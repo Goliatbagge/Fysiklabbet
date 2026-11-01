@@ -1,0 +1,22 @@
+{
+ "film": "Det femton meter långa sugröret",
+ "figur": "Mattias",
+ "rost": "Pl7pcT0MQ5oC83oklshh",
+ "teori": "fy1-5.4",
+ "segment": [
+  {"scen": 1, "tal": "Ett femton meter långt sugrör. Kan du dricka?", "undertext": "Ett 15 meter långt sugrör. Kan du dricka?"},
+  {"scen": 2, "tal": "Vad tror du?", "undertext": "Vad tror du?"},
+  {"scen": 3, "tal": "Nej. Inte ens med världens bästa pump.", "undertext": "Nej. Inte ens med världens bästa pump."},
+  {"scen": 4, "tal": "Det är inte du som suger upp vattnet.", "undertext": "Det är inte du som suger upp vattnet."},
+  {"scen": 5, "tal": "Luften runt omkring trycker hela tiden på allt.", "undertext": "Luften runt omkring trycker hela tiden på allt."},
+  {"scen": 6, "tal": "Den trycker också ner på vattenytan i glaset.", "undertext": "Den trycker också ned på vattenytan i glaset."},
+  {"scen": 7, "tal": "När du suger sjunker trycket inne i sugröret.", "undertext": "När du suger sjunker trycket inne i sugröret."},
+  {"scen": 8, "tal": "Då pressar lufttrycket vattnet upp i röret.", "undertext": "Då pressar lufttrycket vattnet upp i röret."},
+  {"scen": 9, "tal": "Men lufttrycket bär bara upp vattnet en bit.", "undertext": "Men lufttrycket bär bara upp vattnet en bit."},
+  {"scen": 10, "tal": "Pumpa ut all luft ur röret,", "undertext": "Pumpa ut all luft ur röret,"},
+  {"scen": 11, "tal": "och vattnet stannar ändå på drygt tio meter.", "undertext": "och vattnet stannar ändå på drygt 10 meter."},
+  {"scen": 12, "tal": "Där är vattenpelarens tryck lika stort som lufttrycket.", "undertext": "Där är vattenpelarens tryck lika stort som lufttrycket."},
+  {"scen": 13, "tal": "Djupa brunnar har därför pumpen nere i vattnet.", "undertext": "Djupa brunnar har därför pumpen nere i vattnet."},
+  {"scen": 14, "tal": "Du suger inte. Luften trycker.", "undertext": "Du suger inte. Luften trycker."}
+ ]
+}

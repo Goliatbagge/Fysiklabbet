@@ -1,0 +1,55 @@
+1
+00:00:00,300 --> 00:00:04,310
+Ett 15 meter långt sugrör. Kan du dricka?
+
+2
+00:00:04,310 --> 00:00:05,950
+Vad tror du?
+
+3
+00:00:06,550 --> 00:00:10,320
+Nej. Inte ens med världens bästa pump.
+
+4
+00:00:10,320 --> 00:00:13,050
+Det är inte du som suger upp vattnet.
+
+5
+00:00:13,050 --> 00:00:16,900
+Luften runt omkring trycker hela tiden på allt.
+
+6
+00:00:16,900 --> 00:00:20,510
+Den trycker också ned på vattenytan i glaset.
+
+7
+00:00:20,510 --> 00:00:24,600
+När du suger sjunker trycket inne i sugröret.
+
+8
+00:00:24,600 --> 00:00:28,210
+Då pressar lufttrycket vattnet upp i röret.
+
+9
+00:00:28,210 --> 00:00:31,660
+Men lufttrycket bär bara upp vattnet en bit.
+
+10
+00:00:31,660 --> 00:00:34,150
+Pumpa ut all luft ur röret,
+
+11
+00:00:34,150 --> 00:00:38,000
+och vattnet stannar ändå på drygt 10 meter.
+
+12
+00:00:38,000 --> 00:00:42,410
+Där är vattenpelarens tryck lika stort som lufttrycket.
+
+13
+00:00:42,410 --> 00:00:46,260
+Djupa brunnar har därför pumpen nere i vattnet.
+
+14
+00:00:46,260 --> 00:00:49,660
+Du suger inte. Luften trycker.

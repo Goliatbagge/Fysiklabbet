@@ -1,0 +1,60 @@
+Scen 1 · 4 s · AI-SCEN
+"Ett 15 meter långt sugrör. Kan du dricka?"
+
+Scen 2 · 4 s · AI-SCEN
+"Vad tror du?"
+
+Scen 3 · 4 s · AI-SCEN
+"Nej. Inte ens med världens bästa pump."
+
+Scen 4 · 4 s · AI-SCEN
+"Det är inte du som suger upp vattnet."
+
+Scen 5 · 4 s · EGEN INSPELNING
+"Luften runt omkring trycker hela tiden på allt."
+
+Egen animation (pennstil på rutpapper, som teorifigurerna i fy1-5.4): ett glas vatten med sugrör på en bänk. Luftens tryck visas som många korta blå pilar som pekar in mot glaset, sugröret och bänken från alla håll. Etikett "lufttryck 101,3 kPa".
+
+Scen 6 · 4 s · EGEN INSPELNING
+"Den trycker också ned på vattenytan i glaset."
+
+Fortsättning: pilarna mot glasets sidor tonar ut, kvar blir en rad lika långa pilar som trycker ned på vattenytan runt sugröret.
+
+Scen 7 · 4 s · EGEN INSPELNING
+"När du suger sjunker trycket inne i sugröret."
+
+Fortsättning: inne i sugröret krymper pilarna och blir glesare (lägre tryck), medan pilarna på vattenytan utanför står kvar lika långa. Etikett "lägre tryck" vid sugrörets topp.
+
+Scen 8 · 4 s · EGEN INSPELNING
+"Då pressar lufttrycket vattnet upp i röret."
+
+Fortsättning: vattnet stiger upp i sugröret, drivet av pilarna på vattenytan, tills det når munnen (antydd med en enkel linje).
+
+Scen 9 · 4 s · AI-SCEN
+"Men lufttrycket bär bara upp vattnet en bit."
+
+Scen 10 · 4 s · EGEN INSPELNING
+"Pumpa ut all luft ur röret,"
+
+Egen animation, ny bild i skala: ett 15 m högt genomskinligt rör står i en balja vatten, en måttstock 0–15 m bredvid, en pump överst. Luften i röret visas som prickar som sugs ut uppåt tills röret är tomt.
+
+Scen 11 · 4 s · EGEN INSPELNING
+"och vattnet stannar ändå på drygt 10 meter."
+
+Fortsättning: vattnet stiger i röret och saktar in tills det stannar vid 10,3 m. Ovanför vattnet tomt rör (vakuum) upp till 15 m. Streckad linje och etikett "drygt 10 m" vid vattenytan, "15 m" vid toppen.
+
+Scen 12 · 4 s · EGEN INSPELNING
+"Där är vattenpelarens tryck lika stort som lufttrycket."
+
+Fortsättning: en pil nedåt i vattenpelaren och en lika lång pil nedåt på vattenytan i baljan, "lika stort tryck". Filmens enda formel tonar in: p_0 = \rho \cdot g \cdot h, sedan h = 101 300 / (998 · 9,82) ≈ 10,3 m.
+
+Scen 13 · 4 s · EGEN INSPELNING
+"Djupa brunnar har därför pumpen nere i vattnet."
+
+Egen animation: genomskärning av en djup borrad brunn (marken i grafit, grundvattnet i ljusblått). Pumpen sitter längst ned under vattenytan och vattnet går uppåt i röret till ytan, med en pil uppåt vid pumpen.
+
+Scen 14 · 4 s · AI-SCEN
+"Du suger inte. Luften trycker."
+
+Scen 15 · 4 s · AI-SCEN
+"(inget tal, slutskylten läggs på i redigeringen)"

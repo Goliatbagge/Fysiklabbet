@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#f7f2e8}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas>
+<script>
+// De egna scenerna i filmen "Det femton meter långa sugröret".
+// window.rita(scen, t) ritar scenen vid tiden t (s). Fysiken följer fy1-5.4:
+//   scen 5: lufttrycket trycker på glaset, sugröret och bänken från alla håll;
+//   scen 6: kvar blir trycket ned på vattenytan;
+//   scen 7: trycket i sugröret sjunker (luften i röret glesnar);
+//   scen 8: lufttrycket på vattenytan pressar upp vattnet i röret;
+//   scen 10: ett 15 m högt rör i en balja, pumpen överst suger ut luften;
+//   scen 11: vattnet stiger och stannar vid 10,3 m (h = p0 / (rho g));
+//   scen 12: vattenpelarens tryck vid baljans yta = lufttrycket (formeln läggs
+//            på som eget lager i montera.py);
+//   scen 13: djup brunn i genomskärning, pumpen nere i vattnet trycker upp det.
+// Inget ritas i bandet y 1380–1560 (undertexterna).
+const c = document.getElementById('c'), x = c.getContext('2d');
+const BLA = '#2b5ca8', INK = '#0f1620', ROD = '#c8324a', RUT = 'rgba(147,174,199,.55)', GRA = '#7d8794';
+const VATTEN = 'rgba(120,170,220,.55)', VATTEN_K = '#5b8cc8';
+let SLOT = { 5: 4, 6: 4, 7: 4, 8: 4, 10: 4, 11: 4, 12: 4, 13: 4 };
+window.satt = s => Object.assign(SLOT, s);
+
+function papper() {
+  const gr = x.createLinearGradient(0, 0, 0, 1920); gr.addColorStop(0, '#f7f2e8'); gr.addColorStop(1, '#ece3d2');
+  x.fillStyle = gr; x.fillRect(0, 0, 1080, 1920);
+  x.strokeStyle = RUT; x.lineWidth = 1.5;
+  for (let i = 0; i <= 1920; i += 27) { x.beginPath(); x.moveTo(0, i + .75); x.lineTo(1080, i + .75); x.stroke(); }
+  for (let i = 0; i <= 1080; i += 27) { x.beginPath(); x.moveTo(i + .75, 0); x.lineTo(i + .75, 1920); x.stroke(); }
+  x.lineCap = 'round'; x.lineJoin = 'round';
+}
+function text(s, px, py, size, col, align, vikt) {
+  x.font = `${vikt || 600} ${size}px Poppins`; x.fillStyle = col || INK; x.textAlign = align || 'center'; x.textBaseline = 'alphabetic';
+  x.fillText(s, px, py);
+}
+function rubrik(s, a) { x.globalAlpha = a === undefined ? 1 : a; text(s, 540, 250, 62, INK, 'center', 700); x.globalAlpha = 1; }
+const tona = (t, t0, d) => Math.min(1, Math.max(0, (t - t0) / (d || .5)));
+const mjuk = u => u * u * (3 - 2 * u);
+const hash = n => { const s = Math.sin(n * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
+
+// Kraftpil: skaftet slutar vid huvudets bas (butt), huvudet i änden
+function pil(x1, y1, x2, y2, col, w, a) {
+  const L = Math.hypot(x2 - x1, y2 - y1); if (L < 2) return;
+  const ux = (x2 - x1) / L, uy = (y2 - y1) / L, h = Math.min(26, L * .55), b = h * .62;
+  x.globalAlpha = a === undefined ? 1 : a;
+  x.strokeStyle = col; x.fillStyle = col; x.lineWidth = w || 7; x.lineCap = 'butt';
+  x.beginPath(); x.moveTo(x1, y1); x.lineTo(x2 - ux * h, y2 - uy * h); x.stroke();
+  x.beginPath(); x.moveTo(x2, y2); x.lineTo(x2 - ux * h - uy * b, y2 - uy * h + ux * b); x.lineTo(x2 - ux * h + uy * b, y2 - uy * h - ux * b); x.closePath(); x.fill();
+  x.lineCap = 'round'; x.globalAlpha = 1;
+}
+
+// ---------- Glaset med sugröret (scen 5–8) ----------
+const G = { l: 360, r: 720, topp: 780, botten: 1240, yta: 900 };   // glaset
+const S = { l: 600, r: 640, topp: 470, botten: 1200 };           // sugröret
+const BANK = 1250;
+function bank() {
+  x.strokeStyle = BLA; x.lineWidth = 5;
+  x.beginPath(); x.moveTo(90, BANK); x.lineTo(990, BANK); x.stroke();
+  x.lineWidth = 3; for (let i = 120; i < 990; i += 60) { x.beginPath(); x.moveTo(i, BANK); x.lineTo(i - 30, BANK + 40); x.stroke(); }
+}
+function glas(inneNiva) {
+  // vatten i glaset
+  x.fillStyle = VATTEN; x.fillRect(G.l, G.yta, G.r - G.l, G.botten - G.yta);
+  x.strokeStyle = VATTEN_K; x.lineWidth = 3;
+  x.beginPath(); x.moveTo(G.l, G.yta); x.lineTo(S.l, G.yta); x.moveTo(S.r, G.yta); x.lineTo(G.r, G.yta); x.stroke();
+  // vatten i sugröret upp till inneNiva
+  x.fillStyle = VATTEN; x.fillRect(S.l, inneNiva, S.r - S.l, S.botten - inneNiva);
+  x.beginPath(); x.moveTo(S.l, inneNiva); x.lineTo(S.r, inneNiva); x.stroke();
+  // glasets väggar
+  x.strokeStyle = BLA; x.lineWidth = 6;
+  x.beginPath(); x.moveTo(G.l - 10, G.topp); x.lineTo(G.l, G.botten); x.lineTo(G.r, G.botten); x.lineTo(G.r + 10, G.topp); x.stroke();
+  // sugröret (rött, samma accent som i AI-klippen)
+  x.strokeStyle = ROD; x.lineWidth = 6;
+  x.beginPath(); x.moveTo(S.l, S.botten); x.lineTo(S.l, S.topp); x.moveTo(S.r, S.botten); x.lineTo(S.r, S.topp); x.stroke();
+}
+// Pilar från alla håll mot glaset (scen 5)
+const RUNT = [];
+for (let i = 0; i < 5; i++) { const y = 820 + i * 95; RUNT.push([G.l - 150, y, G.l - 22, y]); RUNT.push([G.r + 150, y, G.r + 22, y]); }
+RUNT.push([S.l - 110, S.topp - 40, S.l - 14, S.topp - 4]); RUNT.push([S.r + 110, S.topp - 40, S.r + 14, S.topp - 4]);
+// Pilar ned mot vattenytan
+const YTA_X = [405, 470, 535, 675];
+function ytpilar(a, puls) {
+  for (const px of YTA_X) pil(px, G.yta - 140 - (puls || 0), px, G.yta - 8, BLA, 7, a);
+}
+// Luftpartiklar i sugröret (scen 7): glesnar med u
+function luftIRor(u, niva) {
+  x.fillStyle = BLA;
+  for (let i = 0; i < 14; i++) {
+    if (hash(i + 3) < u) continue;
+    const py = S.topp + 20 + hash(i) * (niva - S.topp - 40), px = S.l + 9 + hash(i + 50) * (S.r - S.l - 18);
+    x.globalAlpha = .7; x.beginPath(); x.arc(px, py, 5, 0, 7); x.fill();
+  }
+  x.globalAlpha = 1;
+}
+
+// ---------- Röret på 15 m (scen 10–12) ----------
+const R = { l: 500, r: 580, botten: 1290, topp: 410 };   // röret
+const M_PER = (R.botten - 30 - R.topp) / 15;                 // px per meter; 0 m = baljans yta
+const NOLL = R.botten - 30;                                  // baljans vattenyta
+const yAv = m => NOLL - m * M_PER;
+const H_VAT = 10.34;                                         // 101 300 / (998 · 9,82)
+function balja() {
+  x.fillStyle = VATTEN; x.fillRect(340, NOLL, 400, R.botten + 40 - NOLL);
+  x.strokeStyle = VATTEN_K; x.lineWidth = 3; x.beginPath(); x.moveTo(340, NOLL); x.lineTo(R.l, NOLL); x.moveTo(R.r, NOLL); x.lineTo(740, NOLL); x.stroke();
+  x.strokeStyle = BLA; x.lineWidth = 6; x.beginPath(); x.moveTo(330, NOLL - 50); x.lineTo(340, R.botten + 40); x.lineTo(740, R.botten + 40); x.lineTo(750, NOLL - 50); x.stroke();
+}
+function ror(niva) {
+  if (niva > 0) { x.fillStyle = VATTEN; x.fillRect(R.l, yAv(niva), R.r - R.l, R.botten - yAv(niva)); x.strokeStyle = VATTEN_K; x.lineWidth = 3; x.beginPath(); x.moveTo(R.l, yAv(niva)); x.lineTo(R.r, yAv(niva)); x.stroke(); }
+  else { x.fillStyle = VATTEN; x.fillRect(R.l, NOLL, R.r - R.l, R.botten - NOLL); }
+  x.strokeStyle = ROD; x.lineWidth = 6;
+  x.beginPath(); x.moveTo(R.l, R.botten); x.lineTo(R.l, R.topp); x.moveTo(R.r, R.botten); x.lineTo(R.r, R.topp); x.stroke();
+}
+function pump(t) {
+  const px = (R.l + R.r) / 2, py = R.topp;
+  x.strokeStyle = BLA; x.lineWidth = 5; x.fillStyle = '#e9eef5';
+  x.beginPath(); x.rect(px - 70, py - 90, 140, 90); x.fill(); x.stroke();
+  const k = Math.sin(t * 6) * 18;
+  x.beginPath(); x.moveTo(px, py - 90); x.lineTo(px, py - 140 + k); x.moveTo(px - 50, py - 140 + k); x.lineTo(px + 50, py - 140 + k); x.stroke();
+  text('pump', px + 90, py - 30, 34, BLA, 'left', 600);
+}
+function matt() {
+  const mx = 270;
+  x.strokeStyle = INK; x.lineWidth = 3;
+  x.beginPath(); x.moveTo(mx, yAv(0)); x.lineTo(mx, yAv(15)); x.stroke();
+  for (let m = 0; m <= 15; m++) {
+    const L = m % 5 === 0 ? 26 : 13; x.beginPath(); x.moveTo(mx - L, yAv(m)); x.lineTo(mx, yAv(m)); x.stroke();
+    if (m % 5 === 0) text(m + ' m', mx - 36, yAv(m) + 12, 34, INK, 'right', 600);
+  }
+}
+function luftIStortRor(u) {
+  x.fillStyle = BLA;
+  for (let i = 0; i < 40; i++) {
+    const py0 = R.topp + 10 + hash(i) * (NOLL - R.topp - 20);
+    const py = py0 - u * (py0 - R.topp + 60) * (0.6 + 0.4 * hash(i + 9));
+    if (py < R.topp + 4) continue;
+    x.globalAlpha = .7; x.beginPath(); x.arc(R.l + 12 + hash(i + 70) * (R.r - R.l - 24), py, 5, 0, 7); x.fill();
+  }
+  x.globalAlpha = 1;
+}
+function nivaEtiketter(a) {
+  x.globalAlpha = a;
+  x.setLineDash([12, 10]); x.strokeStyle = BLA; x.lineWidth = 3;
+  x.beginPath(); x.moveTo(R.r + 10, yAv(H_VAT)); x.lineTo(R.r + 120, yAv(H_VAT)); x.stroke();
+  x.beginPath(); x.moveTo(R.r + 10, yAv(15)); x.lineTo(R.r + 120, yAv(15)); x.stroke();
+  x.setLineDash([]);
+  text('drygt 10 m', R.r + 135, yAv(H_VAT) + 13, 42, BLA, 'left', 700);
+  text('15 m', R.r + 135, yAv(15) + 13, 42, ROD, 'left', 700);
+  text('ingen luft', R.r + 135, yAv(12.7) + 13, 36, GRA, 'left', 600);
+  x.globalAlpha = 1;
+}
+
+// ---------- Brunnen (scen 13) ----------
+function brunn(t) {
+  const MARKY = 620, GV = 900, BOTT = 1300, BX = 520, BW = 70;
+  // mark i grafit med streckning
+  x.fillStyle = 'rgba(125,135,148,.18)'; x.fillRect(80, MARKY, 920, BOTT + 40 - MARKY);
+  x.strokeStyle = 'rgba(80,90,105,.35)'; x.lineWidth = 2;
+  for (let i = 0; i < 40; i++) { const a = 80 + i * 26; x.beginPath(); x.moveTo(a, MARKY); x.lineTo(a - 60, MARKY + 60); x.stroke(); }
+  // grundvatten
+  x.fillStyle = 'rgba(120,170,220,.40)'; x.fillRect(80, GV, 920, BOTT + 40 - GV);
+  x.strokeStyle = VATTEN_K; x.lineWidth = 3; x.setLineDash([14, 10]); x.beginPath(); x.moveTo(80, GV); x.lineTo(1000, GV); x.stroke(); x.setLineDash([]);
+  text('grundvatten', 120, GV + 50, 36, VATTEN_K, 'left', 600);
+  // markytan
+  x.strokeStyle = BLA; x.lineWidth = 5; x.beginPath(); x.moveTo(80, MARKY); x.lineTo(1000, MARKY); x.stroke();
+  // borrhålet
+  x.fillStyle = '#f7f2e8'; x.fillRect(BX - BW / 2 - 18, MARKY, BW + 36, BOTT - MARKY);
+  x.fillStyle = 'rgba(120,170,220,.40)'; x.fillRect(BX - BW / 2 - 18, GV, BW + 36, BOTT - GV);
+  // stigröret: vattnet stiger från pumpen till ytan
+  const u = mjuk(tona(t, .3, 2.2)), topp = BOTT - 120 - u * (BOTT - 120 - (MARKY - 130));
+  x.fillStyle = VATTEN; x.fillRect(BX - 14, topp, 28, BOTT - 120 - topp);
+  x.strokeStyle = ROD; x.lineWidth = 5;
+  x.beginPath(); x.moveTo(BX - 16, BOTT - 120); x.lineTo(BX - 16, MARKY - 130); x.lineTo(BX + 160, MARKY - 130);
+  x.moveTo(BX + 16, BOTT - 120); x.lineTo(BX + 16, MARKY - 98); x.lineTo(BX + 160, MARKY - 98); x.stroke();
+  // pumpen nere i vattnet
+  x.fillStyle = '#e9eef5'; x.strokeStyle = BLA; x.lineWidth = 5;
+  x.beginPath(); x.rect(BX - 34, BOTT - 120, 68, 110); x.fill(); x.stroke();
+  text('pump', BX + 60, BOTT - 50, 36, BLA, 'left', 600);
+  pil(BX + 110, BOTT - 200, BX + 110, BOTT - 380, BLA, 8, tona(t, .4));
+  text('trycker upp', BX + 140, BOTT - 290, 36, BLA, 'left', 600);
+}
+
+window.rita = (n, t) => {
+  papper();
+  if (n >= 5 && n <= 8) {
+    bank();
+    if (n === 5) {
+      rubrik('Luften trycker på allt');
+      glas(G.yta);
+      RUNT.forEach((p, i) => pil(...p, BLA, 7, tona(t, .1 + i * .06, .35)));
+      ytpilar(tona(t, .5, .4));
+      x.globalAlpha = tona(t, 1.2); text('lufttryck 101,3 kPa', 540, 400, 50, BLA, 'center', 700); x.globalAlpha = 1;
+    }
+    if (n === 6) {
+      rubrik('Tryck på vattenytan');
+      glas(G.yta);
+      const ut = 1 - tona(t, .2, .8);
+      RUNT.forEach(p => pil(...p, BLA, 7, ut));
+      ytpilar(1);
+    }
+    if (n === 7) {
+      rubrik('Lägre tryck i sugröret');
+      const u = mjuk(tona(t, .2, 2));
+      glas(G.yta); luftIRor(u, G.yta);
+      ytpilar(1);
+      pil(620, S.topp + 40, 620, S.topp + 40 + 110 * (1 - .65 * u), BLA, 6, 1);
+      x.globalAlpha = tona(t, 1); text('lägre tryck', S.r + 30, S.topp + 70, 42, BLA, 'left', 700); x.globalAlpha = 1;
+    }
+    if (n === 8) {
+      rubrik('Lufttrycket pressar upp vattnet');
+      const u = mjuk(tona(t, .2, 2.6));
+      glas(G.yta - u * (G.yta - S.topp - 30));
+      ytpilar(1, Math.sin(t * 8) * 6 * (1 - u));
+    }
+    return;
+  }
+  if (n >= 10 && n <= 12) {
+    balja(); matt();
+    if (n === 10) {
+      rubrik('Pumpa ut all luft');
+      ror(0); pump(t); luftIStortRor(mjuk(tona(t, .1, 2.1)));
+    }
+    if (n === 11) {
+      rubrik('Vattnet stannar');
+      // stiger och bromsar in mot 10,3 m
+      const u = tona(t, .1, 2.6), niva = H_VAT * (1 - Math.pow(1 - u, 3));
+      ror(niva); pump(0);
+      nivaEtiketter(tona(t, 2.4, .5));
+    }
+    if (n === 12) {
+      ror(H_VAT); pump(0); nivaEtiketter(1);
+      // lika långa pilar: lufttrycket på baljans yta och vattenpelarens tryck vid samma nivå
+      const a = tona(t, .2);
+      pil(670, NOLL - 150, 670, NOLL - 6, BLA, 8, a);
+      pil(R.l + 40, NOLL - 150, R.l + 40, NOLL - 6, BLA, 8, a);
+      x.globalAlpha = a; text('lika stort', 700, NOLL - 110, 40, BLA, 'left', 700); text('tryck', 700, NOLL - 62, 40, BLA, 'left', 700); x.globalAlpha = 1;
+    }
+    return;
+  }
+  if (n === 13) { rubrik('Pumpen sitter nere i vattnet'); brunn(t); }
+};
+window.info = () => ({ h: H_VAT, px_per_m: +M_PER.toFixed(2), niva_y: +yAv(H_VAT).toFixed(1) });
+rita(5, 2);
+</script></body></html>

@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Sat, 31 Oct 2026 12:26:42 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 01 Nov 2026 01:17:26 GMT</lastBuildDate>
+    <item>
+      <title>Rubinobservatoriets provdata avslöjar två gömda följeslagare till Vintergatan</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-11-01-vintergatans-gomda-foljeslagare</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-11-01-vintergatans-gomda-foljeslagare</guid>
+      <pubDate>Sun, 01 Nov 2026 04:00:00 GMT</pubDate>
+      <category>Astronomi</category>
+      <description>En ytterst ljussvag stjärnsamling 355 000 ljusår bort, kanske en av de minsta galaxer som setts, och en stjärnhop som legat dold bakom damm på andra sidan Vintergatans centrum. Båda hittades i provbilder från Rubinobservatoriet i Chile, bilder som täcker bara omkring sju procent av himlen.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-11-01-vintergatans-gomda-foljeslagare.jpg" length="322023" type="image/jpeg"/>
+    </item>
     <item>
       <title>Radiosignaler vände magneten i en enda atomkärna, fast det inte borde gå</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-10-31-karnan-som-lyssnar</link>
@@ -177,15 +186,6 @@
       <category>Magnetism</category>
       <description>Ett magnetfält får normalt den form som magneten eller spolen bakom det ger. Forskare i Barcelona och vid Chalmers i Göteborg har visat hur ett fält från vilken källa som helst kan formas om till exakt den form man vill, inuti ett avgränsat område. Verktygen är gjutjärn och supraledande aluminium.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-13-magnetfaltet-som-formas-om.jpg" length="763355" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Ett lager mjölk gör laserbilden skarpare</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-10-12-ljus-genom-mjolk</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-10-12-ljus-genom-mjolk</guid>
-      <pubDate>Mon, 12 Oct 2026 04:00:00 GMT</pubDate>
-      <category>Optik</category>
-      <description>Spritt ljus brukar vara bildfysikerns fiende. Forskare i Warszawa har nu lagt ett provföremål i vanlig mjölk och låtit mjölkens kringdriftande fettdroppar skaka om laserljuset en aning mellan varje bild. Medelvärdet av hundra bilder blev nästan fritt från det kornighetsbrus som annars plågar laseravbildning, till priset av en liten och förutsägbar oskärpa.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-12-ljus-genom-mjolk.jpg" length="626239" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

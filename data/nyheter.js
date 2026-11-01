@@ -103,6 +103,59 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-02-vakuumet-som-foder-par",
+    date: "2026-11-02",
+    title: "Kalla atomer härmar hur ett elektriskt fält kan skapa partiklar ur vakuum",
+    deck: "Ett tillräckligt starkt elektriskt fält borde kunna ge upphov till par av elektroner och positroner ur tomma rymden, men ett så starkt fält går ännu inte att åstadkomma. Forskare i Kina har, tillsammans med kolleger i Europa och USA, i stället låtit en rad rubidiumatomer spela upp en förenklad version av förloppet, och fotograferat atomerna en och en vid olika tidpunkter.",
+    category: "Partikelfysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-11-02-vakuumet-som-foder-par.jpg",
+    imageAlt: "En rad blåvioletta, timglasformade ljusfällor svävar mot en mörkblå bakgrund med svaga vågräta linjer. I fällorna sitter små guldglänsande kulor, de flesta två och två. Mitt i raden hoppar en kula till nästa fälla, och därifrån flyger två ljusspår åt var sitt håll, ett orange och ett turkost.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad)",
+    tags: ["partikelfysik", "kvantfysik", "schwingereffekten", "falskt vakuum", "kvantsimulator", "kvantelektrodynamik", "elektriskt fält", "positron", "antimateria", "tunneleffekt", "massa och energi", "ultrakalla atomer", "rubidium"],
+    sources: [
+      { name: "Phys.org: Ultracold atoms simulate hard-to-observe matter-antimatter pair production (31 oktober 2026)", url: "https://phys.org/news/2026-10-ultracold-atoms-simulate-hard-antimatter.html" },
+      { name: "arXiv: studien i fulltext (förtryck)", url: "https://arxiv.org/abs/2411.12565" }
+    ],
+    research: {
+      citation: "Z.-H. Zhu, Y. Liu, G. Lagnese, F. M. Surace, W.-Y. Zhang, M.-G. He, J. C. Halimeh, M. Dalmonte, S. C. Morampudi, F. Wilczek, Z.-S. Yuan och J.-W. Pan, ”Probing False Vacuum Decay on a Cold-Atom Gauge-Theory Quantum Simulator”, Physical Review Letters 137, 141601 (2026), publicerad 1 oktober 2026. Kollegialt granskad. Förtryck: arXiv:2411.12565.",
+      url: "https://doi.org/10.1103/vhnm-j9bw"
+    },
+    larare: {
+      moment: [
+        { label: "Elektrisk fältstyrka mellan två plattor", href: "katalog.html?id=fy1-7.11" },
+        { label: "Relativitetsteori och E = m · c²", href: "katalog.html?id=fy1-8.1" }
+      ],
+      fragor: [
+        "Ett elektron–positronpar kostar drygt en miljon elektronvolt. Hur långt måste paret dras isär i ett fält på en miljon volt per meter för att fältet ska ha gett det den energin, och varför gör det sträckan till ett hinder?",
+        "Atomerna i försöket är varken elektroner eller positroner. Vad kan ett sådant försök lära oss om naturen, och vad kan det inte lära oss?",
+        "Paren bildades lättast när energin fältet gav tillbaka var lika stor som energin det kostade att skapa paret. Varför bildas färre par både när fältet är för svagt och när det är för starkt?"
+      ]
+    },
+    body: [
+      { type: "p", html: "Tomma rymden är inte så tom som den ser ut. Enligt kvantelektrodynamiken, teorin för hur ljus och laddade partiklar växelverkar, kan ett tillräckligt starkt elektriskt fält slita fram verkliga partiklar ur vakuumet: en elektron och dess antipartikel, en positron. Fenomenet förutsades av Fritz Sauter 1931 och beräknades av Julian Schwinger 1951, och kallas Schwingereffekten. Det har aldrig observerats direkt. Nu har forskare vid University of Science and Technology of China i Hefei, tillsammans med bland andra nobelpristagaren Frank Wilczek vid MIT, byggt en förenklad modell av förloppet av ultrakalla atomer. Studien publicerades i <em>Physical Review Letters</em>." },
+      { type: "h2", text: "Energin måste komma någonstans ifrån" },
+      { type: "p", html: "För att skapa en elektron och en positron krävs energi motsvarande deras massa, enligt $E = m \\cdot c^2$. För paret blir det drygt en miljon elektronvolt, $2 \\cdot m \\cdot c^2 \\approx 1{,}02\\ \\mathrm{MeV}$. Ett elektriskt fält kan ge den energin genom att dra isär laddningarna, men bara om de hamnar långt nog från varandra. I ett fält på en miljon volt per meter, vilket är ungefär en tredjedel av det fält där luft slår igenom med en gnista, vinner paret ungefär en miljon elektronvolt per meter. Elektronen och positronen skulle alltså behöva hamna omkring en meter isär innan energin gick jämnt ut." },
+      { type: "p", html: "Det kan bara ske genom tunneleffekten, och sannolikheten att tunnla en meter är i praktiken noll. För att paret ska bildas i märkbar mängd behövs ett fält på omkring 10<sup>18</sup>&nbsp;V/m, den så kallade Schwingergränsen. Där räcker det att partiklarna hamnar mindre än en hundradel av en atoms diameter isär. Fältet är omkring 400&nbsp;miljarder gånger starkare än det där luften slår igenom, och ingen kan i dag bygga det i ett laboratorium." },
+      { type: "h2", text: "Ett vakuum som inte är det lägsta" },
+      { type: "p", html: "Fysikerna beskriver förloppet som att ett falskt vakuum övergår i ett sant. Vakuumet i fältet är inte det tillstånd som har lägst energi, men för att komma ner till det lägsta måste systemet först ta sig förbi en energitröskel, precis som en kula i en grop högt upp på en sluttning. I kvantvärlden sker det genom att systemet tunnlar igenom tröskeln. Samma sorts förlopp diskuteras för Higgsfältet och för universums allra första ögonblick, men det är så osannolikt att det nästan aldrig går att se direkt." },
+      { type: "quote", html: "Det här är ett exempel på sönderfall av ett falskt vakuum, och i sin ursprungliga form har det aldrig observerats direkt. Vårt mål var att bygga en enkel, kontrollerbar laboratoriemodell med kalla atomer, där vi kunde simulera förloppet och ställa in hur det utvecklas.", cite: "Zhen-Sheng Yuan, University of Science and Technology of China, en av de ledande forskarna bakom studien, till Phys.org (översatt)" },
+      { type: "h2", text: "Atomer som spelar elektroner, positroner och fält" },
+      { type: "p", html: "Forskarna kylde rubidiumatomer till en bråkdel av en grad över absoluta nollpunkten och fångade dem med laserljus i en rak rad av små fällor. I början satt två atomer i varannan fälla, medan fällorna emellan var tomma. Fällorna och atomernas växelverkan var inställda så att det enda som kan hända är att en atom hoppar från en dubbelt fylld fälla till en tom granne, så att båda får en atom var. I modellen motsvarar startmönstret ett vakuum där det elektriska fältet pekar åt samma håll överallt, och hoppet motsvarar att ett partikel–antipartikelpar bildas. Mellan de två partiklarna har fältet då bytt riktning." },
+      { type: "p", html: "Två saker gick att ställa in med laserljuset: hur mycket det kostar att skapa ett par, som motsvarar partiklarnas massa, och hur mycket energi fältet ger tillbaka, som motsvarar fältets styrka. Efter en bestämd tid tog forskarna en bild med ett så kallat kvantgasmikroskop, som räknar atomerna i varje enskild fälla. Förloppen som följdes tog från några till några tiotals millisekunder." },
+      { type: "h2", text: "Flest par när energin går jämnt ut" },
+      { type: "p", html: "Ju tyngre de simulerade partiklarna var, desto färre par bildades, precis som väntat. Med ett bakgrundsfält kunde forskarna dessutom göra fältet så starkt att paret bara behövde hamna ett steg isär, ett läge som för riktiga elektroner skulle kräva ett extremt starkt fält. Paren bildades snabbast när energin fältet gav tillbaka var lika stor som kostnaden för paret. Var fältet starkare än så gick energin inte jämnt ut åt andra hållet, och färre par bildades igen." },
+      { type: "p", html: "Eftersom mikroskopet ser varje atom kunde forskarna också mäta sannolikheten att vakuumet fortfarande var helt orört, en storhet som är central i Schwingers teori. Under de första millisekunderna var takten med vilken par bildades proportionell mot takten med vilken vakuumet försvann. När både massan och bakgrundsfältet sattes till noll svängde fältet i stället fram och tillbaka mellan sina två riktningar i sex hela perioder, och frekvensspektrumet visade toppar som kan tolkas som samma sorts bosoniska svängningar som i Schwingers modell." },
+      { type: "h2", text: "En modell, inte det riktiga fenomenet" },
+      { type: "p", html: "Försöket visar inte att elektroner och positroner skapas ur vakuum. Det är en förenklad version av kvantelektrodynamiken, med partiklar som bara kan röra sig längs en linje och ett fält som bara kan peka åt två håll. Forskarna påpekar själva att Schwingers formel inte gäller i det läge de undersökt, eftersom paren där bildas lätt i stället för genom en extremt osannolik tunnling. Värdet ligger i att förloppet kan ställas in och följas steg för steg. Nästa mål är att låta de simulerade partiklarna krocka och att bygga modellen i två dimensioner." },
+      { type: "fact", title: "Visste du?", items: [
+        "En elektronvolt är den energi en elektron vinner när den accelereras genom spänningen 1&nbsp;V. Elektronens viloenergi är 0,511&nbsp;MeV, alltså 511&nbsp;000 elektronvolt.",
+        "En besläktad effekt har setts i grafen. Där är det inte elektroner och positroner som bildas utan elektroner och hål, som kräver mycket mindre energi.",
+        "Frank Wilczek, en av forskarna bakom studien, fick nobelpriset i fysik 2004 för sitt arbete om den starka kraften mellan kvarkar."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-01-vintergatans-gomda-foljeslagare",
     date: "2026-11-01",
     title: "Rubinobservatoriets provdata avslöjar två gömda följeslagare till Vintergatan",

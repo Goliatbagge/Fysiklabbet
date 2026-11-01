@@ -4488,6 +4488,42 @@ window.BEGREPP = [
       { type: 'p', html: 'En klotformig hop och en liten dvärggalax kan se nästan likadana ut i en bild. Skillnaden syns i stjärnornas rörelser och sammansättning. En hop har ingen mörk materia som håller ihop den, och dess stjärnor har nästan exakt samma halt av järn. Somliga hopar föddes inte i Vintergatan alls, utan i små dvärggalaxer som Vintergatan sedan har slukat. Hoparna blev kvar och kretsar nu kring vår galax.' }
     ]
   },
+  {
+    id: 'schwingereffekten',
+    term: 'Schwingereffekten',
+    former: ['schwingereffekten', 'schwingereffekt', 'schwingermekanismen', 'schwingergränsen', 'schwingergräns', 'schwingerfältet'],
+    kort: 'Att ett mycket starkt elektriskt fält kan skapa par av partiklar och antipartiklar, till exempel en elektron och en positron, ur tomma rymden. Fältet som krävs är så starkt att effekten aldrig har setts direkt.',
+    relaterade: ['kvantelektrodynamik', 'vakuumfluktuation', 'positron', 'tunneleffekt', 'falskt-vakuum'],
+    body: [
+      { type: 'p', html: 'Tänk dig två metallplattor med en stor spänning emellan och helt tomt mellan dem: ingen luft, inga elektroner, ingenting. Enligt kvantelektrodynamiken kan det ändå dyka upp partiklar där, om fältet är tillräckligt starkt. Fältet ger då energi till ett par av en partikel och dess antipartikel, oftast en elektron och en positron, och paret blir verkligt. Förutsägelsen gjordes av Fritz Sauter 1931 och räknades ut noggrant av Julian Schwinger 1951, och därför heter fenomenet Schwingereffekten.' },
+      { type: 'p', html: 'Problemet är energin. Ett elektron–positronpar kostar drygt en miljon elektronvolt, och fältet kan bara ge den energin genom att dra isär de två laddningarna en bit. I ett fält på en miljon volt per meter måste de hamna omkring en meter från varandra, och det går bara genom tunneleffekten, som för så långa sträckor är så osannolik att den i praktiken aldrig sker. Först vid omkring 10<sup>18</sup>&nbsp;volt per meter, den så kallade Schwingergränsen, blir sträckan så kort att par bildas i märkbar mängd. Ett sådant fält går inte att bygga i dag, inte ens med de starkaste lasrarna.' },
+      { type: 'p', html: 'Därför letar forskare efter andra vägar. I material som grafen har en liknande effekt setts, där elektroner och hål bildas i stället för elektroner och positroner, eftersom det kräver mycket mindre energi. Man bygger också modeller av förloppet med kalla atomer, där atomernas läge får spela partiklarnas och fältets roll. Sådana försök ger inte riktiga positroner, men de låter forskarna följa förloppet steg för steg.' }
+    ]
+  },
+  {
+    id: 'falskt-vakuum',
+    term: 'Falskt vakuum',
+    former: ['falskt vakuum', 'falska vakuumet', 'falska vakuum', 'falskt vakuumtillstånd', 'falskt vakuumsönderfall'],
+    kort: 'Ett tillstånd som ser ut som det lugnaste möjliga, men som inte har den lägsta energin. Det kan hålla sig stabilt länge men till slut falla ner till det verkliga lägsta tillståndet.',
+    relaterade: ['schwingereffekten', 'tunneleffekt', 'higgsbosonen'],
+    body: [
+      { type: 'p', html: 'Föreställ dig en kula som ligger i en liten grop högt upp på en bergssluttning. Den ligger still och verkar ha hittat ro, men längre ned finns en djupare dal. Om kulan på något sätt tog sig över kanten på gropen skulle den rulla ned och hamna lägre. Gropen är ett falskt vakuum: ett tillstånd som är stabilt för stunden men som inte har den lägsta energin. Dalen nedanför kallas det sanna vakuumet.' },
+      { type: 'p', html: 'I kvantfysiken behöver kulan inte klättra över kanten. Den kan tunnla igenom den, alltså plötsligt befinna sig på andra sidan utan att någonsin ha haft energi nog att ta sig över. Det kan ta så lång tid att det i praktiken aldrig händer, men när det väl sker börjar sönderfallet ofta på ett enda ställe, som en liten bubbla av det sanna vakuumet som sedan växer.' },
+      { type: 'p', html: 'Begreppet dyker upp på flera ställen i fysiken. Ett elektriskt fält så starkt att det skapar partikelpar ur tomma rymden kan beskrivas som ett falskt vakuum som sönderfaller. Fysiker diskuterar också om Higgsfältet, som ger partiklarna deras massa, ligger i ett falskt vakuum, och liknande idéer används för att beskriva universums allra första ögonblick.' }
+    ]
+  },
+  {
+    id: 'kvantgasmikroskop',
+    term: 'Kvantgasmikroskop',
+    former: ['kvantgasmikroskop', 'kvantgasmikroskopet', 'kvantgasmikroskopen', 'kvantgasmikroskopi', 'kvantgasmikroskopin'],
+    kort: 'Ett mikroskop som tar bilder av ultrakalla atomer fångade i ljus och kan se var varje enskild atom befinner sig.',
+    relaterade: ['bose-einstein-kondensat', 'laserkylning'],
+    body: [
+      { type: 'p', html: 'Atomer är alldeles för små för att ses i ett vanligt ljusmikroskop, och i en vanlig gas rör de sig dessutom hundratals meter per sekund. Kyler man dem till en liten bråkdel av en grad över absoluta nollpunkten står de däremot nästan stilla. Då kan man fånga dem i ett mönster av laserljus, ett slags äggkartong av ljus där varje fack rymmer en eller några atomer, med ungefär en halv mikrometer mellan facken.' },
+      { type: 'p', html: 'Ett kvantgasmikroskop är en kraftfull lins placerad mycket nära atomerna. När man belyser dem skickar varje atom ut ljus, som linsen samlar in till en kamera. Bilden visar då ljusprickar där atomerna sitter, och med rätt teknik går det att se hur många atomer som satt i varje enskilt fack.' },
+      { type: 'p', html: 'Det gör mikroskopet till ett viktigt verktyg för att bygga modeller av fysik som är svår att studera direkt. Forskarna låter atomerna hoppa mellan facken enligt bestämda regler, väntar en stund och tar en bild. Genom att upprepa försöket många gånger med olika väntetider kan de följa hur hela systemet utvecklas, atom för atom. Bilden förstör dock tillståndet, så varje bild kräver ett nytt försök från början.' }
+    ]
+  },
 ];
 
 

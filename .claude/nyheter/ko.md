@@ -17,6 +17,12 @@ Format per post:
 - **S301: snabbaste stjärnan runt Sgr A* (8,7 år, 25 000 km/s) känner av svarta hålets rotation** **[BREVTEASER]** (nominerad 2026-10-25: snabbaste kända stjärnan i Vintergatan, belagd i fulltext; astronomi senast 2026-10-14) — GRAVITY-samarbetet, Nature 2026, DOI 10.1038/s41586-026-10894-w; fulltext läst i arXiv 2607.12664 (Discovery of a star sensitive to the spin of Sgr A*). OBS: ESO:s pressmeddelande eso2612 kom redan 2026-08-19 (ESO-bilder CC BY 4.0), så inte dagsfärskt; Physics World tog upp den 2026-10-08. Astronomi. Källa: https://physicsworld.com/a/fastest-star-in-the-milky-way-feels-the-rotation-of-our-central-black-hole/
   (tillagd 2026-10-20)
 
+- **Fyra supraledande kablar kopplar ihop två stora kvantprocessorer till en** — kvantteknik. Originalet ej kontrollerat. Källa (Phys.org 2026-10-31): https://phys.org/news/2026-10-superconducting-cables-link-large-quantum.html
+  (tillagd 2026-11-01)
+
+- **UTe₂ visar två sorters supraledning under extremt tryck** — supraledning/fasta tillståndets fysik. Originalet ej kontrollerat. Källa (Phys.org 2026-10-30): https://phys.org/news/2026-10-ute-reveals-flavors-superconductivity-extreme.html
+  (tillagd 2026-11-01)
+
 - **Glaschip kopplar ihop två teleskop vid CHARA i K-bandet (Heriot-Watt, Potsdam)** — optik/astronomi, laserinskrivna vågledare i glas som strålkombinerare för interferometri. Dinkelaker m.fl., MNRAS 2026, DOI 10.1093/mnras/stag1745 (öppenhet ej kontrollerad). OBS astronomi 2026-11-01. Källa (Phys.org 2026-10-30): https://phys.org/news/2026-10-tiny-photonic-chip-links-telescopes.html
   (tillagd 2026-10-31)
 

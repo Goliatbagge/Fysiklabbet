@@ -58,5 +58,6 @@ $exitKod = $LASTEXITCODE
 # senare samma dag faller annars paa samma sak utan att naagon hunnit logga in.
 . (Join-Path $PSScriptRoot 'some-notis.ps1')
 if (LarmaVidInloggningsfel 'Instagram-lansering' $ut $logDir) { Logga 'LARM: inloggningsfel - Windows-notis visad, SOME-LARM.txt uppdaterad.' }
+if (LarmaVidSaknadeChromeVerktyg 'Instagram-lansering' $ut $logDir) { Logga 'LARM: Chrome-verktygen saknades - Windows-notis, SOME-LARM.txt och e-post.' }
 Logga "--- ig-lansering klar (exit $exitKod) ---"
 exit $exitKod

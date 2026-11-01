@@ -34,8 +34,13 @@ Senast uppdaterat 2026-11-01 (oktoberrapporten i
 - **Statistikpanelen oktober** (30 dagar): 1 964 visningar, 84 % från
   icke-följare (var 8,6 %), 1 316 tittare, 41 interaktioner från 26
   konton, 24 profilbesök, 2 länktryck. 81 % av visningarna kom från reels.
-- **Stillbilderna (nyheterna) når fortfarande bara följarna.** Förslag om
-  reels även för nyheterna ligger hos användaren.
+- **Stillbilderna (nyheterna) når fortfarande bara följarna.** Beslutat
+  och infört 2026-11-01: nyheten postas som reel, gjord av
+  `.claude/some/nyhet-till-reel.js` (artikelbilden glider under ett
+  rubrikband, krediten i nederkanten; stillbild vid ND-licens eller
+  misslyckad uppladdning). Utvärdera i novemberrapporten mot 3,7 i
+  räckvidd per nyhetsinlägg i oktober. OBS: lunchjobbet kräver också
+  ett synligt Chrome-fönster på BOSGAME för att videon ska laddas upp.
 - **Missat**: lanseringarna 29 och 30 okt (utloggat) och 31 okt
   (Chrome-verktygen saknades).
 

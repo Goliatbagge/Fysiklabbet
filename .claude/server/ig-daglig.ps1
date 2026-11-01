@@ -41,6 +41,11 @@ $verktyg = @(
     'Glob'
     'Edit(.claude/facebook/logg.md)'
     'Bash(git log:*)'
+    # Reels (sedan 2026-11-01): nyhetsbilden blir en kort film och en
+    # bildruta granskas. Se steg 2b i ig-daglig.md.
+    'Bash(node .claude/some/nyhet-till-reel.js:*)'
+    'Bash(ffmpeg:*)'
+    'Bash(ffprobe:*)'
 ) -join ','
 
 Set-Location $repo
@@ -52,5 +57,6 @@ $exitKod = $LASTEXITCODE
 # senare samma dag faller annars paa samma sak utan att naagon hunnit logga in.
 . (Join-Path $PSScriptRoot 'some-notis.ps1')
 if (LarmaVidInloggningsfel 'Instagram-nyhet' $ut $logDir) { Logga 'LARM: inloggningsfel - Windows-notis visad, SOME-LARM.txt uppdaterad.' }
+if (LarmaVidSaknadeChromeVerktyg 'Instagram-nyhet' $ut $logDir) { Logga 'LARM: Chrome-verktygen saknades - Windows-notis, SOME-LARM.txt och e-post.' }
 Logga "--- ig-daglig klar (exit $exitKod) ---"
 exit $exitKod

@@ -60,5 +60,6 @@ $exitKod = $LASTEXITCODE
 # senare samma dag faller annars paa samma sak utan att naagon hunnit logga in.
 . (Join-Path $PSScriptRoot 'some-notis.ps1')
 if (LarmaVidInloggningsfel 'Facebook-nyhet' $ut $logDir) { Logga 'LARM: inloggningsfel - Windows-notis visad, SOME-LARM.txt uppdaterad.' }
+if (LarmaVidSaknadeChromeVerktyg 'Facebook-nyhet' $ut $logDir) { Logga 'LARM: Chrome-verktygen saknades - Windows-notis, SOME-LARM.txt och e-post.' }
 Logga "--- fb-daglig klar (exit $exitKod) ---"
 exit $exitKod

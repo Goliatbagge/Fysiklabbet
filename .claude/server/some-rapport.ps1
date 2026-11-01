@@ -98,6 +98,10 @@ if ($kod -eq 0) {
         "SoMe-rapporten for $manad gick inte igenom (exit $kod). Se .claude\server\logg\some-rapport.log."
 }
 
+# Larma om Chrome-verktygen saknades (se some-notis.ps1).
+. (Join-Path $PSScriptRoot 'some-notis.ps1')
+if (LarmaVidSaknadeChromeVerktyg 'SoMe-rapporten' $ut $logDir) { Logga 'LARM: Chrome-verktygen saknades - Windows-notis, SOME-LARM.txt och e-post.' }
+
 Logga "Sammanfattning skriven till $sammFil"
 Logga "--- some-rapport klar (exit $kod) ---"
 exit $kod

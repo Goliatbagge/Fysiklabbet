@@ -49,6 +49,40 @@ function LarmaVidInloggningsfel($jobbNamn, $utskrift, $loggDir) {
     return $true
 }
 
+# Känner igen en körning där Chrome-verktygen (claude-in-chrome) saknades
+# och larmar på samma sätt som vid inloggningsfel. Infört 2026-11-01: alla
+# SoMe-jobb 31 okt och månadsrapporten 1 nov föll så, utan att något larmade,
+# eftersom claude.exe själv inte svarar med något fel; jobbet skriver bara i
+# sitt slutsvar att verktygen saknades. Mönstren är rena ASCII, eftersom
+# claude.exe:s utskrift avkodas fel (å/ä/ö blir skräptecken) i $utskrift.
+# Returnerar $true om felet upptäcktes.
+function LarmaVidSaknadeChromeVerktyg($jobbNamn, $utskrift, $loggDir) {
+    if ($utskrift -notmatch 'Chrome-verktyg\w*\s+(\(claude-in-chrome\)\s+)?(saknades|saknas|fanns inte)|[Ii]nga Chrome-verktyg|claude-in-chrome-verktyg\w*\s+(saknades|saknas|fanns inte)') {
+        return $false
+    }
+    $stamp   = Get-Date -Format 'yyyy-MM-dd HH:mm'
+    $larmFil = Join-Path $loggDir 'SOME-LARM.txt'
+    $text    = "LARM $stamp - $jobbNamn fick inga Chrome-verktyg och postade ingenting. Kontrollera att Chrome är igång på BOSGAME och att tillägget Claude in Chrome är anslutet och inloggat."
+    Add-Content -Path $larmFil -Value $text -Encoding utf8
+    VisaNotis 'Fysiklabbet: Chrome-kopplingen saknas!' "$jobbNamn fick inga Chrome-verktyg. Öppna Chrome och kontrollera tillägget Claude in Chrome." | Out-Null
+    SkickaEpostlarm 'chrome' 'SoMe-jobben saknar Chrome-verktygen' (ChromeText $jobbNamn) $loggDir | Out-Null
+    return $true
+}
+
+function ChromeText($jobbNamn) {
+    return @"
+$jobbNamn kördes men fick inga Chrome-verktyg (claude-in-chrome), så inget postades. claude.exe startas med --chrome, så felet sitter oftast i själva kopplingen till webbläsaren.
+
+Kontrollera på BOSGAME:
+
+- att Chrome är igång (inte bara minimerat till ingenting efter en omstart),
+- att tillägget Claude in Chrome är aktiverat och inloggat på samma konto som claude.exe,
+- att en interaktiv session med claude --chrome hittar webbläsaren.
+
+Inlägg som uteblivit postas inte i efterhand av sig själva. Loggarna ligger i .claude\server\logg\.
+"@
+}
+
 function InloggningsText($jobbNamn) {
     $exe = 'C:\Users\sam_s\AppData\Local\Microsoft\WinGet\Packages\Anthropic.ClaudeCode_Microsoft.Winget.Source_8wekyb3d8bbwe\claude.exe'
     return @"

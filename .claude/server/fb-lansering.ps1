@@ -48,6 +48,12 @@ $verktyg = @(
     'Glob'
     'Edit(.claude/facebook/logg.md)'
     'Bash(git log:*)'
+    # Reels (sedan 2026-11-01): jobbet spelar in simuleringen till
+    # bada kanalerna och granskar en bildruta. Se steg 2b i fb-lansering.md.
+    'Bash(node .claude/some/spela-in-reel.js:*)'
+    'Bash(ffmpeg:*)'
+    'Bash(ffprobe:*)'
+    'Bash(grep:*)'
 ) -join ','
 
 Set-Location $repo

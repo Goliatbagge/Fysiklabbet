@@ -30,12 +30,55 @@ föreslår förändringar utifrån uppmätt data — aldrig utifrån känsla.
 
 ## Kanalens läge (uppdatera detta avsnitt vid varje månadsgenomgång)
 
-Senast uppdaterat 2026-09-05 (delrapport för 1–4 sep på begäran, i
-`.claude/some/rapporter/2026-09-facebook.md`; augustirapporten i
-`2026-08-facebook.md`). Sidan startad 2026-08-16:
+Senast uppdaterat 2026-11-01 (oktoberrapporten i
+`.claude/some/rapporter/2026-10-facebook.md`). Sidan startad 2026-08-16:
 
-- **35 följare** (+1 sedan 1 sep, den första nya sedan 27 aug). Demografi
-  och "följare online" är låsta tills sidan når 100 följare.
+- **39 följare** den 1 nov (+2 i oktober).
+- **Oktober (4–31 okt, 54 inlägg)**: 2 031 visningar. Fotoinläggen 25,4
+  visningar och 13,3 tittare per inlägg (23,0 utan Nobelinlägget), alltså
+  septembers nivå. 28 reaktioner, 1 delning (den första), cirka 2
+  besökarkommentarer. Måttet Räckvidd försvann ur Business Suite 31 okt.
+- **Reels slår allt annat**: Faraday-reelen (Labbfolket-film) 31 okt fick
+  369 tittare mot 14 för en vanlig lansering. **Beslutat och infört
+  2026-11-01**: lanseringsjobbet spelar in reelen själv (`fb-lansering.md`
+  steg 2b), postar den via Business Suites reel-verktyg (bara Facebook)
+  och Instagram-jobbet återanvänder filen. Utvärdera i novemberrapporten
+  mot 14,3 tittare per lansering i oktober.
+- **Lanseringar** 26,2 visningar/14,3 tittare och nästan alla reaktioner;
+  **nyheter** 19,6 visningar (utan Nobel, som fick 146).
+- **Missat**: utloggat 29–31 okt (lanseringarna 29 och 30 okt aldrig
+  postade, Satelliter just nu ligger kvar), 31 okt och 1 nov saknades
+  Chrome-verktygen i jobben.
+
+Äldre läge (septemberrapporten):
+
+- **37 följare** den 1 okt (+3 i september). Demografi och "följare
+  online" är låsta tills sidan når 100 följare.
+- **September (3–30 sep, 54 inlägg)**: 1 143 visningar, 21,2 per inlägg,
+  12,3 tittare per inlägg, 36 reaktioner, 0 delningar, cirka 4 kommentarer
+  från besökare (de första på sidan). Business Suite visar inte längre
+  räckvidd; använd **Tittare**, som är samma tal.
+- **Länken i första kommentaren fungerar** (utvärderad 1 okt):
+  nyhetsinläggen gick från 10,3 visningar per inlägg (2–4 sep, länkkort)
+  till 20,8 (5–30 sep), lanseringarna ligger på 22,9. Behåll formatet.
+  Länkklicken syns inte längre i Business Suite (fotoinlägg); trafiken
+  till sajten måste läsas i Cloudflare Web Analytics.
+- **Trenden vände uppåt**: 17,6 visningar per inlägg 5–11 sep, 17,9,
+  24,6 och 28,8 sista veckan. Baslinje för oktober: cirka 25 visningar
+  och 14 tittare per inlägg.
+- **Lärarmaterial är bästa innehållet**: övningsbladet Rita hävarmen 29
+  sep (60 visningar, 3 reaktioner, 2 besökarkommentarer),
+  regelnoten i NP-pennlösningarna (40), kopplingsschema-editorn (36),
+  nivå 3-uppgifterna Ma 1c (35). Designändringar ger 10–15.
+- **Boost-incidenten 30 sep**: Publicera-klicket träffade "Boosta
+  inlägg"-switchen när dialogen flyttade sig. Upptäckt och avslagen före
+  publicering. Förslag om kontroll av switchen ligger hos användaren.
+- **Missade dagar i september**: 1 sep (OAuth), 6 sep (inga jobb körda,
+  ingen loggsektion), 29 sep sent (allt gick ut 21:02–21:16).
+
+Äldre läge (september, delrapporten 5 sep):
+
+- **35 följare** den 5 sep.
 - **1–4 sep** (7 inlägg): 96 visningar, 13,7 per inlägg, räckvidd 8,4 per
   inlägg (samma som 26–31 aug), 2 reaktioner, 3 länkklick, 0 kommentarer,
   0 delningar. Räckvidden har planat ut på golvet, visningarna sjunker

@@ -24,9 +24,40 @@ förändringar utifrån data — aldrig utifrån känsla.
 
 ## Kanalens läge (uppdatera vid varje månadsgenomgång)
 
-Senast uppdaterat 2026-09-05 (delrapport för 1–4 sep på begäran, i
-`.claude/some/rapporter/2026-09-instagram.md`; augustirapporten i
-`2026-08-instagram.md`). Kontot startat 2026-08-16:
+Senast uppdaterat 2026-11-01 (oktoberrapporten i
+`.claude/some/rapporter/2026-10-instagram.md`). Kontot startat 2026-08-16:
+
+- **11 följare** den 1 nov (+6 i oktober, mer än en fördubbling).
+- **Reels fungerar sedan 19 okt** (kräver synligt Chrome-fönster på
+  BOSGAME). Nio reels nådde i snitt 122 konton och 144 visningar, mot 3,7
+  och 6,3 för stillbilderna.
+- **Statistikpanelen oktober** (30 dagar): 1 964 visningar, 84 % från
+  icke-följare (var 8,6 %), 1 316 tittare, 41 interaktioner från 26
+  konton, 24 profilbesök, 2 länktryck. 81 % av visningarna kom från reels.
+- **Stillbilderna (nyheterna) når fortfarande bara följarna.** Förslag om
+  reels även för nyheterna ligger hos användaren.
+- **Missat**: lanseringarna 29 och 30 okt (utloggat) och 31 okt
+  (Chrome-verktygen saknades).
+
+Äldre läge (septemberrapporten):
+
+- **5 följare, 86 inlägg, följer 0 konton** den 1 okt: en ny följare på
+  49 inlägg sedan 5 sep.
+- **Statistikpanelen september** (30 dagar): 139 visningar, 91,4 % från
+  följare och 8,6 % från icke-följare (var 1,7 %), 9 tittare (var 5), 3
+  profilbesök. Per inlägg i Business Suite (Instagram-inläggen syns där
+  sedan kopplingen): 2,5 visningar per inlägg, 31 gillamarkeringar på 53
+  inlägg, sannolikt från ett och samma konto, 0 kommentarer.
+- **Reels har aldrig kunnat publiceras.** Inspelningen fungerar, men
+  Instagrams webbkompositör tar tyst inte emot video via file_upload
+  (prövat vid varje simuleringslansering 5–30 sep, fyra sätt 30 sep).
+  Reservvägen är en bildruta ur reelen som stillbild. Förslag om Business
+  Suites kompositör eller manuell uppladdning från mobilen ligger hos
+  användaren.
+- **Missade inlägg i september**: 1 sep (OAuth), 6 sep (inga jobb körda),
+  29 sep lanseringen (aldrig postad på Instagram).
+
+Äldre läge (delrapporten 5 sep):
 
 - **4 följare, 37 inlägg, följer 0 konton.** Följarantalet är oförändrat
   sedan 27 aug, nu över 14 nya inlägg. Kanalens problem är fortfarande

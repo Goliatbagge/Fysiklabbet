@@ -64,9 +64,58 @@ avsluta.
   Pekar inlägget på en del av en genomgång: ankarlänk med `&block=`, inte
   bara `?id=` (se CLAUDE.md, "Direktlänk till en enskild ruta").
 
+## 2b. Gör en reel av simuleringen (förstahandsvalet)
+
+**Är lanseringen en simulering eller minisimulering ska inlägget vara en
+reel, inte en stillbild** (beslut 2026-11-01 efter oktoberrapporten:
+Faraday-reelen 31 okt nådde 369 tittare, en vanlig lansering med
+stillbild cirka 14). Det här jobbet körs före Instagram-jobbet och gör
+därför filmen åt båda kanalerna:
+
+- Spela in med `.claude/some/spela-in-reel.js` enligt reglerna i
+  `ig-lansering.md` steg 2b (val av knappar, minisimulering via
+  `--block`/`--valj`, 6–12 s, kontroll av en bildruta med ffmpeg).
+  Spara som `.shots/<namn>-reel.mp4`.
+- Skriv filnamnet i dagens `lansering:`-rad (`reel: .shots/<namn>-reel.mp4`),
+  även om Facebook-uppladdningen sedan misslyckas. Instagram-jobbet
+  läser raden och använder samma fil i stället för att spela in igen.
+- Går det inte att få en film som visar förloppet, eller är lanseringen
+  ingen simulering: stillbild enligt steg 3, och logga varför.
+
 ## 3. Publicera
 
-Exakt samma procedur som `fb-daglig.md` steg 3: Chrome-verktygen via
+**Reel (filmen från 2b): via Business Suites reel-verktyg.** Sidans
+vanliga inläggsruta (Foto/video) laddar aldrig upp video (0 % och ingen
+nätverkstrafik, lärdom 2026-10-11), så använd
+`https://business.facebook.com/latest/reels_composer`:
+
+1. Chrome på BOSGAME (`158b4037…`), samma kontroller som nedan.
+   Fönstret måste vara synligt (inte minimerat, skärmen olåst), annars
+   startar videouppladdningen inte; ger skärmdumpar CDP-timeout →
+   stillbild (reservvägen) och logga det.
+2. **Publicera bara på Facebook.** Välj sidan Fysiklabbet som mål och
+   avmarkera Instagram-kontot fysiklabbet: Instagram-jobbet postar sin
+   egen version med hashtaggar kl 19:48, och samma reel två gånger på
+   Instagram vore en dubblett. Kontrollera i skärmdump att bara
+   Facebook är valt.
+3. "Lägg till video" skapar sin file-input först vid klick och öppnar en
+   dold filväljare. Patcha `HTMLInputElement.prototype.click` med
+   javascript_tool så att inputen bara läggs kvar i DOM:en, klicka, och
+   ladda upp mp4-filen med `file_upload` mot den.
+4. Skriv texten (steg 2, inga hashtags), ingen pålagd musik, Offentligt,
+   Dela nu, ingen boost. Vänta in att videon bearbetats; klicka inte
+   igen.
+5. Verifiera i en fräsch flik på facebook.com/fysiklabbet att reelen
+   ligger överst och att texten finns exakt en gång, lägg sedan
+   länkkommentaren under den (som nedan). Logga
+   `lansering: postad … (reel, <fil>, <längd> s)`.
+6. Misslyckas uppladdningen (dialogen står still i över två minuter, ett
+   felmeddelande, något du inte känner igen): stäng utan att publicera,
+   kontrollera i en fräsch flik att inget kommit ut, och ta reservvägen.
+
+**Reservväg, stillbild** (ingen simulering, ingen film, eller
+uppladdningen misslyckades): exakt samma procedur som `fb-daglig.md`
+steg 3: Chrome-verktygen via
 ToolSearch (välj ALLTID Chrome på BOSGAME, deviceId `158b4037…`, aldrig
 `c9c6284f…` som är HP_KONTOR; "Byt nu" till sidläget om Facebook står i
 personligt läge; visar Facebook ett inloggningsformulär: AVBRYT och fyll
@@ -126,7 +175,10 @@ Stängningen får aldrig ersätta verifieringen: stäng först när inlägget
 - **Den enda tillåtna kommentaren är länkkommentaren**: exakt en rad
   med sajtadressen, under det inlägg du själv nyss publicerat i samma
   körning. Kommentera aldrig något annat inlägg.
-- Max ETT inlägg per körning.
+- Max ETT inlägg per körning. En reel publiceras bara på Facebook, aldrig
+  samtidigt på Instagram från det här jobbet.
+- Video får bara komma från `spela-in-reel.js` och sajtens egen
+  simulering, utan musik eller annat tredjepartsljud.
 - Om något ser oväntat ut (dialog du inte känner igen, varning från
   Facebook, fel språk/layout) → avbryt utan att posta och skriv i loggen
   vad som hände. Ett uteblivet inlägg är ofarligt; ett felaktigt är det

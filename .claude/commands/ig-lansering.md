@@ -65,7 +65,12 @@ från konton utan följare för någon ny publik, medan reels distribueras
 till icke-följare. Ett inlägg med ett rörligt förlopp ur simuleringen är
 kontots enda väg till nya följare.
 
-Filmen görs av `.claude/some/spela-in-reel.js` (flaggorna står i
+**Har Facebook-jobbet redan spelat in filmen i dag** (dess
+`lansering:`-rad har `reel: .shots/<namn>-reel.mp4`, sedan 2026-11-01):
+använd den filen och spela inte in igen. Kontrollera bara att filen
+finns och läs en bildruta enligt punkten om kontroll nedan.
+
+Annars görs filmen av `.claude/some/spela-in-reel.js` (flaggorna står i
 filhuvudet; dev-servern på port 8000 svarar alltid):
 
 ```

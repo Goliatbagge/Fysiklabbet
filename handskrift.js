@@ -26230,7 +26230,8 @@
       [['halv våglängd långt, så hela']],
       [['våglängden är dubbelt så lång.']]
     ]));
-    var klam = valueBracket(acts, ['f=28 Hz', 'λ=2·l=2·1,08 m=2,16 m'],
+    var klam = valueBracket(acts, ['f=28 Hz',
+      ['l=', { frac: ['λ', '2'] }, '⟺λ=2·l=2·1,08 m=2,16 m']],
                             padL, y, T.s, F);
     T.stepEnd();
     y = klam.yEnd;
@@ -26340,7 +26341,7 @@
     ]));
     klam = valueBracket(acts, [
       'v=60,48 m/s (från a)',
-      ['l=', { frac: ['3λ', '2'] }, '⟺λ=', { frac: ['2·l', '3'] }],
+      ['l=3·', { frac: ['λ', '2'] }, '⟺λ=', { frac: ['2·l', '3'] }],
       ['λ=', { frac: ['2·1,08 m', '3'] }, '=0,72 m']
     ], padL, y, T.s, F);
     T.stepEnd();

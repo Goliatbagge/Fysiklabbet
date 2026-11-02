@@ -1,0 +1,47 @@
+03:15:02  [idag] === Nyhetsjobb: start (2026-11-02) ===
+03:15:04  [idag] Dagens nyhet finns (förberedd i går).
+03:15:04  [idag] Startar Claude Code (headless, modell opus)...
+03:20:02  [imorgon] === Nyhetsjobb: start (2026-11-02) ===
+03:20:02  [imorgon] En körning pågår redan (lås 5 min gammalt). Avslutar.
+03:27:29  [idag] Morgondagens nyhet ├ñr skriven, godk├ñnd av utgivaren och committad som `4d991523` p├Ñ grenen `nyhetsjobb`. Jag har inte pushat och inte skickat n├Ñgot mejl.
+03:27:29  [idag] 
+03:27:29  [idag] **Artikeln:** ΓÇ¥Vintergatans snabbaste k├ñnda stj├ñrna kan avsl├╢ja hur fort det svarta h├Ñlet i centrum snurrarΓÇ¥ (`2026-11-03-stjarnan-som-kanner-halet-snurra`, datum 2026-11-03). Den handlar om stj├ñrnan S301. Den g├Ñr ett varv runt Sagittarius A* p├Ñ 8,7 ├Ñr och n├Ñr 25 000 km/s. Den kommer s├Ñ n├ñra h├Ñlet att forskarna hoppas kunna m├ñta h├Ñlets rotation inom ungef├ñr tio ├Ñr.
+03:27:29  [idag] - **Brevteasern ├ñr inl├╢st.** S301 teasades i nyhetsbrevet 2026-11-01, och tisdagen ligger inom f├╢nstret m├ÑndagΓÇôl├╢rdag. Det ├ñr heller inte samma omr├Ñde tv├Ñ dagar i rad: grannen 2026-11-02 ├ñr partikelfysik och den h├ñr ├ñr astronomi.
+03:27:29  [idag] - **K├ñllan ├ñr l├ñst i fulltext.** Studien st├Ñr i Nature 657, 359ΓÇô363 (kollegialt granskad, ├╢ppen) och jag l├ñste ├ñven f├╢rtrycket p├Ñ arXiv. ESO:s pressmeddelande och Physics World anv├ñndes som komplement.
+03:27:29  [idag] - **Bilderna ├ñr tre ESO-bilder med fri licens (CC BY 4.0).** Huvudbilden ├ñr ett foto av teleskopen i Chile med en laser riktad mot Vintergatans centrum. Den ├ñr fr├Ñn 2007, och bildkrediten s├ñger att den inte visar studiens observationer. I texten ligger GRAVITY-bilderna av S301:s bana och en konstn├ñrlig bild av hur ett roterande svart h├Ñl drar med sig rumtiden.
+03:27:29  [idag] - **Fyra nya ord i ordlistan:** excentricitet, hillsmekanismen, tidvattenkraft och interferometri.
+03:27:29  [idag] - **Utgivaren** gav f├╢rst R├äTTA F├ûRST p├Ñ fyra punkter, som alla ├ñr r├ñttade:
+03:27:29  [idag]   - H├ñndelsehorisontens storlek beror p├Ñ hur fort h├Ñlet snurrar.
+03:27:29  [idag]   - ΓÇ¥Goda chanserΓÇ¥ blev ΓÇ¥en rimlig chansΓÇ¥, med studiens villkor utskrivna.
+03:27:29  [idag]   - Nobelpriset 2020 var delat i tre.
+03:27:29  [idag]   - Ordet ΓÇ¥interferometriΓÇ¥ l├ñnkade till fel uppslag.
+03:27:29  [idag] 
+03:27:29  [idag]   Omgranskningen hade en sista anm├ñrkning i ordlistans text om interferometri, och den ├ñr ocks├Ñ r├ñttad. Utgivaren skrev att artikeln d├Ñ ├ñr godk├ñnd utan ny granskning, och det har jag loggat i `granskningar.md`.
+03:27:29  [idag] - **Kontroller:** alla verifierare ├ñr gr├╢na (`verify-navigation`, `verify-begrepp`, `verify-sprak`, `verify-sitemap`). Jag har tittat p├Ñ f├╢rhandsvisningen i en sk├ñrmdump. Byggskriptet har k├╢rts, s├Ñ delningssidan, RSS-fl├╢det och sitemapen ├ñr uppdaterade.
+03:27:29  [idag] - **K├╢n:** S301 ├ñr borttagen ur `ko.md`. Ny brevteaser ├ñr hula-hoopens fysik, och jag har kontrollerat att originalstudien ├ñr ├╢ppen.
+03:27:29  [idag] 
+03:27:29  [idag] Bara nyhetsfilerna ing├Ñr i committen. Byggskriptet skrev om hundratals delningssidor, men ├ñndringarna g├ñllde bara radslut och jag har ├Ñterst├ñllt dem. Den osp├Ñrade mappen `.claude/nyheter/logg/` har jag inte r├╢rt.
+03:27:30  [idag] Claude avslutade med kod 0
+03:27:36  [idag] Pushat till main.
+03:27:36  [idag] Artikel 2026-11-03 pushad: 2026-11-03-stjarnan-som-kanner-halet-snurra
+03:29:06  [idag] Startar Claude Code (headless, modell sonnet)...
+03:29:36  [idag] There is no Gmail tool connected in this session ΓÇö there's no MCP server providing `send_message` for Gmail here, and no connector is listed as available. I can't send the email as requested.
+03:29:36  [idag] 
+03:29:36  [idag] Could you check the Gmail connector/MCP configuration? If it needs reconnecting, let me know once it's up and I'll send the review email right away. Meanwhile, here's the content ready to go so nothing is lost:
+03:29:36  [idag] 
+03:29:36  [idag] **Subject:** [Nyhet 2026-11-03] Att granska: Vintergatans snabbaste k├ñnda stj├ñrna kan avsl├╢ja hur fort det svarta h├Ñlet i centrum snurrar
+03:29:36  [idag] 
+03:29:36  [idag] **Body:**
+03:29:36  [idag] Morgondagens nyhetsartikel, tisdag 3 november 2026, ├ñr klar och publiceras automatiskt vid midnatt.
+03:29:36  [idag] 
+03:29:36  [idag] **Vintergatans snabbaste k├ñnda stj├ñrna kan avsl├╢ja hur fort det svarta h├Ñlet i centrum snurrar**
+03:29:36  [idag] 
+03:29:36  [idag] Stj├ñrnan S301 g├Ñr ett varv runt det svarta h├Ñlet i Vintergatans centrum p├Ñ 8,7 ├Ñr och n├Ñr 25 000 km/s, ├╢ver ├Ñtta procent av ljusets hastighet. Den kommer s├Ñ n├ñra h├Ñlet att dess bana b├╢r p├Ñverkas av h├Ñlets rotation, och forskarna hoppas kunna m├ñta rotationen inom tio ├Ñr.
+03:29:36  [idag] 
+03:29:36  [idag] Kategori: Astronomi
+03:29:36  [idag] L├ñstid: 5 min
+03:29:36  [idag] 
+03:29:36  [idag] L├ñs
+03:29:37  [idag] Claude avslutade med kod 0
+03:29:37  [idag] VARNING: mejlet till ägaren verkar inte ha skickats.
+03:29:37  [idag] === Nyhetsjobb: slut ===

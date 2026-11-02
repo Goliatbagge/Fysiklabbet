@@ -12844,8 +12844,8 @@
         if (!longi) {
             bas += '<line x1="30" y1="' + YC + '" x2="610" y2="' + YC + '" stroke="' + GREY + '" stroke-width="1" stroke-dasharray="5 4"/>';
             // den röda partikelns rörelseområde
-            bas += vgDubbelpil(XR + 22, YC - AMP, XR + 22, YC + AMP, SIGNAL) +
-                lbl(XR + 22, YC + AMP + 26, 'middle', 'partikelns rörelse', 13, SIGNAL);
+            bas += vgDubbelpil(XR, YC - AMP, XR, YC + AMP, SIGNAL) +
+                lbl(XR, YC + AMP + 26, 'middle', 'partikelns rörelse', 13, SIGNAL);
         } else {
             bas += vgDubbelpil(XR - AMP, 204, XR + AMP, 204, SIGNAL) +
                 lbl(XR + AMP + 10, 209, 'start', 'partikelns rörelse', 13, SIGNAL);

@@ -12655,6 +12655,56 @@
         return { satt: function (v) { igang = v; if (v) kor(); }, igang: function () { return igang; } };
     }
 
+    // Spela/pausa-knapp och tidsglidare (0 … max s) för vågsimuleringarna.
+    // Glidaren pausar och ställer tiden, så att vågen går att frysa i ett läge.
+    function vgTid(max, hamta, satt) {
+        var PLAY = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4 L20 12 L7 20 Z"/></svg>';
+        var PAUS = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +
+            '<rect x="5" y="4" width="5" height="16" rx="1"/><rect x="14" y="4" width="5" height="16" rx="1"/></svg>';
+        var btn = vgBtn('');
+        btn.style.display = 'inline-flex';
+        btn.style.alignItems = 'center';
+        btn.style.gap = '6px';
+        var rad = document.createElement('div');
+        rad.className = 'minisim-slider-row';
+        var lblEl = document.createElement('span');
+        lblEl.className = 'minisim-slider-lbl';
+        lblEl.innerHTML = 'Tid <em>t</em>';
+        var sl = document.createElement('input');
+        sl.type = 'range';
+        sl.className = 'minisim-slider';
+        sl.min = '0'; sl.max = String(max); sl.step = '0.01'; sl.value = '0';
+        sl.setAttribute('aria-label', 'Tiden i sekunder');
+        var val = document.createElement('span');
+        val.className = 'minisim-slider-val';
+        rad.appendChild(lblEl);
+        rad.appendChild(sl);
+        rad.appendChild(val);
+        var loop = null, drar = false, visatLage = null;
+        function fmt(v) { var x = v.toFixed(2); return parseFloat(x) === 0 ? '0' : x.replace('.', ','); }
+        function visa() {
+            var t = ((hamta() % max) + max) % max;
+            if (!drar) sl.value = String(t);
+            val.textContent = fmt(t) + ' s';
+            var p = !!(loop && loop.igang());
+            if (p !== visatLage) {
+                visatLage = p;
+                btn.innerHTML = (p ? PAUS : PLAY) + '<span>' + (p ? 'Pausa' : 'Spela') + '</span>';
+                btn.classList.toggle('ms-primar', !p);
+            }
+        }
+        function spela(v) { if (loop) loop.satt(v); visa(); }
+        btn.addEventListener('click', function () { spela(!(loop && loop.igang())); });
+        sl.addEventListener('input', function () {
+            drar = true;
+            if (loop) loop.satt(false);
+            satt(parseFloat(sl.value));
+            drar = false;
+            visa();
+        });
+        return { btn: btn, rad: rad, visa: visa, spela: spela, koppla: function (l) { loop = l; } };
+    }
+
     // ══════════════════════════════════════════════════════════════════════
     //  typ: pulsvag  (visa: puls | vag)
     // ══════════════════════════════════════════════════════════════════════
@@ -12774,7 +12824,13 @@
             bas + '<g class="ms-pv-dyn"></g></svg>';
         var dyn = scene.querySelector('.ms-pv-dyn');
         card.appendChild(scene);
-        msFullskarm(card, scene, 616 / 206, 60);
+        msFullskarm(card, scene, 616 / 206, 150);
+        var tk = vgTid(vag ? 2 * TP : CYKEL, function () { return tid; }, function (t) { tid = t; rita(); });
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        controls.appendChild(tk.btn);
+        card.appendChild(controls);
+        card.appendChild(tk.rad);
         var info = document.createElement('div');
         info.className = 'minisim-info ms-brod';
         info.style.marginTop = '6px';
@@ -12784,10 +12840,11 @@
         card.appendChild(info);
         node.appendChild(card);
 
-        var loop = vgLoop(card, function (dt) { tid += dt; rita(); });
-        card._set = function (t) { tid = t; rita(); };
+        var loop = vgLoop(card, function (dt) { tid += dt; rita(); tk.visa(); });
+        tk.koppla(loop);
+        card._set = function (t) { tid = t; rita(); tk.visa(); };
         rita();
-        loop.satt(true);
+        tk.spela(true);
     }
 
     // ══════════════════════════════════════════════════════════════════════
@@ -12935,13 +12992,15 @@
 
         var controls = document.createElement('div');
         controls.className = 'minisim-controls';
-        var startBtn = vgBtn('Pausa');
+        var tk = vgTid(T, function () { return tid; }, function (t) { tid = t; rita(); });
+        var startBtn = tk.btn;
         var ultraCk = vgCheck('Ultrarapid', false);
         var foljCk = vgCheck(longi ? 'Markera förtätningar' : 'Markera vågtopparna', true);
         controls.appendChild(startBtn);
         controls.appendChild(ultraCk.label);
         controls.appendChild(foljCk.label);
         card.appendChild(controls);
+        card.appendChild(tk.rad);
         var info = document.createElement('div');
         info.className = 'minisim-info ms-brod';
         info.style.marginTop = '6px';
@@ -12951,16 +13010,12 @@
         card.appendChild(info);
         node.appendChild(card);
 
-        var loop = vgLoop(card, function (dt) { tid += dt * (ultra ? 0.25 : 1); rita(); });
-        function setSpelar(v) {
-            loop.satt(v);
-            startBtn.textContent = v ? 'Pausa' : 'Starta';
-            startBtn.classList.toggle('ms-primar', !v);
-        }
-        startBtn.addEventListener('click', function () { setSpelar(!loop.igang()); });
+        var loop = vgLoop(card, function (dt) { tid += dt * (ultra ? 0.25 : 1); rita(); tk.visa(); });
+        tk.koppla(loop);
+        function setSpelar(v) { tk.spela(v); }
         ultraCk.cb.addEventListener('change', function () { ultra = ultraCk.cb.checked; });
         foljCk.cb.addEventListener('change', function () { folj = foljCk.cb.checked; rita(); });
-        card._set = function (t) { tid = t; rita(); };
+        card._set = function (t) { tid = t; rita(); tk.visa(); };
         rita();
         setSpelar(true);
     }
@@ -13113,11 +13168,13 @@
 
         var controls = document.createElement('div');
         controls.className = 'minisim-controls';
-        var startBtn = vgBtn('Pausa');
+        var tk = vgTid(T, function () { return tid; }, function (t) { tid = t; rita(); });
+        var startBtn = tk.btn;
         var ultraCk = vgCheck('Ultrarapid', false);
         controls.appendChild(startBtn);
         controls.appendChild(ultraCk.label);
         card.appendChild(controls);
+        card.appendChild(tk.rad);
         var info = document.createElement('div');
         info.className = 'minisim-info ms-brod';
         info.style.marginTop = '6px';
@@ -13127,15 +13184,11 @@
         card.appendChild(info);
         node.appendChild(card);
 
-        var loop = vgLoop(card, function (dt) { tid += dt * (ultra ? 0.25 : 1); rita(); });
-        function setSpelar(v) {
-            loop.satt(v);
-            startBtn.textContent = v ? 'Pausa' : 'Starta';
-            startBtn.classList.toggle('ms-primar', !v);
-        }
-        startBtn.addEventListener('click', function () { setSpelar(!loop.igang()); });
+        var loop = vgLoop(card, function (dt) { tid += dt * (ultra ? 0.25 : 1); rita(); tk.visa(); });
+        tk.koppla(loop);
+        function setSpelar(v) { tk.spela(v); }
         ultraCk.cb.addEventListener('change', function () { ultra = ultraCk.cb.checked; });
-        card._set = function (t) { tid = t; rita(); };
+        card._set = function (t) { tid = t; rita(); tk.visa(); };
         rita();
         setSpelar(true);
     }
@@ -13245,11 +13298,13 @@
 
         var controls = document.createElement('div');
         controls.className = 'minisim-controls';
-        var startBtn = vgBtn('Pausa');
+        var tk = vgTid(T, function () { return tid; }, function (t) { tid = t; rita(); });
+        var startBtn = tk.btn;
         var ultraCk = vgCheck('Ultrarapid', false);
         controls.appendChild(startBtn);
         controls.appendChild(ultraCk.label);
         card.appendChild(controls);
+        card.appendChild(tk.rad);
         var info = document.createElement('div');
         info.className = 'minisim-info ms-brod';
         info.style.marginTop = '6px';
@@ -13258,15 +13313,11 @@
         card.appendChild(info);
         node.appendChild(card);
 
-        var loop = vgLoop(card, function (dt) { tid += dt * (ultra ? 0.25 : 1); rita(); });
-        function setSpelar(v) {
-            loop.satt(v);
-            startBtn.textContent = v ? 'Pausa' : 'Starta';
-            startBtn.classList.toggle('ms-primar', !v);
-        }
-        startBtn.addEventListener('click', function () { setSpelar(!loop.igang()); });
+        var loop = vgLoop(card, function (dt) { tid += dt * (ultra ? 0.25 : 1); rita(); tk.visa(); });
+        tk.koppla(loop);
+        function setSpelar(v) { tk.spela(v); }
         ultraCk.cb.addEventListener('change', function () { ultra = ultraCk.cb.checked; });
-        card._set = function (t) { tid = t; rita(); };
+        card._set = function (t) { tid = t; rita(); tk.visa(); };
         rita();
         setSpelar(true);
     }

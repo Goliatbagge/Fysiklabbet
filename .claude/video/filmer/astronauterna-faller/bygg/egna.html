@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#f7f2e8}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas>
+<script>
+// De egna scenerna i filmen "Astronauterna faller". window.rita(scen, t)
+// ritar scenen vid tiden t (s). Alla tal är uträknade, inte gissade:
+//   scen 4: jorden (radie 6 378 km) och stationens bana 400 km upp i samma skala,
+//           radien 6 778 km = 1,0627 jordradier;
+//   scen 5: F_G vid stationens höjd / F_G vid jordytan = (6 378 / 6 778)² = 0,885,
+//           pilarna är 520 px och 460 px; filmen säger "cirka 89 %";
+//   scen 7–12: Newtons kanonkula. Banorna räknas ur gravitationslagen med RK4
+//           (jordradien = 1, kullens topp r0 = 1,03, GM = r0 så att farten 1 ger
+//           cirkelbana kring kullens topp). Luftmotstånd försummas. Farten i
+//           cirkelbanan vid jordytan är 7,9 km/s, därav "nästan 8 km/s";
+//   scen 11: fallet från den raka linjen och marken som kröker sig undan mäts vid
+//           samma x; de skiljer sig bara med kullens 3 %;
+//   scen 13: stationen 400 km upp (r = 1,0627) med 7,7 km/s; F_G pekar mot
+//           jordens medelpunkt.
+// Inget ritas i bandet y 1380–1560 (undertexterna) utom jordens fyllning.
+const c = document.getElementById('c'), x = c.getContext('2d');
+const BLA = '#2b5ca8', INK = '#0f1620', ROD = '#c8324a', RUT = 'rgba(147,174,199,.55)', GRA = '#3f4a5c';
+const JORD = '#dce7f2';
+let SLOT = {};
+window.satt = s => Object.assign(SLOT, s);
+const NB = ' ';
+
+function papper() {
+  const gr = x.createLinearGradient(0, 0, 0, 1920); gr.addColorStop(0, '#f7f2e8'); gr.addColorStop(1, '#ece3d2');
+  x.fillStyle = gr; x.fillRect(0, 0, 1080, 1920);
+  x.strokeStyle = RUT; x.lineWidth = 1.5;
+  for (let i = 0; i <= 1920; i += 27) { x.beginPath(); x.moveTo(0, i + .75); x.lineTo(1080, i + .75); x.stroke(); }
+  for (let i = 0; i <= 1080; i += 27) { x.beginPath(); x.moveTo(i + .75, 0); x.lineTo(i + .75, 1920); x.stroke(); }
+  x.lineCap = 'round'; x.lineJoin = 'round'; x.setLineDash([]);
+}
+function text(s, px, py, size, col, align, vikt, stil) {
+  x.font = `${stil || ''} ${vikt || 600} ${size}px Poppins`; x.fillStyle = col || INK; x.textAlign = align || 'center'; x.textBaseline = 'alphabetic';
+  x.fillText(s, px, py);
+}
+const klamp = u => Math.min(1, Math.max(0, u));
+const tona = (t, t0, d) => klamp((t - t0) / (d || .5));
+const mjuk = u => u * u * (3 - 2 * u);
+function rubrik(s, alfa) { x.globalAlpha = alfa === undefined ? 1 : alfa; text(s, 540, 300, 66, INK, 'center', 700); x.globalAlpha = 1; }
+function underrubrik(s, py, alfa, col) { x.globalAlpha = alfa; text(s, 540, py, 54, col || BLA, 'center', 600); x.globalAlpha = 1; }
+// F_G: kursivt F, upprätt G som index
+function FG(px, py, size, col, align) {
+  x.font = `italic 600 ${size}px Poppins`; const wF = x.measureText('F').width;
+  x.font = `600 ${size * .62}px Poppins`; const wG = x.measureText('G').width;
+  let x0 = align === 'end' ? px - wF - wG - 4 : px;
+  text('F', x0, py, size, col, 'left', 600, 'italic');
+  text('G', x0 + wF + 4, py + size * .2, size * .62, col, 'left', 600);
+}
+// Kraftpil: skaft med rak ände (butt) som slutar vid huvudets bas
+function pil(x0, y0, x1, y1, col, bredd) {
+  const L = Math.hypot(x1 - x0, y1 - y0), ux = (x1 - x0) / L, uy = (y1 - y0) / L, h = 34, b = 17;
+  x.strokeStyle = col; x.fillStyle = col; x.lineWidth = bredd || 9; x.lineCap = 'butt';
+  x.beginPath(); x.moveTo(x0, y0); x.lineTo(x1 - ux * h, y1 - uy * h); x.stroke();
+  x.beginPath(); x.moveTo(x1, y1); x.lineTo(x1 - ux * h - uy * b, y1 - uy * h + ux * b); x.lineTo(x1 - ux * h + uy * b, y1 - uy * h - ux * b); x.closePath(); x.fill();
+  x.lineCap = 'round';
+}
+function boll(px, py, r, alfa) {
+  x.globalAlpha = alfa === undefined ? 1 : alfa;
+  x.fillStyle = ROD; x.strokeStyle = INK; x.lineWidth = 3;
+  x.beginPath(); x.arc(px, py, r, 0, 7); x.fill(); x.stroke();
+  x.globalAlpha = 1;
+}
+function station(px, py, vinkel, skala, alfa) {
+  x.save(); x.globalAlpha = alfa === undefined ? 1 : alfa; x.translate(px, py); x.rotate(vinkel); x.scale(skala, skala);
+  x.strokeStyle = INK; x.lineWidth = 3;
+  x.fillStyle = '#ffffff';
+  for (const s of [-1, 1]) { x.beginPath(); x.rect(s * 14 - (s > 0 ? 0 : 26), -9, 26, 18); x.fill(); x.stroke(); x.beginPath(); x.moveTo(s * 14 + (s > 0 ? 13 : -13), -9); x.lineTo(s * 14 + (s > 0 ? 13 : -13), 9); x.stroke(); }
+  x.fillStyle = ROD; x.beginPath(); x.rect(-14, -6, 28, 12); x.fill(); x.stroke();
+  x.restore();
+}
+
+// ---- Världen: jordradien = 1, kullen överst (vinkel 0 = rakt upp) ----
+const H = 0.03, W = 0.08, R0 = 1 + H, GM = R0;
+const R_STN = 6778 / 6378;
+function markR(phi) { const a = Math.abs(phi); return a < W ? 1 + H * Math.cos(Math.PI * a / (2 * W)) ** 2 : 1; }
+// Kamera: världspunkten C hamnar i skärmpunkten (sx, sy), skala s px per jordradie
+let K = { cx: 0, cy: 0, sx: 540, sy: 880, s: 330 };
+const KF = { cx: 0, cy: 0, sx: 540, sy: 880, s: 330 };        // hela jorden
+const KZ = { cx: 0.15, cy: 0.98, sx: 540, sy: 820, s: 2600 }; // kullen, inzoomat
+const KT = { cx: 0.313, cy: 0.97, sx: 540, sy: 800, s: 1700 }; // fallet och krökningen
+const P = (X, Y) => [K.sx + K.s * (X - K.cx), K.sy - K.s * (Y - K.cy)];
+function kameraMellan(a, b, u) {
+  const s = Math.exp(Math.log(a.s) + (Math.log(b.s) - Math.log(a.s)) * u);
+  const w = (1 / s - 1 / a.s) / (1 / b.s - 1 / a.s);
+  return { cx: a.cx + (b.cx - a.cx) * w, cy: a.cy + (b.cy - a.cy) * w, sx: a.sx + (b.sx - a.sx) * u, sy: a.sy + (b.sy - a.sy) * u, s };
+}
+function jorden(kulle) {
+  x.beginPath();
+  const N = 1440;
+  for (let i = 0; i <= N; i++) {
+    const phi = -Math.PI + 2 * Math.PI * i / N, r = kulle ? markR(phi) : 1;
+    const [px, py] = P(r * Math.sin(phi), r * Math.cos(phi));
+    i ? x.lineTo(px, py) : x.moveTo(px, py);
+  }
+  x.closePath(); x.fillStyle = JORD; x.fill();
+  x.strokeStyle = BLA; x.lineWidth = 5; x.stroke();
+}
+function cirkel(r, col, bredd, streck) {
+  const [cx, cy] = P(0, 0);
+  x.strokeStyle = col; x.lineWidth = bredd; x.setLineDash(streck || []);
+  x.beginPath(); x.arc(cx, cy, r * K.s, 0, 7); x.stroke(); x.setLineDash([]);
+}
+// Kastbana med RK4 tills bollen slår i marken (högst ett varv)
+function bana(v) {
+  let X = 0, Y = R0, vx = v, vy = 0, t = 0; const dt = 0.0008, pts = [[0, X, Y]];
+  const acc = (X, Y) => { const r3 = Math.pow(X * X + Y * Y, 1.5); return [-GM * X / r3, -GM * Y / r3]; };
+  let varv = 0, forra = 0;
+  for (let i = 0; i < 400000; i++) {
+    const [a1x, a1y] = acc(X, Y);
+    const [a2x, a2y] = acc(X + vx * dt / 2, Y + vy * dt / 2);
+    const [a3x, a3y] = acc(X + (vx + a1x * dt / 2) * dt / 2, Y + (vy + a1y * dt / 2) * dt / 2);
+    const [a4x, a4y] = acc(X + (vx + a2x * dt / 2) * dt, Y + (vy + a2y * dt / 2) * dt);
+    const nX = X + dt * (vx + dt / 6 * (a1x + a2x + a3x)), nY = Y + dt * (vy + dt / 6 * (a1y + a2y + a3y));
+    vx += dt / 6 * (a1x + 2 * a2x + 2 * a3x + a4x); vy += dt / 6 * (a1y + 2 * a2y + 2 * a3y + a4y);
+    X = nX; Y = nY; t += dt;
+    const phi = Math.atan2(X, Y);
+    if (forra > 2 && phi < 0 && phi > -1) varv = 1;    // passerat nedre delen, på väg tillbaka
+    forra = phi < 0 ? phi + 2 * Math.PI : phi;
+    if (i % 10 === 0) pts.push([t, X, Y]);
+    if (Math.hypot(X, Y) < markR(phi)) { pts.push([t, X, Y]); return { pts, T: t, landar: true }; }
+    if (varv && phi >= 0) { pts.push([t, 0, R0]); return { pts, T: t, landar: false }; }
+  }
+  return { pts, T: t, landar: false };
+}
+const V = { a: 0.45, b: 0.62, c: 0.78, d: 0.95, e: 1.0 };
+const BANOR = Object.fromEntries(Object.entries(V).map(([k, v]) => [k, bana(v)]));
+// Rita en bana fram till andelen u av sin tid; klar = streckad och blek
+function ritaBana(b, u, gammal) {
+  const tSlut = u * b.T;
+  x.strokeStyle = BLA; x.lineWidth = gammal ? 4 : 6; x.globalAlpha = gammal ? .45 : 1; x.setLineDash(gammal ? [14, 12] : []);
+  x.beginPath(); let sista = b.pts[0];
+  for (const p of b.pts) { if (p[0] > tSlut) break; const [px, py] = P(p[1], p[2]); p === b.pts[0] ? x.moveTo(px, py) : x.lineTo(px, py); sista = p; }
+  x.stroke(); x.setLineDash([]); x.globalAlpha = 1;
+  return sista;
+}
+function kast(b, t, t0, d) {
+  const u = klamp((t - t0) / d);
+  const p = ritaBana(b, u, false);
+  const [px, py] = P(p[1], p[2]);
+  if (u <= 0) { const [hx, hy] = P(0, R0); boll(hx, hy - 14, 14); return; }
+  boll(px, py - (u < 1 || !b.landar ? 0 : 0), 14);
+}
+function bollPaKullen() { const [hx, hy] = P(0, R0); boll(hx, hy - 14, 14); }
+
+// ---- Scenerna ----
+window.rita = (n, t) => {
+  papper();
+  const d = SLOT[n] || 4;
+  if (n === 4) {
+    K = KF;
+    rubrik('Bara 400 km upp');
+    const a = mjuk(tona(t, .1, .6));
+    x.globalAlpha = a; jorden(false); x.globalAlpha = 1;
+    // banan ritas fram moturs från toppen
+    const u = mjuk(tona(t, .5, 1.4)), [cx, cy] = P(0, 0), rb = R_STN * K.s;
+    x.strokeStyle = ROD; x.lineWidth = 4; x.beginPath(); x.arc(cx, cy, rb, -Math.PI / 2, -Math.PI / 2 + u * 2 * Math.PI); if (u > 0) x.stroke();
+    const st = tona(t, 1.9, .4);
+    station(cx - rb * Math.sin(.6), cy - rb * Math.cos(.6), -.6, 1.1, st);
+    // mått mellan jordytan och banan, till höger om toppen
+    const m = tona(t, 2.3, .5), yJ = cy - K.s, yB = cy - rb, mx = 790;
+    x.globalAlpha = m; x.strokeStyle = GRA; x.lineWidth = 2.5; x.setLineDash([8, 7]);
+    x.beginPath(); x.moveTo(560, yJ); x.lineTo(mx + 30, yJ); x.moveTo(560, yB); x.lineTo(mx + 30, yB); x.stroke(); x.setLineDash([]);
+    // pilarna pekar in mot måttet utifrån, eftersom avståndet är så litet
+    x.strokeStyle = INK; x.fillStyle = INK; x.lineWidth = 4; x.lineCap = 'butt';
+    for (const [y, dir] of [[yB, 1], [yJ, -1]]) {
+      x.beginPath(); x.moveTo(mx, y - dir * 70); x.lineTo(mx, y - dir * 20); x.stroke();
+      x.beginPath(); x.moveTo(mx, y); x.lineTo(mx - 12, y - dir * 22); x.lineTo(mx + 12, y - dir * 22); x.closePath(); x.fill();
+    }
+    x.lineCap = 'round';
+    text(`cirka 400${NB}km`, mx, yB - 95, 50, INK, 'center', 700);
+    x.globalAlpha = 1;
+  }
+  if (n === 5) {
+    rubrik('Tyngdkraften där uppe');
+    const L1 = 520, L2 = L1 * (6378 / 6778) ** 2;
+    const lag = [[290, 'vid jordytan', L1, '100 %'], [790, `400${NB}km upp`, L2, 'cirka 89 %']];
+    lag.forEach(([px, namn, L, pc], k) => {
+      const t0 = .2 + k * 1.3, a = tona(t, t0, .4), u = mjuk(tona(t, t0 + .2, .7));
+      x.globalAlpha = a; text(namn, px, 480, 50, GRA, 'center', 600);
+      const by = 590; boll(px, by, 30, a);
+      x.globalAlpha = a;
+      if (u > 0) pil(px, by, px, by + 40 + (L - 40) * u, INK, 10);
+      x.globalAlpha = tona(t, t0 + .8, .4);
+      FG(px + 30, by + L - 6, 58, INK, 'left');
+      text(pc.replace(' ', NB), px, by + L + 100, 62, k ? ROD : BLA, 'center', 700);
+      x.fillStyle = INK; x.beginPath(); x.arc(px, by, 5, 0, 7); x.fill();   // tyngdpunkten
+      x.globalAlpha = 1;
+    });
+  }
+  if (n === 7) {
+    K = KZ; rubrik('Ett vanligt kast');
+    jorden(true); kast(BANOR.a, t, .4, 1.8);
+  }
+  if (n === 8) {
+    K = KZ; rubrik('Hårdare och hårdare');
+    jorden(true); ritaBana(BANOR.a, 1, true);
+    if (t < 1.75) kast(BANOR.b, t, .2, 1.4);
+    else { ritaBana(BANOR.b, 1, true); kast(BANOR.c, t, 1.8, Math.min(1.5, d - 2)); }
+  }
+  if (n === 9) {
+    const u = mjuk(tona(t, .1, 2.2));
+    K = kameraMellan(KZ, KF, u);
+    rubrik('Men jorden är rund');
+    jorden(true);
+    for (const k of 'abc') ritaBana(BANOR[k], 1, true);
+    if (t < 2.4) bollPaKullen(); else kast(BANOR.d, t, 2.4, d - 2.8);
+  }
+  if (n === 10) {
+    K = KF; rubrik('Nästan 8 km/s');
+    jorden(true);
+    for (const k of 'abcd') ritaBana(BANOR[k], 1, true);
+    // långsammare än i scen 12, så att bara början av varvet syns
+    kast(BANOR.e, t, .3, 12.0);
+    underrubrik(`7,9${NB}km/s vid jordytan`, 1310, tona(t, .6, .4), GRA);
+  }
+  if (n === 11) {
+    K = KT; rubrik('Fallet och krökningen');
+    jorden(true);
+    const b = BANOR.e, tid = mjuk(tona(t, .2, 1.9)) * 0.3678;   // tills bollen nått x = 0,36
+    const u = tid / b.T, p = ritaBana(b, u, false);
+    // den raka linjen bollen hade följt utan tyngdkraft, och markens tangent
+    const [hx, hy] = P(0, R0), [gx, gy] = P(0.08, 1);
+    x.strokeStyle = GRA; x.lineWidth = 3; x.setLineDash([12, 10]);
+    x.beginPath(); x.moveTo(hx, hy); x.lineTo(1080, hy); x.stroke();
+    const m = tona(t, 2.3, .5);
+    x.globalAlpha = m; x.beginPath(); x.moveTo(P(0, 1)[0], gy); x.lineTo(1080, gy); x.stroke(); x.globalAlpha = 1;
+    x.setLineDash([]);
+    const [bx, by] = P(p[1], p[2]); boll(bx, by, 14);
+    if (m > 0) {
+      x.globalAlpha = m;
+      const X = p[1], Yg = Math.sqrt(1 - X * X), [, gyX] = P(X, Yg), [, ty] = P(X, 1);
+      const L = bx - 46, Rr = bx + 46;
+      const klammer = (kx, y0, y1, col) => {
+        x.strokeStyle = col; x.lineWidth = 2.5; x.setLineDash([6, 6]);
+        x.beginPath(); x.moveTo(bx, y0); x.lineTo(kx, y0); x.moveTo(bx, y1); x.lineTo(kx, y1); x.stroke(); x.setLineDash([]);
+        x.lineWidth = 6; x.beginPath(); x.moveTo(kx, y0); x.lineTo(kx, y1); x.stroke();
+        x.lineWidth = 4; x.beginPath(); x.moveTo(kx - 14, y0); x.lineTo(kx + 14, y0); x.moveTo(kx - 14, y1); x.lineTo(kx + 14, y1); x.stroke();
+      };
+      klammer(L, hy, by, ROD);
+      klammer(Rr, ty, gyX, BLA);
+      text('fallet', L, hy - 26, 46, ROD, 'center', 700);
+      text('krökningen', Rr + 22, (ty + gyX) / 2 + 16, 46, BLA, 'start', 700);
+      x.globalAlpha = 1;
+    }
+  }
+  if (n === 12) {
+    K = KF; rubrik('Den missar jorden');
+    jorden(true);
+    for (const k of 'abcd') ritaBana(BANOR[k], 1, true);
+    kast(BANOR.e, t, .2, Math.min(3.3, d - .6));
+  }
+  if (n === 13) {
+    K = KF; rubrik('Rymdstationen faller också');
+    jorden(false);
+    cirkel(R_STN, ROD, 3, [10, 9]);
+    const [cx, cy] = P(0, 0), rb = R_STN * K.s;
+    const ang = -.9 + t * .26;                       // medurs från vänster ovanför
+    const sx = cx + rb * Math.sin(ang), sy = cy - rb * Math.cos(ang);
+    station(sx, sy, ang, 1.4);
+    const a = tona(t, .6, .4);
+    if (a > 0) {
+      x.globalAlpha = a;
+      const L = 130, tx = sx - L * Math.sin(ang), ty = sy + L * Math.cos(ang);
+      pil(sx, sy, tx, ty, INK, 8);
+      x.fillStyle = INK; x.beginPath(); x.arc(sx, sy, 4.5, 0, 7); x.fill();
+      FG(tx + 18, ty + 20, 50, INK, 'left');
+      x.globalAlpha = 1;
+    }
+    underrubrik(`400${NB}km upp, 7,7${NB}km/s`, 1310, tona(t, 1.2, .4), GRA);
+  }
+};
+window.info = () => Object.fromEntries(Object.entries(BANOR).map(([k, b]) => [k, { T: +b.T.toFixed(3), landar: b.landar, vinkel_grader: +(Math.atan2(b.pts[b.pts.length - 1][1], b.pts[b.pts.length - 1][2]) * 180 / Math.PI).toFixed(1), x: +b.pts[b.pts.length - 1][1].toFixed(3) }]));
+</script></body></html>

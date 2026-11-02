@@ -1,0 +1,62 @@
+Scen 1 · 4 s · AI-SCEN
+"Astronauterna på rymdstationen svävar fritt."
+
+Scen 2 · 4 s · AI-SCEN
+"Är de för långt bort för tyngdkraften?"
+
+Scen 3 · 4 s · AI-SCEN
+"Vad tror du?"
+
+Scen 4 · 4 s · EGEN INSPELNING
+"Rymdstationen ligger bara cirka 400 km upp."
+
+Egen animation: jorden i genomskärning i skala (radie 6 378 km) med rymdstationens bana 400 km ovanför jordytan som en tunn cirkel tätt intill. Måttpil "cirka 400 km" mellan jordytan och banan. Banan ska synligt nästan nudda jorden: det är poängen.
+
+Scen 5 · 4 s · EGEN INSPELNING
+"Där uppe är tyngdkraften nästan lika stark som här nere."
+
+Egen animation: två tyngdkraftspilar F_G i skala, en vid jordytan (100 %) och en vid stationens höjd (88,5 %, räknat som (6 378 / 6 778)²). Etikett "cirka 89 %" vid den övre pilen.
+
+Scen 6 · 4 s · AI-SCEN
+"Kasta en boll rakt fram."
+
+Scen 7 · 4 s · EGEN INSPELNING
+"Den faller i en båge ned mot marken."
+
+Egen animation (Newtons kanonkula, räknad bana): en kulle på en jord i genomskärning, bollen kastas vågrätt med låg fart och faller i en båge till marken nära kullen. Luftmotstånd försummas; banan räknas ur gravitationslagen, inte ritas på fri hand.
+
+Scen 8 · 4 s · EGEN INSPELNING
+"Kasta hårdare, så landar den längre bort."
+
+Egen animation: samma bild, två kast till med högre fart. Banorna landar längre och längre bort; de gamla banorna står kvar streckade.
+
+Scen 9 · 4 s · EGEN INSPELNING
+"Men jorden är rund. Marken kröker sig undan."
+
+Egen animation: kameran zoomar ut så hela jorden syns. Ett kast till landar en bra bit runt jorden; markens krökning syns tydligt under banan.
+
+Scen 10 · 4 s · EGEN INSPELNING
+"Kastar du med nästan 8 km/s,"
+
+Egen animation: bollen kastas med 7,9 km/s (cirkelbanefart vid jordytan, som i faktakontrollen). Etikett "nästan 8 km/s" vid kastet. Banan börjar följa jordytan.
+
+Scen 11 · 4 s · EGEN INSPELNING
+"kröker sig marken undan lika mycket som bollen faller."
+
+Egen animation: samma kast, inzoomat på en bit av banan. Två streckade linjer visar hur långt bollen fallit från den raka linjen och hur långt marken kröker sig undan; de är lika långa.
+
+Scen 12 · 4 s · EGEN INSPELNING
+"Bollen faller hela tiden, men missar jorden."
+
+Egen animation: utzoomat igen. Bollen går ett helt varv runt jorden och kommer tillbaka till kullen; banan sluts till en cirkel.
+
+Scen 13 · 4 s · EGEN INSPELNING
+"Precis så faller rymdstationen. Och astronauterna med den."
+
+Egen animation: bollen byts mot en liten rymdstation på samma sorts bana, 400 km upp, 7,7 km/s. En tyngdkraftspil F_G pekar från stationen mot jordens medelpunkt och följer med runt banan.
+
+Scen 14 · 4 s · AI-SCEN
+"Tyngdkraften verkar på dem. De faller, hela tiden."
+
+Scen 15 · 4 s · AI-SCEN
+"(inget tal, slutskylten läggs på i redigeringen)"

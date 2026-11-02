@@ -1,0 +1,22 @@
+{
+ "film": "Astronauterna faller",
+ "figur": "Fylgia",
+ "rost": "zyfJspwEDo0sxPeFmtsn",
+ "teori": "fy2-1.6",
+ "segment": [
+  {"scen": 1, "tal": "Astronauterna på rymdstationen svävar fritt.", "undertext": "Astronauterna på rymdstationen svävar fritt."},
+  {"scen": 2, "tal": "[curious] Är dom för långt bort för tyngdkraften?", "undertext": "Är de för långt bort för tyngdkraften?"},
+  {"scen": 3, "tal": "Vad tror du?", "undertext": "Vad tror du?"},
+  {"scen": 4, "tal": "Rymdstationen ligger bara cirka fyrahundra kilometer upp.", "undertext": "Rymdstationen ligger bara cirka 400 km upp."},
+  {"scen": 5, "tal": "Där uppe är tyngdkraften nästan lika stark som här nere.", "undertext": "Där uppe är tyngdkraften nästan lika stark som här nere."},
+  {"scen": 6, "tal": "Kasta en boll rakt fram.", "undertext": "Kasta en boll rakt fram."},
+  {"scen": 7, "tal": "Den faller i en båge ner mot marken.", "undertext": "Den faller i en båge ned mot marken."},
+  {"scen": 8, "tal": "Kasta hårdare, så landar den längre bort.", "undertext": "Kasta hårdare, så landar den längre bort."},
+  {"scen": 9, "tal": "Men jorden är rund. [pause] Marken kröker sig undan.", "undertext": "Men jorden är rund. Marken kröker sig undan."},
+  {"scen": 10, "tal": "Kastar du med nästan åtta kilometer per sekund,", "undertext": "Kastar du med nästan 8 km/s,"},
+  {"scen": 11, "tal": "kröker sig marken undan lika mycket som bollen faller.", "undertext": "kröker sig marken undan lika mycket som bollen faller."},
+  {"scen": 12, "tal": "[warm] Bollen faller hela tiden, men missar jorden.", "undertext": "Bollen faller hela tiden, men missar jorden."},
+  {"scen": 13, "tal": "Precis så faller rymdstationen. Och astronauterna med den.", "undertext": "Precis så faller rymdstationen. Och astronauterna med den."},
+  {"scen": 14, "tal": "Tyngdkraften verkar på dom. [pause] Dom faller, hela tiden.", "undertext": "Tyngdkraften verkar på dem. De faller, hela tiden."}
+ ]
+}

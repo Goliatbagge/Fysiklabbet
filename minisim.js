@@ -13268,6 +13268,210 @@
         setSpelar(true);
     }
 
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: staendevag
+    // ══════════════════════════════════════════════════════════════════════
+    // fy2-2.9 (Stående vågor i strängar), demonstrationen: ett snöre går från
+    // en vibrator på labbänken över en trissa med en hängande vikt. Eleven
+    // ökar vibratorns frekvens med glidaren (eller med − och +) och ser att
+    // snöret bara svänger kraftigt vid vissa frekvenser: en buk vid
+    // grundtonen f₁ = 12 Hz, två bukar vid 24 Hz, tre vid 36 Hz och fyra vid
+    // 48 Hz. Mellan dem darrar snöret knappt.
+    // Modell: stationär lösning för en dämpad sträng som drivs i ena änden
+    // (x = 0, utslag a · cos ωt) och sitter fast i den andra (x = L):
+    //   y(x, t) = a · Re[ sin(k(L − x)) / sin(kL) · e^(iωt) ],
+    //   k = (ω / v)(1 − iζ),
+    // där dämpningen ζ gör förstärkningen ändlig vid resonans (≈ 1/(nπζ)).
+    // ζ minskar svagt med n, så att alla bukarna blir ungefär lika höga.
+    // Vid 12–48 Hz går snöret för fort för ögat: scenen visar därför det
+    // suddiga band man ser i verkligheten (höljet) och snöret i slow motion
+    // ovanpå. Profilen glider mot sitt nya läge med tidskonstanten TAU, så
+    // att svängningen byggs upp och klingar av i stället för att hoppa.
+    var svRaknare = 0;
+    function buildStaendevag(node, cfg) {
+        var INK = '#1f2530', GREY = '#8a919b', SNORE = '#c0392b', BAND = '#e9a99f', BLA = '#2563c9';
+        var X0 = 96, X1 = 548, YC = 112, ADRIV = 5;            // snörets ändar, viloläge, vibratorns utslag (px)
+        var F1 = 12, FMIN = 2, FMAX = 52, STEG = 0.2, TAU = 0.35;
+        var NPKT = 181, VISFREKV = 0.9;                         // punkter längs snöret, slow motion-takt (Hz)
+        var f = 4, tid = 0, visaNB = false;
+        var id = 'ms-sv-rutnat-' + (++svRaknare);
+        var aktRe = new Float64Array(NPKT), aktIm = new Float64Array(NPKT);
+        var malRe = new Float64Array(NPKT), malIm = new Float64Array(NPKT);
+
+        function lbl(x, y, anchor, inner, size, color, extra) {
+            return '<text x="' + vgR1(x) + '" y="' + vgR1(y) + '" text-anchor="' + anchor + '" font-size="' +
+                (size || 15) + '" fill="' + (color || INK) + '"' + (extra || '') + '>' + inner + '</text>';
+        }
+        function fmt(v) { var s = v.toFixed(1); return parseFloat(s) === 0 ? '0' : s.replace('.', ','); }
+        function narmasteN() { return Math.max(1, Math.round(f / F1)); }
+        function zeta() { return 0.035 / Math.pow(narmasteN(), 0.8); }
+        // ligger frekvensen så nära en egenfrekvens att snöret svänger kraftigt?
+        function iResonans() {
+            var n = Math.round(f / F1);
+            return n >= 1 && Math.abs(f - n * F1) <= n * F1 * zeta() * 1.6;
+        }
+        // målprofilen P(s) = sin(c(1 − s)) / sin(c), c = α − iβ, s = x / L
+        function raknaMal() {
+            var al = Math.PI * f / F1, be = al * zeta();
+            var dr = Math.sin(al) * Math.cosh(be), di = -Math.cos(al) * Math.sinh(be);
+            var d2 = dr * dr + di * di;
+            for (var i = 0; i < NPKT; i++) {
+                var u = 1 - i / (NPKT - 1);
+                var nr = Math.sin(al * u) * Math.cosh(be * u), ni = -Math.cos(al * u) * Math.sinh(be * u);
+                malRe[i] = (nr * dr + ni * di) / d2;
+                malIm[i] = (ni * dr - nr * di) / d2;
+            }
+        }
+
+        // ── fast bakgrund: labbänk, vibrator, trissa med vikt ────────────
+        var bas = vgRutnat(id, 0, 0, 640, 240);
+        bas += '<rect x="0" y="204" width="640" height="36" fill="#c9a26b"/>' +
+            '<line x1="0" y1="204" x2="640" y2="204" stroke="#8a6a3a" stroke-width="2"/>';
+        for (var gx = 18; gx < 640; gx += 46) {
+            bas += '<path d="M ' + gx + ' 214 q 14 3 30 0" fill="none" stroke="#a8824e" stroke-width="1" opacity="0.7"/>';
+        }
+        // vibratorn: låda med etikett och sladd
+        bas += '<rect x="56" y="150" width="80" height="54" rx="6" fill="#4a5568" stroke="#2d3748" stroke-width="1.4"/>' +
+            '<circle cx="74" cy="186" r="5" fill="#2d3748"/><circle cx="118" cy="186" r="5" fill="#2d3748"/>' +
+            '<rect x="88" y="144" width="16" height="7" rx="2" fill="#2d3748"/>' +
+            lbl(96, 170, 'middle', 'vibrator', 11.5, '#f1f3f6', ' font-weight="600"') +
+            '<path d="M 56 194 Q 34 196 30 204" fill="none" stroke="#2d3748" stroke-width="2.4"/>';
+        // bordskanten med trissan och vikten
+        bas += '<rect x="556" y="140" width="10" height="64" fill="#8d96a3" stroke="#5f6773" stroke-width="1"/>' +
+            '<line x1="561" y1="' + (YC + 12) + '" x2="561" y2="140" stroke="#5f6773" stroke-width="4"/>' +
+            '<circle cx="561" cy="' + (YC + 12) + '" r="13" fill="#b8c0cc" stroke="#5f6773" stroke-width="1.6"/>' +
+            '<circle cx="561" cy="' + (YC + 12) + '" r="3" fill="#5f6773"/>' +
+            '<path d="M ' + X1 + ' ' + YC + ' A 13 13 0 0 1 574 ' + (YC + 12) + '" fill="none" stroke="' + SNORE + '" stroke-width="2.4"/>' +
+            '<line x1="574" y1="' + (YC + 12) + '" x2="574" y2="160" stroke="' + SNORE + '" stroke-width="2.4"/>' +
+            '<rect x="562" y="160" width="24" height="30" rx="3" fill="#6b7280" stroke="#374151" stroke-width="1.2"/>' +
+            '';
+        bas += '<line x1="' + X0 + '" y1="' + YC + '" x2="' + X1 + '" y2="' + YC + '" stroke="' + GREY + '" stroke-width="0.8" stroke-dasharray="4 4" opacity="0.7"/>';
+
+        function rita() {
+            var s = '';
+            var th = 2 * Math.PI * VISFREKV * tid, c = Math.cos(th), sn = Math.sin(th);
+            var upp = [], ned = [], pts = [];
+            var maxEnv = 0;
+            for (var i = 0; i < NPKT; i++) {
+                var x = X0 + (X1 - X0) * i / (NPKT - 1);
+                var env = ADRIV * Math.sqrt(aktRe[i] * aktRe[i] + aktIm[i] * aktIm[i]);
+                if (env > maxEnv) maxEnv = env;
+                upp.push(vgR1(x) + ',' + vgR1(YC - env));
+                ned.unshift(vgR1(x) + ',' + vgR1(YC + env));
+                pts.push(vgR1(x) + ',' + vgR1(YC - ADRIV * (aktRe[i] * c - aktIm[i] * sn)));
+            }
+            // det suddiga bandet som ögat ser när snöret svänger snabbt
+            s += '<polygon points="' + upp.join(' ') + ' ' + ned.join(' ') + '" fill="' + BAND + '" opacity="0.45"/>';
+            s += '<polyline points="' + pts.join(' ') + '" fill="none" stroke="' + SNORE + '" stroke-width="2.4" stroke-linejoin="round"/>';
+            // vibratorns stav följer snörets ände
+            var yEnd = YC - ADRIV * (aktRe[0] * c - aktIm[0] * sn);
+            s += '<line x1="' + X0 + '" y1="144" x2="' + X0 + '" y2="' + vgR1(yEnd + 3) + '" stroke="#2d3748" stroke-width="4" stroke-linecap="butt"/>' +
+                '<circle cx="' + X0 + '" cy="' + vgR1(yEnd) + '" r="4" fill="#2d3748"/>';
+            // noder (N) och bukar (B) när en stående våg har byggts upp
+            if (visaNB && iResonans() && maxEnv > 18) {
+                var n = Math.round(f / F1), dx = (X1 - X0) / n;
+                for (var k = 1; k < n; k++) {
+                    s += lbl(X0 + k * dx, YC + 26, 'middle', 'N', 14, BLA, ' font-weight="700"');
+                }
+                for (var b = 0; b < n; b++) {
+                    s += lbl(X0 + (b + 0.5) * dx, YC + maxEnv + 20, 'middle', 'B', 14, BLA, ' font-weight="700"');
+                }
+                s += lbl(X1 - 4, YC + 26, 'end', 'N', 14, BLA, ' font-weight="700"');
+            }
+            s += lbl(X1 + 26, 46, 'end', '<tspan font-style="italic">f</tspan> = ' + fmt(f) + ' Hz', 17, INK, ' font-weight="600"');
+            dyn.innerHTML = s;
+        }
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus ms-bred';
+        if (cfg.titel) {
+            var tEl = document.createElement('div');
+            tEl.className = 'minisim-title';
+            tEl.textContent = cfg.titel;
+            card.appendChild(tEl);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene ms-kv-scene';
+        scene.innerHTML = '<svg class="ms-kv-svg" viewBox="20 24 600 198" width="640" height="211" ' +
+            'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" ' +
+            'aria-label="Ett snöre går från en vibrator över en trissa med en vikt. När vibratorns frekvens ökas svänger ' +
+            'snöret kraftigt vid vissa frekvenser, med en, två, tre eller fyra bukar.">' +
+            bas + '<g class="ms-sv-dyn"></g></svg>';
+        var dyn = scene.querySelector('.ms-sv-dyn');
+        card.appendChild(scene);
+        msFullskarm(card, scene, 600 / 198, 130);
+
+        var row = document.createElement('div');
+        row.className = 'minisim-slider-row';
+        var sLbl = document.createElement('span');
+        sLbl.className = 'minisim-slider-lbl';
+        sLbl.textContent = 'Frekvens';
+        var minusBtn = vgBtn('−');
+        var plusBtn = vgBtn('+');
+        minusBtn.setAttribute('aria-label', 'Sänk frekvensen 0,2 Hz');
+        plusBtn.setAttribute('aria-label', 'Höj frekvensen 0,2 Hz');
+        var sl = document.createElement('input');
+        sl.type = 'range';
+        sl.className = 'minisim-slider';
+        sl.min = String(FMIN); sl.max = String(FMAX); sl.step = String(STEG); sl.value = String(f);
+        sl.setAttribute('aria-label', 'Vibratorns frekvens i hertz');
+        var par = document.createElement('span');
+        par.style.cssText = 'display:flex;flex:1 1 220px;align-items:center;gap:8px;min-width:0;';
+        par.appendChild(minusBtn); par.appendChild(sl); par.appendChild(plusBtn);
+        row.appendChild(sLbl); row.appendChild(par);
+        card.appendChild(row);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        var nbCk = vgCheck('Visa noder och bukar', false);
+        controls.appendChild(nbCk.label);
+        card.appendChild(controls);
+        var info = document.createElement('div');
+        info.className = 'minisim-info ms-brod';
+        info.style.marginTop = '6px';
+        card.appendChild(info);
+        node.appendChild(card);
+
+        var senasteInfo = '';
+        function uppdateraInfo() {
+            var t = iResonans()
+                ? 'Snöret svänger kraftigt: en stående våg. Öka frekvensen och leta efter nästa.'
+                : 'Snöret darrar knappt. Öka frekvensen långsamt tills det börjar svänga kraftigt.';
+            if (t !== senasteInfo) { info.textContent = t; senasteInfo = t; }
+        }
+        function sattF(v) {
+            f = Math.max(FMIN, Math.min(FMAX, Math.round(v / STEG) * STEG));
+            sl.value = String(f);
+            raknaMal();
+            uppdateraInfo();
+        }
+        sl.addEventListener('input', function () { sattF(parseFloat(sl.value)); });
+        minusBtn.addEventListener('click', function () { sattF(f - STEG); });
+        plusBtn.addEventListener('click', function () { sattF(f + STEG); });
+        nbCk.cb.addEventListener('change', function () { visaNB = nbCk.cb.checked; rita(); });
+
+        var loop = vgLoop(card, function (dt) {
+            tid += dt;
+            var w = 1 - Math.exp(-dt / TAU);
+            for (var i = 0; i < NPKT; i++) {
+                aktRe[i] += (malRe[i] - aktRe[i]) * w;
+                aktIm[i] += (malIm[i] - aktIm[i]) * w;
+            }
+            rita();
+        });
+        card._set = function (fr, t) {
+            sattF(fr);
+            for (var i = 0; i < NPKT; i++) { aktRe[i] = malRe[i]; aktIm[i] = malIm[i]; }
+            tid = t || 0;
+            rita();
+        };
+        sattF(f);
+        for (var j = 0; j < NPKT; j++) { aktRe[j] = malRe[j]; aktIm[j] = malIm[j]; }
+        rita();
+        loop.satt(true);
+    }
+
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
                   stegkast: buildStegkast,
                   svangningsgrafer: buildSvangningsgrafer,
@@ -13293,7 +13497,8 @@
                   lodlinje: buildLodlinje,
                   vinkelrata: buildVinkelrata,
                   pulsvag: buildPulsvag, vagtyp: buildVagtyp,
-                  ytvag: buildYtvag, fasvag: buildFasvag };
+                  ytvag: buildYtvag, fasvag: buildFasvag,
+                  staendevag: buildStaendevag };
 
     function decodeSrc(b64) {
         try { return decodeURIComponent(escape(atob(b64))); }

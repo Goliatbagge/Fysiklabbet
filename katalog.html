@@ -1391,8 +1391,14 @@
 
         // del: 'teori' (genomgången utan fördjupningsblocken) eller
         // 'fordjupning' (bara blocken — kortets egen vy).
-        function TeoriBody({ id, bionic, dyslexia, del }) {
+        function TeoriBody({ id, bionic, dyslexia, textScale, del }) {
             const ref = useRef(null);
+            // Ändrad textstorlek flyttar radbrytningarna: anpassa de breda
+            // formlerna på nytt (samma väg som när fönstret ändrar storlek).
+            useEffect(() => {
+                const t = setTimeout(() => window.dispatchEvent(new Event('resize')), 60);
+                return () => clearTimeout(t);
+            }, [textScale]);
             const html = useMemo(() => {
                 const raw = TEORI[id];
                 if (!raw) return null;
@@ -1471,6 +1477,7 @@
             }
             return (
                 <div className={'lab-article-body lab-article-body-inline no-i18n' + (bionic ? ' bionic-on' : '') + (dyslexia ? ' dyslexia-on' : '')}
+                    style={textScale && textScale !== 1 ? { '--text-skala': textScale } : null}
                     ref={ref}
                     dangerouslySetInnerHTML={{ __html: html }} />
             );
@@ -3472,6 +3479,20 @@
                 try { localStorage.setItem('fy-dyslexia', dyslexia ? '1' : '0'); } catch (e) {}
             }, [dyslexia]);
 
+            // Textstorlek i teorivyn (glidaren till höger om Dyslexivänligt).
+            // Skalar brödtexten via CSS-variabeln --text-skala; sparas mellan
+            // besök. Presentationsläget har en egen glidare (fl-pres-textskala).
+            const [textScale, setTextScale] = useState(() => {
+                try {
+                    const v = parseFloat(localStorage.getItem('fy-textskala'));
+                    if (v >= 0.85 && v <= 1.6) return v;
+                } catch (e) {}
+                return 1;
+            });
+            useEffect(() => {
+                try { localStorage.setItem('fy-textskala', String(textScale)); } catch (e) {}
+            }, [textScale]);
+
             // Presentationsläge (fullskärmsbildspel av teorin)
             const [presenting, setPresenting] = useState(false);
 
@@ -3911,6 +3932,14 @@
                                                             <span className="lab-bionic-knob" />
                                                             <span className="lab-dys-label">Dyslexivänligt</span>
                                                         </button>
+                                                        <div className="lab-pres-textsize lab-textsize" title="Textstorlek">
+                                                            <span className="ts-min" aria-hidden="true">A</span>
+                                                            <input type="range" min="0.85" max="1.6" step="0.05"
+                                                                value={textScale} aria-label="Textstorlek"
+                                                                onChange={(e) => setTextScale(parseFloat(e.target.value))}
+                                                                onDoubleClick={() => setTextScale(1)} />
+                                                            <span className="ts-max" aria-hidden="true">A</span>
+                                                        </div>
                                                         {/* Språkvalet (jordklot med meny), byggt av i18n.js */}
                                                         <span className="lab-lang-slot"
                                                             ref={el => { if (el && window.I18N && window.I18N.sprakvaljare) window.I18N.sprakvaljare(el); }} />
@@ -3944,7 +3973,7 @@
                                                         )}
                                                     </div>
                                                 )}
-                                                {view === 'teori' && !isEnhetskoll && <TeoriBody id={tid} bionic={bionic} dyslexia={dyslexia} />}
+                                                {view === 'teori' && !isEnhetskoll && <TeoriBody id={tid} bionic={bionic} dyslexia={dyslexia} textScale={textScale} />}
                                                 {/* Enhetskollavsnitt: ingen teoritext — en startruta till quizet. */}
                                                 {isEnhetskoll && (
                                                     <div className="lab-block lab-block-enhetskoll" style={{ marginTop: 8 }}>
@@ -3972,11 +4001,11 @@
                                                 )}
                                                 {view === 'fordjupning' && (
                                                     <TeoriBody id={tid} del="fordjupning"
-                                                        bionic={bionic} dyslexia={dyslexia} />
+                                                        bionic={bionic} dyslexia={dyslexia} textScale={textScale} />
                                                 )}
                                                 {view === 'sammanfattning' && (
                                                     <TeoriBody id={tid} del="sammanfattning"
-                                                        bionic={bionic} dyslexia={dyslexia} />
+                                                        bionic={bionic} dyslexia={dyslexia} textScale={textScale} />
                                                 )}
                                                 {view === 'ovningar' && <Ovningar id={tid} />}
                                                 {view === 'ovningsblad' && <Ovningsblad id={tid} />}

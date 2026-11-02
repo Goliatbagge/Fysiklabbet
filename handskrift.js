@@ -26284,11 +26284,12 @@
 
     y += adv + 1.7 * F;
     T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
-      [['Två halva våglängder är en hel']],
-      [['våglängd, så nu är våglängden']],
-      [['lika lång som snöret.']]
+      [['Snöret är två halva våglängder']],
+      [['långt. Två halva våglängder är']],
+      [['en hel, så λ är lika med l.']]
     ]));
-    klam = valueBracket(acts, ['v=60,48 m/s (från a)', 'λ=l=1,08 m'],
+    klam = valueBracket(acts, ['v=60,48 m/s (från a)',
+      ['l=2·', { frac: ['λ', '2'] }, '⟺λ=l=1,08 m']],
                         padL, y, T.s, F);
     T.stepEnd();
     y = klam.yEnd;
@@ -26334,12 +26335,13 @@
     y += adv + 1.7 * F;
     T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
       [['Nu ryms tre halva våglängder']],
-      [['på snöret, så en hel våglängd']],
-      [['är två tredjedelar av längden.']]
+      [['på snöret. Jag skriver det som']],
+      [['en ekvation och löser ut λ.']]
     ]));
     klam = valueBracket(acts, [
       'v=60,48 m/s (från a)',
-      ['λ=', { frac: ['2·l', '3'] }, '=', { frac: ['2·1,08 m', '3'] }, '=0,72 m']
+      ['l=', { frac: ['3λ', '2'] }, '⟺λ=', { frac: ['2·l', '3'] }],
+      ['λ=', { frac: ['2·1,08 m', '3'] }, '=0,72 m']
     ], padL, y, T.s, F);
     T.stepEnd();
     y = klam.yEnd;

@@ -13472,6 +13472,224 @@
         loop.satt(true);
     }
 
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: gitarrton
+    // ══════════════════════════════════════════════════════════════════════
+    // fy2-2.9, demonstrationen "Frekvens och ton": en gitarr sedd framifrån.
+    // Eleven drar en barréklämma längs halsen (eller stegar med − och +) och
+    // slår an A-strängen. Strängen svänger mellan klämman och stallet med en
+    // buk (grundtonen), så att den svängande längden l är en halv våglängd.
+    // Utbredningshastigheten v är densamma hela tiden, så f = v / λ ökar när
+    // l och λ blir kortare, och tonen som spelas upp blir ljusare.
+    // Fysik: mensur 0,65 m, öppen A-sträng 110 Hz ⇒ v = f · λ = 143 m/s.
+    // Band n ger l = 0,65 / 2^(n/12) och f = 110 · 2^(n/12) (tempererad
+    // stämning, så som banden sitter på en riktig gitarr).
+    // Ljud: syntetiserat med Web Audio (övertoner med avklingning), inga
+    // ljudfiler. Strängen ritas i slow motion med sitt suddiga band.
+    var gtRaknare = 0;
+    function buildGitarrton(node, cfg) {
+        var INK = '#1f2530', BLA = '#2563c9', SNORE = '#c0392b';
+        var NUT = 92, MENS = 470, SAD = NUT + MENS, NMAX = 12;
+        var L0 = 0.65, F0 = 110, V = F0 * 2 * L0;
+        var SY = [96, 106, 116, 126, 136, 146], AKT = 4;        // strängarnas y, A-strängen (index)
+        var band = 0, tid = 0, slag = -10, AMAX = 15, TAUV = 1.8, VISF = 1.1;
+        var id = 'ms-gt-' + (++gtRaknare);
+
+        function bandX(n) { return NUT + MENS * (1 - Math.pow(2, -n / 12)); }
+        function klamX(n) { return n === 0 ? NUT - 7 : bandX(n) - 9; }
+        function lang() { return L0 / Math.pow(2, band / 12); }
+        function frekv() { return F0 * Math.pow(2, band / 12); }
+        function fmt(v, d) { var s = v.toFixed(d); return parseFloat(s) === 0 ? '0' : s.replace('.', ','); }
+        function lbl(x, y, anchor, inner, size, color, extra) {
+            return '<text x="' + vgR1(x) + '" y="' + vgR1(y) + '" text-anchor="' + anchor + '" font-size="' +
+                (size || 15) + '" fill="' + (color || INK) + '"' + (extra || '') + '>' + inner + '</text>';
+        }
+        function it(t) { return '<tspan font-style="italic">' + t + '</tspan>'; }
+
+        // ── fast bakgrund: kropp, ljudhål, hals, band, stall ─────────────
+        var bas = vgRutnat(id, 0, 0, 660, 260);
+        bas += '<path d="M 360 121 C 360 40 450 34 500 58 C 540 74 560 44 610 44 C 668 44 668 198 610 198 ' +
+            'C 560 198 540 168 500 184 C 450 208 360 202 360 121 Z" fill="#e3b778" stroke="#9c6b34" stroke-width="2"/>';
+        bas += '<circle cx="452" cy="121" r="34" fill="#3b2a1a" stroke="#9c6b34" stroke-width="5"/>';
+        bas += '<path d="M 20 100 L 74 92 L 74 150 L 20 142 Z" fill="#6b4423" stroke="#4a2e17" stroke-width="1.4"/>';
+        [104, 117, 130].forEach(function (y) {
+            bas += '<circle cx="34" cy="' + y + '" r="4" fill="#c9ccd1" stroke="#6b7280"/><circle cx="58" cy="' + y + '" r="4" fill="#c9ccd1" stroke="#6b7280"/>';
+        });
+        bas += '<rect x="74" y="88" width="' + (bandX(19) - 74) + '" height="66" fill="#4a2e17"/>';
+        bas += '<rect x="' + (NUT - 4) + '" y="88" width="5" height="66" fill="#efe6d2"/>';
+        for (var n = 1; n <= 19; n++) {
+            bas += '<rect x="' + vgR1(bandX(n) - 1.2) + '" y="88" width="2.4" height="66" fill="#c9ccd1"/>';
+        }
+        [3, 5, 7, 9].forEach(function (n) {
+            bas += '<circle cx="' + vgR1((bandX(n) + bandX(n - 1)) / 2) + '" cy="121" r="3.4" fill="#efe6d2" opacity="0.8"/>';
+        });
+        var x12 = (bandX(12) + bandX(11)) / 2;
+        bas += '<circle cx="' + vgR1(x12) + '" cy="106" r="3.4" fill="#efe6d2" opacity="0.8"/><circle cx="' + vgR1(x12) + '" cy="136" r="3.4" fill="#efe6d2" opacity="0.8"/>';
+        bas += '<rect x="' + (SAD - 16) + '" y="86" width="40" height="70" rx="6" fill="#4a2e17"/>' +
+            '<rect x="' + (SAD - 2) + '" y="90" width="4" height="62" fill="#efe6d2"/>';
+        // band-nummer under halsen
+        for (var m = 1; m <= NMAX; m++) {
+            if ((m % 2 === 1 && m < 11) || m === 12) bas += lbl((bandX(m) + bandX(m - 1)) / 2, 172, 'middle', String(m), 11, '#6a7180');
+        }
+        bas += lbl(48, 172, 'middle', 'band', 11, '#6a7180');
+
+        function rita() {
+            var s = '';
+            var xk = klamX(band), x0 = band === 0 ? NUT : bandX(band);
+            var dt = tid - slag, amp = dt >= 0 ? AMAX * Math.exp(-dt / TAUV) : 0;
+            var c = Math.cos(2 * Math.PI * VISF * Math.max(0, dt));
+            for (var i = 0; i < SY.length; i++) {
+                var y = SY[i], w = 1.1 + i * 0.35, col = i === AKT ? SNORE : '#d9d2c3';
+                if (i !== AKT || amp < 0.15) {
+                    s += '<line x1="74" y1="' + y + '" x2="' + SAD + '" y2="' + y + '" stroke="' + col + '" stroke-width="' + vgR1(w) + '"/>';
+                    continue;
+                }
+                s += '<line x1="74" y1="' + y + '" x2="' + vgR1(x0) + '" y2="' + y + '" stroke="' + col + '" stroke-width="' + vgR1(w) + '"/>';
+                var upp = [], ned = [], pts = [];
+                for (var k = 0; k <= 60; k++) {
+                    var x = x0 + (SAD - x0) * k / 60, e = amp * Math.sin(Math.PI * k / 60);
+                    upp.push(vgR1(x) + ',' + vgR1(y - e)); ned.unshift(vgR1(x) + ',' + vgR1(y + e));
+                    pts.push(vgR1(x) + ',' + vgR1(y - e * c));
+                }
+                s += '<polygon points="' + upp.join(' ') + ' ' + ned.join(' ') + '" fill="' + SNORE + '" opacity="0.3"/>';
+                s += '<polyline points="' + pts.join(' ') + '" fill="none" stroke="' + col + '" stroke-width="' + vgR1(w) + '"/>';
+            }
+            // barréklämman
+            s += '<g class="ms-gt-klam" style="cursor:grab">' +
+                '<rect x="' + vgR1(xk - 14) + '" y="70" width="28" height="102" fill="transparent"/>' +
+                '<rect x="' + vgR1(xk - 6) + '" y="80" width="12" height="82" rx="5" fill="#2d3748" stroke="#1a202c" stroke-width="1.2"/>' +
+                '<rect x="' + vgR1(xk - 3) + '" y="74" width="6" height="10" rx="2" fill="#4a5568"/></g>';
+            // måttlinje för den svängande längden, under halsen
+            var ym = 192;
+            s += '<line x1="' + vgR1(x0) + '" y1="160" x2="' + vgR1(x0) + '" y2="' + (ym + 6) + '" stroke="#8a919b" stroke-width="1" stroke-dasharray="3 3"/>' +
+                '<line x1="' + SAD + '" y1="160" x2="' + SAD + '" y2="' + (ym + 6) + '" stroke="#8a919b" stroke-width="1" stroke-dasharray="3 3"/>';
+            s += vgDubbelpil(x0, ym, SAD, ym, BLA);
+            s += lbl((x0 + SAD) / 2, ym + 20, 'middle', it('l') + ' = ' + it('λ') + '/2 = ' + fmt(lang(), 2) + ' m', 15, BLA, ' font-weight="600"');
+            s += lbl(640, 30, 'end', it('f') + ' = ' + fmt(frekv(), 0) + ' Hz', 17, INK, ' font-weight="600"');
+            s += lbl(70, 34, 'start', band === 0 ? 'Öppen sträng' : 'Barréklämma på band ' + band, 14, INK);
+            dyn.innerHTML = s;
+        }
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus ms-bred';
+        if (cfg.titel) {
+            var tEl = document.createElement('div');
+            tEl.className = 'minisim-title';
+            tEl.textContent = cfg.titel;
+            card.appendChild(tEl);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene ms-kv-scene';
+        scene.innerHTML = '<svg class="ms-kv-svg" viewBox="10 10 640 214" width="640" height="214" ' +
+            'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" ' +
+            'aria-label="En gitarr med en barréklämma som kan flyttas längs halsen. När klämman flyttas mot ljudhålet blir ' +
+            'den svängande delen av strängen kortare, våglängden kortare och tonen ljusare.">' +
+            bas + '<g class="ms-gt-dyn"></g></svg>';
+        var svg = scene.querySelector('svg');
+        var dyn = scene.querySelector('.ms-gt-dyn');
+        card.appendChild(scene);
+        msFullskarm(card, scene, 640 / 214, 120);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        var slaBtn = vgBtn('Slå an', 'ms-primar');
+        var minusBtn = vgBtn('Flytta klämman vänster');
+        var plusBtn = vgBtn('Flytta klämman höger');
+        controls.appendChild(slaBtn);
+        controls.appendChild(minusBtn);
+        controls.appendChild(plusBtn);
+        card.appendChild(controls);
+        var info = document.createElement('div');
+        info.className = 'minisim-info ms-brod';
+        info.style.marginTop = '6px';
+        card.appendChild(info);
+        node.appendChild(card);
+
+        function uppdateraInfo() {
+            var l = lang();
+            info.innerHTML = 'Svängande längd <em>l</em> = ' + fmt(l, 2) + ' m, våglängd <em>λ</em> = 2 · <em>l</em> = ' +
+                fmt(2 * l, 2) + ' m, frekvens <em>f</em> = <em>v</em> / <em>λ</em> = ' + fmt(V, 0) + ' / ' + fmt(2 * l, 2) +
+                ' = ' + fmt(frekv(), 0) + ' Hz. Utbredningshastigheten <em>v</em> = ' + fmt(V, 0) + ' m/s är densamma hela tiden.';
+        }
+
+        // ── ljud ──────────────────────────────────────────────────────────
+        var actx = null;
+        function spela(f) {
+            var AC = window.AudioContext || window.webkitAudioContext;
+            if (!AC) return;
+            if (!actx) actx = new AC();
+            if (actx.state === 'suspended') actx.resume();
+            var t0 = actx.currentTime;
+            var master = actx.createGain();
+            master.gain.value = 0.35;
+            master.connect(actx.destination);
+            for (var h = 1; h <= 8; h++) {
+                var o = actx.createOscillator(), g = actx.createGain();
+                o.type = 'sine';
+                o.frequency.value = f * h;
+                var peak = 0.5 / Math.pow(h, 1.1) * (h === 1 ? 1 : 0.8);
+                g.gain.setValueAtTime(0.0001, t0);
+                g.gain.exponentialRampToValueAtTime(peak, t0 + 0.006);
+                g.gain.exponentialRampToValueAtTime(0.0001, t0 + 3.2 / Math.sqrt(h));
+                o.connect(g); g.connect(master);
+                o.start(t0); o.stop(t0 + 3.3);
+            }
+        }
+        function sla() { slag = tid; spela(frekv()); rita(); }
+        function sattBand(n) {
+            n = Math.max(0, Math.min(NMAX, n));
+            if (n === band) return;
+            band = n;
+            slag = -10;                          // klämman dämpar strängen
+            uppdateraInfo();
+            rita();
+        }
+        slaBtn.addEventListener('click', sla);
+        minusBtn.addEventListener('click', function () { sattBand(band - 1); });
+        plusBtn.addEventListener('click', function () { sattBand(band + 1); });
+
+        // dra klämman; ett klick på strängen slår an den
+        function svgX(e) {
+            var r = svg.getBoundingClientRect(), vb = svg.viewBox.baseVal;
+            return vb.x + (e.clientX - r.left) / r.width * vb.width;
+        }
+        function svgY(e) {
+            var r = svg.getBoundingClientRect(), vb = svg.viewBox.baseVal;
+            return vb.y + (e.clientY - r.top) / r.height * vb.height;
+        }
+        var drar = false;
+        svg.addEventListener('pointerdown', function (e) {
+            var x = svgX(e), y = svgY(e);
+            if (Math.abs(x - klamX(band)) < 16 && y > 66 && y < 176) {
+                drar = true;
+                try { svg.setPointerCapture(e.pointerId); } catch (er) {}
+                e.preventDefault();
+            } else if (x > (band === 0 ? NUT : bandX(band)) + 6 && x < SAD && y > 86 && y < 156) {
+                sla();
+            }
+        });
+        svg.addEventListener('pointermove', function (e) {
+            if (!drar) return;
+            var x = svgX(e), best = 0, bd = 1e9;
+            for (var n = 0; n <= NMAX; n++) {
+                var d = Math.abs(x - klamX(n));
+                if (d < bd) { bd = d; best = n; }
+            }
+            sattBand(best);
+        });
+        function slapp() { drar = false; }
+        svg.addEventListener('pointerup', slapp);
+        svg.addEventListener('pointercancel', slapp);
+        svg.style.touchAction = 'pan-y';
+
+        var loop = vgLoop(card, function (dt) { tid += dt; rita(); });
+        card._set = function (n, t) { band = n; uppdateraInfo(); tid = 10; slag = 10 - (t || 0); rita(); };
+        uppdateraInfo();
+        rita();
+        loop.satt(true);
+    }
+
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
                   stegkast: buildStegkast,
                   svangningsgrafer: buildSvangningsgrafer,
@@ -13498,7 +13716,7 @@
                   vinkelrata: buildVinkelrata,
                   pulsvag: buildPulsvag, vagtyp: buildVagtyp,
                   ytvag: buildYtvag, fasvag: buildFasvag,
-                  staendevag: buildStaendevag };
+                  staendevag: buildStaendevag, gitarrton: buildGitarrton };
 
     function decodeSrc(b64) {
         try { return decodeURIComponent(escape(atob(b64))); }

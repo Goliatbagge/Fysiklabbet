@@ -29,7 +29,8 @@
  *           pulsvag (fy2-2.7, visa: puls | vag: rep från en person till ett träd),
  *           vagtyp (fy2-2.7, visa: transversell | longitudinell),
  *           ytvag (fy2-2.7, visa: vatten | rayleigh: partiklarnas banor i en ytvåg),
- *           fasvag (fy2-2.7: stående våg med partiklar i fas och i motfas)
+ *           fasvag (fy2-2.7: stående våg med partiklar i fas och i motfas),
+ *           vagstallning (fy2-2.7: en puls vandrar nedåt i en hängande vågställning)
  *   titel:  liten rubrik ovanför scenen (valfritt).
  *
  * Widgeten är ren vanilla-JS (ingen React) och har egen intern CSS.
@@ -13786,6 +13787,126 @@
         loop.satt(true);
     }
 
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: vagstallning
+    // ══════════════════════════════════════════════════════════════════════
+    // fy2-2.7, demonstrationen "Puls och våg": en vågställning som hänger
+    // lodrätt i ett stativ. Vågräta stavar med en röd kula i ena änden sitter
+    // på två lodräta trådar. Den översta staven vrids fram och tillbaka en
+    // gång, och vridningen vandrar NEDÅT som en puls medan varje stav bara
+    // vrider sig kring den lodräta axeln (sett framifrån åt höger/vänster).
+    // Vinkeln φ(s, t) = φ₀ + Φ(t − s/v), där s är avståndet från toppen och Φ
+    // är en halv sinusperiod. Stavarna ritas i en sned projektion (bakre änden
+    // något högre) och den närmaste änden ritas sist. Pulsen klingar av mot
+    // nedre änden (ingen reflex) och upprepas efter en paus.
+    var vsRaknare = 0;
+    function buildVagstallning(node, cfg) {
+        var INK = '#1f2530', ROD = '#c0392b';
+        var CX = 300, YT = 52, N = 30, DY = 11, R = 74, SNED = 0.32;
+        var PHI0 = -0.32, AMAX = 1.5, TAU = 1.3, V = 100;
+        var LNG = (N - 1) * DY, CYKEL = 0.4 + TAU + LNG / V + 1.4;
+        var tid = 0;
+        var id = 'ms-vs-rutnat-' + (++vsRaknare);
+
+        function it(t) { return '<tspan font-style="italic">' + t + '</tspan>'; }
+        function lbl(x, y, anchor, inner, size, color, extra) {
+            return '<text x="' + vgR1(x) + '" y="' + vgR1(y) + '" text-anchor="' + anchor + '" font-size="' +
+                (size || 15) + '" fill="' + (color || INK) + '"' + (extra || '') + '>' + inner + '</text>';
+        }
+        function vrid(u) { return (u > 0 && u < TAU) ? AMAX * Math.sin(Math.PI * u / TAU) : 0; }
+        function phi(s, t) {
+            var w = Math.min(1, (LNG + 6 - s) / 60);
+            w = w * w * (3 - 2 * w);
+            return PHI0 + w * vrid(t - 0.4 - s / V);
+        }
+
+        // ── stativet ────────────────────────────────────────────────────
+        var bas = vgRutnat(id, 0, 0, 640, 420);
+        var PX = CX + 112;
+        bas += '<rect x="' + (PX - 7) + '" y="250" width="14" height="164" rx="3" fill="#5f84a8" stroke="#46658a" stroke-width="1"/>' +
+            '<line x1="' + PX + '" y1="250" x2="' + PX + '" y2="26" stroke="#9aa3ad" stroke-width="3"/>' +
+            '<circle cx="' + (PX - 9) + '" cy="262" r="5" fill="#2b2f36"/>' +
+            '<line x1="' + (CX - 10) + '" y1="34" x2="' + (PX + 4) + '" y2="34" stroke="#8a929c" stroke-width="4" stroke-linecap="round"/>' +
+            '<rect x="' + (PX - 12) + '" y="27" width="24" height="15" rx="2" fill="#5f84a8" stroke="#46658a" stroke-width="1"/>' +
+            '<rect x="' + (CX - 8) + '" y="30" width="16" height="10" rx="2" fill="#5f84a8"/>';
+        // trådarna som stavarna sitter på
+        bas += '<line x1="' + (CX - 3) + '" y1="38" x2="' + (CX - 3) + '" y2="' + (YT + LNG + 14) + '" stroke="#d9d2c2" stroke-width="1.4"/>' +
+            '<line x1="' + (CX + 3) + '" y1="38" x2="' + (CX + 3) + '" y2="' + (YT + LNG + 14) + '" stroke="#d9d2c2" stroke-width="1.4"/>';
+
+        function stav(i, t) {
+            var s = i * DY, y = YT + s, p = phi(s, t);
+            var c = Math.cos(p), sn = Math.sin(p);
+            // röd ände (+) och metallände (−); djup z = R · sin φ (positivt = mot betraktaren)
+            var xr = CX + R * c, yr = y - SNED * R * sn, zr = R * sn;
+            var xm = CX - R * c, ym = y + SNED * R * sn;
+            var ut = '';
+            function rodande() {
+                var k = 1 + zr / R * 0.12;
+                return '<circle cx="' + vgR1(xr) + '" cy="' + vgR1(yr) + '" r="' + vgR1(5.6 * k) + '" fill="#9aa3ad" stroke="#6b737d" stroke-width="0.8"/>' +
+                    '<circle cx="' + vgR1(xr + (c > 0 ? 1.6 : -1.6)) + '" cy="' + vgR1(yr) + '" r="' + vgR1(4.4 * k) + '" fill="#e23b2e"/>';
+            }
+            function metall() {
+                var k = 1 - zr / R * 0.12;
+                return '<circle cx="' + vgR1(xm) + '" cy="' + vgR1(ym) + '" r="' + vgR1(4.4 * k) + '" fill="#a9b1ba" stroke="#6b737d" stroke-width="0.8"/>';
+            }
+            var linje = '<line x1="' + vgR1(xm) + '" y1="' + vgR1(ym) + '" x2="' + vgR1(xr) + '" y2="' + vgR1(yr) +
+                '" stroke="#8d96a1" stroke-width="2.6" stroke-linecap="round"/>' +
+                '<rect x="' + (CX - 6) + '" y="' + vgR1(y - 2.5) + '" width="12" height="5" rx="2" fill="#e9e4d6" stroke="#c9c1ad" stroke-width="0.6"/>';
+            // den bortre änden först, sedan staven, sist den närmaste änden
+            if (zr >= 0) ut = metall() + linje + rodande();
+            else ut = rodande() + linje + metall();
+            return { y: y, z: Math.abs(zr), svg: ut };
+        }
+
+        function rita() {
+            var t = ((tid % CYKEL) + CYKEL) % CYKEL, s = '';
+            for (var i = 0; i < N; i++) s += stav(i, t).svg;
+            // "puls" och v-pil nedåt följer vridningens mitt
+            var sc = V * (t - 0.4 - TAU / 2);
+            if (sc > 10 && sc < LNG - 30) {
+                var y = YT + sc, x = CX - R - 40;
+                s += lbl(x, y - 14, 'end', 'puls', 15, INK, ' font-weight="600"');
+                s += '<line x1="' + (x - 14) + '" y1="' + vgR1(y - 6) + '" x2="' + (x - 14) + '" y2="' + vgR1(y + 22) + '" stroke="' + ROD + '" stroke-width="2.4"/>' +
+                    '<polygon points="' + (x - 18.5) + ',' + vgR1(y + 22) + ' ' + (x - 14) + ',' + vgR1(y + 31) + ' ' + (x - 9.5) + ',' + vgR1(y + 22) + '" fill="' + ROD + '"/>' +
+                    lbl(x - 4, y + 22, 'start', it('v'), 16, ROD);
+            }
+            dyn.innerHTML = s;
+        }
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus ms-bred';
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene ms-kv-scene';
+        scene.innerHTML = '<svg class="ms-kv-svg" viewBox="120 14 400 404" width="420" height="424" ' +
+            'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" ' +
+            'aria-label="En vågställning hänger lodrätt i ett stativ. Den översta staven vrids, och en puls vandrar nedåt ' +
+            'medan varje stav bara vrider sig så att ändarna rör sig åt höger och vänster.">' +
+            bas + '<g class="ms-vs-dyn"></g></svg>';
+        var dyn = scene.querySelector('.ms-vs-dyn');
+        card.appendChild(scene);
+        msFullskarm(card, scene, 400 / 404, 150);
+        scene.querySelector('svg').style.maxWidth = '420px';
+        var tk = vgTid(CYKEL, function () { return tid; }, function (t) { tid = t; rita(); });
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        controls.appendChild(tk.btn);
+        card.appendChild(controls);
+        card.appendChild(tk.rad);
+        var info = document.createElement('div');
+        info.className = 'minisim-info ms-brod';
+        info.style.marginTop = '6px';
+        info.textContent = 'Pulsen rör sig nedåt, men varje stav vrider sig bara på stället så att kulorna rör sig åt höger och vänster.';
+        card.appendChild(info);
+        node.appendChild(card);
+
+        var loop = vgLoop(card, function (dt) { tid += dt; rita(); tk.visa(); });
+        tk.koppla(loop);
+        card._set = function (t) { tid = t; rita(); tk.visa(); };
+        rita();
+        tk.spela(true);
+    }
+
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
                   stegkast: buildStegkast,
                   svangningsgrafer: buildSvangningsgrafer,
@@ -13810,7 +13931,7 @@
                   galton: buildGalton, kalkylblad: buildKalkylblad,
                   lodlinje: buildLodlinje,
                   vinkelrata: buildVinkelrata,
-                  pulsvag: buildPulsvag, vagtyp: buildVagtyp,
+                  vagstallning: buildVagstallning, pulsvag: buildPulsvag, vagtyp: buildVagtyp,
                   ytvag: buildYtvag, fasvag: buildFasvag,
                   staendevag: buildStaendevag, gitarrton: buildGitarrton };
 

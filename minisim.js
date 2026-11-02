@@ -553,6 +553,9 @@
         '.minisim-card.ms-svgfs:fullscreen .minisim-scene{width:min(100%,calc((100vh - var(--ms-fs-ctrl,220px))*var(--ms-asp,1.8)));}',
         '.minisim-card.ms-svgfs:fullscreen .ms-kv-svg{max-width:none!important;width:100%;height:auto;}',
         '.minisim-card.ms-svgfs:fullscreen .minisim-info{width:min(92vw,640px);}',
+        /* ms-brod har flex-basis:100 %, som i fullskärmens kolumn blir hela höjden och trycker ihop scenen */
+        '.minisim-card:fullscreen .minisim-info.ms-brod,.minisim-card:-webkit-full-screen .minisim-info.ms-brod{flex-basis:auto;}',
+        '.minisim-card.ms-svgfs:fullscreen .minisim-scene,.minisim-card.ms-svgfs:-webkit-full-screen .minisim-scene{flex-shrink:0;}',
         '.minisim-card.ms-svgfs:-webkit-full-screen .minisim-scene{width:min(100%,calc((100vh - var(--ms-fs-ctrl,220px))*var(--ms-asp,1.8)));}',
         '.minisim-card.ms-svgfs:-webkit-full-screen .ms-kv-svg{max-width:none!important;width:100%;height:auto;}',
         /* periodtid: knapparna och glidarna ligger på scenens papper, under

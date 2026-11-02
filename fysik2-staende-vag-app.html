@@ -375,20 +375,12 @@
             );
         };
 
-        // STEG C — canvas-tema (V1/V2/V3 jämförelse)
-        const CANVAS_THEMES = {
-            morkRymd:   { label: 'Mörk rymd' },
-            ljusPapper: { label: 'Ljus papper' },
-            pergament:  { label: 'Pergament' },
-        };
-
         const App = () => {
             const [frequency, setFrequency] = useState(5.0);
             const [amplitudeScale, setAmplitudeScale] = useState(1.0);
             const [length, setLength] = useState(5.0);
             const [mass, setMass] = useState(0.15);
             const [isAudioOn, setIsAudioOn] = useState(false);
-            const [canvasTheme, setCanvasTheme] = useState('morkRymd');
             const [isFullscreen, setIsFullscreen] = useState(false);
             const [fsControlsOpen, setFsControlsOpen] = useState(false);
             const stageRef = useRef(null);
@@ -543,34 +535,7 @@
                         </header>
 
                         <main className="space-y-8">
-                            {/* STEG C — experimentell tema-väljare för canvas-bakgrunden.
-                                Tas bort när du valt vilken variant som blir default. */}
-                            <div className="flex flex-wrap items-center gap-3 px-3 py-2 rounded"
-                                 style={{border:'1px solid var(--lab-line-strong)', background:'var(--lab-bg)'}}>
-                                <span className="text-xs font-semibold uppercase tracking-wide"
-                                      style={{color:'var(--lab-ink-soft)', fontFamily:'var(--lab-font-mono)'}}>
-                                    Canvas-tema (test)
-                                </span>
-                                <div className="inline-flex gap-1 rounded p-1"
-                                     style={{background:'var(--lab-bg)', border:'1px solid var(--lab-line-strong)'}}>
-                                    {Object.entries(CANVAS_THEMES).map(([key, t]) => (
-                                        <button key={key} onClick={() => setCanvasTheme(key)}
-                                                className="px-3 py-1 text-xs rounded transition-colors"
-                                                style={{
-                                                    background: canvasTheme === key ? 'var(--lab-ink)' : 'transparent',
-                                                    color: canvasTheme === key ? 'var(--lab-bg)' : 'var(--lab-ink-soft)',
-                                                    fontFamily: 'var(--lab-font-sans)',
-                                                    fontWeight: 500,
-                                                    border: 'none',
-                                                    cursor: 'pointer',
-                                                }}>
-                                            {t.label}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div className="wave-stage" data-theme={canvasTheme} ref={stageRef}>
+                            <div className="wave-stage" data-theme="ljusPapper" ref={stageRef}>
                                 <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
                                         title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
                                     {isFullscreen ? (

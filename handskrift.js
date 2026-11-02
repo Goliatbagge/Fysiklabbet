@@ -14529,8 +14529,19 @@
       [['annars blir det samma linje.']],
       [['Punkten (1, 2) bestämmer m.']]
     ]);
-    y += 3.6 * F;
-    T.str('Punkten (1, 2) på linjen ger', padL, y - 1.6 * F, null, 0.62);
+    y += 4.4 * F;
+    /* x och y i blått ovanför koordinaterna, så att det syns vilket tal
+     * som sätts in var */
+    var yh = y - 1.6 * F, xh, kx = [];
+    xh = T.str('Punkten (', padL, yh, null, 0.62);
+    kx.push([xh]); xh = T.str('1', xh, yh, null, 0.62); kx[0].push(xh);
+    xh = T.str(', ', xh, yh, null, 0.62);
+    kx.push([xh]); xh = T.str('2', xh, yh, null, 0.62); kx[1].push(xh);
+    T.str(') på linjen ger', xh, yh, null, 0.62);
+    ['x', 'y'].forEach(function (t, i) {
+      var w = T.adv(t, 0.55), c = (kx[i][0] + kx[i][1]) / 2;
+      T.str(t, c - w / 2, yh - 1.05 * F, BLUE, 0.55);
+    });
     T.str('2=3·1+m', padL, y);
     T.stepEnd();
 

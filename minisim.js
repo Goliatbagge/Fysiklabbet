@@ -13286,17 +13286,22 @@
     //   k = (ω / v)(1 − iζ),
     // där dämpningen ζ gör förstärkningen ändlig vid resonans (≈ 1/(nπζ)).
     // ζ minskar svagt med n, så att alla bukarna blir ungefär lika höga.
-    // Vid 12–48 Hz går snöret för fort för ögat: scenen visar därför det
-    // suddiga band man ser i verkligheten (höljet) och snöret i slow motion
-    // ovanpå. Profilen glider mot sitt nya läge med tidskonstanten TAU, så
+    // Snöret svänger med vibratorns verkliga frekvens. Vid 12–48 Hz hinner
+    // skärmen bara visa några få bilder per period, så varje bild ritar
+    // snöret i flera lägen utspridda över bildens visningstid (rörelse-
+    // oskärpa), och över höga frekvenser får fasen en slumpvis förskjutning
+    // så att snöret inte ser ut att stå still (stroboskopeffekt). Det ger
+    // det suddiga, skimrande band man ser i verkligheten. Kryssrutan
+    // Ultrarapid visar i stället snöret i slow motion, skarpt. Profilen glider mot sitt nya läge med tidskonstanten TAU, så
     // att svängningen byggs upp och klingar av i stället för att hoppa.
     var svRaknare = 0;
     function buildStaendevag(node, cfg) {
         var INK = '#1f2530', GREY = '#8a919b', SNORE = '#c0392b', BAND = '#e9a99f', BLA = '#2563c9';
         var X0 = 96, X1 = 548, YC = 112, ADRIV = 5;            // snörets ändar, viloläge, vibratorns utslag (px)
         var F1 = 12, FMIN = 2, FMAX = 52, STEG = 0.2, TAU = 0.35;
-        var NPKT = 181, VISFREKV = 0.9;                         // punkter längs snöret, slow motion-takt (Hz)
-        var f = 4, tid = 0, visaNB = false;
+        var NPKT = 181, VISFREKV = 0.9;                         // punkter längs snöret, takt i ultrarapid (Hz)
+        var NOSK = 5, BILD = 1 / 60;                             // lägen per bild, en bilds visningstid (s)
+        var f = 4, tid = 0, visaNB = false, ultra = false;
         var id = 'ms-sv-rutnat-' + (++svRaknare);
         var aktRe = new Float64Array(NPKT), aktIm = new Float64Array(NPKT);
         var malRe = new Float64Array(NPKT), malIm = new Float64Array(NPKT);
@@ -13352,8 +13357,17 @@
 
         function rita() {
             var s = '';
-            var th = 2 * Math.PI * VISFREKV * tid, c = Math.cos(th), sn = Math.sin(th);
-            var upp = [], ned = [], pts = [];
+            // faserna som ritas i den här bilden
+            var faser = [];
+            if (ultra) {
+                faser.push(2 * Math.PI * VISFREKV * tid);
+            } else {
+                var jit = Math.max(0, Math.min(1, (f - 6) / 8));
+                var bas0 = 2 * Math.PI * f * tid + jit * Math.random() * 2 * Math.PI;
+                var sprid = Math.min(2 * Math.PI, 2 * Math.PI * f * BILD);
+                for (var q = 0; q < NOSK; q++) faser.push(bas0 + sprid * q / (NOSK - 1));
+            }
+            var upp = [], ned = [], linjer = faser.map(function () { return []; });
             var maxEnv = 0;
             for (var i = 0; i < NPKT; i++) {
                 var x = X0 + (X1 - X0) * i / (NPKT - 1);
@@ -13361,15 +13375,23 @@
                 if (env > maxEnv) maxEnv = env;
                 upp.push(vgR1(x) + ',' + vgR1(YC - env));
                 ned.unshift(vgR1(x) + ',' + vgR1(YC + env));
-                pts.push(vgR1(x) + ',' + vgR1(YC - ADRIV * (aktRe[i] * c - aktIm[i] * sn)));
+                for (var j = 0; j < faser.length; j++) {
+                    linjer[j].push(vgR1(x) + ',' + vgR1(YC - ADRIV * (aktRe[i] * Math.cos(faser[j]) - aktIm[i] * Math.sin(faser[j]))));
+                }
             }
             // det suddiga bandet som ögat ser när snöret svänger snabbt
-            s += '<polygon points="' + upp.join(' ') + ' ' + ned.join(' ') + '" fill="' + BAND + '" opacity="0.45"/>';
-            s += '<polyline points="' + pts.join(' ') + '" fill="none" stroke="' + SNORE + '" stroke-width="2.4" stroke-linejoin="round"/>';
+            s += '<polygon points="' + upp.join(' ') + ' ' + ned.join(' ') + '" fill="' + BAND + '" opacity="' + (ultra ? 0.45 : 0.55) + '"/>';
+            var op = ultra ? 1 : 0.42;
+            linjer.forEach(function (pts) {
+                s += '<polyline points="' + pts.join(' ') + '" fill="none" stroke="' + SNORE + '" stroke-width="2.4" stroke-linejoin="round" opacity="' + op + '"/>';
+            });
             // vibratorns stav följer snörets ände
-            var yEnd = YC - ADRIV * (aktRe[0] * c - aktIm[0] * sn);
-            s += '<line x1="' + X0 + '" y1="144" x2="' + X0 + '" y2="' + vgR1(yEnd + 3) + '" stroke="#2d3748" stroke-width="4" stroke-linecap="butt"/>' +
-                '<circle cx="' + X0 + '" cy="' + vgR1(yEnd) + '" r="4" fill="#2d3748"/>';
+            faser.forEach(function (th) {
+                var yEnd = YC - ADRIV * (aktRe[0] * Math.cos(th) - aktIm[0] * Math.sin(th));
+                s += '<g opacity="' + (ultra ? 1 : 0.5) + '"><line x1="' + X0 + '" y1="144" x2="' + X0 + '" y2="' + vgR1(yEnd + 3) +
+                    '" stroke="#2d3748" stroke-width="4" stroke-linecap="butt"/>' +
+                    '<circle cx="' + X0 + '" cy="' + vgR1(yEnd) + '" r="4" fill="#2d3748"/></g>';
+            });
             // noder (N) och bukar (B) när en stående våg har byggts upp
             if (visaNB && iResonans() && maxEnv > 18) {
                 var n = Math.round(f / F1), dx = (X1 - X0) / n;
@@ -13428,7 +13450,10 @@
         var controls = document.createElement('div');
         controls.className = 'minisim-controls';
         var nbCk = vgCheck('Visa noder och bukar', false);
+        var ultraCk = vgCheck('Ultrarapid', false);
         controls.appendChild(nbCk.label);
+        controls.appendChild(ultraCk.label);
+        ultraCk.cb.addEventListener('change', function () { ultra = ultraCk.cb.checked; rita(); });
         card.appendChild(controls);
         var info = document.createElement('div');
         info.className = 'minisim-info ms-brod';

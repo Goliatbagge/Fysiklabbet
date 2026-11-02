@@ -13504,8 +13504,10 @@
     //  typ: gitarrton
     // ══════════════════════════════════════════════════════════════════════
     // fy2-2.9, demonstrationen "Frekvens och ton": en gitarr sedd framifrån.
-    // Eleven drar en barréklämma längs halsen (eller stegar med − och +) och
-    // slår an A-strängen. Strängen svänger mellan klämman och stallet med en
+    // Eleven drar ett finger längs halsen (eller stegar med − och +) och
+    // slår an A-strängen. Fingret trycker ned strängen precis bakom ett band,
+    // som när man tar en ton på en riktig gitarr, och kommer in från de tunna
+    // strängarnas sida. Strängen svänger mellan bandet och stallet med en
     // buk (grundtonen), så att den svängande längden l är en halv våglängd.
     // Utbredningshastigheten v är densamma hela tiden, så f = v / λ ökar när
     // l och λ blir kortare, och tonen som spelas upp blir ljusare.
@@ -13524,7 +13526,25 @@
         var id = 'ms-gt-' + (++gtRaknare);
 
         function bandX(n) { return NUT + MENS * (1 - Math.pow(2, -n / 12)); }
-        function klamX(n) { return n === 0 ? NUT - 7 : bandX(n) - 9; }
+        function klamX(n) { return n === 0 ? (NUT + bandX(1)) / 2 - 4 : bandX(n) - 8; }
+        // fingret ritas i egna koordinater med toppen i origo och handen
+        // uppåt, och vrids så att det lutar som ett finger som böjs ned
+        // över halsen; nageln syns eftersom vi ser fingrets ovansida
+        function finger(x, ytopp, nere) {
+            var s = '';
+            if (nere) s += '<ellipse cx="' + vgR1(x + 1) + '" cy="' + vgR1(ytopp + 3) + '" rx="10" ry="4" fill="#1a1008" opacity="0.45"/>';
+            s += '<g transform="translate(' + vgR1(x) + ' ' + vgR1(ytopp) + ') rotate(12)">' +
+                '<path d="M -9 -9 C -9.8 -45 -11.5 -95 -13.5 -140 L 12.5 -140 C 11 -95 10 -45 9 -9 A 9 9.5 0 0 1 -9 -9 Z" ' +
+                'fill="#efc29c" stroke="#b9845c" stroke-width="1.3"/>' +
+                '<path d="M -5 -22 C -5.5 -60 -6 -100 -6.5 -138" fill="none" stroke="#f8dcc4" stroke-width="3.5" stroke-linecap="round" opacity="0.75"/>' +
+                '<path d="M 6.5 -18 C 6.8 -60 7.2 -100 7.8 -138" fill="none" stroke="#d9a47c" stroke-width="2.5" opacity="0.55"/>' +
+                '<path d="M -6.2 -4.5 Q 0 0.5 6.2 -4.5 L 6.6 -19 Q 0 -22.5 -6.6 -19 Z" fill="#f7ddd0" stroke="#d6a287" stroke-width="1"/>' +
+                '<path d="M -4.6 -16.5 Q 0 -18.6 4.6 -16.5" fill="none" stroke="#fbeee6" stroke-width="1.6" stroke-linecap="round"/>' +
+                '<path d="M -8 -36 Q 0 -32.5 8 -36 M -7.5 -41 Q 0 -38 7.5 -41" fill="none" stroke="#b9845c" stroke-width="1" opacity="0.8"/>' +
+                '<path d="M -9 -92 Q 0 -88 9 -92" fill="none" stroke="#b9845c" stroke-width="1" opacity="0.7"/>' +
+                '</g>';
+            return s;
+        }
         function lang() { return L0 / Math.pow(2, band / 12); }
         function frekv() { return F0 * Math.pow(2, band / 12); }
         function fmt(v, d) { var s = v.toFixed(d); return parseFloat(s) === 0 ? '0' : s.replace('.', ','); }
@@ -13582,11 +13602,9 @@
                 s += '<polygon points="' + upp.join(' ') + ' ' + ned.join(' ') + '" fill="' + SNORE + '" opacity="0.3"/>';
                 s += '<polyline points="' + pts.join(' ') + '" fill="none" stroke="' + col + '" stroke-width="' + vgR1(w) + '"/>';
             }
-            // barréklämman
-            s += '<g class="ms-gt-klam" style="cursor:grab">' +
-                '<rect x="' + vgR1(xk - 14) + '" y="70" width="28" height="102" fill="transparent"/>' +
-                '<rect x="' + vgR1(xk - 6) + '" y="80" width="12" height="82" rx="5" fill="#2d3748" stroke="#1a202c" stroke-width="1.2"/>' +
-                '<rect x="' + vgR1(xk - 3) + '" y="74" width="6" height="10" rx="2" fill="#4a5568"/></g>';
+            // fingret: trycker på A-strängen, eller lyft över halsen vid öppen sträng
+            s += '<g class="ms-gt-finger" style="cursor:grab">' +
+                finger(xk, band === 0 ? 74 : SY[AKT] - 1, band !== 0) + '</g>';
             // måttlinje för den svängande längden, under halsen
             var ym = 192;
             s += '<line x1="' + vgR1(x0) + '" y1="160" x2="' + vgR1(x0) + '" y2="' + (ym + 6) + '" stroke="#8a919b" stroke-width="1" stroke-dasharray="3 3"/>' +
@@ -13594,7 +13612,6 @@
             s += vgDubbelpil(x0, ym, SAD, ym, BLA);
             s += lbl((x0 + SAD) / 2, ym + 20, 'middle', it('l') + ' = ' + it('λ') + '/2 = ' + fmt(lang(), 2) + ' m', 15, BLA, ' font-weight="600"');
             s += lbl(640, 30, 'end', it('f') + ' = ' + fmt(frekv(), 0) + ' Hz', 17, INK, ' font-weight="600"');
-            s += lbl(70, 34, 'start', band === 0 ? 'Öppen sträng' : 'Barréklämma på band ' + band, 14, INK);
             dyn.innerHTML = s;
         }
 
@@ -13611,7 +13628,7 @@
         scene.className = 'minisim-scene ms-kv-scene';
         scene.innerHTML = '<svg class="ms-kv-svg" viewBox="10 10 640 214" width="640" height="214" ' +
             'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" ' +
-            'aria-label="En gitarr med en barréklämma som kan flyttas längs halsen. När klämman flyttas mot ljudhålet blir ' +
+            'aria-label="En gitarr där ett finger trycker ned en sträng och kan flyttas längs halsen. När fingret flyttas mot ljudhålet blir ' +
             'den svängande delen av strängen kortare, våglängden kortare och tonen ljusare.">' +
             bas + '<g class="ms-gt-dyn"></g></svg>';
         var svg = scene.querySelector('svg');
@@ -13622,8 +13639,8 @@
         var controls = document.createElement('div');
         controls.className = 'minisim-controls';
         var slaBtn = vgBtn('Slå an', 'ms-primar');
-        var minusBtn = vgBtn('Flytta klämman vänster');
-        var plusBtn = vgBtn('Flytta klämman höger');
+        var minusBtn = vgBtn('Flytta fingret vänster');
+        var plusBtn = vgBtn('Flytta fingret höger');
         controls.appendChild(slaBtn);
         controls.appendChild(minusBtn);
         controls.appendChild(plusBtn);
@@ -13636,7 +13653,7 @@
 
         function uppdateraInfo() {
             var l = lang();
-            info.innerHTML = 'Svängande längd <em>l</em> = ' + fmt(l, 2) + ' m, våglängd <em>λ</em> = 2 · <em>l</em> = ' +
+            info.innerHTML = (band === 0 ? 'Öppen sträng. ' : 'Fingret på band ' + band + '. ') + 'Svängande längd <em>l</em> = ' + fmt(l, 2) + ' m, våglängd <em>λ</em> = 2 · <em>l</em> = ' +
                 fmt(2 * l, 2) + ' m, frekvens <em>f</em> = <em>v</em> / <em>λ</em> = ' + fmt(V, 0) + ' / ' + fmt(2 * l, 2) +
                 ' = ' + fmt(frekv(), 0) + ' Hz. Utbredningshastigheten <em>v</em> = ' + fmt(V, 0) + ' m/s är densamma hela tiden.';
         }
@@ -13669,7 +13686,7 @@
             n = Math.max(0, Math.min(NMAX, n));
             if (n === band) return;
             band = n;
-            slag = -10;                          // klämman dämpar strängen
+            slag = -10;                          // fingret dämpar strängen
             uppdateraInfo();
             rita();
         }
@@ -13677,7 +13694,7 @@
         minusBtn.addEventListener('click', function () { sattBand(band - 1); });
         plusBtn.addEventListener('click', function () { sattBand(band + 1); });
 
-        // dra klämman; ett klick på strängen slår an den
+        // dra fingret; ett klick på strängen slår an den
         function svgX(e) {
             var r = svg.getBoundingClientRect(), vb = svg.viewBox.baseVal;
             return vb.x + (e.clientX - r.left) / r.width * vb.width;
@@ -13689,7 +13706,7 @@
         var drar = false;
         svg.addEventListener('pointerdown', function (e) {
             var x = svgX(e), y = svgY(e);
-            if (Math.abs(x - klamX(band)) < 16 && y > 66 && y < 176) {
+            if (Math.abs(x - klamX(band)) < 18 && y > 10 && y < (band === 0 ? 84 : 144)) {
                 drar = true;
                 try { svg.setPointerCapture(e.pointerId); } catch (er) {}
                 e.preventDefault();

@@ -25,7 +25,11 @@
  *           periodtid (fy2-2.4: m, k och A mot periodtiden),
  *           pendelperiod (fy2-2.5: l, m, g och α mot pendelns periodtid),
  *           stegkast (fy2-1.9: kaströrelsen med stegmetoden),
- *           vinkelrata (ma1c-4.7: lutningstrappan vrids ett kvarts varv)
+ *           vinkelrata (ma1c-4.7: lutningstrappan vrids ett kvarts varv),
+ *           pulsvag (fy2-2.7, visa: puls | vag: rep från en person till ett träd),
+ *           vagtyp (fy2-2.7, visa: transversell | longitudinell),
+ *           ytvag (fy2-2.7, visa: vatten | rayleigh: partiklarnas banor i en ytvåg),
+ *           fasvag (fy2-2.7: stående våg med partiklar i fas och i motfas)
  *   titel:  liten rubrik ovanför scenen (valfritt).
  *
  * Widgeten är ren vanilla-JS (ingen React) och har egen intern CSS.
@@ -12583,6 +12587,687 @@
     }
     var vrRaknare = 0;
 
+    // ══════════════════════════════════════════════════════════════════════
+    //  Gemensamma hjälpare för vågsimuleringarna (pulsvag, vagtyp)
+    // ══════════════════════════════════════════════════════════════════════
+    function vgR1(v) { return Math.round(v * 10) / 10; }
+    function vgBtn(text, cls) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'minisim-btn' + (cls ? ' ' + cls : '');
+        b.textContent = text;
+        return b;
+    }
+    function vgCheck(text, on) {
+        var l = document.createElement('label');
+        l.className = 'minisim-check';
+        var cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.checked = on;
+        l.appendChild(cb);
+        l.appendChild(document.createTextNode(text));
+        return { label: l, cb: cb };
+    }
+    function vgRutnat(id, x, y, w, h) {
+        return '<defs><pattern id="' + id + '" width="20" height="20" patternUnits="userSpaceOnUse">' +
+            '<path d="M 20 0 L 0 0 0 20" fill="none" stroke="#2563c9" stroke-width="0.6" opacity="0.13"/></pattern></defs>' +
+            '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" fill="url(#' + id + ')"/>';
+    }
+    // vågrät pil (skaftet slutar vid huvudets bas)
+    function vgPilX(x1, x2, y, color, w) {
+        var dir = x2 > x1 ? 1 : -1, head = 9, bx = x2 - dir * head;
+        return '<line x1="' + vgR1(x1) + '" y1="' + vgR1(y) + '" x2="' + vgR1(bx) + '" y2="' + vgR1(y) +
+            '" stroke="' + color + '" stroke-width="' + (w || 2.4) + '" stroke-linecap="butt"/>' +
+            '<polygon points="' + vgR1(bx) + ',' + vgR1(y - 4.5) + ' ' + vgR1(x2) + ',' + vgR1(y) + ' ' +
+            vgR1(bx) + ',' + vgR1(y + 4.5) + '" fill="' + color + '"/>';
+    }
+    // måttpil med spets i båda ändar (partikelns rörelseområde)
+    function vgDubbelpil(x1, y1, x2, y2, color) {
+        var dx = x2 - x1, dy = y2 - y1, L = Math.sqrt(dx * dx + dy * dy), ux = dx / L, uy = dy / L, h = 7, b = 3.6;
+        function huvud(px, py, sx, sy) {
+            var bx = px - sx * h, by = py - sy * h;
+            return '<polygon points="' + vgR1(bx - sy * b) + ',' + vgR1(by + sx * b) + ' ' + vgR1(px) + ',' + vgR1(py) + ' ' +
+                vgR1(bx + sy * b) + ',' + vgR1(by - sx * b) + '" fill="' + color + '"/>';
+        }
+        return '<line x1="' + vgR1(x1 + ux * h) + '" y1="' + vgR1(y1 + uy * h) + '" x2="' + vgR1(x2 - ux * h) + '" y2="' +
+            vgR1(y2 - uy * h) + '" stroke="' + color + '" stroke-width="1.8" stroke-linecap="butt"/>' +
+            huvud(x2, y2, ux, uy) + huvud(x1, y1, -ux, -uy);
+    }
+    // rAF-slinga som pausar när kortet inte syns
+    function vgLoop(card, tick) {
+        var raf = null, senast = 0, synlig = true, igang = false;
+        function steg(nu) {
+            raf = null;
+            if (!igang || !synlig) return;
+            var dt = senast ? Math.min(0.05, (nu - senast) / 1000) : 0;
+            senast = nu;
+            tick(dt);
+            raf = requestAnimationFrame(steg);
+        }
+        function kor() { if (!raf && igang && synlig) { senast = 0; raf = requestAnimationFrame(steg); } }
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (e) { synlig = e[0].isIntersecting; if (synlig) kor(); }, { threshold: 0.05 });
+            io.observe(card);
+        }
+        return { satt: function (v) { igang = v; if (v) kor(); }, igang: function () { return igang; } };
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: pulsvag  (visa: puls | vag)
+    // ══════════════════════════════════════════════════════════════════════
+    // fy2-2.7 (Pulser, vågor och utbredningshastighet): en person håller i
+    // ena änden av ett rep som går till ett träd. Ersätter genomgångens två
+    // stillbilder och går av sig själv, utan knappar.
+    //   puls: handen gör EN svängning (upp och tillbaka), ett ensamt vågberg
+    //         vandrar mot trädet och försvinner där; efter en kort paus
+    //         skickas nästa puls.
+    //   vag:  handen svänger upp och ned hela tiden med frekvensen 1,0 Hz,
+    //         och pulserna följer på varandra som en fortskridande våg.
+    // Vågbergen i de två lägena är exakt lika (halv sinusperiod, samma fart),
+    // så att sambandet "våg = pulser i jämn takt" syns. Modell: fortskridande
+    // våg y(s, t) = D(t − s/v), där D är handens utslag. Vågen ska vara
+    // FORTSKRIDANDE (ingen reflex): den klingar av mot trädet i stället.
+    var pvRaknare = 0;
+    function buildPulsvag(node, cfg) {
+        var INK = '#1f2530', ROD = '#c0392b', REP = '#8a5a2b';
+        var vag = /^v/i.test(cfg.visa || '');
+        var X0 = 116, XT = 578, L = XT - X0, Y0 = 150, A = 34;   // repets början, trädet, vilolinje, amplitud
+        var V = 150, F = 1.0, TP = 1 / F, AVKLING = 70;         // px/s, Hz, s, avklingning vid trädet (px)
+        var CYKEL = 0.4 + TP / 2 + L / V + 1.2;                  // en puls + paus innan nästa
+        var tid = vag ? 0 : 0;
+        var id = 'ms-pv-rutnat-' + (++pvRaknare);
+
+        function it(t) { return '<tspan font-style="italic">' + t + '</tspan>'; }
+        function lbl(x, y, anchor, inner, size, color, extra) {
+            return '<text x="' + vgR1(x) + '" y="' + vgR1(y) + '" text-anchor="' + anchor + '" font-size="' +
+                (size || 15) + '" fill="' + (color || INK) + '"' + (extra || '') + '>' + inner + '</text>';
+        }
+        // handens utslag (−1 … 1) vid tiden t
+        function D(t) {
+            if (vag) return Math.sin(2 * Math.PI * F * t);
+            var u = t - 0.4;
+            return (u > 0 && u < TP / 2) ? Math.sin(2 * Math.PI * F * u) : 0;
+        }
+        function repY(s, t) {
+            var w = Math.min(1, (L - s) / AVKLING);
+            w = w * w * (3 - 2 * w);                         // mjuk avklingning in mot trädet
+            return Y0 - A * w * D(t - s / V);
+        }
+
+        // ── fast bakgrund: mark, träd ────────────────────────────────────
+        var bas = vgRutnat(id, 0, 0, 640, 250);
+        bas += '<line x1="0" y1="226" x2="640" y2="226" stroke="#6f8f4e" stroke-width="2"/>';
+        for (var gx = 6; gx < 640; gx += 14) {
+            bas += '<line x1="' + gx + '" y1="226" x2="' + (gx + 3) + '" y2="219" stroke="#6f8f4e" stroke-width="1.2" stroke-linecap="round"/>';
+        }
+        bas += '<path d="M 574 226 L 578 140 Q 584 120 590 140 L 596 226 Z" fill="#8a6a3a" stroke="#6b4f28" stroke-width="1.2"/>' +
+            '<path d="M 584 132 Q 572 110 556 104" fill="none" stroke="#6b4f28" stroke-width="5" stroke-linecap="round"/>' +
+            '<path d="M 588 128 Q 604 106 618 100" fill="none" stroke="#6b4f28" stroke-width="5" stroke-linecap="round"/>';
+        [[586, 70, 34, '#5a9a4e'], [556, 92, 26, '#4f8c45'], [616, 90, 26, '#4f8c45'], [570, 56, 22, '#68a85a'],
+         [604, 54, 22, '#68a85a'], [588, 40, 18, '#74b366']].forEach(function (c) {
+            bas += '<circle cx="' + c[0] + '" cy="' + c[1] + '" r="' + c[2] + '" fill="' + c[3] + '"/>';
+        });
+        bas += '<ellipse cx="585" cy="' + Y0 + '" rx="12" ry="4" fill="none" stroke="' + REP + '" stroke-width="3"/>';
+
+        function person(yh) {
+            var s = '';
+            s += '<path d="M 58 168 L 52 224 M 70 168 L 78 224" stroke="#34495e" stroke-width="9" stroke-linecap="round" fill="none"/>' +
+                '<path d="M 46 225 L 58 225 M 74 225 L 87 225" stroke="' + INK + '" stroke-width="5" stroke-linecap="round"/>';
+            s += '<rect x="50" y="110" width="30" height="62" rx="12" fill="#5b7ea6" stroke="#46658a" stroke-width="1.2"/>';
+            s += '<path d="M 56 120 Q 46 146 54 166" stroke="#4d6d92" stroke-width="8" stroke-linecap="round" fill="none"/>';
+            s += '<circle cx="65" cy="94" r="13" fill="#f0c39c" stroke="#c99a72" stroke-width="1.2"/>' +
+                '<path d="M 52 92 Q 54 77 67 79 Q 79 80 78 92 Q 72 84 62 86 Q 56 87 52 92 Z" fill="#5a3d26"/>' +
+                '<circle cx="71" cy="94" r="1.4" fill="' + INK + '"/>';
+            // främre arm: axel → armbåge → hand som håller repets ände
+            var hx = X0 - 6, ex = 88, ey = 140 + (yh - Y0) * 0.45;
+            s += '<path d="M 66 118 L ' + vgR1(ex) + ' ' + vgR1(ey) + ' L ' + vgR1(hx) + ' ' + vgR1(yh) +
+                '" stroke="#5b7ea6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>';
+            s += '<circle cx="' + vgR1(hx + 2) + '" cy="' + vgR1(yh) + '" r="7" fill="#f0c39c" stroke="#c99a72" stroke-width="1.2"/>';
+            return s;
+        }
+
+        function rita() {
+            var s = '';
+            var t = vag ? tid : (tid % CYKEL);
+            var yh = Y0 - A * D(t);
+            var pts = [];
+            for (var x = X0; x <= XT; x += 3) pts.push(vgR1(x) + ',' + vgR1(repY(x - X0, t)));
+            pts.push(XT + ',' + Y0);
+            s += '<polyline points="' + pts.join(' ') + '" fill="none" stroke="' + REP + '" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/>';
+            s += person(yh);
+            if (!vag) {
+                // "puls" och v-pil följer med vågberget
+                var sc = V * (t - 0.4 - TP / 4);
+                if (sc > 40 && sc < L - 90) {
+                    var xc = X0 + sc;
+                    s += lbl(xc, Y0 - A - 30, 'middle', 'puls', 15, INK, ' font-weight="600"');
+                    s += vgPilX(xc - 18, xc + 22, Y0 - A - 14, ROD, 2.4) + lbl(xc + 28, Y0 - A - 9, 'start', it('v'), 16, ROD);
+                }
+            } else {
+                // fast etikett över repet: en våg är pulser i jämn takt
+                s += lbl(300, 62, 'middle', 'fortskridande våg', 15, INK, ' font-weight="600"');
+                s += vgPilX(380, 430, 57, ROD, 2.4) + lbl(436, 62, 'start', it('v'), 16, ROD);
+            }
+            dyn.innerHTML = s;
+        }
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus ms-bred';
+        if (cfg.titel) {
+            var tEl = document.createElement('div');
+            tEl.className = 'minisim-title';
+            tEl.textContent = cfg.titel;
+            card.appendChild(tEl);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene ms-kv-scene';
+        scene.innerHTML = '<svg class="ms-kv-svg" viewBox="20 30 616 206" width="640" height="214" ' +
+            'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="' +
+            (vag ? 'En person skakar ett rep upp och ned i jämn takt. Pulserna följer på varandra och bildar en ' +
+                   'fortskridande våg som rör sig åt höger mot ett träd.'
+                 : 'En person gör en enda svängning med handen. Ett ensamt vågberg, en puls, vandrar längs repet ' +
+                   'åt höger mot ett träd.') + '">' +
+            bas + '<g class="ms-pv-dyn"></g></svg>';
+        var dyn = scene.querySelector('.ms-pv-dyn');
+        card.appendChild(scene);
+        msFullskarm(card, scene, 616 / 206, 60);
+        var info = document.createElement('div');
+        info.className = 'minisim-info ms-brod';
+        info.style.marginTop = '6px';
+        info.textContent = vag
+            ? 'Handen svänger upp och ned med frekvensen f = 1,0 Hz, alltså en ny puls varje sekund. Pulserna bildar en våg.'
+            : 'Handen gör en enda svängning, och ett ensamt vågberg vandrar längs repet. Det är en puls.';
+        card.appendChild(info);
+        node.appendChild(card);
+
+        var loop = vgLoop(card, function (dt) { tid += dt; rita(); });
+        card._set = function (t) { tid = t; rita(); };
+        rita();
+        loop.satt(true);
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: vagtyp  (visa: transversell | longitudinell)
+    // ══════════════════════════════════════════════════════════════════════
+    // fy2-2.7: en fortskridande våg åt höger i ett medium av partiklar. EN
+    // partikel är markerad i signalfärg, och en måttpil visar dess
+    // rörelseområde runt viloläget (grå streckmarkering).
+    //   transversell:  partiklarna på en rad svänger upp och ned,
+    //                  y = A · sin(ω · t − k · x); den röda partikeln rör sig
+    //                  vinkelrätt mot utbredningsriktningen.
+    //   longitudinell: partiklar i ett rutnät svänger fram och tillbaka,
+    //                  ξ = A · sin(ω · t − k · x); förtätningar och
+    //                  förtunningar vandrar åt höger medan den röda
+    //                  partikeln bara pendlar kring sitt viloläge.
+    // Kryssrutan "Följ en vågtopp"/"Följ en förtätning" sätter en markör som
+    // åker med vågen, så att skillnaden mellan vågens och partikelns rörelse
+    // syns. Starta/Pausa, Ultrarapid.
+    var vtRaknare = 0;
+    function buildVagtyp(node, cfg) {
+        var INK = '#1f2530', ROD = '#c0392b', SIGNAL = '#e8590c', PART = '#5b7ea6', GREY = '#8a919b';
+        var longi = /^long/i.test(cfg.visa || '');
+        var LAMBDA = 200, T = 2.4, K = 2 * Math.PI / LAMBDA, OM = 2 * Math.PI / T;
+        var tid = 0.6 * T, ultra = false, folj = true;
+        var id = 'ms-vt-rutnat-' + (++vtRaknare);
+        var W = 640, H = longi ? 220 : 210;
+
+        function it(t) { return '<tspan font-style="italic">' + t + '</tspan>'; }
+        function lbl(x, y, anchor, inner, size, color, extra) {
+            return '<text x="' + vgR1(x) + '" y="' + vgR1(y) + '" text-anchor="' + anchor + '" font-size="' +
+                (size || 15) + '" fill="' + (color || INK) + '"' + (extra || '') + '>' + inner + '</text>';
+        }
+
+        // ── parametrar per vågtyp ────────────────────────────────────────
+        var cols = [], rows, AMP, YC, XR;
+        if (!longi) {
+            AMP = 38; YC = 118; rows = [YC];
+            for (var x = 40; x <= 600; x += 16) cols.push(x);
+            XR = 312;                                  // den röda partikelns viloläge
+        } else {
+            AMP = 14; YC = 132; rows = [];
+            for (var r = 0; r < 7; r++) rows.push(84 + r * 16);
+            for (var x2 = 34; x2 <= 606; x2 += 11) cols.push(x2);
+            XR = 309;
+        }
+        var RAD = 3 - 1;                               // rad-index för den röda partikeln (longitudinell)
+        // stabil, liten spridning i viloläget så att mediet ser ut som luft
+        var jit = [];
+        var seed = 7;
+        function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+        rows.forEach(function () { jit.push(cols.map(function () { return longi ? (rnd() - 0.5) * 3 : 0; })); });
+
+        var bas = vgRutnat(id, 0, 0, W, H);
+        // vågens utbredningsriktning
+        bas += vgPilX(470, 560, 28, ROD, 2.6) + lbl(566, 33, 'start', it('v'), 16, ROD) +
+            lbl(462, 33, 'end', 'vågens utbredningsriktning', 13, ROD);
+        if (!longi) {
+            bas += '<line x1="30" y1="' + YC + '" x2="610" y2="' + YC + '" stroke="' + GREY + '" stroke-width="1" stroke-dasharray="5 4"/>';
+            // den röda partikelns rörelseområde
+            bas += vgDubbelpil(XR + 22, YC - AMP, XR + 22, YC + AMP, SIGNAL) +
+                lbl(XR + 22, YC + AMP + 26, 'middle', 'partikelns rörelse', 13, SIGNAL);
+        } else {
+            bas += vgDubbelpil(XR - AMP, 204, XR + AMP, 204, SIGNAL) +
+                lbl(XR + AMP + 10, 209, 'start', 'partikelns rörelse', 13, SIGNAL);
+            bas += '<line x1="' + XR + '" y1="76" x2="' + XR + '" y2="196" stroke="' + GREY + '" stroke-width="1" stroke-dasharray="3 4"/>';
+        }
+
+        function rita() {
+            var s = '';
+            var fas = OM * tid;
+            if (!longi) {
+                // tunn tråd som binder ihop partiklarna
+                var pts = [];
+                for (var x = 30; x <= 610; x += 4) pts.push(x + ',' + vgR1(YC - AMP * Math.sin(fas - K * x)));
+                s += '<polyline points="' + pts.join(' ') + '" fill="none" stroke="#b9c4d2" stroke-width="1.4"/>';
+                if (folj) {
+                    // vågtoppen: fas − k·x = π/2 → x = (fas − π/2)/k (+ n·λ); välj den som ligger närmast 1/3 in
+                    var xt = (fas - Math.PI / 2) / K;
+                    xt = ((xt % LAMBDA) + LAMBDA) % LAMBDA;
+                    for (var n = 0; n < 4; n++) {
+                        var xx = xt + n * LAMBDA;
+                        if (xx < 36 || xx > 604) continue;
+                        s += '<polygon points="' + vgR1(xx - 6) + ',' + (YC - AMP - 18) + ' ' + vgR1(xx + 6) + ',' + (YC - AMP - 18) + ' ' +
+                            vgR1(xx) + ',' + (YC - AMP - 9) + '" fill="' + INK + '" opacity="0.75"/>';
+                    }
+                    s += lbl(70, YC - AMP - 26, 'middle', 'vågtopp', 12, '#4a5160');
+                }
+                cols.forEach(function (x) {
+                    if (x === XR) return;
+                    s += '<circle cx="' + x + '" cy="' + vgR1(YC - AMP * Math.sin(fas - K * x)) + '" r="5" fill="' + PART + '" stroke="#3f6189" stroke-width="1"/>';
+                });
+                var yr = YC - AMP * Math.sin(fas - K * XR);
+                s += '<line x1="' + (XR - 9) + '" y1="' + YC + '" x2="' + (XR + 9) + '" y2="' + YC + '" stroke="' + SIGNAL + '" stroke-width="1.6" opacity="0.6"/>';
+                s += '<circle cx="' + XR + '" cy="' + vgR1(yr) + '" r="7.5" fill="' + SIGNAL + '" stroke="#9c3a06" stroke-width="1.4"/>';
+            } else {
+                if (folj) {
+                    // förtätning där cos(fas − k·x) = 1, förtunning där = −1
+                    var xc = fas / K;
+                    xc = ((xc % LAMBDA) + LAMBDA) % LAMBDA;
+                    for (var n2 = -1; n2 < 4; n2++) {
+                        var xa = xc + n2 * LAMBDA, xb = xa + LAMBDA / 2;
+                        if (xa > 60 && xa < 580) {
+                            s += '<rect x="' + vgR1(xa - 24) + '' + '" y="76" width="48" height="120" rx="6" fill="#2563c9" opacity="0.07"/>';
+                            s += lbl(xa, 66, 'middle', 'förtätning', 12, '#2f5aa8');
+                        }
+                        if (xb > 60 && xb < 580) s += lbl(xb, 66, 'middle', 'förtunning', 12, '#6b7280');
+                    }
+                }
+                rows.forEach(function (y, ri) {
+                    cols.forEach(function (x, ci) {
+                        if (ri === RAD && x === XR) return;
+                        var xs = x + jit[ri][ci] + AMP * Math.sin(fas - K * x);
+                        s += '<circle cx="' + vgR1(xs) + '" cy="' + vgR1(y + jit[ri][(ci + 3) % cols.length]) + '" r="3.4" fill="' + PART + '"/>';
+                    });
+                });
+                var xr = XR + AMP * Math.sin(fas - K * XR);
+                s += '<circle cx="' + vgR1(xr) + '" cy="' + rows[RAD] + '" r="6.5" fill="' + SIGNAL + '" stroke="#9c3a06" stroke-width="1.4"/>';
+            }
+            dyn.innerHTML = s;
+        }
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus ms-bred';
+        if (cfg.titel) {
+            var tEl = document.createElement('div');
+            tEl.className = 'minisim-title';
+            tEl.textContent = cfg.titel;
+            card.appendChild(tEl);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene ms-kv-scene';
+        var vb = longi ? '14 14 620 206' : '14 14 620 182';
+        var vbH = longi ? 206 : 182;
+        scene.innerHTML = '<svg class="ms-kv-svg" viewBox="' + vb + '" width="640" height="' + Math.round(640 * vbH / 620) + '" ' +
+            'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="' +
+            (longi ? 'Longitudinell våg: partiklarna svänger fram och tillbaka i samma riktning som vågen går, åt höger. ' +
+                     'Förtätningar och förtunningar vandrar åt höger medan den markerade partikeln bara pendlar kring sitt viloläge.'
+                   : 'Transversell våg: partiklarna svänger upp och ned medan vågen går åt höger. ' +
+                     'Den markerade partikeln rör sig vinkelrätt mot vågens utbredningsriktning.') + '">' +
+            bas + '<g class="ms-vt-dyn"></g></svg>';
+        var dyn = scene.querySelector('.ms-vt-dyn');
+        card.appendChild(scene);
+        msFullskarm(card, scene, 620 / vbH, 110);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        var startBtn = vgBtn('Pausa');
+        var ultraCk = vgCheck('Ultrarapid', false);
+        var foljCk = vgCheck(longi ? 'Markera förtätningar' : 'Markera vågtopparna', true);
+        controls.appendChild(startBtn);
+        controls.appendChild(ultraCk.label);
+        controls.appendChild(foljCk.label);
+        card.appendChild(controls);
+        var info = document.createElement('div');
+        info.className = 'minisim-info ms-brod';
+        info.style.marginTop = '6px';
+        info.textContent = longi
+            ? 'Vågen går åt höger. Den orange partikeln rör sig fram och tillbaka i samma riktning, men följer inte med vågen.'
+            : 'Vågen går åt höger, men den orange partikeln rör sig bara upp och ned, vinkelrätt mot vågens riktning.';
+        card.appendChild(info);
+        node.appendChild(card);
+
+        var loop = vgLoop(card, function (dt) { tid += dt * (ultra ? 0.25 : 1); rita(); });
+        function setSpelar(v) {
+            loop.satt(v);
+            startBtn.textContent = v ? 'Pausa' : 'Starta';
+            startBtn.classList.toggle('ms-primar', !v);
+        }
+        startBtn.addEventListener('click', function () { setSpelar(!loop.igang()); });
+        ultraCk.cb.addEventListener('change', function () { ultra = ultraCk.cb.checked; });
+        foljCk.cb.addEventListener('change', function () { folj = foljCk.cb.checked; rita(); });
+        card._set = function (t) { tid = t; rita(); };
+        rita();
+        setSpelar(true);
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: ytvag  (visa: vatten | rayleigh)
+    // ══════════════════════════════════════════════════════════════════════
+    // fy2-2.7, rutan "Fler typer av vågor": en ytvåg går åt höger genom ett
+    // rutnät av partiklar. Två partiklar är markerade, en vid ytan och en
+    // längre ned, med sina banor (streckade) och en pil som visar varvets
+    // riktning. Startar direkt; Pausa och Ultrarapid.
+    //   vatten:   djupvattenvåg. x = x₀ − a(z) · sin(k·x₀ − ω·t),
+    //             y = a(z) · cos(k·x₀ − ω·t), a(z) = A · e^(−k·z).
+    //             Båda partiklarna går i cirkelbanor medurs (framåt i
+    //             vågtoppen), den undre med mindre radie.
+    //   rayleigh: Rayleigh-våg i ett fast material (Poissons tal 0,25).
+    //             U(z) ∝ e^(−0,8475·kz) − 0,5773 · e^(−0,3933·kz),
+    //             W(z) ∝ −0,8475 · e^(−0,8475·kz) + 1,4679 · e^(−0,3933·kz).
+    //             Vid ytan går partikeln i en ellips MOTURS (bakåt i
+    //             vågtoppen); under djupet kz ≈ 1,21 (≈ 0,19 λ) byter U
+    //             tecken och partikeln går medurs.
+    var ytRaknare = 0;
+    function buildYtvag(node, cfg) {
+        var INK = '#1f2530', ROD = '#c0392b', C1 = '#e8590c', C2 = '#b0247a';
+        var ray = /^ray/i.test(cfg.visa || '');
+        var LAMBDA = 240, K = 2 * Math.PI / LAMBDA, T = 3.0, OM = 2 * Math.PI / T;
+        var YS = 96;                                   // ytans viloläge
+        var tid = 0, ultra = false;
+        var id = 'ms-yt-rutnat-' + (++ytRaknare);
+        var DX = ray ? 16 : 14, DZ = ray ? 16 : 15;
+        var xs = [], zs = [];
+        for (var x = -24; x <= 664; x += DX) xs.push(x);
+        for (var z = 0; z <= (ray ? 150 : 120); z += DZ) zs.push(z);
+
+        // förskjutning (dx, dy uppåt) vid viloläge (x0, z) och fas φ = k·x0 − ω·t
+        var A = 22, S = 40;
+        function U(z) { var a = K * z; return S * (Math.exp(-0.8475 * a) - 0.5773 * Math.exp(-0.3933 * a)); }
+        function Wz(z) { var a = K * z; return S * (-0.8475 * Math.exp(-0.8475 * a) + 1.4679 * Math.exp(-0.3933 * a)); }
+        function las(x0, z, t) {
+            var f = K * x0 - OM * t;
+            if (!ray) { var a = A * Math.exp(-K * z); return [x0 - a * Math.sin(f), YS + z - a * Math.cos(f)]; }
+            return [x0 + U(z) * Math.sin(f), YS + z - Wz(z) * Math.cos(f)];
+        }
+        // de två markerade partiklarna och deras banor
+        var M1 = { x: 222, z: 0, c: C1 }, M2 = { x: 446, z: ray ? 2.9 / K : 30, c: C2 };
+        M2.z = Math.round(M2.z / DZ) * DZ;
+        M1.x = xs.reduce(function (b, v) { return Math.abs(v - M1.x) < Math.abs(b - M1.x) ? v : b; });
+        M2.x = xs.reduce(function (b, v) { return Math.abs(v - M2.x) < Math.abs(b - M2.x) ? v : b; });
+        function radier(m) {
+            if (!ray) { var a = A * Math.exp(-K * m.z); return [a, a, 1]; }
+            var u = U(m.z), w = Wz(m.z);
+            return [Math.abs(u), Math.abs(w), u > 0 ? -1 : 1];      // +1 = medurs, −1 = moturs
+        }
+
+        function it(t) { return '<tspan font-style="italic">' + t + '</tspan>'; }
+        function lbl(x, y, anchor, inner, size, color, extra) {
+            return '<text x="' + vgR1(x) + '" y="' + vgR1(y) + '" text-anchor="' + anchor + '" font-size="' +
+                (size || 15) + '" fill="' + (color || INK) + '"' + (extra || '') + '>' + inner + '</text>';
+        }
+        // etikett i en liten pappersruta, så att den går att läsa ovanpå rutnätet
+        function ruta(x, y, anchor, text, color) {
+            var w = text.length * 6.5 + 12, x0 = anchor === 'start' ? x - 6 : (anchor === 'end' ? x - w + 6 : x - w / 2);
+            return '<rect x="' + vgR1(x0) + '" y="' + vgR1(y - 14) + '" width="' + vgR1(w) + '" height="20" rx="4" fill="#f7f2e8" stroke="' + color + '" stroke-width="1"/>' +
+                lbl(x, y, anchor, text, 12.5, color, ' font-weight="600"');
+        }
+        function bana(m) {
+            var r = radier(m), cx = m.x, cy = YS + m.z, s = '';
+            s += '<ellipse cx="' + cx + '" cy="' + cy + '" rx="' + vgR1(r[0]) + '" ry="' + vgR1(r[1]) + '" fill="none" stroke="' + m.c +
+                '" stroke-width="1.8" stroke-dasharray="4 3"/>';
+            // pilhuvuden i toppen och botten som visar varvets riktning
+            [[-1, r[2]], [1, -r[2]]].forEach(function (p) {
+                var py = cy + p[0] * r[1], d = p[1];
+                s += '<polygon points="' + vgR1(cx - d * 5) + ',' + vgR1(py - 4.5) + ' ' + vgR1(cx + d * 6) + ',' + vgR1(py) + ' ' +
+                    vgR1(cx - d * 5) + ',' + vgR1(py + 4.5) + '" fill="' + m.c + '"/>';
+            });
+            return s;
+        }
+
+        var bas = vgRutnat(id, 0, 0, 640, 280);
+        bas += vgPilX(470, 560, 30, ROD, 2.6) + lbl(566, 35, 'start', it('v'), 16, ROD) +
+            lbl(462, 35, 'end', 'vågens utbredningsriktning', 13, ROD);
+        var dynId = 'ms-yt-dyn';
+
+        function rita() {
+            var s = '';
+            var yta = xs.map(function (x0) { return las(x0, 0, tid); });
+            var botten = YS + zs[zs.length - 1] + 14;
+            var poly = yta.map(function (p) { return vgR1(p[0]) + ',' + vgR1(p[1]); }).join(' ');
+            s += '<polygon points="' + poly + ' 664,' + botten + ' -24,' + botten + '" fill="' + (ray ? '#e3d3b4' : '#cfe3f3') + '"/>';
+            if (ray) {
+                // rutnätet i det fasta materialet
+                var rader = zs.map(function (z) { return xs.map(function (x0) { return las(x0, z, tid); }); });
+                rader.forEach(function (r) {
+                    s += '<polyline points="' + r.map(function (p) { return vgR1(p[0]) + ',' + vgR1(p[1]); }).join(' ') +
+                        '" fill="none" stroke="#a08055" stroke-width="1"/>';
+                });
+                xs.forEach(function (x0, ci) {
+                    s += '<polyline points="' + rader.map(function (r) { return vgR1(r[ci][0]) + ',' + vgR1(r[ci][1]); }).join(' ') +
+                        '" fill="none" stroke="#a08055" stroke-width="1"/>';
+                });
+                // djupet där rörelsen byter riktning
+                var zb = 1.209 / K;
+                s += '<line x1="0" y1="' + vgR1(YS + zb) + '" x2="640" y2="' + vgR1(YS + zb) + '" stroke="#6b5636" stroke-width="1.2" stroke-dasharray="7 5" opacity="0.7"/>';
+                s += ruta(24, YS + zb + 5, 'start', 'här byter rörelsen riktning', '#5a4528');
+            } else {
+                zs.forEach(function (z) {
+                    xs.forEach(function (x0) {
+                        var p = las(x0, z, tid);
+                        s += '<circle cx="' + vgR1(p[0]) + '" cy="' + vgR1(p[1]) + '" r="2.4" fill="#3f78ad" opacity="' + (z ? 0.75 : 1) + '"/>';
+                    });
+                });
+            }
+            s += '<polyline points="' + poly + '" fill="none" stroke="' + (ray ? '#6b5636' : '#2b6cb0') + '" stroke-width="2.2"/>';
+            [M1, M2].forEach(function (m) {
+                s += bana(m);
+                var p = las(m.x, m.z, tid), cx = m.x, cy = YS + m.z;
+                s += '<line x1="' + cx + '" y1="' + cy + '" x2="' + vgR1(p[0]) + '" y2="' + vgR1(p[1]) + '" stroke="' + m.c + '" stroke-width="1.4"/>';
+                s += '<circle cx="' + cx + '" cy="' + cy + '" r="1.8" fill="' + m.c + '"/>';
+                s += '<circle cx="' + vgR1(p[0]) + '" cy="' + vgR1(p[1]) + '" r="6.5" fill="' + m.c + '" stroke="' + INK + '" stroke-width="1.1"/>';
+            });
+            // etiketter vid de markerade partiklarna
+            var r1 = radier(M1), r2 = radier(M2);
+            s += lbl(M1.x, YS - Math.max(r1[1], 22) - 24, 'middle', 'vid ytan: ' + (r1[2] > 0 ? 'medurs' : 'moturs'), 13, C1, ' font-weight="600"');
+            s += ruta(M2.x + Math.max(r2[0], 8) + 16, YS + M2.z + (ray ? 5 : 30), 'start', 'längre ner: ' + (r2[2] > 0 ? 'medurs' : 'moturs'), C2);
+            dyn.innerHTML = s;
+        }
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus ms-bred';
+        if (cfg.titel) {
+            var tEl = document.createElement('div');
+            tEl.className = 'minisim-title';
+            tEl.textContent = cfg.titel;
+            card.appendChild(tEl);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene ms-kv-scene';
+        var vbH = 264 - 14;
+        scene.innerHTML = '<svg class="ms-kv-svg" viewBox="0 14 640 ' + vbH + '" width="640" height="' + vbH + '" ' +
+            'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="' +
+            (ray ? 'Rayleigh-våg i marken som går åt höger. En partikel vid ytan rör sig i en ellips moturs, och en partikel ' +
+                   'längre ned rör sig i en smalare ellips medurs.'
+                 : 'Vattenvåg som går åt höger. En partikel vid ytan rör sig i en cirkel medurs, och en partikel längre ned ' +
+                   'rör sig i en mindre cirkel åt samma håll.') + '">' +
+            bas + '<g class="' + dynId + '"></g></svg>';
+        var dyn = scene.querySelector('.' + dynId);
+        card.appendChild(scene);
+        msFullskarm(card, scene, 640 / vbH, 110);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        var startBtn = vgBtn('Pausa');
+        var ultraCk = vgCheck('Ultrarapid', false);
+        controls.appendChild(startBtn);
+        controls.appendChild(ultraCk.label);
+        card.appendChild(controls);
+        var info = document.createElement('div');
+        info.className = 'minisim-info ms-brod';
+        info.style.marginTop = '6px';
+        info.textContent = ray
+            ? 'Vid ytan går partikeln runt i en ellips moturs, längre ned i en smalare ellips medurs. Ingen partikel följer med vågen.'
+            : 'Båda partiklarna går runt i cirklar åt samma håll, medurs. Längre ned blir cirkeln mindre. Ingen partikel följer med vågen.';
+        card.appendChild(info);
+        node.appendChild(card);
+
+        var loop = vgLoop(card, function (dt) { tid += dt * (ultra ? 0.25 : 1); rita(); });
+        function setSpelar(v) {
+            loop.satt(v);
+            startBtn.textContent = v ? 'Pausa' : 'Starta';
+            startBtn.classList.toggle('ms-primar', !v);
+        }
+        startBtn.addEventListener('click', function () { setSpelar(!loop.igang()); });
+        ultraCk.cb.addEventListener('change', function () { ultra = ultraCk.cb.checked; });
+        card._set = function (t) { tid = t; rita(); };
+        rita();
+        setSpelar(true);
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: fasvag
+    // ══════════════════════════════════════════════════════════════════════
+    // fy2-2.7, under meningen om fas och motfas: en stående våg på en sträng
+    // mellan två fästen, y = A · sin(k · x) · cos(ω · t), med fem bukar
+    // (strängen är 2,5 λ lång). Två partiklar i buk 1 och 3 är orange och
+    // svänger I FAS (alltid samma läge, samma riktning); två partiklar i buk
+    // 2 och 5 är lila och svänger I MOTFAS (alltid motsatt läge och
+    // riktning). Klammer ovanför och under strängen säger "i fas" och
+    // "i motfas", och små pilar på de markerade partiklarna visar åt vilket
+    // håll de rör sig just nu. Startar direkt; Pausa och Ultrarapid.
+    var fvRaknare = 0;
+    function buildFasvag(node, cfg) {
+        var INK = '#1f2530', GREY = '#8a919b', PART = '#5b7ea6', C1 = '#e8590c', C2 = '#9c36b5';
+        var X0 = 44, X1 = 596, LAMBDA = (X1 - X0) / 2.5, K = 2 * Math.PI / LAMBDA;
+        var YC = 124, A = 46, T = 2.4, OM = 2 * Math.PI / T;
+        var tid = 0.15 * T, ultra = false;
+        var id = 'ms-fv-rutnat-' + (++fvRaknare);
+        var IFAS = [X0 + LAMBDA / 4, X0 + 5 * LAMBDA / 4];        // buk 1 och 3
+        var MOTFAS = [X0 + 3 * LAMBDA / 4, X0 + 9 * LAMBDA / 4];  // buk 2 och 5
+
+        function lbl(x, y, anchor, inner, size, color, extra) {
+            return '<text x="' + vgR1(x) + '" y="' + vgR1(y) + '" text-anchor="' + anchor + '" font-size="' +
+                (size || 15) + '" fill="' + (color || INK) + '"' + (extra || '') + '>' + inner + '</text>';
+        }
+        function yv(x, t) { return YC - A * Math.sin(K * (x - X0)) * Math.cos(OM * t); }
+        // klammer mellan två x-lägen, öppen mot strängen (dir = 1 nedåt, −1 uppåt)
+        function klammer(xa, xb, y, dir, color, text) {
+            var s = '<path d="M ' + vgR1(xa) + ' ' + (y + dir * 9) + ' L ' + vgR1(xa) + ' ' + y + ' L ' + vgR1(xb) + ' ' + y +
+                ' L ' + vgR1(xb) + ' ' + (y + dir * 9) + '" fill="none" stroke="' + color + '" stroke-width="1.8"/>';
+            var xm = (xa + xb) / 2, ty = dir > 0 ? y - 8 : y + 19;
+            s += lbl(xm, ty, 'middle', text, 15, color, ' font-weight="600"');
+            return s;
+        }
+        function pilY(x, y0, dy, color) {
+            if (Math.abs(dy) < 6) return '';
+            var dir = dy > 0 ? 1 : -1, y2 = y0 + dy, by = y2 - dir * 7;
+            return '<line x1="' + vgR1(x) + '" y1="' + vgR1(y0) + '" x2="' + vgR1(x) + '" y2="' + vgR1(by) + '" stroke="' + color +
+                '" stroke-width="2.4" stroke-linecap="butt"/><polygon points="' + vgR1(x - 4.5) + ',' + vgR1(by) + ' ' + vgR1(x) + ',' +
+                vgR1(y2) + ' ' + vgR1(x + 4.5) + ',' + vgR1(by) + '" fill="' + color + '"/>';
+        }
+
+        var bas = vgRutnat(id, 0, 0, 640, 260);
+        // fästena i ändarna
+        [[X0, -1], [X1, 1]].forEach(function (f) {
+            var xx = f[0] + f[1] * 6;
+            bas += '<rect x="' + (f[1] < 0 ? xx - 10 : xx) + '" y="' + (YC - 34) + '" width="10" height="68" fill="#8d96a3" stroke="#5f6773" stroke-width="1"/>';
+        });
+        // höljet ±A · sin(kx) (streckat) och viloläget
+        var upp = [], ned = [];
+        for (var x = X0; x <= X1; x += 4) {
+            var e = A * Math.sin(K * (x - X0));
+            upp.push(x + ',' + vgR1(YC - e));
+            ned.push(x + ',' + vgR1(YC + e));
+        }
+        bas += '<polyline points="' + upp.join(' ') + '" fill="none" stroke="' + GREY + '" stroke-width="1" stroke-dasharray="4 4"/>' +
+            '<polyline points="' + ned.join(' ') + '" fill="none" stroke="' + GREY + '" stroke-width="1" stroke-dasharray="4 4"/>' +
+            '<line x1="' + X0 + '" y1="' + YC + '" x2="' + X1 + '" y2="' + YC + '" stroke="' + GREY + '" stroke-width="0.8" opacity="0.6"/>';
+        bas += klammer(IFAS[0], IFAS[1], YC - A - 26, 1, C1, 'i fas');
+        bas += klammer(MOTFAS[0], MOTFAS[1], YC + A + 26, -1, C2, 'i motfas');
+
+        function rita() {
+            var s = '';
+            var pts = [];
+            for (var x = X0; x <= X1; x += 3) pts.push(x + ',' + vgR1(yv(x, tid)));
+            s += '<polyline points="' + pts.join(' ') + '" fill="none" stroke="#b9c4d2" stroke-width="1.6"/>';
+            for (var xb = X0 + 12; xb < X1 - 4; xb += LAMBDA / 16) {
+                var mark = [IFAS[0], IFAS[1], MOTFAS[0], MOTFAS[1]].some(function (m) { return Math.abs(m - xb) < 2; });
+                if (mark) continue;
+                s += '<circle cx="' + vgR1(xb) + '" cy="' + vgR1(yv(xb, tid)) + '" r="4.2" fill="' + PART + '" stroke="#3f6189" stroke-width="1"/>';
+            }
+            [[IFAS, C1], [MOTFAS, C2]].forEach(function (g) {
+                g[0].forEach(function (x) {
+                    var y = yv(x, tid);
+                    // hastigheten dy/dt (i px/s) som en kort pil bredvid partikeln
+                    var v = A * Math.sin(K * (x - X0)) * OM * Math.sin(OM * tid);
+                    s += pilY(x + 14, y, v * 0.22, g[1]);
+                    s += '<circle cx="' + vgR1(x) + '" cy="' + vgR1(y) + '" r="7.5" fill="' + g[1] + '" stroke="' + INK + '" stroke-width="1.1"/>';
+                });
+            });
+            dyn.innerHTML = s;
+        }
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus ms-bred';
+        if (cfg.titel) {
+            var tEl = document.createElement('div');
+            tEl.className = 'minisim-title';
+            tEl.textContent = cfg.titel;
+            card.appendChild(tEl);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene ms-kv-scene';
+        scene.innerHTML = '<svg class="ms-kv-svg" viewBox="14 30 612 190" width="640" height="199" ' +
+            'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" ' +
+            'aria-label="En stående våg på en sträng. Två orange partiklar svänger i fas: de är alltid i samma läge och rör sig åt ' +
+            'samma håll. Två lila partiklar svänger i motfas: de är alltid i motsatt läge och rör sig åt motsatt håll.">' +
+            bas + '<g class="ms-fv-dyn"></g></svg>';
+        var dyn = scene.querySelector('.ms-fv-dyn');
+        card.appendChild(scene);
+        msFullskarm(card, scene, 612 / 190, 110);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        var startBtn = vgBtn('Pausa');
+        var ultraCk = vgCheck('Ultrarapid', false);
+        controls.appendChild(startBtn);
+        controls.appendChild(ultraCk.label);
+        card.appendChild(controls);
+        var info = document.createElement('div');
+        info.className = 'minisim-info ms-brod';
+        info.style.marginTop = '6px';
+        info.textContent = 'De orange partiklarna svänger i fas: de är alltid i samma läge och rör sig åt samma håll. ' +
+            'De lila svänger i motfas: när den ena är högst upp är den andra längst ned.';
+        card.appendChild(info);
+        node.appendChild(card);
+
+        var loop = vgLoop(card, function (dt) { tid += dt * (ultra ? 0.25 : 1); rita(); });
+        function setSpelar(v) {
+            loop.satt(v);
+            startBtn.textContent = v ? 'Pausa' : 'Starta';
+            startBtn.classList.toggle('ms-primar', !v);
+        }
+        startBtn.addEventListener('click', function () { setSpelar(!loop.igang()); });
+        ultraCk.cb.addEventListener('change', function () { ultra = ultraCk.cb.checked; });
+        card._set = function (t) { tid = t; rita(); };
+        rita();
+        setSpelar(true);
+    }
+
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
                   stegkast: buildStegkast,
                   svangningsgrafer: buildSvangningsgrafer,
@@ -12606,7 +13291,9 @@
                   magnetpoler: buildMagnetpoler, magnetdelning: buildMagnetdelning,
                   galton: buildGalton, kalkylblad: buildKalkylblad,
                   lodlinje: buildLodlinje,
-                  vinkelrata: buildVinkelrata };
+                  vinkelrata: buildVinkelrata,
+                  pulsvag: buildPulsvag, vagtyp: buildVagtyp,
+                  ytvag: buildYtvag, fasvag: buildFasvag };
 
     function decodeSrc(b64) {
         try { return decodeURIComponent(escape(atob(b64))); }

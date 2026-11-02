@@ -103,6 +103,71 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-03-stjarnan-som-kanner-halet-snurra",
+    date: "2026-11-03",
+    title: "Vintergatans snabbaste kända stjärna kan avslöja hur fort det svarta hålet i centrum snurrar",
+    deck: "Stjärnan S301 går ett varv runt det svarta hålet i Vintergatans centrum på 8,7 år och når 25 000 km/s, över åtta procent av ljusets hastighet. Den kommer så nära hålet att dess bana bör påverkas av hålets rotation, och forskarna hoppas kunna mäta rotationen inom tio år.",
+    category: "Astronomi",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-11-03-stjarnan-som-kanner-halet-snurra.jpg",
+    imageAlt: "Vintergatans ljusa band med mörka dammstråk sträcker sig över en stjärnklar natthimmel. En tunn orange laserstråle går från en stor, ljus teleskopbyggnad nere till höger upp mot bandets mitt. Längre bort syns två mindre teleskopbyggnader mot horisonten.",
+    imageCredit: "Foto: ESO/Y. Beletsky (CC&nbsp;BY&nbsp;4.0), beskuren. Bilden togs 2007 och visar Very Large Telescope, inte de observationer som studien bygger på.",
+    tags: ["astronomi", "svart hål", "sagittarius a*", "vintergatan", "allmän relativitetsteori", "ramsläpning", "keplers lagar", "ellipsbana", "interferometri", "eso", "dubbelstjärna"],
+    sources: [
+      { name: "ESO: Fastest star in the Milky Way feels the rotation of our central black hole (pressmeddelande eso2612, 19 augusti 2026)", url: "https://www.eso.org/public/news/eso2612/" },
+      { name: "Physics World: Fastest star in the Milky Way feels the rotation of our central black hole (8 oktober 2026)", url: "https://physicsworld.com/a/fastest-star-in-the-milky-way-feels-the-rotation-of-our-central-black-hole/" },
+      { name: "Nature: studien i fulltext (öppen, CC BY 4.0)", url: "https://www.nature.com/articles/s41586-026-10894-w" },
+      { name: "arXiv: förtrycket av studien", url: "https://arxiv.org/abs/2607.12664" }
+    ],
+    research: {
+      citation: "K. Abd El Dayem, R. Abuter, N. Aimar m.fl. (GRAVITY+-samarbetet), ”Discovery of a star sensitive to the spin of Sagittarius A*”, Nature 657, 359–363 (2026), publicerad 19 augusti 2026. Kollegialt granskad. Förtryck: arXiv:2607.12664.",
+      url: "https://doi.org/10.1038/s41586-026-10894-w"
+    },
+    simulering: {
+      href: "fysik2-satellitbana-app.html",
+      name: "Satellit i omloppsbana",
+      text: "Skjut upp en satellit med olika fart och se banan bli en utdragen ellips, där satelliten rusar fram närmast jorden och går långsamt längst ut."
+    },
+    larare: {
+      moment: [
+        { label: "Gravitationslagen", href: "katalog.html?id=fy1-3.5" },
+        { label: "Svarta hål", href: "katalog.html?id=fy2-5.5" },
+        { label: "Relativitetsteori", href: "katalog.html?id=fy1-8.1" }
+      ],
+      fragor: [
+        "Keplers tredje lag kan skrivas så att halva storaxeln i astronomiska enheter i kubik är lika med centralmassan i solmassor gånger omloppstiden i år i kvadrat. Hur stor är halva storaxeln i S301:s bana, med massan 4,3 miljoner solmassor och omloppstiden 8,7 år?",
+        "S301 rör sig mer än hundra gånger fortare närmast hålet än längst ut i banan. Förklara varför med hjälp av Keplers andra lag eller rörelsemängdsmomentet.",
+        "Varför går det lättare att mäta ett svart håls rotation med en stjärna som kommer mycket nära än med en som håller sig längre bort, och vad kan störa en sådan mätning?"
+      ]
+    },
+    body: [
+      { type: "p", html: "I Vintergatans centrum, omkring 27&nbsp;000&nbsp;ljusår härifrån, finns ett supermassivt svart hål, Sagittarius A*, med en massa på 4,3&nbsp;miljoner solmassor. Astronomer har i årtionden följt stjärnorna som kretsar runt det. Nu har forskarsamarbetet GRAVITY+ hittat en stjärna, S301, som kommer närmare hålet än någon annan stjärna som observerats. När den är som närmast rör den sig med omkring 25&nbsp;000&nbsp;km/s, mer än åtta procent av ljusets hastighet, och är därmed den snabbaste kända stjärnan i Vintergatan. Studien publicerades i <em>Nature</em> i augusti." },
+      { type: "h2", text: "Ett varv på 8,7 år" },
+      { type: "p", html: "S301 går ett varv runt hålet på 8,7&nbsp;år. Det är enligt forskarna den kortaste omloppstid som är känd för en stjärna där, och det tidigare rekordet var 12&nbsp;år. En annan forskargrupp har visserligen rapporterat stjärnor med omloppstider ner till fyra år, men i bilder med bara en femtondel av GRAVITY:s skärpa, och GRAVITY-forskarna skriver att de inte hittar de stjärnorna i sina egna bilder." },
+      { type: "p", html: "Banan är en extremt utdragen ellips, med excentriciteten $e \\approx 0{,}98$. Längst ut ligger stjärnan omkring 1&nbsp;400&nbsp;gånger avståndet mellan jorden och solen från hålet. Vid den närmaste punkten, som den passerade i början av 2023, är avståndet bara omkring tolv gånger jordens avstånd till solen, knappt 1,8&nbsp;miljarder kilometer. Det är en bit längre än Saturnus avstånd från solen." },
+      { type: "p", html: "Farten varierar enormt längs banan. Enligt Keplers andra lag sveper linjen mellan stjärnan och hålet över lika stora ytor på lika långa tider, så stjärnan måste röra sig fortast när linjen är kortast. Med 25&nbsp;000&nbsp;km/s skulle den ta sig från jorden till månen på ungefär 15&nbsp;sekunder. Längst ut i banan går den bara drygt 200&nbsp;km/s, så farten närmast hålet är drygt hundra gånger större." },
+      { type: "h2", text: "Fyra teleskop som arbetar som ett" },
+      { type: "p", html: "S301 är ingen jättestjärna. På himlen lyser Betelgeuse i Orion ungefär två miljarder gånger starkare än S301, som forskarna tror är en vanlig stjärna mellan 1,1 och 1,5&nbsp;gånger så tung som solen. För att alls se den krävs instrumentet GRAVITY vid ESO:s Very Large Telescope i Chile, där ljuset från fyra teleskop med åtta meter stora speglar kombineras som i ett enda, mycket större teleskop. Tekniken kallas interferometri och ger 15&nbsp;gånger skarpare bilder än ett av teleskopen ensamt." },
+      { type: "p", html: "Forskarna upptäckte stjärnan våren 2023, då den låg bara 15&nbsp;tusendels bågsekunder från hålet och var på väg utåt. De följde den 2024 och 2025, och med hjälp av den preliminära banan kunde de sedan hitta den i äldre bilder från 2021, och svagare i bilder från 2017. Sammanlagt har de 19&nbsp;lägen för stjärnan, och tillsammans ritar de upp en ellips." },
+      { type: "image", src: "nyheter/bilder/2026-11-03-stjarnan-som-kanner-halet-snurra-2.jpg", alt: "Fyra svarta rutor bredvid varandra med datum från 2021 till 2025. I varje ruta syns några orange ljusprickar, en vit prick märkt SgrA* och en tunn vit ellips. En liten prick märkt S301 ligger på ellipsen, på olika ställen i de olika rutorna. Under rutorna finns en liten ring märkt Neptune's orbit som skala.", caption: "GRAVITY-bilder från 2021, 2023, 2024 och 2025. S301 flyttar sig längs sin ellipsbana runt det svarta hålet (SgrA*). Den lilla ringen under bilderna visar hur stor Neptunus bana runt solen skulle vara i samma skala.", credit: "Bild: ESO/GRAVITY collaboration (CC&nbsp;BY&nbsp;4.0)" },
+      { type: "h2", text: "Rumtiden dras med i rotationen" },
+      { type: "p", html: "Stjärnan S2, som går ett varv på 16&nbsp;år, har redan visat att Einsteins allmänna relativitetsteori stämmer nära hålet. Med GRAVITY har forskarna bland annat mätt att S2:s bana vrider sig ett litet stycke för varje varv, omkring 12&nbsp;bågminuter, alltså en femtedels grad. S301:s minsta avstånd till hålet är bara ungefär en tiondel av S2:s, och där blir effekten mycket större: banan vrider sig omkring två grader per varv, så att ellipsen har roterat ett helt varv efter ungefär 1&nbsp;600&nbsp;år." },
+      { type: "p", html: "Det som gör S301 unik är ändå något annat. Enligt relativitetsteorin drar ett roterande svart hål med sig rumtiden runt omkring sig, ungefär som en sked som rörs runt i en burk honung. Fenomenet kallas ramsläpning eller Lense-Thirring-effekten, och det avtar mycket snabbt med avståndet. Därför har ingen känd stjärna kommit nära nog för att effekten ska gå att mäta inom rimlig tid. För S301 kan ramsläpningen vrida banan upp till ytterligare 0,11&nbsp;grader per varv, om hålet snurrar så fort det över huvud taget kan och rotationsaxeln ligger gynnsamt. Det är i samma storleksordning som den vridning av S2:s bana som redan har mätts." },
+      { type: "image", src: "nyheter/bilder/2026-11-03-stjarnan-som-kanner-halet-snurra-3.jpg", alt: "Ett blått rutnät som buktar ned och vrids runt en svart kula i mitten. En orange pil på kulans framsida visar att den roterar åt höger, och rutnätets linjer närmast kulan är vridna åt samma håll.", caption: "Konstnärlig bild av ramsläpning: ett roterande svart hål kröker rumtiden och vrider den med sig i rotationen.", credit: "Illustration: ESO/M. Kornmesser (CC&nbsp;BY&nbsp;4.0), beskuren" },
+      { type: "p", html: "Hur fort ett svart hål snurrar anges med ett tal $\\chi$ mellan 0, ingen rotation alls, och 1, den största rotation som relativitetsteorin tillåter. Forskarna har simulerat mätningar fram till 2035 och bedömer att det finns en rimlig chans att mäta Sagittarius A*:s rotation med hjälp av S301 inom ungefär tio år. I deras räkneexempel, där hålet snurrar maximalt, rotationsaxeln ligger gynnsamt och stjärnans hastighet mot oss också mäts med ett av de nya jätteteleskopen, bestäms $\\chi$ med en osäkerhet under 0,2 och rotationsaxelns riktning på ungefär 30&nbsp;grader när. Nästa gång S301 passerar hålet på nära håll är 2031." },
+      { type: "quote", html: "För första gången skulle vi faktiskt kunna mäta rotationen hos ett supermassivt svart hål på ett mycket direkt sätt, och det vore ett viktigt test av Einsteins teori.", cite: "Stefan Gillessen, Max-Planck-institutet för utomjordisk fysik, en av de ledande forskarna bakom studien, i ESO:s pressmeddelande (översatt)" },
+      { type: "h2", text: "Rester av ett stjärnpar som slets isär" },
+      { type: "p", html: "Så nära ett svart hål kan knappast en stjärna bildas, eftersom hålets tidvattenkrafter är för starka. Forskarna tror i stället att S301 en gång var ena halvan av en dubbelstjärna, två stjärnor som kretsade runt varandra på mellan fem och tjugo dygn. När paret kom för nära hålet slets det isär. Den ena stjärnan fångades in i en mycket utdragen bana, och den andra slungades i väg med mycket hög fart, enligt ESO troligen tillräckligt för att lämna Vintergatan. Förloppet kallas Hillsmekanismen, och det förklarar naturligt varför banan är så utdragen." },
+      { type: "h2", text: "Det som återstår att mäta" },
+      { type: "p", html: "Än så länge har forskarna bara mätt hur stjärnan flyttar sig över himlen, inte hur fort den rör sig mot eller från oss. Därför passar två olika lutningar av banan i rymden lika bra. Med instrumentet MICADO på ESO:s Extremely Large Telescope, som byggs i Chile, ska stjärnans ljus kunna delas upp i våglängder så att också den hastigheten kan mätas. Andra massor nära hålet, till exempel svarta hål av stjärnstorlek, kan också vrida banan. Forskarnas simuleringar tyder på att den effekten oftast är mindre än ramsläpningen om hålet snurrar måttligt till snabbt och rotationsaxeln ligger gynnsamt, och att de två märks på olika ställen i banan: ramsläpningen nära hålet och störningarna längst ut." },
+      { type: "fact", title: "Visste du?", items: [
+        "Om Sagittarius A* inte roterade skulle händelsehorisonten ha en radie på knappt 13&nbsp;miljoner kilometer, ungefär en femtedel av Merkurius avstånd från solen. Snurrar hålet blir horisonten mindre, som minst hälften så stor. S301 kommer som närmast omkring 140&nbsp;gånger det avståndet från hålet.",
+        "Ramsläpning har mätts förut, runt jorden. Satelliten Gravity Probe B visade 2011 med fyra gyroskop att jorden drar med sig rumtiden en aning när den roterar.",
+        "Reinhard Genzel, en av forskarna bakom studien, delade ena halvan av nobelpriset i fysik 2020 med Andrea Ghez för upptäckten av ett supermassivt kompakt objekt i Vintergatans centrum. De upptäckte det genom att följa stjärnornas banor runt det."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-02-vakuumet-som-foder-par",
     date: "2026-11-02",
     title: "Kalla atomer härmar hur ett elektriskt fält kan skapa partiklar ur vakuum",

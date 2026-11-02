@@ -4524,6 +4524,54 @@ window.BEGREPP = [
       { type: 'p', html: 'Det gör mikroskopet till ett viktigt verktyg för att bygga modeller av fysik som är svår att studera direkt. Forskarna låter atomerna hoppa mellan facken enligt bestämda regler, väntar en stund och tar en bild. Genom att upprepa försöket många gånger med olika väntetider kan de följa hur hela systemet utvecklas, atom för atom. Bilden förstör dock tillståndet, så varje bild kräver ett nytt försök från början.' }
     ]
   },
+  {
+    id: 'interferometri',
+    term: 'Interferometri',
+    former: ['interferometri', 'interferometrin', 'interferometrisk', 'interferometriska', 'interferometriskt'],
+    kort: 'Att låta ljusvågor eller radiovågor samverka för att mäta något mycket noggrant. I astronomin kombineras ljuset från flera teleskop så att de tillsammans ser lika skarpt som ett enda teleskop stort som avståndet mellan dem.',
+    relaterade: ['interferometer', 'interferens', 'vaglangd', 'koherens'],
+    body: [
+      { type: 'p', html: 'När två vågor möts adderas de. Ligger vågtopparna i fas förstärker de varandra, ligger en topp mot en dal släcker de ut varandra. Det kallas interferens, och mönstret som uppstår är mycket känsligt för hur långt vågorna har färdats. Interferometri är alla de mätmetoder som utnyttjar det, från laboratoriets interferometrar som mäter längder på bråkdelar av en våglängd till detektorerna som fångar gravitationsvågor.' },
+      { type: 'p', html: 'I astronomin används idén för att få skarpare bilder. Hur små detaljer ett teleskop kan se beror på hur stort det är jämfört med våglängden: ju större spegel, desto skarpare bild. Ett teleskop går inte att bygga hur stort som helst, men ljuset från flera teleskop som står långt isär kan föras samman och fås att interferera. Då ser de tillsammans ungefär lika små detaljer som ett enda teleskop vars storlek är avståndet mellan dem.' },
+      { type: 'p', html: 'Det kräver att ljusets väg genom varje teleskop hålls lika lång med en noggrannhet på en bråkdel av en våglängd, för synligt och infrarött ljus långt under en tusendels millimeter. Very Large Telescope i Chile kombinerar på det sättet ljuset från fyra teleskop med åtta meter stora speglar. Med radiovågor går det att gå mycket längre: Event Horizon Telescope kopplar ihop radioteleskop över hela jorden och tog 2019 den första bilden av skuggan av ett svart hål.' }
+    ]
+  },
+  {
+    id: 'excentricitet',
+    term: 'Excentricitet',
+    former: ['excentricitet', 'excentriciteten', 'excentriciteter', 'excentriciteterna'],
+    kort: 'Ett tal mellan 0 och 1 som anger hur utdragen en ellipsbana är. 0 betyder en perfekt cirkel, och ju närmare 1 talet kommer, desto längre och smalare blir ellipsen.',
+    relaterade: ['astronomisk-enhet', 'svart-hal', 'komet'],
+    body: [
+      { type: 'p', html: 'Planeter, månar, kometer och stjärnor som kretsar kring något tungt följer nästan aldrig en perfekt cirkel. Banan är en ellips, en tillplattad cirkel där det tunga föremålet inte sitter i mitten utan i en av ellipsens två brännpunkter. Excentriciteten är ett mått på hur tillplattad ellipsen är. Den skrivs ofta med bokstaven <em>e</em> och ligger mellan 0 och 1.' },
+      { type: 'p', html: 'Är excentriciteten 0 är banan en cirkel, och avståndet till centrum är detsamma hela varvet. Jordens bana har excentriciteten 0,017, så jorden är bara drygt tre procent närmare solen i början av januari än i början av juli. Halleys komet har 0,97: den dyker ner innanför Venus bana och svänger sedan ut bortom Neptunus. Ju närmare 1 talet kommer, desto större blir skillnaden mellan det närmaste och det största avståndet.' },
+      { type: 'p', html: 'I en utdragen bana varierar också farten kraftigt. Enligt Keplers andra lag sveper linjen mellan föremålet och centrum över lika stora ytor på lika långa tider, så föremålet rusar fram när det är nära och kryper fram långt ute. Med excentriciteten 0,98 är det största avståndet ungefär hundra gånger så stort som det minsta, och farten närmast centrum är lika många gånger större än farten längst ut.' }
+    ]
+  },
+  {
+    id: 'hillsmekanismen',
+    term: 'Hillsmekanismen',
+    former: ['hillsmekanismen', 'hillsmekanism'],
+    kort: 'Det som händer när en dubbelstjärna kommer för nära ett supermassivt svart hål: paret slits isär, den ena stjärnan fångas in i en bana runt hålet och den andra slungas i väg med extremt hög fart.',
+    relaterade: ['svart-hal', 'vintergatan', 'excentricitet', 'tidvattenkraft'],
+    body: [
+      { type: 'p', html: 'Många stjärnor är inte ensamma utan har en partner, och de två kretsar runt varandra. Kommer ett sådant par för nära ett supermassivt svart hål drar hålet olika hårt i de två stjärnorna, eftersom den ena är närmare än den andra. Skillnaden kan bli större än kraften som håller ihop paret, och då slits det isär. Den amerikanske astronomen Jack Hills beskrev förloppet 1988, och det har fått hans namn.' },
+      { type: 'p', html: 'När paret slits isär fördelas rörelseenergin ojämnt. Den ena stjärnan förlorar energi och fastnar i en bana runt hålet, ofta en mycket utdragen ellips. Den andra får motsvarande energi och slungas ut, ibland med över tusen kilometer per sekund. Det räcker för att lämna galaxen helt, och sådana stjärnor kallas hyperhastighetsstjärnor. Astronomer har hittat flera i Vintergatans utkanter som är på väg bort från centrum.' },
+      { type: 'p', html: 'Stjärnor kan knappast bildas mycket nära ett supermassivt svart hål, eftersom gasmolnen slits sönder innan de hinner dra ihop sig. Hillsmekanismen är därför ett av de bästa sätten att förklara varför det ändå finns stjärnor i snäva banor runt hålet i Vintergatans centrum, och varför deras banor ofta är så utdragna.' }
+    ]
+  },
+  {
+    id: 'tidvattenkraft',
+    term: 'Tidvattenkraft',
+    former: ['tidvattenkraft', 'tidvattenkraften', 'tidvattenkrafter', 'tidvattenkrafterna'],
+    kort: 'Den sträckande kraft som uppstår när gravitationen drar olika hårt i olika delar av ett föremål. Den ger tidvatten i haven och kan slita sönder stjärnor nära ett svart hål.',
+    relaterade: ['svart-hal', 'hillsmekanismen', 'neutronstjarna'],
+    body: [
+      { type: 'p', html: 'Gravitationen blir svagare ju längre bort man kommer. Månen drar därför lite hårdare i den sida av jorden som vetter mot den än i jordens mitt, och lite svagare i den sida som vetter bort. Skillnaden sträcker ut jorden en aning längs linjen mot månen. Den fasta berggrunden ger knappt efter, men haven gör det, och två vattenbulor uppstår, en på var sida. När jorden roterar under dem får vi högvatten och lågvatten ungefär två gånger per dygn.' },
+      { type: 'p', html: 'Tidvattenkraften växer mycket snabbt när avståndet minskar, ungefär som en genom avståndet i kubik. Den blir också större ju större föremålet som sträcks är. Nära ett svart hål, där gravitationen ändras kraftigt på korta avstånd, kan den därför bli starkare än den gravitation som håller ihop en stjärna. Stjärnan slits då sönder, och gasen från den bildar ett lysande moln runt hålet.' },
+      { type: 'p', html: 'Hur nära en stjärna kan komma utan att slitas isär beror på hur tät den är. En stor, gles jättestjärna klarar sig sämre än en liten, tät stjärna som solen. Samma kraft kan också slita isär ett par av stjärnor som kretsar runt varandra, medan var och en av stjärnorna överlever.' }
+    ]
+  },
 ];
 
 

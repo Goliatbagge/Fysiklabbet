@@ -12,10 +12,8 @@ Format per post:
 
 ## Kö
 
-- **OBS för S301 (BREVTEASERN nedan): publicera den INTE 2026-11-02**, eftersom 2026-11-01 är astronomi (Rubins följeslagare). Ta den tisdag–lördag 2026-11-03–07 med ett annat område dagen före och efter. (tillagd 2026-10-31)
-
-- **S301: snabbaste stjärnan runt Sgr A* (8,7 år, 25 000 km/s) känner av svarta hålets rotation** **[BREVTEASER]** (nominerad 2026-10-25: snabbaste kända stjärnan i Vintergatan, belagd i fulltext; astronomi senast 2026-10-14) — GRAVITY-samarbetet, Nature 2026, DOI 10.1038/s41586-026-10894-w; fulltext läst i arXiv 2607.12664 (Discovery of a star sensitive to the spin of Sgr A*). OBS: ESO:s pressmeddelande eso2612 kom redan 2026-08-19 (ESO-bilder CC BY 4.0), så inte dagsfärskt; Physics World tog upp den 2026-10-08. Astronomi. Källa: https://physicsworld.com/a/fastest-star-in-the-milky-way-feels-the-rotation-of-our-central-black-hole/
-  (tillagd 2026-10-20)
+- **Hula-hoopens fysik: lår, smalben och fot håller ringen igång tillsammans (Berkeley)** **[BREVTEASER]** (nominerad 2026-11-02: oväntad vardagsmekanik som en 16-åring kan prova själv; originalet ÖPPET, Springer open access, publicerat 2026-09-28) — mekanik/biomekanik; sensorer på ringen, benet och foten, 120 mätningar per sekund; olinjär analys (funktionell nätverksanalys) i stället för principalkomponentanalys visar att ringens varv och vickning hänger ihop. Chern, Honein, O'Reilly, Nonlinear Dynamics 2026, DOI 10.1007/s11071-026-13058-7 (öppen, kontrollerat 2026-11-02). Mer rörelseanalys än fysik; valdes bort 2026-10-28. Källa (Phys.org): https://phys.org/news/2026-10-decoding-loopy-physics-hula-hooping.html
+  (tillagd 2026-10-28)
 
 - **Fyra supraledande kablar kopplar ihop två stora kvantprocessorer till en** — kvantteknik. Originalet ej kontrollerat. Källa (Phys.org 2026-10-31): https://phys.org/news/2026-10-superconducting-cables-link-large-quantum.html
   (tillagd 2026-11-01)
@@ -40,9 +38,6 @@ Format per post:
 
 - **Supermagnetstormen i maj 2024 accelererade elektroner till flera MeV innanför ”den ogenomträngliga barriären” i strålningsbältena (Arase)** — rymdfysik/jordmagnetism; norrskensstormen 10–11 maj 2024 som syntes i hela Sverige är en bra krok. Elektroner över 3 MeV accelererades på plats av chorusvågor när plasmasfären var urholkad i 4,3–4,7 dygn i stället för cirka 2. Miyoshi m.fl. (Nagoya, ISEE), Geophysical Research Letters 53, e2026GL125879 (publicerad 2026-10-26), DOI 10.1029/2026gl125879, CC BY 4.0. Fulltexten SPÄRRAD 2026-10-29 (agupubs.onlinelibrary.wiley.com ger Cloudflare-kontroll både för pdf och full-xml; WebFetch ger 403; inget förtryck hittat). Prova igen från en session med vanlig webbläsare. Källa (Phys.org 2026-10-28): https://phys.org/news/2026-10-solar-storm-triggered-ultrarelativistic-electrons.html
   (tillagd 2026-10-29)
-
-- **Hula-hoopens fysik: lår, smalben och fot håller ringen igång tillsammans (Berkeley)** — mekanik/biomekanik; sensorer på ringen, benet och foten, 120 mätningar per sekund; olinjär analys (funktionell nätverksanalys) i stället för principalkomponentanalys visar att ringens varv och vickning hänger ihop. Chern, Honein, O'Reilly, Nonlinear Dynamics 2026, DOI 10.1007/s11071-026-13058-7 (öppenhet ej kontrollerad). Mer rörelseanalys än fysik; valdes bort 2026-10-28. Källa (Phys.org): https://phys.org/news/2026-10-decoding-loopy-physics-hula-hooping.html
-  (tillagd 2026-10-28)
 
 - **Lycurgusbägarens färgskifte återskapat i Sheffield** — optik/nanopartiklar (guld och silver i glas, grönt i reflekterat och rött i genomfallande ljus). Verkar vara ett hantverksprojekt utan vetenskaplig artikel; kontrollera om det finns en publikation. OBS optik 2026-10-28. Källa (Phys.org): https://phys.org/news/2026-10-technician-year-mystery-replicate-effect.html
   (tillagd 2026-10-28)

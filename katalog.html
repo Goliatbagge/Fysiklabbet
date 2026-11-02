@@ -1890,6 +1890,21 @@
                 try { localStorage.setItem('fl-pres-textskala', String(textScale)); }
                 catch (e) { /* privat läge m.m. — inställningen gäller ändå nu */ }
             }, [textScale]);
+            // Skärmbredd: textspalten är ritad för 880 px (en 1290×730-
+            // laptop). På en bred skärm lämnade den två tredjedelar av duken
+            // tom, så spalten, texten och figurerna växer i samma takt med
+            // faktorn --pres-bredd (CSS:en i styles-laborans.css). Faktorn
+            // begränsas av HÖJDEN också, så att ett steg som rymdes på en
+            // laptop ryms på den stora skärmen: ultrabreda skärmar får alltså
+            // bredare marginaler i stället för text som spränger höjden.
+            const breddFaktor = () => Math.max(1, Math.min(
+                (window.innerWidth * 0.74) / 880, window.innerHeight / 760, 2.2));
+            const [presBredd, setPresBredd] = useState(breddFaktor);
+            useEffect(() => {
+                const onResize = () => setPresBredd(breddFaktor());
+                window.addEventListener('resize', onResize);
+                return () => window.removeEventListener('resize', onResize);
+            }, []);
             // Pennlösning i helskärm: när presentationen når ett
             // ::: handskrift-steg fullskärmas arket AUTOMATISKT (widgetens
             // eget helskärmsläge — stort ark, uppgiftspanelen fastnålad
@@ -2400,7 +2415,7 @@
             return (
                 <div className={'lab-pres' + (chrome ? ' chrome-on' : '')
                         + (step === 0 ? ' at-title' : '') + (ready ? ' is-ready' : '')}
-                    style={{ '--pres-skala': textScale }}
+                    style={{ '--pres-skala': textScale, '--pres-bredd': presBredd }}
                     ref={overlayRef} onMouseMove={pokeChrome} onClick={onStageClick}
                     role="dialog" aria-label={I18N.t('Presentationsläge:') + ' ' + plainTitle(title)}>
                     <div className="lab-pres-progress" aria-hidden="true">

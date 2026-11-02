@@ -4280,12 +4280,22 @@ body.laborans u .lab-term {
     transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Innehållskolumn. Stor bottenpadding så sista stegen kan centreras. */
+/* Innehållskolumn. Stor bottenpadding så sista stegen kan centreras.
+   --pres-bredd (≥ 1, sätts av presentationsläget i katalog.html efter
+   fönstrets bredd OCH höjd) skalar spalten, brödtexten och figurerna i
+   samma takt, så att en bred skärm fylls i stället för att två
+   tredjedelar av duken står tom. På en laptop är faktorn 1. */
 .lab-pres-stage {
-    max-width: 880px;
+    max-width: calc(880px * var(--pres-bredd, 1));
     margin: 0 auto;
     padding: 7vh 48px 44vh;
 }
+
+/* Figurerna (vektor-SVG med fasta width/height) växer med spalten.
+   zoom i stället för width: attributens mått och max-width: 100%
+   gäller som förut, bara i större skala. */
+.lab-pres .lab-pres-body .lab-block-figur svg,
+.lab-pres .lab-pres-body .lab-block-title { zoom: var(--pres-bredd, 1); }
 
 /* Titelbild → kompakt rubrik. Samma element morfar mellan lägena. */
 .lab-pres-title {
@@ -4350,12 +4360,12 @@ body.laborans u .lab-term {
    em-baserat och följer med. Sammanfattnings-sliden berörs inte — dess
    storlek sätts inline av fitSammanfattning(). */
 .lab-pres .lab-pres-body {
-    font-size: calc(20px * var(--pres-skala, 1));
+    font-size: calc(20px * var(--pres-skala, 1) * var(--pres-bredd, 1));
     line-height: 1.7;
 }
 
-.lab-pres .lab-pres-body h2 { font-size: calc(36px * var(--pres-skala, 1)); }
-.lab-pres .lab-pres-body h3 { font-size: calc(22px * var(--pres-skala, 1)); }
+.lab-pres .lab-pres-body h2 { font-size: calc(36px * var(--pres-skala, 1) * var(--pres-bredd, 1)); }
+.lab-pres .lab-pres-body h3 { font-size: calc(22px * var(--pres-skala, 1) * var(--pres-bredd, 1)); }
 
 /* Sammanfattningen i presentationsläget: EN slide som ska rymmas på en
    skärm (liggande datorläge). Rutan bryter ut ur textspalten och tar

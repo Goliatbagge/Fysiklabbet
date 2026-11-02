@@ -863,6 +863,9 @@
     'y': { w: 62, strokes: [[[24, 52], [32, 72], [42, 96]], [[64, 52], [52, 88], [38, 118], [26, 130]]] },
     /* teckenminus (U+2212): tight, utan operator-luft — för −3 i tabeller/axlar */
     '−': { w: 40, strokes: [[[18, 66], [42, 66]]] },
+    /* bindestreck (U+2010) i sammansättningar som k‐värde: kort, utan
+     * operatorluft ('-' är ett OPS-tecken och får luft åt båda håll) */
+    '‐': { w: 34, strokes: [[[10, 66], [28, 66]]] },
     /* integraltecken: hög S-kurva, från -13 (över versalhöjd) till 113 */
     '∫': { w: 54, strokes: [[[64, -4], [58, -12], [50, -13], [45, -5], [44, 14], [43, 45], [42, 75], [40, 96], [37, 108], [29, 113], [21, 108], [19, 99]]] },
     /* klamrar för primitiv funktion: höga, med korta serifer */
@@ -14517,7 +14520,7 @@
       [['k-värde. Här är k=3.']]
     ], 0);
     y = 116;
-    T.str('a) Samma lutning', padL, y - 1.6 * F, null, 0.62);
+    T.str('a) Samma lutning ⇒ samma k‐värde, så', padL, y - 1.6 * F, null, 0.54);
     T.str('y=3x+m', padL, y);
     T.stepEnd();
 
@@ -14527,7 +14530,7 @@
       [['Punkten (1, 2) bestämmer m.']]
     ]);
     y += 3.6 * F;
-    T.str('Punkten (1, 2) ger', padL, y - 1.6 * F, null, 0.62);
+    T.str('Punkten (1, 2) på linjen ger', padL, y - 1.6 * F, null, 0.62);
     T.str('2=3·1+m', padL, y);
     T.stepEnd();
 

@@ -16,10 +16,16 @@ linjer har alltså *samma* *k*-värde. Linjerna $y = 2x + 1$ och
 $y = 2x - 3$ är till exempel parallella, eftersom båda har $k = 2$.
 
 En linje som är lodrät kallas **vertikal**. Vertikala linjer kan inte
-beskrivas med räta linjens ekvation i k-form, utan beskrivs utifrån var
+beskrivas med räta linjens ekvation i *k*-form, utan beskrivs utifrån var
 den ligger i *x*-led. Den lodräta linjen genom (4, 1) och (4, 5)
 beskrivs till exempel av $x = 4$, eftersom alla dess punkter har
 *x*-koordinaten 4.
+
+::: figur
+<svg viewBox="-26 -20 228 208" width="309" height="282" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Ett koordinatsystem med en lodrät blå linje genom punkterna 4 komma 1 och 4 komma 5. Linjen är x lika med 4."><line x1="0" y1="0" x2="0" y2="182" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="26" y1="0" x2="26" y2="182" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="52" y1="0" x2="52" y2="182" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="78" y1="0" x2="78" y2="182" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="104" y1="0" x2="104" y2="182" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="130" y1="0" x2="130" y2="182" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="156" y1="0" x2="156" y2="182" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="182" y1="0" x2="182" y2="182" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="182" x2="182" y2="182" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="156" x2="182" y2="156" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="130" x2="182" y2="130" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="104" x2="182" y2="104" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="78" x2="182" y2="78" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="52" x2="182" y2="52" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="26" x2="182" y2="26" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="0" x2="182" y2="0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0" y1="156" x2="190" y2="156" stroke="#1f2530" stroke-width="1.6"/><polygon points="198,156 188,151.5 188,160.5" fill="#1f2530"/><line x1="26" y1="182" x2="26" y2="-8" stroke="#1f2530" stroke-width="1.6"/><polygon points="26,-16 21.5,-6 30.5,-6" fill="#1f2530"/><text x="196" y="174" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="35" y="-6" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="0" y="172" font-size="12" text-anchor="middle" fill="#1f2530">−1</text><text x="52" y="172" font-size="12" text-anchor="middle" fill="#1f2530">1</text><text x="78" y="172" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="104" y="172" font-size="12" text-anchor="middle" fill="#1f2530">3</text><text x="126" y="172" font-size="12" text-anchor="end" fill="#1f2530">4</text><text x="156" y="172" font-size="12" text-anchor="middle" fill="#1f2530">5</text><text x="182" y="172" font-size="12" text-anchor="middle" fill="#1f2530">6</text><text x="20" y="134" font-size="12" text-anchor="end" fill="#1f2530">1</text><text x="20" y="108" font-size="12" text-anchor="end" fill="#1f2530">2</text><text x="20" y="82" font-size="12" text-anchor="end" fill="#1f2530">3</text><text x="20" y="56" font-size="12" text-anchor="end" fill="#1f2530">4</text><text x="20" y="30" font-size="12" text-anchor="end" fill="#1f2530">5</text><text x="20" y="4" font-size="12" text-anchor="end" fill="#1f2530">6</text><line x1="130" y1="182" x2="130" y2="0" stroke="#2563c9" stroke-width="2"/><circle cx="130" cy="130" r="3.6" fill="#1f2530"/><text x="138" y="124" font-size="13" text-anchor="start" fill="#1f2530">(4, 1)</text><circle cx="130" cy="26" r="3.6" fill="#1f2530"/><text x="138" y="20" font-size="13" text-anchor="start" fill="#1f2530">(4, 5)</text><text x="138" y="83" font-size="14" text-anchor="start" fill="#2563c9"><tspan font-style="italic">x</tspan> = 4</text></svg>
+
+Den lodräta linjen $x = 4$ går genom punkterna (4, 1) och (4, 5).
+:::
 
 ::: formel "Vertikala linjens ekvation"
 $$
@@ -54,7 +60,7 @@ typ: parallell
 
 ::: textlosning
 **a)** Linjens $k$-värde är 3. Den parallella linjen ska alltså ha samma
-$k$-värde. Insättning av $k = 3$ i RLE i k-form ger
+$k$-värde. Insättning av $k = 3$ i RLE i *k*-form ger
 
 $$
 y = 3x + m
@@ -109,7 +115,7 @@ typ: allmanform
 :::
 
 ::: textlosning
-Vi skriver om ekvationen till k-form genom att *lösa ut y*, för att
+Vi skriver om ekvationen till *k*-form genom att *lösa ut y*, för att
 därefter identifiera $k$-värdet:
 
 $$
@@ -184,7 +190,7 @@ Vi har en vertikal linje vid $x = 3$.
 
 ::: sampunkt "Växla mellan formerna"
 - **Till allmän form**: flytta över alla termer till ena ledet.
-- **Till k-form**: lös ut $y$, så avläses $k$ och $m$ direkt.
+- **Till *k*-form**: lös ut $y$, så avläses $k$ och $m$ direkt.
 - $2x + 3y - 6 = 0$ ger
   $y = -\dfrac{2}{3}x + 2$, alltså
   $k = -\dfrac{2}{3}$.

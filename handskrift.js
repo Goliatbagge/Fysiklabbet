@@ -14627,7 +14627,7 @@
      * (x>420) och måste börja under ekvval-scenernas högre
      * inställningsrutszon (y<210), med marginal för pennjittret */
     y = 248;
-    T.str('Ekvationen', padL, y - 1.6 * F, null, 0.62);
+    T.str('Löser ut y från ekvationen', padL, y - 1.6 * F, null, 0.62);
     T.str('2x+3y-6=0', padL, y);
     T.stepEnd();
 

@@ -1,0 +1,51 @@
+03:15:02  [idag] === Nyhetsjobb: start (2026-11-03) ===
+03:15:07  [idag] Dagens nyhet finns (förberedd i går).
+03:15:07  [idag] Startar Claude Code (headless, modell opus)...
+03:20:02  [imorgon] === Nyhetsjobb: start (2026-11-03) ===
+03:20:02  [imorgon] En körning pågår redan (lås 5 min gammalt). Avslutar.
+03:25:01  [idag] Nyheten f├╢r 2026-11-04 ├ñr skriven, godk├ñnd av utgivaren och committad p├Ñ grenen `nyhetsjobb` (commit `1ca19933`). Jag har inte pushat och inte skickat n├Ñgot mejl, eftersom skriptet sk├╢ter det.
+03:25:01  [idag] 
+03:25:01  [idag] **Artikeln:** "En sv├ñvande glaskula k├ñnner st├╢ten fr├Ñn enskilda atomer" (`2026-11-04-kulan-som-kanner-varje-atom`, kategori Mekanik). G├Ñrdagens artikel handlade om astronomi, s├Ñ det blir inte samma omr├Ñde tv├Ñ dagar i rad.
+03:25:01  [idag] - **Inneh├Ñll:** Forskare vid Yale och Berkeley Lab h├Ñller en glaskula, 100 nm i diameter, sv├ñvande i en laserstr├Ñle i vakuum. Med den m├ñter de st├╢tarna fr├Ñn enskilda krypton- och xenonatomer och svavelhexafluoridmolekyler, och r├ñknar ut gasens tryck ur antalet st├╢tar. Artikeln knyter an till r├╢relsem├ñngd, impuls och den kinetiska gasteorin, och avslutas med forskarnas m├Ñl att m├ñta rekylen fr├Ñn neutriner.
+03:25:01  [idag] - **K├ñlla:** Hela studien ├ñr l├ñst: Tseng m.fl., Phys. Rev. Lett. 137, 173601 (19 oktober 2026). Tidskriftsversionen ligger bakom betalv├ñgg, s├Ñ jag l├ñste den i fulltext p├Ñ arXiv (2604.18371v2, samma version). Citaten kommer fr├Ñn Physics World (23 oktober).
+03:25:02  [idag] - **Utgivaren:** Gav f├╢rst R├äTTA F├ûRST med fyra punkter, och alla fyra ├ñr r├ñttade enligt f├╢rslagen:
+03:25:02  [idag]   - Svavelhexafluorid ├ñr en molekyl, s├Ñ "gasatom" blev "gaspartikel".
+03:25:02  [idag]   - Slutsatsen om att st├╢tarna kommer fr├Ñn snabba atomer ├ñr mildrad, eftersom en del atomer fastnar p├Ñ ytan en stund och l├ñmnar den med en ny fart.
+03:25:02  [idag]   - En ├╢verdrift i sista stycket ├ñr borttagen.
+03:25:02  [idag]   - J├ñmf├╢relsen med en gev├ñrskula i ordlistan var fel och ├ñr utbytt.
+03:25:02  [idag] 
+03:25:02  [idag]   Efter omgranskningen blev utslaget GODK├äND. B├Ñda utslagen st├Ñr i `granskningar.md`.
+03:25:02  [idag] - **Bild:** AI-genererad med Gemini, eftersom Yales pressfoto saknar fri licens. Den ├ñr krediterad som AI-illustration.
+03:25:02  [idag] - **├ûvrigt:**
+03:25:02  [idag]   - Ett nytt ordlisteuppslag, *kinetisk gasteori*.
+03:25:02  [idag]   - Rutan "Prova sj├ñlv" l├ñnkar till simuleringen Ideala gaslagen.
+03:25:02  [idag]   - Tre nya uppslag ligger i k├╢n: fiskstim, enatomsmotorer och en molekyl├ñr skruv.
+03:25:02  [idag]   - `publicerat.md` ├ñr uppdaterad.
+03:25:02  [idag] - **Verifiering:** `verify-navigation`, `verify-begrepp` och `verify-sitemap` gick igenom utan fel efter bygget. Jag har inte tittat p├Ñ artikeln i en sk├ñrmdump: dev-servern visar huvudkatalogen och inte den h├ñr arbetskatalogen.
+03:25:02  [idag] 
+03:25:02  [idag] Byggskriptet skrev om radsluten i `i18n/gemensamt.js`, `i18n/manifest.js` och alla delningssidor under `katalog/dela/` och `nyheter/dela/`, utan att inneh├Ñllet ├ñndrades. De ├ñr inte med i committen och ligger kvar som ├ñndrade i arbetskatalogen, som ├Ñterst├ñlls vid n├ñsta k├╢rning.
+03:25:03  [idag] Claude avslutade med kod 0
+03:25:03  [idag] error: cannot pull with rebase: You have unstaged changes.
+03:25:03  [idag] error: Please commit or stash them.
+03:25:08  [idag] Pushat till main.
+03:25:08  [idag] Artikel 2026-11-04 pushad: 2026-11-04-kulan-som-kanner-varje-atom
+03:26:38  [idag] Startar Claude Code (headless, modell sonnet)...
+03:27:14  [idag] The Gmail tool isn't available in this session ΓÇö the only configured connector shown as failed is the Telegram plugin, and no Gmail/mail-sending tool appears in the deferred tools list at all. This means I can't send the email directly from here.
+03:27:14  [idag] 
+03:27:14  [idag] Could you confirm whether the Gmail connector should be available in this worktree session? If not, I can prepare the email text for you to send manually. Here's the draft:
+03:27:14  [idag] 
+03:27:14  [idag] **To:** [ägaren]
+03:27:14  [idag] **Subject:** [Nyhet 2026-11-04] Att granska: En sv├ñvande glaskula k├ñnner st├╢ten fr├Ñn enskilda atomer
+03:27:14  [idag] 
+03:27:15  [idag] Imorgon, onsdagen den 4 november 2026, publiceras n├ñsta nyhetsartikel automatiskt vid midnatt (00.00).
+03:27:15  [idag] 
+03:27:15  [idag] **En sv├ñvande glaskula k├ñnner st├╢ten fr├Ñn enskilda atomer**
+03:27:15  [idag] Forskare vid Yale har f├Ñngat en glaskula, 100 nanometer i diameter, med en laser i vakuum och m├ñtt den lilla knuff kulan f├Ñr n├ñr en enda gaspartikel krockar med den. Antalet knuffar visar hur h├╢gt trycket i gasen ├ñr.
+03:27:15  [idag] 
+03:27:15  [idag] Kategori: Mekanik
+03:27:15  [idag] L├ñstid: 5 min
+03:27:15  [idag] 
+03:27:15  [idag] L├ñs
+03:27:15  [idag] Claude avslutade med kod 0
+03:27:15  [idag] VARNING: mejlet till ägaren verkar inte ha skickats.
+03:27:15  [idag] === Nyhetsjobb: slut ===

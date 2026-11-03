@@ -12,7 +12,7 @@ section: '4.6'
 ## Parallella och vertikala linjer
 
 Om två linjer har samma lutning kallas de **parallella**. Parallella
-linjer har alltså *samma* *k*-värde. Linjerna $y = 2x + 1$ och
+linjer har alltså <u>samma *k*-värde</u>. Linjerna $y = 2x + 1$ och
 $y = 2x - 3$ är till exempel parallella, eftersom båda har $k = 2$.
 
 ::: figur

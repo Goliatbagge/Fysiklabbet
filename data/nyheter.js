@@ -103,6 +103,66 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-04-kulan-som-kanner-varje-atom",
+    date: "2026-11-04",
+    title: "En svävande glaskula känner stöten från enskilda atomer",
+    deck: "Forskare vid Yale har fångat en glaskula, 100 nanometer i diameter, med en laser i vakuum och mätt den lilla knuff kulan får när en enda gaspartikel krockar med den. Antalet knuffar visar hur högt trycket i gasen är.",
+    category: "Mekanik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-11-04-kulan-som-kanner-varje-atom.jpg",
+    imageAlt: "En liten glödande kula svävar i en röd laserstråle som kommer upp genom en lins, inne i en mörk vakuumkammare av stål. Några blå kulor flyger mot den från olika håll. I bakgrunden syns fönster med bultade flänsar och kopparrör.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad)",
+    tags: ["mekanik", "rörelsemängd", "impuls", "tryck", "kinetisk gasteori", "vakuum", "optisk pincett", "brownsk rörelse", "neutrino", "nanopartikel"],
+    sources: [
+      { name: "Physics World: Levitated nanoparticle detects single-atom collisions (Tim Wogan, 23 oktober 2026)", url: "https://physicsworld.com/a/levitated-nanoparticle-detects-single-atom-collisions/" },
+      { name: "Physical Review Letters: studien (abstract)", url: "https://journals.aps.org/prl/abstract/10.1103/xtzh-6t1f" },
+      { name: "arXiv: studien i fulltext (version 2, 19 oktober 2026)", url: "https://arxiv.org/abs/2604.18371" }
+    ],
+    research: {
+      citation: "Y.-H. Tseng, C. A. Hardy, T. W. Penny, C. Lowe, J. Baeza-Rubio, D. Carney och D. C. Moore, ”Optomechanical Detection of Individual Gas Collisions”, Physical Review Letters 137, 173601 (2026), publicerad 19 oktober 2026. Kollegialt granskad. Förtryck: arXiv:2604.18371.",
+      url: "https://doi.org/10.1103/xtzh-6t1f"
+    },
+    simulering: {
+      href: "fysik1-tryck.html",
+      name: "Ideala gaslagen",
+      text: "Pumpa in fler molekyler, värm gasen eller tryck ihop behållaren, och se hur trycket växer när molekylerna studsar oftare och hårdare mot väggarna."
+    },
+    larare: {
+      moment: [
+        { label: "Rörelsemängd och impuls", href: "katalog.html?id=fy1-4.7" },
+        { label: "Tryck och tryckkraft", href: "katalog.html?id=fy1-5.2" },
+        { label: "Ideala gaslagen och kelvinskalan", href: "katalog.html?id=fy1-5.7" }
+      ],
+      fragor: [
+        "En xenonatom väger ungefär 131 atommassenheter och rör sig med 220 m/s. Hur stor impuls får en kula som atomen studsar rakt tillbaka från, och hur mycket ändras farten hos kulan om den väger en femtogram?",
+        "Lätta gaser som väte och helium rör sig snabbare än xenon vid samma temperatur. Varför är det ändå svårare att se stötarna från dem?",
+        "Tryck brukar beskrivas som kraft per area. Förklara hur man i stället kan bestämma trycket genom att räkna stötar, och vad man då behöver veta om gasen."
+      ]
+    },
+    body: [
+      { type: "p", html: "Tryck känns som något jämnt och stilla. Luften trycker på huden med omkring 100&nbsp;000&nbsp;pascal, men det vi känner är summan av ett enormt antal molekyler som var för sig krockar med ytan och studsar tillbaka. Varje enskild stöt är alldeles för liten för att märkas. Nu har forskare vid Yale University och Lawrence Berkeley National Laboratory i USA mätt stötarna från enskilda gasatomer och gasmolekyler mot ett föremål som är mycket större än de själva. Studien publicerades i <em>Physical Review Letters</em> i oktober." },
+      { type: "h2", text: "En kula som svävar i laserljus" },
+      { type: "p", html: "Föremålet är en kula av kiseldioxid, samma ämne som glas, med en radie på 50&nbsp;nanometer. Den väger omkring ett femtogram, alltså 10<sup>−18</sup>&nbsp;kg. Kulan hålls svävande av en fokuserad infraröd laserstråle i en vakuumkammare där trycket är omkring 3&nbsp;·&nbsp;10<sup>−8</sup>&nbsp;millibar, ungefär en trettiomiljarddel av lufttrycket." },
+      { type: "p", html: "Ljuset drar kulan mot strålens fokus, ungefär som en kula som rullar till botten av en skål. Längs strålens riktning svänger den fram och tillbaka 48&nbsp;000&nbsp;gånger per sekund. Forskarna dämpar svängningen genom att styra laserns effekt och läser av kulans läge mycket noggrant med hjälp av det ljus som kulan sprider tillbaka." },
+      { type: "h2", text: "Gaspartiklar som är tio miljoner gånger lättare" },
+      { type: "p", html: "Sedan släppte forskarna in små mängder av tre tunga gaser: krypton, xenon och svavelhexafluorid. När en atom eller molekyl ur gasen träffar kulan får kulan en liten impuls, alltså en ändring av rörelsemängden, och svängningen störs ett ögonblick. Gaspartiklarna är ungefär tio miljoner gånger lättare än kulan, så knuffen är mycket liten. De minsta stötar forskarna kunde urskilja var omkring $200\\ \\mathrm{keV}/c$, en enhet som partikelfysiker använder. Det motsvarar $\\Delta p \\approx 1{,}1 \\cdot 10^{-22}\\ \\mathrm{kg \\cdot m/s}$, och kulans fart ändras då med $\\Delta v = \\dfrac{\\Delta p}{m} \\approx 0{,}1\\ \\mathrm{mm/s}$." },
+      { type: "p", html: "Därför syns bara de kraftigaste stötarna. En xenonatom i rumstemperatur rör sig i genomsnitt med drygt 200&nbsp;m/s. Studsar den rakt tillbaka från kulan byter rörelsemängden riktning, och kulan får då dubbelt så mycket rörelsemängd som atomen hade, omkring $180\\ \\mathrm{keV}/c$. Stötarna som sticker upp över mätbruset, mellan 200 och $600\\ \\mathrm{keV}/c$, kommer alltså främst från atomer som rör sig snabbare än genomsnittet, antingen på väg in eller när de lämnar ytan. För att veta hur stor en uppmätt stöt var gav forskarna kulan, som bar en laddning på sex elementarladdningar, elektriska knuffar av känd storlek med elektroder runt fällan." },
+      { type: "h2", text: "Trycket räknat stöt för stöt" },
+      { type: "p", html: "För varje gas mätte forskarna vid sju olika tryck, knappt tre minuter per tryck. Ju högre tryck, desto fler atomer finns i kammaren och desto oftare träffas kulan. Ur antalet stötar och hur de fördelade sig på olika storlekar räknade forskarna ut gasens tryck med den kinetiska gasteorin, som beskriver en gas som en mängd partiklar i slumpmässig rörelse. Mellan 10<sup>−8</sup> och 10<sup>−7</sup>&nbsp;millibar stämde resultatet med en vanlig tryckmätare inom mätosäkerheten. Några stötar syntes också när ingen gas hade släppts in, och var de kommer ifrån är ännu inte utrett." },
+      { type: "p", html: "Fördelningen visade också något om kulans yta. En del atomer studsar som mot en spegel, medan andra fastnar ett ögonblick, får samma temperatur som ytan och sedan lämnar den i en slumpmässig riktning. Andelen av det andra slaget låg mellan ungefär hälften och fyra femtedelar, beroende på gas. Mätningen visade dessutom att kulans yta inte var varmare än omkring 350&nbsp;K. Det stämmer med att kulan har ungefär samma temperatur som kammarens väggar och inte värms nämnvärt av lasern." },
+      { type: "quote", html: "Det jag tycker är ganska unikt är att vi kan göra en mycket precis mätning, till och med med ett makroskopiskt föremål.", cite: "Yu-Han Tseng, Yale University, till Physics World (översatt)" },
+      { type: "h2", text: "Från tryckmätare till neutriner" },
+      { type: "p", html: "Kulan räknas som makroskopisk i sammanhanget eftersom den består av tiotals miljoner atomer. Forskarna ser flera användningar. Tekniken kan bli en ny sorts tryckmätare för extremt högt vakuum, där trycket bestäms genom att stötarna räknas i stället för att mätaren jämförs med en annan mätare. Den ger också kunskap till experiment som försöker försätta så stora föremål i kvantmekanisk superposition, eftersom krockar med gasatomer förstör sådana tillstånd. Gruppens huvudmål är ändå ett annat." },
+      { type: "quote", html: "Huvudmålet med vår forskning är att dopa nanokulorna med radioaktiva isotoper som sönderfaller, så att vi kan rekonstruera rörelsemängden hos de neutriner som sänds ut.", cite: "Clarke Hardy, Yale University, till Physics World (översatt)" },
+      { type: "p", html: "När en atomkärna i kulan sönderfaller och sänder ut en neutrino får kulan en rekyl, på samma sätt som en kanon rycker bakåt när den skjuter. Neutrinon själv är nästan omöjlig att fånga, men rekylen går att mäta. Samma teknik har föreslagits för att leta efter mörk materia, som skulle kunna ge kulan små knuffar. I sådana mätningar är krockar med vanliga gasatomer en störning, och den nya studien ger mätvärden som kan användas för att uppskatta hur stor den är." },
+      { type: "fact", title: "Visste du?", items: [
+        "Botanikern Robert Brown såg 1827 små partiklar från pollenkorn darra i vatten utan synbar orsak. Albert Einstein förklarade 1905 att det beror på ett enormt antal stötar från vattenmolekylerna. I det nya experimentet går stötarna att urskilja en och en.",
+        "Om kulan var lika stor som en fotboll skulle en xenonatom i samma skala vara ungefär lika stor som ett litet sandkorn.",
+        "Mätnoggrannheten är bara fyra till sex gånger sämre än standardkvantgränsen, den gräns som kvantmekaniken sätter för hur noggrant en impuls kan mätas med den här sortens avläsning."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-03-stjarnan-som-kanner-halet-snurra",
     date: "2026-11-03",
     title: "Vintergatans snabbaste kända stjärna kan avslöja hur fort det svarta hålet i centrum snurrar",

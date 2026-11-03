@@ -4297,6 +4297,18 @@ window.BEGREPP = [
     ]
   },
   {
+    id: 'kinetisk-gasteori',
+    term: 'Kinetisk gasteori',
+    former: ['kinetisk gasteori', 'kinetiska gasteorin', 'kinetiska teorin för gaser', 'gasteori', 'gasteorin'],
+    kort: 'Teorin som beskriver en gas som ett stort antal små partiklar i slumpmässig rörelse. Tryck och temperatur förklaras med partiklarnas stötar och rörelseenergi.',
+    relaterade: ['brownsk-rorelse', 'rorelsemangd', 'impuls'],
+    body: [
+      { type: 'p', html: 'Tänk dig en låda full av studsbollar som far omkring åt alla håll. Varje gång en boll studsar mot en vägg får väggen en liten knuff. En enda knuff märks knappt, men tusentals knuffar varje sekund blir till en jämn kraft. Så beskriver den kinetiska gasteorin en gas: som ett enormt antal atomer eller molekyler som rör sig fritt och krockar med varandra och med kärlets väggar.' },
+      { type: 'p', html: 'Ur den bilden går det att räkna ut gasens egenskaper. Trycket är den sammanlagda kraften från alla stötar mot väggen delad med väggens area. Det blir högre om partiklarna är fler, eftersom väggen då träffas oftare, och om de rör sig snabbare, eftersom varje stöt då blir kraftigare. Temperaturen är ett mått på partiklarnas genomsnittliga rörelseenergi. I luft vid rumstemperatur rör sig molekylerna i genomsnitt med omkring 500 m/s, snabbare än ljudet i luft.' },
+      { type: 'p', html: 'Teorin utvecklades under 1800-talet av bland andra James Clerk Maxwell och Ludwig Boltzmann, på en tid då många forskare tvivlade på att atomer fanns. Den förklarar den ideala gaslagen och varför en gas blir varmare när den trycks ihop. Den fungerar sämst när gasen är så tät eller kall att partiklarna drar i varandra eller nästan blir en vätska.' }
+    ]
+  },
+  {
     id: 'brownsk-rorelse',
     term: 'Brownsk rörelse',
     former: ['brownsk rörelse', 'brownska rörelsen', 'brownska rörelser', 'browns rörelse'],

@@ -15,6 +15,15 @@ Format per post:
 - **Hula-hoopens fysik: lår, smalben och fot håller ringen igång tillsammans (Berkeley)** **[BREVTEASER]** (nominerad 2026-11-02: oväntad vardagsmekanik som en 16-åring kan prova själv; originalet ÖPPET, Springer open access, publicerat 2026-09-28) — mekanik/biomekanik; sensorer på ringen, benet och foten, 120 mätningar per sekund; olinjär analys (funktionell nätverksanalys) i stället för principalkomponentanalys visar att ringens varv och vickning hänger ihop. Chern, Honein, O'Reilly, Nonlinear Dynamics 2026, DOI 10.1007/s11071-026-13058-7 (öppen, kontrollerat 2026-11-02). Mer rörelseanalys än fysik; valdes bort 2026-10-28. Källa (Phys.org): https://phys.org/news/2026-10-decoding-loopy-physics-hula-hooping.html
   (tillagd 2026-10-28)
 
+- **Fiskstim kan ha en enda ”influencer”** — kollektiv rörelse/statistisk fysik. Originalet ej kontrollerat. Källa (Physics Magazine 2026-10-29): https://physics.aps.org/articles/v19/145
+  (tillagd 2026-11-03)
+
+- **Världens minsta motorer behöver en ”entropirevisor”** — termodynamik, enatomsmotorer. Originalet ej kontrollerat. OBS termodynamik 2026-10-29. Källa (Physics World): https://physicsworld.com/a/worlds-smallest-engines-need-an-entropy-accountant/
+  (tillagd 2026-11-03)
+
+- **Arkimedes skruv krympt till en enda molekyl** — molekylär motor som kan snurra åt båda hållen och öka ledningsförmågan upp till 100 gånger. Originalet ej kontrollerat. Källa (ScienceDaily 2026-11-01): https://www.sciencedaily.com/releases/2026/10/261030002940.htm
+  (tillagd 2026-11-03)
+
 - **Fyra supraledande kablar kopplar ihop två stora kvantprocessorer till en** — kvantteknik. Originalet ej kontrollerat. Källa (Phys.org 2026-10-31): https://phys.org/news/2026-10-superconducting-cables-link-large-quantum.html
   (tillagd 2026-11-01)
 

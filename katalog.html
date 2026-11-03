@@ -1633,6 +1633,37 @@
                         continue;
                     }
                 }
+                // SVARET KOMMER ETT KLICK SENARE (påpekat 2026-11-03,
+                // fy2-2.5 "Definitionen av 1 meter"): en ruta som ställer
+                // en fråga och svarar med ett stycke "**Svar:** …" ska inte
+                // visa svaret i samma klick som frågan, eleverna ska hinna
+                // fundera själva. Allt före svaret är ett steg, svaret och
+                // det som följer det nästa. (Exempelrutorna har egen regel
+                // ovan.)
+                const arSvar = (c) => c.tagName === 'P' && c.firstElementChild &&
+                    c.firstChild === c.firstElementChild &&
+                    c.firstElementChild.tagName === 'STRONG' &&
+                    /^Svar\b/.test(c.firstElementChild.textContent.trim());
+                if (el.classList.contains('lab-block') &&
+                    Array.from(el.children).some((c, i) => i > 0 && arSvar(c))) {
+                    const subs = Array.from(el.children)
+                        .filter(c => !c.classList.contains('lab-block-title'));
+                    const svarIx = subs.findIndex(arSvar);
+                    if (svarIx > 0) {
+                        el.classList.add('pres-block');
+                        blocks.push(el);
+                        subs.forEach((c, i) => {
+                            c.classList.add('pres-sub');
+                            const prev = steps[steps.length - 1];
+                            if (i === 0 || i === svarIx) {
+                                steps.push({ el: c, block: el });
+                            } else {
+                                (prev.twins || (prev.twins = [])).push(c);
+                            }
+                        });
+                        continue;
+                    }
+                }
                 // EN NAMNGIVEN REGEL I TAGET (påpekat 2026-09-09): en
                 // formelruta som räknar upp FLERA regler under var sin
                 // fetstilsrubrik ("Addition — …", "Subtraktion — …",

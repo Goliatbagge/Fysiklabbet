@@ -14520,6 +14520,7 @@
       [['k-värde. Här är k=3.']]
     ], 0);
     y = 116;
+    var yRle = y;
     T.str('a) Samma lutning ⇒ samma k‐värde, så', padL, y - 1.6 * F, null, 0.54);
     T.str('y=3x+m', padL, y);
     T.stepEnd();
@@ -14527,7 +14528,9 @@
     tanke(y, [
       [['Men m ska vara ett annat,']],
       [['annars blir det samma linje.']],
-      [['Punkten (1, 2) bestämmer m.']]
+      [['Punkten (1, 2) ligger PÅ']],
+      [['linjen, så y=2 och x=1 passar']],
+      [['i ekvationen. Det ger m.']]
     ]);
     y += 4.4 * F;
     /* x och y i blått ovanför koordinaterna, så att det syns vilket tal
@@ -14542,7 +14545,24 @@
       var w = T.adv(t, 0.55), c = (kx[i][0] + kx[i][1]) / 2;
       T.str(t, c - w / 2, yh - 1.05 * F, BLUE, 0.55);
     });
-    T.str('2=3·1+m', padL, y);
+    T.pause(300);
+    /* insättningen värde för värde: pennan ringar in koordinaten i
+     * punktraden och bokstaven i y=3x+m, och skriver sedan värdet på
+     * bokstavens plats. Först y (med =3· efter), sedan x (med +m). */
+    var ringLiten = { ry: 0.44 * F, cy: yh - 0.26 * F };
+    function sattIn(i, b0, b1, t, x) {
+      var r1 = T.ring(kx[i][0] + 0.07 * F, kx[i][1] - 0.07 * F, yh, ringLiten);
+      T.pause(320);
+      var r2 = T.ring(b0, b1, yRle);
+      T.pause(420);
+      var xe2 = T.str(t, x, y);
+      T.pause(220);
+      T.fade(r1); T.fade(r2);
+      T.pause(200);
+      return xe2;
+    }
+    var xi = sattIn(1, padL, padL + T.adv('y'), '2=3·', padL);
+    sattIn(0, padL + T.adv('y=3'), padL + T.adv('y=3x'), '1+m', xi);
     T.stepEnd();
 
     y += 2.6 * F;
@@ -14564,12 +14584,26 @@
       T.stepEnd();
       y += 2.6 * F;
     }
+    var yM = y;
     T.str('−1=m', padL, y);
     T.stepEnd();
 
-    y += 2.4 * F;
+    tanke(y, [
+      [['Nu vet jag att m=−1. Det']],
+      [['sätter jag in på m:s plats i']],
+      [['y=3x+m.']]
+    ]);
+    /* m sätts in som x och y ovan: ring kring −1=m, sedan kring m i
+     * y=3x+m, och först därefter skrivs svaret */
+    y += 3.0 * F;
+    var rM1 = T.ring(padL, padL + T.adv('−1=m'), yM);
+    T.pause(320);
+    var rM2 = T.ring(padL + T.adv('y=3x+'), padL + T.adv('y=3x+m'), yRle);
+    T.pause(420);
     xe = T.str('Svar: y=3x-1', padL, y);
     T.underline(xe, y);
+    T.pause(220);
+    T.fade(rM1); T.fade(rM2);
     T.stepEnd();
 
     /* ---- b) allmän form ---- */

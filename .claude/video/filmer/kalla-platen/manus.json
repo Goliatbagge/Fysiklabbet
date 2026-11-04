@@ -1,0 +1,22 @@
+{
+ "film": "Plåten som känns kallare",
+ "figur": "Fylgia",
+ "rost": "zyfJspwEDo0sxPeFmtsn",
+ "teori": "fy1-6.1",
+ "segment": [
+  {"scen": 1, "tal": "Bakplåten och skärbrädan har legat framme hela natten.", "undertext": "Bakplåten och skärbrädan har legat framme hela natten."},
+  {"scen": 2, "tal": "Ändå känns plåten kallare. [curious] Är den kallare?", "undertext": "Ändå känns plåten kallare. Är den kallare?"},
+  {"scen": 3, "tal": "Vad tror du?", "undertext": "Vad tror du?"},
+  {"scen": 4, "tal": "En termometer visar cirka tjugo grader på båda.", "undertext": "En termometer visar cirka 20 °C på båda."},
+  {"scen": 5, "tal": "Båda har SAMMA temperatur som rummet.", "undertext": "Båda har samma temperatur som rummet."},
+  {"scen": 6, "tal": "Din hand är varmare än båda.", "undertext": "Din hand är varmare än båda."},
+  {"scen": 7, "tal": "Värme strömmar från handen in i plåten.", "undertext": "Värme strömmar från handen in i plåten."},
+  {"scen": 8, "tal": "Metall leder värme mycket bättre än trä.", "undertext": "Metall leder värme mycket bättre än trä."},
+  {"scen": 9, "tal": "Plåten leder bort värmen snabbt, [pause] träet långsamt.", "undertext": "Plåten leder bort värmen snabbt, träet långsamt."},
+  {"scen": 10, "tal": "[thoughtful] Det du känner är alltså inte plåtens temperatur.", "undertext": "Det du känner är alltså inte plåtens temperatur."},
+  {"scen": 11, "tal": "Du känner hur FORT handen förlorar värme.", "undertext": "Du känner hur fort handen förlorar värme."},
+  {"scen": 12, "tal": "En isbit på varje. [curious] Vilken smälter först?", "undertext": "En isbit på varje. Vilken smälter först?"},
+  {"scen": 13, "tal": "Den på plåten. [pause] Plåten leder värme till isen snabbare.", "undertext": "Den på plåten. Plåten leder värme till isen snabbare."},
+  {"scen": 14, "tal": "Kyla finns inte. [pause] Bara värme som lämnar dig.", "undertext": "Kyla finns inte. Bara värme som lämnar dig."}
+ ]
+}

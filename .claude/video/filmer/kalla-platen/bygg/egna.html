@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#f7f2e8}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas>
+<script>
+// De egna scenerna i filmen "Plåten som känns kallare". window.rita(scen, t)
+// ritar scenen vid tiden t (s). Fysiken är räknad, inte ritad på känn:
+//   scen 4–5: plåten, brädan och rummet visar alla 20 °C (samma temperatur);
+//   scen 7:   värme strömmar från den varmare handen in i plåten;
+//   scen 8–9: värmeledningsekvationen löses i ett förstorat tvärsnitt, 28 mm
+//             brett och 10 mm djupt, under handflatan (ytan hålls vid 30 °C där
+//             handen ligger, rummet och materialet börjar vid 20 °C).
+//             Temperaturledningstal: stål 4 mm²/s, trä 0,15 mm²/s. Tiden i
+//             tvärsnittet går 1,5 gånger fortare än filmen. Efter 5 s har värmen
+//             nått cirka √(4 · 5) ≈ 4,5 mm in i stålet men bara cirka
+//             √(0,15 · 5) ≈ 0,9 mm in i träet;
+//   scen 9:   prickarna står för värmeflödet in i materialet. Vid samma
+//             yttemperatur är flödet in i stål cirka 25 gånger större än in i
+//             trä (värmeinträngningstalen 7 700 och 310), så stålet får 25 gånger
+//             fler prickar per sekund;
+//   scen 13:  isbiten på plåten smälter först. Bara ordningen visas, ingen tid.
+// Inget ritas i bandet y 1370–1560 (undertexterna).
+const c = document.getElementById('c'), x = c.getContext('2d');
+const BLA = '#2b5ca8', INK = '#0f1620', ROD = '#c8324a', RUT = 'rgba(147,174,199,.55)', GRA = '#3f4a5c';
+const HUD = '#fbf3e6', VIT = '#ffffff', LJBLA = '#e3edf7', LJBLA2 = '#cfdeee', TRA = '#f6ebd5', TRA2 = '#eedfc2';
+const NB = ' ';
+let SLOT = {};
+window.satt = s => Object.assign(SLOT, s);
+
+// ---------- Verktyg ----------
+function slump(fro) { let a = fro >>> 0; return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const klamp = u => Math.min(1, Math.max(0, u));
+const tona = (t, t0, d) => klamp((t - t0) / (d || .5));
+const mjuk = u => u * u * (3 - 2 * u);
+const ut = u => 1 - (1 - u) ** 3;
+const lerp = (a, b, u) => a + (b - a) * u;
+
+function papper() {
+  const gr = x.createLinearGradient(0, 0, 0, 1920); gr.addColorStop(0, '#f7f2e8'); gr.addColorStop(1, '#ece3d2');
+  x.fillStyle = gr; x.fillRect(0, 0, 1080, 1920);
+  x.strokeStyle = RUT; x.lineWidth = 1.5;
+  for (let i = 0; i <= 1920; i += 27) { x.beginPath(); x.moveTo(0, i + .75); x.lineTo(1080, i + .75); x.stroke(); }
+  for (let i = 0; i <= 1080; i += 27) { x.beginPath(); x.moveTo(i + .75, 0); x.lineTo(i + .75, 1920); x.stroke(); }
+  // papperskorn
+  const r = slump(7); x.fillStyle = 'rgba(120,100,70,.05)';
+  for (let i = 0; i < 900; i++) x.fillRect(r() * 1080, r() * 1920, 2, 2);
+  x.lineCap = 'round'; x.lineJoin = 'round'; x.setLineDash([]);
+}
+// Kulspetslinje: huvudstreck + ett tunt, lätt förskjutet andra drag
+function blak(p, w, col, alfa) {
+  x.save(); x.globalAlpha *= (alfa === undefined ? 1 : alfa);
+  x.strokeStyle = col || BLA; x.lineWidth = w; x.stroke(p);
+  x.globalAlpha *= .32; x.lineWidth = w * .55; x.translate(1.1, .7); x.stroke(p);
+  x.restore();
+}
+function fyll(p, col, alfa) { x.save(); x.globalAlpha *= (alfa === undefined ? 1 : alfa); x.fillStyle = col; x.fill(p); x.restore(); }
+// Skraffering innanför en Path2D
+function skraff(p, vinkel, steg, col, w, alfa, bbox) {
+  const [x0, y0, x1, y1] = bbox || [0, 0, 1080, 1920];
+  x.save(); x.clip(p); x.strokeStyle = col; x.lineWidth = w; x.globalAlpha *= alfa;
+  const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2, R = Math.hypot(x1 - x0, y1 - y0) / 2 + 10;
+  const ux = Math.cos(vinkel), uy = Math.sin(vinkel), nx = -uy, ny = ux;
+  x.beginPath();
+  for (let s = -R; s <= R; s += steg) { x.moveTo(cx + nx * s - ux * R, cy + ny * s - uy * R); x.lineTo(cx + nx * s + ux * R, cy + ny * s + uy * R); }
+  x.stroke(); x.restore();
+}
+function poly(pts, sluten = true) { const p = new Path2D(); pts.forEach(([a, b], i) => i ? p.lineTo(a, b) : p.moveTo(a, b)); if (sluten) p.closePath(); return p; }
+function rundPoly(pts, r) {
+  const p = new Path2D(), n = pts.length;
+  const mid = (a, b) => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+  const s = mid(pts[n - 1], pts[0]); p.moveTo(s[0], s[1]);
+  for (let i = 0; i < n; i++) { const a = pts[i], b = pts[(i + 1) % n]; p.arcTo(a[0], a[1], b[0], b[1], r); }
+  p.closePath(); return p;
+}
+function text(s, px, py, size, col, align, vikt, stil) {
+  x.font = `${stil || ''} ${vikt || 600} ${size}px Poppins`; x.fillStyle = col || INK; x.textAlign = align || 'center'; x.textBaseline = 'alphabetic';
+  x.fillText(s, px, py);
+}
+function rubrik(s, alfa) { x.save(); x.globalAlpha = alfa === undefined ? 1 : alfa; text(s, 540, 300, 66, INK, 'center', 700); x.restore(); }
+// Liten skylt med ett värde
+function skylt(s, cx, cy, alfa, col) {
+  if (alfa <= 0) return;
+  x.save(); x.globalAlpha = alfa;
+  x.font = '700 46px Poppins'; const w = x.measureText(s).width + 44, h = 70;
+  const p = new Path2D(); p.roundRect(cx - w / 2, cy - h / 2, w, h, 16);
+  fyll(p, VIT); blak(p, 3.5, col || BLA);
+  text(s, cx, cy + 16, 46, INK, 'center', 700);
+  x.restore();
+}
+// Ring som ritas fram runt något (blåpennan)
+function ring(cx, cy, rx, ry, u, col) {
+  if (u <= 0) return;
+  const p = new Path2D(); const a0 = -2.2;
+  for (let i = 0; i <= 60; i++) {
+    const a = a0 + i / 60 * (2 * Math.PI + .35) * u, k = 1 + .04 * Math.sin(a * 3);
+    const px = cx + rx * k * Math.cos(a), py = cy + ry * k * Math.sin(a);
+    i ? p.lineTo(px, py) : p.moveTo(px, py);
+  }
+  blak(p, 5, col || BLA);
+}
+// Liten pil (värmeflöde): böjd, med huvud
+function flodesPil(pts, u, col, w) {
+  if (u <= 0) return;
+  const n = Math.max(2, Math.round(pts.length * u)); const del = pts.slice(0, n);
+  blak(poly(del, false), w || 7, col || ROD);
+  const [ax, ay] = del[del.length - 2], [bx, by] = del[del.length - 1];
+  const L = Math.hypot(bx - ax, by - ay) || 1, ux = (bx - ax) / L, uy = (by - ay) / L, h = 26, b = 15;
+  fyll(poly([[bx + ux * 8, by + uy * 8], [bx - ux * h - uy * b, by - uy * h + ux * b], [bx - ux * h + uy * b, by - uy * h - ux * b]]), col || ROD);
+}
+function vagPil(x0, y0, x1, y1, amp, u, col, w) {
+  const pts = []; for (let i = 0; i <= 40; i++) { const s = i / 40; pts.push([lerp(x0, x1, s) + amp * Math.sin(s * Math.PI * 2.5), lerp(y0, y1, s)]); }
+  flodesPil(pts, u, col, w);
+}
+
+// ---------- Handen (Fylgias arm från sidan, liggande platt) ----------
+// Handloven i (x0, Y0), handflatan vilar på linjen y = Y0. Skala s.
+function hand(x0, Y0, s, opt) {
+  opt = opt || {}; const l = opt.lyft || 1;
+  x.save(); x.translate(x0, Y0); x.scale(s, s);
+  const lw = v => v / s;
+  const kropp = new Path2D();
+  kropp.moveTo(-360, -230 * l); kropp.quadraticCurveTo(-160, -60 * l, -22, -7); kropp.quadraticCurveTo(-6, 0, 20, 0);
+  kropp.lineTo(398, 0); kropp.bezierCurveTo(428, 0, 442, -12, 433, -25);
+  kropp.quadraticCurveTo(382, -42, 302, -55); kropp.quadraticCurveTo(266, -73, 228, -79);
+  kropp.quadraticCurveTo(128, -100, 42, -101); kropp.quadraticCurveTo(-130, -100 - 90 * l, -330, -101 - 249 * l);
+  kropp.closePath();
+  fyll(kropp, HUD);
+  // skugga längs undersidan
+  x.save(); x.clip(kropp);
+  const sk = new Path2D(); sk.moveTo(-360, -150 * l); sk.quadraticCurveTo(-150, -20 * l, 30, -18); sk.lineTo(420, -10); sk.lineTo(420, 10); sk.lineTo(-360, 10); sk.closePath();
+  skraff(sk, -.7, 9, BLA, lw(1.6), .45, [-400, -400, 460, 20]);
+  x.restore();
+  blak(kropp, lw(4.2), BLA);
+  // tummen
+  const tum = new Path2D();
+  tum.moveTo(66, -62); tum.quadraticCurveTo(150, -60, 226, -42); tum.bezierCurveTo(252, -36, 254, -14, 233, -10);
+  tum.quadraticCurveTo(160, -12, 88, -28); tum.quadraticCurveTo(70, -40, 66, -62); tum.closePath();
+  fyll(tum, HUD); blak(tum, lw(3.6), BLA);
+  const nagel = new Path2D(); nagel.moveTo(222, -34); nagel.quadraticCurveTo(240, -32, 241, -18); blak(nagel, lw(2.6), BLA);
+  // fingrarna, nageln och knogarna
+  const fl = new Path2D();
+  fl.moveTo(298, -36); fl.quadraticCurveTo(360, -30, 418, -22);
+  fl.moveTo(312, -20); fl.quadraticCurveTo(370, -14, 404, -10);
+  fl.moveTo(414, -30); fl.quadraticCurveTo(430, -28, 431, -17);
+  fl.moveTo(242, -70); fl.quadraticCurveTo(250, -62, 262, -66);
+  fl.moveTo(272, -63); fl.quadraticCurveTo(280, -56, 292, -59);
+  blak(fl, lw(2.6), BLA);
+  // ärmen: uppkavlad labbrock
+  const W = [-8, -52], E = [-330, -52 - 238 * l], L = Math.hypot(E[0] - W[0], E[1] - W[1]);
+  const u = [(E[0] - W[0]) / L, (E[1] - W[1]) / L], n = [-u[1], u[0]];
+  const pt = (d, b) => [W[0] + u[0] * d + n[0] * b, W[1] + u[1] * d + n[1] * b];
+  const arm = poly([pt(205, -70), pt(205, 66), pt(560, 110), pt(560, -110)]);
+  fyll(arm, VIT); blak(arm, lw(4), BLA);
+  const rull = rundPoly([pt(188, -76), pt(188, 72), pt(250, 82), pt(250, -86)], 14);
+  fyll(rull, VIT); blak(rull, lw(4), BLA);
+  const veck = new Path2D();
+  [[206, -60, 214, 40], [226, -70, 232, 58], [300, -90, 330, 20], [360, -60, 410, 70]].forEach(([a, b, cc, d]) => { const p1 = pt(a, b), p2 = pt(cc, d); veck.moveTo(p1[0], p1[1]); veck.quadraticCurveTo((p1[0] + p2[0]) / 2 + 6, (p1[1] + p2[1]) / 2, p2[0], p2[1]); });
+  blak(veck, lw(2.2), BLA, .7);
+  x.restore();
+  return [x0 + 20 * s, x0 + 400 * s];
+}
+
+// ---------- Köksbänken i snett ovanifrån ----------
+const BAS = 1300;
+const P3 = (X, Z, H) => [X + Z * .25, BAS - Z * .9 - H];
+function lada(X0, X1, Z0, Z1, H, topp, front, sida) {
+  const f = poly([P3(X0, Z0, 0), P3(X1, Z0, 0), P3(X1, Z0, H), P3(X0, Z0, H)]);
+  const s = poly([P3(X1, Z0, 0), P3(X1, Z1, 0), P3(X1, Z1, H), P3(X1, Z0, H)]);
+  const t = poly([P3(X0, Z0, H), P3(X1, Z0, H), P3(X1, Z1, H), P3(X0, Z1, H)]);
+  fyll(s, sida); fyll(f, front); fyll(t, topp);
+  return { f, s, t };
+}
+function skugga(X0, X1, Z0, Z1) {
+  const p = poly([P3(X1, Z0, 0), P3(X1 + 40, Z0 + 30, 0), P3(X1 + 40, Z1 + 10, 0), P3(X0 + 30, Z1 + 10, 0), P3(X0, Z1, 0)]);
+  skraff(p, .9, 10, BLA, 1.8, .35, [0, 300, 1080, 1320]);
+}
+function bank() {
+  // bänkens bakkant och framkant
+  const bak = new Path2D(); bak.moveTo(-200, BAS - 960); bak.lineTo(1300, BAS - 960); blak(bak, 3, BLA, .55);
+  const fram = new Path2D(); fram.moveTo(-200, BAS + 6); fram.lineTo(1300, BAS + 6); blak(fram, 5, BLA);
+  const fr = new Path2D(); fr.rect(-200, BAS + 6, 1500, 48); fyll(fr, LJBLA, .6);
+  skraff(fr, -.8, 12, BLA, 1.5, .35, [-200, BAS, 1300, BAS + 60]);
+  const fk = new Path2D(); fk.moveTo(-200, BAS + 54); fk.lineTo(1300, BAS + 54); blak(fk, 3, BLA, .8);
+}
+const PL = { X0: 90, X1: 710, Z0: 560, Z1: 960, H: 16 };
+const BR = { X0: 120, X1: 700, Z0: 60, Z1: 440, H: 42 };
+function platen() {
+  const { X0, X1, Z0, Z1, H } = PL;
+  skugga(X0, X1, Z0, Z1);
+  const l = lada(X0, X1, Z0, Z1, H, LJBLA, LJBLA2, '#bcd0e6');
+  // inre kant och botten
+  const i0 = 30, inre = poly([P3(X0 + i0, Z0 + i0, H), P3(X1 - i0, Z0 + i0, H), P3(X1 - i0, Z1 - i0, H), P3(X0 + i0, Z1 - i0, H)]);
+  const botten = poly([P3(X0 + i0 + 6, Z0 + i0 + 6, 5), P3(X1 - i0 - 6, Z0 + i0 + 6, 5), P3(X1 - i0 - 6, Z1 - i0 - 6, 5), P3(X0 + i0 + 6, Z1 - i0 - 6, 5)]);
+  fyll(botten, '#eaf1f8');
+  blak(inre, 2.6, BLA); blak(botten, 2, BLA, .6);
+  // metallglans
+  const r = slump(3), gl = new Path2D();
+  for (let k = 0; k < 7; k++) {
+    const a = P3(X0 + 80 + k * 80 + r() * 20, Z0 + 70, 5), b = P3(X0 + 150 + k * 80 + r() * 20, Z0 + 300 + r() * 40, 5);
+    gl.moveTo(a[0], a[1]); gl.lineTo(b[0], b[1]);
+  }
+  x.save(); x.strokeStyle = VIT; x.lineWidth = 7; x.globalAlpha = .85; x.stroke(gl); x.restore();
+  const gl2 = new Path2D(); for (let k = 0; k < 4; k++) { const a = P3(X0 + 120 + k * 140, Z0 + 90, 5), b = P3(X0 + 165 + k * 140, Z0 + 260, 5); gl2.moveTo(a[0], a[1]); gl2.lineTo(b[0], b[1]); }
+  blak(gl2, 1.8, BLA, .45);
+  blak(l.t, 4, BLA); blak(l.f, 3.5, BLA); blak(l.s, 3.5, BLA);
+}
+function bradan() {
+  const { X0, X1, Z0, Z1, H } = BR;
+  skugga(X0, X1, Z0, Z1);
+  const l = lada(X0, X1, Z0, Z1, H, TRA, TRA2, '#e6d3b0');
+  // ådring på ovansidan
+  x.save(); x.clip(l.t);
+  const r = slump(11), ad = new Path2D();
+  for (let k = 0; k < 16; k++) {
+    const Z = Z0 + 12 + k * (Z1 - Z0 - 24) / 15 + r() * 8, f = r() * 6;
+    for (let i = 0; i <= 40; i++) { const X = X0 - 10 + i * (X1 - X0 + 20) / 40; const [a, b] = P3(X, Z + 7 * Math.sin(i * .35 + f) + 4 * Math.sin(i * .9 + k), H); i ? ad.lineTo(a, b) : ad.moveTo(a, b); }
+  }
+  x.strokeStyle = BLA; x.lineWidth = 1.6; x.globalAlpha = .45; x.stroke(ad); x.restore();
+  // kvist
+  const [kx, ky] = P3(300, 300, H); const kv = new Path2D(); kv.ellipse(kx, ky, 26, 12, 0, 0, 7); kv.moveTo(kx + 14, ky); kv.ellipse(kx, ky, 14, 6, 0, 0, 7); blak(kv, 2, BLA, .6);
+  // ändträ på framsidan
+  x.save(); x.clip(l.f); const ae = new Path2D();
+  for (let i = 0; i < 30; i++) { const [a, b] = P3(X0 + 10 + i * 20, Z0, H * .5); ae.moveTo(a - 6, b - 14); ae.quadraticCurveTo(a, b, a - 4, b + 14); }
+  x.strokeStyle = BLA; x.lineWidth = 1.4; x.globalAlpha = .4; x.stroke(ae); x.restore();
+  // hål för att hänga upp brädan
+  const [hx, hy] = P3(640, 250, H); const hal = new Path2D(); hal.ellipse(hx, hy, 24, 20, 0, 0, 7);
+  fyll(hal, '#efe6d6'); const hk = new Path2D(); hk.ellipse(hx + 2, hy + 4, 24, 16, 0, Math.PI * 1.05, Math.PI * 1.95, true); blak(hal, 3, BLA); blak(hk, 2, BLA, .6);
+  blak(l.t, 4, BLA); blak(l.f, 3.5, BLA); blak(l.s, 3.5, BLA);
+}
+function koket(namnAlfa) {
+  bank(); platen(); bradan();
+  if (namnAlfa > 0) {
+    x.save(); x.globalAlpha = namnAlfa;
+    const [ax, ay] = P3(PL.X0, PL.Z1, PL.H); text('bakplåten', ax - 60, ay - 34, 44, GRA, 'left', 600);
+    const [bx, by] = P3(BR.X0, BR.Z1, BR.H); text('skärbrädan', bx - 50, by - 30, 44, GRA, 'left', 600);
+    x.restore();
+  }
+}
+// Köket ritas i skala 0,8 kring bänkens framkant, så att väggen får plats ovanför
+const KSK = .8;
+function kokStart() { x.save(); x.translate(540, BAS); x.scale(KSK, KSK); x.translate(-540, -BAS); }
+const KS = ([a, b]) => [540 + (a - 540) * KSK, BAS + (b - BAS) * KSK];
+function vagg(niva, alfa) {
+  x.save(); x.globalAlpha = alfa;
+  const f = new Path2D(); f.rect(90, 350, 280, 180); fyll(f, VIT, .7); blak(f, 4.5, BLA);
+  const sp = new Path2D(); sp.moveTo(230, 350); sp.lineTo(230, 530); sp.moveTo(90, 440); sp.lineTo(370, 440); blak(sp, 3, BLA);
+  const sol = new Path2D(); sol.arc(310, 395, 22, 0, 7); blak(sol, 2.5, BLA, .6);
+  const mo = new Path2D(); mo.moveTo(110, 520); mo.quadraticCurveTo(160, 470, 215, 520); mo.moveTo(250, 520); mo.quadraticCurveTo(300, 480, 350, 520); blak(mo, 2, BLA, .5);
+  const fb = new Path2D(); fb.rect(78, 530, 304, 14); fyll(fb, VIT); blak(fb, 3.5, BLA);
+  x.restore();
+  x.save(); x.translate(860, 330); x.scale(.62, .62); x.translate(-860, -330);
+  vaggtermometer(860, 330, niva, alfa);
+  x.restore();
+}
+const TAG_PL = () => { const [a, b] = P3(560, 900, PL.H); return [a + 20, b - 44]; };
+const TAG_BR = () => { const [a, b] = P3(560, 400, BR.H); return [a + 40, b - 40]; };
+
+// ---------- Termometrar ----------
+function termometer(tx, ty, ang, visning) {
+  x.save(); x.translate(tx, ty); x.rotate(ang);
+  // givaren
+  const giv = new Path2D(); giv.moveTo(0, 0); giv.lineTo(-6, -24); giv.lineTo(-6, -230); giv.lineTo(6, -230); giv.lineTo(6, -24); giv.closePath();
+  fyll(giv, LJBLA); blak(giv, 3, BLA);
+  const gs = new Path2D(); gs.moveTo(2, -40); gs.lineTo(2, -220); x.save(); x.strokeStyle = VIT; x.lineWidth = 3; x.stroke(gs); x.restore();
+  // kroppen
+  const kropp = new Path2D(); kropp.roundRect(-78, -510, 156, 290, 38);
+  const hals = rundPoly([[-34, -232], [34, -232], [44, -226 - 30], [-44, -226 - 30]], 8);
+  fyll(hals, VIT); blak(hals, 3.5, BLA);
+  fyll(kropp, VIT);
+  x.save(); x.clip(kropp); const sk = new Path2D(); sk.rect(40, -520, 60, 320); skraff(sk, -1.0, 8, BLA, 1.6, .45, [30, -520, 100, -200]); x.restore();
+  blak(kropp, 4.5, BLA);
+  const disp = new Path2D(); disp.roundRect(-58, -486, 116, 86, 12); fyll(disp, LJBLA); blak(disp, 3, BLA);
+  text(visning, 30, -428, 44, INK, 'right', 700);
+  text('°C', 50, -452, 22, INK, 'center', 600);
+  const knapp = new Path2D(); knapp.arc(0, -330, 26, 0, 7); fyll(knapp, ROD); blak(knapp, 3, INK);
+  const g = new Path2D(); [-280, -268, -256].forEach(yy => { g.moveTo(-40, yy); g.lineTo(40, yy); }); blak(g, 2.4, BLA, .7);
+  x.restore();
+}
+function vaggtermometer(cx, top, niva, alfa) {
+  if (alfa <= 0) return;
+  x.save(); x.globalAlpha = alfa;
+  const H = 330, platta = new Path2D(); platta.roundRect(cx - 62, top, 124, H, 26);
+  fyll(platta, TRA); const r = slump(5);
+  x.save(); x.clip(platta); const ad = new Path2D();
+  for (let k = 0; k < 6; k++) { const xx = cx - 50 + k * 20 + r() * 6; ad.moveTo(xx, top); ad.bezierCurveTo(xx + 8, top + 100, xx - 8, top + 220, xx + 4, top + H); }
+  x.strokeStyle = BLA; x.lineWidth = 1.5; x.globalAlpha *= .4; x.stroke(ad); x.restore();
+  blak(platta, 4, BLA);
+  const spik = new Path2D(); spik.arc(cx, top + 18, 6, 0, 7); fyll(spik, VIT); blak(spik, 2.5, BLA);
+  // röret och kulan
+  const y0 = top + 270, y40 = top + 52, ny = v => y0 - (y0 - y40) * v / 40;
+  const ror = new Path2D(); ror.roundRect(cx - 12, top + 40, 24, 250, 12); fyll(ror, VIT); blak(ror, 3, BLA);
+  const kula = new Path2D(); kula.arc(cx, top + 292, 20, 0, 7); fyll(kula, ROD); blak(kula, 3, INK);
+  const vat = new Path2D(); vat.rect(cx - 5, ny(niva), 10, top + 292 - ny(niva)); fyll(vat, ROD);
+  // skala
+  const sk = new Path2D();
+  for (let v = 0; v <= 40; v += 5) { const yy = ny(v), L = v % 10 === 0 ? 18 : 10; sk.moveTo(cx + 16, yy); sk.lineTo(cx + 16 + L, yy); }
+  blak(sk, 2.2, INK);
+  for (let v = 0; v <= 40; v += 10) text(String(v), cx - 24, ny(v) + 9, 26, INK, 'right', 600);
+  text('°C', cx + 30, top + 40, 24, INK, 'center', 600);
+  x.restore();
+  return [cx, ny(20)];
+}
+
+// ---------- Värmeledning i tvärsnitt (scen 8–9) ----------
+const NX = 188, NY = 66, DX = .15;                 // mm per cell
+const BOX = { x0: 70, x1: 1010, h: 300 };          // 5 px per cell
+const HAND_X0 = 150, HAND_S = .85;
+const KONT = [Math.round((HAND_X0 + 20 * HAND_S - BOX.x0) / 5), Math.round((HAND_X0 + 400 * HAND_S - BOX.x0) / 5)];
+const DTSNAP = .1, TMAX = 12;
+function simulera(alfa) {
+  let T = new Float32Array(NX * NY).fill(20), N = new Float32Array(NX * NY);
+  const dt = .2 * DX * DX / alfa, k = alfa * dt / (DX * DX), snaps = [T.slice()];
+  let t = 0, nasta = DTSNAP;
+  const fast = i => i >= KONT[0] && i <= KONT[1];
+  for (let i = KONT[0]; i <= KONT[1]; i++) T[i] = 30;
+  while (t < TMAX) {
+    for (let j = 0; j < NY; j++) for (let i = 0; i < NX; i++) {
+      const id = j * NX + i, v = T[id];
+      if (j === 0 && fast(i)) { N[id] = 30; continue; }
+      const l = i > 0 ? T[id - 1] : T[id + 1], r = i < NX - 1 ? T[id + 1] : T[id - 1];
+      const u = j > 0 ? T[id - NX] : T[id + NX], d = j < NY - 1 ? T[id + NX] : T[id - NX];
+      N[id] = v + k * (l + r + u + d - 4 * v);
+    }
+    [T, N] = [N, T]; t += dt;
+    if (t >= nasta - 1e-9) { snaps.push(T.slice()); nasta += DTSNAP; }
+  }
+  return snaps;
+}
+const SIM = { stal: simulera(4), tra: simulera(.15) };
+const off = document.createElement('canvas'); off.width = NX; off.height = NY; const ox = off.getContext('2d');
+function djup(snaps, tf, grans) {      // hur djupt (mm) temperaturen stigit minst 'grans' grader under mitten av handen
+  const T = snaps[Math.min(snaps.length - 1, Math.round(tf / DTSNAP))], i = Math.round((KONT[0] + KONT[1]) / 2);
+  let j = 0; while (j < NY && T[j * NX + i] - 20 > grans) j++; return j * DX;
+}
+function varmeKarta(snaps, tf, top) {
+  const T = snaps[Math.min(snaps.length - 1, Math.max(0, Math.round(tf / DTSNAP)))];
+  const im = ox.createImageData(NX, NY);
+  for (let n = 0; n < NX * NY; n++) {
+    const a = Math.pow(klamp((T[n] - 20) / 10), .75);
+    im.data[n * 4] = 200; im.data[n * 4 + 1] = 50; im.data[n * 4 + 2] = 74; im.data[n * 4 + 3] = a * 215;
+  }
+  ox.putImageData(im, 0, 0);
+  x.save(); x.imageSmoothingEnabled = true; x.imageSmoothingQuality = 'high';
+  x.drawImage(off, BOX.x0, top, BOX.x1 - BOX.x0, BOX.h); x.restore();
+}
+function material(top, stal) {
+  const p = new Path2D(); p.rect(BOX.x0, top, BOX.x1 - BOX.x0, BOX.h);
+  if (stal) {
+    fyll(p, LJBLA); skraff(p, -.785, 22, BLA, 2, .5, [BOX.x0, top, BOX.x1, top + BOX.h]);
+  } else {
+    fyll(p, TRA);
+    x.save(); x.clip(p); const r = slump(21), ad = new Path2D();
+    for (let k = 0; k < 13; k++) { const yy = top + 14 + k * 22 + r() * 6, f = r() * 6; for (let i = 0; i <= 60; i++) { const xx = BOX.x0 - 10 + i * 16; const v = yy + 5 * Math.sin(i * .3 + f) + 3 * Math.sin(i * .8 + k); i ? ad.lineTo(xx, v) : ad.moveTo(xx, v); } }
+    x.strokeStyle = BLA; x.lineWidth = 1.8; x.globalAlpha = .45; x.stroke(ad); x.restore();
+  }
+  return p;
+}
+function panel(top, stal, tf, prickar, t, namnAlfa, ordAlfa) {
+  const p = material(top, stal);
+  varmeKarta(stal ? SIM.stal : SIM.tra, tf, top);
+  if (prickar) varmePrickar(top, stal, t);
+  // förstoringens kant: ett avrivet tvärsnitt med vågig underkant
+  blak(p, 4.5, BLA);
+  // handen på ytan
+  hand(HAND_X0, top, HAND_S, { lyft: .45 });
+  x.save(); x.globalAlpha = namnAlfa;
+  text(stal ? 'metall' : 'trä', BOX.x1, top - 88, 46, GRA, 'right', 600);
+  x.restore();
+  if (ordAlfa > 0) { x.save(); x.globalAlpha = ordAlfa; text(stal ? 'snabbt' : 'långsamt', BOX.x1, top - 26, 58, ROD, 'right', 700); x.restore(); }
+}
+// Prickar som står för värmen som strömmar in i materialet (tillståndslösa: ritas ur t)
+function varmePrickar(top, stal, t) {
+  const takt = stal ? 25 : 1, liv = 2.4, dj = stal ? 250 : 40, sprid = stal ? 150 : 30;
+  const xa = BOX.x0 + KONT[0] * 5, xb = BOX.x0 + KONT[1] * 5;
+  const forst = Math.max(0, Math.floor((t - liv) * takt)), sist = Math.floor(t * takt);
+  for (let i = forst; i <= sist; i++) {
+    const t0 = i / takt, a = t - t0; if (a < 0 || a > liv) continue;
+    const r = slump(i * 97 + (stal ? 1 : 2)), x0 = lerp(xa + 10, xb - 10, r()), dirx = r() * 2 - 1, fas = r() * 6;
+    const s = Math.sqrt(a / liv), px = x0 + dirx * sprid * s + 6 * Math.sin(a * 5 + fas), py = top + 8 + dj * s * (.6 + .4 * r());
+    if (px < BOX.x0 + 6 || px > BOX.x1 - 6) continue;
+    x.save(); x.globalAlpha = Math.min(1, a * 4) * (1 - mjuk(klamp((a - liv * .7) / (liv * .3))));
+    const d = new Path2D(); d.arc(px, py, 8, 0, 7); fyll(d, ROD); blak(d, 2, INK, .8); x.restore();
+  }
+}
+
+// ---------- Isbitar (scen 13) ----------
+function isbit(X, Z, H, f, sm) {     // f = kvar av isen (1 = hel), sm = hur rundad
+  const s = 150, w = s * (.55 + .45 * Math.sqrt(f)), h = s * .62 * f, d = s * (.55 + .45 * Math.sqrt(f));
+  // pölen
+  const R = 40 + 150 * (1 - f) * (sm ? 1 : .55), [px, py] = P3(X, Z, H);
+  if (1 - f > .02) {
+    const pol = new Path2D(); pol.ellipse(px + 4, py - 4, R * 1.15, R * .62, -.08, 0, 7);
+    fyll(pol, '#d9e8f6', .9); blak(pol, 3, BLA, .8);
+    const gl = new Path2D(); gl.ellipse(px - R * .35, py - R * .2, R * .4, R * .14, -.1, Math.PI * 1.1, Math.PI * 1.7); x.save(); x.strokeStyle = VIT; x.lineWidth = 5; x.stroke(gl); x.restore();
+  }
+  if (f <= .01) return;
+  const r = Math.min(22, 6 + 30 * (1 - f));
+  const X0 = X - w / 2, X1 = X + w / 2, Z0 = Z - d / 2, Z1 = Z + d / 2;
+  const fr = rundPoly([P3(X0, Z0, H), P3(X1, Z0, H), P3(X1, Z0, H + h), P3(X0, Z0, H + h)], r);
+  const si = rundPoly([P3(X1, Z0, H), P3(X1, Z1, H), P3(X1, Z1, H + h), P3(X1, Z0, H + h)], r * .6);
+  const to = rundPoly([P3(X0, Z0, H + h), P3(X1, Z0, H + h), P3(X1, Z1, H + h), P3(X0, Z1, H + h)], r * .8);
+  fyll(si, '#c9dcef'); fyll(fr, '#dceaf7'); fyll(to, '#f1f7fd');
+  blak(si, 3.5, BLA); blak(fr, 3.5, BLA); blak(to, 3.5, BLA);
+  // glans och en luftblåsa
+  const [a, b] = P3(X0 + w * .18, Z0, H + h * .75), [cc, dd] = P3(X0 + w * .18, Z0, H + h * .3);
+  x.save(); x.strokeStyle = VIT; x.lineWidth = 7; x.beginPath(); x.moveTo(a, b); x.lineTo(cc, dd); x.stroke(); x.restore();
+  const [ba, bb] = P3(X0 + w * .65, Z0, H + h * .55); const bl = new Path2D(); bl.arc(ba, bb, 6 * Math.sqrt(f), 0, 7); blak(bl, 2, BLA, .6);
+  // droppe som rinner
+  if (f < .97) { const [da, db] = P3(X1, Z0, H + h * .35); const dr = new Path2D(); dr.moveTo(da, db - 10); dr.quadraticCurveTo(da + 10, db + 4, da, db + 10); dr.quadraticCurveTo(da - 10, db + 4, da, db - 10); fyll(dr, '#d9e8f6'); blak(dr, 2.4, BLA); }
+}
+function stoppur(cx, cy, t, alfa) {
+  x.save(); x.globalAlpha = alfa;
+  const k = new Path2D(); k.arc(cx, cy, 62, 0, 7); fyll(k, VIT); blak(k, 5, BLA);
+  const kr = new Path2D(); kr.roundRect(cx - 14, cy - 92, 28, 24, 6); fyll(kr, VIT); blak(kr, 4, BLA);
+  const tk = new Path2D(); for (let i = 0; i < 12; i++) { const a = i / 12 * 2 * Math.PI, L = i % 3 ? 8 : 14; tk.moveTo(cx + Math.sin(a) * 50, cy - Math.cos(a) * 50); tk.lineTo(cx + Math.sin(a) * (50 - L), cy - Math.cos(a) * (50 - L)); }
+  blak(tk, 3, INK);
+  const a = t * 7; const v = new Path2D(); v.moveTo(cx, cy); v.lineTo(cx + Math.sin(a) * 42, cy - Math.cos(a) * 42); blak(v, 5, ROD);
+  const m = new Path2D(); m.arc(cx, cy, 6, 0, 7); fyll(m, INK);
+  // fartstreck: tiden går fort
+  const f = new Path2D(); [[-100, -20], [-108, 6], [-98, 30]].forEach(([dx, dy]) => { f.moveTo(cx + dx, cy + dy); f.lineTo(cx + dx + 26, cy + dy); }); blak(f, 3.5, BLA, .7);
+  x.restore();
+}
+
+// ---------- Scenerna ----------
+window.rita = (n, t) => {
+  papper();
+  const d = SLOT[n] || 4;
+  if (n === 4) {
+    rubrik('Vi mäter temperaturen', tona(t, 0, .3));
+    vagg(20, 1);
+    kokStart();
+    koket(1);
+    const TPL = P3(500, 760, PL.H), TBR = P3(470, 250, BR.H), START = [1220, 380], SLUTP = [1240, 260];
+    // banan för givarspetsen
+    let p, tryck = 0;
+    if (t < .8) { const u = mjuk(tona(t, 0, .8)); p = [lerp(START[0], TPL[0], u), lerp(START[1], TPL[1] - 40, u)]; }
+    else if (t < 1.6) { tryck = mjuk(tona(t, .8, .2)) * (1 - mjuk(tona(t, 1.45, .15))); p = [TPL[0], TPL[1] - 40 + 40 * tryck]; }
+    else if (t < 2.3) { const u = mjuk(tona(t, 1.6, .7)); p = [lerp(TPL[0], TBR[0], u), lerp(TPL[1] - 40, TBR[1] - 40, u) - 60 * Math.sin(Math.PI * u)]; }
+    else if (t < 3.2) { tryck = mjuk(tona(t, 2.3, .2)) * (1 - mjuk(tona(t, 3.05, .15))); p = [TBR[0], TBR[1] - 40 + 40 * tryck]; }
+    else { const u = mjuk(tona(t, 3.2, .7)); p = [lerp(TBR[0], SLUTP[0], u), lerp(TBR[1] - 40, SLUTP[1], u)]; }
+    const las = (t0) => { const u = tona(t, t0, .45); return u <= 0 ? '- -' : (19.2 + .8 * ut(u)).toFixed(1).replace('.', ','); };
+    const vis = t < 1.6 ? (t < 1.0 ? '- -' : las(1.0)) : (t < 2.5 ? las(1.0) : las(2.5));
+    skylt(`20${NB}°C`, ...TAG_PL(), mjuk(tona(t, 1.5, .3)));
+    skylt(`20${NB}°C`, ...TAG_BR(), mjuk(tona(t, 3.0, .3)));
+    termometer(p[0], p[1], .38, vis);
+    x.restore();
+  }
+  if (n === 5) {
+    rubrik('Samma som rummet');
+    vagg(20, 1);
+    skylt(`20${NB}°C`, 660, 440, mjuk(tona(t, .2, .3)));
+    kokStart();
+    koket(1);
+    skylt(`20${NB}°C`, ...TAG_PL(), 1); skylt(`20${NB}°C`, ...TAG_BR(), 1);
+    x.restore();
+    const [w1, w2] = KS(TAG_PL()), [b1, b2] = KS(TAG_BR());
+    ring(w1, w2, 112, 52, mjuk(tona(t, .6, .35)), ROD);
+    ring(b1, b2, 112, 52, mjuk(tona(t, 1.1, .35)), ROD);
+    ring(660, 440, 125, 56, mjuk(tona(t, 1.6, .35)), ROD);
+  }
+  if (n === 7) {
+    rubrik('Från varmt till kallt');
+    const Y0 = 1060, PT = 32, HX = 240, HS = 1.25;
+    // bänken och plåten i genomskärning
+    const bk = new Path2D(); bk.rect(0, Y0 + PT, 1080, 90); fyll(bk, TRA);
+    skraff(bk, -.75, 16, BLA, 1.6, .35, [0, Y0 + PT, 1080, Y0 + PT + 90]);
+    const bl = new Path2D(); bl.moveTo(0, Y0 + PT); bl.lineTo(1080, Y0 + PT); bl.moveTo(0, Y0 + PT + 90); bl.lineTo(1080, Y0 + PT + 90); blak(bl, 4, BLA);
+    const pl = new Path2D(); pl.moveTo(40, Y0 - 40); pl.lineTo(72, Y0); pl.lineTo(1008, Y0); pl.lineTo(1040, Y0 - 40); pl.lineTo(1054, Y0 - 36); pl.lineTo(1020, Y0 + PT); pl.lineTo(60, Y0 + PT); pl.lineTo(26, Y0 - 36); pl.closePath();
+    fyll(pl, LJBLA);
+    skraff(pl, -.785, 14, BLA, 1.6, .5, [20, Y0 - 45, 1060, Y0 + PT]);
+    // värmen sprider sig i plåten från handen
+    const ka = HX + 20 * HS, kb = HX + 400 * HS, sp = mjuk(tona(t, .6, d - .8));
+    x.save(); x.clip(pl);
+    const gr = x.createLinearGradient(0, 0, 1080, 0), m = (ka + kb) / 2, half = (kb - ka) / 2 + 240 * sp;
+    gr.addColorStop(klamp((m - half - 90) / 1080), 'rgba(200,50,74,0)');
+    gr.addColorStop(klamp((m - half) / 1080), `rgba(200,50,74,${.6 * sp})`);
+    gr.addColorStop(klamp((m + half) / 1080), `rgba(200,50,74,${.6 * sp})`);
+    gr.addColorStop(klamp((m + half + 90) / 1080), 'rgba(200,50,74,0)');
+    x.fillStyle = gr; x.fillRect(0, Y0 - 45, 1080, 90); x.restore();
+    blak(pl, 4.5, BLA);
+    // prickar som strömmar ned i plåten och vidare åt sidorna
+    for (let i = 0; i < 80; i++) {
+      const r = slump(i * 31 + 5), t0 = .5 + r() * (d - 1.2), a = t - t0; if (a < 0 || a > 1.6) continue;
+      const x0 = lerp(ka + 20, kb - 20, r()), dir = r() < .5 ? -1 : 1, s = a / 1.6;
+      const px = x0 + dir * 320 * Math.max(0, s - .25), py = Y0 - 4 + 20 * Math.min(1, s * 4);
+      if (px < 70 || px > 1010) continue;
+      x.save(); x.globalAlpha = Math.min(1, a * 5) * (1 - mjuk(klamp((s - .7) / .3)));
+      const dd = new Path2D(); dd.arc(px, py, 8, 0, 7); fyll(dd, ROD); blak(dd, 2, INK, .8); x.restore();
+    }
+    hand(HX, Y0, HS);
+    // värmeflödespilar ned genom handflatan
+    [ka + 80, ka + 210, ka + 340].forEach((px, k) => vagPil(px, Y0 - 330, px, Y0 + 16, 12, mjuk(tona(t, .3 + k * .15, .6)), ROD, 9));
+    x.save(); x.globalAlpha = mjuk(tona(t, .8, .4));
+    text('värme', 900, Y0 - 300, 62, ROD, 'center', 700);
+    const lp = new Path2D(); lp.moveTo(830, Y0 - 290); lp.quadraticCurveTo(780, Y0 - 300, ka + 360, Y0 - 250); blak(lp, 3.5, ROD);
+    text('varm hand', 250, Y0 - 250, 46, GRA, 'center', 600);
+    text(`plåten, 20${NB}°C`, 540, Y0 + PT + 160, 46, GRA, 'center', 600);
+    x.restore();
+  }
+  if (n === 8 || n === 9) {
+    const ar8 = n === 8;
+    rubrik(ar8 ? 'Metall leder bättre' : 'Snabbt och långsamt');
+    const tf = ar8 ? 1.5 * Math.max(0, t - .3) : 1.5 * 3.47 + t;
+    const T1 = 520, T2 = 1010;
+    const na = ar8 ? mjuk(tona(t, .1, .4)) : 1;
+    panel(T1, true, tf, !ar8, t, na, ar8 ? 0 : mjuk(tona(t, .6, .35)));
+    panel(T2, false, tf, !ar8, t, ar8 ? mjuk(tona(t, .4, .4)) : 1, ar8 ? 0 : mjuk(tona(t, 2.75, .35)));
+    // förstoringsglaset i hörnet visar att det är ett förstorat tvärsnitt
+    const lup = (cy) => { const l = new Path2D(); l.arc(1030, cy, 26, 0, 7); l.moveTo(1048, cy + 18); l.lineTo(1066, cy + 36); blak(l, 4, BLA, .7); };
+    if (ar8) { x.save(); x.globalAlpha = na; lup(T1 + BOX.h + 40); lup(T2 + BOX.h + 40); x.restore(); }
+  }
+  if (n === 13) {
+    rubrik('Snabbare på plåten');
+    vagg(20, 1);
+    stoppur(640, 445, t, mjuk(tona(t, 0, .3)));
+    kokStart();
+    koket(1);
+    const u = klamp((t - .3) / (d - .9));
+    const fPL = 1 - mjuk(klamp(u / .92)), fBR = 1 - .22 * u;
+    // värme som strömmar upp i isen från plåten (många) och brädan (få)
+    const strom = (X, Z, H, takt, seed) => {
+      for (let i = 0; i < takt * 6; i++) {
+        const r = slump(i * 13 + seed), t0 = r() * 6, a = ((t - t0) % 1.1 + 1.1) % 1.1; if (t < t0) continue;
+        const [px, py] = P3(X + (r() - .5) * 120, Z - 40 + (r() - .5) * 60, H);
+        x.save(); x.globalAlpha = .9 * Math.sin(Math.PI * a / 1.1);
+        const dd = new Path2D(); dd.arc(px + 8 * Math.sin(a * 6 + i), py - 60 * a, 6, 0, 7); fyll(dd, ROD); blak(dd, 1.8, INK, .7); x.restore();
+      }
+    };
+    if (fPL > .02) strom(400, 760, PL.H, 5, 1);
+    strom(410, 250, BR.H, .5, 2);
+    isbit(400, 760, PL.H, fPL, true);
+    isbit(410, 250, BR.H, fBR, false);
+    x.restore();
+  }
+};
+window.info = () => ({
+  stal_mm_efter_12s: +djup(SIM.stal, 12, .5).toFixed(2), tra_mm_efter_12s: +djup(SIM.tra, 12, .5).toFixed(2),
+  kontakt_celler: KONT,
+});
+</script></body></html>

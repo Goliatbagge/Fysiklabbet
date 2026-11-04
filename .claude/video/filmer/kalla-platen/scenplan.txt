@@ -1,0 +1,56 @@
+Scen 1 · 4 s · AI-SCEN
+"Bakplåten och skärbrädan har legat framme hela natten."
+
+Scen 2 · 4 s · AI-SCEN
+"Ändå känns plåten kallare. Är den kallare?"
+
+Scen 3 · 4 s · AI-SCEN
+"Vad tror du?"
+
+Scen 4 · 4 s · EGEN INSPELNING
+"En termometer visar cirka 20 °C på båda."
+
+Egen animation: bakplåten och skärbrädan i genomskärning på bänken. En kontakttermometer (givare som trycks mot ytan, inte infraröd) sätts först mot plåten och sedan mot brädan; displayen visar 20 °C båda gångerna.
+
+Scen 5 · 4 s · EGEN INSPELNING
+"Båda har samma temperatur som rummet."
+
+Egen animation: samma bild, med en rumstermometer på väggen som också visar 20 °C. De tre värdena markeras med en tunn blå ring i tur och ordning.
+
+Scen 6 · 4 s · AI-SCEN
+"Din hand är varmare än båda."
+
+Scen 7 · 4 s · EGEN INSPELNING
+"Värme strömmar från handen in i plåten."
+
+Egen animation: en hand ligger på plåten i genomskärning. Blå värmeflödespilar går från handen ned i plåten. Etikett "värme" vid pilarna. Inga kraftpilar.
+
+Scen 8 · 4 s · EGEN INSPELNING
+"Metall leder värme mycket bättre än trä."
+
+Egen animation (räknad värmeledning): en plåt av stål och en bräda av trä i genomskärning, med en varm hand överst. Temperaturen i materialet visas som en färgton som sprider sig nedåt, räknad ur värmeledningsekvationen med stålets och träets temperaturledningstal (stål cirka 4 · 10⁻⁶ m²/s, trä cirka 1,5 · 10⁻⁷ m²/s). I stålet sprids värmen synligt snabbt, i träet knappt alls.
+
+Scen 9 · 4 s · EGEN INSPELNING
+"Plåten leder bort värmen snabbt, träet långsamt."
+
+Egen animation: samma bild, med värmeflödespilarna ut ur handen. Pilarna in i plåten är många och tjocka, pilarna in i brädan få och tunna. Etiketterna "snabbt" och "långsamt".
+
+Scen 10 · 4 s · AI-SCEN
+"Det du känner är alltså inte plåtens temperatur."
+
+Scen 11 · 4 s · AI-SCEN
+"Du känner hur fort handen förlorar värme."
+
+Scen 12 · 4 s · AI-SCEN
+"En isbit på varje. Vilken smälter först?"
+
+Scen 13 · 4 s · EGEN INSPELNING
+"Den på plåten. Plåten leder värme till isen snabbare."
+
+Egen animation (tidsförlopp): isbitarna på plåten och brädan. Isbiten på plåten smälter till en vattenpöl först, medan isbiten på brädan bara krymper lite. Blå värmeflödespilar från plåten in i isen, få från brädan. Bara ordningen visas, ingen tid i minuter.
+
+Scen 14 · 4 s · AI-SCEN
+"Kyla finns inte. Bara värme som lämnar dig."
+
+Scen 15 · 4 s · AI-SCEN
+"(inget tal, slutskylten läggs på i redigeringen)"

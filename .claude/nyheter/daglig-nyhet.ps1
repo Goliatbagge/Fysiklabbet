@@ -484,7 +484,7 @@ Use the Gmail tools to check for replies from the owner ($Agare) to the news rev
 5. If ANDRA: do NOT reply. Write the file $fil (UTF-8) with exactly these lines: line 1 the date, line 2 the Gmail thread id, then the owner's full new text. Then print: SVAR: <date> ANDRA
 6. If there is no unprocessed reply, print: SVAR: NONE
 
-Do not change any other files and do not commit anything. Your output must contain exactly one line starting with "SVAR:".
+Do not change any other files and do not commit anything. This runs unattended and nobody reads your questions: never ask anything and never handle threads older than 4 days. Your output must contain exactly one line starting with "SVAR:".
 "@
 }
 

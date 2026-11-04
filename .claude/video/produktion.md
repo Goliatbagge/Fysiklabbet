@@ -31,9 +31,10 @@ sa att filmen ska ut.
     └── <film>-liten.mp4          högst 10 MB (Facebook och Instagram)
 ```
 
-**Mallen är `filmer/faradays-bur/`**, den första filmen med de nya figurerna
-och den renaste uppsättningen. Kopiera hela `bygg/`-mappen till den nya
-filmen och skriv om det som är filmspecifikt (scener, textlager, egna
+**Mallen är `filmer/kalla-platen/`** (sedan 2026-11-04): den har
+`tt_lage` för undertexter som måste flyttas upp och de egna animationerna
+på den nivå användaren vill ha (kulspetsverktygen i `bygg/egna.html`).
+Kopiera hela `bygg/`-mappen till den nya filmen och skriv om det som är filmspecifikt (scener, textlager, egna
 animationer). `tung-och-latt-boll/bygg/rost_film.py` är röstskriptet och
 används som det är.
 
@@ -138,6 +139,41 @@ klipp, `ffmpeg -vf "fps=1,scale=270:-1,tile=…"`):
 - Granska varje lager och varje egen scen i skärmdump: inget textlager över
   figuren, inga etiketter på linjer, ingen vit halo.
 
+### Inget viktigt får skymmas (kontroll före montering)
+
+Undertexten ligger i ett band i nedre tredjedelen (y cirka 1370–1560 av
+1920), krokrubriken överst i scen 1 och slutskylten nedtill i sista scenen.
+AI-klippen placerar ofta det viktigaste föremålet just där: i
+`kalla-platen` täckte undertexten "Ändå känns plåten kallare" både plåten
+och skärbrädan i scen 2, och samma sak hände isbitarna i scen 12 (påpekat
+2026-11-04). Därför, i varje film:
+
+1. **Förebygg i scenplanen.** Skriv i varje AI-prompt var nyckelobjekten
+   står, i bildens övre två tredjedelar (regeln står i masterpromptens
+   STEG 6). De egna animationerna ritar aldrig något viktigt i bandet.
+2. **Kör kontrollen** när klippen och lagren finns:
+
+   ```bash
+   python -I .claude/video/verktyg/skymt.py .claude/video/filmer/<film>
+   ```
+
+   Den tar fram bilden UNDER varje textlager (i början, mitten och slutet
+   av den tid lagret syns), mäter hur mycket teckning rutan täcker och
+   skriver `arbete/skymt/rapport.txt` och `arbete/skymt/oversikt.jpg`.
+3. **Titta på `oversikt.jpg`** (verktyget vet inte vad som är viktigt, så
+   det flaggar nästan alla AI-klipp). Fråga för varje flaggad ruta: täcker
+   den det repliken talar om eller det eleven ska titta på? Figurens rock,
+   ben, golvet och köksbakgrunden får täckas; föremålen i försöket, ansiktet
+   när figuren reagerar och allt som pekas på får det inte.
+4. **Åtgärda varje träff** innan filmen monteras, i den här ordningen:
+   - `"tt_lage": "uppe"` på scenens segment i `manus.json` lägger
+     undertexten överst (y 200), kör `rendera.js` igen;
+   - eller flytta klippet med `slutklipp.py` (lyft eller sänk);
+   - eller gör om klippet i Flow med föremålen högre upp.
+   Kör kontrollen igen och titta på översikten en gång till.
+5. Skicka inte filmen till användaren förrän översikten är genomgången, och
+   nämn vilka scener som fick flyttad undertext.
+
 ## Steg 8: Montering
 
 ```bash
@@ -157,7 +193,7 @@ python -I filmer/<film>/bygg/montera.py filmer/<film>/arbete filmer/<film>/klipp
   ```
 
   Blir den ändå över 10 MB: höj `-crf` ett steg i taget.
-- Skicka filmen till användaren med SendUserFile och vänta på klartecken
+- Kör `verktyg/skymt.py` en sista gång på de färdiga lagren (se ovan). Skicka sedan filmen till användaren med SendUserFile och vänta på klartecken
   innan något publiceras.
 
 ## Steg 9: Texter till inläggen
@@ -200,7 +236,7 @@ I YouTube Studio (Skapa → "Ladda upp videor"):
    `ytcp-uploads-dialog #textbox`.
 3. Målgrupp: "Nej, den är inte gjord för barn"
    (`tp-yt-paper-radio-button[name="VIDEO_MADE_FOR_KIDS_NOT_MFK"]`).
-4. **Spellista:** kursens lista (de hittills gjorda ligger i "Fysik nivå 1").
+4. **Spellista:** "Labbfolket" (alla Labbfolket-filmer samlas där, inte i kurslistorna; beslut 2026-11-01).
    Väljaren sorterar ikryssade rader överst, så kontrollera antalet i
    spellisteöversikten efteråt.
 5. "Visa mer" → Videospråk → **Svenska** (måste väljas varje gång; scrolla

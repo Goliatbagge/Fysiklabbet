@@ -14,6 +14,9 @@ const exe = ['C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Progra
 
 const manus = JSON.parse(fs.readFileSync(MANUS, 'utf8')).segment;
 // Hårt mellanslag mellan tal och enhet, och i tusentalsgrupper
+// "tt_lage": "uppe" på ett segment lägger scenens undertext överst i bilden,
+// när den annars skulle skymma ett nyckelobjekt (se verktyg/skymt.py)
+const ttUppe = Object.fromEntries(manus.map(m => [m.scen, m.tt_lage === 'uppe']));
 const undertext = Object.fromEntries(manus.map(m => [m.scen, m.undertext.replace(/(\d) (\d{3}|km\/s|km\b|%|°C)/g, '$1\u00a0$2')]));
 
 // Dela en replik i bitar som ryms på högst två rader
@@ -74,7 +77,7 @@ const egna = Object.fromEntries([4, 5, 7, 8, 9, 13].map(n => [n, slot(n)]));
   };
   await skjut('papper', '<div class="papper"></div>', true);
   for (const [n, h] of Object.entries(lager)) await skjut(n, h);
-  for (const u of undertexter) await skjut(u.id, `<div class="tt"><span>${u.text}</span></div>`);
+  for (const u of undertexter) await skjut(u.id, `<div class="tt${ttUppe[u.scen] ? ' uppe' : ''}"><span>${u.text}</span></div>`);
 
   await p.goto(pathToFileURL(path.join(BYGG, 'egna.html')).href, { waitUntil: 'networkidle' });
   await p.evaluate(s => window.satt(s), egna);

@@ -408,6 +408,18 @@ warping, no morphing, no flickering, no extra limbs, no duplicate
 characters, no unintended characters, no on-screen text, no numbers, no
 letters, no subtitles and no watermark.
 
+**Nyckelobjekten hålls fria från undertexten.** Undertexten ligger i ett
+band i den nedre tredjedelen av bilden (ungefär 70–81 % av höjden,
+räknat från överkanten), och krokrubriken ligger överst i scen 1. Det
+eller de föremål som scenens replik talar om, eller som eleven ska titta
+på (plåten, brädan, isbiten, glaset), ska därför placeras i bildens övre
+två tredjedelar: skriv i prompten var de står, till exempel "the baking
+tray and the cutting board lie on a counter at chest height, in the upper
+middle of the frame, with empty paper below the counter". Ligger
+föremålen på en bänk framför figuren: välj en halvbild eller ett lägre
+bildutsnitt så att bänken hamnar över mitten. Figurens ben, rock och
+golvet får ligga under undertexten.
+
 Variera bildutsnitten genom filmen: helbild, halvbild, närbild, profil,
 lätt grodperspektiv. En tydlig rörelse per klipp: vända huvudet, blinka,
 höja ögonbrynen, peka, hålla upp ett föremål, ställa ned ett föremål, klia
@@ -442,7 +454,9 @@ När användaren skriver "nästa", skriv:
    scenerna. Undertexterna bränns in, eftersom de flesta tittar utan ljud.
    Undertexten följer sajtens stavning och typografi, inte uttalet: tal
    med siffror ("2 000 år", "10 m/s") och "ned" där manuset säger "ner".
-   Innehållet är alltid detsamma som i det talade manuset.
+   Innehållet är alltid detsamma som i det talade manuset. Undertexten får
+   aldrig skymma ett nyckelobjekt: hamnar föremålet repliken talar om
+   under undertexten, flyttas undertexten upp i den scenen.
 3. **Slutskylt**: "Testa själv på fysiklabbet.se" och namnet på
    simuleringen eller teoriavsnittet filmen bygger på, med adressen
    (`fysiklabbet.se/katalog.html?id=<id>` eller simuleringens filnamn).

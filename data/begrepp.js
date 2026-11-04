@@ -2550,7 +2550,7 @@ window.BEGREPP = [
   {
     id: 'myon',
     term: 'Myon',
-    former: ['myon', 'myonen', 'myoner', 'myonerna', 'kosmisk myon', 'kosmiska myoner', 'myonspår', 'antimyon', 'antimyonen', 'antimyoner', 'antimyonerna', 'myonstråle', 'myonstrålar', 'myonstrålen'],
+    former: ['myon', 'myonen', 'myoner', 'myonerna', 'kosmisk myon', 'kosmiska myoner', 'myonspår', 'antimyon', 'antimyonen', 'antimyoner', 'antimyonerna', 'myonstråle', 'myonstrålar', 'myonstrålen', 'myonpar', 'myonparet', 'myonparen'],
     kort: 'En tyngre släkting till elektronen, ungefär 207 gånger så tung. Den lever bara ett par miljondels sekunder, men regnar ständigt ner över oss från kosmisk strålning — omkring en per sekund genom en utsträckt handflata.',
     relaterade: ['neutrino', 'standardmodellen', 'invers-betasonderfall', 'lepton'],
     body: [
@@ -3271,7 +3271,7 @@ window.BEGREPP = [
   {
     id: 'kvark',
     term: 'Kvark',
-    former: ['kvark', 'kvarken', 'kvarkar', 'kvarkarna', 'uppkvark', 'uppkvarken', 'uppkvarkar', 'uppkvarkarna', 'nedkvark', 'nedkvarken', 'nedkvarkar', 'nedkvarkarna', 'särkvark', 'särkvarken', 'särkvarkar', 'särkvarkarna', 'charmkvark', 'charmkvarken', 'charmkvarkar', 'toppkvark', 'toppkvarken', 'toppkvarkar', 'bottenkvark', 'bottenkvarken', 'antikvark', 'antikvarken', 'antikvarkar', 'antikvarkarna', 'kvarksort', 'kvarksorten', 'kvarksorter', 'kvarksorterna', 'pentakvark', 'pentakvarken', 'pentakvarkar', 'pentakvarkarna'],
+    former: ['kvark', 'kvarken', 'kvarkar', 'kvarkarna', 'uppkvark', 'uppkvarken', 'uppkvarkar', 'uppkvarkarna', 'nedkvark', 'nedkvarken', 'nedkvarkar', 'nedkvarkarna', 'särkvark', 'särkvarken', 'särkvarkar', 'särkvarkarna', 'charmkvark', 'charmkvarken', 'charmkvarkar', 'toppkvark', 'toppkvarken', 'toppkvarkar', 'bottenkvark', 'bottenkvarken', 'antikvark', 'antikvarken', 'antikvarkar', 'antikvarkarna', 'bottenkvarkar', 'bottenantikvark', 'bottenantikvarken', 'kvarksort', 'kvarksorten', 'kvarksorter', 'kvarksorterna', 'pentakvark', 'pentakvarken', 'pentakvarkar', 'pentakvarkarna'],
     kort: 'Byggstenen som protoner, neutroner och deras släktingar består av. Kvarkar finns i sex sorter och går aldrig att plocka ut en och en, utan sitter alltid ihop i grupper.',
     relaterade: ['standardmodellen', 'gluon', 'stark-vaxelverkan', 'baryon'],
     body: [
@@ -4584,6 +4584,42 @@ window.BEGREPP = [
       { type: 'p', html: 'Hur nära en stjärna kan komma utan att slitas isär beror på hur tät den är. En stor, gles jättestjärna klarar sig sämre än en liten, tät stjärna som solen. Samma kraft kan också slita isär ett par av stjärnor som kretsar runt varandra, medan var och en av stjärnorna överlever.' }
     ]
   },
+  {
+    id: 'meson',
+    term: 'Meson',
+    former: ['meson', 'mesonen', 'mesoner', 'mesonerna', 'b-meson', 'b-mesonen', 'b-mesoner', 'b-mesonerna'],
+    kort: 'En partikel som består av en kvark och en antikvark. Mesoner bildas i partikelkrockar och i kosmisk strålning och faller sönder efter en mycket kort stund.',
+    relaterade: ['kvark', 'pion', 'stark-vaxelverkan', 'antimateria'],
+    body: [
+      { type: 'p', html: 'Protoner och neutroner är byggda av tre kvarkar. En meson är enklare: den består av bara två, en kvark och en antikvark, som hålls ihop av den starka kraften. Det finns många sorter, eftersom kvarkarna finns i sex varianter och kan paras ihop på många sätt. Den lättaste är pionen, som består av upp- och nedkvarkar. En B-meson innehåller en bottenkvark, eller en bottenantikvark, tillsammans med en lättare kvark, och väger drygt fem gånger så mycket som en proton.' },
+      { type: 'p', html: 'Ingen meson är stabil. Kvarken och antikvarken kan förinta varandra, eller så byter en av kvarkarna sort genom den svaga växelverkan, och då blir mesonen andra, lättare partiklar. De flesta mesoner lever bara några hundramiljondels sekund eller mycket kortare. En B-meson lever i genomsnitt omkring en och en halv biljondels sekund.' },
+      { type: 'p', html: 'Mesoner bildas hela tiden när kosmisk strålning träffar atmosfären, och i stora mängder i partikelacceleratorer. Fysiker studerar hur de sönderfaller för att pröva standardmodellen. Ett sällsynt sönderfall kan påverkas av tunga partiklar som ingen ännu har sett, och om det sker oftare eller mer sällan än teorin säger kan det vara ett tecken på ny fysik.' }
+    ]
+  },
+  {
+    id: 'statistisk-signifikans',
+    term: 'Statistisk signifikans',
+    former: ['statistisk signifikans', 'statistiska signifikansen', 'signifikans', 'signifikansen', 'tre sigma', 'fem sigma'],
+    kort: 'Ett mått på hur osannolikt det är att ett mätresultat bara beror på slumpen. Inom partikelfysiken anges den i standardavvikelser, och fem standardavvikelser krävs för att kalla något en upptäckt.',
+    relaterade: ['standardmodellen', 'higgsbosonen'],
+    body: [
+      { type: 'p', html: 'Kastar du en tärning sex gånger och får tre sexor kan det vara en fuskad tärning, men det kan också vara ren tur. Fysiker har samma problem. När de letar efter en ny partikel eller ett sällsynt sönderfall ser de ofta en liten topp i mätdata, och frågan är om toppen är verklig eller om bakgrunden råkade fluktuera uppåt just där.' },
+      { type: 'p', html: 'Signifikansen svarar på den frågan. Man räknar ut hur ofta slumpen ensam skulle ge en topp minst lika stor som den man ser, om det man letar efter inte fanns. Svaret anges i standardavvikelser, ofta skrivet med den grekiska bokstaven sigma. Tre sigma betyder att slumpen skulle ge en sådan topp ungefär en gång på 740. Fem sigma betyder ungefär en gång på 3,5&nbsp;miljoner.' },
+      { type: 'p', html: 'Inom partikelfysiken räcker tre sigma för att tala om belägg, och fem sigma krävs för att tala om en upptäckt. Gränsen är hög av goda skäl: många experiment letar på många ställen samtidigt, och då dyker slumptoppar upp ganska ofta. Flera resultat på tre sigma har försvunnit när mer data samlats in. Higgsbosonen tillkännagavs 2012 först när två experiment oberoende av varandra hade nått fem sigma.' }
+    ]
+  },
+  {
+    id: 'leptokvark',
+    term: 'Leptokvark',
+    former: ['leptokvark', 'leptokvarken', 'leptokvarkar', 'leptokvarkarna'],
+    kort: 'En tänkt partikel som skulle kunna förvandla en kvark till en lepton, till exempel en elektron eller en myon, och tvärtom. Ingen har ännu hittat någon.',
+    relaterade: ['kvark', 'lepton', 'standardmodellen'],
+    body: [
+      { type: 'p', html: 'Materiens byggstenar delas in i två familjer. Kvarkarna bygger upp protoner och neutroner, och leptonerna är bland annat elektronen, myonen och neutrinerna. I standardmodellen, den teori som beskriver alla kända partiklar, finns ingen partikel som kan förvandla en kvark direkt till en lepton. De två familjerna lever sina egna liv.' },
+      { type: 'p', html: 'En leptokvark skulle vara en sådan bro. Den förekommer i flera teorier som försöker gå längre än standardmodellen, bland annat i försök att förklara varför kvarkar och leptoner kommer i lika många generationer. Om leptokvarkar finns är de antagligen mycket tunga, kanske så tunga att de inte kan skapas i de partikelacceleratorer som finns i dag.' },
+      { type: 'p', html: 'Därför letar fysiker efter dem indirekt. En tung partikel som inte kan bildas kan ändå påverka sällsynta sönderfall genom att för ett ögonblick delta i processen. Sker ett sönderfall oftare eller mer sällan än standardmodellen förutsäger kan det vara ett tecken på leptokvarkar eller något annat nytt. Hittills stämmer mätningarna med standardmodellen, och det sätter gränser för hur leptokvarkar skulle kunna se ut.' }
+    ]
+  }
 ];
 
 

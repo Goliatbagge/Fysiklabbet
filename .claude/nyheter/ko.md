@@ -15,6 +15,15 @@ Format per post:
 - **Hula-hoopens fysik: lår, smalben och fot håller ringen igång tillsammans (Berkeley)** **[BREVTEASER]** (nominerad 2026-11-02: oväntad vardagsmekanik som en 16-åring kan prova själv; originalet ÖPPET, Springer open access, publicerat 2026-09-28) — mekanik/biomekanik; sensorer på ringen, benet och foten, 120 mätningar per sekund; olinjär analys (funktionell nätverksanalys) i stället för principalkomponentanalys visar att ringens varv och vickning hänger ihop. Chern, Honein, O'Reilly, Nonlinear Dynamics 2026, DOI 10.1007/s11071-026-13058-7 (öppen, kontrollerat 2026-11-02). Mer rörelseanalys än fysik; valdes bort 2026-10-28. Källa (Phys.org): https://phys.org/news/2026-10-decoding-loopy-physics-hula-hooping.html
   (tillagd 2026-10-28)
 
+- **Suprafast tillstånd i en kondensat av ljus och materia, i rumstemperatur (Warszawa, IBM Zürich, CNRS)** — kvantfysik/fasta tillståndets fysik; exciton-polaritoner i en mikrokavitet med flytande kristall och organisk halvledare (MeLPPP), ljusa band med spontant symmetribrott och en spinnhelix i polarisationen. Muszyński m.fl., Science Advances 2026, DOI 10.1126/sciadv.aee4875 (öppenhet ej kontrollerad, Science Advances brukar gå via Europe PMC). Källa (Phys.org 2026-11-03): https://phys.org/news/2026-11-hybrids-supersolid-quantum-state-room.html
+  (tillagd 2026-11-04)
+
+- **En kall brun dvärg utklädd till tidig galax** — astronomi/JWST; en liten förskjutning avslöjade förväxlingen. MNRAS 2026, DOI 10.1093/mnras/stag2055 (öppen, ej läst). OBS astronomi 2026-11-03. Källa (Phys.org 2026-11-03): https://phys.org/news/2026-11-tiny-shift-exposes-cold-brown.html
+  (tillagd 2026-11-04)
+
+- **Vibrationer som avslöjar vad som döljer sig under andra planeters yta (Virginia Tech)** — vågor/seismik; prover i sand. IEEE Sensors Journal, DOI 10.1109/jsen.2026.3733381 (öppenhet ej kontrollerad). Källa (Phys.org 2026-11-03): https://phys.org/news/2026-11-vibrations-reveal-beneath-planets-surfaces.html
+  (tillagd 2026-11-04)
+
 - **Fiskstim kan ha en enda ”influencer”** — kollektiv rörelse/statistisk fysik. Originalet ej kontrollerat. Källa (Physics Magazine 2026-10-29): https://physics.aps.org/articles/v19/145
   (tillagd 2026-11-03)
 

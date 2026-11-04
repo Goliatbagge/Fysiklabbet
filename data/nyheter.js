@@ -103,6 +103,69 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-05-ett-sonderfall-pa-tio-miljarder",
+    date: "2026-11-05",
+    title: "LHCb hittar belägg för ett sönderfall som sker en gång på tio miljarder",
+    deck: "Experimentet LHCb vid CERN har för första gången på egen hand hittat belägg för att B-mesonen, en partikel som innehåller en bottenkvark eller dess antikvark, kan sönderfalla till en myon och en antimyon. Det ska hända ungefär en gång på tio miljarder, och fysiker har letat efter sönderfallet sedan 1984.",
+    category: "Partikelfysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-11-05-ett-sonderfall-pa-tio-miljarder.jpg",
+    imageAlt: "En hög underjordisk hall fylld av gröna trappor och ställningar runt en stor detektor med gula och blå delar. Till höger hänger en skylt med texten LHCb, och längs väggen löper tjocka kablar.",
+    imageCredit: "Foto: CERN (pressbild). Bilden visar LHCb-experimentets hall vid Large Hadron Collider.",
+    tags: ["partikelfysik", "lhcb", "cern", "lhc", "meson", "kvark", "myon", "standardmodellen", "svag växelverkan", "massa och energi", "statistisk signifikans", "sönderfall"],
+    sources: [
+      { name: "CERN: LHCb finds evidence of one-in-ten-billion particle decay (3 november 2026)", url: "https://home.cern/lhcb-finds-evidence-of-one-in-ten-billion-particle-decay/" },
+      { name: "LHCb: Evidence for the decay B0→μ+μ– and improved measurements of Bs0→μ+μ– (3 november 2026)", url: "https://lhcb-outreach.web.cern.ch/2026/11/03/evidence-for-the-decay-b0%e2%86%92%ce%bc%ce%bc-and-improved-measurements-of-bs0%e2%86%92%ce%bc%ce%bc/" },
+      { name: "Phys.org: Physicists step closer to the ’Zeptoverse’ after 42-year particle search (University of Manchester, 3 november 2026)", url: "https://phys.org/news/2026-11-physicists-closer-zeptoverse-year-particle.html" },
+      { name: "arXiv: studien i fulltext (förtryck, CC BY 4.0)", url: "https://arxiv.org/abs/2611.00230" }
+    ],
+    research: {
+      citation: "LHCb-samarbetet, ”Evidence for the decay B⁰ → μ⁺μ⁻ and improved measurements of the decay B⁰ₛ → μ⁺μ⁻”, LHCb-PAPER-2026-053, arXiv:2611.00230 (30 oktober 2026). Inskickad till Physical Review X. Förtryck, ännu inte kollegialt granskat.",
+      url: "https://arxiv.org/abs/2611.00230"
+    },
+    larare: {
+      moment: [
+        { label: "Relativitetsteori och E = m · c²", href: "katalog.html?id=fy1-8.1" },
+        { label: "Radioaktivt sönderfall", href: "katalog.html?id=fy1-9.3" },
+        { label: "Aktivitet och halveringstid", href: "katalog.html?id=fy1-9.4" }
+      ],
+      fragor: [
+        "B-mesonen har viloenergin 5 280 MeV och en myon har viloenergin 105,7 MeV. Hur stor rörelseenergi får var och en av myonerna om mesonen står still när den sönderfaller?",
+        "Varför räcker inte tre standardavvikelser för att kalla något en upptäckt? Och varför bestämde forskarna hela analysmetoden innan de tittade på mätdata i det område där signalen skulle synas?",
+        "Mätningen stämmer med standardmodellen. Hur kan ett resultat utan avvikelse ändå säga något om partiklar som ingen har sett?"
+      ]
+    },
+    body: [
+      { type: "p", html: "Vid Large Hadron Collider, LHC, vid CERN utanför Genève krockar protoner med varandra miljontals gånger i sekunden. I krockarna bildas bland annat B-mesoner, partiklar som innehåller en bottenkvark. Nästan alltid sönderfaller de på något av många vanligare sätt. Men en gång på ungefär tio miljarder ska en viss B-meson i stället förvandlas till ett par myoner och inget annat. Den 3 november presenterade samarbetet bakom experimentet LHCb vid ett seminarium på CERN de första belägg för det sönderfallet som ett enda experiment har hittat. Studien finns som förtryck och har skickats till tidskriften <em>Physical Review X</em>, men den är ännu inte kollegialt granskad." },
+      { type: "h2", text: "En partikel som lever en och en halv biljondels sekund" },
+      { type: "p", html: "Partikeln heter $B^0$ och består av två kvarkar: en nedkvark, samma sort som finns i protoner och neutroner, och en bottenantikvark. Antipartikeln är byggd tvärtom, och forskarna räknar med båda. Mesonen väger ungefär 5,6 gånger så mycket som en proton och lever i genomsnitt omkring en och en halv biljondels sekund." },
+      { type: "p", html: "I det sällsynta sönderfallet, som skrivs $B^0 \\to \\mu^+\\mu^-$, försvinner kvarken och antikvarken, och energin blir en myon och en antimyon. Myonen är en tyngre släkting till elektronen. Mesonens viloenergi är omkring 5&nbsp;280&nbsp;MeV, medan en myon bara har en viloenergi på 105,7&nbsp;MeV. Står mesonen still får varje myon därför 2&nbsp;640&nbsp;MeV, och nästan allt det är rörelseenergi. Med $E = \\gamma \\cdot m \\cdot c^2$ blir $\\gamma \\approx 25$, och myonerna far iväg i motsatta riktningar med 99,92&nbsp;procent av ljusets hastighet." },
+      { type: "h2", text: "Varför sönderfallet är så sällsynt" },
+      { type: "p", html: "Kvarkar kan byta sort genom den svaga växelverkan, men i standardmodellen, den teori som beskriver alla kända elementarpartiklar, sker bytet bara via en W-boson, som är elektriskt laddad. Här ska en neutral meson bli två myoner med den sammanlagda laddningen noll, och då finns ingen direkt väg. Processen måste ta en omväg med två W-bosoner, eller en W-boson och en Z-boson, och en toppkvark som bara finns till under ett ögonblick. Dessutom saknar mesonen spinn, och det gör att myonparet måste bildas på ett sätt som den svaga växelverkan ogärna åstadkommer. Den närbesläktade $B^0_s$-mesonen, där nedkvarken är utbytt mot en särkvark, sönderfaller på samma sätt, enligt standardmodellen omkring 35&nbsp;gånger oftare. Det sönderfallet sågs för första gången 2015." },
+      { type: "p", html: "Just att sönderfallet är så sällsynt gör det intressant. Finns det tunga partiklar som ingen ännu har sett, till exempel fler higgsbosoner, en ny sorts Z-boson eller leptokvarkar, kan de delta i omvägen och ändra hur ofta sönderfallet sker. Enligt studien kan sådana mätningar känna av energiskalor upp till 100&nbsp;TeV, långt över de 13,6&nbsp;TeV som LHC:s protonkrockar har." },
+      { type: "h2", text: "En jakt som började 1984" },
+      { type: "p", html: "Det första försöket gjordes av experimentet CLEO i USA 1984, som bara kunde säga att sönderfallet sker mer sällan än två gånger på tiotusen. År 2015 rapporterade LHCb och experimentet CMS tillsammans tecken på sönderfallet, men de försvann när mer data kom in fram till 2018. Den bästa gränsen före den nya mätningen var att sönderfallet sker mer sällan än 1,6 gånger på tio miljarder." },
+      { type: "p", html: "Den ombyggda detektorn, som gjorde mätningarna 2024 och 2025, klarar fem gånger fler protonkrockar per sekund än den gamla, väljer ut intressanta händelser helt med programvara och skiljer myoner från andra partiklar bättre. Bara under de två åren samlade experimentet in dubbelt så mycket data som under hela perioden 2011–2018." },
+      { type: "h2", text: "En liten topp bredvid en stor" },
+      { type: "p", html: "Problemet är bakgrunden. Myoner bildas i mängder i andra sönderfall, och ibland misstas en pion eller en kaon för en myon. Forskarna använde ett maskininlärningsprogram som tränats på simulerade händelser för att sortera bort det mesta. En av de viktigaste ledtrådarna var att äkta sönderfall är ensamma: det finns få andra partikelspår nära de två myonerna. För att inte påverkas av vad de hoppades se bestämde forskarna hela analysmetoden innan de tittade på massor mellan 5&nbsp;200 och 5&nbsp;450&nbsp;MeV/<em>c</em><sup>2</sup>, där signalen skulle synas." },
+      { type: "p", html: "Ur myonernas energi och rörelsemängd går det att räkna ut massan hos partikeln de kom ifrån. De två mesonerna skiljer sig bara med omkring 87&nbsp;MeV/<em>c</em><sup>2</sup> i massa, medan mätningens upplösning är 23&nbsp;MeV/<em>c</em><sup>2</sup>. Om standardmodellen stämmer väntade sig forskarna omkring 26 sönderfall av $B^0$ i det urval de analyserade, jämfört med omkring 235 av den vanligare $B^0_s$." },
+      { type: "image", src: "nyheter/bilder/2026-11-05-ett-sonderfall-pa-tio-miljarder-2.jpg", alt: "Diagram med antal händelser mot myonparets massa mellan 4 900 och 5 900 MeV per c i kvadrat. En hög röd topp vid omkring 5 370 och en liten grön topp vid omkring 5 280, ovanpå streckade bakgrundskurvor som är högst till vänster.", caption: "Antalet myonpar fördelat efter massa, för de händelser som maskininlärningen helst behöll. Den röda toppen är sönderfallet av $B^0_s$, den lilla gröna toppen strax till vänster är det sällsyntare sönderfallet av $B^0$. De streckade kurvorna är olika sorters bakgrund.", credit: "Figur: LHCb-samarbetet, arXiv:2611.00230 (CC BY 4.0)" },
+      { type: "quote", html: "Fysiker har jagat det här sönderfallet i mer än fyrtio år. Det krävs extrem precision för att plocka ut myonerna ur den överväldigande bakgrunden.", cite: "Marco Santimaria, en av ledarna för analysgruppen, till CERN (översatt)" },
+      { type: "h2", text: "Tre standardavvikelser, inte fem" },
+      { type: "p", html: "Med enbart de nya data hade signalen en signifikans på 3,0 standardavvikelser. Tillsammans med data från 2011–2018 steg den till 3,2. Det betyder att om sönderfallet inte fanns skulle bakgrunden av ren slump ge en lika stor topp färre än en gång på tusen. Inom partikelfysiken räcker tre standardavvikelser för att tala om belägg för något. För att kalla det en upptäckt krävs fem, ungefär en gång på 3,5 miljoner." },
+      { type: "p", html: "Den uppmätta sannolikheten för sönderfallet blev ungefär 1,1 på tio miljarder, med en osäkerhet på ungefär en tredjedel. Standardmodellen förutsäger 1,03 på tio miljarder, så resultatet stämmer med teorin. Samma analys gav också de hittills noggrannaste mätningarna av sönderfallet av $B^0_s$, och även de stämmer." },
+      { type: "quote", html: "Det här sönderfallet är anmärkningsvärt osannolikt. Chansen är ungefär som att gå på en första dejt och direkt hitta den enda perfekta matchningen för en själv bland alla människor på jorden.", cite: "Chris Parkes, University of Manchester, till Phys.org (översatt)" },
+      { type: "h2", text: "Vad som händer nu" },
+      { type: "p", html: "Att resultatet stämmer med standardmodellen gör inte mätningen ointressant. Den visar hur stort utrymme som finns kvar för nya partiklar, och därmed var teoretikerna ska leta. LHCb ska samla in mycket mer data fram till början av 2030-talet, och en ny uppgradering kring mitten av 2030-talet kan göra datainsamlingen ytterligare tio gånger snabbare. Målet är att nå fem standardavvikelser, och med mer data blir mätningarna allt känsligare för partiklar som ingen ännu har sett." },
+      { type: "quote", html: "Att se belägg för det här sällsynta sönderfallet är otroligt spännande. Det öppnar nya möjligheter att undersöka det som ligger bortom vad LHC kan nå direkt.", cite: "Harry Cliff, en av ledarna för analysgruppen, till CERN (översatt)" },
+      { type: "fact", title: "Visste du?", items: [
+        "Om varje människa på jorden, drygt åtta miljarder, fick en egen $B^0$-meson skulle i genomsnitt mindre än en av dem sönderfalla till två myoner.",
+        "Bokstaven b i LHCb står för bottenkvarken, som på engelska heter <em>bottom</em> eller <em>beauty</em>. Experimentet är byggt för att studera partiklar som innehåller den.",
+        "Sönderfallet av den närbesläktade $B^0_s$-mesonen sågs först 2015 i en gemensam analys av LHCb och CMS. LHCb såg det på egen hand 2017."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-04-kulan-som-kanner-varje-atom",
     date: "2026-11-04",
     title: "En svävande glaskula känner stöten från enskilda atomer",

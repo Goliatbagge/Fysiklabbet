@@ -10,9 +10,17 @@ section: '4.8'
 # Funktion och funktionsvärde
 
 Ett samband mellan två variabler, till exempel $x$ och $y$, där varje tillåtet
-*x*-värde ger *exakt ett* *y*-värde kallas **funktion**. Om vi ritar upp
-grafen till en funktion innebär det att om vi lägger en penna lodrätt över
-grafen kan den bara skära grafen en gång.
+*x*-värde ger *exakt ett* *y*-värde kallas **funktion**. På grafen syns det
+så här: var vi än håller en penna lodrätt över grafen skär pennan grafen
+**högst en gång**. Skär pennan grafen på två ställen hör två *y*-värden till
+samma *x*-värde, och då är sambandet ingen funktion.
+
+I simuleringen nedan håller du pennan själv. Dra den i sidled över de två
+graferna och avgör vilken av dem som är en funktion.
+
+::: minisim
+typ: pennprovet
+:::
 
 I sambandet $y = 2x + 3$ säger vi att "$y$ är en funktion av $x$".
 
@@ -50,10 +58,10 @@ stoppade vi in värdet 5 som bearbetades enligt "regeln" $2x + 3$ och vi
 fick ut värdet 13.
 
 ::: figur
-<svg viewBox="0 14 420 70" width="532" height="89" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En funktionsmaskin: pilen in är märkt x lika med 3, maskinen innehåller regeln f av x lika med x plus 2, och pilen ut är märkt y lika med 5."><line x1="10" y1="48" x2="118" y2="48" stroke="#c8324a" stroke-width="2"/><polygon points="128,48 116,43 116,53" fill="#c8324a"/><text x="64" y="34" font-size="14" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">x</tspan> = 3</text><rect x="132" y="18" width="156" height="60" rx="12" fill="#cfe3f2" stroke="#1f2530" stroke-width="1.6"/><text x="210" y="54" font-size="15" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">f</tspan>(<tspan font-style="italic">x</tspan>) = <tspan font-style="italic">x</tspan> + 2</text><line x1="292" y1="48" x2="400" y2="48" stroke="#c8324a" stroke-width="2"/><polygon points="410,48 398,43 398,53" fill="#c8324a"/><text x="346" y="34" font-size="14" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">y</tspan> = 5</text></svg>
+<svg viewBox="0 14 420 70" width="532" height="89" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En funktionsmaskin: pilen in är märkt x lika med 5, maskinen innehåller regeln f av x lika med 2x plus 3, och pilen ut är märkt y lika med 13."><line x1="10" y1="48" x2="118" y2="48" stroke="#c8324a" stroke-width="2"/><polygon points="128,48 116,43 116,53" fill="#c8324a"/><text x="64" y="34" font-size="14" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">x</tspan> = 5</text><rect x="132" y="18" width="156" height="60" rx="12" fill="#cfe3f2" stroke="#1f2530" stroke-width="1.6"/><text x="210" y="54" font-size="15" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">f</tspan>(<tspan font-style="italic">x</tspan>) = 2<tspan font-style="italic">x</tspan> + 3</text><line x1="292" y1="48" x2="400" y2="48" stroke="#c8324a" stroke-width="2"/><polygon points="410,48 398,43 398,53" fill="#c8324a"/><text x="346" y="34" font-size="14" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">y</tspan> = 13</text></svg>
 
-Vi stoppar in den oberoende variabeln $x = 3$ i funktionsmaskinen
-$f(x) = x + 2$ och får ut den beroende variabeln $y = 5$.
+Vi stoppar in den oberoende variabeln $x = 5$ i funktionsmaskinen
+$f(x) = 2x + 3$ och får ut den beroende variabeln $y = 13$.
 :::
 
 Precis som att vi kan beteckna variabler med olika bokstäver, till exempel $x$,

@@ -26,6 +26,7 @@
  *           pendelperiod (fy2-2.5: l, m, g och α mot pendelns periodtid),
  *           stegkast (fy2-1.9: kaströrelsen med stegmetoden),
  *           vinkelrata (ma1c-4.7: lutningstrappan vrids ett kvarts varv),
+ *           pennprovet (ma1c-4.8: en lodrät penna dras över två grafer, vilken är en funktion?),
  *           pulsvag (fy2-2.7, visa: puls | vag: rep från en person till ett träd),
  *           vagtyp (fy2-2.7, visa: transversell | longitudinell),
  *           ytvag (fy2-2.7, visa: vatten | rayleigh: partiklarnas banor i en ytvåg),
@@ -13907,6 +13908,305 @@
         tk.spela(true);
     }
 
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: pennprovet
+    // ══════════════════════════════════════════════════════════════════════
+    // ma1c-4.8 (Funktion och funktionsvärde): två grafer bredvid varandra,
+    // den ena en funktion och den andra inte. En penna ligger lodrätt över
+    // båda koordinatsystemen på samma x-värde; eleven drar den i sidled och
+    // ser skärningspunkterna markeras och räknas. Sedan väljer eleven vilken
+    // graf som är en funktion och får en förklaring med ett x-värde där den
+    // andra grafen skärs mer än en gång. "Svep med pennan" drar pennan över
+    // hela fönstret, "Nya grafer" byter till nästa par. Kurvorna samplas
+    // tätt ur sina samband, och skärningarna räknas ur samma polylinjer.
+    function buildPennprovet(node, cfg) {
+        var INK = '#1f2530', BLA = '#2563c9', ROD = '#c8324a', GRON = '#3f7a2e', PRICK = '#b8531f';
+        var GRID = 'rgba(31,37,48,0.15)';
+        var U = 22, LIM = 6, N = ++ppRaknare;
+
+        // Kurvor i matematiska koordinater: listor av polylinjer
+        function avX(f, a, b) {          // y = f(x)
+            var p = [], x;
+            for (x = a; x <= b + 1e-9; x += 0.02) p.push([x, f(x)]);
+            return [p];
+        }
+        function avY(g, a, b) {          // x = g(y)
+            var p = [], y;
+            for (y = a; y <= b + 1e-9; y += 0.02) p.push([g(y), y]);
+            return [p];
+        }
+        function cirkel(cx, cy, r) {
+            var p = [], i, n = 720;
+            for (i = 0; i <= n; i++) { var t = 2 * Math.PI * i / n; p.push([cx + r * Math.cos(t), cy + r * Math.sin(t)]); }
+            return [p];
+        }
+        var PAR = [
+            { fn: avX(function (x) { return 0.5 * x * x - 2; }, -6.5, 6.5),
+              ej: avY(function (y) { return 0.5 * y * y - 2; }, -6.5, 6.5) },
+            { fn: avX(function (x) { return x * x * x / 8 - x; }, -6.5, 6.5),
+              ej: avY(function (y) { return y * y * y / 8 - y; }, -6.5, 6.5) },
+            { fn: avX(function (x) { return 2 * Math.sqrt(Math.max(0, x + 4)) - 2; }, -4, 6.5),
+              ej: cirkel(0, 1, 3.5) },
+            { fn: avX(function (x) { return 3 - Math.abs(x); }, -6.5, 6.5),
+              ej: avY(function (y) { return 3 - Math.abs(y); }, -6.5, 6.5) }
+        ];
+        var par = 0, fnForst = false;    // fnForst: graf A är funktionen
+        var pennX = 1.5, svarat = false, rafId = 0;
+
+        function X(x) { return (x + LIM) * U; }
+        function Y(y) { return (LIM - y) * U; }
+        function r1(v) { return Math.round(v * 10) / 10; }
+        function it(t) { return '<tspan font-style="italic">' + t + '</tspan>'; }
+        function minus(v) { return String(v).replace('-', '−'); }
+        function fmt(v) {
+            var s = v.toFixed(1);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.0', '').replace('.', ',').replace('-', '−');
+        }
+        function ln(x1, y1, x2, y2, col, w, extra) {
+            return '<line x1="' + r1(x1) + '" y1="' + r1(y1) + '" x2="' + r1(x2) + '" y2="' + r1(y2) +
+                '" stroke="' + col + '" stroke-width="' + w + '"' + (extra || '') + '/>';
+        }
+        // y-värdena där den lodräta linjen x = a skär kurvan (dubbletter bort)
+        function skarning(kurva, a) {
+            var ys = [], i, j;
+            for (i = 0; i < kurva.length; i++) {
+                var p = kurva[i];
+                for (j = 1; j < p.length; j++) {
+                    var x1 = p[j - 1][0], x2 = p[j][0];
+                    if (x1 === x2 || (x1 - a) * (x2 - a) > 0) continue;
+                    var y = p[j - 1][1] + (p[j][1] - p[j - 1][1]) * (a - x1) / (x2 - x1);
+                    if (Math.abs(y) > LIM) continue;
+                    var ny = true;
+                    for (var k = 0; k < ys.length; k++) if (Math.abs(ys[k] - y) < 0.08) { ny = false; break; }
+                    if (ny) ys.push(y);
+                }
+            }
+            return ys;
+        }
+        // Ett heltal (närmast 0 först) där kurvan skärs mer än en gång
+        function exempelX(kurva) {
+            for (var d = 0; d <= LIM; d++) {
+                if (skarning(kurva, d).length > 1) return d;
+                if (d && skarning(kurva, -d).length > 1) return -d;
+            }
+            return 0;
+        }
+        function bana(kurva) {
+            var s = '';
+            for (var i = 0; i < kurva.length; i++) {
+                var p = kurva[i], d = '';
+                for (var j = 0; j < p.length; j++) d += (j ? ' L' : 'M') + r1(X(p[j][0])) + ',' + r1(Y(p[j][1]));
+                s += '<path d="' + d + '" fill="none" stroke="' + BLA + '" stroke-width="2.4" stroke-linejoin="round"/>';
+            }
+            return s;
+        }
+
+        // ── Fast bakgrund: rutnät, axlar och skalvärden ────────────────────
+        var bas = '', v;
+        for (v = -LIM; v <= LIM; v++) {
+            bas += ln(X(v), Y(LIM), X(v), Y(-LIM), GRID, 1);
+            bas += ln(X(-LIM), Y(v), X(LIM), Y(v), GRID, 1);
+        }
+        bas += ln(X(-LIM), Y(0), X(LIM) + 6, Y(0), INK, 1.6) +
+            '<polygon points="' + (X(LIM) + 16) + ',' + Y(0) + ' ' + (X(LIM) + 6) + ',' + (Y(0) - 4.5) + ' ' +
+            (X(LIM) + 6) + ',' + (Y(0) + 4.5) + '" fill="' + INK + '"/>';
+        bas += ln(X(0), Y(-LIM), X(0), Y(LIM) - 6, INK, 1.6) +
+            '<polygon points="' + X(0) + ',' + (Y(LIM) - 16) + ' ' + (X(0) - 4.5) + ',' + (Y(LIM) - 6) + ' ' +
+            (X(0) + 4.5) + ',' + (Y(LIM) - 6) + '" fill="' + INK + '"/>';
+        bas += '<text x="' + (X(LIM) + 16) + '" y="' + (Y(0) + 19) + '" font-size="15" text-anchor="end" fill="' + INK + '">' + it('x') + '</text>';
+        bas += '<text x="' + (X(0) + 9) + '" y="' + (Y(LIM) - 6) + '" font-size="15" fill="' + INK + '">' + it('y') + '</text>';
+        for (v = -4; v <= 4; v += 2) {
+            if (!v) continue;
+            bas += '<text x="' + X(v) + '" y="' + (Y(0) + 16) + '" font-size="12" text-anchor="middle" fill="' + INK + '">' + minus(v) + '</text>';
+            bas += '<text x="' + (X(0) - 6) + '" y="' + (Y(v) + 4) + '" font-size="12" text-anchor="end" fill="' + INK + '">' + minus(v) + '</text>';
+        }
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        if (!document.getElementById('ms-pp-css')) {
+            var st = document.createElement('style');
+            st.id = 'ms-pp-css';
+            st.textContent =
+                '.ms-pp-rad{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;}' +
+                '.ms-pp-panel{flex:1 1 250px;min-width:0;max-width:330px;}' +
+                '.ms-pp-namn{font:600 15px Poppins,system-ui,sans-serif;color:#1f2530;text-align:center;margin:2px 0 0;}' +
+                '.ms-pp-svg{display:block;width:100%;height:auto;touch-action:pan-y;cursor:ew-resize;font-style:normal;}' +
+                '.ms-pp-antal{font:14px Poppins,system-ui,sans-serif;text-align:center;min-height:1.5em;margin:0 0 2px;}' +
+                '.minisim-card.ms-svgfs:fullscreen .ms-pp-panel,.minisim-card.ms-svgfs:-webkit-full-screen .ms-pp-panel{max-width:none;}';
+            document.head.appendChild(st);
+        }
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus ms-bred';
+        if (cfg.titel) {
+            var tEl = document.createElement('div');
+            tEl.className = 'minisim-title';
+            tEl.textContent = cfg.titel;
+            card.appendChild(tEl);
+        }
+        var VBX = -16, VBY = -26, VBW = X(LIM) + 40, VBH = Y(-LIM) + 34;
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene ms-kv-scene';
+        var rad = document.createElement('div');
+        rad.className = 'ms-pp-rad';
+        scene.appendChild(rad);
+        var paneler = ['A', 'B'].map(function (namn, i) {
+            var p = document.createElement('div');
+            p.className = 'ms-pp-panel';
+            p.innerHTML = '<div class="ms-pp-namn">Graf ' + namn + '</div>' +
+                '<svg class="ms-pp-svg" viewBox="' + VBX + ' ' + VBY + ' ' + VBW + ' ' + VBH + '" width="300" height="' +
+                Math.round(300 * VBH / VBW) + '" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" ' +
+                'aria-label="Graf ' + namn + ' i ett koordinatsystem med en lodrät penna som kan dras i sidled.">' +
+                '<defs><clipPath id="ms-pp-' + N + '-' + i + '"><rect x="0" y="0" width="' + X(LIM) + '" height="' + Y(-LIM) + '"/></clipPath></defs>' +
+                bas + '<g class="ms-pp-kurva" clip-path="url(#ms-pp-' + N + '-' + i + ')"></g><g class="ms-pp-penna"></g>' +
+                '<rect x="' + VBX + '" y="' + VBY + '" width="' + VBW + '" height="' + VBH + '" fill="transparent" class="ms-pp-drag"/></svg>' +
+                '<div class="ms-pp-antal"></div>';
+            rad.appendChild(p);
+            return { svg: p.querySelector('svg'), kurvG: p.querySelector('.ms-pp-kurva'),
+                     pennG: p.querySelector('.ms-pp-penna'), antal: p.querySelector('.ms-pp-antal') };
+        });
+        card.appendChild(scene);
+        msFullskarm(card, scene, (2 * VBW + 20) / (VBH + 50), 230);
+
+        var info = document.createElement('div');
+        info.className = 'minisim-info';
+        info.style.fontSize = '15px';
+        info.style.lineHeight = '1.6';
+        info.style.whiteSpace = 'normal';
+        info.style.color = INK;
+        card.appendChild(info);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        function mkBtn(txt, cls) {
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'minisim-btn' + (cls ? ' ' + cls : '');
+            b.textContent = txt;
+            controls.appendChild(b);
+            return b;
+        }
+        var svarA = mkBtn('Graf A är en funktion', 'ms-primar');
+        var svarB = mkBtn('Graf B är en funktion', 'ms-primar');
+        var svepBtn = mkBtn('Svep med pennan');
+        var nyBtn = mkBtn('Nya grafer');
+        card.appendChild(controls);
+        node.appendChild(card);
+
+        // ── Ritning ───────────────────────────────────────────────────────
+        function kurvor() {
+            var p = PAR[par];
+            return fnForst ? [p.fn, p.ej] : [p.ej, p.fn];
+        }
+        // Pennan: suddgummi och metallhylsa upptill, spetsad udd nedtill
+        function penna(a) {
+            var px = X(a), w = 11, h = w / 2, top = VBY + 2, udd = Y(-LIM) + 4;
+            var s = '<g opacity="0.82">';
+            s += '<rect x="' + r1(px - h) + '" y="' + top + '" width="' + w + '" height="14" rx="3" fill="#e58a9b"/>';
+            s += '<rect x="' + r1(px - h) + '" y="' + (top + 12) + '" width="' + w + '" height="9" fill="#a9adb3"/>';
+            s += ln(px - h, top + 15, px + h, top + 15, '#7d8187', 1) + ln(px - h, top + 18, px + h, top + 18, '#7d8187', 1);
+            s += '<rect x="' + r1(px - h) + '" y="' + (top + 21) + '" width="' + w + '" height="' + r1(udd - 26 - top - 21) + '" fill="#e9b52e"/>';
+            s += '<rect x="' + r1(px - 1.6) + '" y="' + (top + 21) + '" width="3.2" height="' + r1(udd - 26 - top - 21) + '" fill="#d29e1e"/>';
+            s += '<polygon points="' + r1(px - h) + ',' + r1(udd - 26) + ' ' + r1(px + h) + ',' + r1(udd - 26) + ' ' +
+                r1(px + 1.8) + ',' + r1(udd - 7) + ' ' + r1(px - 1.8) + ',' + r1(udd - 7) + '" fill="#efd3a6"/>';
+            s += '<polygon points="' + r1(px - 1.8) + ',' + r1(udd - 7) + ' ' + r1(px + 1.8) + ',' + r1(udd - 7) + ' ' +
+                r1(px) + ',' + r1(udd) + '" fill="#3b3e44"/>';
+            return s + '</g>';
+        }
+        function ritaKurvor() {
+            var k = kurvor();
+            paneler[0].kurvG.innerHTML = bana(k[0]);
+            paneler[1].kurvG.innerHTML = bana(k[1]);
+        }
+        function rita() {
+            var k = kurvor();
+            paneler.forEach(function (p, i) {
+                var ys = skarning(k[i], pennX), s = penna(pennX);
+                ys.forEach(function (y) {
+                    s += '<circle cx="' + r1(X(pennX)) + '" cy="' + r1(Y(y)) + '" r="5.5" fill="' + PRICK + '" stroke="' + INK + '" stroke-width="1.4"/>';
+                });
+                p.pennG.innerHTML = s;
+                var n = ys.length;
+                p.antal.innerHTML = n === 0 ? '<span style="color:#4a5160">Pennan skär inte grafen här</span>' :
+                    n === 1 ? 'Pennan skär grafen <strong>1 gång</strong>' :
+                    '<span style="color:' + ROD + '">Pennan skär grafen <strong>' + n + ' gånger</strong></span>';
+            });
+            if (!svarat) {
+                info.innerHTML = 'Pennan ligger vid <em>x</em> = ' + fmt(pennX) +
+                    '. Dra den i sidled och välj sedan vilken graf som är en funktion.';
+            }
+        }
+        function satt(a) {
+            pennX = Math.max(-LIM, Math.min(LIM, Math.round(a * 10) / 10));
+            rita();
+        }
+        function svara(valdeA) {
+            cancelAnimationFrame(rafId);
+            svarat = true;
+            var ratt = valdeA === fnForst;
+            var fnNamn = fnForst ? 'A' : 'B', ejNamn = fnForst ? 'B' : 'A';
+            var ex = exempelX(PAR[par].ej);
+            satt(ex);
+            var n = skarning(PAR[par].ej, ex).length;
+            info.innerHTML = (ratt ? '<strong style="color:' + GRON + '">Rätt.</strong> ' :
+                '<strong style="color:' + ROD + '">Inte riktigt.</strong> ') +
+                'Graf ' + fnNamn + ' är en funktion: var du än håller pennan skär den grafen högst en gång. ' +
+                'Graf ' + ejNamn + ' är ingen funktion. Vid <em>x</em> = ' + fmt(ex) + ' skär pennan den ' +
+                (n === 2 ? 'två' : n === 3 ? 'tre' : String(n)) + ' gånger, så där hör flera <em>y</em>-värden till samma <em>x</em>-värde.';
+        }
+        function nyaGrafer() {
+            cancelAnimationFrame(rafId);
+            par = (par + 1) % PAR.length;
+            fnForst = Math.random() < 0.5;
+            svarat = false;
+            ritaKurvor();
+            satt(1.5);
+        }
+        function svep() {
+            cancelAnimationFrame(rafId);
+            var t0 = 0, DUR = 4000;
+            function steg(ts) {
+                if (!t0) t0 = ts;
+                var u = Math.min(1, (ts - t0) / DUR);
+                satt(-LIM + 2 * LIM * u);
+                if (u < 1) rafId = requestAnimationFrame(steg);
+            }
+            rafId = requestAnimationFrame(steg);
+        }
+        svarA.addEventListener('click', function () { svara(true); });
+        svarB.addEventListener('click', function () { svara(false); });
+        svepBtn.addEventListener('click', svep);
+        nyBtn.addEventListener('click', nyaGrafer);
+
+        // Dra pennan: var som helst i ett av koordinatsystemen
+        paneler.forEach(function (p) {
+            var yta = p.svg.querySelector('.ms-pp-drag'), drar = false;
+            function fran(e) {
+                var pt = p.svg.createSVGPoint();
+                pt.x = e.clientX; pt.y = e.clientY;
+                var m = p.svg.getScreenCTM();
+                if (!m) return;
+                var q = pt.matrixTransform(m.inverse());
+                satt(q.x / U - LIM);
+            }
+            yta.addEventListener('pointerdown', function (e) {
+                cancelAnimationFrame(rafId);
+                drar = true;
+                if (yta.setPointerCapture) yta.setPointerCapture(e.pointerId);
+                fran(e);
+            });
+            yta.addEventListener('pointermove', function (e) { if (drar) fran(e); });
+            yta.addEventListener('pointerup', function () { drar = false; });
+            yta.addEventListener('pointercancel', function () { drar = false; });
+        });
+
+        // Test-handtag för skärmdumpsskript
+        card._set = function (i, a, forst) { par = i; fnForst = !!forst; svarat = false; ritaKurvor(); satt(a); };
+        card._svara = svara;
+        ritaKurvor();
+        rita();
+    }
+    var ppRaknare = 0;
+
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
                   stegkast: buildStegkast,
                   svangningsgrafer: buildSvangningsgrafer,
@@ -13930,7 +14230,7 @@
                   magnetpoler: buildMagnetpoler, magnetdelning: buildMagnetdelning,
                   galton: buildGalton, kalkylblad: buildKalkylblad,
                   lodlinje: buildLodlinje,
-                  vinkelrata: buildVinkelrata,
+                  vinkelrata: buildVinkelrata, pennprovet: buildPennprovet,
                   vagstallning: buildVagstallning, pulsvag: buildPulsvag, vagtyp: buildVagtyp,
                   ytvag: buildYtvag, fasvag: buildFasvag,
                   staendevag: buildStaendevag, gitarrton: buildGitarrton };

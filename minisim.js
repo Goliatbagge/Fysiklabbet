@@ -14207,6 +14207,648 @@
     }
     var ppRaknare = 0;
 
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: snurrslang
+    // ══════════════════════════════════════════════════════════════════════
+    // fy2-2.10, demonstrationen "Öppen pipa": en räfflad plastslang som hålls
+    // i ena änden och snurras runt som en propeller. Slangen är en öppen pipa
+    // med längden l = 0,75 m, så tonerna är f = n · v / (2l) med v = 340 m/s
+    // (227, 453 och 680 Hz). Luften sugs ut genom slangen fortare ju fortare
+    // den snurrar, och räfflorna sätter igång en ton först när luftens fart
+    // passar en av pipans stående vågor. Därför ljuder grundtonen vid ett
+    // visst varvtal (n · 1,5 varv/s ± 0,45), första övertonen vid ett högre
+    // och andra övertonen vid ett ännu högre; däremellan hörs bara sus.
+    // Varvtalet styrs med glidaren eller genom att dra slangen runt med
+    // musen/fingret. Ljudet syntetiseras med Web Audio: tonen (grundsvängning
+    // + några övertoner, lätt dopplervibrato i takt med varvet) och ett
+    // bandpassfiltrerat brus för suset.
+    var ssRaknare = 0;
+    function buildSnurrslang(node, cfg) {
+        var INK = '#1f2530', BLA = '#2563c9', GUL = '#f2c81c', GULM = '#b8920a';
+        var L = 0.75, V = 340, RPSMAX = 5, TROSK = 1.5, BRED = 0.45;
+        var HX = 175, HY = 140, R = 110;                       // navet och slangens längd i px
+        var PX0 = 372, PX1 = 622, PY = 118;                    // den raka slangen i panelen
+        var BX0 = 40, BX1 = 620, BY = 290;                     // varvtalsskalan
+        var rps = 0, mal = 0, vinkel = -Math.PI / 2, tid = 0;
+        var ljudPa = true, drar = false, dragVinkel = 0, dragTid = 0;
+        var id = 'ms-ss-' + (++ssRaknare);
+
+        function fmt(v, d) { var s = v.toFixed(d); return parseFloat(s) === 0 ? '0' : s.replace('.', ','); }
+        function it(t) { return '<tspan font-style="italic">' + t + '</tspan>'; }
+        function lbl(x, y, anchor, inner, size, color, extra) {
+            return '<text x="' + vgR1(x) + '" y="' + vgR1(y) + '" text-anchor="' + anchor + '" font-size="' +
+                (size || 14) + '" fill="' + (color || INK) + '"' + (extra || '') + '>' + inner + '</text>';
+        }
+        function ton() {                                       // 0 = ingen ton, annars n
+            for (var n = 1; n <= 3; n++) if (Math.abs(rps - n * TROSK) <= BRED) return n;
+            return 0;
+        }
+        function frekv(n) { return n * V / (2 * L); }
+        function bx(v) { return BX0 + (BX1 - BX0) * v / RPSMAX; }
+        var NAMN = ['', 'Grundton', 'Första övertonen', 'Andra övertonen'];
+
+        // ── fast bakgrund: rutnät, varvtalsskalan ─────────────────────────
+        var bas = vgRutnat(id, 0, 0, 660, 330);
+        for (var n = 1; n <= 3; n++) {
+            var a = bx(n * TROSK - BRED), b = bx(n * TROSK + BRED);
+            bas += '<rect x="' + vgR1(a) + '" y="' + (BY - 9) + '" width="' + vgR1(b - a) + '" height="18" rx="3" fill="' + BLA + '" opacity="0.16"/>';
+            bas += lbl((a + b) / 2, BY - 15, 'middle', NAMN[n].toLowerCase(), 12, BLA, ' font-weight="600"');
+        }
+        bas += '<line x1="' + BX0 + '" y1="' + BY + '" x2="' + BX1 + '" y2="' + BY + '" stroke="' + INK + '" stroke-width="1.6"/>';
+        for (var v = 0; v <= RPSMAX; v++) {
+            bas += '<line x1="' + bx(v) + '" y1="' + (BY - 4) + '" x2="' + bx(v) + '" y2="' + (BY + 4) + '" stroke="' + INK + '" stroke-width="1.3"/>';
+            bas += lbl(bx(v), BY + 18, 'middle', String(v), 12, '#6a7180');
+        }
+        bas += lbl(BX1 + 6, BY + 18, 'start', 'varv/s', 12, '#6a7180');
+        // armen, som håller i slangen nedanför navet
+        bas += '<path d="M -10 250 C 50 232 110 200 ' + (HX - 14) + ' ' + (HY + 18) + '" fill="none" stroke="#4b5563" stroke-width="34" stroke-linecap="round"/>' +
+            '<path d="M -10 250 C 50 232 110 200 ' + (HX - 14) + ' ' + (HY + 18) + '" fill="none" stroke="#6b7280" stroke-width="34" stroke-dasharray="2 5" stroke-linecap="butt" opacity="0.5"/>';
+        // panelens fasta delar: slangens väggar, måttlinje
+        bas += lbl((PX0 + PX1) / 2, 40, 'middle', 'Stående våg i slangen', 13, '#6a7180', ' font-weight="600"');
+        bas += '<line x1="' + PX0 + '" y1="' + (PY - 26) + '" x2="' + PX1 + '" y2="' + (PY - 26) + '" stroke="' + INK + '" stroke-width="2"/>' +
+            '<line x1="' + PX0 + '" y1="' + (PY + 26) + '" x2="' + PX1 + '" y2="' + (PY + 26) + '" stroke="' + INK + '" stroke-width="2"/>';
+        bas += vgDubbelpil(PX0, PY + 44, PX1, PY + 44, '#6a7180');
+        bas += lbl((PX0 + PX1) / 2, PY + 62, 'middle', it('l') + ' = 0,75 m', 13, '#6a7180');
+
+        function slangPunkter(th, bojning) {
+            var p = [];
+            for (var k = 0; k <= 24; k++) {
+                var s = k / 24, a = th - bojning * s * s, r = 14 + (R - 14) * s;
+                p.push(vgR1(HX + r * Math.cos(a)) + ',' + vgR1(HY + r * Math.sin(a)));
+            }
+            return p.join(' ');
+        }
+        function slang(th, bojning, op) {
+            var pts = slangPunkter(th, bojning);
+            return '<g opacity="' + op + '">' +
+                '<polyline points="' + pts + '" fill="none" stroke="' + GULM + '" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>' +
+                '<polyline points="' + pts + '" fill="none" stroke="' + GUL + '" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>' +
+                '<polyline points="' + pts + '" fill="none" stroke="' + GULM + '" stroke-width="13" stroke-dasharray="1.4 3.2" opacity="0.55"/>' +
+                '</g>';
+        }
+
+        function rita() {
+            var s = '', n = ton(), bojning = 0.35 * Math.min(1, rps / 4);
+            // rörelseoskärpa: en svag skiva och några skuggor bakom slangen
+            if (rps > 0.4) {
+                s += '<circle cx="' + HX + '" cy="' + HY + '" r="' + R + '" fill="' + GUL + '" opacity="' + vgR1(Math.min(0.22, rps * 0.05) * 100) / 100 + '"/>';
+                var spann = Math.min(2.2, rps * 0.5);
+                for (var i = 5; i >= 1; i--) s += slang(vinkel - spann * i / 5, bojning, 0.13);
+            }
+            s += slang(vinkel, bojning, 1);
+            // handen runt slangens inre ände
+            s += '<ellipse cx="' + HX + '" cy="' + HY + '" rx="21" ry="19" fill="#efc29c" stroke="#b9845c" stroke-width="1.4"/>' +
+                '<path d="M ' + (HX - 12) + ' ' + (HY - 9) + ' Q ' + HX + ' ' + (HY - 15) + ' ' + (HX + 12) + ' ' + (HY - 9) +
+                ' M ' + (HX - 13) + ' ' + (HY - 1) + ' Q ' + HX + ' ' + (HY - 6) + ' ' + (HX + 13) + ' ' + (HY - 1) +
+                ' M ' + (HX - 12) + ' ' + (HY + 7) + ' Q ' + HX + ' ' + (HY + 3) + ' ' + (HX + 12) + ' ' + (HY + 7) +
+                '" fill="none" stroke="#b9845c" stroke-width="1.1" opacity="0.8"/>';
+            // stående våg i den raka slangen: buk i båda öppningarna
+            if (n) {
+                var upp = [], ned = [], lin = [], A = 20, c = Math.cos(2 * Math.PI * 1.2 * tid);
+                for (var k = 0; k <= 80; k++) {
+                    var x = PX0 + (PX1 - PX0) * k / 80, e = A * Math.cos(n * Math.PI * k / 80);
+                    upp.push(vgR1(x) + ',' + vgR1(PY - e)); ned.unshift(vgR1(x) + ',' + vgR1(PY + e));
+                    lin.push(vgR1(x) + ',' + vgR1(PY - e * c));
+                }
+                s += '<polygon points="' + upp.join(' ') + ' ' + ned.join(' ') + '" fill="' + BLA + '" opacity="0.16"/>';
+                s += '<polyline points="' + upp.join(' ') + '" fill="none" stroke="' + BLA + '" stroke-width="1.6"/>';
+                s += '<polyline points="' + ned.reverse().join(' ') + '" fill="none" stroke="' + BLA + '" stroke-width="1.6" opacity="0.5"/>';
+                s += '<polyline points="' + lin.join(' ') + '" fill="none" stroke="' + BLA + '" stroke-width="2.4"/>';
+                s += lbl((PX0 + PX1) / 2, 200, 'middle', NAMN[n] + ', ' + it('n') + ' = ' + n, 15, INK, ' font-weight="600"');
+                s += lbl((PX0 + PX1) / 2, 224, 'middle', it('λ') + ' = ' + fmt(2 * L / n, 2) + ' m     ' + it('f') + ' = ' + fmt(frekv(n), 0) + ' Hz', 15, BLA, ' font-weight="600" xml:space="preserve"');
+            } else {
+                s += '<line x1="' + PX0 + '" y1="' + PY + '" x2="' + PX1 + '" y2="' + PY + '" stroke="#9aa0a6" stroke-width="1" stroke-dasharray="5 4"/>';
+                s += lbl((PX0 + PX1) / 2, 200, 'middle', rps < 0.2 ? 'Slangen står still' : 'Ingen ton, bara sus', 15, '#6a7180', ' font-weight="600"');
+            }
+            // markören på varvtalsskalan
+            var mx = bx(rps);
+            s += '<polygon points="' + vgR1(mx - 6) + ',' + (BY + 26) + ' ' + vgR1(mx) + ',' + (BY + 9) + ' ' + vgR1(mx + 6) + ',' + (BY + 26) + '" fill="' + INK + '"/>';
+            dyn.innerHTML = s;
+        }
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus ms-bred';
+        if (cfg.titel) {
+            var tEl = document.createElement('div');
+            tEl.className = 'minisim-title';
+            tEl.textContent = cfg.titel;
+            card.appendChild(tEl);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene ms-kv-scene';
+        scene.innerHTML = '<svg class="ms-kv-svg" viewBox="0 10 660 315" width="660" height="315" ' +
+            'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" ' +
+            'aria-label="En hand snurrar en gul räfflad plastslang runt som en propeller. Vid ett visst varvtal ljuder grundtonen, ' +
+            'vid ett högre varvtal första övertonen och vid ett ännu högre andra övertonen. Bredvid visas den stående vågen i slangen.">' +
+            bas + '<g class="ms-ss-dyn"></g></svg>';
+        var svg = scene.querySelector('svg');
+        var dyn = scene.querySelector('.ms-ss-dyn');
+        card.appendChild(scene);
+        msFullskarm(card, scene, 660 / 315, 130);
+
+        var row = document.createElement('div');
+        row.className = 'minisim-slider-row';
+        var sLbl = document.createElement('span');
+        sLbl.className = 'minisim-slider-lbl';
+        sLbl.textContent = 'Varvtal';
+        var sl = document.createElement('input');
+        sl.type = 'range';
+        sl.className = 'minisim-slider';
+        sl.min = '0'; sl.max = String(RPSMAX); sl.step = '0.05'; sl.value = '0';
+        sl.setAttribute('aria-label', 'Varvtal i varv per sekund');
+        var val = document.createElement('span');
+        val.className = 'minisim-slider-val';
+        row.appendChild(sLbl); row.appendChild(sl); row.appendChild(val);
+        card.appendChild(row);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        var stoppBtn = vgBtn('Stanna');
+        var ljudBtn = vgBtn('Stäng av ljudet');
+        controls.appendChild(stoppBtn);
+        controls.appendChild(ljudBtn);
+        card.appendChild(controls);
+        var info = document.createElement('div');
+        info.className = 'minisim-info ms-brod';
+        info.style.marginTop = '6px';
+        card.appendChild(info);
+        node.appendChild(card);
+
+        var senasteInfo = '';
+        function uppdateraInfo() {
+            var n = ton(), t;
+            if (rps < 0.2) t = 'Dra i glidaren, eller ta tag i slangen och snurra den runt, och lyssna.';
+            else if (!n) t = 'Luften susar genom slangen, men farten passar ingen av slangens stående vågor. ' +
+                (rps < TROSK ? 'Snurra fortare.' : 'Snurra fortare eller långsammare.');
+            else t = NAMN[n] + ': slangen rymmer ' + (n === 1 ? 'en halv våglängd' : n === 2 ? 'en hel våglängd' : 'tre halva våglängder') +
+                ', <em>l</em> = ' + n + ' · <em>λ</em>/2, så <em>λ</em> = ' + fmt(2 * L / n, 2) + ' m och <em>f</em> = <em>v</em>/<em>λ</em> = ' +
+                V + '/' + fmt(2 * L / n, 2) + ' = ' + fmt(frekv(n), 0) + ' Hz.';
+            if (t !== senasteInfo) { info.innerHTML = t; senasteInfo = t; }
+            val.textContent = fmt(rps, 1) + ' varv/s';
+        }
+
+        // ── ljud ──────────────────────────────────────────────────────────
+        var actx = null, master = null, tonG = null, oscs = [], susG = null, susF = null;
+        function startaLjud() {
+            if (actx) { if (actx.state === 'suspended') actx.resume(); return; }
+            var AC = window.AudioContext || window.webkitAudioContext;
+            if (!AC) return;
+            actx = new AC();
+            master = actx.createGain(); master.gain.value = ljudPa ? 1 : 0; master.connect(actx.destination);
+            tonG = actx.createGain(); tonG.gain.value = 0; tonG.connect(master);
+            [1, 2, 3, 4].forEach(function (h) {
+                var o = actx.createOscillator(), g = actx.createGain();
+                o.type = 'sine'; o.frequency.value = 227 * h;
+                g.gain.value = [0, 0.5, 0.16, 0.07, 0.03][h];
+                o.connect(g); g.connect(tonG); o.start();
+                oscs.push({ o: o, h: h });
+            });
+            var len = actx.sampleRate * 2, buf = actx.createBuffer(1, len, actx.sampleRate), d = buf.getChannelData(0);
+            for (var i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+            var src = actx.createBufferSource(); src.buffer = buf; src.loop = true;
+            susF = actx.createBiquadFilter(); susF.type = 'bandpass'; susF.frequency.value = 900; susF.Q.value = 0.7;
+            susG = actx.createGain(); susG.gain.value = 0;
+            src.connect(susF); susF.connect(susG); susG.connect(master); src.start();
+        }
+        var tonN = 0, tonAmp = 0;
+        function ljudSteg(dt) {
+            if (!actx) return;
+            var t = actx.currentTime, n = ton();
+            if (n) tonN = n;
+            tonAmp += ((n ? 0.22 : 0) - tonAmp) * Math.min(1, dt * 14);
+            // dopplervibrato: spetsen rör sig mot och från lyssnaren en gång per varv
+            var dopp = 1 + 0.012 * Math.min(1, rps / 3) * Math.sin(vinkel);
+            oscs.forEach(function (x) { x.o.frequency.setTargetAtTime(frekv(tonN || 1) * x.h * dopp, t, 0.01); });
+            var svaj = 1 + 0.25 * Math.sin(vinkel);
+            tonG.gain.setTargetAtTime(tonAmp * svaj, t, 0.02);
+            susG.gain.setTargetAtTime(Math.min(0.09, rps * 0.02) * svaj, t, 0.03);
+            susF.frequency.setTargetAtTime(500 + rps * 260, t, 0.05);
+        }
+        ljudBtn.addEventListener('click', function () {
+            ljudPa = !ljudPa;
+            ljudBtn.textContent = ljudPa ? 'Stäng av ljudet' : 'Sätt på ljudet';
+            startaLjud();
+            if (master) master.gain.setTargetAtTime(ljudPa ? 1 : 0, actx.currentTime, 0.03);
+        });
+        sl.addEventListener('input', function () { startaLjud(); mal = parseFloat(sl.value); });
+        stoppBtn.addEventListener('click', function () { mal = 0; sl.value = '0'; });
+
+        // ta tag i slangen och snurra den runt navet
+        function svgPunkt(e) {
+            var r = svg.getBoundingClientRect(), vb = svg.viewBox.baseVal;
+            return { x: vb.x + (e.clientX - r.left) / r.width * vb.width, y: vb.y + (e.clientY - r.top) / r.height * vb.height };
+        }
+        svg.addEventListener('pointerdown', function (e) {
+            var p = svgPunkt(e), dx = p.x - HX, dy = p.y - HY;
+            if (dx * dx + dy * dy > (R + 14) * (R + 14)) return;
+            startaLjud();
+            drar = true; dragVinkel = Math.atan2(dy, dx); dragTid = performance.now();
+            try { svg.setPointerCapture(e.pointerId); } catch (er) {}
+            e.preventDefault();
+        });
+        svg.addEventListener('pointermove', function (e) {
+            if (!drar) return;
+            var p = svgPunkt(e), a = Math.atan2(p.y - HY, p.x - HX), nu = performance.now();
+            var d = a - dragVinkel;
+            if (d > Math.PI) d -= 2 * Math.PI;
+            if (d < -Math.PI) d += 2 * Math.PI;
+            var dtd = Math.max(0.008, (nu - dragTid) / 1000);
+            var fart = Math.min(RPSMAX, Math.abs(d) / dtd / (2 * Math.PI));
+            mal = mal + (fart - mal) * Math.min(1, dtd * 6);
+            vinkel += d;
+            dragVinkel = a; dragTid = nu;
+            sl.value = String(mal);
+        });
+        function slapp() { drar = false; }
+        svg.addEventListener('pointerup', slapp);
+        svg.addEventListener('pointercancel', slapp);
+        svg.style.touchAction = 'pan-y';
+
+        var loop = vgLoop(card, function (dt) {
+            tid += dt;
+            rps += (mal - rps) * Math.min(1, dt * (drar ? 10 : 2.5));
+            if (Math.abs(rps - mal) < 0.005) rps = mal;
+            if (!drar) vinkel += 2 * Math.PI * rps * dt;
+            vinkel %= 2 * Math.PI;
+            ljudSteg(dt);
+            uppdateraInfo();
+            rita();
+        });
+        card._set = function (v, a) { mal = rps = v; vinkel = a || 0.4; tid = 0.1; uppdateraInfo(); rita(); };
+        uppdateraInfo();
+        rita();
+        loop.satt(true);
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: pipton
+    // ══════════════════════════════════════════════════════════════════════
+    // fy2-2.10, figurerna över den öppna pipan: en eller flera pipor
+    // (cfg.toner, till exempel "1" eller "2, 3") med den stående vågen. Knappen
+    // Starta vågen sätter luften i svängning, så att man ser bukarna svänga och
+    // noderna stå still, och varje ton har en lyssnaknapp. Pipans längd är
+    // 0,75 m och v = 340 m/s, så f = n · 227 Hz, och tonerna går att jämföra
+    // mellan figurerna: bara en ton spelas åt gången på hela sidan.
+    // Pipans längd skrivs med rakt bråkstreck: l = λ/2, l = λ, l = 3 · λ/2.
+    var ppActx = null, ppSpelar = null;
+    function buildPipton(node, cfg) {
+        var INK = '#1f2530', BLA = '#2563c9';
+        var L = 0.75, V = 340, X0 = 70, X1 = 360, H = 96, A = 30;
+        var toner = String(cfg.toner || '1').split(',').map(function (s) { return parseInt(s, 10); })
+            .filter(function (n) { return n >= 1 && n <= 6; });
+        if (!toner.length) toner = [1];
+        var JA = /^(ja|1|true)$/i;
+        var sluten = JA.test(String(cfg.sluten || '')), halv = JA.test(String(cfg.halvoppen || ''));
+        // förskjutningen längs pipan, u = 0 … 1 från vänster öppning
+        function form(n, u) {
+            if (halv) return Math.cos((2 * n - 1) * Math.PI * u / 2);
+            return sluten ? Math.sin(n * Math.PI * u) : Math.cos(n * Math.PI * u);
+        }
+        function noder(n) {
+            var u = [];
+            if (halv) for (var k = 0; k < n; k++) u.push((2 * k + 1) / (2 * n - 1));
+            else if (sluten) for (var j = 0; j <= n; j++) u.push(j / n);
+            else for (var i = 0; i < n; i++) u.push((i + 0.5) / n);
+            return u;
+        }
+        var NAMN = ['', 'grundtonen', 'första övertonen', 'andra övertonen', 'tredje övertonen', 'fjärde övertonen', 'femte övertonen'];
+        var tid = 0, igang = false;
+        function fmt(v, d) { var s = v.toFixed(d); return parseFloat(s) === 0 ? '0' : s.replace('.', ','); }
+        function frekv(n) { return halv ? (2 * n - 1) * V / (4 * L) : n * V / (2 * L); }
+        function txt(x, y, anchor, inner, color) {
+            return '<text x="' + vgR1(x) + '" y="' + vgR1(y) + '" text-anchor="' + anchor + '" font-size="13" fill="' +
+                (color || INK) + '">' + inner + '</text>';
+        }
+        // l = n·λ/2 högerställt mot x = 436 med mittlinjen på y (bråkstrecket)
+        function langd(n, y) {
+            var IT = '<tspan font-style="italic">', E = '</tspan>', s = '', xR = 436;
+            var c = halv ? 2 * n - 1 : n, d = halv ? 4 : 2;
+            var g = c % d === 0 ? d : (d === 4 && c % 2 === 0 ? 2 : 1);
+            c /= g; d /= g;
+            if (d === 1) return txt(xR, y + 4.5, 'end', IT + 'l' + E + ' = ' + (c > 1 ? c + ' · ' : '') + IT + 'λ' + E);
+            var bw = 12, bx = xR - bw;                         // bråket λ över d
+            s += '<line x1="' + vgR1(bx) + '" y1="' + y + '" x2="' + xR + '" y2="' + y + '" stroke="' + INK + '" stroke-width="1.2"/>';
+            s += txt(bx + bw / 2, y - 3.5, 'middle', IT + 'λ' + E);
+            s += txt(bx + bw / 2, y + 13, 'middle', String(d));
+            s += txt(bx - 4, y + 4.5, 'end', IT + 'l' + E + ' = ' + (c > 1 ? c + ' · ' : ''));
+            return s;
+        }
+
+        var bas = '';
+        toner.forEach(function (n, i) {
+            var y0 = i * H;
+            bas += '<text x="62" y="' + (y0 + 19) + '" font-size="12" fill="' + INK + '">' + NAMN[n] + ' (' +
+                '<tspan font-style="italic">n</tspan> = ' + n + ')</text>';
+            bas += '<line x1="' + X0 + '" y1="' + (y0 + 28) + '" x2="' + X1 + '" y2="' + (y0 + 28) + '" stroke="#9aa0a6" stroke-width="2.4"/>' +
+                '<line x1="' + X0 + '" y1="' + (y0 + 96) + '" x2="' + X1 + '" y2="' + (y0 + 96) + '" stroke="#9aa0a6" stroke-width="2.4"/>' +
+                '<line x1="' + X0 + '" y1="' + (y0 + 62) + '" x2="' + X1 + '" y2="' + (y0 + 62) + '" stroke="#9aa0a6" stroke-width="1" stroke-dasharray="5 4"/>';
+            var upp = [], ned = [];
+            for (var k = 0; k <= 120; k++) {
+                var x = X0 + (X1 - X0) * k / 120, e = A * form(n, k / 120);
+                upp.push(vgR1(x) + ',' + vgR1(y0 + 62 - e)); ned.push(vgR1(x) + ',' + vgR1(y0 + 62 + e));
+            }
+            bas += '<polyline points="' + upp.join(' ') + '" fill="none" stroke="' + BLA + '" stroke-width="1.4" opacity="0.35"/>' +
+                '<polyline points="' + ned.join(' ') + '" fill="none" stroke="' + BLA + '" stroke-width="1.4" opacity="0.35"/>';
+            if (sluten) bas += '<line x1="' + X0 + '" y1="' + (y0 + 28) + '" x2="' + X0 + '" y2="' + (y0 + 96) + '" stroke="#9aa0a6" stroke-width="2.4"/>';
+            if (sluten || halv) bas += '<line x1="' + X1 + '" y1="' + (y0 + 28) + '" x2="' + X1 + '" y2="' + (y0 + 96) + '" stroke="#9aa0a6" stroke-width="2.4"/>';
+            noder(n).forEach(function (u) {
+                bas += '<circle cx="' + vgR1(X0 + (X1 - X0) * u) + '" cy="' + (y0 + 62) + '" r="2.6" fill="' + INK + '"/>';
+            });
+            bas += langd(n, y0 + 50);
+            bas += txt(436, y0 + 86, 'end', '<tspan font-style="italic">f</tspan> = ' + fmt(frekv(n), 0) + ' Hz', BLA);
+        });
+
+        function rita() {
+            var s = '';
+            toner.forEach(function (n, i) {
+                var y0 = i * H, c = Math.cos(2 * Math.PI * 2.2 * frekv(n) / frekv(1) * tid), pts = [];
+                for (var k = 0; k <= 120; k++) {
+                    var x = X0 + (X1 - X0) * k / 120, e = A * form(n, k / 120) * c;
+                    pts.push(vgR1(x) + ',' + vgR1(y0 + 62 - e));
+                }
+                s += '<polyline points="' + pts.join(' ') + '" fill="none" stroke="' + BLA + '" stroke-width="2.6" stroke-linejoin="round"/>';
+            });
+            dyn.innerHTML = s;
+        }
+
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus';
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene ms-kv-scene';
+        var vbH = toner.length * H + 6;
+        scene.innerHTML = '<svg class="ms-kv-svg" viewBox="36 8 406 ' + vbH + '" width="593" height="' + Math.round(vbH * 593 / 406) + '" ' +
+            'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" ' +
+            'aria-label="' + (halv ? 'Halvöppen pipa' : sluten ? 'Sluten pipa' : 'Öppen pipa') + ' med den stående vågen för ' + toner.map(function (n) { return NAMN[n]; }).join(' och ') +
+            (halv ? '. Buk i öppningen och nod vid den slutna änden.' : sluten ? '. Noder vid båda ändarna.' : '. Bukar i båda öppningarna.') + ' Vågen kan startas och tonen spelas upp.">' + bas + '<g class="ms-pp-dyn"></g></svg>';
+        var dyn = scene.querySelector('.ms-pp-dyn');
+        card.appendChild(scene);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        var startBtn = vgBtn('Starta vågen', 'ms-primar');
+        controls.appendChild(startBtn);
+        var lyssna = toner.map(function (n) {
+            var b = vgBtn('Lyssna på ' + NAMN[n]);
+            b.setAttribute('aria-pressed', 'false');
+            controls.appendChild(b);
+            return { n: n, btn: b };
+        });
+        card.appendChild(controls);
+        node.appendChild(card);
+
+        var loop = vgLoop(card, function (dt) { tid += dt; rita(); });
+        function sattIgang(v) {
+            igang = v;
+            startBtn.textContent = v ? 'Stoppa vågen' : 'Starta vågen';
+            startBtn.classList.toggle('ms-primar', !v);
+            loop.satt(v);
+            if (!v) tid = 0;
+            rita();
+        }
+        startBtn.addEventListener('click', function () { sattIgang(!igang); });
+
+        function knappar() {
+            lyssna.forEach(function (x) {
+                var pa = !!(ppSpelar && ppSpelar.card === card && ppSpelar.n === x.n);
+                x.btn.textContent = (pa ? 'Tysta ' : 'Lyssna på ') + NAMN[x.n];
+                x.btn.setAttribute('aria-pressed', pa ? 'true' : 'false');
+                x.btn.classList.toggle('ms-primar', pa);
+            });
+        }
+        card._knappar = knappar;
+        function tysta() {
+            if (!ppSpelar) return;
+            var p = ppSpelar, t = ppActx.currentTime;
+            ppSpelar = null;
+            p.g.gain.cancelScheduledValues(t);
+            p.g.gain.setValueAtTime(p.g.gain.value, t);
+            p.g.gain.linearRampToValueAtTime(0, t + 0.08);
+            p.o.forEach(function (o) { o.stop(t + 0.1); });
+            if (p.card._knappar) p.card._knappar();
+        }
+        function spela(n) {
+            var AC = window.AudioContext || window.webkitAudioContext;
+            if (!AC) return;
+            if (!ppActx) ppActx = new AC();
+            if (ppActx.state === 'suspended') ppActx.resume();
+            var t = ppActx.currentTime, g = ppActx.createGain(), os = [];
+            g.gain.setValueAtTime(0, t);
+            g.gain.linearRampToValueAtTime(0.28, t + 0.06);
+            g.connect(ppActx.destination);
+            [[1, 1], [2, 0.18], [3, 0.08]].forEach(function (h) {
+                var o = ppActx.createOscillator(), hg = ppActx.createGain();
+                o.type = 'sine'; o.frequency.value = frekv(n) * h[0]; hg.gain.value = h[1];
+                o.connect(hg); hg.connect(g); o.start(t); os.push(o);
+            });
+            ppSpelar = { card: card, n: n, g: g, o: os };
+        }
+        lyssna.forEach(function (x) {
+            x.btn.addEventListener('click', function () {
+                var samma = ppSpelar && ppSpelar.card === card && ppSpelar.n === x.n;
+                tysta();
+                if (!samma) { spela(x.n); if (!igang) sattIgang(true); }
+                knappar();
+            });
+        });
+        card._set = function (t) { igang = true; tid = t; rita(); };
+        rita();
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: provror
+    // ══════════════════════════════════════════════════════════════════════
+    // fy2-2.10, demonstrationen "Halvöppen pipa": man blåser över öppningen
+    // på ett provrör och grundtonen hörs. Luftpelaren är en halvöppen pipa
+    // med buk i öppningen och nod vid botten (eller vattenytan), så
+    // l = λ/4 och f = v/(4l) med v = 340 m/s. Röret är 16 cm; häller man i
+    // vatten blir luftpelaren kortare och tonen högre. Man blåser så länge
+    // knappen Blås (eller röret/munnen) hålls nedtryckt. Ljudet är en sinuston
+    // på f plus ett smalbandigt brus kring samma frekvens, så att det låter
+    // luftigt som en flaska man blåser i.
+    var prRaknare = 0;
+    function buildProvror(node, cfg) {
+        var INK = '#1f2530', BLA = '#2563c9', GLAS = '#7c8a99';
+        var V = 340, L0 = 0.16, VMAX = 0.10;
+        var RX = 290, RW = 40, TOP = 74, BOT = 274, MX = 40;           // röret: x-mitt, innerbredd, öppning, botten
+        var PXM = 200 / L0;                                    // px per meter längs röret
+        var vatten = 0, blaser = false, styrka = 0, tid = 0;
+        var id = 'ms-pr-' + (++prRaknare);
+        function fmt(v, d) { var s = v.toFixed(d); return parseFloat(s) === 0 ? '0' : s.replace('.', ','); }
+        function it(t) { return '<tspan font-style="italic">' + t + '</tspan>'; }
+        function lbl(x, y, anchor, inner, size, color, extra) {
+            return '<text x="' + vgR1(x) + '" y="' + vgR1(y) + '" text-anchor="' + anchor + '" font-size="' +
+                (size || 14) + '" fill="' + (color || INK) + '"' + (extra || '') + '>' + inner + '</text>';
+        }
+        function langd() { return L0 - vatten; }
+        function frekv() { return V / (4 * langd()); }
+        function ytaY() { return BOT - vatten * PXM; }
+
+        var bas = vgRutnat(id, 0, 0, 660, 310);
+        // ställ av trä
+        bas += '<rect x="' + (RX - 70) + '" y="250" width="140" height="12" rx="3" fill="#c9965a" stroke="#8a6033" stroke-width="1.2"/>' +
+            '<rect x="' + (RX - 70) + '" y="290" width="140" height="10" rx="3" fill="#b5834a" stroke="#8a6033" stroke-width="1.2"/>' +
+            '<rect x="' + (RX - 64) + '" y="262" width="8" height="28" fill="#b5834a"/><rect x="' + (RX + 56) + '" y="262" width="8" height="28" fill="#b5834a"/>';
+        // munnen i profil till vänster om öppningen
+        bas += '<g transform="translate(' + MX + ' 0)">' +
+            '<path d="M 70 18 C 112 22 128 38 140 52 C 146 58 150 61 150 64 C 150 67 145 68 141 68 C 145 71 146 74 141 77 ' +
+            'C 136 80 130 80 126 82 C 128 92 120 104 98 110 L 70 110 Z" fill="#efc29c" stroke="#b9845c" stroke-width="1.4"/>' +
+            '<path d="M 141 68 C 136 68 131 69 127 70" fill="none" stroke="#a5523f" stroke-width="2" stroke-linecap="round"/>' +
+            '<path d="M 136 61 C 140 63 142 65 141 68 C 142 71 141 74 138 76" fill="none" stroke="#c2685a" stroke-width="3.2" stroke-linecap="round"/></g>';
+        // panelens rubrik och formel med rakt bråkstreck
+        var PX = 510;
+        bas += lbl(PX, 50, 'middle', 'Halvöppen pipa', 13, '#6a7180', ' font-weight="600"');
+        bas += lbl(PX, 74, 'middle', 'buk i öppningen, nod vid botten', 12, '#6a7180');
+        bas += '<line x1="' + (PX + 2) + '" y1="110" x2="' + (PX + 16) + '" y2="110" stroke="' + INK + '" stroke-width="1.2"/>' +
+            lbl(PX + 9, 105, 'middle', it('λ'), 16) + lbl(PX + 9, 126, 'middle', '4', 16) +
+            lbl(PX - 2, 115.5, 'end', it('l') + ' = ', 16);
+
+        function rita() {
+            var s = '', yv = ytaY(), A = 15 * styrka, c = Math.cos(2 * Math.PI * 3 * tid);
+            // vattnet
+            if (vatten > 0.001) {
+                s += '<path d="M ' + (RX - RW / 2) + ' ' + vgR1(yv) + ' L ' + (RX + RW / 2) + ' ' + vgR1(yv) + ' L ' + (RX + RW / 2) + ' ' + BOT +
+                    ' A ' + (RW / 2) + ' ' + (RW / 2) + ' 0 0 1 ' + (RX - RW / 2) + ' ' + BOT + ' Z" fill="#9cc3ea" opacity="0.75"/>';
+                s += '<line x1="' + (RX - RW / 2) + '" y1="' + vgR1(yv) + '" x2="' + (RX + RW / 2) + '" y2="' + vgR1(yv) + '" stroke="#5b8fc7" stroke-width="1.4"/>';
+            }
+            // stående våg i luftpelaren: buk i öppningen, nod vid botten/vattenytan
+            if (styrka > 0.02) {
+                var h = yv - TOP, hoger = [], vanster = [], lin = [];
+                for (var k = 0; k <= 50; k++) {
+                    var y = TOP + h * k / 50, e = A * Math.cos(Math.PI / 2 * k / 50);
+                    hoger.push(vgR1(RX + e) + ',' + vgR1(y)); vanster.unshift(vgR1(RX - e) + ',' + vgR1(y));
+                    lin.push(vgR1(RX + e * c) + ',' + vgR1(y));
+                }
+                s += '<polygon points="' + hoger.join(' ') + ' ' + vanster.join(' ') + '" fill="' + BLA + '" opacity="0.15"/>';
+                s += '<polyline points="' + lin.join(' ') + '" fill="none" stroke="' + BLA + '" stroke-width="2.4"/>';
+                s += '<circle cx="' + RX + '" cy="' + vgR1(yv) + '" r="2.8" fill="' + INK + '"/>';
+                s += lbl(RX - RW / 2 - 8, TOP + 14, 'end', 'buk', 12, '#6a7180') + lbl(RX - RW / 2 - 8, yv - 2, 'end', 'nod', 12, '#6a7180');
+            }
+            // luftströmmen över öppningen
+            if (styrka > 0.02) {
+                for (var i = 0; i < 4; i++) {
+                    var fas = (tid * 2.2 + i / 4) % 1, x0 = 150 + MX + fas * 150, yy = 66 + (i % 2) * 6 - fas * 4;
+                    s += '<path d="M ' + vgR1(x0) + ' ' + vgR1(yy) + ' q 14 -4 28 0" fill="none" stroke="#8a919b" stroke-width="1.6" stroke-linecap="round" opacity="' +
+                        vgR1(styrka * (1 - fas) * 0.9 * 100) / 100 + '"/>';
+                }
+            }
+            // provröret av glas
+            s += '<path d="M ' + (RX - RW / 2 - 3) + ' ' + (TOP - 4) + ' L ' + (RX - RW / 2) + ' ' + TOP + ' L ' + (RX - RW / 2) + ' ' + BOT +
+                ' A ' + (RW / 2) + ' ' + (RW / 2) + ' 0 0 0 ' + (RX + RW / 2) + ' ' + BOT + ' L ' + (RX + RW / 2) + ' ' + TOP + ' L ' + (RX + RW / 2 + 3) + ' ' + (TOP - 4) +
+                '" fill="none" stroke="' + GLAS + '" stroke-width="2.6" stroke-linejoin="round"/>' +
+                '<line x1="' + (RX - RW / 2 + 6) + '" y1="' + (TOP + 10) + '" x2="' + (RX - RW / 2 + 6) + '" y2="' + (BOT - 6) + '" stroke="#ffffff" stroke-width="3" opacity="0.6" stroke-linecap="round"/>';
+            // måttlinje för luftpelaren till höger om röret
+            var mx = RX + RW / 2 + 26;
+            s += '<line x1="' + (RX + RW / 2 + 6) + '" y1="' + TOP + '" x2="' + (mx + 6) + '" y2="' + TOP + '" stroke="#8a919b" stroke-width="1" stroke-dasharray="3 3"/>' +
+                '<line x1="' + (RX + RW / 2 + 6) + '" y1="' + vgR1(yv) + '" x2="' + (mx + 6) + '" y2="' + vgR1(yv) + '" stroke="#8a919b" stroke-width="1" stroke-dasharray="3 3"/>';
+            s += vgDubbelpil(mx, TOP, mx, yv, BLA);
+            s += lbl(mx + 10, (TOP + yv) / 2 + 5, 'start', it('l') + ' = ' + fmt(langd() * 100, 0) + ' cm', 14, BLA, ' font-weight="600"');
+            // avläsning i panelen
+            s += lbl(PX, 162, 'middle', it('λ') + ' = 4 · ' + it('l') + ' = ' + fmt(4 * langd(), 2) + ' m', 15, INK);
+            s += lbl(PX, 190, 'middle', it('f') + ' = ' + it('v') + '/' + it('λ') + ' = ' + fmt(frekv(), 0) + ' Hz', 17, styrka > 0.02 ? BLA : INK, ' font-weight="600"');
+            s += lbl(PX, 226, 'middle', styrka > 0.02 ? 'Grundtonen hörs' : 'Håll in Blås', 14, '#6a7180', ' font-weight="600"');
+            dyn.innerHTML = s;
+        }
+
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus ms-bred';
+        if (cfg.titel) {
+            var tEl = document.createElement('div');
+            tEl.className = 'minisim-title';
+            tEl.textContent = cfg.titel;
+            card.appendChild(tEl);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene ms-kv-scene';
+        scene.innerHTML = '<svg class="ms-kv-svg" viewBox="40 10 620 295" width="620" height="295" ' +
+            'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" ' +
+            'aria-label="Någon blåser över öppningen på ett provrör, och grundtonen hörs. I röret visas den stående vågen med buk i öppningen ' +
+            'och nod vid botten. Häller man i vatten blir luftpelaren kortare och tonen högre.">' + bas + '<g class="ms-pr-dyn"></g></svg>';
+        var svg = scene.querySelector('svg');
+        var dyn = scene.querySelector('.ms-pr-dyn');
+        card.appendChild(scene);
+        msFullskarm(card, scene, 620 / 295, 130);
+
+        var row = document.createElement('div');
+        row.className = 'minisim-slider-row';
+        var sLbl = document.createElement('span');
+        sLbl.className = 'minisim-slider-lbl';
+        sLbl.textContent = 'Vatten i röret';
+        var sl = document.createElement('input');
+        sl.type = 'range';
+        sl.className = 'minisim-slider';
+        sl.min = '0'; sl.max = String(VMAX * 100); sl.step = '0.5'; sl.value = '0';
+        sl.setAttribute('aria-label', 'Vattnets höjd i röret i centimeter');
+        var val = document.createElement('span');
+        val.className = 'minisim-slider-val';
+        row.appendChild(sLbl); row.appendChild(sl); row.appendChild(val);
+        card.appendChild(row);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        var blasBtn = vgBtn('Håll in för att blåsa', 'ms-primar');
+        blasBtn.style.touchAction = 'none';
+        controls.appendChild(blasBtn);
+        card.appendChild(controls);
+        node.appendChild(card);
+
+        // ── ljud ──────────────────────────────────────────────────────────
+        var actx = null, tonG = null, osc = null, brusG = null, brusF = null;
+        function startaLjud() {
+            if (actx) { if (actx.state === 'suspended') actx.resume(); return; }
+            var AC = window.AudioContext || window.webkitAudioContext;
+            if (!AC) return;
+            actx = new AC();
+            var master = actx.createGain(); master.gain.value = 1; master.connect(actx.destination);
+            tonG = actx.createGain(); tonG.gain.value = 0; tonG.connect(master);
+            osc = actx.createOscillator(); osc.type = 'sine'; osc.frequency.value = frekv();
+            osc.connect(tonG); osc.start();
+            var len = actx.sampleRate * 2, buf = actx.createBuffer(1, len, actx.sampleRate), d = buf.getChannelData(0);
+            for (var i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+            var src = actx.createBufferSource(); src.buffer = buf; src.loop = true;
+            brusF = actx.createBiquadFilter(); brusF.type = 'bandpass'; brusF.frequency.value = frekv(); brusF.Q.value = 18;
+            brusG = actx.createGain(); brusG.gain.value = 0;
+            src.connect(brusF); brusF.connect(brusG); brusG.connect(master); src.start();
+        }
+        function ljudSteg() {
+            if (!actx) return;
+            var t = actx.currentTime, f = frekv();
+            osc.frequency.setTargetAtTime(f * (1 + 0.003 * Math.sin(2 * Math.PI * 5 * tid)), t, 0.02);
+            brusF.frequency.setTargetAtTime(f, t, 0.02);
+            tonG.gain.setTargetAtTime(0.2 * styrka * styrka, t, 0.03);
+            brusG.gain.setTargetAtTime(0.9 * styrka, t, 0.03);
+        }
+        function blas(v) { if (v) startaLjud(); blaser = v; blasBtn.classList.toggle('ms-primar', !v); }
+        blasBtn.addEventListener('pointerdown', function (e) { e.preventDefault(); blas(true); try { blasBtn.setPointerCapture(e.pointerId); } catch (er) {} });
+        ['pointerup', 'pointercancel', 'pointerleave'].forEach(function (ev) { blasBtn.addEventListener(ev, function () { blas(false); }); });
+        blasBtn.addEventListener('keydown', function (e) { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); blas(true); } });
+        blasBtn.addEventListener('keyup', function (e) { if (e.key === ' ' || e.key === 'Enter') blas(false); });
+        // man kan också hålla in på munnen eller röret
+        svg.addEventListener('pointerdown', function (e) {
+            var r = svg.getBoundingClientRect(), vb = svg.viewBox.baseVal;
+            var x = vb.x + (e.clientX - r.left) / r.width * vb.width;
+            if (x > 420) return;
+            blas(true);
+            try { svg.setPointerCapture(e.pointerId); } catch (er) {}
+        });
+        ['pointerup', 'pointercancel'].forEach(function (ev) { svg.addEventListener(ev, function () { blas(false); }); });
+        svg.style.touchAction = 'pan-y';
+        sl.addEventListener('input', function () { vatten = parseFloat(sl.value) / 100; visaVal(); rita(); });
+        function visaVal() { val.textContent = fmt(vatten * 100, 1) + ' cm'; }
+
+        var loop = vgLoop(card, function (dt) {
+            tid += dt;
+            styrka += ((blaser ? 1 : 0) - styrka) * Math.min(1, dt * (blaser ? 9 : 6));
+            if (styrka < 0.002) styrka = 0;
+            ljudSteg();
+            rita();
+        });
+        card._set = function (v, st) { vatten = v; styrka = st; tid = 0.1; sl.value = String(v * 100); visaVal(); rita(); };
+        visaVal();
+        rita();
+        loop.satt(true);
+    }
+
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
                   stegkast: buildStegkast,
                   svangningsgrafer: buildSvangningsgrafer,
@@ -14233,7 +14875,8 @@
                   vinkelrata: buildVinkelrata, pennprovet: buildPennprovet,
                   vagstallning: buildVagstallning, pulsvag: buildPulsvag, vagtyp: buildVagtyp,
                   ytvag: buildYtvag, fasvag: buildFasvag,
-                  staendevag: buildStaendevag, gitarrton: buildGitarrton };
+                  staendevag: buildStaendevag, gitarrton: buildGitarrton,
+                  snurrslang: buildSnurrslang, pipton: buildPipton, provror: buildProvror };
 
     function decodeSrc(b64) {
         try { return decodeURIComponent(escape(atob(b64))); }

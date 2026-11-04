@@ -30,6 +30,12 @@
 #  Varje mejl från jobbet bär markören FL-JOBB och FL-NYHET:<datum>, och
 #  ämnesraden börjar "[Nyhet <datum>]". Ett svar är obehandlat så länge det
 #  senaste meddelandet i tråden saknar markören.
+#  ⛔ Gmail-kopplingen följer bara med den VANLIGA inloggningen
+#  (~\.claude\.credentials.json), inte den långlivade nyckeln från
+#  `claude setup-token`. Mejlstegen kör därför utan nyckeln (Invoke-Claude
+#  med -Gmail). 2026-10-31 – 11-04 körde de med nyckeln, och inget
+#  granskningsmejl gick ut på fem dagar utan att något larmade. Saknas Gmail
+#  eller kommer mejlstegen inte in larmar Larma-Mejl via GitHub i stället.
 #
 #  Filen MÅSTE sparas som UTF-8 MED BOM (PowerShell 5.1 läser annars å/ä/ö
 #  som ANSI, och de svenska meningarna i uppdragen blir trasiga).
@@ -113,6 +119,12 @@ $script:ClaudeText = ''
 $script:ForsokFil = $null
 $script:AntalForsok = 0
 $script:InloggningSaknas = $false
+$script:MejlFel = $null
+
+# Claude skriver UTF-8. Utan detta läser PowerShell utdata som OEM-teckentabell
+# ("Mejlet är skickat" blev "Mejlet ├ñr skickat"), så kontrollen av att
+# mejlet gått ut slog fel varje gång och loggen blev oläslig.
+try { [Console]::OutputEncoding = New-Object Text.UTF8Encoding $false } catch { }
 
 # Långlivad inloggning för jobbet (sedan 2026-10-31). Den vanliga
 # inloggningen i ~\.claude\.credentials.json gick ut 2026-10-29 och kunde
@@ -121,17 +133,25 @@ $script:InloggningSaknas = $false
 # utanför repot i den här filen och läses av varje körning.
 $TokenFil = Join-Path $env:USERPROFILE '.claude\nyhetsjobb-token.txt'
 
-function Invoke-Claude([string]$Prompt, [string]$Modell) {
+function Invoke-Claude([string]$Prompt, [string]$Modell, [switch]$Gmail) {
     # Headless print-läge avslutar bakgrundsagenter efter 600 s som standard;
     # 0 = vänta ut dem (2026-07-30 dödades nyhetsagenten mitt i arbetet).
     $env:CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS = '0'
     # Rör inte Telegram-kanalen (pluginens server tar annars över boten).
     $env:TELEGRAM_STATE_DIR = Join-Path $env:TEMP 'telegram-ingen-kanal'
-    if (Test-Path $TokenFil) {
+    if ($Gmail) {
+        # Gmail-kopplingen kommer från claude.ai-inloggningen och saknas med
+        # nyckeln, se filhuvudet. Variabeln lever kvar i processen från en
+        # tidigare körning och måste tas bort uttryckligen.
+        Remove-Item Env:\CLAUDE_CODE_OAUTH_TOKEN -ErrorAction SilentlyContinue
+        $script:MejlFel = $null
+    }
+    elseif (Test-Path $TokenFil) {
         $token = ([IO.File]::ReadAllText($TokenFil)).Trim()
         if ($token) { $env:CLAUDE_CODE_OAUTH_TOKEN = $token }
     }
-    Log ("Startar Claude Code (headless, modell {0})..." -f $Modell)
+    if ($Gmail) { $inlogg = 'vanlig inloggning, Gmail' } else { $inlogg = 'nyckel' }
+    Log ("Startar Claude Code (headless, modell {0}, {1})..." -f $Modell, $inlogg)
     $ut = New-Object System.Collections.Generic.List[string]
     & $script:Claude @('-p', $Prompt, '--model', $Modell, '--dangerously-skip-permissions') 2>&1 |
         ForEach-Object { $ut.Add([string]$_); Log $_ }
@@ -140,7 +160,15 @@ function Invoke-Claude([string]$Prompt, [string]$Modell) {
     # Sessionsgränsen ("You've hit your session limit"), veckogränsen och
     # äldre CLI-versioners "Claude AI usage limit reached".
     if ($script:ClaudeText -match 'hit your .*limit|usage limit reached|weekly limit') { $script:GransNadd = $true }
-    if ($script:ClaudeText -match 'Failed to authenticate|OAuth (session|token) (has )?expired|Invalid API key|Please run /login|Not logged in|authentication_error') {
+    $authFel = $script:ClaudeText -match 'Failed to authenticate|OAuth (session|token) (has )?expired|Invalid API key|Please run /login|Not logged in|authentication_error'
+    if ($Gmail) {
+        # Mejlstegen larmar för sig (Larma-Mejl): artikeln är redan skriven,
+        # och morgondagens artikel ska inte hoppas över för att mejlet fallerar.
+        if ($authFel) { $script:MejlFel = 'inloggning' }
+        elseif ($script:ClaudeText -match 'GMAIL SAKNAS') { $script:MejlFel = 'koppling' }
+        return
+    }
+    if ($authFel) {
         $script:InloggningSaknas = $true
         # Försöket dog innan det gjorde något och ska inte räknas mot taket.
         if ($script:ForsokFil) { Set-Content -Path $script:ForsokFil -Value $script:AntalForsok -Encoding ascii }
@@ -180,6 +208,54 @@ Token gäller ett år. Loggen: https://github.com/Goliatbagge/Fysiklabbet/blob/n
     try {
         & msg.exe '*' "Fysiklabbet: nyhetsjobbet kan inte logga in i Claude, så ingen nyhet skrivs. Kör 'claude setup-token' och spara token i $TokenFil." 2>$null
     } catch { }
+}
+
+function Larma-Mejl([string]$Vad, [string]$Extra) {
+    # Ett mejlsteg kom inte fram (ingen Gmail-koppling, inloggningen ute eller
+    # inget kvitto på att mejlet gick). Mejlet kan per definition inte larma
+    # om sig självt, så larmet går som ett ärende via Nyhetsjobb-larm, som
+    # GitHub mejlar om. Högst ett per dag; $Extra (till exempel
+    # förhandslänken) gör att granskningen ändå kan göras från larmet.
+    $Fil = Join-Path $LogDir ('.mejllarm-{0}' -f $Today)
+    if (Test-Path $Fil) { Log 'Mejlsteget misslyckades igen (larmat redan i dag).'; return }
+    Set-Content -Path $Fil -Value (Get-Date -Format 'HH:mm') -Encoding ascii
+    switch ($script:MejlFel) {
+        'inloggning' { $orsak = "Claude Code kom inte in med den vanliga inloggningen (~\.claude\.credentials.json), som mejlstegen behöver för Gmail-kopplingen." }
+        'koppling'   { $orsak = "Claude-sessionen hade ingen Gmail-koppling." }
+        default      { $orsak = "Claude-sessionen gav inget kvitto på att mejlet skickades." }
+    }
+    Log "FEL: $Vad misslyckades ($orsak) Larmar via GitHub."
+    $rubrik = "Nyhetsjobbet kan inte mejla ($Today)"
+    $text = @"
+$Vad gick inte. $orsak
+
+$Extra
+
+Laga så här, på Windows-datorn:
+
+1. Starta ``claude`` i en vanlig PowerShell och kör ``/login`` om den ber om det. Kontrollera med ``/mcp`` att Gmail finns bland claude.ai-kopplingarna.
+2. Kör ``Start-ScheduledTask -TaskName 'Fysiklabbet daglig nyhet svar'`` och se efter i loggen att den hittar Gmail.
+
+Artiklarna skrivs och publiceras som vanligt även när mejlen inte går ut. Loggen: https://github.com/Goliatbagge/Fysiklabbet/blob/nyhetsjobb-logg/$Today.log
+"@
+    $gh = Get-Command gh -ErrorAction SilentlyContinue
+    if ($gh) {
+        & $gh.Source workflow run nyhetsjobb-larm.yml --repo Goliatbagge/Fysiklabbet -f "rubrik=$rubrik" -f "text=$text" 2>&1 | ForEach-Object { Log $_ }
+        if ($LASTEXITCODE -eq 0) { Log 'Larmet skickat till GitHub (Nyhetsjobb-larm).' }
+        else { Log 'FEL: larmet kunde inte skickas till GitHub.' }
+    }
+    else { Log 'FEL: gh saknas, inget GitHub-larm.' }
+}
+
+function Mejl-Skickat {
+    # Kvitto från mejlsessionen. Sessionen skriver inte alltid den överenskomna
+    # raden ordagrant ("Mejlet är skickat …", "Skickat."), så godta det, men
+    # aldrig när den samtidigt säger att den inte kunde skicka.
+    if ($script:MejlFel) { return $false }
+    $t = $script:ClaudeText
+    if ($t -match 'MEJL SKICKAT') { return $true }
+    if ($t -match "(?i)inte (har )?skicka|kan inte skicka|can.?t send|cannot send|not (been )?sent|unable to send") { return $false }
+    return [bool]($t -match '(?i)skickat|email (has been |was )?sent')
 }
 
 function Push-Main {
@@ -335,6 +411,10 @@ function Tak([string]$Nyckel, [int]$Max) {
 #  Uppdrag till Claude
 # ---------------------------------------------------------------------
 
+# Först i varje mejluppdrag: utan den svarar sessionen med en fråga eller ett
+# utkast i stället för ett tydligt besked, och felet syns bara som en VARNING.
+$GmailKoll = 'First check that the Gmail tools (send_message, search_threads, get_thread) are available to you; load them with ToolSearch if they are deferred. If they are not available, print exactly the line GMAIL SAKNAS and stop: do not ask questions, do not draft the email, do nothing else.'
+
 function Prompt-Skriv([string]$Datum, [bool]$Forhand) {
     $Python = Find-Python
     if ($Forhand) {
@@ -374,6 +454,8 @@ The article was written by the night-time safety net because no article had been
 "@
     }
     return @"
+$GmailKoll
+
 Read the article with id "$Id" (date $Datum) in data/nyheter.js. Send ONE email with the Gmail tool send_message to $Agare (and nobody else).
 
 Subject: $amne (replace <title> with the article's title).
@@ -389,6 +471,8 @@ Before sending, check that both htmlBody and the plain-text body contain every i
 function Prompt-LasSvar {
     $fil = Join-Path $LogDir 'svar-uppdrag.txt'
     return @"
+$GmailKoll
+
 Use the Gmail tools to check for replies from the owner ($Agare) to the news review emails.
 
 1. search_threads with the query: subject:"[Nyhet" newer_than:4d
@@ -424,6 +508,8 @@ function Prompt-Kvittera([string]$Datum, [string]$Tradid, [string]$Id) {
     $utfall = Join-Path $LogDir 'andring-utfall.txt'
     if ($Datum -gt $Today) { $lank = "$Bas/nyheter.html?forhand=$Id" } else { $lank = "$Bas/nyheter.html?id=$Id" }
     return @"
+$GmailKoll
+
 Read the file $utfall. Reply in the Gmail thread with id $Tradid (send_message with replyThreadId, to $Agare only) with a short Swedish email built from that file: what was changed or answered and, if the article still exists, a link to $lank (the change can take a few minutes to show). If line 1 is BORTTAGEN, say that the article has been removed and, if the date $Datum is still in the future, that a new article is being written and will arrive in a separate review email. No emojis, no dashes as pause markers. The last line must be exactly: FL-JOBB FL-NYHET:$Datum
 Do not change any files. Print MEJL SKICKAT when done.
 "@
@@ -447,16 +533,26 @@ function Kor-Skriv([string]$Datum, [bool]$Forhand) {
     # Ge GitHub Pages en stund, så att förhandslänken fungerar när mejlet kommer.
     Start-Sleep -Seconds 90
     if ($Forhand) { $typ = 'granska' } else { $typ = 'publicerad' }
-    Invoke-Claude (Prompt-Mejl $Datum $id $typ) 'sonnet'
-    # Sessionen skriver inte alltid den överenskomna raden ordagrant (första
-    # körningen 2026-10-25 svarade "Mejlet är skickat …"), så godta båda.
-    if ($script:ClaudeText -notmatch 'MEJL SKICKAT|[Mm]ejlet är skickat|email (has been |was )?sent') { Log 'VARNING: mejlet till ägaren verkar inte ha skickats.' }
+    Invoke-Claude (Prompt-Mejl $Datum $id $typ) 'sonnet' -Gmail
+    if (Mejl-Skickat) { Log 'Mejlet till ägaren är skickat.'; return }
+    if ($Forhand) {
+        $extra = "Artikeln för $Datum ($id) är pushad och publiceras automatiskt vid midnatt. Granska den här: $Bas/nyheter.html?forhand=$id"
+        Larma-Mejl 'Granskningsmejlet' $extra
+    } else {
+        $extra = "Dagens artikel ($id) skrevs av skyddsnätet och är redan publicerad utan granskning: $Bas/nyheter.html?id=$id"
+        Larma-Mejl 'Mejlet om den ogranskade artikeln' $extra
+    }
 }
 
 function Kor-Svar {
-    Invoke-Claude (Prompt-LasSvar) 'sonnet'
+    Invoke-Claude (Prompt-LasSvar) 'sonnet' -Gmail
+    if ($script:MejlFel) { Larma-Mejl 'Kontrollen av dina svar på granskningsmejlen' ''; return }
     $m = [regex]::Match($script:ClaudeText, 'SVAR:\s*(\d{4}-\d{2}-\d{2})\s+(OK|ANDRA)')
-    if (-not $m.Success) { Log 'Inga obehandlade svar.'; return }
+    if (-not $m.Success) {
+        if ($script:ClaudeText -match 'SVAR:\s*NONE') { Log 'Inga obehandlade svar.' }
+        else { Log 'VARNING: svarskontrollen gav inget SVAR-besked. Försöker igen vid nästa körning.' }
+        return
+    }
     $datum = $m.Groups[1].Value
     if ($m.Groups[2].Value -eq 'OK') { Log "Ägaren godkände artikeln för $datum."; return }
 
@@ -477,7 +573,10 @@ function Kor-Svar {
     }
     if (-not (Push-Main)) { Log 'FEL: ändringen kunde inte pushas. Svaret behandlas vid nästa körning.'; return }
     Start-Sleep -Seconds 60
-    Invoke-Claude (Prompt-Kvittera $datum $tradid $id) 'sonnet'
+    Invoke-Claude (Prompt-Kvittera $datum $tradid $id) 'sonnet' -Gmail
+    if (-not (Mejl-Skickat)) {
+        Larma-Mejl 'Kvittot på din ändringsbegäran' "Ändringen av artikeln $datum ($id) är ändå gjord och pushad."
+    }
     Remove-Item -Force $fil -ErrorAction SilentlyContinue
 
     $utfall = [IO.File]::ReadAllLines($utfallFil) | Select-Object -First 1

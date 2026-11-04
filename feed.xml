@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Tue, 03 Nov 2026 02:24:38 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 04 Nov 2026 01:29:50 GMT</lastBuildDate>
+    <item>
+      <title>En svävande glaskula känner stöten från enskilda atomer</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-11-04-kulan-som-kanner-varje-atom</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-11-04-kulan-som-kanner-varje-atom</guid>
+      <pubDate>Wed, 04 Nov 2026 04:00:00 GMT</pubDate>
+      <category>Mekanik</category>
+      <description>Forskare vid Yale har fångat en glaskula, 100 nanometer i diameter, med en laser i vakuum och mätt den lilla knuff kulan får när en enda gaspartikel krockar med den. Antalet knuffar visar hur högt trycket i gasen är.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-11-04-kulan-som-kanner-varje-atom.jpg" length="552050" type="image/jpeg"/>
+    </item>
     <item>
       <title>Vintergatans snabbaste kända stjärna kan avslöja hur fort det svarta hålet i centrum snurrar</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-11-03-stjarnan-som-kanner-halet-snurra</link>
@@ -177,15 +186,6 @@
       <category>Relativitetsteori</category>
       <description>Fysiker i Berkeley, Wien och Pasadena har räknat fram ett sätt att mäta ramsläpning, den effekt där jordens rotation drar med sig rumtiden, på ett labbord i stället för med satelliter. Instrumentet är en ring av supraflytande helium nedkyld till en hundradels grad över den absoluta nollpunkten. Det är ännu inte byggt, men enligt beräkningarna kan det slå alla tidigare mätningar.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-16-helium-som-kanner-rumtiden.jpg" length="170727" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Ett material av små robotar hittar en gemensam takt av sig självt</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-10-15-robotar-som-hittar-takten</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-10-15-robotar-som-hittar-takten</guid>
-      <pubDate>Thu, 15 Oct 2026 04:00:00 GMT</pubDate>
-      <category>Mekanik</category>
-      <description>Forskare i Amsterdam har byggt ett material av 37 små robotceller som var och en bara känner av sina grannar. Efter en knuff börjar cellerna skaka var för sig, men inom några sekunder har skakningarna vuxit ihop till en enda stor svängning som håller takten av sig själv.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-15-robotar-som-hittar-takten.jpg" length="629827" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

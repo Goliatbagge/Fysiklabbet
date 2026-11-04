@@ -33,8 +33,8 @@ låter som ingenting.
 
 8
 00:00:23,240 --> 00:00:29,010
-Ändå blir glappet 16
-cm. Katten får plats.
+Ändå blir glappet
+16 cm. Katten får plats.
 
 9
 00:00:29,010 --> 00:00:32,300
@@ -52,7 +52,7 @@ Och omkretsen växer
 
 12
 00:00:39,920 --> 00:00:44,810
-1 m delat med 2π är cirka 16 cm.
+1 m delat med 2π är cirka 16 cm.
 
 13
 00:00:44,810 --> 00:00:48,340

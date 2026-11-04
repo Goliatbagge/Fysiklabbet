@@ -15220,23 +15220,26 @@
     //  typ: smaltrace
     //  En isbit (2 cm, 0 °C, 7,3 g) på en aluminiumplatta och en på en
     //  plastplatta, båda 20 °C. Isen smälter av värmen som leds upp från
-    //  plattan och av luften runt om (värmeövergångstal 10 W/(m²·K)).
-    //  Aluminiumplattan (15 × 15 × 1 cm, 546 J/K) räknas som en kropp med en
-    //  enda temperatur: den leder värme till isen genom kontaktytan
-    //  (2 500 W/(m²·K)) och svalnar lite på köpet. Plasten leder så dåligt att
-    //  bara ett tunt skikt under isen hinner ge ifrån sig värme:
+    //  plattan och av luften runt om (värmeövergångstal 12 W/(m²·K), luftens
+    //  strömning och strålningen tillsammans). Aluminiumplattan (15 × 15 × 1 cm,
+    //  546 J/K) räknas som en kropp med en enda temperatur: den leder värme
+    //  till isen genom den tunna vattenfilmen under biten (8 000 W/(m²·K)) och
+    //  svalnar lite på köpet. Plasten leder så dåligt att bara ett tunt skikt
+    //  under isen hinner ge ifrån sig värme:
     //      P = ΔT · e_plast · A / √(π · t),  e_plast ≈ 570
-    //  Smältvärmet är 334 J/g. Klockan visar den simulerade tiden; den går
-    //  tjugo gånger fortare än verkligheten (120 gånger med Snabbspola). Isen
-    //  på aluminiumet är borta efter cirka 5,5 minuter, på plasten efter
-    //  cirka 3,6 timmar.
+    //  Smältvattnet breder ut sig som en pöl (1 mm djup) och hämtar värme från
+    //  luften och plattan över hela sin yta (12 + 15 W/(m²·K)), som det lämnar
+    //  vidare till isen. Smältvärmet är 334 J/g. Isen på aluminiumet är borta
+    //  efter cirka 1,4 minuter, på plasten efter cirka 21 minuter, i nivå med
+    //  klassrumsförsöket. Klockan visar den simulerade tiden; den går fem
+    //  gånger fortare än verkligheten (40 gånger med Snabbspola).
     function buildSmaltrace(node, cfg) {
         var smal = (node.getBoundingClientRect().width || 664) < 520;
         var W = smal ? 500 : 1000, H = smal ? 815 : 600;
         var K = kvKort(node, cfg, W, H, 'En isbit ligger på en aluminiumplatta och en annan på en plastplatta, båda med rumstemperatur. ' +
-            'Ett stoppur visar tiden. Isbiten på aluminiumet smälter på ett par minuter till en vattenpöl, medan isbiten på plasten knappt har börjat smälta.');
+            'Ett stoppur visar tiden. Isbiten på aluminiumet smälter på en och en halv minut till en vattenpöl, medan isbiten på plasten håller i ungefär tjugo minuter.');
         var x = K.x, V = kvVerktyg(x);
-        var M0 = 917 * 8e-6 * 1000, LS = 334, S0 = 0.02, H_LUFT = 10, H_KONT = 2500, C_AL = 546, G_LUFT_AL = 0.3, E_PL = 570;
+        var M0 = 917 * 8e-6 * 1000, LS = 334, S0 = 0.02, H_LUFT = 12, H_POL = 15, FILM = 0.001, H_KONT = 8000, C_AL = 546, G_LUFT_AL = 0.3, E_PL = 570;
         var OY = 450, PH = 22;
         var plattor = [
             { ox: 30, namn: 'Aluminiumplatta', al: true },
@@ -15308,8 +15311,9 @@
                     Pplatta = 20 * E_PL * A / Math.sqrt(Math.PI * Math.max(tid, 1));
                 }
                 var Pluft = H_LUFT * 5 * A * 20;
+                var Ppol = (H_LUFT + H_POL) * (M0 - p.m) / 1e6 / FILM * 20;
                 p.P = Pplatta;
-                p.m -= (Pplatta + Pluft) * dts / LS;
+                p.m -= (Pplatta + Pluft + Ppol) * dts / LS;
                 if (p.m <= 0.01 * M0) { p.m = 0; p.klar = tid; }
             });
         }
@@ -15409,7 +15413,7 @@
         sn.cb.addEventListener('change', function () { snabb = sn.cb.checked; });
         var loop = vgLoop(K.card, function (dt) {
             if (gar) {
-                var dts = dt * (snabb ? 120 : 20), n = Math.ceil(dts / 0.5);
+                var dts = dt * (snabb ? 40 : 5), n = Math.ceil(dts / 0.5);
                 for (var i = 0; i < n; i++) steg(dts / n);
                 if (plattor[0].m <= 0 && plattor[1].m <= 0) { gar = false; etikett(); }
             }

@@ -1,0 +1,22 @@
+{
+ "film": "Repet runt jorden",
+ "figur": "Mattias",
+ "rost": "Pl7pcT0MQ5oC83oklshh",
+ "teori": "ma1c-2.8",
+ "segment": [
+  {"scen": 1, "tal": "Tänk dig ett rep spänt runt jorden.", "undertext": "Tänk dig ett rep spänt runt jorden."},
+  {"scen": 2, "tal": "Tätt mot marken, längs hela ekvatorn.", "undertext": "Tätt mot marken, längs hela ekvatorn."},
+  {"scen": 3, "tal": "Nu skarvar du i en enda meter.", "undertext": "Nu skarvar du i en enda meter."},
+  {"scen": 4, "tal": "Och lyfter repet lika högt överallt.", "undertext": "Och lyfter repet lika högt överallt."},
+  {"scen": 5, "tal": "Kan en myra krypa under? En katt?", "undertext": "Kan en myra krypa under? En katt?"},
+  {"scen": 6, "tal": "[curious] Vad tror du?", "undertext": "Vad tror du?"},
+  {"scen": 7, "tal": "En meter på fyratusen mil låter som ingenting.", "undertext": "En meter på 4 000 mil låter som ingenting."},
+  {"scen": 8, "tal": "Ändå blir glappet sexton centimeter. [pause] Katten får plats.", "undertext": "Ändå blir glappet 16 cm. Katten får plats."},
+  {"scen": 9, "tal": "Omkretsen är två pi gånger radien.", "undertext": "Omkretsen är 2π gånger radien."},
+  {"scen": 10, "tal": "Lyfts repet en bit, växer radien lika mycket.", "undertext": "Lyfts repet en bit, växer radien lika mycket."},
+  {"scen": 11, "tal": "Och omkretsen växer två pi gånger så mycket.", "undertext": "Och omkretsen växer 2π gånger så mycket."},
+  {"scen": 12, "tal": "En meter delat med två pi är ungefär sexton centimeter.", "undertext": "1 m delat med 2π är cirka 16 cm."},
+  {"scen": 13, "tal": "Jordens radie finns inte med i svaret.", "undertext": "Jordens radie finns inte med i svaret."},
+  {"scen": 14, "tal": "Runt en tennisboll blir glappet lika stort.", "undertext": "Runt en tennisboll blir glappet lika stort."}
+ ]
+}

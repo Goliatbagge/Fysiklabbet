@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#f7f2e8}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas>
+<script>
+// De egna scenerna i filmen "Repet runt jorden" (ma1c-2.8, problemlösning).
+// window.rita(scen, t) ritar scenen vid tiden t (s).
+//   scen 2: jorden som en cirkel, repet ritas fram tätt längs ekvatorn;
+//   scen 4: repet skarvas och lyfts lika högt överallt (glappet förstorat);
+//   scen 8: marken vid ekvatorn i skala 1 cm = 15 px: repet 16 cm upp, en katt
+//           (12 cm hög när den kryper) kryper under;
+//   scen 9: omkretsen är 2π · r;
+//   scen 10: repets radie är r + h;
+//   scen 11: omkretsen växer med 2π · h, som är den skarvade metern;
+//   scen 12: bara papper och rubrik, uträkningen läggs på som lager i montera.py;
+//   scen 14: tennisboll (r = 3,3 cm) med repet 16 cm utanför, i skala, och
+//            jorden med samma glapp.
+// Inget ritas i bandet y 1380–1560 (undertexterna).
+const c = document.getElementById('c'), x = c.getContext('2d');
+const BLA = '#2b5ca8', INK = '#0f1620', ROD = '#c8324a', RUT = 'rgba(147,174,199,.55)', GRA = '#7d8794';
+const TVATT = 'rgba(147,174,199,.14)';
+let SLOT = { 2: 4, 4: 4, 8: 4, 9: 4, 10: 4, 11: 4, 12: 4, 14: 4 };
+window.satt = s => Object.assign(SLOT, s);
+
+function papper() {
+  const gr = x.createLinearGradient(0, 0, 0, 1920); gr.addColorStop(0, '#f7f2e8'); gr.addColorStop(1, '#ece3d2');
+  x.fillStyle = gr; x.fillRect(0, 0, 1080, 1920);
+  x.strokeStyle = RUT; x.lineWidth = 1.5;
+  for (let i = 0; i <= 1920; i += 27) { x.beginPath(); x.moveTo(0, i + .75); x.lineTo(1080, i + .75); x.stroke(); }
+  for (let i = 0; i <= 1080; i += 27) { x.beginPath(); x.moveTo(i + .75, 0); x.lineTo(i + .75, 1920); x.stroke(); }
+  x.lineCap = 'round'; x.lineJoin = 'round';
+}
+function text(s, px, py, size, col, align, vikt) {
+  x.font = `${vikt || 600} ${size}px Poppins`; x.fillStyle = col || INK; x.textAlign = align || 'center'; x.textBaseline = 'alphabetic';
+  x.fillText(s, px, py);
+}
+// Text i delar: [sträng, kursiv?]; variabler kursiva, tal och enheter raka
+function mtext(delar, px, py, size, col, align) {
+  const font = k => `${k ? 'italic ' : ''}600 ${size}px Poppins`;
+  let w = 0; for (const [s, k] of delar) { x.font = font(k); w += x.measureText(s).width; }
+  let sx = align === 'left' ? px : align === 'right' ? px - w : px - w / 2;
+  x.fillStyle = col || INK; x.textAlign = 'left'; x.textBaseline = 'alphabetic';
+  for (const [s, k] of delar) { x.font = font(k); x.fillText(s, sx, py); sx += x.measureText(s).width; }
+}
+function rubrik(s, a) { x.globalAlpha = a === undefined ? 1 : a; text(s, 540, 250, 62, INK, 'center', 700); x.globalAlpha = 1; }
+function rubrikM(delar) { mtext(delar, 540, 250, 62, INK, 'center'); }
+const tona = (t, t0, d) => Math.min(1, Math.max(0, (t - t0) / (d || .5)));
+const mjuk = u => u * u * (3 - 2 * u);
+
+// Måttpil med spets i båda ändar (måttlinje)
+function spets(px, py, ux, uy, col) {
+  const h = 20, b = 11;
+  x.fillStyle = col; x.beginPath(); x.moveTo(px, py);
+  x.lineTo(px - ux * h - uy * b, py - uy * h + ux * b); x.lineTo(px - ux * h + uy * b, py - uy * h - ux * b); x.closePath(); x.fill();
+}
+function matt(x1, y1, x2, y2, col, w) {
+  const L = Math.hypot(x2 - x1, y2 - y1), ux = (x2 - x1) / L, uy = (y2 - y1) / L;
+  x.strokeStyle = col; x.lineWidth = w || 4; x.lineCap = 'butt';
+  x.beginPath(); x.moveTo(x1 + ux * 18, y1 + uy * 18); x.lineTo(x2 - ux * 18, y2 - uy * 18); x.stroke();
+  spets(x2, y2, ux, uy, col); spets(x1, y1, -ux, -uy, col); x.lineCap = 'round';
+}
+function cirkel(cx, cy, r, col, w, a0, a1) {
+  x.strokeStyle = col; x.lineWidth = w; x.beginPath(); x.arc(cx, cy, r, a0 === undefined ? 0 : a0, a1 === undefined ? Math.PI * 2 : a1); x.stroke();
+}
+
+// ---------- Jorden (scen 2 och 4) ----------
+const J = { cx: 540, cy: 830, r: 360 };
+function jorden(cx, cy, r) {
+  x.fillStyle = TVATT; x.beginPath(); x.arc(cx, cy, r, 0, 7); x.fill();
+  cirkel(cx, cy, r, BLA, 6);
+  // några lösa kontinentstreck, skalade med radien
+  const k = r / 360;
+  x.strokeStyle = BLA; x.lineWidth = Math.max(2, 4 * k);
+  const former = [
+    [[-200, -150], [-120, -210], [-40, -170], [-60, -90], [-140, -40], [-210, -80]],
+    [[60, -230], [150, -200], [210, -120], [160, -60], [90, -100]],
+    [[-60, 40], [30, 20], [90, 90], [40, 200], [-30, 170], [-70, 100]],
+    [[170, 60], [250, 90], [230, 170], [170, 150]],
+  ];
+  // mjuka konturer: kvadratiska kurvor genom mittpunkterna mellan hörnen
+  for (const f of former) {
+    const P = f.map(([px, py]) => [cx + px * k, cy + py * k]), m = (a, b) => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+    x.beginPath(); x.moveTo(...m(P[P.length - 1], P[0]));
+    P.forEach((p, i) => x.quadraticCurveTo(p[0], p[1], ...m(p, P[(i + 1) % P.length])));
+    x.closePath(); x.stroke();
+  }
+}
+function rep(cx, cy, r, u, w) {        // u = andel av varvet, ritas medurs från toppen
+  if (u <= 0) return;
+  cirkel(cx, cy, r, ROD, w || 8, -Math.PI / 2, -Math.PI / 2 + u * Math.PI * 2);
+}
+
+// ---------- Katten under repet (scen 8) ----------
+const CM = 15;                 // px per cm
+const MARK = 1180, REP8 = MARK - 16 * CM;
+function katt(cx) {            // krypande katt, ryggen 12 cm över marken, nosen åt vänster
+  const H = 12 * CM;
+  x.save(); x.translate(cx, MARK);
+  x.strokeStyle = BLA; x.lineWidth = 5; x.fillStyle = '#fbf8f1';
+  // kropp
+  x.beginPath(); x.moveTo(-170, -40);
+  x.bezierCurveTo(-150, -H * 1.36, 150, -H * 1.36, 230, -60);
+  x.bezierCurveTo(250, -20, 220, -6, 180, -8);
+  x.lineTo(-150, -8); x.bezierCurveTo(-190, -10, -190, -30, -170, -40); x.closePath(); x.fill(); x.stroke();
+  // huvud lågt fram, öron
+  x.beginPath(); x.ellipse(-230, -62, 66, 54, 0, 0, 7); x.fill(); x.stroke();
+  x.beginPath(); x.moveTo(-282, -94); x.lineTo(-282, -150); x.lineTo(-246, -112); x.moveTo(-210, -114); x.lineTo(-184, -152); x.lineTo(-176, -96); x.stroke();
+  x.fillStyle = INK; x.beginPath(); x.arc(-252, -66, 6, 0, 7); x.arc(-214, -66, 6, 0, 7); x.fill();
+  x.beginPath(); x.moveTo(-236, -46); x.lineTo(-228, -40); x.lineTo(-220, -46); x.stroke();
+  x.lineWidth = 2.5; x.beginPath(); x.moveTo(-262, -44); x.lineTo(-318, -52); x.moveTo(-262, -38); x.lineTo(-316, -30); x.moveTo(-200, -44); x.lineTo(-150, -54); x.stroke();
+  // ben (böjda, krypande)
+  x.lineWidth = 5;
+  x.beginPath(); x.moveTo(-120, -14); x.lineTo(-150, 0); x.moveTo(-60, -12); x.lineTo(-40, 0); x.moveTo(120, -12); x.lineTo(90, 0); x.moveTo(180, -12); x.lineTo(200, 0); x.stroke();
+  // svans
+  x.beginPath(); x.moveTo(228, -54); x.bezierCurveTo(300, -60, 330, -120, 300, -160); x.stroke();
+  x.restore();
+}
+
+// ---------- Cirklarna (scen 9–11) ----------
+const K = { cx: 540, cy: 820, r: 300, h: 80 };
+const VINK = -Math.PI / 5;     // radien ritas snett uppåt höger
+function radie(r0, r1, col, w) {
+  const ux = Math.cos(VINK), uy = Math.sin(VINK);
+  x.strokeStyle = col; x.lineWidth = w || 5; x.beginPath(); x.moveTo(K.cx + ux * r0, K.cy + uy * r0); x.lineTo(K.cx + ux * r1, K.cy + uy * r1); x.stroke();
+}
+function mittpunkt() { x.fillStyle = INK; x.beginPath(); x.arc(K.cx, K.cy, 8, 0, 7); x.fill(); }
+function etikettR(a) {
+  x.globalAlpha = a; const m = K.r * .5;
+  mtext([['r', true]], K.cx + Math.cos(VINK) * m - 24, K.cy + Math.sin(VINK) * m - 22, 56, INK, 'center'); x.globalAlpha = 1;
+}
+function etikettH(a) {
+  x.globalAlpha = a; const m = K.r + K.h / 2;
+  mtext([['h', true]], K.cx + Math.cos(VINK) * m - 30, K.cy + Math.sin(VINK) * m - 26, 56, ROD, 'center'); x.globalAlpha = 1;
+}
+
+// ---------- Tennisbollen (scen 14) ----------
+const TB = { cx: 540, cy: 760, s: 17.6 };     // px per cm
+function tennisboll() {
+  const r = 3.3 * TB.s;
+  x.fillStyle = 'rgba(147,174,199,.35)'; x.beginPath(); x.arc(TB.cx, TB.cy, r, 0, 7); x.fill();
+  cirkel(TB.cx, TB.cy, r, BLA, 5);
+  x.lineWidth = 3; x.beginPath(); x.arc(TB.cx - r * 1.25, TB.cy, r * .9, -0.75, 0.75); x.stroke();
+  x.beginPath(); x.arc(TB.cx + r * 1.25, TB.cy, r * .9, Math.PI - 0.75, Math.PI + 0.75); x.stroke();
+}
+
+window.rita = (n, t) => {
+  papper();
+  if (n === 2) {
+    rubrik('Ett rep runt ekvatorn');
+    jorden(J.cx, J.cy, J.r);
+    rep(J.cx, J.cy, J.r + 5, mjuk(tona(t, .2, 2.6)));
+    x.globalAlpha = tona(t, 2.6); text('repet', J.cx + J.r + 30, J.cy - J.r + 60, 44, ROD, 'left', 700); x.globalAlpha = 1;
+  }
+  if (n === 4) {
+    rubrik('Lika högt överallt');
+    jorden(J.cx, J.cy, J.r);
+    const u = mjuk(tona(t, .9, 1.8)), h = 6 + u * 64;
+    rep(J.cx, J.cy, J.r + h, 1);
+    // skarven: en kort röd bit blinkar till överst
+    const bl = t < .9 ? (Math.sin(t * 14) > 0 ? 1 : .25) : 0;
+    if (bl) { x.globalAlpha = bl; x.strokeStyle = ROD; x.lineWidth = 18; x.beginPath(); x.arc(J.cx, J.cy, J.r + h, -Math.PI / 2 - .09, -Math.PI / 2 + .09); x.stroke(); x.globalAlpha = 1;
+      x.globalAlpha = bl; text('+ 1 m', J.cx, J.cy - J.r - 40, 50, ROD, 'center', 700); x.globalAlpha = 1; }
+    // lika långa glapp på fyra ställen
+    const a = tona(t, 2.6);
+    if (a > 0) {
+      x.globalAlpha = a;
+      for (const v of [Math.PI / 4, 3 * Math.PI / 4, 5 * Math.PI / 4, 7 * Math.PI / 4]) {
+        const ux = Math.cos(v), uy = Math.sin(v);
+        matt(J.cx + ux * (J.r + 3), J.cy + uy * (J.r + 3), J.cx + ux * (J.r + h - 3), J.cy + uy * (J.r + h - 3), INK, 3);
+      }
+      x.globalAlpha = 1;
+    }
+    x.globalAlpha = tona(t, 2.8); text('glappet kraftigt förstorat', 540, J.cy + J.r + 140, 40, GRA, 'center', 600); x.globalAlpha = 1;
+  }
+  if (n === 8) {
+    rubrik('Glappet blir 16 cm');
+    // marken med gräs
+    x.strokeStyle = BLA; x.lineWidth = 6; x.beginPath(); x.moveTo(40, MARK); x.lineTo(1040, MARK); x.stroke();
+    x.lineWidth = 3;
+    for (let i = 60; i < 1040; i += 46) { x.beginPath(); x.moveTo(i, MARK); x.lineTo(i - 8, MARK - 26); x.moveTo(i + 8, MARK); x.lineTo(i + 14, MARK - 20); x.stroke(); }
+    for (let i = 70; i < 1040; i += 70) { x.beginPath(); x.moveTo(i, MARK + 10); x.lineTo(i - 26, MARK + 44); x.stroke(); }
+    // repet, rakt så här nära
+    x.strokeStyle = ROD; x.lineWidth = 9; x.beginPath(); x.moveTo(0, REP8); x.lineTo(1080, REP8); x.stroke();
+    // katten kryper in från höger och stannar under repet
+    const u = mjuk(tona(t, .2, 2.4));
+    katt(1450 - u * 830);
+    // måttlinjen i fri yta till vänster
+    const a = tona(t, 2.2);
+    x.globalAlpha = a;
+    matt(150, MARK - 3, 150, REP8 + 5, INK, 4);
+    text('16 cm', 186, (MARK + REP8) / 2 + 16, 50, INK, 'left', 700);
+    x.globalAlpha = 1;
+    x.globalAlpha = tona(t, 3); text('i skala', 540, MARK + 130, 38, GRA, 'center', 600); x.globalAlpha = 1;
+  }
+  if (n === 9) {
+    rubrik('Omkretsen');
+    const u = mjuk(tona(t, .3, 2));
+    cirkel(K.cx, K.cy, K.r, 'rgba(43,92,168,.22)', 4);
+    cirkel(K.cx, K.cy, K.r, BLA, 6, -Math.PI / 2, -Math.PI / 2 + u * Math.PI * 2);
+    if (u > 0 && u < 1) { const v = -Math.PI / 2 + u * Math.PI * 2; x.fillStyle = INK; x.beginPath(); x.arc(K.cx + Math.cos(v) * K.r, K.cy + Math.sin(v) * K.r, 9, 0, 7); x.fill(); }
+    mittpunkt(); radie(0, K.r, INK, 5); etikettR(1);
+    x.globalAlpha = tona(t, 2.3);
+    text('omkrets', K.cx, K.cy + K.r + 80, 46, BLA, 'center', 700);
+    mtext([['2π · ', false], ['r', true]], K.cx, K.cy + K.r + 150, 56, BLA, 'center');
+    x.globalAlpha = 1;
+  }
+  if (n === 10) {
+    rubrik('Radien växer lika mycket');
+    cirkel(K.cx, K.cy, K.r, BLA, 6);
+    mittpunkt(); radie(0, K.r, INK, 5); etikettR(1);
+    const u = mjuk(tona(t, .3, 1.6)), R = K.r + u * K.h;
+    if (u > 0) cirkel(K.cx, K.cy, R, ROD, 7);
+    if (u > 0) radie(K.r, R, ROD, 6);
+    etikettH(tona(t, 1.9));
+    x.globalAlpha = tona(t, 2.4);
+    mtext([['repets radie: ', false], ['r', true], [' + ', false], ['h', true]], K.cx, K.cy + K.r + K.h + 100, 48, INK, 'center');
+    x.globalAlpha = 1;
+  }
+  if (n === 11) {
+    rubrikM([['Omkretsen växer med 2π · ', false], ['h', true]]);
+    cirkel(K.cx, K.cy, K.r, BLA, 6);
+    cirkel(K.cx, K.cy, K.r + K.h, ROD, 7);
+    mittpunkt(); radie(0, K.r, INK, 5); radie(K.r, K.r + K.h, ROD, 6); etikettR(1); etikettH(1);
+    // den extra biten markeras på den yttre cirkeln
+    const u = mjuk(tona(t, .4, 1.2)), v0 = Math.PI * .62, dv = 2 * Math.PI * K.h / (K.r + K.h);
+    if (u > 0) { x.strokeStyle = ROD; x.lineWidth = 20; x.beginPath(); x.arc(K.cx, K.cy, K.r + K.h, v0, v0 + dv * u); x.stroke(); }
+    x.globalAlpha = tona(t, 1.6);
+    mtext([['2π · ', false], ['h', true], [' = 1 m', false]], 180, K.cy + K.r + K.h + 70, 52, ROD, 'left');
+    x.globalAlpha = 1;
+    x.globalAlpha = tona(t, 2.2);
+    text('den skarvade metern', 180, K.cy + K.r + K.h + 130, 40, GRA, 'left', 600);
+    x.globalAlpha = 1;
+  }
+  if (n === 12) {
+    rubrik('Hur stort blir glappet?');
+  }
+  if (n === 14) {
+    rubrik('Runt en tennisboll');
+    const R = 19.3 * TB.s, r = 3.3 * TB.s;
+    tennisboll();
+    const u = mjuk(tona(t, .2, 1.4));
+    rep(TB.cx, TB.cy, R, u);
+    const a = tona(t, 1.6);
+    x.globalAlpha = a;
+    matt(TB.cx + r + 3, TB.cy, TB.cx + R - 4, TB.cy, INK, 4);
+    text('16 cm', TB.cx + (r + R) / 2, TB.cy - 26, 50, INK, 'center', 700);
+    x.globalAlpha = 1;
+    // jorden i liten skala med samma glapp (osynligt i den skalan)
+    const b = tona(t, 2.2);
+    x.globalAlpha = b;
+    jorden(250, 1230, 95); rep(250, 1230, 99, 1, 6);
+    text('runt jorden:', 400, 1215, 42, INK, 'left', 600);
+    text('också 16 cm', 400, 1270, 42, ROD, 'left', 700);
+    x.globalAlpha = 1;
+  }
+};
+window.info = () => ({ katt_rygg_cm: 12, glapp_cm: 16, tennis_r_cm: 3.3, rep_r_cm: 19.3, h_m: +(1 / (2 * Math.PI)).toFixed(4) });
+rita(8, 3);
+</script></body></html>

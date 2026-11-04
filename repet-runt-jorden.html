@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<script src="i18n.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow">
+<title>Repet runt jorden — Fysiklabbet</title>
+<meta name="description" content="Ett rep ligger spänt runt jordens ekvator. Skarva i en enda meter och lyft repet lika högt överallt. Kan en katt krypa under? Pröva själv, se lösningen steg för steg och ta reda på varför svaret inte beror på jordens storlek.">
+<link rel="canonical" href="https://fysiklabbet.se/repet-runt-jorden.html">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fysiklabbet">
+<meta property="og:locale" content="sv_SE">
+<meta property="og:title" content="Repet runt jorden — Matematik nivå 1c">
+<meta property="og:description" content="Ett rep runt ekvatorn blir en meter längre. Hur stort blir glappet mot marken? Pröva själv och se lösningen steg för steg.">
+<meta property="og:url" content="https://fysiklabbet.se/repet-runt-jorden.html">
+<meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Repet runt jorden — Matematik nivå 1c">
+<meta name="twitter:description" content="Ett rep runt ekvatorn blir en meter längre. Hur stort blir glappet mot marken? Pröva själv och se lösningen steg för steg.">
+<meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+<link rel="stylesheet" href="styles-laborans.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<style>
+:root {
+  --bg: #f3eee4;
+  --panel: #fffdf9;
+  --ink: #0f1620;
+  --soft: #3f4a5c;
+  --muted: #69655c;
+  --line: rgba(15, 22, 32, 0.10);
+  --line2: rgba(15, 22, 32, 0.20);
+  --accent: #c8324a;
+  --accent-soft: rgba(200, 50, 74, 0.08);
+  --blue: #2b5ca8;
+  --blue-soft: rgba(43, 92, 168, 0.08);
+  --green: #3f7a34;
+  --shadow: 0 1px 2px rgba(15, 22, 32, 0.05), 0 12px 32px -18px rgba(15, 22, 32, 0.28);
+  --sans: "DM Sans", system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  --serif: "Instrument Serif", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background:
+    radial-gradient(900px 500px at 12% -10%, rgba(200, 50, 74, 0.06), transparent 60%),
+    radial-gradient(900px 600px at 100% 0%, rgba(43, 92, 168, 0.07), transparent 60%),
+    var(--bg);
+  color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased;
+  font-size: 17px; line-height: 1.6;
+}
+button, input { font-family: inherit; font-size: inherit; color: inherit; }
+.lab-header { background: var(--bg); }
+.sida { max-width: 860px; margin: 0 auto; padding: 0 20px 60px; }
+.brod { font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 26px 0 10px; }
+.brod a { color: var(--blue); text-decoration: none; }
+.brod a:hover { text-decoration: underline; }
+h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(40px, 7vw, 64px); line-height: 1; margin: 0 0 14px; letter-spacing: -.01em; }
+h1 em { color: var(--accent); }
+.ingress { font-size: 19px; color: var(--soft); max-width: 640px; margin: 0 0 30px; }
+h2 { font-family: var(--serif); font-weight: 400; font-size: 34px; line-height: 1.1; margin: 0 0 12px; }
+.steg { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+section.kort { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); padding: 26px 26px 24px; margin: 0 0 26px; }
+section.kort p { margin: 0 0 12px; }
+.problem { border-left: 6px solid var(--accent); padding: 4px 0 4px 18px; margin: 4px 0 18px; font-size: 18px; }
+
+/* Gissa */
+.val { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 14px 0 6px; }
+.val button { background: var(--bg); border: 1.5px solid var(--line2); border-radius: 14px; padding: 12px 8px 10px; cursor: pointer; text-align: center; transition: border-color .15s, transform .15s, background .15s; }
+.val button:hover { border-color: var(--ink); }
+.val button:active { transform: scale(.97); }
+.val button svg { display: block; margin: 0 auto 6px; height: 54px; width: auto; }
+.val button b { display: block; font-size: 15px; }
+.val button span { display: block; font-size: 13px; color: var(--muted); }
+.val button.vald { border-color: var(--blue); background: var(--blue-soft); }
+.val button.ratt { border-color: var(--green); background: rgba(63, 122, 52, .09); }
+.svar { margin-top: 12px; padding: 12px 16px; border-radius: 12px; background: var(--bg); display: none; }
+.svar.syns { display: block; animation: in .3s ease-out; }
+@keyframes in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+/* Reglage */
+.reglage { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 22px; margin: 10px 0 16px; }
+.reglage label { display: block; font-size: 14px; font-weight: 600; color: var(--soft); margin-bottom: 4px; }
+.reglage .rad { display: flex; align-items: center; gap: 10px; }
+.reglage input[type=range] { flex: 1; accent-color: var(--accent); }
+.reglage output { font-family: var(--mono); font-size: 14px; min-width: 64px; text-align: right; }
+.flikar { display: flex; flex-wrap: wrap; gap: 6px; }
+.flikar button { border: 1.5px solid var(--line2); background: var(--bg); border-radius: 999px; padding: 4px 12px; font-size: 14px; cursor: pointer; }
+.flikar button.aktiv { border-color: var(--ink); background: var(--ink); color: #fff; }
+.figurer { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.ruta { background: #f7f2e8; border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+  background-image: linear-gradient(rgba(147,174,199,.32) 1px, transparent 1px), linear-gradient(90deg, rgba(147,174,199,.32) 1px, transparent 1px);
+  background-size: 18px 18px; }
+.ruta svg { display: block; width: 100%; height: auto; }
+.ruta-rubrik { font-family: var(--mono); font-size: 11px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); padding: 10px 12px 0; }
+.avlasning { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
+.avlasning div { background: var(--bg); border-radius: 12px; padding: 10px 12px; }
+.avlasning small { display: block; font-size: 12.5px; color: var(--muted); }
+.avlasning strong { font-size: 20px; font-weight: 700; }
+.avlasning .glapp strong { color: var(--accent); }
+
+/* Lösning */
+.losning { counter-reset: led; }
+.led { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 6px 22px; align-items: center; padding: 10px 0; border-top: 1px dashed var(--line2); }
+.led:first-child { border-top: 0; }
+.led .forkl { font-size: 15.5px; color: var(--soft); }
+.led .matte { font-size: 19px; overflow-x: auto; overflow-y: hidden; padding: 4px 0 6px; }
+.led.slut .matte { color: var(--accent); }
+.visa-mer { margin-top: 8px; }
+.knapp { border: 0; border-radius: 11px; background: var(--ink); color: #fff; font-weight: 600; font-size: 15px; padding: 10px 18px; cursor: pointer; }
+.knapp:hover { background: #22324a; }
+.knapp.ljus { background: var(--bg); color: var(--ink); border: 1.5px solid var(--line2); }
+.knapp:disabled { opacity: .4; cursor: default; }
+
+/* Tabell */
+.lab-tabell { overflow-x: auto; margin: 8px 0 4px; }
+table { border-collapse: collapse; width: 100%; font-size: 15.5px; }
+th, td { text-align: right; padding: 8px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+th { font-size: 12.5px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+td.glapp { color: var(--accent); font-weight: 700; }
+
+details.uppg { background: var(--bg); border-radius: 12px; padding: 12px 16px; margin: 10px 0; }
+details.uppg summary { cursor: pointer; font-weight: 600; }
+details.uppg[open] summary { margin-bottom: 8px; }
+.tillbaka { display: inline-flex; gap: 8px; align-items: center; font-weight: 600; color: var(--blue); text-decoration: none; }
+.tillbaka:hover { text-decoration: underline; }
+.sidfot { text-align: center; color: var(--muted); font-size: 14px; padding: 10px 0 30px; }
+.sidfot a { color: var(--muted); margin: 0 6px; }
+.katex { font-size: 1.05em; }
+
+@media (max-width: 680px) {
+  section.kort { padding: 20px 16px 18px; border-radius: 14px; }
+  .val { grid-template-columns: repeat(2, 1fr); }
+  .reglage, .figurer { grid-template-columns: 1fr; }
+  .avlasning { grid-template-columns: 1fr 1fr; }
+  .avlasning .glapp { grid-column: span 2; }
+  .led { grid-template-columns: 1fr; gap: 0; }
+  h2 { font-size: 29px; }
+}
+</style>
+</head>
+<body>
+<div class="lab-header">
+  <div class="lab-header-inner">
+    <a class="lab-logo" href="index.html">
+      <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+        <g transform="rotate(-24 18 18)">
+          <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+          <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+        </g>
+        <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+      </svg>
+      <span class="lab-logo-text">Fysiklabbet</span>
+    </a>
+    <nav class="lab-nav" aria-label="Huvudnavigation">
+      <a href="index.html">Start</a>
+      <div class="lab-nav-dd">
+        <button type="button" class="lab-nav-dd-trigger aktiv" aria-haspopup="true">Ämne <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button>
+        <div class="lab-nav-dd-menu">
+          <div class="lab-nav-dd-grupp">
+            <button type="button" class="lab-nav-dd-grupp-trigger">Fysik <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button>
+            <div class="lab-nav-dd-undermeny">
+              <a href="katalog.html#fy1">Nivå 1</a>
+              <a href="katalog.html#fy2">Nivå 2</a>
+            </div>
+          </div>
+          <div class="lab-nav-dd-grupp">
+            <button type="button" class="lab-nav-dd-grupp-trigger">Matematik <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button>
+            <div class="lab-nav-dd-undermeny">
+              <a href="katalog.html#ma1b">Nivå 1b</a>
+              <a href="katalog.html#ma1c">Nivå 1c</a>
+              <a href="katalog.html#ma2b">Nivå 2b</a>
+              <a href="katalog.html#ma2c">Nivå 2c</a>
+            </div>
+          </div>
+          <div class="lab-nav-dd-grupp">
+            <button type="button" class="lab-nav-dd-grupp-trigger">Matematik – fortsättning <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button>
+            <div class="lab-nav-dd-undermeny">
+              <a href="katalog.html#ma3b">Nivå 1b</a>
+              <a href="katalog.html#ma3c">Nivå 1c</a>
+              <a href="katalog.html#ma4">Nivå 2</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="simuleringar.html">Simuleringar</a>
+      <div class="lab-nav-dd">
+          <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+              Nationella prov
+              <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+          </button>
+          <div class="lab-nav-dd-menu lab-nav-dd-menu--kort">
+              <a href="np.html?amne=fysik">Fysik</a>
+              <a href="np.html?amne=matematik">Matematik</a>
+          </div>
+      </div>
+      <div class="lab-nav-dd">
+        <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+          Resurser
+          <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+        </button>
+        <div class="lab-nav-dd-menu">
+          <div class="lab-nav-dd-grupp">
+            <button type="button" class="lab-nav-dd-grupp-trigger">
+              Verktyg
+              <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+            </button>
+            <div class="lab-nav-dd-undermeny">
+              <a href="kopplingsschema.html">Rita kopplingsschema</a>
+              <a href="sannolikhetskalkylator.html">Sannolikhetskalkylator</a>
+              <a href="slumpa-grupper.html">Slumpa grupper</a>
+            </div>
+          </div>
+          <div class="lab-nav-dd-grupp">
+            <button type="button" class="lab-nav-dd-grupp-trigger">
+              Övningsblad
+              <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+            </button>
+            <div class="lab-nav-dd-undermeny">
+              <a href="ovningsblad.html#fysik">Fysik</a>
+              <a href="ovningsblad.html#matematik">Matematik</a>
+            </div>
+          </div>
+          <div class="lab-nav-dd-grupp">
+            <button type="button" class="lab-nav-dd-grupp-trigger">
+              Sammanfattningar
+              <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+            </button>
+            <div class="lab-nav-dd-undermeny">
+              <a href="sammanfattningar.html?amne=fysik">Fysik</a>
+              <a href="sammanfattningar.html?amne=matematik">Matematik</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="nyheter.html">Fysiknyheter</a>
+      <a href="om.html">Om</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
+  </div>
+</div>
+
+<main class="sida">
+  <div class="brod"><a href="katalog.html?id=ma1c-2.8">Matematik nivå 1c · Problemlösning med ekvationer</a></div>
+  <h1>Repet runt <em>jorden</em></h1>
+  <p class="ingress">Ett klassiskt problem som nästan alla gissar fel på. Svaret går att räkna ut på tre rader, och det visar sig att jordens storlek inte spelar någon roll alls.</p>
+
+  <section class="kort" id="gissa">
+    <div class="steg">Steg 1 · Gissa först</div>
+    <h2>Problemet</h2>
+    <p class="problem">Ett rep ligger spänt runt jorden, tätt mot marken längs hela ekvatorn. Repet skarvas så att det blir <strong>en meter längre</strong>, och lyfts sedan lika högt överallt runt jorden. Hur stort blir glappet mellan repet och marken?</p>
+    <p>Ekvatorn är ungefär 4&nbsp;000&nbsp;mil lång, så en meter är en försvinnande liten del av repet. Vad tror du får plats under repet?</p>
+    <div class="val" id="val">
+      <button type="button" data-v="papper">
+        <svg viewBox="0 0 60 54" aria-hidden="true"><path d="M8 40 L52 36" stroke="#2b5ca8" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M8 43 L52 39" stroke="#2b5ca8" stroke-width="1.2" fill="none"/></svg>
+        <b>Ett papper</b><span>knappt 0,1 mm</span>
+      </button>
+      <button type="button" data-v="myra">
+        <svg viewBox="0 0 60 54" aria-hidden="true"><g fill="#2b5ca8"><ellipse cx="18" cy="36" rx="7" ry="5"/><ellipse cx="30" cy="35" rx="5" ry="4"/><circle cx="41" cy="33" r="5"/></g><g stroke="#2b5ca8" stroke-width="1.8" fill="none" stroke-linecap="round"><path d="M26 38l-6 8M30 39l0 8M34 38l6 8M44 29l6-7M42 28l1-8"/></g></svg>
+        <b>En myra</b><span>cirka 3 mm</span>
+      </button>
+      <button type="button" data-v="katt">
+        <svg viewBox="0 0 60 54" aria-hidden="true"><g stroke="#2b5ca8" stroke-width="2.2" fill="#fffdf9" stroke-linejoin="round"><path d="M14 44 C16 26 40 24 48 38 C50 43 47 46 44 46 L16 46 Z"/><ellipse cx="13" cy="38" rx="9" ry="7.5"/><path d="M7 33l-1-8 5 5M15 31l4-7 1 8" fill="none"/></g><path d="M48 40c8 0 10-8 7-14" stroke="#2b5ca8" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>
+        <b>En katt</b><span>cirka 13 cm när den kryper</span>
+      </button>
+      <button type="button" data-v="person">
+        <svg viewBox="0 0 60 54" aria-hidden="true"><g stroke="#2b5ca8" stroke-width="2.4" fill="none" stroke-linecap="round"><circle cx="30" cy="9" r="5.5" fill="#fffdf9"/><path d="M30 15v19M30 34l-7 14M30 34l7 14M30 20l-9 9M30 20l9 9"/></g></svg>
+        <b>En människa</b><span>cirka 1,7 m</span>
+      </button>
+    </div>
+    <div class="svar" id="gissaSvar"></div>
+  </section>
+
+  <section class="kort" id="lyft">
+    <div class="steg">Steg 2 · Pröva själv</div>
+    <h2>Lyft repet</h2>
+    <p>Välj vad repet ligger runt och hur mycket längre det blir. Den vänstra figuren visar hela klotet med glappet kraftigt förstorat. Den högra visar marken i skala, så att du ser vad som får plats.</p>
+    <div class="reglage">
+      <div>
+        <label>Repet ligger runt</label>
+        <div class="flikar" id="kroppar"></div>
+      </div>
+      <div>
+        <label for="skarv">Repet blir längre med</label>
+        <div class="rad"><input type="range" id="skarv" min="0" max="100" value="50" step="1"><output id="skarvUt">1 m</output></div>
+      </div>
+    </div>
+    <div class="figurer">
+      <div class="ruta"><div class="ruta-rubrik">Hela varvet, glappet förstorat</div><svg id="figOversikt" viewBox="0 0 400 360" role="img" aria-label="Klotet med repet runt"></svg></div>
+      <div class="ruta"><div class="ruta-rubrik">Vid marken, i skala</div><svg id="figSkala" viewBox="0 0 400 360" role="img" aria-label="Glappet vid marken i skala"></svg></div>
+    </div>
+    <div class="avlasning">
+      <div><small>Radie</small><strong id="utR"></strong></div>
+      <div><small>Repets längd före</small><strong id="utO"></strong></div>
+      <div class="glapp"><small>Glappet</small><strong id="utH"></strong></div>
+    </div>
+  </section>
+
+  <section class="kort" id="losning">
+    <div class="steg">Steg 3 · Räkna ut det</div>
+    <h2>Lösningen steg för steg</h2>
+    <p>Kalla jordens radie för <span class="m">r</span> och glappet för <span class="m">h</span>. Repet blir då en cirkel med radien <span class="m">r + h</span>. Vi behöver inte ens veta hur stort <span class="m">r</span> är.</p>
+    <div class="ruta" style="max-width: 420px; margin: 6px auto 14px;">
+      <svg id="figLosning" viewBox="0 0 400 300" role="img" aria-label="Två cirklar med samma medelpunkt"></svg>
+    </div>
+    <div class="losning" id="leden"></div>
+    <div class="visa-mer"><button type="button" class="knapp" id="nastaLed">Visa nästa steg</button> <button type="button" class="knapp ljus" id="allaLed">Visa alla</button></div>
+  </section>
+
+  <section class="kort" id="kanns-fel">
+    <div class="steg">Steg 4 · Förstå</div>
+    <h2>Varför känns svaret fel?</h2>
+    <p>Vi jämför i huvudet en meter med 4&nbsp;000&nbsp;mil och tycker att metern är ingenting. Det stämmer: repet blir bara en fyrtiomiljondel längre. Men glappet beror inte på hur stor del av repet metern är. Varje meter som läggs till omkretsen blir alltid <span class="m">\dfrac{1}{2\pi}\ \mathrm{m}</span> på radien, oavsett hur stor cirkeln är, eftersom omkretsen växer lika fort som <span class="m">2\pi</span> gånger radien.</p>
+    <p>Tabellen visar samma skarv på en meter runt olika klot. Den procentuella förlängningen skiljer sig enormt, men glappet är detsamma.</p>
+    <div class="lab-tabell"><table id="tabell"></table></div>
+  </section>
+
+  <section class="kort" id="taltpinne">
+    <div class="steg">Fördjupning · Överkurs</div>
+    <h2>Dra upp repet i en enda punkt</h2>
+    <p>Lyft i stället repet i en enda punkt, som med en tältpinne, tills det är spänt igen. Repet följer då marken nästan hela vägen och går rakt upp till toppen sista biten. Hur högt når toppen?</p>
+    <div class="reglage" style="grid-template-columns: 1fr;">
+      <div>
+        <label for="skarv2">Repet blir längre med</label>
+        <div class="rad"><input type="range" id="skarv2" min="0" max="100" value="50" step="1"><output id="skarv2Ut">1 m</output></div>
+      </div>
+    </div>
+    <div class="ruta"><div class="ruta-rubrik">Jorden, böjningen kraftigt förstorad</div><svg id="figPinne" viewBox="0 0 640 330" role="img" aria-label="Repet uppdraget i en punkt"></svg></div>
+    <div class="avlasning" style="grid-template-columns: 1fr 1fr;">
+      <div><small>Lyft lika högt överallt</small><strong id="pinneJamn"></strong></div>
+      <div class="glapp"><small>Lyft i en punkt</small><strong id="pinneH"></strong></div>
+    </div>
+    <p style="margin-top: 14px;">Med en meter extra når toppen ungefär 122&nbsp;m upp, högre än de flesta kyrktorn. Repet går ut från marken längs en tangent, och den extra metern räcker långt eftersom tangenten och bågen under den är nästan lika långa. Ekvationen för vinkeln <span class="m">\alpha</span> mellan toppen och tangentpunkterna, sedd från jordens medelpunkt, blir <span class="m">\tan \alpha - \alpha = \dfrac{1\ \mathrm{m}}{2r}</span>. Den går inte att lösa med de metoder som ingår i kursen, så sidan löser den numeriskt.</p>
+  </section>
+
+  <section class="kort" id="prova">
+    <div class="steg">Steg 5 · Öva</div>
+    <h2>Pröva själv</h2>
+    <details class="uppg">
+      <summary>Hur mycket längre måste repet bli för att du ska kunna gå under det upprätt, med glappet 2,0 m?</summary>
+      <p>Glappet <span class="m">h</span> och förlängningen hänger ihop som <span class="m">2\pi \cdot h = \text{förlängningen}</span>.</p>
+      <p><span class="m">2\pi \cdot 2{,}0\ \mathrm{m} \approx 12{,}6\ \mathrm{m}</span></p>
+      <p><strong>Svar:</strong> Repet måste bli cirka 13&nbsp;m längre.</p>
+    </details>
+    <details class="uppg">
+      <summary>Ett rep spänns runt en fotboll med radien 11 cm och blir sedan 1 m längre. Hur stort blir glappet?</summary>
+      <p>Samma räkning som för jorden, eftersom radien tar ut sig: <span class="m">h = \dfrac{1\ \mathrm{m}}{2\pi} \approx 0{,}16\ \mathrm{m}</span>.</p>
+      <p><strong>Svar:</strong> Glappet blir cirka 16&nbsp;cm, lika stort som runt jorden.</p>
+    </details>
+    <details class="uppg">
+      <summary>Repet runt jorden lyfts 1,0 mm överallt. Hur mycket längre har det blivit?</summary>
+      <p><span class="m">2\pi \cdot 0{,}0010\ \mathrm{m} \approx 0{,}0063\ \mathrm{m}</span></p>
+      <p><strong>Svar:</strong> Repet har blivit cirka 6,3&nbsp;mm längre.</p>
+    </details>
+  </section>
+
+  <a class="tillbaka" href="katalog.html?id=ma1c-2.8">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+    Tillbaka till Problemlösning med ekvationer
+  </a>
+</main>
+<footer class="sidfot"><a href="index.html">Fysiklabbet</a>·<a href="om.html">Om</a>·<a href="kontakt.html">Kontakt</a></footer>
+
+<script>
+(function () {
+  const BLA = '#2b5ca8', INK = '#0f1620', ROD = '#c8324a', GRA = '#69655c';
+  const NS = 'http://www.w3.org/2000/svg';
+  const $ = id => document.getElementById(id);
+
+  // Tal med decimalkomma, hårt mellanslag i tusentalsgrupper, exakt noll som "0"
+  function tal(v, d, trim) {
+    const s = v.toFixed(d);
+    if (parseFloat(s) === 0) return '0';
+    let [h, f] = s.split('.');
+    if (f !== undefined && trim) { f = f.replace(/0+$/, ''); if (!f) f = undefined; }
+    const g = h.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    return f !== undefined ? g + ',' + f : g;
+  }
+  // Längd i lämplig enhet med två–tre värdesiffror
+  function langd(m) {
+    const a = Math.abs(m);
+    if (a >= 10000) return tal(m / 1000, a >= 1e7 ? 0 : 0) + ' km';
+    if (a >= 100) return tal(m, 0) + ' m';
+    if (a >= 1) return tal(m, a >= 10 ? 1 : 2, true) + ' m';
+    if (a >= 0.01) return tal(m * 100, a >= 0.1 ? 0 : 1, true) + ' cm';
+    return tal(m * 1000, a >= 0.001 ? 1 : 2, true) + ' mm';
+  }
+  function el(svg, typ, attr, text) {
+    const e = document.createElementNS(NS, typ);
+    for (const k in attr) e.setAttribute(k, attr[k]);
+    if (text !== undefined) e.textContent = text;
+    svg.appendChild(e); return e;
+  }
+  // Text där bokstäver inom *...* kursiveras (variabler); resten rakt
+  function mtext(svg, s, attr) {
+    const t = el(svg, 'text', attr);
+    s.split(/(\*[^*]+\*)/).forEach(del => {
+      if (!del) return;
+      const ts = document.createElementNS(NS, 'tspan');
+      if (del[0] === '*') { ts.setAttribute('font-style', 'italic'); ts.textContent = del.slice(1, -1); }
+      else ts.textContent = del;
+      t.appendChild(ts);
+    });
+    return t;
+  }
+  function matt(svg, x1, y1, x2, y2, col) {   // måttlinje med spets i båda ändar
+    const L = Math.hypot(x2 - x1, y2 - y1); if (L < 1) return;
+    const ux = (x2 - x1) / L, uy = (y2 - y1) / L, h = Math.min(8, L / 2.2), b = h * .55;
+    el(svg, 'line', { x1: x1 + ux * h, y1: y1 + uy * h, x2: x2 - ux * h, y2: y2 - uy * h, stroke: col, 'stroke-width': 1.6 });
+    const sp = (px, py, vx, vy) => el(svg, 'polygon', { fill: col, points: `${px},${py} ${px - vx * h - vy * b},${py - vy * h + vx * b} ${px - vx * h + vy * b},${py - vy * h - vx * b}` });
+    sp(x2, y2, ux, uy); sp(x1, y1, -ux, -uy);
+  }
+  const FONT = { 'font-family': 'DM Sans, sans-serif', 'font-weight': 600 };
+
+  // ---------- Steg 1: gissa ----------
+  const GISSA = {
+    papper: 'Många gissar så. Repet är ju bara en fyrtiomiljondel längre.',
+    myra: 'En vanlig gissning: en meter fördelad på 4 000 mil borde ge ett mikroskopiskt glapp.',
+    katt: 'Rätt! Glappet blir cirka 16 cm, så katten får plats med god marginal.',
+    person: 'Det blir inte riktigt så mycket, men betydligt mer än de flesta tror.',
+  };
+  $('val').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    document.querySelectorAll('#val button').forEach(x => x.classList.remove('vald', 'ratt'));
+    b.classList.add('vald');
+    document.querySelector('#val [data-v="katt"]').classList.add('ratt');
+    const s = $('gissaSvar');
+    s.innerHTML = (b.dataset.v === 'katt' ? '' : '<strong>Inte riktigt.</strong> ') + GISSA[b.dataset.v] +
+      (b.dataset.v === 'katt' ? ' Pröva i nästa steg och se varför.' : ' Glappet blir cirka 16 cm, så en krypande katt får plats. Pröva i nästa steg.');
+    s.classList.add('syns');
+  });
+
+  // ---------- Steg 2: lyft repet ----------
+  const KROPPAR = [
+    { id: 'tennis', namn: 'Tennisboll', r: 0.033 },
+    { id: 'fotboll', namn: 'Fotboll', r: 0.11 },
+    { id: 'manen', namn: 'Månen', r: 1737400 },
+    { id: 'jorden', namn: 'Jorden', r: 6378000 },
+    { id: 'solen', namn: 'Solen', r: 696000000 },
+  ];
+  let kropp = KROPPAR[3];
+  // Glidaren går logaritmiskt från 1 mm till 20 m; mitten (50) = 1 m
+  const skarvAv = v => { const m = Math.pow(10, -3 + 6 * v / 100); return m <= 1 ? m : Math.pow(10, (v - 50) / 50 * Math.log10(20)); };
+  function snygg(m) {          // runda glidarens värde till ett jämnt tal
+    const p = Math.pow(10, Math.floor(Math.log10(m))), k = m / p;
+    const n = k < 1.5 ? 1 : k < 2.25 ? 2 : k < 3.5 ? 3 : k < 7.5 ? 5 : 10;
+    return n * p;
+  }
+  const fk = $('kroppar');
+  KROPPAR.forEach(k => {
+    const b = document.createElement('button'); b.type = 'button'; b.textContent = k.namn; b.dataset.id = k.id;
+    if (k === kropp) b.classList.add('aktiv');
+    b.onclick = () => { kropp = k; fk.querySelectorAll('button').forEach(x => x.classList.toggle('aktiv', x === b)); ritaLyft(); };
+    fk.appendChild(b);
+  });
+
+  function ritaOversikt(dL) {
+    const s = $('figOversikt'); s.innerHTML = '';
+    const cx = 200, cy = 190, R = 118;
+    const vis = 14 + 22 * Math.min(1, Math.log10(1 + dL * 9) / Math.log10(181));  // förstorat glapp, växer med skarven
+    if (kropp.id === 'jorden' || kropp.id === 'manen' || kropp.id === 'solen') {
+      el(s, 'circle', { cx, cy, r: R, fill: kropp.id === 'solen' ? 'rgba(200,140,40,.10)' : 'rgba(147,174,199,.16)', stroke: BLA, 'stroke-width': 2.5 });
+      if (kropp.id === 'jorden') {
+        [['M150 120q30-28 58-6t-6 40q-30 8-48-10t-4-24', 0], ['M230 100q30 4 36 34t-26 22q-22-20-10-56', 0], ['M180 200q30-10 40 22t-26 44q-24-24-14-66', 0], ['M262 200q22 6 18 30t-22 2q-8-22 4-32', 0]]
+          .forEach(([d]) => el(s, 'path', { d, fill: 'none', stroke: BLA, 'stroke-width': 1.8 }));
+      } else if (kropp.id === 'manen') {
+        [[170, 150, 16], [232, 200, 22], [190, 240, 10], [240, 130, 9]].forEach(([x, y, r]) => el(s, 'circle', { cx: x, cy: y, r, fill: 'none', stroke: BLA, 'stroke-width': 1.6 }));
+      }
+    } else if (kropp.id === 'tennis') {
+      el(s, 'circle', { cx, cy, r: R, fill: 'rgba(147,174,199,.22)', stroke: BLA, 'stroke-width': 2.5 });
+      el(s, 'path', { d: `M${cx - R * .62} ${cy - R * .78}q${R * .5} ${R * .78} 0 ${R * 1.56}M${cx + R * .62} ${cy - R * .78}q${-R * .5} ${R * .78} 0 ${R * 1.56}`, fill: 'none', stroke: BLA, 'stroke-width': 2 });
+    } else {
+      el(s, 'circle', { cx, cy, r: R, fill: '#fffdf9', stroke: BLA, 'stroke-width': 2.5 });
+      const pent = (x, y, r) => el(s, 'polygon', { points: [0, 1, 2, 3, 4].map(i => { const v = -Math.PI / 2 + i * 2 * Math.PI / 5; return `${x + r * Math.cos(v)},${y + r * Math.sin(v)}`; }).join(' '), fill: 'rgba(43,92,168,.75)' });
+      pent(cx, cy, 30); [0, 1, 2, 3, 4].forEach(i => { const v = -Math.PI / 2 + i * 2 * Math.PI / 5; pent(cx + 82 * Math.cos(v), cy + 82 * Math.sin(v), 20); });
+    }
+    el(s, 'circle', { cx, cy, r: R + vis, fill: 'none', stroke: ROD, 'stroke-width': 3 });
+    // glappet markerat snett nedåt höger, etiketten i fri yta utanför repet
+    const v = Math.PI * .25, ux = Math.cos(v), uy = Math.sin(v);
+    matt(s, cx + ux * (R + 1.5), cy + uy * (R + 1.5), cx + ux * (R + vis - 1.5), cy + uy * (R + vis - 1.5), INK);
+    mtext(s, '*h*', { x: cx + ux * (R + vis + 16), y: cy + uy * (R + vis + 16) + 6, 'font-size': 20, fill: INK, ...FONT });
+    el(s, 'text', { x: 200, y: 40, 'text-anchor': 'middle', 'font-size': 15, fill: ROD, ...FONT }, 'repet');
+  }
+
+  const FIGURER = [   // [namn, höjd i m, ritfunktion]
+    ['papper', 0.0001], ['myra', 0.003], ['katt', 0.13], ['person', 1.7],
+  ];
+  function ritaSkala(h) {
+    const s = $('figSkala'); s.innerHTML = '';
+    const MARK = 312, TOPP = 50;
+    // välj skalan så att repet hamnar ungefär på 45 % av höjden, men minst 2 cm syns
+    const vyH = Math.max(h / 0.45, 0.02), px = (MARK - TOPP) / vyH, yRep = MARK - h * px;
+    // mark och gräs
+    el(s, 'line', { x1: 0, y1: MARK, x2: 400, y2: MARK, stroke: BLA, 'stroke-width': 2.5 });
+    for (let i = 8; i < 400; i += 16) el(s, 'path', { d: `M${i} ${MARK + 2}l-9 14`, stroke: BLA, 'stroke-width': 1.2, fill: 'none' });
+    // linjal till vänster
+    const steg = snygg(vyH / 5), lx = 44;
+    el(s, 'line', { x1: lx, y1: MARK, x2: lx, y2: TOPP - 10, stroke: GRA, 'stroke-width': 1.2 });
+    for (let k = 0; k * steg <= vyH * 1.05; k++) {
+      const y = MARK - k * steg * px;
+      el(s, 'line', { x1: lx - 6, y1: y, x2: lx, y2: y, stroke: GRA, 'stroke-width': 1.2 });
+      if (k > 0) el(s, 'text', { x: lx - 9, y: y + 4, 'text-anchor': 'end', 'font-size': 11, fill: GRA, ...FONT }, langd(k * steg).replace(' ', ' '));
+    }
+    // figurerna i skala (de som är för små eller för stora syns inte)
+    const x0 = { papper: 200, myra: 160, katt: 248, person: 365 };
+    for (const [namn, fh] of FIGURER) {
+      const H = fh * px; if (H < 2.5 || H > MARK - 10) continue;
+      ritaFigur(s, namn, x0[namn], MARK, H);
+    }
+    // repet
+    el(s, 'line', { x1: 60, y1: yRep, x2: 400, y2: yRep, stroke: ROD, 'stroke-width': 3.5 });
+    matt(s, 82, MARK - 1, 82, yRep + 1.5, INK);
+    el(s, 'text', { x: 92, y: Math.max(yRep - 10, 20), 'font-size': 15, fill: INK, ...FONT }, langd(h));
+  }
+  function ritaFigur(s, namn, x, mark, H) {
+    const g = el(s, 'g', { transform: `translate(${x} ${mark}) scale(${H / 100})` });
+    const a = { stroke: BLA, 'stroke-width': 100 / H * 1.8, fill: '#fffdf9', 'stroke-linejoin': 'round', 'stroke-linecap': 'round' };
+    if (namn === 'papper') el(g, 'rect', { x: -300, y: -100, width: 600, height: 100, fill: BLA });
+    if (namn === 'myra') {
+      el(g, 'ellipse', { cx: -60, cy: -50, rx: 45, ry: 32, fill: BLA }); el(g, 'ellipse', { cx: 10, cy: -52, rx: 28, ry: 24, fill: BLA }); el(g, 'circle', { cx: 70, cy: -58, r: 30, fill: BLA });
+      el(g, 'path', { d: 'M-10 -40l-40 40M10 -36l0 36M30 -40l40 40M85 -80l30 -20', ...a, fill: 'none' });
+    }
+    if (namn === 'katt') {   // krypande katt, 100 enheter hög
+      el(g, 'path', { d: 'M-90 -18 C-80 -100 90 -100 130 -30 C140 -6 120 0 100 0 L-80 0 C-100 -2 -100 -12 -90 -18 Z', ...a });
+      el(g, 'ellipse', { cx: -120, cy: -30, rx: 34, ry: 28, ...a });
+      el(g, 'path', { d: 'M-146 -46l-2 -30 18 18M-108 -56l14 -26 4 30', ...a, fill: 'none' });
+      el(g, 'path', { d: 'M128 -26c26 -4 34 -30 24 -54', ...a, fill: 'none' });
+    }
+    if (namn === 'person') {
+      el(g, 'circle', { cx: 0, cy: -88, r: 10, ...a });
+      el(g, 'path', { d: 'M0 -77v38M0 -39l-12 39M0 -39l12 39M0 -70l-16 22M0 -70l16 22', ...a, fill: 'none' });
+    }
+  }
+
+  function ritaLyft() {
+    const v = +$('skarv').value;
+    const dL = snygg(skarvAv(v));
+    $('skarvUt').textContent = langd(dL);
+    const h = dL / (2 * Math.PI);
+    $('utR').textContent = langd(kropp.r);
+    $('utO').textContent = langd(2 * Math.PI * kropp.r);
+    $('utH').textContent = langd(h);
+    ritaOversikt(dL); ritaSkala(h);
+  }
+  $('skarv').addEventListener('input', ritaLyft);
+
+  // ---------- Steg 3: lösningen ----------
+  const LED = [
+    ['Jordens omkrets', 'O = 2\\pi \\cdot r'],
+    ['Repets omkrets, radien är <em>r</em> + <em>h</em>', 'O_\\text{rep} = 2\\pi \\cdot (r + h)'],
+    ['Repet är 1&nbsp;m längre än jordens omkrets', '2\\pi \\cdot (r + h) = 2\\pi \\cdot r + 1\\ \\mathrm{m}'],
+    ['Multiplicera in 2π i parentesen', '2\\pi \\cdot r + 2\\pi \\cdot h = 2\\pi \\cdot r + 1\\ \\mathrm{m}'],
+    ['Subtrahera 2π · <em>r</em> i båda led, och jordens radie försvinner', '2\\pi \\cdot r + 2\\pi \\cdot h \\mathbin{\\boldsymbol{-}} \\boldsymbol{2\\pi \\cdot r} = 2\\pi \\cdot r + 1\\ \\mathrm{m} \\mathbin{\\boldsymbol{-}} \\boldsymbol{2\\pi \\cdot r}'],
+    ['Kvar blir', '2\\pi \\cdot h = 1\\ \\mathrm{m}'],
+    ['Dividera med 2π i båda led', '\\dfrac{2\\pi \\cdot h}{\\boldsymbol{2\\pi}} = \\dfrac{1\\ \\mathrm{m}}{\\boldsymbol{2\\pi}}'],
+    ['Glappet', 'h = \\dfrac{1\\ \\mathrm{m}}{2\\pi} \\approx 0{,}16\\ \\mathrm{m}'],
+    ['Svar', '\\text{Glappet blir cirka } 16\\ \\mathrm{cm}.', true],
+  ];
+  let visade = 0;
+  function visaLed(n) {
+    const box = $('leden');
+    while (visade < Math.min(n, LED.length)) {
+      const [f, m, slut] = LED[visade++];
+      const d = document.createElement('div'); d.className = 'led' + (slut ? ' slut' : '');
+      const a = document.createElement('div'); a.className = 'forkl'; a.innerHTML = f;
+      const b = document.createElement('div'); b.className = 'matte';
+      if (window.katex) katex.render(m, b, { displayMode: false, throwOnError: false }); else b.textContent = m;
+      d.append(a, b); box.appendChild(d);
+    }
+    $('nastaLed').disabled = $('allaLed').disabled = visade >= LED.length;
+  }
+  $('nastaLed').onclick = () => visaLed(visade + 1);
+  $('allaLed').onclick = () => visaLed(LED.length);
+
+  function ritaLosning() {
+    const s = $('figLosning'); s.innerHTML = '';
+    const cx = 190, cy = 160, r = 100, h = 34, v = -Math.PI / 5, ux = Math.cos(v), uy = Math.sin(v);
+    el(s, 'circle', { cx, cy, r, fill: 'rgba(147,174,199,.16)', stroke: BLA, 'stroke-width': 2.5 });
+    el(s, 'circle', { cx, cy, r: r + h, fill: 'none', stroke: ROD, 'stroke-width': 3 });
+    el(s, 'circle', { cx, cy, r: 3.5, fill: INK });
+    el(s, 'line', { x1: cx, y1: cy, x2: cx + ux * r, y2: cy + uy * r, stroke: INK, 'stroke-width': 2 });
+    el(s, 'line', { x1: cx + ux * r, y1: cy + uy * r, x2: cx + ux * (r + h), y2: cy + uy * (r + h), stroke: ROD, 'stroke-width': 2.5 });
+    mtext(s, '*r*', { x: cx + ux * r * .5 - 6, y: cy + uy * r * .5 - 10, 'font-size': 20, fill: INK, ...FONT });
+    mtext(s, '*h*', { x: cx + ux * (r + h / 2) - 18, y: cy + uy * (r + h / 2) - 8, 'font-size': 20, fill: ROD, ...FONT });
+    el(s, 'text', { x: cx - 30, y: cy + 42, 'font-size': 14, fill: BLA, ...FONT }, 'jorden');
+    el(s, 'text', { x: cx + 84, y: cy + 140, 'font-size': 14, fill: ROD, ...FONT }, 'repet');
+  }
+
+  // ---------- Steg 4: tabellen ----------
+  function tabell() {
+    const rader = KROPPAR.map(k => {
+      const O = 2 * Math.PI * k.r, p = 1 / O * 100;
+      const N = O, ord = N >= 1e9 ? [N / 1e9, 'miljarder'] : N >= 1e6 ? [N / 1e6, 'miljoner'] : [N, ''];
+      const pr = p >= 1 ? tal(p, 0) + ' %' : '1 del på ' + tal(ord[0], ord[0] >= 10 ? 0 : 1) + ' ' + ord[1];
+      return `<tr><td>${k.namn}</td><td>${langd(k.r)}</td><td>${langd(O)}</td><td>${pr}</td><td class="glapp">16 cm</td></tr>`;
+    }).join('');
+    $('tabell').innerHTML = '<thead><tr><th>Klot</th><th>Radie</th><th>Omkrets</th><th>Skarven i förhållande till omkretsen</th><th>Glapp</th></tr></thead><tbody>' + rader + '</tbody>';
+  }
+
+  // ---------- Fördjupning: tältpinnen ----------
+  // tan α − α = dL / (2r), α i (0, π/2); höjden H = r (1/cos α − 1)
+  function pinne(r, dL) {
+    const k = dL / (2 * r); let lo = 0, hi = Math.PI / 2 - 1e-12;
+    for (let i = 0; i < 200; i++) { const a = (lo + hi) / 2; (Math.tan(a) - a < k) ? lo = a : hi = a; }
+    const a = (lo + hi) / 2; return { a, H: r * (1 / Math.cos(a) - 1) };
+  }
+  function ritaPinne() {
+    const dL = snygg(skarvAv(+$('skarv2').value)), r = 6378000;
+    $('skarv2Ut').textContent = langd(dL);
+    const { H } = pinne(r, dL);
+    $('pinneJamn').textContent = langd(dL / (2 * Math.PI));
+    $('pinneH').textContent = langd(H);
+    const s = $('figPinne'); s.innerHTML = '';
+    // en båge av jorden; vinkeln och höjden ritas förstorade men växer med H
+    const R = 300, cx = 320, cy = 175 + R, A = 0.2 + 0.55 * Math.min(1, Math.log10(1 + H) / Math.log10(1500));
+    const Hpx = R * (1 / Math.cos(A) - 1), B = 0.95;
+    const tx = (a, rr) => cx + (rr || R) * Math.sin(a), ty = (a, rr) => cy - (rr || R) * Math.cos(a), top = [cx, cy - R - Hpx];
+    el(s, 'path', { d: `M${tx(-B)} ${ty(-B)} A${R} ${R} 0 0 1 ${tx(B)} ${ty(B)}`, fill: 'none', stroke: BLA, 'stroke-width': 2.5 });
+    // repet: längs marken utanför tangentpunkterna, rakt upp till toppen
+    const R3 = R + 3;
+    el(s, 'path', { d: `M${tx(-B, R3)} ${ty(-B, R3)} A${R3} ${R3} 0 0 1 ${tx(-A, R3)} ${ty(-A, R3)} L${top[0]} ${top[1]} L${tx(A, R3)} ${ty(A, R3)} A${R3} ${R3} 0 0 1 ${tx(B, R3)} ${ty(B, R3)}`, fill: 'none', stroke: ROD, 'stroke-width': 3, 'stroke-linejoin': 'round' });
+    el(s, 'line', { x1: cx, y1: cy - R, x2: top[0], y2: top[1] + 2, stroke: INK, 'stroke-width': 2.5, 'stroke-dasharray': '5 4' });
+    el(s, 'circle', { cx: tx(-A), cy: ty(-A), r: 4, fill: INK }); el(s, 'circle', { cx: tx(A), cy: ty(A), r: 4, fill: INK });
+    el(s, 'text', { x: cx, y: top[1] - 14, 'text-anchor': 'middle', 'font-size': 17, fill: INK, ...FONT }, langd(H));
+    el(s, 'text', { x: tx(A) - 50, y: ty(A) + 32, 'text-anchor': 'middle', 'font-size': 13, fill: GRA, ...FONT }, 'tangentpunkt');
+    el(s, 'text', { x: cx, y: cy - R + 40, 'text-anchor': 'middle', 'font-size': 14, fill: BLA, ...FONT }, 'jorden');
+  }
+  $('skarv2').addEventListener('input', ritaPinne);
+
+  function start() {
+    document.querySelectorAll('.m').forEach(e => { if (window.katex) katex.render(e.textContent, e, { throwOnError: false }); });
+    ritaLyft(); ritaLosning(); tabell(); ritaPinne(); visaLed(1);
+  }
+  if (window.katex) start(); else window.addEventListener('load', start);
+})();
+</script>
+<!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

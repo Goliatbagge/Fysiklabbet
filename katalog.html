@@ -62,6 +62,12 @@
         const UNDERSOKNINGAR = {
             'ma1c-3.4': { href: 'utkast/fordubbling.html', hrefEn: 'utkast/doubling.html', meta: 'Fördubbla pengarna · 60 min' },
         };
+        // Klurigheter: fristående sidor som reder ut ett klassiskt problem från
+        // avsnittet (ofta ett som en Labbfolket-film tar upp), med figurer och
+        // interaktivitet. Kortet visas BARA där det finns en sida.
+        const KLURIGHETER = {
+            'ma1c-2.8': { href: 'repet-runt-jorden.html', titel: 'Repet runt jorden', meta: 'Klassiskt problem' },
+        };
 
         // Matematik nivå 1b delar innehåll med 1c (se MA1B_SPEC i
         // data/katalog.js): spegla teori, övningar, exit tickets och
@@ -83,6 +89,7 @@
             if (OVNINGSBLAD[bId] === undefined && OVNINGSBLAD[cId] !== undefined) OVNINGSBLAD[bId] = OVNINGSBLAD[cId];
             if (VIS_INDEX[bId] === undefined && VIS_INDEX[cId] !== undefined) VIS_INDEX[bId] = VIS_INDEX[cId];
             if (UNDERSOKNINGAR[bId] === undefined && UNDERSOKNINGAR[cId] !== undefined) UNDERSOKNINGAR[bId] = UNDERSOKNINGAR[cId];
+            if (KLURIGHETER[bId] === undefined && KLURIGHETER[cId] !== undefined) KLURIGHETER[bId] = KLURIGHETER[cId];
         }
 
         // --- Skydda math-block ($$..$$ och $..$) från markdown-parsern.
@@ -3474,6 +3481,7 @@
             // inte ha något kort alls).
             const vis = tid ? VIS_INDEX[tid] : null;
             const undersokning = tid ? UNDERSOKNINGAR[tid] : null;
+            const klurighet = tid ? KLURIGHETER[tid] : null;
             // Fördjupning-kortet renderas BARA när avsnittets md-fil har minst
             // ett ::: fördjupning-block (inget "Kommer snart" — de flesta
             // avsnitt ska inte ha kortet alls).
@@ -3862,6 +3870,13 @@
                                                             <div className="lab-card-title">Visualisering</div>
                                                             <div className="lab-card-meta">{vis.titel}</div>
                                                         </button>
+                                                    )}
+                                                    {klurighet && (
+                                                        <a className="lab-card lab-card-clickable" href={klurighet.href}>
+                                                            <div className="lab-card-tag">Klura</div>
+                                                            <div className="lab-card-title">{klurighet.titel}</div>
+                                                            <div className="lab-card-meta">{klurighet.meta}</div>
+                                                        </a>
                                                     )}
                                                     {undersokning && (
                                                         <a className="lab-card lab-card-clickable"

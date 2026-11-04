@@ -1,0 +1,65 @@
+1
+00:00:00,300 --> 00:00:03,430
+Tänk dig ett rep
+spänt runt jorden.
+
+2
+00:00:03,430 --> 00:00:07,120
+Tätt mot marken,
+längs hela ekvatorn.
+
+3
+00:00:07,120 --> 00:00:09,850
+Nu skarvar du i en enda meter.
+
+4
+00:00:09,850 --> 00:00:13,300
+Och lyfter repet
+lika högt överallt.
+
+5
+00:00:13,300 --> 00:00:16,670
+Kan en myra krypa
+under? En katt?
+
+6
+00:00:16,670 --> 00:00:18,390
+Vad tror du?
+
+7
+00:00:18,990 --> 00:00:23,240
+En meter på 4 000 mil
+låter som ingenting.
+
+8
+00:00:23,240 --> 00:00:29,010
+Ändå blir glappet 16
+cm. Katten får plats.
+
+9
+00:00:29,010 --> 00:00:32,300
+Omkretsen är 2π gånger radien.
+
+10
+00:00:32,300 --> 00:00:36,310
+Lyfts repet en bit,
+växer radien lika mycket.
+
+11
+00:00:36,310 --> 00:00:39,920
+Och omkretsen växer
+2π gånger så mycket.
+
+12
+00:00:39,920 --> 00:00:44,810
+1 m delat med 2π är cirka 16 cm.
+
+13
+00:00:44,810 --> 00:00:48,340
+Jordens radie finns
+inte med i svaret.
+
+14
+00:00:48,340 --> 00:00:52,300
+Runt en tennisboll blir
+glappet lika stort.

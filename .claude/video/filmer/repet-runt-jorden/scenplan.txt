@@ -1,0 +1,60 @@
+Scen 1 · 4 s · AI-SCEN
+"Tänk dig ett rep spänt runt jorden."
+
+Scen 2 · 4 s · EGEN INSPELNING
+"Tätt mot marken, längs hela ekvatorn."
+
+Egen animation: jorden som en cirkel i blått bläck på rutpapperet (bara en enkel kontur och några lösa kontinentstreck). Ett rött rep ritas fram tätt längs ekvatorn, runt hela cirkeln, och sluts.
+
+Scen 3 · 4 s · AI-SCEN
+"Nu skarvar du i en enda meter."
+
+Scen 4 · 4 s · EGEN INSPELNING
+"Och lyfter repet lika högt överallt."
+
+Egen animation: samma bild. Repet skarvas (en kort röd bit blinkar till) och lyfts sedan likformigt från jorden: en röd cirkel med samma medelpunkt, något större radie. Glappet är kraftigt överdrivet i bilden; i skala skulle det inte synas (16 cm mot 6 378 km).
+
+Scen 5 · 4 s · AI-SCEN
+"Kan en myra krypa under? En katt?"
+
+Scen 6 · 4 s · AI-SCEN
+"Vad tror du?"
+
+Scen 7 · 4 s · AI-SCEN
+"En meter på 4 000 mil låter som ingenting."
+
+Scen 8 · 4 s · EGEN INSPELNING
+"Ändå blir glappet 16 cm. Katten får plats."
+
+Egen animation: inzoomning till marken vid ekvatorn. Marklinje, repet som en röd linje 16 cm ovanför, och en enkel kattkontur som kryper under. Måttlinje med dubbelpil i fri yta bredvid: "16 cm". Kattens kontur skalenlig (en katt som kryper är cirka 12–15 cm hög).
+
+Scen 9 · 4 s · EGEN INSPELNING
+"Omkretsen är 2π gånger radien."
+
+Egen animation: en cirkel med medelpunkt och radien r utritad. Omkretsen ritas fram med pennan ett varv. Etiketter: r vid radien, ord-etikett "omkrets" vid cirkeln.
+
+Scen 10 · 4 s · EGEN INSPELNING
+"Lyfts repet en bit, växer radien lika mycket."
+
+Egen animation: samma cirkel, en större koncentrisk cirkel (repet, rött) läggs utanför. Radien förlängs med biten h; måttlinje med h i fri yta mellan cirklarna.
+
+Scen 11 · 4 s · EGEN INSPELNING
+"Och omkretsen växer 2π gånger så mycket."
+
+Egen animation: den yttre cirkeln jämförs med den inre: tillskottet i omkrets markeras som en röd bit och etiketten "2π · h" tonar in vid den. Den röda biten är den skarvade metern.
+
+Scen 12 · 4 s · EGEN INSPELNING
+"1 m delat med 2π är cirka 16 cm."
+
+Egen animation: pennlösning på rutpapperet: 2π · h = 1 m, sedan h = 1 m / (2π) med vågrätt bråkstreck, sedan ≈ 0,16 m = 16 cm. En rad i taget. (Detta är filmens enda formel.)
+
+Scen 13 · 4 s · AI-SCEN
+"Jordens radie finns inte med i svaret."
+
+Scen 14 · 4 s · EGEN INSPELNING
+"Runt en tennisboll blir glappet lika stort."
+
+Egen animation, skalenlig: en tennisboll (radie 3,3 cm) med ett rött rep 16 cm utanför (radie 19,3 cm). Måttlinje "16 cm" i fri yta. Bredvid, i liten skala, jorden med samma etikett 16 cm. Glappet är lika stort men ser enormt ut runt bollen.
+
+Scen 15 · 4 s · AI-SCEN
+"(inget tal, slutskylten läggs på i redigeringen)"

@@ -27,6 +27,8 @@
  *           stegkast (fy2-1.9: kaströrelsen med stegmetoden),
  *           vinkelrata (ma1c-4.7: lutningstrappan vrids ett kvarts varv),
  *           pennprovet (ma1c-4.8: en lodrät penna dras över två grafer, vilken är en funktion?),
+ *           varmekansla (fy1-6.1: handen på en aluminium- och en plastplatta, värmen som lämnar handen),
+ *           smaltrace (fy1-6.1: isbitar på aluminium och plast, vilken smälter först?),
  *           pulsvag (fy2-2.7, visa: puls | vag: rep från en person till ett träd),
  *           vagtyp (fy2-2.7, visa: transversell | longitudinell),
  *           ytvag (fy2-2.7, visa: vatten | rayleigh: partiklarnas banor i en ytvåg),
@@ -14885,6 +14887,543 @@
         loop.satt(true);
     }
 
+    // ─────────────────────────────────────────────────────────────────────
+    //  Värmeledning: "Känslan av värme" och "Smältrace" (fy1-6.1)
+    // ─────────────────────────────────────────────────────────────────────
+    //  Ritas på canvas i blå kulspets på rutat papper, samma stil som de egna
+    //  animationerna i Labbfolket-filmen "Plåten som känns kallare". Verktygen
+    //  nedan delas av de två typerna.
+    function kvVerktyg(x) {
+        var BLA = '#2b5ca8', INK = '#0f1620', ROD = '#c8324a', GRA = '#3f4a5c';
+        var HUD = '#fbf3e6', VIT = '#ffffff', LJBLA = '#e3edf7', LJBLA2 = '#cfdeee', TRA = '#f6ebd5';
+        var FONT = 'Poppins, system-ui, sans-serif';
+        function slump(fro) { var a = fro >>> 0; return function () { a |= 0; a = a + 0x6D2B79F5 | 0; var t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+        function klamp(u) { return Math.min(1, Math.max(0, u)); }
+        function mjuk(u) { return u * u * (3 - 2 * u); }
+        function lerp(a, b, u) { return a + (b - a) * u; }
+        // kulspetslinje: huvudstreck och ett tunt, lätt förskjutet andra drag
+        function blak(p, w, col, alfa) {
+            x.save(); x.globalAlpha *= (alfa === undefined ? 1 : alfa);
+            x.strokeStyle = col || BLA; x.lineWidth = w; x.lineCap = 'round'; x.lineJoin = 'round'; x.stroke(p);
+            x.globalAlpha *= 0.32; x.lineWidth = w * 0.55; x.translate(0.7, 0.45); x.stroke(p);
+            x.restore();
+        }
+        function fyll(p, col, alfa) { x.save(); x.globalAlpha *= (alfa === undefined ? 1 : alfa); x.fillStyle = col; x.fill(p); x.restore(); }
+        function skraff(p, vinkel, steg, col, w, alfa, bbox) {
+            var x0 = bbox[0], y0 = bbox[1], x1 = bbox[2], y1 = bbox[3];
+            x.save(); x.clip(p); x.strokeStyle = col; x.lineWidth = w; x.globalAlpha *= alfa;
+            var cx = (x0 + x1) / 2, cy = (y0 + y1) / 2, R = Math.sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0)) / 2 + 10;
+            var ux = Math.cos(vinkel), uy = Math.sin(vinkel), nx = -uy, ny = ux;
+            x.beginPath();
+            for (var s = -R; s <= R; s += steg) { x.moveTo(cx + nx * s - ux * R, cy + ny * s - uy * R); x.lineTo(cx + nx * s + ux * R, cy + ny * s + uy * R); }
+            x.stroke(); x.restore();
+        }
+        function poly(pts, oppen) { var p = new Path2D(); pts.forEach(function (q, i) { if (i) p.lineTo(q[0], q[1]); else p.moveTo(q[0], q[1]); }); if (!oppen) p.closePath(); return p; }
+        function rundPoly(pts, r) {
+            var p = new Path2D(), n = pts.length;
+            var s = [(pts[n - 1][0] + pts[0][0]) / 2, (pts[n - 1][1] + pts[0][1]) / 2]; p.moveTo(s[0], s[1]);
+            for (var i = 0; i < n; i++) { var a = pts[i], b = pts[(i + 1) % n]; p.arcTo(a[0], a[1], b[0], b[1], r); }
+            p.closePath(); return p;
+        }
+        function text(s, px, py, size, col, align, vikt) {
+            x.font = (vikt || 600) + ' ' + size + 'px ' + FONT; x.fillStyle = col || INK; x.textAlign = align || 'center'; x.textBaseline = 'alphabetic';
+            x.fillText(s, px, py);
+        }
+        function papper(W, H) {
+            var gr = x.createLinearGradient(0, 0, 0, H); gr.addColorStop(0, '#f7f2e8'); gr.addColorStop(1, '#ece3d2');
+            x.fillStyle = gr; x.fillRect(0, 0, W, H);
+            x.strokeStyle = 'rgba(147,174,199,.45)'; x.lineWidth = 1;
+            x.beginPath();
+            for (var i = 0; i <= H; i += 25) { x.moveTo(0, i + 0.5); x.lineTo(W, i + 0.5); }
+            for (var j = 0; j <= W; j += 25) { x.moveTo(j + 0.5, 0); x.lineTo(j + 0.5, H); }
+            x.stroke();
+            var r = slump(7); x.fillStyle = 'rgba(120,100,70,.05)';
+            for (var k = 0; k < W * H / 1400; k++) x.fillRect(r() * W, r() * H, 2, 2);
+        }
+        // böjd värmepil med huvud (k skalar pilen)
+        function vagPil(x0, y0, x1, y1, amp, u, col, w, k) {
+            if (u <= 0) return;
+            var pts = [];
+            for (var i = 0; i <= 30; i++) { var s = i / 30; pts.push([lerp(x0, x1, s) + amp * Math.sin(s * Math.PI * 2.5), lerp(y0, y1, s)]); }
+            var n = Math.max(2, Math.round(pts.length * u)), del = pts.slice(0, n);
+            blak(poly(del, true), w, col);
+            var a = del[del.length - 2], b = del[del.length - 1];
+            var L = Math.sqrt((b[0] - a[0]) * (b[0] - a[0]) + (b[1] - a[1]) * (b[1] - a[1])) || 1, ux = (b[0] - a[0]) / L, uy = (b[1] - a[1]) / L, h = 26 * k, bb = 15 * k;
+            fyll(poly([[b[0] + ux * 8 * k, b[1] + uy * 8 * k], [b[0] - ux * h - uy * bb, b[1] - uy * h + ux * bb], [b[0] - ux * h + uy * bb, b[1] - uy * h - ux * bb]]), col);
+        }
+        // Handen från sidan, platt liggande. Handloven i (x0, Y0), handflatan
+        // vilar på linjen y = Y0. hud (0 = sval, 1 = varm) färgar handflatan.
+        function hand(x0, Y0, s, lyft, hud) {
+            var l = lyft;
+            x.save(); x.translate(x0, Y0); x.scale(s, s);
+            function lw(v) { return v / s; }
+            var kropp = new Path2D();
+            kropp.moveTo(-360, -230 * l); kropp.quadraticCurveTo(-160, -60 * l, -22, -7); kropp.quadraticCurveTo(-6, 0, 20, 0);
+            kropp.lineTo(398, 0); kropp.bezierCurveTo(428, 0, 442, -12, 433, -25);
+            kropp.quadraticCurveTo(382, -42, 302, -55); kropp.quadraticCurveTo(266, -73, 228, -79);
+            kropp.quadraticCurveTo(128, -100, 42, -101); kropp.quadraticCurveTo(-130, -100 - 90 * l, -330, -101 - 249 * l);
+            kropp.closePath();
+            fyll(kropp, HUD);
+            x.save(); x.clip(kropp);
+            if (hud !== undefined) {
+                // hudens temperatur: varm ton som blir blå när huden svalnar
+                var gr = x.createLinearGradient(0, 0, 0, -120);
+                var rr = Math.round(lerp(43, 214, hud)), gg = Math.round(lerp(92, 96, hud)), bl = Math.round(lerp(168, 70, hud));
+                var a0 = 0.18 + 0.32 * Math.abs(hud - 0.5) * 2;
+                gr.addColorStop(0, 'rgba(' + rr + ',' + gg + ',' + bl + ',' + a0.toFixed(3) + ')');
+                gr.addColorStop(1, 'rgba(' + rr + ',' + gg + ',' + bl + ',0)');
+                x.fillStyle = gr; x.fillRect(-60, -130, 520, 135);
+            }
+            var sk = new Path2D(); sk.moveTo(-360, -150 * l); sk.quadraticCurveTo(-150, -20 * l, 30, -18); sk.lineTo(420, -10); sk.lineTo(420, 10); sk.lineTo(-360, 10); sk.closePath();
+            skraff(sk, -0.7, 9, BLA, lw(1.1), 0.45, [-400, -400, 460, 20]);
+            x.restore();
+            blak(kropp, lw(2.6), BLA);
+            var tum = new Path2D();
+            tum.moveTo(66, -62); tum.quadraticCurveTo(150, -60, 226, -42); tum.bezierCurveTo(252, -36, 254, -14, 233, -10);
+            tum.quadraticCurveTo(160, -12, 88, -28); tum.quadraticCurveTo(70, -40, 66, -62); tum.closePath();
+            fyll(tum, HUD); blak(tum, lw(2.3), BLA);
+            var nagel = new Path2D(); nagel.moveTo(222, -34); nagel.quadraticCurveTo(240, -32, 241, -18); blak(nagel, lw(1.7), BLA);
+            var fl = new Path2D();
+            fl.moveTo(298, -36); fl.quadraticCurveTo(360, -30, 418, -22);
+            fl.moveTo(312, -20); fl.quadraticCurveTo(370, -14, 404, -10);
+            fl.moveTo(414, -30); fl.quadraticCurveTo(430, -28, 431, -17);
+            fl.moveTo(242, -70); fl.quadraticCurveTo(250, -62, 262, -66);
+            fl.moveTo(272, -63); fl.quadraticCurveTo(280, -56, 292, -59);
+            blak(fl, lw(1.7), BLA);
+            // ärmen: uppkavlad labbrock
+            var W = [-8, -52], E = [-330, -52 - 238 * l], L = Math.sqrt((E[0] - W[0]) * (E[0] - W[0]) + (E[1] - W[1]) * (E[1] - W[1]));
+            var u = [(E[0] - W[0]) / L, (E[1] - W[1]) / L], n = [-u[1], u[0]];
+            function pt(d, b) { return [W[0] + u[0] * d + n[0] * b, W[1] + u[1] * d + n[1] * b]; }
+            var arm = poly([pt(205, -70), pt(205, 66), pt(620, 120), pt(620, -120)]);
+            fyll(arm, VIT); blak(arm, lw(2.6), BLA);
+            var rull = rundPoly([pt(188, -76), pt(188, 72), pt(250, 82), pt(250, -86)], 14);
+            fyll(rull, VIT); blak(rull, lw(2.6), BLA);
+            var veck = new Path2D();
+            [[206, -60, 214, 40], [226, -70, 232, 58], [300, -90, 330, 20], [360, -60, 410, 70]].forEach(function (v) {
+                var p1 = pt(v[0], v[1]), p2 = pt(v[2], v[3]);
+                veck.moveTo(p1[0], p1[1]); veck.quadraticCurveTo((p1[0] + p2[0]) / 2 + 6, (p1[1] + p2[1]) / 2, p2[0], p2[1]);
+            });
+            blak(veck, lw(1.5), BLA, 0.7);
+            x.restore();
+            return [x0 + 20 * s, x0 + 400 * s];
+        }
+        return { BLA: BLA, INK: INK, ROD: ROD, GRA: GRA, VIT: VIT, LJBLA: LJBLA, LJBLA2: LJBLA2, TRA: TRA,
+                 slump: slump, klamp: klamp, mjuk: mjuk, lerp: lerp, blak: blak, fyll: fyll, skraff: skraff,
+                 poly: poly, rundPoly: rundPoly, text: text, papper: papper, vagPil: vagPil, hand: hand };
+    }
+    // Kort med en canvas i logiska mått W × H (skalas med CSS, ritas skarpt)
+    function kvKort(node, cfg, W, H, aria) {
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus ms-bred';
+        if (cfg.titel) {
+            var tEl = document.createElement('div');
+            tEl.className = 'minisim-title';
+            tEl.textContent = cfg.titel;
+            card.appendChild(tEl);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene ms-kv-scene';
+        scene.style.padding = '0';
+        var cv = document.createElement('canvas');
+        var R = 1.6;
+        cv.width = Math.round(W * R); cv.height = Math.round(H * R);
+        cv.className = 'ms-kv-svg';
+        cv.style.maxWidth = '664px';
+        cv.setAttribute('role', 'img');
+        cv.setAttribute('aria-label', aria);
+        scene.appendChild(cv);
+        card.appendChild(scene);
+        msFullskarm(card, scene, W / H, 110);
+        var x = cv.getContext('2d');
+        x.setTransform(R, 0, 0, R, 0, 0);
+        // logiska koordinater ur en pekarhändelse
+        function punkt(e) {
+            var r = cv.getBoundingClientRect();
+            return [(e.clientX - r.left) / r.width * W, (e.clientY - r.top) / r.height * H];
+        }
+        return { card: card, scene: scene, cv: cv, x: x, punkt: punkt };
+    }
+    function kvFmt(v, d) { var s = v.toFixed(d); return parseFloat(s) === 0 ? '0' : s.replace('.', ','); }
+
+    //  typ: varmekansla
+    //  Handen läggs på en aluminiumplatta och en plastplatta, båda 20 °C, i
+    //  genomskärning. Handens hud har 25 °C (som i genomgången). Två kroppar
+    //  med olika temperatur som läggs mot varandra får en kontakttemperatur
+    //      T_k = (e_hud · T_hud + e_platta · T_platta) / (e_hud + e_platta)
+    //  där e = √(λ · ρ · c) är värmeinträngningstalet: hud cirka 1 100,
+    //  aluminium 24 000 (λ 237 W/(m·K), ρ 2 700 kg/m³, c 900 J/(kg·K)) och
+    //  plast cirka 570 (λ 0,19, ρ 1 300, c 1 300). Huden svalnar alltså till
+    //  20,2 °C på aluminiumet men bara till 23,3 °C på plasten. Värmen som
+    //  lämnat en handflata på 50 cm² efter tiden t är
+    //      Q = 2 · ΔT · e_eff · √(t / π) · A,  e_eff = e_hud · e_p / (e_hud + e_p)
+    //  Varje röd prick är ett värmepaket; de släpps i takt med värmeflödet
+    //  (proportionellt mot e_eff / √t) och vandrar slumpmässigt i plattan med
+    //  plattans temperaturledningstal (aluminium 97 mm²/s, plast 0,11 mm²/s)
+    //  i tvärsnittets förstoring, 10 px per mm.
+    function buildVarmekansla(node, cfg) {
+        // smal skärm: plattorna under varandra i stället för bredvid
+        var smal = (node.getBoundingClientRect().width || 664) < 520;
+        var W = smal ? 500 : 1000, H = smal ? 1140 : 600;
+        var K = kvKort(node, cfg, W, H, 'Två händer läggs på en aluminiumplatta och en plastplatta som båda har temperaturen 20 grader. ' +
+            'Röda prickar visar värmen som strömmar från handen in i plattan. Aluminiumet leder bort värmen snabbt och sprider den, ' +
+            'och huden svalnar till drygt 20 grader. Plasten leder värmen långsamt, och huden håller nästan 23 grader.');
+        var x = K.x, V = kvVerktyg(x);
+        var T_HUD = 25, T_PL = 20, E_HUD = 1100, AREA = 0.005, SKALA = 0.74, PT = 360, PB = 440;
+        var kol = [
+            { x0: 0, namn: 'Aluminiumplatta', e: 24000, D: 97 * 100, liv: 2.6 },
+            { x0: 500, namn: 'Plastplatta', e: 570, D: 0.11 * 100, liv: 5 }
+        ];
+        kol.forEach(function (k) {
+            k.eff = E_HUD * k.e / (E_HUD + k.e);
+            k.Tk = (E_HUD * T_HUD + k.e * T_PL) / (E_HUD + k.e);
+            k.ned = 0; k.mal = 0; k.tk = 0; k.hud = T_HUD; k.Q = 0; k.prickar = []; k.skuld = 0;
+            k.HX = k.x0 + 78; k.PX0 = k.x0 + 24; k.PX1 = k.x0 + 476;
+        });
+        // varje platta ritas i sina egna koordinater och flyttas på plats
+        function flytta(c, i) { if (smal) c.translate(-kol[i].x0, i === 0 ? -10 : 560); }
+        // det som aldrig ändras ritas en gång
+        var bg = document.createElement('canvas'); bg.width = K.cv.width; bg.height = K.cv.height;
+        (function () {
+            var bx = bg.getContext('2d'); bx.setTransform(K.cv.width / W, 0, 0, K.cv.height / H, 0, 0);
+            var B = kvVerktyg(bx);
+            B.papper(W, H);
+            kol.forEach(function (k, i) {
+                bx.save(); flytta(bx, i);
+                // bänken
+                var bk = new Path2D(); bk.rect(k.x0, PB, 500, 42); B.fyll(bk, B.TRA);
+                B.skraff(bk, -0.75, 12, B.BLA, 1.1, 0.35, [k.x0, PB, k.x0 + 500, PB + 42]);
+                var bl = new Path2D(); bl.moveTo(k.x0, PB + 42); bl.lineTo(k.x0 + 500, PB + 42); B.blak(bl, 2.6, B.BLA);
+                var p = new Path2D(); p.rect(k.PX0, PT, k.PX1 - k.PX0, PB - PT);
+                if (i === 0) {
+                    B.fyll(p, B.LJBLA); B.skraff(p, -0.785, 14, B.BLA, 1.3, 0.5, [k.PX0, PT, k.PX1, PB]);
+                } else {
+                    B.fyll(p, '#e4f1e9');
+                    B.skraff(p, -0.785, 22, '#3a7d5c', 1.1, 0.35, [k.PX0, PT, k.PX1, PB]);
+                    B.skraff(p, 0.785, 22, '#3a7d5c', 1.1, 0.35, [k.PX0, PT, k.PX1, PB]);
+                }
+                B.blak(p, 3, B.BLA);
+                B.text(k.namn, k.x0 + 250, 46, 30, B.INK, 'center', 700);
+                B.text('20 °C från början', k.x0 + 250, 78, 21, B.GRA, 'center', 500);
+                bx.restore();
+            });
+            var mitt = new Path2D();
+            if (smal) { mitt.moveTo(30, 572); mitt.lineTo(470, 572); } else { mitt.moveTo(500, 100); mitt.lineTo(500, PT - 20); }
+            B.blak(mitt, 1.6, B.BLA, 0.35);
+        })();
+
+        function gauss() { var u = Math.random() || 1e-9, v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
+        function steg(dt) {
+            kol.forEach(function (k) {
+                var fart = 2.2;
+                k.ned = V.klamp(k.ned + (k.mal ? 1 : -1) * dt * fart);
+                var kontakt = k.ned >= 1;
+                if (kontakt) {
+                    k.tk += dt;
+                    // huden närmar sig kontakttemperaturen (kort tidskonstant)
+                    k.hud += (k.Tk - k.hud) * Math.min(1, dt / 0.25);
+                    k.Q = 2 * (T_HUD - T_PL) * k.eff * Math.sqrt(k.tk / Math.PI) * AREA;
+                    var takt = 0.0285 * k.eff / Math.sqrt(Math.max(0.2, k.tk));
+                    k.skuld += takt * dt;
+                    var x0 = k.HX + 20 * SKALA + 8, x1 = k.HX + 400 * SKALA - 8;
+                    while (k.skuld >= 1) { k.skuld -= 1; k.prickar.push({ x: V.lerp(x0, x1, Math.random()), y: PT + 6, a: 0 }); }
+                } else {
+                    k.hud += (T_HUD - k.hud) * Math.min(1, dt / 2.5);
+                }
+                var sd = Math.sqrt(2 * k.D * dt);
+                k.prickar.forEach(function (p) {
+                    p.a += dt;
+                    p.x += sd * gauss(); p.y += sd * gauss();
+                    if (p.x < k.PX0 + 7) p.x = 2 * (k.PX0 + 7) - p.x;
+                    if (p.x > k.PX1 - 7) p.x = 2 * (k.PX1 - 7) - p.x;
+                    if (p.y < PT + 6) p.y = 2 * (PT + 6) - p.y;
+                    if (p.y > PB - 7) p.y = 2 * (PB - 7) - p.y;
+                    p.x = Math.min(k.PX1 - 7, Math.max(k.PX0 + 7, p.x)); p.y = Math.min(PB - 7, Math.max(PT + 6, p.y));
+                });
+                k.prickar = k.prickar.filter(function (p) { return p.a < k.liv; });
+            });
+        }
+        function rita() {
+            x.setTransform(1, 0, 0, 1, 0, 0);
+            x.drawImage(bg, 0, 0);
+            x.setTransform(K.cv.width / W, 0, 0, K.cv.height / H, 0, 0);
+            kol.forEach(function (k, i) {
+                x.save(); flytta(x, i);
+                // värmepaketen i plattan
+                k.prickar.forEach(function (p) {
+                    x.save(); x.globalAlpha = Math.min(1, p.a * 6) * (1 - V.mjuk(V.klamp((p.a - k.liv * 0.65) / (k.liv * 0.35))));
+                    var d = new Path2D(); d.arc(p.x, p.y, 5, 0, 7); V.fyll(d, V.ROD); V.blak(d, 1.3, V.INK, 0.8); x.restore();
+                });
+                var lyft = 85 * (1 - V.mjuk(k.ned)), Y0 = PT - lyft;
+                x.save(); var cl = new Path2D(); cl.rect(k.x0 + 2, 90, 496, PB - 90); x.clip(cl);
+                var hudU = V.klamp((k.hud - T_PL) / (T_HUD - T_PL));
+                V.hand(k.HX, Y0, SKALA, 0.55, hudU);
+                x.restore();
+                // värmepilar genom handflatan, starkare när flödet är stort
+                if (k.ned >= 1) {
+                    var styrka = Math.min(1, k.eff / 1052 / Math.sqrt(Math.max(0.3, k.tk / 2)));
+                    x.save(); x.globalAlpha = 0.35 + 0.65 * styrka;
+                    [k.HX + 85, k.HX + 180].forEach(function (px, j) {
+                        V.vagPil(px, Y0 - 92, px, Y0 + 10, 5, V.mjuk(V.klamp(k.tk * 2.5 - j * 0.3)), V.ROD, 2.2 + 3.2 * styrka, 0.42);
+                    });
+                    x.restore();
+                }
+                // ledtext när handen är lyft
+                if (k.ned <= 0 && !k.mal) {
+                    V.text('Klicka för att', k.x0 + 432, 314, 19, V.GRA, 'center', 600);
+                    V.text('lägga handen', k.x0 + 432, 338, 19, V.GRA, 'center', 600);
+                }
+                // avläsningar under bänken
+                var drop = T_HUD - k.hud, kansla = drop > 3 ? 'känns kall' : (drop > 1 ? 'känns sval' : '');
+                var hudCol = drop > 1 ? (drop > 3 ? V.BLA : '#5b6fa0') : V.INK;
+                V.text('Huden ' + kvFmt(k.hud, 1) + ' °C' + (kansla ? ', ' + kansla : ''), k.x0 + 250, 528, 27, hudCol, 'center', 700);
+                V.text('Värme från handen: ' + kvFmt(k.Q, 0) + ' J', k.x0 + 250, 566, 23, V.GRA, 'center', 600);
+                x.restore();
+            });
+        }
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        var bada = vgBtn('Lägg båda händerna', 'ms-primar');
+        var om = vgBtn('Börja om');
+        controls.appendChild(bada); controls.appendChild(om);
+        K.card.appendChild(controls);
+        var info = document.createElement('div');
+        info.className = 'minisim-info ms-brod';
+        info.textContent = 'Händerna har 25 °C och plattorna 20 °C. Varje röd prick är ett paket värme som lämnar handen.';
+        K.card.appendChild(info);
+        node.appendChild(K.card);
+
+        function etikett() { bada.textContent = (kol[0].mal && kol[1].mal) ? 'Lyft båda händerna' : 'Lägg båda händerna'; }
+        function satt(k, v) { if (v && !k.mal) { k.tk = 0; k.Q = 0; k.skuld = 0; } k.mal = v ? 1 : 0; }
+        bada.addEventListener('click', function () {
+            var ned = !(kol[0].mal && kol[1].mal);
+            kol.forEach(function (k) { satt(k, ned); }); etikett();
+        });
+        om.addEventListener('click', function () {
+            kol.forEach(function (k) { k.mal = 0; k.ned = 0; k.tk = 0; k.Q = 0; k.hud = T_HUD; k.prickar = []; k.skuld = 0; }); etikett(); rita();
+        });
+        K.cv.addEventListener('click', function (e) {
+            var p = K.punkt(e), k = kol[(smal ? p[1] < 570 : p[0] < 500) ? 0 : 1];
+            satt(k, !k.mal); etikett();
+        });
+        K.cv.style.cursor = 'pointer';
+        var loop = vgLoop(K.card, function (dt) { steg(dt); rita(); });
+        K.card._set = function (ned, t) {
+            kol.forEach(function (k) { satt(k, ned); });
+            for (var i = 0; i < Math.round(t * 30); i++) steg(1 / 30);
+            etikett(); rita();
+        };
+        rita();
+        loop.satt(true);
+    }
+
+    //  typ: smaltrace
+    //  En isbit (2 cm, 0 °C, 7,3 g) på en aluminiumplatta och en på en
+    //  plastplatta, båda 20 °C. Isen smälter av värmen som leds upp från
+    //  plattan och av luften runt om (värmeövergångstal 10 W/(m²·K)).
+    //  Aluminiumplattan (15 × 15 × 1 cm, 546 J/K) räknas som en kropp med en
+    //  enda temperatur: den leder värme till isen genom kontaktytan
+    //  (2 500 W/(m²·K)) och svalnar lite på köpet. Plasten leder så dåligt att
+    //  bara ett tunt skikt under isen hinner ge ifrån sig värme:
+    //      P = ΔT · e_plast · A / √(π · t),  e_plast ≈ 570
+    //  Smältvärmet är 334 J/g. Klockan visar den simulerade tiden; den går
+    //  tjugo gånger fortare än verkligheten (120 gånger med Snabbspola). Isen
+    //  på aluminiumet är borta efter cirka 5,5 minuter, på plasten efter
+    //  cirka 3,6 timmar.
+    function buildSmaltrace(node, cfg) {
+        var smal = (node.getBoundingClientRect().width || 664) < 520;
+        var W = smal ? 500 : 1000, H = smal ? 815 : 600;
+        var K = kvKort(node, cfg, W, H, 'En isbit ligger på en aluminiumplatta och en annan på en plastplatta, båda med rumstemperatur. ' +
+            'Ett stoppur visar tiden. Isbiten på aluminiumet smälter på ett par minuter till en vattenpöl, medan isbiten på plasten knappt har börjat smälta.');
+        var x = K.x, V = kvVerktyg(x);
+        var M0 = 917 * 8e-6 * 1000, LS = 334, S0 = 0.02, H_LUFT = 10, H_KONT = 2500, C_AL = 546, G_LUFT_AL = 0.3, E_PL = 570;
+        var OY = 450, PH = 22;
+        var plattor = [
+            { ox: 30, namn: 'Aluminiumplatta', al: true },
+            { ox: 520, namn: 'Plastplatta', al: false }
+        ];
+        var tid = 0, gar = false, snabb = false;
+        function nollstall() {
+            tid = 0; gar = false;
+            plattor.forEach(function (p) { p.m = M0; p.T = 20; p.P = 0; p.klar = null; p.prickar = []; p.skuld = 0; });
+        }
+        nollstall();
+        function P3(p, X, Z, Hh) { return [p.ox + X + Z * 0.4, OY - Z * 0.42 - Hh]; }
+        // smal skärm: plattorna under varandra, var och en med sin bänk
+        function flytta(c, i) { if (smal) c.translate(30 - plattor[i].ox, i === 0 ? -55 : 235); }
+        function bank(B, x0, x1) {
+            var bak = new Path2D(); bak.moveTo(x0, OY - 150); bak.lineTo(x1, OY - 150); B.blak(bak, 2, B.BLA, 0.45);
+            var fr = new Path2D(); fr.rect(x0, OY + 4, x1 - x0, 34); B.fyll(fr, B.LJBLA, 0.6);
+            B.skraff(fr, -0.8, 10, B.BLA, 1.1, 0.35, [x0, OY, x1, OY + 40]);
+            var fk = new Path2D(); fk.moveTo(x0, OY + 4); fk.lineTo(x1, OY + 4); fk.moveTo(x0, OY + 38); fk.lineTo(x1, OY + 38); B.blak(fk, 2.4, B.BLA);
+        }
+
+        var bg = document.createElement('canvas'); bg.width = K.cv.width; bg.height = K.cv.height;
+        (function () {
+            var bx = bg.getContext('2d'); bx.setTransform(K.cv.width / W, 0, 0, K.cv.height / H, 0, 0);
+            var B = kvVerktyg(bx);
+            B.papper(W, H);
+            if (!smal) bank(B, 0, W);
+            plattor.forEach(function (p, i) {
+                bx.save(); flytta(bx, i);
+                if (smal) bank(B, p.ox - 30, p.ox + 470);
+                function Q(X, Z, Hh) { return [p.ox + X + Z * 0.4, OY - Z * 0.42 - Hh]; }
+                var X1 = 340, Z1 = 230;
+                // skugga på bänken
+                var sk = B.poly([Q(X1, 0, 0), Q(X1 + 26, 18, 0), Q(X1 + 26, Z1 + 8, 0), Q(20, Z1 + 8, 0), Q(0, Z1, 0)]);
+                B.skraff(sk, 0.9, 7, B.BLA, 1.1, 0.35, [p.ox - 10, OY - 140, p.ox + 480, OY + 4]);
+                var f = B.poly([Q(0, 0, 0), Q(X1, 0, 0), Q(X1, 0, PH), Q(0, 0, PH)]);
+                var s = B.poly([Q(X1, 0, 0), Q(X1, Z1, 0), Q(X1, Z1, PH), Q(X1, 0, PH)]);
+                var t = B.poly([Q(0, 0, PH), Q(X1, 0, PH), Q(X1, Z1, PH), Q(0, Z1, PH)]);
+                if (p.al) {
+                    B.fyll(s, '#bcd0e6'); B.fyll(f, B.LJBLA2); B.fyll(t, B.LJBLA);
+                    var gl = new Path2D(), r = B.slump(3);
+                    for (var k = 0; k < 6; k++) { var a = Q(40 + k * 50 + r() * 10, 30, PH), b = Q(70 + k * 50 + r() * 10, 190, PH); gl.moveTo(a[0], a[1]); gl.lineTo(b[0], b[1]); }
+                    bx.save(); bx.strokeStyle = '#ffffff'; bx.lineWidth = 5; bx.globalAlpha = 0.85; bx.stroke(gl); bx.restore();
+                    var gl2 = new Path2D(); for (var k2 = 0; k2 < 4; k2++) { var a2 = Q(60 + k2 * 75, 50, PH), b2 = Q(85 + k2 * 75, 160, PH); gl2.moveTo(a2[0], a2[1]); gl2.lineTo(b2[0], b2[1]); }
+                    B.blak(gl2, 1.2, B.BLA, 0.45);
+                    B.skraff(f, -0.785, 9, B.BLA, 1, 0.45, [p.ox, OY - 30, p.ox + 350, OY]);
+                } else {
+                    B.fyll(s, '#c6ddd0'); B.fyll(f, '#d6e9de'); B.fyll(t, '#e8f3ec');
+                    var sh = new Path2D(); var a3 = Q(30, 200, PH), b3 = Q(300, 200, PH); sh.moveTo(a3[0], a3[1]); sh.lineTo(b3[0], b3[1]);
+                    bx.save(); bx.strokeStyle = '#ffffff'; bx.lineWidth = 6; bx.globalAlpha = 0.7; bx.stroke(sh); bx.restore();
+                    B.skraff(f, -0.785, 12, '#3a7d5c', 1, 0.35, [p.ox, OY - 30, p.ox + 350, OY]);
+                    B.skraff(f, 0.785, 12, '#3a7d5c', 1, 0.35, [p.ox, OY - 30, p.ox + 350, OY]);
+                }
+                B.blak(t, 2.6, B.BLA); B.blak(f, 2.3, B.BLA); B.blak(s, 2.3, B.BLA);
+                B.text(p.namn, p.ox + 215, OY + 82, 28, B.INK, 'center', 700);
+                bx.restore();
+            });
+        })();
+
+        function steg(dts) {
+            tid += dts;
+            plattor.forEach(function (p) {
+                if (p.m <= 0) { p.P = 0; return; }
+                var s = S0 * Math.pow(p.m / M0, 1 / 3), A = s * s, Pplatta;
+                if (p.al) {
+                    Pplatta = H_KONT * A * p.T;
+                    p.T += (-Pplatta + G_LUFT_AL * (20 - p.T)) * dts / C_AL;
+                } else {
+                    Pplatta = 20 * E_PL * A / Math.sqrt(Math.PI * Math.max(tid, 1));
+                }
+                var Pluft = H_LUFT * 5 * A * 20;
+                p.P = Pplatta;
+                p.m -= (Pplatta + Pluft) * dts / LS;
+                if (p.m <= 0.01 * M0) { p.m = 0; p.klar = tid; }
+            });
+        }
+        function tidText(t) {
+            var m = Math.floor(t / 60), s = Math.floor(t - 60 * m);
+            if (m >= 60) { var h = Math.floor(m / 60); return h + ' h ' + (m - 60 * h) + ' min'; }
+            return m + ' min ' + (s < 10 ? '0' : '') + s + ' s';
+        }
+        function isbit(p, f) {
+            var X = 175, Z = 115, Hh = PH, S = 108;
+            var w = S * (0.55 + 0.45 * Math.sqrt(f)), h = S * 0.62 * f, d = S * (0.55 + 0.45 * Math.sqrt(f));
+            var c = P3(p, X, Z, Hh), R = 26 + 74 * (1 - f);
+            if (1 - f > 0.01) {
+                var pol = new Path2D(); pol.ellipse(c[0] + 4, c[1] - 2, R * 1.15, R * 0.5, -0.08, 0, 7);
+                V.fyll(pol, '#d9e8f6', 0.9); V.blak(pol, 2, V.BLA, 0.8);
+                var gl = new Path2D(); gl.ellipse(c[0] - R * 0.35, c[1] - R * 0.15, R * 0.4, R * 0.12, -0.1, Math.PI * 1.1, Math.PI * 1.7);
+                x.save(); x.strokeStyle = '#ffffff'; x.lineWidth = 3.5; x.stroke(gl); x.restore();
+            }
+            if (f <= 0.005) return;
+            var r = Math.max(1, Math.min(4 + 10 * (1 - f), h * 0.28, w * 0.18));
+            var X0 = X - w / 2, X1 = X + w / 2, Z0 = Z - d / 2, Z1 = Z + d / 2;
+            var fr = V.rundPoly([P3(p, X0, Z0, Hh), P3(p, X1, Z0, Hh), P3(p, X1, Z0, Hh + h), P3(p, X0, Z0, Hh + h)], r);
+            var si = V.rundPoly([P3(p, X1, Z0, Hh), P3(p, X1, Z1, Hh), P3(p, X1, Z1, Hh + h), P3(p, X1, Z0, Hh + h)], r * 0.6);
+            var to = V.rundPoly([P3(p, X0, Z0, Hh + h), P3(p, X1, Z0, Hh + h), P3(p, X1, Z1, Hh + h), P3(p, X0, Z1, Hh + h)], r * 0.8);
+            V.fyll(si, '#c9dcef'); V.fyll(fr, '#dceaf7'); V.fyll(to, '#f1f7fd');
+            V.blak(si, 2.3, V.BLA); V.blak(fr, 2.3, V.BLA); V.blak(to, 2.3, V.BLA);
+            var a = P3(p, X0 + w * 0.18, Z0, Hh + h * 0.75), b = P3(p, X0 + w * 0.18, Z0, Hh + h * 0.3);
+            x.save(); x.strokeStyle = '#ffffff'; x.lineWidth = 4.5; x.lineCap = 'round'; x.beginPath(); x.moveTo(a[0], a[1]); x.lineTo(b[0], b[1]); x.stroke(); x.restore();
+            var bb = P3(p, X0 + w * 0.65, Z0, Hh + h * 0.55); var bl = new Path2D(); bl.arc(bb[0], bb[1], 4 * Math.sqrt(f), 0, 7); V.blak(bl, 1.4, V.BLA, 0.6);
+            if (f < 0.97) {
+                var dd = P3(p, X1, Z0, Hh + h * 0.35), dr = new Path2D();
+                dr.moveTo(dd[0], dd[1] - 7); dr.quadraticCurveTo(dd[0] + 7, dd[1] + 3, dd[0], dd[1] + 7); dr.quadraticCurveTo(dd[0] - 7, dd[1] + 3, dd[0], dd[1] - 7);
+                V.fyll(dr, '#d9e8f6'); V.blak(dr, 1.6, V.BLA);
+            }
+        }
+        function stoppur(cx, cy, t) {
+            var k = new Path2D(); k.arc(cx, cy, 44, 0, 7); V.fyll(k, V.VIT); V.blak(k, 3.2, V.BLA);
+            var kr = new Path2D(); kr.roundRect(cx - 10, cy - 64, 20, 16, 4); V.fyll(kr, V.VIT); V.blak(kr, 2.6, V.BLA);
+            var tk = new Path2D();
+            for (var i = 0; i < 12; i++) { var a = i / 12 * 2 * Math.PI, L = i % 3 ? 5 : 10; tk.moveTo(cx + Math.sin(a) * 36, cy - Math.cos(a) * 36); tk.lineTo(cx + Math.sin(a) * (36 - L), cy - Math.cos(a) * (36 - L)); }
+            V.blak(tk, 2, V.INK);
+            var v = 2 * Math.PI * (t % 60) / 60, vis = new Path2D(); vis.moveTo(cx, cy); vis.lineTo(cx + Math.sin(v) * 30, cy - Math.cos(v) * 30); V.blak(vis, 3.2, V.ROD);
+            var m = new Path2D(); m.arc(cx, cy, 4, 0, 7); V.fyll(m, V.INK);
+        }
+        function rita(dt) {
+            x.setTransform(1, 0, 0, 1, 0, 0);
+            x.drawImage(bg, 0, 0);
+            x.setTransform(K.cv.width / W, 0, 0, K.cv.height / H, 0, 0);
+            plattor.forEach(function (p, i) {
+                x.save(); flytta(x, i);
+                var f = p.m / M0;
+                // värme som leds upp i isen: fler prickar när effekten är större
+                if (dt && gar && p.m > 0) {
+                    p.skuld += 0.55 * p.P * dt;
+                    while (p.skuld >= 1) { p.skuld -= 1; p.prickar.push({ X: 175 + (Math.random() - 0.5) * 70, Z: 115 + (Math.random() - 0.5) * 50, a: 0, fas: Math.random() * 6 }); }
+                }
+                if (dt) p.prickar.forEach(function (q) { q.a += dt; });
+                p.prickar = p.prickar.filter(function (q) { return q.a < 1.1; });
+                isbit(p, f);
+                p.prickar.forEach(function (q) {
+                    var c = P3(p, q.X, q.Z, PH);
+                    x.save(); x.globalAlpha = 0.9 * Math.sin(Math.PI * q.a / 1.1);
+                    var d = new Path2D(); d.arc(c[0] + 5 * Math.sin(q.a * 6 + q.fas), c[1] - 40 * q.a, 4.5, 0, 7);
+                    V.fyll(d, V.ROD); V.blak(d, 1.2, V.INK, 0.7); x.restore();
+                });
+                var rad = p.klar !== null ? 'Smälte på ' + tidText(p.klar) : 'Kvar av isbiten: ' + Math.round(f * 100) + ' %';
+                V.text(rad, p.ox + 215, OY + 118, 24, p.klar !== null ? V.ROD : V.GRA, 'center', 600);
+                x.restore();
+            });
+            stoppur(W / 2, 82, tid);
+            V.text(tidText(tid), W / 2, 158, 24, V.INK, 'center', 700);
+            if (!gar && tid === 0) {
+                if (smal) {
+                    V.text('Båda plattorna och luften har 20 °C.', W / 2, 192, 20, V.GRA, 'center', 500);
+                    V.text('Isen har 0 °C.', W / 2, 216, 20, V.GRA, 'center', 500);
+                } else V.text('Båda plattorna och luften har 20 °C. Isen har 0 °C.', W / 2, 214, 21, V.GRA, 'center', 500);
+            }
+        }
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        var start = vgBtn('Starta', 'ms-primar');
+        var om = vgBtn('Börja om');
+        var sn = vgCheck('Snabbspola', false);
+        controls.appendChild(start); controls.appendChild(om); controls.appendChild(sn.label);
+        K.card.appendChild(controls);
+        node.appendChild(K.card);
+        function etikett() { start.textContent = gar ? 'Paus' : (tid > 0 ? 'Fortsätt' : 'Starta'); }
+        function vaxla() {
+            if (plattor[0].m <= 0 && plattor[1].m <= 0) return;
+            gar = !gar; etikett();
+        }
+        start.addEventListener('click', vaxla);
+        K.cv.addEventListener('click', vaxla);
+        K.cv.style.cursor = 'pointer';
+        om.addEventListener('click', function () { nollstall(); etikett(); rita(0); });
+        sn.cb.addEventListener('change', function () { snabb = sn.cb.checked; });
+        var loop = vgLoop(K.card, function (dt) {
+            if (gar) {
+                var dts = dt * (snabb ? 120 : 20), n = Math.ceil(dts / 0.5);
+                for (var i = 0; i < n; i++) steg(dts / n);
+                if (plattor[0].m <= 0 && plattor[1].m <= 0) { gar = false; etikett(); }
+            }
+            rita(dt);
+        });
+        K.card._set = function (t) {
+            nollstall();
+            var n = Math.round(t / 0.5); for (var i = 0; i < n; i++) steg(0.5);
+            gar = false; etikett(); rita(0);
+        };
+        rita(0);
+        loop.satt(true);
+    }
+
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
                   stegkast: buildStegkast,
                   svangningsgrafer: buildSvangningsgrafer,
@@ -14912,7 +15451,8 @@
                   vagstallning: buildVagstallning, pulsvag: buildPulsvag, vagtyp: buildVagtyp,
                   ytvag: buildYtvag, fasvag: buildFasvag,
                   staendevag: buildStaendevag, gitarrton: buildGitarrton,
-                  snurrslang: buildSnurrslang, pipton: buildPipton, provror: buildProvror };
+                  snurrslang: buildSnurrslang, pipton: buildPipton, provror: buildProvror,
+                  varmekansla: buildVarmekansla, smaltrace: buildSmaltrace };
 
     function decodeSrc(b64) {
         try { return decodeURIComponent(escape(atob(b64))); }

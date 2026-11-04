@@ -26519,15 +26519,17 @@
 
     y += adv + 1.7 * F;
     T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
-      [['Våglängden är inte given. Jag']],
-      [['räknar ut den ur formeln för']],
-      [['en halvöppen pipa, på en egen']],
-      [['rad i klammern.']]
+      [['Våglängden är inte given. I']],
+      [['klammern ställer jag upp formeln']],
+      [['för en halvöppen pipa, löser ut']],
+      [['λ och sätter in värdena.']]
     ]));
     var klam = valueBracket(acts, [
-      'v=340 m/s',
       'l=24 cm=0,24 m',
-      ['λ=', { frac: ['4·l', '2n-1'] }, '=', { frac: ['4·0,24 m', '3'] },
+      'n=2',
+      'v=340 m/s',
+      ['l=', { frac: ['(2n-1)·λ', '4'] }, '⟺λ=', { frac: ['4·l', '2n-1'] }],
+      ['λ=', { frac: ['4·0,24', '2·2-1'] }, '=', { frac: ['0,96', '3'] },
        '=0,32 m']
     ], padL, y, T.s, F);
     T.stepEnd();
@@ -26557,7 +26559,7 @@
     T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
       [['En liten pipa ger en ljus ton.']],
       [['Drygt en kilohertz ligger högt']],
-      [['upp i tonregistret — rimligt!']]
+      [['upp i tonregistret. Rimligt!']]
     ]));
     T.underline(T.str('Svar: 1,1 kHz', padL, y), y);
     T.stepEnd();

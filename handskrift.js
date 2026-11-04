@@ -15145,8 +15145,9 @@
     var xa0 = padL, xa1 = T.str('a) f(4)', padL, y);
     T.stepEnd();
 
-    var rings = substRings(acts, [[xa0 + T.adv('a) f('), xa1 - T.adv(')'), y, F],
-                                  [xf0, xf1, yF, F]]);
+    /* först talet i parentesen, sedan BARA x-et det ersätter */
+    var ringX = [xf0 + T.adv('f(x)=5'), xf0 + T.adv('f(x)=5x'), yF, F];
+    var rings = substRings(acts, [[xa0 + T.adv('a) f('), xa1 - T.adv(')'), y, F], ringX]);
     xx = T.str('=5·4-3', xa1, y);
     fadeRings(acts, rings);
     T.stepEnd();
@@ -15167,7 +15168,12 @@
       [['multiplikationen.']]
     ], 0.5);
     y += 4.5 * F;
-    xx = T.str('b) f(−2)=5·(−2)-3', padL, y);
+    xx = T.str('b) f(−2)', padL, y);
+    T.stepEnd();
+
+    rings = substRings(acts, [[padL + T.adv('b) f('), xx - T.adv(')'), y, F], ringX]);
+    xx = T.str('=5·(−2)-3', xx, y);
+    fadeRings(acts, rings);
     T.stepEnd();
 
     T.str('=-10-3=-13', xx, y);
@@ -15185,7 +15191,12 @@
       [['x-ets plats, precis likadant.']]
     ], 0.5);
     y += 4.5 * F;
-    xx = T.str('c) f(3a)=5·3a-3', padL, y);
+    xx = T.str('c) f(3a)', padL, y);
+    T.stepEnd();
+
+    rings = substRings(acts, [[padL + T.adv('c) f('), xx - T.adv(')'), y, F], ringX]);
+    xx = T.str('=5·3a-3', xx, y);
+    fadeRings(acts, rings);
     T.stepEnd();
 
     T.str('=15a-3', xx, y);
@@ -15203,12 +15214,22 @@
       [['drar dem ifrån varandra sist.']]
     ], 0.5);
     y += 4.5 * F;
-    xx = T.str('d) f(7)=5·7-3', padL, y);
+    xx = T.str('d) f(7)', padL, y);
+    T.stepEnd();
+
+    rings = substRings(acts, [[padL + T.adv('d) f('), xx - T.adv(')'), y, F], ringX]);
+    xx = T.str('=5·7-3', xx, y);
+    fadeRings(acts, rings);
     T.str('=32', xx, y);
     T.stepEnd();
 
     y += 2.6 * F;
-    xx = T.str('f(6)=5·6-3', padL, y);
+    xx = T.str('f(6)', padL, y);
+    T.stepEnd();
+
+    rings = substRings(acts, [[padL + T.adv('f('), xx - T.adv(')'), y, F], ringX]);
+    xx = T.str('=5·6-3', xx, y);
+    fadeRings(acts, rings);
     T.str('=27', xx, y);
     T.stepEnd();
 
@@ -15896,7 +15917,14 @@
       [['potensen.']]
     ]);
     y = yF + 3.0 * F;
-    xx = T.str('a) f(2)=2^4', padL, y);
+    xx = T.str('a) f(2)', padL, y);
+    T.stepEnd();
+
+    /* först talet i parentesen, sedan BARA x-et det ersätter */
+    var rings = substRings(acts, [[padL + T.adv('a) f('), xx - T.adv(')'), y, F],
+                                  [padL + T.adv('f(x)='), padL + T.adv('f(x)=x'), yF, F]]);
+    xx = T.str('=2^4', xx, y);
+    fadeRings(acts, rings);
     T.stepEnd();
 
     T.str('=16', xx, y);
@@ -15949,7 +15977,7 @@
 
     /* definitionerna UNDER VARANDRA: sida vid sida blir raden 560 px bred
      * och sträcker sig in i inställningsrutans mobilzon (x>420, y<150) */
-    var yF = 100;
+    var yF = 100, yFf = yF;
     T.str('f(x)=x^1^/^2', padL, yF);
     T.pause(220);
     yF += 2.4 * F;
@@ -15963,7 +15991,14 @@
     ]);
     y = yF + 3.0 * F;
     T.str('Inre funktionen', padL, y - 1.6 * F, null, 0.62);
-    var xg0 = padL, xg1 = T.str('g(2)=4·2^2=4·4', padL, y);
+    var xg0 = padL, xg = T.str('g(2)', padL, y);
+    T.stepEnd();
+
+    /* först talet i parentesen, sedan BARA x-et det ersätter */
+    var ringar = substRings(acts, [[padL + T.adv('g('), xg - T.adv(')'), y, F],
+                                   [padL + T.adv('g(x)=4'), padL + T.adv('g(x)=4x'), yF, F]]);
+    var xg1 = T.str('=4·2^2=4·4', xg, y);
+    fadeRings(acts, ringar);
     T.stepEnd();
 
     var xr0 = T.str('=', xg1, y), xr1 = T.str('16', xr0, y);
@@ -15977,7 +16012,13 @@
     var rings = substRings(acts, [[xr0, xr1, y, F]]);
     y += 3.6 * F;
     T.str('Yttre funktionen', padL, y - 1.6 * F, null, 0.62);
-    xx = T.str('f(g(2))=f(16)=16^1^/^2', padL, y);
+    xx = T.str('f(g(2))=f(16)', padL, y);
+    fadeRings(acts, rings);
+    T.stepEnd();
+
+    rings = substRings(acts, [[xx - T.adv('16)'), xx - T.adv(')'), y, F],
+                              [padL + T.adv('f(x)='), padL + T.adv('f(x)=x'), yFf, F]]);
+    xx = T.str('=16^1^/^2', xx, y);
     fadeRings(acts, rings);
     T.stepEnd();
 

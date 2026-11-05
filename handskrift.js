@@ -15542,6 +15542,77 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
+  /* ---------------- scen: lös f(x) = g(x) grafiskt (ma1c-4.8 ex 4) ---
+   * Kurvan f och linjen g är givna i uppgiften och står färdiga från
+   * början. Pennan markerar skärningspunkterna, går lodrätt ned till
+   * x-axeln och läser av x. Samma funktioner som figuren i md-filen:
+   * g(x) = 0,5x + 1,5 och f(x) = g(x) − 3(x − 1)(x − 4)e^(−x/2), som
+   * skär varandra exakt två gånger. */
+  function layoutFligamedg(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+
+    function gv(x) { return 0.5 * x + 1.5; }
+    function fv(x) { return gv(x) - 3 * (x - 1) * (x - 4) * Math.exp(-0.5 * x); }
+    var A = mkAxes(T, F, { ox: padL + 70, oy: 250, u: 27,
+                           xmin: -1, xmax: 6, ymin: -3, ymax: 5 });
+    /* f kommer in i fönstrets underkant (y = −3,4) strax före x = 0,4 */
+    var xin = 0;
+    while (fv(xin) < -3.4) xin += 0.002;
+    forritad(T, function () {
+      A.axes();
+      /* −1 på x-axeln utgår: det krockar annars med y-talet 1 vid origo */
+      A.ticks(heltal(-1, 6), heltal(-3, 5), [1, 2, 3, 4, 5, 6],
+              [-3, -2, -1, 1, 2, 3, 4, 5]);
+      T.pause(150);
+      /* två kurvor jämförs: f behåller bläcket, g i blått (REGEL GRAFEN
+       * RITAS I BLÅTT, undantaget för jämförda kurvor) */
+      A.curve(fv, xin, 6.4, INK);
+      A.rule([A.X(-1.4), A.Y(gv(-1.4))], [A.X(6.4), A.Y(gv(6.4))], BLUE);
+      T.str('f', A.X(6.4) + 6, A.Y(fv(6.4)) + 14, null, 0.62);
+      T.str('g', A.X(5.6) - 6, A.Y(gv(5.6)) - 12, BLUE, 0.62);
+    });
+
+    /* bubblorna bredvid koordinatsystemet, till höger: under det står
+     * svarsraden, och y=180 håller dem borta från mobilzonen */
+    function tankeSida(rader) { T.tanke(T.bubble(370, 180, 300, rader)); }
+
+    tankeSida([
+      [['f(x)=g(x) betyder att graferna']],
+      [['har samma y-värde. Det är']],
+      [['där de skär varandra.']]
+    ]);
+    A.dot(1, 2);
+    T.pause(250);
+    A.dot(4, 3.5);
+    T.stepEnd();
+
+    tankeSida([
+      [['Lösningen är x-koordinaterna.']],
+      [['Jag går lodrätt ned till']],
+      [['x-axeln och läser av.']]
+    ]);
+    function lodratt(xv, yv) {
+      var p1 = [A.X(xv), A.Y(yv)], p2 = [A.X(xv), A.oy], n = 9, i, seg;
+      for (i = 0; i < n; i += 2) {
+        seg = [[p1[0], p1[1] + (p2[1] - p1[1]) * (i / n)],
+               [p1[0], p1[1] + (p2[1] - p1[1]) * ((i + 1) / n)]];
+        acts.push({ kind: 'stroke', pts: humanize(seg), color: BLUE });
+      }
+    }
+    lodratt(1, 2);
+    T.pause(250);
+    lodratt(4, 3.5);
+    T.stepEnd();
+
+    y = A.oy + 3.6 * A.u + 3.0 * F;   /* f går ut ur fönstret vid y = −3,4 */
+    T.str('Där graferna skär varandra', padL, y - 1.6 * F, null, 0.62);
+    xe = T.str('Svar: x_1=1 och x_2=4', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
   /* ---------------- scen: grafisk ekvationslösning (ma1c-4.9 ex 1) ----
    * 3x − 5 = −x + 3. Vänsterled och högerled ritas som var sin linje;
    * lösningen är skärningspunktens x-koordinat. */
@@ -64128,6 +64199,7 @@
                    funktionsvarde: layoutFunktionsvarde,
                    arfunktion: layoutArfunktion,
                    lasavgraf: layoutLasavgraf,
+                   fligamedg: layoutFligamedg,
                    grafiskekv: layoutGrafiskekv,
                    grafiskolikhet: layoutGrafiskolikhet,
                    musiktjanst: layoutMusiktjanst,

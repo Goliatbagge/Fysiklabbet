@@ -31,21 +31,45 @@ typ: grafiskekv
 ::: textlosning
 VL = $3x - 5$ och HL = $-x + 3$.
 
-Vi öppnar GeoGebra och ritar $y = 3x - 5$ och $y = -x + 3$. Vi får
+I filmen nedan visas hela lösningen i GeoGebra Classic, från inmatningsfältet till skärningspunkten. Stegen står också beskrivna under filmen.
+
+::: video
+ankare: geogebra-grafisk-losning
+titel: Hela lösningen i GeoGebra Classic, steg för steg.
+fil: media/video/geogebra-grafisk-losning.mp4
+affisch: media/video/geogebra-grafisk-losning.jpg
+källa: Inspelad i GeoGebra Classic
+länk: https://www.geogebra.org/classic
+:::
+
+Vi klickar i *Inmatningsfältet* uppe till vänster, skriver $y = 3x - 5$
+och trycker Enter. Sedan skriver vi $y = -x + 3$ och trycker Enter. Vi får
 nedanstående grafer:
 
 ::: figur
-<svg viewBox="-26 -20 219 204" width="297" height="277" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Två räta linjer i ett koordinatsystem: den gröna y lika med 3x minus 5 stiger brant, den röda y lika med minus x plus 3 faller. De korsas nära punkten 2 komma 1."><line x1="3.0" y1="0.0" x2="3.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="33.0" y1="0.0" x2="33.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="63.0" y1="0.0" x2="63.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="93.0" y1="0.0" x2="93.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="123.0" y1="0.0" x2="123.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="153.0" y1="0.0" x2="153.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="156.8" x2="171.0" y2="156.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="128.8" x2="171.0" y2="128.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="100.8" x2="171.0" y2="100.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="72.8" x2="171.0" y2="72.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="44.8" x2="171.0" y2="44.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="16.8" x2="171.0" y2="16.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="128.8" x2="179.0" y2="128.8" stroke="#1f2530" stroke-width="1.6"/><polygon points="187.0,128.8 177.0,124.3 177.0,133.3" fill="#1f2530"/><line x1="33.0" y1="173.6" x2="33.0" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="33.0,-16.0 28.5,-6.0 37.5,-6.0" fill="#1f2530"/><text x="185.0" y="146.8" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="42.0" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="3.0" y="144.8" font-size="12" text-anchor="middle" fill="#1f2530">−1</text><text x="63.0" y="144.8" font-size="12" text-anchor="middle" fill="#1f2530">1</text><text x="93.0" y="144.8" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="123.0" y="144.8" font-size="12" text-anchor="middle" fill="#1f2530">3</text><text x="153.0" y="144.8" font-size="12" text-anchor="middle" fill="#1f2530">4</text><text x="27.0" y="160.8" font-size="12" text-anchor="end" fill="#1f2530">−1</text><text x="27.0" y="104.8" font-size="12" text-anchor="end" fill="#1f2530">1</text><text x="27.0" y="76.8" font-size="12" text-anchor="end" fill="#1f2530">2</text><text x="27.0" y="48.8" font-size="12" text-anchor="end" fill="#1f2530">3</text><text x="27.0" y="20.8" font-size="12" text-anchor="end" fill="#1f2530">4</text><line x1="67.0" y1="173.6" x2="129.0" y2="0.0" stroke="#4a7d3a" stroke-width="2"/><line x1="0.0" y1="14.0" x2="171.0" y2="173.6" stroke="#c8324a" stroke-width="2"/></svg>
+<img src="media/bilder/teori/geogebra-grafisk-grafer.jpg" alt="GeoGebra Classic med linjerna f: y = 3x − 5 och g: y = −x + 3 i algebrafönstret till vänster och de två linjerna i ritområdet till höger. Linjerna korsar varandra." width="960" height="480" loading="lazy">
 
-Grön linje: $y = 3x - 5$. Röd linje: $y = -x + 3$.
+Linjerna får namnen f och g i algebrafönstret.
 :::
 
-Vi tar fram skärningspunkten med verktyget *Skärning mellan två objekt*
-(eller verktyget *Punkt*) och klickar på linjerna. Skärningspunkten
-markeras och vi kan läsa av dess koordinater:
+Vi tar fram skärningspunkten med verktyget *Skärning mellan två objekt*.
+Det ligger bland punktverktygen: vi klickar på den andra knappen i
+verktygsraden, och en meny fälls ut.
 
 ::: figur
-<svg viewBox="-26 -20 219 204" width="297" height="277" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Samma linjer med skärningspunkten 2 komma 1 markerad: lösningen till ekvationen är x lika med 2."><line x1="3.0" y1="0.0" x2="3.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="33.0" y1="0.0" x2="33.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="63.0" y1="0.0" x2="63.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="93.0" y1="0.0" x2="93.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="123.0" y1="0.0" x2="123.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="153.0" y1="0.0" x2="153.0" y2="173.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="156.8" x2="171.0" y2="156.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="128.8" x2="171.0" y2="128.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="100.8" x2="171.0" y2="100.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="72.8" x2="171.0" y2="72.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="44.8" x2="171.0" y2="44.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="16.8" x2="171.0" y2="16.8" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="128.8" x2="179.0" y2="128.8" stroke="#1f2530" stroke-width="1.6"/><polygon points="187.0,128.8 177.0,124.3 177.0,133.3" fill="#1f2530"/><line x1="33.0" y1="173.6" x2="33.0" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="33.0,-16.0 28.5,-6.0 37.5,-6.0" fill="#1f2530"/><text x="185.0" y="146.8" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="42.0" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="3.0" y="144.8" font-size="12" text-anchor="middle" fill="#1f2530">−1</text><text x="63.0" y="144.8" font-size="12" text-anchor="middle" fill="#1f2530">1</text><text x="93.0" y="144.8" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="123.0" y="144.8" font-size="12" text-anchor="middle" fill="#1f2530">3</text><text x="153.0" y="144.8" font-size="12" text-anchor="middle" fill="#1f2530">4</text><text x="27.0" y="160.8" font-size="12" text-anchor="end" fill="#1f2530">−1</text><text x="27.0" y="104.8" font-size="12" text-anchor="end" fill="#1f2530">1</text><text x="27.0" y="76.8" font-size="12" text-anchor="end" fill="#1f2530">2</text><text x="27.0" y="48.8" font-size="12" text-anchor="end" fill="#1f2530">3</text><text x="27.0" y="20.8" font-size="12" text-anchor="end" fill="#1f2530">4</text><line x1="67.0" y1="173.6" x2="129.0" y2="0.0" stroke="#4a7d3a" stroke-width="2"/><line x1="0.0" y1="14.0" x2="171.0" y2="173.6" stroke="#c8324a" stroke-width="2"/><circle cx="93.0" cy="100.8" r="3.8" fill="#2563c9"/><text x="102.0" y="93.8" font-size="13" text-anchor="start" fill="#2563c9">(2, 1)</text></svg>
+<img src="media/bilder/teori/geogebra-grafisk-verktyg.jpg" alt="Punktverktygens meny är utfälld under den andra knappen i verktygsraden, och muspekaren står på Skärning mellan två objekt." width="560" height="400" loading="lazy">
+
+Skärning mellan två objekt är det fjärde verktyget i menyn.
+:::
+
+Vi klickar på den ena linjen och sedan på den andra. Skärningspunkten
+markeras med bokstaven A, och i algebrafönstret till vänster kan vi läsa av
+dess koordinater:
+
+::: figur
+<img src="media/bilder/teori/geogebra-grafisk-skarning.jpg" alt="Skärningspunkten A är markerad där linjerna korsar varandra. I algebrafönstret står A = Skärning(f, g) = (2, 1)." width="960" height="480" loading="lazy">
+
+I algebrafönstret står A = Skärning(f, g) = (2, 1).
 :::
 
 Vi ser att skärningspunktens *x*-koordinat är 2, så lösningen är $x = 2$.

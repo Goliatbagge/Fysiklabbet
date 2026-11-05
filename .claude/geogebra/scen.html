@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<title>GeoGebra-inspelning</title>
+<style>
+  html, body { margin: 0; padding: 0; background: #fff; overflow: hidden; }
+  #ggb { width: 960px; height: 480px; }
+  #text {
+    position: absolute; left: 0; top: 480px; width: 960px; height: 60px;
+    display: flex; align-items: center; justify-content: center;
+    background: #f7f2e8; border-top: 1px solid #d9cfbd;
+    font: 600 21px Poppins, system-ui, sans-serif; color: #1f2530;
+    transition: opacity .3s;
+  }
+  #text i { font-style: italic; }
+  #pekare {
+    position: absolute; left: 640px; top: 400px; width: 28px; height: 28px;
+    pointer-events: none; z-index: 100000; transition: none;
+  }
+  #ring {
+    position: absolute; width: 36px; height: 36px; margin: -18px 0 0 -18px;
+    border-radius: 50%; border: 3px solid rgba(37,99,201,.85);
+    pointer-events: none; z-index: 99999; opacity: 0; transform: scale(.4);
+  }
+  #ring.klick { animation: klick .45s ease-out; }
+  @keyframes klick { 0% { opacity: 1; transform: scale(.4); } 100% { opacity: 0; transform: scale(1.4); } }
+</style>
+<script src="https://www.geogebra.org/apps/deployggb.js"></script>
+</head>
+<body>
+<div id="ggb"></div>
+<div id="text"></div>
+<div id="ring"></div>
+<svg id="pekare" viewBox="0 0 28 28"><path d="M3 2 L3 22 L8.5 17 L12.5 26 L16 24.5 L12 15.8 L19.5 15.8 Z" fill="#1f2530" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>
+<script>
+  window.ggbKlar = false;
+  const app = new GGBApplet({
+    appName: 'classic', width: 960, height: 480, language: 'sv',
+    showToolBar: true, showAlgebraInput: true, showMenuBar: true,
+    showResetIcon: false, enableRightClick: false, showZoomButtons: true,
+    showKeyboardOnFocus: false, allowStyleBar: true, perspective: 'AG',
+    algebraInputPosition: 'algebra', borderColor: '#ffffff',
+    appletOnLoad: function (api) { window.ggb = api; window.ggbKlar = true; },
+  }, true);
+  window.addEventListener('load', () => app.inject('ggb'));
+</script>
+</body>
+</html>

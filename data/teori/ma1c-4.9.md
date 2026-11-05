@@ -9,8 +9,8 @@ section: '4.9'
 
 # Ekvationslösning med grafritande hjälpmedel
 
-Vi kan lösa ekvationer med hjälp av grafer med grafritande hjälpmedel,
-till exempel GeoGebra. Vi gör då en **grafisk lösning**.
+När vi löser ekvationer med hjälp av grafer kallas det en **grafisk lösning**.
+Vi kan då använda grafritande hjälpmedel, till exempel GeoGebra.
 
 ::: formel "Lösa ekvationer med grafritande hjälpmedel"
 Vi har en ekvation VL = HL.

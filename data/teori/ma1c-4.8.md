@@ -71,7 +71,7 @@ $f$, $g$, $h$, …
 $f(x) = 2x + 3$ betyder alltså samma sak som $g(x) = 2x + 3$.
 
 ::: exempel "Exempel 1 — Beräkna funktionsvärden"
-**Låt $f(x) = 5x - 3$. Bestäm<br>a)&nbsp;$f(4)$&emsp;&emsp;b)&nbsp;$f(-2)$&emsp;&emsp;c)&nbsp;$f(3a)$&emsp;&emsp;d)&nbsp;$f(7) - f(6)$<br>e)&nbsp;Lös $f(x) = 8$&emsp;&emsp;f)&nbsp;Lös $3 \cdot f(x) = 36$**
+**Låt $f(x) = 5x - 3$. Bestäm<br>a)&nbsp;$f(4)$&emsp;&emsp;b)&nbsp;$f(-2)$&emsp;&emsp;c)&nbsp;$f(3a)$&emsp;&emsp;d)&nbsp;$f(x + 2)$&emsp;&emsp;e)&nbsp;$f(7) - f(6)$<br>f)&nbsp;Lös $f(x) = 8$&emsp;&emsp;g)&nbsp;Lös $3 \cdot f(x) = 36$**
 
 ::: handskrift
 typ: funktionsvarde
@@ -105,7 +105,17 @@ $$
 
 **Svar:** $15a - 3$
 
-**d)** Ibland kan vi ha uttryck med flera funktioner. Då beräknar vi dem
+**d)** Det som står inom parentesen kan också vara ett uttryck med $x$ i.
+Vi ersätter alla $x$ med hela uttrycket $x + 2$, inom parentes, och
+multiplicerar sedan in 5 i parentesen:
+
+$$
+f(x + 2) = 5 \cdot (x + 2) - 3 = 5x + 10 - 3 = 5x + 7
+$$
+
+**Svar:** $5x + 7$
+
+**e)** Ibland kan vi ha uttryck med flera funktioner. Då beräknar vi dem
 var och en för sig för att sedan lägga ihop dem, eller så räknar vi ut dem
 tillsammans på en gång.
 
@@ -131,7 +141,7 @@ $$
 
 **Svar:** 5
 
-**e)** Nu är det tvärtom: funktionsvärdet är känt och vi söker $x$. Vi
+**f)** Nu är det tvärtom: funktionsvärdet är känt och vi söker $x$. Vi
 ersätter $f(x)$ med $5x - 3$ och löser ekvationen:
 
 $$
@@ -152,7 +162,7 @@ $$
 
 **Svar:** $x = 2{,}2$
 
-**f)** Här multipliceras hela funktionsvärdet med 3. Vi ersätter $f(x)$
+**g)** Här multipliceras hela funktionsvärdet med 3. Vi ersätter $f(x)$
 med $5x - 3$ och sätter en parentes runt uttrycket:
 
 $$

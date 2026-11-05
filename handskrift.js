@@ -15124,12 +15124,13 @@
   }
 
   /* ---------------- scen: beräkna funktionsvärden (ma1c-4.8 ex 1) -----
-   * f(x) = 5x − 3 med a) f(4), b) f(−2), c) f(3a) och d) f(7) − f(6).
+   * f(x) = 5x − 3 med a) f(4), b) f(−2), c) f(3a), d) f(x + 2),
+   * e) f(7) − f(6) samt ekvationerna f) f(x) = 8 och g) 3 · f(x) = 36.
    * Genomgående: det som står inom parentesen ersätter VARJE x. */
   function layoutFunktionsvarde(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
-    /* e) och f) löser ekvationer: båda redovisningslägena (se
+    /* f) och g) löser ekvationer: båda redovisningslägena (se
      * EKVATIONSREDOVISNING i filhuvudet), lika många klicksteg. */
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
 
@@ -15210,17 +15211,62 @@
     T.underline(xe, y);
     T.stepEnd();
 
-    /* ---- d) f(7) − f(6) ---- */
+    /* ---- d) f(x + 2) ---- */
+    tanke(y, [
+      [['Hela x+2 ersätter x, så']],
+      [['det får en parentes runt sig.']]
+    ], 0.5);
+    y += 4.5 * F;
+    xx = T.str('d) f(x+2)', padL, y);
+    T.stepEnd();
+
+    rings = substRings(acts, [[padL + T.adv('d) f('), xx - T.adv(')'), y, F], ringX]);
+    xx = T.str('=', xx, y);
+    var dF0 = xx; xx = T.str('5', xx, y); var dF1 = xx;
+    xx = T.str('·(', xx, y);
+    var dT0 = xx; xx = T.str('x', xx, y); var dT1 = xx;
+    xx = T.str('+2', xx, y); var dT2 = xx;
+    T.str(')-3', xx, y);
+    fadeRings(acts, rings);
+    T.stepEnd();
+
+    /* 5:an multipliceras in, en båge per term (se REGEL i filhuvudet) */
+    var multIn = mkMultIn(T), yD1 = y;
+    y += 2.4 * F;
+    xx = T.str('=', padL, y);
+    var dDel = [
+      { fran: [dF0, dF1], till: [dT0, dT1], skriv: '5x', hojd: 22 },
+      { fran: [dF0, dF1], till: [dT1, dT2], skriv: '+10', hojd: 30, dx: 4 }
+    ];
+    xx = multIn(xx, y, yD1 - 0.95 * F, dDel);
+    var dM0 = xx; xx = T.str('-3', xx, y); var dM1 = xx;
+    T.stepEnd();
+
+    var samla = mkSamla(T), yD2 = y;
+    y += 2.4 * F;
+    xx = T.str('=', padL, y);
+    samla(xx, y, [
+      { skriv: '5x' },
+      { ringar: [[dDel[1].x0, dDel[1].x1, yD2], [dM0, dM1, yD2]], skriv: '+7' }
+    ]);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('Svar: 5x+7', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- e) f(7) − f(6) ---- */
     tanke(y, [
       [['Två funktionsvärden. Jag']],
       [['räknar ut ett i taget och']],
       [['drar dem ifrån varandra sist.']]
     ], 0.5);
     y += 4.5 * F;
-    xx = T.str('d) f(7)', padL, y);
+    xx = T.str('e) f(7)', padL, y);
     T.stepEnd();
 
-    rings = substRings(acts, [[padL + T.adv('d) f('), xx - T.adv(')'), y, F], ringX]);
+    rings = substRings(acts, [[padL + T.adv('e) f('), xx - T.adv(')'), y, F], ringX]);
     xx = T.str('=5·7-3', xx, y);
     fadeRings(acts, rings);
     T.str('=32', xx, y);
@@ -15248,7 +15294,7 @@
     T.underline(xe, y);
     T.stepEnd();
 
-    /* ---- e) f(x) = 8 ---- */
+    /* ---- f) f(x) = 8 ---- */
     var x0 = padL;
     var xwE = x0 + T.adv('5x-3=8') + 0.9 * F;
     tanke(y, [
@@ -15257,7 +15303,7 @@
       [['byter f(x) mot 5x-3.']]
     ], 0.5);
     y += 4.5 * F;
-    T.str('e) f(x)=8', padL, y);
+    T.str('f) f(x)=8', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;
@@ -15280,7 +15326,7 @@
     T.underline(xe, y);
     T.stepEnd();
 
-    /* ---- f) 3 · f(x) = 36 ---- */
+    /* ---- g) 3 · f(x) = 36 ---- */
     var xwF = x0 + T.adv('3·(5x-3)=36') + 0.9 * F;
     tanke(y, [
       [['Hela f(x) multipliceras']],
@@ -15288,7 +15334,7 @@
       [['parentes runt sig.']]
     ], 0.5);
     y += 4.5 * F;
-    T.str('f) 3·f(x)=36', padL, y);
+    T.str('g) 3·f(x)=36', padL, y);
     T.stepEnd();
 
     y += 2.4 * F;

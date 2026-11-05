@@ -600,10 +600,21 @@
         // prepMath() limmar ihop en öppningsparentes med formeln efter den,
         // så att "(" aldrig blir ensam kvar i radslutet (samma knep som
         // restoreMath() i katalog.html).
+        // Formlerna letas upp från vänster till höger, på samma sätt som
+        // KaTeX parar dollartecknen. Ett mönster som söker "($…$" direkt i
+        // texten kan annars börja på en formels STÄNGANDE dollartecken och
+        // limma ihop fel par (samma fel som i katalogen 2026-11-05).
         function prepMath(html) {
             if (!html) return html;
-            return html.replace(/\(( *)(\$(?!\$)[^$\n]+?\$)/g,
-                '<span class="math-paren">($1$2</span>');
+            const delar = html.split(/(\$\$[\s\S]+?\$\$|\$[^$\n]+?\$)/);
+            for (let i = 1; i < delar.length; i += 2) {
+                if (delar[i].startsWith('$$')) continue;
+                const m = delar[i - 1].match(/\(( *)$/);
+                if (!m) continue;
+                delar[i - 1] = delar[i - 1].slice(0, -m[0].length);
+                delar[i] = '<span class="math-paren">(' + m[1] + delar[i] + '</span>';
+            }
+            return delar.join('');
         }
         function renderMath(root) {
             if (!root || !window.renderMathInElement) return;

@@ -379,11 +379,15 @@ body.laborans { overflow: hidden; }
         return { md, tokens };
     }
     function restoreMath(html, tokens) {
-        html = html.replace(/@@LABMATH(\d+)@@/g, (_, i) => tokens[+i]);
         // Samma nowrap-omslag som i katalogen: parentes + formel och
-        // variabel + bindestreck + efterled ("$n$-hörning").
-        html = html.replace(/\(( *)(\$(?!\$)[^$\n]+?\$)/g, '<span class="math-paren">($1$2</span>');
-        html = html.replace(/(\$(?!\$)[^$\n]+?\$|<em>[^<]{1,8}<\/em>)-([a-zA-Zåäöé]+)/g,
+        // variabel + bindestreck + efterled ("$n$-hörning"). Formlerna
+        // limmas mot platshållarna, innan de sätts tillbaka (se katalog.html).
+        html = html.replace(/\(( *)(@@LABMATH(\d+)@@)/g, (m, sp, ph, i) =>
+            tokens[+i].startsWith('$$') ? m : '<span class="math-paren">(' + sp + ph + '</span>')
+            .replace(/(@@LABMATH(\d+)@@)-([a-zA-Zåäöé]+)/g, (m, ph, i, w) =>
+                tokens[+i].startsWith('$$') ? m : '<span class="var-compound">' + ph + '-' + w + '</span>');
+        html = html.replace(/@@LABMATH(\d+)@@/g, (_, i) => tokens[+i]);
+        html = html.replace(/(<em>[^<]{1,8}<\/em>)-([a-zA-Zåäöé]+)/g,
             '<span class="var-compound">$1-$2</span>');
         return html;
     }

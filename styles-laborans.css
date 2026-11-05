@@ -3236,6 +3236,12 @@ details.lab-forklaring > .formel-harledning-body { padding-top: 12px; }
 .var-compound {
     white-space: nowrap;
 }
+/* Ett inline-kommando (`y = 7.5x + 3`) är något eleven skriver av exakt i
+   GeoGebra eller på räknaren. Bryts det mitt i läses det som två kommandon
+   (påpekat 2026-11-05 i ma1c-4.9). Kodblock (<pre>) berörs inte. */
+body.laborans :not(pre) > code {
+    white-space: nowrap;
+}
 
 /* Rensa texten (ma1c-2.8 exempel 3): frågan ringas in i blått, som
    pennan gör i pennlösningen. Överstruket (<del>) tonas ned så att det

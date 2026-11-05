@@ -917,8 +917,16 @@
             html = html.replace(
                 /(^|[\s>;])([a-h])\)(?:&nbsp;|\u00a0|[ \t])(?=[0-9A-Za-zÅÄÖåäöÉé])/g,
                 '$1$2)&nbsp;');
+            // Parentes + formel och formel + bindestreck + efterled limmas ihop
+            // mot platshållarna, aldrig mot den återställda texten. Ett mönster
+            // som letar "$…$" i löptext vet inte vilka dollartecken som öppnar
+            // och vilka som stänger: i "HL = $-x + 3$" parade det ihop slutet på
+            // formeln före med början på nästa ("$ och HL = $-x"), och KaTeX
+            // satte "och HL =" som kursiv matte medan formlerna runt omkring
+            // visades med dollartecken (påpekat 2026-11-05 i ma1c-4.9).
+            html = html.replace(/\(( *)(@@LABMATH(\d+)@@)/g, (m, sp, ph, i) =>
+                tokens[+i].startsWith('$$') ? m : '<span class="math-paren">(' + sp + ph + '</span>');
             html = html.replace(/@@LABMATH(\d+)@@/g, (_, i) => tokens[+i]);
-            html = html.replace(/\(( *)(\$(?!\$)[^$\n]+?\$)/g, '<span class="math-paren">($1$2</span>');
             return html;
         }
 

@@ -81,7 +81,18 @@
                 .replace(/(^|[\s>;])([a-h])\)(?:&nbsp;|\u00a0|[ \t])*(@@LABMATH\d+@@)/g,
                     '$1<span class="delupp-bokstav">$2)&nbsp;$3</span>')
                 .replace(/(^|[\s>;])([a-h])\)(?:&nbsp;|\u00a0|[ \t])(?=[0-9A-Za-zÅÄÖåäöÉé])/g,
-                    '$1$2)&nbsp;')).join('');
+                    '$1$2)&nbsp;')
+                // Parentes + formel och formel + bindestreck + efterled limmas ihop
+                // mot platshållarna, aldrig mot den återställda texten. Ett mönster
+                // som letar "$…$" i löptext vet inte vilka dollartecken som öppnar
+                // och vilka som stänger: i "HL = $-x + 3$" parade det ihop slutet på
+                // formeln före med början på nästa ("$ och HL = $-x"), och KaTeX
+                // satte "och HL =" som kursiv matte medan formlerna runt omkring
+                // visades med dollartecken (påpekat 2026-11-05 i ma1c-4.9).
+                .replace(/\(( *)(@@LABMATH(\d+)@@)/g, (m, sp, ph, i) =>
+                    tokens[+i].startsWith('$$') ? m : '<span class="math-paren">(' + sp + ph + '</span>')
+                .replace(/(@@LABMATH(\d+)@@)-([a-zA-Zåäöé]+)/g, (m, ph, i, w) =>
+                    tokens[+i].startsWith('$$') ? m : '<span class="var-compound">' + ph + '-' + w + '</span>')).join('');
             html = html.replace(/@@LABMATH(\d+)@@/g, (_, i) => tokens[+i]);
             // Skydda attributvärden (data-tip="…<em>s-t</em>-graf…") från
             // nowrap-omslagen nedan: en <span class="…"> inuti ett attribut
@@ -95,7 +106,7 @@
             // Håll ihop variabel + bindestreck + efterled ("$x$-termen",
             // "<em>pq</em>-formeln") — annars kan raden brytas efter
             // bindestrecket eller mellan variabeln och bindestrecket.
-            html = html.replace(/(\$(?!\$)[^$\n]+?\$|<em>[^<]{1,8}<\/em>)-([a-zA-Zåäöé]+)/g,
+            html = html.replace(/(<em>[^<]{1,8}<\/em>)-([a-zA-Zåäöé]+)/g,
                 '<span class="var-compound">$1-$2</span>');
             // Håll ihop en hel likhet i löptext: variabel + operator + värde
             // ("<em>a</em> = −<em>g</em>", "<em>y</em> = −1,6 m", "<em>t</em> = 0").

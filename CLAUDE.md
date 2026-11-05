@@ -2171,6 +2171,31 @@ pakka hela parentesen i math-block.
    detta. Skriver du rå inline-HTML/SVG (utanför markdown-pipelinen) gäller
    inte automatiken: lägg då parentesen *inuti* formeln, `$(q_e = …$`.
 
+### ⛔ Nowrap-omslag kring formler körs mot platshållarna, aldrig mot `$` i texten
+
+**Ett mönster som letar `$…$` i den färdiga texten vet inte vilka
+dollartecken som öppnar och vilka som stänger.** `restoreMath()` hade två
+sådana (parentes + formel, formel + bindestreck + efterled). I
+`VL = $3x - 5$ och HL = $-x + 3$` paras då slutet på första formeln ihop
+med början på nästa (`$ och HL = $-x`): KaTeX satte "och HL =" som kursiv
+matte, och formlerna runt omkring visades med dollartecken (påpekat
+2026-11-05 i Exempel 1 i `ma1c-4.9`; samma fel låg på drygt 30 ställen, i
+alla texter där en formel börjar med minus framför en bokstav, `$-x$`,
+`$-c$`, `$-i$`).
+
+- Omslagen körs nu mot platshållarna `@@LABMATH<n>@@` **innan** formlerna
+  sätts tillbaka, i `katalog.html`, `avsnitt.html`, `np.html` och
+  `sammanfattningar.html`. `nyheter.html` har inga platshållare, och där
+  paras formlerna från vänster till höger (`prepMath`) innan parentesen
+  limmas.
+- **Skriv aldrig ett nytt omslag som matchar `\$[^$]+?\$` i
+  återställd html.** Matcha platshållaren, eller para formlerna från
+  vänster först.
+- Innehållet behöver inte skrivas om: `$-x + 3$` är rätt i md-källan.
+- **Inline-kod (`` `y = 7.5x + 3` ``) bryts aldrig**, eftersom eleven
+  skriver av kommandot exakt i GeoGebra (regeln `:not(pre) > code` i
+  `styles-laborans.css`).
+
 ### ⚠️ Inline-math `$…$` måste ligga på EN källrad — aldrig radbrytas
 
 **Ett inline-math-span (enkelt `$…$`) får ALDRIG spänna över en radbrytning i

@@ -1,0 +1,31 @@
+03:15:01  [idag] === Nyhetsjobb: start (2026-11-05) ===
+03:15:06  [idag] Dagens nyhet finns (förberedd i går).
+03:15:06  [idag] Startar Claude Code (headless, modell opus, nyckel)...
+03:20:02  [imorgon] === Nyhetsjobb: start (2026-11-05) ===
+03:20:02  [imorgon] En körning pågår redan (lås 5 min gammalt). Avslutar.
+03:30:00  [idag] Nyheten för 2026-11-06 är skriven, granskad och committad på `nyhetsjobb` (77487f94). Jag har inte pushat och inte skickat något mejl.
+03:30:00  [idag] 
+03:30:00  [idag] **Artikeln:** "Två svaga ljuspulser i rätt takt rubbar atomlagren mer än en stark" (`2026-11-06-tva-knuffar-i-takt`, kategori Materialfysik). Grannen 2026-11-05 är partikelfysik, så områdena krockar inte.
+03:30:00  [idag] 
+03:30:00  [idag] - **Innehåll:** En stark laserpuls får atomlagren i kristallen WTe₂ att glida fram och tillbaka. Över en viss ljusstyrka blir rörelsen mindre i stället för större. Delas samma ljusenergi på två pulser med två perioders mellanrum, 8,3 pikosekunder, blir svängningen upp till 50 procent större. Kommer den andra pulsen ungefär en och en halv period efter den första stannar svängningen nästan helt. Artikeln bygger på jämförelsen med en gunga och tar också upp att Hookes lag slutar gälla vid stora utslag.
+03:30:00  [idag] - **Källa:** Horstmann m.fl. i Nature Physics, publicerad 21 oktober 2026. Studien är granskad och öppet tillgänglig (CC BY 4.0), och jag har läst hela PDF:en. Citaten kommer från Würzburgs pressmeddelande.
+03:30:00  [idag] - **Bilder:** Huvudbilden är ett foto av WTe₂-kristaller från Wikimedia Commons (CC BY 4.0). Jag beskar bort ett skalstreck med text i bilden. I brödtexten ligger ett utsnitt ur studiens figur 3. Universitetets pressbild valde jag bort, eftersom den saknar licens och är gjord med AI-stöd. Ingen AI-bild genererades.
+03:30:00  [idag] - **Ordlistan:** två nya begrepp, ferroelektricitet och frekvensdubbling.
+03:30:00  [idag] - **Granskning:** Utgivaren fällde först RÄTTA FÖRST. Siffrorna och citaten stämde, men åtta formuleringar behövde ändras, bland annat två förbehåll ("troligen") som fallit bort, ett ord som lagts till i ett citat och två fel i ordlisteposten om frekvensdubbling. Allt är rättat, och efterkontrollen gav GODKÄND.
+03:30:00  [idag] - **Verifiering:** `verify-navigation`, `verify-begrepp` och `verify-sitemap` är gröna. Inga träffar på "upphets", och "biljon" står bara för 10⁻¹². Jag kontrollerade artikeln i en skärmdump av förhandsvisningen.
+03:30:00  [idag] 
+03:30:00  [idag] **Att veta:**
+03:30:00  [idag] - `verify-sprak.js data/nyheter.js` ger tre fel (regeln ganger-mindre), men alla ligger i artikeln från 2026-11-04, inte i den nya. Jag lät dem vara.
+03:30:00  [idag] - Byggskriptet ändrade radsluten i hundratals delningssidor i arbetskatalogen, utan någon innehållsändring. De är inte med i committen, och arbetskatalogen återställs vid nästa körning.
+03:30:00  [idag] - Hula-hoopen (märkt BREVTEASER) är orörd. I `ko.md` har jag lagt till tre nya uppslag: altermagnetism i MnTe från SLAC, KM3NeT:s test av Lorentzinvariansen och Japans Phobos-uppdrag MMX.
+03:30:00  [idag] - Utgivaren noterade att ordlisteposten om högharmonisk generering har samma felaktiga gitarrsträngsliknelse som rättades i dag. Jag har inte ändrat den, eftersom den ligger utanför dagens artikel.
+03:30:01  [idag] Claude avslutade med kod 0
+03:30:01  [idag] error: cannot pull with rebase: You have unstaged changes.
+03:30:01  [idag] error: Please commit or stash them.
+03:30:07  [idag] Pushat till main.
+03:30:07  [idag] Artikel 2026-11-06 pushad: 2026-11-06-tva-knuffar-i-takt
+03:31:37  [idag] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+03:32:45  [idag] Mejlet är skickat till [ägaren] med granskning av morgondagens artikel "Två svaga ljuspulser i rätt takt rubbar atomlagren mer än en stark" (Materialfysik, 5 min), med förhandsvisningslänken till `nyheter.html?forhand=2026-11-06-tva-knuffar-i-takt`.
+03:32:46  [idag] Claude avslutade med kod 0
+03:32:46  [idag] Mejlet till ägaren är skickat.
+03:32:46  [idag] === Nyhetsjobb: slut ===

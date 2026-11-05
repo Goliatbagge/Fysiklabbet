@@ -12338,6 +12338,22 @@ window.EXITTICKETS = {
 
 'ma1c-4.8': [
   {
+    question: 'Graferna till $f$ och $g$ skär varandra där $x = 1$ och $x = 4$. Mellan skärningspunkterna ligger grafen till $f$ under grafen till $g$. Vilken är lösningen till $f(x) < g(x)$?',
+    choices: [
+      '$x = 1$ och $x = 4$',
+      '$1 < x < 4$',
+      '$1 \\leq x \\leq 4$',
+      '$x < 1$ eller $x > 4$',
+    ],
+    correct: 1,
+    why: [
+      'Det är lösningarna till ekvationen $f(x) = g(x)$, där graferna skär varandra.',
+      '$f(x) < g(x)$ betyder att $f$ ligger under $g$, och det gör den mellan skärningspunkterna. Där värdena är lika ingår inte.',
+      'I skärningspunkterna är värdena lika stora, och vid $<$ ska de inte ingå.',
+      'Där ligger $f$ ovanför $g$, alltså gäller $f(x) > g(x)$ där.',
+    ],
+  },
+  {
     question: 'Vad krävs för att ett samband mellan $x$ och $y$ ska vara en **funktion**?',
     choices: [
       'Varje tillåtet *x*-värde ger exakt ett *y*-värde',

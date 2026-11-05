@@ -278,6 +278,55 @@ Ekvationen har alltså tre lösningar.
 :::
 :::
 
+## Två funktioner i samma koordinatsystem
+
+Ett funktionsvärde $f(x)$ är *y*-koordinaten på grafen till $f$, alltså
+hur högt grafen ligger vid ett visst $x$. Ritar vi två funktioner $f$ och
+$g$ i samma koordinatsystem kan vi därför jämföra deras värden direkt i
+figuren: vid varje $x$ jämför vi hur högt de två graferna ligger.
+
+**Ekvationen $f(x) = g(x)$** frågar efter de $x$ där funktionerna har
+**samma värde**. Samma värde betyder samma höjd, och två grafer som ligger
+på samma höjd vid samma $x$ går genom samma punkt. Det sker precis där
+graferna **skär varandra**. Lösningarna är skärningspunkternas
+*x*-koordinater. Skärningspunkternas *y*-koordinater är inga lösningar,
+de visar bara vilket värde båda funktionerna har där.
+
+**Olikheten $f(x) < g(x)$** frågar efter de $x$ där $f$ har ett
+**mindre** värde än $g$. Ett mindre *y*-värde betyder att punkten ligger
+lägre, så grafen till $f$ ligger **under** grafen till $g$. På samma sätt
+betyder $f(x) > g(x)$ att grafen till $f$ ligger **ovanför** grafen till
+$g$. I figuren nedan skär graferna varandra där $x = -1$ och $x = 2$.
+
+::: figur
+<svg viewBox="-26 -20 240 247" width="326" height="335" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Grafen till f är en röd parabel och grafen till g en blå rät linje. De skär varandra där x är minus 1 och 2. Mellan skärningspunkterna ligger f under g och området mellan graferna är blått. Utanför skärningspunkterna ligger f ovanför g och området är rött."><line x1="12" y1="0.0" x2="12" y2="216.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="36" y1="0.0" x2="36" y2="216.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="60" y1="0.0" x2="60" y2="216.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="84" y1="0.0" x2="84" y2="216.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="108" y1="0.0" x2="108" y2="216.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="132" y1="0.0" x2="132" y2="216.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="156" y1="0.0" x2="156" y2="216.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="180" y1="0.0" x2="180" y2="216.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="12" x2="192.0" y2="12" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="36" x2="192.0" y2="36" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="60" x2="192.0" y2="60" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="84" x2="192.0" y2="84" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="108" x2="192.0" y2="108" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="132" x2="192.0" y2="132" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="156" x2="192.0" y2="156" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="180" x2="192.0" y2="180" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="204" x2="192.0" y2="204" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><path d="M60,156 L61,155 L61.9,154.1 L62.9,153.1 L63.8,152.2 L64.8,151.2 L65.8,150.2 L66.7,149.3 L67.7,148.3 L68.6,147.4 L69.6,146.4 L70.6,145.4 L71.5,144.5 L72.5,143.5 L73.4,142.6 L74.4,141.6 L75.4,140.6 L76.3,139.7 L77.3,138.7 L78.2,137.8 L79.2,136.8 L80.2,135.8 L81.1,134.9 L82.1,133.9 L83,133 L84,132 L85,131 L85.9,130.1 L86.9,129.1 L87.8,128.2 L88.8,127.2 L89.8,126.2 L90.7,125.3 L91.7,124.3 L92.6,123.4 L93.6,122.4 L94.6,121.4 L95.5,120.5 L96.5,119.5 L97.4,118.6 L98.4,117.6 L99.4,116.6 L100.3,115.7 L101.3,114.7 L102.2,113.8 L103.2,112.8 L104.2,111.8 L105.1,110.9 L106.1,109.9 L107,109 L108,108 L109,107 L109.9,106.1 L110.9,105.1 L111.8,104.2 L112.8,103.2 L113.8,102.2 L114.7,101.3 L115.7,100.3 L116.6,99.4 L117.6,98.4 L118.6,97.4 L119.5,96.5 L120.5,95.5 L121.4,94.6 L122.4,93.6 L123.4,92.6 L124.3,91.7 L125.3,90.7 L126.2,89.8 L127.2,88.8 L128.2,87.8 L129.1,86.9 L130.1,85.9 L131,85 L132,84 L132,84 L131,87.8 L130.1,91.5 L129.1,95.2 L128.2,98.7 L127.2,102.2 L126.2,105.7 L125.3,109 L124.3,112.3 L123.4,115.4 L122.4,118.6 L121.4,121.6 L120.5,124.6 L119.5,127.4 L118.6,130.2 L117.6,133 L116.6,135.6 L115.7,138.2 L114.7,140.7 L113.8,143.1 L112.8,145.4 L111.8,147.7 L110.9,149.9 L109.9,152 L109,154 L108,156 L107,157.9 L106.1,159.7 L105.1,161.4 L104.2,163.1 L103.2,164.6 L102.2,166.1 L101.3,167.6 L100.3,168.9 L99.4,170.2 L98.4,171.4 L97.4,172.5 L96.5,173.5 L95.5,174.5 L94.6,175.4 L93.6,176.2 L92.6,176.9 L91.7,177.5 L90.7,178.1 L89.8,178.6 L88.8,179 L87.8,179.4 L86.9,179.7 L85.9,179.8 L85,180 L84,180 L83,180 L82.1,179.8 L81.1,179.7 L80.2,179.4 L79.2,179 L78.2,178.6 L77.3,178.1 L76.3,177.5 L75.4,176.9 L74.4,176.2 L73.4,175.4 L72.5,174.5 L71.5,173.5 L70.6,172.5 L69.6,171.4 L68.6,170.2 L67.7,168.9 L66.7,167.6 L65.8,166.1 L64.8,164.6 L63.8,163.1 L62.9,161.4 L61.9,159.7 L61,157.9 L60,156 Z" fill="#2563c9" fill-opacity="0.14" stroke="none"/><path d="M18.3,0 L19.2,5.2 L20.2,10.2 L21.1,15.2 L22.1,20.2 L23,25 L24,29.8 L24.9,34.5 L25.9,39.2 L26.8,43.7 L27.8,48.2 L28.7,52.6 L29.7,56.9 L30.6,61.2 L31.5,65.4 L32.5,69.5 L33.4,73.5 L34.4,77.5 L35.3,81.4 L36.3,85.2 L37.2,88.9 L38.2,92.6 L39.1,96.1 L40.1,99.6 L41,103.1 L42,106.4 L42.9,109.7 L43.9,112.9 L44.8,116.1 L45.8,119.1 L46.7,122.1 L47.7,125 L48.6,127.8 L49.6,130.6 L50.5,133.3 L51.5,135.9 L52.4,138.4 L53.4,140.9 L54.3,143.3 L55.3,145.6 L56.2,147.8 L57.2,150 L58.1,152.1 L59.1,154.1 L60,156 L60,156 L59.1,156.9 L58.1,157.9 L57.2,158.8 L56.2,159.8 L55.3,160.7 L54.3,161.7 L53.4,162.6 L52.4,163.6 L51.5,164.5 L50.5,165.5 L49.6,166.4 L48.6,167.4 L47.7,168.3 L46.7,169.3 L45.8,170.2 L44.8,171.2 L43.9,172.1 L42.9,173.1 L42,174 L41,175 L40.1,175.9 L39.1,176.9 L38.2,177.8 L37.2,178.8 L36.3,179.7 L35.3,180.7 L34.4,181.6 L33.4,182.6 L32.5,183.5 L31.5,184.5 L30.6,185.4 L29.7,186.3 L28.7,187.3 L27.8,188.2 L26.8,189.2 L25.9,190.1 L24.9,191.1 L24,192 L23,193 L22.1,193.9 L21.1,194.9 L20.2,195.8 L19.2,196.8 L18.3,197.7 Z" fill="#c8324a" fill-opacity="0.14" stroke="none"/><path d="M132,84 L132.9,80.2 L133.9,76.4 L134.8,72.5 L135.7,68.5 L136.7,64.4 L137.6,60.3 L138.5,56.1 L139.5,51.8 L140.4,47.5 L141.3,43.1 L142.3,38.6 L143.2,34 L144.1,29.4 L145.1,24.6 L146,19.9 L146.9,15 L147.9,10.1 L148.8,5.1 L149.7,0 L149.7,66.3 L148.8,67.2 L147.9,68.1 L146.9,69.1 L146,70 L145.1,70.9 L144.1,71.9 L143.2,72.8 L142.3,73.7 L141.3,74.7 L140.4,75.6 L139.5,76.5 L138.5,77.5 L137.6,78.4 L136.7,79.3 L135.7,80.3 L134.8,81.2 L133.9,82.1 L132.9,83.1 L132,84 Z" fill="#c8324a" fill-opacity="0.14" stroke="none"/><line x1="0.0" y1="156" x2="200" y2="156" stroke="#1f2530" stroke-width="1.6"/><polygon points="208,156 198,151.5 198,160.5" fill="#1f2530"/><line x1="84" y1="216" x2="84" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="84,-16.0 79.5,-6.0 88.5,-6.0" fill="#1f2530"/><text x="206" y="174" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="93" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="12" y="172" font-size="12" text-anchor="middle" fill="#1f2530">−3</text><text x="36" y="172" font-size="12" text-anchor="middle" fill="#1f2530">−2</text><text x="108" y="172" font-size="12" text-anchor="middle" fill="#1f2530">1</text><text x="132" y="172" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="156" y="172" font-size="12" text-anchor="middle" fill="#1f2530">3</text><text x="180" y="172" font-size="12" text-anchor="middle" fill="#1f2530">4</text><text x="78" y="16.0" font-size="12" text-anchor="end" fill="#1f2530">6</text><text x="78" y="40.0" font-size="12" text-anchor="end" fill="#1f2530">5</text><text x="78" y="64.0" font-size="12" text-anchor="end" fill="#1f2530">4</text><text x="78" y="88.0" font-size="12" text-anchor="end" fill="#1f2530">3</text><text x="78" y="112.0" font-size="12" text-anchor="end" fill="#1f2530">2</text><text x="78" y="136.0" font-size="12" text-anchor="end" fill="#1f2530">1</text><text x="78" y="208.0" font-size="12" text-anchor="end" fill="#1f2530">−2</text><path d="M18.3,0 L19.2,5.2 L20.2,10.4 L21.2,15.4 L22.1,20.4 L23.1,25.3 L24,30.2 L25,34.9 L25.9,39.6 L26.9,44.2 L27.9,48.7 L28.8,53.2 L29.8,57.5 L30.7,61.8 L31.7,66.1 L32.7,70.2 L33.6,74.3 L34.6,78.3 L35.5,82.2 L36.5,86 L37.5,89.8 L38.4,93.4 L39.4,97.1 L40.3,100.6 L41.3,104 L42.3,107.4 L43.2,110.7 L44.2,113.9 L45.1,117.1 L46.1,120.1 L47.1,123.1 L48,126.1 L49,128.9 L49.9,131.7 L50.9,134.3 L51.9,136.9 L52.8,139.5 L53.8,141.9 L54.7,144.3 L55.7,146.6 L56.7,148.8 L57.6,151 L58.6,153.1 L59.5,155.1 L60.5,157 L61.5,158.8 L62.4,160.6 L63.4,162.3 L64.3,163.9 L65.3,165.4 L66.2,166.9 L67.2,168.3 L68.2,169.6 L69.1,170.8 L70.1,171.9 L71,173 L72,174 L73,174.9 L73.9,175.8 L74.9,176.5 L75.8,177.2 L76.8,177.8 L77.8,178.4 L78.7,178.8 L79.7,179.2 L80.6,179.5 L81.6,179.8 L82.6,179.9 L83.5,180 L84.5,180 L85.4,179.9 L86.4,179.8 L87.4,179.5 L88.3,179.2 L89.3,178.8 L90.2,178.4 L91.2,177.8 L92.2,177.2 L93.1,176.5 L94.1,175.8 L95,174.9 L96,174 L97,173 L97.9,171.9 L98.9,170.8 L99.8,169.6 L100.8,168.3 L101.8,166.9 L102.7,165.4 L103.7,163.9 L104.6,162.3 L105.6,160.6 L106.5,158.8 L107.5,157 L108.5,155.1 L109.4,153.1 L110.4,151 L111.3,148.8 L112.3,146.6 L113.3,144.3 L114.2,141.9 L115.2,139.5 L116.1,136.9 L117.1,134.3 L118.1,131.7 L119,128.9 L120,126.1 L120.9,123.1 L121.9,120.1 L122.9,117.1 L123.8,113.9 L124.8,110.7 L125.7,107.4 L126.7,104 L127.7,100.6 L128.6,97.1 L129.6,93.4 L130.5,89.8 L131.5,86 L132.5,82.2 L133.4,78.3 L134.4,74.3 L135.3,70.2 L136.3,66.1 L137.3,61.8 L138.2,57.5 L139.2,53.2 L140.1,48.7 L141.1,44.2 L142.1,39.6 L143,34.9 L144,30.2 L144.9,25.3 L145.9,20.4 L146.8,15.4 L147.8,10.4 L148.8,5.2 L149.7,0" fill="none" stroke="#c8324a" stroke-width="2"/><line x1="2.4" y1="213.6" x2="189.6" y2="26.4" stroke="#2563c9" stroke-width="2"/><text x="184.8" y="49.2" font-size="14" text-anchor="middle" fill="#2563c9"><tspan font-style="italic">g</tspan></text><text x="157.7" y="7.2" font-size="14" text-anchor="start" fill="#c8324a"><tspan font-style="italic">f</tspan></text><line x1="132" y1="156" x2="132" y2="84" stroke="#1f2530" stroke-width="1.4" stroke-dasharray="4 3"/><circle cx="60" cy="156" r="3.6" fill="#1f2530"/><circle cx="132" cy="84" r="3.6" fill="#1f2530"/></svg>
+
+Mellan skärningspunkterna ligger $f$ under $g$ (blått område), så där
+gäller $f(x) < g(x)$. Utanför dem ligger $f$ ovanför $g$ (rött område),
+så där gäller $f(x) > g(x)$.
+:::
+
+Ur figuren läser vi alltså av att $f(x) = g(x)$ har lösningarna
+$x_1 = -1$ och $x_2 = 2$, att $f(x) < g(x)$ gäller när $-1 < x < 2$, och
+att $f(x) > g(x)$ gäller när $x < -1$ eller $x > 2$.
+
+| Skrivsätt | Betyder | I figuren |
+|---|---|---|
+| $f(x) = g(x)$ | lika stora värden | graferna skär varandra |
+| $f(x) < g(x)$ | $f$ har mindre värde än $g$ | $f$ ligger under $g$ |
+| $f(x) > g(x)$ | $f$ har större värde än $g$ | $f$ ligger ovanför $g$ |
+| $f(x) \leq g(x)$ | mindre värde eller lika | $f$ ligger under $g$ eller skär den |
+| $f(x) \geq g(x)$ | större värde eller lika | $f$ ligger ovanför $g$ eller skär den |
+
+Två saker är värda att lägga på minnet:
+
+- **Ingår skärningspunkterna?** I skärningspunkterna är värdena lika
+  stora. Vid $<$ och $>$ ingår de därför inte, men vid $\leq$ och
+  $\geq$ gör de det.
+- **Läs vilken funktion som ska vara störst.** Olikheten kan skrivas åt
+  båda hållen: $g(x) < f(x)$ betyder samma sak som $f(x) > g(x)$, alltså
+  att $f$ ligger ovanför $g$.
+
 ::: exempel "Exempel 4 — Lös $f(x) = g(x)$ och $g(x) < f(x)$ grafiskt"
 **Graferna till funktionerna $f$ och $g$ är uppritade. Använd graferna
 för att lösa<br>a)&nbsp;ekvationen $f(x) = g(x)$&emsp;&emsp;b)&nbsp;olikheten $g(x) < f(x)$**
@@ -357,7 +406,12 @@ ingår $x = 1$ och $x = 4$ inte, och intervallet får ofyllda ringar i
 - $f(0)$: läs av där grafen skär $y$-axeln.
 - $f(x) = 0$: leta upp **alla** $x$ där grafen skär $x$-axeln. Det kan
   vara flera.
-- $f(x) = g(x)$: läs av $x$ där graferna **skär varandra**.
-- $g(x) < f(x)$: läs av $x$ där grafen till $f$ ligger **ovanför** $g$.
+:::
+
+::: sampunkt "Två funktioner"
+- $f(x) = g(x)$: *x*-koordinaterna där graferna **skär varandra**.
+- $f(x) < g(x)$: där $f$ ligger **under** $g$.
+- $f(x) > g(x)$: där $f$ ligger **ovanför** $g$.
+- Skärningspunkterna ingår vid $\leq$ och $\geq$, inte vid $<$ och $>$.
 :::
 :::

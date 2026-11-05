@@ -86,15 +86,38 @@ typ: grafiskolikhet
 :::
 
 ::: textlosning
-Vi gör på motsvarande sätt som med en ekvation och ritar upp graferna
+VL = $-2x + 5$ och HL = $x - 4$.
+
+Vi gör på motsvarande sätt som med en ekvation och ritar graferna
 $y = -2x + 5$ och $y = x - 4$ (vi sätter "$y$ =" före vänster och höger
-led). Vi markerar därefter skärningspunkten:
+led). I filmen nedan visas hela lösningen i GeoGebra Classic. Stegen står
+också beskrivna under filmen.
+
+::: video
+ankare: geogebra-grafisk-olikhet
+titel: Olikheten −2x + 5 < x − 4 löses grafiskt i GeoGebra Classic.
+fil: media/video/geogebra-grafisk-olikhet.mp4
+affisch: media/video/geogebra-grafisk-olikhet.jpg
+källa: Inspelad i GeoGebra Classic
+länk: https://www.geogebra.org/classic
+:::
+
+Vi skriver $y = -2x + 5$ i *Inmatningsfältet* och trycker Enter, och sedan
+$y = x - 4$ och Enter. Linjerna får namnen f och g:
 
 ::: figur
-<svg viewBox="-26 -20 264 204" width="358" height="277" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Den röda linjen y lika med minus 2x plus 5 och den gröna linjen y lika med x minus 4 skär varandra i punkten 3 komma minus 1, som är markerad."><line x1="18.0" y1="0.0" x2="18.0" y2="174.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="48.0" y1="0.0" x2="48.0" y2="174.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="78.0" y1="0.0" x2="78.0" y2="174.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="108.0" y1="0.0" x2="108.0" y2="174.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="138.0" y1="0.0" x2="138.0" y2="174.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="168.0" y1="0.0" x2="168.0" y2="174.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="198.0" y1="0.0" x2="198.0" y2="174.2" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="171.6" x2="216.0" y2="171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="145.6" x2="216.0" y2="145.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="119.6" x2="216.0" y2="119.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="93.6" x2="216.0" y2="93.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="67.6" x2="216.0" y2="67.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="41.6" x2="216.0" y2="41.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="15.6" x2="216.0" y2="15.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="93.6" x2="224.0" y2="93.6" stroke="#1f2530" stroke-width="1.6"/><polygon points="232.0,93.6 222.0,89.1 222.0,98.1" fill="#1f2530"/><line x1="18.0" y1="174.2" x2="18.0" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="18.0,-16.0 13.5,-6.0 22.5,-6.0" fill="#1f2530"/><text x="230.0" y="111.6" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="27.0" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="48.0" y="109.6" font-size="12" text-anchor="middle" fill="#1f2530">1</text><text x="78.0" y="109.6" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="108.0" y="109.6" font-size="12" text-anchor="middle" fill="#1f2530">3</text><text x="138.0" y="109.6" font-size="12" text-anchor="middle" fill="#1f2530">4</text><text x="168.0" y="109.6" font-size="12" text-anchor="middle" fill="#1f2530">5</text><text x="198.0" y="109.6" font-size="12" text-anchor="middle" fill="#1f2530">6</text><text x="12.0" y="175.6" font-size="12" text-anchor="end" fill="#1f2530">−3</text><text x="12.0" y="149.6" font-size="12" text-anchor="end" fill="#1f2530">−2</text><text x="12.0" y="123.6" font-size="12" text-anchor="end" fill="#1f2530">−1</text><text x="12.0" y="71.6" font-size="12" text-anchor="end" fill="#1f2530">1</text><text x="12.0" y="45.6" font-size="12" text-anchor="end" fill="#1f2530">2</text><text x="12.0" y="19.6" font-size="12" text-anchor="end" fill="#1f2530">3</text><line x1="39.0" y1="0.0" x2="139.5" y2="174.2" stroke="#c8324a" stroke-width="2"/><line x1="45.0" y1="174.2" x2="216.0" y2="26.0" stroke="#4a7d3a" stroke-width="2"/><circle cx="108.0" cy="119.6" r="3.8" fill="#2563c9"/></svg>
+<img src="media/bilder/teori/geogebra-olikhet-grafer.jpg" alt="GeoGebra Classic med linjerna f: y = −2x + 5 och g: y = x − 4 i algebrafönstret till vänster och de två linjerna i ritområdet till höger. Linjerna korsar varandra." width="960" height="480" loading="lazy">
 
-Röd linje: $y = -2x + 5$. Grön linje: $y = x - 4$. Skärningspunkten
-ligger i (3, −1).
+Linjen f lutar nedåt och linjen g uppåt.
+:::
+
+Med verktyget *Skärning mellan två objekt* (bland punktverktygen, som i
+exempel 1) klickar vi på den ena linjen och sedan på den andra:
+
+::: figur
+<img src="media/bilder/teori/geogebra-olikhet-skarning.jpg" alt="Skärningspunkten A är markerad där linjerna korsar varandra. I algebrafönstret står A = Skärning(f, g) = (3, −1)." width="960" height="480" loading="lazy">
+
+I algebrafönstret står A = Skärning(f, g) = (3, −1).
 :::
 
 Vi ska nu avgöra när $-2x + 5$ är MINDRE ÄN $x - 4$.
@@ -102,6 +125,12 @@ Vi ska nu avgöra när $-2x + 5$ är MINDRE ÄN $x - 4$.
 $-2x + 5$ är MINDRE ÄN $x - 4$ när linjen $y = -2x + 5$ ligger *under*
 linjen $y = x - 4$. Det gör den *till höger* om skärningspunkten, det vill säga
 när $x > 3$.
+
+::: figur
+<img src="media/bilder/teori/geogebra-olikhet-under.jpg" alt="Muspekaren följer linjen f till höger om skärningspunkten A, där f ligger under linjen g." width="960" height="480" loading="lazy">
+
+Till höger om A ligger linjen f under linjen g.
+:::
 
 **Svar:** $x > 3$
 :::

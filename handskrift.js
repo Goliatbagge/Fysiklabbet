@@ -15129,8 +15129,11 @@
   function layoutFunktionsvarde(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T);
+    /* e) och f) löser ekvationer: båda redovisningslägena (se
+     * EKVATIONSREDOVISNING i filhuvudet), lika många klicksteg. */
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
 
-    var yF = 104;              /* a-raden hamnar då under y=150 */
+    var yF = 220;              /* ekvval-scen: mobilzonen når y<210 */
     var xf0 = padL;
     var xf1 = T.str('f(x)=5x-3', padL, yF);
     T.stepEnd();
@@ -15245,7 +15248,72 @@
     T.underline(xe, y);
     T.stepEnd();
 
-    return { acts: acts, contentW: 640, lastBase: y + 0.9 * F, padL: padL };
+    /* ---- e) f(x) = 8 ---- */
+    var x0 = padL;
+    var xwE = x0 + T.adv('5x-3=8') + 0.9 * F;
+    tanke(y, [
+      [['Nu är det tvärtom: värdet']],
+      [['är känt och x söks. Jag']],
+      [['byter f(x) mot 5x-3.']]
+    ], 0.5);
+    y += 4.5 * F;
+    T.str('e) f(x)=8', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('5x-3=8', x0, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '+3', xwE, '5x-3=8', { x0: x0 });
+    T.str('5x=11', x0, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/5', xwE, '5x=11', { x0: x0 });
+    if (vagg) y += 0.6 * F;
+    xx = T.str('x=', x0, y);
+    xx = T.fracH('11', '5', xx, y);
+    T.str('=2,2', xx, y);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xe = T.str('Svar: x=2,2', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- f) 3 · f(x) = 36 ---- */
+    var xwF = x0 + T.adv('3·(5x-3)=36') + 0.9 * F;
+    tanke(y, [
+      [['Hela f(x) multipliceras']],
+      [['med 3, så 5x-3 får en']],
+      [['parentes runt sig.']]
+    ], 0.5);
+    y += 4.5 * F;
+    T.str('f) 3·f(x)=36', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('3·(5x-3)=36', x0, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/3', xwF, '3·(5x-3)=36', { x0: x0 });
+    T.str('5x-3=12', x0, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '+3', xwF, '5x-3=12', { x0: x0 });
+    T.str('5x=15', x0, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/5', xwF, '5x=15', { x0: x0 });
+    T.str('x=3', x0, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xe = T.str('Svar: x=3', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 640, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
   }
 
   /* ---------------- scen: är graferna funktioner (ma1c-4.8 ex 2) ------

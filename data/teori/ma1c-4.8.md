@@ -71,7 +71,7 @@ $f$, $g$, $h$, …
 $f(x) = 2x + 3$ betyder alltså samma sak som $g(x) = 2x + 3$.
 
 ::: exempel "Exempel 1 — Beräkna funktionsvärden"
-**Låt $f(x) = 5x - 3$. Bestäm<br>a)&nbsp;$f(4)$&emsp;&emsp;b)&nbsp;$f(-2)$&emsp;&emsp;c)&nbsp;$f(3a)$&emsp;&emsp;d)&nbsp;$f(7) - f(6)$**
+**Låt $f(x) = 5x - 3$. Bestäm<br>a)&nbsp;$f(4)$&emsp;&emsp;b)&nbsp;$f(-2)$&emsp;&emsp;c)&nbsp;$f(3a)$&emsp;&emsp;d)&nbsp;$f(7) - f(6)$<br>e)&nbsp;Lös $f(x) = 8$&emsp;&emsp;f)&nbsp;Lös $3 \cdot f(x) = 36$**
 
 ::: handskrift
 typ: funktionsvarde
@@ -130,6 +130,54 @@ f(7) - f(6) = 5 \cdot 7 - 3 - (5 \cdot 6 - 3) = 35 - 3 - (30 - 3) = 32 - 27 = 5
 $$
 
 **Svar:** 5
+
+**e)** Nu är det tvärtom: funktionsvärdet är känt och vi söker $x$. Vi
+ersätter $f(x)$ med $5x - 3$ och löser ekvationen:
+
+$$
+5x - 3 = 8
+$$
+
+Vi adderar 3 till båda led:
+
+$$
+5x = 11
+$$
+
+Vi dividerar båda led med 5:
+
+$$
+x = \frac{11}{5} = 2{,}2
+$$
+
+**Svar:** $x = 2{,}2$
+
+**f)** Här multipliceras hela funktionsvärdet med 3. Vi ersätter $f(x)$
+med $5x - 3$ och sätter en parentes runt uttrycket:
+
+$$
+3 \cdot (5x - 3) = 36
+$$
+
+Vi dividerar båda led med 3:
+
+$$
+5x - 3 = 12
+$$
+
+Vi adderar 3 till båda led:
+
+$$
+5x = 15
+$$
+
+Vi dividerar båda led med 5:
+
+$$
+x = 3
+$$
+
+**Svar:** $x = 3$
 :::
 :::
 
@@ -241,6 +289,7 @@ Ekvationen har alltså tre lösningar.
 - $f(x) = 5x - 3$ ger $f(4) = 17$ och
   $f(-2) = -13$.
 - Även uttryck fungerar: $f(3a) = 15a - 3$.
+- $f(x) = 8$ löses som ekvationen $5x - 3 = 8$.
 :::
 
 ::: sampunkt "Läsa av ur en graf"

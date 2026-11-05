@@ -12,6 +12,11 @@
 # skriptet direkt med `gh issue create`: GitHub mejlar aldrig om ärenden man
 # öppnat själv, och skriptet kör som ägarens konto. Ett ärende per rubrik;
 # finns ett öppet med samma rubrik händer ingenting.
+#
+# Ärendet NÄMNER ÄGAREN (@Goliatbagge sist i texten). Utan det mejlar GitHub
+# bara den som bevakar repot, och ägaren bevakar det inte: elva larm om
+# Facebook och Instagram (31 oktober till 5 november 2026) öppnades som
+# ärenden utan att ett enda mejl gick ut. En nämning mejlas oavsett bevakning.
 
 name: Nyhetsjobb-larm
 
@@ -44,4 +49,6 @@ jobs:
             echo "Ärendet finns redan: $RUBRIK"
             exit 0
           fi
-          gh issue create --title "$RUBRIK" --body "$TEXT"
+          gh issue create --title "$RUBRIK" --body "$TEXT
+
+          @Goliatbagge"

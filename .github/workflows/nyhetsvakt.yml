@@ -102,7 +102,7 @@ jobs:
               }
               if (finns !== 'nej') return;
               if (befintliga.length) { core.info(`#${befintliga[0].number} finns redan: ${titel}`); return; }
-              const nytt = await github.rest.issues.create({ ...repo, title: titel, body: kropp.join('\n') });
+              const nytt = await github.rest.issues.create({ ...repo, title: titel, body: kropp.join('\n') + '\n\n@Goliatbagge' });  // nämningen ger mejl även utan bevakning av repot
               core.warning(`Öppnade ärende #${nytt.data.number}: ${titel}`);
             }
 

@@ -15124,8 +15124,8 @@
   }
 
   /* ---------------- scen: beräkna funktionsvärden (ma1c-4.8 ex 1) -----
-   * f(x) = 5x − 3 med a) f(4), b) f(−2), c) f(3a), d) f(x + 2),
-   * e) f(7) − f(6) samt ekvationerna f) f(x) = 8 och g) 3 · f(x) = 36.
+   * f(x) = 5x − 3 med a) f(7), b) f(−2), c) f(3a), d) f(x + 2),
+   * e) f(7) − f(6) samt ekvationerna f) f(x) = 7 och g) 3 · f(x) = 36.
    * Genomgående: det som står inom parentesen ersätter VARJE x. */
   function layoutFunktionsvarde(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
@@ -15143,24 +15143,24 @@
     tanke(yF, [
       [['Talet inom parentesen är']],
       [['det som x ska bytas ut mot.']],
-      [['Här alltså 4.']]
+      [['Här alltså 7.']]
     ]);
     y = yF + 3.0 * F;
-    var xa0 = padL, xa1 = T.str('a) f(4)', padL, y);
+    var xa0 = padL, xa1 = T.str('a) f(7)', padL, y);
     T.stepEnd();
 
     /* först talet i parentesen, sedan BARA x-et det ersätter */
     var ringX = [xf0 + T.adv('f(x)=5'), xf0 + T.adv('f(x)=5x'), yF, F];
     var rings = substRings(acts, [[xa0 + T.adv('a) f('), xa1 - T.adv(')'), y, F], ringX]);
-    xx = T.str('=5·4-3', xa1, y);
+    xx = T.str('=5·7-3', xa1, y);
     fadeRings(acts, rings);
     T.stepEnd();
 
-    T.str('=20-3=17', xx, y);
+    T.str('=35-3=32', xx, y);
     T.stepEnd();
 
     y += 2.4 * F;
-    xe = T.str('Svar: 17', padL, y);
+    xe = T.str('Svar: 32', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -15296,52 +15296,76 @@
 
     /* ---- f) f(x) = 8 ---- */
     var x0 = padL;
-    var xwE = x0 + T.adv('5x-3=8') + 0.9 * F;
+    var xwE = x0 + T.adv('7=5x-3') + 0.9 * F;
     tanke(y, [
       [['Nu är det tvärtom: värdet']],
-      [['är känt och x söks. Jag']],
-      [['byter f(x) mot 5x-3.']]
+      [['är känt och x söks.']]
     ], 0.5);
     y += 4.5 * F;
-    T.str('f) f(x)=8', padL, y);
+    var xg7 = T.str('f) f(x)=7', padL, y);
+    T.stepEnd();
+
+    /* NYTT MOMENT, därför extra tydligt: 7 och 5x−3 är båda f(x), så
+     * f(x) i funktionen byts mot 7. Först ringas 7 in, sedan f(x) i
+     * funktionen överst, och då skrivs ekvationen. */
+    tanke(y, [
+      [['f(x) är 7. Men f(x) är också']],
+      [['5x-3. Då byter jag f(x) i']],
+      [['funktionen mot 7.']]
+    ], 0.5);
+    rings = substRings(acts, [[xg7 - T.adv('7'), xg7, y, F],
+                              [xf0, xf0 + T.adv('f(x)'), yF, F]]);
+    y += 2.4 * F;
+    T.str('7=5x-3', x0, y);
+    fadeRings(acts, rings);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu är det en vanlig']],
+      [['ekvation. Jag löser ut x.']]
+    ], 0.5);
+    y = ekvOp(y, '+3', xwE, '7=5x-3', { x0: x0 });
+    T.str('10=5x', x0, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/5', xwE, '10=5x', { x0: x0 });
+    T.str('2=x', x0, y);
     T.stepEnd();
 
     y += 2.4 * F;
-    T.str('5x-3=8', x0, y);
-    T.stepEnd();
-
-    y = ekvOp(y, '+3', xwE, '5x-3=8', { x0: x0 });
-    T.str('5x=11', x0, y);
-    T.stepEnd();
-
-    y = ekvOp(y, '/5', xwE, '5x=11', { x0: x0 });
-    if (vagg) y += 0.6 * F;
-    xx = T.str('x=', x0, y);
-    xx = T.fracH('11', '5', xx, y);
-    T.str('=2,2', xx, y);
-    T.stepEnd();
-
-    y += 2.6 * F;
-    xe = T.str('Svar: x=2,2', padL, y);
+    xe = T.str('Svar: x=2', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
     /* ---- g) 3 · f(x) = 36 ---- */
-    var xwF = x0 + T.adv('3·(5x-3)=36') + 0.9 * F;
+    var xwF = x0 + T.adv('3(5x-3)=36') + 0.9 * F;
     tanke(y, [
-      [['Hela f(x) multipliceras']],
-      [['med 3, så 5x-3 får en']],
-      [['parentes runt sig.']]
+      [['Nu multipliceras hela']],
+      [['funktionsvärdet med 3.']]
     ], 0.5);
     y += 4.5 * F;
     T.str('g) 3·f(x)=36', padL, y);
     T.stepEnd();
 
+    /* först 5x−3 i funktionen, sedan f(x) i ekvationen, som det byts mot */
+    tanke(y, [
+      [['f(x) är samma sak som 5x-3.']],
+      [['Jag byter f(x) mot 5x-3, med']],
+      [['parentes runt eftersom HELA']],
+      [['uttrycket ska gånger 3.']]
+    ], 0.5);
+    rings = substRings(acts, [[xf0 + T.adv('f(x)='), xf1, yF, F],
+                              [padL + T.adv('g) 3·'), padL + T.adv('g) 3·f(x)'), y, F]]);
     y += 2.4 * F;
-    T.str('3·(5x-3)=36', x0, y);
+    T.str('3(5x-3)=36', x0, y);
+    fadeRings(acts, rings);
     T.stepEnd();
 
-    y = ekvOp(y, '/3', xwF, '3·(5x-3)=36', { x0: x0 });
+    tanke(y, [
+      [['Nu är det en vanlig']],
+      [['ekvation. Jag löser ut x.']]
+    ], 0.5);
+    y = ekvOp(y, '/3', xwF, '3(5x-3)=36', { x0: x0 });
     T.str('5x-3=12', x0, y);
     T.stepEnd();
 

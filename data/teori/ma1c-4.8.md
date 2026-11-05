@@ -71,21 +71,21 @@ $f$, $g$, $h$, …
 $f(x) = 2x + 3$ betyder alltså samma sak som $g(x) = 2x + 3$.
 
 ::: exempel "Exempel 1 — Beräkna funktionsvärden"
-**Låt $f(x) = 5x - 3$. Bestäm<br>a)&nbsp;$f(4)$&emsp;&emsp;b)&nbsp;$f(-2)$&emsp;&emsp;c)&nbsp;$f(3a)$&emsp;&emsp;d)&nbsp;$f(x + 2)$&emsp;&emsp;e)&nbsp;$f(7) - f(6)$<br>f)&nbsp;Lös $f(x) = 8$&emsp;&emsp;g)&nbsp;Lös $3 \cdot f(x) = 36$**
+**Låt $f(x) = 5x - 3$. Bestäm<br>a)&nbsp;$f(7)$&emsp;&emsp;b)&nbsp;$f(-2)$&emsp;&emsp;c)&nbsp;$f(3a)$&emsp;&emsp;d)&nbsp;$f(x + 2)$&emsp;&emsp;e)&nbsp;$f(7) - f(6)$<br>f)&nbsp;Lös $f(x) = 7$&emsp;&emsp;g)&nbsp;Lös $3 \cdot f(x) = 36$**
 
 ::: handskrift
 typ: funktionsvarde
 :::
 
 ::: textlosning
-**a)** För att beräkna $f(4)$ ersätter vi alla $x$ med 4 i funktionen
+**a)** För att beräkna $f(7)$ ersätter vi alla $x$ med 7 i funktionen
 $f(x) = 5x - 3$:
 
 $$
-f(4) = 5 \cdot 4 - 3 = 20 - 3 = 17
+f(7) = 5 \cdot 7 - 3 = 35 - 3 = 32
 $$
 
-**Svar:** 17
+**Svar:** 32
 
 **b)** Vi gör på motsvarande sätt som i a-uppgiften:
 
@@ -141,32 +141,38 @@ $$
 
 **Svar:** 5
 
-**f)** Nu är det tvärtom: funktionsvärdet är känt och vi söker $x$. Vi
-ersätter $f(x)$ med $5x - 3$ och löser ekvationen:
+**f)** Nu är det tvärtom: funktionsvärdet är känt och vi söker $x$.
+
+$f(x) = 7$ säger att funktionsvärdet är 7. Funktionen säger att
+$f(x) = 5x - 3$. Både 7 och $5x - 3$ är alltså samma sak som $f(x)$, så vi
+kan byta ut $f(x)$ i $f(x) = 5x - 3$ mot 7. Då får vi en ekvation som vi
+löser som vanligt:
 
 $$
-5x - 3 = 8
+7 = 5x - 3
 $$
 
 Vi adderar 3 till båda led:
 
 $$
-5x = 11
+10 = 5x
 $$
 
 Vi dividerar båda led med 5:
 
 $$
-x = \frac{11}{5} = 2{,}2
+2 = x
 $$
 
-**Svar:** $x = 2{,}2$
+**Svar:** $x = 2$
 
-**g)** Här multipliceras hela funktionsvärdet med 3. Vi ersätter $f(x)$
-med $5x - 3$ och sätter en parentes runt uttrycket:
+**g)** Här multipliceras hela funktionsvärdet med 3. Funktionen säger att
+$f(x) = 5x - 3$, så i ekvationen kan vi byta ut $f(x)$ mot $5x - 3$. Det
+är hela uttrycket $5x - 3$ som multipliceras med 3, och därför måste det
+stå inom parentes:
 
 $$
-3 \cdot (5x - 3) = 36
+3(5x - 3) = 36
 $$
 
 Vi dividerar båda led med 3:
@@ -340,10 +346,10 @@ ingår $x = 1$ och $x = 4$ inte, och intervallet får ofyllda ringar i
 
 ::: sampunkt "Räkna ut funktionsvärden"
 - **Ersätt $x$** med det som står inom parentesen.
-- $f(x) = 5x - 3$ ger $f(4) = 17$ och
+- $f(x) = 5x - 3$ ger $f(7) = 32$ och
   $f(-2) = -13$.
 - Även uttryck fungerar: $f(3a) = 15a - 3$.
-- $f(x) = 8$ löses som ekvationen $5x - 3 = 8$.
+- $f(x) = 7$: byt $f(x)$ mot 7 och lös ekvationen $7 = 5x - 3$.
 :::
 
 ::: sampunkt "Läsa av ur en graf"

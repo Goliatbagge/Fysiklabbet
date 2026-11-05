@@ -15545,7 +15545,9 @@
   /* ---------------- scen: lös f(x) = g(x) grafiskt (ma1c-4.8 ex 4) ---
    * Kurvan f och linjen g är givna i uppgiften och står färdiga från
    * början. Pennan markerar skärningspunkterna, går lodrätt ned till
-   * x-axeln och läser av x. Samma funktioner som figuren i md-filen:
+   * x-axeln och läser av x (a), och förstärker sedan den del av f som
+   * ligger ovanför g och markerar intervallet 1 < x < 4 (b). Samma
+   * funktioner som figuren i md-filen:
    * g(x) = 0,5x + 1,5 och f(x) = g(x) − 3(x − 1)(x − 4)e^(−x/2), som
    * skär varandra exakt två gånger. */
   function layoutFligamedg(cfg, F) {
@@ -15605,8 +15607,47 @@
     T.stepEnd();
 
     y = A.oy + 3.6 * A.u + 3.0 * F;   /* f går ut ur fönstret vid y = −3,4 */
-    T.str('Där graferna skär varandra', padL, y - 1.6 * F, null, 0.62);
+    T.str('a) Där graferna skär varandra', padL, y - 1.6 * F, null, 0.62);
     xe = T.str('Svar: x_1=1 och x_2=4', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) g(x) < f(x) ---- */
+    tankeSida([
+      [['g(x)<f(x) betyder att f:s']],
+      [['graf ligger OVANFÖR g:s.']],
+      [['Det gör den mellan']],
+      [['skärningspunkterna.']]
+    ]);
+    /* den delen av f-kurvan förstärks i blått */
+    A.curve(fv, 1, 4, BLUE);
+    T.stepEnd();
+
+    tankeSida([
+      [['Intervallet på x-axeln.']],
+      [['I x=1 och x=4 är värdena']],
+      [['lika, så ändpunkterna ingår']],
+      [['inte: ofyllda ringar.']]
+    ]);
+    function ring(xv) {
+      var cx = A.X(xv), cy = A.oy, r = 4.5, pts = [], i;
+      for (i = 0; i <= 16; i++) {
+        pts.push([cx + r * Math.cos(i / 16 * 2 * Math.PI - 1.2),
+                  cy + r * Math.sin(i / 16 * 2 * Math.PI - 1.2)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts, color: BLUE });
+    }
+    ring(1);
+    T.pause(200);
+    linjalStreck(acts, [A.X(1) + 5, A.oy - 1.5], [A.X(4) - 5, A.oy - 1.5], BLUE);
+    linjalStreck(acts, [A.X(1) + 5, A.oy + 1.5], [A.X(4) - 5, A.oy + 1.5], BLUE);
+    T.pause(200);
+    ring(4);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    T.str('b) Där f ligger ovanför g', padL, y - 1.6 * F, null, 0.62);
+    xe = T.str('Svar: 1<x<4', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 

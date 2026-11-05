@@ -103,6 +103,65 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-06-tva-knuffar-i-takt",
+    date: "2026-11-06",
+    title: "Två svaga ljuspulser i rätt takt rubbar atomlagren mer än en stark",
+    deck: "En kraftig laserpuls kan få atomlagren i kristallen volframditellurid att glida fram och tillbaka mot varandra, men över en viss styrka blir rörelsen mindre i stället för större. Nu visar forskare i Schweiz, Tyskland och Frankrike att samma ljusenergi, delad på två pulser med exakt rätt mellanrum, ger upp till 50 procent större svängningar. Det är samma knep som när man knuffar någon på en gunga.",
+    category: "Materialfysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-11-06-tva-knuffar-i-takt.jpg",
+    imageAlt: "Fyra blanka, svarta och tunna kristallflagor ligger på ett orangerutat millimeterpapper. Den största är trekantig och några millimeter stor, de andra är avlånga och smala som knivblad.",
+    imageCredit: "Foto: Yang-Yang Lv m.fl., Scientific Reports 6, 26903 (2016), via Wikimedia Commons (CC BY 4.0), beskuren. Bilden visar kristaller av volframditellurid, WTe₂, på millimeterpapper.",
+    tags: ["materialfysik", "svängningar", "resonans", "interferens", "hookes lag", "harmonisk svängning", "laser", "femtosekundlaser", "ferroelektricitet", "fonon", "volframditellurid", "kristall"],
+    sources: [
+      { name: "Universität Würzburg: Controlling quantum materials with light: why two pulses can be better than one (4 november 2026)", url: "https://www.uni-wuerzburg.de/en/news-and-events/news/detail/news/quantum-materials-light/" },
+      { name: "Phys.org: A carefully timed pair of light pulses can amplify the motion of atomic layers in a quantum material (Universität Würzburg, 4 november 2026)", url: "https://phys.org/news/2026-11-pair-pulses-amplify-motion-atomic.html" },
+      { name: "Nature Physics: studien i fulltext (öppet tillgänglig, CC BY 4.0)", url: "https://doi.org/10.1038/s41567-026-03491-1" }
+    ],
+    research: {
+      citation: "J. G. Horstmann, C. Emeis, A. Caviezel, Q. N. Meier, N. Wyler, T. Lottermoser, F. Caruso och M. Fiebig, ”Coherent phonon control beyond amplitude saturation in a sliding ferroelectric”, Nature Physics (publicerad 21 oktober 2026). DOI: 10.1038/s41567-026-03491-1",
+      url: "https://doi.org/10.1038/s41567-026-03491-1"
+    },
+    larare: {
+      moment: [
+        { label: "Hookes lag", href: "katalog.html?id=fy2-2.1" },
+        { label: "Harmonisk svängning", href: "katalog.html?id=fy2-2.3" },
+        { label: "Resonans", href: "katalog.html?id=fy2-2.6" }
+      ],
+      fragor: [
+        "Atomlagrens glidsvängning har frekvensen 0,24 THz. Hur lång är perioden? Hur lång tid efter den första pulsen kan den andra komma om den ska förstärka svängningen?",
+        "En andra knuff kan också få svängningen att nästan stanna. Vid vilka tidpunkter efter den första knuffen händer det, och varför?",
+        "Forskarna såg att frekvensen sjönk när amplituden blev större. Varför visar det att den återförande kraften inte längre följer Hookes lag?"
+      ]
+    },
+    body: [
+      { type: "p", html: "Den som har knuffat ett barn på en gunga vet att det inte gäller att trycka så hårt som möjligt, utan att trycka i rätt ögonblick. Samma knep fungerar inne i en kristall, där en hel svängning tar fyra biljondels sekund. Forskare vid ETH Zürich och universiteten i Würzburg, Rostock, Kiel och Grenoble har låtit två svaga laserpulser sätta fart på atomlagren i materialet volframditellurid, WTe<sub>2</sub>, och fått större rörelse än med en enda puls som innehöll lika mycket energi. Studien publicerades i <em>Nature Physics</em> den 21 oktober." },
+      { type: "h2", text: "Lager som glider mot varandra" },
+      { type: "p", html: "Volframditellurid är uppbyggt av tunna lager av volfram- och telluratomer som hålls ihop av svaga krafter, ungefär som bladen i en kortlek. I den form som är stabil vid rumstemperatur ligger lagren lite förskjutna i förhållande till varandra. Då har en del elektrisk laddning flyttat sig mellan lagren, och kristallen får en elektrisk polarisation som pekar vinkelrätt mot lagren. Materialet är ferroelektriskt, och eftersom polarisationen beror på hur lagren ligger kallas det ett glidande ferroelektriskt material. Universitetet i Würzburg jämför lagren med två handflator som pressas mot varandra och glider." },
+      { type: "h2", text: "Ljuset flyttar jämviktsläget" },
+      { type: "p", html: "Forskarna belyste kristallen med infraröda laserpulser som varade 130&nbsp;femtosekunder, alltså 130 miljondels miljarddels sekund. Ljuset ändrar hur elektronerna fördelar sig mellan lagren, och då flyttas plötsligt det läge där lagren helst vill ligga. Lagren börjar svänga fram och tillbaka kring det nya jämviktsläget, ungefär som en vikt i en fjäder när någon hastigt flyttar fjäderns fästpunkt. Svängningen har frekvensen 0,24&nbsp;terahertz, och perioden blir" },
+      { type: "p", html: "$$T = \\dfrac{1}{f} = \\dfrac{1}{0{,}24 \\cdot 10^{12}\\ \\mathrm{Hz}} \\approx 4{,}2 \\cdot 10^{-12}\\ \\mathrm{s}$$" },
+      { type: "p", html: "Rörelsen mättes med en andra laserpuls som kom lite senare. Kristallen sänder då tillbaka en liten mängd violett ljus med halva våglängden, 400&nbsp;nanometer i stället för 800. Den frekvensdubblingen kan bara ske i en kristall som saknar symmetricentrum, och hur mycket violett ljus som kommer tillbaka visar därför hur osymmetriskt lagren ligger just då. Genom att ändra fördröjningen mellan pulserna kunde forskarna följa lagrens svängning steg för steg. Alla försök gjordes vid rumstemperatur." },
+      { type: "h2", text: "Mer ljus gav mindre rörelse" },
+      { type: "p", html: "När forskarna ökade den absorberade energin från 0,4 till 6,5&nbsp;millijoule per kvadratcentimeter växte svängningen först. Vid omkring 1,6&nbsp;millijoule per kvadratcentimeter var den som störst, och vid ännu starkare ljus blev den mindre igen. Datorberäkningar förklarar varför. Ljuset ger elektronerna en temperatur på flera tusen kelvin under en kort stund. Elektroner i tillstånd med låg energi knuffar lagren åt ett håll, men ju varmare elektronerna blir, desto fler hamnar i tillstånd med högre energi, och de knuffar åt motsatt håll. Enligt beräkningarna vänder det vid en elektrontemperatur kring 3&nbsp;100&nbsp;kelvin, vilket stämmer med vändpunkten i mätningarna." },
+      { type: "quote", html: "Vid mycket stark excitation lyfts elektronerna upp till tillstånd med hög energi som motverkar atomernas riktade rörelse. Den extra ljusenergin ger då inte längre en motsvarande större förskjutning av atomlagren, utan bromsar dem i stället.", cite: "Gerrit Horstmann, Universität Würzburg, i universitetets pressmeddelande (översatt)" },
+      { type: "h2", text: "Två knuffar i rätt ögonblick" },
+      { type: "p", html: "I stället för att öka styrkan delade forskarna upp ljuset i två svagare pulser och varierade tiden mellan dem. Kommer den andra pulsen en eller två hela perioder efter den första är lagren på väg åt samma håll som knuffen, och de två svängningarna förstärker varandra. Med lika mycket ljusenergi totalt gav två pulser med 8,3&nbsp;pikosekunders mellanrum, alltså två perioder, upp till 50&nbsp;procent större svängning än när båda pulserna kom samtidigt. Kom den andra pulsen i stället ungefär en och en halv period efter den första, efter 6,5&nbsp;pikosekunder, försvann svängningen nästan helt. Det är som att knuffa gungan just när den kommer emot en." },
+      { type: "image", src: "nyheter/bilder/2026-11-06-tva-knuffar-i-takt-2.jpg", alt: "Diagram med intensiteten hos det violetta ljuset mot tiden från minus 5 till 45 pikosekunder. Båda kurvorna sjunker brant vid noll och svänger sedan. Den violetta kurvan har tydligt större svängningar än den röda under de första 15 pikosekunderna.", caption: "Den lodräta axeln visar hur mycket violett ljus som kommer tillbaka, den vågräta tiden i pikosekunder efter den första pulsen. Svängningarna i kurvorna är atomlagrens glidsvängning. Röd kurva: båda pulserna kommer samtidigt. Violett kurva: den andra pulsen kommer 8,3&nbsp;pikosekunder, två perioder, efter den första. Den totala ljusenergin är densamma.", credit: "Figur: Horstmann m.fl., Nature Physics 2026, utsnitt ur figur 3 (CC BY 4.0)" },
+      { type: "p", html: "Den troliga förklaringen är att varje svag puls håller elektronernas temperatur under gränsen där motknuffarna tar överhanden, och att elektronerna hinner svalna mellan pulserna. Ligger pulserna närmare varandra än ungefär 2&nbsp;pikosekunder finns motverkan kvar, och det stämmer med hur länge de exciterade elektronerna lever enligt andra mätningar." },
+      { type: "quote", html: "Tidpunkten öppnar ytterligare ett sätt att utnyttja samspelet mellan elektronerna och atomernas rörelse så bra som möjligt.", cite: "Gerrit Horstmann, i pressmeddelandet (översatt)" },
+      { type: "h2", text: "När Hookes lag slutar gälla" },
+      { type: "p", html: "De större svängningarna avslöjade också något nytt. Ju större amplituden blev, desto lägre blev frekvensen och desto snabbare dämpades svängningen. En vikt i en fjäder svänger lika fort oavsett utslag så länge den återförande kraften är proportionell mot förskjutningen, enligt Hookes lag. När frekvensen ändras med amplituden har kraften alltså slutat följa den lagen, ungefär som en pendel som får längre period när den svänger med stora utslag. Den ökande dämpningen beror troligen, enligt forskarna, på att energin i glidsvängningen läcker över till kristallens ljudvågor." },
+      { type: "h2", text: "Ett steg på vägen" },
+      { type: "p", html: "På sikt hoppas forskarna att metoden kan användas för att ändra ett materials polarisation snabbt och med lite energi, vilket kan bli intressant för elektronik i mycket tunna material. Så långt har de inte kommit. Försöken gjordes på kristaller som var flera tiotals mikrometer tjocka, och signalen kom främst från de översta 50&nbsp;nanometrarna. Forskarna har fått lagren att svänga mer, men de har inte vänt polarisationen. Nästa steg är att pröva metoden på material som bara består av två eller tre atomlager." },
+      { type: "fact", title: "Visste du?", items: [
+        "En pikosekund är en biljondels sekund. Under de 8,3&nbsp;pikosekunderna mellan pulserna hinner ljuset färdas omkring 2,5&nbsp;millimeter.",
+        "Volframditellurid är också känt för att dess elektriska resistans ökar kraftigt i ett magnetfält, utan att planas ut ens i mycket starka fält.",
+        "Den form av kristallen som undersöktes är stabil upp till 565&nbsp;kelvin, ungefär 292&nbsp;°C."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-05-ett-sonderfall-pa-tio-miljarder",
     date: "2026-11-05",
     title: "LHCb hittar belägg för ett sönderfall som sker en gång på tio miljarder",

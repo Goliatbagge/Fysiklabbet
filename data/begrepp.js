@@ -2652,6 +2652,32 @@ window.BEGREPP = [
   },
 
   {
+    id: 'ferroelektricitet',
+    term: 'Ferroelektricitet',
+    former: ['ferroelektricitet', 'ferroelektriciteten', 'ferroelektrisk', 'ferroelektriskt', 'ferroelektriska', 'ferroelektriskt material', 'ferroelektriska material', 'ferroelektriska materialet'],
+    kort: 'Egenskapen hos vissa kristaller att ha en inbyggd elektrisk polarisation, en plus- och en minussida, som går att vända med ett elektriskt fält. Det elektriska syskonet till en permanentmagnet.',
+    relaterade: ['polarisation', 'fonon'],
+    body: [
+      { type: 'p', html: 'En permanentmagnet har en nordända och en sydända utan att någon ström behöver gå genom den. På samma sätt finns det kristaller som har en positiv och en negativ sida utan att någon har laddat dem. Inne i kristallen sitter de positiva och negativa laddningarna en aning förskjutna i förhållande till varandra, och den förskjutningen upprepas i varenda liten byggsten av kristallen. Tillsammans ger de en elektrisk polarisation i hela materialet. Sådana material kallas ferroelektriska. Namnet är lånat från ferromagnetism, trots att materialen oftast inte innehåller något järn alls.' },
+      { type: 'p', html: 'Det som gör ferroelektriska material speciella är att polarisationen går att vända. Lägger man på ett tillräckligt starkt elektriskt fält åt andra hållet flyttar sig atomerna en liten bit, och plus- och minussidan byter plats. Sedan stannar de där när fältet stängs av. En sådan kristall har alltså två stabila lägen, och då kan den lagra en etta eller en nolla. Det utnyttjas i vissa datorminnen, och ferroelektriska keramer används också i ultraljudsgivare och tändare eftersom de ger en spänning när de trycks ihop.' },
+      { type: 'p', html: 'På senare år har forskare hittat en ny sorts ferroelektriska material, som är byggda av tunna atomlager staplade som bladen i en kortlek. Där beror polarisationen på hur lagren ligger förskjutna mot varandra, och den går att ändra genom att lagren glider en aning. Eftersom sådana lager kan vara bara några atomer tjocka hoppas man att de ska kunna bli mycket små och snabba komponenter i framtidens elektronik.' }
+    ]
+  },
+
+  {
+    id: 'frekvensdubbling',
+    term: 'Frekvensdubbling',
+    former: ['frekvensdubbling', 'frekvensdubblingen', 'frekvensdubblat', 'frekvensdubblad', 'frekvensdubblade'],
+    kort: 'När starkt ljus går in i vissa kristaller kommer en liten del ut med dubbelt så hög frekvens, alltså halva våglängden. Infrarött ljus kan på så sätt bli rött eller grönt.',
+    relaterade: ['laser', 'polarisation'],
+    body: [
+      { type: 'p', html: 'De flesta gröna laserpekare innehåller ingen grön laser alls. Inuti sitter en laser som lyser osynligt infrarött med våglängden 1&nbsp;064&nbsp;nanometer, och framför den en liten kristall. När det infraröda ljuset går genom kristallen kommer en del av det ut som grönt ljus med våglängden 532&nbsp;nanometer, precis hälften. Frekvensen har fördubblats, och därav namnet. Ofta kallas fenomenet också andraharmonisk generering, på engelska <em>second-harmonic generation</em>.' },
+      { type: 'p', html: 'Det fungerar för att ljusets elektriska fält rycker i elektronerna i kristallen. I svagt ljus följer elektronerna med i samma takt som ljuset och sänder ut ljus med samma frekvens. I mycket starkt ljus svarar de inte längre proportionellt mot fältet, och då innehåller deras rörelse också svängningar med dubbla frekvensen. Det liknar en förstärkare som skruvas upp så högt att ljudet förvrängs: då dyker det upp toner med dubbla frekvensen som inte fanns i den ursprungliga signalen.' },
+      { type: 'p', html: 'Frekvensdubbling sker bara i kristaller som saknar ett symmetricentrum, alltså där kristallen inte ser likadan ut om man vänder den genom en punkt i mitten. Det gör fenomenet till ett känsligt mätverktyg. Hur mycket ljus med dubbel frekvens som kommer ut visar hur osymmetriskt atomerna sitter, och genom att mäta det med mycket korta laserpulser kan forskare följa hur en kristalls struktur ändras på en biljondels sekund.' }
+    ]
+  },
+
+  {
     id: 'wimp',
     term: 'WIMP',
     former: ['wimp', 'wimpen', 'wimpar', 'wimparna', 'wimp-jakt', 'wimp-jakten', 'wimp-jakterna'],

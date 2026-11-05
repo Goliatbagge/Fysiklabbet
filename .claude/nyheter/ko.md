@@ -15,6 +15,15 @@ Format per post:
 - **Hula-hoopens fysik: lår, smalben och fot håller ringen igång tillsammans (Berkeley)** **[BREVTEASER]** (nominerad 2026-11-02: oväntad vardagsmekanik som en 16-åring kan prova själv; originalet ÖPPET, Springer open access, publicerat 2026-09-28) — mekanik/biomekanik; sensorer på ringen, benet och foten, 120 mätningar per sekund; olinjär analys (funktionell nätverksanalys) i stället för principalkomponentanalys visar att ringens varv och vickning hänger ihop. Chern, Honein, O'Reilly, Nonlinear Dynamics 2026, DOI 10.1007/s11071-026-13058-7 (öppen, kontrollerat 2026-11-02). Mer rörelseanalys än fysik; valdes bort 2026-10-28. Källa (Phys.org): https://phys.org/news/2026-10-decoding-loopy-physics-hula-hooping.html
   (tillagd 2026-10-28)
 
+- **SLAC: kiralt altermagnon i MnTe, cirkulärpolariserad röntgenspridning vid ESRF** — magnetism; ”avgörande belägg” för altermagnetism. Jost m.fl., Science 394, 541 (2026), DOI 10.1126/science.adv3196 (öppenhet ej kontrollerad). Altermagnetism kördes 2026-07-26, så vinkeln måste vara ny. Källa (ScienceDaily 2026-11-04): https://www.sciencedaily.com/releases/2026/11/261104012256.htm
+  (tillagd 2026-11-05)
+
+- **KM3NeT/ORCA prövar Lorentzinvariansen med atmosfäriska neutriner från Medelhavets botten** — partikelfysik/relativitet; 5 828 händelser på 1,4 år med sex detektorenheter, inga avvikelser. JCAP 2026, arXiv 2603.04264 (öppen). OBS partikelfysik 2026-11-05. Källa (Phys.org 2026-11-04): https://phys.org/news/2026-11-einstein-laws-bottom-mediterranean-sea.html
+  (tillagd 2026-11-05)
+
+- **Japan skjuter upp MMX, provhämtning från Mars måne Phobos** — rymdforskning. Källa (Physics World): https://physicsworld.com/a/japan-launches-sample-return-mission-to-marss-moon-phobos/
+  (tillagd 2026-11-05)
+
 - **Suprafast tillstånd i en kondensat av ljus och materia, i rumstemperatur (Warszawa, IBM Zürich, CNRS)** — kvantfysik/fasta tillståndets fysik; exciton-polaritoner i en mikrokavitet med flytande kristall och organisk halvledare (MeLPPP), ljusa band med spontant symmetribrott och en spinnhelix i polarisationen. Muszyński m.fl., Science Advances 2026, DOI 10.1126/sciadv.aee4875 (öppenhet ej kontrollerad, Science Advances brukar gå via Europe PMC). Källa (Phys.org 2026-11-03): https://phys.org/news/2026-11-hybrids-supersolid-quantum-state-room.html
   (tillagd 2026-11-04)
 

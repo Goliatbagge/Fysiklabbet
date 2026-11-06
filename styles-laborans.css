@@ -3261,6 +3261,7 @@ body.laborans :not(pre) > code {
     text-decoration-color: #2b5ca8;
     text-decoration-thickness: 2px;
     text-underline-offset: 3px;
+    white-space: nowrap;
 }
 
 /* Anmärkning intill en formel (wrapFormelAnm i katalog.html/avsnitt.html):
@@ -4074,6 +4075,39 @@ body.laborans u .lab-term {
 }
 .lab-ovning-del .lab-ovning-feedback { margin-top: 0; }
 .lab-ovning-answer-input.is-ord { padding-right: 14px; }
+/* Deluppgift med flera lösningar: en lösning per ruta. Eleven lägger själv
+   till rutor, så att antalet inte avslöjar hur många lösningar det finns. */
+.lab-ovning-input-wrap { gap: 6px; }
+.lab-ovning-input-wrap .lab-ovning-answer-input { min-width: 0; }
+.lab-ovning-input-wrap:has(.lab-ovning-falt-bort) .lab-ovning-unit { right: 52px; }
+.lab-ovning-falt-bort {
+    flex: 0 0 32px;
+    height: 32px;
+    border: 1px solid var(--lab-line-strong);
+    border-radius: 6px;
+    background: var(--lab-bg);
+    color: var(--lab-ink-muted);
+    font-family: var(--lab-font-sans);
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+}
+.lab-ovning-falt-bort:hover { color: var(--lab-ink); border-color: var(--lab-ink-muted); }
+.lab-ovning-falt-till {
+    align-self: flex-start;
+    padding: 2px 0;
+    border: 0;
+    background: none;
+    color: var(--lab-ink);
+    text-decoration: underline dotted;
+    text-underline-offset: 3px;
+    white-space: nowrap;
+    font-family: var(--lab-font-sans);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.lab-ovning-falt-till:hover { text-decoration: underline; }
 
 /* ── Exit ticket (kort förhör per avsnitt) ─────────────────────── */
 .lab-exit {

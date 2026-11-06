@@ -2670,27 +2670,45 @@
             return 'wrong';
         }
 
-        // Deluppgift med flera lösningar (values: [8, -2]): eleven skriver
-        // lösningarna i valfri ordning, åtskilda av "och", "eller",
-        // semikolon eller komma följt av mellanslag. ±3 räknas som 3 och −3.
-        function checkDelsvarMangd(input, d) {
-            if (!input || !input.trim()) return 'unparseable';
+        // Deluppgift med flera lösningar (values: [8, -2]): eleven skriver EN
+        // lösning per fält och lägger själv till fler fält ("Lägg till en
+        // lösning"). Från början finns bara ett fält, så att antalet fält
+        // inte avslöjar hur många lösningar det finns. Ett fält tål ändå
+        // flera tal ("±3", "3 och −3"), om eleven skriver så.
+        function tolkaLosningar(input) {
             const s = input.replace(/[−–—]/g, '-')
                 .replace(/±\s*(\d+(?:[.,]\d+)?)/g, '$1 och -$1')
                 .replace(/[a-zA-Zåäö₀-₉]+\s*=/g, ' ');
-            const tokens = s.split(/\s*(?:\boch\b|\beller\b|\band\b|\bor\b|;|,\s+|\s{1,})\s*/i)
+            const tal = s.split(/\s*(?:\boch\b|\beller\b|\band\b|\bor\b|;|,\s+|\s{1,})\s*/i)
                 .map(t => parseAnswerParts(t)).filter(Boolean).map(p => p.value);
-            if (!tokens.length) return 'unparseable';
+            return tal.length ? tal : null;
+        }
+        // Rättar fälten var för sig och tillsammans: varje tal ska vara en
+        // lösning som ingen annan ruta redan tagit, och alla lösningar ska
+        // finnas med ('ofullstandig' när det skrivna stämmer men någon
+        // saknas). Ger null när alla fält är tomma.
+        function checkDelsvarMangd(falt, d) {
             const kvar = d.values.slice();
-            for (const v of tokens) {
-                const i = kvar.findIndex(e => Math.abs(v - e) <= Math.max(Math.abs(e) * (d.tol || 0.02), 0.001));
-                if (i < 0) return 'wrong';
-                kvar.splice(i, 1);
-            }
-            return kvar.length ? 'wrong' : 'correct';
+            const traff = v => kvar.findIndex(e => Math.abs(v - e) <= Math.max(Math.abs(e) * (d.tol || 0.02), 0.001));
+            let ifyllda = 0, allaRatt = true, otolkbar = false;
+            const domar = falt.map(f => {
+                if (!f.trim()) return null;
+                ifyllda++;
+                const tal = tolkaLosningar(f);
+                if (!tal) { otolkbar = true; return 'unparseable'; }
+                let ratt = true;
+                for (const v of tal) {
+                    const i = traff(v);
+                    if (i < 0) ratt = false; else kvar.splice(i, 1);
+                }
+                if (!ratt) allaRatt = false;
+                return ratt ? 'correct' : 'wrong';
+            });
+            if (!ifyllda) return null;
+            const r = otolkbar ? 'unparseable' : !allaRatt ? 'wrong' : kvar.length ? 'ofullstandig' : 'correct';
+            return { r, falt: domar };
         }
         function checkDelsvar(input, d) {
-            if (Array.isArray(d.values)) return checkDelsvarMangd(input, d);
             if (typeof d.value !== 'number') return null;   // besvaras i ord
             return checkAnswer(input, d);
         }
@@ -2832,10 +2850,12 @@
             // Deluppgifter (a, b, c …) får var sitt svarsfält: uppgift.delsvar
             // har en post per fält, se huvudet i data/ovningar.js.
             const delar = !isMC && Array.isArray(uppgift.delsvar) && uppgift.delsvar.length ? uppgift.delsvar : null;
-            const [delSvar, setDelSvar] = useState(() => delar ? delar.map(() => '') : []);
+            // En deluppgift med flera lösningar (values) har en lista med fält,
+            // ett från början; övriga deluppgifter har ett fält var.
+            const [delSvar, setDelSvar] = useState(() => delar ? delar.map(d => Array.isArray(d.values) ? [''] : '') : []);
             const [delFb, setDelFb] = useState(() => delar ? delar.map(() => null) : []);
-            const delRefs = useRef([]);
-            const aktivDel = useRef(0);
+            const delRefs = useRef({});
+            const aktivDel = useRef({ i: 0, j: 0 });
             const delarRattas = !!delar && delar.some(d => typeof d.value === 'number' || Array.isArray(d.values));
             const fraga = useMemo(() => delar ? utanSvarsinstruktion(uppgift.question) : uppgift.question,
                 [uppgift.question, !!delar]);
@@ -2853,6 +2873,7 @@
             const handleCheck = () => {
                 if (delar) {
                     setDelFb(delar.map((d, i) => {
+                        if (Array.isArray(d.values)) return checkDelsvarMangd(delSvar[i], d);
                         const ordDel = typeof d.value !== 'number' && !Array.isArray(d.values);
                         if (!ordDel && !delSvar[i].trim()) return null;   // tomt fält: ingen dom
                         const r = checkDelsvar(delSvar[i], d);
@@ -2878,19 +2899,33 @@
                     handleCheck();
                 }
             };
-            const andraDel = (i, v) => {
-                setDelSvar(s => s.map((x, j) => j === i ? v : x));
-                setDelFb(f => f.map((x, j) => j === i ? null : x));
+            // j: fältets plats i en deluppgift med flera lösningar
+            const andraDel = (i, v, j) => {
+                setDelSvar(s => s.map((x, k) => k !== i ? x
+                    : Array.isArray(x) ? x.map((y, m) => m === j ? v : y) : v));
+                setDelFb(f => f.map((x, k) => k === i ? null : x));
+            };
+            const MAX_LOSNINGSFALT = 12;
+            const laggTillFalt = (i) => {
+                const j = delSvar[i].length;
+                setDelSvar(s => s.map((x, k) => k === i ? [...x, ''] : x));
+                setDelFb(f => f.map((x, k) => k === i ? null : x));
+                setTimeout(() => { const el = delRefs.current[i + ':' + j]; if (el) el.focus(); }, 0);
+            };
+            const taBortFalt = (i, j) => {
+                setDelSvar(s => s.map((x, k) => k === i ? x.filter((_, m) => m !== j) : x));
+                setDelFb(f => f.map((x, k) => k === i ? null : x));
+                setTimeout(() => { const el = delRefs.current[i + ':' + Math.max(0, j - 1)]; if (el) el.focus(); }, 0);
             };
             const insertSymbol = (text) => {
                 if (delar) {
-                    const i = aktivDel.current;
-                    const el = delRefs.current[i];
+                    const { i, j } = aktivDel.current;
+                    const el = delRefs.current[i + ':' + j];
                     if (!el) return;
-                    const cur = delSvar[i];
+                    const cur = Array.isArray(delSvar[i]) ? delSvar[i][j] : delSvar[i];
                     const start = el.selectionStart ?? cur.length;
                     const end = el.selectionEnd ?? cur.length;
-                    andraDel(i, cur.slice(0, start) + text + cur.slice(end));
+                    andraDel(i, cur.slice(0, start) + text + cur.slice(end), j);
                     setFormatOpen(false);
                     setTimeout(() => {
                         el.focus();
@@ -2958,10 +2993,38 @@
                                 {delar.map((d, i) => {
                                     const forst = i === 0 || delar[i - 1].del !== d.del;
                                     const ord = typeof d.value !== 'number' && !Array.isArray(d.values);
-                                    const fb = delFb[i];
-                                    const cls = 'lab-ovning-answer-input'
-                                        + (fb === 'correct' ? ' is-correct' : '')
-                                        + (fb === 'wrong' ? ' is-wrong' : '');
+                                    const flera = Array.isArray(d.values);
+                                    const fb = flera ? (delFb[i] && delFb[i].r) : delFb[i];
+                                    const klass = (dom) => 'lab-ovning-answer-input'
+                                        + (dom === 'correct' ? ' is-correct' : '')
+                                        + (dom === 'wrong' || dom === 'unparseable' && flera ? ' is-wrong' : '');
+                                    const etikettText = d.etikett ? ', ' + d.etikett.replace(/\$/g, '') : '';
+                                    const falt = (j, varde, dom) => (
+                                        <div key={j} className="lab-ovning-input-wrap">
+                                            <input
+                                                type="text"
+                                                ref={(el) => { delRefs.current[i + ':' + j] = el; }}
+                                                className={klass(dom) + (ord ? ' is-ord' : '') + (flera && j > 0 ? ' har-ta-bort' : '')}
+                                                value={varde}
+                                                placeholder={ord ? 'Svara i ord' : ''}
+                                                style={!ord && d.unit ? { paddingRight: 24 + d.unit.length * 8 } : undefined}
+                                                aria-label={I18N.t('Svar på') + ' ' + d.del + etikettText + (flera ? ', ' + I18N.t('lösning') + ' ' + (j + 1) : '')}
+                                                onFocus={() => { aktivDel.current = { i, j }; }}
+                                                onChange={(e) => andraDel(i, e.target.value, j)}
+                                                onKeyDown={(e) => {
+                                                    if (e.key === 'Enter' && delarRattas) { e.preventDefault(); handleCheck(); }
+                                                }}
+                                            />
+                                            {!ord && d.unit && (
+                                                <span className="lab-ovning-unit">{d.unit}</span>
+                                            )}
+                                            {flera && j > 0 && (
+                                                <button type="button" className="lab-ovning-falt-bort"
+                                                    onClick={() => taBortFalt(i, j)}
+                                                    title="Ta bort lösningen" aria-label={I18N.t('Ta bort lösning') + ' ' + (j + 1)}>×</button>
+                                            )}
+                                        </div>
+                                    );
                                     return (
                                         <div key={i} className={'lab-ovning-del' + (forst ? ' is-forst' : '')}>
                                             <span className="lab-ovning-del-bokstav" aria-hidden={!forst}>
@@ -2971,30 +3034,19 @@
                                                 {d.etikett && (
                                                     <span className="lab-ovning-del-etikett"><InlineMatte text={d.etikett} /></span>
                                                 )}
-                                                <div className="lab-ovning-input-wrap">
-                                                    <input
-                                                        type="text"
-                                                        ref={(el) => { delRefs.current[i] = el; }}
-                                                        className={cls + (ord ? ' is-ord' : '')}
-                                                        value={delSvar[i]}
-                                                        placeholder={ord ? 'Svara i ord' : ''}
-                                                        style={!ord && d.unit ? { paddingRight: 24 + d.unit.length * 8 } : undefined}
-                                                        aria-label={I18N.t('Svar på') + ' ' + d.del + (d.etikett ? ', ' + d.etikett.replace(/\$/g, '') : '')}
-                                                        onFocus={() => { aktivDel.current = i; }}
-                                                        onChange={(e) => andraDel(i, e.target.value)}
-                                                        onKeyDown={(e) => {
-                                                            if (e.key === 'Enter' && delarRattas) { e.preventDefault(); handleCheck(); }
-                                                        }}
-                                                    />
-                                                    {!ord && d.unit && (
-                                                        <span className="lab-ovning-unit">{d.unit}</span>
-                                                    )}
-                                                </div>
+                                                {flera
+                                                    ? delSvar[i].map((v, j) => falt(j, v, delFb[i] && delFb[i].falt[j]))
+                                                    : falt(0, delSvar[i], fb)}
+                                                {flera && delSvar[i].length < MAX_LOSNINGSFALT && (
+                                                    <button type="button" className="lab-ovning-falt-till"
+                                                        onClick={() => laggTillFalt(i)}>+ Lägg till en lösning</button>
+                                                )}
                                                 {fb === 'correct' && <span className="lab-ovning-feedback is-correct">✓ Rätt!</span>}
                                                 {fb === 'wrong' && <span className="lab-ovning-feedback is-wrong">✗ Inte riktigt, försök igen</span>}
+                                                {fb === 'ofullstandig' && <span className="lab-ovning-feedback is-wrong">Det du skrivit stämmer, men alla lösningar är inte med</span>}
                                                 {fb === 'unparseable' && !ord && (
                                                     <span className="lab-ovning-feedback is-wrong">
-                                                        {Array.isArray(d.values) ? 'Skriv lösningarna som tal' : 'Kunde inte tolka svaret som ett tal'}
+                                                        {flera ? 'Skriv en lösning som ett tal i varje ruta' : 'Kunde inte tolka svaret som ett tal'}
                                                     </span>
                                                 )}
                                                 {fb === 'ord' && (

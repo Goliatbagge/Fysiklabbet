@@ -32,7 +32,8 @@
 //        { del: 'c' },            // besvaras i ord, rättas inte
 //      ]
 //    value rättas som answer (tol, ignoreSign); values är flera lösningar
-//    i valfri ordning. Flera poster med samma del delar bokstav. etikett
+//    i valfri ordning (sidan visar EN ruta och eleven lägger själv till
+//    fler, så att antalet rutor inte avslöjar antalet lösningar). Flera poster med samma del delar bokstav. etikett
 //    får innehålla $…$. Frågans instruktion "Ange … som ditt numeriska
 //    svar" döljs automatiskt när delsvar finns.
 //    Varje ny uppgift med deluppgifter och numeriskt svar ska ha delsvar.

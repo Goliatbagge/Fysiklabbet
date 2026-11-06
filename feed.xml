@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Thu, 05 Nov 2026 02:29:37 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 06 Nov 2026 02:27:20 GMT</lastBuildDate>
+    <item>
+      <title>Två svaga ljuspulser i rätt takt rubbar atomlagren mer än en stark</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-11-06-tva-knuffar-i-takt</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-11-06-tva-knuffar-i-takt</guid>
+      <pubDate>Fri, 06 Nov 2026 04:00:00 GMT</pubDate>
+      <category>Materialfysik</category>
+      <description>En kraftig laserpuls kan få atomlagren i kristallen volframditellurid att glida fram och tillbaka mot varandra, men över en viss styrka blir rörelsen mindre i stället för större. Nu visar forskare i Schweiz, Tyskland och Frankrike att samma ljusenergi, delad på två pulser med exakt rätt mellanrum, ger upp till 50 procent större svängningar. Det är samma knep som när man knuffar någon på en gunga.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-11-06-tva-knuffar-i-takt.jpg" length="171023" type="image/jpeg"/>
+    </item>
     <item>
       <title>LHCb hittar belägg för ett sönderfall som sker en gång på tio miljarder</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-11-05-ett-sonderfall-pa-tio-miljarder</link>
@@ -177,15 +186,6 @@
       <category>Atomfysik</category>
       <description>Vid röntgenlasern European XFEL utanför Hamburg har forskare samlat röntgenpulser som varar omkring 300 attosekunder i en fläck så liten att ett hårstrå är flera hundra gånger bredare. Intensiteten blev omkring sju gånger högre än vad någon tidigare nått med så korta pulser av hård röntgenstrålning, och en kopparfolie fick visa att värdet stämmer.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-18-rontgenblixtar-pa-attosekunder.jpg" length="378544" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Galliumgåtan kan ha en lösning som inte kräver några nya partiklar</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-10-17-galliumgatan</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-10-17-galliumgatan</guid>
-      <pubDate>Sat, 17 Oct 2026 04:00:00 GMT</pubDate>
-      <category>Partikelfysik</category>
-      <description>I mer än trettio år har experiment med gallium fångat omkring 20 procent färre neutriner än teorin förutsäger. Fysiker i Italien visar nu att underskottet kan försvinna om man slutar förenkla hur elektronen och atomkärnan samverkar i reaktionen, utan att någon ny sorts neutrino behövs.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-17-galliumgatan.jpg" length="1018788" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

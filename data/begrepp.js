@@ -4645,6 +4645,30 @@ window.BEGREPP = [
       { type: 'p', html: 'En leptokvark skulle vara en sådan bro. Den förekommer i flera teorier som försöker gå längre än standardmodellen, bland annat i försök att förklara varför kvarkar och leptoner kommer i lika många generationer. Om leptokvarkar finns är de antagligen mycket tunga, kanske så tunga att de inte kan skapas i de partikelacceleratorer som finns i dag.' },
       { type: 'p', html: 'Därför letar fysiker efter dem indirekt. En tung partikel som inte kan bildas kan ändå påverka sällsynta sönderfall genom att för ett ögonblick delta i processen. Sker ett sönderfall oftare eller mer sällan än standardmodellen förutsäger kan det vara ett tecken på leptokvarkar eller något annat nytt. Hittills stämmer mätningarna med standardmodellen, och det sätter gränser för hur leptokvarkar skulle kunna se ut.' }
     ]
+  },
+  {
+    id: 'sjalvorganisering',
+    term: 'Självorganisering',
+    former: ['självorganisering', 'självorganiseringen', 'självorganiserar', 'självorganiserande', 'självorganiserad', 'självorganiserade'],
+    kort: 'När en ordnad helhet uppstår ur att många delar bara reagerar på sina närmaste grannar, utan att någon styr eller har en ritning över helheten.',
+    relaterade: ['kollektiv-rorelse', 'aktiv-materia'],
+    body: [
+      { type: 'p', html: 'Tänk på en publikvåg på en arena. Ingen dirigent står och pekar ut vem som ska resa sig. Varje åskådare gör bara en sak: ställer sig upp när grannen bredvid gör det och sätter sig igen strax efter. Ändå vandrar en tydlig våg runt hela arenan, som om den vore planerad. Det kallas självorganisering: en ordning som uppstår inifrån, ur enkla lokala regler, i stället för att styras utifrån.' },
+      { type: 'p', html: 'Naturen är full av exempel. Fiskstim och fågelflockar vänder som en kropp fast varje djur bara ser några få grannar. Sanddyner bildar regelbundna mönster av vind och sandkorn. Bin bygger regelbundna vaxkakor utan att något enskilt bi har en ritning över hela kakan. I alla fallen finns det många delar, var och en reagerar bara på sin närmaste omgivning, och helheten får egenskaper som ingen enskild del har.' },
+      { type: 'p', html: 'För fysiker är det lockande att beskriva sådana system med enkla modeller. Man ger varje del några få regler, låter en dator räkna och ser om samma mönster dyker upp som i naturen. Det svåra är att gå baklänges: att ur det färdiga mönstret lista ut vilka regler delarna faktiskt följer, eftersom helt olika regler ibland kan ge mönster som ser nästan likadana ut.' }
+    ]
+  },
+  {
+    id: 'kollektiv-rorelse',
+    term: 'Kollektiv rörelse',
+    former: ['kollektiv rörelse', 'kollektiva rörelsen', 'kollektiva rörelser', 'kollektiva rörelserna'],
+    kort: 'Samordnad rörelse i en stor grupp, som ett fiskstim, en fågelflock eller en folkmassa, där gruppen rör sig som en helhet fast varje individ bara reagerar på sina grannar.',
+    relaterade: ['sjalvorganisering', 'aktiv-materia'],
+    body: [
+      { type: 'p', html: 'En flock med tusentals starar kan svänga över himlen som ett enda moln som byter form, och ett fiskstim kan vika undan för en rovfisk på en bråkdels sekund. Ingen fågel eller fisk ser hela gruppen. Var och en håller bara koll på några få grannar i närheten, och ändå blir rörelsen samordnad. Det kallas kollektiv rörelse.' },
+      { type: 'p', html: 'Fysiker beskriver ofta sådan rörelse med modeller där varje djur är en partikel som driver sig själv framåt. Partikeln följer några enkla regler: håll lagom avstånd, simma eller flyg åt ungefär samma håll som grannarna och dra dig mot gruppen om du hamnar för långt ut. Lägger man till lite slump, eftersom inget djur är perfekt, räcker det ofta för att en dator ska skapa flockar och stim som liknar de riktiga. Ett av de mest kända exemplen är en modell som den ungerske fysikern Tamás Vicsek och hans kolleger publicerade 1995.' },
+      { type: 'p', html: 'De öppna frågorna gäller vad djuren faktiskt gör. Hur många grannar följer en fisk eller en fågel? Är det de närmaste, eller de som syns tydligast? Sådant går inte att läsa ut direkt ur en film av ett stim, och därför gör forskare försök där de själva styr en del av gruppen, till exempel med robotfiskar eller projicerade fiskar som ett riktigt djur får simma tillsammans med. Samma frågor är intressanta för den som vill bygga svärmar av drönare eller robotar som ska samarbeta utan en central styrning.' }
+    ]
   }
 ];
 

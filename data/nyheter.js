@@ -103,6 +103,64 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-07-fisken-som-foljer-en-granne",
+    date: "2026-11-07",
+    title: "En fisk i stimmet tycks följa bara en granne i taget",
+    deck: "Forskare i Toulouse lät en levande akvariefisk simma i en skål tillsammans med fyra fiskar som bara fanns i en dator. När de ändrade de virtuella fiskarnas regler betedde sig den riktiga fisken som om den inte vägde samman alla grannar, utan bara följde den som just då påverkade den mest. Enligt forskarnas datorsimuleringar byts den grannen ut flera gånger i sekunden.",
+    category: "Biofysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-11-07-fisken-som-foljer-en-granne.jpg",
+    imageAlt: "Fem små, silverglänsande fiskar med klarröda huvuden och svartvit randig stjärtfena simmar i ett akvarium framför en mörk rot, med grönt gräs till vänster och färgade småstenar på botten.",
+    imageCredit: "Foto: Gavinevans, via Wikimedia Commons (CC BY-SA 3.0), beskuren. Bilden visar purpurtetror i ett akvarium, inte försöket.",
+    tags: ["biofysik", "kollektiv rörelse", "självorganisering", "statistisk fysik", "aktiv materia", "acceleration", "newtons andra lag", "vektoraddition", "modell", "datorsimulering", "virtuell verklighet", "fiskstim"],
+    sources: [
+      { name: "Physics Magazine: Schooling Fish May Have Just One Influencer (Michael Schirber, 29 oktober 2026)", url: "https://physics.aps.org/articles/v19/145" },
+      { name: "PRX Life: studien i fulltext (öppet tillgänglig, CC BY 4.0)", url: "https://doi.org/10.1103/18qw-sfyd" },
+      { name: "PNAS: Ballerini m.fl., Interaction ruling animal collective behavior depends on topological rather than metric distance (2008), om stararna i faktarutan", url: "https://doi.org/10.1073/pnas.0711437105" }
+    ],
+    research: {
+      citation: "Z. Kang, R. Escobedo, M. Combe, S. Sanchez, C. Sire och G. Theraulaz, ”Decoding Social Integration in Schooling Fish Using Closed-Loop Real-Virtual Interactions”, PRX Life 4, 043007 (publicerad 29 oktober 2026). DOI: 10.1103/18qw-sfyd",
+      url: "https://doi.org/10.1103/18qw-sfyd"
+    },
+    larare: {
+      moment: [
+        { label: "Newtons andra lag", href: "katalog.html?id=fy1-3.2" },
+        { label: "Vektoraddition", href: "katalog.html?id=fy1-2.2" }
+      ],
+      fragor: [
+        "I modellen är fiskens acceleration summan av flera bidrag från grannarna. Varför svänger en fisk som lägger ihop bidragen från fyra grannar mjukare än en som bara följer en enda?",
+        "Gruppens rörelse som helhet kunde inte avgöra hur många grannar den riktiga fisken följde, men de tvära svängarna kunde det. Varför räcker det ibland inte att jämföra medelvärden när man prövar en modell mot ett försök?",
+        "De virtuella fiskarna rör inte vattnet. Hur kan den begränsningen ha påverkat resultatet, och hur skulle man kunna pröva det?"
+      ]
+    },
+    body: [
+      { type: "p", html: "Ett stim med hundratals fiskar kan vända som en enda kropp, utan att någon fisk bestämmer över de andra. Ordningen uppstår ur hur varje fisk reagerar på sina närmaste grannar, och fenomenet kallas självorganisering. Men vad gör den enskilda fisken? Håller den koll på alla grannar och tar ett slags medelvärde, eller väljer den ut några få? Forskare vid det franska forskningsrådet CNRS och universitetet i Toulouse har låtit en riktig fisk simma tillsammans med fyra fiskar som bara finns i en dator. Resultaten tyder på att fisken följer en enda granne i taget. Studien publicerades i tidskriften <em>PRX Life</em> den 29 oktober." },
+      { type: "h2", text: "Ett akvarium som också är en bioduk" },
+      { type: "p", html: "Försöksfisken var en purpurtetra, <em>Hemigrammus rhodostomus</em>, en sydamerikansk akvariefisk med klarrött huvud som gärna simmar i stim. Fiskarna i försöken var i genomsnitt 3,1&nbsp;centimeter långa. En fisk i taget fick simma i en halvklotformad skål av akrylplast, 52&nbsp;centimeter i diameter och knappt 15&nbsp;centimeter djup, med 15&nbsp;liter vatten. Under skålen satt en projektor som visade fyra fiskar på skålens vägg. En djupkamera 48&nbsp;centimeter ovanför vattenytan följde den riktiga fisken i tre dimensioner med hjälp av infrarött ljus, och en dator räknade hela tiden ut hur de virtuella fiskarna skulle röra sig och hur de skulle ritas för att se rätt ut från just den plats där den riktiga fisken befann sig." },
+      { type: "image", src: "nyheter/bilder/2026-11-07-fisken-som-foljer-en-granne-2.jpg", alt: "En upplyst blå skål sedd uppifrån mot svart bakgrund. I skålen syns en liten silverfärgad fisk som en vit pil pekar på, och fyra större fiskbilder i olika storlek som är projicerade på skålens vägg.", caption: "Skålen sedd uppifrån. Den riktiga purpurtetran är den lilla fisken vid den vita pilen. De fyra andra fiskarna är projicerade på skålens vägg. De ritas förvrängda med avsikt, så att de ser ut att ha rätt storlek och läge sedda från den riktiga fiskens plats.", credit: "Bild: Kang m.fl., PRX Life 4, 043007 (2026), utsnitt ur figur 1 (CC BY 4.0)" },
+      { type: "p", html: "Poängen är att kretsen är sluten. De virtuella fiskarna reagerar på den riktiga, och den riktiga reagerar på dem, precis som i ett vanligt stim. Skillnaden är att forskarna själva bestämmer vilka regler de virtuella fiskarna följer. Med enbart levande fiskar går det inte, och då kan man bara gissa sig till reglerna i efterhand ur filmade rörelser." },
+      { type: "h2", text: "Fiskar som självgående partiklar" },
+      { type: "p", html: "Reglerna är skrivna som en fysikalisk modell där varje fisk behandlas som en partikel som driver sig själv framåt. Fiskens acceleration är en summa av flera bidrag, ungefär som en kropps acceleration bestäms av summan av krafterna som verkar på den: ett motstånd från vattnet, en knuff bort från skålens vägg, en dragning mot grannarna, en strävan att simma åt samma håll som dem och lite slumpmässigt brus. Forskarna kallar bidragen för krafter, men de är inga krafter i fysikens mening. De är ett sätt att beskriva hur fisken bestämmer sig." },
+      { type: "p", html: "Hur mycket en granne påverkar fisken mäts som hur stor del av accelerationen just den grannen står för. Grannarna rangordnas efter det, och i modellen räknar en fisk bara med sina $k$ mest inflytelserika grannar. Med $k = 1$ följer fisken en enda granne, med $k = 4$ lägger den ihop bidragen från alla fyra. Vilken granne som är mest inflytelserik ändras hela tiden när fiskarna byter plats." },
+      { type: "h2", text: "Tre sorters virtuella stim" },
+      { type: "p", html: "I försöken fick de virtuella fiskarna följa en, två eller fyra grannar. För varje fall simmade åtta olika fiskar i en timme var, efter en kvarts tillvänjning. Ju fler grannar de virtuella fiskarna tog hänsyn till, desto mer samstämt simmade gruppen. Rörelserna blev mjukare, fiskarna simmade oftare åt samma håll och följde gärna skålens kant runt, och den riktiga fisken lämnade gruppen mer sällan." },
+      { type: "p", html: "Sedan gjordes samma försök i datorn, med en simulerad fisk i den riktiga fiskens ställe som fick följa en, två eller fyra grannar. Gruppens rörelse som helhet räckte inte för att avgöra vilket antagande som stämde, eftersom alla tre gav ungefär lika god överensstämmelse med försöken. Svaret fanns i stället i den riktiga fiskens egna rörelser." },
+      { type: "h2", text: "Tvära svängar avslöjade fisken" },
+      { type: "p", html: "Den levande fisken gjorde ofta tvära svängar, ibland på mer än 90&nbsp;grader, och svängde ibland in mot skålens vägg. Sådana manövrer uppstod i simuleringarna bara när den simulerade fisken följde en enda granne. En fisk som lägger ihop bidragen från flera grannar svänger mjukare, eftersom grannarnas olika riktningar delvis tar ut varandra, ungefär som när flera krafter i olika riktningar adderas. Även hur fiskens hastighet samvarierade med grannarnas över tiden stämde bäst med en enda granne. Alla mått pekade åt samma håll: den riktiga fisken betedde sig som om den bara följde sin mest inflytelserika granne." },
+      { type: "p", html: "Ledaren är ändå inte fast. I simuleringarna bytte den mest inflytelserika grannen identitet ungefär 2,8&nbsp;gånger per sekund, medan fisken vände helt om ungefär var sextonde sekund. Det blir omkring 40&nbsp;byten mellan två helomvändningar, så inflytandet flyttar hela tiden mellan grannarna." },
+      { type: "quote", html: "En fisk uppmärksammar inte alla sina grannar. Om en organism väljer ut rätt information kan den samordna sig med andra och samtidigt hålla nere sin kognitiva belastning.", cite: "Guy Theraulaz, CNRS, till Physics Magazine (översatt)" },
+      { type: "h2", text: "Det som saknas i den virtuella skålen" },
+      { type: "p", html: "Försöket har en tydlig begränsning. Riktiga fiskar känner också av vattnets rörelser och tryckförändringar med sidolinjen, ett sinnesorgan längs kroppen. De virtuella fiskarna rör inte vattnet, så den riktiga fisken kunde bara se sina kamrater. Forskarna har dessutom bara prövat grupper om fem fiskar, och de vill gå vidare med större grupper. Biologen Liang Li vid Max Planck-institutet för djurs beteende i Tyskland säger till Physics Magazine att den riktiga fisken tydligt reagerade när reglerna ändrades, och att försöket väcker frågan om hur en fisk väljer ut vilken granne som är viktigast." },
+      { type: "p", html: "Theraulaz påpekar att myror också sållar bland informationen de får, och att människor troligen gör något liknande när de tar sig fram genom en tät folkmassa. Att följa en enda granne kräver mindre av nervsystemet än att väga samman alla, och enligt forskarna räcker det ändå för att hålla ihop gruppen." },
+      { type: "fact", title: "Visste du?", items: [
+        "År 1995 visade den ungerske fysikern Tamás Vicsek och hans kolleger med en datormodell att enkla partiklar, som bara rättar in sig efter grannarnas medelriktning och har lite slumpmässigt brus, kan börja röra sig i samma riktning allihop. Modellen blev en startpunkt för forskningen om kollektiv rörelse.",
+        "Stararna i en flock tycks enligt mätningar från 2008 rätta sig efter ungefär sex eller sju grannar, oavsett hur tätt flocken flyger.",
+        "Purpurtetrorna i försöket simmade med omkring 10–11&nbsp;cm/s, drygt tre kroppslängder per sekund.",
+        "Fiskarna simmar ryckvis: ett kort tag på ungefär en tiondels sekund följs av ett glid på omkring en halv sekund, då fisken nästan inte ändrar riktning."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-06-tva-knuffar-i-takt",
     date: "2026-11-06",
     title: "Två svaga ljuspulser i rätt takt rubbar atomlagren mer än en stark",

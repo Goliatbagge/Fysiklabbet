@@ -15737,7 +15737,70 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
-  /* ---------------- scen: grafisk olikhetslösning (ma1c-4.9 ex 2) -----
+  /* ---------------- scen: decimaltal och potens grafiskt (ma1c-4.9 ex 2)
+   * 0,5x³ + 1,2 = 2,7. Kurvan och den vågräta linjen skär varandra i en
+   * punkt vars x-koordinat har oändligt många decimaler, och svaret ska
+   * anges med tre decimaler (GeoGebra visar två tills man ändrar Antal
+   * decimaler). */
+  function layoutGrafiskpotens(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+    var tanke = mkTanke(T);
+
+    tanke(20, [
+      [['Jag sätter y= framför']],
+      [['vänsterledet och framför']],
+      [['högerledet, så blir det en']],
+      [['kurva och en linje.']]
+    ], 0);
+    y = 116;
+    T.str('VL och HL som var sin graf', padL, y - 1.6 * F, null, 0.62);
+    T.str('y=0,5x^3+1,2', padL, y);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('y=2,7', padL, y);
+    T.stepEnd();
+
+    /* två rutor per enhet; y-axeln slutar vid 5, så kurvan ritas mellan
+     * y = −1 och y = 5 (x från ∛−4,4 till ∛7,6) */
+    var oy = y + 360;
+    var A = mkAxes(T, F, { ox: padL + 160, oy: oy, u: 54,
+                           xmin: -2, xmax: 3, ymin: -1, ymax: 5 });
+    A.axes();
+    A.ticks(heltal(-2, 3), heltal(-1, 5), [-2, -1, 1, 2, 3], [2, 3, 4, 5]);
+    T.pause(150);
+    A.curve(function (x) { return 0.5 * x * x * x + 1.2; }, -1.639, 1.966);
+    T.pause(200);
+    A.linjalKM(0, 2.7, null, -2.2, 3.2);
+    T.stepEnd();
+
+    tanke(oy + 80, [
+      [['GeoGebra visar 1,44 med två']],
+      [['decimaler. Uppgiften vill ha']],
+      [['tre, så jag ändrar Antal']],
+      [['decimaler till 3.']]
+    ], 0);
+    var g = A.guides(1.442, 2.7);
+    T.pause(200);
+    A.dot(1.442, 2.7);
+    A.tag(1.442, 2.7, '(1,442; 2,7)', 12, 24, BLUE);
+    T.stepEnd();
+
+    y = oy + 54 + 3.6 * F;
+    tanke(y - 2.6 * F, [
+      [['x-koordinaten är lösningen.']],
+      [['Decimalerna tar aldrig slut,']],
+      [['så jag avrundar till tre.']]
+    ], 0);
+    g.forEach(function (st) { T.fade(st); });
+    xe = T.str('Svar: x≈1,442', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: grafisk olikhetslösning (ma1c-4.9 ex 3) -----
    * −2x + 5 < x − 4. Skärningspunkten ger GRÄNSEN; sedan avgör man på
    * vilken SIDA om den olikheten stämmer, genom att se vilken linje som
    * ligger underst. */
@@ -64265,7 +64328,7 @@
                    arfunktion: layoutArfunktion,
                    lasavgraf: layoutLasavgraf,
                    fligamedg: layoutFligamedg,
-                   grafiskekv: layoutGrafiskekv,
+                   grafiskekv: layoutGrafiskekv, grafiskpotens: layoutGrafiskpotens,
                    grafiskolikhet: layoutGrafiskolikhet,
                    musiktjanst: layoutMusiktjanst,
                    mangderurgraf: layoutMangderurgraf,

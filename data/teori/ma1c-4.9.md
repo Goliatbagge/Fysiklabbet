@@ -78,7 +78,51 @@ Vi ser att skärningspunktens *x*-koordinat är 2, så lösningen är $x = 2$.
 :::
 :::
 
-::: exempel "Exempel 2 — Grafisk lösning av en olikhet"
+::: exempel "Exempel 2 — Decimaltal och en potens"
+**Lös ekvationen $0{,}5x^3 + 1{,}2 = 2{,}7$ med grafritande hjälpmedel. Ange lösningen med tre decimaler.**
+
+::: handskrift
+typ: grafiskpotens
+:::
+
+::: textlosning
+VL = $0{,}5x^3 + 1{,}2$ och HL = $2{,}7$.
+
+Vi ritar graferna $y = 0{,}5x^3 + 1{,}2$ och $y = 2{,}7$. I GeoGebra
+skrivs decimaltal med punkt, och upphöjt till skrivs med tecknet `^`.
+På ett svenskt tangentbord får du `^` med Skift och tangenten till höger
+om Å. Tryck sedan på mellanslag, så att tecknet kommer fram.
+
+Vi skriver alltså `y = 0.5x^3 + 1.2` i *Inmatningsfältet*. När vi har
+skrivit `^` hamnar markören uppe i exponenten. Där skriver vi 3, och sedan
+trycker vi på högerpilen (→) så att markören kommer ned på raden igen.
+Först då skriver vi `+ 1.2`. Annars hamnar även $+\,1{,}2$ i exponenten.
+Vi trycker Enter och skriver sedan `y = 2.7` och Enter.
+
+Kurvan och den vågräta linjen skär varandra i en punkt. Vi tar fram
+skärningspunkten med verktyget *Skärning mellan två objekt*, som i
+exempel 1. I algebrafönstret står `A = (1.44, 2.7)`.
+
+GeoGebra visar bara två decimaler från början, men uppgiften vill ha tre.
+Så här ändrar vi antalet decimaler:
+
+1. Klicka på menyknappen med de tre strecken uppe till höger.
+2. Välj **Inställningar**.
+3. På fliken **Allmänt** finns rutan **Antal decimaler**. Välj
+   **3 decimaler**.
+
+Nu står det `A = (1.442, 2.7)` i algebrafönstret. Skärningspunktens
+*x*-koordinat är lösningen. Väljer vi 10 decimaler visar GeoGebra
+`1.4422495703`, och decimalerna tar aldrig slut. Därför måste lösningen
+avrundas, och uppgiften säger att vi ska avrunda till tre decimaler.
+
+Kontroll genom insättning: $x = 1{,}442$ ger VL $= 0{,}5 \cdot 1{,}442^3 + 1{,}2 \approx 2{,}699$, som nästan är lika med HL $= 2{,}7$. Den lilla skillnaden kommer av avrundningen.
+
+**Svar:** $x \approx 1{,}442$
+:::
+:::
+
+::: exempel "Exempel 3 — Grafisk lösning av en olikhet"
 **Lös olikheten $-2x + 5 < x - 4$.**
 
 ::: handskrift
@@ -143,6 +187,21 @@ Decimaltal i GeoGebra skrivs med punkt (.) istället för decimalkomma (,).
 Om du ska rita upp linjen $y = 7{,}5x + 3$ i GeoGebra ska du alltså
 skriva `y = 7.5x + 3`. Observera skillnaden: **7,5 skrivs 7.5**.
 
+**Upphöjt till**
+
+Upphöjt till skrivs med tecknet `^`: $x^3$ skrivs `x^3`. Efter `^` står
+markören i exponenten, så tryck på högerpilen (→) innan du skriver
+resten av uttrycket.
+
+**Antal decimaler**
+
+GeoGebra avrundar till två decimaler. Vill du se fler eller färre
+decimaler, till exempel i en skärningspunkts koordinater, klickar du på
+menyknappen (de tre strecken uppe till höger) och väljer
+**Inställningar**. På fliken **Allmänt** väljer du antal i rutan
+**Antal decimaler**. Med knappen **Spara inställningar** gäller valet
+även nästa gång du öppnar GeoGebra.
+
 **Variabler**
 
 I grafiska lösningar "förstår" GeoGebra bara variablerna $x$ och $y$. Om
@@ -170,6 +229,8 @@ variabeln $t$ mot $x$ och skriva in det vänstra ledet som $y = 13x + 5$:
 ::: sampunkt "GeoGebra: decimaltal"
 - Skriv **punkt** i stället för decimalkomma.
 - $y = 7{,}5x + 3$ skrivs `y = 7.5x + 3`.
+- Upphöjt till skrivs `^`: $x^3$ blir `x^3`.
+- Fler decimaler: menyn, **Inställningar**, **Antal decimaler**.
 :::
 
 ::: sampunkt "GeoGebra: variabler"

@@ -4108,6 +4108,11 @@ body.laborans u .lab-term {
     cursor: pointer;
 }
 .lab-ovning-falt-till:hover { text-decoration: underline; }
+.lab-ovning-falt-eller {
+    font-family: var(--lab-font-sans);
+    font-size: 13px;
+    color: var(--lab-ink-muted);
+}
 
 /* ── Exit ticket (kort förhör per avsnitt) ─────────────────────── */
 .lab-exit {

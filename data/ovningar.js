@@ -36,6 +36,11 @@
 //    fler, så att antalet rutor inte avslöjar antalet lösningar). Flera poster med samma del delar bokstav. etikett
 //    får innehålla $…$. Frågans instruktion "Ange … som ditt numeriska
 //    svar" döljs automatiskt när delsvar finns.
+//    olikhet: 'x < -2 eller x > 1.5' gör fältet till ett olikhetssvar: en
+//    ruta per villkor (eleven lägger själv till fler), rättat mot
+//    lösningsmängden, så att skrivsättet inte spelar roll. Ensidiga och
+//    dubbla villkor, < > <= >=. Utan del visas ingen bokstav (uppgift
+//    utan deluppgifter).
 //    Varje ny uppgift med deluppgifter och numeriskt svar ska ha delsvar.
 //
 // 2) Flervalsfråga (auto-rättning via val):
@@ -23813,8 +23818,8 @@ Enbart $x < 5$ räcker inte — till exempel är $x = -7 < 5$ men $(-7)^2 = 49 >
             question: `Olikheter av andra graden.<br>a) Lös olikheten $-3x^2 + 5 \\geq -22$.<br>b) Lös olikheten $2x^2 - 8 > 0$.<br>c) Elin löser $x^2 > 4$ genom att dra roten ur båda led och svarar $x > 2$. Visa med ett exempel att svaret är ofullständigt, och förklara varför man i stället undersöker gränsfallet.`,
             answer: { value: 3, unit: '' },
             delsvar: [
-                { del: 'a' },
-                { del: 'b' },
+                { del: 'a', olikhet: '-3 <= x <= 3' },
+                { del: 'b', olikhet: 'x < -2 eller x > 2' },
                 { del: 'c' },
             ],
             solution: `**a)** Vi vill få $x^2$ ensamt. Subtraherar 5 från båda led:
@@ -23960,7 +23965,8 @@ Enkelbiljetter kan inte vara billigast när månadskortet slår rabattkortet, ef
             question: `Olikheten $ax + 3 > 9$ innehåller ett tal $a$.<br>a) Lös olikheten när $a = 2$ och när $a = -2$.<br>b) Lös olikheten allmänt, dels för $a > 0$, dels för $a < 0$.<br>c) Vad händer med olikheten om $a = 0$? Har den några lösningar?`,
             answer: { value: 3, unit: '' },
             delsvar: [
-                { del: 'a' },
+                { del: 'a', olikhet: 'x > 3', etikett: 'för $a = 2$' },
+                { del: 'a', olikhet: 'x < -3', etikett: 'för $a = -2$' },
                 { del: 'b' },
                 { del: 'c' },
             ],
@@ -24026,8 +24032,8 @@ Kontroll mot a): $a = 2$ ger $x > 3$ och $a = -2$ ger $x < \\dfrac{6}{-2} = -3$,
             answer: { value: 3, unit: 'cm' },
             delsvar: [
                 { del: 'a' },
-                { del: 'b' },
-                { del: 'c' },
+                { del: 'b', olikhet: '3 < x < 13' },
+                { del: 'c', olikhet: '3 < x < 11' },
             ],
             solution: `**a)** Regeln ska gälla för varje sida. Sidan $x$ ska vara kortare än $5 + 8$, sidan 8 kortare än $5 + x$ och sidan 5 kortare än $8 + x$:
 
@@ -24077,8 +24083,8 @@ Tillsammans med b): $x$ ska vara större än 3 och mindre än både 13 och 11, o
             answer: { value: 5, unit: '' },
             delsvar: [
                 { del: 'a' },
-                { del: 'b' },
-                { del: 'c' },
+                { del: 'b', olikhet: '0 < x < 5' },
+                { del: 'c', olikhet: 'x < 0 eller x > 5' },
             ],
             solution: `**a)** Talet $x = -1$ uppfyller $x < 5$. Men $\\dfrac{10}{-1} = -10$, och $-10 > 2$ är falskt. Kalles svar innehåller alltså tal som inte är lösningar. Felet är att han multiplicerar båda led med $x$ utan att veta om $x$ är positivt eller negativt. Är $x$ negativt ska olikhetstecknet vändas, och det gjorde han inte. (Dessutom är $x = 0$ förbjudet, eftersom $x$ står i nämnaren.)
 
@@ -26295,7 +26301,7 @@ Kontroll: $B = (2, -4)$ och $C = (-2, 4)$. Sidorna är $AB = 8$ och $AC = 4$, oc
             question: `Punkten $P = (a - 3,\\ 2a + 4)$ flyttar sig när talet $a$ ändras.<br>a) För vilka värden på $a$ ligger $P$ i andra kvadranten?<br>b) Visa att $P$ aldrig kan ligga i fjärde kvadranten.<br>c) För vilket värde på $a$ ligger $P$ på *y*-axeln, och var på axeln ligger den då?`,
             answer: { value: 3, unit: '' },
             delsvar: [
-                { del: 'a' },
+                { del: 'a', olikhet: '-2 < a < 3' },
                 { del: 'b' },
                 { del: 'c', value: 3, unit: '', etikett: '$a =$' },
             ],
@@ -27632,7 +27638,7 @@ Kontroll med trappsteget: från $(7, 1)$ ska linjen gå ytterligare 1 steg nedå
             answer: { value: -1.5, unit: '' },
             delsvar: [
                 { del: 'a', value: -1.5, unit: '', etikett: '$k =$' },
-                { del: 'b' },
+                { del: 'b', olikhet: '-2 < k < 0' },
             ],
             solution: `**Insikten:** $m = 6$ ger triangelns höjd längs *y*-axeln. Triangeln hamnar i första kvadranten bara om linjen lutar nedåt, alltså om $k < 0$. Basen längs *x*-axeln är avståndet till linjens skärning med *x*-axeln, och den beror på $k$.
 
@@ -29658,6 +29664,9 @@ $$ 24\\,000 + 600 \\cdot 20{,}29 \\approx 36\\,170 $$
         {
             level: 3,
             question: `Lös olikheten $0{,}5x + 1 > 4 - x^2$ med grafritande hjälpmedel. Kontrollera svaret genom att pröva ett tal i varje del av tallinjen.`,
+            delsvar: [
+                { olikhet: 'x < -2 eller x > 1.5' },
+            ],
             solution: `**Insikten:** olikheten frågar var linjen $y = 0{,}5x + 1$ ligger *ovanför* kurvan $y = 4 - x^2$. Kurvan är en parabel, och den kan skära linjen i två punkter. Då kan svaret bestå av två skilda delar av tallinjen.
 
 I GeoGebra skriver vi \`y = 0.5x + 1\` och \`y = 4 - x^2\`. Parabeln har sin topp i $(0, 4)$ och linjen skär den i två punkter, som vi tar fram med *Skärning mellan två objekt*:
@@ -30421,7 +30430,7 @@ a) Visa med ett exempel att omskrivningen är fel, och förklara vad Moa gör f�
             delsvar: [
                 { del: 'a' },
                 { del: 'b', value: 1, unit: '', etikett: '$x =$' },
-                { del: 'c' },
+                { del: 'c', olikhet: 'x < 1' },
             ],
             solution: `**Insikten:** exponenten i $2 \\cdot 3^x$ hör bara till 3. Prioriteringsreglerna säger att potensen räknas före multiplikationen, så 2 upphöjs aldrig. I $(2 \\cdot 3)^x$ upphöjs däremot båda faktorerna, eftersom potenslagen ger $(2 \\cdot 3)^x = 2^x \\cdot 3^x$.
 
@@ -30463,7 +30472,7 @@ Kontroll med $x = 0$: $2 \\cdot 3^0 = 2$ och $6^0 = 1$, och $2 > 1$.
             answer: { value: 8, unit: 'min', tol: 0.05 },
             delsvar: [
                 { del: 'a' },
-                { del: 'b' },
+                { del: 'b', olikhet: '20 < T <= 90' },
                 { del: 'c', value: 8, unit: 'min', tol: 0.05 },
             ],
             solution: `**Insikten:** det är inte temperaturen som minskar exponentiellt utan skillnaden mellan kaffets och rummets temperatur. Termen $70 \\cdot 0{,}9^t$ är en exponentialfunktion med $C = 70$ och $a = 0{,}9$, och den läggs ovanpå en konstant nivå på 20.
@@ -30789,7 +30798,7 @@ Kontroll: $1{,}26^3 = 2{,}000\\,376$, alltså nästan exakt 2.
             delsvar: [
                 { del: 'a' },
                 { del: 'b', values: [1.24, 16], unit: '', tol: 0.01, etikett: '$x =$' },
-                { del: 'c' },
+                { del: 'c', olikhet: '0 < x < 1.24 eller x > 16', tol: 0.01 },
             ],
             solution: `**Insikten:** $f$ är en potensfunktion med variabeln i basen och $g$ en exponentialfunktion med variabeln i exponenten. För stora *x* vinner exponentialfunktionen alltid, men på vägen dit kan potensfunktionen ligga över.
 
@@ -43995,7 +44004,7 @@ $$
             question: `En rektangulär pappskiva med måtten 24 cm × 15 cm ska användas för att tillverka en låda utan lock. I varje hörn klipps en kvadrat med sidan $x$ bort, och de fyra sidorna viks sedan upp.<br>a) Visa att lådans volym ges av $V(x) = x(24 - 2x)(15 - 2x)$, och ange en rimlig definitionsmängd för $x$.<br>b) I Geogebra hittas TVÅ extrempunkter på grafen till $V(x)$: $(3, 486)$ och $(10, -200)$. Vilket $x$-värde ger den låda som har störst volym, och varför gäller inte den andra punkten?`,
             answer: { value: 3, unit: 'cm' },
             delsvar: [
-                { del: 'a' },
+                { del: 'a', olikhet: '0 < x < 7.5', etikett: 'definitionsmängd' },
                 { del: 'b', value: 3, unit: 'cm', etikett: '$x =$' },
             ],
             solution: `**a)** Lådans bottenyta får sidorna $(24 - 2x)$ och $(15 - 2x)$, eftersom en kvadrat med sidan $x$ klipps bort i varje hörn, och höjden blir $x$ när de fyra sidorna viks upp:
@@ -45265,6 +45274,9 @@ Lägst kostnad ger 3 kg av varje sort.
         {
             level: 3,
             question: `Figuren visar ett tillåtet område med hörnpunkterna $(0, 0)$, $(6, 0)$, $(4, 3)$ och $(0, 5)$. Målfunktionen är $V = ax + 2y$, där $a$ är en positiv konstant. För vilka värden på $a$ antar $V$ sitt största värde i hörnet $(4, 3)$?
+            delsvar: [
+                { olikhet: '1 <= a <= 3' },
+            ],
 
 <svg style="max-width:100%;height:auto;display:block;margin:12px auto" viewBox="-38 -198 257 224" width="349" height="304" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Ett skuggat område med hörnen 0 komma 0, 6 komma 0, 4 komma 3 och 0 komma 5."><line x1="26" y1="18.2" x2="26" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="52" y1="18.2" x2="52" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="78" y1="18.2" x2="78" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="104" y1="18.2" x2="104" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="130" y1="18.2" x2="130" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="156" y1="18.2" x2="156" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="182" y1="18.2" x2="182" y2="-171.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-26" x2="197.6" y2="-26" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-52" x2="197.6" y2="-52" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-78" x2="197.6" y2="-78" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-104" x2="197.6" y2="-104" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-130" x2="197.6" y2="-130" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="-18.2" y1="-156" x2="197.6" y2="-156" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><polygon points="0,0 156,0 104,-78 0,-130" fill="rgba(37,99,201,0.16)" stroke="none"/><line x1="-18.2" y1="0" x2="207.6" y2="0" stroke="#1f2530" stroke-width="1.6"/><polygon points="215.6,0 205.6,-4.5 205.6,4.5" fill="#1f2530"/><line x1="0" y1="18.2" x2="0" y2="-181.6" stroke="#1f2530" stroke-width="1.6"/><polygon points="0,-189.6 -4.5,-179.6 4.5,-179.6" fill="#1f2530"/><text x="213.6" y="19" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="9" y="-183.6" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><line x1="26" y1="-3.5" x2="26" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="26" y="16" font-size="12" text-anchor="middle" fill="#1f2530">1</text><line x1="52" y1="-3.5" x2="52" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="52" y="16" font-size="12" text-anchor="middle" fill="#1f2530">2</text><line x1="78" y1="-3.5" x2="78" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="78" y="16" font-size="12" text-anchor="middle" fill="#1f2530">3</text><line x1="104" y1="-3.5" x2="104" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="104" y="16" font-size="12" text-anchor="middle" fill="#1f2530">4</text><line x1="130" y1="-3.5" x2="130" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="130" y="16" font-size="12" text-anchor="middle" fill="#1f2530">5</text><line x1="156" y1="-3.5" x2="156" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><line x1="182" y1="-3.5" x2="182" y2="3.5" stroke="#1f2530" stroke-width="1.2"/><text x="182" y="16" font-size="12" text-anchor="middle" fill="#1f2530">7</text><line x1="-3.5" y1="-26" x2="3.5" y2="-26" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-22" font-size="12" text-anchor="end" fill="#1f2530">1</text><line x1="-3.5" y1="-52" x2="3.5" y2="-52" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-48" font-size="12" text-anchor="end" fill="#1f2530">2</text><line x1="-3.5" y1="-78" x2="3.5" y2="-78" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-74" font-size="12" text-anchor="end" fill="#1f2530">3</text><line x1="-3.5" y1="-104" x2="3.5" y2="-104" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-100" font-size="12" text-anchor="end" fill="#1f2530">4</text><line x1="-3.5" y1="-130" x2="3.5" y2="-130" stroke="#1f2530" stroke-width="1.2"/><line x1="-3.5" y1="-156" x2="3.5" y2="-156" stroke="#1f2530" stroke-width="1.2"/><text x="-6" y="-152" font-size="12" text-anchor="end" fill="#1f2530">6</text><line x1="78" y1="-117" x2="161.2" y2="7.8" stroke="#1f2530" stroke-width="2"/><line x1="-10.4" y1="-135.2" x2="156" y2="-52" stroke="#1f2530" stroke-width="2"/><circle cx="0" cy="0" r="3.6" fill="#c8324a"/><text x="-6" y="15" font-size="12.5" text-anchor="end" fill="#c8324a">(0, 0)</text><circle cx="156" cy="0" r="3.6" fill="#c8324a"/><text x="148" y="-6" font-size="12.5" text-anchor="end" fill="#c8324a">(6, 0)</text><circle cx="104" cy="-78" r="3.6" fill="#c8324a"/><text x="112" y="-83" font-size="12.5" text-anchor="start" fill="#c8324a">(4, 3)</text><circle cx="0" cy="-130" r="3.6" fill="#c8324a"/><text x="-7" y="-126" font-size="12.5" text-anchor="end" fill="#c8324a">(0, 5)</text></svg>`,
             solution: `I de fyra hörnen är

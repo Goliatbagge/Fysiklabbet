@@ -2712,6 +2712,94 @@
             if (typeof d.value !== 'number') return null;   // besvaras i ord
             return checkAnswer(input, d);
         }
+        // Deluppgift vars svar är en olikhet (olikhet: 'x < -2 eller x > 1.5'):
+        // en ruta per villkor, och eleven lägger själv till fler ("Lägg till
+        // ett villkor"), precis som för flera lösningar. Varje villkor görs om
+        // till ett intervall { lo, loIn, hi, hiIn } och jämförs med facits
+        // intervall, så skrivsättet spelar ingen roll: "-2 > x" är samma sak
+        // som "x < −2", <= samma som ≤, och 1,5 samma som 1.5. Ett villkor kan
+        // vara ensidigt (x ≥ 3) eller dubbelt (−2 < x ≤ 5). Bokstaven för
+        // variabeln rättas inte.
+        function tolkaVillkor(text) {
+            const s = text.replace(/[−–—]/g, '-')
+                .replace(/<=|=</g, '≤').replace(/>=|=>/g, '≥')
+                .replace(/(\d),(\d)/g, '$1.$2');
+            const delar = s.split(/\s*(≤|≥|<|>)\s*/);   // term, tecken, term …
+            if (delar.length !== 3 && delar.length !== 5) return null;
+            const termer = delar.filter((_, k) => k % 2 === 0).map(t => t.trim());
+            const tecken = delar.filter((_, k) => k % 2 === 1);
+            const arVar = t => /^[a-zA-ZåäöÅÄÖ][a-zA-Z0-9_()]*$/.test(t);
+            const tal = t => {
+                if (!/\d/.test(t) || /[a-zA-ZåäöÅÄÖ]/.test(t)) return null;
+                const p = parseAnswerParts(t);
+                return p ? p.value : null;
+            };
+            const mindre = op => op === '<' || op === '≤';
+            const vand = { '<': '>', '>': '<', '≤': '≥', '≥': '≤' };
+            const ensidig = (op, n) => mindre(op)
+                ? { lo: -Infinity, loIn: false, hi: n, hiIn: op === '≤' }
+                : { lo: n, loIn: op === '≥', hi: Infinity, hiIn: false };
+            if (termer.length === 2) {
+                const [a, b] = termer;
+                if (arVar(a) && tal(b) !== null) return ensidig(tecken[0], tal(b));
+                if (tal(a) !== null && arVar(b)) return ensidig(vand[tecken[0]], tal(a));
+                return null;
+            }
+            const [a, x, b] = termer;
+            const n1 = tal(a), n2 = tal(b);
+            if (!arVar(x) || n1 === null || n2 === null) return null;
+            let v;
+            if (mindre(tecken[0]) && mindre(tecken[1])) {
+                v = { lo: n1, loIn: tecken[0] === '≤', hi: n2, hiIn: tecken[1] === '≤' };
+            } else if (!mindre(tecken[0]) && !mindre(tecken[1])) {
+                v = { lo: n2, loIn: tecken[1] === '≥', hi: n1, hiIn: tecken[0] === '≥' };
+            } else return null;
+            return v.lo < v.hi ? v : null;
+        }
+        // En ruta får rymma flera villkor ("x < −2 eller x > 1,5").
+        function tolkaVillkorLista(text) {
+            const lista = text.split(/\s*(?:\beller\b|\bor\b|;)\s*/i).filter(t => t.trim()).map(tolkaVillkor);
+            return lista.length && lista.every(Boolean) ? lista : null;
+        }
+        // Domen per ruta: 'correct', 'tecken' (rätt gräns och riktning men
+        // fel om gränsen ingår), 'riktning' (rätt gräns åt fel håll),
+        // 'wrong' eller 'unparseable'. Samlad dom som för flera lösningar,
+        // med 'ofullstandig' när det skrivna stämmer men något villkor saknas.
+        function checkOlikhet(falt, d) {
+            const facit = tolkaVillkorLista(d.olikhet) || [];
+            const tol = d.tol || 0.01;
+            const lika = (a, b) => a === b || Math.abs(a - b) <= Math.max(Math.abs(b) * tol, 0.001);
+            const ensidigVand = (v, e) =>
+                (isFinite(v.hi) && !isFinite(v.lo) && !isFinite(e.hi) && lika(v.hi, e.lo)) ||
+                (isFinite(v.lo) && !isFinite(v.hi) && !isFinite(e.lo) && lika(v.lo, e.hi));
+            const RANG = { correct: 0, tecken: 1, riktning: 2, wrong: 3 };
+            const kvar = facit.slice();
+            let ifyllda = 0;
+            const domar = falt.map(f => {
+                if (!f.trim()) return null;
+                ifyllda++;
+                const lista = tolkaVillkorLista(f);
+                if (!lista) return 'unparseable';
+                let dom = 'correct';
+                for (const v of lista) {
+                    const i = kvar.findIndex(e => lika(v.lo, e.lo) && lika(v.hi, e.hi) && v.loIn === e.loIn && v.hiIn === e.hiIn);
+                    let denna;
+                    if (i >= 0) { kvar.splice(i, 1); denna = 'correct'; }
+                    else if (kvar.some(e => lika(v.lo, e.lo) && lika(v.hi, e.hi))) denna = 'tecken';
+                    else if (kvar.some(e => ensidigVand(v, e))) denna = 'riktning';
+                    else denna = 'wrong';
+                    if (RANG[denna] > RANG[dom]) dom = denna;
+                }
+                return dom;
+            });
+            if (!ifyllda) return null;
+            const r = domar.includes('unparseable') ? 'unparseable'
+                : domar.includes('wrong') ? 'wrong'
+                : domar.includes('riktning') ? 'riktning'
+                : domar.includes('tecken') ? 'tecken'
+                : kvar.length ? 'ofullstandig' : 'correct';
+            return { r, falt: domar };
+        }
         // Med svarsfält per deluppgift är frågans gamla instruktion ("Ange
         // tiden (b) som ditt numeriska svar …") överflödig. Meningen tas
         // bort ur kursivraden; övrigt där ("Räkna med g = …") står kvar.
@@ -2753,6 +2841,8 @@
             { label: '⁻', insert: '⁻' },
             { label: 'π', insert: 'π' },
             { label: '√', insert: '√' },
+            { label: '≤', insert: '≤' },
+            { label: '≥', insert: '≥' },
             { label: '°', insert: '°' },
             { label: 'Δ', insert: 'Δ' },
         ];
@@ -2852,11 +2942,11 @@
             const delar = !isMC && Array.isArray(uppgift.delsvar) && uppgift.delsvar.length ? uppgift.delsvar : null;
             // En deluppgift med flera lösningar (values) har en lista med fält,
             // ett från början; övriga deluppgifter har ett fält var.
-            const [delSvar, setDelSvar] = useState(() => delar ? delar.map(d => Array.isArray(d.values) ? [''] : '') : []);
+            const [delSvar, setDelSvar] = useState(() => delar ? delar.map(d => Array.isArray(d.values) || d.olikhet ? [''] : '') : []);
             const [delFb, setDelFb] = useState(() => delar ? delar.map(() => null) : []);
             const delRefs = useRef({});
             const aktivDel = useRef({ i: 0, j: 0 });
-            const delarRattas = !!delar && delar.some(d => typeof d.value === 'number' || Array.isArray(d.values));
+            const delarRattas = !!delar && delar.some(d => typeof d.value === 'number' || Array.isArray(d.values) || d.olikhet);
             const fraga = useMemo(() => delar ? utanSvarsinstruktion(uppgift.question) : uppgift.question,
                 [uppgift.question, !!delar]);
             // Flerval utan svarsrad i lösningen: visa det rätta alternativet
@@ -2874,6 +2964,7 @@
                 if (delar) {
                     setDelFb(delar.map((d, i) => {
                         if (Array.isArray(d.values)) return checkDelsvarMangd(delSvar[i], d);
+                        if (d.olikhet) return checkOlikhet(delSvar[i], d);
                         const ordDel = typeof d.value !== 'number' && !Array.isArray(d.values);
                         if (!ordDel && !delSvar[i].trim()) return null;   // tomt fält: ingen dom
                         const r = checkDelsvar(delSvar[i], d);
@@ -2992,15 +3083,17 @@
                                 </div>
                                 {delar.map((d, i) => {
                                     const forst = i === 0 || delar[i - 1].del !== d.del;
-                                    const ord = typeof d.value !== 'number' && !Array.isArray(d.values);
-                                    const flera = Array.isArray(d.values);
+                                    const ord = typeof d.value !== 'number' && !Array.isArray(d.values) && !d.olikhet;
+                                    const flera = Array.isArray(d.values) || !!d.olikhet;
                                     const fb = flera ? (delFb[i] && delFb[i].r) : delFb[i];
                                     const klass = (dom) => 'lab-ovning-answer-input'
                                         + (dom === 'correct' ? ' is-correct' : '')
-                                        + (dom === 'wrong' || dom === 'unparseable' && flera ? ' is-wrong' : '');
+                                        + (dom === 'wrong' || dom === 'tecken' || dom === 'riktning' || dom === 'unparseable' && flera ? ' is-wrong' : '');
                                     const etikettText = d.etikett ? ', ' + d.etikett.replace(/\$/g, '') : '';
                                     const falt = (j, varde, dom) => (
-                                        <div key={j} className="lab-ovning-input-wrap">
+                                        <React.Fragment key={j}>
+                                        {d.olikhet && j > 0 && <span className="lab-ovning-falt-eller">eller</span>}
+                                        <div className="lab-ovning-input-wrap">
                                             <input
                                                 type="text"
                                                 ref={(el) => { delRefs.current[i + ':' + j] = el; }}
@@ -3008,7 +3101,7 @@
                                                 value={varde}
                                                 placeholder={ord ? 'Svara i ord' : ''}
                                                 style={!ord && d.unit ? { paddingRight: 24 + d.unit.length * 8 } : undefined}
-                                                aria-label={I18N.t('Svar på') + ' ' + d.del + etikettText + (flera ? ', ' + I18N.t('lösning') + ' ' + (j + 1) : '')}
+                                                aria-label={(d.del ? I18N.t('Svar på') + ' ' + d.del : I18N.t('Svar')) + etikettText + (flera ? ', ' + I18N.t(d.olikhet ? 'villkor' : 'lösning') + ' ' + (j + 1) : '')}
                                                 onFocus={() => { aktivDel.current = { i, j }; }}
                                                 onChange={(e) => andraDel(i, e.target.value, j)}
                                                 onKeyDown={(e) => {
@@ -3021,15 +3114,18 @@
                                             {flera && j > 0 && (
                                                 <button type="button" className="lab-ovning-falt-bort"
                                                     onClick={() => taBortFalt(i, j)}
-                                                    title="Ta bort lösningen" aria-label={I18N.t('Ta bort lösning') + ' ' + (j + 1)}>×</button>
+                                                    title="Ta bort rutan" aria-label={I18N.t('Ta bort ruta') + ' ' + (j + 1)}>×</button>
                                             )}
                                         </div>
+                                        </React.Fragment>
                                     );
                                     return (
                                         <div key={i} className={'lab-ovning-del' + (forst ? ' is-forst' : '')}>
-                                            <span className="lab-ovning-del-bokstav" aria-hidden={!forst}>
-                                                {forst ? d.del + ')' : ''}
-                                            </span>
+                                            {d.del && (
+                                                <span className="lab-ovning-del-bokstav" aria-hidden={!forst}>
+                                                    {forst ? d.del + ')' : ''}
+                                                </span>
+                                            )}
                                             <div className="lab-ovning-del-falt">
                                                 {d.etikett && (
                                                     <span className="lab-ovning-del-etikett"><InlineMatte text={d.etikett} /></span>
@@ -3039,14 +3135,19 @@
                                                     : falt(0, delSvar[i], fb)}
                                                 {flera && delSvar[i].length < MAX_LOSNINGSFALT && (
                                                     <button type="button" className="lab-ovning-falt-till"
-                                                        onClick={() => laggTillFalt(i)}>+ Lägg till en lösning</button>
+                                                        onClick={() => laggTillFalt(i)}>{d.olikhet ? '+ Lägg till ett villkor' : '+ Lägg till en lösning'}</button>
                                                 )}
                                                 {fb === 'correct' && <span className="lab-ovning-feedback is-correct">✓ Rätt!</span>}
                                                 {fb === 'wrong' && <span className="lab-ovning-feedback is-wrong">✗ Inte riktigt, försök igen</span>}
-                                                {fb === 'ofullstandig' && <span className="lab-ovning-feedback is-wrong">Det du skrivit stämmer, men alla lösningar är inte med</span>}
+                                                {fb === 'ofullstandig' && <span className="lab-ovning-feedback is-wrong">{d.olikhet
+                                                    ? 'Det du skrivit stämmer, men lösningen är inte komplett. Finns det fler delar av tallinjen där olikheten gäller?'
+                                                    : 'Det du skrivit stämmer, men alla lösningar är inte med'}</span>}
+                                                {fb === 'tecken' && <span className="lab-ovning-feedback is-wrong">Gränsen och riktningen stämmer, men ingår gränsen själv? Sätt in den och se om olikheten gäller.</span>}
+                                                {fb === 'riktning' && <span className="lab-ovning-feedback is-wrong">Gränsen stämmer, men åt fel håll. Pröva ett tal på var sida om gränsen.</span>}
                                                 {fb === 'unparseable' && !ord && (
                                                     <span className="lab-ovning-feedback is-wrong">
-                                                        {flera ? 'Skriv en lösning som ett tal i varje ruta' : 'Kunde inte tolka svaret som ett tal'}
+                                                        {d.olikhet ? 'Skriv ett villkor per ruta, till exempel x > 3 eller 1 < x ≤ 4'
+                                                            : flera ? 'Skriv en lösning som ett tal i varje ruta' : 'Kunde inte tolka svaret som ett tal'}
                                                     </span>
                                                 )}
                                                 {fb === 'ord' && (

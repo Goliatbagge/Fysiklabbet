@@ -1,0 +1,37 @@
+03:15:02  [idag] === Nyhetsjobb: start (2026-11-06) ===
+03:15:07  [idag] Dagens nyhet finns (förberedd i går).
+03:15:07  [idag] Startar Claude Code (headless, modell opus, nyckel)...
+03:20:03  [imorgon] === Nyhetsjobb: start (2026-11-06) ===
+03:20:03  [imorgon] En körning pågår redan (lås 5 min gammalt). Avslutar.
+03:28:21  [idag] Artikeln för 7 november är klar och committad på grenen `nyhetsjobb` (commit `dde7d160`). Den är inte pushad och inget mejl är skickat.
+03:28:21  [idag] 
+03:28:21  [idag] **Artikeln:** "En fisk i stimmet tycks följa bara en granne i taget" (Biofysik, id `2026-11-07-fisken-som-foljer-en-granne`). Den bygger på Kang m.fl., *PRX Life* 4, 043007, publicerad 29 oktober och kollegialt granskad. Jag läste hela studien, som är öppet tillgänglig (CC BY). Försöket: en levande purpurtetra simmar i en skål tillsammans med fyra fiskar som projiceras på skålens vägg. Den riktiga fisken betedde sig som om den bara följde den granne som just då påverkade den mest. Artikeln har inget fält för datum och klockslag utöver datumet, så datumgrinden döljer den till midnatt.
+03:28:21  [idag] 
+03:28:21  [idag] - **Område:** grannen 6 november är materialfysik, så det blir ingen krock.
+03:28:21  [idag] - **Bilder:** huvudbilden är ett foto av purpurtetror från Wikimedia Commons (CC BY-SA 3.0). I brödtexten ligger ett utsnitt ur studiens figur 1 som visar skålen ovanifrån (CC BY 4.0).
+03:28:21  [idag] - **Ordlistan:** två nya begrepp, självorganisering och kollektiv rörelse. Båda länkas i artikeln.
+03:28:21  [idag] - **Utgivaren:** första utslaget var RÄTTA FÖRST. Rubriken och ingressen påstod för mycket, ett simuleringsresultat stod som om det vore mätt, ett citat var felöversatt, en källa saknades och två små sifferfel fanns. Allt är rättat och omgranskningen blev GODKÄND.
+03:28:21  [idag] - **Kontroller:** `verify-begrepp`, `verify-navigation` och `verify-sitemap` är gröna. `verify-sprak` ger bara fel i en äldre artikel, inget i den nya texten. Skärmdumpen visar att artikeln, bilderna och ordlänkarna renderas rätt.
+03:28:21  [idag] - **Loggarna:** `publicerat.md`, `ko.md` och `granskningar.md` är uppdaterade.
+03:28:21  [idag] 
+03:28:21  [idag] **Bortvalt och lagt i kön:**
+03:28:21  [idag] - Molnet över vulkanen Arsia Mons på Mars. Förtrycket varnar för kända fel som rättats i den låsta slutversionen, och astronomi kördes redan 1 och 3 november.
+03:28:21  [idag] - Färgseende på skärmar. Optica-sidan spärrade med en robotkontroll.
+03:28:21  [idag] - Laserplasmaacceleratorn och bläckfisken.
+03:28:21  [idag] 
+03:28:21  [idag] Hula-hoop-uppslaget är fortfarande märkt som brevteaser.
+03:28:21  [idag] 
+03:28:21  [idag] Tre saker att känna till:
+03:28:21  [idag] - **Ändrade filer kvar i arbetskatalogen:** byggskriptet skrev om några hundra genererade filer med andra radslut, utan ändrat innehåll. De ligger utanför committen och syns som ändrade, men worktreen återställs ändå före nästa körning.
+03:28:21  [idag] - **Servern på port 8000** serverar huvudkatalogen och inte den här worktreen. Jag startade därför en tillfällig egen server för skärmdumpen och stängde den efteråt.
+03:28:21  [idag] - **En process på port 8011 avslutades:** när jag letade efter en ledig port avslutade jag process 11464, som jag tror var min egen tillfälliga server. En annan server på samma port (process 32364) lämnade jag orörd.
+03:28:22  [idag] Claude avslutade med kod 0
+03:28:22  [idag] error: cannot pull with rebase: You have unstaged changes.
+03:28:22  [idag] error: Please commit or stash them.
+03:28:27  [idag] Pushat till main.
+03:28:27  [idag] Artikel 2026-11-07 pushad: 2026-11-07-fisken-som-foljer-en-granne
+03:29:57  [idag] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+03:30:21  [idag] Skickat. Granskningsmejlet för morgondagens artikel ("En fisk i stimmet tycks följa bara en granne i taget", biofysik, 5 min) är på väg till [ägaren].
+03:30:22  [idag] Claude avslutade med kod 0
+03:30:22  [idag] Mejlet till ägaren är skickat.
+03:30:22  [idag] === Nyhetsjobb: slut ===

@@ -1238,10 +1238,12 @@
                 <span style={{ padding: '2px 3px 0', borderTop: '2px solid var(--lab-ink, #1f2530)', alignSelf: 'stretch', textAlign: 'center' }}>{bot}</span>
             </span>
         );
+        // Etiketten får inte bredda sin kolumn: då hamnar bråket mitt i en bred ruta och luften kring = växer.
+        const LBL = { width: 0, display: 'flex', justifyContent: 'center', whiteSpace: 'nowrap' };
         const Formel = ({ a, b }) => (
-            <div style={{ display: 'grid', gridTemplateColumns: 'auto auto auto', columnGap: 12, rowGap: 2, alignItems: 'center', justifyItems: 'center' }}>
-                <span className="flbl">{a.lbl}</span><span />
-                <span className="flbl">{b.lbl}</span>
+            <div style={{ display: 'grid', gridTemplateColumns: 'auto auto auto', columnGap: 7, rowGap: 2, alignItems: 'center', justifyItems: 'center' }}>
+                <span className="flbl" style={LBL}>{a.lbl}</span><span />
+                <span className="flbl" style={LBL}>{b.lbl}</span>
                 <Brak top={a.top} bot={a.bot} />
                 <span className="fnum" style={{ fontSize: 25 }}>=</span>
                 <Brak top={b.top} bot={b.bot} />

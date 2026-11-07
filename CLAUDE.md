@@ -2954,6 +2954,10 @@ du ändrar):
      }
    }
    ```
+   Samma sak för en HTML-/canvasscen i ett `div.absolute.inset-0`
+   (referens: `fysik1-faradays-bur.html`, `fysik1-influens.html`) och en
+   `.scene-stage` som blir absolut i fullskärm (`fysik2-dubbelkon-app.html`,
+   `fysik2-gaffelbalans-app.html`).
    Renderaren måste följa behållarens storlek (`ResizeObserver`), och
    kamerans synfält ska räknas om efter proportionen så att hela försöket
    ryms och fyller bredden på en stående skärm.

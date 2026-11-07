@@ -1285,7 +1285,10 @@ body.lab-sim .scene-wrap:-webkit-full-screen .scene-canvas > canvas {
        av HTML i ett `div.absolute.inset-0` som fyller ramen. Där är
        ALLA barn ur flödet, så auto-höjd kollapsar ramen till 0 px och
        hela simuleringen försvinner (fysik1-faradays-bur,
-       fysik1-influens). De behåller sin deklarerade höjd. */
+       fysik1-influens). De behåller sin deklarerade höjd här, men
+       lägger själva scenen i flödet med egen höjd under 600 px (egen
+       regel i respektive sida, rättat 2026-11-07), annars hamnar
+       verktygen över bilden. */
     body.lab-sim :is(.scene-wrap, .canvas-wrap, .wave-stage):not(:has(> .inset-0)) {
         height: auto !important;
         min-height: 0 !important;

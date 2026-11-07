@@ -83,6 +83,11 @@ nederkanten och `fysiklabbet.se` under.
 node .claude/some/nyhet-till-reel.js --id <artikel-id> --ut .shots/<artikel-id>-reel.mp4 --langd 8
 ```
 
+- Filmen ritas bildruta för bildruta (tar ett par minuter) och behöver
+  ingen dev-server. Finns artikeln bara på main: ta ut filerna med
+  `git show origin/main:data/nyheter.js > <tmp>/nyheter.js` (och bilden
+  likadant) och ange `--nyheter <tmp>/nyheter.js --bild <tmp>/bild.jpg`
+  i stället för att bygga sidan för hand.
 - Avslutas skriptet med `ANVÄND STILLBILD` (kod 6) får bilden inte
   bearbetas (licens med NoDerivatives) eller saknas. Posta då
   stillbilden enligt steg 3 och skriv orsaken i loggraden.

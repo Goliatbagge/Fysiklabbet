@@ -11,6 +11,30 @@ Format:
 - Teaser: <vad som utlovades inför nästa vecka>
 ```
 
+## 2026-11-08 — "En fisk som följer en granne, och satelliter just nu"
+- Status: UTKAST skrivet lördag 2026-11-07 (molnsession, före 08.00). Tänkt utskick söndag 2026-11-08
+  kl 06.00 svensk tid. **Kampanjen är INTE upplagd i EmailOctopus** (molnet saknar Chrome): kör
+  `/brev-till-octopus` lokalt, testskicka och schemalägg (tidszonen default:ar till London). Bilderna i
+  nyheter/brev/ pushades till main. Förhandsvisningen (JPEG) skickades till användaren.
+- Brevperiod 2026-11-01 till 2026-11-07: sju artiklar, alla länkade. Söndagens artikel (11-08, sten som
+  spricker på längden) sparas till nästa brev. `verify-nyhetsbrev.js` och `verify-sprak.js` utan fel
+  (längdvarning ~690 ord).
+- Nyheter: 2026-11-07-fisken-som-foljer-en-granne (hjälte), 2026-11-03-stjarnan-som-kanner-halet-snurra
+  (förra brevets teaser, infriad) och 2026-11-05-ett-sonderfall-pa-tio-miljarder (miniatyrer). Läs även:
+  vakuumparen (11-02), glaskulan (11-04), de två ljuspulserna (11-06), Rubinobservatoriet (11-01).
+- Nytt på sajten: Satelliterna just nu (planerat.md, skärmdump), handen på aluminium och plast +
+  smältracet (skärmdump), pipor som låter, kort och gott (pulser och vågor, stående vågor, pennprovet).
+  Utelämnat: Sigbjørn-simuleringar, norska, Labbfolket-filmen om plåten, Repet runt jorden, GeoGebra-
+  filmerna i Ma 1c 4.9, textstorleksglidaren, interna ändringar.
+- Bilder: nyheter/brev/2026-11-08-{satelliter,handen-pa-metall,fisk-hero,s301-thumb,lhcb-thumb}.jpg.
+  Skärmdumparna tagna i Chromium med lokala React/Babel/three/satellite.js (CDN spärrade; satellitbilden
+  från reservkopian av banelementen, Tailwind saknades så bara scenen beskuren).
+- Veckans tips: utelämnat (brevet redan långt). tips.md orörd.
+- Teaser: hula-hoopens fysik ([BREVTEASER] överst i ko.md), kontrollerat mot data/nyheter.js och
+  publicerat.md, ej publicerat. Teasat 2026-11-08. OBS: märkningen i ko.md och bockningen av
+  Satelliter-punkten i planerat.md gjordes inte (uppdraget tillät bara utkast, logg och bilder i commit);
+  bocka av Satelliter just nu i planerat.md.
+
 ## 2026-11-01 — "Videolösningar till nationella proven, och Schrödingers glömda sidor"
 - Omskrivet 2026-10-31 på användarens begäran: inga Sigbjørn-simuleringar, ingen Satelliter just nu
   (sparas till 2026-11-08 med bild, se planerat.md). I stället Labbfolket-filmerna, Ma 3b, Fritt fall

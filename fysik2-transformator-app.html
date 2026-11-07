@@ -1226,20 +1226,41 @@
                 <span style={{ fontSize: size, padding: '2px 6px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bot}</span>
             </div>
         );
+        // Formelkortet (prov 2026-11-07): ett kort ord ovanför varje bråk i stället för en
+        // etikett på varje variabel, så att bråkstrecken blir smala. Index 1 (primär) i bläck,
+        // index 2 (sekundär) i lila, samma färger som i scenen.
+        const Sym = ({ b, i }) => (
+            <span style={{ color: i === 2 ? COL.sek : COL.prim, whiteSpace: 'nowrap' }}><em>{b}</em><span style={{ fontSize: '0.6em', verticalAlign: '-0.28em', marginLeft: '0.04em' }}>{i}</span></span>
+        );
+        const Brak = ({ top, bot }) => (
+            <span className="inline-flex flex-col items-center fnum" style={{ lineHeight: 1.12, fontSize: 25 }}>
+                <span style={{ padding: '0 3px 2px' }}>{top}</span>
+                <span style={{ padding: '2px 3px 0', borderTop: '2px solid var(--lab-ink, #1f2530)', alignSelf: 'stretch', textAlign: 'center' }}>{bot}</span>
+            </span>
+        );
+        const Formel = ({ a, b }) => (
+            <div style={{ display: 'grid', gridTemplateColumns: 'auto auto auto', columnGap: 12, rowGap: 2, alignItems: 'center', justifyItems: 'center' }}>
+                <span className="flbl">{a.lbl}</span><span />
+                <span className="flbl">{b.lbl}</span>
+                <Brak top={a.top} bot={a.bot} />
+                <span className="fnum" style={{ fontSize: 25 }}>=</span>
+                <Brak top={b.top} bot={b.bot} />
+            </div>
+        );
         const FormulaCard = () => (
-            <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-10 gap-y-4" style={{ color: 'var(--lab-ink)' }}>
-                <div className="flex items-center gap-x-3">
-                    <LFrac topLbl="Varv i primärspolen" top={<span><em>N</em>₁</span>} botLbl="Varv i sekundärspolen" bot={<span><em>N</em>₂</span>} />
-                    <span className="fnum">=</span>
-                    <LFrac topLbl="Spänning primär" top={<span><em>U</em>₁</span>} botLbl="Spänning sekundär" bot={<span><em>U</em>₂</span>} />
+            <div className="glass-card rounded-xl p-4 mb-6" style={{ color: 'var(--lab-ink)' }}>
+                <div className="flex flex-wrap items-center gap-x-12 gap-y-4">
+                    <Formel a={{ lbl: 'varv', top: <Sym b="N" i={1} />, bot: <Sym b="N" i={2} /> }}
+                            b={{ lbl: 'spänning', top: <Sym b="U" i={1} />, bot: <Sym b="U" i={2} /> }} />
+                    <Formel a={{ lbl: 'varv', top: <Sym b="N" i={1} />, bot: <Sym b="N" i={2} /> }}
+                            b={{ lbl: 'ström', top: <Sym b="I" i={2} />, bot: <Sym b="I" i={1} /> }} />
+                    <div style={{ fontSize: 14, lineHeight: 1.5 }}>
+                        <div><span style={{ color: COL.prim, fontWeight: 700 }}>1</span> = primärspolen</div>
+                        <div><span style={{ color: COL.sek, fontWeight: 700 }}>2</span> = sekundärspolen</div>
+                    </div>
                 </div>
-                <div className="flex items-center gap-x-3">
-                    <LFrac topLbl="Varv i primärspolen" top={<span><em>N</em>₁</span>} botLbl="Varv i sekundärspolen" bot={<span><em>N</em>₂</span>} />
-                    <span className="fnum">=</span>
-                    <LFrac topLbl="Ström sekundär" top={<span><em>I</em>₂</span>} botLbl="Ström primär" bot={<span><em>I</em>₁</span>} />
-                </div>
-                <div style={{ color: 'var(--lab-ink-muted)', fontSize: 13, maxWidth: 230 }}>
-                    Gäller en ideal transformator, utan energiförluster. Strömkvoten är omvänd.
+                <div className="mt-3" style={{ color: 'var(--lab-ink-muted)', fontSize: 13 }}>
+                    Gäller en ideal transformator, utan energiförluster. Lägg märke till att strömkvoten är omvänd.
                 </div>
             </div>
         );

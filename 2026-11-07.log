@@ -1,0 +1,32 @@
+03:15:01  [idag] === Nyhetsjobb: start (2026-11-07) ===
+03:15:03  [idag] Dagens nyhet finns (förberedd i går).
+03:15:03  [idag] Startar Claude Code (headless, modell opus, nyckel)...
+03:20:02  [imorgon] === Nyhetsjobb: start (2026-11-07) ===
+03:20:02  [imorgon] En körning pågår redan (lås 5 min gammalt). Avslutar.
+03:26:29  [idag] Artikeln för 2026-11-08 är skriven, godkänd av utgivaren och committad på `nyhetsjobb` (`534379c9`). Jag har inte pushat och inte skickat något mejl.
+03:26:29  [idag] 
+03:26:29  [idag] **Artikeln:** "Därför spricker sten på längden när den trycks ihop" (`2026-11-08-spricka-pa-langden`), kategori Mekanik. Grannen 2026-11-07 är biofysik, och senaste mekanikartikeln var 2026-11-04.
+03:26:29  [idag] - **Nyheten:** Physics Magazine skrev om den 6 november. Studien är Khodadad m.fl. i Physical Review Letters 137, 196101, kollegialt granskad. Tidskriftsversionen är låst, så jag läste hela fulltexten i förtrycket arXiv:2609.22558, som är märkt "To appear in PRL".
+03:26:29  [idag] - **Innehåll:** Forskarna förklarar varför spröda material spricker längs tryckriktningen. Plattorna hindrar provkroppen från att bli tjockare vid ändarna, och då uppstår dragning inne i kroppen. Artikeln säger tydligt att detta är en modell som jämförs med äldre mätningar: inga nya försök gjordes, och modellen anpassas med en faktor per material.
+03:26:29  [idag] - **Bilder:** Huvudbilden är ett foto av en sönderpressad betongcylinder (public domain, Wikimedia Commons). I brödtexten ligger ett utsnitt ur studiens figur 2 (CC BY 4.0).
+03:26:29  [idag] - **Ordlistan:** fyra nya begrepp, Poissons tal, mekanisk spänning, hållfasthet och finita elementmetoden.
+03:26:29  [idag] 
+03:26:29  [idag] **Utgivaren** gav först RÄTTA FÖRST. Det viktigaste felet var mitt eget: jag hade lagt till en förklaring med Newtons första lag som inte kom från studien, och den hade fel tecken. Det som verkar genom mittsnittet är tryck, inte dragning, så jag strök stycket och skrev om lärarfrågan. Övriga punkter gällde förbehåll och tillskrivning, till exempel att modellen är tvådimensionell och att "någon procent" bara gäller upp till Poissons tal omkring 0,3. Allt är rättat, och omgranskningen blev GODKÄND.
+03:26:29  [idag] 
+03:26:29  [idag] **Kontroller:** Byggskriptet, `verify-navigation.js`, `verify-begrepp.js` och `verify-sitemap.js` är gröna. `verify-sprak.js` ger tre fel av typen "X gånger lättare", men de ligger i den äldre artikeln 2026-11-04 och jag har inte rört dem. Jag tog ingen skärmdump av sidan, eftersom dev-servern visar huvudkatalogen och inte den här arbetskatalogen.
+03:26:29  [idag] 
+03:26:29  [idag] **Kön och teasern:**
+03:26:29  [idag] - Två nya uppslag ligger i `ko.md`. Det ena är rekordkylan på 10 pikokelvin på Kinas rymdstation, som jag inte kunde välja eftersom Science-artikeln var spärrad och jag inte hittade något förtryck. Det andra är platta speglar för ultraviolett ljus av kiselskivor.
+03:26:29  [idag] - Brevteasern om hula-hoopen är orörd och fryst till efter brevet 2026-11-08.
+03:26:29  [idag] 
+03:26:29  [idag] Byggskriptet skrev om hundratals delningssidor och några `i18n`-filer, men bara radsluten skiljer sig. De ligger kvar oincheckade och utanför committen. Det gör också den ospårade mappen `.claude/nyheter/logg/`, som fanns redan innan.
+03:26:30  [idag] Claude avslutade med kod 0
+03:26:30  [idag] error: cannot pull with rebase: You have unstaged changes.
+03:26:30  [idag] error: Please commit or stash them.
+03:26:35  [idag] Pushat till main.
+03:26:35  [idag] Artikel 2026-11-08 pushad: 2026-11-08-spricka-pa-langden
+03:28:05  [idag] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+03:28:29  [idag] Mejlet är skickat till [ägaren] med ämnet "[Nyhet 2026-11-08] Att granska: Därför spricker sten på längden när den trycks ihop".
+03:28:30  [idag] Claude avslutade med kod 0
+03:28:30  [idag] Mejlet till ägaren är skickat.
+03:28:30  [idag] === Nyhetsjobb: slut ===

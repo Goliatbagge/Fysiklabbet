@@ -162,6 +162,21 @@ sektionen Veckans fysik, inte direkt under anslaget.
    - **något som rör sajten men inte är en uppdatering eller nyhet**:
      en prenumerantmilstolpe och liknande (bara om den är sann; kolla
      antalet i EmailOctopus eller fråga).
+   **Spektakulärt på himlen går FÖRST** (uttryckligt önskemål 2026-11-07):
+   är något ovanligt synligt på himlen under brevets vecka, och då menas
+   ett riktigt skådespel, ska det nämnas i anslaget före andra krokar. Det
+   kan vara ett stort meteorregn nära sitt maximum (Perseiderna i augusti,
+   Geminiderna i december), en sol- eller månförmörkelse som syns från
+   Sverige, norrsken långt söderut efter en kraftig solstorm, en ljusstark
+   komet eller en tydlig planetkonjunktion. Kontrollera datum, klockslag och
+   var på himlen det syns mot en tillförlitlig källa (till exempel
+   Astronomisk Ungdom, Populär Astronomi, SMHI eller NASA). Ange gärna när
+   och åt vilket håll man ska titta, och förklara fysiken kort och rätt:
+   ett meteorregn uppstår när jorden passerar ett stråk av gruskorn som en
+   komet lämnat efter sig, inte ett asteroidbälte. Det här gäller BARA när
+   något verkligen sticker ut. Brevet är inget astronomibrev, så de flesta
+   veckor har ingen sådan krok, och vanliga fenomen (fullmåne, en svag
+   meteorsvärm, en planet som "syns bra") räcker inte.
    Kommer du inte på något: skriv helt enkelt att det är månadens första
    nyhetsbrev ("Det här är oktobers första nyhetsbrev …"). Anslagets sista
    mening leder sedan som vanligt in i sajtnyheterna.

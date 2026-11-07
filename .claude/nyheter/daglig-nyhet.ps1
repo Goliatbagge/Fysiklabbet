@@ -436,6 +436,40 @@ Then git add ONLY the news files and git commit on the current branch. Do NOT pu
 function Prompt-Mejl([string]$Datum, [string]$Id, [string]$Typ) {
     $lank   = "$Bas/nyheter.html?forhand=$Id"
     $publik = "$Bas/nyheter.html?id=$Id"
+    if ($Typ -eq 'granska') { $maste = $lank } else { $maste = $publik }
+
+    # Mejlet byggs i första hand av granskningsmejl.js, så att länken alltid
+    # finns med. När sessionen skrev mejlet fritt föll förhandslänken bort
+    # (mejlen för 2026-11-07 och 2026-11-08 hade inget att klicka på).
+    $mejlDir = Join-Path $LogDir ('mejl-{0}' -f $Datum)
+    $bygg = Join-Path $Repo '.claude\nyheter\granskningsmejl.js'
+    $node = (Get-Command node -ErrorAction SilentlyContinue | Select-Object -First 1).Source
+    if (-not $node) { $node = Join-Path $env:ProgramFiles 'nodejs\node.exe' }
+    & $node $bygg $Id $Typ $mejlDir 2>&1 | ForEach-Object { Log $_ }
+    $htmlFil = Join-Path $mejlDir 'mejl.html'
+    $txtFil  = Join-Path $mejlDir 'mejl.txt'
+    $amneFil = Join-Path $mejlDir 'amne.txt'
+    $mallOk = ($LASTEXITCODE -eq 0) -and (Test-Path $htmlFil) -and (Test-Path $txtFil) -and (Test-Path $amneFil)
+    if ($mallOk) {
+        $mallOk = ([IO.File]::ReadAllText($htmlFil).Contains($maste)) -and ([IO.File]::ReadAllText($txtFil).Contains($maste))
+    }
+    if ($mallOk) {
+        Log "Mejlet byggt av mallen ($mejlDir)."
+        return @"
+$GmailKoll
+
+Send ONE email with the Gmail tool send_message to $Agare (and nobody else). The email is already written:
+- Subject: the single line in $amneFil, exactly as it stands.
+- htmlBody: the content of $htmlFil.
+- Plain-text body: the content of $txtFil.
+
+Both bodies contain the placeholder [[UTGIVARE]]. Replace it (in both bodies, with the same text) by ONE or TWO short Swedish sentences that summarise what the utgivare agent asked to be corrected for the article with id "$Id", read from .claude/nyheter/granskningar.md (if nothing had to be corrected, write "Inga rättelser behövdes."). Plain, friendly Swedish; no emojis; no dashes used as pause markers; no formulas in dollar notation; in htmlBody escape & < > as HTML entities.
+
+Apart from that replacement, send the bodies EXACTLY as they are in the files: do not reword, shorten, reorder or restyle anything, and above all keep the link $maste in both bodies, character for character. Before sending, check that both bodies contain $maste, that neither contains [[UTGIVARE]], and that both end with the line FL-JOBB FL-NYHET:$Datum. Do not change any files and do not commit anything. When the email is sent, print the line MEJL SKICKAT.
+"@
+    }
+    Log 'VARNING: mallen för mejlet kunde inte byggas, sessionen skriver mejlet själv.'
+
     if ($Typ -eq 'granska') {
         $amne = "[Nyhet $Datum] Att granska: <title>"
         $uppdrag = @"

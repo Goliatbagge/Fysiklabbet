@@ -5,21 +5,21 @@
     <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inducerad ström och Lenz lag — Fysiklabbet</title>
-    <meta name="description" content="Ta tag i stavmagneten och närma dig eller avlägsna dig från slingan — galvanometern ger utslag åt olika håll, och strömmen får enligt Lenz lag alltid en riktning som motverkar orsaken. Jämför magnetens fält med slingans inducerade fält, byt pol och se kraften som bromsar magneten.">
+    <meta name="description" content="För en stavmagnet mot, genom och bort från en slinga eller en spole och se strömmen induceras. Galvanometern ger utslag åt olika håll, och strömmen får enligt Lenz lag alltid en riktning som motverkar orsaken. Välj 2D eller 3D, visa elektronerna, magnetens fältlinjer och kraften som bromsar magneten, och följ den inducerade spänningen i en graf.">
     <link rel="canonical" href="https://fysiklabbet.se/fysik2-lenz-lag-app.html">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Fysiklabbet">
     <meta property="og:title" content="Inducerad ström och Lenz lag — Fysik nivå 2">
-    <meta property="og:description" content="Ta tag i stavmagneten och närma dig eller avlägsna dig från slingan — galvanometern ger utslag åt olika håll, och strömmen får enligt Lenz lag alltid en riktning som motverkar orsaken. Jämför magnetens fält med slingans inducerade fält, byt pol och se kraften som bromsar magneten.">
+    <meta property="og:description" content="För en stavmagnet mot, genom och bort från en slinga eller en spole och se strömmen induceras. Galvanometern ger utslag åt olika håll, och strömmen får enligt Lenz lag alltid en riktning som motverkar orsaken. Välj 2D eller 3D, visa elektronerna, magnetens fältlinjer och kraften som bromsar magneten, och följ den inducerade spänningen i en graf.">
     <meta property="og:url" content="https://fysiklabbet.se/fysik2-lenz-lag-app.html">
     <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Inducerad ström och Lenz lag — Fysik nivå 2">
-    <meta name="twitter:description" content="Ta tag i stavmagneten och närma dig eller avlägsna dig från slingan — galvanometern ger utslag åt olika håll, och strömmen får enligt Lenz lag alltid en riktning som motverkar orsaken. Jämför magnetens fält med slingans inducerade fält, byt pol och se kraften som bromsar magneten.">
+    <meta name="twitter:description" content="För en stavmagnet mot, genom och bort från en slinga eller en spole och se strömmen induceras. Galvanometern ger utslag åt olika håll, och strömmen får enligt Lenz lag alltid en riktning som motverkar orsaken. Välj 2D eller 3D, visa elektronerna, magnetens fältlinjer och kraften som bromsar magneten, och följ den inducerade spänningen i en graf.">
     <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -33,6 +33,7 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
     <style>
         html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
@@ -48,7 +49,7 @@
 
         .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
                 color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
-        .fnum { color: var(--lab-ink); font-size: 19px; }
+        .fnum { color: var(--lab-ink); font-size: 21px; font-family: 'Instrument Serif', serif; }
 
         .scene-info {
             position: absolute; bottom: 12px; right: 14px; z-index: 5;
@@ -58,6 +59,7 @@
             border-radius: 10px; padding: 7px 12px;
             box-shadow: 0 2px 8px rgba(15,22,32,0.12);
             display: flex; flex-direction: column; gap: 1px; pointer-events: none;
+            min-width: 150px;
         }
         .scene-info .si-lbl { font-size: 10px; letter-spacing: 0.05em;
             text-transform: uppercase; color: var(--lab-ink-muted, #5a6170); font-weight: 600; }
@@ -67,24 +69,33 @@
         .scene-wrap {
             position: relative;
             width: 100%;
-            height: 560px;
+            height: 580px;
             border-radius: 12px;
             overflow: hidden;
             border: 1px solid rgba(15,22,32,0.18);
             box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
             user-select: none;
-            background: #f3eee4;
+            -webkit-user-select: none;
+            background: linear-gradient(180deg, #f7f2e8 0%, #ece3d2 100%);
         }
         .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
             width: 100vw; height: 100vh; border-radius: 0;
         }
         .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+        .tre-mount { position: absolute; inset: 0; touch-action: none; }
+        .tre-mount > canvas { display: block; width: 100%; height: 100%; outline: none; }
+        .tre-mount.grab { cursor: grab; }
+        .tre-mount.dragging { cursor: grabbing; }
+        .tre-mount.pointer { cursor: ew-resize; }
+        @media (max-width: 600px) {
+            body.lab-sim .scene-wrap:not(:fullscreen) .tre-mount { position: relative; inset: auto; height: 440px; }
+        }
 
         .scene-hint {
             position: absolute; bottom: 10px; left: 12px; z-index: 5;
             font-size: 12px; color: #e9edf3;
             background: rgba(15,22,32,0.80); padding: 4px 11px; border-radius: 7px;
-            pointer-events: none; font-weight: 500;
+            pointer-events: none; font-weight: 500; max-width: calc(100% - 210px);
         }
 
         .scene-toggles {
@@ -95,7 +106,7 @@
             border-radius: 10px; padding: 9px 13px;
             display: flex; flex-direction: column; gap: 3px;
             box-shadow: 0 2px 8px rgba(15,22,32,0.12);
-            max-width: 262px;
+            max-width: 240px;
         }
         .scene-toggles .st-title {
             font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
@@ -110,6 +121,7 @@
             width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
         }
         .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin: 0 3px; }
         .scene-toggles .st-actions {
             display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
             padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
@@ -126,6 +138,14 @@
             background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
             border-color: var(--lab-ink, #0f1620);
         }
+        .seg { display: grid; gap: 1px; border-radius: 9px; overflow: hidden;
+               border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+               background: var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .seg button { background: var(--lab-bg, #f3eee4); border: 0; padding: 8px 4px; font-size: 13.5px;
+                      font-weight: 600; color: var(--lab-ink); cursor: pointer; line-height: 1.2; }
+        .seg button .sub { display: block; font-size: 11px; font-weight: 500; color: var(--lab-ink-muted); }
+        .seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+        .seg button.active .sub { color: rgba(243,238,228,0.75); }
 
         details > summary { list-style: none; cursor: pointer; }
         details > summary::-webkit-details-marker { display: none; }
@@ -208,17 +228,43 @@
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
 
-        // ── Glidarintervall ──
+        /* =====================================================================
+           Inducerad ström och Lenz lag, i 2D och 3D.
+           En stavmagnet förs längs slingans (eller spolens) axel, mot den,
+           genom den och bort från den. Ändras flödet induceras en spänning,
+           e = −N · dΦ/dt, och kretsen får strömmen I = e/R.
+
+           Fysiken (gemensam för 2D och 3D):
+           - Stavmagneten är två magnetiska poler (Gilbert-modellen), +Q vid
+             nordändan och −Q vid sydändan, Q = Br · A (remanens gånger
+             magnetens tvärsnittsarea). Flödet från en punktpol genom en
+             cirkelskiva med radien a på avståndet d är
+             Q/2 · (sign d − d/√(d² + a²)). Ligger skivan mellan polerna
+             läggs magnetiseringens flöde Q till (riktat från S mot N), så
+             att flödet blir kontinuerligt när magneten går genom slingan.
+           - Spolen har N varv jämnt fördelade över sin längd, och flödena
+             summeras: Φ = Σ Φ_varv.
+           - e = −(dΦ/dx) · v räknas direkt ur magnetens fart (inget brus
+             från numerisk derivering). Kraften på magneten följer av att
+             effekten e · I tas från rörelsen: F = −(dΦ/dx)² · v/R, alltid
+             motriktad farten, vilket är Lenz lag.
+           Teckenkonvention: x åt höger längs axeln. Positiv ström har sitt
+           eget fält åt +x och går nedåt i slingans framkant (mot betraktaren).
+           ===================================================================== */
+
         const RMIN = 0.25, RMAX = 3.0;       // resistans R (Ω)
         const AVMIN = 5, AVMAX = 80;         // automatisk fart (cm/s)
+        const NMIN = 4, NMAX = 20;           // varvtal i spolen
 
-        // ── Scen-geometri (viewBox-koordinater) ──
-        const VBW = 820, VBH = 540;
-        const LX = 260, LY = 235;            // slingans mitt (px)
-        const LRX = 20, LRY = 95;            // slingans "radier" i sidovyn (px)
-        const XMINM = 350, XMAXM = 700;      // magnetens mittläge (px)
-        const PXCM = 6;                      // px per cm
-        const KPHI = 350;                    // flödeskonstant (skalfaktor för magneten)
+        // ── Magnet och ledare (cm) ──
+        const LM = 10, HM = 1.25;            // magnetens längd och halva höjd
+        const QPOL = 5.9e-4;                 // polstyrka Br · A (Wb)
+        const A_SLINGA = 4.0;                // slingans radie
+        const A_SPOLE = 3.2, L_SPOLE = 8.0;  // spolens radie och längd
+        const XMIN = -13, XMAX = 22;         // magnetens mittläge (cm, relativt ledarens mitt)
+        const AUTO_A = 20, AUTO_B = -11;     // vändlägen för den automatiska rörelsen
+
+        const tr = (t, p) => (window.I18N ? I18N.t(t, p) : t);
 
         const fmt = (num, decimals = 1) => {
             if (!isFinite(num)) return '–';
@@ -226,61 +272,881 @@
             if (parseFloat(s) === 0) return '0';
             return s.replace('.', ',').replace('-', '−');
         };
-        const fmtE = (mV) => {
-            const a = Math.abs(mV);
-            if (a >= 10) return `${fmt(a, 1)} mV`;
-            if (a >= 0.05) return `${fmt(a, 2)} mV`;
-            return '0 mV';
-        };
-        const fmtI = (mA) => {
-            const a = Math.abs(mA);
-            if (a >= 10) return `${fmt(a, 1)} mA`;
-            if (a >= 0.05) return `${fmt(a, 2)} mA`;
-            return '0 mA';
+        const fmtSmart = (a, unit) => {
+            const b = Math.abs(a);
+            if (b < 0.005) return `0 ${unit}`;
+            return `${fmt(a, b >= 100 ? 0 : b >= 10 ? 1 : 2)} ${unit}`;
         };
 
         const COL = {
             ink:    '#1f2530',
             falt:   '#c0392b',   // magnetens fältlinjer (röda, som teorifigurerna)
             v:      '#3f8f4a',   // hastigheten v (grön, som teorifigurerna)
-            ind:    '#7b3fa0',   // inducerad ström (lila, som teorifigurerna)
+            ind:    '#7b3fa0',   // inducerad ström och dess fält (lila, som teorifigurerna)
+            elek:   '#0e7c86',   // elektronerna (blågröna)
             kraft:  '#2563c9',   // kraften på magneten (blå)
             kopparY: '#8a5a28',
             kopparI: '#c87f3a',
             npol:   '#c0392b',
-            spol:   '#cfd4da',
+            spol:   '#f4f2ee',
         };
 
-        const Slider = ({ label, sub, value, min, max, step, onChange, valueText }) => (
-            <div className="mb-3">
-                <div className="flex justify-between items-baseline mb-1">
-                    <label className="text-sm font-bold" style={{ color: 'var(--lab-ink)' }}
-                           dangerouslySetInnerHTML={{ __html: label }} />
-                    <div className="font-mono font-semibold text-sm" style={{ color: 'var(--lab-accent)' }}>{valueText}</div>
-                </div>
-                <input type="range" min={min} max={max} step={step} value={value}
-                       onChange={(e) => onChange(parseFloat(e.target.value))}
-                       className="w-full cursor-pointer" />
-                {sub && <div className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}
-                             dangerouslySetInnerHTML={{ __html: sub }} />}
-            </div>
-        );
+        // ─────────────────────────────────────────────────────────────────
+        // Fysiken
+        // ─────────────────────────────────────────────────────────────────
+        function varvLagen(ledare, N) {
+            if (ledare === 'slinga') return { a: A_SLINGA, xs: [0] };
+            const xs = [];
+            for (let k = 0; k < N; k++) xs.push(-L_SPOLE / 2 + L_SPOLE * (k + 0.5) / N);
+            return { a: A_SPOLE, xs };
+        }
+        // flödet (Wb) åt +x genom ett varv i xt med radien a, magneten i xm
+        function phiVarv(xt, a, xm, nMot) {
+            const s = nMot ? 1 : -1;               // nMot: nordändan åt −x (mot ledaren)
+            const xN = xm - s * LM / 2, xS = xm + s * LM / 2;
+            let phi = 0;
+            const d1 = xt - xN, d2 = xt - xS;
+            phi += QPOL / 2 * (Math.sign(d1) - d1 / Math.hypot(d1, a));
+            phi -= QPOL / 2 * (Math.sign(d2) - d2 / Math.hypot(d2, a));
+            if (Math.abs(xt - xm) < LM / 2) phi += -s * QPOL;
+            return phi;
+        }
+        function phiTot(xm, geo, nMot) {
+            let p = 0;
+            for (const xt of geo.xs) p += phiVarv(xt, geo.a, xm, nMot);
+            return p;
+        }
+        function dPhiDx(xm, geo, nMot) {            // Wb per meter
+            const h = 0.02;
+            return (phiTot(xm + h, geo, nMot) - phiTot(xm - h, geo, nMot)) / (2 * h) * 100;
+        }
 
-        // Kompakt reglage-rad för inställningsrutan uppe till höger i
-        // fullskärm: etikett + värde på en rad, glidaren under (samma
-        // mönster som fysik2-konisk-pendel-app.html).
-        const StSlider = ({ label, value, min, max, step, onChange, valueText }) => (
-            <div className="st-slider">
-                <div className="st-slider-top">
-                    <span dangerouslySetInnerHTML={{ __html: label }} />
-                    <span style={{ whiteSpace: 'nowrap', fontWeight: 600, color: 'var(--lab-ink, #0f1620)' }}>{valueText}</span>
-                </div>
-                <input type="range" min={min} max={max} step={step} value={value}
-                       onChange={(e) => onChange(parseFloat(e.target.value))} />
-            </div>
-        );
+        // Fältlinjer runt magneten, i magnetens ram (nordändan i x = −LM/2).
+        // Spåras en gång i planet genom axeln (övre halvan); 2D speglar dem,
+        // 3D vrider ut dem runt axeln.
+        function faltPol(x, y) {
+            const p = [[-LM / 2, 1], [LM / 2, -1]];
+            let hx = 0, hy = 0;
+            for (const [px, q] of p) {
+                const dx = x - px, dy = y, r = Math.hypot(dx, dy);
+                const r3 = r * r * r + 1e-9;
+                hx += q * dx / r3; hy += q * dy / r3;
+            }
+            return [hx, hy];
+        }
+        function sparaFalt() {
+            const linjer = [];
+            const vinklar = [0, 24, 48, 74, 102, 132];
+            for (const deg of vinklar) {
+                const th = deg * Math.PI / 180;
+                let x = -LM / 2 - 0.3 * Math.cos(th), y = 0.3 * Math.sin(th);
+                const pts = [[x, y]];
+                for (let n = 0; n < 2500; n++) {
+                    let [hx, hy] = faltPol(x, y); let m = Math.hypot(hx, hy);
+                    const h = 0.12;
+                    const mx = x + hx / m * h / 2, my = y + hy / m * h / 2;
+                    [hx, hy] = faltPol(mx, my); m = Math.hypot(hx, hy);
+                    x += hx / m * h; y += hy / m * h;
+                    if (n % 2 === 0) pts.push([x, y]);
+                    if (Math.hypot(x - LM / 2, y) < 0.35) { pts.push([LM / 2, 0]); break; }
+                    if (Math.abs(x) > 34 || Math.abs(y) > 22) break;
+                }
+                linjer.push(pts);
+            }
+            return linjer;
+        }
+        const FALT_LINJER = sparaFalt();
 
-        // Formelkort-hjälpare (samma mönster som fysik2-svangningstid-app)
+        // ─────────────────────────────────────────────────────────────────
+        // 2D-scenen
+        // ─────────────────────────────────────────────────────────────────
+        const VBW = 820, VBH = 540;
+        const PX = 18;                      // px per cm
+        const LX = 330, LY = 300;           // ledarens mitt
+        const GX = 112, GY = 462;           // galvanometern
+        const sx = (x) => LX + x * PX;
+
+        // Punkter längs ledaren: slingan eller spolens skruvlinje. Parametern
+        // u går från 0 till N varv; framsidan (mot betraktaren) är högra halvan.
+        function ledarPunkt(u, ledare, N) {
+            const rx = ledare === 'slinga' ? 22 : 13;
+            const ry = (ledare === 'slinga' ? A_SLINGA : A_SPOLE) * PX;
+            const len = ledare === 'slinga' ? 0 : L_SPOLE * PX;
+            const x0 = LX - len / 2;
+            const phi = 2 * Math.PI * u;
+            const x = x0 + (ledare === 'slinga' ? 0 : len * u / N) + rx * Math.sin(phi);
+            const y = LY - ry * Math.cos(phi);
+            return { x, y, fram: Math.sin(phi) >= 0 };
+        }
+
+        function Scen2D({ st, p, show, onMagnetDown, svgRef }) {
+            const { ledare, N, nMot } = p;
+            const nV = ledare === 'slinga' ? 1 : N;
+            const els = [], fram = [], bak = [];
+
+            // ledaren: bakre och främre halvor i separata lager
+            for (let k = 0; k < nV; k++) {
+                for (const halva of [0, 1]) {
+                    const pts = [];
+                    for (let j = 0; j <= 24; j++) {
+                        const u = k + (halva ? 0.5 : 0) + 0.5 * j / 24;
+                        const q = ledarPunkt(u, ledare, nV);
+                        pts.push(`${q.x.toFixed(1)},${q.y.toFixed(1)}`);
+                    }
+                    const tjock = ledare === 'slinga' ? 1 : 0.62;
+                    const g = (
+                        <g key={'v' + k + halva}>
+                            <polyline points={pts.join(' ')} fill="none" stroke={COL.kopparY} strokeWidth={11 * tjock} strokeLinecap="round" />
+                            <polyline points={pts.join(' ')} fill="none" stroke={halva ? '#a8692f' : COL.kopparI} strokeWidth={7.5 * tjock} strokeLinecap="round" />
+                        </g>
+                    );
+                    (halva ? bak : fram).push(g);
+                }
+            }
+            // spolens stomme (genomskinligt plaströr)
+            if (ledare === 'spole') {
+                const x0 = sx(-L_SPOLE / 2 - 0.5), x1 = sx(L_SPOLE / 2 + 0.5), ry = A_SPOLE * PX - 4;
+                els.push(<rect key="stomme" x={x0} y={LY - ry} width={x1 - x0} height={2 * ry}
+                               fill="rgba(120,150,170,0.10)" stroke="rgba(60,80,100,0.25)" strokeWidth="1" rx="3" />);
+            }
+            // ledningar till galvanometern
+            const start = ledarPunkt(0.5, ledare, nV), slut = ledarPunkt(nV - 0.5 + 1e-6, ledare, nV);
+            const yb = LY + (ledare === 'slinga' ? A_SLINGA : A_SPOLE) * PX;
+            const xa = ledare === 'slinga' ? LX - 6 : start.x;
+            const xb = ledare === 'slinga' ? LX + 6 : slut.x;
+            els.push(
+                <g key="ledn" fill="none" stroke={COL.kopparI} strokeWidth="3" strokeLinejoin="round">
+                    <polyline points={`${xa},${yb - 2} ${xa},${GY - 7} ${GX + 38},${GY - 7}`} />
+                    <polyline points={`${xb},${yb - 2} ${xb},${GY + 7} ${GX + 38},${GY + 7}`} />
+                </g>
+            );
+
+            // magnetens fältlinjer (följer med magneten)
+            const xmPx = sx(st.xm);
+            if (show.linjer) {
+                const fEls = [];
+                const flip = nMot ? 1 : -1;      // i magnetens ram ligger nordändan åt −x
+                FALT_LINJER.forEach((l, i) => {
+                    [1, -1].forEach((sy) => {
+                        if (i === 0 && sy < 0) return;
+                        const pts = l.map(([x, y]) => `${(xmPx + flip * x * PX).toFixed(1)},${(LY - sy * y * PX).toFixed(1)}`);
+                        fEls.push(<polyline key={'f' + i + sy} points={pts.join(' ')} fill="none" stroke={COL.falt}
+                                            strokeWidth="1.3" opacity="0.6" />);
+                        // pil mitt på linjen
+                        const m = Math.floor(l.length / 2);
+                        const a = l[m], b = l[Math.min(l.length - 1, m + 1)];
+                        const ax = xmPx + flip * a[0] * PX, ay = LY - sy * a[1] * PX;
+                        let ux = flip * (b[0] - a[0]), uy = -sy * (b[1] - a[1]);
+                        const n = Math.hypot(ux, uy) || 1; ux /= n; uy /= n;
+                        fEls.push(<polygon key={'fh' + i + sy}
+                            points={`${ax + ux * 8},${ay + uy * 8} ${ax - uy * 4},${ay + ux * 4} ${ax + uy * 4},${ay - ux * 4}`}
+                            fill={COL.falt} />);
+                    });
+                });
+                els.push(<g key="falt" style={{ pointerEvents: 'none' }}>{fEls}</g>);
+            }
+
+            // magneten
+            const nVanster = nMot;
+            const mag = (
+                <g key="magnet" onPointerDown={onMagnetDown} style={{ cursor: 'grab' }}>
+                    <rect x={xmPx - LM * PX / 2 - 12} y={LY - HM * PX - 14} width={LM * PX + 24} height={2 * HM * PX + 28} fill="transparent" />
+                    <rect x={xmPx - LM * PX / 2} y={LY - HM * PX} width={LM * PX / 2} height={2 * HM * PX}
+                          fill={nVanster ? COL.npol : COL.spol} stroke="#5d646e" strokeWidth="1.2" />
+                    <rect x={xmPx} y={LY - HM * PX} width={LM * PX / 2} height={2 * HM * PX}
+                          fill={nVanster ? COL.spol : COL.npol} stroke="#5d646e" strokeWidth="1.2" />
+                    <rect x={xmPx - LM * PX / 2} y={LY - HM * PX} width={LM * PX} height={HM * PX * 0.55}
+                          fill="rgba(255,255,255,0.18)" style={{ pointerEvents: 'none' }} />
+                    {[[-1, nVanster ? 'N' : 'S'], [1, nVanster ? 'S' : 'N']].map(([sd, t]) => (
+                        <text key={t} x={xmPx + sd * LM * PX / 4} y={LY + 7} textAnchor="middle" fontSize="20" fontWeight="700"
+                              fill="#ffffff" stroke={t === 'S' ? '#0f1620' : 'none'} strokeWidth={t === 'S' ? 2.2 : 0}
+                              paintOrder="stroke" style={{ pointerEvents: 'none' }}>{t}</text>
+                    ))}
+                </g>
+            );
+
+            // inducerad ström och elektroner längs ledaren
+            const strom = [];
+            const aktiv = Math.abs(st.I) > 2e-5;
+            if (aktiv && (show.strom || show.elek)) {
+                const tot = nV;
+                if (show.strom) {
+                    const per = ledare === 'slinga' ? 8 : 4;
+                    for (let k = 0; k < tot * per; k++) {
+                        let u = ((k / per + st.flodI) % tot + tot) % tot;
+                        const q = ledarPunkt(u, ledare, tot), q2 = ledarPunkt(u + 0.01 * Math.sign(st.I || 1), ledare, tot);
+                        let ux = q2.x - q.x, uy = q2.y - q.y; const n = Math.hypot(ux, uy) || 1; ux /= n; uy /= n;
+                        const s = 6.5;
+                        strom.push(<polygon key={'i' + k} opacity={q.fram ? 1 : 0.35}
+                            points={`${q.x + ux * s},${q.y + uy * s} ${q.x - ux * s * 0.7 - uy * s * 0.75},${q.y - uy * s * 0.7 + ux * s * 0.75} ${q.x - ux * s * 0.7 + uy * s * 0.75},${q.y - uy * s * 0.7 - ux * s * 0.75}`}
+                            fill={COL.ind} />);
+                    }
+                }
+                if (show.elek) {
+                    const per = ledare === 'slinga' ? 14 : 7;
+                    for (let k = 0; k < tot * per; k++) {
+                        let u = ((k / per + 0.5 / per + st.flodE) % tot + tot) % tot;
+                        const q = ledarPunkt(u, ledare, tot);
+                        strom.push(<circle key={'e' + k} cx={q.x} cy={q.y} r="3" fill={COL.elek} opacity={q.fram ? 1 : 0.35} />);
+                    }
+                }
+            }
+
+            // jämförelse av fälten genom ledaren (ovanför)
+            const jmf = [];
+            if (show.falten) {
+                const yA = LY - (ledare === 'slinga' ? A_SLINGA : A_SPOLE) * PX - 70;
+                const pil = (y, dir, L, color, label, key) => {
+                    jmf.push(<text key={key + 't'} x={LX - 62} y={y + 4} textAnchor="end" fontSize="13" fill={color}>{label}</text>);
+                    if (L < 6) {
+                        jmf.push(<text key={key + 'n'} x={LX} y={y + 4} textAnchor="middle" fontSize="13" fill="var(--lab-ink-muted, #5a6170)">{tr('inget')}</text>);
+                        return;
+                    }
+                    const x0 = LX - dir * L / 2, x1 = LX + dir * L / 2;
+                    jmf.push(<line key={key + 'l'} x1={x0} y1={y} x2={x1 - dir * 9} y2={y} stroke={color} strokeWidth="3" strokeLinecap="butt" />);
+                    jmf.push(<polygon key={key + 'h'} points={`${x1},${y} ${x1 - dir * 10},${y - 5.5} ${x1 - dir * 10},${y + 5.5}`} fill={color} />);
+                };
+                const Bm = st.phiVarv / (Math.PI * Math.pow((ledare === 'slinga' ? A_SLINGA : A_SPOLE) / 100, 2));
+                pil(yA, Bm >= 0 ? 1 : -1, Math.min(90, 1800 * Math.abs(Bm)), COL.falt, tr('Magnetens fält'), 'm');
+                const Li = aktiv ? Math.min(90, 12 + 78 * Math.tanh(Math.abs(st.I) / st.iSkala)) : 0;
+                pil(yA + 30, st.I >= 0 ? 1 : -1, Li, COL.ind, tr('Inducerat fält'), 'i');
+            }
+
+            // hastighet och kraft
+            const pilar = [];
+            if (Math.abs(st.v) > 1.5) {
+                const vd = st.v > 0 ? 1 : -1;
+                const Lv = Math.min(110, 18 + 0.9 * Math.abs(st.v));
+                const y = LY - HM * PX - 22;
+                const x0 = xmPx - vd * Lv / 2, x1 = xmPx + vd * Lv / 2;
+                pilar.push(<g key="v" style={{ pointerEvents: 'none' }}>
+                    <line x1={x0} y1={y} x2={x1 - vd * 10} y2={y} stroke={COL.v} strokeWidth="3" strokeLinecap="butt" />
+                    <polygon points={`${x1},${y} ${x1 - vd * 11},${y - 5.5} ${x1 - vd * 11},${y + 5.5}`} fill={COL.v} />
+                    <text x={x1 + vd * 8} y={y + 6} textAnchor={vd > 0 ? 'start' : 'end'} fontSize="17" fill={COL.v}><tspan fontStyle="italic">v</tspan></text>
+                </g>);
+            }
+            if (show.kraft && Math.abs(st.F) > 2e-6) {
+                const fd = st.F > 0 ? 1 : -1;
+                const Lf = Math.min(130, 2600 * Math.abs(st.F) + 14);
+                const y = LY + HM * PX + 22;
+                const x0 = xmPx, x1 = xmPx + fd * Lf;
+                pilar.push(<g key="F" style={{ pointerEvents: 'none' }}>
+                    <line x1={x0} y1={y} x2={x1 - fd * 10} y2={y} stroke={COL.kraft} strokeWidth="3" strokeLinecap="butt" />
+                    <polygon points={`${x1},${y} ${x1 - fd * 11},${y - 5.5} ${x1 - fd * 11},${y + 5.5}`} fill={COL.kraft} />
+                    <text x={x1 + fd * 8} y={y + 6} textAnchor={fd > 0 ? 'start' : 'end'} fontSize="17" fill={COL.kraft}><tspan fontStyle="italic">F</tspan></text>
+                </g>);
+            }
+
+            // galvanometern
+            const ang = 46 * Math.tanh(st.I / st.iSkala) * Math.PI / 180;
+            const galv = (
+                <g key="galv">
+                    <circle cx={GX} cy={GY} r="44" fill="#fbf8f2" stroke={COL.ink} strokeWidth="1.8" />
+                    <path d={`M ${GX - 31} ${GY + 2} A 36 36 0 0 1 ${GX + 31} ${GY + 2}`} fill="none" stroke="rgba(31,37,48,0.25)" strokeWidth="1.2" />
+                    {[-46, -23, 0, 23, 46].map((a) => {
+                        const rr = a * Math.PI / 180;
+                        return <line key={'t' + a} x1={GX + 30 * Math.sin(rr)} y1={GY + 10 - 30 * Math.cos(rr)}
+                                     x2={GX + (a === 0 ? 38 : 35) * Math.sin(rr)} y2={GY + 10 - (a === 0 ? 38 : 35) * Math.cos(rr)}
+                                     stroke={COL.ink} strokeWidth={a === 0 ? 1.8 : 1.2} />;
+                    })}
+                    <text x={GX - 30} y={GY - 8} textAnchor="middle" fontSize="12" fill={COL.ink}>−</text>
+                    <text x={GX + 30} y={GY - 8} textAnchor="middle" fontSize="12" fill={COL.ink}>+</text>
+                    <line x1={GX} y1={GY + 10} x2={GX + 34 * Math.sin(ang)} y2={GY + 10 - 34 * Math.cos(ang)}
+                          stroke="#c8324a" strokeWidth="2.6" strokeLinecap="butt" />
+                    <circle cx={GX} cy={GY + 10} r="3.2" fill={COL.ink} />
+                    <text x={GX} y={GY + 31} textAnchor="middle" fontSize="12" fontWeight="600" fill="var(--lab-ink-muted, #5a6170)">mA</text>
+                </g>
+            );
+
+            return (
+                <svg ref={svgRef} viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid meet" fontFamily="Poppins, sans-serif">
+                    <defs>
+                        <linearGradient id="paperG" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stopColor="#f7f2e8" />
+                            <stop offset="1" stopColor="#ece3d2" />
+                        </linearGradient>
+                    </defs>
+                    <rect x="0" y="0" width={VBW} height={VBH} fill="url(#paperG)" />
+                    {/* axeln magneten följer */}
+                    <line x1="0" y1={LY} x2={VBW} y2={LY} stroke="rgba(31,37,48,0.12)" strokeWidth="1" strokeDasharray="5 5" />
+                    {els}
+                    {bak}
+                    {mag}
+                    {fram}
+                    {strom}
+                    {jmf}
+                    {pilar}
+                    {galv}
+                </svg>
+            );
+        }
+
+        // ─────────────────────────────────────────────────────────────────
+        // 3D-hjälp (samma mönster som Den enklaste elmotorn)
+        // ─────────────────────────────────────────────────────────────────
+        const Y_AXEL = new THREE.Vector3(0, 1, 0);
+        const linjar = (hex) => new THREE.Color(hex).convertSRGBToLinear();
+        const markMat = (hex, opt = {}) => new THREE.MeshStandardMaterial({
+            color: linjar(hex), emissive: linjar(hex).multiplyScalar(opt.glod != null ? opt.glod : 0.5),
+            roughness: 0.55, metalness: 0, toneMapped: false,
+            transparent: !!opt.opacity, opacity: opt.opacity || 1, depthWrite: !opt.opacity });
+        function canvasTex(w, h, rita) {
+            const c = document.createElement('canvas');
+            c.width = w; c.height = h;
+            rita(c.getContext('2d'), w, h);
+            const t = new THREE.CanvasTexture(c);
+            t.encoding = THREE.sRGBEncoding;
+            t.anisotropy = 8;
+            return t;
+        }
+        const textSprite = (parts, h = 0.42) => {
+            const c = document.createElement('canvas');
+            const ctx = c.getContext('2d');
+            const FS = 64, PAD = 14;
+            const fontFor = (q) => `${q.italic ? 'italic ' : ''}${q.weight || 600} ${q.small ? FS * 0.74 : FS}px Poppins, sans-serif`;
+            let w = 0;
+            parts.forEach((q) => { ctx.font = fontFor(q); w += ctx.measureText(q.t).width; });
+            c.width = Math.max(2, Math.ceil(w) + PAD * 2);
+            c.height = FS + PAD * 2;
+            let x = PAD;
+            parts.forEach((q) => {
+                ctx.font = fontFor(q); ctx.textBaseline = 'middle'; ctx.fillStyle = q.color;
+                ctx.fillText(q.t, x, c.height / 2 + 2);
+                x += ctx.measureText(q.t).width;
+            });
+            const tex = new THREE.CanvasTexture(c);
+            tex.minFilter = THREE.LinearFilter; tex.encoding = THREE.sRGBEncoding;
+            const spr = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false, toneMapped: false }));
+            spr.scale.set(h * c.width / c.height, h, 1);
+            spr.renderOrder = 20;
+            return spr;
+        };
+        function pil(color, r = 0.12) {
+            const g = new THREE.Group();
+            const mat = markMat(color);
+            const skaft = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 1, 14), mat);
+            const spets = new THREE.Mesh(new THREE.ConeGeometry(1, 1, 18), mat);
+            g.add(skaft, spets);
+            g.userData = { skaft, spets, r };
+            return g;
+        }
+        function stallPil(g, from, vec) {
+            const len = vec.length();
+            if (len < 1e-4) { g.visible = false; return; }
+            g.visible = true;
+            const r = g.userData.r, head = Math.min(r * 6, len * 0.55), shaft = len - head;
+            g.position.copy(from);
+            g.quaternion.setFromUnitVectors(Y_AXEL, vec.clone().normalize());
+            g.userData.skaft.scale.set(r, Math.max(shaft, 1e-4), r);
+            g.userData.skaft.position.set(0, shaft / 2, 0);
+            g.userData.spets.scale.set(r * 2.5, head, r * 2.5);
+            g.userData.spets.position.set(0, shaft + head / 2, 0);
+        }
+        function traTextur() {
+            return canvasTex(1024, 1024, (ctx, w, h) => {
+                const g = ctx.createLinearGradient(0, 0, w, h);
+                g.addColorStop(0, '#caa274'); g.addColorStop(1, '#b98d5e');
+                ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+                let seed = 11;
+                const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+                for (let i = 0; i < 140; i++) {
+                    const y0 = rnd() * h, amp = 4 + rnd() * 14, fr = 0.004 + rnd() * 0.01, ph = rnd() * 6;
+                    ctx.strokeStyle = `rgba(${90 + rnd() * 30},${55 + rnd() * 20},30,${0.05 + rnd() * 0.13})`;
+                    ctx.lineWidth = 0.6 + rnd() * 2.4;
+                    ctx.beginPath();
+                    for (let x = 0; x <= w; x += 8) {
+                        const y = y0 + Math.sin(x * fr + ph) * amp + Math.sin(x * fr * 3.1 + ph) * amp * 0.25;
+                        if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+                    }
+                    ctx.stroke();
+                }
+                ctx.strokeStyle = 'rgba(70,45,25,0.35)'; ctx.lineWidth = 2;
+                [256, 512, 768].forEach(y => { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); });
+            });
+        }
+        function omgivning(renderer) {
+            const tex = canvasTex(1024, 512, (ctx, w, h) => {
+                const g = ctx.createLinearGradient(0, 0, 0, h);
+                g.addColorStop(0, '#fbf8f2'); g.addColorStop(0.45, '#efe7d8'); g.addColorStop(0.55, '#a98559'); g.addColorStop(1, '#5d4128');
+                ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+                ctx.fillStyle = 'rgba(255,255,255,0.95)';
+                ctx.fillRect(w * 0.12, h * 0.12, w * 0.16, h * 0.2);
+                ctx.fillRect(w * 0.6, h * 0.08, w * 0.22, h * 0.14);
+            });
+            tex.mapping = THREE.EquirectangularReflectionMapping;
+            const pm = new THREE.PMREMGenerator(renderer);
+            const env = pm.fromEquirectangular(tex).texture;
+            pm.dispose();
+            return env;
+        }
+        // magnetens ändytor och sidor: röd med vitt N, vit med vitt S och svart kontur
+        function magnetTex(nord, w = 512, h = 128) {
+            return canvasTex(w, h, (ctx) => {
+                ctx.fillStyle = nord ? COL.npol : COL.spol; ctx.fillRect(0, 0, w, h);
+                const g = ctx.createLinearGradient(0, 0, 0, h);
+                g.addColorStop(0, 'rgba(255,255,255,0.22)'); g.addColorStop(0.5, 'rgba(255,255,255,0)'); g.addColorStop(1, 'rgba(0,0,0,0.08)');
+                ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+                ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+                ctx.font = `700 ${Math.round(h * 0.72)}px Poppins, sans-serif`;
+                if (!nord) { ctx.lineWidth = h * 0.06; ctx.lineJoin = 'round'; ctx.strokeStyle = '#0f1620'; ctx.strokeText('S', w / 2, h / 2 + h * 0.04); }
+                ctx.fillStyle = '#ffffff';
+                ctx.fillText(nord ? 'N' : 'S', w / 2, h / 2 + h * 0.04);
+            });
+        }
+        function galvTex() {
+            return canvasTex(512, 512, (ctx, w, h) => {
+                ctx.fillStyle = '#fbf8f2'; ctx.fillRect(0, 0, w, h);
+                const cx = w / 2, cy = h * 0.72;
+                ctx.strokeStyle = '#1f2530'; ctx.lineWidth = 4;
+                ctx.beginPath(); ctx.arc(cx, cy, h * 0.5, Math.PI * 1.25, Math.PI * 1.75); ctx.stroke();
+                for (let k = -10; k <= 10; k++) {
+                    const a = -Math.PI / 2 + k * (Math.PI / 4) / 10;
+                    const r0 = h * 0.5, r1 = h * (k % 5 === 0 ? 0.58 : 0.54);
+                    ctx.lineWidth = k % 5 === 0 ? 5 : 2.5;
+                    ctx.beginPath(); ctx.moveTo(cx + r0 * Math.cos(a), cy + r0 * Math.sin(a)); ctx.lineTo(cx + r1 * Math.cos(a), cy + r1 * Math.sin(a)); ctx.stroke();
+                }
+                ctx.fillStyle = '#1f2530'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+                ctx.font = '700 46px Poppins, sans-serif';
+                ctx.fillText('0', cx, cy - h * 0.66);
+                ctx.fillText('−', cx - h * 0.42, cy - h * 0.48);
+                ctx.fillText('+', cx + h * 0.42, cy - h * 0.48);
+                ctx.font = '600 40px Poppins, sans-serif';
+                ctx.fillStyle = '#5a6170';
+                ctx.fillText('mA', cx, cy - h * 0.18);
+            });
+        }
+
+        const VYER3 = {
+            snett: { theta: 0.34, phi: 1.2, radius: 76, target: [-1, 6.5, 0] },
+            sidan: { theta: 0.0, phi: 1.5, radius: 74, target: [-1, 7, 0] },
+            ovan:  { theta: 0.0, phi: 0.08, radius: 72, target: [-1, 2, 2] },
+        };
+        const AXEL_Y = 7.5;                 // axelns höjd över bordet (cm)
+
+        // ─────────────────────────────────────────────────────────────────
+        // 3D-scenen
+        // ─────────────────────────────────────────────────────────────────
+        function Scen3D({ stRef, pRef, apiRef }) {
+            const mountRef = useRef(null);
+            useEffect(() => {
+                const el = mountRef.current;
+                const W = () => el.clientWidth, H = () => el.clientHeight;
+                const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                renderer.setSize(W(), H());
+                renderer.setClearColor(0x000000, 0);
+                renderer.outputEncoding = THREE.sRGBEncoding;
+                renderer.toneMapping = THREE.ACESFilmicToneMapping;
+                renderer.toneMappingExposure = 1.05;
+                renderer.shadowMap.enabled = true;
+                renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+                el.appendChild(renderer.domElement);
+
+                const scene = new THREE.Scene();
+                scene.environment = omgivning(renderer);
+                const camera = new THREE.PerspectiveCamera(32, W() / H(), 0.5, 400);
+
+                scene.add(new THREE.HemisphereLight(0xfffaf0, 0x8a6a48, 0.55));
+                const sol = new THREE.DirectionalLight(0xffffff, 1.2);
+                sol.position.set(14, 30, 22);
+                sol.castShadow = true;
+                sol.shadow.mapSize.set(2048, 2048);
+                Object.assign(sol.shadow.camera, { left: -48, right: 48, top: 40, bottom: -40, near: 1, far: 120 });
+                sol.shadow.bias = -0.0008;
+                sol.shadow.normalBias = 0.04;
+                scene.add(sol);
+                const fyll = new THREE.DirectionalLight(0xdfe8ff, 0.35);
+                fyll.position.set(-20, 12, -8);
+                scene.add(fyll);
+
+                // labbänk
+                const tra = traTextur(); tra.wrapS = tra.wrapT = THREE.RepeatWrapping; tra.repeat.set(2, 1.3);
+                const traMat = new THREE.MeshStandardMaterial({ map: tra, roughness: 0.78, envMapIntensity: 0.22 });
+                const bank = new THREE.Mesh(new THREE.BoxGeometry(130, 2, 80), traMat);
+                bank.position.set(4, -1, -6); bank.receiveShadow = true;
+                scene.add(bank);
+                const morkTra = new THREE.MeshStandardMaterial({ color: linjar(0x7a5534), roughness: 0.55 });
+                const koppar = new THREE.MeshStandardMaterial({ color: linjar('#b8642c'), roughness: 0.32, metalness: 0.9, envMapIntensity: 0.75 });
+
+                // galvanometern
+                const galvG = new THREE.Group();
+                const lada = new THREE.Mesh(new THREE.BoxGeometry(9, 7, 4.5), new THREE.MeshStandardMaterial({ color: linjar(0x2b2f36), roughness: 0.45, metalness: 0.2 }));
+                lada.position.y = 3.5; lada.castShadow = true; lada.receiveShadow = true;
+                galvG.add(lada);
+                const tavla = new THREE.Mesh(new THREE.PlaneGeometry(7.4, 5.4), new THREE.MeshStandardMaterial({ map: galvTex(), roughness: 0.7 }));
+                tavla.position.set(0, 3.8, 2.27);
+                galvG.add(tavla);
+                const nal = new THREE.Mesh(new THREE.BoxGeometry(0.12, 3.6, 0.05), markMat('#c8324a', { glod: 0.4 }));
+                nal.geometry.translate(0, 1.8, 0);
+                const nalG = new THREE.Group(); nalG.position.set(0, 3.8 - 2.7 + 0.75 * 0 + 0.0, 2.32); nalG.add(nal);
+                nalG.position.y = 3.8 - 5.4 / 2 + 5.4 * 0.28;
+                galvG.add(nalG);
+                const glas = new THREE.Mesh(new THREE.PlaneGeometry(7.4, 5.4), new THREE.MeshPhysicalMaterial({ color: linjar(0xffffff), transparent: true, opacity: 0.12, roughness: 0.05, metalness: 0 }));
+                glas.position.set(0, 3.8, 2.4); galvG.add(glas);
+                const pol = (x, c) => { const m = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.45, 0.8, 20), new THREE.MeshStandardMaterial({ color: linjar(c), roughness: 0.4 })); m.position.set(x, 7.4, 1); galvG.add(m); };
+                pol(-2.6, 0x1f2530); pol(2.6, 0xb8323a);
+                galvG.position.set(-25, 0, -4);
+                galvG.rotation.y = 0.55;
+                scene.add(galvG);
+                galvG.updateMatrixWorld();
+                const polV = new THREE.Vector3(-2.6, 7.8, 1).applyMatrix4(galvG.matrixWorld);
+                const polH = new THREE.Vector3(2.6, 7.8, 1).applyMatrix4(galvG.matrixWorld);
+
+                // ledaren byggs om när läge eller varvtal ändras
+                const ledG = new THREE.Group(); scene.add(ledG);
+                const flodG = new THREE.Group(); scene.add(flodG);
+                let ledBana = null;          // polylinje för ström och elektroner
+                const stromKon = new THREE.ConeGeometry(0.32, 0.9, 14);
+                const stromMat = markMat(COL.ind, { glod: 0.45 });
+                const elekGeo = new THREE.SphereGeometry(0.22, 12, 8);
+                const elekMat = markMat(COL.elek, { glod: 0.45 });
+                let stromPilar = [], elektroner = [];
+
+                function polylinje(pts) {
+                    const L = [0];
+                    for (let i = 1; i < pts.length; i++) L.push(L[i - 1] + pts[i].distanceTo(pts[i - 1]));
+                    return {
+                        pts, L, len: L[L.length - 1],
+                        at(s) {
+                            s = ((s % this.len) + this.len) % this.len;
+                            let lo = 0, hi = this.L.length - 1;
+                            while (hi - lo > 1) { const m = (lo + hi) >> 1; if (this.L[m] < s) lo = m; else hi = m; }
+                            const t = (s - this.L[lo]) / Math.max(1e-9, this.L[hi] - this.L[lo]);
+                            return { p: this.pts[lo].clone().lerp(this.pts[hi], t), d: this.pts[hi].clone().sub(this.pts[lo]).normalize() };
+                        },
+                    };
+                }
+                const tub = (pts, r = 0.16) => {
+                    const m = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), Math.max(40, pts.length * 3), r, 10, false), koppar);
+                    m.castShadow = true; return m;
+                };
+                function byggLedare(ledare, N) {
+                    while (ledG.children.length) { const c = ledG.children.pop(); if (c.geometry) c.geometry.dispose(); }
+                    while (flodG.children.length) flodG.children.pop();
+                    let pts = [], a, endA, endB;
+                    if (ledare === 'slinga') {
+                        a = A_SLINGA;
+                        const gap = 0.12;
+                        for (let j = 0; j <= 200; j++) {
+                            const phi = Math.PI + gap + (2 * Math.PI - 2 * gap) * j / 200;   // börjar längst ned
+                            pts.push(new THREE.Vector3(0, AXEL_Y + a * Math.cos(phi), a * Math.sin(phi)));
+                        }
+                        const ring = tub(pts, 0.22); ledG.add(ring);
+                        endA = pts[0]; endB = pts[pts.length - 1];
+                        // träfot med stolpe
+                        const fot = new THREE.Mesh(new THREE.BoxGeometry(5, 1.2, 5), morkTra); fot.position.set(0, 0.6, 0); fot.castShadow = true; fot.receiveShadow = true; ledG.add(fot);
+                        const stolpe = new THREE.Mesh(new THREE.BoxGeometry(1.1, AXEL_Y - a - 1.2 + 0.2, 1.1), morkTra);
+                        stolpe.position.set(-0.9, 1.2 + (AXEL_Y - a - 1.2) / 2, 0); stolpe.castShadow = true; ledG.add(stolpe);
+                    } else {
+                        a = A_SPOLE;
+                        const n = N * 60;
+                        for (let j = 0; j <= n; j++) {
+                            const t = j / n, phi = Math.PI + 2 * Math.PI * N * t;
+                            pts.push(new THREE.Vector3(-L_SPOLE / 2 + L_SPOLE * t, AXEL_Y + a * Math.cos(phi), a * Math.sin(phi)));
+                        }
+                        ledG.add(tub(pts, 0.16));
+                        endA = pts[0]; endB = pts[pts.length - 1];
+                        // stomme: genomskinligt rör med flänsar, på två träklossar
+                        const ror = new THREE.Mesh(new THREE.CylinderGeometry(a - 0.25, a - 0.25, L_SPOLE + 1.2, 48, 1, true),
+                            new THREE.MeshPhysicalMaterial({ color: linjar(0xcfe3ee), transparent: true, opacity: 0.22, roughness: 0.1, side: THREE.DoubleSide, depthWrite: false }));
+                        ror.rotation.z = Math.PI / 2; ror.position.y = AXEL_Y; ledG.add(ror);
+                        [-1, 1].forEach(sd => {
+                            const fl = new THREE.Mesh(new THREE.TorusGeometry(a + 0.05, 0.28, 10, 48), new THREE.MeshStandardMaterial({ color: linjar(0x3a5a78), roughness: 0.4 }));
+                            fl.rotation.y = Math.PI / 2; fl.position.set(sd * (L_SPOLE / 2 + 0.6), AXEL_Y, 0); ledG.add(fl);
+                            const kl = new THREE.Mesh(new THREE.BoxGeometry(1.4, AXEL_Y - a - 0.2, 4), morkTra);
+                            kl.position.set(sd * (L_SPOLE / 2 + 0.6), (AXEL_Y - a - 0.2) / 2, 0); kl.castShadow = true; kl.receiveShadow = true; ledG.add(kl);
+                        });
+                    }
+                    // ledningar ned till bordet och fram till galvanometern
+                    const ledning = (fran, till, z0) => {
+                        const p = [fran.clone(), new THREE.Vector3(fran.x, 1.4, fran.z), new THREE.Vector3(fran.x, 0.25, fran.z + 1.5),
+                                   new THREE.Vector3((fran.x + till.x) / 2, 0.25, z0), new THREE.Vector3(till.x + 1.5, 0.25, till.z + 2),
+                                   new THREE.Vector3(till.x, 1.5, till.z + 0.8), till.clone()];
+                        ledG.add(tub(new THREE.CatmullRomCurve3(p, false, 'centripetal').getPoints(80), 0.13));
+                    };
+                    ledning(endA, polV, 5);
+                    ledning(endB, polH, 6.5);
+                    ledBana = polylinje(pts);
+                    // strömpilar och elektroner
+                    stromPilar = []; elektroner = [];
+                    const nP = Math.round(ledBana.len / (ledare === 'slinga' ? 3.2 : 4.2));
+                    for (let i = 0; i < nP; i++) { const m = new THREE.Mesh(stromKon, stromMat); flodG.add(m); stromPilar.push({ m, s0: i * ledBana.len / nP }); }
+                    const nE = Math.round(ledBana.len / (ledare === 'slinga' ? 1.4 : 1.9));
+                    for (let i = 0; i < nE; i++) { const m = new THREE.Mesh(elekGeo, elekMat); flodG.add(m); elektroner.push({ m, s0: (i + 0.5) * ledBana.len / nE }); }
+                    return a;
+                }
+
+                // stavmagneten med sina fältlinjer (i magnetens ram ligger nordändan åt −x)
+                const magG = new THREE.Group(); scene.add(magG);
+                const kropp = new THREE.Group(); magG.add(kropp);
+                const sidaN = magnetTex(true), sidaS = magnetTex(false);
+                const halva = (nord) => {
+                    const mats = [];
+                    const side = new THREE.MeshStandardMaterial({ map: nord ? sidaN : sidaS, roughness: 0.32, metalness: 0.2 });
+                    const end = new THREE.MeshStandardMaterial({ map: magnetTex(nord, 256, 256), roughness: 0.32, metalness: 0.2 });
+                    const plain = new THREE.MeshStandardMaterial({ color: linjar(nord ? COL.npol : COL.spol), roughness: 0.32, metalness: 0.2 });
+                    // ordning: +x, −x, +y, −y, +z, −z
+                    mats.push(nord ? plain : end, nord ? end : plain, side, side, side, side);
+                    const m = new THREE.Mesh(new THREE.BoxGeometry(LM / 2, 2 * HM, 2 * HM), mats);
+                    m.position.x = nord ? -LM / 4 : LM / 4;
+                    m.castShadow = true;
+                    m.userData.magnet = true;
+                    return m;
+                };
+                const hN = halva(true), hS = halva(false);
+                kropp.add(hN, hS);
+                const faltG = new THREE.Group(); magG.add(faltG);
+                const faltMat = new THREE.MeshBasicMaterial({ color: linjar(COL.falt), transparent: true, opacity: 0.6, depthWrite: false, toneMapped: false });
+                const faltPilMat = markMat(COL.falt, { glod: 0.6 });
+                const PLAN = 4;
+                FALT_LINJER.forEach((l, i) => {
+                    const planer = i === 0 ? 1 : PLAN;
+                    for (let k = 0; k < planer; k++) {
+                        const w = (k / PLAN) * Math.PI * 2 + Math.PI / 4;
+                        const pts = l.map(([x, y]) => new THREE.Vector3(x, y * Math.cos(w), y * Math.sin(w)));
+                        const rorL = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), Math.min(300, pts.length * 2), 0.055, 6, false), faltMat);
+                        rorL.renderOrder = 2; faltG.add(rorL);
+                        const pl = polylinje(pts);
+                        const { p, d } = pl.at(pl.len * 0.5);
+                        const kon = new THREE.Mesh(new THREE.ConeGeometry(0.3, 0.9, 12), faltPilMat);
+                        kon.position.copy(p); kon.quaternion.setFromUnitVectors(Y_AXEL, d); faltG.add(kon);
+                    }
+                });
+
+                // pilar och etiketter
+                const vPil = pil(COL.v, 0.16), fPil = pil(COL.kraft, 0.16);
+                const bmPil = pil(COL.falt, 0.18), biPil = pil(COL.ind, 0.18);
+                scene.add(vPil, fPil, bmPil, biPil);
+                const vL = textSprite([{ t: 'v', italic: true, color: COL.v }], 1.5);
+                const fL = textSprite([{ t: 'F', italic: true, color: COL.kraft }], 1.5);
+                const bmL = textSprite([{ t: tr('Magnetens fält'), color: COL.falt, weight: 600 }], 1.55);
+                const biL = textSprite([{ t: tr('Inducerat fält'), color: COL.ind, weight: 600 }], 1.55);
+                const iL = textSprite([{ t: 'I', italic: true, color: COL.ind }], 1.6);
+                scene.add(vL, fL, bmL, biL, iL);
+
+                let byggt = '';
+                let aNu = A_SLINGA;
+
+                // kamera
+                const cam = { ...VYER3.snett, target: new THREE.Vector3(...VYER3.snett.target) };
+                let camMal = null;
+                apiRef.current.vy = (namn) => {
+                    const v = VYER3[namn];
+                    camMal = { theta: v.theta, phi: v.phi, radius: v.radius, target: new THREE.Vector3(...v.target) };
+                };
+                const uppdKam = () => {
+                    const sp = Math.sin(cam.phi);
+                    camera.position.set(cam.target.x + cam.radius * sp * Math.sin(cam.theta),
+                                        cam.target.y + cam.radius * Math.cos(cam.phi),
+                                        cam.target.z + cam.radius * sp * Math.cos(cam.theta));
+                    camera.lookAt(cam.target);
+                };
+
+                // pekare: dra magneten längs axeln, annars vrid scenen
+                const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
+                const satt = (e) => {
+                    const r = el.getBoundingClientRect();
+                    ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+                    ray.setFromCamera(ndc, camera);
+                };
+                const traffMagnet = () => ray.intersectObjects([hN, hS], false).length > 0;
+                const axelX = () => {
+                    // planet genom axeln, vänt mot kameran
+                    const n = new THREE.Vector3().subVectors(camera.position, new THREE.Vector3(camera.position.x, AXEL_Y, 0));
+                    n.x = 0; if (n.lengthSq() < 1e-6) n.set(0, 1, 0); n.normalize();
+                    const plan = new THREE.Plane().setFromNormalAndCoplanarPoint(n, new THREE.Vector3(0, AXEL_Y, 0));
+                    const q = new THREE.Vector3();
+                    return ray.ray.intersectPlane(plan, q) ? q.x : null;
+                };
+                const pek = new Map();
+                let drag = null, pinch = null, magDrag = null;
+                const onDown = (e) => {
+                    pek.set(e.pointerId, { x: e.clientX, y: e.clientY });
+                    el.setPointerCapture(e.pointerId);
+                    camMal = null;
+                    if (pek.size === 1) {
+                        satt(e);
+                        if (traffMagnet()) {
+                            const x = axelX();
+                            magDrag = { off: x != null ? stRef.current.xm - x : 0 };
+                            apiRef.current.dragStart();
+                        } else drag = { x: e.clientX, y: e.clientY };
+                    } else if (pek.size === 2) {
+                        const [a, b] = [...pek.values()];
+                        pinch = { d: Math.hypot(a.x - b.x, a.y - b.y), r: cam.radius };
+                        drag = null;
+                    }
+                };
+                const onMove = (e) => {
+                    if (pek.has(e.pointerId)) pek.set(e.pointerId, { x: e.clientX, y: e.clientY });
+                    if (pinch && pek.size === 2) {
+                        const [a, b] = [...pek.values()];
+                        cam.radius = Math.max(30, Math.min(140, pinch.r * pinch.d / Math.max(1, Math.hypot(a.x - b.x, a.y - b.y))));
+                        return;
+                    }
+                    if (magDrag) {
+                        satt(e);
+                        const x = axelX();
+                        if (x != null) apiRef.current.dragTo(x + magDrag.off);
+                        return;
+                    }
+                    if (drag) {
+                        cam.theta -= (e.clientX - drag.x) * 0.006;
+                        cam.phi = Math.max(0.06, Math.min(1.55, cam.phi - (e.clientY - drag.y) * 0.005));
+                        drag.x = e.clientX; drag.y = e.clientY;
+                        el.classList.add('dragging');
+                        return;
+                    }
+                    if (e.pointerType === 'mouse') {
+                        satt(e);
+                        const h = traffMagnet();
+                        el.classList.toggle('pointer', h); el.classList.toggle('grab', !h);
+                    }
+                };
+                const onUp = (e) => {
+                    pek.delete(e.pointerId);
+                    if (magDrag && pek.size === 0) { magDrag = null; apiRef.current.dragEnd(); }
+                    if (pek.size < 2) pinch = null;
+                    if (pek.size === 0) drag = null;
+                    el.classList.remove('dragging');
+                };
+                const onWheel = (e) => { e.preventDefault(); camMal = null; cam.radius = Math.max(30, Math.min(140, cam.radius * Math.exp(e.deltaY * 0.0012))); };
+                el.addEventListener('pointerdown', onDown);
+                el.addEventListener('pointermove', onMove);
+                el.addEventListener('pointerup', onUp);
+                el.addEventListener('pointercancel', onUp);
+                el.addEventListener('wheel', onWheel, { passive: false });
+                el.classList.add('grab');
+
+                const ro = new ResizeObserver(() => {
+                    renderer.setSize(W(), H());
+                    camera.aspect = W() / H();
+                    // samma vågräta synfält (44°) på alla skärmar, så att magnetens hela väg ryms
+                    camera.fov = Math.max(28, Math.min(62, 2 * Math.atan(Math.tan(22 * Math.PI / 180) / camera.aspect) * 180 / Math.PI));
+                    camera.updateProjectionMatrix();
+                });
+                ro.observe(el);
+                let synlig = true;
+                const io = new IntersectionObserver((en) => { synlig = en[0].isIntersecting; }, { threshold: 0.01 });
+                io.observe(el);
+
+                let raf = 0, tLast = performance.now(), nalVinkel = 0;
+                const tick = () => {
+                    raf = requestAnimationFrame(tick);
+                    const now = performance.now();
+                    const dt = Math.min(0.05, (now - tLast) / 1000); tLast = now;
+                    if (!synlig) return;
+                    const st = stRef.current, p = pRef.current, sh = p.show;
+                    const nyckel = p.ledare + (p.ledare === 'spole' ? p.N : '');
+                    if (nyckel !== byggt) { aNu = byggLedare(p.ledare, p.N); byggt = nyckel; }
+
+                    magG.position.set(st.xm, AXEL_Y, 0);
+                    magG.rotation.y = p.nMot ? 0 : Math.PI;
+                    faltG.visible = sh.linjer;
+
+                    // ström och elektroner
+                    const aktiv = Math.abs(st.I) > 2e-5;
+                    const sgn = st.I >= 0 ? 1 : -1;
+                    stromPilar.forEach(a => {
+                        a.m.visible = sh.strom && aktiv;
+                        if (!a.m.visible) return;
+                        const { p: q, d } = ledBana.at(a.s0 + st.flodI * ledBana.len / (p.ledare === 'slinga' ? 1 : p.N));
+                        a.m.position.copy(q);
+                        a.m.quaternion.setFromUnitVectors(Y_AXEL, d.multiplyScalar(sgn));
+                    });
+                    elektroner.forEach(a => {
+                        a.m.visible = sh.elek && aktiv;
+                        if (a.m.visible) a.m.position.copy(ledBana.at(a.s0 + st.flodE * ledBana.len / (p.ledare === 'slinga' ? 1 : p.N)).p);
+                    });
+                    // I-etikett vid ledarens framkant
+                    iL.visible = sh.strom && aktiv;
+                    iL.position.set((p.ledare === 'slinga' ? 0 : L_SPOLE / 2) + 1.6, AXEL_Y - aNu - 1.4, aNu + 1);
+
+                    // galvanometerns nål
+                    const malV = -0.8 * Math.tanh(st.I / st.iSkala);
+                    nalVinkel += (malV - nalVinkel) * Math.min(1, dt * 12);
+                    nalG.rotation.z = nalVinkel;
+
+                    // fart och kraft
+                    const ytt = AXEL_Y + HM + 1.6;
+                    if (Math.abs(st.v) > 1.5) {
+                        const vd = Math.sign(st.v), L = Math.min(7, 1.2 + 0.06 * Math.abs(st.v));
+                        stallPil(vPil, new THREE.Vector3(st.xm - vd * L / 2, ytt, 0), new THREE.Vector3(vd * L, 0, 0));
+                        vL.visible = true; vL.position.set(st.xm + vd * (L / 2 + 1), ytt, 0);
+                    } else { vPil.visible = false; vL.visible = false; }
+                    if (sh.kraft && Math.abs(st.F) > 2e-6) {
+                        const fd = Math.sign(st.F), L = Math.min(9, 1 + 180 * Math.abs(st.F));
+                        const y = AXEL_Y - HM - 1.6;
+                        stallPil(fPil, new THREE.Vector3(st.xm, y, 0), new THREE.Vector3(fd * L, 0, 0));
+                        fL.visible = true; fL.position.set(st.xm + fd * (L + 1), y, 0);
+                    } else { fPil.visible = false; fL.visible = false; }
+
+                    // fälten genom ledaren, ovanför den
+                    const yJ = AXEL_Y + aNu + 3.2;
+                    if (sh.falten) {
+                        const Bm = st.phiVarv / (Math.PI * Math.pow(aNu / 100, 2));
+                        const Lm = Math.min(6, 120 * Math.abs(Bm));
+                        stallPil(bmPil, new THREE.Vector3(-Math.sign(Bm) * Lm / 2, yJ + 1.9, 0), new THREE.Vector3(Math.sign(Bm) * Lm, 0, 0));
+                        bmL.visible = true; bmL.position.set(-4.5 - bmL.scale.x / 2, yJ + 1.9, 0);
+                        const Li = aktiv ? 1 + 5 * Math.tanh(Math.abs(st.I) / st.iSkala) : 0;
+                        stallPil(biPil, new THREE.Vector3(-sgn * Li / 2, yJ, 0), new THREE.Vector3(sgn * Li, 0, 0));
+                        biL.visible = true; biL.position.set(-4.5 - biL.scale.x / 2, yJ, 0);
+                    } else { bmPil.visible = biPil.visible = false; bmL.visible = biL.visible = false; }
+
+                    if (camMal) {
+                        const k = Math.min(1, dt * 4);
+                        cam.theta += (camMal.theta - cam.theta) * k; cam.phi += (camMal.phi - cam.phi) * k;
+                        cam.radius += (camMal.radius - cam.radius) * k; cam.target.lerp(camMal.target, k);
+                        if (Math.abs(camMal.phi - cam.phi) < 1e-3 && Math.abs(camMal.theta - cam.theta) < 1e-3) camMal = null;
+                    }
+                    uppdKam();
+                    renderer.render(scene, camera);
+                };
+                tick();
+                return () => {
+                    cancelAnimationFrame(raf); ro.disconnect(); io.disconnect();
+                    el.removeEventListener('pointerdown', onDown); el.removeEventListener('pointermove', onMove);
+                    el.removeEventListener('pointerup', onUp); el.removeEventListener('pointercancel', onUp);
+                    el.removeEventListener('wheel', onWheel);
+                    renderer.dispose();
+                    if (renderer.domElement.parentNode) renderer.domElement.parentNode.removeChild(renderer.domElement);
+                };
+            }, []);
+            return <div ref={mountRef} className="tre-mount" />;
+        }
+
+        // ─────────────────────────────────────────────────────────────────
+        // Graf över den inducerade spänningen
+        // ─────────────────────────────────────────────────────────────────
+        const GRAF_T = 8;   // sekunder
+        function Graf({ buf }) {
+            const W = 320, H = 130, pl = 40, pr = 10, pt = 10, pb = 22;
+            const max = Math.max(...buf.map(b => Math.abs(b.e)), 1e-4);
+            const steg = [0.5, 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000];
+            const skala = steg.find(s => s >= max * 1000 * 1.05) || 1000;    // mV
+            const tNu = buf.length ? buf[buf.length - 1].t : 0;
+            const X = (t) => pl + (W - pl - pr) * (1 - (tNu - t) / GRAF_T);
+            const Y = (e) => pt + (H - pt - pb) / 2 * (1 - e * 1000 / skala);
+            const pts = buf.map(b => `${X(b.t).toFixed(1)},${Y(b.e).toFixed(1)}`).join(' ');
+            return (
+                <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ display: 'block' }} fontFamily="Poppins, sans-serif">
+                    <line x1={pl} y1={pt} x2={pl} y2={H - pb} stroke={COL.ink} strokeWidth="1" opacity="0.5" />
+                    <line x1={pl} y1={Y(0)} x2={W - pr} y2={Y(0)} stroke="#38bdf8" strokeWidth="1.4" />
+                    <line x1={pl - 4} y1={Y(skala / 1000)} x2={pl} y2={Y(skala / 1000)} stroke={COL.ink} strokeWidth="1" />
+                    <line x1={pl - 4} y1={Y(-skala / 1000)} x2={pl} y2={Y(-skala / 1000)} stroke={COL.ink} strokeWidth="1" />
+                    <text x={pl - 6} y={Y(skala / 1000) + 4} textAnchor="end" fontSize="10" fill={COL.ink}>{fmt(skala, skala < 1 ? 1 : 0)}</text>
+                    <text x={pl - 6} y={Y(0) + 4} textAnchor="end" fontSize="10" fill={COL.ink}>0</text>
+                    <text x={pl - 6} y={Y(-skala / 1000) + 4} textAnchor="end" fontSize="10" fill={COL.ink}>{'−' + fmt(skala, skala < 1 ? 1 : 0)}</text>
+                    <text x={pl + 4} y={pt + 9} fontSize="10.5" fill={COL.ink}><tspan fontStyle="italic">e</tspan> (mV)</text>
+                    <text x={W - pr} y={H - 6} textAnchor="end" fontSize="10.5" fill={COL.ink}><tspan fontStyle="italic">t</tspan> {tr('(senaste 8 s)')}</text>
+                    <polyline points={pts} fill="none" stroke={COL.ind} strokeWidth="2" strokeLinejoin="round" />
+                </svg>
+            );
+        }
+
+        // ─────────────────────────────────────────────────────────────────
+        // Formelkort
+        // ─────────────────────────────────────────────────────────────────
         const Vbl = ({ label, children }) => (
             <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
                 <span className="flbl">{label}</span>
@@ -296,414 +1162,240 @@
                 <span className="flbl" style={botLbl ? {} : { visibility: 'hidden' }}>{botLbl || '·'}</span>
             </div>
         );
-
         const FormulaCard = () => (
-            <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-8 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
-                <div style={{ maxWidth: 380 }}>
+            <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-10 gap-y-4" style={{ color: 'var(--lab-ink)' }}>
+                <div style={{ maxWidth: 330 }}>
                     <div className="flbl mb-1">Lenz lag</div>
                     <div style={{ fontSize: 15 }}>
                         En inducerad ström får en sådan riktning att <strong>orsaken till dess
                         uppkomst motverkas</strong>.
                     </div>
                 </div>
-                <div className="flex items-center gap-x-3">
+                <div className="flex items-center gap-x-2">
+                    <Vbl label="Inducerad spänning"><em>e</em></Vbl>
+                    <span className="fnum">=</span>
+                    <span className="fnum">−</span>
+                    <Vbl label="Antal varv"><em>N</em></Vbl>
+                    <span className="fnum">·</span>
+                    <FracL topLbl="Flödesändring" top={<span>Δ<em>Φ</em></span>} botLbl="Tid" bot={<span>Δ<em>t</em></span>} />
+                </div>
+                <div className="flex items-center gap-x-2">
                     <Vbl label="Inducerad ström"><em>I</em></Vbl>
                     <span className="fnum">=</span>
                     <FracL topLbl="Inducerad spänning" top={<em>e</em>} botLbl="Resistans" bot={<em>R</em>} />
-                    <span className="flex items-center" style={{ color: 'var(--lab-ink-muted)', fontSize: 13, marginLeft: 8 }}>
-                        (Ohms lag)
-                    </span>
                 </div>
             </div>
         );
 
-        // ── Huvudapp ─────────────────────────────────────────────
+        const Slider = ({ label, sub, value, min, max, step, onChange, valueText }) => (
+            <div className="mb-3">
+                <div className="flex justify-between items-baseline mb-1">
+                    <label className="text-sm font-bold" style={{ color: 'var(--lab-ink)' }} dangerouslySetInnerHTML={{ __html: label }} />
+                    <div className="font-mono font-semibold text-sm" style={{ color: 'var(--lab-accent)' }}>{valueText}</div>
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} className="w-full cursor-pointer" />
+                {sub && <div className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }} dangerouslySetInnerHTML={{ __html: sub }} />}
+            </div>
+        );
+        const StSlider = ({ label, value, min, max, step, onChange, valueText }) => (
+            <div className="st-slider">
+                <div className="st-slider-top">
+                    <span dangerouslySetInnerHTML={{ __html: label }} />
+                    <span style={{ whiteSpace: 'nowrap', fontWeight: 600, color: 'var(--lab-ink, #0f1620)' }}>{valueText}</span>
+                </div>
+                <span className="sl-wrap">
+                    <input type="range" min={min} max={max} step={step} value={value}
+                           onChange={(e) => onChange(parseFloat(e.target.value))} />
+                </span>
+            </div>
+        );
+        const Readout = ({ label, value, color }) => (
+            <div className="p-2 rounded-lg" style={{ background: 'var(--lab-bg)', border: '1px solid var(--lab-line-strong)' }}>
+                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }} dangerouslySetInnerHTML={{ __html: label }} />
+                <div className="font-mono font-bold text-sm" style={{ color: color || 'var(--lab-ink)' }}>{value}</div>
+            </div>
+        );
+
+        // ─────────────────────────────────────────────────────────────────
+        // Appen
+        // ─────────────────────────────────────────────────────────────────
         const App = () => {
             const q = new URLSearchParams(location.search);
-            const [R, setR] = useState(isFinite(parseFloat(q.get('r'))) ? parseFloat(q.get('r')) : 0.75);
-            const [autoV, setAutoV] = useState(isFinite(parseFloat(q.get('v'))) ? parseFloat(q.get('v')) : 25);
+            const num = (k, d) => (isFinite(parseFloat(q.get(k))) ? parseFloat(q.get(k)) : d);
+            const [R, setR] = useState(num('r', 0.75));
+            const [autoV, setAutoV] = useState(num('v', 25));
             const [autoRun, setAutoRun] = useState(q.get('auto') === '1');
-            const [nMot, setNMot] = useState(q.get('pol') !== 's');   // nordändan mot slingan
-            const [show, setShow] = useState({ falten: true, strom: true, kraft: false });
+            const [nMot, setNMot] = useState(q.get('pol') !== 's');
+            const [ledare, setLedare] = useState(q.get('ledare') === 'spole' ? 'spole' : 'slinga');
+            const [N, setN] = useState(Math.round(Math.max(NMIN, Math.min(NMAX, num('n', 10)))));
+            const [dim, setDim] = useState(q.get('vy') === '3d' ? '3d' : '2d');
+            const [vy3, setVy3] = useState('snett');
+            const [show, setShow] = useState({ linjer: true, falten: true, strom: true, elek: false, kraft: false });
             const [isFullscreen, setIsFullscreen] = useState(false);
             const [togglesOpen, setTogglesOpen] = useState(true);
             const [, setTick] = useState(0);
 
             const sceneWrapRef = useRef(null);
             const svgRef = useRef(null);
-            const stateRef = useRef({
-                xm: 520, vAct: 0, adir: -1,
-                dragging: false, lastX: 0, lastMove: 0,
-                phi: 0, dphi: 0, theta: 0,
+            const stRef = useRef({
+                xm: 14, v: 0, adir: -1, dragging: false, lastX: 0, lastMove: 0,
+                phi: 0, phiVarv: 0, e: 0, I: 0, F: 0, flodI: 0, flodE: 0, iSkala: 0.004, t: 0, buf: [],
             });
             const pRef = useRef({});
+            const apiRef = useRef({});
+            pRef.current = { autoRun, autoV, R, nMot, ledare, N, show };
 
-            pRef.current = { autoRun, autoV, R, nMot };
-
-            // ── Animationsloop ──
+            // ── Fysikloopen (gemensam för 2D och 3D) ──
             useEffect(() => {
-                let raf, last = performance.now();
+                let raf, last = performance.now(), sista = 0;
                 const loop = (now) => {
                     raf = requestAnimationFrame(loop);
                     const dt = Math.min((now - last) / 1000, 0.05);
                     last = now;
-                    const p = pRef.current;
-                    const st = stateRef.current;
-
+                    const p = pRef.current, st = stRef.current;
+                    st.t += dt;
                     if (st.dragging) {
-                        if (now - st.lastMove > 80) st.vAct *= Math.pow(0.0005, dt);
-                        if (Math.abs(st.vAct) < 0.5) st.vAct = 0;
+                        if (now - st.lastMove > 80) st.v *= Math.pow(0.0005, dt);
                     } else if (p.autoRun) {
-                        st.xm += st.adir * p.autoV * PXCM * dt;
-                        if (st.xm > XMAXM) { st.xm = XMAXM; st.adir = -1; }
-                        if (st.xm < XMINM) { st.xm = XMINM; st.adir = 1; }
-                        st.vAct = st.adir * p.autoV;
+                        st.xm += st.adir * p.autoV * dt;
+                        if (st.xm > AUTO_A) { st.xm = AUTO_A; st.adir = -1; }
+                        if (st.xm < AUTO_B) { st.xm = AUTO_B; st.adir = 1; }
+                        st.v = st.adir * p.autoV;
                     } else {
-                        st.vAct *= Math.pow(0.0005, dt);
-                        if (Math.abs(st.vAct) < 0.5) st.vAct = 0;
+                        st.v *= Math.pow(0.0005, dt);
                     }
+                    if (Math.abs(st.v) < 0.3) st.v = 0;
 
-                    // flödet genom slingan (skalmodell av stavmagnetens fält)
-                    const gap = Math.max(0.5, (st.xm - 64 - (LX + LRX)) / PXCM);   // cm
-                    const pol = p.nMot ? -1 : 1;            // fältets riktning vid slingan (−x om N mot slingan)
-                    const phi = pol * KPHI / Math.pow(gap + 8, 2);
-                    const dphiInst = (phi - st.phi) / Math.max(dt, 1e-3);
-                    st.phi = phi;
-                    st.dphi = 0.8 * st.dphi + 0.2 * dphiInst;
-                    if (Math.abs(st.dphi) < 0.02) st.dphi = 0;
-
-                    // strömprickarna runt slingan
-                    const iMag = Math.abs(st.dphi) / p.R;
-                    const upFront = st.dphi > 0;            // dΦ/dt > 0 ⟹ ström uppåt i framkanten
-                    const rate = Math.min(5, 0.5 + 0.9 * iMag);
-                    if (iMag > 0.06) st.theta += (upFront ? -1 : 1) * rate * dt;
-
-                    setTick(t => t + 1);
+                    const geo = varvLagen(p.ledare, p.N);
+                    st.phi = phiTot(st.xm, geo, p.nMot);
+                    st.phiVarv = phiVarv(0, geo.a, st.xm, p.nMot);       // flödet genom mittvarvet
+                    const dfdx = dPhiDx(st.xm, geo, p.nMot);
+                    const v = st.v / 100;                                 // m/s
+                    st.e = -dfdx * v;                                     // V
+                    st.I = st.e / p.R;                                    // A
+                    st.F = -dfdx * dfdx * v / p.R;                        // N
+                    st.iSkala = p.ledare === 'slinga' ? 0.004 : 0.03;
+                    // strömmen flyter runt ledaren: positiv I är växande u
+                    const fart = Math.min(2.2, 0.25 + 1.6 * Math.tanh(Math.abs(st.I) / st.iSkala));
+                    if (Math.abs(st.I) > 2e-5) {
+                        st.flodI += Math.sign(st.I) * fart * dt * 0.55;
+                        st.flodE -= Math.sign(st.I) * fart * dt * 0.35;
+                    }
+                    if (st.t - sista > 1 / 30) {
+                        sista = st.t;
+                        st.buf.push({ t: st.t, e: st.e });
+                        while (st.buf.length && st.t - st.buf[0].t > GRAF_T) st.buf.shift();
+                    }
+                    setTick(t => (t + 1) % 1e6);
                 };
                 raf = requestAnimationFrame(loop);
                 return () => cancelAnimationFrame(raf);
             }, []);
 
-            // ── Dra i magneten ──
+            // ── Dra i magneten (2D och 3D använder samma funktioner) ──
+            const dragTo = (x) => {
+                const st = stRef.current;
+                const now = performance.now();
+                const dtS = Math.max((now - st.lastMove) / 1000, 1e-3);
+                const nx = Math.max(XMIN, Math.min(XMAX, x));
+                const vInst = (nx - st.xm) / dtS;
+                st.v = 0.6 * st.v + 0.4 * Math.max(-250, Math.min(250, vInst));
+                st.xm = nx;
+                st.lastMove = now;
+            };
+            apiRef.current.dragStart = () => { const st = stRef.current; st.dragging = true; st.lastMove = performance.now(); setAutoRun(false); };
+            apiRef.current.dragTo = dragTo;
+            apiRef.current.dragEnd = () => { stRef.current.dragging = false; };
+
             const svgX = (e) => {
                 const svg = svgRef.current;
                 const pt = svg.createSVGPoint();
                 pt.x = e.clientX; pt.y = e.clientY;
-                return pt.matrixTransform(svg.getScreenCTM().inverse()).x;
+                return (pt.matrixTransform(svg.getScreenCTM().inverse()).x - LX) / PX;
             };
             const onMagnetDown = (e) => {
                 e.preventDefault();
-                const st = stateRef.current;
-                st.dragging = true;
-                st.lastX = svgX(e);
-                st.lastMove = performance.now();
+                const st = stRef.current;
+                st.grepp = st.xm - svgX(e);
+                apiRef.current.dragStart();
             };
             useEffect(() => {
-                const move = (e) => {
-                    const st = stateRef.current;
-                    if (!st.dragging) return;
-                    const x = svgX(e);
-                    const now = performance.now();
-                    const dt = Math.max((now - st.lastMove) / 1000, 1e-3);
-                    const newXm = Math.max(XMINM, Math.min(XMAXM, st.xm + (x - st.lastX)));
-                    const vInst = (newXm - st.xm) / dt / PXCM;      // cm/s
-                    st.vAct = 0.6 * st.vAct + 0.4 * Math.max(-200, Math.min(200, vInst));
-                    st.xm = newXm;
-                    st.lastX = x;
-                    st.lastMove = now;
-                };
-                const up = () => {
-                    const st = stateRef.current;
-                    if (!st.dragging) return;
-                    st.dragging = false;
-                };
+                const move = (e) => { const st = stRef.current; if (!st.dragging || !svgRef.current) return; dragTo(svgX(e) + (st.grepp || 0)); };
+                const up = () => { stRef.current.dragging = false; };
                 window.addEventListener('pointermove', move);
                 window.addEventListener('pointerup', up);
-                return () => {
-                    window.removeEventListener('pointermove', move);
-                    window.removeEventListener('pointerup', up);
-                };
+                return () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); };
             }, []);
 
-            // ── Fullskärm ──
             useEffect(() => {
-                const handler = () => {
-                    const fs = document.fullscreenElement === sceneWrapRef.current ||
-                        document.webkitFullscreenElement === sceneWrapRef.current;
-                    setIsFullscreen(fs);
-                };
+                const handler = () => setIsFullscreen(document.fullscreenElement === sceneWrapRef.current || document.webkitFullscreenElement === sceneWrapRef.current);
                 document.addEventListener('fullscreenchange', handler);
                 document.addEventListener('webkitfullscreenchange', handler);
-                return () => {
-                    document.removeEventListener('fullscreenchange', handler);
-                    document.removeEventListener('webkitfullscreenchange', handler);
-                };
+                return () => { document.removeEventListener('fullscreenchange', handler); document.removeEventListener('webkitfullscreenchange', handler); };
             }, []);
             const toggleFullscreen = () => {
                 const el = sceneWrapRef.current;
                 if (!el) return;
-                if (document.fullscreenElement || document.webkitFullscreenElement)
-                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                if (document.fullscreenElement || document.webkitFullscreenElement) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
                 else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
             };
-
             const tShow = (key) => setShow(sh => ({ ...sh, [key]: !sh[key] }));
+            const valjVy3 = (n) => { setVy3(n); if (apiRef.current.vy) apiRef.current.vy(n); };
 
-            // ── Härledda storheter ──
-            const st = stateRef.current;
-            const eMv = st.dphi;                            // inducerad ems (mV, med tecken)
-            const iMa = eMv / R;                            // inducerad ström (mA, med tecken)
-            const active = Math.abs(iMa) > 0.06;
-            const upFront = st.dphi > 0;                    // ström uppåt i framkanten
-            const bIndLeft = st.dphi > 0;                   // slingans fält åt vänster
-            const fluxOkar = Math.abs(st.phi) > 1e-9 &&
-                Math.sign(st.dphi) === Math.sign(st.phi) ? true
-                : Math.abs(st.dphi) < 0.02 ? null : false;  // |Φ| ökar/minskar
+            const st = stRef.current;
+            const aktiv = Math.abs(st.I) > 2e-5;
+            const phiOkar = Math.abs(st.e) < 1e-6 ? null : (Math.sign(st.phi) === -Math.sign(st.e));
+            const framUpp = st.I < 0;           // positiv ström går nedåt i framkanten
+            const ledOrd = ledare === 'slinga' ? 'slingan' : 'spolen';
 
-            // ── Scenen ──
-            const scene = () => {
-                const els = [];
-                const xm = st.xm;
-                const face = xm - 64;                        // främre poländen (mot slingan)
+            const reglage = (Comp) => (
+                <React.Fragment>
+                    {ledare === 'spole' && <Comp label={Comp === Slider ? 'Antal varv i spolen (<em>N</em>)' : 'Antal varv (<em>N</em>)'} value={N}
+                        min={NMIN} max={NMAX} step={1} onChange={(x) => setN(Math.round(x))} valueText={`${N}`}
+                        sub={Comp === Slider ? 'Fler varv ger större inducerad spänning, e = −N · ΔΦ/Δt.' : undefined} />}
+                    <Comp label={Comp === Slider ? `Resistans i kretsen (<em>R</em>)` : 'Resistans (<em>R</em>)'} value={R}
+                        min={RMIN} max={RMAX} step={0.05} onChange={setR} valueText={`${fmt(R, 2)} Ω`}
+                        sub={Comp === Slider ? 'Mindre resistans ger större inducerad ström (Ohms lag).' : undefined} />
+                    <Comp label="Automatisk fart" value={autoV} min={AVMIN} max={AVMAX} step={5} onChange={setAutoV}
+                        valueText={`${fmt(autoV, 0)} cm/s`}
+                        sub={Comp === Slider ? 'Fortare rörelse ger snabbare flödesändring och större ström.' : undefined} />
+                </React.Fragment>
+            );
 
-                // magnetens fältlinjer (fläkt från främre polen, som teorifiguren)
-                const fEls = [];
-                const endX = Math.max(60, LX - 110);
-                [-2, -1, 0, 1, 2].forEach((i) => {
-                    const pts = [];
-                    for (let x = face; x >= endX; x -= 10) {
-                        const d = face - x;
-                        pts.push(`${x},${(LY + i * (6 + 0.055 * d + 0.00013 * d * d)).toFixed(1)}`);
-                    }
-                    fEls.push(<polyline key={'f' + i} points={pts.join(' ')} fill="none"
-                                        stroke={COL.falt} strokeWidth="1.5" />);
-                    // pil på mitten: ut ur N (åt vänster) eller in i S (åt höger)
-                    const dm = (face - endX) * 0.45;
-                    const ax = face - dm;
-                    const yv = LY + i * (6 + 0.055 * dm + 0.00013 * dm * dm);
-                    const slope = i * (0.055 + 2 * 0.00013 * dm);
-                    const m = Math.hypot(1, slope);
-                    const ux = (nMot ? -1 : 1) / m, uy = (nMot ? 1 : -1) * slope / m;
-                    fEls.push(<polygon key={'fh' + i}
-                                       points={`${ax + ux * 9},${yv + uy * 9} ${ax - uy * 4.2},${yv + ux * 4.2} ${ax + uy * 4.2},${yv - ux * 4.2}`}
-                                       fill={COL.falt} />);
-                });
-                els.push(<g key="falt">{fEls}</g>);
-
-                // fälten genom slingan (jämförelsepilar ovanför slingan)
-                if (show.falten) {
-                    const arrEls = [];
-                    const drawArrow = (y, dir, L, color, label) => {
-                        if (L < 4) {
-                            arrEls.push(<text key={'l' + y} x={LX + 78} y={y + 4} textAnchor="start" fontSize="11.5"
-                                              fill="var(--lab-ink-muted, #5a6170)">{label}: —</text>);
-                            return;
-                        }
-                        const x0 = LX - dir * L / 2, x1 = LX + dir * L / 2;
-                        arrEls.push(<line key={'a' + y} x1={x0} y1={y} x2={x1 - dir * 8} y2={y}
-                                          stroke={color} strokeWidth="2.6" strokeLinecap="butt" />);
-                        arrEls.push(<polygon key={'h' + y}
-                                             points={`${x1},${y} ${x1 - dir * 8},${y - 4.5} ${x1 - dir * 8},${y + 4.5}`}
-                                             fill={color} />);
-                        arrEls.push(<text key={'l' + y} x={LX + 78} y={y + 4} textAnchor="start" fontSize="11.5"
-                                          fill="var(--lab-ink-muted, #5a6170)">{label}</text>);
-                    };
-                    const bMag = Math.min(70, 8 + 340 / Math.pow(Math.max(0.5, (face - (LX + LRX)) / PXCM) + 8, 1));
-                    drawArrow(78, nMot ? -1 : 1, bMag, COL.falt, 'magnetens fält');
-                    drawArrow(106, bIndLeft ? -1 : 1, active ? Math.min(70, 10 + 14 * Math.abs(iMa)) : 0,
-                              COL.ind, 'slingans inducerade fält');
-                    els.push(<g key="jmf">{arrEls}</g>);
-                }
-
-                // ledningar + galvanometer
-                els.push(
-                    <g key="krets">
-                        <polyline points={`${LX - 6},${LY + LRY - 4} ${LX - 6},448 186,448`}
-                                  fill="none" stroke={COL.kopparI} strokeWidth="3" />
-                        <polyline points={`${LX + 6},${LY + LRY - 2} ${LX + 6},462 186,462`}
-                                  fill="none" stroke={COL.kopparI} strokeWidth="3" />
-                        <circle cx="150" cy="455" r="37" fill="#f7f2e8" stroke={COL.ink} strokeWidth="1.7" />
-                        {[-40, -20, 0, 20, 40].map((a) => {
-                            const rr = a * Math.PI / 180;
-                            return <line key={'t' + a}
-                                         x1={150 + 28 * Math.sin(rr)} y1={462 - 28 * Math.cos(rr)}
-                                         x2={150 + 33 * Math.sin(rr)} y2={462 - 33 * Math.cos(rr)}
-                                         stroke={COL.ink} strokeWidth="1.3" />;
-                        })}
-                        {(() => {
-                            const ang = Math.max(-42, Math.min(42, iMa * 9)) * Math.PI / 180;
-                            return <line x1="150" y1="462" x2={150 + 30 * Math.sin(ang)} y2={462 - 30 * Math.cos(ang)}
-                                         stroke="#c8324a" strokeWidth="2.4" strokeLinecap="butt" />;
-                        })()}
-                        <circle cx="150" cy="462" r="2.6" fill={COL.ink} />
-                        <text x="150" y="510" textAnchor="middle" fontSize="11.5"
-                              fill="var(--lab-ink-muted, #5a6170)">galvanometer</text>
-                    </g>
-                );
-
-                // slingan (koppar, som teorifiguren)
-                els.push(
-                    <g key="slinga">
-                        <ellipse cx={LX} cy={LY} rx={LRX} ry={LRY} fill="none" stroke={COL.kopparY} strokeWidth="11" />
-                        <ellipse cx={LX} cy={LY} rx={LRX} ry={LRY} fill="none" stroke={COL.kopparI} strokeWidth="7.5" />
-                        <text x={LX - 34} y={LY + LRY + 22} textAnchor="middle" fontSize="12.5"
-                              fill="var(--lab-ink-muted, #5a6170)">slinga</text>
-                    </g>
-                );
-
-                // strömprickar runt slingan (rör sig bara när ström induceras)
-                if (show.strom && active) {
-                    const dEls = [];
-                    for (let k = 0; k < 8; k++) {
-                        const th = st.theta + k * Math.PI / 4;
-                        dEls.push(<circle key={'d' + k} cx={LX + LRX * Math.sin(th)} cy={LY - LRY * Math.cos(th)}
-                                          r="3.6" fill={COL.ind} />);
-                    }
-                    els.push(<g key="dots">{dEls}</g>);
-                }
-
-                // inducerad ström: pil längs framkanten (som teorifiguren)
-                if (show.strom && active) {
-                    const top = upFront;
-                    const d = top
-                        ? `M ${LX + 27} ${LY + 86} Q ${LX + 46} ${LY} ${LX + 27} ${LY - 86}`
-                        : `M ${LX + 27} ${LY - 86} Q ${LX + 46} ${LY} ${LX + 27} ${LY + 86}`;
-                    const tipY = top ? LY - 92 : LY + 92;
-                    const baseY = top ? LY - 80 : LY + 80;
-                    els.push(
-                        <g key="ipil">
-                            <path d={d} fill="none" stroke={COL.ind} strokeWidth="2.2" />
-                            <polygon points={`${LX + 25},${tipY} ${LX + 21},${baseY} ${LX + 33},${baseY - (top ? -2 : 2)}`}
-                                     fill={COL.ind} />
-                            <text x={LX + 52} y={top ? LY - 98 : LY + 106} textAnchor="start" fontSize="15" fill={COL.ind}>
-                                <tspan fontStyle="italic">I</tspan>
-                            </text>
-                        </g>
-                    );
-                }
-
-                // magneten (dra i den!)
-                const nLeftBlock = !nMot;   // N-blocket sitter mot slingan (vänster) om nMot
-                els.push(
-                    <g key="magnet" onPointerDown={onMagnetDown}
-                       style={{ cursor: st.dragging ? 'grabbing' : 'grab' }}>
-                        <rect x={xm - 76} y={LY - 30} width={152} height={60} fill="transparent" />
-                        <rect x={xm - 64} y={LY - 15} width="64" height="30"
-                              fill={nMot ? COL.npol : COL.spol} stroke="#5d646e" strokeWidth="1.2" />
-                        <rect x={xm} y={LY - 15} width="64" height="30"
-                              fill={nMot ? COL.spol : COL.npol} stroke="#5d646e" strokeWidth="1.2" />
-                        <text x={xm - 32} y={LY + 5} textAnchor="middle" fontSize="14" fontWeight="600"
-                              fill={nMot ? '#ffffff' : '#3a3f47'} style={{ pointerEvents: 'none' }}>{nMot ? 'N' : 'S'}</text>
-                        <text x={xm + 32} y={LY + 5} textAnchor="middle" fontSize="14" fontWeight="600"
-                              fill={nMot ? '#3a3f47' : '#ffffff'} style={{ pointerEvents: 'none' }}>{nMot ? 'S' : 'N'}</text>
-                    </g>
-                );
-
-                // hastigheten v (grön pil ovanför magneten, som teorifiguren)
-                if (Math.abs(st.vAct) > 2) {
-                    const vd = st.vAct > 0 ? 1 : -1;
-                    const Lv = 16 + 0.9 * Math.abs(st.vAct);
-                    const x0 = xm - vd * Lv / 2, x1 = xm + vd * (Lv / 2 - 9);
-                    els.push(
-                        <g key="vpil" style={{ pointerEvents: 'none' }}>
-                            <line x1={x0} y1={LY - 42} x2={x1} y2={LY - 42} stroke={COL.v} strokeWidth="2.4" strokeLinecap="butt" />
-                            <polygon points={`${x1 + vd * 9},${LY - 42} ${x1},${LY - 46.5} ${x1},${LY - 37.5}`} fill={COL.v} />
-                            <text x={xm} y={LY - 54} textAnchor="middle" fontSize="14" fill={COL.v}>
-                                <tspan fontStyle="italic">v</tspan>
-                            </text>
-                        </g>
-                    );
-                }
-
-                // kraften på magneten (motverkar rörelsen — Lenz lag)
-                if (show.kraft && active && Math.abs(st.vAct) > 2) {
-                    const fd = st.vAct > 0 ? -1 : 1;
-                    const Lf = Math.min(90, 12 + 11 * Math.abs(iMa));
-                    const x0 = xm, x1 = xm + fd * (Lf - 9);
-                    els.push(
-                        <g key="fpil" style={{ pointerEvents: 'none' }}>
-                            <line x1={x0} y1={LY + 34} x2={x1} y2={LY + 34} stroke={COL.kraft} strokeWidth="2.6" strokeLinecap="butt" />
-                            <polygon points={`${x1 + fd * 9},${LY + 34} ${x1},${LY + 29.5} ${x1},${LY + 38.5}`} fill={COL.kraft} />
-                            <text x={x1 + fd * 18} y={LY + 52} textAnchor="middle" fontSize="14" fill={COL.kraft}>
-                                <tspan fontStyle="italic">F</tspan>
-                            </text>
-                        </g>
-                    );
-                }
-
-                return (
-                    <svg ref={svgRef} viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid meet"
-                         fontFamily="Poppins, sans-serif">
-                        <defs>
-                            <linearGradient id="paperG" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0" stopColor="#f7f2e8" />
-                                <stop offset="1" stopColor="#ece3d2" />
-                            </linearGradient>
-                        </defs>
-                        <rect x="0" y="0" width={VBW} height={VBH} fill="url(#paperG)" />
-                        {els}
-                    </svg>
-                );
-            };
-
-            // ── Kryssrutor, lägesval och (i fullskärm) reglage — allt samlat
-            // i inställningsrutan uppe till höger. Hopfällbar (.st-hide/
-            // .st-show-btn — centrala klasser i styles-laborans-sim.css).
-            // Bottenpanelen .fs-controls togs bort 2026-08-31: den låg
-            // delvis ovanpå galvanometern nere till vänster i fullskärm
-            // (placeringsregeln i CLAUDE.md).
             const sceneToggles = () => (
                 !togglesOpen ? (
-                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)}
-                            aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                             strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-                            <line x1="4" y1="8" x2="20" y2="8" />
-                            <circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
-                            <line x1="4" y1="16" x2="20" y2="16" />
-                            <circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)} aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" /><circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" /><circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
                         </svg>
                     </button>
                 ) : (
                 <div className="scene-toggles">
-                    <button className="st-hide" onClick={() => setTogglesOpen(false)}
-                            aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                             strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
-                            <path d="M6 6l12 12M18 6L6 18" />
-                        </svg>
+                    <button className="st-hide" onClick={() => setTogglesOpen(false)} aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
                     </button>
-                    <div className="st-title">Magneten</div>
-                    <label><input type="radio" name="pol" checked={nMot} onChange={() => setNMot(true)} />
-                        <span>Nordändan mot slingan</span></label>
-                    <label><input type="radio" name="pol" checked={!nMot} onChange={() => setNMot(false)} />
-                        <span>Sydändan mot slingan</span></label>
-                    <div className="st-title st-group">Visa</div>
+                    <div className="st-title">Visa</div>
+                    <label><input type="checkbox" checked={show.linjer} onChange={() => tShow('linjer')} />
+                        <span className="st-swatch" style={{ background: COL.falt }}></span><span>Magnetens fältlinjer</span></label>
                     <label><input type="checkbox" checked={show.falten} onChange={() => tShow('falten')} />
-                        <span className="st-swatch" style={{ background: COL.ind }}></span>
-                        <span>Fälten genom slingan</span></label>
+                        <span className="st-swatch" style={{ background: `linear-gradient(90deg, ${COL.falt} 50%, ${COL.ind} 50%)` }}></span><span>Fälten genom ledaren</span></label>
                     <label><input type="checkbox" checked={show.strom} onChange={() => tShow('strom')} />
-                        <span className="st-swatch" style={{ background: COL.ind }}></span>
-                        <span>Inducerad ström <em>I</em></span></label>
+                        <span className="st-swatch" style={{ background: COL.ind }}></span><span>Inducerad ström <em>I</em></span></label>
+                    <label><input type="checkbox" checked={show.elek} onChange={() => tShow('elek')} />
+                        <span className="st-dot" style={{ background: COL.elek }}></span><span>Elektronerna</span></label>
                     <label><input type="checkbox" checked={show.kraft} onChange={() => tShow('kraft')} />
-                        <span className="st-swatch" style={{ background: COL.kraft }}></span>
-                        <span>Kraften på magneten</span></label>
-                    {/* Reglagen och styrknappen visas här BARA i fullskärm — i
-                        normalläget finns de i sidopanelen (aldrig dubblerade). */}
+                        <span className="st-swatch" style={{ background: COL.kraft }}></span><span>Kraften på magneten</span></label>
+                    <div className="st-title st-group">Magneten</div>
+                    <label><input type="radio" name="pol" checked={nMot} onChange={() => setNMot(true)} /><span>Nordändan mot {ledOrd}</span></label>
+                    <label><input type="radio" name="pol" checked={!nMot} onChange={() => setNMot(false)} /><span>Sydändan mot {ledOrd}</span></label>
                     {isFullscreen && (
                         <React.Fragment>
                             <div className="st-title st-group">Reglage</div>
-                            <div className="st-sliders">
-                                <StSlider label="Resistans (<em>R</em>)" value={R}
-                                          min={RMIN} max={RMAX} step={0.05} onChange={setR}
-                                          valueText={`${fmt(R, 2)} Ω`} />
-                                <StSlider label="Automatisk fart" value={autoV}
-                                          min={AVMIN} max={AVMAX} step={5} onChange={setAutoV}
-                                          valueText={`${fmt(autoV, 0)} cm/s`} />
-                            </div>
+                            <div className="st-sliders">{reglage(StSlider)}</div>
                             <div className="st-actions">
-                                <button className={`btn-toggle ${autoRun ? 'active' : ''}`}
-                                        onClick={() => setAutoRun(r => !r)}>
+                                <button className={`btn-toggle ${autoRun ? 'active' : ''}`} onClick={() => setAutoRun(r => !r)}>
                                     {autoRun ? 'Stoppa rörelsen' : 'För magneten fram och tillbaka'}
                                 </button>
                             </div>
@@ -713,15 +1405,6 @@
                 )
             );
 
-            const Readout = ({ label, value, unit, color }) => (
-                <div className="p-2 rounded-lg" style={{ background: 'var(--lab-bg)', border: '1px solid var(--lab-line-strong)' }}>
-                    <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }} dangerouslySetInnerHTML={{ __html: label }} />
-                    <div className="font-mono font-bold text-sm" style={{ color: color || 'var(--lab-ink)' }}>
-                        {value} <span className="font-normal text-xs" style={{ color: 'var(--lab-ink-muted)' }}>{unit}</span>
-                    </div>
-                </div>
-            );
-
             return (
                 <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                     <div className="max-w-6xl mx-auto pt-6">
@@ -729,39 +1412,55 @@
                             <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Inducerad ström och Lenz lag
                         </div>
                         <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Inducerad ström och Lenz lag</h1>
-                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
-                            Ta tag i stavmagneten och <strong>närma dig eller avlägsna dig från slingan</strong>.
-                            När magnetfältet genom slingan ändras induceras en ström — och enligt <strong>Lenz
-                            lag</strong> får den en riktning som <strong>motverkar orsaken</strong>: slingans eget
-                            magnetfält motverkar ändringen av flödet. Titta på galvanometern: utslag åt ena hållet
-                            när magneten närmar sig, åt andra hållet när den dras bort — och inget utslag alls när
-                            magneten är stilla.
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 840 }}>
+                            Ta tag i stavmagneten och för den mot en slinga eller en spole, rakt igenom och ut på
+                            andra sidan. När magnetfältet genom ledaren ändras induceras en ström, och enligt{' '}
+                            <strong>Lenz lag</strong> får den en riktning som <strong>motverkar orsaken</strong>: ledarens
+                            eget magnetfält motverkar ändringen av flödet. Titta på galvanometern. Den ger utslag åt ena
+                            hållet när magneten närmar sig, åt andra hållet när den dras bort och inget utslag alls när
+                            magneten står still. Växla till 3D för att se slingan och spolen från alla håll.
                         </p>
 
                         <FormulaCard />
 
                         <main className="flex flex-col lg:flex-row gap-6">
-                            {/* Scen */}
                             <div className="lg:w-3/5 order-1">
-                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
-                                    {scene()}
+                                <div className={'scene-wrap' + (isFullscreen ? ' is-fs' : '')} data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    {dim === '2d'
+                                        ? <Scen2D st={st} p={pRef.current} show={show} onMagnetDown={onMagnetDown} svgRef={svgRef} />
+                                        : <Scen3D stRef={stRef} pRef={pRef} apiRef={apiRef} />}
 
                                     <div className="scene-info">
                                         <span className="si-lbl">Inducerad spänning <em style={{ textTransform: 'none' }}>e</em></span>
-                                        <span className="si-val">{fmtE(eMv)}</span>
+                                        <span className="si-val">{fmtSmart(st.e * 1000, 'mV')}</span>
                                         <span className="si-lbl" style={{ marginTop: 4 }}>Inducerad ström <em style={{ textTransform: 'none' }}>I</em></span>
-                                        <span className="si-val">{fmtI(iMa)}</span>
-                                        <span className="si-lbl" style={{ marginTop: 4 }}>Flödet genom slingan</span>
-                                        <span className="si-val" style={{ fontSize: 12 }}>
-                                            {fluxOkar === null ? 'oförändrat' : fluxOkar ? 'ökar' : 'minskar'}
-                                        </span>
+                                        <span className="si-val">{fmtSmart(st.I * 1000, 'mA')}</span>
+                                        <span className="si-lbl" style={{ marginTop: 4 }}>Flödet genom {ledOrd}</span>
+                                        <span className="si-val" style={{ fontSize: 12.5 }}>{phiOkar === null ? 'oförändrat' : phiOkar ? 'ökar' : 'minskar'}</span>
                                     </div>
 
-                                    <div className="scene-hint">Ta tag i magneten och för den mot eller från slingan</div>
+                                    <div className="scene-hint">{dim === '2d'
+                                        ? tr('Ta tag i magneten och för den mot eller genom {led}', { led: tr(ledOrd) }).replace('{led}', ledOrd)
+                                        : 'Dra i magneten för att flytta den. Dra någon annanstans för att vrida scenen.'}</div>
                                     {sceneToggles()}
 
-                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
-                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                    <div className="fs-quick">
+                                        <button className="fq-play" onClick={() => setAutoRun(r => !r)} aria-label={autoRun ? 'Paus' : 'Start'} title={autoRun ? 'Paus' : 'Start'}>
+                                            {autoRun ? (
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1" /><rect x="14" y="5" width="4" height="14" rx="1" /></svg>
+                                            ) : (
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" /></svg>
+                                            )}
+                                        </button>
+                                        <div className="fq-rows">
+                                            <div className="fq-row">
+                                                <span className="fq-lbl">Fart</span>
+                                                <input type="range" min={AVMIN} max={AVMAX} step={5} value={autoV} onChange={e => setAutoV(parseFloat(e.target.value))} aria-label="Fart" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm" title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
                                         {isFullscreen ? (
                                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                                                 <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
@@ -775,123 +1474,132 @@
                                 </div>
                             </div>
 
-                            {/* Kontroller */}
                             <div className="lg:w-2/5 order-2">
                                 <div className="glass-card rounded-xl p-3 mb-3">
-                                    <Slider label="Resistans i slingan (<em>R</em>)"
-                                            sub="Mindre resistans ⟹ större inducerad ström (Ohms lag)."
-                                            value={R} min={RMIN} max={RMAX} step={0.05} onChange={setR}
-                                            valueText={`${fmt(R, 2)} Ω`} />
-                                    <Slider label="Automatisk fart"
-                                            sub="Fortare rörelse ⟹ snabbare flödesändring ⟹ större ström."
-                                            value={autoV} min={AVMIN} max={AVMAX} step={5} onChange={setAutoV}
-                                            valueText={`${fmt(autoV, 0)} cm/s`} />
-                                    <div className="flex gap-2 mt-1">
-                                        <button className={`btn-toggle flex-1 ${autoRun ? 'active' : ''}`}
-                                                onClick={() => setAutoRun(r => !r)}>
-                                            {autoRun ? 'Stoppa rörelsen' : 'För magneten fram och tillbaka'}
-                                        </button>
+                                    <div className="grid grid-cols-2 gap-3">
+                                        <div>
+                                            <div className="flbl mb-2">Visning</div>
+                                            <div className="seg" style={{ gridTemplateColumns: '1fr 1fr' }}>
+                                                <button className={dim === '2d' ? 'active' : ''} onClick={() => setDim('2d')}>2D</button>
+                                                <button className={dim === '3d' ? 'active' : ''} onClick={() => setDim('3d')}>3D</button>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className="flbl mb-2">Ledare</div>
+                                            <div className="seg" style={{ gridTemplateColumns: '1fr 1fr' }}>
+                                                <button className={ledare === 'slinga' ? 'active' : ''} onClick={() => setLedare('slinga')}>Slinga</button>
+                                                <button className={ledare === 'spole' ? 'active' : ''} onClick={() => setLedare('spole')}>Spole</button>
+                                            </div>
+                                        </div>
                                     </div>
+                                    {dim === '3d' && (
+                                        <div className="mt-3">
+                                            <div className="flbl mb-2">Vy</div>
+                                            <div className="seg" style={{ gridTemplateColumns: '1fr 1fr 1fr' }}>
+                                                <button className={vy3 === 'snett' ? 'active' : ''} onClick={() => valjVy3('snett')}>Snett</button>
+                                                <button className={vy3 === 'sidan' ? 'active' : ''} onClick={() => valjVy3('sidan')}>Från sidan</button>
+                                                <button className={vy3 === 'ovan' ? 'active' : ''} onClick={() => valjVy3('ovan')}>Ovanifrån</button>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
 
-                                {/* Live-beräkning */}
                                 <div className="glass-card rounded-xl p-3 mb-3">
-                                    <div className="flbl mb-2">Ohms lag på den inducerade strömmen</div>
-                                    <div className="flex flex-wrap items-center gap-x-2 gap-y-2"
-                                         style={{ color: 'var(--lab-ink)', fontSize: 15 }}>
-                                        <span><em>I</em></span>
-                                        <span>=</span>
-                                        <span style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', lineHeight: 1.25 }}>
-                                            <span style={{ padding: '0 6px 2px' }}><em>e</em></span>
-                                            <span style={{ padding: '2px 6px 0', borderTop: '1.5px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}><em>R</em></span>
-                                        </span>
-                                        <span>=</span>
-                                        <span style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', lineHeight: 1.25 }}>
-                                            <span style={{ padding: '0 6px 2px' }}>{fmtE(eMv)}</span>
-                                            <span style={{ padding: '2px 6px 0', borderTop: '1.5px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{fmt(R, 2)} Ω</span>
-                                        </span>
-                                        <span>=</span>
-                                        <span className="font-bold" style={{ color: 'var(--lab-accent)', whiteSpace: 'nowrap' }}>{fmtI(iMa)}</span>
-                                    </div>
-                                    <div className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>
-                                        Den inducerade spänningen <em>e</em> kommer från flödesändringen just nu —
-                                        håll magneten stilla så blir både <em>e</em> och <em>I</em> noll.
+                                    {reglage(Slider)}
+                                    <button className={`btn-toggle w-full ${autoRun ? 'active' : ''}`} onClick={() => setAutoRun(r => !r)}>
+                                        {autoRun ? 'Stoppa rörelsen' : 'För magneten fram och tillbaka'}
+                                    </button>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Inducerad spänning över tid</div>
+                                    <Graf buf={st.buf} />
+                                    <div className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}>
+                                        För magneten rakt igenom {ledOrd}: spänningen byter tecken när magnetens mitt passerar.
                                     </div>
                                 </div>
 
-                                {/* Avläsning */}
                                 <div className="glass-card rounded-xl p-3 mb-3">
                                     <div className="flbl mb-2">Avläsning</div>
                                     <div className="grid grid-cols-2 gap-2">
-                                        <Readout label="Inducerad spänning <em>e</em>" value={fmtE(eMv)} unit="" color="var(--lab-accent)" />
-                                        <Readout label="Inducerad ström <em>I</em>" value={fmtI(iMa)} unit="" color="var(--lab-accent)" />
-                                        <Readout label="Magnetens fart" value={fmt(Math.abs(st.vAct), 0)} unit="cm/s" />
-                                        <Readout label="Strömmen i framkanten" value={active ? (upFront ? 'uppåt' : 'nedåt') : '—'} unit="" />
-                                    </div>
-                                    <div className="mt-2 p-2 rounded-lg text-xs" style={{ background: 'rgba(13,148,136,0.08)', color: 'var(--lab-ink-soft)' }}>
-                                        Testa teorins Exempel 2: närma magneten med nordändan mot slingan och läs av
-                                        strömriktningen. Dra sedan bort den — strömmen byter håll. Vänd till sydändan
-                                        och gör om: allt speglas!
+                                        <Readout label="Inducerad spänning <em>e</em>" value={fmtSmart(st.e * 1000, 'mV')} color={COL.ind} />
+                                        <Readout label="Inducerad ström <em>I</em>" value={fmtSmart(st.I * 1000, 'mA')} color={COL.ind} />
+                                        <Readout label="Flödet <em>Φ</em> genom ledaren" value={fmtSmart(st.phi * 1e6, 'µWb')} />
+                                        <Readout label="Kraften på magneten" value={fmtSmart(Math.abs(st.F) * 1000, 'mN')} color={COL.kraft} />
+                                        <Readout label="Magnetens fart" value={`${fmt(Math.abs(st.v), 0)} cm/s`} />
+                                        <Readout label="Strömmen i framkanten" value={aktiv ? (framUpp ? 'uppåt' : 'nedåt') : '–'} />
                                     </div>
                                 </div>
                             </div>
                         </main>
 
-                        {/* Pedagogiska sektioner */}
                         <div className="grid md:grid-cols-3 gap-4 mt-6">
                             <div className="glass-card rounded-xl p-4">
                                 <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Lenz lag i simuleringen</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                    När magneten närmar sig <strong>förstärks</strong> fältet genom slingan. Den
-                                    inducerade strömmen skapar då ett eget fält som är <strong>motriktat</strong> —
-                                    jämför de två pilarna ovanför slingan. När magneten dras bort <strong>försvagas </strong>
-                                    fältet, och slingans fält vänder för att i stället förstärka det. Orsaken
-                                    motverkas alltid.
+                                    När magneten närmar sig <strong>förstärks</strong> fältet genom ledaren. Den inducerade
+                                    strömmen skapar då ett eget fält som är <strong>motriktat</strong>. Jämför de två pilarna
+                                    ovanför ledaren. När magneten dras bort <strong>försvagas</strong> fältet, och det
+                                    inducerade fältet vänder för att i stället förstärka det. Orsaken motverkas alltid.
                                 </p>
                             </div>
                             <div className="glass-card rounded-xl p-4">
-                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Galvanometern avslöjar allt</h3>
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Spolen ger större spänning</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                    Precis som i demonstrationen ger magneten utslag <strong>bara när den rör
-                                    sig</strong>: in mot slingan → utslag åt ena hållet, ut från slingan → utslag åt
-                                    andra hållet, stilla → inget utslag. Snabbare rörelse och mindre resistans ger
-                                    större utslag.
+                                    Varje varv i spolen får samma flödesändring som slingan, och spänningarna i varven
+                                    adderas: <em>e</em>&nbsp;=&nbsp;−<em>N</em>&thinsp;·&thinsp;Δ<em>Φ</em>/Δ<em>t</em>.
+                                    Med tio varv blir spänningen ungefär tio gånger så stor. Pröva att ändra varvtalet och
+                                    se grafen växa.
                                 </p>
                             </div>
                             <div className="glass-card rounded-xl p-4">
                                 <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Kraften motverkar rörelsen</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                    Slingan blir en liten elektromagnet som <strong>bromsar magneten</strong>: den
-                                    stöter bort en annalkande magnet och håller kvar en som dras bort (slå på
-                                    "Kraften på magneten"). Samma princip får en magnet att falla långsamt genom
-                                    ett kopparrör — virvelströmmarna i röret motverkar fallet.
+                                    Ledaren blir en liten elektromagnet som <strong>bromsar magneten</strong>: den stöter
+                                    bort en magnet som närmar sig och håller kvar en som dras bort. Slå på "Kraften på
+                                    magneten". Den energi som blir elektrisk energi i kretsen kommer från arbetet du gör
+                                    när du för magneten.
                                 </p>
                             </div>
                         </div>
 
                         <details className="glass-card rounded-xl p-4 mt-4">
                             <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
-                                <span>Så läser du av strömriktningen</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                                <span>Så läser du av strömriktningen</span><span style={{ color: 'var(--lab-ink-muted)' }}>+</span>
                             </summary>
                             <p className="mt-3 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
                                 Gör som i teorins Exempel 2, i tre steg. <strong>1)</strong> Avgör åt vilket håll
-                                magnetens fält pekar genom slingan och om det <strong>förstärks eller försvagas</strong> av
-                                rörelsen. <strong>2)</strong> Lenz lag: den inducerade strömmens fält
-                                ska <strong>motverka ändringen</strong> — motriktat om fältet förstärks, medriktat om
-                                det försvagas. <strong>3)</strong> Använd tumregeln för spole/slinga baklänges: låt
-                                tummen peka i det inducerade fältets riktning, så visar fingrarna strömmens riktning
-                                runt slingan — till exempel "uppåt i framkanten".
+                                magnetens fält pekar genom ledaren och om det <strong>förstärks eller försvagas</strong> av
+                                rörelsen. <strong>2)</strong> Lenz lag: den inducerade strömmens fält ska <strong>motverka
+                                ändringen</strong>, alltså vara motriktat om fältet förstärks och medriktat om det
+                                försvagas. <strong>3)</strong> Använd tumregeln för spole och slinga baklänges: låt tummen
+                                peka i det inducerade fältets riktning, så visar fingrarna strömmens riktning runt
+                                ledaren, till exempel uppåt i framkanten.
                             </p>
                         </details>
 
                         <details className="glass-card rounded-xl p-4 mt-4">
                             <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
-                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                                <span>Elektronerna och strömriktningen</span><span style={{ color: 'var(--lab-ink-muted)' }}>+</span>
+                            </summary>
+                            <p className="mt-3 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                Strömpilarna visar den överenskomna strömriktningen, från plus till minus. Det som
+                                faktiskt rör sig i koppartråden är elektroner, och eftersom de är negativt laddade
+                                rör de sig åt motsatt håll. Slå på Elektronerna och se dem vandra mot strömpilarna.
+                                Deras verkliga fart är mycket liten, bara bråkdelar av en millimeter per sekund, så i
+                                simuleringen är farten kraftigt förstorad.
+                            </p>
+                        </details>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>+</span>
                             </summary>
                             <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                <li><strong>"Den inducerade strömmen motverkar magnetens fält."</strong> Inte riktigt — den motverkar <em>ändringen</em> av flödet. När magneten dras bort är slingans fält till och med <em>medriktat</em> magnetens, för att försöka behålla flödet.</li>
-                                <li><strong>"En stark magnet nära slingan ger ström."</strong> Nej — utan rörelse ingen flödesändring och ingen ström, hur stark magneten än är. Prova att hålla magneten stilla alldeles intill slingan.</li>
-                                <li><strong>"Strömmen borde förstärka orsaken."</strong> Då skulle energi skapas ur ingenting: strömmen skulle driva på rörelsen som skapar mer ström. Lenz lag är energiprincipen i elektromagnetisk form — man måste utföra arbete för att inducera ström.</li>
+                                <li><strong>”Den inducerade strömmen motverkar magnetens fält.”</strong> Inte riktigt. Den motverkar <em>ändringen</em> av flödet. När magneten dras bort är det inducerade fältet till och med <em>medriktat</em> magnetens, för att försöka behålla flödet.</li>
+                                <li><strong>”En stark magnet nära slingan ger ström.”</strong> Nej. Utan rörelse blir det ingen flödesändring och ingen ström, hur stark magneten än är. Pröva att hålla magneten stilla mitt i spolen.</li>
+                                <li><strong>”Strömmen är störst när magneten är mitt i spolen.”</strong> Nej, där är flödet störst men ändras som minst. Strömmen är störst när magnetens ändar passerar ledaren, och den byter riktning just när magnetens mitt passerar. Titta på grafen.</li>
+                                <li><strong>”Strömmen borde förstärka orsaken.”</strong> Då skulle energi skapas ur ingenting: strömmen skulle driva på rörelsen som skapar mer ström. Lenz lag är energiprincipen i elektromagnetisk form, och man måste utföra arbete för att inducera ström.</li>
                             </ul>
                         </details>
                     </div>

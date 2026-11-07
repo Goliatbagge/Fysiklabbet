@@ -5,21 +5,21 @@
     <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transformator — Fysiklabbet</title>
-    <meta name="description" content="Två spolar på en gemensam järnkärna: växelströmmen i primärspolen ger ett varierande magnetiskt flöde som inducerar en ny spänning i sekundärspolen. Ändra U₁ och varvtalen N₁ och N₂, se spänningsgrafen — och anslut en lampa för att se att strömmen ändras åt motsatt håll så att effekten bevaras (N₁/N₂ = U₁/U₂).">
+    <meta name="description" content="Två spolar på en gemensam järnkärna, i 2D eller 3D på labbänken. Växelströmmen i primärspolen ger ett magnetiskt flöde som ändras hela tiden och inducerar en ny spänning i sekundärspolen. Ändra U₁, N₁ och N₂, anslut lampan och se att strömmen ändras åt motsatt håll så att effekten bevaras. Prova likspänning och se varför den inte fungerar.">
     <link rel="canonical" href="https://fysiklabbet.se/fysik2-transformator-app.html">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Fysiklabbet">
     <meta property="og:title" content="Transformator — Fysik nivå 2">
-    <meta property="og:description" content="Två spolar på en gemensam järnkärna: växelströmmen i primärspolen ger ett varierande magnetiskt flöde som inducerar en ny spänning i sekundärspolen. Ändra U₁ och varvtalen N₁ och N₂, se spänningsgrafen — och anslut en lampa för att se att strömmen ändras åt motsatt håll så att effekten bevaras (N₁/N₂ = U₁/U₂).">
+    <meta property="og:description" content="Två spolar på en gemensam järnkärna, i 2D eller 3D på labbänken. Växelströmmen i primärspolen ger ett magnetiskt flöde som ändras hela tiden och inducerar en ny spänning i sekundärspolen. Ändra U₁, N₁ och N₂, anslut lampan och se att strömmen ändras åt motsatt håll så att effekten bevaras. Prova likspänning och se varför den inte fungerar.">
     <meta property="og:url" content="https://fysiklabbet.se/fysik2-transformator-app.html">
     <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Transformator — Fysik nivå 2">
-    <meta name="twitter:description" content="Två spolar på en gemensam järnkärna: växelströmmen i primärspolen ger ett varierande magnetiskt flöde som inducerar en ny spänning i sekundärspolen. Ändra U₁ och varvtalen N₁ och N₂, se spänningsgrafen — och anslut en lampa för att se att strömmen ändras åt motsatt håll så att effekten bevaras (N₁/N₂ = U₁/U₂).">
+    <meta name="twitter:description" content="Två spolar på en gemensam järnkärna, i 2D eller 3D på labbänken. Växelströmmen i primärspolen ger ett magnetiskt flöde som ändras hela tiden och inducerar en ny spänning i sekundärspolen. Ändra U₁, N₁ och N₂, anslut lampan och se att strömmen ändras åt motsatt håll så att effekten bevaras. Prova likspänning och se varför den inte fungerar.">
     <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -33,6 +33,7 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
     <style>
         html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
@@ -48,16 +49,17 @@
 
         .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
                 color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
-        .fnum { color: var(--lab-ink); font-size: 19px; }
+        .fnum { color: var(--lab-ink); font-size: 21px; font-family: 'Instrument Serif', serif; }
 
         .scene-info {
-            position: absolute; bottom: 12px; right: 14px; z-index: 5;
+            position: absolute; bottom: 12px; left: 14px; z-index: 5;
             background: rgba(246,242,234,0.94);
             backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
             border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
             border-radius: 10px; padding: 7px 12px;
             box-shadow: 0 2px 8px rgba(15,22,32,0.12);
             display: flex; flex-direction: column; gap: 1px; pointer-events: none;
+            min-width: 150px;
         }
         .scene-info .si-lbl { font-size: 10px; letter-spacing: 0.05em;
             text-transform: uppercase; color: var(--lab-ink-muted, #5a6170); font-weight: 600; }
@@ -73,12 +75,35 @@
             border: 1px solid rgba(15,22,32,0.18);
             box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
             user-select: none;
-            background: #f3eee4;
+            -webkit-user-select: none;
+            background: linear-gradient(180deg, #f7f2e8 0%, #ece3d2 100%);
         }
         .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
             width: 100vw; height: 100vh; border-radius: 0;
         }
         .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+        .tre-mount { position: absolute; inset: 0; touch-action: none; }
+        .tre-mount > canvas { display: block; width: 100%; height: 100%; outline: none; }
+        .tre-mount.grab { cursor: grab; }
+        .tre-mount.dragging { cursor: grabbing; }
+        .tre-mount.pointer { cursor: pointer; }
+        @media (max-width: 600px) {
+            body.lab-sim .scene-wrap:not(:fullscreen) .tre-mount { position: relative; inset: auto; height: 380px; }
+            /* Mobil fullskärm: scenen I FLÖDET med egen höjd, så att sim-dock.js
+               dockar verktygen under den (fälla 5 under "Mobil (≤600px)" i CLAUDE.md). */
+            body.lab-sim .scene-wrap:is(:fullscreen, :-webkit-full-screen) .tre-mount {
+                position: sticky; inset: auto; top: 0; z-index: 2;
+                flex: 0 0 auto; width: 100%; height: 46vh;
+            }
+        }
+        .klickbar { cursor: pointer; }
+
+        .scene-hint {
+            position: absolute; bottom: 10px; right: 12px; z-index: 5;
+            font-size: 12px; color: #e9edf3;
+            background: rgba(15,22,32,0.80); padding: 4px 11px; border-radius: 7px;
+            pointer-events: none; font-weight: 500; max-width: calc(100% - 230px);
+        }
 
         .scene-toggles {
             position: absolute; top: 14px; right: 14px; z-index: 6;
@@ -88,7 +113,7 @@
             border-radius: 10px; padding: 9px 13px;
             display: flex; flex-direction: column; gap: 3px;
             box-shadow: 0 2px 8px rgba(15,22,32,0.12);
-            max-width: 262px;
+            max-width: 240px;
         }
         .scene-toggles .st-title {
             font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
@@ -103,13 +128,11 @@
             width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
         }
         .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin: 0 3px; }
         .scene-toggles .st-actions {
             display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
             padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
         }
-
-        .fs-controls .fs-row { display: flex; align-items: center; gap: 10px; }
-        .fs-controls .fs-row input[type="range"] { flex: 1; accent-color: var(--lab-accent, #c8324a); }
 
         .btn-toggle {
             background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
@@ -122,6 +145,14 @@
             background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
             border-color: var(--lab-ink, #0f1620);
         }
+        .seg { display: grid; gap: 1px; border-radius: 9px; overflow: hidden;
+               border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+               background: var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .seg button { background: var(--lab-bg, #f3eee4); border: 0; padding: 8px 4px; font-size: 13.5px;
+                      font-weight: 600; color: var(--lab-ink); cursor: pointer; line-height: 1.2; }
+        .seg button .sub { display: block; font-size: 11px; font-weight: 500; color: var(--lab-ink-muted); }
+        .seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+        .seg button.active .sub { color: rgba(243,238,228,0.75); }
 
         details > summary { list-style: none; cursor: pointer; }
         details > summary::-webkit-details-marker { display: none; }
@@ -202,14 +233,18 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect, useRef, useMemo } = React;
+        const { useState, useEffect, useRef } = React;
+        const tr = (t, p) => (window.I18N ? I18N.t(t, p) : t);
 
         // ── Glidarintervall ──
-        const U1MIN = 5, U1MAX = 400;          // primärspänning U1 (V)
-        const NMIN = 50, NMAX = 1500;          // varvtal N1, N2
-        const RMIN = 10, RMAX = 500;           // lampans resistans (ohm)
+        const U1MIN = 5, U1MAX = 400;          // primärspänning U1 (V, effektivvärde)
+        const NMIN = 20, NMAX = 2000;          // varvtal N1, N2
+        const RMIN = 5, RMAX = 500;            // lampans resistans (ohm)
 
-        const VBW = 820, VBH = 540;
+        // Växelspänningen visas kraftigt nedsaktad: 0,4 Hz på skärmen (50 Hz i verkligheten)
+        const FA = 0.4, OMEGA = 2 * Math.PI * FA;
+        const TAU = 0.4;                       // tidskonstant för flödet vid till- och frånslag med likspänning (s)
+        const GRAF_T = 5;                      // grafens tidsfönster (s)
 
         const fmt = (num, decimals = 1) => {
             if (!isFinite(num)) return '–';
@@ -217,439 +252,1192 @@
             if (parseFloat(s) === 0) return '0';
             return s.replace('.', ',').replace('-', '−');
         };
-        // heltal med hårt mellanslag som tusentalsavgränsare (1 150)
-        const fmtN = (n) => {
-            const s = Math.round(n).toString();
-            return s.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-        };
+        const fmtN = (n) => Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
         const fmtU = (U) => {
-            if (U >= 1000) return `${fmt(U / 1000, U < 10000 ? 2 : 1)} kV`;
-            return `${fmt(U, U >= 100 ? 0 : 1)} V`;
+            const a = Math.abs(U);
+            if (a < 0.005) return '0 V';
+            if (a >= 1000) return `${fmt(U / 1000, a < 10000 ? 2 : 1)} kV`;
+            return `${fmt(U, a >= 100 ? 0 : a >= 10 ? 1 : 2)} V`;
         };
         const fmtI = (I) => {
-            if (I >= 1) return `${fmt(I, 2)} A`;
-            const m = I * 1e3; return `${fmt(m, m < 10 ? 1 : 0)} mA`;
+            const a = Math.abs(I);
+            if (a < 5e-6) return '0 A';
+            if (a >= 1) return `${fmt(I, a >= 10 ? 1 : 2)} A`;
+            const m = I * 1e3; return `${fmt(m, Math.abs(m) < 10 ? 1 : 0)} mA`;
         };
         const fmtP = (P) => {
-            if (P >= 1000) return `${fmt(P / 1000, 2)} kW`;
-            if (P >= 1) return `${fmt(P, 1)} W`;
-            const m = P * 1e3; return `${fmt(m, m < 10 ? 1 : 0)} mW`;
+            if (P < 5e-6) return '0 W';
+            if (P >= 1000) return `${fmt(P / 1000, 2)} kW`;
+            if (P >= 1) return `${fmt(P, P >= 100 ? 0 : 1)} W`;
+            const m = P * 1e3; return `${fmt(m, m < 10 ? 1 : 0)} mW`;
         };
 
         const COL = {
-            ink:   '#1f2530',
-            flux:  '#2563c9',    // magnetiska flödet (blått, som teorifiguren)
-            spole: '#c87f3a',    // spolarna (koppar, som teorifiguren)
-            karna: '#d7dbe0',    // järnkärnan
-            u2:    '#c8324a',    // sekundärkurvan i grafen (accent)
+            ink:    '#1f2530',
+            flux:   '#2563c9',   // det magnetiska flödet (blått, som teorifiguren)
+            prim:   '#1f2530',   // primärsidans ström och spänning (bläck)
+            sek:    '#7b3fa0',   // sekundärsidans inducerade ström och spänning (lila, som i Lenz lag)
+            elek:   '#0e7c86',   // elektronerna (blågröna)
+            koppar: '#c87f3a',
+            kopparM:'#8a5a28',
+            karna:  '#c9ced5',
+            lampa:  '#f2b134',
         };
 
-        // Position längs en polylinje vid båglängden s (för AC-punkterna)
-        const pathPos = (pts, s) => {
-            let acc = 0;
-            for (let i = 1; i < pts.length; i++) {
-                const dx = pts[i][0] - pts[i - 1][0], dy = pts[i][1] - pts[i - 1][1];
-                const seg = Math.hypot(dx, dy);
-                if (s <= acc + seg) {
-                    const f = (s - acc) / seg;
-                    return [pts[i - 1][0] + f * dx, pts[i - 1][1] + f * dy];
+        // ─────────────────────────────────────────────────────────────────
+        // Fysiken (ideal transformator, exakt enligt genomgången fy2-3.11)
+        // ─────────────────────────────────────────────────────────────────
+        // N1/N2 = U1/U2 och N1/N2 = I2/I1. Momentanvärden: u = Û · sin(ωt),
+        // flödet Φ = −Φ̂ · cos(ωt) så att e = N · dΦ/dt ligger i fas med u.
+        function effektivvarden(p) {
+            const ac = p.kalla === 'ac' && p.till;
+            const U2 = ac ? p.U1 * p.N2 / p.N1 : 0;
+            const I2 = ac && p.load ? U2 / p.R : 0;
+            const I1 = ac && p.load ? I2 * p.N2 / p.N1 : 0;
+            return { U1: p.till ? p.U1 : 0, U2, I1, I2, P: U2 * I2, U2ac: p.U1 * p.N2 / p.N1 };
+        }
+
+        // ─────────────────────────────────────────────────────────────────
+        // Polylinjer (ström och elektroner längs ledningarna)
+        // ─────────────────────────────────────────────────────────────────
+        function polylinje2(pts) {
+            const L = [0];
+            for (let i = 1; i < pts.length; i++) L.push(L[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+            return {
+                pts, L, len: L[L.length - 1],
+                at(s) {
+                    s = Math.max(0, Math.min(this.len, s));
+                    let lo = 0, hi = this.L.length - 1;
+                    while (hi - lo > 1) { const m = (lo + hi) >> 1; if (this.L[m] < s) lo = m; else hi = m; }
+                    const t = (s - this.L[lo]) / Math.max(1e-9, this.L[hi] - this.L[lo]);
+                    const a = this.pts[lo], b = this.pts[hi];
+                    const d = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1;
+                    return { x: a[0] + t * (b[0] - a[0]), y: a[1] + t * (b[1] - a[1]), dx: (b[0] - a[0]) / d, dy: (b[1] - a[1]) / d };
+                },
+            };
+        }
+
+        // ─────────────────────────────────────────────────────────────────
+        // 2D-scenen
+        // ─────────────────────────────────────────────────────────────────
+        const VBW = 820, VBH = 470;
+        const K2 = { x0: 230, x1: 560, y0: 78, y1: 368, w: 44 };   // järnkärnan
+        const LEG1 = K2.x0 + K2.w / 2, LEG2 = K2.x1 - K2.w / 2;   // benens mittlinjer
+        const OK = (K2.y0 + K2.w / 2), NK = (K2.y1 - K2.w / 2);   // oket upptill och nedtill (mittlinje)
+        const CY0 = 150, CY1 = 296;                               // spolarnas översta och nedersta varv
+        const CRX = 33, CRY = 8;                                  // varvens halvaxlar
+        const SRC = { x: 96, y: 223, r: 18 };
+        const LAMP = { x: 700, y: 223, r: 19 };
+        const BRYT = { x0: 140, x1: 182 };                        // strömbrytaren på primärsidans övre ledning
+
+        const varv2D = (N) => Math.max(3, Math.min(14, Math.round(3 + 11 * (N - NMIN) / (NMAX - NMIN))));
+
+        // Ledningarna, som polylinjer i strömmens positiva riktning
+        const P1 = polylinje2([[SRC.x, SRC.y - SRC.r], [SRC.x, CY0], [LEG1 - CRX, CY0]]);
+        const P1b = polylinje2([[LEG1 - CRX, CY1], [SRC.x, CY1], [SRC.x, SRC.y + SRC.r]]);
+        const P2 = polylinje2([[LEG2 + CRX, CY1], [LAMP.x, CY1], [LAMP.x, LAMP.y + LAMP.r]]);
+        const P2b = polylinje2([[LAMP.x, LAMP.y - LAMP.r], [LAMP.x, CY0], [LEG2 + CRX, CY0]]);
+
+        function Scen2D({ st, p, show, eff, onBrytare }) {
+            const f = st.f;
+            const els = [], fram = [], bak = [];
+
+            // spolarna: varvens bakre halva ritas före kärnan, den främre efter
+            const spole = (cx, N, farg) => {
+                const n = varv2D(N);
+                for (let i = 0; i < n; i++) {
+                    const cy = CY0 + (n === 1 ? 0 : i * (CY1 - CY0) / (n - 1));
+                    bak.push(<path key={`b${cx}-${i}`} d={`M ${cx - CRX} ${cy} A ${CRX} ${CRY} 0 0 1 ${cx + CRX} ${cy}`}
+                                   fill="none" stroke={COL.kopparM} strokeWidth="3.4" strokeLinecap="round" />);
+                    fram.push(<path key={`f${cx}-${i}`} d={`M ${cx - CRX} ${cy} A ${CRX} ${CRY} 0 0 0 ${cx + CRX} ${cy}`}
+                                    fill="none" stroke={farg} strokeWidth="3.6" strokeLinecap="round" />);
                 }
-                acc += seg;
+            };
+            spole(LEG1, p.N1, COL.koppar);
+            spole(LEG2, p.N2, COL.koppar);
+
+            // flödets pilar längs kärnans mittlinje (positivt flöde medurs)
+            const fluxEls = [];
+            if (show.flux && Math.abs(f) > 0.03) {
+                const a = Math.abs(f), dir = f > 0 ? 1 : -1;
+                const L = 12 + 34 * a;
+                const pilar = [[330, OK, dir, 0], [460, OK, dir, 0], [460, NK, -dir, 0], [330, NK, -dir, 0]];
+                pilar.forEach(([x, y, dx], i) => {
+                    const tip = x + dx * L / 2, tail = x - dx * L / 2, base = tip - dx * 11;
+                    fluxEls.push(
+                        <g key={`fx${i}`} opacity={0.35 + 0.65 * a}>
+                            <line x1={tail} y1={y} x2={base} y2={y} stroke={COL.flux} strokeWidth={2.4 + 2.2 * a} strokeLinecap="butt" />
+                            <polygon points={`${tip},${y} ${base},${y - 6.5} ${base},${y + 6.5}`} fill={COL.flux} />
+                        </g>
+                    );
+                });
             }
-            return pts[pts.length - 1];
+
+            // ström- och elektronmarkörer längs en ledning
+            const stromPilar = (pl, a, farg, key) => {
+                if (!show.strom || Math.abs(a) < 0.04) return null;
+                const sg = a > 0 ? 1 : -1, s = 6 + 4 * Math.abs(a);
+                return [0.3, 0.7].map((t, i) => {
+                    const q = pl.at(pl.len * t);
+                    const ux = q.dx * sg, uy = q.dy * sg;
+                    const tx = q.x + ux * s, ty = q.y + uy * s, bx = q.x - ux * s, by = q.y - uy * s;
+                    return <polygon key={`${key}${i}`} points={`${tx},${ty} ${bx - uy * s * 0.75},${by + ux * s * 0.75} ${bx + uy * s * 0.75},${by - ux * s * 0.75}`}
+                                    fill={farg} opacity={0.45 + 0.55 * Math.abs(a)} />;
+                });
+            };
+            const elektroner = (pl, q, key) => {
+                if (!show.elek) return null;
+                const steg = 22, out = [];
+                const n = Math.floor(pl.len / steg);
+                for (let i = 0; i < n; i++) {
+                    let s = ((i + 0.5) * steg - q) % (n * steg);
+                    if (s < 0) s += n * steg;
+                    const pt = pl.at(s);
+                    out.push(<circle key={`${key}${i}`} cx={pt.x} cy={pt.y} r="3.2" fill={COL.elek} />);
+                }
+                return out;
+            };
+
+            const glow = st.glow;
+            const brytTill = p.till;
+            return (
+                <svg viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid meet" fontFamily="Poppins, sans-serif">
+                    <defs>
+                        <pattern id="lam" width="6" height="6" patternUnits="userSpaceOnUse">
+                            <rect width="6" height="6" fill={COL.karna} />
+                            <line x1="0" y1="5.5" x2="6" y2="5.5" stroke="#aeb4bc" strokeWidth="0.8" />
+                        </pattern>
+                        <radialGradient id="glod">
+                            <stop offset="0" stopColor="#ffd56b" stopOpacity="0.95" />
+                            <stop offset="1" stopColor="#ffd56b" stopOpacity="0" />
+                        </radialGradient>
+                    </defs>
+
+                    {/* ledningarna */}
+                    <g stroke={COL.ink} strokeWidth="2" fill="none" strokeLinejoin="round">
+                        <polyline points={`${SRC.x},${SRC.y - SRC.r} ${SRC.x},${CY0} ${BRYT.x0},${CY0}`} />
+                        <polyline points={`${BRYT.x1},${CY0} ${LEG1 - CRX},${CY0}`} />
+                        <polyline points={P1b.pts.map(q => q.join(',')).join(' ')} />
+                        {p.load ? (
+                            <React.Fragment>
+                                <polyline points={P2.pts.map(q => q.join(',')).join(' ')} />
+                                <polyline points={P2b.pts.map(q => q.join(',')).join(' ')} />
+                            </React.Fragment>
+                        ) : (
+                            <React.Fragment>
+                                <polyline points={`${LEG2 + CRX},${CY0} 652,${CY0}`} />
+                                <polyline points={`${LEG2 + CRX},${CY1} 652,${CY1}`} />
+                            </React.Fragment>
+                        )}
+                    </g>
+                    {!p.load && (
+                        <g fill="#f7f2e8" stroke={COL.ink} strokeWidth="1.8">
+                            <circle cx="656" cy={CY0} r="4" /><circle cx="656" cy={CY1} r="4" />
+                        </g>
+                    )}
+
+                    {/* spänningskällan: växelspänning (cirkel med våg) eller likspänning (batterisymbol) */}
+                    {p.kalla === 'ac' ? (
+                        <g stroke={COL.ink} strokeWidth="2" fill="#f7f2e8">
+                            <circle cx={SRC.x} cy={SRC.y} r={SRC.r} />
+                            <path d={`M ${SRC.x - 10} ${SRC.y} Q ${SRC.x - 5} ${SRC.y - 9} ${SRC.x} ${SRC.y} Q ${SRC.x + 5} ${SRC.y + 9} ${SRC.x + 10} ${SRC.y}`} fill="none" strokeWidth="1.8" />
+                        </g>
+                    ) : (
+                        <g stroke={COL.ink} strokeLinecap="butt">
+                            <rect x={SRC.x - 20} y={SRC.y - SRC.r} width="40" height={2 * SRC.r} fill="#f3eee4" stroke="none" />
+                            <line x1={SRC.x - 16} y1={SRC.y - 5} x2={SRC.x + 16} y2={SRC.y - 5} strokeWidth="2.4" />
+                            <line x1={SRC.x - 8} y1={SRC.y + 5} x2={SRC.x + 8} y2={SRC.y + 5} strokeWidth="5" />
+                            <line x1={SRC.x} y1={SRC.y - SRC.r} x2={SRC.x} y2={SRC.y - 5} strokeWidth="2" />
+                            <line x1={SRC.x} y1={SRC.y + 5} x2={SRC.x} y2={SRC.y + SRC.r} strokeWidth="2" />
+                            <text x={SRC.x + 20} y={SRC.y - 9} fontSize="13" fill={COL.ink} stroke="none">+</text>
+                        </g>
+                    )}
+                    <text x={SRC.x - 28} y={SRC.y + 5} textAnchor="end" fontSize="15" fill={COL.prim}>
+                        <tspan fontStyle="italic">U</tspan><tspan fontSize="10.5" dy="3">1</tspan>
+                    </text>
+                    <text x={SRC.x - 28} y={SRC.y + 24} textAnchor="end" fontSize="13" fill={COL.prim}>{fmtU(p.U1)}</text>
+
+                    {/* strömbrytaren (klickbar) */}
+                    <g className="klickbar" onClick={onBrytare}>
+                        <rect x={BRYT.x0 - 8} y={CY0 - 30} width={BRYT.x1 - BRYT.x0 + 16} height="42" fill="transparent" />
+                        <line x1={BRYT.x0} y1={CY0} x2={brytTill ? BRYT.x1 - 2 : BRYT.x1 - 6} y2={brytTill ? CY0 - 1 : CY0 - 21}
+                              stroke={COL.ink} strokeWidth="2.6" strokeLinecap="round" />
+                        <circle cx={BRYT.x0} cy={CY0} r="3.6" fill={COL.ink} />
+                        <circle cx={BRYT.x1} cy={CY0} r="3.6" fill="#f7f2e8" stroke={COL.ink} strokeWidth="1.8" />
+                    </g>
+
+                    {/* bakre halvorna av varven, kärnan, flödet och de främre halvorna */}
+                    {bak}
+                    <path d={`M ${K2.x0} ${K2.y0} H ${K2.x1} V ${K2.y1} H ${K2.x0} Z M ${K2.x0 + K2.w} ${K2.y0 + K2.w} V ${K2.y1 - K2.w} H ${K2.x1 - K2.w} V ${K2.y0 + K2.w} Z`}
+                          fillRule="evenodd" fill="url(#lam)" stroke="#7d848e" strokeWidth="1.6" />
+                    {show.flux && (
+                        <rect x={LEG1} y={OK} width={LEG2 - LEG1} height={NK - OK} rx="8" fill="none" stroke={COL.flux}
+                              strokeWidth="1.6" strokeDasharray="5 5" opacity={0.15 + 0.45 * Math.abs(f)} />
+                    )}
+                    {fram}
+                    {fluxEls}
+                    {show.flux && (
+                        <text x={(K2.x0 + K2.x1) / 2} y={K2.y0 - 12} textAnchor="middle" fontSize="20" fill={COL.flux}>
+                            <tspan fontStyle="italic">Φ</tspan>
+                        </text>
+                    )}
+                    <text x={(K2.x0 + K2.x1) / 2} y={(K2.y0 + K2.y1) / 2 + 5} textAnchor="middle" fontSize="12.5"
+                          fill="var(--lab-ink-muted, #5a6170)">järnkärna</text>
+
+                    {/* lampan */}
+                    {p.load && (
+                        <g>
+                            {glow > 0.03 && <circle cx={LAMP.x} cy={LAMP.y} r={LAMP.r + 40 * glow} fill="url(#glod)" opacity={Math.min(1, 0.25 + glow)} />}
+                            <circle cx={LAMP.x} cy={LAMP.y} r={LAMP.r} fill={glow > 0.03 ? `rgba(255,208,96,${0.25 + 0.7 * glow})` : '#f7f2e8'}
+                                    stroke={COL.ink} strokeWidth="2" />
+                            <line x1={LAMP.x - 13} y1={LAMP.y - 13} x2={LAMP.x + 13} y2={LAMP.y + 13} stroke={COL.ink} strokeWidth="1.8" />
+                            <line x1={LAMP.x + 13} y1={LAMP.y - 13} x2={LAMP.x - 13} y2={LAMP.y + 13} stroke={COL.ink} strokeWidth="1.8" />
+                        </g>
+                    )}
+                    <text x={p.load ? LAMP.x + 30 : 676} y={LAMP.y + 5} textAnchor="start" fontSize="15" fill={COL.sek}>
+                        <tspan fontStyle="italic">U</tspan><tspan fontSize="10.5" dy="3">2</tspan>
+                    </text>
+                    <text x={p.load ? LAMP.x + 30 : 676} y={LAMP.y + 24} textAnchor="start" fontSize="13" fill={COL.sek}>{fmtU(eff.U2)}</text>
+
+                    {/* strömmar och elektroner */}
+                    {p.till && stromPilar(P1, st.a1, COL.prim, 'p1')}
+                    {p.till && stromPilar(P1b, st.a1, COL.prim, 'p1b')}
+                    {p.load && stromPilar(P2, st.a2, COL.sek, 'p2')}
+                    {p.load && stromPilar(P2b, st.a2, COL.sek, 'p2b')}
+                    {elektroner(P1, st.q1, 'e1')}
+                    {elektroner(P1b, st.q1, 'e1b')}
+                    {p.load && elektroner(P2, st.q2, 'e2')}
+                    {p.load && elektroner(P2b, st.q2, 'e2b')}
+                    {show.strom && p.till && Math.abs(st.a1) > 0.04 && (
+                        <text x={(SRC.x + LEG1 - CRX) / 2 + 6} y={CY1 + 22} textAnchor="middle" fontSize="15" fill={COL.prim}>
+                            <tspan fontStyle="italic">I</tspan><tspan fontSize="10.5" dy="3">1</tspan>
+                        </text>
+                    )}
+                    {show.strom && p.load && Math.abs(st.a2) > 0.04 && (
+                        <text x={(LEG2 + CRX + LAMP.x) / 2} y={CY1 + 22} textAnchor="middle" fontSize="15" fill={COL.sek}>
+                            <tspan fontStyle="italic">I</tspan><tspan fontSize="10.5" dy="3">2</tspan>
+                        </text>
+                    )}
+
+                    {/* varvtal under benen */}
+                    <g fontSize="15" fill={COL.ink}>
+                        <text x={LEG1} y={K2.y1 + 30} textAnchor="middle">
+                            <tspan fontStyle="italic">N</tspan><tspan fontSize="10.5" dy="3">1</tspan><tspan dy="-3"> = {fmtN(p.N1)}</tspan>
+                        </text>
+                        <text x={LEG2} y={K2.y1 + 30} textAnchor="middle">
+                            <tspan fontStyle="italic">N</tspan><tspan fontSize="10.5" dy="3">2</tspan><tspan dy="-3"> = {fmtN(p.N2)}</tspan>
+                        </text>
+                    </g>
+                    <text x={LEG1} y={K2.y1 + 50} textAnchor="middle" fontSize="12.5" fill="var(--lab-ink-muted, #5a6170)">primärspole</text>
+                    <text x={LEG2} y={K2.y1 + 50} textAnchor="middle" fontSize="12.5" fill="var(--lab-ink-muted, #5a6170)">sekundärspole</text>
+                </svg>
+            );
+        }
+
+        // ─────────────────────────────────────────────────────────────────
+        // 3D-hjälp (samma mönster som Den enklaste elmotorn och Lenz lag)
+        // ─────────────────────────────────────────────────────────────────
+        const Y_AXEL = new THREE.Vector3(0, 1, 0);
+        const linjar = (hex) => new THREE.Color(hex).convertSRGBToLinear();
+        const markMat = (hex, opt = {}) => new THREE.MeshStandardMaterial({
+            color: linjar(hex), emissive: linjar(hex).multiplyScalar(opt.glod != null ? opt.glod : 0.5),
+            roughness: 0.55, metalness: 0, toneMapped: false,
+            transparent: !!opt.opacity, opacity: opt.opacity || 1, depthWrite: !opt.opacity });
+        function canvasTex(w, h, rita) {
+            const c = document.createElement('canvas');
+            c.width = w; c.height = h;
+            rita(c.getContext('2d'), w, h);
+            const t = new THREE.CanvasTexture(c);
+            t.encoding = THREE.sRGBEncoding;
+            t.anisotropy = 8;
+            t.userData = { c, rita };
+            return t;
+        }
+        const ritaOm = (t, rita) => { const c = t.userData.c; rita(c.getContext('2d'), c.width, c.height); t.needsUpdate = true; };
+        const textSprite = (parts, h = 0.42) => {
+            const c = document.createElement('canvas');
+            const ctx = c.getContext('2d');
+            const FS = 64, PAD = 14;
+            const fontFor = (q) => `${q.italic ? 'italic ' : ''}${q.weight || 600} ${q.small ? FS * 0.66 : FS}px Poppins, sans-serif`;
+            let w = 0;
+            parts.forEach((q) => { ctx.font = fontFor(q); w += ctx.measureText(q.t).width; });
+            c.width = Math.max(2, Math.ceil(w) + PAD * 2);
+            c.height = FS + PAD * 2;
+            let x = PAD;
+            parts.forEach((q) => {
+                ctx.font = fontFor(q); ctx.textBaseline = 'middle'; ctx.fillStyle = q.color;
+                ctx.fillText(q.t, x, c.height / 2 + 2 + (q.small ? FS * 0.2 : 0));
+                x += ctx.measureText(q.t).width;
+            });
+            const tex = new THREE.CanvasTexture(c);
+            tex.minFilter = THREE.LinearFilter; tex.encoding = THREE.sRGBEncoding;
+            const spr = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false, toneMapped: false }));
+            spr.scale.set(h * c.width / c.height, h, 1);
+            spr.renderOrder = 20;
+            return spr;
         };
-        const pathLen = (pts) => {
-            let acc = 0;
-            for (let i = 1; i < pts.length; i++)
-                acc += Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]);
-            return acc;
+        function traTextur() {
+            return canvasTex(1024, 1024, (ctx, w, h) => {
+                const g = ctx.createLinearGradient(0, 0, w, h);
+                g.addColorStop(0, '#caa274'); g.addColorStop(1, '#b98d5e');
+                ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+                let seed = 11;
+                const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+                for (let i = 0; i < 140; i++) {
+                    const y0 = rnd() * h, amp = 4 + rnd() * 14, fr = 0.004 + rnd() * 0.01, ph = rnd() * 6;
+                    ctx.strokeStyle = `rgba(${90 + rnd() * 30},${55 + rnd() * 20},30,${0.05 + rnd() * 0.13})`;
+                    ctx.lineWidth = 0.6 + rnd() * 2.4;
+                    ctx.beginPath();
+                    for (let x = 0; x <= w; x += 8) {
+                        const y = y0 + Math.sin(x * fr + ph) * amp + Math.sin(x * fr * 3.1 + ph) * amp * 0.25;
+                        if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+                    }
+                    ctx.stroke();
+                }
+                ctx.strokeStyle = 'rgba(70,45,25,0.35)'; ctx.lineWidth = 2;
+                [256, 512, 768].forEach(y => { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); });
+            });
+        }
+        // järnkärnans plåtar: tunna ränder (laminering) på ytor där plåtkanterna syns
+        function lamTextur(randerVagratt) {
+            return canvasTex(512, 512, (ctx, w, h) => {
+                const g = ctx.createLinearGradient(0, 0, w, h);
+                g.addColorStop(0, '#9aa1aa'); g.addColorStop(1, '#7f8790');
+                ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+                for (let i = 0; i < 64; i++) {
+                    const p = i * (randerVagratt ? h : w) / 64;
+                    ctx.fillStyle = i % 2 ? 'rgba(255,255,255,0.10)' : 'rgba(0,0,0,0.12)';
+                    if (randerVagratt) ctx.fillRect(0, p, w, 2.2); else ctx.fillRect(p, 0, 2.2, h);
+                }
+            });
+        }
+        function stalTextur() {
+            return canvasTex(512, 512, (ctx, w, h) => {
+                ctx.fillStyle = '#8d949d'; ctx.fillRect(0, 0, w, h);
+                let seed = 5;
+                const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+                for (let i = 0; i < 900; i++) {
+                    ctx.fillStyle = `rgba(${rnd() > 0.5 ? 255 : 0},${rnd() > 0.5 ? 255 : 0},255,${0.02 + rnd() * 0.03})`;
+                    ctx.fillRect(rnd() * w, rnd() * h, 1 + rnd() * 30, 1);
+                }
+            });
+        }
+        function omgivning(renderer) {
+            const tex = canvasTex(1024, 512, (ctx, w, h) => {
+                const g = ctx.createLinearGradient(0, 0, 0, h);
+                g.addColorStop(0, '#fbf8f2'); g.addColorStop(0.45, '#efe7d8'); g.addColorStop(0.55, '#a98559'); g.addColorStop(1, '#5d4128');
+                ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+                ctx.fillStyle = 'rgba(255,255,255,0.95)';
+                ctx.fillRect(w * 0.12, h * 0.12, w * 0.16, h * 0.2);
+                ctx.fillRect(w * 0.6, h * 0.08, w * 0.22, h * 0.14);
+            });
+            tex.mapping = THREE.EquirectangularReflectionMapping;
+            const pm = new THREE.PMREMGenerator(renderer);
+            const env = pm.fromEquirectangular(tex).texture;
+            pm.dispose();
+            return env;
+        }
+        // nätaggregatets front: display med U1 och strömbrytarens text
+        function ritaAggregat(ctx, w, h, s) {
+            ctx.fillStyle = '#e9e4da'; ctx.fillRect(0, 0, w, h);
+            ctx.fillStyle = '#d8d1c4'; ctx.fillRect(0, h * 0.84, w, h * 0.16);
+            // display
+            const dx = w * 0.08, dy = h * 0.1, dw = w * 0.58, dh = h * 0.36;
+            ctx.fillStyle = '#1b2a22'; ctx.beginPath(); ctx.roundRect(dx, dy, dw, dh, 14); ctx.fill();
+            ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+            if (s.till) {
+                ctx.fillStyle = '#7dffb2';
+                ctx.font = `600 ${Math.round(dh * 0.62)}px "JetBrains Mono", monospace`;
+                ctx.fillText(s.text, dx + dw - 24, dy + dh * 0.53);
+            }
+            ctx.textAlign = 'left'; ctx.fillStyle = '#3a3f47';
+            ctx.font = `600 ${Math.round(h * 0.075)}px Poppins, sans-serif`;
+            ctx.fillText(tr(s.ac ? 'VÄXELSPÄNNING' : 'LIKSPÄNNING') + (s.ac ? '  ~' : '  ='), dx, h * 0.58);
+            ctx.font = `600 ${Math.round(h * 0.06)}px Poppins, sans-serif`;
+            ctx.fillStyle = '#5a6170';
+            ctx.fillText('FYSIKLABBET', dx, h * 0.92);
+            ctx.textAlign = 'center';
+            ctx.fillText(tr(s.till ? 'PÅ' : 'AV'), w * 0.83, h * 0.12);
+            // vred
+            ctx.fillStyle = '#2b2f36'; ctx.beginPath(); ctx.arc(w * 0.83, h * 0.7, h * 0.11, 0, 2 * Math.PI); ctx.fill();
+            ctx.strokeStyle = '#e9e4da'; ctx.lineWidth = 6; ctx.beginPath(); ctx.moveTo(w * 0.83, h * 0.7); ctx.lineTo(w * 0.83 + h * 0.07, h * 0.64); ctx.stroke();
+        }
+        // multimeterns front: digital display med U2
+        function ritaMultimeter(ctx, w, h, s) {
+            ctx.fillStyle = '#e8b735'; ctx.fillRect(0, 0, w, h);
+            ctx.fillStyle = '#2b2f36'; ctx.beginPath(); ctx.roundRect(w * 0.07, h * 0.04, w * 0.86, h * 0.92, 26); ctx.fill();
+            const dx = w * 0.14, dy = h * 0.09, dw = w * 0.72, dh = h * 0.26;
+            ctx.fillStyle = '#c6d3b4'; ctx.beginPath(); ctx.roundRect(dx, dy, dw, dh, 10); ctx.fill();
+            ctx.fillStyle = '#18201a'; ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+            ctx.font = `600 ${Math.round(dh * 0.5)}px "JetBrains Mono", monospace`;
+            ctx.fillText(s.text, dx + dw - 16, dy + dh * 0.5);
+            ctx.textAlign = 'left'; ctx.font = `600 ${Math.round(dh * 0.2)}px Poppins, sans-serif`;
+            ctx.fillText(s.ac ? 'AC' : 'DC', dx + 12, dy + dh * 0.2);
+            // vridomkopplare
+            ctx.fillStyle = '#3b4048'; ctx.beginPath(); ctx.arc(w / 2, h * 0.6, w * 0.22, 0, 2 * Math.PI); ctx.fill();
+            ctx.fillStyle = '#1b1e23'; ctx.beginPath(); ctx.arc(w / 2, h * 0.6, w * 0.15, 0, 2 * Math.PI); ctx.fill();
+            ctx.strokeStyle = '#e9e4da'; ctx.lineWidth = 7; ctx.beginPath(); ctx.moveTo(w / 2, h * 0.6); ctx.lineTo(w / 2 - w * 0.12, h * 0.6 - w * 0.1); ctx.stroke();
+            ctx.fillStyle = '#e9e4da'; ctx.textAlign = 'center';
+            ctx.font = `600 ${Math.round(w * 0.075)}px Poppins, sans-serif`;
+            ctx.fillText('V~', w / 2 - w * 0.27, h * 0.43);
+            ctx.fillText('V', w / 2 + w * 0.27, h * 0.43);
+            ctx.fillText(tr('COM'), w * 0.3, h * 0.9); ctx.fillText('V', w * 0.7, h * 0.9);
+        }
+
+        // Geometri i 3D (cm). Kärnan står på en träsockel, x åt höger, y uppåt, z mot betraktaren.
+        const KG = { b: 26, h: 22, d: 5, w: 4.5, y0: 2.2 };
+        const KX = KG.b / 2 - KG.w / 2;                       // benens mittlinjer x = ±KX
+        const SP = { y0: KG.y0 + KG.w + 0.9, y1: KG.y0 + KG.h - KG.w - 0.9, hx: KG.w / 2 + 0.75, hz: KG.d / 2 + 0.75, r: 0.7 };
+        const varv3D = (N) => Math.max(5, Math.min(30, Math.round(5 + 25 * (N - NMIN) / (NMAX - NMIN))));
+        const VYER3 = {
+            snett:   { theta: 0.42, phi: 1.13, radius: 92, target: [0, 9, 1] },
+            fram:    { theta: 0.0,  phi: 1.42, radius: 90, target: [0, 11, 0] },
+            ovan:    { theta: 0.0,  phi: 0.12, radius: 86, target: [0, 2, 3] },
         };
 
-        const Slider = ({ label, sub, value, min, max, step, onChange, valueText }) => (
-            <div className="mb-3">
-                <div className="flex justify-between items-baseline mb-1">
-                    <label className="text-sm font-bold" style={{ color: 'var(--lab-ink)' }}
-                           dangerouslySetInnerHTML={{ __html: label }} />
-                    <div className="font-mono font-semibold text-sm" style={{ color: 'var(--lab-accent)' }}>{valueText}</div>
-                </div>
-                <input type="range" min={min} max={max} step={step} value={value}
-                       onChange={(e) => onChange(parseFloat(e.target.value))}
-                       className="w-full cursor-pointer" />
-                {sub && <div className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}
-                             dangerouslySetInnerHTML={{ __html: sub }} />}
-            </div>
-        );
+        function Scen3D({ stRef, pRef, apiRef }) {
+            const mountRef = useRef(null);
+            useEffect(() => {
+                const el = mountRef.current;
+                const W = () => el.clientWidth, H = () => el.clientHeight;
+                const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                renderer.setSize(W(), H());
+                renderer.setClearColor(0x000000, 0);
+                renderer.outputEncoding = THREE.sRGBEncoding;
+                renderer.toneMapping = THREE.ACESFilmicToneMapping;
+                renderer.toneMappingExposure = 1.05;
+                renderer.shadowMap.enabled = true;
+                renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+                el.appendChild(renderer.domElement);
 
-        const FsSlider = ({ label, value, min, max, step, onChange, valueText }) => (
-            <div className="fs-row">
-                <span className="fs-label" style={{ minWidth: 170 }} dangerouslySetInnerHTML={{ __html: label }} />
-                <input type="range" min={min} max={max} step={step} value={value}
-                       onChange={(e) => onChange(parseFloat(e.target.value))} />
-                <span className="fs-value" style={{ minWidth: 90, textAlign: 'right' }}>{valueText}</span>
-            </div>
-        );
+                const scene = new THREE.Scene();
+                scene.environment = omgivning(renderer);
+                const camera = new THREE.PerspectiveCamera(32, W() / H(), 0.5, 500);
 
-        // Bråk med vågrätt divisionsstreck (aldrig snedstreck)
-        const Frac = ({ top, bot, size = 19 }) => (
-            <div className="flex flex-col items-center" style={{ lineHeight: 1.15 }}>
-                <span style={{ color: 'var(--lab-ink)', fontSize: size, padding: '0 7px' }}>{top}</span>
-                <span style={{ alignSelf: 'stretch', borderTop: '2px solid currentColor' }} />
-                <span style={{ color: 'var(--lab-ink)', fontSize: size, padding: '0 7px' }}>{bot}</span>
-            </div>
-        );
-        // Bråk med ord-etikett över täljaren och under nämnaren
+                scene.add(new THREE.HemisphereLight(0xfffaf0, 0x8a6a48, 0.55));
+                const sol = new THREE.DirectionalLight(0xffffff, 1.15);
+                sol.position.set(16, 34, 26);
+                sol.castShadow = true;
+                sol.shadow.mapSize.set(2048, 2048);
+                Object.assign(sol.shadow.camera, { left: -55, right: 55, top: 45, bottom: -45, near: 1, far: 140 });
+                sol.shadow.bias = -0.0008;
+                sol.shadow.normalBias = 0.04;
+                scene.add(sol);
+                const fyll = new THREE.DirectionalLight(0xdfe8ff, 0.35);
+                fyll.position.set(-22, 14, -10);
+                scene.add(fyll);
+
+                // labbänk
+                const tra = traTextur(); tra.wrapS = tra.wrapT = THREE.RepeatWrapping; tra.repeat.set(2, 1.3);
+                const traMat = new THREE.MeshStandardMaterial({ map: tra, roughness: 0.78, envMapIntensity: 0.22 });
+                const bank = new THREE.Mesh(new THREE.BoxGeometry(150, 2, 86), traMat);
+                bank.position.set(0, -1, -4); bank.receiveShadow = true;
+                scene.add(bank);
+                const morkTra = new THREE.MeshStandardMaterial({ color: linjar(0x7a5534), roughness: 0.55 });
+                const koppar = new THREE.MeshStandardMaterial({ color: linjar('#b8642c'), roughness: 0.32, metalness: 0.9, envMapIntensity: 0.75 });
+                const kabelR = new THREE.MeshStandardMaterial({ color: linjar('#b8323a'), roughness: 0.5 });
+                const kabelS = new THREE.MeshStandardMaterial({ color: linjar('#23272e'), roughness: 0.5 });
+                const plast = new THREE.MeshStandardMaterial({ color: linjar('#2f3a48'), roughness: 0.45 });
+
+                // träsockel under kärnan
+                const sockel = new THREE.Mesh(new THREE.BoxGeometry(36, KG.y0, 13), morkTra);
+                sockel.position.set(0, KG.y0 / 2, 0); sockel.castShadow = true; sockel.receiveShadow = true;
+                scene.add(sockel);
+
+                // järnkärnan: fyra block, plåtränder på fram- och ovansidan
+                const lamF = lamTextur(true), lamO = lamTextur(false);
+                const stal = new THREE.MeshStandardMaterial({ map: stalTextur(), roughness: 0.42, metalness: 0.65, envMapIntensity: 0.55 });
+                const lamFM = new THREE.MeshStandardMaterial({ map: lamF, roughness: 0.42, metalness: 0.6, envMapIntensity: 0.55 });
+                const lamOM = new THREE.MeshStandardMaterial({ map: lamO, roughness: 0.42, metalness: 0.6, envMapIntensity: 0.55 });
+                // BoxGeometry-ordning: +x, −x, +y, −y, +z, −z. Plåtarna är staplade i z, så kanterna syns uppifrån och från sidorna.
+                const karnMats = [lamOM, lamOM, lamOM, lamOM, stal, stal];
+                const karnG = new THREE.Group(); scene.add(karnG);
+                const blk = (bx, by, x, y) => {
+                    const m = new THREE.Mesh(new THREE.BoxGeometry(bx, by, KG.d), karnMats);
+                    m.position.set(x, y, 0); m.castShadow = true; m.receiveShadow = true; karnG.add(m);
+                };
+                blk(KG.b, KG.w, 0, KG.y0 + KG.w / 2);
+                blk(KG.b, KG.w, 0, KG.y0 + KG.h - KG.w / 2);
+                blk(KG.w, KG.h - 2 * KG.w, -KX, KG.y0 + KG.h / 2);
+                blk(KG.w, KG.h - 2 * KG.w, KX, KG.y0 + KG.h / 2);
+                // fyra bultar i oket
+                [-1, 1].forEach(sx => [KG.y0 + KG.w / 2, KG.y0 + KG.h - KG.w / 2].forEach(y => {
+                    const b = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 0.5, 6), new THREE.MeshStandardMaterial({ color: linjar(0x5b6068), roughness: 0.35, metalness: 0.9 }));
+                    b.rotation.x = Math.PI / 2; b.position.set(sx * (KG.b / 2 - KG.w / 2), y, KG.d / 2 + 0.2); karnG.add(b);
+                }));
+
+                // spolstommarna (flänsar) runt benen
+                [-1, 1].forEach(sx => {
+                    [SP.y0 - 0.45, SP.y1 + 0.45].forEach(y => {
+                        const fl = new THREE.Mesh(new THREE.BoxGeometry(2 * SP.hx + 2.4, 0.4, 2 * SP.hz + 2.4), plast);
+                        fl.position.set(sx * KX, y, 0); fl.castShadow = true; scene.add(fl);
+                    });
+                    const kropp = new THREE.Mesh(new THREE.BoxGeometry(2 * SP.hx - 0.5, SP.y1 - SP.y0 + 0.6, 2 * SP.hz - 0.5), plast);
+                    kropp.position.set(sx * KX, (SP.y0 + SP.y1) / 2, 0); scene.add(kropp);
+                });
+
+                // nätaggregatet till vänster fram
+                const aggrG = new THREE.Group(); scene.add(aggrG);
+                const aggrTex = canvasTex(512, 384, (ctx, w, h) => ritaAggregat(ctx, w, h, { till: true, ac: true, text: '230 V' }));
+                const aggrHus = new THREE.MeshStandardMaterial({ color: linjar(0xd6cfc2), roughness: 0.55 });
+                const aggrBox = new THREE.Mesh(new THREE.BoxGeometry(14, 10.5, 10), [aggrHus, aggrHus, aggrHus, aggrHus, new THREE.MeshStandardMaterial({ map: aggrTex, roughness: 0.6 }), aggrHus]);
+                aggrBox.position.y = 5.25; aggrBox.castShadow = true; aggrBox.receiveShadow = true;
+                aggrG.add(aggrBox);
+                const vipp = new THREE.Mesh(new THREE.BoxGeometry(2.2, 1.6, 1.2), new THREE.MeshStandardMaterial({ color: linjar('#c8324a'), roughness: 0.4 }));
+                vipp.position.set(4.6, 8.4, 5.4); vipp.userData.brytare = true; aggrG.add(vipp);
+                const terminal = (x, c) => { const m = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.6, 1.2, 20), new THREE.MeshStandardMaterial({ color: linjar(c), roughness: 0.35 })); m.rotation.x = Math.PI / 2; m.position.set(x, 2.4, 5.5); aggrG.add(m); };
+                terminal(-4.2, 0x23272e); terminal(-1.4, 0xb8323a);
+                aggrG.position.set(-36, 0, 8); aggrG.rotation.y = 0.28;
+                aggrG.updateMatrixWorld();
+                const aggrPol = [new THREE.Vector3(-4.2, 2.4, 6.1).applyMatrix4(aggrG.matrixWorld), new THREE.Vector3(-1.4, 2.4, 6.1).applyMatrix4(aggrG.matrixWorld)];
+
+                // multimetern till höger fram
+                const mmG = new THREE.Group(); scene.add(mmG);
+                const mmTex = canvasTex(320, 512, (ctx, w, h) => ritaMultimeter(ctx, w, h, { ac: true, text: '20,0 V' }));
+                const mmHus = new THREE.MeshStandardMaterial({ color: linjar(0xe8b735), roughness: 0.6 });
+                const mmBox = new THREE.Mesh(new THREE.BoxGeometry(7.5, 12, 2.6), [mmHus, mmHus, mmHus, mmHus, new THREE.MeshStandardMaterial({ map: mmTex, roughness: 0.6 }), mmHus]);
+                mmBox.position.set(0, 6.2, 0); mmBox.rotation.x = -0.22; mmBox.castShadow = true;
+                mmG.add(mmBox);
+                const stod = new THREE.Mesh(new THREE.BoxGeometry(7, 0.5, 4.5), new THREE.MeshStandardMaterial({ color: linjar(0x2b2f36), roughness: 0.6 }));
+                stod.position.set(0, 0.25, -0.4); mmG.add(stod);
+                mmG.position.set(17, 0, 15); mmG.rotation.y = -0.18;
+                mmG.updateMatrixWorld();
+                [[-1.5, 0x23272e], [1.5, 0xb8323a]].forEach(([x, c]) => { const m = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.45, 0.9, 16), new THREE.MeshStandardMaterial({ color: linjar(c), roughness: 0.35 })); m.rotation.x = Math.PI / 2 - 0.22; m.position.set(x, 1.6, 1.25); mmG.add(m); });
+                mmG.updateMatrixWorld();
+                const mmPol = [new THREE.Vector3(-1.5, 1.6, 1.8).applyMatrix4(mmG.matrixWorld), new THREE.Vector3(1.5, 1.6, 1.8).applyMatrix4(mmG.matrixWorld)];
+
+                // lampan på en träfot, bakom multimetern
+                const lampG = new THREE.Group(); scene.add(lampG);
+                const lFot = new THREE.Mesh(new THREE.BoxGeometry(7, 1.4, 7), morkTra); lFot.position.y = 0.7; lFot.castShadow = true; lFot.receiveShadow = true; lampG.add(lFot);
+                const sockelL = new THREE.Mesh(new THREE.CylinderGeometry(1.25, 1.4, 2.6, 28), new THREE.MeshStandardMaterial({ color: linjar(0x2b2f36), roughness: 0.4 }));
+                sockelL.position.y = 2.7; lampG.add(sockelL);
+                const gang = new THREE.Mesh(new THREE.CylinderGeometry(1.0, 1.0, 1.1, 28), new THREE.MeshStandardMaterial({ color: linjar(0xb9bec6), roughness: 0.25, metalness: 0.95 }));
+                gang.position.y = 4.4; lampG.add(gang);
+                const glasMat = new THREE.MeshPhysicalMaterial({ color: linjar(0xfff8e8), transparent: true, opacity: 0.32, roughness: 0.05, metalness: 0, emissive: linjar(COL.lampa), emissiveIntensity: 0, depthWrite: false });
+                const glas = new THREE.Mesh(new THREE.SphereGeometry(2.4, 40, 28), glasMat);
+                glas.position.y = 6.9; glas.userData.lampa = true; lampG.add(glas);
+                const trad = new THREE.Mesh(new THREE.TorusGeometry(0.55, 0.06, 8, 24, Math.PI), markMat('#5a4630', { glod: 0 }));
+                trad.position.y = 6.9; lampG.add(trad);
+                const ljus = new THREE.PointLight(0xffd27a, 0, 40, 2); ljus.position.y = 7; lampG.add(ljus);
+                // glorian runt glödlampan: en mjuk varmgul skiva som alltid vänds mot kameran
+                const glodTex = canvasTex(256, 256, (ctx, w, h) => {
+                    const g = ctx.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, w / 2);
+                    g.addColorStop(0, 'rgba(255,214,110,0.95)'); g.addColorStop(0.35, 'rgba(255,196,80,0.55)'); g.addColorStop(1, 'rgba(255,190,70,0)');
+                    ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+                });
+                const gloria = new THREE.Sprite(new THREE.SpriteMaterial({ map: glodTex, transparent: true, depthWrite: false, toneMapped: false, opacity: 0 }));
+                gloria.position.y = 6.9; gloria.scale.set(12, 12, 1); lampG.add(gloria);
+                const lampPolL = [new THREE.Vector3(-2.6, 1.4, 1.8), new THREE.Vector3(2.6, 1.4, 1.8)];
+                lampPolL.forEach((v, i) => { const m = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 0.8, 16), new THREE.MeshStandardMaterial({ color: linjar(i ? 0xb8323a : 0x23272e), roughness: 0.35 })); m.position.set(v.x, 1.8, v.z); lampG.add(m); });
+                lampG.position.set(36, 0, 3); lampG.scale.setScalar(1.3);
+                lampG.updateMatrixWorld();
+                const lampPol = lampPolL.map(v => v.clone().setY(2.2).applyMatrix4(lampG.matrixWorld));
+
+                // spolarna och ledningarna byggs om när varvtal eller belastning ändras
+                const ledG = new THREE.Group(); scene.add(ledG);
+                const markG = new THREE.Group(); scene.add(markG);
+                const tub = (pts, r, mat) => {
+                    const m = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), Math.max(40, pts.length * 2), r, 8, false), mat);
+                    m.castShadow = true; return m;
+                };
+                function polylinje(pts) {
+                    const L = [0];
+                    for (let i = 1; i < pts.length; i++) L.push(L[i - 1] + pts[i].distanceTo(pts[i - 1]));
+                    return {
+                        pts, L, len: L[L.length - 1],
+                        at(s) {
+                            s = ((s % this.len) + this.len) % this.len;
+                            let lo = 0, hi = this.L.length - 1;
+                            while (hi - lo > 1) { const m = (lo + hi) >> 1; if (this.L[m] < s) lo = m; else hi = m; }
+                            const t = (s - this.L[lo]) / Math.max(1e-9, this.L[hi] - this.L[lo]);
+                            return { p: this.pts[lo].clone().lerp(this.pts[hi], t), d: this.pts[hi].clone().sub(this.pts[lo]).normalize() };
+                        },
+                    };
+                }
+                // en rundad rektangel runt benet, n varv nedifrån och upp
+                function helix(cx, n) {
+                    const pts = [];
+                    const per = 64, hx = SP.hx, hz = SP.hz;
+                    // vinkel + "superellips" ger en rundad rektangel; varven börjar och slutar på benets utsida
+                    const a0 = cx < 0 ? Math.PI : 0;
+                    for (let j = 0; j <= n * per; j++) {
+                        const t = j / (n * per);
+                        const a = a0 + 2 * Math.PI * n * t;
+                        const c = Math.cos(a), s = Math.sin(a);
+                        const e = 0.22;      // liten exponent ger fyrkantigare form
+                        const x = hx * Math.sign(c) * Math.pow(Math.abs(c), e);
+                        const z = hz * Math.sign(s) * Math.pow(Math.abs(s), e);
+                        pts.push(new THREE.Vector3(cx + x, SP.y0 + (SP.y1 - SP.y0) * t, -z));
+                    }
+                    return pts;
+                }
+                const kabel = (fran, via, till, mat, r = 0.28) => {
+                    const p = [fran.clone(), ...via, till.clone()];
+                    return tub(new THREE.CatmullRomCurve3(p, false, 'centripetal').getPoints(90), r, mat);
+                };
+
+                const stromKon = new THREE.ConeGeometry(0.42, 1.2, 14);
+                const stromMatP = markMat(COL.prim, { glod: 0.25 });
+                const stromMatS = markMat(COL.sek, { glod: 0.45 });
+                const elekGeo = new THREE.SphereGeometry(0.26, 12, 8);
+                const elekMat = markMat(COL.elek, { glod: 0.45 });
+                let kretsar = [];     // { bana, pilar[], elek[], sida }
+
+                function bygg(N1, N2, load) {
+                    while (ledG.children.length) { const c = ledG.children.pop(); if (c.geometry) c.geometry.dispose(); }
+                    while (markG.children.length) markG.children.pop();
+                    kretsar = [];
+                    [[-KX, N1, 'p'], [KX, N2, 's']].forEach(([cx, N, sida]) => {
+                        const n = varv3D(N);
+                        const pts = helix(cx, n);
+                        const pitch = (SP.y1 - SP.y0) / n;
+                        ledG.add(tub(pts, Math.min(0.34, pitch * 0.42), koppar));
+                        const nere = pts[0], uppe = pts[pts.length - 1];
+                        // spolens ändar: ut till en liten anslutning på flänsens framkant
+                        const ut = (q, y) => new THREE.Vector3(cx + (sida === 'p' ? -1 : 1) * (SP.hx + 0.6), y, SP.hz + 1.2);
+                        const anslN = ut(nere, SP.y0 - 1.2), anslU = ut(uppe, SP.y1 + 1.2);
+                        ledG.add(tub([nere, new THREE.Vector3(nere.x - (sida === 'p' ? 0.6 : -0.6), SP.y0 - 0.6, nere.z + 1.6), anslN], 0.22, koppar));
+                        ledG.add(tub([uppe, new THREE.Vector3(uppe.x - (sida === 'p' ? 0.6 : -0.6), SP.y1 + 0.6, uppe.z + 1.6), anslU], 0.22, koppar));
+                        let bana;
+                        if (sida === 'p') {
+                            // från aggregatets röda pol upp till spolens övre ände, genom spolen nedåt och tillbaka till den svarta
+                            const k1 = [aggrPol[1], new THREE.Vector3(aggrPol[1].x + 4, 0.3, aggrPol[1].z + 2), new THREE.Vector3(-22, 0.3, 9), new THREE.Vector3(anslU.x - 1, 0.6, anslU.z + 1.5), new THREE.Vector3(anslU.x - 0.8, anslU.y - 0.5, anslU.z + 0.6), anslU];
+                            const k2 = [anslN, new THREE.Vector3(anslN.x - 1, 0.4, anslN.z + 2), new THREE.Vector3(-24, 0.3, 12), new THREE.Vector3(aggrPol[0].x + 3, 0.3, aggrPol[0].z + 3), aggrPol[0]];
+                            ledG.add(kabel(k1[0], k1.slice(1, -1), k1[k1.length - 1], kabelR));
+                            ledG.add(kabel(k2[0], k2.slice(1, -1), k2[k2.length - 1], kabelS));
+                            const c1 = new THREE.CatmullRomCurve3(k1, false, 'centripetal').getPoints(60);
+                            const c2 = new THREE.CatmullRomCurve3(k2, false, 'centripetal').getPoints(60);
+                            bana = polylinje([...c1, ...pts.slice().reverse(), ...c2]);
+                        } else {
+                            // sekundärsidan: spolens ändar till multimetern, och därifrån till lampan när den är ansluten
+                            const k1 = [anslU, new THREE.Vector3(anslU.x + 0.8, anslU.y - 0.5, anslU.z + 0.6), new THREE.Vector3(anslU.x + 1, 0.6, anslU.z + 1.5), new THREE.Vector3(anslU.x + 2, 0.3, 10), mmPol[1]];
+                            const k2 = [mmPol[0], new THREE.Vector3(mmPol[0].x - 2, 0.3, 12), new THREE.Vector3(anslN.x + 1, 0.4, anslN.z + 2), anslN];
+                            ledG.add(kabel(k1[0], k1.slice(1, -1), k1[k1.length - 1], kabelR, 0.24));
+                            ledG.add(kabel(k2[0], k2.slice(1, -1), k2[k2.length - 1], kabelS, 0.24));
+                            const c1 = new THREE.CatmullRomCurve3(k1, false, 'centripetal').getPoints(60);
+                            const c2 = new THREE.CatmullRomCurve3(k2, false, 'centripetal').getPoints(60);
+                            if (load) {
+                                const l1 = [mmPol[1], new THREE.Vector3(mmPol[1].x + 3, 0.3, mmPol[1].z - 4), new THREE.Vector3(lampPol[1].x + 1, 0.3, lampPol[1].z + 3), lampPol[1]];
+                                const l2 = [lampPol[0], new THREE.Vector3(lampPol[0].x - 1, 0.3, lampPol[0].z + 4), new THREE.Vector3(mmPol[0].x - 2, 0.3, mmPol[0].z - 3), mmPol[0]];
+                                ledG.add(kabel(l1[0], l1.slice(1, -1), l1[l1.length - 1], kabelR, 0.24));
+                                ledG.add(kabel(l2[0], l2.slice(1, -1), l2[l2.length - 1], kabelS, 0.24));
+                                const d1 = new THREE.CatmullRomCurve3(l1, false, 'centripetal').getPoints(50);
+                                const d2 = new THREE.CatmullRomCurve3(l2, false, 'centripetal').getPoints(50);
+                                bana = polylinje([...pts, ...c1, ...d1, ...d2, ...c2]);
+                            } else {
+                                bana = polylinje([...pts, ...c1]);
+                            }
+                        }
+                        const pilar = [], elek = [];
+                        const nP = Math.min(90, Math.round(bana.len / 5));
+                        for (let i = 0; i < nP; i++) { const m = new THREE.Mesh(stromKon, sida === 'p' ? stromMatP : stromMatS); markG.add(m); pilar.push({ m, s0: i * bana.len / nP }); }
+                        const nE = Math.min(260, Math.round(bana.len / 1.8));
+                        for (let i = 0; i < nE; i++) { const m = new THREE.Mesh(elekGeo, elekMat); markG.add(m); elek.push({ m, s0: (i + 0.5) * bana.len / nE }); }
+                        kretsar.push({ bana, pilar, elek, sida });
+                    });
+                }
+
+                // flödets pilar längs kärnans mittlinje, framför kärnans framsida
+                const fluxMat = markMat(COL.flux, { glod: 0.55 });
+                const fluxKon = new THREE.ConeGeometry(0.9, 2.2, 18);
+                const fluxSkaft = new THREE.CylinderGeometry(0.32, 0.32, 1, 12);
+                const zF = KG.d / 2 + 0.55;
+                const yO = KG.y0 + KG.h - KG.w / 2, yN = KG.y0 + KG.w / 2;
+                // medurs sett framifrån: ovanpå åt höger, höger ben nedåt, nedtill åt vänster, vänster ben uppåt
+                const fluxPos = [[-4.5, yO, 1, 0], [4.5, yO, 1, 0], [4.5, yN, -1, 0], [-4.5, yN, -1, 0]];
+                const fluxPilar = fluxPos.map(([x, y, dx]) => {
+                    const g = new THREE.Group();
+                    const sk = new THREE.Mesh(fluxSkaft, fluxMat), sp = new THREE.Mesh(fluxKon, fluxMat);
+                    g.add(sk, sp); g.position.set(x, y, zF); scene.add(g);
+                    return { g, sk, sp, dx };
+                });
+                const fluxRing = (() => {
+                    const r = 1.2, x0 = -KX, x1 = KX, y0 = yN, y1 = yO;
+                    const pts = [];
+                    const hornet = (cx, cy, a0) => { for (let k = 0; k <= 8; k++) { const a = a0 + (Math.PI / 2) * k / 8; pts.push(new THREE.Vector3(cx + r * Math.cos(a), cy + r * Math.sin(a), zF - 0.2)); } };
+                    hornet(x1 - r, y1 - r, 0); hornet(x0 + r, y1 - r, Math.PI / 2); hornet(x0 + r, y0 + r, Math.PI); hornet(x1 - r, y0 + r, 1.5 * Math.PI);
+                    pts.push(pts[0].clone());
+                    const m = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts, true), 200, 0.12, 8, true),
+                        new THREE.MeshBasicMaterial({ color: linjar(COL.flux), transparent: true, opacity: 0.5, depthWrite: false, toneMapped: false }));
+                    scene.add(m); return m;
+                })();
+                const phiL = textSprite([{ t: 'Φ', italic: true, color: COL.flux }], 2.4);
+                phiL.position.set(0, KG.y0 + KG.h + 2.6, zF); scene.add(phiL);
+                const i1L = textSprite([{ t: 'I', italic: true, color: COL.prim }, { t: '1', small: true, color: COL.prim }], 2.2);
+                const i2L = textSprite([{ t: 'I', italic: true, color: COL.sek }, { t: '2', small: true, color: COL.sek }], 2.2);
+                i1L.position.set(-KX - SP.hx - 3.4, (SP.y0 + SP.y1) / 2, SP.hz + 1.5);
+                i2L.position.set(KX + SP.hx + 3.4, (SP.y0 + SP.y1) / 2, SP.hz + 1.5);
+                scene.add(i1L, i2L);
+                const n1L = textSprite([{ t: 'N', italic: true, color: COL.ink }, { t: '1', small: true, color: COL.ink }], 2);
+                const n2L = textSprite([{ t: 'N', italic: true, color: COL.ink }, { t: '2', small: true, color: COL.ink }], 2);
+                n1L.position.set(-KX, KG.y0 + KG.h + 2.4, 0); n2L.position.set(KX, KG.y0 + KG.h + 2.4, 0);
+                scene.add(n1L, n2L);
+
+                let byggt = '', dispAggr = '', dispMm = '';
+
+                // kamera
+                const cam = { ...VYER3.snett, target: new THREE.Vector3(...VYER3.snett.target) };
+                let camMal = null;
+                apiRef.current.vy = (namn) => {
+                    const v = VYER3[namn];
+                    camMal = { theta: v.theta, phi: v.phi, radius: v.radius, target: new THREE.Vector3(...v.target) };
+                };
+                const uppdKam = () => {
+                    const sp = Math.sin(cam.phi);
+                    camera.position.set(cam.target.x + cam.radius * sp * Math.sin(cam.theta),
+                                        cam.target.y + cam.radius * Math.cos(cam.phi),
+                                        cam.target.z + cam.radius * sp * Math.cos(cam.theta));
+                    camera.lookAt(cam.target);
+                };
+
+                // pekare: klick på strömbrytaren eller lampan, annars vrid scenen
+                const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
+                const satt = (e) => {
+                    const r = el.getBoundingClientRect();
+                    ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+                    ray.setFromCamera(ndc, camera);
+                };
+                const traff = () => {
+                    const h = ray.intersectObjects([vipp, aggrBox, glas, lFot, sockelL], false)[0];
+                    if (!h) return null;
+                    return (h.object === vipp || h.object === aggrBox) ? 'brytare' : 'lampa';
+                };
+                const pek = new Map();
+                let drag = null, pinch = null, klick = null;
+                const onDown = (e) => {
+                    pek.set(e.pointerId, { x: e.clientX, y: e.clientY });
+                    el.setPointerCapture(e.pointerId);
+                    camMal = null;
+                    if (pek.size === 1) { drag = { x: e.clientX, y: e.clientY }; klick = { x: e.clientX, y: e.clientY }; }
+                    else if (pek.size === 2) {
+                        const [a, b] = [...pek.values()];
+                        pinch = { d: Math.hypot(a.x - b.x, a.y - b.y), r: cam.radius };
+                        drag = null; klick = null;
+                    }
+                };
+                const onMove = (e) => {
+                    if (pek.has(e.pointerId)) pek.set(e.pointerId, { x: e.clientX, y: e.clientY });
+                    if (pinch && pek.size === 2) {
+                        const [a, b] = [...pek.values()];
+                        cam.radius = Math.max(40, Math.min(170, pinch.r * pinch.d / Math.max(1, Math.hypot(a.x - b.x, a.y - b.y))));
+                        return;
+                    }
+                    if (klick && Math.hypot(e.clientX - klick.x, e.clientY - klick.y) > 6) klick = null;
+                    if (drag) {
+                        cam.theta -= (e.clientX - drag.x) * 0.006;
+                        cam.phi = Math.max(0.08, Math.min(1.52, cam.phi - (e.clientY - drag.y) * 0.005));
+                        drag.x = e.clientX; drag.y = e.clientY;
+                        if (!klick) el.classList.add('dragging');
+                        return;
+                    }
+                    if (e.pointerType === 'mouse') {
+                        satt(e);
+                        const h = traff();
+                        el.classList.toggle('pointer', !!h); el.classList.toggle('grab', !h);
+                    }
+                };
+                const onUp = (e) => {
+                    if (klick && pek.size === 1) {
+                        satt(e);
+                        const h = traff();
+                        if (h === 'brytare') apiRef.current.brytare();
+                        if (h === 'lampa') apiRef.current.lampa();
+                    }
+                    klick = null;
+                    pek.delete(e.pointerId);
+                    if (pek.size < 2) pinch = null;
+                    if (pek.size === 0) drag = null;
+                    el.classList.remove('dragging');
+                };
+                const onWheel = (e) => { e.preventDefault(); camMal = null; cam.radius = Math.max(40, Math.min(170, cam.radius * Math.exp(e.deltaY * 0.0012))); };
+                el.addEventListener('pointerdown', onDown);
+                el.addEventListener('pointermove', onMove);
+                el.addEventListener('pointerup', onUp);
+                el.addEventListener('pointercancel', onUp);
+                el.addEventListener('wheel', onWheel, { passive: false });
+                el.classList.add('grab');
+
+                const ro = new ResizeObserver(() => {
+                    renderer.setSize(W(), H());
+                    camera.aspect = W() / H();
+                    // vågrätt synfält så att aggregat, kärna och lampa ryms (smalare på stående skärmar)
+                    camera.fov = Math.max(26, Math.min(82, 2 * Math.atan(Math.tan((camera.aspect < 1 ? 31 : 25) * Math.PI / 180) / camera.aspect) * 180 / Math.PI));
+                    camera.updateProjectionMatrix();
+                });
+                ro.observe(el);
+                let synlig = true;
+                const io = new IntersectionObserver((en) => { synlig = en[0].isIntersecting; }, { threshold: 0.01 });
+                io.observe(el);
+
+                let raf = 0, tLast = performance.now();
+                const tick = () => {
+                    raf = requestAnimationFrame(tick);
+                    const now = performance.now();
+                    const dt = Math.min(0.05, (now - tLast) / 1000); tLast = now;
+                    if (!synlig) return;
+                    const st = stRef.current, p = pRef.current, sh = p.show, eff = p.eff;
+                    const nyckel = `${varv3D(p.N1)}-${varv3D(p.N2)}-${p.load}`;
+                    if (nyckel !== byggt) { bygg(p.N1, p.N2, p.load); byggt = nyckel; }
+
+                    // displayerna
+                    const dA = `${p.till}-${p.kalla}-${fmtU(p.U1)}`;
+                    if (dA !== dispAggr) { dispAggr = dA; ritaOm(aggrTex, (ctx, w, h) => ritaAggregat(ctx, w, h, { till: p.till, ac: p.kalla === 'ac', text: fmtU(p.U1).replace(' ', ' ') })); }
+                    const visU2 = p.kalla === 'ac' ? eff.U2 : st.u2;
+                    const dM = `${p.kalla}-${fmtU(visU2)}`;
+                    if (dM !== dispMm) { dispMm = dM; ritaOm(mmTex, (ctx, w, h) => ritaMultimeter(ctx, w, h, { ac: p.kalla === 'ac', text: fmtU(visU2) })); }
+                    vipp.rotation.x = p.till ? -0.35 : 0.35;
+
+                    // lampan
+                    lampG.visible = true;
+                    const gl = p.load ? Math.min(1, st.glow * 1.6) : 0;
+                    glasMat.emissiveIntensity = 3.2 * gl;
+                    glasMat.opacity = 0.32 + 0.6 * gl;
+                    gloria.material.opacity = gl;
+                    gloria.scale.setScalar(7 + 9 * gl);
+                    trad.material.emissive.copy(linjar('#ffb43a')).multiplyScalar(p.load ? 3 * st.glow : 0);
+                    ljus.intensity = p.load ? 2.2 * st.glow : 0;
+
+                    // flödet
+                    const f = st.f, af = Math.abs(f);
+                    fluxPilar.forEach(fp => {
+                        const vis = sh.flux && af > 0.03;
+                        fp.g.visible = vis;
+                        if (!vis) return;
+                        const L = 1.5 + 5 * af;
+                        const dir = (f > 0 ? 1 : -1) * fp.dx;
+                        fp.g.rotation.z = dir > 0 ? -Math.PI / 2 : Math.PI / 2;
+                        fp.sk.scale.set(1, L, 1); fp.sk.position.y = 0;
+                        fp.sp.position.y = L / 2 + 1.0;
+                    });
+                    fluxRing.visible = sh.flux;
+                    fluxRing.material.opacity = 0.12 + 0.5 * af;
+                    phiL.visible = sh.flux;
+
+                    // strömmar och elektroner
+                    kretsar.forEach(k => {
+                        const a = k.sida === 'p' ? st.a1 : st.a2;
+                        const q = (k.sida === 'p' ? st.q1 : st.q2) * 0.1;
+                        const aktiv = Math.abs(a) > 0.04 && (k.sida === 'p' ? p.till : p.load);
+                        const sg = a >= 0 ? 1 : -1;
+                        k.pilar.forEach(pp => {
+                            pp.m.visible = sh.strom && aktiv;
+                            if (!pp.m.visible) return;
+                            const { p: pos, d } = k.bana.at(pp.s0);
+                            pp.m.position.copy(pos);
+                            pp.m.quaternion.setFromUnitVectors(Y_AXEL, d.multiplyScalar(sg));
+                            const sk = 0.45 + 0.75 * Math.abs(a);
+                            pp.m.scale.set(sk, sk, sk);
+                        });
+                        k.elek.forEach(ee => {
+                            ee.m.visible = sh.elek;
+                            if (ee.m.visible) ee.m.position.copy(k.bana.at(ee.s0 - q).p);
+                        });
+                    });
+                    i1L.visible = sh.strom && p.till && Math.abs(st.a1) > 0.04;
+                    i2L.visible = sh.strom && p.load && Math.abs(st.a2) > 0.04;
+
+                    if (camMal) {
+                        const k = Math.min(1, dt * 4);
+                        cam.theta += (camMal.theta - cam.theta) * k; cam.phi += (camMal.phi - cam.phi) * k;
+                        cam.radius += (camMal.radius - cam.radius) * k; cam.target.lerp(camMal.target, k);
+                        if (Math.abs(camMal.phi - cam.phi) < 1e-3 && Math.abs(camMal.theta - cam.theta) < 1e-3) camMal = null;
+                    }
+                    uppdKam();
+                    renderer.render(scene, camera);
+                };
+                tick();
+                return () => {
+                    cancelAnimationFrame(raf); ro.disconnect(); io.disconnect();
+                    el.removeEventListener('pointerdown', onDown); el.removeEventListener('pointermove', onMove);
+                    el.removeEventListener('pointerup', onUp); el.removeEventListener('pointercancel', onUp);
+                    el.removeEventListener('wheel', onWheel);
+                    renderer.dispose();
+                    if (renderer.domElement.parentNode) renderer.domElement.parentNode.removeChild(renderer.domElement);
+                };
+            }, []);
+            return <div ref={mountRef} className="tre-mount" />;
+        }
+
+        // ─────────────────────────────────────────────────────────────────
+        // Graf: u1(t), u2(t) och flödet Φ(t)
+        // ─────────────────────────────────────────────────────────────────
+        const skalsteg = (m) => {
+            const s = [0.5, 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1e6, 2e6, 5e6];
+            return s.find(x => x >= m * 1.02) || s[s.length - 1];
+        };
+        function Graf({ buf, U1, U2ac }) {
+            const W = 560, H = 170, pl = 46, pr = 46, pt = 14, pb = 24;
+            const tNu = buf.length ? buf[buf.length - 1].t : 0;
+            const X = (t) => pl + (W - pl - pr) * (1 - (tNu - t) / GRAF_T);
+            const s1 = skalsteg(Math.SQRT2 * Math.max(U1, 1e-3)), s2 = skalsteg(Math.SQRT2 * Math.max(U2ac, 1e-3));
+            const mid = pt + (H - pt - pb) / 2, amp = (H - pt - pb) / 2;
+            const Y = (u, s) => mid - amp * Math.max(-1.08, Math.min(1.08, u / s));
+            const lin = (k, s) => buf.map(b => `${X(b.t).toFixed(1)},${Y(b[k], s).toFixed(1)}`).join(' ');
+            const fUt = buf.map(b => `${X(b.t).toFixed(1)},${(mid - amp * 0.92 * b.f).toFixed(1)}`).join(' ');
+            const t1 = (v) => fmt(v, v < 1 ? 1 : 0).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+            return (
+                <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ display: 'block' }} fontFamily="Poppins, sans-serif">
+                    <line x1={pl} y1={pt} x2={pl} y2={H - pb} stroke={COL.ink} strokeWidth="1" opacity="0.5" />
+                    <line x1={W - pr} y1={pt} x2={W - pr} y2={H - pb} stroke={COL.ink} strokeWidth="1" opacity="0.5" />
+                    <line x1={pl} y1={mid} x2={W - pr} y2={mid} stroke="#38bdf8" strokeWidth="1.4" />
+                    {[1, -1].map(sg => (
+                        <g key={sg}>
+                            <line x1={pl - 4} y1={mid - sg * amp} x2={pl} y2={mid - sg * amp} stroke={COL.ink} strokeWidth="1" />
+                            <text x={pl - 6} y={mid - sg * amp + 4} textAnchor="end" fontSize="10" fill={COL.prim}>{(sg < 0 ? '−' : '') + t1(s1)}</text>
+                            <line x1={W - pr} y1={mid - sg * amp} x2={W - pr + 4} y2={mid - sg * amp} stroke={COL.ink} strokeWidth="1" />
+                            <text x={W - pr + 6} y={mid - sg * amp + 4} textAnchor="start" fontSize="10" fill={COL.sek}>{(sg < 0 ? '−' : '') + t1(s2)}</text>
+                        </g>
+                    ))}
+                    <text x={pl - 6} y={mid + 4} textAnchor="end" fontSize="10" fill={COL.ink}>0</text>
+                    <text x={pl + 6} y={pt + 9} fontSize="11" fill={COL.prim}><tspan fontStyle="italic">u</tspan><tspan fontSize="8" dy="2">1</tspan><tspan dy="-2"> (V)</tspan></text>
+                    <text x={W - pr - 6} y={pt + 9} textAnchor="end" fontSize="11" fill={COL.sek}><tspan fontStyle="italic">u</tspan><tspan fontSize="8" dy="2">2</tspan><tspan dy="-2"> (V)</tspan></text>
+                    <text x={(W) / 2} y={pt + 9} textAnchor="middle" fontSize="11" fill={COL.flux}><tspan fontStyle="italic">Φ</tspan></text>
+                    <text x={W - pr} y={H - 6} textAnchor="end" fontSize="10.5" fill={COL.ink}><tspan fontStyle="italic">t</tspan></text>
+                    <polyline points={fUt} fill="none" stroke={COL.flux} strokeWidth="1.6" strokeDasharray="5 4" strokeLinejoin="round" />
+                    <polyline points={lin('u1', s1)} fill="none" stroke={COL.prim} strokeWidth="2" strokeLinejoin="round" />
+                    <polyline points={lin('u2', s2)} fill="none" stroke={COL.sek} strokeWidth="2.2" strokeLinejoin="round" />
+                </svg>
+            );
+        }
+
+        // ─────────────────────────────────────────────────────────────────
+        // Formelkort och reglage
+        // ─────────────────────────────────────────────────────────────────
         const LFrac = ({ topLbl, top, botLbl, bot }) => (
             <div className="flex flex-col items-center" style={{ lineHeight: 1.15 }}>
                 <span className="flbl">{topLbl}</span>
-                <span className="fnum" style={{ padding: '0 7px' }}>{top}</span>
-                <span style={{ alignSelf: 'stretch', borderTop: '2px solid currentColor', color: 'var(--lab-ink)' }} />
-                <span className="fnum" style={{ padding: '0 7px' }}>{bot}</span>
+                <span className="fnum" style={{ padding: '0 8px 3px' }}>{top}</span>
+                <span className="fnum" style={{ padding: '3px 8px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bot}</span>
                 <span className="flbl">{botLbl}</span>
             </div>
         );
-
+        const Frac = ({ top, bot, size = 15 }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.15 }}>
+                <span style={{ fontSize: size, padding: '0 6px 2px' }}>{top}</span>
+                <span style={{ fontSize: size, padding: '2px 6px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bot}</span>
+            </div>
+        );
         const FormulaCard = () => (
-            <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-8 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
+            <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-10 gap-y-4" style={{ color: 'var(--lab-ink)' }}>
                 <div className="flex items-center gap-x-3">
-                    <LFrac topLbl="Varv i primärspolen" top={<span><em>N</em>₁</span>}
-                           botLbl="Varv i sekundärspolen" bot={<span><em>N</em>₂</span>} />
+                    <LFrac topLbl="Varv i primärspolen" top={<span><em>N</em>₁</span>} botLbl="Varv i sekundärspolen" bot={<span><em>N</em>₂</span>} />
                     <span className="fnum">=</span>
-                    <LFrac topLbl="Spänning primär" top={<span><em>U</em>₁</span>}
-                           botLbl="Spänning sekundär" bot={<span><em>U</em>₂</span>} />
+                    <LFrac topLbl="Spänning primär" top={<span><em>U</em>₁</span>} botLbl="Spänning sekundär" bot={<span><em>U</em>₂</span>} />
                 </div>
                 <div className="flex items-center gap-x-3">
-                    <LFrac topLbl="Varv i primärspolen" top={<span><em>N</em>₁</span>}
-                           botLbl="Varv i sekundärspolen" bot={<span><em>N</em>₂</span>} />
+                    <LFrac topLbl="Varv i primärspolen" top={<span><em>N</em>₁</span>} botLbl="Varv i sekundärspolen" bot={<span><em>N</em>₂</span>} />
                     <span className="fnum">=</span>
-                    <LFrac topLbl="Ström sekundär" top={<span><em>I</em>₂</span>}
-                           botLbl="Ström primär" bot={<span><em>I</em>₁</span>} />
+                    <LFrac topLbl="Ström sekundär" top={<span><em>I</em>₂</span>} botLbl="Ström primär" bot={<span><em>I</em>₁</span>} />
                 </div>
-                <div style={{ color: 'var(--lab-ink-muted)', fontSize: 13 }}>
-                    gäller ideal transformator (utan energiförluster)
+                <div style={{ color: 'var(--lab-ink-muted)', fontSize: 13, maxWidth: 230 }}>
+                    Gäller en ideal transformator, utan energiförluster. Strömkvoten är omvänd.
                 </div>
             </div>
         );
+        const Slider = ({ label, sub, value, min, max, step, onChange, valueText }) => (
+            <div className="mb-3">
+                <div className="flex justify-between items-baseline mb-1">
+                    <label className="text-sm font-bold" style={{ color: 'var(--lab-ink)' }} dangerouslySetInnerHTML={{ __html: label }} />
+                    <div className="font-mono font-semibold text-sm" style={{ color: 'var(--lab-accent)' }}>{valueText}</div>
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} className="w-full cursor-pointer" />
+                {sub && <div className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }} dangerouslySetInnerHTML={{ __html: sub }} />}
+            </div>
+        );
+        const StSlider = ({ label, value, min, max, step, onChange, valueText }) => (
+            <div className="st-slider">
+                <div className="st-slider-top">
+                    <span dangerouslySetInnerHTML={{ __html: label }} />
+                    <span style={{ whiteSpace: 'nowrap', fontWeight: 600, color: 'var(--lab-ink, #0f1620)' }}>{valueText}</span>
+                </div>
+                <span className="sl-wrap">
+                    <input type="range" min={min} max={max} step={step} value={value}
+                           onChange={(e) => onChange(parseFloat(e.target.value))} />
+                </span>
+            </div>
+        );
+        const Readout = ({ label, value, color }) => (
+            <div className="p-2 rounded-lg" style={{ background: 'var(--lab-bg)', border: '1px solid var(--lab-line-strong)' }}>
+                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }} dangerouslySetInnerHTML={{ __html: label }} />
+                <div className="font-mono font-bold text-sm" style={{ color: color || 'var(--lab-ink)' }}>{value}</div>
+            </div>
+        );
 
-        // ── Scen-geometri ──
-        // Järnkärnan ligger nere till vänster så att scen-panelerna inte skymmer den
-        const CORE = { x0: 220, x1: 490, y0: 135, y1: 435, ix0: 260, ix1: 450, iy0: 175, iy1: 395 };
-        const LEG1 = 240, LEG2 = 470;              // benens mittlinjer
-        const COILY0 = 220, COILY1 = 370;          // spolarnas översta/nedersta varv
-        const SRC = { x: 100, y: 295, r: 17 };     // växelspänningskällan
-
+        // ─────────────────────────────────────────────────────────────────
+        // Appen
+        // ─────────────────────────────────────────────────────────────────
         const App = () => {
             const q = new URLSearchParams(location.search);
-            const [U1, setU1] = useState(isFinite(parseFloat(q.get('u1'))) ? parseFloat(q.get('u1')) : 230);
-            const [N1, setN1] = useState(isFinite(parseFloat(q.get('n1'))) ? parseFloat(q.get('n1')) : 1150);
-            const [N2, setN2] = useState(isFinite(parseFloat(q.get('n2'))) ? parseFloat(q.get('n2')) : 100);
-            const [R, setR] = useState(isFinite(parseFloat(q.get('r'))) ? parseFloat(q.get('r')) : 50);
-            const [load, setLoad] = useState(q.get('last') === '1');
-            const [show, setShow] = useState({ graf: true, flux: true });
+            const num = (k, d) => (isFinite(parseFloat(q.get(k))) ? parseFloat(q.get(k)) : d);
+            const [U1, setU1] = useState(num('u1', 230));
+            const [N1, setN1] = useState(num('n1', 1150));
+            const [N2, setN2] = useState(num('n2', 100));
+            const [R, setR] = useState(num('r', 50));
+            const [load, setLoad] = useState(q.get('last') !== '0');
+            const [kalla, setKalla] = useState(q.get('kalla') === 'lik' ? 'dc' : 'ac');
+            const [till, setTill] = useState(true);
             const [running, setRunning] = useState(true);
+            const [dim, setDim] = useState(q.get('vy') === '3d' ? '3d' : '2d');
+            const [vy3, setVy3] = useState('snett');
+            const [show, setShow] = useState({ flux: true, strom: true, elek: false });
             const [isFullscreen, setIsFullscreen] = useState(false);
-            const [controlsOpen, setControlsOpen] = useState(true);
+            const [togglesOpen, setTogglesOpen] = useState(true);
             const [, setTick] = useState(0);
 
             const sceneWrapRef = useRef(null);
-            const phiRef = useRef(0);              // fasvinkeln i AC-cykeln
+            const stRef = useRef({ t: 0, th: 0, f: 0, u1: 0, u2: 0, i1: 0, i2: 0, a1: 0, a2: 0, q1: 0, q2: 0, glow: 0, buf: [] });
             const pRef = useRef({});
-            pRef.current = { running };
+            const apiRef = useRef({});
+            const eff = effektivvarden({ U1, N1, N2, R, load, kalla, till });
+            pRef.current = { U1, N1, N2, R, load, kalla, till, running, show, eff };
 
-            // ── Härledda storheter (exakt enligt genomgången) ──
-            const U2 = U1 * N2 / N1;               // N1/N2 = U1/U2
-            const I2 = load ? U2 / R : 0;          // Ohms lag i lampan
-            const I1 = load ? I2 * N2 / N1 : 0;    // N1/N2 = I2/I1
-            const P = U2 * I2;                     // P1 = P2
-
-            // ── Animationsloop: fasen i växelspänningens cykel ──
+            // ── Fysikloopen (gemensam för 2D och 3D) ──
             useEffect(() => {
-                let raf, last = performance.now();
+                let raf, last = performance.now(), sista = 0;
                 const loop = (now) => {
                     raf = requestAnimationFrame(loop);
                     const dt = Math.min((now - last) / 1000, 0.05);
                     last = now;
-                    if (pRef.current.running) {
-                        phiRef.current = (phiRef.current + 1.6 * dt) % (2 * Math.PI);
-                        setTick(t => t + 1);
+                    const p = pRef.current, st = stRef.current;
+                    if (!p.running) { setTick(t => (t + 1) % 1e6); return; }
+                    st.t += dt;
+                    const U2ac = p.U1 * p.N2 / p.N1;
+                    let dfdt;
+                    if (p.kalla === 'ac') {
+                        if (p.till) {
+                            st.th = (st.th + OMEGA * dt) % (2 * Math.PI);
+                            const fNy = -Math.cos(st.th);
+                            dfdt = OMEGA * Math.sin(st.th);
+                            st.f = fNy;
+                            st.u1 = Math.SQRT2 * p.U1 * Math.sin(st.th);
+                        } else { st.f = 0; dfdt = 0; st.u1 = 0; }
+                    } else {
+                        // likspänning: flödet växer eller avtar mot sitt slutvärde vid till- och frånslag
+                        const mal = p.till ? 1 : 0;
+                        const fNy = mal + (st.f - mal) * Math.exp(-dt / TAU);
+                        dfdt = (fNy - st.f) / dt;
+                        st.f = fNy;
+                        st.u1 = p.till ? p.U1 : 0;
                     }
+                    // e2 = N2 · dΦ/dt, normerat så att växelspänningens toppvärde blir √2 · U2
+                    st.u2 = Math.SQRT2 * U2ac * dfdt / OMEGA;
+                    st.i2 = p.load ? st.u2 / p.R : 0;
+                    st.i1 = p.kalla === 'ac' ? st.i2 * p.N2 / p.N1 : 0;
+                    // normerade strömmar för pilar och elektroner: den största strömmen får störst utslag
+                    const I2max = Math.SQRT2 * U2ac / p.R, I1max = I2max * p.N2 / p.N1;
+                    const Iref = Math.max(I1max, I2max, 1e-9);
+                    if (p.kalla === 'ac') {
+                        st.a1 = p.load ? st.i1 / Iref : 0;
+                        st.a2 = p.load ? st.i2 / Iref : 0;
+                    } else {
+                        st.a1 = p.till ? 0.8 : 0;                         // likström i primärkretsen
+                        st.a2 = p.load ? Math.max(-1, Math.min(1, st.i2 / Math.max(I2max, 1e-9))) : 0;
+                    }
+                    // elektronernas förflyttning (motsatt strömmen); 2D i px, 3D skalas ned
+                    const K = 40;
+                    st.q1 += K * st.a1 * dt * (p.kalla === 'ac' ? 1 : 0.6);
+                    st.q2 += K * st.a2 * dt;
+                    // lampans glöd: effektivvärdet vid växelspänning, momentan effekt vid likspänningens stöt
+                    const P = p.kalla === 'ac' ? p.eff.P : (p.load ? st.u2 * st.u2 / p.R / 2 : 0);
+                    const mal = p.load ? P / (P + 12) : 0;
+                    st.glow += (mal - st.glow) * Math.min(1, dt * (p.kalla === 'ac' ? 6 : 14));
+                    if (st.t - sista > 1 / 30) {
+                        sista = st.t;
+                        st.buf.push({ t: st.t, u1: st.u1, u2: st.u2, f: st.f });
+                        while (st.buf.length && st.t - st.buf[0].t > GRAF_T) st.buf.shift();
+                    }
+                    setTick(t => (t + 1) % 1e6);
                 };
                 raf = requestAnimationFrame(loop);
                 return () => cancelAnimationFrame(raf);
             }, []);
 
-            // ── Fullskärm ──
+            apiRef.current.brytare = () => setTill(t => !t);
+            apiRef.current.lampa = () => setLoad(l => !l);
+
             useEffect(() => {
-                const handler = () => {
-                    const fs = document.fullscreenElement === sceneWrapRef.current ||
-                        document.webkitFullscreenElement === sceneWrapRef.current;
-                    setIsFullscreen(fs);
-                    if (fs) setControlsOpen(false);   // starta hopfälld i fullskärm
-                };
+                const handler = () => setIsFullscreen(document.fullscreenElement === sceneWrapRef.current || document.webkitFullscreenElement === sceneWrapRef.current);
                 document.addEventListener('fullscreenchange', handler);
                 document.addEventListener('webkitfullscreenchange', handler);
-                return () => {
-                    document.removeEventListener('fullscreenchange', handler);
-                    document.removeEventListener('webkitfullscreenchange', handler);
-                };
+                return () => { document.removeEventListener('fullscreenchange', handler); document.removeEventListener('webkitfullscreenchange', handler); };
             }, []);
             const toggleFullscreen = () => {
                 const el = sceneWrapRef.current;
                 if (!el) return;
-                if (document.fullscreenElement || document.webkitFullscreenElement)
-                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                if (document.fullscreenElement || document.webkitFullscreenElement) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
                 else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
             };
-
             const tShow = (key) => setShow(sh => ({ ...sh, [key]: !sh[key] }));
-            const setExample1 = () => { setU1(230); setN1(1150); setN2(100); };
-            const setDemo = () => { setU1(10); setN1(300); setN2(1500); };
+            const valjVy3 = (n) => { setVy3(n); if (apiRef.current.vy) apiRef.current.vy(n); };
+            const forval = (u, n1, n2) => { setU1(u); setN1(n1); setN2(n2); setKalla('ac'); setTill(true); };
 
-            // ── Spolarna: antal ritade varv växer med N (schematiskt) ──
-            const loopsFor = (N) => Math.max(2, Math.min(12,
-                Math.round(2 + 10 * (N - NMIN) / (NMAX - NMIN))));
-
-            const coil = (cx, N, key) => {
-                const n = loopsFor(N);
-                const els = [];
-                for (let i = 0; i < n; i++) {
-                    const cy = COILY0 + (n === 1 ? 0 : i * (COILY1 - COILY0) / (n - 1));
-                    els.push(<ellipse key={i} cx={cx} cy={cy} rx="27" ry="7.5"
-                                      fill="none" stroke={COL.spole} strokeWidth="3.2" />);
-                }
-                return <g key={key}>{els}</g>;
-            };
-
-            // ── Scenen ──
-            const phi = phiRef.current;
-            const s = Math.sin(phi);               // momentanvärdet (normerat)
-
-            const scene = () => {
-                const els = [];
-
-                // järnkärnan (rektangulär ram, som teorifiguren)
-                els.push(
-                    <g key="karna">
-                        <path d={`M ${CORE.x0} ${CORE.y0} L ${CORE.x1} ${CORE.y0} L ${CORE.x1} ${CORE.y1} L ${CORE.x0} ${CORE.y1} Z
-                                  M ${CORE.ix0} ${CORE.iy0} L ${CORE.ix1} ${CORE.iy0} L ${CORE.ix1} ${CORE.iy1} L ${CORE.ix0} ${CORE.iy1} Z`}
-                              fillRule="evenodd" fill={COL.karna} stroke="#8d939c" strokeWidth="1.6" />
-                        <text x={(CORE.x0 + CORE.x1) / 2} y={(CORE.y1 + CORE.iy1) / 2 + 4} textAnchor="middle"
-                              fontSize="12" fill="var(--lab-ink-muted, #5a6170)">järnkärna</text>
-                    </g>
-                );
-
-                // det varierande magnetiska flödet Φ(t) längs kärnans ovansida
-                if (show.flux) {
-                    const mid = (CORE.x0 + CORE.x1) / 2;
-                    const y = (CORE.y0 + CORE.iy0) / 2;
-                    const half = 68 * Math.max(0.12, Math.abs(s));
-                    const dir = s >= 0 ? 1 : -1;
-                    const tip = mid + dir * half, tail = mid - dir * half;
-                    const base = tip - dir * 10;
-                    els.push(
-                        <g key="flux" opacity={0.35 + 0.65 * Math.abs(s)}>
-                            <line x1={tail} y1={y} x2={base} y2={y} stroke={COL.flux}
-                                  strokeWidth={2 + 2.2 * Math.abs(s)} strokeLinecap="butt" />
-                            <polygon points={`${tip},${y} ${base},${y - 5.5} ${base},${y + 5.5}`} fill={COL.flux} />
-                        </g>
-                    );
-                    els.push(
-                        <text key="fluxlbl" x={mid} y={CORE.y0 - 12} textAnchor="middle" fontSize="15" fill={COL.flux}>
-                            <tspan fontStyle="italic">Φ</tspan>(<tspan fontStyle="italic">t</tspan>)
-                        </text>
-                    );
-                }
-
-                // primärkretsen: växelspänningskälla + ledningar
-                const topWire1 = [[SRC.x, SRC.y - SRC.r], [SRC.x, COILY0], [LEG1 - 27, COILY0]];
-                const botWire1 = [[LEG1 - 27, COILY1], [SRC.x, COILY1], [SRC.x, SRC.y + SRC.r]];
-                els.push(
-                    <g key="krets1" stroke={COL.ink} strokeWidth="1.9" fill="none">
-                        <polyline points={topWire1.map(p => p.join(',')).join(' ')} />
-                        <polyline points={botWire1.map(p => p.join(',')).join(' ')} />
-                        <circle cx={SRC.x} cy={SRC.y} r={SRC.r} />
-                        <path d={`M ${SRC.x - 9} ${SRC.y} Q ${SRC.x - 4.5} ${SRC.y - 8} ${SRC.x} ${SRC.y} Q ${SRC.x + 4.5} ${SRC.y + 8} ${SRC.x + 9} ${SRC.y}`}
-                              strokeWidth="1.6" />
-                    </g>
-                );
-                els.push(
-                    <text key="u1lbl" x={SRC.x + 24} y={SRC.y + 5} textAnchor="start" fontSize="14" fill={COL.ink}>
-                        <tspan fontStyle="italic">U</tspan><tspan fontSize="10" dy="3">1</tspan>
-                        <tspan dy="-3"> = {fmtU(U1)}</tspan>
-                    </text>
-                );
-
-                // sekundärkretsen: öppna uttag eller lampa (belastning)
-                const lampX = 640, lampY = 300, lampR = 17;
-                if (load) {
-                    const topWire2 = [[LEG2 + 27, COILY0], [lampX, COILY0], [lampX, lampY - lampR]];
-                    const botWire2 = [[lampX, lampY + lampR], [lampX, COILY1], [LEG2 + 27, COILY1]];
-                    const glow = P / (P + 25);
-                    els.push(
-                        <g key="krets2">
-                            <g stroke={COL.ink} strokeWidth="1.9" fill="none">
-                                <polyline points={topWire2.map(p => p.join(',')).join(' ')} />
-                                <polyline points={botWire2.map(p => p.join(',')).join(' ')} />
-                            </g>
-                            {glow > 0.04 && (
-                                <circle cx={lampX} cy={lampY} r={lampR + 14 * glow} fill="#e8b64c"
-                                        opacity={0.5 * glow} />
-                            )}
-                            <circle cx={lampX} cy={lampY} r={lampR} fill={glow > 0.04 ? `rgba(238,196,96,${0.25 + 0.6 * glow})` : '#f7f2e8'}
-                                    stroke={COL.ink} strokeWidth="1.9" />
-                            <line x1={lampX - 12} y1={lampY - 12} x2={lampX + 12} y2={lampY + 12} stroke={COL.ink} strokeWidth="1.7" />
-                            <line x1={lampX + 12} y1={lampY - 12} x2={lampX - 12} y2={lampY + 12} stroke={COL.ink} strokeWidth="1.7" />
-                            <text x={lampX + 24} y={lampY + 5} textAnchor="start" fontSize="14" fill={COL.ink}>
-                                <tspan fontStyle="italic">U</tspan><tspan fontSize="10" dy="3">2</tspan>
-                                <tspan dy="-3"> = {fmtU(U2)}</tspan>
-                            </text>
-                        </g>
-                    );
-                } else {
-                    els.push(
-                        <g key="krets2">
-                            <g stroke={COL.ink} strokeWidth="1.9" fill="none">
-                                <polyline points={`${LEG2 + 27},${COILY0} 640,${COILY0}`} />
-                                <polyline points={`640,${COILY1} ${LEG2 + 27},${COILY1}`} />
-                            </g>
-                            <circle cx="644" cy={COILY0} r="3.5" fill="none" stroke={COL.ink} strokeWidth="1.7" />
-                            <circle cx="644" cy={COILY1} r="3.5" fill="none" stroke={COL.ink} strokeWidth="1.7" />
-                            <text x="700" y="300" textAnchor="middle" fontSize="14" fill={COL.ink}>
-                                <tspan fontStyle="italic">U</tspan><tspan fontSize="10" dy="3">2</tspan>
-                                <tspan dy="-3"> = {fmtU(U2)}</tspan>
-                            </text>
-                        </g>
-                    );
-                }
-
-                // spolarna (ritas efter ledningarna så varven ligger överst)
-                els.push(coil(LEG1, N1, 'spole1'));
-                els.push(coil(LEG2, N2, 'spole2'));
-
-                // varvtalsetiketter under benen
-                els.push(
-                    <g key="varv" fontSize="14" fill={COL.ink}>
-                        <text x={LEG1} y={CORE.y1 + 33} textAnchor="middle">
-                            <tspan fontStyle="italic">N</tspan><tspan fontSize="10" dy="3">1</tspan>
-                            <tspan dy="-3"> = {fmtN(N1)}</tspan>
-                        </text>
-                        <text x={LEG2} y={CORE.y1 + 33} textAnchor="middle">
-                            <tspan fontStyle="italic">N</tspan><tspan fontSize="10" dy="3">2</tspan>
-                            <tspan dy="-3"> = {fmtN(N2)}</tspan>
-                        </text>
-                        <text x={LEG1} y={CORE.y1 + 54} textAnchor="middle" fontSize="12" fill="var(--lab-ink-muted, #5a6170)">primärspole</text>
-                        <text x={LEG2} y={CORE.y1 + 54} textAnchor="middle" fontSize="12" fill="var(--lab-ink-muted, #5a6170)">sekundärspole</text>
-                    </g>
-                );
-
-                // AC-laddningar som svänger fram och tillbaka i ledningarna
-                if (load && I1 > 0) {
-                    const A1 = 6 + 22 * I1 / (I1 + 0.5);
-                    const A2 = 6 + 22 * I2 / (I2 + 0.5);
-                    const d1 = -A1 * Math.cos(phi);
-                    const d2 = A2 * Math.cos(phi);          // motfas (Lenz)
-                    const dots = [];
-                    [topWire1, botWire1].forEach((pts, wi) => {
-                        const L = pathLen(pts);
-                        [0.25, 0.55, 0.85].forEach((f, di) => {
-                            const [x, y] = pathPos(pts, Math.max(4, Math.min(L - 4, f * L + d1)));
-                            dots.push(<circle key={`p${wi}-${di}`} cx={x} cy={y} r="3.6" fill={COL.ink} />);
-                        });
-                    });
-                    const w2t = [[LEG2 + 27, COILY0], [lampX, COILY0], [lampX, lampY - lampR]];
-                    const w2b = [[lampX, lampY + lampR], [lampX, COILY1], [LEG2 + 27, COILY1]];
-                    [w2t, w2b].forEach((pts, wi) => {
-                        const L = pathLen(pts);
-                        [0.25, 0.55, 0.85].forEach((f, di) => {
-                            const [x, y] = pathPos(pts, Math.max(4, Math.min(L - 4, f * L + d2)));
-                            dots.push(<circle key={`s${wi}-${di}`} cx={x} cy={y} r="3.6" fill={COL.ink} />);
-                        });
-                    });
-                    els.push(<g key="dots">{dots}</g>);
-                }
-
-                // spänningsgraf u1(t), u2(t) (infälld ruta uppe till vänster)
-                if (show.graf) {
-                    const G = { x0: 18, y0: 58, w: 220, h: 116 };
-                    const midY = G.y0 + G.h / 2;
-                    const uMax = Math.max(U1, U2);
-                    const amp1 = 42 * U1 / uMax, amp2 = 42 * U2 / uMax;
-                    const pts1 = [], pts2 = [];
-                    for (let px = 0; px <= G.w - 46; px += 3) {
-                        const arg = phi - px * 0.055;
-                        pts1.push(`${G.x0 + 34 + px},${(midY - amp1 * Math.sin(arg)).toFixed(1)}`);
-                        pts2.push(`${G.x0 + 34 + px},${(midY - amp2 * Math.sin(arg)).toFixed(1)}`);
-                    }
-                    els.push(
-                        <g key="graf">
-                            <rect x={G.x0} y={G.y0} width={G.w} height={G.h} rx="8"
-                                  fill="rgba(246,242,234,0.94)" stroke="rgba(15,22,32,0.28)" strokeWidth="1" />
-                            <line x1={G.x0 + 34} y1={midY} x2={G.x0 + G.w - 10} y2={midY}
-                                  stroke="#38bdf8" strokeWidth="1.2" />
-                            <line x1={G.x0 + 34} y1={G.y0 + 10} x2={G.x0 + 34} y2={G.y0 + G.h - 10}
-                                  stroke="#38bdf8" strokeWidth="1.2" />
-                            <text x={G.x0 + G.w - 10} y={midY - 5} textAnchor="end" fontSize="11" fill={COL.ink}>
-                                <tspan fontStyle="italic">t</tspan>
-                            </text>
-                            <polyline points={pts1.join(' ')} fill="none" stroke={COL.ink} strokeWidth="1.8" />
-                            <polyline points={pts2.join(' ')} fill="none" stroke={COL.u2} strokeWidth="1.8" />
-                            <text x={G.x0 + 10} y={G.y0 + 20} textAnchor="start" fontSize="11.5" fill={COL.ink}>
-                                <tspan fontStyle="italic">u</tspan><tspan fontSize="8.5" dy="2">1</tspan>
-                            </text>
-                            <text x={G.x0 + 10} y={G.y0 + 36} textAnchor="start" fontSize="11.5" fill={COL.u2}>
-                                <tspan fontStyle="italic">u</tspan><tspan fontSize="8.5" dy="2">2</tspan>
-                            </text>
-                        </g>
-                    );
-                }
-
-                return (
-                    <svg viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid meet"
-                         fontFamily="Poppins, sans-serif">
-                        <defs>
-                            <linearGradient id="paperG" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0" stopColor="#f7f2e8" />
-                                <stop offset="1" stopColor="#ece3d2" />
-                            </linearGradient>
-                        </defs>
-                        <rect x="0" y="0" width={VBW} height={VBH} fill="url(#paperG)" />
-                        {els}
-                    </svg>
-                );
-            };
-
-            // ── Kryssrutor och styrknappar (uppe till höger på scenen) ──
-            const sceneToggles = () => (
-                <div className="scene-toggles">
-                    <div className="st-title">Visa</div>
-                    <label><input type="checkbox" checked={show.flux} onChange={() => tShow('flux')} />
-                        <span className="st-swatch" style={{ background: COL.flux }}></span>
-                        <span>Flödet <em>Φ</em>(<em>t</em>)</span></label>
-                    <label><input type="checkbox" checked={show.graf} onChange={() => tShow('graf')} />
-                        <span>Spänningsgraf <em>u</em>₁, <em>u</em>₂</span></label>
-                    <div className="st-title st-group">Belastning</div>
-                    <label><input type="checkbox" checked={load} onChange={() => setLoad(l => !l)} />
-                        <span>Anslut lampa till sekundärspolen</span></label>
-                    <div className="st-actions">
-                        <button className={`btn-toggle ${running ? '' : 'active'}`}
-                                onClick={() => setRunning(r => !r)}>
-                            {running ? 'Pausa' : 'Fortsätt'}
-                        </button>
-                    </div>
-                </div>
-            );
-
-            const Readout = ({ label, value, unit, color }) => (
-                <div className="p-2 rounded-lg" style={{ background: 'var(--lab-bg)', border: '1px solid var(--lab-line-strong)' }}>
-                    <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }} dangerouslySetInnerHTML={{ __html: label }} />
-                    <div className="font-mono font-bold text-sm" style={{ color: color || 'var(--lab-ink)' }}>
-                        {value} <span className="font-normal text-xs" style={{ color: 'var(--lab-ink-muted)' }}>{unit}</span>
-                    </div>
-                </div>
-            );
-
+            const st = stRef.current;
             const ratioText = N1 >= N2
                 ? `${fmt(N1 / N2, N1 / N2 >= 10 ? 1 : 2)} : 1`
                 : `1 : ${fmt(N2 / N1, N2 / N1 >= 10 ? 1 : 2)}`;
+            const upp = N2 > N1;
+            const dcPuls = kalla === 'dc' && Math.abs(st.u2) > 0.01 * Math.max(eff.U2ac, 1e-3);
+
+            const reglage = (Comp) => (
+                <React.Fragment>
+                    <Comp label={Comp === Slider ? 'Primärspänning (<em>U</em>₁)' : 'Spänning (<em>U</em>₁)'} value={U1}
+                        min={U1MIN} max={U1MAX} step={5} onChange={setU1} valueText={fmtU(U1)}
+                        sub={Comp === Slider ? (kalla === 'ac' ? 'Effektivvärdet av växelspänningen över primärspolen.' : 'Likspänningen över primärspolen.') : undefined} />
+                    <Comp label={Comp === Slider ? 'Varv i primärspolen (<em>N</em>₁)' : 'Varv primär (<em>N</em>₁)'} value={N1}
+                        min={NMIN} max={NMAX} step={10} onChange={setN1} valueText={fmtN(N1)}
+                        sub={Comp === Slider ? 'Fler varv i primärspolen ger lägre sekundärspänning.' : undefined} />
+                    <Comp label={Comp === Slider ? 'Varv i sekundärspolen (<em>N</em>₂)' : 'Varv sekundär (<em>N</em>₂)'} value={N2}
+                        min={NMIN} max={NMAX} step={10} onChange={setN2} valueText={fmtN(N2)}
+                        sub={Comp === Slider ? 'Fler varv i sekundärspolen ger högre sekundärspänning.' : undefined} />
+                    {load && <Comp label={Comp === Slider ? 'Lampans resistans (<em>R</em>)' : 'Resistans (<em>R</em>)'} value={R}
+                        min={RMIN} max={RMAX} step={5} onChange={setR} valueText={`${fmt(R, 0)} Ω`}
+                        sub={Comp === Slider ? 'Lampan bestämmer strömmen genom Ohms lag, <em>I</em>₂ = <em>U</em>₂ / <em>R</em>.' : undefined} />}
+                </React.Fragment>
+            );
+
+            const sceneToggles = () => (
+                !togglesOpen ? (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)} aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" /><circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" /><circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                ) : (
+                <div className="scene-toggles">
+                    <button className="st-hide" onClick={() => setTogglesOpen(false)} aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+                    </button>
+                    <div className="st-title">Visa</div>
+                    <label><input type="checkbox" checked={show.flux} onChange={() => tShow('flux')} />
+                        <span className="st-swatch" style={{ background: COL.flux }}></span><span>Magnetiska flödet <em>Φ</em></span></label>
+                    <label><input type="checkbox" checked={show.strom} onChange={() => tShow('strom')} />
+                        <span className="st-swatch" style={{ background: `linear-gradient(90deg, ${COL.prim} 50%, ${COL.sek} 50%)` }}></span><span>Strömmarna <em>I</em>₁ och <em>I</em>₂</span></label>
+                    <label><input type="checkbox" checked={show.elek} onChange={() => tShow('elek')} />
+                        <span className="st-dot" style={{ background: COL.elek }}></span><span>Elektronerna</span></label>
+                    <div className="st-title st-group">Sekundärsidan</div>
+                    <label><input type="checkbox" checked={load} onChange={() => setLoad(l => !l)} /><span>Anslut lampan</span></label>
+                    {isFullscreen && (
+                        <React.Fragment>
+                            <div className="st-title st-group">Reglage</div>
+                            <div className="st-sliders">{reglage(StSlider)}</div>
+                        </React.Fragment>
+                    )}
+                    {isFullscreen && (
+                        <div className="st-actions">
+                            <button className={`btn-toggle ${till ? '' : 'active'}`} onClick={() => setTill(t => !t)}>
+                                {tr(till ? 'Slå av spänningen' : 'Slå på spänningen')}
+                            </button>
+                            <button className={`btn-toggle ${running ? '' : 'active'}`} onClick={() => setRunning(r => !r)}>
+                                {tr(running ? 'Pausa' : 'Fortsätt')}
+                            </button>
+                        </div>
+                    )}
+                </div>
+                )
+            );
 
             return (
                 <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
@@ -658,71 +1446,46 @@
                             <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Transformator
                         </div>
                         <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Transformator</h1>
-                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
-                            Två spolar på en gemensam järnkärna. Växelströmmen i primärspolen skapar ett
-                            varierande magnetiskt flöde <em>Φ</em> genom kärnan, som inducerar en ny spänning i
-                            sekundärspolen. Ändra varvtalen <em>N</em>₁ och <em>N</em>₂ och se hur
-                            spänningen transformeras upp eller ner — anslut sedan en lampa och se att
-                            strömmen ändras åt <strong>motsatt</strong> håll, så att effekten bevaras.
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 840 }}>
+                            Två spolar på en gemensam järnkärna. Växelströmmen i primärspolen ger ett magnetiskt
+                            flöde <em>Φ</em> som hela tiden ändras, och flödet går genom kärnan och sekundärspolen,
+                            där det inducerar en ny spänning. Ändra varvtalen och se spänningen transformeras upp
+                            eller ner. Anslut lampan och se att strömmen ändras åt <strong>motsatt</strong> håll, så
+                            att effekten bevaras. Prova också likspänning, och växla till 3D för att se
+                            transformatorn på labbänken.
                         </p>
 
                         <FormulaCard />
 
                         <main className="flex flex-col lg:flex-row gap-6">
-                            {/* Scen */}
                             <div className="lg:w-3/5 order-1">
-                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
-                                    {scene()}
+                                <div className={'scene-wrap' + (isFullscreen ? ' is-fs' : '')} data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    {dim === '2d'
+                                        ? <Scen2D st={st} p={pRef.current} show={show} eff={eff} onBrytare={() => setTill(t => !t)} />
+                                        : <Scen3D stRef={stRef} pRef={pRef} apiRef={apiRef} />}
 
                                     <div className="scene-info">
                                         <span className="si-lbl">Sekundärspänning <em style={{ textTransform: 'none' }}>U</em>₂</span>
-                                        <span className="si-val">{fmtU(U2)}</span>
-                                        <span className="si-lbl" style={{ marginTop: 4 }}>Omsättning <em style={{ textTransform: 'none' }}>N</em>₁ : <em style={{ textTransform: 'none' }}>N</em>₂</span>
-                                        <span className="si-val" style={{ fontSize: 13 }}>{ratioText}</span>
+                                        <span className="si-val" style={{ color: COL.sek }}>{kalla === 'ac' ? fmtU(eff.U2) : fmtU(st.u2)}</span>
                                         {load && (
                                             <React.Fragment>
-                                                <span className="si-lbl" style={{ marginTop: 4 }}>Effekt <em style={{ textTransform: 'none' }}>P</em></span>
-                                                <span className="si-val" style={{ fontSize: 13 }}>{fmtP(P)}</span>
+                                                <span className="si-lbl" style={{ marginTop: 4 }}>Ström sekundär <em style={{ textTransform: 'none' }}>I</em>₂</span>
+                                                <span className="si-val" style={{ fontSize: 13, color: COL.sek }}>{kalla === 'ac' ? fmtI(eff.I2) : fmtI(st.i2)}</span>
                                             </React.Fragment>
+                                        )}
+                                        {kalla === 'dc' && (
+                                            <span className="si-val" style={{ fontSize: 12, fontWeight: 600, marginTop: 4, color: 'var(--lab-ink-soft)' }}>
+                                                {tr(dcPuls ? 'Flödet ändras: spänningsstöt' : 'Flödet ändras inte')}
+                                            </span>
                                         )}
                                     </div>
 
+                                    <div className="scene-hint">{tr(dim === '2d'
+                                        ? 'Klicka på strömbrytaren för att slå av och på.'
+                                        : 'Dra för att vrida scenen. Klicka på aggregatet eller lampan.')}</div>
                                     {sceneToggles()}
 
-                                    {/* Fullskärm: glidarna i en hopfällbar panel i underkant */}
-                                    {isFullscreen && (
-                                        <React.Fragment>
-                                            <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
-                                                <FsSlider label="Primärspänning (<em>U</em>₁)" value={U1}
-                                                          min={U1MIN} max={U1MAX} step={5} onChange={setU1}
-                                                          valueText={fmtU(U1)} />
-                                                <FsSlider label="Varv primär (<em>N</em>₁)" value={N1}
-                                                          min={NMIN} max={NMAX} step={25} onChange={setN1}
-                                                          valueText={fmtN(N1)} />
-                                                <FsSlider label="Varv sekundär (<em>N</em>₂)" value={N2}
-                                                          min={NMIN} max={NMAX} step={25} onChange={setN2}
-                                                          valueText={fmtN(N2)} />
-                                                {load && (
-                                                    <FsSlider label="Lampans resistans (<em>R</em>)" value={R}
-                                                              min={RMIN} max={RMAX} step={5} onChange={setR}
-                                                              valueText={`${fmt(R, 0)} Ω`} />
-                                                )}
-                                            </div>
-                                            <button className="fs-toggle-handle" onClick={() => setControlsOpen(o => !o)}
-                                                    title={controlsOpen ? 'Dölj reglage' : 'Visa reglage'}
-                                                    aria-expanded={controlsOpen}>
-                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                     strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
-                                                     style={{ transform: controlsOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}>
-                                                    <path d="M6 9l6 6 6-6"/>
-                                                </svg>
-                                                <span>{controlsOpen ? 'Dölj reglage' : 'Reglage'}</span>
-                                            </button>
-                                        </React.Fragment>
-                                    )}
-
-                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
-                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm" title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
                                         {isFullscreen ? (
                                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                                                 <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
@@ -734,119 +1497,135 @@
                                         )}
                                     </button>
                                 </div>
+
+                                <div className="glass-card rounded-xl p-3 mt-3">
+                                    <div className="flex flex-wrap justify-between items-baseline gap-x-4 mb-1">
+                                        <div className="flbl">Spänningarna och flödet</div>
+                                        <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>
+                                            Visas kraftigt nedsaktat. I vägguttaget byter spänningen riktning 100 gånger per sekund.
+                                        </div>
+                                    </div>
+                                    <Graf buf={st.buf} U1={U1} U2ac={eff.U2ac} />
+                                    <div className="text-xs mt-1" style={{ color: 'var(--lab-ink-soft)' }}>
+                                        Spänningen <em>u</em>₂ är störst när flödet <em>Φ</em> ändras snabbast, och noll när flödet
+                                        vänder. Det är flödesändringen som inducerar spänningen, inte flödet i sig.
+                                    </div>
+                                </div>
                             </div>
 
-                            {/* Kontroller */}
                             <div className="lg:w-2/5 order-2">
                                 <div className="glass-card rounded-xl p-3 mb-3">
-                                    <Slider label="Primärspänning (<em>U</em>₁)"
-                                            sub="Växelspänningen som läggs över primärspolen (effektivvärde)."
-                                            value={U1} min={U1MIN} max={U1MAX} step={5} onChange={setU1}
-                                            valueText={fmtU(U1)} />
-                                    <Slider label="Varv i primärspolen (<em>N</em>₁)"
-                                            sub="Fler varv i primärspolen ⟹ lägre sekundärspänning."
-                                            value={N1} min={NMIN} max={NMAX} step={25} onChange={setN1}
-                                            valueText={fmtN(N1)} />
-                                    <Slider label="Varv i sekundärspolen (<em>N</em>₂)"
-                                            sub="Fler varv i sekundärspolen ⟹ högre sekundärspänning."
-                                            value={N2} min={NMIN} max={NMAX} step={25} onChange={setN2}
-                                            valueText={fmtN(N2)} />
-                                    {load && (
-                                        <Slider label="Lampans resistans (<em>R</em>)"
-                                                sub="Belastningen bestämmer strömmen: <em>I</em>₂ = <em>U</em>₂ / <em>R</em> (Ohms lag)."
-                                                value={R} min={RMIN} max={RMAX} step={5} onChange={setR}
-                                                valueText={`${fmt(R, 0)} Ω`} />
+                                    <div className="seg mb-3" style={{ gridTemplateColumns: '1fr 1fr' }}>
+                                        <button className={dim === '2d' ? 'active' : ''} onClick={() => setDim('2d')}>2D<span className="sub">principskiss</span></button>
+                                        <button className={dim === '3d' ? 'active' : ''} onClick={() => setDim('3d')}>3D<span className="sub">på labbänken</span></button>
+                                    </div>
+                                    {dim === '3d' && (
+                                        <div className="seg mb-3" style={{ gridTemplateColumns: '1fr 1fr 1fr' }}>
+                                            <button className={vy3 === 'snett' ? 'active' : ''} onClick={() => valjVy3('snett')}>Snett</button>
+                                            <button className={vy3 === 'fram' ? 'active' : ''} onClick={() => valjVy3('fram')}>Framifrån</button>
+                                            <button className={vy3 === 'ovan' ? 'active' : ''} onClick={() => valjVy3('ovan')}>Ovanifrån</button>
+                                        </div>
                                     )}
+                                    <div className="seg mb-3" style={{ gridTemplateColumns: '1fr 1fr' }}>
+                                        <button className={kalla === 'ac' ? 'active' : ''} onClick={() => setKalla('ac')}>Växelspänning<span className="sub">som i vägguttaget</span></button>
+                                        <button className={kalla === 'dc' ? 'active' : ''} onClick={() => setKalla('dc')}>Likspänning<span className="sub">som från ett batteri</span></button>
+                                    </div>
+                                    {reglage(Slider)}
+                                    <div className="flex gap-2">
+                                        <button className={`btn-toggle flex-1 text-sm ${till ? '' : 'active'}`} onClick={() => setTill(t => !t)}>
+                                            {tr(till ? 'Slå av spänningen' : 'Slå på spänningen')}
+                                        </button>
+                                        <button className={`btn-toggle flex-1 text-sm ${running ? '' : 'active'}`} onClick={() => setRunning(r => !r)}>
+                                            {tr(running ? 'Pausa' : 'Fortsätt')}
+                                        </button>
+                                    </div>
                                 </div>
 
-                                {/* Live-beräkning */}
                                 <div className="glass-card rounded-xl p-3 mb-3">
                                     <div className="flbl mb-2">Beräkning av sekundärspänningen</div>
-                                    <div className="flex flex-wrap items-center gap-x-2 gap-y-2"
-                                         style={{ color: 'var(--lab-ink)', fontSize: 15 }}>
-                                        <span><em>U</em>₂</span>
+                                    <div className="flex flex-wrap items-center gap-x-2 gap-y-2" style={{ color: 'var(--lab-ink)', fontSize: 15 }}>
+                                        <span><em>U</em>₂</span><span>=</span><span><em>U</em>₁</span><span>·</span>
+                                        <Frac top={<span><em>N</em>₂</span>} bot={<span><em>N</em>₁</span>} />
                                         <span>=</span>
-                                        <span><em>U</em>₁</span>
-                                        <span>·</span>
-                                        <Frac size={14} top={<span><em>N</em>₂</span>} bot={<span><em>N</em>₁</span>} />
+                                        <span style={{ whiteSpace: 'nowrap' }}>{fmtU(U1)}</span><span>·</span>
+                                        <Frac top={fmtN(N2)} bot={fmtN(N1)} />
                                         <span>=</span>
-                                        <span style={{ whiteSpace: 'nowrap' }}>{fmtU(U1)}</span>
-                                        <span>·</span>
-                                        <Frac size={14} top={fmtN(N2)} bot={fmtN(N1)} />
-                                        <span>=</span>
-                                        <span className="font-bold" style={{ color: 'var(--lab-accent)', whiteSpace: 'nowrap' }}>{fmtU(U2)}</span>
+                                        <span className="font-bold" style={{ color: COL.sek, whiteSpace: 'nowrap' }}>{fmtU(eff.U2ac)}</span>
                                     </div>
-                                    <div className="flex gap-2 mt-3">
-                                        <button className="btn-toggle flex-1 text-sm" onClick={setExample1}
-                                                title="U₁ = 230 V, N₁ = 1 150, N₂ = 100 ⟹ U₂ = 20 V">
-                                            Exempel 1 ur teorin (230 V → 20 V)
-                                        </button>
-                                        <button className="btn-toggle flex-1 text-sm" onClick={setDemo}
-                                                title="N₁ = 300, N₂ = 1 500 ⟹ spänningen 5 gånger så stor">
-                                            Demonstrationen (300 → 1 500 varv)
-                                        </button>
+                                    <div className="text-xs mt-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                        {N1 === N2 ? tr('Lika många varv: spänningen ändras inte.')
+                                            : upp ? tr('Fler varv på sekundärsidan: spänningen transformeras upp {n} gånger.', { n: fmt(N2 / N1, N2 / N1 >= 10 ? 1 : 2) })
+                                                  : tr('Färre varv på sekundärsidan: spänningen transformeras ner {n} gånger.', { n: fmt(N1 / N2, N1 / N2 >= 10 ? 1 : 2) })}
+                                        {kalla === 'dc' && ' ' + tr('Men bara med växelspänning. Med likspänning blir det ingen spänning alls utom i till- och frånslaget.')}
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-2 mt-3">
+                                        <button className="btn-toggle text-sm" onClick={() => forval(230, 1150, 100)}>Exempel 1 ur teorin<span className="block text-xs font-normal">230 V till 20 V</span></button>
+                                        <button className="btn-toggle text-sm" onClick={() => forval(10, 300, 1500)}>Demonstrationen<span className="block text-xs font-normal">300 och 1 500 varv</span></button>
+                                        <button className="btn-toggle text-sm" onClick={() => forval(230, 1840, 40)}>Mobilladdare<span className="block text-xs font-normal">230 V till 5 V</span></button>
+                                        <button className="btn-toggle text-sm" onClick={() => forval(230, 100, 1000)}>Tio gånger upp<span className="block text-xs font-normal">230 V till 2,3 kV</span></button>
                                     </div>
                                 </div>
 
-                                {/* Avläsning */}
                                 <div className="glass-card rounded-xl p-3 mb-3">
                                     <div className="flbl mb-2">Avläsning</div>
                                     <div className="grid grid-cols-2 gap-2">
-                                        <Readout label="Sekundärspänning <em>U</em>₂" value={fmtU(U2)} unit="" color="var(--lab-accent)" />
-                                        <Readout label="Omsättning <em>N</em>₁ : <em>N</em>₂" value={ratioText} unit="" />
-                                        {load ? (
+                                        <Readout label="Spänning primär <em>U</em>₁" value={fmtU(eff.U1)} color={COL.prim} />
+                                        <Readout label="Spänning sekundär <em>U</em>₂" value={kalla === 'ac' ? fmtU(eff.U2) : fmtU(st.u2)} color={COL.sek} />
+                                        <Readout label="Omsättning <em>N</em>₁ : <em>N</em>₂" value={ratioText} />
+                                        {load && kalla === 'ac' ? (
                                             <React.Fragment>
-                                                <Readout label="Ström primär <em>I</em>₁" value={fmtI(I1)} unit="" />
-                                                <Readout label="Ström sekundär <em>I</em>₂" value={fmtI(I2)} unit="" />
-                                                <Readout label="Effekt <em>P</em> = <em>U</em>₂ · <em>I</em>₂" value={fmtP(P)} unit="" />
-                                                <Readout label="Kontroll: <em>U</em>₁ · <em>I</em>₁" value={fmtP(U1 * I1)} unit="" />
+                                                <Readout label="Effekt <em>P</em>" value={fmtP(eff.P)} />
+                                                <Readout label="Ström primär <em>I</em>₁" value={fmtI(eff.I1)} color={COL.prim} />
+                                                <Readout label="Ström sekundär <em>I</em>₂" value={fmtI(eff.I2)} color={COL.sek} />
+                                                <Readout label="<em>U</em>₁ · <em>I</em>₁" value={fmtP(eff.U1 * eff.I1)} />
+                                                <Readout label="<em>U</em>₂ · <em>I</em>₂" value={fmtP(eff.U2 * eff.I2)} />
                                             </React.Fragment>
-                                        ) : (
-                                            <div className="col-span-2 p-2 rounded-lg text-xs"
-                                                 style={{ background: 'rgba(13,148,136,0.08)', color: 'var(--lab-ink-soft)' }}>
-                                                Utan belastning går (nästan) ingen ström — anslut lampan i
-                                                scenen för att se strömmarna <em>I</em>₁ och <em>I</em>₂.
-                                            </div>
-                                        )}
+                                        ) : <div />}
                                     </div>
-                                    {load && (
-                                        <div className="mt-2 p-2 rounded-lg text-xs" style={{ background: 'rgba(13,148,136,0.08)', color: 'var(--lab-ink-soft)' }}>
-                                            Lägg märke till att <em>U</em>₁ · <em>I</em>₁ = <em>U</em>₂ · <em>I</em>₂ —
-                                            effekten är densamma på båda sidor. Transformatorn kan inte "skapa" energi.
-                                        </div>
-                                    )}
+                                    <div className="mt-2 p-2 rounded-lg text-xs" style={{ background: 'rgba(13,148,136,0.08)', color: 'var(--lab-ink-soft)' }}>
+                                        {tr(kalla === 'dc'
+                                            ? 'Med likspänning ändras flödet bara i ögonblicket när du slår till eller från. Då blir det en kort spänningsstöt i sekundärspolen, åt olika håll vid till- och frånslag. Resten av tiden induceras ingenting.'
+                                            : !load
+                                                ? 'Utan belastning går nästan ingen ström. Anslut lampan för att se strömmarna.'
+                                                : 'Lägg märke till att effekten är densamma på båda sidor, U₁ · I₁ = U₂ · I₂. Transformatorn kan inte skapa energi: transformeras spänningen ner blir strömmen större i samma grad.')}
+                                    </div>
                                 </div>
                             </div>
                         </main>
 
-                        {/* Pedagogiska sektioner */}
-                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
                             <div className="glass-card rounded-xl p-4">
                                 <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Primär och sekundär</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                    Spolen som ansluts till den ingående spänningen kallas <strong>primärspole</strong>,
-                                    och spolen som inducerar den nya spänningen kallas <strong>sekundärspole</strong>.
-                                    Järnkärnan binder ihop dem: den leder det magnetiska flödet <em>Φ</em> så att
-                                    (nästan) allt flöde från primärspolen också går genom sekundärspolen.
+                                    Spolen som ansluts till den ingående spänningen kallas <strong>primärspole</strong>, och
+                                    spolen där den nya spänningen induceras kallas <strong>sekundärspole</strong>. Järnkärnan
+                                    leder det magnetiska flödet <em>Φ</em>, så att nästan allt flöde från primärspolen också
+                                    går genom sekundärspolen.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Bara växelspänning fungerar</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    En spänning induceras bara när flödet <strong>ändras</strong>. Växelströmmen byter
+                                    riktning hela tiden, så flödet ändras hela tiden. Med likström blir flödet konstant, och
+                                    då induceras ingenting. Välj Likspänning och slå av och på för att se det.
                                 </p>
                             </div>
                             <div className="glass-card rounded-xl p-4">
                                 <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Effekten bevaras</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                    Energiprincipen gäller: bortser vi från förluster är effekten i primärspolen
-                                    samma som i sekundärspolen, <span style={{ whiteSpace: 'nowrap' }}><em>U</em>₁ · <em>I</em>₁ = <em>U</em>₂ · <em>I</em>₂</span>.
-                                    Transformeras spänningen upp 10 gånger blir strömmen samtidigt en tiondel
-                                    så stor — det är därför strömförhållandet är "upp och ner":
-                                    <span style={{ whiteSpace: 'nowrap' }}> <em>N</em>₁/<em>N</em>₂ = <em>I</em>₂/<em>I</em>₁</span>.
+                                    Bortser vi från förluster är effekten lika stor på båda sidor,
+                                    <span style={{ whiteSpace: 'nowrap' }}> <em>U</em>₁ · <em>I</em>₁ = <em>U</em>₂ · <em>I</em>₂</span>.
+                                    Transformeras spänningen upp tio gånger blir strömmen en tiondel så stor. Därför är
+                                    strömkvoten omvänd, <span style={{ whiteSpace: 'nowrap' }}><em>N</em>₁/<em>N</em>₂ = <em>I</em>₂/<em>I</em>₁</span>.
                                 </p>
                             </div>
                             <div className="glass-card rounded-xl p-4">
                                 <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Hög eller låg spänning?</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                    En <strong>hög spänning med låg ström</strong> ger små energiförluster i
-                                    ledningarna när elen transporteras — men ökar risken för oönskade urladdningar.
-                                    En <strong>låg spänning med hög ström</strong> är säkrare men ger större
-                                    förluster. Därför transformeras spänningen upp till hundratals kilovolt i
+                                    En <strong>hög spänning med låg ström</strong> ger små förluster i ledningarna men större
+                                    risk för urladdningar. En <strong>låg spänning med hög ström</strong> är säkrare men ger
+                                    större förluster. Därför transformeras spänningen upp till hundratals kilovolt i
                                     kraftnätet och ner igen nära hemmen.
                                 </p>
                             </div>
@@ -858,18 +1637,18 @@
                             </summary>
                             <div className="mt-3 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
                                 <p>
-                                    Samma flödesändring går genom båda spolarna, och den inducerade spänningen i en
-                                    spole är proportionell mot antalet varv:
+                                    Samma flödesändring går genom båda spolarna, och den inducerade spänningen i en spole
+                                    är proportionell mot antalet varv:
                                 </p>
-                                <div className="flex items-center gap-x-2 my-3" style={{ color: 'var(--lab-ink)' }}>
-                                    <span><em>e</em>₁ = <em>N</em>₁ ·</span>
+                                <div className="flex flex-wrap items-center gap-x-2 my-3" style={{ color: 'var(--lab-ink)' }}>
+                                    <span><em>e</em>₁ = −<em>N</em>₁ ·</span>
                                     <Frac size={14} top={<span>Δ<em>Φ</em></span>} bot={<span>Δ<em>t</em></span>} />
                                     <span className="mx-2" style={{ color: 'var(--lab-ink-muted)' }}>respektive</span>
-                                    <span><em>e</em>₂ = <em>N</em>₂ ·</span>
+                                    <span><em>e</em>₂ = −<em>N</em>₂ ·</span>
                                     <Frac size={14} top={<span>Δ<em>Φ</em></span>} bot={<span>Δ<em>t</em></span>} />
                                 </div>
                                 <p>
-                                    Delar man uttrycken med varandra förkortas flödesändringen bort och kvar
+                                    Delar man uttrycken med varandra förkortas flödesändringen bort, och kvar
                                     står <span style={{ whiteSpace: 'nowrap' }}><em>e</em>₁/<em>e</em>₂ = <em>N</em>₁/<em>N</em>₂</span>.
                                     Eftersom transformatorns inre resistans är liten
                                     gäller <span style={{ whiteSpace: 'nowrap' }}><em>U</em>₁ ≈ <em>e</em>₁</span> och <span style={{ whiteSpace: 'nowrap' }}><em>U</em>₂ ≈ <em>e</em>₂</span>, alltså <span style={{ whiteSpace: 'nowrap' }}><em>N</em>₁/<em>N</em>₂ = <em>U</em>₁/<em>U</em>₂</span>.
@@ -883,9 +1662,10 @@
                                 <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
                             </summary>
                             <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                <li><strong>"En transformator kan förstärka energin."</strong> Nej — höjs spänningen sänks strömmen i samma grad. Effekten ut kan aldrig bli större än effekten in (i verkligheten blir den något mindre på grund av förluster).</li>
-                                <li><strong>"Den fungerar med likström också."</strong> Nej — en konstant ström ger ett konstant flöde, och utan flödesändring induceras ingen spänning i sekundärspolen. Det är därför transformatorn kräver <em>växel</em>spänning.</li>
-                                <li><strong>"Fler varv är alltid bättre."</strong> Nej — det är <em>förhållandet</em> mellan varvtalen som avgör spänningen. 1 150 : 100 ger exakt samma omsättning som 230 : 20.</li>
+                                <li><strong>"En transformator kan förstärka energin."</strong> Nej. Höjs spänningen sänks strömmen i samma grad. Effekten ut kan aldrig bli större än effekten in, och i verkligheten blir den något mindre på grund av förluster.</li>
+                                <li><strong>"Den fungerar med likström också."</strong> Nej. En konstant ström ger ett konstant flöde, och utan flödesändring induceras ingen spänning i sekundärspolen. En verklig transformator kan dessutom bli förstörd av likspänning, eftersom bara spolens låga resistans då begränsar strömmen.</li>
+                                <li><strong>"Fler varv är alltid bättre."</strong> Nej. Det är <em>förhållandet</em> mellan varvtalen som avgör spänningen. 1 150 : 100 ger exakt samma omsättning som 230 : 20.</li>
+                                <li><strong>"Strömmen går från primärspolen till sekundärspolen."</strong> Nej. Spolarna har ingen elektrisk kontakt med varandra. Det enda som förbinder dem är det magnetiska flödet i järnkärnan. Titta på elektronerna: de stannar i sin egen krets.</li>
                             </ul>
                         </details>
                     </div>

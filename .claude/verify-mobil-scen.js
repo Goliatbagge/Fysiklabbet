@@ -37,6 +37,7 @@ const argv = process.argv.slice(2);
 // 2D-vyn granskades (påpekat 2026-11-07).
 const EXTRA_LAGEN = [
     'fysik2-lenz-lag-app.html?vy=3d&ledare=spole',
+    'fysik2-transformator-app.html?vy=3d',
 ];
 const files = argv.length ? argv : fs.readdirSync(ROOT)
     .filter(f => /^fysik[12]-.*\.html$/.test(f))

@@ -9,6 +9,8 @@
             'En leder i tverrsnitt mellom en nordende og en sørende. Endre flukstetthet, strøm og lederens lengde og se kraften F = B · I · l endre seg. Bytt strøm- og feltretning og kontroller med høyrehåndsregelen. Slå på det resulterende feltet og se hvorfor lederen dyttes mot den svake siden: tettere feltlinjer på den ene siden, glisnere på den andre. Veksle mellom 2D-tverrsnittet og en 3D-visning som kan roteres og viser hele lederen mellom polene.',
         '/ Strömförande ledare i magnetfält': '/ Strømførende leder i magnetfelt',
         'Strömförande ledare i magnetfält': 'Strømførende leder i magnetfelt',
+        // avsnittsraden (section-nav.js) visar avsnittets andra simulering
+        'Den enklaste elmotorn': 'Den enkleste elmotoren',
 
         // Ingressen
         'En ledare med strömmen': 'En leder med strømmen',

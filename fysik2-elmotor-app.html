@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <script src="i18n.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Den enklaste elmotorn — Fysiklabbet</title>
+    <meta name="description" content="Ett batteri står på en magnet, och en böjd koppartråd vilar på batteriets pluspol och nuddar magneten. Tråden börjar snurra. Se strömmen, elektronerna, magnetfältet och kraften F = B · I · l på tråden i 3D, vänd magneten eller batteriet och följ med tråden runt för att se varför den snurrar.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik2-elmotor-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Den enklaste elmotorn — Fysik nivå 2">
+    <meta property="og:description" content="Ett batteri står på en magnet, och en böjd koppartråd vilar på batteriets pluspol och nuddar magneten. Tråden börjar snurra. Se strömmen, elektronerna, magnetfältet och kraften F = B · I · l på tråden i 3D, vänd magneten eller batteriet och följ med tråden runt för att se varför den snurrar.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik2-elmotor-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Den enklaste elmotorn — Fysik nivå 2">
+    <meta name="twitter:description" content="Ett batteri står på en magnet, och en böjd koppartråd vilar på batteriets pluspol och nuddar magneten. Tråden börjar snurra. Se strömmen, elektronerna, magnetfältet och kraften F = B · I · l på tråden i 3D, vänd magneten eller batteriet och följ med tråden runt för att se varför den snurrar.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 22px; font-family: 'Instrument Serif', serif; }
+
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            -webkit-user-select: none;
+            background: linear-gradient(180deg, #f7f2e8 0%, #ece3d2 100%);
+            touch-action: none;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        .motor-mount { position: absolute; inset: 0; }
+        .motor-mount > canvas { display: block; width: 100%; height: 100%; outline: none; }
+        /* Mobil i normalläge: scenen får en egen höjd i flödet, så att
+           sektion 8 i styles-laborans-sim.css kan docka verktygen under den. */
+        @media (max-width: 600px) {
+            body.lab-sim .scene-wrap:not(:fullscreen) .motor-mount { position: relative; inset: auto; height: 440px; }
+        }
+        .scene-wrap.grab { cursor: grab; }
+        .scene-wrap.dragging { cursor: grabbing; }
+        .scene-wrap.pointer { cursor: pointer; }
+
+        .scene-hint {
+            position: absolute; bottom: 10px; left: 12px; z-index: 5;
+            font-size: 12px; color: #e9edf3;
+            background: rgba(15,22,32,0.80); padding: 4px 11px; border-radius: 7px;
+            pointer-events: none; font-weight: 500; max-width: calc(100% - 24px);
+        }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 236px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin: 0 3px; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+        }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 12px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease; font-size: 14px;
+        }
+        .btn-toggle:hover:not(.active) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .vy-seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; border-radius: 9px; overflow: hidden;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .vy-seg button { background: var(--lab-bg, #f3eee4); border: 0; padding: 8px 4px; font-size: 13px;
+                         font-weight: 600; color: var(--lab-ink); cursor: pointer; }
+        .vy-seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+
+        .readout { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; text-align: center; }
+        .readout .rv { font-weight: 700; font-size: 17px; font-family: 'JetBrains Mono', monospace; }
+        .readout .rl { font-size: 12px; color: var(--lab-ink-muted); }
+
+        .orient { display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--lab-ink-soft); margin-top: 6px; }
+        .orient b { color: var(--lab-ink); }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+        .forkl p { margin-top: 0.6rem; }
+        .forkl ol, .forkl ul { margin-top: 0.5rem; padding-left: 1.3rem; }
+        .forkl ol { list-style: decimal; }
+        .forkl ul { list-style: disc; }
+        .forkl li { margin-top: 0.35rem; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2b">Nivå 2b</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3b">Nivå 1b</a>
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        /* =====================================================================
+           Den enklaste elmotorn (homopolär motor) i 3D.
+           Ett AA-batteri står med minuspolen på en neodymmagnet. En böjd
+           koppartråd vilar på pluspolen och nuddar magnetens sida med sina
+           ändar. Strömmen går ned genom trådbenen, in i magneten och tillbaka
+           till minuspolen. Där tråden går genom magnetens fält verkar kraften
+           F = B · I · l på den, och kraften pekar åt sidan i båda benen, så
+           att tråden snurrar.
+
+           Fysiken räknas på riktigt:
+           - Magnetfältet från en axiellt magnetiserad cylinder räknas exakt
+             med Derby & Olberts formel för en ändlig solenoid (en magnet med
+             remanensen Br är samma sak som en ytström μ0 · n · I = Br runt
+             mantelytan). Fältet är rotationssymmetriskt, så det räknas i
+             (ρ, y) och vrids ut till 3D.
+           - Kraften på tråden summeras segment för segment, dF = I · dl × B,
+             och kraftpilarna i scenen är skalenliga mot dessa dF.
+           - Kraftmomentet kring batteriets axel ger varvtalet: tråden
+             accelererar tills friktionen i kontakterna balanserar momentet
+             (dämpningen är vald så att 2,0 A ger 4 varv per sekund).
+           Enheter i scenen: 1 enhet = 1 cm.
+           ===================================================================== */
+
+        const COL = {
+            ink:    '#1f2530',
+            falt:   '#c0392b',   // magnetfältet B (rött, som teorifigurerna)
+            kraft:  '#2563c9',   // kraften F (blå, som teorifigurerna)
+            strom:  '#1f2530',   // strömmen I (bläck, som i ledarsimuleringen)
+            elek:   '#7b3fbf',   // elektronerna (lila)
+            npol:   '#c0392b',   // nordändan (röd)
+            spol:   '#f4f2ee',   // sydändan (vit)
+            koppar: '#c8703f',
+        };
+
+        const IMIN = 0.5, IMAX = 4.0, IREF = 2.0;
+        const VARV_REF = 4;                    // varv/s vid IREF
+        const T_ACC = 0.7;                     // tidskonstant för uppvarvningen (s)
+
+        // ── Geometri (cm) ──
+        const MAG_R = 1.0, MAG_H = 0.8;        // neodymmagneten
+        const BAT_R = 0.72, BAT_L = 4.85, NUB_R = 0.26, NUB_H = 0.15;
+        const TOP_Y = MAG_H + BAT_L + NUB_H;   // batteriets övre ände (5,8)
+        const WIRE_R = 0.042;
+        const WIRE_Y = TOP_Y + WIRE_R;         // trådens mittpunkt vilar här
+        const KONTAKT = new THREE.Vector3(MAG_R + WIRE_R + 0.003, 0.42, 0);
+
+        const tr = (t) => (window.I18N ? I18N.t(t) : t);
+
+        const fmt = (num, decimals = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(decimals);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',').replace('-', '−');
+        };
+
+        // ─────────────────────────────────────────────────────────────────
+        // Magnetfältet: ändlig solenoid (Derby & Olbert 2010, Am. J. Phys.)
+        // ─────────────────────────────────────────────────────────────────
+        function cel(kc, p, c, s) {
+            if (kc === 0) return NaN;
+            const errtol = 1e-6;
+            let k = Math.abs(kc), pp = p, cc = c, ss = s, em = 1, f, q, g, kk;
+            if (p > 0) { pp = Math.sqrt(p); ss = s / pp; }
+            else { f = kc * kc; q = 1 - f; g = 1 - pp; f = f - pp; q = q * (ss - c * pp); pp = Math.sqrt(f / g); cc = (c - ss) / g; ss = -q / (g * g * pp) + cc * pp; }
+            f = cc; cc = cc + ss / pp; g = k / pp; ss = 2 * (ss + f * g); pp = g + pp; g = em; em = k + em; kk = k;
+            let n = 0;
+            while (Math.abs(g - k) > g * errtol && n++ < 60) {
+                k = 2 * Math.sqrt(kk); kk = k * em; f = cc; cc = cc + ss / pp; g = kk / pp; ss = 2 * (ss + f * g); pp = g + pp; g = em; em = k + em;
+            }
+            return (Math.PI / 2) * (ss + cc * em) / (em * (em + pp));
+        }
+        const BR = 1.2;    // remanens hos en vanlig neodymmagnet (T)
+        // Fältet med nordändan uppåt. Returnerar [Bρ, By] i tesla.
+        function faltRY(rho, y) {
+            rho = Math.max(rho, 1e-6);
+            const A = MAG_R, HB = MAG_H / 2;
+            const z = y - HB, zp = z + HB, zn = z - HB;
+            const B0 = BR / Math.PI;
+            const sp = Math.sqrt(zp * zp + (rho + A) ** 2), sn = Math.sqrt(zn * zn + (rho + A) ** 2);
+            const g = (A - rho) / (A + rho);
+            const kp = Math.sqrt((zp * zp + (A - rho) ** 2) / (zp * zp + (A + rho) ** 2)) || 1e-9;
+            const kn = Math.sqrt((zn * zn + (A - rho) ** 2) / (zn * zn + (A + rho) ** 2)) || 1e-9;
+            const Brho = B0 * ((A / sp) * cel(kp, 1, 1, -1) - (A / sn) * cel(kn, 1, 1, -1));
+            const By = B0 * A / (A + rho) * ((zp / sp) * cel(kp, g * g, 1, g) - (zn / sn) * cel(kn, g * g, 1, g));
+            return [Brho, By];
+        }
+        function falt3(p, pol) {
+            const rho = Math.hypot(p.x, p.z);
+            const [br, by] = faltRY(rho, p.y);
+            const ux = rho > 1e-6 ? p.x / rho : 0, uz = rho > 1e-6 ? p.z / rho : 0;
+            return new THREE.Vector3(br * ux * pol, by * pol, br * uz * pol);
+        }
+
+        // ─────────────────────────────────────────────────────────────────
+        // Trådens form (ett ben i planet z = 0, x > 0; det andra är vridet 180°)
+        // ─────────────────────────────────────────────────────────────────
+        const BEN_PKT = [
+            [0, WIRE_Y, 0], [0.42, WIRE_Y + 0.03, 0], [0.92, WIRE_Y + 0.09, 0], [1.22, WIRE_Y + 0.05, 0],
+            [1.37, WIRE_Y - 0.14, 0], [1.40, WIRE_Y - 0.5, 0], [1.40, 3.6, 0], [1.40, 1.7, 0],
+            [1.39, 1.22, 0], [1.35, 0.86, 0], [1.24, 0.6, 0], [1.12, 0.47, 0], [KONTAKT.x, KONTAKT.y, 0],
+        ].map(a => new THREE.Vector3(a[0], a[1], a[2]));
+        // svansen som ligger an mot magneten efter kontaktpunkten (ingen ström)
+        const SVANS = [16, 32].map(deg => {
+            const a = deg * Math.PI / 180;
+            return new THREE.Vector3(KONTAKT.x * Math.cos(a), KONTAKT.y + 0.01 * deg / 32, -KONTAKT.x * Math.sin(a));
+        });
+        const rot180 = (v) => new THREE.Vector3(-v.x, v.y, -v.z);
+
+        function benKurva() {
+            return new THREE.CatmullRomCurve3(BEN_PKT, false, 'centripetal', 0.5);
+        }
+        // Polylinje med kumulativ längd för att placera saker längs en bana
+        function polylinje(pts) {
+            const L = [0];
+            for (let i = 1; i < pts.length; i++) L.push(L[i - 1] + pts[i].distanceTo(pts[i - 1]));
+            return {
+                pts, L, len: L[L.length - 1],
+                at(s) {
+                    s = Math.max(0, Math.min(this.len, s));
+                    let lo = 0, hi = this.L.length - 1;
+                    while (hi - lo > 1) { const m = (lo + hi) >> 1; if (this.L[m] < s) lo = m; else hi = m; }
+                    const t = (s - this.L[lo]) / Math.max(1e-9, this.L[hi] - this.L[lo]);
+                    const p = this.pts[lo].clone().lerp(this.pts[hi], t);
+                    const d = this.pts[hi].clone().sub(this.pts[lo]).normalize();
+                    return { p, d };
+                },
+            };
+        }
+
+        // ─────────────────────────────────────────────────────────────────
+        // Kraften på ett ben: dF = I · dl × B (SI-enheter)
+        // ─────────────────────────────────────────────────────────────────
+        const BEN_SAMPLES = benKurva().getSpacedPoints(400);
+        function kraftPaBen(I, sI, pol) {
+            const seg = [];
+            let tau = 0, Ft = 0;
+            for (let i = 0; i < BEN_SAMPLES.length - 1; i++) {
+                const a = BEN_SAMPLES[i], b = BEN_SAMPLES[i + 1];
+                const m = a.clone().add(b).multiplyScalar(0.5);
+                const dl = b.clone().sub(a).multiplyScalar(0.01 * sI); // m, strömmens riktning
+                const B = falt3(m, pol);
+                const dF = dl.clone().cross(B).multiplyScalar(I);       // N
+                tau += (m.z * dF.x - m.x * dF.z) * 0.01;                 // (r × F)_y
+                Ft += dF.z;                                              // tangentiell komposant (benet ligger i x-led)
+                seg.push({ m, dF, B, dl, s: i });
+            }
+            return { seg, tau, Ft };
+        }
+        const TAU_REF = Math.abs(kraftPaBen(IREF, 1, 1).tau * 2);
+        const DAMP = TAU_REF / (2 * Math.PI * VARV_REF);   // N·m·s
+
+        // ─────────────────────────────────────────────────────────────────
+        // Fältlinjer: spåras i (ρ, y)-planet en gång
+        // ─────────────────────────────────────────────────────────────────
+        function spara(r0) {
+            const pts = [[r0, MAG_H + 0.002]];
+            let r = r0, y = MAG_H + 0.002;
+            const h = 0.03;
+            for (let n = 0; n < 4000; n++) {
+                let [a, b] = faltRY(r, y); let m = Math.hypot(a, b);
+                const mr = Math.abs(r + a / m * h / 2), my = y + b / m * h / 2;
+                [a, b] = faltRY(mr, my); m = Math.hypot(a, b);
+                r = Math.abs(r + a / m * h); y += b / m * h;
+                if (y < 0.004) { pts.push([r, 0.004]); break; }
+                if (r < MAG_R && y < MAG_H && n > 5) break;
+                if (n % 2 === 0) pts.push([r, y]);
+                if (r > 11 || y > 14) break;
+            }
+            return pts;
+        }
+        const FALT_R0 = [0.48, 0.7, 0.88];
+        const FALT_LINJER_2D = FALT_R0.map(spara);
+
+        // ─────────────────────────────────────────────────────────────────
+        // Grafikhjälp
+        // ─────────────────────────────────────────────────────────────────
+        const textSprite = (parts, h = 0.42) => {
+            const c = document.createElement('canvas');
+            const ctx = c.getContext('2d');
+            const FS = 64, PAD = 14;
+            const fontFor = (p) => `${p.italic ? 'italic ' : ''}${p.weight || 600} ${p.small ? FS * 0.74 : FS}px Poppins, sans-serif`;
+            let w = 0;
+            parts.forEach((p) => { ctx.font = fontFor(p); w += ctx.measureText(p.t).width; });
+            c.width = Math.max(2, Math.ceil(w) + PAD * 2);
+            c.height = FS + PAD * 2;
+            let x = PAD;
+            parts.forEach((p) => {
+                ctx.font = fontFor(p);
+                ctx.textBaseline = 'middle';
+                ctx.fillStyle = p.color;
+                const dy = p.sub ? FS * 0.24 : p.sup ? -FS * 0.24 : 0;
+                ctx.fillText(p.t, x, c.height / 2 + 2 + dy);
+                x += ctx.measureText(p.t).width;
+            });
+            const tex = new THREE.CanvasTexture(c);
+            tex.minFilter = THREE.LinearFilter;
+            tex.anisotropy = 4;
+            tex.encoding = THREE.sRGBEncoding;
+            const spr = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false, toneMapped: false }));
+            spr.scale.set(h * c.width / c.height, h, 1);
+            spr.renderOrder = 20;
+            spr.userData.aspect = c.width / c.height;
+            return spr;
+        };
+
+        // Pil med skaft (cylinder, rak ände) och spets; skaftet slutar vid spetsens bas
+        const Y_AXEL = new THREE.Vector3(0, 1, 0);
+        // Pilar, fältlinjer och etiketter ska ha exakt husets färger: färgen
+        // görs linjär (renderaren kodar sRGB på utvägen), lite självlysande så
+        // att skuggsidan inte blir grå, och undantas från tonmappningen.
+        const linjar = (hex) => new THREE.Color(hex).convertSRGBToLinear();
+        const markMat = (hex, opt = {}) => new THREE.MeshStandardMaterial({
+            color: linjar(hex), emissive: linjar(hex).multiplyScalar(opt.glod != null ? opt.glod : 0.55),
+            roughness: 0.55, metalness: 0, toneMapped: false,
+            transparent: !!opt.opacity, opacity: opt.opacity || 1, depthWrite: !opt.opacity });
+        function pil(color, opt = {}) {
+            const g = new THREE.Group();
+            const mat = markMat(color, opt);
+            const skaft = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 1, 14), mat);
+            const spets = new THREE.Mesh(new THREE.ConeGeometry(1, 1, 18), mat);
+            skaft.castShadow = !!opt.skugga; spets.castShadow = !!opt.skugga;
+            g.add(skaft, spets);
+            g.userData = { skaft, spets, mat, r: opt.r || 0.045 };
+            return g;
+        }
+        function stallPil(g, from, vec, opt = {}) {
+            const len = vec.length();
+            if (len < 1e-6) { g.visible = false; return; }
+            g.visible = true;
+            const r = opt.r || g.userData.r;
+            const head = Math.min(opt.head || r * 6.2, len * 0.6);
+            const shaft = len - head;
+            const dir = vec.clone().normalize();
+            g.position.copy(from);
+            g.quaternion.setFromUnitVectors(Y_AXEL, dir);
+            const { skaft, spets } = g.userData;
+            skaft.scale.set(r, Math.max(shaft, 1e-4), r);
+            skaft.position.set(0, shaft / 2, 0);
+            spets.scale.set(r * 2.5, head, r * 2.5);
+            spets.position.set(0, shaft + head / 2, 0);
+        }
+
+        function canvasTex(w, h, rita) {
+            const c = document.createElement('canvas');
+            c.width = w; c.height = h;
+            rita(c.getContext('2d'), w, h);
+            const t = new THREE.CanvasTexture(c);
+            t.encoding = THREE.sRGBEncoding;
+            t.anisotropy = 8;
+            return t;
+        }
+
+        // Trä till labbänken
+        function traTextur() {
+            return canvasTex(1024, 1024, (ctx, w, h) => {
+                const g = ctx.createLinearGradient(0, 0, w, h);
+                g.addColorStop(0, '#caa274'); g.addColorStop(1, '#b98d5e');
+                ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+                let seed = 7;
+                const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+                for (let i = 0; i < 140; i++) {
+                    const y0 = rnd() * h, amp = 4 + rnd() * 14, fr = 0.004 + rnd() * 0.01, ph = rnd() * 6;
+                    ctx.strokeStyle = `rgba(${90 + rnd() * 30},${55 + rnd() * 20},${30},${0.05 + rnd() * 0.13})`;
+                    ctx.lineWidth = 0.6 + rnd() * 2.4;
+                    ctx.beginPath();
+                    for (let x = 0; x <= w; x += 8) {
+                        const y = y0 + Math.sin(x * fr + ph) * amp + Math.sin(x * fr * 3.1 + ph) * amp * 0.25;
+                        if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+                    }
+                    ctx.stroke();
+                }
+                // plankskarvar
+                ctx.strokeStyle = 'rgba(70,45,25,0.35)'; ctx.lineWidth = 2;
+                [256, 512, 768].forEach(y => { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); });
+            });
+        }
+
+        // Batteriets etikett: u runt cylindern, v längs batteriet (överkant = pluspolen)
+        function batteriTextur() {
+            return canvasTex(1024, 1024, (ctx, w, h) => {
+                const g = ctx.createLinearGradient(0, 0, w, 0);
+                g.addColorStop(0, '#16263f'); g.addColorStop(0.5, '#22406b'); g.addColorStop(1, '#16263f');
+                ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+                // kopparband vid pluspolen
+                const kb = ctx.createLinearGradient(0, 0, 0, h * 0.2);
+                kb.addColorStop(0, '#9a5a2c'); kb.addColorStop(0.5, '#e09a5c'); kb.addColorStop(1, '#b8723e');
+                ctx.fillStyle = kb; ctx.fillRect(0, 0, w, h * 0.2);
+                ctx.fillStyle = 'rgba(255,255,255,0.08)';
+                ctx.fillRect(0, h * 0.2, w, 6);
+                [0.25, 0.75].forEach(u => {
+                    const cx = u * w;
+                    // + på kopparbandet, − längst ned
+                    ctx.fillStyle = '#1b1208';
+                    ctx.font = '700 120px Poppins, sans-serif';
+                    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+                    ctx.fillText('+', cx, h * 0.1);
+                    ctx.fillStyle = '#f2e9da';
+                    ctx.fillText('−', cx, h * 0.93);
+                    // text längs batteriet
+                    ctx.save();
+                    ctx.translate(cx, h * 0.56);
+                    ctx.rotate(-Math.PI / 2);
+                    ctx.fillStyle = '#f2e9da';
+                    ctx.font = '700 104px Poppins, sans-serif';
+                    ctx.fillText('1,5 V', 0, -50);
+                    ctx.font = '600 50px Poppins, sans-serif';
+                    ctx.fillStyle = '#e8b47e';
+                    ctx.fillText('FYSIKLABBET  AA', 0, 48);
+                    ctx.restore();
+                });
+            });
+        }
+
+        // Magnetens mantel: övre halvan röd med N, nedre vit med S (svart kontur)
+        function magnetSidaTextur() {
+            return canvasTex(2048, 256, (ctx, w, h) => {
+                ctx.fillStyle = COL.npol; ctx.fillRect(0, 0, w, h / 2);
+                ctx.fillStyle = COL.spol; ctx.fillRect(0, h / 2, w, h / 2);
+                ctx.fillStyle = 'rgba(0,0,0,0.18)'; ctx.fillRect(0, h / 2 - 2, w, 4);
+                ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+                ctx.font = '700 92px Poppins, sans-serif';
+                for (let i = 0; i < 8; i++) {
+                    const x = (i + 0.5) * w / 8;
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillText('N', x, h * 0.27);
+                    ctx.lineWidth = 7; ctx.lineJoin = 'round'; ctx.strokeStyle = '#0f1620';
+                    ctx.strokeText('S', x, h * 0.76);
+                    ctx.fillText('S', x, h * 0.76);
+                }
+            });
+        }
+        function magnetLockTextur(nord) {
+            return canvasTex(512, 512, (ctx, w, h) => {
+                ctx.fillStyle = nord ? COL.npol : COL.spol; ctx.fillRect(0, 0, w, h);
+                const rg = ctx.createRadialGradient(w * 0.4, h * 0.38, 10, w / 2, h / 2, w / 2);
+                rg.addColorStop(0, 'rgba(255,255,255,0.18)'); rg.addColorStop(1, 'rgba(0,0,0,0.06)');
+                ctx.fillStyle = rg; ctx.fillRect(0, 0, w, h);
+                ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+                ctx.font = '700 230px Poppins, sans-serif';
+                if (!nord) { ctx.lineWidth = 14; ctx.lineJoin = 'round'; ctx.strokeStyle = '#0f1620'; ctx.strokeText('S', w / 2, h / 2 + 10); }
+                ctx.fillStyle = '#ffffff';
+                ctx.fillText(nord ? 'N' : 'S', w / 2, h / 2 + 10);
+            });
+        }
+
+        // En mjuk omgivning att spegla metallen i
+        function omgivning(renderer) {
+            const tex = canvasTex(1024, 512, (ctx, w, h) => {
+                const g = ctx.createLinearGradient(0, 0, 0, h);
+                g.addColorStop(0, '#fbf8f2'); g.addColorStop(0.45, '#efe7d8'); g.addColorStop(0.55, '#a98559'); g.addColorStop(1, '#5d4128');
+                ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+                ctx.fillStyle = 'rgba(255,255,255,0.95)';
+                ctx.fillRect(w * 0.12, h * 0.12, w * 0.16, h * 0.2);
+                ctx.fillRect(w * 0.6, h * 0.08, w * 0.22, h * 0.14);
+                ctx.fillStyle = 'rgba(60,70,90,0.35)';
+                ctx.fillRect(w * 0.36, h * 0.2, w * 0.12, h * 0.25);
+            });
+            tex.mapping = THREE.EquirectangularReflectionMapping;
+            const pm = new THREE.PMREMGenerator(renderer);
+            const env = pm.fromEquirectangular(tex).texture;
+            pm.dispose();
+            return env;
+        }
+
+        const VYER = {
+            snett:  { theta: 0.62, phi: 1.13, radius: 17.5, target: [0, 2.7, 0] },
+            sidan:  { theta: 0.0,  phi: 1.45, radius: 18.5, target: [0, 3.0, 0] },
+            ovan:   { theta: 0.0,  phi: 0.06, radius: 15.5, target: [0, 1.0, 0] },
+        };
+
+        // Delat läge mellan React och scenen (scenen byggs bara en gång)
+        const SIM = {
+            p: { running: true, I: IREF, magN: true, battUp: true, transp: false, follow: false, slow: false,
+                 show: { falt: true, strom: true, elek: false, kraft: true, hand: false, rot: true } },
+            cb: {},
+            ut: { varv: 0, tau: 0, Ft: 0 },
+            vy: null,
+        };
+
+        // ─────────────────────────────────────────────────────────────────
+        // 3D-scenen
+        // ─────────────────────────────────────────────────────────────────
+        function MotorScene({ wrapRef }) {
+            const mountRef = useRef(null);
+            useEffect(() => {
+                const wrap = wrapRef.current;
+                const el = mountRef.current;
+                const W = () => el.clientWidth, H = () => el.clientHeight;
+
+                const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                renderer.setSize(W(), H());
+                renderer.setClearColor(0x000000, 0);
+                renderer.outputEncoding = THREE.sRGBEncoding;
+                renderer.toneMapping = THREE.ACESFilmicToneMapping;
+                renderer.toneMappingExposure = 1.05;
+                renderer.shadowMap.enabled = true;
+                renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+                el.appendChild(renderer.domElement);
+
+                const scene = new THREE.Scene();
+                scene.environment = omgivning(renderer);
+                const camera = new THREE.PerspectiveCamera(34, W() / H(), 0.1, 200);
+
+                // ── Ljus ──
+                scene.add(new THREE.HemisphereLight(0xfffaf0, 0x8a6a48, 0.55));
+                const sol = new THREE.DirectionalLight(0xffffff, 1.25);
+                sol.position.set(7, 14, 9);
+                sol.castShadow = true;
+                sol.shadow.mapSize.set(2048, 2048);
+                Object.assign(sol.shadow.camera, { left: -8, right: 8, top: 8, bottom: -8, near: 1, far: 40 });
+                sol.shadow.bias = -0.0004;
+                sol.shadow.radius = 4;
+                scene.add(sol);
+                const fyll = new THREE.DirectionalLight(0xdfe8ff, 0.35);
+                fyll.position.set(-9, 6, -4);
+                scene.add(fyll);
+
+                // ── Labbänken ──
+                const tra = traTextur();
+                tra.wrapS = tra.wrapT = THREE.RepeatWrapping;
+                tra.repeat.set(2, 1.3);
+                const bank = new THREE.Mesh(new THREE.BoxGeometry(46, 1.2, 30),
+                    new THREE.MeshStandardMaterial({ map: tra, roughness: 0.62, metalness: 0.0, envMapIntensity: 0.4 }));
+                bank.position.set(0, -0.6, -3);
+                bank.receiveShadow = true;
+                scene.add(bank);
+
+                // ── Magneten ──
+                const magnetG = new THREE.Group();
+                const magSida = magnetSidaTextur();
+                const magMats = [
+                    new THREE.MeshStandardMaterial({ map: magSida, roughness: 0.32, metalness: 0.25, transparent: true }),
+                    new THREE.MeshStandardMaterial({ map: magnetLockTextur(true), roughness: 0.32, metalness: 0.25, transparent: true }),
+                    new THREE.MeshStandardMaterial({ map: magnetLockTextur(false), roughness: 0.32, metalness: 0.25, transparent: true }),
+                ];
+                const magnet = new THREE.Mesh(new THREE.CylinderGeometry(MAG_R, MAG_R, MAG_H, 96, 1), magMats);
+                magnet.castShadow = true; magnet.receiveShadow = true;
+                magnet.userData.klick = 'magnet';
+                magnetG.add(magnet);
+                magnetG.position.set(0, MAG_H / 2, 0);
+                scene.add(magnetG);
+
+                // ── Batteriet ──
+                const battG = new THREE.Group();
+                const battMat = new THREE.MeshStandardMaterial({ map: batteriTextur(), roughness: 0.38, metalness: 0.2, transparent: true });
+                const metallMat = new THREE.MeshStandardMaterial({ color: 0xd8d9db, roughness: 0.22, metalness: 1.0, transparent: true });
+                const kropp = new THREE.Mesh(new THREE.CylinderGeometry(BAT_R, BAT_R, BAT_L - 0.12, 72, 1, true), battMat);
+                const lockUpp = new THREE.Mesh(new THREE.CylinderGeometry(BAT_R * 0.97, BAT_R, 0.06, 72), metallMat);
+                lockUpp.position.y = (BAT_L - 0.12) / 2 + 0.03;
+                const lockNed = new THREE.Mesh(new THREE.CylinderGeometry(BAT_R, BAT_R * 0.97, 0.06, 72), metallMat);
+                lockNed.position.y = -(BAT_L - 0.12) / 2 - 0.03;
+                const nub = new THREE.Mesh(new THREE.CylinderGeometry(NUB_R * 0.94, NUB_R, NUB_H, 40), metallMat);
+                nub.position.y = BAT_L / 2 + NUB_H / 2;
+                [kropp, lockUpp, lockNed, nub].forEach(m => { m.castShadow = true; m.receiveShadow = true; m.userData.klick = 'batteri'; battG.add(m); });
+                const BATT_Y_UPP = MAG_H + BAT_L / 2;            // pluspolen uppåt
+                const BATT_Y_NED = MAG_H + NUB_H + BAT_L / 2;    // pluspolen nedåt
+                battG.position.y = BATT_Y_UPP;
+                scene.add(battG);
+
+                // ── Koppartråden (roterar) ──
+                const wireG = new THREE.Group();
+                scene.add(wireG);
+                const benPlus = BEN_SAMPLES;
+                const benMinus = BEN_SAMPLES.map(rot180);
+                const trådPkt = [
+                    ...SVANS.slice().reverse().map(rot180),
+                    ...benMinus.slice().reverse(),
+                    ...benPlus.slice(1),
+                    ...SVANS,
+                ];
+                const trådKurva = new THREE.CatmullRomCurve3(trådPkt, false, 'centripetal');
+                const tråd = new THREE.Mesh(new THREE.TubeGeometry(trådKurva, 900, WIRE_R, 12, false),
+                    new THREE.MeshStandardMaterial({ color: COL.koppar, roughness: 0.28, metalness: 0.92, envMapIntensity: 1.2 }));
+                tråd.castShadow = true;
+                wireG.add(tråd);
+                // ändknoppar
+                [trådPkt[0], trådPkt[trådPkt.length - 1]].forEach(p => {
+                    const k = new THREE.Mesh(new THREE.SphereGeometry(WIRE_R, 12, 8), tråd.material);
+                    k.position.copy(p); wireG.add(k);
+                });
+
+                // ── Strömbanor (i trådens ram) ──
+                // ett ben: pluspolens mitt → ned längs benet → kontakt → genom magneten → minuspolens mitt
+                const inneMagnet = [KONTAKT.clone().setX(MAG_R), new THREE.Vector3(0.62, 0.55, 0), new THREE.Vector3(0.28, 0.72, 0), new THREE.Vector3(0, MAG_H, 0)];
+                const yttrePlus = polylinje([...benPlus, ...new THREE.CatmullRomCurve3(inneMagnet).getSpacedPoints(30)]);
+                const yttreMinus = polylinje(yttrePlus.pts.map(rot180));
+                const BEN_LEN = polylinje(benPlus).len;
+                // batteriets inre (fast i världen, men på axeln, så rotationen spelar ingen roll)
+                const inreBatt = polylinje([new THREE.Vector3(0, MAG_H + 0.05, 0), new THREE.Vector3(0, TOP_Y - 0.05, 0)]);
+
+                // strömpilar: små koner som flyter längs banan
+                const stromMat = markMat(COL.strom, { glod: 0.3 });
+                const stromG = new THREE.Group(); wireG.add(stromG);
+                const battStromG = new THREE.Group(); scene.add(battStromG);
+                const stromKon = new THREE.ConeGeometry(0.1, 0.3, 16);
+                const mkPilar = (bana, n, grupp) => {
+                    const arr = [];
+                    for (let i = 0; i < n; i++) {
+                        const m = new THREE.Mesh(stromKon, stromMat);
+                        m.renderOrder = 5;
+                        grupp.add(m); arr.push({ m, bana, s0: (i / n) * bana.len });
+                    }
+                    return arr;
+                };
+                const STROM_STEG = 0.62;
+                const stromPilar = [
+                    ...mkPilar(yttrePlus, Math.round(yttrePlus.len / STROM_STEG), stromG),
+                    ...mkPilar(yttreMinus, Math.round(yttreMinus.len / STROM_STEG), stromG),
+                ];
+                const battPilar = mkPilar(inreBatt, Math.round(inreBatt.len / STROM_STEG), battStromG);
+                const iLapp = textSprite([{ t: 'I', italic: true, color: COL.strom }], 0.5);
+                wireG.add(iLapp);
+
+                // elektroner
+                const elekG = new THREE.Group(); wireG.add(elekG);
+                const elekMat = markMat(COL.elek, { glod: 0.45 });
+                const elekGeo = new THREE.SphereGeometry(0.075, 14, 10);
+                const elektroner = [];
+                [yttrePlus, yttreMinus].forEach(bana => {
+                    const n = Math.round(bana.len / 0.32);
+                    for (let i = 0; i < n; i++) {
+                        const m = new THREE.Mesh(elekGeo, elekMat);
+                        elekG.add(m);
+                        elektroner.push({ m, bana, s0: (i / n) * bana.len + (i % 2) * 0.05 });
+                    }
+                });
+                const eLapp = textSprite([{ t: 'e', italic: true, color: COL.elek }, { t: '−', color: COL.elek, small: true, sup: true }], 0.46);
+                wireG.add(eLapp);
+
+                // ── Magnetfältet ──
+                const faltG = new THREE.Group(); scene.add(faltG);
+                const faltMat = new THREE.MeshBasicMaterial({ color: linjar(COL.falt), transparent: true, opacity: 0.8, depthWrite: false, toneMapped: false });
+                const faltPilMat = markMat(COL.falt, { glod: 0.6 });
+                const faltPilar = [];
+                const inreFaltG = new THREE.Group(); scene.add(inreFaltG);
+                const PLAN = 4;
+                for (let k = 0; k < PLAN; k++) {
+                    const phi = (k / PLAN) * Math.PI * 2 + Math.PI / PLAN;
+                    const c = Math.cos(phi), s = Math.sin(phi);
+                    FALT_LINJER_2D.forEach((l2, j) => {
+                        const pts = l2.map(([r, y]) => new THREE.Vector3(r * c, y, r * s));
+                        if (pts.length < 4) return;
+                        const pl = polylinje(pts);
+                        const kurva = new THREE.CatmullRomCurve3(pts);
+                        const rör = new THREE.Mesh(new THREE.TubeGeometry(kurva, Math.min(400, pts.length * 2), 0.026, 6, false), faltMat);
+                        rör.renderOrder = 2;
+                        faltG.add(rör);
+                        // pilspetsen mitt på linjen
+                        const { p, d } = pl.at(pl.len * 0.5);
+                        const kon = new THREE.Mesh(new THREE.ConeGeometry(0.085, 0.26, 14), faltPilMat);
+                        kon.position.copy(p);
+                        kon.userData.d = d;
+                        faltG.add(kon); faltPilar.push(kon);
+                        // fältet inne i magneten (syns när magneten är genomskinlig)
+                        const r0 = FALT_R0[j];
+                        const inre = new THREE.Mesh(new THREE.CylinderGeometry(0.022, 0.022, MAG_H, 6), faltMat);
+                        inre.position.set(r0 * c, MAG_H / 2, r0 * s);
+                        inreFaltG.add(inre);
+                        const ik = new THREE.Mesh(new THREE.ConeGeometry(0.07, 0.2, 12), faltPilMat);
+                        ik.position.set(r0 * c, MAG_H / 2, r0 * s);
+                        ik.userData.d = new THREE.Vector3(0, 1, 0);
+                        inreFaltG.add(ik); faltPilar.push(ik);
+                    });
+                }
+                // B-etikett vid toppen av en av de yttre linjerna
+                const bLapp = textSprite([{ t: 'B', italic: true, color: COL.falt }], 0.52);
+                {
+                    const l2 = FALT_LINJER_2D[1];
+                    let top = l2[0]; l2.forEach(q => { if (q[1] > top[1]) top = q; });
+                    bLapp.userData.top = top;
+                }
+                faltG.add(bLapp);
+
+                // ── Krafter ──
+                const kraftG = new THREE.Group(); wireG.add(kraftG);
+                const kraftPilar = [];
+                for (let i = 0; i < 40; i++) { const g = pil(COL.kraft, { r: 0.05 }); kraftG.add(g); kraftPilar.push(g); }
+                const fLapp = textSprite([{ t: 'F', italic: true, color: COL.kraft }], 0.5);
+                kraftG.add(fLapp);
+
+                // ── Högerhandsregeln: I, B och F i en punkt ──
+                const handG = new THREE.Group(); wireG.add(handG);
+                const hI = pil(COL.strom, { r: 0.05 }), hB = pil(COL.falt, { r: 0.05 }), hF = pil(COL.kraft, { r: 0.05 });
+                handG.add(hI, hB, hF);
+                const hIl = textSprite([{ t: 'I', italic: true, color: COL.strom }, { t: '  ' + tr('tummen'), color: COL.strom, weight: 500, small: true }], 0.5);
+                const hBl = textSprite([{ t: 'B', italic: true, color: COL.falt }, { t: '  ' + tr('pekfingret'), color: COL.falt, weight: 500, small: true }], 0.5);
+                const hFl = textSprite([{ t: 'F', italic: true, color: COL.kraft }, { t: '  ' + tr('långfingret'), color: COL.kraft, weight: 500, small: true }], 0.5);
+                handG.add(hIl, hBl, hFl);
+                const handPunkt = new THREE.Mesh(new THREE.SphereGeometry(0.07, 14, 10), markMat(COL.ink, { glod: 0.3 }));
+                handG.add(handPunkt);
+
+                // ── Rotationsriktning ──
+                const rotG = new THREE.Group(); scene.add(rotG);
+                const rotMat = markMat(COL.ink, { glod: 0.3, opacity: 0.88 });
+                const ROT_R = 2.05, ROT_Y = TOP_Y + 0.75;
+                const rotBage = new THREE.Mesh(new THREE.TorusGeometry(ROT_R, 0.035, 8, 90, Math.PI * 1.45), rotMat);
+                rotBage.rotation.x = Math.PI / 2;
+                rotBage.position.y = ROT_Y;
+                rotG.add(rotBage);
+                const rotKon = new THREE.Mesh(new THREE.ConeGeometry(0.12, 0.36, 16), rotMat);
+                rotG.add(rotKon);
+                const wLapp = textSprite([{ t: 'ω', italic: true, color: COL.ink }], 0.48);
+                rotG.add(wLapp);
+
+                // ── Bygg om allt som beror på I, magneten och batteriet ──
+                let krafter = null;
+                let ritadPol = 1, ritadSI = 1;
+                function byggOm() {
+                    const p = SIM.p;
+                    const pol = p.magN ? 1 : -1, sI = p.battUp ? 1 : -1;
+                    ritadPol = pol; ritadSI = sI;
+                    krafter = kraftPaBen(p.I, sI, pol);
+                    // fältpilarnas riktning
+                    faltPilar.forEach(k => k.quaternion.setFromUnitVectors(Y_AXEL, k.userData.d.clone().multiplyScalar(pol)));
+                    // kraftpilar: summera dF i lika långa bitar längs benet
+                    const BIT = 0.42;
+                    const nPer = Math.max(1, Math.round(BIT / (BEN_LEN / krafter.seg.length)));
+                    const bitar = [];
+                    for (let i = 0; i < krafter.seg.length; i += nPer) {
+                        const del = krafter.seg.slice(i, i + nPer);
+                        const F = new THREE.Vector3(); del.forEach(q => F.add(q.dF));
+                        const m = del[Math.floor(del.length / 2)].m.clone();
+                        bitar.push({ m, F, Fn: F.length() });
+                    }
+                    // skala: den största biten vid IMAX blir 2,0 cm lång
+                    if (!SIM.kraftSkala) {
+                        const ref = kraftPaBen(IMAX, 1, 1);
+                        let mx = 0;
+                        for (let i = 0; i < ref.seg.length; i += nPer) {
+                            const F = new THREE.Vector3(); ref.seg.slice(i, i + nPer).forEach(q => F.add(q.dF));
+                            mx = Math.max(mx, F.length());
+                        }
+                        SIM.kraftSkala = 2.0 / mx;  // cm per N
+                    }
+                    let k = 0, storst = null;
+                    [1, -1].forEach(sida => {
+                        bitar.forEach(b => {
+                            const L = b.Fn * SIM.kraftSkala;
+                            if (L < 0.12 || k >= kraftPilar.length) return;
+                            let m = b.m.clone(), F = b.F.clone().multiplyScalar(SIM.kraftSkala);
+                            if (sida < 0) { m = rot180(m); F = rot180(F); }
+                            stallPil(kraftPilar[k], m, F, { r: 0.05 });
+                            if (sida > 0 && (!storst || L > storst.L)) storst = { m, F, L };
+                            k++;
+                        });
+                    });
+                    for (; k < kraftPilar.length; k++) kraftPilar[k].visible = false;
+                    if (storst) {
+                        const tip = storst.m.clone().add(storst.F);
+                        fLapp.position.copy(tip.add(storst.F.clone().normalize().multiplyScalar(0.3)));
+                    }
+                    // högerhandsregeln på det lodräta benet strax ovanför magneten:
+                    // där är strömmen lodrät, fältet nästan vågrätt utåt och kraften
+                    // vågrät åt sidan, så de tre riktningarna syns tydligt
+                    let best = krafter.seg[0];
+                    krafter.seg.forEach(q => { if (Math.abs(q.m.y - 1.45) < Math.abs(best.m.y - 1.45)) best = q; });
+                    const hp = best.m;
+                    handPunkt.position.copy(hp);
+                    const vI = best.dl.clone().normalize().multiplyScalar(1.3);
+                    const vB = best.B.clone().normalize().multiplyScalar(1.3);
+                    const vF = best.dF.clone().normalize().multiplyScalar(1.3);
+                    stallPil(hI, hp, vI); stallPil(hB, hp, vB); stallPil(hF, hp, vF);
+                    const lbl = (spr, v) => {
+                        const d = v.clone().normalize();
+                        spr.position.copy(hp.clone().add(v).add(d.multiplyScalar(0.18 + spr.scale.x / 2)));
+                    };
+                    lbl(hIl, vI); lbl(hBl, vB); lbl(hFl, vF);
+
+                    SIM.ut.tau = krafter.tau * 2;
+                    SIM.ut.Ft = krafter.Ft;
+                    if (SIM.cb.ut) SIM.cb.ut();
+                }
+                byggOm();
+
+                // ── Kamera: vrid, zooma, förinställda vyer ──
+                const cam = { ...VYER.snett, target: new THREE.Vector3(...VYER.snett.target) };
+                let camMal = null;
+                const sattVy = (namn) => {
+                    const v = VYER[namn];
+                    camMal = { theta: v.theta + (SIM.p.follow ? cam.theta - (cam.theta % (2 * Math.PI)) : 0), phi: v.phi, radius: v.radius, target: new THREE.Vector3(...v.target) };
+                    // välj närmaste theta-varv
+                    const d = ((camMal.theta - cam.theta) % (2 * Math.PI) + 3 * Math.PI) % (2 * Math.PI) - Math.PI;
+                    camMal.theta = cam.theta + d;
+                };
+                SIM.vy = sattVy;
+                const uppdateraKamera = () => {
+                    const sp = Math.sin(cam.phi);
+                    camera.position.set(
+                        cam.target.x + cam.radius * sp * Math.sin(cam.theta),
+                        cam.target.y + cam.radius * Math.cos(cam.phi),
+                        cam.target.z + cam.radius * sp * Math.cos(cam.theta));
+                    camera.lookAt(cam.target);
+                };
+
+                // ── Pekare: dra = vrid, klick på magnet/batteri = vänd ──
+                const ray = new THREE.Raycaster();
+                const ndc = new THREE.Vector2();
+                const klickbara = [magnet, kropp, lockUpp, lockNed, nub];
+                const traff = (e) => {
+                    const r = el.getBoundingClientRect();
+                    ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+                    ray.setFromCamera(ndc, camera);
+                    const h = ray.intersectObjects(klickbara, false)[0];
+                    return h ? h.object.userData.klick : null;
+                };
+                const pekare = new Map();
+                let drag = null, pinch = null;
+                const onDown = (e) => {
+                    if (e.target !== renderer.domElement) return;
+                    pekare.set(e.pointerId, { x: e.clientX, y: e.clientY });
+                    renderer.domElement.setPointerCapture(e.pointerId);
+                    if (pekare.size === 1) drag = { x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY, t: performance.now() };
+                    if (pekare.size === 2) {
+                        const [a, b] = [...pekare.values()];
+                        pinch = { d: Math.hypot(a.x - b.x, a.y - b.y), r: cam.radius };
+                        drag = null;
+                    }
+                    camMal = null;
+                };
+                const onMove = (e) => {
+                    if (pekare.has(e.pointerId)) pekare.set(e.pointerId, { x: e.clientX, y: e.clientY });
+                    if (pinch && pekare.size === 2) {
+                        const [a, b] = [...pekare.values()];
+                        const d = Math.hypot(a.x - b.x, a.y - b.y);
+                        cam.radius = Math.max(7, Math.min(32, pinch.r * pinch.d / Math.max(d, 1)));
+                        return;
+                    }
+                    if (drag) {
+                        const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+                        drag.x = e.clientX; drag.y = e.clientY;
+                        cam.theta -= dx * 0.008;
+                        cam.phi = Math.max(0.05, Math.min(1.56, cam.phi - dy * 0.006));
+                        wrap.classList.add('dragging');
+                        return;
+                    }
+                    if (e.pointerType === 'mouse') {
+                        const k = traff(e);
+                        wrap.classList.toggle('pointer', !!k);
+                        wrap.classList.toggle('grab', !k);
+                    }
+                };
+                const onUp = (e) => {
+                    if (drag && pekare.size === 1) {
+                        const flytt = Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0);
+                        if (flytt < 6 && performance.now() - drag.t < 500) {
+                            const k = traff(e);
+                            if (k === 'magnet' && SIM.cb.vandMagnet) SIM.cb.vandMagnet();
+                            if (k === 'batteri' && SIM.cb.vandBatteri) SIM.cb.vandBatteri();
+                        }
+                    }
+                    pekare.delete(e.pointerId);
+                    if (pekare.size < 2) pinch = null;
+                    if (pekare.size === 0) drag = null;
+                    wrap.classList.remove('dragging');
+                };
+                const onWheel = (e) => {
+                    e.preventDefault();
+                    camMal = null;
+                    cam.radius = Math.max(7, Math.min(32, cam.radius * Math.exp(e.deltaY * 0.0012)));
+                };
+                el.addEventListener('pointerdown', onDown);
+                window.addEventListener('pointermove', onMove);
+                window.addEventListener('pointerup', onUp);
+                window.addEventListener('pointercancel', onUp);
+                el.addEventListener('wheel', onWheel, { passive: false });
+                wrap.classList.add('grab');
+
+                const ro = new ResizeObserver(() => {
+                    renderer.setSize(W(), H());
+                    camera.aspect = W() / H();
+                    // smal ruta: backa kameran så att hela motorn ryms
+                    camera.fov = camera.aspect < 0.9 ? 38 : 34;
+                    camera.updateProjectionMatrix();
+                });
+                ro.observe(el);
+
+                // ── Animation ──
+                let synlig = true;
+                const io = new IntersectionObserver((en) => { synlig = en[0].isIntersecting; }, { threshold: 0.01 });
+                io.observe(wrap);
+
+                let vinkel = 0, omega = 0, flode = 0, tLast = performance.now(), raf = 0;
+                // vändanimationer
+                let magVinkel = 0, magMal = 0, battVinkel = 0, battMal = 0;
+                const ease = (x) => x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
+                let lyft = 0;
+
+                const tick = () => {
+                    raf = requestAnimationFrame(tick);
+                    const now = performance.now();
+                    const dtv = Math.min(0.05, (now - tLast) / 1000);
+                    tLast = now;
+                    if (!synlig) return;
+                    const p = SIM.p;
+                    const dt = dtv * (p.slow ? 0.15 : 1);
+
+                    // vändningar: magneten vänds kring en vågrät axel, batteriet likaså
+                    magMal = p.magN ? 0 : Math.PI;
+                    battMal = p.battUp ? 0 : Math.PI;
+                    const vander = Math.abs(magVinkel - magMal) > 1e-3 || Math.abs(battVinkel - battMal) > 1e-3;
+                    const steg = dtv * Math.PI / 0.9;
+                    const narma = (v, m) => Math.abs(m - v) <= steg ? m : v + Math.sign(m - v) * steg;
+                    magVinkel = narma(magVinkel, magMal);
+                    battVinkel = narma(battVinkel, battMal);
+                    // lyft batteri och tråd medan något vänds
+                    lyft += ((vander ? 1.35 : 0) - lyft) * Math.min(1, dtv * 9);
+                    magnetG.rotation.x = magVinkel;
+                    battG.rotation.x = battVinkel;
+                    const battFas = Math.abs(Math.sin(battVinkel)) > 0.01 ? (1 - Math.cos(battVinkel)) / 2 : (p.battUp ? 0 : 1);
+                    battG.position.y = BATT_Y_UPP + (BATT_Y_NED - BATT_Y_UPP) * battFas + lyft;
+                    wireG.position.y = lyft;
+                    if (!vander && (ritadPol !== (p.magN ? 1 : -1) || ritadSI !== (p.battUp ? 1 : -1))) byggOm();
+                    if (SIM.dirty && !vander) { SIM.dirty = false; byggOm(); }
+
+                    // dynamiken: dω/dt = (ω_slut − ω)/T_ACC, ω_slut = τ/DAMP
+                    const ledande = !vander && lyft < 0.05;
+                    const tau = ledande ? SIM.ut.tau : 0;
+                    if (p.running) {
+                        const wSlut = tau / DAMP;
+                        omega += (wSlut - omega) * Math.min(1, dt / T_ACC);
+                        vinkel += omega * dt;
+                        if (ledande) flode += dt * (p.I / IREF);
+                    }
+                    wireG.rotation.y = vinkel;
+                    SIM.ut.varv = omega / (2 * Math.PI);
+
+                    // följ med tråden: kameran vrids lika mycket som tråden
+                    if (p.follow && p.running) cam.theta += omega * dt;
+                    if (camMal) {
+                        const k = Math.min(1, dtv * 4);
+                        cam.theta += (camMal.theta - cam.theta) * k;
+                        cam.phi += (camMal.phi - cam.phi) * k;
+                        cam.radius += (camMal.radius - cam.radius) * k;
+                        cam.target.lerp(camMal.target, k);
+                        if (Math.abs(camMal.phi - cam.phi) < 1e-3 && Math.abs(camMal.theta - cam.theta) < 1e-3) camMal = null;
+                    }
+                    uppdateraKamera();
+
+                    // synlighet
+                    const sh = p.show;
+                    const visaFlode = ledande;
+                    faltG.visible = sh.falt;
+                    inreFaltG.visible = sh.falt && p.transp;
+                    stromG.visible = sh.strom && visaFlode;
+                    battStromG.visible = sh.strom && visaFlode && p.transp;
+                    iLapp.visible = sh.strom && visaFlode;
+                    elekG.visible = sh.elek && visaFlode;
+                    eLapp.visible = sh.elek && visaFlode;
+                    kraftG.visible = sh.kraft && visaFlode;
+                    fLapp.visible = !sh.hand;
+                    handG.visible = sh.hand && visaFlode;
+                    rotG.visible = sh.rot && Math.abs(omega) > 0.4;
+
+                    // genomskinlighet
+                    const op = p.transp ? 0.22 : 1;
+                    magMats.forEach(m => { m.opacity = p.transp ? 0.38 : 1; m.depthWrite = !p.transp; });
+                    battMat.opacity = op; battMat.depthWrite = !p.transp;
+                    metallMat.opacity = p.transp ? 0.35 : 1; metallMat.depthWrite = !p.transp;
+
+                    // strömpilar och elektroner flyter
+                    const sI = p.battUp ? 1 : -1;
+                    const sStrom = flode * 1.1;
+                    stromPilar.forEach(a => {
+                        const L = a.bana.len;
+                        const s = (((a.s0 + sI * sStrom) % L) + L) % L;
+                        const { p: q, d } = a.bana.at(s);
+                        a.m.position.copy(q);
+                        a.m.quaternion.setFromUnitVectors(Y_AXEL, d.multiplyScalar(sI));
+                    });
+                    battPilar.forEach(a => {
+                        const L = a.bana.len;
+                        const s = (((a.s0 + sI * sStrom) % L) + L) % L;
+                        const { p: q, d } = a.bana.at(s);
+                        a.m.position.copy(q);
+                        a.m.quaternion.setFromUnitVectors(Y_AXEL, d.multiplyScalar(sI));
+                    });
+                    const sElek = flode * 0.7;
+                    elektroner.forEach(a => {
+                        const L = a.bana.len;
+                        const s = (((a.s0 - sI * sElek) % L) + L) % L;
+                        a.m.position.copy(a.bana.at(s).p);
+                    });
+                    // etiketter vid benet närmast kameran
+                    const camDir = new THREE.Vector3().subVectors(camera.position, cam.target).setY(0).normalize();
+                    const lokal = camDir.clone().applyAxisAngle(Y_AXEL, -vinkel);
+                    const benHit = lokal.x >= 0 ? 1 : -1;
+                    const placera = (spr, s, ut) => {
+                        const q = yttrePlus.at(s).p;
+                        const v = new THREE.Vector3(q.x + ut, q.y, q.z);
+                        spr.position.copy(benHit > 0 ? v : rot180(v));
+                    };
+                    placera(iLapp, 2.0, 0.48);
+                    placera(eLapp, 3.3, 0.48);
+                    // B-etiketten vid linjen mot kameran
+                    const t2 = bLapp.userData.top;
+                    const camLokal = Math.atan2(camDir.x, camDir.z);
+                    bLapp.position.set(t2[0] * Math.sin(camLokal + 0.9), t2[1] + 0.32, t2[0] * Math.cos(camLokal + 0.9));
+                    // rotationspilen
+                    if (rotG.visible) {
+                        // Bågen täcker vinklarna a ∈ [start, start + 1,45π] i xz-planet,
+                        // punkten (R cos a, R sin a). Växande a är medurs sett ovanifrån,
+                        // alltså ω < 0. Spetsen sätts i den ände rotationen går mot.
+                        // luckan i bågen läggs bakom batteriet, sett från kameran
+                        const start = Math.PI / 2 - camLokal - Math.PI * 0.725;
+                        rotBage.rotation.set(Math.PI / 2, 0, start);
+                        const medursRot = omega < 0;
+                        const a0 = medursRot ? start + Math.PI * 1.45 : start;
+                        rotKon.position.set(ROT_R * Math.cos(a0), ROT_Y, ROT_R * Math.sin(a0));
+                        const tang = new THREE.Vector3(-Math.sin(a0), 0, Math.cos(a0)).multiplyScalar(medursRot ? 1 : -1);
+                        rotKon.quaternion.setFromUnitVectors(Y_AXEL, tang);
+                        const am = start + Math.PI * 0.725;
+                        wLapp.position.set(ROT_R * 1.05 * Math.cos(am), ROT_Y + 0.62, ROT_R * 1.05 * Math.sin(am));
+                    }
+                    renderer.render(scene, camera);
+                };
+                tick();
+
+                return () => {
+                    cancelAnimationFrame(raf);
+                    ro.disconnect(); io.disconnect();
+                    el.removeEventListener('pointerdown', onDown);
+                    window.removeEventListener('pointermove', onMove);
+                    window.removeEventListener('pointerup', onUp);
+                    window.removeEventListener('pointercancel', onUp);
+                    el.removeEventListener('wheel', onWheel);
+                    renderer.dispose();
+                    if (renderer.domElement.parentNode) renderer.domElement.parentNode.removeChild(renderer.domElement);
+                };
+            }, []);
+            return <div ref={mountRef} className="motor-mount" />;
+        }
+
+        // ─────────────────────────────────────────────────────────────────
+        // Formelkort: F = B · I · l med ord-etiketter
+        // ─────────────────────────────────────────────────────────────────
+        const Vbl = ({ lbl, children, color }) => (
+            <div className="flex flex-col items-center">
+                <span className="flbl">{lbl}</span>
+                <span className="fnum" style={color ? { color } : null}>{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{lbl}</span>
+            </div>
+        );
+        const Op = ({ children }) => <span className="fnum" style={{ padding: '0 6px' }}>{children}</span>;
+        const FormulaCard = () => (
+            <div className="glass-card rounded-xl px-5 py-3 mb-5 inline-flex flex-wrap items-center gap-x-6 gap-y-2">
+                <div className="flex items-center">
+                    <Vbl lbl="Kraft" color={COL.kraft}><em>F</em></Vbl>
+                    <Op>=</Op>
+                    <Vbl lbl="Flödestäthet" color={COL.falt}><em>B</em></Vbl>
+                    <Op>·</Op>
+                    <Vbl lbl="Ström"><em>I</em></Vbl>
+                    <Op>·</Op>
+                    <Vbl lbl="Längd"><em>l</em></Vbl>
+                </div>
+                <div className="text-sm" style={{ color: 'var(--lab-ink-soft)', maxWidth: 360 }}>
+                    Riktningen ges av högerhandsregeln: tummen i strömmens riktning,
+                    pekfingret i fältets riktning, så pekar långfingret åt kraften.
+                </div>
+            </div>
+        );
+
+        const StSlider = ({ label, value, min, max, step, onChange, valueText }) => (
+            <div className="st-slider">
+                <div className="st-slider-top">
+                    <span dangerouslySetInnerHTML={{ __html: label }} />
+                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 13 }}>{valueText}</span>
+                </div>
+                <span className="sl-wrap">
+                    <input type="range" min={min} max={max} step={step} value={value}
+                           onChange={(e) => onChange(parseFloat(e.target.value))} />
+                </span>
+            </div>
+        );
+
+        // ─────────────────────────────────────────────────────────────────
+        // Appen
+        // ─────────────────────────────────────────────────────────────────
+        const App = () => {
+            const [running, setRunning] = useState(true);
+            const [I, setI] = useState(IREF);
+            const [magN, setMagN] = useState(true);
+            const [battUp, setBattUp] = useState(true);
+            const [transp, setTransp] = useState(false);
+            const [follow, setFollow] = useState(false);
+            const [slow, setSlow] = useState(false);
+            const [show, setShow] = useState({ ...SIM.p.show });
+            const [vy, setVy] = useState('snett');
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [togglesOpen, setTogglesOpen] = useState(true);
+            const [ut, setUt] = useState({ varv: 0, tau: 0, Ft: 0 });
+            const sceneWrapRef = useRef(null);
+
+            useEffect(() => {
+                Object.assign(SIM.p, { running, I, magN, battUp, transp, follow, slow, show: { ...show } });
+            }, [running, I, magN, battUp, transp, follow, slow, show]);
+            useEffect(() => { SIM.dirty = true; }, [I]);
+            useEffect(() => {
+                SIM.cb.vandMagnet = () => setMagN(v => !v);
+                SIM.cb.vandBatteri = () => setBattUp(v => !v);
+                const id = setInterval(() => setUt({ ...SIM.ut }), 120);
+                return () => clearInterval(id);
+            }, []);
+            useEffect(() => {
+                const h = () => setIsFullscreen(!!(document.fullscreenElement || document.webkitFullscreenElement));
+                document.addEventListener('fullscreenchange', h);
+                document.addEventListener('webkitfullscreenchange', h);
+                return () => { document.removeEventListener('fullscreenchange', h); document.removeEventListener('webkitfullscreenchange', h); };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (document.fullscreenElement || document.webkitFullscreenElement) {
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                } else {
+                    (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+                }
+            };
+            const tShow = (k) => setShow(s => ({ ...s, [k]: !s[k] }));
+            const valjVy = (n) => { setVy(n); if (SIM.vy) SIM.vy(n); };
+            const borjaOm = () => {
+                setI(IREF); setMagN(true); setBattUp(true); setRunning(true);
+                setFollow(false); setSlow(false); valjVy('snett');
+            };
+
+            const varv = ut.varv;
+            const medurs = varv < 0;      // ω < 0 kring y-axeln = medurs sett ovanifrån
+            const FtmN = Math.abs(ut.Ft) * 1000;
+            const tauMikro = Math.abs(ut.tau) * 1e6;
+
+            const reglage = (
+                <StSlider label="Ström (<em>I</em>)" value={I} min={IMIN} max={IMAX} step={0.1}
+                          onChange={setI} valueText={`${fmt(I, 1)} A`} />
+            );
+
+            const sceneToggles = () => {
+                if (!togglesOpen) return (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)}
+                            aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" />
+                            <circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" />
+                            <circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                );
+                return (
+                    <div className="scene-toggles">
+                        <button className="st-hide" onClick={() => setTogglesOpen(false)}
+                                aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+                                <path d="M6 6l12 12M18 6L6 18" />
+                            </svg>
+                        </button>
+                        <div className="st-title">Visa</div>
+                        <label><input type="checkbox" checked={show.strom} onChange={() => tShow('strom')} />
+                            <span className="st-swatch" style={{ background: COL.strom }}></span><span>Strömmen <em>I</em></span></label>
+                        <label><input type="checkbox" checked={show.elek} onChange={() => tShow('elek')} />
+                            <span className="st-dot" style={{ background: COL.elek }}></span><span>Elektronerna</span></label>
+                        <label><input type="checkbox" checked={show.falt} onChange={() => tShow('falt')} />
+                            <span className="st-swatch" style={{ background: COL.falt }}></span><span>Magnetfältet <em>B</em></span></label>
+                        <label><input type="checkbox" checked={show.kraft} onChange={() => tShow('kraft')} />
+                            <span className="st-swatch" style={{ background: COL.kraft }}></span><span>Kraften <em>F</em></span></label>
+                        <label><input type="checkbox" checked={show.hand} onChange={() => tShow('hand')} />
+                            <span className="st-swatch" style={{ background: `linear-gradient(90deg, ${COL.strom} 33%, ${COL.falt} 33% 66%, ${COL.kraft} 66%)` }}></span>
+                            <span>Högerhandsregeln</span></label>
+                        <label><input type="checkbox" checked={show.rot} onChange={() => tShow('rot')} />
+                            <span className="st-swatch" style={{ background: 'rgba(31,37,48,0.75)' }}></span><span>Rotationsriktning</span></label>
+                        <div className="st-title mt">Scen</div>
+                        <label><input type="checkbox" checked={transp} onChange={() => setTransp(v => !v)} /><span>Genomskinligt batteri och magnet</span></label>
+                        <label><input type="checkbox" checked={follow} onChange={() => setFollow(v => !v)} /><span>Följ med tråden runt</span></label>
+                        <label><input type="checkbox" checked={slow} onChange={() => setSlow(v => !v)} /><span>Ultrarapid</span></label>
+                        {isFullscreen && (
+                            <React.Fragment>
+                                <div className="st-title mt">Reglage</div>
+                                <div className="st-sliders">{reglage}</div>
+                                <div className="st-actions">
+                                    <button className="btn-toggle" onClick={() => setRunning(r => !r)}>{running ? 'Pausa' : 'Fortsätt'}</button>
+                                    <button className="btn-toggle" onClick={() => setMagN(v => !v)}>Vänd magneten</button>
+                                    <button className="btn-toggle" onClick={() => setBattUp(v => !v)}>Vänd batteriet</button>
+                                </div>
+                            </React.Fragment>
+                        )}
+                    </div>
+                );
+            };
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Den enklaste elmotorn
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Den enklaste elmotorn</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 840 }}>
+                            Ett batteri, en magnet och en bit koppartråd räcker för att bygga en elmotor. Batteriet
+                            står med minuspolen på en stark magnet, och tråden vilar på pluspolen med ändarna mot
+                            magnetens sida. Strömmen går ned genom tråden, in i magneten och tillbaka till batteriet.
+                            Där tråden går genom magnetens fält påverkas den av en kraft, och eftersom kraften pekar
+                            åt sidan i båda trådbenen börjar tråden snurra. Slå på strömmen, fältet och krafterna,
+                            vänd magneten eller batteriet och se åt vilket håll motorn går.
+                        </p>
+
+                        <FormulaCard />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            <div className="lg:w-2/3 order-1">
+                                <div className={"scene-wrap" + (isFullscreen ? " is-fs" : "")} data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    <MotorScene wrapRef={sceneWrapRef} />
+                                    <div className="scene-hint">Dra för att vrida scenen. Klicka på magneten eller batteriet för att vända dem.</div>
+                                    {sceneToggles()}
+                                    <div className="fs-quick">
+                                        <button className="fq-play" onClick={() => setRunning(r => !r)}
+                                                aria-label={running ? 'Paus' : 'Start'} title={running ? 'Paus' : 'Start'}>
+                                            {running ? (
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                                    <rect x="6" y="5" width="4" height="14" rx="1" />
+                                                    <rect x="14" y="5" width="4" height="14" rx="1" />
+                                                </svg>
+                                            ) : (
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                                    <path d="M8 5.5v13l11-6.5z" />
+                                                </svg>
+                                            )}
+                                        </button>
+                                        <div className="fq-rows">
+                                            <div className="fq-row">
+                                                <span className="fq-lbl">Ström</span>
+                                                <input type="range" min={IMIN} max={IMAX} step={0.1} value={I}
+                                                       onChange={e => setI(parseFloat(e.target.value))} aria-label="Ström" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div className="lg:w-1/3 order-2">
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Reglage</div>
+                                    <div className="mb-1 flex justify-between items-baseline">
+                                        <span className="text-sm" style={{ color: 'var(--lab-ink)' }}>Ström <em>I</em></span>
+                                        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600 }}>{fmt(I, 1)} A</span>
+                                    </div>
+                                    <input type="range" className="w-full cursor-pointer" min={IMIN} max={IMAX} step={0.1} value={I}
+                                           onChange={(e) => setI(parseFloat(e.target.value))} aria-label="Ström" />
+                                    <p className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}>
+                                        Strömmen bestäms av batteriets spänning och trådens resistans. En tunn
+                                        koppartråd direkt över ett AA-batteri ger ofta 1 till 3 A.
+                                    </p>
+                                    <div className="grid grid-cols-2 gap-2 mt-3">
+                                        <button className="btn-toggle" onClick={() => setMagN(v => !v)}>Vänd magneten</button>
+                                        <button className="btn-toggle" onClick={() => setBattUp(v => !v)}>Vänd batteriet</button>
+                                        <button className="btn-toggle" onClick={() => setRunning(r => !r)}>{running ? 'Pausa' : 'Fortsätt'}</button>
+                                        <button className="btn-toggle" onClick={borjaOm}>Börja om</button>
+                                    </div>
+                                    <div className="orient">
+                                        <span>Uppåt:</span>
+                                        <span><b>{magN ? 'nordändan' : 'sydändan'}</b> på magneten,</span>
+                                        <span><b>{battUp ? 'pluspolen' : 'minuspolen'}</b> på batteriet</span>
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Vy</div>
+                                    <div className="vy-seg">
+                                        <button className={vy === 'snett' ? 'active' : ''} onClick={() => valjVy('snett')}>Snett</button>
+                                        <button className={vy === 'sidan' ? 'active' : ''} onClick={() => valjVy('sidan')}>Från sidan</button>
+                                        <button className={vy === 'ovan' ? 'active' : ''} onClick={() => valjVy('ovan')}>Ovanifrån</button>
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Avläsning</div>
+                                    <div className="readout">
+                                        <div>
+                                            <div className="rv" style={{ color: COL.kraft }}>{fmt(FtmN, FtmN < 10 ? 1 : 0)} mN</div>
+                                            <div className="rl">kraft i sidled på ett trådben</div>
+                                        </div>
+                                        <div>
+                                            <div className="rv">{fmt(tauMikro, 0)} µNm</div>
+                                            <div className="rl">kraftmoment på tråden</div>
+                                        </div>
+                                        <div>
+                                            <div className="rv">{fmt(Math.abs(varv), 1)} varv/s</div>
+                                            <div className="rl">varvtal</div>
+                                        </div>
+                                        <div>
+                                            <div className="rv" style={{ fontSize: 15 }}>{Math.abs(varv) < 0.05 ? 'står still' : (medurs ? 'medurs' : 'moturs')}</div>
+                                            <div className="rl">sett ovanifrån</div>
+                                        </div>
+                                    </div>
+                                    <p className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>
+                                        Kraftpilarna är skalenliga: en dubbelt så lång pil betyder en dubbelt så
+                                        stor kraft på den biten av tråden. Kraften är störst längst ned, nära
+                                        magneten, där fältet är starkast.
+                                    </p>
+                                </div>
+                            </div>
+                        </main>
+
+                        <div className="mt-8 grid md:grid-cols-2 gap-5 forkl" style={{ color: 'var(--lab-ink-soft)' }}>
+                            <details className="glass-card rounded-xl p-4" open>
+                                <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>Varför snurrar tråden?<span>+</span></summary>
+                                <ol>
+                                    <li><strong>Strömkretsen sluts.</strong> Strömmen går från batteriets pluspol ut i
+                                        tråden, ned genom båda trådbenen och in i magneten där ändarna nuddar den.
+                                        Magneten leder ström (den är ofta förnicklad), så strömmen går genom den
+                                        till batteriets minuspol.</li>
+                                    <li><strong>Tråden ligger i magnetens fält.</strong> Fältlinjerna kommer ut ur
+                                        magnetens nordända, böjer sig utåt och går tillbaka till sydändan. Nära
+                                        magneten, där trådbenen går ned, pekar fältet snett utåt och nedåt.</li>
+                                    <li><strong>En strömförande ledare i ett magnetfält påverkas av en kraft</strong>,{' '}
+                                        <em>F</em>&nbsp;=&nbsp;<em>B</em>&thinsp;·&thinsp;<em>I</em>&thinsp;·&thinsp;<em>l</em>.
+                                        Kraften är vinkelrät mot både strömmen och fältet. Slå på
+                                        Högerhandsregeln i scenen och se de tre riktningarna i samma punkt.</li>
+                                    <li><strong>Kraften pekar åt sidan i båda benen.</strong> På ena sidan av
+                                        batteriet pekar kraften framåt, på den andra bakåt. Tillsammans ger de ett
+                                        kraftmoment kring batteriets axel, och tråden börjar rotera.</li>
+                                    <li><strong>Farten slutar öka</strong> när friktionen där tråden glider mot
+                                        batteriet och magneten blir lika stor som den drivande kraften.</li>
+                                </ol>
+                            </details>
+
+                            <details className="glass-card rounded-xl p-4" open>
+                                <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>Pröva själv i simuleringen<span>+</span></summary>
+                                <ul>
+                                    <li><strong>Vänd magneten.</strong> Fältet byter riktning, och då vänder kraften.
+                                        Motorn går åt andra hållet.</li>
+                                    <li><strong>Vänd batteriet.</strong> Strömmen byter riktning, och motorn vänder
+                                        igen.</li>
+                                    <li><strong>Vänd båda.</strong> Både strömmen och fältet byter riktning, så
+                                        kraften pekar åt samma håll som från början. Stämmer det med
+                                        högerhandsregeln?</li>
+                                    <li><strong>Öka strömmen.</strong> Kraften är proportionell mot <em>I</em>, så
+                                        dubbelt så stor ström ger dubbelt så långa kraftpilar.</li>
+                                    <li><strong>Följ med tråden runt.</strong> Då står tråden still på skärmen och
+                                        batteriet snurrar i stället. Nu är det lätt att se att kraftpilarna alltid
+                                        pekar åt samma håll i förhållande till tråden.</li>
+                                    <li><strong>Visa elektronerna.</strong> De rör sig åt motsatt håll mot den
+                                        tekniska strömriktningen, eftersom de är negativt laddade.</li>
+                                </ul>
+                            </details>
+
+                            <details className="glass-card rounded-xl p-4">
+                                <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>Bygg en egen motor<span>+</span></summary>
+                                <p>Du behöver ett AA-batteri, en stark neodymmagnet som är minst lika bred som
+                                    batteriet och en bit oisolerad koppartråd, ungefär 1&nbsp;mm tjock.</p>
+                                <ol>
+                                    <li>Ställ batteriet med minuspolen på magneten.</li>
+                                    <li>Böj tråden så att mitten vilar på pluspolen och de två benen går ned längs
+                                        batteriet. Böj ändarna så att de nuddar magnetens sida löst.</li>
+                                    <li>Justera tills tråden står i balans och bara nuddar magneten lätt. Då
+                                        börjar den snurra.</li>
+                                </ol>
+                                <p><strong>Var försiktig:</strong> tråden kortsluter batteriet, så både tråden och
+                                    batteriet blir varma. Låt inte motorn gå länge, och ta bort tråden när du är
+                                    klar. Neodymmagneter är mycket starka och kan nypa fingrarna.</p>
+                            </details>
+
+                            <details className="glass-card rounded-xl p-4">
+                                <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>Vanliga missförstånd<span>+</span></summary>
+                                <ul>
+                                    <li><strong>”Magneten drar tråden runt.”</strong> Nej, koppar dras inte till
+                                        magneter. Det är strömmen genom tråden som gör att magnetfältet kan påverka
+                                        den. Utan ström står tråden still.</li>
+                                    <li><strong>”Kraften pekar mot magneten.”</strong> Nej, kraften på en strömförande
+                                        ledare är vinkelrät mot fältet. Därför pekar den åt sidan och får tråden att
+                                        snurra i stället för att dras in.</li>
+                                    <li><strong>”Det är batteriet som snurrar.”</strong> I den här uppställningen står
+                                        batteriet och magneten still. Magneten påverkas av en lika stor kraft åt
+                                        andra hållet, men den hålls kvar av friktionen mot bordet.</li>
+                                    <li><strong>”Riktiga elmotorer fungerar helt annorlunda.”</strong> Principen är
+                                        densamma: en strömförande ledare i ett magnetfält påverkas av en kraft. I en
+                                        vanlig motor sitter många varv tråd i en spole, och strömmen byter riktning
+                                        varje halvt varv så att spolen fortsätter att rotera åt samma håll.</li>
+                                </ul>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+    <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

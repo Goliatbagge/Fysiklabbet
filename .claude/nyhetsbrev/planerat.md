@@ -154,3 +154,23 @@ Bocka av eller stryk punkter när de är klara och har nämnts i ett brev.
   `https://fysiklabbet.se/fysik2-satelliter-live.html`.
   Simuleringarna som gjorts för Sigbjørn Hals (se
   `.claude/samarbete-sigbjorn/checklista.md`) tas inte upp i brevet.
+
+- **Den enklaste elmotorn: SKA MED I BREVET 2026-11-15** (uttryckligt önskemål
+  2026-11-07: "den här ska finnas med i nästa veckas nyhetsbrev", alltså
+  brevet söndag 15 november, INTE brevet 8 november, som redan var klart).
+  Ny 3D-simulering, lanserad 2026-11-07:
+  `https://fysiklabbet.se/fysik2-elmotor-app.html` (andra simuleringen i
+  Fysik nivå 2, avsnitt 3.5 Strömförande ledare i magnetfält). Ett AA-batteri
+  står med minuspolen på en neodymmagnet, och en böjd koppartråd vilar på
+  pluspolen med ändarna mot magnetens sida. Strömmen går ned genom tråden, in
+  i magneten och tillbaka till batteriet, och där tråden går genom magnetens
+  fält verkar kraften F = B · I · l åt sidan i båda trådbenen, så tråden
+  snurrar. Man kan slå på strömmen, elektronerna, magnetfältets fältlinjer,
+  skalenliga kraftpilar och högerhandsregeln (I, B och F i samma punkt),
+  göra batteri och magnet genomskinliga och "följa med tråden runt" så att
+  tråden står still och världen snurrar. Vänd magneten eller batteriet
+  (klicka på dem) och motorn byter håll; vänd båda och den går åt samma håll
+  som förut. Fältet och krafterna är uträknade på riktigt. Bra
+  vardagskoppling: man kan bygga motorn själv med ett batteri, en magnet och
+  en bit koppartråd (sidan har instruktioner och en säkerhetsvarning).
+  Lägg den under "Nytt på Fysiklabbet", gärna med en skärmdump av scenen.

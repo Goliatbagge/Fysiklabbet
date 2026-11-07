@@ -180,6 +180,12 @@ window.SIM_NAMES = {
   'fysik2-jordmagnetiska-faltet.html': 'Jordmagnetiska fältet',
   'fysik2-magnetiskt-flode.html': 'Magnetiskt flöde',
   'fysik2-vaxelstromsgenerator.html': 'Växelströmsgenerator',
+  'fysik2-ledare-magnetfalt-app.html': [
+    { name: 'Strömförande ledare i magnetfält', desc: 'En ledare mellan en nordända och en sydända. Ändra flödestäthet, ström och ledarens längd och se kraften F = B · I · l ändras, byt ström- och fältriktning och kontrollera med högerhandsregeln.',
+      kw: ['elektromagnetism','magnetism','ledare','strömförande','magnetfält','kraft','magnetisk kraft','högerhandsregeln','flödestäthet','resulterande fält','parallella ledare','3d'] },
+    { name: 'Den enklaste elmotorn', href: 'fysik2-elmotor-app.html', desc: 'Ett batteri står på en magnet, och en koppartråd som vilar på pluspolen börjar snurra. Se strömmen, elektronerna, magnetfältet och kraften på tråden i 3D, och vänd magneten eller batteriet för att byta rotationsriktning.',
+      kw: ['elektromagnetism','magnetism','elmotor','motor','homopolär motor','unipolär motor','batteri','neodymmagnet','magnet','koppartråd','ledare','kraft','magnetisk kraft','högerhandsregeln','rotation','kraftmoment','elektroner','ström','3d'] },
+  ],
   'fysik2-virvelstrommar-app.html': [
     { name: 'Virvelströmmar i en pendel', desc: 'En aluminiumpendel svänger genom ett magnetfält och bromsas in av inducerade virvelströmmar. Justera flödestätheten, slå av elektromagneten mitt i svängningen och byt till en platta med spår.',
       kw: ['elektromagnetism','virvelström','virvelströmmar','induktion','lenz','lenz lag','broms','magnetbroms','induktionshäll','induktionsspis','pendel','aluminium','platta','spår','värme','flöde'] },

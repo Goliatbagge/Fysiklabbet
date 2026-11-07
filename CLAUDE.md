@@ -86,6 +86,15 @@ svenska på en engelsk sida med `node .claude/i18n/kvar.js "<sida>?…"`.
 
 ## Norska (bokmål) i simuleringarna
 
+> ⛔ **AVSLUTAT 2026-11-07 (användarens beslut: "Du behöver inte hålla på
+> på norska mer", det var ett tillfälligt projekt).** Den norska versionen
+> ligger kvar på sajten som den är, men den underhålls inte längre:
+> översätt inget, skriv inga nya nycklar i `i18n/nb/`, kör inte `kvar.js`
+> eller `bygg-manifest.js` för norskan och anlita inte agenten
+> `norsk-sprakgranskare`. En ändrad svensk sträng får visas på svenska på
+> den norska sidan. Förbudet mot att nämna norskan i sociala medier gäller
+> fortfarande. Texten nedan beskriver hur det fungerade.
+
 **Alla fysiksimuleringar (`fysik1-*.html`, `fysik2-*.html`) finns på norska
 via `?lang=nb`** (infört 2026-10-26, så att länkar kan skickas till norska
 lärare och elever): `https://fysiklabbet.se/fysik1-densitet-app.html?lang=nb`.

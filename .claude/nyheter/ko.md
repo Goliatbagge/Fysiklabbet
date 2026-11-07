@@ -15,6 +15,12 @@ Format per post:
 - **Hula-hoopens fysik: lår, smalben och fot håller ringen igång tillsammans (Berkeley)** **[BREVTEASER]** (nominerad 2026-11-02: oväntad vardagsmekanik som en 16-åring kan prova själv; originalet ÖPPET, Springer open access, publicerat 2026-09-28) — mekanik/biomekanik; sensorer på ringen, benet och foten, 120 mätningar per sekund; olinjär analys (funktionell nätverksanalys) i stället för principalkomponentanalys visar att ringens varv och vickning hänger ihop. Chern, Honein, O'Reilly, Nonlinear Dynamics 2026, DOI 10.1007/s11071-026-13058-7 (öppen, kontrollerat 2026-11-02). Mer rörelseanalys än fysik; valdes bort 2026-10-28. Källa (Phys.org): https://phys.org/news/2026-10-decoding-loopy-physics-hula-hooping.html
   (tillagd 2026-10-28)
 
+- **Kvantgas kyld till under 10 pikokelvin på Kinas rymdstation Tiangong (Peking University m.fl.)** — atomfysik/termodynamik; cirka 20 000 rubidiumatomer i optisk dipolfälla i mikrogravitation, ekvivalent temperatur 9,7 pK (7,0–12,9), fri expansion 7 s mot 2 s i falltorn (38 pK) och 1 s på ISS (Cold Atom Laboratory, 52 pK). Wei Xiong m.fl., ”Quantum gases below 10 picokelvin in space”, Science (2026), DOI 10.1126/science.aea5324; science.org gav Cloudflare-spärr 2026-11-07 och inget arXiv-förtryck hittades. Leta förtryck eller öppen kopia. Källa (Phys.org 2026-11-06): https://phys.org/news/2026-11-scientists-temperature-china-space-station.html
+  (tillagd 2026-11-07)
+
+- **Lufthål gör kiselskivor till platta fokuserande speglar för ultraviolett ljus** — optik/metaytor. Advanced Photonics 9(1), 016002, DOI 10.1117/1.ap.9.1.016002 (SPIE, troligen öppen, ej läst). Källa (Phys.org 2026-11-06): https://phys.org/news/2026-11-air-holes-silicon-wafers-flat.html
+  (tillagd 2026-11-07)
+
 - **Marsmolnet över Arsia Mons kan vara första beviset för homogen iskärnbildning (LMD/Sorbonne)** — termodynamik/planetatmosfär; molnet bildas varje morgon på 45 km höjd, upp till 1 800 km långt, mättnadsgrad ~10⁵, adiabatisk avkylning 0,05 K/s. Hernández-Bernal, Määttänen, Spiga, Forget, Nature Geoscience (2026-10-07), DOI 10.1038/s41561-026-02089-9 (betalvägg). Förtrycket arXiv 2609.37259 är öppet (CC BY) MEN författarna skriver att det innehåller kända fel som rättats i slutversionen; slutversionen får inte läggas ut förrän 6 månader efter publicering (april 2027). Ta bara om slutversionen går att läsa. Källa (Physics World 2026-11-04): https://physicsworld.com/a/mystery-of-recurring-martian-cloud-may-be-solved/
   (tillagd 2026-11-06)
 

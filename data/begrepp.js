@@ -63,6 +63,54 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'poissons-tal',
+    term: 'Poissons tal',
+    former: ['poissons tal', 'poissontal', 'poissontalet'],
+    kort: 'Ett tal som anger hur mycket ett material blir tjockare när det trycks ihop, eller smalare när det dras ut. För de flesta fasta material ligger det mellan 0 och 0,5.',
+    relaterade: ['mekanisk-spanning', 'hallfasthet'],
+    body: [
+      { type: 'p', html: 'Tryck ihop ett suddgummi mellan fingrarna, så blir det inte bara kortare. Det buktar också ut åt sidorna. Drar man i ett gummiband händer det omvända: det blir längre och samtidigt smalare. Nästan alla material gör så, även stål och sten, men hos hårda material är ändringen så liten att den bara går att mäta med känsliga instrument.' },
+      { type: 'p', html: 'Poissons tal, uppkallat efter den franske matematikern Siméon Denis Poisson, anger hur stor ändringen i sidled är jämfört med ändringen på längden. Krymper en stav med en tusendel på längden och blir tre tiotusendelar tjockare är Poissons tal 0,3. Talet har ingen enhet. Hos sten, glas och keramik ligger det ofta mellan 0,1 och 0,3, hos metaller kring 0,3 och hos gummi nära 0,5. Värdet 0,5 betyder att volymen inte ändras alls när materialet trycks ihop.' },
+      { type: 'p', html: 'Talet har stor betydelse för hur en kropp går sönder. Sitter ändarna fast, till exempel mot plattorna i en tryckpress, kan materialet inte bli tjockare där, och då uppstår spänningar inne i kroppen som inte skulle finnas annars. Det finns också konstgjorda material med negativt Poissons tal. De blir tjockare när man drar i dem och används bland annat i stötdämpande skydd.' }
+    ]
+  },
+  {
+    id: 'mekanisk-spanning',
+    term: 'Mekanisk spänning',
+    former: ['mekanisk spänning', 'mekaniska spänningen', 'mekaniska spänningar', 'mekaniska spänningarna', 'dragspänning', 'dragspänningen', 'dragspänningar', 'dragspänningarna', 'tryckspänning', 'tryckspänningen', 'tryckspänningar', 'tryckspänningarna'],
+    kort: 'Kraften per area inne i ett material som belastas. Den kan dra isär materialet (dragspänning) eller trycka ihop det (tryckspänning), och den mäts i pascal precis som tryck.',
+    relaterade: ['hallfasthet', 'poissons-tal'],
+    body: [
+      { type: 'p', html: 'Häng en tung väska i ett rep, så dras varje bit av repet isär av biten under. Kraften fördelar sig över repets tvärsnitt, och kraften per area kallas mekanisk spänning. Ordet har inget med elektrisk spänning att göra, trots att det heter likadant. Enheten är pascal, alltså newton per kvadratmeter, samma som för tryck.' },
+      { type: 'p', html: 'Spänningen har en riktning. När materialet dras isär kallas den dragspänning, och när det trycks ihop kallas den tryckspänning. Inne i en belastad kropp kan båda finnas samtidigt i olika riktningar och på olika ställen. En balk som böjs nedåt trycks ihop i överkanten och dras isär i underkanten, och ett föremål som trycks ihop uppifrån kan få dragspänningar i sidled.' },
+      { type: 'p', html: 'Ingenjörer räknar på spänningar för att veta om en konstruktion håller. Ett material går sönder när spänningen någonstans i det blir större än vad materialet tål. Eftersom spänningen ofta är störst i hörn, hål och sprickor, räcker det inte att räkna på genomsnittet: det är de värsta punkterna som avgör.' }
+    ]
+  },
+  {
+    id: 'hallfasthet',
+    term: 'Hållfasthet',
+    former: ['hållfasthet', 'hållfastheten', 'draghållfasthet', 'draghållfastheten', 'tryckhållfasthet', 'tryckhållfastheten'],
+    kort: 'Den största mekaniska spänning ett material tål innan det går sönder. Draghållfastheten gäller när materialet dras isär, tryckhållfastheten när det trycks ihop.',
+    relaterade: ['mekanisk-spanning', 'brottmekanik'],
+    body: [
+      { type: 'p', html: 'Ett material kan vara starkt på ett sätt och svagt på ett annat. Betong tål enormt tryck och används därför i husgrunder och brofundament, men den spricker lätt om den dras isär. Ett rep är tvärtom: det tål stor dragning men går inte alls att trycka med. Därför skiljer man på draghållfasthet och tryckhållfasthet. Båda mäts i pascal, oftast i megapascal.' },
+      { type: 'p', html: 'Spröda material som sten, glas, keramik och betong har mycket högre tryckhållfasthet än draghållfasthet, ofta tio gånger högre eller mer. Det beror på att mikroskopiska sprickor öppnas och växer när materialet dras isär, medan de pressas ihop när det trycks. Hållfastheten mäts genom att en provkropp belastas i en press tills den går sönder, och det uppmätta värdet kan bero både på provkroppens form och på hur den hålls fast.' },
+      { type: 'p', html: 'Kunskapen används överallt i byggandet. Betong armeras med stålstänger i de delar som dras isär, eftersom stålet har hög draghållfasthet. Och valv och bågar, från romerska akvedukter till moderna broar, är formade så att stenen nästan bara trycks ihop, eftersom den tål det betydligt bättre.' }
+    ]
+  },
+  {
+    id: 'finita-elementmetoden',
+    term: 'Finita elementmetoden',
+    former: ['finita elementmetoden', 'finita elementmetod'],
+    kort: 'En beräkningsmetod där ett föremål delas upp i ett stort antal små bitar, element, vars påverkan på varandra räknas ut i en dator. Den används för att räkna ut spänningar, värmeflöden och svängningar i allt från broar till bilar.',
+    relaterade: ['mekanisk-spanning'],
+    body: [
+      { type: 'p', html: 'Att räkna ut exakt hur krafterna fördelar sig inne i en bro, en flygplansvinge eller ett knäimplantat går nästan aldrig med en enkel formel. Formen är för krånglig. Finita elementmetoden löser det genom att dela upp föremålet i tusentals eller miljontals små bitar, ofta trianglar eller små pyramider, som vart och ett är så enkelt att det går att beskriva med några få ekvationer.' },
+      { type: 'p', html: 'Varje bit hänger ihop med sina grannar i hörnen. Datorn ställer upp villkoret att krafterna i varje hörn ska ta ut varandra och att bitarna inte får glida isär, och löser sedan alla ekvationer på en gång. Resultatet blir en karta över till exempel spänningen eller temperaturen i hela föremålet, ofta visad i färger. Ju mindre bitarna är, desto noggrannare blir svaret, men desto längre tid tar beräkningen.' },
+      { type: 'p', html: 'Metoden utvecklades på 1950- och 1960-talen, bland annat för flygindustrin, och är i dag ett standardverktyg för ingenjörer och forskare. Den används för att hitta svaga punkter innan något byggs, men en beräkning blir aldrig bättre än de antaganden den bygger på, så resultaten jämförs med försök när det går.' }
+    ]
+  },
+  {
     id: 'tokamak',
     term: 'Tokamak',
     former: ['tokamak', 'tokamaken', 'tokamaker', 'tokamakerna', 'tokamakreaktor', 'tokamakreaktorn', 'tokamakreaktorer'],

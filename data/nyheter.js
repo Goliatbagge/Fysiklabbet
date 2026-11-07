@@ -103,6 +103,62 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-08-spricka-pa-langden",
+    date: "2026-11-08",
+    title: "Därför spricker sten på längden när den trycks ihop",
+    deck: "Trycker man ihop en cylinder av sten eller keramik mellan två plattor spricker den ofta längs tryckriktningen, som om den drogs isär från sidorna. Forskare i USA har räknat fram en förklaring: plattorna hindrar materialet från att bli tjockare, och då uppstår en dragspänning inne i kroppen.",
+    category: "Mekanik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-11-08-spricka-pa-langden.jpg",
+    imageAlt: "En grå betongcylinder ligger på sidan på ett brunt underlag efter att ha tryckts sönder. Ändarna har bruna gummikapsyler. Stora flagor har lossnat på ena sidan, och längs cylindern löper en lång spricka. Betongdamm ligger på underlaget.",
+    imageCredit: "Foto: Xb-70 på engelskspråkiga Wikipedia, via Wikimedia Commons (public domain), beskuren. Bilden visar en betongcylinder efter ett vanligt tryckprov, inte forskarnas beräkningar. Brottet är delvis ett snett skjuvbrott.",
+    tags: ["mekanik", "tryck", "hållfasthet", "sprickor", "spröda material", "poissons tal", "friktion", "newtons första lag", "bergmekanik", "keramik", "betong"],
+    sources: [
+      { name: "Physics Magazine: Why Brittle Solids Crack Under Pressure (Ryan Wilkinson, 6 november 2026)", url: "https://physics.aps.org/articles/v19/151" },
+      { name: "Physical Review Letters: studien (abstract)", url: "https://journals.aps.org/prl/abstract/10.1103/j8x1-hy4t" },
+      { name: "arXiv: studien i fulltext (CC BY 4.0)", url: "https://arxiv.org/abs/2609.22558" }
+    ],
+    research: {
+      citation: "M. Khodadad, F. Barthelat, J. D. Clayton, G. Gazonas och K. Dayal, ”Compressive Splitting in Brittle Solids: The Inverse of Wrinkling in Sheets”, Physical Review Letters 137, 196101 (2026), publicerad 6 november 2026. Kollegialt granskad. Förtryck: arXiv:2609.22558.",
+      url: "https://doi.org/10.1103/j8x1-hy4t"
+    },
+    larare: {
+      moment: [
+        { label: "Tryck och tryckkraft", href: "katalog.html?id=fy1-5.2" },
+        { label: "Kraft och Newtons första lag", href: "katalog.html?id=fy1-3.1" },
+        { label: "Friktion", href: "katalog.html?id=fy1-3.6" }
+      ],
+      fragor: [
+        "Tänk dig provkroppen delad av ett lodrätt snitt. Rita krafterna i sidled på den vänstra halvan och visa med Newtons första lag att den högra halvan sammantaget måste trycka på den vänstra. Hur kan det ändå finnas dragning mitt i kroppen? Titta på färgerna i figuren.",
+        "Enligt modellen försvinner dragningen helt om materialet inte blir tjockare när det trycks ihop. Vad säger det om vad som orsakar sprickorna?",
+        "Ett litet tryck från sidorna gör provkroppen mycket starkare enligt formeln. Hur kan det vara viktigt för berg djupt nere i jordskorpan, jämfört med berg nära ytan?"
+      ]
+    },
+    body: [
+      { type: "p", html: "Tryck ihop en cylinder av granit, betong eller keramik mellan två stålplattor tills den går sönder, så händer ofta något oväntat. Sprickorna går inte på tvären, utan längs med cylindern, parallellt med den kraft som trycker ihop den. Materialet beter sig som om det drogs isär från sidorna, fast ingen drar i det. Samma sorts brott syns i så olika material som berg, betong, avancerad keramik och is, och trots årtionden av forskning har det varit oklart varför det uppstår." },
+      { type: "p", html: "Nu föreslår Maryam Khodadad och Kaushik Dayal vid Carnegie Mellon University i USA, tillsammans med kolleger vid University of Colorado och den amerikanska arméns forskningslaboratorium, en enkel förklaring. Studien publicerades i <em>Physical Review Letters</em> den 6&nbsp;november." },
+      { type: "h2", text: "Tre förklaringar som inte räckte" },
+      { type: "p", html: "Det har funnits tre huvudsakliga förklaringar. Den vanligaste utgår från att varje verkligt material innehåller mikroskopiska sprickor, som växer när materialet trycks ihop och till slut går samman till stora. En annan beskriver brottet som en tävlan om energi mellan ett helt och ett spjälkat material, och en tredje ser det som att delar av materialet glider mot varandra. Enligt författarna fångar var och en en del av bilden. Men den första bygger på hur defekterna råkar vara fördelade, den andra säger inte vad som sätter i gång brottet, och den tredje kan inte förklara att granit får öppna sprickor längs tryckriktningen innan den går sönder." },
+      { type: "h2", text: "Plattorna hindrar kroppen från att bli tjockare" },
+      { type: "p", html: "Den nya förklaringen börjar i något man kan se när man trycker ihop ett suddgummi: det blir kortare och samtidigt lite tjockare. Hur mycket tjockare anges av Poissons tal. För sten och keramik ligger det ofta mellan 0,1 och 0,3, och för gummi nära 0,5. I en tryckprovning sitter provkroppens ändar fast mot plattorna, eftersom friktionen hindrar ändytorna från att glida utåt. Mitten buktar därför ut, medan ändarna inte kan bli bredare alls." },
+      { type: "p", html: "Forskarna räknade fram hur materialet påverkas i en tvådimensionell modell av ett elastiskt block som är dubbelt så högt som brett, med ändar som sitter helt fast mot plattorna. De använde finita elementmetoden, där kroppen delas upp i ett stort antal små bitar vars krafter på varandra räknas ut i en dator. Resultatet är att det uppstår ett område mitt i kroppen där materialet dras isär i sidled, trots att hela kroppen trycks ihop. Forskarna antar att spjälkningen börjar när dragspänningen där, alltså den dragande kraften per area, når materialets draghållfasthet. Den första sprickan blir då lodrät, längs tryckriktningen." },
+      { type: "image", src: "nyheter/bilder/2026-11-08-spricka-pa-langden-2.jpg", alt: "En hög rektangel färgad i rött och blått. Upptill och nedtill finns mörkblå bågformade områden märkta Compressive zone. I mitten finns ett stort rött område märkt Tensile hotspot. Streckade linjer skiljer de röda och blå områdena åt. Till höger en färgskala från mörkblått till mörkrött.", caption: "Beräknad spänning i sidled i en provkropp som trycks ihop uppifrån och nedifrån mellan plattor som den sitter fast mot. Rött betyder att materialet dras isär i sidled, blått att det trycks ihop. Nära plattorna trycks materialet ihop, men i mitten finns ett område med dragning. Där börjar sprickan enligt modellen.", credit: "Figur: Khodadad m.fl., arXiv:2609.22558, utsnitt ur figur 2 (CC BY 4.0)" },
+      { type: "p", html: "Forskarna beskriver mekanismen som motsatsen till veck i ett gummiark. Drar man i ett tunt ark som sitter fast i båda ändarna kan det inte bli smalare vid ändarna, och då bildas veck längs dragriktningen. I provkroppen är allt omvänt: tryck i stället för drag, och sprickor i stället för veck." },
+      { type: "h2", text: "Bara någon procent av trycket" },
+      { type: "p", html: "Dragningen i mitten är liten. För sten och keramik, med Poissons tal upp till omkring 0,3, är den största dragspänningen bara någon eller några procent av tryckspänningen, och kvoten, som forskarna kallar $k$, beror enbart på kroppens form och på Poissons tal, inte på hur styvt materialet är. Ett material som inte blir tjockare när det trycks ihop skulle inte få någon dragning alls. Ur detta följer en formel för den tryckspänning $\\sigma_\\mathrm{krit}$ där kroppen börjar spjälkas: $\\sigma_\\mathrm{krit} = \\dfrac{\\sigma_\\mathrm{t} + \\sigma_\\mathrm{sida}}{k}$, där $\\sigma_\\mathrm{t}$ är draghållfastheten och $\\sigma_\\mathrm{sida}$ ett tryck som verkar på kroppen från sidorna." },
+      { type: "p", html: "Enligt forskarna är ett materials tryckhållfasthet därför ingen egen egenskap, utan bestäms av draghållfastheten, Poissons tal och provkroppens form. Formeln säger också att ett sidotryck lika stort som draghållfastheten fördubblar tryckhållfastheten. Redan ett sidotryck på någon procent av trycket uppifrån tar bort dragningen i mitten helt, och då kan materialet inte spjälkas. Det stämmer med att berg tål betydligt mer när det är inneslutet." },
+      { type: "quote", html: "Resultaten tyder på att ett sprött materials tryckhållfasthet inte bara beror på själva materialet, utan också på dess form och på hur det hålls fast.", cite: "Maryam Khodadad, Carnegie Mellon University, till Physics Magazine (översatt)" },
+      { type: "h2", text: "Jämfört med gamla mätningar" },
+      { type: "p", html: "Forskarna gjorde inga nya försök. I stället jämförde de formeln med tidigare publicerade mätningar på sex material: en konstgjord bergart, sintrad aluminiumnitrid, glaskeramiken Pyroceram, kiselkarbid, granit och bergsalt. Eftersom modellen beskriver ett felfritt material ger den ett övre tak, och verkliga material går sönder vid betydligt lägre tryck. Forskarna skalade därför ned modellens värden med en faktor som anpassades till mätningarna för varje material, mellan 0,016 och 0,09. Det modellen förutsäger på egen hand är att hållfastheten växer linjärt med sidotrycket, och hur snabbt i förhållande till hållfastheten utan sidotryck. Den formen stämde med mätningarna för alla sex." },
+      { type: "p", html: "Martin Ostoja-Starzewski vid University of Illinois Urbana-Champaign, som inte deltog i studien, tycker att det är intressant att spjälkningen enligt modellen styrs av geometrin, ”snarare än av slumpmässiga fördelningar av defekter i materialet”, som han säger till <em>Physics Magazine</em>. Forskarna vill nu undersöka porösa och ojämna material, där vätsketryck och inre struktur också spelar in. Det kan enligt dem hjälpa till att förstå hur ben bryts och hur berg spricker vid utvinning av geotermisk energi och vid lagring av koldioxid under jord." },
+      { type: "fact", title: "Visste du?", items: [
+        "Betong tål ungefär tio gånger större tryckspänning än dragspänning. Därför gjuts stålarmering in i de delar av en balk som dras isär.",
+        "Draghållfastheten hos berg och betong mäts ofta med det så kallade brasilianska provet. En cylindrisk skiva trycks ihop längs en diameter och spricker längs just den diametern, eftersom trycket ger dragning på tvären.",
+        "Standarderna för tryckprovning har länge haft korrektionsfaktorer för hur hög provkroppen är i förhållande till sin bredd. Enligt författarna ger den nya formeln en mekanisk förklaring till dem."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-07-fisken-som-foljer-en-granne",
     date: "2026-11-07",
     title: "En fisk i stimmet tycks följa bara en granne i taget",

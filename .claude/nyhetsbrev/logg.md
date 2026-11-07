@@ -30,7 +30,7 @@ Format:
   Skärmdumparna tagna i Chromium med lokala React/Babel/three/satellite.js (CDN spärrade; satellitbilden
   från reservkopian av banelementen, Tailwind saknades så bara scenen beskuren).
 - Veckans tips: utelämnat (brevet redan långt). tips.md orörd.
-- Teaser: hula-hoopens fysik ([BREVTEASER] överst i ko.md), kontrollerat mot data/nyheter.js och
+- Teaser: rockringens fysik ([BREVTEASER] överst i ko.md), kontrollerat mot data/nyheter.js och
   publicerat.md, ej publicerat. Teasat 2026-11-08. OBS: märkningen i ko.md och bockningen av
   Satelliter-punkten i planerat.md gjordes inte (uppdraget tillät bara utkast, logg och bilder i commit);
   bocka av Satelliter just nu i planerat.md.

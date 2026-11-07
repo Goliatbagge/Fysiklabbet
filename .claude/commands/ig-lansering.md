@@ -92,6 +92,11 @@ node .claude/some/spela-in-reel.js --url http://localhost:8000/<sim>.html \
 - **Längd 6–12 s.** Förloppet ska hinna visas i sin helhet; ett kast
   eller ett fall är klart på 5–6 s, en pendel behöver några perioder.
   Instagram kräver minst 3 s; över 15 s tappar man tittaren.
+- **Filmen ritas bildruta för bildruta** med en styrd klocka (tar ett par
+  minuter; `--start` och `--paus` räknas i filmens tid). Kontrollera att
+  den flyter: `ffmpeg -i <fil>.mp4 -vf mpdecimate -an -f null -` ska ge
+  nästan lika många bildrutor som filmen har (30 per sekund). Ger den
+  betydligt färre hackar filmen, och då publiceras den inte.
 - **Kontrollera resultatet innan uppladdningen**: extrahera en bildruta
   mitt i klippet (`ffmpeg -y -ss 4 -i <fil>.mp4 -frames:v 1 <fil>-ruta.png`)
   och läs den. Rubriken ska stå i bandet överst, scenen fylla bredden,

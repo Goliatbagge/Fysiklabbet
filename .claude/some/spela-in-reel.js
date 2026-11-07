@@ -13,7 +13,7 @@
 //        --ut .shots/magnetror-reel.mp4 --titel "Magneten i kopparröret" \
 //        --klick "Släpp magneterna" --langd 8
 //
-// Flaggor:
+// Flaggor (--start och --paus räknas i filmens tid, inte i väggklockans):
 //   --url     Sidan som spelas in (obligatorisk).
 //   --ut      Utfil, .mp4 (obligatorisk). En .webm-råfil läggs bredvid och
 //             tas bort när mp4:an är klar.
@@ -50,6 +50,20 @@
 // aldrig i DOM:en, bara positioneras med CSS, så knapparna fungerar under
 // inspelningen.
 //
+// Filmen ritas bildruta för bildruta med en STYRD KLOCKA (sedan 2026-11-07).
+// Tidigare spelades sidan in i realtid med page.screencast, men headless
+// Chrome hinner inte rita en 3D-scen 30 gånger per sekund: elmotorreelen
+// hade 121 unika bildrutor av 311 (cirka 12 per sekund) och upplevdes som
+// hackig på Instagram. Nu byts sidans klocka ut (requestAnimationFrame,
+// performance.now, Date.now, setTimeout/setInterval) innan sidans egna
+// skript körs. Medan sidan laddas och ramen byggs går klockan som vanligt;
+// när filmen börjar fryses den, och för varje bildruta flyttas tiden fram
+// exakt 1/30 s, simuleringen ritar en bild och skriptet tar en skärmdump.
+// Simuleringen tror att den går i realtid, och filmen får 30 jämna bilder
+// per sekund hur långsam datorn än är (inspelningen tar några minuter).
+// Klicken sker på en bestämd bildruta (--start, --paus). Gå inte tillbaka
+// till realtidsinspelning.
+//
 // Kräver puppeteer-core i %TEMP%\pptr-test (samma som verifierarna) och
 // ffmpeg (winget Gyan.FFmpeg; sökvägen hittas via PATH eller miljövariabeln
 // FFMPEG). Ljudspår: tyst AAC-spår läggs till — Instagram nekar ibland
@@ -58,7 +72,7 @@
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
-const { spawnSync } = require('child_process');
+const { spawn, spawnSync } = require('child_process');
 
 const PPTR = path.join(os.tmpdir(), 'pptr-test', 'node_modules', 'puppeteer-core');
 const puppeteer = require(PPTR);
@@ -98,13 +112,76 @@ const W = 1080;
 const H = FORMAT === '9:16' ? 1920 : 1350;
 const FPS = 30;
 const ut = path.resolve(arg.ut);
-const raw = ut.replace(/\.mp4$/i, '') + '.webm';
 const ffmpeg = hittaFfmpeg();
 
 // Bred vy: simuleringens vanliga desktop-layout. Höjden = ramens höjd så
 // att crop-rutan ryms i viewporten (puppeteer kräver det).
 const VIEW_W = 1700;
 const VIEW_H = H;
+
+// --- styrd klocka (körs i sidan före dess egna skript) -----------------
+// Läge "verklig": allt går som vanligt, men rAF-anropen samlas i en egen kö
+// som töms vid varje riktig bildruta. Läge "styrd" (frys()): tiden står
+// still tills steg(ms) flyttar fram den; då körs förfallna timers och
+// rAF-kön med den nya tiden, inne i en riktig bildruta så att det ritade
+// kommer med i nästa skärmdump.
+const KLOCKA = `(() => {
+  const P = performance, pNow = P.now.bind(P), dNow = Date.now;
+  const nRaf = window.requestAnimationFrame.bind(window);
+  const nST = window.setTimeout.bind(window), nCT = window.clearTimeout.bind(window);
+  const nSI = window.setInterval.bind(window), nCI = window.clearInterval.bind(window);
+  let styrd = false, t = 0, dBas = 0, pBas = 0;
+  let ko = [], nastaId = 1;
+  const timers = new Map(); let tId = 1e6;
+  P.now = () => styrd ? t : pNow();
+  const vNow = () => styrd ? dBas + (t - pBas) : dNow();
+  const _D = Date;
+  const ND = class extends _D {
+    constructor(...a) { if (a.length) super(...a); else super(vNow()); }
+    static now() { return vNow(); }
+  };
+  ND.parse = _D.parse; ND.UTC = _D.UTC;
+  window.Date = ND;
+  function tom(tid) {
+    const k = ko; ko = [];
+    for (const [, cb] of k) { try { cb(tid); } catch (e) { console.error(e); } }
+  }
+  function pump() { if (!styrd) { tom(pNow()); nRaf(pump); } }
+  nRaf(pump);
+  window.requestAnimationFrame = cb => { const id = nastaId++; ko.push([id, cb]); return id; };
+  window.cancelAnimationFrame = id => { ko = ko.filter(x => x[0] !== id); };
+  window.setTimeout = (cb, ms, ...a) => {
+    if (!styrd) return nST(cb, ms, ...a);
+    const id = tId++; timers.set(id, { at: t + (+ms || 0), cb, a }); return id;
+  };
+  window.setInterval = (cb, ms, ...a) => {
+    if (!styrd) return nSI(cb, ms, ...a);
+    const iv = Math.max(1, +ms || 0);
+    const id = tId++; timers.set(id, { at: t + iv, cb, a, iv }); return id;
+  };
+  window.clearTimeout = id => { timers.has(id) ? timers.delete(id) : nCT(id); };
+  window.clearInterval = id => { timers.has(id) ? timers.delete(id) : nCI(id); };
+  function korTimers() {
+    for (let varv = 0; varv < 1000; varv++) {
+      let id = null, m = null;
+      for (const [k, v] of timers) if (v.at <= t && (!m || v.at < m.at)) { id = k; m = v; }
+      if (!m) return;
+      if (m.iv) m.at += m.iv; else timers.delete(id);
+      try { if (typeof m.cb === 'function') m.cb(...m.a); } catch (e) { console.error(e); }
+    }
+  }
+  window.__reelKlocka = {
+    frys() { pBas = pNow(); dBas = dNow(); t = pBas; styrd = true; },
+    steg(ms) {
+      return new Promise(res => nRaf(() => {
+        t += ms;
+        korTimers();
+        tom(t);
+        nRaf(() => nST(res, 0));
+      }));
+    },
+  };
+})();`;
 
 // --- själva inspelningen ---------------------------------------------
 (async () => {
@@ -115,6 +192,7 @@ const VIEW_H = H;
     defaultViewport: { width: VIEW_W, height: VIEW_H, deviceScaleFactor: 2 },
   });
   const page = await browser.newPage();
+  await page.evaluateOnNewDocument(KLOCKA);
   let url = arg.url;
   if (arg.block && !/[?&]block=/.test(url)) url += (url.includes('?') ? '&' : '?') + 'block=' + arg.block;
   await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
@@ -122,7 +200,7 @@ const VIEW_H = H;
   await new Promise(r => setTimeout(r, 2000));
 
   // Klick på knapp/etikett via text (samma helper som skärmdumpsskripten).
-  async function klicka(txt) {
+  async function klicka(txt, utanPaus) {
     const ok = await page.evaluate(t => {
       const kand = [...document.querySelectorAll('button, label, a, summary, [role="button"]')];
       const b = kand.find(b => (b.textContent || '').trim().toLowerCase().includes(t.toLowerCase()));
@@ -133,7 +211,7 @@ const VIEW_H = H;
     }, txt);
     console.log((ok ? 'klickade: ' : 'HITTADE INTE: ') + (ok || txt));
     if (!ok) process.exitCode = 3;
-    await new Promise(r => setTimeout(r, PAUS));
+    if (!utanPaus) await new Promise(r => setTimeout(r, PAUS));
   }
 
   if (arg.js) await page.evaluate(arg.js);
@@ -152,7 +230,9 @@ const VIEW_H = H;
     let el = null;
     if (block) {
       const ruta = document.querySelector(`[data-block="${block}"],[data-blockkort="${block}"],[data-blocknr="${block}"]`);
-      el = ruta ? ruta.querySelector(VALJ) : null;
+      // Ankaret kan sitta PÅ det element som ska filmas (minisimuleringarna
+      // får sitt data-block på .lab-minisim själv), inte bara på en ruta runt det.
+      el = ruta ? (ruta.matches(VALJ) ? ruta : ruta.querySelector(VALJ)) : null;
     }
     if (!el) el = document.querySelector(VALJ);
     if (!el) return { fel: 'hittar inget element för ' + VALJ };
@@ -214,31 +294,40 @@ const VIEW_H = H;
   console.log(`scen ${Math.round(info.bredd)}×${Math.round(info.hojd)} → skala ${info.skala.toFixed(3)}, band ${Math.round(info.bandH)} px, ram ${W}×${H}`);
   await new Promise(r => setTimeout(r, 600));
 
-  const recorder = await page.screencast({
-    path: raw, ffmpegPath: ffmpeg, fps: FPS,
-    crop: { x: 0, y: 0, width: W, height: H },
+  // Bildruta för bildruta med den styrda klockan (se filhuvudet).
+  const N = Math.round(LANGD * FPS);
+  const klickVid = new Map();
+  arg.klick.forEach((t, j) => {
+    const i = Math.round((START + j * PAUS) / 1000 * FPS);
+    klickVid.set(i, (klickVid.get(i) || []).concat(t));
   });
-  const t0 = Date.now();
-  if (arg.klick.length) {
-    await new Promise(r => setTimeout(r, START));
-    for (const t of arg.klick) await klicka(t);
-  }
-  const kvar = LANGD * 1000 - (Date.now() - t0);
-  if (kvar > 0) await new Promise(r => setTimeout(r, kvar));
-  await recorder.stop();
-  await browser.close();
-
-  // webm → mp4 (H.264, yuv420p, 30 fps, tyst AAC-spår, faststart).
-  const ff = spawnSync(ffmpeg, [
-    '-y', '-loglevel', 'error', '-i', raw,
+  const ff = spawn(ffmpeg, [
+    '-y', '-loglevel', 'error',
+    '-f', 'image2pipe', '-framerate', String(FPS), '-c:v', 'mjpeg', '-i', '-',
     '-f', 'lavfi', '-i', 'anullsrc=r=44100:cl=stereo',
     '-shortest', '-r', String(FPS),
     '-vf', `scale=${W}:${H}:flags=lanczos,format=yuv420p`,
-    '-c:v', 'libx264', '-preset', 'medium', '-crf', '19', '-profile:v', 'high', '-level', '4.0',
+    '-c:v', 'libx264', '-preset', 'slow', '-crf', '17', '-profile:v', 'high', '-level', '4.1',
     '-c:a', 'aac', '-b:a', '64k', '-movflags', '+faststart', ut,
-  ], { encoding: 'utf8' });
-  if (ff.status !== 0) { console.error('ffmpeg misslyckades:\n' + ff.stderr); process.exit(5); }
-  fs.unlinkSync(raw);
+  ], { stdio: ['pipe', 'ignore', 'pipe'] });
+  let fferr = '';
+  ff.stderr.on('data', d => { fferr += d; });
+  const ffKlar = new Promise(r => ff.on('close', r));
+
+  await page.evaluate(() => window.__reelKlocka.frys());
+  const t0 = Date.now();
+  for (let i = 0; i < N; i++) {
+    for (const t of (klickVid.get(i) || [])) await klicka(t, true);
+    await page.evaluate(ms => window.__reelKlocka.steg(ms), 1000 / FPS);
+    const buf = await page.screenshot({ type: 'jpeg', quality: 94, clip: { x: 0, y: 0, width: W, height: H } });
+    if (!ff.stdin.write(buf)) await new Promise(r => ff.stdin.once('drain', r));
+    if (i % FPS === FPS - 1) process.stdout.write(`\r${i + 1}/${N} bildrutor (${Math.round((Date.now() - t0) / 1000)} s)`);
+  }
+  process.stdout.write('\n');
+  ff.stdin.end();
+  const kod = await ffKlar;
+  await browser.close();
+  if (kod !== 0) { console.error('ffmpeg misslyckades:\n' + fferr); process.exit(5); }
 
   const probe = spawnSync(path.join(path.dirname(ffmpeg), 'ffprobe'), [
     '-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height,r_frame_rate:format=duration',

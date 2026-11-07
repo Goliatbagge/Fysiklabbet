@@ -89,6 +89,13 @@
         .tre-mount.pointer { cursor: ew-resize; }
         @media (max-width: 600px) {
             body.lab-sim .scene-wrap:not(:fullscreen) .tre-mount { position: relative; inset: auto; height: 440px; }
+            /* Mobil fullskärm: scenen måste ligga I FLÖDET med egen höjd, annars
+               hittar sim-dock.js ingen scen och avläsning, ledtext och handtag
+               centreras mitt över bilden (påpekat 2026-11-07). */
+            body.lab-sim .scene-wrap:is(:fullscreen, :-webkit-full-screen) .tre-mount {
+                position: sticky; inset: auto; top: 0; z-index: 2;
+                flex: 0 0 auto; width: 100%; height: 52vh;
+            }
         }
 
         .scene-hint {
@@ -1021,8 +1028,8 @@
                 const ro = new ResizeObserver(() => {
                     renderer.setSize(W(), H());
                     camera.aspect = W() / H();
-                    // samma vågräta synfält (44°) på alla skärmar, så att magnetens hela väg ryms
-                    camera.fov = Math.max(28, Math.min(62, 2 * Math.atan(Math.tan(22 * Math.PI / 180) / camera.aspect) * 180 / Math.PI));
+                    // vågrätt synfält 44° (38° på smala/stående skärmar) så att magnetens hela väg ryms
+                    camera.fov = Math.max(28, Math.min(62, 2 * Math.atan(Math.tan((camera.aspect < 1 ? 19 : 22) * Math.PI / 180) / camera.aspect) * 180 / Math.PI));
                     camera.updateProjectionMatrix();
                 });
                 ro.observe(el);

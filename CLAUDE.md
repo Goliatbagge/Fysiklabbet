@@ -2939,11 +2939,38 @@ du ändrar):
    egen höjd i flödet på mobil i fullskärm (`position: relative; height:
    58vh` under 600 px), som i `fysik2-dubbelspalt-3d-app.html`.
 
+5. **⛔ En Three.js-scen i en absolut positionerad behållare** (`.tre-mount`,
+   `.motor-mount` med `position: absolute; inset: 0`) är samma fälla, och
+   den är lätt att missa eftersom normalläget på mobil redan har en egen
+   regel. I fullskärm hittade docken ingen scen, och avläsningsrutan,
+   ledtexten och handtaget "Visa verktyg" hamnade mitt över bilden (Lenz
+   lag i 3D, påpekat 2026-11-07: "massa rutor och skit i vägen"). **Varje
+   3D-scen ska därför ha BÅDA mobilreglerna:**
+   ```css
+   @media (max-width: 600px) {
+     body.lab-sim .scene-wrap:not(:fullscreen) .tre-mount { position: relative; inset: auto; height: 440px; }
+     body.lab-sim .scene-wrap:is(:fullscreen, :-webkit-full-screen) .tre-mount {
+       position: sticky; inset: auto; top: 0; z-index: 2; flex: 0 0 auto; width: 100%; height: 52vh;
+     }
+   }
+   ```
+   Renderaren måste följa behållarens storlek (`ResizeObserver`), och
+   kamerans synfält ska räknas om efter proportionen så att hela försöket
+   ryms och fyller bredden på en stående skärm.
+6. **Granska varje vy, inte bara standardvyn.** Har simuleringen en 3D-vy,
+   ett annat försök eller ett läge bakom en knapp ska det läget också
+   provas i mobil fullskärm. Lägg adressen med parametrar
+   (`fysik2-lenz-lag-app.html?vy=3d&ledare=spole`) i `EXTRA_LAGEN` i
+   `verify-mobil-scen.js`, så granskas den varje gång. Skärmdumpa
+   fullskärmen på 390 px innan en ny simulering räknas som klar.
+
 **Kör `node .claude/verify-mobil-scen.js` före commit** när du rört en scen,
 en verktygsruta eller sektion 8. Den startar 390×744, går in i fullskärm i
 varje simulering och mäter att ingen verktygsruta ligger ovanpå ritytan,
-klipps bort, kollapsar ramen eller krockar med avläsningsrutan. Kräver
-dev-servern på port 8000.
+klipps bort, kollapsar ramen eller krockar med avläsningsrutan. Ligger
+scenen ur flödet granskas den största absoluta canvas- eller svg-behållaren
+i stället, och då får varken verktygen, avläsningen, ledtexten eller
+handtaget ligga över den. Kräver dev-servern på port 8000.
 
 ### Inga överlappande objekt
 

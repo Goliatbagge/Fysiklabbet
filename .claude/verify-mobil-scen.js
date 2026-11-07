@@ -31,9 +31,17 @@ try {
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 const argv = process.argv.slice(2);
+// Lägen som inte syns i standardvyn (en 3D-vy bakom en knapp, ett annat
+// försök) granskas också: lägg adressen med parametrar här. Felet har hänt:
+// Lenz lags 3D-vy hade rutorna mitt över scenen i mobil fullskärm, men bara
+// 2D-vyn granskades (påpekat 2026-11-07).
+const EXTRA_LAGEN = [
+    'fysik2-lenz-lag-app.html?vy=3d&ledare=spole',
+];
 const files = argv.length ? argv : fs.readdirSync(ROOT)
     .filter(f => /^fysik[12]-.*\.html$/.test(f))
-    .filter(f => /styles-laborans-sim\.css/.test(fs.readFileSync(path.join(ROOT, f), 'utf8')));
+    .filter(f => /styles-laborans-sim\.css/.test(fs.readFileSync(path.join(ROOT, f), 'utf8')))
+    .concat(EXTRA_LAGEN);
 
 // Mäter alla scenramar och deras verktygsrutor i sidan.
 const MAT = function () {
@@ -48,10 +56,27 @@ const MAT = function () {
         const kids = [...w.children];
         const panelEls = kids.filter(c => PANELER.some(p => c.classList.contains(p)));
         // "Mediet" = första barnet som varken är en panel eller en knapp
+        // (Avläsningen räknas aldrig som scen: i ett fall där scenen låg ur
+        // flödet blev .scene-info "mediet", och då granskades ingenting.)
         const media = kids.find(c => !PANELER.some(p => c.classList.contains(p))
                                   && !IGNORERA.some(p => c.classList.contains(p))
+                                  && !c.classList.contains('scene-info')
                                   && getComputedStyle(c).position !== 'absolute'
                                   && getComputedStyle(c).position !== 'fixed');
+        // Ligger scenen ur flödet (position: absolute) hittar sim-dock.js
+        // ingen scen att docka under, och avläsning, ledtext och handtag
+        // flödar in mitt över bilden. Mät då den största absoluta
+        // canvas-/svg-behållaren som "dold scen".
+        let dold = null;
+        if (!media) {
+            kids.filter(c => !PANELER.some(p => c.classList.contains(p))
+                          && !IGNORERA.some(p => c.classList.contains(p))
+                          && !c.classList.contains('scene-info')
+                          && getComputedStyle(c).position === 'absolute'
+                          && c.querySelector('canvas, svg') !== null || c.matches('canvas, svg'))
+                .forEach(c => { const r = c.getBoundingClientRect();
+                    if (!dold || r.width * r.height > dold.w * dold.h) dold = rect(c); });
+        }
         out.push({
             i, cls: w.className.split(/\s+/)[0],
             // ark-läge: scenen fyller skärmen, verktygen ligger som ett
@@ -63,6 +88,7 @@ const MAT = function () {
             scrollTop: w.scrollTop,
             wrap: rect(w),
             media: media ? { tag: media.tagName.toLowerCase(), box: rect(media) } : null,
+            dold,
             paneler: panelEls.map(p => ({
                 cls: PANELER.find(c => p.classList.contains(c)),
                 pos: getComputedStyle(p).position,
@@ -166,6 +192,21 @@ function granska(m, lage) {
                 if (p.display === 'none' || p.box.h === 0 || p.cls === 'scene-hint') return;
                 const o = overlapp(s.info.box, p.box);
                 if (o > 200) fel.push(`${lage}: .scene-info krockar med .${p.cls} i ${namn} (${o} px²)`);
+            });
+        }
+        // 4c. Scen ur flödet utan ark-läge: ingen ruta får ligga över den.
+        //     Gäller även ledtexten och handtaget, som annars centreras
+        //     mitt över bilden (Lenz lag i 3D, påpekat 2026-11-07).
+        if (!s.media && !s.ark && s.dold && s.dold.h > 100) {
+            const rutor = s.paneler.filter(p => p.display !== 'none' && p.box.h > 0)
+                .map(p => ({ namn: '.' + p.cls, box: p.box }));
+            if (s.info) rutor.push({ namn: '.scene-info', box: s.info.box });
+            if (s.handtag) rutor.push({ namn: '.' + s.handtag.cls.split(/\s+/)[0], box: s.handtag.box });
+            rutor.forEach(r => {
+                const o = overlapp(r.box, s.dold);
+                if (o > 400) fel.push(`${lage}: ${r.namn} ligger över scenen i ${namn} (${o} px²), `
+                    + 'scenen ligger ur flödet (position: absolute) så docken hittar den inte. '
+                    + 'Ge den position: relative/sticky och egen höjd på mobil i fullskärm');
             });
         }
         // 5. Fullskärmsknappen måste vara nåbar

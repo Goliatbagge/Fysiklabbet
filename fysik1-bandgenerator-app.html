@@ -121,7 +121,7 @@
         /* ── Formelkort ── */
         .vdg-formula {
             display: flex; align-items: center; justify-content: center;
-            flex-wrap: wrap; gap: 0.75rem 1.0rem;
+            flex-wrap: wrap; gap: 0.75rem 0.5rem;
             font-family: 'Poppins', sans-serif; color: var(--lab-ink, #0f1620);
             font-size: 1.05rem;
         }
@@ -133,7 +133,7 @@
         }
         .vdg-frac { display: flex; flex-direction: column; align-items: center; }
         .vdg-frac .num, .vdg-frac .den {
-            padding: 0.1rem 0.55rem; text-align: center; white-space: nowrap;
+            padding: 0.1rem 3px; text-align: center; white-space: nowrap;
         }
         .vdg-frac .den { border-top: 2px solid currentColor; align-self: stretch; }
         .vdg-op { font-weight: 500; }
@@ -2181,10 +2181,10 @@
                         </div>
                         <span className="vdg-op">=</span>
                         <div className="vdg-frac">
-                            <span className="flbl">Laddning</span>
+                            <span className="flbl brak-etikett">Laddning</span>
                             <span className="num"><em>Q</em></span>
                             <span className="den"><em>q</em><sub>e</sub></span>
-                            <span className="flbl">Elementarladdning</span>
+                            <span className="flbl brak-etikett">Elementarladdning</span>
                         </div>
                         <span className="vdg-op">=</span>
                         <div className="vdg-frac">

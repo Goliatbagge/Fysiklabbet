@@ -364,8 +364,8 @@
         );
         const Frac = ({ top, bottom, size = 19 }) => (
             <div className="flex flex-col items-center" style={{ lineHeight: 1.15, fontSize: size }}>
-                <span style={{ padding: '0 8px 3px' }}>{top}</span>
-                <span style={{ padding: '3px 8px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bottom}</span>
+                <span style={{ padding: '0 3px 3px' }}>{top}</span>
+                <span style={{ padding: '3px 3px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bottom}</span>
             </div>
         );
 
@@ -533,7 +533,7 @@
         // bara sker MELLAN uttryck — aldrig mitt i (t.ex. mellan "E_k =" och
         // bråket). Grupperna linjerar på samma mittlinje via items-center.
         const FGroup = ({ children }) => (
-            <div className="flex items-center gap-x-3" style={{ flexWrap: 'nowrap' }}>{children}</div>
+            <div className="flex items-center gap-x-2" style={{ flexWrap: 'nowrap' }}>{children}</div>
         );
         const FormulaCard = ({ ep, ek }) => (
             <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-5 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
@@ -565,7 +565,7 @@
                 <FGroup>
                     <Vbl label="Rörelseenergi"><em>E</em><sub>k</sub></Vbl>
                     <span className="fnum">=</span>
-                    <Frac top={<span><span className="flbl" style={{ display: 'block', textAlign: 'center' }}>Massa · fart²</span><em>m</em> · <em>v</em>²</span>} bottom="2" />
+                    <Frac top={<span style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center' }}><span className="flbl brak-etikett">Massa · fart²</span><span><em>m</em> · <em>v</em>²</span></span>} bottom="2" />
                 </FGroup>
             </div>
         );

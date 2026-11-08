@@ -1620,17 +1620,17 @@
         );
         const Frac = ({ topLabel, top, bottomLabel, bottom }) => (
             <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
-                <span className="flbl">{topLabel}</span>
-                <span className="fnum">{top}</span>
+                <span className="flbl brak-etikett">{topLabel}</span>
+                <span className="fnum" style={{ padding: '0 3px' }}>{top}</span>
                 {/* nämnaren sträcks över kolumnens fulla bredd så att
                     bråkstrecket täcker hela täljaren */}
                 <span className="fnum" style={{ alignSelf: 'stretch', textAlign: 'center',
-                                                borderTop: '2px solid currentColor', paddingTop: 3, marginTop: 3 }}>{bottom}</span>
-                <span className="flbl">{bottomLabel}</span>
+                                                borderTop: '2px solid currentColor', padding: '3px 3px 0', marginTop: 3 }}>{bottom}</span>
+                <span className="flbl brak-etikett">{bottomLabel}</span>
             </div>
         );
         const FormulaCard = () => (
-            <div className="formula-card glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-4 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
+            <div className="formula-card glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-2 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
                 <Vbl label="Centripetalkraft"><em>F</em><sub>C</sub></Vbl>
                 <span className="fnum">=</span>
                 <Frac topLabel="Massa · fart²" top={<span><em>m</em>&thinsp;·&thinsp;<em>v</em>²</span>}

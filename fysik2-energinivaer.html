@@ -1472,24 +1472,24 @@
                             </p>
                             <div className="mt-6 flex flex-row flex-wrap items-stretch gap-6" style={{fontFamily: 'Poppins, sans-serif'}}>
                                 {/* Formel 1: E_n = -13,6 eV / n² */}
-                                <div className="flex items-center gap-3 flex-wrap px-6 py-4 rounded-xl border border-cyan-500/20 bg-slate-900/40">
+                                <div className="flex items-center gap-2 flex-wrap px-6 py-4 rounded-xl border border-cyan-500/20 bg-slate-900/40">
                                     <div style={{textAlign:'center'}}>
                                         <div className="text-xs font-semibold mb-1">Energinivå</div>
                                         <div className="text-2xl font-bold"><em>E</em><sub>n</sub></div>
                                     </div>
                                     <div className="text-xl text-slate-500">=</div>
-                                    <div style={{textAlign:'center'}}>
-                                        <div className="text-xs font-semibold mb-1">Rydbergs energi</div>
-                                        <div className="text-2xl font-bold">−13,6 eV</div>
-                                        <div style={{borderTop:'2px solid currentColor', marginTop:'3px', paddingTop:'3px'}}>
+                                    <div className="flex flex-col items-center">
+                                        <div className="text-xs font-semibold mb-1" style={{width:0, display:'flex', justifyContent:'center', whiteSpace:'nowrap'}}>Rydbergs energi</div>
+                                        <div className="text-2xl font-bold" style={{padding:'0 3px'}}>−13,6 eV</div>
+                                        <div style={{borderTop:'2px solid currentColor', marginTop:'3px', paddingTop:'3px', alignSelf:'stretch', textAlign:'center'}}>
                                             <div className="text-2xl font-bold"><em>n</em>²</div>
                                         </div>
-                                        <div className="text-xs font-semibold mt-1">Kvanttal</div>
+                                        <div className="text-xs font-semibold mt-1" style={{width:0, display:'flex', justifyContent:'center', whiteSpace:'nowrap'}}>Kvanttal</div>
                                     </div>
                                 </div>
 
                                 {/* Formel 2: ΔE = h·f = hc/λ */}
-                                <div className="flex items-center gap-3 flex-wrap px-6 py-4 rounded-xl border border-cyan-500/20 bg-slate-900/40">
+                                <div className="flex items-center gap-2 flex-wrap px-6 py-4 rounded-xl border border-cyan-500/20 bg-slate-900/40">
                                     <div style={{textAlign:'center'}}>
                                         <div className="text-xs font-semibold mb-1">Fotonenergi</div>
                                         <div className="text-2xl font-bold">Δ<em>E</em></div>
@@ -1507,19 +1507,19 @@
                                         </div>
                                     </div>
                                     <div className="text-xl text-slate-500">=</div>
-                                    <div style={{textAlign:'center'}}>
-                                        <div className="flex items-end justify-center gap-2">
+                                    <div className="flex flex-col items-center" style={{marginRight: 22}}>
+                                        <div className="flex items-end justify-center gap-2" style={{padding:'0 3px'}}>
                                             <div className="text-2xl font-bold leading-none"><em>h</em></div>
                                             <div className="text-2xl font-bold text-slate-400 leading-none">⋅</div>
-                                            <div style={{textAlign:'center'}}>
-                                                <div className="text-xs font-semibold mb-1">Ljushastighet</div>
+                                            <div className="flex flex-col items-center">
+                                                <div className="text-xs font-semibold mb-1" style={{width:0, display:'flex', justifyContent:'center', whiteSpace:'nowrap'}}>Ljushastighet</div>
                                                 <div className="text-2xl font-bold leading-none"><em>c</em></div>
                                             </div>
                                         </div>
-                                        <div style={{borderTop:'2px solid currentColor', marginTop:'3px', paddingTop:'3px'}}>
+                                        <div style={{borderTop:'2px solid currentColor', marginTop:'3px', paddingTop:'3px', alignSelf:'stretch', textAlign:'center'}}>
                                             <div className="text-2xl font-bold"><em>λ</em></div>
                                         </div>
-                                        <div className="text-xs font-semibold mt-1">Våglängd</div>
+                                        <div className="text-xs font-semibold mt-1" style={{width:0, display:'flex', justifyContent:'center', whiteSpace:'nowrap'}}>Våglängd</div>
                                     </div>
                                 </div>
                             </div>

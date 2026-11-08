@@ -588,12 +588,12 @@
         );
         const Frac = ({ top, bottom, size = 19 }) => (
             <div className="flex flex-col items-center" style={{ lineHeight: 1.15, fontSize: size, color: 'var(--lab-ink)' }}>
-                <span style={{ padding: '0 8px 3px' }}>{top}</span>
-                <span style={{ padding: '3px 8px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bottom}</span>
+                <span style={{ padding: '0 3px 3px' }}>{top}</span>
+                <span style={{ padding: '3px 3px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bottom}</span>
             </div>
         );
         const FormulaCard = ({ U, R, I, broken }) => (
-            <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-3 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
+            <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-2 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
                 <Vbl label="Spänning"><em>U</em></Vbl>
                 <span className="fnum">=</span>
                 <Vbl label="Resistans"><em>R</em></Vbl>

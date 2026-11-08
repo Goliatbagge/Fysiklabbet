@@ -54,7 +54,7 @@
         .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
                 color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
         .fnum { color: var(--lab-ink); font-size: 17px; }
-        .fden { border-top: 2px solid var(--lab-ink); margin-top: 3px; padding-top: 3px;
+        .fden { border-top: 2px solid var(--lab-ink); margin-top: 3px; padding: 3px 3px 0; align-self: stretch; text-align: center;
                 color: var(--lab-ink); font-size: 17px; }
 
         /* Scen-wrapper + fullskärm */
@@ -652,49 +652,49 @@
                         <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-10 gap-y-4"
                              style={{ fontFamily: 'Poppins, sans-serif' }}>
                             {/* cos α = g / (ω²·l) */}
-                            <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-2">
                                 <div style={{ textAlign: 'center' }}>
                                     <div className="flbl mb-1">Konvinkel</div>
                                     <div className="fnum">cos&thinsp;<em>α</em></div>
                                 </div>
                                 <span style={{ color: 'var(--lab-ink-muted)', fontSize: '17px' }}>=</span>
-                                <div style={{ textAlign: 'center' }}>
-                                    <div className="flbl mb-1">Tyngdfaktor</div>
-                                    <div className="fnum"><em>g</em></div>
+                                <div className="flex flex-col items-center">
+                                    <div className="flbl brak-etikett mb-1">Tyngdfaktor</div>
+                                    <div className="fnum" style={{ padding: '0 3px' }}><em>g</em></div>
                                     <div className="fden"><em>ω</em>²&thinsp;⋅&thinsp;<em>l</em></div>
-                                    <div className="flbl mt-1">Vinkelhast.² · längd</div>
+                                    <div className="flbl brak-etikett mt-1">Vinkelhast.² · längd</div>
                                 </div>
                             </div>
 
                             {/* T_period = 2π√(l·cos α / g) */}
-                            <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-2">
                                 <div style={{ textAlign: 'center' }}>
                                     <div className="flbl mb-1">Omloppstid</div>
                                     <div className="fnum"><em>T</em><sub>period</sub></div>
                                 </div>
                                 <span style={{ color: 'var(--lab-ink-muted)', fontSize: '17px' }}>=</span>
                                 <span style={{ color: 'var(--lab-ink)', fontSize: '17px' }}>2π&thinsp;√(</span>
-                                <div style={{ textAlign: 'center' }}>
-                                    <div className="flbl mb-1">Snörlängd · cosinus</div>
-                                    <div className="fnum"><em>l</em>&thinsp;cos&thinsp;<em>α</em></div>
+                                <div className="flex flex-col items-center">
+                                    <div className="flbl brak-etikett mb-1">Snörlängd · cosinus</div>
+                                    <div className="fnum" style={{ padding: '0 3px' }}><em>l</em>&thinsp;cos&thinsp;<em>α</em></div>
                                     <div className="fden"><em>g</em></div>
-                                    <div className="flbl mt-1">Tyngdfaktor</div>
+                                    <div className="flbl brak-etikett mt-1">Tyngdfaktor</div>
                                 </div>
                                 <span style={{ color: 'var(--lab-ink)', fontSize: '17px' }}>)</span>
                             </div>
 
                             {/* F_s = F_G / cos α */}
-                            <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-2">
                                 <div style={{ textAlign: 'center' }}>
                                     <div className="flbl mb-1">Spännkraft</div>
                                     <div className="fnum"><em>F</em><sub>s</sub></div>
                                 </div>
                                 <span style={{ color: 'var(--lab-ink-muted)', fontSize: '17px' }}>=</span>
-                                <div style={{ textAlign: 'center' }}>
-                                    <div className="flbl mb-1">Tyngdkraft</div>
-                                    <div className="fnum"><em>F</em><sub>G</sub></div>
+                                <div className="flex flex-col items-center">
+                                    <div className="flbl brak-etikett mb-1">Tyngdkraft</div>
+                                    <div className="fnum" style={{ padding: '0 3px' }}><em>F</em><sub>G</sub></div>
                                     <div className="fden">cos&thinsp;<em>α</em></div>
-                                    <div className="flbl mt-1">Konvinkel</div>
+                                    <div className="flbl brak-etikett mt-1">Konvinkel</div>
                                 </div>
                             </div>
                         </div>

@@ -955,10 +955,10 @@
         );
         const Frac = ({ top, bottom, cls }) => (
             <div className={'flex flex-col items-center ' + (cls || '')} style={{ lineHeight: 1.1 }}>
-                <span className="flbl" style={{ visibility: 'hidden' }}>x</span>
+                <span className="flbl brak-etikett" style={{ visibility: 'hidden' }}>x</span>
                 <span className="fnum" style={{ padding: '0 4px' }}>{top}</span>
                 <span className="fnum" style={{ alignSelf: 'stretch', textAlign: 'center', padding: '3px 4px 0', borderTop: '2px solid currentColor', marginTop: 3 }}>{bottom}</span>
-                <span className="flbl" style={{ visibility: 'hidden' }}>x</span>
+                <span className="flbl brak-etikett" style={{ visibility: 'hidden' }}>x</span>
             </div>
         );
         const Op = ({ c }) => <span className="fnum">{c}</span>;

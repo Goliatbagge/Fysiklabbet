@@ -332,10 +332,10 @@
         // nämnaren. Osynliga spacer-etiketter håller strecket på radens mittlinje.
         const FracL = ({ topLbl, top, botLbl, bot }) => (
             <div className="flex flex-col items-center" style={{ lineHeight: 1.15 }}>
-                <span className="flbl" style={topLbl ? {} : { visibility: 'hidden' }}>{topLbl || '·'}</span>
-                <span className="fnum" style={{ padding: '0 8px 3px' }}>{top}</span>
-                <span className="fnum" style={{ padding: '3px 8px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bot}</span>
-                <span className="flbl" style={botLbl ? {} : { visibility: 'hidden' }}>{botLbl || '·'}</span>
+                <span className="flbl brak-etikett" style={topLbl ? {} : { visibility: 'hidden' }}>{topLbl || '·'}</span>
+                <span className="fnum" style={{ padding: '0 3px 3px' }}>{top}</span>
+                <span className="fnum" style={{ padding: '3px 3px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bot}</span>
+                <span className="flbl brak-etikett" style={botLbl ? {} : { visibility: 'hidden' }}>{botLbl || '·'}</span>
             </div>
         );
         // Enkelt bråk utan ord-etiketter (till live-beräkningen)
@@ -357,17 +357,32 @@
             </span>
         );
 
+        // Bråk under rottecken: orden står utanför roten (ovanför och under), så
+        // att rottecknet bara blir så brett som symbolerna.
+        const RotBrak = ({ topLbl, top, botLbl, bot }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.15 }}>
+                <span className="flbl brak-etikett" style={{ marginBottom: 3 }}>{topLbl}</span>
+                <Sqrt>
+                    <span className="fnum" style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', lineHeight: 1.15 }}>
+                        <span style={{ padding: '0 3px 3px' }}>{top}</span>
+                        <span style={{ padding: '3px 3px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bot}</span>
+                    </span>
+                </Sqrt>
+                <span className="flbl brak-etikett">{botLbl}</span>
+            </div>
+        );
+
         const FormulaCard = () => (
-            <div className="formula-card glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-3 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
+            <div className="formula-card glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-2 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
                 <Vbl label="Periodtid"><em>T</em></Vbl>
                 <span className="fnum">=</span>
                 <span className="fnum">2<em>π</em></span>
                 <span className="fnum">·</span>
-                <Sqrt><FracL topLbl="Massa" top={<em>m</em>} botLbl="Fjäderkonstant" bot={<em>k</em>} /></Sqrt>
+                <RotBrak topLbl="Massa" top={<em>m</em>} botLbl="Fjäderkonstant" bot={<em>k</em>} />
                 <span className="fnum" style={{ margin: '0 10px', color: 'var(--lab-ink-muted)' }}>|</span>
                 <Vbl label="Vinkelhastighet"><em>ω</em></Vbl>
                 <span className="fnum">=</span>
-                <Sqrt><FracL topLbl="Fjäderkonstant" top={<em>k</em>} botLbl="Massa" bot={<em>m</em>} /></Sqrt>
+                <RotBrak topLbl="Fjäderkonstant" top={<em>k</em>} botLbl="Massa" bot={<em>m</em>} />
             </div>
         );
 

@@ -45,7 +45,7 @@
         .fnum { color: var(--lab-ink); font-size: 19px; white-space: nowrap; }
         /* Formelkortet bryts mellan den allmänna formeln och insättningen,
            aldrig mitt i en av dem. */
-        .fk-grupp { display: inline-flex; align-items: center; gap: 0.75rem; flex-wrap: nowrap; }
+        .fk-grupp { display: inline-flex; align-items: center; gap: 0.5rem; flex-wrap: nowrap; }
         @media (max-width: 600px) {
             .formula-card { justify-content: flex-start; }
             .formula-card .fnum { font-size: 15px; }
@@ -802,18 +802,18 @@
         );
         const Frac = ({ topLabel, top, bottomLabel, bottom }) => (
             <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
-                <span className="flbl" style={topLabel ? null : { visibility: 'hidden' }}>{topLabel || 'x'}</span>
+                <span className="flbl brak-etikett" style={topLabel ? null : { visibility: 'hidden' }}>{topLabel || 'x'}</span>
                 <span className="fnum" style={{ padding: '0 4px' }}>{top}</span>
                 <span className="fnum" style={{ alignSelf: 'stretch', textAlign: 'center', padding: '3px 4px 0',
                                                 borderTop: '2px solid currentColor', marginTop: 3 }}>{bottom}</span>
-                <span className="flbl" style={bottomLabel ? null : { visibility: 'hidden' }}>{bottomLabel || 'x'}</span>
+                <span className="flbl brak-etikett" style={bottomLabel ? null : { visibility: 'hidden' }}>{bottomLabel || 'x'}</span>
             </div>
         );
         const FormulaCard = ({ M, sek, dolt }) => {
             const t1 = sek[0], t2 = sek[1], v1 = M.vAt(t1), v2 = M.vAt(t2);
             const a = (v2 - v1) / (t2 - t1);
             return (
-                <div className="formula-card glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-3 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
+                <div className="formula-card glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-2 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
                     <span className="fk-grupp">
                         <Vbl label="Acceleration"><em>a</em></Vbl>
                         <span className="fnum">=</span>

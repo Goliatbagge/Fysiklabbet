@@ -1297,7 +1297,7 @@
                             </p>
 
                             {/* Introduktionsformel — raka divisionsstreck och definierade beteckningar */}
-                            <div className="inline-flex items-stretch gap-5 px-6 py-4 rounded-xl border border-cyan-500/20 bg-slate-900/50 max-w-full overflow-x-auto">
+                            <div className="inline-flex items-stretch gap-2 px-6 py-4 rounded-xl border border-cyan-500/20 bg-slate-900/50 max-w-full overflow-x-auto">
                                 {/* F = */}
                                 <div className="flex flex-col items-center justify-center">
                                     <div className="text-xs text-cyan-400/70 font-semibold mb-1">Gravitations­kraft</div>
@@ -1314,24 +1314,22 @@
                                 <div className="flex items-center text-2xl text-slate-500">·</div>
                                 {/* (m1·m2) / r² som riktigt bråk */}
                                 <div className="flex flex-col items-center justify-center text-center">
-                                    {/* Täljare: m1·m2 med etiketter ovan */}
-                                    <div className="flex items-end gap-2 mb-1">
-                                        <div className="flex flex-col items-center">
-                                            <div className="text-xs text-amber-300/70 font-semibold mb-1">Massa 1</div>
-                                            <div className="text-2xl font-bold text-amber-300"><em>m</em>₁</div>
-                                        </div>
+                                    {/* Täljare: m1·m2 med ett ord ovanför hela täljaren, så att
+                                        bråkstrecket bara blir så brett som symbolerna (CLAUDE.md,
+                                        Formelpresentation punkt 8). Etiketten har bredden 0 och får
+                                        gå ut över kanterna. */}
+                                    <div className="text-xs text-cyan-400/70 font-semibold mb-1" style={{ width: 0, display: 'flex', justifyContent: 'center', whiteSpace: 'nowrap' }}>Massorna</div>
+                                    <div className="flex items-end gap-1 mb-1" style={{ padding: '0 3px' }}>
+                                        <div className="text-2xl font-bold text-amber-300"><em>m</em>₁</div>
                                         <div className="text-2xl text-slate-500 mb-[2px]">·</div>
-                                        <div className="flex flex-col items-center">
-                                            <div className="text-xs text-sky-300/70 font-semibold mb-1">Massa 2</div>
-                                            <div className="text-2xl font-bold text-sky-300"><em>m</em>₂</div>
-                                        </div>
+                                        <div className="text-2xl font-bold text-sky-300"><em>m</em>₂</div>
                                     </div>
                                     {/* Bråkstreck */}
                                     <div className="border-t-2 border-slate-300 w-full"></div>
                                     {/* Nämnare: r² med etikett under */}
                                     <div className="flex flex-col items-center mt-1">
                                         <div className="text-2xl font-bold text-indigo-300"><em>r</em>²</div>
-                                        <div className="text-xs text-indigo-300/70 font-semibold mt-1">Avstånd²</div>
+                                        <div className="text-xs text-indigo-300/70 font-semibold mt-1" style={{ width: 0, display: 'flex', justifyContent: 'center', whiteSpace: 'nowrap' }}>Avstånd²</div>
                                     </div>
                                 </div>
                             </div>

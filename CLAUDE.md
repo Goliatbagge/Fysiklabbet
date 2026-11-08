@@ -232,6 +232,13 @@ node .claude/verify-uppgiftsruta.js [uppgift …]
 # Se "Kopplingsscheman: jämn fördelning och centrering" nedan.
 node .claude/verify-kopplingsschema.js
 
+# Verifiera BRÅKEN i simuleringarnas formelkort (KÖR FÖRE COMMIT när du
+# rört ett formelkort!) — bråkstrecket får inte vara mer än 12 px bredare
+# än symbolerna, och etiketterna får inte krocka med varandra eller med
+# symbolerna. Se Formelpresentation punkt 9. Kräver dev-servern på port
+# 8000 + playwright-core i %TEMP%\pptr-test.
+node .claude/verify-formelkort-brak.js [fil.html …]
+
 # Verifiera att föremål som ska ha KONTAKT i övningsbladens figurer
 # verkligen nuddar varandra (KÖR FÖRE COMMIT vid nya eller ändrade
 # övningsbladsfigurer!) — elementen som ska mötas märks med samma
@@ -3143,6 +3150,25 @@ Gäller överallt formler visas (ingress, header, paneler, förklaringar):
    (`ρ = m/V`, `a = F_R/m`): där får varje variabel sitt eget ord.
    Referensimpl: `FormulaCard` i `fysik2-transformator-app.html`
    (`Formel`/`Brak`/`Sym`-helpers).
+9. **Varje bråk i ett formelkort: smalt bråkstreck, tätt kring
+   likhetstecknet** (användarkrav 2026-11-08, alla simuleringar rättade
+   samma dag). Bråkstrecket ska bara vara så brett som täljare och
+   nämnare, med cirka 3 px luft på var sida (`padding: '0 3px'`), aldrig
+   lika brett som ordet ovanför eller under. Ge därför varje etikett i
+   ett bråk klassen `flbl brak-etikett` (central regel i
+   `styles-laborans-sim.css`): bredden 0, ordet går ut lika långt åt
+   båda håll. Mellanrummet mellan bråk och likhetstecken är cirka 8 px
+   (`gap-x-2`), inte `gap-x-3` eller mer.
+   - **Krockar två ord** (två bråk med etiketter bredvid varandra):
+     dela orden på två rader med `<br />`, både ovanför och under, så att
+     bråket står kvar mitt på raden (`fysik1-effekt-verkningsgrad-app.html`).
+   - **Bråk under rottecken**: orden står utanför roten, ovanför och
+     under, så att rottecknet inte breddas (`RotBrak` i
+     `fysik2-resonans-app.html`).
+   - **Den fristående variabeln** (`a` i `a = F_R/m`) behåller sitt ord
+     med full bredd, eftersom ordet annars krockar med täljaren.
+   - Kör `node .claude/verify-formelkort-brak.js` före commit när du rört
+     ett formelkort. Den mäter strecken och letar krockar mellan orden.
 
 Mönster (densitetssimuleringen är referens):
 

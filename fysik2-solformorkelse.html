@@ -196,7 +196,7 @@
 
         /* Formelkort i headern */
         .formula-box {
-            display: inline-flex; align-items: center; gap: 18px; flex-wrap: wrap;
+            display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap;
             background: var(--lab-panel, rgba(255,255,255,0.55));
             border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
             border-radius: 12px; padding: 14px 22px;
@@ -327,12 +327,12 @@
                 </div>
                 <span class="fnum">=</span>
                 <div style="display:flex;flex-direction:column;align-items:center;">
-                    <span class="flbl">Kroppens radie</span>
-                    <span class="fnum">2 · <em>R</em></span>
-                    <span class="fnum" style="border-top:2px solid currentColor;padding:0 10px;"><em>d</em></span>
-                    <span class="flbl">Avstånd till kroppen</span>
+                    <span class="flbl brak-etikett">Kroppens radie</span>
+                    <span class="fnum" style="padding:0 3px;">2 · <em>R</em></span>
+                    <span class="fnum" style="border-top:2px solid currentColor;padding:0 3px;align-self:stretch;text-align:center;"><em>d</em></span>
+                    <span class="flbl brak-etikett">Avstånd till kroppen</span>
                 </div>
-                <span style="font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:var(--lab-ink-soft);line-height:1.5;">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:var(--lab-ink-soft);line-height:1.5;margin-left:14px;">
                     Solen:&nbsp;<em>α</em> ≈ 0,53°<br>
                     Månen:&nbsp;<em>α</em> ≈ 0,50°–0,56°
                 </span>

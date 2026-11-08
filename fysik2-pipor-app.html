@@ -311,10 +311,10 @@
         );
         const FracL = ({ topLbl, top, botLbl, bot }) => (
             <div className="flex flex-col items-center" style={{ lineHeight: 1.15 }}>
-                <span className="flbl" style={topLbl ? {} : { visibility: 'hidden' }}>{topLbl || '·'}</span>
-                <span className="fnum" style={{ padding: '0 8px 3px' }}>{top}</span>
-                <span className="fnum" style={{ padding: '3px 8px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bot}</span>
-                <span className="flbl" style={botLbl ? {} : { visibility: 'hidden' }}>{botLbl || '·'}</span>
+                <span className="flbl brak-etikett" style={topLbl ? {} : { visibility: 'hidden' }}>{topLbl || '·'}</span>
+                <span className="fnum" style={{ padding: '0 3px 3px' }}>{top}</span>
+                <span className="fnum" style={{ padding: '3px 3px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bot}</span>
+                <span className="flbl brak-etikett" style={botLbl ? {} : { visibility: 'hidden' }}>{botLbl || '·'}</span>
             </div>
         );
         const FracP = ({ top, bot }) => (
@@ -326,19 +326,19 @@
 
         const FormulaCard = () => (
             <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-6 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
-                <div className="flex items-center gap-x-3">
+                <div className="flex items-center gap-x-2">
                     <span className="flbl">Öppen/sluten pipa</span>
                     <Vbl label="Pipans längd"><em>l</em></Vbl>
                     <span className="fnum">=</span>
                     <FracL topLbl="Ordningsnr · våglängd" top={<React.Fragment><em>n</em> · <em>λ</em></React.Fragment>} bot={<React.Fragment>2</React.Fragment>} />
                 </div>
-                <div className="flex items-center gap-x-3">
+                <div className="flex items-center gap-x-2">
                     <span className="flbl">Halvöppen pipa</span>
                     <Vbl label="Pipans längd"><em>l</em></Vbl>
                     <span className="fnum">=</span>
                     <FracL topLbl="Ordningsnr · våglängd" top={<React.Fragment>(2<em>n</em> − 1) · <em>λ</em></React.Fragment>} bot={<React.Fragment>4</React.Fragment>} />
                 </div>
-                <div className="flex items-center gap-x-3">
+                <div className="flex items-center gap-x-2">
                     <Vbl label="Utbredningshastighet"><em>v</em></Vbl>
                     <span className="fnum">=</span>
                     <Vbl label="Frekvens"><em>f</em></Vbl>

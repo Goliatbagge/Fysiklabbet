@@ -1214,16 +1214,16 @@
         // ─────────────────────────────────────────────────────────────────
         const LFrac = ({ topLbl, top, botLbl, bot }) => (
             <div className="flex flex-col items-center" style={{ lineHeight: 1.15 }}>
-                <span className="flbl">{topLbl}</span>
-                <span className="fnum" style={{ padding: '0 8px 3px' }}>{top}</span>
-                <span className="fnum" style={{ padding: '3px 8px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bot}</span>
-                <span className="flbl">{botLbl}</span>
+                <span className="flbl brak-etikett">{topLbl}</span>
+                <span className="fnum" style={{ padding: '0 3px 3px' }}>{top}</span>
+                <span className="fnum" style={{ padding: '3px 3px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bot}</span>
+                <span className="flbl brak-etikett">{botLbl}</span>
             </div>
         );
         const Frac = ({ top, bot, size = 15 }) => (
             <div className="flex flex-col items-center" style={{ lineHeight: 1.15 }}>
-                <span style={{ fontSize: size, padding: '0 6px 2px' }}>{top}</span>
-                <span style={{ fontSize: size, padding: '2px 6px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bot}</span>
+                <span style={{ fontSize: size, padding: '0 3px 2px' }}>{top}</span>
+                <span style={{ fontSize: size, padding: '2px 3px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bot}</span>
             </div>
         );
         // Formelkortet (prov 2026-11-07): ett kort ord ovanför varje bråk i stället för en

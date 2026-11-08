@@ -1023,31 +1023,31 @@
         const FormelKort = ({ lage, P, dE, dt, eta, dolj }) => (
             <div className="glass-card rounded-xl p-4 mb-6" style={{ color: 'var(--lab-ink)' }}>
                 <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
-                    <div className="flex items-center gap-x-3">
+                    <div className="flex items-center gap-x-2">
                         <Vbl label="Effekt"><em>P</em></Vbl>
                         <span className="fnum">=</span>
                         <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
-                            <span className="flbl">Omvandlad energi</span>
-                            <span className="fnum" style={{ padding: '0 8px 3px' }}>Δ<em>E</em></span>
-                            <span className="fnum" style={{ padding: '3px 8px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>Δ<em>t</em></span>
-                            <span className="flbl">Tid</span>
+                            <span className="flbl brak-etikett">Omvandlad energi</span>
+                            <span className="fnum" style={{ padding: '0 3px 3px' }}>Δ<em>E</em></span>
+                            <span className="fnum" style={{ padding: '3px 3px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>Δ<em>t</em></span>
+                            <span className="flbl brak-etikett">Tid</span>
                         </div>
                     </div>
-                    <div className="flex items-center gap-x-3">
+                    <div className="flex items-center gap-x-2">
                         <Vbl label="Verkningsgrad"><em>η</em></Vbl>
                         <span className="fnum">=</span>
                         <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
-                            <span className="flbl">Nyttig energi</span>
-                            <span className="fnum" style={{ padding: '0 8px 3px' }}><em>E</em><sub>n</sub></span>
-                            <span className="fnum" style={{ padding: '3px 8px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}><em>E</em><sub>t</sub></span>
-                            <span className="flbl">Tillförd energi</span>
+                            <span className="flbl brak-etikett">Nyttig<br />energi</span>
+                            <span className="fnum" style={{ padding: '0 3px 3px' }}><em>E</em><sub>n</sub></span>
+                            <span className="fnum" style={{ padding: '3px 3px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}><em>E</em><sub>t</sub></span>
+                            <span className="flbl brak-etikett">Tillförd<br />energi</span>
                         </div>
                         <span className="fnum">=</span>
                         <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
-                            <span className="flbl">Nyttig effekt</span>
-                            <span className="fnum" style={{ padding: '0 8px 3px' }}><em>P</em><sub>n</sub></span>
-                            <span className="fnum" style={{ padding: '3px 8px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}><em>P</em><sub>t</sub></span>
-                            <span className="flbl">Tillförd effekt</span>
+                            <span className="flbl brak-etikett">Nyttig<br />effekt</span>
+                            <span className="fnum" style={{ padding: '0 3px 3px' }}><em>P</em><sub>n</sub></span>
+                            <span className="fnum" style={{ padding: '3px 3px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}><em>P</em><sub>t</sub></span>
+                            <span className="flbl brak-etikett">Tillförd<br />effekt</span>
                         </div>
                     </div>
                 </div>

@@ -1210,11 +1210,11 @@
         );
         const Frac = ({ topLabel, top, bottomLabel, bottom }) => (
             <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
-                <span className="flbl over bred frac-lbl">{topLabel}</span>
+                <span className="flbl brak-etikett">{topLabel}</span>
                 <span className="fnum">{top}</span>
-                <span className="fnum" style={{ alignSelf: 'center', textAlign: 'center', minWidth: '1.9em',
-                                                borderTop: '2px solid currentColor', padding: '3px 4px 0', marginTop: 3 }}>{bottom}</span>
-                <span className="flbl under bred frac-lbl">{bottomLabel}</span>
+                <span className="fnum" style={{ alignSelf: 'stretch', textAlign: 'center',
+                                                borderTop: '2px solid currentColor', padding: '3px 3px 0', marginTop: 3 }}>{bottom}</span>
+                <span className="flbl brak-etikett">{bottomLabel}</span>
             </div>
         );
         const FormulaCard = () => (

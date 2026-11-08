@@ -1669,3 +1669,11 @@ body.lab-sim .scene-wrap:-webkit-full-screen .scene-canvas > canvas {
 .wave-stage svg .fill-gray-800 { fill: var(--wave-vibrator-detail); }
 .wave-stage svg .fill-red-500 { fill: var(--wave-node); }
 .wave-stage svg [stroke="#2d3748"] { stroke: var(--wave-vibrator-detail); }
+
+/* ── Formelkortens bråk: etiketten breddar aldrig bråkstrecket ──────────────
+   Ett ord ovanför täljaren eller under nämnaren ("hastighetsändring") får gå
+   ut över kanterna i stället för att göra bråket lika brett som ordet. Annars
+   blir bråkstrecket mycket bredare än symbolerna och luften kring
+   likhetstecknet växer (användarkrav 2026-11-08, CLAUDE.md Formelpresentation
+   punkt 8). Bredden 0 + centrering låter ordet flöda lika långt åt båda håll. */
+body .flbl.brak-etikett { width: 0; max-width: none; margin-left: 0; margin-right: 0; display: flex; flex-direction: column; align-items: center; white-space: nowrap; text-align: center; }

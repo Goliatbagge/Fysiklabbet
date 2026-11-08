@@ -356,6 +356,7 @@
                         <label><input type="checkbox" id="tPilar" checked><span class="st-swatch" style="background:linear-gradient(90deg,#1f5fbf 50%,#d9711c 50%)"></span><span>Tryckkrafter</span></label>
                         <label><input type="checkbox" id="tSnitt"><span class="st-swatch" style="background:#c9a14a"></span><span>Genomskärning</span></label>
                         <label><input type="checkbox" id="tTyngd" checked><span class="st-swatch" style="background:#2b7a3d"></span><span>Tyngdkraft</span></label>
+                        <label><input type="checkbox" id="tNamn" checked><span class="st-swatch" style="background:transparent"></span><span>Namn på föremålen</span></label>
                         <div class="st-title st-group">Vy</div>
                         <div class="seg" style="grid-template-columns: 1fr 1fr 1fr" id="vyer">
                             <button data-vy="hel" class="active">Hela</button>
@@ -514,7 +515,7 @@
             slag: 0, slagT: 0,   // köade pumpslag och tid in i pågående slag
             slapptVid: null, slapptOrsak: null, harPumpat: false,
             pumpTyp: 'hand', kompPa: false,   // handpump eller kompressor, och om kompressorn går
-            show: { molek: true, pilar: true, snitt: false, tyngd: true },
+            show: { molek: true, pilar: true, snitt: false, tyngd: true, namn: true },
         };
         var etikettKlar = false;   // etiketterna finns och kan ritas om
         const r = () => st.d / 20;                    // radie i scenenheter (1 enhet = 1 dm)
@@ -1392,6 +1393,7 @@
         $('tPilar').addEventListener('change', e => { st.show.pilar = e.target.checked; });
         $('tSnitt').addEventListener('change', e => { st.show.snitt = e.target.checked; stallSnitt(); });
         $('tTyngd').addEventListener('change', e => { st.show.tyngd = e.target.checked; });
+        $('tNamn').addEventListener('change', e => { st.show.namn = e.target.checked; });
         function stallSnitt() {
             const plan = st.show.snitt ? [snittPlan] : [];
             [mKlot, mKlotInne].forEach(m => { m.clippingPlanes = plan; m.needsUpdate = true; });
@@ -1651,7 +1653,7 @@
             etFG.visible = st.show.tyngd;
             etUt.visible = st.show.pilar && st.show.snitt && st.p0 > 1 && aktivVy === 'nara';
             etIn.visible = st.show.pilar && st.show.snitt && st.p > 3 && aktivVy === 'nara';
-            etBord.visible = etKran.visible = etPump.visible = aktivVy !== 'nara';
+            etBord.visible = etKran.visible = etPump.visible = st.show.namn && aktivVy !== 'nara';
 
             stallPilar();
             stegaMolekyler(dt);

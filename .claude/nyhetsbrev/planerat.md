@@ -197,3 +197,25 @@ Bocka av eller stryk punkter när de är klara och har nämnts i ett brev.
     sydända.
   Ta en egen skärmdump av närvyn vid kompassen (Falköping eller Sydney) eller
   översikten med fältlinjerna. Bocka av här när brevet är skrivet.
+
+- **Vattenkraftverket på labbänken: SKA MED I BREVET 2026-11-15**
+  (uttryckligt önskemål 2026-11-08: "Denna måste också nämnas i nästa veckas
+  nyhetsbrev"). Ny 3D-simulering, pushad 2026-11-08 (commit 622a10d2), andra
+  simuleringen i Fysik nivå 2, avsnitt 3.10 Växelströmsgenerator:
+  `https://fysiklabbet.se/fysik2-generator-app.html`
+  Ge den en egen punkt med bild under "Nytt på Fysiklabbet", bredvid elmotorn
+  och jordmagnetiska fältet, inte en kort rad. Det här ska fram:
+  - En vattenstråle från en labbkran får ett skovelhjul att snurra. På samma
+    axel roterar en magnet förbi en spole med järnkärna, och voltmeterns
+    visare pendlar mellan plus och minus: växelspänning, precis som i ett
+    riktigt kraftverk (där är det också magneterna som snurrar).
+  - Tänd lampan med strömbrytaren och se hjulet sakta in. Strömmen i spolen
+    bromsar magneten (Lenz lag), och staplar visar vart vattnets energi tar
+    vägen: lampan, värme i spolen och friktion. Det är poängen som skiljer
+    den från andra generatorsimuleringar.
+  - Ta tag i veven och veva själv: en pil visar kraften du behöver, och den
+    blir större när lampan är tänd (som en cykeldynamo).
+  - Dra i spolen, ta bort järnkärnan, ändra antalet varv. En graf visar u och
+    flödet: spänningen är störst när flödet passerar noll.
+  Ta en egen skärmdump av scenen med lampan tänd. Bocka av här när brevet är
+  skrivet.

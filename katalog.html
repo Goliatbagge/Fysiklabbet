@@ -3400,7 +3400,7 @@
             if (questions.length === 0) {
                 return (
                     <div className="lab-block lab-block-bild" style={{ marginTop: 8 }}>
-                        <em>Exit ticket kommer snart för det här avsnittet.</em>
+                        <em>Snabbkollen kommer snart för det här avsnittet.</em>
                     </div>
                 );
             }
@@ -3439,7 +3439,7 @@
                 return (
                     <div className="lab-exit" ref={topRef}>
                         <div className="lab-exit-result">
-                            <span className="lab-mono-label">Exit ticket · Resultat</span>
+                            <span className="lab-mono-label">Snabbkoll · Resultat</span>
                             <div className="lab-exit-score">{score} / {total} rätt</div>
                             <p className="lab-exit-verdict">{verdict}</p>
                             <div className="lab-ovning-buttons">
@@ -3458,7 +3458,7 @@
             return (
                 <div className="lab-exit" ref={topRef}>
                     <div className="lab-exit-head">
-                        <span className="lab-mono-label">Exit ticket · Fråga {idx + 1} / {total}</span>
+                        <span className="lab-mono-label">Snabbkoll · Fråga {idx + 1} / {total}</span>
                         <span className="lab-mono-label">{score} rätt hittills</span>
                     </div>
                     <div className="lab-exit-progress" aria-hidden="true">
@@ -4012,14 +4012,14 @@
                                                         <button type="button"
                                                             className={'lab-card ' + (view === 'exitticket' ? 'lab-card-active' : 'lab-card-clickable')}
                                                             onClick={() => setView('exitticket')}>
-                                                            <div className="lab-card-tag">Koll</div>
-                                                            <div className="lab-card-title">Exit ticket</div>
+                                                            <div className="lab-card-tag">Testa</div>
+                                                            <div className="lab-card-title">Snabbkoll</div>
                                                             <div className="lab-card-meta">{EXITTICKETS[tid].length} frågor</div>
                                                         </button>
                                                     ) : (isSummary || isEnhetskoll) ? null : (
                                                         <div className="lab-card lab-card-disabled">
-                                                            <div className="lab-card-tag">Koll</div>
-                                                            <div className="lab-card-title">Exit ticket</div>
+                                                            <div className="lab-card-tag">Testa</div>
+                                                            <div className="lab-card-title">Snabbkoll</div>
                                                             <div className="lab-card-meta">Kommer snart</div>
                                                         </div>
                                                     )}
@@ -4436,7 +4436,7 @@
                 const vyEtikett = {
                     ovningar: 'Övningar:',
                     ovningsblad: 'Övningsblad:',
-                    exitticket: 'Exit ticket:',
+                    exitticket: 'Snabbkoll:',
                     visualisering: 'Visualisering:',
                     fordjupning: 'Fördjupning:',
                     sammanfattning: 'Sammanfattning:',

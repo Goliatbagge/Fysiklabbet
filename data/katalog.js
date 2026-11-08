@@ -297,7 +297,7 @@ window.KATALOG = {
           tagline: 'Gymnasiets första matematiknivå för naturvetare och tekniker.',
           paragraphs: [
             'Matematik nivå 1c lägger grunden för all matematik på gymnasiet. Vi börjar med aritmetiken — talmängder, bråk, potenser och prioriteringsregler — och bygger vidare mot algebra och ekvationslösning, procentuella förändringar och privatekonomi, räta linjer och funktioner, statistik och sannolikhetslära samt trigonometri med vektorer.',
-            'Fokus ligger på att förstå varför metoderna fungerar — inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel, övningsuppgifter i tre nivåer och en exit ticket som kollar att du hängt med.',
+            'Fokus ligger på att förstå varför metoderna fungerar — inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel, övningsuppgifter i tre nivåer och en snabbkoll som visar att du hängt med.',
           ],
           bullets: [
             'Du lär dig: taluppfattning, algebra, funktioner och trigonometri',
@@ -423,7 +423,7 @@ window.KATALOG = {
           tagline: 'Nästa nivå — algebra, geometri och logaritmer på djupet.',
           paragraphs: [
             'Matematik nivå 2c bygger vidare på nivå 1c. Vi lär oss lösa linjära ekvationssystem med grafiska och algebraiska metoder, knäcker andragradsekvationer med nollproduktmetoden och *pq*-formeln, och undersöker andragradsfunktionernas parabler. Geometrikapitlet tränar det matematiska hantverket — satser, bevis, likformighet och kongruens — innan logaritmerna gör det möjligt att lösa ekvationer med x i exponenten. Nivån avslutas med statistik: spridningsmått, standardavvikelse, normalfördelning och regression.',
-            'Fokus ligger på att förstå varför metoderna fungerar — inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel, övningsuppgifter i tre nivåer och en exit ticket som kollar att du hängt med.',
+            'Fokus ligger på att förstå varför metoderna fungerar — inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel, övningsuppgifter i tre nivåer och en snabbkoll som visar att du hängt med.',
           ],
           bullets: [
             'Du lär dig: ekvationssystem, andragradsekvationer och logaritmer',
@@ -536,7 +536,7 @@ window.KATALOG = {
           tagline: 'Matematikens tredje nivå — derivata, integraler och trigonometri.',
           paragraphs: [
             'Matematik fortsättning nivå 1c (Ma3c) tar dig vidare in i analysen. Vi börjar med att räkna med rationella uttryck och närma oss gränsvärden, innan derivatan introduceras som en kurvas lutning i en punkt — först grafiskt med sekanter och tangenter, sedan via definitionen och de deriveringsregler som gör räknandet snabbt. Med derivatan i handen undersöker vi funktioners grafer: växande och avtagande, extrempunkter, andraderivatan och extremvärdesproblem. Därefter vänder vi på steget och integrerar — primitiva funktioner, area under och mellan kurvor och integralkalkylens fundamentalsats. Nivån avslutas med trigonometri: enhetscirkeln, trigonometriska ekvationer och triangelsatserna.',
-            'Fokus ligger på att förstå varför metoderna fungerar — inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel, övningsuppgifter i tre nivåer och en exit ticket som kollar att du hängt med.',
+            'Fokus ligger på att förstå varför metoderna fungerar — inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel, övningsuppgifter i tre nivåer och en snabbkoll som visar att du hängt med.',
           ],
           bullets: [
             'Du lär dig: derivator, integraler och trigonometri',
@@ -646,7 +646,7 @@ window.KATALOG = {
           tagline: 'Matematikens fjärde nivå — trigonometri, derivata, integraler och komplexa tal.',
           paragraphs: [
             'Matematik fortsättning nivå 2 (Ma4) fördjupar analysen och öppnar en helt ny talvärld. Vi börjar med trigonometrin: enhetscirkeln och radianer, trigonometriska ekvationer och formler, och sinus- och cosinusfunktionernas grafer med amplitud, period och förskjutning. Sedan utvidgas derivatan till trigonometriska, exponential- och logaritmfunktioner, med kedjeregeln, produktregeln och kvotregeln — och vi använder den för kurvkonstruktion och asymptoter. Integralkapitlet tar oss från primitiva funktioner till area mellan kurvor, täthetsfunktioner och rotationskroppar. Nivån avslutas med de komplexa talen: räkning med i, det komplexa talplanet, polär form och de Moivres formel, ekvationen zⁿ = w och Eulers formel.',
-            'Fokus ligger på att förstå varför metoderna fungerar — inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel, övningsuppgifter i tre nivåer och en exit ticket som kollar att du hängt med.',
+            'Fokus ligger på att förstå varför metoderna fungerar — inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel, övningsuppgifter i tre nivåer och en snabbkoll som visar att du hängt med.',
           ],
           bullets: [
             'Du lär dig: trigonometriska funktioner, deriveringsregler, integraler och komplexa tal',
@@ -751,7 +751,7 @@ window.KATALOG = {
           tagline: 'Fördjupning för dig som vill läsa mer matematik än fortsättningsnivåerna ger.',
           paragraphs: [
             'Matematik specialisering bygger vidare på fortsättningskurserna och tar upp områden som ligger nära universitetets första matematikkurser. Vektorerna är ett av dem. Här får vektorn en egen algebra med addition, subtraktion och multiplikation med tal, först grafiskt och sedan med koordinater. Den används för att beskriva krafter, hastigheter och geometri i planet och rummet.',
-            'Fokus ligger på att förstå varför metoderna fungerar, inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel och pennlösningar, övningsuppgifter i tre nivåer och en exit ticket som kollar att du hängt med.',
+            'Fokus ligger på att förstå varför metoderna fungerar, inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel och pennlösningar, övningsuppgifter i tre nivåer och en snabbkoll som visar att du hängt med.',
           ],
           bullets: [
             'Du lär dig: vektorer som riktade sträckor och räkning med dem',
@@ -880,7 +880,7 @@ window.MA1B_ALIAS = {};
       tagline: 'Gymnasiets första matematiknivå för dig som läser samhällsvetenskap eller ekonomi.',
       paragraphs: [
         'Matematik nivå 1b lägger grunden för gymnasiets matematik och riktar sig framför allt till Samhällsvetenskapsprogrammet och Ekonomiprogrammet. Vi börjar med aritmetiken — talmängder, bråk, potenser och prioriteringsregler — och bygger vidare mot algebra och ekvationslösning, procentuella förändringar med index och privatekonomi, räta linjer och funktioner samt statistik och sannolikhetslära.',
-        'Fokus ligger på att förstå varför metoderna fungerar — inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel, övningsuppgifter i tre nivåer och en exit ticket som kollar att du hängt med.',
+        'Fokus ligger på att förstå varför metoderna fungerar — inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel, övningsuppgifter i tre nivåer och en snabbkoll som visar att du hängt med.',
       ],
       bullets: [
         'Du lär dig: taluppfattning, algebra, procent och funktioner',
@@ -972,7 +972,7 @@ window.MA2B_ALIAS = {};
       tagline: 'Matematikens andra nivå för dig som läser samhällsvetenskap eller ekonomi.',
       paragraphs: [
         'Matematik nivå 2b bygger vidare på nivå 1b och riktar sig framför allt till Samhällsvetenskapsprogrammet och Ekonomiprogrammet. Vi lär oss lösa linjära ekvationssystem med grafiska och algebraiska metoder, knäcker andragradsekvationer med nollproduktmetoden och *pq*-formeln, och undersöker andragradsfunktionernas parabler. Geometrikapitlet tränar det matematiska hantverket — satser, bevis, likformighet och kongruens — innan logaritmerna gör det möjligt att lösa ekvationer med x i exponenten. Nivån avslutas med statistik: spridningsmått, standardavvikelse, normalfördelning och regression.',
-        'Fokus ligger på att förstå varför metoderna fungerar — inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel, övningsuppgifter i tre nivåer och en exit ticket som kollar att du hängt med.',
+        'Fokus ligger på att förstå varför metoderna fungerar — inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel, övningsuppgifter i tre nivåer och en snabbkoll som visar att du hängt med.',
       ],
       bullets: [
         'Du lär dig: ekvationssystem, andragradsekvationer och logaritmer',
@@ -1130,7 +1130,7 @@ window.MA3B_ALIAS = {};
       tagline: 'Matematikens tredje nivå för dig som läser samhällsvetenskap eller ekonomi: derivata, integraler och geometrisk summa.',
       paragraphs: [
         'Matematik fortsättning nivå 1b (Ma3b) tar dig vidare in i analysen och riktar sig framför allt till Samhällsvetenskapsprogrammet och Ekonomiprogrammet. Vi börjar med rationella uttryck och gränsvärden. Linjär optimering visar hur man hittar det bästa valet när resurserna är begränsade, och sedan introduceras derivatan som en kurvas lutning i en punkt, först grafiskt med sekanter och tangenter, sedan via definitionen och de deriveringsregler som gör räknandet snabbt. Med derivatan undersöker vi funktioners grafer och löser extremvärdesproblem, och med integralerna beräknar vi areor och totala förändringar. Nivån avslutas med geometriska talföljder och summor, som används i privatekonomin för nuvärde, sparande och annuitetslån.',
-        'Fokus ligger på att förstå varför metoderna fungerar, inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel, övningsuppgifter i tre nivåer och en exit ticket som kollar att du hängt med.',
+        'Fokus ligger på att förstå varför metoderna fungerar, inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel, övningsuppgifter i tre nivåer och en snabbkoll som visar att du hängt med.',
       ],
       bullets: [
         'Du lär dig: derivator, integraler och geometriska summor',

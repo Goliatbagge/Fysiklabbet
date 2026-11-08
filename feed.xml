@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Sat, 07 Nov 2026 02:25:36 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 08 Nov 2026 00:47:13 GMT</lastBuildDate>
+    <item>
+      <title>Därför spricker sten på längden när den trycks ihop</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-11-08-spricka-pa-langden</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-11-08-spricka-pa-langden</guid>
+      <pubDate>Sun, 08 Nov 2026 04:00:00 GMT</pubDate>
+      <category>Mekanik</category>
+      <description>Trycker man ihop en cylinder av sten eller keramik mellan två plattor spricker den ofta längs tryckriktningen, som om den drogs isär från sidorna. Forskare i USA har räknat fram en förklaring: plattorna hindrar materialet från att bli tjockare, och då uppstår en dragspänning inne i kroppen.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-11-08-spricka-pa-langden.jpg" length="399422" type="image/jpeg"/>
+    </item>
     <item>
       <title>En fisk i stimmet tycks följa bara en granne i taget</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-11-07-fisken-som-foljer-en-granne</link>
@@ -177,15 +186,6 @@
       <category>Strömningslära</category>
       <description>Bakom en vindkraftspark till havs blåser det svagare i många kilometer. Datorsimuleringar från Nederländerna visar att ett lågt molntäcke kan göra stråket av svag vind betydligt kortare, eftersom molnens översida kyls och rör om luften under dem.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-20-moln-som-hjalper-vindkraften.jpg" length="203649" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Svävande glaskula sammanflätad med ljus i rumstemperatur</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-10-19-glaskulan-och-ljuset</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-10-19-glaskulan-och-ljuset</guid>
-      <pubDate>Mon, 19 Oct 2026 04:00:00 GMT</pubDate>
-      <category>Kvantfysik</category>
-      <description>En glaskula som bara är 100 nanometer bred, upphängd i laserljus i ett vakuum, har fått sin rörelse kvantsammanflätad med ljuset som lämnar den. Forskare i Florens klarade det utan att kyla apparaten till nära absoluta nollpunkten, något som tidigare krävts i liknande försök.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-19-glaskulan-och-ljuset.jpg" length="220736" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

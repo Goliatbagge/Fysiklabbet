@@ -3100,6 +3100,25 @@ Gäller överallt formler visas (ingress, header, paneler, förklaringar):
    </div>
    ```
    Referensimpl: `fysik1-newtons-andra-app.html` (`Vbl`/`Frac`-helpers).
+8. **Samband mellan två bråk med index 1 och 2: en etikett per BRÅK, inte
+   per variabel** (användarbeslut 2026-11-08, provat i transformatorn).
+   I `N₁/N₂ = U₁/U₂` gav en ord-etikett över och under varje variabel
+   ("varv i primärspolen" över *N*₁) bråkstreck som var mycket bredare än
+   symbolerna och en formel som såg uppsplittrad ut. Skriv i stället:
+   - **Ett ord ovanför varje bråk** som säger vad bråket jämför (VARV,
+     SPÄNNING, STRÖM). Bråkstrecket blir då bara så brett som symbolerna.
+   - **Indexen färgkodade som i scenen**: 1 i bläck, 2 i simuleringens färg
+     för den andra sidan (lila `#7b3fa0` i transformatorn), med en kort
+     förklaring bredvid formlerna: "1 = primärspolen", "2 = sekundärspolen".
+   - **Tätt kring likhetstecknet**: ett rutnät med tre kolumner (bråk, =,
+     bråk), `columnGap` cirka 7 px, och etiketterna med `width: 0` och
+     `white-space: nowrap`, så att ett långt ord ("spänning") inte breddar
+     sin kolumn. Annars hamnar bråket mitt i en bred ruta och luften kring
+     likhetstecknet växer.
+   Punkt 2 gäller fortfarande för formler med olika storheter
+   (`ρ = m/V`, `a = F_R/m`): där får varje variabel sitt eget ord.
+   Referensimpl: `FormulaCard` i `fysik2-transformator-app.html`
+   (`Formel`/`Brak`/`Sym`-helpers).
 
 Mönster (densitetssimuleringen är referens):
 

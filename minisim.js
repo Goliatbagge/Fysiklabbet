@@ -16016,19 +16016,20 @@
         function fpSkala() { return FP / s; }                  // px per km på avståndet s
         function nyBlixtFP() {
             var k = fpSkala(), topp = Math.max(-12, YH - k * hKanal());
-            var n = 22, pts = [{ x: fpX + (Math.random() - 0.5) * 0.3 * k, y: topp }];
+            var kk = Math.min(k, 330);               // sidledes utslag växer inte i det oändliga
+            var n = 22, pts = [{ x: fpX + (Math.random() - 0.5) * 0.3 * kk, y: topp }];
             for (var i = 1; i <= n; i++) {
                 var y = topp + (YH - topp) * i / n;
-                var x = pts[0].x + (fpX - pts[0].x) * i / n + (i < n ? (Math.random() - 0.5) * 0.16 * k : 0);
+                var x = pts[0].x + (fpX - pts[0].x) * i / n + (i < n ? (Math.random() - 0.5) * 0.16 * kk : 0);
                 pts.push({ x: x, y: y });
             }
             var grenar = [];
             for (var b = 0; b < 4; b++) {
                 var st = 2 + Math.floor(Math.random() * 12), gp = [pts[st]], dir = Math.random() < 0.5 ? -1 : 1;
-                for (var j = 1; j < 6; j++) gp.push({ x: gp[j - 1].x + dir * (0.04 + Math.random() * 0.06) * k, y: gp[j - 1].y + (0.05 + Math.random() * 0.05) * k });
+                for (var j = 1; j < 6; j++) gp.push({ x: gp[j - 1].x + dir * (0.04 + Math.random() * 0.06) * kk, y: gp[j - 1].y + (0.05 + Math.random() * 0.05) * kk });
                 grenar.push(gp);
             }
-            return { pts: pts, grenar: grenar, w: Math.max(1.1, Math.min(4, 4 / s)) };
+            return { pts: pts, grenar: grenar, w: Math.max(1.1, Math.min(9, 4 / s)) };
         }
         function brisaraFP() {
             gnistor = [];
@@ -16080,6 +16081,10 @@
                     ctx.fillRect(0, 0, W, YH);
                     ctx.fillStyle = 'rgba(170,185,235,' + 0.18 * styrka + ')';
                     ctx.fillRect(0, 0, W, H);
+                    if (s < 1) {
+                        ctx.fillStyle = 'rgba(225,230,255,' + 0.45 * ljus * (1 - s) / 0.7 + ')';
+                        ctx.fillRect(0, 0, W, H);
+                    }
                 }
             }
             // avlägsna kullar och trädrand vid horisonten
@@ -16172,7 +16177,7 @@
                 if (typ === 'blixt') ljus = blixtStyrka(tEv) * (gissa ? 1.3 : 1);
                 else if (tEv >= 0 && tEv < 0.4) ljus = 0.35 * (1 - tEv / 0.4);
             }
-            if (gissa && !gissaKlar) { ritaFP(Math.min(1, ljus)); ritaAvlasning(); return; }
+            if (gissa) { ritaFP(Math.min(1, ljus)); ritaAvlasning(); return; }
             ritaHimmel(Math.min(1, ljus));
             var visaGeometri = !gissa || gissaKlar;
             if (visaGeometri) ritaSkala();
@@ -16261,8 +16266,13 @@
                 alp.frequency.value = Math.min(16000, 9000 / (0.4 + 0.6 * s));
                 alp.Q.value = 0.5;
                 var ag = actx.createGain();
-                ag.gain.value = Math.min(1, 1.3 * styrka);
-                as.connect(alp); alp.connect(ag); ag.connect(ut);
+                ag.gain.value = s < 0.9 ? 1.8 : Math.min(1, 1.3 * styrka);
+                as.connect(alp); alp.connect(ag);
+                if (s < 0.9) {
+                    var komp = actx.createDynamicsCompressor();
+                    komp.threshold.value = -10; komp.ratio.value = 8; komp.attack.value = 0.002; komp.release.value = 0.25;
+                    ag.connect(komp); komp.connect(ut);
+                } else ag.connect(ut);
                 as.start(t0);
             } else if (typ === 'blixt') {
                 // mullret: lågpass som blir mörkare med avståndet, ojämnt avklingande
@@ -16414,7 +16424,10 @@
             var denna = ++runda;
             tystna();
             gissa = true; gissaKlar = false;
-            s = Math.round((0.8 + Math.random() * 5.2) * 10) / 10;
+            // Ungefär var fjärde blixt slår ned riktigt nära (0,3–0,8 km), med
+            // stor blixt och kraftig knall. Övriga 0,8–6,0 km.
+            if (typ === 'blixt' && Math.random() < 0.25) s = Math.round((SMIN + Math.random() * 0.5) * 10) / 10;
+            else s = Math.round((0.8 + Math.random() * 5.2) * 10) / 10;
             xo = XO;
             fpX = 130 + Math.random() * (W - 260);
             gnistor = []; fpBolt = null;

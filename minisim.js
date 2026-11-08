@@ -15595,11 +15595,11 @@
         var svar = document.createElement('div');
         svar.className = 'ms-bl-svar';
         svar.style.display = 'none';
-        svar.innerHTML = '<label>Hur långt bort slog blixten ned? <input type="text" inputmode="decimal" ' +
+        svar.innerHTML = '<label><span class="ms-bl-fraga">Hur långt bort slog blixten ned?</span> <input type="text" inputmode="decimal" ' +
             'autocomplete="off" aria-label="Ditt svar i kilometer"> km</label>';
         var svarIn = svar.querySelector('input');
         var svarBtn = knapp('Svara', 'ms-primar');
-        var nyBtn = knapp('Ny blixt');
+        var nyBtn = knapp('Ny omgång');
         var avslutaBtn = knapp('Tillbaka');
         svar.appendChild(svarBtn);
         svar.appendChild(nyBtn);
@@ -15741,9 +15741,9 @@
         function stegGnistor(dt) {
             for (var k = gnistor.length - 1; k >= 0; k--) {
                 var p = gnistor[k];
-                p.vx *= Math.exp(-1.6 * dt); p.vy = p.vy * Math.exp(-1.6 * dt) + 22 * dt;
+                p.vx *= Math.exp(-1.6 * dt); p.vy = p.vy * Math.exp(-1.6 * dt) + (p.g || 22) * dt;
                 p.x += p.vx * dt; p.y += p.vy * dt; p.age += dt;
-                if (p.age > p.liv || p.y > GY) gnistor.splice(k, 1);
+                if (p.age > p.liv || p.y > (p.mark || GY)) gnistor.splice(k, 1);
             }
         }
 
@@ -15865,7 +15865,7 @@
             var rader;
             var tid = tEv === null ? null : Math.min(Math.max(0, tEv), tS());
             if (gissa) {
-                rader = [['Tid sedan blixten', tid === null ? '' : f(tid, 1) + ' s', GUL]];
+                rader = [[typ === 'fyr' ? 'Tid sedan det brast' : 'Tid sedan blixten', tid === null ? '' : f(tid, 1) + ' s', GUL]];
             } else {
                 rader = [
                     ['Ljuset syns efter', (tEv !== null && tEv >= 0) ? fLjus(tL()) + ' s' : '', TXT],
@@ -15971,6 +15971,171 @@
             }
         }
 
+        // ── Förstapersonsvy (gissa-läget) ─────────────────────────────────
+        // Man står själv på slätten och tittar mot horisonten. Allt ritas i
+        // perspektiv med brännvidden FP (px): något på höjden h km och
+        // avståndet s km syns FP · h / s px ovanför horisonten. En nära blixt
+        // går därför ända upp i molnen, en avlägsen är en liten tråd nere vid
+        // horisonten, och ett avlägset fyrverkeri brister lågt och litet.
+        var YH = 286, FP = 260;
+        var fpX = W / 2, fpBolt = null, fpRaknare = 0;
+        var fpTrad = [], fpGras = [], fpKulle = [];
+        (function () {
+            var x = 0;
+            while (x < W) {
+                var ht = 3 + rnd() * 9;
+                if (rnd() < 0.55) fpTrad.push({ x: x, h: ht, w: ht * (0.35 + rnd() * 0.15) });
+                x += 3 + rnd() * 14;
+            }
+            for (var k = 0; k < 170; k++) fpGras.push({ x: rnd() * W, h: 6 + rnd() * 26, lut: (rnd() - 0.5) * 9 });
+            for (var k2 = 0; k2 <= 40; k2++) fpKulle.push(YH - 3 - 6 * Math.sin(k2 / 4.2 + 0.7) * Math.sin(k2 / 9 + 2) - 3 * rnd());
+        })();
+        function fpSkala() { return FP / s; }                  // px per km på avståndet s
+        function nyBlixtFP() {
+            var k = fpSkala(), topp = Math.max(-12, YH - k * hKanal());
+            var n = 22, pts = [{ x: fpX + (Math.random() - 0.5) * 0.3 * k, y: topp }];
+            for (var i = 1; i <= n; i++) {
+                var y = topp + (YH - topp) * i / n;
+                var x = pts[0].x + (fpX - pts[0].x) * i / n + (i < n ? (Math.random() - 0.5) * 0.16 * k : 0);
+                pts.push({ x: x, y: y });
+            }
+            var grenar = [];
+            for (var b = 0; b < 4; b++) {
+                var st = 2 + Math.floor(Math.random() * 12), gp = [pts[st]], dir = Math.random() < 0.5 ? -1 : 1;
+                for (var j = 1; j < 6; j++) gp.push({ x: gp[j - 1].x + dir * (0.04 + Math.random() * 0.06) * k, y: gp[j - 1].y + (0.05 + Math.random() * 0.05) * k });
+                grenar.push(gp);
+            }
+            return { pts: pts, grenar: grenar, w: Math.max(1.1, Math.min(4, 4 / s)) };
+        }
+        function brisaraFP() {
+            gnistor = [];
+            var k = fpSkala(), cx = fpX, cy = YH - k * HFYR;
+            var fa = FARGER[Math.floor(Math.random() * FARGER.length)];
+            var fb = FARGER[Math.floor(Math.random() * FARGER.length)];
+            for (var i = 0; i < 160; i++) {
+                var a = Math.random() * 6.283, sp = (0.15 + Math.random() * 0.17) * k;
+                gnistor.push({ x: cx, y: cy, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, c: i % 2 ? fa : fb,
+                    liv: 1.8 + Math.random() * 1.2, age: 0, g: 0.035 * k, rad: Math.max(0.7, Math.min(2.2, 2.6 / s)), mark: YH + 40 });
+            }
+        }
+        function ritaFP(ljus) {
+            var k = fpSkala();
+            // himmel
+            var g = ctx.createLinearGradient(0, 0, 0, YH);
+            g.addColorStop(0, '#03060d');
+            g.addColorStop(1, typ === 'blixt' ? '#161b2b' : '#1c2136');
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, W, YH);
+            if (typ === 'fyr') {
+                for (var i = 0; i < stjarnor.length; i++) {
+                    var st = stjarnor[i];
+                    if (st.y > YH - 20) continue;
+                    ctx.globalAlpha = st.a;
+                    ctx.fillStyle = '#e8ecf5';
+                    ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, 6.283); ctx.fill();
+                }
+                ctx.globalAlpha = 1;
+            } else {
+                // molntäcke: ett lager på molnbasens höjd, lägre ju längre bort
+                for (var m = 0; m < molnKlot.length; m++) {
+                    var mk = molnKlot[m];
+                    var yy = mk.y * 1.5 - 10;
+                    var gr = ctx.createRadialGradient(mk.x, yy, 0, mk.x, yy, mk.r * 1.6);
+                    gr.addColorStop(0, 'rgba(26,31,46,0.95)');
+                    gr.addColorStop(1, 'rgba(26,31,46,0)');
+                    ctx.fillStyle = gr;
+                    ctx.beginPath(); ctx.arc(mk.x, yy, mk.r * 1.6, 0, 6.283); ctx.fill();
+                }
+                if (ljus > 0) {
+                    // blixten lyser upp molnen inifrån, starkast närmast
+                    var styrka = ljus * Math.min(1, 2.2 / (0.8 + s));
+                    var cy = Math.max(30, YH - k * hKanal());
+                    var gl = ctx.createRadialGradient(fpX, cy, 0, fpX, cy, 260);
+                    gl.addColorStop(0, 'rgba(200,210,255,' + 0.75 * styrka + ')');
+                    gl.addColorStop(1, 'rgba(200,210,255,0)');
+                    ctx.fillStyle = gl;
+                    ctx.fillRect(0, 0, W, YH);
+                    ctx.fillStyle = 'rgba(170,185,235,' + 0.18 * styrka + ')';
+                    ctx.fillRect(0, 0, W, H);
+                }
+            }
+            // avlägsna kullar och trädrand vid horisonten
+            ctx.fillStyle = '#0a0e18';
+            ctx.beginPath(); ctx.moveTo(0, YH + 1);
+            for (var q = 0; q < fpKulle.length; q++) ctx.lineTo(q * W / (fpKulle.length - 1), fpKulle[q]);
+            ctx.lineTo(W, YH + 1); ctx.closePath(); ctx.fill();
+            ctx.fillStyle = '#070a12';
+            for (var t = 0; t < fpTrad.length; t++) {
+                var tr = fpTrad[t];
+                ctx.beginPath(); ctx.moveTo(tr.x - tr.w, YH + 1); ctx.lineTo(tr.x, YH - tr.h); ctx.lineTo(tr.x + tr.w, YH + 1); ctx.closePath(); ctx.fill();
+            }
+            // blixten (framför trädranden, den står närmare än horisonten)
+            if (typ === 'blixt' && fpBolt && tEv !== null) {
+                var bs = blixtStyrka(tEv);
+                if (bs > 0.02) {
+                    ritaLinje(fpBolt.pts, fpBolt.w * 4, 'rgba(160,180,255,' + 0.3 * bs + ')');
+                    fpBolt.grenar.forEach(function (gp) { ritaLinje(gp, fpBolt.w * 0.55, 'rgba(225,232,255,' + 0.8 * bs + ')'); });
+                    ritaLinje(fpBolt.pts, fpBolt.w, 'rgba(250,252,255,' + bs + ')');
+                }
+            }
+            // fyrverkeriet
+            if (typ === 'fyr' && tEv !== null) {
+                var yb = YH - k * HFYR;
+                if (tEv < 0) {
+                    var u = 1 + tEv / 1.1, yr = YH - (YH - yb) * u;
+                    ctx.strokeStyle = 'rgba(255,205,150,0.75)';
+                    ctx.lineWidth = Math.max(0.8, 1.6 / Math.sqrt(s));
+                    ctx.beginPath(); ctx.moveTo(fpX, Math.min(YH, yr + 0.15 * k)); ctx.lineTo(fpX, yr); ctx.stroke();
+                }
+                if (tEv >= 0 && tEv < 0.5) {
+                    var a2 = 1 - tEv / 0.5, rg = 0.45 * k;
+                    var gg = ctx.createRadialGradient(fpX, yb, 0, fpX, yb, rg);
+                    gg.addColorStop(0, 'rgba(255,240,210,' + 0.9 * a2 + ')');
+                    gg.addColorStop(1, 'rgba(255,200,140,0)');
+                    ctx.fillStyle = gg;
+                    ctx.beginPath(); ctx.arc(fpX, yb, rg, 0, 6.283); ctx.fill();
+                }
+                for (var p2 = 0; p2 < gnistor.length; p2++) {
+                    var gn = gnistor[p2];
+                    ctx.globalAlpha = Math.max(0, 1 - gn.age / gn.liv);
+                    ctx.fillStyle = gn.c;
+                    ctx.beginPath(); ctx.arc(gn.x, gn.y, gn.rad || 1.6, 0, 6.283); ctx.fill();
+                }
+                ctx.globalAlpha = 1;
+            }
+            // marken framför en, med gräs i förgrunden
+            var gm = ctx.createLinearGradient(0, YH, 0, H);
+            gm.addColorStop(0, '#0c111b');
+            gm.addColorStop(1, '#04060a');
+            ctx.fillStyle = gm;
+            ctx.fillRect(0, YH + 1, W, H - YH);
+            if (ljus > 0 && typ === 'blixt') {
+                ctx.fillStyle = 'rgba(150,165,215,' + 0.12 * ljus * Math.min(1, 2.2 / (0.8 + s)) + ')';
+                ctx.fillRect(0, YH + 1, W, H - YH);
+            }
+            ctx.strokeStyle = '#010204';
+            ctx.lineWidth = 1.4;
+            ctx.lineCap = 'round';
+            for (var gi = 0; gi < fpGras.length; gi++) {
+                var gb = fpGras[gi];
+                ctx.beginPath(); ctx.moveTo(gb.x, H + 2); ctx.quadraticCurveTo(gb.x + gb.lut * 0.3, H - gb.h * 0.6, gb.x + gb.lut, H - gb.h); ctx.stroke();
+            }
+            // det man hör
+            if (hord && pop < 2.4) {
+                var a3 = Math.max(0, Math.min(1, (2.4 - pop) / 0.6));
+                ctx.globalAlpha = a3;
+                ctx.fillStyle = GUL;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'alphabetic';
+                ctx.font = font(26, true);
+                var sk = 1 + 0.15 * Math.exp(-pop * 6);
+                ctx.save(); ctx.translate(W / 2, H - 46); ctx.scale(sk, sk);
+                ctx.fillText(typ === 'fyr' ? 'Pang!' : 'Mullrrr …', 0, 0);
+                ctx.restore();
+                ctx.globalAlpha = 1;
+            }
+        }
+
         function rita() {
             resize();
             ctx.clearRect(0, 0, W, H);
@@ -15979,6 +16144,7 @@
                 if (typ === 'blixt') ljus = blixtStyrka(tEv) * (gissa ? 1.3 : 1);
                 else if (tEv >= 0 && tEv < 0.4) ljus = 0.35 * (1 - tEv / 0.4);
             }
+            if (gissa && !gissaKlar) { ritaFP(Math.min(1, ljus)); ritaAvlasning(); return; }
             ritaHimmel(Math.min(1, ljus));
             var visaGeometri = !gissa || gissaKlar;
             if (visaGeometri) ritaSkala();
@@ -16060,7 +16226,7 @@
             if (tEv !== null) {
                 var fore = tEv;
                 tEv += dt * k;
-                if (typ === 'fyr' && fore < 0 && tEv >= 0) brisera();
+                if (typ === 'fyr' && fore < 0 && tEv >= 0) { if (gissa && !gissaKlar) brisaraFP(); else brisera(); }
                 if (!hord && tEv >= tS()) { hord = true; pop = 0; small(); klart(); }
             }
             if (hord) pop += dt;
@@ -16074,6 +16240,7 @@
             vakna();
             hord = false; pop = 0; gnistor = [];
             bolt = typ === 'blixt' ? nyBlixt() : null;
+            fpBolt = (gissa && typ === 'blixt') ? nyBlixtFP() : null;
             tEv = typ === 'fyr' ? -1.1 : 0;
             visaInfo();
             loop.satt(true);
@@ -16090,8 +16257,9 @@
             if (gissa) {
                 if (gissaKlar) return;
                 info.textContent = tEv === null ? '' :
-                    (hord ? 'Ljudet var framme efter ' + f(tS(), 1) + ' s. Hur långt bort slog blixten ned? Ljudets hastighet är ' + vv + ' m/s.'
-                          : 'Himlen lyste upp. Vänta på mullret och läs av tiden.');
+                    (hord ? 'Ljudet var framme efter ' + f(tS(), 1) + ' s. ' + fraga() + ' Ljudets hastighet är ' + vv + ' m/s.'
+                          : (typ === 'fyr' ? 'Fyrverkeriet brast. Vänta på smällen och läs av tiden.'
+                                           : 'Himlen lyste upp. Vänta på mullret och läs av tiden.'));
                 return;
             }
             if (tEv === null) {
@@ -16139,11 +16307,14 @@
         });
 
         // gissa-läget
+        function fraga() { return typ === 'fyr' ? 'Hur långt bort brast fyrverkeriet?' : 'Hur långt bort slog blixten ned?'; }
         function gissaRunda() {
-            typ = 'blixt';
             gissa = true; gissaKlar = false;
             s = Math.round((0.8 + Math.random() * 5.2) * 10) / 10;
             xo = XO;
+            fpX = 130 + Math.random() * (W - 260);
+            gnistor = []; fpBolt = null;
+            svar.querySelector('.ms-bl-fraga').textContent = fraga();
             syncVal();
             [startBtn, blixtBtn, fyrBtn, gissaBtn].forEach(function (b) { b.style.display = 'none'; });
             gS.rad.style.display = 'none';
@@ -16152,7 +16323,7 @@
             svarIn.value = ''; svarIn.disabled = true; svarBtn.disabled = true;
             svarBtn.style.display = ''; nyBtn.style.display = 'none';
             tEv = null; rita();
-            info.textContent = 'Titta på himlen …';
+            info.textContent = typ === 'fyr' ? 'Titta mot horisonten …' : 'Titta på himlen …';
             setTimeout(function () { if (gissa && !gissaKlar) starta(); }, 900 + Math.random() * 900);
         }
         function avslutaGissa() {
@@ -16170,10 +16341,11 @@
             var ok = Math.abs(g - s) <= Math.max(0.3, 0.1 * s);
             if (ok) poang++;
             gissaKlar = true;
+            gnistor = [];
             svarIn.disabled = true; svarBtn.style.display = 'none'; nyBtn.style.display = '';
             var t = tS(), tR = Math.round(t * 10) / 10, vv = Math.round(v());
             info.innerHTML = (ok ? '<b>Bra uppskattat.</b> ' : '<b>Inte riktigt.</b> ') +
-                'Blixten slog ned ' + f(s, 1) + ' km bort. <em>s</em> = <em>v</em> · <em>t</em> = ' +
+                (typ === 'fyr' ? 'Fyrverkeriet brast ' : 'Blixten slog ned ') + f(s, 1) + ' km bort. <em>s</em> = <em>v</em> · <em>t</em> = ' +
                 vv + ' m/s · ' + f(tR, 1) + ' s ≈ ' + f(vv * tR / 1000, 1) + ' km. ' +
                 'Tumregeln ger ' + f(tR, 1) + ' / 3 ≈ ' + f(tR / 3, 1) + ' km. ' +
                 'Poäng: ' + poang + ' av ' + forsok + '.';

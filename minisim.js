@@ -33,7 +33,9 @@
  *           vagtyp (fy2-2.7, visa: transversell | longitudinell),
  *           ytvag (fy2-2.7, visa: vatten | rayleigh: partiklarnas banor i en ytvåg),
  *           fasvag (fy2-2.7: stående våg med partiklar i fas och i motfas),
- *           vagstallning (fy2-2.7: en puls vandrar nedåt i en hängande vågställning)
+ *           vagstallning (fy2-2.7: en puls vandrar nedåt i en hängande vågställning),
+ *           blixtljud (fy2-2.10: ljudets hastighet, blixt/fyrverkeri och tumregeln 3 s per km;
+ *                      visa: fyrverkeri startar med fyrverkeriet)
  *   titel:  liten rubrik ovanför scenen (valfritt).
  *
  * Widgeten är ren vanilla-JS (ingen React) och har egen intern CSS.
@@ -617,6 +619,17 @@
         '.minisim-card.ms-sk:fullscreen .ms-sk-panel{flex:0 0 auto;width:100%;max-height:none;overflow:visible;}',
         '.minisim-card.ms-sk:-webkit-full-screen .ms-sk-panel{flex:0 0 auto;width:100%;max-height:none;overflow:visible;}',
         '}',
+        /* typ: blixtljud (fy2-2.10): svarsraden i gissa-läget */
+        '.ms-bl-svar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px;font-family:' + FONT + ';font-size:14px;color:#dde2ec;font-style:normal;}',
+        '.ms-bl-svar label{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap;}',
+        '.ms-bl-svar input{width:72px;padding:7px 8px;border-radius:4px;border:1px solid #3a4150;background:#0d111a;color:#f2c94c;font:600 15px ' + FONT + ';text-align:right;}',
+        '.ms-bl-svar input:focus{outline:2px solid #7aa2e0;outline-offset:1px;}',
+        '.ms-bl-info{margin-top:10px;line-height:1.45;font-size:14px;color:#aab1bf;}',
+        '.ms-bl-info b{color:#f2c94c;font-weight:600;}',
+        '.ms-bl-avl{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:8px;font-family:' + FONT + ';font-size:14px;color:#8a93a5;font-style:normal;font-variant-numeric:tabular-nums;}',
+        '.ms-bl-avl b{font-weight:600;font-size:16px;}',
+        '.minisim-card.ms-bl .minisim-btn.ms-vald{border-color:#d06a30;color:#ffd9bf;background:#2a1a12;}',
+        '.minisim-card.ms-bl:fullscreen .ms-bl-svar,.minisim-card.ms-bl:-webkit-full-screen .ms-bl-svar{width:min(92vw,640px);}',
         '.lab-minisim p{margin:0;}'
     ].join('\n');
 
@@ -15428,6 +15441,753 @@
         loop.satt(true);
     }
 
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: blixtljud (fy2-2.10: ljudets hastighet, blixt och åska)
+    // ══════════════════════════════════════════════════════════════════════
+    // En natt på slätten. En blixt slår ned (eller en fyrverkeripjäs brister)
+    // på avståndet s från en person. Ljuset når fram efter s/c, ljudet efter
+    // s/v, och ljudvågens front ritas som en ring som växer i verklig fart.
+    // Längs marken står en kilometerskala, och när ringen passerar ett
+    // kilometerstreck skrivs tiden ut under det: ungefär 3 s per km, alltså
+    // tumregeln i genomgången. Ljudets fart följer lufttemperaturen
+    // (v = 331,3 + 0,606 · T m/s). Mörk scen är motiverad: blixten och
+    // fyrverkeriet syns i mörker. Gissa-läget visar bara att himlen lyser
+    // upp bakom molnen; eleven ser stoppuret, hör mullret och uppskattar
+    // avståndet. Ljudet är syntetiserat (Web Audio), inga ljudfiler.
+    function buildBlixtljud(node, cfg) {
+        var W = 640, H = 380, GY = 312;          // logisk storlek, markens y
+        var XO = 596;                            // personens x (fast)
+        var PXKM = 82;                           // px per km
+        var SMAX = 6.5, SMIN = 0.3;
+        var HFYR = 0.5;                          // fyrverkeriets brisanshöjd (km)
+        var C_LJUS = 2.998e8;
+        var GUL = '#f2c94c', TXT = '#dfe4ee', DIM = '#8a93a5';
+        var FONT_C = 'Poppins, system-ui, sans-serif';
+
+        var typ = cfg.visa === 'fyrverkeri' ? 'fyr' : 'blixt';
+        var s = 3.0;                             // avstånd (km), rak linje
+        var T = 15;                              // lufttemperatur (°C)
+        var snabb = false;
+        var gissa = false, gissaKlar = false, poang = 0, forsok = 0;
+        var tEv = null;                          // tid sedan nedslaget (s), null = inget
+        var hord = false;                        // har ljudet nått fram?
+        var gnistor = [];
+        var bolt = null;
+        var pop = 0;                             // "Muller!"-textens ålder
+
+        function v() { return 331.3 + 0.606 * T; }
+        function hojd() { return typ === 'fyr' ? HFYR : 0; }
+        function sMin() { return typ === 'fyr' ? HFYR + 0.2 : SMIN; }
+        function sh() { var h = hojd(); return Math.sqrt(Math.max(0, s * s - h * h)); }
+        function x0() { return XO - sh() * PXKM; }
+        function y0() { return GY - hojd() * PXKM; }
+        function tS() { return s * 1000 / v(); }
+        function tL() { return s * 1000 / C_LJUS; }
+
+        function f(vv, d) {
+            var t = vv.toFixed(d);
+            if (parseFloat(t) === 0) return '0';
+            t = t.replace('.', ',').replace('-', '−');
+            var p = t.split(',');
+            p[0] = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+            return p.join(',');
+        }
+        function fLjus(t) {
+            var d = Math.ceil(-Math.log10(t)) + 1;
+            return f(t, Math.min(9, Math.max(1, d)));
+        }
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-bred ms-bl';
+        if (cfg.titel) {
+            var tt = document.createElement('div');
+            tt.className = 'minisim-title';
+            tt.textContent = cfg.titel;
+            card.appendChild(tt);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene';
+        var canvas = document.createElement('canvas');
+        canvas.className = 'minisim-canvas';
+        canvas.setAttribute('role', 'img');
+        canvas.setAttribute('aria-label',
+            'En person står ute en mörk kväll. En bit bort slår en blixt ned. Ljuset når personen nästan ' +
+            'direkt, medan ljudvågen sprider sig som en växande ring och når fram först efter flera sekunder.');
+        scene.appendChild(canvas);
+        var sndBtn = document.createElement('button');
+        sndBtn.type = 'button';
+        sndBtn.className = 'minisim-sndbtn';
+        sndBtn.setAttribute('aria-label', 'Ljud på/av');
+        sndBtn.title = 'Ljud av';
+        var SND_PA = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/>' +
+            '<path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+        var SND_AV = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/>' +
+            '<line x1="16" y1="9" x2="22" y2="15"/><line x1="22" y1="9" x2="16" y2="15"/></svg>';
+        sndBtn.innerHTML = SND_PA;
+        scene.appendChild(sndBtn);
+        card.appendChild(scene);
+        msFullskarm(card, scene, W / H, 250);
+        var avl = document.createElement('div');
+        avl.className = 'ms-bl-avl';
+        card.appendChild(avl);
+
+        function knapp(text, cls) {
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'minisim-btn' + (cls ? ' ' + cls : '');
+            b.textContent = text;
+            return b;
+        }
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        var startBtn = knapp('Blixten slår ned', 'ms-primar');
+        var blixtBtn = knapp('Åska', 'ms-vald');
+        var fyrBtn = knapp('Fyrverkeri');
+        var gissaBtn = knapp('Gissa avståndet');
+        var snabbLbl = document.createElement('label');
+        snabbLbl.className = 'minisim-check';
+        var snabbCb = document.createElement('input');
+        snabbCb.type = 'checkbox';
+        snabbLbl.appendChild(snabbCb);
+        snabbLbl.appendChild(document.createTextNode('Snabbspola'));
+        controls.appendChild(startBtn);
+        controls.appendChild(blixtBtn);
+        controls.appendChild(fyrBtn);
+        controls.appendChild(gissaBtn);
+        controls.appendChild(snabbLbl);
+        card.appendChild(controls);
+
+        function glidRad(lblHtml, min, max, step, val, aria) {
+            var rad = document.createElement('div');
+            rad.className = 'minisim-slider-row';
+            var l = document.createElement('span');
+            l.className = 'minisim-slider-lbl';
+            l.innerHTML = lblHtml;
+            var sl = document.createElement('input');
+            sl.type = 'range';
+            sl.className = 'minisim-slider';
+            sl.min = String(min); sl.max = String(max); sl.step = String(step); sl.value = String(val);
+            sl.setAttribute('aria-label', aria);
+            var vEl = document.createElement('span');
+            vEl.className = 'minisim-slider-val';
+            rad.appendChild(l); rad.appendChild(sl); rad.appendChild(vEl);
+            card.appendChild(rad);
+            return { rad: rad, sl: sl, val: vEl };
+        }
+        var gS = glidRad('Avstånd <em>s</em>', SMIN, SMAX, 0.1, s, 'Avståndet till blixten i kilometer');
+        var gT = glidRad('Lufttemperatur', -20, 35, 1, T, 'Luftens temperatur i grader Celsius');
+        gT.val.style.minWidth = '150px';
+
+        var svar = document.createElement('div');
+        svar.className = 'ms-bl-svar';
+        svar.style.display = 'none';
+        svar.innerHTML = '<label>Hur långt bort slog blixten ned? <input type="text" inputmode="decimal" ' +
+            'autocomplete="off" aria-label="Ditt svar i kilometer"> km</label>';
+        var svarIn = svar.querySelector('input');
+        var svarBtn = knapp('Svara', 'ms-primar');
+        var nyBtn = knapp('Ny blixt');
+        var avslutaBtn = knapp('Tillbaka');
+        svar.appendChild(svarBtn);
+        svar.appendChild(nyBtn);
+        svar.appendChild(avslutaBtn);
+        card.appendChild(svar);
+
+        var info = document.createElement('div');
+        info.className = 'minisim-info ms-brod ms-bl-info';
+        card.appendChild(info);
+        node.appendChild(card);
+
+        // ── Canvas ────────────────────────────────────────────────────────
+        var ctx = canvas.getContext('2d');
+        var tk = 1;                              // textförstoring på smal skärm
+        var smal = false;                        // smal skärm: avläsningen under scenen
+        function resize() {
+            var dpr = Math.min(2, window.devicePixelRatio || 1);
+            var cssW = canvas.clientWidth || W;
+            tk = Math.max(1.12, Math.min(2.3, (W / cssW) * 0.85));
+            smal = cssW < 460;
+            var sc = cssW / W * dpr;
+            var bw = Math.round(W * sc), bh = Math.round(H * sc);
+            if (canvas.width !== bw || canvas.height !== bh) { canvas.width = bw; canvas.height = bh; }
+            ctx.setTransform(sc, 0, 0, sc, 0, 0);
+        }
+
+        // fasta stjärnor och kullar (frö så att de ser likadana ut varje gång)
+        var frö = 7;
+        function rnd() { frö = (frö * 16807) % 2147483647; return (frö - 1) / 2147483646; }
+        var stjarnor = [];
+        for (var i = 0; i < 90; i++) stjarnor.push({ x: rnd() * W, y: rnd() * (GY - 40), r: 0.4 + rnd() * 1.0, a: 0.25 + rnd() * 0.6 });
+        var kulle = [];
+        for (i = 0; i <= 64; i++) {
+            var xx = i * W / 64;
+            kulle.push(GY - 10 - 12 * Math.sin(xx / 90 + 1) - 7 * Math.sin(xx / 37 + 2) - 4 * rnd());
+        }
+
+        function font(px, bold) { return (bold ? '600 ' : '') + (px * tk) + 'px ' + FONT_C; }
+
+        function ritaHimmel(blixtljus) {
+            var g = ctx.createLinearGradient(0, 0, 0, GY);
+            g.addColorStop(0, '#04070f');
+            g.addColorStop(0.65, '#101830');
+            g.addColorStop(1, '#2a2840');
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, W, GY);
+            for (var k = 0; k < stjarnor.length; k++) {
+                var st = stjarnor[k];
+                ctx.globalAlpha = st.a * (1 - Math.min(1, blixtljus));
+                ctx.fillStyle = '#e8ecf5';
+                ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, 6.283); ctx.fill();
+            }
+            ctx.globalAlpha = 1;
+            if (typ === 'blixt') ritaMoln(blixtljus);
+            if (blixtljus > 0) {
+                ctx.fillStyle = 'rgba(190,205,255,' + (0.38 * blixtljus) + ')';
+                ctx.fillRect(0, 0, W, GY);
+            }
+            // kullar
+            ctx.fillStyle = '#0d1322';
+            ctx.beginPath();
+            ctx.moveTo(0, GY);
+            for (var k2 = 0; k2 < kulle.length; k2++) ctx.lineTo(k2 * W / 64, kulle[k2]);
+            ctx.lineTo(W, GY);
+            ctx.closePath();
+            ctx.fill();
+            // mark
+            var gm = ctx.createLinearGradient(0, GY, 0, H);
+            gm.addColorStop(0, '#141a26');
+            gm.addColorStop(1, '#07090f');
+            ctx.fillStyle = gm;
+            ctx.fillRect(0, GY, W, H - GY);
+            ctx.strokeStyle = '#2c3446';
+            ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.moveTo(0, GY + 0.5); ctx.lineTo(W, GY + 0.5); ctx.stroke();
+        }
+
+        var molnKlot = [];
+        for (i = 0; i < 26; i++) molnKlot.push({ x: rnd() * (W + 80) - 40, y: 34 + rnd() * 54, r: 34 + rnd() * 40 });
+        function ritaMoln(ljus) {
+            for (var k = 0; k < molnKlot.length; k++) {
+                var m = molnKlot[k];
+                var g = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, m.r);
+                var a = 0.55 + 0.4 * ljus;
+                var c = ljus > 0 ? '120,130,170' : '30,36,54';
+                g.addColorStop(0, 'rgba(' + c + ',' + a + ')');
+                g.addColorStop(1, 'rgba(' + c + ',0)');
+                ctx.fillStyle = g;
+                ctx.beginPath(); ctx.arc(m.x, m.y, m.r, 0, 6.283); ctx.fill();
+            }
+        }
+
+        // ── Blixt: slumpad sicksacklinje med grenar ───────────────────────
+        function nyBlixt() {
+            var pts = [{ x: x0() + (Math.random() - 0.5) * 30, y: 96 }];
+            var n = 18;
+            for (var k = 1; k <= n; k++) {
+                var tY = 96 + (GY - 96) * k / n;
+                var tX = pts[0].x + (x0() - pts[0].x) * k / n + (k < n ? (Math.random() - 0.5) * 22 : 0);
+                pts.push({ x: tX, y: tY });
+            }
+            var grenar = [];
+            for (var b = 0; b < 3; b++) {
+                var start = 3 + Math.floor(Math.random() * 9);
+                var p = pts[start], gp = [p], dir = Math.random() < 0.5 ? -1 : 1;
+                for (var j = 1; j < 6; j++) gp.push({ x: gp[j - 1].x + dir * (6 + Math.random() * 10), y: gp[j - 1].y + 8 + Math.random() * 8 });
+                grenar.push(gp);
+            }
+            return { pts: pts, grenar: grenar };
+        }
+        function ritaLinje(pts, w, col) {
+            ctx.strokeStyle = col; ctx.lineWidth = w; ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+            ctx.beginPath(); ctx.moveTo(pts[0].x, pts[0].y);
+            for (var k = 1; k < pts.length; k++) ctx.lineTo(pts[k].x, pts[k].y);
+            ctx.stroke();
+        }
+        // blixtens ljusstyrka under de första 0,6 s (tre urladdningar)
+        function blixtStyrka(t) {
+            if (t < 0 || t > 0.6) return 0;
+            var a = 0;
+            [[0, 1], [0.12, 0.7], [0.28, 0.85]].forEach(function (u) {
+                var d = t - u[0];
+                if (d >= 0) a = Math.max(a, u[1] * Math.exp(-d / 0.05));
+            });
+            return a;
+        }
+
+        // ── Fyrverkeri ────────────────────────────────────────────────────
+        var FARGER = ['#ffb347', '#ff6b6b', '#7fd1ff', '#c6ff7a', '#ffd84d', '#e7a6ff'];
+        function brisera() {
+            gnistor = [];
+            var fa = FARGER[Math.floor(Math.random() * FARGER.length)];
+            var fb = FARGER[Math.floor(Math.random() * FARGER.length)];
+            for (var k = 0; k < 110; k++) {
+                var a = Math.random() * 6.283, sp = 26 + Math.random() * 44;
+                gnistor.push({ x: x0(), y: y0(), vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, c: k % 2 ? fa : fb, liv: 1.6 + Math.random() * 1.2, age: 0 });
+            }
+        }
+        function stegGnistor(dt) {
+            for (var k = gnistor.length - 1; k >= 0; k--) {
+                var p = gnistor[k];
+                p.vx *= Math.exp(-1.6 * dt); p.vy = p.vy * Math.exp(-1.6 * dt) + 22 * dt;
+                p.x += p.vx * dt; p.y += p.vy * dt; p.age += dt;
+                if (p.age > p.liv || p.y > GY) gnistor.splice(k, 1);
+            }
+        }
+
+        // ── Person ────────────────────────────────────────────────────────
+        function ritaPerson() {
+            var x = XO, y = GY;
+            ctx.fillStyle = '#c9d0dc';
+            ctx.strokeStyle = '#c9d0dc';
+            ctx.lineCap = 'round';
+            ctx.lineWidth = 3.4;
+            ctx.beginPath(); ctx.moveTo(x - 4, y); ctx.lineTo(x - 2, y - 15); ctx.moveTo(x + 4, y); ctx.lineTo(x + 2, y - 15); ctx.stroke();
+            ctx.fillStyle = '#3d6fb8';
+            ctx.beginPath();
+            ctx.moveTo(x - 6, y - 14); ctx.lineTo(x - 5, y - 30); ctx.quadraticCurveTo(x, y - 33, x + 5, y - 30); ctx.lineTo(x + 6, y - 14); ctx.closePath();
+            ctx.fill();
+            ctx.fillStyle = '#e3c7a8';
+            ctx.beginPath(); ctx.arc(x, y - 37, 5, 0, 6.283); ctx.fill();
+            if (hord && pop < 2.2) {
+                // ljudbågar vid örat
+                ctx.strokeStyle = 'rgba(242,201,76,' + Math.max(0, 1 - pop / 2.2) + ')';
+                ctx.lineWidth = 1.8;
+                for (var k = 0; k < 3; k++) {
+                    ctx.beginPath();
+                    ctx.arc(x - 3, y - 37, 9 + k * 6 + (pop * 8) % 6, Math.PI * 0.8, Math.PI * 1.2);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        // ── Kilometerskala längs marken ───────────────────────────────────
+        // Strecken står på avståndet km från smällen (rak linje), så att varje
+        // kilometer alltid tar km · 1000 / v sekunder, även för fyrverkeriet.
+        function passeradTid(km) { return km * 1000 / v(); }
+        function ritaSkala() {
+            var x = x0();
+            ctx.strokeStyle = '#5b6578';
+            ctx.lineWidth = 1.2;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'alphabetic';
+            var max = Math.floor(s + 1e-6), h = hojd();
+            for (var km = 0; km <= max; km++) {
+                if (km > 0 && km <= h) continue;
+                var px = x + Math.sqrt(Math.max(0, km * km - h * h)) * PXKM;
+                ctx.beginPath(); ctx.moveTo(px, GY + 1); ctx.lineTo(px, GY + 8); ctx.stroke();
+                if (km === 0) continue;
+                ctx.fillStyle = DIM;
+                ctx.font = font(12.5);
+                ctx.fillText(km + ' km', px, GY + 10 + 13 * tk);
+                var tp = passeradTid(km);
+                if (tEv !== null && tEv >= tp) {
+                    ctx.fillStyle = GUL;
+                    ctx.font = font(12.5, true);
+                    ctx.fillText(f(tp, 1) + ' s', px, GY + 14 + 28 * tk);
+                }
+            }
+        }
+
+        // ── Avståndslinje ─────────────────────────────────────────────────
+        function ritaAvstand() {
+            var ax = x0(), ay = y0(), bx = XO, by = GY - 37;
+            ctx.setLineDash([4, 5]);
+            ctx.strokeStyle = 'rgba(223,228,238,0.55)';
+            ctx.lineWidth = 1.2;
+            ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx - 8, by); ctx.stroke();
+            ctx.setLineDash([]);
+            var mx = (ax + bx) / 2, my = (ay + by) / 2 - 10 * tk;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'alphabetic';
+            ctx.fillStyle = TXT;
+            ctx.font = 'italic ' + (15 * tk) + 'px ' + FONT_C;
+            var rest = ' = ' + f(s, 1) + ' km';
+            ctx.font = (15 * tk) + 'px ' + FONT_C;
+            var wR = ctx.measureText(rest).width;
+            ctx.font = 'italic ' + (15 * tk) + 'px ' + FONT_C;
+            var wS = ctx.measureText('s').width;
+            var x1 = mx - (wS + wR) / 2;
+            ctx.textAlign = 'left';
+            ctx.fillText('s', x1, my);
+            ctx.font = (15 * tk) + 'px ' + FONT_C;
+            ctx.fillText(rest, x1 + wS, my);
+        }
+
+        // ── Vågfronten ────────────────────────────────────────────────────
+        function ritaRing() {
+            if (tEv === null || tEv <= 0 || hord && tEv > tS() + 1.2) return;
+            var r = v() * tEv / 1000 * PXKM;
+            var alfa = hord ? Math.max(0, 1 - (tEv - tS()) / 1.2) : 1;
+            ctx.save();
+            ctx.beginPath(); ctx.rect(0, 0, W, GY); ctx.clip();
+            var g = ctx.createRadialGradient(x0(), y0(), Math.max(0, r - 26), x0(), y0(), r);
+            g.addColorStop(0, 'rgba(242,201,76,0)');
+            g.addColorStop(1, 'rgba(242,201,76,' + (0.16 * alfa) + ')');
+            ctx.fillStyle = g;
+            ctx.beginPath(); ctx.arc(x0(), y0(), r, 0, 6.283); ctx.fill();
+            ctx.strokeStyle = 'rgba(242,201,76,' + (0.95 * alfa) + ')';
+            ctx.lineWidth = 2.4;
+            ctx.beginPath(); ctx.arc(x0(), y0(), r, 0, 6.283); ctx.stroke();
+            ctx.restore();
+        }
+
+        // ── Avläsningsrutan ───────────────────────────────────────────────
+        function ritaAvlasning() {
+            var rader;
+            var tid = tEv === null ? null : Math.min(Math.max(0, tEv), tS());
+            if (gissa) {
+                rader = [['Tid sedan blixten', tid === null ? '' : f(tid, 1) + ' s', GUL]];
+            } else {
+                rader = [
+                    ['Ljuset syns efter', (tEv !== null && tEv >= 0) ? fLjus(tL()) + ' s' : '', TXT],
+                    ['Ljudet hörs efter', tid === null ? '' : f(tid, 1) + ' s', GUL]
+                ];
+            }
+            avl.style.display = smal ? '' : 'none';
+            if (smal) {
+                avl.innerHTML = rader.map(function (r) {
+                    return '<span>' + r[0] + ' <b style="color:' + r[2] + '">' + (r[1] || '–') + '</b></span>';
+                }).join('');
+                return;
+            }
+            var lh = 22 * tk, pad = 10 * tk;
+            ctx.font = font(13);
+            var wL = 0;
+            rader.forEach(function (r) { wL = Math.max(wL, ctx.measureText(r[0]).width); });
+            ctx.font = font(17, true);
+            var wV = ctx.measureText(gissa ? '00,0 s' : '0,0000000 s').width;
+            var bw = wL + wV + pad * 3, bh = rader.length * lh + pad * 1.4;
+            var bx = W - bw - 56, by = 10;
+            if (bx < 60) { bx = 56; by = 56; }
+            ctx.fillStyle = 'rgba(6,9,16,0.72)';
+            ctx.strokeStyle = 'rgba(120,130,150,0.35)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            if (ctx.roundRect) ctx.roundRect(bx, by, bw, bh, 6); else ctx.rect(bx, by, bw, bh);
+            ctx.fill(); ctx.stroke();
+            rader.forEach(function (r, k) {
+                var yy = by + pad * 0.7 + lh * (k + 0.72);
+                ctx.textAlign = 'left';
+                ctx.fillStyle = DIM;
+                ctx.font = font(13);
+                ctx.fillText(r[0], bx + pad, yy);
+                ctx.textAlign = 'right';
+                ctx.fillStyle = r[2];
+                ctx.font = font(17, true);
+                ctx.fillText(r[1], bx + bw - pad, yy);
+            });
+        }
+
+        function ritaPop() {
+            if (!hord || pop > 2.2) return;
+            var a = Math.max(0, Math.min(1, (2.2 - pop) / 0.6));
+            ctx.globalAlpha = a;
+            ctx.fillStyle = GUL;
+            ctx.textAlign = 'right';
+            ctx.font = font(22, true);
+            var sk = 1 + 0.15 * Math.exp(-pop * 6);
+            ctx.save();
+            ctx.translate(W - 10, GY - 62);
+            ctx.scale(sk, sk);
+            ctx.fillText(typ === 'fyr' ? 'Pang!' : 'Muller!', 0, 0);
+            ctx.restore();
+            ctx.globalAlpha = 1;
+        }
+
+        function ritaKalla() {
+            var x = x0();
+            if (typ === 'blixt') {
+                var st = tEv === null ? 0 : blixtStyrka(tEv);
+                if (!gissa && bolt && st > 0.02) {
+                    ritaLinje(bolt.pts, 7, 'rgba(160,180,255,' + 0.35 * st + ')');
+                    bolt.grenar.forEach(function (gp) { ritaLinje(gp, 1.6, 'rgba(220,228,255,' + 0.8 * st + ')'); });
+                    ritaLinje(bolt.pts, 2.4, 'rgba(250,252,255,' + st + ')');
+                }
+                if (!gissa || gissaKlar) {
+                    // nedslagspunkten: en liten markering på marken
+                    ctx.fillStyle = gissaKlar ? GUL : '#6f7a90';
+                    ctx.beginPath(); ctx.arc(x, GY, 3.2, 0, 6.283); ctx.fill();
+                }
+            } else {
+                // raket på väg upp (t < 0) och brisad
+                if (tEv !== null && tEv < 0) {
+                    var u = 1 + tEv / 1.1;        // 0 → 1
+                    var yy = GY - (GY - y0()) * u;
+                    var g = ctx.createLinearGradient(x, GY, x, yy);
+                    g.addColorStop(0, 'rgba(255,190,120,0)');
+                    g.addColorStop(1, 'rgba(255,210,150,0.9)');
+                    ctx.strokeStyle = g; ctx.lineWidth = 2;
+                    ctx.beginPath(); ctx.moveTo(x, Math.min(GY, yy + 60)); ctx.lineTo(x, yy); ctx.stroke();
+                    ctx.fillStyle = '#ffe2b0';
+                    ctx.beginPath(); ctx.arc(x, yy, 2.2, 0, 6.283); ctx.fill();
+                }
+                if (tEv !== null && tEv >= 0 && tEv < 0.4) {
+                    var a = 1 - tEv / 0.4;
+                    var gg = ctx.createRadialGradient(x, y0(), 0, x, y0(), 70);
+                    gg.addColorStop(0, 'rgba(255,240,210,' + 0.9 * a + ')');
+                    gg.addColorStop(1, 'rgba(255,200,140,0)');
+                    ctx.fillStyle = gg;
+                    ctx.beginPath(); ctx.arc(x, y0(), 70, 0, 6.283); ctx.fill();
+                }
+                for (var k = 0; k < gnistor.length; k++) {
+                    var p = gnistor[k];
+                    ctx.globalAlpha = Math.max(0, 1 - p.age / p.liv);
+                    ctx.fillStyle = p.c;
+                    ctx.beginPath(); ctx.arc(p.x, p.y, 1.6, 0, 6.283); ctx.fill();
+                }
+                ctx.globalAlpha = 1;
+                // avfyrningsrör på marken
+                ctx.fillStyle = '#5a4636';
+                ctx.fillRect(x - 3, GY - 7, 6, 7);
+            }
+        }
+
+        function rita() {
+            resize();
+            ctx.clearRect(0, 0, W, H);
+            var ljus = 0;
+            if (tEv !== null) {
+                if (typ === 'blixt') ljus = blixtStyrka(tEv) * (gissa ? 1.3 : 1);
+                else if (tEv >= 0 && tEv < 0.4) ljus = 0.35 * (1 - tEv / 0.4);
+            }
+            ritaHimmel(Math.min(1, ljus));
+            var visaGeometri = !gissa || gissaKlar;
+            if (visaGeometri) ritaSkala();
+            ritaKalla();
+            if (visaGeometri) { ritaRing(); ritaAvstand(); }
+            ritaPerson();
+            ritaPop();
+            ritaAvlasning();
+        }
+
+        // ── Ljud (Web Audio) ──────────────────────────────────────────────
+        var AC = window.AudioContext || window.webkitAudioContext;
+        var actx = null, ljudPa = true, brus = null;
+        function vakna() {
+            if (!AC) return;
+            if (!actx) {
+                actx = new AC();
+                var len = actx.sampleRate * 5;
+                brus = actx.createBuffer(1, len, actx.sampleRate);
+                var d = brus.getChannelData(0), last = 0;
+                for (var k = 0; k < len; k++) { last = 0.97 * last + 0.03 * (Math.random() * 2 - 1); d[k] = last * 6; }
+            }
+            if (actx.state === 'suspended') actx.resume();
+        }
+        function small() {
+            if (!actx || !ljudPa) return;
+            var t0 = actx.currentTime + 0.01;
+            var styrka = Math.min(1, 1.6 / (0.6 + s));
+            var src = actx.createBufferSource();
+            src.buffer = brus;
+            var lp = actx.createBiquadFilter();
+            lp.type = 'lowpass';
+            var g = actx.createGain();
+            g.gain.setValueAtTime(0, t0);
+            if (typ === 'blixt') {
+                // mullret: lågpass som blir mörkare med avståndet, ojämnt avklingande
+                lp.frequency.value = 900 / (0.6 + 0.5 * s);
+                var dur = 2.2 + 0.5 * s, tt = t0;
+                g.gain.linearRampToValueAtTime(styrka * (s < 1.5 ? 1 : 0.6), t0 + 0.04);
+                while (tt < t0 + dur) {
+                    tt += 0.15 + Math.random() * 0.35;
+                    g.gain.linearRampToValueAtTime(styrka * (0.25 + 0.75 * Math.random()) * Math.exp(-(tt - t0) / dur * 2.2), tt);
+                }
+                g.gain.linearRampToValueAtTime(0, tt + 0.4);
+                if (s < 1.5) {     // nära: en skarp knall först
+                    var src2 = actx.createBufferSource();
+                    src2.buffer = brus;
+                    var hp = actx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 900;
+                    var g2 = actx.createGain();
+                    g2.gain.setValueAtTime(styrka * 1.4, t0);
+                    g2.gain.exponentialRampToValueAtTime(0.001, t0 + 0.35);
+                    src2.connect(hp); hp.connect(g2); g2.connect(actx.destination);
+                    src2.start(t0); src2.stop(t0 + 0.4);
+                }
+                src.connect(lp); lp.connect(g); g.connect(actx.destination);
+                src.start(t0, Math.random()); src.stop(tt + 0.5);
+            } else {
+                lp.frequency.value = 1400 / (0.6 + 0.4 * s);
+                g.gain.linearRampToValueAtTime(styrka * 1.5, t0 + 0.008);
+                g.gain.exponentialRampToValueAtTime(0.001, t0 + 1.1);
+                src.connect(lp); lp.connect(g); g.connect(actx.destination);
+                src.start(t0, Math.random()); src.stop(t0 + 1.2);
+                var o = actx.createOscillator(), og = actx.createGain();
+                o.frequency.setValueAtTime(90, t0); o.frequency.exponentialRampToValueAtTime(38, t0 + 0.4);
+                og.gain.setValueAtTime(styrka * 0.8, t0); og.gain.exponentialRampToValueAtTime(0.001, t0 + 0.5);
+                o.connect(og); og.connect(actx.destination); o.start(t0); o.stop(t0 + 0.55);
+            }
+        }
+        sndBtn.addEventListener('click', function () {
+            ljudPa = !ljudPa;
+            sndBtn.innerHTML = ljudPa ? SND_PA : SND_AV;
+            sndBtn.title = ljudPa ? 'Ljud av' : 'Ljud på';
+            if (ljudPa) vakna();
+        });
+
+        // ── Förlopp ───────────────────────────────────────────────────────
+        var loop = vgLoop(card, function (dt) {
+            var k = snabb ? 5 : 1;
+            if (tEv !== null) {
+                var fore = tEv;
+                tEv += dt * k;
+                if (typ === 'fyr' && fore < 0 && tEv >= 0) brisera();
+                if (!hord && tEv >= tS()) { hord = true; pop = 0; small(); klart(); }
+            }
+            if (hord) pop += dt;
+            stegGnistor(dt * k);
+            rita();
+            var aktiv = tEv !== null && (!hord || pop < 2.5 || gnistor.length);
+            if (!aktiv) loop.satt(false);
+        });
+
+        function starta() {
+            vakna();
+            hord = false; pop = 0; gnistor = [];
+            bolt = typ === 'blixt' ? nyBlixt() : null;
+            tEv = typ === 'fyr' ? -1.1 : 0;
+            visaInfo();
+            loop.satt(true);
+        }
+        function nollstall() {
+            tEv = null; hord = false; gnistor = []; pop = 0;
+            loop.satt(false);
+            rita();
+            visaInfo();
+        }
+
+        function visaInfo() {
+            var vv = Math.round(v());
+            if (gissa) {
+                if (gissaKlar) return;
+                info.textContent = tEv === null ? '' :
+                    (hord ? 'Ljudet var framme efter ' + f(tS(), 1) + ' s. Hur långt bort slog blixten ned? Ljudets hastighet är ' + vv + ' m/s.'
+                          : 'Himlen lyste upp. Vänta på mullret och läs av tiden.');
+                return;
+            }
+            if (tEv === null) {
+                info.textContent = 'Ljudet färdas med ' + vv + ' m/s i luft som är ' + f(T, 0) + ' °C. Dra i ' +
+                    (typ === 'fyr' ? 'fyrverkeriet' : 'nedslagsplatsen') + ' eller ändra avståndet, och tryck på knappen.';
+            } else if (!hord) {
+                info.textContent = 'Ljuset är redan framme. Ljudvågen sprider sig åt alla håll med ' + vv + ' m/s.';
+            }
+        }
+        function klart() {
+            if (gissa) { visaInfo(); svarIn.disabled = false; svarBtn.disabled = false; try { svarIn.focus({ preventScroll: true }); } catch (e) {} return; }
+            var t = tS(), tR = Math.round(t * 10) / 10;
+            info.innerHTML = 'Ljudet behövde ' + f(t, 1) + ' s för ' + f(s, 1) + ' km, alltså ungefär ' +
+                f(t / s, 1) + ' s per kilometer. Tumregeln ger ' + f(tR, 1) + ' s / 3 ≈ ' +
+                f(tR / 3, 1) + ' km.';
+        }
+
+        // ── Kontroller ────────────────────────────────────────────────────
+        function syncVal() {
+            gS.sl.min = String(sMin());
+            if (s < sMin()) s = sMin();
+            gS.sl.value = String(s);
+            gS.val.textContent = f(s, 1) + ' km';
+            gT.val.textContent = f(T, 0) + ' °C, v = ' + Math.round(v()) + ' m/s';
+            startBtn.textContent = typ === 'fyr' ? 'Skjut upp raketen' : 'Blixten slår ned';
+            blixtBtn.classList.toggle('ms-vald', typ === 'blixt');
+            fyrBtn.classList.toggle('ms-vald', typ === 'fyr');
+        }
+        startBtn.addEventListener('click', starta);
+        blixtBtn.addEventListener('click', function () { typ = 'blixt'; syncVal(); nollstall(); });
+        fyrBtn.addEventListener('click', function () { typ = 'fyr'; syncVal(); nollstall(); });
+        snabbCb.addEventListener('change', function () { snabb = snabbCb.checked; });
+        gS.sl.addEventListener('input', function () { s = parseFloat(gS.sl.value); syncVal(); nollstall(); });
+        gT.sl.addEventListener('input', function () {
+            T = parseFloat(gT.sl.value); syncVal();
+            if (tEv === null || hord) { nollstall(); } else visaInfo();
+        });
+
+        // gissa-läget
+        function gissaRunda() {
+            typ = 'blixt';
+            gissa = true; gissaKlar = false;
+            s = Math.round((0.8 + Math.random() * 5.2) * 10) / 10;
+            syncVal();
+            [startBtn, blixtBtn, fyrBtn, gissaBtn].forEach(function (b) { b.style.display = 'none'; });
+            gS.rad.style.display = 'none';
+            gT.sl.disabled = true;
+            svar.style.display = '';
+            svarIn.value = ''; svarIn.disabled = true; svarBtn.disabled = true;
+            svarBtn.style.display = ''; nyBtn.style.display = 'none';
+            tEv = null; rita();
+            info.textContent = 'Titta på himlen …';
+            setTimeout(function () { if (gissa && !gissaKlar) starta(); }, 900 + Math.random() * 900);
+        }
+        function avslutaGissa() {
+            gissa = false; gissaKlar = false;
+            [startBtn, blixtBtn, fyrBtn, gissaBtn].forEach(function (b) { b.style.display = ''; });
+            gS.rad.style.display = '';
+            gT.sl.disabled = false;
+            svar.style.display = 'none';
+            syncVal(); nollstall();
+        }
+        function bedom() {
+            var g = parseFloat(String(svarIn.value).replace(',', '.').replace(/\s/g, ''));
+            if (!isFinite(g)) { svarIn.focus(); return; }
+            forsok++;
+            var ok = Math.abs(g - s) <= Math.max(0.3, 0.1 * s);
+            if (ok) poang++;
+            gissaKlar = true;
+            svarIn.disabled = true; svarBtn.style.display = 'none'; nyBtn.style.display = '';
+            var t = tS(), tR = Math.round(t * 10) / 10, vv = Math.round(v());
+            info.innerHTML = (ok ? '<b>Bra uppskattat.</b> ' : '<b>Inte riktigt.</b> ') +
+                'Blixten slog ned ' + f(s, 1) + ' km bort. <em>s</em> = <em>v</em> · <em>t</em> = ' +
+                vv + ' m/s · ' + f(tR, 1) + ' s ≈ ' + f(vv * tR / 1000, 1) + ' km. ' +
+                'Tumregeln ger ' + f(tR, 1) + ' / 3 ≈ ' + f(tR / 3, 1) + ' km. ' +
+                'Poäng: ' + poang + ' av ' + forsok + '.';
+            rita();
+        }
+        gissaBtn.addEventListener('click', gissaRunda);
+        nyBtn.addEventListener('click', gissaRunda);
+        avslutaBtn.addEventListener('click', avslutaGissa);
+        svarBtn.addEventListener('click', bedom);
+        svarIn.addEventListener('keydown', function (e) { if (e.key === 'Enter') bedom(); });
+
+        // dra i källan (nedslagsplatsen eller fyrverkeriet) längs marken
+        var drar = false;
+        function logX(e) {
+            var r = canvas.getBoundingClientRect();
+            return { x: (e.clientX - r.left) / r.width * W, y: (e.clientY - r.top) / r.height * H };
+        }
+        function nara(p) { return !gissa && Math.abs(p.x - x0()) < 26 && p.y > (typ === 'fyr' ? y0() - 40 : 90) && p.y < GY + 14; }
+        canvas.addEventListener('pointerdown', function (e) {
+            var p = logX(e);
+            if (!nara(p)) return;
+            drar = true;
+            try { canvas.setPointerCapture(e.pointerId); } catch (er) {}
+            e.preventDefault();
+        });
+        canvas.addEventListener('pointermove', function (e) {
+            var p = logX(e);
+            if (!drar) { canvas.style.cursor = nara(p) ? 'grab' : 'default'; return; }
+            canvas.style.cursor = 'grabbing';
+            var shN = Math.max(0, (XO - p.x) / PXKM), h = hojd();
+            var sN = Math.sqrt(shN * shN + h * h);
+            s = Math.round(Math.max(sMin(), Math.min(SMAX, sN)) * 10) / 10;
+            syncVal();
+            nollstall();
+        });
+        function slapp() { drar = false; canvas.style.cursor = 'default'; }
+        canvas.addEventListener('pointerup', slapp);
+        canvas.addEventListener('pointercancel', slapp);
+        canvas.style.touchAction = 'pan-y';
+
+        window.addEventListener('resize', function () { if (!loop.igang()) rita(); });
+        document.addEventListener('fullscreenchange', function () { setTimeout(rita, 60); });
+        document.addEventListener('webkitfullscreenchange', function () { setTimeout(rita, 60); });
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (!loop.igang()) rita(); });
+
+        syncVal();
+        visaInfo();
+        rita();
+    }
+
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
                   stegkast: buildStegkast,
                   svangningsgrafer: buildSvangningsgrafer,
@@ -15456,7 +16216,8 @@
                   ytvag: buildYtvag, fasvag: buildFasvag,
                   staendevag: buildStaendevag, gitarrton: buildGitarrton,
                   snurrslang: buildSnurrslang, pipton: buildPipton, provror: buildProvror,
-                  varmekansla: buildVarmekansla, smaltrace: buildSmaltrace };
+                  varmekansla: buildVarmekansla, smaltrace: buildSmaltrace,
+                  blixtljud: buildBlixtljud };
 
     function decodeSrc(b64) {
         try { return decodeURIComponent(escape(atob(b64))); }

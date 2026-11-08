@@ -77,3 +77,11 @@
 11:05:50  [svar] Claude avslutade med kod 0
 11:05:50  [svar] VARNING: svarskontrollen gav inget SVAR-besked. Försöker igen vid nästa körning.
 11:05:50  [svar] === Nyhetsjobb: slut ===
+11:45:02  [svar] === Nyhetsjobb: start (2026-11-08) ===
+11:45:04  [svar] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+11:45:39  [svar] No `[Nyhet` review threads turned up in the last 4 days — `search_threads` with `subject:[Nyhet newer_than:4d` returned no results. A broader search for "Nyhet" in the subject only found one match, from 2026-10-29 ("[Nyhet 2026-10-30] Att granska: ..."), which is over a week old and already outside the review window.
+11:45:39  [svar] 
+11:45:39  [svar] So there's nothing to process: no recent review emails, and therefore no owner replies to check. This could mean either no article needed review in the last 4 days, or the nightly review-email step has stopped firing — worth a look if you expected one recently.
+11:45:40  [svar] Claude avslutade med kod 0
+11:45:40  [svar] VARNING: svarskontrollen gav inget SVAR-besked. Försöker igen vid nästa körning.
+11:45:40  [svar] === Nyhetsjobb: slut ===

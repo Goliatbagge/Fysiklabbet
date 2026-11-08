@@ -630,6 +630,7 @@
         '.ms-bl-avl b{font-weight:600;font-size:16px;}',
         '.minisim-card.ms-bl .minisim-btn.ms-vald{border-color:#d06a30;color:#ffd9bf;background:#2a1a12;}',
         '.minisim-card.ms-bl:fullscreen .ms-bl-svar,.minisim-card.ms-bl:-webkit-full-screen .ms-bl-svar{width:min(92vw,640px);}',
+        '.minisim-card.ms-bl:fullscreen .minisim-scene,.minisim-card.ms-bl:-webkit-full-screen .minisim-scene{width:100%;}',
         '.lab-minisim p{margin:0;}'
     ].join('\n');
 
@@ -15615,10 +15616,40 @@
         var ctx = canvas.getContext('2d');
         var tk = 1;                              // textförstoring på smal skärm
         var smal = false;                        // smal skärm: avläsningen under scenen
+        // I fullskärm fyller scenen hela bredden: höjden H är fast, och den
+        // logiska bredden W räknas fram ur skärmens proportioner (minst 640).
+        // Allt som står utspritt i sidled (stjärnor, moln, träd, gräs,
+        // personen och blixten i förstapersonsvyn) flyttas med.
+        var W0 = W;
+        function byggBredd(nyW) {
+            var f = nyW / W;
+            function skala(lista) { for (var i = 0; i < lista.length; i++) lista[i].x *= f; }
+            [stjarnor, molnKlot, fpTrad, fpGras].forEach(skala);
+            fpX *= f;
+            if (fpBolt) { fpBolt.pts.forEach(function (p) { p.x *= f; }); fpBolt.grenar.forEach(function (g) { g.forEach(function (p) { p.x *= f; }); }); }
+            gnistor.forEach(function (g) { g.x *= f; });
+            xo += nyW - W;
+            XO = nyW - (W0 - 596);
+            W = nyW;
+            XMAX = W - 24;
+        }
+        function onskadBredd() {
+            if ((document.fullscreenElement || document.webkitFullscreenElement) !== card) return W0;
+            var ovrigt = 0;
+            for (var i = 0; i < card.children.length; i++) {
+                var el = card.children[i];
+                if (el !== scene && el.offsetParent !== null) ovrigt += el.offsetHeight + 10;
+            }
+            var hojdKvar = Math.max(200, window.innerHeight - ovrigt - 24);
+            var bredd = scene.clientWidth || W;
+            return Math.max(W0, Math.round(H * bredd / hojdKvar));
+        }
         function resize() {
             var dpr = Math.min(2, window.devicePixelRatio || 1);
+            var nyW = onskadBredd();
+            if (Math.abs(nyW - W) > 1) byggBredd(nyW);
             var cssW = canvas.clientWidth || W;
-            tk = Math.max(1.12, Math.min(2.3, (W / cssW) * 0.85));
+            tk = Math.max(1.12, Math.min(2.3, (W0 / cssW) * 0.85));
             smal = cssW < 460;
             var sc = cssW / W * dpr;
             var bw = Math.round(W * sc), bh = Math.round(H * sc);

@@ -12597,7 +12597,7 @@
             fran(e);
         });
         dragYta.addEventListener('pointermove', function (e) { if (drar) fran(e); });
-        function slapp() { drar = false; dragYta.style.cursor = 'grab'; }
+        function slapp() { drar = null; dragYta.style.cursor = 'grab'; }
         dragYta.addEventListener('pointerup', slapp);
         dragYta.addEventListener('pointercancel', slapp);
 
@@ -13791,7 +13791,7 @@
             }
             sattBand(best);
         });
-        function slapp() { drar = false; }
+        function slapp() { drar = null; }
         svg.addEventListener('pointerup', slapp);
         svg.addEventListener('pointercancel', slapp);
         svg.style.touchAction = 'pan-y';
@@ -14476,7 +14476,7 @@
             dragVinkel = a; dragTid = nu;
             sl.value = String(mal);
         });
-        function slapp() { drar = false; }
+        function slapp() { drar = null; }
         svg.addEventListener('pointerup', slapp);
         svg.addEventListener('pointercancel', slapp);
         svg.style.touchAction = 'pan-y';
@@ -15456,7 +15456,9 @@
     // avståndet. Ljudet är syntetiserat (Web Audio), inga ljudfiler.
     function buildBlixtljud(node, cfg) {
         var W = 640, H = 380, GY = 312;          // logisk storlek, markens y
-        var XO = 596;                            // personens x (fast)
+        var XO = 596;                            // personens x från början
+        var xo = XO;                             // personens x (dragbar)
+        var XMIN = 20, XMAX = W - 24;            // gränser för källan och personen
         var PXKM = 82;                           // px per km
         var SMAX = 6.5, SMIN = 0.3;
         var HFYR = 0.5;                          // fyrverkeriets brisanshöjd (km)
@@ -15479,7 +15481,7 @@
         function hojd() { return typ === 'fyr' ? HFYR : 0; }
         function sMin() { return typ === 'fyr' ? HFYR + 0.2 : SMIN; }
         function sh() { var h = hojd(); return Math.sqrt(Math.max(0, s * s - h * h)); }
-        function x0() { return XO - sh() * PXKM; }
+        function x0() { return xo - sh() * PXKM; }
         function y0() { return GY - hojd() * PXKM; }
         function tS() { return s * 1000 / v(); }
         function tL() { return s * 1000 / C_LJUS; }
@@ -15738,7 +15740,7 @@
 
         // ── Person ────────────────────────────────────────────────────────
         function ritaPerson() {
-            var x = XO, y = GY;
+            var x = xo, y = GY;
             ctx.fillStyle = '#c9d0dc';
             ctx.strokeStyle = '#c9d0dc';
             ctx.lineCap = 'round';
@@ -15792,7 +15794,7 @@
 
         // ── Avståndslinje ─────────────────────────────────────────────────
         function ritaAvstand() {
-            var ax = x0(), ay = y0(), bx = XO, by = GY - 37;
+            var ax = x0(), ay = y0(), bx = xo, by = GY - 37;
             ctx.setLineDash([4, 5]);
             ctx.strokeStyle = 'rgba(223,228,238,0.55)';
             ctx.lineWidth = 1.2;
@@ -15889,7 +15891,7 @@
             ctx.font = font(22, true);
             var sk = 1 + 0.15 * Math.exp(-pop * 6);
             ctx.save();
-            ctx.translate(W - 10, GY - 62);
+            ctx.translate(Math.min(W - 10, xo + 40), GY - 62);
             ctx.scale(sk, sk);
             ctx.fillText(typ === 'fyr' ? 'Pang!' : 'Muller!', 0, 0);
             ctx.restore();
@@ -16068,8 +16070,8 @@
                 return;
             }
             if (tEv === null) {
-                info.textContent = 'Ljudet färdas med ' + vv + ' m/s i luft som är ' + f(T, 0) + ' °C. Dra i ' +
-                    (typ === 'fyr' ? 'fyrverkeriet' : 'nedslagsplatsen') + ' eller ändra avståndet, och tryck på knappen.';
+                info.textContent = 'Ljudet färdas med ' + vv + ' m/s i luft som är ' + f(T, 0) + ' °C. Dra i personen eller ' +
+                    (typ === 'fyr' ? 'fyrverkeriet' : 'nedslagsplatsen') + ', eller ändra avståndet, och tryck på knappen.';
             } else if (!hord) {
                 info.textContent = 'Ljuset är redan framme. Ljudvågen sprider sig åt alla håll med ' + vv + ' m/s.';
             }
@@ -16084,6 +16086,8 @@
 
         // ── Kontroller ────────────────────────────────────────────────────
         function syncVal() {
+            // ryms inte källan till vänster flyttas personen åt höger
+            if (x0() < XMIN) xo = Math.min(XMAX, XMIN + sh() * PXKM);
             gS.sl.min = String(sMin());
             if (s < sMin()) s = sMin();
             gS.sl.value = String(s);
@@ -16108,6 +16112,7 @@
             typ = 'blixt';
             gissa = true; gissaKlar = false;
             s = Math.round((0.8 + Math.random() * 5.2) * 10) / 10;
+            xo = XO;
             syncVal();
             [startBtn, blixtBtn, fyrBtn, gissaBtn].forEach(function (b) { b.style.display = 'none'; });
             gS.rad.style.display = 'none';
@@ -16149,17 +16154,26 @@
         svarBtn.addEventListener('click', bedom);
         svarIn.addEventListener('keydown', function (e) { if (e.key === 'Enter') bedom(); });
 
-        // dra i källan (nedslagsplatsen eller fyrverkeriet) längs marken
-        var drar = false;
+        // dra i källan (nedslagsplatsen eller fyrverkeriet) eller i personen
+        // längs marken; det man inte drar i står still
+        var drar = null;
         function logX(e) {
             var r = canvas.getBoundingClientRect();
             return { x: (e.clientX - r.left) / r.width * W, y: (e.clientY - r.top) / r.height * H };
         }
-        function nara(p) { return !gissa && Math.abs(p.x - x0()) < 26 && p.y > (typ === 'fyr' ? y0() - 40 : 90) && p.y < GY + 14; }
+        function naraKalla(p) { return Math.abs(p.x - x0()) < 26 && p.y > (typ === 'fyr' ? y0() - 40 : 90) && p.y < GY + 14; }
+        function naraPerson(p) { return Math.abs(p.x - xo) < 20 && p.y > GY - 52 && p.y < GY + 14; }
+        function nara(p) {
+            if (gissa) return null;
+            var a = naraKalla(p), b = naraPerson(p);
+            if (a && b) return Math.abs(p.x - xo) < Math.abs(p.x - x0()) ? 'person' : 'kalla';
+            return b ? 'person' : (a ? 'kalla' : null);
+        }
         canvas.addEventListener('pointerdown', function (e) {
             var p = logX(e);
-            if (!nara(p)) return;
-            drar = true;
+            var vad = nara(p);
+            if (!vad) return;
+            drar = vad;
             try { canvas.setPointerCapture(e.pointerId); } catch (er) {}
             e.preventDefault();
         });
@@ -16167,13 +16181,24 @@
             var p = logX(e);
             if (!drar) { canvas.style.cursor = nara(p) ? 'grab' : 'default'; return; }
             canvas.style.cursor = 'grabbing';
-            var shN = Math.max(0, (XO - p.x) / PXKM), h = hojd();
-            var sN = Math.sqrt(shN * shN + h * h);
-            s = Math.round(Math.max(sMin(), Math.min(SMAX, sN)) * 10) / 10;
+            var h = hojd(), shN, sN;
+            if (drar === 'person') {
+                // källan står still, personen flyttas och avståndet följer med
+                var kx = x0();
+                shN = Math.max(0, (Math.min(XMAX, p.x) - kx) / PXKM);
+                sN = Math.sqrt(shN * shN + h * h);
+                s = Math.round(Math.max(sMin(), Math.min(SMAX, sN)) * 10) / 10;
+                xo = Math.min(XMAX, kx + sh() * PXKM);
+                s = Math.round(Math.sqrt(Math.pow((xo - kx) / PXKM, 2) + h * h) * 10) / 10;
+            } else {
+                shN = Math.max(0, (xo - Math.max(XMIN, p.x)) / PXKM);
+                sN = Math.sqrt(shN * shN + h * h);
+                s = Math.round(Math.max(sMin(), Math.min(SMAX, sN)) * 10) / 10;
+            }
             syncVal();
             nollstall();
         });
-        function slapp() { drar = false; canvas.style.cursor = 'default'; }
+        function slapp() { drar = null; canvas.style.cursor = 'default'; }
         canvas.addEventListener('pointerup', slapp);
         canvas.addEventListener('pointercancel', slapp);
         canvas.style.touchAction = 'pan-y';

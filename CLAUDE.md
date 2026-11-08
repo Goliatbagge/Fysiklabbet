@@ -3952,6 +3952,12 @@ skydd:
    gäller ett eget tak på fyra gränsförsök per dygn. Går klockslaget inte
    att läsa, eller ligger det mer än sex timmar bort, görs ett nytt försök
    om en timme.
+   **Slår gränsen i först i mejlsteget** (2026-11-08: artikeln pushades,
+   granskningsmejlet dog en minut senare) läggs mejlet som väntande i
+   `logg/.mejl-vantar-<datum>`. Varje körning skickar väntande mejl först,
+   också svarskörningarna, och snabbutgången "båda artiklarna finns" görs
+   inte så länge ett mejl väntar. Larmet går ut först när gränsförsöken är
+   slut, och säger då att det är gränsen, inte Gmail.
 1c. **Jobbet loggar in med en långlivad token.** 2026-10-29 gick den
    vanliga Claude-inloggningen ut ("OAuth session expired and could not be
    refreshed"), och varje körning dog efter fem sekunder: ingen nyhet

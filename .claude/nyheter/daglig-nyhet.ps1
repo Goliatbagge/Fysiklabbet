@@ -159,7 +159,9 @@ function Invoke-Claude([string]$Prompt, [string]$Modell, [switch]$Gmail) {
     $script:ClaudeText = ($ut -join "`n")
     # Sessionsgränsen ("You've hit your session limit"), veckogränsen och
     # äldre CLI-versioners "Claude AI usage limit reached".
-    if ($script:ClaudeText -match 'hit your .*limit|usage limit reached|weekly limit') { $script:GransNadd = $true }
+    # Gäller bara det här anropet: ett tidigare anrop i samma körning får inte
+    # få ett lyckat mejlsteg att se ut som en gränsträff.
+    $script:GransNadd = [bool]($script:ClaudeText -match 'hit your .*limit|usage limit reached|weekly limit')
     $authFel = $script:ClaudeText -match 'Failed to authenticate|OAuth (session|token) (has )?expired|Invalid API key|Please run /login|Not logged in|authentication_error'
     if ($Gmail) {
         # Mejlstegen larmar för sig (Larma-Mejl): artikeln är redan skriven,
@@ -224,17 +226,32 @@ function Larma-Mejl([string]$Vad, [string]$Extra) {
         'koppling'   { $orsak = "Claude-sessionen hade ingen Gmail-koppling." }
         default      { $orsak = "Claude-sessionen gav inget kvitto på att mejlet skickades." }
     }
+    # Användningsgränsen är inget att laga på datorn (2026-11-08 skickade
+    # larmet ägaren att felsöka Gmail, fast kopplingen fungerade).
+    $grans = ($script:GransNadd -and -not $script:MejlFel)
+    if ($grans) { $orsak = "Claudes användningsgräns var nådd, och dagens omförsök efter gränsen räckte inte." }
     Log "FEL: $Vad misslyckades ($orsak) Larmar via GitHub."
     $rubrik = "Nyhetsjobbet kan inte mejla ($Today)"
+    # Hela sökvägen: winget lägger inte claude i PATH på den här datorn.
+    $ClaudeExe = '$env:LOCALAPPDATA\Microsoft\WinGet\Packages\Anthropic.ClaudeCode_Microsoft.Winget.Source_8wekyb3d8bbwe\claude.exe'
+    if ($grans) {
+        $laga = @"
+Det finns inget att laga: Gmail och inloggningen fungerar, det var bara Claudes användningsgräns som tog slut. Nästa natt går som vanligt. Se gärna efter i claude.ai under Settings, Usage om något annat jobb drar mycket.
+"@
+    } else {
+        $laga = @"
+Laga så här, på Windows-datorn:
+
+1. Starta Claude i en vanlig PowerShell med ``& "$ClaudeExe"`` och kör ``/login`` om den ber om det. Kontrollera med ``/mcp`` att Gmail finns bland claude.ai-kopplingarna.
+2. Kör ``Start-ScheduledTask -TaskName 'Fysiklabbet daglig nyhet svar'`` och se efter i loggen att den hittar Gmail.
+"@
+    }
     $text = @"
 $Vad gick inte. $orsak
 
 $Extra
 
-Laga så här, på Windows-datorn:
-
-1. Starta ``claude`` i en vanlig PowerShell och kör ``/login`` om den ber om det. Kontrollera med ``/mcp`` att Gmail finns bland claude.ai-kopplingarna.
-2. Kör ``Start-ScheduledTask -TaskName 'Fysiklabbet daglig nyhet svar'`` och se efter i loggen att den hittar Gmail.
+$laga
 
 Artiklarna skrivs och publiceras som vanligt även när mejlen inte går ut. Loggen: https://github.com/Goliatbagge/Fysiklabbet/blob/nyhetsjobb-logg/$Today.log
 "@
@@ -569,12 +586,73 @@ function Kor-Skriv([string]$Datum, [bool]$Forhand) {
     if ($Forhand) { $typ = 'granska' } else { $typ = 'publicerad' }
     Invoke-Claude (Prompt-Mejl $Datum $id $typ) 'sonnet' -Gmail
     if (Mejl-Skickat) { Log 'Mejlet till ägaren är skickat.'; return }
+    # Claude-gränsen slog i mellan artikeln och mejlet (2026-11-08: artikeln
+    # pushades 03:29, mejlet dog 03:30 på "session limit"). Ett vanligt
+    # gränsomförsök gjorde då ingenting, eftersom båda artiklarna redan fanns
+    # och skriptet avslutades direkt. Mejlet läggs därför som väntande och
+    # skickas av nästa körning (gränsomförsöket eller en svarskörning).
+    if ($script:GransNadd -and -not $script:MejlFel -and (GransForsok) -lt 4) {
+        Spara-VantandeMejl $Datum $id $typ
+        Planera-OmforsokEfterGrans $script:ClaudeText
+        return
+    }
     if ($Forhand) {
         $extra = "Artikeln för $Datum ($id) är pushad och publiceras automatiskt vid midnatt. Granska den här: $Bas/nyheter.html?forhand=$id"
         Larma-Mejl 'Granskningsmejlet' $extra
     } else {
         $extra = "Dagens artikel ($id) skrevs av skyddsnätet och är redan publicerad utan granskning: $Bas/nyheter.html?id=$id"
         Larma-Mejl 'Mejlet om den ogranskade artikeln' $extra
+    }
+}
+
+function GransForsok {
+    # Antal gränsomförsök som planerats i dag (taket i Planera-OmforsokEfterGrans är 4).
+    $Fil = Join-Path $LogDir ('.gransforsok-{0}' -f $Today)
+    $Antal = 0
+    if (Test-Path $Fil) { [void][int]::TryParse((Get-Content $Fil -TotalCount 1), [ref]$Antal) }
+    return $Antal
+}
+
+function Spara-VantandeMejl([string]$Datum, [string]$Id, [string]$Typ) {
+    $Fil = Join-Path $LogDir ('.mejl-vantar-{0}' -f $Datum)
+    Set-Content -Path $Fil -Value @($Id, $Typ) -Encoding utf8
+    Log "Mejlet om $Datum ($Id) väntar på att Claude-gränsen släpper."
+}
+
+function Kor-VantandeMejl {
+    # Mejl som inte gick ut för att Claude-gränsen slog i (Spara-VantandeMejl).
+    # Körs först i varje körning, i alla lägen, så att också svarskörningarna
+    # (fem om dagen) skickar ett mejl som fastnat.
+    $filer = @(Get-ChildItem -Path $LogDir -Filter '.mejl-vantar-*' -Force -ErrorAction SilentlyContinue)
+    foreach ($f in $filer) {
+        $Datum = $f.Name.Substring('.mejl-vantar-'.Length)
+        $rader = @(Get-Content -Path $f.FullName -Encoding utf8)
+        $id = $rader[0]; $typ = $rader[1]
+        if (-not (HasArticle $Datum)) {
+            Log "Väntande mejl om ${Datum}: artikeln finns inte längre. Stryker mejlet."
+            Remove-Item -Force $f.FullName; continue
+        }
+        # Ett mejl om en artikel som publicerades i går eller tidigare är inaktuellt.
+        if ($Datum -lt $Today) {
+            Log "Väntande mejl om $Datum är inaktuellt. Stryker det."
+            Remove-Item -Force $f.FullName; continue
+        }
+        Log "Skickar det väntande mejlet om $Datum ($id)."
+        Invoke-Claude (Prompt-Mejl $Datum $id $typ) 'sonnet' -Gmail
+        if (Mejl-Skickat) {
+            Log 'Det väntande mejlet till ägaren är skickat.'
+            Remove-Item -Force $f.FullName; continue
+        }
+        if ($script:GransNadd -and -not $script:MejlFel -and (GransForsok) -lt 4) {
+            Planera-OmforsokEfterGrans $script:ClaudeText
+            continue
+        }
+        Remove-Item -Force $f.FullName
+        if ($typ -eq 'granska') {
+            Larma-Mejl 'Granskningsmejlet' "Artikeln för $Datum ($id) är pushad och publiceras automatiskt vid midnatt. Granska den här: $Bas/nyheter.html?forhand=$id"
+        } else {
+            Larma-Mejl 'Mejlet om den ogranskade artikeln' "Dagens artikel ($id) skrevs av skyddsnätet och är redan publicerad utan granskning: $Bas/nyheter.html?id=$id"
+        }
     }
 }
 
@@ -648,7 +726,8 @@ Log "=== Nyhetsjobb: start ($Today) ==="
 
 # Snabb utgång utan lås och utan git: nattjobbet behöver inte göra något när
 # både dagens och morgondagens artikel redan ligger i arbetskatalogen.
-if ($Lage -ne 'svar' -and (HasArticle $Today) -and (HasArticle $Tomorrow)) {
+$VantandeMejl = @(Get-ChildItem -Path $LogDir -Filter '.mejl-vantar-*' -Force -ErrorAction SilentlyContinue).Count
+if ($Lage -ne 'svar' -and $VantandeMejl -eq 0 -and (HasArticle $Today) -and (HasArticle $Tomorrow)) {
     Log 'Dagens och morgondagens nyhet finns redan. Inget att göra.'
     Log '=== Nyhetsjobb: slut ==='
     return
@@ -674,6 +753,7 @@ Get-ChildItem -Path $LogDir -Filter '.forsok-*' -Force -ErrorAction SilentlyCont
 try {
     $script:Claude = Find-Claude
     Sync-Main
+    Kor-VantandeMejl
 
     if ($Lage -eq 'svar') {
         Kor-Svar

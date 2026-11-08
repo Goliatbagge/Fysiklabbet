@@ -179,7 +179,12 @@ window.SIM_NAMES = {
   'fysik2-magnetfalt-app.html': 'Magnetfält runt en rak ledare',
   'fysik2-jordmagnetiska-faltet.html': 'Jordmagnetiska fältet',
   'fysik2-magnetiskt-flode.html': 'Magnetiskt flöde',
-  'fysik2-vaxelstromsgenerator.html': 'Växelströmsgenerator',
+  'fysik2-vaxelstromsgenerator.html': [
+    { name: 'Växelströmsgenerator', desc: 'En slinga roterar i ett magnetfält och alstrar sinusformad växelspänning. Faradays lag i 3D.',
+      kw: ['elektromagnetism','magnetism','växelström','växelspänning','generator','induktion','faraday','spole','slinga','släpringar','sinus','3d'] },
+    { name: 'Vattenkraftverket på labbänken', href: 'fysik2-generator-app.html', desc: 'En vattenstråle driver ett skovelhjul, och på samma axel snurrar en magnet förbi en spole. Se växelspänningen uppstå, tänd lampan och se hjulet bromsas när energin går till ljus. Flytta spolen, ändra antalet varv eller veva själv.',
+      kw: ['elektromagnetism','generator','växelströmsgenerator','vattenkraft','vattenkraftverk','kraftverk','turbin','skovelhjul','dynamo','cykeldynamo','vev','magnet','roterande magnet','spole','järnkärna','induktion','lenz','lenz lag','växelspänning','toppspänning','effektivvärde','frekvens','energiomvandling','lampa','3d'] },
+  ],
   'fysik2-ledare-magnetfalt-app.html': [
     { name: 'Strömförande ledare i magnetfält', desc: 'En ledare mellan en nordända och en sydända. Ändra flödestäthet, ström och ledarens längd och se kraften F = B · I · l ändras, byt ström- och fältriktning och kontrollera med högerhandsregeln.',
       kw: ['elektromagnetism','magnetism','ledare','strömförande','magnetfält','kraft','magnetisk kraft','högerhandsregeln','flödestäthet','resulterande fält','parallella ledare','3d'] },

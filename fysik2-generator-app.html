@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <script src="i18n.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vattenkraftverket på labbänken — Fysiklabbet</title>
+    <meta name="description" content="Ett litet vattenkraftverk i 3D: vattenstrålen driver ett skovelhjul, och på samma axel snurrar en magnet förbi en spole. Se växelspänningen u = û · sin(ωt) uppstå, tänd lampan och se hjulet bromsas när energin går till ljus. Flytta spolen, ändra antalet varv och veva själv.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik2-generator-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Vattenkraftverket på labbänken — Fysik nivå 2">
+    <meta property="og:description" content="Ett litet vattenkraftverk i 3D: vattenstrålen driver ett skovelhjul, och på samma axel snurrar en magnet förbi en spole. Se växelspänningen u = û · sin(ωt) uppstå, tänd lampan och se hjulet bromsas när energin går till ljus. Flytta spolen, ändra antalet varv och veva själv.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik2-generator-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Vattenkraftverket på labbänken — Fysik nivå 2">
+    <meta name="twitter:description" content="Ett litet vattenkraftverk i 3D: vattenstrålen driver ett skovelhjul, och på samma axel snurrar en magnet förbi en spole. Se växelspänningen u = û · sin(ωt) uppstå, tänd lampan och se hjulet bromsas när energin går till ljus. Flytta spolen, ändra antalet varv och veva själv.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; white-space: nowrap; }
+        .fnum { color: var(--lab-ink); font-size: 22px; font-family: 'Instrument Serif', serif; line-height: 1.15; }
+
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            -webkit-user-select: none;
+            background: linear-gradient(180deg, #f7f2e8 0%, #ece3d2 100%);
+            touch-action: none;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        .gen-mount { position: absolute; inset: 0; }
+        .gen-mount > canvas { display: block; width: 100%; height: 100%; outline: none; }
+        @media (max-width: 600px) {
+            body.lab-sim .scene-wrap:not(:fullscreen) .gen-mount { position: relative; inset: auto; height: 440px; }
+            /* Mobil fullskärm: scenen i flödet med egen höjd (CLAUDE.md, fälla 5). */
+            body.lab-sim .scene-wrap:is(:fullscreen, :-webkit-full-screen) .gen-mount {
+                position: sticky; inset: auto; top: 0; z-index: 2;
+                flex: 0 0 auto; width: 100%; height: 56vh;
+            }
+        }
+        .scene-wrap.grab { cursor: grab; }
+        .scene-wrap.dragging { cursor: grabbing; }
+        .scene-wrap.pointer { cursor: pointer; }
+        .scene-wrap.ew { cursor: ew-resize; }
+
+        .scene-hint {
+            position: absolute; bottom: 10px; left: 12px; z-index: 5;
+            font-size: 12px; color: #e9edf3;
+            background: rgba(15,22,32,0.80); padding: 4px 11px; border-radius: 7px;
+            pointer-events: none; font-weight: 500; max-width: calc(100% - 24px);
+        }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 236px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-actions { display: flex; flex-direction: column; gap: 7px; margin-top: 9px; }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 12px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease; font-size: 14px;
+        }
+        .btn-toggle:hover:not(.active) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .vy-seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; border-radius: 9px; overflow: hidden;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .vy-seg.two { grid-template-columns: repeat(2, 1fr); }
+        .vy-seg button { background: var(--lab-bg, #f3eee4); border: 0; padding: 8px 4px; font-size: 13px;
+                         font-weight: 600; color: var(--lab-ink); cursor: pointer; }
+        .vy-seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+
+        .readout { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; text-align: center; }
+        .readout .rv { font-weight: 700; font-size: 17px; font-family: 'JetBrains Mono', monospace; }
+        .readout .rl { font-size: 12px; color: var(--lab-ink-muted); }
+
+        .forval { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .forval button { font-size: 13px; padding: 7px 8px; text-align: left; line-height: 1.25; }
+
+        .energi-rad { display: grid; grid-template-columns: 128px 1fr 62px; align-items: center; gap: 8px; margin-top: 6px; font-size: 13px; }
+        .energi-rad .bar { height: 12px; border-radius: 3px; background: rgba(15,22,32,0.08); overflow: hidden; }
+        .energi-rad .bar > div { height: 100%; border-radius: 3px; transition: width 0.12s linear; }
+        .energi-rad .val { font-family: 'JetBrains Mono', monospace; font-weight: 600; text-align: right; font-size: 12.5px; }
+        @media (max-width: 480px) {
+            .fkort { padding-left: 12px !important; padding-right: 12px !important; }
+            .fkort .flbl { font-size: 8.5px; letter-spacing: 0.02em; white-space: normal; max-width: 62px; text-align: center; hyphens: manual; }
+            .fkort .fnum { font-size: 19px; }
+        }
+        @media (max-width: 460px) { .energi-rad { grid-template-columns: 104px 1fr 56px; font-size: 12px; } }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+        .forkl p { margin-top: 0.6rem; }
+        .forkl ol, .forkl ul { margin-top: 0.5rem; padding-left: 1.3rem; }
+        .forkl ol { list-style: decimal; }
+        .forkl ul { list-style: disc; }
+        .forkl li { margin-top: 0.35rem; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2b">Nivå 2b</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3b">Nivå 1b</a>
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        /* =====================================================================
+           Vattenkraftverket på labbänken (generator med roterande magnet), 3D.
+
+           En vattenstråle från en labbkran träffar skovlarna på ett hjul. På
+           hjulets axel sitter en stavmagnet som snurrar förbi en fast spole
+           med järnkärna. Spolen är kopplad till en voltmeter och, via en
+           strömbrytare, till en liten glödlampa. Eleven kan också veva själv.
+
+           Fysiken (samma beteckningar som genomgången fy2-3.10):
+           - Flödet genom spolen: Φ = N · B · A · cos θ, där B är
+             flödestätheten i spolen när magneten pekar rakt mot den.
+             B avtar snabbt med avståndet g mellan magnet och spole:
+             B = B0 / (1 + g/L0)³ (en dipol avtar med tredje potensen).
+           - Inducerad spänning: u = −dΦ/dt = N · B · A · ω · sin θ,
+             så û = N · B · A · ω, precis som ê = B · A · ω för en slinga.
+           - Med lampan inkopplad går strömmen i = u / (R_spole + R_lampa).
+             Effekten u · i måste hjulet leverera. Det ger ett bromsande
+             kraftmoment τ = u · i / ω = N · B · A · sin θ · i (Lenz lag).
+           - Vattnet: τ_vatten = K · q · (q · W0 − ω). Strålen från en kran
+             som öppnas mer blir både större och snabbare.
+           - Hjulet: J · dω/dt = τ_vatten − τ_broms − friktion.
+           Enheter i scenen: 1 enhet = 1 cm. SI i fysiken.
+           ===================================================================== */
+
+        const COL = {
+            ink:    '#1f2530',
+            falt:   '#c0392b',   // magnetfältet B (rött, som teorifigurerna)
+            flux:   '#2563c9',   // flödet Φ (blått, som i transformatorn)
+            ind:    '#7b3fa0',   // inducerad spänning och ström (lila, som i Lenz lag)
+            kraft:  '#2563c9',
+            npol:   '#c0392b',
+            spol:   '#f4f2ee',
+            koppar: '#c87f3a',
+            lampa:  '#f2b134',
+            vatten: '#3a86c8',
+        };
+
+        // ── Fysikens konstanter ──
+        const A_SPOLE = Math.PI * 0.014 * 0.014;   // spolens area (m²), radie 1,4 cm
+        const B0 = 0.80, L0 = 1.2;                 // T, cm (med järnkärna)
+        const UTAN_KARNA = 0.22;                   // utan järnkärna blir B så här mycket mindre
+        const R_PER_VARV = 0.01;                   // Ω per varv
+        const R_LAMPA = 12;                        // Ω (lampan är märkt 1,2 V 0,1 A)
+        const P_LAMPA = 0.12;                      // W, lampans märkeffekt
+        const K_VATTEN = 1.1e-3, W0 = 28;            // N·m·s, rad/s
+        const J_HJUL = 1.0e-3;                     // kg·m²
+        const FRIK_V = 1.5e-5, FRIK_C = 1.2e-3;    // N·m·s, N·m
+        const R_VEV = 0.026;                       // vevens längd (m)
+        const W_MAX = 30;                          // rad/s
+
+        const bFalt = (g, karna) => B0 / Math.pow(1 + g / L0, 3) * (karna ? 1 : UTAN_KARNA);
+
+        // ── Geometri (cm) ──
+        const AY = 7.0;                    // axelns höjd över bänken
+        const Z_HJUL = -4.2, HJUL_R = 4.2, HJUL_B = 1.7;
+        const Z_MAG = 1.6, MAG_L = 5.0, MAG_T = 1.2, MAG_H = MAG_L / 2;
+        const Z_VEV = 5.6, VEV_R = 2.6;
+        const SPOLE_L = 3.4, SPOLE_RI = 1.4;
+        const KARNA_R = 1.2;
+        const spoleRY = (N) => 1.75 + 0.8 * N / 1200;
+        const spoleX = (g) => MAG_H + g + 0.5 + SPOLE_L / 2;    // spolens mitt; kärnans ände ligger g från magneten
+        const KRAN_X = HJUL_R * Math.cos(0.42), KRAN_Z = Z_HJUL;
+        const LAMP = new THREE.Vector3(9.5, 0, 9.6);
+        const VOLT = new THREE.Vector3(15.5, 0, -2.5);
+
+        const tr = (t) => (window.I18N ? I18N.t(t) : t);
+        const fmt = (num, decimals = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(decimals);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',').replace('-', '−');
+        };
+
+        // ─────────────────────────────────────────────────────────────────
+        // Fältlinjer runt stavmagneten (i magnetens eget system: x längs
+        // magneten, nordändan åt +x). Modell: två magnetiska poler i ±a.
+        // ─────────────────────────────────────────────────────────────────
+        const POL_A = 2.05;
+        function faltLokal(x, y) {
+            const dx1 = x - POL_A, dx2 = x + POL_A;
+            const r1 = Math.pow(dx1 * dx1 + y * y, 1.5), r2 = Math.pow(dx2 * dx2 + y * y, 1.5);
+            return [dx1 / r1 - dx2 / r2, y / r1 - y / r2];
+        }
+        // Linjen spåras från nordändan. Når den sydändan innan den lämnar
+        // radien R_KLIPP ritas hela slingan, annars ritas bara biten närmast
+        // magneten, och sydändans bit fås ur symmetrin (x → −x).
+        const R_KLIPP = 6.2;
+        function sparaLinje(phi) {
+            let x = POL_A + 0.32 * Math.cos(phi), y = 0.32 * Math.sin(phi);
+            const pts = [[x, y]];
+            const h = 0.05;
+            for (let n = 0; n < 3000; n++) {
+                let [a, b] = faltLokal(x, y); let m = Math.hypot(a, b);
+                const mx = x + a / m * h / 2, my = y + b / m * h / 2;
+                [a, b] = faltLokal(mx, my); m = Math.hypot(a, b);
+                x += a / m * h; y += b / m * h;
+                if (Math.hypot(x + POL_A, y) < 0.3) { pts.push([x, y]); return [pts]; }
+                if (Math.hypot(x, y) > R_KLIPP) {
+                    pts.push([x, y]);
+                    const sod = pts.map(([px, py]) => [-px, py]).reverse();
+                    return [pts, sod];
+                }
+                if (n % 3 === 0) pts.push([x, y]);
+            }
+            return [];
+        }
+        const FALT_LINJER = [];
+        [[0, [0.1, 0.5, 1.05, 1.6]], [Math.PI, [0.1, 0.5, 1.05, 1.6]],
+         [0.55, [0.7]], [-0.55, [0.7]], [Math.PI + 0.55, [0.7]], [Math.PI - 0.55, [0.7]]].forEach(([psi, phis]) => {
+            phis.forEach(phi => {
+                sparaLinje(phi).forEach(l => { if (l.length > 4) FALT_LINJER.push({ psi, pts: l }); });
+            });
+        });
+
+        // ─────────────────────────────────────────────────────────────────
+        // Grafikhjälp (samma som i elmotorn och Lenz lag)
+        // ─────────────────────────────────────────────────────────────────
+        const textSprite = (parts, h = 0.42) => {
+            const c = document.createElement('canvas');
+            const ctx = c.getContext('2d');
+            const FS = 64, PAD = 14;
+            const fontFor = (p) => `${p.italic ? 'italic ' : ''}${p.weight || 600} ${p.small ? FS * 0.74 : FS}px Poppins, sans-serif`;
+            let w = 0;
+            parts.forEach((p) => { ctx.font = fontFor(p); w += ctx.measureText(p.t).width; });
+            c.width = Math.max(2, Math.ceil(w) + PAD * 2);
+            c.height = FS + PAD * 2;
+            let x = PAD;
+            parts.forEach((p) => {
+                ctx.font = fontFor(p);
+                ctx.textBaseline = 'middle';
+                ctx.fillStyle = p.color;
+                const dy = p.sub ? FS * 0.24 : p.sup ? -FS * 0.24 : 0;
+                ctx.fillText(p.t, x, c.height / 2 + 2 + dy);
+                x += ctx.measureText(p.t).width;
+            });
+            const tex = new THREE.CanvasTexture(c);
+            tex.minFilter = THREE.LinearFilter;
+            tex.anisotropy = 4;
+            tex.encoding = THREE.sRGBEncoding;
+            const spr = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false, toneMapped: false }));
+            spr.scale.set(h * c.width / c.height, h, 1);
+            spr.renderOrder = 20;
+            return spr;
+        };
+        const Y_AXEL = new THREE.Vector3(0, 1, 0);
+        const linjar = (hex) => new THREE.Color(hex).convertSRGBToLinear();
+        const markMat = (hex, opt = {}) => new THREE.MeshStandardMaterial({
+            color: linjar(hex), emissive: linjar(hex).multiplyScalar(opt.glod != null ? opt.glod : 0.55),
+            roughness: 0.55, metalness: 0, toneMapped: false,
+            transparent: !!opt.opacity, opacity: opt.opacity || 1, depthWrite: !opt.opacity });
+        function pil(color, opt = {}) {
+            const g = new THREE.Group();
+            const mat = markMat(color, opt);
+            const skaft = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 1, 14), mat);
+            const spets = new THREE.Mesh(new THREE.ConeGeometry(1, 1, 18), mat);
+            g.add(skaft, spets);
+            g.userData = { skaft, spets, r: opt.r || 0.1 };
+            return g;
+        }
+        function stallPil(g, from, vec, opt = {}) {
+            const len = vec.length();
+            if (len < 1e-4) { g.visible = false; return; }
+            g.visible = true;
+            const r = opt.r || g.userData.r;
+            const head = Math.min(opt.head || r * 6, len * 0.6);
+            const shaft = len - head;
+            g.position.copy(from);
+            g.quaternion.setFromUnitVectors(Y_AXEL, vec.clone().normalize());
+            const { skaft, spets } = g.userData;
+            skaft.scale.set(r, Math.max(shaft, 1e-4), r);
+            skaft.position.set(0, shaft / 2, 0);
+            spets.scale.set(r * 2.5, head, r * 2.5);
+            spets.position.set(0, shaft + head / 2, 0);
+        }
+        function canvasTex(w, h, rita) {
+            const c = document.createElement('canvas');
+            c.width = w; c.height = h;
+            rita(c.getContext('2d'), w, h);
+            const t = new THREE.CanvasTexture(c);
+            t.encoding = THREE.sRGBEncoding;
+            t.anisotropy = 8;
+            return t;
+        }
+        function traTextur() {
+            return canvasTex(1024, 1024, (ctx, w, h) => {
+                const g = ctx.createLinearGradient(0, 0, w, h);
+                g.addColorStop(0, '#caa274'); g.addColorStop(1, '#b98d5e');
+                ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+                let seed = 7;
+                const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+                for (let i = 0; i < 140; i++) {
+                    const y0 = rnd() * h, amp = 4 + rnd() * 14, fr = 0.004 + rnd() * 0.01, ph = rnd() * 6;
+                    ctx.strokeStyle = `rgba(${90 + rnd() * 30},${55 + rnd() * 20},30,${0.05 + rnd() * 0.13})`;
+                    ctx.lineWidth = 0.6 + rnd() * 2.4;
+                    ctx.beginPath();
+                    for (let x = 0; x <= w; x += 8) {
+                        const y = y0 + Math.sin(x * fr + ph) * amp + Math.sin(x * fr * 3.1 + ph) * amp * 0.25;
+                        if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+                    }
+                    ctx.stroke();
+                }
+                ctx.strokeStyle = 'rgba(70,45,25,0.35)'; ctx.lineWidth = 2;
+                [256, 512, 768].forEach(y => { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); });
+            });
+        }
+        // Lindningen: tätt lindad lackerad koppartråd
+        function lindTextur() {
+            return canvasTex(512, 512, (ctx, w, h) => {
+                ctx.fillStyle = '#b8642c'; ctx.fillRect(0, 0, w, h);
+                for (let y = 0; y < h; y += 6) {
+                    const g = ctx.createLinearGradient(0, y, 0, y + 6);
+                    g.addColorStop(0, '#7e3f17'); g.addColorStop(0.45, '#e39a5a'); g.addColorStop(1, '#8a4a1e');
+                    ctx.fillStyle = g; ctx.fillRect(0, y, w, 6);
+                }
+            });
+        }
+        function magnetTex(nord) {
+            return canvasTex(512, 256, (ctx, w, h) => {
+                ctx.fillStyle = nord ? COL.npol : COL.spol; ctx.fillRect(0, 0, w, h);
+                const rg = ctx.createLinearGradient(0, 0, 0, h);
+                rg.addColorStop(0, 'rgba(255,255,255,0.16)'); rg.addColorStop(1, 'rgba(0,0,0,0.08)');
+                ctx.fillStyle = rg; ctx.fillRect(0, 0, w, h);
+                ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+                ctx.font = '700 170px Poppins, sans-serif';
+                if (!nord) { ctx.lineWidth = 11; ctx.lineJoin = 'round'; ctx.strokeStyle = '#0f1620'; ctx.strokeText('S', w / 2, h / 2 + 8); }
+                ctx.fillStyle = '#ffffff';
+                ctx.fillText(nord ? 'N' : 'S', w / 2, h / 2 + 8);
+            });
+        }
+        function voltTex() {
+            return canvasTex(512, 384, (ctx, w, h) => {
+                ctx.fillStyle = '#fbf8f2'; ctx.fillRect(0, 0, w, h);
+                const cx = w / 2, cy = h * 0.86, R = h * 0.62;
+                ctx.strokeStyle = '#1f2530'; ctx.lineWidth = 4;
+                ctx.beginPath(); ctx.arc(cx, cy, R, Math.PI * 1.22, Math.PI * 1.78); ctx.stroke();
+                ctx.fillStyle = '#1f2530'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+                for (let k = -15; k <= 15; k++) {
+                    const a = -Math.PI / 2 + k * (0.28 * Math.PI) / 15;
+                    const r1 = R + (k % 5 === 0 ? 22 : 12);
+                    ctx.lineWidth = k % 5 === 0 ? 5 : 2.5;
+                    ctx.beginPath(); ctx.moveTo(cx + R * Math.cos(a), cy + R * Math.sin(a)); ctx.lineTo(cx + r1 * Math.cos(a), cy + r1 * Math.sin(a)); ctx.stroke();
+                    if (k % 5 === 0) {
+                        ctx.font = '700 34px Poppins, sans-serif';
+                        const v = k / 5;
+                        ctx.fillText((v < 0 ? '−' : '') + Math.abs(v), cx + (R + 48) * Math.cos(a), cy + (R + 48) * Math.sin(a));
+                    }
+                }
+                ctx.font = '700 64px Poppins, sans-serif';
+                ctx.fillText('V', cx, cy - R * 0.42);
+            });
+        }
+        function omgivning(renderer) {
+            const tex = canvasTex(1024, 512, (ctx, w, h) => {
+                const g = ctx.createLinearGradient(0, 0, 0, h);
+                g.addColorStop(0, '#fbf8f2'); g.addColorStop(0.45, '#efe7d8'); g.addColorStop(0.55, '#a98559'); g.addColorStop(1, '#5d4128');
+                ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+                ctx.fillStyle = 'rgba(255,255,255,0.95)';
+                ctx.fillRect(w * 0.12, h * 0.12, w * 0.16, h * 0.2);
+                ctx.fillRect(w * 0.6, h * 0.08, w * 0.22, h * 0.14);
+                ctx.fillStyle = 'rgba(60,70,90,0.35)';
+                ctx.fillRect(w * 0.36, h * 0.2, w * 0.12, h * 0.25);
+            });
+            tex.mapping = THREE.EquirectangularReflectionMapping;
+            const pm = new THREE.PMREMGenerator(renderer);
+            const env = pm.fromEquirectangular(tex).texture;
+            pm.dispose();
+            return env;
+        }
+        function polylinje(pts) {
+            const L = [0];
+            for (let i = 1; i < pts.length; i++) L.push(L[i - 1] + pts[i].distanceTo(pts[i - 1]));
+            return {
+                pts, L, len: L[L.length - 1],
+                at(s) {
+                    s = Math.max(0, Math.min(this.len, s));
+                    let lo = 0, hi = this.L.length - 1;
+                    while (hi - lo > 1) { const m = (lo + hi) >> 1; if (this.L[m] < s) lo = m; else hi = m; }
+                    const t = (s - this.L[lo]) / Math.max(1e-9, this.L[hi] - this.L[lo]);
+                    return { p: this.pts[lo].clone().lerp(this.pts[hi], t), d: this.pts[hi].clone().sub(this.pts[lo]).normalize() };
+                },
+            };
+        }
+
+        const VYER = {
+            snett:  { theta: -0.38, phi: 1.14, radius: 50, target: [5.5, 7.4, 0.5] },
+            fram:   { theta: 0.0,  phi: 1.4,  radius: 44, target: [5.5, 6.0, 0] },
+            ovan:   { theta: 0.0,  phi: 0.08, radius: 46, target: [5.0, 1.0, 0] },
+        };
+
+        // Delat läge mellan React och scenen (scenen byggs bara en gång)
+        const SIM = {
+            p: { running: true, drift: 'vatten', q: 0.85, N: 600, g: 0.5, karna: true, lampa: false, slow: false,
+                 show: { falt: true, flode: true, strom: true, kraft: true } },
+            cb: {},
+            ut: { varv: 0, u: 0, uTopp: 0, i: 0, iTopp: 0, lampa: 0, Pin: 0, Plampa: 0, Pspole: 0, Pfrik: 0, Pkin: 0, Fvev: 0, vevar: false, B: 0 },
+            buf: [],
+            vy: null,
+        };
+        const GRAF_T = 2.0;   // sekunder simuleringstid i grafen
+
+        // ─────────────────────────────────────────────────────────────────
+        // 3D-scenen
+        // ─────────────────────────────────────────────────────────────────
+        function GenScene({ wrapRef }) {
+            const mountRef = useRef(null);
+            useEffect(() => {
+                const wrap = wrapRef.current;
+                const el = mountRef.current;
+                const W = () => el.clientWidth, H = () => el.clientHeight;
+
+                const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                renderer.setSize(W(), H());
+                renderer.setClearColor(0x000000, 0);
+                renderer.outputEncoding = THREE.sRGBEncoding;
+                renderer.toneMapping = THREE.ACESFilmicToneMapping;
+                renderer.toneMappingExposure = 1.05;
+                renderer.shadowMap.enabled = true;
+                renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+                el.appendChild(renderer.domElement);
+
+                const scene = new THREE.Scene();
+                scene.environment = omgivning(renderer);
+                const camera = new THREE.PerspectiveCamera(32, W() / H(), 0.5, 400);
+
+                scene.add(new THREE.HemisphereLight(0xfffaf0, 0x8a6a48, 0.55));
+                const sol = new THREE.DirectionalLight(0xffffff, 1.2);
+                sol.position.set(14, 32, 20);
+                sol.castShadow = true;
+                sol.shadow.mapSize.set(2048, 2048);
+                Object.assign(sol.shadow.camera, { left: -26, right: 26, top: 24, bottom: -24, near: 1, far: 90 });
+                sol.shadow.bias = -0.0006;
+                sol.shadow.normalBias = 0.03;
+                scene.add(sol);
+                const fyll = new THREE.DirectionalLight(0xdfe8ff, 0.35);
+                fyll.position.set(-20, 12, -8);
+                scene.add(fyll);
+
+                const skugg = (m) => { m.castShadow = true; m.receiveShadow = true; return m; };
+
+                // ── Labbänken ──
+                const tra = traTextur(); tra.wrapS = tra.wrapT = THREE.RepeatWrapping; tra.repeat.set(2, 1.3);
+                const bank = new THREE.Mesh(new THREE.BoxGeometry(80, 1.2, 46), new THREE.MeshStandardMaterial({ map: tra, roughness: 0.7, envMapIntensity: 0.25 }));
+                bank.position.set(4, -0.6, -1); bank.receiveShadow = true;
+                scene.add(bank);
+
+                const metall = new THREE.MeshStandardMaterial({ color: 0xc9ccd1, roughness: 0.25, metalness: 1.0 });
+                const morkMetall = new THREE.MeshStandardMaterial({ color: 0x5c6068, roughness: 0.35, metalness: 0.9 });
+                const ljustTra = new THREE.MeshStandardMaterial({ color: linjar('#d9b98c'), roughness: 0.6 });
+                const morktTra = new THREE.MeshStandardMaterial({ color: linjar('#7a5534'), roughness: 0.55 });
+                const svartPlast = new THREE.MeshStandardMaterial({ color: linjar('#2b2f36'), roughness: 0.45, metalness: 0.15 });
+                const kopparMat = new THREE.MeshStandardMaterial({ color: linjar('#c0682f'), roughness: 0.3, metalness: 0.85, envMapIntensity: 0.8 });
+
+                // ── Balja som fångar vattnet ──
+                const baljaG = new THREE.Group();
+                const baljaMat = new THREE.MeshPhysicalMaterial({ color: linjar('#9fb7c9'), roughness: 0.2, metalness: 0, transparent: true, opacity: 0.45, depthWrite: false });
+                const bw = 13, bd = 5.8, bh = 2.6, t = 0.18;
+                const vagg = (w, h, d, x, y, z) => { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), baljaMat); m.position.set(x, y, z); baljaG.add(m); };
+                vagg(bw, t, bd, 0, t / 2, 0);
+                vagg(bw, bh, t, 0, bh / 2, bd / 2); vagg(bw, bh, t, 0, bh / 2, -bd / 2);
+                vagg(t, bh, bd, bw / 2, bh / 2, 0); vagg(t, bh, bd, -bw / 2, bh / 2, 0);
+                const vattenYta = new THREE.Mesh(new THREE.PlaneGeometry(bw - 0.4, bd - 0.4),
+                    new THREE.MeshPhysicalMaterial({ color: linjar('#5c9fd6'), roughness: 0.08, metalness: 0, transparent: true, opacity: 0.55, depthWrite: false }));
+                vattenYta.rotation.x = -Math.PI / 2; vattenYta.position.y = 1.3;
+                baljaG.add(vattenYta);
+                baljaG.position.set(1.5, 0, Z_HJUL);
+                scene.add(baljaG);
+                // ringar på vattenytan där vattnet landar
+                const ringar = [];
+                const ringMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.5, depthWrite: false });
+                for (let i = 0; i < 5; i++) {
+                    const r = new THREE.Mesh(new THREE.RingGeometry(0.85, 1, 40), ringMat.clone());
+                    r.rotation.x = -Math.PI / 2; r.position.set(HJUL_R * 0.95, 1.32, Z_HJUL);
+                    r.userData.fas = i / 5;
+                    scene.add(r); ringar.push(r);
+                }
+
+                // ── Lagerbockar och axel ──
+                const bock = (z) => {
+                    const g = new THREE.Group();
+                    const fot = skugg(new THREE.Mesh(new THREE.BoxGeometry(3.2, 0.6, 2.2), morktTra)); fot.position.y = 0.3; g.add(fot);
+                    const stang = skugg(new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.28, AY - 0.6, 18), metall)); stang.position.y = 0.6 + (AY - 0.6) / 2 - 0.5; g.add(stang);
+                    const lager = skugg(new THREE.Mesh(new THREE.CylinderGeometry(0.7, 0.7, 0.9, 28), morkMetall)); lager.rotation.x = Math.PI / 2; lager.position.y = AY; g.add(lager);
+                    g.position.set(0, 0, z); scene.add(g);
+                };
+                bock(Z_HJUL - 3.2); bock(-0.6); bock(Z_MAG + 1.8);
+                const axel = skugg(new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.22, (Z_VEV + 0.3) - (Z_HJUL - 3.7), 20), metall));
+                axel.rotation.x = Math.PI / 2;
+                axel.position.set(0, AY, ((Z_VEV + 0.3) + (Z_HJUL - 3.7)) / 2);
+                scene.add(axel);
+
+                // ── Skovelhjulet ──
+                const hjulG = new THREE.Group();
+                hjulG.position.set(0, AY, Z_HJUL);
+                scene.add(hjulG);
+                const akrylMat = new THREE.MeshPhysicalMaterial({ color: linjar('#e8eef2'), roughness: 0.12, metalness: 0, transparent: true, opacity: 0.38, depthWrite: false, side: THREE.DoubleSide });
+                [-HJUL_B / 2, HJUL_B / 2].forEach(dz => {
+                    const skiva = new THREE.Mesh(new THREE.CylinderGeometry(HJUL_R + 0.25, HJUL_R + 0.25, 0.14, 64), akrylMat);
+                    skiva.rotation.x = Math.PI / 2; skiva.position.z = dz; hjulG.add(skiva);
+                    const kant = new THREE.Mesh(new THREE.TorusGeometry(HJUL_R + 0.25, 0.07, 8, 80), new THREE.MeshStandardMaterial({ color: linjar('#9aa6b0'), roughness: 0.3 }));
+                    kant.position.z = dz; hjulG.add(kant);
+                });
+                const nav = skugg(new THREE.Mesh(new THREE.CylinderGeometry(0.85, 0.85, HJUL_B + 0.3, 28), svartPlast));
+                nav.rotation.x = Math.PI / 2; hjulG.add(nav);
+                // sex skålformade skovlar (sex, så att hjulet inte ser ut att gå baklänges på skärmen)
+                const skovelMat = new THREE.MeshStandardMaterial({ color: linjar('#e07b2c'), roughness: 0.45, metalness: 0.05, side: THREE.DoubleSide });
+                const ekerMat = new THREE.MeshStandardMaterial({ color: linjar('#6b7480'), roughness: 0.4, metalness: 0.6 });
+                for (let k = 0; k < 6; k++) {
+                    const a = k * Math.PI / 3;
+                    const skovel = new THREE.Group();
+                    const skal = skugg(new THREE.Mesh(new THREE.CylinderGeometry(0.85, 0.85, HJUL_B - 0.1, 20, 1, true, 0, Math.PI), skovelMat));
+                    skal.rotation.x = Math.PI / 2;
+                    skal.position.set(HJUL_R - 0.6, 0, 0);
+                    skovel.add(skal);
+                    const eker = skugg(new THREE.Mesh(new THREE.BoxGeometry(HJUL_R - 1.5, 0.22, 0.3), ekerMat));
+                    eker.position.set((HJUL_R - 1.5) / 2 + 0.75, 0, 0);
+                    skovel.add(eker);
+                    skovel.rotation.z = a;
+                    hjulG.add(skovel);
+                }
+
+                // ── Labbkranen ──
+                const kranG = new THREE.Group();
+                const kromMat = new THREE.MeshStandardMaterial({ color: 0xe4e6ea, roughness: 0.12, metalness: 1.0 });
+                const KRAN_TOPP = AY + HJUL_R + 6.5;
+                const ror = skugg(new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.5, KRAN_TOPP, 24), kromMat));
+                ror.position.set(KRAN_X, KRAN_TOPP / 2, Z_HJUL - 5.6);
+                kranG.add(ror);
+                const fot = skugg(new THREE.Mesh(new THREE.CylinderGeometry(1.3, 1.5, 0.5, 32), kromMat));
+                fot.position.set(KRAN_X, 0.25, Z_HJUL - 5.6); kranG.add(fot);
+                const kropp = skugg(new THREE.Mesh(new THREE.SphereGeometry(0.85, 24, 16), kromMat));
+                kropp.position.set(KRAN_X, KRAN_TOPP, Z_HJUL - 5.6); kranG.add(kropp);
+                const pipKurva = new THREE.CatmullRomCurve3([
+                    new THREE.Vector3(KRAN_X, KRAN_TOPP, Z_HJUL - 5.6),
+                    new THREE.Vector3(KRAN_X, KRAN_TOPP + 1.6, Z_HJUL - 3.6),
+                    new THREE.Vector3(KRAN_X, KRAN_TOPP + 0.8, Z_HJUL - 1.0),
+                    new THREE.Vector3(KRAN_X, KRAN_TOPP - 0.6, Z_HJUL),
+                ]);
+                const pip = skugg(new THREE.Mesh(new THREE.TubeGeometry(pipKurva, 40, 0.34, 16, false), kromMat));
+                kranG.add(pip);
+                const MUN = new THREE.Vector3(KRAN_X, KRAN_TOPP - 0.6, Z_HJUL);
+                // vredet: en vinge med blå knopp, klickbar
+                const vredG = new THREE.Group();
+                vredG.position.set(KRAN_X, KRAN_TOPP + 0.75, Z_HJUL - 5.6);
+                const vredSkaft = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 0.7, 12), kromMat);
+                vredG.add(vredSkaft);
+                const vinge = skugg(new THREE.Mesh(new THREE.BoxGeometry(3.2, 0.35, 0.5), kromMat));
+                vinge.position.y = 0.4; vredG.add(vinge);
+                const knopp = skugg(new THREE.Mesh(new THREE.SphereGeometry(0.42, 18, 12), new THREE.MeshStandardMaterial({ color: linjar('#2f6db5'), roughness: 0.3 })));
+                knopp.position.set(1.6, 0.4, 0); vredG.add(knopp);
+                [vredSkaft, vinge, knopp].forEach(m => { m.userData.klick = 'kran'; });
+                kranG.add(vredG);
+                scene.add(kranG);
+
+                // vattenstrålen: ett genomskinligt rör som smalnar av, och droppar
+                const vattenMat = new THREE.MeshPhysicalMaterial({ color: linjar('#6fb2e8'), roughness: 0.05, metalness: 0, transparent: true, opacity: 0.6, depthWrite: false, emissive: linjar('#3a86c8').multiplyScalar(0.12) });
+                const TRAFF_Y = AY + HJUL_R * Math.sin(0.42) + 0.55;
+                const stralLen = MUN.y - TRAFF_Y;
+                const stral = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.24, stralLen, 16, 1, true), vattenMat);
+                stral.position.set(KRAN_X, TRAFF_Y + stralLen / 2, Z_HJUL);
+                scene.add(stral);
+                const droppGeo = new THREE.SphereGeometry(0.14, 10, 8);
+                const droppar = [];
+                for (let i = 0; i < 70; i++) {
+                    const m = new THREE.Mesh(droppGeo, vattenMat);
+                    m.visible = false; scene.add(m);
+                    droppar.push({ m, liv: -1, p: new THREE.Vector3(), v: new THREE.Vector3() });
+                }
+
+                // ── Magneten (roterar på axeln) ──
+                const magnetG = new THREE.Group();
+                magnetG.position.set(0, AY, Z_MAG);
+                scene.add(magnetG);
+                const nMat = new THREE.MeshStandardMaterial({ map: magnetTex(true), roughness: 0.35, metalness: 0.15 });
+                const sMat = new THREE.MeshStandardMaterial({ map: magnetTex(false), roughness: 0.35, metalness: 0.15 });
+                const nHalva = skugg(new THREE.Mesh(new THREE.BoxGeometry(MAG_H, MAG_T, MAG_T), nMat)); nHalva.position.x = MAG_H / 2;
+                const sHalva = skugg(new THREE.Mesh(new THREE.BoxGeometry(MAG_H, MAG_T, MAG_T), sMat)); sHalva.position.x = -MAG_H / 2;
+                magnetG.add(nHalva, sHalva);
+                const magNav = skugg(new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, MAG_T + 0.5, 20), morkMetall));
+                magNav.rotation.x = Math.PI / 2; magnetG.add(magNav);
+
+                // fältlinjer som roterar med magneten
+                const faltG = new THREE.Group(); magnetG.add(faltG);
+                const faltMat = new THREE.MeshBasicMaterial({ color: linjar(COL.falt), transparent: true, opacity: 0.75, depthWrite: false, toneMapped: false });
+                const faltPilMat = markMat(COL.falt, { glod: 0.6 });
+                FALT_LINJER.forEach(({ psi, pts }) => {
+                    const c = Math.cos(psi), s = Math.sin(psi);
+                    const v3 = pts.map(([x, y]) => new THREE.Vector3(x, y * c, y * s));
+                    const kurva = new THREE.CatmullRomCurve3(v3);
+                    const ror = new THREE.Mesh(new THREE.TubeGeometry(kurva, Math.min(300, v3.length * 2), 0.045, 6, false), faltMat);
+                    ror.renderOrder = 2;
+                    faltG.add(ror);
+                    const pl = polylinje(v3);
+                    const { p, d } = pl.at(pl.len * 0.5);
+                    const kon = new THREE.Mesh(new THREE.ConeGeometry(0.17, 0.48, 14), faltPilMat);
+                    kon.position.copy(p); kon.quaternion.setFromUnitVectors(Y_AXEL, d);
+                    faltG.add(kon);
+                });
+                const bLapp = textSprite([{ t: 'B', italic: true, color: COL.falt }], 1.2);
+                bLapp.position.set(-1.2, AY + 4.6, Z_MAG);
+                scene.add(bLapp);
+
+                // ── Veven (roterar med axeln) ──
+                const vevG = new THREE.Group();
+                vevG.position.set(0, AY, Z_VEV);
+                scene.add(vevG);
+                const vevArm = skugg(new THREE.Mesh(new THREE.BoxGeometry(VEV_R + 0.8, 0.5, 0.4), morkMetall));
+                vevArm.position.x = VEV_R / 2; vevG.add(vevArm);
+                const vevNav = skugg(new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 0.6, 20), morkMetall));
+                vevNav.rotation.x = Math.PI / 2; vevG.add(vevNav);
+                const handtag = skugg(new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.4, 2.0, 20), new THREE.MeshStandardMaterial({ color: linjar('#8a2d2d'), roughness: 0.5 })));
+                handtag.rotation.x = Math.PI / 2; handtag.position.set(VEV_R, 0, 1.1); vevG.add(handtag);
+                [vevArm, vevNav, handtag].forEach(m => { m.userData.klick = 'vev'; });
+                const vevPil = pil(COL.kraft, { r: 0.12 }); scene.add(vevPil);
+                const fLapp = textSprite([{ t: 'F', italic: true, color: COL.kraft }], 1.2); scene.add(fLapp);
+
+                // ── Spolen (dras i sidled) ──
+                const spoleG = new THREE.Group();
+                scene.add(spoleG);
+                const stod = skugg(new THREE.Mesh(new THREE.BoxGeometry(SPOLE_L + 1.6, 1, 3.6), ljustTra));
+                spoleG.add(stod);
+                const sadel = skugg(new THREE.Mesh(new THREE.BoxGeometry(SPOLE_L + 0.8, 1, 2.2), ljustTra));
+                spoleG.add(sadel);
+                const bobbinMat = new THREE.MeshStandardMaterial({ color: linjar('#2b2f36'), roughness: 0.5 });
+                const lindTex = lindTextur(); lindTex.wrapS = lindTex.wrapT = THREE.RepeatWrapping;
+                const lindMat = new THREE.MeshStandardMaterial({ map: lindTex, roughness: 0.32, metalness: 0.75, envMapIntensity: 0.7 });
+                const lindning = skugg(new THREE.Mesh(new THREE.CylinderGeometry(1, 1, SPOLE_L - 0.3, 48, 1, true), lindMat));
+                lindning.rotation.z = Math.PI / 2;
+                spoleG.add(lindning);
+                const flans = [-1, 1].map(sg => {
+                    const f = skugg(new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 0.16, 48), bobbinMat));
+                    f.rotation.z = Math.PI / 2; f.position.x = sg * (SPOLE_L / 2 - 0.08);
+                    spoleG.add(f); return f;
+                });
+                const karnaMat = new THREE.MeshStandardMaterial({ color: linjar('#8d939b'), roughness: 0.42, metalness: 0.85 });
+                const karna = skugg(new THREE.Mesh(new THREE.CylinderGeometry(KARNA_R, KARNA_R, SPOLE_L + 0.5, 32), karnaMat));
+                karna.rotation.z = Math.PI / 2;
+                spoleG.add(karna);
+                // kärnan syns som ett mörkt hål när den är borttagen
+                const hal = new THREE.Mesh(new THREE.CylinderGeometry(SPOLE_RI, SPOLE_RI, SPOLE_L + 0.02, 32, 1, true), new THREE.MeshStandardMaterial({ color: 0x24272c, roughness: 0.8, side: THREE.BackSide }));
+                hal.rotation.z = Math.PI / 2; spoleG.add(hal);
+                // anslutningsskruvar framtill på stödet
+                const skruvPos = [-0.9, 0.9];
+                const skruvar = skruvPos.map((dx, i) => {
+                    const m = skugg(new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.32, 0.55, 16), new THREE.MeshStandardMaterial({ color: linjar(i ? '#b8323a' : '#1f2530'), roughness: 0.4 })));
+                    spoleG.add(m); return m;
+                });
+                const flodePil = pil(COL.flux, { r: 0.16 }); spoleG.add(flodePil);
+                flodePil.traverse(o => { if (o.material) { o.material.depthTest = false; o.material.transparent = true; } o.renderOrder = 9; });
+                const phiLapp = textSprite([{ t: 'Φ', italic: true, color: COL.flux }], 1.25); spoleG.add(phiLapp);
+                [stod, sadel, lindning, karna, ...flans].forEach(m => { m.userData.klick = 'spole'; });
+                const spoleHit = [stod, sadel, lindning, karna, ...flans];
+
+                // ── Lampan med strömbrytare ──
+                const lampG = new THREE.Group();
+                lampG.position.copy(LAMP);
+                lampG.rotation.y = 0.12;
+                lampG.scale.setScalar(1.45);
+                scene.add(lampG);
+                const platta = skugg(new THREE.Mesh(new THREE.BoxGeometry(8.4, 0.8, 4), ljustTra)); platta.position.y = 0.4; lampG.add(platta);
+                const sockel = skugg(new THREE.Mesh(new THREE.CylinderGeometry(0.75, 0.85, 1.4, 24), svartPlast)); sockel.position.set(-2.2, 1.5, 0); lampG.add(sockel);
+                const gang = skugg(new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 0.6, 20), metall)); gang.position.set(-2.2, 2.45, 0); lampG.add(gang);
+                const glasMat = new THREE.MeshPhysicalMaterial({ color: linjar('#ffffff'), roughness: 0.04, metalness: 0, transparent: true, opacity: 0.28, depthWrite: false,
+                                                              emissive: linjar(COL.lampa), emissiveIntensity: 0 });
+                const glas = new THREE.Mesh(new THREE.SphereGeometry(1.05, 32, 24), glasMat);
+                glas.scale.set(1, 1.18, 1); glas.position.set(-2.2, 3.7, 0); lampG.add(glas);
+                const trad = new THREE.Mesh(new THREE.TorusGeometry(0.3, 0.035, 6, 24, Math.PI),
+                    new THREE.MeshStandardMaterial({ color: 0x55402a, emissive: linjar('#ffb43a'), emissiveIntensity: 0, roughness: 0.6 }));
+                trad.position.set(-2.2, 3.55, 0); trad.rotation.x = 0; lampG.add(trad);
+                const glod = new THREE.Sprite(new THREE.SpriteMaterial({
+                    map: canvasTex(128, 128, (ctx, w, h) => { const g = ctx.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, w / 2); g.addColorStop(0, 'rgba(255,214,120,0.9)'); g.addColorStop(0.35, 'rgba(255,190,90,0.35)'); g.addColorStop(1, 'rgba(255,180,80,0)'); ctx.fillStyle = g; ctx.fillRect(0, 0, w, h); }),
+                    transparent: true, depthWrite: false, opacity: 0 }));
+                glod.position.set(-2.2, 3.7, 0); glod.scale.set(6, 6, 1); lampG.add(glod);
+                const lampLjus = new THREE.PointLight(0xffc06a, 0, 26, 2);
+                lampLjus.position.set(-2.2, 3.7, 0); lampG.add(lampLjus);
+                // knivströmbrytaren
+                const brytG = new THREE.Group(); brytG.position.set(1.9, 0.8, 0); lampG.add(brytG);
+                const brytFot = skugg(new THREE.Mesh(new THREE.BoxGeometry(3.6, 0.3, 1.4), svartPlast)); brytFot.position.y = 0.15; brytG.add(brytFot);
+                const fasten = (x) => { const m = skugg(new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.9, 0.7), kopparMat)); m.position.set(x, 0.75, 0); brytG.add(m); };
+                fasten(-1.3); fasten(1.25);
+                const kniv = new THREE.Group(); kniv.position.set(-1.3, 0.95, 0); brytG.add(kniv);
+                const blad = skugg(new THREE.Mesh(new THREE.BoxGeometry(2.75, 0.12, 0.42), kopparMat)); blad.position.x = 1.375; kniv.add(blad);
+                const grepp = skugg(new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.28, 1.1, 14), new THREE.MeshStandardMaterial({ color: linjar('#b8323a'), roughness: 0.45 })));
+                grepp.position.set(2.75, 0.45, 0); kniv.add(grepp);
+                [brytFot, blad, grepp].forEach(m => { m.userData.klick = 'brytare'; });
+                const brytHit = new THREE.Mesh(new THREE.BoxGeometry(4.2, 2.6, 2.2), new THREE.MeshBasicMaterial({ visible: false }));
+                brytHit.position.set(0, 1.1, 0); brytHit.userData.klick = 'brytare'; brytG.add(brytHit);
+                const lampTerm = [new THREE.Vector3(-3.6, 0.95, 1.4), new THREE.Vector3(3.6, 0.95, 1.4)].map((v, i) => {
+                    const m = skugg(new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.4, 14), new THREE.MeshStandardMaterial({ color: linjar(i ? '#b8323a' : '#1f2530'), roughness: 0.4 })));
+                    m.position.copy(v); lampG.add(m); return v;
+                });
+                lampG.updateMatrixWorld();
+                const lampV = lampG.localToWorld(lampTerm[0].clone()).setY(1.2);
+                const lampH = lampG.localToWorld(lampTerm[1].clone()).setY(1.2);
+                // inre väg genom lampan och brytaren (för strömpilarna)
+                const inreLamp = [lampTerm[0].clone().setY(1.0), new THREE.Vector3(-2.2, 1.0, 1.0), new THREE.Vector3(-2.2, 2.9, 0.4), new THREE.Vector3(-2.2, 3.55, 0.4),
+                                  new THREE.Vector3(-2.2, 2.9, -0.4), new THREE.Vector3(-1.6, 1.0, -0.6), new THREE.Vector3(0.6, 1.0, -0.6), new THREE.Vector3(1.9 + 1.25, 1.2, -0.3),
+                                  new THREE.Vector3(3.6, 1.0, 1.0), lampTerm[1].clone().setY(1.0)].map(v => lampG.localToWorld(v.clone()));
+
+                // ── Voltmetern ──
+                const voltG = new THREE.Group();
+                voltG.position.copy(VOLT); voltG.rotation.y = 0.38;
+                scene.add(voltG);
+                const voltLada = skugg(new THREE.Mesh(new THREE.BoxGeometry(8, 6.2, 4.2), new THREE.MeshStandardMaterial({ color: linjar('#2b2f36'), roughness: 0.45, metalness: 0.2 })));
+                voltLada.position.y = 3.1; voltG.add(voltLada);
+                const tavla = new THREE.Mesh(new THREE.PlaneGeometry(7, 5.25), new THREE.MeshStandardMaterial({ map: voltTex(), roughness: 0.7 }));
+                tavla.position.set(0, 3.4, 2.11); voltG.add(tavla);
+                const nalG = new THREE.Group(); nalG.position.set(0, 3.4 - 5.25 / 2 + 5.25 * 0.14, 2.16); voltG.add(nalG);
+                const nal = new THREE.Mesh(new THREE.BoxGeometry(0.09, 3.6, 0.04), markMat('#c8324a', { glod: 0.4 }));
+                nal.geometry.translate(0, 1.8, 0); nalG.add(nal);
+                const nalNav = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.18, 0.1, 16), svartPlast); nalNav.rotation.x = Math.PI / 2; nalG.add(nalNav);
+                const voltGlas = new THREE.Mesh(new THREE.PlaneGeometry(7, 5.25), new THREE.MeshPhysicalMaterial({ color: 0xffffff, transparent: true, opacity: 0.1, roughness: 0.05, depthWrite: false }));
+                voltGlas.position.set(0, 3.4, 2.2); voltG.add(voltGlas);
+                [-2.2, 2.2].forEach((x, i) => { const m = skugg(new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.4, 0.7, 18), new THREE.MeshStandardMaterial({ color: linjar(i ? '#b8323a' : '#1f2530'), roughness: 0.4 }))); m.position.set(x, 6.55, 1); voltG.add(m); });
+                voltG.updateMatrixWorld();
+                const voltV = voltG.localToWorld(new THREE.Vector3(-2.2, 6.9, 1));
+                const voltH = voltG.localToWorld(new THREE.Vector3(2.2, 6.9, 1));
+
+                // ── Ledningar (byggs om när spolen flyttas) ──
+                const svartLed = new THREE.MeshStandardMaterial({ color: linjar('#23262c'), roughness: 0.5 });
+                const rodLed = new THREE.MeshStandardMaterial({ color: linjar('#b8323a'), roughness: 0.5 });
+                let ledningar = [];
+                let stromBana = null;
+                const kabel = (pts, mat) => {
+                    const k = new THREE.CatmullRomCurve3(pts, false, 'centripetal');
+                    const m = new THREE.Mesh(new THREE.TubeGeometry(k, 80, 0.13, 8, false), mat);
+                    m.castShadow = true; scene.add(m); ledningar.push(m);
+                    return k.getSpacedPoints(80);
+                };
+                const stromG = new THREE.Group(); scene.add(stromG);
+                const stromMat = markMat(COL.ind, { glod: 0.45 });
+                const stromKon = new THREE.ConeGeometry(0.24, 0.62, 14);
+                const stromPilar = [];
+                for (let i = 0; i < 64; i++) { const m = new THREE.Mesh(stromKon, stromMat); m.renderOrder = 6; stromG.add(m); stromPilar.push(m); }
+                const iLapp = textSprite([{ t: 'i', italic: true, color: COL.ind }], 1.2); stromG.add(iLapp);
+
+                let ritadN = -1, iLappPos = new THREE.Vector3();
+                function byggSpole() {
+                    const p = SIM.p;
+                    const xc = spoleX(p.g);
+                    const ry = spoleRY(p.N);
+                    spoleG.position.set(xc, 0, Z_MAG);
+                    lindning.scale.set(ry, 1, ry);
+                    lindTex.repeat.set(3, Math.round(p.N / 40));
+                    flans.forEach(f => f.scale.set(ry + 0.25, 1, ry + 0.25));
+                    const stodH = AY - ry - 0.35;
+                    stod.scale.y = stodH; stod.position.y = stodH / 2;
+                    sadel.scale.y = 0.5; sadel.position.y = stodH + 0.1;
+                    lindning.position.y = AY; flans.forEach(f => { f.position.y = AY; });
+                    karna.position.set(-0.25, AY, 0);
+                    hal.position.set(0, AY, 0);
+                    skruvar.forEach((s, i) => s.position.set(skruvPos[i], stodH + 0.27, 1.45));
+                    phiLapp.position.set(0, AY + ry + 1.05, 0);
+                    // ledningar
+                    ledningar.forEach(m => { scene.remove(m); m.geometry.dispose(); });
+                    ledningar = [];
+                    const sV = new THREE.Vector3(xc + skruvPos[0], stodH + 0.5, Z_MAG + 1.45);
+                    const sH = new THREE.Vector3(xc + skruvPos[1], stodH + 0.5, Z_MAG + 1.45);
+                    const golv = 0.25;
+                    const vagLampV = [sV, sV.clone().add(new THREE.Vector3(-0.3, 1.2, 1.2)), new THREE.Vector3(sV.x - 0.4, golv, Z_MAG + 4.2), new THREE.Vector3((sV.x + lampV.x) / 2 - 1, golv, (Z_MAG + 4.2 + lampV.z) / 2 + 0.6), lampV.clone().setY(golv), lampV];
+                    const vagLampH = [sH, sH.clone().add(new THREE.Vector3(0.3, 1.2, 1.2)), new THREE.Vector3(sH.x + 0.6, golv, Z_MAG + 3.6), new THREE.Vector3((sH.x + lampH.x) / 2 + 1, golv, (Z_MAG + 3.6 + lampH.z) / 2 - 0.4), lampH.clone().setY(golv), lampH];
+                    const pV = kabel(vagLampV, svartLed);
+                    const pH = kabel(vagLampH, rodLed);
+                    kabel([sV, sV.clone().add(new THREE.Vector3(0, 1.6, -0.3)), new THREE.Vector3(sV.x + 1.5, golv + 0.05, Z_MAG - 3.2), new THREE.Vector3(voltV.x - 2, golv + 0.05, voltV.z + 2.6), voltV.clone().setY(golv + 2.5), voltV], svartLed);
+                    kabel([sH, sH.clone().add(new THREE.Vector3(0.4, 1.9, -0.4)), new THREE.Vector3(sH.x + 2.4, golv + 0.05, Z_MAG - 2.4), new THREE.Vector3(voltH.x - 1.2, golv + 0.05, voltH.z + 2.4), voltH.clone().setY(golv + 2.5), voltH], rodLed);
+                    // strömmens väg: lindningen (en spiral) → röd ledning → lampan → svart ledning → tillbaka
+                    const spiral = [];
+                    const varv = 3, xs = xc - SPOLE_L / 2 + 0.35, xe = xc + SPOLE_L / 2 - 0.35, rr = ry + 0.12;
+                    for (let k = 0; k <= 120; k++) {
+                        const tt = k / 120, a = tt * varv * Math.PI * 2;
+                        spiral.push(new THREE.Vector3(xs + (xe - xs) * tt, AY + rr * Math.cos(a), Z_MAG + rr * Math.sin(a)));
+                    }
+                    const banPkt = [...spiral, ...pH, ...inreLamp.slice().reverse(), ...pV.slice().reverse(), sV.clone().setY(AY - ry).setX(xs)];
+                    stromBana = polylinje(banPkt);
+                    iLappPos = pH[Math.floor(pH.length * 0.55)].clone().add(new THREE.Vector3(0.9, 1.1, 0));
+                    ritadN = p.N;
+                }
+                byggSpole();
+
+                // ── Kamera ──
+                const cam = { ...VYER.snett, target: new THREE.Vector3(...VYER.snett.target) };
+                let camMal = null;
+                const sattVy = (namn) => {
+                    const v = VYER[namn];
+                    camMal = { theta: v.theta, phi: v.phi, radius: v.radius, target: new THREE.Vector3(...v.target) };
+                    const d = ((camMal.theta - cam.theta) % (2 * Math.PI) + 3 * Math.PI) % (2 * Math.PI) - Math.PI;
+                    camMal.theta = cam.theta + d;
+                };
+                SIM.vy = sattVy;
+                const uppdateraKamera = () => {
+                    const sp = Math.sin(cam.phi);
+                    const rad = cam.radius * (camera.aspect < 0.9 ? 1.35 : camera.aspect < 1.3 ? 1.12 : 1);
+                    camera.position.set(
+                        cam.target.x + rad * sp * Math.sin(cam.theta),
+                        cam.target.y + rad * Math.cos(cam.phi),
+                        cam.target.z + rad * sp * Math.cos(cam.theta));
+                    camera.lookAt(cam.target);
+                };
+
+                // ── Pekare ──
+                const ray = new THREE.Raycaster();
+                const ndc = new THREE.Vector2();
+                const klickbara = [...spoleHit, brytHit, brytFot, blad, grepp, vredSkaft, vinge, knopp, vevArm, vevNav, handtag];
+                const satt = (e) => {
+                    const r = el.getBoundingClientRect();
+                    ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+                    ray.setFromCamera(ndc, camera);
+                };
+                const traff = (e) => {
+                    satt(e);
+                    const h = ray.intersectObjects(klickbara, false)[0];
+                    return h ? h.object.userData.klick : null;
+                };
+                const planPunkt = (e, plan) => { satt(e); const v = new THREE.Vector3(); return ray.ray.intersectPlane(plan, v) ? v : null; };
+                const SPOLPLAN = new THREE.Plane(new THREE.Vector3(0, 1, 0), -AY);
+                const VEVPLAN = new THREE.Plane(new THREE.Vector3(0, 0, 1), -Z_VEV);
+
+                const pekare = new Map();
+                let drag = null, pinch = null;
+                let vevDrag = null;     // { vinkel: pekarens vinkel, offset }
+                let spolDrag = null;    // { dx }
+                const onDown = (e) => {
+                    if (e.target !== renderer.domElement) return;
+                    pekare.set(e.pointerId, { x: e.clientX, y: e.clientY });
+                    renderer.domElement.setPointerCapture(e.pointerId);
+                    camMal = null;
+                    if (pekare.size === 1) {
+                        const k = traff(e);
+                        if (k === 'spole') {
+                            const q = planPunkt(e, SPOLPLAN);
+                            if (q) { spolDrag = { dx: q.x - spoleX(SIM.p.g) }; wrap.classList.add('dragging'); return; }
+                        }
+                        if (k === 'vev') {
+                            if (SIM.p.drift !== 'vev' && SIM.cb.drift) SIM.cb.drift('vev');
+                            const q = planPunkt(e, VEVPLAN);
+                            if (q) { vevDrag = { senast: Math.atan2(q.y - AY, q.x), mal: vinkelVis }; wrap.classList.add('dragging'); return; }
+                        }
+                        drag = { x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY, t: performance.now(), k };
+                    }
+                    if (pekare.size === 2) {
+                        const [a, b] = [...pekare.values()];
+                        pinch = { d: Math.hypot(a.x - b.x, a.y - b.y), r: cam.radius };
+                        drag = null; spolDrag = null; vevDrag = null;
+                    }
+                };
+                const onMove = (e) => {
+                    if (pekare.has(e.pointerId)) pekare.set(e.pointerId, { x: e.clientX, y: e.clientY });
+                    if (pinch && pekare.size === 2) {
+                        const [a, b] = [...pekare.values()];
+                        const d = Math.hypot(a.x - b.x, a.y - b.y);
+                        cam.radius = Math.max(24, Math.min(110, pinch.r * pinch.d / Math.max(d, 1)));
+                        return;
+                    }
+                    if (spolDrag) {
+                        const q = planPunkt(e, SPOLPLAN);
+                        if (q && SIM.cb.g) {
+                            const g = Math.max(0.3, Math.min(5, (q.x - spolDrag.dx) - (MAG_H + 0.5 + SPOLE_L / 2)));
+                            SIM.cb.g(Math.round(g * 10) / 10);
+                        }
+                        return;
+                    }
+                    if (vevDrag) {
+                        const q = planPunkt(e, VEVPLAN);
+                        if (q) {
+                            const a = Math.atan2(q.y - AY, q.x);
+                            let d = a - vevDrag.senast;
+                            d = ((d + 3 * Math.PI) % (2 * Math.PI)) - Math.PI;
+                            vevDrag.senast = a;
+                            vevDrag.mal += d;     // vinkelVis följer pekaren (moturs positivt på skärmen)
+                        }
+                        return;
+                    }
+                    if (drag) {
+                        const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+                        drag.x = e.clientX; drag.y = e.clientY;
+                        if (Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) > 4) {
+                            cam.theta -= dx * 0.007;
+                            cam.phi = Math.max(0.06, Math.min(1.52, cam.phi - dy * 0.005));
+                            wrap.classList.add('dragging');
+                        }
+                        return;
+                    }
+                    if (e.pointerType === 'mouse') {
+                        const k = traff(e);
+                        wrap.classList.toggle('ew', k === 'spole');
+                        wrap.classList.toggle('pointer', k === 'brytare' || k === 'kran' || k === 'vev');
+                        wrap.classList.toggle('grab', !k);
+                    }
+                };
+                const onUp = (e) => {
+                    if (drag && pekare.size === 1) {
+                        const flytt = Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0);
+                        if (flytt < 6 && performance.now() - drag.t < 600) {
+                            if (drag.k === 'brytare' && SIM.cb.brytare) SIM.cb.brytare();
+                            if (drag.k === 'kran' && SIM.cb.kran) SIM.cb.kran();
+                        }
+                    }
+                    pekare.delete(e.pointerId);
+                    if (pekare.size < 2) pinch = null;
+                    if (pekare.size === 0) { drag = null; spolDrag = null; vevDrag = null; }
+                    wrap.classList.remove('dragging');
+                };
+                const onWheel = (e) => {
+                    e.preventDefault();
+                    camMal = null;
+                    cam.radius = Math.max(24, Math.min(110, cam.radius * Math.exp(e.deltaY * 0.0012)));
+                };
+                el.addEventListener('pointerdown', onDown);
+                window.addEventListener('pointermove', onMove);
+                window.addEventListener('pointerup', onUp);
+                window.addEventListener('pointercancel', onUp);
+                el.addEventListener('wheel', onWheel, { passive: false });
+                wrap.classList.add('grab');
+
+                const ro = new ResizeObserver(() => {
+                    renderer.setSize(W(), H());
+                    camera.aspect = W() / H();
+                    camera.updateProjectionMatrix();
+                });
+                ro.observe(el);
+
+                let synlig = true;
+                const io = new IntersectionObserver((en) => { synlig = en[0].isIntersecting; }, { threshold: 0.01 });
+                io.observe(wrap);
+
+                // ── Simuleringens tillstånd ──
+                // theta: magnetens vinkel (0 = nordändan pekar mot spolen), ökar medurs sett framifrån.
+                let theta = 0.3, omega = 0, tSim = 0, stromS = 0, raf = 0, tLast = performance.now();
+                let vinkelVis = -theta;            // vinkeln som ritas (moturs positivt)
+                let tradT = 0, nalV = 0, nalA = 0, brytVinkel = 1.0;
+                let vevOmega = 0;
+                const med = { Pin: 0, Pl: 0, Ps: 0, Pf: 0, Pk: 0, F: 0, uMax: 0, iMax: 0 };
+                let uMaxFonster = 0, iMaxFonster = 0, fonsterT = 0;
+                let sampT = 0;
+                let droppAcc = 0;
+                const tick = () => {
+                    raf = requestAnimationFrame(tick);
+                    const now = performance.now();
+                    const dtv = Math.min(0.05, (now - tLast) / 1000);
+                    tLast = now;
+                    if (!synlig) return;
+                    const p = SIM.p;
+                    if (ritadN !== p.N || SIM.dirty) { SIM.dirty = false; byggSpole(); }
+
+                    const B = bFalt(p.g, p.karna);
+                    const NBA = p.N * B * A_SPOLE;                  // Wb (flödets toppvärde)
+                    const R = R_PER_VARV * p.N + R_LAMPA;
+                    const sluten = p.lampa;
+                    const vevar = p.drift === 'vev' && !!vevDrag;
+                    const skala = p.slow ? 0.12 : 1;
+                    let u = 0, i = 0, Pin = 0, Pf = 0, Pk = 0, F = 0;
+
+                    if (p.running || vevar) {
+                        if (vevar) {
+                            // Vinkeln följer handen (men aldrig fortare än W_MAX)
+                            const onskat = vevDrag.mal - vinkelVis;
+                            const maxSteg = W_MAX * dtv;
+                            const steg = Math.max(-maxSteg, Math.min(maxSteg, onskat * Math.min(1, dtv / 0.05)));
+                            if (Math.abs(onskat) > maxSteg) vevDrag.mal = vinkelVis + steg + Math.sign(onskat) * Math.min(Math.abs(onskat) - maxSteg, 0.6);
+                            vinkelVis += steg;
+                            const wNy = -steg / Math.max(dtv, 1e-4);
+                            const wGammal = vevOmega;
+                            vevOmega += (wNy - vevOmega) * Math.min(1, dtv / 0.12);
+                            omega = vevOmega;
+                            theta = -vinkelVis;
+                            const dtS = dtv;
+                            tSim += dtS;
+                            const e = NBA * omega * Math.sin(theta);
+                            u = e; i = sluten ? e / R : 0;
+                            const tauB = NBA * Math.sin(theta) * i;
+                            const tauF = FRIK_V * omega + FRIK_C * Math.tanh(omega / 0.5);
+                            const alfa = (vevOmega - wGammal) / Math.max(dtv, 1e-4);
+                            const tauHand = tauB + tauF + J_HJUL * alfa;
+                            Pin = tauHand * omega; Pf = tauF * omega; Pk = J_HJUL * alfa * omega;
+                            F = Math.abs(tauB + tauF) / R_VEV;
+                            stromS += i * dtS * 9;
+                        } else {
+                            const dtS = dtv * skala;
+                            const n = Math.max(1, Math.ceil(dtS / 0.002));
+                            const h = dtS / n;
+                            let sPin = 0, sPf = 0, sPk = 0;
+                            for (let k = 0; k < n; k++) {
+                                const e = NBA * omega * Math.sin(theta);
+                                const ii = sluten ? e / R : 0;
+                                const tauB = NBA * Math.sin(theta) * ii;
+                                const q = p.drift === 'vatten' ? p.q : 0;
+                                let tauV = K_VATTEN * q * (q * W0 - omega);
+                                const tauF = FRIK_V * omega + FRIK_C * Math.tanh(omega / 0.5);
+                                const alfa = (tauV - tauB - tauF) / J_HJUL;
+                                sPin += tauV * omega; sPf += tauF * omega; sPk += J_HJUL * alfa * omega;
+                                omega += alfa * h;
+                                if (q === 0 && Math.abs(omega) < 0.05 && Math.abs(tauB) < FRIK_C) omega = 0;
+                                theta += omega * h;
+                            }
+                            Pin = sPin / n; Pf = sPf / n; Pk = sPk / n;
+                            vinkelVis = -theta;
+                            vevOmega = omega;
+                            tSim += dtS;
+                            u = NBA * omega * Math.sin(theta);
+                            i = sluten ? u / R : 0;
+                            stromS += i * dtS * 9;
+                        }
+                    }
+                    const Pl = i * i * R_LAMPA, Ps = i * i * R_PER_VARV * p.N;
+
+                    // medelvärden (glidande, cirka en sekund)
+                    const km = Math.min(1, dtv / 0.9);
+                    med.Pin += (Pin - med.Pin) * km; med.Pl += (Pl - med.Pl) * km; med.Ps += (Ps - med.Ps) * km;
+                    med.Pf += (Pf - med.Pf) * km; med.Pk += (Pk - med.Pk) * km;
+                    med.F += ((vevar ? F : 0) - med.F) * Math.min(1, dtv / 0.35);
+                    // toppvärden: största |u| och |i| det senaste varvet (minst 0,4 s)
+                    uMaxFonster = Math.max(uMaxFonster, Math.abs(u)); iMaxFonster = Math.max(iMaxFonster, Math.abs(i));
+                    fonsterT += dtv * skala;
+                    const varvT = Math.abs(omega) > 0.5 ? 2 * Math.PI / Math.abs(omega) : 0.5;
+                    if (fonsterT > Math.max(0.4 * skala, varvT * 1.05)) {
+                        med.uMax = uMaxFonster; med.iMax = iMaxFonster;
+                        uMaxFonster = 0; iMaxFonster = 0; fonsterT = 0;
+                    }
+
+                    // glödtråden har en värmetröghet på några hundradels sekunder
+                    tradT += (Pl - tradT) * Math.min(1, (dtv * skala) / 0.05);
+                    const ljus = Math.max(0, Math.min(1.3, tradT / P_LAMPA));
+                    const lj = Math.pow(ljus, 0.55);
+                    glasMat.emissiveIntensity = lj * 3.0; glasMat.opacity = 0.28 + 0.4 * Math.min(1, lj);
+                    trad.material.emissiveIntensity = lj * 6;
+                    glod.material.opacity = Math.min(1, lj * 1.1);
+                    glod.scale.setScalar(4 + lj * 6);
+                    lampLjus.intensity = lj * 3.2;
+
+                    // voltmeterns nål: en dämpad svängning (egenfrekvens 6 Hz)
+                    const nalMal = Math.max(-3.3, Math.min(3.3, u)) / 3 * (0.28 * Math.PI);
+                    const w0n = 2 * Math.PI * 6, dzeta = 0.7;
+                    const hs = dtv * skala;
+                    for (let k = 0; k < 4; k++) {
+                        const aN = w0n * w0n * (nalMal - nalV) - 2 * dzeta * w0n * nalA;
+                        nalA += aN * hs / 4; nalV += nalA * hs / 4;
+                    }
+                    nalG.rotation.z = -nalV;
+
+                    // strömbrytaren
+                    brytVinkel += ((sluten ? 0 : 1.05) - brytVinkel) * Math.min(1, dtv * 12);
+                    kniv.rotation.z = brytVinkel;
+
+                    // rotationen
+                    hjulG.rotation.z = vinkelVis;
+                    magnetG.rotation.z = vinkelVis;
+                    vevG.rotation.z = vinkelVis;
+
+                    // vattnet
+                    const qv = p.drift === 'vatten' ? p.q : 0;
+                    stral.visible = qv > 0.01;
+                    if (stral.visible) { const s = 0.45 + 1.1 * Math.sqrt(qv); stral.scale.set(s, 1, s); }
+                    vredG.rotation.y = -qv * 1.4;
+                    droppAcc += qv * dtv * skala * 90;
+                    while (droppAcc > 1) {
+                        droppAcc -= 1;
+                        const d = droppar.find(x => x.liv < 0);
+                        if (!d) break;
+                        d.liv = 0;
+                        d.p.set(KRAN_X + (Math.random() - 0.5) * 0.4, TRAFF_Y - 0.2, Z_HJUL + (Math.random() - 0.5) * 1.1);
+                        d.v.set(0.4 + Math.random() * 1.6 + omega * 0.05, -2 - Math.random() * 6, (Math.random() - 0.5) * 3);
+                        d.m.visible = true;
+                    }
+                    droppar.forEach(d => {
+                        if (d.liv < 0) return;
+                        const hs2 = dtv * skala;
+                        d.liv += hs2; d.v.y -= 98 * hs2 * 0.5; d.p.addScaledVector(d.v, hs2);
+                        d.m.position.copy(d.p);
+                        if (d.p.y < 1.35) { d.liv = -1; d.m.visible = false; }
+                    });
+                    ringar.forEach(r => {
+                        const f = ((tSim * 1.1 + r.userData.fas) % 1);
+                        r.visible = qv > 0.01;
+                        r.scale.setScalar(0.4 + f * 2.2);
+                        r.material.opacity = 0.5 * (1 - f) * Math.min(1, qv * 2);
+                    });
+
+                    // flödet genom spolen
+                    const sh = p.show;
+                    const phi = Math.cos(theta);
+                    flodePil.visible = sh.flode;
+                    const phiRef = 600 * bFalt(0.5, true) * A_SPOLE;
+                    const Lphi = 4.6 * Math.min(1.6, NBA / phiRef) * Math.abs(phi);
+                    if (sh.flode && Lphi > 0.15) {
+                        const riktning = phi >= 0 ? 1 : -1;
+                        stallPil(flodePil, new THREE.Vector3(-riktning * Lphi / 2, AY, 0), new THREE.Vector3(riktning * Lphi, 0, 0), { r: 0.16 });
+                        flodePil.renderOrder = 9;
+                    } else flodePil.visible = false;
+                    phiLapp.visible = sh.flode;
+                    faltG.visible = sh.falt; bLapp.visible = sh.falt;
+                    karna.visible = p.karna;
+
+                    // strömpilar
+                    stromG.visible = sh.strom && sluten && stromBana;
+                    if (stromG.visible) {
+                        const L = stromBana.len, n = stromPilar.length;
+                        const stilla = Math.abs(i) < 0.004;
+                        stromPilar.forEach((m, k) => {
+                            const s = (((k / n) * L + stromS) % L + L) % L;
+                            const { p: q, d } = stromBana.at(s);
+                            m.position.copy(q);
+                            m.quaternion.setFromUnitVectors(Y_AXEL, d.multiplyScalar(i >= 0 ? 1 : -1));
+                            const storlek = stilla ? 0.001 : Math.min(1, 0.35 + Math.abs(i) / 0.12);
+                            m.scale.setScalar(storlek);
+                        });
+                        iLapp.position.copy(iLappPos);
+                        iLapp.visible = Math.abs(med.iMax) > 0.004;
+                    }
+
+                    // kraften på veven (skalenlig, vinkelrät mot vevarmen)
+                    const visaF = sh.kraft && vevar && med.F > 0.02;
+                    vevPil.visible = visaF; fLapp.visible = visaF;
+                    if (visaF) {
+                        const hp = new THREE.Vector3(VEV_R * Math.cos(vinkelVis), AY + VEV_R * Math.sin(vinkelVis), Z_VEV + 2.2);
+                        const tang = new THREE.Vector3(-Math.sin(vinkelVis), Math.cos(vinkelVis), 0).multiplyScalar(omega < 0 ? 1 : -1);
+                        const Lf = Math.min(7, med.F * 14);
+                        stallPil(vevPil, hp, tang.clone().multiplyScalar(Lf), { r: 0.13 });
+                        fLapp.position.copy(hp.clone().add(tang.multiplyScalar(Lf + 0.9)));
+                    }
+
+                    // graf
+                    sampT += dtv * skala;
+                    if (sampT >= 1 / 120 && (p.running || vevar)) {
+                        sampT = 0;
+                        SIM.buf.push({ t: tSim, u, f: phi * Math.min(1.6, NBA / phiRef) });
+                        while (SIM.buf.length && SIM.buf[0].t < tSim - GRAF_T) SIM.buf.shift();
+                    }
+
+                    Object.assign(SIM.ut, {
+                        varv: Math.abs(omega) / (2 * Math.PI), u, i, uTopp: med.uMax, iTopp: med.iMax, lampa: ljus,
+                        Pin: med.Pin, Plampa: med.Pl, Pspole: med.Ps, Pfrik: med.Pf, Pkin: med.Pk, Fvev: med.F, vevar, B,
+                    });
+
+                    if (camMal) {
+                        const k = Math.min(1, dtv * 4);
+                        cam.theta += (camMal.theta - cam.theta) * k;
+                        cam.phi += (camMal.phi - cam.phi) * k;
+                        cam.radius += (camMal.radius - cam.radius) * k;
+                        cam.target.lerp(camMal.target, k);
+                        if (Math.abs(camMal.phi - cam.phi) < 1e-3 && Math.abs(camMal.theta - cam.theta) < 1e-3) camMal = null;
+                    }
+                    uppdateraKamera();
+                    renderer.render(scene, camera);
+                };
+                tick();
+
+                return () => {
+                    cancelAnimationFrame(raf);
+                    ro.disconnect(); io.disconnect();
+                    el.removeEventListener('pointerdown', onDown);
+                    window.removeEventListener('pointermove', onMove);
+                    window.removeEventListener('pointerup', onUp);
+                    window.removeEventListener('pointercancel', onUp);
+                    el.removeEventListener('wheel', onWheel);
+                    renderer.dispose();
+                    if (renderer.domElement.parentNode) renderer.domElement.parentNode.removeChild(renderer.domElement);
+                };
+            }, []);
+            return <div ref={mountRef} className="gen-mount" />;
+        }
+
+        // ─────────────────────────────────────────────────────────────────
+        // Grafen: spänningen u och flödet Φ
+        // ─────────────────────────────────────────────────────────────────
+        const SKALSTEG = [0.5, 1, 2, 3, 5, 10];
+        function Graf({ buf, uTopp }) {
+            const W = 600, H = 176, pl = 44, pr = 16, pt = 18, pb = 24;
+            const tNu = buf.length ? buf[buf.length - 1].t : 0;
+            const X = (t) => pl + (W - pl - pr) * (1 - (tNu - t) / GRAF_T);
+            const s = SKALSTEG.find(v => v >= uTopp * 1.05) || 10;
+            const mid = pt + (H - pt - pb) / 2, amp = (H - pt - pb) / 2;
+            const Y = (u) => mid - amp * Math.max(-1.08, Math.min(1.08, u / s));
+            const uPts = buf.map(b => `${X(b.t).toFixed(1)},${Y(b.u).toFixed(1)}`).join(' ');
+            const fPts = buf.map(b => `${X(b.t).toFixed(1)},${(mid - amp * 0.6 * b.f).toFixed(1)}`).join(' ');
+            const st = (v) => (v < 0 ? '−' : '') + fmt(Math.abs(v), Math.abs(v) < 1 ? 1 : 0);
+            return (
+                <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ display: 'block' }} fontFamily="Poppins, sans-serif" role="img"
+                     aria-label="Graf över den inducerade spänningen u och flödet Φ genom spolen de senaste två sekunderna">
+                    <line x1={pl} y1={pt - 6} x2={pl} y2={H - pb} stroke={COL.ink} strokeWidth="1" opacity="0.5" />
+                    <line x1={pl} y1={mid} x2={W - pr} y2={mid} stroke="#38bdf8" strokeWidth="1.4" />
+                    {[1, -1].map(sg => (
+                        <g key={sg}>
+                            <line x1={pl - 4} y1={mid - sg * amp} x2={pl} y2={mid - sg * amp} stroke={COL.ink} strokeWidth="1" />
+                            <text x={pl - 6} y={mid - sg * amp + 4} textAnchor="end" fontSize="11" fill={COL.ind}>{st(sg * s)}</text>
+                        </g>
+                    ))}
+                    <text x={pl - 6} y={mid + 4} textAnchor="end" fontSize="11" fill={COL.ink}>0</text>
+                    <text x={pl + 8} y={pt + 2} fontSize="12" fill={COL.ind}><tspan fontStyle="italic">u</tspan> (V)</text>
+                    <text x={pl + 62} y={pt + 2} fontSize="12" fill={COL.flux}><tspan fontStyle="italic">Φ</tspan> (streckad)</text>
+                    <text x={W - pr} y={H - 6} textAnchor="end" fontSize="11" fill={COL.ink}><tspan fontStyle="italic">t</tspan></text>
+                    <polyline points={fPts} fill="none" stroke={COL.flux} strokeWidth="1.8" strokeDasharray="6 4" strokeLinejoin="round" />
+                    <polyline points={uPts} fill="none" stroke={COL.ind} strokeWidth="2.4" strokeLinejoin="round" />
+                </svg>
+            );
+        }
+
+        // ─────────────────────────────────────────────────────────────────
+        // Formelkort
+        // ─────────────────────────────────────────────────────────────────
+        const Vbl = ({ lbl, children, color }) => (
+            <div className="flex flex-col items-center">
+                <span className="flbl">{lbl}</span>
+                <span className="fnum" style={color ? { color } : null}>{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{lbl}</span>
+            </div>
+        );
+        const Op = ({ children }) => <span className="fnum" style={{ padding: '0 5px' }}>{children}</span>;
+        const FormulaCard = () => (
+            <div className="glass-card fkort rounded-xl px-5 py-3 mb-5 flex flex-wrap items-center gap-x-10 gap-y-3">
+                <div className="flex items-center">
+                    <Vbl lbl="Spänning" color={COL.ind}><em>u</em></Vbl>
+                    <Op>=</Op>
+                    <Vbl lbl="Topp­spänning" color={COL.ind}><em>û</em></Vbl>
+                    <Op>·</Op>
+                    <span className="fnum">sin(</span>
+                    <Vbl lbl="Vinkel­hastighet"><em>ω</em></Vbl>
+                    <Vbl lbl="Tid"><em>t</em></Vbl>
+                    <span className="fnum">)</span>
+                </div>
+                <div className="flex items-center">
+                    <Vbl lbl="Topp­spänning" color={COL.ind}><em>û</em></Vbl>
+                    <Op>=</Op>
+                    <Vbl lbl="Antal varv"><em>N</em></Vbl>
+                    <Op>·</Op>
+                    <Vbl lbl="Flödes­täthet" color={COL.falt}><em>B</em></Vbl>
+                    <Op>·</Op>
+                    <Vbl lbl="Area"><em>A</em></Vbl>
+                    <Op>·</Op>
+                    <Vbl lbl="Vinkel­hastighet"><em>ω</em></Vbl>
+                </div>
+            </div>
+        );
+
+        const StSlider = ({ label, value, min, max, step, onChange, valueText }) => (
+            <div className="st-slider">
+                <div className="st-slider-top">
+                    <span dangerouslySetInnerHTML={{ __html: label }} />
+                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 13 }}>{valueText}</span>
+                </div>
+                <span className="sl-wrap">
+                    <input type="range" min={min} max={max} step={step} value={value}
+                           onChange={(e) => onChange(parseFloat(e.target.value))} />
+                </span>
+            </div>
+        );
+        const Reglage = ({ label, value, min, max, step, onChange, valueText, sub }) => (
+            <div className="mb-3">
+                <div className="mb-1 flex justify-between items-baseline">
+                    <span className="text-sm" style={{ color: 'var(--lab-ink)' }} dangerouslySetInnerHTML={{ __html: label }} />
+                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600 }}>{valueText}</span>
+                </div>
+                <input type="range" className="w-full cursor-pointer" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+                {sub && <p className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}>{sub}</p>}
+            </div>
+        );
+
+        const EnergiRad = ({ label, P, max, color }) => (
+            <div className="energi-rad">
+                <span style={{ color: 'var(--lab-ink)' }}>{label}</span>
+                <div className="bar"><div style={{ width: `${Math.max(0, Math.min(100, P / max * 100))}%`, background: color }} /></div>
+                <span className="val">{fmt(Math.max(0, P) * 1000, P * 1000 < 10 ? 1 : 0)} mW</span>
+            </div>
+        );
+
+        // ─────────────────────────────────────────────────────────────────
+        // Appen
+        // ─────────────────────────────────────────────────────────────────
+        const App = () => {
+            const [running, setRunning] = useState(true);
+            const [drift, setDrift] = useState('vatten');
+            const [q, setQ] = useState(0.85);
+            const [N, setN] = useState(600);
+            const [g, setG] = useState(0.5);
+            const [karna, setKarna] = useState(true);
+            const [lampa, setLampa] = useState(false);
+            const [slow, setSlow] = useState(false);
+            const [show, setShow] = useState({ ...SIM.p.show });
+            const [vy, setVy] = useState('snett');
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [togglesOpen, setTogglesOpen] = useState(true);
+            const [ut, setUt] = useState({ ...SIM.ut });
+            const [buf, setBuf] = useState([]);
+            const qSenast = useRef(0.85);
+            const sceneWrapRef = useRef(null);
+
+            useEffect(() => {
+                Object.assign(SIM.p, { running, drift, q, N, g, karna, lampa, slow, show: { ...show } });
+            }, [running, drift, q, N, g, karna, lampa, slow, show]);
+            useEffect(() => { SIM.dirty = true; }, [g, N]);
+            useEffect(() => { if (q > 0.01) qSenast.current = q; }, [q]);
+            useEffect(() => {
+                SIM.cb.brytare = () => setLampa(v => !v);
+                SIM.cb.kran = () => { setDrift('vatten'); setQ(v => (v > 0.01 ? 0 : (qSenast.current || 0.85))); };
+                SIM.cb.g = (v) => setG(v);
+                SIM.cb.drift = (d) => setDrift(d);
+                const id = setInterval(() => { setUt({ ...SIM.ut }); setBuf(SIM.buf.slice()); }, 70);
+                return () => clearInterval(id);
+            }, []);
+            useEffect(() => {
+                const h = () => setIsFullscreen(!!(document.fullscreenElement || document.webkitFullscreenElement));
+                document.addEventListener('fullscreenchange', h);
+                document.addEventListener('webkitfullscreenchange', h);
+                return () => { document.removeEventListener('fullscreenchange', h); document.removeEventListener('webkitfullscreenchange', h); };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (document.fullscreenElement || document.webkitFullscreenElement) {
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                } else {
+                    (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+                }
+            };
+            const tShow = (k) => setShow(s => ({ ...s, [k]: !s[k] }));
+            const valjVy = (n) => { setVy(n); if (SIM.vy) SIM.vy(n); };
+            const forval = (namn) => {
+                setRunning(true);
+                if (namn === 'slackt') { setDrift('vatten'); setQ(0.85); setLampa(false); setN(600); setG(0.5); setKarna(true); }
+                if (namn === 'tand') { setDrift('vatten'); setQ(0.85); setLampa(true); setN(600); setG(0.5); setKarna(true); }
+                if (namn === 'vev') { setDrift('vev'); setLampa(true); setN(600); setG(0.5); setKarna(true); setSlow(false); }
+                if (namn === 'karna') { setDrift('vatten'); setQ(0.85); setLampa(true); setN(600); setG(0.5); setKarna(false); }
+            };
+            const borjaOm = () => { forval('slackt'); setSlow(false); valjVy('snett'); };
+
+            const varvS = ut.varv;
+            const f = varvS;                 // ett varv ger en hel period
+            const omega = 2 * Math.PI * varvS;
+            const uEff = ut.uTopp / Math.SQRT2;
+            const Pmax = Math.max(0.03, ut.Pin * 1.05, ut.Plampa + ut.Pspole + ut.Pfrik);
+            const uKalk = N * ut.B * A_SPOLE * omega;
+            const hint = drift === 'vev'
+                ? 'Ta tag i veven och dra den runt. Klicka på strömbrytaren för att tända lampan.'
+                : 'Dra i spolen för att flytta den. Klicka på strömbrytaren eller kranens vred. Dra i scenen för att vrida.';
+
+            const reglageFs = (
+                <React.Fragment>
+                    {drift === 'vatten' && (
+                        <StSlider label="Vattenflöde" value={q} min={0} max={1} step={0.01} onChange={setQ} valueText={`${Math.round(q * 100)} %`} />
+                    )}
+                    <StSlider label="Antal varv (<em>N</em>)" value={N} min={100} max={1200} step={100} onChange={setN} valueText={`${N}`} />
+                    <StSlider label="Avstånd till spolen" value={g} min={0.3} max={5} step={0.1} onChange={setG} valueText={`${fmt(g, 1)} cm`} />
+                </React.Fragment>
+            );
+
+            const sceneToggles = () => {
+                if (!togglesOpen) return (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)}
+                            aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" />
+                            <circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" />
+                            <circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                );
+                return (
+                    <div className="scene-toggles">
+                        <button className="st-hide" onClick={() => setTogglesOpen(false)}
+                                aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+                                <path d="M6 6l12 12M18 6L6 18" />
+                            </svg>
+                        </button>
+                        <div className="st-title">Visa</div>
+                        <label><input type="checkbox" checked={show.falt} onChange={() => tShow('falt')} />
+                            <span className="st-swatch" style={{ background: COL.falt }}></span><span>Magnetfältet <em>B</em></span></label>
+                        <label><input type="checkbox" checked={show.flode} onChange={() => tShow('flode')} />
+                            <span className="st-swatch" style={{ background: COL.flux }}></span><span>Flödet <em>Φ</em> i spolen</span></label>
+                        <label><input type="checkbox" checked={show.strom} onChange={() => tShow('strom')} />
+                            <span className="st-swatch" style={{ background: COL.ind }}></span><span>Strömmen <em>i</em></span></label>
+                        <label><input type="checkbox" checked={show.kraft} onChange={() => tShow('kraft')} />
+                            <span className="st-swatch" style={{ background: COL.kraft }}></span><span>Kraften på veven</span></label>
+                        <div className="st-title mt">Scen</div>
+                        <label><input type="checkbox" checked={karna} onChange={() => setKarna(v => !v)} /><span>Järnkärna i spolen</span></label>
+                        <label><input type="checkbox" checked={slow} onChange={() => setSlow(v => !v)} /><span>Ultrarapid</span></label>
+                        {isFullscreen && (
+                            <React.Fragment>
+                                <div className="st-title mt">Reglage</div>
+                                <div className="st-sliders">{reglageFs}</div>
+                                <div className="st-actions">
+                                    <button className={'btn-toggle' + (lampa ? ' active' : '')} onClick={() => setLampa(v => !v)}>{lampa ? 'Släck lampan' : 'Tänd lampan'}</button>
+                                    <button className="btn-toggle" onClick={() => setDrift(d => d === 'vatten' ? 'vev' : 'vatten')}>{drift === 'vatten' ? 'Veva själv' : 'Driv med vatten'}</button>
+                                    <button className="btn-toggle" onClick={() => setRunning(r => !r)}>{running ? 'Pausa' : 'Fortsätt'}</button>
+                                </div>
+                            </React.Fragment>
+                        )}
+                    </div>
+                );
+            };
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Vattenkraftverket på labbänken
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Vattenkraftverket på labbänken</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 860 }}>
+                            En vattenstråle från kranen får ett skovelhjul att snurra. På samma axel sitter en magnet
+                            som roterar förbi en spole. Flödet genom spolen ändras hela tiden, och då induceras en
+                            växelspänning, precis som i ett riktigt kraftverk. Tänd lampan och se vad som händer med
+                            hjulet: energin till lampan måste komma någonstans ifrån. Flytta spolen, ändra antalet
+                            varv eller veva själv.
+                        </p>
+
+                        <FormulaCard />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            <div className="lg:w-2/3 order-1">
+                                <div className={"scene-wrap" + (isFullscreen ? " is-fs" : "")} data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    <GenScene wrapRef={sceneWrapRef} />
+                                    <div className="scene-hint">{hint}</div>
+                                    {sceneToggles()}
+                                    <div className="fs-quick">
+                                        <button className="fq-play" onClick={() => setRunning(r => !r)}
+                                                aria-label={running ? 'Paus' : 'Start'} title={running ? 'Paus' : 'Start'}>
+                                            {running ? (
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                                    <rect x="6" y="5" width="4" height="14" rx="1" />
+                                                    <rect x="14" y="5" width="4" height="14" rx="1" />
+                                                </svg>
+                                            ) : (
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                                    <path d="M8 5.5v13l11-6.5z" />
+                                                </svg>
+                                            )}
+                                        </button>
+                                        <div className="fq-rows">
+                                            <div className="fq-row">
+                                                <span className="fq-lbl">Vattenflöde</span>
+                                                <input type="range" min={0} max={1} step={0.01} value={q}
+                                                       onChange={e => { setDrift('vatten'); setQ(parseFloat(e.target.value)); }} aria-label="Vattenflöde" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mt-4">
+                                    <div className="flex flex-wrap justify-between items-baseline gap-2">
+                                        <div className="flbl">Spänningen över spolen och flödet genom den</div>
+                                        <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>de senaste {fmt(GRAF_T, 0)} sekunderna{slow ? ' (ultrarapid)' : ''}</div>
+                                    </div>
+                                    <Graf buf={buf} uTopp={ut.uTopp} />
+                                    <p className="text-sm mt-1" style={{ color: 'var(--lab-ink-soft)' }}>
+                                        Flödet är störst när magneten pekar rakt mot spolen, men då ändras det inte just
+                                        i det ögonblicket, och spänningen är noll. Spänningen är störst när flödet passerar
+                                        noll, för där ändras det snabbast.
+                                    </p>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mt-4">
+                                    <div className="flbl">Vart tar energin vägen?</div>
+                                    <EnergiRad label={drift === 'vev' ? 'Din hand ger' : 'Vattnet ger hjulet'} P={ut.Pin} max={Pmax} color={drift === 'vev' ? '#8a2d2d' : COL.vatten} />
+                                    <EnergiRad label="Lampan" P={ut.Plampa} max={Pmax} color={COL.lampa} />
+                                    <EnergiRad label="Spolen blir varm" P={ut.Pspole} max={Pmax} color={COL.koppar} />
+                                    <EnergiRad label="Friktion i lagren" P={ut.Pfrik} max={Pmax} color="#8d939b" />
+                                    <p className="text-sm mt-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                        {lampa
+                                            ? 'Lampan är tänd. Strömmen i spolen ger ett eget magnetfält som bromsar magneten (Lenz lag), så hjulet måste uträtta arbete för att hålla farten. Därför går det långsammare.'
+                                            : 'Kretsen är bruten. Ingen ström går, och då bromsar spolen inte magneten. Nästan all energi går till friktion, och hjulet snurrar fort. Tänd lampan och jämför.'}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="lg:w-1/3 order-2">
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Färdiga försök</div>
+                                    <div className="forval">
+                                        <button className="btn-toggle" onClick={() => forval('slackt')}>Lampan släckt</button>
+                                        <button className="btn-toggle" onClick={() => forval('tand')}>Tänd lampan</button>
+                                        <button className="btn-toggle" onClick={() => forval('vev')}>Veva själv</button>
+                                        <button className="btn-toggle" onClick={() => forval('karna')}>Utan järnkärna</button>
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Drivning</div>
+                                    <div className="vy-seg two mb-3">
+                                        <button className={drift === 'vatten' ? 'active' : ''} onClick={() => setDrift('vatten')}>Vatten</button>
+                                        <button className={drift === 'vev' ? 'active' : ''} onClick={() => setDrift('vev')}>Veva själv</button>
+                                    </div>
+                                    {drift === 'vatten'
+                                        ? <Reglage label="Vattenflöde" value={q} min={0} max={1} step={0.01} onChange={setQ} valueText={`${Math.round(q * 100)} %`} />
+                                        : <p className="text-sm mb-3" style={{ color: 'var(--lab-ink-soft)' }}>Ta tag i veven längst fram på axeln och dra den runt. Kraften du behöver visas som en blå pil.</p>}
+                                    <Reglage label="Antal varv <em>N</em>" value={N} min={100} max={1200} step={100} onChange={setN} valueText={`${N}`} />
+                                    <Reglage label="Avstånd mellan magnet och spole" value={g} min={0.3} max={5} step={0.1} onChange={setG} valueText={`${fmt(g, 1)} cm`}
+                                             sub="Du kan också dra i spolen." />
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <button className={'btn-toggle' + (lampa ? ' active' : '')} onClick={() => setLampa(v => !v)}>{lampa ? 'Släck lampan' : 'Tänd lampan'}</button>
+                                        <button className={'btn-toggle' + (karna ? ' active' : '')} onClick={() => setKarna(v => !v)}>Järnkärna</button>
+                                        <button className="btn-toggle" onClick={() => setRunning(r => !r)}>{running ? 'Pausa' : 'Fortsätt'}</button>
+                                        <button className="btn-toggle" onClick={borjaOm}>Börja om</button>
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Avläsning</div>
+                                    <div className="readout">
+                                        <div>
+                                            <div className="rv">{fmt(varvS, 1)} Hz</div>
+                                            <div className="rl">varvtal och frekvens <em>f</em></div>
+                                        </div>
+                                        <div>
+                                            <div className="rv">{fmt(omega, 0)} rad/s</div>
+                                            <div className="rl">vinkelhastighet <em>ω</em></div>
+                                        </div>
+                                        <div>
+                                            <div className="rv" style={{ color: COL.ind }}>{fmt(ut.uTopp, 2)} V</div>
+                                            <div className="rl">toppspänning <em>û</em></div>
+                                        </div>
+                                        <div>
+                                            <div className="rv" style={{ color: COL.ind }}>{fmt(uEff, 2)} V</div>
+                                            <div className="rl">effektivvärde <em>U</em></div>
+                                        </div>
+                                        <div>
+                                            <div className="rv">{lampa ? fmt(ut.iTopp * 1000, 0) + ' mA' : '0'}</div>
+                                            <div className="rl">toppström <em>î</em></div>
+                                        </div>
+                                        <div>
+                                            <div className="rv">{drift === 'vev' ? fmt(ut.Fvev, 2) + ' N' : fmt(ut.B * 1000, 0) + ' mT'}</div>
+                                            <div className="rl">{drift === 'vev' ? 'kraft på veven' : <span>flödestäthet <em>B</em> i spolen</span>}</div>
+                                        </div>
+                                    </div>
+                                    <p className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>
+                                        Kontroll: <em>N</em>&nbsp;·&nbsp;<em>B</em>&nbsp;·&nbsp;<em>A</em>&nbsp;·&nbsp;<em>ω</em> = {N}&nbsp;·&nbsp;{fmt(ut.B, 3)}&nbsp;T&nbsp;·&nbsp;6,16&nbsp;cm²&nbsp;·&nbsp;{fmt(omega, 1)}&nbsp;rad/s ≈ {fmt(uKalk, 2)}&nbsp;V.
+                                        Lampan är märkt 1,2&nbsp;V och 0,1&nbsp;A.
+                                    </p>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Vy</div>
+                                    <div className="vy-seg">
+                                        <button className={vy === 'snett' ? 'active' : ''} onClick={() => valjVy('snett')}>Snett</button>
+                                        <button className={vy === 'fram' ? 'active' : ''} onClick={() => valjVy('fram')}>Framifrån</button>
+                                        <button className={vy === 'ovan' ? 'active' : ''} onClick={() => valjVy('ovan')}>Ovanifrån</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+
+                        <div className="mt-8 grid md:grid-cols-2 gap-5 forkl" style={{ color: 'var(--lab-ink-soft)' }}>
+                            <details className="glass-card rounded-xl p-4" open>
+                                <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>Så fungerar generatorn<span>+</span></summary>
+                                <ol>
+                                    <li><strong>Vattnet driver hjulet.</strong> Strålen träffar skovlarna och trycker
+                                        dem nedåt. Hjulet, axeln och magneten börjar rotera.</li>
+                                    <li><strong>Flödet genom spolen ändras.</strong> När nordändan pekar rakt mot
+                                        spolen går mycket av magnetens fält genom den. Ett kvarts varv senare pekar
+                                        magneten åt sidan, och flödet är noll. Ytterligare ett kvarts varv senare pekar
+                                        sydändan mot spolen, och flödet går åt andra hållet.</li>
+                                    <li><strong>En ändring av flödet inducerar en spänning</strong>,{' '}
+                                        <em>e</em>&nbsp;=&nbsp;−<em>N</em>&thinsp;·&thinsp;Δ<em>Φ</em>/Δ<em>t</em>. Flödet
+                                        varierar som en cosinusfunktion, och då varierar spänningen som en
+                                        sinusfunktion: <em>u</em>&nbsp;=&nbsp;<em>û</em>&thinsp;·&thinsp;sin(<em>ωt</em>).</li>
+                                    <li><strong>Spänningen byter tecken varje halvt varv.</strong> Det är en
+                                        växelspänning, och frekvensen är lika med antalet varv per sekund.</li>
+                                    <li><strong>Järnkärnan samlar fältet.</strong> Järn leder magnetfältet mycket
+                                        bättre än luft, så flödet genom spolen blir flera gånger större.</li>
+                                </ol>
+                            </details>
+
+                            <details className="glass-card rounded-xl p-4" open>
+                                <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>Pröva själv i simuleringen<span>+</span></summary>
+                                <ul>
+                                    <li><strong>Tänd lampan.</strong> Hjulet saktar in. Strömmen i spolen ger ett
+                                        magnetfält som motverkar magnetens rörelse, så vattnet måste uträtta mer
+                                        arbete. Titta på energistaplarna.</li>
+                                    <li><strong>Stäng av vattnet</strong> (klicka på vredet) med lampan tänd och
+                                        sedan med lampan släckt. Hur länge snurrar hjulet vidare i de två fallen?</li>
+                                    <li><strong>Veva själv.</strong> Kraften du behöver är liten när lampan är släckt
+                                        och växer när du tänder den. Vevar du fortare blir den större.</li>
+                                    <li><strong>Dubbla antalet varv.</strong> Med vatten och släckt lampa blir
+                                        toppspänningen dubbelt så stor, eftersom <em>û</em> är proportionell mot <em>N</em>.</li>
+                                    <li><strong>Dra bort spolen.</strong> Fältet från en magnet avtar snabbt med
+                                        avståndet. Redan några centimeter bort blir spänningen liten.</li>
+                                    <li><strong>Slå på Ultrarapid</strong> och följ voltmeterns nål. Den pendlar
+                                        mellan plus och minus. Lampan flimrar, eftersom den slocknar varje gång
+                                        spänningen passerar noll.</li>
+                                </ul>
+                            </details>
+
+                            <details className="glass-card rounded-xl p-4">
+                                <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>Riktiga kraftverk<span>+</span></summary>
+                                <p>I ett vattenkraftverk faller vattnet genom en turbin, och turbinens axel driver
+                                    en generator. Precis som här är det magneterna (elektromagneter på den roterande
+                                    delen, rotorn) som snurrar, medan spolarna sitter still runt omkring (statorn).
+                                    Då behövs inga släpringar för att föra ut den stora strömmen.</p>
+                                <p>Generatorerna i det svenska elnätet roterar så att spänningen får frekvensen
+                                    50&nbsp;Hz. En generator med ett par magnetpoler måste då snurra 50 varv per
+                                    sekund. Stora vattenkraftsgeneratorer har i stället många polpar och kan gå
+                                    långsamt.</p>
+                                <p>Precis som lampan här bromsar hjulet, bromsas turbinerna när elförbrukningen
+                                    ökar. Kraftverket släpper då på mer vatten för att hålla frekvensen.</p>
+                            </details>
+
+                            <details className="glass-card rounded-xl p-4">
+                                <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>Vanliga missförstånd<span>+</span></summary>
+                                <ul>
+                                    <li><strong>”Generatorn skapar energi.”</strong> Nej, den omvandlar rörelseenergi
+                                        till elektrisk energi. Utan vatten eller hand som driver den blir det ingen el.</li>
+                                    <li><strong>”Spänningen är störst när magneten pekar mot spolen.”</strong> Då är
+                                        flödet störst, men spänningen beror på hur snabbt flödet ändras. I just det
+                                        läget ändras det inte alls.</li>
+                                    <li><strong>”Det är lika tungt att snurra generatorn oavsett vad som är
+                                        inkopplat.”</strong> Nej, ju mer ström som tas ut, desto större bromsande
+                                        kraft. En cykeldynamo känns tyngre när lampan är på.</li>
+                                    <li><strong>”Magneten slits ut när den används.”</strong> Nej, magneten förlorar
+                                        ingen energi. Energin kommer från det som driver axeln.</li>
+                                </ul>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+    <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

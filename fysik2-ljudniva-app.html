@@ -321,9 +321,32 @@
         };
         const avrundaP = (logP) => parseFloat(Math.pow(10, logP).toPrecision(2));
 
+        // ── Energiprickarna. Varje prick bär energin Q, så att prickar per
+        //    sekund = P/Q och fler watt ger fler prickar. Effekten spänner
+        //    över fem tiopotenser, så Q väljs ur serien 1, 2, 5, 10 … och byts
+        //    bara när antalet prickar annars blir för litet eller för stort
+        //    (som skalan på en karta). Inom ett skalläge är antalet alltså
+        //    proportionellt mot P: dubbla effekten ger dubbelt så många. ──
+        const PRICK_DMAX = RMAX * 1.04, PRICK_FART = 4.5;
+        const PRICK_LIV = PRICK_DMAX / PRICK_FART;     // s från källan till ytterkanten
+        const PRICK_MAX = 12000, PRICK_MIN = 500, PRICK_MAL = 1200;
+        const snyggQ = (x) => {
+            const e = Math.floor(Math.log10(x)), m = x / Math.pow(10, e);
+            const f = m < 1.5 ? 1 : m < 3.5 ? 2 : m < 7.5 ? 5 : 10;
+            return parseFloat((f * Math.pow(10, e)).toPrecision(1));
+        };
+        const valjQ = (P) => snyggQ(P * PRICK_LIV / PRICK_MAL);
+        const fmtE = (Q) => {
+            const v = (x, u) => `${fmt(x, 0)} ${u}`;
+            if (Q >= 1) return v(Q, 'J');
+            if (Q >= 1e-3) return v(Q * 1e3, 'mJ');
+            if (Q >= 1e-6) return v(Q * 1e6, 'µJ');
+            return v(Q * 1e9, 'nJ');
+        };
+
         // Delat läge mellan React och 3D-scenen (scenen byggs bara en gång)
         const SIM = {
-            p: { P: 5, r: 10, ang: 1.5, tva: false, L: 96, show: { sfar: true, kvad: true, energi: true, etik: true } },
+            p: { P: 5, Q: 0.05, r: 10, ang: 1.5, tva: false, L: 96, show: { sfar: true, kvad: true, energi: true, etik: true } },
             cb: {},
             vy: null,
         };
@@ -730,7 +753,7 @@
                 scene.add(rPil);
 
                 // ── Energin som sprids: prickar som flyger rakt ut åt alla håll ──
-                const NP = 2400, DMAX = RMAX * 1.04, FART = 4.5;
+                const NP = PRICK_MAX, DMAX = PRICK_DMAX, FART = PRICK_FART;
                 const riktn = new Float32Array(NP * 3), fas = new Float32Array(NP);
                 for (let i = 0; i < NP; i++) {
                     const z = Math.random() * 2 - 1, f = Math.random() * Math.PI * 2, s = Math.sqrt(1 - z * z);
@@ -748,10 +771,15 @@
                     return pts;
                 };
                 const prickar1 = gorPrickar(), prickar2 = gorPrickar();
+                // vilka prickar som är utsända: avgörs varje gång en prick
+                // lämnar källan, så att en ändrad effekt sprider sig utåt
+                prickar1.userData = { aktiv: new Uint8Array(NP), varv: new Int32Array(NP).fill(-1) };
+                prickar2.userData = { aktiv: new Uint8Array(NP), varv: new Int32Array(NP).fill(-1) };
+                let ritadQ = null;
 
                 // ── Etiketter ──
-                const lblP = etikett(), lblR = etikett(), lblKv = etikett(), lblA = etikett(), lblL = etikett();
-                scene.add(lblP, lblR, lblKv, lblA, lblL);
+                const lblP = etikett(), lblR = etikett(), lblKv = etikett(), lblA = etikett(), lblL = etikett(), lblQ = etikett();
+                scene.add(lblP, lblR, lblKv, lblA, lblL, lblQ);
 
                 // ── Kamera: vrid, zooma, förinställda vyer ──
                 const cam = { theta: VYER.snett.theta, phi: VYER.snett.phi, zoom: 1, radius: 40 };
@@ -871,13 +899,17 @@
                 const u = new THREE.Vector3(), tmp = new THREE.Vector3();
                 const kc1 = new THREE.Vector3(), kc2 = new THREE.Vector3();
                 const etikettH = (spr, h) => spr.scale.set(h * spr.userData.aspect, h, 1);
-                const flyttaPrickar = (pts, c, r, syns) => {
+                const flyttaPrickar = (pts, c, r, syns, andel, nyttQ) => {
                     pts.visible = syns;
-                    if (!syns) return;
+                    const { aktiv, varv } = pts.userData;
                     const a = pts.geometry.attributes.position.array;
                     for (let i = 0; i < NP; i++) {
-                        const d = ((t * FART / DMAX + fas[i]) % 1) * DMAX;
-                        if (d > r || d < pRad) { a[i * 3] = 0; a[i * 3 + 1] = -999; a[i * 3 + 2] = 0; continue; }
+                        const x = t * FART / DMAX + fas[i];
+                        const v = Math.floor(x);
+                        if (v !== varv[i] || nyttQ) { aktiv[i] = Math.random() < andel ? 1 : 0; varv[i] = v; }
+                        if (!syns) continue;
+                        const d = (x - v) * DMAX;
+                        if (!aktiv[i] || d > r || d < pRad) { a[i * 3] = 0; a[i * 3 + 1] = -999; a[i * 3 + 2] = 0; continue; }
                         a[i * 3] = c.x + riktn[i * 3] * d;
                         a[i * 3 + 1] = c.y + riktn[i * 3 + 1] * d;
                         a[i * 3 + 2] = c.z + riktn[i * 3 + 2] * d;
@@ -933,8 +965,12 @@
                     // r-pilen från mitten till mikrofonen
                     stallPil(rPil, new THREE.Vector3(0, 0, 0), u.clone().multiplyScalar(Math.max(0.05, r - 0.13)), 0.035 + r * 0.0025);
 
-                    flyttaPrickar(prickar1, kc1, r, sh.energi);
-                    flyttaPrickar(prickar2, kc2, r, sh.energi && p.tva);
+                    // antal prickar i luften från varje källa: P/Q · PRICK_LIV
+                    const nyttQ = ritadQ !== p.Q;
+                    ritadQ = p.Q;
+                    const andel = Math.min(1, p.P / p.Q * PRICK_LIV / NP);
+                    flyttaPrickar(prickar1, kc1, r, sh.energi, andel, nyttQ);
+                    flyttaPrickar(prickar2, kc2, r, sh.energi && p.tva, andel, nyttQ);
                     prickMat.size = 0.22 + r * 0.022;
 
                     // kamera
@@ -954,6 +990,9 @@
                         ? [{ t: '2 · ', color: COL.src }, { t: 'P', italic: true, color: COL.src }, { t: ' = 2 · ' + fmtP(p.P), color: COL.src }]
                         : [{ t: 'P', italic: true, color: COL.src }, { t: ' = ' + fmtP(p.P), color: COL.src }]);
                     lblP.position.set(0, SRC_R * ks + h * 1.15, 0);
+                    lblQ.visible = sh.etik && sh.energi;
+                    lblQ.userData.satt([{ t: '1 prick = ' + fmtE(p.Q), color: COL.src, weight: 500 }]);
+                    lblQ.position.set(0, SRC_R * ks + h * 1.95, 0);
                     lblR.userData.satt([{ t: 'r', italic: true, color: COL.rpil }, { t: ' = ' + fmtR(r), color: COL.rpil }]);
                     lblR.position.copy(u).multiplyScalar(r * 0.6).add(new THREE.Vector3(0, h * 0.7, 0));
                     lblKv.visible = sh.etik && sh.kvad;
@@ -966,7 +1005,7 @@
                     lblL.userData.satt([{ t: 'L', italic: true, color: COL.ink }, { t: ' = ' + fmtL(p.L), color: COL.ink, weight: 700 }]);
                     // under mätarens stativ, där golvet är fritt
                     lblL.position.copy(u).multiplyScalar(r + 0.9).add(new THREE.Vector3(0, GOLV_Y - h * 0.8, 0));
-                    [[lblP, 1], [lblR, 0.95], [lblKv, 0.9], [lblA, 0.9], [lblL, 1.05]].forEach(([s, f]) => etikettH(s, h * f));
+                    [[lblP, 1], [lblR, 0.95], [lblKv, 0.9], [lblA, 0.9], [lblL, 1.05], [lblQ, 0.72]].forEach(([s, f]) => etikettH(s, h * f));
 
                     renderer.render(scene, camera);
                 };
@@ -1185,8 +1224,14 @@
 
             const P = avrundaP(logP);
             const { A, I, L } = berakna(P, r, tva);
+            // prickskalan byts bara när antalet prickar hamnar utanför sitt intervall
+            const [Q, setQ] = useState(() => valjQ(avrundaP(num('lp', Math.log10(5)))));
+            const nPrickar = P / Q * PRICK_LIV;
+            useEffect(() => {
+                if (nPrickar > PRICK_MAX * 0.97 || nPrickar < PRICK_MIN) setQ(valjQ(P));
+            }, [P]);
 
-            SIM.p.P = P; SIM.p.r = r; SIM.p.ang = ang; SIM.p.tva = tva; SIM.p.L = L; SIM.p.show = show;
+            SIM.p.P = P; SIM.p.Q = Q; SIM.p.r = r; SIM.p.ang = ang; SIM.p.tva = tva; SIM.p.L = L; SIM.p.show = show;
 
             const stoppaAnim = () => { cancelAnimationFrame(animRef.current); clearTimeout(animRef.current); animRef.current = 0; };
             SIM.cb.flytta = (rr, a) => { stoppaAnim(); setForsok(null); setR(rr); setAng(a); };
@@ -1297,7 +1342,7 @@
                             <span>En kvadratmeter vid mätaren</span></label>
                         <label><input type="checkbox" checked={show.energi} onChange={() => tShow('energi')} />
                             <span className="st-dot" style={{ background: COL.src }}></span>
-                            <span>Energin som sprids</span></label>
+                            <span>Energin som sprids <span style={{ whiteSpace: 'nowrap', color: 'var(--lab-ink-muted)' }}>(1 prick = {fmtE(Q)})</span></span></label>
                         <label><input type="checkbox" checked={show.etik} onChange={() => tShow('etik')} />
                             <span className="st-swatch" style={{ background: COL.ink }}></span>
                             <span>Etiketter</span></label>
@@ -1497,8 +1542,9 @@
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
                                     Högtalaren sänder ut samma effekt var du än står. På dubbla avståndet har sfären
                                     som effekten sprids över fyra gånger så stor area, så genom varje kvadratmeter går
-                                    bara en fjärdedel. Det ser du på prickarna: lika många lämnar högtalaren, men
-                                    längre ut ligger de glesare.
+                                    bara en fjärdedel. Det ser du på prickarna: varje prick är en bestämd mängd
+                                    energi, och högtalaren skickar ut fler prickar per sekund ju större effekten är.
+                                    Längre ut sprids samma prickar över en större yta och ligger glesare.
                                 </p>
                             </div>
                             <div className="glass-card rounded-xl p-4">

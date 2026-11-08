@@ -874,9 +874,14 @@
             lock.position.y = 2.18;
             const botten = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.1, 40), mMorkStal);
             botten.position.y = 0.19;
+            // styrbussning i locket som stången glider i
+            const bussning = new THREE.Mesh(new THREE.CylinderGeometry(0.085, 0.1, 0.14, 24), mMorkStal);
+            bussning.position.y = 2.29;
             kolvG = new THREE.Group();
-            const stang = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 1.0, 14), mStal);
-            stang.position.y = 0.5;
+            // kolvstången går ned genom locket in i cylindern, så att den
+            // sitter ihop med pumpen även när handtaget är uppdraget
+            const stang = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 2.4, 14), mStal);
+            stang.position.y = -0.2;
             const handtag = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.9, 20), new THREE.MeshStandardMaterial({ color: 0x3b2a1c, roughness: 0.6 }));
             handtag.rotation.z = Math.PI / 2; handtag.position.y = 1.0;
             kolvG.add(stang, handtag);
@@ -897,7 +902,7 @@
             glas.position.set(0, 1.25, 0.455);
             const hals = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.2, 12), mMassing);
             hals.rotation.x = Math.PI / 2; hals.position.set(0, 1.25, 0.25);
-            pumpG.add(fot, cyl, lock, botten, kolvG, port, hus, tavla, glas, hals);
+            pumpG.add(fot, cyl, lock, botten, bussning, kolvG, port, hus, tavla, glas, hals);
             pumpG.position.set(PUMP_X, 0, PUMP_Z);
             pumpG.traverse(o => { o.userData.klick = 'pump'; });
         }

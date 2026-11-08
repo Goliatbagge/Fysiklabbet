@@ -16222,9 +16222,24 @@
             }
             if (actx.state === 'suspended') actx.resume();
         }
+        // Pågående ljud tonas ut när en ny gissningsomgång startas
+        var utgangar = [];
+        function tystna() {
+            if (!actx) return;
+            var t = actx.currentTime;
+            utgangar.forEach(function (ut) {
+                ut.gain.cancelScheduledValues(t);
+                ut.gain.setValueAtTime(ut.gain.value, t);
+                ut.gain.linearRampToValueAtTime(0, t + 0.25);
+            });
+            utgangar = [];
+        }
         function small() {
             if (!actx || !ljudPa) return;
             var t0 = actx.currentTime + 0.01;
+            var ut = actx.createGain();
+            ut.connect(actx.destination);
+            utgangar.push(ut);
             var styrka = Math.min(1, 1.6 / (0.6 + s));
             var src = actx.createBufferSource();
             src.buffer = brus;
@@ -16247,7 +16262,7 @@
                 alp.Q.value = 0.5;
                 var ag = actx.createGain();
                 ag.gain.value = Math.min(1, 1.3 * styrka);
-                as.connect(alp); alp.connect(ag); ag.connect(actx.destination);
+                as.connect(alp); alp.connect(ag); ag.connect(ut);
                 as.start(t0);
             } else if (typ === 'blixt') {
                 // mullret: lågpass som blir mörkare med avståndet, ojämnt avklingande
@@ -16266,10 +16281,10 @@
                     var g2 = actx.createGain();
                     g2.gain.setValueAtTime(styrka * 1.4, t0);
                     g2.gain.exponentialRampToValueAtTime(0.001, t0 + 0.35);
-                    src2.connect(hp); hp.connect(g2); g2.connect(actx.destination);
+                    src2.connect(hp); hp.connect(g2); g2.connect(ut);
                     src2.start(t0); src2.stop(t0 + 0.4);
                 }
-                src.connect(lp); lp.connect(g); g.connect(actx.destination);
+                src.connect(lp); lp.connect(g); g.connect(ut);
                 src.start(t0, Math.random()); src.stop(tt + 0.5);
             } else if (fyrBuf.length) {
                 // inspelad smäll: luften dämpar de höga frekvenserna mer på
@@ -16283,18 +16298,18 @@
                 klp.Q.value = 0.5;
                 var kg = actx.createGain();
                 kg.gain.value = Math.min(0.9, 1.2 * styrka);
-                ks.connect(klp); klp.connect(kg); kg.connect(actx.destination);
+                ks.connect(klp); klp.connect(kg); kg.connect(ut);
                 ks.start(t0);
             } else {
                 lp.frequency.value = 1400 / (0.6 + 0.4 * s);
                 g.gain.linearRampToValueAtTime(styrka * 1.5, t0 + 0.008);
                 g.gain.exponentialRampToValueAtTime(0.001, t0 + 1.1);
-                src.connect(lp); lp.connect(g); g.connect(actx.destination);
+                src.connect(lp); lp.connect(g); g.connect(ut);
                 src.start(t0, Math.random()); src.stop(t0 + 1.2);
                 var o = actx.createOscillator(), og = actx.createGain();
                 o.frequency.setValueAtTime(90, t0); o.frequency.exponentialRampToValueAtTime(38, t0 + 0.4);
                 og.gain.setValueAtTime(styrka * 0.8, t0); og.gain.exponentialRampToValueAtTime(0.001, t0 + 0.5);
-                o.connect(og); og.connect(actx.destination); o.start(t0); o.stop(t0 + 0.55);
+                o.connect(og); og.connect(ut); o.start(t0); o.stop(t0 + 0.55);
             }
         }
         sndBtn.addEventListener('click', function () {
@@ -16392,7 +16407,12 @@
 
         // gissa-läget
         function fraga() { return typ === 'fyr' ? 'Hur långt bort brast fyrverkeriet?' : 'Hur långt bort slog blixten ned?'; }
+        // "Ny omgång" syns hela tiden i gissningsläget, så att man kan hoppa
+        // över en omgång utan att gissa. Ett hoppat försök räknas inte.
+        var runda = 0;
         function gissaRunda() {
+            var denna = ++runda;
+            tystna();
             gissa = true; gissaKlar = false;
             s = Math.round((0.8 + Math.random() * 5.2) * 10) / 10;
             xo = XO;
@@ -16405,12 +16425,14 @@
             gT.sl.disabled = true;
             svar.style.display = '';
             svarIn.value = ''; svarIn.disabled = true; svarBtn.disabled = true;
-            svarBtn.style.display = ''; nyBtn.style.display = 'none';
-            tEv = null; rita();
+            svarBtn.style.display = ''; nyBtn.style.display = '';
+            tEv = null; hord = false; pop = 0; rita();
             info.textContent = typ === 'fyr' ? 'Titta mot horisonten …' : 'Titta på himlen …';
-            setTimeout(function () { if (gissa && !gissaKlar) starta(); }, 900 + Math.random() * 900);
+            setTimeout(function () { if (gissa && !gissaKlar && denna === runda) starta(); }, 900 + Math.random() * 900);
         }
         function avslutaGissa() {
+            runda++;
+            tystna();
             gissa = false; gissaKlar = false;
             [startBtn, blixtBtn, fyrBtn, gissaBtn].forEach(function (b) { b.style.display = ''; });
             gS.rad.style.display = '';

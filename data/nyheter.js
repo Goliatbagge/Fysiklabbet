@@ -103,6 +103,69 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-09-isjattarnas-vingliga-magnetfalt",
+    date: "2026-11-09",
+    title: "Uranus och Neptunus magnetfält kan ha vridit sig sedan Voyager 2 flög förbi",
+    deck: "Uranus och Neptunus har solsystemets märkligaste magnetfält, kraftigt lutade och oordnade. Datorsimuleringar tyder på att förklaringen är vattnet djupt inne i planeterna, som leder ström allt bättre ju längre ner man kommer, och att fälten då kan ändras kraftigt på några årtionden.",
+    category: "Magnetism",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-11-09-isjattarnas-vingliga-magnetfalt.jpg",
+    imageAlt: "Planeten Neptunus mot svart bakgrund. Planeten är klarblå med ljusa, tunna molnstrimmor och en mörk oval fläck med vita moln intill, en bit ovanför mitten.",
+    imageCredit: "Foto: NASA/JPL, Voyager 2 (1989), via Wikimedia Commons (public domain). Förstärkta färger, utfyllt till bredformat.",
+    tags: ["magnetism", "magnetfält", "dynamo", "uranus", "neptunus", "isjätte", "voyager 2", "elektrisk ledningsförmåga", "jon", "norrsken", "datorsimulering", "jordmagnetiska fältet"],
+    sources: [
+      { name: "Phys.org: Wacky magnetic fields of ice giants may stem from conductivity changes in their deep interiors (University of Texas at Austin, 6 november 2026)", url: "https://phys.org/news/2026-11-wacky-magnetic-fields-ice-giants.html" },
+      { name: "Communications Physics: studien i fulltext (öppen, CC BY 4.0)", url: "https://www.nature.com/articles/s42005-026-02841-y" }
+    ],
+    research: {
+      citation: "C. Yan, K. M. Soderlund, J. M. Aurnou, H. Cao, A. Masters och H. Melin, ”Electrical conductivity structure drives anomalous and potentially time-varying magnetic fields at Uranus and Neptune”, Communications Physics 9, 336 (2026), publicerad 3 november 2026. Kollegialt granskad.",
+      url: "https://doi.org/10.1038/s42005-026-02841-y"
+    },
+    simulering: {
+      href: "fysik2-jordmagnetiska-faltet.html",
+      name: "Jordmagnetiska fältet",
+      text: "Rotera jorden i 3D och se fältlinjerna gå ut från ena halvklotet och in i det andra, som kring en stavmagnet inne i planeten. Det är den ordnade bilden som Uranus och Neptunus inte följer."
+    },
+    larare: {
+      moment: [
+        { label: "Jordmagnetiska fältet", href: "katalog.html?id=fy2-3.6" },
+        { label: "Magnetism och magnetfält", href: "katalog.html?id=fy2-3.1" },
+        { label: "Magnetfält i spole", href: "katalog.html?id=fy2-3.3" }
+      ],
+      fragor: [
+        "Jordens inre är flera tusen grader varmt. Varför kan jordens magnetfält då inte komma från en jättelik permanentmagnet i kärnan, utan måste skapas av elektriska strömmar?",
+        "En dynamo kräver både en vätska som leder ström och att vätskan rör sig. Vad tror du händer med magnetfältet om vätskan slutar röra sig, och om den slutar leda ström?",
+        "Varje isjätte har bara mätts på plats en gång. Vilka andra sätt finns att ta reda på om fälten har ändrats, utan att skicka dit en ny rymdsond?"
+      ]
+    },
+    body: [
+      { type: "p", html: "När rymdsonden Voyager 2 flög förbi Uranus 1986 och Neptunus 1989 mätte den magnetfält som inte liknade något man sett förut. Jordens magnetfält liknar fältet kring en stavmagnet, och magnetfältets axel lutar bara knappt 10&nbsp;grader mot jordens rotationsaxel. Uranus fält visade sig luta 59&nbsp;grader och Neptunus 47&nbsp;grader. Fälten var dessutom oordnade. Den del av fältet som liknar en stavmagnet längs rotationsaxeln står bara för omkring 12&nbsp;procent av den magnetiska energin vid planeternas yta. Hos alla andra planeter med ett eget magnetfält är andelen mellan 74 och 98&nbsp;procent." },
+      { type: "p", html: "Nu föreslår Chi Yan vid University of Texas at Austin och kolleger vid University of California, Los Angeles, Imperial College London och Northumbria University en förklaring. Studien publicerades i den öppet tillgängliga tidskriften <em>Communications Physics</em> den 3&nbsp;november." },
+      { type: "h2", text: "Vatten som leder ström" },
+      { type: "p", html: "Ett planetärt magnetfält skapas av en dynamo. En vätska som leder elektrisk ström rör sig djupt inne i planeten, och rörelserna håller i gång elektriska strömmar som i sin tur ger magnetfältet. I jorden är det smält järn i den yttre kärnan som strömmar runt, och jordens rotation ordnar rörelserna så att fältet blir likt en stavmagnets. Uranus och Neptunus har ungefär fyra gånger så stor diameter som jorden och kallas isjättar. De tros till stor del bestå av vatten, ammoniak och metan, och det är i det vattenrika inre som dynamon antas finnas." },
+      { type: "p", html: "Rent vatten leder normalt ström dåligt. Men laboratorieförsök och datorberäkningar visar att vattenmolekylerna bryts upp i joner vid tryck på 30–50&nbsp;gigapascal, alltså omkring 300&nbsp;000 till 500&nbsp;000 gånger lufttrycket vid jordytan. På 70–80&nbsp;procent av vägen från planetens centrum till ytan leder vattnet då minst 2&nbsp;000&nbsp;siemens per meter, ungefär 400 gånger bättre än havsvatten, medan koppar leder omkring 30&nbsp;000 gånger bättre än vattnet där. Högre upp, där trycket är lägre, leder det sämre och sämre." },
+      { type: "h2", text: "Fälten blev oordnade av sig själva" },
+      { type: "p", html: "Forskarna körde 15 datorsimuleringar av en dynamo i ett klotformigt skal av strömmande vätska. Programmet räknar ut hur vätskans rörelse, temperaturen och magnetfältet förändras tillsammans. De varierade hur tjockt skalet var och hur vätskans ledningsförmåga ändrades med djupet. När ledningsförmågan var densamma i hela skalet blev fältet ordnat som jordens, med en stark stavmagnetliknande del längs rotationsaxeln, och det bytte aldrig riktning. Så fort ledningsförmågan fick öka med djupet blev fälten oordnade, med flera poler, och de vände riktning med oregelbundna mellanrum. Det gällde alla tre skaltjocklekar som forskarna prövade." },
+      { type: "p", html: "Enligt forskarna beror det på att den sämre ledningsförmågan längst ut försvagar de magnetiska krafterna på vätskan där. Då tar vätskans tröghet och de värmedrivna rörelserna över, och strömningen i skalets yttre del blir livligare och mer småskalig. Båda isjättarna har också en ovanligt stor del av fältet som varierar en gång runt planeten, ungefär som när en stavmagnet lutar kraftigt mot rotationsaxeln. I simuleringarna där ledningsförmågan ökade med djupet blev just den delen stark. Bäst stämde modeller där skalet var tunnare." },
+      { type: "image", src: "nyheter/bilder/2026-11-09-isjattarnas-vingliga-magnetfalt-2.jpg", alt: "Tre ovala kartor ovanför varandra, var och en med ett rutnät av längd- och breddgrader. Kartorna är färgade i grönt och lila. Den översta är märkt Uranus-Observed, de två nedre Model 6, t = 256 yrs och Model 6, t = 288 yrs. De två övre kartorna har en liknande stor mörkgrön fläck nere till vänster om mitten. I den nedersta har ett lila område växt fram nere till höger.", caption: "Uranus magnetfält vid ytan enligt Voyager 2:s mätningar (överst), en ögonblicksbild ur den simulering som liknade Uranus bäst (i mitten) och samma simulering 32&nbsp;år senare (nederst). Varje karta visar hela planetytan. Grönt betyder att fältet pekar in i planeten, lila att det pekar ut. Talen i kartorna är tiden i simuleringen i år.", credit: "Figur: Yan m.fl., Communications Physics 9, 336 (2026), utsnitt ur figur 3 (CC BY 4.0)" },
+      { type: "h2", text: "Kan ha ändrats sedan 1980-talet" },
+      { type: "p", html: "Simuleringarna tyder också på att fälten kan ändras snabbt. I en av de modeller som liknade Uranus bäst vreds fältets axel 84&nbsp;grader på 40&nbsp;år. I en annan ändrades lutningen bara 13&nbsp;grader på lika lång tid. Det senare stämmer med att norrskenet på Uranus i senare observationer har setts ungefär där det låg under Voyagers förbiflygning, med en osäkerhet på 10–20&nbsp;grader i latitud. Vid Neptunus tycks norrskenet i söder ha flyttat sig omkring 30&nbsp;grader i latitud mellan 1989 och 2023, men det är oklart om det beror på att magnetfältet ändrats." },
+      { type: "quote", html: "Jordens magnetfält ändrar lutning med bara en grad eller så på 50 år. Våra modeller visar att isjättarna kan bete sig helt annorlunda. Under vissa perioder svänger lutningen tiotals grader på några decennier, under andra ändras den bara lite på lika lång tid.", cite: "Chi Yan, University of Texas at Austin, i universitetets pressmeddelande (översatt)" },
+      { type: "p", html: "Hur många år det handlar om beror på hur bra vattnet leder ström, eftersom ledningsförmågan styr hur snabbt ett magnetfält kan förändras i vätskan. Forskarna räknade om tiden i simuleringarna till år med ett antaget värde på 10&nbsp;000&nbsp;siemens per meter. Visar det sig att Uranus fält verkligen är stabilt under lång tid kan ledningsförmågan vara högre än man trott. Med tio gånger högre värde skulle lutningen i den lugnaste modellen hålla sig inom 5&nbsp;grader i ungefär 500&nbsp;år." },
+      { type: "p", html: "Simuleringarna kan inte återskapa förhållandena i en verklig planet. Bland annat måste vätskans inre friktion göras mycket större än i verkligheten för att beräkningarna ska gå att genomföra. Forskarna körde därför om en av modellerna med en tredjedel så stor friktion och såg att de isjättelika dragen fanns kvar. Vilken modell som passar bäst beror dessutom på vilken tolkning av Voyagers mätningar man jämför med, och så länge varje planet bara har mätts på plats en gång går det inte att slå fast om fälten verkligen har ändrats." },
+      { type: "h2", text: "Norrskenet kan visa svaret" },
+      { type: "p", html: "I väntan på nya mätningar på plats följer astronomerna planeternas norrsken. Norrsken uppstår när laddade partiklar, som ytterst kommer från solen, träffar gaserna i en planets atmosfär, och var det lyser bestäms av magnetfältet. Tom Stallard vid Northumbria University leder observationer av isjättarnas norrsken med rymdteleskopet James Webb och granskade dessutom studien åt tidskriften." },
+      { type: "quote", html: "Vi arbetar för fullt med vad de här observationerna innehåller, men norrskenets form och struktur, och andra konstiga mönster i jonosfären, lovar att ge oss ett sätt att förstå hur magnetfälten har förändrats, ett viktigt steg på vägen.", cite: "Tom Stallard, Northumbria University, i pressmeddelandet (översatt)" },
+      { type: "p", html: "Forskarna vill kombinera norrskensbilderna, Voyagers mätningar och simuleringarna för att uppskatta hur fälten ser ut i dag. För att verkligen förstå isjättarnas inre behövs ändå nya rymdsonder, skriver de." },
+      { type: "fact", title: "Visste du?", items: [
+        "Voyager 2 är fortfarande den enda rymdsond som har besökt Uranus och Neptunus.",
+        "Neptunus strålar ut nästan dubbelt så mycket energi som den får från solen, medan Uranus knappt avger något överskott alls. Ändå har de två planeterna lika oordnade magnetfält med ungefär samma styrka.",
+        "Jupiters magnetfält ändrades mätbart mellan rymdsonden Pioneer&nbsp;10:s besök 1973 och Junos mätningar i vår tid, medan Saturnus fält har varit mycket stabilt.",
+        "Även jordens magnetfält vänder ibland, men med långa mellanrum. Den senaste vändningen skedde för knappt 800&nbsp;000 år sedan."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-08-spricka-pa-langden",
     date: "2026-11-08",
     title: "Därför spricker sten på längden när den trycks ihop",

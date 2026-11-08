@@ -2548,6 +2548,18 @@ window.BEGREPP = [
     ]
   },
   {
+    id: 'dynamo',
+    term: 'Dynamo',
+    former: ['dynamo', 'dynamon', 'dynamoer', 'dynamoerna', 'dynamoeffekt', 'dynamoeffekten', 'dynamomodell', 'dynamomodellen', 'dynamomodeller', 'dynamomodellerna', 'geodynamo', 'geodynamon'],
+    kort: 'Ett sätt för en planet eller stjärna att skapa sitt eget magnetfält: en vätska som leder ström rör sig i det inre, och rörelsen håller i gång de elektriska strömmar som ger fältet.',
+    relaterade: ['isjatte', 'superjonisk-is'],
+    body: [
+      { type: 'p', html: 'En cykeldynamo gör om rörelse till elektrisk ström: hjulet snurrar en magnet bredvid en spole, och det föränderliga magnetfältet inducerar en spänning. En planetär dynamo bygger på samma princip, men utan några fasta delar. I stället finns en stor mängd vätska som leder ström, som det smälta järnet i jordens yttre kärna, och som hela tiden är i rörelse.' },
+      { type: 'p', html: 'När den ledande vätskan strömmar genom ett magnetfält induceras elektriska strömmar i den, och strömmarna ger i sin tur ett magnetfält. Under rätt förhållanden förstärker processen sig själv, så att ett litet fält byggs upp och sedan hålls vid liv så länge vätskan rör sig. Rörelsen drivs av att planetens inre är varmare än dess yttre delar, och planetens rotation styr strömningen. Därför blir jordens fält ungefär som kring en stavmagnet, med en axel nära rotationsaxeln. Ett järnklot kan inte vara en permanentmagnet vid flera tusen grader, så utan dynamon skulle jorden sakna magnetfält.' },
+      { type: 'p', html: 'Dynamor finns bland annat i jorden, Merkurius, Jupiter, Saturnus, Uranus, Neptunus, Jupitermånen Ganymedes och solen. I jätteplaneterna är det inte järn som leder strömmen, utan väte under enormt tryck i Jupiter och Saturnus och troligen joniserat vatten i Uranus och Neptunus. Eftersom ingen kan se in i en planet studeras dynamor med datorsimuleringar som räknar ut hur vätskan, värmen och magnetfältet påverkar varandra. En olöst fråga är varför fälten kan vända riktning. Jordens fält har gjort det många gånger, senast för knappt 800&nbsp;000 år sedan.' }
+    ]
+  },
+  {
     id: 'isjatte',
     term: 'Isjätte',
     former: ['isjätte', 'isjätten', 'isjättar', 'isjättarna', 'isjätteplanet', 'isjätteplaneten', 'diamantregn', 'diamantregnet'],

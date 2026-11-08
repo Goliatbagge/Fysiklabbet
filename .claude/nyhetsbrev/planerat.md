@@ -174,3 +174,26 @@ Bocka av eller stryk punkter när de är klara och har nämnts i ett brev.
   vardagskoppling: man kan bygga motorn själv med ett batteri, en magnet och
   en bit koppartråd (sidan har instruktioner och en säkerhetsvarning).
   Lägg den under "Nytt på Fysiklabbet", gärna med en skärmdump av scenen.
+
+- **Jordmagnetiska fältet i ny version: SKA MED I BREVET 2026-11-15**
+  (uttryckligt önskemål 2026-11-08: "Denna vill jag också att du tar med i
+  nästa veckas nyhetsbrev"). Omgjord 3D-simulering, pushad 2026-11-08
+  (commit 22f64b48), Fysik nivå 2, avsnitt 3.6:
+  `https://fysiklabbet.se/fysik2-jordmagnetiska-faltet.html`
+  Användaren var mycket nöjd ("så enkelt, snyggt och pedagogiskt"), så ge den
+  en egen punkt med bild under "Nytt på Fysiklabbet" bredvid elmotorn, inte
+  en kort rad. Det här ska fram:
+  - Ta tag i en kompass och dra den över jordklotet. Nålen ställer in sig
+    efter fältets horisontalkomposant, och pilar visar fältet B och dess
+    komposanter B_jh och B_jv. Fältlinjen genom platsen är markerad.
+  - Därför pekar fältet snett ned i Sverige (inklinationen 71°), ligger
+    vågrätt vid ekvatorn och pekar snett upp i Australien. En panel visar
+    kompassen uppifrån (deklinationen) och fältet från sidan (inklinationen).
+  - Dra i årtalet och se den norra magnetiska polen vandra från norra Kanada
+    mot Sibirien sedan 1831, medan kompassnålen i Sverige följer med.
+  - Färdiga platser (bland annat Geografiska nordpolen, där kompassen pekar
+    långt ifrån norr), vyn Kompassen där man står på marken, och
+    stavmagneten inuti en genomskinlig jord: den norra magnetiska polen är en
+    sydända.
+  Ta en egen skärmdump av närvyn vid kompassen (Falköping eller Sydney) eller
+  översikten med fältlinjerna. Bocka av här när brevet är skrivet.

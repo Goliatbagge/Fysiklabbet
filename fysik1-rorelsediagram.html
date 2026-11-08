@@ -339,7 +339,7 @@
         const COL = {
             ink: '#0f1620',
             s: '#0f766e', v: '#2563c9', a: '#c2410c',
-            axel: '#38bdf8',
+            axel: '#2b3442',
             rekt: 'rgba(37,99,201,0.18)', rektKant: 'rgba(37,99,201,0.5)',
             tri: 'rgba(214,120,40,0.30)', triKant: 'rgba(214,120,40,0.75)',
             medel: '#2f8f4e',
@@ -467,24 +467,30 @@
             );
         };
 
-        // Bilen i sidovy, nosen åt höger. (cx, y) = mitten vid vägbanan.
+        // Bilen i sidovy, fronten åt höger. (cx, y) = mitten vid vägbanan.
         const Bil = ({ cx, y, rot = 0, spok = false }) => {
             const body = `M ${cx - 36} ${y - 11} L ${cx - 36} ${y - 23} Q ${cx - 35} ${y - 27} ${cx - 30} ${y - 27} L ${cx - 19} ${y - 28} L ${cx - 10} ${y - 40} Q ${cx - 8} ${y - 42} ${cx - 4} ${y - 42} L ${cx + 11} ${y - 42} Q ${cx + 15} ${y - 42} ${cx + 18} ${y - 39} L ${cx + 26} ${y - 29} L ${cx + 32} ${y - 27} Q ${cx + 37} ${y - 26} ${cx + 37} ${y - 21} L ${cx + 37} ${y - 11} Z`;
+            // Karossen ritas spegelvänd, så att den långa motorhuven och den
+            // lutande vindrutan hamnar fram (åt höger). Lyktorna står utanför
+            // speglingen: den gula fram, den röda bak.
+            const spegel = `translate(${2 * cx} 0) scale(-1 1)`;
             if (spok) return (
                 <g opacity="0.32" pointerEvents="none">
-                    <path d={body} fill="none" stroke={COL.mark} strokeWidth="1.4" />
+                    <path d={body} transform={spegel} fill="none" stroke={COL.mark} strokeWidth="1.4" />
                     {[-21, 21].map((dx) => <circle key={dx} cx={cx + dx} cy={y - 9} r="8" fill="none" stroke={COL.ink} strokeWidth="1.2" />)}
                 </g>
             );
             return (
                 <g>
                     <ellipse cx={cx} cy={y + 1} rx="38" ry="3" fill="rgba(15,22,32,0.25)" />
+                    <g transform={spegel}>
                     <path d={body} fill="url(#lack)" stroke="rgba(15,22,32,0.6)" strokeWidth="1" />
                     <path d={`M ${cx - 16} ${y - 28} L ${cx - 8} ${y - 38} L ${cx + 2} ${y - 38} L ${cx + 2} ${y - 28} Z`} fill="#cfe2ef" stroke="rgba(15,22,32,0.45)" strokeWidth="0.8" />
                     <path d={`M ${cx + 6} ${y - 28} L ${cx + 6} ${y - 38} L ${cx + 11} ${y - 38} Q ${cx + 14} ${y - 38} ${cx + 15} ${y - 36} L ${cx + 21} ${y - 28} Z`} fill="#cfe2ef" stroke="rgba(15,22,32,0.45)" strokeWidth="0.8" />
                     <line x1={cx + 4} y1={y - 27} x2={cx + 4} y2={y - 13} stroke="rgba(15,22,32,0.35)" strokeWidth="1" />
-                    <rect x={cx + 33} y={y - 24} width="4" height="4" rx="1" fill="#f5d36b" />
-                    <rect x={cx - 36} y={y - 23} width="3" height="4" rx="1" fill="#b3263a" />
+                    </g>
+                    <rect x={cx + 32} y={y - 23} width="4" height="4" rx="1" fill="#f5d36b" />
+                    <rect x={cx - 37} y={y - 24} width="3" height="4" rx="1" fill="#b3263a" />
                     {[-21, 21].map((dx) => (
                         <g key={dx} transform={`rotate(${rot} ${cx + dx} ${y - 9})`}>
                             <circle cx={cx + dx} cy={y - 9} r="8.5" fill="#262c35" />
@@ -825,7 +831,10 @@
                     </text>);
                 }
                 const kurva = dolt ? null : (
-                    <path d={'M ' + pts.join(' L ')} fill="none" stroke={farg} strokeWidth="3" strokeLinejoin="round" strokeLinecap="round" />
+                    <g>
+                        <path d={'M ' + pts.join(' L ')} fill="none" stroke={farg} strokeOpacity="0.16" strokeWidth="9" strokeLinejoin="round" strokeLinecap="round" />
+                        <path d={'M ' + pts.join(' L ')} fill="none" stroke={farg} strokeWidth="3" strokeLinejoin="round" strokeLinecap="round" />
+                    </g>
                 );
                 // Dragpunkterna
                 const handtag = [];
@@ -845,28 +854,35 @@
                 const tLblY = yz + fs + 3;
                 return (
                     <g key={p.k}>
-                        <rect x={p.x0} y={p.y0} width={p.x1 - p.x0} height={p.y1 - p.y0} fill="rgba(255,255,255,0.35)"
+                        <rect x={p.x0 - 1} y={p.y0 - 1} width={p.x1 - p.x0 + 2} height={p.y1 - p.y0 + 2} rx="7" fill="#fffdf8"
+                              stroke="rgba(15,22,32,0.10)" strokeWidth="1" filter="url(#kortskugga)" pointerEvents="none" />
+                        <rect x={p.x0} y={p.y0} width={p.x1 - p.x0} height={p.y1 - p.y0} fill="transparent"
                               style={{ cursor: dolt ? 'default' : 'ew-resize' }} onPointerDown={(e) => !dolt && onDown(e, 'tid')} />
                         <g pointerEvents="none">
-                            {tTicks.map((t) => <line key={'gx' + t} x1={X(t)} y1={p.y0} x2={X(t)} y2={p.y1} stroke="rgba(60,110,180,0.16)" strokeWidth="1" />)}
-                            {yTicks.map((v) => <line key={'gy' + v} x1={p.x0} y1={Y(v)} x2={p.x1} y2={Y(v)} stroke="rgba(60,110,180,0.16)" strokeWidth="1" />)}
+                            {tTicks.map((t) => <line key={'gx' + t} x1={X(t)} y1={p.y0} x2={X(t)} y2={p.y1} stroke="rgba(15,22,32,0.06)" strokeWidth="1" />)}
+                            {yTicks.map((v) => <line key={'gy' + v} x1={p.x0} y1={Y(v)} x2={p.x1} y2={Y(v)} stroke="rgba(15,22,32,0.06)" strokeWidth="1" />)}
                             {extra}
-                            <line x1={p.x0} y1={p.y1} x2={p.x0} y2={p.y0 - 10} stroke={COL.axel} strokeWidth="2" />
-                            <polygon points={`${p.x0 - 4},${p.y0 - 8} ${p.x0},${p.y0 - 16} ${p.x0 + 4},${p.y0 - 8}`} fill={COL.axel} />
-                            <line x1={p.x0} y1={yz} x2={p.x1 + 8} y2={yz} stroke={COL.axel} strokeWidth="2" />
-                            <polygon points={`${p.x1 + 6},${yz - 4} ${p.x1 + 14},${yz} ${p.x1 + 6},${yz + 4}`} fill={COL.axel} />
+                            <line x1={p.x0} y1={p.y1} x2={p.x0} y2={p.y0 - 9} stroke={COL.axel} strokeWidth="1.6" strokeLinecap="butt" />
+                            <path d={`M ${p.x0 - 4} ${p.y0 - 7} L ${p.x0} ${p.y0 - 15} L ${p.x0 + 4} ${p.y0 - 7} Z`} fill={COL.axel} />
+                            <line x1={p.x0} y1={yz} x2={p.x1 + 7} y2={yz} stroke={COL.axel} strokeWidth="1.6" strokeLinecap="butt" />
+                            <path d={`M ${p.x1 + 5} ${yz - 4} L ${p.x1 + 13} ${yz} L ${p.x1 + 5} ${yz + 4} Z`} fill={COL.axel} />
+                            {!dolt && tTicks.map((t) => <line key={'tx' + t} x1={X(t)} y1={yz} x2={X(t)} y2={yz + 4} stroke={COL.axel} strokeWidth="1.2" />)}
+                            {!dolt && yTicks.map((v) => <line key={'ty' + v} x1={p.x0 - 4} y1={Y(v)} x2={p.x0} y2={Y(v)} stroke={COL.axel} strokeWidth="1.2" />)}
+                            <text x={p.x1 - 24} y={p.y0 - 7} textAnchor="end" fontSize={fs - 2} fill={farg} fontWeight="700" letterSpacing="0.06em">
+                                <tspan fontStyle="italic">{sym}</tspan>-<tspan fontStyle="italic">t</tspan>-DIAGRAM
+                            </text>
                             {!dolt && tTicks.map((t) => (
                                 <text key={'xt' + t} x={X(t)} y={tLblY} textAnchor="middle" fontSize={fs - 1} fill="rgba(15,22,32,0.72)">{fmtk(t, 3)}</text>
                             ))}
                             {!dolt && yTicks.map((v) => (
-                                <text key={'yt' + v} x={p.x0 - 6} y={Y(v) + fs * 0.36} textAnchor="end" fontSize={fs - 1} fill="rgba(15,22,32,0.72)">{fmt(v, stegDec(A.step))}</text>
+                                <text key={'yt' + v} x={p.x0 - 8} y={Y(v) + fs * 0.36} textAnchor="end" fontSize={fs - 1} fill="rgba(15,22,32,0.72)">{fmt(v, stegDec(A.step))}</text>
                             ))}
                             <text x={p.x0 + 9} y={p.y0 - 7} textAnchor="start" fontSize={fs + 2} fill={farg} fontStyle="italic" fontWeight="600">{sym}</text>
                             <text x={p.x0 - 8} y={p.y0 - 7} textAnchor="end" fontSize={fs - 1} fill="rgba(15,22,32,0.8)">{enh}</text>
                             <text x={p.x1 + 12} y={yz - 8} textAnchor="middle" fontSize={fs + 1} fill="rgba(15,22,32,0.85)" fontStyle="italic">t</text>
                             {kurva}
                             {!dolt && p.k === 's' && spoktider.map((t, i) => <circle key={i} cx={X(t)} cy={Y(M.s(t))} r="3.6" fill={COL.mark} />)}
-                            {!dolt && <circle cx={X(tc)} cy={Y(f(tc))} r="5.5" fill={COL.ink} />}
+                            {!dolt && <circle cx={X(tc)} cy={Y(f(tc))} r="6" fill={farg} stroke={COL.ink} strokeWidth="2" />}
                         </g>
                         {handtag}
                         {dolt && p.k === 'v' && (
@@ -891,6 +907,9 @@
                         <linearGradient id="lack" x1="0" y1="0" x2="0" y2="1">
                             <stop offset="0" stopColor="#d9475d" /><stop offset="1" stopColor="#a82a3e" />
                         </linearGradient>
+                        <filter id="kortskugga" x="-5%" y="-10%" width="110%" height="125%">
+                            <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#0f1620" floodOpacity="0.10" />
+                        </filter>
                         <radialGradient id="boll" cx="0.35" cy="0.32" r="0.75">
                             <stop offset="0" stopColor="#f08a5d" /><stop offset="0.6" stopColor="#d2452e" /><stop offset="1" stopColor="#8f2516" />
                         </radialGradient>

@@ -1483,10 +1483,18 @@
                                         <button className="btn-toggle" onClick={() => spara()}>Spara mätningen</button>
                                         <button className={'btn-toggle' + (ljudPa ? ' active' : '')} onClick={vaxlaLjud}>{ljudPa ? 'Stäng av ljudet' : 'Lyssna'}</button>
                                     </div>
+                                    <div className="text-sm mt-3 p-2 rounded-lg" style={{ background: 'rgba(37,99,201,0.07)', color: 'var(--lab-ink-soft)' }}>
+                                        <strong style={{ color: 'var(--lab-ink)' }}>Lyssna själv.</strong> Slå på ljudet och kryssa
+                                        i Två likadana ljudkällor. Intensiteten blir dubbelt så stor, men ljudet låter bara
+                                        lite starkare: 3&nbsp;dB är en liten skillnad för örat. Prova sedan Tio gånger effekten.
+                                        Först när intensiteten blir ungefär tio gånger så stor, alltså 10&nbsp;dB mer, upplever
+                                        de flesta att ljudet låter dubbelt så starkt. Det är därför decibelskalan är logaritmisk.
+                                    </div>
                                     {ljudPa && (
                                         <div className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>
                                             Datorns högtalare kan inte spela upp de verkliga nivåerna, men volymen ändras
-                                            lika mycket som ljudnivån: 20&nbsp;dB lägre låter som en tiondel av amplituden.
+                                            lika mycket som ljudnivån: dubbel intensitet i simuleringen är dubbel ljudeffekt
+                                            ur högtalaren. Över 110&nbsp;dB ökar volymen inte längre.
                                         </div>
                                     )}
                                 </div>

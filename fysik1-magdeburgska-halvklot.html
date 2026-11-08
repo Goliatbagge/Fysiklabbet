@@ -1199,7 +1199,8 @@
             return pts;
         }
         const molUt = molekylMoln(NUT, 0x0f5c74);
-        const molIn = molekylMoln(160, 0x0f5c74);
+        const IN_MAX = 160, IN_KAP = 320;   // högst 160 i vila, plats för dem som är på väg
+        const molIn = molekylMoln(IN_KAP, 0x0f5c74);
         // Molekylerna inuti ligger alltid innanför skalet och syns bara i
         // genomskärning; klotets insida skymde dem annars helt.
         molIn.material.depthTest = false; molIn.renderOrder = 10;
@@ -1207,14 +1208,13 @@
         function initMolekyler() {
             molekyler.ut = []; molekyler.in = [];
             for (let i = 0; i < NUT; i++) molekyler.ut.push({ p: slumpaRiktning().multiplyScalar(1), v: slumpaRiktning().multiplyScalar(0.6 + Math.random() * 0.6) });
-            for (let i = 0; i < 160; i++) molekyler.in.push({ p: slumpaRiktning().multiplyScalar(Math.cbrt(Math.random()) * 0.9), v: slumpaRiktning().multiplyScalar(0.6 + Math.random() * 0.6) });
             placeraMolekyler(true);
         }
         function skal() { const R = r(); return { a: R * 1.06 + 0.04, b: R * 1.06 + 0.5 }; }
         function antalIn() {
             const R = r(), { a, b } = skal();
             const vIn = (R * 0.94) ** 3, vSkal = b ** 3 - a ** 3;
-            return Math.min(160, Math.round(NUT * vIn / vSkal * st.p / P_HAV));
+            return Math.min(IN_MAX, Math.round(NUT * vIn / vSkal * st.p / P_HAV));
         }
         function placeraMolekyler(nytt) {
             const R = r(), { a, b } = skal();
@@ -1225,11 +1225,70 @@
                     m.p.copy(slumpaRiktning()).multiplyScalar(rr);
                 }
             });
-            molekyler.in.forEach(m => { if (nytt || m.p.length() > R * 0.92) m.p.copy(slumpaRiktning()).multiplyScalar(Math.cbrt(Math.random()) * R * 0.9); });
+            if (nytt) {
+                molekyler.in = [];
+                const n = antalIn();
+                for (let i = 0; i < n; i++) molekyler.in.push(nyInne(R));
+            } else molekyler.in.forEach(m => { if (m.s === 0 && m.p.length() > R * 0.92) m.p.copy(slumpaRiktning()).multiplyScalar(Math.cbrt(Math.random()) * R * 0.9); });
+        }
+        // s: 0 = studsar runt inuti, 1 = sugs ut genom ventilen, 2 = rusar in
+        function nyInne(R) {
+            return { s: 0, t: 0, p: slumpaRiktning().multiplyScalar(Math.cbrt(Math.random()) * R * 0.9), v: slumpaRiktning().multiplyScalar(0.6 + Math.random() * 0.6) };
+        }
+        // Ventilens öppning på klotets insida (relativt klotets mitt)
+        function inlopp(R) { return ventilSpets.clone().normalize().multiplyScalar(R * 0.9); }
+        // Molekylerna inuti följer trycket: blir de för många sugs de närmast
+        // ventilen ut genom den, blir de för få rusar nya in genom ventilen
+        // (eller genom springan när kloten släppt).
+        function uppdateraInflode(dt, R) {
+            const mal = antalIn();
+            const lev = molekyler.in.filter(m => m.s !== 1);
+            const ventilP = inlopp(R);
+            const fart = 1.4 + R * 2.2;
+            if (lev.length > mal) {
+                const kandidater = lev.filter(m => m.s === 0).sort((a, b) => a.p.distanceToSquared(ventilP) - b.p.distanceToSquared(ventilP));
+                kandidater.slice(0, lev.length - mal).forEach(m => { m.s = 1; m.t = 0; });
+            } else if (lev.length < mal) {
+                const nya = Math.min(mal - lev.length, IN_KAP - molekyler.in.length);
+                const n = ventilP.clone().normalize();
+                for (let i = 0; i < nya; i++) {
+                    let p, v;
+                    if (st.fast) {
+                        // en stråle från ventilen in i klotet
+                        p = ventilP.clone().add(slumpaRiktning().multiplyScalar(R * 0.03));
+                        v = n.clone().negate().add(slumpaRiktning().multiplyScalar(0.3)).normalize().multiplyScalar(fart * (0.55 + Math.random() * 0.4));
+                    } else {
+                        // kloten har släppt: luften rusar in genom springan runt om
+                        const a = Math.random() * Math.PI * 2;
+                        p = new THREE.Vector3(Math.cos(a), 0, Math.sin(a)).multiplyScalar(R * 0.9);
+                        v = p.clone().negate().normalize().add(slumpaRiktning().multiplyScalar(0.4)).normalize().multiplyScalar(fart * (0.7 + Math.random() * 0.6));
+                    }
+                    molekyler.in.push({ s: 2, t: 0, p, v });
+                }
+            }
+            for (let i = molekyler.in.length - 1; i >= 0; i--) {
+                const m = molekyler.in[i];
+                if (m.s === 1) {
+                    // styr mot ventilen, allt fortare ju närmare den kommer
+                    m.t += dt;
+                    const d = ventilP.clone().sub(m.p), l = d.length();
+                    const onskad = d.clone().multiplyScalar(fart * (1 + 0.6 * R / Math.max(l, R * 0.1)) / Math.max(l, 1e-6));
+                    // försvinner in i ventilen när den når öppningen (eller skulle passera den i detta steg)
+                    if (l < Math.max(R * 0.05, onskad.length() * dt * 1.5) || m.t > 3) { molekyler.in.splice(i, 1); continue; }
+                    m.v.lerp(onskad, Math.min(1, dt * 10));
+                } else if (m.s === 2) {
+                    m.t += dt;
+                    // farten avtar till vanlig värmerörelse när molekylen kommit in
+                    if (m.t > 0.25) m.v.multiplyScalar(Math.exp(-dt * 2.5));
+                    if (m.v.length() < 0.9 || m.t > 2) { m.s = 0; if (m.v.length() < 0.6) m.v.setLength(0.6 + Math.random() * 0.6); }
+                }
+            }
         }
         function stegaMolekyler(dt) {
             const R = r(), { a, b } = skal();
-            const nUt = Math.round(NUT * st.p0 / P_HAV), nIn = antalIn();
+            const nUt = Math.round(NUT * st.p0 / P_HAV);
+            uppdateraInflode(dt, R);
+            const nIn = molekyler.in.length;
             const pu = molUt.geometry.attributes.position, pi = molIn.geometry.attributes.position;
             const studs = (m, lo, hi) => {
                 m.p.addScaledVector(m.v, dt);
@@ -1254,7 +1313,8 @@
             }
             for (let i = 0; i < nIn; i++) {
                 const m = molekyler.in[i];
-                studs(m, 0, R * 0.92);
+                if (m.s === 1) m.p.addScaledVector(m.v, dt);
+                else studs(m, 0, R * 0.92);
                 pi.setXYZ(i, m.p.x, m.p.y + SOM_Y, m.p.z);
             }
             pu.needsUpdate = true; pi.needsUpdate = true;

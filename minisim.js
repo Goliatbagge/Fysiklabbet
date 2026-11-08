@@ -16158,10 +16158,28 @@
         // ── Ljud (Web Audio) ──────────────────────────────────────────────
         var AC = window.AudioContext || window.webkitAudioContext;
         var actx = null, ljudPa = true, brus = null;
+        // Fyrverkeriets smäll är inspelade ljudeffekter (skapade i ElevenLabs,
+        // media/ljud/fyrverkeri-1/2.mp3). De hämtas först när ljudet väcks.
+        // Tills de laddats, eller om hämtningen misslyckas, används det
+        // syntetiserade ljudet nedan.
+        var FYR_FILER = ['media/ljud/fyrverkeri-1.mp3', 'media/ljud/fyrverkeri-2.mp3'];
+        var fyrBuf = [];
+        function laddaFyr() {
+            if (!window.fetch) return;
+            FYR_FILER.forEach(function (url) {
+                fetch(url).then(function (res) { return res.ok ? res.arrayBuffer() : Promise.reject(); })
+                    .then(function (ab) {
+                        return new Promise(function (ok, fel) { actx.decodeAudioData(ab, ok, fel); });
+                    })
+                    .then(function (buf) { fyrBuf.push(buf); })
+                    .catch(function () {});
+            });
+        }
         function vakna() {
             if (!AC) return;
             if (!actx) {
                 actx = new AC();
+                laddaFyr();
                 var len = actx.sampleRate * 5;
                 brus = actx.createBuffer(1, len, actx.sampleRate);
                 var d = brus.getChannelData(0), last = 0;
@@ -16201,6 +16219,20 @@
                 }
                 src.connect(lp); lp.connect(g); g.connect(actx.destination);
                 src.start(t0, Math.random()); src.stop(tt + 0.5);
+            } else if (fyrBuf.length) {
+                // inspelad smäll: luften dämpar de höga frekvenserna mer på
+                // långt håll, så smällen blir dovare och svagare med avståndet
+                var ks = actx.createBufferSource();
+                ks.buffer = fyrBuf[Math.floor(Math.random() * fyrBuf.length)];
+                ks.playbackRate.value = 0.94 + Math.random() * 0.12;
+                var klp = actx.createBiquadFilter();
+                klp.type = 'lowpass';
+                klp.frequency.value = Math.min(16000, 14000 / (0.5 + s));
+                klp.Q.value = 0.5;
+                var kg = actx.createGain();
+                kg.gain.value = Math.min(0.9, 1.2 * styrka);
+                ks.connect(klp); klp.connect(kg); kg.connect(actx.destination);
+                ks.start(t0);
             } else {
                 lp.frequency.value = 1400 / (0.6 + 0.4 * s);
                 g.gain.linearRampToValueAtTime(styrka * 1.5, t0 + 0.008);

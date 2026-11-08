@@ -15907,19 +15907,42 @@
             });
         }
 
+        // "Pang!" står där fyrverkeriet exploderade, och texten är mindre ju
+        // längre bort explosionen är (som ljudet, som också blir svagare)
+        function pangStorlek() { return Math.max(11, Math.min(30, 34 / (0.6 + 0.35 * s))); }
+        function ritaPang(x, y, pt) {
+            ctx.font = font(pt, true);
+            var bredd = ctx.measureText('Pang!').width;
+            x = Math.max(8 + bredd / 2, Math.min(W - 8 - bredd / 2, x));
+            y = Math.max(pt + 4, y);
+            var sk = 1 + 0.15 * Math.exp(-pop * 6);
+            ctx.save();
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.translate(x, y);
+            ctx.scale(sk, sk);
+            ctx.fillText('Pang!', 0, 0);
+            ctx.restore();
+        }
         function ritaPop() {
             if (!hord || pop > 2.2) return;
             var a = Math.max(0, Math.min(1, (2.2 - pop) / 0.6));
             ctx.globalAlpha = a;
             ctx.fillStyle = GUL;
-            ctx.textAlign = 'right';
-            ctx.font = font(22, true);
-            var sk = 1 + 0.15 * Math.exp(-pop * 6);
-            ctx.save();
-            ctx.translate(Math.min(W - 10, xo + 40), GY - 62);
-            ctx.scale(sk, sk);
-            ctx.fillText(typ === 'fyr' ? 'Pang!' : 'Muller!', 0, 0);
-            ctx.restore();
+            if (typ === 'fyr') {
+                var pt = pangStorlek();
+                ritaPang(x0(), y0() - 0.9 * pt, pt);
+            } else {
+                ctx.textAlign = 'right';
+                ctx.textBaseline = 'alphabetic';
+                ctx.font = font(22, true);
+                var sk = 1 + 0.15 * Math.exp(-pop * 6);
+                ctx.save();
+                ctx.translate(Math.min(W - 10, xo + 40), GY - 62);
+                ctx.scale(sk, sk);
+                ctx.fillText('Muller!', 0, 0);
+                ctx.restore();
+            }
             ctx.globalAlpha = 1;
         }
 
@@ -16127,11 +16150,16 @@
                 ctx.fillStyle = GUL;
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'alphabetic';
-                ctx.font = font(26, true);
-                var sk = 1 + 0.15 * Math.exp(-pop * 6);
-                ctx.save(); ctx.translate(W / 2, H - 46); ctx.scale(sk, sk);
-                ctx.fillText(typ === 'fyr' ? 'Pang!' : 'Mullrrr …', 0, 0);
-                ctx.restore();
+                if (typ === 'fyr') {
+                    var pt2 = pangStorlek();
+                    ritaPang(fpX, YH - k * HFYR - 0.9 * pt2, pt2);
+                } else {
+                    ctx.font = font(26, true);
+                    var sk = 1 + 0.15 * Math.exp(-pop * 6);
+                    ctx.save(); ctx.translate(W / 2, H - 46); ctx.scale(sk, sk);
+                    ctx.fillText('Mullrrr …', 0, 0);
+                    ctx.restore();
+                }
                 ctx.globalAlpha = 1;
             }
         }
@@ -16158,23 +16186,30 @@
         // ── Ljud (Web Audio) ──────────────────────────────────────────────
         var AC = window.AudioContext || window.webkitAudioContext;
         var actx = null, ljudPa = true, brus = null;
-        // Fyrverkeriets smäll är inspelade ljudeffekter (skapade i ElevenLabs,
-        // media/ljud/fyrverkeri-1.mp3). Den hämtas först när ljudet väcks.
-        // Tills de laddats, eller om hämtningen misslyckas, används det
-        // syntetiserade ljudet nedan.
-        var FYR_FILER = ['media/ljud/fyrverkeri-1.mp3'];
-        var fyrBuf = [];
+        // Fyrverkeriets smäll och åskan är inspelade ljudeffekter (skapade i
+        // ElevenLabs, media/ljud/). Åskan finns i två sorter: nära (skarp
+        // knall och sedan muller) och långt bort (bara ett dovt, rullande
+        // muller). Alla tonar ut till tystnad. Filerna hämtas först när
+        // ljudet väcks; tills de laddats, eller om hämtningen misslyckas,
+        // används det syntetiserade ljudet nedan.
+        var fyrBuf = [], askaNara = [], askaFjarran = [];
+        function laddaLjud(url, lista) {
+            fetch(url).then(function (res) { return res.ok ? res.arrayBuffer() : Promise.reject(); })
+                .then(function (ab) {
+                    return new Promise(function (ok, fel) { actx.decodeAudioData(ab, ok, fel); });
+                })
+                .then(function (buf) { lista.push(buf); })
+                .catch(function () {});
+        }
         function laddaFyr() {
             if (!window.fetch) return;
-            FYR_FILER.forEach(function (url) {
-                fetch(url).then(function (res) { return res.ok ? res.arrayBuffer() : Promise.reject(); })
-                    .then(function (ab) {
-                        return new Promise(function (ok, fel) { actx.decodeAudioData(ab, ok, fel); });
-                    })
-                    .then(function (buf) { fyrBuf.push(buf); })
-                    .catch(function () {});
-            });
+            laddaLjud('media/ljud/fyrverkeri-1.mp3', fyrBuf);
+            laddaLjud('media/ljud/aska-nara-1.mp3', askaNara);
+            laddaLjud('media/ljud/aska-nara-2.mp3', askaNara);
+            laddaLjud('media/ljud/aska-fjarran-1.mp3', askaFjarran);
+            laddaLjud('media/ljud/aska-fjarran-2.mp3', askaFjarran);
         }
+        function slump(lista) { return lista[Math.floor(Math.random() * lista.length)]; }
         function vakna() {
             if (!AC) return;
             if (!actx) {
@@ -16197,7 +16232,24 @@
             lp.type = 'lowpass';
             var g = actx.createGain();
             g.gain.setValueAtTime(0, t0);
-            if (typ === 'blixt') {
+            var askLista = s < 2.2 ? askaNara : askaFjarran;
+            if (typ === 'blixt' && !askLista.length) askLista = askaNara.length ? askaNara : askaFjarran;
+            if (typ === 'blixt' && askLista.length) {
+                // inspelad åska: nära en skarp knall och sedan muller, långt
+                // bort bara muller. Luften dämpar de höga frekvenserna mer ju
+                // längre ljudet går, så åskan blir dovare och svagare.
+                var as = actx.createBufferSource();
+                as.buffer = slump(askLista);
+                as.playbackRate.value = (s < 2.2 ? 1 : 0.95) * (0.94 + Math.random() * 0.1);
+                var alp = actx.createBiquadFilter();
+                alp.type = 'lowpass';
+                alp.frequency.value = Math.min(16000, 9000 / (0.4 + 0.6 * s));
+                alp.Q.value = 0.5;
+                var ag = actx.createGain();
+                ag.gain.value = Math.min(1, 1.3 * styrka);
+                as.connect(alp); alp.connect(ag); ag.connect(actx.destination);
+                as.start(t0);
+            } else if (typ === 'blixt') {
                 // mullret: lågpass som blir mörkare med avståndet, ojämnt avklingande
                 lp.frequency.value = 900 / (0.6 + 0.5 * s);
                 var dur = Math.max(1.6, tSista() - tS()) + 1.2, tt = t0;
@@ -16223,7 +16275,7 @@
                 // inspelad smäll: luften dämpar de höga frekvenserna mer på
                 // långt håll, så smällen blir dovare och svagare med avståndet
                 var ks = actx.createBufferSource();
-                ks.buffer = fyrBuf[Math.floor(Math.random() * fyrBuf.length)];
+                ks.buffer = slump(fyrBuf);
                 ks.playbackRate.value = 0.94 + Math.random() * 0.12;
                 var klp = actx.createBiquadFilter();
                 klp.type = 'lowpass';

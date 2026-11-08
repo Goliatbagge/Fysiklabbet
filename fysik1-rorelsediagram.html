@@ -433,15 +433,24 @@
         // ═══════════════════════════════════════════════
         //  Layout
         // ═══════════════════════════════════════════════
-        const layout = (scen, narrow) => {
-            const W = narrow ? 440 : 860, H = narrow ? 780 : 700;
+        // diag = vilka diagram som visas ({ s, v, a }). Färre diagram blir
+        // högre, men aldrig högre än phMax; då krymper hela scenen i höjd.
+        const layout = (scen, narrow, diag = { s: true, v: true, a: true }) => {
+            const W = narrow ? 440 : 860, H0 = narrow ? 780 : 700;
             const lod = scen === 'lod';
             const pTop = narrow ? (lod ? 30 : 192) : 214;
-            const pBot = H - 50, gap = 30;
-            const ph = (pBot - pTop - 2 * gap) / 3;
+            const gap = 30;
+            const keys = ['s', 'v', 'a'].filter((k) => diag[k]);
+            const n = Math.max(1, keys.length);
+            const phMax = narrow ? 240 : 260;
+            // Vid kast och fall står mätstången bredvid diagrammen och behöver
+            // hela höjden, så där fyller diagrammen alltid ut den.
+            const fri = (H0 - 50 - pTop - (n - 1) * gap) / n;
+            const ph = lod ? fri : Math.min(phMax, fri);
+            const H = lod ? H0 : Math.round(pTop + n * ph + (n - 1) * gap + 50);
             const gx0 = narrow ? (lod ? 214 : 60) : (lod ? 318 : 76);
             const gx1 = narrow ? 412 : 826;
-            const panels = ['s', 'v', 'a'].map((k, i) => ({ k, x0: gx0, x1: gx1, y0: pTop + i * (ph + gap), y1: pTop + i * (ph + gap) + ph }));
+            const panels = keys.map((k, i) => ({ k, x0: gx0, x1: gx1, y0: pTop + i * (ph + gap), y1: pTop + i * (ph + gap) + ph }));
             const fs = narrow ? 14 : 13;
             if (!lod) return { W, H, narrow, fs, panels, lod,
                 road: narrow ? { x0: 12, x1: 428, y: 112 } : { x0: 20, x1: 540, y: 128 }, vpx: narrow ? 2.4 : 3, apx: narrow ? 7 : 9 };
@@ -885,7 +894,7 @@
                             {!dolt && <circle cx={X(tc)} cy={Y(f(tc))} r="6" fill={farg} stroke={COL.ink} strokeWidth="2" />}
                         </g>
                         {handtag}
-                        {dolt && p.k === 'v' && (
+                        {dolt && p === panels[0] && (
                             <text x={(p.x0 + p.x1) / 2} y={(p.y0 + p.y1) / 2} textAnchor="middle" fontSize={fs + 1} fill="rgba(15,22,32,0.6)" fontStyle="italic">
                                 Diagrammen ritas när du har svarat
                             </text>
@@ -1117,7 +1126,8 @@
             const gissa = lage === 'gissa';
             const dolt = gissa && !gst.klar;
             const M = useMemo(() => modell(p), [p]);
-            const L = layout(p.scen, narrow);
+            const [diag, setDiag] = useState({ s: true, v: true, a: true });
+            const L = layout(p.scen, narrow, diag);
 
             const axBer = {
                 s: axel(M.sMin, M.sMax),
@@ -1367,9 +1377,9 @@
                 </React.Fragment>
             );
 
-            const visaRad = (k, text, farg) => (
-                <label className={dolt ? 'av' : ''}>
-                    <input type="checkbox" checked={show[k] && !dolt} disabled={dolt} onChange={() => tShow(k)} />
+            const visaRad = (k, text, farg, ej = false) => (
+                <label className={dolt || ej ? 'av' : ''}>
+                    <input type="checkbox" checked={show[k] && !dolt && !ej} disabled={dolt || ej} onChange={() => tShow(k)} />
                     {farg && <span className="st-swatch" style={{ background: farg }}></span>}
                     <span>{text}</span>
                 </label>
@@ -1392,9 +1402,21 @@
                                 aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
                         </button>
-                        <div className="st-title">Visa</div>
+                        <div className="st-title">Diagram</div>
+                        {[['s', COL.s], ['v', COL.v], ['a', COL.a]].map(([k, farg]) => {
+                            const sista = diag[k] && Object.values(diag).filter(Boolean).length === 1;
+                            return (
+                                <label key={k} className={sista ? 'av' : ''} title={sista ? 'Minst ett diagram visas alltid' : undefined}>
+                                    <input type="checkbox" checked={diag[k]} disabled={sista}
+                                           onChange={() => setDiag((dg) => ({ ...dg, [k]: !dg[k] }))} />
+                                    <span className="st-swatch" style={{ background: farg }}></span>
+                                    <span><em>{k}</em>-<em>t</em>-diagram</span>
+                                </label>
+                            );
+                        })}
+                        <div className="st-title mt">Visa</div>
                         {visaRad('area', 'Areor och Δv', COL.triKant)}
-                        {visaRad('tangent', 'Tangent i s-t', COL.v)}
+                        {visaRad('tangent', 'Tangent i s-t', COL.v, !diag.s)}
                         {visaRad('medel', 'Medelhastighet', COL.medel)}
                         {visaRad('strobo', 'Stroboskopbilder', COL.mark)}
                         {visaRad('pilar', 'Pilar för v och a', COL.a)}

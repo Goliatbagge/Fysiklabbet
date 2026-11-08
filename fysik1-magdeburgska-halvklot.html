@@ -5,157 +5,222 @@
     <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Magdeburgska halvkloten — Fysiklabbet</title>
-    <meta name="description" content="Atmosfärstrycket och dess effekter — Magdeburgska halvkloten.">
+    <meta name="description" content="Pumpa ut luften ur två mässingsklot i 3D, häng vikter i dem och se hur mycket lufttrycket håller. Släpp in luft och se kloten släppa, eller ta med dem till Mount Everest och Månen.">
     <link rel="canonical" href="https://fysiklabbet.se/fysik1-magdeburgska-halvklot.html">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Fysiklabbet">
     <meta property="og:title" content="Magdeburgska halvkloten — Fysik nivå 1">
-    <meta property="og:description" content="Atmosfärstrycket och dess effekter — Magdeburgska halvkloten.">
+    <meta property="og:description" content="Pumpa ut luften ur två mässingsklot i 3D, häng vikter i dem och se hur mycket lufttrycket håller. Släpp in luft och se kloten släppa, eller ta med dem till Mount Everest och Månen.">
     <meta property="og:url" content="https://fysiklabbet.se/fysik1-magdeburgska-halvklot.html">
     <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Magdeburgska halvkloten — Fysik nivå 1">
-    <meta name="twitter:description" content="Atmosfärstrycket och dess effekter — Magdeburgska halvkloten.">
+    <meta name="twitter:description" content="Pumpa ut luften ur två mässingsklot i 3D, häng vikter i dem och se hur mycket lufttrycket håller. Släpp in luft och se kloten släppa, eller ta med dem till Mount Everest och Månen.">
     <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script>window.__CB = String(Date.now());</script>
     <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
     <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
     <style>
-        .dark-container {
-            background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
-        }
+        .sida { max-width: 72rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; font-family: 'DM Sans', sans-serif; }
+        @media (min-width: 768px) { .sida { padding-left: 2rem; padding-right: 2rem; } }
+        .sida h1 { font-size: 2.1rem; font-weight: 900; letter-spacing: -0.02em; color: var(--lab-ink); }
+        .ingress { color: var(--lab-ink-soft); max-width: 860px; margin: 0.5rem 0 1.25rem; }
+
         .glass-card {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(200, 50, 74, 0.15);
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 12px;
         }
-        .glass-card-light {
-            background: rgba(30, 41, 59, 0.6);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(15, 22, 32, 0.28);
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; white-space: nowrap; }
+        .fnum { color: var(--lab-ink); font-size: 21px; font-family: 'Instrument Serif', serif; line-height: 1.15; white-space: nowrap; }
+        .fnum sub { font-size: 0.62em; font-style: normal; }
+        .formelkort { padding: 14px 18px; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap;
+                      align-items: center; column-gap: 2.4rem; row-gap: 1rem; color: var(--lab-ink); }
+        .formelrad { display: flex; align-items: center; column-gap: 0.45rem; }
+        .vbl { display: flex; flex-direction: column; align-items: center; }
+        .vbl .dold { visibility: hidden; }
+
+        .layout { display: flex; flex-direction: column; gap: 1.5rem; }
+        @media (min-width: 1024px) { .layout { flex-direction: row; align-items: flex-start; } }
+        .scen-kol { flex: 1 1 auto; min-width: 0; }
+        @media (min-width: 1024px) { .scen-kol { width: 63%; } .panel-kol { width: 37%; } }
+        .panel-kol { flex-shrink: 0; display: flex; flex-direction: column; gap: 1rem; }
+
+        .scene-wrap {
+            position: relative; width: 100%; height: 620px;
+            border-radius: 12px; overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            user-select: none; -webkit-user-select: none;
+            transition: background 0.8s ease;
         }
-        .glow-text {
-            text-shadow: 0 0 20px rgba(200, 50, 74, 0.5);
+        body.lab-sim .scene-wrap.plats-hav { background: linear-gradient(180deg, #faf6ee 0%, #efe6d4 100%); }
+        body.lab-sim .scene-wrap.plats-fjall { background: linear-gradient(180deg, #e9eef3 0%, #e6e1d5 100%); }
+        body.lab-sim .scene-wrap.plats-everest { background: linear-gradient(180deg, #c9d7e6 0%, #e3e2dc 100%); }
+        body.lab-sim .scene-wrap.plats-flyg { background: linear-gradient(180deg, #8fb0d6 0%, #d6dce4 100%); }
+        body.lab-sim .scene-wrap.plats-manen { background: radial-gradient(ellipse at 50% 30%, #1a2233 0%, #0b0f18 70%); }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen { width: 100vw; height: 100vh; border-radius: 0; }
+        .tre-mount { position: absolute; inset: 0; touch-action: none; }
+        .tre-mount > canvas { display: block; width: 100%; height: 100%; outline: none; }
+        .tre-mount.klickbar { cursor: pointer; }
+        @media (max-width: 600px) {
+            .scene-wrap { height: auto; }
+            body.lab-sim .scene-wrap:not(:fullscreen) .tre-mount { position: relative; inset: auto; height: 440px; }
+            /* Mobil fullskärm: scenen i flödet med egen höjd, annars hittar
+               sim-dock.js ingen scen (CLAUDE.md, fälla 5). */
+            body.lab-sim .scene-wrap:is(:fullscreen, :-webkit-full-screen) .tre-mount {
+                position: sticky; inset: auto; top: 0; z-index: 2;
+                flex: 0 0 auto; width: 100%; height: 52vh;
+            }
         }
-        .btn-glow {
-            box-shadow: 0 0 20px rgba(200, 50, 74, 0.3);
-            transition: all 0.3s ease;
+
+        .scene-info {
+            position: absolute; top: 66px; left: 14px; z-index: 5;
+            background: rgba(246,242,234,0.94);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 7px 12px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            display: flex; flex-direction: column; gap: 1px; pointer-events: none; min-width: 168px;
         }
-        .btn-glow:hover {
-            box-shadow: 0 0 30px rgba(200, 50, 74, 0.5);
+        .scene-info .si-lbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; }
+        .scene-info .si-lbl em { text-transform: none; }
+        .scene-info .si-val { font-size: 15px; font-weight: 700; color: var(--lab-ink, #0f1620);
+            font-family: 'JetBrains Mono', monospace; }
+        .scene-hint {
+            position: absolute; bottom: 10px; left: 12px; z-index: 5;
+            font-size: 12.5px; color: #e9edf3;
+            background: rgba(15,22,32,0.82); padding: 5px 11px; border-radius: 7px;
+            pointer-events: none; font-weight: 500; max-width: calc(100% - 330px);
         }
-        .btn-danger-glow {
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
-        }
-        .btn-danger-glow:hover {
-            box-shadow: 0 0 30px rgba(239, 68, 68, 0.5);
-        }
-        .slider-glow::-webkit-slider-thumb {
-            box-shadow: 0 0 10px rgba(200, 50, 74, 0.8);
-        }
-        input[type="range"] {
-            -webkit-appearance: none;
-            background: rgba(30, 41, 59, 0.8);
-            border-radius: 8px;
-            height: 8px;
-        }
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(200, 50, 74, 0.6);
-        }
-        input[type="range"]::-webkit-slider-thumb:hover {
-            box-shadow: 0 0 25px rgba(200, 50, 74, 0.9);
-        }
-        .pulse-glow {
-            animation: pulseGlow 2s ease-in-out infinite;
-        }
-        @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 20px rgba(200, 50, 74, 0.4); }
-            50% { box-shadow: 0 0 40px rgba(200, 50, 74, 0.8); }
-        }
-        /* Fullskärm: canvasen (fast 600×400) skalas upp med bevarade proportioner */
-        body.lab-sim .scene-wrap:fullscreen > canvas,
-        body.lab-sim .scene-wrap:-webkit-full-screen > canvas {
-            width: 100vw !important;
-            height: 100vh !important;
-            max-width: none !important;
-            object-fit: contain;
-            border-radius: 0;
-        }
-        /* On-scene-ruta uppe till höger: teckenförklaring + visningsval
-           (+ experimentknappar i fullskärm) */
+
         .scene-toggles {
             position: absolute; top: 14px; right: 14px; z-index: 6;
-            background: rgba(246,242,234,0.94);
-            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            background: rgba(246,242,234,0.95);
             border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
             border-radius: 10px; padding: 9px 13px;
             display: flex; flex-direction: column; gap: 3px;
             box-shadow: 0 2px 8px rgba(15,22,32,0.12);
-            max-width: 240px;
+            max-width: 236px;
+        }
+        .scene-wrap:is(:fullscreen, :-webkit-full-screen) .scene-toggles {
+            max-width: 280px; max-height: calc(100vh - 28px); overflow-y: auto;
         }
         .scene-toggles .st-title {
             font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
             color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
         }
+        .scene-toggles .st-group { margin-top: 7px; }
         .scene-toggles label {
             display: flex; align-items: center; gap: 7px; cursor: pointer;
             font-size: 13px; color: var(--lab-ink, #0f1620);
-            font-family: 'Poppins', sans-serif;
         }
-        .scene-toggles input[type="checkbox"] { width: 14px; height: 14px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0; }
-        .scene-toggles .st-legend {
-            display: flex; align-items: center; gap: 7px;
-            font-size: 13px; color: var(--lab-ink, #0f1620);
-            font-family: 'Poppins', sans-serif;
+        .scene-toggles input[type="checkbox"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0; cursor: pointer;
         }
-        .scene-toggles .st-actions {
-            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
-            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
-        }
-        .scene-toggles .st-actions .btn-toggle { width: 100%; font-size: 13px; padding: 7px 10px; }
-        .btn-toggle {
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin: 0 3.5px; }
+        .scene-toggles .st-fs { display: none; flex-direction: column; gap: 6px; }
+        .scene-wrap:is(:fullscreen, :-webkit-full-screen) .scene-toggles .st-fs { display: flex; }
+
+        .seg { display: grid; gap: 1px; border-radius: 9px; overflow: hidden;
+               border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+               background: var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .seg button { background: var(--lab-bg, #f3eee4); border: 0; padding: 6px 4px; font-size: 12.5px;
+                      font-weight: 600; color: var(--lab-ink); cursor: pointer; line-height: 1.2; }
+        .seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+
+        .kort { padding: 14px 16px; color: var(--lab-ink); }
+        .kort h2 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+        .kort p { font-size: 13.5px; color: var(--lab-ink-soft); line-height: 1.55; }
+        .snitt { width: 100%; height: auto; display: block; margin: 2px 0 4px; }
+        .stapel-rad { margin-top: 8px; }
+        .stapel-rubrik { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; gap: 8px; }
+        .stapel-rubrik strong { font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+        .stapel { height: 12px; border-radius: 6px; background: rgba(15,22,32,0.08); margin-top: 3px; overflow: hidden; }
+        .stapel > div { height: 100%; border-radius: 6px; transition: width 0.15s linear; }
+        .status { margin-top: 10px; padding: 8px 10px; border-radius: 8px; font-size: 13px; line-height: 1.45;
+                  background: rgba(15,22,32,0.05); border: 1px solid var(--lab-line, rgba(15,22,32,0.12)); }
+        .status.haller { border-color: rgba(31,95,191,0.45); }
+        .status.slappt { border-color: rgba(200,50,74,0.55); }
+        .varden { width: 100%; font-size: 13.5px; border-collapse: collapse; margin-top: 8px; }
+        .varden td { padding: 3px 0; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.12)); }
+        .varden td:last-child { text-align: right; font-family: 'JetBrains Mono', monospace; font-weight: 600; white-space: nowrap; }
+        .varden sub { font-size: 0.7em; }
+
+        .knappar { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .knapp {
             background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
             border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
-            border-radius: 8px; font-weight: 600; cursor: pointer;
-            font-family: 'Poppins', sans-serif; transition: all 0.15s ease;
+            border-radius: 8px; padding: 7px 8px; font-size: 13px; font-weight: 600; cursor: pointer;
+            line-height: 1.2; text-align: center;
         }
-        .btn-toggle:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
-        .btn-toggle:disabled { opacity: 0.45; cursor: not-allowed; }
-        /* Fullskärm: dragkraftsglidare + avläsningar uppe till vänster */
-        .fs-sliders {
-            position: absolute; top: 64px; left: 14px; z-index: 6;
-            width: 270px; max-width: 44vw; max-height: 60vh; overflow-y: auto;
-            background: rgba(246,242,234,0.94);
-            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+        .knapp:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .knapp:disabled { opacity: 0.45; cursor: not-allowed; }
+        .knapp.hel { grid-column: 1 / -1; }
+        .knapp.primar { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); border-color: var(--lab-ink); }
+        .steg { display: flex; align-items: center; gap: 8px; font-size: 13px; margin: 2px 0; color: var(--lab-ink-soft); }
+        .steg .nr { width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid var(--lab-ink-muted, #5a6170);
+                    display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+        .steg.klar { color: var(--lab-ink); }
+        .steg.klar .nr { background: var(--lab-ink); color: var(--lab-bg); border-color: var(--lab-ink); }
+        .steg.aktiv { color: var(--lab-ink); font-weight: 600; }
+        .steg.aktiv .nr { border-color: var(--lab-accent, #c8324a); color: var(--lab-accent, #c8324a); }
+
+        .reg-rad { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; margin-top: 10px; }
+        .reg-rad strong { font-family: 'JetBrains Mono', monospace; color: var(--lab-accent, #c8324a); }
+        input[type="range"] { width: 100%; accent-color: var(--lab-accent, #c8324a); cursor: pointer; }
+        .platser { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 4px; }
+        .platser button {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
             border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
-            border-radius: 10px; padding: 11px 13px; color: var(--lab-ink, #0f1620);
-            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
-            font-family: 'Poppins', sans-serif;
+            border-radius: 8px; padding: 6px 8px; font-size: 12.5px; font-weight: 600; cursor: pointer;
+            text-align: left; line-height: 1.2;
         }
-        .fs-sliders .st-title {
-            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
-            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        .platser button:hover { border-color: var(--lab-accent, #c8324a); }
+        .platser button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); border-color: var(--lab-ink); }
+        .platser button .sub { display: block; font-size: 10.5px; font-weight: 500; opacity: 0.78; }
+        .scene-toggles .platser button { padding: 4px 6px; font-size: 11.5px; }
+        .scene-toggles .platser button .sub { display: none; }
+        .scene-toggles .knapp { font-size: 12px; padding: 5px 6px; }
+        .forsok { display: flex; flex-direction: column; gap: 6px; }
+        .forsok button {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 7px 10px; font-size: 13px; cursor: pointer; text-align: left; line-height: 1.35;
+        }
+        .forsok button:hover { border-color: var(--lab-accent, #c8324a); }
+        .forsok button strong { display: block; font-size: 13.5px; }
+        .liten { font-size: 12px; color: var(--lab-ink-muted); margin-top: 4px; line-height: 1.45; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { display: flex; justify-content: space-between; align-items: center; font-weight: 600; }
+        details ul { margin-top: 10px; display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; color: var(--lab-ink-soft); line-height: 1.5; }
+
+        @media (max-width: 600px) {
+            .sida h1 { font-size: 1.6rem; }
+            .scene-toggles { max-width: none; }
         }
     </style>
 </head>
 <body class="lab-sim">
-        <div class="lab-topbar lab-topbar--on-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
         <div class="lab-topbar-inner">
             <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
         </div>
@@ -224,1100 +289,1238 @@
         </div>
     </div>
 
-    <main class="dark-container min-h-screen">
-        <div id="root"></div>
-    </main>
-
-    <script type="text/babel">
-        const { useState, useEffect, useRef } = React;
-
-        // ===== TYPES & CONSTANTS =====
-        const SimulationState = {
-            SEALED: 'SEALED',
-            PUMPING: 'PUMPING',
-            LEAKING: 'LEAKING',
-            SEPARATED: 'SEPARATED',
-        };
-
-        const SPHERE_RADIUS = 120;
-        const CANVAS_WIDTH = 600;
-        const CANVAS_HEIGHT = 400;
-        // Beräkna partiklar baserat på area för samma koncentration
-        const CANVAS_AREA = CANVAS_WIDTH * CANVAS_HEIGHT;
-        const SPHERE_AREA_PX = Math.PI * SPHERE_RADIUS * SPHERE_RADIUS;
-        const OUTSIDE_AREA = CANVAS_AREA - SPHERE_AREA_PX;
-        const MAX_PARTICLES_OUTSIDE = 150;
-        const MAX_PARTICLES_INSIDE = Math.round(MAX_PARTICLES_OUTSIDE * (SPHERE_AREA_PX / OUTSIDE_AREA));
-        const FORCE_PER_HORSE = 800;
-        const SPHERE_AREA = 0.2;
-        const ATM_PRESSURE_PA = 101325;
-
-        // ===== ICON COMPONENTS =====
-        const Info = ({ size = 16, className = "" }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="16" x2="12" y2="12"></line>
-                <line x1="12" y1="8" x2="12.01" y2="8"></line>
-            </svg>
-        );
-
-        const Gauge = ({ size = 20, className = "" }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-                <path d="M12 2v4"></path>
-                <path d="m6.8 15-3.5 2"></path>
-                <path d="m20.7 7-3.5 2"></path>
-                <path d="M6.8 9 3.3 7"></path>
-                <path d="m20.7 17-3.5-2"></path>
-                <path d="m9 22 3-8 3 8"></path>
-                <circle cx="12" cy="12" r="10"></circle>
-            </svg>
-        );
-
-        const Wind = ({ size = 20, className = "" }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-                <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path>
-            </svg>
-        );
-
-        const Settings2 = ({ size = 20, className = "" }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-                <path d="M20 7h-9"></path>
-                <path d="M14 17H5"></path>
-                <circle cx="17" cy="17" r="3"></circle>
-                <circle cx="7" cy="7" r="3"></circle>
-            </svg>
-        );
-
-        const RotateCcw = ({ size = 20, className = "" }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-                <polyline points="1 4 1 10 7 10"></polyline>
-                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
-            </svg>
-        );
-
-        const RotateCw = ({ size = 20, className = "" }) => (
-            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-                <polyline points="23 4 23 10 17 10"></polyline>
-                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
-            </svg>
-        );
-
-        // ===== SIMULATION CANVAS COMPONENT =====
-        const SimulationCanvas = ({ simulationState, internalPressure, separationDistance, setInternalPressure, width, height, showForceArrows, showPullForces, pullingForce }) => {
-            const canvasRef = useRef(null);
-            const particlesInsideRef = useRef([]);
-            const particlesOutsideRef = useRef([]);
-            const requestRef = useRef();
-
-            const createParticle = (isInside, startX, startY, initialVx, initialVy) => {
-                let x, y, vx, vy;
-
-                if (startX !== undefined && startY !== undefined) {
-                    x = startX;
-                    y = startY;
-                } else {
-                    const angle = Math.random() * Math.PI * 2;
-                    if (isInside) {
-                        const r = Math.sqrt(Math.random()) * (SPHERE_RADIUS - 10);
-                        x = width / 2 + r * Math.cos(angle);
-                        y = height / 2 + r * Math.sin(angle);
-                    } else {
-                        x = Math.random() * width;
-                        y = Math.random() * height;
-                        const dx = x - width / 2;
-                        const dy = y - height / 2;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-                        if (dist < SPHERE_RADIUS + 10) {
-                            const pushRatio = (SPHERE_RADIUS + 20) / dist;
-                            x = width / 2 + dx * pushRatio;
-                            y = height / 2 + dy * pushRatio;
-                        }
-                    }
-                }
-
-                if (initialVx !== undefined && initialVy !== undefined) {
-                    vx = initialVx;
-                    vy = initialVy;
-                } else {
-                    const vAngle = Math.random() * Math.PI * 2;
-                    const vSpeed = 2 + Math.random() * 3;
-                    vx = Math.cos(vAngle) * vSpeed;
-                    vy = Math.sin(vAngle) * vSpeed;
-                }
-
-                return {
-                    x, y, vx, vy,
-                    radius: 1.5,
-                    isInside,
-                    pulseOffset: Math.random() * Math.PI * 2,
-                };
-            };
-
-            useEffect(() => {
-                if (particlesInsideRef.current.length === 0) {
-                    for (let i = 0; i < MAX_PARTICLES_INSIDE; i++) {
-                        particlesInsideRef.current.push(createParticle(true));
-                    }
-                    for (let i = 0; i < MAX_PARTICLES_OUTSIDE; i++) {
-                        particlesOutsideRef.current.push(createParticle(false));
-                    }
-                }
-            }, [width, height]);
-
-            useEffect(() => {
-                const canvas = canvasRef.current;
-                if (!canvas) return;
-                const ctx = canvas.getContext('2d');
-                if (!ctx) return;
-
-                const centerX = width / 2;
-                const centerY = height / 2;
-                const hoseY = centerY + SPHERE_RADIUS;
-                const hoseWidth = 30;
-                const hoseHeight = 100;
-                let time = 0;
-
-                const update = () => {
-                    time += 0.02;
-
-                    // Clear with dark background
-                    ctx.fillStyle = '#f3eee4';
-                    ctx.fillRect(0, 0, width, height);
-
-                    // (Mörkblå bakgrundsvinjett borttagen — blev en grå fläck på papperstemat)
-
-                    const isSealed = simulationState === SimulationState.SEALED;
-                    const isPumping = simulationState === SimulationState.PUMPING;
-                    const isLeaking = simulationState === SimulationState.LEAKING;
-                    const isSeparated = simulationState === SimulationState.SEPARATED;
-
-                    // --- Logic Updates ---
-                    if (isPumping && !isSeparated) {
-                        particlesInsideRef.current.forEach(p => {
-                            if (p.y > centerY) {
-                                const dx = centerX - p.x;
-                                const dy = hoseY - p.y;
-                                const dist = Math.sqrt(dx*dx + dy*dy);
-                                if (dist > 0) {
-                                    p.vx += (dx / dist) * 0.2;
-                                    p.vy += (dy / dist) * 0.2;
-                                }
-                            }
-                        });
-
-                        for (let i = particlesInsideRef.current.length - 1; i >= 0; i--) {
-                            const p = particlesInsideRef.current[i];
-                            const distToHole = Math.sqrt((p.x - centerX) ** 2 + (p.y - hoseY) ** 2);
-                            if (distToHole < 15) {
-                                particlesInsideRef.current.splice(i, 1);
-                            }
-                        }
-                    }
-
-                    if ((isLeaking || isSeparated) && particlesInsideRef.current.length < MAX_PARTICLES_INSIDE) {
-                        const particlesToSpawn = 3;
-                        for (let k = 0; k < particlesToSpawn; k++) {
-                            if (particlesInsideRef.current.length >= MAX_PARTICLES_INSIDE) break;
-                            const spread = (Math.random() - 0.5) * 1.5;
-                            const speed = 5 + Math.random() * 3;
-                            particlesInsideRef.current.push(
-                                createParticle(true, centerX, hoseY - 5, spread * 2, -speed)
-                            );
-                        }
-                    }
-
-                    const currentPressure = particlesInsideRef.current.length / MAX_PARTICLES_INSIDE;
-                    if (Math.abs(currentPressure - internalPressure) > 0.01) {
-                        setInternalPressure(currentPressure);
-                    }
-
-                    // --- Draw Hose ---
-                    if (!isSeparated) {
-                        // Metallic hose
-                        const hoseGradient = ctx.createLinearGradient(centerX - hoseWidth/2, 0, centerX + hoseWidth/2, 0);
-                        hoseGradient.addColorStop(0, '#f3eee4');
-                        hoseGradient.addColorStop(0.3, '#334155');
-                        hoseGradient.addColorStop(0.5, '#475569');
-                        hoseGradient.addColorStop(0.7, '#334155');
-                        hoseGradient.addColorStop(1, '#f3eee4');
-                        ctx.fillStyle = hoseGradient;
-                        ctx.fillRect(centerX - hoseWidth/2, hoseY - 5, hoseWidth, hoseHeight);
-
-                        // Hose glow when pumping
-                        if (isPumping && particlesInsideRef.current.length > 0) {
-                            ctx.shadowBlur = 15;
-                            ctx.shadowColor = '#f97316';
-                            for(let i=0; i<5; i++) {
-                                if(Math.random() > 0.5) {
-                                    const px = centerX + (Math.random() - 0.5) * (hoseWidth - 8);
-                                    const py = hoseY + Math.random() * hoseHeight;
-                                    ctx.beginPath();
-                                    ctx.arc(px, py, 3, 0, Math.PI*2);
-                                    ctx.fillStyle = '#fb923c';
-                                    ctx.fill();
-                                }
-                            }
-                            ctx.shadowBlur = 0;
-                        }
-                        if (isLeaking) {
-                            ctx.shadowBlur = 15;
-                            ctx.shadowColor = '#38bdf8';
-                            for(let i=0; i<5; i++) {
-                                if(Math.random() > 0.5) {
-                                    const px = centerX + (Math.random() - 0.5) * (hoseWidth - 8);
-                                    const py = hoseY + Math.random() * hoseHeight;
-                                    ctx.beginPath();
-                                    ctx.arc(px, py, 3, 0, Math.PI*2);
-                                    ctx.fillStyle = '#0f1620';
-                                    ctx.fill();
-                                }
-                            }
-                            ctx.shadowBlur = 0;
-                        }
-                    }
-
-                    // --- Draw Sphere Halves (Modern metallic style) ---
-                    const leftX = centerX - separationDistance / 2;
-                    const rightX = centerX + separationDistance / 2;
-
-                    // Draw function for hemisphere with metallic gradient
-                    const drawHemisphere = (x, isLeft) => {
-                        ctx.save();
-
-                        // Main hemisphere gradient
-                        const grad = ctx.createRadialGradient(
-                            x + (isLeft ? -30 : 30), centerY - 30, 10,
-                            x, centerY, SPHERE_RADIUS
-                        );
-                        grad.addColorStop(0, '#64748b');
-                        grad.addColorStop(0.3, '#475569');
-                        grad.addColorStop(0.6, '#334155');
-                        grad.addColorStop(1, '#f3eee4');
-
-                        ctx.beginPath();
-                        if (isLeft) {
-                            ctx.arc(x, centerY, SPHERE_RADIUS, Math.PI / 2, -Math.PI / 2, false);
-                        } else {
-                            ctx.arc(x, centerY, SPHERE_RADIUS, -Math.PI / 2, Math.PI / 2, false);
-                        }
-                        ctx.closePath();
-                        ctx.fillStyle = grad;
-                        ctx.fill();
-
-                        // Metallic rim
-                        ctx.strokeStyle = '#0f1620';
-                        ctx.lineWidth = 3;
-                        ctx.stroke();
-
-                        // Inner glow/shadow
-                        ctx.beginPath();
-                        if (isLeft) {
-                            ctx.arc(x, centerY, SPHERE_RADIUS - 5, Math.PI / 2, -Math.PI / 2, false);
-                        } else {
-                            ctx.arc(x, centerY, SPHERE_RADIUS - 5, -Math.PI / 2, Math.PI / 2, false);
-                        }
-                        ctx.strokeStyle = 'rgba(15, 22, 32, 0.42)';
-                        ctx.lineWidth = 2;
-                        ctx.stroke();
-
-                        ctx.restore();
-                    };
-
-                    drawHemisphere(leftX, true);
-                    drawHemisphere(rightX, false);
-
-                    // Flanges with metallic look
-                    const drawFlange = (x, y) => {
-                        const flangeGrad = ctx.createLinearGradient(x - 12, y - 12, x + 12, y + 12);
-                        flangeGrad.addColorStop(0, '#64748b');
-                        flangeGrad.addColorStop(0.5, '#94a3b8');
-                        flangeGrad.addColorStop(1, '#475569');
-                        ctx.fillStyle = flangeGrad;
-                        ctx.fillRect(x - 12, y - 12, 24, 24);
-                        ctx.strokeStyle = '#0f1620';
-                        ctx.lineWidth = 1;
-                        ctx.strokeRect(x - 12, y - 12, 24, 24);
-                    };
-
-                    drawFlange(leftX, centerY - SPHERE_RADIUS);
-                    drawFlange(leftX, centerY + SPHERE_RADIUS);
-                    drawFlange(rightX, centerY - SPHERE_RADIUS);
-                    drawFlange(rightX, centerY + SPHERE_RADIUS);
-
-                    // Draw Ropes with subtle glow
-                    const ropeWidth = 6;
-                    const ropeLength = 80;
-
-                    const drawRope = (startX, endX) => {
-                        ctx.shadowBlur = 8;
-                        ctx.shadowColor = 'rgba(180, 140, 80, 0.5)';
-
-                        ctx.strokeStyle = '#92400e';
-                        ctx.lineWidth = ropeWidth;
-                        ctx.lineCap = 'round';
-                        ctx.beginPath();
-                        ctx.moveTo(startX, centerY);
-                        ctx.lineTo(endX, centerY);
-                        ctx.stroke();
-
-                        ctx.strokeStyle = '#b45309';
-                        ctx.lineWidth = ropeWidth * 0.5;
-                        const segments = 5;
-                        const segmentLength = (endX - startX) / segments;
-                        for (let i = 0; i < segments; i++) {
-                            ctx.beginPath();
-                            const sx = startX + i * segmentLength;
-                            ctx.moveTo(sx, centerY - 2);
-                            ctx.lineTo(sx + segmentLength * 0.5, centerY + 2);
-                            ctx.stroke();
-                        }
-                        ctx.shadowBlur = 0;
-                    };
-
-                    drawRope(leftX - SPHERE_RADIUS, leftX - SPHERE_RADIUS - ropeLength);
-                    drawRope(rightX + SPHERE_RADIUS, rightX + SPHERE_RADIUS + ropeLength);
-
-                    // --- Draw Pull Forces on Ropes ---
-                    if (showPullForces && pullingForce > 0) {
-                        const maxForce = 15000;
-                        const forceRatio = Math.min(pullingForce / maxForce, 1);
-                        const arrowLength = 20 + forceRatio * 50;
-
-                        const drawPullArrow = (startX, direction) => {
-                            const tipX = startX + direction * arrowLength;
-                            const y = centerY;
-
-                            ctx.shadowBlur = 12;
-                            ctx.shadowColor = 'rgba(34, 197, 94, 0.8)';
-
-                            // Arrow line
-                            ctx.beginPath();
-                            ctx.moveTo(startX, y);
-                            ctx.lineTo(tipX, y);
-                            ctx.strokeStyle = '#22c55e';
-                            ctx.lineWidth = 4;
-                            ctx.stroke();
-
-                            // Arrow head
-                            const headLen = 10;
-                            ctx.beginPath();
-                            ctx.moveTo(tipX, y);
-                            ctx.lineTo(tipX - direction * headLen, y - 6);
-                            ctx.lineTo(tipX - direction * headLen, y + 6);
-                            ctx.closePath();
-                            ctx.fillStyle = '#22c55e';
-                            ctx.fill();
-
-                            ctx.shadowBlur = 0;
-                        };
-
-                        // Left pull arrow (pointing left)
-                        drawPullArrow(leftX - SPHERE_RADIUS - ropeLength - 10, -1);
-                        // Right pull arrow (pointing right)
-                        drawPullArrow(rightX + SPHERE_RADIUS + ropeLength + 10, 1);
-                    }
-
-                    // --- Draw Glowing Particles ---
-                    const drawGlowingParticle = (p) => {
-                        const baseRadius = p.radius;
-
-                        // Outer glow - cyan/blue for all particles
-                        const outerGlow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, baseRadius * 8);
-                        outerGlow.addColorStop(0, 'rgba(200, 50, 74, 0.6)');
-                        outerGlow.addColorStop(0.3, 'rgba(200, 50, 74, 0.3)');
-                        outerGlow.addColorStop(0.6, 'rgba(2, 132, 199, 0.1)');
-                        outerGlow.addColorStop(1, 'rgba(2, 132, 199, 0)');
-
-                        ctx.beginPath();
-                        ctx.arc(p.x, p.y, baseRadius * 8, 0, Math.PI * 2);
-                        ctx.fillStyle = outerGlow;
-                        ctx.fill();
-
-                        // Inner bright core
-                        const coreGlow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, baseRadius * 2);
-                        coreGlow.addColorStop(0, '#f0f9ff');
-                        coreGlow.addColorStop(0.5, '#7dd3fc');
-                        coreGlow.addColorStop(1, '#38bdf8');
-
-                        ctx.beginPath();
-                        ctx.arc(p.x, p.y, baseRadius * 2, 0, Math.PI * 2);
-                        ctx.fillStyle = coreGlow;
-                        ctx.fill();
-                    };
-
-                    // --- Particle Physics ---
-                    const updateParticle = (p, isFromInsideList) => {
-                        p.x += p.vx;
-                        p.y += p.vy;
-
-                        const speedSq = p.vx * p.vx + p.vy * p.vy;
-                        if (speedSq > 30) {
-                            p.vx *= 0.98;
-                            p.vy *= 0.98;
-                        }
-
-                        if (p.x < 0 || p.x > width) p.vx *= -1;
-                        if (p.y < 0 || p.y > height) p.vy *= -1;
-
-                        if (isSeparated) {
-                            // Left Hemisphere Interaction
-                            if (p.x < leftX) {
-                                const dx = p.x - leftX;
-                                const dy = p.y - centerY;
-                                const dist = Math.sqrt(dx * dx + dy * dy);
-                                if (dist > 0) {
-                                    const nx = dx / dist;
-                                    const ny = dy / dist;
-                                    const dot = p.vx * nx + p.vy * ny;
-
-                                    if (dist < SPHERE_RADIUS && dot > 0 && dist > SPHERE_RADIUS - 5) {
-                                        p.vx -= 2 * dot * nx;
-                                        p.vy -= 2 * dot * ny;
-                                        p.x = leftX + nx * (SPHERE_RADIUS - 5.1);
-                                        p.y = centerY + ny * (SPHERE_RADIUS - 5.1);
-                                    } else if (dist > SPHERE_RADIUS && dot < 0 && dist < SPHERE_RADIUS + 5) {
-                                        p.vx -= 2 * dot * nx;
-                                        p.vy -= 2 * dot * ny;
-                                        p.x = leftX + nx * (SPHERE_RADIUS + 5.1);
-                                        p.y = centerY + ny * (SPHERE_RADIUS + 5.1);
-                                    }
-                                }
-                            }
-
-                            // Right Hemisphere Interaction
-                            if (p.x > rightX) {
-                                const dx = p.x - rightX;
-                                const dy = p.y - centerY;
-                                const dist = Math.sqrt(dx * dx + dy * dy);
-                                if (dist > 0) {
-                                    const nx = dx / dist;
-                                    const ny = dy / dist;
-                                    const dot = p.vx * nx + p.vy * ny;
-
-                                    if (dist < SPHERE_RADIUS && dot > 0 && dist > SPHERE_RADIUS - 5) {
-                                        p.vx -= 2 * dot * nx;
-                                        p.vy -= 2 * dot * ny;
-                                        p.x = rightX + nx * (SPHERE_RADIUS - 5.1);
-                                        p.y = centerY + ny * (SPHERE_RADIUS - 5.1);
-                                    } else if (dist > SPHERE_RADIUS && dot < 0 && dist < SPHERE_RADIUS + 5) {
-                                        p.vx -= 2 * dot * nx;
-                                        p.vy -= 2 * dot * ny;
-                                        p.x = rightX + nx * (SPHERE_RADIUS + 5.1);
-                                        p.y = centerY + ny * (SPHERE_RADIUS + 5.1);
-                                    }
-                                }
-                            }
-                        } else {
-                            if (isFromInsideList) {
-                                const distC = Math.sqrt((p.x - centerX) ** 2 + (p.y - centerY) ** 2);
-                                if (distC > SPHERE_RADIUS - 5) {
-                                    const inHoleZone = isPumping && Math.abs(p.x - centerX) < 15 && p.y > centerY + SPHERE_RADIUS - 20;
-                                    if (!inHoleZone) {
-                                        const nx = (p.x - centerX) / distC;
-                                        const ny = (p.y - centerY) / distC;
-                                        const dot = p.vx * nx + p.vy * ny;
-                                        if (dot > 0) {
-                                            p.vx = p.vx - 2 * dot * nx;
-                                            p.vy = p.vy - 2 * dot * ny;
-                                            const jitter = (Math.random() - 0.5) * 0.5;
-                                            p.vx += jitter;
-                                            p.vy -= jitter;
-                                        }
-                                        p.x = centerX + (SPHERE_RADIUS - 5.1) * nx;
-                                        p.y = centerY + (SPHERE_RADIUS - 5.1) * ny;
-                                    }
-                                }
-                            } else {
-                                const dxL = p.x - leftX;
-                                const dy = p.y - centerY;
-                                const distL = Math.sqrt(dxL * dxL + dy * dy);
-                                if (distL < SPHERE_RADIUS + 5) {
-                                    const angle = Math.atan2(dy, dxL);
-                                    const nx = Math.cos(angle);
-                                    const ny = Math.sin(angle);
-                                    const dot = p.vx * nx + p.vy * ny;
-                                    if (dot < 0) {
-                                        p.vx = p.vx - 2 * dot * nx;
-                                        p.vy = p.vy - 2 * dot * ny;
-                                    }
-                                }
-                                const distR = Math.sqrt((p.x - rightX) ** 2 + dy * dy);
-                                if (distR < SPHERE_RADIUS + 5) {
-                                    const angle = Math.atan2(dy, p.x - rightX);
-                                    const nx = Math.cos(angle);
-                                    const ny = Math.sin(angle);
-                                    const dot = p.vx * nx + p.vy * ny;
-                                    if (dot < 0) {
-                                        p.vx = p.vx - 2 * dot * nx;
-                                        p.vy = p.vy - 2 * dot * ny;
-                                    }
-                                }
-                            }
-                        }
-                    };
-
-                    // Update and draw all particles
-                    particlesOutsideRef.current.forEach(p => {
-                        updateParticle(p, false);
-                        drawGlowingParticle(p);
-                    });
-
-                    particlesInsideRef.current.forEach(p => {
-                        updateParticle(p, true);
-                        drawGlowingParticle(p);
-                    });
-
-                    // Particle-Particle Collisions
-                    for (let i = 0; i < particlesInsideRef.current.length; i++) {
-                        for (let j = i + 1; j < particlesInsideRef.current.length; j++) {
-                            const p1 = particlesInsideRef.current[i];
-                            const p2 = particlesInsideRef.current[j];
-                            const dx = p2.x - p1.x;
-                            const dy = p2.y - p1.y;
-                            const dist = Math.sqrt(dx * dx + dy * dy);
-                            const minDist = p1.radius + p2.radius;
-
-                            if (dist < minDist && dist > 0) {
-                                const nx = dx / dist;
-                                const ny = dy / dist;
-                                const dvx = p2.vx - p1.vx;
-                                const dvy = p2.vy - p1.vy;
-                                const dvn = dvx * nx + dvy * ny;
-
-                                if (dvn < 0) {
-                                    p1.vx += dvn * nx;
-                                    p1.vy += dvn * ny;
-                                    p2.vx -= dvn * nx;
-                                    p2.vy -= dvn * ny;
-                                    const overlap = minDist - dist;
-                                    p1.x -= overlap * nx * 0.5;
-                                    p1.y -= overlap * ny * 0.5;
-                                    p2.x += overlap * nx * 0.5;
-                                    p2.y += overlap * ny * 0.5;
-                                }
-                            }
-                        }
-                    }
-
-                    // --- Force Arrows with Glow ---
-                    if (showForceArrows) {
-                        const drawForceArrow = (tipX, tipY, angle, length, isExternal) => {
-                            if (length < 5) return;
-
-                            const tailX = tipX - Math.cos(angle) * length;
-                            const tailY = tipY - Math.sin(angle) * length;
-
-                            ctx.shadowBlur = 10;
-                            ctx.shadowColor = isExternal ? 'rgba(200, 50, 74, 0.8)' : 'rgba(249, 115, 22, 0.8)';
-
-                            ctx.beginPath();
-                            ctx.moveTo(tailX, tailY);
-                            ctx.lineTo(tipX, tipY);
-                            ctx.strokeStyle = isExternal ? '#38bdf8' : '#f97316';
-                            ctx.lineWidth = 3;
-                            ctx.stroke();
-
-                            const headLen = 8;
-                            ctx.beginPath();
-                            ctx.moveTo(tipX, tipY);
-                            ctx.lineTo(tipX - headLen * Math.cos(angle - Math.PI / 6), tipY - headLen * Math.sin(angle - Math.PI / 6));
-                            ctx.lineTo(tipX - headLen * Math.cos(angle + Math.PI / 6), tipY - headLen * Math.sin(angle + Math.PI / 6));
-                            ctx.closePath();
-                            ctx.fillStyle = isExternal ? '#38bdf8' : '#f97316';
-                            ctx.fill();
-
-                            ctx.shadowBlur = 0;
-                        };
-
-                        const arrowScale = 45;
-                        const internalForceLen = arrowScale * internalPressure;
-
-                        const drawArrowPair = (x, y, normalAngle) => {
-                            drawForceArrow(x, y, normalAngle, arrowScale, true);
-                            drawForceArrow(x, y, normalAngle + Math.PI, internalForceLen, false);
-                        };
-
-                        // Arrow pairs on hemispheres
-                        drawArrowPair(leftX, centerY - SPHERE_RADIUS, Math.PI / 2);
-                        drawArrowPair(leftX - SPHERE_RADIUS, centerY, 0);
-                        drawArrowPair(leftX + SPHERE_RADIUS * Math.cos(Math.PI * 1.25), centerY + SPHERE_RADIUS * Math.sin(Math.PI * 1.25), Math.PI * 0.25);
-                        drawArrowPair(leftX + SPHERE_RADIUS * Math.cos(Math.PI * 0.75), centerY + SPHERE_RADIUS * Math.sin(Math.PI * 0.75), Math.PI * -0.25);
-                        drawArrowPair(leftX, centerY + SPHERE_RADIUS, -Math.PI / 2);
-
-                        drawArrowPair(rightX + SPHERE_RADIUS, centerY, Math.PI);
-                        drawArrowPair(rightX, centerY - SPHERE_RADIUS, Math.PI / 2);
-                        drawArrowPair(rightX, centerY + SPHERE_RADIUS, -Math.PI / 2);
-                        drawArrowPair(rightX + SPHERE_RADIUS * Math.cos(-Math.PI * 0.25), centerY + SPHERE_RADIUS * Math.sin(-Math.PI * 0.25), Math.PI * 0.75);
-                        drawArrowPair(rightX + SPHERE_RADIUS * Math.cos(Math.PI * 0.25), centerY + SPHERE_RADIUS * Math.sin(Math.PI * 0.25), Math.PI * 1.25);
-                    }
-
-                    requestRef.current = requestAnimationFrame(update);
-                };
-
-                requestRef.current = requestAnimationFrame(update);
-                return () => {
-                    if (requestRef.current) cancelAnimationFrame(requestRef.current);
-                };
-            }, [width, height, simulationState, internalPressure, separationDistance, setInternalPressure, showForceArrows, showPullForces, pullingForce]);
-
-            return (
-                <canvas
-                    ref={canvasRef}
-                    width={width}
-                    height={height}
-                    className="rounded-xl block mx-auto"
-                    style={{ boxShadow: '0 0 40px rgba(200, 50, 74, 0.15), inset 0 0 60px rgba(0, 0, 0, 0.5)', maxWidth: '100%', height: 'auto' }}
-                />
-            );
-        };
-
-        // ===== PRESSURE GAUGE COMPONENT =====
-        const PressureGauge = ({ value, label }) => {
-            const angle = -90 + (value * 180);
-
-            return (
-                <div className="flex flex-col items-center justify-center p-4 glass-card-light rounded-xl w-full">
-                    <div className="relative w-32 h-16 overflow-hidden mb-2">
-                        <div className="absolute top-0 left-0 w-32 h-32 rounded-full border-[10px] border-slate-600 box-border"
-                             style={{ boxShadow: 'inset 0 0 20px rgba(0,0,0,0.5)' }}></div>
-                        <div
-                            className="absolute bottom-0 left-1/2 w-1 h-14 origin-bottom transform -translate-x-1/2 transition-transform duration-300 ease-out"
-                            style={{
-                                transform: `translateX(-50%) rotate(${angle}deg)`,
-                                background: 'linear-gradient(to top, #38bdf8, #0ea5e9)',
-                                boxShadow: '0 0 10px rgba(200, 50, 74, 0.8)'
-                            }}
-                        ></div>
-                        <div className="absolute bottom-0 left-1/2 w-4 h-4 rounded-full -translate-x-1/2 translate-y-1/2"
-                             style={{ background: 'linear-gradient(135deg, #64748b, #334155)' }}></div>
+    <div class="sida">
+        <div class="breadcrumb mb-4" style="font-size: 13px">
+            <a href="index.html">Hem</a> / <a href="katalog.html#fy1">Fysik nivå 1</a> / Magdeburgska halvkloten
+        </div>
+        <h1>Magdeburgska halvkloten</h1>
+        <p class="ingress">
+            Två mässingsklot hänger i ett stativ, och under dem står vikterna på ett lyftbord. Pumpa ut luften,
+            sänk lyftbordet och se hur många kilo som kan hänga i kloten. Det är inte vakuumet som suger ihop dem.
+            Det är luften utanför som trycker, och därför räknas bara skillnaden i tryck och bara arean i snittet
+            mellan kloten. Öppna kranen och se kloten släppa i samma ögonblick som lufttryckets kraft blir mindre
+            än tyngden, eller ta med kloten upp på Mount Everest och till Månen.
+        </p>
+
+        <div class="glass-card formelkort">
+            <div class="formelrad">
+                <div class="vbl"><span class="flbl">Kraft</span><span class="fnum"><em>F</em></span><span class="flbl dold" aria-hidden="true">Kraft</span></div>
+                <span class="fnum">=</span>
+                <div class="vbl"><span class="flbl">Tryckskillnad</span><span class="fnum">Δ<em>p</em></span><span class="flbl dold" aria-hidden="true">Tryckskillnad</span></div>
+                <span class="fnum">·</span>
+                <div class="vbl"><span class="flbl">Snittarea</span><span class="fnum"><em>A</em></span><span class="flbl dold" aria-hidden="true">Snittarea</span></div>
+            </div>
+            <div class="formelrad">
+                <div class="vbl"><span class="flbl">Tryckskillnad</span><span class="fnum">Δ<em>p</em></span><span class="flbl dold" aria-hidden="true">Tryckskillnad</span></div>
+                <span class="fnum">=</span>
+                <div class="vbl"><span class="flbl">Lufttryck utanför</span><span class="fnum"><em>p</em><sub>0</sub></span><span class="flbl dold" aria-hidden="true">Lufttryck utanför</span></div>
+                <span class="fnum">−</span>
+                <div class="vbl"><span class="flbl">Tryck inuti</span><span class="fnum"><em>p</em><sub>inne</sub></span><span class="flbl dold" aria-hidden="true">Tryck inuti</span></div>
+            </div>
+            <div class="formelrad">
+                <div class="vbl"><span class="flbl">Snittarea</span><span class="fnum"><em>A</em></span><span class="flbl dold" aria-hidden="true">Snittarea</span></div>
+                <span class="fnum">=</span>
+                <span class="fnum">π</span>
+                <span class="fnum">·</span>
+                <div class="vbl"><span class="flbl">Radie</span><span class="fnum"><em>r</em><sup style="font-size:0.62em">2</sup></span><span class="flbl dold" aria-hidden="true">Radie</span></div>
+            </div>
+        </div>
+
+        <div class="layout">
+            <div class="scen-kol">
+                <div class="scene-wrap plats-hav" id="sceneWrap">
+                    <div class="tre-mount" id="mount"></div>
+                    <button class="fs-btn" id="fsBtn" aria-label="Fullskärm" title="Fullskärm">
+                        <svg id="fsIconExpand" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
+                        </svg>
+                        <svg id="fsIconCompress" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                            <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
+                        </svg>
+                    </button>
+
+                    <button class="st-show-btn" id="stShow" aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false" style="display: none">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" /><circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" /><circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                    <div class="scene-toggles" id="sceneToggles">
+                        <button class="st-hide" id="stHide" aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+                        </button>
+                        <div class="st-title">Visa</div>
+                        <label><input type="checkbox" id="tMolek" checked><span class="st-dot" style="background:#0f5c74"></span><span>Luftmolekyler</span></label>
+                        <label><input type="checkbox" id="tPilar" checked><span class="st-swatch" style="background:linear-gradient(90deg,#1f5fbf 50%,#d9711c 50%)"></span><span>Tryckkrafter</span></label>
+                        <label><input type="checkbox" id="tSnitt"><span class="st-swatch" style="background:#c9a14a"></span><span>Genomskärning</span></label>
+                        <label><input type="checkbox" id="tTyngd" checked><span class="st-swatch" style="background:#2b7a3d"></span><span>Tyngdkraft</span></label>
+                        <div class="st-title st-group">Vy</div>
+                        <div class="seg" style="grid-template-columns: 1fr 1fr 1fr" id="vyer">
+                            <button data-vy="hel" class="active">Hela</button>
+                            <button data-vy="nara">Kloten</button>
+                            <button data-vy="fram">Framifrån</button>
+                        </div>
+                        <div class="st-fs" id="stFs">
+                            <div class="st-title st-group">Försöket</div>
+                            <div id="fsKnappar"></div>
+                            <div class="st-title st-group">Reglage</div>
+                            <div id="fsReglage"></div>
+                            <div class="st-title st-group">Plats</div>
+                            <div id="fsPlatser"></div>
+                        </div>
                     </div>
-                    <div className="flex justify-between w-32 text-xs text-slate-400 font-mono mt-1 px-1">
-                        <span>0</span>
-                        <span>50</span>
-                        <span>100</span>
+
+                    <div class="scene-info">
+                        <span class="si-lbl">Tryck inuti <em>p</em><sub>inne</sub></span>
+                        <span class="si-val" id="siP">101,3 kPa</span>
+                        <span class="si-lbl" style="margin-top: 4px">Lufttryckets kraft <em>F</em></span>
+                        <span class="si-val" id="siF">0 N</span>
+                        <span class="si-lbl" style="margin-top: 4px">Tyngd <em>F</em><sub>G</sub></span>
+                        <span class="si-val" id="siG">0 N</span>
                     </div>
-                    <span className="text-sm font-semibold text-slate-300 mt-2">{label}</span>
-                    <span className="text-lg font-mono text-cyan-400 glow-text">
-                        {(value * 101.3).toFixed(1).replace('.', ',')} kPa
-                    </span>
+                    <div class="scene-hint" id="hint">Klicka på vakuumpumpen för att pumpa ut luften.</div>
                 </div>
-            );
-        };
+            </div>
 
-        // ===== CONTROLS COMPONENT =====
-        const Controls = ({ simulationState, onTogglePump, onOpenValve, pullingForce, setPullingForce, requiredForce, onReset }) => {
-            const isPumping = simulationState === SimulationState.PUMPING;
-            const isSealed = simulationState === SimulationState.SEALED;
-            const isSeparated = simulationState === SimulationState.SEPARATED;
-            const equivalentHorses = (pullingForce / FORCE_PER_HORSE).toFixed(1);
-            const isForceSufficient = pullingForce > requiredForce;
-            const forceIntensity = Math.min((pullingForce / 15000) * 100, 100);
-
-            return (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
-
-                    {/* Experiment Controls */}
-                    <div className="glass-card p-6 rounded-xl flex flex-col gap-4">
-                        <div className="flex items-center gap-2 mb-2">
-                            <Settings2 size={20} className="text-cyan-400" />
-                            <h2 className="text-lg font-bold text-slate-200">Experimentkontroller</h2>
-                        </div>
-
-                        <div className="flex gap-3">
-                            <button
-                                onClick={onTogglePump}
-                                disabled={isSeparated}
-                                className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all flex items-center justify-center gap-2 ${
-                                    isPumping
-                                        ? 'bg-orange-500/20 text-orange-400 border border-orange-500/50 btn-danger-glow'
-                                        : 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/50 btn-glow hover:bg-cyan-500/30'
-                                } ${isSeparated ? 'opacity-50 cursor-not-allowed' : ''}`}
-                            >
-                                <Wind size={20} className={isPumping ? 'animate-spin' : ''} />
-                                {isPumping ? 'Stoppa pumpen' : 'Starta vakuumpump'}
-                            </button>
-
-                            <button
-                                onClick={onOpenValve}
-                                disabled={isPumping || (!isSealed && !isSeparated)}
-                                className="flex-1 py-3 px-4 bg-slate-700/50 text-slate-300 border border-slate-600 rounded-lg font-medium hover:bg-slate-600/50 transition-colors flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
-                            >
-                                <RotateCcw size={20} />
-                                Öppna ventil
-                            </button>
-                        </div>
-
-                        <p className="text-sm text-slate-500">
-                            När ventilen öppnas strömmar luft in igen och trycket utjämnas.
-                        </p>
+            <div class="panel-kol">
+                <div class="glass-card kort">
+                    <h2>Varför håller kloten ihop?</h2>
+                    <svg class="snitt" id="svgSnitt" viewBox="0 0 320 214" aria-label="Kloten i genomskärning med tryckkrafterna"></svg>
+                    <p class="liten" style="margin-top:0">Blå pilar: lufttrycket utanför. Orange pilar: trycket inuti. Pilarna från sidorna tar ut varandra, och det som blir kvar är tryckskillnaden gånger den streckade snittytan <em>A</em>&nbsp;=&nbsp;π&nbsp;·&nbsp;<em>r</em><sup>2</sup>.</p>
+                    <div class="stapel-rad">
+                        <div class="stapel-rubrik"><span>Lufttrycket pressar ihop, <em>F</em>&nbsp;=&nbsp;Δ<em>p</em>&nbsp;·&nbsp;<em>A</em></span><strong id="bF">0 N</strong></div>
+                        <div class="stapel"><div id="barF" style="background:#1f5fbf;width:0"></div></div>
                     </div>
+                    <div class="stapel-rad">
+                        <div class="stapel-rubrik"><span>Tyngden drar isär, <em>F</em><sub>G</sub>&nbsp;=&nbsp;<em>m</em>&nbsp;·&nbsp;<em>g</em></span><strong id="bG">0 N</strong></div>
+                        <div class="stapel"><div id="barG" style="background:#2b7a3d;width:0"></div></div>
+                    </div>
+                    <div class="status" id="status"></div>
+                    <table class="varden">
+                        <tr><td>Lufttryck utanför <em>p</em><sub>0</sub></td><td id="vP0"></td></tr>
+                        <tr><td>Tryck inuti <em>p</em><sub>inne</sub></td><td id="vP"></td></tr>
+                        <tr><td>Tryckskillnad Δ<em>p</em></td><td id="vDp"></td></tr>
+                        <tr><td>Snittarea <em>A</em></td><td id="vA"></td></tr>
+                        <tr><td>Hängande massa <em>m</em></td><td id="vM"></td></tr>
+                        <tr><td>Största massa kloten bär nu</td><td id="vMmax"></td></tr>
+                    </table>
+                </div>
 
-                    {/* Pulling Force Control */}
-                    <div className="glass-card p-6 rounded-xl flex flex-col gap-4"
-                         style={{
-                             borderColor: forceIntensity > 60 ? `rgba(249, 115, 22, ${forceIntensity / 200})` : 'rgba(200, 50, 74, 0.15)',
-                             boxShadow: forceIntensity > 60 ? `0 0 ${forceIntensity / 3}px rgba(249, 115, 22, ${forceIntensity / 300})` : 'none'
-                         }}>
-                        <div className="flex items-center gap-2 mb-2">
-                            <svg className="w-6 h-6 text-orange-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" />
-                                <circle cx="5" cy="17" r="2" />
-                                <circle cx="19" cy="17" r="2" />
-                            </svg>
-                            <h2 className="text-lg font-bold text-slate-200">Dragkraft</h2>
-                        </div>
-
-                        {/* Strain Indicator Bar */}
-                        <div className="relative w-full h-3 bg-slate-800 rounded-full overflow-hidden border border-slate-700">
-                            <div
-                                className="absolute top-0 left-0 h-full transition-all duration-300 ease-out rounded-full"
-                                style={{
-                                    width: `${forceIntensity}%`,
-                                    background: `linear-gradient(90deg, #38bdf8, ${forceIntensity > 50 ? '#f97316' : '#0ea5e9'}, ${forceIntensity > 80 ? '#ef4444' : '#38bdf8'})`,
-                                    boxShadow: `0 0 10px ${forceIntensity > 60 ? 'rgba(249, 115, 22, 0.6)' : 'rgba(200, 50, 74, 0.6)'}`
-                                }}
-                            ></div>
-                        </div>
-
-                        <div className="space-y-4">
-                            <div className="flex justify-between items-center">
-                                <label className="text-sm font-medium text-slate-400">
-                                    Dragkraft: <span className="text-orange-400 font-bold text-lg">{pullingForce.toLocaleString('sv-SE')} N</span>
-                                </label>
-                                <span className="text-xs text-slate-500">≈ {equivalentHorses.replace('.', ',')} hästar</span>
-                            </div>
-
-                            <input
-                                type="range"
-                                min="0"
-                                max="15000"
-                                step="100"
-                                value={pullingForce}
-                                onChange={(e) => setPullingForce(parseInt(e.target.value))}
-                                className="w-full cursor-pointer"
-                            />
-
-                            <div className="flex justify-between text-xs text-slate-500">
-                                <span>0 N</span>
-                                <span>15 000 N</span>
-                            </div>
-
-                            {/* Force Status Indicator */}
-                            <div className={`p-3 rounded-lg text-center font-medium transition-all border ${
-                                isForceSufficient
-                                    ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/50'
-                                    : 'bg-red-500/20 text-red-400 border-red-500/50'
-                            }`}>
-                                {isForceSufficient ? (
-                                    <span>✓ Kraften räcker! Kloten är isär</span>
-                                ) : (
-                                    <span>✗ För svagt! Behöver {Math.ceil((requiredForce - pullingForce) / 100) * 100} N till</span>
-                                )}
-                            </div>
-
-                            <p className="text-xs text-slate-500 text-center">
-                                Dra i glidaren för att öka dragkraften. När kraften överstiger {(requiredForce / 1000).toFixed(1).replace('.', ',')} kN lossnar kloten automatiskt!
-                            </p>
-
-                            {isSeparated && (
-                                <button
-                                    onClick={onReset}
-                                    className="w-full py-3 rounded-lg font-bold text-white transition-transform active:scale-95 flex items-center justify-center gap-2 bg-emerald-600/80 hover:bg-emerald-500/80 border border-emerald-500/50"
-                                    style={{ boxShadow: '0 0 20px rgba(52, 211, 153, 0.3)' }}
-                                >
-                                    <RotateCw size={20} />
-                                    Sätt ihop kloten
-                                </button>
-                            )}
-                        </div>
+                <div class="glass-card kort" id="forsokKort">
+                    <h2>Försöket</h2>
+                    <div id="stegLista">
+                        <div class="steg" id="steg1"><span class="nr">1</span>Pumpa ut luften</div>
+                        <div class="steg" id="steg2"><span class="nr">2</span>Sänk lyftbordet så att vikterna hänger i kloten</div>
+                        <div class="steg" id="steg3"><span class="nr">3</span>Öppna kranen och släpp in luft</div>
+                    </div>
+                    <div class="knappar" id="knappar" style="margin-top: 10px">
+                        <button class="knapp" id="kPump1">Ett pumpslag</button>
+                        <button class="knapp" id="kPump10">Tio pumpslag</button>
+                        <button class="knapp" id="kBord">Sänk lyftbordet</button>
+                        <button class="knapp" id="kKran">Öppna kranen</button>
+                    </div>
+                    <div id="reglage">
+                        <div class="reg-rad"><span>Vikter på hängaren</span><strong id="mVarde">20 kg</strong></div>
+                        <input type="range" id="mReg" min="0" max="160" step="1" value="20" aria-label="Vikter på hängaren">
+                        <div class="reg-rad"><span>Klotens diameter <em>d</em></span><strong id="dVarde">10 cm</strong></div>
+                        <input type="range" id="dReg" min="6" max="14" step="1" value="10" aria-label="Klotens diameter">
+                        <p class="liten">Byter du diameter sätts kloten ihop på nytt med luft inuti.</p>
+                    </div>
+                    <div id="platsBlock">
+                        <div class="reg-rad" style="margin-bottom: 2px"><span>Var står labbänken?</span></div>
+                        <div class="platser" id="platser"></div>
                     </div>
                 </div>
-            );
-        };
 
-        // ===== MAIN APP COMPONENT =====
-        const App = () => {
-            const [simulationState, setSimulationState] = useState(SimulationState.SEALED);
-            const [internalPressure, setInternalPressure] = useState(1.0);
-            const [pullingForce, setPullingForce] = useState(0);
-            const [separationDistance, setSeparationDistance] = useState(0);
-            const [targetSeparation, setTargetSeparation] = useState(0);
-            const [showForceArrows, setShowForceArrows] = useState(true);
-            const [showPullForces, setShowPullForces] = useState(true);
-            const [isFullscreen, setIsFullscreen] = useState(false);
-            const animationRef = useRef(null);
-            const sceneWrapRef = useRef(null);
-
-            useEffect(() => {
-                const handler = () => {
-                    setIsFullscreen(
-                        document.fullscreenElement === sceneWrapRef.current ||
-                        document.webkitFullscreenElement === sceneWrapRef.current
-                    );
-                };
-                document.addEventListener('fullscreenchange', handler);
-                document.addEventListener('webkitfullscreenchange', handler);
-                return () => {
-                    document.removeEventListener('fullscreenchange', handler);
-                    document.removeEventListener('webkitfullscreenchange', handler);
-                };
-            }, []);
-
-            const toggleFullscreen = () => {
-                const el = sceneWrapRef.current;
-                if (!el) return;
-                const isFs = document.fullscreenElement || document.webkitFullscreenElement;
-                if (isFs) {
-                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
-                } else {
-                    (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
-                }
-            };
-
-            // Sifferformat för fullskärmsavläsningarna: exakt/avrundat noll → "0"
-            const fmtFs = (n, d) => {
-                const s = n.toFixed(d);
-                if (parseFloat(s) === 0) return '0';
-                return s.replace('.', ',');
-            };
-
-            const calculateNetForce = () => {
-                const pressureDiff = (1.0 - internalPressure) * ATM_PRESSURE_PA;
-                return pressureDiff * SPHERE_AREA;
-            };
-
-            const handleTogglePump = () => {
-                if (simulationState === SimulationState.PUMPING) {
-                    setSimulationState(SimulationState.SEALED);
-                } else {
-                    setSimulationState(SimulationState.PUMPING);
-                }
-            };
-
-            const handleOpenValve = () => {
-                setSimulationState(SimulationState.LEAKING);
-                setTargetSeparation(0);
-            };
-
-            const handleReset = () => {
-                setPullingForce(0);
-                setSimulationState(SimulationState.SEALED);
-                setInternalPressure(1.0);
-                setTargetSeparation(0);
-            };
-
-            useEffect(() => {
-                if (simulationState === SimulationState.LEAKING && internalPressure >= 0.98) {
-                    setInternalPressure(1.0);
-                    setSimulationState(SimulationState.SEALED);
-                    setTargetSeparation(0);
-                }
-            }, [internalPressure, simulationState]);
-
-            useEffect(() => {
-                const animate = () => {
-                    setSeparationDistance(current => {
-                        const diff = targetSeparation - current;
-                        if (Math.abs(diff) < 1) return targetSeparation;
-                        return current + diff * 0.15;
-                    });
-                    animationRef.current = requestAnimationFrame(animate);
-                };
-                animationRef.current = requestAnimationFrame(animate);
-                return () => { if (animationRef.current) cancelAnimationFrame(animationRef.current); };
-            }, [targetSeparation]);
-
-            useEffect(() => {
-                if (simulationState === SimulationState.LEAKING) return;
-                const holdingForce = calculateNetForce();
-
-                if (pullingForce > holdingForce) {
-                    if (simulationState !== SimulationState.SEPARATED) {
-                        setSimulationState(SimulationState.SEPARATED);
-                        setTargetSeparation(200);
-                        setInternalPressure(1.0);
-                    }
-                } else {
-                    if (simulationState === SimulationState.SEPARATED) {
-                        setSimulationState(SimulationState.SEALED);
-                        setTargetSeparation(0);
-                    }
-                }
-            }, [pullingForce, internalPressure, simulationState]);
-
-            return (
-                <div className="min-h-screen flex flex-col items-center py-8 px-4 gap-8 max-w-6xl mx-auto">
-
-                    {/* Header */}
-                    <header className="text-center space-y-3">
-                        <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 tracking-tight glow-text">
-                            Magdeburgska halvkloten
-                        </h1>
-                        <p className="text-slate-400 max-w-2xl mx-auto leading-relaxed">
-                            Ett berömt experiment från 1654 av Otto von Guericke. När luften pumpas ut ur klotet skapas ett vakuum.
-                            Lufttrycket utanför pressar då ihop halvkloten med en enorm kraft.
-                        </p>
-                    </header>
-
-                    {/* Main Simulation Area */}
-                    <div className="w-full flex flex-col lg:flex-row gap-6 items-start">
-
-                        {/* Left: Canvas */}
-                        <div className="flex-1 w-full glass-card p-4 rounded-2xl relative">
-                            <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}
-                                 style={{ userSelect: 'none', boxShadow: 'none' }}>
-                                <SimulationCanvas
-                                    width={600}
-                                    height={400}
-                                    simulationState={simulationState}
-                                    internalPressure={internalPressure}
-                                    setInternalPressure={setInternalPressure}
-                                    separationDistance={separationDistance}
-                                    showForceArrows={showForceArrows}
-                                    showPullForces={showPullForces}
-                                    pullingForce={pullingForce}
-                                />
-                                <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
-                                        title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
-                                    {isFullscreen ? (
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                                            <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
-                                        </svg>
-                                    ) : (
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                                            <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
-                                        </svg>
-                                    )}
-                                </button>
-                                <div className="scene-toggles">
-                                    <div className="st-legend">
-                                        <span className="w-3 h-3 rounded-full bg-cyan-400" style={{ boxShadow: '0 0 8px rgba(56, 189, 248, 0.8)', flexShrink: 0 }}></span>
-                                        <span>Luftmolekyler</span>
-                                    </div>
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            checked={showForceArrows}
-                                            onChange={(e) => setShowForceArrows(e.target.checked)}
-                                        />
-                                        <span>Visa tryckkrafter</span>
-                                    </label>
-                                    <label>
-                                        <input
-                                            type="checkbox"
-                                            checked={showPullForces}
-                                            onChange={(e) => setShowPullForces(e.target.checked)}
-                                        />
-                                        <span>Visa dragkrafter</span>
-                                    </label>
-                                    {isFullscreen && (
-                                        <div className="st-actions">
-                                            <button className="btn-toggle" onClick={handleTogglePump}
-                                                    disabled={simulationState === SimulationState.SEPARATED}>
-                                                {simulationState === SimulationState.PUMPING ? 'Stoppa pumpen' : 'Starta vakuumpump'}
-                                            </button>
-                                            <button className="btn-toggle" onClick={handleOpenValve}
-                                                    disabled={simulationState === SimulationState.PUMPING ||
-                                                              (simulationState !== SimulationState.SEALED &&
-                                                               simulationState !== SimulationState.SEPARATED)}>
-                                                Öppna ventil
-                                            </button>
-                                            {simulationState === SimulationState.SEPARATED && (
-                                                <button className="btn-toggle" onClick={handleReset}>
-                                                    Sätt ihop kloten
-                                                </button>
-                                            )}
-                                        </div>
-                                    )}
-                                </div>
-                                {isFullscreen && (
-                                    <div className="fs-sliders">
-                                        <div className="st-title">Dragkraft</div>
-                                        <input
-                                            type="range"
-                                            min="0"
-                                            max="15000"
-                                            step="100"
-                                            value={pullingForce}
-                                            onChange={(e) => setPullingForce(parseInt(e.target.value))}
-                                            style={{ width: '100%', cursor: 'pointer' }}
-                                        />
-                                        <div style={{ fontSize: '0.8rem', textAlign: 'center', marginBottom: 6 }}>
-                                            {pullingForce.toLocaleString('sv-SE')} N
-                                            {' '}(≈ {fmtFs(pullingForce / FORCE_PER_HORSE, 1)} hästar)
-                                        </div>
-                                        <div className="st-title">Avläsningar</div>
-                                        <div style={{ fontSize: '0.8rem', lineHeight: 1.6 }}>
-                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                                <span>Tryck inuti</span>
-                                                <span style={{ fontWeight: 600 }}>{fmtFs(internalPressure * 101.3, 1)} kPa</span>
-                                            </div>
-                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                                <span>Nettokraft</span>
-                                                <span style={{ fontWeight: 600 }}>{fmtFs(calculateNetForce() / 1000, 1)} kN</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-
-                            {/* Info overlay */}
-                            <div className="mt-4 grid grid-cols-2 gap-4 text-sm">
-                                <div className="flex items-start gap-2 glass-card-light p-3 rounded-lg">
-                                    <div className="p-1.5 bg-cyan-500/20 rounded text-cyan-400 shrink-0"><Info size={16}/></div>
-                                    <p className="text-slate-400"><strong className="text-cyan-400">Blå pilar:</strong> Atmosfärstrycket (konstant kraft inåt)</p>
-                                </div>
-                                <div className="flex items-start gap-2 glass-card-light p-3 rounded-lg">
-                                    <div className="p-1.5 bg-orange-500/20 rounded text-orange-400 shrink-0"><Info size={16}/></div>
-                                    <p className="text-slate-400"><strong className="text-orange-400">Röda pilar:</strong> Det inre gastrycket som minskar</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Right: Data & Visuals */}
-                        <div className="w-full lg:w-64 flex flex-col gap-4 shrink-0">
-                            <div className="glass-card p-4 rounded-xl flex flex-col items-center">
-                                <div className="flex items-center gap-2 text-slate-300 font-semibold mb-3">
-                                    <Gauge size={20} className="text-cyan-400" />
-                                    <span>Tryckmätare</span>
-                                </div>
-                                <PressureGauge value={internalPressure} label="Tryck inuti" />
-                            </div>
-
-                            <div className="glass-card p-4 rounded-xl text-sm space-y-3">
-                                <h3 className="font-semibold text-slate-200">Aktuell data</h3>
-                                <div className="flex justify-between border-b border-slate-700 pb-2">
-                                    <span className="text-slate-500">Tryckskillnad:</span>
-                                    <span className="font-mono text-cyan-400">{(101.3 * (1 - internalPressure)).toFixed(1).replace('.', ',')} kPa</span>
-                                </div>
-                                <div className="flex justify-between border-b border-slate-700 pb-2">
-                                    <span className="text-slate-500">Nettokraft:</span>
-                                    <span className="font-mono text-orange-400">{(calculateNetForce() / 1000).toFixed(1).replace('.', ',')} kN</span>
-                                </div>
-                                <div className="text-xs text-slate-500 italic pt-1">
-                                    Kraften som krävs för att dra isär kloten.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Controls Area */}
-                    <Controls
-                        simulationState={simulationState}
-                        onTogglePump={handleTogglePump}
-                        onOpenValve={handleOpenValve}
-                        pullingForce={pullingForce}
-                        setPullingForce={setPullingForce}
-                        requiredForce={calculateNetForce()}
-                        onReset={handleReset}
-                    />
+                <div class="glass-card kort">
+                    <h2>Färdiga försök</h2>
+                    <div class="forsok" id="forsok"></div>
                 </div>
-            );
-        };
 
-        // ===== RENDER APP =====
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
+                <div class="glass-card kort">
+                    <h2>Guerickes klot</h2>
+                    <p>Otto von Guericke, borgmästare i Magdeburg, visade försöket på 1650-talet med två kopparhalvklot som var ungefär 50&nbsp;cm i diameter. Enligt samtida beskrivningar kunde inte två spann med hästar dra isär dem.</p>
+                    <p style="margin-top: 6px" id="guericke"></p>
+                </div>
+
+                <details class="glass-card kort">
+                    <summary class="accordion-head"><span>Vanliga missuppfattningar</span><span style="color: var(--lab-ink-muted)">+</span></summary>
+                    <ul>
+                        <li><strong>”Vakuumet suger ihop kloten.”</strong> Ett vakuum kan inte dra i något, det är bara frånvaro av luft. Det är luftmolekylerna utanför som knuffar på kloten. Ta med kloten till Månen, där det inte finns någon luft utanför, så faller vikterna fast kloten är tomma.</li>
+                        <li><strong>”Kraften beror på klotens hela yta.”</strong> Lufttrycket trycker på hela ytan, men de snedställda krafterna från sidorna tar ut varandra. Kvar blir bara den del som pekar rakt mot snittet, och den är Δ<em>p</em>&nbsp;·&nbsp;π&nbsp;·&nbsp;<em>r</em><sup>2</sup>. Dubbelt så stor diameter ger alltså fyra gånger så stor kraft.</li>
+                        <li><strong>”Bättre vakuum ger hur stor kraft som helst.”</strong> Kraften kan aldrig bli större än <em>p</em><sub>0</sub>&nbsp;·&nbsp;<em>A</em>, eftersom trycket inuti inte kan bli lägre än noll. Ett perfekt vakuum ger bara lite mer än det som pumpen klarar.</li>
+                        <li><strong>”Guericke behövde hästar på båda sidorna.”</strong> Det hade räckt att fästa ena klotet i en mur. Muren drar lika hårt som det andra spannet, så hälften av hästarna gjorde ingen nytta. Det var en uppvisning.</li>
+                    </ul>
+                </details>
+
+                <p class="liten">Pumpen tar 0,20 liter per slag och kommer som lägst ned till 1,0 kPa. Lufttrycket på höjderna kommer från standardatmosfären. Undre halvklotet med krok väger 0,5 kg och hängaren 1,0 kg, och båda räknas in i den hängande massan. Tyngdfaktorn är <em>g</em>&nbsp;=&nbsp;9,82&nbsp;N/kg.</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        const $ = id => document.getElementById(id);
+        const g = 9.82;
+        const P_HAV = 101.3;          // kPa, som i genomgången
+        const PUMP_V = 0.20;          // liter per pumpslag
+        const P_MIN = 1.0;            // kPa, pumpens bästa
+        const M_UNDRE = 0.5, M_HANGARE = 1.0;   // kg
+        const NBSP = ' ';
+
+        // Standardatmosfären: p = 101,325 kPa · (1 − 2,25577·10⁻⁵ · h)^5,25588,
+        // men havsnivån sätts till genomgångens 101,3 kPa.
+        function hojdTryck(h) { return P_HAV * Math.pow(1 - 2.25577e-5 * h, 5.25588); }
+        const PLATSER = [
+            { id: 'hav', namn: 'Havsnivå', sub: '0 m', p0: P_HAV, klass: 'plats-hav' },
+            { id: 'fjall', namn: 'Kebnekaise', sub: '2 100 m', p0: hojdTryck(2100), klass: 'plats-fjall' },
+            { id: 'everest', namn: 'Mount Everest', sub: '8 849 m', p0: hojdTryck(8849), klass: 'plats-everest' },
+            { id: 'flyg', namn: 'Flyghöjd', sub: '10 000 m', p0: hojdTryck(10000), klass: 'plats-flyg' },
+            { id: 'manen', namn: 'Månen', sub: 'ingen luft', p0: 0, klass: 'plats-manen' },
+        ];
+
+        // ── Formatering ─────────────────────────────────────────────────────
+        function fmt(n, d = 0) {
+            const s = n.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            const [ip, fr] = s.split('.');
+            const gr = ip.replace(/\B(?=(\d{3})+(?!\d))/g, NBSP);
+            return fr !== undefined ? gr + ',' + fr : gr;
+        }
+        const kPa = p => fmt(p, 1) + NBSP + 'kPa';
+        function newton(F) {
+            const a = Math.abs(F);
+            if (a >= 1000) return fmt(F / 1000, a >= 10000 ? 1 : 2) + NBSP + 'kN';
+            return fmt(F, 0) + NBSP + 'N';
+        }
+
+        // ── Tillstånd ───────────────────────────────────────────────────────
+        const st = {
+            d: 10, m: 20, plats: 'hav', p0: P_HAV, p: P_HAV,
+            bordUppe: true, kranOppen: false,
+            fast: true,          // kloten sitter ihop
+            fall: 0, vy: 0,      // undre delens förskjutning nedåt (scenenheter) och fart
+            slag: 0, slagT: 0,   // köade pumpslag och tid in i pågående slag
+            slapptVid: null, slapptOrsak: null, harPumpat: false,
+            show: { molek: true, pilar: true, snitt: false, tyngd: true },
+        };
+        const r = () => st.d / 20;                    // radie i scenenheter (1 enhet = 1 dm)
+        const rMeter = () => st.d / 200;
+        const area = () => Math.PI * rMeter() ** 2;   // m²
+        const volym = () => 4 / 3 * Math.PI * (st.d / 20) ** 3;  // liter (dm³)
+        const massa = () => st.m + M_UNDRE + M_HANGARE;
+        const kraftF = () => (st.p0 - st.p) * 1000 * area();
+        const tyngd = () => massa() * g;
+
+        // ── Scen ────────────────────────────────────────────────────────────
+        const wrap = $('sceneWrap');
+        const mount = $('mount');
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.outputColorSpace = THREE.SRGBColorSpace;
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.05;
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.localClippingEnabled = true;
+        mount.appendChild(renderer.domElement);
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(36, 1, 0.05, 200);
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.08;
+        controls.enablePan = false;
+        controls.minDistance = 1.6;
+        controls.maxDistance = 22;
+        controls.maxPolarAngle = 1.53;
+
+        function canvasTex(w, h, rita) {
+            const c = document.createElement('canvas');
+            c.width = w; c.height = h;
+            rita(c.getContext('2d'), w, h);
+            const t = new THREE.CanvasTexture(c);
+            t.colorSpace = THREE.SRGBColorSpace;
+            t.anisotropy = 8;
+            return t;
+        }
+
+        // Mjuk omgivning som metallen speglar
+        {
+            const tex = canvasTex(1024, 512, (ctx, w, h) => {
+                const gr = ctx.createLinearGradient(0, 0, 0, h);
+                gr.addColorStop(0, '#fbf8f2'); gr.addColorStop(0.45, '#efe7d8'); gr.addColorStop(0.55, '#a98559'); gr.addColorStop(1, '#5d4128');
+                ctx.fillStyle = gr; ctx.fillRect(0, 0, w, h);
+                ctx.fillStyle = 'rgba(255,255,255,0.95)';
+                ctx.fillRect(w * 0.12, h * 0.12, w * 0.16, h * 0.2);
+                ctx.fillRect(w * 0.6, h * 0.08, w * 0.22, h * 0.14);
+                ctx.fillStyle = 'rgba(60,70,90,0.35)';
+                ctx.fillRect(w * 0.36, h * 0.2, w * 0.12, h * 0.25);
+            });
+            tex.mapping = THREE.EquirectangularReflectionMapping;
+            const pm = new THREE.PMREMGenerator(renderer);
+            scene.environment = pm.fromEquirectangular(tex).texture;
+            pm.dispose();
+        }
+
+        scene.add(new THREE.HemisphereLight(0xfffaf0, 0x8a6a48, 0.55));
+        const sol = new THREE.DirectionalLight(0xffffff, 1.3);
+        sol.position.set(6, 13, 9);
+        sol.castShadow = true;
+        sol.shadow.mapSize.set(2048, 2048);
+        Object.assign(sol.shadow.camera, { left: -7, right: 7, top: 9, bottom: -3, near: 1, far: 40 });
+        sol.shadow.bias = -0.0004;
+        sol.shadow.radius = 4;
+        scene.add(sol);
+        const fyll = new THREE.DirectionalLight(0xdfe8ff, 0.35);
+        fyll.position.set(-8, 6, -4);
+        scene.add(fyll);
+
+        // ── Labbänken ──
+        {
+            const tra = canvasTex(1024, 1024, (ctx, w, h) => {
+                const gr = ctx.createLinearGradient(0, 0, w, h);
+                gr.addColorStop(0, '#caa274'); gr.addColorStop(1, '#b98d5e');
+                ctx.fillStyle = gr; ctx.fillRect(0, 0, w, h);
+                let seed = 7;
+                const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+                for (let i = 0; i < 140; i++) {
+                    const y0 = rnd() * h, amp = 4 + rnd() * 14, fr = 0.004 + rnd() * 0.01, ph = rnd() * 6;
+                    ctx.strokeStyle = `rgba(${90 + rnd() * 30},${55 + rnd() * 20},30,${0.05 + rnd() * 0.13})`;
+                    ctx.lineWidth = 0.6 + rnd() * 2.4;
+                    ctx.beginPath();
+                    for (let x = 0; x <= w; x += 8) {
+                        const y = y0 + Math.sin(x * fr + ph) * amp + Math.sin(x * fr * 3.1 + ph) * amp * 0.25;
+                        if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+                    }
+                    ctx.stroke();
+                }
+                ctx.strokeStyle = 'rgba(70,45,25,0.35)'; ctx.lineWidth = 2;
+                [256, 512, 768].forEach(y => { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); });
+            });
+            tra.wrapS = tra.wrapT = THREE.RepeatWrapping;
+            tra.repeat.set(1.6, 1.0);
+            const bank = new THREE.Mesh(new THREE.BoxGeometry(17, 0.5, 8),
+                new THREE.MeshStandardMaterial({ map: tra, roughness: 0.62, metalness: 0, envMapIntensity: 0.4 }));
+            bank.position.set(0.4, -0.25, 0);
+            bank.receiveShadow = true;
+            scene.add(bank);
+        }
+
+        // Material
+        const mMassing = new THREE.MeshStandardMaterial({ color: 0xc9a14a, metalness: 0.85, roughness: 0.28 });
+        // Klotens skal har egna material, så att genomskärningen bara klipper kloten
+        const mKlot = new THREE.MeshStandardMaterial({ color: 0xc9a14a, metalness: 0.85, roughness: 0.28 });
+        const mKlotInne = new THREE.MeshStandardMaterial({ color: 0xd8c08a, metalness: 0.25, roughness: 0.6, side: THREE.BackSide });
+        const mStal = new THREE.MeshStandardMaterial({ color: 0x9aa2ad, metalness: 0.85, roughness: 0.32 });
+        const mMorkStal = new THREE.MeshStandardMaterial({ color: 0x3a4049, metalness: 0.7, roughness: 0.4 });
+        const mJarn = new THREE.MeshStandardMaterial({ color: 0x2b2f36, metalness: 0.55, roughness: 0.55 });
+        const mGummi = new THREE.MeshStandardMaterial({ color: 0xa8442a, metalness: 0, roughness: 0.65 });
+        const mRod = new THREE.MeshStandardMaterial({ color: 0xc8324a, metalness: 0.1, roughness: 0.45 });
+        const mAlu = new THREE.MeshStandardMaterial({ color: 0xc7ccd3, metalness: 0.75, roughness: 0.35 });
+        function skugga(o) { o.traverse(c => { if (c.isMesh) { c.castShadow = true; c.receiveShadow = true; } }); return o; }
+
+        // Klippning för genomskärningen: behåll bara den bakre halvan (z ≤ 0)
+        const snittPlan = new THREE.Plane(new THREE.Vector3(0, 0, -1), 0);
+        [mKlot, mKlotInne].forEach(m => { m.clippingPlanes = []; });
+
+        // Geometri i höjdled
+        const BORD_UPPE = 1.35, BORD_NERE = 0.42;   // lyftbordets ovansida
+        const SOM_Y = 5.6;                          // skarven mellan kloten när de sitter ihop
+        const HANGPLATTA = 0.06;
+        const STATIV_X = -2.7;
+
+        // ── Stativet ──
+        const stativ = new THREE.Group();
+        {
+            const fot = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.12, 1.3), mMorkStal);
+            fot.position.set(STATIV_X + 0.45, 0.06, 0);
+            const stang = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 7.2, 24), mStal);
+            stang.position.set(STATIV_X, 3.6, 0);
+            stativ.add(fot, stang);
+        }
+        scene.add(skugga(stativ));
+        const arm = new THREE.Group();   // muff + arm + krok, flyttas i höjd efter klotets storlek
+        {
+            const muff = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.34, 0.34), mMorkStal);
+            muff.position.set(STATIV_X, 0, 0);
+            const skruv = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.3, 12), mMorkStal);
+            skruv.rotation.x = Math.PI / 2; skruv.position.set(STATIV_X, 0, 0.3);
+            const ratt = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.05, 20), mMorkStal);
+            ratt.rotation.x = Math.PI / 2; ratt.position.set(STATIV_X, 0, 0.45);
+            const armStang = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, Math.abs(STATIV_X) + 0.15, 20), mStal);
+            armStang.rotation.z = Math.PI / 2; armStang.position.set(STATIV_X / 2 + 0.07, 0, 0);
+            const krokStang = new THREE.Mesh(new THREE.CylinderGeometry(0.022, 0.022, 0.28, 12), mStal);
+            krokStang.position.set(0, -0.14, 0);
+            const krok = new THREE.Mesh(new THREE.TorusGeometry(0.07, 0.018, 10, 24, Math.PI * 1.4), mStal);
+            krok.rotation.set(0, 0, Math.PI * 0.8); krok.position.set(0, -0.33, 0);
+            arm.add(muff, skruv, ratt, armStang, krokStang, krok);
+        }
+        scene.add(skugga(arm));
+
+        // ── Kloten ──
+        const ovreG = new THREE.Group();   // övre halvklotet (hänger fast i stativet)
+        const undreG = new THREE.Group();  // undre halvklotet + hängare + vikter (faller)
+        scene.add(ovreG, undreG);
+        const viktG = new THREE.Group();
+        undreG.add(viktG);
+        let klotDelar = [];
+        let ventil = null, ventilSpak = null, ventilSpets = new THREE.Vector3();
+        let hangStang = null, hangPlatta = null;
+
+        function byggKloten() {
+            klotDelar.forEach(o => o.parent && o.parent.remove(o));
+            klotDelar = [];
+            const R = r();
+            const add = (grp, o) => { grp.add(o); klotDelar.push(o); return o; };
+            // skal: utsida mässing, insida mörkare (syns i genomskärningen)
+            const ovre = new THREE.Mesh(new THREE.SphereGeometry(R, 72, 36, 0, Math.PI * 2, 0, Math.PI / 2), mKlot);
+            const ovreIn = new THREE.Mesh(new THREE.SphereGeometry(R * 0.965, 72, 36, 0, Math.PI * 2, 0, Math.PI / 2), mKlotInne);
+            const undre = new THREE.Mesh(new THREE.SphereGeometry(R, 72, 36, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2), mKlot);
+            const undreIn = new THREE.Mesh(new THREE.SphereGeometry(R * 0.965, 72, 36, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2), mKlotInne);
+            add(ovreG, ovre); add(ovreG, ovreIn); add(undreG, undre); add(undreG, undreIn);
+            // flänsar vid skarven
+            const fl = (tecken) => {
+                const t = 0.055, R2 = R * 1.17;
+                const pts = [new THREE.Vector2(R * 0.965, 0), new THREE.Vector2(R2, 0), new THREE.Vector2(R2, t * tecken), new THREE.Vector2(R, t * tecken)];
+                if (tecken < 0) pts.reverse();
+                return new THREE.Mesh(new THREE.LatheGeometry(pts, 72), mKlot);
+            };
+            add(ovreG, fl(1)); add(undreG, fl(-1));
+            // ögla upptill och nedtill
+            const ogla = (y, upp) => {
+                const hals = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.05, 0.12, 16), mMassing);
+                hals.position.y = y + (upp ? 0.04 : -0.04);
+                const ring = new THREE.Mesh(new THREE.TorusGeometry(0.085, 0.024, 12, 32), mMassing);
+                ring.position.y = y + (upp ? 0.17 : -0.17);
+                return [hals, ring];
+            };
+            ogla(R, true).forEach(o => add(ovreG, o));
+            ogla(-R, false).forEach(o => add(undreG, o));
+            // ventilen på övre klotet, snett uppåt mot pumpen
+            ventil = new THREE.Group();
+            const v = 40 * Math.PI / 180;
+            const n = new THREE.Vector3(Math.cos(v), Math.sin(v), 0);
+            const kropp = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.045, 0.3, 16), mMassing);
+            kropp.position.y = 0.15;
+            const huv = new THREE.Mesh(new THREE.CylinderGeometry(0.075, 0.075, 0.11, 20), mMassing);
+            huv.rotation.z = Math.PI / 2; huv.position.y = 0.22;
+            const nippel = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.04, 0.16, 14), mMassing);
+            nippel.position.y = 0.36;
+            ventilSpak = new THREE.Group();
+            const spak = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.3, 0.05), mRod);
+            spak.position.y = 0.15;
+            const knopp = new THREE.Mesh(new THREE.SphereGeometry(0.045, 14, 10), mRod);
+            knopp.position.y = 0.3;
+            ventilSpak.add(spak, knopp);
+            ventilSpak.position.set(0, 0.22, 0.06);
+            ventil.add(kropp, huv, nippel, ventilSpak);
+            ventil.position.copy(n.clone().multiplyScalar(R * 0.98));
+            ventil.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), n);
+            ventil.traverse(c => { c.userData.klick = 'kran'; });
+            add(ovreG, ventil);
+            ventilSpets.copy(n).multiplyScalar(R * 0.98 + 0.44);
+            skugga(ovreG); skugga(undreG);
+            stallVentil();
+
+            ovreG.position.set(0, SOM_Y, 0);
+            arm.position.y = SOM_Y + R + 0.62;
+            // hängaren: stång från öglan ned till plattan
+            if (hangStang) undreG.remove(hangStang, hangPlatta);
+            const topp = -R - 0.25, botten = BORD_UPPE + HANGPLATTA - SOM_Y;
+            hangStang = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, topp - botten, 14), mMorkStal);
+            hangStang.position.y = (topp + botten) / 2;
+            const krok = new THREE.Mesh(new THREE.TorusGeometry(0.06, 0.016, 10, 24, Math.PI * 1.3), mMorkStal);
+            krok.rotation.set(Math.PI / 2, 0, 0); krok.position.y = topp + 0.02;
+            hangStang.add(krok); krok.position.y = (topp - botten) / 2 + 0.03;
+            hangPlatta = new THREE.Mesh(new THREE.CylinderGeometry(0.62, 0.62, HANGPLATTA, 40), mMorkStal);
+            hangPlatta.position.y = botten - HANGPLATTA / 2;
+            undreG.add(skugga(hangStang), skugga(hangPlatta));
+            byggSlang();
+            byggPilar();
+            stallEtiketter();
+        }
+
+        // ── Vikterna: 20 kg, 5 kg och 1 kg, järn med densiteten 7 870 kg/m³ ──
+        const VIKTTYPER = [
+            { kg: 20, R: 1.6 }, { kg: 5, R: 1.1 }, { kg: 1, R: 0.7 },
+        ].map(v => ({ ...v, t: (v.kg / 7870) / (Math.PI * (v.R / 10) ** 2) * 10 }));   // tjocklek i dm
+        function viktTopp(kg) {
+            return canvasTex(512, 512, (ctx, w, h) => {
+                ctx.fillStyle = '#2b2f36'; ctx.fillRect(0, 0, w, h);
+                const rg = ctx.createRadialGradient(w * 0.42, h * 0.4, 20, w / 2, h / 2, w / 2);
+                rg.addColorStop(0, 'rgba(255,255,255,0.10)'); rg.addColorStop(1, 'rgba(0,0,0,0.12)');
+                ctx.fillStyle = rg; ctx.fillRect(0, 0, w, h);
+                ctx.strokeStyle = 'rgba(255,255,255,0.18)'; ctx.lineWidth = 6;
+                ctx.beginPath(); ctx.arc(w / 2, h / 2, w * 0.43, 0, Math.PI * 2); ctx.stroke();
+                ctx.fillStyle = '#e9e2d3'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+                ctx.font = `700 ${kg >= 20 ? 96 : 120}px Poppins, sans-serif`;
+                ctx.fillText(kg + ' kg', w / 2, h * 0.73);
+                // slits för stången
+                ctx.fillStyle = '#121418';
+                ctx.fillRect(w / 2 - 14, 0, 28, h / 2);
+                ctx.beginPath(); ctx.arc(w / 2, h / 2, 16, 0, Math.PI * 2); ctx.fill();
+            });
+        }
+        const viktMat = VIKTTYPER.map(v => [mJarn, new THREE.MeshStandardMaterial({ map: viktTopp(v.kg), metalness: 0.5, roughness: 0.55 }), mJarn]);
+        const viktGeo = VIKTTYPER.map(v => new THREE.CylinderGeometry(v.R, v.R, v.t, 56));
+        let viktTopY = 0;
+        function byggVikter() {
+            while (viktG.children.length) viktG.remove(viktG.children[0]);
+            let kvar = Math.round(st.m), y = BORD_UPPE + HANGPLATTA - SOM_Y, k = 0;
+            VIKTTYPER.forEach((v, i) => {
+                const n = Math.floor(kvar / v.kg); kvar -= n * v.kg;
+                for (let j = 0; j < n; j++) {
+                    const s = new THREE.Mesh(viktGeo[i], viktMat[i]);
+                    s.position.y = y + v.t / 2;
+                    s.rotation.y = 0.7 + k * 1.9;
+                    s.castShadow = true; s.receiveShadow = true;
+                    viktG.add(s);
+                    y += v.t; k++;
+                }
+            });
+            viktTopY = y;
+            stallEtiketter();
+        }
+
+        // ── Lyftbordet (saxlyft) ──
+        const bordG = new THREE.Group();
+        let saxar = [], bordTopp, bordVev;
+        {
+            const S = 2.3;
+            const fot = new THREE.Mesh(new THREE.BoxGeometry(S, 0.08, S), mAlu);
+            fot.position.y = 0.04;
+            bordTopp = new THREE.Mesh(new THREE.BoxGeometry(S, 0.08, S), mAlu);
+            for (const z of [-S / 2 + 0.06, S / 2 - 0.06]) {
+                for (const s of [1, -1]) {
+                    const b = new THREE.Mesh(new THREE.BoxGeometry(S * 1.0, 0.06, 0.04), mMorkStal);
+                    b.position.z = z;
+                    b.userData.tecken = s;
+                    saxar.push(b);
+                }
+            }
+            bordVev = new THREE.Group();
+            const axel = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.5, 12), mStal);
+            axel.rotation.x = Math.PI / 2; axel.position.z = 0.25;
+            const vred = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.13, 0.07, 24), mRod);
+            vred.rotation.x = Math.PI / 2; vred.position.z = 0.5;
+            bordVev.add(axel, vred);
+            bordVev.position.z = S / 2;
+            bordG.add(fot, bordTopp, bordVev, ...saxar);
+            bordG.traverse(c => { c.userData.klick = 'bord'; });
+        }
+        scene.add(skugga(bordG));
+        let bordH = BORD_UPPE;
+        function stallBord() {
+            const h = bordH, S = 2.3, nedre = 0.08, ovre = h - 0.08;
+            bordTopp.position.y = h - 0.04;
+            const dy = ovre - nedre, L = S * 0.92;
+            const vink = Math.asin(Math.min(0.98, dy / L));
+            saxar.forEach(b => {
+                b.scale.x = L / S;
+                b.position.y = (nedre + ovre) / 2;
+                b.rotation.z = vink * b.userData.tecken;
+            });
+            bordVev.position.y = (nedre + ovre) / 2;
+        }
+
+        // ── Vakuumpumpen ──
+        const PUMP_X = 3.7, PUMP_Z = 0.5;
+        const pumpG = new THREE.Group();
+        let kolvG, matarTex, matarCtx, pumpPort = new THREE.Vector3();
+        {
+            const fot = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.62, 0.14, 40), mMorkStal);
+            fot.position.y = 0.07;
+            const cyl = new THREE.Mesh(new THREE.CylinderGeometry(0.26, 0.26, 2.0, 40), mMassing);
+            cyl.position.y = 1.14;
+            const lock = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.1, 40), mMorkStal);
+            lock.position.y = 2.18;
+            const botten = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.1, 40), mMorkStal);
+            botten.position.y = 0.19;
+            kolvG = new THREE.Group();
+            const stang = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 1.0, 14), mStal);
+            stang.position.y = 0.5;
+            const handtag = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.9, 20), new THREE.MeshStandardMaterial({ color: 0x3b2a1c, roughness: 0.6 }));
+            handtag.rotation.z = Math.PI / 2; handtag.position.y = 1.0;
+            kolvG.add(stang, handtag);
+            kolvG.position.y = 2.2;
+            // portstos mot slangen
+            const port = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.045, 0.3, 14), mMassing);
+            port.rotation.z = Math.PI / 2; port.position.set(-0.4, 1.95, 0);
+            pumpPort.set(PUMP_X - 0.55, 1.95, PUMP_Z);
+            // manometern
+            const c = document.createElement('canvas'); c.width = c.height = 512;
+            matarCtx = c.getContext('2d');
+            matarTex = new THREE.CanvasTexture(c); matarTex.colorSpace = THREE.SRGBColorSpace; matarTex.anisotropy = 8;
+            const hus = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.42, 0.12, 48), mMorkStal);
+            hus.rotation.x = Math.PI / 2; hus.position.set(0, 1.25, 0.38);
+            const tavla = new THREE.Mesh(new THREE.CircleGeometry(0.38, 64), new THREE.MeshStandardMaterial({ map: matarTex, roughness: 0.4, metalness: 0 }));
+            tavla.position.set(0, 1.25, 0.445);
+            const glas = new THREE.Mesh(new THREE.CircleGeometry(0.39, 64), new THREE.MeshPhysicalMaterial({ color: 0xffffff, transparent: true, opacity: 0.12, roughness: 0.05, metalness: 0 }));
+            glas.position.set(0, 1.25, 0.455);
+            const hals = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.2, 12), mMassing);
+            hals.rotation.x = Math.PI / 2; hals.position.set(0, 1.25, 0.25);
+            pumpG.add(fot, cyl, lock, botten, kolvG, port, hus, tavla, glas, hals);
+            pumpG.position.set(PUMP_X, 0, PUMP_Z);
+            pumpG.traverse(o => { o.userData.klick = 'pump'; });
+        }
+        scene.add(skugga(pumpG));
+        let senastMatare = -1;
+        function ritaMatare() {
+            const p = st.p;
+            if (Math.abs(p - senastMatare) < 0.05) return;
+            senastMatare = p;
+            const ctx = matarCtx, w = 512, cx = 256, cy = 256;
+            ctx.clearRect(0, 0, w, w);
+            ctx.fillStyle = '#f7f2e8'; ctx.beginPath(); ctx.arc(cx, cy, 256, 0, Math.PI * 2); ctx.fill();
+            const a0 = Math.PI * 0.75, a1 = Math.PI * 2.25;   // 0 till 110 kPa
+            const ang = v => a0 + (a1 - a0) * v / 110;
+            // rött fält: bra vakuum
+            ctx.strokeStyle = 'rgba(31,95,191,0.35)'; ctx.lineWidth = 22;
+            ctx.beginPath(); ctx.arc(cx, cy, 196, ang(0), ang(10)); ctx.stroke();
+            ctx.strokeStyle = '#0f1620';
+            for (let v = 0; v <= 110; v += 5) {
+                const a = ang(v), lang = v % 10 === 0;
+                ctx.lineWidth = lang ? 6 : 3;
+                ctx.beginPath();
+                ctx.moveTo(cx + Math.cos(a) * (lang ? 176 : 190), cy + Math.sin(a) * (lang ? 176 : 190));
+                ctx.lineTo(cx + Math.cos(a) * 214, cy + Math.sin(a) * 214);
+                ctx.stroke();
+            }
+            ctx.fillStyle = '#0f1620'; ctx.font = '600 40px Poppins, sans-serif';
+            ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+            for (let v = 0; v <= 100; v += 20) {
+                const a = ang(v);
+                ctx.fillText(String(v), cx + Math.cos(a) * 138, cy + Math.sin(a) * 138);
+            }
+            ctx.font = '700 44px Poppins, sans-serif';
+            ctx.fillText('kPa', cx, cy + 112);
+            ctx.font = '500 26px Poppins, sans-serif'; ctx.fillStyle = '#5a6170';
+            ctx.fillText('tryck i kloten', cx, cy + 156);
+            const a = ang(Math.max(0, Math.min(110, p)));
+            ctx.strokeStyle = '#c8324a'; ctx.lineWidth = 9; ctx.lineCap = 'round';
+            ctx.beginPath(); ctx.moveTo(cx - Math.cos(a) * 30, cy - Math.sin(a) * 30);
+            ctx.lineTo(cx + Math.cos(a) * 200, cy + Math.sin(a) * 200); ctx.stroke();
+            ctx.fillStyle = '#0f1620'; ctx.beginPath(); ctx.arc(cx, cy, 20, 0, Math.PI * 2); ctx.fill();
+            matarTex.needsUpdate = true;
+        }
+
+        // ── Slangen mellan ventilen och pumpen ──
+        let slang = null;
+        function byggSlang() {
+            if (slang) { scene.remove(slang); slang.geometry.dispose(); }
+            const a = ventilSpets.clone().add(new THREE.Vector3(0, SOM_Y, 0));
+            const b = pumpPort.clone();
+            const mitt1 = new THREE.Vector3(a.x + 0.9, a.y + 0.2, 0.25);
+            const mitt2 = new THREE.Vector3((a.x + b.x) / 2 + 0.9, (a.y + b.y) / 2 - 0.2, 0.5);
+            const kurva = new THREE.CatmullRomCurve3([a, mitt1, mitt2, new THREE.Vector3(b.x - 0.35, b.y + 0.15, b.z), b]);
+            slang = new THREE.Mesh(new THREE.TubeGeometry(kurva, 80, 0.055, 14, false), mGummi);
+            slang.castShadow = true;
+            slang.userData.klick = 'pump';
+            scene.add(slang);
+        }
+
+        // ── Pilar ──
+        const Y_AXEL = new THREE.Vector3(0, 1, 0);
+        function pilMat(hex, ovanpa) {
+            return new THREE.MeshBasicMaterial({ color: hex, toneMapped: false, depthTest: !ovanpa, transparent: !!ovanpa });
+        }
+        function pil(hex, rad, ovanpa) {
+            const grp = new THREE.Group();
+            const mat = pilMat(hex, ovanpa);
+            const skaft = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 1, 12), mat);
+            const spets = new THREE.Mesh(new THREE.ConeGeometry(1, 1, 16), mat);
+            grp.add(skaft, spets);
+            grp.userData = { skaft, spets, r: rad };
+            if (ovanpa) grp.traverse(c => { c.renderOrder = 15; });
+            return grp;
+        }
+        function stallPil(grp, fran, vec) {
+            const len = vec.length();
+            if (len < 1e-4) { grp.visible = false; return; }
+            grp.visible = true;
+            const rr = grp.userData.r, head = Math.min(rr * 5.5, len * 0.55), shaft = len - head;
+            grp.position.copy(fran);
+            grp.quaternion.setFromUnitVectors(Y_AXEL, vec.clone().normalize());
+            const { skaft, spets } = grp.userData;
+            skaft.scale.set(rr, Math.max(shaft, 1e-4), rr); skaft.position.set(0, shaft / 2, 0);
+            spets.scale.set(rr * 2.4, head, rr * 2.4); spets.position.set(0, shaft + head / 2, 0);
+        }
+        const BLA = '#1f5fbf', ORANGE = '#d9711c', GRON = '#2b7a3d';
+        let pilarUt = [], pilarIn = [];
+        const PILVINKLAR = [20, 50, 90, 130, 160, 200, 230, 270, 310, 340].map(v => v * Math.PI / 180);
+        function byggPilar() {
+            [...pilarUt, ...pilarIn].forEach(p => p.parent && p.parent.remove(p));
+            pilarUt = []; pilarIn = [];
+            PILVINKLAR.forEach(v => {
+                const grp = Math.sin(v) > 0 ? ovreG : undreG;
+                const pu = pil(BLA, 0.016); pu.userData.v = v; grp.add(pu); pilarUt.push(pu);
+                const pi = pil(ORANGE, 0.016); pi.userData.v = v; grp.add(pi); pilarIn.push(pi);
+            });
+        }
+        function stallPilar() {
+            const R = r(), LMAX = 0.42;
+            const lu = LMAX * st.p0 / P_HAV, li = LMAX * st.p / P_HAV;
+            pilarUt.forEach(pu => {
+                const v = pu.userData.v, n = new THREE.Vector3(Math.cos(v), Math.sin(v), 0);
+                const ytterR = (Math.abs(Math.sin(v)) < 0.35 ? R * 1.17 : R) + 0.03;
+                stallPil(pu, n.clone().multiplyScalar(ytterR + lu), n.clone().multiplyScalar(-lu));
+                if (!st.show.pilar || lu < 0.01) pu.visible = false;
+            });
+            pilarIn.forEach(pi => {
+                const v = pi.userData.v, n = new THREE.Vector3(Math.cos(v), Math.sin(v), 0);
+                const inR = R * 0.965 - 0.02;
+                stallPil(pi, n.clone().multiplyScalar(inR - li), n.clone().multiplyScalar(li));
+                if (!st.show.pilar || !st.show.snitt || li < 0.01) pi.visible = false;
+            });
+        }
+        const pilG = pil(GRON, 0.03, true);
+        scene.add(pilG);
+        const tpPrick = new THREE.Mesh(new THREE.SphereGeometry(0.075, 16, 12), pilMat(GRON, true));
+        tpPrick.renderOrder = 16;
+        scene.add(tpPrick);
+
+        // ── Etiketter (sprites med fast storlek på skärmen) ──
+        const etiketter = [];
+        function etikett(delar, opt = {}) {
+            const px = 64, pad = 14;
+            const c = document.createElement('canvas'), ctx = c.getContext('2d');
+            const font = (it, sub) => `${it ? 'italic ' : ''}600 ${sub ? px * 0.66 : px}px Poppins, sans-serif`;
+            let w = 0;
+            delar.forEach(d => { ctx.font = font(d.i, d.sub); d.w = ctx.measureText(d.t).width; w += d.w; });
+            c.width = Math.ceil(w + pad * 2); c.height = Math.ceil(px * 1.45);
+            delar.forEach(d => { d.x = 0; });
+            let x = pad;
+            delar.forEach(d => {
+                ctx.font = font(d.i, d.sub);
+                ctx.fillStyle = opt.farg || '#0f1620';
+                ctx.textBaseline = 'alphabetic';
+                ctx.fillText(d.t, x, px * (d.sub ? 1.18 : 1.0));
+                x += d.w;
+            });
+            const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 4;
+            const spr = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false, sizeAttenuation: false, toneMapped: false }));
+            spr.renderOrder = 20;
+            spr.userData = { aspekt: c.width / c.height, px: opt.px || 19 };
+            spr.center.set(opt.cx != null ? opt.cx : 0.5, opt.cy != null ? opt.cy : 0.5);
+            etiketter.push(spr);
+            scene.add(spr);
+            return spr;
+        }
+        function skalaEtiketter() {
+            const H = mount.clientHeight || 600;
+            const k = 2 * Math.tan(camera.fov * Math.PI / 360) / H;
+            etiketter.forEach(s => { const h = s.userData.px * 1.45 * k; s.scale.set(h * s.userData.aspekt, h, 1); });
+        }
+        const etPump = etikett([{ t: 'Vakuumpump' }], { cy: 0 });
+        const etKran = etikett([{ t: 'Kran' }], { cx: 0 });
+        const etBord = etikett([{ t: 'Lyftbord' }], { cx: 0 });
+        let etFG = null, etFGtext = '';
+        let etUt = etikett([{ t: 'Lufttryck utanför' }], { cx: 0, farg: BLA, px: 17 });
+        let etIn = etikett([{ t: 'Tryck inuti' }], { cx: 0, farg: ORANGE, px: 17 });
+        function stallEtiketter() {
+            etPump.position.set(PUMP_X, 3.35, PUMP_Z);
+            const vs = ventilSpets.clone().add(new THREE.Vector3(0, SOM_Y, 0));
+            etKran.position.set(vs.x + 0.12, vs.y + 0.38, 0.1);
+            etBord.position.set(1.3, BORD_NERE * 0.5 + 0.12, 1.25);
+            const R = r();
+            etUt.position.set(-R - 0.5, SOM_Y - R - 0.42, 0); etUt.center.set(0.5, 0.5);
+            etIn.position.set(0, SOM_Y - 0.12, -0.05); etIn.center.set(0.5, 0.5);
+        }
+
+        // ── Luftmolekyler ──
+        const NUT = 420;
+        const molekyler = { ut: [], in: [] };
+        function molekylMoln(n, farg) {
+            const geo = new THREE.BufferGeometry();
+            geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(n * 3), 3));
+            const pts = new THREE.Points(geo, new THREE.PointsMaterial({ color: farg, size: 0.04, sizeAttenuation: true, toneMapped: false }));
+            pts.frustumCulled = false;
+            scene.add(pts);
+            return pts;
+        }
+        const molUt = molekylMoln(NUT, 0x0f5c74);
+        const molIn = molekylMoln(160, 0x0f5c74);
+        function slumpaRiktning() { return new THREE.Vector3().randomDirection(); }
+        function initMolekyler() {
+            molekyler.ut = []; molekyler.in = [];
+            for (let i = 0; i < NUT; i++) molekyler.ut.push({ p: slumpaRiktning().multiplyScalar(1), v: slumpaRiktning().multiplyScalar(0.6 + Math.random() * 0.6) });
+            for (let i = 0; i < 160; i++) molekyler.in.push({ p: slumpaRiktning().multiplyScalar(Math.cbrt(Math.random()) * 0.9), v: slumpaRiktning().multiplyScalar(0.6 + Math.random() * 0.6) });
+            placeraMolekyler(true);
+        }
+        function skal() { const R = r(); return { a: R * 1.06 + 0.04, b: R * 1.06 + 0.5 }; }
+        function antalIn() {
+            const R = r(), { a, b } = skal();
+            const vIn = (R * 0.94) ** 3, vSkal = b ** 3 - a ** 3;
+            return Math.min(160, Math.round(NUT * vIn / vSkal * st.p / P_HAV));
+        }
+        function placeraMolekyler(nytt) {
+            const R = r(), { a, b } = skal();
+            molekyler.ut.forEach(m => {
+                const l = m.p.length();
+                if (nytt || l < a || l > b) {
+                    const rr = Math.cbrt(a ** 3 + Math.random() * (b ** 3 - a ** 3));
+                    m.p.copy(slumpaRiktning()).multiplyScalar(rr);
+                }
+            });
+            molekyler.in.forEach(m => { if (nytt || m.p.length() > R * 0.92) m.p.copy(slumpaRiktning()).multiplyScalar(Math.cbrt(Math.random()) * R * 0.9); });
+        }
+        function stegaMolekyler(dt) {
+            const R = r(), { a, b } = skal();
+            const nUt = Math.round(NUT * st.p0 / P_HAV), nIn = antalIn();
+            const pu = molUt.geometry.attributes.position, pi = molIn.geometry.attributes.position;
+            const studs = (m, lo, hi) => {
+                m.p.addScaledVector(m.v, dt);
+                const l = m.p.length();
+                if ((l > hi && m.v.dot(m.p) > 0) || (l < lo && m.v.dot(m.p) < 0)) {
+                    const n = m.p.clone().normalize();
+                    m.v.addScaledVector(n, -2 * m.v.dot(n));
+                }
+            };
+            for (let i = 0; i < nUt; i++) {
+                const m = molekyler.ut[i];
+                studs(m, a, b);
+                pu.setXYZ(i, m.p.x, m.p.y + SOM_Y, m.p.z);
+            }
+            for (let i = 0; i < nIn; i++) {
+                const m = molekyler.in[i];
+                studs(m, 0, R * 0.92);
+                pi.setXYZ(i, m.p.x, m.p.y + SOM_Y, m.p.z);
+            }
+            pu.needsUpdate = true; pi.needsUpdate = true;
+            molUt.geometry.setDrawRange(0, nUt);
+            molIn.geometry.setDrawRange(0, nIn);
+            // Molekylerna syns bara på nära håll; i helvyn blir de bara brus
+            const nara = camera.position.distanceTo(new THREE.Vector3(0, SOM_Y, 0)) < 6.5;
+            molUt.visible = st.show.molek && nara;
+            molIn.visible = st.show.molek && st.show.snitt && nara;
+        }
+
+        // ── Vyer ──
+        const VYER = {
+            hel:  { pos: [3.0, 5.6, 12.4], mal: [0.5, 3.4, 0] },
+            nara: { pos: [0.45, SOM_Y + 0.45, 5.0], mal: [0.3, SOM_Y - 0.05, 0] },
+            fram: { pos: [0.5, 3.8, 13.4], mal: [0.5, 3.5, 0] },
+        };
+        let tween = null, aktivVy = 'hel';
+        function gaTillVy(namn, direkt) {
+            aktivVy = namn;
+            document.querySelectorAll('#vyer button').forEach(b => b.classList.toggle('active', b.dataset.vy === namn));
+            const v = VYER[namn];
+            const p1 = new THREE.Vector3(...v.pos), m1 = new THREE.Vector3(...v.mal);
+            if (namn === 'nara') { const R = r(); p1.sub(m1).multiplyScalar(R / 0.5 * 0.8 + 0.2).add(m1); }
+            // På en smal (stående) skärm backar kameran så att hela bredden ryms
+            const smal = Math.max(1, (namn === 'nara' ? 1.0 : 1.25) / Math.max(0.3, camera.aspect));
+            p1.sub(m1).multiplyScalar(smal).add(m1);
+            if (direkt) { camera.position.copy(p1); controls.target.copy(m1); controls.update(); return; }
+            tween = { t0: performance.now(), dur: 900, p0: camera.position.clone(), p1, m0: controls.target.clone(), m1 };
+        }
+        document.querySelectorAll('#vyer button').forEach(b => b.addEventListener('click', () => gaTillVy(b.dataset.vy)));
+
+        // ── Handlingar ──
+        function pumpa(n) {
+            if (!st.fast) { flash('Sätt ihop kloten först: höj lyftbordet.'); return; }
+            st.kranOppen = false; stallVentil();
+            st.slag += n;
+        }
+        function slagKlart() {
+            const V = volym();
+            const pmin = Math.min(P_MIN, st.p0);
+            if (st.p > pmin) st.p = pmin + (st.p - pmin) * V / (V + PUMP_V);
+            st.harPumpat = true;
+        }
+        function vaxlaBord() {
+            st.bordUppe = !st.bordUppe;
+            if (st.bordUppe && !st.fast) st.slapptOrsak = null;
+        }
+        function oppnaKran() {
+            if (!st.fast) return;
+            st.kranOppen = !st.kranOppen;
+            if (st.kranOppen) st.slag = 0;
+            stallVentil();
+        }
+        function stallVentil() {
+            if (ventilSpak) ventilSpak.rotation.z = st.kranOppen ? 0 : Math.PI / 2;
+        }
+        let flashTill = 0, flashText = '';
+        function flash(t) { flashText = t; flashTill = performance.now() + 2600; }
+
+        function sattIhop() {
+            st.fast = true; st.fall = 0; st.vy = 0; st.p = st.p0; st.kranOppen = false; stallVentil();
+            st.slapptVid = null; st.slapptOrsak = null;
+        }
+        function nollstall() {
+            st.bordUppe = true; bordH = BORD_UPPE; st.slag = 0;
+            sattIhop();
+            st.harPumpat = false;
+        }
+
+        // ── Klick i scenen ──
+        const ray = new THREE.Raycaster(), mus = new THREE.Vector2();
+        const klickbara = () => [pumpG, slang, bordG, ventil].filter(Boolean);
+        function traff(e) {
+            const b = renderer.domElement.getBoundingClientRect();
+            mus.set(((e.clientX - b.left) / b.width) * 2 - 1, -((e.clientY - b.top) / b.height) * 2 + 1);
+            ray.setFromCamera(mus, camera);
+            const t = ray.intersectObjects(klickbara(), true)[0];
+            return t ? t.object.userData.klick : null;
+        }
+        let ned = null;
+        mount.addEventListener('pointerdown', e => { ned = { x: e.clientX, y: e.clientY }; });
+        mount.addEventListener('pointerup', e => {
+            if (!ned) return;
+            const flytt = Math.hypot(e.clientX - ned.x, e.clientY - ned.y);
+            ned = null;
+            if (flytt > 6) return;
+            const k = traff(e);
+            if (k === 'pump') pumpa(1);
+            else if (k === 'kran') oppnaKran();
+            else if (k === 'bord') vaxlaBord();
+            else return;
+            uppdateraPanel(true);
+        });
+        let hoverT = 0;
+        mount.addEventListener('pointermove', e => {
+            if (e.buttons) return;
+            const nu = performance.now(); if (nu - hoverT < 60) return; hoverT = nu;
+            mount.classList.toggle('klickbar', !!traff(e));
+        });
+
+        // ── Panelen ──
+        const platserEl = $('platser');
+        PLATSER.forEach(pl => {
+            const b = document.createElement('button');
+            b.dataset.id = pl.id;
+            b.innerHTML = `${pl.namn}<span class="sub">${pl.sub}, ${kPa(pl.p0)}</span>`;
+            b.addEventListener('click', () => valjPlats(pl.id));
+            platserEl.appendChild(b);
+        });
+        function valjPlats(id) {
+            const pl = PLATSER.find(x => x.id === id);
+            st.plats = id; st.p0 = pl.p0;
+            if (!st.fast) st.p = st.p0;
+            PLATSER.forEach(x => wrap.classList.remove(x.klass));
+            wrap.classList.add(pl.klass);
+            platserEl.querySelectorAll('button').forEach(b => b.classList.toggle('active', b.dataset.id === id));
+            uppdateraPanel(true);
+        }
+        $('kPump1').addEventListener('click', () => { pumpa(1); uppdateraPanel(true); });
+        $('kPump10').addEventListener('click', () => { pumpa(10); uppdateraPanel(true); });
+        $('kBord').addEventListener('click', () => { vaxlaBord(); uppdateraPanel(true); });
+        $('kKran').addEventListener('click', () => { oppnaKran(); uppdateraPanel(true); });
+        $('mReg').addEventListener('input', e => { st.m = +e.target.value; byggVikter(); uppdateraPanel(true); });
+        $('dReg').addEventListener('input', e => {
+            st.d = +e.target.value;
+            nollstall();
+            byggKloten(); byggVikter(); placeraMolekyler(true);
+            if (aktivVy === 'nara') gaTillVy('nara');
+            uppdateraPanel(true);
+        });
+
+        const FORSOK = [
+            { namn: 'Klassrumsförsöket', text: 'Klot på 10 cm, 30 kg vikter. Pumpa, sänk bordet och öppna kranen.',
+              kor: () => satt({ d: 10, m: 30, plats: 'hav' }) },
+            { namn: 'Hur mycket håller de?', text: 'Väl pumpade klot och 75 kg på hängaren. Klarar de det?',
+              kor: () => satt({ d: 10, m: 75, plats: 'hav', pumpat: 25, bord: false }) },
+            { namn: 'Upp på Mount Everest', text: '40 kg håller vid havsnivån. Byt plats till Mount Everest.',
+              kor: () => satt({ d: 10, m: 40, plats: 'hav', pumpat: 25, bord: false }) },
+            { namn: 'Till Månen', text: 'Tomma klot utan vikter. Byt plats till Månen.',
+              kor: () => satt({ d: 10, m: 0, plats: 'hav', pumpat: 25, bord: false }) },
+            { namn: 'Dubbel diameter', text: 'Pumpade klot på 12 cm. Läs av största massan, byt till 6 cm och pumpa igen. Hur stor del av massan bär de små kloten?',
+              kor: () => satt({ d: 12, m: 60, plats: 'hav', pumpat: 25, bord: false }) },
+        ];
+        function satt(o) {
+            st.d = o.d; st.m = o.m;
+            $('dReg').value = o.d; $('mReg').value = o.m;
+            valjPlats(o.plats);
+            nollstall();
+            byggKloten(); byggVikter(); placeraMolekyler(true);
+            if (o.pumpat) { for (let i = 0; i < o.pumpat; i++) slagKlart(); }
+            if (o.bord === false) { st.bordUppe = false; }
+            gaTillVy('hel');
+            uppdateraPanel(true);
+        }
+        const forsokEl = $('forsok');
+        FORSOK.forEach(f => {
+            const b = document.createElement('button');
+            b.innerHTML = `<strong>${f.namn}</strong>${f.text}`;
+            b.addEventListener('click', f.kor);
+            forsokEl.appendChild(b);
+        });
+
+        $('tMolek').addEventListener('change', e => { st.show.molek = e.target.checked; });
+        $('tPilar').addEventListener('change', e => { st.show.pilar = e.target.checked; });
+        $('tSnitt').addEventListener('change', e => { st.show.snitt = e.target.checked; stallSnitt(); });
+        $('tTyngd').addEventListener('change', e => { st.show.tyngd = e.target.checked; });
+        function stallSnitt() {
+            const plan = st.show.snitt ? [snittPlan] : [];
+            [mKlot, mKlotInne].forEach(m => { m.clippingPlanes = plan; m.needsUpdate = true; });
+        }
+        $('stHide').addEventListener('click', () => { $('sceneToggles').style.display = 'none'; $('stShow').style.display = ''; });
+        $('stShow').addEventListener('click', () => { $('sceneToggles').style.display = ''; $('stShow').style.display = 'none'; });
+
+        // Snittbilden i panelen
+        function ritaSnitt() {
+            const svg = $('svgSnitt');
+            const cx = 160, cy = 104, R = 58;
+            const gap = st.fast ? 0 : Math.min(26, st.fall * 22 + 8);
+            const tatUt = st.p0 / P_HAV, tatIn = st.p / P_HAV;
+            const L = 26;
+            let s = `<rect x="0" y="0" width="320" height="214" rx="8" fill="rgba(15,92,116,${0.04 + 0.12 * tatUt})"/>`;
+            // insidan: luftens täthet
+            s += `<path d="M ${cx - R} ${cy - gap / 2} A ${R} ${R} 0 0 1 ${cx + R} ${cy - gap / 2} Z" fill="rgba(247,242,232,1)"/>`;
+            s += `<path d="M ${cx - R} ${cy + gap / 2} A ${R} ${R} 0 0 0 ${cx + R} ${cy + gap / 2} Z" fill="rgba(247,242,232,1)"/>`;
+            s += `<path d="M ${cx - R} ${cy - gap / 2} A ${R} ${R} 0 0 1 ${cx + R} ${cy - gap / 2} Z" fill="rgba(15,92,116,${0.04 + 0.12 * tatIn})"/>`;
+            s += `<path d="M ${cx - R} ${cy + gap / 2} A ${R} ${R} 0 0 0 ${cx + R} ${cy + gap / 2} Z" fill="rgba(15,92,116,${0.04 + 0.12 * tatIn})"/>`;
+            // skalen
+            s += `<path d="M ${cx - R} ${cy - gap / 2} A ${R} ${R} 0 0 1 ${cx + R} ${cy - gap / 2}" fill="none" stroke="#a9832f" stroke-width="5"/>`;
+            s += `<path d="M ${cx - R} ${cy + gap / 2} A ${R} ${R} 0 0 0 ${cx + R} ${cy + gap / 2}" fill="none" stroke="#a9832f" stroke-width="5"/>`;
+            // flänsar
+            [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([sx, sy]) => {
+                const x = sx < 0 ? cx - R - 10 : cx + R - 1;
+                const y = sy < 0 ? cy - gap / 2 - 4 : cy + gap / 2;
+                s += `<rect x="${x}" y="${y}" width="11" height="4" fill="#a9832f"/>`;
+            });
+            // snittytan
+            if (st.fast) s += `<line x1="${cx - R}" y1="${cy}" x2="${cx + R}" y2="${cy}" stroke="#0f1620" stroke-width="1.6" stroke-dasharray="5 4"/>`;
+            const pilS = (x1, y1, x2, y2, col) => {
+                const dx = x2 - x1, dy = y2 - y1, l = Math.hypot(dx, dy);
+                if (l < 3) return '';
+                const ux = dx / l, uy = dy / l, h = Math.min(8, l * 0.6);
+                const bx = x2 - ux * h, by = y2 - uy * h;
+                return `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${bx.toFixed(1)}" y2="${by.toFixed(1)}" stroke="${col}" stroke-width="2.6" stroke-linecap="butt"/>` +
+                    `<polygon points="${x2.toFixed(1)},${y2.toFixed(1)} ${(bx - uy * 4.5).toFixed(1)},${(by + ux * 4.5).toFixed(1)} ${(bx + uy * 4.5).toFixed(1)},${(by - ux * 4.5).toFixed(1)}" fill="${col}"/>`;
+            };
+            [30, 60, 90, 120, 150, 210, 240, 270, 300, 330].forEach(gr => {
+                const a = gr * Math.PI / 180, ux = Math.cos(a), uy = -Math.sin(a);
+                const oy = uy < 0 ? -gap / 2 : gap / 2;
+                const lu = L * tatUt, li = L * tatIn;
+                const r0 = R + 4;
+                s += pilS(cx + ux * (r0 + lu), cy + oy + uy * (r0 + lu), cx + ux * r0, cy + oy + uy * r0, BLA);
+                const r1 = R - 5;
+                s += pilS(cx + ux * (r1 - li), cy + oy + uy * (r1 - li), cx + ux * r1, cy + oy + uy * r1, ORANGE);
+            });
+            s += `<text x="12" y="20" font-size="12.5" font-family="Poppins, sans-serif" fill="#0f1620"><tspan font-style="italic">p</tspan><tspan font-size="9" dy="3">0</tspan><tspan dy="-3"> = ${kPa(st.p0)}</tspan></text>`;
+            s += `<text x="308" y="204" text-anchor="end" font-size="12.5" font-family="Poppins, sans-serif" fill="#0f1620"><tspan font-style="italic">p</tspan><tspan font-size="9" dy="3">inne</tspan><tspan dy="-3"> = ${kPa(st.p)}</tspan></text>`;
+            svg.innerHTML = s;
+        }
+
+        let senastPanel = 0;
+        function uppdateraPanel(nu) {
+            const t = performance.now();
+            if (!nu && t - senastPanel < 70) return;
+            senastPanel = t;
+            const F = kraftF(), FG = tyngd(), A = area();
+            const maxF = Math.max(F, FG, 50);
+            $('bF').textContent = newton(Math.max(0, F));
+            $('bG').textContent = newton(FG);
+            $('barF').style.width = (100 * Math.max(0, F) / maxF).toFixed(1) + '%';
+            $('barG').style.width = (100 * FG / maxF).toFixed(1) + '%';
+            $('vP0').textContent = kPa(st.p0);
+            $('vP').textContent = kPa(st.p);
+            $('vDp').textContent = kPa(st.p0 - st.p);
+            $('vA').textContent = fmt(A * 1e4, 1) + NBSP + 'cm²';
+            $('vM').textContent = fmt(massa(), 1) + NBSP + 'kg';
+            $('vMmax').textContent = fmt(Math.max(0, F) / g, 1) + NBSP + 'kg';
+            $('siP').textContent = kPa(st.p);
+            $('siF').textContent = newton(Math.max(0, F));
+            $('siG').textContent = newton(FG);
+            $('mVarde').textContent = st.m + NBSP + 'kg';
+            $('dVarde').textContent = st.d + NBSP + 'cm';
+
+            // status
+            const el = $('status');
+            let txt, klass = '';
+            const last = !st.bordUppe && bordH < BORD_UPPE - 0.01;
+            if (!st.fast) {
+                klass = 'slappt';
+                if (st.slapptOrsak === 'inre') txt = 'Trycket inuti är större än lufttrycket utanför, så kloten trycks isär av sig själva.';
+                else if (st.slapptVid != null) txt = `Kloten släppte när trycket inuti hade stigit till ${kPa(st.slapptVid)}. Då blev lufttryckets kraft mindre än tyngden ${newton(FG)}.`;
+                else txt = `Lufttryckets kraft räckte inte till tyngden ${newton(FG)}, så vikterna föll. Höj lyftbordet för att sätta ihop kloten igen.`;
+            } else if (!last) {
+                txt = st.p0 - st.p < 0.5
+                    ? 'Kloten är fulla av luft. Trycket är lika stort inuti som utanför, så ingenting håller ihop dem. Pumpa ut luften.'
+                    : `Lyftbordet bär vikterna. Kloten kan bära ${fmt(Math.max(0, F) / g, 1)}${NBSP}kg. Sänk bordet och se om de håller.`;
+            } else {
+                klass = 'haller';
+                txt = `Kloten håller. Lufttryckets kraft ${newton(F)} är större än tyngden ${newton(FG)}.`;
+                if (st.kranOppen) txt += ' Luft strömmar in genom kranen.';
+            }
+            if (performance.now() < flashTill) txt = flashText;
+            el.className = 'status ' + klass;
+            el.textContent = txt;
+
+            // knappar
+            $('kBord').textContent = st.bordUppe ? 'Sänk lyftbordet' : (st.fast ? 'Höj lyftbordet' : 'Höj bordet och sätt ihop');
+            $('kKran').textContent = st.kranOppen ? 'Stäng kranen' : 'Öppna kranen';
+            $('kKran').disabled = !st.fast;
+            $('kPump1').disabled = !st.fast; $('kPump10').disabled = !st.fast;
+
+            // steg
+            const s1 = st.p0 - st.p > 5, s2 = last && st.fast, s3 = !st.fast && st.slapptVid != null;
+            const steg = [s1 || s2 || s3, s2 || s3, s3];
+            const aktiv = steg.indexOf(false);
+            ['steg1', 'steg2', 'steg3'].forEach((id, i) => {
+                $(id).classList.toggle('klar', steg[i]);
+                $(id).classList.toggle('aktiv', i === aktiv);
+            });
+
+            // ledtext
+            let hint;
+            if (!st.fast) hint = 'Klicka på lyftbordet för att höja det och sätta ihop kloten igen.';
+            else if (!s1) hint = 'Klicka på vakuumpumpen för att pumpa ut luften.';
+            else if (!last) hint = 'Klicka på lyftbordet för att sänka det.';
+            else hint = st.kranOppen ? 'Luft strömmar in. Klicka på kranen för att stänga den.' : 'Klicka på kranen för att släppa in luft.';
+            $('hint').textContent = hint;
+
+            // Guericke
+            const AG = Math.PI * 0.25 ** 2, FGu = (st.p0 - Math.min(st.p0, P_MIN)) * 1000 * AG;
+            $('guericke').innerHTML = st.p0 > 0
+                ? `Med en pump som vår och lufttrycket ${kPa(st.p0)} hade lufttryckets kraft på hans klot blivit ${newton(FGu)}, lika mycket som tyngden av ${fmt(FGu / g / 1000, 1)}${NBSP}ton.`
+                : 'På Månen finns inget lufttryck, och där hade Guerickes klot fallit isär av sig själva.';
+            ritaSnitt();
+        }
+
+        // ── Fullskärm: försöksknapparna, reglagen och platserna flyttar in i rutan ──
+        function storlek() {
+            const w = mount.clientWidth, h = mount.clientHeight;
+            if (!w || !h) return;
+            renderer.setSize(w, h, false);
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+            skalaEtiketter();
+            const staende = w / h < 1.2;
+            if (staende !== senastStaende) { senastStaende = staende; if (!tween) gaTillVy(aktivVy, true); }
+        }
+        let senastStaende = null;
+        new ResizeObserver(storlek).observe(mount);
+        const fsBtn = $('fsBtn');
+        fsBtn.addEventListener('click', () => {
+            if (document.fullscreenElement || document.webkitFullscreenElement) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+            else (wrap.requestFullscreen || wrap.webkitRequestFullscreen).call(wrap);
+        });
+        const hem = { knappar: $('knappar').parentElement, knappEfter: $('knappar').nextElementSibling, reglage: $('reglage'), reglageEfter: $('reglage').nextElementSibling, plats: $('platsBlock') };
+        function vidFullskarm() {
+            const fs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+            $('fsIconExpand').style.display = fs ? 'none' : '';
+            $('fsIconCompress').style.display = fs ? '' : 'none';
+            fsBtn.title = fs ? 'Lämna fullskärm' : 'Fullskärm';
+            if (fs) {
+                $('fsKnappar').appendChild($('knappar'));
+                $('fsReglage').appendChild($('reglage'));
+                $('fsPlatser').appendChild(platserEl);
+            } else {
+                hem.knappar.insertBefore($('reglage'), hem.reglageEfter);
+                hem.knappar.insertBefore($('knappar'), $('reglage'));
+                hem.plats.appendChild(platserEl);
+            }
+            requestAnimationFrame(storlek);
+        }
+        document.addEventListener('fullscreenchange', vidFullskarm);
+        document.addEventListener('webkitfullscreenchange', vidFullskarm);
+
+        // ── Loopen ──
+        const SLAGTID = 0.42;
+        let senast = performance.now();
+        function loop(nu) {
+            requestAnimationFrame(loop);
+            const dt = Math.min(0.05, (nu - senast) / 1000); senast = nu;
+
+            // lyftbordet
+            const malBord = st.bordUppe ? BORD_UPPE : BORD_NERE;
+            if (Math.abs(bordH - malBord) > 1e-4) {
+                const steg = 1.1 * dt;
+                bordH += Math.max(-steg, Math.min(steg, malBord - bordH));
+                bordVev.rotation.z += (malBord > bordH ? -1 : 1) * dt * 9;
+            }
+            stallBord();
+
+            // pumpen
+            if (st.slag > 0 && st.fast) {
+                st.slagT += dt;
+                const f = st.slagT / SLAGTID;
+                kolvG.position.y = 2.2 + 0.55 * Math.sin(Math.PI * Math.min(1, f));
+                if (f >= 1) { st.slagT = 0; st.slag--; slagKlart(); }
+            } else { st.slag = st.fast ? st.slag : 0; st.slagT = 0; kolvG.position.y += (2.2 - kolvG.position.y) * 0.3; }
+
+            // kranen släpper in luft
+            if (st.fast && st.kranOppen) st.p += (st.p0 - st.p) * (1 - Math.exp(-dt / 0.9));
+            if (!st.fast) st.p += (st.p0 - st.p) * (1 - Math.exp(-dt / 0.12));
+
+            // krafterna
+            const F = kraftF(), FG = tyngd();
+            const golv = bordH - BORD_UPPE;      // hur långt ned bordet låter vikterna falla
+            if (st.fast) {
+                const last = golv < -1e-3;
+                if (last && FG > F) {
+                    st.fast = false; st.slapptOrsak = null;
+                    st.slapptVid = st.kranOppen ? st.p : null;
+                    st.kranOppen = false; stallVentil();
+                } else if (F < -1) {
+                    st.fast = false; st.slapptOrsak = 'inre'; st.slapptVid = null; st.kranOppen = false; stallVentil();
+                }
+                st.fall = 0;
+            }
+            if (!st.fast) {
+                st.vy -= 26 * dt;
+                st.fall += st.vy * dt;
+                if (st.fall <= golv) {
+                    st.fall = golv;
+                    st.vy = st.vy < -2 ? -st.vy * 0.18 : 0;
+                }
+                if (st.fall > 0) st.fall = 0;
+                // bordet har lyft tillbaka den undre halvan
+                if (st.bordUppe && golv > -1e-3 && st.fall >= -1e-3) sattIhop();
+            }
+            undreG.position.set(0, SOM_Y + st.fall, 0);
+
+            // tyngdkraftspilen från vikternas tyngdpunkt
+            const yMitt = SOM_Y + st.fall + (BORD_UPPE + HANGPLATTA - SOM_Y + viktTopY) / 2;
+            const L = Math.min(2.6, 0.25 + FG / 900);
+            stallPil(pilG, new THREE.Vector3(0, yMitt, 0), new THREE.Vector3(0, -L, 0));
+            pilG.visible = st.show.tyngd;
+            tpPrick.position.set(0, yMitt, 0); tpPrick.visible = st.show.tyngd;
+            const txt = 'FG' + Math.round(FG);
+            if (txt !== etFGtext) {
+                etFGtext = txt;
+                if (etFG) { scene.remove(etFG); etiketter.splice(etiketter.indexOf(etFG), 1); }
+                etFG = etikett([{ t: 'F', i: true }, { t: 'G', sub: true }, { t: ' = ' + newton(FG) }], { cx: 0, farg: GRON });
+                skalaEtiketter();
+            }
+            etFG.position.set(0.12, SOM_Y + st.fall + viktTopY + 0.85, 0);
+            etFG.visible = st.show.tyngd;
+            etUt.visible = st.show.pilar && st.show.snitt && st.p0 > 1 && aktivVy === 'nara';
+            etIn.visible = st.show.pilar && st.show.snitt && st.p > 3 && aktivVy === 'nara';
+            etBord.visible = etKran.visible = etPump.visible = aktivVy !== 'nara';
+
+            stallPilar();
+            stegaMolekyler(dt);
+            ritaMatare();
+            uppdateraPanel(false);
+
+            if (tween) {
+                const t = Math.min(1, (nu - tween.t0) / tween.dur), e = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+                camera.position.lerpVectors(tween.p0, tween.p1, e);
+                controls.target.lerpVectors(tween.m0, tween.m1, e);
+                if (t >= 1) tween = null;
+            }
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        byggKloten();
+        byggVikter();
+        initMolekyler();
+        valjPlats('hav');
+        storlek();
+        gaTillVy('hel', true);
+        uppdateraPanel(true);
+        requestAnimationFrame(loop);
+        window.__mb = { st, kraftF, tyngd, pumpa, vaxlaBord, oppnaKran, valjPlats, gaTillVy, satt, slagKlart };
     </script>
     <script src="feedback.js" defer></script>
     <script src="sim-dock.js" defer></script>

@@ -1097,10 +1097,10 @@
         );
         const FracL = ({ topLbl, top, botLbl, bot }) => (
             <div className="flex flex-col items-center" style={{ lineHeight: 1.15 }}>
-                <span className="flbl">{topLbl}</span>
-                <span className="fnum" style={{ padding: '0 8px 2px' }}>{top}</span>
-                <span className="fnum" style={{ padding: '2px 8px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bot}</span>
-                <span className="flbl">{botLbl}</span>
+                <span className="flbl brak-etikett">{topLbl}</span>
+                <span className="fnum" style={{ padding: '0 3px 2px' }}>{top}</span>
+                <span className="fnum" style={{ padding: '2px 3px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bot}</span>
+                <span className="flbl brak-etikett">{botLbl}</span>
             </div>
         );
         const FracP = ({ top, bot }) => (
@@ -1111,13 +1111,13 @@
         );
         const FormulaCard = () => (
             <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-8 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
-                <div className="flex items-center gap-x-3">
+                <div className="flex items-center gap-x-2">
                     <Vbl label="Ljudintensitet"><em>I</em></Vbl>
                     <span className="fnum">=</span>
                     <FracL topLbl="Utsänd effekt" top={<em>P</em>} botLbl="Sfärens area"
                            bot={<React.Fragment>4<em>π</em> · <em>r</em><sup style={{ fontSize: 13 }}>2</sup></React.Fragment>} />
                 </div>
-                <div className="flex items-center gap-x-3">
+                <div className="flex items-center gap-x-2">
                     <Vbl label="Ljudnivå"><em>L</em></Vbl>
                     <span className="fnum">=</span>
                     <span className="fnum">10 · lg</span>

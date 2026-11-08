@@ -5,57 +5,73 @@
     <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hastighet-tid-diagram — Fysiklabbet</title>
-    <meta name="description" content="Att läsa acceleration och tillryggalagd sträcka ur ett v-t-diagram.">
+    <meta name="description" content="Dra i punkterna i ett v-t-diagram och se en vagn rulla längs labbänken som grafen säger. Lutningen är accelerationen och arean under grafen är förflyttningen. Med sekant, tangent, genomgångens exempel och ett läge där du testar dig själv.">
     <link rel="canonical" href="https://fysiklabbet.se/fysik1-hastighet-tid-app.html">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Fysiklabbet">
     <meta property="og:title" content="Hastighet-tid-diagram — Fysik nivå 1">
-    <meta property="og:description" content="Att läsa acceleration och tillryggalagd sträcka ur ett v-t-diagram.">
+    <meta property="og:description" content="Dra i punkterna i ett v-t-diagram och se en vagn rulla längs labbänken som grafen säger. Lutningen är accelerationen och arean under grafen är förflyttningen.">
     <meta property="og:url" content="https://fysiklabbet.se/fysik1-hastighet-tid-app.html">
     <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Hastighet-tid-diagram — Fysik nivå 1">
-    <meta name="twitter:description" content="Att läsa acceleration och tillryggalagd sträcka ur ett v-t-diagram.">
+    <meta name="twitter:description" content="Dra i punkterna i ett v-t-diagram och se en vagn rulla längs labbänken som grafen säger. Lutningen är accelerationen och arean under grafen är förflyttningen.">
     <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script>window.__CB = String(Date.now());</script>
     <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
     <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
     <style>
-        .formula-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            font-family: 'Courier New', monospace;
-            font-size: 1.1rem;
-            text-align: center;
-            margin: 0.5rem 0;
+        body { font-family: 'Poppins', sans-serif; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
         }
-        .calc-step {
-            background: #f0f9ff;
-            border-left: 4px solid #3b82f6;
-            padding: 0.75rem;
-            margin: 0.5rem 0;
-            border-radius: 0.25rem;
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 19px; white-space: nowrap; }
+        /* Formelkortet bryts mellan den allmänna formeln och insättningen,
+           aldrig mitt i en av dem. */
+        .fk-grupp { display: inline-flex; align-items: center; gap: 0.75rem; flex-wrap: nowrap; }
+        @media (max-width: 600px) {
+            .formula-card { justify-content: flex-start; }
+            .formula-card .fnum { font-size: 15px; }
+            .fk-grupp { gap: 0.45rem; }
         }
-        .highlight-value {
-            background: #fef3c7;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
-            font-weight: bold;
-            color: #92400e;
+
+        /* Scenen har egen proportion och fyller sin ruta. */
+        .scene-wrap {
+            position: relative; width: 100%; height: auto;
+            border-radius: 12px; overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none; background: #f3eee4;
         }
-        /* Visningsval + rörelsetyp uppe till höger i scenen (normalläge + fullskärm) */
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0; aspect-ratio: auto !important;
+        }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+        /* Bred fullskärm: avläsningen står till vänster, scenen i mitten och
+           inställningsrutan till höger, så att ingenting ligger ovanpå grafen. */
+        .scene-wrap.fs-bred > svg { margin-left: 372px; width: calc(100% - 372px - 300px); }
+        .fs-vanster {
+            position: absolute; left: 14px; top: 66px; bottom: 14px; width: 346px;
+            z-index: 5; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;
+        }
+
         .scene-toggles {
             position: absolute; top: 14px; right: 14px; z-index: 6;
             background: rgba(246,242,234,0.94);
@@ -64,7 +80,7 @@
             border-radius: 10px; padding: 9px 13px;
             display: flex; flex-direction: column; gap: 3px;
             box-shadow: 0 2px 8px rgba(15,22,32,0.12);
-            max-width: 230px;
+            max-width: 252px;
         }
         .scene-toggles .st-title {
             font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
@@ -75,13 +91,78 @@
             display: flex; align-items: center; gap: 7px; cursor: pointer;
             font-size: 13px; color: var(--lab-ink, #0f1620);
         }
-        .scene-toggles input {
+        .scene-toggles label.av { opacity: 0.45; cursor: not-allowed; }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
             width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
         }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles select {
+            font-size: 13px; padding: 4px 6px; border-radius: 6px; width: 100%;
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+        .scene-toggles .st-panels { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease; font-size: 14px;
+        }
+        .btn-toggle:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle:disabled { opacity: 0.45; cursor: not-allowed; }
+        .btn-prim { background: var(--lab-accent, #c8324a); color: #fff; border-color: var(--lab-accent, #c8324a); }
+        .btn-prim:hover:not(:disabled) { filter: brightness(1.08); }
+        .styr { display: flex; flex-wrap: wrap; gap: 8px; }
+        .styr .btn-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 7px; }
+        .styr .btn-steg { flex: none; width: 46px; padding-left: 0; padding-right: 0; }
+        .styr .btn-spela { flex: 1 1 140px; }
+        .styr .btn-om { flex: 1 1 100px; }
+
+        .seg { display: grid; gap: 1px; border-radius: 9px; overflow: hidden;
+               border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+               background: var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .seg button {
+            padding: 8px 6px; font-weight: 600; cursor: pointer; font-size: 13px;
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620); border: none;
+        }
+        .seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+        .seg button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        .forsok { display: flex; flex-direction: column; gap: 6px; }
+        .forsok button {
+            text-align: left; padding: 7px 11px; border-radius: 8px; cursor: pointer;
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            font-weight: 600; font-size: 13.5px; transition: all 0.15s ease;
+        }
+        .forsok button:hover { border-color: var(--lab-accent, #c8324a); }
+        .forsok button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); border-color: var(--lab-ink, #0f1620); }
+        .anm { font-size: 12.5px; line-height: 1.45; color: var(--lab-ink-soft, #3a4151); }
+
+        .rd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .rd { text-align: center; }
+        .rd b { display: block; font-size: 16px; font-weight: 700; color: var(--lab-ink); white-space: nowrap; }
+        .rd span { font-size: 11.5px; color: var(--lab-ink-muted, #5a6170); }
+        .txt-in { width: 92px; padding: 4px 8px; border-radius: 6px; font-size: 14px; text-align: right;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: var(--lab-bg, #f3eee4); font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+        .svar-ok { border-left: 4px solid #2f8f4e; padding-left: 10px; }
+        .svar-fel { border-left: 4px solid #c8324a; padding-left: 10px; }
+        .fraga { font-size: 14.5px; font-weight: 600; color: var(--lab-ink); line-height: 1.4; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
     </style>
 </head>
-<body class="bg-gray-50 lab-sim">
-        <div class="lab-topbar lab-topbar--on-sim">
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
         <div class="lab-topbar-inner">
             <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
         </div>
@@ -153,975 +234,1111 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect, useRef } = React;
+        const { useState, useEffect, useRef, useMemo, useReducer } = React;
 
-        // Formatera tal med komma som decimaltecken (svensk standard)
-        const formatNumber = (num, decimals = 1) => {
-            return num.toFixed(decimals).replace('.', ',');
+        // ═══════════════════════════════════════════════
+        //  Hastighet-tid-diagram (fy1-2.5)
+        //
+        //  Grafen byggs av punkter som eleven drar i. En vagn på en labbänk
+        //  rullar precis som grafen säger: lutningen är accelerationen och
+        //  arean mellan grafen och t-axeln är förflyttningen (Δs), som fylls
+        //  i medan vagnen rullar. Beteckningarna följer genomgången:
+        //  a = Δv/Δt = (v₂ − v₁)/(t₂ − t₁), förflyttning Δs, sträcka s.
+        // ═══════════════════════════════════════════════
+
+        const tr = (s, v) => v ? s.replace(/\{(\w+)\}/g, (m, k) => v[k] != null ? v[k] : m) : s;
+
+        // Decimalkomma, äkta minustecken, exakt noll utan decimaler
+        const fmt = (num, d = 1) => {
+            if (num === null || num === undefined || !isFinite(num)) return '–';
+            const s = num.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',').replace('-', '−');
+        };
+        // Som fmt men utan nollor i slutet (6, 6,5, −1,25)
+        const fmtk = (num, d = 2) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            return String(parseFloat(s)).replace('.', ',').replace('-', '−');
+        };
+        // Ett negativt tal efter ett minustecken får en parentes
+        const par = (s) => s.startsWith('−') ? '(' + s + ')' : s;
+
+        const TAX = 24;            // tidsaxelns längd (s)
+        const VMIN = -15, VMAX = 20;
+        const DT = 0.01;           // tabellens tidssteg
+        const SNAP = 0.5;
+        const snap = (x) => Math.round(x / SNAP) * SNAP;
+        const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+
+        const COL = {
+            ink: '#0f1620',
+            v: '#2563c9',          // grafen och hastighetspilen
+            axel: '#38bdf8',
+            pos: 'rgba(37,99,201,0.20)', posKant: 'rgba(37,99,201,0.55)',
+            neg: 'rgba(200,50,74,0.20)', negKant: 'rgba(200,50,74,0.6)',
+            sekant: '#2f8f4e',
+            tangent: '#c2410c',
+            ds: '#0f766e',
+            mark: '#c8324a',
         };
 
-        // Kompakt reglage-rad för inställningsrutan uppe till höger i
-        // fullskärm: etikett + värde på en rad, glidaren under. Bottenpanelen
-        // (.fs-controls) migrerades hit eftersom den låg ovanpå grafens
-        // negativa v-område (placeringsregeln, omskriven 2026-08-31).
-        const StSlider = ({ label, value, min, max, step, unit, onChange, decimals = 1 }) => (
-            <div className="st-slider">
-                <div className="st-slider-top">
-                    <span>{label}</span>
-                    <span style={{ whiteSpace: 'nowrap', fontWeight: 600, color: 'var(--lab-ink, #0f1620)' }}>
-                        {formatNumber(value, decimals)} {unit}
+        // ── Modellen: hastigheten ur punkterna ──
+        // Raka linjer mellan punkterna, eller en mjuk kurva (monoton kubisk
+        // Hermite, Fritsch–Carlson) som aldrig slår över punkterna.
+        const byggModell = (knots, mjuk) => {
+            const n = knots.length;
+            const tEnd = knots[n - 1].t;
+            const seg = (t) => {
+                let k = 0;
+                while (k < n - 2 && t >= knots[k + 1].t) k++;
+                return k;
+            };
+            let m = null;
+            if (mjuk && n > 2) {
+                const d = [];
+                for (let k = 0; k < n - 1; k++) d.push((knots[k + 1].v - knots[k].v) / (knots[k + 1].t - knots[k].t));
+                m = new Array(n);
+                m[0] = d[0]; m[n - 1] = d[n - 2];
+                for (let k = 1; k < n - 1; k++) m[k] = d[k - 1] * d[k] <= 0 ? 0 : (d[k - 1] + d[k]) / 2;
+                for (let k = 0; k < n - 1; k++) {
+                    if (d[k] === 0) { m[k] = 0; m[k + 1] = 0; continue; }
+                    const al = m[k] / d[k], be = m[k + 1] / d[k];
+                    const r = al * al + be * be;
+                    if (r > 9) { const ta = 3 / Math.sqrt(r); m[k] = ta * al * d[k]; m[k + 1] = ta * be * d[k]; }
+                }
+            }
+            const vAt = (t) => {
+                t = clamp(t, 0, tEnd);
+                const k = seg(t);
+                const a = knots[k], b = knots[k + 1];
+                const h = b.t - a.t, s = (t - a.t) / h;
+                if (!m) return a.v + (b.v - a.v) * s;
+                const s2 = s * s, s3 = s2 * s;
+                return (2 * s3 - 3 * s2 + 1) * a.v + (s3 - 2 * s2 + s) * h * m[k] + (-2 * s3 + 3 * s2) * b.v + (s3 - s2) * h * m[k + 1];
+            };
+            const aAt = (t) => {
+                t = clamp(t, 0, tEnd);
+                const k = seg(t);
+                const a = knots[k], b = knots[k + 1];
+                const h = b.t - a.t, s = (t - a.t) / h;
+                if (!m) return (b.v - a.v) / h;
+                const s2 = s * s;
+                return ((6 * s2 - 6 * s) * a.v + (3 * s2 - 4 * s + 1) * h * m[k] + (-6 * s2 + 6 * s) * b.v + (3 * s2 - 2 * s) * h * m[k + 1]) / h;
+            };
+            // Tabell: förflyttning X och sträcka S från t = 0
+            const N = Math.round(tEnd / DT);
+            const V = new Float64Array(N + 1), X = new Float64Array(N + 1), S = new Float64Array(N + 1);
+            for (let i = 0; i <= N; i++) V[i] = vAt(i * DT);
+            for (let i = 1; i <= N; i++) {
+                const v0 = V[i - 1], v1 = V[i];
+                X[i] = X[i - 1] + (v0 + v1) / 2 * DT;
+                let abs;
+                if (v0 * v1 >= 0) abs = Math.abs(v0 + v1) / 2 * DT;
+                else { const f = Math.abs(v0) / (Math.abs(v0) + Math.abs(v1)); abs = (Math.abs(v0) * f + Math.abs(v1) * (1 - f)) / 2 * DT; }
+                S[i] = S[i - 1] + abs;
+            }
+            const look = (arr, t) => {
+                t = clamp(t, 0, tEnd);
+                const f = t / DT, i = Math.min(N - 1, Math.floor(f));
+                if (N === 0) return 0;
+                const w = f - i;
+                return arr[i] * (1 - w) + arr[i + 1] * w;
+            };
+            let xmin = 0, xmax = 0;
+            for (let i = 0; i <= N; i++) { if (X[i] < xmin) xmin = X[i]; if (X[i] > xmax) xmax = X[i]; }
+            return { knots, mjuk: !!m, tEnd, vAt, aAt, xAt: (t) => look(X, t), sAt: (t) => look(S, t), xmin, xmax };
+        };
+
+        // Exakta areabitar för raka linjer (till gissa-läget): delas vid t-axeln
+        const areaBitar = (knots, tSlut) => {
+            const bitar = [];
+            for (let k = 0; k < knots.length - 1; k++) {
+                const a = knots[k], b = knots[k + 1];
+                if (a.t >= tSlut) break;
+                const tb = Math.min(b.t, tSlut);
+                const vb = a.v + (b.v - a.v) * (tb - a.t) / (b.t - a.t);
+                if (a.v * vb < 0) {
+                    const tc = a.t + (0 - a.v) / (vb - a.v) * (tb - a.t);
+                    bitar.push({ t0: a.t, t1: tc, A: a.v * (tc - a.t) / 2 });
+                    bitar.push({ t0: tc, t1: tb, A: vb * (tb - tc) / 2 });
+                } else {
+                    bitar.push({ t0: a.t, t1: tb, A: (a.v + vb) / 2 * (tb - a.t) });
+                }
+            }
+            return bitar.filter((b) => Math.abs(b.A) > 1e-9);
+        };
+
+        // Ett snyggt steg för linjalens skala
+        const snyggtSteg = (span) => {
+            const rå = span / 6;
+            const p = Math.pow(10, Math.floor(Math.log10(rå)));
+            const f = rå / p;
+            return (f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10) * p;
+        };
+
+        // ── Färdiga försök ──
+        const FORSOK = [
+            { id: 'konstant-v', namn: 'Konstant hastighet', knots: [[0, 8], [20, 8]],
+              text: 'Grafen är vågrät, så lutningen och accelerationen är 0. Arean är en rektangel: 8 m/s · 20 s = 160 m. Prickarna på banan ligger på lika stort avstånd, eftersom vagnen rullar lika långt varje sekund.' },
+            { id: 'konstant-a', namn: 'Konstant acceleration från stillastående', knots: [[0, 0], [10, 20]],
+              text: 'Grafen är en rät linje, så accelerationen är konstant: <em>a</em> = 20 m/s / 10 s = 2 m/s². Arean är en triangel, 10 s · 20 m/s / 2 = 100 m. Avståndet mellan prickarna växer för varje sekund.' },
+            { id: 'parkering', namn: 'Bilen på parkeringen (Exempel 1)', knots: [[0, 16], [5, 16], [13, 6], [17, 6], [21, 0]], sekant: [5, 13],
+              text: 'Exemplet i genomgången. Den gröna sekanten ligger på linjen mellan 5 s och 13 s, där bilen bromsar med <em>a</em> = (6 − 16)/(13 − 5) = −1,25 m/s². Kör hela förloppet: arean och förflyttningen blir 204 m.' },
+            { id: 'fram-tillbaka', namn: 'Fram och tillbaka (Exempel 2)', knots: [[0, 10], [10, -10]], visa: { area: true },
+              text: 'Exemplet i genomgången. Hastigheten byter tecken vid 5 s och vagnen rullar tillbaka. Arean ovanför och under <em>t</em>-axeln är lika stora, så förflyttningen blir 0 men sträckan 50 m.' },
+            { id: 'backa', namn: 'Bromsa, stanna och backa', knots: [[0, 12], [6, 0], [9, 0], [13, -8], [17, -8], [20, 0]],
+              text: 'Vagnen bromsar in, står still i tre sekunder och backar sedan. Under <em>t</em>-axeln räknas arean negativ: förflyttningen blir 36 − 60 = −24 m, alltså 24 m bakom starten, medan sträckan blir 96 m.' },
+            { id: 'kurva', namn: 'Varierande acceleration', knots: [[0, 0], [4, 9], [8, 14], [12, 16], [16, 17]], mjuk: true, sekant: [2, 10], visa: { sekant: true, tangent: true },
+              text: 'Grafen är en kurva, så accelerationen ändras hela tiden. Medelaccelerationen mellan två tidpunkter är sekantens lutning (grön), och momentanaccelerationen är tangentens lutning (orange). Dra i tidslinjen och se tangenten bli flackare.' },
+        ];
+        const tillKnots = (arr) => arr.map(([t, v]) => ({ t, v }));
+
+        // ── Gissa-läget: slumpade grafer och frågor ──
+        const slump = (a) => a[Math.floor(Math.random() * a.length)];
+        const slumpaGraf = () => {
+            for (let forsok = 0; forsok < 200; forsok++) {
+                const nSeg = slump([2, 3, 3, 4]);
+                const knots = [{ t: 0, v: slump([0, 2, 4, 6, 8, 10, 12]) }];
+                let t = 0;
+                for (let i = 0; i < nSeg; i++) {
+                    t += slump([2, 3, 4, 5, 6]);
+                    knots.push({ t, v: slump([-8, -6, -4, -2, 0, 2, 4, 6, 8, 10, 12, 14, 16]) });
+                }
+                if (t > 22 || t < 8) continue;
+                let lutande = 0;
+                for (let k = 0; k < nSeg; k++) if (knots[k].v !== knots[k + 1].v) lutande++;
+                if (lutande < 1) continue;
+                return knots;
+            }
+            return tillKnots([[0, 4], [4, 12], [10, 12], [14, 0]]);
+        };
+        const slumpaFraga = (knots) => {
+            const n = knots.length;
+            const typer = ['a', 'a', 'ds', 'ds', 'v'];
+            if (n >= 3) typer.push('medel');
+            const korsar = (tj) => areaBitar(knots, tj).some((b) => b.A < 0) && areaBitar(knots, tj).some((b) => b.A > 0);
+            if (korsar(knots[n - 1].t)) typer.push('s', 's', 's');
+            const typ = slump(typer);
+            if (typ === 'a') {
+                const lut = [];
+                for (let k = 0; k < n - 1; k++) if (knots[k].v !== knots[k + 1].v) lut.push(k);
+                const k = slump(lut.length ? lut : [0]);
+                const a = knots[k], b = knots[k + 1];
+                const X = (a.t + b.t) / 2;
+                return { typ, X, k, svar: (b.v - a.v) / (b.t - a.t), enhet: 'm/s²',
+                         text: tr('Bestäm accelerationen vid t = {X} s.', { X: fmtk(X) }), marks: [X] };
+            }
+            if (typ === 'medel') {
+                const i = Math.floor(Math.random() * (n - 2));
+                const j = i + 2 + Math.floor(Math.random() * (n - i - 2));
+                const a = knots[i], b = knots[j];
+                return { typ, i, j, svar: (b.v - a.v) / (b.t - a.t), enhet: 'm/s²',
+                         text: tr('Bestäm medelaccelerationen mellan t = {a} s och t = {b} s.', { a: fmtk(a.t), b: fmtk(b.t) }), marks: [a.t, b.t] };
+            }
+            if (typ === 'v') {
+                // En tidpunkt mitt på en linje där hastigheten går att läsa av (hel m/s)
+                const val = [];
+                for (let k = 0; k < n - 1; k++) for (let X = knots[k].t + 1; X < knots[k + 1].t; X++) {
+                    const v = knots[k].v + (knots[k + 1].v - knots[k].v) * (X - knots[k].t) / (knots[k + 1].t - knots[k].t);
+                    if (Math.abs(v - Math.round(v)) < 1e-9) val.push({ k, X, v });
+                }
+                if (!val.length) return slumpaFraga(knots);
+                const { k, X, v } = slump(val);
+                return { typ, X, k, svar: v, enhet: 'm/s',
+                         text: tr('Vilken hastighet har vagnen vid t = {X} s?', { X: fmtk(X) }), marks: [X] };
+            }
+            const kandidater = [];
+            for (let j = 1; j < n; j++) if (typ !== 's' || korsar(knots[j].t)) kandidater.push(j);
+            const j = slump(kandidater);
+            const tj = knots[j].t;
+            const bitar = areaBitar(knots, tj);
+            const ds = bitar.reduce((s, b) => s + b.A, 0);
+            const s = bitar.reduce((s, b) => s + Math.abs(b.A), 0);
+            return typ === 's'
+                ? { typ, tj, bitar, svar: s, enhet: 'm', text: tr('Hur lång sträcka rullar vagnen från t = 0 till t = {t} s?', { t: fmtk(tj) }), marks: [tj] }
+                : { typ, tj, bitar, svar: ds, enhet: 'm', text: tr('Bestäm vagnens förflyttning från t = 0 till t = {t} s.', { t: fmtk(tj) }), marks: [tj] };
+        };
+        const losning = (q, knots) => {
+            if (q.typ === 'a' || q.typ === 'medel') {
+                const a = q.typ === 'a' ? knots[q.k] : knots[q.i];
+                const b = q.typ === 'a' ? knots[q.k + 1] : knots[q.j];
+                const forst = q.typ === 'a'
+                    ? tr('Mellan t = {a} s och t = {b} s är grafen en rät linje, så accelerationen är konstant och lika med linjens lutning.', { a: fmtk(a.t), b: fmtk(b.t) })
+                    : tr('Medelaccelerationen är sekantens lutning mellan punkterna ({a}, {va}) och ({b}, {vb}).', { a: fmtk(a.t), va: fmtk(a.v), b: fmtk(b.t), vb: fmtk(b.v) });
+                return forst + ' ' + tr('<em>a</em> = (<em>v</em>₂ − <em>v</em>₁)/(<em>t</em>₂ − <em>t</em>₁) = ({vb} − {va})/({b} − {a}) = <b>{s} m/s²</b>.',
+                    { va: par(fmtk(a.v)), vb: fmtk(b.v), a: fmtk(a.t), b: fmtk(b.t), s: fmtk(q.svar) });
+            }
+            if (q.typ === 'v') return tr('Läs av grafen vid t = {X} s: <em>v</em> = <b>{v} m/s</b>.', { X: fmtk(q.X), v: fmtk(q.svar) })
+                + (q.svar < 0 ? ' ' + tr('Minustecknet betyder att vagnen rullar bakåt.') : '');
+            const delar = q.bitar.map((b) => (b.A >= 0 ? '+' : '−') + fmtk(Math.abs(b.A)) + ' m');
+            const intro = tr('Dela in arean mellan grafen och t-axeln i rektanglar och trianglar. Bitarna blir {d}', { d: delar.join(', ') });
+            if (q.typ === 'ds') return intro + ' ' + tr('(arean under t-axeln räknas negativ). Förflyttningen blir Δ<em>s</em> = <b>{s} m</b>.', { s: fmtk(q.svar) });
+            return intro + '. ' + tr('För sträckan räknas alla bitar positiva: <em>s</em> = {sum} = <b>{s} m</b>.',
+                { sum: q.bitar.map((b) => fmtk(Math.abs(b.A))).join(' + '), s: fmtk(q.svar) });
+        };
+
+        // ═══════════════════════════════════════════════
+        //  Scenen: labbänken med vagnen och v-t-diagrammet
+        // ═══════════════════════════════════════════════
+        const layout = (narrow) => narrow
+            ? { W: 440, H: 620, rx0: 18, rx1: 422, railY: 104, dsY: 44, gx0: 52, gx1: 410, gy0: 200, gy1: 580, tick: 4, fs: 14, vpx: 3.6 }
+            : { W: 860, H: 610, rx0: 36, rx1: 596, railY: 120, dsY: 54, gx0: 64, gx1: 828, gy0: 214, gy1: 570, tick: 2, fs: 13, vpx: 5 };
+
+        const Pil = ({ x1, y1, x2, y2, color, w = 3, head = 11 }) => {
+            const dx = x2 - x1, dy = y2 - y1, L = Math.hypot(dx, dy);
+            if (L < 2) return null;
+            const ux = dx / L, uy = dy / L;
+            const h = Math.min(head, L * 0.9);
+            const bx = x2 - ux * h, by = y2 - uy * h;
+            const nx = -uy * h * 0.5, ny = ux * h * 0.5;
+            return (
+                <g>
+                    <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={w} strokeLinecap="butt" />
+                    <polygon points={`${x2},${y2} ${bx + nx},${by + ny} ${bx - nx},${by - ny}`} fill={color} />
+                </g>
+            );
+        };
+
+        const Scen = ({ svgRef, L, M, tc, show, sek, gissa, fraga, klar, valdK, onDown, onMove, onUp }) => {
+            const { W, H, gx0, gx1, gy0, gy1, rx0, rx1, railY, dsY, fs } = L;
+            const X = (t) => gx0 + t / TAX * (gx1 - gx0);
+            const tUrPx = (px) => (px - gx0) / (gx1 - gx0) * TAX;
+            const Y = (v) => gy0 + (VMAX - v) / (VMAX - VMIN) * (gy1 - gy0);
+            const y0 = Y(0);
+            const dolt = gissa && !klar;
+
+            // Grafens bana
+            const graf = useMemo(() => {
+                if (!M.mjuk) return 'M ' + M.knots.map((k) => `${X(k.t).toFixed(1)},${Y(k.v).toFixed(1)}`).join(' L ');
+                const pts = [];
+                const n = Math.max(2, Math.round(M.tEnd / 0.05));
+                for (let i = 0; i <= n; i++) { const t = M.tEnd * i / n; pts.push(`${X(t).toFixed(1)},${Y(M.vAt(t)).toFixed(1)}`); }
+                return 'M ' + pts.join(' L ');
+            }, [M, W]);
+
+            // Arean från 0 till tc, delad i del ovanför och under t-axeln
+            const areor = useMemo(() => {
+                if (!show.area || dolt || tc <= 0) return null;
+                const ts = new Set([0, tc]);
+                for (let t = 0; t < tc; t += 0.05) ts.add(+t.toFixed(4));
+                M.knots.forEach((k) => { if (k.t < tc) ts.add(k.t); });
+                for (let k = 0; k < M.knots.length - 1; k++) {
+                    const a = M.knots[k], b = M.knots[k + 1];
+                    if (!M.mjuk && a.v * b.v < 0) { const t0 = a.t - a.v * (b.t - a.t) / (b.v - a.v); if (t0 < tc) ts.add(t0); }
+                }
+                const lista = [...ts].sort((p, q) => p - q);
+                const sida = (f) => 'M ' + X(0) + ',' + y0 + ' L ' + lista.map((t) => `${X(t).toFixed(1)},${Y(f(M.vAt(t))).toFixed(1)}`).join(' L ') + ` L ${X(tc).toFixed(1)},${y0} Z`;
+                return { pos: sida((v) => Math.max(0, v)), neg: sida((v) => Math.min(0, v)) };
+            }, [M, tc, show.area, dolt, W]);
+
+            const vc = M.vAt(tc), ac = M.aAt(tc);
+
+            // Linjalen längs banan
+            const lo0 = Math.min(0, M.xmin), hi0 = Math.max(M.xmax, lo0 + 10);
+            const steg = snyggtSteg(hi0 - lo0);
+            const lo = Math.floor(lo0 / steg + 1e-9) * steg, hi = Math.ceil(hi0 / steg - 1e-9) * steg;
+            const cx0 = rx0 + 42, cx1 = rx1 - 42;
+            const P = (x) => cx0 + (x - lo) / (hi - lo) * (cx1 - cx0);
+            const xNu = M.xAt(tc);
+            const cx = P(xNu);
+            const ticks = [];
+            for (let x = lo; x <= hi + 1e-9; x += steg) ticks.push(x);
+
+            const xTicks = [];
+            for (let t = L.tick; t <= TAX; t += L.tick) xTicks.push(t);
+            const yTicks = [];
+            for (let v = VMIN; v <= VMAX; v += 5) if (v !== 0) yTicks.push(v);
+
+            // Sekanten
+            let sekant = null;
+            if (show.sekant && !dolt) {
+                const t1 = sek[0], t2 = sek[1];
+                const v1 = M.vAt(t1), v2 = M.vAt(t2);
+                const k = (v2 - v1) / (t2 - t1);
+                const ta = clamp(t1 - 1.5, 0, M.tEnd), tb = clamp(t2 + 1.5, 0, M.tEnd);
+                const clipV = (v) => clamp(v, VMIN, VMAX);
+                const dtLblY = v2 >= v1 ? Y(v1) + fs + 5 : Y(v1) - 7;
+                // Δv-etiketten får inte hamna på t-axelns tal
+                let dvY = (Y(v1) + Y(v2)) / 2 + 4;
+                if (Math.abs(dvY - (y0 + fs / 2)) < fs + 4) dvY = y0 + (v2 + v1 > 0 ? -fs : 2 * fs + 6);
+                // t₁ och t₂: välj den av fyra platser runt punkten som ligger längst från
+                // grafen, sekanten och triangelns sidor
+                const kSek = (Y(v2) - Y(v1)) / (X(t2) - X(t1));
+                const lblPos = [t1, t2].map((t) => {
+                    const px = X(t), py = Y(M.vAt(t));
+                    const kand = [[-13, -11], [13, -11], [-13, 21], [13, 21], [0, -15], [0, 26]];
+                    let bast = null, bastD = -1;
+                    kand.forEach(([dx, dy]) => {
+                        const lx = px + dx, ly = py + dy - fs * 0.35;
+                        let d = Infinity;
+                        for (let o = -12; o <= 12; o += 4) {
+                            const tt = clamp(tUrPx(lx + o), 0, M.tEnd);
+                            d = Math.min(d, Math.abs(Y(M.vAt(tt)) - ly));
+                        }
+                        d = Math.min(d, Math.abs(Y(v1) + kSek * (lx - X(t1)) - ly));
+                        if (lx > X(t1) - 6 && lx < X(t2) + 6) d = Math.min(d, Math.abs(Y(v1) - ly));
+                        if (Math.abs(lx - X(t2)) < 10 && ly > Math.min(Y(v1), Y(v2)) - 6 && ly < Math.max(Y(v1), Y(v2)) + 6) d = 0;
+                        if (d > bastD) { bastD = d; bast = { x: lx, y: py + dy }; }
+                    });
+                    return bast;
+                });
+                sekant = (
+                    <g>
+                        <line x1={X(ta)} y1={Y(clipV(v1 + k * (ta - t1)))} x2={X(tb)} y2={Y(clipV(v1 + k * (tb - t1)))}
+                              stroke={COL.sekant} strokeWidth="2.4" strokeDasharray="7 5" />
+                        <line x1={X(t1)} y1={Y(v1)} x2={X(t2)} y2={Y(v1)} stroke={COL.sekant} strokeWidth="1.8" />
+                        <line x1={X(t2)} y1={Y(v1)} x2={X(t2)} y2={Y(v2)} stroke={COL.sekant} strokeWidth="1.8" />
+                        <text x={(X(t1) + X(t2)) / 2} y={dtLblY} textAnchor="middle" fontSize={fs} fill={COL.sekant} fontWeight="600">
+                            Δ<tspan fontStyle="italic">t</tspan> = {fmtk(t2 - t1)} s
+                        </text>
+                        {Math.abs(v2 - v1) > 0.01 && (
+                            <text x={X(t2) + 7} y={dvY} textAnchor="start" fontSize={fs} fill={COL.sekant} fontWeight="600">
+                                Δ<tspan fontStyle="italic">v</tspan> = {fmtk(v2 - v1)} m/s
+                            </text>
+                        )}
+                        {[0, 1].map((i) => (
+                            <g key={i} style={{ cursor: 'ew-resize' }} onPointerDown={(e) => onDown(e, 'sek' + i)}>
+                                <circle cx={X(sek[i])} cy={Y(M.vAt(sek[i]))} r="16" fill="transparent" />
+                                <circle cx={X(sek[i])} cy={Y(M.vAt(sek[i]))} r="6.5" fill={COL.sekant} stroke={COL.ink} strokeOpacity="0.4" strokeWidth="1" />
+                                <text x={lblPos[i].x} y={lblPos[i].y} textAnchor="middle" fontSize={fs + 1} fill={COL.sekant} fontWeight="700">
+                                    <tspan fontStyle="italic">t</tspan>{i === 0 ? '₁' : '₂'}
+                                </text>
+                            </g>
+                        ))}
+                    </g>
+                );
+            }
+
+            // Tangenten i tidslinjens punkt
+            let tangent = null;
+            if (show.tangent && !dolt) {
+                const ta = Math.max(0, tc - 3.5), tb = Math.min(TAX, tc + 3.5);
+                const vl = (t) => vc + ac * (t - tc);
+                tangent = (
+                    <g>
+                        <line x1={X(ta)} y1={Y(clamp(vl(ta), VMIN, VMAX))} x2={X(tb)} y2={Y(clamp(vl(tb), VMIN, VMAX))}
+                              stroke={COL.tangent} strokeWidth="2.4" strokeDasharray="9 5" />
+                    </g>
+                );
+            }
+
+            const mx = (t) => X(t);
+            return (
+                <svg ref={svgRef} viewBox={`0 0 ${W} ${H}`} role="img"
+                     aria-label="En vagn på en labbänk och ett hastighet-tid-diagram som styr vagnens rörelse"
+                     onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}>
+                    <defs>
+                        <linearGradient id="papper" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stopColor="#f7f2e8" /><stop offset="1" stopColor="#ece3d2" />
+                        </linearGradient>
+                        <linearGradient id="tra" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stopColor="#c99a68" /><stop offset="1" stopColor="#a87947" />
+                        </linearGradient>
+                        <linearGradient id="skena" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stopColor="#e3e7ec" /><stop offset="0.5" stopColor="#b9c1cb" /><stop offset="1" stopColor="#8c96a3" />
+                        </linearGradient>
+                        <linearGradient id="vagn" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stopColor="#d9475d" /><stop offset="1" stopColor="#a82a3e" />
+                        </linearGradient>
+                    </defs>
+                    <rect x="0" y="0" width={W} height={H} fill="url(#papper)" />
+
+                    {/* ── Labbänken ── */}
+                    <rect x={rx0 - 10} y={railY + 32} width={rx1 - rx0 + 20} height="26" rx="3" fill="url(#tra)" />
+                    {[0.22, 0.5, 0.78].map((f, i) => (
+                        <path key={i} d={`M ${rx0 - 6} ${railY + 32 + 26 * f} C ${rx0 + (rx1 - rx0) * 0.3} ${railY + 30 + 26 * f}, ${rx0 + (rx1 - rx0) * 0.6} ${railY + 35 + 26 * f}, ${rx1 + 6} ${railY + 32 + 26 * f}`}
+                              fill="none" stroke="rgba(90,55,25,0.22)" strokeWidth="1" />
+                    ))}
+                    {/* Linjalen med skalan i meter */}
+                    <rect x={rx0} y={railY + 10} width={rx1 - rx0} height="22" fill="#efe4c4" stroke="rgba(15,22,32,0.35)" strokeWidth="1" />
+                    {ticks.map((x, i) => (
+                        <g key={i}>
+                            <line x1={P(x)} y1={railY + 10} x2={P(x)} y2={railY + 18} stroke={COL.ink} strokeWidth="1.2" />
+                            <text x={P(x)} y={railY + 29} textAnchor="middle" fontSize={fs - 2} fill="rgba(15,22,32,0.78)">
+                                {fmtk(x, 1)}{i === ticks.length - 1 ? ' m' : ''}
+                            </text>
+                        </g>
+                    ))}
+                    {ticks.slice(0, -1).map((x, i) => (
+                        <line key={'h' + i} x1={P(x + steg / 2)} y1={railY + 10} x2={P(x + steg / 2)} y2={railY + 14} stroke={COL.ink} strokeWidth="1" />
+                    ))}
+                    {/* Skenan */}
+                    <rect x={rx0} y={railY} width={rx1 - rx0} height="9" rx="2" fill="url(#skena)" stroke="rgba(15,22,32,0.4)" strokeWidth="0.8" />
+                    <rect x={rx0 - 6} y={railY - 14} width="6" height="23" rx="1.5" fill="#5b6472" />
+                    <rect x={rx1} y={railY - 14} width="6" height="23" rx="1.5" fill="#5b6472" />
+
+                    {dolt ? (
+                        <text x={(rx0 + rx1) / 2} y={railY - 24} textAnchor="middle" fontSize={fs + 1} fill="rgba(15,22,32,0.6)" fontStyle="italic">
+                            Vagnen rullar när du har svarat
+                        </text>
+                    ) : (
+                        <g>
+                            {/* Startmärket */}
+                            <line x1={P(0)} y1={dsY - 6} x2={P(0)} y2={railY + 9} stroke="rgba(15,22,32,0.45)" strokeWidth="1.2" strokeDasharray="3 3" />
+                            {/* Prickar en gång i sekunden */}
+                            {show.prickar && Array.from({ length: Math.floor(tc + 1e-6) + 1 }, (_, k) => (
+                                <circle key={k} cx={P(M.xAt(k))} cy={railY + 4.5} r="2.8" fill={COL.ink} />
+                            ))}
+                            {/* Förflyttningen */}
+                            {show.area && Math.abs(P(xNu) - P(0)) > 3 && (
+                                <g>
+                                    <Pil x1={P(0)} y1={dsY} x2={cx} y2={dsY} color={COL.ds} w={2.6} head={10} />
+                                    <text x={(P(0) + cx) / 2} y={dsY - 8} textAnchor="middle" fontSize={fs} fill={COL.ds} fontWeight="600">
+                                        Δ<tspan fontStyle="italic">s</tspan> = {fmt(xNu, 1)} m
+                                    </text>
+                                </g>
+                            )}
+                            {/* Vagnen */}
+                            <g>
+                                <rect x={cx - 34} y={railY - 34} width="68" height="24" rx="4" fill="url(#vagn)" stroke="rgba(15,22,32,0.55)" strokeWidth="1" />
+                                <rect x={cx - 26} y={railY - 40} width="52" height="6" rx="2" fill="#7d1f2f" />
+                                {[-21, 21].map((dx) => (
+                                    <g key={dx}>
+                                        <circle cx={cx + dx} cy={railY - 8} r="8" fill="#2b3340" />
+                                        <circle cx={cx + dx} cy={railY - 8} r="3" fill="#9aa3af" />
+                                    </g>
+                                ))}
+                            </g>
+                            {/* Hastighetspilen börjar i vagnens kant */}
+                            {show.pil && Math.abs(vc) > 0.05 && (() => {
+                                const dir = vc > 0 ? 1 : -1;
+                                const xs = cx + dir * 34, xe = xs + dir * Math.abs(vc) * L.vpx;
+                                const yy = railY - 22;
+                                return (
+                                    <g>
+                                        <Pil x1={xs} y1={yy} x2={xe} y2={yy} color={COL.v} w={3.2} head={11} />
+                                        <text x={xe + dir * 6} y={yy + 5} textAnchor={dir > 0 ? 'start' : 'end'} fontSize={fs + 1} fill={COL.v} fontWeight="600">
+                                            <tspan fontStyle="italic">v</tspan>
+                                        </text>
+                                    </g>
+                                );
+                            })()}
+                        </g>
+                    )}
+
+                    {/* ── Diagrammet ── */}
+                    <rect x={gx0} y={gy0} width={gx1 - gx0} height={gy1 - gy0} fill="rgba(255,255,255,0.35)"
+                          style={{ cursor: 'ew-resize' }} onPointerDown={(e) => onDown(e, 'tid')} />
+                    <g pointerEvents="none">
+                        {Array.from({ length: TAX + 1 }, (_, t) => (
+                            <line key={'gx' + t} x1={X(t)} y1={gy0} x2={X(t)} y2={gy1}
+                                  stroke={t % L.tick === 0 ? 'rgba(60,110,180,0.22)' : 'rgba(60,110,180,0.10)'} strokeWidth="1" />
+                        ))}
+                        {Array.from({ length: VMAX - VMIN + 1 }, (_, i) => VMIN + i).map((v) => (
+                            <line key={'gy' + v} x1={gx0} y1={Y(v)} x2={gx1} y2={Y(v)}
+                                  stroke={v % 5 === 0 ? 'rgba(60,110,180,0.22)' : 'rgba(60,110,180,0.10)'} strokeWidth="1" />
+                        ))}
+                        {areor && <path d={areor.pos} fill={COL.pos} stroke="none" />}
+                        {areor && <path d={areor.neg} fill={COL.neg} stroke="none" />}
+                        {/* Axlarna, pilspets bara åt det positiva hållet */}
+                        <line x1={gx0} y1={gy1} x2={gx0} y2={gy0 - 10} stroke={COL.axel} strokeWidth="2" />
+                        <polygon points={`${gx0 - 4},${gy0 - 8} ${gx0},${gy0 - 16} ${gx0 + 4},${gy0 - 8}`} fill={COL.axel} />
+                        <line x1={gx0} y1={y0} x2={gx1 + 8} y2={y0} stroke={COL.axel} strokeWidth="2" />
+                        <polygon points={`${gx1 + 6},${y0 - 4} ${gx1 + 14},${y0} ${gx1 + 6},${y0 + 4}`} fill={COL.axel} />
+                        {xTicks.map((t) => (
+                            <text key={'xt' + t} x={X(t)} y={y0 + fs + 4} textAnchor="middle" fontSize={fs} fill="rgba(15,22,32,0.72)">{t}</text>
+                        ))}
+                        <text x={gx0 - 7} y={y0 + fs + 4} textAnchor="end" fontSize={fs} fill="rgba(15,22,32,0.72)">0</text>
+                        {yTicks.map((v) => (
+                            <text key={'yt' + v} x={gx0 - 7} y={Y(v) + fs * 0.36} textAnchor="end" fontSize={fs} fill="rgba(15,22,32,0.72)">{fmt(v, 0)}</text>
+                        ))}
+                        <text x={gx0 + 9} y={gy0 - 11} textAnchor="start" fontSize={fs + 2} fill="rgba(15,22,32,0.85)" fontStyle="italic">v</text>
+                        <text x={gx0 - 8} y={gy0 - 13} textAnchor="end" fontSize={fs} fill="rgba(15,22,32,0.85)">m/s</text>
+                        <text x={gx1 + 12} y={y0 - 9} textAnchor="middle" fontSize={fs + 2} fill="rgba(15,22,32,0.85)" fontStyle="italic">t</text>
+                        <text x={gx1 + 12} y={y0 + fs + 6} textAnchor="middle" fontSize={fs} fill="rgba(15,22,32,0.85)">s</text>
+
+                        {/* Frågans tidpunkter i gissa-läget */}
+                        {gissa && fraga && fraga.marks.map((t, i) => (
+                            <g key={'m' + i}>
+                                <line x1={mx(t)} y1={gy0} x2={mx(t)} y2={gy1} stroke={COL.mark} strokeWidth="1.6" strokeDasharray="5 4" />
+                                <text x={mx(t) + 5} y={gy0 + fs + 2} textAnchor="start" fontSize={fs} fill={COL.mark} fontWeight="700">
+                                    <tspan fontStyle="italic">t</tspan> = {fmtk(t)} s
+                                </text>
+                            </g>
+                        ))}
+                        {fraga && (fraga.typ === 'ds' || fraga.typ === 's') && (
+                            <Pil x1={X(0)} y1={gy1 - 10} x2={X(fraga.tj)} y2={gy1 - 10} color={COL.mark} w={1.6} head={8} />
+                        )}
+
+                        {tangent}
+                        <path d={graf} fill="none" stroke={COL.v} strokeWidth="3" strokeLinejoin="round" strokeLinecap="round" />
+                    </g>
+                    {sekant}
+
+                    {/* Punkterna som eleven drar i */}
+                    {!gissa && M.knots.map((k, i) => (
+                        <g key={'k' + i} style={{ cursor: 'grab' }} onPointerDown={(e) => onDown(e, 'knot', i)}>
+                            <circle cx={X(k.t)} cy={Y(k.v)} r="17" fill="transparent" />
+                            {valdK === i && <circle cx={X(k.t)} cy={Y(k.v)} r="11" fill="none" stroke={COL.mark} strokeWidth="2" />}
+                            <circle cx={X(k.t)} cy={Y(k.v)} r="6.5" fill={COL.v} stroke={COL.ink} strokeOpacity="0.45" strokeWidth="1.2" />
+                        </g>
+                    ))}
+
+                    {/* Tidslinjen */}
+                    <g>
+                        <line x1={X(tc)} y1={gy0} x2={X(tc)} y2={gy1} stroke={COL.ink} strokeOpacity="0.55" strokeWidth="1.4" strokeDasharray="4 4" pointerEvents="none" />
+                        {!dolt && <circle cx={X(tc)} cy={Y(vc)} r="5" fill={COL.ink} pointerEvents="none" />}
+                        {show.tangent && !dolt && <circle cx={X(tc)} cy={Y(vc)} r="5" fill={COL.tangent} pointerEvents="none" />}
+                        <g style={{ cursor: 'ew-resize' }} onPointerDown={(e) => onDown(e, 'tid')}>
+                            <rect x={clamp(X(tc) - 40, 4, W - 84)} y={gy1 + 6} width="80" height="24" rx="12" fill={COL.ink} />
+                            <text x={clamp(X(tc) - 40, 4, W - 84) + 40} y={gy1 + 22.5} textAnchor="middle" fontSize={fs} fill="#f3eee4" fontWeight="600">
+                                <tspan fontStyle="italic">t</tspan> = {fmt(tc, 1)} s
+                            </text>
+                        </g>
+                    </g>
+                </svg>
+            );
+        };
+
+        // ── Formelkort med ord-etiketter ──
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl" style={label ? null : { visibility: 'hidden' }}>{label || 'x'}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label || 'x'}</span>
+            </div>
+        );
+        const Frac = ({ topLabel, top, bottomLabel, bottom }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl" style={topLabel ? null : { visibility: 'hidden' }}>{topLabel || 'x'}</span>
+                <span className="fnum" style={{ padding: '0 4px' }}>{top}</span>
+                <span className="fnum" style={{ alignSelf: 'stretch', textAlign: 'center', padding: '3px 4px 0',
+                                                borderTop: '2px solid currentColor', marginTop: 3 }}>{bottom}</span>
+                <span className="flbl" style={bottomLabel ? null : { visibility: 'hidden' }}>{bottomLabel || 'x'}</span>
+            </div>
+        );
+        const FormulaCard = ({ M, sek, dolt }) => {
+            const t1 = sek[0], t2 = sek[1], v1 = M.vAt(t1), v2 = M.vAt(t2);
+            const a = (v2 - v1) / (t2 - t1);
+            return (
+                <div className="formula-card glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-3 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
+                    <span className="fk-grupp">
+                        <Vbl label="Acceleration"><em>a</em></Vbl>
+                        <span className="fnum">=</span>
+                        <Frac topLabel="Hastighetsändring" top={<span>Δ<em>v</em></span>} bottom={<span>Δ<em>t</em></span>} bottomLabel="Tidsintervall" />
+                        <span className="fnum">=</span>
+                        <Frac top={<span><em>v</em><sub>2</sub> − <em>v</em><sub>1</sub></span>} bottom={<span><em>t</em><sub>2</sub> − <em>t</em><sub>1</sub></span>} />
                     </span>
+                    {!dolt && (
+                        <span className="fk-grupp">
+                            <span className="fnum">=</span>
+                            <Frac top={<span>{fmtk(v2, 1)}&nbsp;m/s − {par(fmtk(v1, 1))}&nbsp;m/s</span>}
+                                  bottom={<span>{fmtk(t2, 1)}&nbsp;s − {fmtk(t1, 1)}&nbsp;s</span>} />
+                            <span className="fnum">=</span>
+                            <Vbl><b>{fmtk(a, 2)}&nbsp;m/s²</b></Vbl>
+                        </span>
+                    )}
                 </div>
-                <input type="range" min={min} max={max} step={step} value={value}
-                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+            );
+        };
+
+        // ── Avläsningen ──
+        const Avlasning = ({ M, tc, sek, dolt, show }) => {
+            const v = M.vAt(tc), a = M.aAt(tc), x = M.xAt(tc), s = M.sAt(tc);
+            const am = (M.vAt(sek[1]) - M.vAt(sek[0])) / (sek[1] - sek[0]);
+            const q = (txt) => dolt ? '?' : txt;
+            const E = 0.02;
+            let status;
+            if (Math.abs(v) < E && Math.abs(a) < E) status = 'Vagnen står still.';
+            else if (Math.abs(v) < E) status = a > 0 ? 'Vagnen vänder eller startar framåt.' : 'Vagnen vänder eller startar bakåt.';
+            else if (Math.abs(a) < E) status = v > 0 ? 'Vagnen rullar framåt med konstant hastighet.' : 'Vagnen rullar bakåt med konstant hastighet.';
+            else if (v * a > 0) status = v > 0 ? 'Vagnen rullar framåt och farten ökar.' : 'Vagnen rullar bakåt och farten ökar.';
+            else status = v > 0 ? 'Vagnen rullar framåt och bromsar.' : 'Vagnen rullar bakåt och bromsar.';
+            const P = (s + x) / 2, N = (s - x) / 2;
+            return (
+                <div className="glass-card rounded-xl p-3">
+                    <div className="flbl mb-2">Avläsning</div>
+                    <div className="rd-grid">
+                        <div className="rd"><b>{fmt(tc, 1)} s</b><span>tid <em>t</em></span></div>
+                        <div className="rd"><b style={{ color: COL.v }}>{q(fmt(v, 1) + ' m/s')}</b><span>hastighet <em>v</em></span></div>
+                        <div className="rd"><b>{q(fmtk(a, 2) + ' m/s²')}</b><span>acceleration <em>a</em></span></div>
+                        <div className="rd"><b style={{ color: COL.ds }}>{q(fmt(x, 1) + ' m')}</b><span>förflyttning Δ<em>s</em></span></div>
+                        <div className="rd"><b>{q(fmt(s, 1) + ' m')}</b><span>sträcka <em>s</em></span></div>
+                        <div className="rd"><b style={{ color: COL.sekant }}>{q(fmtk(am, 2) + ' m/s²')}</b><span>sekantens lutning</span></div>
+                    </div>
+                    {!dolt && <p className="anm mt-2">{status}</p>}
+                    {!dolt && show.area && tc > 0 && (
+                        <p className="anm mt-1">
+                            Arean ovanför <em>t</em>-axeln är {fmt(P, 1)} m och under {fmt(N, 1)} m.
+                            Förflyttningen blir Δ<em>s</em> = {fmt(P, 1)} − {fmt(N, 1)} = {fmt(x, 1)} m och
+                            sträckan <em>s</em> = {fmt(P, 1)} + {fmt(N, 1)} = {fmt(s, 1)} m.
+                        </p>
+                    )}
+                </div>
+            );
+        };
+
+        const GissaPanel = ({ fraga, st, setSt, onKolla, onNy }) => (
+            <div className="glass-card rounded-xl p-3">
+                <div className="flbl mb-2">Testa dig själv</div>
+                <p className="fraga mb-2">{fraga.text}</p>
+                {!st.klar ? (
+                    <div className="flex items-center gap-2 flex-wrap">
+                        <input className="txt-in" type="text" inputMode="decimal" value={st.input} aria-label="Ditt svar"
+                               onChange={(e) => setSt({ ...st, input: e.target.value })}
+                               onKeyDown={(e) => { if (e.key === 'Enter') onKolla(); }} />
+                        <span style={{ fontSize: 13 }}>{fraga.enhet}</span>
+                        <button className="btn-toggle btn-prim" onClick={onKolla}>Kontrollera</button>
+                    </div>
+                ) : (
+                    <button className="btn-toggle btn-prim" onClick={onNy}>Ny graf</button>
+                )}
+                {st.fb && <div className={'anm mt-2 ' + (st.fb.ok ? 'svar-ok' : 'svar-fel')} dangerouslySetInnerHTML={{ __html: st.fb.html }} />}
+                <div className="flex gap-4 mt-2" style={{ fontSize: 13 }}>
+                    <span>Poäng: <b>{st.poang}</b></span>
+                    <span>Svit: <b>{st.svit}</b></span>
+                </div>
             </div>
         );
 
-        const VelocityTimeSimulation = () => {
-            const [motionType, setMotionType] = useState('constant-acceleration'); // 'constant-velocity', 'constant-acceleration', 'variable-acceleration'
-            const [v0, setV0] = useState(0); // Initial velocity (m/s)
-            const [acceleration, setAcceleration] = useState(2); // Acceleration (m/s²)
-            const [showSlope, setShowSlope] = useState(false);
-            const [showArea, setShowArea] = useState(false);
-            const [areaStart, setAreaStart] = useState(0);
-            const [areaEnd, setAreaEnd] = useState(5);
-            const [maxTime, setMaxTime] = useState(10);
-            const [tangentTime, setTangentTime] = useState(5); // Time for tangent point
-            const [isFullscreen, setIsFullscreen] = useState(false);
+        // ═══════════════════════════════════════════════
+        //  Huvudappen
+        // ═══════════════════════════════════════════════
+        const App = () => {
+            const start = FORSOK.find((f) => f.id === 'parkering');
+            const [knots, setKnots] = useState(() => tillKnots(start.knots));
+            const [mjuk, setMjuk] = useState(false);
+            const [forsok, setForsok] = useState('parkering');
+            const [tc, setTc] = useState(0);
+            const [running, setRunning] = useState(false);
+            const [speed, setSpeed] = useState(1);
+            const [sek, setSek] = useState([5, 13]);
+            const [show, setShow] = useState({ area: true, sekant: true, tangent: false, pil: true, prickar: true });
+            const [valdK, setValdK] = useState(null);
+            const [lage, setLage] = useState('fri');
+            const [gKnots, setGKnots] = useState(null);
+            const [fraga, setFraga] = useState(null);
+            const [gst, setGst] = useState({ input: '', fb: null, forsok: 0, klar: false, poang: 0, svit: 0 });
             const [togglesOpen, setTogglesOpen] = useState(true);
-            const sceneWrapRef = useRef(null);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [narrow, setNarrow] = useState(() => window.matchMedia('(max-width: 600px)').matches);
+            const [bred, setBred] = useState(() => window.matchMedia('(min-width: 1150px)').matches);
 
+            const gissa = lage === 'gissa';
+            const dolt = gissa && !gst.klar;
+            const aktivaKnots = gissa && gKnots ? gKnots : knots;
+            const M = useMemo(() => byggModell(aktivaKnots, gissa ? false : mjuk), [aktivaKnots, mjuk, gissa]);
+            const L = layout(narrow);
+
+            const svgRef = useRef(null);
+            const sceneWrapRef = useRef(null);
+            const dragRef = useRef(null);
+            const tcRef = useRef(tc); tcRef.current = tc;
+            const Mref = useRef(M); Mref.current = M;
+            const spdRef = useRef(speed); spdRef.current = speed;
+
+            // Tidslinjen och sekantpunkterna håller sig inom grafen
+            useEffect(() => {
+                if (tc > M.tEnd) setTc(M.tEnd);
+                setSek(([a, b]) => {
+                    let b2 = Math.min(b, M.tEnd), a2 = Math.min(a, b2 - SNAP);
+                    if (a2 < 0) { a2 = 0; b2 = Math.min(M.tEnd, SNAP); }
+                    return a2 === a && b2 === b ? [a, b] : [a2, b2];
+                });
+            }, [M.tEnd]);
+
+            // Uppspelning
+            useEffect(() => {
+                if (!running) return;
+                let raf, last = performance.now();
+                const loop = (now) => {
+                    const dt = Math.min(0.05, (now - last) / 1000);
+                    last = now;
+                    const nytt = tcRef.current + dt * spdRef.current;
+                    if (nytt >= Mref.current.tEnd) { setTc(Mref.current.tEnd); setRunning(false); return; }
+                    setTc(nytt);
+                    raf = requestAnimationFrame(loop);
+                };
+                raf = requestAnimationFrame(loop);
+                return () => cancelAnimationFrame(raf);
+            }, [running]);
+
+            // Fullskärm och smal skärm
             useEffect(() => {
                 const handler = () => {
-                    setIsFullscreen(
-                        document.fullscreenElement === sceneWrapRef.current ||
-                        document.webkitFullscreenElement === sceneWrapRef.current
-                    );
+                    const w = sceneWrapRef.current;
+                    setIsFullscreen(!!w && (document.fullscreenElement === w || document.webkitFullscreenElement === w));
                 };
                 document.addEventListener('fullscreenchange', handler);
                 document.addEventListener('webkitfullscreenchange', handler);
+                const mq = window.matchMedia('(max-width: 600px)');
+                const mqh = () => setNarrow(mq.matches);
+                mq.addEventListener('change', mqh);
+                const mqb = window.matchMedia('(min-width: 1150px)');
+                const mqbh = () => setBred(mqb.matches);
+                mqb.addEventListener('change', mqbh);
                 return () => {
+                    mqb.removeEventListener('change', mqbh);
                     document.removeEventListener('fullscreenchange', handler);
                     document.removeEventListener('webkitfullscreenchange', handler);
+                    mq.removeEventListener('change', mqh);
                 };
             }, []);
-
             const toggleFullscreen = () => {
                 const el = sceneWrapRef.current;
                 if (!el) return;
-                const isFs = document.fullscreenElement || document.webkitFullscreenElement;
-                if (isFs) {
+                if (document.fullscreenElement || document.webkitFullscreenElement)
                     (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            // ── Dra i scenen ──
+            const svgPunkt = (e) => {
+                const svg = svgRef.current;
+                const pt = svg.createSVGPoint();
+                pt.x = e.clientX; pt.y = e.clientY;
+                return pt.matrixTransform(svg.getScreenCTM().inverse());
+            };
+            const tUr = (px) => (px - L.gx0) / (L.gx1 - L.gx0) * TAX;
+            const vUr = (py) => VMAX - (py - L.gy0) / (L.gy1 - L.gy0) * (VMAX - VMIN);
+            const dra = (e) => {
+                const d = dragRef.current;
+                if (!d) return;
+                const p = svgPunkt(e);
+                if (d.typ === 'tid') {
+                    setTc(clamp(tUr(p.x), 0, Mref.current.tEnd));
+                } else if (d.typ === 'knot') {
+                    setForsok(null);
+                    setKnots((ks) => {
+                        const n = ks.length, i = d.i;
+                        let t = snap(tUr(p.x));
+                        if (i === 0) t = 0;
+                        else t = clamp(t, ks[i - 1].t + SNAP, i < n - 1 ? ks[i + 1].t - SNAP : TAX);
+                        const v = clamp(snap(vUr(p.y)), VMIN, VMAX);
+                        if (ks[i].t === t && ks[i].v === v) return ks;
+                        const ny = ks.slice(); ny[i] = { t, v };
+                        return ny;
+                    });
+                } else if (d.typ === 'sek0' || d.typ === 'sek1') {
+                    const t = snap(tUr(p.x));
+                    setSek(([a, b]) => d.typ === 'sek0'
+                        ? [clamp(t, 0, b - SNAP), b]
+                        : [a, clamp(t, a + SNAP, Mref.current.tEnd)]);
+                }
+            };
+            const onDown = (e, typ, i) => {
+                e.preventDefault(); e.stopPropagation();
+                try { svgRef.current.setPointerCapture(e.pointerId); } catch (err) {}
+                dragRef.current = { typ, i };
+                if (typ === 'knot') setValdK(i);
+                if (typ === 'tid') setRunning(false);
+                dra(e);
+            };
+            const onMove = (e) => { if (dragRef.current) dra(e); };
+            const onUp = () => { dragRef.current = null; };
+
+            // ── Åtgärder ──
+            const tShow = (k) => setShow((sh) => ({ ...sh, [k]: !sh[k] }));
+            const valjForsok = (f) => {
+                setKnots(tillKnots(f.knots));
+                setMjuk(!!f.mjuk);
+                setForsok(f.id);
+                setValdK(null);
+                setSek(f.sekant || [Math.min(2, f.knots[f.knots.length - 1][0] - 1), Math.min(8, f.knots[f.knots.length - 1][0])]);
+                if (f.visa) setShow((sh) => ({ ...sh, ...f.visa }));
+                setTc(0); setRunning(true);
+            };
+            const laggTill = () => {
+                const t = snap(tc);
+                if (knots.length >= 9 || knots.some((k) => Math.abs(k.t - t) < SNAP)) return;
+                if (t <= 0 || t >= M.tEnd) return;
+                const ny = [...knots, { t, v: snap(M.vAt(t)) }].sort((a, b) => a.t - b.t);
+                setKnots(ny); setForsok(null);
+                setValdK(ny.findIndex((k) => k.t === t));
+            };
+            const taBort = () => {
+                if (valdK === null || valdK === 0 || knots.length <= 2) return;
+                setKnots(knots.filter((_, i) => i !== valdK)); setValdK(null); setForsok(null);
+            };
+            const kanLaggaTill = (() => {
+                const t = snap(tc);
+                return !gissa && knots.length < 9 && t > 0 && t < M.tEnd && !knots.some((k) => Math.abs(k.t - t) < SNAP);
+            })();
+
+            const primar = () => {
+                if (dolt) return;
+                if (running) { setRunning(false); return; }
+                if (tc >= M.tEnd - 1e-6) setTc(0);
+                setRunning(true);
+            };
+            const primarText = running ? 'Pausa' : (tc >= M.tEnd - 1e-6 ? 'Kör igen' : (tc === 0 ? 'Starta vagnen' : 'Fortsätt'));
+            const stega = (d) => { setRunning(false); setTc(clamp(Math.round((tc + d) * 2) / 2, 0, M.tEnd)); };
+            const borjaOm = () => { setRunning(false); setTc(0); };
+
+            // ── Gissa-läget ──
+            const nyFraga = () => {
+                const k = slumpaGraf();
+                setGKnots(k); setFraga(slumpaFraga(k));
+                setTc(0); setRunning(false);
+            };
+            const valjLage = (nytt) => {
+                if (nytt === lage) return;
+                setLage(nytt); setRunning(false); setTc(0); setValdK(null);
+                if (nytt === 'gissa') {
+                    setShow((sh) => ({ ...sh, area: false, sekant: false, tangent: false }));
+                    nyFraga();
+                    setGst((g) => ({ ...g, input: '', fb: null, forsok: 0, klar: false }));
                 } else {
-                    (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+                    setShow((sh) => ({ ...sh, area: true, sekant: true }));
                 }
             };
-
-            // Calculate velocity at time t
-            const getVelocity = (t) => {
-                switch(motionType) {
-                    case 'constant-velocity':
-                        return v0;
-                    case 'constant-acceleration':
-                        return v0 + acceleration * t;
-                    case 'variable-acceleration':
-                        // Quadratic-like curve: v = v0 + 0.5*a*t²
-                        return v0 + 0.3 * acceleration * Math.pow(t, 1.5);
-                    default:
-                        return v0;
+            const visaLosning = (q) => {
+                if (q.typ === 'a') { const a = gKnots[q.k], b = gKnots[q.k + 1]; setSek([a.t, b.t]); setShow((s) => ({ ...s, sekant: true })); setTc(q.X); }
+                else if (q.typ === 'medel') { setSek([gKnots[q.i].t, gKnots[q.j].t]); setShow((s) => ({ ...s, sekant: true })); setTc(gKnots[q.j].t); }
+                else if (q.typ === 'v') setTc(q.X);
+                else { setShow((s) => ({ ...s, area: true })); setTc(0); setRunning(true); }
+            };
+            const kolla = () => {
+                const raw = String(gst.input).replace(',', '.').replace('−', '-').trim();
+                const v = parseFloat(raw);
+                if (!isFinite(v)) { setGst({ ...gst, fb: { ok: false, html: tr('Skriv in ett tal, i {e}.', { e: fraga.enhet }) } }); return; }
+                const tol = Math.max(0.02 * Math.abs(fraga.svar), 0.05);
+                const ratt = Math.abs(v - fraga.svar) <= tol;
+                const los = losning(fraga, gKnots);
+                if (ratt) {
+                    const p = gst.forsok === 0 ? 3 : 1;
+                    setGst({ ...gst, klar: true, poang: gst.poang + p, svit: gst.svit + 1,
+                             fb: { ok: true, html: tr('Rätt svar. ') + los + ' ' + tr('Du får {p} poäng.', { p }) } });
+                    visaLosning(fraga);
+                    return;
+                }
+                if (gst.forsok === 0) {
+                    let tips = 'Det stämmer inte riktigt. ';
+                    if (Math.abs(v + fraga.svar) <= tol && fraga.svar !== 0) tips += 'Kontrollera tecknet: lutar linjen nedåt, eller ligger arean under t-axeln? ';
+                    else if (fraga.typ === 'a' || fraga.typ === 'medel') tips += 'Välj två punkter på linjen och räkna Δv delat med Δt. ';
+                    else if (fraga.typ === 'ds') tips += 'Dela in arean i rektanglar och trianglar, och räkna arean under t-axeln negativ. ';
+                    else if (fraga.typ === 's') tips += 'För sträckan räknas även arean under t-axeln positiv. ';
+                    setGst({ ...gst, forsok: 1, fb: { ok: false, html: tr(tips) + tr('Försök en gång till.') } });
+                } else {
+                    setGst({ ...gst, klar: true, svit: 0, fb: { ok: false, html: tr('Det stämmer inte. ') + los } });
+                    visaLosning(fraga);
                 }
             };
+            const nyGraf = () => { setShow((sh) => ({ ...sh, area: false, sekant: false, tangent: false })); nyFraga(); setGst({ ...gst, input: '', fb: null, forsok: 0, klar: false }); };
 
-            // Calculate slope (acceleration)
-            const getSlope = () => {
-                switch(motionType) {
-                    case 'constant-velocity':
-                        return 0;
-                    case 'constant-acceleration':
-                        return acceleration;
-                    case 'variable-acceleration':
-                        // Average slope over interval
-                        const t1 = 0;
-                        const t2 = 5;
-                        return (getVelocity(t2) - getVelocity(t1)) / (t2 - t1);
-                    default:
-                        return 0;
-                }
+            const bredFs = isFullscreen && bred;
+            const forsokObj = FORSOK.find((f) => f.id === forsok);
+
+            const paneler = (
+                <React.Fragment>
+                    {gissa && fraga && <GissaPanel fraga={fraga} st={gst} setSt={setGst} onKolla={kolla} onNy={nyGraf} />}
+                    <Avlasning M={M} tc={tc} sek={sek} dolt={dolt} show={show} />
+                </React.Fragment>
+            );
+
+            const styrknappar = (
+                <div className="styr">
+                    <button className="btn-toggle btn-steg" onClick={() => stega(-0.5)} disabled={tc <= 0}
+                            aria-label="Stega bakåt" title="Stega bakåt 0,5 s">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="4" y="5" width="3" height="14" rx="1" /><path d="M20 5.5v13L9 12z" /></svg>
+                    </button>
+                    <button className="btn-toggle btn-prim btn-spela" onClick={primar} disabled={dolt}>
+                        {running
+                            ? <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1" /><rect x="14" y="5" width="4" height="14" rx="1" /></svg>
+                            : <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15L19.5 12z" /></svg>}
+                        <span>{primarText}</span>
+                    </button>
+                    <button className="btn-toggle btn-steg" onClick={() => stega(0.5)} disabled={tc >= M.tEnd}
+                            aria-label="Stega framåt" title="Stega framåt 0,5 s">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 5.5v13L15 12z" /><rect x="17" y="5" width="3" height="14" rx="1" /></svg>
+                    </button>
+                    <button className="btn-toggle btn-om" onClick={borjaOm}>Börja om</button>
+                </div>
+            );
+
+            const grafKnappar = (
+                <div className="flex gap-2 flex-wrap">
+                    <button className="btn-toggle flex-1" onClick={laggTill} disabled={!kanLaggaTill}
+                            title="Lägger en ny punkt på grafen där tidslinjen står">Lägg till punkt vid <em>t</em> = {fmt(snap(tc), 1)} s</button>
+                    <button className="btn-toggle flex-1" onClick={taBort} disabled={gissa || valdK === null || valdK === 0 || knots.length <= 2}>Ta bort vald punkt</button>
+                </div>
+            );
+
+            const visaRad = (k, text, farg, av) => (
+                <label className={av ? 'av' : ''}>
+                    <input type="checkbox" checked={show[k] && !av} disabled={av} onChange={() => tShow(k)} />
+                    {farg && <span className="st-swatch" style={{ background: farg }}></span>}
+                    <span>{text}</span>
+                </label>
+            );
+
+            const sceneToggles = () => {
+                if (!togglesOpen) return (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)}
+                            aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" /><circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" /><circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                );
+                return (
+                    <div className="scene-toggles">
+                        <button className="st-hide" onClick={() => setTogglesOpen(false)}
+                                aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+                        </button>
+                        <div className="st-title">Visa</div>
+                        {visaRad('area', 'Area och förflyttning', COL.posKant, dolt)}
+                        {visaRad('sekant', 'Sekant', COL.sekant, dolt)}
+                        {visaRad('tangent', 'Tangent', COL.tangent, dolt)}
+                        {visaRad('pil', 'Hastighetspil', COL.v, false)}
+                        {visaRad('prickar', 'Prickar varje sekund', COL.ink, false)}
+                        {isFullscreen && (
+                            <React.Fragment>
+                                <div className="st-title mt">Läge</div>
+                                <label><input type="radio" name="lage-fs" checked={!gissa} onChange={() => valjLage('fri')} /><span>Utforska</span></label>
+                                <label><input type="radio" name="lage-fs" checked={gissa} onChange={() => valjLage('gissa')} /><span>Testa dig själv</span></label>
+                                {!gissa && (
+                                    <React.Fragment>
+                                        <div className="st-title mt">Färdigt försök</div>
+                                        <select value={forsok || ''} onChange={(e) => { const f = FORSOK.find((x) => x.id === e.target.value); if (f) valjForsok(f); }} aria-label="Färdigt försök">
+                                            <option value="">Egen graf</option>
+                                            {FORSOK.map((f) => <option key={f.id} value={f.id}>{f.namn}</option>)}
+                                        </select>
+                                        <div className="st-title mt">Grafen</div>
+                                        <label><input type="radio" name="form-fs" checked={!mjuk} onChange={() => setMjuk(false)} /><span>Raka linjer</span></label>
+                                        <label><input type="radio" name="form-fs" checked={mjuk} onChange={() => setMjuk(true)} /><span>Mjuk kurva</span></label>
+                                        <div className="mt-1">{grafKnappar}</div>
+                                    </React.Fragment>
+                                )}
+                                <div className="st-title mt">Tidsförlopp</div>
+                                {[[0.5, 'Långsamt'], [1, 'Normalt'], [3, 'Snabbt']].map(([v, t]) => (
+                                    <label key={v}><input type="radio" name="speed-fs" checked={speed === v} onChange={() => setSpeed(v)} /><span>{t}</span></label>
+                                ))}
+                                <div className="st-actions">{styrknappar}</div>
+                                {!bredFs && <div className="st-panels">{paneler}</div>}
+                            </React.Fragment>
+                        )}
+                    </div>
+                );
             };
-
-            // Calculate area (displacement) between areaStart and areaEnd
-            const calculateArea = () => {
-                const steps = 100;
-                const dt = (areaEnd - areaStart) / steps;
-                let displacement = 0; // Förflyttning (kan vara negativ)
-                let distance = 0; // Sträcka (alltid positiv)
-                let positiveArea = 0;
-                let negativeArea = 0;
-
-                // Numerical integration using trapezoidal rule
-                for (let i = 0; i < steps; i++) {
-                    const t1 = areaStart + i * dt;
-                    const t2 = areaStart + (i + 1) * dt;
-                    const v1 = getVelocity(t1);
-                    const v2 = getVelocity(t2);
-                    const areaSegment = (v1 + v2) * dt / 2;
-
-                    displacement += areaSegment;
-                    distance += Math.abs(areaSegment);
-
-                    if (areaSegment > 0) {
-                        positiveArea += areaSegment;
-                    } else {
-                        negativeArea += Math.abs(areaSegment);
-                    }
-                }
-
-                return { displacement, distance, positiveArea, negativeArea };
-            };
-
-            // Calculate geometric area for simple cases
-            const getGeometricCalculation = () => {
-                if (motionType === 'constant-velocity') {
-                    const width = areaEnd - areaStart;
-                    const height = v0;
-                    return {
-                        type: 'rectangle',
-                        width,
-                        height,
-                        area: width * height,
-                        formula: `Area = bredd × höjd = ${formatNumber(width)} s × ${formatNumber(height)} m/s`
-                    };
-                } else if (motionType === 'constant-acceleration') {
-                    const width = areaEnd - areaStart;
-                    const v1 = getVelocity(areaStart);
-                    const v2 = getVelocity(areaEnd);
-
-                    if (v1 === 0) {
-                        // Pure triangle
-                        return {
-                            type: 'triangle',
-                            width,
-                            height: v2,
-                            area: width * v2 / 2,
-                            formula: `Area = (bas × höjd) / 2 = (${formatNumber(width)} s × ${formatNumber(v2)} m/s) / 2`
-                        };
-                    } else if (v1 > 0) {
-                        // Trapezoid = Rectangle + Triangle
-                        const rectArea = width * v1;
-                        const triangleArea = width * (v2 - v1) / 2;
-                        return {
-                            type: 'trapezoid',
-                            width,
-                            v1,
-                            v2,
-                            rectArea,
-                            triangleArea,
-                            area: rectArea + triangleArea,
-                            formula: `Area = rektangel + triangel = (${formatNumber(width)} × ${formatNumber(v1)}) + (${formatNumber(width)} × ${formatNumber(v2-v1)}) / 2`
-                        };
-                    }
-                }
-                return null;
-            };
-
-            // SVG parameters
-            const svgWidth = 700;
-            const svgHeight = 400;
-            const padding = 60;
-            const graphWidth = svgWidth - 2 * padding;
-            const graphHeight = svgHeight - 2 * padding;
-
-            // Fixed scale for pedagogical clarity
-            // This allows students to clearly see how slope changes with acceleration
-            const FIXED_MAX_TIME = 20; // Always show 0-20 seconds
-            const FIXED_MAX_V = 30; // Always show -30 to +30 m/s
-            const FIXED_MIN_V = -30;
-
-            const minV = FIXED_MIN_V;
-            const maxV = FIXED_MAX_V;
-
-            // Y-axis values with fixed step of 5 m/s
-            const yStep = 5;
-            const yAxisValues = [];
-            for (let v = minV; v <= maxV; v += yStep) {
-                yAxisValues.push(v);
-            }
-
-            // Scale functions with fixed ranges
-            const scaleX = (t) => padding + (t / FIXED_MAX_TIME) * graphWidth;
-            const scaleY = (v) => svgHeight - padding - ((v - minV) / (maxV - minV)) * graphHeight;
-
-            // Generate path for graph
-            const generatePath = () => {
-                const points = [];
-                const steps = 100;
-                for (let i = 0; i <= steps; i++) {
-                    const t = (i / steps) * FIXED_MAX_TIME;
-                    const v = getVelocity(t);
-                    points.push(`${scaleX(t)},${scaleY(v)}`);
-                }
-                return `M ${points.join(' L ')}`;
-            };
-
-            // Generate area polygon - separated into positive and negative parts
-            const generateAreaPolygons = () => {
-                const steps = 100;
-                const positiveSegments = [];
-                const negativeSegments = [];
-
-                for (let i = 0; i < steps; i++) {
-                    const t1 = areaStart + (i / steps) * (areaEnd - areaStart);
-                    const t2 = areaStart + ((i + 1) / steps) * (areaEnd - areaStart);
-                    const v1 = getVelocity(t1);
-                    const v2 = getVelocity(t2);
-
-                    // Check if this segment crosses the x-axis
-                    if (v1 >= 0 && v2 >= 0) {
-                        // Fully positive
-                        positiveSegments.push([
-                            `${scaleX(t1)},${scaleY(v1)}`,
-                            `${scaleX(t2)},${scaleY(v2)}`,
-                            `${scaleX(t2)},${scaleY(0)}`,
-                            `${scaleX(t1)},${scaleY(0)}`
-                        ].join(' '));
-                    } else if (v1 <= 0 && v2 <= 0) {
-                        // Fully negative
-                        negativeSegments.push([
-                            `${scaleX(t1)},${scaleY(v1)}`,
-                            `${scaleX(t2)},${scaleY(v2)}`,
-                            `${scaleX(t2)},${scaleY(0)}`,
-                            `${scaleX(t1)},${scaleY(0)}`
-                        ].join(' '));
-                    }
-                }
-
-                return { positiveSegments, negativeSegments };
-            };
-
-            const slope = getSlope();
-            const areaData = calculateArea();
-            const geoCalc = getGeometricCalculation();
-            const areaPolygons = generateAreaPolygons();
 
             return (
-                <div className="min-h-screen bg-gray-50 py-8 px-4">
-                    <div className="max-w-7xl mx-auto">
-                        {/* Header */}
-                        <div className="text-center mb-8">
-                            <h1 className="text-5xl font-bold text-gray-900 mb-4">Hastighet-tid-diagram</h1>
-                            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                                Utforska hur hastighet förändras över tid. Lär dig tolka grafer, beräkna acceleration från lutning och sträcka från area!
-                            </p>
+                <div className="min-h-screen px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html?id=fy1">Fysik nivå 1</a> / Hastighet-tid-diagram
                         </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Hastighet-tid-diagram</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 840 }}>
+                            En vagn rullar längs en skena på labbänken, och <em>v-t</em>-diagrammet under bestämmer exakt hur den rör sig.
+                            Dra i de blå punkterna för att forma grafen och starta vagnen. Lutningen är accelerationen: med den gröna
+                            sekanten får du medelaccelerationen mellan två tidpunkter, och med tangenten momentanaccelerationen.
+                            Arean mellan grafen och <em>t</em>-axeln fylls i medan vagnen rullar och är lika stor som förflyttningen
+                            längs linjalen. Ligger grafen under <em>t</em>-axeln rullar vagnen bakåt.
+                        </p>
 
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                            {/* Main Graph Area */}
-                            <div className="lg:col-span-2 space-y-6">
-                                {/* Graph */}
-                                <div className="bg-white rounded-xl shadow-lg p-6">
-                                    <h2 className="text-2xl font-bold mb-4 text-gray-800">Hastighet-tid-graf</h2>
-                                    <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef} style={{ userSelect: 'none', maxWidth: isFullscreen ? 'none' : svgWidth }}>
-                                    <svg viewBox={`0 0 ${svgWidth} ${svgHeight}`} style={isFullscreen ? { width: '100%', height: '100%', display: 'block' } : { width: '100%', height: 'auto', display: 'block' }} className="border-2 border-gray-200 rounded-lg bg-white">
-                                        <defs>
-                                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                                                <polygon points="0 0, 10 3, 0 6" fill="#f3eee4" />
-                                            </marker>
-                                        </defs>
+                        <FormulaCard M={M} sek={sek} dolt={dolt} />
 
-                                        {/* Grid lines */}
-                                        {[...Array(21)].map((_, i) => (
-                                            <line
-                                                key={`grid-x-${i}`}
-                                                x1={scaleX(i)}
-                                                y1={padding}
-                                                x2={scaleX(i)}
-                                                y2={svgHeight - padding}
-                                                stroke="#e5e7eb"
-                                                strokeWidth="1"
-                                            />
-                                        ))}
-                                        {yAxisValues.map((v, i) => (
-                                            <line
-                                                key={`grid-y-${i}`}
-                                                x1={padding}
-                                                y1={scaleY(v)}
-                                                x2={svgWidth - padding}
-                                                y2={scaleY(v)}
-                                                stroke="#e5e7eb"
-                                                strokeWidth="1"
-                                            />
-                                        ))}
-
-                                        {/* Axes with arrows */}
-                                        <line
-                                            x1={padding}
-                                            y1={scaleY(0)}
-                                            x2={svgWidth - padding + 10}
-                                            y2={scaleY(0)}
-                                            stroke="#f3eee4"
-                                            strokeWidth="2"
-                                            markerEnd="url(#arrowhead)"
-                                        />
-                                        <line
-                                            x1={padding}
-                                            y1={svgHeight - padding}
-                                            x2={padding}
-                                            y2={padding - 10}
-                                            stroke="#f3eee4"
-                                            strokeWidth="2"
-                                            markerEnd="url(#arrowhead)"
-                                        />
-
-                                        {/* Axis labels */}
-                                        {[...Array(21)].map((_, i) => (
-                                            <text
-                                                key={`label-x-${i}`}
-                                                x={scaleX(i)}
-                                                y={scaleY(0) + 20}
-                                                textAnchor="middle"
-                                                fontSize="12"
-                                                fill="#666"
-                                            >
-                                                {i}
-                                            </text>
-                                        ))}
-                                        {yAxisValues.map((v, i) => (
-                                            <text
-                                                key={`label-y-${i}`}
-                                                x={padding - 10}
-                                                y={scaleY(v) + 5}
-                                                textAnchor="end"
-                                                fontSize="12"
-                                                fill="#666"
-                                            >
-                                                {v}
-                                            </text>
-                                        ))}
-
-                                        {/* Axis titles */}
-                                        <text x={svgWidth / 2} y={svgHeight - 10} textAnchor="middle" fontSize="16" fontWeight="bold" fill="#f3eee4">
-                                            Tid (s)
-                                        </text>
-                                        <text
-                                            x={20}
-                                            y={svgHeight / 2}
-                                            textAnchor="middle"
-                                            fontSize="16"
-                                            fontWeight="bold"
-                                            fill="#f3eee4"
-                                            transform={`rotate(-90, 20, ${svgHeight / 2})`}
-                                        >
-                                            Hastighet (m/s)
-                                        </text>
-
-                                        {/* Area under curve - positive and negative parts */}
-                                        {showArea && (
-                                            <>
-                                                {/* Positive area (green) */}
-                                                {areaPolygons.positiveSegments.map((points, i) => (
-                                                    <polygon
-                                                        key={`pos-${i}`}
-                                                        points={points}
-                                                        fill="rgba(34, 197, 94, 0.3)"
-                                                        stroke="rgb(34, 197, 94)"
-                                                        strokeWidth="1"
-                                                    />
-                                                ))}
-                                                {/* Negative area (red) */}
-                                                {areaPolygons.negativeSegments.map((points, i) => (
-                                                    <polygon
-                                                        key={`neg-${i}`}
-                                                        points={points}
-                                                        fill="rgba(239, 68, 68, 0.3)"
-                                                        stroke="rgb(239, 68, 68)"
-                                                        strokeWidth="1"
-                                                    />
-                                                ))}
-                                            </>
-                                        )}
-
-                                        {/* Main graph line */}
-                                        <path
-                                            d={generatePath()}
-                                            fill="none"
-                                            stroke="#ef4444"
-                                            strokeWidth="3"
-                                        />
-
-                                        {/* Slope indicator */}
-                                        {showSlope && motionType !== 'variable-acceleration' && (
-                                            <>
-                                                {/* Slope triangle */}
-                                                <line
-                                                    x1={scaleX(2)}
-                                                    y1={scaleY(getVelocity(2))}
-                                                    x2={scaleX(6)}
-                                                    y2={scaleY(getVelocity(6))}
-                                                    stroke="#10b981"
-                                                    strokeWidth="2"
-                                                    strokeDasharray="5,5"
-                                                />
-                                                <line
-                                                    x1={scaleX(2)}
-                                                    y1={scaleY(getVelocity(2))}
-                                                    x2={scaleX(6)}
-                                                    y2={scaleY(getVelocity(2))}
-                                                    stroke="#10b981"
-                                                    strokeWidth="2"
-                                                />
-                                                <line
-                                                    x1={scaleX(6)}
-                                                    y1={scaleY(getVelocity(2))}
-                                                    x2={scaleX(6)}
-                                                    y2={scaleY(getVelocity(6))}
-                                                    stroke="#10b981"
-                                                    strokeWidth="2"
-                                                />
-                                                <text
-                                                    x={(scaleX(2) + scaleX(6)) / 2}
-                                                    y={scaleY(getVelocity(2)) + 20}
-                                                    textAnchor="middle"
-                                                    fontSize="14"
-                                                    fill="#10b981"
-                                                    fontWeight="bold"
-                                                >
-                                                    Δt = 4 s
-                                                </text>
-                                                <text
-                                                    x={scaleX(6) + 30}
-                                                    y={(scaleY(getVelocity(2)) + scaleY(getVelocity(6))) / 2}
-                                                    textAnchor="middle"
-                                                    fontSize="14"
-                                                    fill="#10b981"
-                                                    fontWeight="bold"
-                                                >
-                                                    Δv = {formatNumber(getVelocity(6) - getVelocity(2))} m/s
-                                                </text>
-                                            </>
-                                        )}
-
-                                        {/* Tangent line for variable acceleration */}
-                                        {showSlope && motionType === 'variable-acceleration' && (
-                                            <>
-                                                {(() => {
-                                                    const t = tangentTime;
-                                                    const v = getVelocity(t);
-                                                    // Calculate derivative for variable acceleration: v = v0 + 0.3*a*t^1.5
-                                                    // dv/dt = 0.3*a*1.5*t^0.5 = 0.45*a*sqrt(t)
-                                                    const a = 0.45 * acceleration * Math.sqrt(t);
-                                                    // Extend tangent line across entire graph
-                                                    const x1 = scaleX(0);
-                                                    const y1 = scaleY(v - a * t);
-                                                    const x2 = scaleX(20);
-                                                    const y2 = scaleY(v + a * (20 - t));
-
-                                                    return (
-                                                        <>
-                                                            <line
-                                                                x1={x1}
-                                                                y1={y1}
-                                                                x2={x2}
-                                                                y2={y2}
-                                                                stroke="#2563eb"
-                                                                strokeWidth="3"
-                                                                strokeDasharray="8,4"
-                                                            />
-                                                            <circle
-                                                                cx={scaleX(t)}
-                                                                cy={scaleY(v)}
-                                                                r="6"
-                                                                fill="#2563eb"
-                                                            />
-                                                            <text
-                                                                x={scaleX(t) + 15}
-                                                                y={scaleY(v) - 10}
-                                                                fontSize="14"
-                                                                fill="#2563eb"
-                                                                fontWeight="bold"
-                                                            >
-                                                                Tangent vid t={t}s
-                                                            </text>
-                                                        </>
-                                                    );
-                                                })()}
-                                            </>
-                                        )}
-                                    </svg>
-
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            <div className="lg:w-2/3 order-1">
+                                <div className={'scene-wrap' + (isFullscreen ? ' is-fs' : '') + (bredFs ? ' fs-bred' : '')}
+                                     data-theme="ljusPapper" ref={sceneWrapRef} style={{ aspectRatio: `${L.W} / ${L.H}` }}>
+                                    <Scen svgRef={svgRef} L={L} M={M} tc={tc} show={show} sek={sek} gissa={gissa}
+                                          fraga={fraga} klar={gst.klar} valdK={valdK}
+                                          onDown={onDown} onMove={onMove} onUp={onUp} />
+                                    {bredFs && <div className="fs-vanster">{paneler}</div>}
+                                    {sceneToggles()}
                                     <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
                                             title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
                                         {isFullscreen ? (
                                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                                                <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
                                             </svg>
                                         ) : (
                                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                                                <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
                                             </svg>
                                         )}
                                     </button>
+                                </div>
+                                {!isFullscreen && <div className="mt-3">{styrknappar}</div>}
+                                <p className="anm mt-2">
+                                    {gissa
+                                        ? 'Läs av grafen och svara. Dra i diagrammet för att flytta tidslinjen.'
+                                        : 'Dra i de blå punkterna för att ändra grafen och i diagrammet för att flytta tidslinjen. De gröna punkterna flyttar sekanten.'}
+                                </p>
+                                <div className="hidden lg:flex flex-col gap-3 mt-3">{paneler}</div>
+                            </div>
 
-                                    {/* Inställningsrutan uppe till höger — hopfällbar, och i fullskärm
-                                        bor reglagen här (placeringsregeln, omskriven 2026-08-31:
-                                        bottenpanelen .fs-controls låg ovanpå grafens negativa
-                                        v-område när man drog i glidarna). */}
-                                    {!togglesOpen ? (
-                                        <button className="st-show-btn" onClick={() => setTogglesOpen(true)}
-                                                aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
-                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                 strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-                                                <line x1="4" y1="8" x2="20" y2="8" />
-                                                <circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
-                                                <line x1="4" y1="16" x2="20" y2="16" />
-                                                <circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
-                                            </svg>
-                                        </button>
+                            <div className="lg:w-1/3 order-2 flex flex-col gap-3">
+                                <div className="glass-card rounded-xl p-3">
+                                    <div className="flbl mb-2">Läge</div>
+                                    <div className="seg" style={{ gridTemplateColumns: '1fr 1fr' }}>
+                                        <button className={!gissa ? 'active' : ''} onClick={() => valjLage('fri')}>Utforska</button>
+                                        <button className={gissa ? 'active' : ''} onClick={() => valjLage('gissa')}>Testa dig själv</button>
+                                    </div>
+                                    {!gissa ? (
+                                        <React.Fragment>
+                                            <div className="flbl mt-3 mb-2">Färdiga försök</div>
+                                            <div className="forsok">
+                                                {FORSOK.map((f) => (
+                                                    <button key={f.id} className={forsok === f.id ? 'active' : ''} onClick={() => valjForsok(f)}>{f.namn}</button>
+                                                ))}
+                                            </div>
+                                            {forsokObj && <p className="anm mt-2" dangerouslySetInnerHTML={{ __html: forsokObj.text }} />}
+                                        </React.Fragment>
                                     ) : (
-                                    <div className="scene-toggles">
-                                        <button className="st-hide" onClick={() => setTogglesOpen(false)}
-                                                aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
-                                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                 strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
-                                                <path d="M6 6l12 12M18 6L6 18" />
-                                            </svg>
-                                        </button>
-                                        <div className="st-title">Rörelse</div>
-                                        <label>
-                                            <input type="radio" name="motionType-scene" checked={motionType === 'constant-velocity'}
-                                                   onChange={() => setMotionType('constant-velocity')} />
-                                            <span>Konstant hastighet</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="motionType-scene" checked={motionType === 'constant-acceleration'}
-                                                   onChange={() => setMotionType('constant-acceleration')} />
-                                            <span>Konstant acceleration</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="motionType-scene" checked={motionType === 'variable-acceleration'}
-                                                   onChange={() => setMotionType('variable-acceleration')} />
-                                            <span>Varierande acceleration</span>
-                                        </label>
-                                        <div className="st-title mt">Visa</div>
-                                        <label>
-                                            <input type="checkbox" checked={showSlope}
-                                                   onChange={(e) => setShowSlope(e.target.checked)} />
-                                            <span>Lutning (acceleration)</span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" checked={showArea}
-                                                   onChange={(e) => setShowArea(e.target.checked)} />
-                                            <span>Area (sträcka)</span>
-                                        </label>
-                                        {/* Reglagen visas här BARA i fullskärm — i normalläget finns
-                                            de i sidopanelen (aldrig dubblerade). */}
-                                        {isFullscreen && (
-                                            <React.Fragment>
-                                                <div className="st-title mt">Reglage</div>
-                                                <div className="st-sliders">
-                                                    <StSlider label={<span>Starthastighet <em>v</em>₀</span>} value={v0}
-                                                              min={-10} max={20} step={1} unit="m/s" decimals={0}
-                                                              onChange={(val) => setV0(val)} />
-                                                    {motionType !== 'constant-velocity' && (
-                                                        <StSlider label={<span>Acceleration <em>a</em></span>} value={acceleration}
-                                                                  min={-5} max={5} step={0.1} unit="m/s²" decimals={1}
-                                                                  onChange={(val) => setAcceleration(val)} />
-                                                    )}
-                                                    {showSlope && (
-                                                        <StSlider label={<span>Tangeringspunkt <em>t</em></span>} value={tangentTime}
-                                                                  min={0} max={20} step={0.5} unit="s" decimals={1}
-                                                                  onChange={(val) => setTangentTime(val)} />
-                                                    )}
-                                                    {showArea && (
-                                                        <React.Fragment>
-                                                            <StSlider label="Area, starttid" value={areaStart}
-                                                                      min={0} max={19} step={0.5} unit="s" decimals={1}
-                                                                      onChange={(val) => {
-                                                                          setAreaStart(val);
-                                                                          if (val >= areaEnd) setAreaEnd(val + 1);
-                                                                      }} />
-                                                            <StSlider label="Area, sluttid" value={areaEnd}
-                                                                      min={areaStart + 0.5} max={20} step={0.5} unit="s" decimals={1}
-                                                                      onChange={(val) => setAreaEnd(val)} />
-                                                        </React.Fragment>
-                                                    )}
-                                                </div>
-                                            </React.Fragment>
-                                        )}
-                                    </div>
+                                        <p className="anm mt-2">
+                                            Du får en slumpad graf och en fråga. Vagnen och avläsningen visas först när du har svarat.
+                                            Rätt på första försöket ger 3 poäng, på andra 1 poäng.
+                                        </p>
                                     )}
-                                    </div>
+                                </div>
 
-                                    {/* Status display */}
-                                    <div className="mt-4 p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
-                                        <h3 className="font-bold text-lg mb-2 text-blue-900">📊 Aktuell status vid t = {tangentTime} s:</h3>
-                                        <div className="grid grid-cols-2 gap-4">
-                                            <div>
-                                                <span className="text-gray-600">Hastighet:</span>
-                                                <span className="ml-2 font-bold text-xl text-blue-600">{formatNumber(getVelocity(tangentTime), 2)} m/s</span>
-                                            </div>
-                                            <div>
-                                                <span className="text-gray-600">Acceleration:</span>
-                                                <span className="ml-2 font-bold text-xl text-green-600">{formatNumber(motionType === 'variable-acceleration' ? 0.45 * acceleration * Math.sqrt(tangentTime) : slope, 2)} m/s²</span>
-                                            </div>
+                                {!gissa && (
+                                    <div className="glass-card rounded-xl p-3">
+                                        <div className="flbl mb-2">Grafen</div>
+                                        <div className="seg mb-3" style={{ gridTemplateColumns: '1fr 1fr' }}>
+                                            <button className={!mjuk ? 'active' : ''} onClick={() => setMjuk(false)}>Raka linjer</button>
+                                            <button className={mjuk ? 'active' : ''} onClick={() => setMjuk(true)}>Mjuk kurva</button>
                                         </div>
-                                        <p className="mt-2 text-sm text-gray-700">
-                                            {slope > 0 && "🚀 Objektet ökar sin hastighet (accelererar)"}
-                                            {slope < 0 && "🛑 Objektet minskar sin hastighet (retarderar/bromsar)"}
-                                            {slope === 0 && "➡️ Objektet rör sig med konstant hastighet"}
+                                        {grafKnappar}
+                                        <p className="anm mt-2">
+                                            Punkterna fastnar på hela och halva sekunder och m/s. Klicka på en punkt för att välja den.
+                                            Med raka linjer är accelerationen konstant mellan två punkter; med en mjuk kurva ändras den hela tiden.
                                         </p>
                                     </div>
-                                </div>
-
-                                {/* Slope Analysis */}
-                                {showSlope && (
-                                    <div className="bg-green-50 rounded-xl shadow-lg p-6 border-2 border-green-200">
-                                        <h2 className="text-2xl font-bold mb-4 text-green-900">📐 Lutningsanalys (Acceleration)</h2>
-                                        <div className="formula-box bg-gradient-to-r from-green-500 to-emerald-600">
-                                            a = Δv / Δt = k-värde
-                                        </div>
-                                        <div className="calc-step">
-                                            <p className="font-semibold mb-2">Beräkning av lutning:</p>
-                                            {motionType === 'constant-velocity' && (
-                                                <p>Lutning = 0 (horisontell linje)<br/>
-                                                <span className="highlight-value">Acceleration a = 0 m/s²</span></p>
-                                            )}
-                                            {motionType === 'constant-acceleration' && (
-                                                <>
-                                                    <p>Lutning k = (v₂ - v₁) / (t₂ - t₁)</p>
-                                                    <p>k = ({formatNumber(getVelocity(6))} - {formatNumber(getVelocity(2))}) / (6 - 2)</p>
-                                                    <p>k = {formatNumber(getVelocity(6) - getVelocity(2))} / 4</p>
-                                                    <p className="mt-2"><span className="highlight-value">Acceleration a = {formatNumber(slope, 2)} m/s²</span></p>
-                                                </>
-                                            )}
-                                            {motionType === 'variable-acceleration' && (
-                                                <>
-                                                    <p>För kurvig graf använder vi tangentens lutning vid t={tangentTime}s:</p>
-                                                    <p className="mt-2"><span className="highlight-value">Momentanacceleration a({tangentTime}s) = {formatNumber(0.45 * acceleration * Math.sqrt(tangentTime), 2)} m/s²</span></p>
-                                                    <p className="text-sm text-gray-600 mt-2">(Acceleration varierar över tid)</p>
-                                                </>
-                                            )}
-                                        </div>
-                                        <div className="mt-4 p-4 bg-white rounded border-l-4 border-green-500">
-                                            <p className="font-semibold text-green-900">💡 Fysikalisk tolkning:</p>
-                                            <p className="text-gray-700">
-                                                Lutningen på en v-t-graf visar <strong>accelerationen</strong>.
-                                                {slope > 0 && " En positiv lutning betyder att hastigheten ökar."}
-                                                {slope < 0 && " En negativ lutning betyder att hastigheten minskar (retardation)."}
-                                                {slope === 0 && " Lutning = 0 betyder konstant hastighet."}
-                                            </p>
-                                        </div>
-                                    </div>
                                 )}
 
-                                {/* Area Analysis */}
-                                {showArea && (
-                                    <div className="bg-blue-50 rounded-xl shadow-lg p-6 border-2 border-blue-200">
-                                        <h2 className="text-2xl font-bold mb-4 text-blue-900">📏 Areaanalys: Sträcka vs Förflyttning</h2>
-
-                                        {/* Visual legend */}
-                                        <div className="mb-4 p-3 bg-white rounded-lg border border-gray-200">
-                                            <p className="font-semibold mb-2 text-sm">Färgkodning:</p>
-                                            <div className="flex gap-4 text-sm">
-                                                <div className="flex items-center gap-2">
-                                                    <div className="w-6 h-4 bg-green-500 bg-opacity-30 border border-green-500"></div>
-                                                    <span>Positiv area (v &gt; 0)</span>
-                                                </div>
-                                                <div className="flex items-center gap-2">
-                                                    <div className="w-6 h-4 bg-red-500 bg-opacity-30 border border-red-500"></div>
-                                                    <span>Negativ area (v &lt; 0)</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="formula-box bg-gradient-to-r from-blue-500 to-cyan-600 mb-4">
-                                            Förflyttning = Positiv area - Negativ area
-                                        </div>
-
-                                        <div className="formula-box bg-gradient-to-r from-green-500 to-emerald-600">
-                                            Sträcka = Positiv area + Negativ area
-                                        </div>
-
-                                        {/* Results */}
-                                        <div className="calc-step">
-                                            <p className="font-semibold mb-3 text-lg">📊 Beräkningar (t = {areaStart} s till t = {areaEnd} s):</p>
-
-                                            {areaData.positiveArea > 0 && (
-                                                <p className="mb-1">
-                                                    🟢 Positiv area: <span className="font-mono font-bold text-green-700">{formatNumber(areaData.positiveArea, 2)} m</span>
-                                                </p>
-                                            )}
-
-                                            {areaData.negativeArea > 0 && (
-                                                <p className="mb-1">
-                                                    🔴 Negativ area: <span className="font-mono font-bold text-red-700">{formatNumber(areaData.negativeArea, 2)} m</span>
-                                                </p>
-                                            )}
-
-                                            <div className="mt-4 pt-4 border-t-2 border-blue-300">
-                                                <p className="text-lg mb-2">
-                                                    <strong>Förflyttning (displacement):</strong>
-                                                </p>
-                                                <p className="text-2xl mb-1">
-                                                    <span className="highlight-value bg-blue-100">Δx = {formatNumber(areaData.displacement, 2)} m</span>
-                                                </p>
-                                                <p className="text-sm text-gray-600 mb-4">
-                                                    {areaData.displacement > 0 && "→ Objektet har förflyttat sig framåt (positivt)"}
-                                                    {areaData.displacement < 0 && "← Objektet har förflyttat sig bakåt (negativt)"}
-                                                    {areaData.displacement === 0 && "○ Objektet är tillbaka vid startpunkten"}
-                                                </p>
-
-                                                <p className="text-lg mb-2">
-                                                    <strong>Sträcka (distance):</strong>
-                                                </p>
-                                                <p className="text-2xl">
-                                                    <span className="highlight-value bg-green-100">s = {formatNumber(areaData.distance, 2)} m</span>
-                                                </p>
-                                                <p className="text-sm text-gray-600">
-                                                    ↔ Total längd objektet har rört sig (alltid positivt)
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <div className="mt-4 p-4 bg-white rounded border-l-4 border-blue-500">
-                                            <p className="font-semibold text-blue-900 mb-2">💡 Viktigt att förstå:</p>
-                                            <ul className="text-sm text-gray-700 space-y-1 list-disc pl-5">
-                                                <li><strong>Förflyttning</strong> är vektorstorhet (kan vara positiv, negativ eller noll)</li>
-                                                <li><strong>Sträcka</strong> är skalär storhet (alltid positiv eller noll)</li>
-                                                <li>När v &lt; 0 räknas arean som negativ för förflyttning</li>
-                                                <li>För sträcka räknas all area som positiv (absolutbelopp)</li>
-                                                {areaData.displacement !== areaData.distance && (
-                                                    <li className="font-bold text-blue-800">⚠️ Notera: Förflyttning ≠ Sträcka i detta fall!</li>
-                                                )}
-                                            </ul>
-                                        </div>
+                                <div className="glass-card rounded-xl p-3">
+                                    <div className="flbl mb-2">Tidsförlopp</div>
+                                    <div className="seg" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
+                                        {[[0.5, 'Långsamt'], [1, 'Normalt'], [3, 'Snabbt']].map(([v, t]) => (
+                                            <button key={v} className={speed === v ? 'active' : ''} onClick={() => setSpeed(v)}>{t}</button>
+                                        ))}
                                     </div>
-                                )}
+                                </div>
+
+                                <div className="lg:hidden flex flex-col gap-3">{paneler}</div>
                             </div>
+                        </main>
 
-                            {/* Controls */}
-                            <div className="space-y-6">
-                                {/* Motion Type */}
-                                <div className="bg-white rounded-xl shadow-lg p-6">
-                                    <h3 className="text-xl font-bold mb-4 text-gray-800">🎯 Typ av rörelse</h3>
-                                    <div className="space-y-3">
-                                        <label className={`flex items-center p-3 rounded-lg border-2 cursor-pointer transition ${motionType === 'constant-velocity' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}`}>
-                                            <input
-                                                type="radio"
-                                                name="motionType"
-                                                value="constant-velocity"
-                                                checked={motionType === 'constant-velocity'}
-                                                onChange={(e) => setMotionType(e.target.value)}
-                                                className="w-5 h-5"
-                                            />
-                                            <span className="ml-3 font-medium">Konstant hastighet</span>
-                                        </label>
-                                        <label className={`flex items-center p-3 rounded-lg border-2 cursor-pointer transition ${motionType === 'constant-acceleration' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}`}>
-                                            <input
-                                                type="radio"
-                                                name="motionType"
-                                                value="constant-acceleration"
-                                                checked={motionType === 'constant-acceleration'}
-                                                onChange={(e) => setMotionType(e.target.value)}
-                                                className="w-5 h-5"
-                                            />
-                                            <span className="ml-3 font-medium">Konstant acceleration</span>
-                                        </label>
-                                        <label className={`flex items-center p-3 rounded-lg border-2 cursor-pointer transition ${motionType === 'variable-acceleration' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}`}>
-                                            <input
-                                                type="radio"
-                                                name="motionType"
-                                                value="variable-acceleration"
-                                                checked={motionType === 'variable-acceleration'}
-                                                onChange={(e) => setMotionType(e.target.value)}
-                                                className="w-5 h-5"
-                                            />
-                                            <span className="ml-3 font-medium">Varierande acceleration</span>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                {/* Parameters */}
-                                <div className="bg-white rounded-xl shadow-lg p-6">
-                                    <h3 className="text-xl font-bold mb-4 text-gray-800">⚙️ Parametrar</h3>
-
-                                    {/* Initial velocity */}
-                                    <div className="mb-6">
-                                        <div className="flex justify-between items-center mb-2">
-                                            <label className="font-semibold text-gray-700">Starthastighet (v₀)</label>
-                                            <span className="text-lg font-bold text-blue-600">{v0} m/s</span>
-                                        </div>
-                                        <input
-                                            type="range"
-                                            min="-10"
-                                            max="20"
-                                            step="1"
-                                            value={v0}
-                                            onChange={(e) => setV0(parseFloat(e.target.value))}
-                                            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                                        />
-                                        <div className="flex justify-between text-xs text-gray-500 mt-1">
-                                            <span>-10 m/s</span>
-                                            <span>20 m/s</span>
-                                        </div>
-                                    </div>
-
-                                    {/* Acceleration */}
-                                    {motionType !== 'constant-velocity' && (
-                                        <div className="mb-6">
-                                            <div className="flex justify-between items-center mb-2">
-                                                <label className="font-semibold text-gray-700">Acceleration (a)</label>
-                                                <span className="text-lg font-bold text-green-600">{acceleration} m/s²</span>
-                                            </div>
-                                            <input
-                                                type="range"
-                                                min="-5"
-                                                max="5"
-                                                step="0.1"
-                                                value={acceleration}
-                                                onChange={(e) => setAcceleration(parseFloat(e.target.value))}
-                                                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                                            />
-                                            <div className="flex justify-between text-xs text-gray-500 mt-1">
-                                                <span>-5 m/s²</span>
-                                                <span>5 m/s²</span>
-                                            </div>
-                                        </div>
-                                    )}
-
-                                </div>
-
-                                {/* Display options */}
-                                <div className="bg-white rounded-xl shadow-lg p-6">
-                                    <h3 className="text-xl font-bold mb-4 text-gray-800">👁️ Visningsalternativ</h3>
-
-                                    <label className="flex items-center mb-4 cursor-pointer">
-                                        <input
-                                            type="checkbox"
-                                            checked={showSlope}
-                                            onChange={(e) => setShowSlope(e.target.checked)}
-                                            className="w-5 h-5 text-green-600"
-                                        />
-                                        <span className="ml-3 font-medium">Visa lutning (acceleration)</span>
-                                    </label>
-
-                                    {/* Tangent time slider */}
-                                    {showSlope && (
-                                        <div className="mt-4 mb-6 p-4 bg-green-50 rounded-lg border border-green-200">
-                                            <div className="flex justify-between items-center mb-2">
-                                                <label className="text-sm font-medium text-green-900">Tangeringspunkt</label>
-                                                <span className="font-bold text-green-700">t = {tangentTime} s</span>
-                                            </div>
-                                            <input
-                                                type="range"
-                                                min="0"
-                                                max="20"
-                                                step="0.5"
-                                                value={tangentTime}
-                                                onChange={(e) => setTangentTime(parseFloat(e.target.value))}
-                                                className="w-full h-2 bg-green-200 rounded-lg appearance-none cursor-pointer"
-                                            />
-                                            <div className="flex justify-between text-xs text-gray-500 mt-1">
-                                                <span>0 s</span>
-                                                <span>20 s</span>
-                                            </div>
-                                        </div>
-                                    )}
-
-                                    <label className="flex items-center mb-4 cursor-pointer">
-                                        <input
-                                            type="checkbox"
-                                            checked={showArea}
-                                            onChange={(e) => setShowArea(e.target.checked)}
-                                            className="w-5 h-5 text-blue-600"
-                                        />
-                                        <span className="ml-3 font-medium">Visa area (sträcka/förflyttning)</span>
-                                    </label>
-
-                                    {showArea && (
-                                        <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-                                            <p className="font-semibold mb-3 text-blue-900">Tidsintervall för area:</p>
-
-                                            <div className="mb-4">
-                                                <div className="flex justify-between items-center mb-2">
-                                                    <label className="text-sm font-medium">Starttid</label>
-                                                    <span className="font-bold text-blue-600">{areaStart} s</span>
-                                                </div>
-                                                <input
-                                                    type="range"
-                                                    min="0"
-                                                    max="19"
-                                                    step="0.5"
-                                                    value={areaStart}
-                                                    onChange={(e) => {
-                                                        const val = parseFloat(e.target.value);
-                                                        setAreaStart(val);
-                                                        if (val >= areaEnd) setAreaEnd(val + 1);
-                                                    }}
-                                                    className="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer"
-                                                />
-                                            </div>
-
-                                            <div>
-                                                <div className="flex justify-between items-center mb-2">
-                                                    <label className="text-sm font-medium">Sluttid</label>
-                                                    <span className="font-bold text-blue-600">{areaEnd} s</span>
-                                                </div>
-                                                <input
-                                                    type="range"
-                                                    min={areaStart + 0.5}
-                                                    max="20"
-                                                    step="0.5"
-                                                    value={areaEnd}
-                                                    onChange={(e) => setAreaEnd(parseFloat(e.target.value))}
-                                                    className="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer"
-                                                />
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-
-                                {/* Formulas */}
-                                <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl shadow-lg p-6 border-2 border-purple-200">
-                                    <h3 className="text-xl font-bold mb-4 text-purple-900">📚 Formelsamling</h3>
-                                    <div className="space-y-3 text-sm">
-                                        <div className="bg-white p-3 rounded shadow">
-                                            <p className="font-bold text-purple-800">Hastighet vid konstant acceleration:</p>
-                                            <p className="font-mono mt-1">v(t) = v₀ + a·t</p>
-                                            <p className="text-xs text-gray-600 mt-1">v₀ = {v0} m/s, a = {acceleration} m/s²</p>
-                                        </div>
-                                        <div className="bg-white p-3 rounded shadow">
-                                            <p className="font-bold text-purple-800">Acceleration från lutning:</p>
-                                            <p className="font-mono mt-1">a = Δv / Δt</p>
-                                        </div>
-                                        <div className="bg-white p-3 rounded shadow">
-                                            <p className="font-bold text-purple-800">Sträcka från area:</p>
-                                            <p className="font-mono mt-1">s = ∫ v(t) dt</p>
-                                            <p className="text-xs text-gray-600 mt-1">Area under kurvan</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Info box */}
-                                <div className="bg-amber-50 rounded-xl shadow-lg p-6 border-2 border-amber-200">
-                                    <h3 className="text-xl font-bold mb-3 text-amber-900">💡 Kom ihåg!</h3>
-                                    <ul className="space-y-2 text-sm text-amber-900">
-                                        <li>✓ <strong>Lutning</strong> på v-t-graf = <strong>Acceleration</strong></li>
-                                        <li>✓ <strong>Area</strong> under v-t-graf = <strong>Sträcka eller Förflyttning</strong></li>
-                                        <li>✓ <strong>Förflyttning</strong>: Positiv area - Negativ area (kan vara negativ)</li>
-                                        <li>✓ <strong>Sträcka</strong>: Total area (alltid positiv)</li>
-                                        <li>✓ Horisontell linje = konstant hastighet</li>
-                                        <li>✓ Rät linje med lutning = konstant acceleration</li>
-                                        <li>✓ Kurva = varierande acceleration</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        <details className="glass-card rounded-xl p-4 mt-6">
+                            <summary className="accordion-head">
+                                <span>Så hänger det ihop</span>
+                                <span aria-hidden="true">+</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2" style={{ color: 'var(--lab-ink-soft)', fontSize: 14.5, lineHeight: 1.55, paddingLeft: 18, listStyle: 'disc' }}>
+                                <li>I ett <em>v-t</em>-diagram står hastigheten <em>v</em> på <em>y</em>-axeln och tiden <em>t</em> på <em>x</em>-axeln. Vid konstant acceleration blir grafen en rät linje, och ju brantare linjen är, desto större är accelerationen.</li>
+                                <li>Lutningen räknas som <em>a</em> = Δ<em>v</em>/Δ<em>t</em> = (<em>v</em><sub>2</sub> − <em>v</em><sub>1</sub>)/(<em>t</em><sub>2</sub> − <em>t</em><sub>1</sub>). Mellan två tidpunkter ger sekantens lutning medelaccelerationen, och i en enda tidpunkt ger tangentens lutning momentanaccelerationen.</li>
+                                <li>Arean mellan grafen och <em>t</em>-axeln är förflyttningen Δ<em>s</em>. Arean motsvarar en hastighet gånger en tid, och Δ<em>s</em> = <em>v</em> · Δ<em>t</em>. Därför får arean enheten m när axlarna har m/s och s.</li>
+                                <li>Area ovanför <em>t</em>-axeln räknas positiv och area under negativ. Sträckan <em>s</em> räknas likadant, men då räknas även arean under axeln positiv. När vagnen rullar fram och sedan tillbaka blir förflyttningen mindre än sträckan.</li>
+                                <li>Prickarna på skenan sätts en gång i sekunden. Vid konstant hastighet ligger de på lika avstånd, och när farten ökar blir avstånden större för varje sekund.</li>
+                                <li>Ett negativt värde på <em>a</em> betyder inte alltid att vagnen bromsar. Rullar den bakåt (<em>v</em> &lt; 0) och <em>a</em> &lt; 0 ökar farten bakåt. Vagnen bromsar när <em>v</em> och <em>a</em> har olika tecken.</li>
+                            </ul>
+                        </details>
                     </div>
                 </div>
             );
         };
 
-        ReactDOM.render(<VelocityTimeSimulation />, document.getElementById('root'));
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
     </script>
     <script src="feedback.js" defer></script>
     <script src="sim-dock.js" defer></script>

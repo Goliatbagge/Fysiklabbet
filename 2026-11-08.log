@@ -1,0 +1,41 @@
+03:15:02  [idag] === Nyhetsjobb: start (2026-11-08) ===
+03:15:03  [idag] Dagens nyhet finns (förberedd i går).
+03:15:04  [idag] Startar Claude Code (headless, modell opus, nyckel)...
+03:20:03  [imorgon] === Nyhetsjobb: start (2026-11-08) ===
+03:20:03  [imorgon] En körning pågår redan (lås 5 min gammalt). Avslutar.
+03:29:00  [idag] Nyheten för 2026-11-09 är skriven, godkänd av utgivaren och committad på grenen `nyhetsjobb` (45871008). Jag har varken pushat, pullat eller mejlat.
+03:29:00  [idag] 
+03:29:00  [idag] **Artikeln:** "Uranus och Neptunus magnetfält kan ha vridit sig sedan Voyager 2 flög förbi" (`2026-11-09-isjattarnas-vingliga-magnetfalt`, kategori Magnetism).
+03:29:00  [idag] - **Originalstudien är läst i fulltext:** Yan m.fl., *Communications Physics* 9, 336 (publicerad 3 november, granskad, öppen CC BY).
+03:29:00  [idag] - **Innehåll:** datorsimuleringar visar att vatten som leder ström bättre ju djupare man kommer kan ge isjättarnas lutade, oordnade magnetfält. I simuleringarna kan fälten dessutom ändras kraftigt på några årtionden.
+03:29:00  [idag] - **Grannen:** gårdagens artikel är mekanik, så ämnesområdet krockar inte.
+03:29:00  [idag] - **Bilder:** huvudbilden är Voyager 2:s foto av Neptunus (public domain). I texten ligger ett utsnitt ur figur 3 i studien.
+03:29:00  [idag] - **Övrigt i artikeln:** rutan "Prova själv" pekar på simuleringen Jordmagnetiska fältet. Ordlistan har fått det nya begreppet *dynamo*.
+03:29:00  [idag] 
+03:29:00  [idag] **Utgivaren:** första utslaget var RÄTTA FÖRST med tre punkter:
+03:29:00  [idag] - Jordens magnetfält lutar nu knappt 10 grader, inte 11.
+03:29:00  [idag] - Kontrollen med mindre friktion gjordes bara på en enda modell, och texten säger nu det.
+03:29:00  [idag] - Stallard-citatet hade fått slutet bortklippt; det är nu med.
+03:29:00  [idag] 
+03:29:00  [idag] Efter rättningarna blev utslaget GODKÄND. Språkverifieraren flaggade sedan "tre gånger mindre friktion", som jag skrev om till "en tredjedel så stor friktion".
+03:29:00  [idag] 
+03:29:00  [idag] **Kontroller:** `verify-navigation`, `verify-begrepp` och `verify-sitemap` är gröna, och `build-nyheter-og.js` är körd. En skärmdump av förhandsvisningen ser rätt ut. Port 8000 visar den gamla huvudkatalogen, så den togs från en tillfällig server på worktreen.
+03:29:00  [idag] 
+03:29:00  [idag] **Det här bör du känna till:**
+03:29:00  [idag] - **Rockringen väntar:** den teasades i brevet 2026-11-08 men är mekanik, precis som gårdagens artikel. Jag har märkt den i `ko.md` med fönstret 2026-11-10 till senast lördag 2026-11-14. Den märkningen hade inte gjorts när brevet skrevs.
+03:29:00  [idag] - **Mitt första val gick inte att läsa:** solstormen GLE 77 och strålning på flyghöjd (Space Weather, CC BY). Wiley spärrar fulltexten för både curl och automatiserad Chrome. Den ligger nu i kön med en anteckning om spärren.
+03:29:00  [idag] - **Lämnat utanför committen:** byggskriptet ändrade radslut i många av de äldre delningssidorna och skrev om filerna i `i18n/`. Det ändrar inget innehåll, så de filerna är inte med. Mappen `.claude/nyheter/logg/` fanns redan och är inte heller med.
+03:29:01  [idag] Claude avslutade med kod 0
+03:29:02  [idag] error: cannot pull with rebase: You have unstaged changes.
+03:29:02  [idag] error: Please commit or stash them.
+03:29:06  [idag] Pushat till main.
+03:29:06  [idag] Artikel 2026-11-09 pushad: 2026-11-09-isjattarnas-vingliga-magnetfalt
+03:30:37  [idag] https://fysiklabbet.se/nyheter.html?forhand=2026-11-09-isjattarnas-vingliga-magnetfalt
+03:30:37  [idag] Mejlet byggt av mallen (C:\claude\Fysiklabbet-nyhetsjobb\.claude\nyheter\logg\mejl-2026-11-09).
+03:30:37  [idag] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+03:30:43  [idag] You've hit your session limit · resets 6:40am (Europe/Stockholm)
+03:30:44  [idag] Claude avslutade med kod 1
+03:30:44  [idag] FEL: Granskningsmejlet misslyckades (Claude-sessionen gav inget kvitto på att mejlet skickades.) Larmar via GitHub.
+03:30:46  [idag] https://github.com/Goliatbagge/Fysiklabbet/actions/runs/42438856101
+03:30:47  [idag] Larmet skickat till GitHub (Nyhetsjobb-larm).
+03:30:47  [idag] === Nyhetsjobb: slut ===

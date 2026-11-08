@@ -5,21 +5,21 @@
     <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intensitet och ljudnivå — Fysiklabbet</title>
-    <meta name="description" content="En punktformig ljudkälla och en lyssnare du kan dra i. Ändra utsänd effekt och avstånd och se hur ljudintensiteten I = P/(4π · r²) och ljudnivån L = 10 · lg(I/I₀) ändras — med en decibelskala från hörbarhetsgräns till smärtgräns. Dubbla avståndet ger −6 dB, dubbla effekten +3 dB.">
+    <meta name="description" content="En rundstrålande högtalare och en ljudnivåmätare du drar runt i 3D. Se effekten P spridas över en sfär med arean 4π · r², hur mycket som går genom en kvadratmeter och hur ljudintensiteten I och ljudnivån L ändras. Dubbla avståndet ger 6 dB lägre, två likadana källor bara 3 dB mer.">
     <link rel="canonical" href="https://fysiklabbet.se/fysik2-ljudniva-app.html">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Fysiklabbet">
     <meta property="og:title" content="Intensitet och ljudnivå — Fysik nivå 2">
-    <meta property="og:description" content="En punktformig ljudkälla och en lyssnare du kan dra i. Ändra utsänd effekt och avstånd och se hur ljudintensiteten I = P/(4π · r²) och ljudnivån L = 10 · lg(I/I₀) ändras — med en decibelskala från hörbarhetsgräns till smärtgräns. Dubbla avståndet ger −6 dB, dubbla effekten +3 dB.">
+    <meta property="og:description" content="En rundstrålande högtalare och en ljudnivåmätare du drar runt i 3D. Se effekten P spridas över en sfär med arean 4π · r², hur mycket som går genom en kvadratmeter och hur ljudintensiteten I och ljudnivån L ändras. Dubbla avståndet ger 6 dB lägre, två likadana källor bara 3 dB mer.">
     <meta property="og:url" content="https://fysiklabbet.se/fysik2-ljudniva-app.html">
     <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Intensitet och ljudnivå — Fysik nivå 2">
-    <meta name="twitter:description" content="En punktformig ljudkälla och en lyssnare du kan dra i. Ändra utsänd effekt och avstånd och se hur ljudintensiteten I = P/(4π · r²) och ljudnivån L = 10 · lg(I/I₀) ändras — med en decibelskala från hörbarhetsgräns till smärtgräns. Dubbla avståndet ger −6 dB, dubbla effekten +3 dB.">
+    <meta name="twitter:description" content="En rundstrålande högtalare och en ljudnivåmätare du drar runt i 3D. Se effekten P spridas över en sfär med arean 4π · r², hur mycket som går genom en kvadratmeter och hur ljudintensiteten I och ljudnivån L ändras. Dubbla avståndet ger 6 dB lägre, två likadana källor bara 3 dB mer.">
     <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -33,6 +33,7 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
     <style>
         html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
@@ -48,7 +49,39 @@
 
         .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
                 color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
-        .fnum { color: var(--lab-ink); font-size: 19px; }
+        .fnum { color: var(--lab-ink); font-size: 22px; font-family: 'Instrument Serif', serif; }
+
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            -webkit-user-select: none;
+            background: radial-gradient(ellipse at 50% 38%, #fbf7ef 0%, #f1e9da 60%, #e6dcc9 100%);
+            touch-action: none;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        .tre-mount { position: absolute; inset: 0; }
+        .tre-mount > canvas { display: block; width: 100%; height: 100%; outline: none; }
+        /* Mobil: scenen ligger i flödet med egen höjd, både i normalläge och
+           i fullskärm, så att sim-dock.js kan docka verktygen UNDER den
+           (CLAUDE.md, fälla 5 under "Mobil (≤600px)"). */
+        @media (max-width: 600px) {
+            body.lab-sim .scene-wrap:not(:fullscreen) .tre-mount { position: relative; inset: auto; height: 440px; }
+            body.lab-sim .scene-wrap:is(:fullscreen, :-webkit-full-screen) .tre-mount {
+                position: sticky; inset: auto; top: 0; z-index: 2;
+                flex: 0 0 auto; width: 100%; height: 52vh;
+            }
+        }
+        .scene-wrap.grab { cursor: grab; }
+        .scene-wrap.dragging { cursor: grabbing; }
+        .scene-wrap.flytta { cursor: move; }
 
         .scene-info {
             position: absolute; bottom: 12px; right: 14px; z-index: 5;
@@ -64,27 +97,11 @@
         .scene-info .si-val { font-size: 15px; font-weight: 700;
             color: var(--lab-ink, #0f1620); font-family: 'JetBrains Mono', monospace; }
 
-        .scene-wrap {
-            position: relative;
-            width: 100%;
-            height: 560px;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(15,22,32,0.18);
-            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
-            user-select: none;
-            background: #f3eee4;
-        }
-        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
-            width: 100vw; height: 100vh; border-radius: 0;
-        }
-        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
-
         .scene-hint {
             position: absolute; bottom: 10px; left: 12px; z-index: 5;
             font-size: 12px; color: #e9edf3;
             background: rgba(15,22,32,0.80); padding: 4px 11px; border-radius: 7px;
-            pointer-events: none; font-weight: 500;
+            pointer-events: none; font-weight: 500; max-width: calc(100% - 210px);
         }
 
         .scene-toggles {
@@ -95,12 +112,13 @@
             border-radius: 10px; padding: 9px 13px;
             display: flex; flex-direction: column; gap: 3px;
             box-shadow: 0 2px 8px rgba(15,22,32,0.12);
-            max-width: 262px;
+            max-width: 236px;
         }
         .scene-toggles .st-title {
             font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
             color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
         }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
         .scene-toggles label {
             display: flex; align-items: center; gap: 7px; cursor: pointer;
             font-size: 13px; color: var(--lab-ink, #0f1620);
@@ -109,22 +127,36 @@
             width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
         }
         .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
-        .scene-toggles .st-actions {
-            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
-            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
-        }
+        .scene-toggles .st-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin: 0 3px; }
+        .scene-toggles .st-actions { display: flex; flex-direction: column; gap: 7px; margin-top: 9px; }
 
         .btn-toggle {
             background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
             border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
-            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
-            transition: all 0.15s ease;
+            border-radius: 8px; padding: 8px 12px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease; font-size: 14px;
         }
         .btn-toggle:hover:not(.active) { border-color: var(--lab-accent, #c8324a); }
         .btn-toggle.active {
             background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
             border-color: var(--lab-ink, #0f1620);
         }
+        .vy-seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; border-radius: 9px; overflow: hidden;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .vy-seg button { background: var(--lab-bg, #f3eee4); border: 0; padding: 7px 4px; font-size: 12.5px;
+                         font-weight: 600; color: var(--lab-ink); cursor: pointer; }
+        .vy-seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+
+        .forsok-btn { text-align: left; padding: 9px 12px; }
+        .forsok-btn .fb-namn { display: block; font-size: 14px; }
+        .forsok-btn .fb-sub { display: block; font-size: 12px; font-weight: 400; color: var(--lab-ink-muted, #5a6170); margin-top: 1px; }
+        .forsok-btn.active .fb-sub { color: rgba(243,238,228,0.75); }
+
+        .jmf-rad { display: flex; justify-content: space-between; gap: 10px; font-size: 14px;
+                   padding: 4px 0; border-bottom: 1px dashed var(--lab-line, rgba(15,22,32,0.14)); color: var(--lab-ink); }
+        .jmf-rad:last-child { border-bottom: 0; }
+        .jmf-rad b { font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
 
         details > summary { list-style: none; cursor: pointer; }
         details > summary::-webkit-details-marker { display: none; }
@@ -207,74 +239,873 @@
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
 
+        // ─────────────────────────────────────────────────────────────────
+        // Intensitet och ljudnivå (fy2-2.11), omgjord i 3D 2026-11-08.
+        //
+        // En rundstrålande högtalare (tolv element på en dodekaeder, den
+        // sorts ljudkälla man använder i akustiklabb för att få en
+        // punktformig källa) står mitt i ett rum med gallergolv. Eleven
+        // drar en ljudnivåmätare på stativ runt i rummet. Sfären genom
+        // mätaren visar ytan som effekten P har spridits över, och en
+        // kvadrat på 1 m² vid mätaren visar vad intensiteten I betyder:
+        // effekten som går genom just den kvadratmetern. Decibelstegen
+        // bredvid scenen har ljudnivån L till vänster och intensiteten I
+        // till höger, så att man ser att varje 10 dB är en tiodubbling.
+        //
+        // Beteckningar exakt som genomgången: I = P/(4π · r²),
+        // L = 10 · lg(I/I₀), I₀ = 10⁻¹² W/m².
+        //
+        // Skala: högtalaren och mätaren ritas större än i verkligheten så
+        // att de syns när sfären är 40 m bred. Gallergolvets rutor och
+        // kvadraten är däremot exakt 1 m, så att avstånd och area stämmer.
+        // ─────────────────────────────────────────────────────────────────
+
         const I0 = 1e-12;                    // hörbarhetsgränsen (W/m²)
+        const LPMIN = -3, LPMAX = 2;         // effekten P på logskala: 1 mW till 100 W
+        const RMIN = 1, RMAX = 20;           // avståndet r (m)
+        const SRC_R = 0.8;                  // högtalarens radie i scenen (överdriven)
+        const GOLV_Y = -2.2;                 // gallergolvets höjd under ljudkällans mitt
+        const TVA_DX = 0.86;                 // två källor: var och en så här långt från mitten (vid full storlek)
 
-        // ── Glidarintervall ──
-        const LPMIN = -3, LPMAX = 2;         // effekt P på logskala: 1 mW – 100 W
-        const RMIN = 2, RMAX = 60;           // avstånd r (m)
+        const COL = {
+            ink:    '#0f1620',
+            muted:  '#5a6170',
+            src:    '#c0392b',   // ljudkällan och energin (röd, som teorifiguren)
+            rpil:   '#2563c9',   // avståndet r (blå, som teorifiguren)
+            sfar:   '#3e6ea8',   // sfären med arean 4π · r²
+            kvad:   '#d9701a',   // kvadratmetern vid mätaren
+            accent: '#c8324a',
+        };
 
-        // ── Scen-geometri (viewBox-koordinater) ──
-        const VBW = 820, VBH = 540;
-        const SX = 150, SY = 230;            // ljudkällans läge (px)
-        const RPPM = 10;                     // pixlar per meter (avståndet r)
-        const BARX0 = 110, BARX1 = 600;      // dB-skalans ändar (px)
-        const BARY = 470;                    // dB-skalans läge (px)
-        const DBMAX = 140;
-
+        // ── Talformatering (komma, noll utan decimaler, NBSP i tusental) ──
         const fmt = (num, decimals = 1) => {
             if (!isFinite(num)) return '–';
             const s = num.toFixed(decimals);
             if (parseFloat(s) === 0) return '0';
             return s.replace('.', ',').replace('-', '−');
         };
-        // tusentalsavgränsare med hårt mellanslag (NBSP)
         const fmtNum = (n, d) => {
             const s = n.toFixed(d);
             if (parseFloat(s) === 0) return '0';
             const [intp, frac] = s.split('.');
-            const withSpaces = intp.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+            const withSpaces = intp.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
             return frac !== undefined ? withSpaces + ',' + frac : withSpaces;
         };
-        // ljudintensitet med lämpligt prefix
+        // tre värdesiffror med lämpligt prefix
         const fmtI = (I) => {
-            const pick = (val, unit) => `${fmt(val, val < 10 ? 2 : val < 100 ? 1 : 0)} ${unit}`;
+            const pick = (val, unit) => `${fmt(val, val < 10 ? 2 : val < 100 ? 1 : 0)} ${unit}`;
             if (I >= 1) return pick(I, 'W/m²');
             if (I >= 1e-3) return pick(I * 1e3, 'mW/m²');
             if (I >= 1e-6) return pick(I * 1e6, 'µW/m²');
             if (I >= 1e-9) return pick(I * 1e9, 'nW/m²');
             return pick(I * 1e12, 'pW/m²');
         };
-        // effekt med lämpligt prefix
-        const fmtP = (P) => P >= 1 ? `${fmt(P, P < 10 ? 1 : 0)} W` : `${fmt(P * 1e3, P * 1e3 < 10 ? 1 : 0)} mW`;
-
-        const COL = {
-            ink:    '#0f1620',
-            src:    '#c0392b',   // ljudkällan (röd, som teorifigurerna)
-            rpil:   '#2563c9',   // avståndspilen r (blå, som teorifigurerna)
-            ring:   'rgba(37,99,201,0.55)',
-            sphere: '#9aa0a6',
-            meter:  '#c8324a',
+        const fmtP = (P) => P >= 0.1 ? `${fmt(P, P < 1 ? 2 : P < 10 ? 1 : 0)} W` : `${fmt(P * 1e3, P * 1e3 < 10 ? 1 : 0)} mW`;
+        const fmtR = (r) => `${fmt(r, Math.abs(r - Math.round(r)) < 0.05 ? 0 : 1)} m`;
+        const fmtL = (L) => `${fmt(L, 1)} dB`;
+        // kvot med två värdesiffror (0,25 / 4,0 / 100)
+        const fmtKvot = (k) => {
+            if (k >= 100) return fmtNum(k, 0);
+            const s = parseFloat(k.toPrecision(2));
+            const dec = s >= 10 ? 0 : s >= 1 ? 1 : Math.max(0, 1 - Math.floor(Math.log10(s)));
+            return fmt(s, dec);
         };
 
-        const Slider = ({ label, sub, value, min, max, step, unit, onChange, decimals = 1, valueText }) => (
+        // Exakt enligt genomgången. Två likadana källor tätt intill varandra:
+        // intensiteterna adderas, I = 2 · P/(4π · r²).
+        const berakna = (P, r, tva) => {
+            const A = 4 * Math.PI * r * r;
+            const I = (tva ? 2 : 1) * P / A;
+            const L = 10 * Math.log10(I / I0);
+            return { A, I, L };
+        };
+        const avrundaP = (logP) => parseFloat(Math.pow(10, logP).toPrecision(2));
+
+        // Delat läge mellan React och 3D-scenen (scenen byggs bara en gång)
+        const SIM = {
+            p: { P: 5, r: 10, ang: 1.5, tva: false, L: 96, show: { sfar: true, kvad: true, energi: true, etik: true } },
+            cb: {},
+            vy: null,
+        };
+
+        // ─────────────────────────────────────────────────────────────────
+        // Grafikhjälp
+        // ─────────────────────────────────────────────────────────────────
+        const linjar = (hex) => new THREE.Color(hex).convertSRGBToLinear();
+        function canvasTex(w, h, rita) {
+            const c = document.createElement('canvas');
+            c.width = w; c.height = h;
+            rita(c.getContext('2d'), w, h);
+            const t = new THREE.CanvasTexture(c);
+            t.encoding = THREE.sRGBEncoding;
+            t.anisotropy = 8;
+            return t;
+        }
+
+        // Etikett som går att skriva om: parts = [{ t, color, italic, sup, small, weight }]
+        function etikett() {
+            const c = document.createElement('canvas');
+            const ctx = c.getContext('2d');
+            const tex = new THREE.CanvasTexture(c);
+            tex.minFilter = THREE.LinearFilter;
+            tex.encoding = THREE.sRGBEncoding;
+            const spr = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false, toneMapped: false }));
+            spr.renderOrder = 20;
+            let nyckel = '';
+            const FS = 64, PAD = 14;
+            const font = (p) => `${p.italic ? 'italic ' : ''}${p.weight || 600} ${p.small || p.sup ? FS * 0.66 : FS}px Poppins, sans-serif`;
+            spr.userData.aspect = 1;
+            spr.userData.satt = (parts) => {
+                const k = JSON.stringify(parts);
+                if (k === nyckel) return;
+                nyckel = k;
+                let w = 0;
+                parts.forEach((p) => { ctx.font = font(p); w += ctx.measureText(p.t).width; });
+                c.width = Math.max(2, Math.ceil(w) + PAD * 2);
+                c.height = FS + PAD * 2;
+                ctx.clearRect(0, 0, c.width, c.height);
+                let x = PAD;
+                parts.forEach((p) => {
+                    ctx.font = font(p);
+                    ctx.textBaseline = 'middle';
+                    ctx.fillStyle = p.color || COL.ink;
+                    ctx.fillText(p.t, x, c.height / 2 + 3 + (p.sup ? -FS * 0.26 : 0));
+                    x += ctx.measureText(p.t).width;
+                });
+                tex.dispose();
+                tex.image = c;
+                tex.needsUpdate = true;
+                spr.userData.aspect = c.width / c.height;
+            };
+            return spr;
+        }
+
+        // Pil med skaft (cylinder, rak ände) och spets; skaftet slutar vid spetsens bas
+        const Y_AXEL = new THREE.Vector3(0, 1, 0);
+        const markMat = (hex) => new THREE.MeshStandardMaterial({
+            color: linjar(hex), emissive: linjar(hex).multiplyScalar(0.55),
+            roughness: 0.55, metalness: 0, toneMapped: false });
+        function pil(color) {
+            const g = new THREE.Group();
+            const mat = markMat(color);
+            const skaft = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 1, 14), mat);
+            const spets = new THREE.Mesh(new THREE.ConeGeometry(1, 1, 18), mat);
+            g.add(skaft, spets);
+            g.userData = { skaft, spets };
+            return g;
+        }
+        function stallPil(g, from, vec, r) {
+            const len = vec.length();
+            if (len < 1e-6) { g.visible = false; return; }
+            g.visible = true;
+            const head = Math.min(r * 6.5, len * 0.5);
+            const shaft = len - head;
+            g.position.copy(from);
+            g.quaternion.setFromUnitVectors(Y_AXEL, vec.clone().normalize());
+            const { skaft, spets } = g.userData;
+            skaft.scale.set(r, Math.max(shaft, 1e-4), r);
+            skaft.position.set(0, shaft / 2, 0);
+            spets.scale.set(r * 2.6, head, r * 2.6);
+            spets.position.set(0, shaft + head / 2, 0);
+        }
+
+        // Gallergolvet: rutor på 1 m, var femte linje kraftigare, tonar ut åt kanterna
+        function golvTextur(storlek) {
+            return canvasTex(2048, 2048, (ctx, w, h) => {
+                const px = w / storlek;
+                for (let i = 0; i <= storlek; i++) {
+                    const fem = i % 5 === 0;
+                    ctx.strokeStyle = fem ? 'rgba(52,62,78,0.34)' : 'rgba(52,62,78,0.17)';
+                    ctx.lineWidth = fem ? 3.4 : 1.8;
+                    ctx.beginPath(); ctx.moveTo(i * px, 0); ctx.lineTo(i * px, h); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(0, i * px); ctx.lineTo(w, i * px); ctx.stroke();
+                }
+                ctx.globalCompositeOperation = 'destination-in';
+                const g = ctx.createRadialGradient(w / 2, h / 2, w * 0.12, w / 2, h / 2, w / 2);
+                g.addColorStop(0, 'rgba(0,0,0,1)'); g.addColorStop(0.7, 'rgba(0,0,0,0.75)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+                ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+            });
+        }
+        // Mjuk omgivning att spegla metallen i
+        function omgivning(renderer) {
+            const tex = canvasTex(1024, 512, (ctx, w, h) => {
+                const g = ctx.createLinearGradient(0, 0, 0, h);
+                g.addColorStop(0, '#fbf8f2'); g.addColorStop(0.5, '#efe7d8'); g.addColorStop(1, '#8b7a64');
+                ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+                ctx.fillStyle = 'rgba(255,255,255,0.95)';
+                ctx.fillRect(w * 0.12, h * 0.12, w * 0.16, h * 0.2);
+                ctx.fillRect(w * 0.6, h * 0.08, w * 0.22, h * 0.14);
+            });
+            tex.mapping = THREE.EquirectangularReflectionMapping;
+            const pm = new THREE.PMREMGenerator(renderer);
+            const env = pm.fromEquirectangular(tex).texture;
+            pm.dispose();
+            return env;
+        }
+        // Ljudnivåmätarens display (LCD)
+        function lcdTextur() {
+            const c = document.createElement('canvas');
+            c.width = 512; c.height = 200;
+            const tex = new THREE.CanvasTexture(c);
+            tex.encoding = THREE.sRGBEncoding;
+            tex.anisotropy = 8;
+            let senast = '';
+            tex.userData = {
+                satt: (txt) => {
+                    if (txt === senast) return;
+                    senast = txt;
+                    const ctx = c.getContext('2d');
+                    const g = ctx.createLinearGradient(0, 0, 0, c.height);
+                    g.addColorStop(0, '#cdd8bf'); g.addColorStop(1, '#b7c4a6');
+                    ctx.fillStyle = g; ctx.fillRect(0, 0, c.width, c.height);
+                    ctx.fillStyle = '#1d2a1c';
+                    ctx.textBaseline = 'middle';
+                    ctx.font = '700 118px "JetBrains Mono", monospace';
+                    ctx.textAlign = 'right';
+                    ctx.fillText(txt, c.width - 130, c.height / 2 + 8);
+                    ctx.font = '600 52px Poppins, sans-serif';
+                    ctx.textAlign = 'left';
+                    ctx.fillText('dB', c.width - 112, c.height / 2 + 26);
+                    ctx.font = '600 30px Poppins, sans-serif';
+                    ctx.fillStyle = 'rgba(29,42,28,0.7)';
+                    ctx.fillText('LAeq', 22, 32);
+                    tex.needsUpdate = true;
+                },
+            };
+            return tex;
+        }
+        // Rund prick till energipartiklarna
+        function prickTextur() {
+            return canvasTex(64, 64, (ctx, w, h) => {
+                const g = ctx.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, w / 2);
+                g.addColorStop(0, 'rgba(255,255,255,1)'); g.addColorStop(0.55, 'rgba(255,255,255,1)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+                ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+            });
+        }
+
+        // ── Den rundstrålande högtalaren: dodekaeder med ett element på varje sida ──
+        function hogtalare(env) {
+            const g = new THREE.Group();
+            const huvud = new THREE.Group();
+            g.add(huvud);
+            g.userData.huvud = huvud;
+            const R = SRC_R;
+            const kroppMat = new THREE.MeshStandardMaterial({ color: linjar('#2f343c'), roughness: 0.5, metalness: 0.25, envMap: env, envMapIntensity: 0.6, flatShading: true });
+            const geo = new THREE.DodecahedronGeometry(R, 0);
+            const kropp = new THREE.Mesh(geo, kroppMat);
+            kropp.castShadow = true;
+            huvud.add(kropp);
+            const kanter = new THREE.LineSegments(new THREE.EdgesGeometry(geo), new THREE.LineBasicMaterial({ color: linjar('#8a929e'), transparent: true, opacity: 0.55 }));
+            huvud.add(kanter);
+            // sidornas normaler: gruppera trianglarnas normaler
+            const pos = geo.attributes.position;
+            const normaler = [];
+            const a = new THREE.Vector3(), b = new THREE.Vector3(), c = new THREE.Vector3();
+            for (let i = 0; i < pos.count; i += 3) {
+                a.fromBufferAttribute(pos, i); b.fromBufferAttribute(pos, i + 1); c.fromBufferAttribute(pos, i + 2);
+                const n = new THREE.Vector3().subVectors(c, b).cross(new THREE.Vector3().subVectors(a, b)).normalize();
+                if (n.dot(a) < 0) n.negate();
+                if (!normaler.some(m => m.dot(n) > 0.99)) normaler.push(n);
+            }
+            const ri = R * 0.7947;
+            const ringMat = new THREE.MeshStandardMaterial({ color: linjar('#15181c'), roughness: 0.85 });
+            const konMat = new THREE.MeshStandardMaterial({ color: linjar('#4a515c'), roughness: 0.6, metalness: 0.2, side: THREE.DoubleSide });
+            const kapMat = new THREE.MeshStandardMaterial({ color: linjar('#9aa3ad'), roughness: 0.3, metalness: 0.8, envMap: env });
+            normaler.forEach((n) => {
+                const d = new THREE.Group();
+                const kon = new THREE.Mesh(new THREE.CylinderGeometry(R * 0.33, R * 0.12, R * 0.07, 32, 1, true), konMat);
+                kon.position.y = R * 0.035;
+                const ring = new THREE.Mesh(new THREE.TorusGeometry(R * 0.34, R * 0.035, 10, 40), ringMat);
+                ring.rotation.x = Math.PI / 2;
+                ring.position.y = R * 0.045;
+                const kap = new THREE.Mesh(new THREE.SphereGeometry(R * 0.1, 18, 8, 0, Math.PI * 2, 0, Math.PI / 2), kapMat);
+                kap.position.y = R * 0.0;
+                d.add(kon, ring, kap);
+                d.quaternion.setFromUnitVectors(Y_AXEL, n);
+                d.position.copy(n).multiplyScalar(ri + 0.002);
+                huvud.add(d);
+            });
+            // stativ ned till golvet
+            const metall = new THREE.MeshStandardMaterial({ color: linjar('#b9bec5'), roughness: 0.3, metalness: 0.9, envMap: env });
+            const stav = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.045, -GOLV_Y - 0.25, 16), metall);
+            stav.position.y = (GOLV_Y - 0.25) / 2;
+            stav.castShadow = true;
+            g.add(stav);
+            g.add(tripod(metall, 0.62, 0.0));
+            return g;
+        }
+        // Tre ben från en nav på stativstången ned till golvet
+        function tripod(mat, spann, x0) {
+            const t = new THREE.Group();
+            const navY = GOLV_Y + 0.75;
+            const nav = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.12, 16), mat);
+            nav.position.set(x0, navY, 0);
+            t.add(nav);
+            for (let k = 0; k < 3; k++) {
+                const v = k * 2 * Math.PI / 3 + 0.4;
+                const fot = new THREE.Vector3(x0 + spann * Math.cos(v), GOLV_Y, spann * Math.sin(v));
+                const topp = new THREE.Vector3(x0, navY, 0);
+                const dir = new THREE.Vector3().subVectors(fot, topp);
+                const ben = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, dir.length(), 10), mat);
+                ben.position.copy(topp).addScaledVector(dir, 0.5);
+                ben.quaternion.setFromUnitVectors(Y_AXEL, dir.clone().normalize());
+                ben.castShadow = true;
+                t.add(ben);
+                const sko = new THREE.Mesh(new THREE.SphereGeometry(0.04, 10, 8), new THREE.MeshStandardMaterial({ color: linjar('#1d2025'), roughness: 0.9 }));
+                sko.position.copy(fot);
+                t.add(sko);
+            }
+            return t;
+        }
+        // ── Ljudnivåmätaren på stativ. Origo = mikrofonens mitt (där mätningen görs),
+        //    kroppen sträcker sig längs lokal +x, bort från ljudkällan. ──
+        function matare(env, lcd) {
+            const g = new THREE.Group();
+            const S = 3.4;   // överdriven storlek, så att mätaren syns på 20 m
+            const skum = new THREE.Mesh(new THREE.SphereGeometry(0.075 * S, 28, 20),
+                new THREE.MeshStandardMaterial({ color: linjar('#3c4148'), roughness: 1 }));
+            g.add(skum);
+            const hals = new THREE.Mesh(new THREE.CylinderGeometry(0.022 * S, 0.034 * S, 0.2 * S, 20),
+                new THREE.MeshStandardMaterial({ color: linjar('#c3c8ce'), roughness: 0.25, metalness: 0.9, envMap: env }));
+            hals.rotation.z = -Math.PI / 2;
+            hals.position.x = 0.15 * S;
+            g.add(hals);
+            const kroppMat = new THREE.MeshStandardMaterial({ color: linjar('#e3b23c'), roughness: 0.45, metalness: 0.05, envMap: env, envMapIntensity: 0.4 });
+            const kropp = new THREE.Mesh(new THREE.BoxGeometry(0.44 * S, 0.07 * S, 0.15 * S), kroppMat);
+            kropp.position.x = 0.47 * S;
+            kropp.castShadow = true;
+            g.add(kropp);
+            const ram = new THREE.Mesh(new THREE.BoxGeometry(0.3 * S, 0.012 * S, 0.12 * S),
+                new THREE.MeshStandardMaterial({ color: linjar('#23272d'), roughness: 0.6 }));
+            ram.position.set(0.43 * S, 0.04 * S, 0);
+            g.add(ram);
+            const skarm = new THREE.Mesh(new THREE.PlaneGeometry(0.26 * S, 0.1 * S),
+                new THREE.MeshBasicMaterial({ map: lcd, toneMapped: false }));
+            // displayen ligger på ovansidan, texten löper längs kroppen
+            skarm.rotation.set(-Math.PI / 2, 0, Math.PI);
+            skarm.position.set(0.43 * S, 0.0465 * S, 0);
+            g.add(skarm);
+            [-0.035, 0.035].forEach((z) => {
+                const knapp = new THREE.Mesh(new THREE.CylinderGeometry(0.013 * S, 0.013 * S, 0.012 * S, 14),
+                    new THREE.MeshStandardMaterial({ color: linjar('#2a2e34'), roughness: 0.6 }));
+                knapp.position.set(0.64 * S, 0.04 * S, z * S);
+                g.add(knapp);
+            });
+            const metall = new THREE.MeshStandardMaterial({ color: linjar('#b9bec5'), roughness: 0.3, metalness: 0.9, envMap: env });
+            const fx = 0.5 * S;
+            const stav = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, -GOLV_Y - 0.06 * S, 14), metall);
+            stav.position.set(fx, (GOLV_Y - 0.06 * S) / 2, 0);
+            stav.castShadow = true;
+            g.add(stav);
+            g.add(tripod(metall, 0.45, fx));
+            // osynlig, generös träffyta för att ta tag i mätaren
+            const greppa = new THREE.Mesh(new THREE.BoxGeometry(1.25 * S, 0.6, 0.7), new THREE.MeshBasicMaterial({ visible: false }));
+            greppa.position.x = 0.4 * S;
+            g.add(greppa);
+            g.userData.greppbara = [greppa, skum, kropp, stav];
+            return g;
+        }
+        // Sfärens latitud- och longitudlinjer (enhetssfär, skalas med r)
+        function sfarLinjer() {
+            const p = [];
+            const N = 96;
+            for (let m = 0; m < 12; m++) {
+                const f = m * Math.PI / 6;
+                for (let i = 0; i < N; i++) {
+                    const t0 = i * Math.PI / N, t1 = (i + 1) * Math.PI / N;
+                    p.push(Math.sin(t0) * Math.cos(f), Math.cos(t0), Math.sin(t0) * Math.sin(f));
+                    p.push(Math.sin(t1) * Math.cos(f), Math.cos(t1), Math.sin(t1) * Math.sin(f));
+                }
+            }
+            for (let k = 1; k < 8; k++) {
+                const t = k * Math.PI / 8;
+                for (let i = 0; i < N * 2; i++) {
+                    const f0 = i * Math.PI / N, f1 = (i + 1) * Math.PI / N;
+                    p.push(Math.sin(t) * Math.cos(f0), Math.cos(t), Math.sin(t) * Math.sin(f0));
+                    p.push(Math.sin(t) * Math.cos(f1), Math.cos(t), Math.sin(t) * Math.sin(f1));
+                }
+            }
+            const geo = new THREE.BufferGeometry();
+            geo.setAttribute('position', new THREE.Float32BufferAttribute(p, 3));
+            return geo;
+        }
+
+        const VYER = {
+            snett: { theta: 0.62, phi: 1.12 },
+            sidan: { theta: 0.0,  phi: 1.5 },
+            ovan:  { theta: 0.0,  phi: 0.04 },
+        };
+
+        // ─────────────────────────────────────────────────────────────────
+        // 3D-scenen
+        // ─────────────────────────────────────────────────────────────────
+        function LjudScene({ wrapRef }) {
+            const mountRef = useRef(null);
+            useEffect(() => {
+                const wrap = wrapRef.current;
+                const el = mountRef.current;
+                const W = () => el.clientWidth, H = () => el.clientHeight;
+
+                const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                renderer.setSize(W(), H());
+                renderer.setClearColor(0x000000, 0);
+                renderer.outputEncoding = THREE.sRGBEncoding;
+                renderer.toneMapping = THREE.ACESFilmicToneMapping;
+                renderer.toneMappingExposure = 1.05;
+                renderer.shadowMap.enabled = true;
+                renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+                el.appendChild(renderer.domElement);
+
+                const scene = new THREE.Scene();
+                const env = omgivning(renderer);
+                const camera = new THREE.PerspectiveCamera(34, W() / H(), 0.1, 400);
+
+                scene.add(new THREE.HemisphereLight(0xfffaf0, 0x9a8a72, 0.75));
+                const sol = new THREE.DirectionalLight(0xffffff, 1.0);
+                sol.position.set(12, 30, 16);
+                sol.castShadow = true;
+                sol.shadow.mapSize.set(2048, 2048);
+                Object.assign(sol.shadow.camera, { left: -26, right: 26, top: 26, bottom: -26, near: 1, far: 90 });
+                sol.shadow.bias = -0.0005;
+                sol.shadow.radius = 3;
+                scene.add(sol);
+                const fyll = new THREE.DirectionalLight(0xdfe8ff, 0.4);
+                fyll.position.set(-14, 8, -6);
+                scene.add(fyll);
+
+                // ── Gallergolvet (genomsiktligt, så att hela sfären syns) ──
+                const GOLV = 90;
+                const golv = new THREE.Mesh(new THREE.PlaneGeometry(GOLV, GOLV),
+                    new THREE.MeshBasicMaterial({ map: golvTextur(GOLV), transparent: true, depthWrite: false, toneMapped: false }));
+                golv.rotation.x = -Math.PI / 2;
+                golv.position.y = GOLV_Y;
+                golv.renderOrder = 1;
+                scene.add(golv);
+                const skugga = new THREE.Mesh(new THREE.PlaneGeometry(GOLV, GOLV), new THREE.ShadowMaterial({ opacity: 0.16, depthWrite: false }));
+                skugga.rotation.x = -Math.PI / 2;
+                skugga.position.y = GOLV_Y + 0.005;
+                skugga.receiveShadow = true;
+                scene.add(skugga);
+
+                // ── Ljudkällorna ──
+                const kalla1 = hogtalare(env);
+                const kalla2 = hogtalare(env);
+                scene.add(kalla1, kalla2);
+
+                // ── Sfären med radien r ──
+                const sfarG = new THREE.Group();
+                const sfarYta = new THREE.Mesh(new THREE.SphereGeometry(1, 64, 32),
+                    new THREE.MeshBasicMaterial({ color: linjar(COL.sfar), transparent: true, opacity: 0.07, side: THREE.DoubleSide, depthWrite: false, toneMapped: false }));
+                const sfarNat = new THREE.LineSegments(sfarLinjer(),
+                    new THREE.LineBasicMaterial({ color: linjar(COL.sfar), transparent: true, opacity: 0.38, depthWrite: false, toneMapped: false }));
+                sfarYta.renderOrder = 2; sfarNat.renderOrder = 3;
+                sfarG.add(sfarYta, sfarNat);
+                scene.add(sfarG);
+
+                // ── Kvadratmetern vid mätaren + strålarna från källan till dess hörn ──
+                const kvadG = new THREE.Group();
+                const kvadYta = new THREE.Mesh(new THREE.PlaneGeometry(1, 1),
+                    new THREE.MeshBasicMaterial({ color: linjar(COL.kvad), transparent: true, opacity: 0.42, side: THREE.DoubleSide, depthWrite: false, toneMapped: false }));
+                const kvadKant = new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints([
+                    new THREE.Vector3(-0.5, -0.5, 0), new THREE.Vector3(0.5, -0.5, 0), new THREE.Vector3(0.5, 0.5, 0), new THREE.Vector3(-0.5, 0.5, 0)]),
+                    new THREE.LineBasicMaterial({ color: linjar(COL.kvad), toneMapped: false }));
+                kvadYta.renderOrder = 4; kvadKant.renderOrder = 5;
+                kvadG.add(kvadYta, kvadKant);
+                scene.add(kvadG);
+                const stralGeo = new THREE.BufferGeometry();
+                stralGeo.setAttribute('position', new THREE.Float32BufferAttribute(new Array(24).fill(0), 3));
+                const stralar = new THREE.LineSegments(stralGeo,
+                    new THREE.LineBasicMaterial({ color: linjar(COL.kvad), transparent: true, opacity: 0.55, depthWrite: false, toneMapped: false }));
+                stralar.renderOrder = 4;
+                scene.add(stralar);
+
+                // ── Mätaren ──
+                const lcd = lcdTextur();
+                const matG = matare(env, lcd);
+                scene.add(matG);
+
+                // ── Avståndspilen r ──
+                const rPil = pil(COL.rpil);
+                scene.add(rPil);
+
+                // ── Energin som sprids: prickar som flyger rakt ut åt alla håll ──
+                const NP = 2400, DMAX = RMAX * 1.04, FART = 4.5;
+                const riktn = new Float32Array(NP * 3), fas = new Float32Array(NP);
+                for (let i = 0; i < NP; i++) {
+                    const z = Math.random() * 2 - 1, f = Math.random() * Math.PI * 2, s = Math.sqrt(1 - z * z);
+                    riktn[i * 3] = s * Math.cos(f); riktn[i * 3 + 1] = z; riktn[i * 3 + 2] = s * Math.sin(f);
+                    fas[i] = Math.random();
+                }
+                const prickMat = new THREE.PointsMaterial({ color: linjar(COL.src), size: 0.2, map: prickTextur(), transparent: true, alphaTest: 0.4, depthWrite: false, toneMapped: false });
+                const gorPrickar = () => {
+                    const geo = new THREE.BufferGeometry();
+                    geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(NP * 3), 3));
+                    const pts = new THREE.Points(geo, prickMat);
+                    pts.frustumCulled = false;
+                    pts.renderOrder = 6;
+                    scene.add(pts);
+                    return pts;
+                };
+                const prickar1 = gorPrickar(), prickar2 = gorPrickar();
+
+                // ── Etiketter ──
+                const lblP = etikett(), lblR = etikett(), lblKv = etikett(), lblA = etikett(), lblL = etikett();
+                scene.add(lblP, lblR, lblKv, lblA, lblL);
+
+                // ── Kamera: vrid, zooma, förinställda vyer ──
+                const cam = { theta: VYER.snett.theta, phi: VYER.snett.phi, zoom: 1, radius: 40 };
+                let camMal = null;
+                SIM.vy = (namn) => {
+                    const v = VYER[namn];
+                    const d = ((v.theta - cam.theta) % (2 * Math.PI) + 3 * Math.PI) % (2 * Math.PI) - Math.PI;
+                    camMal = { theta: cam.theta + d, phi: v.phi };
+                };
+                const target = new THREE.Vector3(0, -0.4, 0);
+                const radieFor = (r) => (r * 3.9 + 6) * cam.zoom;
+                cam.radius = radieFor(SIM.p.r);
+                const uppdateraKamera = () => {
+                    const sp = Math.sin(cam.phi);
+                    camera.position.set(
+                        target.x + cam.radius * sp * Math.sin(cam.theta),
+                        target.y + cam.radius * Math.cos(cam.phi),
+                        target.z + cam.radius * sp * Math.cos(cam.theta));
+                    camera.up.set(0, 1, 0);
+                    if (cam.phi < 0.1) camera.up.set(-Math.sin(cam.theta), 0, -Math.cos(cam.theta));
+                    camera.lookAt(target);
+                };
+
+                // ── Pekare: dra i mätaren = flytta den, dra i tomma ytan = vrid ──
+                const ray = new THREE.Raycaster();
+                const ndc = new THREE.Vector2();
+                const plan = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+                const pt = new THREE.Vector3();
+                const satt = (e) => {
+                    const r = el.getBoundingClientRect();
+                    ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+                    ray.setFromCamera(ndc, camera);
+                };
+                const paMatare = (e) => { satt(e); return ray.intersectObjects(matG.userData.greppbara, false).length > 0; };
+                const pekare = new Map();
+                let drag = null, pinch = null, flytt = false;
+                const onDown = (e) => {
+                    if (e.target !== renderer.domElement) return;
+                    pekare.set(e.pointerId, { x: e.clientX, y: e.clientY });
+                    renderer.domElement.setPointerCapture(e.pointerId);
+                    if (pekare.size === 1) {
+                        flytt = paMatare(e);
+                        drag = { x: e.clientX, y: e.clientY };
+                        wrap.classList.add(flytt ? 'flytta' : 'dragging');
+                    }
+                    if (pekare.size === 2) {
+                        const [a, b] = [...pekare.values()];
+                        pinch = { d: Math.hypot(a.x - b.x, a.y - b.y), z: cam.zoom };
+                        drag = null; flytt = false;
+                    }
+                    camMal = null;
+                };
+                const onMove = (e) => {
+                    if (pekare.has(e.pointerId)) pekare.set(e.pointerId, { x: e.clientX, y: e.clientY });
+                    if (pinch && pekare.size === 2) {
+                        const [a, b] = [...pekare.values()];
+                        const d = Math.hypot(a.x - b.x, a.y - b.y);
+                        cam.zoom = Math.max(0.35, Math.min(2.2, pinch.z * pinch.d / Math.max(d, 1)));
+                        return;
+                    }
+                    if (drag && flytt) {
+                        satt(e);
+                        if (ray.ray.intersectPlane(plan, pt)) {
+                            const r = Math.max(RMIN, Math.min(RMAX, Math.round(Math.hypot(pt.x, pt.z) * 10) / 10));
+                            if (SIM.cb.flytta) SIM.cb.flytta(r, Math.atan2(pt.z, pt.x));
+                        }
+                        return;
+                    }
+                    if (drag) {
+                        const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+                        drag.x = e.clientX; drag.y = e.clientY;
+                        cam.theta -= dx * 0.008;
+                        cam.phi = Math.max(0.04, Math.min(1.55, cam.phi - dy * 0.006));
+                        return;
+                    }
+                    if (e.pointerType === 'mouse' && e.target === renderer.domElement) {
+                        const pa = paMatare(e);
+                        wrap.classList.toggle('flytta', pa);
+                        wrap.classList.toggle('grab', !pa);
+                    }
+                };
+                const onUp = (e) => {
+                    pekare.delete(e.pointerId);
+                    if (pekare.size < 2) pinch = null;
+                    if (pekare.size === 0) { drag = null; flytt = false; }
+                    wrap.classList.remove('dragging', 'flytta');
+                };
+                const onWheel = (e) => {
+                    e.preventDefault();
+                    cam.zoom = Math.max(0.35, Math.min(2.2, cam.zoom * Math.exp(e.deltaY * 0.0012)));
+                };
+                el.addEventListener('pointerdown', onDown);
+                window.addEventListener('pointermove', onMove);
+                window.addEventListener('pointerup', onUp);
+                window.addEventListener('pointercancel', onUp);
+                el.addEventListener('wheel', onWheel, { passive: false });
+                wrap.classList.add('grab');
+
+                const ro = new ResizeObserver(() => {
+                    renderer.setSize(W(), H());
+                    camera.aspect = W() / H();
+                    // bred ruta: flytta bilden lite åt vänster, bort från inställningsrutan
+                    if (W() > 600) camera.setViewOffset(W(), H(), Math.round(W() * 0.05), 0, W(), H());
+                    else camera.clearViewOffset();
+                    // stående ruta: vidare synfält så att hela sfären ryms på bredden
+                    camera.fov = camera.aspect < 1 ? 34 / Math.max(camera.aspect, 0.55) : 34;
+                    camera.updateProjectionMatrix();
+                });
+                ro.observe(el);
+
+                let synlig = true;
+                const io = new IntersectionObserver((en) => { synlig = en[0].isIntersecting; }, { threshold: 0.01 });
+                io.observe(wrap);
+
+                // ── Animation ──
+                let t = 0, tLast = performance.now(), raf = 0, pRad = SRC_R * 0.9;
+                const u = new THREE.Vector3(), tmp = new THREE.Vector3();
+                const kc1 = new THREE.Vector3(), kc2 = new THREE.Vector3();
+                const etikettH = (spr, h) => spr.scale.set(h * spr.userData.aspect, h, 1);
+                const flyttaPrickar = (pts, c, r, syns) => {
+                    pts.visible = syns;
+                    if (!syns) return;
+                    const a = pts.geometry.attributes.position.array;
+                    for (let i = 0; i < NP; i++) {
+                        const d = ((t * FART / DMAX + fas[i]) % 1) * DMAX;
+                        if (d > r || d < pRad) { a[i * 3] = 0; a[i * 3 + 1] = -999; a[i * 3 + 2] = 0; continue; }
+                        a[i * 3] = c.x + riktn[i * 3] * d;
+                        a[i * 3 + 1] = c.y + riktn[i * 3 + 1] * d;
+                        a[i * 3 + 2] = c.z + riktn[i * 3 + 2] * d;
+                    }
+                    pts.geometry.attributes.position.needsUpdate = true;
+                };
+
+                const tick = () => {
+                    raf = requestAnimationFrame(tick);
+                    const now = performance.now();
+                    const dt = Math.min(0.05, (now - tLast) / 1000);
+                    tLast = now;
+                    if (!synlig) return;
+                    t += dt;
+                    const p = SIM.p, sh = p.show;
+                    const r = p.r;
+
+                    // källorna: en i mitten, eller två tätt intill varandra
+                    const vinkelratt = new THREE.Vector3(-Math.sin(p.ang), 0, Math.cos(p.ang));
+                    // nära källan krymps högtalaren, så att den ryms i en sfär på 1 m
+                    const ks = Math.min(1, 0.3 + 0.22 * r);
+                    kalla1.userData.huvud.scale.setScalar(ks); kalla2.userData.huvud.scale.setScalar(ks);
+                    pRad = SRC_R * ks * 0.9;
+                    kc1.set(0, 0, 0); kc2.set(0, 0, 0);
+                    if (p.tva) { kc1.addScaledVector(vinkelratt, TVA_DX * ks); kc2.addScaledVector(vinkelratt, -TVA_DX * ks); }
+                    kalla1.position.copy(kc1);
+                    kalla2.position.copy(kc2);
+                    kalla2.visible = p.tva;
+
+                    // mätaren på avståndet r från mitten
+                    u.set(Math.cos(p.ang), 0, Math.sin(p.ang));
+                    matG.position.copy(u).multiplyScalar(r);
+                    matG.rotation.set(0, -p.ang, 0);
+                    lcd.userData.satt(fmt(p.L, 1));
+
+                    sfarG.visible = sh.sfar;
+                    sfarG.scale.setScalar(r);
+
+                    kvadG.visible = sh.kvad;
+                    stralar.visible = sh.kvad;
+                    kvadG.position.copy(u).multiplyScalar(r);
+                    kvadG.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), u);
+                    if (sh.kvad) {
+                        const a = stralGeo.attributes.position.array;
+                        [[-0.5, -0.5], [0.5, -0.5], [0.5, 0.5], [-0.5, 0.5]].forEach(([x, y], k) => {
+                            tmp.set(x, y, 0).applyQuaternion(kvadG.quaternion).add(kvadG.position);
+                            a[k * 6] = 0; a[k * 6 + 1] = 0; a[k * 6 + 2] = 0;
+                            a[k * 6 + 3] = tmp.x; a[k * 6 + 4] = tmp.y; a[k * 6 + 5] = tmp.z;
+                        });
+                        stralGeo.attributes.position.needsUpdate = true;
+                    }
+
+                    // r-pilen från mitten till mikrofonen
+                    stallPil(rPil, new THREE.Vector3(0, 0, 0), u.clone().multiplyScalar(Math.max(0.05, r - 0.13)), 0.035 + r * 0.0025);
+
+                    flyttaPrickar(prickar1, kc1, r, sh.energi);
+                    flyttaPrickar(prickar2, kc2, r, sh.energi && p.tva);
+                    prickMat.size = 0.22 + r * 0.022;
+
+                    // kamera
+                    if (camMal) {
+                        const k = Math.min(1, dt * 5);
+                        cam.theta += (camMal.theta - cam.theta) * k;
+                        cam.phi += (camMal.phi - cam.phi) * k;
+                        if (Math.abs(camMal.phi - cam.phi) < 1e-3 && Math.abs(camMal.theta - cam.theta) < 1e-3) camMal = null;
+                    }
+                    cam.radius += (radieFor(r) - cam.radius) * Math.min(1, dt * 4);
+                    uppdateraKamera();
+
+                    // etiketter: konstant storlek på skärmen
+                    const h = cam.radius * 0.03 * Math.tan(camera.fov * Math.PI / 360) / Math.tan(17 * Math.PI / 180);
+                    [lblP, lblR, lblKv, lblA, lblL].forEach(s => { s.visible = sh.etik; });
+                    lblP.userData.satt(p.tva
+                        ? [{ t: '2 · ', color: COL.src }, { t: 'P', italic: true, color: COL.src }, { t: ' = 2 · ' + fmtP(p.P), color: COL.src }]
+                        : [{ t: 'P', italic: true, color: COL.src }, { t: ' = ' + fmtP(p.P), color: COL.src }]);
+                    lblP.position.set(0, SRC_R * ks + h * 1.15, 0);
+                    lblR.userData.satt([{ t: 'r', italic: true, color: COL.rpil }, { t: ' = ' + fmtR(r), color: COL.rpil }]);
+                    lblR.position.copy(u).multiplyScalar(r * 0.6).add(new THREE.Vector3(0, h * 0.7, 0));
+                    lblKv.visible = sh.etik && sh.kvad;
+                    lblKv.userData.satt([{ t: '1 m', color: COL.kvad }, { t: '2', color: COL.kvad, sup: true }]);
+                    lblKv.position.copy(u).multiplyScalar(r).add(new THREE.Vector3(0, -0.5 - h * 0.7, 0));
+                    lblA.visible = sh.etik && sh.sfar;
+                    lblA.userData.satt([{ t: 'A', italic: true, color: COL.sfar }, { t: ' = 4π · ', color: COL.sfar }, { t: 'r', italic: true, color: COL.sfar },
+                                        { t: '2', color: COL.sfar, sup: true }, { t: ' = ' + fmtNum(4 * Math.PI * r * r, r < 3 ? 1 : 0) + ' m', color: COL.sfar }, { t: '2', color: COL.sfar, sup: true }]);
+                    lblA.position.set(0, r + h * 0.75, 0);
+                    lblL.userData.satt([{ t: 'L', italic: true, color: COL.ink }, { t: ' = ' + fmtL(p.L), color: COL.ink, weight: 700 }]);
+                    // under mätarens stativ, där golvet är fritt
+                    lblL.position.copy(u).multiplyScalar(r + 0.9).add(new THREE.Vector3(0, GOLV_Y - h * 0.8, 0));
+                    [[lblP, 1], [lblR, 0.95], [lblKv, 0.9], [lblA, 0.9], [lblL, 1.05]].forEach(([s, f]) => etikettH(s, h * f));
+
+                    renderer.render(scene, camera);
+                };
+                uppdateraKamera();
+                tick();
+
+                return () => {
+                    cancelAnimationFrame(raf);
+                    ro.disconnect(); io.disconnect();
+                    el.removeEventListener('pointerdown', onDown);
+                    window.removeEventListener('pointermove', onMove);
+                    window.removeEventListener('pointerup', onUp);
+                    window.removeEventListener('pointercancel', onUp);
+                    el.removeEventListener('wheel', onWheel);
+                    renderer.dispose();
+                    if (renderer.domElement.parentNode) renderer.domElement.parentNode.removeChild(renderer.domElement);
+                };
+            }, []);
+            return <div ref={mountRef} className="tre-mount" />;
+        }
+
+        // ─────────────────────────────────────────────────────────────────
+        // Decibelstegen: L till vänster (linjär), I till höger (tiopotenser)
+        // ─────────────────────────────────────────────────────────────────
+        const DBMAX = 140;
+        const SY0 = 404, SY1 = 22;
+        const yDb = (db) => SY0 - (SY0 - SY1) * Math.max(0, Math.min(DBMAX, db)) / DBMAX;
+        const REFERENSER = [
+            [0, 'Hörbarhetsgräns'], [20, 'Viskning'], [60, 'Samtal'], [75, 'Inuti en bil'],
+            [85, 'Risk för hörselskada'], [120, 'Smärtgräns'], [140, 'Startande jetplan'],
+        ];
+        const Stege = ({ L, sparad }) => {
+            const BX = 56, BW = 16;
+            return (
+                <svg viewBox="0 0 320 418" width="100%" style={{ display: 'block', maxWidth: 360, margin: '0 auto' }}
+                     fontFamily="Poppins, sans-serif" role="img" aria-label="Decibelskala från 0 till 140 dB med motsvarande ljudintensitet">
+                    <defs>
+                        <linearGradient id="stegeG" gradientUnits="userSpaceOnUse" x1="0" y1={yDb(0)} x2="0" y2={yDb(140)}>
+                            <stop offset="0" stopColor="#3f9a5c" />
+                            <stop offset={60 / 140} stopColor="#5aa84f" />
+                            <stop offset={85 / 140} stopColor="#e0a526" />
+                            <stop offset={115 / 140} stopColor="#c8324a" />
+                            <stop offset="1" stopColor="#9b1f33" />
+                        </linearGradient>
+                    </defs>
+                    <text x={BX - 10} y="11" textAnchor="end" fontSize="11" fontWeight="600" fill={COL.muted}>
+                        <tspan fontStyle="italic">L</tspan> (dB)</text>
+                    <text x={BX + BW + 10} y="11" fontSize="11" fontWeight="600" fill={COL.muted}>
+                        <tspan fontStyle="italic">I</tspan> (W/m²)</text>
+                    <rect x={BX} y={SY1} width={BW} height={SY0 - SY1} rx="8" fill="rgba(15,22,32,0.08)" />
+                    <rect x={BX} y={yDb(L)} width={BW} height={Math.max(0, SY0 - yDb(L))} rx="8" fill="url(#stegeG)" />
+                    {Array.from({ length: 15 }, (_, k) => k * 10).map(db => (
+                        <g key={db}>
+                            <line x1={BX - (db % 20 ? 5 : 8)} y1={yDb(db)} x2={BX - 1} y2={yDb(db)} stroke="rgba(15,22,32,0.45)" strokeWidth="1.1" />
+                            <line x1={BX + BW + 1} y1={yDb(db)} x2={BX + BW + (db % 20 ? 5 : 8)} y2={yDb(db)} stroke="rgba(15,22,32,0.45)" strokeWidth="1.1" />
+                            {db % 20 === 0 && <text x={BX - 12} y={yDb(db) + 4} textAnchor="end" fontSize="12" fill={COL.ink}>{db}</text>}
+                            {db % 20 === 0 && (
+                                <text x={BX + BW + 12} y={yDb(db) + 4} fontSize="12" fill={COL.ink}>
+                                    10<tspan dy="-5" fontSize="9">{String(db / 10 - 12).replace('-', '−')}</tspan>
+                                </text>
+                            )}
+                        </g>
+                    ))}
+                    {REFERENSER.map(([db, namn]) => (
+                        <g key={namn}>
+                            <line x1={130} y1={yDb(db)} x2={146} y2={yDb(db)} stroke="rgba(15,22,32,0.35)" strokeWidth="1" strokeDasharray="2 2.5" />
+                            <text x={151} y={yDb(db) + 4} fontSize="12" fill="#3a404b">{db} dB: {namn}</text>
+                        </g>
+                    ))}
+                    {sparad && (
+                        <g>
+                            <line x1={BX - 3} y1={yDb(sparad.L)} x2={BX + BW + 3} y2={yDb(sparad.L)} stroke={COL.ink} strokeWidth="2" strokeDasharray="3 2" />
+                            <polygon points={`${BX - 4},${yDb(sparad.L)} ${BX - 13},${yDb(sparad.L) - 5} ${BX - 13},${yDb(sparad.L) + 5}`} fill="#6b7280" />
+                        </g>
+                    )}
+                    <line x1={BX - 3} y1={yDb(L)} x2={BX + BW + 3} y2={yDb(L)} stroke={COL.ink} strokeWidth="2.6" />
+                    <polygon points={`${BX + BW + 4},${yDb(L)} ${BX + BW + 13},${yDb(L) - 5.5} ${BX + BW + 13},${yDb(L) + 5.5}`} fill={COL.accent} />
+                </svg>
+            );
+        };
+
+        // ── Formelkort ──
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+        const FracL = ({ topLbl, top, botLbl, bot }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.15 }}>
+                <span className="flbl">{topLbl}</span>
+                <span className="fnum" style={{ padding: '0 8px 2px' }}>{top}</span>
+                <span className="fnum" style={{ padding: '2px 8px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bot}</span>
+                <span className="flbl">{botLbl}</span>
+            </div>
+        );
+        const FracP = ({ top, bot }) => (
+            <span style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', lineHeight: 1.25, verticalAlign: 'middle' }}>
+                <span style={{ padding: '0 6px 2px' }}>{top}</span>
+                <span style={{ padding: '2px 6px 0', borderTop: '1.5px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bot}</span>
+            </span>
+        );
+        const FormulaCard = () => (
+            <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-8 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
+                <div className="flex items-center gap-x-3">
+                    <Vbl label="Ljudintensitet"><em>I</em></Vbl>
+                    <span className="fnum">=</span>
+                    <FracL topLbl="Utsänd effekt" top={<em>P</em>} botLbl="Sfärens area"
+                           bot={<React.Fragment>4<em>π</em> · <em>r</em><sup style={{ fontSize: 13 }}>2</sup></React.Fragment>} />
+                </div>
+                <div className="flex items-center gap-x-3">
+                    <Vbl label="Ljudnivå"><em>L</em></Vbl>
+                    <span className="fnum">=</span>
+                    <span className="fnum">10 · lg</span>
+                    <span className="fnum" style={{ fontSize: 30 }}>(</span>
+                    <FracL topLbl="Ljudintensitet" top={<em>I</em>} botLbl="Hörbarhetsgränsen"
+                           bot={<React.Fragment><em>I</em><sub style={{ fontSize: 13 }}>0</sub></React.Fragment>} />
+                    <span className="fnum" style={{ fontSize: 30 }}>)</span>
+                </div>
+                <div style={{ color: 'var(--lab-ink-muted)', fontSize: 14 }}>
+                    <em>I</em><sub>0</sub> = 10<sup>−12</sup>&nbsp;W/m²
+                </div>
+            </div>
+        );
+
+        const Slider = ({ label, sub, value, min, max, step, onChange, valueText }) => (
             <div className="mb-3">
                 <div className="flex justify-between items-baseline mb-1">
                     <label className="text-sm font-bold" style={{ color: 'var(--lab-ink)' }}
                            dangerouslySetInnerHTML={{ __html: label }} />
-                    <div className="font-mono font-semibold text-sm" style={{ color: 'var(--lab-accent)' }}>
-                        {valueText || <React.Fragment>{fmt(value, decimals)} <span style={{ color: 'var(--lab-ink-muted)' }}>{unit}</span></React.Fragment>}
-                    </div>
+                    <div className="font-mono font-semibold text-sm" style={{ color: 'var(--lab-accent)' }}>{valueText}</div>
                 </div>
                 <input type="range" min={min} max={max} step={step} value={value}
-                       onChange={(e) => onChange(parseFloat(e.target.value))}
-                       className="w-full cursor-pointer" />
+                       onChange={(e) => onChange(parseFloat(e.target.value))} className="w-full cursor-pointer" />
                 {sub && <div className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}
                              dangerouslySetInnerHTML={{ __html: sub }} />}
             </div>
         );
-
-        // Kompakt reglage-rad för inställningsrutan uppe till höger i
-        // fullskärm: etikett + värde på en rad, glidaren under.
         const StSlider = ({ label, value, min, max, step, onChange, valueText }) => (
             <div className="st-slider">
                 <div className="st-slider-top">
@@ -286,119 +1117,82 @@
             </div>
         );
 
-        // Formelkort-hjälpare (samma mönster som fysik2-svangningstid-app)
-        const Vbl = ({ label, children }) => (
-            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
-                <span className="flbl">{label}</span>
-                <span className="fnum">{children}</span>
-                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
-            </div>
-        );
-        const FracL = ({ topLbl, top, botLbl, bot }) => (
-            <div className="flex flex-col items-center" style={{ lineHeight: 1.15 }}>
-                <span className="flbl" style={topLbl ? {} : { visibility: 'hidden' }}>{topLbl || '·'}</span>
-                <span className="fnum" style={{ padding: '0 8px 3px' }}>{top}</span>
-                <span className="fnum" style={{ padding: '3px 8px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bot}</span>
-                <span className="flbl" style={botLbl ? {} : { visibility: 'hidden' }}>{botLbl || '·'}</span>
-            </div>
-        );
-        const FracP = ({ top, bot }) => (
-            <span style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', lineHeight: 1.25 }}>
-                <span style={{ padding: '0 6px 2px' }}>{top}</span>
-                <span style={{ padding: '2px 6px 0', borderTop: '1.5px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bot}</span>
-            </span>
-        );
+        // Kvoter med namn, så att jämförelsen läses i ord
+        const KVOTNAMN = [[100, 'hundra gånger så stor'], [10, 'tio gånger så stor'], [4, 'fyra gånger så stor'],
+                          [2, 'dubbelt så stor'], [1, 'lika stor'], [0.5, 'hälften så stor'], [0.25, 'en fjärdedel'],
+                          [0.1, 'en tiondel'], [0.01, 'en hundradel']];
+        const kvotIOrd = (k) => {
+            const hit = KVOTNAMN.find(([v]) => Math.abs(k / v - 1) < 0.02);
+            return hit ? hit[1] : null;
+        };
 
-        const FormulaCard = () => (
-            <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-6 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
-                <div className="flex items-center gap-x-3">
-                    <Vbl label="Ljudintensitet"><em>I</em></Vbl>
-                    <span className="fnum">=</span>
-                    <FracL topLbl="Utsänd effekt" top={<em>P</em>} botLbl="Sfärens area"
-                           bot={<React.Fragment>4<em>π</em> · <em>r</em><sup style={{ fontSize: 12 }}>2</sup></React.Fragment>} />
-                </div>
-                <div className="flex items-center gap-x-3">
-                    <Vbl label="Ljudnivå"><em>L</em></Vbl>
-                    <span className="fnum">=</span>
-                    <span className="fnum">10</span>
-                    <span className="fnum">·</span>
-                    <span className="fnum">lg</span>
-                    <span className="fnum" style={{ fontSize: 26, fontWeight: 300 }}>(</span>
-                    <FracL topLbl="Ljudintensitet" top={<em>I</em>} botLbl="Hörbarhetsgränsen"
-                           bot={<React.Fragment><em>I</em><sub style={{ fontSize: 12 }}>0</sub></React.Fragment>} />
-                    <span className="fnum" style={{ fontSize: 26, fontWeight: 300 }}>)</span>
-                </div>
-                <div className="flex items-center gap-x-2" style={{ color: 'var(--lab-ink-muted)', fontSize: 13 }}>
-                    <span><em>I</em><sub>0</sub> = 10<sup>−12</sup> W/m²</span>
-                </div>
-            </div>
-        );
+        // ── Ljudet: brus vars volym följer ljudnivån (relativt) ──
+        const Ljud = {
+            ctx: null, gain: null,
+            start() {
+                if (!this.ctx) {
+                    const AC = window.AudioContext || window.webkitAudioContext;
+                    if (!AC) return false;
+                    this.ctx = new AC();
+                    const len = this.ctx.sampleRate * 2;
+                    const buf = this.ctx.createBuffer(1, len, this.ctx.sampleRate);
+                    const d = buf.getChannelData(0);
+                    let b0 = 0, b1 = 0, b2 = 0;
+                    for (let i = 0; i < len; i++) {   // rosa brus (Paul Kellets filter, förenklat)
+                        const w = Math.random() * 2 - 1;
+                        b0 = 0.99765 * b0 + w * 0.099046; b1 = 0.963 * b1 + w * 0.2965164; b2 = 0.57 * b2 + w * 1.0526913;
+                        d[i] = (b0 + b1 + b2 + w * 0.1848) * 0.18;
+                    }
+                    const src = this.ctx.createBufferSource();
+                    src.buffer = buf; src.loop = true;
+                    const lp = this.ctx.createBiquadFilter();
+                    lp.type = 'lowpass'; lp.frequency.value = 2600;
+                    this.gain = this.ctx.createGain();
+                    this.gain.gain.value = 0;
+                    src.connect(lp).connect(this.gain).connect(this.ctx.destination);
+                    src.start();
+                }
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+                return true;
+            },
+            satt(L, pa) {
+                if (!this.gain) return;
+                // 20 dB lägre nivå = en tiondel av amplituden; 110 dB ger full volym
+                const g = pa ? Math.min(0.6, 0.6 * Math.pow(10, (L - 110) / 20)) : 0;
+                this.gain.gain.setTargetAtTime(g, this.ctx.currentTime, 0.06);
+            },
+        };
 
-        // ── Huvudapp ─────────────────────────────────────────────
+        // ─────────────────────────────────────────────────────────────────
+        // Huvudapp
+        // ─────────────────────────────────────────────────────────────────
         const App = () => {
             const q = new URLSearchParams(location.search);
-            const [logP, setLogP] = useState(isFinite(parseFloat(q.get('lp'))) ? parseFloat(q.get('lp')) : Math.log10(5));
-            const [r, setR] = useState(isFinite(parseFloat(q.get('r'))) ? parseFloat(q.get('r')) : 10);
-            const [running, setRunning] = useState(true);
-            const [show, setShow] = useState({
-                rings: true, sphere: true, meter: true,
-            });
+            const num = (k, d) => (isFinite(parseFloat(q.get(k))) ? parseFloat(q.get(k)) : d);
+            const [logP, setLogP] = useState(num('lp', Math.log10(5)));
+            const [r, setR] = useState(Math.max(RMIN, Math.min(RMAX, num('r', 10))));
+            const [ang, setAng] = useState(1.5);
+            const [tva, setTva] = useState(q.get('tva') === '1');
+            const [show, setShow] = useState({ sfar: true, kvad: true, energi: true, etik: true });
+            const [sparad, setSparad] = useState(null);
+            const [forsok, setForsok] = useState(null);
+            const [ljudPa, setLjudPa] = useState(false);
+            const [vy, setVy] = useState('snett');
             const [isFullscreen, setIsFullscreen] = useState(false);
             const [togglesOpen, setTogglesOpen] = useState(true);
-            const [, setTick] = useState(0);
-
             const sceneWrapRef = useRef(null);
-            const svgRef = useRef(null);
-            const tRef = useRef(0);
-            const dragRef = useRef(false);
-            const pRef = useRef({});
+            const animRef = useRef(0);
 
-            // ── Härledda storheter (exakt enligt genomgången) ──
-            const P = parseFloat(Math.pow(10, logP).toPrecision(2));   // utsänd effekt (W)
-            const A = 4 * Math.PI * r * r;           // sfärens area (m²)
-            const I = P / A;                         // ljudintensitet (W/m²)
-            const L = 10 * Math.log10(I / I0);       // ljudnivå (dB)
+            const P = avrundaP(logP);
+            const { A, I, L } = berakna(P, r, tva);
 
-            pRef.current = { running };
+            SIM.p.P = P; SIM.p.r = r; SIM.p.ang = ang; SIM.p.tva = tva; SIM.p.L = L; SIM.p.show = show;
 
-            // ── Animationsloop (vågfronterna) ──
-            useEffect(() => {
-                let raf, last = performance.now();
-                const loop = (now) => {
-                    raf = requestAnimationFrame(loop);
-                    const dt = Math.min((now - last) / 1000, 0.05);
-                    last = now;
-                    if (pRef.current.running) tRef.current += dt;
-                    setTick(t => t + 1);
-                };
-                raf = requestAnimationFrame(loop);
-                return () => cancelAnimationFrame(raf);
-            }, []);
+            const stoppaAnim = () => { cancelAnimationFrame(animRef.current); clearTimeout(animRef.current); animRef.current = 0; };
+            SIM.cb.flytta = (rr, a) => { stoppaAnim(); setForsok(null); setR(rr); setAng(a); };
 
-            // ── Dra i lyssnaren ──
-            const svgX = (e) => {
-                const svg = svgRef.current;
-                const pt = svg.createSVGPoint();
-                pt.x = e.clientX; pt.y = e.clientY;
-                return pt.matrixTransform(svg.getScreenCTM().inverse()).x;
-            };
-            const onListenerDown = (e) => { e.preventDefault(); dragRef.current = true; };
-            useEffect(() => {
-                const move = (e) => {
-                    if (!dragRef.current) return;
-                    const rm = (svgX(e) - SX) / RPPM;
-                    setR(Math.max(RMIN, Math.min(RMAX, Math.round(rm * 2) / 2)));
-                };
-                const up = () => { dragRef.current = false; };
-                window.addEventListener('pointermove', move);
-                window.addEventListener('pointerup', up);
-                return () => {
-                    window.removeEventListener('pointermove', move);
-                    window.removeEventListener('pointerup', up);
-                };
-            }, []);
+            useEffect(() => { Ljud.satt(L, ljudPa); }, [L, ljudPa]);
 
-            // ── Fullskärm ──
             useEffect(() => {
                 const handler = () => {
                     const fs = document.fullscreenElement === sceneWrapRef.current ||
@@ -420,16 +1214,56 @@
                 else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
             };
 
+            const valjVy = (v) => { setVy(v); if (SIM.vy) SIM.vy(v); };
             const tShow = (key) => setShow(sh => ({ ...sh, [key]: !sh[key] }));
-            // Exempel 1 i teorigenomgången: 5,0 W på 10 m ⟹ I = 4,0 mW/m², L ≈ 96 dB
-            const setExample1 = () => { setLogP(Math.log10(5)); setR(10); };
+            const spara = (Ps = P, rs = r, tvas = tva) => setSparad({ P: Ps, r: rs, tva: tvas, ...berakna(Ps, rs, tvas) });
+            const andraP = (v) => { stoppaAnim(); setForsok(null); setLogP(v); };
+            const andraR = (v) => { stoppaAnim(); setForsok(null); setR(v); };
+            const andraTva = (v) => { stoppaAnim(); setForsok(null); setTva(v); };
+            const vaxlaLjud = () => {
+                if (!ljudPa && !Ljud.start()) return;
+                setLjudPa(pa => !pa);
+            };
 
-            const xL = SX + r * RPPM;                // lyssnarens läge (px)
+            // mjuk övergång för de färdiga försöken
+            const animera = (fran, till, ms, satt, efter) => {
+                stoppaAnim();
+                const t0 = performance.now() + 450;
+                const steg = (now) => {
+                    const x = Math.max(0, Math.min(1, (now - t0) / ms));
+                    const e = x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
+                    satt(fran + (till - fran) * e);
+                    if (x < 1) animRef.current = requestAnimationFrame(steg);
+                    else { animRef.current = 0; if (efter) efter(); }
+                };
+                animRef.current = requestAnimationFrame(steg);
+            };
+            const FORSOK = {
+                ex1: { namn: 'Exempel 1 ur teorin', sub: '5,0 W på 10 m avstånd', kor: () => {
+                    stoppaAnim(); setTva(false); setLogP(Math.log10(5)); setR(10); setSparad(null);
+                } },
+                avst: { namn: 'Dubbla avståndet', sub: 'från 5 m till 10 m', kor: () => {
+                    setTva(false); setLogP(Math.log10(5)); setR(5); spara(5, 5, false);
+                    animera(5, 10, 1600, (v) => setR(Math.round(v * 10) / 10));
+                } },
+                tva: { namn: 'Två likadana ljudkällor', sub: 'blir det dubbelt så många dB?', kor: () => {
+                    stoppaAnim(); setLogP(Math.log10(5)); setR(10); setTva(false); spara(5, 10, false);
+                    animRef.current = setTimeout(() => { animRef.current = 0; setTva(true); }, 900);
+                } },
+                tio: { namn: 'Tio gånger effekten', sub: 'från 0,50 W till 5,0 W', kor: () => {
+                    setTva(false); setR(10); setLogP(Math.log10(0.5)); spara(0.5, 10, false);
+                    animera(Math.log10(0.5), Math.log10(5), 1600, (v) => setLogP(v));
+                } },
+            };
+            const korForsok = (k) => { setForsok(k); FORSOK[k].kor(); };
 
-            // ── Inställningsrutan uppe till höger (visa-val, och i fullskärm
-            // även reglage + styrknapp). Bottenpanelen (.fs-controls) användes
-            // tidigare, men den låg ovanpå decibelskalan i scenens nederkant —
-            // placeringsregeln 2026-08-31 flyttade allt hit i stället. ──
+            // ── Jämförelse med den sparade mätningen ──
+            const jmf = sparad && (() => {
+                const kI = I / sparad.I, dL = L - sparad.L, kr = r / sparad.r, kP = (tva ? 2 : 1) * P / ((sparad.tva ? 2 : 1) * sparad.P);
+                const ord = kvotIOrd(kI);
+                return { kI, dL, kr, kP, ord };
+            })();
+
             const sceneToggles = () => {
                 if (!togglesOpen) {
                     return (
@@ -455,30 +1289,38 @@
                             </svg>
                         </button>
                         <div className="st-title">Visa</div>
-                        <label><input type="checkbox" checked={show.rings} onChange={() => tShow('rings')} />
-                            <span className="st-swatch" style={{ background: COL.ring }}></span>
-                            <span>Vågfronter</span></label>
-                        <label><input type="checkbox" checked={show.sphere} onChange={() => tShow('sphere')} />
-                            <span className="st-swatch" style={{ background: COL.sphere }}></span>
+                        <label><input type="checkbox" checked={show.sfar} onChange={() => tShow('sfar')} />
+                            <span className="st-swatch" style={{ background: COL.sfar }}></span>
                             <span>Sfären med radien <em>r</em></span></label>
-                        <label><input type="checkbox" checked={show.meter} onChange={() => tShow('meter')} />
-                            <span className="st-swatch" style={{ background: COL.meter }}></span>
-                            <span>Decibelskala</span></label>
-                        {/* Reglage och styrknapp visas här BARA i fullskärm — i
-                            normalläget finns de i sidopanelen (aldrig dubblerade). */}
+                        <label><input type="checkbox" checked={show.kvad} onChange={() => tShow('kvad')} />
+                            <span className="st-swatch" style={{ background: COL.kvad }}></span>
+                            <span>En kvadratmeter vid mätaren</span></label>
+                        <label><input type="checkbox" checked={show.energi} onChange={() => tShow('energi')} />
+                            <span className="st-dot" style={{ background: COL.src }}></span>
+                            <span>Energin som sprids</span></label>
+                        <label><input type="checkbox" checked={show.etik} onChange={() => tShow('etik')} />
+                            <span className="st-swatch" style={{ background: COL.ink }}></span>
+                            <span>Etiketter</span></label>
+                        <div className="st-title mt">Vy</div>
+                        <div className="vy-seg">
+                            {[['snett', 'Snett'], ['sidan', 'Sidan'], ['ovan', 'Ovan']].map(([k, n]) => (
+                                <button key={k} className={vy === k ? 'active' : ''} onClick={() => valjVy(k)}>{n}</button>
+                            ))}
+                        </div>
                         {isFullscreen && (
                             <React.Fragment>
-                                <div className="st-title" style={{ marginTop: 7 }}>Reglage</div>
+                                <div className="st-title mt">Reglage</div>
                                 <div className="st-sliders">
-                                    <StSlider label="Utsänd effekt (<em>P</em>)" value={logP}
-                                              min={LPMIN} max={LPMAX} step={0.05} onChange={setLogP}
-                                              valueText={fmtP(P)} />
-                                    <StSlider label="Avstånd (<em>r</em>)" value={r}
-                                              min={RMIN} max={RMAX} step={0.5} onChange={setR}
-                                              valueText={`${fmt(r, r % 1 ? 1 : 0)} m`} />
+                                    <StSlider label="Utsänd effekt (<em>P</em>)" value={logP} min={LPMIN} max={LPMAX} step={0.05}
+                                              onChange={andraP} valueText={fmtP(P)} />
+                                    <StSlider label="Avstånd (<em>r</em>)" value={r} min={RMIN} max={RMAX} step={0.1}
+                                              onChange={andraR} valueText={fmtR(r)} />
                                 </div>
+                                <label style={{ marginTop: 6 }}><input type="checkbox" checked={tva} onChange={() => andraTva(!tva)} />
+                                    <span>Två likadana ljudkällor</span></label>
                                 <div className="st-actions">
-                                    <button className="btn-toggle" onClick={() => setRunning(rr => !rr)}>{running ? 'Pausa' : 'Fortsätt'}</button>
+                                    <button className="btn-toggle" onClick={() => spara()}>Spara mätningen</button>
+                                    <button className={'btn-toggle' + (ljudPa ? ' active' : '')} onClick={vaxlaLjud}>{ljudPa ? 'Stäng av ljudet' : 'Lyssna'}</button>
                                 </div>
                             </React.Fragment>
                         )}
@@ -486,178 +1328,35 @@
                 );
             };
 
-            // ── Scenen ──
-            const scene = () => {
-                const els = [];
-
-                // vågfronter (klipps ovanför dB-skalan)
-                if (show.rings) {
-                    const SPACING = 86, NR = 9;
-                    const off = (tRef.current * 34) % SPACING;
-                    const rings = [];
-                    for (let i = 0; i < NR; i++) {
-                        const rad = off + i * SPACING;
-                        if (rad < 12 || rad > 760) continue;
-                        const op = Math.max(0, 0.5 * (1 - rad / 760));
-                        rings.push(<circle key={i} cx={SX} cy={SY} r={rad} fill="none"
-                                           stroke={COL.ring} strokeWidth="1.6" opacity={op} />);
-                    }
-                    els.push(<g key="rings" clipPath="url(#sceneClip)">{rings}</g>);
-                }
-
-                // sfären genom lyssnaren (streckad cirkel + ellips, som teorifiguren)
-                if (show.sphere) {
-                    const rad = r * RPPM;
-                    els.push(
-                        <g key="sphere" clipPath="url(#sceneClip)">
-                            <circle cx={SX} cy={SY} r={rad} fill="none" stroke={COL.sphere}
-                                    strokeWidth="1.6" strokeDasharray="5 4" />
-                            <ellipse cx={SX} cy={SY} rx={rad} ry={rad * 0.28} fill="none"
-                                     stroke={COL.sphere} strokeWidth="1" strokeDasharray="4 3" />
-                        </g>
-                    );
-                }
-
-                // avståndspilen r (som teorifiguren: blå pil från källan till lyssnaren).
-                // Vid små avstånd ryms inget pilhuvud — då ritas bara en kort linje.
-                const rpilEls = [];
-                if (r >= 6) {
-                    rpilEls.push(<line key="l" x1={SX + 10} y1={SY} x2={xL - 24} y2={SY}
-                                       stroke={COL.rpil} strokeWidth="2.2" strokeLinecap="butt" />);
-                    rpilEls.push(<polygon key="h" points={`${xL - 15},${SY} ${xL - 24},${SY - 4} ${xL - 24},${SY + 4}`} fill={COL.rpil} />);
-                } else if (xL - 12 - (SX + 8) > 8) {
-                    rpilEls.push(<line key="l" x1={SX + 8} y1={SY} x2={xL - 12} y2={SY}
-                                       stroke={COL.rpil} strokeWidth="2" strokeLinecap="butt" />);
-                }
-                rpilEls.push(<text key="t" x={(SX + xL) / 2} y={SY - 14} textAnchor="middle" fontSize="14" fill={COL.rpil}>
-                    <tspan fontStyle="italic">r</tspan> = {fmt(r, r % 1 ? 1 : 0)} m
-                </text>);
-                els.push(<g key="rpil">{rpilEls}</g>);
-
-                // ljudkällan
-                els.push(
-                    <g key="src">
-                        <circle cx={SX} cy={SY} r="5.5" fill={COL.src} />
-                        <text x={SX} y={SY + 26} textAnchor="middle" fontSize="12.5" fill="var(--lab-ink-muted, #5a6170)">ljudkälla</text>
-                        <text x={SX} y={SY + 44} textAnchor="middle" fontSize="13" fill={COL.ink}>
-                            <tspan fontStyle="italic">P</tspan> = {fmtP(P)}
-                        </text>
-                    </g>
-                );
-
-                // lyssnaren (dra i den för att ändra avståndet)
-                els.push(
-                    <g key="lyss" onPointerDown={onListenerDown}
-                       style={{ cursor: dragRef.current ? 'grabbing' : 'grab' }}>
-                        <rect x={xL - 22} y={SY - 62} width="44" height="110" fill="transparent" />
-                        <line x1={xL - 8} y1={SY + 42} x2={xL} y2={SY + 20} stroke={COL.ink} strokeWidth="4" strokeLinecap="round" />
-                        <line x1={xL + 8} y1={SY + 42} x2={xL} y2={SY + 20} stroke={COL.ink} strokeWidth="4" strokeLinecap="round" />
-                        <line x1={xL} y1={SY + 22} x2={xL} y2={SY - 24} stroke="#5b7ea6" strokeWidth="8" strokeLinecap="round" />
-                        <circle cx={xL} cy={SY - 36} r="8.5" fill="#f0c39c" stroke={COL.ink} strokeWidth="1.3" />
-                        <text x={xL} y={SY + 62} textAnchor="middle" fontSize="12.5"
-                              fill="var(--lab-ink-muted, #5a6170)" style={{ pointerEvents: 'none' }}>lyssnare</text>
-                    </g>
-                );
-
-                // dB-skalan med referensexempel
-                if (show.meter) {
-                    const dbX = (db) => BARX0 + (BARX1 - BARX0) * db / DBMAX;
-                    const fillW = Math.max(0, Math.min(BARX1 - BARX0, (BARX1 - BARX0) * L / DBMAX));
-                    const meterEls = [];
-                    // spår + fyllnad
-                    meterEls.push(<rect key="track" x={BARX0} y={BARY - 5} width={BARX1 - BARX0} height="10" rx="5"
-                                        fill="rgba(15,22,32,0.10)" />);
-                    meterEls.push(<rect key="fill" x={BARX0} y={BARY - 5} width={fillW} height="10" rx="5"
-                                        fill={COL.meter} />);
-                    // gradering var 20:e dB
-                    for (let db = 0; db <= DBMAX; db += 20) {
-                        meterEls.push(<line key={'tk' + db} x1={dbX(db)} y1={BARY + 7} x2={dbX(db)} y2={BARY + 13}
-                                            stroke="rgba(15,22,32,0.4)" strokeWidth="1.1" />);
-                        meterEls.push(<text key={'tl' + db} x={dbX(db)} y={BARY + 27} textAnchor="middle"
-                                            fontSize="10.5" fill="var(--lab-ink-muted, #5a6170)">{db}</text>);
-                    }
-                    meterEls.push(<text key="unit" x={BARX1 + 14} y={BARY + 4} fontSize="12"
-                                        fill="var(--lab-ink-muted, #5a6170)">dB</text>);
-                    // referensexempel (ur teorin) i två staplade rader ovanför skalan
-                    const refs = [
-                        [0, 'hörbarhetsgräns', 0], [20, 'viskning', 1], [60, 'samtal', 0],
-                        [85, 'hörselskaderisk', 1], [120, 'smärtgräns', 0],
-                    ];
-                    refs.forEach(([db, name, row]) => {
-                        const y = row ? BARY - 40 : BARY - 22;
-                        meterEls.push(<line key={'rf' + db} x1={dbX(db)} y1={y + 4} x2={dbX(db)} y2={BARY - 7}
-                                            stroke="rgba(15,22,32,0.30)" strokeWidth="1" strokeDasharray="2 3" />);
-                        meterEls.push(<text key={'rl' + db} x={dbX(db)} y={y} textAnchor="middle"
-                                            fontSize="10.5" fill="var(--lab-ink-muted, #5a6170)">{name}</text>);
-                    });
-                    // visare med aktuellt värde
-                    meterEls.push(<polygon key="ptr" points={`${dbX(Math.max(0, L))},${BARY + 9} ${dbX(Math.max(0, L)) - 5},${BARY + 18} ${dbX(Math.max(0, L)) + 5},${BARY + 18}`}
-                                           fill={COL.meter} />);
-                    meterEls.push(<text key="ptrv" x={dbX(Math.max(0, L))} y={BARY + 48} textAnchor="middle"
-                                        fontSize="13" fontWeight="600" fill={COL.meter}>
-                        <tspan fontStyle="italic">L</tspan> = {fmt(L, 0)} dB
-                    </text>);
-                    els.push(<g key="meter">{meterEls}</g>);
-                }
-
-                return (
-                    <svg ref={svgRef} viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid meet"
-                         fontFamily="Poppins, sans-serif">
-                        <defs>
-                            <linearGradient id="paperG" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0" stopColor="#f7f2e8" />
-                                <stop offset="1" stopColor="#ece3d2" />
-                            </linearGradient>
-                            <clipPath id="sceneClip">
-                                <rect x="0" y="0" width={VBW} height={BARY - 62} />
-                            </clipPath>
-                        </defs>
-                        <rect x="0" y="0" width={VBW} height={VBH} fill="url(#paperG)" />
-                        {els}
-                    </svg>
-                );
-            };
-
-            const Readout = ({ label, value, unit, color }) => (
-                <div className="p-2 rounded-lg" style={{ background: 'var(--lab-bg)', border: '1px solid var(--lab-line-strong)' }}>
-                    <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }} dangerouslySetInnerHTML={{ __html: label }} />
-                    <div className="font-mono font-bold text-sm" style={{ color: color || 'var(--lab-ink)' }}>
-                        {value} <span className="font-normal text-xs" style={{ color: 'var(--lab-ink-muted)' }}>{unit}</span>
-                    </div>
-                </div>
-            );
-
             return (
                 <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                     <div className="max-w-6xl mx-auto pt-6">
                         <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
-                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Intensitet och ljudnivå
+                            <a href="index.html">Hem</a> / <a href="katalog.html?id=fy2">Fysik nivå 2</a> / Intensitet och ljudnivå
                         </div>
                         <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Intensitet och ljudnivå</h1>
                         <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
-                            En punktformig ljudkälla sänder ut effekten <em>P</em> jämnt fördelad i alla riktningar.
-                            På avståndet <em>r</em> har effekten spridits ut över en sfär med
-                            arean 4<em>π</em> · <em>r</em>² — ljudintensiteten <em>I</em> är effekten per
-                            kvadratmeter av den sfären. Dra i lyssnaren (eller använd reglagen) och se hur
-                            intensiteten och ljudnivån <em>L</em> i decibel ändras med avståndet och effekten.
+                            En rundstrålande högtalare sänder ut effekten <em>P</em> lika mycket åt alla håll. På
+                            avståndet <em>r</em> har effekten spridits ut över en sfär med arean 4<em>π</em> · <em>r</em>²,
+                            och ljudintensiteten <em>I</em> är den effekt som går genom en kvadratmeter av sfären.
+                            Dra ljudnivåmätaren närmare eller längre bort och se hur intensiteten och ljudnivån <em>L</em> ändras.
                         </p>
 
                         <FormulaCard />
 
                         <main className="flex flex-col lg:flex-row gap-6">
-                            {/* Scen */}
                             <div className="lg:w-3/5 order-1">
                                 <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
-                                    {scene()}
+                                    <LjudScene wrapRef={sceneWrapRef} />
 
                                     <div className="scene-info">
                                         <span className="si-lbl">Ljudintensitet <em style={{ textTransform: 'none' }}>I</em></span>
                                         <span className="si-val">{fmtI(I)}</span>
                                         <span className="si-lbl" style={{ marginTop: 4 }}>Ljudnivå <em style={{ textTransform: 'none' }}>L</em></span>
-                                        <span className="si-val">{fmt(L, 0)} dB</span>
+                                        <span className="si-val">{fmtL(L)}</span>
                                     </div>
 
-                                    <div className="scene-hint">Ta tag i lyssnaren och dra för att ändra avståndet</div>
+                                    <div className="scene-hint">Dra i ljudnivåmätaren. Dra i rummet för att vrida.</div>
                                     {sceneToggles()}
 
                                     <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
@@ -673,118 +1372,165 @@
                                         )}
                                     </button>
                                 </div>
+
+                                <div className="glass-card rounded-xl p-3 mt-4">
+                                    <div className="flbl mb-2">Färdiga försök</div>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                        {Object.entries(FORSOK).map(([k, f]) => (
+                                            <button key={k} className={'btn-toggle forsok-btn' + (forsok === k ? ' active' : '')} onClick={() => korForsok(k)}>
+                                                <span className="fb-namn">{f.namn}</span>
+                                                <span className="fb-sub">{f.sub}</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mt-3">
+                                    <div className="flbl mb-2">Jämför med en sparad mätning</div>
+                                    {!sparad ? (
+                                        <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                            Tryck på <strong>Spara mätningen</strong>, flytta sedan mätaren eller ändra effekten.
+                                            Här ser du då hur många gånger intensiteten ändrats och hur många decibel det motsvarar.
+                                            Du kan också välja ett av de färdiga försöken.
+                                        </p>
+                                    ) : (
+                                        <div>
+                                            <div className="jmf-rad"><span>Sparad mätning</span>
+                                                <b>{sparad.tva ? '2 · ' : ''}{fmtP(sparad.P)}, {fmtR(sparad.r)}: {fmtL(sparad.L)}</b></div>
+                                            <div className="jmf-rad"><span>Nu</span>
+                                                <b>{tva ? '2 · ' : ''}{fmtP(P)}, {fmtR(r)}: {fmtL(L)}</b></div>
+                                            {Math.abs(jmf.kr - 1) > 0.005 && <div className="jmf-rad"><span>Avståndet har blivit</span>
+                                                <b>{fmtKvot(jmf.kr)} gånger så stort</b></div>}
+                                            {Math.abs(jmf.kP - 1) > 0.005 && <div className="jmf-rad"><span>Effekten har blivit</span>
+                                                <b>{fmtKvot(jmf.kP)} gånger så stor</b></div>}
+                                            <div className="jmf-rad"><span>Intensiteten har blivit</span>
+                                                <b>{fmtKvot(jmf.kI)} gånger så stor</b></div>
+                                            <div className="jmf-rad"><span>Ljudnivån har ändrats med</span>
+                                                <b style={{ color: 'var(--lab-accent)' }}>{jmf.dL >= 0 ? '+' : '−'}{fmt(Math.abs(jmf.dL), 1)}&nbsp;dB</b></div>
+                                            {jmf.ord && Math.abs(jmf.kI - 1) > 0.02 && (
+                                                <p className="text-sm mt-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                                    Intensiteten är {jmf.ord === 'en fjärdedel' || jmf.ord === 'en tiondel' || jmf.ord === 'en hundradel' ? jmf.ord + ' av den sparade' : jmf.ord + ' som den sparade'}, och
+                                                    ljudnivån har ändrats med {fmt(Math.abs(jmf.dL), 1)}&nbsp;dB.
+                                                    {Math.abs(jmf.kI - 2) < 0.04 && ' Dubbel intensitet ger alltid 3 dB mer, aldrig dubbelt så många decibel.'}
+                                                    {Math.abs(jmf.kI - 0.25) < 0.005 && ' Dubbla avståndet ger fyra gånger så stor sfär, alltså en fjärdedel av intensiteten, och det är alltid 6 dB lägre.'}
+                                                    {Math.abs(jmf.kI - 10) < 0.2 && ' Tio gånger så stor intensitet är alltid 10 dB mer.'}
+                                                </p>
+                                            )}
+                                            <button className="btn-toggle w-full mt-2 text-sm" onClick={() => { setSparad(null); setForsok(null); }}>Ta bort den sparade mätningen</button>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
 
-                            {/* Kontroller */}
                             <div className="lg:w-2/5 order-2">
                                 <div className="glass-card rounded-xl p-3 mb-3">
                                     <Slider label="Utsänd effekt (<em>P</em>)"
-                                            sub="Reglaget är logaritmiskt: från 1 mW till 100 W. Dubbla effekten ⟹ +3 dB."
-                                            value={logP} min={LPMIN} max={LPMAX} step={0.05} onChange={setLogP}
-                                            valueText={fmtP(P)} />
+                                            sub="Reglaget är logaritmiskt, från 1&nbsp;mW till 100&nbsp;W."
+                                            value={logP} min={LPMIN} max={LPMAX} step={0.05} onChange={andraP} valueText={fmtP(P)} />
                                     <Slider label="Avstånd till källan (<em>r</em>)"
-                                            sub="Dubbla avståndet ⟹ intensiteten fjärdedelas (−6 dB)."
-                                            value={r} min={RMIN} max={RMAX} step={0.5} onChange={setR}
-                                            valueText={`${fmt(r, r % 1 ? 1 : 0)} m`} />
-                                    <div className="flex gap-2 mt-1">
-                                        <button className="btn-toggle flex-1" onClick={() => setRunning(rr => !rr)}>{running ? 'Pausa' : 'Fortsätt'}</button>
-                                    </div>
-                                </div>
-
-                                {/* Live-beräkning */}
-                                <div className="glass-card rounded-xl p-3 mb-3">
-                                    <div className="flbl mb-2">Beräkning av intensitet och ljudnivå</div>
-                                    <div className="flex flex-wrap items-center gap-x-2 gap-y-2"
-                                         style={{ color: 'var(--lab-ink)', fontSize: 15 }}>
-                                        <span><em>I</em></span>
-                                        <span>=</span>
-                                        <FracP top={<em>P</em>} bot={<React.Fragment>4<em>π</em> · <em>r</em>²</React.Fragment>} />
-                                        <span>=</span>
-                                        <FracP top={fmtP(P)} bot={`4π · (${fmt(r, r % 1 ? 1 : 0)} m)²`} />
-                                        <span>=</span>
-                                        <span className="font-bold" style={{ color: 'var(--lab-accent)' }}>{fmtI(I)}</span>
-                                    </div>
-                                    <div className="flex flex-wrap items-center gap-x-2 gap-y-2 mt-3"
-                                         style={{ color: 'var(--lab-ink)', fontSize: 15 }}>
-                                        <span><em>L</em></span>
-                                        <span>=</span>
-                                        <span>10 · lg</span>
-                                        <span style={{ fontSize: 22, fontWeight: 300 }}>(</span>
-                                        <FracP top={<em>I</em>} bot={<React.Fragment><em>I</em><sub>0</sub></React.Fragment>} />
-                                        <span style={{ fontSize: 22, fontWeight: 300 }}>)</span>
-                                        <span>=</span>
-                                        <span className="font-bold" style={{ color: 'var(--lab-accent)' }}>{fmt(L, 0)}{' '}dB</span>
-                                    </div>
-                                    <button className="btn-toggle w-full mt-3 text-sm" onClick={setExample1}
-                                            title="Effekt 5,0 W, avstånd 10 m">
-                                        Exempel 1 ur teorin (5,0 W på 10 m avstånd)
-                                    </button>
-                                </div>
-
-                                {/* Avläsning */}
-                                <div className="glass-card rounded-xl p-3 mb-3">
-                                    <div className="flbl mb-2">Avläsning</div>
+                                            sub="Du kan också dra i mätaren i scenen."
+                                            value={r} min={RMIN} max={RMAX} step={0.1} onChange={andraR} valueText={fmtR(r)} />
+                                    <label className="flex items-center gap-2 text-sm mb-3" style={{ color: 'var(--lab-ink)', cursor: 'pointer' }}>
+                                        <input type="checkbox" checked={tva} onChange={() => andraTva(!tva)} style={{ width: 16, height: 16, accentColor: 'var(--lab-accent)' }} />
+                                        Två likadana ljudkällor tätt intill varandra
+                                    </label>
                                     <div className="grid grid-cols-2 gap-2">
-                                        <Readout label="Ljudintensitet <em>I</em>" value={fmtI(I)} unit="" color="var(--lab-accent)" />
-                                        <Readout label="Ljudnivå <em>L</em>" value={fmt(L, 0)} unit="dB" color="var(--lab-accent)" />
-                                        <Readout label="Sfärens area 4<em>π</em> · <em>r</em>²" value={fmtNum(A, A < 100 ? 1 : 0)} unit="m²" />
-                                        <Readout label="Utsänd effekt <em>P</em>" value={fmtP(P)} unit="" />
+                                        <button className="btn-toggle" onClick={() => spara()}>Spara mätningen</button>
+                                        <button className={'btn-toggle' + (ljudPa ? ' active' : '')} onClick={vaxlaLjud}>{ljudPa ? 'Stäng av ljudet' : 'Lyssna'}</button>
                                     </div>
-                                    <div className="mt-2 p-2 rounded-lg text-xs" style={{ background: 'rgba(13,148,136,0.08)', color: 'var(--lab-ink-soft)' }}>
-                                        Testa: ställ <em>r</em> på 10 m och läs av. Dubbla sedan till 20 m — intensiteten
-                                        fjärdedelas men ljudnivån sjunker bara 6 dB. Dubbla i stället effekten — då ökar
-                                        nivån med 3 dB.
+                                    {ljudPa && (
+                                        <div className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>
+                                            Datorns högtalare kan inte spela upp de verkliga nivåerna, men volymen ändras
+                                            lika mycket som ljudnivån: 20&nbsp;dB lägre låter som en tiondel av amplituden.
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-1">Decibelstegen</div>
+                                    <div className="flex justify-between items-baseline mb-2" style={{ color: 'var(--lab-ink)' }}>
+                                        <span style={{ fontSize: 15 }}><em>L</em> = <b className="font-mono">{fmtL(L)}</b></span>
+                                        <span style={{ fontSize: 15 }}><em>I</em> = <b className="font-mono">{fmtI(I)}</b></span>
                                     </div>
+                                    <Stege L={L} sparad={sparad} />
+                                    <p className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>
+                                        Varje steg på 10&nbsp;dB uppåt är tio gånger så stor intensitet. Den streckade
+                                        linjen är den sparade mätningen.
+                                    </p>
                                 </div>
                             </div>
                         </main>
 
-                        {/* Pedagogiska sektioner */}
+                        <div className="glass-card rounded-xl p-4 mt-6">
+                            <div className="flbl mb-3">Beräkning med värdena just nu</div>
+                            <div className="flex flex-wrap items-center gap-x-2 gap-y-2" style={{ color: 'var(--lab-ink)', fontSize: 16 }}>
+                                <span><em>A</em> = 4<em>π</em> · <em>r</em>² = 4<em>π</em> · ({fmtR(r)})² = <b>{fmtNum(A, A < 100 ? 1 : 0)}&nbsp;m²</b></span>
+                            </div>
+                            <div className="flex flex-wrap items-center gap-x-2 gap-y-2 mt-3" style={{ color: 'var(--lab-ink)', fontSize: 16 }}>
+                                <span><em>I</em></span><span>=</span>
+                                {tva && <span>2 ·</span>}
+                                <FracP top={<em>P</em>} bot={<em>A</em>} />
+                                <span>=</span>
+                                {tva && <span>2 ·</span>}
+                                <FracP top={fmtP(P)} bot={<React.Fragment>{fmtNum(A, A < 100 ? 1 : 0)}&nbsp;m²</React.Fragment>} />
+                                <span>=</span>
+                                <b style={{ color: 'var(--lab-accent)' }}>{fmtI(I)}</b>
+                                {tva && <span className="text-sm" style={{ color: 'var(--lab-ink-muted)' }}>(två källor ger dubbel intensitet)</span>}
+                            </div>
+                            <div className="flex flex-wrap items-center gap-x-2 gap-y-2 mt-3" style={{ color: 'var(--lab-ink)', fontSize: 16 }}>
+                                <span><em>L</em></span><span>=</span><span>10 · lg</span>
+                                <span style={{ fontSize: 24, fontWeight: 300 }}>(</span>
+                                <FracP top={<em>I</em>} bot={<React.Fragment><em>I</em><sub>0</sub></React.Fragment>} />
+                                <span style={{ fontSize: 24, fontWeight: 300 }}>)</span>
+                                <span>=</span><span>10 · lg</span>
+                                <span style={{ fontSize: 24, fontWeight: 300 }}>(</span>
+                                <FracP top={fmtI(I)} bot={<React.Fragment>10<sup>−12</sup>&nbsp;W/m²</React.Fragment>} />
+                                <span style={{ fontSize: 24, fontWeight: 300 }}>)</span>
+                                <span>=</span>
+                                <b style={{ color: 'var(--lab-accent)' }}>{fmtL(L)}</b>
+                            </div>
+                        </div>
+
                         <div className="grid md:grid-cols-3 gap-4 mt-6">
                             <div className="glass-card rounded-xl p-4">
-                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Samma effekt — större sfär</h3>
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Samma effekt, större sfär</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                    Ljudkällan sänder ut samma effekt oavsett var du står. Men på dubbla avståndet
-                                    har sfären som effekten fördelas på fyra gånger så stor area
-                                    (<em>A</em> = 4<em>π</em> · <em>r</em>²) — så intensiteten blir en fjärdedel.
-                                    Det är därför det snabbt blir tystare när du går bort från en högtalare.
+                                    Högtalaren sänder ut samma effekt var du än står. På dubbla avståndet har sfären
+                                    som effekten sprids över fyra gånger så stor area, så genom varje kvadratmeter går
+                                    bara en fjärdedel. Det ser du på prickarna: lika många lämnar högtalaren, men
+                                    längre ut ligger de glesare.
                                 </p>
                             </div>
                             <div className="glass-card rounded-xl p-4">
                                 <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Decibelskalan är logaritmisk</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                    En ökning med ungefär 3 dB motsvarar en <strong>fördubbling</strong> av
-                                    intensiteten. En differens på 30 dB motsvarar 10 fördubblingar —
-                                    alltså 2<sup>10</sup> = 1&nbsp;024 gånger. Ljudnivån 40 dB är därför inte 4 gånger så stark
-                                    som 10 dB, utan över 1 000 gånger starkare!
+                                    Dubbel intensitet ger ungefär 3&nbsp;dB mer, eftersom 10 · lg&nbsp;2&nbsp;≈&nbsp;3.
+                                    Tio gånger så stor intensitet ger 10&nbsp;dB mer. Ljudnivån 40&nbsp;dB är därför inte fyra
+                                    gånger så stark som 10&nbsp;dB, utan 1&nbsp;000 gånger så stark.
                                 </p>
                             </div>
                             <div className="glass-card rounded-xl p-4">
                                 <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Från hörbarhetsgräns till smärtgräns</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                    Örat hör ner till <em>I</em><sub>0</sub> = 10<sup>−12</sup> W/m² — det är 0 dB.
-                                    Smärtgränsen går vid ungefär 1 W/m², alltså 120 dB. Däremellan ryms hela vår
-                                    ljudvärld: en viskning kring 20 dB, ett samtal kring 60 dB och risk för
-                                    hörselskada från 85 dB vid långvarig exponering.
+                                    Örat hör ned till <em>I</em><sub>0</sub> = 10<sup>−12</sup>&nbsp;W/m², vilket är 0&nbsp;dB.
+                                    Smärtgränsen går vid 1&nbsp;W/m², alltså 120&nbsp;dB. Däremellan ryms hela vår ljudvärld:
+                                    en viskning kring 20&nbsp;dB, ett samtal kring 60&nbsp;dB och risk för hörselskada från
+                                    85&nbsp;dB vid långvarig exponering.
                                 </p>
                             </div>
                         </div>
 
                         <details className="glass-card rounded-xl p-4 mt-4">
                             <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
-                                <span>Var kommer formlerna ifrån?</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                                <span>Varför en rundstrålande högtalare?</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
                             </summary>
                             <p className="mt-3 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                Ljudintensiteten definieras som den energi vågen transporterar per sekund genom
-                                tvärsnittsarean 1 m², alltså <span style={{ whiteSpace: 'nowrap' }}><em>I</em> = <em>P</em>/<em>A</em></span>.
-                                Sänds ljudet ut likformigt i alla riktningar fördelas effekten på ytan av en sfär
-                                med arean <span style={{ whiteSpace: 'nowrap' }}><em>A</em> = 4<em>π</em> · <em>r</em>²</span>,
-                                vilket ger <span style={{ whiteSpace: 'nowrap' }}><em>I</em> = <em>P</em>/(4<em>π</em> · <em>r</em>²)</span>.
-                                Ljudnivån infördes för att slippa hantera så små tal — och för att bättre stämma
-                                överens med hur vi upplever ljudstyrka. Den jämför intensiteten med
-                                hörbarhetsgränsen <em>I</em><sub>0</sub> på en logaritmisk
-                                skala: <span style={{ whiteSpace: 'nowrap' }}><em>L</em> = 10 · lg(<em>I</em>/<em>I</em><sub>0</sub>)</span>,
-                                där 0 dB motsvarar hörbarhetsgränsen.
+                                Formeln <em>I</em> = <em>P</em>/(4<em>π</em> · <em>r</em>²) gäller en punktformig källa som
+                                sänder ut ljudet lika mycket åt alla håll. En vanlig högtalare gör inte det, den låter mest
+                                rakt fram. I akustiklabb används därför högtalare som är byggda som en dodekaeder, en kropp
+                                med tolv likadana sidor, med ett högtalarelement på varje sida. Tillsammans sänder de ut
+                                ljudet nästan lika mycket åt alla håll. I scenen är högtalaren och mätaren ritade större än
+                                i verkligheten så att de syns, men golvets rutor och den orange kvadraten är exakt 1&nbsp;m.
                             </p>
                         </details>
 
@@ -793,9 +1539,10 @@
                                 <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
                             </summary>
                             <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                <li><strong>"På dubbla avståndet är ljudet hälften så starkt."</strong> Nej — intensiteten avtar med kvadraten på avståndet, så dubbla avståndet ger en fjärdedels intensitet (−6 dB).</li>
-                                <li><strong>"40 dB är dubbelt så starkt som 20 dB."</strong> Nej — 20 dB mer betyder 100 gånger större intensitet. Decibelskalan är logaritmisk: varje steg på 10 dB är en tiodubbling.</li>
-                                <li><strong>"0 dB betyder att det inte finns något ljud."</strong> Nej — 0 dB är hörbarhetsgränsen, den svagaste intensitet örat kan uppfatta (<em>I</em><sub>0</sub> = 10<sup>−12</sup> W/m²). Ljud kan till och med ha negativ ljudnivå — det är bara för svagt för att höras.</li>
+                                <li><strong>"På dubbla avståndet är ljudet hälften så starkt."</strong> Nej. Intensiteten avtar med kvadraten på avståndet, så dubbla avståndet ger en fjärdedel av intensiteten, och ljudnivån sjunker med 6&nbsp;dB.</li>
+                                <li><strong>"Två högtalare på 60&nbsp;dB ger 120&nbsp;dB."</strong> Nej. Intensiteterna adderas, så två likadana källor ger dubbel intensitet. Det är bara 3&nbsp;dB mer, alltså 63&nbsp;dB. Prova i försöket Två likadana ljudkällor.</li>
+                                <li><strong>"40&nbsp;dB är dubbelt så starkt som 20&nbsp;dB."</strong> Nej. 20&nbsp;dB mer betyder 100 gånger så stor intensitet. Varje steg på 10&nbsp;dB är en tiodubbling.</li>
+                                <li><strong>"0&nbsp;dB betyder att det är helt tyst."</strong> Nej. 0&nbsp;dB är hörbarhetsgränsen, den svagaste intensitet örat kan uppfatta (<em>I</em><sub>0</sub> = 10<sup>−12</sup>&nbsp;W/m²). Ett ännu svagare ljud har negativ ljudnivå, det är bara för svagt för att höras.</li>
                             </ul>
                         </details>
                     </div>

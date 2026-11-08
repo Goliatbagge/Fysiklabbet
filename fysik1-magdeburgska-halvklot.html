@@ -422,6 +422,11 @@
                         <button class="knapp" id="kKran">Öppna kranen</button>
                     </div>
                     <div id="reglage">
+                        <div class="reg-rad"><span>Pump</span></div>
+                        <div class="seg" id="pumpVal" style="grid-template-columns: 1fr 1fr; margin-bottom: 8px">
+                            <button data-typ="hand" class="active">Handpump</button>
+                            <button data-typ="komp">Kompressor</button>
+                        </div>
                         <div class="reg-rad"><span>Vikter på hängaren</span><strong id="mVarde">20 kg</strong></div>
                         <input type="range" id="mReg" min="0" max="160" step="1" value="20" aria-label="Vikter på hängaren">
                         <div class="reg-rad"><span>Klotens diameter <em>d</em></span><strong id="dVarde">10 cm</strong></div>
@@ -455,7 +460,7 @@
                     </ul>
                 </details>
 
-                <p class="liten">Pumpen tar 0,20 liter per slag och kommer som lägst ned till 1,0 kPa. Lufttrycket på höjderna kommer från standardatmosfären. Undre halvklotet med krok väger 0,5 kg och hängaren 1,0 kg, och båda räknas in i den hängande massan. Tyngdfaktorn är <em>g</em>&nbsp;=&nbsp;9,82&nbsp;N/kg.</p>
+                <p class="liten">Handpumpen tar 0,20 liter per slag och kommer som lägst ned till 1,0 kPa. Kompressorn suger 1,6 liter per sekund och kommer ned till 0,2 kPa. Lufttrycket på höjderna kommer från standardatmosfären. Undre halvklotet med krok väger 0,5 kg och hängaren 1,0 kg, och båda räknas in i den hängande massan. Tyngdfaktorn är <em>g</em>&nbsp;=&nbsp;9,82&nbsp;N/kg, och på Månen 1,62&nbsp;N/kg.</p>
             </div>
         </div>
     </div>
@@ -469,6 +474,8 @@
         const P_HAV = 101.3;          // kPa, som i genomgången
         const PUMP_V = 0.20;          // liter per pumpslag
         const P_MIN = 1.0;            // kPa, pumpens bästa
+        const KOMP_S = 1.6;           // liter per sekund, kompressorns sugförmåga
+        const KOMP_MIN = 0.2;         // kPa, kompressorns bästa
         const M_UNDRE = 0.5, M_HANGARE = 1.0;   // kg
         const NBSP = ' ';
 
@@ -506,15 +513,18 @@
             fall: 0, vy: 0,      // undre delens förskjutning nedåt (scenenheter) och fart
             slag: 0, slagT: 0,   // köade pumpslag och tid in i pågående slag
             slapptVid: null, slapptOrsak: null, harPumpat: false,
+            pumpTyp: 'hand', kompPa: false,   // handpump eller kompressor, och om kompressorn går
             show: { molek: true, pilar: true, snitt: false, tyngd: true },
         };
+        var etikettKlar = false;   // etiketterna finns och kan ritas om
         const r = () => st.d / 20;                    // radie i scenenheter (1 enhet = 1 dm)
         const rMeter = () => st.d / 200;
         const area = () => Math.PI * rMeter() ** 2;   // m²
         const volym = () => 4 / 3 * Math.PI * (st.d / 20) ** 3;  // liter (dm³)
         const massa = () => st.m + M_UNDRE + M_HANGARE;
         const kraftF = () => (st.p0 - st.p) * 1000 * area();
-        const tyngd = () => massa() * g;
+        const gNu = () => st.plats === 'manen' ? 1.62 : g;   // tyngdfaktorn där bänken står
+        const tyngd = () => massa() * gNu();
 
         // ── Scen ────────────────────────────────────────────────────────────
         const wrap = $('sceneWrap');
@@ -869,6 +879,99 @@
             pumpG.traverse(o => { o.userData.klick = 'pump'; });
         }
         scene.add(skugga(pumpG));
+
+        // ── Kompressorn (elektrisk pump som suger ut luften snabbare) ──
+        const kompG = new THREE.Group();
+        let kompFlakt, kompMotor, kompLampa;
+        const KOMP_PORT_X = -0.7;
+        {
+            const mLack = new THREE.MeshStandardMaterial({ color: 0x2f5d8a, metalness: 0.35, roughness: 0.42 });
+            const mGummiFot = new THREE.MeshStandardMaterial({ color: 0x1b1d21, roughness: 0.9 });
+            const platta = new THREE.Mesh(new THREE.BoxGeometry(1.95, 0.08, 0.95), mMorkStal);
+            platta.position.set(0.15, 0.1, 0);
+            kompG.add(platta);
+            [[-0.72, -0.38], [-0.72, 0.38], [1.02, -0.38], [1.02, 0.38]].forEach(([x, z]) => {
+                const f = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.08, 0.06, 18), mGummiFot);
+                f.position.set(x, 0.03, z); kompG.add(f);
+            });
+            // motorn med kylflänsar
+            kompMotor = new THREE.Group();
+            const motor = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.32, 1.0, 40), mLack);
+            motor.rotation.z = Math.PI / 2;
+            kompMotor.add(motor);
+            for (let i = 0; i < 11; i++) {
+                const fl = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.35, 0.025, 40), mLack);
+                fl.rotation.z = Math.PI / 2; fl.position.x = -0.4 + i * 0.08;
+                kompMotor.add(fl);
+            }
+            [-0.25, 0.3].forEach(x => {
+                const ben = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.2, 0.5), mLack);
+                ben.position.set(x, -0.28, 0); kompMotor.add(ben);
+            });
+            // fläktkåpa med galler, fläkthjulet syns bakom gallret
+            const kapa = new THREE.Mesh(new THREE.CylinderGeometry(0.31, 0.31, 0.16, 40, 1, true), mMorkStal);
+            kapa.rotation.z = Math.PI / 2; kapa.position.x = 0.58;
+            kompMotor.add(kapa);
+            [0.09, 0.17, 0.25, 0.3].forEach(rr => {
+                const ring = new THREE.Mesh(new THREE.TorusGeometry(rr, 0.012, 8, 40), mMorkStal);
+                ring.rotation.y = Math.PI / 2; ring.position.x = 0.665;
+                kompMotor.add(ring);
+            });
+            const ekerG = new THREE.BoxGeometry(0.012, 0.6, 0.02);
+            const eker = new THREE.Mesh(ekerG, mMorkStal); eker.position.x = 0.665; kompMotor.add(eker);
+            const eker2 = new THREE.Mesh(ekerG, mMorkStal); eker2.position.x = 0.665; eker2.rotation.x = Math.PI / 2; kompMotor.add(eker2);
+            kompFlakt = new THREE.Group();
+            const mBlad = new THREE.MeshStandardMaterial({ color: 0xd8dde3, metalness: 0.4, roughness: 0.5 });
+            for (let i = 0; i < 6; i++) {
+                const blad = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.24, 0.09), mBlad);
+                blad.position.y = 0.14; blad.rotation.y = 0.35;
+                const arm = new THREE.Group(); arm.rotation.x = i * Math.PI / 3; arm.add(blad);
+                kompFlakt.add(arm);
+            }
+            const nav = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.05, 16), mBlad);
+            nav.rotation.z = Math.PI / 2; kompFlakt.add(nav);
+            kompFlakt.position.x = 0.6;
+            kompMotor.add(kompFlakt);
+            kompMotor.position.set(0.35, 0.52, 0);
+            kompG.add(kompMotor);
+            // pumphuset med oljeglas
+            const hus = new THREE.Mesh(new THREE.BoxGeometry(0.56, 0.62, 0.64), mStal);
+            hus.position.set(-0.42, 0.45, 0);
+            const lock = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.06, 0.68), mMorkStal);
+            lock.position.set(-0.42, 0.79, 0);
+            const olja = new THREE.Mesh(new THREE.CircleGeometry(0.07, 32), new THREE.MeshStandardMaterial({ color: 0xc98a1c, emissive: 0x5a3a08, roughness: 0.2 }));
+            olja.position.set(-0.42, 0.34, 0.322);
+            const oljaRam = new THREE.Mesh(new THREE.TorusGeometry(0.075, 0.014, 8, 32), mMorkStal);
+            oljaRam.position.copy(olja.position);
+            kompG.add(hus, lock, olja, oljaRam);
+            // sugrör upp till manometern och slangstosen
+            const ror = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 1.14, 16), mStal);
+            ror.position.set(-0.42, 1.39, 0);
+            const kna = new THREE.Mesh(new THREE.SphereGeometry(0.07, 16, 12), mStal);
+            kna.position.set(-0.42, 1.95, 0);
+            const port = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.045, 0.3, 14), mMassing);
+            port.rotation.z = Math.PI / 2; port.position.set(-0.55, 1.95, 0);
+            kompG.add(ror, kna, port);
+            const mHus = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.32, 0.11, 48), mMorkStal);
+            mHus.rotation.x = Math.PI / 2; mHus.position.set(-0.42, 1.4, 0.16);
+            const tavla = new THREE.Mesh(new THREE.CircleGeometry(0.29, 64), new THREE.MeshStandardMaterial({ map: matarTex, roughness: 0.4, metalness: 0 }));
+            tavla.position.set(-0.42, 1.4, 0.218);
+            const glas = new THREE.Mesh(new THREE.CircleGeometry(0.3, 64), new THREE.MeshPhysicalMaterial({ color: 0xffffff, transparent: true, opacity: 0.12, roughness: 0.05, metalness: 0 }));
+            glas.position.set(-0.42, 1.4, 0.226);
+            kompG.add(mHus, tavla, glas);
+            // strömbrytare med lampa
+            const dosa = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.18, 0.14), mMorkStal);
+            dosa.position.set(0.55, 0.23, 0.4);
+            kompLampa = new THREE.Mesh(new THREE.SphereGeometry(0.045, 16, 12), new THREE.MeshStandardMaterial({ color: 0x5a1a1a, emissive: 0x000000, roughness: 0.3 }));
+            kompLampa.position.set(0.64, 0.24, 0.475);
+            const vippa = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.1, 0.05), new THREE.MeshStandardMaterial({ color: 0xc8324a, roughness: 0.5 }));
+            vippa.position.set(0.48, 0.24, 0.48);
+            kompG.add(dosa, kompLampa, vippa);
+            kompG.position.set(PUMP_X, 0, PUMP_Z);
+            kompG.visible = false;
+            kompG.traverse(o => { o.userData.klick = 'pump'; });
+        }
+        scene.add(skugga(kompG));
         let senastMatare = -1;
         function ritaMatare() {
             const p = st.p;
@@ -986,31 +1089,47 @@
 
         // ── Etiketter (sprites med fast storlek på skärmen) ──
         const etiketter = [];
-        function etikett(delar, opt = {}) {
+        // Etiketterna ritas i bläck på den ljusa scenen och i ljusa toner på den
+        // mörka (Månen). Samma färg mot båda bakgrunderna gav nästan osynlig text.
+        // En etikett som ligger mot bänken (motBank) behåller bläcket, för där är
+        // det bänkens färg som syns bakom texten, inte himlen.
+        const MORK_FARG = { '#0f1620': '#f3eee4', [BLA]: '#8db8ff', [ORANGE]: '#f4a85c', [GRON]: '#7bd88f' };
+        const morkScen = () => st.plats === 'manen';
+        function ritaEtikett(spr) {
+            const { delar, opt, c } = spr.userData;
             const px = 64, pad = 14;
-            const c = document.createElement('canvas'), ctx = c.getContext('2d');
+            const ctx = c.getContext('2d');
             const font = (it, sub) => `${it ? 'italic ' : ''}600 ${sub ? px * 0.66 : px}px Poppins, sans-serif`;
             let w = 0;
             delar.forEach(d => { ctx.font = font(d.i, d.sub); d.w = ctx.measureText(d.t).width; w += d.w; });
             c.width = Math.ceil(w + pad * 2); c.height = Math.ceil(px * 1.45);
-            delar.forEach(d => { d.x = 0; });
+            const bas = opt.farg || '#0f1620';
+            const farg = morkScen() && !opt.motBank ? (MORK_FARG[bas] || '#f3eee4') : bas;
             let x = pad;
             delar.forEach(d => {
                 ctx.font = font(d.i, d.sub);
-                ctx.fillStyle = opt.farg || '#0f1620';
+                ctx.fillStyle = farg;
                 ctx.textBaseline = 'alphabetic';
                 ctx.fillText(d.t, x, px * (d.sub ? 1.18 : 1.0));
                 x += d.w;
             });
+            spr.userData.aspekt = c.width / c.height;
+            if (spr.material.map) spr.material.map.dispose();
             const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 4;
-            const spr = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false, sizeAttenuation: false, toneMapped: false }));
+            spr.material.map = tex; spr.material.needsUpdate = true;
+        }
+        function etikett(delar, opt = {}) {
+            const spr = new THREE.Sprite(new THREE.SpriteMaterial({ transparent: true, depthTest: false, sizeAttenuation: false, toneMapped: false }));
             spr.renderOrder = 20;
-            spr.userData = { aspekt: c.width / c.height, px: opt.px || 19 };
+            spr.userData = { delar, opt, c: document.createElement('canvas'), px: opt.px || 19 };
+            ritaEtikett(spr);
             spr.center.set(opt.cx != null ? opt.cx : 0.5, opt.cy != null ? opt.cy : 0.5);
             etiketter.push(spr);
             scene.add(spr);
             return spr;
         }
+        function bytEtikettText(spr, delar) { spr.userData.delar = delar; ritaEtikett(spr); skalaEtiketter(); }
+        function ritaOmEtiketter() { etiketter.forEach(ritaEtikett); skalaEtiketter(); }
         function skalaEtiketter() {
             const H = mount.clientHeight || 600;
             const k = 2 * Math.tan(camera.fov * Math.PI / 360) / H;
@@ -1018,10 +1137,11 @@
         }
         const etPump = etikett([{ t: 'Vakuumpump' }], { cy: 0 });
         const etKran = etikett([{ t: 'Kran' }], { cx: 0 });
-        const etBord = etikett([{ t: 'Lyftbord' }], { cx: 0 });
+        const etBord = etikett([{ t: 'Lyftbord' }], { cx: 0, motBank: true });   // ligger mot den ljusa bänken
         let etFG = null, etFGtext = '';
         let etUt = etikett([{ t: 'Lufttryck utanför' }], { cx: 0, farg: BLA, px: 17 });
         let etIn = etikett([{ t: 'Tryck inuti' }], { cx: 0, farg: ORANGE, px: 17 });
+        etikettKlar = true;
         function stallEtiketter() {
             etPump.position.set(PUMP_X, 3.35, PUMP_Z);
             const vs = ventilSpets.clone().add(new THREE.Vector3(0, SOM_Y, 0));
@@ -1124,9 +1244,24 @@
         // ── Handlingar ──
         function pumpa(n) {
             if (!st.fast) { flash('Sätt ihop kloten först: höj lyftbordet.'); return; }
+            if (st.pumpTyp === 'komp') {
+                st.kompPa = !st.kompPa;
+                if (st.kompPa) { st.kranOppen = false; stallVentil(); }
+                return;
+            }
             st.kranOppen = false; stallVentil();
             st.slag += n;
         }
+        function valjPump(typ) {
+            st.pumpTyp = typ; st.kompPa = false; st.slag = 0; st.slagT = 0;
+            pumpG.visible = typ === 'hand';
+            kompG.visible = typ === 'komp';
+            pumpPort.set(PUMP_X + (typ === 'komp' ? KOMP_PORT_X : -0.55), 1.95, PUMP_Z);
+            byggSlang();
+            bytEtikettText(etPump, [{ t: typ === 'komp' ? 'Kompressor' : 'Vakuumpump' }]);
+            document.querySelectorAll('#pumpVal button').forEach(b => b.classList.toggle('active', b.dataset.typ === typ));
+        }
+        document.querySelectorAll('#pumpVal button').forEach(b => b.addEventListener('click', () => { valjPump(b.dataset.typ); uppdateraPanel(true); }));
         function slagKlart() {
             const V = volym();
             const pmin = Math.min(P_MIN, st.p0);
@@ -1140,7 +1275,7 @@
         function oppnaKran() {
             if (!st.fast) return;
             st.kranOppen = !st.kranOppen;
-            if (st.kranOppen) st.slag = 0;
+            if (st.kranOppen) { st.slag = 0; st.kompPa = false; }
             stallVentil();
         }
         function stallVentil() {
@@ -1154,14 +1289,14 @@
             st.slapptVid = null; st.slapptOrsak = null;
         }
         function nollstall() {
-            st.bordUppe = true; bordH = BORD_UPPE; st.slag = 0;
+            st.bordUppe = true; bordH = BORD_UPPE; st.slag = 0; st.kompPa = false;
             sattIhop();
             st.harPumpat = false;
         }
 
         // ── Klick i scenen ──
         const ray = new THREE.Raycaster(), mus = new THREE.Vector2();
-        const klickbara = () => [pumpG, slang, bordG, ventil].filter(Boolean);
+        const klickbara = () => [pumpG, kompG, slang, bordG, ventil].filter(o => o && o.visible);
         function traff(e) {
             const b = renderer.domElement.getBoundingClientRect();
             mus.set(((e.clientX - b.left) / b.width) * 2 - 1, -((e.clientY - b.top) / b.height) * 2 + 1);
@@ -1205,6 +1340,7 @@
             if (!st.fast) st.p = st.p0;
             PLATSER.forEach(x => wrap.classList.remove(x.klass));
             wrap.classList.add(pl.klass);
+            if (etikettKlar) ritaOmEtiketter();
             platserEl.querySelectorAll('button').forEach(b => b.classList.toggle('active', b.dataset.id === id));
             uppdateraPanel(true);
         }
@@ -1325,7 +1461,7 @@
             $('vDp').textContent = kPa(st.p0 - st.p);
             $('vA').textContent = fmt(A * 1e4, 1) + NBSP + 'cm²';
             $('vM').textContent = fmt(massa(), 1) + NBSP + 'kg';
-            $('vMmax').textContent = fmt(Math.max(0, F) / g, 1) + NBSP + 'kg';
+            $('vMmax').textContent = fmt(Math.max(0, F) / gNu(), 1) + NBSP + 'kg';
             $('siP').textContent = kPa(st.p);
             $('siF').textContent = newton(Math.max(0, F));
             $('siG').textContent = newton(FG);
@@ -1344,7 +1480,7 @@
             } else if (!last) {
                 txt = st.p0 - st.p < 0.5
                     ? 'Kloten är fulla av luft. Trycket är lika stort inuti som utanför, så ingenting håller ihop dem. Pumpa ut luften.'
-                    : `Lyftbordet bär vikterna. Kloten kan bära ${fmt(Math.max(0, F) / g, 1)}${NBSP}kg. Sänk bordet och se om de håller.`;
+                    : `Lyftbordet bär vikterna. Kloten kan bära ${fmt(Math.max(0, F) / gNu(), 1)}${NBSP}kg. Sänk bordet och se om de håller.`;
             } else {
                 klass = 'haller';
                 txt = `Kloten håller. Lufttryckets kraft ${newton(F)} är större än tyngden ${newton(FG)}.`;
@@ -1359,6 +1495,9 @@
             $('kKran').textContent = st.kranOppen ? 'Stäng kranen' : 'Öppna kranen';
             $('kKran').disabled = !st.fast;
             $('kPump1').disabled = !st.fast; $('kPump10').disabled = !st.fast;
+            const komp = st.pumpTyp === 'komp';
+            $('kPump1').textContent = komp ? (st.kompPa ? 'Stäng av kompressorn' : 'Starta kompressorn') : 'Ett pumpslag';
+            $('kPump10').style.display = komp ? 'none' : '';
 
             // steg
             const s1 = st.p0 - st.p > 5, s2 = last && st.fast, s3 = !st.fast && st.slapptVid != null;
@@ -1372,7 +1511,9 @@
             // ledtext
             let hint;
             if (!st.fast) hint = 'Klicka på lyftbordet för att höja det och sätta ihop kloten igen.';
-            else if (!s1) hint = 'Klicka på vakuumpumpen för att pumpa ut luften.';
+            else if (!s1) hint = st.pumpTyp === 'komp'
+                ? (st.kompPa ? 'Kompressorn suger ut luften ur kloten.' : 'Klicka på kompressorn för att starta den.')
+                : 'Klicka på vakuumpumpen för att pumpa ut luften.';
             else if (!last) hint = 'Klicka på lyftbordet för att sänka det.';
             else hint = st.kranOppen ? 'Luft strömmar in. Klicka på kranen för att stänga den.' : 'Klicka på kranen för att släppa in luft.';
             $('hint').textContent = hint;
@@ -1425,6 +1566,7 @@
 
         // ── Loopen ──
         const SLAGTID = 0.42;
+        let kompVarv = 0;
         let senast = performance.now();
         function loop(nu) {
             requestAnimationFrame(loop);
@@ -1446,6 +1588,20 @@
                 kolvG.position.y = 2.2 + 0.55 * Math.sin(Math.PI * Math.min(1, f));
                 if (f >= 1) { st.slagT = 0; st.slag--; slagKlart(); }
             } else { st.slag = st.fast ? st.slag : 0; st.slagT = 0; kolvG.position.y += (2.2 - kolvG.position.y) * 0.3; }
+
+            // kompressorn suger ut luften hela tiden medan den går
+            if (st.kompPa && !st.fast) st.kompPa = false;
+            if (st.kompPa) {
+                const pmin = Math.min(KOMP_MIN, st.p0);
+                if (st.p > pmin) st.p = pmin + (st.p - pmin) * Math.exp(-KOMP_S * dt / volym());
+                st.harPumpat = true;
+            }
+            kompVarv += ((st.kompPa ? 1 : 0) - kompVarv) * Math.min(1, dt * 3);
+            kompFlakt.rotation.x += kompVarv * dt * 40;
+            kompMotor.position.y = 0.52 + kompVarv * 0.006 * Math.sin(nu * 0.21);
+            kompMotor.position.z = kompVarv * 0.004 * Math.sin(nu * 0.17);
+            kompLampa.material.emissive.setHex(st.kompPa ? 0x2fd35a : 0x000000);
+            kompLampa.material.color.setHex(st.kompPa ? 0x2fd35a : 0x5a1a1a);
 
             // kranen släpper in luft
             if (st.fast && st.kranOppen) st.p += (st.p0 - st.p) * (1 - Math.exp(-dt / 0.9));
@@ -1520,7 +1676,7 @@
         gaTillVy('hel', true);
         uppdateraPanel(true);
         requestAnimationFrame(loop);
-        window.__mb = { st, kraftF, tyngd, pumpa, vaxlaBord, oppnaKran, valjPlats, gaTillVy, satt, slagKlart };
+        window.__mb = { st, kraftF, tyngd, pumpa, valjPump, vaxlaBord, oppnaKran, valjPlats, gaTillVy, satt, slagKlart };
     </script>
     <script src="feedback.js" defer></script>
     <script src="sim-dock.js" defer></script>

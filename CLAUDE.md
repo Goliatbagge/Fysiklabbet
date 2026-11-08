@@ -3053,6 +3053,30 @@ muspekar-cursors), eller dekorativa effekter på riktigt mörka ytor (t.ex.
 en grön LED-display). Avgör alltid utifrån den FAKTISKA bakgrunden bakom
 elementet — inte filens generella tema.
 
+### ⛔ Etiketter ska kontrastera mot det som FAKTISKT ligger bakom dem
+
+**En etikett i en scen ritas i en färg som syns mot bakgrunden just där den
+står, i varje läge simuleringen kan hamna i** (användarkrav 2026-11-08).
+Felet som utlöste regeln: i Magdeburgska halvkloten blir scenen mörk när
+bänken flyttas till Månen, men 3D-etiketterna "Kran" och "Vakuumpump" stod
+kvar i mörkt bläck och syntes knappt mot den marinblå himlen. I standardläget
+såg allt rätt ut, så felet syntes bara i ett av lägena.
+
+- **Byter scenen bakgrund** (plats, dag/natt, tema, vakuum): rita om
+  etiketterna när bakgrunden byts. Bläck och mättade färger på ljus botten,
+  ljusa toner (papper `#f3eee4`, ljusare varianter av kraftfärgerna) på mörk
+  botten. Referens: `ritaEtikett()` + `MORK_FARG` i
+  `fysik1-magdeburgska-halvklot.html`.
+- **Avgör färgen efter den LOKALA bakgrunden**, inte efter scenens tema: en
+  etikett som ligger mot bänken eller golvet behåller bläcket även när
+  himlen blir mörk (`motBank` i referensen). Ljus text på en ljus bänk är
+  samma fel åt andra hållet.
+- **Lös det aldrig med en halo eller kontur**: no-white-outline-regeln ovan
+  gäller fortfarande. Lösningen är rätt färg eller en annan placering.
+- **Granska varje läge i skärmdump**, inte bara standardläget: varje plats,
+  varje vy och varje tema som ändrar bakgrunden. Samma sak med
+  avläsningsrutor och canvasetiketter.
+
 ### Formelpresentation
 
 Gäller överallt formler visas (ingress, header, paneler, förklaringar):

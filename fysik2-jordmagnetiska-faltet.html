@@ -2,24 +2,23 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
-    <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jordmagnetiska fältet — Fysiklabbet</title>
-    <meta name="description" content="Jordens magnetfält i 3D — varför kompassen pekar norrut.">
+    <meta name="description" content="Dra en kompass över jordklotet i 3D och se inklinationen, deklinationen och fältets komposanter. Följ den norra magnetiska polens vandring sedan 1831.">
     <link rel="canonical" href="https://fysiklabbet.se/fysik2-jordmagnetiska-faltet.html">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Fysiklabbet">
     <meta property="og:title" content="Jordmagnetiska fältet — Fysik nivå 2">
-    <meta property="og:description" content="Jordens magnetfält i 3D — varför kompassen pekar norrut.">
+    <meta property="og:description" content="Dra en kompass över jordklotet i 3D och se inklinationen, deklinationen och fältets komposanter. Följ den norra magnetiska polens vandring sedan 1831.">
     <meta property="og:url" content="https://fysiklabbet.se/fysik2-jordmagnetiska-faltet.html">
     <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Jordmagnetiska fältet — Fysik nivå 2">
-    <meta name="twitter:description" content="Jordens magnetfält i 3D — varför kompassen pekar norrut.">
+    <meta name="twitter:description" content="Dra en kompass över jordklotet i 3D och se inklinationen, deklinationen och fältets komposanter. Följ den norra magnetiska polens vandring sedan 1831.">
     <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -37,225 +36,158 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
     <style>
-        .sim-container {
-            display: flex;
-            flex-direction: column;
-            min-height: calc(100vh - 80px);
-        }
+        .sida { max-width: 72rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; font-family: 'DM Sans', sans-serif; }
+        @media (min-width: 768px) { .sida { padding-left: 2rem; padding-right: 2rem; } }
+        .sida h1 { font-size: 2.1rem; font-weight: 900; letter-spacing: -0.02em; color: var(--lab-ink); }
+        .ingress { color: var(--lab-ink-soft); max-width: 860px; margin: 0.5rem 0 1.25rem; }
 
-        @media (min-width: 1024px) {
-            .sim-container {
-                flex-direction: row;
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 12px;
+        }
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 21px; font-family: 'Instrument Serif', serif; line-height: 1.15; }
+        .fnum sub { font-size: 0.62em; font-style: normal; }
+        .formelkort { padding: 14px 18px; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap;
+                      align-items: center; column-gap: 2.6rem; row-gap: 1rem; color: var(--lab-ink); }
+        .formler { display: flex; flex-wrap: wrap; column-gap: 2.4rem; row-gap: 0.6rem; }
+        .formelrad { display: flex; align-items: center; column-gap: 0.45rem; }
+        .vbl { display: flex; flex-direction: column; align-items: center; }
+        .vbl .dold { visibility: hidden; }
+
+        .layout { display: flex; flex-direction: column; gap: 1.5rem; }
+        @media (min-width: 1024px) { .layout { flex-direction: row; align-items: flex-start; } }
+        .scen-kol { flex: 1 1 auto; min-width: 0; }
+        @media (min-width: 1024px) { .scen-kol { width: 63%; } .panel-kol { width: 37%; } }
+        .panel-kol { flex-shrink: 0; display: flex; flex-direction: column; gap: 1rem; }
+
+        .scene-wrap {
+            position: relative; width: 100%; height: 600px;
+            border-radius: 12px; overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            user-select: none; -webkit-user-select: none;
+        }
+        body.lab-sim .scene-wrap.rymd {
+            background: radial-gradient(ellipse at 50% 40%, #13233d 0%, #0a1324 55%, #050912 100%);
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen { width: 100vw; height: 100vh; border-radius: 0; }
+        .tre-mount { position: absolute; inset: 0; touch-action: none; }
+        .tre-mount > canvas { display: block; width: 100%; height: 100%; outline: none; }
+        .tre-mount.grab { cursor: grab; }
+        .tre-mount.dragging { cursor: grabbing; }
+        @media (max-width: 600px) {
+            .scene-wrap { height: auto; }
+            body.lab-sim .scene-wrap:not(:fullscreen) .tre-mount { position: relative; inset: auto; height: 440px; }
+            /* Mobil fullskärm: scenen i flödet med egen höjd, annars hittar
+               sim-dock.js ingen scen (CLAUDE.md, fälla 5). */
+            body.lab-sim .scene-wrap:is(:fullscreen, :-webkit-full-screen) .tre-mount {
+                position: sticky; inset: auto; top: 0; z-index: 2;
+                flex: 0 0 auto; width: 100%; height: 52vh;
             }
         }
 
-        #canvas-container {
-            flex: 1;
-            min-height: 50vh;
-            position: relative;
-            background: radial-gradient(ellipse at center, #0a1628 0%, #050510 100%);
-            user-select: none;
-        }
-
-        #canvas-container:fullscreen,
-        #canvas-container:-webkit-full-screen {
-            width: 100vw;
-            height: 100vh;
-        }
-
-        @media (min-width: 1024px) {
-            #canvas-container {
-                min-height: calc(100vh - 80px);
-            }
-        }
-
-        .controls-panel {
-            width: 100%;
-            padding: 1.5rem;
-            background: var(--lab-bg);
-            border-left: 1px solid var(--lab-line-strong);
-            overflow-y: auto;
-            color: var(--lab-ink);
-        }
-
-        @media (min-width: 1024px) {
-            .controls-panel {
-                width: 380px;
-                max-height: calc(100vh - 80px);
-            }
-        }
-
-        .panel-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--lab-ink);
-            border-bottom: 2px solid var(--lab-line-strong);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        /* On-scene visningsval (uppe till höger) — samma mönster som övriga sims */
-        .scene-toggles {
-            position: absolute; top: 14px; right: 14px; z-index: 10;
+        .scene-info {
+            position: absolute; bottom: 12px; right: 14px; z-index: 5;
             background: rgba(246,242,234,0.94);
-            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 7px 12px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            display: flex; flex-direction: column; gap: 1px; pointer-events: none; min-width: 150px;
+        }
+        .scene-info .si-lbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; }
+        .scene-info .si-lbl em { text-transform: none; }
+        .scene-info .si-val { font-size: 15px; font-weight: 700; color: var(--lab-ink, #0f1620);
+            font-family: 'JetBrains Mono', monospace; }
+        .scene-hint {
+            position: absolute; bottom: 10px; left: 12px; z-index: 5;
+            font-size: 12px; color: #e9edf3;
+            background: rgba(15,22,32,0.80); padding: 4px 11px; border-radius: 7px;
+            pointer-events: none; font-weight: 500; max-width: calc(100% - 210px);
+        }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.95);
             border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
             border-radius: 10px; padding: 9px 13px;
             display: flex; flex-direction: column; gap: 3px;
             box-shadow: 0 2px 8px rgba(15,22,32,0.12);
-            max-width: 230px;
+            max-width: 232px;
         }
         .scene-toggles .st-title {
             font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
             color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
         }
+        .scene-toggles .st-group { margin-top: 7px; }
         .scene-toggles label {
             display: flex; align-items: center; gap: 7px; cursor: pointer;
             font-size: 13px; color: var(--lab-ink, #0f1620);
         }
-        .scene-toggles input {
-            width: 15px; height: 15px;
-            accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
-            cursor: pointer;
+        .scene-toggles input[type="checkbox"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0; cursor: pointer;
         }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; margin: 0 2.5px; box-sizing: border-box; }
+        .scene-toggles .st-fs { display: none; flex-direction: column; gap: 4px; }
+        .scene-wrap:is(:fullscreen, :-webkit-full-screen) .scene-toggles .st-fs { display: flex; }
 
-        .info-box {
-            background: var(--lab-bg);
-            border: 1px solid var(--lab-line-strong);
-            border-left: 3px solid var(--lab-accent);
-            border-radius: 0 8px 8px 0;
-            padding: 1.25rem;
-            margin-top: 1.5rem;
+        .seg { display: grid; gap: 1px; border-radius: 9px; overflow: hidden;
+               border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+               background: var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .seg button { background: var(--lab-bg, #f3eee4); border: 0; padding: 6px 4px; font-size: 12.5px;
+                      font-weight: 600; color: var(--lab-ink); cursor: pointer; line-height: 1.2; }
+        .seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+
+        .kort { padding: 14px 16px; color: var(--lab-ink); }
+        .kort h2 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+        .kort p { font-size: 13.5px; color: var(--lab-ink-soft); line-height: 1.55; }
+        .plats-namn { font-weight: 700; font-size: 15px; }
+        .vyer { display: flex; gap: 10px; margin: 8px 0 6px; }
+        .vyer figure { flex: 2 1 0; margin: 0; text-align: center; }
+        .vyer figure.bred { flex: 3 1 0; }
+        .vyer figcaption { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                           color: var(--lab-ink-muted); font-weight: 600; margin-top: 2px; }
+        .vyer svg { width: 100%; height: auto; display: block; }
+        .varden { width: 100%; font-size: 13.5px; border-collapse: collapse; margin-top: 4px; }
+        .varden td { padding: 3px 0; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.12)); }
+        .varden td:last-child { text-align: right; font-family: 'JetBrains Mono', monospace; font-weight: 600; white-space: nowrap; }
+        .varden sub { font-size: 0.7em; }
+
+        .platser { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .platser button {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 6px 8px; font-size: 12.5px; font-weight: 600; cursor: pointer;
+            text-align: left; line-height: 1.2;
         }
+        .platser button:hover { border-color: var(--lab-accent, #c8324a); }
+        .platser button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); border-color: var(--lab-ink); }
+        .platser button .sub { display: block; font-size: 10.5px; font-weight: 500; opacity: 0.75; }
+        .scene-toggles .platser { grid-template-columns: 1fr 1fr; gap: 4px; }
+        .scene-toggles .platser button { padding: 4px 6px; font-size: 11.5px; }
+        .scene-toggles .platser button .sub { display: none; }
 
-        .info-box h3 {
-            color: var(--lab-ink);
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            font-size: 1rem;
-        }
+        .ar-rad { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; }
+        .ar-rad strong { font-family: 'JetBrains Mono', monospace; color: var(--lab-accent, #c8324a); }
+        input[type="range"] { width: 100%; accent-color: var(--lab-accent, #c8324a); cursor: pointer; }
+        .liten { font-size: 12px; color: var(--lab-ink-muted); margin-top: 4px; line-height: 1.45; }
 
-        .info-box p {
-            color: var(--lab-ink-soft);
-            font-size: 0.9rem;
-            line-height: 1.6;
-            margin-bottom: 0.75rem;
-        }
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { display: flex; justify-content: space-between; align-items: center; font-weight: 600; }
+        details ul { margin-top: 10px; display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; color: var(--lab-ink-soft); line-height: 1.5; }
 
-        .info-box p:last-child {
-            margin-bottom: 0;
-        }
-
-        .highlight {
-            color: var(--lab-accent);
-            font-weight: 600;
-        }
-
-        .highlight-red {
-            color: var(--lab-accent);
-            font-weight: 600;
-        }
-
-        .highlight-white {
-            color: var(--lab-ink);
-            font-weight: 600;
-        }
-
-        .scene-title {
-            position: absolute;
-            top: 0.9rem;
-            left: 4.4rem;   /* till höger om fullskärmsknappen */
-            z-index: 10;
-            pointer-events: none;
-        }
-
-        .scene-title h1 {
-            font-size: 1.75rem;
-            font-weight: 400;
-            font-family: var(--lab-font-display);
-            color: var(--lab-ink);
-            background: none;
-            -webkit-text-fill-color: var(--lab-ink);
-            margin-bottom: 0.25rem;
-        }
-
-        .scene-title p {
-            color: var(--lab-ink-muted);
-            font-size: 0.9rem;
-        }
-
-        .legend {
-            position: absolute;
-            bottom: 1.5rem;
-            left: 1.5rem;
-            z-index: 10;
-            background: var(--lab-bg-panel);
-            border: 1px solid var(--lab-line-strong);
-            border-radius: 8px;
-            padding: 1rem;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--lab-ink-soft);
-            font-size: 0.85rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .legend-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .legend-color {
-            width: 16px;
-            height: 16px;
-            border-radius: 3px;
-        }
-
-        /* Mobil: kompakt teckenförklaring så den inte täcker globen */
         @media (max-width: 600px) {
-            .legend {
-                bottom: 0.5rem;
-                left: 0.5rem;
-                padding: 0.5rem 0.6rem;
-            }
-            .legend-item {
-                font-size: 0.7rem;
-                margin-bottom: 0.25rem;
-            }
-            .legend-color {
-                width: 11px;
-                height: 11px;
-            }
-            .scene-title {
-                top: 0.5rem;
-                left: 3rem;   /* fs-btn är 32 px på mobil */
-            }
-            .scene-title h1 {
-                font-size: 1.2rem;
-            }
-            .scene-title p {
-                font-size: 0.75rem;
-            }
-            .scene-toggles {
-                top: 8px; right: 8px;
-                padding: 6px 9px;
-                max-width: 170px;
-            }
-            .scene-toggles label { font-size: 11.5px; }
-        }
-
-        .legend-line {
-            width: 20px;
-            height: 3px;
-            border-radius: 2px;
+            .sida h1 { font-size: 1.6rem; }
+            .scene-toggles { max-width: none; }
         }
     </style>
 </head>
 <body class="lab-sim">
-        <div class="lab-topbar lab-topbar--on-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
         <div class="lab-topbar-inner">
             <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
         </div>
@@ -324,797 +256,1104 @@
         </div>
     </div>
 
-    <main class="sim-container">
-        <div id="canvas-container">
-            <button class="fs-btn" id="fsBtn" aria-label="Fullskärm" title="Fullskärm">
-                <svg id="fsIconExpand" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                     stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
-                </svg>
-                <svg id="fsIconCompress" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                     stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
-                    <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
-                </svg>
-            </button>
-            <div class="scene-title">
-                <h1>Jordmagnetiska fältet</h1>
-                <p>Dra för att rotera modellen</p>
+    <div class="sida">
+        <div class="breadcrumb mb-4" style="font-size: 13px">
+            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Jordmagnetiska fältet
+        </div>
+        <h1>Jordmagnetiska fältet</h1>
+        <p class="ingress">
+            Jordklotet fungerar ungefär som en stavmagnet, och den norra magnetiska polen är i själva
+            verket en <strong>sydända</strong>. Ta tag i kompassen och dra den över jordklotet. Fältlinjen
+            genom kompassen visar varför fältet pekar snett ned mot marken i Sverige, ligger vågrätt vid
+            ekvatorn och pekar snett upp på södra halvklotet. Dra i årtalet och se den norra magnetiska
+            polen vandra från norra Kanada mot Sibirien sedan 1831, och se kompassnålen följa med.
+        </p>
+
+        <div class="glass-card formelkort">
+            <div style="max-width: 300px">
+                <div class="flbl" style="margin-bottom: 4px">Inklination och deklination</div>
+                <div style="font-size: 14.5px; line-height: 1.45">
+                    <strong>Inklinationen</strong> <em>i</em> är vinkeln mellan fältet och marknivån.
+                    <strong>Deklinationen</strong> <em>α</em> är vinkeln mellan magnetisk och geografisk nordriktning.
+                </div>
             </div>
-            <div class="scene-toggles">
-                <div class="st-title">Visa</div>
-                <label><input type="checkbox" id="showField" checked> Magnetfält</label>
-                <label><input type="checkbox" id="showMoreFields"> Fler fältlinjer</label>
-                <label><input type="checkbox" id="showMagnet"> Stavmagnet</label>
+            <div class="formler">
+            <div class="formelrad">
+                <div class="vbl"><span class="flbl">Horisontalkomposant</span><span class="fnum"><em>B</em><sub>jh</sub></span><span class="flbl dold" aria-hidden="true">Horisontalkomposant</span></div>
+                <span class="fnum">=</span>
+                <div class="vbl"><span class="flbl">Flödestäthet</span><span class="fnum"><em>B</em></span><span class="flbl dold" aria-hidden="true">Flödestäthet</span></div>
+                <span class="fnum">·</span>
+                <span class="fnum">cos</span>
+                <div class="vbl"><span class="flbl">Inklination</span><span class="fnum"><em>i</em></span><span class="flbl dold" aria-hidden="true">Inklination</span></div>
             </div>
-            <div class="legend" id="legend">
-                <!-- Populated by JS -->
+            <div class="formelrad">
+                <div class="vbl"><span class="flbl">Vertikalkomposant</span><span class="fnum"><em>B</em><sub>jv</sub></span><span class="flbl dold" aria-hidden="true">Vertikalkomposant</span></div>
+                <span class="fnum">=</span>
+                <div class="vbl"><span class="flbl">Flödestäthet</span><span class="fnum"><em>B</em></span><span class="flbl dold" aria-hidden="true">Flödestäthet</span></div>
+                <span class="fnum">·</span>
+                <span class="fnum">sin</span>
+                <div class="vbl"><span class="flbl">Inklination</span><span class="fnum"><em>i</em></span><span class="flbl dold" aria-hidden="true">Inklination</span></div>
+            </div>
             </div>
         </div>
 
-        <div class="controls-panel">
-            <h2 class="panel-title">Om simuleringen</h2>
+        <div class="layout">
+            <div class="scen-kol">
+                <div class="scene-wrap rymd" id="sceneWrap">
+                    <div class="tre-mount grab" id="mount"></div>
+                    <button class="fs-btn" id="fsBtn" aria-label="Fullskärm" title="Fullskärm">
+                        <svg id="fsIconExpand" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
+                        </svg>
+                        <svg id="fsIconCompress" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                            <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
+                        </svg>
+                    </button>
 
-            <div class="info-box">
-                <h3>Om jordmagnetiska fältet</h3>
-                <p>
-                    Jorden beter sig som en gigantisk stavmagnet med ett magnetfält som sträcker sig
-                    långt ut i rymden. Detta fält skyddar oss från solvindar och kosmisk strålning.
-                </p>
-                <p>
-                    <span class="highlight">Viktigt:</span> Jordens magnetiska pol i norr är en
-                    <span class="highlight-white">sydända</span>! Det är därför kompassens
-                    nordända pekar norrut: olika poler attraherar, så nordändan dras mot en sydända.
-                </p>
-                <p>
-                    Stavmagneten i modellen visar detta: <span class="highlight-red">röd nordända (N)</span>
-                    nära den geografiska sydpolen, <span class="highlight-white">vit sydända (S)</span> nära
-                    den geografiska nordpolen.
-                </p>
+                    <button class="st-show-btn" id="stShow" aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false" style="display: none">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" /><circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" /><circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                    <div class="scene-toggles" id="sceneToggles">
+                        <button class="st-hide" id="stHide" aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+                        </button>
+                        <div class="st-title">Visa</div>
+                        <label><input type="checkbox" id="tLinjer" checked><span class="st-swatch" style="background:#e8604c"></span><span>Fältlinjer</span></label>
+                        <label><input type="checkbox" id="tFler"><span class="st-swatch" style="background:rgba(232,96,76,0.5)"></span><span>Fler fältlinjer</span></label>
+                        <label><input type="checkbox" id="tGenom" checked><span class="st-swatch" style="background:#ffb36b"></span><span>Linjen genom kompassen</span></label>
+                        <label><input type="checkbox" id="tVektor" checked><span class="st-swatch" style="background:linear-gradient(90deg,#ffb36b 60%,transparent 60%)"></span><span><em>B</em> och komposanterna</span></label>
+                        <label><input type="checkbox" id="tPoler" checked><span class="st-dot" style="background:#ffffff;border:1.5px solid #0f1620"></span><span>Polerna</span></label>
+                        <label><input type="checkbox" id="tVandring" checked><span class="st-swatch" style="background:#9fd3c7"></span><span>Polens vandring</span></label>
+                        <label><input type="checkbox" id="tMagnet"><span class="st-swatch" style="background:linear-gradient(90deg,#ffffff 50%,#dc2626 50%)"></span><span>Stavmagneten</span></label>
+                        <label><input type="checkbox" id="tSnurra"><span class="st-swatch" style="background:transparent"></span><span>Jorden snurrar</span></label>
+                        <div class="st-title st-group">Vy</div>
+                        <div class="seg" style="grid-template-columns: 1fr 1fr 1fr" id="vyer">
+                            <button data-vy="hel" class="active">Hela</button>
+                            <button data-vy="nara">Kompassen</button>
+                            <button data-vy="norr">Norrifrån</button>
+                        </div>
+                        <div class="st-fs" id="stFs">
+                            <div class="st-title st-group">Reglage</div>
+                            <div id="fsAr"></div>
+                            <div class="st-title st-group">Platser</div>
+                            <div id="fsPlatser"></div>
+                        </div>
+                    </div>
+
+                    <div class="scene-info">
+                        <span class="si-lbl">Inklination <em>i</em></span>
+                        <span class="si-val" id="siI">71°</span>
+                        <span class="si-lbl" style="margin-top: 4px">Deklination <em>α</em></span>
+                        <span class="si-val" id="siA">2° öster</span>
+                        <span class="si-lbl" style="margin-top: 4px">Flödestäthet <em>B</em></span>
+                        <span class="si-val" id="siB">52 µT</span>
+                    </div>
+                    <div class="scene-hint" id="hint">Ta tag i kompassen och dra den över jordklotet. Dra någon annanstans för att vrida.</div>
+                </div>
             </div>
 
-            <div class="info-box">
-                <h3>Magnetfältets egenskaper</h3>
-                <p>
-                    • Fältlinjerna går <span class="highlight">ut ur</span> stavmagnetens nordända
-                    (nära den geografiska sydpolen) och <span class="highlight">in i</span> dess sydända
-                    (nära den geografiska nordpolen).
-                </p>
-                <p>
-                    • Vid ekvatorn är fältet horisontellt, vid polerna är det vertikalt.
-                </p>
-                <p>
-                    • Magnetfältets styrka vid jordytan är cirka 25-65 µT.
-                </p>
-            </div>
+            <div class="panel-kol">
+                <div class="glass-card kort">
+                    <h2>Kompassen på platsen</h2>
+                    <div class="plats-namn" id="platsNamn">Falköping</div>
+                    <div class="vyer">
+                        <figure><svg id="svgUppifran" viewBox="0 0 170 170" aria-label="Kompassen sedd uppifrån"></svg><figcaption>Uppifrån</figcaption></figure>
+                        <figure class="bred"><svg id="svgSidan" viewBox="0 0 230 195" aria-label="Fältet sett från sidan"></svg><figcaption>Från sidan</figcaption></figure>
+                    </div>
+                    <table class="varden">
+                        <tr><td>Läge</td><td id="vLage"></td></tr>
+                        <tr><td>Avstånd till norra magnetiska polen</td><td id="vAvst"></td></tr>
+                        <tr><td>Flödestäthet <em>B</em></td><td id="vB"></td></tr>
+                        <tr><td>Horisontalkomposant <em>B</em><sub>jh</sub></td><td id="vBh"></td></tr>
+                        <tr><td>Vertikalkomposant <em>B</em><sub>jv</sub></td><td id="vBv"></td></tr>
+                        <tr><td>Inklination <em>i</em></td><td id="vI"></td></tr>
+                        <tr><td>Deklination <em>α</em></td><td id="vA"></td></tr>
+                    </table>
+                    <p class="liten" id="vKommentar"></p>
+                </div>
 
-            <div class="info-box">
-                <h3>Interaktion</h3>
-                <p>
-                    <span class="highlight">Vänsterklick + dra</span> — rotera modellen
-                </p>
-                <p>
-                    <span class="highlight">Scrollhjul</span> — zooma in/ut
-                </p>
-                <p>
-                    <span class="highlight">Högerklick + dra</span> — panorera
-                </p>
-                <p>
-                    <span class="highlight">Fullskärm</span> — knappen uppe till vänster i scenen
-                </p>
+                <div class="glass-card kort" id="arKort">
+                    <h2>Polens vandring</h2>
+                    <div id="arBlock">
+                        <div class="ar-rad"><span>År</span><strong id="arVarde">2025</strong></div>
+                        <input type="range" id="ar" min="1831" max="2025" step="1" value="2025" aria-label="År">
+                    </div>
+                    <p class="liten">Den norra magnetiska polen hittades 1831 i norra Kanada. Lägena är ungefärliga och bygger på mätningar och på NOAA:s fältmodeller.</p>
+                </div>
+
+                <div class="glass-card kort">
+                    <h2>Färdiga platser</h2>
+                    <div class="platser" id="platser"></div>
+                </div>
+
+                <details class="glass-card kort">
+                    <summary class="accordion-head"><span>Vanliga missuppfattningar</span><span style="color: var(--lab-ink-muted)">+</span></summary>
+                    <ul>
+                        <li><strong>”Kompassen pekar mot den geografiska nordpolen.”</strong> Nej, nålen ställer in sig efter fältets horisontalkomposant, som pekar ungefär mot den norra magnetiska polen. Skillnaden är deklinationen. Välj Geografiska nordpolen och se nålen peka åt ett helt annat håll.</li>
+                        <li><strong>”Den norra magnetiska polen är en nordända.”</strong> Kompassens nordända dras mot en sydända, så polen i norr måste vara en sydända. Slå på stavmagneten och se dess vita sydända peka mot norr.</li>
+                        <li><strong>”Fältet är vågrätt överallt.”</strong> Bara vid den magnetiska ekvatorn. I Sverige pekar fältet snett ned med inklinationen 71°. En vanlig kompass är byggd så att nålen hålls vågrät, och därför visar den bara horisontalkomposanten.</li>
+                        <li><strong>”Den södra magnetiska polen ligger mitt emot den norra.”</strong> Det gör den i modellen, eftersom jorden här är en ren stavmagnet. I verkligheten är fältet ojämnare, och den södra magnetiska polen ligger utanför Antarktis kust söder om Australien.</li>
+                    </ul>
+                </details>
+
+                <p class="liten">Modellen är ett magnetiskt dipolfält med flödestätheten 30 µT vid den magnetiska ekvatorn och 60 µT vid polerna. Det verkliga fältet vid jordytan ligger mellan ungefär 25 och 65 µT. Kustlinjerna kommer från Natural Earth.</p>
             </div>
         </div>
-    </main>
+    </div>
 
     <script type="module">
         import * as THREE from 'three';
         import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-        // Scene setup
-        const container = document.getElementById('canvas-container');
+        // ── Fysiken: jorden som en magnetisk dipol ───────────────────────────
+        // Koordinater i jordens egen ram (texturens ram): lat/lon → enhetsvektor
+        // som matchar SphereGeometrys UV (u = 0 vid longitud −180°).
+        const R = 1.5;              // jordradien i scenen
+        const B0 = 30;              // µT vid den magnetiska ekvatorn
+        const JORDRADIE_KM = 6371;
+        const D2R = Math.PI / 180;
+        const Y = new THREE.Vector3(0, 1, 0);
+
+        function llVec(lat, lon) {
+            const phi = (lon + 180) * D2R, c = Math.cos(lat * D2R);
+            return new THREE.Vector3(-Math.cos(phi) * c, Math.sin(lat * D2R), Math.sin(phi) * c);
+        }
+        function vecLL(v) {
+            const u = v.clone().normalize();
+            const lat = Math.asin(Math.max(-1, Math.min(1, u.y))) / D2R;
+            let lon = Math.atan2(u.z, -u.x) / D2R - 180;
+            if (lon < -180) lon += 360;
+            return { lat, lon };
+        }
+
+        // Den norra magnetiska polens ungefärliga lägen (inklinationspolen)
+        const POLBANA = [
+            [1831, 70.1, -96.8], [1904, 70.5, -95.5], [1948, 73.9, -100.9],
+            [1962, 75.1, -101.0], [1973, 76.0, -100.6], [1984, 77.4, -102.2],
+            [1994, 78.3, -104.0], [2001, 81.3, -110.8], [2007, 83.9, -121.0],
+            [2015, 86.3, -159.2], [2020, 86.5, 164.0], [2025, 85.8, 139.3],
+        ];
+        function polVid(ar) {
+            if (ar <= POLBANA[0][0]) return llVec(POLBANA[0][1], POLBANA[0][2]);
+            for (let k = 1; k < POLBANA.length; k++) {
+                if (ar <= POLBANA[k][0]) {
+                    const [a0, la0, lo0] = POLBANA[k - 1], [a1, la1, lo1] = POLBANA[k];
+                    const t = (ar - a0) / (a1 - a0);
+                    const v0 = llVec(la0, lo0), v1 = llVec(la1, lo1);
+                    const ang = v0.angleTo(v1);
+                    if (ang < 1e-6) return v0;
+                    const s = Math.sin(ang);
+                    return v0.multiplyScalar(Math.sin((1 - t) * ang) / s).add(v1.multiplyScalar(Math.sin(t * ang) / s)).normalize();
+                }
+            }
+            const last = POLBANA[POLBANA.length - 1];
+            return llVec(last[1], last[2]);
+        }
+
+        // Fältet i punkten p (enhetsvektor på jordytan), m = riktningen mot den
+        // norra magnetiska polen. Dipolmomentet pekar mot −m, så B = B0·(m − 3(m·p)p).
+        function faltet(p, m) {
+            const c = m.dot(p);
+            const B = m.clone().sub(p.clone().multiplyScalar(3 * c)).multiplyScalar(B0);
+            const ost = Y.clone().cross(p);
+            if (ost.lengthSq() < 1e-10) ost.set(0, 0, -1);
+            ost.normalize();
+            const nord = p.clone().cross(ost).normalize();
+            const upp = B.dot(p);
+            const Bh = B.clone().sub(p.clone().multiplyScalar(upp));
+            const bh = Bh.length();
+            return {
+                B, Bh, p, ost, nord,
+                b: B.length(), bh, bv: Math.abs(upp),
+                i: Math.atan2(-upp, bh) / D2R,
+                a: Math.atan2(Bh.dot(ost), Bh.dot(nord)) / D2R,
+                avst: Math.acos(Math.max(-1, Math.min(1, c))) * JORDRADIE_KM,
+            };
+        }
+
+        // ── Formatering ─────────────────────────────────────────────────────
+        function fmt(n, d = 0) {
+            const s = n.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            const [ip, fr] = s.split('.');
+            const g = ip.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+            return fr !== undefined ? g + ',' + fr : g;
+        }
+        const NBSP = ' ';
+        function deklText(a) {
+            const r = Math.round(a);
+            if (r === 0) return '0°';
+            if (Math.abs(r) === 180) return '180°';
+            return Math.abs(r) + '°' + NBSP + (r > 0 ? 'öster' : 'väster');
+        }
+        function lageText(lat, lon) {
+            const la = fmt(Math.abs(lat), 1) + '°' + NBSP + (lat >= 0 ? 'N' : 'S');
+            const lo = fmt(Math.abs(lon), 1) + '°' + NBSP + (lon >= 0 ? 'Ö' : 'V');
+            return la + ', ' + lo;
+        }
+
+        // ── Tillstånd ───────────────────────────────────────────────────────
+        const PLATSER = [
+            { namn: 'Falköping', sub: 'Sverige', lat: 58.17, lon: 13.55 },
+            { namn: 'Kiruna', sub: 'Norrbotten', lat: 67.86, lon: 20.23 },
+            { namn: 'Ekvatorn', sub: 'Kenya', lat: 0.0, lon: 37.9 },
+            { namn: 'Sydney', sub: 'Australien', lat: -33.87, lon: 151.21 },
+            { namn: 'Geografiska nordpolen', sub: 'Norra ishavet', lat: 89.6, lon: 0 },
+            { namn: 'Norra magnetiska polen', sub: 'flyttar med årtalet', magnetisk: true },
+        ];
+        const st = {
+            lat: 58.17, lon: 13.55, platsNamn: 'Falköping', ar: 2025,
+            m: polVid(2025),
+            show: { linjer: true, fler: false, genom: true, vektor: true, poler: true, vandring: true, magnet: false, snurra: false },
+        };
+
+        // ── Scen ────────────────────────────────────────────────────────────
+        const wrap = document.getElementById('sceneWrap');
+        const mount = document.getElementById('mount');
         const scene = new THREE.Scene();
-
-        const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
-        camera.position.set(4, 2, 4);
-        // Smal mobilviewport klipper globen och fältlinjerna — backa kameran
-        if (container.clientWidth < 600) camera.position.set(5.8, 2.9, 5.8);
-
+        const camera = new THREE.PerspectiveCamera(42, 1, 0.05, 200);
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setSize(container.clientWidth, container.clientHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        container.appendChild(renderer.domElement);
+        renderer.outputColorSpace = THREE.SRGBColorSpace;
+        mount.appendChild(renderer.domElement);
 
-        // Controls
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;
-        controls.dampingFactor = 0.05;
-        controls.minDistance = 2.5;
-        controls.maxDistance = 15;
+        controls.dampingFactor = 0.08;
+        controls.minDistance = 1.75;
+        controls.maxDistance = 20;
+        controls.enablePan = false;
 
-        // Lighting
-        const ambientLight = new THREE.AmbientLight(0x404060, 0.5);
-        scene.add(ambientLight);
+        scene.add(new THREE.HemisphereLight(0xf4f1ea, 0x55607a, 1.35));
+        const sol = new THREE.DirectionalLight(0xffffff, 1.5);
+        sol.position.set(2.5, 3, 1.5);
+        scene.add(camera);
+        camera.add(sol);
 
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2);
-        directionalLight.position.set(5, 3, 5);
-        scene.add(directionalLight);
-
-        const backLight = new THREE.DirectionalLight(0x38bdf8, 0.3);
-        backLight.position.set(-5, -3, -5);
-        scene.add(backLight);
-
-        // Jordtextur: papper-hav + bläck-kontinenter. Verkliga kustlinjer
-        // (Natural Earth 110m via world-atlas på jsDelivr) ritas när datan
-        // laddats; misslyckas hämtningen ritas förenklade konturer i stället.
-        const textureCanvas = document.createElement('canvas');
-        textureCanvas.width = 2048;
-        textureCanvas.height = 1024;
-        const textureCtx = textureCanvas.getContext('2d');
-
-        const OCEAN_COLOR = '#f3eee4';
-        const LAND_COLOR = '#0f1620';
-
-        // Ekvirektangulär projektion: lon/lat → canvas-koordinater
-        function toCanvas(lon, lat) {
-            return [
-                (lon + 180) * (textureCanvas.width / 360),
-                (90 - lat) * (textureCanvas.height / 180),
-            ];
-        }
-
-        function drawOcean() {
-            textureCtx.fillStyle = OCEAN_COLOR;
-            textureCtx.fillRect(0, 0, textureCanvas.width, textureCanvas.height);
-        }
-
-        drawOcean();
-        const earthTexture = new THREE.CanvasTexture(textureCanvas);
-
-        function drawRealCoastlines(geometries) {
-            drawOcean();
-            textureCtx.fillStyle = LAND_COLOR;
-            textureCtx.strokeStyle = LAND_COLOR;
-            textureCtx.lineWidth = 1.5; // fetar upp små öar en aning
-            textureCtx.beginPath();
-
-            // Ringar som korsar antimeridianen (±180°) skulle ritade rakt av
-            // dra streck tvärs över kartan. Lös det genom att "veckla upp"
-            // longituden (konsekutiva hopp > 180° justeras med ±360°) och rita
-            // tre kopior förskjutna −360/0/+360 grader — canvasen klipper bort
-            // det som hamnar utanför.
-            const addRing = (ring, shift) => {
-                let prevLon = 0, lonUnwrapped = 0;
-                ring.forEach(([lon, lat], i) => {
-                    if (i === 0) {
-                        lonUnwrapped = lon;
-                    } else {
-                        let d = lon - prevLon;
-                        if (d > 180) d -= 360;
-                        else if (d < -180) d += 360;
-                        lonUnwrapped += d;
-                    }
-                    prevLon = lon;
-                    const [x, y] = toCanvas(lonUnwrapped + shift, lat);
-                    if (i === 0) textureCtx.moveTo(x, y);
-                    else textureCtx.lineTo(x, y);
-                });
-                textureCtx.closePath();
-            };
-
-            geometries.forEach(geometry => {
-                const polygons = geometry.type === 'Polygon'
-                    ? [geometry.coordinates]
-                    : geometry.coordinates;
-                polygons.forEach(polygon => {
-                    polygon.forEach(ring => {
-                        [-360, 0, 360].forEach(shift => addRing(ring, shift));
-                    });
-                });
-            });
-            // evenodd så att inre ringar (hål) i polygonerna blir hav
-            textureCtx.fill('evenodd');
-            textureCtx.stroke();
-            earthTexture.needsUpdate = true;
-        }
-
-        function drawFallbackContinents() {
-            drawOcean();
-            textureCtx.fillStyle = LAND_COLOR;
-            textureCtx.strokeStyle = LAND_COLOR;
-            textureCtx.lineWidth = 2;
-
-            function drawContinent(points) {
-                textureCtx.beginPath();
-                const [startX, startY] = toCanvas(points[0][0], points[0][1]);
-                textureCtx.moveTo(startX, startY);
-                for (let i = 1; i < points.length; i++) {
-                    const [x, y] = toCanvas(points[i][0], points[i][1]);
-                    textureCtx.lineTo(x, y);
-                }
-                textureCtx.closePath();
-                textureCtx.fill();
-                textureCtx.stroke();
+        // Stjärnhimmel långt bort
+        {
+            const n = 900, pos = new Float32Array(n * 3);
+            for (let k = 0; k < n; k++) {
+                const v = new THREE.Vector3().randomDirection().multiplyScalar(70 + Math.random() * 40);
+                pos.set([v.x, v.y, v.z], k * 3);
             }
-
-            // Nordamerika
-            drawContinent([
-                [-170, 65], [-140, 70], [-100, 70], [-80, 75], [-60, 70],
-                [-55, 50], [-65, 45], [-75, 35], [-80, 25], [-90, 20],
-                [-105, 20], [-115, 25], [-120, 35], [-125, 50], [-130, 55],
-                [-145, 60], [-165, 60]
-            ]);
-            // Sydamerika
-            drawContinent([
-                [-80, 10], [-60, 10], [-35, -5], [-35, -20], [-40, -25],
-                [-55, -35], [-65, -55], [-75, -50], [-80, -40], [-70, -20],
-                [-80, -5]
-            ]);
-            // Europa
-            drawContinent([
-                [-10, 35], [0, 40], [5, 45], [10, 45], [30, 45],
-                [40, 50], [50, 55], [60, 60], [70, 70], [30, 72],
-                [10, 70], [-5, 60], [-10, 50]
-            ]);
-            // Afrika
-            drawContinent([
-                [-15, 35], [10, 37], [35, 30], [40, 15], [50, 10],
-                [40, -5], [35, -25], [20, -35], [15, -30], [10, -15],
-                [-5, 5], [-15, 15]
-            ]);
-            // Asien
-            drawContinent([
-                [60, 60], [80, 70], [120, 75], [170, 65], [180, 60],
-                [145, 45], [140, 35], [120, 25], [105, 20], [100, 10],
-                [80, 10], [65, 25], [50, 30], [40, 35], [50, 45],
-                [50, 55]
-            ]);
-            // Australien
-            drawContinent([
-                [115, -20], [130, -15], [145, -15], [155, -25],
-                [150, -35], [140, -40], [130, -35], [115, -30]
-            ]);
-            // Antarktis
-            drawContinent([
-                [-180, -65], [-120, -70], [-60, -75], [0, -70],
-                [60, -75], [120, -70], [180, -65], [180, -90],
-                [-180, -90]
-            ]);
-            // Grönland
-            drawContinent([
-                [-45, 60], [-20, 65], [-15, 75], [-25, 83],
-                [-50, 80], [-60, 75], [-55, 65]
-            ]);
-
-            earthTexture.needsUpdate = true;
+            const g = new THREE.BufferGeometry();
+            g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+            scene.add(new THREE.Points(g, new THREE.PointsMaterial({ color: 0xcdd6e6, size: 1.6, sizeAttenuation: false, transparent: true, opacity: 0.7 })));
         }
 
+        // Jorden: allt som sitter fast i jorden (fält, poler, kompass) ligger i
+        // jordGrupp, så att fältet följer med när jorden snurrar.
+        const jordGrupp = new THREE.Group();
+        scene.add(jordGrupp);
+
+        // Jordens textur: papperston för havet, bläck för land, och ett gradnät
+        const texCanvas = document.createElement('canvas');
+        texCanvas.width = 2048; texCanvas.height = 1024;
+        const tctx = texCanvas.getContext('2d');
+        const jordTex = new THREE.CanvasTexture(texCanvas);
+        jordTex.colorSpace = THREE.SRGBColorSpace;
+        jordTex.anisotropy = 8;
+        const toC = (lon, lat) => [(lon + 180) * texCanvas.width / 360, (90 - lat) * texCanvas.height / 180];
+
+        function ritaGradnat() {
+            tctx.save();
+            tctx.strokeStyle = 'rgba(70, 100, 140, 0.28)';
+            tctx.lineWidth = 1.4;
+            for (let lat = -60; lat <= 60; lat += 30) {
+                const [, y] = toC(0, lat);
+                tctx.lineWidth = lat === 0 ? 2.6 : 1.4;
+                tctx.beginPath(); tctx.moveTo(0, y); tctx.lineTo(texCanvas.width, y); tctx.stroke();
+            }
+            tctx.lineWidth = 1.4;
+            for (let lon = -180; lon < 180; lon += 30) {
+                const [x] = toC(lon, 0);
+                tctx.beginPath(); tctx.moveTo(x, 0); tctx.lineTo(x, texCanvas.height); tctx.stroke();
+            }
+            tctx.restore();
+        }
+        function ritaHav() {
+            const g = tctx.createLinearGradient(0, 0, 0, texCanvas.height);
+            g.addColorStop(0, '#eef1f0'); g.addColorStop(0.5, '#f3eee4'); g.addColorStop(1, '#eef1f0');
+            tctx.fillStyle = g;
+            tctx.fillRect(0, 0, texCanvas.width, texCanvas.height);
+            ritaGradnat();
+        }
+        ritaHav();
+        jordTex.needsUpdate = true;
+
+        function ritaKuster(geometrier) {
+            ritaHav();
+            tctx.fillStyle = '#26303d';
+            tctx.strokeStyle = '#1a222d';
+            tctx.lineWidth = 1.5;
+            tctx.beginPath();
+            const ring = (r, skift) => {
+                let prev = 0, upp = 0;
+                r.forEach(([lon, lat], k) => {
+                    if (k === 0) upp = lon;
+                    else { let d = lon - prev; if (d > 180) d -= 360; else if (d < -180) d += 360; upp += d; }
+                    prev = lon;
+                    const [x, y] = toC(upp + skift, lat);
+                    if (k === 0) tctx.moveTo(x, y); else tctx.lineTo(x, y);
+                });
+                tctx.closePath();
+            };
+            geometrier.forEach(geo => {
+                const polys = geo.type === 'Polygon' ? [geo.coordinates] : geo.coordinates;
+                polys.forEach(poly => poly.forEach(r => [-360, 0, 360].forEach(s => ring(r, s))));
+            });
+            tctx.fill('evenodd');
+            tctx.stroke();
+            jordTex.needsUpdate = true;
+        }
         fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/land-110m.json')
             .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-            .then(topology => {
-                // objects.land är en GeometryCollection → feature() ger en
-                // FeatureCollection; hantera även enkel Feature för säkerhets skull
-                const land = window.topojson.feature(topology, topology.objects.land);
-                const geometries = land.type === 'FeatureCollection'
-                    ? land.features.map(f => f.geometry)
-                    : [land.geometry];
-                drawRealCoastlines(geometries);
+            .then(topo => {
+                const land = window.topojson.feature(topo, topo.objects.land);
+                ritaKuster(land.type === 'FeatureCollection' ? land.features.map(f => f.geometry) : [land.geometry]);
             })
-            .catch(() => drawFallbackContinents());
+            .catch(() => {});
 
-        // Create Earth
-        const earthRadius = 1.5;
-        const earthGeometry = new THREE.SphereGeometry(earthRadius, 64, 64);
-        const earthMaterial = new THREE.MeshStandardMaterial({
-            map: earthTexture,
-            metalness: 0.1,
-            roughness: 0.8,
-        });
-        const earth = new THREE.Mesh(earthGeometry, earthMaterial);
-        scene.add(earth);
+        const jordMat = new THREE.MeshStandardMaterial({ map: jordTex, roughness: 0.85, metalness: 0.02 });
+        const jord = new THREE.Mesh(new THREE.SphereGeometry(R, 96, 64), jordMat);
+        jordGrupp.add(jord);
 
-        // Earth's axis tilt (approximately 11.5 degrees for magnetic axis)
-        const magneticTilt = 11.5 * Math.PI / 180;
+        // Tunn atmosfärsglöd
+        const glod = new THREE.Mesh(new THREE.SphereGeometry(R * 1.035, 64, 48), new THREE.ShaderMaterial({
+            vertexShader: 'varying vec3 vN; void main(){ vN = normalize(normalMatrix * normal); gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }',
+            fragmentShader: 'varying vec3 vN; void main(){ float k = pow(0.72 - dot(vN, vec3(0.0,0.0,1.0)), 2.2); gl_FragColor = vec4(0.42, 0.68, 0.95, 1.0) * k * 0.55; }',
+            side: THREE.BackSide, blending: THREE.AdditiveBlending, transparent: true, depthWrite: false,
+        }));
+        jordGrupp.add(glod);
 
-        // Atmosphere glow
-        const atmosphereGeometry = new THREE.SphereGeometry(earthRadius * 1.05, 64, 64);
-        const atmosphereMaterial = new THREE.ShaderMaterial({
-            vertexShader: `
-                varying vec3 vNormal;
-                void main() {
-                    vNormal = normalize(normalMatrix * normal);
-                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-                }
-            `,
-            fragmentShader: `
-                varying vec3 vNormal;
-                void main() {
-                    float intensity = pow(0.7 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 2.0);
-                    gl_FragColor = vec4(0.22, 0.74, 0.97, 1.0) * intensity * 0.5;
-                }
-            `,
-            side: THREE.BackSide,
-            blending: THREE.AdditiveBlending,
-            transparent: true,
-        });
-        const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
-        scene.add(atmosphere);
+        // ── Hjälpare: pilar och etiketter ───────────────────────────────────
+        const FALT = 0xe8604c, GENOM = 0xffb36b;
+        const shaftGeo = new THREE.CylinderGeometry(1, 1, 1, 10, 1, false);
+        const konGeo = new THREE.ConeGeometry(1, 1, 16);
 
-        // Magnetic field lines group
-        const fieldLinesGroup = new THREE.Group();
-        fieldLinesGroup.rotation.x = magneticTilt;
-        scene.add(fieldLinesGroup);
-
-        // Create 3D magnetic field lines
-        function createFieldLines() {
-            const numLines = 8;
-            const pointsPerLine = 100;
-
-            for (let i = 0; i < numLines; i++) {
-                const phi = (i / numLines) * Math.PI * 2;
-
-                // Create field line using dipole field equation
-                const points = [];
-                for (let j = 0; j <= pointsPerLine; j++) {
-                    const theta = (j / pointsPerLine) * Math.PI; // 0 to PI (north to south)
-
-                    // Dipole field line equation: r = r0 * sin²(α)
-                    const r0 = 3.5; // Maximum distance from center
-                    const r = r0 * Math.pow(Math.sin(theta), 2);
-
-                    if (r < 0.01) continue;
-
-                    // Convert to Cartesian
-                    const x = r * Math.sin(theta) * Math.cos(phi);
-                    const y = r * Math.cos(theta);
-                    const z = r * Math.sin(theta) * Math.sin(phi);
-
-                    points.push(new THREE.Vector3(x, y, z));
-                }
-
-                if (points.length > 2) {
-                    const curve = new THREE.CatmullRomCurve3(points);
-                    const geometry = new THREE.TubeGeometry(curve, 64, 0.02, 8, false);
-                    const material = new THREE.MeshBasicMaterial({
-                        color: 0x38bdf8,
-                        transparent: true,
-                        opacity: 0.7,
-                    });
-                    const fieldLine = new THREE.Mesh(geometry, material);
-                    fieldLinesGroup.add(fieldLine);
-                }
-            }
-
-            // Add magnetic pole markers on Earth's surface
-            const magneticPoleSphereGeometry = new THREE.SphereGeometry(0.08, 16, 16);
-            const magneticPoleSphereMaterial = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
-
-            // Magnetic north pole (on Earth's surface, tilted with the field)
-            const magneticNorthPole = new THREE.Mesh(magneticPoleSphereGeometry, magneticPoleSphereMaterial);
-            magneticNorthPole.position.set(0, earthRadius, 0);
-            fieldLinesGroup.add(magneticNorthPole);
-
-            // Magnetic south pole (on Earth's surface, tilted with the field)
-            const magneticSouthPole = new THREE.Mesh(magneticPoleSphereGeometry, magneticPoleSphereMaterial);
-            magneticSouthPole.position.set(0, -earthRadius, 0);
-            fieldLinesGroup.add(magneticSouthPole);
-
-            // Add arrows to show direction
-            for (let i = 0; i < numLines; i++) {
-                const phi = (i / numLines) * Math.PI * 2;
-
-                // Positions must be where the field line is outside Earth
-                // Field line crosses Earth surface at about t=0.23 and t=0.77
-                const arrowPositions = [0.28, 0.5, 0.72];
-                arrowPositions.forEach(t => {
-                    const theta = t * Math.PI;
-                    const r0 = 3.5;
-                    const r = r0 * Math.pow(Math.sin(theta), 2);
-
-                    if (r > earthRadius * 1.05) {
-                        const x = r * Math.sin(theta) * Math.cos(phi);
-                        const y = r * Math.cos(theta);
-                        const z = r * Math.sin(theta) * Math.sin(phi);
-
-                        // Calculate tangent direction (pointing toward north pole)
-                        const dt = -0.01;
-                        const theta2 = (t + dt) * Math.PI;
-                        const r2 = r0 * Math.pow(Math.sin(theta2), 2);
-                        const x2 = r2 * Math.sin(theta2) * Math.cos(phi);
-                        const y2 = r2 * Math.cos(theta2);
-                        const z2 = r2 * Math.sin(theta2) * Math.sin(phi);
-
-                        const dir = new THREE.Vector3(x2 - x, y2 - y, z2 - z).normalize();
-
-                        const arrowHelper = new THREE.ArrowHelper(dir, new THREE.Vector3(x, y, z), 0.25, 0x38bdf8, 0.15, 0.08);
-                        fieldLinesGroup.add(arrowHelper);
-                    }
-                });
+        function pil(farg, tjock = 0.012, streckad = false) {
+            const g = new THREE.Group();
+            const mat = new THREE.MeshBasicMaterial({ color: farg });
+            g.userData = { mat, tjock, streckad, delar: [] };
+            const kon = new THREE.Mesh(konGeo, mat);
+            g.add(kon); g.userData.kon = kon;
+            return g;
+        }
+        // Sätter pilen från a till b (spetsen i b). Skaftet slutar vid huvudets bas.
+        function sattPil(g, a, b) {
+            const { mat, tjock, streckad, kon } = g.userData;
+            g.userData.delar.forEach(d => g.remove(d));
+            g.userData.delar = [];
+            const dir = b.clone().sub(a);
+            const L = dir.length();
+            if (L < 1e-4) { g.visible = false; return; }
+            g.visible = true;
+            dir.divideScalar(L);
+            const hh = Math.min(tjock * 6, L * 0.45), hr = tjock * 2.6;
+            const q = new THREE.Quaternion().setFromUnitVectors(Y, dir);
+            kon.scale.set(hr, hh, hr);
+            kon.quaternion.copy(q);
+            kon.position.copy(b).addScaledVector(dir, -hh / 2);
+            const skaft = L - hh;
+            const bitar = streckad ? Math.max(1, Math.round(skaft / (tjock * 7))) : 1;
+            const steg = skaft / bitar;
+            for (let k = 0; k < bitar; k++) {
+                const len = streckad ? steg * 0.6 : skaft;
+                const s = new THREE.Mesh(shaftGeo, mat);
+                s.scale.set(tjock, len, tjock);
+                s.quaternion.copy(q);
+                s.position.copy(a).addScaledVector(dir, k * steg + len / 2);
+                g.add(s); g.userData.delar.push(s);
             }
         }
 
-        createFieldLines();
-
-        // Extra field lines group (inner and outer, dashed)
-        const extraFieldLinesGroup = new THREE.Group();
-        extraFieldLinesGroup.rotation.x = magneticTilt;
-        extraFieldLinesGroup.visible = false;
-        scene.add(extraFieldLinesGroup);
-
-        function createExtraFieldLines() {
-            const numLines = 8;
-            const pointsPerLine = 100;
-
-            // Inner field lines (closer to Earth) - r0 = 2.2
-            const r0Inner = 2.2;
-            for (let i = 0; i < numLines; i++) {
-                const phi = (i / numLines) * Math.PI * 2;
-                const points = [];
-
-                for (let j = 0; j <= pointsPerLine; j++) {
-                    const theta = (j / pointsPerLine) * Math.PI;
-                    const r = r0Inner * Math.pow(Math.sin(theta), 2);
-                    if (r < 0.01) continue;
-
-                    const x = r * Math.sin(theta) * Math.cos(phi);
-                    const y = r * Math.cos(theta);
-                    const z = r * Math.sin(theta) * Math.sin(phi);
-                    points.push(new THREE.Vector3(x, y, z));
-                }
-
-                if (points.length > 2) {
-                    const curve = new THREE.CatmullRomCurve3(points);
-                    const curvePoints = curve.getPoints(100);
-                    const geometry = new THREE.BufferGeometry().setFromPoints(curvePoints);
-                    const material = new THREE.LineDashedMaterial({
-                        color: 0x38bdf8,
-                        transparent: true,
-                        opacity: 0.6,
-                        dashSize: 0.15,
-                        gapSize: 0.1,
-                    });
-                    const line = new THREE.Line(geometry, material);
-                    line.computeLineDistances();
-                    extraFieldLinesGroup.add(line);
-                }
-            }
-
-            // Outer field lines (further from Earth) - r0 = 5.0
-            const r0Outer = 5.0;
-            for (let i = 0; i < numLines; i++) {
-                const phi = (i / numLines) * Math.PI * 2;
-                const points = [];
-
-                for (let j = 0; j <= pointsPerLine; j++) {
-                    const theta = (j / pointsPerLine) * Math.PI;
-                    const r = r0Outer * Math.pow(Math.sin(theta), 2);
-                    if (r < 0.01) continue;
-
-                    const x = r * Math.sin(theta) * Math.cos(phi);
-                    const y = r * Math.cos(theta);
-                    const z = r * Math.sin(theta) * Math.sin(phi);
-                    points.push(new THREE.Vector3(x, y, z));
-                }
-
-                if (points.length > 2) {
-                    const curve = new THREE.CatmullRomCurve3(points);
-                    const curvePoints = curve.getPoints(100);
-                    const geometry = new THREE.BufferGeometry().setFromPoints(curvePoints);
-                    const material = new THREE.LineDashedMaterial({
-                        color: 0x38bdf8,
-                        transparent: true,
-                        opacity: 0.6,
-                        dashSize: 0.2,
-                        gapSize: 0.15,
-                    });
-                    const line = new THREE.Line(geometry, material);
-                    line.computeLineDistances();
-                    extraFieldLinesGroup.add(line);
-                }
-            }
-
-            // Add arrows for inner field lines
-            // Inner lines (r0=2.2) cross Earth at about t=0.31 and t=0.69
-            for (let i = 0; i < numLines; i++) {
-                const phi = (i / numLines) * Math.PI * 2;
-                const arrowPositions = [0.35, 0.5, 0.65];
-                arrowPositions.forEach(t => {
-                    const theta = t * Math.PI;
-                    const r = r0Inner * Math.pow(Math.sin(theta), 2);
-
-                    if (r > earthRadius * 1.05) {
-                        const x = r * Math.sin(theta) * Math.cos(phi);
-                        const y = r * Math.cos(theta);
-                        const z = r * Math.sin(theta) * Math.sin(phi);
-
-                        const dt = -0.01;
-                        const theta2 = (t + dt) * Math.PI;
-                        const r2 = r0Inner * Math.pow(Math.sin(theta2), 2);
-                        const x2 = r2 * Math.sin(theta2) * Math.cos(phi);
-                        const y2 = r2 * Math.cos(theta2);
-                        const z2 = r2 * Math.sin(theta2) * Math.sin(phi);
-
-                        const dir = new THREE.Vector3(x2 - x, y2 - y, z2 - z).normalize();
-                        const arrowHelper = new THREE.ArrowHelper(dir, new THREE.Vector3(x, y, z), 0.2, 0x38bdf8, 0.12, 0.06);
-                        extraFieldLinesGroup.add(arrowHelper);
-                    }
+        // Etiketter i fast skärmstorlek (sizeAttenuation: false). Delarna är
+        // [text, stil] med stil 'i' (kursiv variabel), 'sub' (index) eller 'n'.
+        const etiketter = [];
+        function etikett(rader, opt = {}) {
+            const px = opt.px || 17, skala = 2, f = px * skala;
+            const c = document.createElement('canvas');
+            const ctx = c.getContext('2d');
+            const font = (stil, vikt) => (stil === 'i' ? 'italic ' : '') + (vikt || opt.vikt || 600) + ' ' + (stil === 'sub' ? f * 0.68 : (stil === 'liten' ? f * 0.78 : f)) + "px Poppins, 'DM Sans', sans-serif";
+            const radH = f * 1.3;
+            const bredd = rader.map(r => r.reduce((s, [t, stl]) => { ctx.font = font(stl); return s + ctx.measureText(t).width; }, 0));
+            c.width = Math.ceil(Math.max(...bredd) + f * 0.5);
+            c.height = Math.ceil(radH * rader.length + f * 0.3);
+            rader.forEach((r, k) => {
+                let x = opt.align === 'left' ? f * 0.2 : (c.width - bredd[k]) / 2;
+                const y = f * 0.15 + radH * k + f * 1.0;
+                r.forEach(([t, stl]) => {
+                    ctx.font = font(stl);
+                    ctx.fillStyle = (stl === 'liten' && opt.farg2) ? opt.farg2 : (opt.farg || '#f2f4f8');
+                    ctx.shadowColor = 'rgba(5,9,18,0.9)'; ctx.shadowBlur = 5;
+                    ctx.fillText(t, x, stl === 'sub' ? y + f * 0.22 : y);
+                    x += ctx.measureText(t).width;
                 });
-            }
-
-            // Add arrows for outer field lines
-            // Outer lines (r0=5.0) cross Earth at about t=0.18 and t=0.82
-            for (let i = 0; i < numLines; i++) {
-                const phi = (i / numLines) * Math.PI * 2;
-                const arrowPositions = [0.25, 0.5, 0.75];
-                arrowPositions.forEach(t => {
-                    const theta = t * Math.PI;
-                    const r = r0Outer * Math.pow(Math.sin(theta), 2);
-
-                    if (r > earthRadius * 1.05) {
-                        const x = r * Math.sin(theta) * Math.cos(phi);
-                        const y = r * Math.cos(theta);
-                        const z = r * Math.sin(theta) * Math.sin(phi);
-
-                        const dt = -0.01;
-                        const theta2 = (t + dt) * Math.PI;
-                        const r2 = r0Outer * Math.pow(Math.sin(theta2), 2);
-                        const x2 = r2 * Math.sin(theta2) * Math.cos(phi);
-                        const y2 = r2 * Math.cos(theta2);
-                        const z2 = r2 * Math.sin(theta2) * Math.sin(phi);
-
-                        const dir = new THREE.Vector3(x2 - x, y2 - y, z2 - z).normalize();
-                        const arrowHelper = new THREE.ArrowHelper(dir, new THREE.Vector3(x, y, z), 0.3, 0x38bdf8, 0.18, 0.09);
-                        extraFieldLinesGroup.add(arrowHelper);
-                    }
-                });
-            }
-        }
-
-        createExtraFieldLines();
-
-        // Bar magnet group
-        const magnetGroup = new THREE.Group();
-        magnetGroup.rotation.x = magneticTilt;
-        magnetGroup.visible = false;
-        scene.add(magnetGroup);
-
-        // Create bar magnet that extends through Earth
-        function createBarMagnet() {
-            const magnetLength = earthRadius * 2.4; // Stick out a bit on both ends
-            const magnetRadius = 0.18;
-            const halfLength = magnetLength / 2;
-
-            // South pole (white/light gray) - at geographic North (magnetic north pole location)
-            // This half extends from center upward
-            const southPoleGeometry = new THREE.CylinderGeometry(magnetRadius, magnetRadius, halfLength, 32);
-            const southPoleMaterial = new THREE.MeshStandardMaterial({
-                color: 0xf1f5f9,
-                metalness: 0.3,
-                roughness: 0.4,
             });
-            const southPole = new THREE.Mesh(southPoleGeometry, southPoleMaterial);
-            southPole.position.y = halfLength / 2;
-            magnetGroup.add(southPole);
+            const tex = new THREE.CanvasTexture(c);
+            tex.colorSpace = THREE.SRGBColorSpace;
+            const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, sizeAttenuation: false, depthTest: opt.djup !== false, depthWrite: false, transparent: true }));
+            sp.renderOrder = 10;
+            if (opt.align === 'left') sp.center.set(0, 0.5);
+            sp.userData = { w: c.width / skala, h: c.height / skala, normal: opt.normal || null };
+            etiketter.push(sp);
+            return sp;
+        }
+        function skalaEtiketter() {
+            const H = renderer.domElement.clientHeight || 600;
+            const p11 = 1 / Math.tan(camera.fov * D2R / 2);
+            const k = 2 / (p11 * H);
+            etiketter.forEach(sp => sp.scale.set(sp.userData.w * k, sp.userData.h * k, 1));
+        }
 
-            // North pole (red) - at geographic South (magnetic south pole location)
-            // This half extends from center downward
-            const northPoleGeometry = new THREE.CylinderGeometry(magnetRadius, magnetRadius, halfLength, 32);
-            const northPoleMaterial = new THREE.MeshStandardMaterial({
-                color: 0xdc2626,
-                metalness: 0.3,
-                roughness: 0.4,
-            });
-            const northPole = new THREE.Mesh(northPoleGeometry, northPoleMaterial);
-            northPole.position.y = -halfLength / 2;
-            magnetGroup.add(northPole);
+        // ── Fältlinjerna (i polens ram: +y mot den norra magnetiska polen) ──
+        const faltGrupp = new THREE.Group();
+        jordGrupp.add(faltGrupp);
+        const linjeGrupp = new THREE.Group(), flerGrupp = new THREE.Group();
+        faltGrupp.add(linjeGrupp, flerGrupp);
 
-            // Add curved labels on the magnet surface
-            const createCurvedLabel = (text, textColor, yPos, strokeColor) => {
-                const canvas = document.createElement('canvas');
-                canvas.width = 128;
-                canvas.height = 128;
-                const ctx = canvas.getContext('2d');
-
-                // Transparent background - only the letter will show
-                ctx.clearRect(0, 0, 128, 128);
-
-                // Text
-                ctx.font = 'bold 100px Arial';
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                // Valfri kontur (ritas före fyllningen, så bara yttre halvan
-                // syns): sydpolen är vit enligt svensk konvention, så det vita
-                // S:et behöver en tunn svart kant för att synas mot den vita
-                // polen. Nordpolens vita N ligger på rött och klarar sig utan.
-                if (strokeColor) {
-                    ctx.strokeStyle = strokeColor;
-                    ctx.lineWidth = 6;
-                    ctx.lineJoin = 'round';
-                    ctx.miterLimit = 2;
-                    ctx.strokeText(text, 64, 68);
+        function dipolKurva(L, ritning, fran = null, till = null) {
+            // r = L·sin²θ, θ mätt från +y. Bara delen utanför jorden.
+            const th0 = Math.asin(Math.sqrt(Math.min(1, R / L)));
+            const a = fran ?? th0, b = till ?? (Math.PI - th0);
+            const pts = [];
+            const n = 140;
+            for (let k = 0; k <= n; k++) {
+                const th = a + (b - a) * k / n;
+                const r = L * Math.sin(th) ** 2;
+                pts.push(ritning(r, th));
+            }
+            return pts;
+        }
+        function linjeMesh(pts, farg, tjock, opac) {
+            const curve = new THREE.CatmullRomCurve3(pts);
+            return new THREE.Mesh(new THREE.TubeGeometry(curve, 160, tjock, 7, false),
+                new THREE.MeshBasicMaterial({ color: farg, transparent: opac < 1, opacity: opac, depthWrite: opac >= 1 }));
+        }
+        // Pilspets mitt på linjen, riktad som fältet (mot minskande θ = mot norr).
+        function linjePil(punkt, framat, farg, storlek, opac = 1) {
+            const m = new THREE.Mesh(konGeo, new THREE.MeshBasicMaterial({ color: farg, transparent: opac < 1, opacity: opac }));
+            m.scale.set(storlek * 0.42, storlek, storlek * 0.42);
+            m.quaternion.setFromUnitVectors(Y, framat.clone().normalize());
+            m.position.copy(punkt);
+            return m;
+        }
+        function byggFaltlinjer() {
+            const sats = [
+                { grupp: linjeGrupp, Ls: [1.55, 2.3, 3.4], plan: 8, tjock: 0.013, opac: 0.95, pil: 0.12 },
+                { grupp: flerGrupp, Ls: [1.25, 1.85, 2.8, 4.6], plan: 12, tjock: 0.007, opac: 0.55, pil: 0.085, fas: 0.5 },
+            ];
+            sats.forEach(({ grupp, Ls, plan, tjock, opac, pil, fas = 0 }) => {
+                for (let j = 0; j < plan; j++) {
+                    const phi = (j + fas) / plan * Math.PI * 2;
+                    const ritning = (r, th) => new THREE.Vector3(r * Math.sin(th) * Math.cos(phi), r * Math.cos(th), r * Math.sin(th) * Math.sin(phi));
+                    Ls.forEach(Lf => {
+                        const L = Lf * R;
+                        grupp.add(linjeMesh(dipolKurva(L, ritning), FALT, tjock, opac));
+                        const pilVid = Lf > 2 ? [Math.PI / 2 - 0.42, Math.PI / 2 + 0.42] : [Math.PI / 2];
+                        pilVid.forEach(th => {
+                            const p = ritning(L * Math.sin(th) ** 2, th);
+                            const p2 = ritning(L * Math.sin(th - 0.01) ** 2, th - 0.01);
+                            grupp.add(linjePil(p, p2.sub(p), FALT, pil, opac));
+                        });
+                    });
                 }
-                ctx.fillStyle = textColor;
-                ctx.fillText(text, 64, 68);
+            });
+        }
+        byggFaltlinjer();
 
-                const texture = new THREE.CanvasTexture(canvas);
-
-                // Create a curved surface (partial cylinder) that wraps around the magnet
-                const arcAngle = Math.PI * 0.4; // 72 degrees arc
-                const curvedGeometry = new THREE.CylinderGeometry(
-                    magnetRadius + 0.005,  // slightly larger than magnet
-                    magnetRadius + 0.005,
-                    0.25,                   // height of label
-                    16,                     // segments
-                    1,
-                    true,                   // open ended
-                    -arcAngle / 2,          // start angle
-                    arcAngle                // arc length
-                );
-
-                const curvedMaterial = new THREE.MeshBasicMaterial({
-                    map: texture,
-                    transparent: true,
-                    side: THREE.DoubleSide,
-                    depthWrite: false
+        // Stavmagneten (i polens ram): vit sydända mot den norra magnetiska polen
+        const magnetGrupp = new THREE.Group();
+        faltGrupp.add(magnetGrupp);
+        {
+            const hl = R * 0.62, rad = 0.17;
+            const vit = new THREE.MeshStandardMaterial({ color: 0xf4f2ee, roughness: 0.4, metalness: 0.15 });
+            const rod = new THREE.MeshStandardMaterial({ color: 0xd42a2a, roughness: 0.4, metalness: 0.15 });
+            const s = new THREE.Mesh(new THREE.BoxGeometry(rad * 2, hl, rad * 1.4), vit); s.position.y = hl / 2;
+            const n = new THREE.Mesh(new THREE.BoxGeometry(rad * 2, hl, rad * 1.4), rod); n.position.y = -hl / 2;
+            magnetGrupp.add(s, n);
+            const bokstav = (t, fyll, kant, y) => {
+                const c = document.createElement('canvas'); c.width = c.height = 128;
+                const x = c.getContext('2d');
+                x.font = "bold 92px Poppins, Arial"; x.textAlign = 'center'; x.textBaseline = 'middle';
+                if (kant) { x.strokeStyle = kant; x.lineWidth = 6; x.lineJoin = 'round'; x.strokeText(t, 64, 70); }
+                x.fillStyle = fyll; x.fillText(t, 64, 70);
+                const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace;
+                [1, -1].forEach(sida => {
+                    const m = new THREE.Mesh(new THREE.PlaneGeometry(rad * 1.5, rad * 1.5), new THREE.MeshBasicMaterial({ map: tex, transparent: true }));
+                    m.position.set(0, y, sida * (rad * 0.7 + 0.002));
+                    if (sida < 0) m.rotation.y = Math.PI;
+                    magnetGrupp.add(m);
                 });
-
-                const curvedLabel = new THREE.Mesh(curvedGeometry, curvedMaterial);
-                curvedLabel.position.y = yPos;
-                return curvedLabel;
             };
-
-            // S label on white part (white text with a thin black outline)
-            magnetGroup.add(createCurvedLabel('S', '#ffffff', halfLength * 0.92, '#0f1620'));
-
-            // N label on red part (white text)
-            magnetGroup.add(createCurvedLabel('N', '#ffffff', -halfLength * 0.92));
-
-            // Add end caps for nicer look
-            const capGeometry = new THREE.SphereGeometry(magnetRadius, 16, 16, 0, Math.PI * 2, 0, Math.PI / 2);
-
-            const southCap = new THREE.Mesh(capGeometry, southPoleMaterial);
-            southCap.position.y = halfLength;
-            magnetGroup.add(southCap);
-
-            const northCap = new THREE.Mesh(capGeometry, northPoleMaterial);
-            northCap.position.y = -halfLength;
-            northCap.rotation.x = Math.PI;
-            magnetGroup.add(northCap);
+            bokstav('S', '#ffffff', '#0f1620', hl * 0.72);
+            bokstav('N', '#ffffff', null, -hl * 0.72);
+            magnetGrupp.visible = false;
         }
 
-        createBarMagnet();
+        // ── Polerna ──────────────────────────────────────────────────────────
+        const polGrupp = new THREE.Group();
+        jordGrupp.add(polGrupp);
+        // Jordaxeln genom de geografiska polerna
+        {
+            const ax = new THREE.Mesh(new THREE.CylinderGeometry(0.008, 0.008, R * 2.5, 8), new THREE.MeshBasicMaterial({ color: 0xe9d8a6, transparent: true, opacity: 0.85 }));
+            polGrupp.add(ax);
+            const gn = etikett([[['Geografiska nordpolen', 'n']]], { px: 14, farg: '#efe2b8', vikt: 600 });
+            gn.position.set(0, R * 1.25 + 0.16, 0); polGrupp.add(gn);
+            const gs = etikett([[['Geografiska sydpolen', 'n']]], { px: 14, farg: '#efe2b8', vikt: 600 });
+            gs.position.set(0, -R * 1.25 - 0.12, 0); polGrupp.add(gs);
+        }
+        function polMarkor(fyll, kant) {
+            const g = new THREE.Group();
+            const ring = new THREE.Mesh(new THREE.CylinderGeometry(0.065, 0.065, 0.014, 28), new THREE.MeshStandardMaterial({ color: fyll, roughness: 0.5 }));
+            const rand = new THREE.Mesh(new THREE.TorusGeometry(0.065, 0.009, 8, 32), new THREE.MeshBasicMaterial({ color: kant }));
+            rand.rotation.x = Math.PI / 2; rand.position.y = 0.007;
+            g.add(ring, rand);
+            return g;
+        }
+        const nMagPol = polMarkor(0xffffff, 0x0f1620), sMagPol = polMarkor(0xd42a2a, 0x5a0f0f);
+        polGrupp.add(nMagPol, sMagPol);
+        const nMagEt = etikett([[['Norra magnetiska polen', 'n']], [['en sydända', 'liten']]], { px: 14, farg: '#ffffff', farg2: '#d6dbe4', align: 'left' });
+        const sMagEt = etikett([[['Södra magnetiska polen', 'n']], [['en nordända', 'liten']]], { px: 14, farg: '#ffd0c8', farg2: '#e6c2bb', align: 'left' });
+        polGrupp.add(nMagEt, sMagEt);
 
-        // Pole markers
-        const poleMarkersGroup = new THREE.Group();
-        scene.add(poleMarkersGroup);
+        // Polens vandring 1831–2025
+        const vandringGrupp = new THREE.Group();
+        jordGrupp.add(vandringGrupp);
+        {
+            const pts = [];
+            for (let a = 1831; a <= 2025; a += 1) pts.push(polVid(a).multiplyScalar(R * 1.004));
+            vandringGrupp.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 300, 0.009, 6, false),
+                new THREE.MeshBasicMaterial({ color: 0x3fd1b5 })));
+            POLBANA.forEach(([a]) => {
+                const pr = new THREE.Mesh(new THREE.SphereGeometry(0.016, 10, 8), new THREE.MeshBasicMaterial({ color: 0x3fd1b5 }));
+                pr.position.copy(polVid(a).multiplyScalar(R * 1.004));
+                vandringGrupp.add(pr);
+            });
+            [[1831, 'left']].forEach(([a]) => {
+                const e = etikett([[[String(a), 'n']]], { px: 13, farg: '#bff0e4', align: 'left' });
+                const p = polVid(a);
+                e.position.copy(p.clone().multiplyScalar(R * 1.03));
+                e.userData.normal = p;
+                vandringGrupp.add(e);
+            });
+        }
 
-        function createPoleMarkers() {
-            // Geographic North pole marker (flat disk)
-            const northGeometry = new THREE.CylinderGeometry(0.08, 0.08, 0.02, 16);
-            const northMaterial = new THREE.MeshStandardMaterial({ color: 0x22c55e });
-            const northMarker = new THREE.Mesh(northGeometry, northMaterial);
-            northMarker.position.y = earthRadius + 0.01;
-            poleMarkersGroup.add(northMarker);
-
-            // Geographic South pole marker (flat disk)
-            const southGeometry = new THREE.CylinderGeometry(0.08, 0.08, 0.02, 16);
-            const southMaterial = new THREE.MeshStandardMaterial({ color: 0xf59e0b });
-            const southMarker = new THREE.Mesh(southGeometry, southMaterial);
-            southMarker.position.y = -earthRadius - 0.01;
-            poleMarkersGroup.add(southMarker);
-
-            // N and S labels
-            const createPoleLabel = (text, y, color) => {
-                const canvas = document.createElement('canvas');
-                canvas.width = 64;
-                canvas.height = 64;
-                const ctx = canvas.getContext('2d');
-                ctx.fillStyle = color;
-                ctx.font = 'bold 48px Arial';
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillText(text, 32, 32);
-
-                const texture = new THREE.CanvasTexture(canvas);
-                const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
-                const sprite = new THREE.Sprite(spriteMaterial);
-                sprite.position.set(0, y, 0);
-                sprite.scale.set(0.3, 0.3, 1);
-                return sprite;
+        // ── Kompassen ────────────────────────────────────────────────────────
+        // Lokal ram: x = öster, y = upp, z = söder (nordriktningen är −z).
+        const kompass = new THREE.Group();
+        jordGrupp.add(kompass);
+        const KR = 0.15;
+        const nalGrupp = new THREE.Group();
+        {
+            const metall = new THREE.MeshStandardMaterial({ color: 0x8a6a3a, roughness: 0.35, metalness: 0.8 });
+            const bas = new THREE.Mesh(new THREE.CylinderGeometry(KR * 1.08, KR * 1.12, 0.03, 40), metall);
+            bas.position.y = 0.015; kompass.add(bas);
+            const rand = new THREE.Mesh(new THREE.TorusGeometry(KR * 1.06, 0.011, 10, 48), metall);
+            rand.rotation.x = Math.PI / 2; rand.position.y = 0.032; kompass.add(rand);
+            // Kompassrosen
+            const c = document.createElement('canvas'); c.width = c.height = 512;
+            const x = c.getContext('2d');
+            x.fillStyle = '#f6f0e2'; x.beginPath(); x.arc(256, 256, 256, 0, Math.PI * 2); x.fill();
+            x.strokeStyle = '#1f2530'; x.lineCap = 'butt';
+            for (let k = 0; k < 72; k++) {
+                const v = k * 5 * D2R, lang = k % 18 === 0 ? 46 : (k % 6 === 0 ? 30 : 16);
+                x.lineWidth = k % 6 === 0 ? 5 : 2.5;
+                x.beginPath();
+                x.moveTo(256 + Math.sin(v) * 238, 256 - Math.cos(v) * 238);
+                x.lineTo(256 + Math.sin(v) * (238 - lang), 256 - Math.cos(v) * (238 - lang));
+                x.stroke();
+            }
+            x.fillStyle = '#1f2530'; x.font = "700 64px Poppins, Arial"; x.textAlign = 'center'; x.textBaseline = 'middle';
+            [['N', 0], ['Ö', 90], ['S', 180], ['V', 270]].forEach(([t, g]) => {
+                x.fillText(t, 256 + Math.sin(g * D2R) * 150, 256 - Math.cos(g * D2R) * 150);
+            });
+            const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 8;
+            const ros = new THREE.Mesh(new THREE.CircleGeometry(KR, 48), new THREE.MeshStandardMaterial({ map: tex, roughness: 0.7 }));
+            ros.rotation.x = -Math.PI / 2; ros.position.y = 0.031; kompass.add(ros);
+            // Nålen: röd nordända, vit sydända med tunn mörk kant
+            const halva = (fyll, kant, tecken) => {
+                const s = new THREE.Shape();
+                s.moveTo(-0.017, 0); s.lineTo(0, tecken * KR * 0.86); s.lineTo(0.017, 0); s.closePath();
+                const g = new THREE.Group();
+                const yta = new THREE.Mesh(new THREE.ShapeGeometry(s), new THREE.MeshStandardMaterial({ color: fyll, roughness: 0.4, side: THREE.DoubleSide }));
+                g.add(yta);
+                if (kant) {
+                    const k = new THREE.Shape();
+                    k.moveTo(-0.021, 0); k.lineTo(0, tecken * (KR * 0.86 + 0.006)); k.lineTo(0.021, 0); k.closePath();
+                    const km = new THREE.Mesh(new THREE.ShapeGeometry(k), new THREE.MeshBasicMaterial({ color: kant, side: THREE.DoubleSide }));
+                    km.position.z = -0.001; g.add(km);
+                }
+                g.rotation.x = -Math.PI / 2; // formens +y blir −z (norr)
+                return g;
             };
+            nalGrupp.add(halva(0xd42a2a, null, 1), halva(0xf8f8f6, 0x1f2530, -1));
+            const tapp = new THREE.Mesh(new THREE.CylinderGeometry(0.009, 0.009, 0.012, 14), metall);
+            tapp.position.y = 0.004; nalGrupp.add(tapp);
+            nalGrupp.position.y = 0.04;
+            kompass.add(nalGrupp);
+            // Osynlig träffyta som gör kompassen lätt att ta tag i
+            const traff = new THREE.Mesh(new THREE.SphereGeometry(KR * 1.6, 12, 10), new THREE.MeshBasicMaterial({ visible: false }));
+            traff.name = 'traff'; kompass.add(traff);
+        }
+        const kompassEt = etikett([[['Kompassen', 'n']]], { px: 13, farg: '#ffe2bd', align: 'left' });
+        jordGrupp.add(kompassEt);
 
-            poleMarkersGroup.add(createPoleLabel('N', earthRadius + 0.18, '#22c55e'));
-            poleMarkersGroup.add(createPoleLabel('S', -earthRadius - 0.18, '#f59e0b'));
+        // Fältvektorn B och komposanterna i kompassens punkt
+        const vektorGrupp = new THREE.Group();
+        jordGrupp.add(vektorGrupp);
+        const pilB = pil(GENOM, 0.011), pilBh = pil(GENOM, 0.0075, true), pilBv = pil(GENOM, 0.0075, true);
+        vektorGrupp.add(pilB, pilBh, pilBv);
+        const etB = etikett([[['B', 'i']]], { px: 18, farg: '#ffd7ad', vikt: 600 });
+        const etBh = etikett([[['B', 'i'], ['jh', 'sub']]], { px: 17, farg: '#ffd7ad' });
+        const etBv = etikett([[['B', 'i'], ['jv', 'sub']]], { px: 17, farg: '#ffd7ad' });
+        vektorGrupp.add(etB, etBh, etBv);
+
+        // Fältlinjen genom kompassen
+        const genomGrupp = new THREE.Group();
+        jordGrupp.add(genomGrupp);
+        function rensa(g) {
+            while (g.children.length) {
+                const c = g.children.pop();
+                if (c.geometry && c.geometry !== konGeo) c.geometry.dispose();
+                if (c.material) c.material.dispose();
+            }
+        }
+        function byggGenomLinje(p, m) {
+            rensa(genomGrupp);
+            const c = m.dot(p);
+            const thP = Math.acos(Math.max(-1, Math.min(1, c)));
+            const s2 = Math.sin(thP) ** 2;
+            if (s2 < 1e-4) return;
+            let L = R / s2;
+            const perp = p.clone().sub(m.clone().multiplyScalar(c)).normalize();
+            const rit = (r, th) => m.clone().multiplyScalar(r * Math.cos(th)).add(perp.clone().multiplyScalar(r * Math.sin(th)));
+            const LMAX = 9 * R;
+            let fran = null, till = null;
+            if (L > LMAX) {
+                // Nära polerna går linjen mycket långt ut. Rita bara en bit av den.
+                if (thP < Math.PI / 2) { fran = thP; till = Math.min(Math.PI / 2, thP + 0.9); }
+                else { till = thP; fran = Math.max(Math.PI / 2, thP - 0.9); }
+            }
+            genomGrupp.add(linjeMesh(dipolKurva(L, rit, fran, till), GENOM, 0.008, 0.9));
+            const lo = fran ?? Math.asin(Math.sqrt(R / L)), hi = till ?? (Math.PI - lo);
+            [0.3, 0.7].forEach(t => {
+                const th = lo + (hi - lo) * t;
+                const q = rit(L * Math.sin(th) ** 2, th), q2 = rit(L * Math.sin(th - 0.01) ** 2, th - 0.01);
+                genomGrupp.add(linjePil(q, q2.sub(q), GENOM, 0.11));
+            });
         }
 
-        createPoleMarkers();
+        // ── Uppdatering av allt som beror på läge och årtal ────────────────
+        let f = null;
+        function uppdatera() {
+            const m = st.m;
+            faltGrupp.quaternion.setFromUnitVectors(Y, m);
+            nMagPol.position.copy(m).multiplyScalar(R);
+            nMagPol.quaternion.setFromUnitVectors(Y, m);
+            const ms = m.clone().negate();
+            sMagPol.position.copy(ms).multiplyScalar(R);
+            sMagPol.quaternion.setFromUnitVectors(Y, ms);
+            const bort = v => { const b = v.clone().sub(Y.clone().multiplyScalar(v.y)); return b.lengthSq() > 1e-6 ? b.normalize() : new THREE.Vector3(1, 0, 0); };
+            nMagEt.position.copy(m).multiplyScalar(R * 1.02).addScaledVector(bort(m), 0.14); nMagEt.userData.normal = m.clone(); nMagEt.userData.ankare = m.clone().multiplyScalar(R);
+            sMagEt.position.copy(ms).multiplyScalar(R * 1.02).addScaledVector(bort(ms), 0.14); sMagEt.userData.normal = ms.clone(); sMagEt.userData.ankare = ms.clone().multiplyScalar(R);
 
-        // Update legend
-        function updateLegend() {
-            const legend = document.getElementById('legend');
-            legend.innerHTML = `
-                <div class="legend-item">
-                    <div class="legend-color" style="background: #0f1620;"></div>
-                    <span>Kontinenter</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: #f3eee4; border: 1px solid var(--lab-line-strong);"></div>
-                    <span>Hav</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-line" style="background: #38bdf8;"></div>
-                    <span>Magnetfältslinjer</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: #22c55e;"></div>
-                    <span>Geografiska nordpolen (N)</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: #f59e0b;"></div>
-                    <span>Geografiska sydpolen (S)</span>
-                </div>
-            `;
+            const p = llVec(st.lat, st.lon);
+            f = faltet(p, m);
+            // Kompassens ram: x = öster, y = upp, z = söder
+            const basis = new THREE.Matrix4().makeBasis(f.ost, p, f.nord.clone().negate());
+            kompass.quaternion.setFromRotationMatrix(basis);
+            kompass.position.copy(p).multiplyScalar(R);
+            nalGrupp.rotation.y = -f.a * D2R;
+            kompassEt.position.copy(p).multiplyScalar(R + 0.03).addScaledVector(f.ost, KR * 1.5);
+            kompassEt.userData.normal = p.clone();
+
+            // B i skala: 60 µT ↔ 0,55 enheter. Pilen läggs alltid ovanför marken:
+            // pekar fältet nedåt slutar spetsen i kompassen, pekar det uppåt börjar den där.
+            // Komposanterna ritas så att hörnet hamnar rakt ovanför kompassen.
+            const C = p.clone().multiplyScalar(R + 0.045);
+            const k = 0.55 / 60;
+            const Bv = p.clone().multiplyScalar(f.B.dot(p) * k);
+            const Bh = f.Bh.clone().multiplyScalar(k);
+            const Bvec = f.B.clone().multiplyScalar(k);
+            const ned = f.B.dot(p) <= 0;
+            let svans, spets, horn;
+            if (ned) {
+                spets = C.clone(); svans = C.clone().sub(Bvec); horn = svans.clone().add(Bh);
+                sattPil(pilBh, svans, horn); sattPil(pilBv, horn, spets);
+            } else {
+                svans = C.clone(); spets = C.clone().add(Bvec); horn = svans.clone().add(Bv);
+                sattPil(pilBv, svans, horn); sattPil(pilBh, horn, spets);
+            }
+            sattPil(pilB, svans, spets);
+            etBv.visible = f.bv * k > 0.06;
+            etBh.visible = f.bh * k > 0.06;
+            const ut = f.Bh.lengthSq() > 1e-8 ? f.Bh.clone().normalize() : f.nord.clone();
+            const vMitt = ned ? horn.clone().add(spets) : svans.clone().add(horn);
+            // Etiketterna läggs utanför triangeln: åt norr om B_jv och åt söder om B
+            // när fältet pekar ned, tvärtom när det pekar upp.
+            const sid = ned ? 1 : -1;
+            etBv.position.copy(vMitt.multiplyScalar(0.5)).addScaledVector(ut, 0.08 * sid);
+            const hMitt = ned ? svans.clone().add(horn) : horn.clone().add(spets);
+            etBh.position.copy(hMitt.multiplyScalar(0.5)).addScaledVector(p, 0.05);
+            const mitt = svans.clone().add(spets).multiplyScalar(0.5);
+            etB.position.copy(mitt).addScaledVector(ut, -0.07 * sid).addScaledVector(p, -0.03);
+            [etB, etBh, etBv].forEach(e => { e.userData.normal = p.clone(); e.userData.nara = true; e.userData.yta = p.clone().multiplyScalar(R); });
+
+            byggGenomLinje(p, m);
+            ritaPanel();
         }
 
-        updateLegend();
+        // ── Panelen: kompassen uppifrån och fältet från sidan ──────────────
+        const $ = id => document.getElementById(id);
+        function ritaPanel() {
+            const { i, a, b, bh, bv } = f;
+            $('platsNamn').textContent = st.platsNamn || 'Vald plats';
+            $('vLage').textContent = lageText(st.lat, st.lon);
+            $('vAvst').textContent = fmt(Math.round(f.avst / 10) * 10) + NBSP + 'km';
+            $('vB').textContent = fmt(b) + NBSP + 'µT';
+            $('vBh').textContent = fmt(bh) + NBSP + 'µT';
+            $('vBv').textContent = fmt(bv) + NBSP + 'µT';
+            $('vI').textContent = fmt(i) + '°';
+            $('vA').textContent = deklText(a);
+            $('siI').textContent = fmt(i) + '°';
+            $('siA').textContent = deklText(a);
+            $('siB').textContent = fmt(b) + NBSP + 'µT';
+            let kom;
+            if (f.avst < 60) kom = 'Här pekar fältet rakt ned i marken. Horisontalkomposanten är nästan noll, så kompassnålen vet inte åt vilket håll den ska peka.';
+            else if (f.avst > JORDRADIE_KM * Math.PI - 60) kom = 'Här pekar fältet rakt upp ur marken, och kompassnålen har nästan ingen horisontalkomposant att ställa in sig efter.';
+            else if (Math.abs(i) < 4) kom = 'Nära den magnetiska ekvatorn är fältet vågrätt, och hela fältet drar i kompassnålen.';
+            else if (i > 0) kom = 'På norra halvklotet pekar fältet snett ned mot marken. Kompassnålen visar bara horisontalkomposanten.';
+            else kom = 'På södra halvklotet pekar fältet snett upp ur marken, men kompassnålens nordända pekar ändå mot norr.';
+            if (Math.abs(a) > 25 && f.avst >= 60) kom += ' Deklinationen är stor här, så kompassen pekar långt ifrån geografiskt norr.';
+            $('vKommentar').textContent = kom;
+            ritaUppifran(a);
+            ritaSidan(i, b, bh, bv);
+        }
+        const INK = '#1f2530', ROD = '#c0392b';
+        function ritaUppifran(a) {
+            const cx = 85, cy = 86, r = 64;
+            let s = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="#f6f0e2" stroke="${INK}" stroke-width="2"/>`;
+            for (let k = 0; k < 36; k++) {
+                const v = k * 10 * D2R, l = k % 9 === 0 ? 9 : 4.5;
+                s += `<line x1="${cx + Math.sin(v) * r}" y1="${cy - Math.cos(v) * r}" x2="${cx + Math.sin(v) * (r - l)}" y2="${cy - Math.cos(v) * (r - l)}" stroke="${INK}" stroke-width="${k % 9 === 0 ? 1.8 : 1}"/>`;
+            }
+            [['N', 0], ['Ö', 90], ['S', 180], ['V', 270]].forEach(([t, g]) => {
+                s += `<text x="${cx + Math.sin(g * D2R) * 46}" y="${cy - Math.cos(g * D2R) * 46 + 4.5}" font-size="13" font-weight="700" text-anchor="middle" fill="#5a6170" font-family="Poppins, sans-serif">${t}</text>`;
+            });
+            // geografiskt norr som streckad referens
+            s += `<line x1="${cx}" y1="${cy}" x2="${cx}" y2="${cy - r + 10}" stroke="#7d8593" stroke-width="1.3" stroke-dasharray="4 3"/>`;
+            const v = a * D2R, dx = Math.sin(v), dy = -Math.cos(v), nx = -dy, ny = dx, L = 50, w = 6;
+            // vinkelbåge α från norr till nålen
+            if (Math.abs(a) >= 3) {
+                const rb = 28, sweep = a > 0 ? 1 : 0, large = Math.abs(a) > 180 ? 1 : 0;
+                s += `<path d="M ${cx} ${cy - rb} A ${rb} ${rb} 0 ${large} ${sweep} ${cx + Math.sin(v) * rb} ${cy - Math.cos(v) * rb}" fill="none" stroke="${INK}" stroke-width="1.4"/>`;
+                const vb = v / 2, ra = 37;
+                s += `<text x="${cx + Math.sin(vb) * ra}" y="${cy - Math.cos(vb) * ra + 4.5}" font-size="14" font-style="italic" text-anchor="middle" fill="${INK}" font-family="'Times New Roman', serif">α</text>`;
+            }
+            s += `<polygon points="${cx + nx * w},${cy + ny * w} ${cx + dx * L},${cy + dy * L} ${cx - nx * w},${cy - ny * w}" fill="${ROD}"/>`;
+            s += `<polygon points="${cx + nx * w},${cy + ny * w} ${cx - dx * L},${cy - dy * L} ${cx - nx * w},${cy - ny * w}" fill="#ffffff" stroke="${INK}" stroke-width="1.2" stroke-linejoin="round"/>`;
+            s += `<circle cx="${cx}" cy="${cy}" r="3.2" fill="#8a6a3a"/>`;
+            $('svgUppifran').innerHTML = s;
+        }
+        function ritaSidan(i, b, bh, bv) {
+            const gy = 95, ox = 62, k = 80 / 60;
+            const vi = i * D2R, L = b * k;
+            const tx = ox + Math.cos(vi) * L, ty = gy + Math.sin(vi) * L;
+            const F = "font-family=\"Poppins, sans-serif\"";
+            let s = `<rect x="2" y="${gy}" width="226" height="${195 - gy - 2}" fill="#e9dfcc"/>`;
+            s += `<line x1="2" y1="${gy}" x2="228" y2="${gy}" stroke="#a8977a" stroke-width="1.2"/>`;
+            s += `<text x="224" y="188" font-size="11" fill="#6b6150" text-anchor="end" ${F}>marken</text>`;
+            s += `<text x="224" y="14" font-size="11" fill="#5a6170" text-anchor="end" ${F}>mot magnetiskt norr</text>`;
+            s += `<line x1="150" y1="22" x2="218" y2="22" stroke="#5a6170" stroke-width="1.2"/><polygon points="212,18.5 219,22 212,25.5" fill="#5a6170"/>`;
+            const pilS = (x1, y1, x2, y2, col, bred, streck) => {
+                const d = Math.hypot(x2 - x1, y2 - y1); if (d < 2) return '';
+                const ux = (x2 - x1) / d, uy = (y2 - y1) / d, h = Math.min(9, d * 0.5);
+                const bx = x2 - ux * h, by = y2 - uy * h;
+                return `<line x1="${x1}" y1="${y1}" x2="${bx}" y2="${by}" stroke="${col}" stroke-width="${bred}" stroke-linecap="butt"${streck ? ' stroke-dasharray="5 3.5"' : ''}/>` +
+                    `<polygon points="${bx - uy * 4.5},${by + ux * 4.5} ${x2},${y2} ${bx + uy * 4.5},${by - ux * 4.5}" fill="${col}"/>`;
+            };
+            // komposanterna: B_jv lodrätt från punkten, B_jh vågrätt fram till spetsen
+            s += pilS(ox, gy, ox, ty, ROD, 1.8, true);
+            s += pilS(ox, ty, tx, ty, ROD, 1.8, true);
+            if (Math.abs(i) >= 4) {
+                const rb = 24, sweep = i > 0 ? 1 : 0;
+                s += `<path d="M ${ox + rb} ${gy} A ${rb} ${rb} 0 0 ${sweep} ${ox + Math.cos(vi) * rb} ${gy + Math.sin(vi) * rb}" fill="none" stroke="${INK}" stroke-width="1.3"/>`;
+                const ra = 34, vb = vi / 2;
+                s += `<text x="${ox + Math.cos(vb) * ra}" y="${gy + Math.sin(vb) * ra + 5}" font-size="15" font-style="italic" text-anchor="middle" fill="${INK}" font-family="'Times New Roman', serif">i</text>`;
+            }
+            s += pilS(ox, gy, tx, ty, ROD, 2.8, false);
+            s += `<circle cx="${ox}" cy="${gy}" r="3" fill="${INK}"/>`;
+            const lbl = (x, y, idx, anchor = 'middle') => `<text x="${x}" y="${y}" font-size="15" text-anchor="${anchor}" fill="${INK}" font-family="'Times New Roman', serif"><tspan font-style="italic">B</tspan>${idx ? `<tspan font-size="11" dy="3">${idx}</tspan>` : ''}</text>`;
+            if (bv * k > 16) s += lbl(ox - 6, (gy + ty) / 2 + 5, 'jv', 'end');
+            if (bh * k > 20) s += lbl((ox + tx) / 2, i > 0 ? ty + 18 : ty - 7, 'jh');
+            // B till höger om spetsen, där inget annat ligger
+            s += lbl(tx + 9, ty + 5, '', 'start');
+            $('svgSidan').innerHTML = s;
+        }
 
-        // Event listeners
-        document.getElementById('showField').addEventListener('change', (e) => {
-            fieldLinesGroup.visible = e.target.checked;
+        // ── Kontroller ──────────────────────────────────────────────────────
+        function vaxla(id, nyckel, fn) {
+            $(id).addEventListener('change', e => { st.show[nyckel] = e.target.checked; fn && fn(); synlighet(); });
+        }
+        function synlighet() {
+            linjeGrupp.visible = st.show.linjer;
+            flerGrupp.visible = st.show.fler;
+            genomGrupp.visible = st.show.genom;
+            vektorGrupp.visible = st.show.vektor;
+            polGrupp.visible = st.show.poler;
+            vandringGrupp.visible = st.show.vandring;
+            magnetGrupp.visible = st.show.magnet;
+            jordMat.transparent = st.show.magnet;
+            jordMat.opacity = st.show.magnet ? 0.55 : 1;
+            glod.visible = !st.show.magnet;
+            jordMat.depthWrite = !st.show.magnet;
+            jordMat.needsUpdate = true;
+        }
+        vaxla('tLinjer', 'linjer'); vaxla('tFler', 'fler'); vaxla('tGenom', 'genom'); vaxla('tVektor', 'vektor');
+        vaxla('tPoler', 'poler'); vaxla('tVandring', 'vandring'); vaxla('tMagnet', 'magnet'); vaxla('tSnurra', 'snurra');
+
+        const platserEl = $('platser');
+        function markeraPlats() {
+            platserEl.querySelectorAll('button').forEach(bn => bn.classList.toggle('active', bn.dataset.namn === st.platsNamn));
+        }
+        PLATSER.forEach(pl => {
+            const bn = document.createElement('button');
+            bn.dataset.namn = pl.namn;
+            bn.innerHTML = `${pl.namn}<span class="sub">${pl.sub}</span>`;
+            bn.addEventListener('click', () => {
+                if (pl.magnetisk) { const ll = vecLL(st.m); st.lat = ll.lat; st.lon = ll.lon; }
+                else { st.lat = pl.lat; st.lon = pl.lon; }
+                st.platsNamn = pl.namn;
+                markeraPlats();
+                uppdatera();
+                if (aktivVy === 'nara') gaTillVy('nara');
+                else vridMotKompassen();
+            });
+            platserEl.appendChild(bn);
+        });
+        markeraPlats();
+
+        $('ar').addEventListener('input', e => {
+            st.ar = +e.target.value;
+            $('arVarde').textContent = st.ar;
+            st.m = polVid(st.ar);
+            if (st.platsNamn === 'Norra magnetiska polen') { const ll = vecLL(st.m); st.lat = ll.lat; st.lon = ll.lon; }
+            uppdatera();
         });
 
-        document.getElementById('showMoreFields').addEventListener('change', (e) => {
-            extraFieldLinesGroup.visible = e.target.checked;
+        // Inställningsrutan: fäll ihop och fram
+        $('stHide').addEventListener('click', () => { $('sceneToggles').style.display = 'none'; $('stShow').style.display = ''; });
+        $('stShow').addEventListener('click', () => { $('sceneToggles').style.display = ''; $('stShow').style.display = 'none'; });
+
+        // ── Kameran och vyerna ──────────────────────────────────────────────
+        let aktivVy = 'hel', tween = null;
+        function kompassVarld() { return kompass.getWorldPosition(new THREE.Vector3()); }
+        function helAvstand() {
+            const asp = camera.aspect, halv = camera.fov * D2R / 2;
+            const halvMin = Math.min(halv, Math.atan(Math.tan(halv) * asp));
+            return 3.6 / Math.sin(halvMin);
+        }
+        // I närvyn vrids jordklotet så att kompassen hamnar överst med norr åt
+        // −z. Då är uppåt på skärmen uppåt på platsen, och kameran kan stå i
+        // öster och se triangeln med komposanterna rakt framifrån (norr åt höger).
+        function vridningNara() {
+            const p = llVec(st.lat, st.lon);
+            const ff = faltet(p, st.m);
+            const M = new THREE.Matrix4().makeBasis(ff.ost, p, ff.nord.clone().negate()).transpose();
+            return new THREE.Quaternion().setFromRotationMatrix(M);
+        }
+        // Översiktens riktning: snett framifrån mot fältlinjens plan (polaxeln och
+        // kompassen), så att linjen genom kompassen syns som en båge och inte
+        // som ett rakt streck.
+        function oversikt(q) {
+            const P = llVec(st.lat, st.lon).applyQuaternion(q);
+            const m = st.m.clone().applyQuaternion(q);
+            let n = m.clone().cross(P);
+            if (n.lengthSq() < 1e-6) n = new THREE.Vector3(1, 0, 0).cross(P);
+            n.normalize();
+            const a = n.clone().multiplyScalar(0.62).add(P.clone().multiplyScalar(0.8));
+            const b = n.clone().multiplyScalar(-0.62).add(P.clone().multiplyScalar(0.8));
+            const d = camera.position.clone().normalize();
+            return (a.dot(d) >= b.dot(d) ? a : b).add(new THREE.Vector3(0, 0.12, 0)).normalize();
+        }
+        function malForVy(vy) {
+            if (vy === 'nara') {
+                const q = vridningNara();
+                const ut = f.Bh.lengthSq() > 1e-8 ? f.Bh.clone().normalize().applyQuaternion(q) : new THREE.Vector3(0, 0, -1);
+                const h = R + 0.27, sk = (f.B.dot(llVec(st.lat, st.lon)) <= 0 ? -0.16 : 0.16) + 0.06;
+                return { q, pos: new THREE.Vector3(1.45, h + 0.22, 0).addScaledVector(ut, sk), mal: new THREE.Vector3(0, h, 0).addScaledVector(ut, sk) };
+            }
+            const q = new THREE.Quaternion();
+            if (vy === 'norr') return { q, pos: new THREE.Vector3(0.001, helAvstand() * 0.92, 0.6), mal: new THREE.Vector3() };
+            return { q, pos: oversikt(q).multiplyScalar(helAvstand()), mal: new THREE.Vector3(0, 0.1, 0) };
+        }
+        function startaTween(m) {
+            tween = { t0: performance.now(), dur: 1000, p0: camera.position.clone(), m0: controls.target.clone(),
+                      q0: jordGrupp.quaternion.clone(), p1: m.pos, m1: m.mal, q1: m.q };
+        }
+        function gaTillVy(vy, direkt = false) {
+            aktivVy = vy;
+            document.querySelectorAll('#vyer button').forEach(bn => bn.classList.toggle('active', bn.dataset.vy === vy));
+            const m = malForVy(vy);
+            if (direkt) { jordGrupp.quaternion.copy(m.q); camera.position.copy(m.pos); controls.target.copy(m.mal); controls.update(); return; }
+            startaTween(m);
+        }
+        function vridMotKompassen() {
+            const q = new THREE.Quaternion();
+            const d = camera.position.distanceTo(controls.target);
+            aktivVy = 'hel';
+            document.querySelectorAll('#vyer button').forEach(bn => bn.classList.toggle('active', bn.dataset.vy === 'hel'));
+            startaTween({ q, pos: oversikt(q).multiplyScalar(Math.max(d, helAvstand() * 0.8)), mal: new THREE.Vector3(0, 0.1, 0) });
+        }
+        document.querySelectorAll('#vyer button').forEach(bn => bn.addEventListener('click', () => gaTillVy(bn.dataset.vy)));
+
+        // ── Dra kompassen ───────────────────────────────────────────────────
+        const ray = new THREE.Raycaster();
+        const ndc = new THREE.Vector2();
+        let drar = false;
+        function satt(e) {
+            const r = renderer.domElement.getBoundingClientRect();
+            ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+            ray.setFromCamera(ndc, camera);
+        }
+        function traffarKompass() {
+            const traff = kompass.getObjectByName('traff');
+            return ray.intersectObject(traff, false).length > 0;
+        }
+        function punktPaJorden() {
+            const sf = new THREE.Sphere(new THREE.Vector3(), R);
+            const hit = ray.ray.intersectSphere(sf, new THREE.Vector3());
+            if (!hit) return null;
+            return jordGrupp.worldToLocal(hit.clone());
+        }
+        function flyttaKompass(lokal) {
+            const ll = vecLL(lokal);
+            st.lat = Math.max(-89.5, Math.min(89.5, ll.lat)); st.lon = ll.lon;
+            st.platsNamn = '';
+            markeraPlats();
+            uppdatera();
+        }
+        mount.addEventListener('pointerdown', e => {
+            satt(e);
+            if (traffarKompass()) {
+                drar = true;
+                controls.enabled = false;
+                mount.classList.add('dragging');
+                mount.setPointerCapture(e.pointerId);
+                e.stopPropagation();
+            }
+        }, true);
+        mount.addEventListener('pointermove', e => {
+            satt(e);
+            if (drar) {
+                const lok = punktPaJorden();
+                if (lok) flyttaKompass(lok);
+            } else if (e.pointerType === 'mouse') {
+                mount.style.cursor = traffarKompass() ? 'grab' : '';
+            }
+        });
+        const slapp = e => {
+            if (!drar) return;
+            drar = false;
+            controls.enabled = true;
+            mount.classList.remove('dragging');
+            try { mount.releasePointerCapture(e.pointerId); } catch (_) {}
+        };
+        mount.addEventListener('pointerup', slapp);
+        mount.addEventListener('pointercancel', slapp);
+        mount.addEventListener('dblclick', e => {
+            satt(e);
+            const lok = punktPaJorden();
+            if (lok) flyttaKompass(lok);
         });
 
-        document.getElementById('showMagnet').addEventListener('change', (e) => {
-            magnetGroup.visible = e.target.checked;
-        });
+        // ── Storlek, fullskärm och renderingsloop ───────────────────────────
+        function storlek() {
+            const w = mount.clientWidth, h = mount.clientHeight;
+            if (!w || !h) return;
+            renderer.setSize(w, h, false);
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+            skalaEtiketter();
+        }
+        new ResizeObserver(storlek).observe(mount);
 
-        // Animation loop
-        function animate() {
-            requestAnimationFrame(animate);
+        const fsBtn = $('fsBtn');
+        fsBtn.addEventListener('click', () => {
+            if (document.fullscreenElement || document.webkitFullscreenElement) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+            else (wrap.requestFullscreen || wrap.webkitRequestFullscreen).call(wrap);
+        });
+        // I fullskärm flyttar årtalet och platserna in i inställningsrutan,
+        // så att varje reglage bara finns på ett ställe åt gången.
+        const arHem = $('arKort'), arBlock = $('arBlock'), arEfter = arBlock.nextElementSibling;
+        const platsHem = platserEl.parentElement;
+        function vidFullskarm() {
+            const fs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+            $('fsIconExpand').style.display = fs ? 'none' : '';
+            $('fsIconCompress').style.display = fs ? '' : 'none';
+            fsBtn.title = fs ? 'Lämna fullskärm' : 'Fullskärm';
+            if (fs) { $('fsAr').appendChild(arBlock); $('fsPlatser').appendChild(platserEl); }
+            else { arHem.insertBefore(arBlock, arEfter); platsHem.appendChild(platserEl); }
+            requestAnimationFrame(storlek);
+        }
+        document.addEventListener('fullscreenchange', vidFullskarm);
+        document.addEventListener('webkitfullscreenchange', vidFullskarm);
+
+        const tmpV = new THREE.Vector3(), tmpN = new THREE.Vector3();
+        function doljBaksidan() {
+            const cam = camera.position;
+            etiketter.forEach(sp => {
+                const n = sp.userData.normal;
+                if (!n) return;
+                sp.material.depthTest = false;
+                sp.getWorldPosition(tmpV);
+                tmpN.copy(n).applyQuaternion(jordGrupp.quaternion);
+                // Etiketter som hör till kompassen prövas mot kompassens punkt på ytan
+                if (sp.userData.yta) tmpV.copy(sp.userData.yta).applyQuaternion(jordGrupp.quaternion);
+                const syns = cam.clone().sub(tmpV).normalize().dot(tmpN) > 0.08 && (!sp.userData.nara || cam.distanceTo(tmpV) < 3.2);
+                sp.material.opacity = syns ? 1 : 0;
+                const ank = sp.userData.ankare;
+                if (ank) {
+                    // Etiketten hänger på den sida om polen där den står på skärmen
+                    const a = ank.clone().applyQuaternion(jordGrupp.quaternion).project(camera);
+                    const e = tmpV.clone().project(camera);
+                    sp.center.set(e.x >= a.x ? 0 : 1, 0.5);
+                }
+            });
+        }
+        let senast = performance.now();
+        function loop(nu) {
+            requestAnimationFrame(loop);
+            const dt = Math.min(0.05, (nu - senast) / 1000); senast = nu;
+            if (st.show.snurra && !tween && aktivVy !== 'nara') jordGrupp.rotateOnWorldAxis(Y, dt * 0.12);
+            if (tween) {
+                const t = Math.min(1, (nu - tween.t0) / tween.dur), e = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+                camera.position.lerpVectors(tween.p0, tween.p1, e);
+                controls.target.lerpVectors(tween.m0, tween.m1, e);
+                jordGrupp.quaternion.slerpQuaternions(tween.q0, tween.q1, e);
+                if (t >= 1) tween = null;
+            }
             controls.update();
-
-            // Slow rotation of Earth
-            earth.rotation.y += 0.001;
-            atmosphere.rotation.y += 0.001;
-
+            doljBaksidan();
             renderer.render(scene, camera);
         }
 
-        animate();
-
-        // Handle resize
-        function handleResize() {
-            camera.aspect = container.clientWidth / container.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(container.clientWidth, container.clientHeight);
-        }
-        window.addEventListener('resize', handleResize);
-
-        // Fullscreen
-        const fsBtn = document.getElementById('fsBtn');
-        const fsIconExpand = document.getElementById('fsIconExpand');
-        const fsIconCompress = document.getElementById('fsIconCompress');
-
-        fsBtn.addEventListener('click', () => {
-            if (document.fullscreenElement || document.webkitFullscreenElement) {
-                (document.exitFullscreen || document.webkitExitFullscreen).call(document);
-            } else {
-                (container.requestFullscreen || container.webkitRequestFullscreen).call(container);
-            }
-        });
-
-        function onFullscreenChange() {
-            const isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement);
-            fsIconExpand.style.display = isFullscreen ? 'none' : '';
-            fsIconCompress.style.display = isFullscreen ? '' : 'none';
-            fsBtn.title = isFullscreen ? 'Lämna fullskärm' : 'Fullskärm';
-            requestAnimationFrame(handleResize);
-        }
-        document.addEventListener('fullscreenchange', onFullscreenChange);
-        document.addEventListener('webkitfullscreenchange', onFullscreenChange);
+        uppdatera();
+        synlighet();
+        storlek();
+        gaTillVy('hel', true);
+        requestAnimationFrame(loop);
+        window.__jord = { st, faltet, polVid, llVec, uppdatera, gaTillVy, etiketter, camera, etB, etBh, etBv };
     </script>
     <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
     <script src="data/katalog.js"></script>
     <script src="section-nav.js"></script>
     <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->

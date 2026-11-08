@@ -15485,6 +15485,15 @@
         function y0() { return GY - hojd() * PXKM; }
         function tS() { return s * 1000 / v(); }
         function tL() { return s * 1000 / C_LJUS; }
+        // Åskan skapas längs HELA blixtkanalen (returslaget hettar upp den i
+        // praktiken samtidigt). Kanalen ritas lodrät från marken upp till
+        // molnbasen YMOLN. Första ljudet kommer från nedslagspunkten (s/v),
+        // det sista från kanalens topp, √(s² + h²)/v. Skillnaden är en stor
+        // del av varför det mullrar i flera sekunder.
+        var YMOLN = 96;
+        function hKanal() { return (GY - YMOLN) / PXKM; }
+        function sTopp() { var a = sh(), h = hKanal(); return Math.sqrt(a * a + h * h); }
+        function tSista() { return typ === 'blixt' ? sTopp() * 1000 / v() : tS(); }
 
         function f(vv, d) {
             var t = vv.toFixed(d);
@@ -15739,26 +15748,25 @@
         }
 
         // ── Person ────────────────────────────────────────────────────────
+        // Personen ritas nästan i skala: en verklig människa (1,8 m) vore
+        // 0,15 px hög med 82 px/km, så hon blir bara en liten ljus figur
+        // på 5 px. Greppytan för att dra i henne är större än figuren.
+        var HUVUD = 5;                           // huvudets höjd över marken (px)
         function ritaPerson() {
             var x = xo, y = GY;
-            ctx.fillStyle = '#c9d0dc';
-            ctx.strokeStyle = '#c9d0dc';
+            ctx.strokeStyle = '#d6dce8';
             ctx.lineCap = 'round';
-            ctx.lineWidth = 3.4;
-            ctx.beginPath(); ctx.moveTo(x - 4, y); ctx.lineTo(x - 2, y - 15); ctx.moveTo(x + 4, y); ctx.lineTo(x + 2, y - 15); ctx.stroke();
-            ctx.fillStyle = '#3d6fb8';
-            ctx.beginPath();
-            ctx.moveTo(x - 6, y - 14); ctx.lineTo(x - 5, y - 30); ctx.quadraticCurveTo(x, y - 33, x + 5, y - 30); ctx.lineTo(x + 6, y - 14); ctx.closePath();
-            ctx.fill();
-            ctx.fillStyle = '#e3c7a8';
-            ctx.beginPath(); ctx.arc(x, y - 37, 5, 0, 6.283); ctx.fill();
+            ctx.lineWidth = 1.3;
+            ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, y - HUVUD + 1.2); ctx.stroke();
+            ctx.fillStyle = '#e9edf5';
+            ctx.beginPath(); ctx.arc(x, y - HUVUD, 1.1, 0, 6.283); ctx.fill();
             if (hord && pop < 2.2) {
                 // ljudbågar vid örat
                 ctx.strokeStyle = 'rgba(242,201,76,' + Math.max(0, 1 - pop / 2.2) + ')';
-                ctx.lineWidth = 1.8;
+                ctx.lineWidth = 1.6;
                 for (var k = 0; k < 3; k++) {
                     ctx.beginPath();
-                    ctx.arc(x - 3, y - 37, 9 + k * 6 + (pop * 8) % 6, Math.PI * 0.8, Math.PI * 1.2);
+                    ctx.arc(x, y - HUVUD, 6 + k * 5 + (pop * 8) % 5, Math.PI * 0.8, Math.PI * 1.2);
                     ctx.stroke();
                 }
             }
@@ -15794,11 +15802,11 @@
 
         // ── Avståndslinje ─────────────────────────────────────────────────
         function ritaAvstand() {
-            var ax = x0(), ay = y0(), bx = xo, by = GY - 37;
+            var ax = x0(), ay = y0(), bx = xo, by = GY - HUVUD;
             ctx.setLineDash([4, 5]);
             ctx.strokeStyle = 'rgba(223,228,238,0.55)';
             ctx.lineWidth = 1.2;
-            ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx - 8, by); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx - 3, by); ctx.stroke();
             ctx.setLineDash([]);
             var mx = (ax + bx) / 2, my = (ay + by) / 2 - 10 * tk;
             ctx.textAlign = 'center';
@@ -15819,19 +15827,36 @@
 
         // ── Vågfronten ────────────────────────────────────────────────────
         function ritaRing() {
-            if (tEv === null || tEv <= 0 || hord && tEv > tS() + 1.2) return;
-            var r = v() * tEv / 1000 * PXKM;
-            var alfa = hord ? Math.max(0, 1 - (tEv - tS()) / 1.2) : 1;
+            var slut = tSista();
+            if (tEv === null || tEv <= 0 || tEv > slut + 1.2) return;
+            var rr = v() * tEv / 1000 * PXKM;
+            var alfa = tEv > slut ? Math.max(0, 1 - (tEv - slut) / 1.2) : 1;
+            var x = x0();
             ctx.save();
             ctx.beginPath(); ctx.rect(0, 0, W, GY); ctx.clip();
-            var g = ctx.createRadialGradient(x0(), y0(), Math.max(0, r - 26), x0(), y0(), r);
-            g.addColorStop(0, 'rgba(242,201,76,0)');
-            g.addColorStop(1, 'rgba(242,201,76,' + (0.16 * alfa) + ')');
-            ctx.fillStyle = g;
-            ctx.beginPath(); ctx.arc(x0(), y0(), r, 0, 6.283); ctx.fill();
+            function front() {
+                ctx.beginPath();
+                if (typ === 'blixt') {
+                    // kapsel kring kanalen: lodräta sidor och en halvcirkel upptill
+                    ctx.moveTo(x - rr, GY + 2);
+                    ctx.lineTo(x - rr, YMOLN);
+                    ctx.arc(x, YMOLN, rr, Math.PI, 2 * Math.PI);
+                    ctx.lineTo(x + rr, GY + 2);
+                } else {
+                    ctx.arc(x, y0(), rr, 0, 6.283);
+                }
+            }
+            // mjuk bakkant: några breda, svaga streck innanför fronten
+            for (var k = 1; k <= 3; k++) {
+                ctx.save();
+                ctx.lineWidth = 7 * k;
+                ctx.strokeStyle = 'rgba(242,201,76,' + (0.05 * alfa) + ')';
+                front(); ctx.stroke();
+                ctx.restore();
+            }
             ctx.strokeStyle = 'rgba(242,201,76,' + (0.95 * alfa) + ')';
             ctx.lineWidth = 2.4;
-            ctx.beginPath(); ctx.arc(x0(), y0(), r, 0, 6.283); ctx.stroke();
+            front(); ctx.stroke();
             ctx.restore();
         }
 
@@ -15991,7 +16016,7 @@
             if (typ === 'blixt') {
                 // mullret: lågpass som blir mörkare med avståndet, ojämnt avklingande
                 lp.frequency.value = 900 / (0.6 + 0.5 * s);
-                var dur = 2.2 + 0.5 * s, tt = t0;
+                var dur = Math.max(1.6, tSista() - tS()) + 1.2, tt = t0;
                 g.gain.linearRampToValueAtTime(styrka * (s < 1.5 ? 1 : 0.6), t0 + 0.04);
                 while (tt < t0 + dur) {
                     tt += 0.15 + Math.random() * 0.35;
@@ -16041,7 +16066,7 @@
             if (hord) pop += dt;
             stegGnistor(dt * k);
             rita();
-            var aktiv = tEv !== null && (!hord || pop < 2.5 || gnistor.length);
+            var aktiv = tEv !== null && (!hord || pop < 2.5 || tEv < tSista() + 1.3 || gnistor.length);
             if (!aktiv) loop.satt(false);
         });
 
@@ -16079,9 +16104,15 @@
         function klart() {
             if (gissa) { visaInfo(); svarIn.disabled = false; svarBtn.disabled = false; try { svarIn.focus({ preventScroll: true }); } catch (e) {} return; }
             var t = tS(), tR = Math.round(t * 10) / 10;
-            info.innerHTML = 'Ljudet behövde ' + f(t, 1) + ' s för ' + f(s, 1) + ' km, alltså ungefär ' +
+            var txt = 'Ljudet behövde ' + f(t, 1) + ' s för ' + f(s, 1) + ' km, alltså ungefär ' +
                 f(t / s, 1) + ' s per kilometer. Tumregeln ger ' + f(tR, 1) + ' s / 3 ≈ ' +
                 f(tR / 3, 1) + ' km.';
+            if (typ === 'blixt') {
+                txt += ' Mullret varar länge eftersom ljudet skapas längs hela blixten. Ljudet från blixtens topp, ' +
+                    f(hKanal(), 1) + ' km upp, har ' + f(sTopp(), 1) + ' km att gå och kommer fram ' +
+                    f(tSista() - t, 1) + ' s senare.';
+            }
+            info.innerHTML = txt;
         }
 
         // ── Kontroller ────────────────────────────────────────────────────

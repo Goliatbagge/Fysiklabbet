@@ -16159,10 +16159,10 @@
         var AC = window.AudioContext || window.webkitAudioContext;
         var actx = null, ljudPa = true, brus = null;
         // Fyrverkeriets smäll är inspelade ljudeffekter (skapade i ElevenLabs,
-        // media/ljud/fyrverkeri-1/2.mp3). De hämtas först när ljudet väcks.
+        // media/ljud/fyrverkeri-1.mp3). Den hämtas först när ljudet väcks.
         // Tills de laddats, eller om hämtningen misslyckas, används det
         // syntetiserade ljudet nedan.
-        var FYR_FILER = ['media/ljud/fyrverkeri-1.mp3', 'media/ljud/fyrverkeri-2.mp3'];
+        var FYR_FILER = ['media/ljud/fyrverkeri-1.mp3'];
         var fyrBuf = [];
         function laddaFyr() {
             if (!window.fetch) return;

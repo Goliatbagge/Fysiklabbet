@@ -1183,16 +1183,26 @@
         // ── Luftmolekyler ──
         const NUT = 420;
         const molekyler = { ut: [], in: [] };
+        // rund prick i stället för THREE.Points fyrkant
+        const prickTex = (() => {
+            const c = document.createElement('canvas'); c.width = c.height = 64;
+            const g = c.getContext('2d');
+            g.fillStyle = '#ffffff'; g.beginPath(); g.arc(32, 32, 29, 0, Math.PI * 2); g.fill();
+            const t = new THREE.CanvasTexture(c); return t;
+        })();
         function molekylMoln(n, farg) {
             const geo = new THREE.BufferGeometry();
             geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(n * 3), 3));
-            const pts = new THREE.Points(geo, new THREE.PointsMaterial({ color: farg, size: 0.04, sizeAttenuation: true, toneMapped: false }));
+            const pts = new THREE.Points(geo, new THREE.PointsMaterial({ color: farg, size: 0.07, map: prickTex, alphaTest: 0.5, transparent: false, sizeAttenuation: true, toneMapped: false }));
             pts.frustumCulled = false;
             scene.add(pts);
             return pts;
         }
         const molUt = molekylMoln(NUT, 0x0f5c74);
         const molIn = molekylMoln(160, 0x0f5c74);
+        // Molekylerna inuti ligger alltid innanför skalet och syns bara i
+        // genomskärning; klotets insida skymde dem annars helt.
+        molIn.material.depthTest = false; molIn.renderOrder = 10;
         function slumpaRiktning() { return new THREE.Vector3().randomDirection(); }
         function initMolekyler() {
             molekyler.ut = []; molekyler.in = [];
@@ -1229,10 +1239,18 @@
                     m.v.addScaledVector(n, -2 * m.v.dot(n));
                 }
             };
+            // Molekyler i skalet FRAMFÖR kloten (mellan kameran och klotet) ritas
+            // inte: sett framifrån hamnar de över klotet och ser ut att ligga inuti,
+            // så att det tomma klotet ser lika fullt ut som luften runt omkring.
+            const tillKam = camera.position.clone().sub(new THREE.Vector3(0, SOM_Y, 0)).normalize();
+            const skym = R * 1.12;
+            let kUt = 0;
             for (let i = 0; i < nUt; i++) {
                 const m = molekyler.ut[i];
                 studs(m, a, b);
-                pu.setXYZ(i, m.p.x, m.p.y + SOM_Y, m.p.z);
+                const fram = m.p.dot(tillKam);
+                if (fram > 0 && m.p.lengthSq() - fram * fram < skym * skym) continue;
+                pu.setXYZ(kUt++, m.p.x, m.p.y + SOM_Y, m.p.z);
             }
             for (let i = 0; i < nIn; i++) {
                 const m = molekyler.in[i];
@@ -1240,7 +1258,7 @@
                 pi.setXYZ(i, m.p.x, m.p.y + SOM_Y, m.p.z);
             }
             pu.needsUpdate = true; pi.needsUpdate = true;
-            molUt.geometry.setDrawRange(0, nUt);
+            molUt.geometry.setDrawRange(0, kUt);
             molIn.geometry.setDrawRange(0, nIn);
             // Molekylerna syns bara på nära håll; i helvyn blir de bara brus
             const nara = camera.position.distanceTo(new THREE.Vector3(0, SOM_Y, 0)) < 6.5;

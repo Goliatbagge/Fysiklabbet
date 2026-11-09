@@ -34,12 +34,20 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <script>(function () { var q = new URLSearchParams(location.search); if (q.has('embed')) document.documentElement.classList.add('embed-mode'); if (q.has('embed') && q.has('mini')) document.documentElement.classList.add('mini-mode'); })();</script>
     <style>
         html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
         html.embed-mode #fb-feedback-widget { display: none !important; }
         html.embed-mode .pt-6 { padding-top: 0.5rem; }
         html.embed-mode .min-h-screen { min-height: 0 !important; }
+        /* Mini-läge (?embed=1&mini=1): teorin (minisim typ: simsida i fy2-2.11)
+           bäddar in sidan i en iframe och visar bara scenen och reglagen.
+           Rubrik, ingress, formelkort och förklaringarna under göms. */
+        html.mini-mode .min-h-screen { padding: 0 !important; }
+        html.mini-mode .max-w-6xl { max-width: none; padding-top: 0 !important; }
+        html.mini-mode .max-w-6xl > :not(main) { display: none !important; }
+        html.mini-mode body.lab-sim .scene-wrap:not(:fullscreen) { height: 480px; }
+        html.mini-mode main .order-2 > :nth-child(2) { display: none !important; }
         .dark-container { background: transparent; }
         .glass-card {
             background: var(--lab-bg, #f3eee4);

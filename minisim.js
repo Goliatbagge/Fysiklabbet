@@ -36,6 +36,7 @@
  *           vagstallning (fy2-2.7: en puls vandrar nedåt i en hängande vågställning),
  *           blixtljud (fy2-2.10: ljudets hastighet, blixt/fyrverkeri och tumregeln 3 s per km;
  *                      visa: fyrverkeri startar med fyrverkeriet)
+ *           simsida (en hel simuleringssida i en iframe, src: <fil>.html; se buildSimsida)
  *           tongenerator (fy2-2.11: tonen på 440 Hz blir starkare och amplituden större när
  *                      ljudintensiteten ökas; frekvensen ändras inte)
  *   titel:  liten rubrik ovanför scenen (valfritt).
@@ -521,6 +522,8 @@
         /* (.lab-minisim-marginalen ligger i styles-laborans.css, som
            .lab-graf/.lab-handskrift.) Neutralisera ev. ärvd kursiv stil. */
         '.minisim-iframe{display:block;width:100%;aspect-ratio:560/430;border:0;',
+        '.ms-simsida-ram{aspect-ratio:auto;height:760px;background:transparent;border-radius:6px;}',
+        '.minisim-card a.ms-simsida-lank{display:inline-block;margin-top:8px;font-size:14px;color:#2563c9 !important;text-decoration:underline !important;}',
         '  border-radius:4px;background:#eef0ee;}',
         /* Situationsväxlare (typ: cirkularrorelse) — uppe till höger på
            scenen, samma stil som simuleringssidornas sim-switch (mörk
@@ -16762,6 +16765,75 @@
         loop.satt(true);
     }
 
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: simsida
+    // ══════════════════════════════════════════════════════════════════════
+    // En hel, fristående simuleringssida inbäddad i teorin via en iframe
+    // (?embed=1&mini=1). Sidan själv avgör vad mini-läget visar (för
+    // fysik2-ljudniva-app.html: scenen och reglagen, utan rubrik, ingress,
+    // formelkort och förklaringar). Iframen får samma höjd som sidans
+    // innehåll (samma ursprung, så höjden kan mätas direkt), och följer med
+    // när innehållet ändrar höjd. Fullskärm startas med scenens egen .fs-btn
+    // inne i iframen. Under kortet länkar "Öppna hela simuleringen" till
+    // sidan i eget fönster.
+    //   src:   simuleringssidans filnamn (obligatoriskt), t.ex.
+    //          fysik2-ljudniva-app.html
+    //   titel: liten rubrik ovanför (valfritt)
+    function buildSimsida(node, cfg) {
+        var src = String(cfg.src || '').replace(/[^\w.\-]/g, '');
+        if (!/\.html$/.test(src)) return;
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus ms-bred ms-simsida';
+        if (cfg.titel) {
+            var t = document.createElement('div');
+            t.className = 'minisim-title';
+            t.textContent = cfg.titel;
+            card.appendChild(t);
+        }
+        var iframe = document.createElement('iframe');
+        iframe.className = 'minisim-iframe ms-simsida-ram';
+        iframe.src = src + '?embed=1&mini=1&v=' + (window.__CB || Date.now());
+        iframe.setAttribute('allowfullscreen', '');
+        iframe.allow = 'fullscreen; autoplay';
+        iframe.loading = 'lazy';
+        iframe.title = cfg.titel || 'Simulering';
+        card.appendChild(iframe);
+
+        var lank = document.createElement('a');
+        lank.className = 'ms-simsida-lank artikel-lank';
+        lank.href = src;
+        lank.target = '_blank';
+        lank.rel = 'noopener';
+        lank.textContent = 'Öppna hela simuleringen';
+        card.appendChild(lank);
+        node.appendChild(card);
+
+        // Höjden följer sidans innehåll
+        var ro = null;
+        function passa() {
+            try {
+                var d = iframe.contentDocument;
+                if (!d || !d.body) return;
+                var h = Math.ceil(d.documentElement.scrollHeight);
+                var root = d.getElementById('root');
+                if (root) h = Math.ceil(root.getBoundingClientRect().height);
+                if (h > 50) iframe.style.height = h + 'px';
+            } catch (e) { /* annat ursprung: behåll standardhöjden */ }
+        }
+        iframe.addEventListener('load', function () {
+            passa();
+            try {
+                var d = iframe.contentDocument;
+                if (window.ResizeObserver && d) {
+                    ro = new ResizeObserver(passa);
+                    ro.observe(d.getElementById('root') || d.body);
+                }
+            } catch (e) {}
+            setTimeout(passa, 600);
+            setTimeout(passa, 2000);
+        });
+    }
+
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
                   stegkast: buildStegkast,
                   svangningsgrafer: buildSvangningsgrafer,
@@ -16791,7 +16863,7 @@
                   staendevag: buildStaendevag, gitarrton: buildGitarrton,
                   snurrslang: buildSnurrslang, pipton: buildPipton, provror: buildProvror,
                   varmekansla: buildVarmekansla, smaltrace: buildSmaltrace,
-                  blixtljud: buildBlixtljud, tongenerator: buildTongenerator };
+                  blixtljud: buildBlixtljud, tongenerator: buildTongenerator, simsida: buildSimsida };
 
     function decodeSrc(b64) {
         try { return decodeURIComponent(escape(atob(b64))); }

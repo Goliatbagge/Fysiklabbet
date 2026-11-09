@@ -18,9 +18,9 @@ section: '4.10'
 När vi anger definitions- och värdemängd utifrån en graf är det viktigt
 att titta på hur grafens ändpunkter är markerade. En
 
-- **ifylld ring** <svg width="14" height="14" viewBox="0 0 14 14" style="vertical-align:-2px" role="img" aria-label="ifylld ring"><circle cx="7" cy="7" r="5" fill="#2563c9"/></svg> betyder att ändpunkten *ingår* i intervallet (markeras
+- **ifylld ring** <svg viewBox="0 0 14 14" style="width:0.85em;height:0.85em;vertical-align:-0.1em" role="img" aria-label="ifylld ring"><circle cx="7" cy="7" r="5" fill="#2563c9"/></svg> betyder att ändpunkten *ingår* i intervallet (markeras
   med ≤ eller ≥)
-- **tom ring** <svg width="14" height="14" viewBox="0 0 14 14" style="vertical-align:-2px" role="img" aria-label="tom ring"><circle cx="7" cy="7" r="5" fill="#f7f2e8" stroke="#2563c9" stroke-width="2"/></svg> betyder att ändpunkten *inte* ingår i intervallet (markeras
+- **tom ring** <svg viewBox="0 0 14 14" style="width:0.85em;height:0.85em;vertical-align:-0.1em" role="img" aria-label="tom ring"><circle cx="7" cy="7" r="5" fill="#f7f2e8" stroke="#2563c9" stroke-width="2"/></svg> betyder att ändpunkten *inte* ingår i intervallet (markeras
   med < eller >).
 
 Figuren nedan visar samma graf två gånger. Till vänster har ändpunkterna

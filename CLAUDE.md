@@ -714,6 +714,18 @@ Så här bygger du scenen:
    nämnaren med *x*₂ och *x*₁ (användarkrav 2026-10-16, referens
    `layoutTvapunkter` och `layoutAvariabel`, `ma1c-4.5`). Punkterna står
    på en rad med *x*₁, *y*₁, *x*₂, *y*₂ i blått under koordinaterna.
+3t. **⛔ Pennscenens graf är EXAKT uppgiftens graf.** En graf eller figur
+   som återges i pennlösningen ska stämma punkt för punkt med uppgiftens
+   figur: samma funktion, samma ändpunkter, samma tomma och ifyllda
+   ringar, samma extrempunkter och axelskärningar. Räkna fram funktionen
+   ur uppgiftens SVG (pathen i md- eller provfilen), skriv den i en
+   kommentar i scenen och rita aldrig en kurva "som ser ungefär likadan
+   ut". Granska pennscenens skärmdump SIDA VID SIDA med uppgiftens figur
+   innan scenen räknas som klar, och läs om tankebubblorna mot den
+   riktiga grafen (användarkrav 2026-11-09: i `ma1c-4.10` exempel 2
+   ritade scenen en kulle från (−1, 0) med toppen i (0,5; 4), medan
+   uppgiftens graf är y = 4 − x² med tom ring i (−1, 3)). Se REGEL
+   "SAMMA GRAF SOM I UPPGIFTEN" i filhuvudet.
 3r. **En ekvation som skrivs om rad för rad börjar på samma x varje rad.**
    `−3 = 2 · 4 + m` och raden under, `−3 = 8 + m`, ska stå rakt under
    varandra. Tidigare stod kedjans första rad på `padL` och resten på

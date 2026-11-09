@@ -12552,7 +12552,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Musiktjänsten $y = 50x$ gäller i högst 12 månader ($0 \\leq x \\leq 12$). Vilken är värdemängden?',
+    question: 'En pump fyller en tank enligt $y = 50x$, där $y$ är vattenmängden i liter efter $x$ minuter och $0 \\leq x \\leq 12$. Vilken är värdemängden?',
     choices: [
       '$y = 600$',
       '$0 \\leq y \\leq 600$',
@@ -12561,10 +12561,10 @@ window.EXITTICKETS = {
     ],
     correct: 1,
     why: [
-      '600 kr är bara det största värdet — värdemängden är hela spannet.',
-      'Minsta kostnaden är $y(0) = 0$ kr och största $y(12) = 600$ kr.',
-      '50 kr är bara priset för EN månad.',
-      '0–12 är definitionsmängden (månaderna), inte kostnaderna.',
+      '600 liter är bara det största värdet. Värdemängden är hela spannet.',
+      'Minsta vattenmängden är $y(0) = 0$ liter och största $y(12) = 600$ liter.',
+      '50 liter är bara det som pumpas in på EN minut.',
+      '0–12 är definitionsmängden (minuterna), inte vattenmängderna.',
     ],
   },
 ],

@@ -22,37 +22,39 @@ att titta på hur grafens ändpunkter är markerade. En
 - **tom ring** betyder att ändpunkten *inte* ingår i intervallet (markeras
   med < eller >).
 
-::: exempel "Exempel 1 — Musiktjänsten"
-**En musiktjänst kostar 50 kr/månad. Erbjudandet gäller max 1 år.
-Kostnaden $y$ kr för $x$ månader kan då skrivas $y = 50x$. Bestäm
-funktionens<br>a) definitionsmängd&emsp;&emsp;b) värdemängd.**
+::: exempel "Exempel 1 — Pumpen som fyller en tank"
+**En pump fyller en tom tank med 50 liter vatten per minut. Pumpen
+stängs av automatiskt efter 12 minuter. Vattenmängden $y$ liter efter
+$x$ minuter kan då skrivas $y = 50x$. Bestäm funktionens<br>a) definitionsmängd&emsp;&emsp;b) värdemängd.**
 
 ::: handskrift
 typ: musiktjanst
 :::
 
 ::: textlosning
-**a)** Antalet månader vi betalar detta pris för tjänsten $x$ kan variera
-från minst 0 till högst 12 månader. (Vi kan inte betala för tjänsten ett
-negativt antal månader och priset gäller endast i 12 månader.)
+**a)** Tiden $x$ räknas från att pumpen startar och kan vara vilket tal
+som helst från 0 till 12 minuter, till exempel även 2,5 minuter eller
+7,25 minuter. Tiden kan inte vara negativ, och efter 12 minuter är
+pumpen avstängd.
 
 **Svar:** $0 \leq x \leq 12$
 
 **b)** I a-uppgiften fick vi att definitionsmängden var
-$0 \leq x \leq 12$. Det *minsta* värdet på $y$ (kostnaden) får vi då
-$x = 0$, det vill säga då vi inte köper musiktjänsten alls:
+$0 \leq x \leq 12$. Det *minsta* värdet på $y$ (vattenmängden) får vi
+då $x = 0$, det vill säga när pumpen startar och tanken är tom:
 
 $$
-y(0) = 50 \cdot 0 = 0\ \mathrm{kr}
+y(0) = 50 \cdot 0 = 0\ \mathrm{liter}
 $$
 
 Det *största* värdet på $y$ får vi då $x = 12$:
 
 $$
-y(12) = 50 \cdot 12 = 600\ \mathrm{kr}
+y(12) = 50 \cdot 12 = 600\ \mathrm{liter}
 $$
 
-Så värdet på $y$ kan vara mellan 0 och 600 kr.
+Vattnet strömmar in hela tiden, så vattenmängden passerar varje värde
+mellan 0 och 600 liter.
 
 **Svar:** $0 \leq y \leq 600$
 :::
@@ -108,7 +110,7 @@ $0 \leq y \leq 4$
 :::
 
 ::: sampunkt "Ur ett sammanhang"
-- Verkligheten sätter gränserna. En musiktjänst för högst ett år ger
+- Verkligheten sätter gränserna. En pump som går i högst 12 minuter ger
   $0 \leq x \leq 12$.
 - Räkna ut motsvarande $y$-värden i ändpunkterna för att få värdemängden,
   här $0 \leq y \leq 600$.

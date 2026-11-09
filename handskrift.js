@@ -109,6 +109,19 @@
  * eleven själv ritar (en graf uppgiften ber om, punkter, hjälplinjer,
  * trappsteg) ritas som vanligt av pennan. Referens: layoutLinjensekv.
  *
+ * REGEL (SAMMA GRAF SOM I UPPGIFTEN, användarkrav 2026-11-09): en graf
+ * eller figur som återges i pennscenen ska vara EXAKT uppgiftens, punkt
+ * för punkt: samma funktion, samma ändpunkter, samma tomma och ifyllda
+ * ringar, samma extrempunkter och skärningar med axlarna. Hämta
+ * funktionen ur uppgiftens figur (läs SVG-pathen i md-filen eller
+ * provfilen och räkna fram vilken funktion den ritar), skriv den i en
+ * kommentar intill fv() i scenen och rita aldrig "en liknande kulle".
+ * Felet hände i ma1c-4.10 exempel 2: scenen ritade en kurva från (−1, 0)
+ * med toppen i (0,5; 4), medan uppgiftens graf är y = 4 − x² från en tom
+ * ring i (−1, 3), och en tankebubbla resonerade sedan ur den felaktiga
+ * kurvan. Granska alltid pennscenens skärmdump SIDA VID SIDA med
+ * uppgiftens figur innan scenen räknas som klar.
+ *
  * REGEL (figurscener, t.ex. hage/gungbrada): i de handritade DIAGRAMMEN
  * (till skillnad från algebra-raderna) ritas grundscenen — streckgubbar,
  * bräda/vägg/hage-linjer, skraffering — alltid i grafit. Alla
@@ -15869,8 +15882,10 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
-  /* ---------------- scen: musiktjänsten (ma1c-4.10 ex 1) ---------------
-   * y = 50x med definitionsmängd 0 ≤ x ≤ 12. Värdemängden fås genom att
+  /* ---------------- scen: pumpen (ma1c-4.10 ex 1, namnet musiktjanst är
+   * kvar från en äldre version om en musiktjänst) ---------------
+   * y = 50x med definitionsmängd 0 ≤ x ≤ 12. Tiden är kontinuerlig (alla
+   * tal mellan 0 och 12, inte bara hela minuter), så olikheter är rätt. Värdemängden fås genom att
    * sätta in ÄNDPUNKTERNA i definitionsmängden — inte genom att gissa. */
   function layoutMusiktjanst(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
@@ -15879,9 +15894,9 @@
     tanke(20, [
       [['Definitionsmängden är de']],
       [['x-värden som får sättas in.']],
-      [['Färre än 0 månader går inte,']],
-      [['och erbjudandet slutar efter']],
-      [['12.']]
+      [['Tiden kan vara vilket tal som']],
+      [['helst från 0 till 12 minuter,']],
+      [['även 2,5 minuter.']]
     ], 0);
     y = 150;
     T.str('a) Definitionsmängd', padL, y - 1.6 * F, null, 0.62);
@@ -15891,8 +15906,8 @@
 
     tanke(y, [
       [['Värdemängden är de y-värden']],
-      [['som kan komma ut. Kostnaden']],
-      [['växer med tiden, så det']],
+      [['som kan komma ut. Vattnet']],
+      [['ökar med tiden, så det']],
       [['minsta y kommer ur det']],
       [['minsta x.']]
     ], 0.5);
@@ -15904,7 +15919,7 @@
     tanke(y, [
       [['Och det största y kommer ur']],
       [['det största x, alltså 12']],
-      [['månader.']]
+      [['minuter.']]
     ]);
     y += 3.6 * F;
     T.str('Största värdet: x=12', padL, y - 1.6 * F, null, 0.62);
@@ -15912,8 +15927,64 @@
     T.stepEnd();
 
     tanke(y, [
-      [['Kostnaden kan alltså bli allt']],
-      [['mellan 0 och 600 kr.']]
+      [['Vattenmängden blir alltså allt']],
+      [['mellan 0 och 600 liter.']]
+    ]);
+    y += 3.0 * F;
+    xe = T.str('Svar: 0≤y≤600', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 640, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: pumpen (ma1c-4.10 ex 1, namnet musiktjanst är
+   * kvar från en äldre version om en musiktjänst) ---------------
+   * y = 50x med definitionsmängd 0 ≤ x ≤ 12. Tiden är kontinuerlig (alla
+   * tal mellan 0 och 12, inte bara hela minuter), så olikheter är rätt. Värdemängden fås genom att
+   * sätta in ÄNDPUNKTERNA i definitionsmängden — inte genom att gissa. */
+  function layoutMusiktjanst(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+    var tanke = mkTanke(T);
+
+    tanke(20, [
+      [['Definitionsmängden är de']],
+      [['x-värden som får sättas in.']],
+      [['Tiden kan vara vilket tal som']],
+      [['helst från 0 till 12 minuter,']],
+      [['även 2,5 minuter.']]
+    ], 0);
+    y = 150;
+    T.str('a) Definitionsmängd', padL, y - 1.6 * F, null, 0.62);
+    xe = T.str('0≤x≤12', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Värdemängden är de y-värden']],
+      [['som kan komma ut. Vattnet']],
+      [['ökar med tiden, så det']],
+      [['minsta y kommer ur det']],
+      [['minsta x.']]
+    ], 0.5);
+    y += 4.5 * F;
+    T.str('b) Minsta värdet: x=0', padL, y - 1.6 * F, null, 0.62);
+    T.str('y=50·0=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Och det största y kommer ur']],
+      [['det största x, alltså 12']],
+      [['minuter.']]
+    ]);
+    y += 3.6 * F;
+    T.str('Största värdet: x=12', padL, y - 1.6 * F, null, 0.62);
+    T.str('y=50·12=600', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Vattenmängden blir alltså allt']],
+      [['mellan 0 och 600 liter.']]
     ]);
     y += 3.0 * F;
     xe = T.str('Svar: 0≤y≤600', padL, y);
@@ -15931,32 +16002,36 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
     var tanke = mkTanke(T);
 
-    /* kurvan: en kulle från (−1, 0) upp till (0,5; 4) och ner till (2, 0).
-     * y=0 nås alltså i HÖGERänden, som är den ifyllda punkten — därför
-     * ingår 0 i värdemängden trots att vänsteränden är en tom ring. */
-    function fv(x) { return 4 - 4 * (x - 0.5) * (x - 0.5) / 2.25; }
-    var A = mkAxes(T, F, { ox: padL + 190, oy: 260, u: 32,
+    /* kurvan är EXAKT uppgiftens graf (figuren i ma1c-4.10.md):
+     * y = 4 − x², med en tom ring i (−1, 3), toppen i (0, 4) och en
+     * ifylld punkt i (2, 0). y=0 nås alltså bara i högeränden, som är
+     * ifylld, och därför ingår 0 i värdemängden. (REGEL SAMMA GRAF SOM
+     * I UPPGIFTEN: en tidigare version ritade en annan kulle, med
+     * vänsteränden i (−1, 0) och toppen i (0,5; 4).) */
+    function fv(x) { return 4 - x * x; }
+    var A = mkAxes(T, F, { ox: padL + 190, oy: 360, u: 54,
                            xmin: -2, xmax: 3, ymin: -1, ymax: 5 });
     /* grafen är given i uppgiften: den står färdig från början (REGEL
      * UPPGIFTENS FIGUR STÅR FÄRDIG FRÅN BÖRJAN) */
     forritad(T, function () {
       A.axes();
       /* de blå lodräta pennlinjerna dras vid x=−1 och x=2 och skulle annars
-       * ligga rakt över dessa två skalstreckstal */
+       * ligga rakt över dessa två skalstreckstal; den vågräta vid y=4
+       * skulle ligga över talet 4, som därför flyttas upp ovanför linjen */
       A.ticks(heltal(-2, 3), heltal(-1, 5), [-2, -1, 1, 2, 3], [1, 2, 3, 4, 5],
-              { x: { '-1': -13, 2: 13 } });
+              { x: { '-1': -13, 2: 13 }, y: { 4: [0, -0.42 * F] } });
       T.pause(150);
       var pts = [], t;
       for (t = -1; t <= 2.0001; t += 0.15) pts.push([A.X(t), A.Y(fv(t))]);
       acts.push({ kind: 'stroke', pts: humanize(pts), color: BLUE });
       T.pause(180);
       /* öppen ring i vänsteränden, ifylld punkt i högeränden */
-      acts.push({ kind: 'stroke', pts: ringPts(A.X(-1), A.Y(0), 4.5, 4.5) });
+      acts.push({ kind: 'stroke', pts: ringPts(A.X(-1), A.Y(fv(-1)), 5, 5), color: BLUE });
       T.pause(150);
       A.dot(2, fv(2));
     });
 
-    tanke(390, [
+    tanke(500, [
       [['Definitionsmängden är de']],
       [['tillåtna x-värdena. Jag håller']],
       [['pennan lodrätt och vandrar']],
@@ -15966,7 +16041,7 @@
     A.line([A.X(-1), A.Y(-1.3)], [A.X(-1), A.Y(5.2)], BLUE);
     T.stepEnd();
 
-    tanke(390, [
+    tanke(500, [
       [['Ringen är TOM, alltså ingår']],
       [['inte x=−1. Då blir det ett']],
       [['strikt olikhetstecken.']]
@@ -15974,12 +16049,12 @@
     A.line([A.X(2), A.Y(-1.3)], [A.X(2), A.Y(5.2)], BLUE);
     T.stepEnd();
 
-    tanke(390, [
+    tanke(500, [
       [['Punkten till höger är IFYLLD,']],
       [['så x=2 ingår. Där blir det']],
       [['mindre än eller lika med.']]
     ], 0);
-    y = 420;
+    y = 530;
     T.str('Definitionsmängd', padL, y - 1.6 * F, null, 0.62);
     xe = T.str('−1<x≤2', padL, y);
     T.underline(xe, y);
@@ -15996,10 +16071,10 @@
     T.stepEnd();
 
     tanke(y, [
-      [['Lägst är y=0 i vänsterändens']],
-      [['höjd, högst är y=4 i toppen.']],
-      [['Båda nås av grafen, så båda']],
-      [['ingår.']]
+      [['Lägst är y=0 i den ifyllda']],
+      [['punkten till höger, högst är']],
+      [['y=4 i toppen. Båda nås av']],
+      [['grafen, så båda ingår.']]
     ], 0.5);
     y += 4.5 * F;
     T.str('Värdemängd', padL, y - 1.6 * F, null, 0.62);

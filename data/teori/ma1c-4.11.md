@@ -107,7 +107,7 @@ där
 - $y$ = värdet efter en viss tid
 - $C$ = ursprungliga värdet
 - $a$ = förändringsfaktorn
-- $x$ = tid
+- $x$ = antal förändringar (ofta tid)
 :::
 
 ::: exempel "Exempel 1 — Tolka en exponentialfunktion"
@@ -198,7 +198,7 @@ Slutsats: $g(x) = 2^x$ är uppritad!
 - Värdet **multipliceras med samma tal** i varje steg.
 - $y = C a^{x}$
 - $C$ är **ursprungsvärdet**, $a$ är **förändringsfaktorn** och $x$ är
-  tiden.
+  antalet förändringar (ofta tiden).
 :::
 
 ::: sampunkt "Ställa upp formeln"

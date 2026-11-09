@@ -43,7 +43,7 @@
 
         .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
                 color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.15; }
-        .fnum { color: var(--lab-ink); font-size: 24px; font-family: 'Instrument Serif', serif; }
+        .fnum { color: var(--lab-ink); font-size: 20px; }
 
         .scene-info {
             position: absolute; bottom: 12px; left: 14px; z-index: 5;
@@ -470,7 +470,7 @@
                 <Etikett a={a} b={b} dold />
             </div>
         );
-        const Bel = ({ n }) => (<span style={{ whiteSpace: 'nowrap' }}>|<em>Q</em><span style={{ fontSize: '0.6em', verticalAlign: '-0.28em' }}>{n}</span>|</span>);
+        const Bel = ({ n }) => (<span style={{ whiteSpace: 'nowrap' }}>|<em>Q</em><span style={{ fontSize: '0.6em', verticalAlign: '-0.28em', marginLeft: '0.04em', marginRight: '0.12em' }}>{n}</span>|</span>);
         const FormulaCard = () => (
             <div className="glass-card rounded-xl p-4 mb-6" style={{ color: 'var(--lab-ink)' }}>
                 <div className="flex flex-wrap items-center gap-x-10 gap-y-3">
@@ -682,7 +682,7 @@
 
                                     {show.varden && <div className="scene-info">
                                         <span className="si-lbl">Kraft på vardera laddningen</span>
-                                        <span className="si-val" style={{ color: COL.kraft }}><em style={{ fontFamily: "'Instrument Serif', serif", fontSize: 18 }}>F</em> = {fmtF(F)}</span>
+                                        <span className="si-val" style={{ color: COL.kraft }}><em>F</em> = {fmtF(F)}</span>
                                         {visaTag && (
                                             <span className="si-val" style={{ fontSize: 12, fontWeight: 600, color: 'var(--lab-ink-soft)' }}>
                                                 avståndet × {fmtFak(fr)} ger kraften × {fmtFak(F / tag.F)}
@@ -740,7 +740,7 @@
                                 <div className="glass-card rounded-xl p-4 mb-3">
                                     <div className="flbl mb-1">Elektrisk kraft</div>
                                     <div className="font-bold" style={{ color: COL.kraft, fontSize: 26, lineHeight: 1.2 }}>
-                                        <em style={{ fontFamily: "'Instrument Serif', serif", fontWeight: 400, fontSize: 30 }}>F</em> = {fmtF(F)}
+                                        <em>F</em> = {fmtF(F)}
                                     </div>
                                     <div className="text-sm mt-1" style={{ color: 'var(--lab-ink-soft)' }}>
                                         {noll ? 'Ingen kraft: den ena laddningen är noll.'

@@ -3190,6 +3190,18 @@ Gäller överallt formler visas (ingress, header, paneler, förklaringar):
      med full bredd, eftersom ordet annars krockar med täljaren.
    - Kör `node .claude/verify-formelkort-brak.js` före commit när du rört
      ett formelkort. Den mäter strecken och letar krockar mellan orden.
+10. **Formelkortets variabler står i sidans vanliga typsnitt** (användarkrav
+   2026-11-09). Klasserna `.fnum` och `.flbl` ska ärva simuleringens
+   typsnitt (DM Sans), som i `fysik1-newtons-andra-app.html`. Sätt aldrig
+   `font-family: 'Instrument Serif'` eller `var(--lab-font-display)` på
+   formelns symboler, varken i sidans CSS eller i en inline-stil: det är
+   ett smalt rubriksnitt, och variablerna ser då hoptryckta ut i sidled.
+   Åtta simuleringar hade felet (Coulombs lag, transformatorn, Lenz lag,
+   elmotorn, generatorn, ljudnivå, Magdeburgska halvkloten och
+   jordmagnetiska fältet) och rättades samma dag. Teckenstorleken är
+   20 px, eller 19 px som i referensen. Kör
+   `node .claude/verify-formelkort-typsnitt.js` före commit när du byggt
+   eller rört ett formelkort.
 
 Mönster (densitetssimuleringen är referens):
 

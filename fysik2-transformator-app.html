@@ -49,7 +49,7 @@
 
         .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
                 color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
-        .fnum { color: var(--lab-ink); font-size: 21px; font-family: 'Instrument Serif', serif; }
+        .fnum { color: var(--lab-ink); font-size: 20px; }
 
         .scene-info {
             position: absolute; bottom: 12px; left: 14px; z-index: 5;
@@ -1233,7 +1233,7 @@
             <span style={{ color: i === 2 ? COL.sek : COL.prim, whiteSpace: 'nowrap' }}><em>{b}</em><span style={{ fontSize: '0.6em', verticalAlign: '-0.28em', marginLeft: '0.04em' }}>{i}</span></span>
         );
         const Brak = ({ top, bot }) => (
-            <span className="inline-flex flex-col items-center fnum" style={{ lineHeight: 1.12, fontSize: 25 }}>
+            <span className="inline-flex flex-col items-center fnum" style={{ lineHeight: 1.12, fontSize: 21 }}>
                 <span style={{ padding: '0 3px 2px' }}>{top}</span>
                 <span style={{ padding: '2px 3px 0', borderTop: '2px solid var(--lab-ink, #1f2530)', alignSelf: 'stretch', textAlign: 'center' }}>{bot}</span>
             </span>
@@ -1245,7 +1245,7 @@
                 <span className="flbl" style={LBL}>{a.lbl}</span><span />
                 <span className="flbl" style={LBL}>{b.lbl}</span>
                 <Brak top={a.top} bot={a.bot} />
-                <span className="fnum" style={{ fontSize: 25 }}>=</span>
+                <span className="fnum" style={{ fontSize: 21 }}>=</span>
                 <Brak top={b.top} bot={b.bot} />
             </div>
         );

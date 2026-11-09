@@ -130,7 +130,7 @@ där
 Förändringsfaktorn är alltid positiv och skild från 1 ($a > 0$ och
 $a \neq 1$). Med $a = 1$ ändras ingenting, och grafen blir en vågrät linje.
 
-::: exempel "Exempel 1 — Tolka en exponentialfunktion"
+::: exempel "Exempel 1 — Tolka en exponentialfunktion (Grund)"
 **En bils värde $V$ efter $t$ år ges av funktionen
 $V(t) = 180\,000 \cdot 0{,}85^t$. Vad står 180 000 respektive 0,85
 för?**
@@ -182,7 +182,7 @@ x: -4, 4
 y: -1, 7
 :::
 
-::: exempel "Exempel 2 — Vilken funktion är uppritad?"
+::: exempel "Exempel 2 — Vilken funktion är uppritad? (Mellan)"
 **Vilken funktion är uppritad: $f(x) = 3^x$ eller $g(x) = 2^x$?**
 
 ::: figur

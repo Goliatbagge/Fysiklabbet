@@ -47,20 +47,16 @@ Antalet korn på ruta $x$ är $y = 2^{x-1}$, en exponentialfunktion med
 startvärdet 1 och förändringsfaktorn 2. Tabellen visar hur många korn
 som ligger på några av rutorna.
 
-| Ruta | Antal korn |
-| --- | --- |
-| 1 | 1 |
-| 8 (första raden) | 128 |
-| 16 | 32 768 |
-| 32 (halva brädet) | 2 147 483 648 |
-| 64 (sista rutan) | $9{,}2 \cdot 10^{18}$ |
+| Ruta | Antal korn | Mängd ris (ungefär) |
+| --- | --- | --- |
+| 1 | 1 | ett enda korn |
+| 8 | 128 | mindre än en tesked |
+| 16 | 32 768 | knappt ett kilo |
+| 32 | 2 147 483 648 | tiotals ton |
+| 64 | $9{,}2 \cdot 10^{18}$ | hundratals gånger världens årsskörd |
 
-När första raden är fylld ligger det 128 korn på rutan, mindre än en
-tesked ris. Halvvägs är det drygt två miljarder korn, tiotals ton. På den
-sista rutan ligger hundratals gånger mer ris än hela världen skördar på
-ett år. Den sista rutan har ensam fler korn än alla 63 rutor före den
-tillsammans. Så beter sig exponentiell tillväxt: länge märks den knappt,
-och sedan går det fortare och fortare.
+Detta är karakteristiskt för exponentiell tillväxt. Förändringshastigheten
+är långsam i början för att sedan öka kraftigt på slutet.
 :::
 
 Exponentialfunktioner dyker upp så fort något förändras med **samma

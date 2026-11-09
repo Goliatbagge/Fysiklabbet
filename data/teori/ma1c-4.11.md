@@ -9,8 +9,8 @@ section: '4.11'
 
 # Exponentialfunktioner
 
-**Exponentialfunktioner** är funktioner där den oberoende variabeln,
-till exempel $x$, är i **exponenten**.
+En funktion där den oberoende variabeln, till exempel $x$, står i
+**exponenten** kallas **exponentialfunktion**.
 
 ::: exempel "Exempel 1 — Kapital som växer"
 **Ett kapital på 25 000 kr ökar varje år med 2 %. Ange en formel för

@@ -80,6 +80,13 @@ Detta är karakteristiskt för exponentiell tillväxt. Förändringshastigheten
 
 ## Från procent till formel
 
+::: tips "Kom ihåg"
+Förändringsfaktorn räknas fram ur den procentuella förändringen.
+
+- Ökning med $p$ %: $a = 1 + \dfrac{p}{100}$, till exempel ger +2 % faktorn 1,02.
+- Minskning med $p$ %: $a = 1 - \dfrac{p}{100}$, till exempel ger −15 % faktorn 0,85.
+:::
+
 Anta att 25 000 kr sätts in på
 ett konto där kapitalet ökar med 2 % varje år. Förändringsfaktorn för en
 ökning med 2 % är 1,02 (100 % + 2 % = 102 % = 1,02), så

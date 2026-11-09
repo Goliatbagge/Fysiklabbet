@@ -116,14 +116,14 @@ Om vi ska ställa upp en formel för en exponentiell förändring (något som
 ändras procentuellt) gäller:
 
 $$
-y = Ca^x
+y = Ca^x \qquad (a > 0 \text{ och } a \neq 1)
 $$
 
 där
 
 - $y$ = värde efter $x$ förändringar
 - $C$ = startvärde
-- $a$ = förändringsfaktor ($a > 0$ och $a \neq 1$)
+- $a$ = förändringsfaktor
 - $x$ = antal förändringar (ofta tid)
 :::
 

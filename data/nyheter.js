@@ -6065,7 +6065,7 @@ const NYHETER_ALL = [
         { label: "Simulering — Densitet", href: "fysik1-densitet-app.html" }
       ],
       fragor: [
-        "I tjugo år låg mätvärdet och beräkningen omkring 20 % från varandra, och båda lägren stod fast vid sitt. Vad är det som avgör vilken sida som till slut får ge sig — och varför räckte det inte att bara räkna om?",
+        "I tjugo år låg mätvärdet och beräkningen omkring 20 % från varandra, och båda lägren stod fast vid sitt. Vad är det som avgör vilken sida som till slut får ge sig — och varför räckte det inte att bara räkna om?",
         "Samma diamant, samma tryck och samma temperatur gav olika resultat beroende på om den träffades av en enda chockvåg eller flera. Vad betyder det för tanken att ett ämnes tillstånd bestäms av tryck och temperatur allena?",
         "Slutsatsen om diamantens smältpunkt vilar på ett svagt röntgenmönster som fanns i ungefär en miljarddels sekund. Vad krävs för att en så kort och svag signal ska duga som bevis?"
       ]
@@ -6092,7 +6092,7 @@ const NYHETER_ALL = [
       { type: 'p', html: 'Eftersom försöken nådde förbi trycket i isjättarnas mittpunkter finns det nu ett mätunderlag som modellerna av planeternas inre kan vila på i stället för ren extrapolation.' },
 
       { type: 'h2', text: 'Tusen grader fel' },
-      { type: 'p', html: 'De gamla mätningarna var ett landmärke i sitt fält, men de lämnade efter sig ett problem som inte gick att vifta bort: uppmätt och beräknad smälttemperatur skilde sig åt med omkring 20 %.' },
+      { type: 'p', html: 'De gamla mätningarna var ett landmärke i sitt fält, men de lämnade efter sig ett problem som inte gick att vifta bort: uppmätt och beräknad smälttemperatur skilde sig åt med omkring 20 %.' },
       { type: 'quote', html: 'Oavsett vad teoretikerna gjorde — även med de mest avancerade simuleringsteknikerna — kunde de inte återskapa experimenten.', cite: 'Marius Millot' },
       { type: 'p', html: 'Med kraftigt förbättrade mätinstrument vid Rochester föll gåtan. Den nya smälttemperaturen stämmer nästan perfekt med simuleringarna, och det var alltså mätningen som legat fel hela tiden — med mer än tusen grader.' },
       { type: 'p', html: 'Avgörande var att laget för första gången kunde följa en chockkomprimerad diamant med röntgendiffraktion ända fram till smältningen. Det är svårare än det låter. Kol är en liten och lätt atom som sprider få röntgenfotoner, så signalen man ska fånga under sin miljarddels sekund är svag.' },
@@ -7554,7 +7554,7 @@ const NYHETER_ALL = [
       fragor: [
         "Gaskulorna är tusentals ljusår bort och alldeles för små för att synas som föremål. Ändå anges deras fart till 8 940 km/s. Hur kan man mäta hastigheten hos något man inte kan följa med blicken? Vad i ljuset bär informationen?",
         "Att spektrumet saknade väte var det som gjorde explosionen unik — universums vanligaste grundämne lyste med sin frånvaro. Varför är det så avslöjande att ett ämne INTE syns i ett spektrum, och vad kan man dra för slutsats om stjärnan som gasen kom ifrån?",
-        "Gasen accelererades till ungefär 3 % av ljushastigheten. Uppskatta rörelseenergin hos ett kilo sådan gas och jämför med något vardagligt — en bil på motorvägen, en sprängladdning. Vad säger jämförelsen om vilken sorts process som måste ligga bakom?"
+        "Gasen accelererades till ungefär 3 % av ljushastigheten. Uppskatta rörelseenergin hos ett kilo sådan gas och jämför med något vardagligt — en bil på motorvägen, en sprängladdning. Vad säger jämförelsen om vilken sorts process som måste ligga bakom?"
       ]
     },
     body: [
@@ -7568,7 +7568,7 @@ const NYHETER_ALL = [
       { type: "p", html: "Svaret dröjde eftersom explosionen år 2000 spydde ut enorma mängder stoft, som i praktiken dolde stjärnsystemet bakom ett tjockt dammoln i över tjugo år. Först nu, när dammet gradvis klarnat, har Mills och kollegor kunnat kombinera bilder från rymdteleskopet Hubble, infraröda mätningar från europeiska sydobservatoriets Very Large Telescope, spektroskopi från Southern African Large Telescope och ljuskurvor från NASA:s planetjägare TESS för att lista ut vad som döljer sig i systemets mitt: en vit dvärg som stjäl material — inte från en vanlig stjärna, utan från en extremt sällsynt heliumstjärna, en stjärna som redan bränt slut på vätet i sin kärna. De två stjärnorna kretsar om varandra på bara 3,7&nbsp;dygn." },
       { type: "quote", html: "”Explosionens utflöde har nu falnat tillräckligt för att vi ska kunna undersöka dess ursprung, och vi kan därför bekräfta att stjärnsystemet faktiskt består av en vit dvärg som suger material från en extremt sällsynt stjärntyp som kallas en heliumstjärna.”", cite: "John Mills, University of Warwick" },
 
-      { type: "h2", text: "Kulor av gas i nästan 3 % av ljusets hastighet" },
+      { type: "h2", text: "Kulor av gas i nästan 3 % av ljusets hastighet" },
       { type: "p", html: "Men bilderna avslöjade också något ingen väntat sig: kompakta klumpar av trolig syrerik gas, ”kulor”, som skjuts ut från explosionsplatsen i upp till 20&nbsp;miljoner miles i timmen — omkring 8&nbsp;940&nbsp;km/s, nästan 3,0&nbsp;% av ljusets hastighet. Sådana höghastighetsklumpar har aldrig setts i någon annan nova, vare sig väterik eller heliumrik." },
       { type: "quote", html: "”Ursprunget till de här ’kulorna’ är ett mysterium. Vi misstänker att de uppstod efter själva utbrottet, men den här typen av ’kulor’ har inte observerats i någon annan nova.”", cite: "John Mills, University of Warwick" },
 
@@ -9350,7 +9350,7 @@ const NYHETER_ALL = [
       { type: "h2", text: "Varför är det här viktigt?" },
       { type: "p", html: "Att forskare kontrollräknar och rättar varandras misstag är inte ett tecken på att vetenskapen är trasig — det är precis så den ska fungera. Ett extraordinärt påstående kräver extraordinära bevis, och här höll de inte. Den mörka energin förblir samtidigt ett av fysikens största mysterier: vi vet att den finns och ungefär hur stark den är, men inte <em>vad</em> den är. Det gör den inte mindre verklig — bara desto mer spännande." },
       { type: "fact", title: "Visste du?", items: [
-        "Mörk energi och mörk materia utgör tillsammans omkring 95 % av universums innehåll. Den vanliga materien — stjärnor, planeter, du och jag — är bara resten.",
+        "Mörk energi och mörk materia utgör tillsammans omkring 95 % av universums innehåll. Den vanliga materien — stjärnor, planeter, du och jag — är bara resten.",
         "En typ Ia-supernova kan under en kort tid lysa lika starkt som en hel galax med miljarder stjärnor.",
         "Att universum accelererar upptäcktes oberoende av två forskarlag 1998, genom att studera ljuset från avlägsna supernovor."
       ]}

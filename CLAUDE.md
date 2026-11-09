@@ -2160,6 +2160,15 @@ Tre fall där radbrytning måste förhindras:
    grupper i samma tal (`10 130 000`) — *alla* mellanslag är NBSP.
 2. **Värde + enhet**: `5,0 m/s` (NBSP mellan 5,0 och m/s). Gäller också
    `100 °C`, `180°`, `5 %`, `3 st`.
+   **Procent och promille sköts automatiskt** (infört 2026-11-09, sedan
+   "100" och "%" hamnat på var sin rad i `ma1c-3.2`): `data/teori/build.js`
+   gör om `5 %` till `5 %` i teorin, och `restoreMath()` i
+   `katalog.html`, `avsnitt.html` och `np.html` gör detsamma i övningar,
+   exit tickets och prov. En inline-formel före tecknet (`$p$ %`) limmas
+   ihop med tecknet i en nowrap-span. **Rör inte de reglerna**, och kopiera
+   dem till varje ny sida som renderar markdown. I HTML-strängar som inte
+   går genom renderarna (`data/nyheter.js`, `data/begrepp.js`) skrivs det
+   hårda mellanslaget direkt i källan.
 3. **Variabel + värde + enhet**: ALLTID math-block — `$g = 9{,}82\ \mathrm{N/kg}$`.
    Gäller alla operatorer: `=`, `≈` (`\approx`), `<`, `>`, `≤` (`\leq`),
    `≥`, `∝` (`\propto`), `≠`.

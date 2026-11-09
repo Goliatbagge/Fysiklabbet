@@ -926,6 +926,15 @@
             // visades med dollartecken (påpekat 2026-11-05 i ma1c-4.9).
             html = html.replace(/\(( *)(@@LABMATH(\d+)@@)/g, (m, sp, ph, i) =>
                 tokens[+i].startsWith('$$') ? m : '<span class="math-paren">(' + sp + ph + '</span>');
+            html = html.split(/(<[^>]*>)/).map(seg => seg.charAt(0) === '<' ? seg : seg
+                // Tal + procent/promille: hårt mellanslag, så att "100" och "%"
+                // aldrig hamnar på var sin rad (påpekat 2026-11-09 i ma1c-3.2). En
+                // inline-formel före tecknet ("$p$ %") är en inline-ruta, och där
+                // räcker inte NBSP: den limmas ihop med tecknet i en nowrap-span.
+                .replace(/(\d)(?:[ \t]|&nbsp;|\u00a0)+([%‰])/g, '$1&nbsp;$2')
+                .replace(/(@@LABMATH(\d+)@@)(?:[ \t]|&nbsp;|\u00a0)+([%‰])/g, (m, ph, i, t) =>
+                    tokens[+i].startsWith('$$') ? m : '<span class="math-paren">' + ph + '&nbsp;' + t + '</span>')
+            ).join('');
             html = html.replace(/@@LABMATH(\d+)@@/g, (_, i) => tokens[+i]);
             return html;
         }

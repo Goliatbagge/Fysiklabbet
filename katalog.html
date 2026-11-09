@@ -126,6 +126,13 @@
                     '$1<span class="delupp-bokstav">$2)&nbsp;$3</span>')
                 .replace(/(^|[\s>;])([a-h])\)(?:&nbsp;|\u00a0|[ \t])(?=[0-9A-Za-zÅÄÖåäöÉé])/g,
                     '$1$2)&nbsp;')
+                // Tal + procent/promille: hårt mellanslag, så att "100" och "%"
+                // aldrig hamnar på var sin rad (påpekat 2026-11-09 i ma1c-3.2). En
+                // inline-formel före tecknet ("$p$ %") är en inline-ruta, och där
+                // räcker inte NBSP: den limmas ihop med tecknet i en nowrap-span.
+                .replace(/(\d)(?:[ \t]|&nbsp;|\u00a0)+([%‰])/g, '$1&nbsp;$2')
+                .replace(/(@@LABMATH(\d+)@@)(?:[ \t]|&nbsp;|\u00a0)+([%‰])/g, (m, ph, i, t) =>
+                    tokens[+i].startsWith('$$') ? m : '<span class="math-paren">' + ph + '&nbsp;' + t + '</span>')
                 // Parentes + formel och formel + bindestreck + efterled limmas ihop
                 // mot platshållarna, aldrig mot den återställda texten. Ett mönster
                 // som letar "$…$" i löptext vet inte vilka dollartecken som öppnar

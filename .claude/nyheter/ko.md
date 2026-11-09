@@ -12,8 +12,8 @@ Format per post:
 
 ## Kö
 
-- **Rockringens fysik (skriv rockring, inte hula-hoop): lår, smalben och fot håller ringen igång tillsammans (Berkeley)** **[BREVTEASER — teasad i brevet 2026-11-08, publiceras TIDIGAST måndag 2026-11-09, senast lördag 2026-11-14]** (inte 2026-11-09: grannen 2026-11-08 är mekanik, så ta den 2026-11-10 eller senare; nominerad 2026-11-02: oväntad vardagsmekanik som en 16-åring kan prova själv; originalet ÖPPET, Springer open access, publicerat 2026-09-28) — mekanik/biomekanik; sensorer på ringen, benet och foten, 120 mätningar per sekund; olinjär analys (funktionell nätverksanalys) i stället för principalkomponentanalys visar att ringens varv och vickning hänger ihop. Chern, Honein, O'Reilly, Nonlinear Dynamics 2026, DOI 10.1007/s11071-026-13058-7 (öppen, kontrollerat 2026-11-02). Mer rörelseanalys än fysik; valdes bort 2026-10-28. Källa (Phys.org): https://phys.org/news/2026-10-decoding-loopy-physics-hula-hooping.html
-  (tillagd 2026-10-28)
+- **En kall brun dvärg utklädd till tidig galax (”Capotauro”, påstådd galax vid z ≈ 32)** **[BREVTEASER]** (nominerad 2026-11-09: udda och lätt att sammanfatta, en ”galax” från universums barndom som visade sig vara en kall brun dvärg i närheten, avslöjad av att den flyttat sig på himlen; originalet ÖPPET, MNRAS CC BY 4.0 enligt Crossref, förtryck arXiv 2608.07461, titel ”A clear detection of proper motion confirms that the claimed z ≃ 32 galaxy candidate, Capotauro, is a Y-type brown dwarf”; tidigare förtryck arXiv 2509.01664) — astronomi/JWST; en liten förskjutning avslöjade förväxlingen. MNRAS 2026, DOI 10.1093/mnras/stag2055 (öppen). OBS astronomi 2026-11-03. Källa (Phys.org 2026-11-03): https://phys.org/news/2026-11-tiny-shift-exposes-cold-brown.html
+  (tillagd 2026-11-04)
 
 - **Sällsynt solstorm (GLE 77, 11 november 2025) gav strålning över ICAO:s gränsvärden på flyghöjd över Shetland (University of Surrey, Met Office)** — strålning/rymdväder; neutronmonitorer i Storbritannien, radiosonder (upp till ~1 000 gånger markbakgrunden), två transatlantiska flyg (Heathrow–JFK +42,6 % enligt abstractet, Physics World skriver 46 %, kontrollera), stark anisotropi norr–söder, två toppar. Baird, Clewer m.fl., Space Weather 2026, DOI 10.1029/2026SW005279, öppen CC BY 4.0 MEN agupubs/onlinelibrary.wiley.com gav Cloudflare-spärr för curl och puppeteer 2026-11-08; bara abstractet via Crossref. Leta öppen kopia (Surrey Open Research) eller läs i vanlig webbläsare. Årsdag 11 november. Källa (Physics World 2026-11-06): https://physicsworld.com/a/a-rare-solar-storm-just-revealed-a-hidden-danger-for-aviation/
   (tillagd 2026-11-08)
@@ -46,9 +46,6 @@ Format per post:
   (tillagd 2026-11-05)
 
 - **Suprafast tillstånd i en kondensat av ljus och materia, i rumstemperatur (Warszawa, IBM Zürich, CNRS)** — kvantfysik/fasta tillståndets fysik; exciton-polaritoner i en mikrokavitet med flytande kristall och organisk halvledare (MeLPPP), ljusa band med spontant symmetribrott och en spinnhelix i polarisationen. Muszyński m.fl., Science Advances 2026, DOI 10.1126/sciadv.aee4875 (öppenhet ej kontrollerad, Science Advances brukar gå via Europe PMC). Källa (Phys.org 2026-11-03): https://phys.org/news/2026-11-hybrids-supersolid-quantum-state-room.html
-  (tillagd 2026-11-04)
-
-- **En kall brun dvärg utklädd till tidig galax** — astronomi/JWST; en liten förskjutning avslöjade förväxlingen. MNRAS 2026, DOI 10.1093/mnras/stag2055 (öppen, ej läst). OBS astronomi 2026-11-03. Källa (Phys.org 2026-11-03): https://phys.org/news/2026-11-tiny-shift-exposes-cold-brown.html
   (tillagd 2026-11-04)
 
 - **Vibrationer som avslöjar vad som döljer sig under andra planeters yta (Virginia Tech)** — vågor/seismik; prover i sand. IEEE Sensors Journal, DOI 10.1109/jsen.2026.3733381 (öppenhet ej kontrollerad). Källa (Phys.org 2026-11-03): https://phys.org/news/2026-11-vibrations-reveal-beneath-planets-surfaces.html

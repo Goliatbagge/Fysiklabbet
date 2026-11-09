@@ -103,6 +103,67 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-10-rockringens-fysik",
+    date: "2026-11-10",
+    title: "Lår, smalben och fot håller rockringen i gång tillsammans",
+    deck: "Forskare i Berkeley satte rörelsesensorer på en rockring och på benet som höll den i gång. Med en vanlig statistisk metod såg det ut som om kroppen och ringen inte hade med varandra att göra. En annan metod visade att samma benrörelser påverkar både ringens snurr och dess vickning, och att även foten är med och driver.",
+    category: "Mekanik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-11-10-rockringens-fysik.jpg",
+    imageAlt: "Ett tiotal kvinnor står utspridda på ett kullerstenstorg framför en tegelbyggnad med blomlådor i fönstren och skylten Rathaus ovanför entrén. De flesta har en rockring runt midjan. Kvinnan i förgrunden har armarna uppe och ringen lutar lite runt hennes höfter. Till höger filmar en kvinna med sin mobiltelefon.",
+    imageCredit: "Foto: Kürschner, rockringning framför rådhuset i Düsseldorf i juli 2024, via Wikimedia Commons (CC0). Beskuren till bredformat.",
+    tags: ["mekanik", "rockring", "rotation", "vinkelhastighet", "biomekanik", "rörelsesensor", "gyroskop", "principalkomponentanalys", "nätverksanalys", "olinjär dynamik", "friktion"],
+    sources: [
+      { name: "Phys.org: Decoding the loopy physics of hula hooping (University of California, Berkeley, oktober 2026)", url: "https://phys.org/news/2026-10-decoding-loopy-physics-hula-hooping.html" },
+      { name: "Nonlinear Dynamics: studien i fulltext (öppen, CC BY 4.0)", url: "https://link.springer.com/article/10.1007/s11071-026-13058-7" },
+      { name: "PNAS: Zhu, Pomerenk och Ristroph, ”Geometrically modulated contact forces enable hula hoop levitation” (2025), om kroppsformen", url: "https://doi.org/10.1073/pnas.2411588121" }
+    ],
+    research: {
+      citation: "C. Chern, T. E. Honein och O. M. O'Reilly, ”The symphony of gyrations producing steady motions of a hula hoop: insights from a network analysis”, Nonlinear Dynamics 114, 1192 (2026), publicerad 28 september 2026. Kollegialt granskad.",
+      url: "https://doi.org/10.1007/s11071-026-13058-7"
+    },
+    larare: {
+      moment: [
+        { label: "Period, frekvens, radianer och vinkelhastighet", href: "katalog.html?id=fy2-1.4" },
+        { label: "Cirkulär rörelse", href: "katalog.html?id=fy2-1.5" },
+        { label: "Friktion", href: "katalog.html?id=fy1-3.6" }
+      ],
+      fragor: [
+        "Ringen snurrade 1,35 varv per sekund. Räkna om det till vinkelhastighet i radianer per sekund och jämför med forskarnas värde på omkring 8,5 rad/s.",
+        "Ringen ska hållas uppe trots tyngdkraften. Vilka krafter verkar på ringen där den ligger an mot kroppen, och vilken av dem måste ha en del som pekar uppåt?",
+        "Studien bygger på en enda person. Varför kan en sådan mätning ändå vara värdefull, och vad skulle du vilja mäta för att pröva om resultaten gäller fler?"
+      ]
+    },
+    body: [
+      { type: "p", html: "Rockringen blev en världsfluga när leksaksföretaget Wham-O började tillverka den i plast i slutet av 1950-talet, men ringar som hålls i gång runt kroppen är mycket äldre än så. Exakt hur det går till är ändå inte utrett. Ringen ska både snurra runt kroppen och hålla sig uppe mot tyngdkraften, och det enda som driver den är små rörelser i höfter och ben." },
+      { type: "p", html: "Nu har Chrystal Chern och Oliver O'Reilly vid University of California, Berkeley, och Theresa Honein, numera vid American University of Beirut, mätt på både kroppen och ringen samtidigt. Studien publicerades i den öppet tillgängliga tidskriften <em>Nonlinear Dynamics</em> den 28&nbsp;september." },
+      { type: "h2", text: "Sensorer på ringen och benet" },
+      { type: "p", html: "Forskarna använde fyra små rörelsesensorer på 11,2&nbsp;gram vardera. Varje sensor rymmer accelerometrar, gyroskop och magnetometrar, samma sorts komponenter som finns i en mobiltelefon. En sensor satt på ringen, som hade radien 41,5&nbsp;cm och vägde 243&nbsp;gram. De tre andra satt på högra benet: mitt på lårbenet, mitt på skenbenet och på mellanfoten. Höften gick inte att mäta på, eftersom ringen hela tiden ligger an mot den. Sensorerna registrerade vinkelhastigheten, alltså hur snabbt och kring vilken axel varje del vred sig, 120&nbsp;gånger per sekund." },
+      { type: "p", html: "Enligt universitetets pressmeddelande var det Chrystal Chern, som tidigare varit gymnast, som själv stod i ringen. Hon gjorde nio försök på 20–30&nbsp;sekunder vardera, i strumplästen på ett trägolv så att friktionen mot golvet skulle bli densamma varje gång. Ur varje försök användes de 10–15&nbsp;sekunder då ringen snurrade jämnt." },
+      { type: "h2", text: "Ringen snurrar långsammare än höfterna" },
+      { type: "p", html: "Benets rörelser upprepades knappt två gånger per sekund, 1,96&nbsp;Hz. Ringen själv snurrade 1,35&nbsp;varv per sekund, vilket motsvarar en vinkelhastighet på omkring 8,5&nbsp;radianer per sekund. Ringens vickning upp och ned var ännu långsammare, 0,63&nbsp;gånger per sekund." },
+      { type: "p", html: "Att ringen snurrar långsammare än höfterna stämmer med en tidigare modell av ringens rörelse i ett plan, där höfternas tyngdpunkt går runt i en liten ellips. Där gäller $\\omega = \\Omega \\cdot \\left(1 - \\dfrac{r}{R}\\right)$, där $\\omega$ är ringens vinkelhastighet, $\\Omega$ hur snabbt höfterna går runt, $r$ midjans radie och $R$ ringens radie. Det är samma samband som för en ring som rullar runt en mindre cirkel utan att glida. Forskarna löste ut $r$ ur de uppmätta värdena och fick 12,9&nbsp;cm, vilket motsvarar ett midjemått på 81&nbsp;cm. Det är ett rimligt mått, och det tyder på att mätningarna hänger ihop med modellen." },
+      { type: "h2", text: "Den vanliga metoden såg inget samband" },
+      { type: "p", html: "Tidigare studier, bland annat en från 2004, hade bara mätt på kroppen och använt principalkomponentanalys, en vanlig statistisk metod som letar fram de mönster som förklarar mest av variationen i en stor mängd data. Slutsatsen blev att två skilda rörelsemönster i höfter, knän och fotleder sköter var sin sak: det ena håller ringen snurrande, det andra håller den uppe. Den hypotesen hade aldrig prövats med mätningar på själva ringen." },
+      { type: "p", html: "När Berkeleygruppen gjorde samma sorts analys med ringen inräknad blev resultatet förbryllande. De två starkaste mönstren bestod nästan bara av benets rörelser och de två nästa nästan bara av ringens. Det såg alltså ut som om kroppen och ringen rörde sig oberoende av varandra." },
+      { type: "quote", html: "Vi blev verkligen överraskade. De dominerande resultaten […] visar att kroppens rörelse inte påverkade rockringen alls, och tvärtom.", cite: "Oliver O'Reilly, University of California, Berkeley, i universitetets pressmeddelande (översatt)" },
+      { type: "p", html: "Förklaringen är att principalkomponentanalys bara hittar linjära samband, där storheterna ändras i proportion till varandra. Kontakten mellan ring och kropp ger rörelseekvationer som inte är linjära, och dessutom snurrar ringen i en helt annan takt än benet rör sig." },
+      { type: "h2", text: "Ett nätverk av rörelser" },
+      { type: "p", html: "Forskarna bytte därför till funktionell nätverksanalys, en metod som använts för att studera hur svängande system påverkar varandra. Varje mätserie görs om till ett nätverk där två ögonblick kopplas ihop om rörelsen då var nästan likadan. Genom att jämföra nätverken för ringen och för benet går det att se åt vilket håll påverkan går, inte bara att två rörelser hänger ihop." },
+      { type: "image", src: "nyheter/bilder/2026-11-10-rockringens-fysik-2.jpg", alt: "Diagram med prickar i fyra färger ordnade i ringar. Blå prick är ringen, lila lårbenet, grön skenbenet och orange mellanfoten. Svarta pilar går från de färgade prickarna till den blå. I den nedre raden, märkt Hoop Rotation, går pilar från lårbenet, två från skenbenet och en från mellanfoten, tjockast från lårbenet och skenbenet. I den övre raden, märkt Hoop Wobbling, går i varje ruta bara en pil, från lårbenet. Till höger en tecknad människa i profil med en ring runt midjan och små pilar som visar sensorernas lägen på lår, smalben och fot.", caption: "Vilka benrörelser som påverkar ringen, sammanvägt över alla nio försöken. Övre raden gäller ringens vickning, nedre raden dess snurr, med två olika mått på påverkan i vänster och mitten. Ju tjockare pil, desto starkare påverkan. Till höger syns var sensorerna satt på benet och ringen.", credit: "Figur: Chern, Honein och O'Reilly, Nonlinear Dynamics 114, 1192 (2026), figur 1 (CC BY 4.0)" },
+      { type: "p", html: "Nu syntes sambanden. Ringens snurr påverkades av att lårbenet och skenbenet vred sig inåt och utåt kring sina egna längdaxlar, av att knät böjdes och sträcktes och av att foten rullade från insidan till utsidan. Att foten och fotleden var så viktiga överraskade forskarna, enligt pressmeddelandet. Ringens vickning hängde bara ihop med lårbenets vridning, och det sambandet var svagare och mer osäkert." },
+      { type: "p", html: "Eftersom lårbenet inte kan vridas utan att skenbenet följer med går det inte att dela upp rörelserna i en del som håller ringen snurrande och en annan som håller den uppe, tvärtemot den gamla hypotesen. Kroppens rörelser påverkade dessutom snurret tydligt mer än vickningen." },
+      { type: "h2", text: "En enda person i ringen" },
+      { type: "p", html: "Studien bygger på en enda person, och forskarna skriver själva att siffrorna inte ska generaliseras. Tidigare mätningar har visat att olika personer kan hålla ringen i gång med olika rörelser, och det är fortfarande öppet om det finns ett sätt att röra sig där snurret och lyftet går att skilja åt. Sensorn på ringen ändrade också ringens tröghetsmoment med 4,4&nbsp;procent, men forskarna märkte ingen skillnad i hur ringen drevs med och utan sensorn." },
+      { type: "p", html: "Forskarna hoppas att metoden ska komma till användning i rehabilitering, till exempel för att se vilka rörelser som hjälper en patient att gå med rullator, eller för roddare som vill veta hur kroppens rörelser hänger ihop med kraften i årorna. Poängen är då att mäta både på människan och på det hon använder: rullatorn, åran och båten." },
+      { type: "fact", title: "Visste du?", items: [
+        "Forskare vid New York University visade med robotar i slutet av 2024 att kroppens form avgör om ringen kan hållas uppe. Kroppen behöver lutande ”höfter” för att ringen inte ska glida ned, och en tillräckligt markerad ”midja” för att ringen ska ligga stabilt.",
+        "Yuya Yamada satte 2017 världsrekord genom att hålla i gång en rockring som var 5,14&nbsp;meter stor. Hans teknik ser helt annorlunda ut än en vanlig rockringares, vilket visar att det finns många sätt att driva en ring.",
+        "Oliver O'Reilly har tidigare undersökt varför skosnören går upp av sig själva och hur den klotformade roboten BB-8 i Star Wars kan rulla."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-09-isjattarnas-vingliga-magnetfalt",
     date: "2026-11-09",
     title: "Uranus och Neptunus magnetfält kan ha vridit sig sedan Voyager 2 flög förbi",

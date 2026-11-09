@@ -63,6 +63,42 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'principalkomponentanalys',
+    term: 'Principalkomponentanalys',
+    former: ['principalkomponentanalys', 'principalkomponentanalysen', 'principalkomponentanalyser', 'principalkomponentanalyserna', 'principalkomponent', 'principalkomponenten', 'principalkomponenter', 'principalkomponenterna'],
+    kort: 'En statistisk metod som letar fram de få mönster som förklarar det mesta av variationen i en stor mängd mätdata. Den hittar bara samband där storheterna ändras i proportion till varandra.',
+    relaterade: ['funktionell-natverksanalys'],
+    body: [
+      { type: 'p', html: 'Tänk dig att du mäter längd, armspann, skostorlek och vikt hos hundra personer. De fyra måtten hänger ihop: den som är lång har oftast också långa armar och stora fötter. I stället för fyra separata tal kan man därför beskriva varje person ganska bra med ett enda mått på hur stor hon är i allmänhet, plus några små avvikelser. Principalkomponentanalys gör just det, automatiskt och för hur många mätserier som helst.' },
+      { type: 'p', html: 'Metoden letar först upp den kombination av mätvärden som varierar mest mellan mätningarna. Det är den första principalkomponenten. Sedan letar den upp den kombination som förklarar mest av det som är kvar, och så vidare. Ofta räcker två eller tre komponenter för att beskriva det mesta av vad som händer, och då har man fått en överskådlig bild av ett stort och rörigt datamaterial. Metoden används överallt, från rörelseanalys av hur människor går och springer till ansiktsigenkänning och klimatdata.' },
+      { type: 'p', html: 'Begränsningen är att metoden bara ser linjära samband, där ett mätvärde ökar eller minskar i takt med ett annat. Hänger två storheter ihop på ett krångligare sätt, till exempel om de svänger i olika takt eller bara påverkar varandra korta stunder, kan metoden få det att se ut som om de inte har något med varandra att göra. Då behövs olinjära metoder.' }
+    ]
+  },
+  {
+    id: 'funktionell-natverksanalys',
+    term: 'Funktionell nätverksanalys',
+    former: ['funktionell nätverksanalys', 'funktionella nätverksanalysen', 'funktionellt nätverk', 'funktionella nätverk'],
+    kort: 'En metod som gör om mätserier till nätverk för att avslöja hur olika delar av ett system påverkar varandra, och åt vilket håll påverkan går. Den klarar samband som inte är proportionella.',
+    relaterade: ['principalkomponentanalys'],
+    body: [
+      { type: 'p', html: 'En gunga, ett hjärta eller en rockring återkommer hela tiden till ungefär samma lägen. Den egenskapen kan man använda. Ta en mätserie, till exempel hur snabbt ett lårben vrider sig, och låt varje mätögonblick bli en punkt. Dra sedan ett streck mellan två punkter om rörelsen var nästan likadan vid de två tillfällena. Resultatet blir ett nätverk, ungefär som en karta över vänskaper där de som liknar varandra är sammankopplade.' },
+      { type: 'p', html: 'Har man två mätserier, till exempel ett ben och en ring det driver, kan man också dra streck mellan ögonblick i den ena och ögonblick i den andra. Genom att räkna hur ofta strecken bildar små trianglar åt det ena eller det andra hållet går det att se om benet påverkar ringen mer än ringen påverkar benet. Metoden ser alltså inte bara att två saker hänger ihop, utan också vem som styr vem.' },
+      { type: 'p', html: 'Styrkan är att metoden inte förutsätter att sambanden är linjära. Därför fungerar den för system med stötar, kontakter och svängningar i olika takt, där enklare statistik ofta missar kopplingarna. Den har använts för att studera hur svängande system synkroniseras, och kan användas för att analysera hur människor rör sig, till exempel vid rehabilitering.' }
+    ]
+  },
+  {
+    id: 'gyroskop',
+    term: 'Gyroskop',
+    former: ['gyroskop', 'gyroskopet', 'gyroskopen', 'gyrosensor', 'gyrosensorn', 'gyrosensorer'],
+    kort: 'Ett instrument som mäter hur snabbt något vrider sig, eller som håller en fast riktning i rummet. Små gyroskop av kisel finns i nästan alla mobiltelefoner.',
+    relaterade: ['magnetometer', 'troghetsmoment'],
+    body: [
+      { type: 'p', html: 'Det klassiska gyroskopet är ett tungt hjul som snurrar fort i en upphängning där det kan vrida sig fritt. Så länge hjulet snurrar pekar dess axel envist åt samma håll, hur man än vrider och vänder på upphängningen. Det beror på att ett snurrande föremål har ett rörelsemängdsmoment, och det ändras inte om inget vrider på hjulet.' },
+      { type: 'p', html: 'De gyroskop som finns i mobiltelefoner, spelkontroller och rörelsesensorer ser helt annorlunda ut. De är några tiondels millimeter stora strukturer av kisel som svänger fram och tillbaka. När hela kretsen vrids får den svängande delen en liten sidoknuff, och den knuffen går att mäta elektriskt. Ut kommer vinkelhastigheten, alltså hur många grader eller radianer per sekund sensorn vrider sig, kring tre axlar på en gång.' },
+      { type: 'p', html: 'Ofta sitter gyroskopet tillsammans med en accelerometer, som mäter acceleration, och en magnetometer, som känner av jordens magnetfält. Tillsammans kan de räkna ut hur sensorn är vänd och hur den rör sig. Det används i allt från flygplan och drönare till stegräknare och forskning om hur människor rör sig.' }
+    ]
+  },
+  {
     id: 'poissons-tal',
     term: 'Poissons tal',
     former: ['poissons tal', 'poissontal', 'poissontalet'],

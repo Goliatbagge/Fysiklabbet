@@ -523,7 +523,7 @@
            .lab-graf/.lab-handskrift.) Neutralisera ev. ärvd kursiv stil. */
         '.minisim-iframe{display:block;width:100%;aspect-ratio:560/430;border:0;',
         '.ms-simsida-ram{aspect-ratio:auto;height:760px;background:transparent;border-radius:6px;}',
-        '.minisim-card a.ms-simsida-lank{display:inline-block;margin-top:8px;font-size:14px;color:#2563c9 !important;text-decoration:underline !important;}',
+        '.minisim-title a.ms-simsida-lank{font-size:inherit;}',
         '  border-radius:4px;background:#eef0ee;}',
         /* Situationsväxlare (typ: cirkularrorelse) — uppe till höger på
            scenen, samma stil som simuleringssidornas sim-switch (mörk
@@ -16774,8 +16774,8 @@
     // formelkort och förklaringar). Iframen får samma höjd som sidans
     // innehåll (samma ursprung, så höjden kan mätas direkt), och följer med
     // när innehållet ändrar höjd. Fullskärm startas med scenens egen .fs-btn
-    // inne i iframen. Under kortet länkar "Öppna hela simuleringen" till
-    // sidan i eget fönster.
+    // inne i iframen. Rubriken (titel:) är en länk som öppnar sidan i en
+    // egen flik.
     //   src:   simuleringssidans filnamn (obligatoriskt), t.ex.
     //          fysik2-ljudniva-app.html
     //   titel: liten rubrik ovanför (valfritt)
@@ -16784,12 +16784,17 @@
         if (!/\.html$/.test(src)) return;
         var card = document.createElement('div');
         card.className = 'minisim-card ms-ljus ms-bred ms-simsida';
-        if (cfg.titel) {
-            var t = document.createElement('div');
-            t.className = 'minisim-title';
-            t.textContent = cfg.titel;
-            card.appendChild(t);
-        }
+        // Rubriken är en länk till den fristående simuleringen (ny flik)
+        var t = document.createElement('div');
+        t.className = 'minisim-title';
+        var lank = document.createElement('a');
+        lank.className = 'ms-simsida-lank artikel-lank';
+        lank.href = src;
+        lank.target = '_blank';
+        lank.rel = 'noopener';
+        lank.textContent = cfg.titel || 'Öppna simuleringen';
+        t.appendChild(lank);
+        card.appendChild(t);
         var iframe = document.createElement('iframe');
         iframe.className = 'minisim-iframe ms-simsida-ram';
         iframe.src = src + '?embed=1&mini=1&v=' + (window.__CB || Date.now());
@@ -16799,13 +16804,6 @@
         iframe.title = cfg.titel || 'Simulering';
         card.appendChild(iframe);
 
-        var lank = document.createElement('a');
-        lank.className = 'ms-simsida-lank artikel-lank';
-        lank.href = src;
-        lank.target = '_blank';
-        lank.rel = 'noopener';
-        lank.textContent = 'Öppna hela simuleringen';
-        card.appendChild(lank);
         node.appendChild(card);
 
         // Höjden följer sidans innehåll

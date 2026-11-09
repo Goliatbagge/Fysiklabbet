@@ -38,8 +38,8 @@ så $K(x) = 25\,000 \cdot 1{,}02^x$.
 :::
 
 ::: formel "Exponentiell förändring"
-Om man ska ställa upp en formel för en exponentiell förändring (något som
-ökar/minskar med en viss procent med tiden) gäller:
+Om vi ska ställa upp en formel för en exponentiell förändring (något som
+förändras med en viss procent) gäller:
 
 $$
 y = Ca^x

@@ -16,17 +16,34 @@ Det som kännetecknar en exponentialfunktion är att värdet
 **multipliceras med samma tal** varje gång $x$ ökar med 1. Talet är
 förändringsfaktorn, som du känner igen från ränteberäkningarna. En linjär
 funktion fungerar på ett annat sätt: där **adderas** samma tal i varje
-steg. Tabellen visar skillnaden för $y = 2x$ och $y = 2^x$.
+steg. Tabellen visar skillnaden för $y = 2x$, $y = 10x$ och $y = 2^x$.
 
-| $x$ | 0 | 1 | 2 | 3 | 4 | 5 | 10 |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| $y = 2x$ | 0 | 2 | 4 | 6 | 8 | 10 | 20 |
-| $y = 2^x$ | 1 | 2 | 4 | 8 | 16 | 32 | 1 024 |
+| $x$ | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 10 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| $y = 2x$ | 0 | 2 | 4 | 6 | 8 | 10 | 12 | 20 |
+| $y = 10x$ | 0 | 10 | 20 | 30 | 40 | 50 | 60 | 100 |
+| $y = 2^x$ | 1 | 2 | 4 | 8 | 16 | 32 | 64 | 1 024 |
 
-En exponentiell ökning går alltså långsamt i början men blir allt
-snabbare. Förr eller senare går den om varje linjär ökning, hur brant
-linjen än är. En exponentiell minskning blir i stället allt långsammare
-och närmar sig noll utan att någonsin nå dit.
+Den linjära funktionen $y = 10x$ ligger länge långt före, men vid
+$x = 6$ har $y = 2^x$ gått om. En exponentiell ökning går långsamt i
+början men blir allt snabbare, och förr eller senare går den om varje
+linjär ökning, hur brant linjen än är. En exponentiell minskning blir i
+stället allt långsammare. Är startvärdet positivt närmar sig värdet noll
+utan att någonsin nå dit.
+
+Exponentialfunktioner dyker upp så fort något förändras med **samma
+procent** per tidsenhet, till exempel
+
+- pengar på ett sparkonto som växer med räntan,
+- en befolkning som ökar med en viss procent per år,
+- bakterier som delar sig och fördubblas i antal,
+- en bil som tappar en viss procent av sitt värde varje år,
+- ett läkemedel som bryts ned i kroppen,
+- radioaktiva ämnen som sönderfaller.
+
+I vardagen säger man ofta att något ”växer exponentiellt” när det bara
+växer snabbt. I matematiken betyder ordet något precist: värdet
+förändras med samma faktor i varje steg.
 
 ::: kuriosa "Riskornen på schackbrädet"
 Enligt en gammal berättelse fick schackspelets uppfinnare önska sig en
@@ -43,7 +60,9 @@ Ett korn på första rutan, och sedan dubbelt så många på varje ny ruta.
 <p class="lab-foto-kalla" data-bild="Riskornen på schackbrädet">Illustration: AI-genererad bild (Google Gemini)</p>
 :::
 
-Antalet korn på ruta $x$ är $y = 2^{x-1}$, en exponentialfunktion med
+Låt $x$ vara antalet fördubblingar. På första rutan har ingen
+fördubbling skett ännu, så där är $x = 0$, och på ruta 64 har det skett
+63 fördubblingar. Antalet korn är $y = 2^x$, en exponentialfunktion med
 startvärdet 1 och förändringsfaktorn 2. Tabellen visar hur många korn
 som ligger på några av rutorna.
 
@@ -59,32 +78,19 @@ Detta är karakteristiskt för exponentiell tillväxt. Förändringshastigheten
 är långsam i början för att sedan öka kraftigt på slutet.
 :::
 
-Exponentialfunktioner dyker upp så fort något förändras med **samma
-procent** per tidsenhet, till exempel
-
-- pengar på ett sparkonto som växer med räntan,
-- en befolkning som ökar med en viss procent per år,
-- bakterier som delar sig och fördubblas i antal,
-- en bil som tappar en viss procent av sitt värde varje år,
-- ett läkemedel som bryts ned i kroppen,
-- radioaktiva ämnen som sönderfaller.
-
-I vardagen säger man ofta att något ”växer exponentiellt” när det bara
-växer snabbt. I matematiken betyder ordet något precist: värdet
-förändras med samma faktor i varje steg.
-
 ## Från procent till formel
 
 Anta att 25 000 kr sätts in på
 ett konto där kapitalet ökar med 2 % varje år. Förändringsfaktorn för en
-ökning med 2 % är 1,02, så varje år multipliceras kapitalet med 1,02.
+ökning med 2 % är 1,02 (100 % + 2 % = 102 % = 1,02), så
+varje år multipliceras kapitalet med 1,02.
 Tabellen visar kapitalet år för år.
 
 | Tid | Kapital (kr) |
 | --- | --- |
 | 0 år | $25\,000$ |
 | 1 år | $25\,000 \cdot 1{,}02$ |
-| 2 år | $25\,000 \cdot 1{,}02^2$ |
+| 2 år | $25\,000 \cdot 1{,}02 \cdot 1{,}02 = 25\,000 \cdot 1{,}02^2$ |
 | 3 år | $25\,000 \cdot 1{,}02^3$ |
 | $x$ år | $25\,000 \cdot 1{,}02^x$ |
 
@@ -108,11 +114,14 @@ $$
 
 där
 
-- $y$ = värdet efter en viss tid
-- $C$ = ursprungliga värdet
-- $a$ = förändringsfaktorn
+- $y$ = värde efter $x$ förändringar
+- $C$ = startvärde
+- $a$ = förändringsfaktor
 - $x$ = antal förändringar (ofta tid)
 :::
+
+Förändringsfaktorn är alltid positiv och skild från 1 ($a > 0$ och
+$a \neq 1$). Med $a = 1$ ändras ingenting, och grafen blir en vågrät linje.
 
 ::: exempel "Exempel 1 — Tolka en exponentialfunktion"
 **En bils värde $V$ efter $t$ år ges av funktionen
@@ -124,11 +133,14 @@ typ: tolkaexp
 :::
 
 ::: textlosning
-Jämför med formeln $y = Ca^x$ ovan: 180 000 motsvarar $C$ (det
-ursprungliga värdet) och 0,85 motsvarar $a$ (förändringsfaktorn).
+Jämför med formeln $y = Ca^x$ ovan: 180 000 motsvarar $C$
+(startvärdet) och 0,85 motsvarar $a$ (förändringsfaktorn).
 
-**Svar:** Bilens nyvärde (ursprungliga värde) är 180 000 kr och värdet
-minskar varje år med 15 % (förändringsfaktorn är 0,85).
+Förändringsfaktorn är mindre än 1, så värdet minskar. Eftersom
+$0{,}85 = 1 - 0{,}15$ minskar värdet med 15 % per år.
+
+**Svar:** Startvärdet, bilens pris som ny, är 180 000 kr, och värdet
+minskar med 15 % per år.
 :::
 :::
 
@@ -149,7 +161,7 @@ beskriva radioaktivt sönderfall.
 :::
 
 Undersök själv hur $C$ och $a$ formar exponentialfunktionen. Den röda
-pricken visar skärningen med *y*-axeln — den ligger alltid i höjd med $C$,
+pricken visar skärningen med *y*-axeln. Den ligger alltid i höjd med $C$,
 eftersom $y = C \cdot a^0 = C$ när $x = 0$. Prova värden på
 förändringsfaktorn $a$ både över och under 1.
 
@@ -179,9 +191,9 @@ Testar att beräkna några punkter på $f(x) = 3^x$:
 
 $f(0) = 3^0 = 1$, så (0, 1) ska vara på kurvan (stämmer).
 
-$f(1) = 3^1 = 3$, så (1, 3) ska vara på kurvan (stämmer ej!).
+$f(1) = 3^1 = 3$, så (1, 3) ska vara på kurvan (stämmer inte).
 
-Slutsats: $f(x) = 3^x$ är INTE uppritad.
+Slutsats: $f(x) = 3^x$ är inte den uppritade funktionen.
 
 Testar att beräkna några punkter på $g(x) = 2^x$:
 
@@ -189,7 +201,7 @@ $g(0) = 2^0 = 1$, så (0, 1) ska vara på kurvan (stämmer).
 
 $g(1) = 2^1 = 2$, så (1, 2) ska vara på kurvan (stämmer).
 
-Slutsats: $g(x) = 2^x$ är uppritad!
+Slutsats: $g(x) = 2^x$ är den uppritade funktionen.
 
 **Svar:** $g(x) = 2^x$
 :::
@@ -199,22 +211,23 @@ Slutsats: $g(x) = 2^x$ är uppritad!
 
 ::: sampunkt "Exponentialfunktion"
 - Den oberoende variabeln står **i exponenten**.
-- Värdet **multipliceras med samma tal** i varje steg.
+- Värdet **multipliceras med samma tal** i varje steg. En linjär
+  funktion **adderar** i stället samma tal.
 - $y = C a^{x}$
-- $C$ är **ursprungsvärdet**, $a$ är **förändringsfaktorn** och $x$ är
+- $C$ är **startvärdet**, $a$ är **förändringsfaktorn** och $x$ är
   antalet förändringar (ofta tiden).
 :::
 
 ::: sampunkt "Ställa upp formeln"
-- $C$ är startvärdet, $a$ räknas fram ur den procentuella förändringen.
+- Ökning med $p$ %: $a = 1 + \dfrac{p}{100}$. Minskning: $a = 1 - \dfrac{p}{100}$.
 - $+2\ \%$ per år ger $a = 1{,}02$, alltså
   $K(x) = 25\,000 \cdot 1{,}02^{x}$.
 :::
 
 ::: sampunkt "Tolka en färdig funktion"
-- $V(t) = 180\,000 \cdot 0{,}85^{t}$: nyvärdet är
+- $V(t) = 180\,000 \cdot 0{,}85^{t}$: startvärdet är
   $180\,000$ kr och värdet **minskar med 15 %** per år.
-- Dra bort 1 från faktorn för att få den procentuella förändringen.
+- $0{,}85 = 1 - 0{,}15$, alltså en minskning med 15 %.
 :::
 
 ::: sampunkt "Grafens utseende"
@@ -223,6 +236,6 @@ Slutsats: $g(x) = 2^x$ är uppritad!
   sönderfall.
 - Grafen skär $y$-axeln i $C$, eftersom
   $C \cdot a^{0} = C$.
-- Kurvan närmar sig $x$-axeln men **når den aldrig**.
+- Med $C > 0$ närmar sig kurvan $x$-axeln men **når den aldrig**.
 :::
 :::

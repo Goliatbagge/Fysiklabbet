@@ -16135,13 +16135,13 @@
       [['C står först, före']],
       [['multiplikationstecknet. Det']],
       [['är värdet vid tiden noll,']],
-      [['alltså bilens nypris.']]
+      [['startvärdet: priset som ny.']]
     ]);
     var r1 = substRings(acts, [[xg0 + T.adv('y='), xg0 + T.adv('y=C'), yg, F],
                                [xv0 + T.adv('V(t)='),
                                 xv0 + T.adv('V(t)=180 000'), y, F]]);
     y += 3.4 * F;
-    T.str('C=180 000 kr (nypriset)', padL, y);
+    T.str('C=180 000 kr (startvärdet)', padL, y);
     fadeRings(acts, r1);
     T.stepEnd();
 
@@ -16155,16 +16155,24 @@
     T.stepEnd();
 
     tanke(y, [
-      [['0,85 är MINDRE än 1, alltså']],
-      [['en minskning. Hur stor?']],
-      [['Avståndet upp till 1.']]
+      [['0,85 är mindre än 1, alltså']],
+      [['en minskning. Jag skriver']],
+      [['0,85 som 1 minus något.']]
     ]);
     y += 2.8 * F;
-    T.str('1-0,85=0,15=15 %', padL, y);
+    T.str('0,85=1-0,15', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['0,15 är 15 %. Varje år']],
+      [['försvinner 15 % av värdet.']]
+    ]);
+    y += 2.8 * F;
+    T.str('Minskning: 0,15=15 % per år', padL, y);
     T.stepEnd();
 
     y += 2.8 * F;
-    xe = T.str('Svar: Nypriset 180 000 kr, och', padL, y);
+    xe = T.str('Svar: Startvärdet är 180 000 kr, och', padL, y);
     T.stepEnd();
     y += 2.2 * F;
     xe = T.str('värdet minskar 15 % per år', padL, y);
@@ -16181,23 +16189,25 @@
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
     var tanke = mkTanke(T);
 
+    /* samma graf som i uppgiften (REGEL SAMMA GRAF SOM I UPPGIFTEN):
+     * y = 2^x för x från −3 till 2,43 (där y ≈ 5,4), axlar −3…2 och 0…5 */
     var A = mkAxes(T, F, { ox: padL + 130, oy: 250, u: 30,
-                           xmin: -2, xmax: 3, ymin: -1, ymax: 5 });
+                           xmin: -3, xmax: 2, ymin: 0, ymax: 5 });
     /* grafen är given i uppgiften: den står färdig från början (REGEL
      * UPPGIFTENS FIGUR STÅR FÄRDIG FRÅN BÖRJAN) */
     forritad(T, function () {
       A.axes();
-      A.ticks(heltal(-2, 3), heltal(-1, 5), [-2, -1, 1, 2, 3], [1, 2, 3, 4, 5]);
+      A.ticks(heltal(-3, 2), heltal(0, 5), [-3, -2, -1, 1, 2], [1, 2, 3, 4, 5]);
       T.pause(150);
       var pts = [], t;
-      for (t = -2; t <= 2.3001; t += 0.2) pts.push([A.X(t), A.Y(Math.pow(2, t))]);
+      for (t = -3; t <= 2.4301; t += 0.1) pts.push([A.X(t), A.Y(Math.pow(2, t))]);
       acts.push({ kind: 'stroke', pts: humanize(pts), color: BLUE });
     });
 
     tanke(360, [
       [['Båda funktionerna går genom']],
-      [['(0, 1), för allt upphöjt till']],
-      [['noll är 1. Den punkten']],
+      [['(0, 1), för både 3 och 2']],
+      [['upphöjt till 0 är 1. Punkten']],
       [['skiljer dem alltså inte åt.']]
     ], 0);
     A.dot(0, 1);
@@ -16219,7 +16229,7 @@
     T.stepEnd();
 
     y += 2.8 * F;
-    T.str('(1, 3) ligger ÖVER kurvan, stämmer ej', padL, y, null, 0.62);
+    T.str('(1, 3) ligger över kurvan, stämmer inte', padL, y, null, 0.62);
     g.forEach(function (st) { T.fade(st); });
     T.stepEnd();
 
@@ -16234,12 +16244,12 @@
     T.stepEnd();
 
     tanke(y, [
-      [['(1, 2) ligger PÅ kurvan.']],
+      [['(1, 2) ligger på kurvan.']],
       [['Både (0, 1) och (1, 2)']],
       [['stämmer, så det är g.']]
     ]);
     y += 2.8 * F;
-    T.str('(1, 2) ligger PÅ kurvan, stämmer', padL, y, null, 0.62);
+    T.str('(1, 2) ligger på kurvan, stämmer', padL, y, null, 0.62);
     g2.forEach(function (st) { T.fade(st); });
     T.stepEnd();
 

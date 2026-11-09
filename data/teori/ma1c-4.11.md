@@ -71,7 +71,7 @@ förändras med samma faktor i varje steg.
 
 ## Från procent till formel
 
-Ett exempel visar varifrån formeln kommer. Anta att 25 000 kr sätts in på
+Anta att 25 000 kr sätts in på
 ett konto där kapitalet ökar med 2 % varje år. Förändringsfaktorn för en
 ökning med 2 % är 1,02, så varje år multipliceras kapitalet med 1,02.
 Tabellen visar kapitalet år för år.

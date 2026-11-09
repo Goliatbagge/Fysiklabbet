@@ -12,6 +12,36 @@ section: '4.11'
 En funktion där den oberoende variabeln, till exempel $x$, står i
 **exponenten** kallas **exponentialfunktion**.
 
+Det som kännetecknar en exponentialfunktion är att värdet
+**multipliceras med samma tal** varje gång $x$ ökar med 1. Talet är
+förändringsfaktorn, som du känner igen från ränteberäkningarna. En linjär
+funktion fungerar på ett annat sätt: där **adderas** samma tal i varje
+steg. Tabellen visar skillnaden för $y = 2x$ och $y = 2^x$.
+
+| $x$ | 0 | 1 | 2 | 3 | 4 | 5 | 10 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| $y = 2x$ | 0 | 2 | 4 | 6 | 8 | 10 | 20 |
+| $y = 2^x$ | 1 | 2 | 4 | 8 | 16 | 32 | 1 024 |
+
+En exponentiell ökning går alltså långsamt i början men blir allt
+snabbare. Förr eller senare går den om varje linjär ökning, hur brant
+linjen än är. En exponentiell minskning blir i stället allt långsammare
+och närmar sig noll utan att någonsin nå dit.
+
+Exponentialfunktioner dyker upp så fort något förändras med **samma
+procent** per tidsenhet, till exempel
+
+- pengar på ett sparkonto som växer med räntan,
+- en befolkning som ökar med en viss procent per år,
+- bakterier som delar sig och fördubblas i antal,
+- en bil som tappar en viss procent av sitt värde varje år,
+- ett läkemedel som bryts ned i kroppen,
+- radioaktiva ämnen som sönderfaller.
+
+I vardagen säger man ofta att något ”växer exponentiellt” när det bara
+växer snabbt. I matematiken betyder ordet något precist: värdet
+förändras med samma faktor i varje steg.
+
 ::: exempel "Exempel 1 — Kapital som växer"
 **Ett kapital på 25 000 kr ökar varje år med 2 %. Ange en formel för
 kapitalet $K$ kr efter $x$ år.**
@@ -138,6 +168,7 @@ Slutsats: $g(x) = 2^x$ är uppritad!
 
 ::: sampunkt "Exponentialfunktion"
 - Den oberoende variabeln står **i exponenten**.
+- Värdet **multipliceras med samma tal** i varje steg.
 - $y = C a^{x}$
 - $C$ är **ursprungsvärdet**, $a$ är **förändringsfaktorn** och $x$ är
   tiden.

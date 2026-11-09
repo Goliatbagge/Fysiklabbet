@@ -15945,6 +15945,15 @@
   function layoutMangderurgraf(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
     var tanke = mkTanke(T);
+    /* jämn handritad cirkel med radien 6, samma för tom ring och ifylld punkt */
+    function cirkel(cx, cy) {
+      var pts = [], n;
+      for (n = 0; n <= 26; n++) {
+        var v = -0.4 + (n / 26) * Math.PI * 2.08, r = 6 + rnd(-0.3, 0.3);
+        pts.push([cx + Math.cos(v) * r, cy + Math.sin(v) * r]);
+      }
+      return pts;
+    }
 
     /* kurvan är EXAKT uppgiftens graf (figuren i ma1c-4.10.md):
      * y = 4 − x², med en tom ring i (−1, 3), toppen i (0, 4) och en
@@ -15970,9 +15979,17 @@
       acts.push({ kind: 'stroke', pts: humanize(pts), color: BLUE });
       T.pause(180);
       /* öppen ring i vänsteränden, ifylld punkt i högeränden */
-      acts.push({ kind: 'stroke', pts: ringPts(A.X(-1), A.Y(fv(-1)), 5, 5), color: BLUE });
+      acts.push({ kind: 'stroke', pts: cirkel(A.X(-1), A.Y(fv(-1))), color: BLUE });
       T.pause(150);
-      A.dot(2, fv(2));
+      /* ifylld ring lika stor som den tomma (radie 5): ringen ritas och
+       * fylls sedan med en tät spiral, så att fyllningen syns tydligt */
+      var fx = A.X(2), fy = A.Y(fv(2)), fill = [], k;
+      acts.push({ kind: 'stroke', pts: cirkel(fx, fy), color: BLUE });
+      for (k = 0; k <= 40; k++) {
+        var fa = (k / 40) * Math.PI * 8, fr = 5.2 * (1 - k / 40);
+        fill.push([fx + Math.cos(fa) * fr, fy + Math.sin(fa) * fr]);
+      }
+      acts.push({ kind: 'stroke', pts: fill, color: BLUE });
     });
 
     tanke(500, [

@@ -12,6 +12,9 @@ window.OVNINGAR = {
 };
 ```
 
+> **På sajten visas nivåerna som Grund, Mellan och Avancerad, utan siffra**
+> (beslut 2026-11-09). Siffrorna och N1, N2, N3 nedan är interna.
+
 ## Nivåer
 
 - **Nivå 1** — Grund. Bara SI-omvandling och insättning i

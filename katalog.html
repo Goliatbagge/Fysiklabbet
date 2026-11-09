@@ -2963,9 +2963,12 @@
             const pennaKlar = useOvningPenna(showSolution ? uppgift.penna : null);
             const [losVy, setLosVy] = useState(lasHkVy);
             const pennaVy = pennaKlar && losVy === 'penna';
-            const levelLabel = uppgift.level === 1 ? 'Nivå 1 · Grundläggande'
-                             : uppgift.level === 2 ? 'Nivå 2 · Medel'
-                             : 'Nivå 3 · Avancerad';
+            /* Nivåerna heter Grund, Mellan och Avancerad på hela sajten
+             * (beslut 2026-11-09), utan siffra. Samma ord som i teorins
+             * exempelrubriker och på övningsbladen. */
+            const levelLabel = uppgift.level === 1 ? 'Grund'
+                             : uppgift.level === 2 ? 'Mellan'
+                             : 'Avancerad';
 
             const handleCheck = () => {
                 if (delar) {
@@ -3356,6 +3359,7 @@
                     </div>
                 );
             }
+            const NIVANAMN = { 1: 'Grund', 2: 'Mellan', 3: 'Avancerad' };
             const counts = { 1: 0, 2: 0, 3: 0 };
             for (const u of list) counts[u.level] = (counts[u.level] || 0) + 1;
             const filtered = selectedLevel === null
@@ -3375,7 +3379,7 @@
                                 className={`lab-ovningar-filter-btn lab-ovningar-filter-btn-level-${lvl}` + (selectedLevel === lvl ? ' active' : '')}
                                 disabled={counts[lvl] === 0}
                                 onClick={() => setSelectedLevel(lvl)}>
-                                Nivå {lvl} <span className="lab-ovningar-filter-count">{counts[lvl]}</span>
+                                {NIVANAMN[lvl]} <span className="lab-ovningar-filter-count">{counts[lvl]}</span>
                             </button>
                         ))}
                     </div>

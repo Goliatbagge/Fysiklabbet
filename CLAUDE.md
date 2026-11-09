@@ -4356,6 +4356,26 @@ A-nivå". Referens för ett blad med alla tre nivåerna:
    och dela för breda rader. En för bred formel klipps i PDF:en utan att
    något ser trasigt ut i webbläsaren.
 
+## Nivåerna heter Grund, Mellan och Avancerad, överallt
+
+**En uppgifts nivå skrivs med orden Grund, Mellan och Avancerad på hela
+sajten, utan siffra** (beslut 2026-11-09, efter samråd med pedagogen).
+Eleven ser exempel och övningar på samma sida, och olika ord på de två
+ställena läses som två olika skalor. Tidigare stod det "Nivå 1 ·
+Grundläggande", "Nivå 2 · Medel" och "Nivå 3 · Avancerad" vid övningarna,
+medan exempel och övningsblad sa Grund, Mellan och Avancerad.
+
+- **Övningarna** (`Ovning` och nivåfiltret i `katalog.html`): etiketten
+  är bara ordet.
+- **Teorins exempel** nivåmärks sist i rubriken:
+  `::: exempel "Exempel 2 — Spett mot sten (Mellan)"`.
+- **Övningsblad och diagnoser**: samma tre ord (se "Övningsblad" ovan).
+- Skriv aldrig Grundläggande, Medel, Medelsvår, Lätt eller Svår som
+  nivånamn, och aldrig betygsbokstäver. Orden ska säga var uppgiften
+  ligger, inte hur den känns.
+- I koden och i `OVNINGAR.md` finns siffrorna kvar (`level: 1`, N1, N2,
+  N3). De är interna och visas aldrig för besökaren.
+
 ## Övningar
 
 Se [`OVNINGAR.md`](OVNINGAR.md) för komplett guide:

@@ -47,7 +47,15 @@
         html.mini-mode .max-w-6xl { max-width: none; padding-top: 0 !important; }
         html.mini-mode .max-w-6xl > :not(main) { display: none !important; }
         html.mini-mode body.lab-sim .scene-wrap:not(:fullscreen) { height: 480px; }
-        html.mini-mode main .order-2 > :nth-child(2) { display: none !important; }
+        html.mini-mode main > .order-2 { display: none !important; }
+        /* Högtalarknappen (ljud av/på) bredvid fullskärmsknappen, samma runda stil */
+        body.lab-sim .ljud-btn { position: absolute; top: 14px; left: 66px; width: 40px; height: 40px; border-radius: 50%;
+            background: rgba(255,255,255,0.92); border: 1px solid var(--lab-line-strong); color: var(--lab-ink); cursor: pointer;
+            display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,0.18); z-index: 5;
+            transition: transform 0.15s ease, background 0.15s ease; }
+        body.lab-sim .ljud-btn:hover { transform: scale(1.08); background: var(--lab-bg); }
+        body.lab-sim .ljud-btn.pa { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+        @media (max-width: 600px) { body.lab-sim .ljud-btn { width: 32px; height: 32px; left: 54px; } }
         .dark-container { background: transparent; }
         .glass-card {
             background: var(--lab-bg, #f3eee4);
@@ -157,10 +165,6 @@
         .vy-seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
 
 
-        .jmf-rad { display: flex; justify-content: space-between; gap: 10px; font-size: 14px;
-                   padding: 4px 0; border-bottom: 1px dashed var(--lab-line, rgba(15,22,32,0.14)); color: var(--lab-ink); }
-        .jmf-rad:last-child { border-bottom: 0; }
-        .jmf-rad b { font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
 
         details > summary { list-style: none; cursor: pointer; }
         details > summary::-webkit-details-marker { display: none; }
@@ -1041,7 +1045,7 @@
             [0, 'Hörbarhetsgräns'], [20, 'Viskning'], [60, 'Samtal'], [75, 'Inuti en bil'],
             [85, 'Risk för hörselskada'], [120, 'Smärtgräns'], [140, 'Startande jetplan'],
         ];
-        const Stege = ({ L, sparad }) => {
+        const Stege = ({ L }) => {
             const BX = 56, BW = 16;
             return (
                 <svg viewBox="0 0 320 418" width="100%" style={{ display: 'block', maxWidth: 360, margin: '0 auto' }}
@@ -1079,12 +1083,6 @@
                             <text x={151} y={yDb(db) + 4} fontSize="12" fill="#3a404b">{db} dB: {namn}</text>
                         </g>
                     ))}
-                    {sparad && (
-                        <g>
-                            <line x1={BX - 3} y1={yDb(sparad.L)} x2={BX + BW + 3} y2={yDb(sparad.L)} stroke={COL.ink} strokeWidth="2" strokeDasharray="3 2" />
-                            <polygon points={`${BX - 4},${yDb(sparad.L)} ${BX - 13},${yDb(sparad.L) - 5} ${BX - 13},${yDb(sparad.L) + 5}`} fill="#6b7280" />
-                        </g>
-                    )}
                     <line x1={BX - 3} y1={yDb(L)} x2={BX + BW + 3} y2={yDb(L)} stroke={COL.ink} strokeWidth="2.6" />
                     <polygon points={`${BX + BW + 4},${yDb(L)} ${BX + BW + 13},${yDb(L) - 5.5} ${BX + BW + 13},${yDb(L) + 5.5}`} fill={COL.accent} />
                 </svg>
@@ -1217,7 +1215,6 @@
             const [ang, setAng] = useState(1.5);
             const [tva, setTva] = useState(q.get('tva') === '1');
             const [show, setShow] = useState({ sfar: true, kvad: true, energi: true, etik: false });
-            const [sparad, setSparad] = useState(null);
             const [ljudPa, setLjudPa] = useState(false);
             const [vy, setVy] = useState('snett');
             const [isFullscreen, setIsFullscreen] = useState(false);
@@ -1264,7 +1261,6 @@
 
             const valjVy = (v) => { setVy(v); if (SIM.vy) SIM.vy(v); };
             const tShow = (key) => setShow(sh => ({ ...sh, [key]: !sh[key] }));
-            const spara = (Ps = P, rs = r, tvas = tva) => setSparad({ P: Ps, r: rs, tva: tvas, ...berakna(Ps, rs, tvas) });
             const andraP = (v) => { stoppaAnim(); setLogP(v); };
             const andraR = (v) => { stoppaAnim(); setR(v); };
             const andraTva = (v) => { stoppaAnim(); setTva(v); };
@@ -1273,13 +1269,7 @@
                 setLjudPa(pa => !pa);
             };
 
-            // ── Jämförelse med den sparade mätningen ──
-            const jmf = sparad && (() => {
-                const kI = I / sparad.I, dL = L - sparad.L, kr = r / sparad.r, kP = (tva ? 2 : 1) * P / ((sparad.tva ? 2 : 1) * sparad.P);
-                const ord = kvotIOrd(kI);
-                return { kI, dL, kr, kP, ord };
-            })();
-
+            const MINI = document.documentElement.classList.contains('mini-mode');
             const sceneToggles = () => {
                 if (!togglesOpen) {
                     return (
@@ -1323,21 +1313,17 @@
                                 <button key={k} className={vy === k ? 'active' : ''} onClick={() => valjVy(k)}>{n}</button>
                             ))}
                         </div>
-                        {isFullscreen && (
+                        {(isFullscreen || MINI) && (
                             <React.Fragment>
                                 <div className="st-title mt">Reglage</div>
                                 <div className="st-sliders">
                                     <StSlider label="Utsänd effekt (<em>P</em>)" value={logP} min={LPMIN} max={LPMAX} step={0.05}
                                               onChange={andraP} valueText={fmtP(P)} />
-                                    <StSlider label="Avstånd (<em>r</em>)" value={r} min={RMIN} max={RMAX} step={0.1}
+                                    <StSlider label="Avstånd till källan (<em>r</em>)" value={r} min={RMIN} max={RMAX} step={0.1}
                                               onChange={andraR} valueText={fmtR(r)} />
                                 </div>
                                 <label style={{ marginTop: 6 }}><input type="checkbox" checked={tva} onChange={() => andraTva(!tva)} />
                                     <span>Två likadana ljudkällor</span></label>
-                                <div className="st-actions">
-                                    <button className="btn-toggle" onClick={() => spara()}>Spara mätningen</button>
-                                    <button className={'btn-toggle' + (ljudPa ? ' active' : '')} onClick={vaxlaLjud}>{ljudPa ? 'Stäng av ljudet' : 'Lyssna'}</button>
-                                </div>
                             </React.Fragment>
                         )}
                     </div>
@@ -1375,6 +1361,19 @@
                                     <div className="scene-hint">Dra i ljudnivåmätaren. Dra i rummet för att vrida.</div>
                                     {sceneToggles()}
 
+                                    <button className={'ljud-btn' + (ljudPa ? ' pa' : '')} onClick={vaxlaLjud}
+                                            aria-label={ljudPa ? 'Stäng av ljudet' : 'Slå på ljudet'} aria-pressed={ljudPa}
+                                            title={ljudPa ? 'Stäng av ljudet' : 'Lyssna'}>
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+                                             strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                            <path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor" />
+                                            {ljudPa ? (
+                                                <React.Fragment><path d="M15.5 9a4 4 0 0 1 0 6" /><path d="M18.3 6.5a7.5 7.5 0 0 1 0 11" /></React.Fragment>
+                                            ) : (
+                                                <React.Fragment><path d="M16 9.5l5 5" /><path d="M21 9.5l-5 5" /></React.Fragment>
+                                            )}
+                                        </svg>
+                                    </button>
                                     <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
                                             title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
                                         {isFullscreen ? (
@@ -1389,40 +1388,6 @@
                                     </button>
                                 </div>
 
-                                <div className="glass-card rounded-xl p-3 mt-4">
-                                    <div className="flbl mb-2">Jämför med en sparad mätning</div>
-                                    {!sparad ? (
-                                        <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                            Tryck på <strong>Spara mätningen</strong>, flytta sedan mätaren eller ändra effekten.
-                                            Här ser du då hur många gånger intensiteten ändrats och hur många decibel det motsvarar.
-                                        </p>
-                                    ) : (
-                                        <div>
-                                            <div className="jmf-rad"><span>Sparad mätning</span>
-                                                <b>{sparad.tva ? '2 · ' : ''}{fmtP(sparad.P)}, {fmtR(sparad.r)}: {fmtL(sparad.L)}</b></div>
-                                            <div className="jmf-rad"><span>Nu</span>
-                                                <b>{tva ? '2 · ' : ''}{fmtP(P)}, {fmtR(r)}: {fmtL(L)}</b></div>
-                                            {Math.abs(jmf.kr - 1) > 0.005 && <div className="jmf-rad"><span>Avståndet har blivit</span>
-                                                <b>{fmtKvot(jmf.kr)} gånger så stort</b></div>}
-                                            {Math.abs(jmf.kP - 1) > 0.005 && <div className="jmf-rad"><span>Effekten har blivit</span>
-                                                <b>{fmtKvot(jmf.kP)} gånger så stor</b></div>}
-                                            <div className="jmf-rad"><span>Intensiteten har blivit</span>
-                                                <b>{fmtKvot(jmf.kI)} gånger så stor</b></div>
-                                            <div className="jmf-rad"><span>Ljudnivån har ändrats med</span>
-                                                <b style={{ color: 'var(--lab-accent)' }}>{jmf.dL >= 0 ? '+' : '−'}{fmt(Math.abs(jmf.dL), 1)}&nbsp;dB</b></div>
-                                            {jmf.ord && Math.abs(jmf.kI - 1) > 0.02 && (
-                                                <p className="text-sm mt-2" style={{ color: 'var(--lab-ink-soft)' }}>
-                                                    Intensiteten är {jmf.ord === 'en fjärdedel' || jmf.ord === 'en tiondel' || jmf.ord === 'en hundradel' ? jmf.ord + ' av den sparade' : jmf.ord + ' som den sparade'}, och
-                                                    ljudnivån har ändrats med {fmt(Math.abs(jmf.dL), 1)}&nbsp;dB.
-                                                    {Math.abs(jmf.kI - 2) < 0.04 && ' Dubbel intensitet ger alltid 3 dB mer, aldrig dubbelt så många decibel.'}
-                                                    {Math.abs(jmf.kI - 0.25) < 0.005 && ' Dubbla avståndet ger fyra gånger så stor sfär, alltså en fjärdedel av intensiteten, och det är alltid 6 dB lägre.'}
-                                                    {Math.abs(jmf.kI - 10) < 0.2 && ' Tio gånger så stor intensitet är alltid 10 dB mer.'}
-                                                </p>
-                                            )}
-                                            <button className="btn-toggle w-full mt-2 text-sm" onClick={() => { setSparad(null); }}>Ta bort den sparade mätningen</button>
-                                        </div>
-                                    )}
-                                </div>
                             </div>
 
                             <div className="lg:w-2/5 order-2">
@@ -1437,13 +1402,9 @@
                                         <input type="checkbox" checked={tva} onChange={() => andraTva(!tva)} style={{ width: 16, height: 16, accentColor: 'var(--lab-accent)' }} />
                                         Två likadana ljudkällor tätt intill varandra
                                     </label>
-                                    <div className="grid grid-cols-2 gap-2">
-                                        <button className="btn-toggle" onClick={() => spara()}>Spara mätningen</button>
-                                        <button className={'btn-toggle' + (ljudPa ? ' active' : '')} onClick={vaxlaLjud}>{ljudPa ? 'Stäng av ljudet' : 'Lyssna'}</button>
-                                    </div>
-                                    <div className="text-sm mt-3 p-2 rounded-lg" style={{ background: 'rgba(37,99,201,0.07)', color: 'var(--lab-ink-soft)' }}>
-                                        <strong style={{ color: 'var(--lab-ink)' }}>Lyssna själv.</strong> Slå på ljudet och kryssa
-                                        i Två likadana ljudkällor. Intensiteten blir dubbelt så stor, men ljudet låter bara
+                                    <div className="text-sm p-2 rounded-lg" style={{ background: 'rgba(37,99,201,0.07)', color: 'var(--lab-ink-soft)' }}>
+                                        <strong style={{ color: 'var(--lab-ink)' }}>Lyssna själv.</strong> Slå på ljudet med högtalarknappen uppe till
+                                        vänster i scenen och kryssa i Två likadana ljudkällor. Intensiteten blir dubbelt så stor, men ljudet låter bara
                                         lite starkare: 3&nbsp;dB är en liten skillnad för örat. Gör sedan effekten tio gånger så stor.
                                         Först när intensiteten blir ungefär tio gånger så stor, alltså 10&nbsp;dB mer, upplever
                                         de flesta att ljudet låter dubbelt så starkt. Det är därför decibelskalan är logaritmisk.
@@ -1463,10 +1424,9 @@
                                         <span style={{ fontSize: 15 }}><em>L</em> = <b className="font-mono">{fmtL(L)}</b></span>
                                         <span style={{ fontSize: 15 }}><em>I</em> = <b className="font-mono">{fmtI(I)}</b></span>
                                     </div>
-                                    <Stege L={L} sparad={sparad} />
+                                    <Stege L={L} />
                                     <p className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>
-                                        Varje steg på 10&nbsp;dB uppåt är tio gånger så stor intensitet. Den streckade
-                                        linjen är den sparade mätningen.
+                                        Varje steg på 10&nbsp;dB uppåt är tio gånger så stor intensitet.
                                     </p>
                                 </div>
                             </div>

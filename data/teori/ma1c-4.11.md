@@ -116,7 +116,7 @@ där
 
 - $y$ = värde efter $x$ förändringar
 - $C$ = startvärde
-- $a$ = förändringsfaktor
+- $a$ = förändringsfaktor ($a > 0$ och $a \neq 1$)
 - $x$ = antal förändringar (ofta tid)
 :::
 

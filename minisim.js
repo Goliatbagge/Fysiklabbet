@@ -36,6 +36,8 @@
  *           vagstallning (fy2-2.7: en puls vandrar nedåt i en hängande vågställning),
  *           blixtljud (fy2-2.10: ljudets hastighet, blixt/fyrverkeri och tumregeln 3 s per km;
  *                      visa: fyrverkeri startar med fyrverkeriet)
+ *           tongenerator (fy2-2.11: tonen på 440 Hz blir starkare och amplituden större när
+ *                      ljudintensiteten ökas; frekvensen ändras inte)
  *   titel:  liten rubrik ovanför scenen (valfritt).
  *
  * Widgeten är ren vanilla-JS (ingen React) och har egen intern CSS.
@@ -16566,6 +16568,200 @@
         rita();
     }
 
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: tongenerator
+    // ══════════════════════════════════════════════════════════════════════
+    // fy2-2.11, Intensitet och ljudnivå: en tongenerator kopplad till en
+    // högtalare spelar en sinuston med frekvensen 440 Hz, som aldrig ändras.
+    // Eleven drar i glidaren för ljudintensiteten I (0,01 … 1,00 mW/m²) och
+    // hör tonen bli starkare, samtidigt som grafen till höger (tryckändring
+    // mot tid) visar att amplituden växer medan våglängden på tidsaxeln står
+    // still. Intensiteten är proportionell mot amplitudens kvadrat, så
+    // amplituden (och ljudets förstärkning) ritas ∝ √I. Ljudnivån
+    // L = 10 · lg(I/I₀) skrivs ut bredvid. Ljudet är syntetiserat (Web Audio),
+    // startar först när eleven trycker på knappen och tystnar när kortet
+    // skrollas ur bild.
+    var tgRaknare = 0, tgAktiv = null;
+    function buildTongenerator(node, cfg) {
+        var INK = '#1f2530', BLA = '#2563c9', ROD = '#c0392b';
+        var F = 440, IMIN = 0.01, IMAX = 1.0;              // mW/m²
+        var X0 = 290, X1 = 612, Y0 = 136, AMAXPX = 74, LAMPX = 80.5, VISF = 0.6;
+        var I = cfg.start ? parseFloat(String(cfg.start).replace(',', '.')) : 0.25;
+        var tid = 0, spelar = false;
+        var id = 'ms-tg-' + (++tgRaknare);
+
+        function fmt(v, d) { var s = v.toFixed(d); return parseFloat(s) === 0 ? '0' : s.replace('.', ','); }
+        function it(t) { return '<tspan font-style="italic">' + t + '</tspan>'; }
+        function lbl(x, y, anchor, inner, size, color, extra) {
+            return '<text x="' + vgR1(x) + '" y="' + vgR1(y) + '" text-anchor="' + anchor + '" font-size="' +
+                (size || 15) + '" fill="' + (color || INK) + '"' + (extra || '') + '>' + inner + '</text>';
+        }
+        function niva() { return 10 * Math.log(I * 1e-3 / 1e-12) / Math.LN10; }
+        function relAmp() { return Math.sqrt(I / IMAX); }
+
+        // ── fast bakgrund: tongenerator, kabel, högtalare, axlar ──────────
+        var bas = vgRutnat(id, 0, 0, 640, 250);
+        // tongeneratorn
+        bas += '<rect x="22" y="96" width="112" height="78" rx="7" fill="#d8dce2" stroke="' + INK + '" stroke-width="1.4"/>';
+        bas += '<rect x="32" y="106" width="92" height="30" rx="3" fill="#1d2a22" stroke="#0f1620" stroke-width="1"/>';
+        bas += '<text x="78" y="127" text-anchor="middle" font-size="16" font-weight="600" fill="#86e39a" font-family="ui-monospace, Consolas, monospace">440 Hz</text>';
+        [[50, 156], [78, 156]].forEach(function (p) {
+            bas += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="8" fill="#9aa1ab" stroke="' + INK + '" stroke-width="1.1"/>' +
+                '<line x1="' + p[0] + '" y1="' + p[1] + '" x2="' + p[0] + '" y2="' + (p[1] - 6) + '" stroke="' + INK + '" stroke-width="1.6" stroke-linecap="round"/>';
+        });
+        bas += '<circle cx="106" cy="152" r="3.6" fill="#1f2530"/><circle cx="118" cy="152" r="3.6" fill="' + ROD + '"/>';
+        bas += lbl(78, 194, 'middle', 'tongenerator', 13, '#4a5160');
+        // kabeln
+        bas += '<path d="M 118 152 C 124 176 146 178 158 154" fill="none" stroke="' + ROD + '" stroke-width="2.2"/>';
+        bas += '<path d="M 106 152 C 112 186 150 188 160 160" fill="none" stroke="#1f2530" stroke-width="2.2"/>';
+        // högtalaren
+        bas += '<rect x="156" y="92" width="30" height="88" rx="4" fill="#3b414b" stroke="' + INK + '" stroke-width="1.3"/>';
+        bas += '<path d="M 186 116 L 210 96 L 210 176 L 186 156 Z" fill="#7b828d" stroke="' + INK + '" stroke-width="1.3"/>';
+        bas += '<ellipse cx="210" cy="136" rx="5" ry="40" fill="#5c636e" stroke="' + INK + '" stroke-width="1.2"/>';
+        bas += lbl(184, 210, 'middle', 'högtalare', 13, '#4a5160');
+        // axlarna (pil bara åt det positiva hållet)
+        bas += '<line x1="' + X0 + '" y1="' + Y0 + '" x2="' + (X1 + 6) + '" y2="' + Y0 + '" stroke="' + INK + '" stroke-width="1.4"/>' +
+            '<polygon points="' + (X1 + 6) + ',' + (Y0 - 4.5) + ' ' + (X1 + 15) + ',' + Y0 + ' ' + (X1 + 6) + ',' + (Y0 + 4.5) + '" fill="' + INK + '"/>';
+        bas += '<line x1="' + X0 + '" y1="226" x2="' + X0 + '" y2="38" stroke="' + INK + '" stroke-width="1.4"/>' +
+            '<polygon points="' + (X0 - 4.5) + ',38 ' + X0 + ',29 ' + (X0 + 4.5) + ',38" fill="' + INK + '"/>';
+        bas += lbl(X1 + 12, Y0 + 20, 'middle', it('t'), 15);
+        bas += lbl(X0 + 10, 36, 'start', 'tryckändring', 13, '#4a5160');
+
+        function rita() {
+            var A = AMAXPX * relAmp(), s = '';
+            // ljudbågar framför högtalaren, starkare ju större amplitud
+            var op = 0.15 + 0.85 * relAmp();
+            [0, 1, 2].forEach(function (k) {
+                var r = 22 + k * 13, ph = spelar ? ((tid * 1.3 + k / 3) % 1) : 0;
+                var rr = r + ph * 10;
+                s += '<path d="M ' + vgR1(206 + rr * Math.cos(0.6)) + ' ' + vgR1(136 - rr * Math.sin(0.6)) + ' A ' + vgR1(rr) + ' ' + vgR1(rr) +
+                    ' 0 0 1 ' + vgR1(206 + rr * Math.cos(0.6)) + ' ' + vgR1(136 + rr * Math.sin(0.6)) + '" fill="none" stroke="' + BLA +
+                    '" stroke-width="' + vgR1(1 + 2.2 * relAmp()) + '" stroke-linecap="round" opacity="' + vgR1(op * (spelar ? 1 - ph * 0.6 : 0.5)) + '"/>';
+            });
+            // amplitudlinjer
+            s += '<line x1="' + X0 + '" y1="' + vgR1(Y0 - A) + '" x2="' + X1 + '" y2="' + vgR1(Y0 - A) + '" stroke="#8a919b" stroke-width="1" stroke-dasharray="4 4"/>';
+            s += '<line x1="' + X0 + '" y1="' + vgR1(Y0 + A) + '" x2="' + X1 + '" y2="' + vgR1(Y0 + A) + '" stroke="#8a919b" stroke-width="1" stroke-dasharray="4 4"/>';
+            // kurvan: frekvensen (våglängden på tidsaxeln) är alltid densamma
+            var pts = [], fas = 2 * Math.PI * VISF * tid;
+            for (var x = X0; x <= X1; x += 2) {
+                pts.push(vgR1(x) + ',' + vgR1(Y0 - A * Math.sin(2 * Math.PI * (x - X0) / LAMPX - fas)));
+            }
+            s += '<polyline points="' + pts.join(' ') + '" fill="none" stroke="' + BLA + '" stroke-width="2.4" stroke-linejoin="round"/>';
+            // amplitudpilen vid högerkanten
+            var xa = X1 - 4;
+            if (A > 16) s += vgDubbelpil(xa, Y0, xa, Y0 - A, ROD);
+            s += lbl(xa - 8, vgR1(Y0 - A - 7), 'end', 'amplitud', 13, ROD, ' font-weight="600"');
+            // avläsningar
+            s += lbl(80, 42, 'start', it('I') + ' = ' + fmt(I, 2) + ' mW/m²', 16, INK, ' font-weight="600"');
+            s += lbl(80, 66, 'start', it('L') + ' = ' + fmt(niva(), 0) + ' dB', 16, INK, ' font-weight="600"');
+            dyn.innerHTML = s;
+        }
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus ms-bred';
+        if (cfg.titel) {
+            var tEl = document.createElement('div');
+            tEl.className = 'minisim-title';
+            tEl.textContent = cfg.titel;
+            card.appendChild(tEl);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene ms-kv-scene';
+        scene.innerHTML = '<svg class="ms-kv-svg" viewBox="10 14 624 214" width="624" height="214" ' +
+            'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" ' +
+            'aria-label="En tongenerator kopplad till en högtalare spelar en ton på 440 Hz. En graf visar tryckändringen mot tiden. ' +
+            'När ljudintensiteten ökas blir amplituden större, medan frekvensen är densamma.">' +
+            bas + '<g class="ms-tg-dyn"></g></svg>';
+        var dyn = scene.querySelector('.ms-tg-dyn');
+        card.appendChild(scene);
+        msFullskarm(card, scene, 624 / 214, 130);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        var spelaBtn = vgBtn('Spela ton', 'ms-primar');
+        controls.appendChild(spelaBtn);
+        card.appendChild(controls);
+
+        var row = document.createElement('div');
+        row.className = 'minisim-slider-row';
+        var sl = document.createElement('span');
+        sl.className = 'minisim-slider-lbl';
+        sl.textContent = 'Ljudintensitet';
+        var slider = document.createElement('input');
+        slider.type = 'range';
+        slider.className = 'minisim-slider';
+        slider.min = String(IMIN); slider.max = String(IMAX); slider.step = '0.01';
+        slider.value = String(I);
+        slider.setAttribute('aria-label', 'Ljudintensitet i milliwatt per kvadratmeter');
+        var sv = document.createElement('span');
+        sv.className = 'minisim-slider-val';
+        row.appendChild(sl); row.appendChild(slider); row.appendChild(sv);
+        card.appendChild(row);
+
+        var info = document.createElement('div');
+        info.className = 'minisim-info ms-brod';
+        info.style.marginTop = '6px';
+        card.appendChild(info);
+        node.appendChild(card);
+
+        function uppdatera() {
+            sv.textContent = fmt(I, 2) + ' mW/m²';
+            info.innerHTML = 'Frekvensen är hela tiden <em>f</em> = 440 Hz, så tonen låter likadant men starkare eller svagare. ' +
+                'Ljudintensiteten är proportionell mot amplitudens kvadrat: fyra gånger så stor intensitet ger dubbelt så stor amplitud.';
+        }
+
+        // ── ljud ──────────────────────────────────────────────────────────
+        var actx = null, osc = null, gain = null;
+        function malGain() { return 0.32 * relAmp(); }
+        function starta() {
+            var AC = window.AudioContext || window.webkitAudioContext;
+            if (!AC) return;
+            if (tgAktiv && tgAktiv !== stoppa) tgAktiv();
+            if (!actx) actx = new AC();
+            if (actx.state === 'suspended') actx.resume();
+            var t0 = actx.currentTime;
+            gain = actx.createGain();
+            gain.gain.setValueAtTime(0.0001, t0);
+            gain.gain.setTargetAtTime(malGain(), t0, 0.03);
+            gain.connect(actx.destination);
+            osc = actx.createOscillator();
+            osc.type = 'sine';
+            osc.frequency.value = F;
+            osc.connect(gain);
+            osc.start(t0);
+            spelar = true;
+            tgAktiv = stoppa;
+            spelaBtn.textContent = 'Stoppa ton';
+        }
+        function stoppa() {
+            if (osc && actx) {
+                var t0 = actx.currentTime, o = osc;
+                gain.gain.setTargetAtTime(0.0001, t0, 0.03);
+                o.stop(t0 + 0.2);
+            }
+            osc = null; gain = null; spelar = false;
+            if (tgAktiv === stoppa) tgAktiv = null;
+            spelaBtn.textContent = 'Spela ton';
+        }
+        spelaBtn.addEventListener('click', function () { if (spelar) stoppa(); else starta(); });
+        slider.addEventListener('input', function () {
+            I = Math.max(IMIN, Math.min(IMAX, parseFloat(slider.value)));
+            if (gain && actx) gain.gain.setTargetAtTime(malGain(), actx.currentTime, 0.04);
+            uppdatera();
+            rita();
+        });
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(function (e) { if (!e[0].isIntersecting && spelar) stoppa(); }, { threshold: 0 }).observe(card);
+        }
+
+        var loop = vgLoop(card, function (dt) { tid += dt; rita(); });
+        card._set = function (v, t) { I = v; slider.value = String(v); tid = t || 0; uppdatera(); rita(); };
+        uppdatera();
+        rita();
+        loop.satt(true);
+    }
+
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
                   stegkast: buildStegkast,
                   svangningsgrafer: buildSvangningsgrafer,
@@ -16595,7 +16791,7 @@
                   staendevag: buildStaendevag, gitarrton: buildGitarrton,
                   snurrslang: buildSnurrslang, pipton: buildPipton, provror: buildProvror,
                   varmekansla: buildVarmekansla, smaltrace: buildSmaltrace,
-                  blixtljud: buildBlixtljud };
+                  blixtljud: buildBlixtljud, tongenerator: buildTongenerator };
 
     function decodeSrc(b64) {
         try { return decodeURIComponent(escape(atob(b64))); }

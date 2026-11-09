@@ -1,0 +1,33 @@
+03:15:01  [idag] === Nyhetsjobb: start (2026-11-09) ===
+03:15:03  [idag] Dagens nyhet finns (förberedd i går).
+03:15:04  [idag] Startar Claude Code (headless, modell opus, nyckel)...
+03:20:02  [imorgon] === Nyhetsjobb: start (2026-11-09) ===
+03:20:02  [imorgon] Dagens och morgondagens nyhet finns redan. Inget att göra.
+03:20:02  [imorgon] === Nyhetsjobb: slut ===
+03:27:14  [idag] Artikeln för 2026-11-10 är skriven, granskad och committad på grenen `nyhetsjobb` (commit `8cf0cc08`). Jag har inte pushat och inte skickat något mejl.
+03:27:14  [idag] 
+03:27:14  [idag] **Artikel:** ”Lår, smalben och fot håller rockringen i gång tillsammans” (`2026-11-10-rockringens-fysik`, kategori Mekanik).
+03:27:14  [idag] - **Varför den här:** det var uppslaget som nyhetsbrevet 2026-11-08 lovade till nästa vecka, och nu är löftet infriat inom fönstret. Grannen 2026-11-09 handlar om magnetism, så det blir inte samma område två dagar i rad.
+03:27:14  [idag] - **Källa:** studien i *Nonlinear Dynamics* 114, 1192 (Chern, Honein och O'Reilly, Berkeley). Den är kollegialt granskad och öppen, och jag läste hela PDF:en. Pressmeddelandet via Phys.org användes för citatet och för detaljerna om personerna.
+03:27:14  [idag] - **Bilder:** huvudbilden är ett riktigt foto av rockringning framför rådhuset i Düsseldorf (Wikimedia Commons, fri licens CC0). I brödtexten ligger figur 1 ur studien (CC BY 4.0). Ingen AI-bild behövdes.
+03:27:14  [idag] - **Ordlistan:** tre nya begrepp, principalkomponentanalys, funktionell nätverksanalys och gyroskop.
+03:27:14  [idag] 
+03:27:14  [idag] **Utgivarens granskning:** första utslaget var RÄTTA FÖRST med sex punkter. Det gällde ingressen (det är samma benrörelser som påverkar både snurret och vickningen), en utelämning i citatet som inte var markerad, ”gymnast”, ”japanen”, som inte stod i någon källa, hårda mellanslag i lärarfrågorna och bildbeskrivningen till figur 1. Jag rättade alla sex och tog med utgivarens fem rekommendationer. Omgranskningen blev GODKÄND, och båda utslagen står i `granskningar.md`.
+03:27:14  [idag] 
+03:27:14  [idag] **Kontroller:** `verify-navigation.js`, `verify-begrepp.js` och `verify-sitemap.js` gick igenom utan fel, och `build-nyheter-og.js` är körd. `verify-sprak.js` ger 3 fel, men alla ligger i äldre artiklar längre ned i `data/nyheter.js` och inget i den nya.
+03:27:14  [idag] 
+03:27:14  [idag] **Loggarna:** `publicerat.md` har fått en rad, och rockringsposten är borttagen ur `ko.md`. Jag har märkt ett nytt uppslag till nästa brev: Capotauro, en påstådd galax från universums barndom som visade sig vara en kall brun dvärg (MNRAS, öppen, förtryck på arXiv).
+03:27:14  [idag] 
+03:27:14  [idag] Byggskriptet rörde också `i18n/gemensamt.js`, `i18n/manifest.js` och många äldre delningssidor. Jag har lämnat dem utanför committen.
+03:27:15  [idag] Claude avslutade med kod 0
+03:27:15  [idag] error: cannot pull with rebase: You have unstaged changes.
+03:27:15  [idag] error: Please commit or stash them.
+03:27:20  [idag] Pushat till main.
+03:27:20  [idag] Artikel 2026-11-10 pushad: 2026-11-10-rockringens-fysik
+03:28:50  [idag] https://fysiklabbet.se/nyheter.html?forhand=2026-11-10-rockringens-fysik
+03:28:50  [idag] Mejlet byggt av mallen (C:\claude\Fysiklabbet-nyhetsjobb\.claude\nyheter\logg\mejl-2026-11-10).
+03:28:50  [idag] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+03:29:57  [idag] Mejlet är skickat till [ägaren]. Jag fyllde i [[UTGIVARE]]-platshållaren med en sammanfattning av de sex rättningarna utgivaren begärde (ingressen om snurr/vickning, en omarkerad citatutelämning, "tävlat i gymnastik", "Japanen", hårda mellanslag i lärarfrågorna och alt-texten till figur 1) innan artikeln godkändes vid omgranskningen.
+03:29:57  [idag] Claude avslutade med kod 0
+03:29:57  [idag] Mejlet till ägaren är skickat.
+03:29:57  [idag] === Nyhetsjobb: slut ===

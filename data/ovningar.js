@@ -29875,7 +29875,7 @@ Kontroll: med $a = 3$ är ekvationen $3x - 3 = 7 - 2x$. Insättning av $x = 2$ g
         },
         {
             level: 1,
-            question: `En parkering kostar 20 kr per påbörjad timme, i högst 8 timmar. Kostnaden är $y = 20x$. Vilken är definitionsmängden?`,
+            question: `Att ladda en elbil kostar 20 kr per timme och debiteras exakt efter laddtiden. Man får ladda i högst 8 timmar. Kostnaden är $y = 20x$ kr efter $x$ timmar. Vilken är definitionsmängden?`,
             choices: [
                 `$0 \\leq y \\leq 160$`,
                 `$0 \\leq x \\leq 8$`,
@@ -29883,7 +29883,7 @@ Kontroll: med $a = 3$ är ekvationen $3x - 3 = 7 - 2x$. Insättning av $x = 2$ g
                 `$0 < x < 20$`,
             ],
             correct: 1,
-            solution: `Definitionsmängden är de tillåtna *x*-värdena (antalet timmar): minst 0 och högst 8:
+            solution: `Definitionsmängden är de tillåtna *x*-värdena (laddtiden i timmar). Tiden kan vara vilket tal som helst från 0 till 8, till exempel även 2,5 timmar:
 
 $$ 0 \\leq x \\leq 8 $$
 
@@ -30101,7 +30101,7 @@ Ekvationen löses grafiskt. I GeoGebra skriver vi \`y = 12*0.82^x\` och \`y = 2\
 
 Kontroll: $C(9) = 12 \\cdot 0{,}82^9 \\approx 2{,}01$, alltså strax över 2, och $C(9{,}1) = 12 \\cdot 0{,}82^{9{,}1} \\approx 1{,}97$, strax under 2. Gränsen ligger mellan 9,0 och 9,1, nära 9,0.
 
-**Svar:** $0 \\leq t \\leq 9{,}0$
+**Svar:** $0 \\leq t \\leq 9{,}02\\ldots$, avrundat $0 \\leq t \\leq 9{,}0$
 
 **b)** Koncentrationen minskar hela tiden, eftersom förändringsfaktorn är mindre än 1. Det största värdet är startvärdet och det minsta värdet är 2:
 

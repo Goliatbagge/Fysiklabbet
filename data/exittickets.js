@@ -12513,8 +12513,8 @@ window.EXITTICKETS = {
     ],
     correct: 2,
     why: [
-      'Definitionsmängden är i stället de möjliga X-värdena.',
-      'Koordinater är punkter — mängderna handlar om var sin variabel.',
+      'Definitionsmängden är i stället de möjliga $x$-värdena.',
+      'En punkt har koordinater, men mängderna gäller var sin variabel.',
       'Möjliga *y*-värden bildar värdemängden.',
       '"Funktionsmängd" är inget vedertaget begrepp här.',
     ],
@@ -12562,7 +12562,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       '600 liter är bara det största värdet. Värdemängden är hela spannet.',
-      'Minsta vattenmängden är $y(0) = 0$ liter och största $y(12) = 600$ liter.',
+      'Vattenmängden ökar hela tiden. $x = 0$ ger minst, $y = 0$, och $x = 12$ ger mest, $y = 50 \\cdot 12 = 600$.',
       '50 liter är bara det som pumpas in på EN minut.',
       '0–12 är definitionsmängden (minuterna), inte vattenmängderna.',
     ],

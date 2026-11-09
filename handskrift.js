@@ -15906,64 +15906,8 @@
 
     tanke(y, [
       [['Värdemängden är de y-värden']],
-      [['som kan komma ut. Vattnet']],
-      [['ökar med tiden, så det']],
-      [['minsta y kommer ur det']],
-      [['minsta x.']]
-    ], 0.5);
-    y += 4.5 * F;
-    T.str('b) Minsta värdet: x=0', padL, y - 1.6 * F, null, 0.62);
-    T.str('y=50·0=0', padL, y);
-    T.stepEnd();
-
-    tanke(y, [
-      [['Och det största y kommer ur']],
-      [['det största x, alltså 12']],
-      [['minuter.']]
-    ]);
-    y += 3.6 * F;
-    T.str('Största värdet: x=12', padL, y - 1.6 * F, null, 0.62);
-    T.str('y=50·12=600', padL, y);
-    T.stepEnd();
-
-    tanke(y, [
-      [['Vattenmängden blir alltså allt']],
-      [['mellan 0 och 600 liter.']]
-    ]);
-    y += 3.0 * F;
-    xe = T.str('Svar: 0≤y≤600', padL, y);
-    T.underline(xe, y);
-    T.stepEnd();
-
-    return { acts: acts, contentW: 640, lastBase: y + 0.9 * F, padL: padL };
-  }
-
-  /* ---------------- scen: pumpen (ma1c-4.10 ex 1, namnet musiktjanst är
-   * kvar från en äldre version om en musiktjänst) ---------------
-   * y = 50x med definitionsmängd 0 ≤ x ≤ 12. Tiden är kontinuerlig (alla
-   * tal mellan 0 och 12, inte bara hela minuter), så olikheter är rätt. Värdemängden fås genom att
-   * sätta in ÄNDPUNKTERNA i definitionsmängden — inte genom att gissa. */
-  function layoutMusiktjanst(cfg, F) {
-    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
-    var tanke = mkTanke(T);
-
-    tanke(20, [
-      [['Definitionsmängden är de']],
-      [['x-värden som får sättas in.']],
-      [['Tiden kan vara vilket tal som']],
-      [['helst från 0 till 12 minuter,']],
-      [['även 2,5 minuter.']]
-    ], 0);
-    y = 150;
-    T.str('a) Definitionsmängd', padL, y - 1.6 * F, null, 0.62);
-    xe = T.str('0≤x≤12', padL, y);
-    T.underline(xe, y);
-    T.stepEnd();
-
-    tanke(y, [
-      [['Värdemängden är de y-värden']],
-      [['som kan komma ut. Vattnet']],
-      [['ökar med tiden, så det']],
+      [['som kan komma ut. Mängden']],
+      [['ökar hela tiden, så det']],
       [['minsta y kommer ur det']],
       [['minsta x.']]
     ], 0.5);
@@ -16036,23 +15980,24 @@
       [['tillåtna x-värdena. Jag håller']],
       [['pennan lodrätt och vandrar']],
       [['från vänster tills jag möter']],
-      [['grafen.']]
+      [['grafen. Ringen är TOM, så']],
+      [['x=−1 ingår inte: strikt <.']]
     ], 0);
     A.line([A.X(-1), A.Y(-1.3)], [A.X(-1), A.Y(5.2)], BLUE);
     T.stepEnd();
 
     tanke(500, [
-      [['Ringen är TOM, alltså ingår']],
-      [['inte x=−1. Då blir det ett']],
-      [['strikt olikhetstecken.']]
+      [['Från höger möter pennan en']],
+      [['IFYLLD punkt, så x=2 ingår.']],
+      [['Där blir det mindre än eller']],
+      [['lika med.']]
     ], 0);
     A.line([A.X(2), A.Y(-1.3)], [A.X(2), A.Y(5.2)], BLUE);
     T.stepEnd();
 
     tanke(500, [
-      [['Punkten till höger är IFYLLD,']],
-      [['så x=2 ingår. Där blir det']],
-      [['mindre än eller lika med.']]
+      [['Definitionsmängden blir']],
+      [['alltså allt mellan −1 och 2.']]
     ], 0);
     y = 530;
     T.str('Definitionsmängd', padL, y - 1.6 * F, null, 0.62);
@@ -16072,9 +16017,10 @@
 
     tanke(y, [
       [['Lägst är y=0 i den ifyllda']],
-      [['punkten till höger, högst är']],
-      [['y=4 i toppen. Båda nås av']],
-      [['grafen, så båda ingår.']]
+      [['punkten, högst y=4 i toppen.']],
+      [['Den tomma ringen vid y=3']],
+      [['spelar ingen roll: grafen']],
+      [['når y=3 igen vid x=1.']]
     ], 0.5);
     y += 4.5 * F;
     T.str('Värdemängd', padL, y - 1.6 * F, null, 0.62);

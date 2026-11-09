@@ -350,7 +350,7 @@
 
         // Delat läge mellan React och 3D-scenen (scenen byggs bara en gång)
         const SIM = {
-            p: { P: 5, Q: 0.05, r: 10, ang: 1.5, tva: false, L: 96, show: { sfar: true, kvad: true, energi: true, etik: true } },
+            p: { P: 5, Q: 0.05, r: 10, ang: 1.5, tva: false, L: 96, show: { sfar: true, kvad: true, energi: true, etik: false } },
             cb: {},
             vy: null,
         };
@@ -1216,7 +1216,7 @@
             const [r, setR] = useState(Math.max(RMIN, Math.min(RMAX, num('r', 10))));
             const [ang, setAng] = useState(1.5);
             const [tva, setTva] = useState(q.get('tva') === '1');
-            const [show, setShow] = useState({ sfar: true, kvad: true, energi: true, etik: true });
+            const [show, setShow] = useState({ sfar: true, kvad: true, energi: true, etik: false });
             const [sparad, setSparad] = useState(null);
             const [ljudPa, setLjudPa] = useState(false);
             const [vy, setVy] = useState('snett');

@@ -16321,13 +16321,199 @@
       [['negativt tal upphöjt till 4']],
       [['ger samma positiva svar.']]
     ]);
+    y += 2.5 * F;
+    T.str('x≈±1,19', padL, y);
+    T.stepEnd();
+
     y += 3.0 * F;
     xe = T.str('Svar: x=±', padL, y);
     xe = T.rot('2', xe, y, 4);
+    xe = T.str('≈±1,19', xe, y);
     T.underline(xe, y);
     T.stepEnd();
 
     return { acts: acts, contentW: 640, lastBase: y + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: udda och jämn exponent (ma1c-4.12 ex 2) -----
+   * a) x³ = −8 (udda: en negativ lösning), b) x⁴ = −16 (jämn: ingen
+   * lösning), c) 3x⁵ = 96 (dividera först, sedan femteroten). Bara c)
+   * har en operation på båda led; rotdragningarna skrivs likadant i
+   * båda redovisningslägena. */
+  function layoutPotensekvuddajamn(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    var xwC = padL + T.adv('c) 3x^5=96') + 0.9 * F;
+
+    /* ---- a) x³=−8 ---- */
+    y = 100;
+    T.str('a) x^3=-8', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Exponenten 3 är UDDA. Då']],
+      [['finns exakt en lösning,']],
+      [['och inget ± ska skrivas.']]
+    ]);
+    y += 2.6 * F;
+    xx = T.str('x=', padL, y);
+    T.rot('-8', xx + 9, y, 3);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Ett negativt tal upphöjt']],
+      [['till 3 är negativt:']],
+      [['(-2)·(-2)·(-2) = -8.']]
+    ]);
+    y += 2.5 * F;
+    T.str('x=-2', padL, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: x=-2', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) x⁴=−16 ---- */
+    y += 3.4 * F;
+    T.str('b) x^4=-16', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Exponenten 4 är JÄMN. Ett']],
+      [['tal upphöjt till 4 blir']],
+      [['aldrig negativt.']]
+    ]);
+    y += 2.2 * F;
+    T.str('x^4 kan inte bli negativt', padL, y, null, 0.62);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: Ekvationen saknar lösning', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- c) 3x⁵=96 ---- */
+    y += 3.4 * F;
+    T.str('c) 3x^5=96', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Potensen står inte ensam.']],
+      [['Först dividerar jag båda']],
+      [['led med 3.']]
+    ]);
+    y = ekvOp(y, '/3', xwC, '3x^5=96');
+    T.str('x^5=32', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Exponenten 5 är UDDA:']],
+      [['exakt en lösning. Jag drar']],
+      [['femteroten ur båda led.']]
+    ]);
+    y += 2.6 * F;
+    xx = T.str('x=', padL, y);
+    T.rot('32', xx + 9, y, 5);
+    T.stepEnd();
+
+    tanke(y, [
+      [['2 upphöjt till 5 är 32,']],
+      [['så femteroten ur 32 är 2.']]
+    ]);
+    y += 2.5 * F;
+    T.str('x=2', padL, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: x=2', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 640, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: bestäm C ur en punkt (ma1c-4.12 ex 3) -------
+   * f(x) = C·x² går genom (3, 18). a) C = 2, b) f(6) = 72. Sista bubblan
+   * knyter ihop med skalningen: dubbelt x ger 2² = 4 gånger värdet. */
+  function layoutPotensbestamc(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    var xw = padL + T.adv('C·3^2=18') + 0.9 * F;
+
+    var yF = 100;
+    T.str('f(x)=C·x^2', padL, yF);
+    T.stepEnd();
+
+    tanke(yF, [
+      [['Punkten (3, 18) ligger på']],
+      [['grafen. Det betyder att']],
+      [['f(3) = 18.']]
+    ]);
+    y = yF + 4.0 * F;
+    T.str('a) f(3)=18 ger', padL, y - 1.6 * F, null, 0.62);
+    T.str('C·3^2=18', padL, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    T.str('C·9=18', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Dividerar med 9 i båda']],
+      [['led.']]
+    ]);
+    y = ekvOp(y, '/9', xw, 'C·9=18');
+    T.str('C=2', padL, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: C=2', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu är funktionen känd.']],
+      [['Jag byter ut x mot 6.']]
+    ], 0.5);
+    y += 3.4 * F;
+    var yB = y;
+    T.str('b) f(x)=2x^2', padL, yB);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    xx = T.str('f(6)', padL, y);
+    T.stepEnd();
+
+    /* först talet i parentesen, sedan BARA x-et det ersätter */
+    var rings = substRings(acts, [[padL + T.adv('f('), xx - T.adv(')'), y, F],
+                                  [padL + T.adv('b) f(x)=2'), padL + T.adv('b) f(x)=2x'), yB, F]]);
+    xx = T.str('=2·6^2', xx, y);
+    fadeRings(acts, rings);
+    T.stepEnd();
+
+    xx = T.str('=2·36', xx, y);
+    T.stepEnd();
+
+    T.str('=72', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Rimligt? x blev dubbelt så']],
+      [['stort, från 3 till 6, och']],
+      [['värdet fyra gånger så']],
+      [['stort: 18·4 = 72.']]
+    ]);
+    y += 2.4 * F;
+    xe = T.str('Svar: 72', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 640, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
   }
 
   /* ---------------- scen: funktion i funktion (ma1c-4.12 ex 2) --------
@@ -64425,6 +64611,8 @@
                    tolkaexp: layoutTolkaexp,
                    vilkenexp: layoutVilkenexp,
                    potensfunktion: layoutPotensfunktion,
+                   potensekvuddajamn: layoutPotensekvuddajamn,
+                   potensbestamc: layoutPotensbestamc,
                    funktionifunktion: layoutFunktionifunktion,
                    /* ma1c kapitel 5 — Statistik och sannolikhetslära */
                    enkatfraga: layoutEnkatfraga,

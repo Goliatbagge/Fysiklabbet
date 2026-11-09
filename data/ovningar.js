@@ -30615,13 +30615,13 @@ $$ \\frac{9 \\cdot 1}{2} = 4{,}5 $$
             choices: [
                 `$f(x) = 5 \\cdot 3^x$`,
                 `$f(x) = 5x^3$`,
-                `$f(x) = 5$`,
+                `$f(x) = x^3 + 5$`,
                 `$f(x) = 3x + 5$`,
             ],
             correct: 1,
-            solution: `I en potensfunktion $f(x) = Cx^a$ är variabeln i **basen**: $5x^3$ passar med $C = 5$ och $a = 3$.
+            solution: `I en potensfunktion $f(x) = Cx^a$ står variabeln i **basen**, och uttrycket har en enda term: $5x^3$ passar med $C = 5$ och $a = 3$.
 
-$5 \\cdot 3^x$ har variabeln i exponenten — en exponentialfunktion.
+$5 \\cdot 3^x$ har variabeln i exponenten och är en exponentialfunktion. $x^3 + 5$ och $3x + 5$ har två termer och går inte att skriva på formen $Cx^a$.
 
 **Svar:** $f(x) = 5x^3$`,
         },
@@ -30642,10 +30642,10 @@ $$ f(3) = 3^4 = 81 $$
                 `I potensfunktionen är variabeln basen; i exponentialfunktionen är den exponenten`,
                 `Potensfunktioner saknar konstanter`,
                 `Exponentialfunktioner kan bara öka`,
-                `Ingen skillnad — de är samma sak`,
+                `Ingen skillnad, de är samma sak`,
             ],
             correct: 0,
-            solution: `Skillnaden ligger i var variabeln sitter: $x^a$ (basen — potensfunktion) mot $a^x$ (exponenten — exponentialfunktion). Graferna beter sig helt olika.
+            solution: `Skillnaden ligger i var variabeln står. I potensfunktionen $x^a$ står den i basen, i exponentialfunktionen $a^x$ står den i exponenten. Graferna beter sig helt olika.
 
 **Svar:** Variabeln är basen i potensfunktionen och exponenten i exponentialfunktionen.`,
         },
@@ -30658,11 +30658,63 @@ $$ f(3) = 3^4 = 81 $$
 
 $$ x^6 = 40 $$
 
-Jämn exponent ger två lösningar:
+Exponenten 6 är jämn, så ekvationen har två lösningar:
 
 $$ x = \\pm\\sqrt[6]{40} = \\pm 40^{1/6} = \\pm 1{,}849\\ldots \\approx \\pm 1{,}85 $$
 
-**Svar:** $x \\approx \\pm 1{,}85$`,
+Frågan gäller den positiva lösningen.
+
+**Svar:** $x \\approx 1{,}85$ (den andra lösningen är $x \\approx -1{,}85$)`,
+        },
+        {
+            level: 2,
+            question: `Lös ekvationen $2x^3 = -54$.`,
+            answer: { value: -3, unit: '' },
+            solution: `Potensen står inte ensam. Dividerar först båda led med 2:
+
+$$ \\frac{2x^3}{\\boldsymbol{2}} = \\frac{-54}{\\boldsymbol{2}} $$
+
+$$ x^3 = -27 $$
+
+Exponenten 3 är udda. Då finns exakt en lösning, och den är negativ eftersom högerledet är negativt. Drar tredjeroten ur båda led:
+
+$$ x = \\sqrt[3]{-27} $$
+
+$$ x = -3 $$
+
+Kontroll: $2 \\cdot (-3)^3 = 2 \\cdot (-27) = -54$. Stämmer.
+
+**Svar:** $x = -3$`,
+        },
+        {
+            level: 2,
+            question: `Grafen till potensfunktionen $f(x) = C \\cdot x^3$ går genom punkten $(2, 40)$.<br>a) Bestäm $C$.<br>b) Hur många gånger så stort blir funktionsvärdet när $x$ fördubblas?`,
+            answer: { value: 8, unit: '' },
+            delsvar: [
+                { del: 'a', value: 5, unit: '', etikett: '$C =$' },
+                { del: 'b', value: 8, unit: 'gånger' },
+            ],
+            solution: `**a)** Att grafen går genom $(2, 40)$ betyder att $f(2) = 40$:
+
+$$ C \\cdot 2^3 = 40 $$
+
+$$ C \\cdot 8 = 40 $$
+
+Dividerar båda led med 8:
+
+$$ \\frac{C \\cdot 8}{\\boldsymbol{8}} = \\frac{40}{\\boldsymbol{8}} $$
+
+$$ C = 5 $$
+
+**Svar:** $C = 5$
+
+**b)** I en potensfunktion gäller $f(k \\cdot x) = k^a \\cdot f(x)$: när $x$ multipliceras med $k$ multipliceras funktionsvärdet med $k^a$. Här är $k = 2$ och $a = 3$:
+
+$$ 2^3 = 8 $$
+
+Kontroll med $f(x) = 5x^3$: $f(2) = 40$ och $f(4) = 5 \\cdot 4^3 = 5 \\cdot 64 = 320$, och $8 \\cdot 40 = 320$. Stämmer.
+
+**Svar:** 8 gånger så stort`,
         },
         {
             level: 2,
@@ -30862,7 +30914,7 @@ Det som saknas är kvadratroten ur negativa tal, inte tredjeroten. $\\sqrt[3]{-8
 
 **Svar:** $x^4 = 81$ har lösningarna $x = \\pm 3$, och $x^3 = -8$ har lösningen $x = -2$
 
-**b)** Grafen till $y = x^n$ ser ut som $y = x^2$ när $n$ är jämnt och som $y = x^3$ när $n$ är udda. Antalet lösningar är antalet skärningar med den vågräta linjen $y = b$.
+**b)** Grafen till $y = x^n$ ser ut som $y = x^2$ när $n$ är jämnt och som $y = x^3$ när $n$ är udda och minst 3. För $n = 1$ är grafen den räta linjen $y = x$, som också passerar varje höjd exakt en gång. Antalet lösningar är antalet skärningar med den vågräta linjen $y = b$.
 
 - **$n$ jämnt:** grafen ligger aldrig under *x*-axeln och är symmetrisk kring *y*-axeln. Om $b > 0$ blir det två lösningar, $x = \\pm\\sqrt[n]{b}$. Om $b = 0$ blir det en lösning, $x = 0$. Om $b < 0$ finns ingen lösning.
 - **$n$ udda:** grafen går från långt ned till vänster till långt upp till höger och passerar varje höjd en gång. Det finns alltid exakt en lösning, $x = \\sqrt[n]{b}$, med samma tecken som $b$.
@@ -30918,7 +30970,7 @@ Kontroll: $\\sqrt[4]{256} = 4$, eftersom $4^4 = 256$, och $\\dfrac{240}{4} = 60$
 
 $$ 16^{-0{,}25} = \\frac{1}{\\sqrt[4]{16}} = \\frac{1}{2} $$
 
-Kontroll med siffror från a) och b): massan $4 \\cdot 16 = 64$ kg ger $P(64) = \\dfrac{240}{\\sqrt[4]{64}} = \\dfrac{240}{2\\sqrt{2}} = 84{,}8\\ldots$, vilket är hälften av $169{,}7\\ldots$.
+Kontroll med värdet från a): massan $4 \\cdot 16 = 64$ kg ger $P(64) = \\dfrac{240}{\\sqrt[4]{64}} = \\dfrac{240}{2\\sqrt{2}} = 84{,}8\\ldots$, vilket är hälften av $169{,}7\\ldots$.
 
 **Svar:** Pulsen halveras
 

@@ -35,6 +35,14 @@ korn på den andra, fyra på den tredje och så vidare, med dubbelt så
 många korn på varje ny ruta. Kungen tyckte att det lät som en blygsam
 önskan.
 
+::: figur
+<img src="media/bilder/teori/riskornen-schackbrade.jpg" alt="Ett gammalt schackbräde av trä på ett bord vid ett fönster. På de första rutorna ligger ett, två och fyra riskorn, längre fram små högar, och mot brädets bortre kant växer högarna till väldiga berg av ris som väller ut över kanten." width="1100" height="600" loading="lazy">
+
+Ett korn på första rutan, och sedan dubbelt så många på varje ny ruta.
+
+<p class="lab-foto-kalla" data-bild="Riskornen på schackbrädet">Illustration: AI-genererad bild (Google Gemini)</p>
+:::
+
 Antalet korn på ruta $x$ är $y = 2^{x-1}$, en exponentialfunktion med
 startvärdet 1 och förändringsfaktorn 2. Tabellen visar hur många korn
 som ligger på några av rutorna.

@@ -42,16 +42,12 @@ I vardagen säger man ofta att något ”växer exponentiellt” när det bara
 växer snabbt. I matematiken betyder ordet något precist: värdet
 förändras med samma faktor i varje steg.
 
-::: exempel "Exempel 1 — Kapital som växer"
-**Ett kapital på 25 000 kr ökar varje år med 2 %. Ange en formel för
-kapitalet $K$ kr efter $x$ år.**
+## Från procent till formel
 
-::: handskrift
-typ: kapitalvaxer
-:::
-
-::: textlosning
-Förändringsfaktorn för en ökning med 2 % är 1,02. Efter
+Ett exempel visar varifrån formeln kommer. Anta att 25 000 kr sätts in på
+ett konto där kapitalet ökar med 2 % varje år. Förändringsfaktorn för en
+ökning med 2 % är 1,02, så varje år multipliceras kapitalet med 1,02.
+Tabellen visar kapitalet år för år.
 
 | Tid | Kapital (kr) |
 | --- | --- |
@@ -61,11 +57,15 @@ Förändringsfaktorn för en ökning med 2 % är 1,02. Efter
 | 3 år | $25\,000 \cdot 1{,}02^3$ |
 | $x$ år | $25\,000 \cdot 1{,}02^x$ |
 
-så $K(x) = 25\,000 \cdot 1{,}02^x$.
+Exponenten är alltid lika med antalet år. Kapitalet $K$ kr efter $x$ år
+är därför
 
-**Svar:** $K(x) = 25\,000 \cdot 1{,}02^x$
-:::
-:::
+$$
+K(x) = 25\,000 \cdot 1{,}02^x
+$$
+
+Startvärdet står först, och förändringsfaktorn upphöjs till antalet år.
+Samma mönster gäller för varje exponentiell förändring.
 
 ::: formel "Exponentiell förändring"
 Om vi ska ställa upp en formel för en exponentiell förändring (något som
@@ -83,7 +83,7 @@ där
 - $x$ = tid
 :::
 
-::: exempel "Exempel 2 — Tolka en exponentialfunktion"
+::: exempel "Exempel 1 — Tolka en exponentialfunktion"
 **En bils värde $V$ efter $t$ år ges av funktionen
 $V(t) = 180\,000 \cdot 0{,}85^t$. Vad står 180 000 respektive 0,85
 för?**
@@ -132,7 +132,7 @@ x: -4, 4
 y: -1, 7
 :::
 
-::: exempel "Exempel 3 — Vilken funktion är uppritad?"
+::: exempel "Exempel 2 — Vilken funktion är uppritad?"
 **Vilken funktion är uppritad: $f(x) = 3^x$ eller $g(x) = 2^x$?**
 
 ::: figur

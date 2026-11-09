@@ -141,7 +141,7 @@ Udda exponent, här $y = x^3$. Varje vågrät linje skär grafen exakt en gång.
   Ekvationen har alltid exakt en lösning, $x = \sqrt[n]{b}$, och lösningen
   har samma tecken som $b$.
 
-::: exempel "Exempel 1 — Funktionsvärde och ekvation"
+::: exempel "Exempel 1 — Funktionsvärde och ekvation (Grund)"
 **Låt $f(x) = x^4$.<br>a) Bestäm $f(2)$.&emsp;&emsp;b) Lös ekvationen $f(x) = 2$.**
 
 ::: handskrift
@@ -183,7 +183,7 @@ till vänster om *y*-axeln och en gång till höger.
 :::
 :::
 
-::: exempel "Exempel 2 — Potensekvationer med udda och jämn exponent"
+::: exempel "Exempel 2 — Potensekvationer med udda och jämn exponent (Mellan)"
 **Lös ekvationerna.<br>a)&nbsp;$x^3 = -8$&emsp;&emsp;b)&nbsp;$x^4 = -16$&emsp;&emsp;c)&nbsp;$3x^5 = 96$**
 
 ::: handskrift
@@ -239,7 +239,7 @@ Kontroll: $3 \cdot 2^5 = 3 \cdot 32 = 96$. Stämmer.
 :::
 :::
 
-::: exempel "Exempel 3 — Bestäm konstanten med hjälp av en punkt"
+::: exempel "Exempel 3 — Bestäm konstanten med hjälp av en punkt (Mellan)"
 **Grafen till potensfunktionen $f(x) = C \cdot x^2$ går genom punkten $(3, 18)$.<br>a) Bestäm $C$.&emsp;&emsp;b) Bestäm $f(6)$.**
 
 ::: handskrift
@@ -333,7 +333,7 @@ inre funktionen $g$. Värdet $g(2)$ som kommer ut stoppas sedan in i den
 yttre funktionen $f$. Vi räknar alltså **inifrån och ut**. Observera att
 $f(g(2))$ inte är en multiplikation av $f(2)$ och $g(2)$.
 
-::: exempel "Exempel 4 — Funktion i funktion"
+::: exempel "Exempel 4 — Funktion i funktion (Mellan)"
 **Låt $f(x) = x^{1/2}$ och $g(x) = 4x^2$. Bestäm $f(g(2))$.**
 
 ::: handskrift

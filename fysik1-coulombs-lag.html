@@ -325,7 +325,7 @@
                 const a = g * Math.PI / 180;
                 const x = cx + rad * Math.cos(a), y = cy + rad * Math.sin(a);
                 if (x < w / 2 + 8 || x > VBW - w / 2 - 8 || y < 22 || y > VBH - 14) continue;
-                if (x > VBW - 300 && y < 205) continue;                       // inställningsrutan
+                if (x > VBW - 300 && y < 235) continue;                       // inställningsrutan
                 if (x < 330 && y < 80) continue;                              // fullskärmsknappen och pilskalan
                 if (x < 300 && y > VBH - 110) continue;                       // avläsningsrutan
                 let d = Math.abs(a - motAndra) % (2 * Math.PI); if (d > Math.PI) d = 2 * Math.PI - d;
@@ -407,13 +407,13 @@
                     )}
 
                     {/* avståndet r mellan mittpunkterna */}
-                    <g pointerEvents="none">
+                    {show.linje && <g pointerEvents="none">
                         <line x1={a.x + ux * R} y1={a.y + uy * R} x2={b.x - ux * R} y2={b.y - uy * R}
                               stroke={COL.matt} strokeWidth="1.3" strokeDasharray="5 5" />
                         <text x={mx + nx * rUt} y={my + ny * rUt + 5 * Math.abs(nx)} textAnchor="middle" fontSize="17" fill={COL.ink}>
                             {show.bet && <tspan fontStyle="italic">r</tspan>}{show.bet && show.varden ? ' = ' : ''}{show.varden ? fmtR(r) : ''}
                         </text>
-                    </g>
+                    </g>}
 
                     {/* kraftpilarna: alltid lika långa (Newtons tredje lag), fast skala */}
                     {show.kraft && L >= 3 && (attr ? (
@@ -546,7 +546,7 @@
             const [q2, setQ2] = useState(-5);
             const [p1, setP1] = useState({ x: 11, y: 9 });
             const [p2, setP2] = useState({ x: 21, y: 9 });
-            const [show, setShow] = useState({ kraft: true, ringar: true, rutor: true, tecken: true, bet: true, varden: true });
+            const [show, setShow] = useState({ kraft: true, ringar: true, rutor: true, tecken: true, bet: true, varden: true, linje: true });
             const [ankare, setAnkare] = useState(1);         // laddningen som ringarna ligger kring
             const [tag, setTag] = useState(null);            // avstånd och kraft när man tog tag i en laddning
             const [isFullscreen, setIsFullscreen] = useState(false);
@@ -639,6 +639,8 @@
                     <div className="st-title">Visa</div>
                     <label><input type="checkbox" checked={show.kraft} onChange={() => tShow('kraft')} />
                         <span className="st-swatch" style={{ background: COL.kraft }}></span><span>Kraftpilarna <em>F</em></span></label>
+                    <label><input type="checkbox" checked={show.linje} onChange={() => tShow('linje')} />
+                        <span className="st-swatch" style={{ background: `repeating-linear-gradient(90deg, ${COL.matt} 0 4px, transparent 4px 7px)`, height: 2 }}></span><span>Avståndet <em>r</em></span></label>
                     <label><input type="checkbox" checked={show.ringar} onChange={() => tShow('ringar')} /><span>Avståndsringarna</span></label>
                     <label><input type="checkbox" checked={show.rutor} onChange={() => tShow('rutor')} /><span>Rutnätet (1 cm)</span></label>
                     <label><input type="checkbox" checked={show.tecken} onChange={() => tShow('tecken')} /><span>Laddningstecknen</span></label>

@@ -96,7 +96,7 @@ Samma mönster gäller för varje exponentiell förändring.
 
 ::: formel "Exponentiell förändring"
 Om vi ska ställa upp en formel för en exponentiell förändring (något som
-förändras med en viss procent) gäller:
+ändras procentuellt) gäller:
 
 $$
 y = Ca^x

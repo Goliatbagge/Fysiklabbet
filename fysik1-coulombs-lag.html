@@ -272,16 +272,6 @@
         const klamp = (v, a, b) => Math.max(a, Math.min(b, v));
         const iScen = (p) => ({ x: klamp(p.x, 1, BRED - 1), y: klamp(p.y, 1, HOJD - 1) });
 
-        const tecken = (n) => {
-            const ut = [];
-            for (let i = 0; i < n; i++) {
-                const rad = n === 1 ? 0 : 13.5 * Math.sqrt((i + 0.5) / n);
-                const v = i * 2.39996;
-                ut.push([rad * Math.cos(v), rad * Math.sin(v)]);
-            }
-            return ut;
-        };
-
         // Pil från (x, y) i riktningen (ux, uy) med längden L
         const Pil = ({ x, y, ux, uy, L, col }) => {
             const h = Math.max(6, Math.min(14, L * 0.5));
@@ -296,7 +286,9 @@
 
         const Kula = ({ p, q, visaTecken, handlers }) => {
             const x = p.x * S, y = p.y * S;
-            const antal = Math.round(Math.abs(q));
+            // ett enda tecken, större ju större laddningen är
+            const storlek = Math.abs(q) / QMAX;
+            const arm = 4 + 8.5 * storlek;
             const id = q > 0 ? 'gPos' : q < 0 ? 'gNeg' : 'gNoll';
             return (
                 <g className="kula" {...handlers}>
@@ -304,12 +296,12 @@
                     <ellipse cx={x + 3} cy={y + R + 3} rx={R * 0.9} ry="4" fill="rgba(15,22,32,0.13)" />
                     <circle cx={x} cy={y} r={R} fill={`url(#${id})`} stroke={q > 0 ? '#7d1f16' : q < 0 ? '#143a80' : '#565c66'} strokeWidth="1.5" />
                     <ellipse cx={x - 7} cy={y - 9} rx="6.5" ry="4" fill="#fff" opacity="0.28" transform={`rotate(-30 ${x - 7} ${y - 9})`} />
-                    {visaTecken && q !== 0 && tecken(Math.max(1, antal)).map(([dx, dy], i) => (
-                        <g key={i} stroke="#f7f2e8" strokeWidth="1.6" strokeLinecap="round">
-                            <line x1={x + dx - 3} y1={y + dy} x2={x + dx + 3} y2={y + dy} />
-                            {q > 0 && <line x1={x + dx} y1={y + dy - 3} x2={x + dx} y2={y + dy + 3} />}
+                    {visaTecken && q !== 0 && (
+                        <g stroke="#f7f2e8" strokeWidth={1.8 + 1.7 * storlek} strokeLinecap="round">
+                            <line x1={x - arm} y1={y} x2={x + arm} y2={y} />
+                            {q > 0 && <line x1={x} y1={y - arm} x2={x} y2={y + arm} />}
                         </g>
-                    ))}
+                    )}
                 </g>
             );
         };

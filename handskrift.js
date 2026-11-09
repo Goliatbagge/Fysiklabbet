@@ -27221,6 +27221,47 @@
     T.underline(T.str('Svar: 2,0 mW/m^2', padL, y), y);
     T.stepEnd();
 
+    /* Alternativ lösning: värdena insatta i den ursprungliga formeln,
+       och ekvationen löses med NLös i CAS (samma som textlösningen). */
+    y += adv + 3.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Samma uppgift igen, men nu']],
+      [['låter jag CAS lösa ekvationen.']],
+      [['Jag börjar med formeln.']]
+    ]));
+    T.str('Alternativ lösning med NLös i CAS', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.6 * F;
+    T.parenFrac('I', 'I_0', null, T.str('L=10·lg', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Jag sätter in ', 0], ['L', 1], [' = 93 dB och', 0]],
+      [['hörtröskeln direkt i formeln.']]
+    ]));
+    T.parenFrac('I', '10^−^1^2', null, T.str('93=10·lg', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['NLös löser ekvationen numeriskt.']],
+      [['Den enda okända är ', 0], ['I', 1], ['.', 0]]
+    ]));
+    var xN = T.parenFrac('I', '10^−^1^2', null, T.str('NLös(93=10·lg', padL, y), y);
+    T.str(') i CAS ger', xN, y);
+    y += adv + 1.6 * F;
+    T.str('I≈0,0020 W/m^2=2,0 mW/m^2', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Samma svar som med den']],
+      [['algebraiska lösningen.']]
+    ]));
+    T.underline(T.str('Svar: 2,0 mW/m^2', padL, y), y);
+    T.stepEnd();
+
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
   }
 

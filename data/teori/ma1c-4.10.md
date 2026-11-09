@@ -9,11 +9,12 @@ section: '4.10'
 
 # Definitionsmängd och värdemängd
 
-- **Definitionsmängden** är alla värden som den **oberoende variabeln**,
-  oftast $x$, kan anta, alltså alla $x$-värden som får sättas in i
-  funktionen.
-- **Värdemängden** är alla värden som den **beroende variabeln**, oftast
-  $y$, antar när $x$ går igenom definitionsmängden.
+Alla värden som den **oberoende variabeln**, oftast $x$, kan anta, alltså
+alla $x$-värden som får sättas in i funktionen, kallas
+**definitionsmängd**.
+
+Alla värden som den **beroende variabeln**, oftast $y$, antar när $x$ går
+igenom definitionsmängden kallas **värdemängd**.
 
 När vi anger definitions- och värdemängd utifrån en graf är det viktigt
 att titta på hur grafens ändpunkter är markerade. En

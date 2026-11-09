@@ -156,10 +156,6 @@
                          font-weight: 600; color: var(--lab-ink); cursor: pointer; }
         .vy-seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
 
-        .forsok-btn { text-align: left; padding: 9px 12px; }
-        .forsok-btn .fb-namn { display: block; font-size: 14px; }
-        .forsok-btn .fb-sub { display: block; font-size: 12px; font-weight: 400; color: var(--lab-ink-muted, #5a6170); margin-top: 1px; }
-        .forsok-btn.active .fb-sub { color: rgba(243,238,228,0.75); }
 
         .jmf-rad { display: flex; justify-content: space-between; gap: 10px; font-size: 14px;
                    padding: 4px 0; border-bottom: 1px dashed var(--lab-line, rgba(15,22,32,0.14)); color: var(--lab-ink); }
@@ -1222,7 +1218,6 @@
             const [tva, setTva] = useState(q.get('tva') === '1');
             const [show, setShow] = useState({ sfar: true, kvad: true, energi: true, etik: true });
             const [sparad, setSparad] = useState(null);
-            const [forsok, setForsok] = useState(null);
             const [ljudPa, setLjudPa] = useState(false);
             const [vy, setVy] = useState('snett');
             const [isFullscreen, setIsFullscreen] = useState(false);
@@ -1242,7 +1237,7 @@
             SIM.p.P = P; SIM.p.Q = Q; SIM.p.r = r; SIM.p.ang = ang; SIM.p.tva = tva; SIM.p.L = L; SIM.p.show = show;
 
             const stoppaAnim = () => { cancelAnimationFrame(animRef.current); clearTimeout(animRef.current); animRef.current = 0; };
-            SIM.cb.flytta = (rr, a) => { stoppaAnim(); setForsok(null); setR(rr); setAng(a); };
+            SIM.cb.flytta = (rr, a) => { stoppaAnim(); setR(rr); setAng(a); };
 
             useEffect(() => { Ljud.satt(L, ljudPa); }, [L, ljudPa]);
 
@@ -1270,45 +1265,13 @@
             const valjVy = (v) => { setVy(v); if (SIM.vy) SIM.vy(v); };
             const tShow = (key) => setShow(sh => ({ ...sh, [key]: !sh[key] }));
             const spara = (Ps = P, rs = r, tvas = tva) => setSparad({ P: Ps, r: rs, tva: tvas, ...berakna(Ps, rs, tvas) });
-            const andraP = (v) => { stoppaAnim(); setForsok(null); setLogP(v); };
-            const andraR = (v) => { stoppaAnim(); setForsok(null); setR(v); };
-            const andraTva = (v) => { stoppaAnim(); setForsok(null); setTva(v); };
+            const andraP = (v) => { stoppaAnim(); setLogP(v); };
+            const andraR = (v) => { stoppaAnim(); setR(v); };
+            const andraTva = (v) => { stoppaAnim(); setTva(v); };
             const vaxlaLjud = () => {
                 if (!ljudPa && !Ljud.start()) return;
                 setLjudPa(pa => !pa);
             };
-
-            // mjuk övergång för de färdiga försöken
-            const animera = (fran, till, ms, satt, efter) => {
-                stoppaAnim();
-                const t0 = performance.now() + 450;
-                const steg = (now) => {
-                    const x = Math.max(0, Math.min(1, (now - t0) / ms));
-                    const e = x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
-                    satt(fran + (till - fran) * e);
-                    if (x < 1) animRef.current = requestAnimationFrame(steg);
-                    else { animRef.current = 0; if (efter) efter(); }
-                };
-                animRef.current = requestAnimationFrame(steg);
-            };
-            const FORSOK = {
-                ex1: { namn: 'Exempel 1 ur teorin', sub: '5,0 W på 10 m avstånd', kor: () => {
-                    stoppaAnim(); setTva(false); setLogP(Math.log10(5)); setR(10); setSparad(null);
-                } },
-                avst: { namn: 'Dubbla avståndet', sub: 'från 5 m till 10 m', kor: () => {
-                    setTva(false); setLogP(Math.log10(5)); setR(5); spara(5, 5, false);
-                    animera(5, 10, 1600, (v) => setR(Math.round(v * 10) / 10));
-                } },
-                tva: { namn: 'Två likadana ljudkällor', sub: 'blir det dubbelt så många dB?', kor: () => {
-                    stoppaAnim(); setLogP(Math.log10(5)); setR(10); setTva(false); spara(5, 10, false);
-                    animRef.current = setTimeout(() => { animRef.current = 0; setTva(true); }, 900);
-                } },
-                tio: { namn: 'Tio gånger effekten', sub: 'från 0,50 W till 5,0 W', kor: () => {
-                    setTva(false); setR(10); setLogP(Math.log10(0.5)); spara(0.5, 10, false);
-                    animera(Math.log10(0.5), Math.log10(5), 1600, (v) => setLogP(v));
-                } },
-            };
-            const korForsok = (k) => { setForsok(k); FORSOK[k].kor(); };
 
             // ── Jämförelse med den sparade mätningen ──
             const jmf = sparad && (() => {
@@ -1427,24 +1390,11 @@
                                 </div>
 
                                 <div className="glass-card rounded-xl p-3 mt-4">
-                                    <div className="flbl mb-2">Färdiga försök</div>
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                        {Object.entries(FORSOK).map(([k, f]) => (
-                                            <button key={k} className={'btn-toggle forsok-btn' + (forsok === k ? ' active' : '')} onClick={() => korForsok(k)}>
-                                                <span className="fb-namn">{f.namn}</span>
-                                                <span className="fb-sub">{f.sub}</span>
-                                            </button>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                <div className="glass-card rounded-xl p-3 mt-3">
                                     <div className="flbl mb-2">Jämför med en sparad mätning</div>
                                     {!sparad ? (
                                         <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
                                             Tryck på <strong>Spara mätningen</strong>, flytta sedan mätaren eller ändra effekten.
                                             Här ser du då hur många gånger intensiteten ändrats och hur många decibel det motsvarar.
-                                            Du kan också välja ett av de färdiga försöken.
                                         </p>
                                     ) : (
                                         <div>
@@ -1469,7 +1419,7 @@
                                                     {Math.abs(jmf.kI - 10) < 0.2 && ' Tio gånger så stor intensitet är alltid 10 dB mer.'}
                                                 </p>
                                             )}
-                                            <button className="btn-toggle w-full mt-2 text-sm" onClick={() => { setSparad(null); setForsok(null); }}>Ta bort den sparade mätningen</button>
+                                            <button className="btn-toggle w-full mt-2 text-sm" onClick={() => { setSparad(null); }}>Ta bort den sparade mätningen</button>
                                         </div>
                                     )}
                                 </div>
@@ -1494,7 +1444,7 @@
                                     <div className="text-sm mt-3 p-2 rounded-lg" style={{ background: 'rgba(37,99,201,0.07)', color: 'var(--lab-ink-soft)' }}>
                                         <strong style={{ color: 'var(--lab-ink)' }}>Lyssna själv.</strong> Slå på ljudet och kryssa
                                         i Två likadana ljudkällor. Intensiteten blir dubbelt så stor, men ljudet låter bara
-                                        lite starkare: 3&nbsp;dB är en liten skillnad för örat. Prova sedan Tio gånger effekten.
+                                        lite starkare: 3&nbsp;dB är en liten skillnad för örat. Gör sedan effekten tio gånger så stor.
                                         Först när intensiteten blir ungefär tio gånger så stor, alltså 10&nbsp;dB mer, upplever
                                         de flesta att ljudet låter dubbelt så starkt. Det är därför decibelskalan är logaritmisk.
                                     </div>
@@ -1602,7 +1552,7 @@
                             </summary>
                             <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
                                 <li><strong>"På dubbla avståndet är ljudet hälften så starkt."</strong> Nej. Intensiteten avtar med kvadraten på avståndet, så dubbla avståndet ger en fjärdedel av intensiteten, och ljudnivån sjunker med 6&nbsp;dB.</li>
-                                <li><strong>"Två högtalare på 60&nbsp;dB ger 120&nbsp;dB."</strong> Nej. Intensiteterna adderas, så två likadana källor ger dubbel intensitet. Det är bara 3&nbsp;dB mer, alltså 63&nbsp;dB. Prova i försöket Två likadana ljudkällor.</li>
+                                <li><strong>"Två högtalare på 60&nbsp;dB ger 120&nbsp;dB."</strong> Nej. Intensiteterna adderas, så två likadana källor ger dubbel intensitet. Det är bara 3&nbsp;dB mer, alltså 63&nbsp;dB. Kryssa i Två likadana ljudkällor och prova.</li>
                                 <li><strong>"40&nbsp;dB är dubbelt så starkt som 20&nbsp;dB."</strong> Nej. 20&nbsp;dB mer betyder 100 gånger så stor intensitet. Varje steg på 10&nbsp;dB är en tiodubbling.</li>
                                 <li><strong>"0&nbsp;dB betyder att det är helt tyst."</strong> Nej. 0&nbsp;dB är hörbarhetsgränsen, den svagaste intensitet örat kan uppfatta (<em>I</em><sub>0</sub> = 10<sup>−12</sup>&nbsp;W/m²). Ett ännu svagare ljud har negativ ljudnivå, det är bara för svagt för att höras.</li>
                             </ul>

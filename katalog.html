@@ -537,8 +537,13 @@
                     out.push('<div class="lab-block lab-block-' + ty + '"' + ankare + '>');
                     if (title) {
                         // '*pq*-formeln' → kursiverad variabeldel (<em>pq</em>).
-                        const t = escapeHtml(title).replace(/\*([^*]+)\*/g, '<em>$1</em>');
-                        out.push('<div class="lab-block-title">' + t + '</div>');
+                        let t = escapeHtml(title).replace(/\*([^*]+)\*/g, '<em>$1</em>');
+                        // Nivån sist i rubriken, "… (Mellan)", lyfts ut till en
+                        // diskret etikett i rubrikradens högerkant (.lab-niva i
+                        // styles-laborans.css) i stället för en svart parentes.
+                        const mNiva = /^(.*\S)\s*\((Grund|Mellan|Avancerad)\)$/.exec(t);
+                        if (mNiva) t = '<span>' + mNiva[1] + '</span><span class="lab-niva">' + mNiva[2] + '</span>';
+                        out.push('<div class="lab-block-title' + (mNiva ? ' har-niva' : '') + '">' + t + '</div>');
                     }
                     out.push('');
                 } else if (close && stack.length > 0) {

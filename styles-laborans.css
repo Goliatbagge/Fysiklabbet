@@ -2293,6 +2293,23 @@ details.lab-forklaring.block-mal,
     font-weight: 600;
 }
 
+/* Nivån vid ett exempel ("Exempel 2 — … (Mellan)" i md-filen) står som en
+   diskret etikett i rubrikradens högerkant: tunnare och ljusare än
+   rubriken, så att den går att hitta men inte tävlar med exemplets namn
+   (önskemål 2026-11-09). Renderarna i katalog.html och avsnitt.html
+   lyfter ut ordet ur rubriken och sätter klassen har-niva. */
+.lab-block-title.har-niva {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+}
+.lab-niva {
+    flex: none;
+    font-weight: 400;
+    color: rgba(31, 37, 48, 0.5);
+}
+
 .lab-block p:last-child { margin-bottom: 0; }
 .lab-block ul:last-child,
 .lab-block ol:last-child { margin-bottom: 0; }

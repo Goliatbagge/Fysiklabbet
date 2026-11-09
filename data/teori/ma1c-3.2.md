@@ -39,6 +39,14 @@ Förändringsfaktorn fås genom att lägga till ändringen i procentform
 till 100 % (100 % står för det vi har från början) och sedan göra om till
 decimalform. Man kan också direkt lägga till ändringen i decimalform till 1,
 eftersom 100 % = 1.
+
+$$
+\begin{gathered}
+\text{ökning med } p\ \%\text{:} \quad \text{förändringsfaktor} = 1 + \frac{p}{100}
+\\[0.7em]
+\text{minskning med } p\ \%\text{:} \quad \text{förändringsfaktor} = 1 - \frac{p}{100}
+\end{gathered}
+$$
 :::
 
 Exempel:

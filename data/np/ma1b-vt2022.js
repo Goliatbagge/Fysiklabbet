@@ -285,22 +285,19 @@ window.NP_PROV = window.NP_PROV || {};
                         'Svaret ska bli mindre än $10{,}0$ miljoner kronor.',
                 },
                 {
-                    rubrik: 'Ställ upp proportionen',
-                    varfor: 'Beloppen förhåller sig till varandra som KPI-värdena för sina år: ' +
-                        'belopp delat med KPI är detsamma för båda åren. Kalla det sökta beloppet $x$.',
-                    text: '$$\\dfrac{x}{316{,}43} = \\dfrac{10{,}0}{335{,}92}$$',
-                },
-                {
-                    rubrik: 'Multiplicera båda led med 316,43',
-                    varfor: 'Då står $x$ ensamt i vänsterledet.',
-                    text: '$$x = \\dfrac{10{,}0 \\cdot 316{,}43}{335{,}92} = 9{,}4198\\ldots$$',
+                    rubrik: 'Multiplicera med kvoten mellan KPI-värdena',
+                    varfor: 'Priserna år $2016$ var $\\dfrac{316{,}43}{335{,}92}$ av priserna år $2020$, ' +
+                        'eftersom KPI är ett mått på prisnivån. Ett belopp räknas därför om till ' +
+                        '$2016$ års penningvärde genom att multipliceras med samma kvot. KPI-värdet för ' +
+                        'året vi räknar om **till** står i täljaren.',
+                    text: '$$10{,}0 \\cdot \\dfrac{316{,}43}{335{,}92} = 9{,}4198\\ldots$$',
                 },
                 {
                     rubrik: 'Avrunda och bedöm rimligheten',
                     varfor: 'Prissumman i tabellen anges med en decimal, så vi svarar med en decimal. ' +
                         'Svaret är mindre än $10{,}0$, som vi förutsåg. KPI steg med drygt $6\\ \\%$, ' +
                         'och beloppet krymper med ungefär lika mycket.',
-                    text: '$$x \\approx 9{,}4 \\text{ miljoner kronor}$$',
+                    text: '$$10{,}0 \\cdot \\dfrac{316{,}43}{335{,}92} \\approx 9{,}4 \\text{ miljoner kronor}$$',
                 },
             ],
             svar: 'Ungefär $9{,}4$ miljoner kronor i $2016$ års penningvärde.',

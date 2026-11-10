@@ -16048,13 +16048,14 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
-  /* ---------------- scen: rektangelns sidor (ma1c-4.10 ex 3) -----------
-   * y = 10 − x för en rektangel med omkretsen 20 cm. Båda sidorna måste
-   * vara längre än 0, så BÅDA ändpunkterna faller bort: 0 < x < 10 och
-   * 0 < y < 10. Grafen ritas med tomma ringar i båda ändar, så att det
-   * öppna intervallet syns. Grafen ligger till höger om texten (x > 400)
-   * och under mobilzonen, så att bubblorna (x 120–388) aldrig täcker den. */
-  function layoutRektangelmangder(cfg, F) {
+  /* ---------------- scen: elsparkcykeln (ma1c-4.10 ex 3) ----------------
+   * y = 10 + 3x, där x är resans tid i minuter. x = 0 ingår inte (då har
+   * resan aldrig börjat) och det finns ingen övre gräns: x > 0 och
+   * y > 10. Grafen ritas med en TOM ring i (0, 10) och linjen går vidare
+   * ut till rutans kant, utan ändpunkt. Grafen ligger till höger om
+   * texten (x > 405) och under mobilzonen, så att bubblorna (x 120–388)
+   * aldrig täcker den. */
+  function layoutElsparkcykel(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
     var tanke = mkTanke(T);
     function cirkel(cx, cy) {
@@ -16067,73 +16068,65 @@
     }
 
     tanke(20, [
-      [['En sida måste vara längre']],
-      [['än 0 cm, annars blir det']],
-      [['ingen rektangel.']]
+      [['Tiden kan inte vara negativ,']],
+      [['och med x=0 har resan aldrig']],
+      [['börjat.']]
     ], 0);
     y = 150;
-    T.str('a) Sidan x', padL, y - 1.6 * F, null, 0.62);
+    T.str('a) Minsta tiden', padL, y - 1.6 * F, null, 0.62);
     T.str('x>0', padL, y);
     T.stepEnd();
 
     tanke(y, [
-      [['Även y=10−x måste vara']],
-      [['större än 0. Det gäller bara']],
-      [['när x är mindre än 10.']]
+      [['Man får åka hur länge som']],
+      [['helst, så det finns ingen']],
+      [['övre gräns för x.']]
     ]);
-    y += 3.6 * F;
-    T.str('Sidan y=10−x', padL, y - 1.6 * F, null, 0.62);
-    T.str('x<10', padL, y);
-    T.stepEnd();
-
-    tanke(y, [
-      [['Båda villkoren gäller, och']],
-      [['ingen av ändpunkterna ingår.']]
-    ]);
-    y += 2.6 * F;
-    xe = T.str('Svar: 0<x<10', padL, y);
+    y += 3.0 * F;
+    xe = T.str('Svar: x>0', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
     tanke(y, [
-      [['y minskar när x ökar. Jag']],
-      [['sätter in ändpunkterna för']],
+      [['Kostnaden ökar med tiden. Jag']],
+      [['sätter in ändpunkten x=0 för']],
       [['att se vad y närmar sig.']]
     ], 0.5);
     y += 4.5 * F;
     T.str('b) Ändpunkten x=0', padL, y - 1.6 * F, null, 0.62);
-    T.str('y=10−0=10', padL, y);
+    T.str('y=10+3·0=10', padL, y);
     T.stepEnd();
 
-    y += 3.6 * F;
-    T.str('Ändpunkten x=10', padL, y - 1.6 * F, null, 0.62);
-    T.str('y=10−10=0', padL, y);
-    T.stepEnd();
-
-    /* grafen: sträckan från (0, 10) till (10, 0) med TOMMA ringar */
-    var A = mkAxes(T, F, { ox: 378, oy: y + 0.6 * F, u: 27,
-                           xmin: 0, xmax: 10, ymin: 0, ymax: 10 });
+    /* grafen: tom ring i (0, 10), linjen fortsätter till (9, 37).
+     * ysc = 5 kr per ruta, så att y upp till 40 kr ryms. */
+    var A = mkAxes(T, F, { ox: 405, oy: y + 3.2 * F, u: 27, ysc: 5,
+                           xmin: 0, xmax: 9, ymin: 0, ymax: 40 });
     tanke(y, [
-      [['I grafen blir båda ändarna']],
-      [['tomma ringar. x=0 och x=10']],
-      [['ingår inte, så y blir aldrig']],
-      [['exakt 10 eller exakt 0.']]
+      [['x=0 ingår inte, så kostnaden']],
+      [['är alltid mer än 10 kr. I']],
+      [['grafen blir det en tom ring,']],
+      [['och linjen tar aldrig slut.']]
     ], 0.5);
     A.axes();
-    A.ticks(heltal(0, 10), heltal(0, 10), [2, 4, 6, 8, 10], [2, 4, 6, 8, 10]);
+    A.ticks(heltal(0, 9), [5, 10, 15, 20, 25, 30, 35, 40],
+            [2, 4, 6, 8], [10, 20, 30, 40]);
     T.pause(150);
-    var p0 = [A.X(0), A.Y(10)], p1 = [A.X(10), A.Y(0)];
+    var p0 = [A.X(0), A.Y(10)], p1 = [A.X(9), A.Y(37)];
     var dx = p1[0] - p0[0], dy = p1[1] - p0[1], d = Math.sqrt(dx * dx + dy * dy);
-    var ex = dx / d * 6.5, ey = dy / d * 6.5;
-    A.linjal([p0[0] + ex, p0[1] + ey], [p1[0] - ex, p1[1] - ey], BLUE);
+    A.linjal([p0[0] + dx / d * 6.5, p0[1] + dy / d * 6.5], p1, BLUE);
     T.pause(150);
     acts.push({ kind: 'stroke', pts: cirkel(p0[0], p0[1]), color: BLUE });
-    T.pause(150);
-    acts.push({ kind: 'stroke', pts: cirkel(p1[0], p1[1]), color: BLUE });
     T.stepEnd();
 
-    y += 3.0 * F;
-    xe = T.str('Svar: 0<y<10', padL, y);
+    /* svaret skrivs UNDER grafen, så att bubblan inte täcker axeln */
+    y = A.Y(0) + 0.9 * F;
+    tanke(y, [
+      [['Tiden har ingen övre gräns,']],
+      [['och då har inte kostnaden']],
+      [['det heller.']]
+    ], 0.5);
+    y += 4.5 * F;
+    xe = T.str('Svar: y>10', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -64786,7 +64779,7 @@
                    grafiskolikhet: layoutGrafiskolikhet,
                    musiktjanst: layoutMusiktjanst,
                    mangderurgraf: layoutMangderurgraf,
-                   rektangelmangder: layoutRektangelmangder,
+                   elsparkcykel: layoutElsparkcykel,
                    rationelldef: layoutRationelldef,
                    kapitalvaxer: layoutKapitalvaxer,
                    tolkaexp: layoutTolkaexp,

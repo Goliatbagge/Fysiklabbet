@@ -118,46 +118,37 @@ $0 \leq y \leq 4$
 :::
 :::
 
-::: exempel "Exempel 3 — Rektangelns sidor"
-**En rektangel har omkretsen 20 cm. Den ena sidan är $x$ cm och den andra
-$y$ cm, och då är $y = 10 - x$. Bestäm funktionens<br>a) definitionsmängd&emsp;&emsp;b) värdemängd.**
-
-::: figur
-<svg viewBox="16 10 262 130" width="311" height="154" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En rektangel med den vågräta sidan x centimeter och den lodräta sidan y centimeter."><rect x="20" y="14" width="210" height="96" fill="rgba(37,99,201,0.08)" stroke="#1f2530" stroke-width="2"/><text x="125" y="132" font-size="16" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">x</tspan> cm</text><text x="240" y="67.5" font-size="16" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan> cm</text></svg>
-:::
+::: exempel "Exempel 3 — Elsparkcykeln"
+**Att hyra en elsparkcykel kostar 10 kr för att låsa upp den plus 3 kr
+per minut. Kostnaden räknas exakt efter tiden, och det finns ingen
+gräns för hur länge man får åka. Kostnaden $y$ kr för en resa på $x$
+minuter är då $y = 10 + 3x$. Bestäm funktionens<br>a) definitionsmängd&emsp;&emsp;b) värdemängd.**
 
 ::: handskrift
-typ: rektangelmangder
+typ: elsparkcykel
 :::
 
 ::: textlosning
-**a)** En sida i en rektangel måste vara längre än 0 cm, annars finns
-det ingen rektangel. Alltså är $x > 0$.
+**a)** Tiden $x$ kan inte vara negativ, och med $x = 0$ har resan aldrig
+börjat. Alltså är $x > 0$. Någon största tid finns inte, eftersom man
+får åka hur länge som helst. Därför har definitionsmängden ingen övre
+gräns.
 
-Även den andra sidan, $y = 10 - x$, måste vara längre än 0 cm. Uttrycket
-$10 - x$ är större än 0 bara när $x$ är mindre än 10, så $x < 10$. Med
-$x = 10$ blir $y = 0$, och då har rektangeln krympt till ett streck.
+**Svar:** $x > 0$
 
-**Svar:** $0 < x < 10$
-
-**b)** Funktionen $y = 10 - x$ minskar när $x$ ökar. Ändpunkterna
-$x = 0$ och $x = 10$ ingår inte i definitionsmängden, men vi sätter in
-dem för att se vilka gränser $y$ närmar sig:
+**b)** Kostnaden $y = 10 + 3x$ ökar när $x$ ökar. Vi sätter in
+ändpunkten $x = 0$ för att se vilken gräns $y$ närmar sig:
 
 $$
-y = 10 - 0 = 10
+y = 10 + 3 \cdot 0 = 10
 $$
 
-$$
-y = 10 - 10 = 0
-$$
+Eftersom $x = 0$ inte ingår blir kostnaden aldrig exakt 10 kr, utan
+alltid lite mer. Tiden kan bli hur lång som helst, så kostnaden kan
+också bli hur stor som helst. I en graf börjar funktionen med en tom
+ring i $(0, 10)$ och fortsätter uppåt utan slut.
 
-Eftersom $x = 0$ och $x = 10$ inte ingår blir $y$ aldrig exakt 10 eller
-exakt 0, men $y$ antar alla värden däremellan. I en graf blir funktionen
-en sträcka med tomma ringar i båda ändpunkterna, $(0, 10)$ och
-$(10, 0)$.
-
-**Svar:** $0 < y < 10$
+**Svar:** $y > 10$
 :::
 :::
 
@@ -248,8 +239,8 @@ $$
 - Ökar eller minskar $y$ hela tiden räcker det att räkna ut $y$ i
   ändpunkterna, här $0 \leq y \leq 600$.
 - Annars ger grafens lägsta och högsta punkt värdemängden.
-- Kan en ändpunkt inte ingå, som en sida på 0 cm, blir intervallet öppet:
-  $0 < x < 10$.
+- Kan en ändpunkt inte ingå blir olikheten strikt. Finns ingen övre
+  gräns skrivs bara den undre, till exempel $x > 0$ och $y > 10$.
 :::
 
 ::: sampunkt "Ur en graf: titta på ringarna"

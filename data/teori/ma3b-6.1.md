@@ -41,7 +41,7 @@ En talföljd kan beskrivas med en formel på två sätt.
   med 3 och lägg till 4 varje gång. För att få $a_{100}$ måste vi då räkna
   oss fram element för element.
 
-::: exempel "Exempel 1 — Element ur en formel"
+::: exempel "Exempel 1 — Element ur en formel (Grund)"
 **Bestäm de fyra första elementen i talföljden som ges av<br>a)&nbsp;$a_{\mathit{n}} = n^2 + 1$&emsp;&emsp;b)&nbsp;$a_1 = 2$ och $a_{\mathit{n}+1} = 2 \cdot a_{\mathit{n}} + 1$**
 
 ::: handskrift
@@ -126,7 +126,7 @@ Talföljder dyker ofta upp när en figur byggs ut steg för steg. Vi räknar
 antalet stickor, prickar eller rutor i varje figur och får en talföljd. Är
 talföljden aritmetisk ger formeln ovan direkt en sluten formel.
 
-::: exempel "Exempel 2 — Stickmönstret"
+::: exempel "Exempel 2 — Stickmönstret (Mellan)"
 **Figurerna nedan är byggda av stickor, och mönstret fortsätter på samma sätt.**
 
 ::: figur
@@ -211,7 +211,7 @@ element.
 - Är varken differensen eller kvoten konstant är talföljden ingetdera.
 :::
 
-::: exempel "Exempel 3 — Vilken sorts talföljd?"
+::: exempel "Exempel 3 — Vilken sorts talföljd? (Grund)"
 **Avgör om talföljden är aritmetisk, geometrisk eller ingetdera.<br>a)&nbsp;$5,\ 15,\ 45,\ 135,\ \ldots$&emsp;&emsp;b)&nbsp;$7,\ 4,\ 1,\ -2,\ \ldots$&emsp;&emsp;c)&nbsp;$1,\ 4,\ 9,\ 16,\ \ldots$**
 
 ::: handskrift

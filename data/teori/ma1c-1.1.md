@@ -46,7 +46,7 @@ Alla naturliga tal är alltså även heltal, rationella tal och reella tal.
 Alla heltal är även rationella tal och reella tal, men inte nödvändigtvis
 naturliga tal.
 
-::: exempel "Exempel 1 — Rationellt tal som inte är heltal"
+::: exempel "Exempel 1 — Rationellt tal som inte är heltal (Grund)"
 **Ange ett rationellt tal som inte är ett heltal.**
 
 ::: handskrift
@@ -103,7 +103,7 @@ skrivs < eller >.
 En kom ihåg-regel är att olikhetstecknet "gapar" åt det större värdet.
 :::
 
-::: exempel "Exempel 2 — Sätt ut rätt olikhetstecken"
+::: exempel "Exempel 2 — Sätt ut rätt olikhetstecken (Grund)"
 **Sätt ut korrekt olikhetstecken, < eller >, mellan talen.<br>
 a) 23&emsp;19&emsp;&emsp;&emsp;&emsp;b) −20&emsp;−3**
 
@@ -139,7 +139,7 @@ ersättas med ett minustecken.
 Minnesregel: "minus minus ger plus" och "plus minus ger minus".
 :::
 
-::: exempel "Exempel 3 — Addition och subtraktion"
+::: exempel "Exempel 3 — Addition och subtraktion (Grund)"
 **Beräkna<br>a)&nbsp;$4 - (-9)$&emsp;&emsp;b)&nbsp;$25 + (-10)$**
 
 ::: handskrift
@@ -185,7 +185,7 @@ varandra ger ett **negativt** värde.
 Minnesregel: "minus gånger minus ger plus" och "plus gånger minus ger minus".
 :::
 
-::: exempel "Exempel 4 — Multiplikation och division"
+::: exempel "Exempel 4 — Multiplikation och division (Grund)"
 **Beräkna<br>a)&nbsp;$4 \cdot (-3)$&emsp;&emsp;b)&nbsp;$(-5) \cdot (-9)$&emsp;&emsp;c)&nbsp;$\dfrac{35}{(-7)}$&emsp;&emsp;d)&nbsp;$\dfrac{(-42)}{(-7)}$**
 
 ::: handskrift
@@ -211,7 +211,7 @@ typ: negmult
 :::
 :::
 
-::: exempel "Exempel 5 — Se upp med subtraktionen"
+::: exempel "Exempel 5 — Se upp med subtraktionen (Grund)"
 **Beräkna $(-5) - 3$**
 
 ::: handskrift

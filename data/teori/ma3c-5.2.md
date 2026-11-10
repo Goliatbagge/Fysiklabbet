@@ -43,7 +43,7 @@ och integrering av en hastighet en sträcka.
 
 ## Bestäm konstanten C med ett villkor
 
-::: exempel "Exempel 1 — Bestäm konstanten C med ett villkor"
+::: exempel "Exempel 1 — Bestäm konstanten C med ett villkor (Mellan)"
 **Bestäm den primitiva funktionen till $f(x) = x^3 + 12x$ som uppfyller
 villkoret $F(1) = 7$.**
 
@@ -97,7 +97,7 @@ $$
 
 ## Tillämpning: sträcka ur en hastighetsfunktion
 
-::: exempel "Exempel 2 — Sträcka ur en hastighetsfunktion"
+::: exempel "Exempel 2 — Sträcka ur en hastighetsfunktion (Mellan)"
 **Hastigheten $v(t)$ m/s för en bil som accelererar är $v(t) = 1{,}2t^2$,
 där $t$ är tiden i sekunder från start. Hur lång sträcka rör sig bilen de
 första 10 sekunderna?**

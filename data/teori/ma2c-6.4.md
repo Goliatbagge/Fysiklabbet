@@ -88,7 +88,7 @@ s = \sqrt{\frac{(x_1 - \bar{x})^2 + (x_2 - \bar{x})^2 + \ldots + (x_n - \bar{x})
 $$
 :::
 
-::: exempel "Exempel 1 — Standardavvikelse i Geogebra"
+::: exempel "Exempel 1 — Standardavvikelse i Geogebra (Grund)"
 **Beräkna standardavvikelsen för mätvärdena 2, 4, 12, 24 och 43.**
 
 ::: handskrift

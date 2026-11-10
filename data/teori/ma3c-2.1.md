@@ -34,7 +34,7 @@ $y$-axeln" per "enheten på $x$-axeln".
 
 Vi tillämpar detta i två exempel.
 
-::: exempel "Exempel 1 — Sekantens lutning som förändringshastighet"
+::: exempel "Exempel 1 — Sekantens lutning som förändringshastighet (Grund)"
 **En granplanta har höjden $y$ dm efter $x$ år enligt diagrammet
 nedan.<br>a) Beräkna sekantens lutning mellan $x = 0$ och $x = 2$.
 <br>b) Tolka svaret i a) med ord.**
@@ -69,7 +69,7 @@ första åren.
 :::
 :::
 
-::: exempel "Exempel 2 — Ändringskvoten för en andragradsfunktion"
+::: exempel "Exempel 2 — Ändringskvoten för en andragradsfunktion (Grund)"
 **Beräkna ändringskvoten mellan $x = 3$ och $x = 5$ för $f(x) = x^2$.**
 
 ::: handskrift

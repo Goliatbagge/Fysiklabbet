@@ -464,8 +464,11 @@
                     rakn[ty] = (rakn[ty] || 0) + 1;
                     let ankare = ' data-blocknr="' + blockSlug(ty) + '-' + rakn[ty] + '"';
                     if (title) {
-                        const slug = blockSlug(title);
-                        ankare += ' data-block="' + slug + '"';
+                        // Nivån sist i rubriken, "(Mellan)", ingår inte i ankaret:
+                        // en länk med &block= ska hålla även när exemplet
+                        // nivåmärks eller byter nivå.
+                        const slug = blockSlug(title.replace(/\s*\((Grund|Mellan|Avancerad)\)\s*$/, ''));
+                        ankare +=' data-block="' + slug + '"';
                         // "Exempel 1 — Den fatala gungan" ger också den korta
                         // formen "den-fatala-gungan", som överlever att
                         // exemplen numreras om.

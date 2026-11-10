@@ -15,7 +15,7 @@ byggs upp av grenar, ett så kallat **träddiagram**. För att beräkna
 sannolikheten för en kombination, multiplicerar vi bara sannolikheterna
 längs med den grenen.
 
-::: exempel "Exempel 1 — Strumporna i lådan"
+::: exempel "Exempel 1 — Strumporna i lådan (Mellan)"
 **I en låda ligger 7 svarta och 3 vita strumpor. Du drar två strumpor
 efter varandra. Vad är sannolikheten att du<br>
 a) med återläggning drar två svarta strumpor?<br>

@@ -154,7 +154,7 @@ $$
 2. Sätt sedan in $x = a$ i derivatafunktionen och bestäm $f'(a)$.
 :::
 
-::: exempel "Exempel 1 — Derivera med deriveringsreglerna"
+::: exempel "Exempel 1 — Derivera med deriveringsreglerna (Grund)"
 **Derivera<br>a)&nbsp;$f(x) = x^7$&emsp;&emsp;b)&nbsp;$y = 3x^5$&emsp;&emsp;c)&nbsp;$f(x) = 27$&emsp;&emsp;d)&nbsp;$g(x) = 12x$&emsp;&emsp;e)&nbsp;$f(x) = \dfrac{x^4}{5}$<br>f)&nbsp;$f(x) = \dfrac{9\pi^{e}\left(4 + \ln 90\right)^{\sqrt{2}}}{5\ln 2 - \sqrt{e} + 8\pi}$**
 
 ::: handskrift
@@ -218,7 +218,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Derivatans värde i en punkt"
+::: exempel "Exempel 2 — Derivatans värde i en punkt (Grund)"
 **Bestäm $f'(3)$ för $f(x) = 4x^2$.**
 
 ::: handskrift

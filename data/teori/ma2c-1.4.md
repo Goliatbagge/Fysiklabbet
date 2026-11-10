@@ -18,7 +18,7 @@ ekvationssystem.
 3. Tolka och svara.
 :::
 
-::: exempel "Exempel 1 — Kor och höns"
+::: exempel "Exempel 1 — Kor och höns (Mellan)"
 **En bonde har kor och höns. Totalt har djuren 100 huvuden och 352 ben.
 Hur många kor respektive höns har bonden?**
 
@@ -92,7 +92,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Summa och differens"
+::: exempel "Exempel 2 — Summa och differens (Grund)"
 **Två tal har summan 19 och differensen 5. Vilka är talen?**
 
 ::: handskrift

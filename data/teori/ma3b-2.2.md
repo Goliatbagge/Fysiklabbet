@@ -41,7 +41,7 @@ sitt **minsta** värde i någon av områdets **hörnpunkter**.
 Beräkna därför målfunktionens värde i varje hörnpunkt och jämför.
 :::
 
-::: exempel "Exempel 1 — Största och minsta värde i ett område"
+::: exempel "Exempel 1 — Största och minsta värde i ett område (Grund)"
 **Figuren visar ett område med hörnpunkterna $(0, 0)$, $(5, 0)$, $(3, 2)$ och $(0, 3)$. Bestäm det största och det minsta värdet av $z = 2x + 3y$ i området.**
 
 ::: figur
@@ -129,7 +129,7 @@ hörnpunktsmetoden säger.
 7. Svara på frågan i dess sammanhang.
 :::
 
-::: exempel "Exempel 2 — Störst vinst"
+::: exempel "Exempel 2 — Störst vinst (Mellan)"
 **En möbelsnickare tillverkar stolar och bord. En stol kräver 2 timmars snickeriarbete och 1 timmes målning. Ett bord kräver 3 timmars snickeriarbete och 1 timmes målning. Varje vecka finns högst 24 timmar för snickeri och högst 10 timmar för målning. Vinsten är 400 kr per stol och 500 kr per bord.<br>a) Ställ upp bivillkoren och målfunktionen.<br>b) Hur många stolar och bord ska snickaren tillverka varje vecka för att vinsten ska bli så stor som möjligt, och hur stor blir vinsten då?**
 
 ::: handskrift
@@ -225,7 +225,7 @@ Ett område som beskrivs av $\geq$-villkor kan fortsätta obegränsat uppåt
 och åt höger. Då finns inget största värde av en kostnad, men det minsta
 värdet finns fortfarande i ett hörn.
 
-::: exempel "Exempel 3 — Lägsta kostnad"
+::: exempel "Exempel 3 — Lägsta kostnad (Mellan)"
 **En skola ska hyra bussar till en utflykt för 300 personer. En liten buss har 30 platser och kostar 2 000 kr. En stor buss har 50 platser och kostar 4 000 kr. Bussbolaget har bara 8 förare lediga, så skolan kan hyra högst 8 bussar. Hur många bussar av varje sort ska skolan hyra för att kostnaden ska bli så låg som möjligt?**
 
 ::: handskrift
@@ -311,7 +311,7 @@ kant som förbinder hörnen, och **alla** punkter på kanten ger samma bästa
 värde. Svaret är då inte en enda punkt. Måste svaret vara heltal kan det
 finnas flera heltalspunkter på kanten som alla är lika bra.
 
-::: exempel "Exempel 4 — Två hörn ger samma vinst"
+::: exempel "Exempel 4 — Två hörn ger samma vinst (Mellan)"
 **Möbelsnickaren från Exempel 2 höjer priset på borden så att vinsten blir 600 kr per bord. Vinsten per stol är fortfarande 400 kr, och bivillkoren är desamma, så det tillåtna området har hörnen $(0, 0)$, $(10, 0)$, $(6, 4)$ och $(0, 8)$, där $x$ är antalet stolar och $y$ antalet bord. Hur många stolar och bord ska snickaren nu tillverka för att vinsten ska bli så stor som möjligt?**
 
 ::: figur

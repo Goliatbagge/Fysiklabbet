@@ -66,7 +66,7 @@ kvartiler (fjärdedelar), dela in det statistiska materialet i
 och då är 80 % av värdena mindre än detta värde och 20 % av värdena
 större. Percentiler beräknas i Geogebra (se exemplet nedan).
 
-::: exempel "Exempel 1 — Två middagar"
+::: exempel "Exempel 1 — Två middagar (Mellan)"
 **Adriana arrangerar två olika typer av middagar: en släktmiddag och en
 kompismiddag. Åldrarna på deltagarna i respektive middag är:**
 

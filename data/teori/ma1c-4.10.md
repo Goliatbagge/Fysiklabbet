@@ -36,7 +36,7 @@ För värdemängden avgör ringen bara när ändpunkten också är grafens
 lägsta eller högsta punkt. Annars kan grafen nå samma $y$-värde på ett
 annat ställe.
 
-::: exempel "Exempel 1 — Pumpen som fyller en tank"
+::: exempel "Exempel 1 — Pumpen som fyller en tank (Mellan)"
 **En pump fyller en tom tank med 50 liter vatten per minut. Pumpen
 stängs av automatiskt efter 12 minuter. Medan pumpen går är
 vattenmängden $y$ liter efter $x$ minuter $y = 50x$. Bestäm funktionens<br>a) definitionsmängd&emsp;&emsp;b) värdemängd.**
@@ -75,7 +75,7 @@ mellan 0 och 600 liter.
 :::
 :::
 
-::: exempel "Exempel 2 — Ur en graf"
+::: exempel "Exempel 2 — Ur en graf (Mellan)"
 **Bestäm definitions- och värdemängd till nedanstående funktion.**
 
 ::: figur
@@ -118,7 +118,7 @@ $0 \leq y \leq 4$
 :::
 :::
 
-::: exempel "Exempel 3 — Elsparkcykeln"
+::: exempel "Exempel 3 — Elsparkcykeln (Mellan)"
 **Att hyra en elsparkcykel kostar 10 kr för att låsa upp den plus 3 kr
 per minut. Kostnaden räknas exakt efter tiden, och det finns ingen
 gräns för hur länge man får åka. Kostnaden $y$ kr för en resa på $x$
@@ -172,7 +172,7 @@ Så hittar du definitionsmängden till en rationell funktion: sätt
 nämnaren lika med 0 och lös ekvationen. Lösningen är det $x$-värde som
 inte får sättas in, och alla andra $x$ ingår.
 
-::: exempel "Exempel 4 — Där nämnaren blir noll"
+::: exempel "Exempel 4 — Där nämnaren blir noll (Mellan)"
 **Bestäm definitionsmängden till funktionerna<br>a)&nbsp;$f(x) = \dfrac{4}{x + 3}$&emsp;&emsp;b)&nbsp;$g(x) = \dfrac{x}{2x - 10}$**
 
 ::: handskrift

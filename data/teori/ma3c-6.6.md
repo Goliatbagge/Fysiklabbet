@@ -55,7 +55,7 @@ Sinussatsen går att använda för trianglar med
 - en sida och två vinklar kända,
 - två sidor och en icke-mellanliggande vinkel kända.
 
-::: exempel "Exempel 1 — Bestäm en sida med sinussatsen"
+::: exempel "Exempel 1 — Bestäm en sida med sinussatsen (Grund)"
 **Bestäm sidan $a$ i triangeln nedan.**
 
 ::: figur
@@ -84,7 +84,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Bestäm en vinkel med sinussatsen"
+::: exempel "Exempel 2 — Bestäm en vinkel med sinussatsen (Mellan)"
 **En triangel $ABC$ har sidorna $a = 7$ cm och $b = 10$ cm. Vinkeln $B$,
 mitt emot sidan $b$, är $40^\circ$. Bestäm vinkeln $A$, mitt emot sidan
 $a$.**

@@ -62,7 +62,7 @@ Vi repeterar först principen med några exempel med bråk. Därefter går vi
 täljare och nämnare med samma tal eller uttryck. Att **förkorta** innebär
 att dividera både täljare och nämnare med en gemensam faktor.
 
-::: exempel "Exempel 1 — Förläng ett bråk"
+::: exempel "Exempel 1 — Förläng ett bråk (Grund)"
 **Förläng $\dfrac{3}{4}$ med 5.**
 
 ::: handskrift
@@ -80,7 +80,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Förkorta ett bråk"
+::: exempel "Exempel 2 — Förkorta ett bråk (Grund)"
 **Förkorta $\dfrac{14}{21}$.**
 
 ::: handskrift
@@ -110,7 +110,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 3 — Förläng ett rationellt uttryck"
+::: exempel "Exempel 3 — Förläng ett rationellt uttryck (Grund)"
 **Förläng $\dfrac{x + 3}{8}$ med $(x - 2)$. Svara i faktoriserad form och i
 utvecklad form.**
 
@@ -130,7 +130,7 @@ $\dfrac{x^2 + x - 6}{8x - 16}$ (utvecklad form)
 :::
 :::
 
-::: exempel "Exempel 4 — Förkorta rationella uttryck"
+::: exempel "Exempel 4 — Förkorta rationella uttryck (Mellan)"
 **Förkorta**
 
 ::: handskrift

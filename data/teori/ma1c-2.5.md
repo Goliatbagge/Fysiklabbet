@@ -83,7 +83,7 @@ x = 78
 $$
 :::
 
-::: exempel "Exempel 1 — Lös ekvationerna"
+::: exempel "Exempel 1 — Lös ekvationerna (Grund)"
 **Lös<br>a)&nbsp;$4x + 7 = 35$&emsp;&emsp;b)&nbsp;$\dfrac{7x}{6} - 15 = -11$**
 
 ::: handskrift

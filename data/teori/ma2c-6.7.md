@@ -44,7 +44,7 @@ fram $r^2$-värdet matar vi, som vanligt, in värdena i Geogebras
 kalkylblad, klickar på knappen "Visa statistik" och läser av
 $r^2$-värdet i tabellen.
 
-::: exempel "Exempel 1 — Världens befolkning"
+::: exempel "Exempel 1 — Världens befolkning (Mellan)"
 **Världens befolkning vid några olika årtal redovisas i tabellen
 nedan.**
 

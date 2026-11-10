@@ -30,7 +30,7 @@ leda till A.
 **Ekvivalens:** $A \iff B$. A leder till B och B leder till A.
 :::
 
-::: exempel "Exempel 1 — Taxen och hunden"
+::: exempel "Exempel 1 — Taxen och hunden (Grund)"
 **Betrakta meningen "Om det är en tax, så är det en hund".<br>a) Skriv meningen med logiska symboler.<br>b) Är meningen en implikation eller en ekvivalens?**
 
 ::: handskrift
@@ -58,7 +58,7 @@ ekvivalens.
 :::
 :::
 
-::: exempel "Exempel 2 — Vilket logiskt tecken?"
+::: exempel "Exempel 2 — Vilket logiskt tecken? (Mellan)"
 **Avgör vilket logiskt tecken som ska vara mellan påståendena:**
 
 ::: handskrift
@@ -88,7 +88,7 @@ Implikationen gäller alltså åt båda håll och vi har då en ekvivalens.
 :::
 :::
 
-::: exempel "Exempel 3 — Stämmer implikationerna?"
+::: exempel "Exempel 3 — Stämmer implikationerna? (Mellan)"
 **Avgör om följande implikationer stämmer.<br>a) $2x + 5 = 11 \implies x = 3$<br>b) man äter godis ⟹ man får hål i tänderna<br>c) $x^2 = 25 \implies x = 5$<br>d) $x^3 = 27 \implies x = 3$**
 
 ::: handskrift

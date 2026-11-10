@@ -56,7 +56,7 @@ likbent triangel. Basvinklar i en likbent triangel är alltid lika
 stora. Motiveras (likbent triangel).
 :::
 
-::: exempel "Exempel 1 — Beräkna randvinkeln"
+::: exempel "Exempel 1 — Beräkna randvinkeln (Grund)"
 **Beräkna vinkeln $x$ i figurerna.** I den vänstra figuren är
 medelpunktsvinkeln 120° given, och i den högra är randvinkeln 32°
 given.
@@ -90,7 +90,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Likbent triangel av radier"
+::: exempel "Exempel 2 — Likbent triangel av radier (Mellan)"
 **Beräkna vinkeln $y$. Den streckade linjen är en diameter och vinkeln
 23° är given.**
 
@@ -120,7 +120,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 3 — Tangent"
+::: exempel "Exempel 3 — Tangent (Mellan)"
 **Linjen genom A och B är en tangent till cirkeln med medelpunkten P.
 Beräkna vinkeln $v$.**
 

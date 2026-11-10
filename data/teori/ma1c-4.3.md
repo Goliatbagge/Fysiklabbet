@@ -15,7 +15,7 @@ fram på nivån kommer vi att göra det med digitala hjälpmedel, till exempel
 GeoGebra. För att förstå vad de digitala hjälpmedlen egentligen gör, så
 ska vi nu själva rita grafer för hand.
 
-::: exempel "Exempel 1: Rita grafen för hand"
+::: exempel "Exempel 1: Rita grafen för hand (Grund)"
 **Rita grafen till ekvationen $y = -2x + 3$.**
 
 ::: handskrift
@@ -115,7 +115,7 @@ För en linje på formen $y = kx + m$ ger $x = 0$ alltid $y = m$, så
 skärningen med *y*-axeln kan läsas direkt ur ekvationen. Skärningen med
 *x*-axeln kräver däremot att vi löser en ekvation.
 
-::: exempel "Exempel 2: Skärning med axlarna"
+::: exempel "Exempel 2: Skärning med axlarna (Grund)"
 **Bestäm algebraiskt var linjen $y = 2x - 8$ skär<br>a) *y*-axeln&emsp;&emsp;b) *x*-axeln**
 
 ::: handskrift
@@ -165,7 +165,7 @@ $x$-koordinat i ekvationen och räknar ut $y$. Blir $y$ samma som punktens
 $y$-koordinat ligger punkten på linjen. Blir det något annat ligger
 punkten inte på linjen, utan ovanför eller nedanför den.
 
-::: exempel "Exempel 2: Ligger punkten på linjen?"
+::: exempel "Exempel 2: Ligger punkten på linjen? (Grund)"
 **Avgör om punkten ligger på linjen $y = -2x + 3$.<br>a)&nbsp;$(5, -7)$&emsp;&emsp;b)&nbsp;$(-4, 10)$**
 
 ::: handskrift

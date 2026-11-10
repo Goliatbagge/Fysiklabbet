@@ -35,7 +35,7 @@ Två trianglar är kongruenta om de överensstämmer i
 I figurer markeras lika långa sidor med lika många tvärstreck och lika
 stora vinklar med vinkelbågar.
 
-::: exempel "Exempel 1 — Kongruenta enligt SVS"
+::: exempel "Exempel 1 — Kongruenta enligt SVS (Grund)"
 **Trianglarna överensstämmer i två sidor och mellanliggande vinkel.
 Bestäm sträckorna $x$ och $y$.**
 
@@ -64,7 +64,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Kongruenta enligt SSS"
+::: exempel "Exempel 2 — Kongruenta enligt SSS (Grund)"
 **Trianglarna överensstämmer i alla tre sidor. Bestäm de okända
 vinklarna i triangeln till höger.**
 

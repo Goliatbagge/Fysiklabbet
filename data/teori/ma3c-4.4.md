@@ -87,7 +87,7 @@ I en punkt där
 <p class="lab-figur-cap">Andraderivatan är negativ för hela den blå delen av kurvan ("ledsen" kurva, konkav) och positiv för hela den röda delen ("glad" kurva, konvex). I inflexionspunkten, där kurvan varken är konkav eller konvex, är andraderivatan lika med noll. Peka eller tryck på en kurvdel eller inflexionspunkten så visas andraderivatans tecken.</p>
 :::
 
-::: exempel "Exempel 1 — Inflexionspunkt och konvexitet"
+::: exempel "Exempel 1 — Inflexionspunkt och konvexitet (Mellan)"
 **Funktionen $f(x) = x^3 - 6x^2 + 7x$ är given.<br>
 a) Bestäm inflexionspunktens koordinater.<br>b) I vilket
 intervall är funktionen konvex?**
@@ -149,7 +149,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Inflexionspunkt från grafen till $f(x)$ eller $f'(x)$"
+::: exempel "Exempel 2 — Inflexionspunkt från grafen till $f(x)$ eller $f'(x)$ (Avancerad)"
 **Ange $x$-koordinaten för inflexionspunkten till funktionen $f(x)$.<br>
 a) $f(x)$ är ett tredjegradspolynom, och grafen till $y = f(x)$ har
 extrempunkter där $x = -1$ och $x = 1$.<br>b) Grafen till $y = f'(x)$ har en extrempunkt

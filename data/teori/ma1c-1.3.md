@@ -21,7 +21,7 @@ Om bråken har
   får samma nämnare. Sedan utför du beräkningen.
 :::
 
-::: exempel "Exempel 1 — Samma nämnare"
+::: exempel "Exempel 1 — Samma nämnare (Grund)"
 **Beräkna<br>a) $\dfrac{1}{13} + \dfrac{2}{13}$&emsp;&emsp;b) $\dfrac{19}{6} - \dfrac{5}{6}$**
 
 ::: handskrift
@@ -59,7 +59,7 @@ första bråket. Detta ger alltid en gemensam nämnare — men inte
 nödvändigtvis den *minsta* gemensamma nämnaren.
 :::
 
-::: exempel "Exempel 2 — Olika nämnare"
+::: exempel "Exempel 2 — Olika nämnare (Grund)"
 **Beräkna<br>a) $\dfrac{3}{5} - \dfrac{7}{20}$&emsp;&emsp;b) $\dfrac{2}{5} + \dfrac{1}{3}$**
 
 ::: handskrift
@@ -103,7 +103,7 @@ $$
 annan metod, primtalsfaktorisering, som vi går igenom härnäst.
 :::
 
-::: exempel "Exempel 3 — Minsta gemensamma nämnaren"
+::: exempel "Exempel 3 — Minsta gemensamma nämnaren (Mellan)"
 **Bestäm den minsta gemensamma nämnaren till 10 och 6 och beräkna sedan
 $\dfrac{7}{10} - \dfrac{1}{6}$.**
 
@@ -232,7 +232,7 @@ ska vara.
   **förkortar** bråk, inte när man ska hitta en gemensam nämnare.
 :::
 
-::: exempel "Exempel 4 — MGN med primtalsfaktorisering"
+::: exempel "Exempel 4 — MGN med primtalsfaktorisering (Mellan)"
 **Bestäm den minsta gemensamma nämnaren till 72 och 108 med
 primtalsfaktorisering och beräkna sedan $\dfrac{5}{72} + \dfrac{7}{108}$.**
 
@@ -299,7 +299,7 @@ fjärdedelar). Vi kan även låta de motsvaras i **blandad form** av
 $3\frac{3}{4}$ (3 hela och 3 fjärdedelar). Så $\dfrac{15}{4}$ (bråkform)
 $= 3\frac{3}{4}$ (blandad form).
 
-::: exempel "Exempel 5 — Skriv i bråkform"
+::: exempel "Exempel 5 — Skriv i bråkform (Grund)"
 **Skriv i bråkform<br>a) $1\dfrac{4}{5}$&emsp;&emsp;b) $3\dfrac{1}{7}$**
 
 ::: handskrift

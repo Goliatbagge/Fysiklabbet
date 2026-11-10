@@ -109,7 +109,7 @@ funktionen enklast genom att dela upp bråket i flera termer och sedan
 derivera termvis.
 :::
 
-::: exempel "Exempel 1 — Derivera potensuttryck"
+::: exempel "Exempel 1 — Derivera potensuttryck (Mellan)"
 **Derivera**
 
 ::: handskrift

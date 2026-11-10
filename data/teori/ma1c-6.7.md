@@ -20,7 +20,7 @@ Vi adderar alltså den motsatta vektorn, vilket sedan beräknas med
 parallellförflyttning enligt tidigare.
 :::
 
-::: exempel "Exempel 1 — Subtrahera vektorer"
+::: exempel "Exempel 1 — Subtrahera vektorer (Grund)"
 **Figuren visar vektorerna $\vec{u}$ och $\vec{v}$. Rita vektorn
 $\vec{w} = \vec{u} - \vec{v}$.**
 

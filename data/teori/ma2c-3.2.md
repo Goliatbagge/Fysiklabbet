@@ -26,7 +26,7 @@ Algebraiskt bestäms en andragradsfunktions
   och funktionsuttryckets värde ger extrempunktens $y$-koordinat.
 :::
 
-::: exempel "Exempel 1 — Bestäm allt algebraiskt"
+::: exempel "Exempel 1 — Bestäm allt algebraiskt (Mellan)"
 **Vi har funktionen $f(x) = 3x^2 - 12x + 9$. Ange funktionens<br>a) nollställen&emsp;&emsp;b) symmetrilinje&emsp;&emsp;c) extrempunkt&emsp;&emsp;d) extrempunkts karaktär&emsp;&emsp;e) största eller minsta värde**
 
 ::: handskrift
@@ -100,7 +100,7 @@ alltså −3.
 :::
 :::
 
-::: exempel "Exempel 2 — Symmetrilinje utan nollställen"
+::: exempel "Exempel 2 — Symmetrilinje utan nollställen (Mellan)"
 **Bestäm symmetrilinjen till $f(x) = x^2 + 6x + 10$.**
 
 ::: handskrift

@@ -71,7 +71,7 @@ konstanttermen med ombytt tecken**.
 ekvationen är lika med 0 **och** att vi inte har någon koefficient
 framför $x^2$-termen.
 
-::: exempel "Exempel 1 — Lös ekvationerna"
+::: exempel "Exempel 1 — Lös ekvationerna (Grund)"
 **Lös ekvationerna<br>a)&nbsp;$x^2 + 6x - 7 = 0$&emsp;&emsp;b)&nbsp;$3x^2 - 15x + 18 = 0$&emsp;&emsp;c)&nbsp;$x^2 = 39 - 10x$**
 
 ::: handskrift

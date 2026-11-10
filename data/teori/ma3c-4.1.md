@@ -36,7 +36,7 @@ eller genom att studera **tecknet** på grafen till derivatan $f'(x)$.
 
 ## Avläsa växande och avtagande ur en graf
 
-::: exempel "Exempel 1 — Avläsa växande och avtagande ur en graf"
+::: exempel "Exempel 1 — Avläsa växande och avtagande ur en graf (Grund)"
 **I vilka intervall växer respektive avtar funktionerna nedan?<br>
 a)&nbsp;$f(x)$&emsp;&emsp;b)&nbsp;$g(x)$**
 
@@ -74,7 +74,7 @@ $x > 1$.
 :::
 :::
 
-::: exempel "Exempel 2 — Tolka derivatans tecken ur en graf"
+::: exempel "Exempel 2 — Tolka derivatans tecken ur en graf (Grund)"
 **Grafen till funktionen $g(x)$ (samma funktion som i föregående
 exempel) visas nedan.<br>
 a) Är $g'(2)$ positiv, negativ eller noll?&emsp;&emsp;
@@ -124,7 +124,7 @@ intervallen mellan dess nollställen.
 3. Sammanställ resultatet i en **teckentabell**.
 :::
 
-::: exempel "Exempel 3 — Bestämma var $f(x)$ växer ur grafen till $f'(x)$"
+::: exempel "Exempel 3 — Bestämma var $f(x)$ växer ur grafen till $f'(x)$ (Mellan)"
 **Figuren nedan visar grafen till $y = f'(x)$.<br>
 a) I vilket intervall är $f(x)$ växande?&emsp;&emsp;
 b) För vilka $x$-värden har grafen till $f(x)$ lutningen 0?**

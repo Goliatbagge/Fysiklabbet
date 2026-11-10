@@ -105,7 +105,7 @@ v.s.b.
 :::
 :::
 
-::: exempel "Exempel 1 — Kordasatsen"
+::: exempel "Exempel 1 — Kordasatsen (Grund)"
 **Bestäm längden av sidan markerad $x$.**
 
 ::: figur
@@ -137,7 +137,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Inskriven fyrhörning"
+::: exempel "Exempel 2 — Inskriven fyrhörning (Grund)"
 **Bestäm vinkeln $x$.**
 
 ::: figur

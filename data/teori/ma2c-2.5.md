@@ -65,7 +65,7 @@ v.s.b.
 :::
 :::
 
-::: exempel "Exempel 1 — Lös med *abc*-formeln"
+::: exempel "Exempel 1 — Lös med *abc*-formeln (Grund)"
 **Lös ekvationen $2x^2 - 8x + 6 = 0$ med *abc*-formeln.**
 
 ::: handskrift

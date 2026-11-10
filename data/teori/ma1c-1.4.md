@@ -16,7 +16,7 @@ Vid multiplikation av
 - **ett heltal och ett bråk** multipliceras heltalet med **täljaren**.
 :::
 
-::: exempel "Exempel 1 — Multiplikation"
+::: exempel "Exempel 1 — Multiplikation (Grund)"
 **Beräkna<br>a)&nbsp;$\dfrac{8}{3} \cdot \dfrac{7}{2}$&emsp;&emsp;b)&nbsp;$3 \cdot \dfrac{4}{5}$**
 
 ::: handskrift
@@ -51,7 +51,7 @@ täljarna och nämnarna och förkorta bråken *innan* du utför
 multiplikationen.
 :::
 
-::: exempel "Exempel 2 — Faktorisera och förkorta först"
+::: exempel "Exempel 2 — Faktorisera och förkorta först (Mellan)"
 **Beräkna $\dfrac{7}{36} \cdot \dfrac{6}{21}$ genom att faktorisera
 täljarna och nämnarna och därefter förenkla.**
 
@@ -110,7 +110,7 @@ vilket skulle visas.
 :::
 :::
 
-::: exempel "Exempel 3 — Division"
+::: exempel "Exempel 3 — Division (Mellan)"
 **Beräkna<br>a)&nbsp;$\dfrac{\;\dfrac{3}{4}\;}{\;\dfrac{2}{5}\;}$&emsp;&emsp;b)&nbsp;$\dfrac{4}{5} \Big/ \dfrac{2}{7}$&emsp;&emsp;c)&nbsp;$5 \Big/ \dfrac{3}{4}$&emsp;&emsp;d)&nbsp;$\dfrac{2}{3} \Big/ 12$**
 
 ::: handskrift
@@ -164,7 +164,7 @@ När vi ska beräkna en bråkdel *av* något så **multiplicerar** vi med
 bråkdelen.
 :::
 
-::: exempel "Exempel 4 — Bråkdel av ett belopp"
+::: exempel "Exempel 4 — Bråkdel av ett belopp (Grund)"
 **Hur mycket är $\dfrac{5}{7}$ av 63 kr?**
 
 ::: handskrift

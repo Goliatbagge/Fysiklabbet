@@ -48,7 +48,7 @@ Vi har en olikhet, till exempel VL < HL eller VL > HL.
    - **över** grafen till $g(x)$ gäller $f(x) > g(x)$.
 :::
 
-::: exempel "Exempel 1 — Lös ekvationerna grafiskt"
+::: exempel "Exempel 1 — Lös ekvationerna grafiskt (Grund)"
 **Lös ekvationerna grafiskt.** I a-uppgiften ritar vi upp båda leden
 som varsin funktion — grafen nedan visar uppritningen.
 
@@ -84,7 +84,7 @@ $x_2 = -3$.
 :::
 :::
 
-::: exempel "Exempel 2 — Lös olikheterna grafiskt"
+::: exempel "Exempel 2 — Lös olikheterna grafiskt (Grund)"
 **Lös olikheterna nedan.** Vi ritar upp $f(x) = x^2 + 6x + 6$ och
 $g(x) = 1$ i Geogebra och tar fram skärningarnas koordinater — se
 grafen.

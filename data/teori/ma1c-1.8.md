@@ -48,7 +48,7 @@ det vill säga $27^{1/3} = \sqrt[3]{27}$.
 :::
 :::
 
-::: exempel "Exempel 1 — Beräkna utan räknare"
+::: exempel "Exempel 1 — Beräkna utan räknare (Mellan)"
 **Beräkna utan räknare<br>a)&nbsp;$49^{1/2}$&emsp;&emsp;b)&nbsp;$5 \cdot 8^{1/3}$&emsp;&emsp;c)&nbsp;$27^{2/3}$**
 
 ::: handskrift
@@ -82,7 +82,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Förenkla med potenslagarna"
+::: exempel "Exempel 2 — Förenkla med potenslagarna (Mellan)"
 **Förenkla $\dfrac{x^{\frac{7}{2}}}{x^3}$.**
 
 ::: handskrift
@@ -150,7 +150,7 @@ Alltså är $\sqrt{9 + 16} \neq \sqrt{9} + \sqrt{16}$. Räkna först ut summan
 eller differensen under rottecknet och dra roten ur först därefter.
 :::
 
-::: exempel "Exempel 3 — Roten ur en produkt och en kvot"
+::: exempel "Exempel 3 — Roten ur en produkt och en kvot (Grund)"
 **Beräkna utan räknare<br>a)&nbsp;$\sqrt{4 \cdot 49}$&emsp;&emsp;b)&nbsp;$\sqrt{\dfrac{9}{25}}$&emsp;&emsp;c)&nbsp;$\sqrt{2} \cdot \sqrt{8}$**
 
 ::: handskrift
@@ -211,7 +211,7 @@ Regeln gäller när $a \geq 0$ och $b \geq 0$. Läs den från vänster till
 höger när en faktor lyfts ut och från höger till vänster när den lyfts in.
 :::
 
-::: exempel "Exempel 4 — Lyfta ut och lyfta in"
+::: exempel "Exempel 4 — Lyfta ut och lyfta in (Mellan)"
 **Förenkla genom att lyfta ut en faktor ur rottecknet.<br>a)&nbsp;$\sqrt{12}$&emsp;&emsp;b)&nbsp;$\sqrt{50}$<br>c)&nbsp;Skriv $2\sqrt{7}$ som roten ur ett enda tal.**
 
 ::: handskrift

@@ -73,7 +73,7 @@ Sannolikheten = 1 betyder att händelsen garanterat kommer att inträffa.
 "Sannolikheten att dra upp en vit strumpa ur en låda med enbart vita
 strumpor är 1."
 
-::: exempel "Exempel 1 — Tre klassiska sannolikheter"
+::: exempel "Exempel 1 — Tre klassiska sannolikheter (Grund)"
 **Vad är sannolikheten att<br>a) få klave vid slantsingling?<br>b) slå minst 5 med en (vanlig) tärning?<br>c) dra ett klätt hjärter ur en kortlek?**
 
 ::: handskrift
@@ -117,7 +117,7 @@ Uppgifter där vi använder oss av två föremål (kast med *två* tärningar,
 singla *två* mynt och så vidare) är oftast enklast att lösa genom att rita upp
 *utfallsrummet* (alla möjliga kombinationer).
 
-::: exempel "Exempel 2 — Två tärningar"
+::: exempel "Exempel 2 — Två tärningar (Mellan)"
 **Du kastar två tärningar. Vad är sannolikheten att få<br>a) minst
 summan 10?&emsp;&emsp;b) en summa större än 10?**
 

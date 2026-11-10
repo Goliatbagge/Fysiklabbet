@@ -28,7 +28,7 @@ Metoden fungerar på precis samma typ av problem som den algebraiska
 metoden, men kräver ingen derivering för hand. Nackdelen är att vi bara
 får ett avläst, avrundat värde — inte ett exakt uttryck.
 
-::: exempel "Exempel 1 — Optimera en cylindervolym grafiskt"
+::: exempel "Exempel 1 — Optimera en cylindervolym grafiskt (Avancerad)"
 **En cylinder ska tillverkas där summan av höjden och diametern ska vara
 50 cm. Vilken radie ska cylindern ha för att den ska få så stor volym som
 möjligt?**

@@ -39,7 +39,7 @@ av slumpen i vilka som råkade väljas ut. Som tumregel gäller: är
 förändringen större än felmarginalen kan vi med 95 % säkerhet säga att det
 har skett en verklig förändring.
 
-::: exempel "Exempel 1 — Favoritämnet"
+::: exempel "Exempel 1 — Favoritämnet (Mellan)"
 **En stickprovsundersökning gjordes bland Sveriges gymnasieelever för att
 ta reda på hur många procent av naturelever som har matematik som
 favoritämne. Av 100 tillfrågade svarade 60 att de har matematik som

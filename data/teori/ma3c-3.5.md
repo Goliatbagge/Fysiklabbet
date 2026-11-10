@@ -60,7 +60,7 @@ $f'(x) = 4e^{4x}$ och att $f(x) = e^{5x}$ har derivatan $f'(x) = 5e^{5x}$.
 :::
 :::
 
-::: exempel "Exempel 1 — Derivera exponentialfunktioner med basen e"
+::: exempel "Exempel 1 — Derivera exponentialfunktioner med basen e (Grund)"
 **Derivera<br>
 a)&nbsp;$f(x) = 3e^x$&emsp;&emsp;b)&nbsp;$f(x) = e^{4x}$&emsp;&emsp;c)&nbsp;$f(x) = 2e^{5x}$&emsp;&emsp;d)&nbsp;$f(x) = 12e^{x/3}$**
 
@@ -199,7 +199,7 @@ fungerar.
 3. Är basen en annan än $e$, multiplicera även med $\ln$ för den basen.
 :::
 
-::: exempel "Exempel 2 — Derivera exponentialfunktioner med annan bas än e"
+::: exempel "Exempel 2 — Derivera exponentialfunktioner med annan bas än e (Mellan)"
 **Derivera<br>
 a)&nbsp;$f(x) = 12^x$&emsp;&emsp;b)&nbsp;$f(x) = 3 \cdot 7^x$&emsp;&emsp;c)&nbsp;$f(x) = 4^{3x}$&emsp;&emsp;d)&nbsp;$f(x) = 5 \cdot 8^{6x}$**
 

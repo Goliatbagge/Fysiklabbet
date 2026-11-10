@@ -56,7 +56,7 @@ $$
 där $a$, $b$ och $c$ är konstanter.
 :::
 
-::: exempel "Exempel 1 — Parallell linje och allmän form"
+::: exempel "Exempel 1 — Parallell linje och allmän form (Mellan)"
 **En linje beskrivs av $y = 3x - 5$. Ange ekvationen för<br>a) en parallell
 linje som går genom (1, 2)<br>b) linjen i allmän form.**
 
@@ -113,7 +113,7 @@ Vi skiftar VL och HL och sorterar termerna i "bokstavsordning".
 :::
 :::
 
-::: exempel "Exempel 2 — *k*-värde ur allmän form"
+::: exempel "Exempel 2 — *k*-värde ur allmän form (Mellan)"
 **Ange $k$-värdet för linjen som beskrivs av $2x + 3y - 6 = 0$.**
 
 ::: handskrift
@@ -154,7 +154,7 @@ och vi ser nu lätt att $k = -\dfrac{2}{3}$.
 :::
 :::
 
-::: exempel "Exempel 3 — Vertikal linje"
+::: exempel "Exempel 3 — Vertikal linje (Grund)"
 **Ange ekvationen för linjen nedan.**
 
 ::: figur

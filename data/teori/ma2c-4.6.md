@@ -80,7 +80,7 @@ där $(x_m, y_m)$ är mittpunkten mellan punkterna $(x_1, y_1)$ och
 $(x_2, y_2)$.
 :::
 
-::: exempel "Exempel 1 — Avstånd och mittpunkt"
+::: exempel "Exempel 1 — Avstånd och mittpunkt (Grund)"
 **Vi har punkterna (−3, −5) och (7, −1). Bestäm<br>a) avståndet mellan punkterna&emsp;&emsp;b) mittpunkten**
 
 ::: handskrift

@@ -45,7 +45,7 @@ Händelser där sannolikheten inte är självklar leder till
 bestäms genom upprepade försök och kan anges i procent som **relativ
 frekvens**. Ju fler försök desto mer exakt kommer sannolikheten att bli.
 
-::: exempel "Exempel 1 — Straffläggningen"
+::: exempel "Exempel 1 — Straffläggningen (Grund)"
 **Asllani lägger 200 straffar på Musovic. Resultatet antecknas löpande i
 tabellen nedan.**
 
@@ -79,7 +79,7 @@ komplementet. Mer om det framöver.)
 :::
 :::
 
-::: exempel "Exempel 2 — Flicka eller pojke?"
+::: exempel "Exempel 2 — Flicka eller pojke? (Grund)"
 **Under 2022 föddes 50 901 flickor och 53 833 pojkar i Sverige. Om du får
 ett barn, vad är sannolikheten att det blir en flicka?**
 

@@ -65,7 +65,7 @@ k = \frac{y_2 - y_1}{x_2 - x_1}
 $$
 :::
 
-::: exempel "Exempel 1 — Riktningskoefficient ur två punkter"
+::: exempel "Exempel 1 — Riktningskoefficient ur två punkter (Grund)"
 **Beräkna riktningskoefficienten för linjen som går genom punkterna
 (−6, −1) och (2, 3).**
 
@@ -129,7 +129,7 @@ $m$. Ger uppgiften i stället två punkter räknar vi först ut $k$ och sätter
 sedan in en av punkterna. Behöver vi linjen på *k*-form, $y = kx + m$, löser
 vi ut $y$ ur enpunktsformen.
 
-::: exempel "Exempel 2 — Bestäm ekvationen ur punkt och lutning"
+::: exempel "Exempel 2 — Bestäm ekvationen ur punkt och lutning (Mellan)"
 **En rät linje går genom punkten (4, −3) och har riktningskoefficienten 2.<br>a) Bestäm linjens ekvation på *k*-form.<br>b) Skriv linjens ekvation på enpunktsform.**
 
 ::: handskrift
@@ -198,7 +198,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 3 — Bestäm a ur riktningskoefficienten"
+::: exempel "Exempel 3 — Bestäm a ur riktningskoefficienten (Avancerad)"
 **En rät linje går genom punkterna $(a, 2)$ och $(4, 3a)$ och har
 riktningskoefficienten 2. Bestäm $a$.**
 

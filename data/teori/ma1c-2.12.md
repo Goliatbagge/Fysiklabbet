@@ -14,7 +14,7 @@ exempel på storheter. En ekvation som beskriver ett samband mellan olika
 storheter kallas **formel** och fungerar som hjälpmedel för att lösa
 problem.
 
-::: exempel "Exempel 1 — Hastighetsformeln"
+::: exempel "Exempel 1 — Hastighetsformeln (Mellan)"
 **Formeln för att beräkna hastigheten $v$ utifrån hur lång tid $t$ det tar
 att färdas en viss sträcka $s$ är $v = \dfrac{s}{t}$. Lös ut $t$ och
 beräkna hur lång tid det tar att åka 35 mil med medelhastigheten
@@ -56,7 +56,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Hyrbilen"
+::: exempel "Exempel 2 — Hyrbilen (Mellan)"
 **Den totala kostnaden $H$ kr för att hyra en bil under ett år är en fast
 kostnad på 21 000 kr och sedan en rörlig kostnad på 2,5 kr/km. Formeln för
 den totala kostnaden om man kör $m$ kilometer är då

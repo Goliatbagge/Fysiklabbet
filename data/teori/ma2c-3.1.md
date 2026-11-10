@@ -80,7 +80,7 @@ Om andragradstermen (till exempel $x^2$ eller $t^2$) i en andragradsfunktion
   $x^2$-term ger "sur mun")
 :::
 
-::: exempel "Exempel 1 — Rita och avläs en andragradsfunktion"
+::: exempel "Exempel 1 — Rita och avläs en andragradsfunktion (Grund)"
 **Rita grafen till funktionen $g(x) = -x^2 - 2x + 3$ och bestäm
 nedanstående.**
 

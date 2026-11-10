@@ -24,7 +24,7 @@ När vi betalar av ett lån betalar vi **amortering** (återbetalning) *och*
 **ränta** (lånekostnad).
 :::
 
-::: exempel "Exempel 1 — Billånet"
+::: exempel "Exempel 1 — Billånet (Avancerad)"
 **Ellen tar ett lån på 150 000 kr för att köpa en bil. Amorteringstiden
 är 5 år och hon amorterar lika stora belopp varje månad ("rak
 amortering"). Årsräntan på lånet är 4,8 %. Hur<br>

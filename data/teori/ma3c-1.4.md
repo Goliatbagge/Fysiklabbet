@@ -33,7 +33,7 @@ täljarna — nämnaren förblir densamma. Har de olika nämnare måste vi förs
 göra dem liknämniga, precis som för vanliga bråk: vi förlänger varje term
 med den andra termens nämnare.
 
-::: exempel "Exempel 1 — Förenkla"
+::: exempel "Exempel 1 — Förenkla (Mellan)"
 **Förenkla**
 
 ::: handskrift
@@ -96,7 +96,7 @@ kontrollera vilka $x$-värden som gör någon nämnare lika med noll — dessa
 värden får aldrig vara med i svaret. Sedan löser vi ekvationen med metod 1
 eller metod 2 från rutan ovan.
 
-::: exempel "Exempel 2 — Lös ekvationerna"
+::: exempel "Exempel 2 — Lös ekvationerna (Avancerad)"
 **Lös ekvationerna**
 
 ::: handskrift

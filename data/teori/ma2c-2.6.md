@@ -57,7 +57,7 @@ Vi sammanfattar undersökningen:
 | noll | en lösning |
 | negativ | noll lösningar |
 
-::: exempel "Exempel 1 — Ange antalet lösningar"
+::: exempel "Exempel 1 — Ange antalet lösningar (Grund)"
 **Ange antalet lösningar till<br>a)&nbsp;$x^2 + 12x - 13 = 0$&emsp;&emsp;b)&nbsp;$x^2 + 5x + 8 = 0$**
 
 ::: handskrift
@@ -88,7 +88,7 @@ Diskriminanten är **negativ**. Alltså **saknar** ekvationen lösningar.
 :::
 :::
 
-::: exempel "Exempel 2 — Dubbelrot"
+::: exempel "Exempel 2 — Dubbelrot (Mellan)"
 **För vilka värden på $a$ gäller att ekvationen $x^2 - 8x + a = 0$ har
 en enda lösning (en så kallad dubbelrot)?**
 

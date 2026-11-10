@@ -55,7 +55,7 @@ med negativa tal.
 :::
 :::
 
-::: exempel "Exempel 1 — Lös olikheterna"
+::: exempel "Exempel 1 — Lös olikheterna (Mellan)"
 **Lös<br>a)&nbsp;$3x - 5 < 22$&emsp;&emsp;b)&nbsp;$7(6 - x) \leq 105$&emsp;&emsp;c)&nbsp;$\dfrac{6a}{5} > 3a - 18$**
 
 ::: handskrift
@@ -160,7 +160,7 @@ olikhetstecknet vändas, det vill säga $a < 10$.
 :::
 :::
 
-::: exempel "Exempel 2 — Olikheter av andra graden"
+::: exempel "Exempel 2 — Olikheter av andra graden (Mellan)"
 **Lös<br>a)&nbsp;$x^2 < 4$&emsp;&emsp;b)&nbsp;$x^2 > 4$**
 
 ::: handskrift

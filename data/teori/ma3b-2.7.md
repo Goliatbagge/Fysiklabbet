@@ -78,7 +78,7 @@ Derivatan saknar alltså värde där, och funktionen är inte deriverbar i
 $x = 0$.
 :::
 
-::: exempel "Exempel 1 — Avläs deriverbarhet ur en graf"
+::: exempel "Exempel 1 — Avläs deriverbarhet ur en graf (Grund)"
 **Figuren visar grafen till en funktion. För vilka värden på $x$ är
 funktionen inte deriverbar?**
 
@@ -100,7 +100,7 @@ då $x = 0$. I dessa punkter är funktionen alltså inte deriverbar.
 :::
 :::
 
-::: exempel "Exempel 2 — Där nämnaren blir noll"
+::: exempel "Exempel 2 — Där nämnaren blir noll (Grund)"
 **För vilket värde på $x$ är funktionen $f(x) = \dfrac{5}{x - 3}$ inte
 deriverbar? Motivera ditt svar.**
 

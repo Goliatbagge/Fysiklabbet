@@ -101,7 +101,7 @@ kvoter utom $k = 1$. (Är $k = 1$ är alla termer lika med $a_1$, och då
    ekvationen $a_1 \cdot k^{n-1} = \text{sista termen}$.
 :::
 
-::: exempel "Exempel 1 — Bestäm summan"
+::: exempel "Exempel 1 — Bestäm summan (Mellan)"
 **Bestäm<br>a) summan $3 + 6 + 12 + \ldots + 3 \cdot 2^{9}$<br>b) summan av de 8 första elementen i den geometriska talföljden $200,\ 100,\ 50,\ \ldots$**
 
 ::: handskrift
@@ -134,7 +134,7 @@ som den ska när alla termer är positiva.
 :::
 :::
 
-::: exempel "Exempel 2 — Hur många termer?"
+::: exempel "Exempel 2 — Hur många termer? (Mellan)"
 **Summan $5 + 15 + 45 + \ldots + 98\,415$ är en geometrisk summa.<br>a) Hur många termer har summan?<br>b) Bestäm summan.**
 
 ::: handskrift
@@ -230,7 +230,7 @@ för varje insättning.
    år till. Då är $a_1 = \text{insättningen} \cdot k$.
 :::
 
-::: exempel "Exempel 3 — Sparkontot"
+::: exempel "Exempel 3 — Sparkontot (Mellan)"
 **Elin sätter in 5 000 kr på ett sparkonto i slutet av varje år. Räntan är 2,8 %.<br>a) Hur mycket finns på kontot direkt efter den tionde insättningen?<br>b) Hur mycket hade funnits på kontot i slutet av det tionde året om Elin i stället hade satt in pengarna i början av varje år?**
 
 ::: handskrift
@@ -280,7 +280,7 @@ längre.
 :::
 :::
 
-::: exempel "Exempel 4 — Hur länge måste Elin spara?"
+::: exempel "Exempel 4 — Hur länge måste Elin spara? (Avancerad)"
 **Elin fortsätter att sätta in 5 000 kr i slutet av varje år, med räntan 2,8 %. Hur många insättningar behövs för att behållningen direkt efter den sista insättningen ska bli minst 100 000 kr?**
 
 ::: handskrift

@@ -42,7 +42,7 @@ lösningar.
 - $n$ jämnt och $a < 0$: ingen reell lösning.
 :::
 
-::: exempel "Exempel 1 — Enkla polynomekvationer"
+::: exempel "Exempel 1 — Enkla polynomekvationer (Grund)"
 **Lös ekvationerna.<br>a)&nbsp;$x^5 = 32$&emsp;&emsp;b)&nbsp;$2x^4 = 162$&emsp;&emsp;c)&nbsp;$x^3 + 8 = 0$**
 
 ::: handskrift
@@ -104,7 +104,7 @@ brytas ut, och vänsterledet blir en produkt. Enligt **nollproduktmetoden**
 är en produkt noll bara om någon av faktorerna är noll, så ekvationen delas
 upp i två enklare ekvationer.
 
-::: exempel "Exempel 2 — Bryt ut x"
+::: exempel "Exempel 2 — Bryt ut x (Mellan)"
 **Lös ekvationen $x^3 - 2x^2 - 15x = 0$.**
 
 ::: handskrift
@@ -140,7 +140,7 @@ lösas genom att vi **byter variabel**. Vi inför $t = x^2$, så att $x^4 = t^2$
 Då blir ekvationen en andragradsekvation i $t$. När $t$ är bestämt går vi
 tillbaka till $x$ med $x^2 = t$.
 
-::: exempel "Exempel 3 — Byt variabel"
+::: exempel "Exempel 3 — Byt variabel (Mellan)"
 **Lös ekvationen $x^4 - 10x^2 + 9 = 0$.**
 
 ::: handskrift
@@ -233,7 +233,7 @@ där $k$ är koefficienten framför $x$-termen med högst grad. På samma sätt
 ger ett polynom av grad $n$ med $n$ nollställen $n$ faktorer.
 :::
 
-::: exempel "Exempel 4 — Faktorer och nollställen"
+::: exempel "Exempel 4 — Faktorer och nollställen (Avancerad)"
 **a) Faktorisera $p(x) = 3x^2 - 6x - 24$ med hjälp av nollställena.<br>b) Ett tredjegradspolynom $p(x)$ har nollställena $-2$, $1$ och $4$, och $p(0) = 16$. Bestäm $p(x)$.**
 
 ::: handskrift

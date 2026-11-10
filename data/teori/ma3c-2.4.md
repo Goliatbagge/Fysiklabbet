@@ -19,7 +19,7 @@ någon form av **förändringshastighet vid en tidpunkt**. Enheten för
 derivatan fås genom att ta "enheten för funktionen" per "enheten för
 variabeln".
 
-::: exempel "Exempel 1 — Tolka derivatan"
+::: exempel "Exempel 1 — Tolka derivatan (Grund)"
 **En bil färdas $s(t)$ km på $t$ timmar. Tolka<br>
 a)&nbsp;$s(2) = 120$&emsp;&emsp;b)&nbsp;$s'(2) = 90$**
 
@@ -56,7 +56,7 @@ I Geogebras inmatningsfält används punkt `.` som decimaltecken, inte komma.
 Talet $0{,}3$ skrivs alltså som `0.3` när du matar in en funktion.
 :::
 
-::: exempel "Exempel 2 — Beräkna derivata med Geogebra"
+::: exempel "Exempel 2 — Beräkna derivata med Geogebra (Grund)"
 **En vårdag ges temperaturen $f(x)$ °C av formeln $f(x) = 0{,}3x^2 - 5$, där
 $x$ är tiden i timmar efter 6.00.<br>
 a) Beräkna $f'(5)$ med symbolhanterande hjälpmedel.<br>b) Tolka

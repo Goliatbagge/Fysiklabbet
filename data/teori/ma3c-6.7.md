@@ -84,7 +84,7 @@ Cosinussatsen går att använda för trianglar med
 - alla tre sidor kända och ingen vinkel känd.
 :::
 
-::: exempel "Exempel 1 — Bestäm en sida med cosinussatsen"
+::: exempel "Exempel 1 — Bestäm en sida med cosinussatsen (Grund)"
 **Bestäm sidan $c$ i triangeln nedan.**
 
 ::: figur
@@ -107,7 +107,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Bestäm alla vinklar med cosinussatsen"
+::: exempel "Exempel 2 — Bestäm alla vinklar med cosinussatsen (Mellan)"
 **Beräkna vinklarna i triangeln nedan.**
 
 ::: figur

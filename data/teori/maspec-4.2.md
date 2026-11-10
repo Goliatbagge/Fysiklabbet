@@ -81,7 +81,7 @@ k\vec{u} = (kx_1,\ ky_1)
 $$
 :::
 
-::: exempel "Exempel 1 — Räkna med koordinater"
+::: exempel "Exempel 1 — Räkna med koordinater (Grund)"
 **Vektorerna $\vec{u} = (2,\ -3)$ och $\vec{v} = (-4,\ 1)$ är givna.
 Bestäm koordinaterna för<br>a)&nbsp;$\vec{u} + \vec{v}$&emsp;&emsp;b)&nbsp;$\vec{u} - \vec{v}$&emsp;&emsp;c)&nbsp;$4\vec{u}$<br>d)&nbsp;$3\vec{u} - 2\vec{v}$&emsp;&emsp;e)&nbsp;$2(\vec{u} + \vec{v})$**
 
@@ -153,7 +153,7 @@ $(6,\ -4) = -2 \cdot (-3,\ 2)$. Däremot är $(6,\ -4)$ och $(3,\ 2)$
 inte parallella: $6 = 2 \cdot 3$, men $-4 \neq 2 \cdot 2$.
 :::
 
-::: exempel "Exempel 2 — Bestäm ett tal så att vektorerna blir parallella"
+::: exempel "Exempel 2 — Bestäm ett tal så att vektorerna blir parallella (Avancerad)"
 **Bestäm det reella talet $t$ så att vektorn $(5,\ 1) + t(1,\ 2)$
 blir parallell med vektorn $(1,\ 1)$.**
 
@@ -237,7 +237,7 @@ Vektorns koordinater är alltså **slutpunktens koordinater minus
 startpunktens**.
 :::
 
-::: exempel "Exempel 3 — Vektorer mellan punkter"
+::: exempel "Exempel 3 — Vektorer mellan punkter (Mellan)"
 **Punkterna $A = (-1,\ 2)$ och $B = (4,\ -1)$ är givna.
 Bestäm<br>a)&nbsp;$\overrightarrow{AB}$&emsp;&emsp;b)&nbsp;$\overrightarrow{BA}$<br>c) punkten $C$ så att $\overrightarrow{AC} = (2,\ 6)$.**
 
@@ -312,7 +312,7 @@ ingen roll, eftersom talen kvadreras.
 :::
 :::
 
-::: exempel "Exempel 4 — Beräkna längder"
+::: exempel "Exempel 4 — Beräkna längder (Grund)"
 **Vektorerna $\vec{u} = (3,\ -4)$ och $\vec{v} = (-2,\ 1)$ är givna.
 Beräkna<br>a)&nbsp;$|\vec{u}|$&emsp;&emsp;b)&nbsp;$|\vec{u} - 2\vec{v}|$**
 

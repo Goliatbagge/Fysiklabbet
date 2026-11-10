@@ -68,7 +68,7 @@ maximipunkt.
 3. Bestäm punkternas karaktär med hjälp av en teckentabell.
 :::
 
-::: exempel "Exempel 1 — Bestäm lokala extrempunkter och deras karaktär"
+::: exempel "Exempel 1 — Bestäm lokala extrempunkter och deras karaktär (Mellan)"
 **Bestäm de lokala extrempunkterna och deras karaktär till funktionen**
 
 ::: handskrift
@@ -150,7 +150,7 @@ minimipunkt.
 :::
 :::
 
-::: exempel "Exempel 2 — Extrempunkt till en andragradsfunktion"
+::: exempel "Exempel 2 — Extrempunkt till en andragradsfunktion (Grund)"
 **Bestäm extrempunkten och dess karaktär till funktionen**
 
 ::: handskrift

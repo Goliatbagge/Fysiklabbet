@@ -20,7 +20,7 @@ Vid problemlösning är det ofta bra att följa nedanstående procedur.
    någon lösning bortses?
 :::
 
-::: exempel "Exempel 1 — Differens och produkt"
+::: exempel "Exempel 1 — Differens och produkt (Avancerad)"
 **Två positiva tal har differensen 21 och produkten 1 080. Vilka är
 talen?**
 
@@ -97,7 +97,7 @@ Kontroll: $45 - 24 = 21$ och $24 \cdot 45 = 1\,080$. Stämmer!
 :::
 :::
 
-::: exempel "Exempel 2 — Rektangelns omkrets"
+::: exempel "Exempel 2 — Rektangelns omkrets (Mellan)"
 **En rektangel har arean $1\,215\ \mathrm{cm}^2$. Den ena sidan är 18 cm kortare
 än den andra. Vilken är rektangelns omkrets?**
 

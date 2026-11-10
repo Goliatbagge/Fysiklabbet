@@ -63,7 +63,7 @@ uppstår om man utgår från hörn *A*, går till hörn *B* och sedan till hörn
 Om vi ska ange en sträcka, men enhet saknas, så används beteckningen
 l.e. (längdenheter). Se en av exempeluppgifterna nedan.
 
-::: exempel "Exempel 1 — Tangens ur sidorna"
+::: exempel "Exempel 1 — Tangens ur sidorna (Grund)"
 **Beräkna för triangeln nedan<br>a) tan $u$&emsp;&emsp;b) tan $v$.**
 
 ::: figur
@@ -95,7 +95,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Tangens med räknaren"
+::: exempel "Exempel 2 — Tangens med räknaren (Grund)"
 **Bestäm tan 29° med din räknare.**
 
 ::: handskrift
@@ -113,7 +113,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 3 — Bestäm en okänd sida"
+::: exempel "Exempel 3 — Bestäm en okänd sida (Mellan)"
 **Bestäm längden hos sidan $x$. Figurerna är inte skalenliga.**
 
 **a)**

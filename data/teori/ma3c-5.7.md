@@ -46,7 +46,7 @@ integralen genom att ta "enheten på $y$-axeln" $\cdot$ "enheten på
 $x$-axeln".
 :::
 
-::: exempel "Exempel 1 — Sträcka från en hastighet-tid-funktion"
+::: exempel "Exempel 1 — Sträcka från en hastighet-tid-funktion (Mellan)"
 **Hastigheten $v(t)$ m/s för en bil ges av $v(t) = 40 - 40e^{-0,25t}$ där $t$
 är tiden i sekunder efter start. Hur långt rör sig bilen mellan $t = 5,0$ s
 och $t = 12$ s?**
@@ -77,7 +77,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Tolka en integral"
+::: exempel "Exempel 2 — Tolka en integral (Mellan)"
 **Ett företag omsätter $K(t)$ kr/månad, där $t$ är tiden i månader. Tolka**
 
 ::: handskrift

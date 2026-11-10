@@ -21,7 +21,7 @@ kallas **additionsmetoden**.
    ekvationerna för att få värdet på den andra variabeln.
 :::
 
-::: exempel "Exempel 1 — Addera direkt"
+::: exempel "Exempel 1 — Addera direkt (Grund)"
 **Lös ekvationssystemet**
 
 ::: handskrift
@@ -94,7 +94,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Multiplicera ena ekvationen först"
+::: exempel "Exempel 2 — Multiplicera ena ekvationen först (Mellan)"
 **Lös ekvationssystemet**
 
 ::: handskrift
@@ -181,7 +181,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 3 — Multiplicera båda ekvationerna"
+::: exempel "Exempel 3 — Multiplicera båda ekvationerna (Mellan)"
 **Lös ekvationssystemet**
 
 ::: handskrift

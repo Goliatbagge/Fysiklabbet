@@ -62,7 +62,7 @@ I geometriuppgifter är det viktigt att **motivera** varför en vinkel
 får en viss storlek. Motiveringar kan skrivas kortfattat i parentes, se
 exemplen nedan.
 
-::: exempel "Exempel 1 — Alternatvinklar"
+::: exempel "Exempel 1 — Alternatvinklar (Grund)"
 **Beräkna vinkeln $x$ om linjerna L₁ och L₂ är parallella.**
 
 ::: figur
@@ -82,7 +82,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Hjälpvinkel"
+::: exempel "Exempel 2 — Hjälpvinkel (Mellan)"
 **Beräkna vinkeln $v_1$ om linjerna L₁ och L₂ är parallella.**
 
 ::: handskrift

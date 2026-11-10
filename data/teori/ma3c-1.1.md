@@ -47,7 +47,7 @@ exponent är **inte** ett polynom. Till exempel är $\dfrac{1}{x} = x^{-1}$ och
 $\sqrt{x} = x^{\frac{1}{2}}$, och varken $-1$ eller $\dfrac{1}{2}$ är ett heltal
 som är noll eller positivt.
 
-::: exempel "Exempel 1 — Polynom eller inte?"
+::: exempel "Exempel 1 — Polynom eller inte? (Grund)"
 **Avgör om uttrycket är ett polynom. Ange i så fall polynomets grad.<br>a)&nbsp;$3x^4 - 2x + 5$&emsp;&emsp;b)&nbsp;$7 - x$&emsp;&emsp;c)&nbsp;$\dfrac{4}{x} + x^2$&emsp;&emsp;d)&nbsp;$\sqrt{x} + 1$**
 
 ::: handskrift
@@ -84,7 +84,7 @@ polynomet för ett visst $x$ får vi genom att sätta in värdet på varje stäl
 där $x$ står. Står $x$ upphöjt till något sätter vi värdet inom parentes,
 så att även ett minustecken upphöjs.
 
-::: exempel "Exempel 2 — Värdet av ett polynom"
+::: exempel "Exempel 2 — Värdet av ett polynom (Grund)"
 **Polynomet $p(x) = 2x^3 - 5x + 4$ är givet. Beräkna<br>a)&nbsp;$p(2)$&emsp;&emsp;b)&nbsp;$p(-1)$&emsp;&emsp;c)&nbsp;$p(0)$**
 
 ::: handskrift
@@ -160,7 +160,7 @@ $$
 $$
 :::
 
-::: exempel "Exempel 3 — Multiplicera polynom"
+::: exempel "Exempel 3 — Multiplicera polynom (Grund)"
 **Polynomen $2x - 3$ och $x^2 + 4x - 1$ multipliceras med varandra.<br>a) Utveckla och förenkla produkten $(2x - 3)(x^2 + 4x - 1)$.<br>b) Vilken grad har produkten?**
 
 ::: handskrift
@@ -208,7 +208,7 @@ av sina nollställen.
    parentesen.
 :::
 
-::: exempel "Exempel 4 — Faktorisera polynom"
+::: exempel "Exempel 4 — Faktorisera polynom (Mellan)"
 **Faktorisera så långt som möjligt.<br>a)&nbsp;$6x^3 - 9x^2$&emsp;&emsp;b)&nbsp;$x^3 - 16x$&emsp;&emsp;c)&nbsp;$2x^3 + 12x^2 + 18x$**
 
 ::: handskrift

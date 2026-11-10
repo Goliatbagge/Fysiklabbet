@@ -90,7 +90,7 @@ beroende på från vilket håll vi närmar oss $x = 0$, saknar derivatan ett
 entydigt värde, och $f(x) = |x|$ är alltså inte deriverbar i $x = 0$.
 :::
 
-::: exempel "Exempel 1 — Beräkna absolutbelopp"
+::: exempel "Exempel 1 — Beräkna absolutbelopp (Grund)"
 **Beräkna $|x^3 + 5|$ för $x = -2$.**
 
 ::: handskrift
@@ -108,7 +108,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Lös en ekvation med absolutbelopp"
+::: exempel "Exempel 2 — Lös en ekvation med absolutbelopp (Grund)"
 **Lös ekvationen $|x - 7| = 10$.**
 
 ::: handskrift
@@ -136,7 +136,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 3 — Avläs deriverbarhet ur en graf"
+::: exempel "Exempel 3 — Avläs deriverbarhet ur en graf (Grund)"
 **Figuren visar grafen till en funktion. För vilka värden på $x$ är
 funktionen inte deriverbar?**
 

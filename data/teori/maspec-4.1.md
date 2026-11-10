@@ -39,7 +39,7 @@ $11\ \mathrm{N}$ bara om de drar åt samma håll. Drar de åt motsatt håll
 tar de delvis ut varandra. Det första exemplet visar hur summan ser ut
 i det fallet.
 
-::: exempel "Exempel 1 — Två vektorer längs samma linje"
+::: exempel "Exempel 1 — Två vektorer längs samma linje (Grund)"
 **Vektorerna $\vec{u}$ och $\vec{v}$ är riktade åt rakt motsatta håll.
 Vektorn $\vec{u}$ har längden 3 och vektorn $\vec{v}$ har längden 8.
 Bestäm summan $\vec{u} + \vec{v}$.**
@@ -79,7 +79,7 @@ geometri: är de **vinkelräta** kan summans längd beräknas med
 Pythagoras sats, och för andra vinklar tar man till sinussatsen eller
 cosinussatsen.
 
-::: exempel "Exempel 2 — Två vinkelräta krafter"
+::: exempel "Exempel 2 — Två vinkelräta krafter (Grund)"
 **På en kropp verkar två krafter som är vinkelräta mot varandra.
 Kraften $\vec{F}_1$ har storleken $6{,}0\ \mathrm{N}$ och kraften
 $\vec{F}_2$ har storleken $8{,}0\ \mathrm{N}$. Bestäm storleken av
@@ -172,7 +172,7 @@ För vektorer gäller den **kommutativa lagen**, $\vec{u} + \vec{v} =
 börjar med.
 :::
 
-::: exempel "Exempel 3 — Addera grafiskt med båda metoderna"
+::: exempel "Exempel 3 — Addera grafiskt med båda metoderna (Grund)"
 **Figuren visar vektorerna $\vec{u}$ och $\vec{v}$. Konstruera summan
 $\vec{u} + \vec{v}$ grafiskt med<br>a) polygonmetoden&emsp;&emsp;b) parallellogrammetoden.**
 
@@ -226,7 +226,7 @@ Två vektorer $\vec{u}$ och $\vec{v}$ är **parallella** precis när det
 finns ett tal $k$ så att $\vec{u} = k\vec{v}$.
 :::
 
-::: exempel "Exempel 4 — Multiplar av vektorer"
+::: exempel "Exempel 4 — Multiplar av vektorer (Grund)"
 **Figuren visar vektorerna $\vec{u}$ och $\vec{v}$. Konstruera
 vektorerna<br>a)&nbsp;$3\vec{u}$&emsp;&emsp;b)&nbsp;$-\vec{v}$&emsp;&emsp;c)&nbsp;$-2\vec{v}$**
 
@@ -276,7 +276,7 @@ $\vec{v}$ från samma punkt: då är $\vec{u} - \vec{v}$ **vektorn från
 spetsen på $\vec{v}$ till spetsen på $\vec{u}$**.
 :::
 
-::: exempel "Exempel 5 — Subtrahera grafiskt"
+::: exempel "Exempel 5 — Subtrahera grafiskt (Mellan)"
 **Vektorerna $\vec{u}$ och $\vec{v}$ är samma som i exempel 3.
 Konstruera differensen $\vec{u} - \vec{v}$ grafiskt med<br>a) polygonmetoden&emsp;&emsp;b) parallellogrammetoden.**
 

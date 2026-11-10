@@ -36,7 +36,7 @@ Det räcker att undersöka om två vinklar är lika för att säga att två
 trianglar är likformiga (eftersom den tredje vinkeln då måste vara
 samma, på grund av vinkelsumman i trianglar).
 
-::: exempel "Exempel 1 — Jämför vinklarna"
+::: exempel "Exempel 1 — Jämför vinklarna (Grund)"
 **Är trianglarna likformiga?**
 
 ::: figur
@@ -70,7 +70,7 @@ $\triangle ABC \sim \triangle DEF$.
 :::
 :::
 
-::: exempel "Exempel 2 — Jämför sidförhållandena"
+::: exempel "Exempel 2 — Jämför sidförhållandena (Grund)"
 **Är trianglarna likformiga?**
 
 ::: figur
@@ -102,7 +102,7 @@ Sidförhållandena är lika (0,6), alltså är trianglarna likformiga.
 :::
 :::
 
-::: exempel "Exempel 3 — Flaggstången"
+::: exempel "Exempel 3 — Flaggstången (Mellan)"
 **Alva ska bestämma höjden hos en flaggstång en solig sommardag. Hon är
 1,60 meter lång och får en skugga som är 1,20 meter. Hon mäter sedan
 längden på flaggstångens skugga till 6,75 meter. Hur hög är

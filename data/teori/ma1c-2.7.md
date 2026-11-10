@@ -23,7 +23,7 @@ ekvationen ser ut. Det finns tre vanliga varianter.
 **Metod:** Täljaren är lika med produkten av kvoten och nämnaren.
 :::
 
-::: exempel "Exempel 1 — En bråkterm"
+::: exempel "Exempel 1 — En bråkterm (Grund)"
 **Lös $\dfrac{130}{3x} = 5$.**
 
 ::: handskrift
@@ -59,7 +59,7 @@ $$
 **Metod:** Korsvis multiplikation.
 :::
 
-::: exempel "Exempel 2 — Korsvis multiplikation"
+::: exempel "Exempel 2 — Korsvis multiplikation (Grund)"
 **Lös $\dfrac{9}{2x} = \dfrac{3}{8}$.**
 
 ::: handskrift
@@ -102,7 +102,7 @@ $$
 eller skriv om båda led som ett bråk och använd korsvis multiplikation.
 :::
 
-::: exempel "Exempel 3 — Tre bråktermer"
+::: exempel "Exempel 3 — Tre bråktermer (Mellan)"
 **Lös $\dfrac{x}{3} + \dfrac{1}{4} = \dfrac{5}{6}$.**
 
 ::: handskrift
@@ -196,7 +196,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 4 — Variabler i nämnarna"
+::: exempel "Exempel 4 — Variabler i nämnarna (Mellan)"
 **Lös $\dfrac{5}{3x} - \dfrac{1}{2x} = \dfrac{1}{6}$.**
 
 ::: handskrift
@@ -233,7 +233,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 5 — När lösningen inte är tillåten"
+::: exempel "Exempel 5 — När lösningen inte är tillåten (Mellan)"
 **Lös $\dfrac{5x - 35}{x - 7} = 4$.**
 
 ::: handskrift

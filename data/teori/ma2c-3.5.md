@@ -13,7 +13,7 @@ Vid problemlösning, så ritar vi upp den funktion som beskriver
 situationen för att besvara frågan. Användbara verktyg i Geogebra är
 *Extrempunkt*, *Skärning mellan två objekt* och *Nollställen*.
 
-::: exempel "Exempel 1 — Nyårsraketen"
+::: exempel "Exempel 1 — Nyårsraketen (Mellan)"
 **En nyårsraket har en höjd som kan beskrivas av funktionen
 $h(t) = 40t - 4{,}9t^2$, där $t$ är tiden i sekunder och $h(t)$ är
 raketens höjd i meter.**
@@ -57,7 +57,7 @@ upp) och efter $t \approx 6{,}6$ s (på väg ner).
 :::
 :::
 
-::: exempel "Exempel 2 — Hagen vid muren"
+::: exempel "Exempel 2 — Hagen vid muren (Avancerad)"
 **En rektangulär hage ska byggas mot en mur. Det finns 52 meter
 stängsel som ska räcka till tre av sidorna eftersom den fjärde sidan
 utgörs av muren. Se figur. Vilka mått ska hagen ha för att dess area

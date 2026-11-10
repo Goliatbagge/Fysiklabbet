@@ -62,7 +62,7 @@ mellanliggande till sidorna $a$ och $c$, och vinkeln $A$ mellanliggande till
 sidorna $b$ och $c$. Areasatsen fungerar alltså för trianglar där två sidor
 och den mellanliggande vinkeln är kända.
 
-::: exempel "Exempel 1 — Beräkna arean av en triangel"
+::: exempel "Exempel 1 — Beräkna arean av en triangel (Grund)"
 **Beräkna arean av triangeln nedan.**
 
 ::: figur
@@ -86,7 +86,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Bestäm en mellanliggande vinkel"
+::: exempel "Exempel 2 — Bestäm en mellanliggande vinkel (Mellan)"
 **En triangel har arean $10$ cm². En sida är $4{,}0$ cm och en annan är
 $12{,}0$ cm. Bestäm den mellanliggande vinkeln till dessa sidor.**
 

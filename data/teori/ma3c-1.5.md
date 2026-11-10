@@ -27,7 +27,7 @@ Faktorisera gärna täljare och nämnare **innan** du multiplicerar ihop dem —
 det gör det lättare att se vilka faktorer som senare kan förkortas bort.
 :::
 
-::: exempel "Exempel 1 — Multiplikation av rationella uttryck"
+::: exempel "Exempel 1 — Multiplikation av rationella uttryck (Mellan)"
 **Förenkla<br>a)&nbsp;$\dfrac{3}{8-x}\cdot\dfrac{x^2+5}{6}$&emsp;&emsp;b)&nbsp;$\dfrac{3x+6}{x-2}\cdot\dfrac{x^2-4}{3}$**
 
 ::: handskrift
@@ -83,7 +83,7 @@ $$
 $$
 :::
 
-::: exempel "Exempel 2 — Division av rationella uttryck"
+::: exempel "Exempel 2 — Division av rationella uttryck (Grund)"
 **Förenkla $\dfrac{3x}{x+7} \Big/ \dfrac{5x}{x-2}$.**
 
 ::: handskrift
@@ -115,7 +115,7 @@ Multiplikations- och divisionsreglerna används också när vi löser
 eftersom division med noll inte är definierad måste vi alltid utesluta de
 värden på $x$ som gör någon nämnare i ekvationen lika med noll.
 
-::: exempel "Exempel 3 — Lös en ekvation med rationella uttryck"
+::: exempel "Exempel 3 — Lös en ekvation med rationella uttryck (Mellan)"
 **Lös ekvationen $\dfrac{x-2}{x-3} = \dfrac{x+7}{x}$.**
 
 ::: handskrift

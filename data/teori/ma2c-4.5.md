@@ -105,7 +105,7 @@ $$
 a^2 + b^2 = c^2 \iff \text{Triangeln är rätvinklig}
 $$
 
-::: exempel "Exempel 1 — Bestäm sidan"
+::: exempel "Exempel 1 — Bestäm sidan (Grund)"
 **Bestäm sidan $x$.**
 
 ::: figur
@@ -145,7 +145,7 @@ $x = 12$ cm.
 :::
 :::
 
-::: exempel "Exempel 2 — Är triangeln rätvinklig?"
+::: exempel "Exempel 2 — Är triangeln rätvinklig? (Grund)"
 **Sidorna i en triangel är 8 cm, 15 cm och 20 cm. Är triangeln
 rätvinklig?**
 

@@ -168,7 +168,7 @@ v.s.b.
 <svg viewBox="10 -2 180 154" width="285" height="244" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Poppins, system-ui, sans-serif" aria-label="En triangel A B C där bisektrisen från C delar vinkeln vid C mitt itu och träffar sidan A B i punkten D."><polygon points="20,130 170,130 100,18" fill="none" stroke="#1f2530" stroke-width="1.8"/><line x1="100" y1="18" x2="96.6" y2="130" stroke="#1f2530" stroke-width="1.4"/><path d="M 91.9,29.4 A 14 14 0 0 0 99.6,32" fill="none" stroke="#1f2530" stroke-width="1"/><path d="M 99.6,32 A 14 14 0 0 0 107.4,29.9" fill="none" stroke="#1f2530" stroke-width="1"/><text x="96" y="10" font-size="12" text-anchor="middle" fill="#1f2530">C</text><text x="14" y="143" font-size="12" text-anchor="middle" fill="#1f2530">A</text><text x="176" y="143" font-size="12" text-anchor="middle" fill="#1f2530">B</text><text x="96.6" y="144" font-size="12" text-anchor="middle" fill="#1f2530">D</text></svg>
 :::
 
-::: exempel "Exempel 1 — Parallelltransversal"
+::: exempel "Exempel 1 — Parallelltransversal (Mellan)"
 **Bestäm sidan $x$.**
 
 ::: figur
@@ -222,7 +222,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Bisektris"
+::: exempel "Exempel 2 — Bisektris (Grund)"
 **Bestäm sidan $x$.**
 
 ::: figur

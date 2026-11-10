@@ -70,7 +70,7 @@ delarna heter vid olika räknesätt. Lär dig dessa utantill!
 | Division | $\dfrac{\text{täljare}}{\text{nämnare}}$ | kvot | $12/4 = 3$ |
 :::
 
-::: exempel "Exempel 1 — Räkna i rätt ordning"
+::: exempel "Exempel 1 — Räkna i rätt ordning (Grund)"
 **Beräkna<br>a)&nbsp;$5 \cdot (3 + 6)$&emsp;&emsp;b)&nbsp;$8 \cdot 10 - (4 \cdot 2 - 3)$&emsp;&emsp;c)&nbsp;$9 \cdot 5 - (10 - 7)^2$&emsp;&emsp;d)&nbsp;$\dfrac{15}{5 - 2}$**
 
 ::: handskrift

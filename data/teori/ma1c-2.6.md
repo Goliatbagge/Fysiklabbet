@@ -13,7 +13,7 @@ Om vi har variabler på båda sidor om likhetstecknet, så samla dem på ena
 sidan och lös sedan ekvationen som vanligt. Enklast brukar det bli genom
 att ta bort variabeltermen från den sida som har *minst* koefficient.
 
-::: exempel "Exempel 1 — Variabler i båda led"
+::: exempel "Exempel 1 — Variabler i båda led (Mellan)"
 **Lös<br>a)&nbsp;$5x + 8 - 3x = 9x - 20$&emsp;&emsp;b)&nbsp;$54 - 4(3x - 5) = 25x$&emsp;&emsp;c)&nbsp;$3(7x - 4) = 7(9 + 3x)$**
 
 ::: handskrift
@@ -154,7 +154,7 @@ saknar ekvationen lösning. Är leden helt identiska, som i
 $4x + 3 = 4x + 3$, är båda led samma uttryck skrivet på två sätt, och då
 är alla tal lösningar.
 
-::: exempel "Exempel 2 — Ekvationer utan lösning och med oändligt många lösningar"
+::: exempel "Exempel 2 — Ekvationer utan lösning och med oändligt många lösningar (Mellan)"
 **Lös<br>a)&nbsp;$8x + 3 = 5x + 3x - 4$&emsp;&emsp;b)&nbsp;$4(x - 1) + 7 = 4x + 3$**
 
 ::: handskrift
@@ -219,7 +219,7 @@ ekvationen först se ut att innehålla $x^2$, men finns samma $x^2$-term i
 båda led tar den ut sig själv när den subtraheras bort, och kvar blir en
 vanlig förstagradsekvation.
 
-::: exempel "Exempel 3 — Ekvation med parentesmultiplikation"
+::: exempel "Exempel 3 — Ekvation med parentesmultiplikation (Mellan)"
 **Lös ekvationen $(1 + 4x)(3x - 2) = x(12x - 6)$.**
 
 ::: handskrift

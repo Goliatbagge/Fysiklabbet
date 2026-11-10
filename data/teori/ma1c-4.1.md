@@ -57,7 +57,7 @@ kallas **linjär modell** (eftersom den grafiskt beskrivs av en rät linje).
 
 Linjära modeller kan beskrivas med formel, tabell eller graf.
 
-::: exempel "Exempel 1 — Bilverkstaden"
+::: exempel "Exempel 1 — Bilverkstaden (Grund)"
 **En bilfirma tar för en reparation 500 kr i fast avgift och sedan 400 kr
 per timme utfört arbete. Visa sambandet mellan kostnaden $y$ kr för $x$
 arbetade timmar med en<br>a) formel&emsp;&emsp;b) värdetabell&emsp;&emsp;c) graf.**

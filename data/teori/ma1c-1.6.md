@@ -55,7 +55,7 @@ För att räkna med potenser ska vi använda **potenslagarna**.
 | $(ab)^x = a^x \cdot b^x$ | $(3 \cdot 4)^2 = 3^2 \cdot 4^2$ | $3 \cdot 4 \;\cdot\; 3 \cdot 4 = 3 \cdot 3 \cdot 4 \cdot 4 = 3^2 \cdot 4^2$ |
 :::
 
-::: exempel "Exempel 1 — Tecken och potenser"
+::: exempel "Exempel 1 — Tecken och potenser (Grund)"
 **Beräkna<br>a)&nbsp;$(-9)^2$&emsp;&emsp;b)&nbsp;$-9^2$**
 
 ::: handskrift
@@ -84,7 +84,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Skriv som en potens"
+::: exempel "Exempel 2 — Skriv som en potens (Grund)"
 **Skriv 64 som en potens med basen 4.**
 
 ::: handskrift
@@ -109,7 +109,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 3 — Utveckla en parentes"
+::: exempel "Exempel 3 — Utveckla en parentes (Grund)"
 **Utveckla $(7x)^2$.**
 
 ::: handskrift
@@ -127,7 +127,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 4 — Förenkla ett bråk med potenser"
+::: exempel "Exempel 4 — Förenkla ett bråk med potenser (Grund)"
 **Förenkla $\dfrac{42x^5}{x^2}$.**
 
 ::: handskrift
@@ -145,7 +145,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 5 — Potensekvation med samma bas"
+::: exempel "Exempel 5 — Potensekvation med samma bas (Mellan)"
 **Lös ekvationen $8^m \cdot 8^5 = 8^7$.**
 
 ::: handskrift
@@ -179,7 +179,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 6 — Förenkla ett bråkuttryck med potenser"
+::: exempel "Exempel 6 — Förenkla ett bråkuttryck med potenser (Avancerad)"
 **Förenkla $\dfrac{27^{5x}}{3^x + 3^x + 3^x}$.**
 
 ::: handskrift

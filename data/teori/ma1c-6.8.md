@@ -59,7 +59,7 @@ $$
 $$
 :::
 
-::: exempel "Exempel 1 — Längden ur koordinatform"
+::: exempel "Exempel 1 — Längden ur koordinatform (Grund)"
 **Bestäm längden hos vektorn $\vec{u} = (11,\ -5)$. Svara exakt och
 avrundat till två decimaler.**
 

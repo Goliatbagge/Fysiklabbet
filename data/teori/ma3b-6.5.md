@@ -130,7 +130,7 @@ $k$ förändringsfaktorn för **månadsräntan**, och $n$ är antalet
 årsränta ger månadsräntan 0,5 % och $k = 1{,}005$.
 :::
 
-::: exempel "Exempel 1 — Lånet som en summa av nuvärden"
+::: exempel "Exempel 1 — Lånet som en summa av nuvärden (Mellan)"
 **Nora lånar 30 000 kr. Lånet ska betalas tillbaka med tre lika stora betalningar, en i slutet av varje år. Räntan är 5 %. Hur stor blir varje betalning?**
 
 ::: handskrift
@@ -179,7 +179,7 @@ av en skuld som minskar.
 :::
 :::
 
-::: exempel "Exempel 2 — Billånet"
+::: exempel "Exempel 2 — Billånet (Mellan)"
 **Sami lånar 120 000 kr till en bil. Lånet är ett annuitetslån med räntan 6 %, och det ska betalas tillbaka med en betalning i slutet av varje år i fem år.<br>a) Hur stor är annuiteten?<br>b) Hur mycket betalar Sami totalt, och hur mycket av det är ränta?<br>c) Hur mycket ränta hade Sami betalat totalt om lånet i stället hade haft rak amortering, med en betalning per år?**
 
 ::: handskrift
@@ -244,7 +244,7 @@ på. I gengäld är de första betalningarna större.
 :::
 :::
 
-::: exempel "Exempel 3 — Månadsbetalningar (svårare)"
+::: exempel "Exempel 3 — Månadsbetalningar (svårare) (Avancerad)"
 **Linnea lånar 200 000 kr till en bil. Lånet är ett annuitetslån med årsräntan 6 %. Det ska betalas tillbaka med en betalning i slutet av varje månad i fem år, och månadsräntan räknas som årsräntan delad med 12.<br>a) Hur stor är månadsbetalningen?<br>b) Hur mycket ränta betalar Linnea totalt?**
 
 ::: handskrift

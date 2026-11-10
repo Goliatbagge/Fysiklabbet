@@ -27,7 +27,7 @@ Lösningen till en ekvation kallas också för **rot**.
 3. Sätt varje faktor lika med 0 och lös.
 :::
 
-::: exempel "Exempel 1 — Lös ekvationerna"
+::: exempel "Exempel 1 — Lös ekvationerna (Grund)"
 **Lös ekvationerna<br>a)&nbsp;$x^2 - 12x = 0$&emsp;&emsp;b)&nbsp;$x^2 + 5x = 0$&emsp;&emsp;c)&nbsp;$(x - 7)(x + 3) = 0$&emsp;&emsp;d)&nbsp;$14x^2 = 21x$**
 
 ::: handskrift
@@ -126,7 +126,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Konstruera en ekvation med givna rötter"
+::: exempel "Exempel 2 — Konstruera en ekvation med givna rötter (Mellan)"
 **Ange en ekvation med rötterna $x_1 = 3$ och $x_2 = -10$.**
 
 ::: handskrift

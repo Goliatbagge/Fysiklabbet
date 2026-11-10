@@ -21,7 +21,7 @@ $$
 $$
 :::
 
-::: exempel "Exempel 1 — Höjning följd av sänkning"
+::: exempel "Exempel 1 — Höjning följd av sänkning (Mellan)"
 **Ett pris höjs med 15 % för att sedan sänkas med 15 %. Med hur många
 procent har det ursprungliga priset ändrats?**
 
@@ -56,7 +56,7 @@ en förändring på 0 %. Detta beror på att värdet som vi räknar 15 % av
 :::
 :::
 
-::: exempel "Exempel 2 — Sparkontot"
+::: exempel "Exempel 2 — Sparkontot (Grund)"
 **Axel sätter in 80 000 kr på ett sparkonto med årsräntan 2,5 % och tar
 inte ut några pengar. Hur mycket pengar finns på kontot om 18 år?**
 

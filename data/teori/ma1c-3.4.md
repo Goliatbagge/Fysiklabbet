@@ -92,7 +92,7 @@ Kolumnerna betecknas med bokstäver och raderna med tal. Cellen där kolumn C oc
 Om vi ska skriva in beräkningar i en cell inleds formeln i cellen alltid
 med ett likhetstecken, =.
 
-::: exempel "Exempel 1 — Sparkonto i kalkylblad"
+::: exempel "Exempel 1 — Sparkonto i kalkylblad (Mellan)"
 **Du sätter in pengar på ett konto. Använd ett kalkylark och beräkna
 behållningen på kontot varje år till och med år 8 om du<br>
 a) sätter in 30 000 kr med räntan 3,5 %<br>
@@ -130,7 +130,7 @@ scen: sparkonto-c
 :::
 :::
 
-::: exempel "Exempel 2 — Årligt sparande"
+::: exempel "Exempel 2 — Årligt sparande (Mellan)"
 **Du sätter in 5 000 kr i slutet av varje år på ett konto med 2,8 %
 ränta. Vad är behållningen på kontot direkt efter 10:e insättningen?**
 

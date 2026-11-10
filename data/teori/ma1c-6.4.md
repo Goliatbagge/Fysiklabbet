@@ -33,7 +33,7 @@ koordinatsystem, så bildar vi en rätvinklig triangel med hörn i två av
 punkterna. Sträckan motsvarar hypotenusan som beräknas med Pythagoras
 sats. Vinkeln beräknas med trigonometri.
 
-::: exempel "Exempel 1 — Sträcka och vinkel i koordinatsystemet"
+::: exempel "Exempel 1 — Sträcka och vinkel i koordinatsystemet (Mellan)"
 **En sträcka dras mellan punkterna (−2, 1) och (2, 4). Bestäm<br>a) sträckans längd&emsp;&emsp;b) vinkeln mellan sträckan och *x*-axeln.**
 
 ::: handskrift

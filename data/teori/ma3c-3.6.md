@@ -17,7 +17,7 @@ på det med två nya tillämpningar: att bestämma en obekant konstant i en
 modell med hjälp av derivatan, och att bestämma ekvationen för tangenten
 till en kurva i en given punkt.
 
-::: exempel "Exempel 1 — Tillväxthastighet för en folkmängd"
+::: exempel "Exempel 1 — Tillväxthastighet för en folkmängd (Mellan)"
 **Folkmängden $N(t)$ i en kommun beräknas minska enligt
 $N(t) = 42\,000 \cdot 0{,}98^t$, där $t$ är tiden i år från 1 januari 2020.
 Beräkna tillväxthastigheten den 1 januari 2025.**
@@ -59,7 +59,7 @@ till funktionens eller derivatans värde vid en viss tidpunkt kan vi använda
 den informationen för att bestämma en obekant konstant — ofta med hjälp av
 logaritmer, precis som vid exponentialekvationer i Matematik nivå 2c.
 
-::: exempel "Exempel 2 — Bestämma en konstant med hjälp av derivata"
+::: exempel "Exempel 2 — Bestämma en konstant med hjälp av derivata (Mellan)"
 **Temperaturen $y$ °C hos en maträtt som placerats i en ugn ges av
 $y = e^{kx} - 19$, där $x$ är antalet minuter i ugnen och $k$ en
 konstant.<br>
@@ -183,7 +183,7 @@ Konstanten $m$ bestäms genom att sätta in tangeringspunktens koordinater
 $(a, f(a))$ i räta linjens ekvation.
 :::
 
-::: exempel "Exempel 3 — Tangentens ekvation"
+::: exempel "Exempel 3 — Tangentens ekvation (Mellan)"
 **Bestäm ekvationen för tangenten i punkten där $x = 3$ på kurvan
 $y = x^2 + 4x - 7$.**
 

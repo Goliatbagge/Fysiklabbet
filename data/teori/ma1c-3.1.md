@@ -33,7 +33,7 @@ $$
 För att bestämma delen eller det hela, så löser vi ut det från formeln
 ovan.
 
-::: exempel "Exempel 1 — Bestäm andelen"
+::: exempel "Exempel 1 — Bestäm andelen (Grund)"
 **Hur många promille är 120 g av 15 kg?**
 
 ::: handskrift
@@ -61,7 +61,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Bestäm delen"
+::: exempel "Exempel 2 — Bestäm delen (Grund)"
 **Vad är 3,5 ‰ av 32 000 kr?**
 
 ::: handskrift
@@ -94,7 +94,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 3 — Bestäm det hela"
+::: exempel "Exempel 3 — Bestäm det hela (Mellan)"
 **Koncentrationen av ett visst ämne i havsvatten är 5 ppm. Hur mycket
 vatten behövs för att samla in 30 gram av ämnet?**
 

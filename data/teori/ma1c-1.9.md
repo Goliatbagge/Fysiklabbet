@@ -32,7 +32,7 @@ Om ett tal är skrivet i grundpotensform gäller för tal
   första siffran.
 :::
 
-::: exempel "Exempel 1 — Skriv i grundpotensform"
+::: exempel "Exempel 1 — Skriv i grundpotensform (Grund)"
 **Skriv i grundpotensform<br>a) 8 000 000 000&emsp;&emsp;b) 743 000&emsp;&emsp;c) 0,0009&emsp;&emsp;d) 0,000024**
 
 ::: handskrift
@@ -88,7 +88,7 @@ En bokstav som ersätter en tiopotens och sätts framför en enhet kallas
 | p | piko | $10^{-12}$ |
 :::
 
-::: exempel "Exempel 2 — Skriv med lämpligt prefix"
+::: exempel "Exempel 2 — Skriv med lämpligt prefix (Mellan)"
 **Skriv med lämpligt prefix<br>a) 2 000 000 000 000 B&emsp;&emsp;b) 0,0047 l&emsp;&emsp;c) 270 000 N&emsp;&emsp;d) 0,000082 g**
 
 ::: handskrift
@@ -141,7 +141,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 3 — Skriv utan prefix"
+::: exempel "Exempel 3 — Skriv utan prefix (Grund)"
 **Skriv 5 MHz utan prefix.**
 
 ::: handskrift
@@ -159,7 +159,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 4 — Hårddisken"
+::: exempel "Exempel 4 — Hårddisken (Mellan)"
 **Josefin har köpt en extern hårddisk på 2,0 TB. Hur många videofiler får
 plats på den om en fil i genomsnitt är 4,0 GB?**
 

@@ -42,7 +42,7 @@ Om möjligt,
 2. Förkorta ("stryk") likadana faktorer från täljare och nämnare.
 :::
 
-::: exempel "Exempel 1 — Faktorisera"
+::: exempel "Exempel 1 — Faktorisera (Mellan)"
 **Faktorisera<br>a)&nbsp;$18x^2 + 45x^3 - 81x^4$&emsp;&emsp;b)&nbsp;$x^2 - 6x + 9$&emsp;&emsp;c)&nbsp;$50x^2 - 98$**
 
 ::: handskrift
@@ -130,7 +130,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Förkorta ett rationellt uttryck"
+::: exempel "Exempel 2 — Förkorta ett rationellt uttryck (Mellan)"
 **Förkorta $\dfrac{x^2 - 9}{5x + 15}$ så långt som möjligt.**
 
 ::: handskrift

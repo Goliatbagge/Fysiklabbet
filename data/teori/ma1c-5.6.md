@@ -51,7 +51,7 @@ Om sannolikheten för en händelse
   kvar av 51 kort totalt). Sannolikheten att dra ett hjärter har ändrats!
   Att dra kort utan återläggning är alltså beroende händelser.
 
-::: exempel "Exempel 1 — Två sexor i rad"
+::: exempel "Exempel 1 — Två sexor i rad (Grund)"
 **Vad är sannolikheten att slå två sexor i rad med tärning?**
 
 ::: handskrift
@@ -70,7 +70,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Yatzy!"
+::: exempel "Exempel 2 — Yatzy! (Grund)"
 **Vad är sannolikheten att slå fem sexor vid ett kast med fem tärningar?
 Yatzy!**
 
@@ -89,7 +89,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 3 — Kulor med och utan återläggning"
+::: exempel "Exempel 3 — Kulor med och utan återläggning (Mellan)"
 **I en skål ligger 6 röda och 4 blå kulor. Vad är sannolikheten att dra
 två blå kulor<br>a) med återläggning?&emsp;&emsp;b) utan återläggning?**
 

@@ -57,7 +57,7 @@ $$
 
 De inversa funktionerna slås på räknare. Lär dig att slå dem!
 
-::: exempel "Exempel 1 — Bestäm vinkeln ur cosinusvärdet"
+::: exempel "Exempel 1 — Bestäm vinkeln ur cosinusvärdet (Grund)"
 **Bestäm vinkeln $v$ om cos $v$ = 0,753.**
 
 ::: handskrift
@@ -77,7 +77,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Bestäm triangelns alla vinklar"
+::: exempel "Exempel 2 — Bestäm triangelns alla vinklar (Mellan)"
 **Den ena kateten i en rätvinklig triangel är 3 cm och hypotenusan är
 5 cm. Bestäm triangelns vinklar med de inversa funktionerna.**
 

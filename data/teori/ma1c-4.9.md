@@ -21,7 +21,7 @@ Vi har en ekvation VL = HL.
    lösningen!
 :::
 
-::: exempel "Exempel 1 — Grafisk lösning av en ekvation"
+::: exempel "Exempel 1 — Grafisk lösning av en ekvation (Grund)"
 **Lös med grafritande hjälpmedel ekvationen $3x - 5 = -x + 3$.**
 
 ::: handskrift
@@ -78,7 +78,7 @@ Vi ser att skärningspunktens *x*-koordinat är 2, så lösningen är $x = 2$.
 :::
 :::
 
-::: exempel "Exempel 2 — Decimaltal och en potens"
+::: exempel "Exempel 2 — Decimaltal och en potens (Grund)"
 **Lös ekvationen $0{,}5x^3 + 1{,}2 = 2{,}7$ med grafritande hjälpmedel. Ange lösningen med tre decimaler.**
 
 ::: handskrift
@@ -122,7 +122,7 @@ Kontroll genom insättning: $x = 1{,}442$ ger VL $= 0{,}5 \cdot 1{,}442^3 + 1{,}
 :::
 :::
 
-::: exempel "Exempel 3 — Grafisk lösning av en olikhet"
+::: exempel "Exempel 3 — Grafisk lösning av en olikhet (Mellan)"
 **Lös olikheten $-2x + 5 < x - 4$.**
 
 ::: handskrift

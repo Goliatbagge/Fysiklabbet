@@ -71,7 +71,7 @@ tangensfunktionen $180^\circ$.
 :::
 :::
 
-::: exempel "Exempel 1 — Lös en tangensekvation"
+::: exempel "Exempel 1 — Lös en tangensekvation (Grund)"
 **Lös ekvationen $\tan v = 2$ i intervallet $0^\circ \leq v \leq 360^\circ$.**
 
 ::: handskrift

@@ -24,7 +24,7 @@ gör.)
    ekvationerna för att få värdet på den andra variabeln.
 :::
 
-::: exempel "Exempel 1 — Variabeln redan utlöst"
+::: exempel "Exempel 1 — Variabeln redan utlöst (Grund)"
 **Lös ekvationssystemet**
 
 ::: handskrift
@@ -99,7 +99,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Lös ut en variabel först"
+::: exempel "Exempel 2 — Lös ut en variabel först (Mellan)"
 **Lös ekvationssystemet**
 
 ::: handskrift

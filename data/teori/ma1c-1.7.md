@@ -47,7 +47,7 @@ definierat.
 exponenten är noll betyder alltså inte att potensen blir noll, och det är en
 av de vanligaste missuppfattningarna.
 
-::: exempel "Exempel 1 — Exponenten noll"
+::: exempel "Exempel 1 — Exponenten noll (Grund)"
 **Beräkna<br>a)&nbsp;$25^0$&emsp;&emsp;b)&nbsp;$4^0 + (-7)^0$**
 
 ::: handskrift
@@ -108,7 +108,7 @@ exponenten".
 :::
 :::
 
-::: exempel "Exempel 2 — Negativa exponenter"
+::: exempel "Exempel 2 — Negativa exponenter (Grund)"
 **Beräkna utan räknare<br>a)&nbsp;$4^{-2}$&emsp;&emsp;b)&nbsp;$5^{-1}$**
 
 ::: handskrift
@@ -134,7 +134,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 3 — Skriv i potensform"
+::: exempel "Exempel 3 — Skriv i potensform (Grund)"
 **Skriv $\dfrac{1}{3^5}$ i potensform.**
 
 ::: handskrift
@@ -153,7 +153,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 4 — Flytta upp nämnaren"
+::: exempel "Exempel 4 — Flytta upp nämnaren (Mellan)"
 **Skriv $\dfrac{5}{x}$ som en potens med basen $x$.**
 
 ::: handskrift
@@ -194,7 +194,7 @@ det vill säga $\left(\dfrac{a}{b}\right)^{-1} = \dfrac{b}{a}$, vsv.
 :::
 :::
 
-::: exempel "Exempel 5 — Bråk med negativa exponenter"
+::: exempel "Exempel 5 — Bråk med negativa exponenter (Mellan)"
 **Beräkna<br>a)&nbsp;$\left(\dfrac{3}{4}\right)^{-1}$&emsp;&emsp;b)&nbsp;$\left(\dfrac{4}{5}\right)^{-2}$**
 
 ::: handskrift

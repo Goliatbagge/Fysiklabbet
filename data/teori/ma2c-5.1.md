@@ -15,7 +15,7 @@ En ekvation där variabeln, oftast $x$, är i **basen** ("$x$ upphöjt
 till något") kallas **potensekvation**. Dessa kan lösas med två
 algebraiska metoder — antingen med potenslagar eller med rotuttryck.
 
-::: exempel "Exempel 1 — Lös potensekvationen"
+::: exempel "Exempel 1 — Lös potensekvationen (Grund)"
 **Lös potensekvationen $x^7 = 860$.**
 
 ::: handskrift
@@ -73,7 +73,7 @@ där
 - $x$ = antal förändringar (ofta tid)
 :::
 
-::: exempel "Exempel 2 — Aktier"
+::: exempel "Exempel 2 — Aktier (Mellan)"
 **Du köper aktier för 12 000 kr.**
 
 ::: handskrift

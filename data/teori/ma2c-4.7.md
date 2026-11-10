@@ -23,7 +23,7 @@ Två månghörningar är likformiga om
 (Undantaget är trianglar, vilket nästa genomgång handlar om.)
 :::
 
-::: exempel "Exempel 1 — Är parallellogrammen likformiga?"
+::: exempel "Exempel 1 — Är parallellogrammen likformiga? (Mellan)"
 **Är parallellogrammen likformiga? Motstående vinklar i en
 parallellogram är lika stora. Motstående sidor i en parallellogram är
 lika stora.**
@@ -73,7 +73,7 @@ parallellogrammen likformiga.
 :::
 :::
 
-::: exempel "Exempel 2 — Bestäm sidan"
+::: exempel "Exempel 2 — Bestäm sidan (Grund)"
 **Figurerna är likformiga. Bestäm sidan $x$.**
 
 ::: figur

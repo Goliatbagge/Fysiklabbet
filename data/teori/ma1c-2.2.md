@@ -18,7 +18,7 @@ för sig, $y$-termer för sig, $x^2$-termer för sig, konstanttermer för sig,
 och så vidare. Var noga med att titta på tecknet framför varje term!
 :::
 
-::: exempel "Exempel 1 — Lägg ihop likadana termer"
+::: exempel "Exempel 1 — Lägg ihop likadana termer (Grund)"
 **Förenkla<br>a)&nbsp;$8x + 3y - 2x + 9y$&emsp;&emsp;b)&nbsp;$5x^2 + 3x - x^2$**
 
 ::: handskrift
@@ -57,7 +57,7 @@ När ett
   $a - (b + c) = a - b - c$&emsp;&emsp;$a - (b - c) = a - b + c$
 :::
 
-::: exempel "Exempel 2 — Minustecken framför parentes"
+::: exempel "Exempel 2 — Minustecken framför parentes (Grund)"
 **Förenkla $20x - (5 + 3x - 7y)$.**
 
 ::: handskrift
@@ -76,7 +76,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 3 — Rektangelns omkrets"
+::: exempel "Exempel 3 — Rektangelns omkrets (Grund)"
 **Teckna ett förenklat uttryck för omkretsen till rektangeln nedan.**
 
 ::: figur

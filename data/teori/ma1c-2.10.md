@@ -83,7 +83,7 @@ En potensekvation $x^n = a$ där exponenten $n$ är ett **jämnt** heltal har
 vilket tecken $a$ har.
 :::
 
-::: exempel "Exempel 1 — Lös potensekvationerna"
+::: exempel "Exempel 1 — Lös potensekvationerna (Mellan)"
 **Lös ekvationerna och avrunda svaret till två decimaler.<br>a)&nbsp;$x^{14} = 80\,000$&emsp;&emsp;b)&nbsp;$3x^5 - 21 = 0$&emsp;&emsp;c)&nbsp;$x^{3,4} = 98$&emsp;&emsp;d)&nbsp;$x^{1/2} = 4$&emsp;&emsp;e)&nbsp;$x^{2/5} = 10$**
 
 ::: handskrift
@@ -206,7 +206,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Bestäm antalet lösningar"
+::: exempel "Exempel 2 — Bestäm antalet lösningar (Mellan)"
 **Bestäm antal lösningar till ekvationen<br>a)&nbsp;$x^{12} = 154$&emsp;&emsp;b)&nbsp;$x^4 = 0$&emsp;&emsp;c)&nbsp;$x^{100} = -50$&emsp;&emsp;d)&nbsp;$x^{99} = -5$**
 
 ::: handskrift

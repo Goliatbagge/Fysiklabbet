@@ -48,7 +48,7 @@ gränser dessutom ger det integralens värde. **CAS-läget** ger exakta svar
 (bråk, rotuttryck) medan **standardläget** ger numeriska närmevärden —
 välj läge efter vilken sorts svar uppgiften efterfrågar.
 
-::: exempel "Exempel 1 — Beräkna en bestämd integral med digitalt hjälpmedel"
+::: exempel "Exempel 1 — Beräkna en bestämd integral med digitalt hjälpmedel (Grund)"
 **Beräkna $\displaystyle\int_1^5 (x^2 - 4)\, dx$ med ett digitalt
 hjälpmedel. Svara<br>a) med ett närmevärde&emsp;&emsp;b) exakt.**
 
@@ -75,7 +75,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Bestämma en primitiv funktion med digitalt hjälpmedel"
+::: exempel "Exempel 2 — Bestämma en primitiv funktion med digitalt hjälpmedel (Grund)"
 **Ange en primitiv funktion till $f(x) = x^2 - 4$.**
 
 ::: handskrift

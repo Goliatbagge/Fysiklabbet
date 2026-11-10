@@ -38,7 +38,7 @@ $k = \dfrac{\Delta y}{\Delta x}$ gäller att enheten på tangentens lutning
 vid tillämpningar blir "enheten på $y$-axeln" per "enheten på $x$-axeln".
 :::
 
-::: exempel "Exempel 1 — Avläs tangentens lutning i en graf"
+::: exempel "Exempel 1 — Avläs tangentens lutning i en graf (Mellan)"
 **En granplanta har höjden $y$ dm efter $x$ år enligt diagrammet nedan. Med
 vilken hastighet växer granplantan efter 2 år?**
 

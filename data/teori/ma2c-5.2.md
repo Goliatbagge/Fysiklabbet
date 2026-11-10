@@ -79,7 +79,7 @@ tians exponent har desto närmare 0 kommer vi, men det blir aldrig 0
 eller negativt: $10^{-3} = \dfrac{1}{1\,000} = 0{,}001$ och
 $10^{-6} = \dfrac{1}{1\,000\,000} = 0{,}000\,001$ och så vidare.
 
-::: exempel "Exempel 1 — Bestäm utan räknare"
+::: exempel "Exempel 1 — Bestäm utan räknare (Grund)"
 **Bestäm utan räknare<br>a)&nbsp;$\lg 10\,000$&emsp;&emsp;b)&nbsp;$\lg 10^{-5}$&emsp;&emsp;c)&nbsp;$\lg \sqrt{10}$**
 
 ::: handskrift
@@ -107,7 +107,7 @@ $\dfrac{1}{2}$ för att svaret ska bli $\sqrt{10}$.
 :::
 :::
 
-::: exempel "Exempel 2 — Skriv som en potens med basen 10"
+::: exempel "Exempel 2 — Skriv som en potens med basen 10 (Grund)"
 **Skriv som en potens med basen 10.<br>a) 4&emsp;&emsp;b) 75**
 
 ::: handskrift
@@ -130,7 +130,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 3 — Beräkna utan räknare"
+::: exempel "Exempel 3 — Beräkna utan räknare (Mellan)"
 **Beräkna utan räknare $10^{\lg 9} - \dfrac{3 \cdot 10^{\lg 3}}{\lg 10}$.**
 
 ::: handskrift

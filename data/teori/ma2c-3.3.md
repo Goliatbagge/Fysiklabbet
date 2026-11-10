@@ -32,7 +32,7 @@ funktionen. Denna metod är ofta krängligare räknemässigt, men fungerar
 alltid, även om till exempel nollställena är okända.
 :::
 
-::: exempel "Exempel 1 — Nollställen och en punkt"
+::: exempel "Exempel 1 — Nollställen och en punkt (Mellan)"
 **Figuren visar grafen till en andragradsfunktion $f(x)$. Bestäm $f(x)$
 och svara på formen $f(x) = ax^2 + bx + c$.**
 
@@ -82,7 +82,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Tre punkter"
+::: exempel "Exempel 2 — Tre punkter (Avancerad)"
 **Figuren visar grafen till en andragradsfunktion $f(x)$ som saknar
 nollställen och som går genom punkterna (−2, 1), (−1, 2) och (0, 5).
 Bestäm $f(x)$.**
@@ -166,7 +166,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 3 — Fontänen i Seoul"
+::: exempel "Exempel 3 — Fontänen i Seoul (Avancerad)"
 **Avståndet längs vattenytan från en vattenstråles start till dess att
 strålen träffar vattnet är ungefär $2{,}3$ m. Strålens högsta höjd över
 vattenytan är ungefär $3{,}1$ m. Anta att strålens bana har samma form

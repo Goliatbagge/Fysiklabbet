@@ -37,7 +37,7 @@ kallas **avrundningssiffra**.
 | 5, 6, 7, 8 eller 9 | öka avrundningssiffran med 1 (avrunda uppåt) |
 :::
 
-::: exempel "Exempel 1 — Avrundning"
+::: exempel "Exempel 1 — Avrundning (Grund)"
 **Avrunda 61,4738 till<br>a) tiondelar&emsp;&emsp;b) ental&emsp;&emsp;c) tiotal**
 
 ::: handskrift
@@ -100,7 +100,7 @@ Vid
   decimaler ger antalet **decimaler** i svaret.
 :::
 
-::: exempel "Exempel 2 — Värdesiffror vid multiplikation"
+::: exempel "Exempel 2 — Värdesiffror vid multiplikation (Mellan)"
 **Framsidan av en bok är 19,5 cm × 24 cm. Bestäm framsidans area.**
 
 ::: handskrift
@@ -124,7 +124,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 3 — Decimaler vid subtraktion"
+::: exempel "Exempel 3 — Decimaler vid subtraktion (Grund)"
 **Du har en bräda som är 1,73 meter och sågar av 1,3 meter. Hur lång är
 brädbiten som är kvar?**
 

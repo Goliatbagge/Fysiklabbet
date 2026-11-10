@@ -37,7 +37,7 @@ Om vi till $f(x) = 2x$ ska ange
   $C$ är en konstant som kan stå för vilket tal som helst
 :::
 
-::: exempel "Exempel 1 — En och samtliga primitiva funktioner"
+::: exempel "Exempel 1 — En och samtliga primitiva funktioner (Grund)"
 **Ange för funktionen $f(x) = 3x^2$<br>a) en primitiv funktion&emsp;&emsp;b) samtliga primitiva funktioner**
 
 ::: handskrift
@@ -73,7 +73,7 @@ exponentialfunktioner med basen $e$.
 | Exponentialfunktion ($x$ i exponenten) med basen $e$ | Skriv av funktionen och dividera med koefficienten (talet) framför variabeln (oftast $x$) i exponenten. | $f(x) = e^{kx}$<br>$F(x) = \dfrac{e^{kx}}{k}$ |
 :::
 
-::: exempel "Exempel 2 — Bestäm en primitiv funktion"
+::: exempel "Exempel 2 — Bestäm en primitiv funktion (Grund)"
 **Bestäm en primitiv funktion till<br>a)&nbsp;$f(x) = 5$&emsp;&emsp;b)&nbsp;$f(x) = 14x^2 - 3$&emsp;&emsp;c)&nbsp;$f(x) = e^{4x}$**
 
 ::: handskrift
@@ -113,7 +113,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 3 — Bestäm samtliga primitiva funktioner"
+::: exempel "Exempel 3 — Bestäm samtliga primitiva funktioner (Grund)"
 **Bestäm samtliga primitiva funktioner till<br>a)&nbsp;$f(x) = 6x$&emsp;&emsp;b)&nbsp;$f(x) = 6e^{3x}$**
 
 ::: handskrift

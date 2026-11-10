@@ -48,7 +48,7 @@ storleken på bråket. När vi
 - **dividerar** täljare och nämnare med samma tal **förkortar** vi bråket.
 :::
 
-::: exempel "Exempel 1 — Förkorta ett bråk"
+::: exempel "Exempel 1 — Förkorta ett bråk (Grund)"
 **Förkorta $\dfrac{6}{15}$ med 3.**
 
 ::: handskrift
@@ -66,7 +66,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Förläng ett bråk"
+::: exempel "Exempel 2 — Förläng ett bråk (Grund)"
 **Förläng $\dfrac{2}{3}$ så att nämnaren blir 12.**
 
 ::: handskrift
@@ -105,7 +105,7 @@ När vi jämför bråk görs det lättast genom att göra om bråken till **samm
 nämnare**. Vi inser till exempel lätt att $\dfrac{5}{7}$ är större än $\dfrac{4}{7}$.
 :::
 
-::: exempel "Exempel 3 — Vilket bråk är störst?"
+::: exempel "Exempel 3 — Vilket bråk är störst? (Mellan)"
 **Vilket bråk är störst: $\dfrac{4}{9}$ eller $\dfrac{3}{7}$?**
 
 ::: handskrift

@@ -51,7 +51,7 @@ figur, men den kan också beräknas algebraiskt med substitutionsmetoden
 eller additionsmetoden. Det är säkrast att räkna, eftersom punkten inte
 alltid hamnar exakt i en ruta.
 
-::: exempel "Exempel 1 — Skärningspunkt mellan två linjer"
+::: exempel "Exempel 1 — Skärningspunkt mellan två linjer (Grund)"
 **Två linjer har ekvationerna $2x + y = 10$ och $x + y = 7$.<br>a) Skriv den första linjens ekvation på formen $y = kx + m$.<br>b) Bestäm linjernas skärningspunkt.**
 
 ::: handskrift
@@ -136,7 +136,7 @@ till exempel $3x - y \leq 6$. Testpunkten är ett bra sätt att kontrollera
 att du skuggat rätt sida.
 :::
 
-::: exempel "Exempel 2 — Rita en olikhet"
+::: exempel "Exempel 2 — Rita en olikhet (Grund)"
 **Rita det område som beskrivs av olikheten $x + 2y < 6$.**
 
 ::: handskrift
@@ -189,7 +189,7 @@ finns nästan alltid villkoren $x \geq 0$ och $y \geq 0$ med. Tillsammans
 betyder de att området ligger i första kvadranten, alltså till höger om
 *y*-axeln och ovanför *x*-axeln.
 
-::: exempel "Exempel 3 — Område och hörnpunkter"
+::: exempel "Exempel 3 — Område och hörnpunkter (Mellan)"
 **Ett område beskrivs av olikheterna $x \geq 0$, $y \geq 0$, $x + 2y \leq 8$ och $3x + y \leq 9$.<br>a) Rita området.&emsp;&emsp;b) Bestäm områdets hörnpunkter.**
 
 ::: handskrift
@@ -263,7 +263,7 @@ olikheter som beskriver det. Då bestämmer vi först ekvationen för varje
 gränslinje. Sedan avgör vi på vilken sida av linjen området ligger, och om
 linjen är streckad eller heldragen.
 
-::: exempel "Exempel 4 — Bestäm olikheterna till ett område"
+::: exempel "Exempel 4 — Bestäm olikheterna till ett område (Mellan)"
 **Det skuggade området i figuren begränsas av tre linjer. Bestäm de olikheter som beskriver området.**
 
 ::: figur

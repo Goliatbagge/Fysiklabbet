@@ -70,7 +70,7 @@ negativa vinkeln ger en punkt som är en spegelbild i $x$-axeln av punkten
 för $v$: $x$-koordinaten (cosinusvärdet) är oförändrad, medan
 $y$-koordinaten (sinusvärdet) byter tecken.
 
-::: exempel "Exempel 1 — Bestäm ur enhetscirkeln"
+::: exempel "Exempel 1 — Bestäm ur enhetscirkeln (Mellan)"
 **Bestäm ur enhetscirkeln, där punkten $(0{,}51;\ 0{,}86)$ motsvarar
 vinkeln $v$ (se figuren).<br>a)&nbsp;$\cos v$&emsp;&emsp;b)&nbsp;$\sin v$&emsp;&emsp;c)&nbsp;$\tan v$&emsp;&emsp;d)&nbsp;$v$&emsp;&emsp;e)&nbsp;$\sin 419{,}3^\circ$&emsp;&emsp;f)&nbsp;$\sin(-59{,}3^\circ)$**
 

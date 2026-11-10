@@ -19,7 +19,7 @@ vi oss åt **problemlösning**.
 3. **Tolka och svara** med enhet. Är svaret rimligt?
 :::
 
-::: exempel "Exempel 1 — Dela upp ett belopp"
+::: exempel "Exempel 1 — Dela upp ett belopp (Mellan)"
 **Rayan, Arielle och Samuel ska dela på 4 000 kr. Rayan ska få dubbelt så
 mycket som Arielle och Samuel ska få 300 kr mindre än Rayan. Hur stort
 belopp får Arielle?**
@@ -112,7 +112,7 @@ i km och tiden i timmar, så 20 minuter skrivs som $\dfrac{20}{60}$ h och inte
 som 20.
 :::
 
-::: exempel "Exempel 2 — Fram och tillbaka med olika fart"
+::: exempel "Exempel 2 — Fram och tillbaka med olika fart (Avancerad)"
 **Amir cyklar hemifrån till badplatsen med medelfarten 18 km/h och går
 sedan hem samma väg med medelfarten 6 km/h. Hela turen tar 1 timme och
 20 minuter. Hur långt är det till badplatsen?**
@@ -239,7 +239,7 @@ användas alls. Innan du översätter till matematik lönar det sig därför att
    använda metoden i tre steg.
 :::
 
-::: exempel "Exempel 3 — Rensa texten först"
+::: exempel "Exempel 3 — Rensa texten först (Mellan)"
 **Det är fredag kväll och Elin, som går första året på gymnasiet, ska gå på
 bio med två kompisar. Bion ligger 3 km hemifrån, och filmen börjar klockan
 19.30 och är 2 timmar och 10 minuter lång. Elin har 650 kr på sitt

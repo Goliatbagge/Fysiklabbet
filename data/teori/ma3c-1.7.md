@@ -28,7 +28,7 @@ faktorisera uttryck, lösa ekvationer och bestämma gränsvärden.
 | Beräkna gränsvärde | Gränsvärde( Funktion, Värde ) |
 :::
 
-::: exempel "Exempel 1 — Förenkla ett uttryck"
+::: exempel "Exempel 1 — Förenkla ett uttryck (Grund)"
 **Förenkla $(x + 3)(x - 1)(x + 5)$ med symbolhanterande hjälpmedel.**
 
 ::: handskrift
@@ -53,7 +53,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Faktorisera ett uttryck"
+::: exempel "Exempel 2 — Faktorisera ett uttryck (Grund)"
 **Faktorisera $x^3 + 7x^2 + 7x - 15$ med symbolhanterande hjälpmedel.**
 
 ::: handskrift
@@ -76,7 +76,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 3 — Lös en tredjegradsekvation"
+::: exempel "Exempel 3 — Lös en tredjegradsekvation (Grund)"
 **Lös ekvationen $x^3 - x^2 - 3x + 3 = 0$ med symbolhanterande hjälpmedel.
 Svara<br>a) med två decimaler&emsp;&emsp;b) exakt.**
 
@@ -114,7 +114,7 @@ Observera att man i Geogebra enkelt kan växla mellan exakt och ungefärlig
 form med knapparna "$=$" och "$\approx$" utan att skriva om hela
 kommandot.
 
-::: exempel "Exempel 4 — Funktionsvärde och ekvationslösning"
+::: exempel "Exempel 4 — Funktionsvärde och ekvationslösning (Grund)"
 **Funktionen $f(x) = x^3 - 4x^2$ är given. Med symbolhanterande hjälpmedel,
 bestäm<br>a) $f(7)$&emsp;&emsp;b) lösningen till $f(x) = 7$.**
 
@@ -152,7 +152,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 5 — Gränsvärde"
+::: exempel "Exempel 5 — Gränsvärde (Grund)"
 **Bestäm $\displaystyle\lim_{x \to \infty} \frac{3x + 2}{x - 1}$ med
 symbolhanterande hjälpmedel.**
 

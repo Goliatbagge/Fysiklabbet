@@ -59,7 +59,7 @@ alternativ till teckentabellen så länge $f''(a) \neq 0$.
    bestämma karaktären.
 :::
 
-::: exempel "Exempel 1 — Andraderivatametoden"
+::: exempel "Exempel 1 — Andraderivatametoden (Mellan)"
 **Bestäm lokala maximi-, minimi- och terrasspunkter till
 $f(x) = \dfrac{x^3}{3} - 9x$.**
 

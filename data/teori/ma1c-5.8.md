@@ -40,7 +40,7 @@ vsv.
 Komplementhändelser är användbara i uppgifter där vi ska beräkna
 sannolikheten för **minst en** eller **åtminstone en**.
 
-::: exempel "Exempel 1 — Ange komplementhändelsen"
+::: exempel "Exempel 1 — Ange komplementhändelsen (Grund)"
 **Vad är komplementhändelsen till att<br>a) det regnar?<br>b) dra ett hjärter ur en kortlek?<br>c) slå minst en femma på en tärning?**
 
 ::: handskrift
@@ -71,7 +71,7 @@ ett spader, klöver eller ruter.
 :::
 :::
 
-::: exempel "Exempel 2 — Minst en sexa med fem tärningar"
+::: exempel "Exempel 2 — Minst en sexa med fem tärningar (Mellan)"
 **Vad är sannolikheten att få minst en sexa vid kast med fem vanliga
 tärningar?**
 
@@ -102,7 +102,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 3 — Minst en dotter"
+::: exempel "Exempel 3 — Minst en dotter (Mellan)"
 **Vad är sannolikheten att få minst en dotter om man skaffar fyra barn?
 (Vi räknar med att det är samma sannolikhet att få en flicka som en
 pojke.)**

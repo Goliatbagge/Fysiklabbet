@@ -31,7 +31,7 @@ $$
 En formel för att direkt beräkna ett element i talföljden kallas **sluten
 formel**.
 
-::: exempel "Exempel 1 — Hitta en sluten formel"
+::: exempel "Exempel 1 — Hitta en sluten formel (Mellan)"
 **Vi har talföljden 3, 7, 11, 15, 19, …<br>a) Ange en sluten formel för talföljden.<br>b) Vilket är det 100:e talet i talföljden?**
 
 ::: handskrift
@@ -89,7 +89,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Prickmönstret"
+::: exempel "Exempel 2 — Prickmönstret (Mellan)"
 **Nedanstående figurer byggs.**
 
 ::: figur

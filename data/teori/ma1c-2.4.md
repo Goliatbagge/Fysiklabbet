@@ -19,7 +19,7 @@ Hitta en eller flera **gemensamma faktorer** för alla termer i uttrycket.
 baklänges".
 :::
 
-::: exempel "Exempel 1 — Faktorisera så långt som möjligt"
+::: exempel "Exempel 1 — Faktorisera så långt som möjligt (Mellan)"
 **Faktorisera så långt som möjligt<br>a)&nbsp;$27x^2 - 18x$&emsp;&emsp;b)&nbsp;$5x^3 + 20x^5$&emsp;&emsp;c)&nbsp;$21x^2 - 14$&emsp;&emsp;d)&nbsp;$4x^3 - 6x^2 + 10x$&emsp;&emsp;e)&nbsp;$81y - 45x^2y + 27xy^2$**
 
 ::: handskrift
@@ -152,7 +152,7 @@ kvar: $5(9x - 6)$ är inte färdigt, eftersom 9 och 6 båda är delbara
 med 3.
 :::
 
-::: exempel "Exempel 2 — Bryt ut en parentes"
+::: exempel "Exempel 2 — Bryt ut en parentes (Mellan)"
 **Faktorisera så långt som möjligt<br>a)&nbsp;$5(9x - 6)$&emsp;&emsp;b)&nbsp;$3(x + 2) - x(x + 2)$**
 
 ::: handskrift
@@ -216,7 +216,7 @@ kan skrivas som 3 gånger ett heltal. Ska vi visa att en summa alltid är
 delbar med 3 tecknar vi summan med en variabel, förenklar den och
 faktoriserar. Kan vi bryta ut faktorn 3 är saken klar.
 
-::: exempel "Exempel 3 — Visa att en summa är delbar med ett tal"
+::: exempel "Exempel 3 — Visa att en summa är delbar med ett tal (Avancerad)"
 **a) Visa att summan av fyra på varandra följande heltal alltid är ett jämnt tal.<br>b) Visa att summan av två på varandra följande udda tal alltid är delbar med 4.**
 
 ::: handskrift

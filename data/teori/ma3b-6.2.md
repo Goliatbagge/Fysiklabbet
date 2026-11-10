@@ -91,7 +91,7 @@ De blå punkterna har $a_1 = 1$ och $k = 1{,}5$. De röda har $a_1 = 8$ och $k =
 - Är $k$ negativ **växlar** elementen tecken. Med $a_1 = 1$ och $k = -2$
   blir talföljden $1, -2, 4, -8, 16, \ldots$
 
-::: exempel "Exempel 1 — Bestäm ett element"
+::: exempel "Exempel 1 — Bestäm ett element (Grund)"
 **Talföljden $3,\ 6,\ 12,\ 24,\ \ldots$ är geometrisk.<br>a) Bestäm en sluten formel för $a_{\mathit{n}}$.<br>b) Bestäm $a_{10}$.**
 
 ::: handskrift
@@ -130,7 +130,7 @@ Känner vi två element som står längre isär kan vi ändå bestämma kvoten.
 Från $a_2$ till $a_5$ är det tre steg, så $a_5 = a_2 \cdot k^3$. Antalet
 steg är skillnaden mellan ordningsnumren, $5 - 2 = 3$.
 
-::: exempel "Exempel 2 — Kvoten ur två element"
+::: exempel "Exempel 2 — Kvoten ur två element (Mellan)"
 **I en geometrisk talföljd är $a_2 = 12$ och $a_5 = 324$. Bestäm kvoten $k$ och det första elementet $a_1$.**
 
 ::: handskrift
@@ -197,7 +197,7 @@ Ska vi ta reda på **när** elementen passerar ett visst värde står den
 okända $n$ i exponenten. Då logaritmerar vi båda led, precis som när
 exponentialekvationer löstes med lg i Matematik nivå 2.
 
-::: exempel "Exempel 3 — Lönen som växer"
+::: exempel "Exempel 3 — Lönen som växer (Mellan)"
 **Elin har 28 000 kr i månadslön sitt första år på ett nytt jobb. Lönen höjs med 3 % varje år.<br>a) Hur stor är månadslönen år 8?<br>b) Vilket år blir månadslönen för första gången högre än 40 000 kr?**
 
 ::: handskrift

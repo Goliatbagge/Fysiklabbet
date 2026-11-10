@@ -70,7 +70,7 @@ självklart vad som är "nya värdet" och "gamla värdet".
 Vid jämförelser motsvarar det vi JÄMFÖR MED det gamla värdet.
 :::
 
-::: exempel "Exempel 1 — Prissänkning"
+::: exempel "Exempel 1 — Prissänkning (Grund)"
 **En begagnad bil kostar 72 000 kr och sänks sedan i pris med 8 %.
 Vilket blir det nya priset? Lös med förändringsfaktor.**
 
@@ -96,7 +96,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Hur stor är ökningen?"
+::: exempel "Exempel 2 — Hur stor är ökningen? (Grund)"
 **Ett pris ökar från 175 kr till 231 kr. Hur många procents prisökning
 motsvarar det?**
 
@@ -120,7 +120,7 @@ $(132\ \% - 100\ \%) = 32\ \%$.
 :::
 :::
 
-::: exempel "Exempel 3 — Jämföra två butiker"
+::: exempel "Exempel 3 — Jämföra två butiker (Mellan)"
 **Butik A säljer en chokladkaka för 18 kr. Butik B säljer en likadan
 chokladkaka för 22 kr. Hur många procent<br>a) dyrare är chokladkakan i
 butik B jämfört med butik A?<br>b) billigare är chokladkakan i butik A

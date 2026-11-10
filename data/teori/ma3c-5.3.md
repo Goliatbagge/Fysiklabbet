@@ -94,7 +94,7 @@ negativ. Ligger området under $x$-axeln är alltså integralens värde lika
 med arean, fast med motsatt (negativt) tecken.
 :::
 
-::: exempel "Exempel 1 — Beskriv en skuggad area med en integral"
+::: exempel "Exempel 1 — Beskriv en skuggad area med en integral (Grund)"
 **Grafen till $f(x) = 0{,}5x^2 + 1$ är ritad i ett koordinatsystem. Det
 skuggade området begränsas av grafen, $x$-axeln, linjen $x = 1$ och
 linjen $x = 4$. Beskriv det skuggade områdets area med en integral.**
@@ -118,7 +118,7 @@ $$
 
 ## Beräkna arean utifrån en graf
 
-::: exempel "Exempel 2 — Beräkna area och integral utifrån en graf"
+::: exempel "Exempel 2 — Beräkna area och integral utifrån en graf (Grund)"
 **Grafen till den räta linjen $f(x) = 0{,}5x + 2$ är ritad i ett
 koordinatsystem. Tillsammans med $x$-axeln, linjen $x = 2$ och linjen
 $x = 6$ bildar grafen ett skuggat område.<br>
@@ -151,7 +151,7 @@ anges med någon enhet).
 :::
 :::
 
-::: exempel "Exempel 3 — En integral med negativt värde"
+::: exempel "Exempel 3 — En integral med negativt värde (Mellan)"
 **Grafen till $f(x) = 1 - x$ är ritad i ett koordinatsystem. Tillsammans
 med $x$-axeln och linjen $x = 6$ bildar grafen ett skuggat område mellan
 $x = 1$ och $x = 6$. Bestäm<br>
@@ -184,7 +184,7 @@ integralens värde (inte en area) som efterfrågas.
 
 ## Avgöra tecknet på en integral
 
-::: exempel "Exempel 4 — Avgör om en integral är positiv eller negativ"
+::: exempel "Exempel 4 — Avgör om en integral är positiv eller negativ (Mellan)"
 **Grafen till $f(x)$ delar tillsammans med $x$-axeln in ett område i två
 delar mellan $x = a$ och $x = b$: del $A$ ligger ovanför $x$-axeln och
 del $B$ ligger under $x$-axeln. Del $B$ är större än del $A$. Avgör om

@@ -26,7 +26,7 @@ när datamängden inte är tal, till exempel färger eller bilmärken.
 Antalet av ett visst värde kallas **frekvens**. Om till exempel antalet
 17-åringar i ett klassrum är 12 är 17-åringarnas frekvens 12.
 
-::: exempel "Exempel 1 — Tre lägesmått"
+::: exempel "Exempel 1 — Tre lägesmått (Grund)"
 **Åldern på personerna i ett klassrum är 16, 17, 61, 16, 16, 18 och 17
 år. Bestäm<br>a) medelvärdet&emsp;&emsp;b) medianen&emsp;&emsp;c) typvärdet**
 
@@ -59,7 +59,7 @@ förekommande åldern.
 :::
 :::
 
-::: exempel "Exempel 2 — Vilket lägesmått är lämpligast?"
+::: exempel "Exempel 2 — Vilket lägesmått är lämpligast? (Grund)"
 **Vilket lägesmått är lämpligast att använda i exemplet ovan:
 medelvärde eller median?**
 
@@ -87,7 +87,7 @@ sammanhängande staplar. I dessa fall räknar man med att alla värden i
 en klass har värdet i mitten av intervallet, vilket kallas
 **klassmitt**. Klassen $300 \leq x < 400$ har till exempel klassmitten 350.
 
-::: exempel "Exempel 3 — Medelvärde ur klassindelat material"
+::: exempel "Exempel 3 — Medelvärde ur klassindelat material (Mellan)"
 **Åldern hos personerna i ett rum åskådliggörs i en tabell med
 intervall och i ett histogram. Beräkna medelåldern.**
 

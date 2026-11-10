@@ -131,7 +131,7 @@ lodräta linjen har inget *k*-värde alls. Prova att ställa den blå linjen
 vågrätt i simuleringen.
 :::
 
-::: exempel "Exempel 1 — Är linjerna vinkelräta?"
+::: exempel "Exempel 1 — Är linjerna vinkelräta? (Grund)"
 **Avgör om linjerna är vinkelräta.<br>a)&nbsp;$y = 3x + 1$ och $y = -\dfrac{1}{3}x + 5$&emsp;&emsp;b)&nbsp;$y = 4x - 2$ och $y = -4x + 1$**
 
 ::: handskrift
@@ -163,7 +163,7 @@ varandra i rät vinkel.
 :::
 :::
 
-::: exempel "Exempel 2 — Vinkelrät linje genom en punkt"
+::: exempel "Exempel 2 — Vinkelrät linje genom en punkt (Mellan)"
 **Bestäm ekvationen för den linje som är vinkelrät mot $y = 2x + 3$ och går
 genom punkten (4, 1).**
 
@@ -228,7 +228,7 @@ $y = -\dfrac{1}{2}x + 3$.
 :::
 :::
 
-::: exempel "Exempel 3 — En rät vinkel i en triangel"
+::: exempel "Exempel 3 — En rät vinkel i en triangel (Avancerad)"
 **En triangel har hörnen A(3, 1), B(7, 3) och C(1, 5). Visa att vinkeln vid
 A är rät.**
 

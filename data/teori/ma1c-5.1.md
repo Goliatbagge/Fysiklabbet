@@ -70,7 +70,7 @@ Om alla som tillfrågas i en undersökning inte svarar får vi ett
 bortfallet kan misstänkas svara annorlunda på undersökningen behöver
 hänsyn till bortfallet tas.
 
-::: exempel "Exempel 1 — Granska en enkätfråga"
+::: exempel "Exempel 1 — Granska en enkätfråga (Grund)"
 **Du vill undersöka uppfattningen om språk och ställer nedanstående fråga
 i en enkät:**
 
@@ -93,7 +93,7 @@ alternativet som ges är *katalanska*.)
 :::
 :::
 
-::: exempel "Exempel 2 — Ta hänsyn till bortfallet"
+::: exempel "Exempel 2 — Ta hänsyn till bortfallet (Mellan)"
 **En enkät skickades ut till 1 000 personer. Frågan var "Är du positiv
 eller negativ till utbyggnad av kärnkraft?". Resultatet blev**
 

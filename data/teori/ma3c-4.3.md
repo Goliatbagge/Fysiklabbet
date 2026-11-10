@@ -43,7 +43,7 @@ extrempunkter och deras karaktär. Därefter skissar vi kurvan utifrån
 extrempunkternas läge och karaktär — utan att räkna ut fler punkter än
 nödvändigt.
 
-::: exempel "Exempel 1 — Största och minsta värde samt kurvkonstruktion"
+::: exempel "Exempel 1 — Största och minsta värde samt kurvkonstruktion (Avancerad)"
 **Funktionen $f(x) = x^3 - 3x$ är given i intervallet $-2 \leq x \leq 3$.
 Bestäm funktionens största och minsta värde i intervallet och skissa sedan
 grafen utan digitala hjälpmedel.**

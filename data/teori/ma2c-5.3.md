@@ -41,7 +41,7 @@ till det som står i högra ledet är lika med det vi har logaritmen
 för."
 :::
 
-::: exempel "Exempel 1 — Lös ekvationerna"
+::: exempel "Exempel 1 — Lös ekvationerna (Mellan)"
 **Lös ekvationerna nedan. Svara exakt och med två decimaler.<br>a)&nbsp;$10^x = 53$&emsp;&emsp;b)&nbsp;$2^x = 37$&emsp;&emsp;c)&nbsp;$5 \cdot 3^{2x} - 4 = 31$**
 
 ::: handskrift
@@ -126,7 +126,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Lös logaritmekvationerna"
+::: exempel "Exempel 2 — Lös logaritmekvationerna (Grund)"
 **Lös<br>a)&nbsp;$\lg x = 3$&emsp;&emsp;b)&nbsp;$\lg 5x = 2{,}7$**
 
 ::: handskrift

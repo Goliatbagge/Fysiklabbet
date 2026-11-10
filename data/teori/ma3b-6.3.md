@@ -77,7 +77,7 @@ kallas ofta **kalkylränta**. Ju högre räntan är, desto mindre är ett
 framtida belopp värt i dag, och desto mindre är det värt ju längre bort
 utbetalningen ligger.
 
-::: exempel "Exempel 1 — Arvet"
+::: exempel "Exempel 1 — Arvet (Grund)"
 **Max ska få ett arv på 200 000 kr om 6 år. Vad är arvet värt i dag om vi räknar med räntan 3 %?**
 
 ::: handskrift
@@ -109,7 +109,7 @@ Belopp som betalas ut vid olika tidpunkter går inte att jämföra direkt.
 Räknar vi om dem till nuvärden står de på samma tidpunkt, i dag, och då kan
 vi se vilket som är värt mest.
 
-::: exempel "Exempel 2 — Nu eller senare?"
+::: exempel "Exempel 2 — Nu eller senare? (Grund)"
 **Du har vunnit en tävling och får välja mellan 100 000 kr nu och 120 000 kr om 4 år. Vilket alternativ är mest värt om räntan är<br>a)&nbsp;4 %&emsp;&emsp;b)&nbsp;6 %**
 
 ::: handskrift
@@ -151,7 +151,7 @@ Betalas ett belopp ut vid flera tillfällen räknar vi ut nuvärdet av varje
 utbetalning för sig och adderar nuvärdena. Varje utbetalning divideras med
 förändringsfaktorn upphöjd till antalet år tills just den betalas ut.
 
-::: exempel "Exempel 3 — Vinsten som betalas ut i delar"
+::: exempel "Exempel 3 — Vinsten som betalas ut i delar (Mellan)"
 **En vinst betalas ut som 50 000 kr om 1 år, 50 000 kr om 2 år och 50 000 kr om 3 år. Vad är vinsten värd i dag om vi räknar med räntan 5 %?**
 
 ::: handskrift

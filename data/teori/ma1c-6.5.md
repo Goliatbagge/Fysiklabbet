@@ -34,7 +34,7 @@ Längden av en vektor $\vec{u}$ skrivs $|\vec{u}|$ och utläses
 "absolutbeloppet av $u$". Längden av en vektor beräknas med Pythagoras
 sats, på samma sätt som sträckor i koordinatsystem.
 
-::: exempel "Exempel 1 — Samma, motsatta och parallella"
+::: exempel "Exempel 1 — Samma, motsatta och parallella (Grund)"
 **Studera nedanstående vektorer.**
 
 ::: figur
@@ -65,7 +65,7 @@ har samma lutning är de parallella vektorer.
 :::
 :::
 
-::: exempel "Exempel 2 — Vektorns längd"
+::: exempel "Exempel 2 — Vektorns längd (Grund)"
 **Beräkna längden av vektorn $\overrightarrow{AB}$. En ruta motsvarar
 1 l.e.**
 

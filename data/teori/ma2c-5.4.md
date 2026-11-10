@@ -131,7 +131,7 @@ Logaritmfunktionen kan därefter strykas och vi löser ekvationen som
 vanligt.
 :::
 
-::: exempel "Exempel 1 — Beräkna utan räknare"
+::: exempel "Exempel 1 — Beräkna utan räknare (Grund)"
 **Beräkna utan räknare<br>a)&nbsp;$\lg 25 + \lg 4$&emsp;&emsp;b)&nbsp;$\lg 3\,000 - \lg 3$**
 
 ::: handskrift
@@ -157,7 +157,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Lös med tredje logaritmlagen"
+::: exempel "Exempel 2 — Lös med tredje logaritmlagen (Avancerad)"
 **Lös ekvationerna med tredje logaritmlagen.<br>a)&nbsp;$5^x = 136$&emsp;&emsp;b)&nbsp;$4 \cdot 5^x = 3 \cdot 2^x$**
 
 ::: handskrift
@@ -213,7 +213,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 3 — Flera logaritmtermer"
+::: exempel "Exempel 3 — Flera logaritmtermer (Mellan)"
 **Lös ekvationen $2 \lg 5 + \lg 4 = \lg 2x$.**
 
 ::: handskrift

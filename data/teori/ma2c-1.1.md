@@ -49,7 +49,7 @@ $$
    lösningen till $y$.
 :::
 
-::: exempel "Exempel 1 — Lös ett ekvationssystem grafiskt"
+::: exempel "Exempel 1 — Lös ett ekvationssystem grafiskt (Grund)"
 **Lös nedanstående ekvationssystem grafiskt.**
 
 ::: handskrift
@@ -105,7 +105,7 @@ som ger det.
 | Samma $k$-värde, olika $m$-värden | Saknar lösningar |
 | Samma $k$-värde, samma $m$-värde | Oändligt många lösningar |
 
-::: exempel "Exempel 2 — Bestäm k och m"
+::: exempel "Exempel 2 — Bestäm k och m (Mellan)"
 **Bestäm $k$ och $m$ så att ekvationssystemet**
 
 ::: handskrift

@@ -39,6 +39,7 @@ const UNDANTAG = new Set([
     'maspec-4.1:Exempel 4 — Multiplar av vektorer',
     'maspec-4.1:Exempel 5 — Subtrahera grafiskt',
 ]);
+const UNDANTAG_UTAN_NIVA = new Set([...UNDANTAG].map(k => k.replace(/\s*\((Grund|Mellan|Avancerad|E|C|A)\)\s*$/, '')));
 
 const INGET_SVAR = /\b(visa att|bevisa|härled|rita|konstruera)\b/i;
 const SVAR = /Svar[^:\n]{0,12}:/g;
@@ -63,7 +64,10 @@ for (const f of filer) {
         if (!blk.includes('::: textlosning')) continue;
         antal++;
         const titel = (L[i].match(/"([^"]*)"/) || [, ''])[1];
-        if (UNDANTAG.has(id + ':' + titel)) continue;
+        // Nivån sist i rubriken ("(Mellan)", äldre "(C)") ingår inte i nyckeln,
+        // så att ett undantag håller när exemplet nivåmärks eller byter nivå.
+        const utanNiva = s => s.replace(/\s*\((Grund|Mellan|Avancerad|E|C|A)\)\s*$/, '');
+        if (UNDANTAG_UTAN_NIVA.has(id + ':' + utanNiva(titel))) continue;
         const [stam, los] = blk.split('::: textlosning');
 
         // deluppgifterna i frågestammen, med texten fram till nästa bokstav

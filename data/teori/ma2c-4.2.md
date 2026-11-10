@@ -36,7 +36,7 @@ Vinkelsumman i en
 - fyrhörning är 360°
 :::
 
-::: exempel "Exempel 1 — Vinkelsumman i en femhörning"
+::: exempel "Exempel 1 — Vinkelsumman i en femhörning (Grund)"
 **Vad är vinkelsumman i en femhörning?**
 
 ::: handskrift

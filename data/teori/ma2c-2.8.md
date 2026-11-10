@@ -27,7 +27,7 @@ En ekvation där variabeln, till exempel $x$, är under ett rottecken kallas
 4. Kontrollera din lösning! Falska rötter kan uppstå.
 :::
 
-::: exempel "Exempel 1 — Lös rotekvationerna"
+::: exempel "Exempel 1 — Lös rotekvationerna (Mellan)"
 **Lös<br>a)&nbsp;$\sqrt{x} = 8$&emsp;&emsp;b)&nbsp;$\sqrt{x + 2} = 17$&emsp;&emsp;c)&nbsp;$x + 3\sqrt{x} - 4 = 0$**
 
 ::: handskrift
@@ -128,7 +128,7 @@ Stämmer inte! **Falsk rot!**
 :::
 :::
 
-::: exempel "Exempel 2 — Alternativ lösning med variabelsubstitution"
+::: exempel "Exempel 2 — Alternativ lösning med variabelsubstitution (Avancerad)"
 **Lös $x + 3\sqrt{x} - 4 = 0$ med variabelsubstitution.**
 
 ::: handskrift

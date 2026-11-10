@@ -62,7 +62,7 @@ till att döttrarna blir långa att mammorna är långa? Svaret är *ja*,
 eftersom generna från mamman (delvis) avgör hur lång dottern blir. Alltså
 råder kausalitet.
 
-::: exempel "Exempel 1 — Livslängd och internet"
+::: exempel "Exempel 1 — Livslängd och internet (Grund)"
 **Ett spridningsdiagram över medellivslängd (år, *y*-axeln) och tillgång
 till internet (%, *x*-axeln) för några olika länder visar punkter spridda
 kring en stigande linje. Avgör om det råder<br>a) korrelation, och i så

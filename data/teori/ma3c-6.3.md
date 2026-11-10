@@ -72,7 +72,7 @@ Kontrollera gärna mot exemplen ovan.
    - cosinus gäller $v_2 = 360^\circ - v_1$
 :::
 
-::: exempel "Exempel 1 — Sinus och cosinus för vinklar på enhetscirkeln"
+::: exempel "Exempel 1 — Sinus och cosinus för vinklar på enhetscirkeln (Grund)"
 **Använd enhetscirkeln för att bestämma<br>a)&nbsp;$\sin 90^\circ$&emsp;&emsp;b)&nbsp;$\cos 180^\circ$.**
 
 ::: handskrift
@@ -102,7 +102,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Närmevärden med enhetscirkeln"
+::: exempel "Exempel 2 — Närmevärden med enhetscirkeln (Grund)"
 **Använd enhetscirkeln för att bestämma ett närmevärde till<br>a)&nbsp;$\sin 45^\circ$&emsp;&emsp;b)&nbsp;$\cos 220^\circ$.**
 
 ::: handskrift
@@ -124,7 +124,7 @@ ungefär $-0,8$.
 :::
 :::
 
-::: exempel "Exempel 3 — Lös trigonometriska ekvationer med enhetscirkeln"
+::: exempel "Exempel 3 — Lös trigonometriska ekvationer med enhetscirkeln (Mellan)"
 **Använd enhetscirkeln för att lösa ekvationerna nedan i intervallet
 $0^\circ \leq v \leq 360^\circ$.<br>a)&nbsp;$\sin v = 0{,}4$&emsp;&emsp;b)&nbsp;$\cos v = 1{,}5$**
 
@@ -147,7 +147,7 @@ vid $x = 1{,}5$. Linjen hamnar helt utanför enhetscirkeln (radien är ju bara
 :::
 :::
 
-::: exempel "Exempel 4 — Lös en trigonometrisk ekvation med räknare"
+::: exempel "Exempel 4 — Lös en trigonometrisk ekvation med räknare (Mellan)"
 **Lös ekvationen $4\cos v + 3{,}28 = 6{,}58$ med räknare. Ange lösningarna i
 intervallet $0^\circ \leq v \leq 360^\circ$.**
 

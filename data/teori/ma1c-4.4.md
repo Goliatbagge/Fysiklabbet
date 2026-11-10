@@ -109,7 +109,7 @@ x: -6, 6
 y: -6, 6
 :::
 
-::: exempel "Exempel 1: Bestäm linjens ekvation"
+::: exempel "Exempel 1: Bestäm linjens ekvation (Grund)"
 **Bestäm ekvationen för linjen nedan.**
 
 ::: figur
@@ -135,7 +135,7 @@ $y = 2x + 3$.
 :::
 :::
 
-::: exempel "Exempel 2: Bestäm riktningskoefficienten"
+::: exempel "Exempel 2: Bestäm riktningskoefficienten (Grund)"
 **Bestäm linjens riktningskoefficient.**
 
 ::: figur

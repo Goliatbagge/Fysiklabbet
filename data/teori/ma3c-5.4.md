@@ -50,7 +50,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 1 — Beräkna integraler med primitiva funktioner"
+::: exempel "Exempel 1 — Beräkna integraler med primitiva funktioner (Grund)"
 **Beräkna integralerna med primitiva funktioner.**
 
 ::: handskrift

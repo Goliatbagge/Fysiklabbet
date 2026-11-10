@@ -46,7 +46,7 @@ $$
    under kvadratroten negativt saknas reella lösningar.
 :::
 
-::: exempel "Exempel 1 — Enkla andra- och tredjegradsekvationer"
+::: exempel "Exempel 1 — Enkla andra- och tredjegradsekvationer (Grund)"
 **Lös<br>a)&nbsp;$x^2 = 64$&emsp;&emsp;b)&nbsp;$x^2 = 10$&emsp;&emsp;c)&nbsp;$x^2 = -9$&emsp;&emsp;d)&nbsp;$x^3 = 343$&emsp;&emsp;e)&nbsp;$x^3 = -27$&emsp;&emsp;f)&nbsp;$3x^2 - 2{,}31 = 17{,}97$**
 
 ::: handskrift
@@ -109,7 +109,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Kvadraten och kuben"
+::: exempel "Exempel 2 — Kvadraten och kuben (Grund)"
 **Bestäm sidan hos en<br>a) kvadrat med arean $4\,096\ \mathrm{cm^2}$&emsp;&emsp;b) kub med volymen $4\,096\ \mathrm{cm^3}$**
 
 ::: handskrift
@@ -160,7 +160,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 3 — En parentes i kvadrat"
+::: exempel "Exempel 3 — En parentes i kvadrat (Mellan)"
 **Lös ekvationen $(x-5)^2 = 36$**
 
 ::: handskrift

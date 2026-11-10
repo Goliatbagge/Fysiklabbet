@@ -39,7 +39,7 @@ Exempel på samband: fotlängd/skostorlek har stark positiv korrelation,
 vägbredd/antal olyckor kan ha svag negativ korrelation och
 äggkonsumtion/kriminalitet har ingen korrelation.
 
-::: exempel "Exempel 1 — Glassförsäljningen"
+::: exempel "Exempel 1 — Glassförsäljningen (Mellan)"
 **Medeltemperaturen och ett företags försäljning av glass under en
 vecka visas nedan.**
 

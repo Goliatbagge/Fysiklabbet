@@ -45,7 +45,7 @@ n, \quad n + 1, \quad n + 2, \quad \ldots
 $$
 :::
 
-::: exempel "Exempel 1 — Yttervinkelsatsen"
+::: exempel "Exempel 1 — Yttervinkelsatsen (Mellan)"
 **Betrakta nedanstående figur. Yttervinkelsatsen lyder: "Yttervinkeln
 $x$ är lika med summan av de två motstående vinklarna $a$ och $c$, det vill säga
 $x = a + c$." Bevisa att yttervinkelsatsen gäller.**
@@ -91,7 +91,7 @@ v.s.b.
 :::
 :::
 
-::: exempel "Exempel 2 — Kvadraten av ett jämnt tal"
+::: exempel "Exempel 2 — Kvadraten av ett jämnt tal (Avancerad)"
 **Visa att kvadraten av ett jämnt tal alltid är delbar med 4.**
 
 ::: handskrift
@@ -119,7 +119,7 @@ v.s.v.
 :::
 :::
 
-::: exempel "Exempel 3 — Tre på varandra följande heltal"
+::: exempel "Exempel 3 — Tre på varandra följande heltal (Mellan)"
 **Visa att om $a$, $b$ och $c$ är tre på varandra följande heltal så
 gäller att deras summa är delbar med 3.**
 

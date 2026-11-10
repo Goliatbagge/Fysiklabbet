@@ -35,7 +35,7 @@ Kom ihåg 2:
    sedan som vanligt.
 :::
 
-::: exempel "Exempel 1 — Sparkontot"
+::: exempel "Exempel 1 — Sparkontot (Mellan)"
 **Du sätter in 10 000 kr på ett konto med årsräntan 2,3 %. Hur lång tid
 tar det tills du har över 12 000 kr på kontot?**
 

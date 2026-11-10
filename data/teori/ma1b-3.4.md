@@ -31,7 +31,7 @@ Sambandet mellan indextal och förändringsfaktor är nära: divideras
 indextalet med 100 fås förändringsfaktorn från basåret. Index 175
 motsvarar förändringsfaktorn 1,75.
 
-::: exempel "Exempel 1 — Bestäm indextal"
+::: exempel "Exempel 1 — Bestäm indextal (Grund)"
 **Priset på en biobiljett var 80 kr år 2010 och 140 kr år 2023.<br>a) Bestäm biljettprisets indextal år 2023, med 2010 som basår.<br>b) Med hur många procent har priset ökat sedan basåret?**
 
 ::: handskrift
@@ -91,7 +91,7 @@ $$
 $$
 :::
 
-::: exempel "Exempel 2 — Räkna om med KPI"
+::: exempel "Exempel 2 — Räkna om med KPI (Mellan)"
 **En anställd hade månadslönen 21 500 kr år 2010. Vad motsvarar den
 lönen i 2023 års penningvärde? KPI var 303,5 år 2010 och 403,7 år
 2023.**

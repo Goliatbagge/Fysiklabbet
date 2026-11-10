@@ -36,7 +36,7 @@ där $e^k = a$ (förändringsfaktorn).
 
 ## Lösa tillämpningsuppgifter med Geogebra
 
-::: exempel "Exempel 1 — Tillväxthastighet hos en kaninpopulation"
+::: exempel "Exempel 1 — Tillväxthastighet hos en kaninpopulation (Mellan)"
 **Antalet kaniner $N(t)$ i en population ges av
 $N(t) = 30 \cdot 1{,}84^t$ där $t$ är tiden räknat i veckor.<br>a)
 Beräkna tillväxthastigheten efter 4 veckor.<br>b) Efter hur lång
@@ -74,7 +74,7 @@ vilket avrundas till $t \approx 2{,}8$.
 :::
 :::
 
-::: exempel "Exempel 2 — Minsta lutning hos en funktion"
+::: exempel "Exempel 2 — Minsta lutning hos en funktion (Mellan)"
 **För vilket värde på $x$ har funktionen $f(x) = x^3 - 3x^2 - 4x$ sin
 minsta lutning?**
 
@@ -107,7 +107,7 @@ funktionen $f(x)$ har sin minsta lutning.
 
 ## Ställa upp exponentialmodeller med basen e
 
-::: exempel "Exempel 3 — Kattungens vikt som exponentialmodell"
+::: exempel "Exempel 3 — Kattungens vikt som exponentialmodell (Mellan)"
 **En kattunge väger 100 gram och ökar sin vikt med 5 % per dag under
 den första månaden. Ställ upp en exponentialfunktion med basen $e$ för
 kattungens vikt $V$ i gram som funktion av tiden $t$ dagar.**

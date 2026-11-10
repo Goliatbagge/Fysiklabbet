@@ -70,7 +70,7 @@ $f$, $g$, $h$, …
 
 $f(x) = 2x + 3$ betyder alltså samma sak som $g(x) = 2x + 3$.
 
-::: exempel "Exempel 1 — Beräkna funktionsvärden"
+::: exempel "Exempel 1 — Beräkna funktionsvärden (Mellan)"
 **Låt $f(x) = 5x - 3$. Bestäm<br>a)&nbsp;$f(7)$&emsp;&emsp;b)&nbsp;$f(-2)$&emsp;&emsp;c)&nbsp;$f(3a)$&emsp;&emsp;d)&nbsp;$f(x + 2)$&emsp;&emsp;e)&nbsp;$f(7) - f(6)$<br>f)&nbsp;Lös $f(x) = 7$&emsp;&emsp;g)&nbsp;Lös $3 \cdot f(x) = 36$**
 
 ::: handskrift
@@ -197,7 +197,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Är graferna funktioner?"
+::: exempel "Exempel 2 — Är graferna funktioner? (Grund)"
 **Är $f(x)$ och $g(x)$, som är uppritade nedan, funktioner? Motivera ditt
 svar.**
 
@@ -228,7 +228,7 @@ alltså inte heller en funktion.
 :::
 :::
 
-::: exempel "Exempel 3 — Läs av funktionsvärden ur grafen"
+::: exempel "Exempel 3 — Läs av funktionsvärden ur grafen (Grund)"
 **Grafen till funktionen $f$ är uppritad.**
 
 ::: figur
@@ -327,7 +327,7 @@ Två saker är värda att lägga på minnet:
   båda hållen: $g(x) < f(x)$ betyder samma sak som $f(x) > g(x)$, alltså
   att $f$ ligger ovanför $g$.
 
-::: exempel "Exempel 4 — Lös $f(x) = g(x)$ och $g(x) < f(x)$ grafiskt"
+::: exempel "Exempel 4 — Lös $f(x) = g(x)$ och $g(x) < f(x)$ grafiskt (Mellan)"
 **Graferna till funktionerna $f$ och $g$ är uppritade. Använd graferna
 för att lösa<br>a)&nbsp;ekvationen $f(x) = g(x)$&emsp;&emsp;b)&nbsp;olikheten $g(x) < f(x)$**
 

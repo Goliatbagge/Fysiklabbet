@@ -56,7 +56,7 @@ $$
 3. Sätt nu $h = 0$ och beräkna gränsvärdet.
 :::
 
-::: exempel "Exempel 1 — Derivatans definition"
+::: exempel "Exempel 1 — Derivatans definition (Mellan)"
 **Funktionen $f(x) = x^2$ är given. Bestäm<br>
 a)&nbsp;$f'(5)$&emsp;&emsp;b) tangentens lutning då $x = 5$.**
 

@@ -71,7 +71,7 @@ för att beräkna arean mellan två kurvor, både exakt och som närmevärde.
 6. **Enter** ger ett närmevärde (ungefärligt värde) på arean.
 :::
 
-::: exempel "Exempel 1 — Area mellan kurvor med integraler och Geogebra"
+::: exempel "Exempel 1 — Area mellan kurvor med integraler och Geogebra (Mellan)"
 **Bestäm arean av det skuggade området mellan kurvorna $y = x^2$ och
 $y = x - 2$ då $0 \leq x \leq 2$, dels<br>
 a) med integraler&emsp;&emsp;b) med digitalt hjälpmedel.**
@@ -107,7 +107,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Skärningspunkter och sammansatt area"
+::: exempel "Exempel 2 — Skärningspunkter och sammansatt area (Avancerad)"
 **Ett område är markerat mellan kurvorna $y = x$, $y = 6 - x^2$ och
 $y = -3$. Punkt A är skärningen mellan $y = x$ och $y = 6 - x^2$, och punkt B
 är skärningen mellan $y = 6 - x^2$ och $y = -3$ (båda med positiv

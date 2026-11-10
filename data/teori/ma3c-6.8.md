@@ -56,7 +56,7 @@ I många tillämpningsproblem behöver vi dessutom använda satserna i **flera
 trianglar efter varandra** — en storhet som beräknas i den ena triangeln
 används sedan som känd information i nästa. Nästa exempel visar hur.
 
-::: exempel "Exempel 1 — Bestäm en kulles höjd"
+::: exempel "Exempel 1 — Bestäm en kulles höjd (Avancerad)"
 **En 11 meter hög flaggstång står på toppen av en kulle. Från en punkt $B$
 på marken är höjdvinkeln till flaggstångens topp $32^\circ$, samtidigt som
 höjdvinkeln till kullens topp är $25^\circ$. Hur hög är kullen?**

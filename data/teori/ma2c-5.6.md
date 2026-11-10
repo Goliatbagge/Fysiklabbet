@@ -30,7 +30,7 @@ $7^{\log_7 3} = 3$ och $5^{\log_5 12} = 12$ och så vidare.
 ("10-logaritmen" kan även skrivas $\log_{10}$, men eftersom den är så
 vanlig används det förkortade skrivsättet "lg".)
 
-::: exempel "Exempel 1 — Lös med generell logaritm"
+::: exempel "Exempel 1 — Lös med generell logaritm (Grund)"
 **Lös $3^x = 25$.**
 
 ::: handskrift
@@ -49,7 +49,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Bestäm utan räknare"
+::: exempel "Exempel 2 — Bestäm utan räknare (Grund)"
 **Bestäm utan räknare<br>a)&nbsp;$\log_2 16$&emsp;&emsp;b)&nbsp;$\log_3 9$**
 
 ::: handskrift
@@ -69,7 +69,7 @@ Då $3^2 = 9$ gäller $\log_3 9 = 2$.
 :::
 :::
 
-::: exempel "Exempel 3 — Skriv som en potens"
+::: exempel "Exempel 3 — Skriv som en potens (Grund)"
 **Skriv 24 som en potens med basen 3.**
 
 ::: handskrift

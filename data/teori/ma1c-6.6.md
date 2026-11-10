@@ -33,7 +33,7 @@ vektorn fås som vektorn från startpunkten till slutpunkten
 (polygonmetoden) och kallas **resultant**.
 :::
 
-::: exempel "Exempel 1 — Addera vektorer"
+::: exempel "Exempel 1 — Addera vektorer (Grund)"
 **Figurerna visar vektorerna $\vec{u}$ och $\vec{v}$. Rita vektorn
 $\vec{w} = \vec{u} + \vec{v}$.**
 

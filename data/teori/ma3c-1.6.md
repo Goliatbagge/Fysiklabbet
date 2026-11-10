@@ -54,7 +54,7 @@ Metoderna är sorterade efter hur effektiva de är. Fungerar inte metod 1, gå
 vidare till metod 2. Fungerar inte metod 2, gå vidare till metod 3.
 :::
 
-::: exempel "Exempel 1 — Sätta in värdet direkt"
+::: exempel "Exempel 1 — Sätta in värdet direkt (Grund)"
 **Bestäm $\displaystyle\lim_{x \to 2} (x + 5)$.**
 
 ::: handskrift
@@ -73,7 +73,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Förkorta uttrycket"
+::: exempel "Exempel 2 — Förkorta uttrycket (Mellan)"
 **Bestäm $\displaystyle\lim_{x \to 1} \frac{x^2 - 1}{x - 1}$ a) med tabeller
 b) genom att förkorta uttrycket.**
 
@@ -119,7 +119,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 3 — Gränsvärde saknas"
+::: exempel "Exempel 3 — Gränsvärde saknas (Mellan)"
 **Bestäm $\displaystyle\lim_{x \to 3} \frac{x + 1}{x - 3}$.**
 
 ::: handskrift
@@ -172,7 +172,7 @@ Ett uttryck med en oändlighet
   Därefter görs en förkortning och gränsvärdet kan bestämmas.
 :::
 
-::: exempel "Exempel 4 — Oändlighet i nämnaren"
+::: exempel "Exempel 4 — Oändlighet i nämnaren (Grund)"
 **Bestäm $\displaystyle\lim_{x \to \infty} \frac{5}{x}$.**
 
 ::: handskrift
@@ -187,7 +187,7 @@ då 0.
 :::
 :::
 
-::: exempel "Exempel 5 — Oändlighet i både täljare och nämnare"
+::: exempel "Exempel 5 — Oändlighet i både täljare och nämnare (Mellan)"
 **Bestäm $\displaystyle\lim_{x \to \infty} \frac{3x + 2}{x - 1}$.**
 
 ::: handskrift

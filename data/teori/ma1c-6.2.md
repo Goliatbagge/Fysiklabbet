@@ -30,7 +30,7 @@ kommer sin $v$ och cos $v$ alltid bli tal som är mindre än 1. Detta
 eftersom vi dividerar sträckan hos en katet (ett mindre tal) med sträckan
 hos hypotenusan (ett större tal).
 
-::: exempel "Exempel 1 — Sinus och cosinus ur sidorna"
+::: exempel "Exempel 1 — Sinus och cosinus ur sidorna (Grund)"
 **Beräkna för triangeln nedan<br>a) sin $u$&emsp;&emsp;b) cos $u$&emsp;&emsp;c) sin $v$&emsp;&emsp;d) cos $v$**
 
 ::: figur
@@ -77,7 +77,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 2 — Bestäm hypotenusan"
+::: exempel "Exempel 2 — Bestäm hypotenusan (Mellan)"
 **Bestäm längden hos sidan $a$. Figuren är inte skalenlig.**
 
 ::: figur
@@ -106,7 +106,7 @@ $$
 :::
 :::
 
-::: exempel "Exempel 3 — Triangelns area"
+::: exempel "Exempel 3 — Triangelns area (Mellan)"
 **Beräkna arean av triangeln nedan.**
 
 ::: figur

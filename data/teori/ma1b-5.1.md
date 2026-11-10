@@ -68,7 +68,7 @@ klassens färdsätt ur frekvenstabellen ovan.
 Peka eller tryck på en sektor så framhävs den och dess andel.
 :::
 
-::: exempel "Exempel 1 — Från andel till antal"
+::: exempel "Exempel 1 — Från andel till antal (Grund)"
 **Cirkeldiagrammet visar vad 240 biobesökare köpte med sig in i salongen.<br>a) Hur många valde popcorn?<br>b) Hur många fler valde godis än inget alls?**
 
 ::: figur
@@ -117,7 +117,7 @@ vanligaste knepen att känna igen:
 Fråga alltid: *var börjar axlarna, vad visar skalorna och vilken period
 är vald?*
 
-::: exempel "Exempel 2 — Avhuggen axel"
+::: exempel "Exempel 2 — Avhuggen axel (Mellan)"
 **Diagrammen visar månadshyran för en lägenhet: 9 600 kr år 2020 och
 10 400 kr år 2023. I det vänstra diagrammet är *y*-axeln avhuggen vid
 9 400 kr, så 2020 års stapel blir 200 kr hög och 2023 års stapel

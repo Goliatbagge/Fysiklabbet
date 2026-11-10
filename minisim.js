@@ -16887,7 +16887,8 @@
         var W = 640, H = 300, YB = 150, PX = 250;
         var G = 9.82, H1 = 4.0, TP = 10;                // tyngdfaktor, djup 1, period (s)
         var LAM1 = 56, TANIM = 2.2;                       // λ₁ på skärmen (px), period i animationen (s)
-        var iDeg = 40, h2 = 2.0, tid = 0, visaStrale = true;
+        var iDeg = 40, h2 = 2.0, tid = 0, visaStrale = true, visaFart = true, visaLambda = true;
+        var GRN = '#1d7a46', LV = 60;                    // hastighetspilarnas färg, längd för v₁ (px)
         var id = 'ms-vt-rutnat-' + (++vtRaknare);
 
         function fmt(v, d) {
@@ -16932,7 +16933,7 @@
         }
         function pil(x1, y1, x2, y2, color, w) {
             var L = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)), ux = (x2 - x1) / L, uy = (y2 - y1) / L;
-            var hd = 11, bx = x2 - ux * hd, by = y2 - uy * hd, b = 5;
+            var hd = arguments[6] || 11, bx = x2 - ux * hd, by = y2 - uy * hd, b = hd * 5 / 11;
             return '<line x1="' + vgR1(x1) + '" y1="' + vgR1(y1) + '" x2="' + vgR1(bx) + '" y2="' + vgR1(by) + '" stroke="' + color +
                 '" stroke-width="' + w + '" stroke-linecap="butt"/>' +
                 '<polygon points="' + vgR1(bx - uy * b) + ',' + vgR1(by + ux * b) + ' ' + vgR1(x2) + ',' + vgR1(y2) + ' ' +
@@ -16942,6 +16943,33 @@
             var pts = [];
             for (var k = 0; k <= 20; k++) { var a = a0 + (a1 - a0) * k / 20; pts.push(vgR1(PX + r * Math.cos(a)) + ',' + vgR1(YB + r * Math.sin(a))); }
             return '<polyline points="' + pts.join(' ') + '" fill="none" stroke="' + INK + '" stroke-width="1.6"/>';
+        }
+
+        // En punkt som åker med vågfronterna längs spåret A + s·a, s i [0, λ).
+        // Fronterna ligger där x·ax + (y − YB)·ay = λ · (n + t/T). Vid
+        // varvet hoppar punkten tillbaka en våglängd, så den tonas ut och in.
+        function spar(A, a, lam) {
+            var cA = A[0] * a[0] + (A[1] - YB) * a[1];
+            var s = lam * tid / TANIM - cA;
+            s -= lam * Math.floor(s / lam);
+            var u = s / lam;
+            return { p: [A[0] + s * a[0], A[1] + s * a[1]], op: Math.max(0, Math.min(1, u / 0.15, (1 - u) / 0.15)) };
+        }
+        function fartpil(A, a, lam, L, namn) {
+            var q = spar(A, a, lam), p = q.p, n = [a[1], -a[0]];
+            var m = [p[0] + a[0] * L / 2 - n[0] * 16, p[1] + a[1] * L / 2 - n[1] * 16 + 5];
+            return '<g opacity="' + q.op.toFixed(2) + '">' + pil(p[0], p[1], p[0] + a[0] * L, p[1] + a[1] * L, GRN, 3) +
+                '<text x="' + vgR1(m[0]) + '" y="' + vgR1(m[1]) + '" text-anchor="middle" font-size="17" fill="' + GRN + '">' +
+                it('v') + sb(namn) + '</text></g>';
+        }
+        function lambdamatt(A, a, lam, namn, farg) {
+            var q = spar(A, a, lam), p = q.p, n = [a[1], -a[0]];
+            var mid = [p[0] + a[0] * lam / 2, p[1] + a[1] * lam / 2], hs = Math.min(10, lam * 0.3);
+            var lx = mid[0] + n[0] * 16, ly = mid[1] + n[1] * 16 + 5;
+            return '<g opacity="' + q.op.toFixed(2) + '">' + pil(mid[0], mid[1], p[0], p[1], INK, 1.6, hs) +
+                pil(mid[0], mid[1], p[0] + a[0] * lam, p[1] + a[1] * lam, INK, 1.6, hs) +
+                '<text x="' + vgR1(lx) + '" y="' + vgR1(ly) + '" text-anchor="' + (n[0] > 0.3 ? 'start' : 'middle') +
+                '" font-size="17" fill="' + farg + '">' + it('λ') + sb(namn) + '</text></g>';
         }
 
         var bas = '<rect x="0" y="0" width="' + W + '" height="' + YB + '" fill="#cfe3f3"/>' +
@@ -16977,6 +17005,16 @@
                         '" text-anchor="middle" font-size="18" fill="' + INK + '">' + it('b') + '</text>';
                 }
             }
+            var a1 = [Math.sin(i), Math.cos(i)], a2 = [Math.sin(b), Math.cos(b)];
+            if (visaLambda) {
+                s += lambdamatt([560 - LAM1 * a1[0], YB - 4 - 2 * LAM1 * a1[1]], a1, LAM1, '1', BLA);
+                s += lambdamatt([560 - lam2 * a2[0], YB + 4], a2, lam2, '2', ROD);
+            }
+            if (visaFart) {
+                var L2 = LV * kv, t1 = LAM1 + LV, t2 = lam2 + L2;
+                s += fartpil([400 - t1 * a1[0] / 2, 8 + (YB - 14 - t1 * a1[1]) / 2], a1, LAM1, LV, '1');
+                s += fartpil([330 - t2 * a2[0] / 2, YB + 6 + (H - YB - 12 - t2 * a2[1]) / 2], a2, lam2, L2, '2');
+            }
             s += ruta(W - 12, 26, 'end', 'djupt vatten, ' + it('h') + ' = ' + fmt(H1, 1) + ' m', 23, BLA);
             s += ruta(W - 12, H - 12, 'end', 'grunt vatten, ' + it('h') + ' = ' + fmt(h2, 1) + ' m', 23, '#7a5a1a');
             dyn.innerHTML = s;
@@ -17009,7 +17047,7 @@
         scene.innerHTML = '<svg class="ms-kv-svg" viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H + '" ' +
             'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Vågtank sedd ' +
             'uppifrån. Raka vågfronter går från djupt vatten in över grunt vatten och knycker vid gränsen. En stråle visar ' +
-            'infallsvinkeln och brytningsvinkeln mot normalen.">' + bas + '<g class="' + dynKl + '"></g></svg>';
+            'infallsvinkeln och brytningsvinkeln mot normalen. Gröna pilar visar hastigheterna och dubbelpilar våglängderna.">' + bas + '<g class="' + dynKl + '"></g></svg>';
         var dyn = scene.querySelector('.' + dynKl);
         card.appendChild(scene);
         msFullskarm(card, scene, W / H, 190);
@@ -17018,8 +17056,12 @@
         controls.className = 'minisim-controls';
         var tk = vgTid(TANIM, function () { return tid; }, function (t) { tid = t; rita(); });
         var straleCk = vgCheck('Visa strålen och vinklarna', true);
+        var fartCk = vgCheck('Visa hastigheterna', true);
+        var lambdaCk = vgCheck('Visa våglängderna', true);
         controls.appendChild(tk.btn);
         controls.appendChild(straleCk.label);
+        controls.appendChild(fartCk.label);
+        controls.appendChild(lambdaCk.label);
         card.appendChild(controls);
 
         function reglage(etikett, min, max, steg, varde, aria, visa, satt) {
@@ -17060,6 +17102,8 @@
         var loop = vgLoop(card, function (dt) { tid += dt; rita(); tk.visa(); });
         tk.koppla(loop);
         straleCk.cb.addEventListener('change', function () { visaStrale = straleCk.cb.checked; rita(); });
+        fartCk.cb.addEventListener('change', function () { visaFart = fartCk.cb.checked; rita(); });
+        lambdaCk.cb.addEventListener('change', function () { visaLambda = lambdaCk.cb.checked; rita(); });
         card._set = function (vinkel, djup, t) { iDeg = vinkel; h2 = djup; tid = t || 0; rita(); tk.visa(); };
         rita();
         tk.spela(true);

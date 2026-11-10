@@ -1667,7 +1667,7 @@
                                         const provNamn = p => k.kursprov ? 'Kursprov, ' + terminNamn(p.t).toLowerCase() : terminNamn(p.t);
                                         const delKnappar = p => Object.keys(p.delar).map(d => (
                                             <a key={d} className="np-delknapp" href={p.delar[d]} target="_blank" rel="noopener"
-                                               title={'Öppna delprov ' + d + ' (pdf) hos ' + k.kalla.namn}>{d}</a>
+                                               title={'Öppna delprov ' + d + ' (pdf)'}>{d}</a>
                                         ));
                                         return (
                                             <React.Fragment>
@@ -1697,7 +1697,7 @@
                                                             <li key={p.t} className={'np-provcell' + (los ? ' har-losning' : '')}>
                                                                 {fil ? (
                                                                     <a className="np-provknapp" href={fil} target="_blank" rel="noopener"
-                                                                       title={'Öppna provet (pdf) hos ' + k.kalla.namn}>
+                                                                       title={'Öppna provet (pdf)'}>
                                                                         {innehall}
                                                                     </a>
                                                                 ) : (
@@ -1732,16 +1732,13 @@
                                                                         <span className="np-aldre-lankar">
                                                                             {p.delar ? delKnappar(p) : fil && (
                                                                                 <a className="np-delknapp np-delknapp-bred" href={fil} target="_blank" rel="noopener"
-                                                                                   title={'Öppna provet (pdf) hos ' + k.kalla.namn}>Provet {IKON_UT}</a>
+                                                                                   title={'Öppna provet (pdf)'}>Provet {IKON_UT}</a>
                                                                             )}
                                                                         </span>
                                                                     </li>
                                                                 );
                                                             })}
                                                         </ul>
-                                                        {k.kalla === window.NP_FRISLAPPTA[0].kalla && (
-                                                            <p className="np-aldre-not">Proven från 2011 och 2012 finns bara som zip-filer hos PRIM-gruppen och är därför inte med här.</p>
-                                                        )}
                                                     </details>
                                                 )}
                                             </React.Fragment>
@@ -1756,10 +1753,10 @@
                                             </React.Fragment>
                                         ) : (
                                             <React.Fragment>
-                                                Proven publiceras av <a href={k.kalla.url} target="_blank" rel="noopener">{k.kalla.namn}</a>.
+                                                Proven ges ut av <a href={k.kalla.url} target="_blank" rel="noopener">{k.kalla.namn}</a>.
                                                 {k.prov.some(p => p.delar)
                                                     ? ' Varje delprov öppnas som en egen pdf.'
-                                                    : ' Varje prov öppnas som en pdf med delprov B, C och D. Bedömningsanvisningarna står sist i samma fil.'}
+                                                    : ' Varje prov öppnas som en pdf med delprov B, C och D.'}
                                             </React.Fragment>
                                         )}
                                     </p>
@@ -1787,18 +1784,18 @@
                             <span className="np-delar-etikett">Provet i original, delprov</span>
                             {Object.keys(original.prov.delar).map(d => (
                                 <a key={d} className="np-delknapp" href={original.prov.delar[d]} target="_blank" rel="noopener"
-                                   title={'Öppna delprov ' + d + ' (pdf) hos ' + original.kurs.kalla.namn}>{d}</a>
+                                   title={'Öppna delprov ' + d + ' (pdf)'}>{d}</a>
                             ))}
-                            <span className="np-hint">hos {original.kurs.kalla.namn}</span>
+                            <span className="np-hint">utgivet av {original.kurs.kalla.namn}</span>
                         </div>
                     )}
                     {originalFil && (
                         <div className="np-original">
                             <a className="np-lank" href={originalFil} target="_blank" rel="noopener"
-                               title={'Provet hos ' + original.kurs.kalla.namn}>
+                               title={'Öppna provet (pdf)'}>
                                 Provet i original <small>pdf</small> {IKON_UT}
                             </a>
-                            <span className="np-hint">hos {original.kurs.kalla.namn}</span>
+                            <span className="np-hint">utgivet av {original.kurs.kalla.namn}</span>
                         </div>
                     )}
                     {video && (

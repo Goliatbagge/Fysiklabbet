@@ -120,7 +120,7 @@
             amne: 'matematik', kurs: 'Matematik nivå 1b', kort: 'Matematik 1b', kod: 'ma1b',
             kalla: PRIM, format: 'pdf',
             prov: [
-                { t: 'vt22', delar: {
+                { t: 'vt22', losning: 'ma1b-vt2022', delar: {
                     B: EGEN + 'ma1b-vt22-delprov-b.pdf',
                     C: EGEN + 'ma1b-vt22-delprov-c.pdf',
                     D: EGEN + 'ma1b-vt22-delprov-d.pdf',
@@ -261,7 +261,7 @@
         {
             amne: 'matematik', kurs: 'Matematik nivå 2b', kort: 'Matematik 2b', kod: 'ma2b',
             kalla: UMU, format: 'pdf', filmall: EGEN + 'ma2b-{t}.pdf',
-            prov: umuTerminer('vt12'),
+            prov: losning(umuTerminer('vt12'), { vt22: 'ma2b-vt2022' }),
         },
         {
             amne: 'matematik', kurs: 'Matematik nivå 2c', kort: 'Matematik 2c', kod: 'ma2c',
@@ -271,7 +271,7 @@
         {
             amne: 'matematik', kurs: 'Matematik fortsättning nivå 1b', kort: 'Matematik 3b', kod: 'ma3b',
             kalla: UMU, format: 'pdf', filmall: EGEN + 'ma3b-{t}.pdf',
-            prov: umuTerminer('ht12'),
+            prov: losning(umuTerminer('ht12'), { vt22: 'ma3b-vt2022' }),
         },
         {
             amne: 'matematik', kurs: 'Matematik fortsättning nivå 1c', kort: 'Matematik 3c', kod: 'ma3c',

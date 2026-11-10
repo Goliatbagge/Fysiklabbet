@@ -10,6 +10,12 @@
 // om den är bortkommenterad).
 window.NP_INDEX = [
     {
+        id: 'ma1b-vt2022',
+        kurs: 'Matematik nivå 1b',
+        namn: 'Nationellt prov, våren 2022',
+        meta: '32 uppgifter · Delprov B, C och D · Lösningar steg för steg',
+    },
+    {
         id: 'ma1c-vt2022',
         kurs: 'Matematik nivå 1c',
         namn: 'Nationellt prov, våren 2022',
@@ -28,6 +34,12 @@ window.NP_INDEX = [
         meta: '28 uppgifter · Delprov B, C och D · Lösningar steg för steg',
     },
     {
+        id: 'ma2b-vt2022',
+        kurs: 'Matematik nivå 2b',
+        namn: 'Nationellt prov, våren 2022',
+        meta: '29 uppgifter · Delprov B, C och D · Lösningar steg för steg',
+    },
+    {
         id: 'ma2c-vt2022',
         kurs: 'Matematik nivå 2c',
         namn: 'Nationellt prov, våren 2022',
@@ -38,6 +50,12 @@ window.NP_INDEX = [
         kurs: 'Matematik nivå 2c',
         namn: 'Nationellt prov, våren 2018',
         meta: '26 uppgifter · Delprov B, C och D · Lösningar steg för steg',
+    },
+    {
+        id: 'ma3b-vt2022',
+        kurs: 'Matematik fortsättning nivå 1b',
+        namn: 'Nationellt prov, våren 2022',
+        meta: '28 uppgifter · Delprov B, C och D · Lösningar steg för steg',
     },
     {
         id: 'ma3c-vt2022',

@@ -1045,6 +1045,15 @@
     <script>document.write('<scr' + 'ipt src="data/np/ma3c-vt2018.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/np/ma4-vt2018-figurer.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/np/ma4-vt2018.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <!-- Ma 1b, 2b och 3b VT 2022 är HÄRLEDDA ur c-proven (se filhuvudet i
+         data/np/ma1b-vt2022.js): de lånar c-provets uppgifter, figurer och
+         pennlösningar, så c-filerna ovan måste finnas med. -->
+    <script>document.write('<scr' + 'ipt src="data/np/ma1b-vt2022-figurer.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/np/ma1b-vt2022.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/np/ma2b-vt2022-figurer.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/np/ma2b-vt2022.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/np/ma3b-vt2022-figurer.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/np/ma3b-vt2022.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <!-- Pennlösningarna: motorn + en scenfil per prov. Scenfilerna
          registrerar sina layouter med HANDSKRIFT.registrera() och måste
          därför laddas EFTER handskrift.js. Saknar en uppgift scen visas
@@ -1061,6 +1070,9 @@
     <script>document.write('<scr' + 'ipt src="data/np/fy1-vt2017-penna.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/np/ma3c-vt2018-penna.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/np/ma4-vt2018-penna.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/np/ma1b-vt2022-penna.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/np/ma2b-vt2022-penna.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/np/ma3b-vt2022-penna.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="kanonisk.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
@@ -1081,8 +1093,11 @@
         const KURSKOD = {
             'Fysik nivå 1': 'fy1',
             'Fysik nivå 2': 'fy2',
+            'Matematik nivå 1b': 'ma1b',
             'Matematik nivå 1c': 'ma1c',
+            'Matematik nivå 2b': 'ma2b',
             'Matematik nivå 2c': 'ma2c',
+            'Matematik fortsättning nivå 1b': 'ma3b',
             'Matematik fortsättning nivå 1c': 'ma3c',
             'Matematik fortsättning nivå 2': 'ma4',
         };
@@ -1090,7 +1105,9 @@
         // kurs (t.ex. ett Ma1c-prov vars geometriteori bor i Ma2c).
         const KURSKORT = {
             'Fysik nivå 1': 'Fy 1', 'Fysik nivå 2': 'Fy 2',
+            'Matematik nivå 1b': 'Ma 1b', 'Matematik nivå 2b': 'Ma 2b',
             'Matematik nivå 1c': 'Ma 1c', 'Matematik nivå 2c': 'Ma 2c',
+            'Matematik fortsättning nivå 1b': 'Ma 3b',
             'Matematik fortsättning nivå 1c': 'Ma 3c',
             'Matematik fortsättning nivå 2': 'Ma 4',
         };

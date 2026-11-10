@@ -26,7 +26,7 @@ for (const prov of win.NP_INDEX) {
   const p = win.NP_PROV[prov.id];
   if (!p) { console.log(prov.id+': DATA SAKNAS'); continue; }
   const upp = p.uppgifter.filter(u=>!u.sekretess);
-  const saknas = upp.filter(u=>typer.indexOf(prov.id+'-u'+u.nr)<0).map(u=>u.nr);
+  const saknas = upp.filter(u=>typer.indexOf(u.penna||(prov.id+'-u'+u.nr))<0).map(u=>u.nr);  // u.penna: lånad scen (härledda b-prov)
   tot += upp.length; klara += upp.length - saknas.length;
   console.log(prov.id.padEnd(14)+ (upp.length-saknas.length)+'/'+upp.length+
     (saknas.length? '  saknar: '+saknas.join(','):'  KLART'));

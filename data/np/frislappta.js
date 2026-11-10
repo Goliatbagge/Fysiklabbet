@@ -9,14 +9,18 @@
 // mappen NP/ hålls lokal (se LOKALA_MAPPAR i .claude/dev-server.py).
 //
 // Utgivare (kontrollerade 2026-11-10, alla fil-länkar gav 200):
-// - Matematik nivå 1 (1b, 1c): PRIM-gruppen, Stockholms universitet. En zip
-//   per prov med delprov, bedömningsanvisningar och engelsk version.
+// - Matematik nivå 1 (1b, 1c): PRIM-gruppen, Stockholms universitet. En pdf
+//   per delprov (elevhäftena B, C, D), i fältet delar. Proven HT11–HT12
+//   finns bara som zip hos PRIM och är därför inte med (önskemål 2026-11-10:
+//   proven ska öppnas direkt som pdf, aldrig som zip). Ma 1b VT13 saknar
+//   delprov B: PRIM länkar där till Ma 1a-häftet.
 // - Matematik nivå 2 och fortsättning (2b, 2c, 3b, 3c, 4): Umeå universitet.
 //   En pdf per prov (delprov B–D), filnamnet följer mönstret i `filmall`.
 // - Fysik: kursproven finns som bedömningsstöd hos Skolverket. Någon öppen
 //   provlista finns inte, så bara proven vi har lösningar till listas.
 //
-// Fält per prov: t = termin ('vt22', 'ht16'), fil = full adress (annars
+// Fält per prov: t = termin ('vt22', 'ht16'), delar = { B, C, D } (pdf per
+// delprov), fil = full adress till en enda pdf (annars
 // byggs den ur kursens filmall), losning = prov-id i data/np/index.js.
 // Ordning: nyast först. Bara proven från våren 2022 följer aktuell ämnesplan.
 
@@ -44,40 +48,114 @@
     window.NP_FRISLAPPTA = [
         {
             amne: 'matematik', kurs: 'Matematik nivå 1b', kort: 'Ma 1b', kod: 'ma1b',
-            kalla: PRIM, format: 'zip',
+            kalla: PRIM, format: 'pdf',
             prov: [
-                { t: 'vt22', fil: SU + '/download/18.2dd14ace199c907e2a83764/1760618633630/Ma%201b%20VT%202022.zip' },
-                { t: 'vt17', fil: SU + '/download/18.2dd14ace199c907e2a83765/1760618651778/Ma%201b%20VT%202017%20(Hela%20materialet%20inklusive%20engelsk%20version).zip' },
-                { t: 'ht16', fil: SU + '/download/18.2dd14ace199c907e2a83766/1760618663849/Ma%201b%20HT2016.zip' },
-                { t: 'vt16', fil: SU + '/download/18.2dd14ace199c907e2a83767/1760618678193/Ma%201b%20VT%202016%20(Hela%20materialet%20inklusive%20engelsk%20version).zip' },
-                { t: 'ht15', fil: SU + '/download/18.2dd14ace199c907e2a83768/1760618696182/Ma%201b%20HT%202015%20(Hela%20materialet%20inklusive%20engelsk%20version).zip' },
-                { t: 'vt15', fil: SU + '/download/18.2dd14ace199c907e2a83769/1760618716618/Ma%201b%20VT%202015%20(Hela%20materialet%20inklusive%20engelsk%20version).zip' },
-                { t: 'ht14', fil: SU + '/download/18.2dd14ace199c907e2a8376a/1760618732934/Ma%201b%20HT2014.zip' },
-                { t: 'vt14', fil: SU + '/download/18.2dd14ace199c907e2a8376b/1760618748378/Ma%201b%20VT2014.zip' },
-                { t: 'ht13', fil: SU + '/download/18.2dd14ace199c907e2a8376c/1760618762500/Ma%201b%20HT2013.zip' },
-                { t: 'vt13', fil: SU + '/download/18.2dd14ace199c907e2a8376d/1760618777821/Ma%201b%20VT2013.zip' },
-                { t: 'ht12', fil: SU + '/download/18.2dd14ace199c907e2a8376e/1760618795490/Ma%201b%20HT2012.zip' },
-                { t: 'vt12', fil: SU + '/download/18.2dd14ace199c907e2a8376f/1760618812691/Ma%201b%20VT2012.zip' },
+                { t: 'vt22', delar: {
+                    B: SU + '/download/18.2b7477cb199a332c2a8262a/1759930385489/Ma1b%20VT22%20Delprov%20BVT%202022%20Ma%201b_Delprov%20B.pdf',
+                    C: SU + '/download/18.2b7477cb199a332c2a8262b/1759930385596/Ma1b%20VT22%20Delprov%20CVT%202022%20Ma%201b_Delprov%20C.pdf',
+                    D: SU + '/download/18.2b7477cb199a332c2a8262c/1759930385762/Ma1b%20VT22%20Delprov%20DVT%202022%20Ma%201b_Delprov%20D.pdf',
+                } },
+                { t: 'vt17', delar: {
+                    B: SU + '/download/18.2b7477cb199a332c2a8262d/1759930385910/KPVT%202017%20Ma%201b%20Delprov%20BKPVT%202017%20Ma%201b%20Delprov%20B.pdf',
+                    C: SU + '/download/18.2b7477cb199a332c2a8262e/1759930386164/KPVT%202017%20Ma%201b%20Delprov%20CKPVT%202017%20Ma%201b%20Delprov%20C.pdf',
+                    D: SU + '/download/18.2b7477cb199a332c2a8262f/1759930386271/KPVT%202017%20Ma%201b%20Delprov%20DKPVT%202017%20Ma%201b%20Delprov%20D.pdf',
+                } },
+                { t: 'ht16', delar: {
+                    B: SU + '/download/18.2b7477cb199a332c2a82630/1759930386342/Ma1b%20HT16%20Delprov%20BHT16_Delprov%20B%201b.pdf',
+                    C: SU + '/download/18.2b7477cb199a332c2a82631/1759930386425/Ma1b%20HT16%20Delprov%20CHT16_Delprov%20C%201b.pdf',
+                    D: SU + '/download/18.2b7477cb199a332c2a82632/1759930386513/Ma1b%20HT16%20Delprov%20DHT16_Delprov%20D%201b.pdf',
+                } },
+                { t: 'vt16', delar: {
+                    B: SU + '/download/18.2b7477cb199a332c2a82633/1759930386667/Ma1b%20VT16%20Delprov%20BKPVT%202016%20Ma%201b%20Delprov%20B.pdf',
+                    C: SU + '/download/18.2b7477cb199a332c2a82634/1759930386819/Ma1b%20VT16%20Delprov%20CKPVT%202016%20Ma%201b%20Delprov%20C.pdf',
+                    D: SU + '/download/18.2b7477cb199a332c2a82635/1759930387147/Ma1b%20VT16%20Delprov%20DKPVT%202016%20Ma%201b%20Delprov%20D.pdf',
+                } },
+                { t: 'ht15', delar: {
+                    B: SU + '/download/18.2b7477cb199a332c2a82636/1759930387594/Ma1b%20HT15%20Delprov%20BKPHT%202015%20Ma%201b%20Delprov%20B.pdf',
+                    C: SU + '/download/18.2b7477cb199a332c2a82637/1759930387738/Ma1b%20HT15%20Delprov%20CKPHT%202015%20Ma%201b%20Delprov%20C.pdf',
+                    D: SU + '/download/18.2b7477cb199a332c2a82638/1759930387913/Ma1b%20HT15%20Delprov%20DKPHT%202015%20Ma%201b%20Delprov%20D.pdf',
+                } },
+                { t: 'vt15', delar: {
+                    B: SU + '/download/18.2b7477cb199a332c2a82639/1759930388323/Ma1b%20VT15%20Delprov%20BKPVT%202015%20Ma%201b%20Delprov%20B.pdf',
+                    C: SU + '/download/18.2b7477cb199a332c2a8263a/1759930388549/Ma1b%20VT15%20Delprov%20CKPVT%202015%20Ma%201b%20Delprov%20C.pdf',
+                    D: SU + '/download/18.2b7477cb199a332c2a8263b/1759930388715/Ma1b%20VT15%20Delprov%20DKPVT%202015%20Ma%201b%20Delprov%20D.pdf',
+                } },
+                { t: 'ht14', delar: {
+                    B: SU + '/download/18.2b7477cb199a332c2a8263c/1759930388997/Ma1b%20HT14%20Delprov%20BProvh%C3%A4fte%20Delprov%20B%201b%20ht14_.pdf',
+                    C: SU + '/download/18.2b7477cb199a332c2a8263d/1759930389126/Ma1b%20HT14%20Delprov%20CProvh%C3%A4fte%20Delprov%20C%201b%20ht14.pdf',
+                    D: SU + '/download/18.2b7477cb199a332c2a8263e/1759930389235/Ma1b%20HT14%20Delprov%20DProvh%C3%A4fte%20Delprov%20D%201b%20ht14_.pdf',
+                } },
+                { t: 'vt14', delar: {
+                    B: SU + '/download/18.2b7477cb199a332c2a8263f/1759930389456/Ma1b%20VT14%20Delprov%20BProvh%C3%A4fte%20Del%20B%201b%20VT14.pdf',
+                    C: SU + '/download/18.2b7477cb199a332c2a82640/1759930389723/Ma1b%20VT14%20Delprov%20CProvh%C3%A4fte%20Del%20C%201b%20vt14.pdf',
+                    D: SU + '/download/18.2b7477cb199a332c2a82641/1759930389811/Ma1b%20VT14%20Delprov%20DProvh%C3%A4fte%20Del%20D%201b%20vt14.pdf',
+                } },
+                { t: 'ht13', delar: {
+                    B: SU + '/download/18.2b7477cb199a332c2a82642/1759930389881/Ma1b%20HT13%20Delprov%20BProvh%C3%A4fte%20Del%20B%201b%20HT13.pdf',
+                    C: SU + '/download/18.2b7477cb199a332c2a82643/1759930389966/Ma1b%20HT13%20Delprov%20CProvh%C3%A4fte%20Del%20C%201b%20ht13.pdf',
+                    D: SU + '/download/18.2b7477cb199a332c2a82644/1759930390063/Ma1b%20HT13%20Delprov%20DProvh%C3%A4fte%20Del%20D%201b%20ht13.pdf',
+                } },
+                { t: 'vt13', delar: {
+                    C: SU + '/download/18.2b7477cb199a332c2a82645/1759930390165/Ma1b%20VT13%20Delprov%20CProvh%C3%A4fte%20Del%20C%201b.pdf',
+                    D: SU + '/download/18.2b7477cb199a332c2a82646/1759930390282/Ma1b%20VT13%20Delprov%20DProvh%C3%A4fte%20Del%20D%201b.pdf',
+                } },
             ],
         },
         {
             amne: 'matematik', kurs: 'Matematik nivå 1c', kort: 'Ma 1c', kod: 'ma1c',
-            kalla: PRIM, format: 'zip',
+            kalla: PRIM, format: 'pdf',
             prov: losning([
-                { t: 'vt22', fil: SU + '/download/18.2dd14ace199c907e2a83770/1760618868593/Ma%201c%20VT%202022.zip' },
-                { t: 'vt17', fil: SU + '/download/18.2dd14ace199c907e2a83771/1760618881472/Ma%201c%20VT%202017%20(Hela%20materialet%20inklusive%20engelsk%20version).zip' },
-                { t: 'ht16', fil: SU + '/download/18.2dd14ace199c907e2a83772/1760618894512/Ma%201c%20HT2016.zip' },
-                { t: 'vt16', fil: SU + '/download/18.39dc5cbc19afcf09c0019cf/1765443107698/Ma%201c%20VT%202016%20(Hela%20materialet%20inklusive%20engelsk%20version).zip' },
-                { t: 'ht15', fil: SU + '/download/18.39dc5cbc19afcf09c0019d5/1765443151473/Ma%201c%20HT%202015%20(Hela%20materialet%20inklusive%20engelsk%20version).zip' },
-                { t: 'vt15', fil: SU + '/download/18.2dd14ace199c907e2a83779/1760619143499/Ma%201c%20VT%202015%20(Hela%20materialet%20inklusive%20engelsk%20version).zip' },
-                { t: 'ht14', fil: SU + '/download/18.2dd14ace199c907e2a8377a/1760619160858/Ma%201c%20HT%202014.zip' },
-                { t: 'vt14', fil: SU + '/download/18.2dd14ace199c907e2a8377b/1760619177757/Ma%201c%20VT%202014.zip' },
-                { t: 'ht13', fil: SU + '/download/18.2dd14ace199c907e2a8377c/1760619194595/Ma%201c%20HT%202013.zip' },
-                { t: 'vt13', fil: SU + '/download/18.2dd14ace199c907e2a8377d/1760619212542/Ma%201c%20VT%202013.zip' },
-                { t: 'ht12', fil: SU + '/download/18.2dd14ace199c907e2a8377e/1760619228548/Ma%201c%20HT%202012.zip' },
-                { t: 'vt12', fil: SU + '/download/18.2dd14ace199c907e2a8377f/1760619243673/Ma%201c%20VT%202012.zip' },
-                { t: 'ht11', fil: SU + '/download/18.2dd14ace199c907e2a83780/1760619255843/Ma%201c%20HT%202011.zip' },
-            ], { vt22: 'ma1c-vt2022', vt17: 'ma1c-vt2017', ht16: 'ma1c-ht2016' }),
+                { t: 'vt22', delar: {
+                    B: SU + '/download/18.2b7477cb199a332c2a82647/1759930390468/Ma1c%20VT22%20Delprov%20BVT%202022%20Ma%201c_Delprov%20B.pdf',
+                    C: SU + '/download/18.2b7477cb199a332c2a82648/1759930390574/Ma1c%20VT22%20Delprov%20CVT%202022%20Ma%201c_Delprov%20C.pdf',
+                    D: SU + '/download/18.2b7477cb199a332c2a82649/1759930390719/Ma1c%20VT22%20Delprov%20DVT%202022%20Ma%201c_Delprov%20D_230907.pdf',
+                } },
+                { t: 'vt17', delar: {
+                    B: SU + '/download/18.2b7477cb199a332c2a8264a/1759930390880/KPVT%202017%20Ma%201c%20Delprov%20BKPVT%202017%20Ma%201c%20Delprov%20B.pdf',
+                    C: SU + '/download/18.2b7477cb199a332c2a8264b/1759930391047/KPVT%202017%20Ma%201c%20Delprov%20CKPVT%202017%20Ma%201c%20Delprov%20C.pdf',
+                    D: SU + '/download/18.2b7477cb199a332c2a8264c/1759930391151/KPVT%202017%20Ma%201c%20Delprov%20DKPVT%202017%20Ma%201c%20Delprov%20D.pdf',
+                } },
+                { t: 'ht16', delar: {
+                    B: SU + '/download/18.2b7477cb199a332c2a8264d/1759930391222/Ma1c%20HT16%20Delprov%20BHT16_Delprov%20B%201c.pdf',
+                    C: SU + '/download/18.2b7477cb199a332c2a8264e/1759930391314/Ma1c%20HT16%20Delprov%20CHT16_Delprov%20C%201c.pdf',
+                    D: SU + '/download/18.2b7477cb199a332c2a8264f/1759930391400/Ma1c%20HT16%20Delprov%20DHT16_Delprov%20D%201c.pdf',
+                } },
+                { t: 'vt16', delar: {
+                    B: SU + '/download/18.2b7477cb199a332c2a82650/1759930391524/Ma1c%20VT16%20Delprov%20BKPVT%202016%20Ma%201c%20Delprov%20B.pdf',
+                    C: SU + '/download/18.2b7477cb199a332c2a82651/1759930391687/Ma1c%20VT16%20Delprov%20CKPVT%202016%20Ma%201c%20Delprov%20C.pdf',
+                    D: SU + '/download/18.2b7477cb199a332c2a82652/1759930392096/Ma1c%20VT16%20Delprov%20DKPVT%202016%20Ma%201c%20Delprov%20D.pdf',
+                } },
+                { t: 'ht15', delar: {
+                    B: SU + '/download/18.2b7477cb199a332c2a82653/1759930392602/Ma1c%20HT15%20Delprov%20BKPHT%202015%20Ma%201c%20Delprov%20B.pdf',
+                    C: SU + '/download/18.2b7477cb199a332c2a82654/1759930392733/Ma1c%20HT15%20Delprov%20CKPHT%202015%20Ma%201c%20Delprov%20C.pdf',
+                    D: SU + '/download/18.2b7477cb199a332c2a82655/1759930392920/Ma1c%20HT15%20Delprov%20DKPHT%202015%20Ma%201c%20Delprov%20D.pdf',
+                } },
+                { t: 'vt15', delar: {
+                    B: SU + '/download/18.2b7477cb199a332c2a82656/1759930393332/Ma1c%20VT15%20Delprov%20BKPVT%202015%20Ma%201c%20Delprov%20B.pdf',
+                    C: SU + '/download/18.2b7477cb199a332c2a82657/1759930393544/Ma1c%20VT15%20Delprov%20CKPVT%202015%20Ma%201c%20Delprov%20C.pdf',
+                    D: SU + '/download/18.2b7477cb199a332c2a82658/1759930393737/Ma1c%20VT15%20Delprov%20DKPVT%202015%20Ma%201c%20Delprov%20D.pdf',
+                } },
+                { t: 'ht14', delar: {
+                    B: SU + '/download/18.2b7477cb199a332c2a82659/1759930393971/Ma1c%20HT14%20Delprov%20BProvh%C3%A4fte%20Delprov%20B%201c%20ht14_.pdf',
+                    C: SU + '/download/18.2b7477cb199a332c2a8265a/1759930394128/Ma1c%20HT14%20Delprov%20CProvh%C3%A4fte%20Delprov%20C%201c%20ht14.pdf',
+                    D: SU + '/download/18.2b7477cb199a332c2a8265b/1759930394259/Ma1c%20HT14%20Delprov%20DProvh%C3%A4fte%20Delprov%20D%201c%20ht14_.pdf',
+                } },
+                { t: 'vt14', delar: {
+                    B: SU + '/download/18.2b7477cb199a332c2a8265c/1759930394402/Ma1c%20VT14%20Delprov%20BProvh%C3%A4fte%20Del%20B%201c%20VT14.pdf',
+                    C: SU + '/download/18.2b7477cb199a332c2a8265d/1759930394565/Ma1c%20VT14%20Delprov%20CProvh%C3%A4fte%20Del%20C%201c%20vt14.pdf',
+                    D: SU + '/download/18.2b7477cb199a332c2a8265e/1759930394638/Ma1c%20VT14%20Delprov%20DProvh%C3%A4fte%20Del%20D%201c%20vt14.pdf',
+                } },
+                { t: 'ht13', delar: {
+                    B: SU + '/download/18.2b7477cb199a332c2a8265f/1759930394715/Ma1c%20HT13%20Delprov%20BProvh%C3%A4fte%20Del%20B%201c%20HT13.pdf',
+                    C: SU + '/download/18.2b7477cb199a332c2a82660/1759930394796/Ma1c%20HT13%20Delprov%20CProvh%C3%A4fte%20Del%20C%201c%20ht13.pdf',
+                    D: SU + '/download/18.2b7477cb199a332c2a82661/1759930394907/Ma1c%20HT13%20Delprov%20DProvh%C3%A4fte%20Del%20D%201c%20ht13.pdf',
+                } },
+                { t: 'vt13', delar: {
+                    B: SU + '/download/18.2b7477cb199a332c2a82662/1759930395102/Ma1c%20VT13%20Delprov%20BProvh%C3%A4fte%20Del%20B%201c.pdf',
+                    C: SU + '/download/18.2b7477cb199a332c2a82663/1759930395290/Ma1c%20VT13%20Delprov%20CProvh%C3%A4fte%20Del%20C%201c.pdf',
+                    D: SU + '/download/18.2b7477cb199a332c2a82664/1759930395389/Ma1c%20VT13%20Delprov%20DProvh%C3%A4fte%20Del%20D%201c.pdf',
+                } },
+            ], { 'vt22': 'ma1c-vt2022', 'vt17': 'ma1c-vt2017', 'ht16': 'ma1c-ht2016' }),
         },
         {
             amne: 'matematik', kurs: 'Matematik nivå 2b', kort: 'Ma 2b', kod: 'ma2b',

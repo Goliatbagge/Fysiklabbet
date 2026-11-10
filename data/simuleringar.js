@@ -169,7 +169,18 @@ window.SIM_NAMES = {
   ],
   'fysik2-resonans-app.html': 'Resonans (driven svängning)',
   'fysik2-staende-vag-app.html': 'Stående våg i sträng',
-  'fysik2-vagsimulator.html': 'Vågsimulator',
+  'fysik2-vagsimulator.html': [
+    { name: 'Vågtanken: vattenvågor och brytning', desc: 'En vågtank sedd uppifrån och i 3D: cirkulära vågor från en punktkälla, plana vågor och brytning där vattnet blir grundare.',
+      kw: ['vågor','vattenvågor','vågtank','punktkälla','cirkulära vågor','plana vågor','vågfront','vågfronter','våglängd','frekvens','brytning','refraktion','brytningslagen','djupt vatten','grunt vatten','normal','infallsvinkel','brytningsvinkel','3d'] },
+  ],
+  'fysik2-vagsimulator.html?lage=interferens': [
+    { name: 'Vågtanken: interferens och diffraktion', href: 'fysik2-vagsimulator.html?lage=interferens', desc: 'Två vågkällor i fas och en plan våg genom en eller två öppningar, med nodlinjer och maximilinjer.',
+      kw: ['vågor','vågtank','interferens','diffraktion','nodlinjer','nodlinje','maximilinjer','maximilinje','vägskillnad','två källor','dubbelspalt','öppning','spalt','huygens','superposition','3d'] },
+  ],
+  'fysik2-vagsimulator.html?lage=doppler': [
+    { name: 'Vågtanken: dopplereffekt', href: 'fysik2-vagsimulator.html?lage=doppler', desc: 'En vågkälla som rör sig genom vattnet. Tätare fronter och högre frekvens framför källan, glesare bakom, och en kil av fronter när källan går fortare än vågorna.',
+      kw: ['vågor','ljud','doppler','dopplereffekt','rörlig källa','frekvens','våglängd','ljudbang','överljudsfart','överljudshastighet','mach','ambulans','3d'] },
+  ],
   'fysik2-stavmagnet-app.html': [
     { name: 'Stavmagnetens magnetfält', desc: 'Magnetfältet kring en stavmagnet i 2D och 3D — dra magneten över en platta med kompassnålar, strö järnfilspån och rotera fältbilden fritt i rummet.',
       kw: ['magnetism','elektromagnetism','magnetfält','stavmagnet','permanentmagnet','fältlinjer','kompass','kompassnål','järnfilspån','nordpol','sydpol','nordända','sydända','poler','provkompass','3d'] },

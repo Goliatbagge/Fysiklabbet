@@ -5,128 +5,156 @@
     <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vågsimulator — Fysiklabbet</title>
-    <meta name="description" content="Mekaniska vågor i 2D och 3D — interferens, doppler, nodlinjer.">
+    <meta name="description" content="En vågtank sedd uppifrån: cirkulära och plana vågor, brytning mellan djupt och grunt vatten, interferens, diffraktion och dopplereffekt, i 2D och 3D.">
     <link rel="canonical" href="https://fysiklabbet.se/fysik2-vagsimulator.html">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Fysiklabbet">
     <meta property="og:title" content="Vågsimulator — Fysik nivå 2">
-    <meta property="og:description" content="Mekaniska vågor i 2D och 3D — interferens, doppler, nodlinjer.">
+    <meta property="og:description" content="En vågtank sedd uppifrån: cirkulära och plana vågor, brytning mellan djupt och grunt vatten, interferens, diffraktion och dopplereffekt, i 2D och 3D.">
     <meta property="og:url" content="https://fysiklabbet.se/fysik2-vagsimulator.html">
     <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Vågsimulator — Fysik nivå 2">
-    <meta name="twitter:description" content="Mekaniska vågor i 2D och 3D — interferens, doppler, nodlinjer.">
+    <meta name="twitter:description" content="En vågtank sedd uppifrån: cirkulära och plana vågor, brytning mellan djupt och grunt vatten, interferens, diffraktion och dopplereffekt, i 2D och 3D.">
     <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
     <script>window.__CB = String(Date.now());</script>
     <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
     <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.1);
-      }
-      ::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: rgba(255, 255, 255, 0.4);
-      }
-
-      body {
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden;
-      }
-
-      #root {
-        width: 100vw;
-        height: 100vh;
-      }
-
-      /* Fullskärm: canvasen skalas upp (bitmapp 800x600 behålls, ren CSS-
-         skalning med bevarat 4:3-förhållande) */
-      .vs-stage:fullscreen canvas,
-      .vs-stage:-webkit-full-screen canvas {
-        width: min(100vw, 133.34vh);
-        height: min(100vh, 75vw);
-      }
-
-      /* Fullskärm: scen-overlay-kontroller (visas endast i fullskärm) */
-      .scene-toggles {
-        position: absolute; top: 14px; right: 14px; z-index: 12;
-        background: rgba(243,238,228,0.92);
-        backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-        border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
-        border-radius: 10px; padding: 8px 12px;
-        display: flex; flex-direction: column; gap: 5px;
-        box-shadow: 0 2px 8px rgba(15,22,32,0.12);
-        max-width: 250px;
-        color: var(--lab-ink, #0f1620);
-      }
-      .scene-toggles .st-title {
-        font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
-        color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
-      }
-      .scene-toggles .st-title.mt { margin-top: 7px; }
-      .scene-toggles label {
-        display: flex; align-items: center; gap: 7px; cursor: pointer;
-        font-size: 13px; color: var(--lab-ink, #0f1620);
-      }
-      .scene-toggles input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0; }
-      .scene-toggles select {
-        background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
-        border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
-        border-radius: 8px; padding: 5px 8px; font-size: 13px; width: 100%;
-      }
-      .scene-toggles .st-actions {
-        display: flex; gap: 7px; margin-top: 7px;
-        padding-top: 8px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
-      }
-      .scene-toggles .st-actions .btn-toggle { flex: 1; font-size: 13px; padding: 7px 10px; }
-      .btn-toggle {
-        background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
-        border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
-        border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
-        transition: all 0.15s ease;
-      }
-      .btn-toggle.active {
-        background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
-        border-color: var(--lab-ink, #0f1620);
-      }
-      .st-viewrow { display: flex; gap: 7px; }
-      .st-viewrow .btn-toggle { flex: 1; font-size: 13px; padding: 5px 10px; }
-      .fs-controls .fs-row { display: flex; align-items: center; gap: 10px; }
-      .fs-controls .fs-row input[type="range"] { flex: 1; accent-color: var(--lab-accent, #c8324a); }
-      .fs-controls .fs-label { min-width: 150px; }
-
-      /* Mobil: stapla — vågcanvas i full bredd överst, kontroller under */
-      @media (max-width: 600px) {
-        body { overflow: auto !important; }
-        #root { height: auto; }
-        .vs-root {
-          flex-direction: column !important;
-          height: auto !important;
-          overflow: visible !important;
-        }
-        .vs-stage { order: -1; width: 100%; padding: 8px 0; }
-        .vs-panel { width: 100% !important; border-right: none !important; }
-      }
-    </style>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 19px; }
+        .formula-card { justify-content: center; }
+        @media (max-width: 600px) {
+            .formula-card { flex-wrap: nowrap !important; overflow-x: auto;
+                            justify-content: flex-start; -webkit-overflow-scrolling: touch; }
+            .formula-card > * { flex-shrink: 0; }
+            .formula-card .fnum { font-size: 16px; }
+        }
+
+        /* ── Scenen: en vågtank sedd uppifrån ─────────────────────────── */
+        .scene-wrap {
+            position: relative; width: 100%;
+            border-radius: 12px; overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none; background: #f3eee4;
+        }
+        .scene-wrap > canvas { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; }
+        @media (min-width: 601px) {
+            .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+                width: 100vw; height: 100vh; border-radius: 0; background: #1d2630;
+            }
+            .scene-wrap:fullscreen > canvas, .scene-wrap:-webkit-full-screen > canvas {
+                position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+                width: min(100vw, calc(100vh * 4 / 3)); height: auto;
+            }
+        }
+
+        .scene-info {
+            position: absolute; top: 62px; left: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 7px 12px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            display: grid; grid-template-columns: auto auto; column-gap: 12px; row-gap: 1px;
+            pointer-events: none;
+        }
+        .scene-info .si-lbl { font-size: 13px; align-self: center;
+            color: var(--lab-ink-soft, #3a4151); }
+        .scene-info .si-val { font-size: 14px; font-weight: 700; text-align: right;
+            color: var(--lab-ink, #0f1620); font-family: 'JetBrains Mono', monospace; }
+
+        .scene-hint {
+            position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); z-index: 5;
+            font-size: 12px; color: #e9edf3; white-space: nowrap;
+            background: rgba(15,22,32,0.80); padding: 4px 11px; border-radius: 7px;
+            pointer-events: none; font-weight: 500;
+        }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 30px 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 262px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-swatch.streck { background: none !important; border-top: 3px dashed; height: 0; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+        .scene-toggles .st-row { display: flex; gap: 6px; }
+        .scene-toggles .st-row .btn-toggle { flex: 1; font-size: 13px; padding: 6px 8px; }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .mode-seg { display: grid; gap: 1px; border-radius: 9px; overflow: hidden;
+                    border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                    background: var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .mode-seg button {
+            padding: 9px 10px; font-weight: 600; cursor: pointer; font-size: 13.5px;
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620); border: none;
+        }
+        .mode-seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+        .mode-seg button .sub { display: block; font-size: 11px; font-weight: 400; opacity: 0.8; }
+
+        .sl-row { margin-bottom: 12px; }
+        .sl-top { display: flex; justify-content: space-between; align-items: baseline;
+                  font-size: 14px; color: var(--lab-ink-soft, #3a4151); margin-bottom: 3px; }
+        .sl-val { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 13px;
+                  color: var(--lab-ink, #0f1620); white-space: nowrap; }
+        .sl-row input[type="range"] { width: 100%; }
+        .sl-note { font-size: 12px; color: var(--lab-ink-muted, #5a6170); margin-top: 2px; }
+        .provlista li { margin-bottom: 6px; }
+    </style>
 </head>
-<body class="text-white overflow-hidden lab-sim">
+<body class="lab-sim">
         <div class="lab-topbar lab-topbar--on-sim">
         <div class="lab-topbar-inner">
             <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
@@ -196,1345 +224,994 @@
         </div>
     </div>
 
+
     <div id="root"></div>
 
     <script type="text/babel">
 const { useState, useRef, useEffect } = React;
 
-// Types (using JSDoc comments for type hints)
-/** @typedef {'single' | 'double' | 'planar' | 'doppler' | 'refraction' | 'diffraction' | 'diffraction-double'} SimulationMode */
-/** @typedef {{ x: number; y: number }} Point */
-/** @typedef {{ x: number; y: number; emitTime: number }} WaveFront */
-
-const WaveSimulator = () => {
-  // --- State ---
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [viewMode, setViewMode] = useState('2D');
-  const [mode, setMode] = useState('single');
-  const [showNodalLines, setShowNodalLines] = useState(false);
-  const [showMaximaLines, setShowMaximaLines] = useState(false);
-  const [showRefractionAngles, setShowRefractionAngles] = useState(false);
-
-  // Physics Parameters
-  const [frequency, setFrequency] = useState(2); // Hz
-  const [separation, setSeparation] = useState(150); // pixels
-  const [sourceSpeed, setSourceSpeed] = useState(1.5); // Multiplier
-  const [waveSpeedParam, setWaveSpeedParam] = useState(100); // pixels/s
-  const [slitWidth, setSlitWidth] = useState(50); // pixels
-  const [refrAngleDeg, setRefrAngleDeg] = useState(30);   // infallsvinkel i refraktionsläget (grader)
-  const [speedRatio, setSpeedRatio] = useState(0.5);      // v2 / v1 i refraktionsläget
-
-  // Fullskärm
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const [fsControlsOpen, setFsControlsOpen] = useState(false);
-  const stageRef = useRef(null);
-
-  // Refs for animation
-  const canvasRef = useRef(null);
-  const requestRef = useRef();
-  const timeRef = useRef(0);
-  const wavefrontsRef = useRef([]);
-  const lastEmitTimeRef = useRef(0);
-  // Vågfältet räknas i halv upplösning på en offscreen-canvas och skalas upp
-  // 2x utan utjämning — samma 2x2-block som förr, men utan getImageData-
-  // återläsning och med en fjärdedel av pixelskrivningarna. Bildrutan måste
-  // hålla sig under ~10 ms: dyrare rAF-uppgifter skjuter fram Chromes
-  // "network quiet"-fönster så att sidan aldrig når network-idle, och då
-  // fastnar verify-mobil-scen.js (och allt annat Puppeteer-drivet) på
-  // navigation timeout trots att sidan ser färdigladdad ut.
-  const fieldRef = useRef(null);
-
-  // Refs for Camera Interaction
-  const cameraAngleRef = useRef({ h: Math.PI / 4, v: Math.PI / 4 }); // Azimuth (h), Elevation (v)
-  const isDraggingRef = useRef(false);
-  const lastMousePosRef = useRef({ x: 0, y: 0 });
-
-  // Configuration constants
-  const CANVAS_WIDTH = 800;
-  const CANVAS_HEIGHT = 600;
-
-  // Reset time when switching major modes to prevent jumps
-  useEffect(() => {
-    wavefrontsRef.current = [];
-    lastEmitTimeRef.current = timeRef.current;
-  }, [mode]);
-
-  // Fullskärmslyssnare
-  useEffect(() => {
-    const handler = () => {
-      setIsFullscreen(
-        document.fullscreenElement === stageRef.current ||
-        document.webkitFullscreenElement === stageRef.current
-      );
-    };
-    document.addEventListener('fullscreenchange', handler);
-    document.addEventListener('webkitfullscreenchange', handler);
-    return () => {
-      document.removeEventListener('fullscreenchange', handler);
-      document.removeEventListener('webkitfullscreenchange', handler);
-    };
-  }, []);
-
-  const toggleFullscreen = () => {
-    const el = stageRef.current;
-    if (!el) return;
-    const isFs = document.fullscreenElement || document.webkitFullscreenElement;
-    if (isFs) {
-      (document.exitFullscreen || document.webkitExitFullscreen).call(document);
-    } else {
-      (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
-    }
-  };
-
-  // --- Physics & Math Helpers ---
-
-  const getSources = (t) => {
-    const centerX = CANVAS_WIDTH / 2;
-    const centerY = CANVAS_HEIGHT / 2;
-
-    if (mode === 'doppler') {
-      // Moving source for Doppler (Linear motion loop)
-      // Wave speed is 100 px/s. Source moves at 60 px/s (subsonic) to show doppler effect clearly.
-
-      const cycleDur = 6; // seconds for one pass
-      const progress = (t % cycleDur) / cycleDur;
-
-      // Distance to travel: 6s * 60px/s = 360px
-      const range = 360;
-
-      const x = (centerX - range/2) + progress * range;
-      return [{ x, y: centerY }];
-    }
-
-    if (mode === 'double') {
-      return [
-        { x: centerX - separation / 2, y: centerY },
-        { x: centerX + separation / 2, y: centerY },
-      ];
-    }
-
-    if (mode === 'single') {
-        return [{ x: centerX, y: centerY }];
-    }
-
-    // Planar/Refraction/Diffraction waves don't have a point source in the same way
-    return [];
-  };
-
-  const calculateInterferenceLines = (wavelength, separation, type) => {
-      const curves = [];
-      const phaseOffset = type === 'nodal' ? 0.5 : 0;
-
-      // Nodal condition: |r1 - r2| = (n + 0.5) * lambda
-      // Maxima condition: |r1 - r2| = n * lambda
-
-      // Max path diff is separation d.
-      // So (n + offset) * lambda < separation
-
-      const maxN = Math.floor(separation / wavelength - phaseOffset - 0.01);
-      const cx = CANVAS_WIDTH / 2;
-      const cy = CANVAS_HEIGHT / 2;
-      const yRange = CANVAS_HEIGHT / 2 + 50;
-
-      // We iterate n to find the hyperbolas
-      for (let n = 0; n <= maxN; n++) {
-          const k = n + phaseOffset;
-          const delta = k * wavelength; // Path difference
-
-          if (delta === 0) {
-              // Center line for n=0 Maxima
-              const pts = [];
-              for (let y = -yRange; y <= yRange; y += 10) {
-                  pts.push({ x: cx, y: cy + y });
-              }
-              curves.push(pts);
-              continue;
-          }
-
-          // Hyperbola parameters: x^2/a^2 - y^2/b^2 = 1
-          // 2a = delta => a = delta / 2
-          const a = delta / 2;
-
-          // c = separation / 2 (focal distance from center)
-          const c = separation / 2;
-
-          if (a >= c) continue;
-
-          const b = Math.sqrt(c * c - a * a);
-
-          const ptsRight = [];
-          const ptsLeft = [];
-
-          // Generate points for the hyperbola
-          for (let y = -yRange; y <= yRange; y += 10) {
-              // x = a * sqrt(1 + y^2/b^2)
-              const xVal = a * Math.sqrt(1 + (y * y) / (b * b));
-
-              ptsRight.push({ x: cx + xVal, y: cy + y });
-              ptsLeft.push({ x: cx - xVal, y: cy + y });
-          }
-
-          curves.push(ptsRight);
-          curves.push(ptsLeft);
-      }
-      return curves;
-  };
-
-  // --- Interaction Handlers ---
-
-  const handleMouseDown = (e) => {
-    if (viewMode === '3D') {
-        isDraggingRef.current = true;
-        lastMousePosRef.current = { x: e.clientX, y: e.clientY };
-    }
-  };
-
-  const handleMouseMove = (e) => {
-    if (viewMode === '3D' && isDraggingRef.current) {
-        const dx = e.clientX - lastMousePosRef.current.x;
-        const dy = e.clientY - lastMousePosRef.current.y;
-
-        const sensitivity = 0.01;
-
-        // Update angles
-        // h: Azimuth (rotation around vertical axis)
-        // v: Elevation (angle from horizon)
-
-        let newH = cameraAngleRef.current.h + dx * sensitivity;
-        let newV = cameraAngleRef.current.v - dy * sensitivity;
-
-        // Clamp elevation to avoid flipping upside down or going underground
-        // 0.1 rad (~5 deg) to PI/2 (90 deg, top down)
-        newV = Math.max(0.1, Math.min(Math.PI / 2, newV));
-
-        cameraAngleRef.current = { h: newH, v: newV };
-        lastMousePosRef.current = { x: e.clientX, y: e.clientY };
-    }
-  };
-
-  const handleMouseUp = () => {
-    isDraggingRef.current = false;
-  };
-
-  const handleMouseLeave = () => {
-    isDraggingRef.current = false;
-  }
-
-  // --- Renderers ---
-
-  const draw2D = (ctx, t, sources) => {
-    const wavelength = waveSpeedParam / frequency;
-
-    // Background
-    ctx.fillStyle = '#f3eee4';
-    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-
-    if (mode === 'doppler') {
-      // Doppler Visualization: Draw expanding wavefronts
-
-      const currentWavefronts = wavefrontsRef.current;
-
-      for (const wf of currentWavefronts) {
-        const age = t - wf.emitTime;
-        if (age < 0) continue;
-        const radius = age * waveSpeedParam;
-
-        // Fade out as it gets large
-        const alpha = Math.max(0, 1 - radius / 600);
-        ctx.lineWidth = 3;
-        ctx.strokeStyle = `rgba(15, 22, 32, ${alpha})`;
-
-        ctx.beginPath();
-        ctx.arc(wf.x, wf.y, radius, 0, Math.PI * 2);
-        ctx.stroke();
-      }
-
-      // Draw source
-      ctx.fillStyle = '#ffcc00';
-      ctx.strokeStyle = '#0f1620';
-      ctx.lineWidth = 1.5;
-      for (const src of sources) {
-        ctx.beginPath();
-        ctx.arc(src.x, src.y, 6, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.stroke();
-      }
-
-    } else {
-      // Interference / Standard Wave Field / Planar / Refraction / Diffraction
-      // Fältet ritas i halv upplösning (se fieldRef-kommentaren ovan).
-      const FIELD_W = CANVAS_WIDTH / 2;
-      const FIELD_H = CANVAS_HEIGHT / 2;
-      if (!fieldRef.current) {
-          const fc = document.createElement('canvas');
-          fc.width = FIELD_W; fc.height = FIELD_H;
-          const fctx = fc.getContext('2d');
-          fieldRef.current = { canvas: fc, ctx: fctx, img: fctx.createImageData(FIELD_W, FIELD_H) };
-      }
-      const { canvas: fieldCanvas, ctx: fieldCtx, img: imgData } = fieldRef.current;
-      const data = imgData.data;
-
-      const k = (2 * Math.PI) / wavelength;
-      const omega = 2 * Math.PI * frequency;
-
-      const src1 = sources[0];
-      const src2 = sources[1]; // may be undefined
-
-      // Refraction constants
-      // Horizontal boundary at middle of height
-      const boundaryY = CANVAS_HEIGHT / 2;
-      const incidentAngle = refrAngleDeg * Math.PI / 180; // mot normalen (lodräta y-axeln)
-      const v1 = waveSpeedParam;
-      const v2 = v1 * speedRatio; // långsammare i medium 2
-
-      // Snell's law
-      const sinTheta2 = (v2 / v1) * Math.sin(incidentAngle);
-      const theta2 = Math.asin(sinTheta2);
-
-      const k1 = omega / v1;
-      const k2 = omega / v2;
-
-      const k1x = k1 * Math.sin(incidentAngle);
-      const k1y = k1 * Math.cos(incidentAngle);
-
-      const k2x = k2 * Math.sin(theta2);
-      const k2y = k2 * Math.cos(theta2);
-
-      const phaseOffset = (k1y - k2y) * boundaryY;
-
-      // Diffraction Setup
-      let huygensSources = [];
-      const cx = CANVAS_WIDTH / 2;
-      const numPointsPerSlit = Math.max(3, Math.floor(slitWidth / 4));
-
-      if (mode === 'diffraction') {
-          // Single slit centered at cx
-          for (let i = 0; i < numPointsPerSlit; i++) {
-              const xPos = cx - slitWidth / 2 + (slitWidth * (i + 0.5)) / numPointsPerSlit;
-              huygensSources.push(xPos);
-          }
-      } else if (mode === 'diffraction-double') {
-          // Left Slit: centered at cx - separation/2
-          const centerLeft = cx - separation / 2;
-          for (let i = 0; i < numPointsPerSlit; i++) {
-              const xPos = centerLeft - slitWidth / 2 + (slitWidth * (i + 0.5)) / numPointsPerSlit;
-              huygensSources.push(xPos);
-          }
-          // Right Slit: centered at cx + separation/2
-          const centerRight = cx + separation / 2;
-          for (let i = 0; i < numPointsPerSlit; i++) {
-              const xPos = centerRight - slitWidth / 2 + (slitWidth * (i + 0.5)) / numPointsPerSlit;
-              huygensSources.push(xPos);
-          }
-      }
-
-      const maxAmp = (mode === 'double' || mode === 'diffraction-double') ? 2 : 1;
-
-      // Samplar varannan scenpixel, precis som förr (x = 2·fx, y = 2·fy)
-      for (let fy = 0; fy < FIELD_H; fy++) {
-        const y = fy * 2;
-        for (let fx = 0; fx < FIELD_W; fx++) {
-           const x = fx * 2;
-           let z = 0;
-
-           if (mode === 'planar') {
-               // Planar wave moving right
-               z = Math.sin(k * x - omega * t);
-           } else if (mode === 'refraction') {
-               if (y < boundaryY) {
-                   // Medium 1 (Top)
-                   z = Math.sin(k1x * x + k1y * y - omega * t);
-               } else {
-                   // Medium 2 (Bottom)
-                   z = Math.sin(k2x * x + k2y * y - omega * t + phaseOffset);
-               }
-           } else if (mode === 'diffraction' || mode === 'diffraction-double') {
-               if (y < boundaryY) {
-                   // Planar wave coming from top
-                   z = Math.sin(k * y - omega * t);
-               } else {
-                   // Huygens Principle: Sum of point sources from the slit
-                   let sum = 0;
-                   // Phase match at boundary: Incident wave at y=boundaryY has phase k*boundaryY - wt
-                   const incidentPhaseAtBoundary = k * boundaryY;
-
-                   for (const hs of huygensSources) {
-                       const dist = Math.sqrt((x - hs)**2 + (y - boundaryY)**2);
-                       // Each source emits spherical wave.
-                       sum += Math.sin(k * dist - omega * t + incidentPhaseAtBoundary);
-                   }
-
-                   // Normalize amplitude
-                   z = sum / Math.sqrt(huygensSources.length * (mode === 'diffraction-double' ? 1 : 2));
-               }
-           } else {
-               // Source 1
-               if (src1) {
-                   const d1 = Math.sqrt((x - src1.x)**2 + (y - src1.y)**2);
-                   z += Math.sin(k * d1 - omega * t);
-               }
-               // Source 2
-               if (src2) {
-                   const d2 = Math.sqrt((x - src2.x)**2 + (y - src2.y)**2);
-                   z += Math.sin(k * d2 - omega * t);
-               }
-           }
-
-           // Normalize z to 0-1 range for coloring
-           let val = (z + maxAmp) / (maxAmp * 2);
-
-           if (val < 0) val = 0;
-           if (val > 1) val = 1;
-
-           // Laborans-papper gradient: papper-kräm (låg amplitud) → mörk slate-blå (peak)
-           const r = Math.round(243 - val * 213);
-           const g = Math.round(238 - val * 180);
-           const b = Math.round(228 - val * 133);
-
-           const idx = (fy * FIELD_W + fx) * 4;
-           data[idx] = r; data[idx+1] = g; data[idx+2] = b; data[idx+3] = 255;
-        }
-      }
-      fieldCtx.putImageData(imgData, 0, 0);
-      ctx.imageSmoothingEnabled = false;
-      ctx.drawImage(fieldCanvas, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-
-      // Overlays
-      if (mode === 'refraction') {
-          // Draw boundary line (Horizontal)
-          ctx.beginPath();
-          ctx.strokeStyle = 'rgba(15, 22, 32, 0.4)';
-          ctx.setLineDash([5, 5]);
-          ctx.moveTo(0, boundaryY);
-          ctx.lineTo(CANVAS_WIDTH, boundaryY);
-          ctx.stroke();
-          ctx.setLineDash([]);
-
-          // Text Labels
-          ctx.fillStyle = 'rgba(15, 22, 32, 0.85)';
-          ctx.font = '14px Arial';
-          ctx.fillText(window.I18N ? I18N.t("Djupt vatten (v)") : "Djupt vatten (v)", 20, boundaryY - 10);
-          ctx.fillText((window.I18N ? I18N.t("Grunt vatten") : "Grunt vatten") + " (" + speedRatio.toFixed(2).replace(".", ",") + " · v)", 20, boundaryY + 20);
-
-          if (showRefractionAngles) {
-              const rayLen = 150;
-              const cx = CANVAS_WIDTH / 2;
-              const cy = boundaryY;
-
-              // Ray Geometry
-              // Incident Ray (From Top-Left)
-              const startX = cx - rayLen * Math.sin(incidentAngle);
-              const startY = cy - rayLen * Math.cos(incidentAngle);
-
-              // Refracted Ray (To Bottom-Right)
-              const endX = cx + rayLen * Math.sin(theta2);
-              const endY = cy + rayLen * Math.cos(theta2);
-
-              // Draw Rays
-              ctx.lineWidth = 3;
-              ctx.strokeStyle = 'rgba(255, 230, 0, 0.9)'; // Yellow
-              ctx.beginPath();
-              ctx.moveTo(startX, startY);
-              ctx.lineTo(cx, cy);
-              ctx.lineTo(endX, endY);
-              ctx.stroke();
-
-              // Draw Normal Line
-              ctx.lineWidth = 1;
-              ctx.strokeStyle = 'rgba(15, 22, 32, 0.55)';
-              ctx.setLineDash([4, 4]);
-              ctx.beginPath();
-              ctx.moveTo(cx, cy - rayLen);
-              ctx.lineTo(cx, cy + rayLen);
-              ctx.stroke();
-              ctx.setLineDash([]);
-
-              // Draw Angle Arcs
-              const arcRadius = 40;
-
-              // Incident Angle Arc (From Normal-Up to Incident Ray)
-              // Normal Up is -90 deg (-PI/2). Incident Ray comes from -90 - theta.
-              ctx.beginPath();
-              ctx.strokeStyle = '#0f1620';
-              ctx.arc(cx, cy, arcRadius, -Math.PI / 2 - incidentAngle, -Math.PI / 2);
-              ctx.stroke();
-
-              // Refracted Angle Arc (From Refracted Ray to Normal-Down)
-              // Normal Down is 90 deg (PI/2). Refracted Ray is at 90 - theta.
-              ctx.beginPath();
-              ctx.arc(cx, cy, arcRadius, Math.PI / 2 - theta2, Math.PI / 2);
-              ctx.stroke();
-
-              // Labels
-              ctx.fillStyle = '#0f1620';
-              ctx.font = 'bold 16px Arial';
-              const deg1 = Math.round(incidentAngle * 180 / Math.PI);
-              const deg2 = Math.round(theta2 * 180 / Math.PI);
-              ctx.fillText(`${deg1}°`, cx - 35, cy - 50);
-              ctx.fillText(`${deg2}°`, cx + 20, cy + 50);
-          }
-      }
-
-      if (mode === 'diffraction' || mode === 'diffraction-double') {
-           // Draw Barrier
-           ctx.fillStyle = '#0f1620';
-           const cx = CANVAS_WIDTH / 2;
-
-           if (mode === 'diffraction') {
-                // Left part
-                ctx.fillRect(0, boundaryY - 2, cx - slitWidth / 2, 4);
-                // Right part
-                ctx.fillRect(cx + slitWidth / 2, boundaryY - 2, CANVAS_WIDTH - (cx + slitWidth / 2), 4);
-           } else {
-                // Double Slit Barriers
-                // Left Wall: 0 to (cx - sep/2 - w/2)
-                ctx.fillRect(0, boundaryY - 2, (cx - separation/2) - slitWidth/2, 4);
-                // Center Wall: (cx - sep/2 + w/2) to (cx + sep/2 - w/2)
-                const centerStart = (cx - separation/2) + slitWidth/2;
-                const centerEnd = (cx + separation/2) - slitWidth/2;
-                if (centerEnd > centerStart) {
-                    ctx.fillRect(centerStart, boundaryY - 2, centerEnd - centerStart, 4);
-                }
-                // Right Wall: (cx + sep/2 + w/2) to End
-                const rightStart = (cx + separation/2) + slitWidth/2;
-                ctx.fillRect(rightStart, boundaryY - 2, CANVAS_WIDTH - rightStart, 4);
-           }
-      }
-
-      const drawLines = (type, color) => {
-        const lines = calculateInterferenceLines(wavelength, separation, type);
-        ctx.strokeStyle = color;
-        ctx.lineWidth = 2;
-        ctx.setLineDash([5, 5]);
-
-        lines.forEach(curve => {
-            if (curve.length < 2) return;
-
-            if (mode === 'diffraction-double') {
-                let started = false;
-                ctx.beginPath();
-                for (let i = 0; i < curve.length; i++) {
-                    if (curve[i].y > boundaryY) {
-                        if (!started) {
-                            ctx.moveTo(curve[i].x, curve[i].y);
-                            started = true;
-                        } else {
-                            ctx.lineTo(curve[i].x, curve[i].y);
-                        }
-                    }
-                }
-                ctx.stroke();
-            } else {
-                ctx.beginPath();
-                ctx.moveTo(curve[0].x, curve[0].y);
-                for (let i = 1; i < curve.length; i++) {
-                    ctx.lineTo(curve[i].x, curve[i].y);
-                }
-                ctx.stroke();
-            }
-        });
-        ctx.setLineDash([]);
-      };
-
-      if (mode === 'double' || mode === 'diffraction-double') {
-        if (showNodalLines) drawLines('nodal', 'rgba(255, 50, 50, 0.9)');
-        if (showMaximaLines) drawLines('maxima', 'rgba(50, 255, 50, 0.9)');
-      }
-
-      if (mode !== 'planar' && mode !== 'refraction' && mode !== 'diffraction' && mode !== 'diffraction-double') {
-          ctx.fillStyle = '#ffcc00';
-          for (const src of sources) {
-            ctx.beginPath();
-            ctx.arc(src.x, src.y, 6, 0, Math.PI * 2);
-            ctx.fill();
-          }
-      }
-    }
-  };
-
-  const draw3D = (ctx, t, sources) => {
-    const cx = CANVAS_WIDTH / 2;
-    const cy = CANVAS_HEIGHT / 2;
-
-    // Background
-    ctx.fillStyle = '#f3eee4';
-    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-
-    // Get Camera Rotation
-    const { h, v } = cameraAngleRef.current;
-    const cosH = Math.cos(h);
-    const sinH = Math.sin(h);
-    const cosV = Math.cos(v);
-    const sinV = Math.sin(v);
-
-    // Projection Function
-    const project = (x, y, z) => {
-        const dx = x - cx;
-        const dy = y - cy;
-
-        // Rotate Azimuth
-        const xRot = dx * cosH - dy * sinH;
-        const yRot = dx * sinH + dy * cosH;
-
-        // Rotate Elevation & Project
-        const px = cx + xRot;
-        const py = cy + yRot * sinV - z * 3 * cosV;
-
-        return { x: px, y: py, depth: yRot }; // Return depth for sorting
-    };
-
-    // --- Doppler 3D Visualization (Simple Rings) ---
-    if (mode === 'doppler') {
-       const currentWavefronts = wavefrontsRef.current;
-       ctx.strokeStyle = 'rgba(15, 22, 32, 0.7)';
-       ctx.lineWidth = 1;
-
-       for (const wf of currentWavefronts) {
-        const age = t - wf.emitTime;
-        if (age < 0) continue;
-        const radius = age * waveSpeedParam;
-
-        ctx.beginPath();
-        for (let a = 0; a <= Math.PI * 2; a += 0.2) {
-            const wx = wf.x + radius * Math.cos(a);
-            const wy = wf.y + radius * Math.sin(a);
-            const { x: px, y: py } = project(wx, wy, 0);
-
-            if (a === 0) ctx.moveTo(px, py);
-            else ctx.lineTo(px, py);
-        }
-        ctx.closePath();
-        ctx.stroke();
-       }
-
-       // Draw source
-       ctx.fillStyle = '#ffcc00';
-       ctx.strokeStyle = '#0f1620';
-       ctx.lineWidth = 1.5;
-       for (const src of sources) {
-          const { x: px, y: py } = project(src.x, src.y, 0);
-          ctx.beginPath();
-          ctx.arc(px, py, 4, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.stroke();
-       }
-       return;
-    }
-
-    // --- Standard Wave Surface (Filled Mesh) ---
-    const wavelength = waveSpeedParam / frequency;
-    const k = (2 * Math.PI) / wavelength;
-    const omega = 2 * Math.PI * frequency;
-
-    // Refraction constants for 3D
-    const boundaryY = CANVAS_HEIGHT / 2;
-    const incidentAngle = refrAngleDeg * Math.PI / 180;
-    const v1 = waveSpeedParam;
-    const v2 = v1 * speedRatio;
-    const sinTheta2 = (v2 / v1) * Math.sin(incidentAngle);
-    const theta2 = Math.asin(sinTheta2);
-    const k1 = omega / v1;
-    const k2 = omega / v2;
-
-    // Normal is Y axis
-    const k1x = k1 * Math.sin(incidentAngle);
-    const k1y = k1 * Math.cos(incidentAngle);
-    const k2x = k2 * Math.sin(theta2);
-    const k2y = k2 * Math.cos(theta2);
-    const phaseOffset = (k1y - k2y) * boundaryY;
-
-    // Diffraction Setup for 3D
-    let huygensSources = [];
-    const numPointsPerSlit = Math.max(3, Math.floor(slitWidth / 4));
-
-    if (mode === 'diffraction') {
-        for (let i = 0; i < numPointsPerSlit; i++) {
-            const xPos = cx - slitWidth / 2 + (slitWidth * (i + 0.5)) / numPointsPerSlit;
-            huygensSources.push(xPos);
-        }
-    } else if (mode === 'diffraction-double') {
-          // Left Slit
-          const centerLeft = cx - separation / 2;
-          for (let i = 0; i < numPointsPerSlit; i++) {
-              const xPos = centerLeft - slitWidth / 2 + (slitWidth * (i + 0.5)) / numPointsPerSlit;
-              huygensSources.push(xPos);
-          }
-          // Right Slit
-          const centerRight = cx + separation / 2;
-          for (let i = 0; i < numPointsPerSlit; i++) {
-              const xPos = centerRight - slitWidth / 2 + (slitWidth * (i + 0.5)) / numPointsPerSlit;
-              huygensSources.push(xPos);
-          }
-    }
-    const incidentPhaseAtBoundary = k * boundaryY;
-
-
-    // Increased resolution for smoother surface (150x150)
-    const cols = 150;
-    const rows = 150;
-    const stepX = CANVAS_WIDTH / cols;
-    const stepY = CANVAS_HEIGHT / rows;
-
-    // 1. Calculate vertices and heights
-    const vertices = [];
-
-    for (let r = 0; r <= rows; r++) {
-        for (let c = 0; c <= cols; c++) {
-            const x = c * stepX;
-            const y = r * stepY;
-            let z = 0;
-
-            if (mode === 'planar') {
-                z = Math.sin(k * x - omega * t) * 5;
-            } else if (mode === 'refraction') {
-                if (y < boundaryY) {
-                   z = Math.sin(k1x * x + k1y * y - omega * t) * 5;
-                } else {
-                   z = Math.sin(k2x * x + k2y * y - omega * t + phaseOffset) * 5;
-                }
-            } else if (mode === 'diffraction' || mode === 'diffraction-double') {
-                if (y < boundaryY) {
-                    z = Math.sin(k * y - omega * t) * 5;
-                } else {
-                    let sum = 0;
-                    for (const hs of huygensSources) {
-                        const dist = Math.sqrt((x - hs)**2 + (y - boundaryY)**2);
-                        sum += Math.sin(k * dist - omega * t + incidentPhaseAtBoundary);
-                    }
-                    const numSrc = mode === 'diffraction-double' ? huygensSources.length / 2 : huygensSources.length;
-                    z = (sum / Math.sqrt(numSrc * 2)) * 5;
-                }
-            } else {
-                for (const src of sources) {
-                    const dist = Math.sqrt((x - src.x)**2 + (y - src.y)**2);
-                    // Attenuation for visual fade at edges
-                    const d = Math.max(0, 1000 - dist)/1000;
-                    z += Math.sin(k * dist - omega * t) * 5 * d;
-                }
-            }
-
-            const p = project(x, y, z);
-            vertices.push({ x, y, z, px: p.x, py: p.y, depth: p.depth });
-        }
-    }
-
-    // 2. Create Quads (Faces)
-    const quads = [];
-
-    for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-            const idx = r * (cols + 1) + c;
-            const p1 = idx;
-            const p2 = idx + 1;
-            const p3 = idx + (cols + 1) + 1;
-            const p4 = idx + (cols + 1);
-
-            const v1 = vertices[p1];
-            const v2 = vertices[p2];
-            const v3 = vertices[p3];
-            const v4 = vertices[p4];
-
-            // Use average depth for Painter's Algorithm sorting
-            const avgDepth = (v1.depth + v2.depth + v3.depth + v4.depth) / 4;
-            const avgZ = (v1.z + v2.z + v3.z + v4.z) / 4;
-
-            quads.push({
-                p1, p2, p3, p4,
-                avgDepth,
-                avgZ,
-                centerX: (v1.x + v2.x + v3.x + v4.x)/4,
-                centerY: (v1.y + v2.y + v3.y + v4.y)/4
-            });
-        }
-    }
-
-    // 3. Sort Quads (Painter's Algorithm)
-    quads.sort((a, b) => a.avgDepth - b.avgDepth);
-
-    // 4. Draw Quads
-    const maxAmp = (mode === 'double' || mode === 'diffraction-double') ? 10 : 5;
-
-    for (const q of quads) {
-        const v1 = vertices[q.p1];
-        const v2 = vertices[q.p2];
-        const v3 = vertices[q.p3];
-        const v4 = vertices[q.p4];
-
-        // Color Logic
-        // Normalize Z: -max to +max map to 0-1
-        let val = (q.avgZ + maxAmp) / (maxAmp * 2);
-        if (val < 0) val = 0; if (val > 1) val = 1;
-
-        // Laborans-papper gradient: papper-kräm (låg amplitud) → mörk slate-blå (peak)
-        // Använder linjär interpolation mellan #f3eee4 (cream) och #1e3a5f (deep blue)
-        const red = Math.round(243 - val * 213);
-        const green = Math.round(238 - val * 180);
-        const blue = Math.round(228 - val * 133);
-
-        const fillStyle = `rgb(${red}, ${green}, ${blue})`;
-
-        ctx.fillStyle = fillStyle;
-        ctx.strokeStyle = fillStyle; // stroke with same color to fill gaps
-        ctx.lineWidth = 1;
-
-        ctx.beginPath();
-        ctx.moveTo(v1.px, v1.py);
-        ctx.lineTo(v2.px, v2.py);
-        ctx.lineTo(v3.px, v3.py);
-        ctx.lineTo(v4.px, v4.py);
-        ctx.closePath();
-        ctx.fill();
-        ctx.stroke();
-    }
-
-    // Draw boundary line in 3D
-    if (mode === 'refraction') {
-        const pStart = project(0, boundaryY, 0);
-        const pEnd = project(CANVAS_WIDTH, boundaryY, 0);
-        ctx.beginPath();
-        ctx.strokeStyle = 'rgba(15, 22, 32, 0.5)';
-        ctx.lineWidth = 2;
-        ctx.setLineDash([5, 5]);
-        ctx.moveTo(pStart.x, pStart.y);
-        ctx.lineTo(pEnd.x, pEnd.y);
-        ctx.stroke();
-        ctx.setLineDash([]);
-
-        if (showRefractionAngles) {
-            const rayLen = 150;
-            const cx = CANVAS_WIDTH / 2;
-            const cy = boundaryY;
-            const zOff = 10; // Draw slightly above waves
-
-            // Calculate 3D points
-            const startX = cx - rayLen * Math.sin(incidentAngle);
-            const startY = cy - rayLen * Math.cos(incidentAngle);
-            const endX = cx + rayLen * Math.sin(theta2);
-            const endY = cy + rayLen * Math.cos(theta2);
-
-            const pRayStart = project(startX, startY, zOff);
-            const pCenter = project(cx, cy, zOff);
-            const pRayEnd = project(endX, endY, zOff);
-            const pNormStart = project(cx, cy - rayLen, zOff);
-            const pNormEnd = project(cx, cy + rayLen, zOff);
-
-            // Rays
-            ctx.lineWidth = 3;
-            ctx.strokeStyle = 'rgba(255, 230, 0, 0.9)';
-            ctx.beginPath();
-            ctx.moveTo(pRayStart.x, pRayStart.y);
-            ctx.lineTo(pCenter.x, pCenter.y);
-            ctx.lineTo(pRayEnd.x, pRayEnd.y);
-            ctx.stroke();
-
-            // Normal
-            ctx.lineWidth = 1;
-            ctx.strokeStyle = 'rgba(15, 22, 32, 0.55)';
-            ctx.setLineDash([5, 5]);
-            ctx.beginPath();
-            ctx.moveTo(pNormStart.x, pNormStart.y);
-            ctx.lineTo(pNormEnd.x, pNormEnd.y);
-            ctx.stroke();
-            ctx.setLineDash([]);
-        }
-    }
-
-    if (mode === 'diffraction' || mode === 'diffraction-double') {
-        // Helper to draw plate
-        const drawPlate = (xStart, xEnd) => {
-             const p1 = project(xStart, boundaryY - 5, 5);
-             const p2 = project(xEnd, boundaryY - 5, 5);
-             const p3 = project(xEnd, boundaryY + 5, 5);
-             const p4 = project(xStart, boundaryY + 5, 5);
-
-             ctx.beginPath();
-             ctx.moveTo(p1.x, p1.y);
-             ctx.lineTo(p2.x, p2.y);
-             ctx.lineTo(p3.x, p3.y);
-             ctx.lineTo(p4.x, p4.y);
-             ctx.closePath();
-             ctx.fill();
-             ctx.stroke();
-        };
-
-        ctx.fillStyle = 'rgba(20, 20, 20, 0.9)';
-        ctx.strokeStyle = '#555';
-        ctx.lineWidth = 1;
-
-        if (mode === 'diffraction') {
-            drawPlate(0, cx - slitWidth/2);
-            drawPlate(cx + slitWidth/2, CANVAS_WIDTH);
-        } else {
-             // Left Wall: 0 to (cx - sep/2 - w/2)
-             drawPlate(0, (cx - separation/2) - slitWidth/2);
-             // Center Wall
-             const centerStart = (cx - separation/2) + slitWidth/2;
-             const centerEnd = (cx + separation/2) - slitWidth/2;
-             if (centerEnd > centerStart) {
-                drawPlate(centerStart, centerEnd);
-             }
-             // Right Wall
-             const rightStart = (cx + separation/2) + slitWidth/2;
-             drawPlate(rightStart, CANVAS_WIDTH);
-        }
-    }
-
-    // Draw Lines in 3D (Analytical)
-    const draw3DLines = (type, color) => {
-        const lines = calculateInterferenceLines(wavelength, separation, type);
-        ctx.strokeStyle = color;
-        ctx.lineWidth = 3;
-
-        lines.forEach(curve => {
-            if (curve.length < 2) return;
-            ctx.beginPath();
-            let started = false;
-            for (let i = 0; i < curve.length; i++) {
-                 // For diffraction, clip before boundary
-                 if (mode === 'diffraction-double' && curve[i].y <= boundaryY) continue;
-
-                 let p = project(curve[i].x, curve[i].y, 0);
-                 if (!started) {
-                     ctx.moveTo(p.x, p.y);
-                     started = true;
-                 } else {
-                     ctx.lineTo(p.x, p.y);
-                 }
-            }
-            if (started) ctx.stroke();
-        });
-    };
-
-    if (mode === 'double' || mode === 'diffraction-double') {
-        if (showNodalLines) draw3DLines('nodal', 'rgba(255, 50, 50, 0.9)');
-        if (showMaximaLines) draw3DLines('maxima', 'rgba(50, 255, 50, 0.9)');
-    }
-
-    // Draw sources (last, to be on top-ish)
-    if (mode !== 'planar' && mode !== 'refraction' && mode !== 'diffraction' && mode !== 'diffraction-double') {
-        ctx.fillStyle = '#ffcc00';
-        ctx.strokeStyle = '#0f1620';
-        ctx.lineWidth = 1;
-        for (const src of sources) {
-            // Calculate z roughly at source location (approximation)
-            const { x: px, y: py } = project(src.x, src.y, 10);
-            ctx.beginPath();
-            ctx.arc(px, py, 6, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.stroke();
-        }
-    }
-  };
-
-  const animate = (timestamp) => {
-    if (isPlaying) {
-      // Delta time in seconds
-      const dt = 0.016;
-      timeRef.current += dt * sourceSpeed;
-
-      // Handle Doppler Emission
-      if (mode === 'doppler') {
-          const emissionPeriod = 1 / frequency;
-          if (timeRef.current - lastEmitTimeRef.current >= emissionPeriod) {
-            const sources = getSources(timeRef.current);
-            // Add new wavefront at current source position
-            wavefrontsRef.current.push({
-                x: sources[0].x,
-                y: sources[0].y,
-                emitTime: timeRef.current
-            });
-            lastEmitTimeRef.current = timeRef.current;
-
-            // Cleanup old wavefronts
-            if (wavefrontsRef.current.length > 50) {
-                wavefrontsRef.current.shift();
-            }
-          }
-      }
-    }
-
-    const canvas = canvasRef.current;
-    if (canvas) {
-        const ctx = canvas.getContext('2d');
-        if (ctx) {
-            const sources = getSources(timeRef.current);
-            if (viewMode === '2D') {
-                draw2D(ctx, timeRef.current, sources);
-            } else {
-                draw3D(ctx, timeRef.current, sources);
-            }
-        }
-    }
-
-    requestRef.current = requestAnimationFrame(animate);
-  };
-
-  useEffect(() => {
-    requestRef.current = requestAnimationFrame(animate);
-    return () => {
-        if (requestRef.current) cancelAnimationFrame(requestRef.current);
-    };
-  }, [isPlaying, viewMode, mode, showNodalLines, showMaximaLines, showRefractionAngles, frequency, separation, sourceSpeed, waveSpeedParam, slitWidth, refrAngleDeg, speedRatio]);
-
-
-  return (
-    <div className="vs-root flex h-screen bg-gray-900 text-white font-sans overflow-hidden">
-      {/* Sidebar Controls */}
-      <div className="vs-panel w-80 p-6 flex flex-col gap-6 bg-gray-800 border-r border-gray-700 shadow-xl overflow-y-auto z-10">
-        <h1 className="text-2xl font-bold text-blue-400">Vågsimulator</h1>
-
-        {/* Play/Pause */}
-        <button
-            onClick={() => setIsPlaying(!isPlaying)}
-            className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
-                isPlaying ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'
-            }`}
-        >
-            {isPlaying ? 'Pausa' : 'Starta'}
-        </button>
-
-        {/* View Mode */}
-        <div className="flex flex-col gap-2">
-            <label className="text-sm text-gray-400 uppercase tracking-wide">Vy</label>
-            <div className="flex bg-gray-700 rounded-lg p-1">
-                <button
-                    onClick={() => setViewMode('2D')}
-                    className={`flex-1 py-1 rounded-md text-sm transition-all ${viewMode === '2D' ? 'bg-blue-500 shadow' : 'text-gray-300 hover:text-white'}`}
-                >
-                    2D
-                </button>
-                <button
-                    onClick={() => setViewMode('3D')}
-                    className={`flex-1 py-1 rounded-md text-sm transition-all ${viewMode === '3D' ? 'bg-blue-500 shadow' : 'text-gray-300 hover:text-white'}`}
-                >
-                    3D
-                </button>
-            </div>
-        </div>
-
-        {/* Source Settings */}
-        <div className="flex flex-col gap-2">
-            <label className="text-sm text-gray-400 uppercase tracking-wide">Vågkällor</label>
-
-            <select
-                value={mode}
-                onChange={(e) => setMode(e.target.value)}
-                className="w-full bg-gray-700 text-white p-2 rounded-lg border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
-            >
-                <option value="single">En punktkälla</option>
-                <option value="double">Två punktkällor</option>
-                <option value="planar">Plana vågor</option>
-                <option value="refraction">Refraktion</option>
-                <option value="diffraction">Diffraktion: en öppning</option>
-                <option value="diffraction-double">Diffraktion: två öppningar</option>
-                <option value="doppler">Dopplereffekt</option>
-            </select>
-
-            {(mode === 'double' || mode === 'diffraction-double') && (
-                <div className="flex flex-col gap-2 mt-2">
-                    <div className="flex items-center gap-3">
-                        <input
-                            type="checkbox"
-                            id="nodal"
-                            checked={showNodalLines}
-                            onChange={(e) => setShowNodalLines(e.target.checked)}
-                            className="w-4 h-4 rounded border-gray-600 text-blue-500 focus:ring-blue-500 bg-gray-700"
-                        />
-                        <label htmlFor="nodal" className="text-sm">Visa nodlinjer (röd)</label>
-                    </div>
-                    <div className="flex items-center gap-3">
-                        <input
-                            type="checkbox"
-                            id="maxima"
-                            checked={showMaximaLines}
-                            onChange={(e) => setShowMaximaLines(e.target.checked)}
-                            className="w-4 h-4 rounded border-gray-600 text-green-500 focus:ring-green-500 bg-gray-700"
-                        />
-                        <label htmlFor="maxima" className="text-sm">Visa maximilinjer (grön)</label>
-                    </div>
-                </div>
-            )}
-
-            {mode === 'refraction' && (
-                <div className="flex items-center gap-3 mt-2">
-                    <input
-                        type="checkbox"
-                        id="angles"
-                        checked={showRefractionAngles}
-                        onChange={(e) => setShowRefractionAngles(e.target.checked)}
-                        className="w-4 h-4 rounded border-gray-600 text-yellow-500 focus:ring-yellow-500 bg-gray-700"
-                    />
-                    <label htmlFor="angles" className="text-sm">Visa vinklar</label>
-                </div>
-            )}
-        </div>
-
-        {/* Sliders */}
-        <div className="flex flex-col gap-4">
-            <div>
-                <div className="flex justify-between text-sm mb-1">
-                    <span className="text-gray-300">Frekvens</span>
-                    <span className="text-gray-400">{frequency.toFixed(1).replace('.', ',')} Hz</span>
-                </div>
-                <input
-                    type="range" min="0.5" max="5" step="0.1"
-                    value={frequency}
-                    onChange={(e) => setFrequency(parseFloat(e.target.value))}
-                    className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
-                />
-            </div>
-
-            <div>
-                <div className="flex justify-between text-sm mb-1">
-                    <span className="text-gray-300">Våglängd (i djupt vatten)</span>
-                    <span className="text-gray-400">{(waveSpeedParam / frequency).toFixed(0)} px</span>
-                </div>
-                <input
-                    type="range" min="20" max="200" step="1"
-                    value={waveSpeedParam / frequency}
-                    onChange={(e) => {
-                         const lambda = parseFloat(e.target.value);
-                         if (lambda > 0) setFrequency(waveSpeedParam / lambda);
-                    }}
-                    className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
-                />
-            </div>
-
-            <div>
-                <div className="flex justify-between text-sm mb-1">
-                    <span className="text-gray-300">Simuleringshastighet</span>
-                    <span className="text-gray-400">{sourceSpeed.toFixed(1).replace('.', ',')}x</span>
-                </div>
-                <input
-                    type="range" min="0" max="3" step="0.1"
-                    value={sourceSpeed}
-                    onChange={(e) => setSourceSpeed(parseFloat(e.target.value))}
-                    className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
-                />
-            </div>
-
-            {(mode === 'double' || mode === 'diffraction-double') && (
-                <div>
-                    <div className="flex justify-between text-sm mb-1">
-                        <span className="text-gray-300">Avstånd</span>
-                        <span className="text-gray-400">{separation} px</span>
-                    </div>
-                    <input
-                        type="range" min="50" max="400" step="10"
-                        value={separation}
-                        onChange={(e) => setSeparation(parseFloat(e.target.value))}
-                        className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
-                    />
-                </div>
-            )}
-
-            {mode === 'refraction' && (
-                <div>
-                    <div className="flex justify-between text-sm mb-1">
-                        <span className="text-gray-300">Infallsvinkel <em>i</em></span>
-                        <span className="text-gray-400">{refrAngleDeg}°</span>
-                    </div>
-                    <input
-                        type="range" min="0" max="70" step="1"
-                        value={refrAngleDeg}
-                        onChange={(e) => setRefrAngleDeg(parseFloat(e.target.value))}
-                        className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
-                    />
-                </div>
-            )}
-
-            {mode === 'refraction' && (
-                <div>
-                    <div className="flex justify-between text-sm mb-1">
-                        <span className="text-gray-300">Fart i grunt vatten, <em>v</em><sub>2</sub> / <em>v</em><sub>1</sub></span>
-                        <span className="text-gray-400">{speedRatio.toFixed(2).replace('.', ',')}</span>
-                    </div>
-                    <input
-                        type="range" min="0.3" max="1" step="0.05"
-                        value={speedRatio}
-                        onChange={(e) => setSpeedRatio(parseFloat(e.target.value))}
-                        className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
-                    />
-                </div>
-            )}
-
-            {(mode === 'diffraction' || mode === 'diffraction-double') && (
-                <div>
-                    <div className="flex justify-between text-sm mb-1">
-                        <span className="text-gray-300">Öppningsbredd</span>
-                        <span className="text-gray-400">{slitWidth} px</span>
-                    </div>
-                    <input
-                        type="range" min="20" max="300" step="5"
-                        value={slitWidth}
-                        onChange={(e) => setSlitWidth(parseFloat(e.target.value))}
-                        className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
-                    />
-                </div>
-            )}
-        </div>
-      </div>
-
-      {/* Main Canvas Area */}
-      <div ref={stageRef} className="vs-stage flex-1 relative flex items-center justify-center cursor-crosshair"
-           style={{ background: 'var(--lab-bg)', userSelect: 'none' }}>
-         <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
-                 title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
-           {isFullscreen ? (
-             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-               <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
-             </svg>
-           ) : (
-             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-               <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
-             </svg>
-           )}
-         </button>
-         {isFullscreen && (
-           <div className="scene-toggles">
-             <div className="st-title">Vågkällor</div>
-             <select value={mode} onChange={(e) => setMode(e.target.value)}>
-               <option value="single">En punktkälla</option>
-               <option value="double">Två punktkällor</option>
-               <option value="planar">Plana vågor</option>
-               <option value="refraction">Refraktion</option>
-               <option value="diffraction">Diffraktion: en öppning</option>
-               <option value="diffraction-double">Diffraktion: två öppningar</option>
-               <option value="doppler">Dopplereffekt</option>
-             </select>
-             {(mode === 'double' || mode === 'diffraction-double') && (
-               <React.Fragment>
-                 <label htmlFor="fs-nodal">
-                   <input type="checkbox" id="fs-nodal" checked={showNodalLines}
-                          onChange={(e) => setShowNodalLines(e.target.checked)} />
-                   Visa nodlinjer (röd)
-                 </label>
-                 <label htmlFor="fs-maxima">
-                   <input type="checkbox" id="fs-maxima" checked={showMaximaLines}
-                          onChange={(e) => setShowMaximaLines(e.target.checked)} />
-                   Visa maximilinjer (grön)
-                 </label>
-               </React.Fragment>
-             )}
-             {mode === 'refraction' && (
-               <label htmlFor="fs-angles">
-                 <input type="checkbox" id="fs-angles" checked={showRefractionAngles}
-                        onChange={(e) => setShowRefractionAngles(e.target.checked)} />
-                 Visa vinklar
-               </label>
-             )}
-             <div className="st-title mt">Vy</div>
-             <div className="st-viewrow">
-               <button className={viewMode === '2D' ? 'btn-toggle active' : 'btn-toggle'}
-                       onClick={() => setViewMode('2D')}>2D</button>
-               <button className={viewMode === '3D' ? 'btn-toggle active' : 'btn-toggle'}
-                       onClick={() => setViewMode('3D')}>3D</button>
-             </div>
-             <div className="st-actions">
-               <button className={isPlaying ? 'btn-toggle' : 'btn-toggle active'}
-                       onClick={() => setIsPlaying(!isPlaying)}>
-                 {isPlaying ? 'Pausa' : 'Starta'}
-               </button>
-             </div>
-           </div>
-         )}
-         {isFullscreen && (
-           <React.Fragment>
-             <div className={`fs-controls ${fsControlsOpen ? '' : 'collapsed'}`}>
-               <div className="fs-row">
-                 <span className="fs-label">Frekvens</span>
-                 <input type="range" min="0.5" max="5" step="0.1" value={frequency}
-                        onChange={(e) => setFrequency(parseFloat(e.target.value))} />
-                 <span className="fs-value">{frequency.toFixed(1).replace('.', ',')} Hz</span>
-               </div>
-               <div className="fs-row">
-                 <span className="fs-label">Våglängd (i djupt vatten)</span>
-                 <input type="range" min="20" max="200" step="1" value={waveSpeedParam / frequency}
-                        onChange={(e) => {
-                          const lambda = parseFloat(e.target.value);
-                          if (lambda > 0) setFrequency(waveSpeedParam / lambda);
-                        }} />
-                 <span className="fs-value">{(waveSpeedParam / frequency).toFixed(0)} px</span>
-               </div>
-               <div className="fs-row">
-                 <span className="fs-label">Simuleringshastighet</span>
-                 <input type="range" min="0" max="3" step="0.1" value={sourceSpeed}
-                        onChange={(e) => setSourceSpeed(parseFloat(e.target.value))} />
-                 <span className="fs-value">{sourceSpeed.toFixed(1).replace('.', ',')}x</span>
-               </div>
-               {(mode === 'double' || mode === 'diffraction-double') && (
-                 <div className="fs-row">
-                   <span className="fs-label">Avstånd</span>
-                   <input type="range" min="50" max="400" step="10" value={separation}
-                          onChange={(e) => setSeparation(parseFloat(e.target.value))} />
-                   <span className="fs-value">{separation} px</span>
-                 </div>
-               )}
-               {mode === 'refraction' && (
-                 <div className="fs-row">
-                   <span className="fs-label">Infallsvinkel <em>i</em></span>
-                   <input type="range" min="0" max="70" step="1" value={refrAngleDeg}
-                          onChange={(e) => setRefrAngleDeg(parseFloat(e.target.value))} />
-                   <span className="fs-value">{refrAngleDeg}°</span>
-                 </div>
-               )}
-               {mode === 'refraction' && (
-                 <div className="fs-row">
-                   <span className="fs-label"><em>v</em><sub>2</sub> / <em>v</em><sub>1</sub></span>
-                   <input type="range" min="0.3" max="1" step="0.05" value={speedRatio}
-                          onChange={(e) => setSpeedRatio(parseFloat(e.target.value))} />
-                   <span className="fs-value">{speedRatio.toFixed(2).replace('.', ',')}</span>
-                 </div>
-               )}
-               {(mode === 'diffraction' || mode === 'diffraction-double') && (
-                 <div className="fs-row">
-                   <span className="fs-label">Öppningsbredd</span>
-                   <input type="range" min="20" max="300" step="5" value={slitWidth}
-                          onChange={(e) => setSlitWidth(parseFloat(e.target.value))} />
-                   <span className="fs-value">{slitWidth} px</span>
-                 </div>
-               )}
-             </div>
-             <button
-               className="fs-toggle-handle"
-               onClick={() => setFsControlsOpen(o => !o)}
-               title={fsControlsOpen ? 'Dölj reglage' : 'Visa reglage'}
-               aria-label={fsControlsOpen ? 'Dölj reglage' : 'Visa reglage'}
-               aria-expanded={fsControlsOpen}>
-               <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
-                    style={{ transform: fsControlsOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}>
-                 <path d="M6 9l6 6 6-6"/>
-               </svg>
-               <span>{fsControlsOpen ? 'Dölj reglage' : 'Reglage'}</span>
-             </button>
-           </React.Fragment>
-         )}
-         <canvas
-            ref={canvasRef}
-            width={800}
-            height={600}
-            className="rounded"
-            style={{ background: 'var(--lab-bg)', maxWidth: '100%', maxHeight: '100%', border: '1px solid var(--lab-line-strong)' }}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseLeave}
-         />
-         {viewMode === '3D' && (
-             <div className="absolute bottom-4 right-4 bg-black/60 text-white px-3 py-1 rounded text-xs pointer-events-none">
-                 Dra för att rotera kameran
-             </div>
-         )}
-      </div>
-    </div>
-  );
+// ═══════════════════════════════════════════════════════════════════════
+//  Vågsimulatorn: en vågtank sedd uppifrån (omgjord 2026-11-10)
+// ═══════════════════════════════════════════════════════════════════════
+// Skala: 1 px på scenen = 1 mm i tanken, alltså en tank på 80 × 60 cm.
+// Vågornas fart är 0,20 m/s (200 px/s), vilket på grunt vatten svarar mot
+// djupet h = v²/g ≈ 4,1 mm. Lägena delas mellan tre teoriavsnitt och väljs
+// med adressen:
+//   fysik2-vagsimulator.html                  fy2-2.13 (punktkälla, plana vågor, brytning)
+//   fysik2-vagsimulator.html?lage=interferens fy2-2.14 (två källor, en och två öppningar)
+//   fysik2-vagsimulator.html?lage=doppler     fy2-2.12 (dopplereffekt, överljudsfart)
+//
+// Alla lägen utom dopplereffekten är tidsharmoniska: utslaget i en punkt är
+// z = S · cos φ − C · sin φ, där φ = ω · t. S och C räknas fram EN gång när
+// en parameter ändras (byggFalt), och varje bildruta blir då billig även
+// för diffraktionen med många Huygens-källor. Bildrutan ska hålla sig under
+// ~10 ms, annars når sidan aldrig network-idle i Puppeteer.
+
+const W = 800, H = 600;           // scenens koordinater (mm)
+const V = 200;                    // vågornas fart (px/s = mm/s)
+const G = 9.82;
+const H_DJUP = (0.2 * 0.2) / G;   // djup som ger v = 0,20 m/s (m)
+const FS = 2, FW = W / FS, FH = H / FS;           // fältets upplösning
+const G3 = 5, GX3 = W / G3, GY3 = H / G3;         // 3D-nätets upplösning
+const RAM = 14;                                    // tankens kant (px)
+const YB_BRYT = 300, YB_SPALT = 210;
+
+const LAGEN = {
+    vatten: ['single', 'planar', 'refraction'],
+    interferens: ['double', 'diffraction', 'diffraction-double'],
+    doppler: ['doppler'],
+};
+const NAMN = {
+    single: ['En punktkälla', 'cirkulära vågor'],
+    planar: ['Plana vågor', 'raka vågfronter'],
+    refraction: ['Brytning', 'djupt och grunt vatten'],
+    double: ['Två punktkällor', 'i fas'],
+    diffraction: ['En öppning', 'diffraktion'],
+    'diffraction-double': ['Två öppningar', 'dubbelspalt'],
+    doppler: ['Rörlig källa', 'dopplereffekt'],
+};
+const lageFranAdress = () => {
+    const l = (new URLSearchParams(location.search).get('lage') || '').toLowerCase();
+    return LAGEN[l] ? l : 'vatten';
 };
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<WaveSimulator />);
+const fmt = (x, d) => {
+    const s = x.toFixed(d);
+    if (parseFloat(s) === 0) return '0';
+    return s.replace('.', ',');
+};
+
+// Vattnets färger: dal → mitt → topp. Det grunda området är ljusare och
+// grönare, som när botten skiner igenom.
+const PAL_DJUP = [[14, 58, 92], [40, 112, 156], [206, 236, 247]];
+const PAL_GRUNT = [[30, 92, 98], [82, 152, 152], [224, 245, 236]];
+const BLAECK = '#0f1620', ROD = '#c0392b', GRON = '#1d7a46';
+
+// ── Fältet: S och C i varje punkt ──────────────────────────────────────
+function huygensKallor(mode, b, d) {
+    const n = Math.max(3, Math.min(24, Math.round(b / 6)));
+    const mitter = mode === 'diffraction' ? [W / 2] : [W / 2 - d / 2, W / 2 + d / 2];
+    const xs = [];
+    for (const c of mitter) for (let j = 0; j < n; j++) xs.push(c - b / 2 + b * (j + 0.5) / n);
+    return xs;
+}
+function brytGeometri(p) {
+    const i = p.vinkel * Math.PI / 180;
+    const v1 = V, v2 = Math.sqrt(G * p.h2 / 1000) * 1000;
+    const b = Math.asin(Math.min(1, v2 / v1 * Math.sin(i)));
+    return { i, b, v1, v2 };
+}
+// Fasen θ och amplituden A i punkten (x, y); utslaget är A · sin(θ − φ).
+function byggFalt(p, nx, ny, steg) {
+    const S = new Float32Array(nx * ny), C = new Float32Array(nx * ny);
+    const lam = V / p.f, k = 2 * Math.PI / lam;
+    let norm = 1;
+    const sett = (idx, A, th) => { S[idx] += A * Math.sin(th); C[idx] += A * Math.cos(th); };
+    if (p.mode === 'single' || p.mode === 'double') {
+        const kallor = p.mode === 'single' ? [p.k1] : [p.k1, p.k2];
+        let mx = 0;
+        for (let j = 0; j < ny; j++) for (let i = 0; i < nx; i++) {
+            const x = (i + 0.5) * steg, y = (j + 0.5) * steg, idx = j * nx + i;
+            let nara = false;
+            for (const s of kallor) {
+                const r = Math.hypot(x - s.x, y - s.y);
+                if (r < 30) nara = true;
+                sett(idx, 1 / Math.sqrt(1 + r / (2 * lam)), k * r);
+            }
+            if (!nara) { const a = Math.hypot(S[idx], C[idx]); if (a > mx) mx = a; }
+        }
+        norm = mx || 1;
+    } else if (p.mode === 'planar') {
+        for (let j = 0; j < ny; j++) for (let i = 0; i < nx; i++) sett(j * nx + i, 1, k * (i + 0.5) * steg);
+    } else if (p.mode === 'refraction') {
+        const g = brytGeometri(p), k1 = 2 * Math.PI * p.f / g.v1, k2 = 2 * Math.PI * p.f / g.v2;
+        const fas0 = (k1 * Math.cos(g.i) - k2 * Math.cos(g.b)) * YB_BRYT;
+        for (let j = 0; j < ny; j++) for (let i = 0; i < nx; i++) {
+            const x = (i + 0.5) * steg, y = (j + 0.5) * steg;
+            const th = y < YB_BRYT ? k1 * (x * Math.sin(g.i) + y * Math.cos(g.i))
+                                   : k2 * (x * Math.sin(g.b) + y * Math.cos(g.b)) + fas0;
+            sett(j * nx + i, 1, th);
+        }
+    } else if (p.mode === 'diffraction' || p.mode === 'diffraction-double') {
+        const xs = huygensKallor(p.mode, p.b, p.d);
+        let mx = 0;
+        for (let j = 0; j < ny; j++) for (let i = 0; i < nx; i++) {
+            const x = (i + 0.5) * steg, y = (j + 0.5) * steg, idx = j * nx + i;
+            if (y < YB_SPALT) { sett(idx, 1, k * y); continue; }
+            for (const hx of xs) {
+                const r = Math.hypot(x - hx, y - YB_SPALT);
+                sett(idx, 1 / Math.sqrt(1 + r / (2 * lam)), k * r + k * YB_SPALT);
+            }
+            if (y > YB_SPALT + 40) { const a = Math.hypot(S[idx], C[idx]); if (a > mx) mx = a; }
+        }
+        // Normera området bakom öppningen för sig, så att mönstret syns
+        // lika tydligt oavsett hur många Huygens-källor som summeras.
+        const sk = 1 / (mx || 1);
+        for (let j = 0; j < ny; j++) {
+            if ((j + 0.5) * steg < YB_SPALT) continue;
+            for (let i = 0; i < nx; i++) { S[j * nx + i] *= sk; C[j * nx + i] *= sk; }
+        }
+    }
+    return { S, C, norm };
+}
+
+// Vågtoppar: punkter där θ − φ = π/2 + 2π · n.
+// Spår A + s · a längs utbredningsriktningen a: s för den topp som ligger
+// i [0, λ) framför A, och hur långt in i varvet den kommit (för att tona).
+function toppSpar(cA, k, fas0, phi) {
+    const lam = 2 * Math.PI / k;
+    let s = (phi + Math.PI / 2 - fas0) / k - cA;
+    s -= lam * Math.floor(s / lam);
+    return { s, u: s / lam, lam };
+}
+const tona = (u) => Math.max(0, Math.min(1, u / 0.15, (1 - u) / 0.15));
+
+function dubbelpil(ctx, x1, y1, x2, y2, farg, alfa) {
+    const L = Math.hypot(x2 - x1, y2 - y1); if (L < 4) return;
+    const ux = (x2 - x1) / L, uy = (y2 - y1) / L, hd = Math.min(11, L * 0.3), bb = hd * 0.5;
+    ctx.save(); ctx.globalAlpha = alfa; ctx.strokeStyle = farg; ctx.fillStyle = farg; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(x1 + ux * hd, y1 + uy * hd); ctx.lineTo(x2 - ux * hd, y2 - uy * hd); ctx.stroke();
+    for (const [px, py, sx] of [[x1, y1, 1], [x2, y2, -1]]) {
+        const bx = px + sx * ux * hd, by = py + sx * uy * hd;
+        ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(bx - uy * bb, by + ux * bb); ctx.lineTo(bx + uy * bb, by - ux * bb); ctx.closePath(); ctx.fill();
+    }
+    ctx.restore();
+}
+function pil(ctx, x1, y1, x2, y2, farg, bredd) {
+    const L = Math.hypot(x2 - x1, y2 - y1), ux = (x2 - x1) / L, uy = (y2 - y1) / L, hd = 14, bb = 7;
+    const bx = x2 - ux * hd, by = y2 - uy * hd;
+    ctx.strokeStyle = farg; ctx.fillStyle = farg; ctx.lineWidth = bredd; ctx.lineCap = 'butt';
+    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(bx, by); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x2, y2); ctx.lineTo(bx - uy * bb, by + ux * bb); ctx.lineTo(bx + uy * bb, by - ux * bb); ctx.closePath(); ctx.fill();
+}
+// Kursiv beteckning med index, till exempel λ₁: (ctx, 'λ', '1', x, y)
+function beteckning(ctx, bokstav, index, x, y, farg, storlek, ankare) {
+    ctx.save(); ctx.fillStyle = farg; ctx.textBaseline = 'alphabetic';
+    ctx.font = 'italic 600 ' + storlek + 'px Poppins, sans-serif';
+    const w1 = ctx.measureText(bokstav).width;
+    ctx.font = '600 ' + Math.round(storlek * 0.66) + 'px Poppins, sans-serif';
+    const w2 = index ? ctx.measureText(index).width : 0;
+    let x0 = ankare === 'end' ? x - w1 - w2 : ankare === 'middle' ? x - (w1 + w2) / 2 : x;
+    ctx.font = 'italic 600 ' + storlek + 'px Poppins, sans-serif'; ctx.fillText(bokstav, x0, y);
+    if (index) { ctx.font = '600 ' + Math.round(storlek * 0.66) + 'px Poppins, sans-serif'; ctx.fillText(index, x0 + w1 + 1, y + storlek * 0.28); }
+    ctx.restore();
+}
+function etikett(ctx, text, x, y, farg, storlek, ankare) {
+    ctx.save(); ctx.fillStyle = farg; ctx.font = '600 ' + storlek + 'px Poppins, sans-serif';
+    ctx.textAlign = ankare || 'left'; ctx.fillText(text, x, y); ctx.restore();
+}
+
+// Interferenslinjer: hyperbler med fokus i källorna (eller öppningarna).
+// Δs = n · λ på maximilinjerna och Δs = (n + 1/2) · λ på nodlinjerna.
+function interferensLinjer(F1, F2, lam, typ) {
+    const ut = [], c = Math.hypot(F2.x - F1.x, F2.y - F1.y) / 2;
+    const cx = (F1.x + F2.x) / 2, cy = (F1.y + F2.y) / 2;
+    const ux = (F2.x - F1.x) / (2 * c), uy = (F2.y - F1.y) / (2 * c), nx = -uy, ny = ux;
+    const off = typ === 'nod' ? 0.5 : 0;
+    for (let n = 0; (n + off) * lam < 2 * c - 0.5; n++) {
+        const a = (n + off) * lam / 2, bh = Math.sqrt(c * c - a * a);
+        for (const gren of a === 0 ? [1] : [1, -1]) {
+            const pts = [];
+            for (let t = -3.2; t <= 3.2; t += 0.04) {
+                const lx = gren * a * Math.cosh(t), ly = bh * Math.sinh(t);
+                pts.push([cx + ux * lx + nx * ly, cy + uy * lx + ny * ly]);
+            }
+            ut.push(pts);
+        }
+    }
+    return ut;
+}
+
+const WaveSimulator = () => {
+    const lage = lageFranAdress();
+    const lagen = LAGEN[lage];
+
+    const [mode, setMode] = useState(() => {
+        const m = new URLSearchParams(location.search).get('situation');
+        return lagen.includes(m) ? m : lagen[0];
+    });
+    const [spelar, setSpelar] = useState(true);
+    const [ultra, setUltra] = useState(false);
+    const [vy, setVy] = useState('2D');
+    const [f, setF] = useState(lage === 'interferens' ? 3 : 2);
+    const [vinkel, setVinkel] = useState(35);
+    const [h2, setH2] = useState(1.5);          // djup i det grunda området (mm)
+    const [d, setD] = useState(lage === 'interferens' ? 200 : 160);            // avstånd mellan källorna/öppningarna (mm)
+    const [b, setB] = useState(50);             // öppningens bredd (mm)
+    const [u, setU] = useState(0.5);            // källans fart som andel av v
+    const [visa, setVisa] = useState({ toppar: false, lambda: true, stralen: true, nod: false, max: false });
+    const [kallor, setKallor] = useState({ k1: { x: W / 2, y: H / 2 }, k2: { x: W / 2 + 80, y: H / 2 } });
+    const [isFullscreen, setIsFullscreen] = useState(false);
+    const [togglesOpen, setTogglesOpen] = useState(true);
+    const [, rendera] = useState(0);
+
+    const canvasRef = useRef(null), canvas3Ref = useRef(null), wrapRef = useRef(null);
+    const P = useRef({}), falt = useRef(null), falt3 = useRef(null), nyckel = useRef('');
+    const fas = useRef(0), tid = useRef(0);
+    const doppler = useRef({ x: 90, fronter: [], nastaFas: 0 });
+    const kamera = useRef({ h: -0.55, v: 0.72 });
+    const drag = useRef(null);
+    const info = useRef({});
+
+    // Två punktkällor: läget sätts av avståndet d (symmetriskt kring mitten)
+    useEffect(() => {
+        if (mode === 'double') setKallor({ k1: { x: W / 2 - d / 2, y: 190 }, k2: { x: W / 2 + d / 2, y: 190 } });
+    }, [mode]);
+    useEffect(() => {
+        if (mode === 'single') setKallor((k) => ({ ...k, k1: { x: W / 2, y: H / 2 } }));
+        doppler.current = { x: 90, fronter: [], nastaFas: fas.current };
+    }, [mode]);
+
+    P.current = { mode, spelar, ultra, vy, f, vinkel, h2, d, b, u, visa, k1: kallor.k1, k2: kallor.k2 };
+
+    // Fullskärm
+    useEffect(() => {
+        const h = () => {
+            const fs = document.fullscreenElement === wrapRef.current || document.webkitFullscreenElement === wrapRef.current;
+            setIsFullscreen(fs);
+        };
+        document.addEventListener('fullscreenchange', h);
+        document.addEventListener('webkitfullscreenchange', h);
+        return () => { document.removeEventListener('fullscreenchange', h); document.removeEventListener('webkitfullscreenchange', h); };
+    }, []);
+    const toggleFullscreen = () => {
+        const el = wrapRef.current; if (!el) return;
+        if (document.fullscreenElement || document.webkitFullscreenElement) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+        else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+    };
+
+    // ── Ritloopen (startas en gång, läser parametrarna ur P) ─────────────
+    useEffect(() => {
+        const cv = canvasRef.current, ctx = cv.getContext('2d');
+        const dpr = Math.min(2, window.devicePixelRatio || 1) < 1.5 ? 1.5 : 2;
+        cv.width = W * dpr; cv.height = H * dpr;
+        const off = document.createElement('canvas'); off.width = FW; off.height = FH;
+        const octx = off.getContext('2d'), img = octx.createImageData(FW, FH);
+        const z = new Float32Array(FW * FH);
+        let senast = performance.now(), raf = 0, synlig = true, iTimer = 0;
+        const obs = new IntersectionObserver((e) => { synlig = e[0].isIntersecting; }, { threshold: 0 });
+        obs.observe(cv);
+
+        const ram = (nu) => {
+            raf = requestAnimationFrame(ram);
+            const p = P.current;
+            let dt = Math.min(0.05, (nu - senast) / 1000); senast = nu;
+            if (!synlig) return;
+            if (!p.spelar) dt = 0;
+            if (p.ultra) dt *= 0.25;
+            fas.current += 2 * Math.PI * p.f * dt;
+            tid.current += dt;
+            if (p.mode === 'doppler') stegDoppler(p, dt);
+            else {
+                const key = [p.mode, p.f, p.vinkel, p.h2, p.d, p.b, p.k1.x, p.k1.y, p.k2.x, p.k2.y].join('|');
+                if (key !== nyckel.current) {
+                    nyckel.current = key;
+                    falt.current = byggFalt(p, FW, FH, FS);
+                    falt3.current = null;
+                }
+            }
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            if (p.vy === '3D') rita3D(ctx, p);
+            else rita2D(ctx, p);
+            if (++iTimer % 6 === 0) rendera((x) => x + 1);   // avläsningen
+        };
+
+        function stegDoppler(p, dt) {
+            const D = doppler.current;
+            D.x += p.u * V * dt;
+            if (D.x > W - 90) { D.x = 90; D.fronter = []; }
+            while (fas.current >= D.nastaFas) {
+                D.fronter.push({ x: D.x, t: tid.current - (fas.current - D.nastaFas) / (2 * Math.PI * p.f) });
+                D.nastaFas += 2 * Math.PI;
+            }
+            if (D.fronter.length > 80) D.fronter.splice(0, D.fronter.length - 80);
+        }
+
+        function fyllFalt(p, phi) {
+            const F = falt.current, cw = Math.cos(phi), sw = Math.sin(phi), inv = 1 / F.norm;
+            for (let i = 0; i < z.length; i++) {
+                let v = (F.S[i] * cw - F.C[i] * sw) * inv;
+                z[i] = v > 1.25 ? 1.25 : v < -1.25 ? -1.25 : v;
+            }
+            const data = img.data;
+            const grundGrans = p.mode === 'refraction' ? YB_BRYT / FS : 1e9;
+            for (let j = 0; j < FH; j++) {
+                const pal = j >= grundGrans ? PAL_GRUNT : PAL_DJUP;
+                for (let i = 0; i < FW; i++) {
+                    const idx = j * FW + i;
+                    const zx = z[idx + (i < FW - 1 ? 1 : 0)] - z[idx - (i > 0 ? 1 : 0)];
+                    const zy = z[idx + (j < FH - 1 ? FW : 0)] - z[idx - (j > 0 ? FW : 0)];
+                    let t = (z[idx] + 1) / 2; t = t < 0 ? 0 : t > 1 ? 1 : t;
+                    let c0, c1, s;
+                    if (t < 0.5) { c0 = pal[0]; c1 = pal[1]; s = t * 2; } else { c0 = pal[1]; c1 = pal[2]; s = (t - 0.5) * 2; s = s * s * (3 - 2 * s); }
+                    const ljus = (-zx - zy) * 70;          // ljus snett uppifrån vänster
+                    const o = idx * 4;
+                    data[o] = c0[0] + (c1[0] - c0[0]) * s + ljus;
+                    data[o + 1] = c0[1] + (c1[1] - c0[1]) * s + ljus;
+                    data[o + 2] = c0[2] + (c1[2] - c0[2]) * s + ljus;
+                    data[o + 3] = 255;
+                }
+            }
+            octx.putImageData(img, 0, 0);
+        }
+
+        function ritaRam() {
+            ctx.save();
+            ctx.lineWidth = RAM; ctx.strokeStyle = '#3d4651'; ctx.strokeRect(RAM / 2, RAM / 2, W - RAM, H - RAM);
+            ctx.lineWidth = 2; ctx.strokeStyle = 'rgba(255,255,255,0.28)'; ctx.strokeRect(RAM + 1, RAM + 1, W - 2 * RAM - 2, H - 2 * RAM - 2);
+            ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(0,0,0,0.5)'; ctx.strokeRect(0.5, 0.5, W - 1, H - 1);
+            ctx.restore();
+        }
+
+        function ritaKalla(x, y, phi) {
+            const r = 9 + 1.5 * Math.sin(phi);
+            const g = ctx.createRadialGradient(x - 3, y - 3, 1, x, y, r);
+            g.addColorStop(0, '#f6f2ea'); g.addColorStop(0.5, '#c9d2db'); g.addColorStop(1, '#6b7785');
+            ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+            ctx.lineWidth = 1.5; ctx.strokeStyle = BLAECK; ctx.stroke();
+        }
+
+        function ritaVagalstrare(phi, overkant) {
+            const s = 4 * Math.sin(phi);
+            const g = ctx.createLinearGradient(0, 0, overkant ? 0 : 30, overkant ? 30 : 0);
+            g.addColorStop(0, '#8b96a3'); g.addColorStop(1, '#4a5461');
+            ctx.fillStyle = g;
+            if (overkant) ctx.fillRect(RAM, RAM + 2 + s, W - 2 * RAM, 12);
+            else ctx.fillRect(RAM + 2 + s, RAM, 12, H - 2 * RAM);
+        }
+
+        function ritaSkarm(xa, xb) {
+            const g = ctx.createLinearGradient(0, YB_SPALT - 6, 0, YB_SPALT + 6);
+            g.addColorStop(0, '#9aa5b1'); g.addColorStop(0.5, '#5b6672'); g.addColorStop(1, '#2f3741');
+            ctx.fillStyle = g; ctx.fillRect(xa, YB_SPALT - 6, xb - xa, 12);
+            ctx.strokeStyle = BLAECK; ctx.lineWidth = 1; ctx.strokeRect(xa, YB_SPALT - 6, xb - xa, 12);
+        }
+
+        function rita2D(ctx, p) {
+            const phi = fas.current, lam = V / p.f, k = 2 * Math.PI / lam;
+            info.current = { f: p.f, lam, v: V };
+            if (p.mode === 'doppler') { ritaDoppler(p, phi, lam); ritaRam(); return; }
+            fyllFalt(p, phi);
+            ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+            ctx.drawImage(off, 0, 0, W, H);
+
+            if (p.mode === 'single' || p.mode === 'double') {
+                const ks = p.mode === 'single' ? [p.k1] : [p.k1, p.k2];
+                if (p.mode === 'single' && p.visa.toppar) {
+                    ctx.save(); ctx.strokeStyle = 'rgba(15,22,32,0.6)'; ctx.lineWidth = 1.6;
+                    const r0 = (phi + Math.PI / 2) / k; let r = r0 - lam * Math.floor(r0 / lam);
+                    for (; r < 1100; r += lam) { ctx.beginPath(); ctx.arc(p.k1.x, p.k1.y, r, 0, Math.PI * 2); ctx.stroke(); }
+                    ctx.restore();
+                }
+                if (p.mode === 'single' && p.visa.lambda) {
+                    const a = [Math.cos(0.55), Math.sin(0.55)], R0 = 120;
+                    const tp = toppSpar(R0, k, 0, phi), r1 = R0 + tp.s, r2 = r1 + lam;
+                    const al = tona(tp.u);
+                    dubbelpil(ctx, p.k1.x + a[0] * r1, p.k1.y + a[1] * r1, p.k1.x + a[0] * r2, p.k1.y + a[1] * r2, '#f6f2ea', al);
+                    ctx.save(); ctx.globalAlpha = al;
+                    const rm = (r1 + r2) / 2;
+                    beteckning(ctx, 'λ', '', p.k1.x + a[0] * rm + 10, p.k1.y + a[1] * rm - 10, '#f6f2ea', 25, 'start');
+                    ctx.restore();
+                }
+                if (p.mode === 'double') ritaInterferens(p, p.k1, p.k2, lam, false);
+                for (const s of ks) ritaKalla(s.x, s.y, phi);
+            } else if (p.mode === 'planar') {
+                ritaVagalstrare(phi, false);
+                if (p.visa.toppar) {
+                    ctx.save(); ctx.strokeStyle = 'rgba(15,22,32,0.6)'; ctx.lineWidth = 1.6;
+                    const x0 = (phi + Math.PI / 2) / k; let x = x0 - lam * Math.floor(x0 / lam);
+                    for (; x < W; x += lam) { ctx.beginPath(); ctx.moveTo(x, RAM); ctx.lineTo(x, H - RAM); ctx.stroke(); }
+                    ctx.restore();
+                }
+                if (p.visa.lambda) {
+                    const tp = toppSpar(330, k, 0, phi), x1 = 330 + tp.s, al = tona(tp.u), y = H - 70;
+                    dubbelpil(ctx, x1, y, x1 + lam, y, '#f6f2ea', al);
+                    ctx.save(); ctx.globalAlpha = al;
+                    beteckning(ctx, 'λ', '', x1 + lam / 2, y - 12, '#f6f2ea', 25, 'middle');
+                    ctx.restore();
+                }
+            } else if (p.mode === 'refraction') {
+                ritaBrytning(p, phi);
+            } else {
+                const xs = p.mode === 'diffraction' ? [[W / 2 - p.b / 2, W / 2 + p.b / 2]]
+                    : [[W / 2 - p.d / 2 - p.b / 2, W / 2 - p.d / 2 + p.b / 2], [W / 2 + p.d / 2 - p.b / 2, W / 2 + p.d / 2 + p.b / 2]];
+                ritaVagalstrare(phi, true);
+                if (p.mode === 'diffraction-double') ritaInterferens(p, { x: W / 2 - p.d / 2, y: YB_SPALT }, { x: W / 2 + p.d / 2, y: YB_SPALT }, lam, true);
+                let x = 0;
+                for (const [a, bb] of xs) { if (a > x) ritaSkarm(x, a); x = bb; }
+                ritaSkarm(x, W);
+            }
+            ritaRam();
+        }
+
+        function ritaInterferens(p, F1, F2, lam, barabakom) {
+            ctx.save();
+            if (barabakom) { ctx.beginPath(); ctx.rect(0, YB_SPALT, W, H - YB_SPALT); ctx.clip(); }
+            for (const [typ, pa, farg] of [['nod', p.visa.nod, ROD], ['max', p.visa.max, GRON]]) {
+                if (!pa) continue;
+                ctx.strokeStyle = farg; ctx.lineWidth = 3; ctx.setLineDash([9, 7]);
+                for (const pts of interferensLinjer(F1, F2, lam, typ)) {
+                    ctx.beginPath(); pts.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)); ctx.stroke();
+                }
+            }
+            ctx.restore();
+        }
+
+        function ritaBrytning(p, phi) {
+            const g = brytGeometri(p), k1 = 2 * Math.PI * p.f / g.v1, k2 = 2 * Math.PI * p.f / g.v2;
+            const lam1 = g.v1 / p.f, lam2 = g.v2 / p.f;
+            const fas0 = (k1 * Math.cos(g.i) - k2 * Math.cos(g.b)) * YB_BRYT;
+            const a1 = [Math.sin(g.i), Math.cos(g.i)], a2 = [Math.sin(g.b), Math.cos(g.b)];
+            info.current = { f: p.f, lam: lam1, v: g.v1, lam2, v2: g.v2, i: g.i, b: g.b };
+            // gränsen: kanten på den glasskiva som gör vattnet grunt
+            ctx.save();
+            ctx.fillStyle = 'rgba(255,255,255,0.10)'; ctx.fillRect(RAM, YB_BRYT, W - 2 * RAM, H - YB_BRYT - RAM);
+            ctx.strokeStyle = 'rgba(15,22,32,0.75)'; ctx.lineWidth = 2.5;
+            ctx.beginPath(); ctx.moveTo(0, YB_BRYT); ctx.lineTo(W, YB_BRYT); ctx.stroke();
+            ctx.restore();
+            etikett(ctx, 'djupt vatten', W - RAM - 14, YB_BRYT - 12, '#f3eee4', 21, 'right');
+            etikett(ctx, 'grunt vatten', W - RAM - 14, YB_BRYT + 26, '#f3eee4', 21, 'right');
+
+            if (p.visa.toppar) {
+                ctx.save(); ctx.strokeStyle = 'rgba(15,22,32,0.6)'; ctx.lineWidth = 1.6;
+                for (const [a, kk, f0, y0, y1] of [[a1, k1, 0, 0, YB_BRYT], [a2, k2, fas0, YB_BRYT, H]]) {
+                    ctx.save(); ctx.beginPath(); ctx.rect(0, y0, W, y1 - y0); ctx.clip();
+                    const lam = 2 * Math.PI / kk;
+                    const c0 = (phi + Math.PI / 2 - f0) / kk;
+                    for (let n = -30; n < 30; n++) {
+                        const c = c0 + n * lam;                  // x · ax + y · ay = c
+                        const px = c * a[0], py = c * a[1];
+                        ctx.beginPath(); ctx.moveTo(px - 2000 * a[1], py + 2000 * a[0]); ctx.lineTo(px + 2000 * a[1], py - 2000 * a[0]); ctx.stroke();
+                    }
+                    ctx.restore();
+                }
+                ctx.restore();
+            }
+            if (p.visa.lambda) {
+                // dubbelpilar som åker med fronterna, till höger om strålen
+                const A1 = [450 - lam1 * a1[0], YB_BRYT - 20 - 2 * lam1 * a1[1]];
+                const t1 = toppSpar(A1[0] * a1[0] + A1[1] * a1[1], k1, 0, phi);
+                const P1 = [A1[0] + t1.s * a1[0], A1[1] + t1.s * a1[1]];
+                dubbelpil(ctx, P1[0], P1[1], P1[0] + lam1 * a1[0], P1[1] + lam1 * a1[1], '#f6f2ea', tona(t1.u));
+                ctx.save(); ctx.globalAlpha = tona(t1.u);
+                beteckning(ctx, 'λ', '1', P1[0] + lam1 * a1[0] / 2 + 14 * a1[1], P1[1] + lam1 * a1[1] / 2 - 14 * a1[0] + 6, '#f6f2ea', 25, 'start');
+                ctx.restore();
+                const A2 = [600 - lam2 * a2[0], YB_BRYT + 20];
+                const t2 = toppSpar(A2[0] * a2[0] + A2[1] * a2[1], k2, fas0, phi);
+                const P2 = [A2[0] + t2.s * a2[0], A2[1] + t2.s * a2[1]];
+                dubbelpil(ctx, P2[0], P2[1], P2[0] + lam2 * a2[0], P2[1] + lam2 * a2[1], '#f6f2ea', tona(t2.u));
+                ctx.save(); ctx.globalAlpha = tona(t2.u);
+                beteckning(ctx, 'λ', '2', P2[0] + lam2 * a2[0] / 2 + 14 * a2[1], P2[1] + lam2 * a2[1] / 2 - 14 * a2[0] + 6, '#f6f2ea', 25, 'start');
+                ctx.restore();
+            }
+            if (p.visa.stralen) {
+                const cx = 300, L = 190;
+                ctx.save(); ctx.strokeStyle = 'rgba(243,238,228,0.9)'; ctx.lineWidth = 2; ctx.setLineDash([8, 6]);
+                ctx.beginPath(); ctx.moveTo(cx, YB_BRYT - 200); ctx.lineTo(cx, YB_BRYT + 200); ctx.stroke(); ctx.restore();
+                pil(ctx, cx - L * a1[0], YB_BRYT - L * a1[1], cx, YB_BRYT, BLAECK, 4);
+                pil(ctx, cx, YB_BRYT, cx + L * a2[0], YB_BRYT + L * a2[1], BLAECK, 4);
+                ctx.save(); ctx.strokeStyle = '#ffe9a8'; ctx.lineWidth = 2.5;
+                if (g.i > 0.01) {
+                    ctx.beginPath(); ctx.arc(cx, YB_BRYT, 52, -Math.PI / 2 - g.i, -Math.PI / 2); ctx.stroke();
+                    ctx.beginPath(); ctx.arc(cx, YB_BRYT, 66, Math.PI / 2 - g.b, Math.PI / 2); ctx.stroke();
+                }
+                ctx.restore();
+                if (g.i > 0.01) {
+                    const ai = g.i > 0.3 ? g.i / 2 : g.i + 0.18, ab = g.b > 0.3 ? g.b / 2 : g.b + 0.16;
+                    beteckning(ctx, 'i', '', cx - 74 * Math.sin(ai), YB_BRYT - 74 * Math.cos(ai) + 7, '#ffe9a8', 26, 'middle');
+                    beteckning(ctx, 'b', '', cx + 88 * Math.sin(ab), YB_BRYT + 88 * Math.cos(ab) + 7, '#ffe9a8', 26, 'middle');
+                }
+            }
+        }
+
+        function ritaDoppler(p, phi, lam) {
+            const D = doppler.current, y0 = H / 2;
+            const g = ctx.createLinearGradient(0, 0, 0, H);
+            g.addColorStop(0, '#2f7aa8'); g.addColorStop(1, '#1f5f8a');
+            ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+            const t = tid.current;
+            ctx.save();
+            for (const fr of D.fronter) {
+                const R = V * (t - fr.t); if (R <= 2) continue;
+                const al = Math.max(0, 1 - R / 950);
+                ctx.lineWidth = 7; ctx.strokeStyle = 'rgba(8,36,62,' + (0.35 * al) + ')';
+                ctx.beginPath(); ctx.arc(fr.x, y0, Math.max(1, R - 8), 0, Math.PI * 2); ctx.stroke();
+                ctx.lineWidth = 4; ctx.strokeStyle = 'rgba(214,240,249,' + (0.95 * al) + ')';
+                ctx.beginPath(); ctx.arc(fr.x, y0, R, 0, Math.PI * 2); ctx.stroke();
+            }
+            ctx.restore();
+            // observatörerna vid tankens kortsidor
+            const fFram = p.u < 1 ? p.f / (1 - p.u) : null, fBak = p.f / (1 + p.u);
+            info.current = { f: p.f, lam, v: V, fFram, fBak, u: p.u };
+            for (const [x, txt, ank, lx] of [[RAM + 30, 'bakom', 'left', RAM + 10], [W - RAM - 30, 'framför', 'right', W - RAM - 10]]) {
+                ctx.save(); ctx.fillStyle = '#f3eee4'; ctx.strokeStyle = BLAECK; ctx.lineWidth = 2;
+                ctx.beginPath(); ctx.arc(x, y0, 10, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+                ctx.fillStyle = BLAECK; ctx.beginPath(); ctx.arc(x, y0, 4, 0, Math.PI * 2); ctx.fill();
+                ctx.restore();
+                etikett(ctx, txt, lx, y0 - 22, '#f3eee4', 21, ank);
+            }
+            if (p.visa.lambda) {
+                const fram = [], bak = [];
+                for (const fr of D.fronter) {
+                    const R = V * (t - fr.t); if (R <= 2) continue;
+                    if (fr.x + R > D.x + 1) fram.push(fr.x + R);
+                    if (fr.x - R < D.x - 1) bak.push(fr.x - R);
+                }
+                fram.sort((a, b) => a - b); bak.sort((a, b) => b - a);
+                const lamF = lam * (1 - p.u), lamB = lam * (1 + p.u);
+                const g0 = D.x + 50;
+                const iF = fram.findIndex((x) => x >= g0);
+                if (p.u < 0.98 && iF >= 0 && iF + 1 < fram.length && fram[iF + 1] < W - RAM) {
+                    const al = tona((fram[iF] - g0) / lamF);
+                    dubbelpil(ctx, fram[iF], y0 - 34, fram[iF + 1], y0 - 34, '#f6f2ea', al);
+                    ctx.save(); ctx.globalAlpha = al;
+                    beteckning(ctx, 'λ', '', (fram[iF] + fram[iF + 1]) / 2, y0 - 48, '#f6f2ea', 25, 'middle'); ctx.restore();
+                }
+                const g1 = D.x - 50;
+                const iB = bak.findIndex((x) => x <= g1);
+                if (iB >= 0 && iB + 1 < bak.length && bak[iB + 1] > RAM) {
+                    const al = tona((g1 - bak[iB]) / lamB);
+                    dubbelpil(ctx, bak[iB + 1], y0 - 34, bak[iB], y0 - 34, '#f6f2ea', al);
+                    ctx.save(); ctx.globalAlpha = al;
+                    beteckning(ctx, 'λ', '', (bak[iB] + bak[iB + 1]) / 2, y0 - 48, '#f6f2ea', 25, 'middle'); ctx.restore();
+                }
+            }
+            // källan och dess hastighet
+            if (p.u > 0.02) pil(ctx, D.x + 14, y0 + 30, D.x + 14 + 40 + 50 * p.u, y0 + 30, '#ffe9a8', 4);
+            ritaKalla(D.x, y0, phi);
+        }
+
+        // ── 3D: vattenytan i Three.js, på en labbänk ────────────────────
+        // Ytan är ett nät med (GX3 + 1) × (GY3 + 1) hörn vars höjd sätts
+        // varje bildruta ur S och C (samma fält som i 2D). Färgen följer
+        // samma palett, och ljuset ger glansen på vågtopparna.
+        let tre = null;
+        function byggTre() {
+            const cv3 = canvas3Ref.current;
+            const renderer = new THREE.WebGLRenderer({ canvas: cv3, antialias: true });
+            renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color('#ece5d8');
+            const camera = new THREE.PerspectiveCamera(38, W / H, 10, 5000);
+            scene.add(new THREE.HemisphereLight(0xf4f1ea, 0x5a5048, 0.7));
+            const sol = new THREE.DirectionalLight(0xffffff, 0.75);
+            sol.position.set(-400, 700, -300); scene.add(sol);
+            // vattenytan
+            const geo = new THREE.PlaneGeometry(W, H, GX3, GY3);
+            geo.rotateX(-Math.PI / 2);
+            const nv = geo.attributes.position.count;
+            geo.setAttribute('color', new THREE.BufferAttribute(new Float32Array(nv * 3), 3));
+            const mat = new THREE.MeshPhongMaterial({ vertexColors: true, shininess: 70, specular: 0x6f8fa8, side: THREE.DoubleSide });
+            const yta = new THREE.Mesh(geo, mat); scene.add(yta);
+            // tankens ram och botten
+            const ramMat = new THREE.MeshPhongMaterial({ color: 0x3d4651, shininess: 40 });
+            const kant = (w, d, x, z) => { const m = new THREE.Mesh(new THREE.BoxGeometry(w, 34, d), ramMat); m.position.set(x, 2, z); scene.add(m); };
+            kant(W + 28, 14, 0, -H / 2 - 7); kant(W + 28, 14, 0, H / 2 + 7);
+            kant(14, H, -W / 2 - 7, 0); kant(14, H, W / 2 + 7, 0);
+            const botten = new THREE.Mesh(new THREE.BoxGeometry(W + 28, 6, H + 28), new THREE.MeshPhongMaterial({ color: 0x24303b }));
+            botten.position.y = -18; scene.add(botten);
+            const bank = new THREE.Mesh(new THREE.BoxGeometry(1700, 30, 1250), new THREE.MeshLambertMaterial({ color: 0x9c7c58 }));
+            bank.position.y = -36; scene.add(bank);
+            // det som byts med läget: källor, skärm, glasskiva
+            const extra = new THREE.Group(); scene.add(extra);
+            return { renderer, scene, camera, geo, yta, extra, nyckel: '' };
+        }
+        function bygglage(p) {
+            const g = tre.extra;
+            while (g.children.length) g.remove(g.children[0]);
+            const kulMat = new THREE.MeshPhongMaterial({ color: 0xe6ebf0, shininess: 90 });
+            if (p.mode === 'single' || p.mode === 'double' || p.mode === 'doppler') {
+                const n = p.mode === 'double' ? 2 : 1;
+                for (let i = 0; i < n; i++) { const k = new THREE.Mesh(new THREE.SphereGeometry(9, 20, 14), kulMat); k.name = 'kalla' + i; g.add(k); }
+            }
+            if (p.mode === 'diffraction' || p.mode === 'diffraction-double') {
+                const xs = p.mode === 'diffraction' ? [[W / 2 - p.b / 2, W / 2 + p.b / 2]]
+                    : [[W / 2 - p.d / 2 - p.b / 2, W / 2 - p.d / 2 + p.b / 2], [W / 2 + p.d / 2 - p.b / 2, W / 2 + p.d / 2 + p.b / 2]];
+                const bit = []; let x = 0;
+                for (const [a, bb] of xs) { if (a > x) bit.push([x, a]); x = bb; }
+                bit.push([x, W]);
+                const sm = new THREE.MeshPhongMaterial({ color: 0x5b6672, shininess: 50 });
+                for (const [xa, xb] of bit) {
+                    if (xb - xa < 1) continue;
+                    const m = new THREE.Mesh(new THREE.BoxGeometry(xb - xa, 40, 10), sm);
+                    m.position.set((xa + xb) / 2 - W / 2, 6, YB_SPALT - H / 2); g.add(m);
+                }
+            }
+            if (p.mode === 'planar' || p.mode === 'diffraction' || p.mode === 'diffraction-double') {
+                const bar = new THREE.Mesh(p.mode === 'planar' ? new THREE.BoxGeometry(12, 26, H - 8) : new THREE.BoxGeometry(W - 8, 26, 12),
+                                           new THREE.MeshPhongMaterial({ color: 0x7d8895, shininess: 50 }));
+                bar.name = 'alstrare'; g.add(bar);
+            }
+        }
+        function rita3D(ctx, p) {
+            if (!window.THREE) return;
+            if (!tre) tre = byggTre();
+            const cv3 = canvas3Ref.current, br = cv3.clientWidth, hr = Math.round(br * H / W);
+            if (br < 10) return;
+            if (cv3.width !== Math.round(br * tre.renderer.getPixelRatio())) tre.renderer.setSize(br, hr, false);
+            const lk = [p.mode, p.b, p.d].join('|');
+            if (lk !== tre.nyckel) { tre.nyckel = lk; bygglage(p); }
+            const phi = fas.current, lam = V / p.f;
+            info.current = { f: p.f, lam, v: V };
+            const pos = tre.geo.attributes.position, col = tre.geo.attributes.color, nx = GX3 + 1;
+            const AMP = 13;
+            const satt = (idx, zn, pal) => {
+                pos.setY(idx, zn * AMP);
+                let tt = (zn + 1) / 2; tt = tt < 0 ? 0 : tt > 1 ? 1 : tt;
+                let c0, c1, s;
+                if (tt < 0.5) { c0 = pal[0]; c1 = pal[1]; s = tt * 2; } else { c0 = pal[1]; c1 = pal[2]; s = (tt - 0.5) * 2; }
+                col.setXYZ(idx, (c0[0] + (c1[0] - c0[0]) * s) / 255, (c0[1] + (c1[1] - c0[1]) * s) / 255, (c0[2] + (c1[2] - c0[2]) * s) / 255);
+            };
+            if (p.mode === 'doppler') {
+                const D = doppler.current, tt = tid.current, sig = 13;
+                info.current = { f: p.f, lam, v: V, fFram: p.u < 1 ? p.f / (1 - p.u) : null, fBak: p.f / (1 + p.u), u: p.u };
+                const ringar = [];
+                for (const fr of D.fronter) { const R = V * (tt - fr.t); if (R > 2 && R < 1000) ringar.push([fr.x, R, Math.max(0, 1 - R / 950)]); }
+                for (let j = 0; j <= GY3; j++) for (let i = 0; i <= GX3; i++) {
+                    const x = i * G3, y = j * G3; let zz = 0;
+                    for (const [fx, R, A] of ringar) {
+                        const r = Math.hypot(x - fx, y - H / 2), q = (r - R) / sig;
+                        if (q > -3 && q < 3) zz += A * (Math.exp(-q * q) - 0.45 * Math.exp(-(q + 1.6) * (q + 1.6)));
+                    }
+                    satt(j * nx + i, Math.max(-1.2, Math.min(1.2, zz)), PAL_DJUP);
+                }
+                const k0 = tre.extra.getObjectByName('kalla0');
+                if (k0) k0.position.set(D.x - W / 2, 6, 0);
+            } else {
+                if (!falt3.current) falt3.current = byggFalt(p, nx, GY3 + 1, G3);
+                const F = falt3.current, cw = Math.cos(phi), sw = Math.sin(phi), inv = 1 / F.norm;
+                const grund = p.mode === 'refraction' ? YB_BRYT : 1e9;
+                for (let j = 0; j <= GY3; j++) {
+                    const pal = j * G3 >= grund ? PAL_GRUNT : PAL_DJUP;
+                    for (let i = 0; i <= GX3; i++) {
+                        const idx = j * nx + i;
+                        let zz = (F.S[idx] * cw - F.C[idx] * sw) * inv;
+                        satt(idx, Math.max(-1.25, Math.min(1.25, zz)), pal);
+                    }
+                }
+                if (p.mode === 'refraction') {
+                    const g = brytGeometri(p);
+                    info.current = { f: p.f, lam, v: g.v1, lam2: g.v2 / p.f, v2: g.v2, i: g.i, b: g.b };
+                }
+                const ks = p.mode === 'single' ? [p.k1] : p.mode === 'double' ? [p.k1, p.k2] : [];
+                ks.forEach((s, i) => { const k = tre.extra.getObjectByName('kalla' + i); if (k) k.position.set(s.x - W / 2, 8 + 3 * Math.sin(phi), s.y - H / 2); });
+                const bar = tre.extra.getObjectByName('alstrare');
+                if (bar) {
+                    const s = 4 * Math.sin(phi);
+                    if (p.mode === 'planar') bar.position.set(-W / 2 + 12 + s, 4, 0);
+                    else bar.position.set(0, 4, -H / 2 + 12 + s);
+                }
+            }
+            pos.needsUpdate = true; col.needsUpdate = true;
+            tre.geo.computeVertexNormals();
+            const k = kamera.current, R = 1280;
+            tre.camera.position.set(R * Math.cos(k.v) * Math.sin(k.h), R * Math.sin(k.v), R * Math.cos(k.v) * Math.cos(k.h));
+            tre.camera.lookAt(0, -20, 10);
+            tre.renderer.render(tre.scene, tre.camera);
+        }
+
+        raf = requestAnimationFrame(ram);
+        return () => { cancelAnimationFrame(raf); obs.disconnect(); };
+    }, []);
+
+    // ── Pekare: dra i källorna (2D) eller vrid kameran (3D) ─────────────
+    const tillScen = (e) => {
+        const r = canvasRef.current.getBoundingClientRect();
+        return { x: (e.clientX - r.left) * W / r.width, y: (e.clientY - r.top) * H / r.height };
+    };
+    const kanDra = vy === '3D' || mode === 'single' || mode === 'double';
+    const onDown = (e) => {
+        if (vy === '3D') { drag.current = { kamera: true, x: e.clientX, y: e.clientY }; e.currentTarget.setPointerCapture(e.pointerId); return; }
+        if (mode !== 'single' && mode !== 'double') return;
+        const q = tillScen(e);
+        const lista = mode === 'single' ? ['k1'] : ['k1', 'k2'];
+        for (const n of lista) {
+            const s = kallor[n];
+            if (Math.hypot(q.x - s.x, q.y - s.y) < 34) { drag.current = { kalla: n }; e.currentTarget.setPointerCapture(e.pointerId); return; }
+        }
+    };
+    const onMove = (e) => {
+        const dr = drag.current; if (!dr) return;
+        if (dr.kamera) {
+            const k = kamera.current;
+            k.h += (e.clientX - dr.x) * 0.008;
+            k.v = Math.max(0.25, Math.min(1.45, k.v + (e.clientY - dr.y) * 0.006));
+            dr.x = e.clientX; dr.y = e.clientY; return;
+        }
+        const q = tillScen(e);
+        const x = Math.max(RAM + 12, Math.min(W - RAM - 12, q.x)), y = Math.max(RAM + 12, Math.min(H - RAM - 12, q.y));
+        setKallor((k) => {
+            const ny = { ...k, [dr.kalla]: { x, y } };
+            if (mode === 'double') setD(Math.round(Math.hypot(ny.k2.x - ny.k1.x, ny.k2.y - ny.k1.y)));
+            return ny;
+        });
+    };
+    const onUp = () => { drag.current = null; };
+
+    // Avståndsreglaget flyttar källorna symmetriskt kring deras mittpunkt
+    const sattD = (nd) => {
+        setD(nd);
+        if (mode === 'double') setKallor((k) => {
+            const mx = (k.k1.x + k.k2.x) / 2, my = (k.k1.y + k.k2.y) / 2;
+            let ux = k.k2.x - k.k1.x, uy = k.k2.y - k.k1.y; const L = Math.hypot(ux, uy) || 1; ux /= L; uy /= L;
+            return { k1: { x: mx - ux * nd / 2, y: my - uy * nd / 2 }, k2: { x: mx + ux * nd / 2, y: my + uy * nd / 2 } };
+        });
+    };
+    const tVisa = (n) => setVisa((s) => ({ ...s, [n]: !s[n] }));
+    const byt = (m) => setMode(m);
+
+    // ── Avläsning ───────────────────────────────────────────────────────
+    const I = info.current;
+    const avlasning = () => {
+        const rader = [];
+        const cm = (px) => fmt(px / 10, 1) + ' cm';
+        const ms = (pxs) => fmt(pxs / 1000, 2) + ' m/s';
+        if (mode === 'refraction' && I.v2) {
+            rader.push(['<em>f</em>', fmt(f, 1) + ' Hz'], ['<em>v</em><sub>1</sub>', ms(I.v)], ['<em>λ</em><sub>1</sub>', cm(I.lam)],
+                       ['<em>v</em><sub>2</sub>', ms(I.v2)], ['<em>λ</em><sub>2</sub>', cm(I.lam2)],
+                       ['<em>i</em>', fmt(I.i * 180 / Math.PI, 0) + '°'], ['<em>b</em>', fmt(I.b * 180 / Math.PI, 0) + '°']);
+        } else if (mode === 'doppler') {
+            rader.push(['<em>f</em> hos källan', fmt(f, 1) + ' Hz'], ['<em>v</em>', ms(V)], ['källans fart', ms(u * V)],
+                       ['<em>f</em> framför', u < 1 ? fmt(f / (1 - u), 1) + ' Hz' : 'ingen våg'], ['<em>f</em> bakom', fmt(f / (1 + u), 1) + ' Hz']);
+        } else {
+            rader.push(['<em>f</em>', fmt(f, 1) + ' Hz'], ['<em>v</em>', ms(V)], ['<em>λ</em>', cm(V / f)]);
+            if (mode === 'double' || mode === 'diffraction-double') rader.push(['<em>d</em>', cm(d)]);
+            if (mode === 'diffraction' || mode === 'diffraction-double') rader.push(['öppning', cm(b)]);
+        }
+        return (
+            <div className="scene-info">
+                {rader.map(([l, v]) => (
+                    <React.Fragment key={l}><span className="si-lbl" dangerouslySetInnerHTML={{ __html: l }} /><span className="si-val">{v}</span></React.Fragment>
+                ))}
+            </div>
+        );
+    };
+
+    // ── Reglage ─────────────────────────────────────────────────────────
+    const reglage = (kompakt) => {
+        const rad = (key, label, value, min, max, step, onChange, visaV, not) => kompakt ? (
+            <div className="st-slider" key={key}>
+                <div className="st-slider-top"><span dangerouslySetInnerHTML={{ __html: label }} /><span className="sl-val">{visaV}</span></div>
+                <input type="range" min={min} max={max} step={step} value={value} onChange={(e) => onChange(parseFloat(e.target.value))} />
+            </div>
+        ) : (
+            <div className="sl-row" key={key}>
+                <div className="sl-top"><span dangerouslySetInnerHTML={{ __html: label }} /><span className="sl-val">{visaV}</span></div>
+                <input type="range" min={min} max={max} step={step} value={value} onChange={(e) => onChange(parseFloat(e.target.value))} />
+                {not && <div className="sl-note" dangerouslySetInnerHTML={{ __html: not }} />}
+            </div>
+        );
+        const ut = [rad('f', 'Frekvens <em>f</em>', f, 1.5, 5, 0.1, setF, fmt(f, 1) + ' Hz',
+            mode === 'doppler' ? 'Frekvensen som källan svänger med.' : 'Våglängden blir <em>λ</em> = <em>v</em> / <em>f</em>.')];
+        if (mode === 'refraction') {
+            ut.push(rad('i', 'Infallsvinkel <em>i</em>', vinkel, 0, 70, 1, setVinkel, fmt(vinkel, 0) + '°'));
+            ut.push(rad('h', 'Djup i det grunda området <em>h</em><sub>2</sub>', h2, 0.5, 4, 0.1, setH2, fmt(h2, 1) + ' mm',
+                'Djupt vatten är ' + fmt(H_DJUP * 1000, 1) + '&nbsp;mm. Ju grundare, desto långsammare går vågen.'));
+        }
+        if (mode === 'double' || mode === 'diffraction-double')
+            ut.push(rad('d', mode === 'double' ? 'Avstånd mellan källorna <em>d</em>' : 'Avstånd mellan öppningarna <em>d</em>',
+                d, 40, mode === 'double' ? 360 : 320, 2, sattD, fmt(d / 10, 1) + ' cm'));
+        if (mode === 'diffraction' || mode === 'diffraction-double')
+            ut.push(rad('b', 'Öppningens bredd', b, 20, mode === 'diffraction' ? 300 : 120, 2, setB, fmt(b / 10, 1) + ' cm'));
+        if (mode === 'doppler')
+            ut.push(rad('u', 'Källans fart', u, 0, 1.5, 0.05, setU, fmt(u * V / 1000, 2) + ' m/s',
+                u >= 1 ? 'Källan går lika fort som eller fortare än vågorna. Fronterna hopar sig till en kil, som en ljudbang.'
+                       : 'Vågorna går med <em>v</em> = 0,20&nbsp;m/s.'));
+        return ut;
+    };
+
+    const visaRutor = () => {
+        if (vy === '3D') return null;
+        const r = [];
+        const cb = (n, txt, swatch) => (
+            <label key={n}><input type="checkbox" checked={!!visa[n]} onChange={() => tVisa(n)} />{swatch}<span dangerouslySetInnerHTML={{ __html: txt }} /></label>
+        );
+        if (mode === 'single' || mode === 'planar' || mode === 'refraction') r.push(cb('toppar', 'Vågtoppar (vågfronter)', <span className="st-swatch" style={{ background: 'rgba(15,22,32,0.6)' }}></span>));
+        if (mode === 'single' || mode === 'planar' || mode === 'refraction' || mode === 'doppler') r.push(cb('lambda', 'Våglängd <em>λ</em>'));
+        if (mode === 'refraction') r.push(cb('stralen', 'Stråle, normal och vinklar'));
+        if (mode === 'double' || mode === 'diffraction-double') {
+            r.push(cb('nod', 'Nodlinjer', <span className="st-swatch streck" style={{ borderColor: ROD }}></span>));
+            r.push(cb('max', 'Maximilinjer', <span className="st-swatch streck" style={{ borderColor: GRON }}></span>));
+        }
+        return r;
+    };
+
+    const lagesVal = (kompakt) => lagen.length < 2 ? null : kompakt ? (
+        <React.Fragment>
+            <div className="st-title mt">Försök</div>
+            {lagen.map((m) => (
+                <label key={m}><input type="radio" name="fs-mode" checked={mode === m} onChange={() => byt(m)} /><span>{NAMN[m][0]}</span></label>
+            ))}
+        </React.Fragment>
+    ) : (
+        <div className="glass-card rounded-xl p-3 mb-3">
+            <div className="flbl mb-2">Försök</div>
+            <div className="mode-seg" style={{ gridTemplateColumns: 'repeat(' + lagen.length + ', 1fr)' }}>
+                {lagen.map((m) => (
+                    <button key={m} className={mode === m ? 'active' : ''} onClick={() => byt(m)}>
+                        {NAMN[m][0]}<span className="sub">{NAMN[m][1]}</span>
+                    </button>
+                ))}
+            </div>
+        </div>
+    );
+
+    const sceneToggles = () => {
+        if (!togglesOpen) return (
+            <button className="st-show-btn" onClick={() => setTogglesOpen(true)} aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                    <line x1="4" y1="8" x2="20" y2="8" /><circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                    <line x1="4" y1="16" x2="20" y2="16" /><circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                </svg>
+            </button>
+        );
+        const rutor = visaRutor();
+        return (
+            <div className="scene-toggles">
+                <button className="st-hide" onClick={() => setTogglesOpen(false)} aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+                </button>
+                {rutor && rutor.length > 0 && <React.Fragment><div className="st-title">Visa</div>{rutor}</React.Fragment>}
+                <label><input type="checkbox" checked={ultra} onChange={() => setUltra((x) => !x)} /><span>Ultrarapid</span></label>
+                <div className="st-title mt">Vy</div>
+                <div className="st-row">
+                    <button className={vy === '2D' ? 'btn-toggle active' : 'btn-toggle'} onClick={() => setVy('2D')}>Uppifrån</button>
+                    <button className={vy === '3D' ? 'btn-toggle active' : 'btn-toggle'} onClick={() => setVy('3D')}>3D</button>
+                </div>
+                {isFullscreen && (
+                    <React.Fragment>
+                        {lagesVal(true)}
+                        <div className="st-title mt">Reglage</div>
+                        <div className="st-sliders">{reglage(true)}</div>
+                        <div className="st-actions">
+                            <button className="btn-toggle" onClick={() => setSpelar((s) => !s)}>{spelar ? 'Pausa' : 'Spela'}</button>
+                        </div>
+                    </React.Fragment>
+                )}
+            </div>
+        );
+    };
+
+    // ── Texter per avsnitt ──────────────────────────────────────────────
+    const Vbl = ({ label, children }) => (
+        <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+            <span className="flbl">{label}</span>
+            <span className="fnum">{children}</span>
+            <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+        </div>
+    );
+    const Op = ({ children }) => <span className="fnum">{children}</span>;
+    const formel = lage === 'interferens' ? (
+        <div className="formula-card glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-2 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
+            <span className="flbl" style={{ marginRight: 6 }}>Maximilinje</span>
+            <Vbl label="Vägskillnad">Δ<em>s</em></Vbl><Op>=</Op>
+            <Vbl label="Ordningsnummer"><em>n</em></Vbl><Op>·</Op>
+            <Vbl label="Våglängd"><em>λ</em></Vbl>
+            <span className="fnum" style={{ margin: '0 14px', color: 'var(--lab-ink-muted)' }}>|</span>
+            <span className="flbl" style={{ marginRight: 6 }}>Nodlinje</span>
+            <Vbl label="Vägskillnad">Δ<em>s</em></Vbl><Op>=</Op>
+            <Op>(</Op><Vbl label="Ordningsnummer"><em>n</em></Vbl><Op>+</Op>
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.05, margin: '0 1px' }}>
+                <span className="fnum" style={{ fontSize: 15, padding: '0 2px' }}>1</span>
+                <span className="fnum" style={{ fontSize: 15, borderTop: '1.6px solid currentColor', padding: '0 2px' }}>2</span>
+            </div>
+            <Op>)</Op><Op>·</Op>
+            <Vbl label="Våglängd"><em>λ</em></Vbl>
+        </div>
+    ) : (
+        <div className="formula-card glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-2 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
+            <Vbl label="Våghastighet"><em>v</em></Vbl><Op>=</Op>
+            <Vbl label="Frekvens"><em>f</em></Vbl><Op>·</Op>
+            <Vbl label="Våglängd"><em>λ</em></Vbl>
+        </div>
+    );
+    const TEXT = {
+        vatten: {
+            titel: 'Vågtanken: vattenvågor och brytning',
+            krumelur: ['Hem', 'Fysik nivå 2', 'Vattenvågor och brytningslagen'],
+            ingress: <React.Fragment>En vågtank sedd uppifrån. En <strong>punktformig vågkälla</strong> ger cirkulära vågor, och en rak <strong>vågalstrare</strong> ger plana vågor med raka vågfronter. Där en glasskiva gör vattnet <strong>grundare</strong> går vågorna långsammare. Frekvensen är densamma, så våglängden blir kortare, och en våg som kommer snett in <strong>bryts mot normalen</strong>.</React.Fragment>,
+            prova: ['Dra i punktkällan och se att vågfronterna alltid är cirklar runt den.', 'Öka frekvensen. Vad händer med våglängden när farten är densamma?', 'Brytning: gör det grunda området grundare. Hur ändras <em>λ</em><sub>2</sub> och brytningsvinkeln <em>b</em>?', 'Sätt infallsvinkeln till 0°. Ändrar vågen riktning nu?'],
+        },
+        interferens: {
+            titel: 'Vågtanken: interferens och diffraktion',
+            krumelur: ['Hem', 'Fysik nivå 2', 'Diffraktion och interferens'],
+            ingress: <React.Fragment>Två vågkällor som svänger <strong>i fas</strong> ger ett mönster av stråk där vattnet nästan står stilla, <strong>nodlinjer</strong>, och stråk där vågorna förstärker varandra, <strong>maximilinjer</strong>. En plan våg som går genom en öppning <strong>böjs av vid kanterna</strong> (diffraktion), och två öppningar fungerar som två källor i fas.</React.Fragment>,
+            prova: ['Slå på nodlinjerna och dra isär källorna. Blir nodlinjerna fler eller färre?', 'Öka frekvensen så att våglängden blir kortare. Hur ändras mönstret?', 'En öppning: gör öppningen smal jämfört med våglängden, och sedan bred. När böjs vågen mest?', 'Två öppningar: jämför mönstret med två punktkällor.'],
+        },
+        doppler: {
+            titel: 'Vågtanken: dopplereffekt',
+            krumelur: ['Hem', 'Fysik nivå 2', 'Ljudfrekvens och dopplereffekt'],
+            ingress: <React.Fragment>En vågkälla som rör sig genom vattnet. Varje vågfront sprids som en cirkel från den plats där källan var när fronten skickades ut. <strong>Framför</strong> källan kommer fronterna tätare, så en observatör där uppfattar en <strong>högre frekvens</strong>. <strong>Bakom</strong> källan blir våglängden längre och frekvensen <strong>lägre</strong>.</React.Fragment>,
+            prova: ['Jämför våglängden framför och bakom källan.', 'Sätt källans fart till 0. Hur ser fronterna ut då?', 'Öka källans fart till samma som vågornas fart, 0,20 m/s. Vad händer framför källan?', 'Gå över vågornas fart. Fronterna bildar en kil, precis som ljudet bakom ett flygplan som flyger fortare än ljudet.'],
+        },
+    }[lage];
+
+    const tips = vy === '3D' ? 'Dra för att vrida vattenytan'
+        : mode === 'single' ? 'Dra i vågkällan'
+        : mode === 'double' ? 'Dra i vågkällorna' : null;
+
+    return (
+        <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+            <div className="max-w-6xl mx-auto pt-6">
+                <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                    <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / {TEXT.krumelur[2]}
+                </div>
+                <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>{TEXT.titel}</h1>
+                <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>{TEXT.ingress}</p>
+                {formel}
+
+                <main className="flex flex-col lg:flex-row gap-6">
+                    <div className="lg:w-3/5 order-1">
+                        <div className={'scene-wrap' + (isFullscreen ? ' is-fs' : '')} data-theme="ljusPapper" ref={wrapRef}>
+                            <canvas ref={canvas3Ref} className="vs-3d" style={{ display: vy === '3D' ? 'block' : 'none', touchAction: 'none', cursor: 'grab' }}
+                                    onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}
+                                    aria-label="Vågtanken i 3D" role="img" />
+                            <canvas ref={canvasRef} width={W} height={H}
+                                    style={{ display: vy === '3D' ? 'none' : 'block', touchAction: kanDra ? 'none' : 'auto', cursor: vy === '3D' ? 'grab' : (mode === 'single' || mode === 'double') ? 'pointer' : 'default' }}
+                                    onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}
+                                    aria-label="Vågtank sedd uppifrån med vattenvågor" role="img" />
+                            {avlasning()}
+                            {tips && <div className="scene-hint">{tips}</div>}
+                            {sceneToggles()}
+                            <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm" title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                {isFullscreen ? (
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                    </svg>
+                                ) : (
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                    </svg>
+                                )}
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="lg:w-2/5 order-2">
+                        {lagesVal(false)}
+                        <div className="glass-card rounded-xl p-3 mb-3">
+                            {reglage(false)}
+                            <div className="flex gap-2 mt-1">
+                                <button className={'btn-toggle flex-1' + (spelar ? '' : ' active')} onClick={() => setSpelar((s) => !s)}>{spelar ? 'Pausa' : 'Spela'}</button>
+                            </div>
+                        </div>
+                        <div className="glass-card rounded-xl p-4">
+                            <div className="flbl mb-2">Prova själv</div>
+                            <ul className="provlista text-sm list-disc pl-5" style={{ color: 'var(--lab-ink-soft)' }}>
+                                {TEXT.prova.map((t, i) => <li key={i} dangerouslySetInnerHTML={{ __html: t }} />)}
+                            </ul>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    );
+};
+
+ReactDOM.createRoot(document.getElementById('root')).render(<WaveSimulator />);
     </script>
     <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
     <script src="data/katalog.js"></script>
     <script src="section-nav.js"></script>
     <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->

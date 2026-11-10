@@ -28150,120 +28150,6 @@
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
   }
 
-  /* ---------------- scen: vågorna vid stranden (fy2-2.13 Ex 3)
-   * Kvalitativ uppgift. Stranden och djupkurvorna ur uppgiftens figur
-   * står förritade; pennan ritar hur fronterna vrids. Vinklarna mellan
-   * front och strandkant i de fyra djupzonerna följer brytningslagen med
-   * v ∝ √h för djupen 8, 4, 2 och 1 m: 40°, 27°, 18,7° och 13,1°. */
-  function layoutVagorMotStranden(cfg, F) {
-    var T = physTools(F), acts = T.acts, padL = T.padL;
-    var adv = 1.7 * F, bw = 292;
-    var X0 = 60, X1 = 410, YS = 250;                    /* strandkanten */
-    var GR = [70, 130, 180, 220, YS];                   /* zongränser uppifrån */
-    var VINK = [40, 27.03, 18.75, 13.14].map(function (a) { return a * Math.PI / 180; });
-
-    forritad(T, function () {
-      T.line([X0, YS], [X1, YS]);
-      T.hatch([X0 + 6, YS + 12], [X1, YS + 12], 16);
-      [130, 180, 220].forEach(function (y) { T.dash([X0, y], [X1, y]); });
-      T.lbl('strand', X1 - 70, YS + 34, null, 0.5);
-      T.lbl('djupt', X0 + 4, 120, null, 0.45);
-      T.lbl('grunt', X1 - 54, 242, null, 0.45);
-    });
-
-    /* en front som börjar i (x, GR[0]) ute på djupt vatten och knycker
-     * vid varje zongräns: lutningen mot strandkanten minskar inåt land */
-    function front(xStart) {
-      var pts = [[xStart, GR[0]]], x = xStart, y = GR[0];
-      for (var z = 0; z < 4; z++) {
-        var dy = GR[z + 1] - y;
-        x -= dy / Math.tan(VINK[z]);
-        y = GR[z + 1];
-        pts.push([x, y]);
-      }
-      return pts;
-    }
-    T.tanke(T.figurBubble(300, [
-      [['Ute på djupt vatten kommer fronterna']],
-      [['snett in. Vid varje djupkurva blir']],
-      [['vattnet grundare och fronten knycker.']]
-    ], 326));
-    [330, 410, 490].forEach(function (xs) {
-      var p = front(xs);
-      for (var k = 0; k + 1 < p.length; k++) {
-        var a = p[k], b = p[k + 1];
-        /* klipp mot arkets vänsterkant för fronten */
-        if (b[0] < X0) {
-          var t = (X0 - a[0]) / (b[0] - a[0]);
-          if (t <= 0) break;
-          b = [X0, a[1] + t * (b[1] - a[1])];
-          T.line(a, b);
-          break;
-        }
-        if (a[0] > X1) {
-          var t2 = (X1 - a[0]) / (b[0] - a[0]);
-          if (t2 >= 1) continue;
-          a = [X1, a[1] + t2 * (b[1] - a[1])];
-        }
-        T.line(a, b);
-      }
-      T.pause(140);
-    });
-    T.stepEnd();
-
-    /* vågstrålen: vinkelrät mot fronterna, vrids mot normalen */
-    T.tanke(T.figurBubble(300, [
-      [['Vågen rör sig vinkelrätt mot sina']],
-      [['fronter. Riktningen vrids mot normalen,']],
-      [['allt mer rakt in mot stranden.']]
-    ], 326));
-    var rp = [[150, 70]], rx = 150;
-    for (var z = 0; z < 4; z++) {
-      rx += (GR[z + 1] - GR[z]) * Math.tan(VINK[z]);
-      rp.push([rx, GR[z + 1]]);
-    }
-    for (var k = 0; k + 1 < rp.length - 1; k++) T.line(rp[k], rp[k + 1], BLUE);
-    T.arrow(rp[rp.length - 2], rp[rp.length - 1], BLUE, 9);
-    T.dash([rx, YS - 70], [rx, YS], BLUE);
-    T.lbl('normal', rx + 8, YS - 10, BLUE, 0.45);
-    T.stepEnd();
-
-    var y = 426;
-    T.tanke(T.bubble(120, T.bubbleTop(336), bw, [
-      [['Nära land ligger fronterna nästan']],
-      [['parallellt med strandkanten.']]
-    ]));
-    T.str('a) Fronternas riktning', padL, y, null, 0.62);
-    T.pause(300);
-    y += 1.9 * F;
-    T.str('Svar: Fronterna vrids och blir nästan', padL, y);
-    y += adv;
-    T.underline(T.str('parallella med strandkanten.', padL, y), y);
-    T.stepEnd();
-
-    /* ---- b) förklaringen ---- */
-    y += adv + 1.6 * F;
-    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
-      [['Farten beror på djupet: ju grundare']],
-      [['vatten, desto långsammare våg.']]
-    ]));
-    T.str('b) Förklaring', padL, y, null, 0.62);
-    T.pause(300);
-    var rader = ['Svar: Den del av fronten som är',
-                 'närmast land ligger på grundare',
-                 'vatten och går långsammare. Resten',
-                 'av fronten hinner ikapp, så fronten',
-                 'vrids mot strandkanten.'];
-    rader.forEach(function (r, ix) {
-      y += ix === 0 ? 1.9 * F : adv;
-      var xe = T.str(r, padL, y);
-      if (ix === rader.length - 1) T.underline(xe, y);
-    });
-    T.stepEnd();
-
-    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
-  }
-
   /* ---------------- scen: två högtalare och första tysta punkten
    * (fy2-2.14 Ex 1). Figuren följer teorins orientering (se REGEL):
    * högtalarna till vänster, väggen till höger, C–D–E uppifrån och ned.
@@ -65275,7 +65161,6 @@
                    ljudniva: layoutLjudniva,
                    vattenbrytning: layoutVattenbrytning,
                    'vattenbrytning-grunt-djupt': layoutVattenbrytningGruntDjupt,
-                   'vagor-mot-stranden': layoutVagorMotStranden,
                    hogtalare: layoutHogtalare,
                    /* Fysik 2 kapitel 3 — Elektromagnetism */
                    faltpunkter: layoutFaltpunkter,

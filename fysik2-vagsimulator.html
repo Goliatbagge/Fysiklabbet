@@ -718,8 +718,8 @@ const WaveSimulator = () => {
                 for (const [a, kk, f0, y0, y1] of [[a1, k1, 0, 0, YB_BRYT], [a2, k2, fas0, YB_BRYT, H]]) {
                     ctx.save(); ctx.beginPath(); ctx.rect(0, y0, W, y1 - y0); ctx.clip();
                     const lam = 2 * Math.PI / kk;
-                    const c0 = (phi + Math.PI / 2 - f0) / kk;
-                    for (let n = -30; n < 30; n++) {
+                    let c0 = (phi + Math.PI / 2 - f0) / kk; c0 -= lam * Math.floor(c0 / lam);   // fasen växer hela tiden: håll c0 inom ett varv
+                    for (let n = -1, nMax = Math.ceil((W + H) / lam) + 1; n <= nMax; n++) {   // x · a täcker 0 … W + H
                         const c = c0 + n * lam;                  // x · ax + y · ay = c
                         const px = c * a[0], py = c * a[1];
                         ctx.beginPath(); ctx.moveTo(px - 2000 * a[1], py + 2000 * a[0]); ctx.lineTo(px + 2000 * a[1], py - 2000 * a[0]); ctx.stroke();

@@ -29959,9 +29959,10 @@ Med $x = 4$ blir nämnaren 0. Alla andra $x$ går att sätta in, även tal mindr
             answer: { value: 6.9, unit: 'm', tol: 0.01 },
             delsvar: [
                 { del: 'a' },
-                { del: 'b', value: 6.9, unit: 'm', tol: 0.01, etikett: 'största bredden' },
-                { del: 'c', value: 6.9, unit: 'm', tol: 0.01, etikett: 'minsta längden' },
-                { del: 'c', value: 12, unit: 'm', etikett: 'största längden' },
+                { del: 'b', value: 4, unit: 'm', etikett: 'undre gräns för $x$' },
+                { del: 'b', value: 6.9, unit: 'm', tol: 0.01, etikett: 'övre gräns för $x$' },
+                { del: 'c', value: 6.9, unit: 'm', tol: 0.01, etikett: 'undre gräns för $y$' },
+                { del: 'c', value: 12, unit: 'm', etikett: 'övre gräns för $y$' },
             ],
             solution: `**Insikten:** definitionsmängden bestäms av *alla* villkor tillsammans. Varje villkor ger en gräns för $x$, och det är den skarpaste gränsen åt varje håll som gäller.
 

@@ -1742,7 +1742,6 @@
                    title={'Öppna delprov ' + d + ' (pdf)'}>{d}</a>
             ));
             const medLos = k.prov.filter(p => synligLosning(p.losning));
-            const ovriga = k.prov.filter(p => medLos.indexOf(p) < 0);
             const grannar = NP_FRISLAPPTA.filter(x => x.amne === k.amne);
 
             const cell = (p, losningsrad) => {
@@ -1816,18 +1815,9 @@
                         </p>
                     )}
 
-                    {medLos.length > 0 && (
-                        <React.Fragment>
-                            <h2 className="np-sektionsrubrik">Prov med lösningsförslag</h2>
-                            <ul className="np-provgrid">{medLos.map(p => cell(p, true))}</ul>
-                        </React.Fragment>
-                    )}
-                    {ovriga.length > 0 && (
-                        <React.Fragment>
-                            <h2 className="np-sektionsrubrik">{medLos.length > 0 ? 'Fler frisläppta prov' : 'Frisläppta prov'}</h2>
-                            <ul className="np-provgrid np-provgrid-tat">{ovriga.map(p => cell(p, false))}</ul>
-                        </React.Fragment>
-                    )}
+                    {/* Alla prov i en lista, nyast först. Lösningsförslaget står under
+                        de prov som har ett (önskemål 2026-11-10: inga mellanrubriker). */}
+                    <ul className="np-provgrid">{k.prov.map(p => cell(p, true))}</ul>
 
                     <p className="np-kallrad">
                         {k.kursprov ? (

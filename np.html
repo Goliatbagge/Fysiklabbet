@@ -152,6 +152,65 @@
         .np-lank-los { background: var(--lab-ink); border-color: var(--lab-ink); color: var(--lab-bg) !important; }
         .np-lank-los:hover { background: var(--lab-ink-soft); }
         .np-lank-video { border-color: var(--lab-accent); color: var(--lab-accent) !important; }
+        /* Provknapparna (ersätter raderna ovan sedan 2026-11-10): knappen
+           öppnar originalprovet hos utgivaren, och under den står länken
+           "Lösningsförslag" till vår lösningssida för provet (där varje
+           uppgift har text-, penn- och videolösning). */
+        .np-provgrid {
+            list-style: none; margin: 0; padding: 0;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+            gap: 14px 12px;
+        }
+        .np-provcell { display: flex; flex-direction: column; gap: 7px; }
+        /* Alla knappar i en rad blir lika höga (cellen sträcks, knappen fyller),
+           och länkplatsen finns även där lösningar saknas: annars hamnar
+           Lösningsförslag på olika höjd under knapparna i samma rad. */
+        .np-provcell > .np-provknapp { flex: 1 1 auto; }
+        /* Subgrid: knappraden och länkraden är egna rader i rutnätet, så en
+           rad utan lösningar får ingen tom länkrad under sig. */
+        @supports (grid-template-rows: subgrid) {
+            .np-provgrid { row-gap: 0; }
+            .np-provcell { display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 6px; padding-bottom: 14px; }
+            .np-losningsslot:empty { display: none; }
+        }
+        .np-provknapp {
+            display: flex; flex-direction: column; align-items: flex-start; gap: 3px;
+            padding: 12px 14px; border-radius: 10px;
+            background: var(--lab-bg-panel); border: 1px solid var(--lab-line-strong);
+            color: var(--lab-ink) !important; text-decoration: none;
+            transition: transform .08s ease, box-shadow .08s ease, border-color .12s ease;
+        }
+        a.np-provknapp:hover {
+            transform: translateY(-1px); border-color: var(--lab-ink-soft);
+            box-shadow: 0 3px 10px rgba(15, 22, 32, 0.10);
+        }
+        .np-provcell.har-losning .np-provknapp { border-color: var(--lab-ink); }
+        .np-provknapp.is-utan-fil { background: none; border-style: dashed; }
+        .np-provknapp-namn { font-family: var(--lab-font-display); font-size: 19px; line-height: 1.2; }
+        .np-provknapp-under {
+            display: inline-flex; align-items: center; gap: 5px;
+            font-size: 12.5px; color: var(--lab-ink-soft);
+        }
+        .np-provknapp-under small { font-size: 10.5px; color: var(--lab-ink-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+        .np-provknapp .np-tagg { margin-top: 4px; font-size: 10px; }
+        .np-losningsslot { display: flex; flex-direction: column; gap: 2px; align-items: flex-start; }
+        .np-losningslank {
+            display: inline-flex; align-items: center; gap: 6px; align-self: flex-start;
+            margin-left: 2px; font-size: 14px; font-weight: 600;
+            color: var(--lab-accent) !important; text-decoration: none;
+            border-bottom: 1px solid transparent;
+        }
+        .np-losningslank:hover { border-bottom-color: var(--lab-accent); }
+        .np-losningslank-video {
+            display: inline-flex; align-items: center; gap: 3px;
+            font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em;
+            color: var(--lab-ink-muted);
+        }
+        @media (max-width: 560px) {
+            .np-provgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 10px; }
+            .np-provknapp { padding: 10px 11px; }
+            .np-provknapp-namn { font-size: 17px; }
+        }
         .np-kallrad { font-size: 13px; color: var(--lab-ink-muted); margin: 10px 0 0; line-height: 1.55; }
         .np-kallrad a { color: inherit !important; text-decoration: underline; text-underline-offset: 2px; }
         @media (max-width: 560px) {
@@ -1520,10 +1579,11 @@
                     <h1 className="np-hero-title">Nationella prov <em>med lösningar och videor</em></h1>
                     <p className="np-lede">
                         Här finns alla frisläppta nationella prov i matematik och kursprov i fysik
-                        för kurserna på Fysiklabbet. Till de markerade proven finns lösningar
-                        som du klickar fram <em>ett steg i taget</em>, med en förklaring till varje
-                        steg. Till proven från våren 2022 i Ma 1c, Ma 2c, Ma 3c och Ma 4 finns
-                        dessutom en <em>videolösning till varje uppgift</em>.
+                        för kurserna på Fysiklabbet. Klicka på ett prov för att öppna det. Under
+                        många av proven står <em>Lösningsförslag</em>: där väljer du uppgift och
+                        ser lösningen som text, ett steg i taget, eller skriven med penna. Till
+                        proven från våren 2022 i Ma 1c, Ma 2c, Ma 3c och Ma 4 finns dessutom
+                        en <em>videolösning till varje uppgift</em>.
                     </p>
                     <p className="np-lede np-lede-obs">
                         <strong>Obs!</strong> Endast proven från våren 2022 följer aktuell ämnesplan.
@@ -1548,31 +1608,42 @@
                                     <h3 className="np-kursrubrik">
                                         {k.kurs}<span className="np-kurskort">{k.kort}</span>
                                     </h3>
-                                    <ul className="np-provlista">
+                                    <ul className="np-provgrid">
                                         {k.prov.map(p => {
                                             const fil = provFil(k, p);
                                             const los = synlig(p.losning) ? p.losning : null;
                                             const video = los && harVideo(los);
+                                            const namn = k.kursprov ? 'Kursprov, ' + terminNamn(p.t).toLowerCase() : terminNamn(p.t);
+                                            const innehall = (
+                                                <React.Fragment>
+                                                    <span className="np-provknapp-namn">{namn}</span>
+                                                    <span className="np-provknapp-under">
+                                                        {fil ? <React.Fragment>Provet <small>{k.format}</small> {IKON_UT}</React.Fragment>
+                                                             : 'Provet finns hos Skolverket'}
+                                                    </span>
+                                                    {p.t === 'vt22' && <span className="np-tagg">Aktuell ämnesplan</span>}
+                                                </React.Fragment>
+                                            );
                                             return (
-                                                <li key={p.t} className={'np-provrad' + (los ? ' har-losning' : '')}>
-                                                    <span className="np-provrad-namn">
-                                                        {k.kursprov ? 'Kursprov, ' + terminNamn(p.t).toLowerCase() : terminNamn(p.t)}
-                                                        {p.t === 'vt22' && <span className="np-tagg">Aktuell ämnesplan</span>}
-                                                    </span>
-                                                    <span className="np-provrad-lankar">
-                                                        {fil && (
-                                                            <a className="np-lank" href={fil} target="_blank" rel="noopener"
-                                                               title={'Provet hos ' + k.kalla.namn}>
-                                                                Provet <small>{k.format}</small> {IKON_UT}
-                                                            </a>
-                                                        )}
-                                                        {los && (
-                                                            <a className="np-lank np-lank-los" href={'#' + los}>Lösningar steg för steg</a>
-                                                        )}
-                                                        {video && (
-                                                            <a className="np-lank np-lank-video" href={'#' + los}>{IKON_PLAY} Videolösningar</a>
-                                                        )}
-                                                    </span>
+                                                <li key={p.t} className={'np-provcell' + (los ? ' har-losning' : '')}>
+                                                    {fil ? (
+                                                        <a className="np-provknapp" href={fil} target="_blank" rel="noopener"
+                                                           title={'Öppna provet hos ' + k.kalla.namn + ' (' + k.format + ')'}>
+                                                            {innehall}
+                                                        </a>
+                                                    ) : (
+                                                        <span className="np-provknapp is-utan-fil">{innehall}</span>
+                                                    )}
+                                                    <div className="np-losningsslot">
+                                                    {los && (
+                                                        <a className="np-losningslank" href={'#' + los}
+                                                           title={video ? 'Lösningsförslag som text, med penna och som video' : 'Lösningsförslag som text och med penna'}>
+                                                            Lösningsförslag
+                                                            <span aria-hidden="true">→</span>
+                                                        </a>
+                                                    )}
+                                                    {video && <span className="np-losningslank-video">{IKON_PLAY} Med videolösningar</span>}
+                                                    </div>
                                                 </li>
                                             );
                                         })}

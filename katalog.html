@@ -2568,7 +2568,9 @@
                 }
                 const sel = window.getSelection && window.getSelection();
                 if (sel && sel.toString()) return;   // markerar text — bläddra inte
-                next();
+                // Vänstra halvan av skärmen stegar bakåt, högra framåt
+                // (som att bläddra i en bok, särskilt på mobilen).
+                if (e.clientX < window.innerWidth / 2) prev(); else next();
             };
 
             return (
@@ -2588,7 +2590,7 @@
                             <h1>{emTitle(title)}</h1>
                             <span className="lab-pres-rule" aria-hidden="true" />
                             <div className="lab-pres-hint">
-                                Klicka — eller tryck <kbd>→</kbd> — för nästa stycke · <kbd>Esc</kbd> avslutar
+                                Klicka till höger eller tryck <kbd>→</kbd> för nästa stycke, till vänster för föregående · <kbd>Esc</kbd> avslutar
                             </div>
                         </div>
                         {html ? (

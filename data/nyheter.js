@@ -103,6 +103,62 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-11-lonnloven-och-bombkolet",
+    date: "2026-11-11",
+    title: "Lönnlöv från 65 år visar hur kolet från kärnvapenproven späddes ut",
+    deck: "Sedan 1961 har forskare plockat lönnlöv på samma plats utanför Ottawa och mätt halten av den radioaktiva kolisotopen kol-14. Serien visar att halten i löven sjönk under nivån från tiden före kärnvapenproven först 2024, omkring två år efter luften, eftersom träden bygger sina nya löv delvis av kol som lagrats under tidigare år.",
+    category: "Kärnfysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-11-11-lonnloven-och-bombkolet.jpg",
+    imageAlt: "Grenar med orange och gula lönnlöv i motljus. Bakom dem glittrar en blå sjö med solreflexer och mörka speglingar av träd på andra stranden.",
+    imageCredit: "Foto: LBM1948, lönngren i Gatineau Park i oktober 2010, via Wikimedia Commons (CC BY-SA 4.0). Beskuren till bredformat.",
+    tags: ["kärnfysik", "kol-14", "radioaktivitet", "halveringstid", "isotop", "bombpulsen", "suesseffekten", "kolets kretslopp", "fotosyntes", "acceleratormasspektrometri", "klimat"],
+    sources: [
+      { name: "Phys.org: Gatineau Park foliage reveals local Cold War nuclear testing legacy (University of Ottawa, november 2026)", url: "https://phys.org/news/2026-11-gatineau-foliage-reveals-local-cold.html" },
+      { name: "Scientific Reports: studien i fulltext (öppen, CC BY-NC-ND 4.0)", url: "https://www.nature.com/articles/s41598-026-76700-9" }
+    ],
+    research: {
+      citation: "L. I. Wassenaar, C. A. Crann och S. Murseli, ”Stored carbohydrates buffer Bomb and Suess radiocarbon effects in maple leaves across a 65-year Ottawa region record”, Scientific Reports 16, 37339 (2026), publicerad 21 oktober 2026. Kollegialt granskad.",
+      url: "https://doi.org/10.1038/s41598-026-76700-9"
+    },
+    larare: {
+      moment: [
+        { label: "Radioaktivt sönderfall", href: "katalog.html?id=fy1-9.3" },
+        { label: "Aktivitet och halveringstid", href: "katalog.html?id=fy1-9.4" }
+      ],
+      fragor: [
+        "Kol-14 har halveringstiden omkring 5 700 år. Hur stor andel av kol-14-atomerna hinner sönderfalla på 60 år? Varför kan sönderfallet då inte förklara att halten i luften sjunkit så mycket sedan 1964?",
+        "Överskottet av kol-14 i löven halverades ungefär var tolfte år mellan 1964 och 1990. Vad är skillnaden mellan den här ”halveringstiden” och halveringstiden för en radioaktiv isotop?",
+        "Under bombpulsens uppgång 1962–1963 låg löven under luften, men under hela nedgången låg de över. Hur kan samma förklaring, att träden använder lagrat kol, ge en skillnad åt båda hållen?"
+      ]
+    },
+    body: [
+      { type: "p", html: "Sedan 1961 har forskare plockat blad från sockerlönnar på samma plats i Gatineau Park, strax nordväst om Ottawa i Kanada, en gång i månaden under växtsäsongen. Genom att mäta hur mycket av den radioaktiva kolisotopen kol-14 bladen innehåller har de byggt upp en 65&nbsp;år lång mätserie över hur luften förändrats sedan kärnvapenproven under kalla kriget." },
+      { type: "p", html: "Nu har Leonard Wassenaar, Carley Crann och Sarah Murseli vid acceleratoranläggningen André E. Lalonde National Facility for Accelerator Mass Spectrometry vid University of Ottawa förlängt serien till 2025. Studien publicerades i den öppet tillgängliga tidskriften <em>Scientific Reports</em> den 21&nbsp;oktober." },
+      { type: "quote", html: "Bladen är en 65&nbsp;år lång dagbok över atmosfären. Det tog mer än 65&nbsp;år för det extra radiokolet från vapenproven att försvinna ur biosfären i Ottawatrakten.", cite: "Leonard Wassenaar, University of Ottawa, i universitetets pressmeddelande (översatt)" },
+      { type: "h2", text: "Bomberna fördubblade halten" },
+      { type: "p", html: "Kol-14 bildas hela tiden högt uppe i atmosfären, när neutroner som den kosmiska strålningen slår loss träffar kväveatomer. Det nybildade kolet blir koldioxid, som växterna tar upp i fotosyntesen och bygger in i socker, stärkelse och nya blad. Ett blad bär därför ett avtryck av den luft det byggdes av." },
+      { type: "p", html: "När kärnvapen sprängdes ovan jord i slutet av 1950-talet och början av 1960-talet frigjordes stora mängder neutroner, som gav samma reaktion med luftens kväve. Halten kol-14 i luften ungefär fördubblades. Den här toppen kallas bombpulsen. I lönnbladen från Ottawa nåddes toppen 1964, då halten låg 842&nbsp;promille över nivån från tiden före proven." },
+      { type: "h2", text: "Sönderfallet förklarar nästan ingenting" },
+      { type: "p", html: "Sedan dess har halten sjunkit, men inte för att kol-14 sönderfaller. Halveringstiden är omkring 5&nbsp;700&nbsp;år, så på sextio år hinner mindre än en procent av atomerna sönderfalla. I stället har haven och växtligheten tagit upp det extra kolet, och koldioxid från kol, olja och naturgas har spätt ut resten. Fossilt kol är miljoner år gammalt och har för länge sedan förlorat sitt kol-14. Utspädningen kallas Suesseffekten." },
+      { type: "p", html: "Mellan 1964 och 1990 halverades överskottet i bladen ungefär var tolfte år. Mätningar i ren luft vid forskningsstationen Jungfraujoch i de schweiziska Alperna visar att halten passerade nivån från tiden före proven omkring 2021–2022. I bladen hände samma sak först 2024, och sommaren 2025 låg de 13,9&nbsp;promille under den nivån." },
+      { type: "h2", text: "Träden bygger med gammalt kol" },
+      { type: "p", html: "Efter toppen låg bladen hela tiden över luften. Mellan 1990 och 2019 var skillnaden i genomsnitt 7,4&nbsp;promille, och under det snabba fallet 1966–1998 i genomsnitt 34&nbsp;promille. Förklaringen är att ett träd inte bygger sina nya blad enbart av årets koldioxid. På våren, innan bladen själva hunnit ta över, tar trädet av socker och stärkelse som lagrats i stam och grenar under tidigare år. Det kolet kommer från luft som hade en högre halt kol-14." },
+      { type: "image", src: "nyheter/bilder/2026-11-11-lonnloven-och-bombkolet-2.jpg", alt: "Diagram med årtal från 1955 till 2025 på den vågräta axeln och halten kol-14 i promille, från 0 till 1000, på den lodräta. En röd kurva för luften stiger brant till en topp strax under 1000 kring 1963–1964 och sjunker sedan i en jämn, avtagande kurva mot noll. Grå ringar för äldre bladmätningar och svarta prickar för nya ligger efter toppen hela tiden strax ovanför den röda kurvan, medan de första ringarna, från 1962 och 1963, ligger under den. En inzoomad ruta för åren 2010–2026 visar att luften passerar noll vid 2021,8 och bladen vid 2024,5, med en pil märkt lag 2.2 ± 0.3 yr mellan dem.", caption: "Halten kol-14 i luften (röd kurva) från 1955 och i lönnbladen från Gatineau Park (ringar och prickar) från 1961 till 2025, mätt i promille i förhållande till nivån före kärnvapenproven. Den inzoomade rutan visar att bladen passerade nollnivån omkring två år efter luften.", credit: "Figur: Wassenaar, Crann och Murseli, Scientific Reports 16, 37339 (2026), figur 1 (CC BY-NC-ND 4.0)" },
+      { type: "p", html: "Ju snabbare halten i luften föll, desto större var skillnaden. Under bombpulsens uppgång 1962–1963 var det tvärtom: då låg bladen under luften, eftersom det lagrade kolet var äldre och fattigare på kol-14 än den snabbt berikade luften. Att skillnaden byter tecken på det sättet talar för att den kommer från trädet och inte från luften runt det." },
+      { type: "p", html: "Mätningarna räcker inte för att bestämma både hur stor del av kolet som kommer från förrådet och hur gammalt det är, bara produkten av de två. Om det lagrade kolet i genomsnitt är två till tre år gammalt motsvarar det att 50–70&nbsp;procent av bladets kol kommer från förrådet. Modellen förutsade också att bladen skulle passera nollnivån två till tre år efter luften. Mätningarna gav 2,2&nbsp;±&nbsp;0,3&nbsp;år." },
+      { type: "h2", text: "Varför fördröjningen spelar roll" },
+      { type: "p", html: "Blad och årsringar används ofta för att ta reda på hur luftens halt av kol-14 sett ut på platser och under perioder där ingen mätte luften direkt. Bombpulsens kurva används dessutom inom rättsmedicin, ekologi och medicin. Den som tolkar ett blad som en ögonblicksbild av årets luft får alltså ett litet fel, i dag omkring 5–10&nbsp;promille, så länge halten fortsätter att sjunka." },
+      { type: "p", html: "Två saker syntes inte i bladen. Kärnkraftverk och forskningsreaktorer i Ontario, där den närmaste ligger omkring 128&nbsp;km bort, gav inga varaktiga förhöjningar. Inte heller den tillfälliga minskningen av de fossila utsläppen med omkring 7&nbsp;procent under pandemiåret 2020 gick att se: den väntade effekten, 1–2&nbsp;promille, är mindre än mätosäkerheten." },
+      { type: "quote", html: "När man räknar med den två år långa fördröjningen bör våra tolkningar bli mer exakta.", cite: "Leonard Wassenaar, University of Ottawa, i universitetets pressmeddelande (översatt)" },
+      { type: "fact", title: "Visste du?", items: [
+        "Fram till 2004 mätte Kanadas geologiska undersökning halten genom att räkna sönderfallen i provet. I dag räknas kol-14-atomerna en och en i en accelerator, och det räcker med 1–3&nbsp;milligram torkat blad.",
+        "Ett prov från 2002 låg omkring 55&nbsp;promille över trenden. Mätningen upprepades med samma resultat, men ingen förklaring har hittats, och provet räknades bort.",
+        "Bladen plockas från tre till fem träd på en brant som vetter mot Ottawaflodens dal. Luften där är väl blandad, så att bladen speglar regionens luft och inte utsläpp från staden."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-10-rockringens-fysik",
     date: "2026-11-10",
     title: "Lår, smalben och fot håller rockringen i gång tillsammans",

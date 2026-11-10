@@ -2196,7 +2196,7 @@ window.BEGREPP = [
   {
     id: 'isotop',
     term: 'Isotop',
-    former: ['isotop', 'isotopen', 'isotoper', 'isotoperna', 'isotopisk', 'isotopiska', 'isotopförhållande', 'isotopförhållandet', 'isotopförhållanden', 'nuklid', 'nuklider', 'väteisotop', 'väteisotopen', 'väteisotoper', 'väteisotoperna', 'moderisotop', 'moderisotopen', 'radiumisotop', 'radiumisotoper', 'radiumisotoperna', 'titanisotop', 'titanisotopen', 'titanisotoper'],
+    former: ['isotop', 'isotopen', 'kolisotop', 'kolisotopen', 'isotoper', 'isotoperna', 'isotopisk', 'isotopiska', 'isotopförhållande', 'isotopförhållandet', 'isotopförhållanden', 'nuklid', 'nuklider', 'väteisotop', 'väteisotopen', 'väteisotoper', 'väteisotoperna', 'moderisotop', 'moderisotopen', 'radiumisotop', 'radiumisotoper', 'radiumisotoperna', 'titanisotop', 'titanisotopen', 'titanisotoper'],
     kort: 'Atomer av samma grundämne men med olika många neutroner i kärnan. De uppför sig nästan likadant kemiskt, men skiljer sig i massa och i hur stabila de är.',
     relaterade: ['radioaktivt-sonderfall', 'spektroskopi', 'deuterium', 'tritium'],
     body: [
@@ -4764,6 +4764,54 @@ window.BEGREPP = [
       { type: 'p', html: 'En flock med tusentals starar kan svänga över himlen som ett enda moln som byter form, och ett fiskstim kan vika undan för en rovfisk på en bråkdels sekund. Ingen fågel eller fisk ser hela gruppen. Var och en håller bara koll på några få grannar i närheten, och ändå blir rörelsen samordnad. Det kallas kollektiv rörelse.' },
       { type: 'p', html: 'Fysiker beskriver ofta sådan rörelse med modeller där varje djur är en partikel som driver sig själv framåt. Partikeln följer några enkla regler: håll lagom avstånd, simma eller flyg åt ungefär samma håll som grannarna och dra dig mot gruppen om du hamnar för långt ut. Lägger man till lite slump, eftersom inget djur är perfekt, räcker det ofta för att en dator ska skapa flockar och stim som liknar de riktiga. Ett av de mest kända exemplen är en modell som den ungerske fysikern Tamás Vicsek och hans kolleger publicerade 1995.' },
       { type: 'p', html: 'De öppna frågorna gäller vad djuren faktiskt gör. Hur många grannar följer en fisk eller en fågel? Är det de närmaste, eller de som syns tydligast? Sådant går inte att läsa ut direkt ur en film av ett stim, och därför gör forskare försök där de själva styr en del av gruppen, till exempel med robotfiskar eller projicerade fiskar som ett riktigt djur får simma tillsammans med. Samma frågor är intressanta för den som vill bygga svärmar av drönare eller robotar som ska samarbeta utan en central styrning.' }
+    ]
+  },
+  {
+    id: 'kol-14',
+    term: 'Kol-14',
+    former: ['kol-14', 'radiokol', 'radiokolet', 'kol-14-atomerna', 'kol-14-atomer', 'kol-14-halten', 'kol-14-halt'],
+    kort: 'En radioaktiv form av grundämnet kol, med två neutroner fler än vanligt kol. Den bildas hela tiden i atmosfären och har halveringstiden omkring 5 700 år.',
+    relaterade: ['isotop', 'halveringstid', 'radioaktivt-sonderfall', 'kosmisk-stralning', 'bombpulsen', 'suesseffekten'],
+    body: [
+      { type: 'p', html: 'Nästan allt kol omkring oss är kol-12, med sex protoner och sex neutroner i kärnan. En mycket liten del, ungefär en atom på en biljon, är kol-14, som har åtta neutroner. Det är för många för att kärnan ska vara stabil, och förr eller senare omvandlas en av neutronerna till en proton. Då blir atomen kväve-14, och en elektron och en antineutrino skickas ut. Halveringstiden är omkring 5&nbsp;700&nbsp;år.' },
+      { type: 'p', html: 'Att det alls finns kol-14 kvar beror på att det nybildas hela tiden. Högt uppe i atmosfären slår den kosmiska strålningen loss neutroner, och när en sådan neutron träffar en kväveatom kan kärnan ta upp den och skicka ut en proton. Kvar blir kol-14. Det reagerar med syre till koldioxid, blandas i luften och tas upp av växter i fotosyntesen, och via maten hamnar det i alla levande varelser.' },
+      { type: 'p', html: 'Så länge en organism lever fylls kol-14 på i samma takt som det sönderfaller. När den dör upphör påfyllningen, och halten sjunker med halveringstiden. Genom att mäta hur mycket som är kvar går det att bestämma åldern på trä, ben och tyg upp till omkring 50&nbsp;000&nbsp;år. Metoden kallas kol-14-datering eller radiokoldatering.' }
+    ]
+  },
+  {
+    id: 'bombpulsen',
+    term: 'Bombpulsen',
+    former: ['bombpulsen', 'bombpuls'],
+    kort: 'Den kraftiga ökningen av kol-14 i luften som kärnvapenproven ovan jord orsakade kring 1960. Halten på norra halvklotet ungefär fördubblades och har sedan dess sjunkit.',
+    relaterade: ['kol-14', 'suesseffekten', 'isotop'],
+    body: [
+      { type: 'p', html: 'En kärnvapenexplosion frigör väldigt många neutroner. När provsprängningar gjordes ovan jord reagerade neutronerna med kvävet i luften på samma sätt som neutronerna från den kosmiska strålningen gör, och det bildades kol-14. Under några få år i slutet av 1950-talet och början av 1960-talet ungefär fördubblades halten kol-14 i luften på norra halvklotet. Toppen nåddes 1963–1964, och efter provstoppsavtalet 1963, då USA, Sovjetunionen och Storbritannien slutade provspränga i atmosfären, började halten sjunka.' },
+      { type: 'p', html: 'Nedgången beror inte på radioaktivt sönderfall, som är alldeles för långsamt. Det som händer är att det extra kolet blandas in i haven och i växtligheten, och att koldioxid från fossila bränslen späder ut det som är kvar i luften. Under de första decennierna halverades överskottet ungefär var tolfte år.' },
+      { type: 'p', html: 'Bombpulsen har blivit ett användbart verktyg. Eftersom halten ändrades så snabbt och så tydligt fungerar den som en tidsmarkör: mäter man kol-14 i ett blad, en årsring eller en vävnad som bildats efter 1955 går det ofta att avgöra vilket år kolet togs upp. Forskare använder den också för att se hur snabbt kol rör sig mellan luften, haven och växterna.' }
+    ]
+  },
+  {
+    id: 'suesseffekten',
+    term: 'Suesseffekten',
+    former: ['suesseffekten', 'suesseffekt'],
+    kort: 'Att andelen kol-14 i luften sjunker när koldioxid från fossila bränslen släpps ut. Fossilt kol är så gammalt att allt dess kol-14 hunnit sönderfalla, så det späder ut luften.',
+    relaterade: ['kol-14', 'bombpulsen', 'isotop'],
+    body: [
+      { type: 'p', html: 'Kol, olja och naturgas är rester av växter och plankton som levde för många miljoner år sedan. Kol-14 har halveringstiden omkring 5&nbsp;700&nbsp;år, så efter några hundra tusen år finns det praktiskt taget inget kvar. När fossila bränslen eldas släpps alltså koldioxid ut som saknar kol-14.' },
+      { type: 'p', html: 'Den koldioxiden blandas med resten av luften, och då minskar andelen kol-14, ungefär som när man häller vatten i saft. Effekten upptäcktes av den österrikisk-amerikanske forskaren Hans Suess på 1950-talet, när han såg att trä från 1900-talet innehöll mindre kol-14 än trä från tiden före industrialiseringen.' },
+      { type: 'p', html: 'I dag märks effekten tydligt. Kring 2021–2022 sjönk halten kol-14 i ren luft på norra halvklotet under nivån från tiden före kärnvapenproven, och den fortsätter att sjunka. Det ställer till det för kol-14-datering, eftersom färskt material nu kan se äldre ut än det är.' }
+    ]
+  },
+  {
+    id: 'acceleratormasspektrometri',
+    term: 'Acceleratormasspektrometri',
+    former: ['acceleratormasspektrometri', 'acceleratormasspektrometrin'],
+    kort: 'En metod att räkna sällsynta atomer, till exempel kol-14, en och en. Atomerna görs till joner, accelereras och sorteras efter massa, så att även mycket små prov räcker.',
+    relaterade: ['kol-14', 'isotop'],
+    body: [
+      { type: 'p', html: 'Det äldre sättet att mäta kol-14 är att vänta på sönderfallen och räkna dem. Eftersom halveringstiden är så lång sönderfaller bara en bråkdel av atomerna under en mätning, och därför behövs stora prov och lång tid.' },
+      { type: 'p', html: 'Acceleratormasspektrometri räknar i stället atomerna direkt. Provet förbränns, kolet görs om till grafit och skjuts ut som negativt laddade joner. En accelerator ger jonerna hög fart, och magneter böjer av dem olika mycket beroende på massan, ungefär som när vinden blåser lätta och tunga föremål olika långt. Kol-14 hamnar på ett annat ställe än kol-12 och kol-13 och kan räknas för sig.' },
+      { type: 'p', html: 'Eftersom atomerna räknas direkt, i stället för att man väntar på de få som hinner sönderfalla, räcker det ofta med några milligram material. Metoden används för att datera arkeologiska fynd, för att följa kol i naturen och för att mäta andra sällsynta isotoper, till exempel i is och berggrund.' }
     ]
   }
 ];

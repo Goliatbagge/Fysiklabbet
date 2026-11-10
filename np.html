@@ -1778,6 +1778,13 @@
                         Klicka på ett prov för att öppna det som pdf.
                         {medLos.length > 0 && ' Under proven med lösningsförslag kommer du till lösningarna, uppgift för uppgift.'}
                     </p>
+                    {k.prov.some(p => p.t !== 'vt22') && !k.kursprov && (
+                        <p className="np-lede np-lede-obs">
+                            <strong>Obs!</strong> Endast proven från våren 2022 följer aktuell ämnesplan.
+                            Äldre prov innehåller enstaka uppgifter på stoff som utgick ur kursen vid
+                            revideringen 2021.{medLos.length > 0 && ' I våra lösningar är de uppgifterna märkta.'}
+                        </p>
+                    )}
 
                     {medLos.length > 0 && (
                         <React.Fragment>
@@ -1792,13 +1799,6 @@
                         </React.Fragment>
                     )}
 
-                    {k.prov.some(p => p.t !== 'vt22') && !k.kursprov && (
-                        <p className="np-lede np-lede-obs" style={{ marginTop: 26 }}>
-                            <strong>Obs!</strong> Endast proven från våren 2022 följer aktuell ämnesplan.
-                            Äldre prov innehåller enstaka uppgifter på stoff som utgick ur kursen vid
-                            revideringen 2021.{medLos.length > 0 && ' I våra lösningar är de uppgifterna märkta.'}
-                        </p>
-                    )}
                     <p className="np-kallrad">
                         {k.kursprov ? (
                             <React.Fragment>

@@ -424,8 +424,12 @@ node .claude/verify-analytics.js
 # ⛔ BORTTAGEN FRÅN SAJTEN (2026-10-05, uttrycklig begäran): spelaren i
 # katalog.html, tts.js och prototyp-tts.html är borttagna, så inget ljud
 # spelas upp någonstans. Lägg inte tillbaka någon uppläsningsspelare utan att
-# användaren ber om det. Ljudfilerna i audio/ och kedjan i data/tts/ ligger
-# kvar orörda tills vidare.
+# användaren ber om det. Kedjan i data/tts/ ligger kvar orörd. Ljudfilerna
+# (668 MB) togs bort ur repot 2026-11-10, eftersom sajten närmade sig GitHub
+# Pages gräns på 1 GB; de ligger arkiverade i C:claudeFysiklabbet-arkivaudio
+# och audio/ står i .gitignore. Lägg ALDRIG tillbaka ljud eller andra stora
+# mediefiler i repot: de hör hemma på en lagringstjänst (till exempel
+# Cloudflare R2).
 # ⛔ PAUSAT (2026-08-03, tills vidare på uttrycklig begäran): generera INGET
 # nytt ljud och committa inga ljudkedje-artefakter (audio/,
 # data/tts/manus/teori.json) — ljudproduktionen löses på annat sätt framöver.

@@ -101,3 +101,8 @@ np-test.html
 
 # Norska delningspaketet (byggs av .claude/i18n/nb/bygg-delningspaket.js), bara lokalt
 /delningspaket/
+
+# Uppläsningens ljudfiler (borttagna från sajten 2026-10-05). Arkiv lokalt i
+# C:\claude\Fysiklabbet-arkivudio, utanför repot, för att hålla sajten under
+# GitHub Pages gräns på 1 GB.
+audio/

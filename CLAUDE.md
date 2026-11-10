@@ -933,7 +933,8 @@ när en genomgång byggs om från en ny PDF i `Genomgångar/`):
 
 1. **Teori-bundle**: `node data/teori/build.js` (se avsnittet ovan).
 2. **Övningar** — `data/ovningar.js`, nyckel = teori-id (t.ex. `'fy2-1.2'`).
-   Uppgifterna ska spegla det NYA innehållet (3 N1 + 2 N2 + 1 N3, se
+   Uppgifterna ska spegla det NYA innehållet (minst 3 N1 + 2 N2 + 1 N3,
+   fler går alltid bra, se
    `OVNINGAR.md`); ta bort/ersätt uppgifter som testar borttaget stoff.
    Blanda flervalsalternativen och kör `node .claude/verify-ovningar-flerval.js`.
 3. **Exit tickets** — `data/exittickets.js`, samma id. Frågorna ska förhöra
@@ -4415,7 +4416,7 @@ medan exempel och övningsblad sa Grund, Mellan och Avancerad.
 
 Se [`OVNINGAR.md`](OVNINGAR.md) för komplett guide:
 - Nivåer N1/N2/N3 och kalibrering mot Impuls Fysik 1 / kursprov
-- Antal per avsnitt (3 + 2 + 1) och formel-täckning
+- Antal per avsnitt (minst 3 + 2 + 1, fler är aldrig en nackdel) och formel-täckning
 - Diagram-helper `makeDiagram` och kraftvektor-helper `makeForceDiagram`
 - **Figurer ska ritas, inte beskrivas** — uppgifter med rumslig/geometrisk
   uppställning (kast, hävstång, cirkelrörelse, lutning, pendel, loop) ska ha

@@ -170,7 +170,11 @@ innehållet. Konkretiserat för Fysik 2:
 
 ## Antal per avsnitt
 
-Riktlinje: **3 övningar N1 + 2 N2 + 1 N3 = 6 st**. Korta avsnitt får frångås.
+Riktlinje: **minst 3 övningar N1 + 2 N2 + 1 N3**. Det är ett golv, inte
+ett tak: fler övningar är aldrig en nackdel (användarbeslut 2026-11-10).
+Lägg gärna till en uppgift när avsnittet förtjänar det, till exempel en
+begreppsuppgift vid sidan av räkneuppgifterna eller en uppgift som fångar
+en vanlig fälla. Korta avsnitt får ha färre.
 
 ### Minst en uppgift per formel
 

@@ -16295,6 +16295,30 @@ $$ g = \\frac{4\\pi^2 \\cdot 0{,}30}{1{,}20^2} = \\frac{11{,}84}{1{,}44} \\appro
 
 **Generell slutsats:** En matematisk pendel är ett enkelt instrument för att mäta tyngdaccelerationen: perioden ger *g* direkt eftersom pendellängden lätt mäts med måttband.`,
         },
+        {
+            level: 1,
+            question: `Två pendlar har samma längd. Pendel A har en stålkula med massan $400\\ \\mathrm{g}$ och släpps från utslaget $5^\\circ$. Pendel B har en träkula med massan $50\\ \\mathrm{g}$ och släpps från utslaget $10^\\circ$. Vilken pendel har längst periodtid?
+
+${makeSwing({ angle: 10, ropeLabel: 'l', angleLabel: null })}`,
+            choices: [
+                'Pendel A, eftersom den har större massa',
+                'Pendel B, eftersom den har större utslag',
+                'De har lika lång periodtid',
+                'Det går inte att avgöra utan att veta pendellängden',
+            ],
+            correct: 2,
+            solution: `Periodtiden för en matematisk pendel vid små utslag ges av
+
+$$ T = 2\\pi\\sqrt{\\frac{l}{g}} $$
+
+Där finns varken massan eller utslaget med, bara pendellängden och tyngdaccelerationen. De två pendlarna har samma längd och svänger på samma plats, så de har samma periodtid.
+
+Massan spelar ingen roll eftersom den tyngre kulan visserligen dras tillbaka med större kraft, men den är också lika mycket trögare att sätta i rörelse. Utslaget spelar ingen roll vid små utslag eftersom den större svängningen har längre väg att gå men också rör sig fortare. Både $5^\\circ$ och $10^\\circ$ räknas som små utslag. Pendellängden behöver vi inte känna till, eftersom den är densamma för båda.
+
+**Svar:** De har lika lång periodtid.
+
+**Generell slutsats:** Den vanligaste missuppfattningen om pendlar är att en tyngre kula eller ett större utslag ger en långsammare svängning. Formeln visar att det bara är längden och platsen som avgör.`,
+        },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
@@ -16343,6 +16367,34 @@ $$ T_\\text{Mars} = 2{,}00 \\cdot \\sqrt{\\frac{9{,}82}{3{,}71}} = 2{,}00 \\cdot
 **Svar:** Periodtiden på Mars är ungefär $3{,}25\\ \\mathrm{s}$.
 
 **Generell slutsats:** Lägre tyngdacceleration ger längre periodtid, eftersom pendeln "faller långsammare" tillbaka mot lodlinjen. Det är därför mekaniska pendelklockor från jorden går *för långsamt* på Mars eller Månen.`,
+        },
+        {
+            level: 2,
+            question: `En pendel består av ett tunt snöre och en klotformad kula med diametern $6{,}0\\ \\mathrm{cm}$. Snöret är $1{,}20\\ \\mathrm{m}$ långt, mätt från fästpunkten till kulans översida. Bestäm pendelns periodtid. Räkna med $g = 9{,}82\\ \\mathrm{m/s^2}$.
+
+${makeSwing({ angle: 14, ropeLabel: '1,20 m', angleLabel: null })}`,
+            answer: { value: 2.22, unit: 's' },
+            solution: `Pendellängden räknas från fästpunkten till kulans **tyngdpunkt**, alltså till kulans mittpunkt. Snörets längd slutar vid kulans översida, så vi lägger till kulans radie, halva diametern:
+
+$$ l = 1{,}20\\ \\mathrm{m} + \\dfrac{0{,}060\\ \\mathrm{m}}{2} = 1{,}23\\ \\mathrm{m} $$
+
+Periodtiden för en matematisk pendel ges av
+
+$$ T = 2\\pi\\sqrt{\\frac{l}{g}} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+l = 1{,}23\\ \\mathrm{m} \\\\
+g \\approx 9{,}82\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$ T = 2\\pi\\sqrt{\\frac{1{,}23}{9{,}82}} = 2\\pi \\cdot 0{,}3539\\ldots = 2{,}223\\ldots\\ \\mathrm{s} \\approx 2{,}22\\ \\mathrm{s} $$
+
+**Svar:** Periodtiden är ungefär $2{,}22\\ \\mathrm{s}$.
+
+**Generell slutsats:** Räknar man bara med snörets längd, $1{,}20\\ \\mathrm{m}$, blir periodtiden $2{,}20\\ \\mathrm{s}$. Felet är litet här, men det växer när kulan är stor jämfört med snöret. Pendellängden ska alltid mätas till tyngdpunkten.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────

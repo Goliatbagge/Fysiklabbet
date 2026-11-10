@@ -384,21 +384,46 @@ function pil(ctx, x1, y1, x2, y2, farg, bredd) {
     ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(bx, by); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(x2, y2); ctx.lineTo(bx - uy * bb, by + ux * bb); ctx.lineTo(bx + uy * bb, by - ux * bb); ctx.closePath(); ctx.fill();
 }
+// Etiketterna står på en enfärgad pappersbricka med mörk text, så att de
+// går att läsa mot vattnet som rör sig bakom. Brickans kant tar etikettens
+// färg (gul för vinklarna, ljus för våglängderna och orden).
+function bricka(ctx, x, yTop, w, h, kant) {
+    const r = Math.min(8, h / 2);
+    ctx.save();
+    ctx.shadowColor = 'rgba(8,20,32,0.35)'; ctx.shadowBlur = 6; ctx.shadowOffsetY = 1;
+    ctx.fillStyle = 'rgba(246,242,234,0.94)';
+    ctx.beginPath();
+    ctx.moveTo(x + r, yTop); ctx.arcTo(x + w, yTop, x + w, yTop + h, r); ctx.arcTo(x + w, yTop + h, x, yTop + h, r);
+    ctx.arcTo(x, yTop + h, x, yTop, r); ctx.arcTo(x, yTop, x + w, yTop, r); ctx.closePath();
+    ctx.fill();
+    ctx.shadowColor = 'transparent';
+    if (kant && kant !== '#f6f2ea' && kant !== '#f3eee4') { ctx.strokeStyle = kant === '#ffe9a8' ? '#d9a521' : kant; ctx.lineWidth = 2; ctx.stroke(); }
+    ctx.restore();
+}
 // Kursiv beteckning med index, till exempel λ₁: (ctx, 'λ', '1', x, y)
 function beteckning(ctx, bokstav, index, x, y, farg, storlek, ankare) {
-    ctx.save(); ctx.fillStyle = farg; ctx.textBaseline = 'alphabetic';
+    ctx.save(); ctx.textBaseline = 'alphabetic';
+    storlek = Math.round(storlek * 0.88);
     ctx.font = 'italic 600 ' + storlek + 'px Poppins, sans-serif';
     const w1 = ctx.measureText(bokstav).width;
     ctx.font = '600 ' + Math.round(storlek * 0.66) + 'px Poppins, sans-serif';
-    const w2 = index ? ctx.measureText(index).width : 0;
-    let x0 = ankare === 'end' ? x - w1 - w2 : ankare === 'middle' ? x - (w1 + w2) / 2 : x;
+    const w2 = index ? ctx.measureText(index).width + 1 : 0;
+    const bw = w1 + w2;
+    let x0 = ankare === 'end' ? x - bw : ankare === 'middle' ? x - bw / 2 : x;
+    const px = 7, top = y - storlek * 0.86, h = storlek * (index ? 1.32 : 1.14);
+    bricka(ctx, x0 - px, top, bw + 2 * px, h, farg);
+    ctx.fillStyle = BLAECK;
     ctx.font = 'italic 600 ' + storlek + 'px Poppins, sans-serif'; ctx.fillText(bokstav, x0, y);
     if (index) { ctx.font = '600 ' + Math.round(storlek * 0.66) + 'px Poppins, sans-serif'; ctx.fillText(index, x0 + w1 + 1, y + storlek * 0.28); }
     ctx.restore();
 }
 function etikett(ctx, text, x, y, farg, storlek, ankare) {
-    ctx.save(); ctx.fillStyle = farg; ctx.font = '600 ' + storlek + 'px Poppins, sans-serif';
-    ctx.textAlign = ankare || 'left'; ctx.fillText(text, x, y); ctx.restore();
+    ctx.save(); storlek = Math.round(storlek * 0.86);
+    ctx.font = '600 ' + storlek + 'px Poppins, sans-serif';
+    const w = ctx.measureText(text).width;
+    const x0 = ankare === 'right' ? x - w : ankare === 'center' ? x - w / 2 : x;
+    bricka(ctx, x0 - 8, y - storlek * 0.98, w + 16, storlek * 1.36, farg);
+    ctx.fillStyle = BLAECK; ctx.textAlign = 'left'; ctx.fillText(text, x0, y); ctx.restore();
 }
 
 // Interferenslinjer: hyperbler med fokus i källorna (eller öppningarna).
@@ -490,7 +515,7 @@ const WaveSimulator = () => {
         const z = new Float32Array(FW * FH);
         let senast = performance.now(), raf = 0, synlig = true, iTimer = 0;
         const obs = new IntersectionObserver((e) => { synlig = e[0].isIntersecting; }, { threshold: 0 });
-        obs.observe(cv);
+        obs.observe(wrapRef.current || cv);   // ramen, inte 2D-ytan: den är dold i 3D
 
         const ram = (nu) => {
             raf = requestAnimationFrame(ram);
@@ -670,7 +695,7 @@ const WaveSimulator = () => {
             ctx.beginPath(); ctx.moveTo(0, YB_BRYT); ctx.lineTo(W, YB_BRYT); ctx.stroke();
             ctx.restore();
             etikett(ctx, 'djupt vatten', W - RAM - 14, YB_BRYT - 12, '#f3eee4', 21, 'right');
-            etikett(ctx, 'grunt vatten', W - RAM - 14, YB_BRYT + 26, '#f3eee4', 21, 'right');
+            etikett(ctx, 'grunt vatten', W - RAM - 14, YB_BRYT + 30, '#f3eee4', 21, 'right');
 
             if (p.visa.toppar) {
                 ctx.save(); ctx.strokeStyle = 'rgba(15,22,32,0.6)'; ctx.lineWidth = 1.6;
@@ -717,9 +742,13 @@ const WaveSimulator = () => {
                 }
                 ctx.restore();
                 if (g.i > 0.01) {
-                    const ai = g.i > 0.3 ? g.i / 2 : g.i + 0.18, ab = g.b > 0.3 ? g.b / 2 : g.b + 0.16;
-                    beteckning(ctx, 'i', '', cx - 74 * Math.sin(ai), YB_BRYT - 74 * Math.cos(ai) + 7, '#ffe9a8', 26, 'middle');
-                    beteckning(ctx, 'b', '', cx + 88 * Math.sin(ab), YB_BRYT + 88 * Math.cos(ab) + 7, '#ffe9a8', 26, 'middle');
+                    // Brickan står i kilen, så långt ut att den har minst 27 px till
+                    // vartdera benet (r · sin(α/2) ≥ 27). För en smal vinkel hamnar
+                    // den i stället strax utanför strålen.
+                    const plats = (v, r0) => v > 0.3 ? [v / 2, Math.min(175, Math.max(r0, 27 / Math.sin(v / 2)))] : [v + 0.2, r0];
+                    const [ai, ri] = plats(g.i, 80), [ab, rb] = plats(g.b, 96);
+                    beteckning(ctx, 'i', '', cx - ri * Math.sin(ai), YB_BRYT - ri * Math.cos(ai) + 7, '#ffe9a8', 26, 'middle');
+                    beteckning(ctx, 'b', '', cx + rb * Math.sin(ab), YB_BRYT + rb * Math.cos(ab) + 7, '#ffe9a8', 26, 'middle');
                 }
             }
         }

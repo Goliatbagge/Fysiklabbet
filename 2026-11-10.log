@@ -1,0 +1,33 @@
+03:15:02  [idag] === Nyhetsjobb: start (2026-11-10) ===
+03:15:07  [idag] Dagens nyhet finns (förberedd i går).
+03:15:07  [idag] Startar Claude Code (headless, modell opus, nyckel)...
+03:20:02  [imorgon] === Nyhetsjobb: start (2026-11-10) ===
+03:20:02  [imorgon] En körning pågår redan (lås 5 min gammalt). Avslutar.
+03:27:50  [idag] Morgondagens nyhet är skriven, godkänd av utgivaren och committad på grenen `nyhetsjobb` (a189721b). Jag har inte pushat och inte skickat något mejl, som uppdraget sa.
+03:27:50  [idag] 
+03:27:50  [idag] **Mpemba-nyheten gick inte att skriva.** Den var ditt önskemål för den här veckan, men studien i Physical Review Letters ligger bakom betalvägg. Bara sammanfattningen gick att läsa, och jag hittade inget förtryck på arXiv. Reglerna kräver att hela studien är läst, så den ligger kvar överst i kön med en anteckning om vad jag sökte. Hittas ingen öppen kopia före lördag 14 november går löftet inte att hålla. Capotauro (den bruna dvärgen) räknade jag inte med, eftersom den är brevteaser och får publiceras först efter brevet 15 november.
+03:27:50  [idag] 
+03:27:50  [idag] **Dagens artikel:** ”Lönnlöv från 65 år visar hur kolet från kärnvapenproven späddes ut” (id `2026-11-11-lonnloven-och-bombkolet`, kategori kärnfysik).
+03:27:50  [idag] - **Källa:** Wassenaar, Crann och Murseli, Scientific Reports 16, 37339 (2026). Studien är öppen och jag har läst hela, metoddelen inräknad.
+03:27:50  [idag] - **Innehåll:** Sedan 1961 har man mätt kol-14 i lönnlöv utanför Ottawa. Luften sjönk under nivån från tiden före kärnvapenproven 2021–2022, men löven först 2024. Fördröjningen är 2,2 ± 0,3 år och beror på att träden bygger nya löv delvis av kol som lagrats under tidigare år. Artikeln förklarar också att halten sjunkit på grund av utspädning och upptag i hav och växtlighet, inte på grund av sönderfall.
+03:27:50  [idag] - **Grannarna:** dagen före, 10 november, handlar om mekanik (rockringen), och den senaste partikel- eller kärnfysiken var 5 november. Ingen krock.
+03:27:50  [idag] - **Bilder:** huvudbilden är ett foto av en lönngren i Gatineau Park från Wikimedia Commons (CC BY-SA 4.0). I brödtexten ligger figur 1 ur studien, oförändrad som licensen kräver (CC BY-NC-ND).
+03:27:50  [idag] - **Ordlistan:** fyra nya begrepp: kol-14, bombpulsen, suesseffekten och acceleratormasspektrometri. Dessutom är ”kolisotopen” tillagd under isotop.
+03:27:50  [idag] - **Granskning:** utgivaren svarade först RÄTTA FÖRST på fyra punkter. Den viktigaste var att ”bladen låg hela tiden över luften” inte stämde för 1962–1963. Jag rättade det och de frivilliga förslagen, och efterkontrollen blev GODKÄND.
+03:27:50  [idag] - **Kontroller:** `verify-begrepp`, `verify-navigation` och `verify-sitemap` är gröna. `verify-sprak` ger tre fel, men alla i äldre artiklar och inget i den nya. Förhandsvisningen renderade som den ska.
+03:27:50  [idag] 
+03:27:50  [idag] **Kvar i arbetskatalogen:** byggskriptet rörde också en mängd delningssidor och två filer i `i18n/`. Jag lät dem vara utanför commiten, eftersom ändringarna bara gäller radslut eller inte hör till nyheten.
+03:27:50  [idag] 
+03:27:50  [idag] I kön har jag också lagt tre nya uppslag från Physics World.
+03:27:51  [idag] Claude avslutade med kod 0
+03:27:51  [idag] error: cannot pull with rebase: You have unstaged changes.
+03:27:51  [idag] error: Please commit or stash them.
+03:27:56  [idag] Pushat till main.
+03:27:56  [idag] Artikel 2026-11-11 pushad: 2026-11-11-lonnloven-och-bombkolet
+03:29:26  [idag] https://fysiklabbet.se/nyheter.html?forhand=2026-11-11-lonnloven-och-bombkolet
+03:29:27  [idag] Mejlet byggt av mallen (C:\claude\Fysiklabbet-nyhetsjobb\.claude\nyheter\logg\mejl-2026-11-11).
+03:29:27  [idag] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+03:30:22  [idag] Mejlet är skickat till [ägaren] med granskningsresultatet för artikeln om lönnlöven och bombkolet. Utgivarens punkter: tidsförloppet kring luft/blad-toppen, figurens alt-text, hårda mellanslag i citatet och en överdriven AMS-formulering — alla rättade, och artikeln godkändes vid omgranskningen.
+03:30:23  [idag] Claude avslutade med kod 0
+03:30:23  [idag] Mejlet till ägaren är skickat.
+03:30:23  [idag] === Nyhetsjobb: slut ===

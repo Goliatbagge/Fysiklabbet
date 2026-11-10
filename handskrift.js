@@ -26523,9 +26523,9 @@
 
     /* AVRUNDNING (se REGEL) */
     var bAvr = bubble(140, bubbleTop(y + 1.1 * F), bw, [
-      [['Först nu avrundar jag. Tiden']],
-      [['1,00 s har tre värdesiffror:']],
-      [['svaret får tre.']]
+      [['Först nu avrundar jag. Både']],
+      [['1,00 s och 9,82 har tre']],
+      [['värdesiffror: svaret får tre.']]
     ]);
     tanke(bAvr);
     var avrS = '≈0,995 m=99,5 cm';
@@ -26741,6 +26741,141 @@
    * grafit med givna värden och vektorer i blått, sedan rubrik + formel,
    * mätvärdesklammer DIREKT under formeln, insättning, avrundning,
    * rimlighetsbedömning och svarsrad. Verktygen kommer från physTools(). */
+
+  /* ---------------- scen: mät g med en pendel (fy2-2.5 Ex 2) ----------
+   * Tio perioder på 18,5 s ger periodtiden 1,85 s, som räknas ut som en
+   * DELUTRÄKNING inne i klammern (samma mönster som egenfrekvensen).
+   * g = 4π² · 0,850 / 1,85² = 9,8047… ≈ 9,80 m/s² (tre värdesiffror).
+   * Siffrorna är identiska med textlösningen i fy2-2.5.md. */
+  function layoutPendelG(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var px = 236, py = 52, PL = 152;
+    var vin = 22 * Math.PI / 180;
+    var bob = [px, py + PL];
+    function bagPts(R, a0, a1, n) {
+      var pts = [];
+      for (var i = 0; i <= n; i++) {
+        var a = a0 + (i / n) * (a1 - a0);
+        pts.push([px + Math.sin(a) * R, py + Math.cos(a) * R]);
+      }
+      return pts;
+    }
+
+    /* ---- steg 1: rita pendeln (grafit) ---- */
+    T.tanke(T.figurBubble(268, [
+      [['Ritar pendeln: fästet i taket,']],
+      [['snöret och kulan. Den streckade']],
+      [['bågen visar hur kulan svänger.']]
+    ]));
+    T.line([px - 90, py], [px + 90, py]);
+    T.hatch([px - 82, py], [px + 90, py], 11);
+    T.pause(140);
+    T.line([px, py], bob);
+    T.dot(px, py);
+    T.circle(bob[0], bob[1], 10);
+    T.dot(bob[0], bob[1]);
+    T.pause(140);
+    T.dashPts(bagPts(PL, -vin, vin, 24));
+    T.stepEnd();
+
+    /* ---- steg 2: annoteringar (blått) ---- */
+    T.tanke(T.figurBubble(286, [
+      [['Skriver in det jag vet: längden']],
+      [['till kulans tyngdpunkt och tiden']],
+      [['för tio hela perioder. ', 0], ['g', 1], [' är det', 0]],
+      [['jag söker.']]
+    ]));
+    T.lbl('l=0,850 m', px + 12, py + 84, BLUE);
+    T.pause(160);
+    var bp = bagPts(PL + 34, -vin * 0.86, vin * 0.86, 16);
+    for (var k = 0; k + 1 < bp.length; k++) T.line(bp[k], bp[k + 1], BLUE);
+    T.arrowHead(bp[0][0], bp[0][1], bp[2][0], bp[2][1], 9, BLUE);
+    T.arrowHead(bp[16][0], bp[16][1], bp[14][0], bp[14][1], 9, BLUE);
+    T.lbl('10 perioder: 18,5 s', px - 78, py + PL + 62, BLUE);
+    T.stepEnd();
+
+    /* ---- formeln ---- */
+    var y = 372;
+    T.tanke(T.bubble(120, T.bubbleTop(292), bw, [
+      [['Formeln för pendelns periodtid']],
+      [['innehåller ', 0], ['g', 1], ['. Den kan jag lösa', 0]],
+      [['ut.']]
+    ]));
+    /* INLEDANDE MOTIVERING (se REGEL): rubrik + formel i SAMMA steg */
+    T.str('Matematisk pendel', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    var xx = T.str('T=2π', padL, y);
+    var fw = Math.max(T.adv('l'), T.adv('g')) + 0.3 * F;
+    var xs = rootSign(acts, xx, y, fw, F,
+                      { yTop: y - 1.55 * F, yBot: y + 1.3 * F });
+    T.fracH('l', 'g', xs, y);
+    T.stepEnd();
+
+    /* OMSKRIVNING MED EKVIVALENSPIL (se REGEL) */
+    y += adv + 1.3 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv - 0.4 * F), bw, [
+      [['Längden sitter under ett']],
+      [['rottecken. Jag kvadrerar båda']],
+      [['led för att få bort roten, och']],
+      [['löser sedan ut ', 0], ['g', 1]]
+    ]));
+    T.str('Kvadrera båda led och lös ut g', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.0 * F;
+    var xq = T.fracH('l', 'g', T.str('T^2=4π^2·', padL, y), y);
+    xq = T.str('⟺g=', xq + 0.12 * F, y);
+    T.fracH('4π^2·l', 'T^2', xq, y);
+    T.stepEnd();
+
+    /* ---- mätvärdesklammern DIREKT under formeln (se REGEL) ---- */
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Periodtiden är tiden för EN']],
+      [['period. Jag delar därför tiden']],
+      [['med antalet perioder.']]
+    ]));
+    var klam = valueBracket(acts, [
+      'l=0,850 m',
+      ['T=', { frac: ['18,5 s', '10'] }, '=1,85 s']
+    ], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.str('=9,8047... m/s^2',
+                     T.fracH('4π^2·0,850', '1,85^2', T.str('g=', padL, y), y) + 0.15 * F,
+                     y);
+    T.stepEnd();
+
+    /* AVRUNDNING (se REGEL) */
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.1 * F), bw, [
+      [['Först nu avrundar jag. Både']],
+      [['0,850 m och 18,5 s har tre']],
+      [['värdesiffror: svaret får tre.']]
+    ]));
+    var avrS = '≈9,80 m/s^2';
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
+    else { y += adv + 1.0 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.0 * F;
+    /* RIMLIGHETSBEDÖMNING (se REGEL) före svarsraden */
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Tabellvärdet är 9,82 m/s².']],
+      [['Mätningen hamnar nära det,']],
+      [['rimligt!']]
+    ]));
+    T.underline(T.str('Svar: Ungefär 9,80 m/s^2', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
 
   /* ---------------- scen: gitarrsträngens egenfrekvens (fy2-2.6 Ex 1) ---
    * 100 svängningar på 1,22 s ger periodtiden. Periodtiden är INTE given
@@ -64844,6 +64979,7 @@
                    periodfjader: layoutPeriodfjader,
                    massafjader: layoutMassafjader,
                    sekundpendel: layoutSekundpendel,
+                   pendelG: layoutPendelG,
                    /* Fysik 2 kapitel 2 — Mekaniska vågor (2.6 och framåt) */
                    egenfrekvens: layoutEgenfrekvens,
                    superposition: layoutSuperposition,

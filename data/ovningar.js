@@ -16230,7 +16230,7 @@ $$ T = 2\\pi\\sqrt{\\frac{m}{k_\\mathrm{R}}} = 2\\pi\\sqrt{\\frac{0{,}50}{48}} =
             question: `En matematisk pendel har pendellängden $2{,}0\\ \\mathrm{m}$. Bestäm periodtiden. Räkna med $g = 9{,}82\\ \\mathrm{m/s^2}$.
 
 ${makeSwing({ angle: 18, ropeLabel: 'l = 2,0 m', angleLabel: null })}`,
-            answer: { value: 2.84, unit: 's' },
+            answer: { value: 2.8, unit: 's' },
             solution: `Periodtiden för en matematisk pendel ges av
 
 $$ T = 2\\pi\\sqrt{\\frac{l}{g}} $$
@@ -16243,7 +16243,7 @@ g \\approx 9{,}82\\ \\mathrm{m/s^2}
 \\end{array} \\right]
 $$
 
-$$ T = 2\\pi\\sqrt{\\frac{2{,}0}{9{,}82}} = 2\\pi\\cdot 0{,}4514 \\approx 2{,}84\\ \\mathrm{s} $$
+$$ T = 2\\pi\\sqrt{\\frac{2{,}0}{9{,}82}} = 2\\pi\\cdot 0{,}4513\\ldots = 2{,}835\\ldots\\ \\mathrm{s} \\approx 2{,}8\\ \\mathrm{s} $$
 
 **Svar:** Periodtiden är ungefär $2{,}8\\ \\mathrm{s}$.
 
@@ -16254,7 +16254,7 @@ $$ T = 2\\pi\\sqrt{\\frac{2{,}0}{9{,}82}} = 2\\pi\\cdot 0{,}4514 \\approx 2{,}84
             question: `En matematisk pendel har periodtiden $1{,}50\\ \\mathrm{s}$. Hur lång är pendeln? Räkna med $g = 9{,}82\\ \\mathrm{m/s^2}$.
 
 ${makeSwing({ angle: 16, ropeLabel: 'l', angleLabel: null })}`,
-            answer: { value: 0.559, unit: 'm' },
+            answer: { value: 0.560, unit: 'm' },
             solution: `Vi löser ut pendellängden ur periodformeln:
 
 $$ T = 2\\pi\\sqrt{\\frac{l}{g}} \\quad\\Leftrightarrow\\quad T^2 = 4\\pi^2 \\cdot \\frac{l}{g} \\quad\\Leftrightarrow\\quad l = \\frac{T^2 \\cdot g}{4\\pi^2} $$
@@ -16267,16 +16267,16 @@ g \\approx 9{,}82\\ \\mathrm{m/s^2}
 \\end{array} \\right]
 $$
 
-$$ l = \\frac{1{,}50^2 \\cdot 9{,}82}{4\\pi^2} = \\frac{22{,}10}{39{,}48} \\approx 0{,}56\\ \\mathrm{m} $$
+$$ l = \\frac{1{,}50^2 \\cdot 9{,}82}{4\\pi^2} = \\frac{22{,}095}{39{,}478\\ldots} = 0{,}5596\\ldots\\ \\mathrm{m} \\approx 0{,}560\\ \\mathrm{m} $$
 
-**Svar:** Pendellängden är ungefär $0{,}56\\ \\mathrm{m}$.`,
+**Svar:** Pendellängden är ungefär $0{,}560\\ \\mathrm{m}$.`,
         },
         {
             level: 1,
             question: `En astronaut har med sig en matematisk pendel med pendellängden $0{,}30\\ \\mathrm{m}$ till en främmande planet. Pendeln mäts upp att ha periodtiden $1{,}20\\ \\mathrm{s}$ där. Bestäm tyngdaccelerationen på planeten.
 
 ${makeSwing({ angle: 14, ropeLabel: 'l = 0,30 m', angleLabel: null })}`,
-            answer: { value: 8.22, unit: 'm/s²' },
+            answer: { value: 8.2, unit: 'm/s²' },
             solution: `Vi löser ut tyngdaccelerationen:
 
 $$ T = 2\\pi\\sqrt{\\frac{l}{g}} \\quad\\Leftrightarrow\\quad g = \\frac{4\\pi^2 \\cdot l}{T^2} $$
@@ -16302,7 +16302,7 @@ $$ g = \\frac{4\\pi^2 \\cdot 0{,}30}{1{,}20^2} = \\frac{11{,}84}{1{,}44} \\appro
             question: `En matematisk pendel har pendellängden $0{,}80\\ \\mathrm{m}$. Hur lång ska pendeln vara för att periodtiden ska **fördubblas**?
 
 ${makeSwing({ angle: 14, ropeLabel: 'l = 0,80 m', angleLabel: null })}`,
-            answer: { value: 3.20, unit: 'm' },
+            answer: { value: 3.2, unit: 'm' },
             solution: `Periodtiden är proportionell mot kvadratroten av pendellängden:
 
 $$ T \\propto \\sqrt{l} $$
@@ -16311,9 +16311,9 @@ Om perioden ska fördubblas måste pendellängden bli **fyra gånger** så stor:
 
 $$ \\frac{T_2}{T_1} = \\sqrt{\\frac{l_2}{l_1}} = 2 \\quad\\Leftrightarrow\\quad l_2 = 4\\cdot l_1 $$
 
-$$ l_2 = 4 \\cdot 0{,}80 = 3{,}20\\ \\mathrm{m} $$
+$$ l_2 = 4 \\cdot 0{,}80 = 3{,}2\\ \\mathrm{m} $$
 
-**Svar:** Pendeln ska vara $3{,}20\\ \\mathrm{m}$ lång.
+**Svar:** Pendeln ska vara $3{,}2\\ \\mathrm{m}$ lång.
 
 **Generell slutsats:** På grund av rotuttrycket växer periodtiden **långsammare** än längden. För att fördubbla *T* krävs en fyrdubbling av *l*. Detta gäller alla rörelser där *T* ∝ √*l*.`,
         },
@@ -16340,7 +16340,7 @@ $$
 
 $$ T_\\text{Mars} = 2{,}00 \\cdot \\sqrt{\\frac{9{,}82}{3{,}71}} = 2{,}00 \\cdot \\sqrt{2{,}647} = 2{,}00 \\cdot 1{,}627 \\approx 3{,}25\\ \\mathrm{s} $$
 
-**Svar:** Periodtiden på Mars är ungefär $3{,}3\\ \\mathrm{s}$.
+**Svar:** Periodtiden på Mars är ungefär $3{,}25\\ \\mathrm{s}$.
 
 **Generell slutsats:** Lägre tyngdacceleration ger längre periodtid, eftersom pendeln "faller långsammare" tillbaka mot lodlinjen. Det är därför mekaniska pendelklockor från jorden går *för långsamt* på Mars eller Månen.`,
         },
@@ -16348,7 +16348,7 @@ $$ T_\\text{Mars} = 2{,}00 \\cdot \\sqrt{\\frac{9{,}82}{3{,}71}} = 2{,}00 \\cdot
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `En pendelklocka är kalibrerad för jordens tyngdacceleration ($g = 9{,}82\\ \\mathrm{m/s^2}$). Klockan tas med till en främmande planet. När exakt $24$ timmar har gått enligt en korrekt atomur visar pendelklockan att $14$ h $45$ min har gått. Bestäm tyngdaccelerationen på planeten.
+            question: `En pendelklocka är kalibrerad för jordens tyngdacceleration ($g = 9{,}82\\ \\mathrm{m/s^2}$). Klockan tas med till en främmande planet. När exakt $24$ timmar har gått enligt ett korrekt atomur visar pendelklockan att $14$ h $45$ min har gått. Bestäm tyngdaccelerationen på planeten.
 
 ${makeSwing({ angle: 12, ropeLabel: null, angleLabel: null })}`,
             answer: { value: 3.71, unit: 'm/s²' },

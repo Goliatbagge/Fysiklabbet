@@ -352,8 +352,13 @@ window.NP_PROV = window.NP_PROV || {};
     function bygg() {
         var kalla = window.NP_PROV[KALLA];
         if (!kalla) return null;
-        var alias = window[ALIAS] || {}, tillB = {};
-        Object.keys(alias).forEach(function (b) { tillB[alias[b]] = b; });
+        // c-avsnitt → b-avsnitt för alla b-kurser, så att även en länk över
+        // kursgränsen (ett 3b-prov som pekar på 2c-teori) går till b-kursen.
+        var tillB = {};
+        ['MA1B_ALIAS', 'MA2B_ALIAS', 'MA3B_ALIAS'].forEach(function (namn) {
+            var alias = window[namn] || {};
+            Object.keys(alias).forEach(function (b) { tillB[alias[b]] = b; });
+        });
         var fig = window.NP_FIGURER = window.NP_FIGURER || {};
         var cf = fig[KALLA] || {}, bf = fig[ID] = fig[ID] || {};
         Object.keys(cf).forEach(function (k) { if (!(k in bf)) bf[k] = cf[k]; });
@@ -368,8 +373,8 @@ window.NP_PROV = window.NP_PROV || {};
                 penna: u.penna || (KALLA + '-u' + k[1]),
                 lanadFran: { prov: KALLA, nr: k[1] },
             });
-            if (u.genomgangar) {
-                kopia.genomgangar = u.genomgangar.map(function (g) { return tillB[g] || g; });
+            if (kopia.genomgangar) {
+                kopia.genomgangar = kopia.genomgangar.map(function (g) { return tillB[g] || g; });
             }
             return kopia;
         });

@@ -632,11 +632,16 @@ const WaveSimulator = () => {
             fyllFalt(p, phi);
             ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
             ctx.drawImage(off, 0, 0, W, H);
+            // Vågfrontsläget: vattnet tonas ned mot papperet så att fronterna,
+            // ritade som mörka linjer, blir det man ser (som teorins figurer).
+            if (p.visa.toppar && (p.mode === 'single' || p.mode === 'planar' || p.mode === 'refraction')) {
+                ctx.save(); ctx.fillStyle = 'rgba(243,238,228,0.62)'; ctx.fillRect(0, 0, W, H); ctx.restore();
+            }
 
             if (p.mode === 'single' || p.mode === 'double') {
                 const ks = p.mode === 'single' ? [p.k1] : [p.k1, p.k2];
                 if (p.mode === 'single' && p.visa.toppar) {
-                    ctx.save(); ctx.strokeStyle = 'rgba(15,22,32,0.6)'; ctx.lineWidth = 1.6;
+                    ctx.save(); ctx.strokeStyle = BLAECK; ctx.lineWidth = 3;
                     const r0 = (phi + Math.PI / 2) / k; let r = r0 - lam * Math.floor(r0 / lam);
                     for (; r < 1100; r += lam) { ctx.beginPath(); ctx.arc(p.k1.x, p.k1.y, r, 0, Math.PI * 2); ctx.stroke(); }
                     ctx.restore();
@@ -656,7 +661,7 @@ const WaveSimulator = () => {
             } else if (p.mode === 'planar') {
                 ritaVagalstrare(phi, false);
                 if (p.visa.toppar) {
-                    ctx.save(); ctx.strokeStyle = 'rgba(15,22,32,0.6)'; ctx.lineWidth = 1.6;
+                    ctx.save(); ctx.strokeStyle = BLAECK; ctx.lineWidth = 3;
                     const x0 = (phi + Math.PI / 2) / k; let x = x0 - lam * Math.floor(x0 / lam);
                     for (; x < W; x += lam) { ctx.beginPath(); ctx.moveTo(x, RAM); ctx.lineTo(x, H - RAM); ctx.stroke(); }
                     ctx.restore();
@@ -707,11 +712,9 @@ const WaveSimulator = () => {
             ctx.strokeStyle = 'rgba(15,22,32,0.75)'; ctx.lineWidth = 2.5;
             ctx.beginPath(); ctx.moveTo(0, YB_BRYT); ctx.lineTo(W, YB_BRYT); ctx.stroke();
             ctx.restore();
-            etikett(ctx, 'djupt vatten', W - RAM - 14, YB_BRYT - 12, '#f3eee4', 21, 'right');
-            etikett(ctx, 'grunt vatten', W - RAM - 14, YB_BRYT + 30, '#f3eee4', 21, 'right');
 
             if (p.visa.toppar) {
-                ctx.save(); ctx.strokeStyle = 'rgba(15,22,32,0.6)'; ctx.lineWidth = 1.6;
+                ctx.save(); ctx.strokeStyle = BLAECK; ctx.lineWidth = 3;
                 for (const [a, kk, f0, y0, y1] of [[a1, k1, 0, 0, YB_BRYT], [a2, k2, fas0, YB_BRYT, H]]) {
                     ctx.save(); ctx.beginPath(); ctx.rect(0, y0, W, y1 - y0); ctx.clip();
                     const lam = 2 * Math.PI / kk;
@@ -725,6 +728,9 @@ const WaveSimulator = () => {
                 }
                 ctx.restore();
             }
+            // orden efter fronterna, så att ingen front ritas över brickorna
+            etikett(ctx, 'djupt vatten', W - RAM - 14, YB_BRYT - 12, '#f3eee4', 21, 'right');
+            etikett(ctx, 'grunt vatten', W - RAM - 14, YB_BRYT + 30, '#f3eee4', 21, 'right');
             if (p.visa.lambda) {
                 // dubbelpilar som åker med fronterna, till höger om strålen
                 const A1 = [450 - lam1 * a1[0], YB_BRYT - 20 - 2 * lam1 * a1[1]];
@@ -744,11 +750,11 @@ const WaveSimulator = () => {
             }
             if (p.visa.stralen) {
                 const cx = 300, L = 190;
-                ctx.save(); ctx.strokeStyle = 'rgba(243,238,228,0.9)'; ctx.lineWidth = 2; ctx.setLineDash([8, 6]);
+                ctx.save(); ctx.strokeStyle = p.visa.toppar ? 'rgba(15,22,32,0.7)' : 'rgba(243,238,228,0.9)'; ctx.lineWidth = 2; ctx.setLineDash([8, 6]);
                 ctx.beginPath(); ctx.moveTo(cx, YB_BRYT - 200); ctx.lineTo(cx, YB_BRYT + 200); ctx.stroke(); ctx.restore();
                 pil(ctx, cx - L * a1[0], YB_BRYT - L * a1[1], cx, YB_BRYT, BLAECK, 4);
                 pil(ctx, cx, YB_BRYT, cx + L * a2[0], YB_BRYT + L * a2[1], BLAECK, 4);
-                ctx.save(); ctx.strokeStyle = '#ffe9a8'; ctx.lineWidth = 2.5;
+                ctx.save(); ctx.strokeStyle = p.visa.toppar ? '#c4860a' : '#ffe9a8'; ctx.lineWidth = p.visa.toppar ? 3 : 2.5;
                 if (g.i > 0.01) {
                     ctx.beginPath(); ctx.arc(cx, YB_BRYT, 52, -Math.PI / 2 - g.i, -Math.PI / 2); ctx.stroke();
                     ctx.beginPath(); ctx.arc(cx, YB_BRYT, 66, Math.PI / 2 - g.b, Math.PI / 2); ctx.stroke();
@@ -1068,7 +1074,7 @@ const WaveSimulator = () => {
         const cb = (n, txt, swatch) => (
             <label key={n}><input type="checkbox" checked={!!visa[n]} onChange={() => tVisa(n)} />{swatch}<span dangerouslySetInnerHTML={{ __html: txt }} /></label>
         );
-        if (mode === 'single' || mode === 'planar' || mode === 'refraction') r.push(cb('toppar', 'Vågtoppar (vågfronter)', <span className="st-swatch" style={{ background: 'rgba(15,22,32,0.6)' }}></span>));
+        if (mode === 'single' || mode === 'planar' || mode === 'refraction') r.push(cb('toppar', 'Vågtoppar (vågfronter)', <span className="st-swatch" style={{ background: '#0f1620' }}></span>));
         if (mode === 'single' || mode === 'planar' || mode === 'refraction' || mode === 'doppler') r.push(cb('lambda', 'Våglängd <em>λ</em>'));
         if (mode === 'refraction') r.push(cb('stralen', 'Stråle, normal och vinklar'));
         if (mode === 'double' || mode === 'diffraction-double') {

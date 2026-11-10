@@ -213,6 +213,12 @@
             display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px;
         }
         .np-kursgrid + .np-kursgrid { margin-top: 12px; }
+        /* Spåretiketten över varje rad med matematikkurser. */
+        .np-spar-etikett {
+            margin: 22px 0 8px 2px; font-family: var(--lab-font-mono); font-size: 12px;
+            letter-spacing: 0.06em; color: var(--lab-ink-muted);
+        }
+        .np-amnesrubrik + .np-spar-etikett { margin-top: 0; }
         .np-kursgrid-spar { grid-template-columns: repeat(4, minmax(0, 1fr)); }
         .np-kurskort-knapp {
             position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
@@ -1665,6 +1671,8 @@
         // (1a, 2a), b-spåret (1b, 2b, 3b) och c-spåret (1c, 2c, 3c, 4). Raderna
         // har fyra fasta kolumner, så att nivå 1, 2, 3 och 4 står under varandra.
         const SPAR = [['ma1a', 'ma2a'], ['ma1b', 'ma2b', 'ma3b'], ['ma1c', 'ma2c', 'ma3c', 'ma4']];
+        // Etikett över varje rad, nyckel = radens första kurs.
+        const SPAR_NAMN = { ma1a: 'a-spåret', ma1b: 'b-spåret', ma1c: 'c-spåret' };
         function kursRader(amne) {
             const kurser = NP_FRISLAPPTA.filter(k => k.amne === amne);
             if (amne !== 'matematik') return [kurser];
@@ -1693,7 +1701,11 @@
                         <section className="np-kursval" key={a.id}>
                             <h2 className="np-amnesrubrik">{a.namn}</h2>
                             {kursRader(a.id).map((rad, ri) => (
-                            <ul className={'np-kursgrid' + (a.id === 'matematik' ? ' np-kursgrid-spar' : '')} key={ri}>
+                            <React.Fragment key={ri}>
+                            {a.id === 'matematik' && SPAR_NAMN[rad[0].kod] && (
+                                <p className="np-spar-etikett">{SPAR_NAMN[rad[0].kod]}</p>
+                            )}
+                            <ul className={'np-kursgrid' + (a.id === 'matematik' ? ' np-kursgrid-spar' : '')}>
                                 {rad.map(k => {
                                     const medLos = k.prov.filter(p => synligLosning(p.losning));
                                     const video = medLos.some(p => harVideo(p.losning));
@@ -1713,6 +1725,7 @@
                                     );
                                 })}
                             </ul>
+                            </React.Fragment>
                             ))}
                         </section>
                     ))}

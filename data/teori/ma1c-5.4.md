@@ -43,13 +43,13 @@ som träffats av blixten flest gånger.
 **Slutsats: Det är väldigt sannolikt att osannolika saker sker!**
 :::
 
-Hur stor chans/risk att en händelse inträffar kallas **sannolikhet** och
+Hur troligt det är att en händelse inträffar kallas **sannolikhet** och
 anges i decimal-, procent- eller bråkform. Resultatet av varje slumpförsök
 kallas **utfall**. Mängden av alla möjliga utfall kallas **utfallsrum**.
 De utfall som stämmer in på händelsen kallas **gynnsamma utfall**.
 
 Sannolikheten för en händelse skrivs $P(\text{händelse})$ ($P$ från
-"probability" = sannolikhet).
+engelskans *probability*, som betyder "sannolikhet").
 
 Om sannolikheten för varje utfall är lika stor har vi en **likformig
 sannolikhetsfördelning** som beräknas med **den klassiska

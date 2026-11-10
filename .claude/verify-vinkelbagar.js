@@ -91,6 +91,17 @@ function raysFrom(v, segs, minLen) {
     const d2 = Math.hypot(s.x2 - v[0], s.y2 - v[1]);
     if (d1 < 2) { rays.push(Math.atan2(s.y2 - v[1], s.x2 - v[0]) * 180 / Math.PI); continue; }
     if (d2 < 2) { rays.push(Math.atan2(s.y1 - v[1], s.x1 - v[0]) * 180 / Math.PI); continue; }
+    // Pilskaft som slutar vid pilhuvudets bas, en bit före hörnet: räkna
+    // förlängningen genom hörnet som ett vinkelben (strålen in mot en yta).
+    if (d1 < 14 || d2 < 14) {
+      const vx0 = s.x2 - s.x1, vy0 = s.y2 - s.y1, L = segLen(s);
+      const kors = Math.abs((v[0] - s.x1) * vy0 - (v[1] - s.y1) * vx0) / L;
+      if (kors < 1.5) {
+        const [fx, fy] = d1 < d2 ? [s.x2, s.y2] : [s.x1, s.y1];
+        rays.push(Math.atan2(fy - v[1], fx - v[0]) * 180 / Math.PI);
+        continue;
+      }
+    }
     // passerar segmentet genom v?
     const vx = s.x2 - s.x1, vy = s.y2 - s.y1, len = segLen(s);
     const t = ((v[0] - s.x1) * vx + (v[1] - s.y1) * vy) / (len * len);

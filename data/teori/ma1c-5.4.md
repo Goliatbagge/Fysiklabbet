@@ -9,7 +9,7 @@ section: '5.4'
 
 # Den klassiska sannolikhetsdefinitionen
 
-::: kuriosa "Introduktion — Fyra sanna osannolikheter"
+::: förklaring "Introduktion — Fyra sanna osannolikheter"
 Två enäggstvillingar i Ohio i USA adopterades till olika familjer när de
 var några veckor gamla. Båda adoptivfamiljerna gav sin pojke namnet James.
 Bröderna träffades först 1979, när de var 39 år, och upptäckte då att båda

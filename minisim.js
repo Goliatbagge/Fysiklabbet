@@ -583,6 +583,11 @@
         '.ms-pt-cell .minisim-slider{width:100%;flex:none;margin:6px 0 4px;}',
         '.ms-pp-panel{grid-template-columns:auto minmax(0,1fr) minmax(0,1fr);gap:4px 20px;}',
         '.ms-pp-panel .ms-pt-knappar{grid-row:span 2;align-self:center;}',
+        /* pendelperiod på bred skärm: reglagen som en ruta uppe till höger på scenen */
+        '.ms-pp-panel.ms-pp-pa-scenen{position:absolute;margin:0;padding:8px 12px 6px;grid-template-columns:minmax(0,1fr);gap:2px;' +
+            'background:rgba(251,248,241,0.94);border:1px solid rgba(31,37,48,0.16);border-radius:6px;box-shadow:0 1px 3px rgba(31,37,48,0.08);}',
+        '.ms-pp-panel.ms-pp-pa-scenen .ms-pt-knappar{grid-row:auto;flex-direction:row;margin-bottom:4px;}',
+        '.ms-pp-panel.ms-pp-pa-scenen .ms-pt-knappar .minisim-btn{flex:1;}',
         '@media (max-width:600px){.ms-pt-panel{grid-template-columns:minmax(0,1fr);gap:6px;}.ms-pt-knappar{flex-direction:row;}}',
         /* typ: stegkast — teckenförklaring och stegtabell under scenen */
         '.ms-sk-legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:8px;font-family:' + FONT + ';',
@@ -11637,10 +11642,14 @@
     var ppRaknare = 0;
     function buildPendelperiod(node, cfg) {
         var INK = '#1f2530', GREY = '#9aa0a6', BLA = '#2563c9', RUTA = '#2563c9', AXEL = '#38bdf8', MATT = '#0f8a7e';
-        // Bred skärm: pendeln till vänster och grafen till höger. Smalt kort
-        // (telefon): pendeln överst och grafen under, så att båda blir stora.
+        // Bred skärm: en hög scen med pendeln stor till vänster, reglagen i
+        // en ruta uppe till höger PÅ scenen och grafen under reglagen
+        // (användarönskemål 2026-11-10: pendeln var för liten). Grafens
+        // höjd räknas ut efter hur hög reglagerutan faktiskt blir, se
+        // placeraPanel(). Smalt kort (telefon): pendeln överst, grafen
+        // under och reglagen under scenen.
         var PY = 24, PXM = 85, PXGRAD = 1.25;           // tak, px per meter, px per grad
-        var PX, GX0, GX1, CY, VBW, VBH, smal = null;
+        var PX, GX0, GX1, CY, GH = 86, VBW, VBH, HALV, smal = null;
         var PLATSER = [
             { namn: 'Månen', g: 1.62 }, { namn: 'Mars', g: 3.71 },
             { namn: 'Jorden', g: 9.82 }, { namn: 'Jupiter', g: 24.8 }
@@ -11681,19 +11690,22 @@
                 '" stroke="' + INK + '" stroke-width="1" stroke-linecap="round"/>';
         }
         // grafens axlar: pilspets bara åt det positiva hållet
-        bas += '<line x1="' + GX0 + '" y1="' + (CY + 86) + '" x2="' + GX0 + '" y2="' + (CY - 92) + '" stroke="' + AXEL + '" stroke-width="1.6"/>' +
-            '<polygon points="' + (GX0 - 4) + ',' + (CY - 92) + ' ' + GX0 + ',' + (CY - 102) + ' ' + (GX0 + 4) + ',' + (CY - 92) + '" fill="' + AXEL + '"/>' +
+        bas += '<line x1="' + GX0 + '" y1="' + r1(CY + GH) + '" x2="' + GX0 + '" y2="' + r1(CY - GH - 6) + '" stroke="' + AXEL + '" stroke-width="1.6"/>' +
+            '<polygon points="' + (GX0 - 4) + ',' + r1(CY - GH - 6) + ' ' + GX0 + ',' + r1(CY - GH - 16) + ' ' + (GX0 + 4) + ',' + r1(CY - GH - 6) + '" fill="' + AXEL + '"/>' +
             '<line x1="' + GX0 + '" y1="' + CY + '" x2="' + (GX1 + 4) + '" y2="' + CY + '" stroke="' + AXEL + '" stroke-width="1.6"/>' +
             '<polygon points="' + (GX1 + 4) + ',' + (CY - 4) + ' ' + (GX1 + 14) + ',' + CY + ' ' + (GX1 + 4) + ',' + (CY + 4) + '" fill="' + AXEL + '"/>' +
-            lbl(GX0 - 8, CY - 88, 'end', it('α'), 15) +
+            lbl(GX0 - 8, CY - GH - 2, 'end', it('α'), 15) +
             lbl(GX1 + 14, CY + 20, 'end', it('t'), 15);
         return bas;
         }
 
         function rita() {
             var s = '';
-            var L = l * PXM;
             var a = amp * Math.PI / 180;
+            // Fast skala så att en längre pendel syns längre, utom när
+            // svängningen inte skulle rymmas i sidled: då krymps skalan.
+            var bred = l * Math.sin(Math.min(Math.PI / 2, Math.max(a, Math.abs(th))));
+            var L = l * Math.min(PXM, bred > 0 ? HALV / bred : PXM);
             // lodlinjen och den streckade banan mellan vändlägena
             s += '<line x1="' + PX + '" y1="' + PY + '" x2="' + PX + '" y2="' + r1(PY + L + 16) +
                 '" stroke="' + GREY + '" stroke-width="1" stroke-dasharray="5 4"/>';
@@ -11705,7 +11717,7 @@
             s += '<polyline points="' + bana.join(' ') + '" fill="none" stroke="' + GREY + '" stroke-width="1.2" stroke-dasharray="2 3"/>';
             // snöre och kula; kulan ritas större ju tyngre den är
             var bx = PX + L * Math.sin(th), by = PY + L * Math.cos(th);
-            var r = Math.max(6, Math.min(15, 9 * Math.cbrt(m / 0.2)));
+            var r = smal ? Math.max(6, Math.min(15, 9 * Math.cbrt(m / 0.2))) : Math.max(8, Math.min(20, 12 * Math.cbrt(m / 0.2)));
             s += '<line x1="' + PX + '" y1="' + PY + '" x2="' + r1(bx) + '" y2="' + r1(by) + '" stroke="' + INK + '" stroke-width="1.5"/>';
             s += '<circle cx="' + PX + '" cy="' + PY + '" r="2.4" fill="' + INK + '"/>';
             s += '<circle cx="' + r1(bx) + '" cy="' + r1(by) + '" r="' + r1(r) + '" fill="#6ba3d6" stroke="#2f6db0" stroke-width="1.5"/>';
@@ -11715,7 +11727,7 @@
             // uppmaning vid kulan tills någon dragit i den: på den sida om
             // kulan som vetter bort från snöret, annars på andra sidan
             if (!dragits) {
-                var grans = smal ? VBW - 4 : GX0 - 12, hoger = th >= 0 && bx + r + 72 < grans;
+                var grans = smal ? VBW - 4 : PX + HALV + 12, hoger = th >= 0 && bx + r + 72 < grans;
                 if (th < 0 && bx - r - 72 < 4) hoger = true;
                 s += lbl(hoger ? bx + r + 8 : bx - r - 8, by + 5, hoger ? 'start' : 'end', 'Dra i mig', 14, '#4a5160');
             }
@@ -11737,7 +11749,7 @@
             if (n >= 2 && toppar[n - 2].t >= t0) {
                 var xa = tx(toppar[n - 2].t), xb = tx(toppar[n - 1].t);
                 var ya = ty(toppar[n - 2].a), yb = ty(toppar[n - 1].a);
-                var ym = CY - 86;
+                var ym = r1(CY - GH);
                 s += '<line x1="' + r1(xa) + '" y1="' + r1(ya - 5) + '" x2="' + r1(xa) + '" y2="' + (ym - 6) + '" stroke="' + MATT + '" stroke-width="1" stroke-dasharray="3 3"/>';
                 s += '<line x1="' + r1(xb) + '" y1="' + r1(yb - 5) + '" x2="' + r1(xb) + '" y2="' + (ym - 6) + '" stroke="' + MATT + '" stroke-width="1" stroke-dasharray="3 3"/>';
                 if (xb - xa > 16) {
@@ -11745,7 +11757,7 @@
                     s += '<polygon points="' + r1(xa) + ',' + ym + ' ' + r1(xa + 8) + ',' + (ym - 4) + ' ' + r1(xa + 8) + ',' + (ym + 4) + '" fill="' + MATT + '"/>';
                     s += '<polygon points="' + r1(xb) + ',' + ym + ' ' + r1(xb - 8) + ',' + (ym - 4) + ' ' + r1(xb - 8) + ',' + (ym + 4) + '" fill="' + MATT + '"/>';
                 }
-                var mx = Math.max(GX0 + 62, Math.min(GX1 - 62, (xa + xb) / 2));
+                var mx = Math.max(GX0 + 70, Math.min(GX1 - 58, (xa + xb) / 2));
                 s += lbl(mx, ym - 9, 'middle', 'Uppmätt ' + it('T') + ' = ' + fmt(toppar[n - 1].t - toppar[n - 2].t, 2) + ' s', 14, MATT);
             }
             dyn.innerHTML = s;
@@ -11765,30 +11777,54 @@
         scene.className = 'minisim-scene ms-kv-scene';
         scene.innerHTML = '<svg class="ms-kv-svg" ' +
             'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" ' +
-            'aria-label="En kula i ett snöre svänger fram och tillbaka. En graf till höger ritar utslagsvinkeln ' +
+            'aria-label="En kula i ett snöre svänger fram och tillbaka. En graf ritar utslagsvinkeln ' +
             'mot tiden, och en måttlinje mellan de två senaste vändlägena visar den uppmätta periodtiden T.">' +
             '<g class="ms-pp-bas"></g><g class="ms-pp-dyn"></g>' +
             '<rect class="ms-pp-grepp" fill="transparent" style="cursor:grab;touch-action:none"/></svg>';
         var dyn = scene.querySelector('.ms-pp-dyn');
         card.appendChild(scene);
-        msFullskarm(card, scene, 620 / 250, 300);
+        msFullskarm(card, scene, 620 / 470, 90);
         var svgRot = scene.querySelector('svg');
+        var PANEL_X = 372;                               // reglagerutans vänsterkant (viewBox)
         function lagUt() {
             var nySmal = card.clientWidth > 0 && card.clientWidth < 480;
-            if (nySmal === smal) return;
-            smal = nySmal;
-            if (smal) { PX = 180; GX0 = 40; GX1 = 324; CY = 318; VBW = 360; VBH = 418; }
-            else { PX = 172; GX0 = 356; GX1 = 590; CY = 124; VBW = 620; VBH = 250; }
-            svgRot.setAttribute('viewBox', '0 0 ' + VBW + ' ' + VBH);
-            svgRot.setAttribute('width', String(VBW));
-            svgRot.setAttribute('height', String(VBH));
-            card.style.setProperty('--ms-asp', String(VBW / VBH));
-            scene.querySelector('.ms-pp-bas').innerHTML = basSvg();
-            var gr = scene.querySelector('.ms-pp-grepp');
-            gr.setAttribute('x', '0'); gr.setAttribute('y', String(PY + 4));
-            gr.setAttribute('width', String(smal ? VBW : GX0 - 20));
-            gr.setAttribute('height', String(smal ? 206 : 246 - PY));
+            if (nySmal !== smal) {
+                smal = nySmal;
+                if (smal) { PX = 180; HALV = 172; PXM = 85; PXGRAD = 1.25; GH = 86; GX0 = 40; GX1 = 324; CY = 318; VBW = 360; VBH = 418; }
+                else { PX = 184; HALV = 148; PXM = 200; GX0 = 398; GX1 = 588; CY = 340; VBW = 620; VBH = 470; }
+                panel.classList.toggle('ms-pp-pa-scenen', !smal);
+                if (smal) panel.removeAttribute('style');
+                svgRot.setAttribute('viewBox', '0 0 ' + VBW + ' ' + VBH);
+                svgRot.setAttribute('width', String(VBW));
+                svgRot.setAttribute('height', String(VBH));
+                card.style.setProperty('--ms-asp', String(VBW / VBH));
+                var gr = scene.querySelector('.ms-pp-grepp');
+                gr.setAttribute('x', '0'); gr.setAttribute('y', String(PY + 4));
+                gr.setAttribute('width', String(smal ? VBW : PANEL_X - 6));
+                gr.setAttribute('height', String(smal ? 206 : VBH - PY - 4));
+                if (smal) scene.querySelector('.ms-pp-bas').innerHTML = basSvg();
+            }
+            if (!smal) placeraPanel();
             if (dyn.innerHTML) rita();
+        }
+        // Reglagerutan ligger på scenen, i högerkolumnen ovanför grafen. Den
+        // följer svg:ns verkliga storlek (svg:n kan vara smalare än scenen
+        // och centrerad), och grafen får hela höjden under rutan.
+        function placeraPanel() {
+            var sR = scene.getBoundingClientRect(), vR = svgRot.getBoundingClientRect();
+            if (!vR.width) return;
+            var k = vR.width / VBW;
+            panel.style.left = r1(vR.left - sR.left + PANEL_X * k) + 'px';
+            panel.style.top = r1(vR.top - sR.top + 10 * k) + 'px';
+            panel.style.width = r1((VBW - PANEL_X - 8) * k) + 'px';
+            var under = 10 + panel.offsetHeight / k;   // rutans underkant i viewBox
+            var topp = under + 30;                      // plats för "Uppmätt T"-etiketten
+            var nyGH = Math.max(50, (VBH - 14 - topp) / 2);
+            var nyCY = topp + nyGH;
+            if (Math.abs(nyGH - GH) < 0.5 && Math.abs(nyCY - CY) < 0.5 && scene.querySelector('.ms-pp-bas').innerHTML) return;
+            GH = nyGH; CY = nyCY;
+            PXGRAD = (GH - 14) / 60;                    // 60° når nästan upp till måttlinjen
+            scene.querySelector('.ms-pp-bas').innerHTML = basSvg();
         }
 
         var panel = document.createElement('div');

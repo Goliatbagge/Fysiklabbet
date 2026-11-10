@@ -366,15 +366,28 @@ function toppSpar(cA, k, fas0, phi) {
 }
 const tona = (u) => Math.max(0, Math.min(1, u / 0.15, (1 - u) / 0.15));
 
+// Våglängdens dubbelpil: orange med en mörk kant runt om, så att den syns
+// både mot de ljusa vågtopparna och mot de mörka dalarna.
+const LAMBDA_FARG = '#ff8a3d';
 function dubbelpil(ctx, x1, y1, x2, y2, farg, alfa) {
     const L = Math.hypot(x2 - x1, y2 - y1); if (L < 4) return;
-    const ux = (x2 - x1) / L, uy = (y2 - y1) / L, hd = Math.min(11, L * 0.3), bb = hd * 0.5;
-    ctx.save(); ctx.globalAlpha = alfa; ctx.strokeStyle = farg; ctx.fillStyle = farg; ctx.lineWidth = 2;
+    const ux = (x2 - x1) / L, uy = (y2 - y1) / L, hd = Math.min(13, L * 0.32), bb = hd * 0.55;
+    const huvuden = () => {
+        for (const [px, py, sx] of [[x1, y1, 1], [x2, y2, -1]]) {
+            const bx = px + sx * ux * hd, by = py + sx * uy * hd;
+            ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(bx - uy * bb, by + ux * bb); ctx.lineTo(bx + uy * bb, by - ux * bb); ctx.closePath();
+            ctx.stroke(); ctx.fill();
+        }
+    };
+    ctx.save(); ctx.globalAlpha = alfa; ctx.lineJoin = 'round'; ctx.lineCap = 'butt';
+    // mörk kant
+    ctx.strokeStyle = BLAECK; ctx.fillStyle = BLAECK; ctx.lineWidth = 6.5;
     ctx.beginPath(); ctx.moveTo(x1 + ux * hd, y1 + uy * hd); ctx.lineTo(x2 - ux * hd, y2 - uy * hd); ctx.stroke();
-    for (const [px, py, sx] of [[x1, y1, 1], [x2, y2, -1]]) {
-        const bx = px + sx * ux * hd, by = py + sx * uy * hd;
-        ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(bx - uy * bb, by + ux * bb); ctx.lineTo(bx + uy * bb, by - ux * bb); ctx.closePath(); ctx.fill();
-    }
+    ctx.lineWidth = 3; huvuden();
+    // färgen ovanpå
+    ctx.strokeStyle = LAMBDA_FARG; ctx.fillStyle = LAMBDA_FARG; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(x1 + ux * hd, y1 + uy * hd); ctx.lineTo(x2 - ux * hd, y2 - uy * hd); ctx.stroke();
+    ctx.lineWidth = 0.01; huvuden();
     ctx.restore();
 }
 function pil(ctx, x1, y1, x2, y2, farg, bredd) {
@@ -397,7 +410,7 @@ function bricka(ctx, x, yTop, w, h, kant) {
     ctx.arcTo(x, yTop + h, x, yTop, r); ctx.arcTo(x, yTop, x + w, yTop, r); ctx.closePath();
     ctx.fill();
     ctx.shadowColor = 'transparent';
-    if (kant && kant !== '#f6f2ea' && kant !== '#f3eee4') { ctx.strokeStyle = kant === '#ffe9a8' ? '#d9a521' : kant; ctx.lineWidth = 2; ctx.stroke(); }
+    if (kant && kant !== '#f6f2ea' && kant !== '#f3eee4') { ctx.strokeStyle = kant === '#ffe9a8' ? '#d9a521' : kant; ctx.lineWidth = 2.5; ctx.stroke(); }
     ctx.restore();
 }
 // Kursiv beteckning med index, till exempel λ₁: (ctx, 'λ', '1', x, y)
@@ -635,7 +648,7 @@ const WaveSimulator = () => {
                     dubbelpil(ctx, p.k1.x + a[0] * r1, p.k1.y + a[1] * r1, p.k1.x + a[0] * r2, p.k1.y + a[1] * r2, '#f6f2ea', al);
                     ctx.save(); ctx.globalAlpha = al;
                     const rm = (r1 + r2) / 2;
-                    beteckning(ctx, 'λ', '', p.k1.x + a[0] * rm + 10, p.k1.y + a[1] * rm - 10, '#f6f2ea', 25, 'start');
+                    beteckning(ctx, 'λ', '', p.k1.x + a[0] * rm + 10, p.k1.y + a[1] * rm - 10, LAMBDA_FARG, 25, 'start');
                     ctx.restore();
                 }
                 if (p.mode === 'double') ritaInterferens(p, p.k1, p.k2, lam, false);
@@ -652,7 +665,7 @@ const WaveSimulator = () => {
                     const tp = toppSpar(330, k, 0, phi), x1 = 330 + tp.s, al = tona(tp.u), y = H - 70;
                     dubbelpil(ctx, x1, y, x1 + lam, y, '#f6f2ea', al);
                     ctx.save(); ctx.globalAlpha = al;
-                    beteckning(ctx, 'λ', '', x1 + lam / 2, y - 12, '#f6f2ea', 25, 'middle');
+                    beteckning(ctx, 'λ', '', x1 + lam / 2, y - 12, LAMBDA_FARG, 25, 'middle');
                     ctx.restore();
                 }
             } else if (p.mode === 'refraction') {
@@ -719,14 +732,14 @@ const WaveSimulator = () => {
                 const P1 = [A1[0] + t1.s * a1[0], A1[1] + t1.s * a1[1]];
                 dubbelpil(ctx, P1[0], P1[1], P1[0] + lam1 * a1[0], P1[1] + lam1 * a1[1], '#f6f2ea', tona(t1.u));
                 ctx.save(); ctx.globalAlpha = tona(t1.u);
-                beteckning(ctx, 'λ', '1', P1[0] + lam1 * a1[0] / 2 + 14 * a1[1], P1[1] + lam1 * a1[1] / 2 - 14 * a1[0] + 6, '#f6f2ea', 25, 'start');
+                beteckning(ctx, 'λ', '1', P1[0] + lam1 * a1[0] / 2 + 14 * a1[1], P1[1] + lam1 * a1[1] / 2 - 14 * a1[0] + 6, LAMBDA_FARG, 25, 'start');
                 ctx.restore();
                 const A2 = [600 - lam2 * a2[0], YB_BRYT + 20];
                 const t2 = toppSpar(A2[0] * a2[0] + A2[1] * a2[1], k2, fas0, phi);
                 const P2 = [A2[0] + t2.s * a2[0], A2[1] + t2.s * a2[1]];
                 dubbelpil(ctx, P2[0], P2[1], P2[0] + lam2 * a2[0], P2[1] + lam2 * a2[1], '#f6f2ea', tona(t2.u));
                 ctx.save(); ctx.globalAlpha = tona(t2.u);
-                beteckning(ctx, 'λ', '2', P2[0] + lam2 * a2[0] / 2 + 14 * a2[1], P2[1] + lam2 * a2[1] / 2 - 14 * a2[0] + 6, '#f6f2ea', 25, 'start');
+                beteckning(ctx, 'λ', '2', P2[0] + lam2 * a2[0] / 2 + 14 * a2[1], P2[1] + lam2 * a2[1] / 2 - 14 * a2[0] + 6, LAMBDA_FARG, 25, 'start');
                 ctx.restore();
             }
             if (p.visa.stralen) {
@@ -794,7 +807,7 @@ const WaveSimulator = () => {
                     const al = tona((fram[iF] - g0) / lamF);
                     dubbelpil(ctx, fram[iF], y0 - 34, fram[iF + 1], y0 - 34, '#f6f2ea', al);
                     ctx.save(); ctx.globalAlpha = al;
-                    beteckning(ctx, 'λ', '', (fram[iF] + fram[iF + 1]) / 2, y0 - 48, '#f6f2ea', 25, 'middle'); ctx.restore();
+                    beteckning(ctx, 'λ', '', (fram[iF] + fram[iF + 1]) / 2, y0 - 48, LAMBDA_FARG, 25, 'middle'); ctx.restore();
                 }
                 const g1 = D.x - 50;
                 const iB = bak.findIndex((x) => x <= g1);
@@ -802,7 +815,7 @@ const WaveSimulator = () => {
                     const al = tona((g1 - bak[iB]) / lamB);
                     dubbelpil(ctx, bak[iB + 1], y0 - 34, bak[iB], y0 - 34, '#f6f2ea', al);
                     ctx.save(); ctx.globalAlpha = al;
-                    beteckning(ctx, 'λ', '', (bak[iB] + bak[iB + 1]) / 2, y0 - 48, '#f6f2ea', 25, 'middle'); ctx.restore();
+                    beteckning(ctx, 'λ', '', (bak[iB] + bak[iB + 1]) / 2, y0 - 48, LAMBDA_FARG, 25, 'middle'); ctx.restore();
                 }
             }
             // källan och dess hastighet

@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Tue, 10 Nov 2026 21:00:30 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 10 Nov 2026 23:33:10 GMT</lastBuildDate>
+    <item>
+      <title>Lönnlöv från 65 år visar hur kolet från kärnvapenproven späddes ut</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-11-11-lonnloven-och-bombkolet</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-11-11-lonnloven-och-bombkolet</guid>
+      <pubDate>Wed, 11 Nov 2026 04:00:00 GMT</pubDate>
+      <category>Kärnfysik</category>
+      <description>Sedan 1961 har forskare plockat lönnlöv på samma plats utanför Ottawa och mätt halten av den radioaktiva kolisotopen kol-14. Serien visar att halten i löven sjönk under nivån från tiden före kärnvapenproven först 2024, omkring två år efter luften, eftersom träden bygger sina nya löv delvis av kol som lagrats under tidigare år.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-11-11-lonnloven-och-bombkolet.jpg" length="466028" type="image/jpeg"/>
+    </item>
     <item>
       <title>Lår, smalben och fot håller rockringen i gång tillsammans</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-11-10-rockringens-fysik</link>
@@ -177,15 +186,6 @@
       <category>Partikelfysik</category>
       <description>Fysiker i USA har fångat en enda positron, elektronens antipartikel, och kylt ned den så mycket att den hamnat i sitt lägsta möjliga kvanttillstånd. Nu kan de se den hoppa ett energisteg i taget, och det öppnar för den skarpaste jämförelsen hittills mellan elektronen och positronen.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-23-positronen-som-stannade.jpg" length="361204" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Flimrande magnetism kan vara limmet i en gåtfull supraledare</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-10-22-spinnen-som-limmar-elektronerna</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-10-22-spinnen-som-limmar-elektronerna</guid>
-      <pubDate>Thu, 22 Oct 2026 04:00:00 GMT</pubDate>
-      <category>Supraledning</category>
-      <description>I vissa kopparoxider leder elektronerna ström helt utan motstånd, men ingen har kunnat visa vad som får dem att bilda par. Nu har forskare i Bristol mätt hur motståndet hos en sådan supraledare beter sig i starka magnetfält, och svaret pekar på kortlivade magnetiska mönster bland elektronernas spinn.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-22-spinnen-som-limmar-elektronerna.jpg" length="157466" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

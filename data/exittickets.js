@@ -12567,6 +12567,22 @@ window.EXITTICKETS = {
       '0–12 är definitionsmängden (minuterna), inte vattenmängderna.',
     ],
   },
+  {
+    question: 'Vilken är definitionsmängden till funktionen $f(x) = \\dfrac{6}{x - 2}$?',
+    choices: [
+      '$x \\neq 6$',
+      '$x > 2$',
+      '$x \\neq -2$',
+      '$x \\neq 2$',
+    ],
+    correct: 3,
+    why: [
+      'Det är nämnaren som inte får bli 0, inte täljaren. Talet 6 spelar ingen roll.',
+      'Även $x < 2$ går bra att sätta in, till exempel $x = 0$. Det är bara $x = 2$ som är förbjudet.',
+      'Med $x = -2$ blir nämnaren $-2 - 2 = -4$, och det går bra att dividera med.',
+      'Med $x = 2$ blir nämnaren $2 - 2 = 0$, och division med 0 är inte definierad. Alla andra $x$ ingår.',
+    ],
+  },
 ],
 
 'ma1c-4.11': [

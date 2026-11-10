@@ -118,6 +118,121 @@ $0 \leq y \leq 4$
 :::
 :::
 
+::: exempel "Exempel 3 — Rektangelns sidor"
+**En rektangel har omkretsen 20 cm. Den ena sidan är $x$ cm och den andra
+$y$ cm, och då är $y = 10 - x$. Bestäm funktionens<br>a) definitionsmängd&emsp;&emsp;b) värdemängd.**
+
+::: figur
+<svg viewBox="16 10 262 130" width="311" height="154" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En rektangel med den vågräta sidan x centimeter och den lodräta sidan y centimeter."><rect x="20" y="14" width="210" height="96" fill="rgba(37,99,201,0.08)" stroke="#1f2530" stroke-width="2"/><text x="125" y="132" font-size="16" text-anchor="middle" fill="#1f2530"><tspan font-style="italic">x</tspan> cm</text><text x="240" y="67.5" font-size="16" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan> cm</text></svg>
+:::
+
+::: handskrift
+typ: rektangelmangder
+:::
+
+::: textlosning
+**a)** En sida i en rektangel måste vara längre än 0 cm, annars finns
+det ingen rektangel. Alltså är $x > 0$.
+
+Även den andra sidan, $y = 10 - x$, måste vara längre än 0 cm. Uttrycket
+$10 - x$ är större än 0 bara när $x$ är mindre än 10, så $x < 10$. Med
+$x = 10$ blir $y = 0$, och då har rektangeln krympt till ett streck.
+
+**Svar:** $0 < x < 10$
+
+**b)** Funktionen $y = 10 - x$ minskar när $x$ ökar. Ändpunkterna
+$x = 0$ och $x = 10$ ingår inte i definitionsmängden, men vi sätter in
+dem för att se vilka gränser $y$ närmar sig:
+
+$$
+y = 10 - 0 = 10
+$$
+
+$$
+y = 10 - 10 = 0
+$$
+
+Eftersom $x = 0$ och $x = 10$ inte ingår blir $y$ aldrig exakt 10 eller
+exakt 0, men $y$ antar alla värden däremellan. I en graf blir funktionen
+en sträcka med tomma ringar i båda ändpunkterna, $(0, 10)$ och
+$(10, 0)$.
+
+**Svar:** $0 < y < 10$
+:::
+:::
+
+## Rationella funktioner
+
+En funktion som är ett bråk med $x$ i nämnaren, till exempel
+$f(x) = \dfrac{2}{x - 1}$, kallas en **rationell funktion**.
+
+Division med 0 är inte definierad. Det finns inget tal som blir 2 när
+det multipliceras med 0, så $\dfrac{2}{0}$ har inget värde. Därför får vi
+aldrig sätta in ett $x$-värde som gör **nämnaren lika med 0**.
+
+För $f(x) = \dfrac{2}{x - 1}$ blir nämnaren 0 när $x = 1$.
+Definitionsmängden är alltså alla $x$ utom $x = 1$, och det skrivs
+$x \neq 1$. I figuren nedan syns det som ett avbrott i grafen: den
+består av två delar, en på var sida om den streckade linjen $x = 1$, och
+den når aldrig fram till linjen.
+
+::: figur
+<svg viewBox="0 0 220.0 264.0" width="279" height="334" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Grafen till f av x lika med 2 genom x minus 1. Den består av två delar, en på var sida om en streckad lodrät linje vid x lika med 1. Grafen kommer aldrig fram till linjen."><line x1="22.0" y1="18.0" x2="22.0" y2="246.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="44.0" y1="18.0" x2="44.0" y2="246.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="66.0" y1="18.0" x2="66.0" y2="246.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="110.0" y1="18.0" x2="110.0" y2="246.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="132.0" y1="18.0" x2="132.0" y2="246.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="154.0" y1="18.0" x2="154.0" y2="246.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="176.0" y1="18.0" x2="176.0" y2="246.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="198.0" y1="18.0" x2="198.0" y2="246.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="18.0" y1="242.0" x2="202.0" y2="242.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="18.0" y1="220.0" x2="202.0" y2="220.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="18.0" y1="198.0" x2="202.0" y2="198.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="18.0" y1="176.0" x2="202.0" y2="176.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="18.0" y1="154.0" x2="202.0" y2="154.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="18.0" y1="110.0" x2="202.0" y2="110.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="18.0" y1="88.0" x2="202.0" y2="88.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="18.0" y1="66.0" x2="202.0" y2="66.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="18.0" y1="44.0" x2="202.0" y2="44.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="18.0" y1="22.0" x2="202.0" y2="22.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="16.0" y1="132.0" x2="208.0" y2="132.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="216.0,132.0 206.0,127.5 206.0,136.5" fill="#1f2530"/><line x1="88.0" y1="248.0" x2="88.0" y2="12.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="88.0,4.0 83.5,14.0 92.5,14.0" fill="#1f2530"/><text x="216.0" y="150.0" font-size="15" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="97.0" y="14.0" font-size="15" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="132.0" y="148.0" font-size="13" text-anchor="middle" fill="#1f2530">2</text><text x="154.0" y="148.0" font-size="13" text-anchor="middle" fill="#1f2530">3</text><text x="176.0" y="148.0" font-size="13" text-anchor="middle" fill="#1f2530">4</text><text x="114.0" y="148.0" font-size="13" text-anchor="start" fill="#1f2530">1</text><text x="82.0" y="224.5" font-size="13" text-anchor="end" fill="#1f2530">−4</text><text x="82.0" y="92.5" font-size="13" text-anchor="end" fill="#1f2530">2</text><text x="82.0" y="48.5" font-size="13" text-anchor="end" fill="#1f2530">4</text><line x1="110.0" y1="20.0" x2="110.0" y2="244.0" stroke="#1f2530" stroke-width="1.4" stroke-dasharray="5 4"/><text x="116.0" y="231.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">x</tspan> = 1</text><path d="M22.0,143.0 L24.0,143.3 L26.0,143.5 L27.9,143.8 L29.9,144.1 L31.9,144.4 L33.9,144.7 L35.9,145.1 L37.8,145.4 L39.8,145.8 L41.8,146.2 L43.7,146.6 L45.7,147.0 L47.6,147.5 L49.6,148.0 L51.5,148.5 L53.4,149.1 L55.3,149.7 L57.2,150.3 L59.1,151.0 L61.0,151.8 L62.8,152.5 L64.7,153.4 L66.5,154.2 L68.3,155.2 L70.0,156.2 L71.7,157.3 L73.4,158.4 L75.0,159.7 L76.6,161.0 L78.1,162.3 L79.5,163.8 L80.9,165.3 L82.2,166.9 L83.5,168.5 L84.7,170.2 L85.8,172.0 L86.8,173.7 L87.8,175.6 L88.7,177.4 L89.5,179.3 L90.3,181.2 L91.1,183.1 L91.8,185.1 L92.4,187.1 L93.0,189.0 L93.6,191.0 L94.1,193.0 L94.6,195.0 L95.1,197.0 L95.6,199.0 L96.0,201.0 L96.4,203.0 L96.8,205.1 L97.1,207.1 L97.4,209.1 L97.8,211.1 L98.1,213.2 L98.4,215.2 L98.6,217.2 L98.9,219.3 L99.2,221.3 L99.4,223.3 L99.6,225.3 L99.9,227.4 L100.1,229.4 L100.3,231.4 L100.5,233.5 L100.6,235.5 L100.8,237.5 L101.0,239.6 L101.2,241.6 L101.3,243.6 L101.5,245.7 L101.6,247.7 L101.7,248.6" fill="none" stroke="#2563c9" stroke-width="2.2"/><path d="M118.3,15.4 L118.4,17.4 L118.6,19.3 L118.7,21.3 L118.9,23.2 L119.1,25.2 L119.2,27.2 L119.4,29.1 L119.6,31.1 L119.8,33.0 L120.0,35.0 L120.2,36.9 L120.4,38.9 L120.6,40.8 L120.8,42.8 L121.1,44.7 L121.3,46.6 L121.6,48.6 L121.9,50.5 L122.2,52.4 L122.5,54.4 L122.8,56.3 L123.1,58.2 L123.5,60.1 L123.8,62.0 L124.2,64.0 L124.6,65.9 L125.1,67.8 L125.5,69.6 L126.0,71.5 L126.5,73.4 L127.1,75.3 L127.6,77.1 L128.3,79.0 L128.9,80.8 L129.6,82.6 L130.3,84.4 L131.1,86.2 L132.0,87.9 L132.8,89.6 L133.8,91.3 L134.8,93.0 L135.9,94.6 L137.0,96.2 L138.2,97.7 L139.5,99.2 L140.8,100.6 L142.2,102.0 L143.7,103.3 L145.2,104.5 L146.8,105.7 L148.4,106.8 L150.1,107.9 L151.8,108.8 L153.5,109.8 L155.3,110.6 L157.1,111.5 L159.0,112.2 L160.8,113.0 L162.7,113.6 L164.6,114.3 L166.5,114.9 L168.4,115.4 L170.3,116.0 L172.3,116.5 L174.2,116.9 L176.1,117.4 L178.1,117.8 L180.1,118.2 L182.0,118.6 L184.0,118.9 L186.0,119.3 L187.9,119.6 L189.9,119.9 L191.9,120.2 L193.9,120.5 L195.8,120.7 L197.8,121.0 L198.0,121.0" fill="none" stroke="#2563c9" stroke-width="2.2"/></svg>
+:::
+
+Så hittar du definitionsmängden till en rationell funktion: sätt
+nämnaren lika med 0 och lös ekvationen. Lösningen är det $x$-värde som
+inte får sättas in, och alla andra $x$ ingår.
+
+::: exempel "Exempel 4 — Där nämnaren blir noll"
+**Bestäm definitionsmängden till funktionerna<br>a)&nbsp;$f(x) = \dfrac{4}{x + 3}$&emsp;&emsp;b)&nbsp;$g(x) = \dfrac{x}{2x - 10}$**
+
+::: handskrift
+typ: rationelldef
+:::
+
+::: textlosning
+**a)** Nämnaren får inte vara 0. Vi sätter nämnaren lika med 0 och löser
+ekvationen:
+
+$$
+x + 3 = 0
+$$
+
+Vi subtraherar 3 från båda led:
+
+$$
+x = -3
+$$
+
+Med $x = -3$ blir nämnaren 0, så det värdet får inte sättas in.
+
+**Svar:** Alla $x$ utom $x = -3$, alltså $x \neq -3$
+
+**b)** Här är det också bara nämnaren som spelar roll. Att $x$ står i
+täljaren gör inget, eftersom täljaren gärna får vara 0. Vi sätter
+nämnaren lika med 0:
+
+$$
+2x - 10 = 0
+$$
+
+Vi adderar 10 till båda led:
+
+$$
+2x = 10
+$$
+
+Vi dividerar båda led med 2:
+
+$$
+x = 5
+$$
+
+**Svar:** Alla $x$ utom $x = 5$, alltså $x \neq 5$
+:::
+:::
+
 ::: sammanfattning "Sammanfattning"
 
 ::: sampunkt "De två mängderna"
@@ -133,6 +248,8 @@ $0 \leq y \leq 4$
 - Ökar eller minskar $y$ hela tiden räcker det att räkna ut $y$ i
   ändpunkterna, här $0 \leq y \leq 600$.
 - Annars ger grafens lägsta och högsta punkt värdemängden.
+- Kan en ändpunkt inte ingå, som en sida på 0 cm, blir intervallet öppet:
+  $0 < x < 10$.
 :::
 
 ::: sampunkt "Ur en graf: titta på ringarna"
@@ -147,5 +264,11 @@ $0 \leq y \leq 4$
   sträcker sig åt vänster och höger.
 - Värdemängden läses av i **höjdled**, alltså hur lågt och hur högt grafen
   når.
+:::
+
+::: sampunkt "Rationella funktioner"
+- Ett bråk med $x$ i nämnaren. Division med 0 är inte definierad.
+- Sätt nämnaren lika med 0 och lös ut $x$. Det värdet ingår inte.
+- $f(x) = \dfrac{4}{x + 3}$ har definitionsmängden $x \neq -3$.
 :::
 :::

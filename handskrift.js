@@ -16048,6 +16048,185 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
+  /* ---------------- scen: rektangelns sidor (ma1c-4.10 ex 3) -----------
+   * y = 10 − x för en rektangel med omkretsen 20 cm. Båda sidorna måste
+   * vara längre än 0, så BÅDA ändpunkterna faller bort: 0 < x < 10 och
+   * 0 < y < 10. Grafen ritas med tomma ringar i båda ändar, så att det
+   * öppna intervallet syns. Grafen ligger till höger om texten (x > 400)
+   * och under mobilzonen, så att bubblorna (x 120–388) aldrig täcker den. */
+  function layoutRektangelmangder(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+    var tanke = mkTanke(T);
+    function cirkel(cx, cy) {
+      var pts = [], n;
+      for (n = 0; n <= 26; n++) {
+        var v = -0.4 + (n / 26) * Math.PI * 2.08, r = 6 + rnd(-0.3, 0.3);
+        pts.push([cx + Math.cos(v) * r, cy + Math.sin(v) * r]);
+      }
+      return pts;
+    }
+
+    tanke(20, [
+      [['En sida måste vara längre']],
+      [['än 0 cm, annars blir det']],
+      [['ingen rektangel.']]
+    ], 0);
+    y = 150;
+    T.str('a) Sidan x', padL, y - 1.6 * F, null, 0.62);
+    T.str('x>0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Även y=10−x måste vara']],
+      [['större än 0. Det gäller bara']],
+      [['när x är mindre än 10.']]
+    ]);
+    y += 3.6 * F;
+    T.str('Sidan y=10−x', padL, y - 1.6 * F, null, 0.62);
+    T.str('x<10', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Båda villkoren gäller, och']],
+      [['ingen av ändpunkterna ingår.']]
+    ]);
+    y += 2.6 * F;
+    xe = T.str('Svar: 0<x<10', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['y minskar när x ökar. Jag']],
+      [['sätter in ändpunkterna för']],
+      [['att se vad y närmar sig.']]
+    ], 0.5);
+    y += 4.5 * F;
+    T.str('b) Ändpunkten x=0', padL, y - 1.6 * F, null, 0.62);
+    T.str('y=10−0=10', padL, y);
+    T.stepEnd();
+
+    y += 3.6 * F;
+    T.str('Ändpunkten x=10', padL, y - 1.6 * F, null, 0.62);
+    T.str('y=10−10=0', padL, y);
+    T.stepEnd();
+
+    /* grafen: sträckan från (0, 10) till (10, 0) med TOMMA ringar */
+    var A = mkAxes(T, F, { ox: 378, oy: y + 0.6 * F, u: 27,
+                           xmin: 0, xmax: 10, ymin: 0, ymax: 10 });
+    tanke(y, [
+      [['I grafen blir båda ändarna']],
+      [['tomma ringar. x=0 och x=10']],
+      [['ingår inte, så y blir aldrig']],
+      [['exakt 10 eller exakt 0.']]
+    ], 0.5);
+    A.axes();
+    A.ticks(heltal(0, 10), heltal(0, 10), [2, 4, 6, 8, 10], [2, 4, 6, 8, 10]);
+    T.pause(150);
+    var p0 = [A.X(0), A.Y(10)], p1 = [A.X(10), A.Y(0)];
+    var dx = p1[0] - p0[0], dy = p1[1] - p0[1], d = Math.sqrt(dx * dx + dy * dy);
+    var ex = dx / d * 6.5, ey = dy / d * 6.5;
+    A.linjal([p0[0] + ex, p0[1] + ey], [p1[0] - ex, p1[1] - ey], BLUE);
+    T.pause(150);
+    acts.push({ kind: 'stroke', pts: cirkel(p0[0], p0[1]), color: BLUE });
+    T.pause(150);
+    acts.push({ kind: 'stroke', pts: cirkel(p1[0], p1[1]), color: BLUE });
+    T.stepEnd();
+
+    y += 3.0 * F;
+    xe = T.str('Svar: 0<y<10', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660,
+             lastBase: Math.max(y, A.Y(0) + 1.6 * F) + 0.9 * F, padL: padL };
+  }
+
+  /* ---------------- scen: definitionsmängd för rationella funktioner
+   * (ma1c-4.10 ex 4) ----------------------------------------------------
+   * Nämnaren sätts lika med 0 och ekvationen löses. Lösningen är det
+   * x-värde som INTE ingår. Ekvationerna redovisas i båda lägena
+   * (Båda led / Väggen) via mkEkvOp, med samma antal klicksteg. */
+  function layoutRationelldef(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    var xwA = padL + T.adv('x+3=0') + 0.9 * F;
+    var xwB = padL + T.adv('2x-10=0') + 0.9 * F;
+
+    /* ---- a) ---- första raden under y=210 (ekvval-scenens högre
+     * inställningsruta, se mobilzon-regeln i filhuvudet) */
+    y = 250;
+    xx = T.str('a) f(x)=', padL, y);
+    T.fracH('4', 'x+3', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nämnaren får inte bli 0.']],
+      [['Jag sätter den lika med 0']],
+      [['och löser ut x.']]
+    ], 0.9);
+    y += 2.9 * F;
+    T.str('x+3=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag subtraherar 3 från']],
+      [['båda led.']]
+    ]);
+    y = ekvOp(y, '-3', xwA, 'x+3=0');
+    T.str('x=-3', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x=−3 gör nämnaren till 0.']],
+      [['Det värdet får inte sättas']],
+      [['in, men alla andra x ingår.']]
+    ]);
+    y += 2.2 * F;
+    xe = T.str('Svar: x≠-3', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) ---- */
+    tanke(y, [
+      [['x i täljaren gör inget,']],
+      [['täljaren får gärna vara 0.']],
+      [['Bara nämnaren spelar roll.']]
+    ]);
+    y += 3.6 * F;
+    xx = T.str('b) g(x)=', padL, y);
+    T.fracH('x', '2x-10', xx, y);
+    T.stepEnd();
+
+    y += 2.9 * F;
+    T.str('2x-10=0', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag adderar 10 till båda']],
+      [['led.']]
+    ]);
+    y = ekvOp(y, '+10', xwB, '2x-10=0');
+    T.str('2x=10', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Jag dividerar båda led']],
+      [['med 2.']]
+    ]);
+    y = ekvOp(y, '/2', xwB, '2x=10');
+    T.str('x=5', padL, y);
+    T.stepEnd();
+
+    y += 2.2 * F;
+    xe = T.str('Svar: x≠5', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 600, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
   /* ---------------- scen: kapital som växer (ma1c-4.11 ex 1) ----------
    * 25 000 kr med 2 % ökning per år. Tabellen visar hur antalet
    * multiplikationer blir EXPONENTEN, och den sista raden generaliserar
@@ -64607,6 +64786,8 @@
                    grafiskolikhet: layoutGrafiskolikhet,
                    musiktjanst: layoutMusiktjanst,
                    mangderurgraf: layoutMangderurgraf,
+                   rektangelmangder: layoutRektangelmangder,
+                   rationelldef: layoutRationelldef,
                    kapitalvaxer: layoutKapitalvaxer,
                    tolkaexp: layoutTolkaexp,
                    vilkenexp: layoutVilkenexp,

@@ -29926,6 +29926,32 @@ $$ -3 < x \\leq 5 $$
 
 **Svar:** $-3 < x \\leq 5$`,
         },
+        {
+            level: 2,
+            question: `Vilken är definitionsmängden till funktionen $f(x) = \\dfrac{5}{3x - 12}$?`,
+            choices: [
+                `$x \\neq 4$`,
+                `$x \\neq 12$`,
+                `$x > 4$`,
+                `$x \\neq 5$`,
+            ],
+            correct: 0,
+            solution: `Division med 0 är inte definierad, så nämnaren får inte bli 0. Vi sätter nämnaren lika med 0 och löser ekvationen:
+
+$$ 3x - 12 = 0 $$
+
+Vi adderar 12 till båda led:
+
+$$ 3x = 12 $$
+
+Vi dividerar båda led med 3:
+
+$$ x = 4 $$
+
+Med $x = 4$ blir nämnaren 0. Alla andra $x$ går att sätta in, även tal mindre än 4.
+
+**Svar:** $x \\neq 4$`,
+        },
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,

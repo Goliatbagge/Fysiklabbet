@@ -9,33 +9,36 @@ section: '5.4'
 
 # Den klassiska sannolikhetsdefinitionen
 
-::: kuriosa "Introduktion — Tre sanna osannolikheter"
-Den 28 juli 1900 åkte Italiens kung Umberto I till en restaurang för
-middag. När ägaren, som heter Umberto, tog kungens order, märkte han att
-de såg väldigt lika ut. Så de tillbringade kvällen med att prata och
-upptäckte: de föddes båda den 14 mars 1844; de gifte sig båda med kvinnor
-med namnet Margherita samma dag; restaurangen öppnades samma dag som
-kungen kröntes. Nästa dag fick kungen veta att restaurangägaren hade dött
-i en mystisk skjutning samma morgon. När kungen pratade med en vän om det
-mördades kungen av en man i folkmassan.
+::: kuriosa "Introduktion — Fyra sanna osannolikheter"
+Två enäggstvillingar i Ohio i USA adopterades till olika familjer när de
+var några veckor gamla. Båda adoptivfamiljerna gav sin pojke namnet James.
+Bröderna träffades först 1979, när de var 39 år, och upptäckte då att båda
+hade gift sig med en kvinna som hette Linda, skilt sig och gift om sig med
+en kvinna som hette Betty. Den ene hade en son som hette James Alan, den
+andre en son som hette James Allan, och båda hade haft en hund som hette
+Toy. Tvillingarna blev sedan en del av en stor forskningsstudie om
+tvillingar som vuxit upp åtskilda, vid University of Minnesota.
 
-Napoleon och Hitler föddes med 129 års mellanrum, kom till makten med 129
-års mellanrum, förklarade krig med Ryssland med 129 års mellanrum och
-besegrades med 129 års mellanrum.
+Violet Jessop arbetade som stewardess ombord på de tre systerfartygen
+Olympic, Titanic och Britannic, och var med när alla tre råkade ut för
+olyckor. År 1911 var hon ombord på Olympic när fartyget kolliderade med
+krigsfartyget HMS Hawke. År 1912 räddade hon sig i livbåt nummer 16 när
+Titanic sjönk, och år 1916 överlevde hon när Britannic, som då användes
+som sjukhusfartyg, gick på en mina och sjönk.
 
-Två tvillingpojkar separerades vid födseln. Deras adoptivfamiljer gav dem
-båda namnet James, de båda utbildade sig till poliser och gifte sig sedan
-med en kvinna som hette Linda. De hade båda pojkar, varav en hette James
-Alan och en som hette James Allan. De skilde sig från sina fruar Linda
-och gifte sig igen med kvinnor som hette Betty. De hade båda en hund som
-heter Toy.
+Tsutomu Yamaguchi var på tjänsteresa i Hiroshima den 6 augusti 1945 när
+atombomben föll där. Han skadades, men tog sig hem till Nagasaki, och
+befann sig där när nästa atombomb föll tre dagar senare. Han överlevde
+båda och dog först 2010, 93 år gammal. År 2009 blev han den förste som
+den japanska staten officiellt erkände som överlevande från båda
+bombningarna.
 
 Roy Cleveland Sullivan, född 7 februari 1912, död 28 september 1983, var
-en amerikansk skogvaktare i Shenandoah nationalpark i Virginia. Han är
-den person som träffats flest gånger av blixten. Mellan 1942 och 1977
-träffades Sullivan av blixtar vid sju olika tillfällen och överlevde dem
-alla. Av denna anledning fick han smeknamnet "Den mänskliga blixtledaren"
-(The Human Lightning Rod). Samtliga fall har bekräftats av läkare.
+en amerikansk skogvaktare i Shenandoah nationalpark i Virginia. Mellan
+1942 och 1977 träffades han av blixten vid sju olika tillfällen och
+överlevde varje gång. Han fick smeknamnet "Den mänskliga blixtledaren"
+(The Human Lightning Rod), och står i Guinness rekordbok som den person
+som träffats av blixten flest gånger.
 
 **Slutsats: Det är väldigt sannolikt att osannolika saker sker!**
 :::

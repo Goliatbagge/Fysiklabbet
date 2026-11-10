@@ -129,26 +129,23 @@ typ: elsparkcykel
 :::
 
 ::: textlosning
-**a)** Tiden $x$ kan inte vara negativ, och med $x = 0$ har resan aldrig
-börjat. Alltså är $x > 0$. Någon största tid finns inte, eftersom man
-får åka hur länge som helst. Därför har definitionsmängden ingen övre
-gräns.
+**a)** Tiden $x$ kan inte vara negativ. Låser man upp elsparkcykeln men
+inte åker någon tid alls är $x = 0$, så det minsta värdet är $x = 0$.
+Någon största tid finns inte, eftersom man får åka hur länge som helst.
 
-**Svar:** $x > 0$
+**Svar:** $x \geq 0$
 
-**b)** Kostnaden $y = 10 + 3x$ ökar när $x$ ökar. Vi sätter in
-ändpunkten $x = 0$ för att se vilken gräns $y$ närmar sig:
+**b)** Kostnaden $y = 10 + 3x$ ökar när $x$ ökar. Den *minsta*
+kostnaden får vi då $x = 0$, alltså när man bara låser upp:
 
 $$
 y = 10 + 3 \cdot 0 = 10
 $$
 
-Eftersom $x = 0$ inte ingår blir kostnaden aldrig exakt 10 kr, utan
-alltid lite mer. Tiden kan bli hur lång som helst, så kostnaden kan
-också bli hur stor som helst. I en graf börjar funktionen med en tom
-ring i $(0, 10)$ och fortsätter uppåt utan slut.
+Tiden kan bli hur lång som helst, så kostnaden kan också bli hur stor
+som helst.
 
-**Svar:** $y > 10$
+**Svar:** $y \geq 10$
 :::
 :::
 
@@ -239,8 +236,8 @@ $$
 - Ökar eller minskar $y$ hela tiden räcker det att räkna ut $y$ i
   ändpunkterna, här $0 \leq y \leq 600$.
 - Annars ger grafens lägsta och högsta punkt värdemängden.
-- Kan en ändpunkt inte ingå blir olikheten strikt. Finns ingen övre
-  gräns skrivs bara den undre, till exempel $x > 0$ och $y > 10$.
+- Finns ingen övre gräns skrivs bara den undre, till exempel $x \geq 0$
+  och $y \geq 10$.
 :::
 
 ::: sampunkt "Ur en graf: titta på ringarna"

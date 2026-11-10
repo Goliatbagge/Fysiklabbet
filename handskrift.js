@@ -16049,9 +16049,9 @@
   }
 
   /* ---------------- scen: elsparkcykeln (ma1c-4.10 ex 3) ----------------
-   * y = 10 + 3x, där x är resans tid i minuter. x = 0 ingår inte (då har
-   * resan aldrig börjat) och det finns ingen övre gräns: x > 0 och
-   * y > 10. Grafen ritas med en TOM ring i (0, 10) och linjen går vidare
+   * y = 10 + 3x, där x är resans tid i minuter. x = 0 ingår (man låser
+   * upp men åker ingen tid alls) och det finns ingen övre gräns: x ≥ 0
+   * och y ≥ 10. Grafen ritas med en IFYLLD ring i (0, 10) och linjen går vidare
    * ut till rutans kant, utan ändpunkt. Grafen ligger till höger om
    * texten (x > 405) och under mobilzonen, så att bubblorna (x 120–388)
    * aldrig täcker den. */
@@ -16068,13 +16068,13 @@
     }
 
     tanke(20, [
-      [['Tiden kan inte vara negativ,']],
-      [['och med x=0 har resan aldrig']],
-      [['börjat.']]
+      [['Tiden kan inte vara negativ.']],
+      [['Låser jag upp men inte åker']],
+      [['alls är x=0.']]
     ], 0);
     y = 150;
     T.str('a) Minsta tiden', padL, y - 1.6 * F, null, 0.62);
-    T.str('x>0', padL, y);
+    T.str('x≥0', padL, y);
     T.stepEnd();
 
     tanke(y, [
@@ -16083,39 +16083,46 @@
       [['övre gräns för x.']]
     ]);
     y += 3.0 * F;
-    xe = T.str('Svar: x>0', padL, y);
+    xe = T.str('Svar: x≥0', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
     tanke(y, [
-      [['Kostnaden ökar med tiden. Jag']],
-      [['sätter in ändpunkten x=0 för']],
-      [['att se vad y närmar sig.']]
+      [['Kostnaden ökar med tiden, så']],
+      [['den minsta kostnaden får jag']],
+      [['när x=0.']]
     ], 0.5);
     y += 4.5 * F;
-    T.str('b) Ändpunkten x=0', padL, y - 1.6 * F, null, 0.62);
+    T.str('b) Minsta kostnaden: x=0', padL, y - 1.6 * F, null, 0.62);
     T.str('y=10+3·0=10', padL, y);
     T.stepEnd();
 
-    /* grafen: tom ring i (0, 10), linjen fortsätter till (9, 37).
+    /* grafen: ifylld ring i (0, 10), linjen fortsätter till (9, 37).
      * ysc = 5 kr per ruta, så att y upp till 40 kr ryms. */
     var A = mkAxes(T, F, { ox: 405, oy: y + 3.2 * F, u: 27, ysc: 5,
                            xmin: 0, xmax: 9, ymin: 0, ymax: 40 });
     tanke(y, [
-      [['x=0 ingår inte, så kostnaden']],
-      [['är alltid mer än 10 kr. I']],
-      [['grafen blir det en tom ring,']],
-      [['och linjen tar aldrig slut.']]
+      [['Bara upplåsningen kostar 10']],
+      [['kr. I grafen blir det en']],
+      [['ifylld ring, och linjen tar']],
+      [['aldrig slut.']]
     ], 0.5);
     A.axes();
     A.ticks(heltal(0, 9), [5, 10, 15, 20, 25, 30, 35, 40],
             [2, 4, 6, 8], [10, 20, 30, 40]);
     T.pause(150);
     var p0 = [A.X(0), A.Y(10)], p1 = [A.X(9), A.Y(37)];
-    var dx = p1[0] - p0[0], dy = p1[1] - p0[1], d = Math.sqrt(dx * dx + dy * dy);
-    A.linjal([p0[0] + dx / d * 6.5, p0[1] + dy / d * 6.5], p1, BLUE);
+    A.linjal(p0, p1, BLUE);
     T.pause(150);
+    /* ifylld ring: ringen ritas och fylls med en tät spiral (samma
+     * teknik som i layoutMangderurgraf) */
+    var fill = [], k;
     acts.push({ kind: 'stroke', pts: cirkel(p0[0], p0[1]), color: BLUE });
+    for (k = 0; k <= 40; k++) {
+      var fa = (k / 40) * Math.PI * 8, fr = 5.2 * (1 - k / 40);
+      fill.push([p0[0] + Math.cos(fa) * fr, p0[1] + Math.sin(fa) * fr]);
+    }
+    acts.push({ kind: 'stroke', pts: fill, color: BLUE });
     T.stepEnd();
 
     /* svaret skrivs UNDER grafen, så att bubblan inte täcker axeln */
@@ -16126,7 +16133,7 @@
       [['det heller.']]
     ], 0.5);
     y += 4.5 * F;
-    xe = T.str('Svar: y>10', padL, y);
+    xe = T.str('Svar: y≥10', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 

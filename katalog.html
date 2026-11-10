@@ -520,7 +520,8 @@
                     // syns ingenting av den: ingen ram, ingen rubrik.
                     if (ty === 'stegvis') {
                         stack.push({ type: ty, close: '</div>' });
-                        out.push('<div class="lab-stegvis">');
+                        out.push('<div class="lab-stegvis"' +
+                            (title && /kolumn/i.test(title) ? ' data-ordning="kolumner"' : '') + '>');
                         out.push('');
                         continue;
                     }
@@ -1896,13 +1897,35 @@
         // nästa cell, rad för rad (i en lista nästa punkt). De dolda
         // cellerna har visibility: hidden, så tabellen har sin fulla
         // storlek från början och hoppar inte medan den fylls i.
+        // En enhet är en grupp element som tänds i samma klick.
+        // Radvis (standard): en cell i taget, rad för rad. Står flera
+        // formler i samma cell ("$A$ $= B$") tänds de var för sig, så att
+        // läraren kan hålla inne med det som står efter likhetstecknet.
+        // Kolumnvis (::: stegvis "kolumner"): första kolumnen (radernas
+        // rubriker) syns direkt, och sedan tänds en kolumn per klick, till
+        // exempel en jämförelse av funktionsvärden x för x.
         function stegEnheter(box) {
             const enh = [];
+            const formler = (cell) => Array.from(cell.querySelectorAll('.katex'))
+                .filter(k => !(k.parentElement && k.parentElement.closest('.katex')));
+            const cellen = (cell) => {
+                const f = formler(cell);
+                enh.push([cell]);
+                f.slice(1).forEach(k => enh.push([k]));
+            };
+            const kolumner = box.dataset.ordning === 'kolumner';
             box.querySelectorAll('table, ul, ol').forEach(t => {
                 if (t.tagName === 'TABLE') {
-                    t.querySelectorAll('tbody > tr').forEach(tr => enh.push(...Array.from(tr.children)));
+                    const rader = Array.from(t.querySelectorAll('tbody > tr'));
+                    if (kolumner) {
+                        const n = Math.max(0, ...rader.map(r => r.children.length));
+                        enh.push(rader.map(r => r.children[0]).filter(Boolean));
+                        for (let j = 1; j < n; j++) enh.push(rader.map(r => r.children[j]).filter(Boolean));
+                    } else {
+                        rader.forEach(tr => Array.from(tr.children).forEach(cellen));
+                    }
                 } else if (!(t.parentElement && t.parentElement.closest('li'))) {
-                    enh.push(...Array.from(t.children).filter(c => c.tagName === 'LI'));
+                    Array.from(t.children).filter(c => c.tagName === 'LI').forEach(cellen);
                 }
             });
             return enh;
@@ -1912,10 +1935,10 @@
             if (!enh || !enh.length) return;
             pos = Math.max(1, Math.min(enh.length, pos));
             box.__stegPos = pos;
-            enh.forEach((e, i) => {
+            enh.forEach((g, i) => g.forEach(e => {
                 e.classList.toggle('pres-steg-dold', i >= pos);
                 e.classList.toggle('pres-steg-ny', !!ny && i === pos - 1);
-            });
+            }));
         }
         function stegBox(st) {
             if (st.el.classList.contains('lab-stegvis')) return st.el;

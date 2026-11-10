@@ -1412,7 +1412,16 @@ användaren påpekat (2026-08-25).
    I presentationsläget tänds rubrikraden och första cellen först, och
    sedan tänder varje klick nästa cell, rad för rad (i en lista nästa
    punkt). Bakåt går det cell för cell. Utanför presentationsläget syns
-   inget av blocket: ingen ram och ingen rubrik. Koden är `stegCtl` i
+   inget av blocket: ingen ram och ingen rubrik.
+   - **Håll inne med det som står efter likhetstecknet** genom att skriva
+     cellen som flera formler: `$25\,000 \cdot 1{,}02 \cdot 1{,}02$ $= 25\,000 \cdot 1{,}02^2$`.
+     Varje formel i cellen tänds då i ett eget klick, på samma rad
+     (cellerna i en stegvis tabell bryts aldrig).
+   - **`::: stegvis "kolumner"`** tänder en kolumn per klick i stället,
+     med radernas rubriker synliga från början. Passar en jämförelse av
+     funktionsvärden, där klassen gissar alla funktioners nästa värde
+     innan kolumnen visas (tabellen med $2x$, $10x$ och $2^x$ i
+     `ma1c-4.11`). Koden är `stegCtl` i
    `katalog.html` (samma inre stegning som textlösningen och kalkyl-
    bladen), och `avsnitt.html` renderar blocket som en osynlig ruta.
    Gör det när det är en pedagogisk vinst, inte för varje tabell: en

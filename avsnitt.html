@@ -450,7 +450,8 @@
                     // syns ingenting av den: ingen ram, ingen rubrik.
                     if (ty === 'stegvis') {
                         stack.push({ type: ty, close: '</div>' });
-                        out.push('<div class="lab-stegvis">');
+                        out.push('<div class="lab-stegvis"' +
+                            (title && /kolumn/i.test(title) ? ' data-ordning="kolumner"' : '') + '>');
                         out.push('');
                         continue;
                     }

@@ -18,11 +18,13 @@ förändringsfaktorn, som du känner igen från ränteberäkningarna. En linjär
 funktion fungerar på ett annat sätt: där **adderas** samma tal i varje
 steg. Tabellen visar skillnaden för $y = 2x$, $y = 10x$ och $y = 2^x$.
 
+::: stegvis "kolumner"
 | $x$ | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 10 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | $y = 2x$ | 0 | 2 | 4 | 6 | 8 | 10 | 12 | 20 |
 | $y = 10x$ | 0 | 10 | 20 | 30 | 40 | 50 | 60 | 100 |
 | $y = 2^x$ | 1 | 2 | 4 | 8 | 16 | 32 | 64 | 1 024 |
+:::
 
 Den linjära funktionen $y = 10x$ ligger länge långt före, men vid
 $x = 6$ har $y = 2^x$ gått om. En exponentiell ökning går långsamt i
@@ -98,8 +100,8 @@ Tabellen visar kapitalet år för år.
 | --- | --- |
 | 0 år | $25\,000$ |
 | 1 år | $25\,000 \cdot 1{,}02$ |
-| 2 år | $25\,000 \cdot 1{,}02 \cdot 1{,}02 = 25\,000 \cdot 1{,}02^2$ |
-| 3 år | $25\,000 \cdot 1{,}02 \cdot 1{,}02 \cdot 1{,}02 = 25\,000 \cdot 1{,}02^3$ |
+| 2 år | $25\,000 \cdot 1{,}02 \cdot 1{,}02$ $= 25\,000 \cdot 1{,}02^2$ |
+| 3 år | $25\,000 \cdot 1{,}02 \cdot 1{,}02 \cdot 1{,}02$ $= 25\,000 \cdot 1{,}02^3$ |
 | $x$ år | $25\,000 \cdot 1{,}02^x$ |
 :::
 

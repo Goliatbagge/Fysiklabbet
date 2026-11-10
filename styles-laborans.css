@@ -4477,6 +4477,10 @@ body.laborans u .lab-term {
    katalog.html). visibility, inte display, så att tabellen har sin fulla
    storlek från början och inte hoppar medan den fylls i. */
 .lab-pres-body .lab-stegvis .pres-steg-dold { visibility: hidden; }
+/* En cell kan rymma flera formler som tänds var för sig ("$A$ $= B$");
+   raden får aldrig brytas vid likhetstecknet. Tabellen scrollar i sidled
+   (.lab-tabell) om den blir för bred. */
+.lab-stegvis td { white-space: nowrap; }
 .lab-pres-body .lab-stegvis .pres-steg-ny {
     animation: labPresStegIn 0.45s ease;
 }

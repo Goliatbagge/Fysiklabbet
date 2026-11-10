@@ -204,6 +204,42 @@
             font-size: 13px; font-weight: 600; color: var(--lab-ink) !important; text-decoration: none;
         }
         .np-delknapp:hover { background: var(--lab-ink); border-color: var(--lab-ink); color: var(--lab-bg) !important; }
+        /* Kursvalet på startsidan: ett kort per kurs, kortnamnet stort
+           (Ma 1c) och kursnamnet under, så att de snarlika namnen går att
+           skilja åt med en blick. */
+        .np-kursval { margin: 0 0 30px; }
+        .np-kursgrid {
+            list-style: none; margin: 0; padding: 0;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px;
+        }
+        .np-kurskort-knapp {
+            position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+            height: 100%; box-sizing: border-box; padding: 16px 40px 16px 18px; border-radius: 12px;
+            background: var(--lab-bg-panel); border: 1px solid var(--lab-line-strong);
+            color: var(--lab-ink) !important; text-decoration: none;
+            transition: transform .08s ease, box-shadow .08s ease, border-color .12s ease;
+        }
+        .np-kurskort-knapp:hover { transform: translateY(-1px); border-color: var(--lab-ink); box-shadow: 0 3px 10px rgba(15, 22, 32, 0.10); }
+        .np-kurskort-kort { font-family: var(--lab-font-display); font-size: 30px; line-height: 1; }
+        .np-kurskort-namn { font-size: 14px; color: var(--lab-ink-soft); line-height: 1.35; }
+        .np-kurskort-meta { font-size: 12.5px; color: var(--lab-ink-muted); margin-top: 4px; }
+        .np-kurskort-pil { position: absolute; right: 16px; top: 18px; font-size: 18px; color: var(--lab-accent); }
+        /* Kursbytet överst i kursvyn: samma kortnamn som knappar. */
+        .np-kursbyte { display: flex; flex-wrap: wrap; gap: 6px; margin: -2px 0 18px; }
+        .np-kursbyte a {
+            font-size: 13px; padding: 4px 11px; border-radius: 6px;
+            border: 1px solid var(--lab-line-strong); color: var(--lab-ink-soft) !important; text-decoration: none;
+        }
+        .np-kursbyte a:hover { color: var(--lab-ink) !important; border-color: var(--lab-ink-soft); }
+        .np-kursbyte a[aria-current="true"] { background: var(--lab-ink); border-color: var(--lab-ink); color: var(--lab-bg) !important; }
+        .np-provgrid-tat .np-provknapp-namn { font-size: 17px; }
+        @media (max-width: 560px) {
+            .np-kursgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+            .np-kurskort-knapp { padding: 13px 30px 13px 13px; }
+            .np-kurskort-kort { font-size: 26px; }
+            .np-kurskort-namn { font-size: 13px; }
+            .np-kurskort-pil { right: 11px; top: 14px; }
+        }
         .np-delknapp-bred { gap: 5px; padding: 0 10px; font-weight: 500; }
         /* Äldre prov ligger hopfällda under knapparna (önskemål 2026-11-10:
            listan blev för lång). Raden är en <details> som fälls ut till en
@@ -1511,14 +1547,20 @@
                 </div>
             );
         }
-        function Breadcrumb({ prov, uppgift }) {
+        function Breadcrumb({ prov, uppgift, kurs }) {
             return (
                 <div className="lab-breadcrumb">
                     {/* På startvyn är smulan bara en etikett; inne i ett prov
                         leder den tillbaka dit (och kursen till sin rubrik). */}
                     <span className="lab-breadcrumb-current">
-                        {prov ? <a href="np.html">NATIONELLA PROV</a> : 'NATIONELLA PROV'}
+                        {(prov || kurs) ? <a href="np.html">NATIONELLA PROV</a> : 'NATIONELLA PROV'}
                     </span>
+                    {!prov && kurs && (
+                        <React.Fragment>
+                            <span className="lab-breadcrumb-sep">/</span>
+                            <span className="lab-breadcrumb-tail">{kurs.kurs.toUpperCase()}</span>
+                        </React.Fragment>
+                    )}
                     {prov && (
                         <React.Fragment>
                             <span className="lab-breadcrumb-sep">/</span>
@@ -1601,169 +1643,176 @@
             </svg>
         );
 
-        // --- Startvy: alla frisläppta prov, en lista per kurs ---
-        function Landing({ kurs }) {
-            // ?amne=fysik eller ?amne=matematik visar bara det ämnets kurser.
-            const amne = (() => {
-                const a = new URLSearchParams(window.location.search).get('amne');
-                return a === 'fysik' || a === 'matematik' ? a : null;
-            })();
-            const kurser = NP_FRISLAPPTA.filter(k => !amne || k.amne === amne);
-            const amnen = [
-                { id: 'matematik', namn: 'Matematik' },
-                { id: 'fysik', namn: 'Fysik' },
-            ].filter(a => kurser.some(k => k.amne === a.id));
-            // En lösning som är dold i data/np/index.js länkas inte.
-            const synlig = id => !!id && !!NP_PROV[id] && !NP_INDEX.some(x => x.id === id && x.dold);
+        // --- Startvy: välj kurs (beslut 2026-11-10: en sida per kurs i stället
+        // för alla kursers prov på en lång sida, där de snarlika kursnamnen
+        // gjorde det svårt att se vilken kurs man skrollat till) ---
+        const AMNEN = [
+            { id: 'matematik', namn: 'Matematik' },
+            { id: 'fysik', namn: 'Fysik' },
+        ];
+        // En lösning som är dold i data/np/index.js länkas inte.
+        const synligLosning = id => !!id && !!NP_PROV[id] && !NP_INDEX.some(x => x.id === id && x.dold);
+        function lasAmne() {
+            const a = new URLSearchParams(window.location.search).get('amne');
+            return a === 'fysik' || a === 'matematik' ? a : null;
+        }
 
-            // Kurslänken i brödsmulan (#kurs:<kod>) skrollar hit.
-            useEffect(() => {
-                if (!kurs) return;
-                const el = document.querySelector('[data-kurs="' + kurs + '"]');
-                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, [kurs]);
-
+        function Landing() {
+            // ?amne=fysik eller ?amne=matematik (menyn) visar bara det ämnets kurser.
+            const amne = lasAmne();
+            useEffect(() => { window.scrollTo(0, 0); }, []);
             return (
                 <main className="np-main">
                     <h1 className="np-hero-title">Nationella prov <em>med lösningar och videor</em></h1>
                     <p className="np-lede">
-                        Här finns alla frisläppta nationella prov i matematik och kursprov i fysik
-                        för kurserna på Fysiklabbet. Klicka på ett prov för att öppna det som pdf. De äldre
-                        proven fäller du ut under varje kurs. Under
-                        många av proven står <em>Lösningsförslag</em>: där väljer du uppgift och
-                        ser lösningen som text, ett steg i taget, eller skriven med penna. Till
-                        proven från våren 2022 i Ma 1c, Ma 2c, Ma 3c och Ma 4 finns dessutom
-                        en <em>videolösning till varje uppgift</em>.
-                    </p>
-                    <p className="np-lede np-lede-obs">
-                        <strong>Obs!</strong> Endast proven från våren 2022 följer aktuell ämnesplan.
-                        Äldre prov innehåller enstaka uppgifter på stoff som utgick ur kurserna vid
-                        revideringen 2021. I våra lösningar är de uppgifterna märkta.
+                        Välj kurs. Där finns kursens alla frisläppta prov som pdf, och till många
+                        av dem lösningsförslag som text, med penna och som video.
                     </p>
                     <nav className="np-amnen" aria-label="Välj ämne">
-                        <a href="np.html" aria-current={amne ? undefined : 'true'}>Alla prov</a>
+                        <a href="np.html" aria-current={amne ? undefined : 'true'}>Alla kurser</a>
                         <a href="np.html?amne=matematik" aria-current={amne === 'matematik' ? 'true' : undefined}>Matematik</a>
                         <a href="np.html?amne=fysik" aria-current={amne === 'fysik' ? 'true' : undefined}>Fysik</a>
                     </nav>
-                    <nav className="np-kurshopp" aria-label="Hoppa till kurs">
-                        {kurser.map(k => (
-                            <a key={k.kod} href={'#kurs:' + k.kod}>{k.kort}</a>
+                    {AMNEN.filter(a => !amne || a.id === amne).map(a => (
+                        <section className="np-kursval" key={a.id}>
+                            <h2 className="np-amnesrubrik">{a.namn}</h2>
+                            <ul className="np-kursgrid">
+                                {NP_FRISLAPPTA.filter(k => k.amne === a.id).map(k => {
+                                    const medLos = k.prov.filter(p => synligLosning(p.losning));
+                                    const video = medLos.some(p => harVideo(p.losning));
+                                    return (
+                                        <li key={k.kod}>
+                                            <a className="np-kurskort-knapp" href={'#kurs:' + k.kod}>
+                                                <span className="np-kurskort-kort">{k.kort}</span>
+                                                <span className="np-kurskort-namn">{k.kurs}</span>
+                                                <span className="np-kurskort-meta">
+                                                    {k.prov.length} prov
+                                                    {medLos.length > 0 && <React.Fragment>, {medLos.length} med lösningsförslag</React.Fragment>}
+                                                </span>
+                                                {video && <span className="np-losningslank-video">{IKON_PLAY} Videolösningar</span>}
+                                                <span className="np-kurskort-pil" aria-hidden="true">→</span>
+                                            </a>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        </section>
+                    ))}
+                </main>
+            );
+        }
+
+        // --- Kursvy: kursens frisläppta prov (#kurs:<kod>) ---
+        function KursView({ kurs: k }) {
+            useEffect(() => { window.scrollTo(0, 0); }, [k.kod]);
+            const provNamn = p => k.kursprov ? 'Kursprov, ' + terminNamn(p.t).toLowerCase() : terminNamn(p.t);
+            const delKnappar = p => Object.keys(p.delar).map(d => (
+                <a key={d} className="np-delknapp" href={p.delar[d]} target="_blank" rel="noopener"
+                   title={'Öppna delprov ' + d + ' (pdf)'}>{d}</a>
+            ));
+            const medLos = k.prov.filter(p => synligLosning(p.losning));
+            const ovriga = k.prov.filter(p => medLos.indexOf(p) < 0);
+            const grannar = NP_FRISLAPPTA.filter(x => x.amne === k.amne);
+
+            const cell = (p, losningsrad) => {
+                const fil = provFil(k, p);
+                const los = synligLosning(p.losning) ? p.losning : null;
+                const video = los && harVideo(los);
+                const innehall = (
+                    <React.Fragment>
+                        <span className="np-provknapp-namn">{provNamn(p)}</span>
+                        {p.delar ? (
+                            <span className="np-provknapp-delar">
+                                <span className="np-delar-etikett">Delprov</span>
+                                {delKnappar(p)}
+                            </span>
+                        ) : (
+                            <span className="np-provknapp-under">
+                                {fil ? <React.Fragment>Provet <small>pdf</small> {IKON_UT}</React.Fragment>
+                                     : 'Provet finns hos Skolverket'}
+                            </span>
+                        )}
+                        {p.t === 'vt22' && <span className="np-tagg">Aktuell ämnesplan</span>}
+                    </React.Fragment>
+                );
+                return (
+                    <li key={p.t} className={'np-provcell' + (los ? ' har-losning' : '')}>
+                        {fil ? (
+                            <a className="np-provknapp" href={fil} target="_blank" rel="noopener" title="Öppna provet (pdf)">
+                                {innehall}
+                            </a>
+                        ) : (
+                            <span className={'np-provknapp' + (p.delar ? ' har-delar' : ' is-utan-fil')}>{innehall}</span>
+                        )}
+                        {losningsrad && (
+                            <div className="np-losningsslot">
+                                {los && (
+                                    <a className="np-losningslank" href={'#' + los}
+                                       title={video ? 'Lösningsförslag som text, med penna och som video' : 'Lösningsförslag som text och med penna'}>
+                                        Lösningsförslag
+                                        <span aria-hidden="true">→</span>
+                                    </a>
+                                )}
+                                {video && <span className="np-losningslank-video">{IKON_PLAY} Med videolösningar</span>}
+                            </div>
+                        )}
+                    </li>
+                );
+            };
+
+            return (
+                <main className="np-main">
+                    <a className="np-tillbaka" href={'np.html?amne=' + k.amne}>
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7.5 2.5 4 6l3.5 3.5"/></svg>
+                        Alla kurser i {k.amne === 'fysik' ? 'fysik' : 'matematik'}
+                    </a>
+                    <h1 className="np-hero-title" style={{ marginTop: 10 }}>{k.kurs} <em>{k.kort}</em></h1>
+                    <nav className="np-kursbyte" aria-label="Byt kurs">
+                        {grannar.map(x => (
+                            <a key={x.kod} href={'#kurs:' + x.kod} aria-current={x.kod === k.kod ? 'true' : undefined}>{x.kort}</a>
                         ))}
                     </nav>
-                    {amnen.map(a => (
-                        <React.Fragment key={a.id}>
-                            {!amne && <h2 className="np-amnesrubrik">{a.namn}</h2>}
-                            {kurser.filter(k => k.amne === a.id).map(k => (
-                                <section className="np-kursgrupp" key={k.kod} data-kurs={k.kod}>
-                                    <h3 className="np-kursrubrik">
-                                        {k.kurs}<span className="np-kurskort">{k.kort}</span>
-                                    </h3>
-                                    {(() => {
-                                        // Synliga knappar: vårens prov 2022 (aktuell ämnesplan) och
-                                        // proven vi har lösningar till. Resten ligger hopfällda i en
-                                        // kompakt lista, så att sidan inte blir lång att leta i.
-                                        const framme = k.prov.filter(p => p.t === 'vt22' || synlig(p.losning));
-                                        const aldre = k.prov.filter(p => framme.indexOf(p) < 0);
-                                        const provNamn = p => k.kursprov ? 'Kursprov, ' + terminNamn(p.t).toLowerCase() : terminNamn(p.t);
-                                        const delKnappar = p => Object.keys(p.delar).map(d => (
-                                            <a key={d} className="np-delknapp" href={p.delar[d]} target="_blank" rel="noopener"
-                                               title={'Öppna delprov ' + d + ' (pdf)'}>{d}</a>
-                                        ));
-                                        return (
-                                            <React.Fragment>
-                                                <ul className="np-provgrid">
-                                                    {framme.map(p => {
-                                                        const fil = provFil(k, p);
-                                                        const los = synlig(p.losning) ? p.losning : null;
-                                                        const video = los && harVideo(los);
-                                                        const innehall = (
-                                                            <React.Fragment>
-                                                                <span className="np-provknapp-namn">{provNamn(p)}</span>
-                                                                {p.delar ? (
-                                                                    <span className="np-provknapp-delar">
-                                                                        <span className="np-delar-etikett">Delprov</span>
-                                                                        {delKnappar(p)}
-                                                                    </span>
-                                                                ) : (
-                                                                    <span className="np-provknapp-under">
-                                                                        {fil ? <React.Fragment>Provet <small>pdf</small> {IKON_UT}</React.Fragment>
-                                                                             : 'Provet finns hos Skolverket'}
-                                                                    </span>
-                                                                )}
-                                                                {p.t === 'vt22' && <span className="np-tagg">Aktuell ämnesplan</span>}
-                                                            </React.Fragment>
-                                                        );
-                                                        return (
-                                                            <li key={p.t} className={'np-provcell' + (los ? ' har-losning' : '')}>
-                                                                {fil ? (
-                                                                    <a className="np-provknapp" href={fil} target="_blank" rel="noopener"
-                                                                       title={'Öppna provet (pdf)'}>
-                                                                        {innehall}
-                                                                    </a>
-                                                                ) : (
-                                                                    <span className={'np-provknapp' + (p.delar ? ' har-delar' : ' is-utan-fil')}>{innehall}</span>
-                                                                )}
-                                                                <div className="np-losningsslot">
-                                                                {los && (
-                                                                    <a className="np-losningslank" href={'#' + los}
-                                                                       title={video ? 'Lösningsförslag som text, med penna och som video' : 'Lösningsförslag som text och med penna'}>
-                                                                        Lösningsförslag
-                                                                        <span aria-hidden="true">→</span>
-                                                                    </a>
-                                                                )}
-                                                                {video && <span className="np-losningslank-video">{IKON_PLAY} Med videolösningar</span>}
-                                                                </div>
-                                                            </li>
-                                                        );
-                                                    })}
-                                                </ul>
-                                                {aldre.length > 0 && (
-                                                    <details className="np-aldre">
-                                                        <summary>
-                                                            <span>Äldre prov i {k.kort}</span>
-                                                            <span className="np-aldre-antal">{aldre.length} prov, {terminNamn(aldre[aldre.length - 1].t).replace(/^\S+ /, '')}–{terminNamn(aldre[0].t).replace(/^\S+ /, '')}</span>
-                                                        </summary>
-                                                        <ul className="np-aldre-lista">
-                                                            {aldre.map(p => {
-                                                                const fil = provFil(k, p);
-                                                                return (
-                                                                    <li key={p.t}>
-                                                                        <span className="np-aldre-namn">{provNamn(p)}</span>
-                                                                        <span className="np-aldre-lankar">
-                                                                            {p.delar ? delKnappar(p) : fil && (
-                                                                                <a className="np-delknapp np-delknapp-bred" href={fil} target="_blank" rel="noopener"
-                                                                                   title={'Öppna provet (pdf)'}>Provet {IKON_UT}</a>
-                                                                            )}
-                                                                        </span>
-                                                                    </li>
-                                                                );
-                                                            })}
-                                                        </ul>
-                                                    </details>
-                                                )}
-                                            </React.Fragment>
-                                        );
-                                    })()}
-                                    <p className="np-kallrad">
-                                        {k.kursprov ? (
-                                            <React.Fragment>
-                                                Kursproven i fysik ges ut av Skolverket som bedömningsstöd. Här listas
-                                                de kursprov vi har skrivit lösningar till. Läs mer hos <a href={k.kalla.url} target="_blank" rel="noopener">Umeå universitet</a>,
-                                                som gör proven åt Skolverket.
-                                            </React.Fragment>
-                                        ) : (
-                                            <React.Fragment>
-                                                Proven ges ut av <a href={k.kalla.url} target="_blank" rel="noopener">{k.kalla.namn}</a>.
-                                                {k.prov.some(p => p.delar)
-                                                    ? ' Varje delprov öppnas som en egen pdf.'
-                                                    : ' Varje prov öppnas som en pdf med delprov B, C och D.'}
-                                            </React.Fragment>
-                                        )}
-                                    </p>
-                                </section>
-                            ))}
+                    <p className="np-lede">
+                        Klicka på ett prov för att öppna det som pdf.
+                        {medLos.length > 0 && ' Under proven med lösningsförslag kommer du till lösningarna, uppgift för uppgift.'}
+                    </p>
+
+                    {medLos.length > 0 && (
+                        <React.Fragment>
+                            <h2 className="np-sektionsrubrik">Prov med lösningsförslag</h2>
+                            <ul className="np-provgrid">{medLos.map(p => cell(p, true))}</ul>
                         </React.Fragment>
-                    ))}
+                    )}
+                    {ovriga.length > 0 && (
+                        <React.Fragment>
+                            <h2 className="np-sektionsrubrik">{medLos.length > 0 ? 'Fler frisläppta prov' : 'Frisläppta prov'}</h2>
+                            <ul className="np-provgrid np-provgrid-tat">{ovriga.map(p => cell(p, false))}</ul>
+                        </React.Fragment>
+                    )}
+
+                    {k.prov.some(p => p.t !== 'vt22') && !k.kursprov && (
+                        <p className="np-lede np-lede-obs" style={{ marginTop: 26 }}>
+                            <strong>Obs!</strong> Endast proven från våren 2022 följer aktuell ämnesplan.
+                            Äldre prov innehåller enstaka uppgifter på stoff som utgick ur kursen vid
+                            revideringen 2021. I våra lösningar är de uppgifterna märkta.
+                        </p>
+                    )}
+                    <p className="np-kallrad">
+                        {k.kursprov ? (
+                            <React.Fragment>
+                                Kursproven i fysik ges ut av Skolverket som bedömningsstöd. Här listas
+                                de kursprov vi har skrivit lösningar till. Läs mer hos <a href={k.kalla.url} target="_blank" rel="noopener">Umeå universitet</a>,
+                                som gör proven åt Skolverket.
+                            </React.Fragment>
+                        ) : (
+                            <React.Fragment>
+                                Proven ges ut av <a href={k.kalla.url} target="_blank" rel="noopener">{k.kalla.namn}</a>.
+                                {k.prov.some(p => p.delar)
+                                    ? ' Varje delprov öppnas som en egen pdf.'
+                                    : ' Varje prov öppnas som en pdf med delprov B, C och D.'}
+                            </React.Fragment>
+                        )}
+                    </p>
                 </main>
             );
         }
@@ -2523,8 +2572,8 @@
         // osynligt för sökmotorer, så alla prov räknades som samma sida.
         // Hashen vinner när båda finns, så befintliga länkar och bokmärken
         // beter sig exakt som förut.
-        // #kurs:<kurskod> är en tredje form: startvyn, skrollad till kursens
-        // rubrik. Den bär inget eget innehåll och hör därför inte i sitemapen.
+        // #kurs:<kurskod> är en tredje form: kursens sida med dess frisläppta
+        // prov (KursView). Den hör inte i sitemapen (ingen ?id=-form).
         function parseHash() {
             const hash = (window.location.hash || '').replace(/^#/, '')
                 || (new URLSearchParams(window.location.search).get('id') || '');
@@ -2545,6 +2594,7 @@
             }, []);
 
             const prov = route.provId ? NP_PROV[route.provId] : null;
+            const kursSida = (!prov && route.kurs) ? (NP_FRISLAPPTA.find(k => k.kod === route.kurs) || null) : null;
             const uppgift = (prov && route.nr != null)
                 ? prov.uppgifter.find(u => u.nr === route.nr && !u.sekretess)
                 : null;
@@ -2557,7 +2607,9 @@
                     ? `Uppgift ${uppgift.nr} — ${prov.namn} — Fysiklabbet`
                     : prov
                         ? `${prov.namn} — lösningar steg för steg — Fysiklabbet`
-                        : 'Fysiklabbet — Nationella prov med lösningar steg för steg';
+                        : kursSida
+                            ? `Nationella prov i ${kursSida.kurs} (${kursSida.kort}) — Fysiklabbet`
+                            : 'Fysiklabbet — Nationella prov med lösningar steg för steg';
 
                 // Kanonisk adress = provets ?id=-adress, samma som i
                 // sitemap.xml (se kanonisk.js). De enskilda uppgifterna
@@ -2567,14 +2619,15 @@
                         ? `np.html?id=${route.provId}`
                         : 'np.html');
                 }
-            }, [prov, uppgift, route.provId]);
+            }, [prov, uppgift, route.provId, kursSida]);
 
             return (
                 <div className="lab-page">
                     <Topbar />
                     <Header />
-                    <Breadcrumb prov={prov} uppgift={uppgift ? uppgift.nr : null} />
-                    {!prov && <Landing kurs={route.kurs} />}
+                    <Breadcrumb prov={prov} uppgift={uppgift ? uppgift.nr : null} kurs={kursSida} />
+                    {!prov && !kursSida && <Landing />}
+                    {kursSida && <KursView kurs={kursSida} />}
                     {prov && !uppgift && <ProvView prov={prov} />}
                     {prov && uppgift && <UppgiftView prov={prov} uppgift={uppgift} />}
                     <Footer />

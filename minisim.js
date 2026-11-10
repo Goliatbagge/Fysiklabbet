@@ -34,6 +34,7 @@
  *           ytvag (fy2-2.7, visa: vatten | rayleigh: partiklarnas banor i en ytvåg),
  *           fasvag (fy2-2.7: stående våg med partiklar i fas och i motfas),
  *           vagstallning (fy2-2.7: en puls vandrar nedåt i en hängande vågställning),
+ *           vagtank (fy2-2.13: vågfronter bryts vid gränsen mellan djupt och grunt vatten)
  *           blixtljud (fy2-2.10: ljudets hastighet, blixt/fyrverkeri och tumregeln 3 s per km;
  *                      visa: fyrverkeri startar med fyrverkeriet)
  *           simsida (en hel simuleringssida i en iframe, src: <fil>.html; se buildSimsida)
@@ -16832,6 +16833,202 @@
         });
     }
 
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: vagtank
+    // ══════════════════════════════════════════════════════════════════════
+    // fy2-2.13 (Vattenvågor och brytningslagen): en vågtank sedd uppifrån.
+    // Övre halvan är djupt vatten (h₁ = 4,0 m), nedre halvan grunt vatten med
+    // ett djup h₂ som eleven väljer. Raka vågfronter (vågtoppar) kommer in
+    // med infallsvinkeln i och knycker vid gränsen. Farten följer
+    // v ≈ √(g · h) och perioden är T = 10 s, så v₂/v₁ = √(h₂/h₁) och
+    // sin b = (v₂/v₁) · sin i. Fasen är kontinuerlig längs gränsen, så att
+    // varje front i det djupa vattnet fortsätter som en front i det grunda.
+    // En stråle med normal och vinkelbågar visar i och b, och raden under
+    // scenen visar v, λ och kvoten sin i / sin b = v₁ / v₂.
+    var vtRaknare = 0;
+    function buildVagtank(node, cfg) {
+        var INK = '#1f2530', BLA = '#2563c9', ROD = '#c0392b', GRA = '#7c828c';
+        var W = 640, H = 300, YB = 150, PX = 250;
+        var G = 9.82, H1 = 4.0, TP = 10;                // tyngdfaktor, djup 1, period (s)
+        var LAM1 = 56, TANIM = 2.2;                       // λ₁ på skärmen (px), period i animationen (s)
+        var iDeg = 40, h2 = 2.0, tid = 0, visaStrale = true;
+        var id = 'ms-vt-rutnat-' + (++vtRaknare);
+
+        function fmt(v, d) {
+            var s = v.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',');
+        }
+        function it(t) { return '<tspan font-style="italic">' + t + '</tspan>'; }
+        function sb(t) { return '<tspan font-size="11" dy="3">' + t + '</tspan><tspan dy="-3"> </tspan>'; }
+        function ruta(x, y, anchor, inner, nTecken, color) {
+            var w = nTecken * 7.2 + 14, x0 = anchor === 'start' ? x - 7 : (anchor === 'end' ? x - w + 7 : x - w / 2);
+            return '<rect x="' + vgR1(x0) + '" y="' + vgR1(y - 15) + '" width="' + vgR1(w) + '" height="21" rx="4" fill="#f7f2e8" stroke="' + color + '" stroke-width="1"/>' +
+                '<text x="' + vgR1(x) + '" y="' + vgR1(y) + '" text-anchor="' + anchor + '" font-size="14" fill="' + color + '" font-weight="600">' + inner + '</text>';
+        }
+        function klipp(p, q, box) {
+            var t0 = 0, t1 = 1, dx = q[0] - p[0], dy = q[1] - p[1];
+            var P = [-dx, dx, -dy, dy], Q = [p[0] - box[0], box[2] - p[0], p[1] - box[1], box[3] - p[1]];
+            for (var k = 0; k < 4; k++) {
+                if (P[k] === 0) { if (Q[k] < 0) return null; continue; }
+                var t = Q[k] / P[k];
+                if (P[k] < 0) { if (t > t1) return null; if (t > t0) t0 = t; }
+                else { if (t < t0) return null; if (t < t1) t1 = t; }
+            }
+            return [[p[0] + t0 * dx, p[1] + t0 * dy], [p[0] + t1 * dx, p[1] + t1 * dy]];
+        }
+        // vågtoppar där (x·ax + y·ay)/λ + fas0 − t/T är ett heltal, inom box
+        function fronter(ax, ay, lam, y0, fas0, box, color) {
+            var s = '', hor = [box[0], box[2]], ver = [box[1], box[3]], fmin = 1e9, fmax = -1e9;
+            hor.forEach(function (x) { ver.forEach(function (y) {
+                var f = (x * ax + (y - y0) * ay) / lam + fas0 - tid / TANIM;
+                if (f < fmin) fmin = f; if (f > fmax) fmax = f;
+            }); });
+            for (var n = Math.ceil(fmin); n <= Math.floor(fmax); n++) {
+                // linjen x·ax + (y − y0)·ay = lam · (n − fas0 + t/T)
+                var d = lam * (n - fas0 + tid / TANIM);
+                var p0 = [d * ax, y0 + d * ay];
+                var seg = klipp([p0[0] - 2000 * ay, p0[1] + 2000 * ax], [p0[0] + 2000 * ay, p0[1] - 2000 * ax], box);
+                if (seg) s += '<line x1="' + vgR1(seg[0][0]) + '" y1="' + vgR1(seg[0][1]) + '" x2="' + vgR1(seg[1][0]) + '" y2="' +
+                    vgR1(seg[1][1]) + '" stroke="' + color + '" stroke-width="2.2"/>';
+            }
+            return s;
+        }
+        function pil(x1, y1, x2, y2, color, w) {
+            var L = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)), ux = (x2 - x1) / L, uy = (y2 - y1) / L;
+            var hd = 11, bx = x2 - ux * hd, by = y2 - uy * hd, b = 5;
+            return '<line x1="' + vgR1(x1) + '" y1="' + vgR1(y1) + '" x2="' + vgR1(bx) + '" y2="' + vgR1(by) + '" stroke="' + color +
+                '" stroke-width="' + w + '" stroke-linecap="butt"/>' +
+                '<polygon points="' + vgR1(bx - uy * b) + ',' + vgR1(by + ux * b) + ' ' + vgR1(x2) + ',' + vgR1(y2) + ' ' +
+                vgR1(bx + uy * b) + ',' + vgR1(by - ux * b) + '" fill="' + color + '"/>';
+        }
+        function bage(r, a0, a1) {
+            var pts = [];
+            for (var k = 0; k <= 20; k++) { var a = a0 + (a1 - a0) * k / 20; pts.push(vgR1(PX + r * Math.cos(a)) + ',' + vgR1(YB + r * Math.sin(a))); }
+            return '<polyline points="' + pts.join(' ') + '" fill="none" stroke="' + INK + '" stroke-width="1.6"/>';
+        }
+
+        var bas = '<rect x="0" y="0" width="' + W + '" height="' + YB + '" fill="#cfe3f3"/>' +
+            '<rect x="0" y="' + YB + '" width="' + W + '" height="' + (H - YB) + '" fill="#ece0bf"/>' +
+            vgRutnat(id, 0, 0, W, H);
+        var dynKl = 'ms-vt-dyn';
+
+        function rita() {
+            var i = iDeg * Math.PI / 180, kv = Math.sqrt(h2 / H1), b = Math.asin(kv * Math.sin(i));
+            var lam2 = LAM1 * kv, s = '';
+            // djupt: fas 0 vid gränsens punkt x = 0; grunt: samma fas längs gränsen
+            s += fronter(Math.sin(i), Math.cos(i), LAM1, YB, 0, [0, 0, W, YB], BLA);
+            s += fronter(Math.sin(b), Math.cos(b), lam2, YB, 0, [0, YB, W, H], ROD);
+            s += '<line x1="0" y1="' + YB + '" x2="' + W + '" y2="' + YB + '" stroke="' + INK + '" stroke-width="2"/>';
+            if (visaStrale) {
+                var L1 = 132, L2 = 128;
+                s += '<line x1="' + PX + '" y1="' + (YB - 140) + '" x2="' + PX + '" y2="' + (YB + 140) + '" stroke="' + GRA +
+                    '" stroke-width="1.4" stroke-dasharray="6 5"/>';
+                s += pil(PX - L1 * Math.sin(i), YB - L1 * Math.cos(i), PX, YB, INK, 3);
+                s += pil(PX, YB, PX + L2 * Math.sin(b), YB + L2 * Math.cos(b), INK, 3);
+                if (iDeg > 0) {
+                    s += bage(46, -Math.PI / 2 - i, -Math.PI / 2);
+                    s += bage(46, Math.PI / 2 - b, Math.PI / 2);
+                }
+                // beteckningen i vinkelns kil; är vinkeln för smal läggs den
+                // strax utanför strålen, på den sida som vänder bort från normalen
+                if (iDeg > 0) {
+                    var ai = i > 0.28 ? i / 2 : i + 0.16;
+                    var ab = b > 0.28 ? b / 2 : b + 0.16;
+                    s += '<text x="' + vgR1(PX - 66 * Math.sin(ai)) + '" y="' + vgR1(YB - 66 * Math.cos(ai) + 6) +
+                        '" text-anchor="middle" font-size="18" fill="' + INK + '">' + it('i') + '</text>';
+                    s += '<text x="' + vgR1(PX + 68 * Math.sin(ab)) + '" y="' + vgR1(YB + 68 * Math.cos(ab) + 6) +
+                        '" text-anchor="middle" font-size="18" fill="' + INK + '">' + it('b') + '</text>';
+                }
+            }
+            s += ruta(W - 12, 26, 'end', 'djupt vatten, ' + it('h') + ' = ' + fmt(H1, 1) + ' m', 23, BLA);
+            s += ruta(W - 12, H - 12, 'end', 'grunt vatten, ' + it('h') + ' = ' + fmt(h2, 1) + ' m', 23, '#7a5a1a');
+            dyn.innerHTML = s;
+
+            var v1 = Math.sqrt(G * H1), v2 = Math.sqrt(G * h2);
+            var txt = '<em>i</em> = ' + fmt(iDeg, 0) + '°, <em>b</em> = ' + fmt(b * 180 / Math.PI, 0) + '°<br>' +
+                '<em>v</em><sub>1</sub> = ' + fmt(v1, 1) + '&nbsp;m/s, <em>λ</em><sub>1</sub> = ' + fmt(v1 * TP, 0) + '&nbsp;m' +
+                '&emsp;<em>v</em><sub>2</sub> = ' + fmt(v2, 1) + '&nbsp;m/s, <em>λ</em><sub>2</sub> = ' + fmt(v2 * TP, 0) + '&nbsp;m<br>';
+            if (iDeg > 0) {
+                txt += 'sin&nbsp;<em>i</em>&nbsp;/&nbsp;sin&nbsp;<em>b</em> = ' + fmt(Math.sin(i) / Math.sin(b), 2) +
+                    '&emsp;<em>v</em><sub>1</sub>&nbsp;/&nbsp;<em>v</em><sub>2</sub> = ' + fmt(v1 / v2, 2) +
+                    '&emsp;<em>λ</em><sub>1</sub>&nbsp;/&nbsp;<em>λ</em><sub>2</sub> = ' + fmt(v1 / v2, 2);
+            } else {
+                txt += 'Vågen kommer rakt in mot gränsen och fortsätter rakt fram. Bara farten och våglängden ändras.';
+            }
+            info.innerHTML = txt;
+        }
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus ms-bred';
+        if (cfg.titel) {
+            var tEl = document.createElement('div');
+            tEl.className = 'minisim-title';
+            tEl.textContent = cfg.titel;
+            card.appendChild(tEl);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene ms-kv-scene';
+        scene.innerHTML = '<svg class="ms-kv-svg" viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H + '" ' +
+            'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Vågtank sedd ' +
+            'uppifrån. Raka vågfronter går från djupt vatten in över grunt vatten och knycker vid gränsen. En stråle visar ' +
+            'infallsvinkeln och brytningsvinkeln mot normalen.">' + bas + '<g class="' + dynKl + '"></g></svg>';
+        var dyn = scene.querySelector('.' + dynKl);
+        card.appendChild(scene);
+        msFullskarm(card, scene, W / H, 190);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        var tk = vgTid(TANIM, function () { return tid; }, function (t) { tid = t; rita(); });
+        var straleCk = vgCheck('Visa strålen och vinklarna', true);
+        controls.appendChild(tk.btn);
+        controls.appendChild(straleCk.label);
+        card.appendChild(controls);
+
+        function reglage(etikett, min, max, steg, varde, aria, visa, satt) {
+            var rad = document.createElement('div');
+            rad.className = 'minisim-slider-row';
+            var l = document.createElement('span');
+            l.className = 'minisim-slider-lbl';
+            l.innerHTML = etikett;
+            var sl = document.createElement('input');
+            sl.type = 'range';
+            sl.className = 'minisim-slider';
+            sl.min = String(min); sl.max = String(max); sl.step = String(steg); sl.value = String(varde);
+            sl.setAttribute('aria-label', aria);
+            var v = document.createElement('span');
+            v.className = 'minisim-slider-val';
+            v.textContent = visa(varde);
+            sl.addEventListener('input', function () {
+                var x = parseFloat(sl.value);
+                v.textContent = visa(x);
+                satt(x);
+                rita();
+            });
+            rad.appendChild(l); rad.appendChild(sl); rad.appendChild(v);
+            card.appendChild(rad);
+            return sl;
+        }
+        reglage('Infallsvinkel <em>i</em>', 0, 70, 1, iDeg, 'Infallsvinkeln i grader',
+                function (x) { return fmt(x, 0) + '°'; }, function (x) { iDeg = x; });
+        reglage('Djup på grunt vatten <em>h</em>', 0.5, 4, 0.5, h2, 'Djupet på det grunda vattnet i meter',
+                function (x) { return fmt(x, 1) + ' m'; }, function (x) { h2 = x; });
+
+        var info = document.createElement('div');
+        info.className = 'minisim-info ms-brod';
+        info.style.marginTop = '8px';
+        card.appendChild(info);
+        node.appendChild(card);
+
+        var loop = vgLoop(card, function (dt) { tid += dt; rita(); tk.visa(); });
+        tk.koppla(loop);
+        straleCk.cb.addEventListener('change', function () { visaStrale = straleCk.cb.checked; rita(); });
+        card._set = function (vinkel, djup, t) { iDeg = vinkel; h2 = djup; tid = t || 0; rita(); tk.visa(); };
+        rita();
+        tk.spela(true);
+    }
+
     var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
                   stegkast: buildStegkast,
                   svangningsgrafer: buildSvangningsgrafer,
@@ -16861,7 +17058,8 @@
                   staendevag: buildStaendevag, gitarrton: buildGitarrton,
                   snurrslang: buildSnurrslang, pipton: buildPipton, provror: buildProvror,
                   varmekansla: buildVarmekansla, smaltrace: buildSmaltrace,
-                  blixtljud: buildBlixtljud, tongenerator: buildTongenerator, simsida: buildSimsida };
+                  blixtljud: buildBlixtljud, tongenerator: buildTongenerator, simsida: buildSimsida,
+                  vagtank: buildVagtank };
 
     function decodeSrc(b64) {
         try { return decodeURIComponent(escape(atob(b64))); }

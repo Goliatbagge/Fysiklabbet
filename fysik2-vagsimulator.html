@@ -221,6 +221,8 @@ const WaveSimulator = () => {
   const [sourceSpeed, setSourceSpeed] = useState(1.5); // Multiplier
   const [waveSpeedParam, setWaveSpeedParam] = useState(100); // pixels/s
   const [slitWidth, setSlitWidth] = useState(50); // pixels
+  const [refrAngleDeg, setRefrAngleDeg] = useState(30);   // infallsvinkel i refraktionsläget (grader)
+  const [speedRatio, setSpeedRatio] = useState(0.5);      // v2 / v1 i refraktionsläget
 
   // Fullskärm
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -481,11 +483,9 @@ const WaveSimulator = () => {
       // Refraction constants
       // Horizontal boundary at middle of height
       const boundaryY = CANVAS_HEIGHT / 2;
-      const incidentAngle = Math.PI / 6; // 30 degrees w.r.t the normal (Vertical Y-axis)
-      const n1 = 1.0;
-      const n2 = 2.0; // Index of refraction (slower in medium 2)
+      const incidentAngle = refrAngleDeg * Math.PI / 180; // mot normalen (lodräta y-axeln)
       const v1 = waveSpeedParam;
-      const v2 = v1 / n2;
+      const v2 = v1 * speedRatio; // långsammare i medium 2
 
       // Snell's law
       const sinTheta2 = (v2 / v1) * Math.sin(incidentAngle);
@@ -614,7 +614,7 @@ const WaveSimulator = () => {
           ctx.fillStyle = 'rgba(15, 22, 32, 0.85)';
           ctx.font = '14px Arial';
           ctx.fillText(window.I18N ? I18N.t("Djupt vatten (v)") : "Djupt vatten (v)", 20, boundaryY - 10);
-          ctx.fillText(window.I18N ? I18N.t("Grunt vatten (v/2)") : "Grunt vatten (v/2)", 20, boundaryY + 20);
+          ctx.fillText((window.I18N ? I18N.t("Grunt vatten") : "Grunt vatten") + " (" + speedRatio.toFixed(2).replace(".", ",") + " · v)", 20, boundaryY + 20);
 
           if (showRefractionAngles) {
               const rayLen = 150;
@@ -828,10 +828,9 @@ const WaveSimulator = () => {
 
     // Refraction constants for 3D
     const boundaryY = CANVAS_HEIGHT / 2;
-    const incidentAngle = Math.PI / 6;
-    const n2 = 2.0;
+    const incidentAngle = refrAngleDeg * Math.PI / 180;
     const v1 = waveSpeedParam;
-    const v2 = v1 / n2;
+    const v2 = v1 * speedRatio;
     const sinTheta2 = (v2 / v1) * Math.sin(incidentAngle);
     const theta2 = Math.asin(sinTheta2);
     const k1 = omega / v1;
@@ -1175,7 +1174,7 @@ const WaveSimulator = () => {
     return () => {
         if (requestRef.current) cancelAnimationFrame(requestRef.current);
     };
-  }, [isPlaying, viewMode, mode, showNodalLines, showMaximaLines, showRefractionAngles, frequency, separation, sourceSpeed, waveSpeedParam, slitWidth]);
+  }, [isPlaying, viewMode, mode, showNodalLines, showMaximaLines, showRefractionAngles, frequency, separation, sourceSpeed, waveSpeedParam, slitWidth, refrAngleDeg, speedRatio]);
 
 
   return (
@@ -1329,6 +1328,36 @@ const WaveSimulator = () => {
                 </div>
             )}
 
+            {mode === 'refraction' && (
+                <div>
+                    <div className="flex justify-between text-sm mb-1">
+                        <span className="text-gray-300">Infallsvinkel <em>i</em></span>
+                        <span className="text-gray-400">{refrAngleDeg}°</span>
+                    </div>
+                    <input
+                        type="range" min="0" max="70" step="1"
+                        value={refrAngleDeg}
+                        onChange={(e) => setRefrAngleDeg(parseFloat(e.target.value))}
+                        className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                    />
+                </div>
+            )}
+
+            {mode === 'refraction' && (
+                <div>
+                    <div className="flex justify-between text-sm mb-1">
+                        <span className="text-gray-300">Fart i grunt vatten, <em>v</em><sub>2</sub> / <em>v</em><sub>1</sub></span>
+                        <span className="text-gray-400">{speedRatio.toFixed(2).replace('.', ',')}</span>
+                    </div>
+                    <input
+                        type="range" min="0.3" max="1" step="0.05"
+                        value={speedRatio}
+                        onChange={(e) => setSpeedRatio(parseFloat(e.target.value))}
+                        className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                    />
+                </div>
+            )}
+
             {(mode === 'diffraction' || mode === 'diffraction-double') && (
                 <div>
                     <div className="flex justify-between text-sm mb-1">
@@ -1439,6 +1468,22 @@ const WaveSimulator = () => {
                    <input type="range" min="50" max="400" step="10" value={separation}
                           onChange={(e) => setSeparation(parseFloat(e.target.value))} />
                    <span className="fs-value">{separation} px</span>
+                 </div>
+               )}
+               {mode === 'refraction' && (
+                 <div className="fs-row">
+                   <span className="fs-label">Infallsvinkel <em>i</em></span>
+                   <input type="range" min="0" max="70" step="1" value={refrAngleDeg}
+                          onChange={(e) => setRefrAngleDeg(parseFloat(e.target.value))} />
+                   <span className="fs-value">{refrAngleDeg}°</span>
+                 </div>
+               )}
+               {mode === 'refraction' && (
+                 <div className="fs-row">
+                   <span className="fs-label"><em>v</em><sub>2</sub> / <em>v</em><sub>1</sub></span>
+                   <input type="range" min="0.3" max="1" step="0.05" value={speedRatio}
+                          onChange={(e) => setSpeedRatio(parseFloat(e.target.value))} />
+                   <span className="fs-value">{speedRatio.toFixed(2).replace('.', ',')}</span>
                  </div>
                )}
                {(mode === 'diffraction' || mode === 'diffraction-double') && (

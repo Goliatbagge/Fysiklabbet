@@ -27912,9 +27912,9 @@
     T.stepEnd();
 
     T.tanke(T.bubble(140, T.bubbleTop(y + 1.4 * F), bw, [
-      [['Först nu avrundar jag. Vinkeln']],
-      [['40° har två värdesiffror, så']],
-      [['svaret får två.']]
+      [['Först nu avrundar jag.']],
+      [['Våglängderna 10 m och 15 m har']],
+      [['två värdesiffror, så svaret får två.']]
     ]));
     var avrS = '≈25°';
     if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
@@ -27976,11 +27976,289 @@
 
     y += adv + 1.2 * F;
     T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
-      [['En halv våg per sekund — knappt']],
-      [['två sekunder mellan vågtopparna.']],
+      [['En halv våg per sekund, alltså']],
+      [['knappt två sekunder mellan']],
+      [['vågtopparna.']],
       [['Rimligt för havsvågor!']]
     ]));
     T.underline(T.str('Svar: 0,53 Hz', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: våg från grunt till djupt vatten (fy2-2.13 Ex 2)
+   * a) brytningsvinkeln ur brytningslagen med hastigheter:
+   *    b = sin⁻¹(6,0 · sin 25° / 4,0) = 39,340…° ≈ 39°,
+   * b) våglängden på det djupa vattnet: λ₂ = 6,0 / 0,25 = 24 m.
+   * Siffrorna är identiska med textlösningen i fy2-2.13.md. */
+  function layoutVattenbrytningGruntDjupt(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var gx = 250, gy = 170;                 /* träffpunkten på gränsen */
+    var vi = 25 * Math.PI / 180, vb = 39.34 * Math.PI / 180;
+
+    function arc(r, a0, a1, color) {
+      var pts = [], n = 16;
+      for (var i = 0; i <= n; i++) {
+        var a = a0 + (a1 - a0) * i / n;
+        pts.push([gx + r * Math.cos(a), gy + r * Math.sin(a)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts, color: color || null });
+    }
+
+    T.tanke(T.figurBubble(292, [
+      [['Ritar gränsen mellan grunt och']],
+      [['djupt vatten, normalen och den']],
+      [['infallande vågstrålen.']]
+    ], 300));
+    T.line([90, gy], [420, gy]);                    /* gränsytan */
+    T.pause(130);
+    T.dash([gx, gy - 110], [gx, gy + 100]);         /* normalen */
+    T.pause(130);
+    T.arrow([gx - 120 * Math.sin(vi), gy - 120 * Math.cos(vi)],
+            [gx - 12 * Math.sin(vi), gy - 12 * Math.cos(vi)]);
+    T.pause(130);
+    T.arrow([gx, gy], [gx + 96 * Math.sin(vb), gy + 96 * Math.cos(vb)]);
+    T.dot(gx, gy);
+    T.pause(130);
+    T.lbl('grunt vatten', 95, gy - 14, null, 0.5);
+    T.lbl('djupt vatten', 95, gy + 30, null, 0.5);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Skriver in hastigheterna och']],
+      [['infallsvinkeln. Brytnings-']],
+      [['vinkeln ', 0], ['b', 1], [' är det jag söker i a).', 0]]
+    ], 300));
+    arc(78, -Math.PI / 2, -Math.PI / 2 - vi);       /* infallsvinkeln */
+    T.lbl('i=25°', 112, 96, BLUE);
+    T.pause(150);
+    arc(46, Math.PI / 2, Math.PI / 2 - vb);         /* brytningsvinkeln */
+    T.lbl('b', 266, 234, BLUE);
+    T.pause(150);
+    T.lbl('v_1=4,0 m/s', 300, 120, BLUE);
+    T.pause(150);
+    T.lbl('v_2=6,0 m/s', 330, 224, BLUE);
+    T.stepEnd();
+
+    var y = 396;
+    T.tanke(T.bubble(120, T.bubbleTop(300), bw, [
+      [['Brytningslagen kopplar ihop']],
+      [['vinklarna med hastigheterna.']]
+    ]));
+    T.str('a) Brytningslagen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.5 * F;
+    var xa = T.fracH('sin i', 'sin b', padL, y);
+    xa = T.str('=', xa + 0.10 * F, y);
+    T.fracH('v_1', 'v_2', xa, y);
+    T.stepEnd();
+
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+      [['Jag löser ut brytningsvinkeln:']],
+      [['först ', 0], ['sin b', 1], [', sedan vinkeln själv', 0]],
+      [['med inversa sinusfunktionen.']]
+    ]));
+    var xb2 = T.fracH('v_2·sin i', 'v_1', T.str('sin b=', padL, y), y);
+    xb2 = T.str('⟺b=sin^−^1', xb2 + 0.12 * F, y);
+    T.parenFrac('v_2·sin i', 'v_1', null, xb2, y);
+    T.stepEnd();
+
+    y += adv + 2.4 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.4), bw, [
+      [['Vågen kommer från det grunda']],
+      [['vattnet, så ', 0], ['v', 1], ['₁', 0], [' är farten där.', 0]]
+    ]));
+    var klam = valueBracket(acts, ['v_1=4,0 m/s', 'v_2=6,0 m/s', 'i=25°'],
+                            padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    var xIns = T.parenFrac('6,0·sin 25°', '4,0', null,
+                           T.str('b=sin^−^1', padL, y), y) + 0.15 * F;
+    xIns = T.str('=39,340...°', xIns, y);
+    T.stepEnd();
+
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.4 * F), bw, [
+      [['Först nu avrundar jag.']],
+      [['Hastigheterna har två']],
+      [['värdesiffror, så svaret får två.']]
+    ]));
+    var avrS = '≈39°';
+    if (xIns + T.adv(avrS) < PAPER_W - 34) T.str(avrS, xIns, y);
+    else { y += adv + 1.4 * F; T.str(avrS, padL, y); }
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Vågen går fortare på det djupa']],
+      [['vattnet och bryts från normalen,']],
+      [['så vinkeln ska vara större än']],
+      [['25°. Stämmer!']]
+    ]));
+    T.underline(T.str('Svar: 39°', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) våglängden ---- */
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Frekvensen ändras inte vid']],
+      [['gränsen, så ', 0], ['f', 1], [' = 0,25 Hz gäller', 0]],
+      [['även på det djupa vattnet.']]
+    ]));
+    T.str('b) Våglängd', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('v', 'f', T.str('v=f·λ⟺λ=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Hastigheten på det djupa']],
+      [['vattnet, dit vågen är på väg.']]
+    ]));
+    klam = valueBracket(acts, ['v_2=6,0 m/s', 'f=0,25 Hz'], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Nu sätter jag in värdena ur']],
+      [['klammern i formeln.']]
+    ]));
+    T.str('=24 m',
+          T.fracH('6,0', '0,25', T.str('λ_2=', padL, y), y) + 0.15 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['På det grunda vattnet var']],
+      [['våglängden 4,0/0,25 = 16 m.']],
+      [['Snabbare våg, längre våg.']],
+      [['Rimligt!']]
+    ]));
+    T.underline(T.str('Svar: 24 m', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: vågorna vid stranden (fy2-2.13 Ex 3)
+   * Kvalitativ uppgift. Stranden och djupkurvorna ur uppgiftens figur
+   * står förritade; pennan ritar hur fronterna vrids. Vinklarna mellan
+   * front och strandkant i de fyra djupzonerna följer brytningslagen med
+   * v ∝ √h för djupen 8, 4, 2 och 1 m: 40°, 27°, 18,7° och 13,1°. */
+  function layoutVagorMotStranden(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292;
+    var X0 = 60, X1 = 410, YS = 250;                    /* strandkanten */
+    var GR = [70, 130, 180, 220, YS];                   /* zongränser uppifrån */
+    var VINK = [40, 27.03, 18.75, 13.14].map(function (a) { return a * Math.PI / 180; });
+
+    forritad(T, function () {
+      T.line([X0, YS], [X1, YS]);
+      T.hatch([X0 + 6, YS + 12], [X1, YS + 12], 16);
+      [130, 180, 220].forEach(function (y) { T.dash([X0, y], [X1, y]); });
+      T.lbl('strand', X1 - 70, YS + 34, null, 0.5);
+      T.lbl('djupt', X0 + 4, 120, null, 0.45);
+      T.lbl('grunt', X1 - 54, 242, null, 0.45);
+    });
+
+    /* en front som börjar i (x, GR[0]) ute på djupt vatten och knycker
+     * vid varje zongräns: lutningen mot strandkanten minskar inåt land */
+    function front(xStart) {
+      var pts = [[xStart, GR[0]]], x = xStart, y = GR[0];
+      for (var z = 0; z < 4; z++) {
+        var dy = GR[z + 1] - y;
+        x -= dy / Math.tan(VINK[z]);
+        y = GR[z + 1];
+        pts.push([x, y]);
+      }
+      return pts;
+    }
+    T.tanke(T.figurBubble(300, [
+      [['Ute på djupt vatten kommer fronterna']],
+      [['snett in. Vid varje djupkurva blir']],
+      [['vattnet grundare och fronten knycker.']]
+    ], 326));
+    [330, 410, 490].forEach(function (xs) {
+      var p = front(xs);
+      for (var k = 0; k + 1 < p.length; k++) {
+        var a = p[k], b = p[k + 1];
+        /* klipp mot arkets vänsterkant för fronten */
+        if (b[0] < X0) {
+          var t = (X0 - a[0]) / (b[0] - a[0]);
+          if (t <= 0) break;
+          b = [X0, a[1] + t * (b[1] - a[1])];
+          T.line(a, b);
+          break;
+        }
+        if (a[0] > X1) {
+          var t2 = (X1 - a[0]) / (b[0] - a[0]);
+          if (t2 >= 1) continue;
+          a = [X1, a[1] + t2 * (b[1] - a[1])];
+        }
+        T.line(a, b);
+      }
+      T.pause(140);
+    });
+    T.stepEnd();
+
+    /* vågstrålen: vinkelrät mot fronterna, vrids mot normalen */
+    T.tanke(T.figurBubble(300, [
+      [['Vågen rör sig vinkelrätt mot sina']],
+      [['fronter. Riktningen vrids mot normalen,']],
+      [['allt mer rakt in mot stranden.']]
+    ], 326));
+    var rp = [[150, 70]], rx = 150;
+    for (var z = 0; z < 4; z++) {
+      rx += (GR[z + 1] - GR[z]) * Math.tan(VINK[z]);
+      rp.push([rx, GR[z + 1]]);
+    }
+    for (var k = 0; k + 1 < rp.length - 1; k++) T.line(rp[k], rp[k + 1], BLUE);
+    T.arrow(rp[rp.length - 2], rp[rp.length - 1], BLUE, 9);
+    T.dash([rx, YS - 70], [rx, YS], BLUE);
+    T.lbl('normal', rx + 8, YS - 10, BLUE, 0.45);
+    T.stepEnd();
+
+    var y = 426;
+    T.tanke(T.bubble(120, T.bubbleTop(336), bw, [
+      [['Nära land ligger fronterna nästan']],
+      [['parallellt med strandkanten.']]
+    ]));
+    T.str('a) Fronternas riktning', padL, y, null, 0.62);
+    T.pause(300);
+    y += 1.9 * F;
+    T.str('Svar: Fronterna vrids och blir nästan', padL, y);
+    y += adv;
+    T.underline(T.str('parallella med strandkanten.', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) förklaringen ---- */
+    y += adv + 1.6 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Farten beror på djupet: ju grundare']],
+      [['vatten, desto långsammare våg.']]
+    ]));
+    T.str('b) Förklaring', padL, y, null, 0.62);
+    T.pause(300);
+    var rader = ['Svar: Den del av fronten som är',
+                 'närmast land ligger på grundare',
+                 'vatten och går långsammare. Resten',
+                 'av fronten hinner ikapp, så fronten',
+                 'vrids mot strandkanten.'];
+    rader.forEach(function (r, ix) {
+      y += ix === 0 ? 1.9 * F : adv;
+      var xe = T.str(r, padL, y);
+      if (ix === rader.length - 1) T.underline(xe, y);
+    });
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
@@ -64996,6 +65274,8 @@
                    ljudintensitet: layoutLjudintensitet,
                    ljudniva: layoutLjudniva,
                    vattenbrytning: layoutVattenbrytning,
+                   'vattenbrytning-grunt-djupt': layoutVattenbrytningGruntDjupt,
+                   'vagor-mot-stranden': layoutVagorMotStranden,
                    hogtalare: layoutHogtalare,
                    /* Fysik 2 kapitel 3 — Elektromagnetism */
                    faltpunkter: layoutFaltpunkter,

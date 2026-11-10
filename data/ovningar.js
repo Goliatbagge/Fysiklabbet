@@ -17437,9 +17437,9 @@ Pulstakten, $80$ pulser per sekund, påverkar inte det kortaste avståndet. Den 
   <polygon points="133,81.8 124.7,77.8 132.1,72.6" fill="#c8324a"/>
   <line x1="160" y1="120" x2="220" y2="35" stroke="#c8324a" stroke-width="2.2" stroke-dasharray="6 4" opacity="0.6"/>
   <polygon points="193,73.3 192.1,82.4 184.7,77.2" fill="#c8324a" opacity="0.6"/>
-  <path d="M 160 88 A 32 32 0 0 0 141.66 95.78" stroke="#1a1d24" stroke-width="1.2" fill="none"/>
+  <path d="M 160 88 A 32 32 0 0 0 141.65 93.79" stroke="#1a1d24" stroke-width="1.2" fill="none"/>
   <text x="138" y="100" text-anchor="end" font-size="13" fill="#1a1d24"><tspan font-style="italic">i</tspan> = 35°</text>
-  <path d="M 160 88 A 32 32 0 0 1 178.34 95.78" stroke="#1a1d24" stroke-width="1.2" fill="none"/>
+  <path d="M 160 88 A 32 32 0 0 1 178.35 93.79" stroke="#1a1d24" stroke-width="1.2" fill="none"/>
   <text x="182" y="100" font-size="13" font-style="italic" fill="#1a1d24">r</text>
   <text x="20" y="115" font-size="12" fill="#3a4250">vatten</text>
   <text x="20" y="138" font-size="12" fill="#3a4250">klippa</text>
@@ -17451,17 +17451,17 @@ $$ i = r = 35^\\circ $$
 
 **Svar:** Reflexionsvinkeln är $35^\\circ$.
 
-**Generell slutsats:** Reflexionslagen gäller för alla typer av vågor — vatten, ljud, ljus — så länge ytan är **slät** jämfört med våglängden. Vid en ojämn yta sprids vågen åt olika håll (*diffus reflexion*).`,
+**Generell slutsats:** Reflexionslagen gäller för alla typer av vågor (vatten, ljud och ljus) så länge ytan är **slät** jämfört med våglängden. Vid en ojämn yta sprids vågen åt olika håll (*diffus reflexion*).`,
         },
         {
             level: 1,
             question: `En vattenvåg går från djupt vatten med våglängden $\\lambda_1 = 12\\ \\mathrm{m}$ till grunt vatten med våglängden $\\lambda_2 = 8{,}0\\ \\mathrm{m}$. Infallsvinkeln är $30^\\circ$. Beräkna brytningsvinkeln.
 
 ${makeRefraction({ i: 30, b: 19.5, iLabel: '30°', bLabel: 'b', medium1: 'djupt (<tspan font-style="italic">λ</tspan>₁ = 12 m)', medium2: 'grunt (<tspan font-style="italic">λ</tspan>₂ = 8,0 m)' })}`,
-            answer: { value: 19.47, unit: '°' },
+            answer: { value: 19, unit: '°' },
             solution: `Brytningslagen ger
 
-$$ \\frac{\\sin i}{\\sin b} = \\frac{\\lambda_1}{\\lambda_2} \\quad\\Leftrightarrow\\quad \\sin b = \\frac{\\lambda_2}{\\lambda_1}\\sin i $$
+$$ \\frac{\\sin i}{\\sin b} = \\frac{\\lambda_1}{\\lambda_2} \\quad\\Leftrightarrow\\quad \\sin b = \\frac{\\lambda_2 \\cdot \\sin i}{\\lambda_1} $$
 
 Mätvärden:
 $$
@@ -17472,23 +17472,23 @@ i = 30^\\circ
 \\end{array} \\right]
 $$
 
-$$ \\sin b = \\frac{8{,}0}{12}\\cdot\\sin 30^\\circ = 0{,}6667 \\cdot 0{,}5 = 0{,}3333 $$
+$$ \\sin b = \\frac{8{,}0 \\cdot \\sin 30^\\circ}{12} = 0{,}3333\\ldots $$
 
-$$ b = \\sin^{-1}(0{,}3333) \\approx 19{,}5^\\circ $$
+$$ b = \\sin^{-1}(0{,}3333\\ldots) = 19{,}47\\ldots^\\circ \\approx 19^\\circ $$
 
-**Svar:** Brytningsvinkeln är ungefär $19{,}5^\\circ$.
+**Svar:** Brytningsvinkeln är ungefär $19^\\circ$.
 
-**Generell slutsats:** När vågen bromsas in (kortare våglängd) bryts den **mot** normalen — vinkeln minskar.`,
+**Generell slutsats:** När vågen bromsas in (kortare våglängd) bryts den **mot** normalen. Vinkeln minskar.`,
         },
         {
             level: 1,
             question: `En vattenvåg går från grunt vatten ($v_1 = 3{,}0\\ \\mathrm{m/s}$) till djupt vatten ($v_2 = 8{,}0\\ \\mathrm{m/s}$). Infallsvinkeln är $18^\\circ$. Beräkna brytningsvinkeln.
 
 ${makeRefraction({ i: 18, b: 55.5, iLabel: '18°', bLabel: 'b', medium1: 'grunt (<tspan font-style="italic">v</tspan>₁ = 3,0 m/s)', medium2: 'djupt (<tspan font-style="italic">v</tspan>₂ = 8,0 m/s)' })}`,
-            answer: { value: 55.5, unit: '°' },
+            answer: { value: 55, unit: '°' },
             solution: `Brytningslagen med hastigheter:
 
-$$ \\frac{\\sin i}{\\sin b} = \\frac{v_1}{v_2} \\quad\\Leftrightarrow\\quad \\sin b = \\frac{v_2}{v_1}\\sin i $$
+$$ \\frac{\\sin i}{\\sin b} = \\frac{v_1}{v_2} \\quad\\Leftrightarrow\\quad \\sin b = \\frac{v_2 \\cdot \\sin i}{v_1} $$
 
 Mätvärden:
 $$
@@ -17499,13 +17499,35 @@ i = 18^\\circ
 \\end{array} \\right]
 $$
 
-$$ \\sin b = \\frac{8{,}0}{3{,}0}\\cdot\\sin 18^\\circ = 2{,}667 \\cdot 0{,}3090 = 0{,}8240 $$
+$$ \\sin b = \\frac{8{,}0 \\cdot \\sin 18^\\circ}{3{,}0} = 0{,}8240\\ldots $$
 
-$$ b = \\sin^{-1}(0{,}8240) \\approx 55{,}5^\\circ $$
+$$ b = \\sin^{-1}(0{,}8240\\ldots) = 55{,}49\\ldots^\\circ \\approx 55^\\circ $$
 
-**Svar:** Brytningsvinkeln är ungefär $55{,}5^\\circ$.
+**Svar:** Brytningsvinkeln är ungefär $55^\\circ$.
 
-**Generell slutsats:** Vågen påskyndas (längre våglängd) och bryts **från** normalen — vinkeln ökar.`,
+**Generell slutsats:** Vågen går fortare (längre våglängd) och bryts **från** normalen. Vinkeln ökar.`,
+        },
+        {
+            level: 1,
+            question: `Vågor går in mot en strand. På ett ställe är vattnet $2{,}5\\ \\mathrm{m}$ djupt. Beräkna våghastigheten där. Djupet är litet jämfört med våglängden, så du kan använda $v \\approx \\sqrt{g \\cdot h}$.`,
+            answer: { value: 5.0, unit: 'm/s' },
+            solution: `På grunt vatten beror våghastigheten bara på djupet:
+
+$$ v \\approx \\sqrt{g \\cdot h} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+h = 2{,}5\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ v \\approx \\sqrt{9{,}82 \\cdot 2{,}5} = 4{,}954\\ldots\\ \\mathrm{m/s} \\approx 5{,}0\\ \\mathrm{m/s} $$
+
+**Svar:** Våghastigheten är ungefär $5{,}0\\ \\mathrm{m/s}$.
+
+**Generell slutsats:** Ju grundare vatten, desto långsammare våg. Därför saktar vågorna in när de närmar sig land.`,
         },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
@@ -17514,10 +17536,10 @@ $$ b = \\sin^{-1}(0{,}8240) \\approx 55{,}5^\\circ $$
             question: `En vattenvåg går från djupt till grunt vatten. Våglängden i djupt vatten är $8{,}0\\ \\mathrm{m}$. Infallsvinkeln är $60^\\circ$ och brytningsvinkeln är $30^\\circ$. Beräkna våglängden i det grunda vattnet.
 
 ${makeRefraction({ i: 60, b: 30, iLabel: '60°', bLabel: '30°', medium1: 'djupt (<tspan font-style="italic">λ</tspan>₁ = 8,0 m)', medium2: 'grunt (<tspan font-style="italic">λ</tspan>₂)' })}`,
-            answer: { value: 4.62, unit: 'm' },
+            answer: { value: 4.6, unit: 'm' },
             solution: `Brytningslagen:
 
-$$ \\frac{\\sin i}{\\sin b} = \\frac{\\lambda_1}{\\lambda_2} \\quad\\Leftrightarrow\\quad \\lambda_2 = \\lambda_1 \\cdot \\frac{\\sin b}{\\sin i} $$
+$$ \\frac{\\sin i}{\\sin b} = \\frac{\\lambda_1}{\\lambda_2} \\quad\\Leftrightarrow\\quad \\lambda_2 = \\frac{\\lambda_1 \\cdot \\sin b}{\\sin i} $$
 
 Mätvärden:
 $$
@@ -17528,7 +17550,7 @@ b = 30^\\circ
 \\end{array} \\right]
 $$
 
-$$ \\lambda_2 = 8{,}0 \\cdot \\frac{\\sin 30^\\circ}{\\sin 60^\\circ} = 8{,}0 \\cdot \\frac{0{,}5}{0{,}8660} = 8{,}0 \\cdot 0{,}5774 \\approx 4{,}62\\ \\mathrm{m} $$
+$$ \\lambda_2 = \\frac{8{,}0 \\cdot \\sin 30^\\circ}{\\sin 60^\\circ} = 4{,}618\\ldots\\ \\mathrm{m} \\approx 4{,}6\\ \\mathrm{m} $$
 
 **Svar:** Våglängden i grunt vatten är ungefär $4{,}6\\ \\mathrm{m}$.
 
@@ -17536,57 +17558,115 @@ $$ \\lambda_2 = 8{,}0 \\cdot \\frac{\\sin 30^\\circ}{\\sin 60^\\circ} = 8{,}0 \\
         },
         {
             level: 2,
-            question: `En vattenvåg har frekvensen $0{,}50\\ \\mathrm{Hz}$ och våglängden $6{,}0\\ \\mathrm{m}$ i djupt vatten. Den möter grunt vatten där våghastigheten är $1{,}5\\ \\mathrm{m/s}$. Infallsvinkeln mot gränsytan är $45^\\circ$. Beräkna brytningsvinkeln.
+            question: `En vattenvåg har frekvensen $0{,}50\\ \\mathrm{Hz}$ och våglängden $6{,}0\\ \\mathrm{m}$ i djupt vatten. Den möter grunt vatten där våghastigheten är $1{,}5\\ \\mathrm{m/s}$. Infallsvinkeln mot gränsytans normal är $45^\\circ$. Beräkna brytningsvinkeln.
 
 ${makeRefraction({ i: 45, b: 21, iLabel: '45°', bLabel: 'b', medium1: 'djupt vatten', medium2: 'grunt vatten' })}`,
-            answer: { value: 20.7, unit: '°' },
+            answer: { value: 21, unit: '°' },
             solution: `Vi behöver först våghastigheten i djupt vatten, sedan brytningsvinkeln.
 
-**Steg 1 — våghastighet i djupt vatten.**
+**Steg 1: våghastigheten i djupt vatten.**
 
 $$ v_1 = f \\cdot \\lambda_1 = 0{,}50 \\cdot 6{,}0 = 3{,}0\\ \\mathrm{m/s} $$
 
-**Steg 2 — brytningsvinkeln.**
+**Steg 2: brytningsvinkeln.**
 
-$$ \\sin b = \\frac{v_2}{v_1}\\sin i = \\frac{1{,}5}{3{,}0}\\cdot\\sin 45^\\circ = 0{,}5 \\cdot 0{,}7071 = 0{,}3536 $$
+$$ \\sin b = \\frac{v_2 \\cdot \\sin i}{v_1} = \\frac{1{,}5 \\cdot \\sin 45^\\circ}{3{,}0} = 0{,}3535\\ldots $$
 
-$$ b = \\sin^{-1}(0{,}3536) \\approx 20{,}7^\\circ $$
+$$ b = \\sin^{-1}(0{,}3535\\ldots) = 20{,}70\\ldots^\\circ \\approx 21^\\circ $$
 
 **Svar:** Brytningsvinkeln är ungefär $21^\\circ$.
 
-**Generell slutsats:** När vågen bromsas (här halveras hastigheten) bryts den mot normalen — typiskt fall som händer när vågor närmar sig strandkanten.`,
+**Generell slutsats:** När vågen bromsas (här halveras hastigheten) bryts den mot normalen. Det händer när vågor närmar sig strandkanten.`,
+        },
+        {
+            level: 2,
+            question: `Havsvågor med periodtiden $8{,}0\\ \\mathrm{s}$ kommer in över ett grund där vattnet är $1{,}5\\ \\mathrm{m}$ djupt. Beräkna våglängden på grundet. Använd $v \\approx \\sqrt{g \\cdot h}$.`,
+            answer: { value: 31, unit: 'm' },
+            solution: `Vi beräknar först våghastigheten på grundet och sedan våglängden med $v = f \\cdot \\lambda$. Frekvensen är $f = \\dfrac{1}{T}$, så $\\lambda = v \\cdot T$.
+
+**Steg 1: våghastigheten.**
+
+$$
+\\left[ \\begin{array}{l}
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+h = 1{,}5\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ v \\approx \\sqrt{g \\cdot h} = \\sqrt{9{,}82 \\cdot 1{,}5} = 3{,}837\\ldots\\ \\mathrm{m/s} $$
+
+**Steg 2: våglängden.**
+
+$$ v = f \\cdot \\lambda = \\frac{\\lambda}{T} \\quad\\Leftrightarrow\\quad \\lambda = v \\cdot T $$
+
+$$ \\lambda = 3{,}837\\ldots \\cdot 8{,}0 = 30{,}70\\ldots\\ \\mathrm{m} \\approx 31\\ \\mathrm{m} $$
+
+**Svar:** Våglängden på grundet är ungefär $31\\ \\mathrm{m}$.
+
+**Generell slutsats:** Periodtiden ändras inte när vågen kommer in på grunt vatten, men farten gör det. Därför blir våglängden kortare.`,
+        },
+        {
+            level: 2,
+            question: `Raka vattenvågor passerar en gräns mellan två områden med olika djup. Före gränsen är avståndet mellan vågtopparna $12\\ \\mathrm{m}$ och efter gränsen $18\\ \\mathrm{m}$. Vågen kommer snett in mot gränsen. Vilket påstående stämmer?`,
+            choices: [
+                'Vågen går från djupt till grunt vatten och bryts mot normalen.',
+                'Vågen går från grunt till djupt vatten och bryts mot normalen.',
+                'Vågen går från grunt till djupt vatten och bryts från normalen.',
+                'Vågen går från djupt till grunt vatten, och frekvensen ökar efter gränsen.',
+            ],
+            correct: 2,
+            solution: `Frekvensen är densamma på båda sidor om gränsen. Med $v = f \\cdot \\lambda$ betyder den längre våglängden efter gränsen att vågen går **fortare** där. Vågor går fortare på djupare vatten, så vågen går från grunt till djupt vatten.
+
+En våg som går fortare bryts **från** normalen, eftersom brytningslagen ger
+
+$$ \\frac{\\sin i}{\\sin b} = \\frac{\\lambda_1}{\\lambda_2} = \\frac{12}{18} < 1 \\quad\\Rightarrow\\quad \\sin b > \\sin i $$
+
+**Svar:** Vågen går från grunt till djupt vatten och bryts från normalen.
+
+**Generell slutsats:** Våglängden avslöjar vilket område som är djupast: där vågtopparna står glesast går vågen fortast.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Vattenvågor går från **grunt** vatten ($v_1 = 3{,}0\\ \\mathrm{m/s}$) till **djupt** vatten ($v_2 = 8{,}0\\ \\mathrm{m/s}$). Vid vilken infallsvinkel uppstår **totalreflexion**, så att inga vågor transmitteras till det djupa vattnet?
+            question: `Raka havsvågor går över ett område där vattnet är $8{,}0\\ \\mathrm{m}$ djupt och kommer snett in mot en kant där djupet minskar till $2{,}0\\ \\mathrm{m}$. Infallsvinkeln är $40^\\circ$. Beräkna brytningsvinkeln. Anta att $v \\approx \\sqrt{g \\cdot h}$ gäller på båda djupen.
 
-${makeRefraction({ i: 22, b: 87, iLabel: 'i', bLabel: 'b → 90°', medium1: 'grunt (<tspan font-style="italic">v</tspan>₁ = 3,0 m/s)', medium2: 'djupt (<tspan font-style="italic">v</tspan>₂ = 8,0 m/s)', reflected: true })}`,
-            answer: { value: 22.0, unit: '°' },
-            solution: `**Insikten är att brytningsvinkeln *b* inte kan överstiga $90^\\circ$** — vid $b = 90^\\circ$ skulle den brytta vågen löpa **parallellt** med ytan, vilket är gränsen. Vid större infallsvinkel kan ingen brytning ske, och allt reflekteras tillbaka (*totalreflexion*).
+${makeRefraction({ i: 40, b: 18.7, iLabel: '40°', bLabel: 'b', medium1: 'djupt (<tspan font-style="italic">h</tspan> = 8,0 m)', medium2: 'grunt (<tspan font-style="italic">h</tspan> = 2,0 m)' })}`,
+            answer: { value: 19, unit: '°' },
+            solution: `Brytningslagen kopplar vinklarna till hastigheterna, och hastigheterna bestäms av djupen.
 
-**Villkor för kritisk vinkel:**
+$$ \\frac{\\sin i}{\\sin b} = \\frac{v_1}{v_2} \\quad\\Leftrightarrow\\quad \\sin b = \\frac{v_2 \\cdot \\sin i}{v_1} $$
 
-$$ \\frac{\\sin i_\\text{kritisk}}{\\sin 90^\\circ} = \\frac{v_1}{v_2} \\quad\\Leftrightarrow\\quad \\sin i_\\text{kritisk} = \\frac{v_1}{v_2} $$
+**Kvoten mellan hastigheterna.** Med $v \\approx \\sqrt{g \\cdot h}$ på båda djupen blir
 
-Mätvärden:
+$$ \\frac{v_2}{v_1} = \\frac{\\sqrt{g \\cdot h_2}}{\\sqrt{g \\cdot h_1}} = \\sqrt{\\frac{g \\cdot h_2}{g \\cdot h_1}} = \\sqrt{\\frac{h_2}{h_1}} $$
+
+Tyngdfaktorn *g* förkortas bort, så det räcker att känna djupen.
+
 $$
 \\left[ \\begin{array}{l}
-v_1 = 3{,}0\\ \\mathrm{m/s} \\\\
-v_2 = 8{,}0\\ \\mathrm{m/s}
+h_1 = 8{,}0\\ \\mathrm{m} \\\\
+h_2 = 2{,}0\\ \\mathrm{m} \\\\
+i = 40^\\circ
 \\end{array} \\right]
 $$
 
-$$ \\sin i_\\text{kritisk} = \\frac{3{,}0}{8{,}0} = 0{,}375 $$
+$$ \\frac{v_2}{v_1} = \\sqrt{\\frac{2{,}0}{8{,}0}} = 0{,}5 $$
 
-$$ i_\\text{kritisk} = \\sin^{-1}(0{,}375) \\approx 22{,}0^\\circ $$
+**Brytningsvinkeln.**
 
-**Svar:** Totalreflexion uppstår vid infallsvinklar större än ungefär $22^\\circ$.
+$$ \\sin b = \\frac{v_2}{v_1} \\cdot \\sin i = 0{,}5 \\cdot \\sin 40^\\circ = 0{,}3213\\ldots $$
 
-**Generell slutsats:** Totalreflexion kan **bara** ske när vågen går från ett *långsamt* till ett *snabbt* medium (här grunt → djupt vatten). Då finns en kritisk vinkel där $\\sin b$ skulle bli $> 1$, vilket är omöjligt. Samma princip används i optiska fibrer: ljus från glas mot luft totalreflekteras och hålls kvar inuti fibern.`,
+$$ b = \\sin^{-1}(0{,}3213\\ldots) = 18{,}74\\ldots^\\circ \\approx 19^\\circ $$
+
+Vågen kommer in på grundare vatten, saktar in och bryts mot normalen, så vinkeln ska vara mindre än $40^\\circ$. Det stämmer.
+
+**Svar:** Brytningsvinkeln är ungefär $19^\\circ$.
+
+**Generell slutsats:** Ett fyra gånger så litet djup halverar farten, eftersom farten beror på roten ur djupet.`,
         },
     ],
+
 
     'fy2-2.14': [
         // ── Nivå 1 (Grund) ───────────────────────────────────────────────

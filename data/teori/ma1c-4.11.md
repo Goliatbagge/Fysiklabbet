@@ -98,7 +98,7 @@ Tabellen visar kapitalet år för år.
 | 0 år | $25\,000$ |
 | 1 år | $25\,000 \cdot 1{,}02$ |
 | 2 år | $25\,000 \cdot 1{,}02 \cdot 1{,}02 = 25\,000 \cdot 1{,}02^2$ |
-| 3 år | $25\,000 \cdot 1{,}02^3$ |
+| 3 år | $25\,000 \cdot 1{,}02 \cdot 1{,}02 \cdot 1{,}02 = 25\,000 \cdot 1{,}02^3$ |
 | $x$ år | $25\,000 \cdot 1{,}02^x$ |
 
 Exponenten är alltid lika med antalet år. Kapitalet $K$ kr efter $x$ år

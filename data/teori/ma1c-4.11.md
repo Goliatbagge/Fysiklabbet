@@ -83,8 +83,8 @@ Detta är karakteristiskt för exponentiell tillväxt. Förändringshastigheten
 ::: tips "Kom ihåg"
 Förändringsfaktorn räknas fram ur den procentuella förändringen.
 
-- Ökning med $p$ %: $a = 1 + \dfrac{p}{100}$, till exempel ger +2 % faktorn 1,02.
-- Minskning med $p$ %: $a = 1 - \dfrac{p}{100}$, till exempel ger −15 % faktorn 0,85.
+- Ökning med $p$ %: $a = 1 + \dfrac{p}{100}$, till exempel ger +2 % faktorn $1 + \dfrac{2}{100} = 1 + 0{,}02 = 1{,}02$.
+- Minskning med $p$ %: $a = 1 - \dfrac{p}{100}$, till exempel ger −15 % faktorn $1 - \dfrac{15}{100} = 1 - 0{,}15 = 0{,}85$.
 :::
 
 Anta att 25 000 kr sätts in på

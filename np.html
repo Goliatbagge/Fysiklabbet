@@ -212,6 +212,8 @@
             list-style: none; margin: 0; padding: 0;
             display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px;
         }
+        .np-kursgrid + .np-kursgrid { margin-top: 12px; }
+        .np-kursgrid-spar { grid-template-columns: repeat(4, minmax(0, 1fr)); }
         .np-kurskort-knapp {
             position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
             height: 100%; box-sizing: border-box; padding: 16px 40px 16px 18px; border-radius: 12px;
@@ -235,7 +237,8 @@
         .np-kursbyte a[aria-current="true"] { background: var(--lab-ink); border-color: var(--lab-ink); color: var(--lab-bg) !important; }
         .np-provgrid-tat .np-provknapp-namn { font-size: 17px; }
         @media (max-width: 560px) {
-            .np-kursgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+            .np-kursgrid, .np-kursgrid-spar { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+            .np-kursgrid + .np-kursgrid { margin-top: 22px; }
             .np-kurskort-knapp { padding: 13px 30px 13px 13px; }
             .np-kurskort-kort { font-size: 21px; }
             .np-kurskort-namn { font-size: 13px; }
@@ -1658,6 +1661,18 @@
             return a === 'fysik' || a === 'matematik' ? a : null;
         }
 
+        // Matematikkurserna i en rad per spår (önskemål 2026-11-10): a-spåret
+        // (1a, 2a), b-spåret (1b, 2b, 3b) och c-spåret (1c, 2c, 3c, 4). Raderna
+        // har fyra fasta kolumner, så att nivå 1, 2, 3 och 4 står under varandra.
+        const SPAR = [['ma1a', 'ma2a'], ['ma1b', 'ma2b', 'ma3b'], ['ma1c', 'ma2c', 'ma3c', 'ma4']];
+        function kursRader(amne) {
+            const kurser = NP_FRISLAPPTA.filter(k => k.amne === amne);
+            if (amne !== 'matematik') return [kurser];
+            const rader = SPAR.map(rad => rad.map(kod => kurser.find(k => k.kod === kod)).filter(Boolean));
+            const ovriga = kurser.filter(k => !SPAR.some(rad => rad.indexOf(k.kod) >= 0));
+            return rader.concat(ovriga.length ? [ovriga] : []).filter(rad => rad.length);
+        }
+
         function Landing() {
             // ?amne=fysik eller ?amne=matematik (menyn) visar bara det ämnets kurser.
             const amne = lasAmne();
@@ -1677,8 +1692,9 @@
                     {AMNEN.filter(a => !amne || a.id === amne).map(a => (
                         <section className="np-kursval" key={a.id}>
                             <h2 className="np-amnesrubrik">{a.namn}</h2>
-                            <ul className="np-kursgrid">
-                                {NP_FRISLAPPTA.filter(k => k.amne === a.id).map(k => {
+                            {kursRader(a.id).map((rad, ri) => (
+                            <ul className={'np-kursgrid' + (a.id === 'matematik' ? ' np-kursgrid-spar' : '')} key={ri}>
+                                {rad.map(k => {
                                     const medLos = k.prov.filter(p => synligLosning(p.losning));
                                     const video = medLos.some(p => harVideo(p.losning));
                                     return (
@@ -1697,6 +1713,7 @@
                                     );
                                 })}
                             </ul>
+                            ))}
                         </section>
                     ))}
                 </main>

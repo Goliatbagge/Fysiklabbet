@@ -514,6 +514,16 @@
                         out.push('');
                         continue;
                     }
+                    // ::: stegvis — osynlig omslagsruta kring en tabell eller
+                    // lista som presentationsläget visar cell för cell (se
+                    // stegCtl i katalog.html). Utanför presentationsläget
+                    // syns ingenting av den: ingen ram, ingen rubrik.
+                    if (ty === 'stegvis') {
+                        stack.push({ type: ty, close: '</div>' });
+                        out.push('<div class="lab-stegvis">');
+                        out.push('');
+                        continue;
+                    }
                     stack.push({ type: ty, close: '</div>' });
                     // Ankare per ruta, så att en länk kan peka RAKT på den:
                     //   data-blocknr  typ + ordningsnummer  (exempel-2)
@@ -1878,6 +1888,49 @@
                 e.classList.toggle('pres-tl-ny', !!ny && i === pos - 1);
             }));
         }
+        // STEGVIS TABELL ELLER LISTA (::: stegvis, önskemål 2026-11-10,
+        // kapitaltabellen i ma1c-4.11): läraren ska kunna hålla inne med
+        // nästa post så att klassen hinner resonera fram den själv, i
+        // stället för att hela tabellen "slängs upp". Steget tänds med
+        // tabellens rubrikrad och första cellen; sedan tänder varje klick
+        // nästa cell, rad för rad (i en lista nästa punkt). De dolda
+        // cellerna har visibility: hidden, så tabellen har sin fulla
+        // storlek från början och hoppar inte medan den fylls i.
+        function stegEnheter(box) {
+            const enh = [];
+            box.querySelectorAll('table, ul, ol').forEach(t => {
+                if (t.tagName === 'TABLE') {
+                    t.querySelectorAll('tbody > tr').forEach(tr => enh.push(...Array.from(tr.children)));
+                } else if (!(t.parentElement && t.parentElement.closest('li'))) {
+                    enh.push(...Array.from(t.children).filter(c => c.tagName === 'LI'));
+                }
+            });
+            return enh;
+        }
+        function setStegPos(box, pos, ny) {
+            const enh = box.__stegEnh;
+            if (!enh || !enh.length) return;
+            pos = Math.max(1, Math.min(enh.length, pos));
+            box.__stegPos = pos;
+            enh.forEach((e, i) => {
+                e.classList.toggle('pres-steg-dold', i >= pos);
+                e.classList.toggle('pres-steg-ny', !!ny && i === pos - 1);
+            });
+        }
+        function stegBox(st) {
+            if (st.el.classList.contains('lab-stegvis')) return st.el;
+            return (st.twins || []).find(t => t.classList.contains('lab-stegvis')) || null;
+        }
+        function stegCtl(box) {
+            const n = box.__stegEnh.length;
+            const pos = () => box.__stegPos || 1;
+            return {
+                klar: () => pos() >= n,
+                vidStart: () => pos() <= 1,
+                nasta: () => { if (pos() < n) setStegPos(box, pos() + 1, true); },
+                forra: () => { if (pos() > 1) setStegPos(box, pos() - 1, false); },
+            };
+        }
         function synligTextlosning(st) {
             const tl = st.el.classList.contains('lab-block-textlosning') ? st.el
                 : (st.twins || []).find(t => t.classList.contains('lab-block-textlosning'));
@@ -2019,6 +2072,9 @@
             const curHkCtl = (s = stepRef.current) => {
                 const st = stepsRef.current[s - 1];
                 if (!st) return null;
+                // ::: stegvis: tabellen/listan fylls i en cell i taget.
+                const sb = stegBox(st);
+                if (sb && sb.__stegEnh && sb.__stegEnh.length > 1) return stegCtl(sb);
                 // Textlösningen stegas en bit i taget när den visas (se
                 // tlChunks): annars tändes hela lösningen till a, b och c i
                 // ett enda klick (påpekat 2026-10-12, Exempel 1 i ma1c-3.5).
@@ -2171,6 +2227,10 @@
                     tl.__tlChunks = tlChunks(tl);
                     setTlPos(tl, 1, false);
                 });
+                root.querySelectorAll('.lab-stegvis').forEach(b => {
+                    b.__stegEnh = stegEnheter(b);
+                    setStegPos(b, 1, false);
+                });
                 stepsRef.current = steps;
                 blocksRef.current = blocks;
                 totalRef.current = steps.length;
@@ -2242,6 +2302,14 @@
                             if (i < step - 1) setTlPos(tl, n, false);
                             else if (i > step - 1) setTlPos(tl, 1, false);
                             else setTlPos(tl, fran < step ? 1 : n, false);
+                        }
+                        // ::: stegvis följer samma regel som textlösningen.
+                        const sb = stegBox(st);
+                        if (sb && sb.__stegEnh) {
+                            const n = sb.__stegEnh.length;
+                            if (i < step - 1) setStegPos(sb, n, false);
+                            else if (i > step - 1) setStegPos(sb, 1, false);
+                            else setStegPos(sb, fran < step ? 1 : n, false);
                         }
                     }
                     // Tvilling (textlösningen till en handskrift-widget) följer

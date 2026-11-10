@@ -93,6 +93,7 @@ ett konto där kapitalet ökar med 2 % varje år. Förändringsfaktorn för en
 varje år multipliceras kapitalet med 1,02.
 Tabellen visar kapitalet år för år.
 
+::: stegvis
 | Tid | Kapital (kr) |
 | --- | --- |
 | 0 år | $25\,000$ |
@@ -100,6 +101,7 @@ Tabellen visar kapitalet år för år.
 | 2 år | $25\,000 \cdot 1{,}02 \cdot 1{,}02 = 25\,000 \cdot 1{,}02^2$ |
 | 3 år | $25\,000 \cdot 1{,}02 \cdot 1{,}02 \cdot 1{,}02 = 25\,000 \cdot 1{,}02^3$ |
 | $x$ år | $25\,000 \cdot 1{,}02^x$ |
+:::
 
 Exponenten är alltid lika med antalet år. Kapitalet $K$ kr efter $x$ år
 är därför

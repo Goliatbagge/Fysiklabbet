@@ -444,6 +444,16 @@
                         out.push('');
                         continue;
                     }
+                    // ::: stegvis — osynlig omslagsruta kring en tabell eller
+                    // lista som presentationsläget visar cell för cell (se
+                    // stegCtl i katalog.html). Utanför presentationsläget
+                    // syns ingenting av den: ingen ram, ingen rubrik.
+                    if (ty === 'stegvis') {
+                        stack.push({ type: ty, close: '</div>' });
+                        out.push('<div class="lab-stegvis">');
+                        out.push('');
+                        continue;
+                    }
                     stack.push({ type: ty, close: '</div>' });
                     // Ankare per ruta, så att en länk kan peka RAKT på den:
                     //   data-blocknr  typ + ordningsnummer  (exempel-2)

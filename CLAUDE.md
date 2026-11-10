@@ -1393,6 +1393,32 @@ användaren påpekat (2026-08-25).
    Ledordet är pedagogiskt: eleven ska hela tiden kunna följa med utan
    att leta.
 
+9. **Håll inne med posterna när klassen kan resonera fram dem.** En tabell
+   eller lista där varje post bygger på den förra (kapitalet år för år, en
+   värdetabell, stegen i en metod) ska inte "slängas upp" i ett klick:
+   läraren ska kunna fråga klassen vad som kommer härnäst innan det syns
+   (användarkrav 2026-11-10, kapitaltabellen i `ma1c-4.11`). Lägg då
+   tabellen eller listan i ett `::: stegvis`-block i md-filen:
+
+   ```
+   ::: stegvis
+   | Tid | Kapital (kr) |
+   | --- | --- |
+   | 0 år | $25\,000$ |
+   | 1 år | $25\,000 \cdot 1{,}02$ |
+   :::
+   ```
+
+   I presentationsläget tänds rubrikraden och första cellen först, och
+   sedan tänder varje klick nästa cell, rad för rad (i en lista nästa
+   punkt). Bakåt går det cell för cell. Utanför presentationsläget syns
+   inget av blocket: ingen ram och ingen rubrik. Koden är `stegCtl` i
+   `katalog.html` (samma inre stegning som textlösningen och kalkyl-
+   bladen), och `avsnitt.html` renderar blocket som en osynlig ruta.
+   Gör det när det är en pedagogisk vinst, inte för varje tabell: en
+   tabell som bara redovisar fakta eller jämför färdiga värden får tändas
+   hel.
+
 **Granska i skärmdump på en låg skärm (t.ex. 1290×730), inte bara i DOM:en**
 — felet syns bara i renderingen. Skriptet
 `%TEMP%\pptr-test\pres-alla.js` stegar igenom ett avsnitts alla steg och

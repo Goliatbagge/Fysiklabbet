@@ -12,11 +12,11 @@
 // i fysiklabbet-np/pdf/ med samma namnmönster och pusha det repot.
 //
 // Utgivare (kontrollerade 2026-11-10, alla fil-länkar gav 200):
-// - Matematik nivå 1 (1b, 1c): PRIM-gruppen, Stockholms universitet. En pdf
+// - Matematik nivå 1 (1a, 1b, 1c): PRIM-gruppen, Stockholms universitet. En pdf
 //   per delprov (elevhäftena B, C, D), i fältet delar. HT11 och VT12 hade
 //   delproven Del I, II och III. Proven HT11–HT12 och Ma 1b VT13 delprov B
 //   finns bara som zip hos PRIM; de är tagna ur den lokala mappen NP/.
-// - Matematik nivå 2 och fortsättning (2b, 2c, 3b, 3c, 4): Umeå universitet.
+// - Matematik nivå 2 och fortsättning (2a, 2b, 2c, 3b, 3c, 4): Umeå universitet.
 //   En pdf per prov (delprov B–D), filnamnet följer mönstret i `filmall`.
 // - Fysik: kursproven finns som bedömningsstöd hos Skolverket. Någon öppen
 //   provlista finns inte, så bara proven vi har lösningar till listas.
@@ -50,6 +50,72 @@
     }
 
     window.NP_FRISLAPPTA = [
+        {
+            amne: 'matematik', kurs: 'Matematik nivå 1a', kort: 'Matematik 1a', kod: 'ma1a',
+            kalla: PRIM, format: 'pdf',
+            prov: [
+                { t: 'vt22', delar: {
+                    B: EGEN + 'ma1a-vt22-delprov-b.pdf',
+                    C: EGEN + 'ma1a-vt22-delprov-c.pdf',
+                    D: EGEN + 'ma1a-vt22-delprov-d.pdf',
+                } },
+                { t: 'vt17', delar: {
+                    B: EGEN + 'ma1a-vt17-delprov-b.pdf',
+                    C: EGEN + 'ma1a-vt17-delprov-c.pdf',
+                    D: EGEN + 'ma1a-vt17-delprov-d.pdf',
+                } },
+                { t: 'ht16', delar: {
+                    B: EGEN + 'ma1a-ht16-delprov-b.pdf',
+                    C: EGEN + 'ma1a-ht16-delprov-c.pdf',
+                    D: EGEN + 'ma1a-ht16-delprov-d.pdf',
+                } },
+                { t: 'vt16', delar: {
+                    B: EGEN + 'ma1a-vt16-delprov-b.pdf',
+                    C: EGEN + 'ma1a-vt16-delprov-c.pdf',
+                    D: EGEN + 'ma1a-vt16-delprov-d.pdf',
+                } },
+                { t: 'ht15', delar: {
+                    B: EGEN + 'ma1a-ht15-delprov-b.pdf',
+                    C: EGEN + 'ma1a-ht15-delprov-c.pdf',
+                    D: EGEN + 'ma1a-ht15-delprov-d.pdf',
+                } },
+                { t: 'vt15', delar: {
+                    B: EGEN + 'ma1a-vt15-delprov-b.pdf',
+                    C: EGEN + 'ma1a-vt15-delprov-c.pdf',
+                    D: EGEN + 'ma1a-vt15-delprov-d.pdf',
+                } },
+                { t: 'ht14', delar: {
+                    B: EGEN + 'ma1a-ht14-delprov-b.pdf',
+                    C: EGEN + 'ma1a-ht14-delprov-c.pdf',
+                    D: EGEN + 'ma1a-ht14-delprov-d.pdf',
+                } },
+                { t: 'vt14', delar: {
+                    B: EGEN + 'ma1a-vt14-delprov-b.pdf',
+                    C: EGEN + 'ma1a-vt14-delprov-c.pdf',
+                    D: EGEN + 'ma1a-vt14-delprov-d.pdf',
+                } },
+                { t: 'ht13', delar: {
+                    B: EGEN + 'ma1a-ht13-delprov-b.pdf',
+                    C: EGEN + 'ma1a-ht13-delprov-c.pdf',
+                    D: EGEN + 'ma1a-ht13-delprov-d.pdf',
+                } },
+                { t: 'vt13', delar: {
+                    B: EGEN + 'ma1a-vt13-delprov-b.pdf',
+                    C: EGEN + 'ma1a-vt13-delprov-c.pdf',
+                    D: EGEN + 'ma1a-vt13-delprov-d.pdf',
+                } },
+                { t: 'ht12', delar: {
+                    B: EGEN + 'ma1a-ht12-delprov-b.pdf',
+                    C: EGEN + 'ma1a-ht12-delprov-c.pdf',
+                    D: EGEN + 'ma1a-ht12-delprov-d.pdf',
+                } },
+                { t: 'vt12', delar: {
+                    'I': EGEN + 'ma1a-vt12-del-1.pdf',
+                    'II': EGEN + 'ma1a-vt12-del-2.pdf',
+                    'III': EGEN + 'ma1a-vt12-del-3.pdf',
+                } },
+            ],
+        },
         {
             amne: 'matematik', kurs: 'Matematik nivå 1b', kort: 'Matematik 1b', kod: 'ma1b',
             kalla: PRIM, format: 'pdf',
@@ -186,6 +252,11 @@
                     'III': EGEN + 'ma1c-ht11-del-3.pdf',
                 } },
             ], { 'vt22': 'ma1c-vt2022', 'vt17': 'ma1c-vt2017', 'ht16': 'ma1c-ht2016' }),
+        },
+        {
+            amne: 'matematik', kurs: 'Matematik nivå 2a', kort: 'Matematik 2a', kod: 'ma2a',
+            kalla: UMU, format: 'pdf', filmall: EGEN + 'ma2a-{t}.pdf',
+            prov: umuTerminer('ht12'),
         },
         {
             amne: 'matematik', kurs: 'Matematik nivå 2b', kort: 'Matematik 2b', kod: 'ma2b',

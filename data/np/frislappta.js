@@ -51,7 +51,7 @@
 
     window.NP_FRISLAPPTA = [
         {
-            amne: 'matematik', kurs: 'Matematik nivå 1b', kort: 'Ma 1b', kod: 'ma1b',
+            amne: 'matematik', kurs: 'Matematik nivå 1b', kort: 'Matematik 1b', kod: 'ma1b',
             kalla: PRIM, format: 'pdf',
             prov: [
                 { t: 'vt22', delar: {
@@ -117,7 +117,7 @@
             ],
         },
         {
-            amne: 'matematik', kurs: 'Matematik nivå 1c', kort: 'Ma 1c', kod: 'ma1c',
+            amne: 'matematik', kurs: 'Matematik nivå 1c', kort: 'Matematik 1c', kod: 'ma1c',
             kalla: PRIM, format: 'pdf',
             prov: losning([
                 { t: 'vt22', delar: {
@@ -188,37 +188,37 @@
             ], { 'vt22': 'ma1c-vt2022', 'vt17': 'ma1c-vt2017', 'ht16': 'ma1c-ht2016' }),
         },
         {
-            amne: 'matematik', kurs: 'Matematik nivå 2b', kort: 'Ma 2b', kod: 'ma2b',
+            amne: 'matematik', kurs: 'Matematik nivå 2b', kort: 'Matematik 2b', kod: 'ma2b',
             kalla: UMU, format: 'pdf', filmall: EGEN + 'ma2b-{t}.pdf',
             prov: umuTerminer('vt12'),
         },
         {
-            amne: 'matematik', kurs: 'Matematik nivå 2c', kort: 'Ma 2c', kod: 'ma2c',
+            amne: 'matematik', kurs: 'Matematik nivå 2c', kort: 'Matematik 2c', kod: 'ma2c',
             kalla: UMU, format: 'pdf', filmall: EGEN + 'ma2c-{t}.pdf',
             prov: losning(umuTerminer('vt12'), { vt22: 'ma2c-vt2022', vt18: 'ma2c-vt2018' }),
         },
         {
-            amne: 'matematik', kurs: 'Matematik fortsättning nivå 1b', kort: 'Ma 3b', kod: 'ma3b',
+            amne: 'matematik', kurs: 'Matematik fortsättning nivå 1b', kort: 'Matematik 3b', kod: 'ma3b',
             kalla: UMU, format: 'pdf', filmall: EGEN + 'ma3b-{t}.pdf',
             prov: umuTerminer('ht12'),
         },
         {
-            amne: 'matematik', kurs: 'Matematik fortsättning nivå 1c', kort: 'Ma 3c', kod: 'ma3c',
+            amne: 'matematik', kurs: 'Matematik fortsättning nivå 1c', kort: 'Matematik 3c', kod: 'ma3c',
             kalla: UMU, format: 'pdf', filmall: EGEN + 'ma3c-{t}.pdf',
             prov: losning(umuTerminer('ht12'), { vt22: 'ma3c-vt2022', vt18: 'ma3c-vt2018' }),
         },
         {
-            amne: 'matematik', kurs: 'Matematik fortsättning nivå 2', kort: 'Ma 4', kod: 'ma4',
+            amne: 'matematik', kurs: 'Matematik fortsättning nivå 2', kort: 'Matematik 4', kod: 'ma4',
             kalla: UMU, format: 'pdf', filmall: EGEN + 'ma4-{t}.pdf',
             prov: losning(umuTerminer('vt13'), { vt22: 'ma4-vt2022', vt18: 'ma4-vt2018' }),
         },
         {
-            amne: 'fysik', kurs: 'Fysik nivå 1', kort: 'Fy 1', kod: 'fy1', kursprov: true,
+            amne: 'fysik', kurs: 'Fysik nivå 1', kort: 'Fysik 1', kod: 'fy1', kursprov: true,
             kalla: SKOLVERKET,
             prov: [{ t: 'vt17', losning: 'fy1-vt2017' }],
         },
         {
-            amne: 'fysik', kurs: 'Fysik nivå 2', kort: 'Fy 2', kod: 'fy2', kursprov: true,
+            amne: 'fysik', kurs: 'Fysik nivå 2', kort: 'Fysik 2', kod: 'fy2', kursprov: true,
             kalla: SKOLVERKET,
             prov: [{ t: 'vt16', losning: 'fy2-vt2016' }],
         },

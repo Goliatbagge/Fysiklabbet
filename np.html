@@ -220,7 +220,8 @@
             transition: transform .08s ease, box-shadow .08s ease, border-color .12s ease;
         }
         .np-kurskort-knapp:hover { transform: translateY(-1px); border-color: var(--lab-ink); box-shadow: 0 3px 10px rgba(15, 22, 32, 0.10); }
-        .np-kurskort-kort { font-family: var(--lab-font-display); font-size: 30px; line-height: 1; }
+        .np-kurskort-kort { font-family: var(--lab-font-display); font-size: 26px; line-height: 1.05; }
+        .np-kursniva { font-size: 15px; color: var(--lab-ink-soft); margin: 0 0 16px; }
         .np-kurskort-namn { font-size: 14px; color: var(--lab-ink-soft); line-height: 1.35; }
         .np-kurskort-meta { font-size: 12.5px; color: var(--lab-ink-muted); margin-top: 4px; }
         .np-kurskort-pil { position: absolute; right: 16px; top: 18px; font-size: 18px; color: var(--lab-accent); }
@@ -236,7 +237,7 @@
         @media (max-width: 560px) {
             .np-kursgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
             .np-kurskort-knapp { padding: 13px 30px 13px 13px; }
-            .np-kurskort-kort { font-size: 26px; }
+            .np-kurskort-kort { font-size: 21px; }
             .np-kurskort-namn { font-size: 13px; }
             .np-kurskort-pil { right: 11px; top: 14px; }
         }
@@ -1766,7 +1767,8 @@
                         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7.5 2.5 4 6l3.5 3.5"/></svg>
                         Alla kurser i {k.amne === 'fysik' ? 'fysik' : 'matematik'}
                     </a>
-                    <h1 className="np-hero-title" style={{ marginTop: 10 }}>{k.kurs} <em>{k.kort}</em></h1>
+                    <h1 className="np-hero-title" style={{ marginTop: 10, marginBottom: 2 }}>{k.kort}</h1>
+                    <p className="np-kursniva">{k.kurs}</p>
                     <nav className="np-kursbyte" aria-label="Byt kurs">
                         {grannar.map(x => (
                             <a key={x.kod} href={'#kurs:' + x.kod} aria-current={x.kod === k.kod ? 'true' : undefined}>{x.kort}</a>
@@ -2608,7 +2610,7 @@
                     : prov
                         ? `${prov.namn} — lösningar steg för steg — Fysiklabbet`
                         : kursSida
-                            ? `Nationella prov i ${kursSida.kurs} (${kursSida.kort}) — Fysiklabbet`
+                            ? `Nationella prov i ${kursSida.kort} (${kursSida.kurs}) — Fysiklabbet`
                             : 'Fysiklabbet — Nationella prov med lösningar steg för steg';
 
                 // Kanonisk adress = provets ?id=-adress, samma som i

@@ -17191,12 +17191,13 @@
                 '<circle cx="' + vgR1(S[0]) + '" cy="' + vgR1(S[1]) + '" r="22" fill="transparent"/>' +
                 '<circle cx="' + vgR1(S[0]) + '" cy="' + vgR1(S[1]) + '" r="9" fill="#f7f2e8" stroke="' + INK + '" stroke-width="2.2"/>' +
                 '<circle cx="' + vgR1(S[0]) + '" cy="' + vgR1(S[1]) + '" r="3" fill="' + INK + '"/></g>';
+            // uppmaningen står vid handtaget tills eleven har dragit en gång
+            if (!provat) s += '<text x="' + vgR1(S[0] - 17) + '" y="' + vgR1(S[1] + 5) + '" text-anchor="end" font-size="15" font-weight="600" fill="' + INK + '">Dra i mig</text>';
             dyn.innerHTML = s;
-            info.innerHTML = '<em>i</em> = ' + fmt0(iDeg) + '°&emsp;<em>r</em> = ' + fmt0(iDeg) + '°&emsp;' +
-                '<span style="opacity:0.75">Dra i den infallande strålens ände.</span>';
+            info.innerHTML = '<em>i</em> = ' + fmt0(iDeg) + '°&emsp;<em>r</em> = ' + fmt0(iDeg) + '°';
         }
 
-        var drar = false;
+        var drar = false, provat = false;
         function vinkelFran(ev) {
             var m = svg.getScreenCTM();
             if (!m) return;
@@ -17211,7 +17212,7 @@
         }
         svg.addEventListener('pointerdown', function (ev) {
             if (!ev.target.closest || !ev.target.closest('.ms-ref-handtag')) return;
-            drar = true;
+            drar = true; provat = true;
             try { svg.setPointerCapture(ev.pointerId); } catch (e) {}
             ev.preventDefault();
             vinkelFran(ev);
@@ -17225,6 +17226,7 @@
             if (!d) return;
             ev.preventDefault();
             iDeg = Math.max(0, Math.min(80, iDeg + d));
+            provat = true;
             rita();
             var h = svg.querySelector('.ms-ref-handtag');
             if (h) h.focus();

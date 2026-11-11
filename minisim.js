@@ -17599,7 +17599,7 @@
             bctx.strokeStyle = '#b89a5e'; bctx.lineWidth = 2; bctx.stroke();
         })();
 
-        var tid = 0, visaStralar = true, visaDjup = false;
+        var tid = 0, visaStralar = false, visaDjup = false;
         // varje cells minsta och största gångtid, för att snabbt hitta vilka toppar som korsar den
         var CMIN = new Float64Array((NX - 1) * (NY - 1)), CMAX = new Float64Array((NX - 1) * (NY - 1));
         for (var cj = 0; cj < NY - 1; cj++) for (var ci = 0; ci < NX - 1; ci++) {
@@ -17681,7 +17681,7 @@
 
         var controls = document.createElement('div');
         controls.className = 'minisim-controls';
-        var stCk = vgCheck('Visa strålarna', true);
+        var stCk = vgCheck('Visa strålarna', false);
         var djCk = vgCheck('Visa djupkurvorna', false);
         var loop = vgLoop(card, function (dt) { tid += dt; rita(); });
         var sk = vbSpelknapp(loop);
@@ -17690,7 +17690,7 @@
         var info = document.createElement('div');
         info.className = 'minisim-info ms-brod';
         info.style.marginTop = '6px';
-        info.innerHTML = 'De orange strålarna visar vägen vågens energi tar. Lika många strålar startar ute till havs, ' +
+        info.innerHTML = 'Kryssa i Visa strålarna för att se vägen vågens energi tar. Lika många strålar startar ute till havs, ' +
             'men de samlas mot udden och sprids ut inne i bukterna. Den vita bränningen längs stranden är lika kraftig som strålarna är täta.';
         card.appendChild(info);
         node.appendChild(card);

@@ -30,8 +30,8 @@ steg. Tabellen visar skillnaden för $y = 2x$, $y = 10x$ och $y = 2^x$.
 Den linjära funktionen $y = 10x$ ligger länge långt före, men vid
 $x = 6$ har $y = 2^x$ gått om. En exponentiell ökning går långsamt i
 början men blir allt snabbare, och förr eller senare går den om varje
-linjär ökning, hur brant linjen än är. En exponentiell minskning blir i
-stället allt långsammare. Är startvärdet positivt närmar sig värdet noll
+linjär ökning, hur brant linjen än är. En exponentiell minskning går i stället fort i början,
+för att bli allt långsammare. Är startvärdet positivt närmar sig värdet noll
 utan att någonsin nå dit.
 
 Exponentialfunktioner dyker upp så fort något förändras med **samma

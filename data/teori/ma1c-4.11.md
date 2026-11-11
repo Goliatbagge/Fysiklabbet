@@ -47,7 +47,7 @@ I vardagen säger man ofta att något ”växer exponentiellt” när det bara
 växer snabbt. I matematiken betyder ordet något precist: värdet
 förändras med samma faktor i varje steg.
 
-::: kuriosa "Riskornen på schackbrädet"
+::: förklaring "Riskornen på schackbrädet"
 Enligt en gammal berättelse fick schackspelets uppfinnare önska sig en
 belöning av kungen. Han bad om ett riskorn på brädets första ruta, två
 korn på den andra, fyra på den tredje och så vidare, med dubbelt så

@@ -13,8 +13,9 @@ En funktion där den oberoende variabeln, till exempel $x$, står i
 **exponenten** kallas **exponentialfunktion**.
 
 Det som kännetecknar en exponentialfunktion är att värdet
-**multipliceras med samma tal** varje gång $x$ ökar med 1. Talet man multiplicerar med är
-förändringsfaktorn, som du känner igen från ränteberäkningarna. En linjär
+**multipliceras med samma tal** varje gång $x$ ökar lika mycket. Ökar
+$x$ med 1 är talet man multiplicerar med förändringsfaktorn, som du känner
+igen från ränteberäkningarna. En linjär
 funktion fungerar på ett annat sätt: där **adderas** samma tal i varje
 steg. Tabellen visar skillnaden för $y = 2x$, $y = 10x$ och $y = 2^x$.
 

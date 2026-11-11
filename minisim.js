@@ -17312,8 +17312,8 @@
     // ─────────────────────────────────────────────────────────────────
     function buildVagbotten(node, cfg) {
         var W = 900, H = 340, YS = 92;
-        var HD = 175, HG = 22, X1 = 300, X2 = 690;
-        var LAM0 = 260, A0 = 12, TPER = 2.6;
+        var HD = 175, HG = 16, X1 = 300, X2 = 690;
+        var LAM0 = 260, A0 = 9, TPER = 2.6;
         var BLA = '#1f4f8a', ORB = 'rgba(37,99,201,0.38)', ORANGE = '#d9661f';
         var K0 = 2 * Math.PI / LAM0, OM2 = K0 * Math.tanh(K0 * HD), OM = Math.sqrt(OM2);
         function djup(x) { return x < X1 ? HD : x > X2 ? HG : HD + (HG - HD) * (0.5 - 0.5 * Math.cos(Math.PI * (x - X1) / (X2 - X1))); }
@@ -17338,7 +17338,21 @@
             for (var jr = 0; jr < nR; jr++) parts.push({ x: px, z: 6 + jr * (hb - 10) / nR, botten: false });
             parts.push({ x: px, z: hb - 4, botten: true });
         }
-        var tid = 0, visaBanor = true, slow = 1;
+        var tid = 0, visaBanor = true, visaFart = true, slow = 1;
+        var GRN = '#1d7a46', SKALA = 54 / (OM / kx[0]);     // fartpilens längd på djupt vatten (px)
+        // x där fasen θ(x) har ett givet värde (θ växer med x)
+        function xVidFas(f) {
+            var lo = 0, hi = W;
+            if (f < th[0] || f > th[W]) return -1;
+            while (hi - lo > 1) { var mid = (lo + hi) >> 1; if (th[mid] < f) lo = mid; else hi = mid; }
+            return lo + (f - th[lo]) / (th[hi] - th[lo]);
+        }
+        function fartpil(x0, y, L) {
+            var hd = 10, bx = x0 + L - hd;
+            ctx.strokeStyle = GRN; ctx.fillStyle = GRN; ctx.lineWidth = 3.2; ctx.lineCap = 'butt';
+            ctx.beginPath(); ctx.moveTo(x0, y); ctx.lineTo(bx, y); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(x0 + L, y); ctx.lineTo(bx, y - 5.5); ctx.lineTo(bx, y + 5.5); ctx.closePath(); ctx.fill();
+        }
 
         var k0 = vbKort(node, cfg, 'Genomskärning av havet från djupt vatten till vänster in över en sluttning till grunt vatten ' +
             'till höger. Vattnet går runt i banor när vågen passerar. På djupt vatten är banorna cirklar som blir mindre nedåt och ' +
@@ -17417,6 +17431,20 @@
                 ctx.fillStyle = BLA;
                 ctx.beginPath(); ctx.arc(cx - A * Math.sin(tht), cy - B * Math.cos(tht), 3.6, 0, 2 * Math.PI); ctx.fill();
             }
+            // en fartpil vid varje vågtopp, lika lång som toppens fart
+            if (visaFart) {
+                var n0 = Math.ceil((th[0] - wt) / (2 * Math.PI)), n1 = Math.floor((th[W] - wt) / (2 * Math.PI));
+                ctx.save();
+                for (var nn = n0; nn <= n1; nn++) {
+                    var xc = xVidFas(wt + 2 * Math.PI * nn);
+                    if (xc < 4) continue;
+                    var ic = idx(xc), L = SKALA * OM / kx[ic];
+                    if (xc + L > W - 4) continue;
+                    var ytop = YS - ax[ic] - 14;
+                    fartpil(xc, ytop, L);
+                }
+                ctx.restore();
+            }
             vbBricka(ctx, 'djupt vatten', 16, 30, 'start');
             vbBricka(ctx, 'grunt vatten', W - 16, 30, 'end');
             vbBricka(ctx, 'här når rörelsen inte ned till botten', 150, YS + HD - 18, 'middle');
@@ -17427,19 +17455,22 @@
         var controls = document.createElement('div');
         controls.className = 'minisim-controls';
         var banCk = vgCheck('Visa vattnets banor', true);
+        var fartCk = vgCheck('Visa vågtopparnas fart', true);
         var slowCk = vgCheck('Ultrarapid', false);
         var loop = vgLoop(card, function (dt) { tid += dt * slow * (2 * Math.PI / TPER) / OM; rita(); });
         var sk = vbSpelknapp(loop);
-        controls.appendChild(sk.btn); controls.appendChild(banCk.label); controls.appendChild(slowCk.label);
+        controls.appendChild(sk.btn); controls.appendChild(banCk.label); controls.appendChild(fartCk.label); controls.appendChild(slowCk.label);
         card.appendChild(controls);
         var info = document.createElement('div');
         info.className = 'minisim-info ms-brod';
         info.style.marginTop = '6px';
         info.innerHTML = 'Varje prick är en liten del av vattnet. Vågen flyttar sig åt höger, men vattnet går bara runt på sitt ställe. ' +
-            'Till höger trycks banorna ihop av botten, och vågtopparna kommer tätare: vågen går långsammare.';
+            'Till höger trycks banorna ihop av botten. De gröna pilarna följer vågtopparna och är lika långa som deras fart: ' +
+            'när en topp kommer in på det grunda vattnet blir pilen kortare, och topparna kommer tätare.';
         card.appendChild(info);
         node.appendChild(card);
         banCk.cb.addEventListener('change', function () { visaBanor = banCk.cb.checked; rita(); });
+        fartCk.cb.addEventListener('change', function () { visaFart = fartCk.cb.checked; rita(); });
         slowCk.cb.addEventListener('change', function () { slow = slowCk.cb.checked ? 0.3 : 1; });
         card._set = function (t) { tid = t; rita(); };
         rita();

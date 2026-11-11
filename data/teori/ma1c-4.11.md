@@ -44,10 +44,6 @@ procent** per tidsenhet, till exempel
 - ett läkemedel som bryts ned i kroppen,
 - radioaktiva ämnen som sönderfaller.
 
-I vardagen säger man ofta att något ”växer exponentiellt” när det bara
-växer snabbt. I matematiken betyder ordet något precist: värdet
-förändras med samma faktor i varje steg.
-
 ::: förklaring "Riskornen på schackbrädet"
 Enligt en gammal berättelse fick schackspelets uppfinnare önska sig en
 belöning av kungen. Han bad om ett riskorn på brädets första ruta, två

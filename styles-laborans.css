@@ -2538,6 +2538,24 @@ details.lab-forklaring > .formel-harledning-body { padding-top: 12px; }
     text-align: center;
     color: var(--lab-ink);
 }
+/* ::: rutnat lägger figurerna inuti i ett rutnät med två kolumner
+   (2 × 2 för fyra figurer) i stället för att stapla dem på höjden.
+   Ingen egen ram. På smal skärm blir det en kolumn igen. */
+.lab-block-rutnat {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 18px;
+    align-items: end;
+    border: none;
+    background: transparent;
+    padding: 0;
+}
+.lab-block-rutnat > .lab-block {
+    margin: 0;
+}
+@media (max-width: 560px) {
+    .lab-block-rutnat { grid-template-columns: minmax(0, 1fr); }
+}
 .lab-block-figur > svg,
 .lab-block-figur p > svg {
     max-width: 100%;

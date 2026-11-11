@@ -19,6 +19,10 @@ exponenten är ett fast tal kallas en **potensfunktion**. $f(x) = 5x^3$ och
 $g(x) = x^{-2}$ är exempel på potensfunktioner. Skilj dem från
 exponentialfunktionerna, där den oberoende variabeln står i exponenten.
 
+En potensfunktion består av **en enda term**. En funktion med flera
+potenstermer, till exempel $h(x) = x^3 + 2x^2$, är alltså ingen
+potensfunktion, även om varje term för sig är en potens.
+
 ::: formel "Potensfunktion, allmän form"
 $$
 f(x) = Cx^a
@@ -124,7 +128,7 @@ går det att *se* hur många lösningar en sådan ekvation har. Lösningarna är
 de $x$ där grafen till $y = x^n$ skär den vågräta linjen $y = b$.
 
 ::: figur
-<svg viewBox="-26 -20 218 195" width="296" height="264" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Grafen till y lika med x i kvadrat med två vågräta linjer. Linjen y lika med 2 skär grafen i två punkter. Linjen y lika med 0, som sammanfaller med x-axeln, nuddar grafen i en enda punkt, origo. Linjen y lika med minus 1 ligger under grafen och skär den inte."><line x1="13.6" y1="0.0" x2="13.6" y2="166.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="47.6" y1="0.0" x2="47.6" y2="166.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="81.6" y1="0.0" x2="81.6" y2="166.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="115.6" y1="0.0" x2="115.6" y2="166.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="149.6" y1="0.0" x2="149.6" y2="166.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="149.6" x2="170.0" y2="149.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="81.6" x2="170.0" y2="81.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="47.6" x2="170.0" y2="47.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="13.6" x2="170.0" y2="13.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="115.6" x2="178.0" y2="115.6" stroke="#1f2530" stroke-width="1.6"/><polygon points="186.0,115.6 176.0,111.1 176.0,120.1" fill="#1f2530"/><line x1="81.6" y1="166.6" x2="81.6" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="81.6,-16.0 77.1,-6.0 86.1,-6.0" fill="#1f2530"/><text x="184.0" y="133.6" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="90.6" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="13.6" y="131.6" font-size="12" text-anchor="middle" fill="#1f2530">−2</text><text x="47.6" y="131.6" font-size="12" text-anchor="middle" fill="#1f2530">−1</text><text x="115.6" y="131.6" font-size="12" text-anchor="middle" fill="#1f2530">1</text><text x="149.6" y="131.6" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="75.6" y="85.6" font-size="12" text-anchor="end" fill="#1f2530">1</text><text x="75.6" y="17.6" font-size="12" text-anchor="end" fill="#1f2530">3</text><line x1="0.0" y1="47.6" x2="170.0" y2="47.6" stroke="#2563c9" stroke-width="1.6" stroke-dasharray="6 4"/><text x="168.0" y="41.6" font-size="12" text-anchor="end" fill="#2563c9"><tspan font-style="italic">y</tspan> = 2</text><line x1="0.0" y1="149.6" x2="170.0" y2="149.6" stroke="#2563c9" stroke-width="1.6" stroke-dasharray="6 4"/><text x="168.0" y="163.6" font-size="12" text-anchor="end" fill="#2563c9"><tspan font-style="italic">y</tspan> = −1</text><line x1="0.0" y1="115.6" x2="170.0" y2="115.6" stroke="#c2410c" stroke-width="2.4" stroke-dasharray="6 4"/><text x="168.0" y="145.6" font-size="12" text-anchor="end" fill="#c2410c"><tspan font-style="italic">y</tspan> = 0</text><path d="M18.9,0.0 L19.1,0.8 L19.5,2.4 L20.0,3.9 L20.4,5.4 L20.8,7.0 L21.3,8.5 L21.7,10.0 L22.1,11.5 L22.5,13.0 L23.0,14.4 L23.4,15.9 L23.8,17.3 L24.2,18.8 L24.7,20.2 L25.1,21.6 L25.5,23.0 L25.9,24.4 L26.3,25.8 L26.8,27.2 L27.2,28.6 L27.6,29.9 L28.0,31.3 L28.5,32.6 L28.9,33.9 L29.3,35.2 L29.8,36.5 L30.2,37.8 L30.6,39.1 L31.0,40.4 L31.5,41.6 L31.9,42.9 L32.3,44.1 L32.7,45.3 L33.2,46.6 L33.6,47.8 L34.0,49.0 L34.4,50.1 L34.8,51.3 L35.3,52.5 L35.7,53.6 L36.1,54.8 L36.5,55.9 L37.0,57.0 L37.4,58.1 L37.8,59.2 L38.3,60.3 L38.7,61.4 L39.1,62.5 L39.5,63.5 L40.0,64.6 L40.4,65.6 L40.8,66.6 L41.2,67.7 L41.7,68.7 L42.1,69.7 L42.5,70.6 L42.9,71.6 L43.3,72.6 L43.8,73.5 L44.2,74.5 L44.6,75.4 L45.0,76.3 L45.5,77.2 L45.9,78.1 L46.3,79.0 L46.8,79.9 L47.2,80.7 L47.6,81.6 L48.0,82.4 L48.5,83.3 L48.9,84.1 L49.3,84.9 L49.7,85.7 L50.2,86.5 L50.6,87.3 L51.0,88.1 L51.4,88.8 L51.8,89.6 L52.3,90.3 L52.7,91.0 L53.1,91.8 L53.5,92.5 L54.0,93.2 L54.4,93.8 L54.8,94.5 L55.3,95.2 L55.7,95.8 L56.1,96.5 L56.5,97.1 L57.0,97.7 L57.4,98.3 L57.8,98.9 L58.2,99.5 L58.7,100.1 L59.1,100.7 L59.5,101.2 L59.9,101.8 L60.3,102.3 L60.8,102.8 L61.2,103.4 L61.6,103.9 L62.0,104.4 L62.5,104.8 L62.9,105.3 L63.3,105.8 L63.8,106.2 L64.2,106.7 L64.6,107.1 L65.0,107.5 L65.5,107.9 L65.9,108.3 L66.3,108.7 L66.7,109.1 L67.2,109.5 L67.6,109.8 L68.0,110.2 L68.4,110.5 L68.8,110.8 L69.3,111.1 L69.7,111.4 L70.1,111.7 L70.6,112.0 L71.0,112.3 L71.4,112.5 L71.8,112.8 L72.3,113.0 L72.7,113.3 L73.1,113.5 L73.5,113.7 L73.9,113.9 L74.4,114.1 L74.8,114.2 L75.2,114.4 L75.7,114.6 L76.1,114.7 L76.5,114.8 L76.9,115.0 L77.3,115.1 L77.8,115.2 L78.2,115.3 L78.6,115.3 L79.1,115.4 L79.5,115.5 L79.9,115.5 L80.3,115.6 L80.8,115.6 L81.2,115.6 L81.6,115.6 L82.0,115.6 L82.4,115.6 L82.9,115.6 L83.3,115.5 L83.7,115.5 L84.2,115.4 L84.6,115.3 L85.0,115.3 L85.4,115.2 L85.8,115.1 L86.3,115.0 L86.7,114.8 L87.1,114.7 L87.6,114.6 L88.0,114.4 L88.4,114.2 L88.8,114.1 L89.3,113.9 L89.7,113.7 L90.1,113.5 L90.5,113.3 L90.9,113.0 L91.4,112.8 L91.8,112.5 L92.2,112.3 L92.7,112.0 L93.1,111.7 L93.5,111.4 L93.9,111.1 L94.3,110.8 L94.8,110.5 L95.2,110.2 L95.6,109.8 L96.1,109.5 L96.5,109.1 L96.9,108.7 L97.3,108.3 L97.8,107.9 L98.2,107.5 L98.6,107.1 L99.0,106.7 L99.4,106.2 L99.9,105.8 L100.3,105.3 L100.7,104.8 L101.2,104.4 L101.6,103.9 L102.0,103.4 L102.4,102.8 L102.8,102.3 L103.3,101.8 L103.7,101.2 L104.1,100.7 L104.6,100.1 L105.0,99.5 L105.4,98.9 L105.8,98.3 L106.3,97.7 L106.7,97.1 L107.1,96.5 L107.5,95.8 L107.9,95.2 L108.4,94.5 L108.8,93.8 L109.2,93.2 L109.7,92.5 L110.1,91.8 L110.5,91.0 L110.9,90.3 L111.3,89.6 L111.8,88.8 L112.2,88.1 L112.6,87.3 L113.1,86.5 L113.5,85.7 L113.9,84.9 L114.3,84.1 L114.8,83.3 L115.2,82.4 L115.6,81.6 L116.0,80.7 L116.4,79.9 L116.9,79.0 L117.3,78.1 L117.7,77.2 L118.2,76.3 L118.6,75.4 L119.0,74.5 L119.4,73.5 L119.8,72.6 L120.3,71.6 L120.7,70.6 L121.1,69.7 L121.6,68.7 L122.0,67.7 L122.4,66.6 L122.8,65.6 L123.3,64.6 L123.7,63.5 L124.1,62.5 L124.5,61.4 L124.9,60.3 L125.4,59.2 L125.8,58.1 L126.2,57.0 L126.7,55.9 L127.1,54.8 L127.5,53.6 L127.9,52.5 L128.3,51.3 L128.8,50.1 L129.2,49.0 L129.6,47.8 L130.1,46.6 L130.5,45.3 L130.9,44.1 L131.3,42.9 L131.8,41.6 L132.2,40.4 L132.6,39.1 L133.0,37.8 L133.4,36.5 L133.9,35.2 L134.3,33.9 L134.7,32.6 L135.2,31.3 L135.6,29.9 L136.0,28.6 L136.4,27.2 L136.9,25.8 L137.3,24.4 L137.7,23.0 L138.1,21.6 L138.6,20.2 L139.0,18.8 L139.4,17.3 L139.8,15.9 L140.3,14.4 L140.7,13.0 L141.1,11.5 L141.5,10.0 L141.9,8.5 L142.4,7.0 L142.8,5.4 L143.2,3.9 L143.6,2.4 L144.1,0.8 L144.3,0.0" fill="none" stroke="#4a7d3a" stroke-width="2"/><circle cx="33.5" cy="47.6" r="3.4" fill="#2563c9"/><circle cx="129.7" cy="47.6" r="3.4" fill="#2563c9"/><circle cx="81.6" cy="115.6" r="3.4" fill="#c2410c"/></svg>
+<svg viewBox="-26 -20 218 195" width="296" height="264" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Grafen till y lika med x i kvadrat med två vågräta linjer. Linjen y lika med 2 skär grafen i två punkter. Linjen y lika med 0, som sammanfaller med x-axeln, nuddar grafen i en enda punkt, origo. Linjen y lika med minus 1 ligger under grafen och skär den inte."><line x1="13.6" y1="0.0" x2="13.6" y2="166.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="47.6" y1="0.0" x2="47.6" y2="166.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="81.6" y1="0.0" x2="81.6" y2="166.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="115.6" y1="0.0" x2="115.6" y2="166.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="149.6" y1="0.0" x2="149.6" y2="166.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="149.6" x2="170.0" y2="149.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="81.6" x2="170.0" y2="81.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="47.6" x2="170.0" y2="47.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="13.6" x2="170.0" y2="13.6" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="115.6" x2="178.0" y2="115.6" stroke="#1f2530" stroke-width="1.6"/><polygon points="186.0,115.6 176.0,111.1 176.0,120.1" fill="#1f2530"/><line x1="81.6" y1="166.6" x2="81.6" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="81.6,-16.0 77.1,-6.0 86.1,-6.0" fill="#1f2530"/><text x="184.0" y="133.6" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="90.6" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="13.6" y="131.6" font-size="12" text-anchor="middle" fill="#1f2530">−2</text><text x="47.6" y="131.6" font-size="12" text-anchor="middle" fill="#1f2530">−1</text><text x="115.6" y="131.6" font-size="12" text-anchor="middle" fill="#1f2530">1</text><text x="149.6" y="131.6" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="75.6" y="85.6" font-size="12" text-anchor="end" fill="#1f2530">1</text><text x="75.6" y="17.6" font-size="12" text-anchor="end" fill="#1f2530">3</text><line x1="0.0" y1="47.6" x2="170.0" y2="47.6" stroke="#2563c9" stroke-width="1.6" stroke-dasharray="6 4"/><text x="168.0" y="41.6" font-size="12" text-anchor="end" fill="#2563c9"><tspan font-style="italic">y</tspan> = 2</text><line x1="0.0" y1="149.6" x2="170.0" y2="149.6" stroke="#2563c9" stroke-width="1.6" stroke-dasharray="6 4"/><text x="168.0" y="163.6" font-size="12" text-anchor="end" fill="#2563c9"><tspan font-style="italic">y</tspan> = −1</text><line x1="0.0" y1="115.6" x2="170.0" y2="115.6" stroke="#c2410c" stroke-width="2.4" stroke-dasharray="6 4"/><text x="2.0" y="109.6" font-size="12" text-anchor="start" fill="#c2410c"><tspan font-style="italic">y</tspan> = 0</text><path d="M18.9,0.0 L19.1,0.8 L19.5,2.4 L20.0,3.9 L20.4,5.4 L20.8,7.0 L21.3,8.5 L21.7,10.0 L22.1,11.5 L22.5,13.0 L23.0,14.4 L23.4,15.9 L23.8,17.3 L24.2,18.8 L24.7,20.2 L25.1,21.6 L25.5,23.0 L25.9,24.4 L26.3,25.8 L26.8,27.2 L27.2,28.6 L27.6,29.9 L28.0,31.3 L28.5,32.6 L28.9,33.9 L29.3,35.2 L29.8,36.5 L30.2,37.8 L30.6,39.1 L31.0,40.4 L31.5,41.6 L31.9,42.9 L32.3,44.1 L32.7,45.3 L33.2,46.6 L33.6,47.8 L34.0,49.0 L34.4,50.1 L34.8,51.3 L35.3,52.5 L35.7,53.6 L36.1,54.8 L36.5,55.9 L37.0,57.0 L37.4,58.1 L37.8,59.2 L38.3,60.3 L38.7,61.4 L39.1,62.5 L39.5,63.5 L40.0,64.6 L40.4,65.6 L40.8,66.6 L41.2,67.7 L41.7,68.7 L42.1,69.7 L42.5,70.6 L42.9,71.6 L43.3,72.6 L43.8,73.5 L44.2,74.5 L44.6,75.4 L45.0,76.3 L45.5,77.2 L45.9,78.1 L46.3,79.0 L46.8,79.9 L47.2,80.7 L47.6,81.6 L48.0,82.4 L48.5,83.3 L48.9,84.1 L49.3,84.9 L49.7,85.7 L50.2,86.5 L50.6,87.3 L51.0,88.1 L51.4,88.8 L51.8,89.6 L52.3,90.3 L52.7,91.0 L53.1,91.8 L53.5,92.5 L54.0,93.2 L54.4,93.8 L54.8,94.5 L55.3,95.2 L55.7,95.8 L56.1,96.5 L56.5,97.1 L57.0,97.7 L57.4,98.3 L57.8,98.9 L58.2,99.5 L58.7,100.1 L59.1,100.7 L59.5,101.2 L59.9,101.8 L60.3,102.3 L60.8,102.8 L61.2,103.4 L61.6,103.9 L62.0,104.4 L62.5,104.8 L62.9,105.3 L63.3,105.8 L63.8,106.2 L64.2,106.7 L64.6,107.1 L65.0,107.5 L65.5,107.9 L65.9,108.3 L66.3,108.7 L66.7,109.1 L67.2,109.5 L67.6,109.8 L68.0,110.2 L68.4,110.5 L68.8,110.8 L69.3,111.1 L69.7,111.4 L70.1,111.7 L70.6,112.0 L71.0,112.3 L71.4,112.5 L71.8,112.8 L72.3,113.0 L72.7,113.3 L73.1,113.5 L73.5,113.7 L73.9,113.9 L74.4,114.1 L74.8,114.2 L75.2,114.4 L75.7,114.6 L76.1,114.7 L76.5,114.8 L76.9,115.0 L77.3,115.1 L77.8,115.2 L78.2,115.3 L78.6,115.3 L79.1,115.4 L79.5,115.5 L79.9,115.5 L80.3,115.6 L80.8,115.6 L81.2,115.6 L81.6,115.6 L82.0,115.6 L82.4,115.6 L82.9,115.6 L83.3,115.5 L83.7,115.5 L84.2,115.4 L84.6,115.3 L85.0,115.3 L85.4,115.2 L85.8,115.1 L86.3,115.0 L86.7,114.8 L87.1,114.7 L87.6,114.6 L88.0,114.4 L88.4,114.2 L88.8,114.1 L89.3,113.9 L89.7,113.7 L90.1,113.5 L90.5,113.3 L90.9,113.0 L91.4,112.8 L91.8,112.5 L92.2,112.3 L92.7,112.0 L93.1,111.7 L93.5,111.4 L93.9,111.1 L94.3,110.8 L94.8,110.5 L95.2,110.2 L95.6,109.8 L96.1,109.5 L96.5,109.1 L96.9,108.7 L97.3,108.3 L97.8,107.9 L98.2,107.5 L98.6,107.1 L99.0,106.7 L99.4,106.2 L99.9,105.8 L100.3,105.3 L100.7,104.8 L101.2,104.4 L101.6,103.9 L102.0,103.4 L102.4,102.8 L102.8,102.3 L103.3,101.8 L103.7,101.2 L104.1,100.7 L104.6,100.1 L105.0,99.5 L105.4,98.9 L105.8,98.3 L106.3,97.7 L106.7,97.1 L107.1,96.5 L107.5,95.8 L107.9,95.2 L108.4,94.5 L108.8,93.8 L109.2,93.2 L109.7,92.5 L110.1,91.8 L110.5,91.0 L110.9,90.3 L111.3,89.6 L111.8,88.8 L112.2,88.1 L112.6,87.3 L113.1,86.5 L113.5,85.7 L113.9,84.9 L114.3,84.1 L114.8,83.3 L115.2,82.4 L115.6,81.6 L116.0,80.7 L116.4,79.9 L116.9,79.0 L117.3,78.1 L117.7,77.2 L118.2,76.3 L118.6,75.4 L119.0,74.5 L119.4,73.5 L119.8,72.6 L120.3,71.6 L120.7,70.6 L121.1,69.7 L121.6,68.7 L122.0,67.7 L122.4,66.6 L122.8,65.6 L123.3,64.6 L123.7,63.5 L124.1,62.5 L124.5,61.4 L124.9,60.3 L125.4,59.2 L125.8,58.1 L126.2,57.0 L126.7,55.9 L127.1,54.8 L127.5,53.6 L127.9,52.5 L128.3,51.3 L128.8,50.1 L129.2,49.0 L129.6,47.8 L130.1,46.6 L130.5,45.3 L130.9,44.1 L131.3,42.9 L131.8,41.6 L132.2,40.4 L132.6,39.1 L133.0,37.8 L133.4,36.5 L133.9,35.2 L134.3,33.9 L134.7,32.6 L135.2,31.3 L135.6,29.9 L136.0,28.6 L136.4,27.2 L136.9,25.8 L137.3,24.4 L137.7,23.0 L138.1,21.6 L138.6,20.2 L139.0,18.8 L139.4,17.3 L139.8,15.9 L140.3,14.4 L140.7,13.0 L141.1,11.5 L141.5,10.0 L141.9,8.5 L142.4,7.0 L142.8,5.4 L143.2,3.9 L143.6,2.4 L144.1,0.8 L144.3,0.0" fill="none" stroke="#4a7d3a" stroke-width="2"/><circle cx="33.5" cy="47.6" r="3.4" fill="#2563c9"/><circle cx="129.7" cy="47.6" r="3.4" fill="#2563c9"/><circle cx="81.6" cy="115.6" r="3.4" fill="#c2410c"/></svg>
 
 Jämn exponent, här $y = x^2$. Linjen $y = 2$ skär grafen två gånger, linjen $y = 0$ (som sammanfaller med *x*-axeln) en gång, i origo, och linjen $y = -1$ inte alls.
 :::
@@ -185,59 +189,46 @@ till vänster om *y*-axeln och en gång till höger.
 :::
 :::
 
-::: exempel "Exempel 2 — Potensekvationer med udda och jämn exponent (Mellan)"
-**Lös ekvationerna.<br>a)&nbsp;$x^3 = -8$&emsp;&emsp;b)&nbsp;$x^4 = -16$&emsp;&emsp;c)&nbsp;$3x^5 = 96$**
+::: exempel "Exempel 2 — Läs av en potensfunktion ur grafen (Grund)"
+**Figuren visar grafen till en potensfunktion $f$. Använd grafen för att<br>a) bestämma $f(2)$&emsp;&emsp;b) lösa ekvationen $f(x) = 8$.**
+
+::: figur
+<svg viewBox="-4 -20 244 168" width="331" height="228" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Grafen till potensfunktionen f: en parabel med botten i origo, symmetrisk kring y-axeln. Den går bland annat genom punkterna minus 4 komma 8, 2 komma 2 och 4 komma 8. En ruta är 1 i x-led och 2 i y-led."><line x1="14.4" y1="0.0" x2="14.4" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="38.4" y1="0.0" x2="38.4" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="62.4" y1="0.0" x2="62.4" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="86.4" y1="0.0" x2="86.4" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="134.4" y1="0.0" x2="134.4" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="158.4" y1="0.0" x2="158.4" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="182.4" y1="0.0" x2="182.4" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="206.4" y1="0.0" x2="206.4" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="144" x2="220.8" y2="144" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="96" x2="220.8" y2="96" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="72" x2="220.8" y2="72" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="48" x2="220.8" y2="48" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="24" x2="220.8" y2="24" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="0" x2="220.8" y2="0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="120" x2="228.0" y2="120" stroke="#1f2530" stroke-width="1.6"/><polygon points="236.0,120 226.0,115.5 226.0,124.5" fill="#1f2530"/><line x1="110.4" y1="144.0" x2="110.4" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="110.4,-16.0 105.9,-6.0 114.9,-6.0" fill="#1f2530"/><text x="234.0" y="138.0" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="119.4" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="14.4" y="136.0" font-size="12" text-anchor="middle" fill="#1f2530">−4</text><text x="62.4" y="136.0" font-size="12" text-anchor="middle" fill="#1f2530">−2</text><text x="158.4" y="136.0" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="206.4" y="136.0" font-size="12" text-anchor="middle" fill="#1f2530">4</text><text x="104.4" y="100.0" font-size="12" text-anchor="end" fill="#1f2530">2</text><text x="104.4" y="76.0" font-size="12" text-anchor="end" fill="#1f2530">4</text><text x="104.4" y="52.0" font-size="12" text-anchor="end" fill="#1f2530">6</text><text x="104.4" y="28.0" font-size="12" text-anchor="end" fill="#1f2530">8</text><path d="M3.1,0.0 L4.9,4.0 L6.6,7.9 L8.4,11.7 L10.2,15.5 L12.0,19.2 L13.8,22.8 L15.6,26.4 L17.4,29.9 L19.2,33.3 L21.0,36.7 L22.7,40.0 L24.5,43.2 L26.3,46.4 L28.1,49.5 L29.9,52.5 L31.7,55.5 L33.5,58.4 L35.3,61.2 L37.1,64.0 L38.8,66.7 L40.6,69.3 L42.4,71.9 L44.2,74.4 L46.0,76.8 L47.8,79.2 L49.6,81.5 L51.4,83.7 L53.2,85.9 L54.9,88.0 L56.7,90.0 L58.5,92.0 L60.3,93.9 L62.1,95.7 L63.9,97.5 L65.7,99.2 L67.5,100.8 L69.3,102.4 L71.0,103.9 L72.8,105.3 L74.6,106.7 L76.4,108.0 L78.2,109.2 L80.0,110.4 L81.8,111.5 L83.6,112.5 L85.4,113.5 L87.1,114.4 L88.9,115.2 L90.7,116.0 L92.5,116.7 L94.3,117.3 L96.1,117.9 L97.9,118.4 L99.7,118.8 L101.5,119.2 L103.2,119.5 L105.0,119.7 L106.8,119.9 L108.6,120.0 L110.4,120.0 L112.2,120.0 L114.0,119.9 L115.8,119.7 L117.6,119.5 L119.3,119.2 L121.1,118.8 L122.9,118.4 L124.7,117.9 L126.5,117.3 L128.3,116.7 L130.1,116.0 L131.9,115.2 L133.7,114.4 L135.4,113.5 L137.2,112.5 L139.0,111.5 L140.8,110.4 L142.6,109.2 L144.4,108.0 L146.2,106.7 L148.0,105.3 L149.8,103.9 L151.5,102.4 L153.3,100.8 L155.1,99.2 L156.9,97.5 L158.7,95.7 L160.5,93.9 L162.3,92.0 L164.1,90.0 L165.9,88.0 L167.6,85.9 L169.4,83.7 L171.2,81.5 L173.0,79.2 L174.8,76.8 L176.6,74.4 L178.4,71.9 L180.2,69.3 L182.0,66.7 L183.7,64.0 L185.5,61.2 L187.3,58.4 L189.1,55.5 L190.9,52.5 L192.7,49.5 L194.5,46.4 L196.3,43.2 L198.1,40.0 L199.8,36.7 L201.6,33.3 L203.4,29.9 L205.2,26.4 L207.0,22.8 L208.8,19.2 L210.6,15.5 L212.4,11.7 L214.2,7.9 L215.9,4.0 L217.7,0.0" fill="none" stroke="#4a7d3a" stroke-width="2"/><text x="222.0" y="10.0" font-size="14" text-anchor="start" fill="#4a7d3a"><tspan font-style="italic">f</tspan></text></svg>
+
+En ruta är 1 i *x*-led och 2 i *y*-led.
+:::
 
 ::: handskrift
-typ: potensekvuddajamn
+typ: potensavlas
 :::
 
 ::: textlosning
-**a)** Exponenten 3 är udda. Då finns exakt en lösning, och den är negativ
-eftersom högerledet är negativt. Vi drar tredjeroten ur båda led:
+**a)** $f(2)$ är funktionsvärdet (*y*-värdet) då $x = 2$. Vi går från
+$x = 2$ på *x*-axeln lodrätt upp till grafen och läser av *y*-koordinaten
+där.
 
-$$
-x = \sqrt[3]{-8}
-$$
+::: figur
+<svg viewBox="-4 -20 244 168" width="331" height="228" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Samma graf med streckade linjer från x lika med 2 upp till punkten 2 komma 2 på grafen och vidare till y-axeln: f av 2 är 2."><line x1="14.4" y1="0.0" x2="14.4" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="38.4" y1="0.0" x2="38.4" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="62.4" y1="0.0" x2="62.4" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="86.4" y1="0.0" x2="86.4" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="134.4" y1="0.0" x2="134.4" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="158.4" y1="0.0" x2="158.4" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="182.4" y1="0.0" x2="182.4" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="206.4" y1="0.0" x2="206.4" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="144" x2="220.8" y2="144" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="96" x2="220.8" y2="96" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="72" x2="220.8" y2="72" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="48" x2="220.8" y2="48" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="24" x2="220.8" y2="24" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="0" x2="220.8" y2="0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="120" x2="228.0" y2="120" stroke="#1f2530" stroke-width="1.6"/><polygon points="236.0,120 226.0,115.5 226.0,124.5" fill="#1f2530"/><line x1="110.4" y1="144.0" x2="110.4" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="110.4,-16.0 105.9,-6.0 114.9,-6.0" fill="#1f2530"/><text x="234.0" y="138.0" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="119.4" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="14.4" y="136.0" font-size="12" text-anchor="middle" fill="#1f2530">−4</text><text x="62.4" y="136.0" font-size="12" text-anchor="middle" fill="#1f2530">−2</text><text x="158.4" y="136.0" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="206.4" y="136.0" font-size="12" text-anchor="middle" fill="#1f2530">4</text><text x="104.4" y="100.0" font-size="12" text-anchor="end" fill="#1f2530">2</text><text x="104.4" y="76.0" font-size="12" text-anchor="end" fill="#1f2530">4</text><text x="104.4" y="52.0" font-size="12" text-anchor="end" fill="#1f2530">6</text><text x="104.4" y="28.0" font-size="12" text-anchor="end" fill="#1f2530">8</text><line x1="158.4" y1="120" x2="158.4" y2="96" stroke="#2563c9" stroke-width="1.6" stroke-dasharray="5 4"/><line x1="110.4" y1="96" x2="158.4" y2="96" stroke="#2563c9" stroke-width="1.6" stroke-dasharray="5 4"/><path d="M3.1,0.0 L4.9,4.0 L6.6,7.9 L8.4,11.7 L10.2,15.5 L12.0,19.2 L13.8,22.8 L15.6,26.4 L17.4,29.9 L19.2,33.3 L21.0,36.7 L22.7,40.0 L24.5,43.2 L26.3,46.4 L28.1,49.5 L29.9,52.5 L31.7,55.5 L33.5,58.4 L35.3,61.2 L37.1,64.0 L38.8,66.7 L40.6,69.3 L42.4,71.9 L44.2,74.4 L46.0,76.8 L47.8,79.2 L49.6,81.5 L51.4,83.7 L53.2,85.9 L54.9,88.0 L56.7,90.0 L58.5,92.0 L60.3,93.9 L62.1,95.7 L63.9,97.5 L65.7,99.2 L67.5,100.8 L69.3,102.4 L71.0,103.9 L72.8,105.3 L74.6,106.7 L76.4,108.0 L78.2,109.2 L80.0,110.4 L81.8,111.5 L83.6,112.5 L85.4,113.5 L87.1,114.4 L88.9,115.2 L90.7,116.0 L92.5,116.7 L94.3,117.3 L96.1,117.9 L97.9,118.4 L99.7,118.8 L101.5,119.2 L103.2,119.5 L105.0,119.7 L106.8,119.9 L108.6,120.0 L110.4,120.0 L112.2,120.0 L114.0,119.9 L115.8,119.7 L117.6,119.5 L119.3,119.2 L121.1,118.8 L122.9,118.4 L124.7,117.9 L126.5,117.3 L128.3,116.7 L130.1,116.0 L131.9,115.2 L133.7,114.4 L135.4,113.5 L137.2,112.5 L139.0,111.5 L140.8,110.4 L142.6,109.2 L144.4,108.0 L146.2,106.7 L148.0,105.3 L149.8,103.9 L151.5,102.4 L153.3,100.8 L155.1,99.2 L156.9,97.5 L158.7,95.7 L160.5,93.9 L162.3,92.0 L164.1,90.0 L165.9,88.0 L167.6,85.9 L169.4,83.7 L171.2,81.5 L173.0,79.2 L174.8,76.8 L176.6,74.4 L178.4,71.9 L180.2,69.3 L182.0,66.7 L183.7,64.0 L185.5,61.2 L187.3,58.4 L189.1,55.5 L190.9,52.5 L192.7,49.5 L194.5,46.4 L196.3,43.2 L198.1,40.0 L199.8,36.7 L201.6,33.3 L203.4,29.9 L205.2,26.4 L207.0,22.8 L208.8,19.2 L210.6,15.5 L212.4,11.7 L214.2,7.9 L215.9,4.0 L217.7,0.0" fill="none" stroke="#4a7d3a" stroke-width="2"/><text x="222.0" y="10.0" font-size="14" text-anchor="start" fill="#4a7d3a"><tspan font-style="italic">f</tspan></text><circle cx="158.4" cy="96" r="3.4" fill="#2563c9"/></svg>
+:::
 
-$$
-x = -2
-$$
+Grafen går genom punkten $(2, 2)$, så $f(2) = 2$.
 
-Kontroll: $(-2)^3 = (-2) \cdot (-2) \cdot (-2) = -8$. Stämmer.
+**Svar:** 2
 
-**Svar:** $x = -2$
+**b)** Nu är det tvärtom: funktionsvärdet är känt och $x$ söks. $f(x) = 8$
+betyder att *y*-värdet är 8. Vi drar den vågräta linjen $y = 8$ och letar
+upp var den skär grafen.
 
-**b)** Exponenten 4 är jämn. Ett tal upphöjt till 4 blir aldrig negativt,
-så $x^4$ kan inte bli $-16$. Grafen till $y = x^4$ ligger aldrig under
-*x*-axeln och skär därför inte linjen $y = -16$.
+::: figur
+<svg viewBox="-4 -20 244 168" width="331" height="228" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Samma graf med den vågräta linjen y lika med 8. Den skär grafen i två punkter, minus 4 komma 8 och 4 komma 8, och streckade linjer går därifrån ned till x lika med minus 4 och x lika med 4."><line x1="14.4" y1="0.0" x2="14.4" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="38.4" y1="0.0" x2="38.4" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="62.4" y1="0.0" x2="62.4" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="86.4" y1="0.0" x2="86.4" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="134.4" y1="0.0" x2="134.4" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="158.4" y1="0.0" x2="158.4" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="182.4" y1="0.0" x2="182.4" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="206.4" y1="0.0" x2="206.4" y2="144.0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="144" x2="220.8" y2="144" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="96" x2="220.8" y2="96" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="72" x2="220.8" y2="72" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="48" x2="220.8" y2="48" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="24" x2="220.8" y2="24" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="0" x2="220.8" y2="0" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="0.0" y1="120" x2="228.0" y2="120" stroke="#1f2530" stroke-width="1.6"/><polygon points="236.0,120 226.0,115.5 226.0,124.5" fill="#1f2530"/><line x1="110.4" y1="144.0" x2="110.4" y2="-8.0" stroke="#1f2530" stroke-width="1.6"/><polygon points="110.4,-16.0 105.9,-6.0 114.9,-6.0" fill="#1f2530"/><text x="234.0" y="138.0" font-size="14" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="119.4" y="-6.0" font-size="14" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="14.4" y="136.0" font-size="12" text-anchor="middle" fill="#1f2530">−4</text><text x="62.4" y="136.0" font-size="12" text-anchor="middle" fill="#1f2530">−2</text><text x="158.4" y="136.0" font-size="12" text-anchor="middle" fill="#1f2530">2</text><text x="206.4" y="136.0" font-size="12" text-anchor="middle" fill="#1f2530">4</text><text x="104.4" y="100.0" font-size="12" text-anchor="end" fill="#1f2530">2</text><text x="104.4" y="76.0" font-size="12" text-anchor="end" fill="#1f2530">4</text><text x="104.4" y="52.0" font-size="12" text-anchor="end" fill="#1f2530">6</text><text x="104.4" y="28.0" font-size="12" text-anchor="end" fill="#1f2530">8</text><line x1="0" y1="24" x2="220.8" y2="24" stroke="#2563c9" stroke-width="1.6" stroke-dasharray="5 4"/><text x="116.4" y="18.0" font-size="12" text-anchor="start" fill="#2563c9"><tspan font-style="italic">y</tspan> = 8</text><line x1="14.4" y1="24" x2="14.4" y2="120" stroke="#2563c9" stroke-width="1.6" stroke-dasharray="5 4"/><line x1="206.4" y1="24" x2="206.4" y2="120" stroke="#2563c9" stroke-width="1.6" stroke-dasharray="5 4"/><path d="M3.1,0.0 L4.9,4.0 L6.6,7.9 L8.4,11.7 L10.2,15.5 L12.0,19.2 L13.8,22.8 L15.6,26.4 L17.4,29.9 L19.2,33.3 L21.0,36.7 L22.7,40.0 L24.5,43.2 L26.3,46.4 L28.1,49.5 L29.9,52.5 L31.7,55.5 L33.5,58.4 L35.3,61.2 L37.1,64.0 L38.8,66.7 L40.6,69.3 L42.4,71.9 L44.2,74.4 L46.0,76.8 L47.8,79.2 L49.6,81.5 L51.4,83.7 L53.2,85.9 L54.9,88.0 L56.7,90.0 L58.5,92.0 L60.3,93.9 L62.1,95.7 L63.9,97.5 L65.7,99.2 L67.5,100.8 L69.3,102.4 L71.0,103.9 L72.8,105.3 L74.6,106.7 L76.4,108.0 L78.2,109.2 L80.0,110.4 L81.8,111.5 L83.6,112.5 L85.4,113.5 L87.1,114.4 L88.9,115.2 L90.7,116.0 L92.5,116.7 L94.3,117.3 L96.1,117.9 L97.9,118.4 L99.7,118.8 L101.5,119.2 L103.2,119.5 L105.0,119.7 L106.8,119.9 L108.6,120.0 L110.4,120.0 L112.2,120.0 L114.0,119.9 L115.8,119.7 L117.6,119.5 L119.3,119.2 L121.1,118.8 L122.9,118.4 L124.7,117.9 L126.5,117.3 L128.3,116.7 L130.1,116.0 L131.9,115.2 L133.7,114.4 L135.4,113.5 L137.2,112.5 L139.0,111.5 L140.8,110.4 L142.6,109.2 L144.4,108.0 L146.2,106.7 L148.0,105.3 L149.8,103.9 L151.5,102.4 L153.3,100.8 L155.1,99.2 L156.9,97.5 L158.7,95.7 L160.5,93.9 L162.3,92.0 L164.1,90.0 L165.9,88.0 L167.6,85.9 L169.4,83.7 L171.2,81.5 L173.0,79.2 L174.8,76.8 L176.6,74.4 L178.4,71.9 L180.2,69.3 L182.0,66.7 L183.7,64.0 L185.5,61.2 L187.3,58.4 L189.1,55.5 L190.9,52.5 L192.7,49.5 L194.5,46.4 L196.3,43.2 L198.1,40.0 L199.8,36.7 L201.6,33.3 L203.4,29.9 L205.2,26.4 L207.0,22.8 L208.8,19.2 L210.6,15.5 L212.4,11.7 L214.2,7.9 L215.9,4.0 L217.7,0.0" fill="none" stroke="#4a7d3a" stroke-width="2"/><text x="222.0" y="10.0" font-size="14" text-anchor="start" fill="#4a7d3a"><tspan font-style="italic">f</tspan></text><circle cx="14.4" cy="24" r="3.4" fill="#2563c9"/><circle cx="206.4" cy="24" r="3.4" fill="#2563c9"/></svg>
+:::
 
-**Svar:** Ekvationen saknar lösning.
+Linjen skär grafen i två punkter, $(-4, 8)$ och $(4, 8)$. Från dem går vi
+lodrätt ned till *x*-axeln och läser av $x = -4$ och $x = 4$. Grafen är
+symmetrisk kring *y*-axeln, precis som grafen till $y = x^2$, så det finns
+en lösning på var sida om *y*-axeln.
 
-**c)** Potensen står inte ensam. Vi dividerar först båda led med 3:
-
-$$
-\dfrac{3x^5}{3} = \dfrac{96}{3}
-$$
-
-$$
-x^5 = 32
-$$
-
-Exponenten 5 är udda, så det finns exakt en lösning. Vi drar femteroten ur
-båda led:
-
-$$
-x = \sqrt[5]{32}
-$$
-
-$$
-x = 2
-$$
-
-Kontroll: $3 \cdot 2^5 = 3 \cdot 32 = 96$. Stämmer.
-
-**Svar:** $x = 2$
+**Svar:** $x_1 = -4$ och $x_2 = 4$
 :::
 :::
 
@@ -281,47 +272,6 @@ $$
 **Svar:** 72
 :::
 :::
-
-## När *x* multipliceras med ett tal
-
-Jämför de två punkterna i exempel 3. När $x$ fördubblades från 3 till 6
-blev funktionsvärdet fyra gånger så stort, från 18 till 72. Faktorn 4 är
-$2^2$, alltså fördubblingen upphöjd till funktionens exponent. Kuben i
-början av avsnittet följer samma mönster: där är exponenten 3, och dubbel
-sida ger $2^3 = 8$ gånger så stor volym.
-
-::: formel "Skalning i en potensfunktion"
-$$
-f(k \cdot x) = k^a \cdot f(x)
-$$
-
-När $x$ multipliceras med ett tal $k$ multipliceras funktionsvärdet med
-$k^a$. Det gäller var på grafen man än börjar, och konstanten $C$ påverkar
-inte faktorn.
-
-::: härledning "Härledning — Skalning i en potensfunktion"
-Vi sätter in $k \cdot x$ i stället för $x$ i $f(x) = C \cdot x^a$ och
-använder potenslagen $(k \cdot x)^a = k^a \cdot x^a$:
-
-$$
-f(k \cdot x) = C \cdot (k \cdot x)^a = C \cdot k^a \cdot x^a = k^a \cdot C \cdot x^a = k^a \cdot f(x)
-$$
-:::
-:::
-
-Regeln gör det lätt att resonera utan att räkna ut $C$. Tre exempel:
-
-- $a = 2$: tre gånger så stort $x$ ger $3^2 = 9$ gånger så stort
-  funktionsvärde. Så växer arean av en kvadrat när sidan blir tre gånger
-  så lång.
-- $a = -1$: dubbelt så stort $x$ ger $2^{-1} = \dfrac{1}{2}$ av
-  funktionsvärdet. Det är en omvänd proportionalitet.
-- $a = \dfrac{1}{2}$: fyra gånger så stort $x$ ger
-  $4^{1/2} = \sqrt{4} = 2$ gånger så stort funktionsvärde.
-
-Jämför med exponentialfunktionen. Där multipliceras funktionsvärdet med
-samma faktor varje gång ett fast tal *adderas* till $x$. I en
-potensfunktion händer det varje gång $x$ *multipliceras* med ett fast tal.
 
 ## Funktion i funktion
 
@@ -376,7 +326,7 @@ $$
 ::: sammanfattning "Sammanfattning"
 
 ::: sampunkt "Potens eller exponential"
-- **Potensfunktion**: $f(x) = Cx^{a}$, variabeln i **basen**.
+- **Potensfunktion**: $f(x) = Cx^{a}$, en enda term med variabeln i **basen**.
 - **Exponentialfunktion**: $f(x) = Ca^{x}$, variabeln i **exponenten**.
 - Titta på var $x$ står. Det är hela skillnaden.
 :::
@@ -392,12 +342,6 @@ $$
 - Lösningarna till $x^{n} = b$ är skärningarna med linjen $y = b$.
 - **Jämn**: två lösningar om $b > 0$, en om $b = 0$, ingen om $b < 0$.
 - **Udda**: alltid exakt en lösning, med samma tecken som $b$.
-:::
-
-::: sampunkt "Skalning"
-- När $x$ multipliceras med $k$ multipliceras funktionsvärdet med $k^{a}$.
-- Dubbel sida på en kub ger $2^{3} = 8$ gånger så stor volym.
-- Konstanten $C$ påverkar inte faktorn.
 :::
 
 ::: sampunkt "Räkna med dem"

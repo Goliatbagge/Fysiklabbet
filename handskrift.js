@@ -16514,6 +16514,109 @@
     return { acts: acts, contentW: 640, lastBase: y + 0.9 * F, padL: padL };
   }
 
+  /* ---------------- scen: läs av en potensfunktion (ma1c-4.12 ex 2) ---
+   * Grafen till f(x) = 0,5x² är given i uppgiften (samma kurva som
+   * figuren i md-filen, där en ruta är 1 i x-led och 2 i y-led).
+   * a) f(2) läses av LODRÄTT, b) f(x) = 8 VÅGRÄTT: linjen y = 8 skär
+   * grafen i (−4, 8) och (4, 8), alltså två lösningar. */
+  function layoutPotensavlas(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
+
+    function fv(x) { return 0.5 * x * x; }
+    var A = mkAxes(T, F, { ox: padL + 120, oy: 270, u: 27, ysc: 2,
+                           xmin: -4.6, xmax: 4.6, ymin: -2, ymax: 10 });
+    /* grafen är given i uppgiften: den står färdig från början (REGEL
+     * UPPGIFTENS FIGUR STÅR FÄRDIG FRÅN BÖRJAN) */
+    forritad(T, function () {
+      A.axes();
+      A.ticks(heltal(-4, 4), [-2, 2, 4, 6, 8, 10], [-4, -2, 2, 4], [2, 4, 6, 8]);
+      T.pause(150);
+      /* blått markerar avläsningarna, så grundkurvan behåller bläcket
+       * (undantaget i REGEL GRAFEN RITAS I BLÅTT) */
+      var pts = [], t, x0 = -Math.sqrt(20);
+      for (t = 0; t <= 60; t++) {
+        var xv = x0 + (2 * -x0) * t / 60;
+        pts.push([A.X(xv), A.Y(fv(xv))]);
+      }
+      acts.push({ kind: 'stroke', pts: pts, color: null });
+      T.str('f', A.X(4.75), A.Y(9.4), null, 0.62);
+    });
+
+    /* bubblorna bredvid koordinatsystemet, till höger; under det ligger
+     * svarsraderna. y = 180 håller dem borta från inställningsrutans
+     * mobilzon (x > 420 kräver y > 150). */
+    function tankeSida(rader) { T.tanke(T.bubble(370, 180, 300, rader)); }
+    /* streckad lodrät linje från en punkt ned till x-axeln */
+    function lodratt(xv, yv) {
+      var st = [], n = 9, p1 = [A.X(xv), A.Y(yv)], p2 = [A.X(xv), A.Y(0)];
+      for (var i = 0; i < n; i += 2) {
+        var a = { kind: 'stroke', color: BLUE, pts: humanize([
+          [p1[0], p1[1] + (p2[1] - p1[1]) * i / n],
+          [p1[0], p1[1] + (p2[1] - p1[1]) * (i + 1) / n]]) };
+        acts.push(a); st.push(a);
+      }
+      return st;
+    }
+
+    /* ---- a) f(2) ---- */
+    tankeSida([
+      [['f(2) betyder: gå till x=2,']],
+      [['följ LODRÄTT upp till grafen']],
+      [['och läs av y-värdet.']]
+    ]);
+    var g = A.guides(2, fv(2));
+    T.pause(200);
+    A.dot(2, fv(2));
+    T.stepEnd();
+
+    y = 360;              /* koordinatsystemet slutar vid y ≈ 325 */
+    T.str('a) f(2)=2', padL, y);
+    g.forEach(function (st) { T.fade(st); });
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: 2', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) f(x)=8 ---- */
+    tankeSida([
+      [['Nu är det tvärtom: y=8 är']],
+      [['givet och x söks. Jag drar']],
+      [['linjen y=8 och letar var den']],
+      [['skär grafen.']]
+    ]);
+    A.linjal([A.X(-4.6), A.Y(8)], [A.X(4.6), A.Y(8)], BLUE);
+    T.str('y=8', A.X(0.35), A.Y(8) - 0.35 * F, BLUE, 0.5);
+    T.pause(200);
+    A.dot(-4, 8, BLUE);
+    T.pause(200);
+    A.dot(4, 8, BLUE);
+    T.stepEnd();
+
+    tankeSida([
+      [['Två skärningar! Från var och']],
+      [['en går jag LODRÄTT ned till']],
+      [['x-axeln och läser av x.']]
+    ]);
+    lodratt(-4, 8);
+    T.pause(150);
+    lodratt(4, 8);
+    T.stepEnd();
+
+    y += 3.4 * F;
+    T.str('b) f(x)=8 ger', padL, y - 1.6 * F, null, 0.62);
+    T.str('x_1=−4, x_2=4', padL, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    xe = T.str('Svar: x_1=−4 och x_2=4', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+  }
+
   /* ---------------- scen: udda och jämn exponent (ma1c-4.12 ex 2) -----
    * a) x³ = −8 (udda: en negativ lösning), b) x⁴ = −16 (jämn: ingen
    * lösning), c) 3x⁵ = 96 (dividera först, sedan femteroten). Bara c)
@@ -65091,6 +65194,7 @@
                    tolkaexp: layoutTolkaexp,
                    vilkenexp: layoutVilkenexp,
                    potensfunktion: layoutPotensfunktion,
+                   potensavlas: layoutPotensavlas,
                    potensekvuddajamn: layoutPotensekvuddajamn,
                    potensbestamc: layoutPotensbestamc,
                    funktionifunktion: layoutFunktionifunktion,

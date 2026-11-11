@@ -12750,19 +12750,19 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'I potensfunktionen $f(x) = 5x^3$ fördubblas $x$. Vad händer med funktionsvärdet?',
+    question: 'Vilken av funktionerna är en potensfunktion?',
     choices: [
-      'Det fördubblas',
-      'Det blir 6 gånger så stort',
-      'Det blir 8 gånger så stort',
-      'Det blir 10 gånger så stort',
+      '$f(x) = x^3 + 2x^2$',
+      '$f(x) = 3 \\cdot 2^x$',
+      '$f(x) = 4x^5$',
+      '$f(x) = 5^x$',
     ],
     correct: 2,
     why: [
-      'Så är det bara när exponenten är 1, alltså i en proportionalitet. Här är exponenten 3.',
-      'Det vore $2 \\cdot 3$. Fördubblingen ska upphöjas till exponenten, inte multipliceras med den.',
-      'När $x$ multipliceras med 2 multipliceras funktionsvärdet med $2^3 = 8$.',
-      'Konstanten 5 påverkar inte faktorn, eftersom den finns med både före och efter fördubblingen.',
+      'Funktionen har två termer. En potensfunktion består av en enda term, $Cx^a$.',
+      'Här står $x$ i exponenten. Det är en exponentialfunktion.',
+      'En enda term där $x$ står i basen och exponenten är ett fast tal, alltså formen $Cx^a$ med $C = 4$ och $a = 5$.',
+      'Här står $x$ i exponenten. Det är en exponentialfunktion.',
     ],
   },
   {

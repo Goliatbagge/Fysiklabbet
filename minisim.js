@@ -35,6 +35,8 @@
  *           fasvag (fy2-2.7: stående våg med partiklar i fas och i motfas),
  *           vagstallning (fy2-2.7: en puls vandrar nedåt i en hängande vågställning),
  *           vagtank (fy2-2.13: vågfronter bryts vid gränsen mellan djupt och grunt vatten)
+ *           vagbotten (fy2-2.13: vattnets banor från djupt till grunt vatten, varför vågen saktar in)
+ *           udde (fy2-2.13: vågor böjs mot en udde, energin samlas där och sprids ut i bukterna)
  *           reflexion (fy2-2.13: dra i den infallande strålen, den reflekterade följer med, r = i)
  *           blixtljud (fy2-2.10: ljudets hastighet, blixt/fyrverkeri och tumregeln 3 s per km;
  *                      visa: fyrverkeri startar med fyrverkeriet)
@@ -17231,7 +17233,445 @@
         rita();
     }
 
+    // ─────────────────────────────────────────────────────────────────
+    //  Gemensamt för vagbotten och udde: canvas med DPR, bricka-etiketter
+    // ─────────────────────────────────────────────────────────────────
+    function vbCanvas(scene, W, H) {
+        var cv = document.createElement('canvas');
+        var dpr = Math.min(2, window.devicePixelRatio || 1);
+        cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+        cv.style.width = '100%'; cv.style.height = 'auto'; cv.style.display = 'block';
+        cv.style.borderRadius = '6px';
+        scene.appendChild(cv);
+        var ctx = cv.getContext('2d');
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        return { cv: cv, ctx: ctx, dpr: dpr };
+    }
+    // Etikett på en enfärgad pappersbricka, så att den går att läsa mot vattnet.
+    function vbBricka(ctx, text, x, y, ankare, kant) {
+        ctx.save();
+        ctx.font = '600 15px Poppins, sans-serif';
+        var w = ctx.measureText(text).width, x0 = ankare === 'end' ? x - w : ankare === 'middle' ? x - w / 2 : x;
+        var bx = x0 - 8, by = y - 15, bw = w + 16, bh = 22, r = 6;
+        ctx.fillStyle = 'rgba(247,242,232,0.95)';
+        ctx.beginPath();
+        ctx.moveTo(bx + r, by); ctx.arcTo(bx + bw, by, bx + bw, by + bh, r); ctx.arcTo(bx + bw, by + bh, bx, by + bh, r);
+        ctx.arcTo(bx, by + bh, bx, by, r); ctx.arcTo(bx, by, bx + bw, by, r); ctx.closePath();
+        ctx.fill();
+        if (kant) { ctx.strokeStyle = kant; ctx.lineWidth = 1.5; ctx.stroke(); }
+        ctx.fillStyle = '#1f2530'; ctx.textBaseline = 'alphabetic';
+        ctx.fillText(text, x0, y);
+        ctx.restore();
+    }
+    function vbKort(node, cfg, aria) {
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus ms-bred';
+        if (cfg.titel) {
+            var tEl = document.createElement('div');
+            tEl.className = 'minisim-title';
+            tEl.textContent = cfg.titel;
+            card.appendChild(tEl);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene';
+        scene.setAttribute('role', 'img');
+        scene.setAttribute('aria-label', aria);
+        card.appendChild(scene);
+        return { card: card, scene: scene };
+    }
+    function vbSpelknapp(loop) {
+        var PLAY = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4 L20 12 L7 20 Z"/></svg>';
+        var PAUS = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +
+            '<rect x="5" y="4" width="5" height="16" rx="1"/><rect x="14" y="4" width="5" height="16" rx="1"/></svg>';
+        var btn = vgBtn('');
+        btn.style.display = 'inline-flex'; btn.style.alignItems = 'center'; btn.style.gap = '6px';
+        function visa() {
+            var p = loop.igang();
+            btn.innerHTML = (p ? PAUS : PLAY) + '<span>' + (p ? 'Pausa' : 'Spela') + '</span>';
+            btn.classList.toggle('ms-primar', !p);
+        }
+        btn.addEventListener('click', function () { loop.satt(!loop.igang()); visa(); });
+        return { btn: btn, visa: visa };
+    }
+
+    // ─────────────────────────────────────────────────────────────────
+    //  typ: vagbotten
+    //  fy2-2.13: varför en vattenvåg går långsammare på grunt vatten.
+    //  Genomskärning av havet från djupt vatten in över en sluttning till
+    //  grunt vatten. Vattenpartiklarna går runt i banor enligt linjär
+    //  vågteori (Airy): förskjutningen i x-led är
+    //    ξ = −a · cosh(k(h − z)) / sinh(kh) · sin θ
+    //  och i höjdled ζ = a · sinh(k(h − z)) / sinh(kh) · cos θ,
+    //  där z är djupet under ytan och θ = ∫k dx − ωt. Det lokala vågtalet k
+    //  löses ur ω² = g·k·tanh(kh) i varje punkt, och amplituden a följer av
+    //  att energiflödet a²·c_g är detsamma längs hela vägen. På djupt vatten
+    //  är banorna cirklar som krymper nedåt och inte når botten; på grunt
+    //  vatten blir de platta ellipser och vattnet vid botten går bara fram
+    //  och tillbaka. Våglängden blir kortare, alltså går vågen långsammare.
+    //  Skalan: g = 1 px/s² · (2π/Tper)²-justerad, bara proportionerna räknas.
+    // ─────────────────────────────────────────────────────────────────
+    function buildVagbotten(node, cfg) {
+        var W = 900, H = 340, YS = 92;
+        var HD = 175, HG = 22, X1 = 300, X2 = 690;
+        var LAM0 = 260, A0 = 12, TPER = 2.6;
+        var BLA = '#1f4f8a', ORB = 'rgba(37,99,201,0.38)', ORANGE = '#d9661f';
+        var K0 = 2 * Math.PI / LAM0, OM2 = K0 * Math.tanh(K0 * HD), OM = Math.sqrt(OM2);
+        function djup(x) { return x < X1 ? HD : x > X2 ? HG : HD + (HG - HD) * (0.5 - 0.5 * Math.cos(Math.PI * (x - X1) / (X2 - X1))); }
+        function losK(h) {
+            var k = Math.max(K0, OM / Math.sqrt(h));
+            for (var n = 0; n < 40; n++) { var t = Math.tanh(k * h), f = k * t - OM2, df = t + k * h * (1 - t * t); k -= f / df; }
+            return k;
+        }
+        var N = W + 1, kx = new Float64Array(N), th = new Float64Array(N), ax = new Float64Array(N), hx = new Float64Array(N);
+        var cg0 = null;
+        for (var x = 0; x < N; x++) {
+            var h = djup(x), k = losK(h), c = OM / k, cg = c / 2 * (1 + 2 * k * h / Math.sinh(2 * k * h));
+            if (cg0 === null) cg0 = cg;
+            kx[x] = k; hx[x] = h; ax[x] = A0 * Math.sqrt(cg0 / cg);
+            th[x] = x === 0 ? 0 : th[x - 1] + (kx[x - 1] + k) / 2;
+        }
+        // partiklarna: kolumner med jämna mellanrum, rader på fasta djup och en rad vid botten
+        var parts = [];
+        for (var px = 15; px <= W - 10; px += 30) {
+            var hb = djup(px);
+            var nR = Math.max(1, Math.round((hb - 10) / 32));
+            for (var jr = 0; jr < nR; jr++) parts.push({ x: px, z: 6 + jr * (hb - 10) / nR, botten: false });
+            parts.push({ x: px, z: hb - 4, botten: true });
+        }
+        var tid = 0, visaBanor = true, slow = 1;
+
+        var k0 = vbKort(node, cfg, 'Genomskärning av havet från djupt vatten till vänster in över en sluttning till grunt vatten ' +
+            'till höger. Vattnet går runt i banor när vågen passerar. På djupt vatten är banorna cirklar som blir mindre nedåt och ' +
+            'inte når botten. På grunt vatten blir de platta, och vid botten går vattnet bara fram och tillbaka. Våglängden blir ' +
+            'kortare på grunt vatten, eftersom vågen går långsammare där.');
+        var card = k0.card, scene = k0.scene;
+        var C = vbCanvas(scene, W, H), ctx = C.ctx;
+
+        function idx(x) { var i = Math.round(x); return i < 0 ? 0 : i > W ? W : i; }
+        function rita() {
+            var wt = OM * tid;
+            ctx.clearRect(0, 0, W, H);
+            // luft
+            var gl = ctx.createLinearGradient(0, 0, 0, YS);
+            gl.addColorStop(0, '#f7f2e8'); gl.addColorStop(1, '#efe8da');
+            ctx.fillStyle = gl; ctx.fillRect(0, 0, W, H);
+            // vatten: från ytan till botten
+            ctx.beginPath();
+            for (var x = 0; x <= W; x += 3) {
+                var i = idx(x), y = YS - ax[i] * Math.cos(th[i] - wt);
+                if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+            }
+            for (var x2 = W; x2 >= 0; x2 -= 6) ctx.lineTo(x2, YS + djup(x2));
+            ctx.closePath();
+            var gv = ctx.createLinearGradient(0, YS - 20, 0, YS + HD);
+            gv.addColorStop(0, '#bcd8ee'); gv.addColorStop(1, '#7fb0d9');
+            ctx.fillStyle = gv; ctx.fill();
+            // ytans linje
+            ctx.beginPath();
+            for (var x3 = 0; x3 <= W; x3 += 3) {
+                var i3 = idx(x3), y3 = YS - ax[i3] * Math.cos(th[i3] - wt);
+                if (x3 === 0) ctx.moveTo(x3, y3); else ctx.lineTo(x3, y3);
+            }
+            ctx.strokeStyle = '#1f4f8a'; ctx.lineWidth = 2.4; ctx.stroke();
+            // botten med sand
+            ctx.beginPath(); ctx.moveTo(0, H);
+            for (var x4 = 0; x4 <= W; x4 += 6) ctx.lineTo(x4, YS + djup(x4));
+            ctx.lineTo(W, H); ctx.closePath();
+            ctx.fillStyle = '#e6d4a6'; ctx.fill();
+            ctx.beginPath();
+            for (var x5 = 0; x5 <= W; x5 += 6) { var yb = YS + djup(x5); if (x5 === 0) ctx.moveTo(x5, yb); else ctx.lineTo(x5, yb); }
+            ctx.strokeStyle = '#8a6a3a'; ctx.lineWidth = 2; ctx.stroke();
+            ctx.fillStyle = 'rgba(138,106,58,0.35)';
+            for (var s = 0; s < 140; s++) {
+                var sx = (s * 97.31) % W, sy = YS + djup(sx) + 6 + ((s * 53.7) % 40);
+                if (sy < H - 2) ctx.fillRect(sx, sy, 2, 2);
+            }
+            // partiklarna och deras banor
+            for (var p = 0; p < parts.length; p++) {
+                var q = parts[p], ii = idx(q.x), k = kx[ii], h = hx[ii], a = ax[ii], sh = Math.sinh(k * h);
+                var A = a * Math.cosh(k * (h - q.z)) / sh, B = a * Math.sinh(k * (h - q.z)) / sh;
+                var tht = th[ii] - wt, cx = q.x, cy = YS + q.z;
+                if (q.botten) {
+                    // vid botten: bara fram och tillbaka, och vattnet gnider mot sanden
+                    if (A > 1.5) {
+                        var al = Math.min(1, A / 10);
+                        ctx.strokeStyle = 'rgba(217,102,31,' + (0.35 + 0.55 * al).toFixed(2) + ')'; ctx.lineWidth = 3.2;
+                        ctx.beginPath(); ctx.moveTo(cx - A, cy + 1); ctx.lineTo(cx + A, cy + 1); ctx.stroke();
+                        ctx.fillStyle = ORANGE;
+                        ctx.beginPath(); ctx.arc(cx - A * Math.sin(tht), cy, 4, 0, 2 * Math.PI); ctx.fill();
+                    } else {
+                        ctx.fillStyle = 'rgba(31,79,138,0.55)';
+                        ctx.beginPath(); ctx.arc(cx, cy, 2.6, 0, 2 * Math.PI); ctx.fill();
+                    }
+                    continue;
+                }
+                if (A < 0.35 && B < 0.35) {
+                    ctx.fillStyle = 'rgba(31,79,138,0.55)';
+                    ctx.beginPath(); ctx.arc(cx, cy, 2.6, 0, 2 * Math.PI); ctx.fill();
+                    continue;
+                }
+                if (visaBanor) {
+                    ctx.strokeStyle = ORB; ctx.lineWidth = 1.4;
+                    ctx.beginPath(); ctx.ellipse(cx, cy, Math.max(0.5, A), Math.max(0.5, B), 0, 0, 2 * Math.PI); ctx.stroke();
+                }
+                ctx.fillStyle = BLA;
+                ctx.beginPath(); ctx.arc(cx - A * Math.sin(tht), cy - B * Math.cos(tht), 3.6, 0, 2 * Math.PI); ctx.fill();
+            }
+            vbBricka(ctx, 'djupt vatten', 16, 30, 'start');
+            vbBricka(ctx, 'grunt vatten', W - 16, 30, 'end');
+            vbBricka(ctx, 'här når rörelsen inte ned till botten', 150, YS + HD - 18, 'middle');
+            vbBricka(ctx, 'vattnet skvalpar mot botten', (X2 + W) / 2 - 20, H - 14, 'middle', ORANGE);
+        }
+
+        card.appendChild(scene);
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        var banCk = vgCheck('Visa vattnets banor', true);
+        var slowCk = vgCheck('Ultrarapid', false);
+        var loop = vgLoop(card, function (dt) { tid += dt * slow * (2 * Math.PI / TPER) / OM; rita(); });
+        var sk = vbSpelknapp(loop);
+        controls.appendChild(sk.btn); controls.appendChild(banCk.label); controls.appendChild(slowCk.label);
+        card.appendChild(controls);
+        var info = document.createElement('div');
+        info.className = 'minisim-info ms-brod';
+        info.style.marginTop = '6px';
+        info.innerHTML = 'Varje prick är en liten del av vattnet. Vågen flyttar sig åt höger, men vattnet går bara runt på sitt ställe. ' +
+            'Till höger trycks banorna ihop av botten, och vågtopparna kommer tätare: vågen går långsammare.';
+        card.appendChild(info);
+        node.appendChild(card);
+        banCk.cb.addEventListener('change', function () { visaBanor = banCk.cb.checked; rita(); });
+        slowCk.cb.addEventListener('change', function () { slow = slowCk.cb.checked ? 0.3 : 1; });
+        card._set = function (t) { tid = t; rita(); };
+        rita();
+        loop.satt(true); sk.visa();
+    }
+
+    // ─────────────────────────────────────────────────────────────────
+    //  typ: udde
+    //  fy2-2.13: havsvågor som bryts in mot en kust med en udde mellan två
+    //  bukter, sedd uppifrån. Djupet ökar med avståndet till land, och
+    //  vågens fart är √(g·h) (grunt vatten). Gångtiden T(x, y) från havet
+    //  räknas med Dijkstra på ett rutnät (16 grannar), och vågtopparna är
+    //  nivåkurvorna T = n·P + fas. Strålarna (energins väg) följer
+    //  gradienten av T. De samlas mot udden och sprids ut i bukterna, och
+    //  bränningen vid stranden ritas lika kraftig som strålarnas täthet.
+    // ─────────────────────────────────────────────────────────────────
+    function buildUdde(node, cfg) {
+        var W = 760, H = 460, G = 4, NX = W / G + 1, NY = H / G + 1;
+        var HMAX = 60, D0 = 190, TPER = 3.2;
+        function kust(x) {
+            return 410 - 160 * Math.exp(-Math.pow((x - 380) / 105, 2)) -
+                60 * (Math.exp(-Math.pow((x + 30) / 120, 2)) + Math.exp(-Math.pow((x - 790) / 120, 2)));
+        }
+        var KX = [], KY = [];
+        for (var kx0 = -60; kx0 <= W + 60; kx0 += 3) { KX.push(kx0); KY.push(kust(kx0)); }
+        function avst(x, y) {
+            var m = 1e9;
+            for (var i = 0; i < KX.length; i++) { var dx = KX[i] - x, dy = KY[i] - y, d = dx * dx + dy * dy; if (d < m) m = d; }
+            return Math.sqrt(m);
+        }
+        // djup i rutnätet (0 på land)
+        var hG = new Float64Array(NX * NY);
+        for (var j = 0; j < NY; j++) for (var i = 0; i < NX; i++) {
+            var x = i * G, y = j * G;
+            hG[j * NX + i] = y >= kust(x) ? 0 : 1.2 + (HMAX - 1.2) * (1 - Math.exp(-avst(x, y) / D0));
+        }
+        // gångtid med Dijkstra (binär hög), start längs övre kanten
+        var T = new Float64Array(NX * NY).fill(Infinity), heap = [], hp = [];
+        function push(v, n) { heap.push(v); hp.push(n); var c = heap.length - 1;
+            while (c > 0) { var p = (c - 1) >> 1; if (heap[p] <= heap[c]) break;
+                var tv = heap[p]; heap[p] = heap[c]; heap[c] = tv; var tn = hp[p]; hp[p] = hp[c]; hp[c] = tn; c = p; } }
+        function pop() { var v = heap[0], n = hp[0], lv = heap.pop(), ln = hp.pop();
+            if (heap.length) { heap[0] = lv; hp[0] = ln; var c = 0;
+                for (;;) { var l = 2 * c + 1, r = l + 1, m = c;
+                    if (l < heap.length && heap[l] < heap[m]) m = l; if (r < heap.length && heap[r] < heap[m]) m = r;
+                    if (m === c) break; var tv = heap[m]; heap[m] = heap[c]; heap[c] = tv; var tn = hp[m]; hp[m] = hp[c]; hp[c] = tn; c = m; } }
+            return [v, n]; }
+        for (var i0 = 0; i0 < NX; i0++) { T[i0] = 0; push(0, i0); }
+        var NB = [[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1],[2,1],[2,-1],[-2,1],[-2,-1],[1,2],[1,-2],[-1,2],[-1,-2]];
+        while (heap.length) {
+            var e = pop(), tv = e[0], n = e[1];
+            if (tv > T[n]) continue;
+            var ci = n % NX, cj = (n - ci) / NX, hc = hG[n];
+            if (hc <= 0) continue;
+            for (var b = 0; b < NB.length; b++) {
+                var ni = ci + NB[b][0], nj = cj + NB[b][1];
+                if (ni < 0 || nj < 0 || ni >= NX || nj >= NY) continue;
+                var m = nj * NX + ni, hm = hG[m];
+                if (hm <= 0) continue;
+                var L = G * Math.sqrt(NB[b][0] * NB[b][0] + NB[b][1] * NB[b][1]);
+                var nt = tv + L * 2 / (Math.sqrt(hc) + Math.sqrt(hm));
+                if (nt < T[m]) { T[m] = nt; push(nt, m); }
+            }
+        }
+        var TMAX = 0;
+        for (var q = 0; q < T.length; q++) if (isFinite(T[q]) && T[q] > TMAX) TMAX = T[q];
+        var P = 46 / Math.sqrt(HMAX);   // våglängd ute till havs ≈ 46 px
+        function Tat(x, y) {
+            var fi = x / G, fj = y / G, i = Math.floor(fi), j = Math.floor(fj);
+            if (i < 0) i = 0; if (j < 0) j = 0; if (i > NX - 2) i = NX - 2; if (j > NY - 2) j = NY - 2;
+            var u = fi - i, v = fj - j, a = T[j * NX + i], bb = T[j * NX + i + 1], c = T[(j + 1) * NX + i], d = T[(j + 1) * NX + i + 1];
+            if (!isFinite(a) || !isFinite(bb) || !isFinite(c) || !isFinite(d)) return NaN;
+            return a * (1 - u) * (1 - v) + bb * u * (1 - v) + c * (1 - u) * v + d * u * v;
+        }
+        // strålarna: följer gradienten av T från havet in mot land
+        var STRALAR = [], LAND = [];
+        for (var sx = 16; sx < W; sx += 28) {
+            var pts = [[sx, 2]], px = sx, py = 2;
+            for (var st = 0; st < 600; st++) {
+                var e2 = 1.5, gx = (Tat(px + e2, py) - Tat(px - e2, py)) / (2 * e2), gy = (Tat(px, py + e2) - Tat(px, py - e2)) / (2 * e2);
+                if (!isFinite(gx) || !isFinite(gy)) break;
+                var gl = Math.sqrt(gx * gx + gy * gy); if (gl < 1e-9) break;
+                px += 3 * gx / gl; py += 3 * gy / gl;
+                if (px < 0 || px > W || py > H) break;
+                pts.push([px, py]);
+                if (py >= kust(px) - 3) { LAND.push(px); break; }
+            }
+            STRALAR.push(pts);
+        }
+        // bränningens styrka längs kusten: strålar per längdenhet kust, utjämnad
+        var NE = Math.ceil(W / 8) + 1, ENERGI = new Float64Array(NE);
+        for (var e3 = 0; e3 < NE; e3++) {
+            var x0 = e3 * 8, s = 0;
+            for (var l2 = 0; l2 < LAND.length; l2++) { var dx2 = (LAND[l2] - x0) / 22; s += Math.exp(-dx2 * dx2); }
+            var lut = (kust(x0 + 1) - kust(x0 - 1)) / 2;
+            ENERGI[e3] = s / Math.sqrt(1 + lut * lut);
+        }
+        var EREF = 0; for (var e4 = 0; e4 < NE; e4++) EREF = Math.max(EREF, ENERGI[e4]);
+
+        var k0 = vbKort(node, cfg, 'Kust sedd uppifrån med en udde i mitten och en bukt på var sida. Raka vågor kommer från havet ' +
+            'och böjs in mot land eftersom de går långsammare där vattnet är grunt. Strålarna, som visar vägen energin tar, samlas ' +
+            'mot udden och sprids ut i bukterna. Bränningen är kraftig vid udden och svag inne i bukterna.');
+        var card = k0.card, scene = k0.scene;
+        var C = vbCanvas(scene, W, H), ctx = C.ctx;
+        // bakgrunden (hav efter djup, land) ritas en gång
+        var bg = document.createElement('canvas');
+        bg.width = C.cv.width; bg.height = C.cv.height;
+        var bctx = bg.getContext('2d');
+        bctx.setTransform(C.dpr, 0, 0, C.dpr, 0, 0);
+        (function () {
+            for (var j = 0; j < NY - 1; j++) for (var i = 0; i < NX - 1; i++) {
+                var h = hG[j * NX + i], t = Math.min(1, h / HMAX);
+                if (h <= 0) continue;
+                var r = Math.round(150 - 104 * t), g = Math.round(206 - 92 * t), bl = Math.round(222 - 52 * t);
+                bctx.fillStyle = 'rgb(' + r + ',' + g + ',' + bl + ')';
+                bctx.fillRect(i * G - 0.5, j * G - 0.5, G + 1, G + 1);
+            }
+            bctx.beginPath(); bctx.moveTo(0, H);
+            for (var x = 0; x <= W; x += 3) bctx.lineTo(x, kust(x));
+            bctx.lineTo(W, H); bctx.closePath();
+            var gl = bctx.createLinearGradient(0, 200, 0, H);
+            gl.addColorStop(0, '#e9d7a7'); gl.addColorStop(0.35, '#c9cf98'); gl.addColorStop(1, '#9fbd84');
+            bctx.fillStyle = gl; bctx.fill();
+            bctx.beginPath();
+            for (var x2 = 0; x2 <= W; x2 += 3) { if (x2 === 0) bctx.moveTo(x2, kust(x2)); else bctx.lineTo(x2, kust(x2)); }
+            bctx.strokeStyle = '#b89a5e'; bctx.lineWidth = 2; bctx.stroke();
+        })();
+
+        var tid = 0, visaStralar = true, visaDjup = false;
+        // varje cells minsta och största gångtid, för att snabbt hitta vilka toppar som korsar den
+        var CMIN = new Float64Array((NX - 1) * (NY - 1)), CMAX = new Float64Array((NX - 1) * (NY - 1));
+        for (var cj = 0; cj < NY - 1; cj++) for (var ci = 0; ci < NX - 1; ci++) {
+            var c0 = cj * (NX - 1) + ci, n00 = cj * NX + ci, va = T[n00], vb = T[n00 + 1], vc = T[n00 + NX + 1], vd = T[n00 + NX];
+            if (!isFinite(va) || !isFinite(vb) || !isFinite(vc) || !isFinite(vd)) { CMIN[c0] = Infinity; CMAX[c0] = -Infinity; continue; }
+            CMIN[c0] = Math.min(va, vb, vc, vd); CMAX[c0] = Math.max(va, vb, vc, vd);
+        }
+        function cellSeg(c, niva) {
+            var i = c % (NX - 1), j = (c - i) / (NX - 1), n0 = j * NX + i;
+            var a = T[n0], b = T[n0 + 1], cc = T[n0 + NX + 1], d = T[n0 + NX], p = [], x = i * G, y = j * G;
+            if ((a - niva) * (b - niva) < 0) p.push(x + G * (niva - a) / (b - a), y);
+            if ((b - niva) * (cc - niva) < 0) p.push(x + G, y + G * (niva - b) / (cc - b));
+            if ((d - niva) * (cc - niva) < 0) p.push(x + G * (niva - d) / (cc - d), y + G);
+            if ((a - niva) * (d - niva) < 0) p.push(x, y + G * (niva - a) / (d - a));
+            if (p.length >= 4) { ctx.moveTo(p[0], p[1]); ctx.lineTo(p[2], p[3]); }
+            if (p.length === 8) { ctx.moveTo(p[4], p[5]); ctx.lineTo(p[6], p[7]); }
+        }
+        function nivaLinjer(niva) {
+            // marching squares på T-rutnätet för en nivå
+            ctx.beginPath();
+            for (var j = 0; j < NY - 1; j++) for (var i = 0; i < NX - 1; i++) {
+                var n0 = j * NX + i, a = T[n0], b = T[n0 + 1], c = T[n0 + NX + 1], d = T[n0 + NX];
+                if (!isFinite(a) || !isFinite(b) || !isFinite(c) || !isFinite(d)) continue;
+                var mn = Math.min(a, b, c, d), mx = Math.max(a, b, c, d);
+                if (niva < mn || niva > mx) continue;
+                var p = [], x = i * G, y = j * G;
+                if ((a - niva) * (b - niva) < 0) p.push([x + G * (niva - a) / (b - a), y]);
+                if ((b - niva) * (c - niva) < 0) p.push([x + G, y + G * (niva - b) / (c - b)]);
+                if ((d - niva) * (c - niva) < 0) p.push([x + G * (niva - d) / (c - d), y + G]);
+                if ((a - niva) * (d - niva) < 0) p.push([x, y + G * (niva - a) / (d - a)]);
+                if (p.length >= 2) { ctx.moveTo(p[0][0], p[0][1]); ctx.lineTo(p[1][0], p[1][1]); }
+                if (p.length === 4) { ctx.moveTo(p[2][0], p[2][1]); ctx.lineTo(p[3][0], p[3][1]); }
+            }
+            ctx.stroke();
+        }
+        function rita() {
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.drawImage(bg, 0, 0);
+            ctx.setTransform(C.dpr, 0, 0, C.dpr, 0, 0);
+            if (visaDjup) {
+                ctx.save(); ctx.strokeStyle = 'rgba(31,37,48,0.35)'; ctx.lineWidth = 1; ctx.setLineDash([4, 4]);
+                var Tbak = T; T = hG;
+                for (var dn = 10; dn < HMAX; dn += 12) nivaLinjer(dn);
+                T = Tbak; ctx.restore();
+            }
+            // vågtopparna
+            var fas = (tid / TPER) * P % P;
+            ctx.save(); ctx.strokeStyle = 'rgba(250,252,255,0.92)'; ctx.lineWidth = 2.2; ctx.lineCap = 'round';
+            ctx.beginPath();
+            for (var c = 0; c < CMIN.length; c++) {
+                if (CMIN[c] === Infinity) continue;
+                var n0 = Math.ceil((CMIN[c] - fas) / P), n1 = Math.floor((CMAX[c] - fas) / P);
+                for (var nn = n0; nn <= n1; nn++) { var nv = nn * P + fas; if (nv > 0) cellSeg(c, nv); }
+            }
+            ctx.stroke();
+            ctx.restore();
+            // bränningen längs stranden, lika kraftig som strålarnas täthet
+            for (var e = 0; e < NE; e++) {
+                var x = e * 8, f = Math.pow(ENERGI[e] / EREF, 1.5);
+                if (f < 0.04) continue;
+                var y = kust(x) - 3, puls = 0.75 + 0.25 * Math.sin(tid * 2.4 + e * 0.7);
+                ctx.fillStyle = 'rgba(255,255,255,' + (0.35 + 0.6 * f).toFixed(2) + ')';
+                ctx.beginPath(); ctx.ellipse(x, y, 6, 1.5 + 7 * f * puls, 0, 0, 2 * Math.PI); ctx.fill();
+            }
+            if (visaStralar) {
+                ctx.save(); ctx.strokeStyle = 'rgba(217,102,31,0.9)'; ctx.lineWidth = 1.8;
+                for (var s = 0; s < STRALAR.length; s++) {
+                    var pts = STRALAR[s]; ctx.beginPath();
+                    for (var k = 0; k < pts.length; k++) { if (k === 0) ctx.moveTo(pts[k][0], pts[k][1]); else ctx.lineTo(pts[k][0], pts[k][1]); }
+                    ctx.stroke();
+                }
+                ctx.restore();
+            }
+            vbBricka(ctx, 'udde', 380, kust(380) + 46, 'middle');
+            vbBricka(ctx, 'bukt', 175, H - 18, 'middle');
+            vbBricka(ctx, 'bukt', W - 175, H - 18, 'middle');
+            vbBricka(ctx, 'djupt hav', 16, 28, 'start');
+        }
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        var stCk = vgCheck('Visa strålarna', true);
+        var djCk = vgCheck('Visa djupkurvorna', false);
+        var loop = vgLoop(card, function (dt) { tid += dt; rita(); });
+        var sk = vbSpelknapp(loop);
+        controls.appendChild(sk.btn); controls.appendChild(stCk.label); controls.appendChild(djCk.label);
+        card.appendChild(controls);
+        var info = document.createElement('div');
+        info.className = 'minisim-info ms-brod';
+        info.style.marginTop = '6px';
+        info.innerHTML = 'De orange strålarna visar vägen vågens energi tar. Lika många strålar startar ute till havs, ' +
+            'men de samlas mot udden och sprids ut inne i bukterna. Den vita bränningen längs stranden är lika kraftig som strålarna är täta.';
+        card.appendChild(info);
+        node.appendChild(card);
+        stCk.cb.addEventListener('change', function () { visaStralar = stCk.cb.checked; rita(); });
+        djCk.cb.addEventListener('change', function () { visaDjup = djCk.cb.checked; rita(); });
+        card._set = function (t) { tid = t; rita(); };
+        rita();
+        loop.satt(true); sk.visa();
+    }
+
     var TYPES = { tomtebloss: buildTomtebloss,
+                  vagbotten: buildVagbotten, udde: buildUdde,
                   reflexion: buildReflexion, centrifug: buildCentrifug,
                   stegkast: buildStegkast,
                   svangningsgrafer: buildSvangningsgrafer,

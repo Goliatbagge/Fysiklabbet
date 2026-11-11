@@ -35,6 +35,7 @@ window.SIM_NAMES = {
       kw: ['krafter','tyngdfaktor','tyngdacceleration','tyngdkraft','jorden','ekvator','pol','rotation','latitud','3d','gravitation'] },
   ],
   'fysik1-hastighet-tid-app.html': 'Hastighet-tid-diagram',
+  'fysik1-stotar-app.html': 'Elastisk och oelastisk stöt',
   'fysik1-acceleration-tid-app.html': 'Acceleration-tid-diagram',
   'fysik1-rorelsediagram.html': 'Rörelsediagram',
   'fysik1-newtons-forsta-app.html': 'Newtons första lag',

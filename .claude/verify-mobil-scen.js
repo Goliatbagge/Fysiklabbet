@@ -38,6 +38,7 @@ const argv = process.argv.slice(2);
 const EXTRA_LAGEN = [
     'fysik2-lenz-lag-app.html?vy=3d&ledare=spole',
     'fysik2-transformator-app.html?vy=3d',
+    'fysik1-stotar-app.html?dim=2d',
 ];
 const files = argv.length ? argv : fs.readdirSync(ROOT)
     .filter(f => /^fysik[12]-.*\.html$/.test(f))

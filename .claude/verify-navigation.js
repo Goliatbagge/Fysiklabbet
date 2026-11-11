@@ -85,6 +85,7 @@ const HTML_FILES_TO_CHECK = [
     'fysik1-andra-huvudsatsen-app.html',
     'fysik1-flytkraft-app.html',
     'fysik1-hastighet-tid-app.html',
+    'fysik1-stotar-app.html',
     'fysik1-acceleration-tid-app.html',
     'fysik1-stracka-tid-app.html',
     'fysik1-varme-app.html',

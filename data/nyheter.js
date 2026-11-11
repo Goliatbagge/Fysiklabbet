@@ -103,6 +103,63 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-12-snurran-som-svavar",
+    date: "2026-11-12",
+    title: "En svävande magnet stor som ett dammkorn snurrar 2,3 miljoner varv i sekunden",
+    deck: "Forskare i Singapore, Italien, Storbritannien och Lettland har låtit en magnetisk kula med radien 30 mikrometer sväva över en supraledare av bly och snurrat upp den till 2,3 miljoner varv i sekunden, det högsta varvtal som uppmätts för en magnetiskt svävande rotor. Snurran bromsas nästan bara av gasen runt den, och eftersom bromsningen är proportionell mot trycket kan den användas som tryckmätare, och forskarna har gjort ett första försök att leta efter mörk materia med den.",
+    category: "Supraledning",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-11-12-snurran-som-svavar.jpg",
+    imageAlt: "En svart, cylinderformad magnet svävar några millimeter ovanför en mörk skiva i en genomskinlig skål. Skålen står på ett vitt isolerande block och runt den driver vit, kall dimma. Bakgrunden är blågrå.",
+    imageCredit: "Foto: Mai-Linh Doan, en magnet som svävar över en supraledare kyld med flytande kväve, via Wikimedia Commons (CC BY-SA 3.0). Beskuren till bredformat. Bilden visar en närbesläktad svävning, inte experimentet i studien, där supraledaren är bly vid 4,2 kelvin.",
+    tags: ["supraledning", "meissnereffekten", "magnetism", "rotation", "cirkelrörelse", "centripetalacceleration", "tryck", "vakuum", "precession", "squid", "mörk materia", "axion", "levitation"],
+    sources: [
+      { name: "Phys.org: The fastest levitated spinning magnet ever made might help physicists search for dark matter (Krystal Kasal, 9 november 2026)", url: "https://phys.org/news/2026-11-fastest-levitated-magnet-physicists-dark.html" },
+      { name: "arXiv: förtrycket av studien i fulltext (version 3, 9 november 2026)", url: "https://arxiv.org/abs/2509.24964" }
+    ],
+    research: {
+      citation: "J. K. Jose, A. Marchese, M. Cromb, H. Ulbricht, A. Cebers, P. K. Lam, T. Wang och A. Vinante, ”Ultrafast Meissner-levitated microrotor”, Science Advances 12, nummer 45 (2026), publicerad 6 november 2026. Kollegialt granskad.",
+      url: "https://doi.org/10.1126/sciadv.aee6434"
+    },
+    larare: {
+      moment: [
+        { label: "Cirkulär rörelse", href: "katalog.html?id=fy2-1.5" },
+        { label: "Lufttryck och totalt tryck", href: "katalog.html?id=fy1-5.4" },
+        { label: "Magnetism och magnetfält", href: "katalog.html?id=fy2-3.1" }
+      ],
+      fragor: [
+        "Kulan har radien 30 µm och snurrar 2,3 miljoner varv per sekund. Räkna ut farten i kanten med v = 2πrf och accelerationen in mot mitten med a = v²/r. Hur många gånger större än tyngdaccelerationen blir den?",
+        "Forskarna uppskattar att kulan går sönder vid omkring 5,5 miljoner varv per sekund, och skriver att en mindre kula tål ett högre varvtal. Varför är det rimligt, om man tänker på farten i kanten?",
+        "Bromsningen är proportionell mot gastrycket. Varför bromsar en tunnare gas mindre, och varför blir snurran just därför en bra tryckmätare när trycket är mycket lågt?"
+      ]
+    },
+    body: [
+      { type: "p", html: "En snurra på ett bord stannar efter någon minut. Friktionen mot bordet och luftmotståndet äter upp rörelsen. Men om snurran inte rör vid något alls, och nästan all luft runt den pumpas bort, finns det inte mycket kvar som kan bromsa den." },
+      { type: "p", html: "Det är idén bakom ett experiment som en forskargrupp från A*STAR i Singapore, CNR och Fondazione Bruno Kessler i Trento, University of Southampton och Lettlands universitet beskriver i tidskriften <em>Science Advances</em> den 6&nbsp;november. Försteförfattare är Joel K. Jose, och gruppen leds av Tao Wang i Singapore och Andrea Vinante i Trento." },
+      { type: "h2", text: "Supraledaren trycker undan magnetfältet" },
+      { type: "p", html: "Rotorn är en nästan perfekt rund kula av en magnetlegering med neodym, järn och bor, samma sorts material som i de starkaste permanentmagneterna. Kulorna har en radie på 24–30&nbsp;mikrometer, så de är ungefär lika tjocka som ett tunt hårstrå. Varje kula magnetiseras först i en kraftig magnet på 10&nbsp;tesla och läggs sedan i en liten skål av bly, 5&nbsp;mm i diameter, i en vakuumkammare som sänks ned i flytande helium vid 4,2&nbsp;kelvin, alltså omkring −269&nbsp;°C." },
+      { type: "p", html: "Vid den temperaturen är blyet supraledande, och en supraledare släpper inte in magnetfält. Fenomenet kallas Meissnereffekten. Magnetkulan trycks därför uppåt från skålens botten och svävar på den höjd där den magnetiska kraften uppåt är lika stor som tyngdkraften. Skålens kanter håller den kvar i sidled. Ingen elektronik behövs för att hålla den på plats. Ibland fastnar en mindre kula på botten, och då brukar forskarna knacka försiktigt på kylbehållaren med en gummiklubba." },
+      { type: "h2", text: "Knuffar i rätt ögonblick" },
+      { type: "p", html: "Kulans rörelse avläses med en SQUID, en extremt känslig mätare av magnetfält, via en liten slinga av supraledande tråd. Signalen skickas tillbaka till en spole som ger kulan en magnetisk knuff i takt med att den roterar, ungefär som när man knuffar på en gunga precis i rätt ögonblick. Först gungar kulan fram och tillbaka, men till slut svänger den över och börjar snurra runt, som en pendel som får så mycket fart att den går över toppen." },
+      { type: "p", html: "Den snabbaste kulan, med radien omkring 30&nbsp;mikrometer, nådde 2,3&nbsp;miljoner varv per sekund, eller 138&nbsp;miljoner varv per minut. Det tidigare rekordet för en magnetiskt svävande rotor var en stålkula med diametern 0,5&nbsp;mm som snurrade 660&nbsp;000 varv per sekund, och som behövde en elektronisk återkoppling för att hållas på plats. För rotorer som svävar med hjälp av Meissnereffekten låg rekordet på 20&nbsp;000 varv per sekund." },
+      { type: "p", html: "Kulans yta vid ekvatorn rör sig med farten $v = 2\\pi r f \\approx 433\\ \\mathrm{m/s}$, snabbare än ljudet i luft. Accelerationen in mot mitten blir $a = \\dfrac{v^2}{r} \\approx 6{,}3 \\cdot 10^{9}\\ \\mathrm{m/s^2}$, drygt 600&nbsp;miljoner gånger tyngdaccelerationen. Forskarna uppskattar att materialet slits sönder vid omkring 5,5&nbsp;miljoner varv per sekund, så kulan snurrade på knappt halva den gränsen. Den var ändå fortfarande magnetisk. Damm som fastnat på ytan slungas däremot av redan vid de första snabba varven." },
+      { type: "h2", text: "Tjugofyra dygn att bromsa in" },
+      { type: "p", html: "När knuffarna stängs av snurrar kulan fritt och bromsas av de få gasatomer som finns kvar i kammaren. Varvtalet avtar exponentiellt, och hur fort det sker är proportionellt mot gastrycket. Det gör snurran till en tryckmätare: mät hur snabbt varvtalet sjunker, så får du trycket. Forskarna kontrollerade sambandet vid olika tryck och fick en lutning som stämde med teorin inom ungefär 3&nbsp;procent." },
+      { type: "p", html: "I den bästa mätningen, där trycket enligt kulans egen bromsning var omkring 4&nbsp;·&nbsp;10<sup>−8</sup>&nbsp;millibar, gick det åt omkring 24&nbsp;dygn för varvtalet att sjunka till 37&nbsp;procent av startvärdet. Under en mätning på drygt en halvtimme vid omkring 2&nbsp;miljoner varv per sekund minskade varvtalet med ungefär en promille. Det är i nivå med den svagaste dämpning som någonsin uppmätts för ett svävande föremål av mikro- eller nanostorlek, en nanopartikel som svängde i en jonfälla. Liknande tryckmätare med snurrande kulor används redan av mätinstitut, men tidigare aldrig kallare än 77&nbsp;kelvin. Nu fungerar tekniken vid 4,2&nbsp;kelvin, vilket kan behövas i kylda vakuumkammare där gasatomer stör känsliga kvantexperiment." },
+      { type: "p", html: "Forskarna såg också en svag signal som de tolkar som att snurrans axel långsamt vandrar runt den lodräta linjen, som axeln på en lutande snurra. Den rörelsen kallas precession. Ju fortare kulan snurrar, desto långsammare blir precessionen, som den modell gruppen tagit fram förutsäger." },
+      { type: "h2", text: "Ett första försök att leta efter mörk materia" },
+      { type: "p", html: "En snurra som nästan inte bromsas är också mycket lugn: de slumpmässiga knuffarna från värmerörelsen blir små. Det gör den känslig för små vridningar. Gruppen lät en kula snurra i takt med ett magnetfält som svängde 20&nbsp;000 gånger per sekund och mätte hur den vickade fram och tillbaka kring den takten. Under en sekunds mätning kunde den då urskilja magnetfält ned mot omkring 20&nbsp;femtotesla. Jordens magnetfält är omkring två och en halv miljard gånger starkare. Det är lika bra som det bästa resultatet med en svävande magnet av samma storlek som inte snurrar." },
+      { type: "p", html: "Enligt vissa teorier består mörk materia av lätta partiklar, axionliknande partiklar, som skulle påverka elektronernas spinn i en magnet som ett svagt, svängande magnetfält. Under nästan tolv timmars mätning syntes ingen sådan signal. Det ger en övre gräns för hur starkt partiklarna kan växelverka med elektroner, men bara i ett mycket smalt frekvensband kring 20&nbsp;000 svängningar per sekund. Där är gränsen flera tiopotenser skarpare än tidigare direkta sökningar och nära de bästa gränser som laboratorieexperiment med vridpendlar gett." },
+      { type: "quote", html: "Vi vill betona att den här mätningen och analysen är mycket preliminära när det gäller axionliknande mörk materia.", cite: "Joel K. Jose, Andrea Vinante, Tao Wang med flera i studien (översatt)" },
+      { type: "p", html: "Med större kulor, lägre temperatur och ännu lägre tryck räknar forskarna med att känsligheten kan bli mycket bättre. Avlånga rotorer skulle dessutom kunna användas för att leta efter gravitationsvågor med höga frekvenser eller för att pröva om tyngdkraften följer kvantmekanikens regler." },
+      { type: "fact", title: "Visste du?", items: [
+        "Bly är det material av den enklaste sortens supraledare, så kallade typ&nbsp;I-supraledare, som blir supraledande vid högst temperatur. Därför valde forskarna bly till skålen.",
+        "Kulans ena varv tar omkring 0,4&nbsp;mikrosekunder. Vid de allra högsta varvtalen hann mätelektroniken inte riktigt med, och det var den, inte kulan, som satte stopp för att snurra ännu fortare.",
+        "En vanlig tryckmätare med snurrande kula måste hålla kulan på plats med elektromagneter som styrs i tre riktningar. Här sköter supraledaren det helt av sig själv."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-11-lonnloven-och-bombkolet",
     date: "2026-11-11",
     title: "Lönnlöv från 65 år visar hur kolet från kärnvapenproven späddes ut",

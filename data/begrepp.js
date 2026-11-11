@@ -63,6 +63,18 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'precession',
+    term: 'Precession',
+    former: ['precession', 'precessionen', 'precessionsrörelse', 'precessionsrörelsen', 'precesserar'],
+    kort: 'En långsam vridning av axeln hos något som snurrar, så att axeln ritar en kon i stället för att peka stilla åt samma håll. En snurra som lutar på bordet visar det tydligt.',
+    relaterade: ['gyroskop', 'troghetsmoment'],
+    body: [
+      { type: 'p', html: 'Sätt en snurra i gång och låt den luta lite. Den faller inte omkull, som den skulle ha gjort om den stått still. I stället vandrar dess axel långsamt runt i en cirkel medan snurran själv roterar mycket fortare. Den långsamma vandringen kallas precession.' },
+      { type: 'p', html: 'Förklaringen är att en snurrande kropp har ett rörelsemängdsmoment som pekar längs axeln. Tyngdkraften försöker vrida snurran omkull, men en vridning av ett snurrande föremål ändrar inte axelns lutning. Den knuffar i stället axeln åt sidan, vinkelrätt mot både axeln och kraften. Knuff efter knuff får axeln att gå runt. Ju fortare snurran roterar, desto större är rörelsemängdsmomentet och desto långsammare blir precessionen.' },
+      { type: 'p', html: 'Samma sak händer i stor skala. Jordaxeln precesserar eftersom solen och månen drar i jordens utbuktning vid ekvatorn, och ett varv tar omkring 26&nbsp;000&nbsp;år. Därför är Polstjärnan inte alltid polstjärna. I magnetiska system kan magnetfält ge samma sorts vridning, och precession hos atomkärnor i ett magnetfält är grunden för magnetkameran.' }
+    ]
+  },
+  {
     id: 'principalkomponentanalys',
     term: 'Principalkomponentanalys',
     former: ['principalkomponentanalys', 'principalkomponentanalysen', 'principalkomponentanalyser', 'principalkomponentanalyserna', 'principalkomponent', 'principalkomponenten', 'principalkomponenter', 'principalkomponenterna'],

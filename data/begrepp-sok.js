@@ -10,6 +10,7 @@
  */
 window.BEGREPP_LATT = true;
 window.BEGREPP = [
+  {"id":"precession","term":"Precession","kort":"En långsam vridning av axeln hos något som snurrar, så att axeln ritar en kon i stället för att peka stilla åt samma håll. En snurra som lutar på bordet visar det tydligt.","former":["precession","precessionen","precessionsrörelse","precessionsrörelsen","precesserar"]},
   {"id":"principalkomponentanalys","term":"Principalkomponentanalys","kort":"En statistisk metod som letar fram de få mönster som förklarar det mesta av variationen i en stor mängd mätdata. Den hittar bara samband där storheterna ändras i proportion till varandra.","former":["principalkomponentanalys","principalkomponentanalysen","principalkomponentanalyser","principalkomponentanalyserna","principalkomponent","principalkomponenten","principalkomponenter","principalkomponenterna"]},
   {"id":"funktionell-natverksanalys","term":"Funktionell nätverksanalys","kort":"En metod som gör om mätserier till nätverk för att avslöja hur olika delar av ett system påverkar varandra, och åt vilket håll påverkan går. Den klarar samband som inte är proportionella.","former":["funktionell nätverksanalys","funktionella nätverksanalysen","funktionellt nätverk","funktionella nätverk"]},
   {"id":"gyroskop","term":"Gyroskop","kort":"Ett instrument som mäter hur snabbt något vrider sig, eller som håller en fast riktning i rummet. Små gyroskop av kisel finns i nästan alla mobiltelefoner.","former":["gyroskop","gyroskopet","gyroskopen","gyrosensor","gyrosensorn","gyrosensorer"]},

@@ -29654,6 +29654,49 @@ Rimligt? Under den första kvarten sjunker temperaturen från $T(0) = 90$ till c
 
 **Generell slutsats:** funktionsbeteckningen gör det möjligt att skriva ett påstående exakt och sedan pröva det mot en modell. Samma påstående kan vara sant i en modell och falskt i en annan.`,
         },
+        {
+            level: 3,
+            question: `Låt $f(x) = 4x - 3$ och $g(x) = 5 - x$.<br>a) Bestäm $f(g(2))$.<br>b) Bestäm $g(f(2))$.<br>c) För vilket värde på $x$ är $f(g(x)) = 9$?`,
+            answer: { value: 2, unit: '' },
+            delsvar: [
+                { del: 'a', value: 9, unit: '' },
+                { del: 'b', value: 0, unit: '' },
+                { del: 'c', value: 2, unit: '', etikett: '$x =$' },
+            ],
+            solution: `**a)** Funktion i funktion räknas inifrån och ut. Först den inre funktionen: vi ersätter $x$ med 2 i $g(x) = 5 - x$.
+
+$$ g(2) = 5 - 2 = 3 $$
+
+Sedan den yttre: vi ersätter $x$ med 3 i $f(x) = 4x - 3$.
+
+$$ f(g(2)) = f(3) = 4 \\cdot 3 - 3 = 9 $$
+
+**Svar:** 9
+
+**b)** Nu står $f(2)$ innerst, så den räknas först. Vi ersätter $x$ med 2 i $f(x) = 4x - 3$.
+
+$$ f(2) = 4 \\cdot 2 - 3 = 5 $$
+
+Sedan ersätter vi $x$ med 5 i $g(x) = 5 - x$.
+
+$$ g(f(2)) = g(5) = 5 - 5 = 0 $$
+
+**Svar:** 0
+
+**c)** Svaret i a) visar att $f(g(2)) = 9$, så $x = 2$ är en lösning. Kan det finnas fler? Den yttre funktionen $f(x) = 4x - 3$ ger värdet 9 bara för ett enda tal, eftersom ekvationen $4x - 3 = 9$ har en lösning, $x = 3$. Det inre värdet $g(x)$ måste alltså vara 3:
+
+$$ 5 - x = 3 $$
+
+Vi subtraherar 5 från båda led.
+
+$$ 5 - x \\mathbin{\\boldsymbol{-}} \\boldsymbol{5} = 3 \\mathbin{\\boldsymbol{-}} \\boldsymbol{5} $$
+
+$$ -x = -2 $$
+
+$$ x = 2 $$
+
+**Svar:** $x = 2$`,
+        },
     ],
 
     'ma1c-4.9': [
@@ -31134,61 +31177,6 @@ Kontroll med värdet från a): massan $4 \\cdot 16 = 64$ kg ger $P(64) = \\dfrac
 **Svar:** Pulsen halveras
 
 **Generell slutsats:** en potensfunktion med negativ exponent är avtagande för $x > 0$. Med $a = -0{,}25$ halveras funktionsvärdet varje gång *x* blir 16 gånger så stort, var man än börjar. Det är därför små djur har så hög puls.`,
-        },
-        {
-            level: 3,
-            question: `Låt $f(x) = 2x^3$ och $g(x) = C \\cdot x^a$, där $C > 0$.<br>a) Bestäm $C$ och $a$ så att $f(g(x)) = 16x^6$ för alla $x$.<br>b) Är $g(f(x))$ samma funktion som $f(g(x))$ med de värden du fick i a)? Motivera.`,
-            answer: { value: 2, unit: '' },
-            delsvar: [
-                { del: 'a', value: 2, unit: '', etikett: '$C =$' },
-                { del: 'a', value: 2, unit: '', etikett: '$a =$' },
-                { del: 'b' },
-            ],
-            solution: `**Insikten:** räkna inifrån och ut, men med hela funktionsuttrycket i stället för ett tal. Sätt in $g(x)$ på varje ställe där $f$ har ett $x$. Två uttryck $p \\cdot x^q$ är lika för alla $x$ bara om både koefficienterna och exponenterna är lika.
-
-**a)** Den inre funktionen $g(x) = C \\cdot x^a$ sätts in i $f$:
-
-$$ f(g(x)) = 2 \\cdot \\left(C \\cdot x^a\\right)^3 $$
-
-Potenslagarna ger $\\left(C \\cdot x^a\\right)^3 = C^3 \\cdot \\left(x^a\\right)^3 = C^3 \\cdot x^{3a}$, så
-
-$$ f(g(x)) = 2C^3 \\cdot x^{3a} $$
-
-Det ska vara lika med $16x^6$ för alla $x$. Exponenterna ska vara lika:
-
-$$ 3a = 6 $$
-
-Dividerar båda led med 3:
-
-$$ \\frac{3a}{\\boldsymbol{3}} = \\frac{6}{\\boldsymbol{3}} $$
-
-$$ a = 2 $$
-
-Koefficienterna ska vara lika:
-
-$$ 2C^3 = 16 $$
-
-Dividerar båda led med 2:
-
-$$ \\frac{2C^3}{\\boldsymbol{2}} = \\frac{16}{\\boldsymbol{2}} $$
-
-$$ C^3 = 8 $$
-
-$$ C = \\sqrt[3]{8} = 2 $$
-
-Kontroll: $g(x) = 2x^2$ ger $f(g(x)) = 2 \\cdot \\left(2x^2\\right)^3 = 2 \\cdot 8x^6 = 16x^6$. Stämmer.
-
-**Svar:** $C = 2$ och $a = 2$, alltså $g(x) = 2x^2$
-
-**b)** Nu är $f(x) = 2x^3$ den inre funktionen:
-
-$$ g(f(x)) = 2 \\cdot \\left(2x^3\\right)^2 = 2 \\cdot 4x^6 = 8x^6 $$
-
-Kontroll med ett tal, $x = 1$: $f(g(1)) = f(2) = 16$ men $g(f(1)) = g(2) = 8$.
-
-**Svar:** Nej, $g(f(x)) = 8x^6$ medan $f(g(x)) = 16x^6$. Ordningen spelar roll.
-
-**Generell slutsats:** en potensfunktion insatt i en annan potensfunktion ger en ny potensfunktion, där exponenterna multipliceras. Koefficienterna behandlas olika beroende på vilken funktion som är den inre, och därför blir $f(g(x))$ och $g(f(x))$ i regel olika.`,
         },
         {
             level: 3,

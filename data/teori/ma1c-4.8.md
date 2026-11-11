@@ -371,6 +371,62 @@ ingår $x = 1$ och $x = 4$ inte, och intervallet får ofyllda ringar i
 :::
 :::
 
+## Funktion i funktion
+
+I början av avsnittet liknade vi en funktion vid en maskin: ett värde
+stoppas in och ett nytt värde kommer ut. Ibland kopplas två maskiner efter
+varandra, så att det som kommer ut ur den första stoppas in i den andra.
+
+Skrivsättet $f(g(2))$ betyder just det. Talet 2 stoppas först in i den
+inre funktionen $g$. Värdet $g(2)$ som kommer ut stoppas sedan in i den
+yttre funktionen $f$. Vi räknar alltså **inifrån och ut**. Observera att
+$f(g(2))$ inte är en multiplikation av $f(2)$ och $g(2)$.
+
+::: exempel "Exempel 5 — Funktion i funktion (Avancerad)"
+**Låt $f(x) = 3x - 5$ och $g(x) = 2x + 1$. Bestäm<br>a)&nbsp;$f(g(2))$&emsp;&emsp;b)&nbsp;$g(f(2))$**
+
+::: handskrift
+typ: funktionifunktion
+:::
+
+::: textlosning
+**a)** Vi räknar inifrån och ut och beräknar först den inre funktionen,
+$g(2)$. Vi ersätter $x$ med 2 i $g(x) = 2x + 1$:
+
+$$
+g(2) = 2 \cdot 2 + 1 = 5
+$$
+
+Därefter ersätter vi $g(2)$ i den yttre funktionen med 5. Vi ersätter $x$
+med 5 i $f(x) = 3x - 5$:
+
+$$
+f(g(2)) = f(5) = 3 \cdot 5 - 5 = 10
+$$
+
+**Svar:** 10
+
+**b)** Nu står $f(2)$ innerst, så den räknas först. Vi ersätter $x$ med 2
+i $f(x) = 3x - 5$:
+
+$$
+f(2) = 3 \cdot 2 - 5 = 1
+$$
+
+Värdet 1 stoppas in i den yttre funktionen. Vi ersätter $x$ med 1 i
+$g(x) = 2x + 1$:
+
+$$
+g(f(2)) = g(1) = 2 \cdot 1 + 1 = 3
+$$
+
+Svaren i a) och b) är olika. Det spelar alltså roll vilken funktion som
+står innerst.
+
+**Svar:** 3
+:::
+:::
+
 ::: sammanfattning "Sammanfattning"
 
 ::: sampunkt "Funktion"
@@ -399,6 +455,7 @@ ingår $x = 1$ och $x = 4$ inte, och intervallet får ofyllda ringar i
   $f(-2) = -13$.
 - Även uttryck fungerar: $f(3a) = 15a - 3$.
 - $f(x) = 7$: byt $f(x)$ mot 7 och lös ekvationen $7 = 5x - 3$.
+- $f(g(2))$ räknas **inifrån och ut**: först $g(2)$, sedan $f$ av svaret.
 :::
 
 ::: sampunkt "Läsa av ur en graf"

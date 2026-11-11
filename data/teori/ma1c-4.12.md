@@ -273,45 +273,7 @@ $$
 :::
 :::
 
-## Funktion i funktion
-
-I avsnittet Funktion och funktionsvärde liknade vi en funktion vid en
-maskin: ett värde stoppas in och ett nytt värde kommer ut. Ibland kopplas
-två maskiner efter varandra, så att det som kommer ut ur den första stoppas
-in i den andra.
-
-Skrivsättet $f(g(2))$ betyder just det. Talet 2 stoppas först in i den
-inre funktionen $g$. Värdet $g(2)$ som kommer ut stoppas sedan in i den
-yttre funktionen $f$. Vi räknar alltså **inifrån och ut**. Observera att
-$f(g(2))$ inte är en multiplikation av $f(2)$ och $g(2)$.
-
-::: exempel "Exempel 4 — Funktion i funktion (Mellan)"
-**Låt $f(x) = x^{1/2}$ och $g(x) = 4x^2$. Bestäm $f(g(2))$.**
-
-::: handskrift
-typ: funktionifunktion
-:::
-
-::: textlosning
-Vi räknar inifrån och ut och beräknar först den inre funktionen, $g(2)$:
-
-$$
-g(2) = 4 \cdot 2^2 = 4 \cdot 4 = 16
-$$
-
-Därefter ersätter vi $g(2)$ i den yttre funktionen med 16. Exponenten
-$\dfrac{1}{2}$ betyder kvadratroten, $x^{1/2} = \sqrt{x}$, som vi såg i
-avsnittet Rationella exponenter:
-
-$$
-f(g(2)) = f(16) = 16^{1/2} = \sqrt{16} = 4
-$$
-
-**Svar:** 4
-:::
-:::
-
-::: härledning "OBS! Fyra vanliga fel"
+::: härledning "OBS! Tre vanliga fel"
 - **Att blanda ihop $x^2$ och $2^x$.** Titta på var $x$ står. I basen är
   det en potensfunktion, i exponenten en exponentialfunktion.
 - **Att glömma ± när exponenten är jämn.** $x^4 = 81$ har lösningarna
@@ -319,8 +281,6 @@ $$
 - **Att skriva ”saknar lösning” när exponenten är udda.** $x^3 = -8$ har
   lösningen $x = -2$. Det är bara med jämn exponent som ett negativt
   högerled ger en ekvation utan lösning.
-- **Att läsa $f(g(2))$ som en multiplikation.** Räkna inifrån och ut:
-  först $g(2)$, sedan $f$ av det värdet.
 :::
 
 ::: sammanfattning "Sammanfattning"
@@ -347,6 +307,6 @@ $$
 ::: sampunkt "Räkna med dem"
 - Funktionsvärde: sätt in *x*-värdet. $f(x) = x^{4}$ ger $f(2) = 16$.
 - Bestäm $C$: sätt in en känd punkt och lös ekvationen.
-- $f(g(2))$ räknas **inifrån och ut**: först $g(2)$, sedan $f$ av svaret.
+- Läs av ur grafen: $f(2)$ lodrätt från $x = 2$, $f(x) = 8$ vågrätt från $y = 8$.
 :::
 :::

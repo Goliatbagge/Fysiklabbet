@@ -16798,73 +16798,103 @@
              ekvval: 1 };
   }
 
-  /* ---------------- scen: funktion i funktion (ma1c-4.12 ex 2) --------
-   * f(g(2)) räknas INIFRÅN OCH UT: först g(2), sedan f av det svaret. */
+  /* ---------------- scen: funktion i funktion (ma1c-4.8 ex 5) ---------
+   * f(x) = 3x − 5 och g(x) = 2x + 1. a) f(g(2)) och b) g(f(2)) räknas
+   * INIFRÅN OCH UT: först den inre funktionen, sedan den yttre av svaret.
+   * Svaren blir olika (10 och 3), så ordningen spelar roll. */
   function layoutFunktionifunktion(cfg, F) {
-    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, r;
     var tanke = mkTanke(T);
 
-    /* definitionerna UNDER VARANDRA: sida vid sida blir raden 560 px bred
+    /* definitionerna UNDER VARANDRA: sida vid sida blir raden för bred
      * och sträcker sig in i inställningsrutans mobilzon (x>420, y<150) */
-    var yF = 100, yFf = yF;
-    T.str('f(x)=x^1^/^2', padL, yF);
+    var yFf = 100, yFg = yFf + 2.4 * F;
+    T.str('f(x)=3x-5', padL, yFf);
     T.pause(220);
-    yF += 2.4 * F;
-    T.str('g(x)=4x^2', padL, yF);
+    T.str('g(x)=2x+1', padL, yFg);
     T.stepEnd();
 
-    tanke(yF, [
+    /* ett led där talet i parentesen ersätter x i definitionen: först
+     * talet ringas in, sedan BARA x-et det ersätter */
+    function satt(namn, tal, yDef, rest, yRad, x0) {
+      var x1 = T.str(namn + '(' + tal + ')', x0, yRad);
+      T.stepEnd();
+      var rr = substRings(acts, [[x0 + T.adv(namn + '('), x1 - T.adv(')'), yRad, F],
+                                 [padL + T.adv(namn + '(x)=' + rest[0]),
+                                  padL + T.adv(namn + '(x)=' + rest[0] + 'x'), yDef, F]]);
+      x1 = T.str(rest[1], x1, yRad);
+      fadeRings(acts, rr);
+      T.stepEnd();
+      return x1;
+    }
+
+    /* ---- a) f(g(2)) ---- */
+    y = yFg + 3.6 * F;
+    T.str('a) f(g(2))', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
       [['f(g(2)) räknas inifrån och']],
       [['ut. Innerst står g(2), så']],
-      [['den tar jag först.']]
+      [['den räknar jag först.']]
     ]);
-    y = yF + 3.0 * F;
+    y += 3.4 * F;
     T.str('Inre funktionen', padL, y - 1.6 * F, null, 0.62);
-    var xg0 = padL, xg = T.str('g(2)', padL, y);
-    T.stepEnd();
-
-    /* först talet i parentesen, sedan BARA x-et det ersätter */
-    var ringar = substRings(acts, [[padL + T.adv('g('), xg - T.adv(')'), y, F],
-                                   [padL + T.adv('g(x)=4'), padL + T.adv('g(x)=4x'), yF, F]]);
-    var xg1 = T.str('=4·2^2=4·4', xg, y);
-    fadeRings(acts, ringar);
-    T.stepEnd();
-
-    var xr0 = T.str('=', xg1, y), xr1 = T.str('16', xr0, y);
+    xx = satt('g', '2', yFg, ['2', '=2·2+1'], y, padL);
+    var xr0 = T.str('=', xx, y), xr1 = T.str('5', xr0, y);
     T.stepEnd();
 
     tanke(y, [
       [['Nu byter jag ut g(2) mot']],
-      [['sitt värde 16 och räknar ut']],
+      [['sitt värde 5 och räknar ut']],
       [['den yttre funktionen.']]
     ]);
-    var rings = substRings(acts, [[xr0, xr1, y, F]]);
+    r = substRings(acts, [[xr0 + T.adv('='), xr1, y, F]]);
     y += 3.6 * F;
     T.str('Yttre funktionen', padL, y - 1.6 * F, null, 0.62);
-    xx = T.str('f(g(2))=f(16)', padL, y);
-    fadeRings(acts, rings);
-    T.stepEnd();
-
-    rings = substRings(acts, [[xx - T.adv('16)'), xx - T.adv(')'), y, F],
-                              [padL + T.adv('f(x)='), padL + T.adv('f(x)=x'), yFf, F]]);
-    xx = T.str('=16^1^/^2', xx, y);
-    fadeRings(acts, rings);
-    T.stepEnd();
-
-    tanke(y, [
-      [['Exponenten 1/2 är detsamma']],
-      [['som kvadratroten.']]
-    ]);
-    y += 2.8 * F;
-    xx = T.str('=', padL, y);
-    xx = T.rot('16', xx, y);
-    T.stepEnd();
-
-    T.str('=4', xx, y);
+    xx = T.str('f(g(2))=', padL, y);
+    fadeRings(acts, r);
+    xx = satt('f', '5', yFf, ['3', '=3·5-5'], y, xx);
+    T.str('=10', xx, y);
     T.stepEnd();
 
     y += 2.4 * F;
-    xe = T.str('Svar: 4', padL, y);
+    xe = T.str('Svar: 10', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) g(f(2)) ---- */
+    y += 3.6 * F;
+    T.str('b) g(f(2))', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Nu står f(2) innerst. Samma']],
+      [['tal, men den andra']],
+      [['funktionen först.']]
+    ]);
+    y += 3.4 * F;
+    T.str('Inre funktionen', padL, y - 1.6 * F, null, 0.62);
+    xx = satt('f', '2', yFf, ['3', '=3·2-5'], y, padL);
+    xr0 = T.str('=', xx, y); xr1 = T.str('1', xr0, y);
+    T.stepEnd();
+
+    r = substRings(acts, [[xr0 + T.adv('='), xr1, y, F]]);
+    y += 3.6 * F;
+    T.str('Yttre funktionen', padL, y - 1.6 * F, null, 0.62);
+    xx = T.str('g(f(2))=', padL, y);
+    fadeRings(acts, r);
+    xx = satt('g', '1', yFg, ['2', '=2·1+1'], y, xx);
+    T.str('=3', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Olika svar, 10 och 3!']],
+      [['Ordningen spelar roll:']],
+      [['det inre räknas alltid först.']]
+    ]);
+    y += 2.4 * F;
+    xe = T.str('Svar: 3', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 

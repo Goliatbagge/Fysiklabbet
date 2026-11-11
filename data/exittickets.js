@@ -12449,6 +12449,22 @@ window.EXITTICKETS = {
       'Skärning med *x*-axeln betyder $y = 0$ — där är funktionsvärdet noll, alltså lösningarna till $f(x) = 0$.',
     ],
   },
+  {
+    question: 'Låt $f(x) = 2x - 3$ och $g(x) = x + 4$. Hur beräknas $f(g(2))$?',
+    choices: [
+      '$f(2) + g(2)$',
+      '$f(2) \\cdot g(2)$',
+      'Först $f(2) = 1$, sedan $g(1) = 5$',
+      'Först $g(2) = 6$, sedan $f(6) = 9$',
+    ],
+    correct: 3,
+    why: [
+      'Funktionsvärdena ska inte adderas. Värdet $g(2)$ är det som stoppas in i $f$.',
+      'Skrivsättet $f(g(2))$ är ingen multiplikation. Värdet $g(2)$ är det som stoppas in i $f$.',
+      'Det vore $g(f(2))$. Ordningen styrs av vilken funktion som står innerst.',
+      'Funktion i funktion räknas inifrån och ut: den inre $g(2) = 2 + 4 = 6$, sedan den yttre $f(6) = 2 \\cdot 6 - 3 = 9$.',
+    ],
+  },
 ],
 
 'ma1c-4.9': [
@@ -12734,19 +12750,19 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Låt $f(x) = x^{1/2}$ och $g(x) = 4x^2$. Hur beräknas $f(g(2))$?',
+    question: 'Grafen till en potensfunktion $f$ går genom punkten $(3, 18)$. Vad betyder det?',
     choices: [
-      '$f(2) + g(2)$',
-      'Först $g(2) = 16$, sedan $f(16) = 4$',
-      '$f(2) \\cdot g(2)$',
-      'Först $f(2)$, sedan $g$ av det värdet',
+      '$f(18) = 3$',
+      '$f(3) = 18$',
+      '$f(x) = 3$ har lösningen $x = 18$',
+      '$f(3) \\cdot 18 = 0$',
     ],
     correct: 1,
     why: [
-      'Funktionsvärdena ska inte adderas. Värdet $g(2)$ är det som stoppas in i $f$.',
-      'Funktion i funktion räknas inifrån och ut: den inre $g(2) = 4 \\cdot 4 = 16$, sedan den yttre $f(16) = \\sqrt{16} = 4$.',
-      'Skrivsättet $f(g(2))$ är ingen multiplikation. Värdet $g(2)$ är det som stoppas in i $f$.',
-      'Det vore $g(f(2))$. Ordningen styrs av vilken funktion som står innerst.',
+      'Ordningen är omkastad. I en punkt $(x, y)$ står $x$ först, och $y$-värdet är funktionsvärdet.',
+      'Punkten $(3, 18)$ har $x = 3$ och $y = 18$. Funktionsvärdet när $x = 3$ är alltså 18.',
+      'Ordningen är omkastad. Punkten säger att $f(x) = 18$ har lösningen $x = 3$.',
+      'En punkt på grafen säger att $y$-värdet är lika med $f(x)$, inte att en produkt är noll.',
     ],
   },
   {

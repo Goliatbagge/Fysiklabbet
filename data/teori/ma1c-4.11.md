@@ -102,7 +102,7 @@ Tabellen visar kapitalet år för år.
 | $x$ år | $25\,000 \cdot 1{,}02^x$ |
 :::
 
-Exponenten är alltid lika med antalet år. Kapitalet $K$ kr efter $x$ år
+Exponenten är lika med antalet år. Kapitalet $K$ kr efter $x$ år
 är därför
 
 $$

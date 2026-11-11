@@ -35,6 +35,7 @@
  *           fasvag (fy2-2.7: stående våg med partiklar i fas och i motfas),
  *           vagstallning (fy2-2.7: en puls vandrar nedåt i en hängande vågställning),
  *           vagtank (fy2-2.13: vågfronter bryts vid gränsen mellan djupt och grunt vatten)
+ *           reflexion (fy2-2.13: dra i den infallande strålen, den reflekterade följer med, r = i)
  *           blixtljud (fy2-2.10: ljudets hastighet, blixt/fyrverkeri och tumregeln 3 s per km;
  *                      visa: fyrverkeri startar med fyrverkeriet)
  *           simsida (en hel simuleringssida i en iframe, src: <fil>.html; se buildSimsida)
@@ -17109,7 +17110,129 @@
         tk.spela(true);
     }
 
-    var TYPES = { tomtebloss: buildTomtebloss, centrifug: buildCentrifug,
+    // ─────────────────────────────────────────────────────────────────
+    //  typ: reflexion
+    //  Reflexionslagen (fy2-2.13). Eleven drar i den infallande strålens
+    //  ände och ser den reflekterade strålen följa med, så att r alltid
+    //  är lika stor som i. Vinklarna mäts mot den streckade normalen.
+    // ─────────────────────────────────────────────────────────────────
+    var refRaknare = 0;
+    function buildReflexion(node, cfg) {
+        var INK = '#1f2530', ROD = '#c0392b', GRA = '#7c828c';
+        var W = 440, H = 220, YS = 186, PX = 220, L = 150, RI = 40, RR = 54;
+        var iDeg = 40;
+        var id = 'ms-ref-rutnat-' + (++refRaknare);
+        function fmt0(v) { return String(Math.round(v)); }
+        function pt(r, a, sida) { return [PX + sida * r * Math.sin(a), YS - r * Math.cos(a)]; }
+
+        var bas = vgRutnat(id, 0, 0, W, H) +
+            '<line x1="20" y1="' + YS + '" x2="' + (W - 20) + '" y2="' + YS + '" stroke="' + INK + '" stroke-width="2.2"/>';
+        for (var x = 26; x <= W - 20; x += 12) {
+            bas += '<line x1="' + x + '" y1="' + YS + '" x2="' + (x - 8) + '" y2="' + (YS + 8) + '" stroke="' + GRA + '" stroke-width="1"/>';
+        }
+        bas += '<line x1="' + PX + '" y1="' + (YS - L - 8) + '" x2="' + PX + '" y2="' + (YS + 4) + '" stroke="#9aa0a6" stroke-width="1.3" stroke-dasharray="5 4"/>' +
+            '<text x="' + (PX + 6) + '" y="' + (YS - L) + '" font-size="13" fill="' + INK + '">normal</text>';
+
+        function pil(x1, y1, x2, y2) {
+            var dx = x2 - x1, dy = y2 - y1, l = Math.sqrt(dx * dx + dy * dy), ux = dx / l, uy = dy / l, hd = 11, b = 5;
+            var bx = x2 - ux * hd, by = y2 - uy * hd;
+            return '<line x1="' + vgR1(x1) + '" y1="' + vgR1(y1) + '" x2="' + vgR1(bx) + '" y2="' + vgR1(by) + '" stroke="' + INK +
+                '" stroke-width="2.6" stroke-linecap="butt"/><polygon points="' + vgR1(bx - uy * b) + ',' + vgR1(by + ux * b) + ' ' +
+                vgR1(x2) + ',' + vgR1(y2) + ' ' + vgR1(bx + uy * b) + ',' + vgR1(by - ux * b) + '" fill="' + INK + '"/>';
+        }
+        function bage(r, a, sida) {
+            if (a < 0.01) return '';
+            var p = pt(r, a, sida);
+            // från strålen till normalen (vänster) eller från normalen till strålen (höger), medurs på skärmen
+            return sida < 0
+                ? '<path d="M' + vgR1(p[0]) + ',' + vgR1(p[1]) + ' A' + r + ',' + r + ' 0 0 1 ' + PX + ',' + (YS - r) + '" fill="none" stroke="' + ROD + '" stroke-width="1.8"/>'
+                : '<path d="M' + PX + ',' + (YS - r) + ' A' + r + ',' + r + ' 0 0 1 ' + vgR1(p[0]) + ',' + vgR1(p[1]) + '" fill="none" stroke="' + ROD + '" stroke-width="1.8"/>';
+        }
+        function etikett(r, a, sida, bokstav) {
+            // på bisektrisen strax utanför bågen; vid små vinklar en bit ut från normalen
+            var p = pt(r + 13, a / 2, sida), dx = Math.max(Math.abs(p[0] - PX), 11);
+            return '<text x="' + vgR1(PX + sida * dx) + '" y="' + vgR1(p[1] + 5) + '" text-anchor="middle" font-size="16" fill="' + ROD + '">' +
+                '<tspan font-style="italic">' + bokstav + '</tspan></text>';
+        }
+
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus';
+        if (cfg.titel) {
+            var tEl = document.createElement('div');
+            tEl.className = 'minisim-title';
+            tEl.textContent = cfg.titel;
+            card.appendChild(tEl);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene';
+        scene.innerHTML = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" style="display:block;max-width:' + (W * 1.4) + 'px;margin:0 auto;user-select:none;-webkit-user-select:none" ' +
+            'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En stråle träffar en ' +
+            'reflekterande yta. Dra i den infallande strålens ände för att ändra infallsvinkeln i. Den reflekterade strålen följer med, ' +
+            'och reflexionsvinkeln r är alltid lika stor som i.">' + bas + '<g class="ms-ref-dyn"></g></svg>';
+        var svg = scene.querySelector('svg'), dyn = scene.querySelector('.ms-ref-dyn');
+        card.appendChild(scene);
+        var info = document.createElement('div');
+        info.className = 'minisim-info ms-brod';
+        info.style.marginTop = '6px';
+        card.appendChild(info);
+        node.appendChild(card);
+
+        function rita() {
+            var a = iDeg * Math.PI / 180, S = pt(L, a, -1), E = pt(L, a, 1), s = '';
+            s += pil(S[0], S[1], PX, YS) + pil(PX, YS, E[0], E[1]);
+            s += bage(RI, a, -1) + bage(RR, a, 1);
+            s += etikett(RI, a, -1, 'i') + etikett(RR, a, 1, 'r');
+            // handtaget i strålens ände, med en stor osynlig träffyta för fingret
+            s += '<g class="ms-ref-handtag" tabindex="0" role="slider" aria-label="Infallsvinkel" aria-valuemin="0" aria-valuemax="80" aria-valuenow="' +
+                fmt0(iDeg) + '" style="cursor:grab;touch-action:none;outline:none">' +
+                '<line x1="' + vgR1(S[0]) + '" y1="' + vgR1(S[1]) + '" x2="' + PX + '" y2="' + YS + '" stroke="transparent" stroke-width="22"/>' +
+                '<circle cx="' + vgR1(S[0]) + '" cy="' + vgR1(S[1]) + '" r="22" fill="transparent"/>' +
+                '<circle cx="' + vgR1(S[0]) + '" cy="' + vgR1(S[1]) + '" r="9" fill="#f7f2e8" stroke="' + INK + '" stroke-width="2.2"/>' +
+                '<circle cx="' + vgR1(S[0]) + '" cy="' + vgR1(S[1]) + '" r="3" fill="' + INK + '"/></g>';
+            dyn.innerHTML = s;
+            info.innerHTML = '<em>i</em> = ' + fmt0(iDeg) + '°&emsp;<em>r</em> = ' + fmt0(iDeg) + '°&emsp;' +
+                '<span style="opacity:0.75">Dra i den infallande strålens ände.</span>';
+        }
+
+        var drar = false;
+        function vinkelFran(ev) {
+            var m = svg.getScreenCTM();
+            if (!m) return;
+            var p = svg.createSVGPoint();
+            p.x = ev.clientX; p.y = ev.clientY;
+            var q = p.matrixTransform(m.inverse());
+            var dx = PX - q.x, dy = YS - q.y;
+            if (dy < 1) dy = 1;
+            var v = Math.atan2(Math.max(0, dx), dy) * 180 / Math.PI;
+            iDeg = Math.max(0, Math.min(80, Math.round(v)));
+            rita();
+        }
+        svg.addEventListener('pointerdown', function (ev) {
+            if (!ev.target.closest || !ev.target.closest('.ms-ref-handtag')) return;
+            drar = true;
+            try { svg.setPointerCapture(ev.pointerId); } catch (e) {}
+            ev.preventDefault();
+            vinkelFran(ev);
+        });
+        svg.addEventListener('pointermove', function (ev) { if (drar) vinkelFran(ev); });
+        function slapp() { drar = false; }
+        svg.addEventListener('pointerup', slapp);
+        svg.addEventListener('pointercancel', slapp);
+        svg.addEventListener('keydown', function (ev) {
+            var d = ev.key === 'ArrowLeft' || ev.key === 'ArrowDown' ? 1 : ev.key === 'ArrowRight' || ev.key === 'ArrowUp' ? -1 : 0;
+            if (!d) return;
+            ev.preventDefault();
+            iDeg = Math.max(0, Math.min(80, iDeg + d));
+            rita();
+            var h = svg.querySelector('.ms-ref-handtag');
+            if (h) h.focus();
+        });
+        card._set = function (v) { iDeg = v; rita(); };
+        rita();
+    }
+
+    var TYPES = { tomtebloss: buildTomtebloss,
+                  reflexion: buildReflexion, centrifug: buildCentrifug,
                   stegkast: buildStegkast,
                   svangningsgrafer: buildSvangningsgrafer,
                   periodtid: buildPeriodtid,

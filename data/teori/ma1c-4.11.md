@@ -215,6 +215,109 @@ Slutsats: $g(x) = 2^x$ är den uppritade funktionen.
 :::
 :::
 
+::: exempel "Exempel 3 — Andmaten i dammen (Avancerad)"
+**Andmat är små flytande växter som kan breda ut sig över en damm. I en damm täckte andmaten $288\ \mathrm{m^2}$ två år efter att den upptäcktes och $972\ \mathrm{m^2}$ fem år efter upptäckten. Anta att den täckta ytan växer exponentiellt.<br>a) Hur stor yta täckte andmaten när den upptäcktes, och med hur många procent ökar ytan per år?<br>b) Dammen är $12\,000\ \mathrm{m^2}$. Hur många år efter upptäckten är hela dammen täckt, om ökningen fortsätter i samma takt?**
+
+::: handskrift
+typ: andmat
+:::
+
+::: textlosning
+Vi kallar den täckta ytan $A$ kvadratmeter efter $x$ år. Ytan växer exponentiellt,
+så $A(x) = C \cdot a^x$, där $C$ är ytan när andmaten upptäcktes och $a$
+är förändringsfaktorn. Vi vet att $A(2) = 288$ och $A(5) = 972$.
+
+**a)** Från år 2 till år 5 går det 3 år. Varje år multipliceras ytan med
+$a$, så de $288\ \mathrm{m^2}$ multipliceras med $a$ tre gånger:
+
+$$
+288 \cdot a^3 = 972
+$$
+
+Vi dividerar båda led med 288:
+
+$$
+\dfrac{288 \cdot a^3}{288} = \dfrac{972}{288}
+$$
+
+$$
+a^3 = 3{,}375
+$$
+
+Exponenten 3 är udda, så vi drar tredjeroten ur båda led:
+
+$$
+a = \sqrt[3]{3{,}375}
+$$
+
+$$
+a = 1{,}5
+$$
+
+Förändringsfaktorn är $1{,}5 = 1 + 0{,}5$, alltså en ökning med 50 % per
+år.
+
+Efter 2 år har startytan $C$ multiplicerats med 1,5 två gånger:
+
+$$
+C \cdot 1{,}5^2 = 288
+$$
+
+$$
+C \cdot 2{,}25 = 288
+$$
+
+Vi dividerar båda led med 2,25:
+
+$$
+\dfrac{C \cdot 2{,}25}{2{,}25} = \dfrac{288}{2{,}25}
+$$
+
+$$
+C = 128
+$$
+
+Kontroll: $128 \cdot 1{,}5^5 = 972$, vilket stämmer med ytan efter 5 år.
+
+**Svar:** Andmaten täckte $128\ \mathrm{m^2}$ när den upptäcktes, och ytan ökar med
+50 % per år.
+
+**b)** Modellen är nu $A(x) = 128 \cdot 1{,}5^x$. Dammen är helt täckt när
+ytan är $12\,000\ \mathrm{m^2}$:
+
+$$
+128 \cdot 1{,}5^x = 12\,000
+$$
+
+Vi dividerar båda led med 128:
+
+$$
+\dfrac{128 \cdot 1{,}5^x}{128} = \dfrac{12\,000}{128}
+$$
+
+$$
+1{,}5^x = 93{,}75
+$$
+
+Den okända $x$ sitter i exponenten, så vi prövar heltal tills potensen
+går förbi 93,75:
+
+$$
+1{,}5^{11} \approx 86{,}5 \quad \text{(mindre än 93,75)}
+$$
+
+$$
+1{,}5^{12} \approx 129{,}7 \quad \text{(större än 93,75)}
+$$
+
+Alltså ligger $x$ mellan 11 och 12. Det är rimligt: efter 11 år täcker
+andmaten $128 \cdot 1{,}5^{11} \approx 11\,072\ \mathrm{m^2}$, nästan hela
+dammen.
+
+**Svar:** Mellan 11 och 12 år efter upptäckten.
+:::
+:::
+
 ::: sammanfattning "Sammanfattning"
 
 ::: sampunkt "Exponentialfunktion"

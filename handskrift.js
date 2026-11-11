@@ -16440,6 +16440,146 @@
     return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
   }
 
+  /* ---------------- scen: andmaten i dammen (ma1c-4.11 ex 3) ----------
+   * Avancerad tillämpning: ytan är känd efter 2 och 5 år, A(2) = 288 m²
+   * och A(5) = 972 m². Mellan mätningarna multipliceras ytan med a tre
+   * gånger, så 288·a³ = 972 ger a = ∛3,375 = 1,5 och därefter C = 128.
+   * b) 128·1,5^x = 12 000 ger 1,5^x = 93,75, som prövas med heltal:
+   * 1,5^11 ≈ 86,5 och 1,5^12 ≈ 129,7, alltså mellan 11 och 12 år.
+   * Samma tal som textlösningen i ma1c-4.11. */
+  function layoutAndmat(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    var xwA = padL + T.adv('288·a^3=972') + 0.9 * F;
+    var xwC = padL + T.adv('C·2,25=288') + 0.9 * F;
+    var xwB = padL + T.adv('128·1,5^x=12 000') + 0.9 * F;
+
+    var yM = 166;
+    T.str('Ytan växer exponentiellt', padL, yM - 1.6 * F, null, 0.62);
+    T.str('A(x)=C·a^x', padL, yM);
+    T.stepEnd();
+
+    y = yM + 2.6 * F;
+    T.str('A(2)=288  och  A(5)=972', padL, y);
+    T.stepEnd();
+
+    /* ---- a) förändringsfaktorn ---- */
+    tanke(y, [
+      [['Från år 2 till år 5 går det']],
+      [['3 år. Varje år multipliceras']],
+      [['ytan med a, alltså tre gånger.']]
+    ]);
+    y += 4.0 * F;
+    T.str('a) 288 multipliceras med a tre gånger', padL, y - 1.6 * F, null, 0.62);
+    T.str('288·a^3=972', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/288', xwA, '288·a^3=972');
+    T.str('a^3=3,375', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Exponenten 3 är udda. Jag']],
+      [['drar tredjeroten ur båda led.']]
+    ]);
+    y += 2.6 * F;
+    xx = T.str('a=', padL, y);
+    T.rot('3,375', xx + 9, y, 3);
+    T.stepEnd();
+
+    y += 2.5 * F;
+    T.str('a=1,5', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['1,5 är 1 plus 0,5. Varje år']],
+      [['kommer hälften till, 50 %.']]
+    ]);
+    y += 2.6 * F;
+    T.str('1,5=1+0,5', padL, y);
+    T.str('ökning med 50 % per år', padL + T.adv('1,5=1+0,5') + 0.9 * F, y, null, 0.62);
+    T.stepEnd();
+
+    /* ---- a) startytan ---- */
+    tanke(y, [
+      [['Nu är a känt. Efter 2 år har']],
+      [['startytan C multiplicerats']],
+      [['med 1,5 två gånger.']]
+    ]);
+    y += 4.0 * F;
+    T.str('Ytan efter 2 år ger startytan C', padL, y - 1.6 * F, null, 0.62);
+    T.str('C·1,5^2=288', padL, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    T.str('C·2,25=288', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/2,25', xwC, 'C·2,25=288');
+    T.str('C=128', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Kontroll: 128 · 1,5^5 = 972.']],
+      [['Det stämmer med ytan efter']],
+      [['5 år.']]
+    ]);
+    y += 2.8 * F;
+    T.str('Svar: Startytan var 128 m^2, och', padL, y);
+    T.stepEnd();
+    y += 2.2 * F;
+    xe = T.str('ytan ökar med 50 % per år', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) hela dammen ---- */
+    tanke(y, [
+      [['Modellen är nu A(x) = 128 · 1,5^x.']],
+      [['Dammen är täckt när ytan']],
+      [['är 12 000 m^2.']]
+    ], 0.5);
+    y += 4.6 * F;
+    T.str('b) Hela dammen täckt när A(x)=12 000', padL, y - 1.6 * F, null, 0.62);
+    T.str('128·1,5^x=12 000', padL, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/128', xwB, '128·1,5^x=12 000');
+    T.str('1,5^x=93,75', padL, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['x sitter i exponenten. Jag']],
+      [['prövar heltal tills potensen']],
+      [['går förbi 93,75.']]
+    ]);
+    y += 2.6 * F;
+    T.str('1,5^1^1≈86,5', padL, y);
+    T.str('mindre än 93,75', padL + T.adv('1,5^1^1≈86,5') + 0.9 * F, y, null, 0.62);
+    T.stepEnd();
+
+    y += 2.4 * F;
+    T.str('1,5^1^2≈129,7', padL, y);
+    T.str('större än 93,75', padL + T.adv('1,5^1^2≈129,7') + 0.9 * F, y, null, 0.62);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Efter 11 år täcks cirka']],
+      [['11 000 m^2, nästan hela']],
+      [['dammen. Rimligt.']]
+    ]);
+    y += 2.8 * F;
+    T.str('Svar: Mellan 11 och 12 år efter', padL, y);
+    T.stepEnd();
+    y += 2.2 * F;
+    xe = T.str('upptäckten', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
   /* ---------------- scen: potensfunktion (ma1c-4.12 ex 1) -------------
    * f(x) = x⁴ med a) f(2) och b) ekvationen f(x) = 2. Exponenten är
    * JÄMN, så ekvationen har två lösningar och roten får ±. */
@@ -65223,6 +65363,7 @@
                    kapitalvaxer: layoutKapitalvaxer,
                    tolkaexp: layoutTolkaexp,
                    vilkenexp: layoutVilkenexp,
+                   andmat: layoutAndmat,
                    potensfunktion: layoutPotensfunktion,
                    potensavlas: layoutPotensavlas,
                    potensekvuddajamn: layoutPotensekvuddajamn,

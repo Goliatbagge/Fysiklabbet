@@ -1,0 +1,43 @@
+03:15:01  [idag] === Nyhetsjobb: start (2026-11-11) ===
+03:15:03  [idag] Dagens nyhet finns (förberedd i går).
+03:15:04  [idag] Startar Claude Code (headless, modell opus, nyckel)...
+03:20:02  [imorgon] === Nyhetsjobb: start (2026-11-11) ===
+03:20:02  [imorgon] En körning pågår redan (lås 5 min gammalt). Avslutar.
+03:27:54  [idag] Morgondagens nyhet är skriven, godkänd av utgivaren och committad på grenen `nyhetsjobb` (8c5a50c5). Jag har inte pushat och inte mejlat, enligt uppdraget.
+03:27:54  [idag] 
+03:27:54  [idag] **Artikeln:** ”En svävande magnet stor som ett dammkorn snurrar 2,3 miljoner varv i sekunden” (`2026-11-12-snurran-som-svavar`, kategori Supraledning). Den har datum 2026-11-12 och datumgrinden döljer den till midnatt.
+03:27:55  [idag] - **Studien:** Jose m.fl., ”Ultrafast Meissner-levitated microrotor”, *Science Advances* 6 november 2026, kollegialt granskad. Tidskriftens sida spärrar automatiska hämtningar, så jag läste hela studien i förtrycket på arXiv (version 3). Siffrorna i den publicerade sammanfattningen är desamma.
+03:27:55  [idag] - **Innehåll:**
+03:27:55  [idag]   - En magnetkula med radien 30 µm svävar över en supraledare av bly vid 4,2 kelvin.
+03:27:55  [idag]   - Den snurrar 2,3 miljoner varv per sekund, vilket är rekord för en magnetiskt svävande rotor.
+03:27:55  [idag]   - Bromsningen är så liten att det tar omkring 24 dygn innan varvtalet sjunkit till 37 procent.
+03:27:55  [idag]   - Kulan kan användas som tryckmätare vid 4,2 kelvin, och forskarna har gjort ett första, uttryckligen preliminärt försök att leta efter mörk materia (axionliknande partiklar).
+03:27:55  [idag] - **Ämnesområdet:** krockar inte med grannen 2026-11-11, som är kärnfysik.
+03:27:55  [idag] - **Huvudbild:** ett fritt foto från Wikimedia Commons (Mai-Linh Doan, CC BY-SA 3.0) av en magnet som svävar över en supraledare, beskuret till bredformat. Bildtexten säger att fotot inte visar experimentet i studien. Jag tog ingen figur ur studien, eftersom jag inte kunde kontrollera dess licens. Ingen AI-bild behövdes.
+03:27:55  [idag] - **Ordlistan:** ett nytt begrepp, precession.
+03:27:55  [idag] 
+03:27:55  [idag] **Granskning:** Utgivaren gav först RÄTTA FÖRST. Inga siffror eller citat var fel, bara tre formuleringar:
+03:27:55  [idag] - ingressens förklaring till varför kulan fungerar som tryckmätare,
+03:27:55  [idag] - att precession beskrevs som att snurran vinglar,
+03:27:55  [idag] - att bildtexten kallade fotot ”samma fenomen”, fast supraledaren där kyls med flytande kväve.
+03:27:55  [idag] 
+03:27:55  [idag] Jag har rättat alla tre. Utgivaren skrev att rättningarna inte krävde någon ny granskning. Därför loggade jag GODKÄND själv i `granskningar.md` efter att ha kontrollerat att rättningarna kommit in, utan att utgivaren körts en andra gång.
+03:27:55  [idag] 
+03:27:55  [idag] **Kontroller:** `verify-navigation`, `verify-begrepp`, `verify-sitemap` och språkgranskningen av artikeln är gröna. Förhandsvisningen ser rätt ut i en skärmdump. `publicerat.md`, `ko.md` och `granskningar.md` är uppdaterade.
+03:27:55  [idag] 
+03:27:55  [idag] **Att känna till:**
+03:27:55  [idag] - **Ditt önskemål om Mpemba-nyheten** gick fortfarande inte att skriva: det finns inget förtryck på arXiv, och fulltexten hos APS ligger bakom betalvägg. Den ligger kvar i kön, men fönstret du angav stänger på lördag (2026-11-14). Utan fulltext går den inte att skriva.
+03:27:55  [idag] - **Capotauro** står kvar som brevteaser och får inte publiceras förrän brevet 2026-11-15 gått ut.
+03:27:55  [idag] - **Utelämnade filer:** bygget skrev om cirka 500 delningssidor och två i18n-filer, men bara radsluten ändrades och innehållet är detsamma. De ligger utanför committen.
+03:27:56  [idag] Claude avslutade med kod 0
+03:27:56  [idag] error: cannot pull with rebase: You have unstaged changes.
+03:27:56  [idag] error: Please commit or stash them.
+03:28:00  [idag] Pushat till main.
+03:28:00  [idag] Artikel 2026-11-12 pushad: 2026-11-12-snurran-som-svavar
+03:29:31  [idag] https://fysiklabbet.se/nyheter.html?forhand=2026-11-12-snurran-som-svavar
+03:29:31  [idag] Mejlet byggt av mallen (C:\claude\Fysiklabbet-nyhetsjobb\.claude\nyheter\logg\mejl-2026-11-12).
+03:29:31  [idag] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+03:30:20  [idag] Email sent to [ägaren] with subject "[Nyhet 2026-11-12] Att granska: En svävande magnet stor som ett dammkorn snurrar 2,3 miljoner varv i sekunden". The `[[UTGIVARE]]` placeholder was replaced in both bodies with a summary of the three corrections the utgivare required (the causal link in the intro tightened to "braking proportional to pressure," precession described as an interpreted signal rather than an exact measurement, and the image caption corrected to show a liquid-nitrogen high-temperature superconductor instead of claiming "the same phenomenon").
+03:30:21  [idag] Claude avslutade med kod 0
+03:30:21  [idag] Mejlet till ägaren är skickat.
+03:30:21  [idag] === Nyhetsjobb: slut ===

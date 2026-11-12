@@ -103,6 +103,65 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-13-magneten-vid-sidan-av-fibern",
+    date: "2026-11-13",
+    title: "En magnet vid sidan av en glasfiber vrider ljuset, en effekt som räknats bort i femtio år",
+    deck: "Forskare vid Wits University i Johannesburg har visat att ett magnetfält som går tvärs över en vanlig optisk fiber vrider ljusets polarisation, en variant av Faradayeffekten som den förenkling fiberingenjörer använt sedan 1970-talet räknar bort. Effekten syns bara i fibrer där ljuset studsar mot en skarp gräns mellan kärna och mantel, och bara när ljusets elektriska fält svänger vinkelrätt mot magnetfältet.",
+    category: "Optik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-11-13-magneten-vid-sidan-av-fibern.jpg",
+    imageAlt: "En hoprullad genomskinlig optisk kabel på svart botten. Rött ljus lyser ur kontakterna i båda ändar och färgar kabeln svagt röd.",
+    imageCredit: "Foto: Hustvedt, en optisk kabel med rött ljus, via Wikimedia Commons (CC BY-SA 3.0). Beskuren till bredformat. Bilden visar en vanlig ljusledande kabel, inte fibrerna i studien.",
+    tags: ["optik", "optisk fiber", "polarisation", "faradayeffekten", "magnetfält", "totalreflektion", "brytningsindex", "transversell våg", "speckle", "interferens", "laser", "wits university"],
+    sources: [
+      { name: "Phys.org: A standard shortcut, used since the 1970s, hides a magneto-optic effect in ordinary glass fiber (Wits University, november 2026)", url: "https://phys.org/news/2026-11-standard-shortcut-1970s-magneto-optic.html" },
+      { name: "arXiv: förtrycket av studien i fulltext (29 september 2026)", url: "https://arxiv.org/abs/2609.36917" },
+      { name: "Wikipedia: Faraday effect (historik)", url: "https://en.wikipedia.org/wiki/Faraday_effect" }
+    ],
+    research: {
+      citation: "M. R. Sharif och M. A. Cox, ”Transverse Faraday effect in multimode fibres”, Optics Letters 51, sidorna 5526–5529 (2026). Kollegialt granskad.",
+      url: "https://doi.org/10.1364/OL.611078"
+    },
+    larare: {
+      moment: [
+        { label: "Ljusets brytning", href: "katalog.html?id=fy2-4.4" },
+        { label: "Magnetism och magnetfält", href: "katalog.html?id=fy2-3.1" }
+      ],
+      fragor: [
+        "I den vanliga Faradayeffekten vrids polarisationen vinkeln α = V · B · L. Hur stor blir vinkeln i grader för kvartsglas och grönt ljus med V = 5,2 rad/(T · m), om fältet 0,24 T gick längs med hela den 1,0 m långa fibern? Varför märks ändå ingen sådan vridning när fältet går tvärs över fibern och fibern bär tusentals ljusmönster samtidigt?",
+        "Forskarna vände varannan magnet åt motsatt håll och såg då ingen effekt alls. Varför tar en effekt som är proportionell mot B ut sig själv på det sättet, medan en effekt som är proportionell mot B² inte gör det?",
+        "Ljus är en transversell våg. Förklara med en skiss av en stråle som studsar i fiberns kärna varför det elektriska fältet då får en del som pekar längs med fibern, och varför den delen blir större ju brantare strålen går."
+      ]
+    },
+    body: [
+      { type: "p", html: "År 1845 upptäckte Michael Faraday att ett magnetfält kan påverka ljus. Han lät linjärt polariserat ljus gå genom ett tjockt glasblock och lade en kraftig magnet så att fältet pekade längs med strålen. Ljusets polarisationsriktning, den riktning som vågens elektriska fält svänger i, vreds då en bit. Det var det första beviset för att ljus och elektromagnetism hänger ihop." },
+      { type: "p", html: "I dag används Faradayeffekten varje dag i optisk teknik, till exempel i komponenter som bara släpper igenom ljus åt ett håll och i mätare som läser av strömmen i en kraftledning via magnetfältet runt den. Men en sak har fiberforskare tagit för given: fältet måste gå längs med ljuset. Ett magnetfält som går tvärs över en fiber har ansetts ge bara en annan och mycket svagare effekt." },
+      { type: "p", html: "Nu visar Mohammed Raiyan Sharif och Mitchell Cox vid University of the Witwatersrand (Wits) i Johannesburg att det inte stämmer. Studien är publicerad i tidskriften <em>Optics Letters</em>." },
+      { type: "h2", text: "Förenklingen som tog bort en del av ljuset" },
+      { type: "p", html: "En optisk fiber består av en kärna av glas omgiven av en mantel med något lägre brytningsindex. Ljuset hålls kvar i kärnan genom totalreflektion och studsar i sicksack längs fibern. Skillnaden i brytningsindex är ofta bara omkring en procent, så strålarna går nästan parallellt med fibern. Därför räknar man sedan 1970-talet med en förenkling som behandlar brytningsindex som nästan konstant genom hela fibern. Förenklingen gör beräkningarna mycket enklare, och den fungerar så bra att få har ifrågasatt den." },
+      { type: "p", html: "Men den har ett pris. Ljus är en transversell våg: det elektriska fältet svänger alltid vinkelrätt mot den riktning strålen går. En stråle som går snett genom kärnan får därför ett elektriskt fält som delvis pekar längs med fibern. Ju brantare strålen går, desto större blir den delen. Förenklingen sätter den delen till noll." },
+      { type: "p", html: "Faradayeffekten vrider det elektriska fältet runt magnetfältets riktning. Pekar fältet längs med fibern vrids polarisationen i fiberns tvärsnitt, det klassiska fallet. Går magnetfältet i stället tvärs över fibern skulle det elektriska fältet vridas i ett plan som innehåller fiberns längdriktning, och det kräver just den del av fältet som förenklingen tagit bort. Sharif och Cox räknade igenom problemet utan förenklingen och fann att vid en skarp gräns mellan kärna och mantel måste fältet ha en del längs med fibern. Då finns också en Faradayeffekt i ett tvärgående magnetfält." },
+      { type: "h2", text: "Femtio magnetpar på en 3D-skriven skena" },
+      { type: "p", html: "För att pröva idén lade forskarna en meter lång fiber i en 3D-skriven skena och placerade 50&nbsp;par neodymmagneter längs den, med polerna mot varandra och fibern i den 3,5&nbsp;mm smala springan emellan. Fältet tvärs över fibern beräknades till omkring 0,24&nbsp;tesla. Sedan skickade de in grönt laserljus med våglängden 532&nbsp;nm, polariserat antingen parallellt med magnetfältet, vinkelrätt mot det eller cirkulärt." },
+      { type: "p", html: "Mätningen hade ett problem. En fiber med en kärna på 50 eller 105&nbsp;mikrometer bär tusentals olika ljusmönster samtidigt, så kallade moder. Varje mönster vrids lite olika mycket och åt olika håll, så i genomsnitt blir vridningen noll. Ett vanligt instrument som mäter polarisationen skulle inte se något. I stället filmade forskarna det korniga specklemönstret i fiberns utgång, som uppstår när alla ljusmönster interfererar med varandra. Ändras ljusmönstrens inbördes fas ändras också specklemönstret." },
+      { type: "p", html: "Forskarna tog bort magnetparen ett i taget och jämförde varje gång specklemönstret med det de fått med alla 50&nbsp;par på plats. Varje försök gjordes tio gånger." },
+      { type: "h2", text: "Bara det vinkelräta ljuset påverkades" },
+      { type: "p", html: "Resultatet följde teorins förutsägelser. När ljusets elektriska fält svängde vinkelrätt mot magnetfältet ändrades specklemönstret tydligt: efter att alla magneter tagits bort hade korrelationstalet, ett mått på hur lika bilderna är där 1 betyder identiska, sjunkit till omkring 0,84. När fältet svängde parallellt med magnetfältet hände ingenting alls. Cirkulärt polariserat ljus, som kan ses som en kombination av båda, hamnade mitt emellan." },
+      { type: "p", html: "Effekten blev också större ju snedare ljuset sköts in i fibern, precis som den ska om den beror på strålar som går brant genom kärnan. I en fiber där brytningsindex ändras gradvis från mitten och utåt, alltså utan skarp gräns, syntes ingen effekt. Inte heller i en vanlig telekomfiber med tunn kärna, men där bär fibern för få ljusmönster för att metoden ska kunna se någon förändring." },
+      { type: "p", html: "Det smartaste testet var att vända varannan magnet. Den nya effekten är proportionell mot magnetfältet, så när fältet byter riktning byter också vridningen tecken, och de växlande magneterna tar ut varandra. Den äldre effekten, den så kallade Cotton–Mouton-effekten, beror på fältets kvadrat och påverkas inte av riktningen. Med växlande magneter syntes nästan ingen förändring alls. Den svaga ändring som ändå finns kommer alltså från den äldre effekten, och resten från den nya." },
+      { type: "p", html: "Till sist bytte forskarna till rött ljus med våglängden 633&nbsp;nm. Faradayeffekten i kvartsglas är svagare för rött ljus, och förändringen av specklemönstret blev omkring hälften så stor. Förhållandet mellan de två våglängderna stämde med det som glasets kända egenskaper förutsäger." },
+      { type: "quote", html: "Det överraskande är att hitta en förbisedd, användbar växelverkan i en så välbekant teknik.", cite: "Mitchell Cox, Wits University (översatt)" },
+      { type: "h2", text: "Sensorer som ligger bredvid kabeln" },
+      { type: "p", html: "I dag måste en fiber som ska mäta ström med Faradayeffekten lindas runt ledaren, så att magnetfältet går längs med fibern. Med den tvärgående effekten skulle en sensor kunna läggas bredvid en kabel i stället, vilket kan göra den lättare att montera. Cox tror också att man med elektriskt styrda magnetfält skulle kunna styra hur ljuset fördelar sig på de olika ljusmönstren i fibern, något som kan bli användbart för att räkna med ljus." },
+      { type: "p", html: "Själva försöket var enkelt att bygga. Det svåra var teorin. ”Det var inte svårt att 3D-skriva en rigg för att pröva vår intuition. Att räkna ut teorin för det vi såg var den utmanande delen”, säger Mohammed Raiyan Sharif, som gjorde arbetet inom sin masterutbildning." },
+      { type: "fact", title: "Visste du?", items: [
+        "Hur mycket Faradayeffekten vrider polarisationen beskrivs av $\\alpha = V \\cdot B \\cdot L$, där $V$ är materialets Verdetkonstant, $B$ magnetfältet och $L$ sträckan. För kvartsglas och grönt ljus är $V$ omkring 5,2&nbsp;rad/(T&nbsp;·&nbsp;m).",
+        "Faradayeffekten skiljer sig från de flesta andra optiska effekter: skickar man ljuset tillbaka genom samma magnetfält vrids polarisationen ytterligare i samma riktning i stället för att vridas tillbaka. Det används i optiska isolatorer, som skyddar lasrar från ljus som reflekteras tillbaka in i dem.",
+        "Michael Faraday letade länge efter ett samband mellan ljus och magnetism innan han lyckades 1845, med ett block av tungt blyhaltigt glas som han själv hade tillverkat många år tidigare."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-12-snurran-som-svavar",
     date: "2026-11-12",
     title: "En svävande magnet stor som ett dammkorn snurrar 2,3 miljoner varv i sekunden",

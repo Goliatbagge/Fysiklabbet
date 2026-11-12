@@ -4407,6 +4407,18 @@ window.BEGREPP = [
     ]
   },
   {
+    id: 'faradayeffekten',
+    term: 'Faradayeffekten',
+    former: ['faradayeffekten', 'faradayeffekt', 'faradayrotation', 'faradayrotationen', 'faradayvridning', 'faradayvridningen'],
+    kort: 'Att ett magnetfält vrider polarisationsriktningen hos ljus som går genom ett genomskinligt material. Hur mycket beror på fältets styrka, sträckan och materialet.',
+    relaterade: ['polarisation', 'optisk-fiber'],
+    body: [
+      { type: 'p', html: 'Ljus är en elektromagnetisk våg, och i linjärt polariserat ljus svänger det elektriska fältet hela tiden i samma riktning, ungefär som ett hopprep som någon skakar upp och ned. Skickar man sådant ljus genom en bit glas där ett magnetfält pekar längs med strålen, kommer det ut med svängningsriktningen vriden en bit. Det är Faradayeffekten, upptäckt av Michael Faraday 1845. Det var det första beviset för att ljus och magnetism hänger ihop.' },
+      { type: 'p', html: 'Vridningen uppstår för att magnetfältet påverkar elektronerna i materialet. Linjärt polariserat ljus kan ses som summan av två cirkulärt polariserade vågor som roterar åt var sitt håll. I magnetfältet går de två med lite olika fart, så den ena hinner rotera lite mer än den andra, och när de läggs ihop igen pekar summan åt ett nytt håll. Vinkeln blir <em>α</em>&nbsp;=&nbsp;<em>V</em>&nbsp;·&nbsp;<em>B</em>&nbsp;·&nbsp;<em>L</em>, där <em>B</em> är magnetfältet, <em>L</em> sträckan och <em>V</em> en materialkonstant som kallas Verdetkonstanten.' },
+      { type: 'p', html: 'En egenhet gör effekten användbar: vridningen beror på magnetfältets riktning, inte på åt vilket håll ljuset går. Ljus som reflekteras tillbaka genom samma glas vrids därför ytterligare i samma riktning i stället för att vridas tillbaka. Det utnyttjas i optiska isolatorer, som släpper ljus bara åt ett håll och skyddar lasrar mot reflexer. Effekten används också för att mäta ström i kraftledningar, med en optisk fiber som lindas runt ledaren, och astronomer använder den för att mäta magnetfält i rymden.' }
+    ]
+  },
+  {
     id: 'speckle',
     term: 'Speckle',
     former: ['speckle', 'specklet', 'specklemönster', 'specklemönstret', 'specklebrus', 'specklebruset', 'laserspeckle'],

@@ -888,6 +888,24 @@ förklaringen är inget svar. Felet som utlöste regeln: Exempel 1 i
 - `node .claude/verify-svar.js` granskar teorins exempel. Listan
   `UNDANTAG` i skriptet är arvsskulden från 2026-10-12 och ska bara krympa.
 
+## Varje exempel och deluppgift ska tillföra något nytt
+
+**Lägg aldrig till ett exempel eller en deluppgift som bara upprepar det
+som redan visats i ett tidigare exempel i genomgången** (uttryckligt krav
+2026-11-12). Exempel 3 i `ma1c-4.12` hade ett b) där eleven skulle
+beräkna $f(6)$, men att räkna ut ett funktionsvärde fanns redan i
+exempel 1a. Deluppgiften gjorde bara exemplet längre, och den togs bort.
+
+- Fråga för varje exempel och varje deluppgift: vad lär sig eleven här som
+  de tidigare exemplen inte redan visat? Ett nytt moment, en ny metod, ett
+  nytt fall (udda i stället för jämn exponent, negativt högerled) eller en
+  svårare variant räknas som nytt. Samma räkning med andra tal räknas inte.
+- Är svaret "ingenting": stryk deluppgiften, eller byt den mot något som
+  tillför. Det gäller också när du skriver om ett äldre exempel.
+- Övningarna är något annat: där är upprepning med nya tal meningen (se
+  `OVNINGAR.md`). Regeln gäller genomgångens exempel, inklusive
+  pennlösningar och textlösningar, och provens genomgångar av exempel.
+
 ## Pennlösningar till övningarna (`penna:` i data/ovningar.js)
 
 En övning kan få samma animerade pennlösning som teorins exempel (infört
@@ -1550,6 +1568,23 @@ Regeln, som gäller ALLA fastnålade rutor, även nya:
    uppgifter och besök. Knappen ligger absolut i rutans övre högra hörn,
    UTANFÖR flödet: i en huvudrad gjorde den kortet 14 px högre och
    tippade det över takhöjden på en 730 px-skärm.
+
+**Uppgiftstexten i pennlösningens helskärm görs så stor som ytan
+tillåter** (användarkrav 2026-11-12: på en projektor var texten 18–19 px och
+gick knappt att läsa, fast panelen hade plats för dubbelt så stor text).
+`fitFS()` i `handskrift.js` binärsöker den STÖRSTA teckenstorleken där
+panelen ryms under takhöjden `UPG_TAK()`, mellan `UPG_MIN` (16,5 px) och
+`UPG_MAX()` (6 % av skärmhöjden, högst 64 px; på mobil 16,5 px). På en
+1280×720-projektor blir texten i `ma1c-4.12` exempel 2 cirka 39 px i
+stället för 19. Regeln gäller varje ny ruta som visar uppgiftstext vid
+sidan av en lösning i helskärm eller presentationsläge:
+
+- **Sätt aldrig en fast teckenstorlek** och aldrig en storlek som bara
+  följer bredden. Mät rutans höjd mot den yta den får ta och välj den
+  största storleken som ryms.
+- **Taket på storleken ska stå i förhållande till skärmhöjden**, så att en
+  enradig fråga inte sväller till en rubrik.
+- Mät om vid `resize`, när helskärmen byts och när teckensnitten laddats.
 
 **Breda displayformler i proven bryts, de radbryts aldrig mitt itu.**
 `styles-laborans.css` sätter `white-space: normal` i `.katex-display`, och

@@ -233,14 +233,14 @@ en lösning på var sida om *y*-axeln.
 :::
 
 ::: exempel "Exempel 3 — Bestäm konstanten med hjälp av en punkt (Mellan)"
-**Grafen till potensfunktionen $f(x) = C \cdot x^2$ går genom punkten $(3, 18)$.<br>a) Bestäm $C$.&emsp;&emsp;b) Bestäm $f(6)$.**
+**Grafen till potensfunktionen $f(x) = C \cdot x^2$ går genom punkten $(3, 18)$. Bestäm $C$.**
 
 ::: handskrift
 typ: potensbestamc
 :::
 
 ::: textlosning
-**a)** Att grafen går genom punkten $(3, 18)$ betyder att $f(3) = 18$. Vi
+Att grafen går genom punkten $(3, 18)$ betyder att $f(3) = 18$. Vi
 sätter in $x = 3$ i funktionsuttrycket och sätter det lika med 18:
 
 $$
@@ -262,14 +262,6 @@ C = 2
 $$
 
 **Svar:** $C = 2$
-
-**b)** Nu är funktionen känd, $f(x) = 2x^2$. Vi sätter in $x = 6$:
-
-$$
-f(6) = 2 \cdot 6^2 = 2 \cdot 36 = 72
-$$
-
-**Svar:** 72
 :::
 :::
 

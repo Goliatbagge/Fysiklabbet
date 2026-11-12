@@ -16864,7 +16864,7 @@
    * f(x) = C·x² går genom (3, 18). a) C = 2, b) f(6) = 72. Sista bubblan
    * knyter ihop med skalningen: dubbelt x ger 2² = 4 gånger värdet. */
   function layoutPotensbestamc(cfg, F) {
-    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
     var tanke = mkTanke(T);
     var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
     var xw = padL + T.adv('C·3^2=18') + 0.9 * F;
@@ -16879,7 +16879,7 @@
       [['f(3) = 18.']]
     ]);
     y = yF + 4.0 * F;
-    T.str('a) f(3)=18 ger', padL, y - 1.6 * F, null, 0.62);
+    T.str('f(3)=18 ger', padL, y - 1.6 * F, null, 0.62);
     T.str('C·3^2=18', padL, y);
     T.stepEnd();
 
@@ -16897,43 +16897,6 @@
 
     y += 2.3 * F;
     xe = T.str('Svar: C=2', padL, y);
-    T.underline(xe, y);
-    T.stepEnd();
-
-    tanke(y, [
-      [['Nu är funktionen känd.']],
-      [['Jag byter ut x mot 6.']]
-    ], 0.5);
-    y += 3.4 * F;
-    var yB = y;
-    T.str('b) f(x)=2x^2', padL, yB);
-    T.stepEnd();
-
-    y += 2.4 * F;
-    xx = T.str('f(6)', padL, y);
-    T.stepEnd();
-
-    /* först talet i parentesen, sedan BARA x-et det ersätter */
-    var rings = substRings(acts, [[padL + T.adv('f('), xx - T.adv(')'), y, F],
-                                  [padL + T.adv('b) f(x)=2'), padL + T.adv('b) f(x)=2x'), yB, F]]);
-    xx = T.str('=2·6^2', xx, y);
-    fadeRings(acts, rings);
-    T.stepEnd();
-
-    xx = T.str('=2·36', xx, y);
-    T.stepEnd();
-
-    T.str('=72', xx, y);
-    T.stepEnd();
-
-    tanke(y, [
-      [['Rimligt? x blev dubbelt så']],
-      [['stort, från 3 till 6, och']],
-      [['värdet fyra gånger så']],
-      [['stort: 18·4 = 72.']]
-    ]);
-    y += 2.4 * F;
-    xe = T.str('Svar: 72', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -66763,6 +66726,13 @@
     /* takhöjd för den fastnålade uppgiftspanelen, andel av skärmhöjden:
      * högre än så nålas den inte fast (se CSS-kommentaren vid .hk-upg-inner) */
     function UPG_TAK() { return window.innerWidth <= 600 ? 0.30 : 0.42; }
+    /* uppgiftstextens storlek i helskärm: aldrig mindre än UPG_MIN och
+     * aldrig större än UPG_MAX() (6 % av skärmhöjden, högst 64 px), så
+     * att en enradig fråga inte sväller till en rubrik */
+    var UPG_MIN = 16.5;
+    function UPG_MAX() {
+      return window.innerWidth <= 600 ? UPG_MIN : Math.max(UPG_MIN, Math.min(64, window.innerHeight * 0.06));
+    }
     function fitFS() {
       var fs = document.fullscreenElement === wrap;
       fsBtn.innerHTML = fs ? ICO_COMPRESS : ICO_EXPAND;
@@ -66783,19 +66753,30 @@
         upgPanel.classList.remove('hk-los');
         var inner = upgPanel.querySelector('.hk-upg-inner');
         if (fs) {
-          /* Uppgiftstexten VÄXER MED SKÄRMEN: på en stor duk är 16,5 px
-           * onödigt litet när halva panelen står tom (påpekat 2026-09-16,
-           * skiftnyckeln i fy2-1.1 på en 1885 px bred skärm). Utgå från
-           * bredden (1,45 % av den, 16,5–30 px) och krymp sedan stegvis
-           * om panelen annars skulle bli högre än takhöjden — nålen
-           * släpps först när minsta storleken inte heller ryms. */
+          /* Uppgiftstexten görs SÅ STOR SOM YTAN TILLÅTER: den ska gå att
+           * läsa längst bak i klassrummet på en projektor. Tidigare utgick
+           * storleken från bredden (1,45 % av den) och gav 18–19 px på en
+           * vanlig projektor, fast panelen hade plats för dubbelt så stor
+           * text (påpekat 2026-11-12, ma1c-4.12 exempel 2). Nu söks den
+           * STÖRSTA storleken (binärsökning, halva pixlar) där panelen
+           * ryms under takhöjden UPG_TAK, mellan UPG_MIN och UPG_MAX().
+           * Ryms inte ens UPG_MIN släpps nålen. Se "Fastnålade
+           * uppgiftsrutor" i CLAUDE.md. */
           var tak = window.innerHeight * UPG_TAK();
-          var fz = Math.max(16.5, Math.min(30, window.innerWidth * 0.0145));
-          inner.style.fontSize = fz + 'px';
-          while (fz > 16.5 && upgPanel.getBoundingClientRect().height > tak) {
-            fz = Math.max(16.5, fz - 1);
-            inner.style.fontSize = fz + 'px';
+          var ryms = function (z) {
+            inner.style.fontSize = z + 'px';
+            return upgPanel.getBoundingClientRect().height <= tak;
+          };
+          var lo = UPG_MIN, hi = UPG_MAX();
+          if (ryms(hi)) {
+            lo = hi;
+          } else if (ryms(lo)) {
+            while (hi - lo > 0.5) {
+              var mid = (lo + hi) / 2;
+              if (ryms(mid)) lo = mid; else hi = mid;
+            }
           }
+          inner.style.fontSize = lo + 'px';
           if (upgPanel.getBoundingClientRect().height > tak) {
             upgPanel.classList.add('hk-los');
           }

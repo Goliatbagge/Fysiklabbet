@@ -96,3 +96,15 @@
 19:17:35  [svar] Claude avslutade med kod 0
 19:17:35  [svar] VARNING: svarskontrollen gav inget SVAR-besked. Försöker igen vid nästa körning.
 19:17:35  [svar] === Nyhetsjobb: slut ===
+22:15:03  [svar] === Nyhetsjobb: start (2026-11-12) ===
+22:15:07  [svar] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+22:15:47  [svar] I searched Gmail for `subject:[Nyhet newer_than:4d` (and variants without brackets) — **no threads found** in the last 4 days with a subject starting with "[Nyhet".
+22:15:47  [svar] 
+22:15:47  [svar] Confirmed the account itself works (other recent mail shows up fine), so this isn't an auth/API issue. The most recent "[Nyhet ...]" email in the mailbox at all is from **2026-10-29** ("Att granska: Elektroner surfar på radiovågor..." for the 2026-10-30 article) — nothing since then.
+22:15:47  [svar] 
+22:15:47  [svar] That's notable: no review email has gone out in the last two weeks, which lines up with the known OAuth-token outage around 2026-10-29/10-31 (noted in memory — the daily-news job's login expired and mail sending died with it). Worth checking whether the daily-news scheduled task and its mailing step are actually running again, since no review request has reached the owner since.
+22:15:47  [svar] 
+22:15:47  [svar] Your message got cut off after step 1/2 of the instructions ("For each thread whose subject starts with [Nyhet" has no continuation) — let me know what you'd like done with any matching threads once/if they turn up, or if you want me to dig into why no review emails have been sent recently.
+22:15:48  [svar] Claude avslutade med kod 0
+22:15:48  [svar] VARNING: svarskontrollen gav inget SVAR-besked. Försöker igen vid nästa körning.
+22:15:48  [svar] === Nyhetsjobb: slut ===

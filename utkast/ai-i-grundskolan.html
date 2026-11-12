@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>AI i grundskolan – kom igång</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f4;
+    --kort: #ffffff;
+    --text: #1f2421;
+    --mjuk: #5b625e;
+    --linje: #e4e0d8;
+    --gron: #2f6b4f;
+    --gron-ljus: #e8f1ec;
+    --rod: #a33a2c;
+    --rod-ljus: #f8e9e6;
+    --gul-ljus: #fbf3dc;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.55 Inter, system-ui, sans-serif;
+  }
+  .sida { max-width: 860px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1, h2, h3 { font-family: Fraunces, Georgia, serif; line-height: 1.2; margin: 0; }
+  h1 { font-size: 2.3rem; }
+  h1 span { color: var(--gron); display: block; }
+  h2 { font-size: 1.6rem; margin: 48px 0 6px; }
+  h3 { font-size: 1.2rem; }
+  .ingress { font-size: 1.1rem; color: var(--mjuk); margin: 12px 0 0; max-width: 640px; }
+  .utkast { display: inline-block; font-size: .8rem; font-weight: 600; letter-spacing: .04em;
+            text-transform: uppercase; color: var(--mjuk); border: 1px solid var(--linje);
+            border-radius: 99px; padding: 2px 10px; margin-bottom: 14px; }
+  .under { color: var(--mjuk); margin: 0 0 18px; }
+
+  /* Reglerna */
+  .regler { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 16px; }
+  .regel { background: var(--kort); border: 1px solid var(--linje); border-radius: 12px; padding: 16px 18px; }
+  .regel b { display: block; font-size: 1.05rem; margin-bottom: 2px; }
+  .regel .nr { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;
+               background: var(--gron); color: #fff; font-weight: 700; font-size: .9rem; margin-bottom: 8px; }
+  .regel p { margin: 0; color: var(--mjuk); }
+  .incident { margin-top: 12px; background: var(--gul-ljus); border-radius: 12px; padding: 12px 18px; }
+
+  /* Verktygen */
+  .verktyg { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .verktyg .regel h3 { margin-bottom: 4px; }
+  .verktyg ol { margin: 10px 0 0; padding-left: 20px; }
+  .verktyg li { margin: 3px 0; }
+
+  /* Exempelkorten */
+  .exempel { background: var(--kort); border: 1px solid var(--linje); border-radius: 14px;
+             padding: 20px 22px; margin: 14px 0; break-inside: avoid; }
+  .exempel header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .tagg { font-size: .8rem; font-weight: 600; color: var(--gron); background: var(--gron-ljus);
+          border-radius: 99px; padding: 2px 10px; white-space: nowrap; }
+  .exempel .vad { margin: 4px 0 10px; color: var(--mjuk); }
+  .exempel ol { margin: 0 0 12px; padding-left: 20px; }
+  .exempel li { margin: 3px 0; }
+  .prompt { position: relative; background: var(--gron-ljus); border-radius: 10px; padding: 12px 14px; }
+  .prompt .etikett { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--gron); }
+  .prompt p { margin: 4px 0 0; font-size: .97rem; }
+  .prompt mark { background: #fff; color: var(--gron); font-weight: 600; border-radius: 4px; padding: 0 3px; }
+  .kopiera { position: absolute; top: 8px; right: 8px; font: 600 .8rem Inter, sans-serif; color: var(--gron);
+             background: #fff; border: 1px solid #c9ddd1; border-radius: 6px; padding: 3px 10px; cursor: pointer; }
+  .kopiera:hover { background: var(--gron); color: #fff; }
+  .tankpa { margin: 10px 0 0; font-size: .92rem; color: var(--mjuk); }
+  .tankpa b { color: var(--text); }
+
+  /* Öppenhet */
+  .ruta { background: var(--kort); border: 1px solid var(--linje); border-radius: 14px; padding: 18px 22px; break-inside: avoid; }
+  .ruta ul { margin: 8px 0 0; padding-left: 20px; }
+  .citat { border-left: 4px solid var(--gron); padding: 6px 14px; margin: 12px 0 4px; font-style: italic; background: var(--gron-ljus); border-radius: 0 8px 8px 0; }
+
+  /* Inte så här */
+  .rott { background: var(--rod-ljus); border-radius: 14px; padding: 18px 22px; break-inside: avoid; }
+  .rott h3 { color: var(--rod); }
+  .rott ul { margin: 8px 0 0; padding-left: 20px; }
+  .rott li { margin: 4px 0; }
+  .fore-efter { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; break-inside: avoid; }
+  .fore-efter div { border-radius: 10px; padding: 12px 14px; background: var(--kort); border: 1px solid var(--linje); }
+  .fore-efter .etikett { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+  .fore-efter .nej .etikett { color: var(--rod); }
+  .fore-efter .ja .etikett { color: var(--gron); }
+  .fore-efter p { margin: 4px 0 0; }
+
+  footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--linje); font-size: .85rem; color: var(--mjuk); }
+
+  @media (max-width: 640px) {
+    h1 { font-size: 1.8rem; }
+    .regler, .verktyg, .fore-efter { grid-template-columns: 1fr; }
+    .kopiera { position: static; margin-top: 8px; }
+  }
+  @media print {
+    @page { size: A4; margin: 14mm 14mm 16mm; }
+    body { background: #fff; font-size: 10pt; }
+    .sida { max-width: none; padding: 0; }
+    .kopiera { display: none; }
+    h2 { margin-top: 22px; break-after: avoid; }
+    .exempel { margin: 8px 0; padding: 12px 14px; }
+    .regel, .exempel, .ruta, .rott { border-color: #d6d1c7; }
+    .nysida { break-before: page; }
+  }
+</style>
+</head>
+<body>
+<main class="sida">
+
+  <div class="utkast">Utkast · november 2026</div>
+  <h1>AI i undervisningen<span>så kommer du igång</span></h1>
+  <p class="ingress">Exempel på hur du som lärare i grundskolan kan använda Gemini och NotebookLM, inom ramen för kommunens förhållningssätt för AI i grundskolan.</p>
+
+  <!-- ============ REGLERNA ============ -->
+  <h2>Fyra saker att alltid tänka på</h2>
+  <div class="regler">
+    <div class="regel"><span class="nr">1</span><b>Använd jobbkontot</b><p>Logga in med skolkontot. Privata konton får inte användas i jobbet.</p></div>
+    <div class="regel"><span class="nr">2</span><b>Inga uppgifter om elever</b><p>Inga namn, klasser, bilder, betyg, omdömen eller uppgifter om stöd och hälsa.</p></div>
+    <div class="regel"><span class="nr">3</span><b>Bara ditt eget material</b><p>Texter du själv har skrivit eller öppna webbsidor. Aldrig läromedel och aldrig elevernas texter.</p></div>
+    <div class="regel"><span class="nr">4</span><b>Granska alltid svaret</b><p>AI kan ha fel. Du ansvarar för det du använder.</p></div>
+  </div>
+  <p class="incident"><b>Råkade du skriva in något om en elev?</b> Rapportera det direkt i kommunens e-tjänst för incidentrapportering.</p>
+
+  <!-- ============ VERKTYGEN ============ -->
+  <h2>Två verktyg</h2>
+  <p class="under">Båda finns i ditt skolkonto.</p>
+  <div class="verktyg">
+    <div class="regel">
+      <h3>Gemini</h3>
+      <p>Skriv vad du vill ha hjälp med, och få svar. Bra för att skapa, skriva om och få idéer.</p>
+      <ol>
+        <li>Gå till <b>gemini.google.com</b> och logga in med jobbkontot.</li>
+        <li>Skriv i rutan längst ner och tryck <b>Enter</b>.</li>
+        <li>Inte nöjd? Skriv till exempel <i>Kortare</i> eller <i>Enklare språk</i>.</li>
+      </ol>
+    </div>
+    <div class="regel">
+      <h3>NotebookLM</h3>
+      <p>Utgår bara från det material du lägger in. Bra för att göra frågor, sammanfattningar och poddar av dina egna texter.</p>
+      <ol>
+        <li>Gå till <b>notebooklm.google.com</b> och klicka på <b>Skapa ny</b>.</li>
+        <li>Lägg in ditt eget material eller en länk till en öppen webbsida.</li>
+        <li>Ställ frågor i chatten, eller skapa material under <b>Studio</b>.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ============ EXEMPLEN ============ -->
+  <h2 class="nysida">Åtta exempel</h2>
+  <p class="under">Kopiera prompten och byt ut det som är <mark style="background:var(--gron-ljus);color:var(--gron);font-weight:600;border-radius:4px;padding:0 3px">markerat</mark>.</p>
+
+  <article class="exempel">
+    <header><h3>1. Gör instuderingsfrågor</h3><span class="tagg">NotebookLM</span></header>
+    <p class="vad">Quiz eller frågekort till din egen genomgång.</p>
+    <ol>
+      <li>Skapa en ny anteckningsbok och lägg in din genomgång.</li>
+      <li>Klicka på pennan vid <b>Quiz</b> eller <b>Frågekort</b> under <b>Studio</b>.</li>
+      <li>Skriv prompten i rutan och klicka på <b>Generera</b>.</li>
+    </ol>
+    <div class="prompt"><span class="etikett">Prompt</span><p>Bara frågor på de viktigaste begreppen. Börja lätt och bli svårare.</p></div>
+  </article>
+
+  <article class="exempel">
+    <header><h3>2. Gör en text enklare</h3><span class="tagg">Gemini</span></header>
+    <p class="vad">Samma fakta med enklare språk, till exempel för elever som läser långsamt.</p>
+    <ol>
+      <li>Klistra in din text i Gemini.</li>
+      <li>Lägg till prompten och tryck <b>Enter</b>.</li>
+      <li>Jämför med originalet. Har något fallit bort?</li>
+    </ol>
+    <div class="prompt"><span class="etikett">Prompt</span><p>Skriv om texten för en elev i <mark>årskurs 6</mark> som läser långsamt. Korta meningar, ett budskap per mening. Behåll alla fakta och alla begrepp – förenkla språket, inte innehållet. Avsluta med en ordlista med de 8 svåraste orden.</p></div>
+    <p class="tankpa"><b>Tips:</b> Skriv <i>Gör texten i tre versioner: lätt, medel och svår</i> så får du nivåer till hela klassen.</p>
+  </article>
+
+  <article class="exempel">
+    <header><h3>3. Översätt en text</h3><span class="tagg">Gemini</span></header>
+    <p class="vad">Till elever som inte förstår svenska än, eller till vårdnadshavare.</p>
+    <ol>
+      <li>Klistra in din text i Gemini.</li>
+      <li>Lägg till prompten, byt ut språket och tryck <b>Enter</b>.</li>
+      <li>Be gärna någon som kan språket läsa igenom.</li>
+    </ol>
+    <div class="prompt"><span class="etikett">Prompt</span><p>Översätt texten till <mark>arabiska</mark>. Enkel och vänlig ton. Behåll datum, tider och platser exakt. Lista efteråt ord som kan vara svåra att översätta.</p></div>
+  </article>
+
+  <article class="exempel">
+    <header><h3>4. Få tips till lektionsplaneringen</h3><span class="tagg">Gemini</span></header>
+    <p class="vad">Ett första förslag som du sedan gör till ditt eget.</p>
+    <ol>
+      <li>Klistra in prompten i Gemini och byt ut det markerade.</li>
+      <li>Tryck <b>Enter</b>.</li>
+      <li>Stryk, ändra och lägg till utifrån din klass.</li>
+    </ol>
+    <div class="prompt"><span class="etikett">Prompt</span><p>Skriv en planering för ett moment om <mark>vattnets kretslopp</mark> i <mark>årskurs 4</mark>, tre veckor med två lektioner per vecka. Mål, innehåll och en övning per lektion. Tabell.</p></div>
+  </article>
+
+  <article class="exempel">
+    <header><h3>5. Använd AI som idéspruta</h3><span class="tagg">Gemini</span></header>
+    <p class="vad">Exempel, övningar och diskussionsfrågor när du kört fast.</p>
+    <ol>
+      <li>Klistra in prompten i Gemini och byt ut det markerade.</li>
+      <li>Tryck <b>Enter</b>.</li>
+      <li>Be om fler eller andra: <i>Ge mig fem till, mer kopplade till idrott.</i></li>
+    </ol>
+    <div class="prompt"><span class="etikett">Prompt</span><p>Du är en pedagogisk lärare i <mark>matematik</mark>. Ge mig fem verklighetsnära exempel på <mark>procent</mark> för elever i <mark>årskurs 7</mark>.</p></div>
+  </article>
+
+  <article class="exempel">
+    <header><h3>6. Korrekturläs din text</h3><span class="tagg">Gemini</span></header>
+    <p class="vad">Stavning och grammatik i till exempel ett veckobrev eller en uppgiftsinstruktion.</p>
+    <ol>
+      <li>Klistra in din text och prompten i Gemini.</li>
+      <li>Tryck <b>Enter</b>.</li>
+      <li>Gå igenom listan och välj vilka ändringar du vill ha.</li>
+    </ol>
+    <div class="prompt"><span class="etikett">Prompt</span><p>Rätta stavning, grammatik och skiljetecken i texten. Ändra inte innehållet eller stilen. Lista sedan vad du ändrade.</p></div>
+    <p class="tankpa"><b>Tänk på:</b> Bara dina egna texter. Elevernas texter får inte läggas in.</p>
+  </article>
+
+  <article class="exempel">
+    <header><h3>7. Gör en egen chattbot för ditt ämne</h3><span class="tagg">NotebookLM</span></header>
+    <p class="vad">En anteckningsbok med dina genomgångar och planeringar, som du kan ställa frågor till.</p>
+    <ol>
+      <li>Skapa en ny anteckningsbok och lägg in dina egna genomgångar för ett moment.</li>
+      <li>Ställ frågor i chatten.</li>
+      <li>Klicka på siffran i svaret så ser du var det står.</li>
+    </ol>
+    <div class="prompt"><span class="etikett">Prompt</span><p>Vad är skillnaden mellan <mark>väder</mark> och <mark>klimat</mark> enligt genomgången? Svara i tre meningar och visa var det står.</p></div>
+    <p class="tankpa"><b>Tips:</b> Finns svaret inte i ditt material säger NotebookLM det. Den hittar inte på.</p>
+  </article>
+
+  <article class="exempel">
+    <header><h3>8. Förbered svar på elevernas frågor</h3><span class="tagg">Gemini</span></header>
+    <p class="vad">Flera sätt att förklara samma sak, när den första förklaringen inte räcker.</p>
+    <ol>
+      <li>Klistra in prompten i Gemini och byt ut frågan.</li>
+      <li>Tryck <b>Enter</b>.</li>
+      <li>Välj det sätt som passar dina elever.</li>
+    </ol>
+    <div class="prompt"><span class="etikett">Prompt</span><p>En elev i <mark>årskurs 5</mark> frågar: <mark>Varför blir det årstider?</mark> Ge mig tre olika sätt att förklara det: med en vardaglig jämförelse, med en enkel skiss jag kan rita på tavlan och med en fråga som får eleven att tänka själv.</p></div>
+  </article>
+
+  <!-- ============ ÖPPENHET ============ -->
+  <h2>Var öppen med att du använt AI</h2>
+  <p class="under">Du är förebild för hur eleverna tänker kring AI.</p>
+  <div class="ruta">
+    <ul>
+      <li>Berätta för eleverna när ett prov, en uppgift eller en instruktion helt eller delvis är gjord med AI.</li>
+      <li>Skriv kort vilket verktyg du använde och till vad.</li>
+      <li>Visa gärna eleverna hur du granskar AI:s svar, och berätta när du valt att göra något själv.</li>
+    </ul>
+    <p class="citat">”Frågorna är gjorda med hjälp av NotebookLM utifrån min genomgång. Jag har läst igenom och rättat dem.”</p>
+  </div>
+
+  <!-- ============ INTE SÅ HÄR ============ -->
+  <h2>Det här gör du inte</h2>
+  <div class="rott">
+    <h3>Lägg aldrig in</h3>
+    <ul>
+      <li>Elevers namn, personnummer eller klass.</li>
+      <li>Foton, filmer eller ljud med elever.</li>
+      <li>Betyg, omdömen eller bedömningar av en enskild elev.</li>
+      <li>Åtgärdsprogram, stöd, hälsa eller anteckningar från samtal.</li>
+      <li>Elevernas egna texter och bilder.</li>
+      <li>Läromedel, inte ens ett fotograferat kapitel.</li>
+    </ul>
+  </div>
+
+  <div class="fore-efter">
+    <div class="nej"><span class="etikett">Inte så här</span><p>Hjälp mig skriva en instruktion till Ali i 7B som har dyslexi.</p></div>
+    <div class="ja"><span class="etikett">Utan elevuppgifter</span><p>Hjälp mig skriva en instruktion med korta meningar och punktlistor för en elev som läser långsamt.</p></div>
+  </div>
+  <p class="tankpa">Beskriv behovet, inte eleven. Går eleven ändå att känna igen? Avstå.</p>
+
+  <h2>Och kom ihåg</h2>
+  <div class="ruta">
+    <ul>
+      <li><b>Fråga dig först:</b> är uppgiften värd att göra själv? Använd i så fall AI som stöd, inte som ersättning.</li>
+      <li><b>Bedömning:</b> uppgifter som skrivs hemma eller oövervakat används inte som betygsunderlag. Skriftliga betygsunderlag skrivs i klassrummet.</li>
+      <li><b>AI-detektorer</b> fungerar inte och får inte användas för att avgöra om en text är skriven av AI.</li>
+    </ul>
+  </div>
+
+  <footer>Bygger på <i>Förhållningssätt gällande användning av AI på grundskolan i Falköpings kommun</i> och kommunens riktlinje för AI-användning. Godkända AI-tjänster finns i förteckningen på intranätet.</footer>
+</main>
+
+<script>
+  document.querySelectorAll('.prompt').forEach(ruta => {
+    const knapp = document.createElement('button');
+    knapp.className = 'kopiera';
+    knapp.textContent = 'Kopiera';
+    knapp.addEventListener('click', async () => {
+      const text = ruta.querySelector('p').innerText;
+      try { await navigator.clipboard.writeText(text); knapp.textContent = 'Kopierad!'; }
+      catch { knapp.textContent = 'Markera och kopiera'; }
+      setTimeout(() => knapp.textContent = 'Kopiera', 1800);
+    });
+    ruta.appendChild(knapp);
+  });
+</script>
+</body>
+</html>

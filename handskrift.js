@@ -16596,7 +16596,7 @@
       [['x mot 2 och räknar ut']],
       [['potensen.']]
     ]);
-    y = yF + 3.0 * F;
+    y = yF + 3.7 * F;
     xx = T.str('a) f(2)', padL, y);
     T.stepEnd();
 
@@ -16605,6 +16605,9 @@
                                   [padL + T.adv('f(x)='), padL + T.adv('f(x)=x'), yF, F]]);
     xx = T.str('=2^4', xx, y);
     fadeRings(acts, rings);
+    T.stepEnd();
+
+    xx = T.str('=2·2·2·2', xx, y);
     T.stepEnd();
 
     T.str('=16', xx, y);

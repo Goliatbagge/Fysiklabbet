@@ -158,7 +158,7 @@ typ: potensfunktion
 **a)** Vi sätter in $x = 2$ i funktionsuttrycket och beräknar värdet:
 
 $$
-f(2) = 2^4 = 16
+f(2) = 2^4 = 2 \cdot 2 \cdot 2 \cdot 2 = 16
 $$
 
 **Svar:** 16

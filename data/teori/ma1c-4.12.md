@@ -15,7 +15,7 @@ Volymen blir alltså åtta gånger så stor, inte dubbelt så stor. Sambandet
 mellan sidan och volymen är ett exempel på en **potensfunktion**.
 
 En funktion där den oberoende variabeln, oftast $x$, står **i basen** och
-exponenten är ett fast tal kallas en **potensfunktion**. $f(x) = 5x^3$ och
+exponenten är en konstant kallas en **potensfunktion**. $f(x) = 5x^3$ och
 $g(x) = x^{-2}$ är exempel på potensfunktioner. Skilj dem från
 exponentialfunktionerna, där den oberoende variabeln står i exponenten.
 

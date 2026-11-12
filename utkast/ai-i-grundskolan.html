@@ -2,8 +2,8 @@
 <html lang="sv">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI i grundskolan – kom igång</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -40,7 +40,7 @@
   /* Reglerna */
   .regler { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 16px; }
   .regel { background: var(--kort); border: 1px solid var(--linje); border-radius: 12px; padding: 16px 18px; }
-  .regel b { display: block; font-size: 1.05rem; margin-bottom: 2px; }
+  .regel > b { display: block; font-size: 1.05rem; margin-bottom: 2px; }
   .regel .nr { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;
                background: var(--gron); color: #fff; font-weight: 700; font-size: .9rem; margin-bottom: 8px; }
   .regel p { margin: 0; color: var(--mjuk); }
@@ -112,7 +112,7 @@
 
   <div class="utkast">Utkast · november 2026</div>
   <h1>AI i undervisningen<span>så kommer du igång</span></h1>
-  <p class="ingress">Exempel på hur du som lärare i grundskolan kan använda Gemini och NotebookLM, inom ramen för kommunens förhållningssätt för AI i grundskolan.</p>
+  <p class="ingress">Exempel på hur du som lärare i grundskolan kan använda Gemini och NotebookLM, inom ramen för kommunens förhållningssätt för AI.</p>
 
   <!-- ============ REGLERNA ============ -->
   <h2>Fyra saker att alltid tänka på</h2>
@@ -139,11 +139,11 @@
     </div>
     <div class="regel">
       <h3>NotebookLM</h3>
-      <p>Utgår bara från det material du lägger in. Bra för att göra frågor, sammanfattningar och poddar av dina egna texter.</p>
+      <p>Utgår bara från det material du lägger in. Bra för studieguider, poddar, videogenomgångar och mer.</p>
       <ol>
         <li>Gå till <b>notebooklm.google.com</b> och klicka på <b>Skapa ny</b>.</li>
-        <li>Lägg in ditt eget material eller en länk till en öppen webbsida.</li>
-        <li>Ställ frågor i chatten, eller skapa material under <b>Studio</b>.</li>
+        <li>Lägg in eget material eller en öppen webbsida.</li>
+        <li>Ställ frågor, eller skapa material i <b>Studio</b>.</li>
       </ol>
     </div>
   </div>
@@ -153,21 +153,21 @@
   <p class="under">Kopiera prompten och byt ut det som är <mark style="background:var(--gron-ljus);color:var(--gron);font-weight:600;border-radius:4px;padding:0 3px">markerat</mark>.</p>
 
   <article class="exempel">
-    <header><h3>1. Gör instuderingsfrågor</h3><span class="tagg">NotebookLM</span></header>
-    <p class="vad">Quiz eller frågekort till din egen genomgång.</p>
+    <header><h3>1. Gör en studieguide</h3><span class="tagg">NotebookLM</span></header>
+    <p class="vad">Frågor med facit, essäfrågor och en ordlista till din egen genomgång.</p>
     <ol>
       <li>Skapa en ny anteckningsbok och lägg in din genomgång.</li>
-      <li>Klicka på pennan vid <b>Quiz</b> eller <b>Frågekort</b> under <b>Studio</b>.</li>
-      <li>Skriv prompten i rutan och klicka på <b>Generera</b>.</li>
+      <li>Klicka på <b>Rapporter</b> under <b>Studio</b>, välj <b>Dokument</b> och sedan <b>Studieguide</b>.</li>
+      <li>Vill du anpassa den? Klicka på pennan vid <b>Studieguide</b>, skriv prompten och klicka på <b>Generera</b>.</li>
     </ol>
-    <div class="prompt"><span class="etikett">Prompt</span><p>Bara frågor på de viktigaste begreppen. Börja lätt och bli svårare.</p></div>
+    <div class="prompt"><span class="etikett">Prompt</span><p>Skriv för elever i <mark>årskurs 6</mark>. Korta frågor och enkla förklaringar i ordlistan.</p></div>
   </article>
 
   <article class="exempel">
     <header><h3>2. Gör en text enklare</h3><span class="tagg">Gemini</span></header>
     <p class="vad">Samma fakta med enklare språk, till exempel för elever som läser långsamt.</p>
     <ol>
-      <li>Klistra in din text i Gemini.</li>
+      <li>Klistra in din text i Gemini, eller lägg till filen via <b>+</b> (<b>Ladda upp filer</b> eller <b>Lägg till från Drive</b>).</li>
       <li>Lägg till prompten och tryck <b>Enter</b>.</li>
       <li>Jämför med originalet. Har något fallit bort?</li>
     </ol>
@@ -179,7 +179,7 @@
     <header><h3>3. Översätt en text</h3><span class="tagg">Gemini</span></header>
     <p class="vad">Till elever som inte förstår svenska än, eller till vårdnadshavare.</p>
     <ol>
-      <li>Klistra in din text i Gemini.</li>
+      <li>Klistra in din text, eller lägg till filen via <b>+</b> och <b>Lägg till från Drive</b>.</li>
       <li>Lägg till prompten, byt ut språket och tryck <b>Enter</b>.</li>
       <li>Be gärna någon som kan språket läsa igenom.</li>
     </ol>

@@ -429,7 +429,7 @@
 
             // Zonrubriker
             svg.appendChild(svgEl('text', { x: SX0 + SS / 2, y: 24, 'font-size': 12.5, 'text-anchor': 'middle', fill: COL.axis }))
-                .textContent = 'Kartongarket (24 × 24 cm)';
+                .textContent = 'Kartongarket (24 × 24 cm)';
             svg.appendChild(svgEl('text', { x: BOX_CX, y: 24, 'font-size': 12.5, 'text-anchor': 'middle', fill: COL.axis }))
                 .textContent = 'Lådan du bygger';
 
@@ -574,11 +574,11 @@
 
                 var guessSentence = '';
                 if (state.guess === 'mitt') {
-                    guessSentence = 'Din gissning stämde: bäst är ett mellanvärde, <em>x</em> = 4 cm, med volymen 1024 cm³.';
+                    guessSentence = 'Din gissning stämde: bäst är ett mellanvärde, <em>x</em> = 4 cm, med volymen 1024 cm³.';
                 } else if (state.guess) {
                     var word = state.guess === 'litet' ? 'ett litet x' : 'ett stort x';
-                    guessSentence = 'Du gissade ' + word + ' — men bäst är faktiskt ett mellanvärde: <em>x</em> = 4 cm ' +
-                        '(volymen 1024 cm³). Varken en tunn bricka eller en smal, hög låda rymmer mest.';
+                    guessSentence = 'Du gissade ' + word + ' — men bäst är faktiskt ett mellanvärde: <em>x</em> = 4 cm ' +
+                        '(volymen 1024 cm³). Varken en tunn bricka eller en smal, hög låda rymmer mest.';
                 }
                 note.innerHTML = signSentence + (guessSentence ? '<br>' + guessSentence : '');
             } else {

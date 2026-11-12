@@ -50,7 +50,7 @@ window.REPETITION['fy1-2'] = {
             instruktion: 'Ordna hastigheterna från långsammast till snabbast. Dra brickorna till rätt plats (eller klicka på två för att byta plats) och tryck sedan på Kontrollera.',
             etikettStart: 'långsammast',
             etikettSlut: 'snabbast',
-            items: ['18 km/h', '10 m/s', '54 km/h', '20 m/s', '90 km/h'],
+            items: ['18 km/h', '10 m/s', '54 km/h', '20 m/s', '90 km/h'],
         },
         {
             type: 'blixt',

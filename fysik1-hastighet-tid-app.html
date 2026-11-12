@@ -381,15 +381,15 @@
         // ── Färdiga försök ──
         const FORSOK = [
             { id: 'konstant-v', namn: 'Konstant hastighet', knots: [[0, 8], [20, 8]],
-              text: 'Grafen är vågrät, så lutningen och accelerationen är 0. Arean är en rektangel: 8 m/s · 20 s = 160 m. Prickarna på banan ligger på lika stort avstånd, eftersom vagnen rullar lika långt varje sekund.' },
+              text: 'Grafen är vågrät, så lutningen och accelerationen är 0. Arean är en rektangel: 8 m/s · 20 s = 160 m. Prickarna på banan ligger på lika stort avstånd, eftersom vagnen rullar lika långt varje sekund.' },
             { id: 'konstant-a', namn: 'Konstant acceleration från stillastående', knots: [[0, 0], [10, 20]],
-              text: 'Grafen är en rät linje, så accelerationen är konstant: <em>a</em> = 20 m/s / 10 s = 2 m/s². Arean är en triangel, 10 s · 20 m/s / 2 = 100 m. Avståndet mellan prickarna växer för varje sekund.' },
+              text: 'Grafen är en rät linje, så accelerationen är konstant: <em>a</em> = 20 m/s / 10 s = 2 m/s². Arean är en triangel, 10 s · 20 m/s / 2 = 100 m. Avståndet mellan prickarna växer för varje sekund.' },
             { id: 'parkering', namn: 'Bilen på parkeringen (Exempel 1)', knots: [[0, 16], [5, 16], [13, 6], [17, 6], [21, 0]], sekant: [5, 13],
-              text: 'Exemplet i genomgången. Den gröna sekanten ligger på linjen mellan 5 s och 13 s, där bilen bromsar med <em>a</em> = (6 − 16)/(13 − 5) = −1,25 m/s². Kör hela förloppet: arean och förflyttningen blir 204 m.' },
+              text: 'Exemplet i genomgången. Den gröna sekanten ligger på linjen mellan 5 s och 13 s, där bilen bromsar med <em>a</em> = (6 − 16)/(13 − 5) = −1,25 m/s². Kör hela förloppet: arean och förflyttningen blir 204 m.' },
             { id: 'fram-tillbaka', namn: 'Fram och tillbaka (Exempel 2)', knots: [[0, 10], [10, -10]], visa: { area: true },
-              text: 'Exemplet i genomgången. Hastigheten byter tecken vid 5 s och vagnen rullar tillbaka. Arean ovanför och under <em>t</em>-axeln är lika stora, så förflyttningen blir 0 men sträckan 50 m.' },
+              text: 'Exemplet i genomgången. Hastigheten byter tecken vid 5 s och vagnen rullar tillbaka. Arean ovanför och under <em>t</em>-axeln är lika stora, så förflyttningen blir 0 men sträckan 50 m.' },
             { id: 'backa', namn: 'Bromsa, stanna och backa', knots: [[0, 12], [6, 0], [9, 0], [13, -8], [17, -8], [20, 0]],
-              text: 'Vagnen bromsar in, står still i tre sekunder och backar sedan. Under <em>t</em>-axeln räknas arean negativ: förflyttningen blir 36 − 60 = −24 m, alltså 24 m bakom starten, medan sträckan blir 96 m.' },
+              text: 'Vagnen bromsar in, står still i tre sekunder och backar sedan. Under <em>t</em>-axeln räknas arean negativ: förflyttningen blir 36 − 60 = −24 m, alltså 24 m bakom starten, medan sträckan blir 96 m.' },
             { id: 'kurva', namn: 'Varierande acceleration', knots: [[0, 0], [4, 9], [8, 14], [12, 16], [16, 17]], mjuk: true, sekant: [2, 10], visa: { sekant: true, tangent: true },
               text: 'Grafen är en kurva, så accelerationen ändras hela tiden. Medelaccelerationen mellan två tidpunkter är sekantens lutning (grön), och momentanaccelerationen är tangentens lutning (orange). Dra i tidslinjen och se tangenten bli flackare.' },
         ];
@@ -1131,7 +1131,7 @@
             const styrknappar = (
                 <div className="styr">
                     <button className="btn-toggle btn-steg" onClick={() => stega(-0.5)} disabled={tc <= 0}
-                            aria-label="Stega bakåt" title="Stega bakåt 0,5 s">
+                            aria-label="Stega bakåt" title="Stega bakåt 0,5 s">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="4" y="5" width="3" height="14" rx="1" /><path d="M20 5.5v13L9 12z" /></svg>
                     </button>
                     <button className="btn-toggle btn-prim btn-spela" onClick={primar} disabled={dolt}>
@@ -1141,7 +1141,7 @@
                         <span>{primarText}</span>
                     </button>
                     <button className="btn-toggle btn-steg" onClick={() => stega(0.5)} disabled={tc >= M.tEnd}
-                            aria-label="Stega framåt" title="Stega framåt 0,5 s">
+                            aria-label="Stega framåt" title="Stega framåt 0,5 s">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 5.5v13L15 12z" /><rect x="17" y="5" width="3" height="14" rx="1" /></svg>
                     </button>
                     <button className="btn-toggle btn-om" onClick={borjaOm}>Börja om</button>

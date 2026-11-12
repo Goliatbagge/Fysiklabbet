@@ -350,10 +350,10 @@
         const FORSOK = [
             { id: 'omkorning', namn: 'Bilen som kör om (exempel 1 a och b)', scen: 'vag', obj: 'bil',
               s0: 0, v0: 18, a: 2, T: 3, speed: 1, visa: { area: true },
-              text: 'Bilen kör i 18 m/s och accelererar med 2,0 m/s² i 3,0 s. Arean i <em>v-t</em>-diagrammet delar sig i rektangeln <em>v</em>₀ · <em>t</em> = 54 m och triangeln ovanpå, 9 m. Tillsammans blir det 63 m, och sluthastigheten blir 24 m/s.' },
+              text: 'Bilen kör i 18 m/s och accelererar med 2,0 m/s² i 3,0 s. Arean i <em>v-t</em>-diagrammet delar sig i rektangeln <em>v</em>₀ · <em>t</em> = 54 m och triangeln ovanpå, 9 m. Tillsammans blir det 63 m, och sluthastigheten blir 24 m/s.' },
             { id: 'inbromsning', namn: 'Inbromsningen (exempel 1 c)', scen: 'vag', obj: 'bil',
               s0: 63, v0: 24, a: -4, T: 2, speed: 1, visa: { area: true },
-              text: 'Bilen fortsätter från 63 m och bromsar från 24 m/s med retardationen 4,0 m/s², alltså <em>a</em> = −4,0 m/s². Efter 2,0 s är hastigheten 16 m/s. Triangeln ligger nu inne i rektangeln och räknas negativ: 48 m − 8 m = 40 m.' },
+              text: 'Bilen fortsätter från 63 m och bromsar från 24 m/s med retardationen 4,0 m/s², alltså <em>a</em> = −4,0 m/s². Efter 2,0 s är hastigheten 16 m/s. Triangeln ligger nu inne i rektangeln och räknas negativ: 48 m − 8 m = 40 m.' },
             { id: 'vila', namn: 'Start från stillastående', scen: 'vag', obj: 'bil',
               s0: 0, v0: 0, a: 2.5, T: 6, speed: 1, visa: { area: true, strobo: true },
               text: 'Med <em>v</em>₀ = 0 blir formlerna <em>v</em> = <em>a</em> · <em>t</em> och <em>s</em> = <em>a</em> · <em>t</em>²/2. Hela arean är en triangel, och <em>s-t</em>-grafen är en parabel som börjar vågrätt. Stroboskopbilderna hamnar allt längre isär.' },
@@ -362,16 +362,16 @@
               text: 'Med <em>a</em> = 0 försvinner triangeln. <em>v-t</em>-grafen blir vågrät och <em>s-t</em>-grafen en rät linje, och bilen kör lika långt varje sekund.' },
             { id: 'backar', namn: 'Bromsar, stannar och backar', scen: 'vag', obj: 'bil',
               s0: 0, v0: 12, a: -3, T: 8, speed: 1, visa: { area: true, tangent: true },
-              text: 'Hastigheten är 0 efter 4,0 s och blir sedan negativ, så bilen backar. <em>s-t</em>-grafen vänder vid 24 m, där tangenten är vågrät. Efter 8,0 s är förflyttningen 0 men sträckan 48 m. Räkna alltid med tecken.' },
+              text: 'Hastigheten är 0 efter 4,0 s och blir sedan negativ, så bilen backar. <em>s-t</em>-grafen vänder vid 24 m, där tangenten är vågrät. Efter 8,0 s är förflyttningen 0 men sträckan 48 m. Räkna alltid med tecken.' },
             { id: 'kast', namn: 'Kast rakt uppåt', scen: 'lod', obj: 'boll',
               s0: 0, v0: 15, a: -G, T: 2 * 15 / G, speed: 1, visa: { area: true, strobo: true },
-              text: 'Bollen kastas upp med 15 m/s. Med uppåt som positiv riktning är <em>a</em> = −<em>g</em> = −9,82 m/s² hela tiden, även i vändläget där <em>v</em> = 0. Bollen når 11,5 m efter 1,53 s och är tillbaka efter dubbla tiden.' },
+              text: 'Bollen kastas upp med 15 m/s. Med uppåt som positiv riktning är <em>a</em> = −<em>g</em> = −9,82 m/s² hela tiden, även i vändläget där <em>v</em> = 0. Bollen når 11,5 m efter 1,53 s och är tillbaka efter dubbla tiden.' },
             { id: 'reaktion', namn: 'Reaktionstid med linjal (exempel 2)', scen: 'lod', obj: 'linjal',
               s0: 0, v0: 0, a: -G, T: 0.1563, speed: 0.1, visa: { area: false, strobo: false },
-              text: 'Linjalen släpps och faller fritt tills du nyper ihop fingrarna. Fångar du den vid 12,0 cm har den fallit i 0,156 s, och det är din reaktionstid. Uppspelningen går i ultrarapid.' },
+              text: 'Linjalen släpps och faller fritt tills du nyper ihop fingrarna. Fångar du den vid 12,0 cm har den fallit i 0,156 s, och det är din reaktionstid. Uppspelningen går i ultrarapid.' },
             { id: 'fall', namn: 'Fritt fall från vila', scen: 'lod', obj: 'boll',
               s0: 0, v0: 0, a: -G, T: 2, speed: 1, visa: { area: true, strobo: true },
-              text: 'Bollen släpps från vila. Hastigheten ökar med 9,82 m/s varje sekund, och fallsträckan växer med kvadraten på tiden: efter 2,0 s har bollen fallit 19,6 m, fyra gånger så långt som efter 1,0 s.' },
+              text: 'Bollen släpps från vila. Hastigheten ökar med 9,82 m/s varje sekund, och fallsträckan växer med kvadraten på tiden: efter 2,0 s har bollen fallit 19,6 m, fyra gånger så långt som efter 1,0 s.' },
         ];
 
         const GRANS = {
@@ -409,11 +409,11 @@
             if (typ === 'fall') {
                 const t = slump([0.5, 1, 1.5, 2, 2.5]);
                 return { typ, scen: 'lod', obj: 'boll', s0: 0, v0: 0, a: -G, T: t, t, svar: G * t * t / 2, enhet: 'm',
-                         text: `En sten släpps från vila och faller fritt. Hur långt har den fallit efter ${fmt(t, 1)} s? Räkna med g = 9,82 m/s².` };
+                         text: `En sten släpps från vila och faller fritt. Hur långt har den fallit efter ${fmt(t, 1)} s? Räkna med g = 9,82 m/s².` };
             }
             const v0 = slump([6, 8, 10, 12, 15, 20]);
             return { typ: 'hojd', scen: 'lod', obj: 'boll', s0: 0, v0, a: -G, T: 2 * v0 / G, t: v0 / G, svar: v0 * v0 / (2 * G), enhet: 'm',
-                     text: `En boll kastas rakt uppåt med hastigheten ${fmtk(v0)} m/s. Hur högt över utkastpunkten når bollen? Räkna med g = 9,82 m/s².` };
+                     text: `En boll kastas rakt uppåt med hastigheten ${fmtk(v0)} m/s. Hur högt över utkastpunkten når bollen? Räkna med g = 9,82 m/s².` };
         };
         // Inline-bråk med rakt bråkstreck i lösningstexten
         const fr = (t, n) => `<span class="ifr"><span>${t}</span><span>${n}</span></span>`;
@@ -1372,7 +1372,7 @@
                     <Reglage kompakt={kompakt} namn={<span>Startläge <em>s</em>₀</span>} aria="Startläge" varde={p.s0} g={g.s0} d={1} enhet="m" onChange={(v) => andra({ s0: v })} av={gissa} />
                     <Reglage kompakt={kompakt} namn={<span>Starthastighet <em>v</em>₀</span>} aria="Starthastighet" varde={p.v0} g={g.v0} d={1} enhet="m/s" onChange={(v) => andra({ v0: v })} av={gissa} />
                     <Reglage kompakt={kompakt} namn={<span>Acceleration <em>a</em></span>} aria="Acceleration" varde={p.a} g={lod ? [-10, 0, 0.01] : g.a} d={2} enhet="m/s²" onChange={(v) => andra({ a: v })} av={gissa || lod} />
-                    {lod && <p className="anm">Fritt fall: <em>a</em> = −<em>g</em> = −9,82 m/s², med uppåt som positiv riktning.</p>}
+                    {lod && <p className="anm">Fritt fall: <em>a</em> = −<em>g</em> = −9,82 m/s², med uppåt som positiv riktning.</p>}
                     <Reglage kompakt={kompakt} namn={<span>Tid för rörelsen</span>} aria="Tid för rörelsen" varde={p.T} g={g.T} d={lod ? 4 : 1} enhet="s" onChange={(v) => andra({ T: v })} av={gissa} />
                 </React.Fragment>
             );
@@ -1562,7 +1562,7 @@
                                 <li>Arean i ett diagram är ändringen i diagrammet ovanför. Arean under <em>a-t</em>-grafen är hastighetsändringen Δ<em>v</em> = <em>a</em> · <em>t</em>, och arean under <em>v-t</em>-grafen är förflyttningen Δ<em>s</em>.</li>
                                 <li>Arean under <em>v-t</em>-grafen är rektangeln <em>v</em>₀ · <em>t</em> plus triangeln <em>a</em> · <em>t</em>²/2. Därför ser formeln ut som den gör: <em>s</em> = <em>s</em>₀ + <em>v</em>₀ · <em>t</em> + <em>a</em> · <em>t</em>²/2.</li>
                                 <li>Vid en inbromsning har <em>v</em> och <em>a</em> olika tecken. Triangeln blir då negativ och dras bort från rektangeln. Byter hastigheten tecken vänder rörelsen, och då blir förflyttningen mindre än sträckan.</li>
-                                <li>Vid fritt fall och kast rakt uppåt är <em>a</em> = −<em>g</em> = −9,82 m/s² när uppåt räknas positivt, hela tiden, även i högsta punkten där <em>v</em> = 0.</li>
+                                <li>Vid fritt fall och kast rakt uppåt är <em>a</em> = −<em>g</em> = −9,82 m/s² när uppåt räknas positivt, hela tiden, även i högsta punkten där <em>v</em> = 0.</li>
                                 <li>Medelhastigheten vid konstant acceleration är medelvärdet av start- och sluthastigheten, <em>v</em><sub>m</sub> = (<em>v</em>₀ + <em>v</em>)/2. Det är lutningen hos sekanten i <em>s-t</em>-diagrammet.</li>
                                 <li>Stroboskopbilderna tas med jämna tidsmellanrum. Ökar farten hamnar de allt längre isär, och samma punkter syns på <em>s-t</em>-grafen.</li>
                             </ul>

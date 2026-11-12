@@ -1342,8 +1342,8 @@
                 var s1 = zoneCount(1) / total;
                 var s2 = zoneCount(2) / total;
                 html += '<br>Andel kulor inom <em>μ</em> ± <em>σ</em>: <strong>' + pct(s1) +
-                    '</strong> (normalfördelningen ger 68,2 %). Andel inom <em>μ</em> ± 2<em>σ</em>: <strong>' +
-                    pct(s2) + '</strong> (normalfördelningen ger 95,4 %). Kantfacken räknas efter ' +
+                    '</strong> (normalfördelningen ger 68,2 %). Andel inom <em>μ</em> ± 2<em>σ</em>: <strong>' +
+                    pct(s2) + '</strong> (normalfördelningen ger 95,4 %). Kantfacken räknas efter ' +
                     'hur stor del av dem som ligger i zonen.';
             }
             note.innerHTML = html;

@@ -164,7 +164,7 @@
     var START1 = 1000;     // startbelopp för kedje-scenen (steg 1 & 2)
     var START3 = 80000;    // startbelopp för upprepnings-scenen (steg 3) —
                             // samma som genomgångens sparkonto-exempel
-    var DEMO = [20, -20];  // gissa-först-facit: +20 % följt av −20 %
+    var DEMO = [20, -20];  // gissa-först-facit: +20 % följt av −20 %
     var TILES = [20, -20, 50, -10, 5];
     var MAX_CHAIN = 5;
 

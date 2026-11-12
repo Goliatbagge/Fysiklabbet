@@ -216,7 +216,7 @@ window.NP_PROV = window.NP_PROV || {};
             figur: null,
             steg: [
                 {
-                    rubrik: 'Plocka ut kolumnen för 0 °C',
+                    rubrik: 'Plocka ut kolumnen för 0 °C',
                     varfor: 'Frågan gäller bara den faktiska temperaturen $0$ °C, så vi läser den ' +
                         'kolumnen uppifrån och ned.',
                     text: '| Vindhastighet (m/s) | $2$ | $5$ | $10$ | $15$ | $20$ |\n' +
@@ -321,25 +321,25 @@ window.NP_PROV = window.NP_PROV || {};
             'klicka sedan fram lösningen ett steg i taget. Varje steg förklarar både vad som ' +
             'görs och varför, och varje uppgift kan också följas som en pennlösning.',
         kravgranser: 'Provet (delprov B–D) ger totalt högst 67 poäng. Poängen skrivs (E/C/A). ' +
-            'Till exempel betyder (1/0/1) att uppgiften kan ge 1 E-poäng och 1 A-poäng. ' +
+            'Till exempel betyder (1/0/1) att uppgiften kan ge 1 E-poäng och 1 A-poäng. ' +
             'Gräns för provbetyget: E minst 14 poäng · D minst 25 poäng varav 9 på lägst C-nivå · ' +
             'C minst 33 poäng varav 14 på lägst C-nivå · B minst 43 poäng varav 6 på A-nivå · ' +
             'A minst 51 poäng varav 10 på A-nivå.',
         delprov: {
             B: {
-                tid: '60 minuter',
+                tid: '60 minuter',
                 hjalpmedel: 'Formelblad och linjal. Inga digitala verktyg',
                 hjalpmedelKort: 'Utan digitala verktyg',
                 beskrivning: 'Till uppgifterna behöver du endast ange svar.',
             },
             C: {
-                tid: '60 minuter',
+                tid: '60 minuter',
                 hjalpmedel: 'Formelblad och linjal. Inga digitala verktyg',
                 hjalpmedelKort: 'Utan digitala verktyg',
                 beskrivning: 'Lösningarna ska redovisas.',
             },
             D: {
-                tid: '120 minuter',
+                tid: '120 minuter',
                 hjalpmedel: 'Digitala verktyg, formelblad och linjal',
                 hjalpmedelKort: 'Digitala verktyg tillåtna',
                 beskrivning: 'Lösningarna ska redovisas, om inte uppgiften anger att endast svar krävs.',

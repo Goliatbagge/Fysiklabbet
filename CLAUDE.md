@@ -178,6 +178,13 @@ node .claude/verify-kurvor.js
 # agenten `korrekturlasare`. Se "Språkgranskning" nedan.
 node .claude/verify-sprak.js [fil …]
 
+# Verifiera HÅRT MELLANSLAG MELLAN TAL OCH ENHET (KÖR FÖRE COMMIT när du
+# skrivit text med mått, belopp eller tider utanför teorins md-filer!) —
+# "10 m", "10 meter", "2 500 kr" ska ha U+00A0, annars kan raden brytas
+# mellan talet och enheten. --laga byter mellanslagen. Teorin sköts av
+# build.js. Se "Hårt mellanslag (NBSP) i löptext", punkt 2.
+node .claude/verify-nbsp-enhet.js [--laga] [fil …]
+
 # Verifiera BRÅKENS TECKENSTORLEK i inline-matte (KÖR FÖRE COMMIT vid
 # ändringar i teori, övningar, exit tickets eller nationella prov!) — ett
 # bråk i löptext ska vara lika stort som texten runt omkring. Flaggar
@@ -2209,6 +2216,19 @@ Tre fall där radbrytning måste förhindras:
    dem till varje ny sida som renderar markdown. I HTML-strängar som inte
    går genom renderarna (`data/nyheter.js`, `data/begrepp.js`) skrivs det
    hårda mellanslaget direkt i källan.
+   **⛔ Alla enheter, på hela sajten** (användarkrav 2026-11-12: "10" och
+   "meter" bröts på var sin rad i Exempel 1 i `fy2-2.13`). Det gäller både
+   enhetssymboler (`10 m`, `3 kWh`, `20 °C`) och utskrivna enheter
+   (`10 meter`, `5 minuter`, `200 kr`, `3 ljusår`), och tusentalsgrupperna
+   framför dem (`2 500 meter`). Regeln och enhetslistan bor i
+   `.claude/nbsp-enhet.js`. **Teorin sköts automatiskt** av
+   `data/teori/build.js` (skriv vanligt mellanslag i md-filen). **Allt
+   annat** (övningar, exit tickets, prov, nyheter, ordlistan, katalogen,
+   simuleringarna, sidorna i roten) ska ha U+00A0 i källan:
+   `node .claude/verify-nbsp-enhet.js` ger fel på varje vanligt mellanslag
+   mellan tal och enhet, och `--laga` byter dem. Saknas en enhet i listan,
+   lägg till den i `ENHETER`. Pennlösningarna undantas (de ritas glyf för
+   glyf och bryter aldrig rad).
 3. **Variabel + värde + enhet**: ALLTID math-block — `$g = 9{,}82\ \mathrm{N/kg}$`.
    Gäller alla operatorer: `=`, `≈` (`\approx`), `<`, `>`, `≤` (`\leq`),
    `≥`, `∝` (`\propto`), `≠`.

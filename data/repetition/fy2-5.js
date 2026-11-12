@@ -35,9 +35,9 @@ window.REPETITION['fy2-5'] = {
                 { a: '$r_s = \\dfrac{2GM}{c^{2}}$', b: 'Schwarzschildradien' },
                 { a: '$\\sigma \\propto \\dfrac{1}{\\lambda^{4}}$', b: 'Rayleighspridningens våglängdsberoende' },
                 { a: '1 AU', b: 'Jordens medelavstånd till solen' },
-                { a: '1 pc', b: 'Ungefär 3,26 ljusår' },
-                { a: '29,5 dygn', b: 'Synodisk månad — nymåne till nymåne' },
-                { a: '27,3 dygn', b: 'Siderisk månad — ett varv mätt mot fixstjärnorna' },
+                { a: '1 pc', b: 'Ungefär 3,26 ljusår' },
+                { a: '29,5 dygn', b: 'Synodisk månad — nymåne till nymåne' },
+                { a: '27,3 dygn', b: 'Siderisk månad — ett varv mätt mot fixstjärnorna' },
             ],
         },
         {

@@ -294,26 +294,26 @@ window.NP_PROV = window.NP_PROV || {};
             'Välj en uppgift, lös den själv, och klicka sedan fram lösningen ett steg i taget. ' +
             'Varje steg förklarar både vad som görs och varför, och varje uppgift kan också ' +
             'följas som en pennlösning.',
-        kravgranser: 'Provet (delprov B–D) ger totalt 59 poäng varav 21 E-, 22 C- och 16 A-poäng. ' +
-            'Poängen skrivs (E/C/A). Till exempel betyder (3/2/1) att uppgiften kan ge 3 E-, 2 C- och ' +
-            '1 A-poäng. Gräns för provbetyget: E minst 15 poäng · D minst 24 poäng varav 7 på ' +
+        kravgranser: 'Provet (delprov B–D) ger totalt 59 poäng varav 21 E-, 22 C- och 16 A-poäng. ' +
+            'Poängen skrivs (E/C/A). Till exempel betyder (3/2/1) att uppgiften kan ge 3 E-, 2 C- och ' +
+            '1 A-poäng. Gräns för provbetyget: E minst 15 poäng · D minst 24 poäng varav 7 på ' +
             'minst C-nivå · C minst 31 poäng varav 13 på minst C-nivå · B minst 39 poäng varav ' +
             '5 på A-nivå · A minst 46 poäng varav 8 på A-nivå.',
         delprov: {
             B: {
-                tid: '120 minuter för delprov B och C tillsammans',
+                tid: '120 minuter för delprov B och C tillsammans',
                 hjalpmedel: 'Formelblad och linjal. Inga digitala verktyg',
                 hjalpmedelKort: 'Utan digitala verktyg',
                 beskrivning: 'Uppgift 1–11. Endast svar krävs.',
             },
             C: {
-                tid: '120 minuter för delprov B och C tillsammans',
+                tid: '120 minuter för delprov B och C tillsammans',
                 hjalpmedel: 'Formelblad och linjal. Inga digitala verktyg',
                 hjalpmedelKort: 'Utan digitala verktyg',
                 beskrivning: 'Uppgift 12–18. Fullständiga lösningar krävs.',
             },
             D: {
-                tid: '120 minuter',
+                tid: '120 minuter',
                 hjalpmedel: 'Digitala verktyg, formelblad och linjal',
                 hjalpmedelKort: 'Digitala verktyg tillåtna',
                 beskrivning: 'Uppgift 19–28. Fullständiga lösningar krävs.',

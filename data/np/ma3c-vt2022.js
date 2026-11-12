@@ -22,26 +22,26 @@ window.NP_PROV['ma3c-vt2022'] = {
         'Välj en uppgift, lös den själv, och klicka sedan fram lösningen ett steg i taget. ' +
         'Varje steg förklarar både vad som görs och varför, och figurerna byggs upp i takt ' +
         'med lösningen.',
-    kravgranser: 'Provet (delprov B–D) ger totalt 58 poäng varav 21 E-, 21 C- och 16 A-poäng. ' +
-        'Poängen skrivs (E/C/A) — till exempel betyder (3/2/1) att uppgiften kan ge 3 E-, 2 C- och ' +
-        '1 A-poäng. Gräns för provbetyget: E minst 15 poäng · D minst 24 poäng varav 7 på ' +
+    kravgranser: 'Provet (delprov B–D) ger totalt 58 poäng varav 21 E-, 21 C- och 16 A-poäng. ' +
+        'Poängen skrivs (E/C/A) — till exempel betyder (3/2/1) att uppgiften kan ge 3 E-, 2 C- och ' +
+        '1 A-poäng. Gräns för provbetyget: E minst 15 poäng · D minst 24 poäng varav 7 på ' +
         'minst C-nivå · C minst 31 poäng varav 13 på minst C-nivå · B minst 39 poäng varav ' +
         '5 på A-nivå · A minst 45 poäng varav 8 på A-nivå.',
     delprov: {
         B: {
-            tid: '120 minuter för delprov B och C tillsammans',
+            tid: '120 minuter för delprov B och C tillsammans',
             hjalpmedel: 'Formelblad och linjal — inga digitala verktyg',
             hjalpmedelKort: 'Utan digitala verktyg',
             beskrivning: 'Uppgift 1–11. Endast svar krävs.',
         },
         C: {
-            tid: '120 minuter för delprov B och C tillsammans',
+            tid: '120 minuter för delprov B och C tillsammans',
             hjalpmedel: 'Formelblad och linjal — inga digitala verktyg',
             hjalpmedelKort: 'Utan digitala verktyg',
             beskrivning: 'Uppgift 12–18. Fullständiga lösningar krävs.',
         },
         D: {
-            tid: '120 minuter',
+            tid: '120 minuter',
             hjalpmedel: 'Digitala verktyg, formelblad och linjal',
             hjalpmedelKort: 'Digitala verktyg tillåtna',
             beskrivning: 'Uppgift 19–28. Fullständiga lösningar krävs.',
@@ -814,7 +814,7 @@ window.NP_PROV['ma3c-vt2022'] = {
             fraga: 'Pojkars längd kan beskrivas med den enkla modellen ' +
                 '$f(x) = 78 \\cdot \\mathrm{e}^{0{,}07x}$ där $f(x)$ är längden i centimeter och ' +
                 '$x$ är pojkars ålder i år.<br>' +
-                '**a)** Bestäm vid vilken ålder som pojkar är 125 cm långa enligt modellen.<br>' +
+                '**a)** Bestäm vid vilken ålder som pojkar är 125 cm långa enligt modellen.<br>' +
                 '**b)** Använd modellen och bestäm hur snabbt pojkar växer då de är exakt 6 år.<br>' +
                 '**c)** Undersök om modellen även är giltig för pojkar som går på gymnasiet.',
             figur: null,
@@ -834,7 +834,7 @@ window.NP_PROV['ma3c-vt2022'] = {
                     text: '$$\\mathrm{e}^{0{,}07x} = \\dfrac{125}{78} \\quad \\Longleftrightarrow \\quad ' +
                         '0{,}07x = \\ln \\dfrac{125}{78} \\quad \\Longleftrightarrow \\quad ' +
                         'x = \\dfrac{\\ln \\frac{125}{78}}{0{,}07} \\approx 6{,}7$$',
-                    delsvar: { del: 'a', text: 'Pojkar är 125 cm långa vid cirka $6{,}7$ års ålder enligt modellen.' },
+                    delsvar: { del: 'a', text: 'Pojkar är 125 cm långa vid cirka $6{,}7$ års ålder enligt modellen.' },
                 },
                 {
                     del: 'b',
@@ -1084,7 +1084,7 @@ window.NP_PROV['ma3c-vt2022'] = {
                 'Bensinförbrukningen för mopeden kan beskrivas med den förenklade modellen ' +
                 '$f(x) = 0{,}3 + 0{,}5\\mathrm{e}^{-0{,}76x}$ där $f(x)$ är bensinförbrukningen i ' +
                 'liter/mil och $x$ är sträckan i mil från start.\n\n' +
-                'Wilma startar med 4,0 liter bensin i tanken. Bestäm hur lång sträcka Wilma kan ' +
+                'Wilma startar med 4,0 liter bensin i tanken. Bestäm hur lång sträcka Wilma kan ' +
                 'köra som längst innan bensinen tar slut enligt modellen.',
             figur: null,
             steg: [
@@ -1126,7 +1126,7 @@ window.NP_PROV['ma3c-vt2022'] = {
             genomgangar: ['ma3c-4.6', 'ma3c-4.7', 'ma2c-4.5'],
             fraga: 'Konstsmeden Suzanna tänker göra smycken av silver och guld. Varje smycke ska ' +
                 'bestå av en rektangulär silverplatta och en guldtråd. Guldtråden ska lödas fast ' +
-                '8 mm från silverplattans hörn. Se figur.\n\n' +
+                '8 mm från silverplattans hörn. Se figur.\n\n' +
                 'Guldtråd är dyr och hon vill därför använda så lite guld som möjligt till ' +
                 'smycket. Smycket får inte heller väga för mycket och därför bestämmer Suzanna ' +
                 'att en silverplatta ska ha arean $550\\ \\mathrm{mm^2}$.\n\n' +

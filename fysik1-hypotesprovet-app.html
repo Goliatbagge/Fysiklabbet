@@ -680,8 +680,8 @@
         );
 
         const FORSOK = [
-            { id: 'massa', namn: 'Spelar massan roll?', sub: '50 g och 400 g, samma snöre', hyp: 'm', serie: [{ m: 50, l: 0.8, a0: 10 }, { m: 400, l: 0.8, a0: 10 }] },
-            { id: 'langd', namn: 'Fyra gånger så långt snöre', sub: '0,25 m och 1,00 m', hyp: 'l', serie: [{ m: 100, l: 0.25, a0: 10 }, { m: 100, l: 1.0, a0: 10 }] },
+            { id: 'massa', namn: 'Spelar massan roll?', sub: '50 g och 400 g, samma snöre', hyp: 'm', serie: [{ m: 50, l: 0.8, a0: 10 }, { m: 400, l: 0.8, a0: 10 }] },
+            { id: 'langd', namn: 'Fyra gånger så långt snöre', sub: '0,25 m och 1,00 m', hyp: 'l', serie: [{ m: 100, l: 0.25, a0: 10 }, { m: 100, l: 1.0, a0: 10 }] },
             { id: 'utslag', namn: 'Litet och stort utslag', sub: '5° och 40°, två gånger var', hyp: 'a0', serie: [{ m: 100, l: 1.0, a0: 5 }, { m: 100, l: 1.0, a0: 40 }, { m: 100, l: 1.0, a0: 5 }, { m: 100, l: 1.0, a0: 40 }] },
             { id: 'upprepa', namn: 'Upprepa samma mätning', sub: 'fem gånger, en räknas fel', hyp: null, serie: [{ m: 100, l: 0.5, a0: 10 }, { m: 100, l: 0.5, a0: 10 }, { m: 100, l: 0.5, a0: 10, fel: 1 }, { m: 100, l: 0.5, a0: 10 }, { m: 100, l: 0.5, a0: 10 }] },
             { id: 'tva', namn: 'Två ändringar på en gång', sub: 'tyngre kula och längre snöre', hyp: 'm', serie: [{ m: 50, l: 0.3, a0: 10 }, { m: 400, l: 0.9, a0: 10 }] },
@@ -1021,7 +1021,7 @@
                                             </div>
                                             <p className="text-sm" style={{ color: 'var(--lab-ink-soft)', maxWidth: 520 }}>
                                                 Mätningarna stämmer med en modell där svängningstiden växer med roten ur längden{status.m && status.m.res !== 'stods' ? ' och inte beror på massan' : ''}:
-                                                fyra gånger så långt snöre ger dubbelt så lång tid. <em>g</em> är tyngdfaktorn, 9,82 N/kg. Modellen gäller för små utslag.
+                                                fyra gånger så långt snöre ger dubbelt så lång tid. <em>g</em> är tyngdfaktorn, 9,82 N/kg. Modellen gäller för små utslag.
                                                 Den streckade kurvan i diagrammet visar modellen.
                                             </p>
                                         </div>

@@ -597,7 +597,7 @@
 
                                     <div className="scene-info">
                                         <span className="si-lbl">Inducerad spänning <em style={{ textTransform: 'none' }}>e</em></span>
-                                        <span className="si-val">{moving ? fmtE(e) : '0 V'}</span>
+                                        <span className="si-val">{moving ? fmtE(e) : '0 V'}</span>
                                         <span className="si-lbl" style={{ marginTop: 4 }}>Hastighet <em style={{ textTransform: 'none' }}>v</em></span>
                                         <span className="si-val">{fmt(Math.abs(vAct), 0)} cm/s</span>
                                     </div>
@@ -680,16 +680,16 @@
                                         <span>·</span>
                                         <span style={{ whiteSpace: 'nowrap' }}>{fmt(Math.abs(vAct) / 100, 2)} m/s</span>
                                         <span>·</span>
-                                        <span style={{ whiteSpace: 'nowrap' }}>{fmt(Bmt, 2)}·10<sup>−3</sup> T</span>
+                                        <span style={{ whiteSpace: 'nowrap' }}>{fmt(Bmt, 2)}·10<sup>−3</sup> T</span>
                                         <span>=</span>
-                                        <span className="font-bold" style={{ color: 'var(--lab-accent)', whiteSpace: 'nowrap' }}>{moving ? fmtE(e) : '0 V'}</span>
+                                        <span className="font-bold" style={{ color: 'var(--lab-accent)', whiteSpace: 'nowrap' }}>{moving ? fmtE(e) : '0 V'}</span>
                                     </div>
                                     <div className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>
                                         Beräkningen använder ledarens hastighet just nu — pausa eller håll
                                         ledaren stilla så blir spänningen 0.
                                     </div>
                                     <button className="btn-toggle w-full mt-3 text-sm" onClick={setExample1}
-                                            title="l = 20 cm, v = 80 cm/s, B = 0,85 mT">
+                                            title="l = 20 cm, v = 80 cm/s, B = 0,85 mT">
                                         Exempel 1 ur teorin (20 cm, 80 cm/s, 0,85 mT)
                                     </button>
                                 </div>
@@ -698,7 +698,7 @@
                                 <div className="glass-card rounded-xl p-3 mb-3">
                                     <div className="flbl mb-2">Avläsning</div>
                                     <div className="grid grid-cols-2 gap-2">
-                                        <Readout label="Inducerad spänning <em>e</em>" value={moving ? fmtE(e) : '0 V'} unit="" color="var(--lab-accent)" />
+                                        <Readout label="Inducerad spänning <em>e</em>" value={moving ? fmtE(e) : '0 V'} unit="" color="var(--lab-accent)" />
                                         <Readout label="Hastighet just nu" value={fmt(Math.abs(vAct), 0)} unit="cm/s" />
                                         <Readout label="Flödestäthet <em>B</em>" value={fmt(Bmt, 2)} unit="mT" />
                                         <Readout label="Ledarens längd <em>l</em>" value={fmt(lcm, 0)} unit="cm" />

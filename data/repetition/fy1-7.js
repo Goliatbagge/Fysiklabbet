@@ -49,7 +49,7 @@ window.REPETITION['fy1-7'] = {
             instruktion: 'Ordna kopplingarna från lägst till högst total resistans. Dra brickorna till rätt plats (eller klicka på två för att byta plats) och tryck sedan på Kontrollera.',
             etikettStart: 'lägst resistans',
             etikettSlut: 'högst resistans',
-            items: ['Två 10 Ω parallellt', 'En 10 Ω och en 20 Ω parallellt', 'En 10 Ω-resistor', 'Två 10 Ω i serie', 'Tre 10 Ω i serie'],
+            items: ['Två 10 Ω parallellt', 'En 10 Ω och en 20 Ω parallellt', 'En 10 Ω-resistor', 'Två 10 Ω i serie', 'Tre 10 Ω i serie'],
         },
         {
             type: 'blixt',

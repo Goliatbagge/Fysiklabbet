@@ -29,26 +29,26 @@ window.NP_PROV['ma2c-vt2018'] = {
         'klicka sedan fram lösningen ett steg i taget. Varje steg förklarar både vad som ' +
         'görs och varför, figurerna byggs upp i takt med lösningen och varje uppgift kan ' +
         'också följas som en pennlösning.',
-    kravgranser: 'Provet (delprov B–D) ger totalt 57 poäng varav 20 E-, 20 C- och 17 A-poäng. ' +
-        'Poängen skrivs (E/C/A). Till exempel betyder (3/2/1) att uppgiften kan ge 3 E-, 2 C- och ' +
-        '1 A-poäng. Gräns för provbetyget: E minst 13 poäng · D minst 22 poäng varav 7 på ' +
+    kravgranser: 'Provet (delprov B–D) ger totalt 57 poäng varav 20 E-, 20 C- och 17 A-poäng. ' +
+        'Poängen skrivs (E/C/A). Till exempel betyder (3/2/1) att uppgiften kan ge 3 E-, 2 C- och ' +
+        '1 A-poäng. Gräns för provbetyget: E minst 13 poäng · D minst 22 poäng varav 7 på ' +
         'minst C-nivå · C minst 29 poäng varav 12 på minst C-nivå · B minst 37 poäng varav ' +
         '5 på A-nivå · A minst 44 poäng varav 9 på A-nivå.',
     delprov: {
         B: {
-            tid: '120 minuter för delprov B och C tillsammans',
+            tid: '120 minuter för delprov B och C tillsammans',
             hjalpmedel: 'Formelblad och linjal. Inga digitala verktyg',
             hjalpmedelKort: 'Utan digitala verktyg',
             beskrivning: 'Uppgift 1–9. Endast svar krävs.',
         },
         C: {
-            tid: '120 minuter för delprov B och C tillsammans',
+            tid: '120 minuter för delprov B och C tillsammans',
             hjalpmedel: 'Formelblad och linjal. Inga digitala verktyg',
             hjalpmedelKort: 'Utan digitala verktyg',
             beskrivning: 'Uppgift 10–16. Fullständiga lösningar krävs.',
         },
         D: {
-            tid: '120 minuter',
+            tid: '120 minuter',
             hjalpmedel: 'Digitala verktyg, formelblad och linjal',
             hjalpmedelKort: 'Digitala verktyg tillåtna',
             beskrivning: 'Uppgift 17–26. Fullständiga lösningar krävs.',
@@ -390,8 +390,8 @@ window.NP_PROV['ma2c-vt2018'] = {
             genomgangar: ['ma2c-5.5', 'ma1c-3.3', 'ma1c-4.11'],
             endastSvar: true,
             fraga: 'Emil "HeatoN" Christensen, en känd e-sportare, köpte i början av år 2017 ' +
-                'en speldator för 32 997 kr. Han räknar med att den procentuella minskningen ' +
-                'av datorns värde kommer vara ungefär 5 % per månad. Anta att värdeminskningen ' +
+                'en speldator för 32 997 kr. Han räknar med att den procentuella minskningen ' +
+                'av datorns värde kommer vara ungefär 5 % per månad. Anta att värdeminskningen ' +
                 'per månad fortsätter i samma takt.\n\n' +
                 'Teckna den funktion $V$ som beskriver datorns värde $V(t)$ kr som funktion ' +
                 'av tiden $t$ i år, istället för i månader, efter inköpet.',
@@ -503,9 +503,9 @@ window.NP_PROV['ma2c-vt2018'] = {
         {
             nr: 11, del: 'C', poang: [3, 0, 0], omrade: 'Problemlösning med ekvationssystem',
             genomgangar: ['ma2c-1.4', 'ma2c-1.2'],
-            fraga: 'Kim och Sascha är på torget och köper 2,5 kg äpplen var. Kim köper gröna ' +
-                'äpplen och Sascha köper röda äpplen. Kim köper även 1 kg päron. Tillsammans ' +
-                'betalar de 105 kr. Kilopriset för de röda äpplena är 2 kr högre än kilopriset ' +
+            fraga: 'Kim och Sascha är på torget och köper 2,5 kg äpplen var. Kim köper gröna ' +
+                'äpplen och Sascha köper röda äpplen. Kim köper även 1 kg päron. Tillsammans ' +
+                'betalar de 105 kr. Kilopriset för de röda äpplena är 2 kr högre än kilopriset ' +
                 'för de gröna äpplena.\n\n' +
                 'Följande ekvationssystem beskriver situationen:\n\n' +
                 '$$\\begin{cases} y - x = 2 \\\\ 2{,}5x + 2{,}5y + z = 105 \\\\ 105 - z = 85 \\end{cases}$$\n\n' +
@@ -1092,12 +1092,12 @@ window.NP_PROV['ma2c-vt2018'] = {
         {
             nr: 23, del: 'D', poang: [0, 3, 0], omrade: 'Exponentialekvationer: procentuell minskning',
             genomgangar: ['ma2c-5.5', 'ma2c-5.3', 'ma1c-3.2'],
-            fraga: 'Ett av Sveriges miljömål är att minska koldioxidutsläppet med 40 % från år ' +
+            fraga: 'Ett av Sveriges miljömål är att minska koldioxidutsläppet med 40 % från år ' +
                 '1990 till år 2020. År 1990 var koldioxidutsläppet $7{,}29 \\cdot 10^7$ ton. År 2014 ' +
                 'hade utsläppet minskat till $5{,}44 \\cdot 10^7$ ton.\n\n' +
-                'Anta att den årliga procentuella minskningen är 2,0 % från och med år 2014. ' +
+                'Anta att den årliga procentuella minskningen är 2,0 % från och med år 2014. ' +
                 'Bestäm hur många år det kommer att ta, räknat från år 2014, innan ' +
-                'koldioxidutsläppet är 40 % lägre än år 1990.',
+                'koldioxidutsläppet är 40 % lägre än år 1990.',
             figur: null,
             steg: [
                 {
@@ -1228,7 +1228,7 @@ window.NP_PROV['ma2c-vt2018'] = {
                 'se ut.\n\n' +
                 'Åsa vill att de två bitarna i mitten ska vara identiska och att deras övre kant ' +
                 'ska ha samma form som grafen till en andragradsfunktion så att de blir ' +
-                'symmetriska. Bitarnas bredd ska vara 11,5 cm och deras höjd 4,5 cm.\n\n' +
+                'symmetriska. Bitarnas bredd ska vara 11,5 cm och deras höjd 4,5 cm.\n\n' +
                 'Bestäm en andragradsfunktion som beskriver bitarnas övre kant.',
             figur: 'u25',
             steg: [
@@ -1278,7 +1278,7 @@ window.NP_PROV['ma2c-vt2018'] = {
         {
             nr: 26, del: 'D', poang: [0, 0, 3], omrade: 'Största rektangel i en triangel: likformighet och andragradsfunktion',
             genomgangar: ['ma2c-4.8', 'ma2c-3.3', 'ma2c-3.5'],
-            fraga: 'Figuren visar en triangel $ABC$ med höjden 7,0 cm och basen 9,0 cm. En ' +
+            fraga: 'Figuren visar en triangel $ABC$ med höjden 7,0 cm och basen 9,0 cm. En ' +
                 'rektangel ritas så att två av rektangelns hörn ligger på triangelns bas och de ' +
                 'andra hörnen ligger på triangelns två andra sidor, se figur.\n\n' +
                 'Bestäm den största area som en sådan rektangel kan ha.',

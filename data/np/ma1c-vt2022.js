@@ -35,25 +35,25 @@ window.NP_PROV['ma1c-vt2022'] = {
         'Välj en uppgift, lös den själv, och klicka sedan fram lösningen ett steg i taget. ' +
         'Varje steg förklarar både vad som görs och varför.',
     kravgranser: 'Provet (delprov B–D) ger totalt högst 70 poäng. Poängen skrivs (E/C/A) — ' +
-        'till exempel betyder (1/0/1) att uppgiften kan ge 1 E-poäng och 1 A-poäng. ' +
+        'till exempel betyder (1/0/1) att uppgiften kan ge 1 E-poäng och 1 A-poäng. ' +
         'Gräns för provbetyget: E minst 14 poäng · D minst 27 poäng varav 12 på lägst C-nivå · ' +
         'C minst 35 poäng varav 18 på lägst C-nivå · B minst 46 poäng varav 6 på A-nivå · ' +
         'A minst 55 poäng varav 11 på A-nivå.',
     delprov: {
         B: {
-            tid: '60 minuter',
+            tid: '60 minuter',
             hjalpmedel: 'Formelblad och linjal — inga digitala verktyg',
             hjalpmedelKort: 'Utan digitala verktyg',
             beskrivning: 'Till uppgifterna behöver du endast ange svar.',
         },
         C: {
-            tid: '60 minuter',
+            tid: '60 minuter',
             hjalpmedel: 'Formelblad och linjal — inga digitala verktyg',
             hjalpmedelKort: 'Utan digitala verktyg',
             beskrivning: 'Lösningarna ska redovisas.',
         },
         D: {
-            tid: '120 minuter',
+            tid: '120 minuter',
             hjalpmedel: 'Digitala verktyg, formelblad och linjal',
             hjalpmedelKort: 'Digitala verktyg tillåtna',
             beskrivning: 'Lösningarna ska redovisas, om inte uppgiften anger att endast svar krävs.',
@@ -312,8 +312,8 @@ window.NP_PROV['ma1c-vt2022'] = {
                 'om den kan beskrivas med en linjär modell, exponentiell modell eller potensmodell.\n\n' +
                 '1. Totalvikten på en lastbil ökar beroende på mängden sand som lastas på flaket.\n' +
                 '2. Bromssträckan för en bil beror på bilens hastighet i kvadrat.\n' +
-                '3. Volymen på en deg ökar beroende på tiden, när degens volym ökar med 5 % var tionde minut.\n' +
-                '4. Volymen vatten i en hink minskar beroende på tiden, när vattnet rinner ut med 2 cl per minut.',
+                '3. Volymen på en deg ökar beroende på tiden, när degens volym ökar med 5 % var tionde minut.\n' +
+                '4. Volymen vatten i en hink minskar beroende på tiden, när vattnet rinner ut med 2 cl per minut.',
             figur: null,
             steg: [
                 {
@@ -663,7 +663,7 @@ window.NP_PROV['ma1c-vt2022'] = {
         {
             nr: 18, del: 'C', poang: [2, 0, 0], omrade: 'Räta linjen — genom två punkter',
             genomgangar: ['ma1c-4.5'],
-            film: { fil: 'media/video/np-ma1c-vt2022-u18.mp4', affisch: 'media/video/np-ma1c-vt2022-u18.jpg', langd: '4 min' },
+            film: { fil: 'media/video/np-ma1c-vt2022-u18.mp4', affisch: 'media/video/np-ma1c-vt2022-u18.jpg', langd: '4 min' },
             endastSvar: false,
             fraga: 'Bestäm ekvationen för den räta linje som går genom punkterna $(2,\\ 10)$ och $(12,\\ 30)$.',
             figur: null,
@@ -770,7 +770,7 @@ window.NP_PROV['ma1c-vt2022'] = {
                 'att odla på. Området ska ha formen av en triangel med basen $b$ meter och höjden $h$ meter. ' +
                 'Ali vill undersöka hur området kan se ut.\n\n' +
                 '**a)** Bestäm en funktion för hur basen $b$ beror av höjden $h$ för Alis område.\n\n' +
-                '**b)** Bestäm definitionsmängden för funktionen om $b$ ska vara minst 1 m lång.',
+                '**b)** Bestäm definitionsmängden för funktionen om $b$ ska vara minst 1 m lång.',
             figur: 'u21',
             steg: [
                 {
@@ -852,7 +852,7 @@ window.NP_PROV['ma1c-vt2022'] = {
             nr: 23, del: 'D', poang: [2, 2, 0], omrade: 'Trigonometri — tillämpning',
             genomgangar: ['ma1c-6.1', 'ma1c-6.2'],
             endastSvar: false,
-            fraga: 'Jonas ska borra ett hål för bergvärme och behöver borra ner till djupet 125 m. ' +
+            fraga: 'Jonas ska borra ett hål för bergvärme och behöver borra ner till djupet 125 m. ' +
                 'Lutningen på borrhålet måste vara $10{,}0\\degree$ enligt en borrplan, se figur.\n\n' +
                 '**a)** Hur långt borrhål måste Jonas *minst* borra?\n\n' +
                 '**b)** Hur långt från tomtgränsen ska Jonas *minst* börja borra för att inte ' +
@@ -1004,7 +1004,7 @@ window.NP_PROV['ma1c-vt2022'] = {
                 '$$\\text{Formel 1:} \\quad y_1 = 70x^{0{,}75}$$\n\n' +
                 '$$\\text{Formel 2:} \\quad y_2 = 30x + 70$$\n\n' +
                 'där $y_1$ och $y_2$ är energibehovet i kcal/dygn för en hund som väger $x$ kg.\n\n' +
-                'Hur många procent lägre energibehov ger formel 1 jämfört med formel 2 för en hund som väger 40 kg?',
+                'Hur många procent lägre energibehov ger formel 1 jämfört med formel 2 för en hund som väger 40 kg?',
             figur: null,
             steg: [
                 {
@@ -1031,7 +1031,7 @@ window.NP_PROV['ma1c-vt2022'] = {
             ],
             svar: 'Cirka $12\\ \\%$ lägre',
             bedomning: [
-                ['Tecknar kvoten för att kunna jämföra energibehovet för en hund som väger 40 kg', '+C'],
+                ['Tecknar kvoten för att kunna jämföra energibehovet för en hund som väger 40 kg', '+C'],
                 ['Lösning med godtagbart svar', '+C'],
             ],
         },
@@ -1131,13 +1131,13 @@ window.NP_PROV['ma1c-vt2022'] = {
                 '$$t = \\left(\\dfrac{1}{h_1} - \\dfrac{1}{h_2}\\right) \\cdot s \\cdot 60$$\n\n' +
                 'där $t$ är tidsskillnad i minuter, $h_1$ är genomsnittlig hastighet 1 i km/h, ' +
                 '$h_2$ är genomsnittlig hastighet 2 i km/h och $s$ är sträcka i kilometer.\n\n' +
-                'Kim kör bil till jobbet. Till Kims jobb är sträckan 20 km.\n\n' +
+                'Kim kör bil till jobbet. Till Kims jobb är sträckan 20 km.\n\n' +
                 '**a)** Använd formeln för att beräkna tidsskillnaden i minuter om Kim ena dagen ' +
-                'kör i den genomsnittliga hastigheten 80 km/h och den andra dagen istället kör i den ' +
-                'genomsnittliga hastigheten 90 km/h till jobbet.\n\n' +
+                'kör i den genomsnittliga hastigheten 80 km/h och den andra dagen istället kör i den ' +
+                'genomsnittliga hastigheten 90 km/h till jobbet.\n\n' +
                 '**b)** Kim jämför två andra dagars resor till jobbet. Den ena genomsnittliga hastigheten ' +
                 'var dubbelt så hög som den andra på grund av trafiken. Tidsskillnaden för resorna till ' +
-                'jobbet var 12 min. Vilka genomsnittliga hastigheter körde Kim med de två dagarna?',
+                'jobbet var 12 min. Vilka genomsnittliga hastigheter körde Kim med de två dagarna?',
             figur: null,
             steg: [
                 {
@@ -1151,7 +1151,7 @@ window.NP_PROV['ma1c-vt2022'] = {
                     del: 'a', rubrik: 'Beräkna tidsskillnaden',
                     text: '$$t = \\left(\\dfrac{1}{80} - \\dfrac{1}{90}\\right) \\cdot 1\\,200 = ' +
                         '\\dfrac{10}{7\\,200} \\cdot 1\\,200 = \\dfrac{5}{3} \\approx 1{,}7$$',
-                    delsvar: { del: 'a', text: '$\\dfrac{5}{3} \\approx 1{,}7$ minuter (1 minut och 40 sekunder)' },
+                    delsvar: { del: 'a', text: '$\\dfrac{5}{3} \\approx 1{,}7$ minuter (1 minut och 40 sekunder)' },
                 },
                 {
                     del: 'b', rubrik: 'Inför en variabel för hastigheterna',
@@ -1178,7 +1178,7 @@ window.NP_PROV['ma1c-vt2022'] = {
                     delsvar: { del: 'b', text: '$50$ km/h och $100$ km/h' },
                 },
             ],
-            svar: '**a)** $\\dfrac{5}{3} \\approx 1{,}7$ minuter (1 minut och 40 sekunder) ' +
+            svar: '**a)** $\\dfrac{5}{3} \\approx 1{,}7$ minuter (1 minut och 40 sekunder) ' +
                 '**b)** $50$ km/h och $100$ km/h',
             bedomning: [
                 ['a) Ersätter $h_1$, $h_2$ och $s$ med korrekta värden i formeln', '+E'],

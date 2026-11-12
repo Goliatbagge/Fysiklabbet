@@ -230,7 +230,7 @@
                 const loc = pt.matrixTransform(ctm.inverse());
                 // Invertera scaleX: t = (x − padding) / graphWidth · FIXED_MAX_TIME
                 let t = ((loc.x - padding) / graphWidth) * FIXED_MAX_TIME;
-                t = Math.round(t * 10) / 10; // steglöst (0,1 s) — matchar 1-decimals visning
+                t = Math.round(t * 10) / 10; // steglöst (0,1 s) — matchar 1-decimals visning
                 return Math.max(0, Math.min(FIXED_MAX_TIME, t));
             };
 
@@ -537,7 +537,7 @@
                                                     fill="#10b981"
                                                     fontWeight="bold"
                                                 >
-                                                    Δ<tspan fontStyle="italic">t</tspan> = 4,0 s
+                                                    Δ<tspan fontStyle="italic">t</tspan> = 4,0 s
                                                 </text>
                                                 <text
                                                     x={scaleX(6) + 35}
@@ -903,8 +903,8 @@
                                             className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                                         />
                                         <div className="flex justify-between text-xs text-gray-500 mt-1">
-                                            <span>−20,0 m</span>
-                                            <span>30,0 m</span>
+                                            <span>−20,0 m</span>
+                                            <span>30,0 m</span>
                                         </div>
                                     </div>
 
@@ -926,8 +926,8 @@
                                             className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                                         />
                                         <div className="flex justify-between text-xs text-gray-500 mt-1">
-                                            <span>−10,0 m/s</span>
-                                            <span>10,0 m/s</span>
+                                            <span>−10,0 m/s</span>
+                                            <span>10,0 m/s</span>
                                         </div>
                                     </div>
                                 </div>
@@ -976,8 +976,8 @@
                                                 className="w-full h-2 bg-green-200 rounded-lg appearance-none cursor-pointer"
                                             />
                                             <div className="flex justify-between text-xs text-gray-500 mt-1">
-                                                <span>0 s</span>
-                                                <span>20,0 s</span>
+                                                <span>0 s</span>
+                                                <span>20,0 s</span>
                                             </div>
                                         </div>
                                     )}

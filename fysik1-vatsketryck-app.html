@@ -1106,7 +1106,7 @@
                     const p = M.tryck(rho, h);
                     const hs = kar === KAR.akvarium ? fmt(h, 2) : fmt(h, 1);
                     const m = rho * MEMBRAN_A * h;
-                    rad1 = <span>Vätskepelaren ovanför membranet: <em>p</em> = <Brak t={<em>F</em>} n={<em>A</em>} /> = <Brak t={<span><em>m</em> · <em>g</em></span>} n={<em>A</em>} /> = <Brak t={<span><em>ρ</em> · <em>A</em> · <em>h</em> · <em>g</em></span>} n={<em>A</em>} /> = <em>ρ</em> · <em>g</em> · <em>h</em>{'   '}(arean förkortas bort){!dolj && <span>, här <em>m</em> = {fmt(m, m < 10 ? 2 : 1)} kg på <em>A</em> = 36 cm²</span>}</span>;
+                    rad1 = <span>Vätskepelaren ovanför membranet: <em>p</em> = <Brak t={<em>F</em>} n={<em>A</em>} /> = <Brak t={<span><em>m</em> · <em>g</em></span>} n={<em>A</em>} /> = <Brak t={<span><em>ρ</em> · <em>A</em> · <em>h</em> · <em>g</em></span>} n={<em>A</em>} /> = <em>ρ</em> · <em>g</em> · <em>h</em>{'   '}(arean förkortas bort){!dolj && <span>, här <em>m</em> = {fmt(m, m < 10 ? 2 : 1)} kg på <em>A</em> = 36 cm²</span>}</span>;
                     rad2 = dolj ? <span>Räkna själv innan du tittar på manometern.</span>
                         : <span><em>p</em> = {p0 ? '101 300 + ' : ''}{fmt(rho, 0)} · 9,82 · {hs} = {fmt(p0 ? M.P0 + p : p, 0)} Pa{p0 ? ' (totalt tryck)' : ''}
                             {kar === KAR.cistern && !p0 ? `   (${fmt(100 * p / M.P0, 0)} % av lufttrycket)` : ''}
@@ -1142,13 +1142,13 @@
         //  FÄRDIGA FÖRSÖK OCH GISSA-LÄGET
         // ════════════════════════════════════════════════════════
         const FORSOK = [
-            { id: 'sond',  namn: '35 cm vatten', sub: 'sonden i akvariet', cfg: { lage: 'sond', kar: 'akvarium', vatska: 'vatten', h: 0.35, rikt: 'upp' } },
+            { id: 'sond',  namn: '35 cm vatten', sub: 'sonden i akvariet', cfg: { lage: 'sond', kar: 'akvarium', vatska: 'vatten', h: 0.35, rikt: 'upp' } },
             { id: 'glyc',  namn: 'Glycerol', sub: 'samma djup, tätare vätska', cfg: { lage: 'sond', kar: 'akvarium', vatska: 'glycerol', h: 0.35, rikt: 'upp' } },
             { id: 'vrid',  namn: 'Vrid sonden', sub: 'membranet åt sidan', cfg: { lage: 'sond', kar: 'akvarium', vatska: 'vatten', h: 0.30, rikt: 'sida' } },
             { id: 'tio',   namn: 'Tio meter vatten', sub: 'ungefär ett lufttryck', cfg: { lage: 'sond', kar: 'cistern', vatska: 'vatten', h: 10, rikt: 'upp' } },
             { id: 'form',  namn: 'Fyra kärl, samma nivå', sub: 'olika mycket vatten', cfg: { lage: 'karl', nivaer: [0.25, 0.25, 0.25, 0.25], oppen: false } },
             { id: 'kran',  namn: 'Öppna kranarna', sub: 'nivåerna jämnar ut sig', cfg: { lage: 'karl', nivaer: [0.10, 0.35, 0.05, 0.25], oppen: true } },
-            { id: 'ex1',   namn: 'Domkraften', sub: 'Exempel 1: 100 N lyfter 2 ton', cfg: { lage: 'press', F1: 100, A1: 0.5, A2: 100, last: 'bil', kor: true } },
+            { id: 'ex1',   namn: 'Domkraften', sub: 'Exempel 1: 100 N lyfter 2 ton', cfg: { lage: 'press', F1: 100, A1: 0.5, A2: 100, last: 'bil', kor: true } },
             { id: 'svag',  namn: 'För liten kraft', sub: 'lasten står kvar', cfg: { lage: 'press', F1: 60, A1: 0.5, A2: 100, last: 'bil', kor: true } },
         ];
         const slump = (a) => a[Math.floor(Math.random() * a.length)];
@@ -1465,7 +1465,7 @@
                                 <p className="text-sm mt-2" style={{ color: 'var(--lab-ink-soft)' }}>
                                     {lage === 'sond' && karNamn === 'cistern' && 'Sonden och vätskepelaren är inte ritade i cisternens skala. '}
                                     {lage === 'sond' && 'Dra i sonden för att ändra djupet. Manometern är fylld med färgat vatten: nivåskillnaden Δh är lika stor som vattendjupet över sonden när karet också innehåller vatten.'}
-                                    {lage === 'karl' && 'Dra i vattenytan för att ändra nivån i ett kärl, eller använd reglagen. Varje kärl sträcker sig 10 cm in i bilden. När kranarna öppnas blir kärlen kommunicerande. Tryck på en kran för att öppna eller stänga dem.'}
+                                    {lage === 'karl' && 'Dra i vattenytan för att ändra nivån i ett kärl, eller använd reglagen. Varje kärl sträcker sig 10 cm in i bilden. När kranarna öppnas blir kärlen kommunicerande. Tryck på en kran för att öppna eller stänga dem.'}
                                     {lage === 'press' && 'Kolvarna och oljan räknas som masslösa, och oljan går inte att pressa ihop. Pilarna visar krafternas riktning, staplarna deras storlek.'}
                                 </p>
                             </div>

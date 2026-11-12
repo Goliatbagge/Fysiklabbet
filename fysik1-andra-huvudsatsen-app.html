@@ -668,7 +668,7 @@
                         <rect x="939" y={BENK - 4} width="24" height="5" rx="2" fill="#161a22" />
                         <rect x="608" y="390" width="350" height="128" rx="4" fill="#e7ecdc" stroke="#11151c" strokeWidth="1.5" />
                         <text x={G.x0 + 6} y="405" fontSize="10.5" fill="#3b4232"><tspan fontStyle="italic">T</tspan> (°C)</text>
-                        <text x={G.x1} y="513" textAnchor="end" fontSize="10.5" fill="#3b4232"><tspan fontStyle="italic">t</tspan>, de senaste 60 s</text>
+                        <text x={G.x1} y="513" textAnchor="end" fontSize="10.5" fill="#3b4232"><tspan fontStyle="italic">t</tspan>, de senaste 60 s</text>
                         <line x1={G.x0} y1={G.y0} x2={G.x1} y2={G.y0} stroke="#3b4232" strokeWidth="1" />
                         <line x1={G.x0} y1={G.y0} x2={G.x0} y2={G.y1} stroke="#3b4232" strokeWidth="1" />
                         {[0, 50, 100].map((T) => <text key={T} x={G.x0 - 5} y={ty(T) + 3.5} textAnchor="end" fontSize="10" fill="#3b4232">{T}</text>)}
@@ -852,7 +852,7 @@
                         </g>
                     ) : !pump ? (
                         <g>
-                            {/* vinsch, trissa på ett stativ och en vikt på 10 kg */}
+                            {/* vinsch, trissa på ett stativ och en vikt på 10 kg */}
                             <rect x="772" y="92" width="10" height={BENK2 - 92} fill="#6b7280" stroke="#374151" strokeWidth="1" />
                             <rect x="744" y={BENK2 - 8} width="66" height="8" rx="2" fill="#374151" />
                             <rect x="690" y="88" width="92" height="8" fill="#6b7280" stroke="#374151" strokeWidth="1" />
@@ -868,7 +868,7 @@
                             </g>
                             <path d={`M 699 ${viktY + 8} L 735 ${viktY + 8} L 741 ${viktY + 50} L 693 ${viktY + 50} Z`} fill="#57534e" stroke="#1c1917" strokeWidth="1.3" strokeLinejoin="round" />
                             <path d={`M 709 ${viktY + 8} C 709 ${viktY - 2} 725 ${viktY - 2} 725 ${viktY + 8}`} fill="none" stroke="#1c1917" strokeWidth="2" />
-                            <text x="717" y={viktY + 35} textAnchor="middle" fontSize="12.5" fontWeight="600" fill="#f5f5f4">10 kg</text>
+                            <text x="717" y={viktY + 35} textAnchor="middle" fontSize="12.5" fontWeight="600" fill="#f5f5f4">10 kg</text>
                             <text x="717" y={viktY + 70} textAnchor="middle" fontSize="12.5" fill={COL.soft}>lyft {fmt(lyft, 2)} m</text>
                         </g>
                     ) : (
@@ -1495,7 +1495,7 @@
                                                 ? tr('Ett kraftverk som eldar bränsle eller har en kärnreaktor är en värmemaskin. Het ånga driver turbinen, som driver generatorn. Ångan måste sedan kylas till vatten igen, och den värmen går ut i kyltornet eller havet. Per varv: {Qv} J in, {W} J el och {Qk} J värme ut.', { Qv: fmt(v.Qv, 0), W: fmt(v.W, 0), Qk: fmt(v.Qk, 0) })
                                             : exempel && exempel.typ === typ && exempel.id === 'kyl'
                                                 ? 'Ett kylskåp är en värmepump. Kompressorn, som drivs med el, flyttar värme från skåpets insida ut i köket. Därför är gallret på kylskåpets baksida varmt. Värmen går aldrig av sig själv från kallt till varmt, det kräver arbete.'
-                                            : typ === 'maskin' ? 'Klicka på maskinen för att starta eller pausa den. Under varje varv tar maskinen emot 200 J värme från den varma sidan. Arbetet lyfter en vikt på 10 kg. En bricka är 10 J.' : 'Klicka på maskinen för att starta eller pausa den. Pumpens arbete, 100 J per varv, kommer från en elmotor. En bricka är 10 J.'}</span>}
+                                            : typ === 'maskin' ? 'Klicka på maskinen för att starta eller pausa den. Under varje varv tar maskinen emot 200 J värme från den varma sidan. Arbetet lyfter en vikt på 10 kg. En bricka är 10 J.' : 'Klicka på maskinen för att starta eller pausa den. Pumpens arbete, 100 J per varv, kommer från en elmotor. En bricka är 10 J.'}</span>}
                                 </p>
                             </div>
 

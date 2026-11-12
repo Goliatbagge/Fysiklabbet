@@ -24,26 +24,26 @@ window.NP_PROV['ma4-vt2018'] = {
         'den själv, och klicka sedan fram lösningen ett steg i taget. Varje steg förklarar ' +
         'både vad som görs och varför, figurerna byggs upp i takt med lösningen och varje ' +
         'uppgift kan också följas som en pennlösning.',
-    kravgranser: 'Provet (delprov B–D) ger totalt 61 poäng varav 20 E-, 23 C- och 18 A-poäng. ' +
-        'Poängen skrivs (E/C/A). Till exempel betyder (3/2/1) att uppgiften kan ge 3 E-, 2 C- och ' +
-        '1 A-poäng. Gräns för provbetyget: E minst 14 poäng · D minst 23 poäng varav 8 på ' +
+    kravgranser: 'Provet (delprov B–D) ger totalt 61 poäng varav 20 E-, 23 C- och 18 A-poäng. ' +
+        'Poängen skrivs (E/C/A). Till exempel betyder (3/2/1) att uppgiften kan ge 3 E-, 2 C- och ' +
+        '1 A-poäng. Gräns för provbetyget: E minst 14 poäng · D minst 23 poäng varav 8 på ' +
         'minst C-nivå · C minst 31 poäng varav 14 på minst C-nivå · B minst 41 poäng varav ' +
         '6 på A-nivå · A minst 49 poäng varav 10 på A-nivå.',
     delprov: {
         B: {
-            tid: '150 minuter för delprov B och C tillsammans',
+            tid: '150 minuter för delprov B och C tillsammans',
             hjalpmedel: 'Formelblad och linjal. Inga digitala verktyg',
             hjalpmedelKort: 'Utan digitala verktyg',
             beskrivning: 'Uppgift 1–10. Endast svar krävs.',
         },
         C: {
-            tid: '150 minuter för delprov B och C tillsammans',
+            tid: '150 minuter för delprov B och C tillsammans',
             hjalpmedel: 'Formelblad och linjal. Inga digitala verktyg',
             hjalpmedelKort: 'Utan digitala verktyg',
             beskrivning: 'Uppgift 11–19. Fullständiga lösningar krävs.',
         },
         D: {
-            tid: '120 minuter',
+            tid: '120 minuter',
             hjalpmedel: 'Digitala verktyg, formelblad och linjal',
             hjalpmedelKort: 'Digitala verktyg tillåtna',
             beskrivning: 'Uppgift 20–27. Fullständiga lösningar krävs.',

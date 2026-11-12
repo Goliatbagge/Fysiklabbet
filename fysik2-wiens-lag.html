@@ -587,10 +587,10 @@ function PlanckGraph({ T, showComparison, fullscreen }) {
 
         // X-axel ticks + etiketter
         const xTicks = [
-            { m: 1e-7, label: '100 nm' },
-            { m: 1e-6, label: '1 μm' },
-            { m: 1e-5, label: '10 μm' },
-            { m: 1e-4, label: '100 μm' },
+            { m: 1e-7, label: '100 nm' },
+            { m: 1e-6, label: '1 μm' },
+            { m: 1e-5, label: '10 μm' },
+            { m: 1e-4, label: '100 μm' },
         ];
         ctx.font = '11px Poppins, sans-serif';
         ctx.fillStyle = '#cbd5e1';
@@ -609,7 +609,7 @@ function PlanckGraph({ T, showComparison, fullscreen }) {
         // Mindre tick-labels vid 300 nm, 3 μm, 30 μm för extra orientering
         ctx.font = '9px Poppins, sans-serif';
         ctx.fillStyle = '#64748b';
-        [{ m: 3e-7, label: '300 nm' }, { m: 3e-6, label: '3 μm' }, { m: 3e-5, label: '30 μm' }].forEach(t => {
+        [{ m: 3e-7, label: '300 nm' }, { m: 3e-6, label: '3 μm' }, { m: 3e-5, label: '30 μm' }].forEach(t => {
             const x = xMap(t.m);
             ctx.fillText(t.label, x, pad.top + gh + 26);
         });
@@ -1040,7 +1040,7 @@ function WienSim() {
                         </strong>
                         En varm kropp strålar ut ett helt spektrum av våglängder, men intensiteten är som störst vid en viss våglängd <em>λ</em><sub>max</sub>. Wiens förskjutningslag säger att produkten <em>λ</em><sub>max</sub>·<em>T</em> är konstant. Dubblar du temperaturen halveras alltså topp-våglängden — toppen "förskjuts" mot kortare våglängder.
                         <br/><br/>
-                        Solens yta (≈ 5778 K) har topp vid ca 500 nm (grönt–gult ljus), medan en människas hud (≈ 293 K, ca 20 °C) har sin topp kring 9,9 μm i infrarött, det som värmekameror ser.
+                        Solens yta (≈ 5778 K) har topp vid ca 500 nm (grönt–gult ljus), medan en människas hud (≈ 293 K, ca 20 °C) har sin topp kring 9,9 μm i infrarött, det som värmekameror ser.
                     </div>
                     <div>
                         <strong style={{color:'#cbd5e1',display:'block',marginBottom:'4px'}}>

@@ -777,10 +777,10 @@
         const FORSOK = [
             { id: 'smal', namn: 'Smalare rör, högre fart', sub: 'halva diametern i 2', lage: 'bernoulli', p: { Q: 0.30, d2: 15, h: 0, p1: 5 } },
             { id: 'sug', namn: 'Mycket smalt: undertryck', sub: 'luft sugs in i 2', lage: 'bernoulli', p: { Q: 0.45, d2: 11, h: 0, p1: 3 } },
-            { id: 'upp', namn: 'Röret går uppför', sub: 'samma diameter, 0,30 m högre', lage: 'bernoulli', p: { Q: 0.30, d2: 30, h: 0.3, p1: 5 } },
+            { id: 'upp', namn: 'Röret går uppför', sub: 'samma diameter, 0,30 m högre', lage: 'bernoulli', p: { Q: 0.30, d2: 30, h: 0.3, p1: 5 } },
             { id: 'rakt', namn: 'Samma diameter hela vägen', sub: 'trycket är lika överallt', lage: 'bernoulli', p: { Q: 0.30, d2: 30, h: 0, p1: 5 } },
-            { id: 'droppar', namn: 'Kranen nästan stängd', sub: 'vatten, 5 cm/s i 10 mm', lage: 'reynolds', r: { vatska: 'vatten', v: 0.05, d: 10 } },
-            { id: 'oppen', namn: 'Kranen öppen', sub: 'vatten, 0,5 m/s i 15 mm', lage: 'reynolds', r: { vatska: 'vatten', v: 0.5, d: 15 } },
+            { id: 'droppar', namn: 'Kranen nästan stängd', sub: 'vatten, 5 cm/s i 10 mm', lage: 'reynolds', r: { vatska: 'vatten', v: 0.05, d: 10 } },
+            { id: 'oppen', namn: 'Kranen öppen', sub: 'vatten, 0,5 m/s i 15 mm', lage: 'reynolds', r: { vatska: 'vatten', v: 0.5, d: 15 } },
             { id: 'olja', namn: 'Matolja i samma rör', sub: 'samma fart, mycket mer trögflytande', lage: 'reynolds', r: { vatska: 'olja', v: 0.5, d: 15 } },
             { id: 'grans', namn: 'Precis vid gränsen', sub: 'vatten, Re ungefär 2 300', lage: 'reynolds', r: { vatska: 'vatten', v: 0.15, d: 15 } },
         ];
@@ -1172,8 +1172,8 @@
                                     {gissa && gissa.typ === 'tryck' && (
                                         <div>
                                             <p className="text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>
-                                                Röret är vågrätt. I punkt 1 är diametern 30 mm och övertrycket {fmt(gissa.p.p1, 1)} kPa, i punkt 2 är diametern {fmt(gissa.p.d2, 0)} mm.
-                                                Volymflödet är {fmt(gissa.p.Q, 2)} l/s. Vilket övertryck är det i punkt 2? Vattnets densitet är 998 kg/m³.
+                                                Röret är vågrätt. I punkt 1 är diametern 30 mm och övertrycket {fmt(gissa.p.p1, 1)} kPa, i punkt 2 är diametern {fmt(gissa.p.d2, 0)} mm.
+                                                Volymflödet är {fmt(gissa.p.Q, 2)} l/s. Vilket övertryck är det i punkt 2? Vattnets densitet är 998 kg/m³.
                                             </p>
                                             <div className="flex items-center gap-2 mb-2">
                                                 <span><Sub s="p" i="2" /> =</span>

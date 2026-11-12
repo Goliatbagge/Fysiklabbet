@@ -51,7 +51,7 @@ window.REPETITION['fy1-9'] = {
             instruktion: 'Ordna isotoperna från kortast till längst halveringstid. Dra brickorna till rätt plats (eller klicka på två för att byta plats) och tryck sedan på Kontrollera.',
             etikettStart: 'kortast halveringstid',
             etikettSlut: 'längst halveringstid',
-            items: ['Radon-222 (3,8 dygn)', 'Cesium-137 (30 år)', 'Kol-14 (5 730 år)', 'Uran-238 (4,5 miljarder år)'],
+            items: ['Radon-222 (3,8 dygn)', 'Cesium-137 (30 år)', 'Kol-14 (5 730 år)', 'Uran-238 (4,5 miljarder år)'],
         },
         {
             type: 'blixt',

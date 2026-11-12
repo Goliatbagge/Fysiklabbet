@@ -674,7 +674,7 @@
                     <rect x={xh} y="-10" width={DB} height="20" rx="5" fill="#e5e9ee" stroke="#7b8594" strokeWidth="1.4" />
                     <rect x={xh + DB - 18} y="-10" width="8" height="20" fill="#c8324a" opacity="0.85" />
                     <text x={xh + 30} y="4.5" fontSize="12" fontWeight="700" fill="#4b5563" fontFamily="Poppins, sans-serif" textAnchor="middle"
-                          transform={uppochner ? `rotate(180 ${xh + 30} 0)` : undefined}>0–20 N</text>
+                          transform={uppochner ? `rotate(180 ${xh + 30} 0)` : undefined}>0–20 N</text>
                 </g>
             );
         };
@@ -719,7 +719,7 @@
             const b = M.bana(cfg);
             const irSeg = [];
             if (ir) {
-                const skala = 2 * G * 0.6;              // J/m: fast skala (2 kg på sandpapper), så att en tung kloss syns som mer värme
+                const skala = 2 * G * 0.6;              // J/m: fast skala (2 kg på sandpapper), så att en tung kloss syns som mer värme
                 for (let i = 0; i < st.varme.length; i++) {
                     if (st.varme[i] <= 1e-6) continue;
                     const u1 = b.umin + i * M.CELL, u2 = Math.min(b.umax, u1 + M.CELL);
@@ -931,7 +931,7 @@
                             <g key={i}>
                                 <line x1={geo.xa + i * 0.1 * geo.S} y1={BAS + 13} x2={geo.xa + i * 0.1 * geo.S} y2={BAS + 13 + (i % 2 === 0 ? 6 : 3)} stroke="#4b5563" strokeWidth="1" />
                                 {i % 2 === 0 && <text x={geo.xa + i * 0.1 * geo.S + (i === 0 ? 3 : 0)} y={BAS + 26} textAnchor={i === 0 ? 'start' : 'middle'} fontSize="11"
-                                                      fill="#374151" fontFamily="Poppins, sans-serif">{i === 12 ? '1,2 m' : fmt(i * 0.1, 1)}</text>}
+                                                      fill="#374151" fontFamily="Poppins, sans-serif">{i === 12 ? '1,2 m' : fmt(i * 0.1, 1)}</text>}
                             </g>
                         ))}
                     </g>
@@ -1027,7 +1027,7 @@
                     })}
                     <g>
                         <rect x={FACK[0].x} y={FACK_BOT + 34} width="14" height="11" rx="2" fill={COL.brick} stroke={COL.brickK} strokeWidth="0.8" />
-                        <text x={FACK[0].x + 20} y={FACK_BOT + 44} fontSize="13" fill="rgba(15,22,32,0.7)" fontFamily="Poppins, sans-serif">= 1 J</text>
+                        <text x={FACK[0].x + 20} y={FACK_BOT + 44} fontSize="13" fill="rgba(15,22,32,0.7)" fontFamily="Poppins, sans-serif">= 1 J</text>
                     </g>
                     {flygande.map((t) => (
                         <rect key={t.id} x={t.x} y={t.y} width="14" height="11" rx="2" fill={COL.brick} stroke={COL.brickK} strokeWidth="0.8" opacity={t.op} />
@@ -1137,8 +1137,8 @@
             { id: 'utan',  namn: 'Utan friktion', sub: 'samma höjd varje gång', cfg: { ...BAS_CFG, remsa: 'ingen', h: 0.4 }, verkligTid: true },
             { id: 'sand',  namn: 'Sandpapper', sub: 'klossen stannar på planen', cfg: { ...BAS_CFG, remsa: 'sand', h: 0.4 } },
             { id: 'fram',  namn: 'Fram och tillbaka', sub: 'plast: höjden minskar', cfg: { ...BAS_CFG, remsa: 'plast', h: 0.5 }, verkligTid: true },
-            { id: 'latt',  namn: 'Lätt kloss, 0,5 kg', sub: 'trä i backen, filt på planen', cfg: { ...BAS_CFG, ramp: 'tra', remsa: 'filt', m: 0.5, h: 0.5 } },
-            { id: 'tung',  namn: 'Tung kloss, 2 kg', sub: 'samma höjd: var stannar den?', cfg: { ...BAS_CFG, ramp: 'tra', remsa: 'filt', m: 2, h: 0.5 } },
+            { id: 'latt',  namn: 'Lätt kloss, 0,5 kg', sub: 'trä i backen, filt på planen', cfg: { ...BAS_CFG, ramp: 'tra', remsa: 'filt', m: 0.5, h: 0.5 } },
+            { id: 'tung',  namn: 'Tung kloss, 2 kg', sub: 'samma höjd: var stannar den?', cfg: { ...BAS_CFG, ramp: 'tra', remsa: 'filt', m: 2, h: 0.5 } },
             { id: 'flack', namn: 'Flack ramp, 20°', sub: 'längre väg i backen', cfg: { ...BAS_CFG, ramp: 'tra', remsa: 'tra', a: 20, h: 0.4 } },
             { id: 'brant', namn: 'Brant ramp, 45°', sub: 'samma höjd, kortare väg', cfg: { ...BAS_CFG, ramp: 'tra', remsa: 'tra', a: 45, h: 0.4 } },
             { id: 'ligger', namn: 'Filt i backen, 20°', sub: 'tan α < μ: ligger kvar', cfg: { ...BAS_CFG, ramp: 'filt', remsa: 'tra', a: 20, h: 0.4 } },

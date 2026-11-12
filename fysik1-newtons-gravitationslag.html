@@ -155,7 +155,7 @@
 
         // Smart formattering för krafter
         const formatForce = (F) => {
-            if (!isFinite(F) || F === 0) return '0 N';
+            if (!isFinite(F) || F === 0) return '0 N';
             const abs = Math.abs(F);
             if (abs < 1e-3) return `${formatSci(F, 2)} N`;
             if (abs < 1)    return `${formatNum(F, 3)} N`;
@@ -1273,7 +1273,7 @@
                 ], textX, 44, 22, '700', 'left');
                 ctx.font = '500 11px Poppins, sans-serif';
                 ctx.fillStyle = '#cbd5e1';
-                ctx.fillText(window.I18N ? I18N.t('≈ tyngden av en 70 kg-person på jordytan') : '≈ tyngden av en 70 kg-person på jordytan', textX, 70);
+                ctx.fillText(window.I18N ? I18N.t('≈ tyngden av en 70 kg-person på jordytan') : '≈ tyngden av en 70 kg-person på jordytan', textX, 70);
             };
 
             // ----------------------------------------------------------
@@ -1563,7 +1563,7 @@
                                         <div className="text-sm text-slate-300 leading-relaxed space-y-3">
                                             <p>
                                                 I detta läge är massorna fixerade: jorden ({formatSci(M_EARTH, 1)} kg)
-                                                och en människa (70 kg).
+                                                och en människa (70 kg).
                                             </p>
                                             <p className="text-slate-400">
                                                 Klicka och dra människan runt jordens yta för att se hur
@@ -1642,7 +1642,7 @@
                                 <div className="glass-card p-5">
                                     <h3 className="text-cyan-300 font-semibold mb-2">Lika stora krafter</h3>
                                     <p className="text-sm text-slate-400 leading-relaxed">
-                                        Människan dras mot jordens centrum med en kraft <em>F</em> ≈ 686 N — och samtidigt
+                                        Människan dras mot jordens centrum med en kraft <em>F</em> ≈ 686 N — och samtidigt
                                         drar människan jorden mot sig med exakt samma kraft. Det är vad Newtons tredje lag säger.
                                     </p>
                                 </div>
@@ -1658,7 +1658,7 @@
                                     <p className="text-sm text-slate-300 leading-relaxed font-mono">
                                         F = G · m_J · m_p / R_J²<br/>
                                         F = 6,67·10⁻¹¹ · 5,97·10²⁴ · 70 / (6,37·10⁶)²<br/>
-                                        F ≈ <span className="text-amber-300 font-semibold">686 N</span>
+                                        F ≈ <span className="text-amber-300 font-semibold">686 N</span>
                                     </p>
                                 </div>
                             </div>

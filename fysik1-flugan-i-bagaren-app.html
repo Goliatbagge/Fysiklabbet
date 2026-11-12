@@ -330,8 +330,8 @@
 
         const G_ACC = 9.82;              // tyngdfaktor (N/kg)
         const RHO0 = 1.204;              // luftens densitet vid 20 °C (kg/m³)
-        const A_DISK = Math.PI * 0.0065 * 0.0065;  // vingarnas svepta yta (m²), vinglängd 6,5 mm
-        const CDA_BODY = 3.9e-5;         // C_d·A för flugkroppen (m²) → gränsfart ≈ 2,2 m/s
+        const A_DISK = Math.PI * 0.0065 * 0.0065;  // vingarnas svepta yta (m²), vinglängd 6,5 mm
+        const CDA_BODY = 3.9e-5;         // C_d·A för flugkroppen (m²) → gränsfart ≈ 2,2 m/s
         const F_WING = 200;              // vingslagsfrekvens (Hz)
         const D_BEAKER = 0.08;           // bägarens inre diameter (m)
         const A_BOTTOM = Math.PI * 0.04 * 0.04;    // bottenarea (m²)
@@ -356,7 +356,7 @@
               explain: 'Flugans tyngd går som vanlig kontaktkraft genom benen till botten. Vågen bär hela systemet: bägare, luft och fluga.' },
             { id: 'fullt', name: 'Lyfter, hovrar och landar', svar: 'Oförändrat',
               desc: 'Hela förloppet: avstamp, hovring och landning.',
-              explain: 'Avstampet ger en kort spik uppåt, sedan kommer en lika stor dipp medan luftströmmen byggs upp (0,1–0,2 s) — och under hovringen är utslaget oförändrat. Landningen ger en ny spik. Impulsöverskottet, ytan under avvikelsekurvan, summerar till noll över hela förloppet.' },
+              explain: 'Avstampet ger en kort spik uppåt, sedan kommer en lika stor dipp medan luftströmmen byggs upp (0,1–0,2 s) — och under hovringen är utslaget oförändrat. Landningen ger en ny spik. Impulsöverskottet, ytan under avvikelsekurvan, summerar till noll över hela förloppet.' },
             { id: 'hovrar', name: 'Hovrar stilla i bägaren', svar: 'Oförändrat',
               desc: 'Stationär hovring mitt i den slutna bägaren.',
               explain: 'Flugan accelererar luft nedåt med ett rörelsemängdsflöde som exakt motsvarar dess tyngd. I en sluten bägare tas hela flödet upp av botten och väggarna — vågen visar samma som när flugan satt still.' },
@@ -1314,7 +1314,7 @@
 
                 ctx.fillStyle = 'rgba(147,236,171,0.65)';
                 ctx.textAlign = 'right';
-                ctx.fillText(oversatt('VÅG 0,1 mg'), 604, 526);
+                ctx.fillText(oversatt('VÅG 0,1 mg'), 604, 526);
             }
 
             beakerGeom() {
@@ -2628,7 +2628,7 @@
                                         arbete mot luften och luften värms en aning — men det påverkar inte kraftbalansen.
                                         Vågen mäter kraft, inte energi.</li>
                                     <li>Jämför grafens två kurvor: den grå visar den <strong>verkliga kraften</strong> mot
-                                        vågen — med vingslagens 200 Hz-rippel och de korta start- och landningsspikarna —
+                                        vågen — med vingslagens 200 Hz-rippel och de korta start- och landningsspikarna —
                                         medan den röda visar vad den dämpade <strong>laboratorievågen</strong> hinner uppfatta.
                                         Vågen filtrerar bort alltihop, och det är därför man aldrig ser något hända i ett
                                         verkligt klassrumsförsök.</li>

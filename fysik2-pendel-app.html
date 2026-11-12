@@ -395,7 +395,7 @@
                         m.n += 1;
                         if (m.n >= 10) {
                             m.fas = 'done';
-                            m.T10 = Math.round((tc - m.t0) * 100) / 100;   // ljusgrindens tidsupplösning: 0,01 s
+                            m.T10 = Math.round((tc - m.t0) * 100) / 100;   // ljusgrindens tidsupplösning: 0,01 s
                             m.snap = { l: P.l, g: P.g, a0: P.a0 };
                             m.added = false;
                         }
@@ -428,25 +428,25 @@
             if (sim.t < 1e-9) sim.t = 0;
             if (sim.meas.fas === 'armed' || sim.meas.fas === 'running') sim.meas = nyMatning();
         };
-        const STEG = 0.02;   // ett klick på stegknappen = 0,02 s
+        const STEG = 0.02;   // ett klick på stegknappen = 0,02 s
 
         // ── Färdiga försök ──
         const FORSOK = [
             { id: 'massa', namn: 'Samma längd, olika massa',
               set: { l: 1.0, a0: 10, m: 100, plats: 'jorden' }, ghost: { l: 1.0, m: 400, a0: 10 },
-              text: 'A har massan 100 g och B massan 400 g, men längd och utslag är lika. Pendlarna svänger i takt: massan ingår inte i <em>T</em> = 2π√(<em>l</em>/<em>g</em>).' },
+              text: 'A har massan 100 g och B massan 400 g, men längd och utslag är lika. Pendlarna svänger i takt: massan ingår inte i <em>T</em> = 2π√(<em>l</em>/<em>g</em>).' },
             { id: 'langd', namn: 'Fyrdubbla längden',
               set: { l: 0.5, a0: 10, m: 100, plats: 'jorden' }, ghost: { l: 2.0, m: 100, a0: 10 },
-              text: 'B är fyra gånger så lång som A (2,00 m mot 0,50 m) och behöver dubbelt så lång tid för en svängning. <em>T</em> växer som √<em>l</em>.' },
+              text: 'B är fyra gånger så lång som A (2,00 m mot 0,50 m) och behöver dubbelt så lång tid för en svängning. <em>T</em> växer som √<em>l</em>.' },
             { id: 'sekund', namn: 'Sekundpendeln',
               set: { l: 0.995, a0: 5, m: 100, plats: 'jorden' }, ghost: null,
-              text: 'Med <em>l</em> = 0,995 m blir <em>T</em> = 2,00 s. Ljusgrinden slås ut en gång per sekund, varje gång pendeln passerar jämviktsläget.' },
+              text: 'Med <em>l</em> = 0,995 m blir <em>T</em> = 2,00 s. Ljusgrinden slås ut en gång per sekund, varje gång pendeln passerar jämviktsläget.' },
             { id: 'stort', namn: 'Stort utslag (formeln slutar gälla)',
               set: { l: 1.0, a0: 60, m: 100, plats: 'jorden' }, ghost: { l: 1.0, m: 100, a0: 5 },
-              text: 'A släpps från 60° och B från 5°, båda med <em>l</em> = 1,00 m. A hänger efter: formeln gäller bara för små utslag, och vid 60° är perioden cirka 7 % längre.' },
+              text: 'A släpps från 60° och B från 5°, båda med <em>l</em> = 1,00 m. A hänger efter: formeln gäller bara för små utslag, och vid 60° är perioden cirka 7 % längre.' },
             { id: 'manen', namn: 'Pendeln på Månen',
               set: { l: 1.0, a0: 10, m: 100, plats: 'mon' }, ghost: null,
-              text: 'På Månen är <em>g</em> = 1,62 m/s². Samma pendel behöver ungefär 2,5 gånger så lång tid: <em>T</em> = 4,94 s.' },
+              text: 'På Månen är <em>g</em> = 1,62 m/s². Samma pendel behöver ungefär 2,5 gånger så lång tid: <em>T</em> = 4,94 s.' },
         ];
 
         // ── SVG-pil: en sammanhängande polygon ──
@@ -1312,7 +1312,7 @@
             const styrknappar = (
                 <div className="styr">
                     <button className="btn-toggle btn-steg" onClick={stegaBak} disabled={simRef.current.t === 0}
-                            aria-label="Stega bakåt" title="Stega bakåt 0,02 s">
+                            aria-label="Stega bakåt" title="Stega bakåt 0,02 s">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="4" y="5" width="3" height="14" rx="1" /><path d="M20 5.5v13L9 12z" /></svg>
                     </button>
                     <button className="btn-toggle btn-prim btn-spela" onClick={primar}>
@@ -1322,7 +1322,7 @@
                         <span>{primarText}</span>
                     </button>
                     <button className="btn-toggle btn-steg" onClick={stegaFram}
-                            aria-label="Stega framåt" title="Stega framåt 0,02 s">
+                            aria-label="Stega framåt" title="Stega framåt 0,02 s">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 5.5v13L15 12z" /><rect x="17" y="5" width="3" height="14" rx="1" /></svg>
                     </button>
                     <button className="btn-toggle btn-om" onClick={tillbaka}>Börja om</button>
@@ -1519,8 +1519,8 @@
                                 <li>Tyngdkraften <em>F</em><sub>G</sub> delas i en komposant längs snöret och en tangentiell komposant <em>F</em><sub>1</sub> = <em>F</em><sub>G</sub>&thinsp;·&thinsp;sin&nbsp;<em>α</em>. Spännkraften <em>F</em><sub>S</sub> tar upp den första, och bara <em>F</em><sub>1</sub> för pendeln mot jämviktsläget.</li>
                                 <li>Massan ingår inte i formeln. <em>F</em><sub>1</sub> är proportionell mot massan, men det är också kulans tröghet, så massan förkortas bort. Prova försöket med samma längd och olika massa.</li>
                                 <li>Kvadrerar du formeln får du <em>T</em>² = (4π²/<em>g</em>)&thinsp;·&thinsp;<em>l</em>, en rät linje genom origo med lutningen 4π²/<em>g</em>. Läs av lutningen och räkna ut <em>g</em> ur den.</li>
-                                <li>Formeln gäller bara för små utslag, eftersom den bygger på att sin&nbsp;<em>α</em> ≈ <em>α</em> (i radianer). Vid 23° blir felet cirka 1 %, vid 45° cirka 4 % och vid 60° cirka 7 %. Simuleringen räknar rörelsen exakt, så du ser avvikelsen själv.</li>
-                                <li>Sekundpendeln har perioden 2,00 s, så den passerar jämviktsläget en gång per sekund. Vid <em>g</em> = 9,82 m/s² är den knappt en meter lång, <em>l</em> ≈ 0,995 m.</li>
+                                <li>Formeln gäller bara för små utslag, eftersom den bygger på att sin&nbsp;<em>α</em> ≈ <em>α</em> (i radianer). Vid 23° blir felet cirka 1 %, vid 45° cirka 4 % och vid 60° cirka 7 %. Simuleringen räknar rörelsen exakt, så du ser avvikelsen själv.</li>
+                                <li>Sekundpendeln har perioden 2,00 s, så den passerar jämviktsläget en gång per sekund. Vid <em>g</em> = 9,82 m/s² är den knappt en meter lång, <em>l</em> ≈ 0,995 m.</li>
                             </ul>
                         </details>
                     </div>

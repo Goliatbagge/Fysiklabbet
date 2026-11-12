@@ -24,13 +24,13 @@ window.NP_PROV['fy2-vt2016'] = {
         'inte i det frisläppta materialet. Välj en uppgift, lös den själv, och klicka sedan ' +
         'fram lösningen ett steg i taget. Varje steg förklarar både vad som görs och varför, ' +
         'och figurerna byggs upp i takt med lösningen.',
-    kravgranser: 'Provet (delprov A och B) ger totalt 60 poäng varav 20 E-, 21 C- och 19 A-poäng. ' +
+    kravgranser: 'Provet (delprov A och B) ger totalt 60 poäng varav 20 E-, 21 C- och 19 A-poäng. ' +
         'Poängen skrivs (E/C/A). Gräns för provbetyget: E minst 14 poäng · ' +
         'D minst 23 poäng varav 6 på minst C-nivå · C minst 30 poäng varav 11 på minst C-nivå · ' +
         'B minst 38 poäng varav 5 på A-nivå · A minst 45 poäng varav 9 på A-nivå.',
     delprov: {
         A: {
-            tid: '240 minuter',
+            tid: '240 minuter',
             hjalpmedel: 'Linjal, formelsamling och digitala hjälpmedel (även dator utan tillgång till kommunikation)',
             hjalpmedelKort: 'Digitala verktyg tillåtna',
             beskrivning: 'Uppgift 1–6 kräver endast ett kort svar eller en kortare redovisning. ' +
@@ -459,7 +459,7 @@ window.NP_PROV['fy2-vt2016'] = {
                 },
                 {
                     del: 'b',
-                    rubrik: 'Beräkna fotonens energi vid 200 nm',
+                    rubrik: 'Beräkna fotonens energi vid 200 nm',
                     varfor: 'Kortare våglängd betyder mer energi per foton. Även här gör vi först om ' +
                         'våglängden till SI-enheten meter innan den sätts in i formeln.',
                     text: 'Mätvärden (efter omvandling till SI-enheter):\n\n' +

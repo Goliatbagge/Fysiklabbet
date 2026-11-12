@@ -687,7 +687,7 @@
                 note.textContent = '';
             } else if (state.step === 2) {
                 katexInto(formelA, 'y = f(x) = \\sqrt{x}, \\quad 0 \\le x \\le 4');
-                katexInto(formelB, 'V_\\text{skiva} = \\pi r^2 h');
+                katexInto(formelB, 'V_\\text{skiva} = \\pi r^2 h');
                 note.innerHTML = state.angle >= 359.5
                     ? 'Ett helt varv klart — nu är kroppen färdigsvept.'
                     : '';

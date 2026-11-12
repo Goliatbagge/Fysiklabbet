@@ -29,13 +29,13 @@ window.NP_PROV['ma1c-vt2017'] = {
         'A minst 66 poäng varav 13 på A-nivå.',
     delprov: {
         B: {
-            tid: '60 minuter',
+            tid: '60 minuter',
             hjalpmedel: 'Formelblad och linjal — inga digitala verktyg',
             hjalpmedelKort: 'Utan digitala verktyg',
             beskrivning: 'De flesta uppgifter kräver endast svar; några kräver en kort redovisning.',
         },
         C: {
-            tid: '60 minuter',
+            tid: '60 minuter',
             hjalpmedel: 'Digitala verktyg, formelblad och linjal',
             hjalpmedelKort: 'Digitala verktyg tillåtna',
             beskrivning: 'En enda större uppgift där lösningen ska redovisas och motiveras.',
@@ -122,7 +122,7 @@ window.NP_PROV['ma1c-vt2017'] = {
                     figur: 'u3-los2',
                 },
                 {
-                    del: 'b', rubrik: 'Läs av var linjen skär y-axeln (0 °C)',
+                    del: 'b', rubrik: 'Läs av var linjen skär y-axeln (0 °C)',
                     varfor: '$0\\degree$C ligger på $y$-axeln ($x = 0$). Gå rakt upp från $x = 0$ till linjen ' +
                         'och läs av $y$-värdet — det är antalet grader Fahrenheit.',
                     text: 'Vid $x = 0$ ligger linjen på ungefär $y = 32$:\n\n$$0\\degree\\text{C} \\approx 32\\degree\\text{F}$$\n\n' +
@@ -213,7 +213,7 @@ window.NP_PROV['ma1c-vt2017'] = {
             genomgangar: ['ma1c-4.4', 'ma1c-4.1'],
             endastSvar: true,
             fraga: 'Hamed är dykare. När han dyker nedåt från vattenytan gör han det med samma hastighet ' +
-                'hela tiden. Vid ett dyk startar han dykdatorn när han är 6 meter under vattenytan. ' +
+                'hela tiden. Vid ett dyk startar han dykdatorn när han är 6 meter under vattenytan. ' +
                 'Dykdatorns data visas i diagrammet.\n\n' +
                 'Hur lång tid tar det för Hamed att komma från vattenytan ner till 18 meters djup?',
             figur: 'u6',
@@ -228,14 +228,14 @@ window.NP_PROV['ma1c-vt2017'] = {
                     figur: 'u6-los',
                 },
                 {
-                    rubrik: 'Räkna ut tiden från ytan till 18 m djup',
+                    rubrik: 'Räkna ut tiden från ytan till 18 m djup',
                     varfor: 'Hastigheten är konstant hela dyket, även före dykdatorn startade. Från ytan ' +
                         '($0$ m) till $18$ m djup är det $18$ m, och han rör sig $3$ m varje minut.',
                     text: '$$\\text{tid} = \\dfrac{18\\ \\text{m}}{3\\ \\text{m/min}} = 6\\ \\text{minuter}$$',
                 },
             ],
-            svar: '6 minuter',
-            bedomning: [['Godtagbart svar: 6 minuter', '+C']],
+            svar: '6 minuter',
+            bedomning: [['Godtagbart svar: 6 minuter', '+C']],
         },
 
         {
@@ -805,7 +805,7 @@ window.NP_PROV['ma1c-vt2017'] = {
             figur: null,
             steg: [
                 {
-                    del: 'a', rubrik: 'Räkna ut priset för 20 m²',
+                    del: 'a', rubrik: 'Räkna ut priset för 20 m²',
                     varfor: 'Priset är pris per kvadratmeter gånger antal kvadratmeter. Rabatten på golv B ' +
                         'gäller bara från $50$ m², så vid $20$ m² är det fullpris för båda.',
                     text: 'Golv A: $345 \\cdot 20 = 6\\,900$ kr.\n\nGolv B: $395 \\cdot 20 = 7\\,900$ kr ' +

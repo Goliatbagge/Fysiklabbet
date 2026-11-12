@@ -126,7 +126,7 @@ window.OVNINGSBLAD = {
   'ma1c-3.3': [
     {
       titel: 'Upprepade procentuella förändringar',
-      beskrivning: 'Förändringsfaktorer, total förändringsfaktor, samma förändring flera gånger som en potens och tillbaka till procent. Priser, sparande och värdeminskning i text, och resonemang om varför +15 % följt av −15 % inte blir 0 %. Svar och lösningsförslag sist.',
+      beskrivning: 'Förändringsfaktorer, total förändringsfaktor, samma förändring flera gånger som en potens och tillbaka till procent. Priser, sparande och värdeminskning i text, och resonemang om varför +15 % följt av −15 % inte blir 0 %. Svar och lösningsförslag sist.',
       niva: ['Grund'],
       antal: 34,
       html: 'ovningsblad/ovningsblad-upprepade-procent.html',

@@ -52,7 +52,7 @@ window.REPETITION['fy1-5'] = {
             instruktion: 'De fem enheterna nedan motsvarar olika stora tryck. Ordna dem från minst till störst tryck. Dra brickorna till rätt plats (eller klicka på två för att byta plats) och tryck sedan på Kontrollera.',
             etikettStart: 'minst',
             etikettSlut: 'störst',
-            items: ['1 Pa', '1 mmHg', '1 psi', '1 bar', '1 atm'],
+            items: ['1 Pa', '1 mmHg', '1 psi', '1 bar', '1 atm'],
         },
         {
             type: 'blixt',
@@ -60,7 +60,7 @@ window.REPETITION['fy1-5'] = {
             instruktion: 'Avgör om påståendet stämmer.',
             pastaenden: [
                 { text: 'Vattnets densitet är ungefär $1\\,000\\ \\mathrm{kg/m^3}$.',
-                  sant: true, varfor: '1,0 liter vatten väger ungefär 1,0 kg, vilket ger densiteten 1 000 kg/m³.' },
+                  sant: true, varfor: '1,0 liter vatten väger ungefär 1,0 kg, vilket ger densiteten 1 000 kg/m³.' },
                 { text: 'Ett föremål flyter i vatten om dess densitet är större än vattnets.',
                   sant: false, varfor: 'Det är tvärtom: föremålet flyter om dess sammanlagda densitet är LÄGRE än vätskans.' },
                 { text: 'Tryckkraften och trycket är alltid lika stora, oavsett vilken area kraften fördelas på.',

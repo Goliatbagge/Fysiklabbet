@@ -24,26 +24,26 @@ window.NP_PROV['ma2c-vt2022'] = {
         'klicka sedan fram lösningen ett steg i taget. Varje steg förklarar både vad som ' +
         'görs och varför, figurerna byggs upp i takt med lösningen och varje uppgift kan ' +
         'också följas som en pennlösning.',
-    kravgranser: 'Provet (delprov B–D) ger totalt 58 poäng varav 21 E-, 20 C- och 17 A-poäng. ' +
-        'Poängen skrivs (E/C/A). Till exempel betyder (3/2/1) att uppgiften kan ge 3 E-, 2 C- och ' +
-        '1 A-poäng. Gräns för provbetyget: E minst 14 poäng · D minst 22 poäng varav 6 på ' +
+    kravgranser: 'Provet (delprov B–D) ger totalt 58 poäng varav 21 E-, 20 C- och 17 A-poäng. ' +
+        'Poängen skrivs (E/C/A). Till exempel betyder (3/2/1) att uppgiften kan ge 3 E-, 2 C- och ' +
+        '1 A-poäng. Gräns för provbetyget: E minst 14 poäng · D minst 22 poäng varav 6 på ' +
         'minst C-nivå · C minst 29 poäng varav 11 på minst C-nivå · B minst 38 poäng varav ' +
         '5 på A-nivå · A minst 45 poäng varav 9 på A-nivå.',
     delprov: {
         B: {
-            tid: '120 minuter för delprov B och C tillsammans',
+            tid: '120 minuter för delprov B och C tillsammans',
             hjalpmedel: 'Formelblad och linjal. Inga digitala verktyg',
             hjalpmedelKort: 'Utan digitala verktyg',
             beskrivning: 'Uppgift 1–8. Endast svar krävs.',
         },
         C: {
-            tid: '120 minuter för delprov B och C tillsammans',
+            tid: '120 minuter för delprov B och C tillsammans',
             hjalpmedel: 'Formelblad och linjal. Inga digitala verktyg',
             hjalpmedelKort: 'Utan digitala verktyg',
             beskrivning: 'Uppgift 9–15. Fullständiga lösningar krävs.',
         },
         D: {
-            tid: '120 minuter',
+            tid: '120 minuter',
             hjalpmedel: 'Digitala verktyg, formelblad och linjal',
             hjalpmedelKort: 'Digitala verktyg tillåtna',
             beskrivning: 'Uppgift 16–28. Fullständiga lösningar krävs.',

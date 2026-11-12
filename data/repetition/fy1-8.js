@@ -50,7 +50,7 @@ window.REPETITION['fy1-8'] = {
             pastaenden: [
                 { text: 'Ljusets hastighet i vakuum är alltid densamma, oavsett hur ljuskällan eller observatören rör sig.',
                   sant: true, varfor: 'Detta är den grundläggande principen bakom relativitetsteorin, bekräftad av Michelson och Morleys experiment.' },
-                { text: 'Om ett rymdskepp rör sig mot dig med 70 % av ljusets hastighet och slår på strålkastarna, träffar ljuset dig med mer än ljusets hastighet.',
+                { text: 'Om ett rymdskepp rör sig mot dig med 70 % av ljusets hastighet och slår på strålkastarna, träffar ljuset dig med mer än ljusets hastighet.',
                   sant: false, varfor: 'Ljusets hastighet är konstant — den blir alltid $c$, oavsett källans rörelse.' },
                 { text: 'Tidsdilatation innebär att tiden går snabbare för ett objekt som rör sig nära ljusets hastighet, sett från en observatör i vila.',
                   sant: false, varfor: 'Tiden går långsammare för det rörliga objektet sett från observatören i vila — inte snabbare.' },

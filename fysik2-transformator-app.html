@@ -255,18 +255,18 @@
         const fmtN = (n) => Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
         const fmtU = (U) => {
             const a = Math.abs(U);
-            if (a < 0.005) return '0 V';
+            if (a < 0.005) return '0 V';
             if (a >= 1000) return `${fmt(U / 1000, a < 10000 ? 2 : 1)} kV`;
             return `${fmt(U, a >= 100 ? 0 : a >= 10 ? 1 : 2)} V`;
         };
         const fmtI = (I) => {
             const a = Math.abs(I);
-            if (a < 5e-6) return '0 A';
+            if (a < 5e-6) return '0 A';
             if (a >= 1) return `${fmt(I, a >= 10 ? 1 : 2)} A`;
             const m = I * 1e3; return `${fmt(m, Math.abs(m) < 10 ? 1 : 0)} mA`;
         };
         const fmtP = (P) => {
-            if (P < 5e-6) return '0 W';
+            if (P < 5e-6) return '0 W';
             if (P >= 1000) return `${fmt(P / 1000, 2)} kW`;
             if (P >= 1) return `${fmt(P, P >= 100 ? 0 : 1)} W`;
             const m = P * 1e3; return `${fmt(m, m < 10 ? 1 : 0)} mW`;
@@ -787,7 +787,7 @@
 
                 // nätaggregatet till vänster fram
                 const aggrG = new THREE.Group(); scene.add(aggrG);
-                const aggrTex = canvasTex(512, 384, (ctx, w, h) => ritaAggregat(ctx, w, h, { till: true, ac: true, text: '230 V' }));
+                const aggrTex = canvasTex(512, 384, (ctx, w, h) => ritaAggregat(ctx, w, h, { till: true, ac: true, text: '230 V' }));
                 const aggrHus = new THREE.MeshStandardMaterial({ color: linjar(0xd6cfc2), roughness: 0.55 });
                 const aggrBox = new THREE.Mesh(new THREE.BoxGeometry(14, 10.5, 10), [aggrHus, aggrHus, aggrHus, aggrHus, new THREE.MeshStandardMaterial({ map: aggrTex, roughness: 0.6 }), aggrHus]);
                 aggrBox.position.y = 5.25; aggrBox.castShadow = true; aggrBox.receiveShadow = true;
@@ -802,7 +802,7 @@
 
                 // multimetern till höger fram
                 const mmG = new THREE.Group(); scene.add(mmG);
-                const mmTex = canvasTex(320, 512, (ctx, w, h) => ritaMultimeter(ctx, w, h, { ac: true, text: '20,0 V' }));
+                const mmTex = canvasTex(320, 512, (ctx, w, h) => ritaMultimeter(ctx, w, h, { ac: true, text: '20,0 V' }));
                 const mmHus = new THREE.MeshStandardMaterial({ color: linjar(0xe8b735), roughness: 0.6 });
                 const mmBox = new THREE.Mesh(new THREE.BoxGeometry(7.5, 12, 2.6), [mmHus, mmHus, mmHus, mmHus, new THREE.MeshStandardMaterial({ map: mmTex, roughness: 0.6 }), mmHus]);
                 mmBox.position.set(0, 6.2, 0); mmBox.rotation.x = -0.22; mmBox.castShadow = true;
@@ -1590,10 +1590,10 @@
                                         {kalla === 'dc' && ' ' + tr('Men bara med växelspänning. Med likspänning blir det ingen spänning alls utom i till- och frånslaget.')}
                                     </div>
                                     <div className="grid grid-cols-2 gap-2 mt-3">
-                                        <button className="btn-toggle text-sm" onClick={() => forval(230, 1150, 100)}>Exempel 1 ur teorin<span className="block text-xs font-normal">230 V till 20 V</span></button>
+                                        <button className="btn-toggle text-sm" onClick={() => forval(230, 1150, 100)}>Exempel 1 ur teorin<span className="block text-xs font-normal">230 V till 20 V</span></button>
                                         <button className="btn-toggle text-sm" onClick={() => forval(10, 300, 1500)}>Demonstrationen<span className="block text-xs font-normal">300 och 1 500 varv</span></button>
-                                        <button className="btn-toggle text-sm" onClick={() => forval(230, 1840, 40)}>Mobilladdare<span className="block text-xs font-normal">230 V till 5 V</span></button>
-                                        <button className="btn-toggle text-sm" onClick={() => forval(230, 100, 1000)}>Tio gånger upp<span className="block text-xs font-normal">230 V till 2,3 kV</span></button>
+                                        <button className="btn-toggle text-sm" onClick={() => forval(230, 1840, 40)}>Mobilladdare<span className="block text-xs font-normal">230 V till 5 V</span></button>
+                                        <button className="btn-toggle text-sm" onClick={() => forval(230, 100, 1000)}>Tio gånger upp<span className="block text-xs font-normal">230 V till 2,3 kV</span></button>
                                     </div>
                                 </div>
 

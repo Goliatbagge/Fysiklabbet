@@ -5,21 +5,21 @@
     <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intensitet och ljudnivå — Fysiklabbet</title>
-    <meta name="description" content="En rundstrålande högtalare och en ljudnivåmätare du drar runt i 3D. Se effekten P spridas över en sfär med arean 4π · r², hur mycket som går genom en kvadratmeter och hur ljudintensiteten I och ljudnivån L ändras. Dubbla avståndet ger 6 dB lägre, två likadana källor bara 3 dB mer.">
+    <meta name="description" content="En rundstrålande högtalare och en ljudnivåmätare du drar runt i 3D. Se effekten P spridas över en sfär med arean 4π · r², hur mycket som går genom en kvadratmeter och hur ljudintensiteten I och ljudnivån L ändras. Dubbla avståndet ger 6 dB lägre, två likadana källor bara 3 dB mer.">
     <link rel="canonical" href="https://fysiklabbet.se/fysik2-ljudniva-app.html">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Fysiklabbet">
     <meta property="og:title" content="Intensitet och ljudnivå — Fysik nivå 2">
-    <meta property="og:description" content="En rundstrålande högtalare och en ljudnivåmätare du drar runt i 3D. Se effekten P spridas över en sfär med arean 4π · r², hur mycket som går genom en kvadratmeter och hur ljudintensiteten I och ljudnivån L ändras. Dubbla avståndet ger 6 dB lägre, två likadana källor bara 3 dB mer.">
+    <meta property="og:description" content="En rundstrålande högtalare och en ljudnivåmätare du drar runt i 3D. Se effekten P spridas över en sfär med arean 4π · r², hur mycket som går genom en kvadratmeter och hur ljudintensiteten I och ljudnivån L ändras. Dubbla avståndet ger 6 dB lägre, två likadana källor bara 3 dB mer.">
     <meta property="og:url" content="https://fysiklabbet.se/fysik2-ljudniva-app.html">
     <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Intensitet och ljudnivå — Fysik nivå 2">
-    <meta name="twitter:description" content="En rundstrålande högtalare och en ljudnivåmätare du drar runt i 3D. Se effekten P spridas över en sfär med arean 4π · r², hur mycket som går genom en kvadratmeter och hur ljudintensiteten I och ljudnivån L ändras. Dubbla avståndet ger 6 dB lägre, två likadana källor bara 3 dB mer.">
+    <meta name="twitter:description" content="En rundstrålande högtalare och en ljudnivåmätare du drar runt i 3D. Se effekten P spridas över en sfär med arean 4π · r², hur mycket som går genom en kvadratmeter och hur ljudintensiteten I och ljudnivån L ändras. Dubbla avståndet ger 6 dB lägre, två likadana källor bara 3 dB mer.">
     <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -269,7 +269,7 @@
         // ─────────────────────────────────────────────────────────────────
 
         const I0 = 1e-12;                    // hörbarhetsgränsen (W/m²)
-        const LPMIN = -3, LPMAX = 2;         // effekten P på logskala: 1 mW till 100 W
+        const LPMIN = -3, LPMAX = 2;         // effekten P på logskala: 1 mW till 100 W
         const RMIN = 1, RMAX = 20;           // avståndet r (m)
         const SRC_R = 0.8;                  // högtalarens radie i scenen (överdriven)
         const GOLV_Y = -2.2;                 // gallergolvets höjd under ljudkällans mitt
@@ -592,7 +592,7 @@
         //    kroppen sträcker sig längs lokal +x, bort från ljudkällan. ──
         function matare(env, lcd) {
             const g = new THREE.Group();
-            const S = 3.4;   // överdriven storlek, så att mätaren syns på 20 m
+            const S = 3.4;   // överdriven storlek, så att mätaren syns på 20 m
             const skum = new THREE.Mesh(new THREE.SphereGeometry(0.075 * S, 28, 20),
                 new THREE.MeshStandardMaterial({ color: linjar('#3c4148'), roughness: 1 }));
             g.add(skum);
@@ -1004,7 +1004,7 @@
                     lblR.userData.satt([{ t: 'r', italic: true, color: COL.rpil }, { t: ' = ' + fmtR(r), color: COL.rpil }]);
                     lblR.position.copy(u).multiplyScalar(r * 0.6).add(new THREE.Vector3(0, h * 0.7, 0));
                     lblKv.visible = sh.etik && sh.kvad;
-                    lblKv.userData.satt([{ t: '1 m', color: COL.kvad }, { t: '2', color: COL.kvad, sup: true }]);
+                    lblKv.userData.satt([{ t: '1 m', color: COL.kvad }, { t: '2', color: COL.kvad, sup: true }]);
                     lblKv.position.copy(u).multiplyScalar(r).add(new THREE.Vector3(0, -0.5 - h * 0.7, 0));
                     lblA.visible = sh.etik && sh.sfar;
                     lblA.userData.satt([{ t: 'A', italic: true, color: COL.sfar }, { t: ' = 4π · ', color: COL.sfar }, { t: 'r', italic: true, color: COL.sfar },
@@ -1049,7 +1049,7 @@
             const BX = 56, BW = 16;
             return (
                 <svg viewBox="0 0 320 418" width="100%" style={{ display: 'block', maxWidth: 360, margin: '0 auto' }}
-                     fontFamily="Poppins, sans-serif" role="img" aria-label="Decibelskala från 0 till 140 dB med motsvarande ljudintensitet">
+                     fontFamily="Poppins, sans-serif" role="img" aria-label="Decibelskala från 0 till 140 dB med motsvarande ljudintensitet">
                     <defs>
                         <linearGradient id="stegeG" gradientUnits="userSpaceOnUse" x1="0" y1={yDb(0)} x2="0" y2={yDb(140)}>
                             <stop offset="0" stopColor="#3f9a5c" />

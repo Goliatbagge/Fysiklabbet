@@ -114,7 +114,7 @@ window.EXITTICKETS = {
 
 'fy1-1.2': [
   {
-    question: 'I meningen "sträckan är 2 500 meter", vad kallas talet 2 500?',
+    question: 'I meningen "sträckan är 2 500 meter", vad kallas talet 2 500?',
     choices: ['Storhet', 'Enhet', 'Mätetal', 'Prefix'],
     correct: 2,
     why: [
@@ -376,7 +376,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Ett rymdskepp rör sig i 70 % av ljusets hastighet och slår på strålkastarna. Med vilken hastighet träffar ljuset dig, oavsett om skeppet rör sig mot eller från dig?',
+    question: 'Ett rymdskepp rör sig i 70 % av ljusets hastighet och slår på strålkastarna. Med vilken hastighet träffar ljuset dig, oavsett om skeppet rör sig mot eller från dig?',
     choices: [
       '$0{,}70 c$ om skeppet rör sig mot dig, $1{,}70 c$ om det rör sig från dig',
       '$1{,}70 c$ om skeppet rör sig mot dig, $0{,}30 c$ om det rör sig från dig',
@@ -414,7 +414,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En buss rör sig i 87 % av ljusets hastighet. Enligt genomgången blir sambandet mellan tiden $t$ för en observatör utanför bussen och egentiden $t_0$ för passageraren ombord ungefär',
+    question: 'En buss rör sig i 87 % av ljusets hastighet. Enligt genomgången blir sambandet mellan tiden $t$ för en observatör utanför bussen och egentiden $t_0$ för passageraren ombord ungefär',
     choices: [
       '$t \\approx t_0$ (ingen skillnad)',
       '$t \\approx 0{,}5 \\cdot t_0$',
@@ -423,10 +423,10 @@ window.EXITTICKETS = {
     ],
     correct: 2,
     why: [
-      'Vid så hög hastighet som 87 % av ljusets hastighet blir skillnaden allt annat än försumbar.',
+      'Vid så hög hastighet som 87 % av ljusets hastighet blir skillnaden allt annat än försumbar.',
       'Tiden för observatören går snabbare än för passageraren, inte hälften så fort — förhållandet blir tvärtom större än 1.',
       'Insättning av $v = 0{,}87 c$ i tidsdilatationsformeln ger $t \\approx 2 \\cdot t_0$ — observatörens klocka tickar dubbelt så fort som passagerarens.',
-      'Det skulle innebära en orimligt stor tidsskillnad — hastighetens andel av ljushastigheten (87 %) ska sättas in i formeln, inte användas direkt som en multiplikator.',
+      'Det skulle innebära en orimligt stor tidsskillnad — hastighetens andel av ljushastigheten (87 %) ska sättas in i formeln, inte användas direkt som en multiplikator.',
     ],
   },
   {
@@ -691,7 +691,7 @@ window.EXITTICKETS = {
       '1,6 m fås om man råkar dela farten med tiden ($8{,}0/5{,}0$) istället för att multiplicera dem.',
       '13 m fås om man råkar addera farten och tiden ($8{,}0+5{,}0$) istället för att multiplicera dem.',
       'Förflyttningen motsvaras av arean under grafen — en rektangel med bas 5,0 s och höjd 8,0 m/s: $s = 8{,}0 \\cdot 5{,}0 = 40\\ \\mathrm{m}$.',
-      '8,0 m är bara hastighetsvärdet i sig, inte den förflyttning som byggs upp under de 5,0 sekunderna.',
+      '8,0 m är bara hastighetsvärdet i sig, inte den förflyttning som byggs upp under de 5,0 sekunderna.',
     ],
   },
   {
@@ -1047,12 +1047,12 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Två krafter på 10 N och 20 N verkar åt samma håll på en låda. Hur stor är den resulterande kraften?',
+    question: 'Två krafter på 10 N och 20 N verkar åt samma håll på en låda. Hur stor är den resulterande kraften?',
     choices: [
-      '10 N',
-      '30 N',
-      '20 N',
-      '200 N',
+      '10 N',
+      '30 N',
+      '20 N',
+      '200 N',
     ],
     correct: 1,
     why: [
@@ -1078,7 +1078,7 @@ window.EXITTICKETS = {
       'Kraftresultanten är summan av alla krafter som verkar på ett föremål — inte ett mått på motstånd mot rörelseförändring.',
       'Tröghet är just motståndet mot förändring av rörelsen. Ju större massa, desto större tröghet.',
       'Acceleration är hur snabbt hastigheten ändras — det är resultatet av krafterna, inte namnet på motståndet mot förändring.',
-      'Tyngdfaktorn anger hur stor tyngdkraften är per kilogram (9,82 N/kg i Sverige) — helt orelaterat till tröghet.',
+      'Tyngdfaktorn anger hur stor tyngdkraften är per kilogram (9,82 N/kg i Sverige) — helt orelaterat till tröghet.',
     ],
   },
   {
@@ -1098,7 +1098,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Hur definieras 1 newton i grundenheter?',
+    question: 'Hur definieras 1 newton i grundenheter?',
     choices: [
       '$1\\ \\mathrm{N} = 1\\ \\mathrm{kg/s^2}$',
       '$1\\ \\mathrm{N} = 1\\ \\mathrm{m/s^2}$',
@@ -1109,7 +1109,7 @@ window.EXITTICKETS = {
     why: [
       'Detta saknar längdenheten meter — accelerationens enhet är m/s², inte bara 1/s².',
       'Detta är enheten för acceleration, inte för kraft — massan (kg) saknas helt.',
-      '1 N är den kraft som krävs för att ge massan 1 kg accelerationen 1 m/s², vilket i grundenheter blir $1\\ \\mathrm{kg \\cdot m/s^2}$.',
+      '1 N är den kraft som krävs för att ge massan 1 kg accelerationen 1 m/s², vilket i grundenheter blir $1\\ \\mathrm{kg \\cdot m/s^2}$.',
       'Detta saknar tidsenheten i kvadrat — enheten för kraft innehåller $\\mathrm{s^2}$ i nämnaren, inte bara $\\mathrm{s}$.',
     ],
   },
@@ -1130,28 +1130,28 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En låda med massan 2,0 kg puttas med kraften 14 N. En friktionskraft på 4,0 N verkar åt motsatt håll. Vilken acceleration får lådan?',
+    question: 'En låda med massan 2,0 kg puttas med kraften 14 N. En friktionskraft på 4,0 N verkar åt motsatt håll. Vilken acceleration får lådan?',
     choices: [
-      '5,0 m/s²',
-      '7,0 m/s²',
-      '10 m/s²',
-      '2,0 m/s²',
+      '5,0 m/s²',
+      '7,0 m/s²',
+      '10 m/s²',
+      '2,0 m/s²',
     ],
     correct: 0,
     why: [
       'Den resulterande kraften är $F_\\mathrm{R} = 14 - 4 = 10\\ \\mathrm{N}$, och accelerationen blir $a = F_\\mathrm{R}/m = 10/2{,}0 = 5{,}0\\ \\mathrm{m/s^2}$ — vilket stämmer.',
-      'Detta fås om man av misstag delar 14 N med 2,0 kg utan att först dra bort friktionskraften.',
+      'Detta fås om man av misstag delar 14 N med 2,0 kg utan att först dra bort friktionskraften.',
       'Detta är den resulterande kraften i newton (14 − 4 = 10 N), inte accelerationen i m/s² — kom ihåg att dela med massan.',
       'Detta fås om man av misstag delar friktionskraften (4,0 N) med massan i stället för den resulterande kraften.',
     ],
   },
   {
-    question: 'En bil med massan 1 000 kg accelererar från 0 till 20 m/s på 10 sekunder. Vilken är den genomsnittliga resulterande kraften på bilen?',
+    question: 'En bil med massan 1 000 kg accelererar från 0 till 20 m/s på 10 sekunder. Vilken är den genomsnittliga resulterande kraften på bilen?',
     choices: [
-      '20 000 N',
-      '200 N',
-      '2 000 N',
-      '100 N',
+      '20 000 N',
+      '200 N',
+      '2 000 N',
+      '100 N',
     ],
     correct: 2,
     why: [
@@ -1229,7 +1229,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'I en dragkamp är spännkraften i repet olika stor åt de två hållen, till exempel 600 N åt ena hållet och 400 N åt andra. Stämmer detta?',
+    question: 'I en dragkamp är spännkraften i repet olika stor åt de två hållen, till exempel 600 N åt ena hållet och 400 N åt andra. Stämmer detta?',
     choices: [
       'Nej, spännkraften i repet är lika stor åt båda hållen — det är friktionen mot marken som avgör vem som vinner',
       'Ja, laget som drar starkast ger en större kraft i sin ände av repet',
@@ -1344,12 +1344,12 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En bom väger 2,0 kg och har en motvikt på 3,0 kg. Med tyngdfaktorn avrundad till 10 N/kg, hur stor normalkraft verkar på bommen från stödet, om bommen ligger i jämvikt?',
+    question: 'En bom väger 2,0 kg och har en motvikt på 3,0 kg. Med tyngdfaktorn avrundad till 10 N/kg, hur stor normalkraft verkar på bommen från stödet, om bommen ligger i jämvikt?',
     choices: [
-      '40 N',
-      '20 N',
-      '50 N',
-      '30 N',
+      '40 N',
+      '20 N',
+      '50 N',
+      '30 N',
     ],
     correct: 2,
     why: [
@@ -1381,7 +1381,7 @@ window.EXITTICKETS = {
   {
     question: 'Vad kallas konstanten *G* i Newtons gravitationslag, och vad är dess ungefärliga värde?',
     choices: [
-      'Tyngdfaktorn, 9,82 N/kg',
+      'Tyngdfaktorn, 9,82 N/kg',
       'Gravitationskonstanten, $6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}$',
       'Ljushastigheten, $3{,}00 \\cdot 10^{8}\\ \\mathrm{m/s}$',
       'Jordens massa, $5{,}972 \\cdot 10^{24}\\ \\mathrm{kg}$',
@@ -1395,7 +1395,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Två personer som väger 60 kg vardera sitter 1,0 meter ifrån varandra. Gravitationskraften mellan dem är ungefär $2{,}4 \\cdot 10^{-7}\\ \\mathrm{N}$. Varför känns denna kraft inte av?',
+    question: 'Två personer som väger 60 kg vardera sitter 1,0 meter ifrån varandra. Gravitationskraften mellan dem är ungefär $2{,}4 \\cdot 10^{-7}\\ \\mathrm{N}$. Varför känns denna kraft inte av?',
     choices: [
       'Eftersom personerna befinner sig för långt ifrån varandra',
       'Eftersom gravitationskraft bara verkar mellan himlakroppar',
@@ -1404,7 +1404,7 @@ window.EXITTICKETS = {
     ],
     correct: 3,
     why: [
-      '1,0 meter är faktiskt ett kort avstånd — det är inte avståndet som gör kraften okännbar, utan konstantens litenhet.',
+      '1,0 meter är faktiskt ett kort avstånd — det är inte avståndet som gör kraften okännbar, utan konstantens litenhet.',
       'Gravitationskraft verkar mellan ALLA massor, inte bara himlakroppar — men den blir bara märkbar när minst en av massorna är enorm, som jordens.',
       'Gravitationskraften försvinner inte av att föremål rör sig — den beror bara på massorna och avståndet mellan dem.',
       'Gravitationskonstanten $G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}$ är oerhört liten, vilket gör att gravitationskraften mellan vardagliga massor (som två personer) blir försumbart liten, trots att lagen gäller alla massor.',
@@ -1486,7 +1486,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Vad innebär det om friktionstalet är $\\mu = 1$ (100 %)?',
+    question: 'Vad innebär det om friktionstalet är $\\mu = 1$ (100 %)?',
     choices: [
       'Det finns ingen friktion alls mellan ytorna.',
       'Friktionskraften är lika stor som normalkraften.',
@@ -1495,15 +1495,15 @@ window.EXITTICKETS = {
     ],
     correct: 1,
     why: [
-      'Ingen friktion alls motsvarar $\\mu = 0$ (0 %), inte $\\mu = 1$.',
+      'Ingen friktion alls motsvarar $\\mu = 0$ (0 %), inte $\\mu = 1$.',
       'Eftersom $F_\\mathrm{f} = \\mu \\cdot F_\\mathrm{N}$ ger $\\mu = 1$ att friktionskraften blir lika stor som normalkraften.',
-      'Dubbelt så stor friktionskraft som normalkraft skulle kräva $\\mu = 2$ (200 %), vilket är ovanligt högt.',
+      'Dubbelt så stor friktionskraft som normalkraft skulle kräva $\\mu = 2$ (200 %), vilket är ovanligt högt.',
       'Ett stort friktionstal gör det svårare att få ytorna att glida, men med tillräckligt stor kraft kan de ändå sättas i rörelse.',
     ],
   },
   {
     question: 'En låda med massan $10\\ \\mathrm{kg}$ vilar på plant golv. Friktionstalet mellan låda och golv är $0{,}50$. Ungefär hur stor kraft krävs minst för att få lådan att börja glida? (Använd $g \\approx 10\\ \\mathrm{N/kg}$.)',
-    choices: ['5,0 N', '10 N', '50 N', '100 N'],
+    choices: ['5,0 N', '10 N', '50 N', '100 N'],
     correct: 2,
     why: [
       'Detta är för litet — det motsvarar att bara räkna med friktionstalet utan att multiplicera med normalkraften.',
@@ -1598,10 +1598,10 @@ window.EXITTICKETS = {
   {
     question: 'En låda glider nedför ett lutande plan med KONSTANT hastighet. Tyngdkraftens komposant nedför planet är $F_1 = 12\\ \\mathrm{N}$. Hur stor är friktionskraften $F_\\mathrm{f}$?',
     choices: [
-      '0 N, eftersom hastigheten är konstant',
-      'Större än 12 N',
-      'Mindre än 12 N',
-      '12 N',
+      '0 N, eftersom hastigheten är konstant',
+      'Större än 12 N',
+      'Mindre än 12 N',
+      '12 N',
     ],
     correct: 3,
     why: [
@@ -1613,7 +1613,7 @@ window.EXITTICKETS = {
   },
   {
     question: 'En låda med massan $2{,}0\\ \\mathrm{kg}$ ligger stilla på ett plan som lutar $60°$. Vad är ungefär normalkraften $F_\\mathrm{N}$? (Använd $g \\approx 10\\ \\mathrm{N/kg}$ och $\\cos 60^{\\circ} = 0{,}50$.)',
-    choices: ['20 N', '10 N', '17 N', '2,0 N'],
+    choices: ['20 N', '10 N', '17 N', '2,0 N'],
     correct: 1,
     why: [
       'Detta är $m \\cdot g$ utan att multiplicera med $\\cos 60^{\\circ}$ — hela tyngdkraften, inte normalkraften.',
@@ -1718,7 +1718,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Hastigheten minskar hela tiden (till exempel från 6 m/s till 0 till −6 m/s), så accelerationen är konstant och negativ under hela kastet.',
+      'Hastigheten minskar hela tiden (till exempel från 6 m/s till 0 till −6 m/s), så accelerationen är konstant och negativ under hela kastet.',
       'Accelerationen är densamma (tyngdaccelerationen) genom hela kastet — den byter inte tecken i vändläget.',
       'Accelerationen är inte noll — då skulle hastigheten inte alls ändras, men den minskar hela tiden.',
       'Om accelerationen vore positiv skulle hastigheten öka, men den minskar (blir mer negativ) genom hela kastet.',
@@ -1750,8 +1750,8 @@ window.EXITTICKETS = {
     ],
     correct: 1,
     why: [
-      'Att farten ökar räcker inte för slutsatsen — hastigheten (med tecken) går här från till exempel 0 till −1 m/s till −2 m/s, alltså minskar den.',
-      'Hastigheten går från 0 till −1 m/s till −2 m/s, alltså minskar den, vilket ger en negativ acceleration — trots att farten ökar.',
+      'Att farten ökar räcker inte för slutsatsen — hastigheten (med tecken) går här från till exempel 0 till −1 m/s till −2 m/s, alltså minskar den.',
+      'Hastigheten går från 0 till −1 m/s till −2 m/s, alltså minskar den, vilket ger en negativ acceleration — trots att farten ökar.',
       'Accelerationen är inte noll eftersom hastigheten hela tiden ändras.',
       'Det går att avgöra: med positiv riktning uppåt minskar hastigheten (blir mer negativ) när farten ökar nedåt, så accelerationen är negativ.',
     ],
@@ -1766,9 +1766,9 @@ window.EXITTICKETS = {
     ],
     correct: 2,
     why: [
-      'Att hissen rör sig nedåt räcker inte — det är hastighetens förändring som avgör tecknet, och här ökar hastigheten (till exempel från −2 m/s till −1 m/s till 0).',
+      'Att hissen rör sig nedåt räcker inte — det är hastighetens förändring som avgör tecknet, och här ökar hastigheten (till exempel från −2 m/s till −1 m/s till 0).',
       'Accelerationen är inte noll eftersom hastigheten hela tiden ändras när hissen bromsar in.',
-      'Hastigheten går från −2 m/s till −1 m/s till 0, alltså ökar den, vilket ger en positiv acceleration — trots att farten minskar.',
+      'Hastigheten går från −2 m/s till −1 m/s till 0, alltså ökar den, vilket ger en positiv acceleration — trots att farten minskar.',
       'Det går att avgöra: hastigheten (med tecken) ökar mot noll, så accelerationen är positiv.',
     ],
   },
@@ -1836,7 +1836,7 @@ window.EXITTICKETS = {
   },
   {
     question: 'En vikt med massan $1{,}0\\ \\mathrm{kg}$ hänger i ett snöre över en trissa och accelererar uppåt med $2{,}0\\ \\mathrm{m/s^2}$. Använd $g \\approx 10\\ \\mathrm{N/kg}$. Hur stor är spännkraften $F_\\mathrm{S}$ i snöret?',
-    choices: ['12 N', '10 N', '2,0 N', '8,0 N'],
+    choices: ['12 N', '10 N', '2,0 N', '8,0 N'],
     correct: 0,
     why: [
       'Resulterande kraft: $F_\\mathrm{R} = m \\cdot a = 1{,}0 \\cdot 2{,}0 = 2{,}0\\ \\mathrm{N}$. Eftersom $F_\\mathrm{R} = F_\\mathrm{S} - F_\\mathrm{G}$ blir $F_\\mathrm{S} = F_\\mathrm{R} + F_\\mathrm{G} = 2{,}0 + 10 = 12\\ \\mathrm{N}$.',
@@ -1905,8 +1905,8 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En person puttar en låda 4,0 m med en kraft på 50 N i lådans rörelseriktning. Hur stort arbete uträttas?',
-    choices: ['200 Nm', '54 Nm', '12,5 Nm', '0,08 Nm'],
+    question: 'En person puttar en låda 4,0 m med en kraft på 50 N i lådans rörelseriktning. Hur stort arbete uträttas?',
+    choices: ['200 Nm', '54 Nm', '12,5 Nm', '0,08 Nm'],
     correct: 0,
     why: [
       'Insättning i $W = F_\\mathrm{s} \\cdot s$ ger $W = 50 \\cdot 4{,}0 = 200\\ \\mathrm{Nm}$.',
@@ -1955,7 +1955,7 @@ window.EXITTICKETS = {
     choices: [
       'Alltid marken, och den kan aldrig flyttas',
       'Den högsta punkten i systemet',
-      'En fast höjd som alltid ligger 0 meter över havet',
+      'En fast höjd som alltid ligger 0 meter över havet',
       'En referenspunkt som kan väljas fritt, där lägesenergin sätts till 0',
     ],
     correct: 3,
@@ -1999,8 +1999,8 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En låda med massan 2,0 kg lyfts 5,0 m rakt upp. Tyngdfaktorn är $g = 9{,}82\\ \\mathrm{N/kg}$. Ungefär hur stor blir ökningen av lägesenergi?',
-    choices: ['≈49 J', '≈98 J', '≈10 J', '≈500 J'],
+    question: 'En låda med massan 2,0 kg lyfts 5,0 m rakt upp. Tyngdfaktorn är $g = 9{,}82\\ \\mathrm{N/kg}$. Ungefär hur stor blir ökningen av lägesenergi?',
+    choices: ['≈49 J', '≈98 J', '≈10 J', '≈500 J'],
     correct: 1,
     why: [
       'Detta är ungefär halva det korrekta värdet: $g \\cdot h = 9{,}82 \\cdot 5{,}0 \\approx 49$. Massan $m = 2{,}0\\ \\mathrm{kg}$ har inte multiplicerats in.',
@@ -2051,8 +2051,8 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Ett föremål med massan 4,0 kg rör sig med farten 5,0 m/s. Hur stor är dess rörelseenergi?',
-    choices: ['100 J', '50 J', '20 J', '10 J'],
+    question: 'Ett föremål med massan 4,0 kg rör sig med farten 5,0 m/s. Hur stor är dess rörelseenergi?',
+    choices: ['100 J', '50 J', '20 J', '10 J'],
     correct: 1,
     why: [
       'Detta fås om man glömmer att dela med två efter att ha kvadrerat hastigheten.',
@@ -2161,12 +2161,12 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Ett föremål släpps från vila och faller fritt från höjden 5,0 m ovanför marken (nollnivån). Bortse från luftmotstånd. Ungefär hur stor är farten precis innan föremålet slår i marken?',
-    choices: ['≈5,0 m/s', '≈50 m/s', '≈10 m/s', '≈98 m/s'],
+    question: 'Ett föremål släpps från vila och faller fritt från höjden 5,0 m ovanför marken (nollnivån). Bortse från luftmotstånd. Ungefär hur stor är farten precis innan föremålet slår i marken?',
+    choices: ['≈5,0 m/s', '≈50 m/s', '≈10 m/s', '≈98 m/s'],
     correct: 2,
     why: [
       'Detta är för litet — kom ihåg att både faktorn 2 och tyngdfaktorn *g* ska vara med under rottecknet.',
-      'Detta är för stort — resultatet ska bli runt 10 m/s, inte 50 m/s; kontrollera uträkningen under rottecknet.',
+      'Detta är för stort — resultatet ska bli runt 10 m/s, inte 50 m/s; kontrollera uträkningen under rottecknet.',
       'Energiprincipen ger $v = \\sqrt{2 \\cdot g \\cdot h} = \\sqrt{2 \\cdot 9{,}82 \\cdot 5{,}0} \\approx \\sqrt{98} \\approx 10\\ \\mathrm{m/s}$.',
       'Detta är värdet under rottecknet ($2 \\cdot g \\cdot h \\approx 98$) — glöm inte att dra roten ur det för att få farten.',
     ],
@@ -2234,7 +2234,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Hur många joule motsvarar 1 kWh, enligt genomgången?',
+    question: 'Hur många joule motsvarar 1 kWh, enligt genomgången?',
     choices: [
       '$3{,}6 \\cdot 10^{3}\\ \\mathrm{J}$',
       '$3{,}6 \\cdot 10^{6}\\ \\mathrm{J}$',
@@ -2243,19 +2243,19 @@ window.EXITTICKETS = {
     ],
     correct: 1,
     why: [
-      'Denna tiopotens är tusen gånger för liten — glöm inte att multiplicera med både 1 000 W och 3 600 s.',
+      'Denna tiopotens är tusen gånger för liten — glöm inte att multiplicera med både 1 000 W och 3 600 s.',
       'Genomgången räknar ut att $1\\ \\mathrm{kWh} = 1\\,000\\ \\mathrm{W} \\cdot 3\\,600\\ \\mathrm{s} = 3{,}6 \\cdot 10^{6}\\ \\mathrm{J}$.',
-      'Detta motsvarar bara antalet sekunder på ungefär en kvart, inte den energi som 1 kWh innehåller.',
-      'Detta är antalet sekunder på en timme, men inte omvandlat till joule via effekten 1 000 W.',
+      'Detta motsvarar bara antalet sekunder på ungefär en kvart, inte den energi som 1 kWh innehåller.',
+      'Detta är antalet sekunder på en timme, men inte omvandlat till joule via effekten 1 000 W.',
     ],
   },
   {
-    question: 'En glödlampa med effekten 100 W lyser i 10 sekunder. Hur mycket energi omvandlas?',
-    choices: ['10 J', '100 J', '10 kJ', '1,0 kJ'],
+    question: 'En glödlampa med effekten 100 W lyser i 10 sekunder. Hur mycket energi omvandlas?',
+    choices: ['10 J', '100 J', '10 kJ', '1,0 kJ'],
     correct: 3,
     why: [
-      'Detta är alldeles för litet — kontrollera att effekten (100 W) verkligen multiplicerats med hela tiden (10 s).',
-      'Detta motsvarar bara effekten multiplicerad med en sekund, inte med de fulla 10 sekunderna.',
+      'Detta är alldeles för litet — kontrollera att effekten (100 W) verkligen multiplicerats med hela tiden (10 s).',
+      'Detta motsvarar bara effekten multiplicerad med en sekund, inte med de fulla 10 sekunderna.',
       'Detta är tio gånger för stort — dubbelkolla multiplikationen $100 \\cdot 10$.',
       'Insättning i $\\Delta E = P \\cdot \\Delta t$ ger $\\Delta E = 100 \\cdot 10 = 1\\,000\\ \\mathrm{J} = 1{,}0\\ \\mathrm{kJ}$.',
     ],
@@ -2611,7 +2611,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En låda dras 4,0 m längs ett plant golv där friktionskraften är 10 N. Hur stort blir friktionsvärmet?',
+    question: 'En låda dras 4,0 m längs ett plant golv där friktionskraften är 10 N. Hur stort blir friktionsvärmet?',
     choices: [
       '2,5 J',
       '40 J',
@@ -2745,7 +2745,7 @@ window.EXITTICKETS = {
       'Det här är för lågt med en faktor 100 — kontrollera att både ρ, g och h verkligen är multiplicerade med varandra.',
       'Det här stämmer bara om man glömmer att multiplicera med tyngdfaktorn g — $\\rho \\cdot h = 1\\,000 \\cdot 5{,}0 = 5\\,000$, men g = 10 N/kg saknas.',
       'Med $p = \\rho \\cdot g \\cdot h = 1\\,000 \\cdot 10 \\cdot 5{,}0$ blir trycket 50 000 Pa.',
-      'Det här är för högt med en faktor 10 — en vanlig felkälla är att räkna djupet som 50 m istället för 5,0 m.',
+      'Det här är för högt med en faktor 10 — en vanlig felkälla är att räkna djupet som 50 m istället för 5,0 m.',
     ],
   },
   {
@@ -3175,7 +3175,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En aluminiumplatta och en plastplatta har båda rumstemperatur, ca 20 °C. Ändå känns aluminiumplattan kallare mot handen. Varför?',
+    question: 'En aluminiumplatta och en plastplatta har båda rumstemperatur, ca 20 °C. Ändå känns aluminiumplattan kallare mot handen. Varför?',
     choices: [
       'Aluminium har i själva verket lägre temperatur än plasten',
       'Aluminium har högre specifik värmekapacitet än plast',
@@ -3184,10 +3184,10 @@ window.EXITTICKETS = {
     ],
     correct: 3,
     why: [
-      'En infraröd termometer visar att båda plattorna faktiskt har samma temperatur, ca 20 °C — skillnaden ligger i hur snabbt värme leds bort, inte i temperaturen.',
+      'En infraröd termometer visar att båda plattorna faktiskt har samma temperatur, ca 20 °C — skillnaden ligger i hur snabbt värme leds bort, inte i temperaturen.',
       'Värmeledningsförmåga och specifik värmekapacitet är olika egenskaper — det är just ledningsförmågan (inte värmekapaciteten) som förklarar känslan här.',
       'Det är inte strålning som är den avgörande faktorn i det här experimentet, utan ledning genom kontakt mellan hand och platta.',
-      'Metaller som aluminium leder värme bättre än plast. Handen (ca 25 °C) förlorar därför energi snabbare till aluminiumplattan, vilket upplevs som kallare.',
+      'Metaller som aluminium leder värme bättre än plast. Handen (ca 25 °C) förlorar därför energi snabbare till aluminiumplattan, vilket upplevs som kallare.',
     ],
   },
   {
@@ -3202,30 +3202,30 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Vilken temperatur i kelvin motsvarar 20 °C?',
-    choices: ['20 K', '253 K', '293 K', '273 K'],
+    question: 'Vilken temperatur i kelvin motsvarar 20 °C?',
+    choices: ['20 K', '253 K', '293 K', '273 K'],
     correct: 2,
     why: [
       'Att bara byta enhet till K utan att addera 273 glömmer att kelvinskalan har en annan nollpunkt än celsiusskalan.',
       'Detta fås om man felaktigt subtraherar 273 istället för att addera — kelvinskalan ligger högre än celsius, inte lägre.',
-      'Med $T_\\mathrm{K} = T_\\mathrm{C} + 273 = 20 + 273 = 293\\ \\mathrm{K}$ blir svaret 293 K.',
-      'Detta är 0 °C omvandlat till kelvin ($T_\\mathrm{K} = 0 + 273 = 273\\ \\mathrm{K}$) — men frågan gäller 20 °C, inte 0 °C.',
+      'Med $T_\\mathrm{K} = T_\\mathrm{C} + 273 = 20 + 273 = 293\\ \\mathrm{K}$ blir svaret 293 K.',
+      'Detta är 0 °C omvandlat till kelvin ($T_\\mathrm{K} = 0 + 273 = 273\\ \\mathrm{K}$) — men frågan gäller 20 °C, inte 0 °C.',
     ],
   },
   {
     question: 'Vad gäller för den absoluta nollpunkten?',
     choices: [
-      'Den ligger vid ungefär −273 °C, där all termisk rörelse hos atomerna upphör',
-      'Den ligger vid 0 °C, där vatten fryser',
+      'Den ligger vid ungefär −273 °C, där all termisk rörelse hos atomerna upphör',
+      'Den ligger vid 0 °C, där vatten fryser',
       'Den är den högsta temperatur som teoretiskt kan uppnås',
-      'Den ligger vid −100 °C och är gränsen för flytande kväve',
+      'Den ligger vid −100 °C och är gränsen för flytande kväve',
     ],
     correct: 0,
     why: [
-      'Den absoluta nollpunkten är ungefär −273 °C (0 K). Där är atomerna helt stilla och saknar rörelseenergi, vilket är den teoretiskt lägsta temperatur som går att uppnå.',
-      '0 °C är vattnets fryspunkt, inte den absoluta nollpunkten — den ligger mycket längre ner på skalan.',
+      'Den absoluta nollpunkten är ungefär −273 °C (0 K). Där är atomerna helt stilla och saknar rörelseenergi, vilket är den teoretiskt lägsta temperatur som går att uppnå.',
+      '0 °C är vattnets fryspunkt, inte den absoluta nollpunkten — den ligger mycket längre ner på skalan.',
       'Det är tvärtom — den absoluta nollpunkten är den lägsta möjliga temperaturen. Det finns ingen motsvarande naturlig högsta temperatur.',
-      '−100 °C är varken den absoluta nollpunkten eller någon fysikaliskt särskild gräns i det här sammanhanget.',
+      '−100 °C är varken den absoluta nollpunkten eller någon fysikaliskt särskild gräns i det här sammanhanget.',
     ],
   },
 ],
@@ -3234,17 +3234,17 @@ window.EXITTICKETS = {
   {
     question: 'Vad beskriver storheten specifik värmekapacitet ($c$)?',
     choices: [
-      'Hur mycket energi som krävs för att smälta 1 kg av ett ämne',
+      'Hur mycket energi som krävs för att smälta 1 kg av ett ämne',
       'Hur snabbt värme leds genom ett ämne',
-      'Den totala inre energin i 1 kg av ett ämne',
-      'Hur mycket energi som krävs för att höja temperaturen 1 K på 1 kg av ett ämne',
+      'Den totala inre energin i 1 kg av ett ämne',
+      'Hur mycket energi som krävs för att höja temperaturen 1 K på 1 kg av ett ämne',
     ],
     correct: 3,
     why: [
-      'Det är specifik smältentalpi som beskriver energin för att smälta 1 kg av ett ämne — en helt annan storhet, med enheten J/kg utan kelvin.',
+      'Det är specifik smältentalpi som beskriver energin för att smälta 1 kg av ett ämne — en helt annan storhet, med enheten J/kg utan kelvin.',
       'Hur snabbt värme leds genom ett material beskrivs av materialets ledningsförmåga, inte av den specifika värmekapaciteten.',
       'Den totala inre energin beror på fler faktorer och anges inte av en enda tabellkonstant som $c$.',
-      'Specifik värmekapacitet anger den energi som krävs för att höja temperaturen 1 K (eller 1 °C) på 1 kg av ett ämne. Enheten är J/(kg · K).',
+      'Specifik värmekapacitet anger den energi som krävs för att höja temperaturen 1 K (eller 1 °C) på 1 kg av ett ämne. Enheten är J/(kg · K).',
     ],
   },
   {
@@ -3291,11 +3291,11 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Ett ämne med specifik värmekapacitet $c = 2{,}0\\ \\mathrm{kJ/(kg \\cdot K)}$ och massan $5{,}0\\ \\mathrm{kg}$ värms från 20 °C till 30 °C. Hur mycket energi krävs?',
-    choices: ['100 kJ', '10 kJ', '50 kJ', '300 kJ'],
+    question: 'Ett ämne med specifik värmekapacitet $c = 2{,}0\\ \\mathrm{kJ/(kg \\cdot K)}$ och massan $5{,}0\\ \\mathrm{kg}$ värms från 20 °C till 30 °C. Hur mycket energi krävs?',
+    choices: ['100 kJ', '10 kJ', '50 kJ', '300 kJ'],
     correct: 0,
     why: [
-      'Med $E = c \\cdot m \\cdot \\Delta T = 2{,}0 \\cdot 5{,}0 \\cdot 10 = 100\\ \\mathrm{kJ}$ blir svaret 100 kJ.',
+      'Med $E = c \\cdot m \\cdot \\Delta T = 2{,}0 \\cdot 5{,}0 \\cdot 10 = 100\\ \\mathrm{kJ}$ blir svaret 100 kJ.',
       'Det motsvarar bara $c \\cdot m = 2{,}0 \\cdot 5{,}0$ utan att multiplicera med temperaturändringen $\\Delta T = 10\\ \\mathrm{K}$.',
       'Det motsvarar $m \\cdot \\Delta T = 5{,}0 \\cdot 10$ utan att multiplicera med den specifika värmekapaciteten $c$.',
       'Det motsvarar att räkna med $\\Delta T = 30\\ \\mathrm{K}$ (sluttemperaturen) istället för temperaturändringen $10\\ \\mathrm{K}$.',
@@ -3359,24 +3359,24 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Specifik smältentalpi för is är $l_\\mathrm{s} = 334\\ \\mathrm{kJ/kg}$. Hur mycket energi krävs för att smälta $2{,}0\\ \\mathrm{kg}$ is som redan har temperaturen 0 °C?',
-    choices: ['334 kJ', '167 kJ', '1 336 kJ', '668 kJ'],
+    question: 'Specifik smältentalpi för is är $l_\\mathrm{s} = 334\\ \\mathrm{kJ/kg}$. Hur mycket energi krävs för att smälta $2{,}0\\ \\mathrm{kg}$ is som redan har temperaturen 0 °C?',
+    choices: ['334 kJ', '167 kJ', '1 336 kJ', '668 kJ'],
     correct: 3,
     why: [
-      'Det är energin för att smälta bara 1,0 kg is — man har glömt att multiplicera med massan 2,0 kg.',
-      'Det motsvarar att smälta 0,50 kg is, inte 2,0 kg.',
-      'Det är dubbelt så mycket som det korrekta svaret — som om massan vore 4,0 kg istället för 2,0 kg.',
-      'Med $E = l_\\mathrm{s} \\cdot m = 334 \\cdot 2{,}0 = 668\\ \\mathrm{kJ}$ blir svaret 668 kJ.',
+      'Det är energin för att smälta bara 1,0 kg is — man har glömt att multiplicera med massan 2,0 kg.',
+      'Det motsvarar att smälta 0,50 kg is, inte 2,0 kg.',
+      'Det är dubbelt så mycket som det korrekta svaret — som om massan vore 4,0 kg istället för 2,0 kg.',
+      'Med $E = l_\\mathrm{s} \\cdot m = 334 \\cdot 2{,}0 = 668\\ \\mathrm{kJ}$ blir svaret 668 kJ.',
     ],
   },
   {
-    question: 'Specifik ångbildningsentalpi för vatten anges i tabellen som 2,26 MJ/kg, medan specifika smältentalpier oftast anges i kJ/kg. Vilket prefix är M i "MJ"?',
+    question: 'Specifik ångbildningsentalpi för vatten anges i tabellen som 2,26 MJ/kg, medan specifika smältentalpier oftast anges i kJ/kg. Vilket prefix är M i "MJ"?',
     choices: ['kilo — $10^3$', 'mega — $10^6$', 'milli — $10^{-3}$', 'giga — $10^9$'],
     correct: 1,
     why: [
       'Kilo ($10^3$) är prefixet i kJ, som används för smältentalpier — men M i MJ är ett annat, större prefix.',
       'M står för mega, $10^6$ — tusen gånger större än kilo. Det är därför vattnets ångbildningsentalpi anges i MJ/kg: annars skulle talet bli opraktiskt stort i kJ.',
-      'Milli ($10^{-3}$) är en tusendels prefix — helt fel storleksordning för ett stort tal som 2,26 MJ/kg.',
+      'Milli ($10^{-3}$) är en tusendels prefix — helt fel storleksordning för ett stort tal som 2,26 MJ/kg.',
       'Giga ($10^9$) är tusen gånger större än mega — alldeles för stort för att stämma med "M" i MJ.',
     ],
   },
@@ -3401,13 +3401,13 @@ window.EXITTICKETS = {
   },
   {
     question: 'En människokropp i vila avger värme ungefär som ett element med vilken effekt?',
-    choices: ['10 W', '1 000 W', '37 W', '100 W'],
+    choices: ['10 W', '1 000 W', '37 W', '100 W'],
     correct: 3,
     why: [
       'Det är för lågt — en vilande kropp avger betydligt mer effekt än så.',
       'Det är för högt för en kropp i vila — det värdet ligger närmare vad en kraftig värmefläkt avger.',
       '37 är kroppstemperaturen i celsius, inte en effekt i watt — lätt att blanda ihop dem här.',
-      'En människokropp i vila strålar värme ungefär som ett element med effekten 100 W.',
+      'En människokropp i vila strålar värme ungefär som ett element med effekten 100 W.',
     ],
   },
   {
@@ -3760,7 +3760,7 @@ window.EXITTICKETS = {
       'Det motsvarar antalet sekunder i en minut, men en amperetimme innehåller antalet sekunder i en hel timme, inte en minut.',
       '$1\\ \\mathrm{Ah} = 1\\ \\mathrm{A} \\cdot 3\\,600\\ \\mathrm{s} = 3\\,600\\ \\mathrm{C}$, eftersom en timme har $3\\,600$ sekunder.',
       'Ett ampere under en hel timme ger betydligt mer laddning än bara $1\\ \\mathrm{C}$ — glöm inte att multiplicera med antalet sekunder i en timme.',
-      'Det motsvarar antalet sekunder på ett helt dygn (24 h), inte i en enda timme.',
+      'Det motsvarar antalet sekunder på ett helt dygn (24 h), inte i en enda timme.',
     ],
   },
 ],
@@ -4077,7 +4077,7 @@ window.EXITTICKETS = {
     choices: ['$20\\ \\Omega$', '$5{,}0\\ \\Omega$', '$10\\ \\Omega$', '$0{,}20\\ \\Omega$'],
     correct: 1,
     why: [
-      'Det är summan av de två resistanserna (10 + 10 = 20 Ω), men den formeln gäller vid seriekoppling, inte parallellkoppling.',
+      'Det är summan av de två resistanserna (10 + 10 = 20 Ω), men den formeln gäller vid seriekoppling, inte parallellkoppling.',
       'Vid parallellkoppling gäller $1/R_\\text{tot} = 1/10 + 1/10 = 2/10$, vilket ger $R_\\text{tot} = 10/2 = 5{,}0\\ \\Omega$.',
       'Ersättningsresistansen vid parallellkoppling av två lika resistorer blir halva den enskilda resistansen, inte densamma.',
       'Det är inversen $1/R_\\text{tot}$ (2/10 = 0,20), men själva ersättningsresistansen $R_\\text{tot}$ fås genom att invertera detta värde igen: $1/0{,}20 = 5{,}0\\ \\Omega$.',
@@ -4162,7 +4162,7 @@ window.EXITTICKETS = {
     ],
     correct: 3,
     why: [
-      'Vid parallellkoppling blir totalresistansen alltid mindre än den minsta enskilda resistansen, aldrig större — 20 Ω vore additionen som gäller vid seriekoppling.',
+      'Vid parallellkoppling blir totalresistansen alltid mindre än den minsta enskilda resistansen, aldrig större — 20 Ω vore additionen som gäller vid seriekoppling.',
       'Detta värde är för litet; det motsvarar inte $1/R_\\text{tot} = 1/10 + 1/10$.',
       'Detta vore resultatet om bara en resistor fanns med, inte två parallellkopplade.',
       'Med $1/R_\\text{tot} = 1/10 + 1/10 = 2/10$ blir $R_\\text{tot} = 5{,}0\\ \\mathrm{\\Omega}$ — halva resistansen hos en enskild resistor, precis vad som gäller för två lika stora parallellkopplade resistorer.',
@@ -4457,15 +4457,15 @@ window.EXITTICKETS = {
     choices: [
       'Alltid lika med batteriets spänning',
       'Beror på vilken resistor som ligger närmast',
-      '0 V',
+      '0 V',
       'Odefinierad, eftersom jordning saknar en fast referens',
     ],
     correct: 2,
     why: [
-      'Potentialen i en jordad punkt är per definition 0 V, oavsett vilket batteri som finns i kretsen.',
-      'Jordningens potential är alltid 0 V, oberoende av var i kretsen den sitter.',
-      'Jordning definieras just som nollnivån för potential i kretsen, så potentialen där är 0 V.',
-      'Jordning fungerar tvärtom som en fast referenspunkt — det är därför potentialen där är väldefinierad och lika med 0 V.',
+      'Potentialen i en jordad punkt är per definition 0 V, oavsett vilket batteri som finns i kretsen.',
+      'Jordningens potential är alltid 0 V, oberoende av var i kretsen den sitter.',
+      'Jordning definieras just som nollnivån för potential i kretsen, så potentialen där är 0 V.',
+      'Jordning fungerar tvärtom som en fast referenspunkt — det är därför potentialen där är väldefinierad och lika med 0 V.',
     ],
   },
   {
@@ -4611,7 +4611,7 @@ window.EXITTICKETS = {
     why: [
       'Induktion är ett annat fenomen: en spänning induceras när magnetfältet genom en ledare ändras. Det har inget med urladdning från en spets att göra.',
       'Kortslutning innebär en oavsiktlig lågresistiv väg för strömmen, inte en urladdning från en spetsig ledare till luften.',
-      'Jordning handlar om att ansluta en ledare till marken för att hålla potentialen på 0 V, inte om urladdning till luftmolekyler.',
+      'Jordning handlar om att ansluta en ledare till marken för att hålla potentialen på 0 V, inte om urladdning till luftmolekyler.',
       'Fenomenet där en spetsig laddad ledare orsakar urladdning till luftmolekyler kallas spetsurladdning, även känt som Sankt Elmseld.',
     ],
   },
@@ -4948,9 +4948,9 @@ window.EXITTICKETS = {
     choices: ['400', '100', '200', '0'],
     correct: 2,
     why: [
-      '400 är antalet kärnor som återstår efter EN halveringstid (1 dygn), inte efter två.',
-      '100 skulle vara antalet efter tre halveringstider (3 dygn), inte två.',
-      'Efter två halveringstider (2 dygn) har antalet halverats två gånger: $800 \\to 400 \\to 200$ kärnor.',
+      '400 är antalet kärnor som återstår efter EN halveringstid (1 dygn), inte efter två.',
+      '100 skulle vara antalet efter tre halveringstider (3 dygn), inte två.',
+      'Efter två halveringstider (2 dygn) har antalet halverats två gånger: $800 \\to 400 \\to 200$ kärnor.',
       'Efter två halveringstider återstår i genomsnitt en fjärdedel av kärnorna, alltså 200. Antalet halveras ungefär en gång per halveringstid, så det tar många halveringstider innan i stort sett alla kärnor har sönderfallit.',
     ],
   },
@@ -5056,7 +5056,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En kraft på 20 N verkar vinkelrätt mot ett skaft, 0,50 m från vridpunkten. Hur stort är kraftmomentet?',
+    question: 'En kraft på 20 N verkar vinkelrätt mot ett skaft, 0,50 m från vridpunkten. Hur stort är kraftmomentet?',
     choices: [
       '$0{,}025\\ \\mathrm{Nm}$',
       '$40\\ \\mathrm{Nm}$',
@@ -5104,7 +5104,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En person på 80 kg sitter 1,0 m från vridpunkten på en gungbräda. Hur långt från vridpunkten måste en person på 20 kg sitta på andra sidan för momentjämvikt?',
+    question: 'En person på 80 kg sitter 1,0 m från vridpunkten på en gungbräda. Hur långt från vridpunkten måste en person på 20 kg sitta på andra sidan för momentjämvikt?',
     choices: [
       '$0{,}25\\ \\mathrm{m}$',
       '$4{,}0\\ \\mathrm{m}$',
@@ -5187,35 +5187,35 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En jämntjock bräda väger 20 kg och ligger med tyngdpunkten mitt emellan två bockar. Ungefär hur stor kraft trycker varje bock uppåt med?',
+    question: 'En jämntjock bräda väger 20 kg och ligger med tyngdpunkten mitt emellan två bockar. Ungefär hur stor kraft trycker varje bock uppåt med?',
     choices: [
-      'Ungefär 98 N',
-      'Ungefär 196 N',
-      'Ungefär 49 N',
-      'Ungefär 20 N',
+      'Ungefär 98 N',
+      'Ungefär 196 N',
+      'Ungefär 49 N',
+      'Ungefär 20 N',
     ],
     correct: 0,
     why: [
-      'Tyngdkraften är $F_\\mathrm{G} = 20 \\cdot 9{,}82 \\approx 196\\ \\mathrm{N}$, och när tyngdpunkten ligger mitt emellan stöden bär de hälften var — cirka 98 N.',
-      '196 N är hela tyngdkraften. Den delas mellan de två stöden, så varje bock bär hälften.',
-      '49 N vore en fjärdedel av tyngden — men det finns bara två stöd, inte fyra.',
+      'Tyngdkraften är $F_\\mathrm{G} = 20 \\cdot 9{,}82 \\approx 196\\ \\mathrm{N}$, och när tyngdpunkten ligger mitt emellan stöden bär de hälften var — cirka 98 N.',
+      '196 N är hela tyngdkraften. Den delas mellan de två stöden, så varje bock bär hälften.',
+      '49 N vore en fjärdedel av tyngden — men det finns bara två stöd, inte fyra.',
       '20 är massan i kilogram, inte en kraft i newton. Tyngdkraften är $m \\cdot g \\approx 196\\ \\mathrm{N}$, och varje stöd bär hälften.',
     ],
   },
   {
-    question: 'En bräda är i vila på två stöd. Tyngdkraften på brädan är 200 N och det högra stödet trycker uppåt med 120 N. Hur stor kraft ger det vänstra stödet?',
+    question: 'En bräda är i vila på två stöd. Tyngdkraften på brädan är 200 N och det högra stödet trycker uppåt med 120 N. Hur stor kraft ger det vänstra stödet?',
     choices: [
-      '80 N',
-      '120 N',
-      '200 N',
-      '320 N',
+      '80 N',
+      '120 N',
+      '200 N',
+      '320 N',
     ],
     correct: 0,
     why: [
       'Brädan är i vila, så kraftjämvikt gäller: krafterna uppåt måste tillsammans vara lika stora som tyngdkraften nedåt. $(200 - 120)\\ \\mathrm{N} = 80\\ \\mathrm{N}$.',
       'Då skulle krafterna uppåt bli $240\\ \\mathrm{N}$ — mer än tyngdkraften — och brädan skulle inte vara i jämvikt.',
-      'Stöden delar på tyngden — det vänstra stödet bär bara det som återstår när det högra tagit sina 120 N.',
-      'Krafterna uppåt ska tillsammans bli 200 N, inte 320 N. Det vänstra stödet ger skillnaden $200 - 120 = 80\\ \\mathrm{N}$.',
+      'Stöden delar på tyngden — det vänstra stödet bär bara det som återstår när det högra tagit sina 120 N.',
+      'Krafterna uppåt ska tillsammans bli 200 N, inte 320 N. Det vänstra stödet ger skillnaden $200 - 120 = 80\\ \\mathrm{N}$.',
     ],
   },
 ],
@@ -5332,7 +5332,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En cirkulär rörelse har frekvensen 5,0 Hz. Vad är perioden $T$?',
+    question: 'En cirkulär rörelse har frekvensen 5,0 Hz. Vad är perioden $T$?',
     choices: [
       '$5{,}0\\ \\mathrm{s}$',
       '$0{,}20\\ \\mathrm{s}$',
@@ -5380,7 +5380,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Ett föremål rör sig i en cirkelbana med radien 0,50 m och vinkelhastigheten 2,0 rad/s. Vilken fart har det?',
+    question: 'Ett föremål rör sig i en cirkelbana med radien 0,50 m och vinkelhastigheten 2,0 rad/s. Vilken fart har det?',
     choices: [
       '$1{,}0\\ \\mathrm{m/s}$',
       '$4{,}0\\ \\mathrm{m/s}$',
@@ -5431,7 +5431,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Ett föremål rör sig i en cirkelbana med farten 4,0 m/s och radien 2,0 m. Vad blir centripetalaccelerationen $a_\\mathrm{C}$?',
+    question: 'Ett föremål rör sig i en cirkelbana med farten 4,0 m/s och radien 2,0 m. Vad blir centripetalaccelerationen $a_\\mathrm{C}$?',
     choices: [
       '$2{,}0\\ \\mathrm{m/s^2}$',
       '$16\\ \\mathrm{m/s^2}$',
@@ -5479,7 +5479,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En vikt med massan 0,50 kg rör sig i en cirkelbana med radien 1,0 m och farten 2,0 m/s. Vad blir centripetalkraften?',
+    question: 'En vikt med massan 0,50 kg rör sig i en cirkelbana med radien 1,0 m och farten 2,0 m/s. Vad blir centripetalkraften?',
     choices: [
       '$0{,}50\\ \\mathrm{N}$',
       '$4{,}0\\ \\mathrm{N}$',
@@ -5760,7 +5760,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En boll kastas med utgångshastigheten 10 m/s i vinkeln 60° mot marken. Vad blir hastighetens x-komposant $v_\\mathrm{x}$? (Ledtråd: $\\cos 60^{\\circ} = 0{,}50$.)',
+    question: 'En boll kastas med utgångshastigheten 10 m/s i vinkeln 60° mot marken. Vad blir hastighetens x-komposant $v_\\mathrm{x}$? (Ledtråd: $\\cos 60^{\\circ} = 0{,}50$.)',
     choices: [
       '$10\\ \\mathrm{m/s}$',
       '$8{,}7\\ \\mathrm{m/s}$',
@@ -5808,7 +5808,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En boll kastas med farten 20 m/s och landar i samma horisontalplan som den kastades ifrån. Om luftmotstånd försummas, vilken fart har den precis vid nedslaget?',
+    question: 'En boll kastas med farten 20 m/s och landar i samma horisontalplan som den kastades ifrån. Om luftmotstånd försummas, vilken fart har den precis vid nedslaget?',
     choices: [
       '$0\\ \\mathrm{m/s}$, eftersom farten alltid blir noll vid nedslag',
       '$20\\ \\mathrm{m/s}$ — samma fart som vid utkastet',
@@ -5824,7 +5824,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Två likadana kulor lämnar kanten av ett bord i samma ögonblick. Den ena skjuts ut vågrätt med farten 3 m/s, den andra släpps rakt ned. Bortse från luftmotstånd. Vilken kula träffar golvet först?',
+    question: 'Två likadana kulor lämnar kanten av ett bord i samma ögonblick. Den ena skjuts ut vågrätt med farten 3 m/s, den andra släpps rakt ned. Bortse från luftmotstånd. Vilken kula träffar golvet först?',
     choices: [
       'Den som släpps, eftersom den bara rör sig nedåt',
       'Den som skjuts ut, eftersom den har högre fart',
@@ -5875,19 +5875,19 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En simulering med stegmetoden ger kastvidden 10,57 m med tidssteget 0,1 s. Den exakta kastvidden är 9,78 m. Ungefär vilken kastvidd ger simuleringen med tidssteget 0,05 s?',
+    question: 'En simulering med stegmetoden ger kastvidden 10,57 m med tidssteget 0,1 s. Den exakta kastvidden är 9,78 m. Ungefär vilken kastvidd ger simuleringen med tidssteget 0,05 s?',
     choices: [
-      '10,2 m',
-      '10,6 m',
-      '9,8 m',
-      '11,4 m',
+      '10,2 m',
+      '10,6 m',
+      '9,8 m',
+      '11,4 m',
     ],
     correct: 0,
     why: [
-      'Felet är 10,57 − 9,78 = 0,79 m. För stegmetoden halveras felet ungefär när tidssteget halveras, så felet blir cirka 0,40 m och kastvidden cirka 10,2 m.',
+      'Felet är 10,57 − 9,78 = 0,79 m. För stegmetoden halveras felet ungefär när tidssteget halveras, så felet blir cirka 0,40 m och kastvidden cirka 10,2 m.',
       'Ett kortare tidssteg ger ett mindre fel, så resultatet ändras och kommer närmare det exakta värdet.',
       'Felet minskar, men försvinner inte helt. Med halva tidssteget blir det ungefär hälften så stort.',
-      'Ett kortare tidssteg ger ett **mindre** fel, inte ett större. Kastvidden 11,4 m hör till tidssteget 0,2 s.',
+      'Ett kortare tidssteg ger ett **mindre** fel, inte ett större. Kastvidden 11,4 m hör till tidssteget 0,2 s.',
     ],
   },
   {
@@ -5966,14 +5966,14 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En vikt med tyngden 4,0 N hängs i en fjäder som förlängs 0,20 m. Hur stor är fjäderkonstanten?',
-    choices: ['0,80 N/m', '20 N/m', '4,2 N/m', '200 N/m'],
+    question: 'En vikt med tyngden 4,0 N hängs i en fjäder som förlängs 0,20 m. Hur stor är fjäderkonstanten?',
+    choices: ['0,80 N/m', '20 N/m', '4,2 N/m', '200 N/m'],
     correct: 1,
     why: [
       'Detta fås om man multiplicerar kraft och förlängning istället för att dividera: $k = \\dfrac{F}{\\Delta l}$, inte $F \\cdot \\Delta l$.',
       'Med Hookes lag $k = \\dfrac{F}{\\Delta l} = \\dfrac{4{,}0}{0{,}20} = 20$ N/m.',
       'Detta stämmer inte med divisionen $\\dfrac{4{,}0}{0{,}20}$ — kontrollera uträkningen igen.',
-      'Detta fås om man råkar dividera med 0,020 m istället för 0,20 m — kontrollera decimalplaceringen.',
+      'Detta fås om man råkar dividera med 0,020 m istället för 0,20 m — kontrollera decimalplaceringen.',
     ],
   },
   {
@@ -6034,8 +6034,8 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En fjäder med fjäderkonstanten 10 N/m dras ut 0,20 m. Hur stor är svängningsenergin i detta vändläge?',
-    choices: ['1,0 J', '2,0 J', '0,020 J', '0,20 J'],
+    question: 'En fjäder med fjäderkonstanten 10 N/m dras ut 0,20 m. Hur stor är svängningsenergin i detta vändläge?',
+    choices: ['1,0 J', '2,0 J', '0,020 J', '0,20 J'],
     correct: 3,
     why: [
       'Detta fås om man glömmer att kvadrera amplituden — men $A^2$ måste räknas ut innan multiplikationen med *k*.',
@@ -6151,13 +6151,13 @@ window.EXITTICKETS = {
   },
   {
     question: 'En svängning beskrivs av $y = 0{,}15 \\sin(10t)$ (SI-enheter). Vad är amplituden?',
-    choices: ['0,15 m', '10 m', '1,5 m', '10 cm'],
+    choices: ['0,15 m', '10 m', '1,5 m', '10 cm'],
     correct: 0,
     why: [
       'Jämförelse med $y = A \\cdot \\sin(\\omega \\cdot t)$ visar direkt att amplituden är talet framför sinusfunktionen: $A = 0{,}15$ m.',
       '10 är vinkelhastigheten ω i enheten rad/s, inte amplituden.',
-      '1,5 m/s är den maximala farten $v_{\\max} = \\omega \\cdot A$, inte amplituden.',
-      'Amplituden är 0,15 m, vilket motsvarar 15 cm — inte 10 cm.',
+      '1,5 m/s är den maximala farten $v_{\\max} = \\omega \\cdot A$, inte amplituden.',
+      'Amplituden är 0,15 m, vilket motsvarar 15 cm — inte 10 cm.',
     ],
   },
 ],
@@ -6207,8 +6207,8 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En vikt med massan 0,50 kg hänger i en fjäder med fjäderkonstanten 2,0 N/m. Hur stor är periodtiden ungefär? (Använd $\\pi \\approx 3{,}14$.)',
-    choices: ['0,25 s', '3,1 s', '1,0 s', '6,3 s'],
+    question: 'En vikt med massan 0,50 kg hänger i en fjäder med fjäderkonstanten 2,0 N/m. Hur stor är periodtiden ungefär? (Använd $\\pi \\approx 3{,}14$.)',
+    choices: ['0,25 s', '3,1 s', '1,0 s', '6,3 s'],
     correct: 1,
     why: [
       'Detta är kvoten $m/k = 0{,}25$ under rottecknet — men glöm inte att ta roten ur och sedan multiplicera med $2\\pi$.',
@@ -6302,7 +6302,7 @@ window.EXITTICKETS = {
   },
   {
     question: 'En pendel har längden $l = 2{,}45\\ \\mathrm{m}$. Ungefär hur lång är periodtiden? (Använd $g = 9{,}82\\ \\mathrm{m/s^2}$ och $\\pi \\approx 3{,}14$.)',
-    choices: ['0,50 s', '1,6 s', '3,1 s', '6,3 s'],
+    choices: ['0,50 s', '1,6 s', '3,1 s', '6,3 s'],
     correct: 2,
     why: [
       'Detta är resultatet av $\\sqrt{l/g}$ ($\\sqrt{0{,}25} = 0{,}50$), men faktorn $2\\pi$ saknas.',
@@ -6312,8 +6312,8 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En pendel tar 0,80 s från det ena vändläget till det andra. Hur stor är periodtiden?',
-    choices: ['1,6 s', '0,40 s', '0,80 s', '3,2 s'],
+    question: 'En pendel tar 0,80 s från det ena vändläget till det andra. Hur stor är periodtiden?',
+    choices: ['1,6 s', '0,40 s', '0,80 s', '3,2 s'],
     correct: 0,
     why: [
       'Från det ena vändläget till det andra är bara en halv period. Hela perioden, fram och tillbaka, är $2 \\cdot 0{,}80 = 1{,}6$ s.',
@@ -6433,8 +6433,8 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En våg har frekvensen 5,0 Hz och våglängden 2,0 m. Hur stor är utbredningshastigheten?',
-    choices: ['2,5 m/s', '0,40 m/s', '7,0 m/s', '10 m/s'],
+    question: 'En våg har frekvensen 5,0 Hz och våglängden 2,0 m. Hur stor är utbredningshastigheten?',
+    choices: ['2,5 m/s', '0,40 m/s', '7,0 m/s', '10 m/s'],
     correct: 3,
     why: [
       'Detta fås om man dividerar frekvensen med våglängden istället för att multiplicera dem.',
@@ -6583,7 +6583,7 @@ window.EXITTICKETS = {
       'Det är en tiopotens för lågt — ljudets hastighet i luft är ungefär tio gånger detta.',
       'Det är en tiopotens för högt för luft, även om det kan stämma bättre för hastigheten i vissa fasta material.',
       'Det är ljusets hastighet i vakuum, en helt annan storhet än ljudets hastighet.',
-      'Ljudets hastighet i luft är ungefär $340\\ \\mathrm{m/s}$, vilket motsvarar ungefär 1 kilometer på 3 sekunder.',
+      'Ljudets hastighet i luft är ungefär $340\\ \\mathrm{m/s}$, vilket motsvarar ungefär 1 kilometer på 3 sekunder.',
     ],
   },
   {
@@ -6671,10 +6671,10 @@ window.EXITTICKETS = {
     choices: ['En tiodubbling av ljudintensiteten.', 'Ingen förändring av ljudintensiteten.', 'En halvering av ljudintensiteten.', 'En fördubbling av ljudintensiteten.'],
     correct: 3,
     why: [
-      'En tiodubbling av intensiteten motsvarar istället en ökning med 10 dB, inte 3 dB.',
+      'En tiodubbling av intensiteten motsvarar istället en ökning med 10 dB, inte 3 dB.',
       'En förändring i dB motsvarar alltid en förändring i intensitet, eftersom dB-skalan är en logaritmisk representation av intensiteten.',
-      'En halvering av intensiteten motsvarar istället en minskning med ungefär 3 dB, inte en ökning.',
-      'Eftersom $10 \\cdot \\lg 2 \\approx 3$, motsvarar en ökning med 3 dB en fördubbling av ljudintensiteten.',
+      'En halvering av intensiteten motsvarar istället en minskning med ungefär 3 dB, inte en ökning.',
+      'Eftersom $10 \\cdot \\lg 2 \\approx 3$, motsvarar en ökning med 3 dB en fördubbling av ljudintensiteten.',
     ],
   },
   {
@@ -6682,7 +6682,7 @@ window.EXITTICKETS = {
     choices: ['$120\\ \\mathrm{dB}$', '$30\\ \\mathrm{dB}$', '$60\\ \\mathrm{dB}$', '$100\\ \\mathrm{dB}$'],
     correct: 0,
     why: [
-      'Smärtgränsen, där ljud övergår till smärta, ligger vid ungefär $120\\ \\mathrm{dB}$ (motsvarande intensiteten 1 W/m²).',
+      'Smärtgränsen, där ljud övergår till smärta, ligger vid ungefär $120\\ \\mathrm{dB}$ (motsvarande intensiteten 1 W/m²).',
       'Det är en mycket tyst nivå, ungefär bakgrundsljud i ett tyst rum, långt under smärtgränsen.',
       'Det motsvarar ungefär ett samtal på kort avstånd, alltså en normal ljudnivå, inte smärtgränsen.',
       'Det är en hög ljudnivå, men den ligger fortfarande under smärtgränsen. Intensiteten är bara en hundradel av den vid smärtgränsen.',
@@ -6708,8 +6708,8 @@ window.EXITTICKETS = {
     correct: 2,
     why: [
       'Det intervallet ligger en tiopotens för lågt i båda ändar jämfört med människans hörbara område.',
-      'Den nedre gränsen ligger en tiopotens för högt — människor kan höra ner till 20 Hz, inte bara ner till 200 Hz.',
-      'Det mänskliga örat kan normalt uppfatta frekvenser mellan ungefär 20 Hz och 20 000 Hz.',
+      'Den nedre gränsen ligger en tiopotens för högt — människor kan höra ner till 20 Hz, inte bara ner till 200 Hz.',
+      'Det mänskliga örat kan normalt uppfatta frekvenser mellan ungefär 20 Hz och 20 000 Hz.',
       'Det intervallet ligger helt inom (och ovanför) ultraljudsområdet, långt över vad örat normalt kan uppfatta.',
     ],
   },
@@ -6718,10 +6718,10 @@ window.EXITTICKETS = {
     choices: ['Infraljud', 'Överljud', 'Diskantljud', 'Ultraljud'],
     correct: 3,
     why: [
-      'Infraljud är istället ljud med frekvens under 20 Hz, i motsatt ände av skalan.',
+      'Infraljud är istället ljud med frekvens under 20 Hz, i motsatt ände av skalan.',
       'Överljud används normalt om hastigheter över ljudets hastighet, inte om höga frekvenser.',
       'Diskantljud är inget vedertaget fysikbegrepp för höga frekvenser i detta sammanhang.',
-      'Ljud över 20 000 Hz, utanför människans hörbara område, kallas ultraljud och används bland annat vid fosterdiagnostik.',
+      'Ljud över 20 000 Hz, utanför människans hörbara område, kallas ultraljud och används bland annat vid fosterdiagnostik.',
     ],
   },
   {
@@ -6729,9 +6729,9 @@ window.EXITTICKETS = {
     choices: ['Infraljud', 'Ultraljud', 'Basljud', 'Undertoner'],
     correct: 0,
     why: [
-      'Ljud under 20 Hz, under människans hörbarhetsgräns, kallas infraljud och genereras till exempel av jordbävningar och ventilationsfläktar.',
-      'Ultraljud ligger istället över 20 000 Hz, i motsatt ände av skalan.',
-      'Basljud är inget etablerat fysikbegrepp för frekvenser under 20 Hz.',
+      'Ljud under 20 Hz, under människans hörbarhetsgräns, kallas infraljud och genereras till exempel av jordbävningar och ventilationsfläktar.',
+      'Ultraljud ligger istället över 20 000 Hz, i motsatt ände av skalan.',
+      'Basljud är inget etablerat fysikbegrepp för frekvenser under 20 Hz.',
       'Undertoner är inte det vedertagna begreppet för frekvenser under hörbarhetsgränsen — det korrekta begreppet är infraljud.',
     ],
   },
@@ -7036,7 +7036,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Magnetisk flödestäthet betecknas *B* och mäts i tesla (T) — redan 1 T är ett mycket starkt magnetfält.',
+      'Magnetisk flödestäthet betecknas *B* och mäts i tesla (T) — redan 1 T är ett mycket starkt magnetfält.',
       'Newton (N) är enheten för kraft, inte för magnetisk flödestäthet.',
       'Volt (V) är enheten för spänning (och inducerad spänning), inte för magnetisk flödestäthet.',
       'Ampere (A) är enheten för elektrisk ström, inte för magnetfältets styrka.',
@@ -7075,7 +7075,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En rak ledare har strömmen *I* = 5,0 A. Beräkna den magnetiska flödestätheten på avståndet *d* = 0,10 m från ledaren ($k = 2 \\cdot 10^{-7}$ T·m/A).',
+    question: 'En rak ledare har strömmen *I* = 5,0 A. Beräkna den magnetiska flödestätheten på avståndet *d* = 0,10 m från ledaren ($k = 2 \\cdot 10^{-7}$ T·m/A).',
     choices: [
       '$1{,}0\\ \\mathrm{\\mu T}$',
       '$100\\ \\mathrm{\\mu T}$',
@@ -7084,7 +7084,7 @@ window.EXITTICKETS = {
     ],
     correct: 3,
     why: [
-      'Detta motsvarar en beräkning där avståndet av misstag sattes till 1,0 m i stället för 0,10 m.',
+      'Detta motsvarar en beräkning där avståndet av misstag sattes till 1,0 m i stället för 0,10 m.',
       'Detta är tio gånger för stort. En vanlig felkälla är att hantera tiopotenserna fel i uträkningen.',
       'Detta är hundra gånger för litet jämfört med det korrekta svaret.',
       '$B = k \\cdot \\dfrac{I}{d} = 2 \\cdot 10^{-7} \\cdot \\dfrac{5{,}0}{0{,}10} = 1{,}0 \\cdot 10^{-5}\\ \\mathrm{T} = 10\\ \\mathrm{\\mu T}$.',
@@ -7158,7 +7158,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En spole med 100 varv och längden 0,50 m ges strömmen 2,0 A. Ungefär hur stor blir den magnetiska flödestätheten inuti spolen ($\\mu_0 = 4\\pi \\cdot 10^{-7}$ T·m/A)?',
+    question: 'En spole med 100 varv och längden 0,50 m ges strömmen 2,0 A. Ungefär hur stor blir den magnetiska flödestätheten inuti spolen ($\\mu_0 = 4\\pi \\cdot 10^{-7}$ T·m/A)?',
     choices: [
       '$0{,}050\\ \\mathrm{mT}$',
       '$0{,}50\\ \\mathrm{mT}$',
@@ -7241,7 +7241,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Beräkna den magnetiska kraften på en proton ($q \\approx 1{,}602 \\cdot 10^{-19}$ C) som rör sig med hastigheten $1{,}0 \\cdot 10^{6}$ m/s vinkelrätt mot ett magnetfält på 0,10 T.',
+    question: 'Beräkna den magnetiska kraften på en proton ($q \\approx 1{,}602 \\cdot 10^{-19}$ C) som rör sig med hastigheten $1{,}0 \\cdot 10^{6}$ m/s vinkelrätt mot ett magnetfält på 0,10 T.',
     choices: [
       '$1{,}6 \\cdot 10^{-13}\\ \\mathrm{N}$',
       '$1{,}6 \\cdot 10^{-19}\\ \\mathrm{N}$',
@@ -7356,7 +7356,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En rak ledare med längden 0,50 m ligger vinkelrätt i ett magnetfält på 0,20 T och har strömmen 4,0 A. Beräkna kraften på ledaren.',
+    question: 'En rak ledare med längden 0,50 m ligger vinkelrätt i ett magnetfält på 0,20 T och har strömmen 4,0 A. Beräkna kraften på ledaren.',
     choices: [
       '$0{,}40\\ \\mathrm{N}$',
       '$4{,}0\\ \\mathrm{N}$',
@@ -7541,20 +7541,20 @@ window.EXITTICKETS = {
     question: 'En ledare rör sig i sin egen längdriktning (parallellt med sig själv) genom ett magnetfält, i stället för vinkelrätt mot sig själv. Hur stor blir den inducerade spänningen?',
     choices: [
       'Lika stor som om ledaren rört sig vinkelrätt mot sig själv',
-      '0 V, eftersom elektronerna då rör sig längs ledaren och inte tvärs över den',
+      '0 V, eftersom elektronerna då rör sig längs ledaren och inte tvärs över den',
       'Alltid maximal, oavsett rörelseriktning',
       'Beror bara på fältstyrkan, inte på rörelseriktningen',
     ],
     correct: 1,
     why: [
       'Spänningen blir inte densamma — just riktningen på rörelsen relativt ledaren avgör om en spänning alls induceras.',
-      'Rör sig ledaren i sin egen längdriktning blir den magnetiska kraften på elektronerna vinkelrät mot ledaren. Ingen kraft verkar längs ledaren, så elektronerna samlas inte vid ena änden, och den inducerade spänningen blir 0 V.',
+      'Rör sig ledaren i sin egen längdriktning blir den magnetiska kraften på elektronerna vinkelrät mot ledaren. Ingen kraft verkar längs ledaren, så elektronerna samlas inte vid ena änden, och den inducerade spänningen blir 0 V.',
       'Spänningen är inte alltid maximal — i det här specialfallet blir den i stället noll.',
       'Rörelseriktningen har stor betydelse: rör sig ledaren parallellt med sig själv induceras ingen spänning alls, oavsett fältstyrka.',
     ],
   },
   {
-    question: 'En ledare med längden 0,50 m rör sig med hastigheten 2,0 m/s vinkelrätt genom ett magnetfält på 0,10 T (*l*, *v* och *B* är vinkelräta mot varandra). Beräkna den inducerade spänningen.',
+    question: 'En ledare med längden 0,50 m rör sig med hastigheten 2,0 m/s vinkelrätt genom ett magnetfält på 0,10 T (*l*, *v* och *B* är vinkelräta mot varandra). Beräkna den inducerade spänningen.',
     choices: [
       '$1{,}0\\ \\mathrm{V}$',
       '$0{,}010\\ \\mathrm{V}$',
@@ -7591,7 +7591,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En 0,50 m lång ledare rör sig med farten 4,0 m/s vinkelrätt genom ett magnetfält med flödestätheten 0,10 T. Hur stor blir den inducerade emsen $e$?',
+    question: 'En 0,50 m lång ledare rör sig med farten 4,0 m/s vinkelrätt genom ett magnetfält med flödestätheten 0,10 T. Hur stor blir den inducerade emsen $e$?',
     choices: [
       '$0{,}020\\ \\mathrm{V}$',
       '$2{,}0\\ \\mathrm{V}$',
@@ -7600,14 +7600,14 @@ window.EXITTICKETS = {
     ],
     correct: 2,
     why: [
-      'Det uppstår om farten av misstag läses som 0,40 m/s i stället för 4,0 m/s.',
+      'Det uppstår om farten av misstag läses som 0,40 m/s i stället för 4,0 m/s.',
       'Det motsvarar att bara $l$ och $v$ multipliceras ($0{,}50 \\cdot 4{,}0 = 2{,}0$) medan flödestätheten $B$ glöms bort.',
       'Med $e = l \\cdot v \\cdot B$ blir $e = 0{,}50 \\cdot 4{,}0 \\cdot 0{,}10 = 0{,}20\\ \\mathrm{V}$.',
-      'Det uppstår om flödestätheten av misstag läses som 10 T i stället för 0,10 T.',
+      'Det uppstår om flödestätheten av misstag läses som 10 T i stället för 0,10 T.',
     ],
   },
   {
-    question: 'En inducerad ems på 0,30 V driver en ström genom en krets med resistansen 0,50 Ω. Hur stor blir strömmen $I$?',
+    question: 'En inducerad ems på 0,30 V driver en ström genom en krets med resistansen 0,50 Ω. Hur stor blir strömmen $I$?',
     choices: [
       '$0{,}60\\ \\mathrm{A}$',
       '$0{,}15\\ \\mathrm{A}$',
@@ -7623,7 +7623,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En rak ledare med längden 0,20 m bär strömmen 5,0 A vinkelrätt mot ett magnetfält med flödestätheten 2,0 T. Hur stor blir den magnetiska kraften på ledaren?',
+    question: 'En rak ledare med längden 0,20 m bär strömmen 5,0 A vinkelrätt mot ett magnetfält med flödestätheten 2,0 T. Hur stor blir den magnetiska kraften på ledaren?',
     choices: [
       '$0{,}40\\ \\mathrm{N}$',
       '$1{,}0\\ \\mathrm{N}$',
@@ -7690,7 +7690,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En area på 0,50 m² är vinkelrät mot ett magnetfält med flödestätheten 0,20 T. Hur stort är det magnetiska flödet genom arean?',
+    question: 'En area på 0,50 m² är vinkelrät mot ett magnetfält med flödestätheten 0,20 T. Hur stort är det magnetiska flödet genom arean?',
     choices: [
       '$0{,}10\\ \\mathrm{Wb}$',
       '$0{,}70\\ \\mathrm{Wb}$',
@@ -7702,7 +7702,7 @@ window.EXITTICKETS = {
       'Med $\\Phi = B \\cdot A_\\perp$ blir $\\Phi = 0{,}20 \\cdot 0{,}50 = 0{,}10\\ \\mathrm{Wb}$.',
       'Det fås om $B$ och $A$ adderas i stället för multipliceras: $0{,}20 + 0{,}50 = 0{,}70$.',
       'Det fås om arean divideras med flödestätheten i stället för att multipliceras: $\\dfrac{0{,}50}{0{,}20} = 2{,}5$.',
-      'Det uppstår om arean av misstag läses som 5,0 m² i stället för 0,50 m².',
+      'Det uppstår om arean av misstag läses som 5,0 m² i stället för 0,50 m².',
     ],
   },
   {
@@ -7722,7 +7722,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Det magnetiska flödet i en spole med 100 varv ökar likformigt med 0,020 Wb på 2,0 s. Hur stort blir beloppet av den inducerade spänningen?',
+    question: 'Det magnetiska flödet i en spole med 100 varv ökar likformigt med 0,020 Wb på 2,0 s. Hur stort blir beloppet av den inducerade spänningen?',
     choices: [
       '$1{,}0\\ \\mathrm{V}$',
       '$0{,}010\\ \\mathrm{V}$',
@@ -7734,11 +7734,11 @@ window.EXITTICKETS = {
       'Med $e = N \\cdot \\dfrac{\\Delta \\Phi}{\\Delta t}$ blir beloppet $e = 100 \\cdot \\dfrac{0{,}020}{2{,}0} = 1{,}0\\ \\mathrm{V}$.',
       'Det fås om antalet varv $N$ glöms bort och bara $\\dfrac{\\Delta \\Phi}{\\Delta t} = \\dfrac{0{,}020}{2{,}0}$ beräknas.',
       'Det fås om man glömmer att dividera med tiden och bara beräknar $N \\cdot \\Delta \\Phi = 100 \\cdot 0{,}020$.',
-      'Det uppstår om flödesändringen av misstag läses som 0,20 Wb i stället för 0,020 Wb.',
+      'Det uppstår om flödesändringen av misstag läses som 0,20 Wb i stället för 0,020 Wb.',
     ],
   },
   {
-    question: 'I en $\\Phi$–$t$-graf ökar flödet likformigt från 0 till 8,0 mWb under de första 4,0 sekunderna och ligger sedan konstant. Hur stor är den inducerade spänningens belopp under de första 4,0 sekunderna?',
+    question: 'I en $\\Phi$–$t$-graf ökar flödet likformigt från 0 till 8,0 mWb under de första 4,0 sekunderna och ligger sedan konstant. Hur stor är den inducerade spänningens belopp under de första 4,0 sekunderna?',
     choices: [
       '$32\\ \\mathrm{mV}$',
       '$0{,}50\\ \\mathrm{mV}$',
@@ -7773,7 +7773,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Det svenska elnätet har frekvensen 50 Hz. Hur stor är vinkelhastigheten $\\omega$?',
+    question: 'Det svenska elnätet har frekvensen 50 Hz. Hur stor är vinkelhastigheten $\\omega$?',
     choices: [
       '$100\\pi\\ \\mathrm{rad/s}$',
       '$50\\pi\\ \\mathrm{rad/s}$',
@@ -7789,7 +7789,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En växelspänningskälla har effektivvärdet 100 V. Ungefär hur stor är toppspänningen $\\hat{u}$ ($\\sqrt{2} \\approx 1{,}4$)?',
+    question: 'En växelspänningskälla har effektivvärdet 100 V. Ungefär hur stor är toppspänningen $\\hat{u}$ ($\\sqrt{2} \\approx 1{,}4$)?',
     choices: [
       '$\\approx 71\\ \\mathrm{V}$',
       '$100\\ \\mathrm{V}$',
@@ -7846,10 +7846,10 @@ window.EXITTICKETS = {
     ],
     correct: 2,
     why: [
-      '60 Hz är frekvensen i det amerikanska elnätet, inte det svenska.',
+      '60 Hz är frekvensen i det amerikanska elnätet, inte det svenska.',
       '230 blandas ofta ihop med den svenska nätspänningen (230 V), men det är inte frekvensen.',
-      'Det svenska elnätet har frekvensen 50 Hz (och den effektiva nätspänningen 230 V).',
-      '100 Hz är dubbelt så mycket som den verkliga frekvensen.',
+      'Det svenska elnätet har frekvensen 50 Hz (och den effektiva nätspänningen 230 V).',
+      '100 Hz är dubbelt så mycket som den verkliga frekvensen.',
     ],
   },
 ],
@@ -7865,7 +7865,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Primärspolen är den spole som ansluts till den ingående spänningen, till exempel vägguttagets 230 V.',
+      'Primärspolen är den spole som ansluts till den ingående spänningen, till exempel vägguttagets 230 V.',
       'Sekundärspolen är i stället den spole där den nya spänningen induceras och kopplas till apparaten som ska drivas.',
       'Järnkärnan binder ihop spolarna magnetiskt men är själv ingen spole och ansluts inte till spänningskällan.',
       'Hela poängen med en transformator är att spänningen först induceras via primärspolen, inte att den kopplas förbi den.',
@@ -7888,7 +7888,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En transformator ska sänka spänningen från 120 V till 12 V. Om sekundärspolen har 100 varv, hur många varv har primärspolen?',
+    question: 'En transformator ska sänka spänningen från 120 V till 12 V. Om sekundärspolen har 100 varv, hur många varv har primärspolen?',
     choices: [
       '$10\\ \\mathrm{varv}$',
       '$100\\ \\mathrm{varv}$',
@@ -7920,7 +7920,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En transformator har $N_1 : N_2 = 5 : 1$. Om strömmen i primärspolen är 2,0 A, hur stor är strömmen i sekundärspolen?',
+    question: 'En transformator har $N_1 : N_2 = 5 : 1$. Om strömmen i primärspolen är 2,0 A, hur stor är strömmen i sekundärspolen?',
     choices: [
       '$10\\ \\mathrm{A}$',
       '$0{,}40\\ \\mathrm{A}$',
@@ -7987,7 +7987,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En hastighetsväljare har det elektriska fältet $4{,}0 \\cdot 10^3$ V/m och den magnetiska flödestätheten 0,20 T. Vilken hastighet väljs ut?',
+    question: 'En hastighetsväljare har det elektriska fältet $4{,}0 \\cdot 10^3$ V/m och den magnetiska flödestätheten 0,20 T. Vilken hastighet väljs ut?',
     choices: [
       '$8{,}0 \\cdot 10^{2}\\ \\mathrm{m/s}$',
       '$2{,}0 \\cdot 10^{2}\\ \\mathrm{m/s}$',
@@ -7997,7 +7997,7 @@ window.EXITTICKETS = {
     correct: 3,
     why: [
       'Det fås om $\\mathbb{E}$ och $B$ multipliceras i stället för divideras: $4{,}0 \\cdot 10^3 \\cdot 0{,}20 = 8{,}0 \\cdot 10^2$.',
-      'Det uppstår om flödestätheten av misstag läses som 20 T i stället för 0,20 T.',
+      'Det uppstår om flödestätheten av misstag läses som 20 T i stället för 0,20 T.',
       'Det uppstår om fältstyrkan av misstag läses som $4{,}0 \\cdot 10^2$ V/m i stället för $4{,}0 \\cdot 10^3$ V/m.',
       'Med $v = \\dfrac{\\mathbb{E}}{B}$ blir $v = \\dfrac{4{,}0 \\cdot 10^3}{0{,}20} = 2{,}0 \\cdot 10^{4}\\ \\mathrm{m/s}$.',
     ],
@@ -8097,7 +8097,7 @@ window.EXITTICKETS = {
     why: [
       'Värmeledningsförmåga hos metallen är inte skälet — det handlar om att fältet ska kunna inducera strömmar i materialet.',
       'Det är tvärtom hällens funktion att kastrullens botten själv blir varm genom virvelströmmarna — inte hällen.',
-      'Frekvensen (omkring 50 kHz) är inte tillräckligt hög för att smälta metall; problemet med en icke-magnetisk kastrull är i stället att den värms upp för lite.',
+      'Frekvensen (omkring 50 kHz) är inte tillräckligt hög för att smälta metall; problemet med en icke-magnetisk kastrull är i stället att den värms upp för lite.',
       'Virvelströmmar induceras i alla metaller, men i ett magnetiskt material samlas det växlande fältet och strömmarna koncentreras till ett tunt skikt i botten, så att de ger mycket värme. Hysteresen bidrar också. I en kastrull av till exempel aluminium blir uppvärmningen för svag.',
     ],
   },
@@ -8238,8 +8238,8 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En ficklampa lyser med effekten 2,0 W jämnt fördelat över en yta med arean 4,0 m². Vad blir ljusintensiteten på ytan?',
-    choices: ['2,0 W/m²', '0,5 W/m²', '8,0 W/m²', '0,25 W/m²'],
+    question: 'En ficklampa lyser med effekten 2,0 W jämnt fördelat över en yta med arean 4,0 m². Vad blir ljusintensiteten på ytan?',
+    choices: ['2,0 W/m²', '0,5 W/m²', '8,0 W/m²', '0,25 W/m²'],
     correct: 1,
     why: [
       'Detta är bara ficklampans effekt *P* — kom ihåg att intensiteten fås genom att dela effekten med ytans area, inte bara läsa av *P*.',
@@ -8333,7 +8333,7 @@ window.EXITTICKETS = {
   },
   {
     question: 'Ett gitter har spaltavståndet $d = 2{,}0 \\cdot 10^{-6}$ m. Första ordningens maximum ($n = 1$) bildas vid avböjningsvinkeln $30^\\circ$. Bestäm ljusets våglängd.',
-    choices: ['500 nm', '2000 nm', '1000 nm', '0,5 nm'],
+    choices: ['500 nm', '2000 nm', '1000 nm', '0,5 nm'],
     correct: 2,
     why: [
       'Detta är hälften av rätt svar, som om man multiplicerat med $\\sin 30^\\circ = 0{,}5$ två gånger. Med $n = 1$ blir $\\lambda = d \\cdot \\sin 30^\\circ = 2{,}0 \\cdot 10^{-6} \\cdot 0{,}5 = 1{,}0 \\cdot 10^{-6}\\ \\mathrm{m}$.',
@@ -8587,8 +8587,8 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En foton med energin 3,0 eV träffar en metallyta med utträdesarbetet 2,0 eV och slår loss en elektron. Vilken rörelseenergi får elektronen?',
-    choices: ['5,0 eV', '2,0 eV', '6,0 eV', '1,0 eV'],
+    question: 'En foton med energin 3,0 eV träffar en metallyta med utträdesarbetet 2,0 eV och slår loss en elektron. Vilken rörelseenergi får elektronen?',
+    choices: ['5,0 eV', '2,0 eV', '6,0 eV', '1,0 eV'],
     correct: 3,
     why: [
       'Detta fås om man adderar fotonens energi och utträdesarbetet istället för att subtrahera dem.',
@@ -8737,7 +8737,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Solen sänder ut ett brett spektrum av våglängder — de mörka linjerna är bara smala avbrott i ett annars kontinuerligt spektrum.',
-      'De mörka linjerna i solens spektrum, till exempel vid 656 nm, sammanfaller exakt med vätets spektrallinjer, vilket avslöjar att solens atmosfär innehåller väte.',
+      'De mörka linjerna i solens spektrum, till exempel vid 656 nm, sammanfaller exakt med vätets spektrallinjer, vilket avslöjar att solens atmosfär innehåller väte.',
       'Tvärtom visar de mörka linjerna att det finns väte i solens atmosfär, som absorberar ljus vid just de våglängderna.',
       'Solen visar tydliga (mörka) spektrallinjer i sitt annars nästan kontinuerliga spektrum.',
     ],
@@ -8779,13 +8779,13 @@ window.EXITTICKETS = {
   },
   {
     question: 'Hur stor är jonisationsenergin för väteatomen, räknat från grundtillståndet?',
-    choices: ['0 eV', '1,0 eV', '13,6 eV', '656 eV'],
+    choices: ['0 eV', '1,0 eV', '13,6 eV', '656 eV'],
     correct: 2,
     why: [
       'Jonisationsgränsen är vald som nollnivå, men själva jonisationsenergin (räknat från grundtillståndet) är inte noll.',
       'Detta är alldeles för lite — jonisationsenergin för väte är betydligt större.',
-      'För väteatomen är jonisationsenergin 13,6 eV — energin som krävs för att lyfta elektronen från grundtillståndet ($n = 1$) till jonisationsgränsen.',
-      'Detta är alldeles för mycket — 656 nm är istället en våglängd i Balmerserien, inte en energi i eV.',
+      'För väteatomen är jonisationsenergin 13,6 eV — energin som krävs för att lyfta elektronen från grundtillståndet ($n = 1$) till jonisationsgränsen.',
+      'Detta är alldeles för mycket — 656 nm är istället en våglängd i Balmerserien, inte en energi i eV.',
     ],
   },
   {
@@ -8799,14 +8799,14 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Lyman-serien slutar på $n = 1$ och ger ultraviolett strålning, inte synligt ljus.',
-      'Balmer-serien slutar på $n = 2$ och ger de hopp som motsvarar synligt ljus, till exempel den röda linjen vid 656 nm.',
+      'Balmer-serien slutar på $n = 2$ och ger de hopp som motsvarar synligt ljus, till exempel den röda linjen vid 656 nm.',
       'Paschen-serien slutar på $n = 3$ och ger infraröd strålning, inte ultraviolett.',
       'De tre serierna motsvarar olika energiskillnader och ger därför helt olika våglängder.',
     ],
   },
   {
     question: 'Använd formeln $E_n \\approx -\\dfrac{13{,}6}{n^{2}}$ eV för att bestämma energin hos väteatomens andra energinivå ($n = 2$).',
-    choices: ['−6,8 eV', '−1,7 eV', '−13,6 eV', '−3,4 eV'],
+    choices: ['−6,8 eV', '−1,7 eV', '−13,6 eV', '−3,4 eV'],
     correct: 3,
     why: [
       'Detta fås om man delar med 2 istället för att dela med $n^{2} = 4$.',
@@ -8973,14 +8973,14 @@ window.EXITTICKETS = {
       '$\\dfrac{1}{60}$ grad',
       '$\\dfrac{1}{3\\,600}$ grad',
       '$\\dfrac{1}{100}$ grad',
-      '60 grader',
+      '60 grader',
     ],
     correct: 1,
     why: [
       'Det är en bågminut, som är $1/60$ grad — en bågsekund är mindre än så.',
       'En grad delas i 60 bågminuter och varje bågminut i 60 bågsekunder, så det blir $3\\,600$ bågsekunder per grad — en bågsekund är alltså $1/3\\,600$ grad.',
       'Grader delas inte upp i hundradelar på det här sättet — uppdelningen sker i 60-delar (minuter och sekunder), inte 100-delar.',
-      '60 grader är sextio gånger större än en hel grad, långt ifrån en bågsekund som är en bråkdel av en grad.',
+      '60 grader är sextio gånger större än en hel grad, långt ifrån en bågsekund som är en bråkdel av en grad.',
     ],
   },
   {
@@ -9746,19 +9746,19 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Hur mycket är $\\dfrac{2}{9}$ av 45 kr?',
+    question: 'Hur mycket är $\\dfrac{2}{9}$ av 45 kr?',
     choices: [
-      '90 kr',
-      '10 kr',
-      '18 kr',
-      '5 kr',
+      '90 kr',
+      '10 kr',
+      '18 kr',
+      '5 kr',
     ],
     correct: 1,
     why: [
-      '90 kr är dubbla beloppet — då har det multiplicerats med 2 utan att divideras med 9.',
+      '90 kr är dubbla beloppet — då har det multiplicerats med 2 utan att divideras med 9.',
       'Bråkdel av något betyder multiplikation: $\\dfrac{2}{9} \\cdot 45 = \\dfrac{2 \\cdot 45}{9} = 2 \\cdot 5 = 10$.',
-      '18 kr är $\\dfrac{2}{5}$ av 45 kr — kontrollera nämnaren.',
-      '5 kr är $\\dfrac{1}{9}$ av 45 kr — här söks $\\dfrac{2}{9}$, alltså dubbelt så mycket.',
+      '18 kr är $\\dfrac{2}{5}$ av 45 kr — kontrollera nämnaren.',
+      '5 kr är $\\dfrac{1}{9}$ av 45 kr — här söks $\\dfrac{2}{9}$, alltså dubbelt så mycket.',
     ],
   },
   {
@@ -10129,12 +10129,12 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Skriv 0,0025 A med lämpligt prefix.',
+    question: 'Skriv 0,0025 A med lämpligt prefix.',
     choices: [
-      '25 mA',
-      '2,5 µA',
+      '25 mA',
+      '2,5 µA',
       '2,5 cA',
-      '2,5 mA',
+      '2,5 mA',
     ],
     correct: 3,
     why: [
@@ -10145,12 +10145,12 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Varför skrivs 270 000 N som 0,27 MN och inte som $2{,}7 \\cdot 10^5$ N med ett eget prefix?',
+    question: 'Varför skrivs 270 000 N som 0,27 MN och inte som $2{,}7 \\cdot 10^5$ N med ett eget prefix?',
     choices: [
-      '270 000 N går inte att skriva i grundpotensform',
+      '270 000 N går inte att skriva i grundpotensform',
       'Prefixet för $10^5$ är för ovanligt för att användas i skolan',
       'Det finns inget prefix för $10^5$, så talet justeras till närmaste tiopotens med prefix',
-      'MN är fel — det borde vara 27 kN',
+      'MN är fel — det borde vara 27 kN',
     ],
     correct: 2,
     why: [
@@ -10913,7 +10913,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Rayan får dubbelt så mycket som Arielle, som får $x$ kr. Samuel får 300 kr mindre än Rayan. Vilket uttryck beskriver Samuels belopp?',
+    question: 'Rayan får dubbelt så mycket som Arielle, som får $x$ kr. Samuel får 300 kr mindre än Rayan. Vilket uttryck beskriver Samuels belopp?',
     choices: [
       '$2x - 300$',
       '$2(x - 300)$',
@@ -10922,8 +10922,8 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Rayan får $2x$ kr, och Samuel får 300 kr mindre än så: $2x - 300$.',
-      'Subtraktionen görs efter dubblingen — 300 kr dras från Rayans belopp, inte från Arielles före dubblingen.',
+      'Rayan får $2x$ kr, och Samuel får 300 kr mindre än så: $2x - 300$.',
+      'Subtraktionen görs efter dubblingen — 300 kr dras från Rayans belopp, inte från Arielles före dubblingen.',
       '"Mindre än" betyder subtraktion, inte addition.',
       'Samuel jämförs med Rayan (som får $2x$), inte med Arielle.',
     ],
@@ -10998,10 +10998,10 @@ window.EXITTICKETS = {
   {
     question: 'En kvadrat har arean $196\\ \\mathrm{cm^2}$. Ekvationen $x^2 = 196$ ger $x = \\pm 14$. Vad är kvadratens sida?',
     choices: [
-      '98 cm — arean delas med 2',
-      '49 cm — arean delas med 4',
-      '14 cm — den negativa lösningen förkastas eftersom en sida inte kan vara negativ',
-      '±14 cm — båda lösningarna ska anges',
+      '98 cm — arean delas med 2',
+      '49 cm — arean delas med 4',
+      '14 cm — den negativa lösningen förkastas eftersom en sida inte kan vara negativ',
+      '±14 cm — båda lösningarna ska anges',
     ],
     correct: 2,
     why: [
@@ -11197,35 +11197,35 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Formeln $H = 21\\ 000 + 2{,}5m$ gäller med $m$ i kilometer. Vad måste man göra innan man sätter in en körsträcka på 2 000 mil?',
+    question: 'Formeln $H = 21\\ 000 + 2{,}5m$ gäller med $m$ i kilometer. Vad måste man göra innan man sätter in en körsträcka på 2 000 mil?',
     choices: [
       'Räkna om kostnaden till euro',
       'Dividera sträckan med 10',
-      'Räkna om sträckan till kilometer: 2 000 mil = 20 000 km',
+      'Räkna om sträckan till kilometer: 2 000 mil = 20 000 km',
       'Ingenting — mil och kilometer är samma sak',
     ],
     correct: 2,
     why: [
       'Valutan har inget med formeln att göra.',
       'Det är precis tvärtom — antalet mil MULTIPLICERAS med 10 för att bli kilometer.',
-      'Formelns $m$ är definierad i kilometer — 1 mil = 10 km, så $m = 20\\ 000$.',
-      'En mil är 10 km — utan omvandling blir kostnaden tio gånger för låg.',
+      'Formelns $m$ är definierad i kilometer — 1 mil = 10 km, så $m = 20\\ 000$.',
+      'En mil är 10 km — utan omvandling blir kostnaden tio gånger för låg.',
     ],
   },
   {
-    question: 'Hur långt kan man köra för 30 000 kr om $H = 21\\ 000 + 2{,}5m$?',
+    question: 'Hur långt kan man köra för 30 000 kr om $H = 21\\ 000 + 2{,}5m$?',
     choices: [
-      '360 km',
-      '9 000 km',
-      '3 600 km',
-      '12 000 km',
+      '360 km',
+      '9 000 km',
+      '3 600 km',
+      '12 000 km',
     ],
     correct: 2,
     why: [
       '360 är svaret i MIL — i kilometer är det 3 600.',
-      '9 000 är kronorna som återstår efter den fasta kostnaden — de ska divideras med 2,5 kr/km.',
-      'Insättning av $H = 30\\ 000$ ger $9\\ 000 = 2{,}5m$, det vill säga $m = 3\\ 600$ km (360 mil).',
-      '12 000 vore $30\\ 000/2{,}5$ — den fasta kostnaden 21 000 kr måste dras bort först.',
+      '9 000 är kronorna som återstår efter den fasta kostnaden — de ska divideras med 2,5 kr/km.',
+      'Insättning av $H = 30\\ 000$ ger $9\\ 000 = 2{,}5m$, det vill säga $m = 3\\ 600$ km (360 mil).',
+      '12 000 vore $30\\ 000/2{,}5$ — den fasta kostnaden 21 000 kr måste dras bort först.',
     ],
   },
 ],
@@ -11310,7 +11310,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      '1 ‰ = 1/1 000 = 0,001 — promille är tusendelar.',
+      '1 ‰ = 1/1 000 = 0,001 — promille är tusendelar.',
       'Miljondelar är ppm (parts per million).',
       'Tiondelar har ingen egen symbol i det här systemet.',
       'Hundradelar är procent (%).',
@@ -11333,7 +11333,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Vad måste man kontrollera innan man beräknar andelen 120 g av 15 kg?',
+    question: 'Vad måste man kontrollera innan man beräknar andelen 120 g av 15 kg?',
     choices: [
       'Att delen och det hela har samma enhet',
       'Att svaret blir i procent',
@@ -11342,10 +11342,10 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Gör om till samma enhet först: 15 kg = 15 000 g, sedan är andelen 120/15 000 = 0,008 = 8 ‰.',
+      'Gör om till samma enhet först: 15 kg = 15 000 g, sedan är andelen 120/15 000 = 0,008 = 8 ‰.',
       'Andelen kan uttryckas i procent, promille eller ppm — det väljs efter frågan.',
       'Decimaltal fungerar utmärkt i andelsberäkningar.',
-      'Delen är normalt mindre än det hela — annars är andelen större än 100 %.',
+      'Delen är normalt mindre än det hela — annars är andelen större än 100 %.',
     ],
   },
   {
@@ -11358,8 +11358,8 @@ window.EXITTICKETS = {
     ],
     correct: 3,
     why: [
-      '0,5 är 50 % — långt ifrån miljondelar.',
-      '0,005 är 5 ‰ — promille, inte ppm.',
+      '0,5 är 50 % — långt ifrån miljondelar.',
+      '0,005 är 5 ‰ — promille, inte ppm.',
       'En nolla för lite — miljondelar kräver sex decimalpositioner för 1 ppm.',
       'ppm är miljondelar: $5/1\\ 000\\ 000 = 0{,}000\\ 005$.',
     ],
@@ -11400,7 +11400,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Vilken förändringsfaktor motsvarar − 25 %?',
+    question: 'Vilken förändringsfaktor motsvarar − 25 %?',
     choices: [
       '0,75',
       '0,25',
@@ -11410,25 +11410,25 @@ window.EXITTICKETS = {
     correct: 0,
     why: [
       '$100\\ \\% - 25\\ \\% = 75\\ \\% = 0{,}75$.',
-      '0,25 vore en minskning med 75 % — bara en fjärdedel kvar.',
-      '1,25 motsvarar en ÖKNING med 25 %.',
+      '0,25 vore en minskning med 75 % — bara en fjärdedel kvar.',
+      '1,25 motsvarar en ÖKNING med 25 %.',
       'Förändringsfaktorer är aldrig negativa — minskningen kodas som en faktor mindre än 1.',
     ],
   },
   {
     question: 'En förändringsfaktor är 2,40. Vad betyder det?',
     choices: [
-      'Värdet har minskat med 40 %',
-      'Värdet har ökat med 24 %',
-      'Värdet har ökat med 240 %',
-      'Värdet har ökat med 140 %',
+      'Värdet har minskat med 40 %',
+      'Värdet har ökat med 24 %',
+      'Värdet har ökat med 240 %',
+      'Värdet har ökat med 140 %',
     ],
     correct: 3,
     why: [
       'Faktorer över 1 betyder alltid ökning.',
-      'En ökning med 24 % ger faktorn 1,24.',
-      'En ökning med 240 % hade gett faktorn 3,40.',
-      '2,40 = 240 %, och jämfört med 100 % är ökningen 140 %.',
+      'En ökning med 24 % ger faktorn 1,24.',
+      'En ökning med 240 % hade gett faktorn 3,40.',
+      '2,40 = 240 %, och jämfört med 100 % är ökningen 140 %.',
     ],
   },
   {
@@ -11441,42 +11441,42 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      '"Hur många procent dyrare än butik A?" — då är A:s pris gamla värdet. Det förklarar varför 22 % dyrare och 18 % billigare kan beskriva samma prisskillnad.',
+      '"Hur många procent dyrare än butik A?" — då är A:s pris gamla värdet. Det förklarar varför 22 % dyrare och 18 % billigare kan beskriva samma prisskillnad.',
       'Jämförelsereferensen väljs av frågan, inte av storleken.',
       'Medelvärdet används inte i procentuella jämförelser av den här typen.',
       'Samma sak — det är frågans "jämfört med" som styr.',
     ],
   },
   {
-    question: 'Ett pris ökar från 175 kr till 231 kr. Hur stor är ökningen i procent?',
+    question: 'Ett pris ökar från 175 kr till 231 kr. Hur stor är ökningen i procent?',
     choices: [
-      '24 %',
-      '32 %',
-      '56 %',
-      '132 %',
+      '24 %',
+      '32 %',
+      '56 %',
+      '132 %',
     ],
     correct: 1,
     why: [
-      '24 % vore ökningen räknad på det NYA priset — ökningen räknas alltid på det gamla.',
-      'Förändringsfaktorn är $231/175 = 1{,}32 = 132\\ \\%$ — alltså 32 % över 100 %.',
-      '56 kr är ökningen i KRONOR — i procent av 175 kr är den 32 %.',
-      '132 % är hela förändringsfaktorn — själva ökningen är det som överstiger 100 %.',
+      '24 % vore ökningen räknad på det NYA priset — ökningen räknas alltid på det gamla.',
+      'Förändringsfaktorn är $231/175 = 1{,}32 = 132\\ \\%$ — alltså 32 % över 100 %.',
+      '56 kr är ökningen i KRONOR — i procent av 175 kr är den 32 %.',
+      '132 % är hela förändringsfaktorn — själva ökningen är det som överstiger 100 %.',
     ],
   },
   {
-    question: 'Efter en sänkning med 20 % kostar en tröja 360 kr. Vad kostade tröjan före sänkningen?',
+    question: 'Efter en sänkning med 20 % kostar en tröja 360 kr. Vad kostade tröjan före sänkningen?',
     choices: [
-      '288 kr',
-      '432 kr',
-      '450 kr',
-      '300 kr',
+      '288 kr',
+      '432 kr',
+      '450 kr',
+      '300 kr',
     ],
     correct: 2,
     why: [
-      'Här har du sänkt 360 kr med 20 % en gång till. 360 kr är redan det nya priset.',
-      'Att lägga 20 % på 360 kr ger fel, eftersom sänkningen räknades på det gamla priset och inte på 360 kr.',
+      'Här har du sänkt 360 kr med 20 % en gång till. 360 kr är redan det nya priset.',
+      'Att lägga 20 % på 360 kr ger fel, eftersom sänkningen räknades på det gamla priset och inte på 360 kr.',
       'Förändringsfaktorn är 0,80, och gamla värdet = nya värdet / förändringsfaktor = $360/0{,}80 = 450$ kr.',
-      'Att dividera med 1,20 vore att ta bort en höjning med 20 %, inte en sänkning.',
+      'Att dividera med 1,20 vore att ta bort en höjning med 20 %, inte en sänkning.',
     ],
   },
 ],
@@ -11493,29 +11493,29 @@ window.EXITTICKETS = {
     correct: 0,
     why: [
       'Total förändringsfaktor = faktor 1 · faktor 2 · … — varje förändring verkar på det redan förändrade värdet.',
-      '+15 % följt av −15 % ger 0,9775 (−2,25 %), inte 0 % — procentsatser kan inte adderas rakt av.',
+      '+15 % följt av −15 % ger 0,9775 (−2,25 %), inte 0 % — procentsatser kan inte adderas rakt av.',
       'Alla förändringar påverkar — ingen kan hoppas över.',
       'Faktorer adderas aldrig — addition av procentsatser är just det klassiska felet.',
     ],
   },
   {
-    question: 'Ett pris höjs med 15 % och sänks sedan med 15 %. Vad har hänt totalt?',
+    question: 'Ett pris höjs med 15 % och sänks sedan med 15 %. Vad har hänt totalt?',
     choices: [
-      'Priset har minskat med 15 %',
-      'Priset har minskat med 2,25 %',
+      'Priset har minskat med 15 %',
+      'Priset har minskat med 2,25 %',
       'Priset är oförändrat',
-      'Priset har ökat med 2,25 %',
+      'Priset har ökat med 2,25 %',
     ],
     correct: 1,
     why: [
-      'Sänkningen med 15 % tog bara bort det mesta av höjningen, inte 15 % av originalet netto.',
-      '$1{,}15 \\cdot 0{,}85 = 0{,}9775$ — en minskning med 2,25 %, eftersom sänkningen räknas på det höjda priset.',
-      'Det känns intuitivt men stämmer inte — 15 % av det höjda priset är mer i kronor än 15 % av det ursprungliga.',
+      'Sänkningen med 15 % tog bara bort det mesta av höjningen, inte 15 % av originalet netto.',
+      '$1{,}15 \\cdot 0{,}85 = 0{,}9775$ — en minskning med 2,25 %, eftersom sänkningen räknas på det höjda priset.',
+      'Det känns intuitivt men stämmer inte — 15 % av det höjda priset är mer i kronor än 15 % av det ursprungliga.',
       'Faktorn 0,9775 ligger UNDER 1 — en minskning.',
     ],
   },
   {
-    question: 'Vilket uttryck ger kontobehållningen efter 18 år om 80 000 kr sätts in med 2,5 % årsränta?',
+    question: 'Vilket uttryck ger kontobehållningen efter 18 år om 80 000 kr sätts in med 2,5 % årsränta?',
     choices: [
       '$80\\ 000 + 1{,}025^{18}$',
       '$80\\ 000 \\cdot 1{,}025^{18}$',
@@ -11531,17 +11531,17 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Varför ger +15 % följt av −15 % inte 0 % totalt?',
+    question: 'Varför ger +15 % följt av −15 % inte 0 % totalt?',
     choices: [
       'Procentsatserna räknas på olika värden — sänkningen räknas på det redan höjda priset',
-      'Det ger visst 0 % totalt',
+      'Det ger visst 0 % totalt',
       'Höjningar väger alltid tyngre än sänkningar',
       'Avrundningsfel i mellanstegen',
     ],
     correct: 0,
     why: [
-      '15 % av det höjda värdet är mer i kronor än 15 % av originalet — därför hamnar man under startvärdet.',
-      'Kontrollera: 100 kr → 115 kr → 97,75 kr. Inte tillbaka till 100.',
+      '15 % av det höjda värdet är mer i kronor än 15 % av originalet — därför hamnar man under startvärdet.',
+      'Kontrollera: 100 kr → 115 kr → 97,75 kr. Inte tillbaka till 100.',
       'Ordningen spelar ingen roll ($0{,}85 \\cdot 1{,}15$ är samma produkt) — asymmetrin ligger i att basen ändras.',
       'Effekten är exakt, inte ett avrundningsfel: $1{,}15 \\cdot 0{,}85 = 0{,}9775$ precis.',
     ],
@@ -11598,7 +11598,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Du sparar 5 000 kr i slutet av varje år med 2,8 % ränta. Vilken kalkylbladsformel ger nästa års behållning utifrån föregående (cell B2)?',
+    question: 'Du sparar 5 000 kr i slutet av varje år med 2,8 % ränta. Vilken kalkylbladsformel ger nästa års behållning utifrån föregående (cell B2)?',
     choices: [
       '\`=B2*1,028+5000\`',
       '\`=B2+5000\`',
@@ -11607,7 +11607,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Det gamla beloppet växer med faktorn 1,028 OCH en ny insättning på 5 000 kr läggs till.',
+      'Det gamla beloppet växer med faktorn 1,028 OCH en ny insättning på 5 000 kr läggs till.',
       'Utan faktorn växer inga pengar — det är sparande utan ränta.',
       '0,028 ger bara själva räntedelen — behållningen kräver faktorn 1,028.',
       'Här är det bara den nya insättningen som får ränta — det är tvärtom det gamla beloppet som ska växa.',
@@ -11643,25 +11643,25 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Det vore en engångsbetalning, inte en amorteringsplan.',
-      'Skulden delas i lika delar — till exempel 150 000 kr på 60 månader ger 2 500 kr amortering varje månad. Totalbeloppet sjunker ändå, eftersom räntedelen krymper.',
+      'Skulden delas i lika delar — till exempel 150 000 kr på 60 månader ger 2 500 kr amortering varje månad. Totalbeloppet sjunker ändå, eftersom räntedelen krymper.',
       'Ränta betalas alltid på den aktuella skulden.',
       'Det beskriver annuitetslån — vid rak amortering är det amorteringen som är konstant, inte totalen.',
     ],
   },
   {
-    question: 'En skuld är 150 000 kr och årsräntan 4,8 %. Hur stor är räntan den första månaden?',
+    question: 'En skuld är 150 000 kr och årsräntan 4,8 %. Hur stor är räntan den första månaden?',
     choices: [
-      '60 kr',
-      '600 kr',
-      '2 500 kr',
-      '7 200 kr',
+      '60 kr',
+      '600 kr',
+      '2 500 kr',
+      '7 200 kr',
     ],
     correct: 1,
     why: [
       'En tiopotens fel — kontrollera divisionen med 12.',
       'Årsräntan är $0{,}048 \\cdot 150\\ 000 = 7\\ 200$ kr, och per månad $7\\ 200/12 = 600$ kr.',
-      '2 500 kr är amorteringen i exemplet, inte räntan.',
-      '7 200 kr är räntan för ett HELT år — månadsräntan är en tolftedel.',
+      '2 500 kr är amorteringen i exemplet, inte räntan.',
+      '7 200 kr är räntan för ett HELT år — månadsräntan är en tolftedel.',
     ],
   },
   {
@@ -11677,7 +11677,7 @@ window.EXITTICKETS = {
       'Vid rak amortering är amorteringen exakt lika stor varje gång.',
       'Räntesatsen är oförändrad — det är underlaget (skulden) som minskar.',
       'Konstant inbetalning kännetecknar annuitetslån, inte rak amortering.',
-      'Amorteringen är konstant men räntedelen krymper i takt med skulden — från 600 kr första månaden till 10 kr den sista i exemplet.',
+      'Amorteringen är konstant men räntedelen krymper i takt med skulden — från 600 kr första månaden till 10 kr den sista i exemplet.',
     ],
   },
   {
@@ -11721,15 +11721,15 @@ window.EXITTICKETS = {
   {
     question: 'Priset på en vara har indextalet 140, med 2015 som basår. Vad betyder det?',
     choices: [
-      'Priset är 140 kr',
-      'Priset är 40 % högre än år 2015',
-      'Priset är 140 % högre än år 2015',
-      'Priset är 40 kr högre än år 2015',
+      'Priset är 140 kr',
+      'Priset är 40 % högre än år 2015',
+      'Priset är 140 % högre än år 2015',
+      'Priset är 40 kr högre än år 2015',
     ],
     correct: 1,
     why: [
       'Ett indextal är en jämförelse med basåret, inte ett pris i kronor.',
-      'Index 140 ligger 40 enheter över basårets 100 — en ökning med 40 % (förändringsfaktor 1,40).',
+      'Index 140 ligger 40 enheter över basårets 100 — en ökning med 40 % (förändringsfaktor 1,40).',
       'De första 100 enheterna är basårets egen nivå — bara det som ligger över 100 är ökning.',
       'Indexenheterna är procent av basårets pris, inte kronor.',
     ],
@@ -11751,7 +11751,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En lön på 25 000 kr från år A ska räknas om till år B:s penningvärde. KPI är 300 år A och 360 år B. Vilket uttryck är rätt?',
+    question: 'En lön på 25 000 kr från år A ska räknas om till år B:s penningvärde. KPI är 300 år A och 360 år B. Vilket uttryck är rätt?',
     choices: [
       '$25\\ 000 \\cdot \\dfrac{300}{360}$',
       '$25\\ 000 \\cdot \\dfrac{360}{300}$',
@@ -11798,7 +11798,7 @@ window.EXITTICKETS = {
       'Spridningsdiagram visar samband mellan två variabler, inte andelar.',
       'Linjediagram visar hur ett värde ändras över tid, inte hur en helhet fördelas.',
       'En tabell kan förstås visa samma data, men frågan gäller diagramtyp — och tabellen ger ingen visuell jämförelse av andelarna.',
-      'Hela cirkeln är 100 % och varje sektor en andel — perfekt när delarna summerar till en helhet.',
+      'Hela cirkeln är 100 % och varje sektor en andel — perfekt när delarna summerar till en helhet.',
     ],
   },
   {
@@ -11821,14 +11821,14 @@ window.EXITTICKETS = {
     question: 'Vad ska de relativa frekvenserna i en undersökning summera till?',
     choices: [
       'Det beror på antalet kategorier',
-      '50 %',
-      '1, alltså 100 %',
+      '50 %',
+      '1, alltså 100 %',
       'Det totala antalet svar',
     ],
     correct: 2,
     why: [
       'Oavsett hur många kategorier som finns delar de på samma helhet.',
-      'Hälften är bara en godtycklig andel — helheten är alltid 100 %.',
+      'Hälften är bara en godtycklig andel — helheten är alltid 100 %.',
       'Alla andelar tillsammans utgör hela undersökningen — summan är alltid 1. Bra som räknekontroll.',
       'Det är de vanliga frekvensernas summa. De relativa frekvenserna är andelar och summerar till 1.',
     ],
@@ -12593,9 +12593,9 @@ window.EXITTICKETS = {
     ],
     correct: 1,
     why: [
-      '600 liter är bara det största värdet. Värdemängden är hela spannet.',
+      '600 liter är bara det största värdet. Värdemängden är hela spannet.',
       'Vattenmängden ökar hela tiden. $x = 0$ ger minst, $y = 0$, och $x = 12$ ger mest, $y = 50 \\cdot 12 = 600$.',
-      '50 liter är bara det som pumpas in på EN minut.',
+      '50 liter är bara det som pumpas in på EN minut.',
       '0–12 är definitionsmängden (minuterna), inte vattenmängderna.',
     ],
   },
@@ -12644,7 +12644,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      '$a$ är förändringsfaktorn — till exempel 1,02 för +2 % per år eller 0,85 för −15 %.',
+      '$a$ är förändringsfaktorn — till exempel 1,02 för +2 % per år eller 0,85 för −15 %.',
       'Det ursprungliga värdet är $C$.',
       'Tiden är exponenten $x$.',
       'Formeln handlar om förändring över tid, inte geometri.',
@@ -12653,17 +12653,17 @@ window.EXITTICKETS = {
   {
     question: 'Bilens värde ges av $V(t) = 180\\ 000 \\cdot 0{,}85^t$. Vad betyder 0,85?',
     choices: [
-      'Värdet ökar med 85 % per år',
-      'Bilen är värd 85 kr efter ett år',
-      'Värdet minskar med 15 % per år',
-      'Värdet minskar med 85 % per år',
+      'Värdet ökar med 85 % per år',
+      'Bilen är värd 85 kr efter ett år',
+      'Värdet minskar med 15 % per år',
+      'Värdet minskar med 85 % per år',
     ],
     correct: 2,
     why: [
       'Faktorer under 1 betyder minskning.',
       '0,85 är en faktor, inte ett belopp — värdet efter 1 år är $180\\ 000 \\cdot 0{,}85 = 153\\ 000$ kr.',
-      '$0{,}85 = 100\\ \\% - 15\\ \\%$ — en årlig minskning med 15 %.',
-      'En minskning med 85 % hade gett faktorn 0,15.',
+      '$0{,}85 = 100\\ \\% - 15\\ \\%$ — en årlig minskning med 15 %.',
+      'En minskning med 85 % hade gett faktorn 0,15.',
     ],
   },
   {
@@ -12835,18 +12835,18 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Vid ett stratifierat urval med 75 % kvinnor i populationen — hur väljs stickprovet?',
+    question: 'Vid ett stratifierat urval med 75 % kvinnor i populationen — hur väljs stickprovet?',
     choices: [
       'Var femte person från en lista',
       'Endast kvinnor väljs',
-      'Så att även 75 % av stickprovet är kvinnor',
+      'Så att även 75 % av stickprovet är kvinnor',
       'Helt slumpmässigt ur hela populationen',
     ],
     correct: 2,
     why: [
       'Det beskriver systematiskt urval.',
-      'Då speglas inte populationen alls — 25 % är ju män.',
-      'Stratifierat urval speglar populationens sammansättning — 75 % kvinnor i populationen ger 75 % kvinnor i stickprovet.',
+      'Då speglas inte populationen alls — 25 % är ju män.',
+      'Stratifierat urval speglar populationens sammansättning — 75 % kvinnor i populationen ger 75 % kvinnor i stickprovet.',
       'Det beskriver obundet slumpmässigt urval.',
     ],
   },
@@ -12879,7 +12879,7 @@ window.EXITTICKETS = {
       'Inget olagligt — men resultaten måste tolkas försiktigt.',
       'Bortfallet nollar inget — det skapar osäkerhet.',
       'Bara små bortfall utan misstänkt snedvridning kan ibland ignoreras.',
-      'I kärnkraftsexemplet kunde andelen positiva ligga mellan 42 % och 54 % beroende på hur bortfallet skulle ha svarat.',
+      'I kärnkraftsexemplet kunde andelen positiva ligga mellan 42 % och 54 % beroende på hur bortfallet skulle ha svarat.',
     ],
   },
 ],
@@ -12896,22 +12896,22 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Det finns inga "fel svar" i en åsiktsundersökning — marginalen handlar om slumpvariation.',
-      'Felmarginalen mäter resultatets osäkerhet — vanligen så att resultatet i 95 % av fallen ligger inom den.',
+      'Felmarginalen mäter resultatets osäkerhet — vanligen så att resultatet i 95 % av fallen ligger inom den.',
       'Kostnaden har inget med felmarginalen att göra.',
       'Bortfall är en egen felkälla, skild från den statistiska osäkerheten.',
     ],
   },
   {
-    question: 'Med resultatet 60 % och felmarginalen 9,6 % — vilket är konfidensintervallet?',
+    question: 'Med resultatet 60 % och felmarginalen 9,6 % — vilket är konfidensintervallet?',
     choices: [
-      '55 % till 65 %',
-      '9,6 % till 60 %',
-      '60 % till 69,6 %',
-      '50,4 % till 69,6 %',
+      '55 % till 65 %',
+      '9,6 % till 60 %',
+      '60 % till 69,6 %',
+      '50,4 % till 69,6 %',
     ],
     correct: 3,
     why: [
-      'Det vore intervallet för felmarginalen 5 %.',
+      'Det vore intervallet för felmarginalen 5 %.',
       'Felmarginalen är en bredd, inte en undre gräns.',
       'Marginalen läggs åt BÅDA hållen, inte bara uppåt.',
       'Resultatet ± felmarginalen: $60 - 9{,}6 = 50{,}4$ och $60 + 9{,}6 = 69{,}6$.',
@@ -12921,9 +12921,9 @@ window.EXITTICKETS = {
     question: 'Vad betyder att en förändring är "statistiskt säkerställd" (signifikant)?',
     choices: [
       'Alla i populationen har tillfrågats',
-      'Förändringen är större än 10 procentenheter',
+      'Förändringen är större än 10 procentenheter',
       'Förändringen är exakt uppmätt utan någon osäkerhet',
-      'Förändringen är större än felmarginalen — den beror med 95 % säkerhet inte på slumpen',
+      'Förändringen är större än felmarginalen — den beror med 95 % säkerhet inte på slumpen',
     ],
     correct: 3,
     why: [
@@ -12939,14 +12939,14 @@ window.EXITTICKETS = {
       'Den minskar — resultatet blir säkrare',
       'Den ökar',
       'Den påverkas inte',
-      'Den blir alltid exakt 1,96 %',
+      'Den blir alltid exakt 1,96 %',
     ],
     correct: 0,
     why: [
       '$n$ står i nämnaren under rottecknet — större stickprov ger mindre felmarginal (men det krävs 4 gånger fler för att halvera den).',
       'Fler svarande kan aldrig göra resultatet osäkrare.',
       '$n$ ingår i formeln — storleken påverkar i högsta grad.',
-      '1,96 är en konstant i formeln (kopplad till 95 %-nivån), inte felmarginalen själv.',
+      '1,96 är en konstant i formeln (kopplad till 95 %-nivån), inte felmarginalen själv.',
     ],
   },
 ],
@@ -13041,14 +13041,14 @@ window.EXITTICKETS = {
       'Antalet gynnsamma utfall delat med antalet möjliga utfall',
       'Gynnsamma plus möjliga utfall',
       'Antalet möjliga utfall delat med antalet gynnsamma',
-      'Alltid 50 %',
+      'Alltid 50 %',
     ],
     correct: 0,
     why: [
       '$P(\\text{händelse}) = \\dfrac{\\text{gynnsamma}}{\\text{möjliga}}$ — och den kräver likformig sannolikhetsfördelning.',
       'En summa av antal är ingen sannolikhet.',
       'Uppochnedvänt — då blir sannolikheten större än 1.',
-      '50 % gäller bara specialfall som slantsingling.',
+      '50 % gäller bara specialfall som slantsingling.',
     ],
   },
   {
@@ -13061,7 +13061,7 @@ window.EXITTICKETS = {
     ],
     correct: 3,
     why: [
-      'För straffar skulle formeln ge 50 % mål oavsett skytt — uppenbart fel.',
+      'För straffar skulle formeln ge 50 % mål oavsett skytt — uppenbart fel.',
       'Kantfall är inte poängen — likformigheten är.',
       'Antalet utfall är två i båda fallen (mål/miss, krona/klave) — problemet är sannolikheterna.',
       'Formeln kräver likformig fördelning: krona och klave är lika sannolika, men sannolikheten för mål beror på skyttens skicklighet.',
@@ -13131,23 +13131,23 @@ window.EXITTICKETS = {
       'Konfidensintervall hör till felmarginalen.',
       'Korrelation handlar om samband mellan variabler.',
       'Utfallsrummet är mängden möjliga utfall.',
-      'Relativ frekvens = antal gånger händelsen inträffade delat med antalet försök — till exempel 139 mål på 200 straffar ≈ 70 %.',
+      'Relativ frekvens = antal gånger händelsen inträffade delat med antalet försök — till exempel 139 mål på 200 straffar ≈ 70 %.',
     ],
   },
   {
-    question: 'Asllanis relativa frekvens efter 200 straffar är cirka 70 %. Vad är sannolikheten att nästa straff INTE blir mål?',
+    question: 'Asllanis relativa frekvens efter 200 straffar är cirka 70 %. Vad är sannolikheten att nästa straff INTE blir mål?',
     choices: [
-      '70 %',
-      '30 %',
+      '70 %',
+      '30 %',
       'Det går inte att veta',
-      '50 %',
+      '50 %',
     ],
     correct: 1,
     why: [
-      '70 % är sannolikheten FÖR mål.',
+      '70 % är sannolikheten FÖR mål.',
       'Motsatshändelsen: $100\\ \\% - 70\\ \\% = 30\\ \\%$.',
       'Jodå — komplementet ger det direkt.',
-      '50 % vore den felaktiga klassiska ansatsen med två utfall.',
+      '50 % vore den felaktiga klassiska ansatsen med två utfall.',
     ],
   },
   {
@@ -13161,9 +13161,9 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Skyttens skicklighet antas konstant — det är MÄTNINGEN som förbättras.',
-      'I tabellen studsade frekvensen (100 %, 50 %, 40 %…) i början men stabiliserades kring 70 % — fler försök ger mer exakthet.',
+      'I tabellen studsade frekvensen (100 %, 50 %, 40 %…) i början men stabiliserades kring 70 % — fler försök ger mer exakthet.',
       'Jämnhet hos talet har ingen betydelse.',
-      'Den kan vara för hög också — efter 1 straff var den 100 %.',
+      'Den kan vara för hög också — efter 1 straff var den 100 %.',
     ],
   },
 ],
@@ -13174,14 +13174,14 @@ window.EXITTICKETS = {
     choices: [
       'Produkten av två sannolikheter är alltid större än 1',
       'Sannolikheten för en kombination av händelser fås genom att multiplicera de enskilda sannolikheterna',
-      'Sannolikheten för två händelser är alltid 50 %',
+      'Sannolikheten för två händelser är alltid 50 %',
       'Sannolikheter adderas alltid',
     ],
     correct: 1,
     why: [
       'Tvärtom — produkten av tal mellan 0 och 1 blir MINDRE än faktorerna.',
       'Till exempel är $P(\\text{två sexor}) = \\dfrac{1}{6} \\cdot \\dfrac{1}{6} = \\dfrac{1}{36}$.',
-      '50 % gäller bara enstaka specialfall.',
+      '50 % gäller bara enstaka specialfall.',
       'Addition hör till "antingen eller"-situationer, inte kombinationer.',
     ],
   },
@@ -13218,7 +13218,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Skål med 6 röda och 4 blå kulor. Varför skiljer sig $P$(två blå) med och utan återläggning (16 % mot 13 %)?',
+    question: 'Skål med 6 röda och 4 blå kulor. Varför skiljer sig $P$(två blå) med och utan återläggning (16 % mot 13 %)?',
     choices: [
       'De borde vara lika — beräkningen är fel',
       'Med återläggning hinner kulorna blandas bättre',
@@ -13368,7 +13368,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Hur många personer krävs enligt födelsedagsparadoxen för över 50 % chans att minst två delar födelsedag?',
+    question: 'Hur många personer krävs enligt födelsedagsparadoxen för över 50 % chans att minst två delar födelsedag?',
     choices: [
       '365',
       '57',
@@ -13377,8 +13377,8 @@ window.EXITTICKETS = {
     ],
     correct: 3,
     why: [
-      'Med 365 personer är det i praktiken garanterat — långt över 50 %.',
-      '57 personer ger över 99 % — frågan gällde 50 %.',
+      'Med 365 personer är det i praktiken garanterat — långt över 50 %.',
+      '57 personer ger över 99 % — frågan gällde 50 %.',
       '183 (halva 365) är den vanliga felgissningen.',
       'Bara 23 — i en sådan grupp finns 253 möjliga par, så chansen växer mycket snabbare än intuitionen säger.',
     ],
@@ -13437,7 +13437,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'I en triangel är motstående katet 4 cm och närliggande katet 3 cm till vinkeln $u$. Vad är tan $u$?',
+    question: 'I en triangel är motstående katet 4 cm och närliggande katet 3 cm till vinkeln $u$. Vad är tan $u$?',
     choices: [
       '$\\dfrac{3}{5}$',
       '$\\dfrac{4}{3}$',
@@ -13488,7 +13488,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'I 3-4-5-triangeln är motstående katet till $u$ 4 cm. Vad är cos $u$?',
+    question: 'I 3-4-5-triangeln är motstående katet till $u$ 4 cm. Vad är cos $u$?',
     choices: [
       '$\\dfrac{4}{5}$',
       '$\\dfrac{4}{3}$',
@@ -13587,7 +13587,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'I en rätvinklig triangel är närliggande katet 3 cm och hypotenusan 5 cm. Hur bestäms vinkeln $u$?',
+    question: 'I en rätvinklig triangel är närliggande katet 3 cm och hypotenusan 5 cm. Hur bestäms vinkeln $u$?',
     choices: [
       '$u = \\cos^{-1}\\left(\\dfrac{3}{5}\\right) \\approx 53°$',
       '$u = \\dfrac{3}{5} = 0{,}6°$',
@@ -13598,7 +13598,7 @@ window.EXITTICKETS = {
     why: [
       'Närliggande katet och hypotenusa → cosinus, och vinkeln fås med cos⁻¹.',
       '0,6 är förhållandet, inte vinkeln — inversen behövs.',
-      'sin⁻¹(3/5) ger den ANDRA vinkeln (37°) — där 3 cm är motstående katet.',
+      'sin⁻¹(3/5) ger den ANDRA vinkeln (37°) — där 3 cm är motstående katet.',
       'Tangens kräver båda katetrarna — hypotenusan ingår inte.',
     ],
   },
@@ -13761,7 +13761,7 @@ window.EXITTICKETS = {
       'Storleken skalas och riktningen vänds',
       'Vektorn försvinner',
       'Bara storleken ändras',
-      'Vektorn vrids 90 grader',
+      'Vektorn vrids 90 grader',
     ],
     correct: 0,
     why: [
@@ -14857,9 +14857,9 @@ window.EXITTICKETS = {
   {
     question: 'En rektangel har sidorna $x$ och $x - 18$ cm och arean $1\\,215\\ \\mathrm{cm}^2$. Frågan gäller **omkretsen**. Vad ska man göra när $x = 45$ har bestämts?',
     choices: [
-      'Sätta in $x = 45$ i omkretsformeln $O = 4x - 36$ — svaret är 144 cm, inte 45',
-      'Dubblera $x$ till 90 cm',
-      'Svara 45 cm — det är ju lösningen till ekvationen',
+      'Sätta in $x = 45$ i omkretsformeln $O = 4x - 36$ — svaret är 144 cm, inte 45',
+      'Dubblera $x$ till 90 cm',
+      'Svara 45 cm — det är ju lösningen till ekvationen',
       'Multiplicera sidorna för att få svaret',
     ],
     correct: 0,
@@ -15321,7 +15321,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Hur tar man reda på **när** raketen befinner sig på höjden 50 meter?',
+    question: 'Hur tar man reda på **när** raketen befinner sig på höjden 50 meter?',
     choices: [
       'Sätt in $t = 50$ i funktionen',
       'Ta fram nollställena',
@@ -15330,14 +15330,14 @@ window.EXITTICKETS = {
     ],
     correct: 3,
     why: [
-      '$t = 50$ ger höjden efter 50 sekunder — frågan är omvänd: när är höjden 50?',
+      '$t = 50$ ger höjden efter 50 sekunder — frågan är omvänd: när är höjden 50?',
       'Nollställena gäller höjden 0.',
       'Extrempunkten ger den högsta höjden, inte en specifik höjd.',
       'Skärningarna mellan banan och linjen $y = 50$ ger tidpunkterna — typiskt två: en på väg upp och en på väg ner.',
     ],
   },
   {
-    question: 'En hage byggs mot en mur med 52 m stängsel till tre sidor. De två lika sidorna kallas $x$. Varför blir den tredje sidan $52 - 2x$?',
+    question: 'En hage byggs mot en mur med 52 m stängsel till tre sidor. De två lika sidorna kallas $x$. Varför blir den tredje sidan $52 - 2x$?',
     choices: [
       'Muren är alltid dubbelt så lång som sidorna',
       'Symmetrilinjen ligger vid $x = 52$',
@@ -15349,13 +15349,13 @@ window.EXITTICKETS = {
       'Muren ersätter den fjärde sidan och behöver inget stängsel — dess längd ingår inte i beräkningen.',
       '52 är stängsellängden — symmetrilinjen för arean hamnar vid $x = 13$.',
       '52 är stängslets längd i meter, inte arean.',
-      'Totalt 52 m fördelas på tre sidor: $x + x + \\text{tredje sidan} = 52$, så tredje sidan är $52 - 2x$.',
+      'Totalt 52 m fördelas på tre sidor: $x + x + \\text{tredje sidan} = 52$, så tredje sidan är $52 - 2x$.',
     ],
   },
   {
     question: 'Arean beskrivs av $A(x) = x(52 - 2x)$ och verktyget Extrempunkt ger (13, 338). Hur tolkas det?',
     choices: [
-      'Hagen ska vara 13 × 338 meter',
+      'Hagen ska vara 13 × 338 meter',
       'Den maximala arean är $338\\ \\mathrm{m}^2$ och fås när $x = 13$ m',
       'Arean är alltid $338\\ \\mathrm{m}^2$ oavsett x',
       'Den maximala arean är $13\\ \\mathrm{m}^2$ och fås när $x = 338$ m',
@@ -15363,7 +15363,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Måtten är $x = 13$ m och $52 - 2x = 26$ m — 338 är arean, inte en sida.',
-      'Maximipunktens *x*-koordinat är det värde på x som ger störst area, och *y*-koordinaten är själva arean. Måtten blir 13 m och $52 - 26 = 26$ m.',
+      'Maximipunktens *x*-koordinat är det värde på x som ger störst area, och *y*-koordinaten är själva arean. Måtten blir 13 m och $52 - 26 = 26$ m.',
       'Parabeln visar just att arean VARIERAR med x — 338 är dess största värde.',
       'Koordinaterna har bytt plats — *x*-värdet är sidan, *y*-värdet arean.',
     ],
@@ -15918,17 +15918,17 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Två likformiga figurer har skalfaktorn 3. Sidan 5 cm i den lilla motsvaras i den stora av …',
+    question: 'Två likformiga figurer har skalfaktorn 3. Sidan 5 cm i den lilla motsvaras i den stora av …',
     choices: [
-      '8 cm',
-      '15 cm',
-      '5 cm',
-      '45 cm',
+      '8 cm',
+      '15 cm',
+      '5 cm',
+      '45 cm',
     ],
     correct: 1,
     why: [
       '8 = 5 + 3 — skalfaktorn multipliceras, adderas inte.',
-      'Motsvarande sida = 5 · 3 = 15 cm.',
+      'Motsvarande sida = 5 · 3 = 15 cm.',
       'Sidorna är lika bara om skalfaktorn är 1.',
       '45 = 5 · 9 — det vore skalfaktorn 3 använd två gånger (det gäller AREOR, inte sidor).',
     ],
@@ -16001,7 +16001,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Alva (1,60 m) har skuggan 1,20 m samtidigt som flaggstångens skugga är 6,75 m. Varför är trianglarna likformiga?',
+    question: 'Alva (1,60 m) har skuggan 1,20 m samtidigt som flaggstångens skugga är 6,75 m. Varför är trianglarna likformiga?',
     choices: [
       'Solens strålar ger samma vinkel i båda trianglar, och båda har en rät vinkel mot marken — två lika vinklar',
       'För att Alva står bredvid flaggstången',
@@ -16010,23 +16010,23 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Samma solvinkel + rät vinkel = två lika vinklar i båda trianglar — det räcker för likformighet, och sidförhållandena ger höjden 9,00 m.',
+      'Samma solvinkel + rät vinkel = två lika vinklar i båda trianglar — det räcker för likformighet, och sidförhållandena ger höjden 9,00 m.',
       'Platsen spelar ingen roll — det är vinklarna som avgör.',
       'Kongruens skulle kräva samma storlek — trianglarna är olika stora men likformiga.',
       'Olika skugglängder är själva poängen (olika storlek) — likformigheten kommer från vinklarna.',
     ],
   },
   {
-    question: 'Två likformiga trianglar har sidförhållandet 0,6. En sida i den stora är 7,5 cm. Motsvarande sida i den lilla är …',
+    question: 'Två likformiga trianglar har sidförhållandet 0,6. En sida i den stora är 7,5 cm. Motsvarande sida i den lilla är …',
     choices: [
-      '4,5 cm',
-      '6,9 cm',
-      '8,1 cm',
-      '12,5 cm',
+      '4,5 cm',
+      '6,9 cm',
+      '8,1 cm',
+      '12,5 cm',
     ],
     correct: 0,
     why: [
-      'Liten/stor = 0,6 ger liten sida = 7,5 · 0,6 = 4,5 cm.',
+      'Liten/stor = 0,6 ger liten sida = 7,5 · 0,6 = 4,5 cm.',
       '6,9 = 7,5 − 0,6 — förhållandet multipliceras, subtraheras inte.',
       '8,1 = 7,5 + 0,6 — förhållandet är en faktor, inte ett tillägg.',
       '12,5 = 7,5/0,6 — det vore att gå åt fel håll (förstora i stället för förminska).',
@@ -16167,16 +16167,16 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Två trianglar är kongruenta enligt SSS. Sidan med två tvärstreck i den ena är 32 cm. Vad gäller i den andra?',
+    question: 'Två trianglar är kongruenta enligt SSS. Sidan med två tvärstreck i den ena är 32 cm. Vad gäller i den andra?',
     choices: [
-      'Alla sidor är 32 cm',
-      'Sidan med ett tvärstreck är 32 cm',
-      'Sidan med två tvärstreck är också 32 cm',
+      'Alla sidor är 32 cm',
+      'Sidan med ett tvärstreck är 32 cm',
+      'Sidan med två tvärstreck är också 32 cm',
       'Ingen slutsats kan dras',
     ],
     correct: 2,
     why: [
-      'Bara motsvarande sida är 32 cm — de andra har sina egna längder.',
+      'Bara motsvarande sida är 32 cm — de andra har sina egna längder.',
       'Ett tvärstreck markerar ett ANNAT sidopar — de kan ha en annan längd.',
       'Lika många tvärstreck markerar motsvarande sidor — i kongruenta trianglar är motsvarande sidor exakt lika långa.',
       'Kongruensen ger precis denna slutsats — motsvarande delar är lika.',
@@ -16432,7 +16432,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Aktier köps för 12 000 kr och säljs 5 år senare för 27 000 kr. Vilken ekvation ger den årliga förändringsfaktorn?',
+    question: 'Aktier köps för 12 000 kr och säljs 5 år senare för 27 000 kr. Vilken ekvation ger den årliga förändringsfaktorn?',
     choices: [
       '$27\\,000 = 12\\,000 \\cdot 5a$',
       '$12\\,000 = 27\\,000 \\cdot a^5$',
@@ -16700,7 +16700,7 @@ window.EXITTICKETS = {
 
 'ma2c-5.5': [
   {
-    question: 'Något ökar med 2,3 % per år. Vilken förändringsfaktor används i modellen $y = C \\cdot a^x$?',
+    question: 'Något ökar med 2,3 % per år. Vilken förändringsfaktor används i modellen $y = C \\cdot a^x$?',
     choices: [
       '$a = 1{,}023$',
       '$a = 1{,}23$',
@@ -16709,10 +16709,10 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'En ökning med 2,3 % betyder att hela värdet (100 %) plus 2,3 % finns kvar: faktorn är 1 + 0,023 = 1,023.',
-      '1,23 motsvarar en ökning med 23 %, inte 2,3 %.',
-      '0,023 är bara ökningsdelen — då försvinner 97,7 % av värdet varje år.',
-      '2,3 skulle betyda att värdet 2,3-dubblas varje år (+130 %).',
+      'En ökning med 2,3 % betyder att hela värdet (100 %) plus 2,3 % finns kvar: faktorn är 1 + 0,023 = 1,023.',
+      '1,23 motsvarar en ökning med 23 %, inte 2,3 %.',
+      '0,023 är bara ökningsdelen — då försvinner 97,7 % av värdet varje år.',
+      '2,3 skulle betyda att värdet 2,3-dubblas varje år (+130 %).',
     ],
   },
   {
@@ -16759,7 +16759,7 @@ window.EXITTICKETS = {
     why: [
       'Avrundningen motiveras av situationen (årsvisa utbetalningar), inte av en allmän regel.',
       'Uträkningen stämmer — tolkningen kräver hela år.',
-      'Modellen är kontinuerlig men räntan är diskret: efter 8 år har beloppet inte passerat 12 000 kr — det sker vid årsskifte 9.',
+      'Modellen är kontinuerlig men räntan är diskret: efter 8 år har beloppet inte passerat 12 000 kr — det sker vid årsskifte 9.',
       'Logaritmer ger vilka reella värden som helst.',
     ],
   },
@@ -16773,7 +16773,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Minskning betyder förändringsfaktor under 1 (till exempel 0,85 vid −15 % per år).',
+      'Minskning betyder förändringsfaktor under 1 (till exempel 0,85 vid −15 % per år).',
       'Förändringsfaktorer är alltid positiva — annars växlar värdet tecken.',
       'a = 0,5 gäller bara om halveringen sker på exakt en tidsenhet.',
       'a > 1 beskriver tillväxt — då nås aldrig hälften.',
@@ -16990,7 +16990,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Q1 delar den undre halvan i två lika delar — 25 % av värdena ligger under Q1.',
+      'Q1 delar den undre halvan i två lika delar — 25 % av värdena ligger under Q1.',
       'Minsta värdet är pinnens ände, inte kvartilen.',
       'Kvartilen är ett läge i materialet, inte en bråkdel av ett värde.',
       'Q1 är medianen av HELA undre halvan, oavsett antal.',
@@ -17008,24 +17008,24 @@ window.EXITTICKETS = {
     why: [
       'Olika stora delar är helt normalt — det är så spridningen syns.',
       'Medelvärdet syns inte i ett lådagram.',
-      'Varje del innehåller alltid 25 % av värdena — en stor del betyder att dessa 25 % ligger utspridda (stor spridning).',
-      'Antalet är alltid 25 % per del — det är spridningen som varierar.',
+      'Varje del innehåller alltid 25 % av värdena — en stor del betyder att dessa 25 % ligger utspridda (stor spridning).',
+      'Antalet är alltid 25 % per del — det är spridningen som varierar.',
     ],
   },
   {
     question: 'Vad anger den 80:e percentilen, $p_{80}$?',
     choices: [
-      'Värdet som 80 % av materialet är större än',
-      '80 % av medelvärdet',
+      'Värdet som 80 % av materialet är större än',
+      '80 % av medelvärdet',
       'Att materialet innehåller 80 värden',
-      'Värdet som 80 % av materialet är mindre än',
+      'Värdet som 80 % av materialet är mindre än',
     ],
     correct: 3,
     why: [
-      'Tvärtom — 20 % är större än p80.',
+      'Tvärtom — 20 % är större än p80.',
       'Percentilen är inte kopplad till medelvärdet.',
       'Percentilen är ett värde i materialet, inte ett antal.',
-      'Percentiler anger hur många procent som är LÄGRE än värdet: under p80 ligger 80 %, över ligger 20 %.',
+      'Percentiler anger hur många procent som är LÄGRE än värdet: under p80 ligger 80 %, över ligger 20 %.',
     ],
   },
 ],
@@ -17208,7 +17208,7 @@ window.EXITTICKETS = {
     correct: 1,
     why: [
       'Lika vanliga värden vore en likformig fördelning — normalfördelningen toppar vid medelvärdet.',
-      'Normalfördelningen är den klockformade kurvan där bestämda procentsatser (34,1/13,6/2,3 %) ligger inom givna intervall av standardavvikelser.',
+      'Normalfördelningen är den klockformade kurvan där bestämda procentsatser (34,1/13,6/2,3 %) ligger inom givna intervall av standardavvikelser.',
       'Exponentiell tillväxt är något annat — normalfördelning beskriver hur värden SPRIDS.',
       'Normalfördelade värden kan vara negativa (till exempel temperaturer).',
     ],
@@ -17216,37 +17216,37 @@ window.EXITTICKETS = {
   {
     question: 'Hur stor andel ligger mellan medelvärdet och EN standardavvikelse uppåt ($\\mu$ till $\\mu + \\sigma$)?',
     choices: [
-      '68,2 %',
-      '34,1 %',
-      '13,6 %',
-      '50 %',
+      '68,2 %',
+      '34,1 %',
+      '13,6 %',
+      '50 %',
     ],
     correct: 1,
     why: [
-      '68,2 % är BÅDA sidorna tillsammans (±σ).',
-      'Varje sida om medelvärdet upp till en standardavvikelse rymmer 34,1 %.',
-      '13,6 % ligger mellan en och två standardavvikelser.',
-      '50 % är hela halvan ovanför medelvärdet.',
+      '68,2 % är BÅDA sidorna tillsammans (±σ).',
+      'Varje sida om medelvärdet upp till en standardavvikelse rymmer 34,1 %.',
+      '13,6 % ligger mellan en och två standardavvikelser.',
+      '50 % är hela halvan ovanför medelvärdet.',
     ],
   },
   {
     question: 'Hur stor andel ligger MER än två standardavvikelser ÖVER medelvärdet?',
     choices: [
-      '4,6 %',
-      '13,6 %',
-      '2,3 %',
-      '15,9 %',
+      '4,6 %',
+      '13,6 %',
+      '2,3 %',
+      '15,9 %',
     ],
     correct: 2,
     why: [
-      '4,6 % är BÅDA svansarna tillsammans.',
-      '13,6 % ligger mellan en och två standardavvikelser.',
-      'Svansen ovanför μ + 2σ rymmer 2,3 % (kontroll: 34,1 + 13,6 + 2,3 = 50 %).',
-      '15,9 % är allt ovanför μ + σ.',
+      '4,6 % är BÅDA svansarna tillsammans.',
+      '13,6 % ligger mellan en och två standardavvikelser.',
+      'Svansen ovanför μ + 2σ rymmer 2,3 % (kontroll: 34,1 + 13,6 + 2,3 = 50 %).',
+      '15,9 % är allt ovanför μ + σ.',
     ],
   },
   {
-    question: 'Kvinnors längd: $\\mu = 165{,}5$ och $\\sigma = 6{,}15$. Vilket Geogebra-verktyg besvarar "hur stor andel är mellan 160 och 170 cm"?',
+    question: 'Kvinnors längd: $\\mu = 165{,}5$ och $\\sigma = 6{,}15$. Vilket Geogebra-verktyg besvarar "hur stor andel är mellan 160 och 170 cm"?',
     choices: [
       'Sannolikhetskalkylatorn med ett slutet intervall 160 ≤ X ≤ 170',
       'Verktyget Nollställen',
@@ -17255,7 +17255,7 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Sannolikhetskalkylatorn tar μ och σ, och intervallknappen ger P(160 ≤ X ≤ 170) ≈ 0,58 = 58 %.',
+      'Sannolikhetskalkylatorn tar μ och σ, och intervallknappen ger P(160 ≤ X ≤ 170) ≈ 0,58 = 58 %.',
       'Nollställen hör till funktionsgrafer.',
       'Envariabelanalys arbetar med inmatade värden — här finns bara fördelningens parametrar.',
       'Percentiler kräver en lista av värden — och svarar på en annan fråga.',
@@ -17345,16 +17345,16 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Modellen y = 270x + 2 500 beskriver glassförsäljning (kr) som funktion av temperatur (°C). Hur uppskattas försäljningen vid 30 °C?',
+    question: 'Modellen y = 270x + 2 500 beskriver glassförsäljning (kr) som funktion av temperatur (°C). Hur uppskattas försäljningen vid 30 °C?',
     choices: [
       'Sätt in y = 30 och lös ut x',
       'Multiplicera 30 med r-värdet',
-      'Sätt in x = 30: y = 270 · 30 + 2 500 = 10 600 kr',
+      'Sätt in x = 30: y = 270 · 30 + 2 500 = 10 600 kr',
       'Läs av medelvärdet av försäljningen',
     ],
     correct: 2,
     why: [
-      'y = 30 skulle betyda 30 kr i försäljning — frågan ger temperaturen.',
+      'y = 30 skulle betyda 30 kr i försäljning — frågan ger temperaturen.',
       'r beskriver korrelationens styrka, inte sambandet självt.',
       'Modellen används som en vanlig funktion — temperaturen in, försäljningen ut.',
       'Poängen med modellen är att förutsäga NYA värden, inte att sammanfatta gamla.',
@@ -18317,10 +18317,10 @@ window.EXITTICKETS = {
   {
     question: 'Antalet besökare på en webbsida ges av $B(t)$, där $t$ är tiden i dygn. Om $B\'(4) = 150$, vad betyder det?',
     choices: [
-      'Efter 4 dygn har sidan haft totalt 150 besökare',
+      'Efter 4 dygn har sidan haft totalt 150 besökare',
       'Antalet besökare ökar med exakt 150 varje dygn under hela mätperioden',
-      'Efter 150 dygn har sidan haft 4 besökare',
-      'Efter 4 dygn ökar antalet besökare med cirka 150 per dygn',
+      'Efter 150 dygn har sidan haft 4 besökare',
+      'Efter 4 dygn ökar antalet besökare med cirka 150 per dygn',
     ],
     correct: 3,
     why: [
@@ -18349,7 +18349,7 @@ window.EXITTICKETS = {
   {
     question: 'En bils sträcka ges av $s(t)$ km, där $t$ är tiden i timmar. Vad är skillnaden mellan $s(2)$ och $s\'(2)$?',
     choices: [
-      '$s(2)$ är sträckan efter 2 timmar; $s\'(2)$ är momentanhastigheten vid $t = 2$ timmar',
+      '$s(2)$ är sträckan efter 2 timmar; $s\'(2)$ är momentanhastigheten vid $t = 2$ timmar',
       '$s(2)$ och $s\'(2)$ betyder samma sak, bara skrivet på två sätt',
       '$s(2)$ är momentanhastigheten; $s\'(2)$ är den tillryggalagda sträckan',
       '$s(2)$ gäller vid $t = 2$ timmar, men $s\'(2)$ gäller vid $t = 2$ km',
@@ -19678,10 +19678,10 @@ window.EXITTICKETS = {
   {
     question: 'Ett företags omsättningshastighet ges av $K(t)$ kr/månad. Om $\\displaystyle\\int_0^{12} K(t)\\, dt = 3\\,000\\,000$, vad betyder detta?',
     choices: [
-      'Företagets fasta kostnader är 3 000 000 kr',
+      'Företagets fasta kostnader är 3 000 000 kr',
       'Företaget behöver 3 000 000 månader för att nå en viss omsättning',
-      'Företaget omsatte totalt 3 000 000 kr under de första 12 månaderna',
-      'Företagets omsättningshastighet är 3 000 000 kr/månad vid $t = 12$',
+      'Företaget omsatte totalt 3 000 000 kr under de första 12 månaderna',
+      'Företagets omsättningshastighet är 3 000 000 kr/månad vid $t = 12$',
     ],
     correct: 2,
     why: [
@@ -20205,7 +20205,7 @@ window.EXITTICKETS = {
       'Att en funktion beror av flera variabler säger ingenting om tecknet på dess värden.',
       'En graf ritas i ett koordinatsystem med en $x$-axel och en $y$-axel — funktionen måste alltså bero av en enda variabel för att kunna ritas och undersökas med verktyget Extrempunkt.',
       'Geogebra kan visst beräkna uttryck med flera variabler — problemet är att en sådan funktion inte kan ritas som en vanlig graf i ett plan.',
-      'Svaret behöver inte alls bli ett heltal — i exemplet blev radien cirka 16,7 cm.',
+      'Svaret behöver inte alls bli ett heltal — i exemplet blev radien cirka 16,7 cm.',
     ],
   },
   {
@@ -20340,7 +20340,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En rätvinklig triangel har hypotenusan 10 cm och vinkeln $v = 30°$. Vilken formel ger den motstående kateten $a$?',
+    question: 'En rätvinklig triangel har hypotenusan 10 cm och vinkeln $v = 30°$. Vilken formel ger den motstående kateten $a$?',
     choices: [
       '$a = 10 \\cdot \\tan 30°$',
       '$a = 10 \\cdot \\cos 30°$',
@@ -21056,7 +21056,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En möbelsnickare har högst 10 timmar för målning per vecka. En stol tar 1 timme och ett bord 1 timme att måla. Hur skrivs bivillkoret om $x$ är antalet stolar och $y$ antalet bord?',
+    question: 'En möbelsnickare har högst 10 timmar för målning per vecka. En stol tar 1 timme och ett bord 1 timme att måla. Hur skrivs bivillkoret om $x$ är antalet stolar och $y$ antalet bord?',
     choices: [
       '$x + y \\geq 10$',
       '$x + y \\leq 10$',
@@ -21065,10 +21065,10 @@ window.EXITTICKETS = {
     ],
     correct: 1,
     why: [
-      'Högst 10 timmar betyder att tiden får vara 10 eller mindre, inte minst 10.',
-      'Målningen tar $x + y$ timmar, och den tiden får vara högst 10 timmar.',
-      'Snickaren måste inte använda exakt 10 timmar. Det räcker att tiden inte överstiger 10 timmar.',
-      'Varje stol och bord tar 1 timme, så tiden är $1 \\cdot x + 1 \\cdot y$. Talet 10 är gränsen, inte tiden per möbel.',
+      'Högst 10 timmar betyder att tiden får vara 10 eller mindre, inte minst 10.',
+      'Målningen tar $x + y$ timmar, och den tiden får vara högst 10 timmar.',
+      'Snickaren måste inte använda exakt 10 timmar. Det räcker att tiden inte överstiger 10 timmar.',
+      'Varje stol och bord tar 1 timme, så tiden är $1 \\cdot x + 1 \\cdot y$. Talet 10 är gränsen, inte tiden per möbel.',
     ],
   },
   {
@@ -21238,7 +21238,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En lön på 30 000 kr år 1 höjs med 2 % per år. Vilket uttryck ger lönen år $n$?',
+    question: 'En lön på 30 000 kr år 1 höjs med 2 % per år. Vilket uttryck ger lönen år $n$?',
     choices: [
       '$30\\,000 \\cdot 1{,}02^{n}$',
       '$30\\,000 \\cdot 0{,}02^{n-1}$',
@@ -21272,7 +21272,7 @@ window.EXITTICKETS = {
 ],
 'ma3b-6.3': [
   {
-    question: 'Varför är 10 000 kr om fem år värt mindre än 10 000 kr i dag?',
+    question: 'Varför är 10 000 kr om fem år värt mindre än 10 000 kr i dag?',
     choices: [
       'Pengar man har i dag kan sättas in och växa med ränta',
       'Sedlar slits och förlorar i värde',
@@ -21281,14 +21281,14 @@ window.EXITTICKETS = {
     ],
     correct: 0,
     why: [
-      'Sätter man in 10 000 kr i dag har de om fem år vuxit till mer än 10 000 kr. Därför är samma belopp i framtiden värt mindre.',
+      'Sätter man in 10 000 kr i dag har de om fem år vuxit till mer än 10 000 kr. Därför är samma belopp i framtiden värt mindre.',
       'Nuvärdet handlar om räntan, inte om sedlarnas skick.',
       'Hur mycket mindre det är värt beror på räntan och tiden. Det finns ingen fast andel.',
       'Med ränta växer pengarna, så pengar i dag är värda mer än samma belopp senare.',
     ],
   },
   {
-    question: 'Vilket uttryck ger nuvärdet av 60 000 kr som betalas ut om 3 år, vid räntan 5 %?',
+    question: 'Vilket uttryck ger nuvärdet av 60 000 kr som betalas ut om 3 år, vid räntan 5 %?',
     choices: [
       '$60\\,000 \\cdot 1{,}05^3$',
       '$\\dfrac{60\\,000}{1{,}05^3}$',
@@ -21297,14 +21297,14 @@ window.EXITTICKETS = {
     ],
     correct: 1,
     why: [
-      'Det är slutvärdet om 60 000 kr sätts in i dag. Nuvärdet fås genom att dividera.',
+      'Det är slutvärdet om 60 000 kr sätts in i dag. Nuvärdet fås genom att dividera.',
       'Nuvärdet är beloppet dividerat med förändringsfaktorn upphöjd till antalet år.',
       'Förändringsfaktorn ska upphöjas till 3, inte multipliceras med 3.',
       'Att multiplicera med 0,95 är en minskning med 5 % per år. Det är inte samma sak som att dividera med 1,05.',
     ],
   },
   {
-    question: 'Nuvärdet av 50 000 kr om 4 år är cirka 42 700 kr vid räntan 4 %. Vad händer med nuvärdet om räntan i stället är 2 %?',
+    question: 'Nuvärdet av 50 000 kr om 4 år är cirka 42 700 kr vid räntan 4 %. Vad händer med nuvärdet om räntan i stället är 2 %?',
     choices: [
       'Det minskar',
       'Det blir oförändrat',
@@ -21320,23 +21320,23 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Du kan få 100 000 kr nu eller 110 000 kr om 2 år. Räntan är 6 %. Vilket är mest värt?',
+    question: 'Du kan få 100 000 kr nu eller 110 000 kr om 2 år. Räntan är 6 %. Vilket är mest värt?',
     choices: [
-      '110 000 kr om 2 år, eftersom beloppet är större',
-      '100 000 kr nu, eftersom nuvärdet av 110 000 kr är cirka 97 900 kr',
+      '110 000 kr om 2 år, eftersom beloppet är större',
+      '100 000 kr nu, eftersom nuvärdet av 110 000 kr är cirka 97 900 kr',
       'De är lika mycket värda',
-      '110 000 kr om 2 år, eftersom nuvärdet är cirka 123 600 kr',
+      '110 000 kr om 2 år, eftersom nuvärdet är cirka 123 600 kr',
     ],
     correct: 1,
     why: [
       'Belopp vid olika tidpunkter kan inte jämföras direkt. De måste räknas om till nuvärden först.',
-      '$\\dfrac{110\\,000}{1{,}06^2} \\approx 97\\,900$ kr, som är mindre än 100 000 kr.',
-      'Nuvärdet av 110 000 kr är cirka 97 900 kr, inte 100 000 kr.',
+      '$\\dfrac{110\\,000}{1{,}06^2} \\approx 97\\,900$ kr, som är mindre än 100 000 kr.',
+      'Nuvärdet av 110 000 kr är cirka 97 900 kr, inte 100 000 kr.',
       'Det är slutvärdet $110\\,000 \\cdot 1{,}06^2$. Nuvärdet fås genom att dividera, inte multiplicera.',
     ],
   },
   {
-    question: 'En vinst betalas ut som 20 000 kr om 1 år och 20 000 kr om 2 år. Hur räknar man ut vinstens nuvärde vid räntan 3 %?',
+    question: 'En vinst betalas ut som 20 000 kr om 1 år och 20 000 kr om 2 år. Hur räknar man ut vinstens nuvärde vid räntan 3 %?',
     choices: [
       '$\\dfrac{40\\,000}{1{,}03^2}$',
       '$\\dfrac{40\\,000}{1{,}03}$',
@@ -21394,7 +21394,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Du sätter in 1 000 kr i slutet av varje år på ett konto med räntan 2 %. Vilket uttryck ger behållningen direkt efter den sjätte insättningen?',
+    question: 'Du sätter in 1 000 kr i slutet av varje år på ett konto med räntan 2 %. Vilket uttryck ger behållningen direkt efter den sjätte insättningen?',
     choices: [
       '$1\\,000 \\cdot 1{,}02^6$',
       '$\\dfrac{1\\,000(1{,}02^5 - 1)}{1{,}02 - 1}$',
@@ -21410,7 +21410,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Lisa sätter in 1 000 kr i **början** av varje år på ett konto med räntan 2 %. Hon vill veta behållningen i slutet av det sjätte året. Vad blir första termen $a_1$ i den geometriska summan?',
+    question: 'Lisa sätter in 1 000 kr i **början** av varje år på ett konto med räntan 2 %. Hon vill veta behållningen i slutet av det sjätte året. Vad blir första termen $a_1$ i den geometriska summan?',
     choices: ['$1\\,000$', '$1\\,020$', '$1\\,000 \\cdot 1{,}02^6$', '$6\\,000$'],
     correct: 1,
     why: [
@@ -21472,7 +21472,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Ett annuitetslån har årsräntan 6 % och betalas med en betalning i slutet av varje månad i 5 år. Månadsräntan räknas som årsräntan delad med 12. Vilka värden på $k$ och $n$ ska sättas in i formeln för annuiteten?',
+    question: 'Ett annuitetslån har årsräntan 6 % och betalas med en betalning i slutet av varje månad i 5 år. Månadsräntan räknas som årsräntan delad med 12. Vilka värden på $k$ och $n$ ska sättas in i formeln för annuiteten?',
     choices: [
       '$k = 1{,}06$ och $n = 5$',
       '$k = 1{,}005$ och $n = 60$',
@@ -21483,12 +21483,12 @@ window.EXITTICKETS = {
     why: [
       'Det gäller en betalning per år. Här betalar man varje månad, så både räntan och antalet betalningar ska räknas per månad.',
       'Månadsräntan är $\\dfrac{6\\ \\%}{12} = 0{,}5\\ \\%$, vilket ger $k = 1{,}005$. På fem år görs $5 \\cdot 12 = 60$ betalningar.',
-      'Antalet betalningar stämmer, men räntan ska också vara per månad. 6 % är årsräntan.',
-      '0,5 % skrivs 0,005 i decimalform, så förändringsfaktorn blir 1,005 och inte 1,5.',
+      'Antalet betalningar stämmer, men räntan ska också vara per månad. 6 % är årsräntan.',
+      '0,5 % skrivs 0,005 i decimalform, så förändringsfaktorn blir 1,005 och inte 1,5.',
     ],
   },
   {
-    question: 'Samma lån på 120 000 kr med räntan 6 % betalas tillbaka på fem år, en gång som annuitetslån och en gång med rak amortering. Vilket påstående stämmer?',
+    question: 'Samma lån på 120 000 kr med räntan 6 % betalas tillbaka på fem år, en gång som annuitetslån och en gång med rak amortering. Vilket påstående stämmer?',
     choices: [
       'Lånen kostar exakt lika mycket i ränta',
       'Annuitetslånet ger mindre ränta totalt',
@@ -21572,7 +21572,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'En rätvinklig triangel har den motstående kateten 3,0 cm och den närliggande kateten 4,0 cm till vinkeln $v$. Vilket uttryck ger vinkeln $v$?',
+    question: 'En rätvinklig triangel har den motstående kateten 3,0 cm och den närliggande kateten 4,0 cm till vinkeln $v$. Vilket uttryck ger vinkeln $v$?',
     choices: [
       '$v = \\cos^{-1}\\!\\left(\\dfrac{3{,}0}{4{,}0}\\right)$',
       '$v = \\tan^{-1}\\!\\left(\\dfrac{4{,}0}{3{,}0}\\right)$',
@@ -23442,7 +23442,7 @@ window.EXITTICKETS = {
     ],
   },
   {
-    question: 'Vanja har 60 m stängsel och bygger en rektangulär hage mot en mur (ingen stängsel längs muren). Låt $x$ vara längden av var och en av de två sidor som går ut från muren. Vilket uttryck beskriver arean?',
+    question: 'Vanja har 60 m stängsel och bygger en rektangulär hage mot en mur (ingen stängsel längs muren). Låt $x$ vara längden av var och en av de två sidor som går ut från muren. Vilket uttryck beskriver arean?',
     choices: [
       '$A(x) = 2x(60 - x)$',
       '$A(x) = 60x$',
@@ -25375,8 +25375,8 @@ window.EXITTICKETS = {
     why: [
       'Båda sorterna har enhet. Massa mäts i kilogram och kraft i newton.',
       'Storleken säger ingenting om vilken sort storheten är. Det är riktningen som skiljer dem åt.',
-      'En kraft på 10 N är inte fullständigt beskriven förrän man vet åt vilket håll den drar. En massa på 3 kg behöver ingen riktning.',
-      'En temperatur på −5 °C är en skalär. Tecknet har inget med riktning att göra.',
+      'En kraft på 10 N är inte fullständigt beskriven förrän man vet åt vilket håll den drar. En massa på 3 kg behöver ingen riktning.',
+      'En temperatur på −5 °C är en skalär. Tecknet har inget med riktning att göra.',
     ],
   },
   {

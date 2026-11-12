@@ -233,7 +233,7 @@
             role: 'img',
             'aria-label': 'Interaktiv figur: en konvex månghörning med dragbara hörn. ' +
                 'En pil promenerar runt kanten och vrider sig med yttervinkeln vid varje ' +
-                'hörn — efter ett helt varv har den vridit sig exakt 360 grader.'
+                'hörn — efter ett helt varv har den vridit sig exakt 360 grader.'
         });
         svg.classList.add('lab-graf-svg');
         svg.style.cursor = 'default';

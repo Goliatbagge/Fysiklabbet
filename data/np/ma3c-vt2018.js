@@ -28,28 +28,28 @@ window.NP_PROV['ma3c-vt2018'] = {
         'lösningen ett steg i taget. Varje steg förklarar både vad som görs och varför, ' +
         'figurerna byggs upp i takt med lösningen och varje uppgift kan också följas som en ' +
         'pennlösning.',
-    kravgranser: 'De skriftliga delproven B–D ger totalt 57 poäng varav 21 E-, 21 C- och 15 A-poäng. ' +
-        'Poängen skrivs (E/C/A). Till exempel betyder (3/2/1) att uppgiften kan ge 3 E-, 2 C- och ' +
-        '1 A-poäng. Provbetyget räknades på hela provet, inklusive det muntliga delprovet A, som ' +
-        'tillsammans gav 64 poäng varav 24 E-, 22 C- och 18 A-poäng. Gräns för provbetyget: ' +
+    kravgranser: 'De skriftliga delproven B–D ger totalt 57 poäng varav 21 E-, 21 C- och 15 A-poäng. ' +
+        'Poängen skrivs (E/C/A). Till exempel betyder (3/2/1) att uppgiften kan ge 3 E-, 2 C- och ' +
+        '1 A-poäng. Provbetyget räknades på hela provet, inklusive det muntliga delprovet A, som ' +
+        'tillsammans gav 64 poäng varav 24 E-, 22 C- och 18 A-poäng. Gräns för provbetyget: ' +
         'E minst 18 poäng · D minst 27 poäng varav 7 på minst C-nivå · C minst 34 poäng varav ' +
         '13 på minst C-nivå · B minst 43 poäng varav 6 på A-nivå · A minst 50 poäng varav 10 ' +
         'på A-nivå.',
     delprov: {
         B: {
-            tid: '120 minuter för delprov B och C tillsammans',
+            tid: '120 minuter för delprov B och C tillsammans',
             hjalpmedel: 'Formelblad och linjal. Inga digitala verktyg',
             hjalpmedelKort: 'Utan digitala verktyg',
             beskrivning: 'Uppgift 1–11. Endast svar krävs.',
         },
         C: {
-            tid: '120 minuter för delprov B och C tillsammans',
+            tid: '120 minuter för delprov B och C tillsammans',
             hjalpmedel: 'Formelblad och linjal. Inga digitala verktyg',
             hjalpmedelKort: 'Utan digitala verktyg',
             beskrivning: 'Uppgift 12–19. Fullständiga lösningar krävs.',
         },
         D: {
-            tid: '120 minuter',
+            tid: '120 minuter',
             hjalpmedel: 'Digitala verktyg, formelblad och linjal',
             hjalpmedelKort: 'Digitala verktyg tillåtna',
             beskrivning: 'Uppgift 20–28. Fullständiga lösningar krävs.',
@@ -1306,7 +1306,7 @@ window.NP_PROV['ma3c-vt2018'] = {
                     figur: 'u25-s3',
                 },
                 {
-                    rubrik: 'Lägg ihop och jämför med 250 m²',
+                    rubrik: 'Lägg ihop och jämför med 250 m²',
                     varfor: 'Gräsmattans area är summan av de två trianglarna. Den ska jämföras ' +
                         'med de $250\\ \\mathrm{m^2}$ som fröna räcker till.',
                     text: '$$T = 120 + 127{,}21\\ldots = 247{,}21\\ldots \\approx 247\\ \\mathrm{m^2}$$\n\n' +
@@ -1386,7 +1386,7 @@ window.NP_PROV['ma3c-vt2018'] = {
                 'Priset $P(x)$ kronor för ett band som är $x$ meter långt kan beskrivas med ' +
                 'följande modell\n\n' +
                 '$$P(x) = \\dfrac{20x^2 + 150}{x}$$\n\n' +
-                '**a)** Kalle beställer ett 5 meter långt band och undrar över meterpriset. Beräkna ' +
+                '**a)** Kalle beställer ett 5 meter långt band och undrar över meterpriset. Beräkna ' +
                 'priset uttryckt i kronor per meter.\n\n' +
                 '**b)** För kunder som beställer mycket långa band kan företaget ge ett fast pris ' +
                 'uttryckt i kronor per meter. Använd modellen och visa hur det fasta meterpriset ' +
@@ -1395,7 +1395,7 @@ window.NP_PROV['ma3c-vt2018'] = {
             steg: [
                 {
                     del: 'a',
-                    rubrik: 'Beräkna priset för 5 meter',
+                    rubrik: 'Beräkna priset för 5 meter',
                     varfor: 'Priset för hela bandet är funktionsvärdet $P(5)$.',
                     text: '$$P(5) = \\dfrac{20 \\cdot 5^2 + 150}{5} = \\dfrac{500 + 150}{5} = ' +
                         '\\dfrac{650}{5} = 130\\ \\text{kr}$$',

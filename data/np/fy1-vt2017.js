@@ -23,13 +23,13 @@ window.NP_PROV['fy1-vt2017'] = {
         'inte här. Välj en uppgift, lös den själv, och klicka sedan fram lösningen ett steg ' +
         'i taget. Varje steg förklarar både vad som görs och varför, och figurerna byggs upp ' +
         'i takt med lösningen.',
-    kravgranser: 'Provet (delprov A och B) ger totalt 60 poäng varav 21 E-, 20 C- och 19 A-poäng. ' +
+    kravgranser: 'Provet (delprov A och B) ger totalt 60 poäng varav 21 E-, 20 C- och 19 A-poäng. ' +
         'Poängen skrivs (E/C/A). Gräns för provbetyget: E minst 13 poäng · ' +
         'D minst 21 poäng varav 6 på minst C-nivå · C minst 28 poäng varav 11 på minst C-nivå · ' +
         'B minst 36 poäng varav 5 på A-nivå · A minst 43 poäng varav 9 på A-nivå.',
     delprov: {
         A: {
-            tid: '240 minuter',
+            tid: '240 minuter',
             hjalpmedel: 'Linjal, formelsamling och digitala hjälpmedel (även dator utan tillgång till kommunikation)',
             hjalpmedelKort: 'Digitala verktyg tillåtna',
             beskrivning: 'Uppgift 1–7 kräver endast ett kort svar eller en kortare redovisning. ' +
@@ -745,7 +745,7 @@ window.NP_PROV['fy1-vt2017'] = {
                     'En temperaturskillnad är lika stor i kelvin som i grader Celsius.',
                 text: 'Mätvärden:\n\n' +
                     '$$\\left[ \\begin{array}{l} ' +
-                    'm_k \\approx 700\\ \\mathrm{kg}\\ \\text{(1 liter vatten väger cirka 1 kg)} \\\\ ' +
+                    'm_k \\approx 700\\ \\mathrm{kg}\\ \\text{(1 liter vatten väger cirka 1 kg)} \\\\ ' +
                     '\\Delta T_k = (20 - 16)\\ \\mathrm{K} = 4\\ \\mathrm{K} \\\\ ' +
                     '\\Delta T_v = (47 - 20)\\ \\mathrm{K} = 27\\ \\mathrm{K} ' +
                     '\\end{array} \\right]$$\n\n' +
@@ -1321,7 +1321,7 @@ window.NP_PROV['fy1-vt2017'] = {
     P.uppgifter.push({
         nr: 19, del: 'A', poang: [0, 0, 2], omrade: 'Värme: avsvalning och effekt',
         genomgangar: ['fy1-6.2', 'fy1-4.5'],
-        fraga: 'Ett litet akvarium fylls med 12 liter varmvatten. Vattnet blandas så att temperaturen är ' +
+        fraga: 'Ett litet akvarium fylls med 12 liter varmvatten. Vattnet blandas så att temperaturen är ' +
             'lika överallt. Det varma vattnet i akvariet får sedan svalna vilket visas i diagrammet.\n\n' +
             'För att hålla vattentemperaturen konstant på $30\\ \\mathrm{°C}$ tänker man använda en ' +
             'doppvärmare. Bestäm med hjälp av grafen hur stor effekt doppvärmaren behöver ha.',
@@ -1339,7 +1339,7 @@ window.NP_PROV['fy1-vt2017'] = {
                 figur: 'u19-s1',
             },
             {
-                rubrik: 'Rita tangenten vid 30 °C och läs av två punkter på den',
+                rubrik: 'Rita tangenten vid 30 °C och läs av två punkter på den',
                 varfor: 'Hur snabbt temperaturen sjunker just vid $30\\ \\mathrm{°C}$ är kurvans lutning i ' +
                     'den punkten, och lutningen i en punkt är tangentens lutning. Tangenten är rak, så ' +
                     'vi kan läsa av den över hela diagrammets bredd. Långt mellan avläsningarna ger ' +
@@ -1370,7 +1370,7 @@ window.NP_PROV['fy1-vt2017'] = {
                 text: 'Mätvärden (efter omvandling till SI-enheter):\n\n' +
                     '$$\\left[ \\begin{array}{l} ' +
                     'c \\approx 4\\,180\\ \\mathrm{J/(kg \\cdot K)}\\ \\text{(vattnets specifika värmekapacitet)} \\\\ ' +
-                    'm = 12\\ \\mathrm{kg}\\ \\text{(12 liter vatten)} \\\\ ' +
+                    'm = 12\\ \\mathrm{kg}\\ \\text{(12 liter vatten)} \\\\ ' +
                     '\\Delta T = (35{,}3 - 25{,}4)\\ \\mathrm{°C} = 9{,}9\\ \\mathrm{°C} = 9{,}9\\ \\mathrm{K}\\ \\text{(avläst)} \\\\ ' +
                     '\\Delta t = 160\\ \\mathrm{min} = 9\\,600\\ \\mathrm{s}\\ \\text{(avläst)} ' +
                     '\\end{array} \\right]$$\n\n' +
@@ -1623,9 +1623,9 @@ window.NP_PROV['fy1-vt2017'] = {
         bedomning: [
             ['a) Korrekt svar (${}_{42}^{99}\\mathrm{Mo} \\rightarrow {}_{43}^{99}\\mathrm{Tc} + ' +
                 '{}_{-1}^{\\ \\ 0}\\mathrm{e} + \\bar{\\nu}$). Poängen ges även om $\\bar{\\nu}$ utelämnas.', '+C'],
-            ['b) Godtagbar ansats, till exempel beräknar aktiviteten efter 8 h, $1{,}907\\ \\mathrm{MBq}$', '+A'],
+            ['b) Godtagbar ansats, till exempel beräknar aktiviteten efter 8 h, $1{,}907\\ \\mathrm{MBq}$', '+A'],
             ['med i övrigt godtagbar lösning och svar ($4{,}9$ liter)', '+A'],
-            ['c) Godtagbar ansats, till exempel beräknar antal sönderfall under 8 h, ' +
+            ['c) Godtagbar ansats, till exempel beräknar antal sönderfall under 8 h, ' +
                 '$\\Delta N \\approx 9{,}025 \\cdot 10^{10}$ st', '+A'],
             ['med i övrigt godtagbar lösning och svar ($24\\ \\mathrm{µGy}$)', '+A'],
         ],

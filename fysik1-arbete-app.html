@@ -468,7 +468,7 @@
         const xStart = (c) => (c.lage === 'dra' && Math.cos(c.v * DEG) < -0.01) ? 380 : 190;
         const FSK = 6;                 // kraftpilarnas skala vid dragning, px per newton
         const FSK_V = 3.5;             // vid lyft och bär (tyngdkraften måste rymmas)
-        const LS = 138, LS_L = 26;     // snörets längd (dra / lyft och bär), längre än F-pilen vid 20 N
+        const LS = 138, LS_L = 26;     // snörets längd (dra / lyft och bär), längre än F-pilen vid 20 N
         const DB = 70;                 // dynamometerns hylsa
         const STR = 1.7;               // dynamometerns utdrag, px per newton
         const FMAX = 20;               // dynamometerns största värde (N)
@@ -600,7 +600,7 @@
                     <rect x={xh} y="-10" width={DB} height="20" rx="5" fill="#e5e9ee" stroke="#7b8594" strokeWidth="1.4" />
                     <rect x={xh + DB - 18} y="-10" width="8" height="20" fill="#c8324a" opacity="0.85" />
                     <text x={xh + 30} y="4.5" fontSize="12" fontWeight="700" fill="#4b5563" fontFamily="Poppins, sans-serif" textAnchor="middle"
-                          transform={uppochner ? `rotate(180 ${xh + 30} 0)` : undefined}>0–20 N</text>
+                          transform={uppochner ? `rotate(180 ${xh + 30} 0)` : undefined}>0–20 N</text>
                 </g>
             );
         };
@@ -841,7 +841,7 @@
                             })}
                             {[0, 0.5, 1, 1.5].map((s) => (
                                 <text key={s} x={linjalX + s * PXM} y={BANK_Y + 37} textAnchor="middle" fontSize="12"
-                                      fill="#374151" fontFamily="Poppins, sans-serif">{s === 1.5 ? '1,5 m' : fmt(s, 1)}</text>
+                                      fill="#374151" fontFamily="Poppins, sans-serif">{s === 1.5 ? '1,5 m' : fmt(s, 1)}</text>
                             ))}
                         </g>
                     )}
@@ -917,7 +917,7 @@
                         <g>
                             <polygon points={poly} fill="rgba(212,147,15,0.30)" clipPath="url(#klippPos)" />
                             <polygon points={poly} fill="rgba(91,125,177,0.30)" clipPath="url(#klippNeg)" />
-                            {/* brickmönstret inne i ytan: varje ruta är 1 J */}
+                            {/* brickmönstret inne i ytan: varje ruta är 1 J */}
                             <g clipPath="url(#klippArea)">
                                 {Array.from({ length: Math.round(smax / 0.1) + 1 }, (_, i) => (
                                     <line key={i} x1={sx(i * 0.1)} y1={DTOP - 10} x2={sx(i * 0.1)} y2={DBOT + 10} stroke={COL.brickK} strokeWidth="1.3" opacity="0.55" />
@@ -993,7 +993,7 @@
                     })}
                     <g>
                         <rect x={FACK[0].x} y={FACK_BOT + 34} width="14" height="11" rx="2" fill={COL.brick} stroke={COL.brickK} strokeWidth="0.8" />
-                        <text x={FACK[0].x + 17} y={FACK_BOT + 43} fontSize="13" fill="rgba(15,22,32,0.7)" fontFamily="Poppins, sans-serif">= 1 J = en ruta i diagrammet</text>
+                        <text x={FACK[0].x + 17} y={FACK_BOT + 43} fontSize="13" fill="rgba(15,22,32,0.7)" fontFamily="Poppins, sans-serif">= 1 J = en ruta i diagrammet</text>
                     </g>
 
                     {/* flygande brickor */}
@@ -1101,19 +1101,19 @@
         //  FÄRDIGA FÖRSÖK
         // ════════════════════════════════════════════════════════
         const FORSOK = [
-            { id: 'rakt',  namn: 'Dra rakt', sub: 'vagn, 8 N, v = 0°',
+            { id: 'rakt',  namn: 'Dra rakt', sub: 'vagn, 8 N, v = 0°',
               cfg: { lage: 'dra', obj: 'vagn', m: 2, mu: 0, F: 8, v: 0, s: 1.5, v0: 0 } },
-            { id: 'snett', namn: 'Dra snett', sub: 'vagn, 12 N, v = 30°',
+            { id: 'snett', namn: 'Dra snett', sub: 'vagn, 12 N, v = 30°',
               cfg: { lage: 'dra', obj: 'vagn', m: 2, mu: 0, F: 12, v: 30, s: 1.5, v0: 0 } },
             { id: 'lada',  namn: 'Dra lådan', sub: 'friktion ger värme',
               cfg: { lage: 'dra', obj: 'lada', m: 2, mu: 0.3, F: 10, v: 0, s: 1.5, v0: 0 } },
-            { id: 'fast',  namn: 'Lådan sitter fast', sub: '20 N men ingen rörelse',
+            { id: 'fast',  namn: 'Lådan sitter fast', sub: '20 N men ingen rörelse',
               cfg: { lage: 'dra', obj: 'lada', m: 5, mu: 0.6, F: 20, v: 0, s: 1.5, v0: 0 } },
             { id: 'bar',   namn: 'Bära vikten', sub: 'kraften uppåt, rörelsen åt sidan',
               cfg: { lage: 'bar', obj: 'lada', m: 2, mu: 0, F: 2 * G, v: 90, s: 1.5, v0: 0 } },
-            { id: 'lyft1', namn: 'Lyft 1 kg 0,6 m', sub: 'med jämn fart',
+            { id: 'lyft1', namn: 'Lyft 1 kg 0,6 m', sub: 'med jämn fart',
               cfg: { lage: 'lyft', obj: 'lada', m: 1, mu: 0, F: 1 * G, v: 90, s: 0.6, v0: 0.25 }, verkligTid: true },
-            { id: 'lyft2', namn: 'Lyft 2 kg 0,3 m', sub: 'samma arbete?',
+            { id: 'lyft2', namn: 'Lyft 2 kg 0,3 m', sub: 'samma arbete?',
               cfg: { lage: 'lyft', obj: 'lada', m: 2, mu: 0, F: 2 * G, v: 90, s: 0.3, v0: 0.25 }, verkligTid: true },
             { id: 'broms', namn: 'Bromsa vagnen', sub: 'Utforska: v = 150°',
               cfg: { lage: 'dra', obj: 'vagn', m: 2, mu: 0, F: 6, v: 150, s: 1.5, v0: 1.2 }, utforska: true },
@@ -1417,7 +1417,7 @@
                     if (M.krafter(st, c).stopp) return { rubrik: 'Ingen förflyttning, inget arbete',
                         text: `Kraften drar bakåt, men föremålet står mot stoppklossen och kan inte röra sig. Sträckan är 0, så W = 0. Ge vagnen en startfart framåt för att se kraften bromsa den.` };
                     return { rubrik: 'Ingen förflyttning, inget arbete',
-                        text: `Dynamometern visar ${fmt(c.F, 1)} N, och komposanten längs bänken är ${fmt(Fs0, 1)} N. Friktionen håller emot lika mycket och föremålet står kvar. Sträckan är 0, så W = ${fmt(Fs0, 1)} N · 0 m = 0. En stor kraft räcker inte: något måste också flyttas.` };
+                        text: `Dynamometern visar ${fmt(c.F, 1)} N, och komposanten längs bänken är ${fmt(Fs0, 1)} N. Friktionen håller emot lika mycket och föremålet står kvar. Sträckan är 0, så W = ${fmt(Fs0, 1)} N · 0 m = 0. En stor kraft räcker inte: något måste också flyttas.` };
                 }
                 const dEk = e.Ek - e.Ek0;
                 const delar = [];
@@ -1824,8 +1824,8 @@
                                 <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Arbetet är en area</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
                                     Ritar man kraften i rörelsens riktning mot sträckan blir arbetet <em>W</em> = <em>F</em><sub>s</sub> · <em>s</em> arean
-                                    under grafen, eftersom en rektangels area är höjd gånger bredd. Varje ruta i diagrammet är 10 N gånger 0,1 m,
-                                    alltså 1 Nm = 1 J. Ändras kraften under vägen blir ytan trappformad, men arbetet är fortfarande arean.
+                                    under grafen, eftersom en rektangels area är höjd gånger bredd. Varje ruta i diagrammet är 10 N gånger 0,1 m,
+                                    alltså 1 Nm = 1 J. Ändras kraften under vägen blir ytan trappformad, men arbetet är fortfarande arean.
                                 </p>
                             </div>
                             <div className="glass-card rounded-xl p-4">
@@ -1856,8 +1856,8 @@
                                     men energin som musklerna gör av med blir värme i kroppen.</li>
                                 <li><strong>”Större kraft ger alltid större arbete.”</strong> Bara om sträckan och vinkeln är desamma. En stor kraft i
                                     stor vinkel kan ge mindre arbete än en liten kraft rakt framåt.</li>
-                                <li><strong>”Det tyngre föremålet kräver alltid mer arbete att lyfta.”</strong> Det beror också på höjden. Att lyfta 1 kg 0,6 m uppåt ger
-                                    samma arbete som att lyfta 2 kg 0,3 m, eftersom arbetet är kraft gånger sträcka.</li>
+                                <li><strong>”Det tyngre föremålet kräver alltid mer arbete att lyfta.”</strong> Det beror också på höjden. Att lyfta 1 kg 0,6 m uppåt ger
+                                    samma arbete som att lyfta 2 kg 0,3 m, eftersom arbetet är kraft gånger sträcka.</li>
                                 <li><strong>”Tyngdkraften och normalkraften uträttar arbete när lådan dras längs bänken.”</strong> Nej. Båda är
                                     vinkelräta mot rörelsen, så deras komposant längs rörelsen är noll.</li>
                                 <li><strong>”Arbete kan inte vara negativt.”</strong> Jo. Pekar kraften bakåt mot rörelsen tar den energi från föremålet.

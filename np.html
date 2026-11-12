@@ -450,7 +450,7 @@
            figuren avhuggen i underkant (uppgift 11 i Ma 2c VT2022, påpekat
            2026-09-13). I stället läggs figuren bredvid texten och krymps
            efter skärmhöjden så att kortet håller sig under NP_FAST_TAK
-           (38 % av höjden). Ryms det ändå inte (lång frågestam) släpper
+           (38 % av höjden). Ryms det ändå inte (lång frågestam) släpper
            UppgiftView nålen med .np-fraga-los: kortet rullar då med sidan
            som ett vanligt kort. Se "Fastnålade uppgiftsrutor" i CLAUDE.md
            och node .claude/verify-uppgiftsruta.js. */
@@ -463,7 +463,7 @@
         .np-fraga-fast.np-fraga-los { position: static; box-shadow: none; }
         /* Rutnät, inte float: en float lägger sig bara bredvid text som
            KOMMER EFTER den i DOM:en, och figuren renderas efter frågan.
-           Figurkolumnen får högst 42 % av bredden; svg:n krymps i höjd
+           Figurkolumnen får högst 42 % av bredden; svg:n krymps i höjd
            efter skärmen (så att kortet ryms) och i bredd efter kolumnen. */
         .np-fraga-fast,
         .np-pres .np-pres-fraga-fast .np-fraga {
@@ -958,7 +958,7 @@
 
         /* Fastnålad uppgiftstext även i presentationsläget — frågekortet
            klistras mot overlayens överkant medan lösningsstegen rullar
-           under. Hålls odimmad (övriga tidigare steg tonas till 38 %)
+           under. Hålls odimmad (övriga tidigare steg tonas till 38 %)
            eftersom den ska gå att läsa hela tiden. */
         /* .lab-article-body har overflow-x:hidden, vilket gör kroppen till
            en egen (oskrollbar) scroll-container och dödar sticky mot

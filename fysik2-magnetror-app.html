@@ -234,7 +234,7 @@
         const CMEND = BENCH_Y - MAG.hh;        // magnetens mittpunkt när den landat på bänken
         const TUBELEN_M = 0.30;                // rörets längd i meter
         const PXM = (TUBE.botY - TUBE.topY) / TUBELEN_M;   // px per meter (= 840)
-        const TRAVEL_M = (CMEND - CM0) / PXM;  // hela fallhöjden, rör + fri luft (≈ 0,40 m)
+        const TRAVEL_M = (CMEND - CM0) / PXM;  // hela fallhöjden, rör + fri luft (≈ 0,40 m)
 
         const fmt = (num, decimals = 1) => {
             if (!isFinite(num)) return '–';

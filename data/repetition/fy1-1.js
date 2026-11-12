@@ -66,7 +66,7 @@ window.REPETITION['fy1-1'] = {
                 { text: 'Man ska avrunda efter varje delberäkning i en uppgift.',
                   sant: false, varfor: 'Avrunda först i slutet — avrundar man i varje steg kan felet i slutsvaret bli stort.' },
                 { text: 'Prefixet "centi" motsvarar tiopotensen $10^{-2}$.',
-                  sant: true, varfor: 'Centi (c) står för $10^{-2}$ — 1 cm är alltså 0,01 m.' },
+                  sant: true, varfor: 'Centi (c) står för $10^{-2}$ — 1 cm är alltså 0,01 m.' },
                 { text: 'En hypotes som motbevisas i ett experiment blir automatiskt en lag.',
                   sant: false, varfor: 'En hypotes blir en lag om experimenten STÖDJER den, inte om den motbevisas.' },
                 { text: 'SI-systemet bygger på sju grundenheter, bland annat meter, kilogram och sekund.',

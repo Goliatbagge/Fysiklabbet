@@ -226,7 +226,7 @@
         var snapBtn = document.createElement('button');
         snapBtn.type = 'button';
         snapBtn.className = 'lab-btn';
-        snapBtn.textContent = 'Alvas mätning (6,75 m)';
+        snapBtn.textContent = 'Alvas mätning (6,75 m)';
         snapBtn.addEventListener('click', function () {
             state.poleShadow = 6.75;
             rowShadow.sync();

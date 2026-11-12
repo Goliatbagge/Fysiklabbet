@@ -420,17 +420,17 @@
             { k: 'led',   namn: 'LED-lampa 8 W',   P: 8,    eta: 0.38, nytta: 'Ljus',  forlust: 'Värme', typ: 'led' },
             { k: 'glod85',namn: 'Glödlampa 8,5 W', P: 8.5,  eta: 0.05, nytta: 'Ljus',  forlust: 'Värme', typ: 'lampa' },
             { k: 'led1',  namn: 'LED-lampa 1,1 W (samma ljus)', P: 1.1, eta: 0.38, nytta: 'Ljus', forlust: 'Värme', typ: 'led' },
-            { k: 'kok',   namn: 'Vattenkokare 2 000 W, 6 min per dygn', P: 2000, eta: 0.90, paPerDygn: 0.1, nytta: 'Varmt vatten', forlust: 'Värme i rummet', typ: 'kok' },
-            { k: 'akv',   namn: 'Akvarievärmare 25 W', P: 25, eta: 1.0, nytta: 'Varmt vatten', forlust: 'Ingen förlust', typ: 'akv' },
-            { k: 'lad',   namn: 'Mobilladdare 10 W, 2 h per dygn', P: 10, eta: 0.85, paPerDygn: 2, nytta: 'Kemisk energi', forlust: 'Värme', typ: 'lad' },
-            { k: 'tv',    namn: 'Äldre tv i viloläge 1 W', P: 1, eta: 0, nytta: 'Ingen nytta', forlust: 'Värme', typ: 'tv' },
+            { k: 'kok',   namn: 'Vattenkokare 2 000 W, 6 min per dygn', P: 2000, eta: 0.90, paPerDygn: 0.1, nytta: 'Varmt vatten', forlust: 'Värme i rummet', typ: 'kok' },
+            { k: 'akv',   namn: 'Akvarievärmare 25 W', P: 25, eta: 1.0, nytta: 'Varmt vatten', forlust: 'Ingen förlust', typ: 'akv' },
+            { k: 'lad',   namn: 'Mobilladdare 10 W, 2 h per dygn', P: 10, eta: 0.85, paPerDygn: 2, nytta: 'Kemisk energi', forlust: 'Värme', typ: 'lad' },
+            { k: 'tv',    namn: 'Äldre tv i viloläge 1 W', P: 1, eta: 0, nytta: 'Ingen nytta', forlust: 'Värme', typ: 'tv' },
         ];
         const app = (k) => APPARATER.find((a) => a.k === k);
         const TAKTER = [
-            { k: 'min',  namn: '1 s = 1 min',  hPerS: 1 / 60 },
-            { k: 'h',    namn: '1 s = 1 h',    hPerS: 1 },
-            { k: 'dygn', namn: '1 s = 1 dygn', hPerS: 24 },
-            { k: 'vecka', namn: '1 s = 1 vecka', hPerS: 168 },
+            { k: 'min',  namn: '1 s = 1 min',  hPerS: 1 / 60 },
+            { k: 'h',    namn: '1 s = 1 h',    hPerS: 1 },
+            { k: 'dygn', namn: '1 s = 1 dygn', hPerS: 24 },
+            { k: 'vecka', namn: '1 s = 1 vecka', hPerS: 168 },
         ];
 
         // ════════════════════════════════════════════════════════
@@ -578,7 +578,7 @@
                     <rect x={xh} y="-10" width={DB} height="20" rx="5" fill="#e5e9ee" stroke="#7b8594" strokeWidth="1.4" />
                     <rect x={xh + DB - 18} y="-10" width="8" height="20" fill="#c8324a" opacity="0.85" />
                     <text x={xh + 30} y="4.5" fontSize="12" fontWeight="700" fill="#4b5563" fontFamily="Poppins, sans-serif" textAnchor="middle"
-                          transform={uppochner ? `rotate(180 ${xh + 30} 0)` : undefined}>0–20 N</text>
+                          transform={uppochner ? `rotate(180 ${xh + 30} 0)` : undefined}>0–20 N</text>
                 </g>
             );
         };
@@ -726,7 +726,7 @@
                             <Pil x1={x0 - steg * stegB - 18} y1={BANK} x2={x0 - steg * stegB - 18} y2={BANK - H * S_TRAPPA} color="rgba(15,22,32,0.7)" width={1.6} head={9} />
                             <Pil x1={x0 - steg * stegB - 18} y1={BANK - H * S_TRAPPA} x2={x0 - steg * stegB - 18} y2={BANK} color="rgba(15,22,32,0.7)" width={1.6} head={9} />
                             <text x={x0 - steg * stegB - 18} y={BANK - H * S_TRAPPA - 12} textAnchor="middle" fontSize="15" fill={COL.ink} fontFamily="Poppins, sans-serif">
-                                <tspan fontStyle="italic">h</tspan> = 4,0 m</text>
+                                <tspan fontStyle="italic">h</tspan> = 4,0 m</text>
                             <Emilia x={xP} y={(() => {
                                 // fötterna på steget hon står på
                                 const i = Math.floor((x0 - xP) / stegB);
@@ -1060,7 +1060,7 @@
                             <span style={{ display: 'inline-block' }}><em>η</em> = {fmt(eta, 2)} = {fmt(eta * 100, 0)} %</span>
                         </span>
                     ) : (
-                        <span className="fnum-live">1 kWh = 1 000 W · 3 600 s = 3,6 · 10<sup>6</sup> J</span>
+                        <span className="fnum-live">1 kWh = 1 000 W · 3 600 s = 3,6 · 10<sup>6</sup> J</span>
                     )}
                 </div>
             </div>
@@ -1070,14 +1070,14 @@
         //  FÄRDIGA FÖRSÖK
         // ════════════════════════════════════════════════════════
         const FORSOK = [
-            { id: 'p5',  namn: 'Lyft med 5 W', sub: 'elmotor, 1 kg, 0,8 m', cfg: { lage: 'lyft', motor: 'el', Pt: 5, m: 1, h: 0.8 } },
-            { id: 'p10', namn: 'Samma lyft med 10 W', sub: 'dubbel effekt', cfg: { lage: 'lyft', motor: 'el', Pt: 10, m: 1, h: 0.8 } },
-            { id: 'gam', namn: 'Leksaksmotor', sub: '10 W, η = 25 %', cfg: { lage: 'lyft', motor: 'leksak', Pt: 10, m: 1, h: 0.8 } },
-            { id: 'ny',  namn: 'Elmotor', sub: '10 W, η = 70 %', cfg: { lage: 'lyft', motor: 'el', Pt: 10, m: 1, h: 0.8 } },
-            { id: 'gar', namn: 'Emilia går', sub: '60 kg, 4,0 m på 10 s', cfg: { lage: 'lyft', emilia: 'ga' } },
-            { id: 'spr', namn: 'Emilia springer', sub: 'samma trappa på 2,5 s', cfg: { lage: 'lyft', emilia: 'spring' } },
+            { id: 'p5',  namn: 'Lyft med 5 W', sub: 'elmotor, 1 kg, 0,8 m', cfg: { lage: 'lyft', motor: 'el', Pt: 5, m: 1, h: 0.8 } },
+            { id: 'p10', namn: 'Samma lyft med 10 W', sub: 'dubbel effekt', cfg: { lage: 'lyft', motor: 'el', Pt: 10, m: 1, h: 0.8 } },
+            { id: 'gam', namn: 'Leksaksmotor', sub: '10 W, η = 25 %', cfg: { lage: 'lyft', motor: 'leksak', Pt: 10, m: 1, h: 0.8 } },
+            { id: 'ny',  namn: 'Elmotor', sub: '10 W, η = 70 %', cfg: { lage: 'lyft', motor: 'el', Pt: 10, m: 1, h: 0.8 } },
+            { id: 'gar', namn: 'Emilia går', sub: '60 kg, 4,0 m på 10 s', cfg: { lage: 'lyft', emilia: 'ga' } },
+            { id: 'spr', namn: 'Emilia springer', sub: 'samma trappa på 2,5 s', cfg: { lage: 'lyft', emilia: 'spring' } },
             { id: 'lam', namn: 'Glödlampa och LED-lampa', sub: 'lika mycket ljus, ett dygn', cfg: { lage: 'app', A: 'glod', B: 'led', takt: 'h', tMax: 24 } },
-            { id: 'glom', namn: 'Den glömda glödlampan', sub: '8,5 W i två dygn, mot en LED-lampa', cfg: { lage: 'app', A: 'glod85', B: 'led1', takt: 'dygn', tMax: 48 } },
+            { id: 'glom', namn: 'Den glömda glödlampan', sub: '8,5 W i två dygn, mot en LED-lampa', cfg: { lage: 'app', A: 'glod85', B: 'led1', takt: 'dygn', tMax: 48 } },
             { id: 'kok', namn: 'Vattenkokare och akvarium', sub: 'stor effekt under kort tid', cfg: { lage: 'app', A: 'kok', B: 'akv', takt: 'h', tMax: 24 } },
             { id: 'tv',  namn: 'Tv i viloläge', sub: 'mot laddaren, under ett år', cfg: { lage: 'app', A: 'tv', B: 'lad', takt: 'vecka', tMax: 365 * 24 } },
         ];
@@ -1323,7 +1323,7 @@
                     </Sl>
                 );
                 if (lage === 'lyft') {
-                    if (emilia) return <p className="text-xs mb-1" style={{ color: 'var(--lab-ink-soft)' }}>Emilia väger 60 kg och trappan är 4,0 m hög. Välj ett annat försök eller läget Lyft för att ställa in egna värden.</p>;
+                    if (emilia) return <p className="text-xs mb-1" style={{ color: 'var(--lab-ink-soft)' }}>Emilia väger 60 kg och trappan är 4,0 m hög. Välj ett annat försök eller läget Lyft för att ställa in egna värden.</p>;
                     return (
                         <React.Fragment>
                             {rad('Tillförd effekt <em>P</em><sub>t</sub>', Pt, 2, 20, 0.5, setPt, (x) => fmt(x, 1), 'W')}
@@ -1404,7 +1404,7 @@
                                 </div>
                                 <p className="text-sm mt-2" style={{ color: 'var(--lab-ink-soft)' }}>
                                     {lage === 'lyft' && emilia
-                                        ? 'Exempel 1 i genomgången söker den nyttiga effekten, den som ökar Emilias lägesenergi: 0,24 kW när hon går och 0,94 kW när hon springer. Kroppen har en verkningsgrad på ungefär 20 %, så den tillförda effekten från maten är omkring fem gånger så stor, och resten blir värme.'
+                                        ? 'Exempel 1 i genomgången söker den nyttiga effekten, den som ökar Emilias lägesenergi: 0,24 kW när hon går och 0,94 kW när hon springer. Kroppen har en verkningsgrad på ungefär 20 %, så den tillförda effekten från maten är omkring fem gånger så stor, och resten blir värme.'
                                         : lage === 'lyft'
                                         ? 'Motorn lyfter vikten med jämn fart till den röda linjen. Energimätaren visar den tillförda effekten och energin, och stoppuret tiden. Igångsättningen försummas.'
                                         : 'Tiden snabbspolas. Energin räknas i kilowattimmar, och kostnaden räknas ut med elpriset. Effekterna och verkningsgraderna är ungefärliga.'}
@@ -1442,7 +1442,7 @@
                                                 ))}
                                             </div>
                                             <div className="mode-seg">
-                                                {[[1, '1 h'], [24, '1 dygn'], [48, '2 dygn'], [365 * 24, '1 år']].map(([t, n]) => (
+                                                {[[1, '1 h'], [24, '1 dygn'], [48, '2 dygn'], [365 * 24, '1 år']].map(([t, n]) => (
                                                     <button key={t} className={tMaxApp === t ? 'active' : ''} disabled={kor} onClick={() => setTMaxApp(t)} style={{ fontSize: 12 }}>{n}</button>
                                                 ))}
                                             </div>
@@ -1519,7 +1519,7 @@
                                 <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Energi och effekt</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
                                     Energin är hur mycket som omvandlas och mäts i joule. Effekten är hur snabbt det sker, <em>P</em> = <Brak t={<span>Δ<em>E</em></span>} n={<span>Δ<em>t</em></span>} />,
-                                    och mäts i watt: 1 W = 1 J/s. I diagrammet över energin mot tiden är effekten lutningen. Samma lyft med dubbel effekt
+                                    och mäts i watt: 1 W = 1 J/s. I diagrammet över energin mot tiden är effekten lutningen. Samma lyft med dubbel effekt
                                     kräver samma energi men tar halva tiden.
                                 </p>
                             </div>
@@ -1534,8 +1534,8 @@
                             <div className="glass-card rounded-xl p-4">
                                 <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Kilowattimmar</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                    På elräkningen betalar man för energi, inte effekt. 1 kWh är energin som omvandlas på en timme med effekten 1 000 W:
-                                    1 kWh = 1 000 W · 3 600 s = 3,6 · 10<sup>6</sup> J. En apparat med liten effekt kan därför kosta mer än en med stor
+                                    På elräkningen betalar man för energi, inte effekt. 1 kWh är energin som omvandlas på en timme med effekten 1 000 W:
+                                    1 kWh = 1 000 W · 3 600 s = 3,6 · 10<sup>6</sup> J. En apparat med liten effekt kan därför kosta mer än en med stor
                                     effekt, om den är på mycket längre.
                                 </p>
                             </div>
@@ -1552,7 +1552,7 @@
                                     Jämför vattenkokaren och laddaren under ett dygn.</li>
                                 <li><strong>”Energi försvinner i en dålig motor.”</strong> Nej, den blir värme. Verkningsgraden säger hur stor andel
                                     som blir det man vill ha.</li>
-                                <li><strong>”Verkningsgraden kan bli större än 100 %.”</strong> Aldrig. Då skulle apparaten ge ut mer energi än den får.</li>
+                                <li><strong>”Verkningsgraden kan bli större än 100 %.”</strong> Aldrig. Då skulle apparaten ge ut mer energi än den får.</li>
                                 <li><strong>”kW och kWh är samma enhet.”</strong> Nej. kW är effekt (hur snabbt), kWh är energi (hur mycket).</li>
                             </ul>
                         </details>

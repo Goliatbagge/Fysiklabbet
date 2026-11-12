@@ -312,7 +312,7 @@
        vid en given tidpunkt räknas fram med SGP4 (satellite.js), samma
        modell som de som publicerar banelementen använder. Varje bildruta
        räknas en del av satelliterna om exakt (så många som hinns på
-       ~5 ms); övriga flyttas fram från sin senaste exakta position med
+       ~5 ms); övriga flyttas fram från sin senaste exakta position med
        hastigheten och gravitationsaccelerationen. Hela flottan förnyas
        därmed flera gånger i sekunden.
 
@@ -1275,7 +1275,7 @@
                 for (let v = 0; v <= DIAG_VMAX; v += 2) c.fillText(String(v), X(0) - 6, Y(v));
                 c.fillStyle = ink; c.textAlign = 'right'; c.textBaseline = 'top';
                 c.font = 'italic 13px Poppins, sans-serif';
-                const xl = T('r (1 000 km)');
+                const xl = T('r (1 000 km)');
                 c.fillText(xl, W - 4, Y(0) + 18);
                 c.textAlign = 'left'; c.textBaseline = 'middle';
                 c.fillText(T('v (km/s)'), X(0) + 9, 10);
@@ -1328,15 +1328,15 @@
         // ── Färdiga försök ──
         const PRESETS = [
             { id: 'iss', kort: 'ISS', namn: 'Rymdstationen ISS', grupp: 'stationer', hitta: (s) => s.id === 25544, avst: 4.4,
-              text: 'Rymdstationen ISS på drygt 400 km höjd, ett varv på drygt 90 minuter. Följ den över dag- och nattsidan.' },
+              text: 'Rymdstationen ISS på drygt 400 km höjd, ett varv på drygt 90 minuter. Följ den över dag- och nattsidan.' },
             { id: 'hubble', kort: 'Hubble', namn: 'Hubble', grupp: 'vetenskap', hitta: (s) => s.id === 20580, avst: 4.4,
               text: 'Rymdteleskopet Hubble, exemplet i genomgången. Kontrollera själv att farten stämmer med gravitationslagen för höjden just nu.' },
             { id: 'gps', kort: 'GPS', namn: 'GPS-satellit', grupp: 'navigering', hitta: [(s) => /^GPS BIII/.test(s.namn), (s) => /^GPS /.test(s.namn)], avst: 9.5,
-              text: 'GPS-satelliterna går på drygt 20 000 km höjd, två varv per stjärndygn. Högre upp är farten lägre.' },
+              text: 'GPS-satelliterna går på drygt 20 000 km höjd, två varv per stjärndygn. Högre upp är farten lägre.' },
             { id: 'meteosat', kort: 'Geostationär', namn: 'Geostationär', grupp: 'vader', hitta: [(s) => /^METEOSAT-11/.test(s.namn), (s) => /^METEOSAT/.test(s.namn)], avst: 15,
-              text: 'Vädersatelliten Meteosat på 35 786 km höjd: ett varv tar lika lång tid som jordens rotation, så den står stilla över Afrika och tar bilderna i väderprognosen.' },
+              text: 'Vädersatelliten Meteosat på 35 786 km höjd: ett varv tar lika lång tid som jordens rotation, så den står stilla över Afrika och tar bilderna i väderprognosen.' },
             { id: 'starlink', kort: 'Starlink', namn: 'Starlink', grupp: 'starlink', hitta: (s) => /^STARLINK/.test(s.namn), avst: 4.4,
-              text: 'Tiotusen Starlink-satelliter på 340–570 km höjd. Alla i samma höjd har samma fart, oavsett massa.' },
+              text: 'Tiotusen Starlink-satelliter på 340–570 km höjd. Alla i samma höjd har samma fart, oavsett massa.' },
         ];
 
         const NumSvar = ({ onSvar, disabled }) => {
@@ -1826,7 +1826,7 @@
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
                                     Sätter man gravitationskraften lika med centripetalkraften, <em>G</em> · <em>m</em> · <em>m</em><sub>j</sub> / <em>r</em>²
                                     = <em>m</em> · <em>v</em>² / <em>r</em>, försvinner satellitens massa <em>m</em>. Rymdstationen ISS väger
-                                    420 ton och en liten forskningssatellit några kilo, men på samma höjd har de samma fart. Därför hamnar
+                                    420 ton och en liten forskningssatellit några kilo, men på samma höjd har de samma fart. Därför hamnar
                                     alla satelliter i diagrammet på samma kurva.
                                 </p>
                             </div>
@@ -1834,8 +1834,8 @@
                                 <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Högre upp, långsammare och längre varv</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
                                     Längre ut är gravitationskraften svagare, så det behövs mindre fart för att hålla kvar satelliten i
-                                    banan. Samtidigt blir banan längre. ISS går ett varv på drygt 90 minuter, en GPS-satellit på knappt
-                                    12 timmar och en geostationär satellit på 23 timmar och 56 minuter, lika länge som det tar för jorden
+                                    banan. Samtidigt blir banan längre. ISS går ett varv på drygt 90 minuter, en GPS-satellit på knappt
+                                    12 timmar och en geostationär satellit på 23 timmar och 56 minuter, lika länge som det tar för jorden
                                     att rotera ett varv. Den står därför stilla över samma punkt på ekvatorn.
                                 </p>
                             </div>
@@ -1855,12 +1855,12 @@
                                 <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
                             </summary>
                             <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                <li><strong>”Satelliterna är långt ute i rymden.”</strong> De flesta går mindre än 600 km över jordytan,
+                                <li><strong>”Satelliterna är långt ute i rymden.”</strong> De flesta går mindre än 600 km över jordytan,
                                     ungefär avståndet mellan Stockholm och Malmö. Zooma in och se hur tätt intill jorden molnet av prickar ligger.</li>
                                 <li><strong>”I rymden finns ingen gravitation.”</strong> På ISS höjd är gravitationskraften ungefär
-                                    90 procent av den vid jordytan. Det är just den kraften som håller stationen i banan. Astronauterna svävar
+                                    90 procent av den vid jordytan. Det är just den kraften som håller stationen i banan. Astronauterna svävar
                                     eftersom de och stationen faller fritt tillsammans.</li>
-                                <li><strong>”En geostationär satellit står still.”</strong> Den rör sig med drygt 3 000 m/s, men jorden
+                                <li><strong>”En geostationär satellit står still.”</strong> Den rör sig med drygt 3 000 m/s, men jorden
                                     roterar lika fort under den. Sett från marken står den stilla, sett från rymden går den ett helt varv per dygn.</li>
                                 <li><strong>”En satellit behöver motorer för att hålla farten.”</strong> Ingen kraft verkar framåt eller
                                     bakåt, bara gravitationskraften mot jordens medelpunkt, vinkelrätt mot hastigheten. Den ändrar riktningen

@@ -1841,8 +1841,8 @@ function makeBridge(opts) {
     b += text(xM - 11, yU - 9, opts.pLabel || 'P', 'end');
     b += text(xM - 11, yLo + 18, opts.qLabel || 'Q', 'end');
     // Jordning (0 V)
-    if (grd === 'A') { b += gnd(xL, yLo); b += text(xL, yLo + 48, '0 V'); }
-    else if (grd === 'B') { b += gnd(xR, yLo); b += text(xR, yLo + 48, '0 V'); }
+    if (grd === 'A') { b += gnd(xL, yLo); b += text(xL, yLo + 48, '0 V'); }
+    else if (grd === 'B') { b += gnd(xR, yLo); b += text(xR, yLo + 48, '0 V'); }
 
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" style="max-width:${W}px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif">${b}</svg>`;
 }
@@ -2804,7 +2804,7 @@ function makeEnergyLevels(opts) {
 
     // Jonisationsgräns (0 eV) — streckad linje överst
     body += `<line x1="${axX}" y1="${boundTop.toFixed(1)}" x2="${lineR}" y2="${boundTop.toFixed(1)}" stroke="${SCENE_MUTED}" stroke-width="1.2" stroke-dasharray="5 4"/>`;
-    body += sceneText((axX + lineR) / 2 + 10, boundTop - 9, 'jonisationsgräns (0 eV)', { size: 11, color: SCENE_MUTED });
+    body += sceneText((axX + lineR) / 2 + 10, boundTop - 9, 'jonisationsgräns (0 eV)', { size: 11, color: SCENE_MUTED });
 
     // Valfri övergångspil (ritas under nivålinjerna så pilspetsen syns)
     if (opts.transition) {
@@ -2968,7 +2968,7 @@ $$ v_\\mathrm{m} = \\frac{12}{0{,}5} = 24\\ \\mathrm{km/h} $$
         },
         {
             level: 1,
-            question: `En löpare har medelfarten 4,0 m/s under 15 minuter. Hur långt har hon sprungit? Ange svaret i meter.`,
+            question: `En löpare har medelfarten 4,0 m/s under 15 minuter. Hur långt har hon sprungit? Ange svaret i meter.`,
             answer: { value: 3600, unit: 'm' },
             solution: `Vi löser ut sträckan ur medelfartsformeln:
 $$ v_\\mathrm{m} = \\frac{s}{t} \\quad\\Leftrightarrow\\quad s = v_\\mathrm{m} \\cdot t $$
@@ -3008,7 +3008,7 @@ $$ t = \\frac{270}{90} = 3{,}0\\ \\mathrm{h} $$
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `Tom cyklar 5,0 km på 20 minuter. Sedan promenerar han 2,0 km på 30 minuter. Vilken är hans medelfart i km/h under hela sträckan?`,
+            question: `Tom cyklar 5,0 km på 20 minuter. Sedan promenerar han 2,0 km på 30 minuter. Vilken är hans medelfart i km/h under hela sträckan?`,
             answer: { value: 8.4, unit: 'km/h', tol: 0.03 },
             solution: `Medelfarten under hela sträckan är **total sträcka** delat med **total tid** — inte medelvärdet av delarnas farter.
 
@@ -3173,7 +3173,7 @@ Det är just därför fysik fungerar: vi kan förutsäga vad som händer utan at
         // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
-            question: `I meningen *"sträckan är 2 500 meter"* — vad är **mätetalet**?`,
+            question: `I meningen *"sträckan är 2 500 meter"* — vad är **mätetalet**?`,
             choices: [
                 `m (symbolen för meter)`,
                 `sträckan`,
@@ -3238,7 +3238,7 @@ $$
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `En cyklist rullar 1,8 km på 5,5 minuter. Beräkna medelfarten i m/s med **korrekt antal värdesiffror**.`,
+            question: `En cyklist rullar 1,8 km på 5,5 minuter. Beräkna medelfarten i m/s med **korrekt antal värdesiffror**.`,
             answer: { value: 5.5, unit: 'm/s', tol: 0.03 },
             solution: `Vi använder medelfartsformeln efter att ha gjort om till SI-enheter (m och s):
 
@@ -3817,7 +3817,7 @@ En **tangent** däremot snuddar grafen i *en* punkt, och dess lutning är **mome
         },
         {
             level: 1,
-            question: `En lastbil färdas med medelhastigheten 65 km/h under 2,5 timmar. Hur lång är dess förflyttning under denna tid? Ange svaret i km.`,
+            question: `En lastbil färdas med medelhastigheten 65 km/h under 2,5 timmar. Hur lång är dess förflyttning under denna tid? Ange svaret i km.`,
             answer: { value: 162.5, unit: 'km', tol: 0.02 },
             solution: `Vi löser ut förflyttningen ur formeln för medelhastighet:
 
@@ -3867,7 +3867,7 @@ $$
         },
         {
             level: 2,
-            question: `En joggare springer 1,8 km rakt norrut, vänder och springer sedan 0,6 km rakt söderut. Hela rörelsen tar 12 minuter. Vad är hennes **medelhastighet**? Räkna nord som positiv riktning och ange svaret i m/s.`,
+            question: `En joggare springer 1,8 km rakt norrut, vänder och springer sedan 0,6 km rakt söderut. Hela rörelsen tar 12 minuter. Vad är hennes **medelhastighet**? Räkna nord som positiv riktning och ange svaret i m/s.`,
             answer: { value: 1.67, unit: 'm/s', tol: 0.03 },
             solution: `Medelhastigheten är **förflyttningen** delat med tiden — inte sträckan.
 
@@ -3948,7 +3948,7 @@ $$
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Anna börjar cykla från en startpunkt med den konstanta farten 4,0 m/s i en rak linje. **30 sekunder senare** börjar Beata cykla samma resa från samma startpunkt med den konstanta farten 6,0 m/s.
+            question: `Anna börjar cykla från en startpunkt med den konstanta farten 4,0 m/s i en rak linje. **30 sekunder senare** börjar Beata cykla samma resa från samma startpunkt med den konstanta farten 6,0 m/s.
 
 a) Vid vilken tidpunkt (mätt från Annas start) hinner Beata ifatt Anna?
 
@@ -4056,7 +4056,7 @@ $$
         },
         {
             level: 1,
-            question: `En cyklist rullar med farten 5,0 m/s och accelererar konstant med 0,80 m/s² i 4,0 sekunder. Vilken är hans sluthastighet?`,
+            question: `En cyklist rullar med farten 5,0 m/s och accelererar konstant med 0,80 m/s² i 4,0 sekunder. Vilken är hans sluthastighet?`,
             answer: { value: 8.2, unit: 'm/s', tol: 0.02 },
             solution: `Vi använder formeln för hastighet vid konstant acceleration:
 
@@ -4135,7 +4135,7 @@ $$
 
         {
             level: 2,
-            question: `En passagerare i en bil noterar att hastighetsmätaren visar 50 km/h, och 8,0 sekunder senare visar den 80 km/h.
+            question: `En passagerare i en bil noterar att hastighetsmätaren visar 50 km/h, och 8,0 sekunder senare visar den 80 km/h.
 
 a) Vilken är medelaccelerationen i SI-enheter (m/s²)?
 
@@ -4647,7 +4647,7 @@ $$
         // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
-            question: `En bil rullar med 12 m/s och accelererar konstant med 2,5 m/s² i 6,0 sekunder. Hur långt rullar bilen under denna tid? Använd $s = v_0 t + \\dfrac{1}{2} a t^{2}$.`,
+            question: `En bil rullar med 12 m/s och accelererar konstant med 2,5 m/s² i 6,0 sekunder. Hur långt rullar bilen under denna tid? Använd $s = v_0 t + \\dfrac{1}{2} a t^{2}$.`,
             answer: { value: 117, unit: 'm', tol: 0.02 },
             solution: `Vi sätter in värdena i formeln för sträcka vid konstant acceleration:
 
@@ -4672,7 +4672,7 @@ $$
         },
         {
             level: 1,
-            question: `En kropp startar från vila (*v*₀ = 0) och har konstant acceleration *a* = 1,5 m/s² under 4,0 sekunder. Hur långt rör sig kroppen?`,
+            question: `En kropp startar från vila (*v*₀ = 0) och har konstant acceleration *a* = 1,5 m/s² under 4,0 sekunder. Hur långt rör sig kroppen?`,
             answer: { value: 12, unit: 'm', tol: 0.02 },
             solution: `Eftersom *v*₀ = 0 förenklas sträckformeln:
 
@@ -5616,7 +5616,7 @@ $$
         },
         {
             level: 2,
-            question: `En bil med massan 1 200 kg accelererar från 0 till 90 km/h på 12 sekunder. Beräkna den **genomsnittliga** resulterande kraften på bilen under accelerationen.`,
+            question: `En bil med massan 1 200 kg accelererar från 0 till 90 km/h på 12 sekunder. Beräkna den **genomsnittliga** resulterande kraften på bilen under accelerationen.`,
             penna: 'ov-fy1-3.2-u8',
             answer: { value: 2500, unit: 'N', tol: 0.03 },
             solution: `Vi räknar först ut accelerationen i SI-enheter, sedan sätter in i Newtons andra lag.
@@ -5645,7 +5645,7 @@ $$
         {
             level: 2,
             penna: 'ov-fy1-3.2-u9',
-            question: `Diagrammet visar hastigheten för en motorbåt med massan 750 kg som accelererar från stillastående. Beräkna den resulterande kraften på båten under de första 8,0 sekunderna.
+            question: `Diagrammet visar hastigheten för en motorbåt med massan 750 kg som accelererar från stillastående. Beräkna den resulterande kraften på båten under de första 8,0 sekunderna.
 
 ${makeDiagram({
     xMax: 12, yMax: 12,
@@ -7042,7 +7042,7 @@ $$
         {
             level: 3,
             penna: 'ov-fy1-3.6-u11',
-            question: `En framhjulsdriven bil med massan 1 400 kg står på torr asfalt, där friktionstalet mellan däck och väg är 0,90. Hälften av bilens tyngd vilar på de drivande framhjulen.<br>a) Hur stor är den största acceleration bilen kan få utan att drivhjulen spinner loss?<br>b) Hur kort kan tiden 0–100 km/h då som bäst bli?
+            question: `En framhjulsdriven bil med massan 1 400 kg står på torr asfalt, där friktionstalet mellan däck och väg är 0,90. Hälften av bilens tyngd vilar på de drivande framhjulen.<br>a) Hur stor är den största acceleration bilen kan få utan att drivhjulen spinner loss?<br>b) Hur kort kan tiden 0–100 km/h då som bäst bli?
 
 *Ange tiden (b) som ditt numeriska svar i s. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
             answer: { value: 6.29, unit: 's', tol: 0.03 },
@@ -7324,7 +7324,7 @@ $$
 F_{f,\\max} = \\mu \\cdot m \\cdot g \\cdot \\cos\\alpha = 0{,}35 \\cdot 6{,}0 \\cdot 9{,}82 \\cdot \\cos 31^{\\circ} = 17{,}676\\ldots\\ \\mathrm{N}
 $$
 
-Eftersom $F_1 > F_{f,\\max}$ (ungefär 30 N mot högst 18 N) kommer lådan att accelerera nedför planet.
+Eftersom $F_1 > F_{f,\\max}$ (ungefär 30 N mot högst 18 N) kommer lådan att accelerera nedför planet.
 
 Alternativ kontroll: jämför $\\tan\\alpha$ med $\\mu$. Om $\\tan\\alpha > \\mu$ glider lådan. $\\tan 31^{\\circ} \\approx 0{,}60 > 0{,}35$ ✓.
 
@@ -7433,9 +7433,9 @@ Klossen glider alltså **ner igen** — nu med friktionen riktad *uppför* plane
         {
             level: 1,
             penna: 'ov-fy1-3.8-u1',
-            question: `En lampa med massan 2,0 kg hänger stilla i två lika långa rep enligt figuren. Hur stor är spännkraften i vardera repet? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+            question: `En lampa med massan 2,0 kg hänger stilla i två lika långa rep enligt figuren. Hur stor är spännkraften i vardera repet? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
 
-${makeHangingRopes({ angL: 30, angR: 30, mass: '2,0 kg' })}`,
+${makeHangingRopes({ angL: 30, angR: 30, mass: '2,0 kg' })}`,
             answer: { value: 20, unit: 'N', tol: 0.03 },
             solution: `Lampan hänger stilla, så repens **lodräta komposanter** ska tillsammans vara lika stora som tyngdkraften. Figuren är symmetrisk, så vardera repet bär halva tyngden.
 
@@ -7479,12 +7479,12 @@ Alternativet "oförändrad" blandar ihop tyngdkraften, som mycket riktigt är de
         {
             level: 1,
             penna: 'ov-fy1-3.8-u3',
-            question: `Ett rep drar i en låda med spännkraften 40 N enligt figuren. Hur stor är spännkraftens **vågräta** komposant?
+            question: `Ett rep drar i en låda med spännkraften 40 N enligt figuren. Hur stor är spännkraftens **vågräta** komposant?
 
 ${makeForceDiagram({
     box: true,
     vectors: [
-        { label: 'F_S', magnitude: '40 N', angle: 25, length: 160, showAngle: true },
+        { label: 'F_S', magnitude: '40 N', angle: 25, length: 160, showAngle: true },
     ],
 })}`,
             answer: { value: 36, unit: 'N', tol: 0.03 },
@@ -7503,9 +7503,9 @@ $$
         {
             level: 2,
             penna: 'ov-fy1-3.8-u4',
-            question: `En blöt jacka med massan 1,5 kg hänger mitt på en tvättlina enligt figuren. Hur stor är spännkraften i linan? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+            question: `En blöt jacka med massan 1,5 kg hänger mitt på en tvättlina enligt figuren. Hur stor är spännkraften i linan? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
 
-${makeHangingRopes({ angL: 8, angR: 8, mass: '1,5 kg', posts: true, half: 200 })}`,
+${makeHangingRopes({ angL: 8, angR: 8, mass: '1,5 kg', posts: true, half: 200 })}`,
             answer: { value: 53, unit: 'N', tol: 0.03 },
             solution: `Jackan hänger stilla. Linans två halvor lutar lika mycket, så de bär halva tyngden var med sina lodräta komposanter.
 
@@ -7525,7 +7525,7 @@ $$
 F_\\mathrm{S} = \\frac{14{,}73}{2 \\cdot \\sin 8{,}0^{\\circ}} = 52{,}919\\ldots\\ \\mathrm{N} \\approx 53\\ \\mathrm{N}
 $$
 
-Rimlighet: linan är nästan vågrät, så bara en liten del av spännkraften pekar uppåt. Då måste spännkraften vara mycket större än tyngden, och 53 N är ungefär 3,6 gånger jackans tyngd.
+Rimlighet: linan är nästan vågrät, så bara en liten del av spännkraften pekar uppåt. Då måste spännkraften vara mycket större än tyngden, och 53 N är ungefär 3,6 gånger jackans tyngd.
 
 **Svar:** Spännkraften i linan är cirka 53 N.
 
@@ -7534,11 +7534,11 @@ Rimlighet: linan är nästan vågrät, så bara en liten del av spännkraften pe
         {
             level: 2,
             penna: 'ov-fy1-3.8-u5',
-            question: `En gatlykta med massan 3,0 kg hänger mitt på en vajer mellan två stolpar. Avståndet mellan stolparna är 4,0 m, och lyktan får vajern att hänga ned 0,50 m under linjen mellan fästpunkterna. Hur stor är spännkraften i vajern? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+            question: `En gatlykta med massan 3,0 kg hänger mitt på en vajer mellan två stolpar. Avståndet mellan stolparna är 4,0 m, och lyktan får vajern att hänga ned 0,50 m under linjen mellan fästpunkterna. Hur stor är spännkraften i vajern? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
 
-${makeHangingRopes({ angL: 14.04, angR: 14.04, mass: '3,0 kg', posts: true, half: 220, showAngles: false, spanLabel: '4,0 m', sagLabel: '0,50 m' })}`,
+${makeHangingRopes({ angL: 14.04, angR: 14.04, mass: '3,0 kg', posts: true, half: 220, showAngles: false, spanLabel: '4,0 m', sagLabel: '0,50 m' })}`,
             answer: { value: 61, unit: 'N', tol: 0.03 },
-            solution: `**Vinkeln.** Lyktan hänger mitt på vajern, så varje halva bildar en rätvinklig triangel med den vågräta kateten 2,0 m (halva avståndet) och den lodräta kateten 0,50 m. Vinkeln $\\alpha$ mot det vågräta ges av
+            solution: `**Vinkeln.** Lyktan hänger mitt på vajern, så varje halva bildar en rätvinklig triangel med den vågräta kateten 2,0 m (halva avståndet) och den lodräta kateten 0,50 m. Vinkeln $\\alpha$ mot det vågräta ges av
 
 $$
 \\tan \\alpha = \\frac{0{,}50}{2{,}0} = 0{,}25
@@ -7571,9 +7571,9 @@ $$
         {
             level: 3,
             penna: 'ov-fy1-3.8-u6',
-            question: `En låda med massan 10 kg hänger stilla i två rep enligt figuren. Rep 1 bildar vinkeln 60° och rep 2 vinkeln 30° mot det vågräta.<br>a) Bestäm spännkraften i rep 1.<br>b) Bestäm spännkraften i rep 2.
+            question: `En låda med massan 10 kg hänger stilla i två rep enligt figuren. Rep 1 bildar vinkeln 60° och rep 2 vinkeln 30° mot det vågräta.<br>a) Bestäm spännkraften i rep 1.<br>b) Bestäm spännkraften i rep 2.
 
-${makeHangingRopes({ angL: 60, angR: 30, mass: '10 kg', ropeLabels: ['rep 1', 'rep 2'] })}
+${makeHangingRopes({ angL: 60, angR: 30, mass: '10 kg', ropeLabels: ['rep 1', 'rep 2'] })}
 
 *Ange spännkraften i rep 1 (a) som ditt numeriska svar i N. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
             answer: { value: 85, unit: 'N', tol: 0.03 },
@@ -7631,7 +7631,7 @@ $$
 
 **b)** **Svar:** Spännkraften i rep 2 är cirka 49 N.
 
-Kontroll: det brantare repet (rep 1) får den största spännkraften, och båda krafterna är mindre än tyngden 98,2 N. Det stämmer med att repen här bildar rät vinkel med varandra.
+Kontroll: det brantare repet (rep 1) får den största spännkraften, och båda krafterna är mindre än tyngden 98,2 N. Det stämmer med att repen här bildar rät vinkel med varandra.
 
 **Generell slutsats:** I det asymmetriska fallet räcker det inte att dela tyngden på två. Man måste använda **båda** leden, vågrätt och lodrätt, och lösa ett ekvationssystem. Samma svar fås grafiskt med parallellogrammet i genomgången.`,
         },
@@ -7683,7 +7683,7 @@ Det är tyngdkraften som ger accelerationen, och den verkar hela tiden, även i 
         {
             level: 1,
             penna: 'ov-fy1-3.9-u3',
-            question: `En sten faller nedåt. Vid ett tillfälle är farten 3,0 m/s, och 0,50 s senare är farten 7,9 m/s. Positiv riktning är **uppåt**. Bestäm stenens acceleration med tecken.`,
+            question: `En sten faller nedåt. Vid ett tillfälle är farten 3,0 m/s, och 0,50 s senare är farten 7,9 m/s. Positiv riktning är **uppåt**. Bestäm stenens acceleration med tecken.`,
             answer: { value: -9.8, unit: 'm/s²', tol: 0.03 },
             solution: `Stenen rör sig nedåt, alltså i negativ riktning. Hastigheterna är därför negativa:
 
@@ -7710,7 +7710,7 @@ $$
         {
             level: 2,
             penna: 'ov-fy1-3.9-u4',
-            question: `En hiss är på väg **nedåt** med farten 4,0 m/s. Den bromsar jämnt och stannar på 2,5 s. Positiv riktning är uppåt. Bestäm hissens acceleration med tecken.`,
+            question: `En hiss är på väg **nedåt** med farten 4,0 m/s. Den bromsar jämnt och stannar på 2,5 s. Positiv riktning är uppåt. Bestäm hissens acceleration med tecken.`,
             answer: { value: 1.6, unit: 'm/s²', tol: 0.03 },
             solution: `Hissen rör sig nedåt, så starthastigheten är negativ. Sluthastigheten är noll:
 
@@ -7745,7 +7745,7 @@ Rimlighet: hastigheten går från $-4{,}0\\ \\mathrm{m/s}$ upp mot 0, alltså **
             correct: 2,
             solution: `Skriv hastigheten med tecken i början och i slutet för varje fall:
 
-- **Åt höger, ökar farten:** till exempel från 5 till 10 m/s. Hastigheten ökar, så accelerationen är positiv.
+- **Åt höger, ökar farten:** till exempel från 5 till 10 m/s. Hastigheten ökar, så accelerationen är positiv.
 - **Åt vänster, bromsar:** till exempel från $-10$ till $-5$ m/s. Hastigheten ökar, så accelerationen är positiv.
 - **Åt vänster, ökar farten:** till exempel från $-5$ till $-10$ m/s. Hastigheten **minskar**, så accelerationen är **negativ**.
 - **Står stilla:** hastigheten är hela tiden 0 och ändras inte, så accelerationen är noll.
@@ -7759,7 +7759,7 @@ Rimlighet: hastigheten går från $-4{,}0\\ \\mathrm{m/s}$ upp mot 0, alltså **
         {
             level: 3,
             penna: 'ov-fy1-3.9-u6',
-            question: `En tennisboll släpps mot ett golv. Den träffar golvet med farten 5,0 m/s och studsar upp igen med farten 4,0 m/s. Bollen har kontakt med golvet i 0,010 s. Bestäm bollens medelacceleration under studsen, med positiv riktning uppåt.`,
+            question: `En tennisboll släpps mot ett golv. Den träffar golvet med farten 5,0 m/s och studsar upp igen med farten 4,0 m/s. Bollen har kontakt med golvet i 0,010 s. Bestäm bollens medelacceleration under studsen, med positiv riktning uppåt.`,
             answer: { value: 900, unit: 'm/s²', tol: 0.03 },
             solution: `Fällan är att räkna med farterna: $4{,}0 - 5{,}0 = -1{,}0\\ \\mathrm{m/s}$ ger en liten negativ acceleration, och det är fel. Hastigheten måste skrivas med tecken. Före studsen rör sig bollen nedåt, efter studsen uppåt:
 
@@ -7775,7 +7775,7 @@ $$
 a = \\frac{v - v_0}{\\Delta t} = \\frac{4{,}0 - (-5{,}0)}{0{,}010} = \\frac{9{,}0}{0{,}010} = 900\\ \\mathrm{m/s^2}
 $$
 
-Rimlighet: under studsen ska bollen först bromsas från 5,0 m/s till stillastående och sedan få upp farten 4,0 m/s åt andra hållet. Hastighetsändringen är alltså summan av farterna, 9,0 m/s, och den sker på en hundradels sekund. Accelerationen blir därför enorm och riktad uppåt.
+Rimlighet: under studsen ska bollen först bromsas från 5,0 m/s till stillastående och sedan få upp farten 4,0 m/s åt andra hållet. Hastighetsändringen är alltså summan av farterna, 9,0 m/s, och den sker på en hundradels sekund. Accelerationen blir därför enorm och riktad uppåt.
 
 **Svar:** Medelaccelerationen är $900\\ \\mathrm{m/s^2}$, riktad uppåt.
 
@@ -7793,11 +7793,11 @@ Rimlighet: under studsen ska bollen först bromsas från 5,0 m/s till stillastå
         {
             level: 1,
             penna: 'ov-fy1-3.10-u1',
-            question: `Ett snöre löper över en friktionsfri trissa. Spännkraften i snörets ena ände är 12 N. Hur stor är spännkraften i snörets andra ände, på andra sidan trissan?`,
+            question: `Ett snöre löper över en friktionsfri trissa. Spännkraften i snörets ena ände är 12 N. Hur stor är spännkraften i snörets andra ände, på andra sidan trissan?`,
             choices: [
-                `Mindre än 12 N, eftersom trissan tar upp en del av kraften.`,
-                `12 N, eftersom spännkraften är lika stor i hela snöret.`,
-                `24 N, eftersom snöret drar åt två håll.`,
+                `Mindre än 12 N, eftersom trissan tar upp en del av kraften.`,
+                `12 N, eftersom spännkraften är lika stor i hela snöret.`,
+                `24 N, eftersom snöret drar åt två håll.`,
                 `Det beror på vilken av sidorna som har den tyngsta vikten.`,
             ],
             correct: 1,
@@ -7810,9 +7810,9 @@ Rimlighet: under studsen ska bollen först bromsas från 5,0 m/s till stillastå
         {
             level: 1,
             penna: 'ov-fy1-3.10-u2',
-            question: `Två vikter med massan 2,0 kg vardera hänger i ett snöre över en trissa enligt figuren och är i vila. Hur stor är spännkraften i snöret? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+            question: `Två vikter med massan 2,0 kg vardera hänger i ett snöre över en trissa enligt figuren och är i vila. Hur stor är spännkraften i snöret? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
 
-${makePulley({ kind: 'atwood', left: '2,0 kg', right: '2,0 kg' })}`,
+${makePulley({ kind: 'atwood', left: '2,0 kg', right: '2,0 kg' })}`,
             answer: { value: 20, unit: 'N', tol: 0.03 },
             solution: `Vikterna är lika tunga och står stilla, så den resulterande kraften på varje vikt är noll. För den ena vikten gäller då att spännkraften uppåt är lika stor som tyngdkraften nedåt:
 
@@ -7827,9 +7827,9 @@ $$
         {
             level: 1,
             penna: 'ov-fy1-3.10-u3',
-            question: `Två vikter med massorna 2,0 kg och 3,0 kg hänger i ett snöre över en friktionsfri trissa enligt figuren. Vikterna släpps. Vilken acceleration får de? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+            question: `Två vikter med massorna 2,0 kg och 3,0 kg hänger i ett snöre över en friktionsfri trissa enligt figuren. Vikterna släpps. Vilken acceleration får de? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
 
-${makePulley({ kind: 'atwood', left: '3,0 kg', right: '2,0 kg' })}`,
+${makePulley({ kind: 'atwood', left: '3,0 kg', right: '2,0 kg' })}`,
             answer: { value: 2.0, unit: 'm/s²', tol: 0.03 },
             solution: `Vi ser vikterna och snöret som **ett system**. Den tyngre vikten drar systemet åt sitt håll och den lättare bromsar:
 
@@ -7856,9 +7856,9 @@ $$
         {
             level: 2,
             penna: 'ov-fy1-3.10-u4',
-            question: `Två vikter med massorna 2,0 kg och 3,0 kg hänger i ett snöre över en friktionsfri trissa enligt figuren. När de släpps får de accelerationen $1{,}964\\ \\mathrm{m/s^2}$. Hur stor är spännkraften i snöret? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+            question: `Två vikter med massorna 2,0 kg och 3,0 kg hänger i ett snöre över en friktionsfri trissa enligt figuren. När de släpps får de accelerationen $1{,}964\\ \\mathrm{m/s^2}$. Hur stor är spännkraften i snöret? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
 
-${makePulley({ kind: 'atwood', left: '3,0 kg', right: '2,0 kg' })}`,
+${makePulley({ kind: 'atwood', left: '3,0 kg', right: '2,0 kg' })}`,
             answer: { value: 24, unit: 'N', tol: 0.03 },
             solution: `Spännkraften får vi genom att titta på **en** av vikterna, till exempel 2-kilosvikten. Den accelererar uppåt, så spännkraften uppåt är större än tyngdkraften nedåt:
 
@@ -7888,9 +7888,9 @@ Kontroll med 3-kilosvikten, som accelererar nedåt: $F_\\mathrm{S} = m_3 \\cdot 
         {
             level: 2,
             penna: 'ov-fy1-3.10-u5',
-            question: `En låda med massan 3,0 kg ligger på ett bord. Ett snöre går från lådan över en friktionsfri trissa vid bordskanten till en hängande vikt med massan 2,0 kg, enligt figuren. Friktionstalet mellan lådan och bordet är 0,20.<br>a) Bestäm systemets acceleration.<br>b) Bestäm spännkraften i snöret.
+            question: `En låda med massan 3,0 kg ligger på ett bord. Ett snöre går från lådan över en friktionsfri trissa vid bordskanten till en hängande vikt med massan 2,0 kg, enligt figuren. Friktionstalet mellan lådan och bordet är 0,20.<br>a) Bestäm systemets acceleration.<br>b) Bestäm spännkraften i snöret.
 
-${makePulley({ kind: 'bord', table: '3,0 kg', hanging: '2,0 kg' })}
+${makePulley({ kind: 'bord', table: '3,0 kg', hanging: '2,0 kg' })}
 
 *Ange accelerationen (a) som ditt numeriska svar i m/s². Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
             answer: { value: 2.7, unit: 'm/s²', tol: 0.03 },
@@ -7949,9 +7949,9 @@ Kontroll med den hängande vikten: $F_\\mathrm{S} = m_2 \\cdot g - m_2 \\cdot a 
         {
             level: 3,
             penna: 'ov-fy1-3.10-u6',
-            question: `En vagn med massan 3,0 kg står på ett bord och kan rulla utan friktion. Ett snöre går från vagnen över en friktionsfri trissa vid bordskanten till en hängande vikt, enligt figuren. Hur stor ska den hängande viktens massa *m* vara för att vagnen ska få accelerationen 2,0 m/s²? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+            question: `En vagn med massan 3,0 kg står på ett bord och kan rulla utan friktion. Ett snöre går från vagnen över en friktionsfri trissa vid bordskanten till en hängande vikt, enligt figuren. Hur stor ska den hängande viktens massa *m* vara för att vagnen ska få accelerationen 2,0 m/s²? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
 
-${makePulley({ kind: 'bord', table: '3,0 kg', hanging: '<tspan font-style="italic">m</tspan>' })}`,
+${makePulley({ kind: 'bord', table: '3,0 kg', hanging: '<tspan font-style="italic">m</tspan>' })}`,
             answer: { value: 0.77, unit: 'kg', tol: 0.03 },
             solution: `Den sökta massan finns på **två** ställen: viktens tyngd $m \\cdot g$ driver systemet, men vikten måste också själv accelereras och ingår därför i den totala massan. Vi kan alltså inte bara sätta in värden, utan måste ställa upp en ekvation och lösa ut *m*.
 
@@ -8478,7 +8478,7 @@ $$
     'fy1-4.5': [
         {
             level: 1,
-            question: `En motor uträttar arbetet 4 500 J på 30 sekunder. Vilken är motorns effekt?`,
+            question: `En motor uträttar arbetet 4 500 J på 30 sekunder. Vilken är motorns effekt?`,
             answer: { value: 150, unit: 'W', tol: 0.02 },
             solution: `$$
 P = \\frac{W}{t} = \\frac{4\\,500}{30} = 150\\ \\mathrm{W}
@@ -8488,7 +8488,7 @@ $$
         },
         {
             level: 1,
-            question: `En glödlampa har effekten 60 W. Hur mycket energi (i J) omvandlar den på 5,0 minuter?`,
+            question: `En glödlampa har effekten 60 W. Hur mycket energi (i J) omvandlar den på 5,0 minuter?`,
             answer: { value: 18000, unit: 'J', tol: 0.02 },
             solution: `Lös ut energi från effektformeln, efter omvandling av tiden till sekunder:
 
@@ -8500,7 +8500,7 @@ $$
         },
         {
             level: 1,
-            question: `Emilia (60 kg) går upp för en 4,0 m hög trappa på 10 sekunder. Vilken effekt utvecklar hon mot tyngdkraften? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            question: `Emilia (60 kg) går upp för en 4,0 m hög trappa på 10 sekunder. Vilken effekt utvecklar hon mot tyngdkraften? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
             answer: { value: 236, unit: 'W', tol: 0.03 },
             solution: `Energiomvandling = ökning av lägesenergi:
 
@@ -8518,7 +8518,7 @@ $$
         },
         {
             level: 2,
-            question: `En vattenkokare på 2 000 W värmer vatten i 3,5 minuter. Hur många **kWh** energi har förbrukats?`,
+            question: `En vattenkokare på 2 000 W värmer vatten i 3,5 minuter. Hur många **kWh** energi har förbrukats?`,
             answer: { value: 0.117, unit: 'kWh', tol: 0.03 },
             solution: `Räkna ut energin i Wh direkt: effekt × tid (i timmar).
 
@@ -8534,7 +8534,7 @@ $$
         },
         {
             level: 2,
-            question: `En lampa på 25 W lyser i hela dygnet. Vad blir kostnaden om 1 kWh kostar 1,80 kr?`,
+            question: `En lampa på 25 W lyser i hela dygnet. Vad blir kostnaden om 1 kWh kostar 1,80 kr?`,
             answer: { value: 1.08, unit: 'kr', tol: 0.03 },
             solution: `Energin i kWh:
 
@@ -8552,7 +8552,7 @@ $$
         },
         {
             level: 3,
-            question: `En bil med massan 1 200 kg accelererar från 0 till 100 km/h på 8,0 sekunder på plan väg. Hur stor är den **genomsnittliga effekten** som motorn levererar under accelerationen, om vi bortser från friktion?
+            question: `En bil med massan 1 200 kg accelererar från 0 till 100 km/h på 8,0 sekunder på plan väg. Hur stor är den **genomsnittliga effekten** som motorn levererar under accelerationen, om vi bortser från friktion?
 
 *Tips: motoreffekten omvandlas till rörelseenergi.*`,
             answer: { value: 57870, unit: 'W', tol: 0.05 },
@@ -8607,7 +8607,7 @@ $$
         },
         {
             level: 1,
-            question: `En hiss lyfter 200 kg upp till 12 meter och förbrukar 30 kJ. Bestäm hissens verkningsgrad. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            question: `En hiss lyfter 200 kg upp till 12 meter och förbrukar 30 kJ. Bestäm hissens verkningsgrad. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
             answer: { value: 0.786, unit: '', tol: 0.03 },
             solution: `Nyttig energi = lägesenergi som hissen ger lasten:
 
@@ -8657,7 +8657,7 @@ $$
         },
         {
             level: 3,
-            question: `Ett vattenkraftverk har en fallhöjd på 95 m och 320 ton vatten per sekund passerar turbinerna. Turbinernas verkningsgrad är 0,90 och generatorernas är 0,95. Beräkna kraftverkets **nyttiga uteffekt** (i MW). Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            question: `Ett vattenkraftverk har en fallhöjd på 95 m och 320 ton vatten per sekund passerar turbinerna. Turbinernas verkningsgrad är 0,90 och generatorernas är 0,95. Beräkna kraftverkets **nyttiga uteffekt** (i MW). Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
             answer: { value: 255, unit: 'MW', tol: 0.03 },
             solution: `**Steg 1 — tillförd effekt** (vattnets lägesenergi per sekund):
 
@@ -8706,7 +8706,7 @@ $$
         },
         {
             level: 1,
-            question: `En kraft på 12 N verkar på ett föremål under 4,0 sekunder. Beräkna impulsen.`,
+            question: `En kraft på 12 N verkar på ett föremål under 4,0 sekunder. Beräkna impulsen.`,
             answer: { value: 48, unit: 'Ns', tol: 0.02 },
             solution: `$$
 I = F \\cdot \\Delta t = 12 \\cdot 4{,}0 = 48\\ \\mathrm{Ns}
@@ -8881,7 +8881,7 @@ $$
         },
         {
             level: 2,
-            question: `Två kompakta tågvagnar krockar och **hakar ihop**. Vagn A (10 ton) rör sig åt höger med 5,0 m/s. Vagn B (15 ton) rör sig åt vänster med 3,0 m/s. Bestäm vagnarnas slutgemensamma hastighet (med tecken — positiv riktning åt höger).`,
+            question: `Två kompakta tågvagnar krockar och **hakar ihop**. Vagn A (10 ton) rör sig åt höger med 5,0 m/s. Vagn B (15 ton) rör sig åt vänster med 3,0 m/s. Bestäm vagnarnas slutgemensamma hastighet (med tecken — positiv riktning åt höger).`,
             answer: { value: 0.2, unit: 'm/s', tol: 0.05 },
             solution: `Inelastisk stöt med tecken:
 
@@ -8909,7 +8909,7 @@ $$
 I = m (v_2 - v_1) = 0{,}30 \\cdot (-6{,}0 - 8{,}0) = 0{,}30 \\cdot (-14) = -4{,}2\\ \\mathrm{Ns}
 $$
 
-Impulsens *storlek* är 4,2 Ns (riktad åt vänster — vägg pushar bollen bakåt).
+Impulsens *storlek* är 4,2 Ns (riktad åt vänster — vägg pushar bollen bakåt).
 
 **Svar:** 4,2 Ns.
 
@@ -9201,7 +9201,7 @@ $$
         },
         {
             level: 2,
-            question: `En person med massan 60 kg går på en klack med arean 1,0 cm². På marken bredvid står en stridsvagn med massan 60 ton vars sammanlagda larvfotsyta är 6,0 m². Hur många gånger större är klackens tryck jämfört med stridsvagnens? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            question: `En person med massan 60 kg går på en klack med arean 1,0 cm². På marken bredvid står en stridsvagn med massan 60 ton vars sammanlagda larvfotsyta är 6,0 m². Hur många gånger större är klackens tryck jämfört med stridsvagnens? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
             answer: { value: 60, unit: '', tol: 0.05 },
             solution: `Vi beräknar de två trycken och tar förhållandet.
 
@@ -9254,9 +9254,9 @@ b) Härled en allmän formel för trycket en kubformad kropp med densiteten *ρ*
 *Ange trycket för 16 cm-kuben som ditt numeriska svar i Pa. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
             answer: { value: 12330, unit: 'Pa', tol: 0.03 },
             delsvar: [
-                { del: 'a', value: 3083, unit: 'Pa', etikett: '4,0 cm-kuben', tol: 0.03 },
-                { del: 'a', value: 6166, unit: 'Pa', etikett: '8,0 cm-kuben', tol: 0.03 },
-                { del: 'a', value: 12330, unit: 'Pa', etikett: '16 cm-kuben', tol: 0.03 },
+                { del: 'a', value: 3083, unit: 'Pa', etikett: '4,0 cm-kuben', tol: 0.03 },
+                { del: 'a', value: 6166, unit: 'Pa', etikett: '8,0 cm-kuben', tol: 0.03 },
+                { del: 'a', value: 12330, unit: 'Pa', etikett: '16 cm-kuben', tol: 0.03 },
                 { del: 'b' },
             ],
             solution: `**a) Beräkna de tre trycken.** För en kub med kantlängd *a* är massan $m = \\rho \\cdot V = \\rho \\cdot a^{3}$, tyngden $F = m g$ och basytan $A = a^{2}$. För 4,0 cm-kuben:
@@ -10905,8 +10905,8 @@ $$ m_\\mathrm{is} = \\frac{4{,}18 \\cdot 0{,}80 \\cdot 45}{334 + 4{,}18 \\cdot 2
             choices: [
                 `Ca 10 W.`,
                 `Ca 100 W.`,
-                `Ca 1 000 W.`,
-                `Ca 10 000 W.`,
+                `Ca 1 000 W.`,
+                `Ca 10 000 W.`,
             ],
             correct: 1,
             solution: `En människokropp i vila avger ca **100 W** värme genom strålning, konvektion och avdunstning från hud och luftvägar.
@@ -11760,7 +11760,7 @@ $$ n = \\frac{Q_1}{q_e} = \\frac{0{,}10}{1{,}602 \\cdot 10^{-19}} = 6{,}24 \\cdo
         },
         {
             level: 3,
-            question: `Diagrammet visar strömmen genom en ledare som funktion av tiden. Bestäm den totala laddning som passerat ett tvärsnitt under de första 10 sekunderna, och hur många elektroner det motsvarar. ($q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$)
+            question: `Diagrammet visar strömmen genom en ledare som funktion av tiden. Bestäm den totala laddning som passerat ett tvärsnitt under de första 10 sekunderna, och hur många elektroner det motsvarar. ($q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$)
 
 ${makeDiagram({
     xMax: 10, yMax: 2.5,
@@ -12135,9 +12135,9 @@ $$ R_\\text{ny} = 9 \\cdot 5{,}0 = 45\\ \\mathrm{\\Omega} $$
 ${makeCircuit({
     source: { label: 'U' },
     components: [
-        { type: 'resistor', label: 'R_1', value: '10 Ω' },
-        { type: 'resistor', label: 'R_2', value: '15 Ω' },
-        { type: 'resistor', label: 'R_3', value: '25 Ω' },
+        { type: 'resistor', label: 'R_1', value: '10 Ω' },
+        { type: 'resistor', label: 'R_2', value: '15 Ω' },
+        { type: 'resistor', label: 'R_3', value: '25 Ω' },
     ],
 })}`,
             answer: { value: 50, unit: 'Ω' },
@@ -12169,8 +12169,8 @@ $$ R_\\mathrm{tot} = 10 + 15 + 25 = 50\\ \\mathrm{\\Omega} $$
 ${makeCircuit({
     source: { label: 'U' },
     components: [{ type: 'parallel', branches: [
-        [{ type: 'resistor', label: 'R_1', value: '12 Ω' }],
-        [{ type: 'resistor', label: 'R_2', value: '12 Ω' }],
+        [{ type: 'resistor', label: 'R_1', value: '12 Ω' }],
+        [{ type: 'resistor', label: 'R_2', value: '12 Ω' }],
     ] }],
 })}`,
             answer: { value: 6.0, unit: 'Ω' },
@@ -12191,8 +12191,8 @@ $$ R_\\mathrm{tot} = 6{,}0\\ \\mathrm{\\Omega} $$
 ${makeCircuit({
     source: { label: 'U' },
     components: [{ type: 'parallel', branches: [
-        [{ type: 'resistor', label: 'R_1', value: '20 Ω' }],
-        [{ type: 'resistor', label: 'R_2', value: '60 Ω' }],
+        [{ type: 'resistor', label: 'R_1', value: '20 Ω' }],
+        [{ type: 'resistor', label: 'R_2', value: '60 Ω' }],
     ] }],
 })}`,
             answer: { value: 15, unit: 'Ω' },
@@ -12219,7 +12219,7 @@ $$ R_\\mathrm{tot} = 15\\ \\mathrm{\\Omega} $$
 ${makeCircuit({
     source: { label: 'U' },
     components: [{ type: 'parallel', branches: [
-        [{ type: 'resistor', label: 'R_1', value: '30 Ω' }],
+        [{ type: 'resistor', label: 'R_1', value: '30 Ω' }],
         [{ type: 'resistor', label: 'R_2', value: '?' }],
     ] }],
 })}`,
@@ -12251,10 +12251,10 @@ $$ R_2 = 20\\ \\mathrm{\\Omega} $$
             question: `Två resistorer $R_1 = 15\\ \\mathrm{\\Omega}$ och $R_2 = 45\\ \\mathrm{\\Omega}$ seriekopplas till ett batteri med spänningen $U = 12\\ \\mathrm{V}$. Hur stor ström går ut från batteriet?
 
 ${makeCircuit({
-    source: { label: 'U', value: '12 V' },
+    source: { label: 'U', value: '12 V' },
     components: [
-        { type: 'resistor', label: 'R_1', value: '15 Ω' },
-        { type: 'resistor', label: 'R_2', value: '45 Ω' },
+        { type: 'resistor', label: 'R_1', value: '15 Ω' },
+        { type: 'resistor', label: 'R_2', value: '45 Ω' },
     ],
 })}`,
             answer: { value: 0.20, unit: 'A' },
@@ -12309,12 +12309,12 @@ vilket ger $x = 30$ eller $x = 10$.
             question: `Studera kopplingsschemat. Vilka resistorer är parallellkopplade?
 
 ${makeCircuit({
-    source: { label: 'U', value: '24 V' },
+    source: { label: 'U', value: '24 V' },
     components: [
-        { type: 'resistor', label: 'R_1', value: '4,0 Ω' },
+        { type: 'resistor', label: 'R_1', value: '4,0 Ω' },
         { type: 'parallel', branches: [
-            [{ type: 'resistor', label: 'R_2', value: '12 Ω' }],
-            [{ type: 'resistor', label: 'R_3', value: '6,0 Ω' }],
+            [{ type: 'resistor', label: 'R_2', value: '12 Ω' }],
+            [{ type: 'resistor', label: 'R_3', value: '6,0 Ω' }],
         ] },
     ],
 })}`,
@@ -12338,12 +12338,12 @@ $R_1$ sitter däremot ensam på huvudledningen *före* förgreningen, alltså i 
             question: `I schemat nedan sitter $R_2 = 12\\ \\mathrm{\\Omega}$ och $R_3 = 6{,}0\\ \\mathrm{\\Omega}$ parallellkopplade. Bestäm ersättningsresistansen $R_{2,3}$ för enbart parallelldelen.
 
 ${makeCircuit({
-    source: { label: 'U', value: '24 V' },
+    source: { label: 'U', value: '24 V' },
     components: [
-        { type: 'resistor', label: 'R_1', value: '4,0 Ω' },
+        { type: 'resistor', label: 'R_1', value: '4,0 Ω' },
         { type: 'parallel', branches: [
-            [{ type: 'resistor', label: 'R_2', value: '12 Ω' }],
-            [{ type: 'resistor', label: 'R_3', value: '6,0 Ω' }],
+            [{ type: 'resistor', label: 'R_2', value: '12 Ω' }],
+            [{ type: 'resistor', label: 'R_3', value: '6,0 Ω' }],
         ] },
     ],
 })}`,
@@ -12377,12 +12377,12 @@ $$ R_\\mathrm{tot} = R_1 + R_{2,3} = 4{,}0 + 4{,}0 = 8{,}0\\ \\mathrm{\\Omega} $
             question: `Bestäm huvudströmmen *I* som går ut från batteriet i kretsen nedan.
 
 ${makeCircuit({
-    source: { label: 'U', value: '24 V' },
+    source: { label: 'U', value: '24 V' },
     components: [
-        { type: 'resistor', label: 'R_1', value: '4,0 Ω' },
+        { type: 'resistor', label: 'R_1', value: '4,0 Ω' },
         { type: 'parallel', branches: [
-            [{ type: 'resistor', label: 'R_2', value: '12 Ω' }],
-            [{ type: 'resistor', label: 'R_3', value: '6,0 Ω' }],
+            [{ type: 'resistor', label: 'R_2', value: '12 Ω' }],
+            [{ type: 'resistor', label: 'R_3', value: '6,0 Ω' }],
         ] },
     ],
 })}`,
@@ -12408,12 +12408,12 @@ $$ I = \\frac{U}{R_\\mathrm{tot}} = \\frac{24}{8{,}0} = 3{,}0\\ \\mathrm{A} $$
             question: `I kretsen nedan är huvudströmmen $I = 3{,}0\\ \\mathrm{A}$ (genom $R_1$). Bestäm spänningen $U_{2,3}$ över parallelldelen.
 
 ${makeCircuit({
-    source: { label: 'U', value: '24 V' },
+    source: { label: 'U', value: '24 V' },
     components: [
-        { type: 'resistor', label: 'R_1', value: '4,0 Ω' },
+        { type: 'resistor', label: 'R_1', value: '4,0 Ω' },
         { type: 'parallel', branches: [
-            [{ type: 'resistor', label: 'R_2', value: '12 Ω' }],
-            [{ type: 'resistor', label: 'R_3', value: '6,0 Ω' }],
+            [{ type: 'resistor', label: 'R_2', value: '12 Ω' }],
+            [{ type: 'resistor', label: 'R_3', value: '6,0 Ω' }],
         ] },
     ],
 })}`,
@@ -12437,12 +12437,12 @@ $$ U_{2,3} = U - U_1 = 24 - 12 = 12\\ \\mathrm{V} $$
             question: `Bestäm strömmen $I_3$ genom resistorn $R_3$ i kretsen nedan.
 
 ${makeCircuit({
-    source: { label: 'U', value: '24 V' },
+    source: { label: 'U', value: '24 V' },
     components: [
-        { type: 'resistor', label: 'R_1', value: '4,0 Ω' },
+        { type: 'resistor', label: 'R_1', value: '4,0 Ω' },
         { type: 'parallel', branches: [
-            [{ type: 'resistor', label: 'R_2', value: '12 Ω' }],
-            [{ type: 'resistor', label: 'R_3', value: '6,0 Ω' }],
+            [{ type: 'resistor', label: 'R_2', value: '12 Ω' }],
+            [{ type: 'resistor', label: 'R_3', value: '6,0 Ω' }],
         ] },
     ],
 })}`,
@@ -12474,9 +12474,9 @@ $$ I_3 = \\frac{U_{2,3}}{R_3} = \\frac{12}{6{,}0} = 2{,}0\\ \\mathrm{A} $$
             question: `I bryggkopplingen nedan ligger spänningen $U = 12\\ \\mathrm{V}$ över kretsen. En voltmeter är inkopplad mellan punkterna P och Q. Vilken spänning visar voltmetern?
 
 ${makeBridge({
-    source: { label: 'U', value: '12 V' },
-    upper: [ { type: 'resistor', label: 'R_1', value: '50 Ω' }, { type: 'resistor', label: 'R_2', value: '30 Ω' } ],
-    lower: [ { type: 'resistor', label: 'R_3', value: '15 Ω' }, { type: 'resistor', label: 'R_4', value: '60 Ω' } ],
+    source: { label: 'U', value: '12 V' },
+    upper: [ { type: 'resistor', label: 'R_1', value: '50 Ω' }, { type: 'resistor', label: 'R_2', value: '30 Ω' } ],
+    lower: [ { type: 'resistor', label: 'R_3', value: '15 Ω' }, { type: 'resistor', label: 'R_4', value: '60 Ω' } ],
     bridge: { type: 'voltmeter', label: 'V' },
 })}`,
             answer: { value: 5.1, unit: 'V' },
@@ -13014,13 +13014,13 @@ $$ U = |+12 - (-4{,}0)| = |16| = 16\\ \\mathrm{V} $$
             choices: [
                 `Strömmen går från en punkt med högre potential till en punkt med lägre potential.`,
                 `Strömmen går från en punkt med lägre potential till en punkt med högre potential.`,
-                `Potentialen i en jordad punkt är alltid 230 V.`,
+                `Potentialen i en jordad punkt är alltid 230 V.`,
                 `Elektrisk potential och spänning är exakt samma storhet.`,
             ],
             correct: 0,
             solution: `Strömmen går från **högre** till **lägre** potential — precis som vatten rinner från högre till lägre höjd. Potentialen är som en "elektrisk höjd".
 
-Övriga alternativ är fel: en jordad punkt har potentialen **0 V** (inte 230 V), och potential har tecken (positiv/negativ/noll) medan spänning är den icke-negativa *skillnaden* mellan två potentialer.
+Övriga alternativ är fel: en jordad punkt har potentialen **0 V** (inte 230 V), och potential har tecken (positiv/negativ/noll) medan spänning är den icke-negativa *skillnaden* mellan två potentialer.
 
 **Svar:** Alternativ A.
 
@@ -13112,9 +13112,9 @@ $$ U = |V_A - V_C| = |+10 - (-20)| = |30| = 30\\ \\mathrm{V} $$
             question: `I kretsen nedan är den högra noden jordad ($0\\ \\mathrm{V}$). Bestäm spänningen mellan punkterna P och Q. Tips: bestäm först potentialen i P respektive Q genom att potentialvandra från jordningen.
 
 ${makeBridge({
-    source: { label: 'U', value: '24 V' },
-    upper: [ { type: 'resistor', label: 'R_1', value: '20 Ω' }, { type: 'resistor', label: 'R_2', value: '40 Ω' } ],
-    lower: [ { type: 'resistor', label: 'R_3', value: '40 Ω' }, { type: 'resistor', label: 'R_4', value: '20 Ω' } ],
+    source: { label: 'U', value: '24 V' },
+    upper: [ { type: 'resistor', label: 'R_1', value: '20 Ω' }, { type: 'resistor', label: 'R_2', value: '40 Ω' } ],
+    lower: [ { type: 'resistor', label: 'R_3', value: '40 Ω' }, { type: 'resistor', label: 'R_4', value: '20 Ω' } ],
     ground: 'B',
 })}`,
             answer: { value: 8.0, unit: 'V' },
@@ -14108,7 +14108,7 @@ $$ H = D \\cdot Q = 2{,}4 \\cdot 10^{-7} \\cdot 20 = 4{,}8 \\cdot 10^{-6}\\ \\ma
             penna: 'ov-fy2-1.1-u1',
             question: `En kraft på $25\\ \\mathrm{N}$ verkar vinkelrätt mot en skiftnyckel $0{,}18\\ \\mathrm{m}$ från muttern. Beräkna kraftmomentet kring muttern.
 
-${makeTorqueArm({ armAngle: 0, armLabel: 'l = 0,18 m', force: { angle: -90, label: 'F = 25 N', len: 72 }, pivotLabel: 'mutter' })}`,
+${makeTorqueArm({ armAngle: 0, armLabel: 'l = 0,18 m', force: { angle: -90, label: 'F = 25 N', len: 72 }, pivotLabel: 'mutter' })}`,
             answer: { value: 4.5, unit: 'Nm' },
             solution: `Kraftmomentet är kraft gånger hävarm:
 
@@ -14156,7 +14156,7 @@ $$ F = \\frac{18}{0{,}30} = 60\\ \\mathrm{N} $$
             penna: 'ov-fy2-1.1-u3',
             question: `Ett barn som väger $25\\ \\mathrm{kg}$ sitter $2{,}4\\ \\mathrm{m}$ från vridpunkten på en gungbräda. Hur långt från vridpunkten ska en vuxen på $75\\ \\mathrm{kg}$ sitta för att brädan ska vara i momentjämvikt?
 
-${makeLever({ pivot: { posFrac: 0.5, type: 'wedge' }, loads: [{ posFrac: 0.12, kind: 'weight', label: '25 kg' }, { posFrac: 0.64, kind: 'weight', label: '75 kg' }], dims: [{ fromFrac: 0.12, toFrac: 0.5, label: '2,4 m' }, { fromFrac: 0.5, toFrac: 0.64, label: '?', row: 1 }] })}`,
+${makeLever({ pivot: { posFrac: 0.5, type: 'wedge' }, loads: [{ posFrac: 0.12, kind: 'weight', label: '25 kg' }, { posFrac: 0.64, kind: 'weight', label: '75 kg' }], dims: [{ fromFrac: 0.12, toFrac: 0.5, label: '2,4 m' }, { fromFrac: 0.5, toFrac: 0.64, label: '?', row: 1 }] })}`,
             answer: { value: 0.80, unit: 'm' },
             solution: `Vid momentjämvikt är momentet moturs lika stort som momentet medurs:
 
@@ -14194,7 +14194,7 @@ $$ l_\\mathrm{V} = \\frac{25 \\cdot 2{,}4}{75} = 0{,}80\\ \\mathrm{m} $$
             penna: 'ov-fy2-1.1-u4',
             question: `En $0{,}80\\ \\mathrm{m}$ lång arm lutar $35^\\circ$ över horisontalplanet och är fäst i sin nedre ände. Vid den övre änden verkar en kraft på $120\\ \\mathrm{N}$ rakt nedåt. Beräkna kraftmomentet kring den nedre änden.
 
-${makeTorqueArm({ armAngle: 35, armLabel: 'L = 0,80 m', force: { angle: -90, label: 'F = 120 N', len: 66 }, leverHint: true })}`,
+${makeTorqueArm({ armAngle: 35, armLabel: 'L = 0,80 m', force: { angle: -90, label: 'F = 120 N', len: 66 }, leverHint: true })}`,
             answer: { value: 78.64, unit: 'Nm' },
             solution: `Kraftmomentet är kraft gånger hävarm:
 
@@ -14221,7 +14221,7 @@ $$ M = 120 \\cdot 0{,}6553\\ldots = 78{,}638\\ldots\\ \\mathrm{Nm} \\approx 79\\
             penna: 'ov-fy2-1.1-u5',
             question: `En $4{,}0\\ \\mathrm{m}$ lång jämntjock planka väger $12\\ \\mathrm{kg}$ och vilar på en stödpunkt $1{,}5\\ \\mathrm{m}$ från vänster ände. Var (avstånd från stödpunkten) ska en vikt på $8{,}0\\ \\mathrm{kg}$ placeras för att plankan ska vara i jämvikt?
 
-${makeLever({ pivot: { posFrac: 0.375, type: 'wedge' }, cog: { posFrac: 0.5, label: 'F_G' }, loads: [{ posFrac: 0.16, kind: 'weight', label: '8,0 kg' }], dims: [{ fromFrac: 0, toFrac: 0.375, label: '1,5 m', row: 1 }, { fromFrac: 0.375, toFrac: 1, label: '2,5 m' }, { fromFrac: 0.16, toFrac: 0.375, label: 'l_V' }] })}`,
+${makeLever({ pivot: { posFrac: 0.375, type: 'wedge' }, cog: { posFrac: 0.5, label: 'F_G' }, loads: [{ posFrac: 0.16, kind: 'weight', label: '8,0 kg' }], dims: [{ fromFrac: 0, toFrac: 0.375, label: '1,5 m', row: 1 }, { fromFrac: 0.375, toFrac: 1, label: '2,5 m' }, { fromFrac: 0.16, toFrac: 0.375, label: 'l_V' }] })}`,
             answer: { value: 0.75, unit: 'm' },
             solution: `Plankans egen tyngd $F_\\mathrm{G}$ verkar i dess **tyngdpunkt**, mitt på plankan. Det är $2{,}0\\ \\mathrm{m}$ från vänster ände, alltså $2{,}0 - 1{,}5 = 0{,}5\\ \\mathrm{m}$ till höger om stödpunkten, och den vrider plankan medurs.
 
@@ -14259,13 +14259,13 @@ $$ l_\\mathrm{V} = \\frac{12 \\cdot 0{,}5}{8{,}0} = 0{,}75\\ \\mathrm{m} $$
             penna: 'ov-fy2-1.1-u6',
             question: `En $5{,}0\\ \\mathrm{m}$ lång stege som väger $15\\ \\mathrm{kg}$ lutar mot en vägg med vinkeln $65^\\circ$ mot marken. Friktionen mellan stege och vägg är försumbar, men friktionen mot marken är tillräcklig för att stegen ska stå still. Hur stor är friktionskraften från marken? ($g = 9{,}82\\ \\mathrm{N/kg}$)
 
-${makeLadder({ angle: 65, lenLabel: 'L = 5,0 m' })}`,
+${makeLadder({ angle: 65, lenLabel: 'L = 5,0 m' })}`,
             answer: { value: 34.34, unit: 'N' },
             solution: `Det räcker inte med en formel. Vi måste kombinera **momentjämvikt** och **kraftjämvikt** och se vilka krafter som verkar.
 
 Fyra krafter verkar på stegen: tyngdkraften $F_\\mathrm{G} = m \\cdot g$ nedåt i mitten, markens normalkraft $F_\\mathrm{N}$ uppåt vid foten, markens friktionskraft $F_f$ vågrätt vid foten och väggens normalkraft $F_\\mathrm{V}$ vågrätt vid toppen (väggen är friktionsfri, så den kan bara trycka vinkelrätt ut från väggen).
 
-${makeLadder({ angle: 65, lenLabel: 'L = 5,0 m', forces: true })}
+${makeLadder({ angle: 65, lenLabel: 'L = 5,0 m', forces: true })}
 
 **Momentjämvikt kring stegens fot.** Där angriper $F_\\mathrm{N}$ och $F_f$, så deras hävarmar är 0 och de ger inget moment. Väggens kraft vrider stegen moturs och tyngdkraften medurs:
 
@@ -14362,7 +14362,7 @@ Massan $24\\ \\mathrm{kg}$ har två värdesiffror, så svaret avrundas till två
             penna: 'ov-fy2-1.2-u4',
             question: `En $4{,}0\\ \\mathrm{m}$ lång jämntjock planka med massan $30\\ \\mathrm{kg}$ vilar på två stöd: A vid plankans vänstra ände och B $1{,}0\\ \\mathrm{m}$ från högra änden. Hur stor kraft trycker stödet B uppåt med? ($g = 9{,}82\\ \\mathrm{N/kg}$)
 
-${makeBeamSupports({ supports: [{ posFrac: 0, label: 'A' }, { posFrac: 0.75, label: 'B' }], cog: { posFrac: 0.5, label: 'F_G' }, dims: [{ fromFrac: 0, toFrac: 0.5, label: '2,0 m' }, { fromFrac: 0.75, toFrac: 1, label: '1,0 m' }] })}`,
+${makeBeamSupports({ supports: [{ posFrac: 0, label: 'A' }, { posFrac: 0.75, label: 'B' }], cog: { posFrac: 0.5, label: 'F_G' }, dims: [{ fromFrac: 0, toFrac: 0.5, label: '2,0 m' }, { fromFrac: 0.75, toFrac: 1, label: '1,0 m' }] })}`,
             answer: { value: 196.4, unit: 'N' },
             solution: `Två okända stödkrafter — vi väljer **vridningspunkten i A** så att $F_\\mathrm{A}$ får hävarmen 0 och försvinner ur momentlagen. Kvar står tyngdkraftens moment (medurs) mot $F_\\mathrm{B}$:s moment (moturs):
 
@@ -14389,7 +14389,7 @@ Längderna och massan har två värdesiffror, så svaret avrundas till två vär
             penna: 'ov-fy2-1.2-u5',
             question: `En $4{,}0\\ \\mathrm{m}$ lång jämntjock bräda med massan $15\\ \\mathrm{kg}$ vilar på två bockar, en vid varje ände. En person med massan $60\\ \\mathrm{kg}$ står $1{,}0\\ \\mathrm{m}$ från den vänstra änden. Hur stor kraft trycker den vänstra bocken uppåt med? ($g = 9{,}82\\ \\mathrm{N/kg}$)
 
-${makeBeamSupports({ supports: [{ posFrac: 0, label: 'V' }, { posFrac: 1, label: 'H' }], cog: { posFrac: 0.5, label: 'F_G' }, person: { posFrac: 0.25, label: '60 kg' }, dims: [{ fromFrac: 0, toFrac: 0.25, label: '1,0 m', row: 0 }, { fromFrac: 0, toFrac: 0.5, label: '2,0 m', row: 1 }, { fromFrac: 0, toFrac: 1, label: '4,0 m', row: 2 }] })}`,
+${makeBeamSupports({ supports: [{ posFrac: 0, label: 'V' }, { posFrac: 1, label: 'H' }], cog: { posFrac: 0.5, label: 'F_G' }, person: { posFrac: 0.25, label: '60 kg' }, dims: [{ fromFrac: 0, toFrac: 0.25, label: '1,0 m', row: 0 }, { fromFrac: 0, toFrac: 0.5, label: '2,0 m', row: 1 }, { fromFrac: 0, toFrac: 1, label: '4,0 m', row: 2 }] })}`,
             answer: { value: 515.55, unit: 'N' },
             solution: `Två okända stödkrafter. Vi väljer **vridningspunkten i det högra stödet H** så att $F_\\mathrm{H}$ får hävarmen 0 och försvinner. Kvar står momentjämvikten kring H: personens och brädans tyngdkrafter vrider moturs, och den vänstra stödkraften vrider medurs. Hävarmarna mäts från H: personen står $4{,}0 - 1{,}0 = 3{,}0\\ \\mathrm{m}$ från H, brädans tyngdpunkt (mitt på brädan) $4{,}0 - 2{,}0 = 2{,}0\\ \\mathrm{m}$ från H och den vänstra bocken $4{,}0\\ \\mathrm{m}$ från H.
 
@@ -14420,7 +14420,7 @@ Alla mätvärden har två värdesiffror, så svaret avrundas till två värdesif
             penna: 'ov-fy2-1.2-u6',
             question: `En $6{,}0\\ \\mathrm{m}$ lång jämntjock bräda med massan $20\\ \\mathrm{kg}$ ligger på två bockar: P står $1{,}5\\ \\mathrm{m}$ från vänstra änden och Q står $2{,}0\\ \\mathrm{m}$ från högra änden. En person med massan $60\\ \\mathrm{kg}$ går sakta ut mot brädans högra ände. **Hur långt förbi stödet Q kan personen gå innan brädan börjar tippa?**
 
-${makeBeamSupports({ width: 500, supports: [{ posFrac: 0.25, label: 'P' }, { posFrac: 0.6667, label: 'Q' }], cog: { posFrac: 0.5, label: 'F_G' }, person: { posFrac: 0.8, label: '60 kg' }, dims: [{ fromFrac: 0.6667, toFrac: 0.8, label: 'd', row: 0 }, { fromFrac: 0, toFrac: 0.25, label: '1,5 m', row: 1 }, { fromFrac: 0.25, toFrac: 0.6667, label: '2,5 m', row: 1 }, { fromFrac: 0.6667, toFrac: 1, label: '2,0 m', row: 1 }] })}`,
+${makeBeamSupports({ width: 500, supports: [{ posFrac: 0.25, label: 'P' }, { posFrac: 0.6667, label: 'Q' }], cog: { posFrac: 0.5, label: 'F_G' }, person: { posFrac: 0.8, label: '60 kg' }, dims: [{ fromFrac: 0.6667, toFrac: 0.8, label: 'd', row: 0 }, { fromFrac: 0, toFrac: 0.25, label: '1,5 m', row: 1 }, { fromFrac: 0.25, toFrac: 0.6667, label: '2,5 m', row: 1 }, { fromFrac: 0.6667, toFrac: 1, label: '2,0 m', row: 1 }] })}`,
             answer: { value: 0.3333, unit: 'm' },
             solution: `Insikten är vad som händer i **tippögonblicket**: brädan lyfter från stödet P, så kraften där blir noll, $F_\\mathrm{P} = 0$. Brädan vrider sig då kring Q — vi väljer alltså **Q som vridningspunkt**, och den okända stödkraften $F_\\mathrm{Q}$ går genom vridningspunkten och försvinner ur momentlagen.
 
@@ -14508,7 +14508,7 @@ $$ d = \\frac{20 \\cdot 1{,}0}{60} = 0{,}333\\ldots\\ \\mathrm{m} \\approx 0{,}3
             penna: 'ov-fy2-1.3-u4',
             question: `En låda är $0{,}60\\ \\mathrm{m}$ bred och $0{,}80\\ \\mathrm{m}$ hög med tyngdpunkten i mitten. Den tippas sakta åt sidan kring sin nedre kant. Vid vilken lutningsvinkel välter lådan?
 
-${makeTippingBox({ boxW: 84, boxH: 112, tipArrow: true, gravityLine: true, wLabel: '0,60 m', hLabel: '0,80 m' })}`,
+${makeTippingBox({ boxW: 84, boxH: 112, tipArrow: true, gravityLine: true, wLabel: '0,60 m', hLabel: '0,80 m' })}`,
             answer: { value: 36.87, unit: '°' },
             solution: `Lådan välter när **tyngdpunkten hamnar utanför vridningspunkten**, alltså när tyngdkraftens lodräta riktningslinje genom tyngdpunkten passerar tippkanten. Vid gränsen står tyngdpunkten rakt ovanför kanten, och för en jämntjock låda med bredden $b$ och höjden $h$ uppfyller vältningsvinkeln $\\alpha$
 
@@ -14534,7 +14534,7 @@ $$ \\alpha = \\tan^{-1}(0{,}75) = 36{,}869...^\\circ \\approx 37^\\circ $$
             penna: 'ov-fy2-1.3-u5',
             question: `En transportlåda ska tåla att lutas $25^\\circ$ utan att välta. Lådan är $0{,}40\\ \\mathrm{m}$ bred och jämnt packad, så att tyngdpunkten ligger i mitten. Hur hög får lådan högst vara?
 
-${makeTippingBox({ boxW: 56, boxH: 116, gravityLine: true, wLabel: '0,40 m', hLabel: 'h' })}`,
+${makeTippingBox({ boxW: 56, boxH: 116, gravityLine: true, wLabel: '0,40 m', hLabel: 'h' })}`,
             answer: { value: 0.8578, unit: 'm', tol: 0.02 },
             solution: `Vältningsvinkeln för en jämntjock låda uppfyller $\\tan \\alpha = \\dfrac{b}{h}$. Ju högre lådan är, desto mindre blir vältningsvinkeln. Gränsfallet är att vältningsvinkeln är exakt $25^\\circ$. Vi löser ut höjden:
 
@@ -14560,7 +14560,7 @@ $$ h = \\frac{0{,}40}{\\tan 25^\\circ} = 0{,}8578...\\ \\mathrm{m} \\approx 0{,}
             penna: 'ov-fy2-1.3-u6',
             question: `En jämntjock bräda är $1{,}2\\ \\mathrm{m}$ lång och har massan $2{,}4\\ \\mathrm{kg}$. Den skjuts sakta ut över en bordskant, och på brädans inre ände står en vikt med massan $1{,}2\\ \\mathrm{kg}$. **Hur långt utanför bordskanten kan brädans yttre ände som mest sticka ut utan att brädan tippar?**
 
-<svg viewBox="0 0 420 170" width="420" height="170" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En bräda ligger på ett bord och sticker ut en bit utanför bordskanten åt höger. På brädans vänstra ände står en vikt märkt 1,2 kg. Brädan är märkt 2,4 kg och är 1,2 m lång. Utsticket utanför bordskanten är märkt d."><rect x="20" y="110" width="210" height="10" fill="#d8c39a" stroke="#8a6a3a" stroke-width="1.4"/><rect x="36" y="120" width="8" height="45" fill="#b8925f" stroke="#8a6a3a" stroke-width="1.2"/><rect x="198" y="120" width="8" height="45" fill="#b8925f" stroke="#8a6a3a" stroke-width="1.2"/><rect x="50" y="100" width="300" height="10" rx="2" fill="#c69a5e" stroke="#8a6a3a" stroke-width="1.4"/><rect x="54" y="74" width="36" height="26" rx="3" fill="#9aa2ad" stroke="#1f2530" stroke-width="1.4"/><text x="72" y="66" text-anchor="middle" font-size="13" fill="#1f2530">1,2 kg</text><text x="215" y="93" text-anchor="middle" font-size="13" fill="#1f2530">2,4 kg</text><line x1="50" y1="40" x2="50" y2="96" stroke="#1f2530" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/><line x1="350" y1="40" x2="350" y2="96" stroke="#1f2530" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/><line x1="50" y1="36" x2="350" y2="36" stroke="#1f2530" stroke-width="1.3"/><polygon points="50,36 58,32.8 58,39.2" fill="#1f2530"/><polygon points="350,36 342,32.8 342,39.2" fill="#1f2530"/><text x="200" y="30" text-anchor="middle" font-size="13" fill="#1f2530">1,2 m</text><line x1="230" y1="122" x2="230" y2="144" stroke="#1f2530" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/><line x1="350" y1="112" x2="350" y2="144" stroke="#1f2530" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/><line x1="230" y1="140" x2="350" y2="140" stroke="#1f2530" stroke-width="1.3"/><polygon points="230,140 238,136.8 238,143.2" fill="#1f2530"/><polygon points="350,140 342,136.8 342,143.2" fill="#1f2530"/><text x="290" y="158" text-anchor="middle" font-size="14" fill="#1f2530" font-style="italic">d</text></svg>`,
+<svg viewBox="0 0 420 170" width="420" height="170" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En bräda ligger på ett bord och sticker ut en bit utanför bordskanten åt höger. På brädans vänstra ände står en vikt märkt 1,2 kg. Brädan är märkt 2,4 kg och är 1,2 m lång. Utsticket utanför bordskanten är märkt d."><rect x="20" y="110" width="210" height="10" fill="#d8c39a" stroke="#8a6a3a" stroke-width="1.4"/><rect x="36" y="120" width="8" height="45" fill="#b8925f" stroke="#8a6a3a" stroke-width="1.2"/><rect x="198" y="120" width="8" height="45" fill="#b8925f" stroke="#8a6a3a" stroke-width="1.2"/><rect x="50" y="100" width="300" height="10" rx="2" fill="#c69a5e" stroke="#8a6a3a" stroke-width="1.4"/><rect x="54" y="74" width="36" height="26" rx="3" fill="#9aa2ad" stroke="#1f2530" stroke-width="1.4"/><text x="72" y="66" text-anchor="middle" font-size="13" fill="#1f2530">1,2 kg</text><text x="215" y="93" text-anchor="middle" font-size="13" fill="#1f2530">2,4 kg</text><line x1="50" y1="40" x2="50" y2="96" stroke="#1f2530" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/><line x1="350" y1="40" x2="350" y2="96" stroke="#1f2530" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/><line x1="50" y1="36" x2="350" y2="36" stroke="#1f2530" stroke-width="1.3"/><polygon points="50,36 58,32.8 58,39.2" fill="#1f2530"/><polygon points="350,36 342,32.8 342,39.2" fill="#1f2530"/><text x="200" y="30" text-anchor="middle" font-size="13" fill="#1f2530">1,2 m</text><line x1="230" y1="122" x2="230" y2="144" stroke="#1f2530" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/><line x1="350" y1="112" x2="350" y2="144" stroke="#1f2530" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/><line x1="230" y1="140" x2="350" y2="140" stroke="#1f2530" stroke-width="1.3"/><polygon points="230,140 238,136.8 238,143.2" fill="#1f2530"/><polygon points="350,140 342,136.8 342,143.2" fill="#1f2530"/><text x="290" y="158" text-anchor="middle" font-size="14" fill="#1f2530" font-style="italic">d</text></svg>`,
             answer: { value: 0.8, unit: 'm', tol: 0.02 },
             solution: `I **tippögonblicket** vrider sig brädan kring bordskanten: hela normalkraften $F_\\mathrm{N}$ samlas där, så vi väljer **bordskanten som vridningspunkt**. Då saknar normalkraften moment. Kalla utsticket $d$. Vikten står på den inre änden, så dess tyngdkraft $F_\\mathrm{V}$ har hävarmen $l_\\mathrm{V} = 1{,}2 - d$ **innanför** kanten och vrider moturs. Brädans tyngdpunkt sitter mitt på brädan, $0{,}60\\ \\mathrm{m}$ från den yttre änden, så brädans tyngdkraft $F_\\mathrm{B}$ har hävarmen $l_\\mathrm{B} = d - 0{,}60$ **utanför** kanten och vrider medurs.
 
@@ -14635,7 +14635,7 @@ $$ \\omega = 2\\pi \\cdot f = 2\\pi \\cdot 25 = 157\\ \\mathrm{rad/s} $$
             level: 1,
             question: `En punkt sitter $0{,}25\\ \\mathrm{m}$ från centrum på ett hjul som roterar med vinkelhastigheten $\\omega = 12\\ \\mathrm{rad/s}$. Vilken fart har punkten?
 
-${makeCircularPath({ width: 260, height: 240, r: 92, angleDeg: 52, radiusLabel: 'r = 0,25 m', vLabel: 'v', point: true, dashTrack: true })}`,
+${makeCircularPath({ width: 260, height: 240, r: 92, angleDeg: 52, radiusLabel: 'r = 0,25 m', vLabel: 'v', point: true, dashTrack: true })}`,
             answer: { value: 3.0, unit: 'm/s' },
             solution: `Farten i cirkelbanan är vinkelhastigheten gånger banradien:
 
@@ -14693,7 +14693,7 @@ $$ r = \\frac{7\\,800 \\cdot 5\\,400}{2\\pi} = 6{,}7 \\cdot 10^6\\ \\mathrm{m} $
 
 ${makeClock({ size: 150, hour: 0, minute: 0 })}`,
             answer: { value: 65.5, unit: 'min' },
-            solution: `Det går inte att gissa "1 timme" — timvisaren har då redan flyttat sig. Vi tänker i **vinkelhastigheter** och frågar när minutvisaren har hunnit ikapp timvisaren ett helt varv.
+            solution: `Det går inte att gissa "1 timme" — timvisaren har då redan flyttat sig. Vi tänker i **vinkelhastigheter** och frågar när minutvisaren har hunnit ikapp timvisaren ett helt varv.
 
 Minutvisaren går ett varv på $60\\ \\mathrm{min}$, timvisaren ett varv på $12 \\cdot 60 = 720\\ \\mathrm{min}$. Deras vinkelhastigheter (i varv per minut):
 
@@ -14719,7 +14719,7 @@ $$ t = \\frac{1\\ \\text{varv}}{\\omega_\\text{rel}} = \\frac{720}{11} = 65{,}5\
             level: 1,
             question: `En bil tar en kurva med radien $50\\ \\mathrm{m}$ i farten $20\\ \\mathrm{m/s}$. Hur stor är centripetalaccelerationen?
 
-${makeCircularPath({ r: 110, radiusLabel: 'r = 50 m', vLabel: 'v = 20 m/s', showFc: true, fcLabel: 'a_C', dashTrack: true })}`,
+${makeCircularPath({ r: 110, radiusLabel: 'r = 50 m', vLabel: 'v = 20 m/s', showFc: true, fcLabel: 'a_C', dashTrack: true })}`,
             answer: { value: 8.0, unit: 'm/s²' },
             solution: `Centripetalaccelerationen ges av
 
@@ -14733,7 +14733,7 @@ $$ a_C = \\frac{v^2}{r} = \\frac{20^2}{50} = \\frac{400}{50} = 8{,}0\\ \\mathrm{
             level: 1,
             question: `En boll som väger $0{,}50\\ \\mathrm{kg}$ snurrar i en cirkel med radien $1{,}2\\ \\mathrm{m}$ med farten $6{,}0\\ \\mathrm{m/s}$. Beräkna centripetalkraften.
 
-${makeCircularPath({ width: 280, height: 260, r: 100, radiusLabel: 'r = 1,2 m', vLabel: 'v = 6,0 m/s', showFc: true, fcLabel: 'F_C', point: true, dashTrack: true })}`,
+${makeCircularPath({ width: 280, height: 260, r: 100, radiusLabel: 'r = 1,2 m', vLabel: 'v = 6,0 m/s', showFc: true, fcLabel: 'F_C', point: true, dashTrack: true })}`,
             answer: { value: 15, unit: 'N' },
             solution: `Centripetalkraften ges av
 
@@ -14781,7 +14781,7 @@ $$ F_C = \\frac{4\\pi^2 \\cdot 0{,}20 \\cdot 0{,}80}{0{,}50^2} = 25\\ \\mathrm{N
             level: 1,
             question: `I lägsta punkten av en gungbana (radie $3{,}0\\ \\mathrm{m}$) rör sig en gungare som väger $60\\ \\mathrm{kg}$ med farten $5{,}0\\ \\mathrm{m/s}$. Hur stor är centripetalkraften?
 
-${makeSwing({ ropeLabel: 'r = 3,0 m', forces: true })}`,
+${makeSwing({ ropeLabel: 'r = 3,0 m', forces: true })}`,
             answer: { value: 500, unit: 'N' },
             solution: `Centripetalkraften ges av
 
@@ -14795,7 +14795,7 @@ $$ F_C = \\frac{m v^2}{r} = \\frac{60 \\cdot 5{,}0^2}{3{,}0} = \\frac{1\\,500}{3
             level: 1,
             question: `En berg-och-dalbanevagn åker i en vertikal loop med radien $4{,}0\\ \\mathrm{m}$. Vilken är den minsta farten i loopens **högsta** punkt för att vagnen inte ska tappa kontakten med banan? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
 
-${makeLoop({ r: 92, rLabel: 'r = 4,0 m', cartTop: true, topForces: true, vTop: 'v' })}`,
+${makeLoop({ r: 92, rLabel: 'r = 4,0 m', cartTop: true, topForces: true, vTop: 'v' })}`,
             answer: { value: 6.3, unit: 'm/s' },
             solution: `I gränsfallet är normalkraften (eller spännkraften) noll i högsta punkten, så tyngdkraften ensam utgör centripetalkraften:
 
@@ -14811,7 +14811,7 @@ $$ mg = \\frac{mv^2}{r} \\quad\\Leftrightarrow\\quad v = \\sqrt{gr} = \\sqrt{9{,
             level: 2,
             question: `En bil som väger $1\\,200\\ \\mathrm{kg}$ kör över ett backkrön med krökningsradien $60\\ \\mathrm{m}$ i farten $72\\ \\mathrm{km/h}$. Hur stor är normalkraften från vägen på bilen i krönets högsta punkt? ($g = 9{,}82\\ \\mathrm{N/kg}$)
 
-${makeCrest({ r: 160, rLabel: 'r = 60 m' })}`,
+${makeCrest({ r: 160, rLabel: 'r = 60 m' })}`,
             answer: { value: 3800, unit: 'N' },
             solution: `I krönets högsta punkt pekar centripetalkraften **nedåt** (mot krökningens centrum). Två krafter verkar: tyngdkraften $mg$ nedåt och normalkraften $N$ uppåt. Deras resultant är centripetalkraften:
 
@@ -14835,7 +14835,7 @@ $$ N = 1\\,200 \\cdot 9{,}82 - \\frac{1\\,200 \\cdot 20^2}{60} = 11\\,784 - 8\\,
             level: 2,
             question: `En bil kör i en plan (oluttad) kurva med radien $90\\ \\mathrm{m}$. Friktionstalet mellan däck och väg är $0{,}50$. Vilken är den högsta fart bilen kan ha utan att slira ut ur kurvan? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
 
-${makeCircularPath({ r: 110, radiusLabel: 'r = 90 m', vLabel: 'v', showFc: true, fcLabel: 'F_f', dashTrack: true })}`,
+${makeCircularPath({ r: 110, radiusLabel: 'r = 90 m', vLabel: 'v', showFc: true, fcLabel: 'F_f', dashTrack: true })}`,
             answer: { value: 21, unit: 'm/s' },
             solution: `Det är **friktionskraften** som utgör centripetalkraften och håller bilen kvar i kurvan. Vid högsta farten är friktionen maximal, $F_f = \\mu mg$:
 
@@ -14885,7 +14885,7 @@ $$ \\tan\\alpha = \\frac{25^2}{110 \\cdot 9{,}82} = \\frac{625}{1\\,080} = 0{,}5
             level: 1,
             question: `En gunga släpps från vila och faller så att tyngdpunkten sjunker $1{,}5\\ \\mathrm{m}$ tills den når banans lägsta punkt. Vilken fart har gungan där? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
 
-${makeSwing({ angle: 48, hLabel: 'h = 1,5 m', angleLabel: null })}`,
+${makeSwing({ angle: 48, hLabel: 'h = 1,5 m', angleLabel: null })}`,
             answer: { value: 5.4, unit: 'm/s' },
             solution: `Vi använder energiprincipen — lägesenergin omvandlas till rörelseenergi:
 
@@ -14945,7 +14945,7 @@ $$ v = \\sqrt{\\frac{G \\cdot m_j}{r}} = \\sqrt{\\frac{6{,}67 \\cdot 10^{-11} \\
             level: 2,
             question: `En person som väger $70\\ \\mathrm{kg}$ gungar i en gunga med $4{,}0\\ \\mathrm{m}$ långa rep. Hon släpps från vila från en höjd $1{,}2\\ \\mathrm{m}$ över banans lägsta punkt. Hur stor är den totala spännkraften i repen i lägsta punkten? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
 
-${makeSwing({ angle: 40, hLabel: 'h = 1,2 m', ropeLabel: 'l = 4,0 m', angleLabel: null, forces: true })}`,
+${makeSwing({ angle: 40, hLabel: 'h = 1,2 m', ropeLabel: 'l = 4,0 m', angleLabel: null, forces: true })}`,
             answer: { value: 1100, unit: 'N' },
             solution: `Vi kombinerar **energiprincipen** (för farten) med **cirkulär rörelse** (för kraften).
 
@@ -14964,7 +14964,7 @@ $$ F_S = \\frac{70 \\cdot 23{,}6}{4{,}0} + 70 \\cdot 9{,}82 = 412 + 687 = 1\\,10
             level: 2,
             question: `En berg-och-dalbana har en vertikal loop med radien $8{,}0\\ \\mathrm{m}$. Vilken minsta fart måste vagnen ha vid loopens **botten** för att precis klara hela loopen? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
 
-${makeLoop({ r: 88, rLabel: 'r = 8,0 m', cartTop: true, cartBottom: true, heightLabel: '2r' })}`,
+${makeLoop({ r: 88, rLabel: 'r = 8,0 m', cartTop: true, cartBottom: true, heightLabel: '2r' })}`,
             answer: { value: 20, unit: 'm/s' },
             solution: `Vi arbetar i två steg: villkoret i toppen ger minsta toppfarten, och energiprincipen kopplar topp och botten.
 
@@ -15019,7 +15019,7 @@ $$ h = r - r_j = 42\\,240 - 6\\,378 = 35\\,862\\ \\mathrm{km} \\approx 35\\,900\
             level: 3,
             question: `En pendelkula som väger $200\\ \\mathrm{g}$ hänger i en $1{,}2\\ \\mathrm{m}$ lång tråd. Kulan dras ut i sidled till vinkeln α mot lodlinjen och släpps. Tråden tål en spännkraft på högst $3{,}0\\ \\mathrm{N}$. Vilken är den största vinkeln α man kan släppa kulan ifrån utan att tråden brister? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
 
-${makeSwing({ angle: 42, angleLabel: 'α', ropeLabel: 'l = 1,2 m', forces: true })}`,
+${makeSwing({ angle: 42, angleLabel: 'α', ropeLabel: 'l = 1,2 m', forces: true })}`,
             answer: { value: 43, unit: '°' },
             solution: `Tråden är som mest belastad i banans **lägsta punkt** (där farten är störst). Där måste spännkraften både bära tyngden och kröka banan. Vi måste alltså koppla ihop **energiprincipen** (farten) med **cirkulär dynamik** (kraften) och uttrycka allt i vinkeln α.
 
@@ -15047,7 +15047,7 @@ $$ \\alpha = \\arccos(0{,}736) = 43^\\circ $$
             level: 1,
             question: `En konisk pendel har trådlängden $1{,}5\\ \\mathrm{m}$, och tråden bildar vinkeln $25^\\circ$ mot vertikalen. Beräkna periodtiden. ($g = 9{,}82\\ \\mathrm{m/s^2}$)
 
-${makeConicalPendulum({ angle: 25, lLabel: 'l = 1,5 m', massLabel: 'm' })}`,
+${makeConicalPendulum({ angle: 25, lLabel: 'l = 1,5 m', massLabel: 'm' })}`,
             answer: { value: 2.3, unit: 's' },
             solution: `Vi använder formeln för den koniska pendelns periodtid:
 
@@ -15072,7 +15072,7 @@ $$ T = 2\\pi\\sqrt{\\frac{1{,}5 \\cdot \\cos 25^\\circ}{9{,}82}} = 2{,}3\\ \\mat
             level: 1,
             question: `I en laboration hängs en leksakskossa i ett snöre och sätts i rörelse som en konisk pendel. Gruppen mäter tiden för $10$ varv till $21\\ \\mathrm{s}$ och cirkelbanans höjd under takfästet till $1{,}1\\ \\mathrm{m}$. Vilket värde på *g* ger mätningen?
 
-${makeConicalPendulum({ angle: 27, hLabel: 'h = 1,1 m', angleLabel: null })}`,
+${makeConicalPendulum({ angle: 27, hLabel: 'h = 1,1 m', angleLabel: null })}`,
             answer: { value: 9.8, unit: 'm/s²' },
             solution: `Snörets lodräta del $l\\cos\\alpha$ är banans höjd *h* under fästet, så periodformeln blir $T = 2\\pi\\sqrt{h/g}$. Löser vi ut *g* får vi
 
@@ -15108,7 +15108,7 @@ $$ f = \\frac{1}{T} = \\frac{1}{2{,}0} = 0{,}50\\ \\mathrm{Hz} $$
             level: 2,
             question: `En konisk pendel har trådlängden $2{,}0\\ \\mathrm{m}$ och tråden bildar vinkeln $40^\\circ$ mot vertikalen. Bestäm farten hos pendelvikten i cirkelbanan. ($g = 9{,}82\\ \\mathrm{m/s^2}$)
 
-${makeConicalPendulum({ angle: 40, lLabel: 'l = 2,0 m', rLabel: 'r' })}`,
+${makeConicalPendulum({ angle: 40, lLabel: 'l = 2,0 m', rLabel: 'r' })}`,
             answer: { value: 3.3, unit: 'm/s' },
             solution: `Vi behöver banradien *r* och periodtiden *T*, sedan $v = \\dfrac{2\\pi r}{T}$.
 
@@ -15129,7 +15129,7 @@ $$ v = \\frac{2\\pi r}{T} = \\frac{2\\pi \\cdot 1{,}29}{2{,}48} = 3{,}3\\ \\math
             level: 2,
             question: `En konisk pendel med trådlängden $1{,}0\\ \\mathrm{m}$ har periodtiden $1{,}8\\ \\mathrm{s}$. Vilken vinkel bildar tråden mot vertikalen? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
 
-${makeConicalPendulum({ angle: 34, lLabel: 'l = 1,0 m', angleLabel: 'α' })}`,
+${makeConicalPendulum({ angle: 34, lLabel: 'l = 1,0 m', angleLabel: 'α' })}`,
             answer: { value: 36, unit: '°' },
             solution: `Vi löser ut $\\cos\\alpha$ ur periodformeln:
 
@@ -15156,7 +15156,7 @@ $$ \\cos\\alpha = \\frac{9{,}82 \\cdot 1{,}8^2}{4\\pi^2 \\cdot 1{,}0} = 0{,}806 
             level: 3,
             question: `En konisk pendel har trådlängden $1{,}5\\ \\mathrm{m}$. Vid vilken periodtid blir spännkraften i tråden **exakt dubbelt så stor** som tyngdkraften på pendelvikten? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
 
-${makeConicalPendulum({ angle: 45, lLabel: 'l = 1,5 m', angleLabel: null, forces: true })}`,
+${makeConicalPendulum({ angle: 45, lLabel: 'l = 1,5 m', angleLabel: null, forces: true })}`,
             answer: { value: 1.7, unit: 's', tol: 0.03 },
             solution: `Insikten är att spännkraften $F_S$ måste delas upp i komposanter, och att den **lodräta** komposanten ensam bär upp tyngden (vikten åker varken upp eller ner):
 
@@ -15182,7 +15182,7 @@ $$ T = 2\\pi\\sqrt{\\frac{l\\cos\\alpha}{g}} = 2\\pi\\sqrt{\\frac{1{,}5 \\cdot 0
             level: 1,
             question: `En boll sparkas från marken med utgångsfarten $18\\ \\mathrm{m/s}$ och vinkeln $30^\\circ$ mot horisontalplanet. Hur lång blir kastvidden? (Bortse från luftmotstånd, $g = 9{,}82\\ \\mathrm{m/s^2}$.)
 
-${makeProjectile({ kind: 'angle', angle: 30, v0Label: 'v_0 = 18 m/s', rangeLabel: 'x_max' })}`,
+${makeProjectile({ kind: 'angle', angle: 30, v0Label: 'v_0 = 18 m/s', rangeLabel: 'x_max' })}`,
             answer: { value: 29, unit: 'm' },
             solution: `Eftersom bollen startar och landar i samma höjd kan vi använda formeln för kastvidd:
 
@@ -15196,7 +15196,7 @@ $$ x_{\\max} = \\frac{v_0^2 \\cdot \\sin(2\\alpha)}{g} = \\frac{18^2 \\cdot \\si
             level: 1,
             question: `Samma boll sparkas från marken med utgångsfarten $18\\ \\mathrm{m/s}$ och vinkeln $30^\\circ$. Hur hög blir bollens stighöjd (högsta punkt)? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
 
-${makeProjectile({ kind: 'angle', angle: 30, v0Label: 'v_0 = 18 m/s', apex: true, apexLabel: 'y_max' })}`,
+${makeProjectile({ kind: 'angle', angle: 30, v0Label: 'v_0 = 18 m/s', apex: true, apexLabel: 'y_max' })}`,
             answer: { value: 4.1, unit: 'm' },
             solution: `Stighöjden ges av
 
@@ -15210,7 +15210,7 @@ $$ y_{\\max} = \\frac{v_0^2 \\cdot \\sin^2\\alpha}{2g} = \\frac{18^2 \\cdot \\si
             level: 1,
             question: `Kalle springer rakt ut från kanten på ett $10\\ \\mathrm{m}$ högt hopptorn med den vågräta farten $4{,}0\\ \\mathrm{m/s}$. Hur långt ut från tornet landar han i vattnet? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
 
-${makeProjectile({ kind: 'horizontal', platformH: 150, v0Label: 'v_0 = 4,0 m/s', heightLabel: 'h = 10 m', distLabel: 'x', objLabel: 'Kalle' })}`,
+${makeProjectile({ kind: 'horizontal', platformH: 150, v0Label: 'v_0 = 4,0 m/s', heightLabel: 'h = 10 m', distLabel: 'x', objLabel: 'Kalle' })}`,
             answer: { value: 5.7, unit: 'm' },
             solution: `Detta är ett vågrätt kast. Vi bestämmer först falltiden ur rörelsen i *y*-led (han startar med $v_y = 0$):
 
@@ -15230,7 +15230,7 @@ $$ x = v_0 \\cdot t = 4{,}0 \\cdot 1{,}43 = 5{,}7\\ \\mathrm{m} $$
             level: 2,
             question: `En boll kastas vågrätt med farten $12\\ \\mathrm{m/s}$ från höjden $8{,}0\\ \\mathrm{m}$. Med vilken fart träffar den marken? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
 
-${makeProjectile({ kind: 'horizontal', platformH: 140, v0Label: 'v_0 = 12 m/s', heightLabel: 'h = 8,0 m' })}`,
+${makeProjectile({ kind: 'horizontal', platformH: 140, v0Label: 'v_0 = 12 m/s', heightLabel: 'h = 8,0 m' })}`,
             answer: { value: 17, unit: 'm/s', tol: 0.03 },
             solution: `Sluthastigheten är resultanten av den (konstanta) vågräta farten och den (växande) lodräta farten. Vi behöver först falltiden:
 
@@ -15256,7 +15256,7 @@ $$ v = \\sqrt{v_x^2 + v_y^2} = \\sqrt{12^2 + 12{,}5^2} = 17\\ \\mathrm{m/s} $$
             level: 2,
             question: `Från en klippa $20\\ \\mathrm{m}$ över vattnet kastas en sten **vågrätt**. Stenen ska landa $15\\ \\mathrm{m}$ ut från klippans fot. Vilken utgångsfart krävs? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
 
-${makeProjectile({ kind: 'horizontal', platformH: 150, v0Label: 'v_0', heightLabel: 'h = 20 m', distLabel: 'x = 15 m' })}`,
+${makeProjectile({ kind: 'horizontal', platformH: 150, v0Label: 'v_0', heightLabel: 'h = 20 m', distLabel: 'x = 15 m' })}`,
             answer: { value: 7.4, unit: 'm/s' },
             solution: `Falltiden bestäms av höjden (rörelsen i *y*-led, $v_y = 0$ från start):
 
@@ -15276,7 +15276,7 @@ $$ x = v_0 \\cdot t \\quad\\Leftrightarrow\\quad v_0 = \\frac{x}{t} = \\frac{15}
             level: 3,
             question: `En fotbollsspelare sparkar bollen från marken med utgångsfarten $20\\ \\mathrm{m/s}$ och vinkeln $35^\\circ$. På avståndet $30\\ \\mathrm{m}$ står en $2{,}5\\ \\mathrm{m}$ hög mur. Hur högt över marken befinner sig bollen när den når muren — och går den över? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
 
-${makeProjectile({ kind: 'angle', angle: 35, v0Label: 'v_0 = 20 m/s', wall: { atFracX: 0.78, hFrac: 0.37, label: '2,5 m' } })}`,
+${makeProjectile({ kind: 'angle', angle: 35, v0Label: 'v_0 = 20 m/s', wall: { atFracX: 0.78, hFrac: 0.37, label: '2,5 m' } })}`,
             answer: { value: 4.5, unit: 'm' },
             solution: `Här går det **inte** att använda kastviddsformeln — vi måste behandla rörelsen i *x*- och *y*-led var för sig och ta reda på höjden vid en *specifik* vågrät position.
 
@@ -15590,7 +15590,7 @@ $$ a = \\frac{-25 \\cdot (-0{,}10)}{0{,}40} = \\frac{2{,}5}{0{,}40} = 6{,}25\\ \
   <line x1="242" y1="98" x2="242" y2="120" stroke="#1a1d24" stroke-width="1.4"/>
   <line x1="78" y1="120" x2="242" y2="120" stroke="#1a1d24" stroke-width="1.4"/>
   <rect x="130" y="120" width="60" height="44" fill="#fafaf5" stroke="#1a1d24" stroke-width="1.6"/>
-  <text x="160" y="148" font-family="Poppins, sans-serif" font-size="13" text-anchor="middle" fill="#1a1d24">0,50 kg</text>
+  <text x="160" y="148" font-family="Poppins, sans-serif" font-size="13" text-anchor="middle" fill="#1a1d24">0,50 kg</text>
   <text x="160" y="186" font-family="Poppins, sans-serif" font-size="12" text-anchor="middle" fill="#5a6172" font-style="italic">parallellkoppling</text>
 </svg>`,
             answer: { value: 0.040, unit: 'm' },
@@ -15832,7 +15832,7 @@ $$ \\Delta l = \\frac{6{,}0}{25} = 0{,}24\\ \\mathrm{m} $$
             level: 3,
             question: `En pilbåge spänns $32\\ \\mathrm{cm}$ med en spännkraft på $180\\ \\mathrm{N}$. Pilen skjuts vågrätt från höjden $1{,}6\\ \\mathrm{m}$ ovanför marken och landar $24\\ \\mathrm{m}$ bort. Bestäm pilens massa. Räkna med $g = 9{,}82\\ \\mathrm{m/s^2}$ och bortse från luftmotstånd.
 
-${makeProjectile({ kind: 'horizontal', hLabel: 'h = 1,6 m', xLabel: 'x = 24 m', vLabel: 'v_0' })}`,
+${makeProjectile({ kind: 'horizontal', hLabel: 'h = 1,6 m', xLabel: 'x = 24 m', vLabel: 'v_0' })}`,
             answer: { value: 0.033, unit: 'kg' },
             solution: `Uppgiften kombinerar **fjäderenergi**, **energiomvandling** och **horisontellt kast**.
 
@@ -15970,7 +15970,7 @@ $$ y = 0{,}12\\sin(8{,}0\\,t) $$
 
 Beräkna farten i ögonblicket $t = 0{,}10\\ \\mathrm{s}$.
 
-${makeOscillation({ A: 0.12, omega: 8.0, tMax: 1.2, markT: 0.10, markTLabel: 't = 0,10 s' })}`,
+${makeOscillation({ A: 0.12, omega: 8.0, tMax: 1.2, markT: 0.10, markTLabel: 't = 0,10 s' })}`,
             answer: { value: 0.67, unit: 'm/s' },
             solution: `Hastigheten fås som derivatan av läget med avseende på tiden:
 
@@ -16200,11 +16200,11 @@ $$ k = \\frac{4\\pi^2 \\cdot 0{,}45}{0{,}80^2} = \\frac{17{,}77}{0{,}64} \\appro
   <line x1="40" y1="22" x2="240" y2="22" stroke="#1a1d24" stroke-width="1.6"/>
   <g><line x1="48" y1="22" x2="42" y2="14" stroke="#1a1d24"/><line x1="60" y1="22" x2="54" y2="14" stroke="#1a1d24"/><line x1="72" y1="22" x2="66" y2="14" stroke="#1a1d24"/><line x1="84" y1="22" x2="78" y2="14" stroke="#1a1d24"/><line x1="96" y1="22" x2="90" y2="14" stroke="#1a1d24"/><line x1="108" y1="22" x2="102" y2="14" stroke="#1a1d24"/><line x1="120" y1="22" x2="114" y2="14" stroke="#1a1d24"/><line x1="132" y1="22" x2="126" y2="14" stroke="#1a1d24"/><line x1="144" y1="22" x2="138" y2="14" stroke="#1a1d24"/><line x1="156" y1="22" x2="150" y2="14" stroke="#1a1d24"/><line x1="168" y1="22" x2="162" y2="14" stroke="#1a1d24"/><line x1="180" y1="22" x2="174" y2="14" stroke="#1a1d24"/><line x1="192" y1="22" x2="186" y2="14" stroke="#1a1d24"/><line x1="204" y1="22" x2="198" y2="14" stroke="#1a1d24"/><line x1="216" y1="22" x2="210" y2="14" stroke="#1a1d24"/><line x1="228" y1="22" x2="222" y2="14" stroke="#1a1d24"/></g>
   <path d="M 140 22 L 140 32 L 150 38 L 130 46 L 150 54 L 130 62 L 150 70 L 130 78 L 150 86 L 140 92 L 140 102" stroke="#1a1d24" stroke-width="1.6" fill="none"/>
-  <text x="170" y="65" font-family="Poppins, sans-serif" font-size="14" fill="#1a1d24"><tspan font-style="italic">k</tspan> = 96 N/m</text>
+  <text x="170" y="65" font-family="Poppins, sans-serif" font-size="14" fill="#1a1d24"><tspan font-style="italic">k</tspan> = 96 N/m</text>
   <path d="M 140 102 L 140 112 L 150 118 L 130 126 L 150 134 L 130 142 L 150 150 L 130 158 L 150 166 L 140 172 L 140 182" stroke="#1a1d24" stroke-width="1.6" fill="none"/>
-  <text x="170" y="145" font-family="Poppins, sans-serif" font-size="14" fill="#1a1d24"><tspan font-style="italic">k</tspan> = 96 N/m</text>
+  <text x="170" y="145" font-family="Poppins, sans-serif" font-size="14" fill="#1a1d24"><tspan font-style="italic">k</tspan> = 96 N/m</text>
   <rect x="118" y="182" width="44" height="36" fill="#fafaf5" stroke="#1a1d24" stroke-width="1.6"/>
-  <text x="140" y="205" font-family="Poppins, sans-serif" font-size="12" text-anchor="middle" fill="#1a1d24">0,50 kg</text>
+  <text x="140" y="205" font-family="Poppins, sans-serif" font-size="12" text-anchor="middle" fill="#1a1d24">0,50 kg</text>
 </svg>`,
             answer: { value: 0.641, unit: 's' },
             solution: `**Insikten är att två fjädrar i serie känner samma *kraft*** (viktens tyngd), men deras *förlängningar* adderas. Paret blir därför mjukare än en ensam fjäder.
@@ -16229,7 +16229,7 @@ $$ T = 2\\pi\\sqrt{\\frac{m}{k_\\mathrm{R}}} = 2\\pi\\sqrt{\\frac{0{,}50}{48}} =
             level: 1,
             question: `En matematisk pendel har pendellängden $2{,}0\\ \\mathrm{m}$. Bestäm periodtiden. Räkna med $g = 9{,}82\\ \\mathrm{m/s^2}$.
 
-${makeSwing({ angle: 18, ropeLabel: 'l = 2,0 m', angleLabel: null })}`,
+${makeSwing({ angle: 18, ropeLabel: 'l = 2,0 m', angleLabel: null })}`,
             answer: { value: 2.8, unit: 's' },
             solution: `Periodtiden för en matematisk pendel ges av
 
@@ -16275,7 +16275,7 @@ $$ l = \\frac{1{,}50^2 \\cdot 9{,}82}{4\\pi^2} = \\frac{22{,}095}{39{,}478\\ldot
             level: 1,
             question: `En astronaut har med sig en matematisk pendel med pendellängden $0{,}30\\ \\mathrm{m}$ till en främmande planet. Pendeln mäts upp att ha periodtiden $1{,}20\\ \\mathrm{s}$ där. Bestäm tyngdaccelerationen på planeten.
 
-${makeSwing({ angle: 14, ropeLabel: 'l = 0,30 m', angleLabel: null })}`,
+${makeSwing({ angle: 14, ropeLabel: 'l = 0,30 m', angleLabel: null })}`,
             answer: { value: 8.2, unit: 'm/s²' },
             solution: `Vi löser ut tyngdaccelerationen:
 
@@ -16325,7 +16325,7 @@ Massan spelar ingen roll eftersom den tyngre kulan visserligen dras tillbaka med
             level: 2,
             question: `En matematisk pendel har pendellängden $0{,}80\\ \\mathrm{m}$. Hur lång ska pendeln vara för att periodtiden ska **fördubblas**?
 
-${makeSwing({ angle: 14, ropeLabel: 'l = 0,80 m', angleLabel: null })}`,
+${makeSwing({ angle: 14, ropeLabel: 'l = 0,80 m', angleLabel: null })}`,
             answer: { value: 3.2, unit: 'm' },
             solution: `Periodtiden är proportionell mot kvadratroten av pendellängden:
 
@@ -16372,7 +16372,7 @@ $$ T_\\text{Mars} = 2{,}00 \\cdot \\sqrt{\\frac{9{,}82}{3{,}71}} = 2{,}00 \\cdot
             level: 2,
             question: `En pendel består av ett tunt snöre och en klotformad kula med diametern $6{,}0\\ \\mathrm{cm}$. Snöret är $1{,}20\\ \\mathrm{m}$ långt, mätt från fästpunkten till kulans översida. Bestäm pendelns periodtid. Räkna med $g = 9{,}82\\ \\mathrm{m/s^2}$.
 
-${makeSwing({ angle: 14, ropeLabel: '1,20 m', angleLabel: null })}`,
+${makeSwing({ angle: 14, ropeLabel: '1,20 m', angleLabel: null })}`,
             answer: { value: 2.22, unit: 's' },
             solution: `Pendellängden räknas från fästpunkten till kulans **tyngdpunkt**, alltså till kulans mittpunkt. Snörets längd slutar vid kulans översida, så vi lägger till kulans radie, halva diametern:
 
@@ -16866,7 +16866,7 @@ $$ t = \\frac{d}{v_\\text{rel}} = \\frac{1{,}2}{4{,}0} = 0{,}30\\ \\mathrm{s} $$
             level: 1,
             question: `En sträng med fasta ändar har längden $0{,}60\\ \\mathrm{m}$ och svänger i sin **grundton** (en buk). Beräkna vågens våglängd i strängen.
 
-${makeStanding({ type: 'string', n: 1, length: 280, lengthLabel: '<tspan font-style="italic">l</tspan> = 0,60 m' })}`,
+${makeStanding({ type: 'string', n: 1, length: 280, lengthLabel: '<tspan font-style="italic">l</tspan> = 0,60 m' })}`,
             answer: { value: 1.20, unit: 'm' },
             solution: `Vid grundtonen har strängen **en buk** mellan de två fasta ändarna. Avståndet mellan två närliggande noder är $\\lambda/2$, så strängens längd motsvarar en halv våglängd:
 
@@ -16889,7 +16889,7 @@ $$ \\lambda = 2 \\cdot 0{,}60 = 1{,}20\\ \\mathrm{m} $$
             level: 1,
             question: `En sträng med längden $0{,}90\\ \\mathrm{m}$ svänger i sin **andra överton** (tre bukar). Beräkna vågens våglängd.
 
-${makeStanding({ type: 'string', n: 3, length: 320, lengthLabel: '<tspan font-style="italic">l</tspan> = 0,90 m' })}`,
+${makeStanding({ type: 'string', n: 3, length: 320, lengthLabel: '<tspan font-style="italic">l</tspan> = 0,90 m' })}`,
             answer: { value: 0.60, unit: 'm' },
             solution: `Med $n$ bukar är strängens längd $n$ halva våglängder:
 
@@ -16925,7 +16925,7 @@ $$ f = \\frac{v}{\\lambda} = \\frac{300}{2{,}0} = 150\\ \\mathrm{Hz} $$
             level: 2,
             question: `En sträng med längden $0{,}50\\ \\mathrm{m}$ har våghastigheten $160\\ \\mathrm{m/s}$. Beräkna **grundtonens frekvens**.
 
-${makeStanding({ type: 'string', n: 1, length: 260, lengthLabel: '<tspan font-style="italic">l</tspan> = 0,50 m' })}`,
+${makeStanding({ type: 'string', n: 1, length: 260, lengthLabel: '<tspan font-style="italic">l</tspan> = 0,50 m' })}`,
             answer: { value: 160, unit: 'Hz' },
             solution: `Vi behöver först grundtonens våglängd, sedan dess frekvens.
 
@@ -16993,7 +16993,7 @@ $$ f_2 = \\frac{v}{\\lambda_2} = \\frac{214{,}5}{0{,}65} = 330\\ \\mathrm{Hz} $$
             level: 1,
             question: `En **öppen pipa** har längden $0{,}40\\ \\mathrm{m}$. Beräkna grundtonens frekvens. Räkna med ljudets hastighet $v = 340\\ \\mathrm{m/s}$ i luft.
 
-${makeStanding({ type: 'open', n: 1, length: 280, lengthLabel: '<tspan font-style="italic">l</tspan> = 0,40 m' })}`,
+${makeStanding({ type: 'open', n: 1, length: 280, lengthLabel: '<tspan font-style="italic">l</tspan> = 0,40 m' })}`,
             answer: { value: 425, unit: 'Hz' },
             solution: `I en öppen pipa är båda ändarna bukar. Grundtonen ($n = 1$) har en nod i mitten, så pipans längd motsvarar en halv våglängd:
 
@@ -17017,7 +17017,7 @@ $$ f = \\frac{v}{\\lambda} = \\frac{340}{0{,}80} = 425\\ \\mathrm{Hz} $$
             level: 1,
             question: `En **halvöppen pipa** har längden $0{,}40\\ \\mathrm{m}$. Beräkna grundtonens frekvens. Räkna med $v = 340\\ \\mathrm{m/s}$.
 
-${makeStanding({ type: 'half', n: 1, length: 280, lengthLabel: '<tspan font-style="italic">l</tspan> = 0,40 m' })}`,
+${makeStanding({ type: 'half', n: 1, length: 280, lengthLabel: '<tspan font-style="italic">l</tspan> = 0,40 m' })}`,
             answer: { value: 212.5, unit: 'Hz' },
             solution: `I en halvöppen pipa är ena änden öppen (buk) och andra änden sluten (nod). Grundtonen ($n = 1$) motsvarar avståndet från en buk till närliggande nod — en **fjärdedels** våglängd:
 
@@ -17065,7 +17065,7 @@ $$ l = \\frac{340}{2 \\cdot 300} = 0{,}5667\\ldots\\ \\mathrm{m} \\approx 0{,}57
             level: 2,
             question: `En halvöppen pipa har längden $0{,}18\\ \\mathrm{m}$. Beräkna frekvensen för **första övertonen**. Räkna med $v = 340\\ \\mathrm{m/s}$.
 
-${makeStanding({ type: 'half', n: 2, length: 280, lengthLabel: '<tspan font-style="italic">l</tspan> = 0,18 m' })}`,
+${makeStanding({ type: 'half', n: 2, length: 280, lengthLabel: '<tspan font-style="italic">l</tspan> = 0,18 m' })}`,
             answer: { value: 1417, unit: 'Hz' },
             solution: `För en halvöppen pipa gäller
 
@@ -17218,11 +17218,11 @@ $$ I = 10^{-12} \\cdot 10^{60/10} = 10^{-12} \\cdot 10^{6} = 10^{-6}\\ \\mathrm{
   <circle cx="120" cy="100" r="80" fill="none" stroke="#5a6172" stroke-width="1.2" stroke-dasharray="4 4"/>
   <circle cx="120" cy="100" r="6" fill="#c8324a"/>
   <text x="120" y="88" text-anchor="middle" font-size="11" fill="#1a1d24">källa</text>
-  <text x="120" y="130" text-anchor="middle" font-size="12" fill="#1a1d24"><tspan font-style="italic">P</tspan> = 8,0 W</text>
+  <text x="120" y="130" text-anchor="middle" font-size="12" fill="#1a1d24"><tspan font-style="italic">P</tspan> = 8,0 W</text>
   <circle cx="200" cy="100" r="4" fill="#1a1d24"/>
   <text x="206" y="96" font-size="12" fill="#1a1d24">lyssnare</text>
   <line x1="126" y1="100" x2="194" y2="100" stroke="#5a6172" stroke-width="1"/>
-  <text x="160" y="92" text-anchor="middle" font-size="12" fill="#1a1d24"><tspan font-style="italic">r</tspan> = 5,0 m</text>
+  <text x="160" y="92" text-anchor="middle" font-size="12" fill="#1a1d24"><tspan font-style="italic">r</tspan> = 5,0 m</text>
 </svg>`,
             answer: { value: 0.0255, unit: 'W/m²' },
             solution: `För en punktkälla i en jämn omgivning fördelas effekten över en sfärsk yta med radien *r*. Intensiteten är därför
@@ -17384,9 +17384,9 @@ $$ d = \\frac{340 \\cdot 0{,}012}{2} = 2{,}04\\ \\mathrm{m} $$
                 'Alla ljud har störst amplitud just vid $4\\,000\\ \\mathrm{Hz}$.',
             ],
             correct: 1,
-            solution: `Vårt öra är som mest känsligt mellan $2\\,000$ och $4\\,000\\ \\mathrm{Hz}$ eftersom **konsonanter** i mänskligt tal — som *s*, *f*, *t*, *k*, *p* och sch-ljud — ligger där. Konsonanterna bär nästan all *information* i talet; vokalerna ligger lägre (250–1 000 Hz) och bär ljudets styrka. Utan diskanten kan vi inte skilja "saft" från "katt".
+            solution: `Vårt öra är som mest känsligt mellan $2\\,000$ och $4\\,000\\ \\mathrm{Hz}$ eftersom **konsonanter** i mänskligt tal — som *s*, *f*, *t*, *k*, *p* och sch-ljud — ligger där. Konsonanterna bär nästan all *information* i talet; vokalerna ligger lägre (250–1 000 Hz) och bär ljudets styrka. Utan diskanten kan vi inte skilja "saft" från "katt".
 
-Dessutom förstärker **hörselgångens resonans** (ett rör stängt i ena änden) just frekvenserna 2 500–4 000 Hz, så örat fungerar som en passiv förstärkare i exakt det område där talets information sitter. Evolutionärt har det också varit livsavgörande att höra prassel, knak och barngråt — alla med starka komponenter runt $3\\,000\\ \\mathrm{Hz}$.
+Dessutom förstärker **hörselgångens resonans** (ett rör stängt i ena änden) just frekvenserna 2 500–4 000 Hz, så örat fungerar som en passiv förstärkare i exakt det område där talets information sitter. Evolutionärt har det också varit livsavgörande att höra prassel, knak och barngråt — alla med starka komponenter runt $3\\,000\\ \\mathrm{Hz}$.
 
 **Generell slutsats:** Mänsklig hörsel är **inte** linjär — vi uppfattar olika frekvenser olika starkt även när ljudnivån (i dB) är densamma. Det är därför hörlurar och ljudsystem ofta är "EQ-tunade" till att kompensera.`,
         },
@@ -17457,7 +17457,7 @@ $$ i = r = 35^\\circ $$
             level: 1,
             question: `En vattenvåg går från djupt vatten med våglängden $\\lambda_1 = 12\\ \\mathrm{m}$ till grunt vatten med våglängden $\\lambda_2 = 8{,}0\\ \\mathrm{m}$. Infallsvinkeln är $30^\\circ$. Beräkna brytningsvinkeln.
 
-${makeRefraction({ i: 30, b: 19.5, iLabel: '30°', bLabel: 'b', medium1: 'djupt (<tspan font-style="italic">λ</tspan>₁ = 12 m)', medium2: 'grunt (<tspan font-style="italic">λ</tspan>₂ = 8,0 m)' })}`,
+${makeRefraction({ i: 30, b: 19.5, iLabel: '30°', bLabel: 'b', medium1: 'djupt (<tspan font-style="italic">λ</tspan>₁ = 12 m)', medium2: 'grunt (<tspan font-style="italic">λ</tspan>₂ = 8,0 m)' })}`,
             answer: { value: 19, unit: '°' },
             solution: `Brytningslagen ger
 
@@ -17484,7 +17484,7 @@ $$ b = \\sin^{-1}(0{,}3333\\ldots) = 19{,}47\\ldots^\\circ \\approx 19^\\circ $$
             level: 1,
             question: `En vattenvåg går från grunt vatten ($v_1 = 3{,}0\\ \\mathrm{m/s}$) till djupt vatten ($v_2 = 8{,}0\\ \\mathrm{m/s}$). Infallsvinkeln är $18^\\circ$. Beräkna brytningsvinkeln.
 
-${makeRefraction({ i: 18, b: 55.5, iLabel: '18°', bLabel: 'b', medium1: 'grunt (<tspan font-style="italic">v</tspan>₁ = 3,0 m/s)', medium2: 'djupt (<tspan font-style="italic">v</tspan>₂ = 8,0 m/s)' })}`,
+${makeRefraction({ i: 18, b: 55.5, iLabel: '18°', bLabel: 'b', medium1: 'grunt (<tspan font-style="italic">v</tspan>₁ = 3,0 m/s)', medium2: 'djupt (<tspan font-style="italic">v</tspan>₂ = 8,0 m/s)' })}`,
             answer: { value: 55, unit: '°' },
             solution: `Brytningslagen med hastigheter:
 
@@ -17535,7 +17535,7 @@ $$ v \\approx \\sqrt{9{,}82 \\cdot 2{,}5} = 4{,}954\\ldots\\ \\mathrm{m/s} \\app
             level: 2,
             question: `En vattenvåg går från djupt till grunt vatten. Våglängden i djupt vatten är $8{,}0\\ \\mathrm{m}$. Infallsvinkeln är $60^\\circ$ och brytningsvinkeln är $30^\\circ$. Beräkna våglängden i det grunda vattnet.
 
-${makeRefraction({ i: 60, b: 30, iLabel: '60°', bLabel: '30°', medium1: 'djupt (<tspan font-style="italic">λ</tspan>₁ = 8,0 m)', medium2: 'grunt (<tspan font-style="italic">λ</tspan>₂)' })}`,
+${makeRefraction({ i: 60, b: 30, iLabel: '60°', bLabel: '30°', medium1: 'djupt (<tspan font-style="italic">λ</tspan>₁ = 8,0 m)', medium2: 'grunt (<tspan font-style="italic">λ</tspan>₂)' })}`,
             answer: { value: 4.6, unit: 'm' },
             solution: `Brytningslagen:
 
@@ -17631,7 +17631,7 @@ $$ \\frac{\\sin i}{\\sin b} = \\frac{\\lambda_1}{\\lambda_2} = \\frac{12}{18} < 
             level: 3,
             question: `Raka havsvågor går över ett område där vattnet är $8{,}0\\ \\mathrm{m}$ djupt och kommer snett in mot en kant där djupet minskar till $2{,}0\\ \\mathrm{m}$. Infallsvinkeln är $40^\\circ$. Beräkna brytningsvinkeln. Anta att $v \\approx \\sqrt{g \\cdot h}$ gäller på båda djupen.
 
-${makeRefraction({ i: 40, b: 18.7, iLabel: '40°', bLabel: 'b', medium1: 'djupt (<tspan font-style="italic">h</tspan> = 8,0 m)', medium2: 'grunt (<tspan font-style="italic">h</tspan> = 2,0 m)' })}`,
+${makeRefraction({ i: 40, b: 18.7, iLabel: '40°', bLabel: 'b', medium1: 'djupt (<tspan font-style="italic">h</tspan> = 8,0 m)', medium2: 'grunt (<tspan font-style="italic">h</tspan> = 2,0 m)' })}`,
             answer: { value: 19, unit: '°' },
             solution: `Brytningslagen kopplar vinklarna till hastigheterna, och hastigheterna bestäms av djupen.
 
@@ -17724,7 +17724,7 @@ I dubbelspaltsförsöket samverkar båda — först diffrakterar vågen genom va
             level: 2,
             question: `Två högtalare *A* och *B* står $4{,}0\\ \\mathrm{m}$ från varandra och spelar samma ton ($340\\ \\mathrm{Hz}$) i fas. En lyssnare står $3{,}0\\ \\mathrm{m}$ från *B* på en linje vinkelrätt mot $AB$ (alltså rakt fram från *B*). På vilken linje står lyssnaren? Räkna med $v = 340\\ \\mathrm{m/s}$.
 
-${makeTwoSourceGeo({ dAB: 4.0, dBL: 3.0, dABLabel: 'AB = 4,0 m', dBLLabel: 'BL = 3,0 m', dALLabel: 'AL' })}`,
+${makeTwoSourceGeo({ dAB: 4.0, dBL: 3.0, dABLabel: 'AB = 4,0 m', dBLLabel: 'BL = 3,0 m', dALLabel: 'AL' })}`,
             answer: { value: 2, unit: '(2:a maxlinjen)' },
             solution: `Vi avgör vilken linje genom att räkna vägskillnaden i våglängder.
 
@@ -17754,7 +17754,7 @@ Vägskillnaden är **två hela våglängder**, alltså konstruktiv interferens: 
             level: 2,
             question: `Två högtalare *A* och *B* står $3{,}0\\ \\mathrm{m}$ från varandra och spelar samma ton i fas. En lyssnare står $4{,}0\\ \\mathrm{m}$ från *B* på en linje vinkelrätt mot $AB$ (rakt fram från *B*). Lyssnaren upplever att hen står på **0:e nodlinjen** (första tysta punkten från centrum). Bestäm tonens frekvens. Räkna med $v = 340\\ \\mathrm{m/s}$.
 
-${makeTwoSourceGeo({ dAB: 3.0, dBL: 4.0, dABLabel: 'AB = 3,0 m', dBLLabel: 'BL = 4,0 m', dALLabel: 'AL' })}`,
+${makeTwoSourceGeo({ dAB: 3.0, dBL: 4.0, dABLabel: 'AB = 3,0 m', dBLLabel: 'BL = 4,0 m', dALLabel: 'AL' })}`,
             answer: { value: 170, unit: 'Hz' },
             solution: `Vi bestämmer först vägskillnaden ur geometrin, sedan våglängden från interferens-villkoret, och slutligen frekvensen.
 
@@ -17782,7 +17782,7 @@ $$ f = \\frac{v}{\\lambda} = \\frac{340}{2{,}0} = 170\\ \\mathrm{Hz} $$
             level: 3,
             question: `Två högtalare *A* och *B* står $5{,}0\\ \\mathrm{m}$ från varandra och spelar samma ton i fas. En lyssnare står $12{,}0\\ \\mathrm{m}$ från *B* på en linje vinkelrätt mot $AB$ (rakt fram från *B*). Lyssnaren upplever att hen står på **1:a nodlinjen**. Bestäm tonens frekvens. Räkna med $v = 340\\ \\mathrm{m/s}$.
 
-${makeTwoSourceGeo({ dAB: 5.0, dBL: 12.0, dABLabel: 'AB = 5,0 m', dBLLabel: 'BL = 12,0 m', dALLabel: 'AL' })}`,
+${makeTwoSourceGeo({ dAB: 5.0, dBL: 12.0, dABLabel: 'AB = 5,0 m', dBLLabel: 'BL = 12,0 m', dALLabel: 'AL' })}`,
             answer: { value: 510, unit: 'Hz' },
             solution: `**Insikten är att 1:a nodlinjen ($n = 1$) motsvarar vägskillnaden $\\dfrac{3\\lambda}{2}$** — inte $\\lambda/2$ som för 0:e nodlinjen. Att räkna fel på nodlinje-ordningen är den vanligaste fällan i interferensuppgifter.
 
@@ -17918,11 +17918,11 @@ Namnet nordända betyder "den ända som pekar norrut", inte att ändan själv sk
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 160" width="300" height="160" style="display:block;margin:14px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:4px;font-family:Poppins,sans-serif">
   <circle cx="80" cy="80" r="13" fill="#fafaf5" stroke="#1a1d24" stroke-width="1.6"/>
   <circle cx="80" cy="80" r="3" fill="#1a1d24"/>
-  <text x="60" y="62" text-anchor="end" font-size="12" fill="#1a1d24"><tspan font-style="italic">I</tspan> = 3,5 A</text>
+  <text x="60" y="62" text-anchor="end" font-size="12" fill="#1a1d24"><tspan font-style="italic">I</tspan> = 3,5 A</text>
   <circle cx="220" cy="80" r="3.5" fill="#c8324a"/>
   <text x="226" y="76" font-size="12" fill="#1a1d24">P</text>
   <line x1="93" y1="80" x2="217" y2="80" stroke="#5a6172" stroke-width="1" stroke-dasharray="4 3"/>
-  <text x="156" y="98" text-anchor="middle" font-size="12" fill="#5a6172"><tspan font-style="italic">d</tspan> = 2,0 cm</text>
+  <text x="156" y="98" text-anchor="middle" font-size="12" fill="#5a6172"><tspan font-style="italic">d</tspan> = 2,0 cm</text>
 </svg>`,
             answer: { value: 3.5e-5, unit: 'T' },
             solution: `Magnetfältet kring en lång rak ledare ges av
@@ -17990,7 +17990,7 @@ $$ d = \\frac{2{,}0\\cdot 10^{-7} \\cdot 8{,}0}{1{,}0\\cdot 10^{-4}} = 0{,}016\\
             level: 2,
             question: `En lång rak ledare står vinkelrätt mot pappret med strömmen $2{,}5\\ \\mathrm{A}$ **in i planet**. En punkt P ligger $4{,}0\\ \\mathrm{cm}$ rakt åt höger om ledaren. Bestäm magnetfältets storlek och riktning i punkten P. Räkna med $k = 2{,}0\\cdot 10^{-7}\\ \\mathrm{T\\cdot m/A}$.
 
-${makeBField({ width: 280, height: 200, wireIn: { label: 'I = 2,5 A' } })}`,
+${makeBField({ width: 280, height: 200, wireIn: { label: 'I = 2,5 A' } })}`,
             answer: { value: 1.25e-5, unit: 'T' },
             solution: `**Steg 1 — fältets storlek.**
 
@@ -18221,7 +18221,7 @@ $$ B_2 = \\frac{B_1}{4} = \\frac{50}{4} = 12{,}5\\ \\mathrm{mT} $$
             level: 1,
             question: `En proton med hastigheten $3{,}0\\cdot 10^6\\ \\mathrm{m/s}$ rör sig vinkelrätt mot ett magnetfält med flödestätheten $0{,}50\\ \\mathrm{T}$. Beräkna den magnetiska kraften på protonen. Räkna med $q = 1{,}602\\cdot 10^{-19}\\ \\mathrm{C}$.
 
-${makeBField({ width: 280, height: 180, bDir: 'in', bLabel: 'B = 0,50 T', particle: { sign: '+' }, velocity: { angle: 0, label: 'v' } })}`,
+${makeBField({ width: 280, height: 180, bDir: 'in', bLabel: 'B = 0,50 T', particle: { sign: '+' }, velocity: { angle: 0, label: 'v' } })}`,
             answer: { value: 2.40e-13, unit: 'N' },
             solution: `Magnetisk kraft på en laddad partikel:
 
@@ -18277,7 +18277,7 @@ $$ B = \\frac{F}{q\\cdot v} = \\frac{4{,}0\\cdot 10^{-13}}{1{,}602\\cdot 10^{-19
             level: 2,
             question: `En elektron rör sig **nedåt** med hastigheten $4{,}0\\cdot 10^6\\ \\mathrm{m/s}$ i ett magnetfält $B = 0{,}25\\ \\mathrm{T}$ som är riktat **in i pappret**. Bestäm den magnetiska kraftens storlek och riktning på elektronen. Räkna med $q = 1{,}602\\cdot 10^{-19}\\ \\mathrm{C}$.
 
-${makeBField({ width: 280, height: 200, bDir: 'in', bLabel: 'B = 0,25 T', particle: { sign: '−' }, velocity: { angle: -90, label: 'v' } })}`,
+${makeBField({ width: 280, height: 200, bDir: 'in', bLabel: 'B = 0,25 T', particle: { sign: '−' }, velocity: { angle: -90, label: 'v' } })}`,
             answer: { value: 1.60e-13, unit: 'N' },
             solution: `**Steg 1 — kraftens storlek.**
 
@@ -18359,7 +18359,7 @@ $$ \\frac{r_\\text{p}}{r_\\text{e}} = \\sqrt{\\frac{m_\\text{p}}{m_\\text{e}}} =
             level: 1,
             question: `En rak ledare med längden $30\\ \\mathrm{cm}$ ligger vinkelrätt mot ett magnetfält med $B = 0{,}50\\ \\mathrm{T}$. Strömmen genom ledaren är $4{,}0\\ \\mathrm{A}$. Bestäm den magnetiska kraften på ledaren.
 
-${makeBField({ width: 300, height: 180, bDir: 'in', bLabel: 'B = 0,50 T', wireH: { dir: 'right', label: 'I = 4,0 A', lenLabel: 'l = 30 cm' } })}`,
+${makeBField({ width: 300, height: 180, bDir: 'in', bLabel: 'B = 0,50 T', wireH: { dir: 'right', label: 'I = 4,0 A', lenLabel: 'l = 30 cm' } })}`,
             answer: { value: 0.60, unit: 'N' },
             solution: `Magnetisk kraft på strömförande ledare:
 
@@ -18404,7 +18404,7 @@ $$ B = \\frac{F}{I\\cdot l} = \\frac{0{,}50}{2{,}5 \\cdot 0{,}25} = 0{,}80\\ \\m
             level: 2,
             question: `En rak ledare med längden $15\\ \\mathrm{cm}$ ligger horisontellt mellan polerna på en U-formad magnet. Magnetfältet i gapet är $0{,}60\\ \\mathrm{T}$ riktat från nordändan (vänster) till sydändan (höger). Strömmen i ledaren är $2{,}5\\ \\mathrm{A}$ riktad **ut ur planet** (mot läsaren). Bestäm den magnetiska kraftens storlek och riktning.
 
-${makeBField({ width: 300, height: 200, bDir: 'right', bLabel: 'B = 0,60 T', wireOut: { label: 'I = 2,5 A' } })}`,
+${makeBField({ width: 300, height: 200, bDir: 'right', bLabel: 'B = 0,60 T', wireOut: { label: 'I = 2,5 A' } })}`,
             answer: { value: 0.225, unit: 'N' },
             solution: `**Steg 1 — kraftens storlek.**
 
@@ -18654,7 +18654,7 @@ $$ B = \\frac{e}{l\\cdot v} = \\frac{0{,}15}{0{,}20 \\cdot 5{,}0} = 0{,}15\\ \\m
             level: 2,
             question: `En rak ledare med längden $30\\ \\mathrm{cm}$ rör sig med hastigheten $4{,}0\\ \\mathrm{m/s}$ i ett magnetfält $B = 0{,}20\\ \\mathrm{T}$. Magnetfältet är riktat **in i pappret**, ledaren ligger horisontellt och rör sig **uppåt**. Bestäm den inducerade spänningen och avgör vilken ände av ledaren som blir **positiv**.
 
-${makeBField({ width: 320, height: 200, bDir: 'in', bLabel: 'B = 0,20 T', wireH: { dir: 'right', label: '', lenLabel: 'l = 30 cm' }, velocity: { angle: 90, label: 'v' } })}`,
+${makeBField({ width: 320, height: 200, bDir: 'in', bLabel: 'B = 0,20 T', wireH: { dir: 'right', label: '', lenLabel: 'l = 30 cm' }, velocity: { angle: 90, label: 'v' } })}`,
             answer: { value: 0.24, unit: 'V' },
             solution: `**Steg 1 — beräkna inducerad spänning.**
 
@@ -19598,7 +19598,7 @@ $$ n\\lambda = d\\sin\\alpha_n \\quad\\Leftrightarrow\\quad d = \\frac{n\\lambda
             level: 2,
             question: `Monokromatiskt ljus träffar ett gitter med 200 linjer/mm. På en skärm ligger första ordningens ljusmax $21\\ \\mathrm{cm}$ från centralmax. Skärmen står $2{,}0\\ \\mathrm{m}$ bakom gittret. Beräkna ljusets våglängd.
 
-${makeGratingScreen({ ellLabel: 'ℓ = 2,0 m', xLabel: 'x = 21 cm' })}`,
+${makeGratingScreen({ ellLabel: 'ℓ = 2,0 m', xLabel: 'x = 21 cm' })}`,
             answer: { value: 522, unit: 'nm' },
             solution: `**Steg 1 — avböjningsvinkeln ur geometrin.** Vinkeln $\\alpha$ fås ur den räta triangeln (motstående katet $x$, närliggande katet $\\ell$):
 
@@ -20651,7 +20651,7 @@ $$ \\frac{3}{4} \\Big/ \\frac{5}{2} = \\frac{3}{4} \\cdot \\frac{2}{5} = \\frac{
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `Hur mycket är $\\dfrac{3}{8}$ av 96 kr?`,
+            question: `Hur mycket är $\\dfrac{3}{8}$ av 96 kr?`,
             answer: { value: 36, unit: 'kr' },
             solution: `En bråkdel *av* något beräknas genom att multiplicera med bråkdelen:
 
@@ -21174,7 +21174,7 @@ $$ 0{,}00052 = 5{,}2 \\cdot 10^{-4} $$
         },
         {
             level: 1,
-            question: `Skriv 6,5 km utan prefix. Svara i meter.`,
+            question: `Skriv 6,5 km utan prefix. Svara i meter.`,
             answer: { value: 6500, unit: 'm' },
             solution: `Prefixet k (kilo) betyder $10^3$:
 
@@ -21185,12 +21185,12 @@ $$ 6{,}5\\ \\mathrm{km} = 6{,}5 \\cdot 10^3\\ \\mathrm{m} = 6\\ 500\\ \\mathrm{m
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `Skriv 0,0000039 s med lämpligt prefix.`,
+            question: `Skriv 0,0000039 s med lämpligt prefix.`,
             choices: [
-                `3,9 ns`,
-                `3,9 µs`,
-                `39 µs`,
-                `3,9 ms`,
+                `3,9 ns`,
+                `3,9 µs`,
+                `39 µs`,
+                `3,9 ms`,
             ],
             correct: 1,
             solution: `Skriv först talet i grundpotensform:
@@ -21205,12 +21205,12 @@ $$ 3{,}9 \\cdot 10^{-6}\\ \\mathrm{s} = 3{,}9\\ \\mathrm{µs} $$
         },
         {
             level: 2,
-            question: `Skriv 45 000 000 W med lämpligt prefix.`,
+            question: `Skriv 45 000 000 W med lämpligt prefix.`,
             choices: [
-                `45 kW`,
-                `4,5 MW`,
-                `45 MW`,
-                `45 GW`,
+                `45 kW`,
+                `4,5 MW`,
+                `45 MW`,
+                `45 GW`,
             ],
             correct: 2,
             solution: `Grundpotensform: $45\\ 000\\ 000\\ \\mathrm{W} = 4{,}5 \\cdot 10^7\\ \\mathrm{W}$.
@@ -21414,7 +21414,7 @@ $$ 8 \\cdot 6 - 5 = 48 - 5 = 43 $$
         },
         {
             level: 1,
-            question: `En biobiljett kostar $p$ kr. Vilket uttryck beskriver kostnaden för 5 biljetter och en popcorn för 65 kr?`,
+            question: `En biobiljett kostar $p$ kr. Vilket uttryck beskriver kostnaden för 5 biljetter och en popcorn för 65 kr?`,
             choices: [
                 `$5p + 65$`,
                 `$5(p + 65)$`,
@@ -21422,7 +21422,7 @@ $$ 8 \\cdot 6 - 5 = 48 - 5 = 43 $$
                 `$70p$`,
             ],
             correct: 0,
-            solution: `Fem biljetter kostar $5p$ kr och popcornen 65 kr — den totala kostnaden är summan:
+            solution: `Fem biljetter kostar $5p$ kr och popcornen 65 kr — den totala kostnaden är summan:
 
 $$ 5p + 65 $$
 
@@ -21445,7 +21445,7 @@ Ett vanligt fel är att räkna $14 - 15 = -1$ — då har minustecknet i $-3$ ta
         },
         {
             level: 2,
-            question: `Ett gym tar 250 kr i månadsavgift och 20 kr per pass. Selma är $x$ år och tränar $y$ pass en viss månad. Vilket uttryck beskriver månadens kostnad?`,
+            question: `Ett gym tar 250 kr i månadsavgift och 20 kr per pass. Selma är $x$ år och tränar $y$ pass en viss månad. Vilket uttryck beskriver månadens kostnad?`,
             choices: [
                 `$250 + 20x$`,
                 `$250 + 20y$`,
@@ -21453,7 +21453,7 @@ Ett vanligt fel är att räkna $14 - 15 = -1$ — då har minustecknet i $-3$ ta
                 `$250y + 20$`,
             ],
             correct: 1,
-            solution: `Kostnaden beror på antalet **pass**, som betecknas $y$: fast avgift 250 kr plus 20 kr per pass ger
+            solution: `Kostnaden beror på antalet **pass**, som betecknas $y$: fast avgift 250 kr plus 20 kr per pass ger
 
 $$ 250 + 20y $$
 
@@ -22283,7 +22283,7 @@ $$ x(3 - k) = 4(3 - k) $$
         },
         {
             level: 3,
-            question: `Sara cyklar uppför en lång backe med medelfarten 12 km/h och sedan nedför samma backe igen. Medelfarten för hela turen är den totala sträckan delad med den totala tiden.<br>a) Vilken medelfart måste hon hålla nedför för att medelfarten för hela turen ska bli 20 km/h?<br>b) Sara påstår att om hon cyklar nedför i 36 km/h blir medelfarten för hela turen 24 km/h, eftersom medelvärdet av 12 och 36 är 24. Stämmer det? Motivera med en beräkning.<br>c) Visa att medelfarten 24 km/h för hela turen är omöjlig att nå, hur fort hon än cyklar nedför.`,
+            question: `Sara cyklar uppför en lång backe med medelfarten 12 km/h och sedan nedför samma backe igen. Medelfarten för hela turen är den totala sträckan delad med den totala tiden.<br>a) Vilken medelfart måste hon hålla nedför för att medelfarten för hela turen ska bli 20 km/h?<br>b) Sara påstår att om hon cyklar nedför i 36 km/h blir medelfarten för hela turen 24 km/h, eftersom medelvärdet av 12 och 36 är 24. Stämmer det? Motivera med en beräkning.<br>c) Visa att medelfarten 24 km/h för hela turen är omöjlig att nå, hur fort hon än cyklar nedför.`,
             answer: { value: 60, unit: 'km/h' },
             delsvar: [
                 { del: 'a', value: 60, unit: 'km/h' },
@@ -22333,7 +22333,7 @@ och medelfarten
 
 $$ \\frac{2s}{\\dfrac{s}{9}} = 2s \\cdot \\frac{9}{s} = 18 $$
 
-Medelfarten blir 18 km/h, inte 24 km/h. Det beror på att Sara tillbringar mycket längre tid i den långsamma backen uppför än i den snabba nedför. Medelvärdet av två farter ger rätt medelfart bara om de hålls lika lång **tid**, inte lika lång sträcka.
+Medelfarten blir 18 km/h, inte 24 km/h. Det beror på att Sara tillbringar mycket längre tid i den långsamma backen uppför än i den snabba nedför. Medelvärdet av två farter ger rätt medelfart bara om de hålls lika lång **tid**, inte lika lång sträcka.
 
 **c)** Vi ställer upp ekvationen på samma sätt som i a), med 24 i HL:
 
@@ -22349,7 +22349,7 @@ Subtraherar 2 från båda led:
 
 $$ 0 = \\frac{24}{v} $$
 
-Täljaren är lika med produkten av kvoten och nämnaren: $24 = 0 \\cdot v = 0$, vilket är en motsägelse. Ekvationen saknar lösning. Uppför tar backen $\\dfrac{s}{12}$ timmar, och redan det är hela den tid som en medelfart på 24 km/h tillåter för $2s$ km. Nedförsbacken måste ta tid, hur liten den än är, så medelfarten hamnar alltid under 24 km/h.
+Täljaren är lika med produkten av kvoten och nämnaren: $24 = 0 \\cdot v = 0$, vilket är en motsägelse. Ekvationen saknar lösning. Uppför tar backen $\\dfrac{s}{12}$ timmar, och redan det är hela den tid som en medelfart på 24 km/h tillåter för $2s$ km. Nedförsbacken måste ta tid, hur liten den än är, så medelfarten hamnar alltid under 24 km/h.
 
 **Svar:** a) 60 km/h. b) Nej, medelfarten blir 18 km/h. c) Ekvationen ger $0 = \\dfrac{24}{v}$, som saknar lösning: enbart uppförsbacken tar hela den tid som medelfarten 24 km/h tillåter.
 
@@ -22357,14 +22357,14 @@ Täljaren är lika med produkten av kvoten och nämnaren: $24 = 0 \\cdot v = 0$,
         },
         {
             level: 3,
-            question: `En kanna innehåller 2 dl koncentrerad saft och 10 dl vatten.<br>a) Hur mycket saft ska tillsättas för att saften ska utgöra 25 % av blandningen?<br>b) Hur mycket vatten skulle man i stället behöva hälla bort för att saften ska utgöra 25 % av blandningen?<br>c) Kan man genom att bara tillsätta saft få en blandning som består av 100 % saft? Ställ upp och lös en ekvation, och tolka resultatet.`,
+            question: `En kanna innehåller 2 dl koncentrerad saft och 10 dl vatten.<br>a) Hur mycket saft ska tillsättas för att saften ska utgöra 25 % av blandningen?<br>b) Hur mycket vatten skulle man i stället behöva hälla bort för att saften ska utgöra 25 % av blandningen?<br>c) Kan man genom att bara tillsätta saft få en blandning som består av 100 % saft? Ställ upp och lös en ekvation, och tolka resultatet.`,
             answer: { value: 1.33, unit: 'dl', tol: 0.03 },
             delsvar: [
                 { del: 'a', value: 1.33, unit: 'dl', tol: 0.03 },
                 { del: 'b', value: 4, unit: 'dl' },
                 { del: 'c' },
             ],
-            solution: `Andelen saft i blandningen är mängden saft delad med hela blandningens volym. Från början är andelen $\\dfrac{2}{12} \\approx 0{,}17$, alltså cirka 17 %.
+            solution: `Andelen saft i blandningen är mängden saft delad med hela blandningens volym. Från början är andelen $\\dfrac{2}{12} \\approx 0{,}17$, alltså cirka 17 %.
 
 **a)** Låt $x$ vara mängden saft som tillsätts, i dl. Då finns $(2 + x)$ dl saft i en blandning på $(12 + x)$ dl. Andelen ska vara 25 %, det vill säga 0,25:
 
@@ -22404,7 +22404,7 @@ $$ 0{,}25y = 1 $$
 
 $$ y = 4 $$
 
-Kontroll: $\\dfrac{2}{12 - 4} = \\dfrac{2}{8} = 0{,}25$. Lägg märke till att det behövs 4 dl vatten bort men bara 1,33 dl saft till, för att nå samma andel.
+Kontroll: $\\dfrac{2}{12 - 4} = \\dfrac{2}{8} = 0{,}25$. Lägg märke till att det behövs 4 dl vatten bort men bara 1,33 dl saft till, för att nå samma andel.
 
 **c)** Andelen ska bli 100 %, det vill säga 1:
 
@@ -22418,7 +22418,7 @@ Subtraherar $x$ från båda led:
 
 $$ 2 = 12 $$
 
-Det är en motsägelse, så ekvationen saknar lösning. Tolkning: hur mycket saft man än tillsätter finns de 10 dl vattnet kvar i kannan, så blandningen består aldrig av enbart saft. Andelen kan komma hur nära 100 % som helst (100 dl tillsatt saft ger $\\dfrac{102}{112} \\approx 91\\ \\%$) men når aldrig dit.
+Det är en motsägelse, så ekvationen saknar lösning. Tolkning: hur mycket saft man än tillsätter finns de 10 dl vattnet kvar i kannan, så blandningen består aldrig av enbart saft. Andelen kan komma hur nära 100 % som helst (100 dl tillsatt saft ger $\\dfrac{102}{112} \\approx 91\\ \\%$) men når aldrig dit.
 
 **Svar:** a) $\\dfrac{4}{3}$ dl $\\approx 1{,}3$ dl saft. b) 4 dl vatten. c) Nej. Ekvationen leder till $2 = 12$ och saknar lösning, eftersom vattnet alltid finns kvar i blandningen.
 
@@ -22462,7 +22462,7 @@ Alternativt kan man kalla talen $x$ och $y$ och ställa upp två ekvationer, $\\
         },
         {
             level: 3,
-            question: `Två pumpar används för att tömma en bassäng. Pump A klarar tömningen ensam på 6 timmar. När båda pumparna arbetar samtidigt tar tömningen 4 timmar.<br>a) Hur lång tid skulle pump B behöva för att tömma bassängen ensam?<br>b) Antag i stället att pump A ensam behöver $a$ timmar och pump B ensam $b$ timmar. Visa att tömningen med båda pumparna tar $T = \\dfrac{ab}{a + b}$ timmar.<br>c) Förklara med hjälp av formeln i b) varför $T$ alltid är kortare än både $a$ och $b$.`,
+            question: `Två pumpar används för att tömma en bassäng. Pump A klarar tömningen ensam på 6 timmar. När båda pumparna arbetar samtidigt tar tömningen 4 timmar.<br>a) Hur lång tid skulle pump B behöva för att tömma bassängen ensam?<br>b) Antag i stället att pump A ensam behöver $a$ timmar och pump B ensam $b$ timmar. Visa att tömningen med båda pumparna tar $T = \\dfrac{ab}{a + b}$ timmar.<br>c) Förklara med hjälp av formeln i b) varför $T$ alltid är kortare än både $a$ och $b$.`,
             answer: { value: 12, unit: 'h' },
             delsvar: [
                 { del: 'a', value: 12, unit: 'h' },
@@ -22471,7 +22471,7 @@ Alternativt kan man kalla talen $x$ och $y$ och ställa upp två ekvationer, $\\
             ],
             solution: `**a)** Tiderna kan inte adderas eller subtraheras rakt av: pump B tar inte $6 - 4 = 2$ timmar. Det som går att addera är hur stor **del** av bassängen varje pump tömmer per timme.
 
-Pump A tömmer hela bassängen på 6 timmar, alltså $\\dfrac{1}{6}$ av bassängen per timme. Låt pump B behöva $x$ timmar ensam, så att den tömmer $\\dfrac{1}{x}$ av bassängen per timme. Tillsammans töms $\\dfrac{1}{4}$ av bassängen per timme:
+Pump A tömmer hela bassängen på 6 timmar, alltså $\\dfrac{1}{6}$ av bassängen per timme. Låt pump B behöva $x$ timmar ensam, så att den tömmer $\\dfrac{1}{x}$ av bassängen per timme. Tillsammans töms $\\dfrac{1}{4}$ av bassängen per timme:
 
 $$ \\frac{1}{6} + \\frac{1}{x} = \\frac{1}{4} $$
 
@@ -22521,7 +22521,7 @@ Eftersom $a$ är positivt är nämnaren $a + b$ större än täljaren $b$, så b
         },
         {
             level: 3,
-            question: `Tidsskillnaden $t$ minuter mellan att köra en sträcka på $s$ km med medelhastigheten $h_1$ km/h och med den högre medelhastigheten $h_2$ km/h ges av formeln $$t = \\left(\\frac{1}{h_1} - \\frac{1}{h_2}\\right) \\cdot s \\cdot 60$$<br>a) Visa hur formeln följer ur sambandet tid = sträcka delat med hastighet.<br>b) Elin pendlar 30 km med medelhastigheten 60 km/h. Vilken medelhastighet skulle hon behöva hålla för att komma fram 6 minuter tidigare?<br>c) Elin påstår att hon kan spara 30 minuter om hon bara kör tillräckligt fort. Undersök påståendet med hjälp av ekvationen.`,
+            question: `Tidsskillnaden $t$ minuter mellan att köra en sträcka på $s$ km med medelhastigheten $h_1$ km/h och med den högre medelhastigheten $h_2$ km/h ges av formeln $$t = \\left(\\frac{1}{h_1} - \\frac{1}{h_2}\\right) \\cdot s \\cdot 60$$<br>a) Visa hur formeln följer ur sambandet tid = sträcka delat med hastighet.<br>b) Elin pendlar 30 km med medelhastigheten 60 km/h. Vilken medelhastighet skulle hon behöva hålla för att komma fram 6 minuter tidigare?<br>c) Elin påstår att hon kan spara 30 minuter om hon bara kör tillräckligt fort. Undersök påståendet med hjälp av ekvationen.`,
             answer: { value: 75, unit: 'km/h' },
             delsvar: [
                 { del: 'a' },
@@ -22532,7 +22532,7 @@ Eftersom $a$ är positivt är nämnaren $a + b$ större än täljaren $b$, så b
 
 $$ \\frac{s}{h_1} - \\frac{s}{h_2} = \\left(\\frac{1}{h_1} - \\frac{1}{h_2}\\right) \\cdot s $$
 
-där vi brutit ut $s$. En timme är 60 minuter, så tidsskillnaden i minuter fås genom att multiplicera med 60. Det är precis formeln.
+där vi brutit ut $s$. En timme är 60 minuter, så tidsskillnaden i minuter fås genom att multiplicera med 60. Det är precis formeln.
 
 **b)** Vi sätter in $t = 6$, $h_1 = 60$ och $s = 30$ och löser ut $h_2$. Vi har $h_2$ i nämnaren, så $h_2 \\neq 0$.
 
@@ -22556,7 +22556,7 @@ $$ 1\\,800 = 24 h_2 $$
 
 $$ h_2 = \\frac{1\\,800}{24} = 75 $$
 
-Kontroll: i 60 km/h tar 30 km $\\dfrac{30}{60}$ h $= 30$ minuter, och i 75 km/h tar det $\\dfrac{30}{75}$ h $= 0{,}4$ h $= 24$ minuter. Skillnaden är 6 minuter.
+Kontroll: i 60 km/h tar 30 km $\\dfrac{30}{60}$ h $= 30$ minuter, och i 75 km/h tar det $\\dfrac{30}{75}$ h $= 0{,}4$ h $= 24$ minuter. Skillnaden är 6 minuter.
 
 **c)** Samma ekvation med $t = 30$:
 
@@ -22568,7 +22568,7 @@ $$ 0 = -\\frac{1\\,800}{h_2} $$
 
 Täljaren är lika med produkten av kvoten och nämnaren: $-1\\,800 = 0 \\cdot h_2 = 0$, vilket är en motsägelse. Ekvationen saknar lösning.
 
-Tolkning: resan tar 30 minuter i 60 km/h. Att spara 30 minuter skulle betyda att resan tar 0 minuter, och det kräver oändligt hög hastighet. Elin kan spara nästan 30 minuter med en mycket hög hastighet (i 600 km/h tar resan 3 minuter, så 27 minuter sparas), men aldrig hela 30. Formeln visar samma sak: termen $\\dfrac{1\\,800}{h_2}$ är alltid större än 0, så $t$ är alltid mindre än 30.
+Tolkning: resan tar 30 minuter i 60 km/h. Att spara 30 minuter skulle betyda att resan tar 0 minuter, och det kräver oändligt hög hastighet. Elin kan spara nästan 30 minuter med en mycket hög hastighet (i 600 km/h tar resan 3 minuter, så 27 minuter sparas), men aldrig hela 30. Formeln visar samma sak: termen $\\dfrac{1\\,800}{h_2}$ är alltid större än 0, så $t$ är alltid mindre än 30.
 
 **Svar:** a) $\\dfrac{s}{h_1} - \\dfrac{s}{h_2}$ timmar, som skrivs om med utbrutet $s$ och multipliceras med 60. b) 75 km/h. c) Nej. Ekvationen $30 = 30 - \\dfrac{1\\,800}{h_2}$ saknar lösning; tidsvinsten kan komma nära 30 minuter men aldrig nå dit, eftersom resan alltid tar tid.
 
@@ -22684,7 +22684,7 @@ $$ x + (x + 5) = 31 $$
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `Tre syskon delar på 2 700 kr. Mellanbarnet får dubbelt så mycket som yngsta barnet, och äldsta barnet får 200 kr mer än mellanbarnet. Hur mycket får yngsta barnet?`,
+            question: `Tre syskon delar på 2 700 kr. Mellanbarnet får dubbelt så mycket som yngsta barnet, och äldsta barnet får 200 kr mer än mellanbarnet. Hur mycket får yngsta barnet?`,
             answer: { value: 500, unit: 'kr' },
             solution: `**Översätt.** Yngsta barnets belopp efterfrågas — kalla det $x$. Då får mellanbarnet $2x$ och äldsta barnet $2x + 200$.
 
@@ -22704,7 +22704,7 @@ $$ x = 500 $$
         },
         {
             level: 2,
-            question: `En rektangel har omkretsen 54 cm. Basen är 3 cm längre än höjden. Hur lång är höjden?`,
+            question: `En rektangel har omkretsen 54 cm. Basen är 3 cm längre än höjden. Hur lång är höjden?`,
             answer: { value: 12, unit: 'cm' },
             solution: `**Översätt.** Höjden efterfrågas — kalla den $x$ cm. Då är basen $(x + 3)$ cm. Omkretsen är två baser plus två höjder:
 
@@ -22751,9 +22751,9 @@ $$ 2x = 24 \\qquad x = 12 $$
         },
         {
             level: 3,
-            question: `Tre syskon ärver tillsammans 210 000 kr. Arvet fördelas så att förhållandet mellan det äldsta och det mellersta syskonets andel är $5:4$, och förhållandet mellan det mellersta och det yngsta syskonets andel är $3:2$. Hur mycket får vart och ett av syskonen?`,
+            question: `Tre syskon ärver tillsammans 210 000 kr. Arvet fördelas så att förhållandet mellan det äldsta och det mellersta syskonets andel är $5:4$, och förhållandet mellan det mellersta och det yngsta syskonets andel är $3:2$. Hur mycket får vart och ett av syskonen?`,
             answer: { value: 90000, unit: 'kr' },
-            solution: `**1. Översätt.** Båda förhållandena innehåller det mellersta syskonets andel, så vi låter $x$ vara den, i kronor. Det äldsta syskonet får $\\dfrac{5}{4}$ av det mellersta, alltså $\\dfrac{5x}{4}$, och det yngsta får $\\dfrac{2}{3}$ av det mellersta, alltså $\\dfrac{2x}{3}$. Summan är 210 000 kr:
+            solution: `**1. Översätt.** Båda förhållandena innehåller det mellersta syskonets andel, så vi låter $x$ vara den, i kronor. Det äldsta syskonet får $\\dfrac{5}{4}$ av det mellersta, alltså $\\dfrac{5x}{4}$, och det yngsta får $\\dfrac{2}{3}$ av det mellersta, alltså $\\dfrac{2x}{3}$. Summan är 210 000 kr:
 
 $$ \\frac{5x}{4} + x + \\frac{2x}{3} = 210\\,000 $$
 
@@ -22779,7 +22779,7 @@ Insikten är att välja $x$ som den andel som **båda** förhållandena nämner.
         },
         {
             level: 3,
-            question: `Emma startar en löprunda och håller hastigheten 10 km/h. Tolv minuter senare startar Hanna från samma plats och springer samma väg med hastigheten 12 km/h.<br>a) Hur lång tid efter sin egen start hinner Hanna ikapp Emma?<br>b) Hur långt från startplatsen sker det?<br>c) Rundan är 10 km lång. Hinner Hanna ikapp Emma innan rundan är slut? Motivera med ditt svar i b).`,
+            question: `Emma startar en löprunda och håller hastigheten 10 km/h. Tolv minuter senare startar Hanna från samma plats och springer samma väg med hastigheten 12 km/h.<br>a) Hur lång tid efter sin egen start hinner Hanna ikapp Emma?<br>b) Hur långt från startplatsen sker det?<br>c) Rundan är 10 km lång. Hinner Hanna ikapp Emma innan rundan är slut? Motivera med ditt svar i b).`,
             answer: { value: 1, unit: 'h' },
             delsvar: [
                 { del: 'a', value: 1, unit: 'h' },
@@ -22788,7 +22788,7 @@ Insikten är att välja $x$ som den andel som **båda** förhållandena nämner.
             ],
             solution: `**1. Översätt.** Den avgörande insikten är att Emma och Hanna har sprungit **lika långt** i det ögonblick Hanna hinner ikapp. Sträckan är hastigheten gånger tiden, så vi behöver båda tiderna.
 
-Låt $t$ vara Hannas löptid i timmar när hon hinner ikapp. Emma startade 12 minuter tidigare, det vill säga $\\dfrac{12}{60} = 0{,}2$ timmar tidigare, så Emma har då sprungit i $(t + 0{,}2)$ timmar. Sträckorna är lika:
+Låt $t$ vara Hannas löptid i timmar när hon hinner ikapp. Emma startade 12 minuter tidigare, det vill säga $\\dfrac{12}{60} = 0{,}2$ timmar tidigare, så Emma har då sprungit i $(t + 0{,}2)$ timmar. Sträckorna är lika:
 
 $$ 10(t + 0{,}2) = 12t $$
 
@@ -22818,14 +22818,14 @@ $$ t = 1 $$
         },
         {
             level: 3,
-            question: `En tehandlare har två sorters te, ett som kostar 120 kr/kg och ett som kostar 200 kr/kg. Handlaren vill blanda dem till 10 kg te som ska säljas för 150 kr/kg, utan att tjäna eller förlora något på blandningen jämfört med att sälja sorterna var för sig.<br>a) Hur många kilogram av varje sort ska blandas?<br>b) Handlaren funderar på att i stället blanda till en sort för 100 kr/kg. Vad säger ekvationen om det? Tolka resultatet.`,
+            question: `En tehandlare har två sorters te, ett som kostar 120 kr/kg och ett som kostar 200 kr/kg. Handlaren vill blanda dem till 10 kg te som ska säljas för 150 kr/kg, utan att tjäna eller förlora något på blandningen jämfört med att sälja sorterna var för sig.<br>a) Hur många kilogram av varje sort ska blandas?<br>b) Handlaren funderar på att i stället blanda till en sort för 100 kr/kg. Vad säger ekvationen om det? Tolka resultatet.`,
             answer: { value: 6.25, unit: 'kg', tol: 0.01 },
             delsvar: [
-                { del: 'a', value: 6.25, unit: 'kg', etikett: 'teet för 120 kr/kg', tol: 0.01 },
-                { del: 'a', value: 3.75, unit: 'kg', etikett: 'teet för 200 kr/kg', tol: 0.01 },
+                { del: 'a', value: 6.25, unit: 'kg', etikett: 'teet för 120 kr/kg', tol: 0.01 },
+                { del: 'a', value: 3.75, unit: 'kg', etikett: 'teet för 200 kr/kg', tol: 0.01 },
                 { del: 'b' },
             ],
-            solution: `**1. Översätt.** Låt $x$ vara mängden av det billiga teet i kilogram. Blandningen ska väga 10 kg, så mängden dyrt te är $(10 - x)$ kg. Priset för det te som går åt ska vara lika stort som priset för blandningen: 10 kg för 150 kr/kg kostar $10 \\cdot 150 = 1\\,500$ kr.
+            solution: `**1. Översätt.** Låt $x$ vara mängden av det billiga teet i kilogram. Blandningen ska väga 10 kg, så mängden dyrt te är $(10 - x)$ kg. Priset för det te som går åt ska vara lika stort som priset för blandningen: 10 kg för 150 kr/kg kostar $10 \\cdot 150 = 1\\,500$ kr.
 
 $$ 120x + 200(10 - x) = 1\\,500 $$
 
@@ -22857,7 +22857,7 @@ $$ -80x = -1\\,000 $$
 
 $$ x = 12{,}5 $$
 
-Ekvationen ger $x = 12{,}5$ kg billigt te, men blandningen ska väga 10 kg, så mängden dyrt te blir $10 - 12{,}5 = -2{,}5$ kg. En negativ mängd går inte att blanda i. Tolkningen är att det inte går: en blandning kan aldrig bli billigare än den billigaste ingrediensen, och det billiga teet kostar 120 kr/kg.
+Ekvationen ger $x = 12{,}5$ kg billigt te, men blandningen ska väga 10 kg, så mängden dyrt te blir $10 - 12{,}5 = -2{,}5$ kg. En negativ mängd går inte att blanda i. Tolkningen är att det inte går: en blandning kan aldrig bli billigare än den billigaste ingrediensen, och det billiga teet kostar 120 kr/kg.
 
 **Svar:** a) 6,25 kg av teet för 120 kr/kg och 3,75 kg av teet för 200 kr/kg. b) Ekvationen ger en negativ mängd av det dyra teet. Det går inte, eftersom blandningen inte kan bli billigare än 120 kr/kg.
 
@@ -22865,13 +22865,13 @@ Ekvationen ger $x = 12{,}5$ kg billigt te, men blandningen ska väga 10 kg, så 
         },
         {
             level: 3,
-            question: `En kvadrat har sidan $x$ cm. Om den ena sidan förlängs med 4 cm och den andra förkortas med 2 cm får man en rektangel vars area är 12 cm² större än kvadratens area.<br>a) Bestäm $x$.<br>b) Visa att om den ena sidan förlängs med $a$ cm och den andra förkortas med $a$ cm, så blir arean alltid mindre än kvadratens, oavsett vilket $x$ kvadraten har.`,
+            question: `En kvadrat har sidan $x$ cm. Om den ena sidan förlängs med 4 cm och den andra förkortas med 2 cm får man en rektangel vars area är 12 cm² större än kvadratens area.<br>a) Bestäm $x$.<br>b) Visa att om den ena sidan förlängs med $a$ cm och den andra förkortas med $a$ cm, så blir arean alltid mindre än kvadratens, oavsett vilket $x$ kvadraten har.`,
             answer: { value: 10, unit: 'cm' },
             delsvar: [
                 { del: 'a', value: 10, unit: 'cm', etikett: '$x =$' },
                 { del: 'b' },
             ],
-            solution: `**a)** Kvadratens area är $x \\cdot x = x^2$. Rektangeln får sidorna $(x + 4)$ cm och $(x - 2)$ cm, så dess area är $(x + 4)(x - 2)$. Den ska vara 12 cm² större än kvadratens:
+            solution: `**a)** Kvadratens area är $x \\cdot x = x^2$. Rektangeln får sidorna $(x + 4)$ cm och $(x - 2)$ cm, så dess area är $(x + 4)(x - 2)$. Den ska vara 12 cm² större än kvadratens:
 
 $$ (x + 4)(x - 2) = x^2 + 12 $$
 
@@ -22891,13 +22891,13 @@ $$ 2x = 20 $$
 
 $$ x = 10 $$
 
-Kontroll: kvadraten har arean $10^2 = 100$ cm². Rektangeln får sidorna 14 cm och 8 cm och arean $14 \\cdot 8 = 112$ cm², vilket är 12 cm² mer.
+Kontroll: kvadraten har arean $10^2 = 100$ cm². Rektangeln får sidorna 14 cm och 8 cm och arean $14 \\cdot 8 = 112$ cm², vilket är 12 cm² mer.
 
 **b)** Rektangeln får sidorna $(x + a)$ och $(x - a)$, och arean
 
 $$ (x + a)(x - a) = x^2 - ax + ax - a^2 = x^2 - a^2 $$
 
-Kvadratens area är $x^2$. Rektangelns area är alltså $a^2$ mindre, och $a^2$ är positivt så snart $a \\neq 0$. Skillnaden beror inte på $x$ alls: hur stor kvadraten än är, minskar arean med $a^2$ cm². Kontroll med a): $a = 4$ ger att arean minskar med 16 cm², och med $x = 10$ blir $14 \\cdot 6 = 84 = 100 - 16$.
+Kvadratens area är $x^2$. Rektangelns area är alltså $a^2$ mindre, och $a^2$ är positivt så snart $a \\neq 0$. Skillnaden beror inte på $x$ alls: hur stor kvadraten än är, minskar arean med $a^2$ cm². Kontroll med a): $a = 4$ ger att arean minskar med 16 cm², och med $x = 10$ blir $14 \\cdot 6 = 84 = 100 - 16$.
 
 **Svar:** a) $x = 10$ cm. b) Rektangelns area är $(x + a)(x - a) = x^2 - a^2$, alltså alltid $a^2$ cm² mindre än kvadratens area $x^2$.
 
@@ -22943,7 +22943,7 @@ $$ x = 4 $$
         },
         {
             level: 3,
-            question: `En idrottsförening ska hyra en buss till en cup. Bussen kostar 4 800 kr, och dessutom kostar mat 60 kr per person. Kostnaden delas lika mellan alla som åker med.<br>a) Teckna ett uttryck för kostnaden per person när $n$ personer åker med.<br>b) Hur många personer måste åka med för att kostnaden per person ska bli högst 200 kr?<br>c) Föreningen vill sätta priset till 60 kr per person. Visa med ett resonemang om uttrycket att det inte går, oavsett hur många som åker med.`,
+            question: `En idrottsförening ska hyra en buss till en cup. Bussen kostar 4 800 kr, och dessutom kostar mat 60 kr per person. Kostnaden delas lika mellan alla som åker med.<br>a) Teckna ett uttryck för kostnaden per person när $n$ personer åker med.<br>b) Hur många personer måste åka med för att kostnaden per person ska bli högst 200 kr?<br>c) Föreningen vill sätta priset till 60 kr per person. Visa med ett resonemang om uttrycket att det inte går, oavsett hur många som åker med.`,
             answer: { value: 35, unit: 'personer' },
             delsvar: [
                 { del: 'a' },
@@ -22953,7 +22953,7 @@ $$ x = 4 $$
 
 $$ \\frac{4\\,800 + 60n}{n} = \\frac{4\\,800}{n} + 60 $$
 
-Uttrycket läses så här: varje person betalar sina egna 60 kr för mat plus sin andel av bussen. Ju fler som åker, desto mindre blir bussandelen $\\dfrac{4\\,800}{n}$.
+Uttrycket läses så här: varje person betalar sina egna 60 kr för mat plus sin andel av bussen. Ju fler som åker, desto mindre blir bussandelen $\\dfrac{4\\,800}{n}$.
 
 **b)** Kostnaden per person ska vara högst 200 kr. Vi tar reda på när den är exakt 200 kr:
 
@@ -22969,7 +22969,7 @@ $$ 4\\,800 = 140n $$
 
 $$ n = \\frac{4\\,800}{140} \\approx 34{,}3 $$
 
-Antalet personer är ett heltal. Med 34 personer blir kostnaden $\\dfrac{4\\,800}{34} + 60 \\approx 201{,}2$ kr, alltså mer än 200 kr. Med 35 personer blir den $\\dfrac{4\\,800}{35} + 60 \\approx 197{,}1$ kr. Eftersom bussandelen minskar när fler åker med, räcker det att minst 35 personer åker.
+Antalet personer är ett heltal. Med 34 personer blir kostnaden $\\dfrac{4\\,800}{34} + 60 \\approx 201{,}2$ kr, alltså mer än 200 kr. Med 35 personer blir den $\\dfrac{4\\,800}{35} + 60 \\approx 197{,}1$ kr. Eftersom bussandelen minskar när fler åker med, räcker det att minst 35 personer åker.
 
 **c)** Priset 60 kr per person skulle kräva
 
@@ -22977,7 +22977,7 @@ $$ \\frac{4\\,800}{n} + 60 = 60 $$
 
 $$ \\frac{4\\,800}{n} = 0 $$
 
-Täljaren är lika med produkten av kvoten och nämnaren: $4\\,800 = 0 \\cdot n = 0$, vilket är en motsägelse. Ekvationen saknar lösning. Tolkning: 60 kr täcker precis maten, och då finns ingenting kvar till bussen. Bussandelen $\\dfrac{4\\,800}{n}$ blir mindre ju fler som åker, men den blir aldrig 0, så kostnaden per person är alltid större än 60 kr.
+Täljaren är lika med produkten av kvoten och nämnaren: $4\\,800 = 0 \\cdot n = 0$, vilket är en motsägelse. Ekvationen saknar lösning. Tolkning: 60 kr täcker precis maten, och då finns ingenting kvar till bussen. Bussandelen $\\dfrac{4\\,800}{n}$ blir mindre ju fler som åker, men den blir aldrig 0, så kostnaden per person är alltid större än 60 kr.
 
 **Svar:** a) $\\dfrac{4\\,800 + 60n}{n}$ kr, det vill säga $\\dfrac{4\\,800}{n} + 60$ kr. b) Minst 35 personer. c) Det skulle kräva $\\dfrac{4\\,800}{n} = 0$, som saknar lösning; kostnaden per person är alltid större än 60 kr.
 
@@ -23487,7 +23487,7 @@ $$ x = 125 $$
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Ett sparkapital på 20 000 kr växte med samma räntesats varje år, och efter 6 år var det värt 26 000 kr.<br>a) Ställ upp en potensekvation för förändringsfaktorn och bestäm räntesatsen.<br>b) Anta i stället att kapitalet växte till 26 000 kr på bara 3 år. Bestäm räntesatsen, och förklara varför den inte är dubbelt så stor som i a).<br>c) Ett kapital $K$ kr växer på $t$ år till $S$ kr. Härled en formel för räntesatsen $p$ i procent, och kontrollera formeln mot a).`,
+            question: `Ett sparkapital på 20 000 kr växte med samma räntesats varje år, och efter 6 år var det värt 26 000 kr.<br>a) Ställ upp en potensekvation för förändringsfaktorn och bestäm räntesatsen.<br>b) Anta i stället att kapitalet växte till 26 000 kr på bara 3 år. Bestäm räntesatsen, och förklara varför den inte är dubbelt så stor som i a).<br>c) Ett kapital $K$ kr växer på $t$ år till $S$ kr. Härled en formel för räntesatsen $p$ i procent, och kontrollera formeln mot a).`,
             answer: { value: 4.5, unit: '%', tol: 0.1 },
             delsvar: [
                 { del: 'a', value: 4.47, unit: '%', tol: 0.03 },
@@ -23510,7 +23510,7 @@ $$ \\left(x^6\\right)^{\\boldsymbol{1/6}} = 1{,}3^{\\boldsymbol{1/6}} $$
 
 $$ x = 1{,}3^{1/6} \\approx 1{,}0447 $$
 
-Förändringsfaktorn 1,0447 betyder en ökning med cirka 4,5 % per år. Kontroll: $20\\,000 \\cdot 1{,}0447^6 \\approx 26\\,000$.
+Förändringsfaktorn 1,0447 betyder en ökning med cirka 4,5 % per år. Kontroll: $20\\,000 \\cdot 1{,}0447^6 \\approx 26\\,000$.
 
 **Svar:** $x^6 = 1{,}3$ ger räntesatsen cirka 4,5 %.
 
@@ -23522,7 +23522,7 @@ $$ \\left(x^3\\right)^{\\boldsymbol{1/3}} = 1{,}3^{\\boldsymbol{1/3}} $$
 
 $$ x = 1{,}3^{1/3} \\approx 1{,}0914 $$
 
-Räntesatsen är cirka 9,1 %. Det är mer än $2 \\cdot 4{,}47 = 8{,}94$ %. Räntan läggs varje år på ett kapital som redan vuxit, så på 6 år hinner ränta på ränta hjälpa till fler gånger än på 3 år. Ska hela ökningen klaras på halva tiden krävs därför lite mer än dubbla räntesatsen.
+Räntesatsen är cirka 9,1 %. Det är mer än $2 \\cdot 4{,}47 = 8{,}94$ %. Räntan läggs varje år på ett kapital som redan vuxit, så på 6 år hinner ränta på ränta hjälpa till fler gånger än på 3 år. Ska hela ökningen klaras på halva tiden krävs därför lite mer än dubbla räntesatsen.
 
 **Svar:** Cirka 9,1 %. Ränta på ränta gör att tillväxten inte är proportionell mot tiden.
 
@@ -23554,7 +23554,7 @@ Kontroll mot a): $100 \\cdot \\left(1{,}3^{1/6} - 1\\right) = 100 \\cdot 0{,}044
         },
         {
             level: 3,
-            question: `Keplers tredje lag säger att kvadraten på en planets omloppstid är proportionell mot kuben på dess medelavstånd till solen. Mäts tiden i år och avståndet i astronomiska enheter (1 AE är jordens medelavstånd till solen) blir sambandet $T^2 = r^3$.<br>a) Mars medelavstånd är 1,52 AE. Bestäm Mars omloppstid.<br>b) En asteroid har omloppstiden 5,0 år. Hur långt från solen är den?<br>c) Visa att $r = T^{2/3}$, och använd formeln för att kontrollera svaret i b).`,
+            question: `Keplers tredje lag säger att kvadraten på en planets omloppstid är proportionell mot kuben på dess medelavstånd till solen. Mäts tiden i år och avståndet i astronomiska enheter (1 AE är jordens medelavstånd till solen) blir sambandet $T^2 = r^3$.<br>a) Mars medelavstånd är 1,52 AE. Bestäm Mars omloppstid.<br>b) En asteroid har omloppstiden 5,0 år. Hur långt från solen är den?<br>c) Visa att $r = T^{2/3}$, och använd formeln för att kontrollera svaret i b).`,
             answer: { value: 1.87, unit: 'år', tol: 0.02 },
             delsvar: [
                 { del: 'a', value: 1.87, unit: 'år', tol: 0.02 },
@@ -23585,7 +23585,7 @@ Udda exponent, en lösning:
 
 $$ r = \\sqrt[3]{25} \\approx 2{,}92 $$
 
-Asteroiden ligger cirka 2,9 AE från solen, i asteroidbältet mellan Mars och Jupiter.
+Asteroiden ligger cirka 2,9 AE från solen, i asteroidbältet mellan Mars och Jupiter.
 
 **Svar:** Cirka 2,9 AE.
 
@@ -23743,7 +23743,7 @@ Att $n$ måste vara jämnt följer av att $x = -3$ också är en lösning: $(-3)
         },
         {
             level: 3,
-            question: `Belysningsstyrkan $E$ från en lampa avtar med kvadraten på avståndet $r$ enligt $E = \\dfrac{k}{r^2}$, där $k$ är en konstant som beror på lampan. På avståndet 2,0 m från en viss lampa är belysningsstyrkan 50 lux.<br>a) Bestäm konstanten $k$.<br>b) På vilket avstånd är belysningsstyrkan 8,0 lux?<br>c) Med vilken faktor ska avståndet ändras för att belysningsstyrkan ska bli en fjärdedel så stor? Visa att svaret inte beror på $k$.`,
+            question: `Belysningsstyrkan $E$ från en lampa avtar med kvadraten på avståndet $r$ enligt $E = \\dfrac{k}{r^2}$, där $k$ är en konstant som beror på lampan. På avståndet 2,0 m från en viss lampa är belysningsstyrkan 50 lux.<br>a) Bestäm konstanten $k$.<br>b) På vilket avstånd är belysningsstyrkan 8,0 lux?<br>c) Med vilken faktor ska avståndet ändras för att belysningsstyrkan ska bli en fjärdedel så stor? Visa att svaret inte beror på $k$.`,
             answer: { value: 5, unit: 'm' },
             delsvar: [
                 { del: 'a', value: 200, unit: 'lux · m²', etikett: '$k =$' },
@@ -23802,7 +23802,7 @@ $$ r_2^2 = 4 r_1^2 $$
 
 $$ r_2 = \\sqrt{4 r_1^2} = 2 r_1 $$
 
-Avståndet ska fördubblas. I b) stämmer det: från 2,0 m till 4,0 m sjunker belysningsstyrkan från 50 lux till $\\dfrac{200}{16} = 12{,}5$ lux, en fjärdedel. Konstanten $k$ försvann ur ekvationen, så faktorn 2 gäller för alla lampor.
+Avståndet ska fördubblas. I b) stämmer det: från 2,0 m till 4,0 m sjunker belysningsstyrkan från 50 lux till $\\dfrac{200}{16} = 12{,}5$ lux, en fjärdedel. Konstanten $k$ försvann ur ekvationen, så faktorn 2 gäller för alla lampor.
 
 **Svar:** Avståndet ska fördubblas, oavsett $k$.
 
@@ -24037,7 +24037,7 @@ Kontroll: $x = 0$ och $y = -2$ ger $0 - 4 = -4$.
         },
         {
             level: 3,
-            question: `En bussresa kan betalas på tre sätt. Enkelbiljett: 20 kr per resa. Rabattkort: 150 kr i månaden och därefter 5 kr per resa. Månadskort: 450 kr för obegränsat resande.<br>a) För hur många resor per månad är rabattkortet billigare än enkelbiljetter?<br>b) För hur många resor per månad är månadskortet billigare än rabattkortet?<br>c) Ange för varje antal resor vilket alternativ som är billigast, och förklara varför enkelbiljetter aldrig kan vara billigast när månadskortet slår rabattkortet.`,
+            question: `En bussresa kan betalas på tre sätt. Enkelbiljett: 20 kr per resa. Rabattkort: 150 kr i månaden och därefter 5 kr per resa. Månadskort: 450 kr för obegränsat resande.<br>a) För hur många resor per månad är rabattkortet billigare än enkelbiljetter?<br>b) För hur många resor per månad är månadskortet billigare än rabattkortet?<br>c) Ange för varje antal resor vilket alternativ som är billigast, och förklara varför enkelbiljetter aldrig kan vara billigast när månadskortet slår rabattkortet.`,
             answer: { value: 10, unit: 'resor' },
             delsvar: [
                 { del: 'a', value: 10, unit: 'resor', etikett: 'fler än' },
@@ -24060,7 +24060,7 @@ $$ \\frac{150}{\\boldsymbol{15}} < \\frac{15x}{\\boldsymbol{15}} $$
 
 $$ 10 < x $$
 
-Kontroll: 10 resor kostar 200 kr på båda sätten. 11 resor kostar 220 kr med enkelbiljetter och 205 kr med rabattkort.
+Kontroll: 10 resor kostar 200 kr på båda sätten. 11 resor kostar 220 kr med enkelbiljetter och 205 kr med rabattkort.
 
 **Svar:** Vid fler än 10 resor per månad.
 
@@ -24080,7 +24080,7 @@ $$ \\frac{300}{\\boldsymbol{5}} < \\frac{5x}{\\boldsymbol{5}} $$
 
 $$ 60 < x $$
 
-Kontroll: 60 resor kostar 450 kr med rabattkort, lika mycket som månadskortet. 61 resor kostar 455 kr med rabattkort.
+Kontroll: 60 resor kostar 450 kr med rabattkort, lika mycket som månadskortet. 61 resor kostar 455 kr med rabattkort.
 
 **Svar:** Vid fler än 60 resor per månad.
 
@@ -24160,7 +24160,7 @@ Kontroll mot a): $a = 2$ ger $x > 3$ och $a = -2$ ger $x < \\dfrac{6}{-2} = -3$,
         },
         {
             level: 3,
-            question: `I en triangel måste varje sida vara kortare än de två andra sidorna tillsammans, annars går sidorna inte ihop till en triangel. En triangel har sidorna 5 cm, 8 cm och $x$ cm.<br>a) Ställ upp de tre olikheter som sidorna måste uppfylla.<br>b) Lös olikheterna och ange alla möjliga värden på $x$.<br>c) Triangeln ska dessutom ha en omkrets som är mindre än 24 cm. Vilka värden på $x$ är då möjliga?`,
+            question: `I en triangel måste varje sida vara kortare än de två andra sidorna tillsammans, annars går sidorna inte ihop till en triangel. En triangel har sidorna 5 cm, 8 cm och $x$ cm.<br>a) Ställ upp de tre olikheter som sidorna måste uppfylla.<br>b) Lös olikheterna och ange alla möjliga värden på $x$.<br>c) Triangeln ska dessutom ha en omkrets som är mindre än 24 cm. Vilka värden på $x$ är då möjliga?`,
             answer: { value: 3, unit: 'cm' },
             delsvar: [
                 { del: 'a' },
@@ -24379,7 +24379,7 @@ $$ v \\cdot t = \\frac{s}{t} \\cdot t \\qquad\\Rightarrow\\qquad s = v \\cdot t 
         },
         {
             level: 1,
-            question: `En taxiresa kostar enligt formeln $K = 45 + 12x$ kr, där $x$ är antalet kilometer. Vad kostar en resa på 8 km?`,
+            question: `En taxiresa kostar enligt formeln $K = 45 + 12x$ kr, där $x$ är antalet kilometer. Vad kostar en resa på 8 km?`,
             answer: { value: 141, unit: 'kr' },
             solution: `Sätt in $x = 8$ i formeln:
 
@@ -24390,7 +24390,7 @@ $$ K = 45 + 12 \\cdot 8 = 45 + 96 = 141\\ \\mathrm{kr} $$
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `Kostnaden för ett gymkort är $K = 3\\ 000 + 250x$ kr, där $x$ är antalet månader. Hur många månader räcker 9 500 kr till?`,
+            question: `Kostnaden för ett gymkort är $K = 3\\ 000 + 250x$ kr, där $x$ är antalet månader. Hur många månader räcker 9 500 kr till?`,
             answer: { value: 26, unit: 'månader' },
             solution: `Sätt in $K = 9\\ 500$ och lös ut $x$:
 
@@ -24408,7 +24408,7 @@ $$ x = \\frac{6\\ 500}{250} = 26 $$
         },
         {
             level: 2,
-            question: `Använd $t = \\dfrac{s}{v}$ för att beräkna restiden för 42 mil med medelhastigheten 84 km/h. Svara i timmar.`,
+            question: `Använd $t = \\dfrac{s}{v}$ för att beräkna restiden för 42 mil med medelhastigheten 84 km/h. Svara i timmar.`,
             answer: { value: 5, unit: 'h' },
             solution: `Enheterna måste stämma överens — hastigheten är i km/h, så sträckan anges i km:
 
@@ -24563,7 +24563,7 @@ $$ a_{100} = 2 \\cdot 100 + 3 = 203 $$
         // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
-            question: `Skriv 1 ‰ i decimalform.`,
+            question: `Skriv 1 ‰ i decimalform.`,
             choices: [
                 `0,01`,
                 `0,001`,
@@ -24575,13 +24575,13 @@ $$ a_{100} = 2 \\cdot 100 + 3 = 203 $$
 
 $$ 1\\ \\text{‰} = \\frac{1}{1\\ 000} = 0{,}001 $$
 
-0,01 är 1 % (hundradel) och 0,000 001 är 1 ppm (miljondel).
+0,01 är 1 % (hundradel) och 0,000 001 är 1 ppm (miljondel).
 
 **Svar:** 0,001`,
         },
         {
             level: 1,
-            question: `Hur mycket är 4 ‰ av 25 000 kr?`,
+            question: `Hur mycket är 4 ‰ av 25 000 kr?`,
             answer: { value: 100, unit: 'kr' },
             solution: `Delen = andelen · hela, och andelen skrivs i decimalform:
 
@@ -24593,7 +24593,7 @@ $$ \\text{delen} = 0{,}004 \\cdot 25\\ 000 = 100\\ \\mathrm{kr} $$
         },
         {
             level: 1,
-            question: `Hur många procent är 45 kr av 180 kr?`,
+            question: `Hur många procent är 45 kr av 180 kr?`,
             answer: { value: 25, unit: '%' },
             solution: `Andelen = delen/hela:
 
@@ -24606,7 +24606,7 @@ Decimalformen 0,25 motsvarar 25 %.
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `Hur många promille är 84 g av 24 kg?`,
+            question: `Hur många promille är 84 g av 24 kg?`,
             answer: { value: 3.5, unit: '‰', tol: 0.01 },
             solution: `Samma enhet på delen och det hela: $24\\ \\mathrm{kg} = 24\\ 000\\ \\mathrm{g}$.
 
@@ -24620,7 +24620,7 @@ $$ 0{,}0035 = 3{,}5\\ \\text{‰} $$
         },
         {
             level: 2,
-            question: `Ett dricksvatten innehåller 8 ppm fluorid. Hur mycket vatten behövs för att få i sig 2,0 gram fluorid? Svara i kg.`,
+            question: `Ett dricksvatten innehåller 8 ppm fluorid. Hur mycket vatten behövs för att få i sig 2,0 gram fluorid? Svara i kg.`,
             answer: { value: 250, unit: 'kg' },
             solution: `Det hela = delen/andelen, med andelen i decimalform:
 
@@ -24778,7 +24778,7 @@ $0{,}03$ ppm betyder att delen är $0{,}03$ miljondelar av det hela:
 
 $$ 0{,}03\\ \\text{ppm} = \\frac{0{,}03}{1\\,000\\,000} = 0{,}000\\,000\\,03 $$
 
-En liter vatten väger 1 kg, och $1\\ \\mathrm{kg} = 1\\,000\\,000\\,000$ mikrogram (1 kg är 1 000 g, och 1 g är 1 000 000 mikrogram). Delen är andelen gånger det hela:
+En liter vatten väger 1 kg, och $1\\ \\mathrm{kg} = 1\\,000\\,000\\,000$ mikrogram (1 kg är 1 000 g, och 1 g är 1 000 000 mikrogram). Delen är andelen gånger det hela:
 
 $$ \\text{delen} = 0{,}000\\,000\\,03 \\cdot 1\\,000\\,000\\,000 = 30 $$
 
@@ -24804,7 +24804,7 @@ I de torkade svamparna är fortfarande $0{,}5$ kg torrsubstans, men nu utgör de
 
 $$ \\text{hela} = \\frac{\\text{delen}}{\\text{andelen}} = \\frac{0{,}5}{0{,}80} = 0{,}625\\ \\mathrm{kg} = 625\\ \\mathrm{g} $$
 
-Kontroll: i 625 g torkad svamp är $0{,}20 \\cdot 625 = 125$ g vatten och $500$ g torrsubstans.
+Kontroll: i 625 g torkad svamp är $0{,}20 \\cdot 625 = 125$ g vatten och $500$ g torrsubstans.
 
 Rimligt? Svamparna har förlorat $4{,}375$ kg av sina $4{,}5$ kg vatten. Nästan allt vatten är borta, och då ska vikten sjunka kraftigt.
 
@@ -24843,7 +24843,7 @@ Kontroll med 1 000 elever: 150 cyklister blir 180, och skolan krymper till 800 e
         // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
-            question: `Vilken förändringsfaktor motsvarar en ökning med 35 %?`,
+            question: `Vilken förändringsfaktor motsvarar en ökning med 35 %?`,
             choices: [
                 `1,035`,
                 `0,35`,
@@ -24851,17 +24851,17 @@ Kontroll med 1 000 elever: 150 cyklister blir 180, och skolan krymper till 800 e
                 `1,35`,
             ],
             correct: 3,
-            solution: `Lägg ändringen till 100 % och gör om till decimalform:
+            solution: `Lägg ändringen till 100 % och gör om till decimalform:
 
 $$ 100\\ \\% + 35\\ \\% = 135\\ \\% = 1{,}35 $$
 
-0,35 är bara ändringen själv och 0,65 motsvarar en MINSKNING med 35 %.
+0,35 är bara ändringen själv och 0,65 motsvarar en MINSKNING med 35 %.
 
 **Svar:** 1,35`,
         },
         {
             level: 1,
-            question: `Vilken förändringsfaktor motsvarar en minskning med 12 %?`,
+            question: `Vilken förändringsfaktor motsvarar en minskning med 12 %?`,
             choices: [
                 `1,12`,
                 `0,98`,
@@ -24869,7 +24869,7 @@ $$ 100\\ \\% + 35\\ \\% = 135\\ \\% = 1{,}35 $$
                 `0,88`,
             ],
             correct: 3,
-            solution: `Dra ändringen från 100 %:
+            solution: `Dra ändringen från 100 %:
 
 $$ 100\\ \\% - 12\\ \\% = 88\\ \\% = 0{,}88 $$
 
@@ -24877,7 +24877,7 @@ $$ 100\\ \\% - 12\\ \\% = 88\\ \\% = 0{,}88 $$
         },
         {
             level: 1,
-            question: `En jacka kostar 1 200 kr och sänks med 25 %. Beräkna det nya priset med förändringsfaktor.`,
+            question: `En jacka kostar 1 200 kr och sänks med 25 %. Beräkna det nya priset med förändringsfaktor.`,
             answer: { value: 900, unit: 'kr' },
             solution: `Förändringsfaktorn är $100\\ \\% - 25\\ \\% = 75\\ \\% = 0{,}75$:
 
@@ -24888,33 +24888,33 @@ $$ \\text{nya värdet} = 0{,}75 \\cdot 1\\ 200 = 900\\ \\mathrm{kr} $$
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `En hyra höjs från 6 500 kr till 6 891 kr. Hur många procent höjdes hyran?`,
+            question: `En hyra höjs från 6 500 kr till 6 891 kr. Hur många procent höjdes hyran?`,
             answer: { value: 6, unit: '%' },
             solution: `Bestäm förändringsfaktorn:
 
 $$ \\text{förändringsfaktor} = \\frac{\\text{nya värdet}}{\\text{gamla värdet}} = \\frac{6\\ 891}{6\\ 500} = 1{,}06 = 106\\ \\% $$
 
-Jämfört med 100 % har hyran ökat med 6 %.
+Jämfört med 100 % har hyran ökat med 6 %.
 
 **Svar:** 6 %`,
         },
         {
             level: 2,
-            question: `Elsa tjänar 32 000 kr/månad och Karim tjänar 25 600 kr/månad. Hur många procent MER tjänar Elsa än Karim?`,
+            question: `Elsa tjänar 32 000 kr/månad och Karim tjänar 25 600 kr/månad. Hur många procent MER tjänar Elsa än Karim?`,
             answer: { value: 25, unit: '%' },
             solution: `Vi jämför MED Karim — hans lön är "gamla värdet":
 
 $$ \\text{förändringsfaktor} = \\frac{32\\ 000}{25\\ 600} = 1{,}25 = 125\\ \\% $$
 
-Elsa tjänar alltså 25 % mer än Karim.
+Elsa tjänar alltså 25 % mer än Karim.
 
-(Observera att Karim tjänar $\\dfrac{25\\ 600}{32\\ 000} = 0{,}80$, det vill säga 20 % MINDRE än Elsa — procentsatsen beror på vad man jämför med.)
+(Observera att Karim tjänar $\\dfrac{25\\ 600}{32\\ 000} = 0{,}80$, det vill säga 20 % MINDRE än Elsa — procentsatsen beror på vad man jämför med.)
 
 **Svar:** 25 %`,
         },
         {
             level: 2,
-            question: `Efter en prishöjning med 15 % kostar en cykel 5 520 kr. Vad kostade cykeln före höjningen?`,
+            question: `Efter en prishöjning med 15 % kostar en cykel 5 520 kr. Vad kostade cykeln före höjningen?`,
             answer: { value: 4800, unit: 'kr' },
             solution: `Förändringsfaktorn är $100\\ \\% + 15\\ \\% = 115\\ \\% = 1{,}15$.
 
@@ -24924,7 +24924,7 @@ $$ \\text{gamla värdet} = \\frac{\\text{nya värdet}}{\\text{förändringsfakto
 
 Kontroll: $1{,}15 \\cdot 4\\ 800 = 5\\ 520$. Det stämmer.
 
-Lägg märke till att det är fel att dra bort 15 % av 5 520 kr. Höjningen räknades på det gamla priset, inte på det nya.
+Lägg märke till att det är fel att dra bort 15 % av 5 520 kr. Höjningen räknades på det gamla priset, inte på det nya.
 
 **Svar:** 4 800 kr`,
         },
@@ -24995,7 +24995,7 @@ $$ \\text{förändringsfaktor} = \\frac{\\text{nya värdet}}{\\text{gamla värde
 
 Moa har alltså $166{,}7\\ \\% - 100\\ \\% = 66{,}7\\ \\%$ mer än Nils.
 
-Kontroll med $x = 100$: Moa har 125 kr och Nils 75 kr. Skillnaden är 50 kr, och $\\dfrac{50}{75} \\approx 0{,}667$.
+Kontroll med $x = 100$: Moa har 125 kr och Nils 75 kr. Skillnaden är 50 kr, och $\\dfrac{50}{75} \\approx 0{,}667$.
 
 **Svar:** Cirka 66,7 % mer
 
@@ -25078,7 +25078,7 @@ $$ f = 0{,}8333\\ldots $$
 
 Faktorn $0{,}8333\\ldots$ motsvarar en minskning med $1 - 0{,}8333\\ldots = 0{,}1666\\ldots \\approx 16{,}7\\ \\%$.
 
-Kontroll med en lott som är 10 m lång och 6 m bred, arean $60\\ \\mathrm{m}^2$: den nya längden är 12 m och den nya bredden $\\dfrac{60}{12} = 5$ m. Bredden har minskat med 1 m av 6 m, och $\\dfrac{1}{6} \\approx 0{,}167$.
+Kontroll med en lott som är 10 m lång och 6 m bred, arean $60\\ \\mathrm{m}^2$: den nya längden är 12 m och den nya bredden $\\dfrac{60}{12} = 5$ m. Bredden har minskat med 1 m av 6 m, och $\\dfrac{1}{6} \\approx 0{,}167$.
 
 **Svar:** Cirka 16,7 %
 
@@ -25088,7 +25088,7 @@ Kontroll med en lott som är 10 m lång och 6 m bred, arean $60\\ \\mathrm{m}^2$
             level: 3,
             question: `En cykel kostar $10\\,000$ kr, inklusive $25\\ \\%$ moms. Momsen räknas på priset utan moms. Regeringen sänker momsen på cyklar till $12\\ \\%$, och butiken behåller sitt pris utan moms. Med hur många procent sjunker priset för kunden?`,
             answer: { value: 10.4, unit: '%', tol: 0.005 },
-            solution: `**Insikten:** momsen är en procentsats av priset UTAN moms. Momsen sjunker med 13 procentenheter, men priset för kunden sjunker inte med $13\\ \\%$, eftersom kundpriset räknas från ett annat hela.
+            solution: `**Insikten:** momsen är en procentsats av priset UTAN moms. Momsen sjunker med 13 procentenheter, men priset för kunden sjunker inte med $13\\ \\%$, eftersom kundpriset räknas från ett annat hela.
 
 Priset utan moms är det gamla värdet och kundpriset det nya, med förändringsfaktorn $1{,}25$:
 
@@ -25147,7 +25147,7 @@ Lampan kostade 200 kr och mattan 300 kr.
 
 Kontroll: $1{,}10 \\cdot 200 + 0{,}80 \\cdot 300 = 220 + 240 = 460$ kr.
 
-Rimligt? Totalpriset sjönk med 40 kr. Hade båda varorna kostat 250 kr hade lampan blivit 25 kr dyrare och mattan 50 kr billigare, alltså bara 25 kr billigare totalt. Sänkningen är större än så, och då måste mattan vara den dyrare varan.
+Rimligt? Totalpriset sjönk med 40 kr. Hade båda varorna kostat 250 kr hade lampan blivit 25 kr dyrare och mattan 50 kr billigare, alltså bara 25 kr billigare totalt. Sänkningen är större än så, och då måste mattan vara den dyrare varan.
 
 **Svar:** 200 kr`,
         },
@@ -25157,7 +25157,7 @@ Rimligt? Totalpriset sjönk med 40 kr. Hade båda varorna kostat 250 kr hade lam
             answer: { value: 810, unit: 'kr' },
             solution: `**Insikten:** båda prisen räknas från samma gamla pris. Skillnaden mellan dem motsvarar skillnaden mellan förändringsfaktorerna, $1{,}08 - 0{,}92$, gånger det gamla priset.
 
-Kalla det gamla priset $x$ kr. Efter höjningen kostar varan $1{,}08x$ kr, och efter en sänkning hade den kostat $0{,}92x$ kr. Skillnaden är 120 kr:
+Kalla det gamla priset $x$ kr. Efter höjningen kostar varan $1{,}08x$ kr, och efter en sänkning hade den kostat $0{,}92x$ kr. Skillnaden är 120 kr:
 
 $$ 1{,}08x - 0{,}92x = 120 $$
 
@@ -25169,7 +25169,7 @@ $$ \\frac{0{,}16x}{\\boldsymbol{0{,}16}} = \\frac{120}{\\boldsymbol{0{,}16}} $$
 
 $$ x = 750 $$
 
-Det gamla priset var 750 kr. Efter höjningen kostar varan
+Det gamla priset var 750 kr. Efter höjningen kostar varan
 
 $$ 1{,}08 \\cdot 750 = 810\\ \\mathrm{kr} $$
 
@@ -25185,7 +25185,7 @@ Kontroll: en sänkning hade gett $0{,}92 \\cdot 750 = 690$ kr, och $810 - 690 = 
         // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
-            question: `Ett pris höjs först med 10 % och sedan med 20 %. Vilken är den totala förändringsfaktorn?`,
+            question: `Ett pris höjs först med 10 % och sedan med 20 %. Vilken är den totala förändringsfaktorn?`,
             choices: [
                 `$0{,}88$`,
                 `$1{,}10 + 1{,}20 = 2{,}30$`,
@@ -25197,13 +25197,13 @@ Kontroll: en sänkning hade gett $0{,}92 \\cdot 750 = 690$ kr, och $810 - 690 = 
 
 $$ 1{,}10 \\cdot 1{,}20 = 1{,}32 $$
 
-Den totala ökningen är alltså 32 % — inte 30 % som man får om procentsatserna adderas.
+Den totala ökningen är alltså 32 % — inte 30 % som man får om procentsatserna adderas.
 
 **Svar:** $1{,}10 \\cdot 1{,}20 = 1{,}32$`,
         },
         {
             level: 1,
-            question: `En vara kostar 500 kr. Priset höjs med 15 % och sänks därefter med 15 %. Vad kostar varan då?`,
+            question: `En vara kostar 500 kr. Priset höjs med 15 % och sänks därefter med 15 %. Vad kostar varan då?`,
             answer: { value: 488.75, unit: 'kr', tol: 0.005 },
             solution: `Total förändringsfaktor:
 
@@ -25211,13 +25211,13 @@ $$ 1{,}15 \\cdot 0{,}85 = 0{,}9775 $$
 
 $$ 500 \\cdot 0{,}9775 = 488{,}75\\ \\mathrm{kr} $$
 
-Priset återgår alltså INTE till 500 kr — värdet som 15 % räknas av har ändrats.
+Priset återgår alltså INTE till 500 kr — värdet som 15 % räknas av har ändrats.
 
 **Svar:** 488,75 kr`,
         },
         {
             level: 1,
-            question: `Vilken total förändringsfaktor får ett sparkonto med årsräntan 3 % efter 5 år?`,
+            question: `Vilken total förändringsfaktor får ett sparkonto med årsräntan 3 % efter 5 år?`,
             choices: [
                 `$1{,}03^5$`,
                 `$1{,}03 \\cdot 5$`,
@@ -25229,14 +25229,14 @@ Priset återgår alltså INTE till 500 kr — värdet som 15 % räknas av har ä
 
 $$ 1{,}03 \\cdot 1{,}03 \\cdot 1{,}03 \\cdot 1{,}03 \\cdot 1{,}03 = 1{,}03^5 \\approx 1{,}159 $$
 
-$1{,}03 \\cdot 5 = 5{,}15$ vore en femdubbling plus 15 % — orimligt för 3 % ränta.
+$1{,}03 \\cdot 5 = 5{,}15$ vore en femdubbling plus 15 % — orimligt för 3 % ränta.
 
 **Svar:** $1{,}03^5$`,
         },
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `Nadia sätter in 45 000 kr på ett konto med årsräntan 3,2 %. Hur mycket finns på kontot efter 10 år? Avrunda till hela kronor.`,
+            question: `Nadia sätter in 45 000 kr på ett konto med årsräntan 3,2 %. Hur mycket finns på kontot efter 10 år? Avrunda till hela kronor.`,
             answer: { value: 61638, unit: 'kr', tol: 0.001 },
             solution: `Förändringsfaktorn per år är $1 + 0{,}032 = 1{,}032$. Efter 10 år:
 
@@ -25246,19 +25246,19 @@ $$ 45\\ 000 \\cdot 1{,}032^{10} = 45\\ 000 \\cdot 1{,}3702\\ldots = 61\\ 637{,}6
         },
         {
             level: 2,
-            question: `En aktie ökade med 8 % ett år och minskade med 5 % året därpå. Vilken var den totala förändringen?`,
+            question: `En aktie ökade med 8 % ett år och minskade med 5 % året därpå. Vilken var den totala förändringen?`,
             choices: [
-                `+ 2,6 %`,
-                `+ 3,0 %`,
-                `− 2,6 %`,
-                `+ 13 %`,
+                `+ 2,6 %`,
+                `+ 3,0 %`,
+                `− 2,6 %`,
+                `+ 13 %`,
             ],
             correct: 0,
             solution: `Multiplicera förändringsfaktorerna:
 
 $$ 1{,}08 \\cdot 0{,}95 = 1{,}026 $$
 
-1,026 motsvarar en ökning med 2,6 %. Att addera procentsatserna ($8 - 5 = 3$ %) ger fel — faktorerna verkar på olika belopp.
+1,026 motsvarar en ökning med 2,6 %. Att addera procentsatserna ($8 - 5 = 3$ %) ger fel — faktorerna verkar på olika belopp.
 
 **Svar:** + 2,6 %`,
         },
@@ -25351,7 +25351,7 @@ Vi prövar några värden på $n$:
 
 $$ 200 \\cdot 0{,}75^6 = 35{,}6\\ldots \\qquad 200 \\cdot 0{,}75^7 = 26{,}6\\ldots $$
 
-Efter sex studsar når bollen fortfarande över 30 cm, men efter sju studsar under.
+Efter sex studsar når bollen fortfarande över 30 cm, men efter sju studsar under.
 
 **Svar:** Efter 7 studsar
 
@@ -25510,7 +25510,7 @@ Kontroll med fondernas värden: efter 14 år är A värd $58\\,744$ kr och B $59
         },
         {
             level: 1,
-            question: `Du sätter in 12 000 kr på ett konto med årsräntan 3,5 %. Vad är behållningen efter ett år?`,
+            question: `Du sätter in 12 000 kr på ett konto med årsräntan 3,5 %. Vad är behållningen efter ett år?`,
             answer: { value: 12420, unit: 'kr' },
             solution: `Förändringsfaktorn är $1 + 0{,}035 = 1{,}035$:
 
@@ -25555,7 +25555,7 @@ Då blir kopiorna \`=B3*$B$12\`, \`=B4*$B$12\` … — föregående års behåll
         },
         {
             level: 2,
-            question: `Amir sparar 60 000 kr med räntan 2,4 % i 6 år. Hur mycket finns på kontot då? Avrunda till hela kronor.`,
+            question: `Amir sparar 60 000 kr med räntan 2,4 % i 6 år. Hur mycket finns på kontot då? Avrunda till hela kronor.`,
             answer: { value: 69166, unit: 'kr', tol: 0.001 },
             solution: `Samma förändringsfaktor varje år ger den totala faktorn $1{,}024^6$:
 
@@ -25797,7 +25797,7 @@ Kontroll med påhittade tal: $10\\,000$ kr växer till $10\\,000 \\cdot 1{,}03^{
         },
         {
             level: 1,
-            question: `Ett lån på 90 000 kr ska amorteras med lika stora belopp varje månad i 3 år. Hur stor blir amorteringen per månad?`,
+            question: `Ett lån på 90 000 kr ska amorteras med lika stora belopp varje månad i 3 år. Hur stor blir amorteringen per månad?`,
             answer: { value: 2500, unit: 'kr' },
             solution: `Antalet inbetalningar är $3 \\cdot 12 = 36$ stycken:
 
@@ -25807,7 +25807,7 @@ $$ \\frac{90\\ 000}{36} = 2\\ 500\\ \\mathrm{kr} $$
         },
         {
             level: 1,
-            question: `En skuld är 50 000 kr och årsräntan 6 %. Hur stor är räntan för EN månad?`,
+            question: `En skuld är 50 000 kr och årsräntan 6 %. Hur stor är räntan för EN månad?`,
             answer: { value: 250, unit: 'kr' },
             solution: `Årsräntan i kronor:
 
@@ -25822,13 +25822,13 @@ $$ \\frac{3\\ 000}{12} = 250\\ \\mathrm{kr} $$
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `Hugo lånar 120 000 kr med rak amortering på 4 år och årsräntan 5,4 %. Hur mycket ska han betala totalt vid FÖRSTA inbetalningen (månadsvis)?`,
+            question: `Hugo lånar 120 000 kr med rak amortering på 4 år och årsräntan 5,4 %. Hur mycket ska han betala totalt vid FÖRSTA inbetalningen (månadsvis)?`,
             answer: { value: 3040, unit: 'kr' },
             solution: `Amortering per månad: $4 \\cdot 12 = 48$ inbetalningar ger
 
 $$ \\frac{120\\ 000}{48} = 2\\ 500\\ \\mathrm{kr} $$
 
-Räntan första månaden räknas på hela skulden 120 000 kr:
+Räntan första månaden räknas på hela skulden 120 000 kr:
 
 $$ \\frac{0{,}054 \\cdot 120\\ 000}{12} = \\frac{6\\ 480}{12} = 540\\ \\mathrm{kr} $$
 
@@ -25840,7 +25840,7 @@ $$ 2\\ 500 + 540 = 3\\ 040\\ \\mathrm{kr} $$
         },
         {
             level: 2,
-            question: `I kalkylarket för ett lån står aktuell skuld i B2 och årsräntan är 4,8 %. Vilken formel ger räntan per månad?`,
+            question: `I kalkylarket för ett lån står aktuell skuld i B2 och årsräntan är 4,8 %. Vilken formel ger räntan per månad?`,
             choices: [
                 `\`=B2*1,048/12\``,
                 `\`=B2/12\``,
@@ -25848,7 +25848,7 @@ $$ 2\\ 500 + 540 = 3\\ 040\\ \\mathrm{kr} $$
                 `\`=(B2*0,048)/12\``,
             ],
             correct: 3,
-            solution: `Räntan per månad är årsräntan (4,8 % av aktuell skuld) delad med 12:
+            solution: `Räntan per månad är årsräntan (4,8 % av aktuell skuld) delad med 12:
 
 \`=(B2*0,048)/12\`
 
@@ -25956,7 +25956,7 @@ Kontroll: den första räntan är $\\dfrac{0{,}042 \\cdot 180\\,000}{12} = 630$ 
                 { del: 'a', value: 12, unit: '%' },
                 { del: 'b', value: 200000, unit: 'kr', tol: 0.001 },
             ],
-            solution: `**Insikten:** mellan två inbetalningar har skulden minskat med en amortering. Skillnaden på 25 kr är alltså månadsräntan på $2\\,500$ kr, och då kan räntesatsen lösas ut. Därefter avslöjar den första inbetalningens ränta hur stor skulden var från början.
+            solution: `**Insikten:** mellan två inbetalningar har skulden minskat med en amortering. Skillnaden på 25 kr är alltså månadsräntan på $2\\,500$ kr, och då kan räntesatsen lösas ut. Därefter avslöjar den första inbetalningens ränta hur stor skulden var från början.
 
 **a)** Låt årsräntan i decimalform vara $r$. Räntan för en månad är $\\dfrac{r}{12}$ av skulden. Skulden har minskat med $2\\,500$ kr, så räntan har minskat med
 
@@ -25990,7 +25990,7 @@ $$ \\frac{0{,}01L}{\\boldsymbol{0{,}01}} = \\frac{2\\,000}{\\boldsymbol{0{,}01}}
 
 $$ L = 200\\,000 $$
 
-Kontroll: den andra inbetalningen har skulden $197\\,500$ kr och räntan $1\\,975$ kr, alltså inbetalningen $4\\,475$ kr, som är 25 kr mindre än $4\\,500$ kr.
+Kontroll: den andra inbetalningen har skulden $197\\,500$ kr och räntan $1\\,975$ kr, alltså inbetalningen $4\\,475$ kr, som är 25 kr mindre än $4\\,500$ kr.
 
 **Svar:** 200 000 kr
 
@@ -26066,7 +26066,7 @@ Den totala räntekostnaden är det han betalat minus det han lånat:
 
 $$ 32\\,668{,}25 - 30\\,000 = 2\\,668{,}25\\ \\mathrm{kr} $$
 
-Rimligt? Utan ränta hade 15 inbetalningar räckt. Räntan är i början 300 kr per månad och sjunker sedan, så drygt 2 600 kr på 17 månader är rimligt.
+Rimligt? Utan ränta hade 15 inbetalningar räckt. Räntan är i början 300 kr per månad och sjunker sedan, så drygt 2 600 kr på 17 månader är rimligt.
 
 **Svar:** Cirka 2 668 kr
 
@@ -26115,13 +26115,13 @@ Den lägre räntan i bank B sparar $6\\,250 - 5\\,729{,}17 = 520{,}83$ kr, men a
             level: 1,
             question: `Priset på en vara har indextalet 132, med 2015 som basår. Vad betyder det?`,
             choices: [
-                `Priset är 32 % högre än år 2015`,
-                `Priset är 132 % högre än år 2015`,
-                `Priset är 32 % av priset år 2015`,
-                `Priset är 132 kr`,
+                `Priset är 32 % högre än år 2015`,
+                `Priset är 132 % högre än år 2015`,
+                `Priset är 32 % av priset år 2015`,
+                `Priset är 132 kr`,
             ],
             correct: 0,
-            solution: `Basåret har alltid index 100. Indextalet 132 ligger $132 - 100 = 32$ enheter över basåret — priset är alltså 32 % högre än år 2015 (förändringsfaktorn är $\\dfrac{132}{100} = 1{,}32$).
+            solution: `Basåret har alltid index 100. Indextalet 132 ligger $132 - 100 = 32$ enheter över basåret — priset är alltså 32 % högre än år 2015 (förändringsfaktorn är $\\dfrac{132}{100} = 1{,}32$).
 
 Ett indextal säger ingenting om priset i kronor — bara om förhållandet till basåret.
 
@@ -26129,7 +26129,7 @@ Ett indextal säger ingenting om priset i kronor — bara om förhållandet till
         },
         {
             level: 1,
-            question: `Ett månadskort för bussen kostade 550 kr under basåret och kostar i år 715 kr. Vilket indextal har priset i år?`,
+            question: `Ett månadskort för bussen kostade 550 kr under basåret och kostar i år 715 kr. Vilket indextal har priset i år?`,
             answer: { value: 130, unit: '', tol: 0.005 },
             solution: `Insättning i formeln för indextal:
 
@@ -26141,7 +26141,7 @@ $$ \\text{index} = \\frac{715}{550} \\cdot 100 = 1{,}30 \\cdot 100 = 130 $$
             level: 1,
             question: `KPI var 335,9 år 2020, med 1980 som basår. Vad säger det om prisnivån?`,
             choices: [
-                `Priserna ökade med 335,9 kr mellan 1980 och 2020`,
+                `Priserna ökade med 335,9 kr mellan 1980 och 2020`,
                 `Prisnivån år 2020 var 235,9 % högre än år 1980`,
                 `Prisnivån år 2020 var 35,9 % högre än år 1980`,
                 `Prisnivån år 2020 var 335,9 % högre än år 1980`,
@@ -26156,7 +26156,7 @@ Den vanligaste felläsningen är att ta hela indextalet som procentuell ökning 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `En chokladkaka kostar 65 kr i år, och prisets indextal är 125. Vad kostade chokladkakan under basåret?`,
+            question: `En chokladkaka kostar 65 kr i år, och prisets indextal är 125. Vad kostade chokladkakan under basåret?`,
             answer: { value: 52, unit: 'kr', tol: 0.005 },
             solution: `Index 125 betyder att dagens pris är basårets pris multiplicerat med förändringsfaktorn $\\dfrac{125}{100} = 1{,}25$. Kalla basårets pris $x$:
 
@@ -26168,7 +26168,7 @@ $$ x = \\frac{65}{1{,}25} = 52\\ \\mathrm{kr} $$
         },
         {
             level: 2,
-            question: `En bok kostade 249 kr år 2010, när KPI var 303,5. Vad motsvarar det priset i 2023 års penningvärde, när KPI var 403,7? Avrunda till hela kronor.`,
+            question: `En bok kostade 249 kr år 2010, när KPI var 303,5. Vad motsvarar det priset i 2023 års penningvärde, när KPI var 403,7? Avrunda till hela kronor.`,
             answer: { value: 331, unit: 'kr', tol: 0.005 },
             solution: `Kvoten mellan årens indextal är förändringsfaktorn mellan åren:
 
@@ -26179,7 +26179,7 @@ $$ 249 \\cdot \\frac{403{,}7}{303{,}5} = 249 \\cdot 1{,}3301\\ldots = 331{,}2\\l
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Linneas månadslön höjdes från 28 000 kr år 2020 till 30 000 kr år 2023. Under samma tid steg KPI från 335,9 till 403,7. Med hur många procent minskade hennes köpkraft (reallön)? Avrunda till tiondels procent.`,
+            question: `Linneas månadslön höjdes från 28 000 kr år 2020 till 30 000 kr år 2023. Under samma tid steg KPI från 335,9 till 403,7. Med hur många procent minskade hennes köpkraft (reallön)? Avrunda till tiondels procent.`,
             answer: { value: 10.9, unit: '%', tol: 0.02 },
             solution: `**Insikten:** lönen ska jämföras med prisnivån — köpkraften ändras med kvoten mellan lönens och prisernas förändringsfaktorer.
 
@@ -26261,24 +26261,24 @@ $$ \\frac{81}{450} = 0{,}18 = 18\\ \\% $$
             level: 2,
             question: `En tidning visar två staplar: 490 och 520 enheter. Diagrammets *y*-axel är avhuggen och börjar vid 480. Vilket påstående stämmer?`,
             choices: [
-                `Den verkliga ökningen är 300 %, precis som staplarna visar`,
+                `Den verkliga ökningen är 300 %, precis som staplarna visar`,
                 `Diagrammet är fel ritat — staplar får aldrig börja vid 480`,
-                `Den verkliga ökningen är 30 %`,
-                `Den verkliga ökningen är cirka 6 %, men staplarnas höjder får den att se ut som en fyrdubbling`,
+                `Den verkliga ökningen är 30 %`,
+                `Den verkliga ökningen är cirka 6 %, men staplarnas höjder får den att se ut som en fyrdubbling`,
             ],
             correct: 3,
             solution: `Ovanför brytpunkten 480 blir staplarna $490 - 480 = 10$ respektive $520 - 480 = 40$ enheter höga — den andra ser $\\dfrac{40}{10} = 4$ gånger så hög ut. Den verkliga förändringsfaktorn är
 
 $$ \\frac{520}{490} = 1{,}061\\ldots $$
 
-alltså en ökning med cirka 6 %. Diagrammet är inte "fel ritat" — en avhuggen axel kan vara motiverad — men den som läser måste se var axeln börjar.
+alltså en ökning med cirka 6 %. Diagrammet är inte "fel ritat" — en avhuggen axel kan vara motiverad — men den som läser måste se var axeln börjar.
 
 **Svar:** Den verkliga ökningen är cirka 6 %, men staplarna får den att se ut som en fyrdubbling.`,
         },
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `I en enkät svarade 60 % av de 300 tillfrågade eleverna på Åskolan ja, och 40 % av de 700 tillfrågade på Bäckskolan. En rubrik påstår: "I snitt svarade hälften ja." Hur många procent av samtliga tillfrågade svarade egentligen ja?`,
+            question: `I en enkät svarade 60 % av de 300 tillfrågade eleverna på Åskolan ja, och 40 % av de 700 tillfrågade på Bäckskolan. En rubrik påstår: "I snitt svarade hälften ja." Hur många procent av samtliga tillfrågade svarade egentligen ja?`,
             answer: { value: 46, unit: '%', tol: 0.005 },
             solution: `**Insikten:** procentsatser från olika stora grupper kan inte medelvärdesbildas rakt av — de måste vägas med gruppernas storlek. Räkna i stället antal personer.
 
@@ -26332,7 +26332,7 @@ $$ \\frac{460}{1\\ 000} = 0{,}46 = 46\\ \\% $$
         },
         {
             level: 1,
-            question: `En laddstation tar 30 kr i startavgift och 5 kr per kWh. Vilken formel beskriver kostnaden $y$ kr för $x$ kWh?`,
+            question: `En laddstation tar 30 kr i startavgift och 5 kr per kWh. Vilken formel beskriver kostnaden $y$ kr för $x$ kWh?`,
             choices: [
                 `$y = 35x$`,
                 `$y = 30 + 5x$`,
@@ -26340,7 +26340,7 @@ $$ \\frac{460}{1\\ 000} = 0{,}46 = 46\\ \\% $$
                 `$y = 30 \\cdot 5x$`,
             ],
             correct: 1,
-            solution: `Den fasta avgiften 30 kr är konstanttermen och 5 kr multipliceras med varje kWh:
+            solution: `Den fasta avgiften 30 kr är konstanttermen och 5 kr multipliceras med varje kWh:
 
 $$ y = 30 + 5x $$
 
@@ -26351,13 +26351,13 @@ $$ y = 30 + 5x $$
             level: 2,
             question: `Den linjära modellen $y = 500 + 400x$ beskriver kostnaden hos en bilverkstad. Vad betyder talet 400 i modellen?`,
             choices: [
-                `Reparationen tar högst 400 minuter`,
-                `Den fasta avgiften är 400 kr`,
-                `Kostnaden är alltid minst 400 kr`,
-                `Kostnaden ökar med 400 kr för varje arbetad timme`,
+                `Reparationen tar högst 400 minuter`,
+                `Den fasta avgiften är 400 kr`,
+                `Kostnaden är alltid minst 400 kr`,
+                `Kostnaden ökar med 400 kr för varje arbetad timme`,
             ],
             correct: 3,
-            solution: `Talet 400 är koefficienten framför $x$ — det anger hur mycket $y$ ökar när $x$ ökar med 1, alltså kostnaden per timme. Den fasta avgiften är konstanttermen 500 kr.
+            solution: `Talet 400 är koefficienten framför $x$ — det anger hur mycket $y$ ökar när $x$ ökar med 1, alltså kostnaden per timme. Den fasta avgiften är konstanttermen 500 kr.
 
 **Svar:** Kostnaden ökar med 400 kr per arbetad timme.`,
         },
@@ -26714,7 +26714,7 @@ $$ \\frac{15{,}95}{\\boldsymbol{0{,}0065}} = \\frac{0{,}0065x}{\\boldsymbol{0{,}
 
 $$ x = 2\\,453{,}8\\ldots $$
 
-Rimligt? Från stationen ska temperaturen sjunka 14 grader, och det tar $\\dfrac{14}{0{,}65} \\approx 21{,}5$ hundratal meter, alltså drygt $2\\,150$ m ovanför stationen.
+Rimligt? Från stationen ska temperaturen sjunka 14 grader, och det tar $\\dfrac{14}{0{,}65} \\approx 21{,}5$ hundratal meter, alltså drygt $2\\,150$ m ovanför stationen.
 
 **Svar:** Cirka $2\\,450$ m över havet
 
@@ -26726,7 +26726,7 @@ och på $20\\,000$ m
 
 $$ 15{,}95 - 0{,}0065 \\cdot 20\\,000 = -114{,}05 $$
 
-Upp till 11 km stämmer modellen bra, cirka $-56$ °C mot verklighetens cirka $-56$ °C. Ovanför 11 km fortsätter modellen att sjunka, medan temperaturen i verkligheten slutar sjunka. På 20 km är modellens värde nästan 60 grader för kallt.
+Upp till 11 km stämmer modellen bra, cirka $-56$ °C mot verklighetens cirka $-56$ °C. Ovanför 11 km fortsätter modellen att sjunka, medan temperaturen i verkligheten slutar sjunka. På 20 km är modellens värde nästan 60 grader för kallt.
 
 **Svar:** Modellen ger cirka −56 °C på 11 000 m och cirka −114 °C på 20 000 m. Den är användbar upp till ungefär 11 km men inte högre upp.
 
@@ -26752,7 +26752,7 @@ Upp till 11 km stämmer modellen bra, cirka $-56$ °C mot verklighetens cirka 
         },
         {
             level: 1,
-            question: `Bananer kostar 24 kr/kg. Vilken formel beskriver kostnaden $y$ kr för $x$ kg bananer?`,
+            question: `Bananer kostar 24 kr/kg. Vilken formel beskriver kostnaden $y$ kr för $x$ kg bananer?`,
             choices: [
                 `$y = x + 24x$`,
                 `$y = \\dfrac{24}{x}$`,
@@ -26801,13 +26801,13 @@ Tabell två ökar med samma mängd men har startvärde (linjär, ej proportionel
         },
         {
             level: 2,
-            question: `En bil drar bensin proportionellt mot körsträckan: 42 liter på 600 km. Hur mycket bensin krävs för 850 km? Svara i liter.`,
+            question: `En bil drar bensin proportionellt mot körsträckan: 42 liter på 600 km. Hur mycket bensin krävs för 850 km? Svara i liter.`,
             answer: { value: 59.5, unit: 'liter', tol: 0.005 },
             solution: `Proportionalitetskonstanten (förbrukning per km):
 
 $$ k = \\frac{42}{600} = 0{,}07\\ \\text{liter/km} $$
 
-För 850 km:
+För 850 km:
 
 $$ y = 0{,}07 \\cdot 850 = 59{,}5\\ \\text{liter} $$
 
@@ -27872,11 +27872,11 @@ Den röda linjen visar ljus A och den blå linjen visar ljus B.<br>a) Bestäm en
 
 $$ k = \\frac{\\Delta h}{\\Delta t} = \\frac{18 - 24}{2} = \\frac{-6}{2} = -3 $$
 
-Ljus B är 18 cm vid start och sjunker till 16 cm på 2 timmar:
+Ljus B är 18 cm vid start och sjunker till 16 cm på 2 timmar:
 
 $$ k = \\frac{\\Delta h}{\\Delta t} = \\frac{16 - 18}{2} = \\frac{-2}{2} = -1 $$
 
-Ljus A brinner alltså ned 3 cm per timme och ljus B 1 cm per timme.
+Ljus A brinner alltså ned 3 cm per timme och ljus B 1 cm per timme.
 
 **Svar:** Ljus A: $h = -3t + 24$. Ljus B: $h = -t + 18$.
 
@@ -27904,7 +27904,7 @@ $$ t = 3 $$
 
 Kontroll: ljus A är $-3 \\cdot 3 + 24 = 15$ cm och ljus B är $-3 + 18 = 15$ cm. Det stämmer.
 
-Rimligt? Skillnaden i höjd är 6 cm från början och minskar med $3 - 1 = 2$ cm per timme, så den är borta efter $\\dfrac{6}{2} = 3$ timmar.
+Rimligt? Skillnaden i höjd är 6 cm från början och minskar med $3 - 1 = 2$ cm per timme, så den är borta efter $\\dfrac{6}{2} = 3$ timmar.
 
 **Svar:** Efter 3 timmar, då båda är 15 cm höga
 
@@ -27953,11 +27953,11 @@ a) Förklara vad Lisa har gjort fel.<br>b) Bestäm linjens rätta ekvation och t
                 { del: 'b', value: 30, unit: '', etikett: '$k =$' },
                 { del: 'b', value: 100, unit: '', etikett: '$m =$' },
             ],
-            solution: `**Insikten:** en ruta betyder inte samma sak på de två axlarna. Här är en ruta 2 GB i sidled men 100 kr i höjdled. $\\Delta x$ och $\\Delta y$ ska därför mätas i axlarnas enheter, inte i antal rutor.
+            solution: `**Insikten:** en ruta betyder inte samma sak på de två axlarna. Här är en ruta 2 GB i sidled men 100 kr i höjdled. $\\Delta x$ och $\\Delta y$ ska därför mätas i axlarnas enheter, inte i antal rutor.
 
 **a)** Lisa har räknat rutor. Hennes trappsteg är rätt ritat, men 5 rutor i sidled är $5 \\cdot 2 = 10$ GB och 3 rutor i höjdled är $3 \\cdot 100 = 300$ kr. Samma fel gör hon med $m$: en ruta upp på *y*-axeln är 100 kr, inte 1.
 
-Hennes ekvation går att kontrollera: $y = 0{,}6x + 1$ ger 1 kr för 0 GB, men grafen visar 100 kr.
+Hennes ekvation går att kontrollera: $y = 0{,}6x + 1$ ger 1 kr för 0 GB, men grafen visar 100 kr.
 
 **Svar:** Lisa räknar rutor i stället för att läsa av värdena på axlarna. En ruta är 2 GB i sidled och 100 kr i höjdled, så både $k$ och $m$ blir fel.
 
@@ -27967,9 +27967,9 @@ $$ k = \\frac{\\Delta y}{\\Delta x} = \\frac{400 - 100}{10 - 0} = \\frac{300}{10
 
 Linjen skär *y*-axeln vid 100, så $m = 100$.
 
-Kontroll med en annan punkt i grafen: $x = 4$ ger $y = 30 \\cdot 4 + 100 = 220$, och linjen ligger strax ovanför 200 kr vid 4 GB. Det stämmer.
+Kontroll med en annan punkt i grafen: $x = 4$ ger $y = 30 \\cdot 4 + 100 = 220$, och linjen ligger strax ovanför 200 kr vid 4 GB. Det stämmer.
 
-$k = 30$ betyder att varje GB kostar 30 kr extra. $m = 100$ är den fasta avgiften, det man betalar även om man inte surfar alls.
+$k = 30$ betyder att varje GB kostar 30 kr extra. $m = 100$ är den fasta avgiften, det man betalar även om man inte surfar alls.
 
 **Svar:** $y = 30x + 100$. Varje GB kostar 30 kr, och den fasta avgiften är 100 kr.
 
@@ -28324,7 +28324,7 @@ Vid exakt 8 dagar kostar båda lika mycket: $250 \\cdot 8 + 400 = 2\\,400$ kr oc
 
 Kontroll: 9 dagar kostar $250 \\cdot 9 + 400 = 2\\,650$ kr hos Släpet och $300 \\cdot 9 = 2\\,700$ kr hos Kärran.
 
-Rimligt? Släpet är 50 kr billigare per dag, och det tar $\\dfrac{400}{50} = 8$ dagar att tjäna in den fasta avgiften.
+Rimligt? Släpet är 50 kr billigare per dag, och det tar $\\dfrac{400}{50} = 8$ dagar att tjäna in den fasta avgiften.
 
 **Svar:** Från och med 9 dagar
 
@@ -29047,7 +29047,7 @@ Kontroll med $a = 0$: $L_2$ blir $-3y + 9 = 0$, alltså den vågräta linjen $y 
         },
         {
             level: 3,
-            question: `Klassen har $1\\,200$ kr att handla frukt och dryck för till en utflykt. En frukt kostar 15 kr och en dryck 20 kr. Klassen köper $x$ frukter och $y$ drycker och gör av med alla pengar.<br>a) Teckna sambandet mellan $x$ och $y$ som en rät linje i allmän form. Bestäm linjens $k$-värde och tolka det.<br>b) Budgeten höjs med 10 %. Förklara varför den nya linjen är parallell med den gamla, och beräkna hur många fler drycker klassen som mest kan köpa.<br>c) Budgeten är i stället kvar på $1\\,200$ kr, men priset på en dryck stiger med 25 %. Är den nya linjen parallell med den gamla? Bestäm dess $k$-värde.`,
+            question: `Klassen har $1\\,200$ kr att handla frukt och dryck för till en utflykt. En frukt kostar 15 kr och en dryck 20 kr. Klassen köper $x$ frukter och $y$ drycker och gör av med alla pengar.<br>a) Teckna sambandet mellan $x$ och $y$ som en rät linje i allmän form. Bestäm linjens $k$-värde och tolka det.<br>b) Budgeten höjs med 10 %. Förklara varför den nya linjen är parallell med den gamla, och beräkna hur många fler drycker klassen som mest kan köpa.<br>c) Budgeten är i stället kvar på $1\\,200$ kr, men priset på en dryck stiger med 25 %. Är den nya linjen parallell med den gamla? Bestäm dess $k$-värde.`,
             answer: { value: 6, unit: 'drycker' },
             delsvar: [
                 { del: 'a', value: -0.75, unit: '', etikett: '$k =$' },
@@ -29510,7 +29510,7 @@ Kontroll: vänster led $f(2 \\cdot 2) = f(4) = 5 \\cdot 4 - 4 = 16$. Höger led 
                 { del: 'b', value: 20, unit: 'km' },
                 { del: 'c', value: 14.3, unit: 'km', tol: 0.01, etikett: '$s >$' },
             ],
-            solution: `**Insikten:** $K(12)$ är ett tal, kostnaden för en resa på 12 km. Påståenden om kostnader blir därför ekvationer och olikheter mellan funktionsvärden.
+            solution: `**Insikten:** $K(12)$ är ett tal, kostnaden för en resa på 12 km. Påståenden om kostnader blir därför ekvationer och olikheter mellan funktionsvärden.
 
 **a)** Funktionsvärdena var för sig:
 
@@ -29520,7 +29520,7 @@ $$ K(8) = 49 + 14{,}5 \\cdot 8 = 49 + 116 = 165 $$
 
 $$ K(12) - K(8) = 223 - 165 = 58 $$
 
-Startavgiften 49 kr finns med i båda och tar ut sig. Kvar blir kostnaden för de 4 kilometrarna mellan 8 och 12 km: $4 \\cdot 14{,}5 = 58$.
+Startavgiften 49 kr finns med i båda och tar ut sig. Kvar blir kostnaden för de 4 kilometrarna mellan 8 och 12 km: $4 \\cdot 14{,}5 = 58$.
 
 **Svar:** $58\\ \\mathrm{kr}$, det som de fyra extra kilometrarna kostar när resan blir 12 km i stället för 8 km.
 
@@ -29601,7 +29601,7 @@ $$ A(3) = 3(10 - 3) = 3 \\cdot 7 = 21 $$
 
 $$ A(7) = 7(10 - 7) = 7 \\cdot 3 = 21 $$
 
-Med $x = 3$ blir den andra sidan 7 cm, och med $x = 7$ blir den andra sidan 3 cm. Det är samma rektangel, bara vriden ett kvarts varv.
+Med $x = 3$ blir den andra sidan 7 cm, och med $x = 7$ blir den andra sidan 3 cm. Det är samma rektangel, bara vriden ett kvarts varv.
 
 **Svar:** $A(3) = A(7) = 21$. Båda ger en rektangel med sidorna 3 cm och 7 cm.
 
@@ -29611,7 +29611,7 @@ För att se hur stor arean kan bli skriver vi sidorna som $5 + d$ och $5 - d$, e
 
 $$ (5 + d)(5 - d) = 25 - 5d + 5d - d^2 = 25 - d^2 $$
 
-Talet $d^2$ är aldrig negativt, så arean är högst 25, och störst när $d = 0$, alltså för kvadraten med sidan 5 cm. Arean 30 går inte att få.
+Talet $d^2$ är aldrig negativt, så arean är högst 25, och störst när $d = 0$, alltså för kvadraten med sidan 5 cm. Arean 30 går inte att få.
 
 Kontroll med $d = 2$: sidorna 7 cm och 3 cm ger $25 - 4 = 21$, samma som i b.
 
@@ -29621,14 +29621,14 @@ Kontroll med $d = 2$: sidorna 7 cm och 3 cm ger $25 - 4 = 21$, samma som i b.
         },
         {
             level: 3,
-            question: `Temperaturen i en kopp te är $T(t)$ °C, där $t$ är tiden i minuter efter att teet hälldes upp.<br>a) Skriv påståendet "efter en kvart är teet 20 grader varmare än efter en halvtimme" med funktionsbeteckningar.<br>b) Förklara i ord vad olikheten $T(t + 1) < T(t)$ betyder.<br>c) En modell för temperaturen är $T(t) = 20 + 70 \\cdot 0{,}95^t$. Stämmer påståendet i a enligt modellen?`,
+            question: `Temperaturen i en kopp te är $T(t)$ °C, där $t$ är tiden i minuter efter att teet hälldes upp.<br>a) Skriv påståendet "efter en kvart är teet 20 grader varmare än efter en halvtimme" med funktionsbeteckningar.<br>b) Förklara i ord vad olikheten $T(t + 1) < T(t)$ betyder.<br>c) En modell för temperaturen är $T(t) = 20 + 70 \\cdot 0{,}95^t$. Stämmer påståendet i a enligt modellen?`,
             answer: { value: 17.4, unit: '°C', tol: 0.01 },
             delsvar: [
                 { del: 'a' },
                 { del: 'b' },
                 { del: 'c', value: 17.4, unit: '°C', tol: 0.01, etikett: '$T(15) - T(30) \\approx$' },
             ],
-            solution: `**Insikten:** $T(15)$ är ett tal, temperaturen 15 minuter efter att teet hälldes upp. Varje påstående om temperaturer vid bestämda tider blir därför ett samband mellan funktionsvärden.
+            solution: `**Insikten:** $T(15)$ är ett tal, temperaturen 15 minuter efter att teet hälldes upp. Varje påstående om temperaturer vid bestämda tider blir därför ett samband mellan funktionsvärden.
 
 **a)** En kvart är $t = 15$ och en halvtimme är $t = 30$. Temperaturen efter en kvart är 20 grader högre:
 
@@ -29646,9 +29646,9 @@ $$ T(30) = 20 + 70 \\cdot 0{,}95^{30} = 20 + 70 \\cdot 0{,}2146\\ldots = 35{,}02
 
 $$ T(15) - T(30) \\approx 52{,}43 - 35{,}02 = 17{,}41 $$
 
-Skillnaden är cirka 17 grader, inte 20.
+Skillnaden är cirka 17 grader, inte 20.
 
-Rimligt? Under den första kvarten sjunker temperaturen från $T(0) = 90$ till cirka 52, alltså med cirka 38 grader. Ju närmare rumstemperaturen 20 °C teet kommer, desto långsammare svalnar det, så den andra kvarten ger en mindre sänkning.
+Rimligt? Under den första kvarten sjunker temperaturen från $T(0) = 90$ till cirka 52, alltså med cirka 38 grader. Ju närmare rumstemperaturen 20 °C teet kommer, desto långsammare svalnar det, så den andra kvarten ger en mindre sänkning.
 
 **Svar:** Nej. Enligt modellen är teet cirka 17,4 grader varmare efter en kvart än efter en halvtimme.
 
@@ -29913,7 +29913,7 @@ Lösningarna $-3$ och $3$ ligger på avståndet 6 från varandra.
                 { del: 'b', values: [0.42, 2.02], unit: 's', tol: 0.01, etikett: '$t \\approx$' },
                 { del: 'c', value: 1.60, unit: 's', tol: 0.01 },
             ],
-            solution: `**Insikten:** frågan "när är bollen 6 m upp?" är ekvationen $h(t) = 6$. Bollen passerar den höjden två gånger, en gång på väg upp och en gång på väg ned.
+            solution: `**Insikten:** frågan "när är bollen 6 m upp?" är ekvationen $h(t) = 6$. Bollen passerar den höjden två gånger, en gång på väg upp och en gång på väg ned.
 
 **a)** I grafiska lösningar förstår GeoGebra bara variablerna $x$ och $y$, och decimaltal skrivs med punkt.
 
@@ -29933,7 +29933,7 @@ Kontroll: $h(0{,}42) = 1{,}8 + 12 \\cdot 0{,}42 - 4{,}91 \\cdot 0{,}42^2 \\appro
 
 $$ 2{,}020\\ldots - 0{,}423\\ldots \\approx 1{,}60 $$
 
-Rimligt? Bollen når högsta punkten mitt emellan, vid cirka 1,2 s, och tillbringar lika lång tid på väg upp från 6 m som på väg ned till 6 m.
+Rimligt? Bollen når högsta punkten mitt emellan, vid cirka 1,2 s, och tillbringar lika lång tid på väg upp från 6 m som på väg ned till 6 m.
 
 **Svar:** Cirka $1{,}60\\ \\mathrm{s}$
 
@@ -30050,7 +30050,7 @@ Kontroll: med $a = 3$ är ekvationen $3x - 3 = 7 - 2x$. Insättning av $x = 2$ g
         },
         {
             level: 1,
-            question: `Att ladda en elbil kostar 20 kr per timme och debiteras exakt efter laddtiden. Man får ladda i högst 8 timmar. Kostnaden är $y = 20x$ kr efter $x$ timmar. Vilken är definitionsmängden?`,
+            question: `Att ladda en elbil kostar 20 kr per timme och debiteras exakt efter laddtiden. Man får ladda i högst 8 timmar. Kostnaden är $y = 20x$ kr efter $x$ timmar. Vilken är definitionsmängden?`,
             choices: [
                 `$0 \\leq y \\leq 160$`,
                 `$0 \\leq x \\leq 8$`,
@@ -30058,7 +30058,7 @@ Kontroll: med $a = 3$ är ekvationen $3x - 3 = 7 - 2x$. Insättning av $x = 2$ g
                 `$0 < x < 20$`,
             ],
             correct: 1,
-            solution: `Definitionsmängden är de tillåtna *x*-värdena (laddtiden i timmar). Tiden kan vara vilket tal som helst från 0 till 8, till exempel även 2,5 timmar:
+            solution: `Definitionsmängden är de tillåtna *x*-värdena (laddtiden i timmar). Tiden kan vara vilket tal som helst från 0 till 8, till exempel även 2,5 timmar:
 
 $$ 0 \\leq x \\leq 8 $$
 
@@ -30155,7 +30155,7 @@ $$ y = \\frac{48}{x} $$
 
 - Bredden minst 4 m: $x \\geq 4$.
 - Längden minst lika stor som bredden: $\\dfrac{48}{x} \\geq x$. Vi multiplicerar båda led med det positiva talet $x$ och får $48 \\geq x^2$. Det största tillåtna *x* är alltså $\\sqrt{48} = 6{,}92\\ldots$, då hagen är en kvadrat.
-- Längden minst 4 m: $\\dfrac{48}{x} \\geq 4$ ger $x \\leq 12$. Den gränsen är svagare än $x \\leq \\sqrt{48}$ och påverkar inte svaret.
+- Längden minst 4 m: $\\dfrac{48}{x} \\geq 4$ ger $x \\leq 12$. Den gränsen är svagare än $x \\leq \\sqrt{48}$ och påverkar inte svaret.
 
 Kontroll med en bredd inne i intervallet: $x = 6$ ger $y = \\dfrac{48}{6} = 8$, och både $6 \\geq 4$ och $8 \\geq 6$ stämmer. Med $x = 8$ blir $y = 6$, och då är längden kortare än bredden.
 
@@ -30255,7 +30255,7 @@ Kontroll med ett värde nära gränsen: $f(4{,}9) = 4{,}9^2 - 4 \\cdot 4{,}9 + 1
         },
         {
             level: 3,
-            question: `På en parkering är de två första timmarna gratis. Därefter kostar det $15\\ \\mathrm{kr}$ per påbörjad timme, och man får stå högst 8 timmar. Kostnaden är $K(x)$ kr när bilen står parkerad i $x$ timmar, där $0 < x \\leq 8$.<br>a) Beräkna $K(2{,}5)$ och $K(3)$.<br>b) Bestäm funktionens värdemängd.<br>c) Förklara varför värdemängden inte kan skrivas $0 \\leq y \\leq 90$.`,
+            question: `På en parkering är de två första timmarna gratis. Därefter kostar det $15\\ \\mathrm{kr}$ per påbörjad timme, och man får stå högst 8 timmar. Kostnaden är $K(x)$ kr när bilen står parkerad i $x$ timmar, där $0 < x \\leq 8$.<br>a) Beräkna $K(2{,}5)$ och $K(3)$.<br>b) Bestäm funktionens värdemängd.<br>c) Förklara varför värdemängden inte kan skrivas $0 \\leq y \\leq 90$.`,
             answer: { value: 90, unit: 'kr' },
             delsvar: [
                 { del: 'a', value: 15, unit: 'kr', etikett: '$K(2{,}5) =$' },
@@ -30273,7 +30273,7 @@ Kontroll med ett värde nära gränsen: $f(4{,}9) = 4{,}9^2 - 4 \\cdot 4{,}9 + 1
 
 $$ 6 \\cdot 15 = 90 $$
 
-Kontroll: $K(8) = 90$, eftersom 8 timmar ger 6 betalda timmar. $K(7{,}5) = 90$ också, eftersom den sjätte betalda timmen redan är påbörjad.
+Kontroll: $K(8) = 90$, eftersom 8 timmar ger 6 betalda timmar. $K(7{,}5) = 90$ också, eftersom den sjätte betalda timmen redan är påbörjad.
 
 **Svar:** Värdemängden består av talen 0, 15, 30, 45, 60, 75 och 90 (kr).
 
@@ -30417,7 +30417,7 @@ Kontroll med $y = -4$: formeln ger $x = 3 + \\dfrac{12}{-4} = 3 - 3 = 0$, och my
         },
         {
             level: 1,
-            question: `Ett kapital på 8 000 kr växer med 3 % per år. Vilken funktion beskriver kapitalet $K$ kr efter $x$ år?`,
+            question: `Ett kapital på 8 000 kr växer med 3 % per år. Vilken funktion beskriver kapitalet $K$ kr efter $x$ år?`,
             choices: [
                 `$K(x) = 8\\ 000 \\cdot 1{,}03^x$`,
                 `$K(x) = 8\\ 000 \\cdot 0{,}03^x$`,
@@ -30450,19 +30450,19 @@ $$ K(x) = 8\\ 000 \\cdot 1{,}03^x $$
             level: 2,
             question: `Antalet bakterier i en odling ges av $N(t) = 500 \\cdot 1{,}12^t$ där $t$ är tiden i timmar. Vad beskriver funktionen?`,
             choices: [
-                `112 bakterier från början som ökar med 500 % per timme`,
-                `500 bakterier från början som ökar med 12 % per timme`,
-                `500 bakterier från början som ökar med 1,12 % per timme`,
-                `500 bakterier som minskar med 12 % per timme`,
+                `112 bakterier från början som ökar med 500 % per timme`,
+                `500 bakterier från början som ökar med 12 % per timme`,
+                `500 bakterier från början som ökar med 1,12 % per timme`,
+                `500 bakterier som minskar med 12 % per timme`,
             ],
             correct: 1,
-            solution: `Jämför med $y = Ca^x$: $C = 500$ (ursprungligt antal) och $a = 1{,}12$, som motsvarar $100\\ \\% + 12\\ \\% $ — en ökning med 12 % per timme.
+            solution: `Jämför med $y = Ca^x$: $C = 500$ (ursprungligt antal) och $a = 1{,}12$, som motsvarar $100\\ \\% + 12\\ \\% $ — en ökning med 12 % per timme.
 
 **Svar:** 500 bakterier från början, ökning 12 % per timme.`,
         },
         {
             level: 2,
-            question: `En maskin köps för 240 000 kr och tappar 20 % av värdet varje år. Vad är maskinen värd efter 5 år? Avrunda till hela tusental kronor.`,
+            question: `En maskin köps för 240 000 kr och tappar 20 % av värdet varje år. Vad är maskinen värd efter 5 år? Avrunda till hela tusental kronor.`,
             answer: { value: 78643, unit: 'kr', tol: 0.02 },
             solution: `Förändringsfaktorn är $1 - 0{,}20 = 0{,}80$ och funktionen $V(t) = 240\\ 000 \\cdot 0{,}80^t$:
 
@@ -30670,7 +30670,7 @@ Kontroll med $x = 0$: $2 \\cdot 3^0 = 2$ och $6^0 = 1$, och $2 > 1$.
         },
         {
             level: 3,
-            question: `Temperaturen $T$ °C hos en kopp kaffe $t$ minuter efter att den hällts upp beskrivs av modellen $T(t) = 20 + 70 \\cdot 0{,}9^t$.<br>a) Vad betyder talen 20, 70 och 0,9 i modellen?<br>b) Ange värdemängden för $T(t)$ när $t \\geq 0$.<br>c) Hur lång tid tar det innan kaffet har svalnat till 50 °C? Avrunda till hela minuter.`,
+            question: `Temperaturen $T$ °C hos en kopp kaffe $t$ minuter efter att den hällts upp beskrivs av modellen $T(t) = 20 + 70 \\cdot 0{,}9^t$.<br>a) Vad betyder talen 20, 70 och 0,9 i modellen?<br>b) Ange värdemängden för $T(t)$ när $t \\geq 0$.<br>c) Hur lång tid tar det innan kaffet har svalnat till 50 °C? Avrunda till hela minuter.`,
             answer: { value: 8, unit: 'min', tol: 0.05 },
             delsvar: [
                 { del: 'a' },
@@ -30683,7 +30683,7 @@ Kontroll med $x = 0$: $2 \\cdot 3^0 = 2$ och $6^0 = 1$, och $2 > 1$.
 
 $$ T(0) = 20 + 70 \\cdot 1 = 90 $$
 
-Kaffet är alltså 90 °C från början. Termen $70 \\cdot 0{,}9^t$ närmar sig 0 när tiden går, så temperaturen närmar sig 20 °C, rummets temperatur.
+Kaffet är alltså 90 °C från början. Termen $70 \\cdot 0{,}9^t$ närmar sig 0 när tiden går, så temperaturen närmar sig 20 °C, rummets temperatur.
 
 **Svar:** 20 är rummets temperatur (i °C), som kaffet närmar sig. 70 är hur många grader varmare än rummet kaffet är från början. 0,9 är förändringsfaktorn: skillnaden mot rummets temperatur minskar med $10\\ \\%$ per minut.
 
@@ -30709,9 +30709,9 @@ $$ 0{,}9^t = 0{,}428\\,57\\ldots $$
 
 Exponenten är okänd. Prövning ger $0{,}9^8 = 0{,}430\\,4\\ldots$ och $0{,}9^9 = 0{,}387\\,4\\ldots$, så lösningen ligger strax över 8. Med digitala verktyg (skärning mellan $y = 20 + 70 \\cdot 0{,}9^x$ och $y = 50$) blir $t = 8{,}04\\ldots$
 
-Kontroll: $T(8) = 20 + 70 \\cdot 0{,}9^8 = 50{,}13\\ldots$, alltså nästan exakt 50 °C.
+Kontroll: $T(8) = 20 + 70 \\cdot 0{,}9^8 = 50{,}13\\ldots$, alltså nästan exakt 50 °C.
 
-Rimligt? Kaffet har svalnat 40 grader av de 70 grader det kan svalna, alltså mer än hälften av vägen. Halva vägen tar drygt 6 minuter, eftersom $0{,}9^6 \\approx 0{,}53$, så drygt 8 minuter är rimligt.
+Rimligt? Kaffet har svalnat 40 grader av de 70 grader det kan svalna, alltså mer än hälften av vägen. Halva vägen tar drygt 6 minuter, eftersom $0{,}9^6 \\approx 0{,}53$, så drygt 8 minuter är rimligt.
 
 **Svar:** Efter cirka 8 minuter
 
@@ -31009,7 +31009,7 @@ Rimligt? Grafen sjunker allt långsammare. Från 6 till 3 halveras funktionsvär
         },
         {
             level: 3,
-            question: `För fiskar av en viss art kan vikten $W$ gram beskrivas med en potensfunktion av längden $L$ cm, $W(L) = C \\cdot L^3$. En fisk som är 30 cm lång väger 400 g.<br>a) Hur mycket väger en fisk av samma art som är 45 cm lång?<br>b) Hur många procent längre än en annan fisk av samma art måste en fisk vara för att väga dubbelt så mycket? Avrunda till hela procent.`,
+            question: `För fiskar av en viss art kan vikten $W$ gram beskrivas med en potensfunktion av längden $L$ cm, $W(L) = C \\cdot L^3$. En fisk som är 30 cm lång väger 400 g.<br>a) Hur mycket väger en fisk av samma art som är 45 cm lång?<br>b) Hur många procent längre än en annan fisk av samma art måste en fisk vara för att väga dubbelt så mycket? Avrunda till hela procent.`,
             answer: { value: 26, unit: '%', tol: 0.02 },
             delsvar: [
                 { del: 'a', value: 1350, unit: 'g', tol: 0.01 },
@@ -31129,7 +31129,7 @@ Kontroll med exempel: $x^2 = 9$ ger $\\pm 3$ (två), $x^2 = -9$ saknar lösning,
         },
         {
             level: 3,
-            question: `Pulsen $P$ slag per minut hos däggdjur i vila kan grovt beskrivas av modellen $P(m) = 240 \\cdot m^{-0{,}25}$, där $m$ är djurets massa i kg.<br>a) Beräkna enligt modellen pulsen hos en katt som väger 4 kg. Avrunda till tiotal.<br>b) Hur tungt är ett djur som enligt modellen har pulsen 60 slag per minut? Lös uppgiften utan räknare.<br>c) Hur ändras pulsen enligt modellen om massan blir 16 gånger så stor?`,
+            question: `Pulsen $P$ slag per minut hos däggdjur i vila kan grovt beskrivas av modellen $P(m) = 240 \\cdot m^{-0{,}25}$, där $m$ är djurets massa i kg.<br>a) Beräkna enligt modellen pulsen hos en katt som väger 4 kg. Avrunda till tiotal.<br>b) Hur tungt är ett djur som enligt modellen har pulsen 60 slag per minut? Lös uppgiften utan räknare.<br>c) Hur ändras pulsen enligt modellen om massan blir 16 gånger så stor?`,
             answer: { value: 256, unit: 'kg' },
             delsvar: [
                 { del: 'a', value: 170, unit: 'slag/min', tol: 0.03 },
@@ -31295,9 +31295,9 @@ Kontroll: rektangeln har arean $4 \\cdot 0{,}5 = 2$. Stämmer.
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `I en skola är 60 % av eleverna tjejer. Hamid gör ett stratifierat urval med 50 elever för en enkät om idrottsvanor. Hur många tjejer ska ingå i stickprovet?`,
+            question: `I en skola är 60 % av eleverna tjejer. Hamid gör ett stratifierat urval med 50 elever för en enkät om idrottsvanor. Hur många tjejer ska ingå i stickprovet?`,
             answer: { value: 30, unit: 'st' },
-            solution: `Vid stratifierat urval ska stickprovet spegla populationen — 60 % av 50 elever:
+            solution: `Vid stratifierat urval ska stickprovet spegla populationen — 60 % av 50 elever:
 
 $$ 0{,}60 \\cdot 50 = 30 $$
 
@@ -31673,18 +31673,18 @@ Kontroll med b): $q = \\dfrac{260}{400} = 0{,}65$ ger $p = 2 \\cdot 0{,}65 - 1 =
                 `Stickprov`,
             ],
             correct: 2,
-            solution: `Resultatet ± felmarginalen ger **konfidensintervallet** — det intervall som det verkliga värdet med 95 % säkerhet ligger i.
+            solution: `Resultatet ± felmarginalen ger **konfidensintervallet** — det intervall som det verkliga värdet med 95 % säkerhet ligger i.
 
 **Svar:** Konfidensintervall`,
         },
         {
             level: 1,
-            question: `En undersökning ger resultatet 40 % med felmarginalen 5 %. Vilket är konfidensintervallet?`,
+            question: `En undersökning ger resultatet 40 % med felmarginalen 5 %. Vilket är konfidensintervallet?`,
             choices: [
-                `Mellan 40 % och 45 %`,
-                `Mellan 35 % och 45 %`,
-                `Mellan 30 % och 50 %`,
-                `Exakt 40 %`,
+                `Mellan 40 % och 45 %`,
+                `Mellan 35 % och 45 %`,
+                `Mellan 30 % och 50 %`,
+                `Exakt 40 %`,
             ],
             correct: 1,
             solution: `Konfidensintervallet är resultatet ± felmarginalen:
@@ -31706,27 +31706,27 @@ $$ f = 1{,}96 \\cdot \\sqrt{\\frac{50(100 - 50)}{100}} = 1{,}96 \\cdot \\sqrt{25
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `I en undersökning med 400 tillfrågade svarade 60 % ja. Beräkna felmarginalen. Avrunda till en decimal.`,
+            question: `I en undersökning med 400 tillfrågade svarade 60 % ja. Beräkna felmarginalen. Avrunda till en decimal.`,
             answer: { value: 4.8, unit: '%', tol: 0.01 },
             solution: `Insättning av $p = 60$ och $n = 400$:
 
 $$ f = 1{,}96 \\cdot \\sqrt{\\frac{60(100 - 60)}{400}} = 1{,}96 \\cdot \\sqrt{\\frac{2\\ 400}{400}} = 1{,}96 \\cdot \\sqrt{6} = 4{,}80\\ldots \\approx 4{,}8\\ \\% $$
 
-Jämför med genomgångens exempel ($n = 100$ gav 9,6 %) — fyra gånger fler tillfrågade halverade felmarginalen.
+Jämför med genomgångens exempel ($n = 100$ gav 9,6 %) — fyra gånger fler tillfrågade halverade felmarginalen.
 
 **Svar:** 4,8 %`,
         },
         {
             level: 2,
-            question: `Ett parti fick 8,2 % i en väljarundersökning med felmarginalen 1,1 procentenheter. I nästa mätning fick partiet 9,0 %. Är ökningen statistiskt säkerställd?`,
+            question: `Ett parti fick 8,2 % i en väljarundersökning med felmarginalen 1,1 procentenheter. I nästa mätning fick partiet 9,0 %. Är ökningen statistiskt säkerställd?`,
             choices: [
                 `Nej — opinionsmätningar kan aldrig säkerställas`,
-                `Ja — 9,0 % är större än 8,2 %`,
-                `Nej — 9,0 % ligger inom konfidensintervallet 7,1–9,3 %`,
-                `Ja — alla förändringar över 0,5 procentenheter är signifikanta`,
+                `Ja — 9,0 % är större än 8,2 %`,
+                `Nej — 9,0 % ligger inom konfidensintervallet 7,1–9,3 %`,
+                `Ja — alla förändringar över 0,5 procentenheter är signifikanta`,
             ],
             correct: 2,
-            solution: `Konfidensintervallet kring första mätningen är $8{,}2\\ \\% \\pm 1{,}1\\ \\%$, det vill säga 7,1 % till 9,3 %. Det nya värdet 9,0 % ligger INOM intervallet — förändringen kan bero på slumpen.
+            solution: `Konfidensintervallet kring första mätningen är $8{,}2\\ \\% \\pm 1{,}1\\ \\%$, det vill säga 7,1 % till 9,3 %. Det nya värdet 9,0 % ligger INOM intervallet — förändringen kan bero på slumpen.
 
 **Svar:** Nej — förändringen är inte statistiskt säkerställd.`,
         },
@@ -31751,7 +31751,7 @@ Båda undersökningarna har $p = 40$ och $n = 1\\ 000$:
 
 $$ f = 1{,}96 \\cdot \\sqrt{\\frac{40(100 - 40)}{1\\ 000}} = 1{,}96 \\cdot \\sqrt{2{,}4} = 3{,}036\\ldots \\approx 3{,}0 $$
 
-Båda får alltså felmarginalen 3,0 procentenheter. Det kan kännas fel, men tänk på en soppa: en sked räcker för att smaka av soppan, och det spelar ingen roll om kastrullen är liten eller stor, så länge soppan är väl omrörd. På samma sätt räcker 1&nbsp;000 slumpvis utvalda personer lika bra för ett helt land som för en kommun.
+Båda får alltså felmarginalen 3,0 procentenheter. Det kan kännas fel, men tänk på en soppa: en sked räcker för att smaka av soppan, och det spelar ingen roll om kastrullen är liten eller stor, så länge soppan är väl omrörd. På samma sätt räcker 1&nbsp;000 slumpvis utvalda personer lika bra för ett helt land som för en kommun.
 
 **Svar:** Felmarginalerna är lika stora, eftersom felmarginalen bara beror på andelen $p$ och stickprovets storlek $n$.
 
@@ -31759,7 +31759,7 @@ Båda får alltså felmarginalen 3,0 procentenheter. Det kan kännas fel, men t�
         },
         {
             level: 3,
-            question: `I genomgångens exempel gav $p = 60\\ \\%$ och $n = 100$ felmarginalen 9,6 procentenheter. Andelen $p$ antas vara densamma i nya undersökningar.<br>a) Hur många personer måste tillfrågas för att felmarginalen ska bli en fjärdedel så stor?<br>b) Hur många personer måste minst tillfrågas för att felmarginalen ska bli högst 2,0 procentenheter?`,
+            question: `I genomgångens exempel gav $p = 60\\ \\%$ och $n = 100$ felmarginalen 9,6 procentenheter. Andelen $p$ antas vara densamma i nya undersökningar.<br>a) Hur många personer måste tillfrågas för att felmarginalen ska bli en fjärdedel så stor?<br>b) Hur många personer måste minst tillfrågas för att felmarginalen ska bli högst 2,0 procentenheter?`,
             answer: { value: 2305, unit: 'personer' },
             delsvar: [
                 { del: 'a', value: 1600, unit: 'personer' },
@@ -31797,7 +31797,7 @@ $$ \\frac{2\\ 400}{\\boldsymbol{1{,}0412\\ldots}} = \\frac{1{,}0412\\ldots \\cdo
 
 $$ 2\\ 304{,}96 = n $$
 
-Antalet personer måste vara ett heltal. Med 2&nbsp;304 personer blir felmarginalen en aning större än 2,0 ($f = 2{,}0004\\ldots$), eftersom ett mindre $n$ ger en större felmarginal. Vi måste alltså avrunda **uppåt**, och med 2&nbsp;305 personer blir $f = 1{,}99998\\ldots$, alltså högst 2,0 procentenheter.
+Antalet personer måste vara ett heltal. Med 2&nbsp;304 personer blir felmarginalen en aning större än 2,0 ($f = 2{,}0004\\ldots$), eftersom ett mindre $n$ ger en större felmarginal. Vi måste alltså avrunda **uppåt**, och med 2&nbsp;305 personer blir $f = 1{,}99998\\ldots$, alltså högst 2,0 procentenheter.
 
 **Svar:** Minst 2&nbsp;305 personer
 
@@ -31805,7 +31805,7 @@ Antalet personer måste vara ett heltal. Med 2&nbsp;304 personer blir felmargina
         },
         {
             level: 3,
-            question: `I en undersökning med 1&nbsp;000 slumpvis utvalda vuxna svarade 40&nbsp;% att de cyklar till jobbet minst en gång i veckan. Bland de 100 personerna i åldern 18 till 25 år var andelen 48&nbsp;%. En tidning skriver: ”Unga cyklar mer än genomsnittet. Skillnaden är 8 procentenheter, och undersökningens felmarginal är bara 3 procentenheter.”<br>a) Beräkna felmarginalen för hela undersökningen.<br>b) Beräkna felmarginalen för gruppen 18 till 25 år.<br>c) Granska tidningens slutsats. Är det statistiskt säkerställt att unga cyklar mer än genomsnittet?`,
+            question: `I en undersökning med 1&nbsp;000 slumpvis utvalda vuxna svarade 40&nbsp;% att de cyklar till jobbet minst en gång i veckan. Bland de 100 personerna i åldern 18 till 25 år var andelen 48&nbsp;%. En tidning skriver: ”Unga cyklar mer än genomsnittet. Skillnaden är 8 procentenheter, och undersökningens felmarginal är bara 3 procentenheter.”<br>a) Beräkna felmarginalen för hela undersökningen.<br>b) Beräkna felmarginalen för gruppen 18 till 25 år.<br>c) Granska tidningens slutsats. Är det statistiskt säkerställt att unga cyklar mer än genomsnittet?`,
             answer: { value: 9.8, unit: 'procentenheter' },
             delsvar: [
                 { del: 'a', value: 3.0, unit: 'procentenheter', tol: 0.02 },
@@ -31830,7 +31830,7 @@ $$ f = 1{,}96 \\cdot \\sqrt{\\frac{48(100 - 48)}{100}} = 1{,}96 \\cdot \\sqrt{24
 
 $$ \\left[\\begin{array}{l} \\text{Undre gräns} = 48\\ \\% - 9{,}8\\ \\% = 38{,}2\\ \\% \\\\ \\text{Övre gräns} = 48\\ \\% + 9{,}8\\ \\% = 57{,}8\\ \\% \\end{array}\\right. $$
 
-Genomsnittet 40&nbsp;% ligger inom intervallet 38,2&nbsp;% till 57,8&nbsp;%. Skillnaden på 8 procentenheter är mindre än felmarginalen 9,8 procentenheter, så den kan bero på slumpen i vilka unga som råkade bli tillfrågade.
+Genomsnittet 40&nbsp;% ligger inom intervallet 38,2&nbsp;% till 57,8&nbsp;%. Skillnaden på 8 procentenheter är mindre än felmarginalen 9,8 procentenheter, så den kan bero på slumpen i vilka unga som råkade bli tillfrågade.
 
 **Svar:** Nej. Resultatet för de unga har felmarginalen 9,8 procentenheter, och skillnaden på 8 procentenheter är mindre än så. Det är inte statistiskt säkerställt att unga cyklar mer än genomsnittet.
 
@@ -31959,7 +31959,7 @@ $$ \\frac{2\\ 304}{\\boldsymbol{4{,}5918\\ldots}} = \\frac{4{,}5918\\ldots \\cdo
 
 $$ 501{,}7\\ldots = n $$
 
-Gränserna i rapporten är avrundade till en decimal, så felmarginalen kan ha varit allt från ungefär 4,15 till 4,25 procentenheter. Det motsvarar mellan ungefär 490 och 510 personer, så svaret kan bara anges ungefärligt.
+Gränserna i rapporten är avrundade till en decimal, så felmarginalen kan ha varit allt från ungefär 4,15 till 4,25 procentenheter. Det motsvarar mellan ungefär 490 och 510 personer, så svaret kan bara anges ungefärligt.
 
 Kontroll: med $n = 500$ blir $f = 1{,}96 \\cdot \\sqrt{\\frac{2\\ 304}{500}} = 4{,}20\\ldots$. Stämmer.
 
@@ -31969,7 +31969,7 @@ Kontroll: med $n = 500$ blir $f = 1{,}96 \\cdot \\sqrt{\\frac{2\\ 304}{500}} = 4
         },
         {
             level: 3,
-            question: `Ett opinionsinstitut ska fråga slumpvis utvalda personer om ett nytt förslag. Ingen vet i förväg hur stor andel som kommer att svara ja, men felmarginalen ska bli högst 3,0 procentenheter vad resultatet än blir.<br>a) Beräkna $p(100 - p)$ för $p = 10$, $30$, $50$, $70$ och $90$.<br>b) Visa att $p(100 - p) = 2\\ 500 - (p - 50)^2$, och förklara med hjälp av det varför felmarginalen blir störst när $p = 50\\ \\%$.<br>c) Hur många personer måste minst tillfrågas?`,
+            question: `Ett opinionsinstitut ska fråga slumpvis utvalda personer om ett nytt förslag. Ingen vet i förväg hur stor andel som kommer att svara ja, men felmarginalen ska bli högst 3,0 procentenheter vad resultatet än blir.<br>a) Beräkna $p(100 - p)$ för $p = 10$, $30$, $50$, $70$ och $90$.<br>b) Visa att $p(100 - p) = 2\\ 500 - (p - 50)^2$, och förklara med hjälp av det varför felmarginalen blir störst när $p = 50\\ \\%$.<br>c) Hur många personer måste minst tillfrågas?`,
             answer: { value: 1068, unit: 'personer' },
             delsvar: [
                 { del: 'a', value: 2500, unit: '', etikett: '$p(100 - p)$ för $p = 50$' },
@@ -32778,7 +32778,7 @@ $$ \\frac{132}{200} = 0{,}66 = 66\\ \\% $$
                 `Utfallen är inte lika sannolika`,
                 `Det finns fler än två utfall`,
                 `Häftstift är för små att räkna på`,
-                `Den kan visst användas — sannolikheten är 50 %`,
+                `Den kan visst användas — sannolikheten är 50 %`,
             ],
             correct: 0,
             solution: `Klassiska definitionen kräver likformig sannolikhetsfördelning. Ett häftstift är osymmetriskt — spets upp och spets ner är INTE lika sannolika. Då måste sannolikheten bestämmas experimentellt genom upprepade kast.
@@ -32791,11 +32791,11 @@ $$ \\frac{132}{200} = 0{,}66 = 66\\ \\% $$
             choices: [
                 `Den blir mer exakt`,
                 `Den blir mindre exakt`,
-                `Den blir alltid 50 %`,
+                `Den blir alltid 50 %`,
                 `Den påverkas inte av antalet försök`,
             ],
             correct: 0,
-            solution: `Ju fler försök, desto närmare den verkliga sannolikheten kommer den relativa frekvensen — i straffexemplet studsade frekvensen mellan 40 % och 100 % i början men stabiliserades kring 70 %.
+            solution: `Ju fler försök, desto närmare den verkliga sannolikheten kommer den relativa frekvensen — i straffexemplet studsade frekvensen mellan 40 % och 100 % i början men stabiliserades kring 70 %.
 
 **Svar:** Den blir mer exakt.`,
         },
@@ -32823,7 +32823,7 @@ $$ P(\\text{pojke}) = \\frac{2\\ 489}{4\\ 850} = 0{,}5132\\ldots \\approx 51{,}3
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Elvin kastar ett mynt 10 gånger och får 7 kronor. Han säger: "Myntet är skevt, sannolikheten för krona är 70&nbsp;%!" Vad är den viktigaste invändningen?`,
+            question: `Elvin kastar ett mynt 10 gånger och får 7 kronor. Han säger: "Myntet är skevt, sannolikheten för krona är 70&nbsp;%!" Vad är den viktigaste invändningen?`,
             choices: [
                 `Han har rätt, eftersom den relativa frekvensen alltid är lika med sannolikheten`,
                 `Ett mynt kan aldrig vara skevt`,
@@ -32835,7 +32835,7 @@ $$ P(\\text{pojke}) = \\frac{2\\ 489}{4\\ 850} = 0{,}5132\\ldots \\approx 51{,}3
 
 Jämför med straffexemplet i genomgången: efter 1 straff var den relativa frekvensen 100&nbsp;%, efter 5 straffar 40&nbsp;%, och först efter många straffar stabiliserades den kring 70&nbsp;%.
 
-Med bara 10 kast är 7 kronor inget konstigt alls. Ett ärligt mynt ger exakt 7 kronor i knappt 12&nbsp;% av alla serier om tio kast, och minst 7 kronor i ungefär 17&nbsp;% av dem.
+Med bara 10 kast är 7 kronor inget konstigt alls. Ett ärligt mynt ger exakt 7 kronor i knappt 12&nbsp;% av alla serier om tio kast, och minst 7 kronor i ungefär 17&nbsp;% av dem.
 
 Vill Elvin påstå att myntet är skevt behöver han kasta det betydligt fler gånger, hundratals kast, och se om den relativa frekvensen fortfarande ligger långt från 50&nbsp;%.
 
@@ -33966,7 +33966,7 @@ $$ P(\\text{minst en krona}) = 1 - \\frac{1}{8} = \\frac{7}{8} $$
         },
         {
             level: 2,
-            question: `Sannolikheten att en viss lott vinner är 10 %. Amir köper tre lotter. Vad är sannolikheten att han vinner på minst en? Svara i procent med en decimal.`,
+            question: `Sannolikheten att en viss lott vinner är 10 %. Amir köper tre lotter. Vad är sannolikheten att han vinner på minst en? Svara i procent med en decimal.`,
             answer: { value: 27.1, unit: '%', tol: 0.005 },
             solution: `Komplementet är att INGEN av lotterna vinner. Varje lott förlorar med sannolikheten 0,90:
 
@@ -34297,7 +34297,7 @@ Det går också att se utan räkning. Tänk dig att alla $n$ kulor dras och läg
         },
         {
             level: 1,
-            question: `I en rätvinklig triangel är kateten mitt emot vinkeln $v$ 6 cm och kateten intill 8 cm. Beräkna tan $v$.`,
+            question: `I en rätvinklig triangel är kateten mitt emot vinkeln $v$ 6 cm och kateten intill 8 cm. Beräkna tan $v$.`,
             answer: { value: 0.75, unit: '', tol: 0.01 },
             solution: `$$ \\tan v = \\frac{\\text{motstående}}{\\text{närliggande}} = \\frac{6}{8} = 0{,}75 $$
 
@@ -34306,7 +34306,7 @@ Det går också att se utan räkning. Tänk dig att alla $n$ kulor dras och läg
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `I en rätvinklig triangel är vinkeln 35° och den närliggande kateten 4,0 m. Beräkna den motstående kateten. Svara i meter med en decimal.`,
+            question: `I en rätvinklig triangel är vinkeln 35° och den närliggande kateten 4,0 m. Beräkna den motstående kateten. Svara i meter med en decimal.`,
             answer: { value: 2.8, unit: 'm', tol: 0.02 },
             solution: `Tangens kopplar vinkeln till de två katetrarna:
 
@@ -34331,7 +34331,7 @@ $$ x = \\frac{5{,}0}{\\tan 22°} = \\frac{5{,}0}{0{,}4040\\ldots} = 12{,}37\\ldo
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Ett 4,2 m högt träd står på plan mark. Solen står så att trädets skugga är 6,0 m lång. Senare på dagen har skuggan vuxit till 9,5 m. Hur många grader har solens höjdvinkel SJUNKIT mellan mätningarna? Avrunda till heltal.`,
+            question: `Ett 4,2 m högt träd står på plan mark. Solen står så att trädets skugga är 6,0 m lång. Senare på dagen har skuggan vuxit till 9,5 m. Hur många grader har solens höjdvinkel SJUNKIT mellan mätningarna? Avrunda till heltal.`,
             answer: { value: 11, unit: '°', tol: 0.1 },
             solution: `**Insikten:** båda situationerna är rätvinkliga trianglar med samma motstående katet (trädet) men olika närliggande katet (skuggan) — vinklarna fås ur tangens och jämförs. (Att bestämma vinkeln ur tangensvärdet görs med räknarens inversfunktion, som nästa avsnitt fördjupar.)
 
@@ -34357,7 +34357,7 @@ $$ v_1 - v_2 \\approx 35{,}0° - 23{,}9° = 11{,}1° \\approx 11° $$
         // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
-            question: `I en rätvinklig triangel är motstående katet 4 cm och hypotenusan 5 cm till vinkeln $u$. Beräkna sin $u$.`,
+            question: `I en rätvinklig triangel är motstående katet 4 cm och hypotenusan 5 cm till vinkeln $u$. Beräkna sin $u$.`,
             answer: { value: 0.8, unit: '', tol: 0.01 },
             solution: `$$ \\sin u = \\frac{\\text{motstående katet}}{\\text{hypotenusa}} = \\frac{4}{5} = 0{,}8 $$
 
@@ -34396,7 +34396,7 @@ $$ v_1 - v_2 \\approx 35{,}0° - 23{,}9° = 11{,}1° \\approx 11° $$
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `I en rätvinklig triangel är vinkeln 41° och dess motstående katet 6,1 cm. Beräkna hypotenusan. Svara i cm med en decimal.`,
+            question: `I en rätvinklig triangel är vinkeln 41° och dess motstående katet 6,1 cm. Beräkna hypotenusan. Svara i cm med en decimal.`,
             answer: { value: 9.3, unit: 'cm', tol: 0.02 },
             solution: `Motstående katet och hypotenusa → sinus:
 
@@ -34408,7 +34408,7 @@ $$ a = \\frac{6{,}1}{\\sin 41°} = \\frac{6{,}1}{0{,}6560\\ldots} = 9{,}29\\ldot
         },
         {
             level: 2,
-            question: `I en rätvinklig triangel är hypotenusan 12 m och en vinkel 28°. Hur lång är den NÄRLIGGANDE kateten till vinkeln? Svara i meter med en decimal.`,
+            question: `I en rätvinklig triangel är hypotenusan 12 m och en vinkel 28°. Hur lång är den NÄRLIGGANDE kateten till vinkeln? Svara i meter med en decimal.`,
             answer: { value: 10.6, unit: 'm', tol: 0.02 },
             solution: `Närliggande katet och hypotenusa → cosinus:
 
@@ -34480,7 +34480,7 @@ $$ v = \\tan^{-1}(1) = 45° $$
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `I en rätvinklig triangel är motstående katet 7,0 cm och närliggande katet 4,0 cm till vinkeln $v$. Bestäm $v$. Svara i grader, avrundat till heltal.`,
+            question: `I en rätvinklig triangel är motstående katet 7,0 cm och närliggande katet 4,0 cm till vinkeln $v$. Bestäm $v$. Svara i grader, avrundat till heltal.`,
             answer: { value: 60, unit: '°', tol: 0.02 },
             solution: `Två kateter → tangens, och vinkeln fås med inversen:
 
@@ -34492,9 +34492,9 @@ $$ v = \\tan^{-1}(1{,}75) = 60{,}25\\ldots° \\approx 60° $$
         },
         {
             level: 2,
-            question: `En 6,0 m lång stege lutar mot en vägg och når 5,2 m upp. Vilken vinkel bildar stegen mot MARKEN? Svara i grader, avrundat till heltal.`,
+            question: `En 6,0 m lång stege lutar mot en vägg och når 5,2 m upp. Vilken vinkel bildar stegen mot MARKEN? Svara i grader, avrundat till heltal.`,
             answer: { value: 60, unit: '°', tol: 0.02 },
-            solution: `Stegen är hypotenusan (6,0 m) och höjden på väggen den motstående kateten (5,2 m) till markvinkeln:
+            solution: `Stegen är hypotenusan (6,0 m) och höjden på väggen den motstående kateten (5,2 m) till markvinkeln:
 
 $$ \\sin v = \\frac{5{,}2}{6{,}0} = 0{,}8666\\ldots $$
 
@@ -34505,11 +34505,11 @@ $$ v = \\sin^{-1}(0{,}8666\\ldots) = 60{,}07\\ldots° \\approx 60° $$
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `I en rätvinklig triangel är katetrarna 5,0 cm och 12 cm. Bestäm triangelns MINSTA vinkel. Svara i grader, avrundat till heltal.`,
+            question: `I en rätvinklig triangel är katetrarna 5,0 cm och 12 cm. Bestäm triangelns MINSTA vinkel. Svara i grader, avrundat till heltal.`,
             answer: { value: 23, unit: '°', tol: 0.03 },
             solution: `**Insikten:** den minsta vinkeln ligger alltid mitt emot den kortaste sidan — välj kvoten så att den korta kateten är motstående.
 
-Den minsta vinkeln $v$ har 5,0 cm som motstående och 12 cm som närliggande katet:
+Den minsta vinkeln $v$ har 5,0 cm som motstående och 12 cm som närliggande katet:
 
 $$ \\tan v = \\frac{5{,}0}{12} = 0{,}4166\\ldots $$
 
@@ -34721,7 +34721,7 @@ $\\vec{d}$: lutning $\\dfrac{2}{4} = \\dfrac{1}{2} \\neq \\dfrac{1}{4}$ — INTE
             choices: [
                 `Den nya vektorn blir tre gånger så lång med motsatt riktning`,
                 `Den nya vektorn blir tre gånger så lång med samma riktning`,
-                `Riktningen vrids 3 grader`,
+                `Riktningen vrids 3 grader`,
                 `Ingenting — skalärer påverkar inte vektorer`,
             ],
             correct: 1,
@@ -35513,7 +35513,7 @@ $$ 2x = 34 \\iff x = 17 $$
         },
         {
             level: 1,
-            question: `En vuxenbiljett kostar 120 kr och en barnbiljett 60 kr. En familj köpte 10 biljetter för totalt 900 kr. Hur många vuxenbiljetter köpte familjen?`,
+            question: `En vuxenbiljett kostar 120 kr och en barnbiljett 60 kr. En familj köpte 10 biljetter för totalt 900 kr. Hur många vuxenbiljetter köpte familjen?`,
             answer: { value: 5, unit: '' },
             solution: `Definiera variabler: $v$ = antalet vuxenbiljetter, $b$ = antalet barnbiljetter.
 
@@ -35536,7 +35536,7 @@ $$ 60v = 300 \\iff v = 5 $$
         },
         {
             level: 1,
-            question: `En fruktlåda innehåller $x$ kg äpplen och $y$ kg päron. Frukten väger totalt 7 kg, och äpplena väger 3 kg mer än päronen. Vilket ekvationssystem beskriver situationen?`,
+            question: `En fruktlåda innehåller $x$ kg äpplen och $y$ kg päron. Frukten väger totalt 7 kg, och äpplena väger 3 kg mer än päronen. Vilket ekvationssystem beskriver situationen?`,
             choices: [
                 `$\\begin{cases} x + y = 7 \\\\ x = y + 3 \\end{cases}$`,
                 `$\\begin{cases} x + y = 7 \\\\ y = x + 3 \\end{cases}$`,
@@ -35546,7 +35546,7 @@ $$ 60v = 300 \\iff v = 5 $$
             correct: 0,
             solution: `Totalvikten ger den första ekvationen: $x + y = 7$.
 
-"Äpplena väger 3 kg **mer** än päronen" betyder att äpplenas vikt är päronens vikt plus 3: $x = y + 3$.
+"Äpplena väger 3 kg **mer** än päronen" betyder att äpplenas vikt är päronens vikt plus 3: $x = y + 3$.
 
 (Vanlig fälla: att skriva $y = x + 3$, vilket skulle betyda att päronen väger mest.)
 
@@ -35608,7 +35608,7 @@ Kontroll: om 20 år är Anna 60 och sonen 30 — dubbelt så gammal. Stämmer!
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `En handlare blandar kaffe som kostar 80 kr/kg med kaffe som kostar 120 kr/kg. Blandningen ska väga 10 kg och kosta 95 kr/kg. Hur många kilogram av det dyrare kaffet ska handlaren ta? Svara i kg.`,
+            question: `En handlare blandar kaffe som kostar 80 kr/kg med kaffe som kostar 120 kr/kg. Blandningen ska väga 10 kg och kosta 95 kr/kg. Hur många kilogram av det dyrare kaffet ska handlaren ta? Svara i kg.`,
             answer: { value: 3.75, unit: 'kg' },
             solution: `Nyckelinsikten: det finns **två** villkor gömda i texten — ett för vikten och ett för **totala värdet**. Blandningens pris per kg gäller hela blandningen, så totala värdet är $10 \\cdot 95 = 950$ kr.
 
@@ -35629,7 +35629,7 @@ $$ 800 - 80y + 120y = 950 $$
 
 $$ 40y = 150 \\iff y = 3{,}75 $$
 
-Rimlighet: 95 kr/kg ligger närmare 80 än 120, så det ska vara mindre än hälften dyrt kaffe — $3{,}75 < 5$. Stämmer!
+Rimlighet: 95 kr/kg ligger närmare 80 än 120, så det ska vara mindre än hälften dyrt kaffe — $3{,}75 < 5$. Stämmer!
 
 **Svar:** $3{,}75$ kg av det dyrare kaffet`,
         },
@@ -36337,7 +36337,7 @@ Talen skulle vara positiva, så $x = 8$ (talen är 8 och 9; kontroll $8 \\cdot 9
         },
         {
             level: 1,
-            question: `En rektangels bas är 5 cm längre än höjden. Arean är $84$ cm². Bestäm höjden. Svara i cm.`,
+            question: `En rektangels bas är 5 cm längre än höjden. Arean är $84$ cm². Bestäm höjden. Svara i cm.`,
             answer: { value: 7, unit: 'cm' },
             solution: `Kalla höjden $h$ cm — då är basen $(h + 5)$ cm. Arean ger
 
@@ -36351,13 +36351,13 @@ $$ h = -2{,}5 \\pm \\sqrt{6{,}25 + 84} = -2{,}5 \\pm 9{,}5 $$
 
 $$ h_1 = -12 \\qquad h_2 = 7 $$
 
-En sträcka kan inte vara negativ, så $h = 7$ cm (basen är 12 cm; kontroll $7 \\cdot 12 = 84$).
+En sträcka kan inte vara negativ, så $h = 7$ cm (basen är 12 cm; kontroll $7 \\cdot 12 = 84$).
 
 **Svar:** 7 cm`,
         },
         {
             level: 1,
-            question: `Sidan i en kvadrat förlängs med 3 cm. Den nya arean är $49$ cm². Vilken ekvation beskriver situationen, om $x$ är den ursprungliga sidan?`,
+            question: `Sidan i en kvadrat förlängs med 3 cm. Den nya arean är $49$ cm². Vilken ekvation beskriver situationen, om $x$ är den ursprungliga sidan?`,
             choices: [
                 `$x^2 + 3 = 49$`,
                 `$4(x + 3) = 49$`,
@@ -36403,7 +36403,7 @@ Kontroll: $12 - 7 = 5$ och $7 \\cdot 12 = 84$. Stämmer!
         },
         {
             level: 2,
-            question: `En kvadrats sida förkortas med 4 cm. Den nya arean är $121$ cm². Bestäm den ursprungliga sidan. Svara i cm.`,
+            question: `En kvadrats sida förkortas med 4 cm. Den nya arean är $121$ cm². Bestäm den ursprungliga sidan. Svara i cm.`,
             answer: { value: 15, unit: 'cm' },
             solution: `Kalla den ursprungliga sidan $s$ cm. Den nya sidan är $(s - 4)$ cm och den nya arean
 
@@ -36422,7 +36422,7 @@ En sträcka kan inte vara negativ, så $s = 15$ cm.
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `En rektangel har omkretsen 46 cm och arean $120$ cm². Bestäm den **längre** sidan. Svara i cm.`,
+            question: `En rektangel har omkretsen 46 cm och arean $120$ cm². Bestäm den **längre** sidan. Svara i cm.`,
             answer: { value: 15, unit: 'cm' },
             solution: `Nyckelinsikten: omkrets och area ger ett ekvationssystem där den ena ekvationen är linjär och den andra innehåller en produkt — tillsammans ger de en andragradsekvation.
 
@@ -36446,7 +36446,7 @@ $$ x = 11{,}5 \\pm \\sqrt{132{,}25 - 120} = 11{,}5 \\pm 3{,}5 $$
 
 $$ x_1 = 8 \\qquad x_2 = 15 $$
 
-Båda är giltiga — de är rektangelns två sidor (8 cm och 15 cm). Den längre är 15 cm.
+Båda är giltiga — de är rektangelns två sidor (8 cm och 15 cm). Den längre är 15 cm.
 
 Kontroll: $2(8 + 15) = 46$ och $8 \\cdot 15 = 120$. Stämmer!
 
@@ -36854,7 +36854,7 @@ $$ 2a = 4 \\iff a = 2 $$
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `En boll kastas från marken och landar 6 meter bort. Kastbanans högsta höjd är $4{,}5$ meter. Banan beskrivs av $h(x) = kx(x - 6)$, där $x$ är avståndet i meter. Bestäm $k$.`,
+            question: `En boll kastas från marken och landar 6 meter bort. Kastbanans högsta höjd är $4{,}5$ meter. Banan beskrivs av $h(x) = kx(x - 6)$, där $x$ är avståndet i meter. Bestäm $k$.`,
             answer: { value: -0.5, unit: '' },
             solution: `Nyckelinsikten: den högsta punkten ligger på symmetrilinjen — mitt emellan nollställena $x = 0$ och $x = 6$, det vill säga vid $x = 3$. Där är höjden $4{,}5$ m, så punkten (3; 4,5) ligger på banan.
 
@@ -37019,7 +37019,7 @@ Grafiskt: verktyget *Extrempunkt* i Geogebra.
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `Raketen med $h(t) = 30t - 5t^2$ når höjden 25 meter två gånger. Efter hur många sekunder sker det **första** gången?`,
+            question: `Raketen med $h(t) = 30t - 5t^2$ når höjden 25 meter två gånger. Efter hur många sekunder sker det **första** gången?`,
             answer: { value: 1, unit: 's' },
             solution: `Sätt $h(t) = 25$ (grafiskt: rita hjälplinjen $y = 25$ och ta skärningarna):
 
@@ -37033,13 +37033,13 @@ $$ t^2 - 6t + 5 = 0 $$
 
 $$ t = 3 \\pm \\sqrt{9 - 5} = 3 \\pm 2 $$
 
-det vill säga $t = 1$ (på väg upp) och $t = 5$ (på väg ner). Första gången är efter 1 sekund.
+det vill säga $t = 1$ (på väg upp) och $t = 5$ (på väg ner). Första gången är efter 1 sekund.
 
 **Svar:** Efter 1 sekund.`,
         },
         {
             level: 2,
-            question: `En rektangulär inhägnad byggs mot en vägg med 40 meter staket till de tre öppna sidorna. Arean beskrivs av $A(x) = x(40 - 2x)$, där $x$ är de två lika sidorna. Bestäm den **maximala arean**. Svara i m².`,
+            question: `En rektangulär inhägnad byggs mot en vägg med 40 meter staket till de tre öppna sidorna. Arean beskrivs av $A(x) = x(40 - 2x)$, där $x$ är de två lika sidorna. Bestäm den **maximala arean**. Svara i m².`,
             answer: { value: 200, unit: 'm²' },
             solution: `Grafen till $A(x) = x(40 - 2x)$ är en parabel med maximipunkt. Nollställena är $x = 0$ och $x = 20$, så maximum ligger vid $x = 10$:
 
@@ -37462,7 +37462,7 @@ Uttrycket har faktorn 5, och $\\dfrac{5(n+2)}{5} = n + 2$ är ett heltal — sum
         // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
-            question: `En rätvinklig triangel har kateterna 6 cm och 8 cm. Bestäm hypotenusan. Svara i cm.`,
+            question: `En rätvinklig triangel har kateterna 6 cm och 8 cm. Bestäm hypotenusan. Svara i cm.`,
             answer: { value: 10, unit: 'cm' },
             solution: `Pythagoras sats:
 
@@ -37476,7 +37476,7 @@ $$ c = \\sqrt{100} = 10 $$
         },
         {
             level: 1,
-            question: `En rätvinklig triangel har hypotenusan 13 cm och den ena kateten 5 cm. Bestäm den andra kateten. Svara i cm.`,
+            question: `En rätvinklig triangel har hypotenusan 13 cm och den ena kateten 5 cm. Bestäm den andra kateten. Svara i cm.`,
             answer: { value: 12, unit: 'cm' },
             solution: `Pythagoras sats med hypotenusan ensam på ena sidan:
 
@@ -37503,7 +37503,7 @@ $$ b = \\sqrt{144} = 12 $$
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `Sidorna i en triangel är 7 cm, 24 cm och 25 cm. Är triangeln rätvinklig?`,
+            question: `Sidorna i en triangel är 7 cm, 24 cm och 25 cm. Är triangeln rätvinklig?`,
             choices: [
                 `Nej — en triangel med så olika sidor kan inte vara rätvinklig`,
                 `Ja — $7^2 + 24^2 = 625 = 25^2$, så $a^2 + b^2 = c^2$ gäller`,
@@ -37523,7 +37523,7 @@ Likhet — triangeln är rätvinklig.
         },
         {
             level: 2,
-            question: `En 4,1 meter lång stege lutas mot en vägg. Stegens fot står 0,9 meter från väggen. Hur högt upp på väggen når stegen? Svara i meter.`,
+            question: `En 4,1 meter lång stege lutas mot en vägg. Stegens fot står 0,9 meter från väggen. Hur högt upp på väggen når stegen? Svara i meter.`,
             answer: { value: 4.0, unit: 'm' },
             solution: `Stegen är hypotenusa i en rätvinklig triangel med marken och väggen som kateter:
 
@@ -37536,9 +37536,9 @@ $$ h = \\sqrt{16} = 4{,}0 $$
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `En likbent triangel har basen 16 cm och benen 17 cm. Bestäm triangelns höjd mot basen. Svara i cm.`,
+            question: `En likbent triangel har basen 16 cm och benen 17 cm. Bestäm triangelns höjd mot basen. Svara i cm.`,
             answer: { value: 15, unit: 'cm' },
-            solution: `Nyckelinsikten: höjden mot basen i en likbent triangel delar basen mitt itu — då uppstår en rätvinklig triangel med **halva basen** (8 cm) och benet (17 cm) som hypotenusa.
+            solution: `Nyckelinsikten: höjden mot basen i en likbent triangel delar basen mitt itu — då uppstår en rätvinklig triangel med **halva basen** (8 cm) och benet (17 cm) som hypotenusa.
 
 $$ h^2 = 17^2 - 8^2 = 289 - 64 = 225 $$
 
@@ -37668,7 +37668,7 @@ Villkoret $y > 0$ ger $y = 13$.
         },
         {
             level: 1,
-            question: `Två likformiga figurer har motsvarande sidor 6 cm och 18 cm. Bestäm skalfaktorn från den lilla till den stora figuren.`,
+            question: `Två likformiga figurer har motsvarande sidor 6 cm och 18 cm. Bestäm skalfaktorn från den lilla till den stora figuren.`,
             answer: { value: 3, unit: '' },
             solution: `Skalfaktorn fås genom att dividera två motsvarande sidor:
 
@@ -37680,7 +37680,7 @@ Alla sidor i den stora figuren är alltså 3 gånger längre.
         },
         {
             level: 1,
-            question: `Två månghörningar är likformiga. Sidan 4 cm i den lilla motsvarar 10 cm i den stora. Vilken sida i den stora motsvarar 6 cm i den lilla? Svara i cm.`,
+            question: `Två månghörningar är likformiga. Sidan 4 cm i den lilla motsvarar 10 cm i den stora. Vilken sida i den stora motsvarar 6 cm i den lilla? Svara i cm.`,
             answer: { value: 15, unit: 'cm' },
             solution: `Förhållandet mellan motsvarande sidor är lika:
 
@@ -37695,7 +37695,7 @@ $$ x = \\frac{10}{4} \\cdot 6 = 15 $$
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `En rektangel har sidorna 4 cm och 6 cm, en annan har sidorna 6 cm och 9 cm. Är rektanglarna likformiga?`,
+            question: `En rektangel har sidorna 4 cm och 6 cm, en annan har sidorna 6 cm och 9 cm. Är rektanglarna likformiga?`,
             choices: [
                 `Nej — sidorna är olika långa`,
                 `Det går inte att avgöra`,
@@ -37713,7 +37713,7 @@ Båda villkoren är uppfyllda — rektanglarna är likformiga. (Likformiga figur
         },
         {
             level: 2,
-            question: `Två likformiga femhörningar har skalfaktorn 2,5. Den lilla femhörningens omkrets är 12 cm. Bestäm den storas omkrets. Svara i cm.`,
+            question: `Två likformiga femhörningar har skalfaktorn 2,5. Den lilla femhörningens omkrets är 12 cm. Bestäm den storas omkrets. Svara i cm.`,
             answer: { value: 30, unit: 'cm' },
             solution: `Varje sida i den stora femhörningen är 2,5 gånger längre — då blir även summan av sidorna (omkretsen) 2,5 gånger längre:
 
@@ -37762,7 +37762,7 @@ Motexempel: en kvadrat ($1 \\times 1$) och en avlång rektangel ($1 \\times 5$) 
         },
         {
             level: 1,
-            question: `Två trianglar är likformiga. Den ena har sidorna 3, 4 och 5 cm. Den andra har sidorna 6, 8 och $x$ cm. Bestäm $x$.`,
+            question: `Två trianglar är likformiga. Den ena har sidorna 3, 4 och 5 cm. Den andra har sidorna 6, 8 och $x$ cm. Bestäm $x$.`,
             answer: { value: 10, unit: 'cm' },
             solution: `Skalfaktorn är $\\dfrac{6}{3} = 2$ — alla sidor i den stora triangeln är dubbelt så långa:
 
@@ -37785,7 +37785,7 @@ $$ v = 180° - 35° - 80° = 65° $$
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `En 1,5 meter hög pinne kastar en 2 meter lång skugga. Samtidigt kastar ett träd en 12 meter lång skugga. Hur högt är trädet? Svara i meter.`,
+            question: `En 1,5 meter hög pinne kastar en 2 meter lång skugga. Samtidigt kastar ett träd en 12 meter lång skugga. Hur högt är trädet? Svara i meter.`,
             answer: { value: 9, unit: 'm' },
             solution: `Solstrålarna träffar pinnen och trädet under samma vinkel, och båda står vinkelrätt mot marken — trianglarna är likformiga (två lika vinklar). Sidförhållandena är lika:
 
@@ -37810,11 +37810,11 @@ $$ EF = 7{,}5 \\cdot \\frac{8}{5} = 12 $$
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `En lyktstolpe är 2,4 meter hög. En person som är 1,8 meter lång står 4,0 meter från stolpen. Hur lång blir personens skugga (räknat från personen och bort från stolpen)? Svara i meter.`,
+            question: `En lyktstolpe är 2,4 meter hög. En person som är 1,8 meter lång står 4,0 meter från stolpen. Hur lång blir personens skugga (räknat från personen och bort från stolpen)? Svara i meter.`,
             answer: { value: 12, unit: 'm' },
             solution: `Nyckelinsikten: ljusstrålen från lyktan över personens huvud till skuggspetsen skapar **två likformiga trianglar med gemensam spets i skuggspetsen** — en stor (stolpen) och en liten (personen).
 
-Kalla skuggans längd $s$. Den lilla triangeln har höjden 1,8 m och basen $s$; den stora har höjden 2,4 m och basen $4{,}0 + s$:
+Kalla skuggans längd $s$. Den lilla triangeln har höjden 1,8 m och basen $s$; den stora har höjden 2,4 m och basen $4{,}0 + s$:
 
 $$ \\frac{2{,}4}{4{,}0 + s} = \\frac{1{,}8}{s} $$
 
@@ -37893,7 +37893,7 @@ $$ 9x = 6 \\cdot 12 = 72 \\iff x = 8 $$
         },
         {
             level: 2,
-            question: `En bisektris delar en triangels motstående sida i delarna 4 cm och 6 cm. Sidan närmast 4-delen är 10 cm. Bestäm sidan närmast 6-delen. Svara i cm.`,
+            question: `En bisektris delar en triangels motstående sida i delarna 4 cm och 6 cm. Sidan närmast 4-delen är 10 cm. Bestäm sidan närmast 6-delen. Svara i cm.`,
             answer: { value: 15, unit: 'cm' },
             solution: `Bisektrissatsen — bisektrisen delar motstående sida i samma förhållande som de närliggande sidorna:
 
@@ -38239,7 +38239,7 @@ Den positiva lösningen är $x \\approx 2{,}66$.
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `Ett fondkonto växer från 8 000 kr till 12 000 kr på 4 år. Hur stor genomsnittlig årlig ökning i procent motsvarar det? Svara med en decimal.`,
+            question: `Ett fondkonto växer från 8 000 kr till 12 000 kr på 4 år. Hur stor genomsnittlig årlig ökning i procent motsvarar det? Svara med en decimal.`,
             answer: { value: 10.7, unit: '%', tol: 0.2 },
             solution: `Modellen $y = C \\cdot a^x$ med $y = 12\\,000$, $C = 8\\,000$ och $x = 4$:
 
@@ -38251,7 +38251,7 @@ Potensekvationen ger
 
 $$ a = 1{,}5^{1/4} = 1{,}1067\\ldots $$
 
-Förändringsfaktorn 1,107 motsvarar en ökning med cirka 10,7 %.
+Förändringsfaktorn 1,107 motsvarar en ökning med cirka 10,7 %.
 
 **Svar:** 10,7 %`,
         },
@@ -38272,9 +38272,9 @@ Förändringsfaktorn 1,107 motsvarar en ökning med cirka 10,7 %.
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Mängden av ett ämne minskar med samma faktor varje år. Efter 6 år återstår 40 % av ursprungsmängden. Hur stor är den **årliga procentuella minskningen**? Svara i procent med en decimal.`,
+            question: `Mängden av ett ämne minskar med samma faktor varje år. Efter 6 år återstår 40 % av ursprungsmängden. Hur stor är den **årliga procentuella minskningen**? Svara i procent med en decimal.`,
             answer: { value: 14.2, unit: '%', tol: 0.3 },
-            solution: `Nyckelinsikten: "samma faktor varje år" betyder $y = C \\cdot a^x$, och "40 % återstår" ger $y = 0{,}40C$.
+            solution: `Nyckelinsikten: "samma faktor varje år" betyder $y = C \\cdot a^x$, och "40 % återstår" ger $y = 0{,}40C$.
 
 $$ 0{,}40C = C \\cdot a^6 $$
 
@@ -38572,13 +38572,13 @@ $$ 40 = 4x \\iff x = 10 $$
                 `Tiden`,
             ],
             correct: 2,
-            solution: `$a$ är förändringsfaktorn (till exempel 1,023 vid en ökning med 2,3 %). $C$ är startvärdet, $y$ nya värdet och $x$ antalet förändringar (ofta tid).
+            solution: `$a$ är förändringsfaktorn (till exempel 1,023 vid en ökning med 2,3 %). $C$ är startvärdet, $y$ nya värdet och $x$ antalet förändringar (ofta tid).
 
 **Svar:** Förändringsfaktorn`,
         },
         {
             level: 1,
-            question: `Du sätter in 5 000 kr på ett konto med årsräntan 3 %. Hur mycket finns på kontot efter 10 år? Svara i hela kronor.`,
+            question: `Du sätter in 5 000 kr på ett konto med årsräntan 3 %. Hur mycket finns på kontot efter 10 år? Svara i hela kronor.`,
             answer: { value: 6720, unit: 'kr', tol: 5 },
             solution: `Modellen $y = C \\cdot a^x$ med $C = 5\\,000$, $a = 1{,}03$ och $x = 10$:
 
@@ -38607,7 +38607,7 @@ $$ \\lg 1{,}2 = x \\cdot \\lg 1{,}023 \\iff x = \\frac{\\lg 1{,}2}{\\lg 1{,}023}
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `Ett kapital växer med 5 % per år. Efter hur många år har det **fördubblats**? Svara med en decimal.`,
+            question: `Ett kapital växer med 5 % per år. Efter hur många år har det **fördubblats**? Svara med en decimal.`,
             answer: { value: 14.2, unit: 'år', tol: 0.2 },
             solution: `Fördubbling betyder $y = 2C$:
 
@@ -38625,9 +38625,9 @@ $$ x = \\frac{\\lg 2}{\\lg 1{,}05} \\approx 14{,}2 $$
         },
         {
             level: 2,
-            question: `En bil är värd 240 000 kr och tappar 15 % av värdet varje år. Efter hur många år är värdet under 100 000 kr? Svara med en decimal.`,
+            question: `En bil är värd 240 000 kr och tappar 15 % av värdet varje år. Efter hur många år är värdet under 100 000 kr? Svara med en decimal.`,
             answer: { value: 5.4, unit: 'år', tol: 0.2 },
-            solution: `Minskning med 15 % ger förändringsfaktorn 0,85:
+            solution: `Minskning med 15 % ger förändringsfaktorn 0,85:
 
 $$ 100\\,000 = 240\\,000 \\cdot 0{,}85^x $$
 
@@ -38644,9 +38644,9 @@ $$ x = \\frac{\\lg(100/240)}{\\lg 0{,}85} \\approx 5{,}4 $$
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `En bakteriekultur växer med 8 % per timme. Hur lång tid tar det innan kulturen har vuxit med **50 %**? Svara i timmar med en decimal.`,
+            question: `En bakteriekultur växer med 8 % per timme. Hur lång tid tar det innan kulturen har vuxit med **50 %**? Svara i timmar med en decimal.`,
             answer: { value: 5.3, unit: 'h', tol: 0.15 },
-            solution: `Nyckelinsikten: "vuxit med 50 %" betyder att nya värdet är 1,5 gånger startvärdet — inte 50 % av det.
+            solution: `Nyckelinsikten: "vuxit med 50 %" betyder att nya värdet är 1,5 gånger startvärdet — inte 50 % av det.
 
 $$ 1{,}5C = C \\cdot 1{,}08^x $$
 
@@ -38850,7 +38850,7 @@ $$ \\text{medelvärdet} = \\frac{3 \\cdot 5 + 5 \\cdot 15 + 2 \\cdot 25}{3 + 5 +
                 `Antalet värden i datamängden`,
             ],
             correct: 0,
-            solution: `Lådan sträcker sig från nedre kvartilen $Q_1$ till övre kvartilen $Q_3$ — dess bredd är kvartilavståndet, som rymmer de mittersta 50 % av värdena.
+            solution: `Lådan sträcker sig från nedre kvartilen $Q_1$ till övre kvartilen $Q_3$ — dess bredd är kvartilavståndet, som rymmer de mittersta 50 % av värdena.
 
 (Variationsbredden motsvarar hela lådagrammet inklusive "pinnarna".)
 
@@ -38869,13 +38869,13 @@ $$ \\text{medelvärdet} = \\frac{3 \\cdot 5 + 5 \\cdot 15 + 2 \\cdot 25}{3 + 5 +
             level: 2,
             question: `Hur stor andel av värdena innehåller varje del av ett lådagram ("vänster pinne", vänstra lådan, högra lådan och "höger pinne")?`,
             choices: [
-                `10 % i pinnarna och 40 % i lådhalvorna`,
+                `10 % i pinnarna och 40 % i lådhalvorna`,
                 `Det beror på delens storlek — större del innehåller fler värden`,
-                `50 % i lådan och 50 % i pinnarna tillsammans, ojämnt fördelat`,
-                `25 % vardera`,
+                `50 % i lådan och 50 % i pinnarna tillsammans, ojämnt fördelat`,
+                `25 % vardera`,
             ],
             correct: 3,
-            solution: `Kvartilerna delar materialet i fyra lika stora delar — varje del innehåller exakt 25 % av värdena. Därför gäller: ju STÖRRE en del ser ut, desto mer utspridda ligger dess 25 % av värdena.
+            solution: `Kvartilerna delar materialet i fyra lika stora delar — varje del innehåller exakt 25 % av värdena. Därför gäller: ju STÖRRE en del ser ut, desto mer utspridda ligger dess 25 % av värdena.
 
 **Svar:** 25 % vardera.`,
         },
@@ -38883,7 +38883,7 @@ $$ \\text{medelvärdet} = \\frac{3 \\cdot 5 + 5 \\cdot 15 + 2 \\cdot 25}{3 + 5 +
             level: 2,
             question: `I ett statistiskt material är den 90:e percentilen $p_{90} = 72$. Hur många procent av värdena är **större** än 72?`,
             answer: { value: 10, unit: '%' },
-            solution: `Percentilen anger hur många procent som är **lägre** än värdet: 90 % ligger under 72. Resten ligger över:
+            solution: `Percentilen anger hur många procent som är **lägre** än värdet: 90 % ligger under 72. Resten ligger över:
 
 $$ 100\\ \\% - 90\\ \\% = 10\\ \\% $$
 
@@ -38897,10 +38897,10 @@ $$ 100\\ \\% - 90\\ \\% = 10\\ \\% $$
                 `Det finns fler värden i höger pinne än i vänstra lådan`,
                 `Medelvärdet är större än det största värdet`,
                 `Datamängden innehåller ett fel`,
-                `De översta 25 % av värdena är mycket utspridda, medan värdena strax under medianen ligger tätt samlade`,
+                `De översta 25 % av värdena är mycket utspridda, medan värdena strax under medianen ligger tätt samlade`,
             ],
             correct: 3,
-            solution: `Nyckelinsikten: varje del innehåller ALLTID 25 % av värdena — delarnas storlek visar SPRIDNINGEN, inte antalet.
+            solution: `Nyckelinsikten: varje del innehåller ALLTID 25 % av värdena — delarnas storlek visar SPRIDNINGEN, inte antalet.
 
 En lång höger pinne betyder att den översta fjärdedelen är utspridd över ett stort intervall. En kort lådhalva betyder att den fjärdedelen ligger tätt packad.
 
@@ -38950,11 +38950,11 @@ En lång höger pinne betyder att den översta fjärdedelen är utspridd över e
             choices: [
                 `De 90 största värdena i listan`,
                 `Hur många värden som är exakt 90`,
-                `90 % av medelvärdet`,
-                `Det värde i listan som 90 % av värdena är mindre än`,
+                `90 % av medelvärdet`,
+                `Det värde i listan som 90 % av värdena är mindre än`,
             ],
             correct: 3,
-            solution: `Percentilen $p_{90}$ är gränsvärdet där 90 % av materialet ligger under — till exempel åldern man måste överstiga för att tillhöra de 10 % äldsta.
+            solution: `Percentilen $p_{90}$ är gränsvärdet där 90 % av materialet ligger under — till exempel åldern man måste överstiga för att tillhöra de 10 % äldsta.
 
 **Svar:** Värdet som 90 % av värdena är mindre än.`,
         },
@@ -39102,7 +39102,7 @@ Exempel: 1, 2, 3 (medel 2) → 11, 12, 13 (medel 12). Avvikelserna är −1, 0, 
             level: 1,
             question: `Hur stor andel av ett normalfördelat material ligger inom **en standardavvikelse** från medelvärdet (mellan $\\mu - \\sigma$ och $\\mu + \\sigma$)? Svara i procent med en decimal.`,
             answer: { value: 68.2, unit: '%', tol: 0.1 },
-            solution: `Normalfördelningskurvan ger 34,1 % på vardera sidan om medelvärdet:
+            solution: `Normalfördelningskurvan ger 34,1 % på vardera sidan om medelvärdet:
 
 $$ 34{,}1\\ \\% + 34{,}1\\ \\% = 68{,}2\\ \\% $$
 
@@ -39110,9 +39110,9 @@ $$ 34{,}1\\ \\% + 34{,}1\\ \\% = 68{,}2\\ \\% $$
         },
         {
             level: 1,
-            question: `Mäns längd är normalfördelad med $\\mu = 181$ cm och $\\sigma = 8$ cm. Hur stor andel är längre än 189 cm? Svara i procent med en decimal.`,
+            question: `Mäns längd är normalfördelad med $\\mu = 181$ cm och $\\sigma = 8$ cm. Hur stor andel är längre än 189 cm? Svara i procent med en decimal.`,
             answer: { value: 15.9, unit: '%', tol: 0.1 },
-            solution: `189 cm är $\\mu + \\sigma$. Ovanför den gränsen ligger
+            solution: `189 cm är $\\mu + \\sigma$. Ovanför den gränsen ligger
 
 $$ 13{,}6\\ \\% + 2{,}3\\ \\% = 15{,}9\\ \\% $$
 
@@ -39135,9 +39135,9 @@ $$ 13{,}6\\ \\% + 2{,}3\\ \\% = 15{,}9\\ \\% $$
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `Mäns längd är normalfördelad med $\\mu = 181$ cm och $\\sigma = 8$ cm. Hur stor andel är mellan 165 cm och 197 cm? Svara i procent med en decimal.`,
+            question: `Mäns längd är normalfördelad med $\\mu = 181$ cm och $\\sigma = 8$ cm. Hur stor andel är mellan 165 cm och 197 cm? Svara i procent med en decimal.`,
             answer: { value: 95.4, unit: '%', tol: 0.1 },
-            solution: `165 cm är $\\mu - 2\\sigma$ och 197 cm är $\\mu + 2\\sigma$. Inom två standardavvikelser ligger
+            solution: `165 cm är $\\mu - 2\\sigma$ och 197 cm är $\\mu + 2\\sigma$. Inom två standardavvikelser ligger
 
 $$ 13{,}6 + 34{,}1 + 34{,}1 + 13{,}6 = 95{,}4\\ \\% $$
 
@@ -39145,7 +39145,7 @@ $$ 13{,}6 + 34{,}1 + 34{,}1 + 13{,}6 = 95{,}4\\ \\% $$
         },
         {
             level: 2,
-            question: `I Geogebras sannolikhetskalkylator ska du besvara "hur många procent är mindre än 170 cm?". Vilken intervalltyp väljer du?`,
+            question: `I Geogebras sannolikhetskalkylator ska du besvara "hur många procent är mindre än 170 cm?". Vilken intervalltyp väljer du?`,
             choices: [
                 `Öppet åt vänster`,
                 `Öppet åt höger`,
@@ -39168,7 +39168,7 @@ $$ 13{,}6 + 34{,}1 + 34{,}1 + 13{,}6 = 95{,}4\\ \\% $$
 
 $$ 130 = 100 + 2 \\cdot 15 = \\mu + 2\\sigma $$
 
-Över två standardavvikelser ligger 2,3 % av ett normalfördelat material.
+Över två standardavvikelser ligger 2,3 % av ett normalfördelat material.
 
 **Svar:** 2,3 %`,
         },
@@ -39210,7 +39210,7 @@ $$ 130 = 100 + 2 \\cdot 15 = \\mu + 2\\sigma $$
         },
         {
             level: 1,
-            question: `Regressionsmodellen för glassförsäljningen är $y = 270x + 2\\,500$, där $x$ är medeltemperaturen i °C. Uppskatta försäljningen en vecka med medeltemperaturen 25 °C. Svara i kronor.`,
+            question: `Regressionsmodellen för glassförsäljningen är $y = 270x + 2\\,500$, där $x$ är medeltemperaturen i °C. Uppskatta försäljningen en vecka med medeltemperaturen 25 °C. Svara i kronor.`,
             answer: { value: 9250, unit: 'kr' },
             solution: `Insättning av $x = 25$:
 
@@ -39235,7 +39235,7 @@ $$ y = 270 \\cdot 25 + 2\\,500 = 6\\,750 + 2\\,500 = 9\\,250 $$
         },
         {
             level: 2,
-            question: `Modellen $y = 270x + 2\\,500$ beskriver glassförsäljningen. Vilken medeltemperatur motsvarar försäljningen 9 100 kr? Svara i °C med en decimal.`,
+            question: `Modellen $y = 270x + 2\\,500$ beskriver glassförsäljningen. Vilken medeltemperatur motsvarar försäljningen 9 100 kr? Svara i °C med en decimal.`,
             answer: { value: 24.4, unit: '°C', tol: 0.2 },
             solution: `Sätt in $y = 9\\,100$ och lös ut $x$:
 
@@ -39250,7 +39250,7 @@ $$ x = \\frac{6\\,600}{270} = 24{,}4\\ldots $$
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Glassmodellen $y = 270x + 2\\,500$ ger en **negativ** försäljning för temperaturer under cirka −9 °C. Vad illustrerar detta?`,
+            question: `Glassmodellen $y = 270x + 2\\,500$ ger en **negativ** försäljning för temperaturer under cirka −9 °C. Vad illustrerar detta?`,
             choices: [
                 `Korrelationskoefficienten måste vara negativ`,
                 `Glassförsäljning kan inte modelleras matematiskt`,
@@ -39258,7 +39258,7 @@ $$ x = \\frac{6\\,600}{270} = 24{,}4\\ldots $$
                 `Modellen gäller bara inom det intervall där data samlades in — extrapolering långt utanför kan ge orimliga resultat`,
             ],
             correct: 3,
-            solution: `Nyckelinsikten: en regressionsmodell är byggd på data i ett visst intervall (här cirka 18–28 °C). Inom intervallet ger den bra uppskattningar — men långt utanför (extrapolering) kan den ge orimliga svar, som negativ försäljning.
+            solution: `Nyckelinsikten: en regressionsmodell är byggd på data i ett visst intervall (här cirka 18–28 °C). Inom intervallet ger den bra uppskattningar — men långt utanför (extrapolering) kan den ge orimliga svar, som negativ försäljning.
 
 Modellen är alltså inte "fel", men dess giltighetsområde är begränsat, och prognoser utanför datat ska tolkas med försiktighet.
 
@@ -40551,10 +40551,10 @@ Eftersom $k > 0$ är tangentens lutning positiv, vilket betyder att funktionen *
             level: 2,
             question: `En bils sträcka ges av grafen $s(t)$ (m, s). En tangent i punkten där $t = 5{,}0$ s går genom punkterna $(2{,}0;\\ 30)$ och $(5{,}0;\\ 54)$. Bestäm bilens momentana hastighet vid $t = 5{,}0$ s.`,
             choices: [
-                `24 m/s`,
-                `8,0 m/s`,
-                `0,125 m/s`,
-                `2,7 m/s`,
+                `24 m/s`,
+                `8,0 m/s`,
+                `0,125 m/s`,
+                `2,7 m/s`,
             ],
             correct: 1,
             solution: `Momentanhastigheten vid en tidpunkt motsvarar tangentens lutning i den punkten på $s(t)$-grafen. Vi läser av de två punkterna på tangenten och sätter in dem i formeln för $k$.
@@ -40790,9 +40790,9 @@ $$
             question: `En bakteriekultur beskrivs av funktionen $N(t)$, där $N$ är antal individer och $t$ är tiden i timmar. Vad betyder $N'(3) = 240$?`,
             choices: [
                 `Antalet bakterier ökar med exakt 240 individer per timme under hela förloppet`,
-                `Efter 3 timmar finns det 240 bakterier`,
-                `Efter 3 timmar ökar antalet bakterier med cirka 240 individer per timme`,
-                `Efter 240 timmar finns det 3 bakterier`,
+                `Efter 3 timmar finns det 240 bakterier`,
+                `Efter 3 timmar ökar antalet bakterier med cirka 240 individer per timme`,
+                `Efter 240 timmar finns det 3 bakterier`,
             ],
             correct: 2,
             solution: `Enheten för derivatan fås genom att ta "enheten för funktionen" per "enheten för variabeln". Här är enheten för $N$ individer och enheten för $t$ timmar, så $N'$ har enheten individer per timme.
@@ -40840,10 +40840,10 @@ Enheten för derivatan är "enheten för funktionen" ($\\text{°C}$) per "enhete
             level: 2,
             question: `Ett företags intäkt ges av $I(x) = 5x^2 - 3x$ (kr), där $x$ är antal sålda produkter. Bestäm $I'(10)$ med digitala hjälpmedel och tolka svaret.`,
             choices: [
-                `$I'(10) = 47$ kr/styck — vid 10 sålda produkter ökar intäkten med cirka 47 kr per ytterligare produkt`,
+                `$I'(10) = 47$ kr/styck — vid 10 sålda produkter ökar intäkten med cirka 47 kr per ytterligare produkt`,
                 `$I'(10) = 470$ kr — det är den totala intäkten vid 10 sålda produkter`,
                 `$I'(10) = 97$ styck — det säljs 97 produkter till`,
-                `$I'(10) = 97$ kr/styck — vid 10 sålda produkter ökar intäkten med cirka 97 kr per ytterligare produkt`,
+                `$I'(10) = 97$ kr/styck — vid 10 sålda produkter ökar intäkten med cirka 97 kr per ytterligare produkt`,
             ],
             correct: 3,
             solution: `Vi deriverar och sätter in $x = 10$.
@@ -40852,7 +40852,7 @@ $$
 I'(x) = 10x - 3 \\quad \\Rightarrow \\quad I'(10) = 10 \\cdot 10 - 3 = 97
 $$
 
-Enheten för derivatan är "enheten för funktionen" (kr) per "enheten för variabeln" (styck), det vill säga kr/styck. $I'(10) = 97$ betyder alltså att intäkten just vid 10 sålda produkter ökar med cirka 97 kr per ytterligare produkt — inte att den totala intäkten är 97 kr (det är $I(10) = 470$ kr).
+Enheten för derivatan är "enheten för funktionen" (kr) per "enheten för variabeln" (styck), det vill säga kr/styck. $I'(10) = 97$ betyder alltså att intäkten just vid 10 sålda produkter ökar med cirka 97 kr per ytterligare produkt — inte att den totala intäkten är 97 kr (det är $I(10) = 470$ kr).
 
 **Svar:** $I'(10) = 97$ kr/styck — intäkten ökar med cirka 97 kr per ytterligare produkt`,
         },
@@ -40863,7 +40863,7 @@ Enheten för derivatan är "enheten för funktionen" (kr) per "enheten för vari
                 `$h'(5) = -2$ m/min — draken sjunker vid $t = 5$ min`,
                 `$h'(5) = -2$ m/min — draken stiger vid $t = 5$ min`,
                 `$h'(5) = 2$ m/min — draken stiger vid $t = 5$ min`,
-                `$h(5) = 15$ m — draken befinner sig på höjden 15 m vid $t = 5$ min`,
+                `$h(5) = 15$ m — draken befinner sig på höjden 15 m vid $t = 5$ min`,
             ],
             correct: 0,
             solution: `Vi deriverar och sätter in $t = 5$.
@@ -41113,7 +41113,7 @@ Vi subtraherar 4 från båda led och får $x = -4$. Där har grafen ett språng 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `En parkering kostar 20 kr för varje påbörjad timme. Kostnaden är $K(t)$ kronor när bilen står parkerad i $t$ timmar, där $0 < t \\le 4$.<br>a) Bestäm $K(0{,}5)$, $K(1)$ och $K(1{,}5)$.<br>b) För vilka värden på $t$ är $K$ inte deriverbar?`,
+            question: `En parkering kostar 20 kr för varje påbörjad timme. Kostnaden är $K(t)$ kronor när bilen står parkerad i $t$ timmar, där $0 < t \\le 4$.<br>a) Bestäm $K(0{,}5)$, $K(1)$ och $K(1{,}5)$.<br>b) För vilka värden på $t$ är $K$ inte deriverbar?`,
             choices: [
                 `a) $20$, $20$ och $40$ kr&emsp;&emsp;b) $t = 1$, $t = 2$ och $t = 3$`,
                 `a) $10$, $20$ och $30$ kr&emsp;&emsp;b) $K$ är deriverbar för alla $t$`,
@@ -41958,7 +41958,7 @@ g/dygn.`,
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `Antalet bakterier ges av $B(t) = e^{kt} + 40$, där $t$ är tiden i timmar. Efter 10 timmar finns 500 bakterier. Bestäm konstanten $k$.`,
+            question: `Antalet bakterier ges av $B(t) = e^{kt} + 40$, där $t$ är tiden i timmar. Efter 10 timmar finns 500 bakterier. Bestäm konstanten $k$.`,
             answer: { value: 0.6131, unit: '', tol: 0.001 },
             solution: `Vi sätter in $t = 10$ och $B(t) = 500$ i funktionen och löser ut $k$.
 
@@ -42129,7 +42129,7 @@ $$
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `En insättning på 5 000 kr växer med förändringsfaktorn 1,04 per år, vilket motsvarar modellen $y = 5000 \\cdot 1{,}04^x$. Skriv om modellen på formen $y = Ce^{kx}$ och använd den för att beräkna insättningens värde efter 10 år. Svara i kr, avrundat till heltal.`,
+            question: `En insättning på 5 000 kr växer med förändringsfaktorn 1,04 per år, vilket motsvarar modellen $y = 5000 \\cdot 1{,}04^x$. Skriv om modellen på formen $y = Ce^{kx}$ och använd den för att beräkna insättningens värde efter 10 år. Svara i kr, avrundat till heltal.`,
             answer: { value: 7401, unit: 'kr' },
             solution: `Vi jämför uttrycken $y = 5000 \\cdot 1{,}04^x$ och $y = 5000 \\cdot e^{kx}$ och ser att $e^k = 1{,}04$. Vi logaritmerar och löser ut $k$:
 
@@ -42178,9 +42178,9 @@ $$
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Antalet besökare på en webbplats ökar enligt modellen $V(t) = 500e^{0{,}065t}$, där $t$ är tiden i månader efter lanseringen. Efter hur många månader har antalet besökare ökat med 50 % jämfört med lanseringen? Svara avrundat till en decimal, i månader.`,
+            question: `Antalet besökare på en webbplats ökar enligt modellen $V(t) = 500e^{0{,}065t}$, där $t$ är tiden i månader efter lanseringen. Efter hur många månader har antalet besökare ökat med 50 % jämfört med lanseringen? Svara avrundat till en decimal, i månader.`,
             answer: { value: 6.2, unit: 'månader' },
-            solution: `Nyckelinsikten: "ökat med 50 %" betyder att $V(t)$ ska vara $1{,}5$ gånger startvärdet $V(0) = 500$, det vill säga
+            solution: `Nyckelinsikten: "ökat med 50 %" betyder att $V(t)$ ska vara $1{,}5$ gånger startvärdet $V(0) = 500$, det vill säga
 
 $$
 V(t) = 1{,}5 \\cdot V(0)
@@ -42435,7 +42435,7 @@ $$
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `Accelerationen för en bil är $a(t) = 4t$ m/s², och begynnelsehastigheten är $v(0) = 3$ m/s. Beräkna hastigheten $v(2)$, det vill säga hastigheten efter 2 sekunder.`,
+            question: `Accelerationen för en bil är $a(t) = 4t$ m/s², och begynnelsehastigheten är $v(0) = 3$ m/s. Beräkna hastigheten $v(2)$, det vill säga hastigheten efter 2 sekunder.`,
             answer: { value: 11, unit: 'm/s' },
             solution: `Vi integrerar $a(t)$ för att få $v(t)$.
 
@@ -43023,7 +43023,7 @@ $$
                 `Antalet liter vatten som runnit in i tanken mellan $t = 0$ och $t = 20$ minuter`,
                 `Vattennivån i tanken vid $t = 20$ minuter`,
                 `Den momentana inflödeshastigheten vid $t = 20$ minuter`,
-                `Antalet minuter det tar att fylla tanken med 20 liter`,
+                `Antalet minuter det tar att fylla tanken med 20 liter`,
             ],
             correct: 0,
             solution: `En integral står för produkten av den beroende variabeln ($r(t)$, med enheten liter/minut) och den oberoende variabeln ($t$, med enheten minuter). Enhetsanalysen ger
@@ -43108,7 +43108,7 @@ $$
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Ett företags marginalkostnad ges av $K'(x) = 6x + 10$ (kr per tillverkad enhet), där $x$ är antalet tillverkade enheter. Den fasta kostnaden, det vill säga kostnaden vid $x = 0$ innan någon enhet tillverkats, är 500 kr. Bestäm den totala kostnaden för att tillverka 20 enheter.`,
+            question: `Ett företags marginalkostnad ges av $K'(x) = 6x + 10$ (kr per tillverkad enhet), där $x$ är antalet tillverkade enheter. Den fasta kostnaden, det vill säga kostnaden vid $x = 0$ innan någon enhet tillverkats, är 500 kr. Bestäm den totala kostnaden för att tillverka 20 enheter.`,
             answer: { value: 1900, unit: 'kr' },
             solution: `Marginalkostnaden $K'(x)$ är derivatan av den totala kostnadsfunktionen $K(x)$. Vi måste alltså gå baklänges — integrera — för att hitta $K(x)$, men en obestämd integral ger bara en familj av funktioner som skiljer sig åt med en konstant $C$.
 
@@ -43116,7 +43116,7 @@ $$
 K(x) = \\int (6x + 10)\\, dx = 3x^2 + 10x + C
 $$
 
-Insikten här är att konstanten $C$ bestäms av villkoret att den fasta kostnaden (kostnaden vid $x = 0$) är 500 kr.
+Insikten här är att konstanten $C$ bestäms av villkoret att den fasta kostnaden (kostnaden vid $x = 0$) är 500 kr.
 
 $$
 K(0) = 3 \\cdot 0^2 + 10 \\cdot 0 + C = 500 \\quad \\Rightarrow \\quad C = 500
@@ -43999,7 +43999,7 @@ $$
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `En rektangulär rabatt ska anläggas utmed en husvägg (den sidan behöver inget kantstöd). Det finns totalt 48 meter kantstöd till de tre övriga sidorna, där de två lika långa sidorna är $x$ meter. Vilken är den maximala area rabatten kan få?`,
+            question: `En rektangulär rabatt ska anläggas utmed en husvägg (den sidan behöver inget kantstöd). Det finns totalt 48 meter kantstöd till de tre övriga sidorna, där de två lika långa sidorna är $x$ meter. Vilken är den maximala area rabatten kan få?`,
             choices: [
                 `$576\\ \\mathrm{m}^2$`,
                 `$144\\ \\mathrm{m}^2$`,
@@ -44062,11 +44062,11 @@ $$
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `En lantbrukare ska hägna in en rektangulär hage utmed en rak å (sidan mot ån behöver inget stängsel). Det finns totalt 32 meter stängsel. Mitt i den sida som är parallell med ån ska en grind på 8 meter sättas in — grinden kräver inget stängsel. Bestäm hagens maximala area.`,
+            question: `En lantbrukare ska hägna in en rektangulär hage utmed en rak å (sidan mot ån behöver inget stängsel). Det finns totalt 32 meter stängsel. Mitt i den sida som är parallell med ån ska en grind på 8 meter sättas in — grinden kräver inget stängsel. Bestäm hagens maximala area.`,
             answer: { value: 200, unit: 'm²' },
             solution: `Vi kallar de två sidorna vinkelräta mot ån för $x$ meter och sidan parallell med ån för $y$ meter.
 
-Stängslet läggs på de två sidorna $x$ samt på den del av den parallella sidan som **inte** är grind, det vill säga $(y - 8)$ meter. Totalt stängsel är 32 meter, vilket ger ekvationen
+Stängslet läggs på de två sidorna $x$ samt på den del av den parallella sidan som **inte** är grind, det vill säga $(y - 8)$ meter. Totalt stängsel är 32 meter, vilket ger ekvationen
 
 $$
 2x + (y - 8) = 32 \\quad \\Rightarrow \\quad y = 40 - 2x
@@ -44096,7 +44096,7 @@ $$
 A(10) = 10 \\cdot 20 = 200
 $$
 
-Observera att grindens 8 meter **inte** ska räknas som stängsel — det är den vanligaste fällan i den här typen av uppgift.
+Observera att grindens 8 meter **inte** ska räknas som stängsel — det är den vanligaste fällan i den här typen av uppgift.
 
 **Svar:** $200\\ \\mathrm{m}^2$`,
         },
@@ -44106,7 +44106,7 @@ Observera att grindens 8 meter **inte** ska räknas som stängsel — det är de
         // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
-            question: `En rektangel ska ha omkretsen 60 cm. Om ena sidan är $x$ cm, vilket uttryck ger rektangelns area $A$ som funktion av $x$?`,
+            question: `En rektangel ska ha omkretsen 60 cm. Om ena sidan är $x$ cm, vilket uttryck ger rektangelns area $A$ som funktion av $x$?`,
             choices: [
                 `$A(x) = 2x(30 - x)$`,
                 `$A(x) = x^2 - 30$`,
@@ -44130,7 +44130,7 @@ $$
         },
         {
             level: 1,
-            question: `En rektangel med omkretsen 40 cm har arean $A(x) = x(20 - x)$, där $x$ är ena sidans längd i cm. I Geogebra hittas extrempunkten $B = (10, 100)$ på grafen till $A(x)$. Vilken är rektangelns största möjliga area?`,
+            question: `En rektangel med omkretsen 40 cm har arean $A(x) = x(20 - x)$, där $x$ är ena sidans längd i cm. I Geogebra hittas extrempunkten $B = (10, 100)$ på grafen till $A(x)$. Vilken är rektangelns största möjliga area?`,
             answer: { value: 100, unit: 'cm²' },
             solution: `Extrempunkten $B$ har koordinaterna $(x, A(x))$. Eftersom det är arean (inte sidan $x$) som efterfrågas ska vi läsa av $y$-koordinaten, inte $x$-koordinaten.
 
@@ -44155,7 +44155,7 @@ $$
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `En cylindrisk konservburk utan lock ska tillverkas så att summan av höjden $h$ och radien $r$ är 15 cm.<br>a) Skriv burkens volym $V$ som funktion av enbart radien $r$.<br>b) I Geogebra hittas extrempunkten $B = (10, 1570.79633)$ på grafen till $V(r)$. Vilken radie ger störst volym?`,
+            question: `En cylindrisk konservburk utan lock ska tillverkas så att summan av höjden $h$ och radien $r$ är 15 cm.<br>a) Skriv burkens volym $V$ som funktion av enbart radien $r$.<br>b) I Geogebra hittas extrempunkten $B = (10, 1570.79633)$ på grafen till $V(r)$. Vilken radie ger störst volym?`,
             answer: { value: 10, unit: 'cm' },
             delsvar: [
                 { del: 'a' },
@@ -44200,7 +44200,7 @@ $$
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `En rektangulär pappskiva med måtten 24 cm × 15 cm ska användas för att tillverka en låda utan lock. I varje hörn klipps en kvadrat med sidan $x$ bort, och de fyra sidorna viks sedan upp.<br>a) Visa att lådans volym ges av $V(x) = x(24 - 2x)(15 - 2x)$, och ange en rimlig definitionsmängd för $x$.<br>b) I Geogebra hittas TVÅ extrempunkter på grafen till $V(x)$: $(3, 486)$ och $(10, -200)$. Vilket $x$-värde ger den låda som har störst volym, och varför gäller inte den andra punkten?`,
+            question: `En rektangulär pappskiva med måtten 24 cm × 15 cm ska användas för att tillverka en låda utan lock. I varje hörn klipps en kvadrat med sidan $x$ bort, och de fyra sidorna viks sedan upp.<br>a) Visa att lådans volym ges av $V(x) = x(24 - 2x)(15 - 2x)$, och ange en rimlig definitionsmängd för $x$.<br>b) I Geogebra hittas TVÅ extrempunkter på grafen till $V(x)$: $(3, 486)$ och $(10, -200)$. Vilket $x$-värde ger den låda som har störst volym, och varför gäller inte den andra punkten?`,
             answer: { value: 3, unit: 'cm' },
             delsvar: [
                 { del: 'a', olikhet: '0 < x < 7.5', etikett: 'definitionsmängd' },
@@ -44238,7 +44238,7 @@ Både $(24 - 2x) > 0$ och $(15 - 2x) > 0$ måste gälla (annars går det inte at
         },
         {
             level: 1,
-            question: `I en rätvinklig triangel är den motstående kateten till vinkeln $v$ 5,0 cm och hypotenusan 13 cm. Beräkna $\\sin v$. Avrunda till två decimaler.`,
+            question: `I en rätvinklig triangel är den motstående kateten till vinkeln $v$ 5,0 cm och hypotenusan 13 cm. Beräkna $\\sin v$. Avrunda till två decimaler.`,
             answer: { value: 0.38, unit: '', tol: 0.01 },
             solution: `Sinus är motstående katet delat med hypotenusan.
 
@@ -44250,7 +44250,7 @@ $$
         },
         {
             level: 1,
-            question: `En rätvinklig triangel har vinkeln 27° och hypotenusan 8,0 m. Beräkna den närliggande kateten. Avrunda till en decimal.`,
+            question: `En rätvinklig triangel har vinkeln 27° och hypotenusan 8,0 m. Beräkna den närliggande kateten. Avrunda till en decimal.`,
             answer: { value: 7.1, unit: 'm', tol: 0.05 },
             solution: `Den närliggande kateten och hypotenusan hör ihop via cosinus.
 
@@ -44263,12 +44263,12 @@ $$
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `En flaggstång är 6,0 m hög och solens höjdvinkel är 52°.<br>a) Bestäm skuggans längd.<br>b) Bestäm avståndet mellan flaggstångens topp och skuggans yttersta punkt (hypotenusan). Avrunda båda svaren till en decimal.`,
+            question: `En flaggstång är 6,0 m hög och solens höjdvinkel är 52°.<br>a) Bestäm skuggans längd.<br>b) Bestäm avståndet mellan flaggstångens topp och skuggans yttersta punkt (hypotenusan). Avrunda båda svaren till en decimal.`,
             choices: [
-                `4,7 m; 9,7 m`,
-                `7,7 m; 7,6 m`,
-                `4,7 m; 7,6 m`,
-                `7,6 m; 4,7 m`,
+                `4,7 m; 9,7 m`,
+                `7,7 m; 7,6 m`,
+                `4,7 m; 7,6 m`,
+                `7,6 m; 4,7 m`,
             ],
             correct: 2,
             solution: `**a)** Flaggstången är motstående katet till höjdvinkeln, skuggan är närliggande katet — vi använder tangens.
@@ -44287,12 +44287,12 @@ $$
         },
         {
             level: 2,
-            question: `En rutschkana har en vågrät bottensträcka på 3,5 m och en lodrät höjd på 2,1 m.<br>a) Bestäm lutningsvinkeln $v$ mot marken (avrunda till heltal).<br>b) Bestäm rutschkanans egen längd, det vill säga hypotenusan (avrunda till en decimal).`,
+            question: `En rutschkana har en vågrät bottensträcka på 3,5 m och en lodrät höjd på 2,1 m.<br>a) Bestäm lutningsvinkeln $v$ mot marken (avrunda till heltal).<br>b) Bestäm rutschkanans egen längd, det vill säga hypotenusan (avrunda till en decimal).`,
             choices: [
-                `59°; 3,5 m`,
-                `31°; 3,5 m`,
-                `59°; 4,1 m`,
-                `31°; 4,1 m`,
+                `59°; 3,5 m`,
+                `31°; 3,5 m`,
+                `59°; 4,1 m`,
+                `31°; 4,1 m`,
             ],
             correct: 3,
             solution: `**a)** Höjden är motstående katet och bottensträckan är närliggande katet till $v$ — vi använder tangens och dess invers.
@@ -45051,7 +45051,7 @@ $$
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Ett fyrtorn (18 meter högt) står på toppen av en klippa. Från en båt är höjdvinkeln till fyrtornets topp $40^\\circ$, samtidigt som höjdvinkeln till klippans topp (tornets fot) är $28^\\circ$. Hur hög är klippan?`,
+            question: `Ett fyrtorn (18 meter högt) står på toppen av en klippa. Från en båt är höjdvinkeln till fyrtornets topp $40^\\circ$, samtidigt som höjdvinkeln till klippans topp (tornets fot) är $28^\\circ$. Hur hög är klippan?`,
             answer: { value: 31.1, unit: 'm', tol: 0.5 },
             solution: `Precis som i tillämpningsexemplet i teorin behöver vi använda triangelsatserna i **två trianglar efter varandra** — sträckan mellan båten och tornets fot är bryggan mellan dem.
 
@@ -45158,9 +45158,9 @@ $$
         },
         {
             level: 2,
-            question: `En triangel har sidorna 7 cm, 9 cm och 13 cm. Bestäm triangelns STÖRSTA vinkel.`,
+            question: `En triangel har sidorna 7 cm, 9 cm och 13 cm. Bestäm triangelns STÖRSTA vinkel.`,
             answer: { value: 108, unit: '°' },
-            solution: `Den största vinkeln ligger mitt emot den längsta sidan, alltså sidan 13 cm. Vi kallar den motstående vinkeln $\\alpha$ och använder cosinussatsen.
+            solution: `Den största vinkeln ligger mitt emot den längsta sidan, alltså sidan 13 cm. Vi kallar den motstående vinkeln $\\alpha$ och använder cosinussatsen.
 
 $$
 13^2 = 7^2 + 9^2 - 2 \\cdot 7 \\cdot 9\\cos\\alpha \\iff \\cos\\alpha = \\frac{7^2 + 9^2 - 13^2}{2 \\cdot 7 \\cdot 9}
@@ -45179,7 +45179,7 @@ $$
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `En triangel har sidorna $x$ och $x + 7$, med en mellanliggande vinkel på $60^\\circ$. Den tredje sidan, mitt emot den mellanliggande vinkeln, är 13 cm. Bestäm $x$.`,
+            question: `En triangel har sidorna $x$ och $x + 7$, med en mellanliggande vinkel på $60^\\circ$. Den tredje sidan, mitt emot den mellanliggande vinkeln, är 13 cm. Bestäm $x$.`,
             answer: { value: 8, unit: 'cm' },
             solution: `Vi använder cosinussatsen med den kända mellanliggande vinkeln.
 
@@ -45389,7 +45389,7 @@ Hela arean är $2 + 12 = 14$ areaenheter.
         },
         {
             level: 1,
-            question: `En snickare tillverkar $x$ stolar och $y$ bord per vecka och har högst 24 timmar för snickeri. Det ger villkoret $2x + 3y \\leq 24$. Vad kallas ett sådant villkor i linjär optimering?`,
+            question: `En snickare tillverkar $x$ stolar och $y$ bord per vecka och har högst 24 timmar för snickeri. Det ger villkoret $2x + 3y \\leq 24$. Vad kallas ett sådant villkor i linjär optimering?`,
             choices: [
                 `Målfunktion`,
                 `Bivillkor`,
@@ -45404,7 +45404,7 @@ Hela arean är $2 + 12 = 14$ areaenheter.
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `Ett bageri bakar limpor och baguetter. Ugnen rymmer högst 120 bröd per dag. En limpa kräver 2 hg mjöl och en baguette 1 hg mjöl, och bageriet har 160 hg mjöl per dag. Vinsten är 15 kr per limpa och 10 kr per baguette. Hur stor kan vinsten bli som mest per dag?`,
+            question: `Ett bageri bakar limpor och baguetter. Ugnen rymmer högst 120 bröd per dag. En limpa kräver 2 hg mjöl och en baguette 1 hg mjöl, och bageriet har 160 hg mjöl per dag. Vinsten är 15 kr per limpa och 10 kr per baguette. Hur stor kan vinsten bli som mest per dag?`,
             answer: { value: 1400, unit: 'kr' },
             solution: `Vi låter $x$ vara antalet limpor och $y$ antalet baguetter per dag.
 
@@ -45438,7 +45438,7 @@ Störst vinst ger 40 limpor och 80 baguetter.
         },
         {
             level: 2,
-            question: `En hästägare blandar två fodersorter. Ett kilo av sort A innehåller 1 enhet protein och 1 enhet vitaminer. Ett kilo av sort B innehåller 1 enhet protein och 3 enheter vitaminer. Blandningen ska innehålla minst 6 enheter protein och minst 12 enheter vitaminer. Sort A kostar 30 kr/kg och sort B 50 kr/kg. Vad kostar den billigaste blandningen?`,
+            question: `En hästägare blandar två fodersorter. Ett kilo av sort A innehåller 1 enhet protein och 1 enhet vitaminer. Ett kilo av sort B innehåller 1 enhet protein och 3 enheter vitaminer. Blandningen ska innehålla minst 6 enheter protein och minst 12 enheter vitaminer. Sort A kostar 30 kr/kg och sort B 50 kr/kg. Vad kostar den billigaste blandningen?`,
             answer: { value: 240, unit: 'kr' },
             solution: `Vi låter $x$ vara antalet kilo av sort A och $y$ antalet kilo av sort B.
 
@@ -45465,7 +45465,7 @@ Skärningspunkten: vi multiplicerar $x + y = 6$ med $-1$, så att den blir $-x -
 | $(3, 3)$ | $30 \\cdot 3 + 50 \\cdot 3 = 240$ |
 | $(12, 0)$ | $30 \\cdot 12 + 50 \\cdot 0 = 360$ |
 
-Lägst kostnad ger 3 kg av varje sort.
+Lägst kostnad ger 3 kg av varje sort.
 
 **Svar:** $240$ kr`,
         },
@@ -45852,7 +45852,7 @@ $$
         // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
-            question: `Ett belopp på 50 000 kr betalas ut om 5 år. Bestäm beloppets nuvärde om vi räknar med räntan 4 %.`,
+            question: `Ett belopp på 50 000 kr betalas ut om 5 år. Bestäm beloppets nuvärde om vi räknar med räntan 4 %.`,
             answer: { value: 41096, unit: 'kr' },
             solution: `Förändringsfaktorn för räntan 4 % är 1,04. Formeln för nuvärdet, $N = \\dfrac{B}{\\text{förändringsfaktor}^{\\,n}}$, ger
 
@@ -45878,7 +45878,7 @@ $$
         },
         {
             level: 1,
-            question: `Du sätter in 20 000 kr på ett konto med räntan 3 %. Vad är slutvärdet efter 8 år?`,
+            question: `Du sätter in 20 000 kr på ett konto med räntan 3 %. Vad är slutvärdet efter 8 år?`,
             answer: { value: 25335, unit: 'kr' },
             solution: `Förändringsfaktorn är 1,03. Formeln för slutvärdet, $B = N \\cdot \\text{förändringsfaktor}^{\\,n}$, ger
 
@@ -45891,12 +45891,12 @@ $$
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `Du får välja mellan 70 000 kr om 2 år och 80 000 kr om 4 år. Vilket alternativ är mest värt om vi räknar med räntan 3,5 %?`,
+            question: `Du får välja mellan 70 000 kr om 2 år och 80 000 kr om 4 år. Vilket alternativ är mest värt om vi räknar med räntan 3,5 %?`,
             choices: [
-                `70 000 kr om 2 år`,
+                `70 000 kr om 2 år`,
                 `Båda är lika mycket värda`,
                 `Det går inte att avgöra utan att veta beloppet i dag`,
-                `80 000 kr om 4 år`,
+                `80 000 kr om 4 år`,
             ],
             correct: 3,
             solution: `Beloppen betalas ut vid olika tidpunkter, så vi räknar om båda till nuvärden. Förändringsfaktorn är 1,035.
@@ -45909,13 +45909,13 @@ $$
 N_2 = \\frac{80\\,000}{1{,}035^4} = 69\\,715{,}378\\ldots \\approx 69\\,715
 $$
 
-Nuvärdet av 80 000 kr om 4 år är störst.
+Nuvärdet av 80 000 kr om 4 år är störst.
 
 **Svar:** 80 000 kr om 4 år`,
         },
         {
             level: 2,
-            question: `Ett företag ska få 100 000 kr om 1 år, 150 000 kr om 2 år och 200 000 kr om 3 år. Vad är betalningarna värda i dag om företaget räknar med räntan 6 %?`,
+            question: `Ett företag ska få 100 000 kr om 1 år, 150 000 kr om 2 år och 200 000 kr om 3 år. Vad är betalningarna värda i dag om företaget räknar med räntan 6 %?`,
             answer: { value: 395763, unit: 'kr' },
             solution: `Vi räknar ut nuvärdet av varje betalning för sig. Förändringsfaktorn är 1,06, och exponenten är antalet år till betalningen.
 
@@ -45942,9 +45942,9 @@ $$
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Vid vilken ränta är 120 000 kr som betalas ut om 4 år lika mycket värt som 100 000 kr i dag? Svara i procent med en decimal.`,
+            question: `Vid vilken ränta är 120 000 kr som betalas ut om 4 år lika mycket värt som 100 000 kr i dag? Svara i procent med en decimal.`,
             answer: { value: 4.7, unit: '%' },
-            solution: `De två alternativen är lika mycket värda när nuvärdet av 120 000 kr är 100 000 kr. Vi kallar förändringsfaktorn $x$.
+            solution: `De två alternativen är lika mycket värda när nuvärdet av 120 000 kr är 100 000 kr. Vi kallar förändringsfaktorn $x$.
 
 $$
 \\frac{120\\,000}{x^4} = 100\\,000
@@ -46076,7 +46076,7 @@ $$
 s_8 = \\frac{10\\,400(1{,}04^8 - 1)}{1{,}04 - 1} = 95\\,827{,}953\\ldots \\approx 95\\,828
 $$
 
-Med $a_1 = 10\\,000$ får man 92 142 kr. Det är behållningen om insättningarna görs i slutet av varje år, vilket inte är fallet här.
+Med $a_1 = 10\\,000$ får man 92 142 kr. Det är behållningen om insättningarna görs i slutet av varje år, vilket inte är fallet här.
 
 **Svar:** $95\\,828$ kr`,
         },
@@ -46163,7 +46163,7 @@ $$
 10 \\cdot 12\\,000 = 120\\,000
 $$
 
-Av det är 100 000 kr själva lånet. Resten är ränta:
+Av det är 100 000 kr själva lånet. Resten är ränta:
 
 $$
 120\\,000 - 100\\,000 = 20\\,000
@@ -46200,7 +46200,7 @@ $$
                 `$25\\,901$ kr`,
             ],
             correct: 0,
-            solution: `Vid den första betalningen är skulden hela lånebeloppet. Räntan är 5 % av skulden:
+            solution: `Vid den första betalningen är skulden hela lånebeloppet. Räntan är 5 % av skulden:
 
 $$
 0{,}05 \\cdot 200\\,000 = 10\\,000
@@ -46212,7 +46212,7 @@ $$
 25\\,901 - 10\\,000 = 15\\,901
 $$
 
-20 000 kr hade amorteringen varit med rak amortering, där lånet delas lika på de tio åren.
+20 000 kr hade amorteringen varit med rak amortering, där lånet delas lika på de tio åren.
 
 **Svar:** $15\\,901$ kr`,
         },
@@ -46261,7 +46261,7 @@ $$
         },
         {
             level: 1,
-            question: `En rätvinklig triangel har vinkeln 38° och hypotenusan 12 cm. Beräkna den motstående kateten. Avrunda till en decimal.`,
+            question: `En rätvinklig triangel har vinkeln 38° och hypotenusan 12 cm. Beräkna den motstående kateten. Avrunda till en decimal.`,
             answer: { value: 7.4, unit: 'cm', tol: 0.05 },
             solution: `Den motstående kateten och hypotenusan hör ihop via sinus.
 
@@ -46273,7 +46273,7 @@ $$
         },
         {
             level: 1,
-            question: `I en rätvinklig triangel är den motstående kateten till vinkeln $v$ 4,0 m och den närliggande kateten 6,0 m. Bestäm vinkeln $v$. Avrunda till hela grader.`,
+            question: `I en rätvinklig triangel är den motstående kateten till vinkeln $v$ 4,0 m och den närliggande kateten 6,0 m. Bestäm vinkeln $v$. Avrunda till hela grader.`,
             answer: { value: 34, unit: '°', tol: 1 },
             solution: `Motstående och närliggande katet hör ihop via tangens — vi använder dess invers.
 
@@ -46286,15 +46286,15 @@ $$
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
             level: 2,
-            question: `En stege lutar mot en vägg. Stegen är 5,0 m lång och når 4,3 m upp på väggen.<br>a) Bestäm stegens lutningsvinkel $v$ mot marken (avrunda till heltal).<br>b) Bestäm avståndet från väggen till stegens fot (avrunda till en decimal).`,
+            question: `En stege lutar mot en vägg. Stegen är 5,0 m lång och når 4,3 m upp på väggen.<br>a) Bestäm stegens lutningsvinkel $v$ mot marken (avrunda till heltal).<br>b) Bestäm avståndet från väggen till stegens fot (avrunda till en decimal).`,
             choices: [
-                `59°; 3,3 m`,
-                `59°; 2,6 m`,
-                `31°; 2,6 m`,
-                `41°; 2,6 m`,
+                `59°; 3,3 m`,
+                `59°; 2,6 m`,
+                `31°; 2,6 m`,
+                `41°; 2,6 m`,
             ],
             correct: 1,
-            solution: `**a)** Väggens höjd (4,3 m) är motstående katet till $v$ och stegen (5,0 m) är hypotenusan — vi använder sinus och dess invers.
+            solution: `**a)** Väggens höjd (4,3 m) är motstående katet till $v$ och stegen (5,0 m) är hypotenusan — vi använder sinus och dess invers.
 
 $$
 \\sin v = \\frac{4{,}3}{5{,}0} = 0{,}86 \\quad\\Rightarrow\\quad v = \\sin^{-1}(0{,}86) = 59{,}316\\ldots^\\circ \\approx 59^\\circ
@@ -46310,15 +46310,15 @@ $$
         },
         {
             level: 2,
-            question: `Från en punkt på marken 25 m från ett torn ser man tornets topp i höjdvinkeln 34°. Ögonhöjden är 1,6 m.<br>a) Bestäm höjden från ögonhöjd upp till toppen.<br>b) Bestäm tornets totala höjd över marken. Avrunda till en decimal.`,
+            question: `Från en punkt på marken 25 m från ett torn ser man tornets topp i höjdvinkeln 34°. Ögonhöjden är 1,6 m.<br>a) Bestäm höjden från ögonhöjd upp till toppen.<br>b) Bestäm tornets totala höjd över marken. Avrunda till en decimal.`,
             choices: [
-                `16,9 m; 18,5 m`,
-                `18,5 m; 16,9 m`,
-                `13,8 m; 15,4 m`,
-                `16,9 m; 16,9 m`,
+                `16,9 m; 18,5 m`,
+                `18,5 m; 16,9 m`,
+                `13,8 m; 15,4 m`,
+                `16,9 m; 16,9 m`,
             ],
             correct: 0,
-            solution: `**a)** Höjden ovanför ögat är motstående katet till höjdvinkeln och det vågräta avståndet (25 m) är närliggande katet — vi använder tangens.
+            solution: `**a)** Höjden ovanför ögat är motstående katet till höjdvinkeln och det vågräta avståndet (25 m) är närliggande katet — vi använder tangens.
 
 $$
 \\tan 34^\\circ = \\frac{h}{25} \\quad\\Leftrightarrow\\quad h = 25 \\cdot \\tan 34^\\circ = 16{,}865\\ldots \\approx 16{,}9\\ \\mathrm{m}
@@ -47949,7 +47949,7 @@ $$
         },
         {
             level: 2,
-            question: `Temperaturen i ett växthus varierar under dygnet mellan lägst 18 °C och högst 26 °C och modelleras med $y = A \\sin(Bt + C) + D$. Bestäm amplituden $A$ och jämviktsläget $D$.`,
+            question: `Temperaturen i ett växthus varierar under dygnet mellan lägst 18 °C och högst 26 °C och modelleras med $y = A \\sin(Bt + C) + D$. Bestäm amplituden $A$ och jämviktsläget $D$.`,
             choices: [
                 `$A = 4$ och $D = 44$`,
                 `$A = 4$ och $D = 22$`,
@@ -47972,7 +47972,7 @@ $$
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Tidvattnet vid en hamn modelleras med $h(t) = A \\sin(Bt + C) + D$, där $t$ är tiden i timmar (radianer). Perioden är 12 timmar och det första högvattnet (max) efter $t = 0$ inträffar vid $t = 2$ timmar. Bestäm fasförskjutningskonstanten $C$ exakt.`,
+            question: `Tidvattnet vid en hamn modelleras med $h(t) = A \\sin(Bt + C) + D$, där $t$ är tiden i timmar (radianer). Perioden är 12 timmar och det första högvattnet (max) efter $t = 0$ inträffar vid $t = 2$ timmar. Bestäm fasförskjutningskonstanten $C$ exakt.`,
             choices: [
                 `$C = \\dfrac{\\pi}{6}$`,
                 `$C = \\dfrac{\\pi}{3}$`,
@@ -50084,7 +50084,7 @@ $$
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Vatten rinner in i en tank med flödet $q(t) = 6t$ (liter/minut). Vid $t = 0$ innehåller tanken redan 5 liter. Vid vilken tidpunkt innehåller tanken 32 liter?`,
+            question: `Vatten rinner in i en tank med flödet $q(t) = 6t$ (liter/minut). Vid $t = 0$ innehåller tanken redan 5 liter. Vid vilken tidpunkt innehåller tanken 32 liter?`,
             choices: [
                 `$t = 9$ min`,
                 `$t = 3$ min`,
@@ -50092,7 +50092,7 @@ $$
                 `$t \\approx 3{,}3$ min`,
             ],
             correct: 1,
-            solution: `**Insikten:** flödet är volymändring per tid, så volymen är integralen av flödet — och begynnelsevolymen 5 liter bestämmer integrationskonstanten.
+            solution: `**Insikten:** flödet är volymändring per tid, så volymen är integralen av flödet — och begynnelsevolymen 5 liter bestämmer integrationskonstanten.
 
 Volymfunktionen fås genom att integrera flödet:
 
@@ -50100,7 +50100,7 @@ $$
 V(t) = \\int 6t\\,dt = 3t^2 + C
 $$
 
-Villkoret $V(0) = 5$ ger $C = 5$, alltså $V(t) = 3t^2 + 5$. Vi söker den tid då volymen är 32 liter:
+Villkoret $V(0) = 5$ ger $C = 5$, alltså $V(t) = 3t^2 + 5$. Vi söker den tid då volymen är 32 liter:
 
 $$
 3t^2 + 5 = 32 \\quad\\Leftrightarrow\\quad 3t^2 = 27 \\quad\\Leftrightarrow\\quad t^2 = 9 \\quad\\Leftrightarrow\\quad t = 3\\ \\text{min}
@@ -51635,7 +51635,7 @@ $$
                 `Massa`,
             ],
             correct: 0,
-            solution: `En vektoriell storhet har både storlek och riktning. En förflyttning på 500 m är inte fullständigt beskriven förrän man vet åt vilket håll den går. Massa, temperatur och energi saknar riktning och är skalära.
+            solution: `En vektoriell storhet har både storlek och riktning. En förflyttning på 500 m är inte fullständigt beskriven förrän man vet åt vilket håll den går. Massa, temperatur och energi saknar riktning och är skalära.
 
 **Svar:** Förflyttning`,
         },
@@ -51682,7 +51682,7 @@ $$
 |\\vec{F}| = \\sqrt{169} = 13
 $$
 
-Kontroll: 13 N är större än båda krafterna men mindre än $5{,}0 + 12 = 17\\ \\mathrm{N}$, precis som det ska vara när krafterna drar åt olika håll.
+Kontroll: 13 N är större än båda krafterna men mindre än $5{,}0 + 12 = 17\\ \\mathrm{N}$, precis som det ska vara när krafterna drar åt olika håll.
 
 **Svar:** 13 N`,
         },

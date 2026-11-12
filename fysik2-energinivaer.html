@@ -914,7 +914,7 @@
                 ], pad.left - 6, y, 12, nWeight, 'right');
 
                 // Energi-etikett (höger)
-                const eLabel = isInfinity ? '0 eV' : `${formatNum(e, 2)} eV`;
+                const eLabel = isInfinity ? '0 eV' : `${formatNum(e, 2)} eV`;
                 ctx.fillStyle = 'rgba(15, 22, 32, 1.00)';
                 ctx.font = '500 11px Poppins, sans-serif';
                 ctx.textAlign = 'left';
@@ -1141,7 +1141,7 @@
             const ef = energyOf(displayInfo.nf);
             const deltaE = Math.abs(ei - ef);
             const wavelength = deltaE > 0 ? HC_EV_NM / deltaE : Infinity;
-            const frequency = deltaE > 0 ? deltaE * 2.418e14 : 0; // eV → Hz via E=hf, 1 eV = 2.418e14 Hz
+            const frequency = deltaE > 0 ? deltaE * 2.418e14 : 0; // eV → Hz via E=hf, 1 eV = 2.418e14 Hz
             const isEmission = displayInfo.ni > displayInfo.nf;
             const lowerLevel = Math.min(displayInfo.ni, displayInfo.nf);
             const upperLevel = Math.max(displayInfo.ni, displayInfo.nf);
@@ -1480,7 +1480,7 @@
                                     <div className="text-xl text-slate-500">=</div>
                                     <div className="flex flex-col items-center">
                                         <div className="text-xs font-semibold mb-1" style={{width:0, display:'flex', justifyContent:'center', whiteSpace:'nowrap'}}>Rydbergs energi</div>
-                                        <div className="text-2xl font-bold" style={{padding:'0 3px'}}>−13,6 eV</div>
+                                        <div className="text-2xl font-bold" style={{padding:'0 3px'}}>−13,6 eV</div>
                                         <div style={{borderTop:'2px solid currentColor', marginTop:'3px', paddingTop:'3px', alignSelf:'stretch', textAlign:'center'}}>
                                             <div className="text-2xl font-bold"><em>n</em>²</div>
                                         </div>
@@ -1841,8 +1841,8 @@
                                     />
                                 </div>
                                 <p className="text-xs text-slate-500 mt-3">
-                                    Väteatomens Balmer-serie ger de synliga linjerna <em>H-α</em> (656 nm, röd),
-                                    <em> H-β</em> (486 nm, cyan), <em>H-γ</em> (434 nm, violett), <em>H-δ</em> (410 nm, violett)…
+                                    Väteatomens Balmer-serie ger de synliga linjerna <em>H-α</em> (656 nm, röd),
+                                    <em> H-β</em> (486 nm, cyan), <em>H-γ</em> (434 nm, violett), <em>H-δ</em> (410 nm, violett)…
                                     De är fingeravtrycket för väte i stjärnors spektrum.
                                 </p>
                             </div>
@@ -1887,21 +1887,21 @@
                                         <span className="w-2.5 h-2.5 rounded-full" style={{ background: SERIES[1].accent }}></span>
                                         <strong className="text-slate-200">Lyman-serien</strong>
                                     </div>
-                                    <p className="text-slate-400 text-xs">Alla hopp till <em>n</em>=1. Ligger i ultraviolett (91–122 nm).</p>
+                                    <p className="text-slate-400 text-xs">Alla hopp till <em>n</em>=1. Ligger i ultraviolett (91–122 nm).</p>
                                 </div>
                                 <div className="glass-card-inner p-3">
                                     <div className="flex items-center gap-2 mb-1">
                                         <span className="w-2.5 h-2.5 rounded-full" style={{ background: SERIES[2].accent }}></span>
                                         <strong className="text-slate-200">Balmer-serien</strong>
                                     </div>
-                                    <p className="text-slate-400 text-xs">Alla hopp till <em>n</em>=2. Ligger i synligt ljus + nära UV (365–656 nm).</p>
+                                    <p className="text-slate-400 text-xs">Alla hopp till <em>n</em>=2. Ligger i synligt ljus + nära UV (365–656 nm).</p>
                                 </div>
                                 <div className="glass-card-inner p-3">
                                     <div className="flex items-center gap-2 mb-1">
                                         <span className="w-2.5 h-2.5 rounded-full" style={{ background: SERIES[3].accent }}></span>
                                         <strong className="text-slate-200">Paschen-serien</strong>
                                     </div>
-                                    <p className="text-slate-400 text-xs">Alla hopp till <em>n</em>=3. Ligger i infrarött (820 nm och längre).</p>
+                                    <p className="text-slate-400 text-xs">Alla hopp till <em>n</em>=3. Ligger i infrarött (820 nm och längre).</p>
                                 </div>
                             </div>
                         </div>

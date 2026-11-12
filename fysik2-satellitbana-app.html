@@ -240,7 +240,7 @@
         const MMIN = 100, MMAX = 50000;        // satellitens massa (kg)
         const TLMIN = 1, TLMAX = 3.6;          // log10 av tidsförkortningen (10× till 4 000×)
         const R_ESCAPE = 60 * RJ;              // bortom detta räknas satelliten som försvunnen
-        const T_SID = 86164;                   // stjärndygnet: jordens rotationstid, 23 h 56 min 4 s
+        const T_SID = 86164;                   // stjärndygnet: jordens rotationstid, 23 h 56 min 4 s
 
         const fmt = (num, decimals = 1) => {
             if (!isFinite(num)) return '–';
@@ -800,11 +800,11 @@ const KONTINENTER = [
 
         // Färdiga försök: höjd (km), fart (m/s), massa (kg)
         const PRESETS = [
-            { id: 'hubble', namn: 'Hubble', h: 590, v: 7560, m: 11110, text: 'Rymdteleskopet Hubble, exemplet i genomgången: 7 560 m/s på 590 km höjd.' },
-            { id: 'iss', namn: 'Rymdstationen ISS', h: 420, v: null, m: 420000, text: 'Den internationella rymdstationen på 420 km höjd, ett varv på drygt 90 minuter.' },
-            { id: 'gps', namn: 'GPS-satellit', h: 20200, v: null, m: 1630, text: 'En GPS-satellit på 20 200 km höjd går två varv om dygnet.' },
-            { id: 'geo', namn: 'Geostationär', h: 35786, v: null, m: 3500, text: 'På 35 786 km höjd tar ett varv lika lång tid som jordens rotation, 23 h 56 min: satelliten står stilla över samma punkt på ekvatorn. Förstora bilden och följ kontinenten under satelliten när jorden snurrar.' },
-            { id: 'mane', namn: 'Månens avstånd', h: 378000, v: 1020, m: 50000, text: 'En satellit på månens avstånd, 384 400 km från jordens medelpunkt, behöver bara 1 020 m/s och tar 27 dygn på ett varv.' },
+            { id: 'hubble', namn: 'Hubble', h: 590, v: 7560, m: 11110, text: 'Rymdteleskopet Hubble, exemplet i genomgången: 7 560 m/s på 590 km höjd.' },
+            { id: 'iss', namn: 'Rymdstationen ISS', h: 420, v: null, m: 420000, text: 'Den internationella rymdstationen på 420 km höjd, ett varv på drygt 90 minuter.' },
+            { id: 'gps', namn: 'GPS-satellit', h: 20200, v: null, m: 1630, text: 'En GPS-satellit på 20 200 km höjd går två varv om dygnet.' },
+            { id: 'geo', namn: 'Geostationär', h: 35786, v: null, m: 3500, text: 'På 35 786 km höjd tar ett varv lika lång tid som jordens rotation, 23 h 56 min: satelliten står stilla över samma punkt på ekvatorn. Förstora bilden och följ kontinenten under satelliten när jorden snurrar.' },
+            { id: 'mane', namn: 'Månens avstånd', h: 378000, v: 1020, m: 50000, text: 'En satellit på månens avstånd, 384 400 km från jordens medelpunkt, behöver bara 1 020 m/s och tar 27 dygn på ett varv.' },
         ];
 
         // ── Huvudapp ─────────────────────────────────────────────
@@ -972,7 +972,7 @@ const KONTINENTER = [
                         valueNode={<NumInput value={m} min={1} max={null} fmtFn={(x) => fmtNum(x, 0)} unit="kg" onCommit={setM} />} />
                     <St label="Tidsförkortning" value={tl} min={TLMIN} max={TLMAX} step={0.02}
                         onChange={setTl}
-                        valueNode={<span className="num-unit">1 s = {fmtTid(tidsfaktor)}</span>} />
+                        valueNode={<span className="num-unit">1 s = {fmtTid(tidsfaktor)}</span>} />
                     <St label="Förstoring" value={zoom} min={1} max={4} step={0.1}
                         onChange={setZoom}
                         valueNode={<span className="num-unit">{fmt(zoom, 1)}×</span>} />

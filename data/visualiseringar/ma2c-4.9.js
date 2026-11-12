@@ -323,8 +323,8 @@
             2: 'Topptriangeln <em>ADE</em> är likformig med hela triangeln <em>ABC</em> — samma form, ' +
                'bara mindre. Tryck på knappen för att lyfta ut en kopia av <em>ADE</em> och jämföra ' +
                'den, i samma skala, med <em>ABC</em>.',
-            3: 'Testa genomgångens exempel: en parallelltransversal delar <em>AB</em> i 4 cm och 8 cm. ' +
-               'Hur långt är <em>AE</em> = <em>x</em> när <em>EC</em> = 10 cm? Tryck på knappen — ' +
+            3: 'Testa genomgångens exempel: en parallelltransversal delar <em>AB</em> i 4 cm och 8 cm. ' +
+               'Hur långt är <em>AE</em> = <em>x</em> när <em>EC</em> = 10 cm? Tryck på knappen — ' +
                'figuren snäpper till exemplets mått och lösningen visas steg för steg. Dra sedan ' +
                'vidare i figuren: proportionen håller ändå.'
         };
@@ -607,7 +607,7 @@
             if (state.exampleShown) {
                 katexInto(exK1, '\\dfrac{x}{10} = \\dfrac{4}{8}');
                 katexInto(exK2, 'x = \\dfrac{4}{8} \\cdot 10 = 5');
-                exAnswer.innerHTML = '<strong>Svar:</strong> <em>x</em> = 5 cm';
+                exAnswer.innerHTML = '<strong>Svar:</strong> <em>x</em> = 5 cm';
                 katexInto(exAlt, '\\dfrac{4}{4+8} = \\dfrac{x}{x+10} \\implies x = 5');
             }
         }

@@ -51,7 +51,7 @@ window.REPETITION['fy2-2'] = {
             instruktion: 'Ordna ljuden från lägst till högst frekvens. Dra brickorna till rätt plats (eller klicka på två för att byta plats) och tryck sedan på Kontrollera.',
             etikettStart: 'lägst frekvens',
             etikettSlut: 'högst frekvens',
-            items: ['10 Hz (infraljud)', '440 Hz (kammartonen A)', '4 000 Hz (örats känsligaste område)', '18 000 Hz (ljus diskant)', '25 000 Hz (ultraljud)'],
+            items: ['10 Hz (infraljud)', '440 Hz (kammartonen A)', '4 000 Hz (örats känsligaste område)', '18 000 Hz (ljus diskant)', '25 000 Hz (ultraljud)'],
         },
         {
             type: 'blixt',

@@ -608,7 +608,7 @@
                     <rect x={xh} y="-10" width={DB} height="20" rx="5" fill="#e5e9ee" stroke="#7b8594" strokeWidth="1.4" />
                     <rect x={xh + DB - 18} y="-10" width="8" height="20" fill="#c8324a" opacity="0.85" />
                     <text x={xh + 30} y="4.5" fontSize="12" fontWeight="700" fill="#4b5563" fontFamily="Poppins, sans-serif" textAnchor="middle"
-                          transform={uppochner ? `rotate(180 ${xh + 30} 0)` : undefined}>0–20 N</text>
+                          transform={uppochner ? `rotate(180 ${xh + 30} 0)` : undefined}>0–20 N</text>
                 </g>
             );
         };
@@ -1082,10 +1082,10 @@
         //  FÄRDIGA FÖRSÖK OCH GISSA-LÄGET
         // ════════════════════════════════════════════════════════
         const FORSOK = [
-            { id: 'ex1',   namn: 'Exempel 1', sub: '1,0 kg och 3,0 kg över bordet', cfg: { u: 'bord', m1: 1, m2: 3, mv: 1, mu: 0 } },
+            { id: 'ex1',   namn: 'Exempel 1', sub: '1,0 kg och 3,0 kg över bordet', cfg: { u: 'bord', m1: 1, m2: 3, mv: 1, mu: 0 } },
             { id: 'lika',  namn: 'Lika tunga', sub: 'står still, spännkraften är lika med tyngden', cfg: { u: 'bord', m1: 2, m2: 2, mv: 1, mu: 0 } },
-            { id: 'atw',   namn: 'Nästan lika tunga', sub: 'Atwood: 1,00 och 1,05 kg', cfg: { u: 'atwood', m1: 1, m2: 1.05, mv: 1, mu: 0 } },
-            { id: 'tung',  namn: 'Tung kloss, lätt vikt', sub: '3,0 kg och 0,2 kg', cfg: { u: 'vagn', m1: 1, m2: 0.2, mv: 3, mu: 0 } },
+            { id: 'atw',   namn: 'Nästan lika tunga', sub: 'Atwood: 1,00 och 1,05 kg', cfg: { u: 'atwood', m1: 1, m2: 1.05, mv: 1, mu: 0 } },
+            { id: 'tung',  namn: 'Tung kloss, lätt vikt', sub: '3,0 kg och 0,2 kg', cfg: { u: 'vagn', m1: 1, m2: 0.2, mv: 3, mu: 0 } },
             { id: 'fast',  namn: 'Friktionen håller emot', sub: 'klossen står kvar', cfg: { u: 'vagn', m1: 1, m2: 0.5, mv: 2, mu: 0.3 } },
             { id: 'tre',   namn: 'Tre föremål', sub: 'två snören, två spännkrafter', cfg: { u: 'tre', m1: 1, m2: 2, mv: 2, mu: 0 } },
         ];

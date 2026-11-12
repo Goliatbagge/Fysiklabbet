@@ -50,7 +50,7 @@ window.REPETITION['fy2-3'] = {
             instruktion: 'Ordna magnetfälten från svagast till starkast. Dra brickorna till rätt plats (eller klicka på två för att byta plats) och tryck sedan på Kontrollera.',
             etikettStart: 'svagast',
             etikettSlut: 'starkast',
-            items: ['Jordmagnetiska fältet (~50 μT)', 'Kylskåpsmagnet (~5 mT)', 'Inuti en spole/transformator (~1 T)', 'Starkaste människan skapat (1 200 T)', 'Starkast observerade, en magnetar (~100 GT)'],
+            items: ['Jordmagnetiska fältet (~50 μT)', 'Kylskåpsmagnet (~5 mT)', 'Inuti en spole/transformator (~1 T)', 'Starkaste människan skapat (1 200 T)', 'Starkast observerade, en magnetar (~100 GT)'],
         },
         {
             type: 'blixt',

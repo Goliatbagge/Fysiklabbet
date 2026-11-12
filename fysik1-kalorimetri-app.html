@@ -389,11 +389,11 @@
     // Sista biten: kropparna får exakt samma temperatur, med samma totala energi.
     function utjamna(st) {
         const A = st.A, B = st.B, H = A.H + B.H;
-        const Hfast = 0, Hflyt = A.L + B.L;               // summan vid 0 °C, före och efter smältningen
+        const Hfast = 0, Hflyt = A.L + B.L;               // summan vid 0 °C, före och efter smältningen
         let T;
         if (H < Hfast) T = H / (A.Cs + B.Cs);
         else if (H > Hflyt) T = (H - Hflyt) / (A.Cl + B.Cl);
-        else {                                            // smältningen pågår: båda vid exakt 0 °C
+        else {                                            // smältningen pågår: båda vid exakt 0 °C
             B.H = Math.min(B.L, H);
             A.H = H - B.H;
             return;
@@ -515,7 +515,7 @@
             const n = namn(lage);
             const lagg = (k, E, farg, upp, av) => { if (Math.abs(E) > 0.5) ut.push({ k, E, farg, text: E > 0 ? upp : av }); };
             if (lage === 'is') {
-                lagg('Afast', e.A.fast, COL.isVarm, 'isen värms till 0 °C', 'isen svalnar');
+                lagg('Afast', e.A.fast, COL.isVarm, 'isen värms till 0 °C', 'isen svalnar');
                 lagg('Afas', e.A.fas, COL.smalt, 'isen smälter', 'vattnet fryser till is');
                 lagg('Aflyt', e.A.flyt, COL.kall, 'smältvattnet värms', 'smältvattnet svalnar');
                 lagg('Bflyt', e.B.flyt, COL.varm, 'vattnet värms', 'vattnet svalnar');
@@ -645,7 +645,7 @@
                             return <circle key={i} cx={64 + i * 26} cy={536 - fase * 80} r={2 + fase * 3} fill="none" stroke="rgba(255,255,255,0.85)" strokeWidth="1.3" />;
                         })}
                         <rect x="40" y="546" width="156" height="14" rx="3" fill="#374151" />
-                        <text x="118" y={BANK + 24} textAnchor="middle" fontSize="13" fill={COL.soft}>kokande vatten, 100 °C</text>
+                        <text x="118" y={BANK + 24} textAnchor="middle" fontSize="13" fill={COL.soft}>kokande vatten, 100 °C</text>
                         {fas === 'fore' && <text x="118" y="410" textAnchor="middle" fontSize="13" fill={COL.soft}>{doljMetall ? 'okänd metall' : M.METALLER[A.typ].namn.toLowerCase()}, {kg(A.m)} kg</text>}
                     </g>
                 );
@@ -907,12 +907,12 @@
                     {fryser && ideal.T < -1e-9 ? <span>Isen är så kall och så stor att allt vatten fryser till is. Sluttemperaturen blir <em>T</em> = {Ttxt}.</span>
                     : fryser ? <span><Sub s="c" i="is" /> · <Sub s="m" i="is" /> · <Sub s="ΔT" i="is" /> = <Sub s="c" i="v" /> · <Sub s="m" i="v" /> · <Sub s="ΔT" i="v" /> + <Sub s="l" i="s" /> · <Sub s="m" i="fruset" />{' '}
                         ger {tal(2200, 0)} · {kg(A.m)} · {fmt(-A.T, 0)} = {tal(4180, 0)} · {kg(B.m)} · {fmt(B.T, 0)} + {tal(334000, 0)} · <Sub s="m" i="fruset" />,
-                        alltså <Sub s="m" i="fruset" /> = {dolj ? '?' : `${fmt(-ideal.smaltMassa, 3)} kg`} och <em>T</em> = 0 °C. En del av vattnet fryser till is.</span>
+                        alltså <Sub s="m" i="fruset" /> = {dolj ? '?' : `${fmt(-ideal.smaltMassa, 3)} kg`} och <em>T</em> = 0 °C. En del av vattnet fryser till is.</span>
                     : helt ? <span><Sub s="c" i="v" /> · <Sub s="m" i="v" /> · <Sub s="ΔT" i="v" /> = <Sub s="c" i="is" /> · <Sub s="m" i="is" /> · <Sub s="ΔT" i="is" /> + <Sub s="l" i="s" /> · <Sub s="m" i="is" /> + <Sub s="c" i="v" /> · <Sub s="m" i="is" /> · <em>T</em>{' '}
                         ger {tal(4180, 0)} · {kg(B.m)} · ({fmt(B.T, 0)} − <em>T</em>) = {tal(2200, 0)} · {kg(A.m)} · {fmt(-A.T, 0)} + {tal(334000, 0)} · {kg(A.m)} + {tal(4180, 0)} · {kg(A.m)} · <em>T</em>, alltså <em>T</em> = {Ttxt}. All is smälter.</span>
                     : <span><Sub s="c" i="v" /> · <Sub s="m" i="v" /> · <Sub s="ΔT" i="v" /> = <Sub s="c" i="is" /> · <Sub s="m" i="is" /> · <Sub s="ΔT" i="is" /> + <Sub s="l" i="s" /> · <Sub s="m" i="smältis" />{' '}
                         ger {tal(4180, 0)} · {kg(B.m)} · {fmt(B.T, 0)} = {tal(2200, 0)} · {kg(A.m)} · {fmt(-A.T, 0)} + {tal(334000, 0)} · <Sub s="m" i="smältis" />,
-                        alltså <Sub s="m" i="smältis" /> = {dolj ? '?' : `${fmt(ideal.smaltMassa, 3)} kg`} och <em>T</em> = 0 °C. Vattnets energi räcker inte för att smälta all is.</span>}
+                        alltså <Sub s="m" i="smältis" /> = {dolj ? '?' : `${fmt(ideal.smaltMassa, 3)} kg`} och <em>T</em> = 0 °C. Vattnets energi räcker inte för att smälta all is.</span>}
                 </div>;
             }
             return (
@@ -946,9 +946,9 @@
                         {dolj ? <div>Räkna ut sluttemperaturen innan du blandar.</div> : rad}
                         <div className="mt-1 text-base" style={{ color: 'var(--lab-ink-soft)' }}>
                             {lage === 'is'
-                                ? 'Medan isen smälter står temperaturen still vid 0 °C. Energin går till att bryta bindningarna i isen, inte till att höja temperaturen.'
+                                ? 'Medan isen smälter står temperaturen still vid 0 °C. Energin går till att bryta bindningarna i isen, inte till att höja temperaturen.'
                                 : <span>Utan energiförluster är den avgivna energin lika stor som den upptagna. Här är <span style={{ whiteSpace: 'nowrap' }}><em>c</em> · <em>m</em></span> = {doljMetall ? '?' : tal(M.METALLER[A.typ] ? M.METALLER[A.typ].c * A.m : 4180 * A.m, 0)} J/K för {namn(lage).A} och {tal(4180 * B.m, 0)} J/K för {namn(lage).B}: det som har störst <span style={{ whiteSpace: 'nowrap' }}><em>c</em> · <em>m</em></span> behöver mest energi för varje grad och ändrar därför temperatur minst. Sluttemperaturen hamnar närmast dess starttemperatur.</span>}
-                            {' '}<em>c</em> för vatten är 4,18 kJ/(kg · K){lage === 'is' ? <span>, <em>c</em> för is 2,2 kJ/(kg · K) och <Sub s="l" i="s" /> för is 334 kJ/kg</span> : ''}.
+                            {' '}<em>c</em> för vatten är 4,18 kJ/(kg · K){lage === 'is' ? <span>, <em>c</em> för is 2,2 kJ/(kg · K) och <Sub s="l" i="s" /> för is 334 kJ/kg</span> : ''}.
                         </div>
                     </div>
                 </div>
@@ -959,12 +959,12 @@
         //  FÄRDIGA FÖRSÖK OCH GISSA-LÄGET
         // ════════════════════════════════════════════════════════
         const FORSOK = [
-            { id: 'ex2',    namn: 'Exempel 2 i teorin', sub: 'Uppvärmning och avsvalning: 5,0 dl vid 80 °C i 3,0 dl vid 20 °C', lage: 'vatten', p: { mV: 0.5, TV: 80, mK: 0.3, TK: 20 } },
-            { id: 'lika',   namn: 'Lika mycket av varje', sub: '0,30 kg vid 80 °C och vid 20 °C', lage: 'vatten', p: { mV: 0.3, TV: 80, mK: 0.3, TK: 20 } },
-            { id: 'koppar', namn: 'Kopparbit i vatten', sub: '0,10 kg koppar i 0,30 kg vatten', lage: 'metall', p: { metall: 'koppar', mM: 0.1, mW: 0.3, TW: 20 } },
+            { id: 'ex2',    namn: 'Exempel 2 i teorin', sub: 'Uppvärmning och avsvalning: 5,0 dl vid 80 °C i 3,0 dl vid 20 °C', lage: 'vatten', p: { mV: 0.5, TV: 80, mK: 0.3, TK: 20 } },
+            { id: 'lika',   namn: 'Lika mycket av varje', sub: '0,30 kg vid 80 °C och vid 20 °C', lage: 'vatten', p: { mV: 0.3, TV: 80, mK: 0.3, TK: 20 } },
+            { id: 'koppar', namn: 'Kopparbit i vatten', sub: '0,10 kg koppar i 0,30 kg vatten', lage: 'metall', p: { metall: 'koppar', mM: 0.1, mW: 0.3, TW: 20 } },
             { id: 'okand',  namn: 'Den okända metallen', sub: 'räkna ut c och slå upp metallen', lage: 'metall', p: { metall: 'okand', mM: 0.2, mW: 0.2, TW: 20 } },
             { id: 'isex',   namn: 'Is i varmt vatten', sub: 'Exempel 2 i Faser och fasövergångar', lage: 'is', p: { mW2: 1.0, TW2: 56, mIs: 2.0, TIs: -8 } },
-            { id: 'isbit',  namn: 'En isbit i ett glas', sub: '50 g is vid −18 °C, 0,30 kg vatten', lage: 'is', p: { mW2: 0.3, TW2: 20, mIs: 0.05, TIs: -18 } },
+            { id: 'isbit',  namn: 'En isbit i ett glas', sub: '50 g is vid −18 °C, 0,30 kg vatten', lage: 'is', p: { mW2: 0.3, TW2: 20, mIs: 0.05, TIs: -18 } },
         ];
         const slump = (a) => a[Math.floor(Math.random() * a.length)];
         function nyUppgift(typ) {
@@ -1300,7 +1300,7 @@
                                 <div className="glass-card rounded-xl p-3 mb-3">
                                     {!isFullscreen && reglage(Slider, false)}
                                     {isFullscreen && <p className="text-xs mb-2" style={{ color: 'var(--lab-ink-soft)' }}>Reglagen finns i rutan uppe till höger i fullskärm.</p>}
-                                    {lage === 'metall' && <p className="text-xs mb-2" style={{ color: 'var(--lab-ink-soft)' }}>Metallbiten har värmts i kokande vatten, så den har temperaturen 100 °C.</p>}
+                                    {lage === 'metall' && <p className="text-xs mb-2" style={{ color: 'var(--lab-ink-soft)' }}>Metallbiten har värmts i kokande vatten, så den har temperaturen 100 °C.</p>}
                                     <div className="flex gap-2 mt-2">{knappar('flex-1')}</div>
                                     <label className="flex items-center gap-2 text-sm mt-2" style={{ color: 'var(--lab-ink)' }}>
                                         <input type="checkbox" checked={forlust} disabled={las} onChange={() => setForlust((x) => !x)} /> Med värmeförluster (koppen värms och energi läcker ut)
@@ -1335,8 +1335,8 @@
                                                 {gissa.typ === 'slut'
                                                     ? (gissa.lage === 'vatten'
                                                         ? <span>{kg(gissa.p.mV)} kg vatten med temperaturen {fmt(gissa.p.TV, 0)} °C hälls i {kg(gissa.p.mK)} kg vatten med temperaturen {fmt(gissa.p.TK, 0)} °C. Vad blir sluttemperaturen?</span>
-                                                        : <span>En bit {M.METALLER[gissa.p.metall].namn.toLowerCase()} på {kg(gissa.p.mM)} kg värms till 100 °C och sänks ned i {kg(gissa.p.mW)} kg vatten med temperaturen {fmt(gissa.p.TW, 0)} °C. Vad blir sluttemperaturen? <em>c</em> för {M.METALLER[gissa.p.metall].namn.toLowerCase()} är {fmt(M.METALLER[gissa.p.metall].c / 1000, 2)} kJ/(kg · K).</span>)
-                                                    : <span>En okänd metallbit på {kg(gissa.p.mM)} kg har värmts till 100 °C och sänks ned i {kg(gissa.p.mW)} kg vatten med temperaturen {fmt(gissa.p.TW, 0)} °C. Läs av sluttemperaturen, räkna ut metallens specifika värmekapacitet och välj metall.</span>}
+                                                        : <span>En bit {M.METALLER[gissa.p.metall].namn.toLowerCase()} på {kg(gissa.p.mM)} kg värms till 100 °C och sänks ned i {kg(gissa.p.mW)} kg vatten med temperaturen {fmt(gissa.p.TW, 0)} °C. Vad blir sluttemperaturen? <em>c</em> för {M.METALLER[gissa.p.metall].namn.toLowerCase()} är {fmt(M.METALLER[gissa.p.metall].c / 1000, 2)} kJ/(kg · K).</span>)
+                                                    : <span>En okänd metallbit på {kg(gissa.p.mM)} kg har värmts till 100 °C och sänks ned i {kg(gissa.p.mW)} kg vatten med temperaturen {fmt(gissa.p.TW, 0)} °C. Läs av sluttemperaturen, räkna ut metallens specifika värmekapacitet och välj metall.</span>}
                                             </p>
                                             {gissa.typ === 'slut' ? (
                                                 <div className="flex items-center gap-2 mb-2">
@@ -1379,7 +1379,7 @@
                             <div className="glass-card rounded-xl p-4">
                                 <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Vattnets temperatur ändras minst</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                    Vatten har en ovanligt stor specifik värmekapacitet, 4,18 kJ/(kg · K), ungefär tio gånger så stor som koppars.
+                                    Vatten har en ovanligt stor specifik värmekapacitet, 4,18 kJ/(kg · K), ungefär tio gånger så stor som koppars.
                                     Därför ändras vattnets temperatur bara lite när en het metallbit sänks ned i det, medan metallbiten svalnar nästan
                                     ända ned till vattnets temperatur.
                                 </p>
@@ -1387,8 +1387,8 @@
                             <div className="glass-card rounded-xl p-4">
                                 <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Is kyler mer än kallt vatten</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                    Att smälta ett kilogram is kräver 334 kJ. Det räcker för att värma ett kilogram vatten 80 grader. Därför kyler
-                                    en isbit en dryck mycket mer än samma massa iskallt vatten, och temperaturen står still vid 0 °C så länge det finns is kvar.
+                                    Att smälta ett kilogram is kräver 334 kJ. Det räcker för att värma ett kilogram vatten 80 grader. Därför kyler
+                                    en isbit en dryck mycket mer än samma massa iskallt vatten, och temperaturen står still vid 0 °C så länge det finns is kvar.
                                 </p>
                             </div>
                         </div>
@@ -1404,7 +1404,7 @@
                                     för att det tar emot energi.</li>
                                 <li><strong>”Metallbiten och vattnet ändrar temperatur lika mycket.”</strong> Nej. Metallbiten avger lika mycket energi som vattnet tar upp, men vattnet
                                     har oftast mycket större <em>c</em> · <em>m</em> och behöver därför mer energi för varje grad, så dess temperatur ändras mindre.</li>
-                                <li><strong>”Isen blir varmare medan den smälter.”</strong> Nej. Under smältningen står temperaturen still vid 0 °C. Energin går
+                                <li><strong>”Isen blir varmare medan den smälter.”</strong> Nej. Under smältningen står temperaturen still vid 0 °C. Energin går
                                     åt till att bryta bindningarna mellan vattenmolekylerna i isen.</li>
                                 <li><strong>”En mätning som ger lite för låg temperatur är fel.”</strong> Nej. När blandningen är varmare än rummet visar den att energi har gått till kalorimeterns
                                     kopp och ut till rummet. Därför gör man mätningen snabbt och med god isolering.</li>

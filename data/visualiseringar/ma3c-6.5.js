@@ -204,8 +204,8 @@
             'font-family': 'DM Sans, system-ui, sans-serif',
             role: 'img',
             'aria-label': 'Graf över arean T som funktion av vinkeln C mellan 0 ' +
-                'och 180 grader — en sinuskurva skalad med ab genom två, med max ' +
-                'vid 90 grader. En punkt visar aktuell vinkel.'
+                'och 180 grader — en sinuskurva skalad med ab genom två, med max ' +
+                'vid 90 grader. En punkt visar aktuell vinkel.'
         });
         svg2.classList.add('lab-graf-svg');
         svg2.style.cursor = 'default';
@@ -788,7 +788,7 @@
                 var isEx2b = calc.a === EX2_A && calc.b === EX2_B && Math.abs(calc.angleC - EX2_C2) < 0.05;
                 if (isEx1) {
                     katexInto(formelB, 'T = \\dfrac{a\\,b\\sin C}{2} = \\dfrac{11\\cdot 8\\sin 80^\\circ}{2} \\approx 43{,}331\\ldots \\approx 43{,}3\\ \\text{cm}^2');
-                    note.innerHTML = 'Genomgångens Exempel 1 — den kända vinkeln kallas där <em>A</em> (mellanliggande till sidorna 11 cm och 8 cm). Här heter samma mellanliggande vinkel <em>C</em>, men det är exakt samma formel och samma tal.';
+                    note.innerHTML = 'Genomgångens Exempel 1 — den kända vinkeln kallas där <em>A</em> (mellanliggande till sidorna 11 cm och 8 cm). Här heter samma mellanliggande vinkel <em>C</em>, men det är exakt samma formel och samma tal.';
                 } else if (isEx2a || isEx2b) {
                     katexInto(formelB, '10 = \\dfrac{4{,}0\\cdot 12{,}0\\sin C}{2} \\iff \\sin C = \\dfrac{2\\cdot 10}{4{,}0\\cdot 12{,}0} = 0{,}416\\ldots');
                     katexInto(formelC, 'C_1 = \\sin^{-1}(0{,}416\\ldots) \\approx 24{,}624\\ldots^\\circ \\approx 25^\\circ');
@@ -797,7 +797,7 @@
                     formelD.style.display = '';
                     note.innerHTML = isEx2a
                         ? 'Denna triangel visar den spetsiga lösningen <em>C</em>₁ ≈ 25°.'
-                        : 'Denna triangel visar den trubbiga lösningen <em>C</em>₂ ≈ 155°. Båda vinklarna ger <strong>exakt samma area</strong>, 10 cm² — precis den symmetri i sinuskurvan som steg 2 visade (sin<em>C</em> = sin(180° − <em>C</em>)).';
+                        : 'Denna triangel visar den trubbiga lösningen <em>C</em>₂ ≈ 155°. Båda vinklarna ger <strong>exakt samma area</strong>, 10 cm² — precis den symmetri i sinuskurvan som steg 2 visade (sin<em>C</em> = sin(180° − <em>C</em>)).';
                 } else {
                     katexInto(formelB, 'T = \\dfrac{' + aT + '\\cdot ' + bT + '\\sin ' + angT + '^\\circ}{2} \\approx ' + TT + '\\ \\text{a.e.}');
                     note.innerHTML = 'Tryck på en av exempel-knapparna, eller experimentera med dina egna värden på <em>a</em>, <em>b</em> och vinkeln <em>C</em>.';

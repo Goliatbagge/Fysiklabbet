@@ -428,7 +428,7 @@ function fmtDur(min) {
 function fmtTid(t) {
     const sign = t < -1 / 120 ? '−' : '+';
     const a = Math.abs(t);
-    if (Math.round(a * 60) === 0) return '0 s';
+    if (Math.round(a * 60) === 0) return '0 s';
     return sign + fmtDur(a);
 }
 

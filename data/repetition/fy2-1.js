@@ -52,7 +52,7 @@ window.REPETITION['fy2-1'] = {
             instruktion: 'Ordna rotationerna från lägst till högst frekvens. Dra brickorna till rätt plats (eller klicka på två för att byta plats) och tryck sedan på Kontrollera.',
             etikettStart: 'lägst frekvens',
             etikettSlut: 'högst frekvens',
-            items: ['0,5 Hz', '10 rad/s', '2 varv/s', '180 varv/min', '900 varv/min'],
+            items: ['0,5 Hz', '10 rad/s', '2 varv/s', '180 varv/min', '900 varv/min'],
         },
         {
             type: 'blixt',

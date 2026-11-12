@@ -29,19 +29,19 @@ window.NP_PROV['ma1c-ht2016'] = {
         'A minst 64 poäng varav 13 på A-nivå.',
     delprov: {
         B: {
-            tid: '60 minuter',
+            tid: '60 minuter',
             hjalpmedel: 'Formelblad och linjal — inga digitala verktyg',
             hjalpmedelKort: 'Utan digitala verktyg',
             beskrivning: 'De flesta uppgifter kräver endast svar; några kräver en kort redovisning.',
         },
         C: {
-            tid: '60 minuter',
+            tid: '60 minuter',
             hjalpmedel: 'Digitala verktyg, formelblad och linjal',
             hjalpmedelKort: 'Digitala verktyg tillåtna',
             beskrivning: 'En enda större uppgift där lösningen ska redovisas och motiveras.',
         },
         D: {
-            tid: '120 minuter',
+            tid: '120 minuter',
             hjalpmedel: 'Digitala verktyg, formelblad och linjal',
             hjalpmedelKort: 'Digitala verktyg tillåtna',
             beskrivning: 'Flera uppgifter; lösningarna ska oftast redovisas och motiveras.',
@@ -626,13 +626,13 @@ window.NP_PROV['ma1c-ht2016'] = {
             figur: null,
             steg: [
                 {
-                    rubrik: 'Beräkna bromssträckan vid 50 km/h',
+                    rubrik: 'Beräkna bromssträckan vid 50 km/h',
                     varfor: 'Vi räknar ut de två bromssträckorna var för sig och jämför dem sedan. ' +
                         'Sätt in $v = 50$ i formeln.',
                     text: '$$s = \\dfrac{50^2}{200} = \\dfrac{2\\,500}{200} = 12{,}5\\ \\text{m}$$',
                 },
                 {
-                    rubrik: 'Beräkna bromssträckan vid 70 km/h',
+                    rubrik: 'Beräkna bromssträckan vid 70 km/h',
                     text: '$$s = \\dfrac{70^2}{200} = \\dfrac{4\\,900}{200} = 24{,}5\\ \\text{m}$$',
                 },
                 {
@@ -670,7 +670,7 @@ window.NP_PROV['ma1c-ht2016'] = {
                     figur: 'u20-los-a',
                 },
                 {
-                    del: 'a', rubrik: 'Ta 82 % av totalen',
+                    del: 'a', rubrik: 'Ta 82 % av totalen',
                     varfor: 'Spam utgör $82\\ \\%$ av alla mejl. $82\\ \\%$ som förändringsfaktor är $0{,}82$.',
                     text: '$$0{,}82 \\cdot 190 \\approx 156\\ \\text{miljarder spam per dag}$$\n\n' +
                         '(Ett svar i intervallet $148$–$160$ miljarder godtas, eftersom avläsningen är ungefärlig.)',

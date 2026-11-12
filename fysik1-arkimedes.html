@@ -250,7 +250,7 @@
         const SPOUT_Y1 = 372, SPOUT_Y2 = 390;   // pipöppningen i höger vägg
         const BK_IL = 562, BK_IR = 642;     // uppsamlingsbägarens inre kanter
         const BK_RIM = 404, BK_FLOOR = 472; // bägarens rand och inre botten
-        const BK_MAXH = 56;                 // px vattenhöjd vid 1 000 cm³
+        const BK_MAXH = 56;                 // px vattenhöjd vid 1 000 cm³
         const STREAM_X = 574;               // var strålen landar i bägaren
 
         // Kraftfärger — samma som teorigenomgångens figurer (fy1-5.5/5.6)
@@ -829,7 +829,7 @@
             const PRESETS = [
                 { name: 'Sänk stenen helt', desc: 'hela volymen under ytan — full lyftkraft',
                   apply: () => setSub(1) },
-                { name: 'Dubbelt så stor sten', desc: '800 cm³ i stället för 400 — lyftkraften fördubblas',
+                { name: 'Dubbelt så stor sten', desc: '800 cm³ i stället för 400 — lyftkraften fördubblas',
                   apply: () => { setStone({ V: 800, rho: 2700 }); setSub(1); } },
                 { name: 'Tyngre sten, samma volym', desc: 'högre densitet — men lyftkraften ändras inte',
                   apply: () => { setStone({ V: 400, rho: 5000 }); setSub(1); } },

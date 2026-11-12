@@ -397,11 +397,11 @@
 
                     <div class="scene-info">
                         <span class="si-lbl">Tryck inuti <em>p</em><sub>inne</sub></span>
-                        <span class="si-val" id="siP">101,3 kPa</span>
+                        <span class="si-val" id="siP">101,3 kPa</span>
                         <span class="si-lbl" style="margin-top: 4px">Lufttryckets kraft <em>F</em></span>
-                        <span class="si-val" id="siF">0 N</span>
+                        <span class="si-val" id="siF">0 N</span>
                         <span class="si-lbl" style="margin-top: 4px">Tyngd <em>F</em><sub>G</sub></span>
-                        <span class="si-val" id="siG">0 N</span>
+                        <span class="si-val" id="siG">0 N</span>
                     </div>
                     <div class="scene-hint" id="hint">Klicka på vakuumpumpen för att pumpa ut luften.</div>
                 </div>
@@ -413,11 +413,11 @@
                     <svg class="snitt" id="svgSnitt" viewBox="0 0 320 214" aria-label="Kloten i genomskärning med tryckkrafterna"></svg>
                     <p class="liten" style="margin-top:0">Blå pilar: lufttrycket utanför. Orange pilar: trycket inuti. Pilarna från sidorna tar ut varandra, och det som blir kvar är tryckskillnaden gånger den streckade snittytan <em>A</em>&nbsp;=&nbsp;π&nbsp;·&nbsp;<em>r</em><sup>2</sup>.</p>
                     <div class="stapel-rad">
-                        <div class="stapel-rubrik"><span>Lufttrycket pressar ihop, <em>F</em>&nbsp;=&nbsp;Δ<em>p</em>&nbsp;·&nbsp;<em>A</em></span><strong id="bF">0 N</strong></div>
+                        <div class="stapel-rubrik"><span>Lufttrycket pressar ihop, <em>F</em>&nbsp;=&nbsp;Δ<em>p</em>&nbsp;·&nbsp;<em>A</em></span><strong id="bF">0 N</strong></div>
                         <div class="stapel"><div id="barF" style="background:#1f5fbf;width:0"></div></div>
                     </div>
                     <div class="stapel-rad">
-                        <div class="stapel-rubrik"><span>Tyngden drar isär, <em>F</em><sub>G</sub>&nbsp;=&nbsp;<em>m</em>&nbsp;·&nbsp;<em>g</em></span><strong id="bG">0 N</strong></div>
+                        <div class="stapel-rubrik"><span>Tyngden drar isär, <em>F</em><sub>G</sub>&nbsp;=&nbsp;<em>m</em>&nbsp;·&nbsp;<em>g</em></span><strong id="bG">0 N</strong></div>
                         <div class="stapel"><div id="barG" style="background:#2b7a3d;width:0"></div></div>
                     </div>
                     <div class="status" id="status"></div>
@@ -450,9 +450,9 @@
                             <button data-typ="hand" class="active">Handpump</button>
                             <button data-typ="komp">Kompressor</button>
                         </div>
-                        <div class="reg-rad"><span>Vikter på hängaren</span><strong id="mVarde">20 kg</strong></div>
+                        <div class="reg-rad"><span>Vikter på hängaren</span><strong id="mVarde">20 kg</strong></div>
                         <input type="range" id="mReg" min="0" max="160" step="1" value="20" aria-label="Vikter på hängaren">
-                        <div class="reg-rad"><span>Klotens diameter <em>d</em></span><strong id="dVarde">10 cm</strong></div>
+                        <div class="reg-rad"><span>Klotens diameter <em>d</em></span><strong id="dVarde">10 cm</strong></div>
                         <input type="range" id="dReg" min="6" max="14" step="1" value="10" aria-label="Klotens diameter">
                         <p class="liten">Byter du diameter sätts kloten ihop på nytt med luft inuti.</p>
                     </div>
@@ -483,7 +483,7 @@
                     </ul>
                 </details>
 
-                <p class="liten">Handpumpen tar 0,20 liter per slag och kommer som lägst ned till 1,0 kPa. Kompressorn suger 1,6 liter per sekund och kommer ned till 0,2 kPa. Lufttrycket på höjderna kommer från standardatmosfären. Undre halvklotet med krok väger 0,5 kg och hängaren 1,0 kg, och båda räknas in i den hängande massan. Tyngdfaktorn är <em>g</em>&nbsp;=&nbsp;9,82&nbsp;N/kg, och på Månen 1,62&nbsp;N/kg.</p>
+                <p class="liten">Handpumpen tar 0,20 liter per slag och kommer som lägst ned till 1,0 kPa. Kompressorn suger 1,6 liter per sekund och kommer ned till 0,2 kPa. Lufttrycket på höjderna kommer från standardatmosfären. Undre halvklotet med krok väger 0,5 kg och hängaren 1,0 kg, och båda räknas in i den hängande massan. Tyngdfaktorn är <em>g</em>&nbsp;=&nbsp;9,82&nbsp;N/kg, och på Månen 1,62&nbsp;N/kg.</p>
             </div>
         </div>
     </div>
@@ -506,10 +506,10 @@
         // men havsnivån sätts till genomgångens 101,3 kPa.
         function hojdTryck(h) { return P_HAV * Math.pow(1 - 2.25577e-5 * h, 5.25588); }
         const PLATSER = [
-            { id: 'hav', namn: 'Havsnivå', sub: '0 m', p0: P_HAV, klass: 'plats-hav' },
-            { id: 'fjall', namn: 'Kebnekaise', sub: '2 100 m', p0: hojdTryck(2100), klass: 'plats-fjall' },
-            { id: 'everest', namn: 'Mount Everest', sub: '8 849 m', p0: hojdTryck(8849), klass: 'plats-everest' },
-            { id: 'flyg', namn: 'Flyghöjd', sub: '10 000 m', p0: hojdTryck(10000), klass: 'plats-flyg' },
+            { id: 'hav', namn: 'Havsnivå', sub: '0 m', p0: P_HAV, klass: 'plats-hav' },
+            { id: 'fjall', namn: 'Kebnekaise', sub: '2 100 m', p0: hojdTryck(2100), klass: 'plats-fjall' },
+            { id: 'everest', namn: 'Mount Everest', sub: '8 849 m', p0: hojdTryck(8849), klass: 'plats-everest' },
+            { id: 'flyg', namn: 'Flyghöjd', sub: '10 000 m', p0: hojdTryck(10000), klass: 'plats-flyg' },
             { id: 'manen', namn: 'Månen', sub: 'ingen luft', p0: 0, klass: 'plats-manen' },
         ];
 
@@ -540,7 +540,7 @@
             show: { molek: true, pilar: true, snitt: false, tyngd: true, namn: true },
         };
         var etikettKlar = false;   // etiketterna finns och kan ritas om
-        const r = () => st.d / 20;                    // radie i scenenheter (1 enhet = 1 dm)
+        const r = () => st.d / 20;                    // radie i scenenheter (1 enhet = 1 dm)
         const rMeter = () => st.d / 200;
         const area = () => Math.PI * rMeter() ** 2;   // m²
         const volym = () => 4 / 3 * Math.PI * (st.d / 20) ** 3;  // liter (dm³)
@@ -1464,15 +1464,15 @@
         });
 
         const FORSOK = [
-            { namn: 'Klassrumsförsöket', text: 'Klot på 10 cm, 30 kg vikter. Pumpa, sänk bordet och öppna kranen.',
+            { namn: 'Klassrumsförsöket', text: 'Klot på 10 cm, 30 kg vikter. Pumpa, sänk bordet och öppna kranen.',
               kor: () => satt({ d: 10, m: 30, plats: 'hav' }) },
-            { namn: 'Hur mycket håller de?', text: 'Väl pumpade klot och 75 kg på hängaren. Klarar de det?',
+            { namn: 'Hur mycket håller de?', text: 'Väl pumpade klot och 75 kg på hängaren. Klarar de det?',
               kor: () => satt({ d: 10, m: 75, plats: 'hav', pumpat: 25, bord: false }) },
-            { namn: 'Upp på Mount Everest', text: '40 kg håller vid havsnivån. Byt plats till Mount Everest.',
+            { namn: 'Upp på Mount Everest', text: '40 kg håller vid havsnivån. Byt plats till Mount Everest.',
               kor: () => satt({ d: 10, m: 40, plats: 'hav', pumpat: 25, bord: false }) },
             { namn: 'Till Månen', text: 'Tomma klot utan vikter. Byt plats till Månen.',
               kor: () => satt({ d: 10, m: 0, plats: 'hav', pumpat: 25, bord: false }) },
-            { namn: 'Dubbel diameter', text: 'Pumpade klot på 12 cm. Läs av största massan, byt till 6 cm och pumpa igen. Hur stor del av massan bär de små kloten?',
+            { namn: 'Dubbel diameter', text: 'Pumpade klot på 12 cm. Läs av största massan, byt till 6 cm och pumpa igen. Hur stor del av massan bär de små kloten?',
               kor: () => satt({ d: 12, m: 60, plats: 'hav', pumpat: 25, bord: false }) },
         ];
         function satt(o) {

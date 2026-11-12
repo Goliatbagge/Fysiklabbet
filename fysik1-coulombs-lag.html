@@ -514,7 +514,7 @@
                 <input type="range" min={-QMAX} max={QMAX} step="0.5" value={q}
                        onChange={(e) => onChange(parseFloat(e.target.value))} className="w-full cursor-pointer laddreglage" />
                 <div className="flex justify-between text-xs" style={{ color: 'var(--lab-ink-muted)' }}>
-                    <span>−10 nC</span><span>0</span><span>+10 nC</span>
+                    <span>−10 nC</span><span>0</span><span>+10 nC</span>
                 </div>
             </div>
         );
@@ -634,7 +634,7 @@
                     <label><input type="checkbox" checked={show.linje} onChange={() => tShow('linje')} />
                         <span className="st-swatch" style={{ background: `repeating-linear-gradient(90deg, ${COL.matt} 0 4px, transparent 4px 7px)`, height: 2 }}></span><span>Avståndet <em>r</em></span></label>
                     <label><input type="checkbox" checked={show.ringar} onChange={() => tShow('ringar')} /><span>Avståndsringarna</span></label>
-                    <label><input type="checkbox" checked={show.rutor} onChange={() => tShow('rutor')} /><span>Rutnätet (1 cm)</span></label>
+                    <label><input type="checkbox" checked={show.rutor} onChange={() => tShow('rutor')} /><span>Rutnätet (1 cm)</span></label>
                     <label><input type="checkbox" checked={show.tecken} onChange={() => tShow('tecken')} /><span>Laddningstecknen</span></label>
                     <label><input type="checkbox" checked={show.bet} onChange={() => tShow('bet')} /><span>Beteckningar</span></label>
                     <label><input type="checkbox" checked={show.varden} onChange={() => tShow('varden')} /><span>Värden</span></label>
@@ -698,7 +698,7 @@
                                     </button>
                                 </div>
                                 <div className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>
-                                    En ruta är 1 cm. Pilarna ritas i en fast skala, så dubbelt så lång pil betyder
+                                    En ruta är 1 cm. Pilarna ritas i en fast skala, så dubbelt så lång pil betyder
                                     dubbelt så stor kraft. Ringarna ligger kring laddningen du inte drar i.
                                 </div>
                                 <div className="glass-card rounded-xl p-4 mt-3">
@@ -753,14 +753,14 @@
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
                                     Enligt Newtons tredje lag är den elektriska kraften <strong>lika stor</strong> på båda
                                     laddningarna, fast motriktad. Det gäller även när den ena laddningen är mycket större
-                                    än den andra. Ställ in 10 nC och 1 nC och jämför pilarna.
+                                    än den andra. Ställ in 10 nC och 1 nC och jämför pilarna.
                                 </p>
                             </div>
                             <div className="glass-card rounded-xl p-4">
                                 <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Avståndet står i kvadrat</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
                                     Dubbelt avstånd ger en fjärdedel av kraften, tre gånger så långt avstånd en niondel.
-                                    Jämför ringarna på 5, 10 och 15 cm, eller dra en laddning och läs av i rutan nere
+                                    Jämför ringarna på 5, 10 och 15 cm, eller dra en laddning och läs av i rutan nere
                                     till vänster hur kraften ändras.
                                 </p>
                             </div>
@@ -788,7 +788,7 @@
                             </summary>
                             <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
                                 <li><strong>"Den större laddningen drar hårdare."</strong> Nej. Kraften är lika stor på båda laddningarna, och pilarna är därför alltid lika långa.</li>
-                                <li><strong>"Dubbelt avstånd ger halva kraften."</strong> Nej. Avståndet står i kvadrat, så kraften blir en fjärdedel. Jämför ringen på 5 cm med ringen på 10 cm.</li>
+                                <li><strong>"Dubbelt avstånd ger halva kraften."</strong> Nej. Avståndet står i kvadrat, så kraften blir en fjärdedel. Jämför ringen på 5 cm med ringen på 10 cm.</li>
                                 <li><strong>"En negativ laddning ger en negativ kraft."</strong> Nej. I formeln sätts beloppen in, och kraften får sin riktning av om tecknen är lika eller olika.</li>
                                 <li><strong>"Långt bort försvinner kraften."</strong> Nej. Kraften blir snabbt svag men aldrig noll.</li>
                             </ul>

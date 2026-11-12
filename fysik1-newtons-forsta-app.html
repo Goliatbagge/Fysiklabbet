@@ -690,8 +690,8 @@
             // 🥚 Påskägg: väntar man (klipper inte snöret) flyger en knasig
             // fiskmås förbi med jämna mellanrum — flaxar frenetiskt, tunga ute
             // och solglasögon på.
-            const gullCycle = ((clock - 5) % 15 + 15) % 15;          // 15 s-period, börjar efter 5 s
-            const gullVisible = !cut && clock > 5 && gullCycle < 6;   // 6 s flygtur
+            const gullCycle = ((clock - 5) % 15 + 15) % 15;          // 15 s-period, börjar efter 5 s
+            const gullVisible = !cut && clock > 5 && gullCycle < 6;   // 6 s flygtur
             const gullDir = Math.floor((clock - 5) / 15) % 2 === 0 ? 1 : -1;  // växlar håll varje flygtur
             const gullProg = gullCycle / 6;                          // 0 → 1 längs flygriktningen
             const gullX = gullDir === 1
@@ -888,7 +888,7 @@
                                         <g>
                                             <circle cx={rx} cy={cmY} r="4" fill={COL.res} />
                                             <Tag x={rx + 20} y={cmY - 12} anchor="end" color={COL.res} size={14}>
-                                                <tspan fontStyle="italic">F</tspan><tspan fontSize="10" dy="3">R</tspan><tspan dy="-3"> = 0 N</tspan>
+                                                <tspan fontStyle="italic">F</tspan><tspan fontSize="10" dy="3">R</tspan><tspan dy="-3"> = 0 N</tspan>
                                             </Tag>
                                         </g>
                                     )}
@@ -1214,7 +1214,7 @@
                 },
                 diver: {
                     title: 'Fallskärmshopparen — gränshastighet',
-                    text: 'Klipp av snöret så börjar hopparen falla. Allra först är farten noll och luftmotståndet noll — bara tyngdkraften verkar, så hon accelererar. Ju fortare hon faller, desto större blir luftmotståndet (det växer med farten i kvadrat). Till slut, vid gränshastigheten 53 m/s, är luftmotståndet precis lika stort som tyngdkraften: resultanten blir noll och farten konstant.',
+                    text: 'Klipp av snöret så börjar hopparen falla. Allra först är farten noll och luftmotståndet noll — bara tyngdkraften verkar, så hon accelererar. Ju fortare hon faller, desto större blir luftmotståndet (det växer med farten i kvadrat). Till slut, vid gränshastigheten 53 m/s, är luftmotståndet precis lika stort som tyngdkraften: resultanten blir noll och farten konstant.',
                     note: 'Accelerationen avtar hela tiden under fallet — den är störst i början (då bara tyngdkraften verkar) och går mot noll när farten närmar sig gränshastigheten. Farten ökar alltså snabbt först och planar sedan ut.',
                 },
             };
@@ -1326,7 +1326,7 @@
                                     ) : scenario === 'car' ? (
                                         <React.Fragment>
                                             <p className="text-sm mb-2" style={{ color: 'var(--lab-ink-soft)' }}>
-                                                Tryck på <strong>Starta</strong> så ökar <strong>drivkraften</strong> till 3000 N.
+                                                Tryck på <strong>Starta</strong> så ökar <strong>drivkraften</strong> till 3000 N.
                                                 Drivkraften är då större än luftmotståndet en stund (bilen accelererar) tills
                                                 luftmotståndet vuxit ikapp — då är resultanten noll och bilen håller en konstant fart.
                                             </p>

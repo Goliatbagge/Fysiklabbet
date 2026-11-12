@@ -234,11 +234,11 @@
                 ctx.fillStyle = '#94a3b8';
                 ctx.font = '12px Poppins, sans-serif';
                 ctx.textAlign = 'center';
-                ctx.fillText('9,0 cm', cmX(BASE / 2), cmY(0) + 32);
+                ctx.fillText('9,0 cm', cmX(BASE / 2), cmY(0) + 32);
                 ctx.save();
                 ctx.translate(cmX(Ax_cm) - 24, cmY(HEIGHT / 2));
                 ctx.rotate(-Math.PI / 2);
-                ctx.fillText('7,0 cm', 0, 0);
+                ctx.fillText('7,0 cm', 0, 0);
                 ctx.restore();
 
                 // Axis ticks
@@ -425,7 +425,7 @@
                 ctx.fillStyle = '#4ade80';
                 ctx.font = 'bold 11px Poppins, sans-serif';
                 ctx.textAlign = 'left';
-                ctx.fillText('Max: 15,75 cm\u00b2', gX(3.5) + 10, gY(MAX_AREA) - 6);
+                ctx.fillText('Max: 15,75 cm\u00b2', gX(3.5) + 10, gY(MAX_AREA) - 6);
                 ctx.font = 'italic 11px Poppins, sans-serif';
                 ctx.fillText('h', gX(3.5) + 10, gY(MAX_AREA) + 10);
                 ctx.font = '11px Poppins, sans-serif';
@@ -499,7 +499,7 @@
                         'Maximera rektangelns area i en triangel'
                     ),
                     React.createElement('p', { className: 'text-slate-400 max-w-2xl mx-auto', style: { fontFamily: 'Poppins, sans-serif' } },
-                        'Triangel ABC har basen 9,0 cm och h\u00f6jden 7,0 cm. En rektangel ritas s\u00e5 att tv\u00e5 h\u00f6rn ligger p\u00e5 basen och de andra tv\u00e5 p\u00e5 triangelns sidor. Dra i glidaren f\u00f6r att hitta den maximala arean.'
+                        'Triangel ABC har basen 9,0 cm och h\u00f6jden 7,0 cm. En rektangel ritas s\u00e5 att tv\u00e5 h\u00f6rn ligger p\u00e5 basen och de andra tv\u00e5 p\u00e5 triangelns sidor. Dra i glidaren f\u00f6r att hitta den maximala arean.'
                     )
                 ),
 
@@ -577,7 +577,7 @@
                     React.createElement('div', { className: 'glass-card rounded-xl p-4 text-center' },
                         React.createElement('p', { className: 'text-xs text-slate-500 mb-1', style: { fontFamily: 'Poppins, sans-serif' } }, 'Max area'),
                         React.createElement('p', { className: 'text-xl font-bold text-green-400', style: { fontFamily: 'Poppins, sans-serif' } },
-                            '15,75 cm\u00b2'
+                            '15,75 cm\u00b2'
                         )
                     )
                 ),
@@ -619,12 +619,12 @@
                                 '/7 = 0  \u21d2  ',
                                 React.createElement('span', { className: 'text-green-400 font-semibold' },
                                     React.createElement('span', { className: 'italic' }, 'h'),
-                                    ' = 3,5 cm'
+                                    ' = 3,5 cm'
                                 )
                             ),
                             React.createElement('p', null,
                                 'Maximal area: A(3,5) = 9 \u00b7 3,5 \u00b7 (1 \u2212 3,5/7) = 9 \u00b7 3,5 \u00b7 0,5 = ',
-                                React.createElement('span', { className: 'text-green-400 font-bold text-base' }, '15,75 cm\u00b2')
+                                React.createElement('span', { className: 'text-green-400 font-bold text-base' }, '15,75 cm\u00b2')
                             )
                         )
                     )

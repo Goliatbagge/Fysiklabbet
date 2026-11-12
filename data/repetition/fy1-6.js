@@ -16,7 +16,7 @@ window.REPETITION['fy1-6'] = {
                 { fore: 'Energi som självmant strömmar från varmt till kallt kallas', efter: '.', svar: 'värme' },
                 { fore: 'Mått på atomernas genomsnittliga rörelseenergi kallas', efter: '.', svar: 'temperatur' },
                 { fore: 'Summan av potentiell energi och rörelseenergi hos atomerna i ett material kallas', efter: '.', svar: 'inre energi' },
-                { fore: 'Energin som går åt för att smälta 1 kg av ett ämne kallas', efter: '.', svar: 'specifik smältentalpi' },
+                { fore: 'Energin som går åt för att smälta 1 kg av ett ämne kallas', efter: '.', svar: 'specifik smältentalpi' },
                 { fore: 'Den lägsta möjliga temperaturen, $0\\ \\mathrm{K}$, kallas', efter: '.', svar: 'absoluta nollpunkten' },
             ],
             distraktorer: ['kyla', 'effekt'],

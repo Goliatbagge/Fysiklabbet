@@ -362,7 +362,7 @@
     var MISSIONS = [
         { text: 'Hitta en atom', a: 1, n: -10, tol: 0.3, found: 'Så liten är en atom – kärnan omgiven av ett elektronmoln.' },
         { text: 'Hitta en stad', a: 5, n: 3, tol: 0.3, found: 'Nu är du på en stads skala – hustaken sträcker sig kilometervis.' },
-        { text: 'Hitta månens bana', a: 3, n: 8, tol: 0.3, found: 'Så långt är det till månen – omkring 3,8 · 10<sup>8</sup> m.' }
+        { text: 'Hitta månens bana', a: 3, n: 8, tol: 0.3, found: 'Så långt är det till månen – omkring 3,8 · 10<sup>8</sup> m.' }
     ];
     MISSIONS.forEach(function (m) { m.L = m.n + Math.log10(m.a); });
 
@@ -434,7 +434,7 @@
         var svg2 = svgEl('svg', {
             viewBox: '0 0 ' + W2 + ' ' + H2, width: W2, height: H2,
             'font-family': 'DM Sans, system-ui, sans-serif', role: 'img',
-            'aria-label': 'Dekadlinjal från 10 upphöjt till minus 10 till 10 upphöjt till 22 meter, med aktuell position markerad.'
+            'aria-label': 'Dekadlinjal från 10 upphöjt till minus 10 till 10 upphöjt till 22 meter, med aktuell position markerad.'
         });
         svg2.classList.add('lab-graf-svg');
         svg2.style.cursor = 'default';
@@ -475,7 +475,7 @@
         var quizQ = document.createElement('div');
         quizQ.className = 'lab-vis-note';
         quizQ.style.color = 'var(--lab-ink-soft)';
-        quizQ.innerHTML = 'Gissa först: hur många <em>×10</em>-steg är det från en människa (10<sup>0</sup> m) till jorden (10<sup>7</sup> m)?';
+        quizQ.innerHTML = 'Gissa först: hur många <em>×10</em>-steg är det från en människa (10<sup>0</sup> m) till jorden (10<sup>7</sup> m)?';
         quizPanel.appendChild(quizQ);
         var quizBtns = document.createElement('div');
         quizBtns.style.display = 'flex';
@@ -514,7 +514,7 @@
                     btn.style.color = (v === 7 || (v === val && val !== 7)) ? '#fff' : '';
                     btn.style.borderColor = v === 7 ? GOOD : (v === val && val !== 7 ? '#a83232' : '');
                 });
-                quizReveal.innerHTML = 'Rätt svar är 7. Varje ×10-steg höjer exponenten n med exakt 1, och 7 − 0 = 7 steg skiljer människan (10<sup>0</sup> m) från jorden (10<sup>7</sup> m).';
+                quizReveal.innerHTML = 'Rätt svar är 7. Varje ×10-steg höjer exponenten n med exakt 1, och 7 − 0 = 7 steg skiljer människan (10<sup>0</sup> m) från jorden (10<sup>7</sup> m).';
                 quizActions.style.display = '';
             });
             quizBtns.appendChild(b);
@@ -701,8 +701,8 @@
         endsRow.style.fontFamily = 'var(--lab-font-mono)';
         endsRow.style.marginTop = '2px';
         controls.appendChild(endsRow);
-        var endL = document.createElement('span'); endL.innerHTML = '10<sup>&minus;10</sup> m (atom)';
-        var endR = document.createElement('span'); endR.innerHTML = '10<sup>22</sup> m';
+        var endL = document.createElement('span'); endL.innerHTML = '10<sup>&minus;10</sup> m (atom)';
+        var endR = document.createElement('span'); endR.innerHTML = '10<sup>22</sup> m';
         endsRow.appendChild(endL); endsRow.appendChild(endR);
 
         var foot = document.createElement('div');

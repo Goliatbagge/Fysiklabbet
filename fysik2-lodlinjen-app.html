@@ -327,7 +327,7 @@
             let x = best[0], y = best[1];
             const L = Math.hypot(g.cx - x, g.cy - y);
             let ok = false;
-            for (let k = 0; k < 25; k++) {     // högst 5 cm in från kanten
+            for (let k = 0; k < 25; k++) {     // högst 5 cm in från kanten
                 if (inuti(pts, x, y) && kantAvstand(pts, x, y) >= 1.2) { ok = true; break; }
                 x += (g.cx - x) / L * 0.2; y += (g.cy - y) / L * 0.2;
             }

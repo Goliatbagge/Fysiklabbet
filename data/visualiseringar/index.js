@@ -311,12 +311,12 @@ window.VISUALISERINGAR_INDEX = {
     },
     'ma1c-3.2': {
         titel: 'Faktorkedjan',
-        beskrivning: 'Gissa om +20 % och −20 % tar dig tillbaka till start — och bygg egna kedjor av förändringsfaktorer.',
+        beskrivning: 'Gissa om +20 % och −20 % tar dig tillbaka till start — och bygg egna kedjor av förändringsfaktorer.',
         fil: 'data/visualiseringar/ma1c-3.2.js'
     },
     'ma1c-3.3': {
         titel: 'Faktorkedjan',
-        beskrivning: 'Gissa om +20 % och −20 % tar dig tillbaka till start — och se upprepad ränta växa exponentiellt.',
+        beskrivning: 'Gissa om +20 % och −20 % tar dig tillbaka till start — och se upprepad ränta växa exponentiellt.',
         fil: 'data/visualiseringar/ma1c-3.2.js'
     },
     'ma1c-6.5': {
@@ -346,7 +346,7 @@ window.VISUALISERINGAR_INDEX = {
     },
     'ma1c-5.2': {
         titel: 'Opinionsmätaren',
-        beskrivning: 'Är skillnaden mellan 46 % och 48 % säker? Bygg konfidensintervall och se hur stort urval som krävs.',
+        beskrivning: 'Är skillnaden mellan 46 % och 48 % säker? Bygg konfidensintervall och se hur stort urval som krävs.',
         fil: 'data/visualiseringar/ma1c-5.1.js'
     },
     'ma1c-5.3': {

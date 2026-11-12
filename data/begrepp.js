@@ -330,7 +330,7 @@ window.BEGREPP = [
     id: 'rotationsbarriaren',
     term: 'Rotationsbarriären',
     former: ['rotationsbarriären', 'rotationsbarriär', 'rotationsbarriärer'],
-    kort: 'Den gräns på ungefär ett varv per 2,2 timmar som asteroider större än omkring 150 meter nästan aldrig roterar fortare än. Snurrar en lös grushög fortare slits den sönder.',
+    kort: 'Den gräns på ungefär ett varv per 2,2 timmar som asteroider större än omkring 150 meter nästan aldrig roterar fortare än. Snurrar en lös grushög fortare slits den sönder.',
     relaterade: ['asteroid', 'ljuskurva', 'yorp-effekten'],
     body: [
       { type: 'p', html: 'Snurra en hink med grus runt i en cirkel. För att gruset ska följa med i cirkelbanan måste något hela tiden dra det in mot mitten, och i hinken är det botten som gör det. På en asteroid som roterar finns ingen hink. Stenarna på ytan hålls kvar bara av asteroidens egen gravitation, och den är mycket svag: på en kilometerstor asteroid väger du bara några hundratusendelar av vad du väger på jorden.' },
@@ -438,7 +438,7 @@ window.BEGREPP = [
     id: 'vakuumultraviolett',
     term: 'Vakuumultraviolett',
     former: ['vakuumultraviolett', 'vakuumultravioletta', 'vakuumultraviolett ljus', 'vakuumultraviolett strålning', 'vuv-ljus', 'vuv-strålning', 'vuv-laser', 'vuv-lasern'],
-    kort: 'Ultraviolett ljus med så kort våglängd, ungefär 100 till 200 nanometer, att det absorberas av luften. Det kan därför bara färdas i vakuum eller i en gas som släpper igenom det.',
+    kort: 'Ultraviolett ljus med så kort våglängd, ungefär 100 till 200 nanometer, att det absorberas av luften. Det kan därför bara färdas i vakuum eller i en gas som släpper igenom det.',
     relaterade: ['karnklocka', 'foton'],
     body: [
       { type: 'p', html: 'Ljus med kortare våglängd än det violetta vi kan se kallas ultraviolett. Solens UV-strålning, den som ger solbränna, har våglängder kring 300&nbsp;nm och tar sig utan problem genom luften. Men går man längre ned i våglängd, under ungefär 200&nbsp;nm, händer något: syremolekylerna i luften börjar slå i sig fotonerna. Redan efter några millimeter luft är ljuset borta.' },
@@ -570,7 +570,7 @@ window.BEGREPP = [
     id: 'jordens-karna',
     term: 'Jordens kärna',
     former: ['jordens kärna', 'jordkärnan', 'inre kärnan', 'inre kärna', 'yttre kärnan', 'yttre kärna'],
-    kort: 'Jordens innersta del, ett klot av främst järn och nickel med en radie på omkring 3 500 kilometer. Den yttre delen är flytande, den innersta är fast.',
+    kort: 'Jordens innersta del, ett klot av främst järn och nickel med en radie på omkring 3 500 kilometer. Den yttre delen är flytande, den innersta är fast.',
     relaterade: ['jordmanteln', 'troghetsmoment'],
     body: [
       { type: 'p', html: 'Går man rakt ned genom jorden passerar man först skorpan, sedan manteln av sten, och efter knappt 2&nbsp;900&nbsp;kilometer når man kärnan. Den består främst av järn med en del nickel och är uppdelad i två lager. Den yttre kärnan är flytande metall, omkring 2&nbsp;200&nbsp;kilometer tjock. Innerst sitter den inre kärnan, ett fast klot med en radie på omkring 1&nbsp;220&nbsp;kilometer, ungefär 70&nbsp;procent av månens.' },
@@ -582,7 +582,7 @@ window.BEGREPP = [
     id: 'jordmanteln',
     term: 'Jordmanteln',
     former: ['jordmanteln', 'jordmantel', 'manteln'],
-    kort: 'Det knappt 2 900 kilometer tjocka lagret av het sten mellan jordskorpan och kärnan. Det utgör ungefär två tredjedelar av jordens massa.',
+    kort: 'Det knappt 2 900 kilometer tjocka lagret av het sten mellan jordskorpan och kärnan. Det utgör ungefär två tredjedelar av jordens massa.',
     relaterade: ['jordens-karna', 'viskositet'],
     body: [
       { type: 'p', html: 'Under havsbottnarna, knappt en mil ned, och under kontinenterna, oftast tre till fem mil ned, slutar jordskorpan och manteln tar vid. Den fortsätter ned till knappt 2&nbsp;900&nbsp;kilometers djup, där kärnan av järn börjar. Manteln är alltså det överlägset största lagret i jorden, med ungefär två tredjedelar av planetens massa.' },
@@ -1191,7 +1191,7 @@ window.BEGREPP = [
     kort: 'Ett vinkelmått för mycket små vinklar: en bågsekund är 1/3600 grad. Astronomer anger positioner och skenbara storlekar på himlen i bågminuter, bågsekunder och tusendels bågsekunder.',
     relaterade: [],
     body: [
-      { type: 'p', html: 'Ett varv är 360 grader, och en grad räcker långt när man mäter hörn i en triangel. På himlen är den däremot grov: fullmånen är bara ungefär en halv grad bred. Därför delas graden vidare på samma sätt som en timme delas i minuter och sekunder. En grad rymmer 60 bågminuter, och varje bågminut rymmer 60 bågsekunder. En bågsekund är alltså 1/3600 grad. Orden båg- finns med för att skilja vinkelmåtten från tidsenheterna.' },
+      { type: 'p', html: 'Ett varv är 360 grader, och en grad räcker långt när man mäter hörn i en triangel. På himlen är den däremot grov: fullmånen är bara ungefär en halv grad bred. Därför delas graden vidare på samma sätt som en timme delas i minuter och sekunder. En grad rymmer 60 bågminuter, och varje bågminut rymmer 60 bågsekunder. En bågsekund är alltså 1/3600 grad. Orden båg- finns med för att skilja vinkelmåtten från tidsenheterna.' },
       { type: 'p', html: 'Hur litet är det? En bågsekund är ungefär den vinkel ett tvåkronorsmynt upptar på knappt fem kilometers avstånd. Ett bra öga skiljer på sin höjd två punkter som ligger omkring 60 bågsekunder isär, och luftens oro gör att ett teleskop på marken sällan får skarpare bilder än en bågsekund utan särskilda knep. Rymdteleskop och radioteleskop som kopplas ihop över kontinenter kommer betydligt längre.' },
       { type: 'p', html: 'När det blir riktigt smått används tusendelar: en millibågsekund är 1/1000 bågsekund, alltså en 3,6-miljondels grad. I den storleksordningen ligger stjärnornas parallax, alltså den lilla förskjutning i skenbart läge som uppstår när jorden hinner till andra sidan av sin bana — och det är också i millibågsekunder per år man mäter hur satellitbanor vrids av relativistiska effekter.' }
     ]
@@ -1333,7 +1333,7 @@ window.BEGREPP = [
     body: [
       { type: 'p', html: 'Det finns en leksaksmassa, hoppgummi, som svarar helt olika beroende på hur snabbt man behandlar den. Kastar man en klump i golvet studsar den som en boll. Lämnar man samma klump på bordet över natten har den flutit ut till en pannkaka. Massan är varken fast eller flytande — den är båda, och vilket beteende som visar sig avgörs av tiden. Gränsen mellan de två kallas materialets maxwelltid, efter fysikern James Clerk Maxwell.' },
       { type: 'p', html: 'Bakom ligger en enkel modell: en fjäder och en trög dämpare kopplade efter varandra. Fjädern står för det elastiska, den del som fjädrar tillbaka när kraften släpper. Dämparen står för det trögflytande, den del som ger efter för gott. Snabba påfrestningar hinner bara fjädern reagera på, och materialet känns fast. Långsamma påfrestningar hinner dämparen släppa igenom, och materialet flyter. Maxwelltiden räknas ut genom att dividera viskositeten med styvheten (skjuvmodulen), och den anger var omslaget sker. Påfrestningar som är mycket kortare än maxwelltiden möts av ett fast ämne, påfrestningar som är mycket längre av en vätska.' },
-      { type: 'p', html: 'För jordens mantel, med en viskositet kring 10<sup>21</sup>&nbsp;Pa·s och en styvhet kring 10<sup>11</sup>&nbsp;Pa, blir maxwelltiden ungefär 10<sup>10</sup> sekunder — några hundra år. Det förklarar två observationer som annars verkar motsäga varandra. En jordbävningsvåg, som passerar på sekunder, möter ett stelt berg och går rakt igenom. Men Skandinavien, som pressades ner av inlandsisen och blev av med den för tiotusen år sedan, reser sig fortfarande någon centimeter om året — för på den tidsskalan är samma berg en vätska som långsamt rinner tillbaka på plats.' }
+      { type: 'p', html: 'För jordens mantel, med en viskositet kring 10<sup>21</sup>&nbsp;Pa·s och en styvhet kring 10<sup>11</sup>&nbsp;Pa, blir maxwelltiden ungefär 10<sup>10</sup> sekunder — några hundra år. Det förklarar två observationer som annars verkar motsäga varandra. En jordbävningsvåg, som passerar på sekunder, möter ett stelt berg och går rakt igenom. Men Skandinavien, som pressades ner av inlandsisen och blev av med den för tiotusen år sedan, reser sig fortfarande någon centimeter om året — för på den tidsskalan är samma berg en vätska som långsamt rinner tillbaka på plats.' }
     ]
   },
   {
@@ -1810,7 +1810,7 @@ window.BEGREPP = [
     relaterade: ['parsec', 'vintergatan', 'galaxhop'],
     body: [
       { type: 'p', html: 'Ett ljusår låter som en tid men är en sträcka: precis så långt som ljuset hinner färdas på ett år. Ljuset går knappt 300&nbsp;000&nbsp;km i sekunden — sju varv runt jorden medan du säger ordet — och när man låter den farten fortsätta i ett helt år blir sträckan ungefär 9,46&nbsp;·&nbsp;10<sup>12</sup>&nbsp;km, alltså nästan tio biljoner kilometer.' },
-      { type: 'p', html: 'Anledningen till att astronomer inte skriver ut kilometrarna är att talen annars blir omöjliga att känna något inför. Närmaste stjärna efter solen, Proxima Centauri, ligger 4,2 ljusår bort. Skrivet i kilometer blir det fyrtio biljoner — ett tal som säger de flesta ingenting. Granngalaxen Andromeda ligger 2,5 miljoner ljusår bort, och de mest avlägsna galaxer teleskopen når syns med ljus som varit på väg i över tretton miljarder år.' },
+      { type: 'p', html: 'Anledningen till att astronomer inte skriver ut kilometrarna är att talen annars blir omöjliga att känna något inför. Närmaste stjärna efter solen, Proxima Centauri, ligger 4,2 ljusår bort. Skrivet i kilometer blir det fyrtio biljoner — ett tal som säger de flesta ingenting. Granngalaxen Andromeda ligger 2,5 miljoner ljusår bort, och de mest avlägsna galaxer teleskopen når syns med ljus som varit på väg i över tretton miljarder år.' },
       { type: 'p', html: 'Just den väntetiden gör måttet extra användbart. Eftersom ljuset behöver tid på sig ser vi aldrig något i rymden som det är just nu, utan som det var när ljuset lämnade det. Solen ser vi med åtta minuters fördröjning, månen med drygt en sekund, och en galax hundra miljoner ljusår bort ser vi som den såg ut för hundra miljoner år sedan. Varje teleskop är därför också en tidsmaskin: ju längre ut man tittar, desto längre bakåt i universums historia ser man.' },
       { type: 'p', html: 'I populärvetenskap är ljusåret det vanligaste avståndsmåttet, men i forskarnas egna artiklar används oftast parsec i stället.' }
     ]
@@ -1819,10 +1819,10 @@ window.BEGREPP = [
     id: 'parsec',
     term: 'Parsec',
     former: ['parsec', 'kiloparsec', 'megaparsec', 'gigaparsec', 'parsek', 'kiloparsek', 'megaparsek', 'gigaparsek'],
-    kort: 'Astronomernas egen avståndsenhet, ungefär 3,26 ljusår. Den är definierad utifrån hur mycket en stjärna tycks flytta sig på himlen när jorden rör sig runt solen.',
+    kort: 'Astronomernas egen avståndsenhet, ungefär 3,26 ljusår. Den är definierad utifrån hur mycket en stjärna tycks flytta sig på himlen när jorden rör sig runt solen.',
     relaterade: ['ljusar', 'galaxhop', 'magnitud'],
     body: [
-      { type: 'p', html: 'En parsec är ungefär 3,26 ljusår, eller drygt 3,09&nbsp;·&nbsp;10<sup>13</sup>&nbsp;km. Det är ett skevt värde, och det beror på att enheten inte är påhittad för att vara rund — den kommer direkt ur den mätning astronomer använder för att bestämma avstånd till närbelägna stjärnor.' },
+      { type: 'p', html: 'En parsec är ungefär 3,26 ljusår, eller drygt 3,09&nbsp;·&nbsp;10<sup>13</sup>&nbsp;km. Det är ett skevt värde, och det beror på att enheten inte är påhittad för att vara rund — den kommer direkt ur den mätning astronomer använder för att bestämma avstånd till närbelägna stjärnor.' },
       { type: 'p', html: 'Håll upp ett finger framför ansiktet och blunda växelvis med höger och vänster öga: fingret verkar hoppa fram och tillbaka mot bakgrunden. Ju närmare fingret är, desto större hopp. Samma sak händer med stjärnorna när jorden hinner till andra sidan av sin bana ett halvår senare — en närbelägen stjärna tycks då ha flyttat sig en aning mot de avlägsna bakgrundsstjärnorna. Halva den lilla vinkeln kallas stjärnans parallax, och en parsec är definierad som avståndet till en stjärna vars parallax är exakt en bågsekund, det vill säga 1/3600 grad. Namnet är helt enkelt en hopslagning av <em>par</em>allax och båg<em>sec</em>und.' },
       { type: 'p', html: 'Fördelen framför ljusåret är att räkningen blir trivial: avståndet i parsec är precis ett dividerat med parallaxen i bågsekunder. Mätvärdet blir avstånd utan omvägar. I praktiken ligger ingen stjärna så nära att parallaxen når en hel bågsekund — rekordhållaren Proxima Centauri har 0,77 bågsekunder och ligger alltså 1,3 parsec bort.' },
       { type: 'p', html: 'För större avstånd används kiloparsec (tusen parsec) inom vår egen galax, megaparsec (en miljon parsec) mellan galaxer och gigaparsec för de allra största kosmologiska skalorna.' }
@@ -1882,11 +1882,11 @@ window.BEGREPP = [
     id: 'vintergatan',
     term: 'Vintergatan',
     former: ['vintergatan'],
-    kort: 'Vår egen galax: en stavspiral med hundratals miljarder stjärnor, ungefär 100 000 ljusår tvärs över. Det ljusa bandet på natthimlen är dess skiva sedd inifrån.',
+    kort: 'Vår egen galax: en stavspiral med hundratals miljarder stjärnor, ungefär 100 000 ljusår tvärs över. Det ljusa bandet på natthimlen är dess skiva sedd inifrån.',
     relaterade: ['svart-hal', 'ljusar', 'solmassa'],
     body: [
       { type: 'p', html: 'Långt från stadsljus syns ett svagt, disigt band tvärs över natthimlen. Det bandet gav Vintergatan sitt namn, och när Galilei 1610 riktade sitt teleskop mot det upptäckte han att dimman i själva verket består av oräkneliga enskilda stjärnor. Förklaringen till bandets form är att vi sitter mitt inne i en tillplattad skiva av stjärnor: tittar vi längs skivans plan ligger hundratusentals stjärnor bakom varandra och flyter ihop till en sammanhängande strimma, tittar vi rakt ut ur skivan ser vi bara enstaka stjärnor mot tom rymd.' },
-      { type: 'p', html: 'Vintergatan är en stavspiral — en avlång stav av stjärnor genom mitten, med spiralarmar som lindar ut från stavens ändar. Skivan mäter ungefär 100&nbsp;000 ljusår tvärs över men är bara några tusen ljusår tjock, och rymmer någonstans mellan hundra och fyrahundra miljarder stjärnor. Solen ligger inte i centrum utan ungefär 26&nbsp;000 ljusår ut, i utkanten av en av armarna, och behöver omkring 230 miljoner år för ett varv runt galaxens mitt.' },
+      { type: 'p', html: 'Vintergatan är en stavspiral — en avlång stav av stjärnor genom mitten, med spiralarmar som lindar ut från stavens ändar. Skivan mäter ungefär 100&nbsp;000 ljusår tvärs över men är bara några tusen ljusår tjock, och rymmer någonstans mellan hundra och fyrahundra miljarder stjärnor. Solen ligger inte i centrum utan ungefär 26&nbsp;000 ljusår ut, i utkanten av en av armarna, och behöver omkring 230 miljoner år för ett varv runt galaxens mitt.' },
       { type: 'p', html: 'I själva centrum sitter ett supermassivt svart hål som kallas Sagittarius&nbsp;A*, efter stjärnbilden Skytten (på latin Sagittarius) som det ligger i sett från jorden. Det väger ungefär fyra miljoner solmassor. Tjocka stoftmoln blockerar allt synligt ljus mot centrum, så hålet upptäcktes i stället genom att man i infrarött ljus följde enskilda stjärnor som svängde runt en osynlig punkt — ett arbete som gav Nobelpriset i fysik 2020. Runt hela skivan finns dessutom ett väldigt klotformigt moln av mörk materia, som står för det mesta av galaxens massa.' }
     ]
   },
@@ -2122,7 +2122,7 @@ window.BEGREPP = [
     body: [
       { type: 'p', html: 'En atomkärna borde inte finnas. Protonerna i den är positivt laddade och stöter bort varandra kraftfullt på så korta avstånd. Att kärnan ändå håller ihop beror på en kraft som är ungefär hundra gånger starkare än den elektriska, men som bara verkar över ungefär en kärndiameter. Den kallas den starka växelverkan. Egentligen verkar den mellan kvarkarna inne i protoner och neutroner; det som håller ihop kärnpartiklarna med varandra är ett slags läckage av den kraften utanför partiklarnas kant.' },
       { type: 'p', html: 'Kraftens bärare heter gluoner, och den egenskap de reagerar på kallas färgladdning. Namnet har ingenting med färg att göra — det är bara en etikett för tre sorters laddning, ungefär som plus och minus i elektriciteten men med tre varianter i stället för två. Teorin för alltihop heter kvantkromodynamik. Det märkliga är att gluonerna själva bär färgladdning, till skillnad från fotonen som är elektriskt neutral. Därför drar kraftfältet ihop sig till smala strängar i stället för att breda ut sig.' },
-      { type: 'p', html: 'Det ger kraften dess mest kända egenhet: den avtar inte med avståndet. Drar man i en kvark växer energin i fältet stadigt, tills det finns tillräckligt mycket energi för att skapa ett nytt kvarkpar — och i stället för en lös kvark står man med två partiklar. En ensam kvark har därför aldrig observerats. Energin i det här fältet svarar dessutom för omkring 99 procent av protonens massa; kvarkarnas egen massa är närmast försumbar i sammanhanget.' }
+      { type: 'p', html: 'Det ger kraften dess mest kända egenhet: den avtar inte med avståndet. Drar man i en kvark växer energin i fältet stadigt, tills det finns tillräckligt mycket energi för att skapa ett nytt kvarkpar — och i stället för en lös kvark står man med två partiklar. En ensam kvark har därför aldrig observerats. Energin i det här fältet svarar dessutom för omkring 99 procent av protonens massa; kvarkarnas egen massa är närmast försumbar i sammanhanget.' }
     ]
   },
   {
@@ -2171,7 +2171,7 @@ window.BEGREPP = [
     body: [
       { type: 'p', html: 'Principen är enkel och gammal: en laddad partikel i ett elektriskt fält känner en kraft och accelereras. Bildröret i en gammaldags tv var faktiskt en liten accelerator — elektroner som fick fart av en spänning och slog i skärmen. Skillnaden i en forskningsanläggning är att partiklarna får passera samma accelererande fält om och om igen. I en ringaccelerator böjer kraftfulla elektromagneter partikelknippet runt ett cirkelformat vakuumrör, medan snabbt växlande elektriska fält ger en knuff varje varv. Efter miljontals varv rör sig partiklarna med bara några miljondels procent lägre fart än ljuset.' },
       { type: 'p', html: 'Energin anges i elektronvolt (eV) — den energi en elektron får av en volts spänning. Världens största maskin, LHC vid CERN, ligger i en tunnel med 27&nbsp;km omkrets och krockar protoner med en sammanlagd energi på drygt 13&nbsp;TeV, alltså över 13&nbsp;·&nbsp;10<sup>12</sup>&nbsp;eV. Hög energi behövs av två skäl. Dels beter sig snabba partiklar som vågor med kort våglängd, och bara korta vågor kan avbilda små detaljer — acceleratorn är i den meningen ett mikroskop. Dels kan energin enligt <em>E</em> = <em>m</em> · <em>c</em><sup>2</sup> omvandlas till nya, tyngre partiklar som annars bara fanns i universums första ögonblick.' },
-      { type: 'image', src: 'begrepp/bilder/partikelaccelerator.jpg', alt: 'En lång, böjd tunnel med betonggolv. Längs ena sidan löper ett tjockt blått rör som försvinner i fjärran, och i taket hänger kabelstegar och lysrör.', caption: 'Tunneln till LHC vid CERN, omkring 100 meter under marken vid gränsen mellan Schweiz och Frankrike. Det blå röret består av supraledande magneter, kylda till −271&nbsp;°C, som håller protonerna kvar på den krökta banan. Inuti går de två strålrören där protonerna färdas åt var sitt håll.', credit: 'Foto: Julian Herzog (CC BY-SA 3.0), via Wikimedia Commons' },
+      { type: 'image', src: 'begrepp/bilder/partikelaccelerator.jpg', alt: 'En lång, böjd tunnel med betonggolv. Längs ena sidan löper ett tjockt blått rör som försvinner i fjärran, och i taket hänger kabelstegar och lysrör.', caption: 'Tunneln till LHC vid CERN, omkring 100 meter under marken vid gränsen mellan Schweiz och Frankrike. Det blå röret består av supraledande magneter, kylda till −271&nbsp;°C, som håller protonerna kvar på den krökta banan. Inuti går de två strålrören där protonerna färdas åt var sitt håll.', credit: 'Foto: Julian Herzog (CC BY-SA 3.0), via Wikimedia Commons' },
       { type: 'p', html: 'Partikelfysik är ändå en liten minoritet av verksamheten. Av världens tiotusentals acceleratorer används de allra flesta till helt andra saker: strålbehandling av cancer, tillverkning av kortlivade spårämnen till medicinska undersökningar, härdning av plaster och sterilisering av utrustning. En särskilt viktig gren är synkrotronljuskällor, där elektroner som tvingas runt en ring sänder ut extremt intensivt röntgenljus. Det ljuset används för att kartlägga proteiners form, se vad som händer inuti ett batteri under drift och till och med läsa texten i förkolnade antika bokrullar utan att rulla upp dem.' }
     ]
   },
@@ -2335,7 +2335,7 @@ window.BEGREPP = [
     kort: 'Avståndet mellan jorden och solen, knappt 150 miljoner km. Det är måttstocken astronomer använder inom solsystemet, där ljusår blir orimligt stora.',
     relaterade: ['ljusar', 'parsec', 'asteroid', 'komet'],
     body: [
-      { type: 'p', html: 'Avstånd i rymden spänner över så många storleksordningar att ett enda mått inte räcker. Ljusår passar mellan stjärnorna, men inne i vårt eget solsystem blir de löjligt stora — hela avståndet ut till Neptunus är bara en halv tusendels ljusår. Därför använder astronomer i stället jordens eget avstånd till solen som måttstock och kallar det en astronomisk enhet, förkortad au. Sedan 2012 är den exakt definierad till 149&nbsp;597&nbsp;870&nbsp;700 meter, alltså knappt 150&nbsp;miljoner&nbsp;km.' },
+      { type: 'p', html: 'Avstånd i rymden spänner över så många storleksordningar att ett enda mått inte räcker. Ljusår passar mellan stjärnorna, men inne i vårt eget solsystem blir de löjligt stora — hela avståndet ut till Neptunus är bara en halv tusendels ljusår. Därför använder astronomer i stället jordens eget avstånd till solen som måttstock och kallar det en astronomisk enhet, förkortad au. Sedan 2012 är den exakt definierad till 149&nbsp;597&nbsp;870&nbsp;700 meter, alltså knappt 150&nbsp;miljoner&nbsp;km.' },
       { type: 'p', html: 'Fördelen är att solsystemet plötsligt går att överblicka. Mars ligger 1,5&nbsp;au från solen, Jupiter 5,2&nbsp;au och Neptunus 30&nbsp;au. Kuiperbältet, där de flesta kometer håller till, sträcker sig från ungefär 30 till 50&nbsp;au. Rymdsonden Voyager&nbsp;1, som lämnade jorden 1977, har passerat 160&nbsp;au. Ett ljusår motsvarar drygt 63&nbsp;000&nbsp;au — först då börjar det bli tal om grannstjärnor.' },
       { type: 'p', html: 'Enheten säger också något om tid. Ljuset behöver ungefär 8&nbsp;minuter och 20&nbsp;sekunder för att färdas en astronomisk enhet, vilket är precis så gammal bilden av solen är när den når din näthinna. Att över huvud taget mäta upp avståndet var länge ett av astronomins svåraste problem; i dag görs det med radarekon mot planeter och med hur rymdsonders signaler fördröjs på vägen hem.' }
     ]
@@ -3261,7 +3261,7 @@ window.BEGREPP = [
     id: 'magisk-vinkel',
     term: 'Magisk vinkel',
     former: ['magisk vinkel', 'magiska vinkeln', 'magiska vinkel', 'magisk-vinkel-grafen', 'magiska vinklar'],
-    kort: 'Den vridning på ungefär 1,1 grader mellan två grafenlager som gör att materialet plötsligt börjar leda ström utan motstånd. Vid nästan alla andra vinklar händer ingenting särskilt.',
+    kort: 'Den vridning på ungefär 1,1 grader mellan två grafenlager som gör att materialet plötsligt börjar leda ström utan motstånd. Vid nästan alla andra vinklar händer ingenting särskilt.',
     relaterade: ['grafen', 'supraledare', 'moiremonster', 'cooperpar'],
     body: [
       { type: 'p', html: 'Lägg två stycken grafen, alltså två skikt av kolatomer som var för sig är en enda atom tjocka, på varandra så att atomerna hamnar rakt över varandra. Ingenting anmärkningsvärt händer. Vrid sedan det ena skiktet en aning. Vid ungefär 1,1&nbsp;grader förändras materialet fullständigt: det börjar leda ström helt utan motstånd om det kyls tillräckligt, och det uppträder samtidigt i flera andra ovanliga tillstånd som beror på hur många elektroner man matat in i det.' },

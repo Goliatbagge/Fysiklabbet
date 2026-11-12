@@ -259,7 +259,7 @@
                '(höjd gånger bredd) alltid är rättvisande, oavsett klassbredd.',
             2: 'Kryssa i "Visa normalfördelningskurvan": en kurva räknad från datans eget ' +
                'medelvärde och standardavvikelse läggs över staplarna. Dra klassbredden mot ' +
-               '1 cm — staplarna följer kurvan allt bättre.',
+               '1 cm — staplarna följer kurvan allt bättre.',
             3: 'Dra i handtagen <em>a</em> och <em>b</em> på x-axeln. Den gröna arean under ' +
                'kurvan mellan dem är sannolikheten <em>P</em>(<em>a</em> ≤ <em>X</em> ≤ <em>b</em>) ' +
                '— jämför den med hur stor andel av de 500 datapunkterna som faktiskt hamnar ' +
@@ -606,7 +606,7 @@
                     'poängen med att normera y-axeln till andel per cm i stället för antal.';
             } else if (state.step === 2) {
                 note.innerHTML = state.showCurve
-                    ? 'Dra klassbredden mot 1 cm — staplarna smälter samman med kurvan. En ' +
+                    ? 'Dra klassbredden mot 1 cm — staplarna smälter samman med kurvan. En ' +
                       'täthetsfunktion måste vara noll eller större överallt, och hela arean ' +
                       'under den är exakt 1 (samma area som histogrammets, oavsett klassbredd).'
                     : 'Kryssa i "Visa normalfördelningskurvan" ovan för att lägga kurvan över staplarna.';

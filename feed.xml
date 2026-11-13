@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Thu, 12 Nov 2026 08:55:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 13 Nov 2026 01:57:35 GMT</lastBuildDate>
+    <item>
+      <title>En magnet vid sidan av en glasfiber vrider ljuset, en effekt som räknats bort i femtio år</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-11-13-magneten-vid-sidan-av-fibern</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-11-13-magneten-vid-sidan-av-fibern</guid>
+      <pubDate>Fri, 13 Nov 2026 04:00:00 GMT</pubDate>
+      <category>Optik</category>
+      <description>Forskare vid Wits University i Johannesburg har visat att ett magnetfält som går tvärs över en vanlig optisk fiber vrider ljusets polarisation, en variant av Faradayeffekten som den förenkling fiberingenjörer använt sedan 1970-talet räknar bort. Effekten syns bara i fibrer där ljuset studsar mot en skarp gräns mellan kärna och mantel, och bara när ljusets elektriska fält svänger vinkelrätt mot magnetfältet.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-11-13-magneten-vid-sidan-av-fibern.jpg" length="143711" type="image/jpeg"/>
+    </item>
     <item>
       <title>En svävande magnet stor som ett dammkorn snurrar 2,3 miljoner varv i sekunden</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-11-12-snurran-som-svavar</link>
@@ -177,15 +186,6 @@
       <category>Fysikhistoria</category>
       <description>I ett arkiv i Wien har tre handskrivna sidor av Erwin Schrödinger legat otryckta i över 80 år. Med en enkel modell för ljus som passerar ett polarisationsfilter visade han att ett påstått bevis för att slumpen i kvantfysiken är äkta inte höll, fast han själv trodde att den var det.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-25-schrodingers-glomda-manuskript.jpg" length="553378" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Plastkulor som svävar i ultraljud laddas upp som kondensatorer</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-10-24-kulorna-som-laddas-som-kondensatorer</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-10-24-kulorna-som-laddas-som-kondensatorer</guid>
-      <pubDate>Sat, 24 Oct 2026 04:00:00 GMT</pubDate>
-      <category>Elektrostatik</category>
-      <description>Två små plastkulor hölls svävande i ultraljud och fick krocka med varandra om och om igen. Varje krock flyttade en slumpmässig mängd laddning, men sammantaget följde laddningen samma kurva som en kondensator som laddas upp, och efter några minuter började den plana ut.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-24-kulorna-som-laddas-som-kondensatorer.jpg" length="208284" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

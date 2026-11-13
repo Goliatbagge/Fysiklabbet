@@ -27728,7 +27728,7 @@
     ]));
     var klam = valueBracket(acts, [
       'n=1 (grundtonen)',
-      ['λ=', { frac: ['v', 'f'] }, '=', { frac: ['340 m/s', '440 Hz'] },
+      ['v=f·λ⟺λ=', { frac: ['v', 'f'] }, '=', { frac: ['340 m/s', '440 Hz'] },
        '=0,772... m']
     ], padL, y, T.s, F);
     T.stepEnd();

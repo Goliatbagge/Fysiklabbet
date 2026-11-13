@@ -4500,6 +4500,13 @@ Se [`OVNINGAR.md`](OVNINGAR.md) för komplett guide:
 - **⛔ Aldrig en kopia av ett exempel i teorin**: övningarna görs efter
   genomgången och ska vara nya uppgifter, med annan situation och andra tal
   (användarkrav 2026-11-13, se OVNINGAR.md)
+- **Figurerna ska vara omsorgsfullt ritade, aldrig amatörmässiga**
+  (användarkrav 2026-11-13): samma arbetsinsats som i Labbfolket-filmernas
+  egna scener. Riktiga kroppar och föremål med form, färg och skuggning,
+  en miljö som visar var det händer (is, labbänk, väg) och små detaljer
+  som ger liv. En streckgubbe och några linjer räcker inte. Fysiken,
+  pilarna och etiketterna följer reglerna som vanligt. Referens: skytten
+  på skridskor i `fy1-4.8`, uppgift 2.
 
 ## CDN-länkar (standard)
 

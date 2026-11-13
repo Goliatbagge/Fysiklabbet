@@ -420,6 +420,17 @@ layoutkrav. För kretsar utan parallellsektion blir resultatet typiskt
 > Lägg in figuren där det är möjligt; hoppa bara över rent numeriska
 > uppgifter utan rumsligt innehåll (t.ex. "$f = 1/T$, beräkna *T*").
 
+> **Figurerna ska vara omsorgsfullt ritade, aldrig amatörmässiga**
+> (användarkrav 2026-11-13). Lägg samma arbetsinsats på en övningsfigur som
+> på en scen i Labbfolket-filmerna: människor och föremål med riktig form,
+> färg och lätt skuggning (gradienter), en miljö som visar var det händer
+> (isen och sargen i en ishall, en labbänk, en väg) och små detaljer som ger
+> liv (skuggan under kroppen, rörelsestreck bakom en kula). En streckgubbe,
+> en rektangel och några raka linjer räcker inte. Pilarna, etiketterna och
+> fysiken följer reglerna nedan som vanligt, och gradient-id:n ges ett
+> unikt prefix så att två figurer på samma sida inte krockar. Referens:
+> skytten på skridskor i `fy1-4.8`, uppgift 2.
+
 **⚠ Stanna upp och fråga: ser uppgiften ut som något?** Innan du publicerar
 en ny uppgift, fråga dig om uppgiftens scen har en *visuell representation*.
 Använd den här mappningstabellen som checklista:

@@ -8943,7 +8943,7 @@ Impulsens *storlek* är 4,2 Ns (riktad åt vänster — vägg pushar bollen bak
         },
         {
             level: 3,
-            question: `En **liten kula** med massan 0,050 kg avfyras horisontellt med farten 320 m/s in i en stillastående **träblock** med massan 2,0 kg som hänger fritt i ett snöre (ballistisk pendel). Kulan fastnar i blocket och båda svänger upp tillsammans.
+            question: `En **liten kula** med massan 0,050 kg avfyras horisontellt med farten 320 m/s in i ett stillastående **träblock** med massan 2,0 kg som hänger fritt i ett snöre (ballistisk pendel). Kulan fastnar i blocket och båda svänger upp tillsammans.
 
 Hur högt (vertikalt) svänger blocket + kula upp innan det stannar? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och bortse från friktion i upphängningen.`,
             answer: { value: 3.10, unit: 'm', tol: 0.05 },

@@ -1,0 +1,32 @@
+03:15:05  [idag] === Nyhetsjobb: start (2026-11-13) ===
+03:15:11  [idag] Dagens nyhet finns (förberedd i går).
+03:15:11  [idag] Startar Claude Code (headless, modell opus, nyckel)...
+03:20:03  [imorgon] === Nyhetsjobb: start (2026-11-13) ===
+03:20:03  [imorgon] En körning pågår redan (lås 5 min gammalt). Avslutar.
+03:27:39  [idag] Nyheten för 2026-11-14 är skriven, granskad och committad på grenen `nyhetsjobb` (commit `f8052782`). Jag har inte pushat och inte skickat något mejl.
+03:27:39  [idag] 
+03:27:39  [idag] **Artikeln:** "Guldkorn på heliumdroppar visar hur laddningar ordnar sig på ett klot" (`2026-11-14-laddningarna-pa-heliumdroppen`, kategori Elektrostatik). Den handlar om ett forskarlag i Innsbruck, Leicester, Durham och Cambridge som fotograferat hur lika laddningar lägger sig på ytan av supraflytande heliumdroppar. Guldkorn märker ut var laddningarna sitter, och avtrycken avbildas i elektronmikroskop. Frågan är Thomsonproblemet, som går tillbaka till Thomsons atommodell från 1904. För droppar med upp till 36 laddningar stämde mönstren med beräkningarna. Studien heter Pohl med flera, *Physical Review Letters* 137, 183001 (2026). Den är öppet tillgänglig (CC BY 4.0) och jag läste hela texten.
+03:27:39  [idag] 
+03:27:39  [idag] - **Område:** elektrostatik, så den krockar inte med gårdagens optiknyhet.
+03:27:39  [idag] - **Bilder:** alla tre är riktiga bilder, ingen är AI-genererad. Huvudbilden är Alfred Leitners foto av supraflytande helium som kryper ur en skål (Wikimedia Commons, public domain). I brödtexten ligger figur 2 och 3 ur studien. Innsbrucks pressbild valde jag bort eftersom ingen licens anges.
+03:27:39  [idag] - **Övrigt:** en "Prova själv"-ruta som länkar till simuleringen Coulombs lag, och två nya ord i ordlistan: Thomsonproblemet och plumpuddingmodellen.
+03:27:39  [idag] - **Granskning:** utgivaren svarade först RÄTTA FÖRST på fyra punkter där texten sa mer än studien. Jag rättade dem, och vid omgranskningen blev utslaget GODKÄND.
+03:27:39  [idag] - **Kontroller:** byggskriptet för delningssidor, RSS och sitemap har körts. Kontrollerna av navigation, ordlista, sitemap, hårda mellanslag och bråk gav inga fel. Jag tog också en skärmdump av förhandsvisningen.
+03:27:39  [idag] - **Loggar:** `publicerat.md`, `ko.md` och `granskningar.md` är uppdaterade, och tre oanvända uppslag ligger nu i kön.
+03:27:39  [idag] 
+03:27:39  [idag] **Det här behöver du veta:**
+03:27:39  [idag] - **Mpembanyheten går inte att skriva i tid.** Det fanns fortfarande inget arXiv-förtryck i dag, och studien ligger bakom betalvägg. Du ville ha den publicerad senast lördag 2026-11-14, men utan fulltexten kan den inte skrivas. Det står också i `ko.md`.
+03:27:39  [idag] - **Byggskriptet ändrade radsluten i många orelaterade filer**, bland annat `katalog/dela/`, övriga `nyheter/dela/` och `i18n/`. Innehållet är oförändrat, och de filerna är inte med i commiten. De ligger kvar som ändrade i arbetskatalogen.
+03:27:39  [idag] - **En annan nyhet är fortfarande vald som brevteaser:** Capotauro, som är fryst till efter brevet 2026-11-15.
+03:27:40  [idag] Claude avslutade med kod 0
+03:27:41  [idag] error: cannot pull with rebase: You have unstaged changes.
+03:27:41  [idag] error: Please commit or stash them.
+03:27:45  [idag] Pushat till main.
+03:27:45  [idag] Artikel 2026-11-14 pushad: 2026-11-14-laddningarna-pa-heliumdroppen
+03:29:17  [idag] https://fysiklabbet.se/nyheter.html?forhand=2026-11-14-laddningarna-pa-heliumdroppen
+03:29:17  [idag] Mejlet byggt av mallen (C:\claude\Fysiklabbet-nyhetsjobb\.claude\nyheter\logg\mejl-2026-11-14).
+03:29:17  [idag] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+03:30:11  [idag] Mejlet är skickat till [ägaren]. Utgivarraden fylldes i med en kort sammanfattning av de fyra rättningarna (ytladdningen efter krympningskorrigering, nedtonat "hittar alltså", virus/fullerener-jämförelsen och 140 kDa som medelvärde) — alla införda och godkända vid omgranskningen.
+03:30:19  [idag] Claude avslutade med kod 0
+03:30:19  [idag] Mejlet till ägaren är skickat.
+03:30:19  [idag] === Nyhetsjobb: slut ===

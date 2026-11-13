@@ -15,6 +15,24 @@ window.OVNINGAR = {
 > **På sajten visas nivåerna som Grund, Mellan och Avancerad, utan siffra**
 > (beslut 2026-11-09). Siffrorna och N1, N2, N3 nedan är interna.
 
+## ⛔ En övning får aldrig vara en kopia av ett exempel
+
+**Övningarna görs EFTER att eleven gått igenom teoriavsnittet, så de ska vara
+nya uppgifter.** En övning som har samma situation, samma tal eller bara
+byter ett namn eller en enhet jämfört med ett `::: exempel` i genomgången
+testar ingenting: eleven kan skriva av exemplets lösning (användarkrav
+2026-11-13: uppgift 3 och 4 i `fy1-4.8` var Agnes och Boel på inlines och
+tågvagnarna på 10 och 15 ton, ordagrant ur exempel 1 och 2).
+
+- Läs avsnittets exempel innan du skriver övningarna, och välj en annan
+  situation, andra tal och gärna en annan obekant (sök en begynnelsehastighet
+  i stället för sluthastigheten, en massa i stället för en kraft).
+- Samma metod ska förstås övas, men i ett nytt sammanhang.
+- Hittar du en kopia i en befintlig övning: byt ut den mot en ny uppgift.
+- Nämn bara uppgifter i frågan som tillför något. En detalj som inte används
+  i lösningen (en "studsmattedeltagare" som står på marken) förvirrar.
+
+
 ## Nivåer
 
 - **Nivå 1** — Grund. Bara SI-omvandling och insättning i

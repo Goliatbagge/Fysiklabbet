@@ -4497,6 +4497,9 @@ Se [`OVNINGAR.md`](OVNINGAR.md) för komplett guide:
   vinkelrätt ut. Granska alltid renderingen (skärmbild) före klart.
 - Flervalsformat (`choices` + `correct`)
 - Lösningsmall (formel → bracket → beräkning → svar)
+- **⛔ Aldrig en kopia av ett exempel i teorin**: övningarna görs efter
+  genomgången och ska vara nya uppgifter, med annan situation och andra tal
+  (användarkrav 2026-11-13, se OVNINGAR.md)
 
 ## CDN-länkar (standard)
 

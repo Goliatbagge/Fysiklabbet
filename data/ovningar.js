@@ -8843,9 +8843,10 @@ $$
         },
         {
             level: 1,
-            question: `En studsmatta-deltagare med massan 50 kg står still på marken och avfyrar ett gevär. Gevärskulan (0,015 kg) lämnar pipan med farten 600 m/s. Med vilken hastighet rekylerar personen bakåt? Bortse från friktion mot marken.`,
+            question: `En skytt står stilla på skridskor på blank is och avfyrar ett gevär vågrätt åt höger, som i figuren. Skytten och geväret har tillsammans massan 50 kg. Kulan har massan 0,015 kg och lämnar pipan med farten 600 m/s. Med vilken fart glider skytten bakåt (åt vänster) direkt efter skottet? Bortse från friktionen mot isen.
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 180" style="max-width:440px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif" role="img" aria-label="En skytt står på skridskor på is och håller ett gevär som pekar åt höger. Kulan flyger åt höger med 600 m/s. En pil åt vänster ovanför skytten visar skyttens hastighet v p efter skottet."><line x1="20" y1="140" x2="420" y2="140" stroke="#5b7f99" stroke-width="2"/><line x1="40" y1="146" x2="70" y2="146" stroke="#5b7f99" stroke-width="1.2"/><line x1="150" y1="146" x2="190" y2="146" stroke="#5b7f99" stroke-width="1.2"/><line x1="260" y1="146" x2="300" y2="146" stroke="#5b7f99" stroke-width="1.2"/><line x1="360" y1="146" x2="395" y2="146" stroke="#5b7f99" stroke-width="1.2"/><text x="400" y="132" text-anchor="end" font-size="12" fill="#8a8579">is</text><circle cx="110" cy="52" r="9" fill="none" stroke="#0f1620" stroke-width="2.2"/><line x1="110" y1="62" x2="110" y2="102" stroke="#0f1620" stroke-width="2.2" stroke-linecap="round"/><line x1="110" y1="102" x2="102" y2="128" stroke="#0f1620" stroke-width="2.2" stroke-linecap="round"/><line x1="110" y1="102" x2="118" y2="128" stroke="#0f1620" stroke-width="2.2" stroke-linecap="round"/><line x1="96" y1="128" x2="106" y2="128" stroke="#0f1620" stroke-width="3" stroke-linecap="round"/><line x1="114" y1="128" x2="124" y2="128" stroke="#0f1620" stroke-width="3" stroke-linecap="round"/><line x1="100" y1="129" x2="100" y2="138" stroke="#0f1620" stroke-width="1.4"/><line x1="120" y1="129" x2="120" y2="138" stroke="#0f1620" stroke-width="1.4"/><line x1="93" y1="138.5" x2="108" y2="138.5" stroke="#0f1620" stroke-width="1.8"/><line x1="112" y1="138.5" x2="127" y2="138.5" stroke="#0f1620" stroke-width="1.8"/><line x1="110" y1="70" x2="138" y2="80" stroke="#0f1620" stroke-width="2.2" stroke-linecap="round"/><line x1="110" y1="72" x2="124" y2="84" stroke="#0f1620" stroke-width="2.2" stroke-linecap="round"/><polygon points="112,77 128,77 128,83 117,91 112,91" fill="#6b4a2b"/><line x1="128" y1="80" x2="196" y2="80" stroke="#2a2f36" stroke-width="4" stroke-linecap="butt"/><ellipse cx="282" cy="80" rx="7" ry="2.6" fill="#8a6a3a"/><line x1="296" y1="80" x2="346" y2="80" stroke="#c8324a" stroke-width="2.4" stroke-linecap="butt"/><polygon points="346,75.6 355,80 346,84.4" fill="#c8324a"/><text x="322" y="68" text-anchor="middle" font-size="13" fill="#c8324a">600 m/s</text><text x="282" y="104" text-anchor="middle" font-size="12" fill="#0f1620">kula, 0,015 kg</text><line x1="122" y1="26" x2="80" y2="26" stroke="#c8324a" stroke-width="2.4" stroke-linecap="butt"/><polygon points="80,21.6 71,26 80,30.4" fill="#c8324a"/><text x="64" y="31" text-anchor="end" font-size="14" fill="#c8324a"><tspan font-style="italic">v</tspan><tspan font-size="10" dy="3">p</tspan></text><text x="110" y="168" text-anchor="middle" font-size="12" fill="#0f1620">skytt + gevär, 50 kg</text></svg>`,
             answer: { value: 0.18, unit: 'm/s', tol: 0.03 },
-            solution: `Före: båda står stilla, total rörelsemängd = 0. Efter: kulan flyger framåt med $v_k = +600$ m/s, personen rekylerar med $v_p$.
+            solution: `Vi väljer positiv riktning åt höger. Före skottet står skytten och kulan stilla, så den totala rörelsemängden är 0. Efter skottet flyger kulan åt höger med $v_k = 600\\ \\mathrm{m/s}$ och skytten glider med hastigheten $v_p$.
 
 Rörelsemängdens bevarande:
 
@@ -8857,43 +8858,68 @@ $$
 v_p = -\\frac{0{,}015 \\cdot 600}{50} = -\\frac{9{,}0}{50} = -0{,}18\\ \\mathrm{m/s}
 $$
 
-Minustecknet betyder rörelse motsatt kulan.
+Minustecknet betyder att skytten rör sig åt vänster, motsatt kulan. Skytten är drygt 3 000 gånger tyngre än kulan och får därför en fart som är drygt 3 000 gånger lägre, vilket är rimligt.
 
-**Svar:** Personen rekylerar med 0,18 m/s bakåt.`,
+**Svar:** Skytten glider bakåt med farten 0,18 m/s.`,
         },
         {
             level: 1,
-            question: `Agnes (60 kg) och Boel (85 kg) står stilla på inlines och knuffar iväg varandra. Direkt efter knuffen rör sig Agnes med 0,50 m/s åt höger. Vilken hastighet får Boel?`,
-            answer: { value: -0.353, unit: 'm/s', tol: 0.03 },
-            solution: `Före: båda i vila, total rörelsemängd = 0. Efter: Agnes åt höger ($v_A = +0{,}50$ m/s), Boel åt vänster ($v_B$).
+            question: `På en luftkuddebana rör sig vagn A (0,50 kg) med hastigheten 0,80 m/s åt höger. Den krockar med vagn B (0,30 kg), som står stilla. Vagnarna studsar mot varandra, och efter stöten rör sig vagn B med 1,0 m/s åt höger. Vilken hastighet har vagn A efter stöten?`,
+            answer: { value: 0.2, unit: 'm/s', tol: 0.03 },
+            solution: `Vagnarna studsar mot varandra, så stöten är elastisk och de får olika hastigheter efteråt. Vi väljer positiv riktning åt höger, ställer upp rörelsemängdslagen och löser ut $v_A$.
 
 $$
-0 = m_A v_A + m_B v_B \\quad\\Leftrightarrow\\quad v_B = -\\frac{m_A v_A}{m_B}
+m_A \\cdot v_{A0} + m_B \\cdot v_{B0} = m_A \\cdot v_A + m_B \\cdot v_B
+\\quad\\Leftrightarrow\\quad
+v_A = \\frac{m_A \\cdot v_{A0} + m_B \\cdot v_{B0} - m_B \\cdot v_B}{m_A}
 $$
 
 $$
-v_B = -\\frac{60 \\cdot 0{,}50}{85} \\approx -0{,}353\\ \\mathrm{m/s}
+\\left[ \\begin{array}{l}
+m_A = 0{,}50\\ \\mathrm{kg} \\\\
+v_{A0} = 0{,}80\\ \\mathrm{m/s} \\\\
+m_B = 0{,}30\\ \\mathrm{kg} \\\\
+v_{B0} = 0 \\\\
+v_B = 1{,}0\\ \\mathrm{m/s}
+\\end{array} \\right]
 $$
 
-**Svar:** Boel glider åt vänster med ca 0,35 m/s (alltså $v_B \\approx -0{,}35$ m/s).
+$$
+v_A = \\frac{0{,}50 \\cdot 0{,}80 + 0{,}30 \\cdot 0 - 0{,}30 \\cdot 1{,}0}{0{,}50} = \\frac{0{,}10}{0{,}50} = 0{,}20\\ \\mathrm{m/s}
+$$
 
-**Generell slutsats:** Den tyngre kroppen får en lägre hastighet — det är hela poängen med rekyl. Skytten "kastas" bakåt mycket mindre än kulan på grund av sin större massa.`,
+Hastigheten är positiv, så vagn A fortsätter åt höger men långsammare än förut. Den har lämnat en del av sin rörelsemängd till vagn B.
+
+**Svar:** 0,20 m/s åt höger.`,
         },
         {
             level: 2,
-            question: `Två kompakta tågvagnar krockar och **hakar ihop**. Vagn A (10 ton) rör sig åt höger med 5,0 m/s. Vagn B (15 ton) rör sig åt vänster med 3,0 m/s. Bestäm vagnarnas slutgemensamma hastighet (med tecken — positiv riktning åt höger).`,
-            answer: { value: 0.2, unit: 'm/s', tol: 0.05 },
-            solution: `Inelastisk stöt med tecken:
+            question: `En ishockeyspelare med massan 90 kg åker åt höger med farten 6,0 m/s och tacklar en motståndare med massan 75 kg, som åker rakt mot honom åt vänster. Spelarna håller fast i varandra efter tacklingen och glider tillsammans åt höger med 0,50 m/s. Med vilken fart åkte motståndaren före tacklingen? Bortse från friktionen mot isen.`,
+            answer: { value: 6.1, unit: 'm/s', tol: 0.03 },
+            solution: `Spelarna håller fast i varandra, så stöten är fullkomligt inelastisk. Vi väljer positiv riktning åt höger, ställer upp rörelsemängdslagen vid fullkomligt inelastisk stöt och löser ut motståndarens hastighet $v_B$.
 
 $$
-v = \\frac{m_A v_A + m_B v_B}{m_A + m_B} = \\frac{10\\,000 \\cdot 5{,}0 + 15\\,000 \\cdot (-3{,}0)}{10\\,000 + 15\\,000}
+m_A \\cdot v_A + m_B \\cdot v_B = (m_A + m_B) \\cdot v
+\\quad\\Leftrightarrow\\quad
+v_B = \\frac{(m_A + m_B) \\cdot v - m_A \\cdot v_A}{m_B}
 $$
 
 $$
-v = \\frac{50\\,000 - 45\\,000}{25\\,000} = \\frac{5\\,000}{25\\,000} = 0{,}20\\ \\mathrm{m/s}
+\\left[ \\begin{array}{l}
+m_A = 90\\ \\mathrm{kg} \\\\
+v_A = 6{,}0\\ \\mathrm{m/s} \\\\
+m_B = 75\\ \\mathrm{kg} \\\\
+v = 0{,}50\\ \\mathrm{m/s}
+\\end{array} \\right]
 $$
 
-**Svar:** 0,20 m/s åt höger.`,
+$$
+v_B = \\frac{(90 + 75) \\cdot 0{,}50 - 90 \\cdot 6{,}0}{75} = \\frac{82{,}5 - 540}{75} = \\frac{-457{,}5}{75} = -6{,}1\\ \\mathrm{m/s}
+$$
+
+Minustecknet bekräftar att motståndaren åkte åt vänster. Motståndaren åkte alltså lite fortare än spelaren men är lättare, så spelarens rörelsemängd var något större och paret glider långsamt åt höger, vilket är rimligt.
+
+**Svar:** Motståndaren åkte med farten 6,1 m/s.`,
         },
         {
             level: 2,

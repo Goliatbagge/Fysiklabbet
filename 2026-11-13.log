@@ -97,3 +97,11 @@
 19:17:43  [svar] Claude avslutade med kod 0
 19:17:43  [svar] VARNING: svarskontrollen gav inget SVAR-besked. Försöker igen vid nästa körning.
 19:17:43  [svar] === Nyhetsjobb: slut ===
+22:15:12  [svar] === Nyhetsjobb: start (2026-11-13) ===
+22:15:16  [svar] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+22:16:05  [svar] Confirmed: the only `[Nyhet …]` thread in the mailbox is from 2026-10-29 (reviewing the 2026-10-30 article), which is over two weeks old and already outside the 4-day window. No `[Nyhet …]` review emails have been sent in the last 4 days, so there are no owner replies to check or process.
+22:16:05  [svar] 
+22:16:05  [svar] This itself is noteworthy: per the CLAUDE.md workflow, a review email should go out every night for the next day's article, and none have arrived since October 29 — the nightly review-email step appears to have stopped working roughly two weeks ago.
+22:16:06  [svar] Claude avslutade med kod 0
+22:16:06  [svar] VARNING: svarskontrollen gav inget SVAR-besked. Försöker igen vid nästa körning.
+22:16:06  [svar] === Nyhetsjobb: slut ===

@@ -82,3 +82,18 @@
 15:45:45  [svar] Claude avslutade med kod 0
 15:45:45  [svar] VARNING: svarskontrollen gav inget SVAR-besked. Försöker igen vid nästa körning.
 15:45:45  [svar] === Nyhetsjobb: slut ===
+19:15:01  [svar] === Nyhetsjobb: start (2026-11-13) ===
+19:15:05  [svar] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+19:17:42  [svar] Summary of the check (threads matching `[Nyhet` from the last 4 days):
+19:17:42  [svar] 
+19:17:42  [svar] | Datum | Status |
+19:17:42  [svar] |---|---|
+19:17:42  [svar] | **2026-11-14** | Ägaren svarade "Ok" men saknade kvittens — skickade nu kvittensmejlet med markören `FL-JOBB FL-NYHET:2026-11-14` |
+19:17:42  [svar] | 2026-11-13 | Redan behandlat (ägaren svarade "Ok", jobbet kvitterade redan) |
+19:17:42  [svar] | 2026-11-12 | Inget svar — artikeln har redan publicerats automatiskt |
+19:17:42  [svar] | 2026-11-11 | Inget svar — artikeln har redan publicerats automatiskt |
+19:17:42  [svar] 
+19:17:42  [svar] Enda åtgärden som behövdes var kvittensen för imorgondagens artikel (2026-11-14), som nu är skickad.
+19:17:43  [svar] Claude avslutade med kod 0
+19:17:43  [svar] VARNING: svarskontrollen gav inget SVAR-besked. Försöker igen vid nästa körning.
+19:17:43  [svar] === Nyhetsjobb: slut ===

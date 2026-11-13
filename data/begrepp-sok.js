@@ -400,5 +400,7 @@ window.BEGREPP = [
   {"id":"bombpulsen","term":"Bombpulsen","kort":"Den kraftiga ökningen av kol-14 i luften som kärnvapenproven ovan jord orsakade kring 1960. Halten på norra halvklotet ungefär fördubblades och har sedan dess sjunkit.","former":["bombpulsen","bombpuls"]},
   {"id":"suesseffekten","term":"Suesseffekten","kort":"Att andelen kol-14 i luften sjunker när koldioxid från fossila bränslen släpps ut. Fossilt kol är så gammalt att allt dess kol-14 hunnit sönderfalla, så det späder ut luften.","former":["suesseffekten","suesseffekt"]},
   {"id":"acceleratormasspektrometri","term":"Acceleratormasspektrometri","kort":"En metod att räkna sällsynta atomer, till exempel kol-14, en och en. Atomerna görs till joner, accelereras och sorteras efter massa, så att även mycket små prov räcker.","former":["acceleratormasspektrometri","acceleratormasspektrometrin"]},
+  {"id":"thomsonproblemet","term":"Thomsonproblemet","kort":"Frågan om hur ett antal lika laddningar lägger sig på ytan av ett klot när de stöter bort varandra. Svaret är den placering som ger lägst sammanlagd elektrisk lägesenergi.","former":["thomsonproblemet","thomsonproblem"]},
+  {"id":"plumpuddingmodellen","term":"Plumpuddingmodellen","kort":"J. J. Thomsons atommodell från början av 1900-talet. Atomen tänktes vara ett klot av utspridd positiv laddning med elektronerna inbäddade som russin i en kaka.","former":["plumpuddingmodellen","plumpuddingmodell","thomsons atommodell"]},
 ];
 if (window.I18N) window.I18N.overlay('begrepp-sok');

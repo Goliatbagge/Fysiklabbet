@@ -4837,6 +4837,30 @@ window.BEGREPP = [
       { type: 'p', html: 'Acceleratormasspektrometri räknar i stället atomerna direkt. Provet förbränns, kolet görs om till grafit och skjuts ut som negativt laddade joner. En accelerator ger jonerna hög fart, och magneter böjer av dem olika mycket beroende på massan, ungefär som när vinden blåser lätta och tunga föremål olika långt. Kol-14 hamnar på ett annat ställe än kol-12 och kol-13 och kan räknas för sig.' },
       { type: 'p', html: 'Eftersom atomerna räknas direkt, i stället för att man väntar på de få som hinner sönderfalla, räcker det ofta med några milligram material. Metoden används för att datera arkeologiska fynd, för att följa kol i naturen och för att mäta andra sällsynta isotoper, till exempel i is och berggrund.' }
     ]
+  },
+  {
+    id: 'thomsonproblemet',
+    term: 'Thomsonproblemet',
+    former: ['thomsonproblemet', 'thomsonproblem'],
+    kort: 'Frågan om hur ett antal lika laddningar lägger sig på ytan av ett klot när de stöter bort varandra. Svaret är den placering som ger lägst sammanlagd elektrisk lägesenergi.',
+    relaterade: ['plumpuddingmodellen', 'superfluid', 'nanoskala'],
+    body: [
+      { type: 'p', html: 'Tänk dig några elektroner som kan glida fritt på ytan av en ballong men inte lämna den. De stöter bort varandra och flyttar sig tills de inte kommer längre. Var hamnar de? Det är Thomsonproblemet, uppkallat efter fysikern J.&nbsp;J. Thomson, som funderade på liknande frågor när han 1904 försökte förstå hur atomen är byggd.' },
+      { type: 'p', html: 'För få laddningar är svaret lätt att gissa. Två hamnar på var sin sida av klotet, tre bildar en liksidig triangel och fyra sitter i hörnen av en tetraeder, en pyramid med fyra trekantiga sidor. Men ju fler laddningar det blir, desto fler nästan lika bra placeringar finns det, och snart går det inte att pröva alla. Datorer kan hitta mycket bra lösningar för tusentals laddningar, men bara för ett fåtal små antal är det matematiskt bevisat att lösningen är den bästa.' },
+      { type: 'p', html: 'Med många laddningar ser mönstret ut som ett nät av sexhörningar, där varje laddning har sex grannar. Ett klot kan ändå inte täckas helt med sexhörningar, så några laddningar måste ha fem grannar, precis som femhörningarna på en fotboll. Samma problem dyker upp i naturen, till exempel i hur proteinerna i skalet på vissa virus ordnar sig.' }
+    ]
+  },
+  {
+    id: 'plumpuddingmodellen',
+    term: 'Plumpuddingmodellen',
+    former: ['plumpuddingmodellen', 'plumpuddingmodell', 'thomsons atommodell'],
+    kort: 'J.\u00a0J. Thomsons atommodell från början av 1900-talet. Atomen tänktes vara ett klot av utspridd positiv laddning med elektronerna inbäddade som russin i en kaka.',
+    relaterade: ['thomsonproblemet'],
+    body: [
+      { type: 'p', html: 'När J.&nbsp;J. Thomson upptäckte elektronen 1897 visste man plötsligt att atomen innehåller små negativt laddade partiklar. Men atomen som helhet är neutral, så någonstans måste det finnas lika mycket positiv laddning. Thomsons förslag var att den positiva laddningen var jämnt utspridd över hela atomen, som en deg, och att elektronerna satt inbäddade i den som russin. Den engelska efterrätten plum pudding gav modellen dess namn.' },
+      { type: 'p', html: 'Modellen höll bara några år. År 1909 sköt Hans Geiger och Ernest Marsden alfapartiklar mot en tunn guldfolie i Ernest Rutherfords laboratorium. De flesta for rakt igenom, men några studsade tillbaka. Det gick inte ihop med en utspridd positiv laddning, och Rutherford drog slutsatsen att den positiva laddningen sitter samlad i en liten kärna i mitten av atomen.' },
+      { type: 'p', html: 'Även om modellen var fel lämnade den ett spår. Frågan om hur lika laddningar ordnar sig på ett klot, Thomsonproblemet, är fortfarande ett levande forskningsområde inom matematik och fysik.' }
+    ]
   }
 ];
 

@@ -103,6 +103,70 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-14-laddningarna-pa-heliumdroppen",
+    date: "2026-11-14",
+    title: "Guldkorn på heliumdroppar visar hur laddningar ordnar sig på ett klot",
+    deck: "Hur lägger sig ett antal lika laddningar på ytan av ett klot när de stöter bort varandra? Frågan går tillbaka till J. J. Thomsons atommodell från 1904 och är fortfarande olöst matematik. Nu har fysiker i Innsbruck och Storbritannien för första gången fotograferat svaret, med hjälp av supraflytande heliumdroppar och små korn av guld.",
+    category: "Elektrostatik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-11-14-laddningarna-pa-heliumdroppen.jpg",
+    imageAlt: "Svartvitt foto av en liten glasskål som hänger i tunna trådar ovanför ytan av flytande helium. En droppe har bildats under skålens botten.",
+    imageCredit: "Foto: Alfred Leitner, supraflytande helium som kryper ur en skål, via Wikimedia Commons (public domain). Beskuren till bredformat. Bilden visar inte försöket i studien.",
+    tags: ["elektrostatik", "coulombs lag", "laddning", "elektrisk lägesenergi", "influens", "thomsonproblemet", "plumpuddingmodellen", "atommodeller", "helium", "superfluiditet", "nanopartikel", "elektronmikroskop", "geometri", "universitetet i innsbruck"],
+    sources: [
+      { name: "Universitetet i Innsbruck: A 120-year-old puzzle made visible in a helium droplet (28 oktober 2026)", url: "https://www.uibk.ac.at/en/newsroom/2026/a-120-year-old-puzzle-made-visible-in-a-helium-droplet/" },
+      { name: "Physics World: Gold nanoparticles on superfluid droplets illuminate century-old Thomson problem (11 november 2026)", url: "https://physicsworld.com/a/gold-nanoparticles-on-superfluid-droplets-illuminate-century-old-thomson-problem/" }
+    ],
+    research: {
+      citation: "T. Pohl, J. Mayerhofer, H. Liu, A. Mizouri, H. Sha, M. Mahmoodi Darian, F. Zappa, A. M. Ellis, D. J. Wales, S. Yang och P. Scheier, ”Real-Space Imaging of Thomson Charge Configurations in Superfluid Helium Nanodroplets”, Physical Review Letters 137, 183001 (2026). Kollegialt granskad, öppet tillgänglig (CC BY 4.0).",
+      url: "https://doi.org/10.1103/qby4-bm6q"
+    },
+    simulering: {
+      href: "fysik1-coulombs-lag.html",
+      name: "Coulombs lag",
+      text: "Dra två laddningar över papperet och byt tecken på dem. Lika laddningar stöter bort varandra, och kraftpilarna krymper snabbt när avståndet växer."
+    },
+    larare: {
+      moment: [
+        { label: "Krafter mellan laddningar och Coulombs lag", href: "katalog.html?id=fy1-7.2" },
+        { label: "Laddning och influens", href: "katalog.html?id=fy1-7.1" },
+        { label: "Bohrs atommodell och energinivåer", href: "katalog.html?id=fy2-4.8" }
+      ],
+      fragor: [
+        "Fyra lika laddningar på ett klot med radien r lägger sig i en tetraeder, inte i en kvadrat runt ekvatorn. Räkna ut summan av 1/avstånd för alla sex paren i båda fallen (kvadraten har sidan √2 · r och diagonalen 2r, tetraedern har kanten 1,63r). Vilken placering ger lägst elektrisk lägesenergi?",
+        "Forskarna fick fram att dropparna bar omkring 63 laddningar per kvadratmikrometer yta. Ungefär hur många laddningar bär en droppe som från början hade radien 0,20 µm? Varför bär en droppe med dubbelt så stor radie ungefär fyra gånger så många laddningar?",
+        "Ett experiment kan inte bevisa att en placering har den lägsta möjliga energin. Vad kan försöket ändå tillföra som beräkningar inte kan, och varför blir det svårare att jämföra med teorin ju fler laddningar droppen bär?"
+      ]
+    },
+    body: [
+      { type: "p", html: "År 1904 försökte J.&nbsp;J. Thomson, som några år tidigare hade upptäckt elektronen, förstå hur en atom är byggd. I hans modell, ofta kallad plumpuddingmodellen, satt elektronerna inbäddade i ett klot av positiv laddning. Modellen övergavs efter några år, men den lämnade efter sig en fråga som visat sig vara förvånansvärt svår: hur lägger sig ett antal lika laddningar på ytan av ett klot, om de stöter bort varandra och inte kan lämna ytan?" },
+      { type: "p", html: "Frågan kallas Thomsonproblemet, och den är fortfarande inte löst i allmänhet. Matematikern Steve Smale tog 1998 med den som nummer sju på sin lista över 18 stora matematiska problem för 2000-talet. Nu har en grupp under ledning av Paul Scheier vid universitetet i Innsbruck, tillsammans med forskare i Leicester, Durham och Cambridge, för första gången avbildat hur verkliga laddningar faktiskt ordnar sig på ett klot. Studien är publicerad i <em>Physical Review Letters</em>." },
+      { type: "h2", text: "Lägst energi när laddningarna står långt isär" },
+      { type: "p", html: "Två lika laddningar stöter bort varandra med en kraft som avtar med kvadraten på avståndet enligt Coulombs lag, $F = k \\cdot \\dfrac{Q_1 \\cdot Q_2}{r^2}$. Varje par har dessutom en elektrisk lägesenergi, $E_\\mathrm{p} = k \\cdot \\dfrac{Q_1 \\cdot Q_2}{r}$, som blir mindre ju längre isär laddningarna står. Laddningarna på klotet hamnar i den placering där den sammanlagda lägesenergin för alla par är så liten som möjligt." },
+      { type: "p", html: "För några få laddningar går svaret att resonera fram. Två hamnar på var sin pol, tre i en liksidig triangel runt klotet. Fyra laddningar lägger sig i hörnen av en tetraeder, sex i hörnen av en oktaeder och tolv i hörnen av en ikosaeder, en kropp med tjugo trekantiga sidoytor. Men antalet nästan lika bra placeringar växer explosionsartat med antalet laddningar. Datorer har tagit fram troliga bästa lösningar för upp till några tusen laddningar, men det går sällan att bevisa att en lösning verkligen är den bästa." },
+      { type: "h2", text: "Ett klot av supraflytande helium" },
+      { type: "p", html: "Den som vill pröva frågan i laboratoriet behöver ett klot där laddningarna kan röra sig fritt längs ytan men stannar kvar på den. I en vattendroppe sprider sig laddningarna i hela volymen. Forskarna valde i stället droppar av supraflytande helium, kylda till några tiondels grader över den absoluta nollpunkten. Där kan laddningarna röra sig nästan ostört, och de lägger sig strax innanför droppens yta." },
+      { type: "p", html: "Dropparna bildas när heliumgas, förkyld till 5,75&nbsp;kelvin och under trycket 20&nbsp;bar, sprutas ut i vakuum genom ett hål som bara är 5&nbsp;mikrometer brett. Strålen av droppar korsas av en elektronstråle som slår loss elektroner och gör varje droppe positivt laddad på flera ställen. Sedan passerar dropparna genom guldånga från en degel som håller omkring 1&nbsp;500&nbsp;kelvin." },
+      { type: "p", html: "Här kommer ett knep som liknar influens. Laddningen i droppen förskjuter elektronerna i en neutral guldatom, så att atomens negativa sida hamnar närmast laddningen och atomen dras mot den, på samma sätt som en laddad kam drar till sig papperstussar. Den första guldatomen som når fram tar över laddningen, och fler atomer samlas runt den. Till sist sitter ett guldkorn med omkring 700&nbsp;atomer och en enda positiv laddning på varje plats där droppen var laddad." },
+      { type: "p", html: "Dropparna får sedan slå ner på en tunn kolhinna i en provhållare för elektronmikroskopet. Heliumet dunstar bort, men guldkornen stannar där de landade och bildar ett avtryck av hur laddningarna satt. Avtrycken fotograferades i ett transmissionselektronmikroskop." },
+      { type: "image", src: "nyheter/bilder/2026-11-14-laddningarna-pa-heliumdroppen-2.jpg", alt: "Tre rader med bilder. Till vänster elektronmikroskopbilder av svarta prickar inom en röd cirkel, med 5, 11 och 16 prickar. I mitten samma prickar jämförda med blå ringar från beräkningen. Till höger tredimensionella klot med guldkulor i hörnen av en mångsidig kropp.", caption: "Avtryck av droppar med 5, 11 och 16 laddningar (vänster), jämförda med beräknade lösningar på Thomsonproblemet sedda rakt uppifrån (mitten, svarta prickar mot blå ringar) och samma lösningar i tre dimensioner (höger). Den röda cirkeln visar droppens kant.", credit: "Figur ur studien: T. Pohl med flera, Physical Review Letters 137, 183001 (2026) (CC BY 4.0)" },
+      { type: "h2", text: "Upp till 36 laddningar stämde med beräkningarna" },
+      { type: "p", html: "Forskarna analyserade 25 tydliga avtryck med mellan 5 och 36 guldkorn. För varje avtryck vred de den beräknade bästa placeringen i datorn tills den, sedd rakt uppifrån, passade så bra som möjligt med prickarna. Mönstren stämde nära överens med de beräknade lösningarna. Det tyder på att laddningarna av sig själva hamnar i den placering där lägesenergin är lägst, åtminstone när de är upp till ett trettiotal." },
+      { type: "quote", html: "Experiment kan inte ge ett matematiskt bevis, men de kan visa något som beräkningar ensamma inte kan: vilka placeringar ett verkligt fysikaliskt system faktiskt väljer.", cite: "Shengfu Yang, University of Leicester, till Physics World (översatt)" },
+      { type: "p", html: "I de största dropparna, med en radie på upp till omkring en mikrometer och hundratals laddningar, går det inte längre att peka ut en enda lösning. Men där syns något annat. Guldkornen bildar ett mönster av sexhörningar, där varje laddning har sex grannar, och här och där sitter en laddning med bara fem grannar." },
+      { type: "image", src: "nyheter/bilder/2026-11-14-laddningarna-pa-heliumdroppen-3.jpg", alt: "Tre bilder. Till vänster hundratals svarta prickar från en stor droppe. I mitten prickarna sammanbundna med linjer till trianglar, där tre femhörningar är markerade i rött. Till höger ett blått klot täckt av små guldkulor i ett triangelmönster med röda femhörningar.", caption: "Avtrycket av en stor droppe (vänster). När grannarna binds ihop syns ett mönster där de flesta laddningar har sex grannar, men några har bara fem (röda femhörningar, mitten). Till höger en beräknad lösning med 400 laddningar.", credit: "Figur ur studien: T. Pohl med flera, Physical Review Letters 137, 183001 (2026) (CC BY 4.0)" },
+      { type: "p", html: "Det är ingen slump. Ett plant golv kan täckas helt med sexhörningar, men ett klot kan det inte. Matematiken kräver att minst tolv punkter på klotet har fem grannar i stället för sex, precis som en fotboll har tolv femhörningar bland sina sexhörningar. Att samma femhörningar dyker upp i avtrycken är ett tecken på att laddningarna ordnat sig efter klotets krökning." },
+      { type: "h2", text: "Naturen räknar ut svaret" },
+      { type: "p", html: "Metoden har begränsningar. När en stor droppe slår ner stänker den, och bara guldkornen från den halva av droppen som vette mot kolhinnan hamnar på rätt plats. Forskarna vill därför låta dropparna landa långsammare, så att även stora droppar lämnar fullständiga avtryck. Thomsonproblemet är inte heller bara en kuriositet: liknande frågor om hur punkter packas på ett klot har betydelse för hur proteinerna i skalet på vissa virus och kolatomerna i fullerener ordnar sig." },
+      { type: "p", html: "”Det som fascinerar mig mest är att det vänder på det vanliga förhållandet mellan teori och experiment. I stället för att matematiken bara förutsäger vad ett experiment ska se kan vi nu låta naturen ta fram lösningar och be matematiken förklara det vi ser”, säger Shengfu Yang i universitetet i Innsbrucks pressmeddelande." },
+      { type: "fact", title: "Visste du?", items: [
+        "Helium blir supraflytande under 2,17&nbsp;kelvin. Då försvinner all inre friktion, och vätskan kryper som en tunn hinna upp längs kärlets väggar och över kanten. Fotot överst visar en skål som töms på det sättet: heliumet har krupit ut och samlas i en droppe under skålen.",
+        "När forskarna räknat med att dropparna krympt med omkring 75&nbsp;nanometer på vägen fick de fram att alla droppar ursprungligen bar omkring 63 laddningar per kvadratmikrometer yta, oberoende av hur stora de var. Det stämmer med att alla droppar passerade elektronstrålen med ungefär samma fart.",
+        "Guldkornen i försöket har i genomsnitt en massa på omkring 140&nbsp;000 atommassenheter, ungefär lika mycket som 35&nbsp;000 heliumatomer."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-13-magneten-vid-sidan-av-fibern",
     date: "2026-11-13",
     title: "En magnet vid sidan av en glasfiber vrider ljuset, en effekt som räknats bort i femtio år",

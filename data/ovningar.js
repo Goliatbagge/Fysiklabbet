@@ -8595,7 +8595,7 @@ $$
         },
         {
             level: 1,
-            question: `En LED-lampa har verkningsgraden 0,40 (40 %). Hur stor del av dess energiförbrukning blir nyttigt ljus om den tillförs 25 J energi?`,
+            question: `En LED-lampa har verkningsgraden 0,40 (40 %). Lampan tillförs 25 J energi. Hur mycket energi, i joule, blir nyttigt ljus?`,
             answer: { value: 10, unit: 'J', tol: 0.02 },
             solution: `$$
 E_n = \\eta \\cdot E_t = 0{,}40 \\cdot 25 = 10\\ \\mathrm{J}

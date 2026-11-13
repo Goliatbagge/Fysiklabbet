@@ -279,6 +279,16 @@ node .claude/verify-exittickets.js
 # balanskontroll i dess verifierare. Se OVNINGAR.md, "Flervalsfrågor".
 node .claude/verify-ovningar-flerval.js
 
+# Verifiera att FRÅGAN BER OM DET SOM FACIT ANGER (KÖR FÖRE COMMIT vid nya
+# eller ändrade övningar!) — "hur stor del/andel" kräver facit i % eller
+# utan enhet, "hur många procent"/"i procent" kräver %, och "hur mycket
+# energi" får inte ha en andel som facit. Felet har hänt: uppgift 2 i
+# fy1-4.6 frågade "Hur stor del av energin blir ljus?" med facit 10 J, så
+# en elev som svarade 40 % fick fel (påpekat 2026-11-13). Formulera
+# frågan så att storheten och enheten framgår ("Hur mycket energi, i
+# joule, …?"). Bara frågor utan deluppgifter granskas.
+node .claude/verify-fraga-svar.js
+
 # Verifiera RÄKNINGEN i lösningarna (KÖR FÖRE COMMIT vid nya eller ändrade
 # övningar, exit tickets eller teoriexempel!) — räknar om varje led i
 # formlerna som bara innehåller tal (insättningsled, mellanled, slutvärde)

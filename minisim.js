@@ -17703,6 +17703,453 @@
         loop.satt(true); sk.visa();
     }
 
+    // ══════════════════════════════════════════════════════════════════════
+    //  Gemensamt för interferenssimuleringarna (hogtalarpar, vagskillnad)
+    // ══════════════════════════════════════════════════════════════════════
+    // Två källor på avståndet 2·f. Punkterna där vägskillnaden till de två
+    // källorna är konstant, |P K₁| − |P K₂| = c, ligger på en hyperbel. I
+    // lokala koordinater (u längs källornas symmetriaxel, w längs linjen
+    // mellan källorna) är grenen w = (c/2) · √(1 + u²/b²), b² = f² − c²/4.
+    // Kurvan ritas alltså EXAKT, så att vägskillnaden verkligen är konstant
+    // längs hela linjen, inte bara långt bort.
+    function ifHyperbel(c, f, umax, n) {
+        var b2 = f * f - c * c / 4, pts = [];
+        for (var k = 0; k <= n; k++) {
+            var u = umax * k / n;
+            pts.push([u, (c / 2) * Math.sqrt(1 + u * u / b2)]);
+        }
+        return pts;
+    }
+    function ifSvgPunkt(svg, e) {
+        var pt = svg.createSVGPoint();
+        pt.x = e.clientX; pt.y = e.clientY;
+        var m = svg.getScreenCTM();
+        if (!m) return null;
+        var q = pt.matrixTransform(m.inverse());
+        return [q.x, q.y];
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: hogtalarpar
+    // ══════════════════════════════════════════════════════════════════════
+    // fy2-2.14 (Diffraktion och interferens), demonstrationen "Lyssna efter
+    // nod- och maximilinjer": två högtalare i fas, sedda uppifrån, sänder en
+    // ton på 480 Hz (λ = 340/480 m). Eleven drar ett öra i sidled längs en
+    // linje tvärs över klassrummet och hör tonen bli starkare och svagare.
+    // Ljudet syntetiseras med Web Audio: en sinuston vars styrka följer
+    // summan av de två vågorna i örat, |e^{ikr₁}/r₁ + e^{ikr₂}/r₂|, delad
+    // med 1/r₁ + 1/r₂ (1 i en maximipunkt, nära 0 i en nodpunkt).
+    // Kryssrutorna visar vågfronterna (vågtopparna, animerade) och nod- och
+    // maximilinjerna (exakta hyperbler, se ifHyperbel).
+    var hpRaknare = 0;
+    function buildHogtalarpar(node, cfg) {
+        var INK = '#1f2530', BLA = '#2563c9', ROD = '#c0392b', GRA = '#6b7178';
+        var W = 640, H = 420, S = 56;                     // px per meter
+        var V = 340, FREQ = 480, LAM = V / FREQ;          // m/s, Hz, m
+        var D = 2.0, CX = 320, YS = 74, YL = 372;         // högtalaravstånd (m), mitt, högtalarnas y, gånglinjens y
+        var XL = [CX - D / 2 * S, CX + D / 2 * S];
+        var TANIM = 1.1;                                  // en period i animationen (s)
+        var ex = CX + 0.62 * S, tid = 0, visaFronter = true, visaLinjer = false;
+        var EXMIN = 34, EXMAX = W - 34;
+        var id = 'ms-hp-rutnat-' + (++hpRaknare);
+
+        function fmt(v, d) {
+            var s = v.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',');
+        }
+        function avst(i) { var dx = (ex - XL[i]) / S, dy = (YL - YS) / S; return Math.sqrt(dx * dx + dy * dy); }
+        function styrka() {
+            var r1 = avst(0), r2 = avst(1), k = 2 * Math.PI / LAM;
+            var re = Math.cos(k * r1) / r1 + Math.cos(k * r2) / r2;
+            var im = Math.sin(k * r1) / r1 + Math.sin(k * r2) / r2;
+            return Math.sqrt(re * re + im * im) / (1 / r1 + 1 / r2);
+        }
+
+        // ── statiskt: rutnät, bord, tongenerator, sladdar, högtalare ───────
+        var bas = vgRutnat(id, 0, 0, W, H);
+        bas += '<rect x="' + (XL[0] - 58) + '" y="' + (YS - 40) + '" width="' + (XL[1] - XL[0] + 116) + '" height="44" rx="3" fill="#d9c3a0" stroke="#a88a5e" stroke-width="1.2"/>';
+        bas += '<path d="M ' + (CX - 20) + ' ' + (YS - 26) + ' C ' + (CX - 50) + ' ' + (YS - 26) + ' ' + (XL[0] + 30) + ' ' + (YS - 20) + ' ' + XL[0] + ' ' + (YS - 20) +
+            ' M ' + (CX + 20) + ' ' + (YS - 26) + ' C ' + (CX + 50) + ' ' + (YS - 26) + ' ' + (XL[1] - 30) + ' ' + (YS - 20) + ' ' + XL[1] + ' ' + (YS - 20) +
+            '" fill="none" stroke="#3a3f47" stroke-width="1.6"/>';
+        bas += '<rect x="' + (CX - 34) + '" y="' + (YS - 36) + '" width="68" height="22" rx="3" fill="#3a3f47"/>' +
+            '<text x="' + CX + '" y="' + (YS - 20.5) + '" text-anchor="middle" font-size="12" fill="#f3eee4">480 Hz</text>';
+        XL.forEach(function (x) {
+            bas += '<rect x="' + (x - 15) + '" y="' + (YS - 26) + '" width="30" height="16" rx="2" fill="#2b3038"/>' +
+                '<polygon points="' + (x - 10) + ',' + (YS - 10) + ' ' + (x + 10) + ',' + (YS - 10) + ' ' + (x + 15) + ',' + YS + ' ' + (x - 15) + ',' + YS + '" fill="#5a616b"/>';
+        });
+        // gånglinjen
+        bas += '<line x1="12" y1="' + YL + '" x2="' + (W - 12) + '" y2="' + YL + '" stroke="' + INK + '" stroke-width="1.3" stroke-dasharray="7 5" opacity="0.6"/>' +
+            '<text x="16" y="' + (YL + 30) + '" font-size="13" fill="' + GRA + '">vägg</text>' +
+            '<text x="' + (W - 16) + '" y="' + (YL + 30) + '" text-anchor="end" font-size="13" fill="' + GRA + '">vägg</text>';
+
+        // nod- och maximilinjer (ritas en gång)
+        function linjer() {
+            var s = '', f = D / 2 * S, umax = H - YS + 10;
+            for (var h = -6; h <= 6; h++) {
+                var c = h / 2 * LAM * S;
+                if (Math.abs(c) >= 2 * f) continue;
+                var max = h % 2 === 0;
+                var pts = ifHyperbel(c, f, umax, 60).map(function (p) { return vgR1(CX + p[1]) + ',' + vgR1(YS + p[0]); });
+                s += '<polyline points="' + pts.join(' ') + '" fill="none" stroke="' + (max ? ROD : GRA) + '" stroke-width="' +
+                    (max ? 2 : 1.8) + '"' + (max ? '' : ' stroke-dasharray="6 4"') + ' opacity="0.85"/>';
+            }
+            return s;
+        }
+        var linjeSvg = linjer();
+
+        function fronter() {
+            var s = '', rmax = Math.sqrt(W * W + H * H) / S, fas = (tid / TANIM) % 1;
+            [0, 1].forEach(function (i) {
+                var x = XL[i], col = i ? ROD : BLA;
+                for (var k = 0; (k + fas) * LAM < rmax; k++) {
+                    var r = (k + fas) * LAM * S;
+                    if (r < 4) continue;
+                    var op = Math.max(0, Math.min(0.75, 0.75 * (1 - r / (rmax * S)) + 0.15)) * Math.min(1, r / 18);
+                    s += '<path d="M ' + vgR1(x - r) + ' ' + YS + ' A ' + vgR1(r) + ' ' + vgR1(r) + ' 0 0 0 ' + vgR1(x + r) + ' ' + YS +
+                        '" fill="none" stroke="' + col + '" stroke-width="1.5" opacity="' + op.toFixed(2) + '"/>';
+                }
+            });
+            return s;
+        }
+
+        function ora(x, y) {
+            return '<g transform="translate(' + vgR1(x) + ' ' + y + ')">' +
+                '<path d="M -3 -21 C 9 -24 18 -14 17 -3 C 16 6 10 9 8 15 C 6 22 -2 25 -7 20 C -11 16 -10 10 -7 6 ' +
+                'C -12 1 -13 -8 -10 -14 C -8 -18 -6 -20 -3 -21 Z" fill="#f0c9a6" stroke="#8a5a3b" stroke-width="1.6" stroke-linejoin="round"/>' +
+                '<path d="M -1 -13 C 6 -15 11 -9 10 -3 C 9 2 5 3 3 7" fill="none" stroke="#8a5a3b" stroke-width="1.4" stroke-linecap="round"/>' +
+                '<path d="M -4 -2 C -2 -5 2 -4 2 -1 C 2 2 -1 3 -3 2" fill="none" stroke="#8a5a3b" stroke-width="1.3" stroke-linecap="round"/>' +
+                '</g>';
+        }
+
+        function rita() {
+            var s = '';
+            if (visaFronter) s += fronter();
+            if (visaLinjer) s += linjeSvg;
+            var a = styrka();
+            // ljudvågor som går in i örat, fler och tydligare ju starkare tonen är
+            for (var k = 1; k <= 3; k++) {
+                var op = Math.max(0, Math.min(1, a * 1.25 - (k - 1) * 0.3));
+                if (op <= 0.02) continue;
+                var r = 22 + k * 9;
+                s += '<path d="M ' + vgR1(ex - r * 0.7) + ' ' + vgR1(YL - r * 0.7) + ' A ' + r + ' ' + r + ' 0 0 1 ' + vgR1(ex + r * 0.7) + ' ' + vgR1(YL - r * 0.7) +
+                    '" fill="none" stroke="#1d7a46" stroke-width="2.4" stroke-linecap="round" opacity="' + op.toFixed(2) + '"/>';
+            }
+            s += ora(ex, YL);
+            // ljudmätare uppe till höger
+            var mx = W - 182, my = 18;
+            s += '<rect x="' + (mx - 10) + '" y="' + (my - 4) + '" width="180" height="46" rx="5" fill="#f7f2e8" stroke="#c9bfae"/>' +
+                '<text x="' + mx + '" y="' + (my + 12) + '" font-size="13" fill="' + INK + '">Ljudstyrka i örat</text>' +
+                '<rect x="' + mx + '" y="' + (my + 20) + '" width="160" height="12" rx="2" fill="#ece3d2" stroke="#b9ad98"/>' +
+                '<rect x="' + mx + '" y="' + (my + 20) + '" width="' + vgR1(160 * a) + '" height="12" rx="2" fill="#1d7a46"/>';
+            dyn.innerHTML = s;
+
+            var r1 = avst(0), r2 = avst(1), ds = Math.abs(r1 - r2), q = ds / LAM;
+            var narmast = Math.round(q * 2) / 2, lage;
+            if (Math.abs(q - narmast) < 0.08) {
+                lage = narmast % 1 === 0
+                    ? 'Örat står på en <b>maximilinje</b>: vägskillnaden är ett helt antal våglängder, och tonen är stark.'
+                    : 'Örat står på en <b>nodlinje</b>: vägskillnaden är ett halvt antal våglängder, och det är nästan tyst.';
+            } else {
+                lage = 'Örat står mellan en maximilinje och en nodlinje.';
+            }
+            info.innerHTML = 'Tonen 480&nbsp;Hz har våglängden <em>λ</em> = 340&nbsp;/&nbsp;480 = ' + fmt(LAM, 2) + '&nbsp;m. ' +
+                'Avstånd till högtalarna: ' + fmt(r1, 2) + '&nbsp;m och ' + fmt(r2, 2) + '&nbsp;m. Vägskillnad ' +
+                'Δ<em>s</em> = ' + fmt(ds, 2) + '&nbsp;m = ' + fmt(q, 2) + '&nbsp;<em>λ</em>.<br>' + lage;
+            ljudNiva(a);
+        }
+
+        // ── ljud ──────────────────────────────────────────────────────────
+        var actx = null, osc = null, gain = null, ljudPa = false, synlig = true;
+        function ljudNiva(a) {
+            if (!gain || !actx) return;
+            var mal = ljudPa && synlig ? 0.22 * a * a : 0;
+            gain.gain.setTargetAtTime(mal, actx.currentTime, 0.04);
+        }
+        function sattLjud(pa) {
+            ljudPa = pa;
+            if (pa && !actx) {
+                var AC = window.AudioContext || window.webkitAudioContext;
+                if (!AC) { ljudPa = false; return; }
+                actx = new AC();
+                gain = actx.createGain();
+                gain.gain.value = 0;
+                gain.connect(actx.destination);
+                osc = actx.createOscillator();
+                osc.type = 'sine';
+                osc.frequency.value = FREQ;
+                osc.connect(gain);
+                osc.start();
+            }
+            if (actx && actx.state === 'suspended' && pa) actx.resume();
+            ljudBtn.textContent = ljudPa ? 'Stäng av ljudet' : 'Slå på ljudet';
+            ljudBtn.classList.toggle('ms-primar', !ljudPa);
+            ljudNiva(styrka());
+        }
+
+        // ── DOM ───────────────────────────────────────────────────────────
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus ms-bred';
+        if (cfg.titel) {
+            var tEl = document.createElement('div');
+            tEl.className = 'minisim-title';
+            tEl.textContent = cfg.titel;
+            card.appendChild(tEl);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene ms-kv-scene';
+        scene.innerHTML = '<svg class="ms-kv-svg" viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H + '" ' +
+            'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" tabindex="0" role="img" ' +
+            'style="touch-action:pan-y;font-style:normal" aria-label="Två högtalare sedda uppifrån, kopplade till en tongenerator ' +
+            'på 480 hertz. Längs en linje tvärs över klassrummet kan ett öra dras i sidled. Piltangenterna flyttar örat.">' +
+            bas + '<g class="ms-hp-dyn"></g></svg>';
+        var svg = scene.querySelector('svg');
+        var dyn = scene.querySelector('.ms-hp-dyn');
+        card.appendChild(scene);
+        msFullskarm(card, scene, W / H, 150);
+
+        var controls = document.createElement('div');
+        controls.className = 'minisim-controls';
+        var ljudBtn = vgBtn('Slå på ljudet', 'ms-primar');
+        var linjeCk = vgCheck('Visa nod- och maximilinjer', visaLinjer);
+        var frontCk = vgCheck('Visa vågfronter', visaFronter);
+        controls.appendChild(ljudBtn);
+        controls.appendChild(linjeCk.label);
+        controls.appendChild(frontCk.label);
+        card.appendChild(controls);
+        var info = document.createElement('div');
+        info.className = 'minisim-info ms-brod';
+        info.style.marginTop = '8px';
+        card.appendChild(info);
+        node.appendChild(card);
+
+        ljudBtn.addEventListener('click', function () { sattLjud(!ljudPa); });
+        linjeCk.cb.addEventListener('change', function () { visaLinjer = linjeCk.cb.checked; rita(); });
+        frontCk.cb.addEventListener('change', function () { visaFronter = frontCk.cb.checked; rita(); });
+
+        // dra örat: greppa nära örat eller klicka var som helst nära gånglinjen
+        var drar = false;
+        function flytta(p) { ex = Math.max(EXMIN, Math.min(EXMAX, p[0])); rita(); }
+        svg.addEventListener('pointerdown', function (e) {
+            var p = ifSvgPunkt(svg, e);
+            if (!p || Math.abs(p[1] - YL) > 44) return;
+            drar = true;
+            svg.style.touchAction = 'none';
+            if (svg.setPointerCapture) svg.setPointerCapture(e.pointerId);
+            e.preventDefault();
+            flytta(p);
+        });
+        svg.addEventListener('pointermove', function (e) {
+            var p = ifSvgPunkt(svg, e);
+            if (!p) return;
+            if (drar) { flytta(p); return; }
+            svg.style.cursor = Math.abs(p[1] - YL) <= 44 ? (Math.abs(p[0] - ex) < 26 ? 'grab' : 'pointer') : 'default';
+        });
+        function slapp() { drar = false; svg.style.touchAction = 'pan-y'; }
+        svg.addEventListener('pointerup', slapp);
+        svg.addEventListener('pointercancel', slapp);
+        svg.addEventListener('keydown', function (e) {
+            var steg = e.shiftKey ? 12 : 3;
+            if (e.key === 'ArrowLeft') { ex = Math.max(EXMIN, ex - steg); rita(); e.preventDefault(); }
+            else if (e.key === 'ArrowRight') { ex = Math.min(EXMAX, ex + steg); rita(); e.preventDefault(); }
+        });
+        // tyst när kortet inte syns eller fliken byts
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(function (en) { synlig = en[0].isIntersecting; ljudNiva(styrka()); }, { threshold: 0.05 }).observe(card);
+        }
+        document.addEventListener('visibilitychange', function () { if (document.hidden && ljudPa) sattLjud(false); });
+
+        var loop = vgLoop(card, function (dt) { tid += dt; if (visaFronter) rita(); });
+        card._set = function (x, linjerPa, fronterPa, t) {
+            ex = CX + x * S; visaLinjer = !!linjerPa; visaFronter = fronterPa !== false; tid = t || 0;
+            linjeCk.cb.checked = visaLinjer; frontCk.cb.checked = visaFronter; loop.satt(false); rita();
+        };
+        rita();
+        loop.satt(true);
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    //  typ: vagskillnad
+    // ══════════════════════════════════════════════════════════════════════
+    // fy2-2.14, rutan "Vägskillnad på max- och nodlinjer": två vågkällor A
+    // och B på avståndet 2λ med maximilinjerna (heldragna, röda) och
+    // nodlinjerna (streckade) ritade som exakta hyperbler. Namnet står i
+    // linjens ände. Eleven klickar på en linje för att sätta punkten P där
+    // och drar sedan P längs linjen. Sträckorna PA och PB ritas, och rutan
+    // nere till vänster visar att skillnaden är densamma var P än står.
+    var vsRaknare = 0;
+    function buildVagskillnad(node, cfg) {
+        var INK = '#1f2530', ROD = '#c0392b', GRA = '#5f656d', BLA = '#2563c9', GRN = '#1d7a46';
+        var W = 580, H = 540, LAM = 44, F = LAM, XS = 66, CY = 240, R = 300;
+        var A = [XS, CY - F], B = [XS, CY + F];
+        var id = 'ms-vs-rutnat-' + (++vsRaknare);
+        var ORD = ['0:e', '1:a'];
+        // linjer: PA − PB = c·λ
+        var LINJER = [-1.5, -1, -0.5, 0, 0.5, 1, 1.5].map(function (c) {
+            var max = c % 1 === 0, n = Math.floor(Math.abs(c));
+            var pts = [];
+            // sampla tills avståndet från mittpunkten är R
+            var b2 = F * F - c * c * LAM * LAM / 4, u = 0, du = 1;
+            while (true) {
+                var w = (c * LAM / 2) * Math.sqrt(1 + u * u / b2);
+                pts.push([XS + u, CY + w]);
+                if (u * u + w * w >= R * R) break;
+                u += du;
+            }
+            return { c: c, max: max, namn: ORD[n] + ' ' + (max ? 'maximilinjen' : 'nodlinjen'), pts: pts };
+        });
+        var valdL = 5, valdI = 150;                       // 1:a maximilinjen under mittlinjen
+        var drar = false;
+
+        function it(t) { return '<tspan font-style="italic">' + t + '</tspan>'; }
+        function fmt(v, d) {
+            var s = v.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',');
+        }
+        function dist(p, q) { var dx = p[0] - q[0], dy = p[1] - q[1]; return Math.sqrt(dx * dx + dy * dy); }
+
+        var bas = vgRutnat(id, 0, 0, W, H);
+        // svaga vågtoppar från A och B (högra halvan)
+        for (var k = 1; k * LAM < R + 40; k++) {
+            [A, B].forEach(function (Q) {
+                var r = k * LAM;
+                bas += '<path d="M ' + Q[0] + ' ' + (Q[1] - r) + ' A ' + r + ' ' + r + ' 0 0 1 ' + Q[0] + ' ' + (Q[1] + r) +
+                    '" fill="none" stroke="' + BLA + '" stroke-width="1" opacity="0.16"/>';
+            });
+        }
+        LINJER.forEach(function (L) {
+            var s = L.pts.map(function (p) { return vgR1(p[0]) + ',' + vgR1(p[1]); }).join(' ');
+            bas += '<polyline points="' + s + '" fill="none" stroke="' + (L.max ? ROD : GRA) + '" stroke-width="2"' +
+                (L.max ? '' : ' stroke-dasharray="6 4"') + '/>';
+            var e = L.pts[L.pts.length - 1], p = L.pts[L.pts.length - 6];
+            var ux = e[0] - p[0], uy = e[1] - p[1], l = Math.sqrt(ux * ux + uy * uy);
+            bas += '<text x="' + vgR1(e[0] + ux / l * 8) + '" y="' + vgR1(e[1] + uy / l * 8 + 5) + '" font-size="14" fill="' +
+                (L.max ? ROD : GRA) + '">' + L.namn + '</text>';
+        });
+        [[A, 'A'], [B, 'B']].forEach(function (q) {
+            bas += '<circle cx="' + q[0][0] + '" cy="' + q[0][1] + '" r="5" fill="' + INK + '"/>' +
+                '<text x="' + (q[0][0] - 12) + '" y="' + (q[0][1] + 6) + '" text-anchor="end" font-size="17" fill="' + INK + '">' + it(q[1]) + '</text>';
+        });
+
+        function brak(x, y, tal, namn, farg) {
+            // tal i halva våglängder → text eller stående bråk efter x
+            var h = Math.round(Math.abs(tal) * 2);
+            if (h === 0) return { s: '<text x="' + x + '" y="' + y + '" font-size="18" fill="' + farg + '">0</text>', w: 12 };
+            if (h % 2 === 0) {
+                var t = (h === 2 ? '' : String(h / 2)) + '';
+                return { s: '<text x="' + x + '" y="' + y + '" font-size="18" fill="' + farg + '">' + t + it('λ') + '</text>', w: t.length * 11 + 12 };
+            }
+            var tl = (h === 1 ? '' : String(h)), bw = tl.length * 10 + 14, cx = x + bw / 2;
+            return { s: '<text x="' + cx + '" y="' + (y - 10) + '" text-anchor="middle" font-size="16" fill="' + farg + '">' + tl + it('λ') + '</text>' +
+                '<line x1="' + x + '" y1="' + (y - 5) + '" x2="' + (x + bw) + '" y2="' + (y - 5) + '" stroke="' + farg + '" stroke-width="1.4"/>' +
+                '<text x="' + cx + '" y="' + (y + 12) + '" text-anchor="middle" font-size="16" fill="' + farg + '">2</text>', w: bw };
+        }
+
+        function rita() {
+            var L = LINJER[valdL], P = L.pts[valdI], s = '';
+            var pa = dist(P, A) / LAM, pb = dist(P, B) / LAM;
+            s += '<line x1="' + A[0] + '" y1="' + A[1] + '" x2="' + vgR1(P[0]) + '" y2="' + vgR1(P[1]) + '" stroke="' + BLA + '" stroke-width="2.4"/>';
+            s += '<line x1="' + B[0] + '" y1="' + B[1] + '" x2="' + vgR1(P[0]) + '" y2="' + vgR1(P[1]) + '" stroke="' + GRN + '" stroke-width="2.4"/>';
+            s += '<circle cx="' + vgR1(P[0]) + '" cy="' + vgR1(P[1]) + '" r="11" fill="' + INK + '" opacity="0.12"/>' +
+                '<circle cx="' + vgR1(P[0]) + '" cy="' + vgR1(P[1]) + '" r="5.5" fill="' + INK + '"/>';
+            // P-etiketten på den sida av linjen som vänder bort från källorna
+            var nx = P[0] - (A[0] + B[0]) / 2, ny = P[1] - CY, nl = Math.sqrt(nx * nx + ny * ny) || 1;
+            s += '<text x="' + vgR1(P[0] + nx / nl * 20) + '" y="' + vgR1(P[1] + ny / nl * 20 + 6) + '" text-anchor="middle" font-size="17" fill="' + INK + '">' + it('P') + '</text>';
+            // avläsningsruta nere till vänster
+            var lang = L.c >= 0, rad1 = lang ? it('PA') + ' − ' + it('PB') : it('PB') + ' − ' + it('PA');
+            var x0 = W - 172, y0 = H - 116;
+            s += '<rect x="' + x0 + '" y="' + y0 + '" width="160" height="106" rx="6" fill="#f7f2e8" stroke="#c9bfae"/>';
+            s += '<text x="' + (x0 + 12) + '" y="' + (y0 + 22) + '" font-size="14" fill="' + BLA + '">' + it('PA') + ' = ' + fmt(pa, 2) + it('λ') + '</text>';
+            s += '<text x="' + (x0 + 12) + '" y="' + (y0 + 42) + '" font-size="14" fill="' + GRN + '">' + it('PB') + ' = ' + fmt(pb, 2) + it('λ') + '</text>';
+            var t1 = '<text x="' + (x0 + 12) + '" y="' + (y0 + 82) + '" font-size="18" fill="' + INK + '">' + rad1 + ' =</text>';
+            var b = brak(x0 + 106, y0 + 82, L.c, '', L.max ? ROD : GRA);
+            s += t1 + b.s;
+            dyn.innerHTML = s;
+            info.innerHTML = '<em>P</em> ligger på ' + L.namn + '. ' + (L.max
+                ? 'Vägskillnaden är ett helt antal våglängder, Δ<em>s</em> = <em>n</em> · <em>λ</em> med <em>n</em> = ' + Math.abs(L.c) + ', och vågorna möts i fas.'
+                : 'Vägskillnaden är ett halvt antal våglängder, Δ<em>s</em> = (<em>n</em> + ½) · <em>λ</em> med <em>n</em> = ' + Math.floor(Math.abs(L.c)) + ', och vågorna möts i motfas.') +
+                ' Dra i punkten: <em>PA</em> och <em>PB</em> ändras, men skillnaden står still. Klicka på en annan linje för att flytta dit.';
+        }
+
+        // närmaste punkt på en linje (eller alla linjer)
+        function narmast(p, bara) {
+            var bast = { d: 1e9 };
+            LINJER.forEach(function (L, li) {
+                if (bara != null && li !== bara) return;
+                for (var i = 4; i < L.pts.length; i++) {
+                    var d = dist(p, L.pts[i]);
+                    if (d < bast.d) bast = { d: d, l: li, i: i };
+                }
+            });
+            return bast;
+        }
+
+        var card = document.createElement('div');
+        card.className = 'minisim-card ms-ljus ms-bred';
+        if (cfg.titel) {
+            var tEl = document.createElement('div');
+            tEl.className = 'minisim-title';
+            tEl.textContent = cfg.titel;
+            card.appendChild(tEl);
+        }
+        var scene = document.createElement('div');
+        scene.className = 'minisim-scene ms-kv-scene';
+        scene.innerHTML = '<svg class="ms-kv-svg" viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H + '" ' +
+            'xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" tabindex="0" role="img" ' +
+            'style="touch-action:pan-y;font-style:normal" aria-label="Två vågkällor A och B med maximilinjer och nodlinjer. ' +
+            'En punkt P sitter på en av linjerna och kan dras längs den. Sträckorna PA och PB är utritade, och vägskillnaden visas ' +
+            'nere till vänster. Piltangenterna flyttar P längs linjen, upp och ned byter linje.">' +
+            bas + '<g class="ms-vs-dyn"></g></svg>';
+        var svg = scene.querySelector('svg');
+        var dyn = scene.querySelector('.ms-vs-dyn');
+        card.appendChild(scene);
+        msFullskarm(card, scene, W / H, 110);
+        var info = document.createElement('div');
+        info.className = 'minisim-info ms-brod';
+        info.style.marginTop = '8px';
+        card.appendChild(info);
+        node.appendChild(card);
+
+        svg.addEventListener('pointerdown', function (e) {
+            var p = ifSvgPunkt(svg, e);
+            if (!p) return;
+            var P = LINJER[valdL].pts[valdI], n;
+            if (dist(p, P) < 22) n = narmast(p, valdL);
+            else { n = narmast(p); if (n.d > 18) return; }
+            valdL = n.l; valdI = n.i;
+            drar = true;
+            svg.style.touchAction = 'none';
+            if (svg.setPointerCapture) svg.setPointerCapture(e.pointerId);
+            e.preventDefault();
+            rita();
+        });
+        svg.addEventListener('pointermove', function (e) {
+            var p = ifSvgPunkt(svg, e);
+            if (!p) return;
+            if (drar) { var n = narmast(p, valdL); valdI = n.i; rita(); return; }
+            var P = LINJER[valdL].pts[valdI];
+            svg.style.cursor = dist(p, P) < 22 ? 'grab' : (narmast(p).d <= 18 ? 'pointer' : 'default');
+        });
+        function slapp() { drar = false; svg.style.touchAction = 'pan-y'; }
+        svg.addEventListener('pointerup', slapp);
+        svg.addEventListener('pointercancel', slapp);
+        svg.addEventListener('keydown', function (e) {
+            var L = LINJER[valdL];
+            if (e.key === 'ArrowRight') valdI = Math.min(L.pts.length - 1, valdI + 4);
+            else if (e.key === 'ArrowLeft') valdI = Math.max(4, valdI - 4);
+            else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+                var nl = Math.max(0, Math.min(LINJER.length - 1, valdL + (e.key === 'ArrowUp' ? -1 : 1)));
+                valdI = Math.min(LINJER[nl].pts.length - 1, valdI);
+                valdL = nl;
+            } else return;
+            e.preventDefault();
+            rita();
+        });
+        card._set = function (l, frac) { valdL = l; valdI = Math.max(4, Math.round((LINJER[l].pts.length - 1) * frac)); rita(); };
+        rita();
+    }
+
     var TYPES = { tomtebloss: buildTomtebloss,
                   vagbotten: buildVagbotten, udde: buildUdde,
                   reflexion: buildReflexion, centrifug: buildCentrifug,
@@ -17735,7 +18182,8 @@
                   snurrslang: buildSnurrslang, pipton: buildPipton, provror: buildProvror,
                   varmekansla: buildVarmekansla, smaltrace: buildSmaltrace,
                   blixtljud: buildBlixtljud, tongenerator: buildTongenerator, simsida: buildSimsida,
-                  vagtank: buildVagtank };
+                  vagtank: buildVagtank,
+                  hogtalarpar: buildHogtalarpar, vagskillnad: buildVagskillnad };
 
     function decodeSrc(b64) {
         try { return decodeURIComponent(escape(atob(b64))); }

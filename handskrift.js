@@ -28565,7 +28565,7 @@
     y += adv + 1.2 * F;
     T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
       [['110 Hz är en mörk baston med']],
-      [['drygt tre meters våglängd —']],
+      [['drygt tre meters våglängd,']],
       [['just den storleksordning som']],
       [['rummets mått har. Rimligt!']]
     ]));

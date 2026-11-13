@@ -17749,7 +17749,7 @@
         var D = 2.0, CX = 320, YS = 74, YL = 372;         // högtalaravstånd (m), mitt, högtalarnas y, gånglinjens y
         var XL = [CX - D / 2 * S, CX + D / 2 * S];
         var TANIM = 1.1;                                  // en period i animationen (s)
-        var ex = CX + 0.62 * S, tid = 0, visaFronter = true, visaLinjer = false;
+        var ex = CX + 0.62 * S, tid = 0, visaFronter = false, visaLinjer = false;
         var EXMIN = 34, EXMAX = W - 34;
         var id = 'ms-hp-rutnat-' + (++hpRaknare);
 

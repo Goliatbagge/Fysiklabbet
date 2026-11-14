@@ -11,6 +11,30 @@ Format:
 - Teaser: <vad som utlovades inför nästa vecka>
 ```
 
+## 2026-11-15 — "En motor av batteri och tråd, och 2,3 miljoner varv"
+- Status: UTKAST skrivet lördag 2026-11-14 (molnsession, klart cirka 05.40 svensk tid, före 08.00). Tänkt utskick
+  söndag 2026-11-15 kl 06.00 svensk tid. **Kampanjen är INTE upplagd i EmailOctopus** (molnet saknar Chrome): kör
+  `/brev-till-octopus` lokalt, testskicka och schemalägg (tidszonen default:ar till London). Bilderna i nyheter/brev/
+  pushades till main. Förhandsvisningen (JPEG) skickades till användaren.
+- Preheader: "Plus ett kraftverk på labbänken, kompassen på jordklotet och lönnlöv som minns bomben."
+- Brevperiod 2026-11-08 till 2026-11-14: sju artiklar, alla länkade. Söndagens artikel (11-15, den gröna stjärnan)
+  sparas till nästa brev. `verify-nyhetsbrev.js` och `verify-sprak.js` utan fel (längdvarning ~746 ord).
+- Nyheter: 2026-11-12-snurran-som-svavar (hjälte), 2026-11-14-laddningarna-pa-heliumdroppen och
+  2026-11-11-lonnloven-och-bombkolet (miniatyrer). Läs även: rockringen (11-10, förra brevets teaser, infriad),
+  magneten vid fibern (11-13), isjättarnas magnetfält (11-09), sten som spricker på längden (11-08).
+- Nytt på sajten: den enklaste elmotorn, vattenkraftverket och jordmagnetiska fältet (alla tre ur planerat.md, med
+  skärmdumpar), elastisk och oelastisk stöt (skärmdump), kort rad om vågsimuleringarna i fy2-2.13/2.14, vågtanken och
+  NP Ma 1b/2b/3b VT 2022. Utelämnat: Coulombs lag, Magdeburg 3D, ljudnivå 3D, tongeneratorn, blixt och åska,
+  rörelsediagrammen, transformatorn och Lenz lag i 3D, Ma 1c-exemplen, interna ändringar.
+- Bilder: nyheter/brev/2026-11-15-{elmotor,vattenkraftverket,jordmagnetiska-faltet,stotar,snurran-hero,
+  heliumdroppen-thumb,lonnloven-thumb}.jpg. Skärmdumparna tagna i Chromium med React/Babel/three/Tailwind hämtade
+  från npm (CDN spärrade i molnet).
+- Veckans tips: utelämnat (brevet redan långt). tips.md orörd.
+- Teaser: Capotauro, den bruna dvärgen som såg ut som en tidig galax ([BREVTEASER] i ko.md), kontrollerat mot
+  data/nyheter.js och publicerat.md, ej publicerat. Teasat 2026-11-15. OBS: bockningen av elmotorn, jordmagnetiska
+  fältet och vattenkraftverket i planerat.md och teaserdatumet i ko.md gjordes inte (uppdraget tillät bara utkast,
+  logg och bilder i commit).
+
 ## 2026-11-08 — "En fisk som följer en granne, och satelliter just nu"
 - Status: UTKAST skrivet lördag 2026-11-07 (molnsession, före 08.00). Tänkt utskick söndag 2026-11-08
   kl 06.00 svensk tid. **Kampanjen är INTE upplagd i EmailOctopus** (molnet saknar Chrome): kör

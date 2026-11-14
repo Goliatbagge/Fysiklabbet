@@ -1,0 +1,121 @@
+<!--
+  ÄMNESRAD:  En motor av batteri och tråd, och 2,3 miljoner varv
+  PREHEADER: Plus ett kraftverk på labbänken, kompassen på jordklotet och lönnlöv som minns bomben.
+  Utskick:   söndag 2026-11-15 kl 06.00 svensk tid (EmailOctopus)
+  Brevperiod: 2026-11-08 till 2026-11-14 (sju artiklar, alla länkade). Söndagens artikel (11-15, den gröna stjärnan) hör till nästa brev.
+  Nytt på sajten: elmotorn, vattenkraftverket och jordmagnetiska fältet (alla tre enligt planerat.md, med skärmdumpar),
+  stötar i fy1-4.8 (skärmdump), vågsimuleringarna i fy2-2.13/2.14, vågtanken, NP Ma 1b/2b/3b VT 2022 (korta rader).
+  Skärmdumparna tagna i Chromium med React/Babel/three/Tailwind hämtade från npm (CDN spärrade).
+  Veckans tips utelämnat (brevet redan långt). tips.md orörd.
+  Teaser: Capotauro, den bruna dvärgen ([BREVTEASER] i ko.md), kontrollerat mot data/nyheter.js och publicerat.md, ej publicerat.
+-->
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fysiklabbets nyhetsbrev, vecka 46</title>
+</head>
+<body style="margin:0; padding:0; background-color:#f7f2e8;">
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f7f2e8;">
+<tr><td align="center" style="padding:28px 12px 40px;">
+
+  <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:100%;">
+
+    <tr><td align="center" style="padding:8px 8px 26px;">
+      <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; padding-bottom:10px;">Nyhetsbrev nr 14 &middot; vecka 46 &middot; 2026</div>
+      <div style="font-family:Georgia,'Times New Roman',serif; font-size:34px; font-weight:bold; color:#0f1620;">Fysiklabbet</div>
+    </td></tr>
+
+    <tr><td style="background-color:#fdfaf3; border-radius:10px; padding:30px 34px 8px;">
+
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 14px;">Om drygt fem veckor, den 21&nbsp;december, är det vintersolstånd, och sedan blir dagarna längre igen. Fram till dess är det gott om mörka eftermiddagar, och de passar bra för ellära. I veckan har tre nya simuleringar om magnetism och induktion kommit till Fysik nivå&nbsp;2.</p>
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:28px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:18px;">Nytt på Fysiklabbet</div>
+      </div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 14px;"><strong>Den enklaste elmotorn.</strong> Ställ ett batteri på en magnet och låt en böjd koppartråd vila på pluspolen, så börjar tråden snurra. Slå på strömmen, magnetfältets fältlinjer och de skalenliga kraftpilarna och se varför: där tråden går genom fältet trycks den åt sidan. Vänd magneten eller batteriet så byter motorn håll. Motorn går att bygga hemma med ett batteri, en magnet och en bit koppartråd, och sidan visar hur.</p>
+      <a href="https://fysiklabbet.se/fysik2-elmotor-app.html" style="text-decoration:none;">
+        <img src="https://fysiklabbet.se/nyheter/brev/2026-11-15-elmotor.jpg" width="532" alt="Ett AA-batteri står på en röd och vit magnet på en träbänk. En böjd koppartråd går från batteriets pluspol ned till magneten, med röda fältlinjer runt magneten och blå kraftpilar på tråden" style="display:block; width:100%; max-width:532px; height:auto; border-radius:8px; border:0;">
+      </a>
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:8px 0 16px;">Strömmen I i tråden, magnetfältet B och kraften F där tråden möter fältet.</div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 14px;"><strong>Vattenkraftverket på labbänken.</strong> En vattenstråle från en labbkran får ett skovelhjul att snurra. På samma axel sitter en magnet som roterar förbi en spole, och voltmeterns visare pendlar mellan plus och minus. Tänd lampan och se hjulet sakta in: strömmen i spolen bromsar magneten, och staplar visar vart vattnets energi tar vägen. <a href="https://fysiklabbet.se/fysik2-generator-app.html" style="color:#2563a8; text-decoration:underline;">Till vattenkraftverket</a>.</p>
+      <a href="https://fysiklabbet.se/fysik2-generator-app.html" style="text-decoration:none;">
+        <img src="https://fysiklabbet.se/nyheter/brev/2026-11-15-vattenkraftverket.jpg" width="532" alt="En labbkran sprutar vatten på ett skovelhjul. En magnet på hjulets axel snurrar framför en kopparspole som är kopplad till en voltmeter och en tänd glödlampa" style="display:block; width:100%; max-width:532px; height:auto; border-radius:8px; border:0;">
+      </a>
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:8px 0 16px;">Lampan lyser, och magneten snurrar förbi spolen med järnkärna.</div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 14px;"><strong>Jordmagnetiska fältet i ny version.</strong> Ta tag i en kompass och dra den över jordklotet. Pilarna för fältet och dess komposanter visar varför fältet pekar snett ned i Sverige, ligger vågrätt vid ekvatorn och pekar snett upp i Australien. Dra i årtalet och se den norra magnetiska polen vandra från norra Kanada mot Sibirien sedan 1831. Den norra magnetiska polen är för övrigt en sydända. <a href="https://fysiklabbet.se/fysik2-jordmagnetiska-faltet.html" style="color:#2563a8; text-decoration:underline;">Dra i kompassen</a>.</p>
+      <a href="https://fysiklabbet.se/fysik2-jordmagnetiska-faltet.html" style="text-decoration:none;">
+        <img src="https://fysiklabbet.se/nyheter/brev/2026-11-15-jordmagnetiska-faltet.jpg" width="532" alt="Jordklotet mot en mörk rymdbakgrund, omgivet av röda magnetiska fältlinjer. En kompass ligger på Sverige, och nära nordpolen syns den norra magnetiska polens väg sedan 1831" style="display:block; width:100%; max-width:532px; height:auto; border-radius:8px; border:0;">
+      </a>
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:8px 0 16px;">Fältlinjerna runt jorden, med kompassen i Sverige.</div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 14px;"><strong>Elastisk och oelastisk stöt.</strong> Låt två vagnar krocka på en luftkuddebana eller två puckar på ett airhockeybord. Välj om de ska studsa isär eller haka i varandra. Pilarna för rörelsemängden läggs efter varandra, och summan är lika stor före och efter stöten. Testa dig sedan själv på slumpade stötar. <a href="https://fysiklabbet.se/fysik1-stotar-app.html" style="color:#2563a8; text-decoration:underline;">Till stötarna</a>.</p>
+      <a href="https://fysiklabbet.se/fysik1-stotar-app.html" style="text-decoration:none;">
+        <img src="https://fysiklabbet.se/nyheter/brev/2026-11-15-stotar.jpg" width="532" alt="Två puckar på ett airhockeybord har studsat isär snett efter en stöt, och bredvid visar två pilar lagda efter varandra att rörelsemängdernas summa är densamma som före stöten" style="display:block; width:100%; max-width:532px; height:auto; border-radius:8px; border:0;">
+      </a>
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:8px 0 16px;">Puckarna efter stöten. Pilarna för rörelsemängden lagda efter varandra.</div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 14px;margin:0 0 4px;"><strong>Kort och gott.</strong> Vågavsnitten i Fysik nivå&nbsp;2 har fått flera nya simuleringar. Se <a href="https://fysiklabbet.se/katalog.html?id=fy2-2.13&amp;block=varfor-surfarna-soker-sig-till-uddarna" style="color:#2563a8; text-decoration:underline;">havsvågorna böjas in mot en udde</a>. I <a href="https://fysiklabbet.se/katalog.html?id=fy2-2.14&amp;block=demonstration-lyssna-efter-nod-och-maximilinjer" style="color:#2563a8; text-decoration:underline;">Diffraktion och interferens</a> drar du ett öra tvärs över klassrummet mellan två högtalare och hör tonen bli starkare och svagare om vartannat. <a href="https://fysiklabbet.se/fysik2-vagsimulator.html" style="color:#2563a8; text-decoration:underline;">Vågtanken</a> har dessutom fått en 3D-vy på labbänken. Och i matematiken finns nu lösningar till <a href="https://fysiklabbet.se/np.html?id=ma1b-vt2022" style="color:#2563a8; text-decoration:underline;">de nationella proven i Ma&nbsp;1b, Ma&nbsp;2b och Ma&nbsp;3b</a> från våren 2022, steg för steg eller med penna på rutat papper.</p>
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:28px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:18px;">Veckans fysik</div>
+      </div>
+      <a href="https://fysiklabbet.se/nyheter.html?id=2026-11-12-snurran-som-svavar" style="text-decoration:none;">
+        <img src="https://fysiklabbet.se/nyheter/brev/2026-11-15-snurran-hero.jpg" width="532" alt="En svart, cylinderformad magnet svävar några millimeter ovanför en mörk skiva i en genomskinlig skål, med vit kall dimma runt omkring" style="display:block; width:100%; max-width:532px; height:auto; border-radius:8px; border:0;">
+      </a>
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:8px 0 16px; margin:8px 0 18px;">Foto: Mai-Linh Doan, via Wikimedia Commons (CC&nbsp;BY-SA&nbsp;3.0), beskuren. Bilden visar en närbesläktad svävning, inte experimentet i studien.</div>
+      <h2 style="font-family:Georgia,'Times New Roman',serif; font-size:22px; line-height:1.35; color:#0f1620; margin:0 0 10px;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-11-12-snurran-som-svavar" style="color:#0f1620; text-decoration:none;">2,3&nbsp;miljoner varv i sekunden</a></h2>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 14px;">En snurra stannar efter någon minut, eftersom friktionen och luften bromsar den. Forskare i Singapore, Italien, Storbritannien och Lettland tog bort båda. De lät en magnetisk kula, ungefär lika tjock som ett tunt hårstrå, sväva över en supraledare av bly i vakuum och gav den små knuffar i takt, som när man knuffar en gunga. Kulan kom upp i 2,3&nbsp;miljoner varv per sekund, ett rekord för en magnetiskt svävande rotor. Ytan vid kulans ekvator rör sig då fortare än ljudet i luft.</p>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:15px; margin:0 0 26px;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-11-12-snurran-som-svavar" style="color:#2563a8; text-decoration:underline;">Läs artikeln &rarr;</a></p>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td width="48%" valign="top" style="padding-right:10px;">
+            <a href="https://fysiklabbet.se/nyheter.html?id=2026-11-14-laddningarna-pa-heliumdroppen" style="text-decoration:none;">
+              <img src="https://fysiklabbet.se/nyheter/brev/2026-11-15-heliumdroppen-thumb.jpg" width="250" alt="Svartvitt foto av en liten glasskål som hänger ovanför flytande helium, med en droppe under skålens botten" style="display:block; width:100%; height:auto; border-radius:8px; border:0;">
+            </a>
+            <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:7px 0 0;">Foto: Alfred Leitner, via Wikimedia Commons (public domain), beskuren. Bilden visar inte försöket.</div>
+            <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:14px; line-height:1.55; color:#0f1620; margin:10px 0 4px;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-11-14-laddningarna-pa-heliumdroppen" style="color:#0f1620; text-decoration:none;"><strong>Laddningar på ett klot, fotograferade.</strong></a> Hur lägger sig lika laddningar på en klotyta? Frågan är från 1904 och fortfarande olöst matematik. Med guldkorn på heliumdroppar har den nu för första gången fotograferats.</p>
+            <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:13px; margin:0;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-11-14-laddningarna-pa-heliumdroppen" style="color:#2563a8; text-decoration:underline;">Läs mer &rarr;</a></p>
+          </td>
+          <td width="48%" valign="top" style="padding-left:10px;">
+            <a href="https://fysiklabbet.se/nyheter.html?id=2026-11-11-lonnloven-och-bombkolet" style="text-decoration:none;">
+              <img src="https://fysiklabbet.se/nyheter/brev/2026-11-15-lonnloven-thumb.jpg" width="250" alt="Orange och gula lönnlöv i motljus framför en blå sjö" style="display:block; width:100%; height:auto; border-radius:8px; border:0;">
+            </a>
+            <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:7px 0 0;">Foto: LBM1948, via Wikimedia Commons (CC&nbsp;BY-SA&nbsp;4.0), beskuren.</div>
+            <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:14px; line-height:1.55; color:#0f1620; margin:10px 0 4px;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-11-11-lonnloven-och-bombkolet" style="color:#0f1620; text-decoration:none;"><strong>Lönnlöv som minns kärnvapenproven.</strong></a> Sedan 1961 har forskare plockat lönnlöv på samma plats i Kanada och mätt halten kol-14. Först 2024 var halten i löven nere under nivån från tiden före proven.</p>
+            <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:13px; margin:0;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-11-11-lonnloven-och-bombkolet" style="color:#2563a8; text-decoration:underline;">Läs mer &rarr;</a></p>
+          </td>
+        </tr>
+      </table>
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:28px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:18px;">Läs även</div>
+      </div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:15px; line-height:1.9; color:#0f1620; margin:0;">
+        <a href="https://fysiklabbet.se/nyheter.html?id=2026-11-10-rockringens-fysik" style="color:#2563a8; text-decoration:underline;">Lår, smalben och fot håller rockringen i gång</a><br>
+        <a href="https://fysiklabbet.se/nyheter.html?id=2026-11-13-magneten-vid-sidan-av-fibern" style="color:#2563a8; text-decoration:underline;">En magnet vid sidan av en fiber vrider ljuset</a><br>
+        <a href="https://fysiklabbet.se/nyheter.html?id=2026-11-09-isjattarnas-vingliga-magnetfalt" style="color:#2563a8; text-decoration:underline;">Uranus och Neptunus magnetfält kan ha vridit sig</a><br>
+        <a href="https://fysiklabbet.se/nyheter.html?id=2026-11-08-spricka-pa-langden" style="color:#2563a8; text-decoration:underline;">Därför spricker sten på längden när den trycks ihop</a>
+      </p>
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:28px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:18px;">Nästa vecka</div>
+      </div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 14px;margin:0 0 16px;">Ur nyhetskön väntar en galax som inte var någon galax. Rymdteleskopet James Webb hittade en ljuspunkt som såg ut att vara en av de allra tidigaste galaxerna i universum, men en liten förskjutning på himlen avslöjade att det i stället är en kall brun dvärg alldeles i närheten. Vi läser på.</p>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:26px 0 4px;">Trevlig läsning, och tänd gärna en lampa till.</p>
+      <p style="font-family:Georgia,'Times New Roman',serif; font-size:17px; color:#0f1620; margin:0 0 30px;">/ Fysiklabbet</p>
+    </td></tr>
+
+    <!-- ── Sidfot ───────────────────────────────────────────── -->
+    <!-- {{UnsubscribeURL}}, {{SenderInfo}} och {{RewardsURL}} krävs av
+         EmailOctopus i egen HTML. Ta inte bort dem. -->
+    <tr><td align="center" style="padding:20px 8px 0;">
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); padding-bottom:12px;"><a href="https://fysiklabbet.se" style="color:rgba(15,22,32,0.5);">fysiklabbet.se</a> &middot; Interaktiva simuleringar, teori och övningar i fysik och matematik</div>
+      <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:12px; line-height:1.6; color:rgba(15,22,32,0.5); padding-bottom:6px;">Du får det här brevet för att du prenumererar på Fysiklabbets nyhetsbrev. <a href="{{UnsubscribeURL}}" style="color:rgba(15,22,32,0.5); text-decoration:underline;">Avsluta prenumerationen</a>.</div>
+      <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:12px; line-height:1.6; color:rgba(15,22,32,0.45); padding-bottom:6px;">{{SenderInfo}}</div>
+      <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:11px; color:rgba(15,22,32,0.4);"><a href="{{RewardsURL}}" style="color:rgba(15,22,32,0.4); text-decoration:underline;">Powered by EmailOctopus</a></div>
+    </td></tr>
+
+  </table>
+
+</td></tr>
+</table>
+
+</body>
+</html>

@@ -388,7 +388,7 @@ window.NP_PROV['fy2-vt2016'] = {
                 {
                     rubrik: 'Beskriv tidmätningen',
                     varfor: 'Reaktionstiden vid start och stopp av tidtagaruret är den största felkällan. ' +
-                        'Mäter vi tiden för många perioder i följd fördelas felet på alla perioderna och ' +
+                        'Mäter vi tiden för många svängningar i följd fördelas felet på alla svängningarna och ' +
                         'periodtiden blir mycket noggrannare.',
                     text: 'Mät med tidtagaruret tiden för minst $10$ hela svängningar och dela med ' +
                         'antalet — det ger periodtiden $T$. Upprepa försöket med några olika ' +
@@ -405,7 +405,7 @@ window.NP_PROV['fy2-vt2016'] = {
                 },
             ],
             svar: 'Se planeringen i stegen: mät pendellängden till kulans tyngdpunkt, ta tiden för minst ' +
-                '10 perioder och dela med antalet, upprepa för flera pendellängder, och bestäm $g$ ur ' +
+                '10 svängningar och dela med antalet, upprepa för flera pendellängder, och bestäm $g$ ur ' +
                 '$g = 4\\pi^2 l / T^2$ som medelvärde över mätpunkterna.',
             bedomning: [
                 ['Godtagbar beskrivning av hur försöket ska genomföras där det framgår att pendellängden och periodtiden behöver mätas', '+E'],

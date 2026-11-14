@@ -1619,7 +1619,7 @@
                     {
                         symbol: 'T₁/₂',
                         correct: 'Halveringstid',
-                        options: ['Halveringstid', 'Temperatur', 'Aktivitet', 'Period'],
+                        options: ['Halveringstid', 'Temperatur', 'Aktivitet', 'Periodtid'],
                         hint: 'T₁/₂ är halveringstiden — tiden det tar för hälften av kärnorna att sönderfalla.'
                     },
                     {
@@ -1682,10 +1682,10 @@
                         }
                     },
                     {
-                        quantity: 'Period',
+                        quantity: 'Periodtid',
                         correct: 's',
                         options: ['s', 'Hz', 'min', 'rad'],
-                        hint: 'Perioden T är tiden för ett varv (eller en svängning) — SI-enheten är sekund.',
+                        hint: 'Periodtiden T är tiden för ett varv (eller en svängning) — SI-enheten är sekund.',
                         wrongInfo: {
                             'Hz': 'Hz (hertz) är SI-enheten för frekvens — antalet varv per sekund.',
                             'min': 'min (minut) är en enhet för tid, men inte SI-enheten.',
@@ -1697,9 +1697,9 @@
                         correct: 'Hz',
                         options: ['Hz', 's', 'rad/s', 'varv'],
                         hint: 'Hertz (Hz) är SI-enheten — antalet varv eller svängningar per sekund.',
-                        bonusInfo: '1 Hz = 1 varv per sekund — och f = 1/T, så frekvensen är periodens invers!',
+                        bonusInfo: '1 Hz = 1 varv per sekund — och f = 1/T, så frekvensen är periodtidens invers!',
                         wrongInfo: {
-                            's': 's (sekund) är SI-enheten för tid — perioden T mäts i sekunder.',
+                            's': 's (sekund) är SI-enheten för tid — periodtiden T mäts i sekunder.',
                             'rad/s': 'rad/s (radianer per sekund) är SI-enheten för vinkelhastighet.',
                             'varv': 'varv är ingen SI-enhet — frekvensen anges i hertz (Hz).'
                         }
@@ -1797,7 +1797,7 @@
                     {
                         symbol: 'M',
                         correct: 'Kraftmoment',
-                        options: ['Kraftmoment', 'Period', 'Meter', 'Kraft'],
+                        options: ['Kraftmoment', 'Periodtid', 'Meter', 'Kraft'],
                         hint: 'Stort M står för kraftmoment, M = F · l. Massa betecknas m (liten).'
                     },
                     {
@@ -1808,14 +1808,14 @@
                     },
                     {
                         symbol: 'T',
-                        correct: 'Period',
-                        options: ['Period', 'Varvtal', 'Frekvens', 'Vinkelhastighet'],
-                        hint: 'I rörelseläran står T för perioden — tiden för ett varv. T = 1/f.'
+                        correct: 'Periodtid',
+                        options: ['Periodtid', 'Varvtal', 'Frekvens', 'Vinkelhastighet'],
+                        hint: 'I rörelseläran står T för periodtiden — tiden för ett varv. T = 1/f.'
                     },
                     {
                         symbol: 'f',
                         correct: 'Frekvens',
-                        options: ['Frekvens', 'Kraft', 'Period', 'Friktionstal'],
+                        options: ['Frekvens', 'Kraft', 'Periodtid', 'Friktionstal'],
                         hint: 'Litet f står för frekvens. Kraft betecknas F (stor).'
                     },
                     {
@@ -1827,7 +1827,7 @@
                     {
                         symbol: 'F',
                         correct: 'Kraft',
-                        options: ['Kraft', 'Frekvens', 'Kraftmoment', 'Period'],
+                        options: ['Kraft', 'Frekvens', 'Kraftmoment', 'Periodtid'],
                         hint: 'F står för kraft. Frekvens betecknas f (liten), kraftmoment M.'
                     },
                     {
@@ -1845,7 +1845,7 @@
                     {
                         symbol: 'm',
                         correct: 'Massa',
-                        options: ['Massa', 'Kraftmoment', 'Meter', 'Period'],
+                        options: ['Massa', 'Kraftmoment', 'Meter', 'Periodtid'],
                         hint: 'm (liten) står för massa. Kraftmoment betecknas M (stor).'
                     }
                 ],
@@ -1956,10 +1956,10 @@
                         }
                     },
                     {
-                        quantity: 'Period',
+                        quantity: 'Periodtid',
                         correct: 's',
                         options: ['s', 'Hz', 'm', 'min'],
-                        hint: 'Sekund (s) — perioden T är tiden för en hel svängning.',
+                        hint: 'Sekund (s) — periodtiden T är tiden för en hel svängning.',
                         wrongInfo: {
                             'Hz': 'Hz (hertz) är SI-enheten för frekvens — antalet svängningar per sekund.',
                             'm': 'm (meter) är SI-enheten för längd.',
@@ -1972,7 +1972,7 @@
                         options: ['Hz', 's', 'm/s', 'dB'],
                         hint: 'Hertz (Hz) — antalet svängningar per sekund, f = 1/T.',
                         wrongInfo: {
-                            's': 's (sekund) är SI-enheten för tid — perioden T mäts i sekunder.',
+                            's': 's (sekund) är SI-enheten för tid — periodtiden T mäts i sekunder.',
                             'm/s': 'm/s är SI-enheten för utbredningshastighet.',
                             'dB': 'dB (decibel) är enheten för ljudnivå.'
                         }
@@ -2046,25 +2046,25 @@
                     {
                         symbol: 'm',
                         correct: 'Massa',
-                        options: ['Massa', 'Meter', 'Period', 'Fjäderkonstant'],
+                        options: ['Massa', 'Meter', 'Periodtid', 'Fjäderkonstant'],
                         hint: 'm står för massan som hänger i fjädern — i T = 2π · √(m/k).'
                     },
                     {
                         symbol: 'T',
-                        correct: 'Period',
-                        options: ['Period', 'Våglängd', 'Kraft', 'Frekvens'],
+                        correct: 'Periodtid',
+                        options: ['Periodtid', 'Våglängd', 'Kraft', 'Frekvens'],
                         hint: 'T är periodtiden — tiden för en hel svängning. T = 1/f.'
                     },
                     {
                         symbol: 'f',
                         correct: 'Frekvens',
-                        options: ['Frekvens', 'Kraft', 'Fjäderkonstant', 'Period'],
+                        options: ['Frekvens', 'Kraft', 'Fjäderkonstant', 'Periodtid'],
                         hint: 'Litet f står för frekvens — i vågformeln v = f · λ. Kraft betecknas F (stor).'
                     },
                     {
                         symbol: 'P',
                         correct: 'Effekt',
-                        options: ['Effekt', 'Ljudintensitet', 'Tryck', 'Period'],
+                        options: ['Effekt', 'Ljudintensitet', 'Tryck', 'Periodtid'],
                         hint: 'P (stor) är ljudkällans utsända effekt i I = P/(4π · r²).'
                     }
                 ],

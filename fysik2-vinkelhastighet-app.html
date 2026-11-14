@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <script src="i18n.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Period, frekvens och vinkelhastighet — Fysiklabbet</title>
+    <title>Periodtid, frekvens och vinkelhastighet — Fysiklabbet</title>
     <meta name="description" content="En punkt i cirkelbana kopplad till en svängande punkt och en y–t-graf. Dra i de sammanlänkade reglagen för T, f och ω och se hur de hänger ihop (T = 1/f, ω = 2π/T), visa vinkeln i radianer, cirkelbågen och farten v = ω · r.">
     <link rel="canonical" href="https://fysiklabbet.se/fysik2-vinkelhastighet-app.html">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Fysiklabbet">
-    <meta property="og:title" content="Period, frekvens och vinkelhastighet — Fysik nivå 2">
+    <meta property="og:title" content="Periodtid, frekvens och vinkelhastighet — Fysik nivå 2">
     <meta property="og:description" content="En punkt i cirkelbana kopplad till en svängande punkt och en y–t-graf. Dra i de sammanlänkade reglagen för T, f och ω och se hur de hänger ihop (T = 1/f, ω = 2π/T), visa vinkeln i radianer, cirkelbågen och farten v = ω · r.">
     <meta property="og:url" content="https://fysiklabbet.se/fysik2-vinkelhastighet-app.html">
     <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Period, frekvens och vinkelhastighet — Fysik nivå 2">
+    <meta name="twitter:title" content="Periodtid, frekvens och vinkelhastighet — Fysik nivå 2">
     <meta name="twitter:description" content="En punkt i cirkelbana kopplad till en svängande punkt och en y–t-graf. Dra i de sammanlänkade reglagen för T, f och ω och se hur de hänger ihop (T = 1/f, ω = 2π/T), visa vinkeln i radianer, cirkelbågen och farten v = ω · r.">
     <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <link rel="stylesheet" href="styles.css">
@@ -228,7 +228,7 @@
         const TAU = 2 * Math.PI;
 
         // ── Glidarintervall (T är den kanoniska storheten; f och ω följer) ──
-        const TMIN = 1.0, TMAX = 10.0;       // period (s)
+        const TMIN = 1.0, TMAX = 10.0;       // periodtid (s)
         const RMIN = 0.6, RMAX = 1.5;        // banradie (m)
 
         // ── Scen-geometri (viewBox-koordinater) ──
@@ -340,13 +340,13 @@
 
         const FormulaCard = () => (
             <div className="formula-card glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-2 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
-                <Vbl label="Period"><em>T</em></Vbl>
+                <Vbl label="Periodtid"><em>T</em></Vbl>
                 <span className="fnum">=</span>
                 <FracL top="1" botLbl="Frekvens" bot={<em>f</em>} />
                 <span className="fnum" style={{ margin: '0 10px', color: 'var(--lab-ink-muted)' }}>|</span>
                 <Vbl label="Vinkelhastighet"><em>ω</em></Vbl>
                 <span className="fnum">=</span>
-                <FracL top={<span>2<em>π</em></span>} botLbl="Period" bot={<em>T</em>} />
+                <FracL top={<span>2<em>π</em></span>} botLbl="Periodtid" bot={<em>T</em>} />
                 <span className="fnum">=</span>
                 <span className="fnum">2<em>π</em></span>
                 <span className="fnum">·</span>
@@ -362,7 +362,7 @@
 
         // ── Huvudapp ─────────────────────────────────────────────
         const App = () => {
-            const [T, setT] = useState(4.0);         // period (s) — kanonisk storhet
+            const [T, setT] = useState(4.0);         // periodtid (s) — kanonisk storhet
             const [r, setR] = useState(1.2);         // banradie (m)
             const [running, setRunning] = useState(true);
             const [show, setShow] = useState({
@@ -382,7 +382,7 @@
             const v = om * r;                        // fart i banan (m/s)
             pRef.current = { om, running };
 
-            // De tre reglagen är sammanlänkade: alla styr perioden T
+            // De tre reglagen är sammanlänkade: alla styr periodtiden T
             const setTc = (val) => setT(Math.min(TMAX, Math.max(TMIN, val)));
             const setFromF = (fv) => setTc(1 / fv);
             const setFromOm = (ov) => setTc(TAU / ov);
@@ -525,7 +525,7 @@
                 const p2y = CY - 0.5 * Rpx * Math.sin(alpha);
                 const v2Len = 0.5 * vLen;
 
-                // måttlinje för perioden T under grafen
+                // måttlinje för periodtiden T under grafen
                 const dimX1 = GX0, dimX2 = GX0 + T * PXS;
                 const dimW = dimX2 - dimX1;
 
@@ -608,7 +608,7 @@
                                 {/* kurvan y(t) = r · sin(ω · t) */}
                                 <polyline points={curve} fill="none" stroke={COL.ink} strokeWidth="1.8" />
 
-                                {/* måttlinje för perioden T (i fri yta under grafen) */}
+                                {/* måttlinje för periodtiden T (i fri yta under grafen) */}
                                 <line x1={dimX1} y1={CY} x2={dimX1} y2={DIMY}
                                       stroke="rgba(15,22,32,0.3)" strokeWidth="1" strokeDasharray="4 4" />
                                 <line x1={dimX2} y1={CY} x2={dimX2} y2={DIMY}
@@ -682,13 +682,13 @@
                 <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                     <div className="max-w-6xl mx-auto pt-6">
                         <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
-                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Period, frekvens och vinkelhastighet
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Periodtid, frekvens och vinkelhastighet
                         </div>
-                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Period, frekvens, radianer och vinkelhastighet</h1>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Periodtid, frekvens, radianer och vinkelhastighet</h1>
                         <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
                             En punkt rör sig i en cirkelbana. Dess höjdläge utför samtidigt en <strong>harmonisk
                             svängning</strong> som ritar en sinuskurva i grafen. De tre reglagen för
-                            perioden <em>T</em>, frekvensen <em>f</em> och vinkelhastigheten <em>ω</em> är
+                            periodtiden <em>T</em>, frekvensen <em>f</em> och vinkelhastigheten <em>ω</em> är
                             sammanlänkade — ändra ett av dem och se hur de andra två följer med. Visa vinkeln
                             i radianer, cirkelbågen och farten <em>v</em> = <em>ω</em>&thinsp;·&thinsp;<em>r</em>.
                         </p>
@@ -715,7 +715,7 @@
                                     {isFullscreen && (
                                         <React.Fragment>
                                             <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
-                                                <FsSlider label="Period (<em>T</em>)" value={T}
+                                                <FsSlider label="Periodtid (<em>T</em>)" value={T}
                                                           min={TMIN} max={TMAX} step={0.1} unit="s" onChange={setTc} />
                                                 <FsSlider label="Frekvens (<em>f</em>)" value={f}
                                                           min={0.10} max={1.00} step={0.01} unit="Hz" onChange={setFromF} decimals={2} />
@@ -759,7 +759,7 @@
                                         De tre översta reglagen beskriver <strong>samma sak</strong> på tre sätt —
                                         ändrar du ett, följer de andra två med.
                                     </div>
-                                    <Slider label="Period (<em>T</em>)"
+                                    <Slider label="Periodtid (<em>T</em>)"
                                             sub="Tiden för ett helt varv."
                                             value={T} min={TMIN} max={TMAX} step={0.1} unit="s" onChange={setTc} />
                                     <Slider label="Frekvens (<em>f</em>)"
@@ -781,7 +781,7 @@
                                 <div className="glass-card rounded-xl p-3 mb-3">
                                     <div className="flbl mb-2">Avläsning</div>
                                     <div className="grid grid-cols-2 gap-2">
-                                        <Readout label="Period <em>T</em>" value={fmt(T, 1)} unit="s" />
+                                        <Readout label="Periodtid <em>T</em>" value={fmt(T, 1)} unit="s" />
                                         <Readout label="Frekvens <em>f</em>" value={fmt(f, 2)} unit="Hz" />
                                         <Readout label="Vinkelhastighet <em>ω</em>" value={fmt(om, 2)} unit="rad/s" />
                                         <Readout label="I grader: <em>ω</em>" value={fmt(360 / T, 1)} unit="°/s" />
@@ -804,7 +804,7 @@
                                     <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
                                         Punkten i cirkelbanan, den <span style={{ color: COL.bollK, fontWeight: 600 }}>svängande
                                         punkten</span> och kurvan i grafen har exakt samma
-                                        period <em>T</em>, frekvens <em>f</em> och vinkelhastighet <em>ω</em>.
+                                        periodtid <em>T</em>, frekvens <em>f</em> och vinkelhastighet <em>ω</em>.
                                         Den streckade linjen visar att de hela tiden ligger på samma höjd —
                                         en harmonisk svängning är helt enkelt en cirkelrörelse sedd från sidan.
                                     </p>
@@ -815,10 +815,10 @@
                         {/* Pedagogiska sektioner */}
                         <div className="grid md:grid-cols-3 gap-4 mt-6">
                             <div className="glass-card rounded-xl p-4">
-                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Period och frekvens</h3>
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Periodtid och frekvens</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
                                     En rörelse som upprepas kallas <strong>periodisk</strong>. Tiden för en
-                                    upprepning — ett varv eller en svängning — är <strong>perioden</strong> <em>T</em> (enhet s),
+                                    upprepning — ett varv eller en svängning — är <strong>periodtiden</strong> <em>T</em> (enhet s),
                                     och antalet upprepningar per sekund är <strong>frekvensen</strong> <em>f</em> (enhet Hz).
                                     De är varandras inverser: <em>T</em> = 1/<em>f</em>. Roterar något med
                                     frekvensen 10&nbsp;Hz tar ett varv 1/10&nbsp;sekund.

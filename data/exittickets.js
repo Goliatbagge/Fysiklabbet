@@ -5310,14 +5310,14 @@ window.EXITTICKETS = {
       'Frekvens',
       'Vinkelhastighet',
       'Amplitud',
-      'Period',
+      'Periodtid',
     ],
     correct: 3,
     why: [
       'Frekvens är antalet upprepningar per sekund, inte tiden för en upprepning.',
       'Vinkelhastighet beskriver hur fort vinkeln ändras, inte tiden för ett helt varv.',
-      'Amplitud förekommer inte i denna genomgång om period/frekvens — det är ett annat begrepp, kopplat till svängningars utslag.',
-      'Perioden $T$ är just tiden det tar för rörelsen att upprepa sig en gång.',
+      'Amplitud förekommer inte i denna genomgång om periodtid/frekvens — det är ett annat begrepp, kopplat till svängningars utslag.',
+      'Periodtiden $T$ är just tiden det tar för rörelsen att upprepa sig en gång.',
     ],
   },
   {
@@ -5326,13 +5326,13 @@ window.EXITTICKETS = {
     correct: 0,
     why: [
       'Hertz (Hz) är SI-enheten för frekvens, motsvarande 1/s.',
-      'Sekund är enheten för period $T$, inte för frekvens.',
+      'Sekund är enheten för periodtid $T$, inte för frekvens.',
       'rad/s är enheten för vinkelhastighet ω, en annan storhet.',
       'm/s är enheten för fart/hastighet, inte för frekvens.',
     ],
   },
   {
-    question: 'En cirkulär rörelse har frekvensen 5,0 Hz. Vad är perioden $T$?',
+    question: 'En cirkulär rörelse har frekvensen 5,0 Hz. Vad är periodtiden $T$?',
     choices: [
       '$5{,}0\\ \\mathrm{s}$',
       '$0{,}20\\ \\mathrm{s}$',
@@ -5341,7 +5341,7 @@ window.EXITTICKETS = {
     ],
     correct: 1,
     why: [
-      'Detta är frekvensens värde, inte perioden — perioden ges av $1/f$.',
+      'Detta är frekvensens värde, inte periodtiden — periodtiden ges av $1/f$.',
       '$T = \\dfrac{1}{f} = \\dfrac{1}{5{,}0} = 0{,}20\\ \\mathrm{s}$.',
       'Detta fås om man av misstag delar frekvensen med 2 istället för att beräkna $1/f$.',
       'Detta fås om man multiplicerar frekvensen med 10, $10 \\cdot 5{,}0 = 50$, i stället för att beräkna $1/f$.',
@@ -5671,7 +5671,7 @@ window.EXITTICKETS = {
     correct: 2,
     why: [
       'En längre cirkelbana kompenseras av att pendeln också rör sig snabbare vid större utslag — nettoeffekten enligt formeln är att $T$ minskar, inte ökar.',
-      'α påverkar $T$ direkt genom faktorn $\\cos \\alpha$ i formeln — perioden är alltså inte opåverkad.',
+      'α påverkar $T$ direkt genom faktorn $\\cos \\alpha$ i formeln — periodtiden är alltså inte opåverkad.',
       'Eftersom $\\cos \\alpha$ minskar när α växer (mot 90°), minskar också uttrycket under rottecknet, och därmed $T$.',
       'En tid kan inte bli negativ — $\\cos \\alpha$ är positivt för alla vinklar mellan 0° och 90°.',
     ],
@@ -6187,7 +6187,7 @@ window.EXITTICKETS = {
       'Bråket under rottecknet är omvänt — det ska vara massa delat med fjäderkonstant, inte tvärtom.',
       'Faktorn $2\\pi$ ska multipliceras, inte divideras.',
       'Rottecknet saknas i detta uttryck.',
-      'Periodtiden ges av $T = 2\\pi \\sqrt{\\dfrac{m}{k}}$ — en tyngre vikt ger längre period, en styvare fjäder (större *k*) ger kortare period.',
+      'Periodtiden ges av $T = 2\\pi \\sqrt{\\dfrac{m}{k}}$ — en tyngre vikt ger längre periodtid, en styvare fjäder (större *k*) ger kortare periodtid.',
     ],
   },
   {
@@ -6200,10 +6200,10 @@ window.EXITTICKETS = {
     ],
     correct: 2,
     why: [
-      'En större fjäderkonstant ger snabbare svängning (kortare period), inte längre — kontrollera att du inte blandat ihop *k* och *m*.',
+      'En större fjäderkonstant ger snabbare svängning (kortare periodtid), inte längre — kontrollera att du inte blandat ihop *k* och *m*.',
       'Fjäderkonstanten *k* står under rottecknet i formeln, så en ändring av *k* påverkar visst periodtiden.',
-      'Eftersom *k* står under ett rottecken blir den nya perioden $T_2 = T_1 / \\sqrt{2} \\approx 0{,}71 \\cdot T_1$ — kortare, men inte precis hälften.',
-      'Perioden minskar med en faktor $\\sqrt{2}$, inte med en faktor 2 — det är lätt att glömma att *k* står under ett rottecken.',
+      'Eftersom *k* står under ett rottecken blir den nya periodtiden $T_2 = T_1 / \\sqrt{2} \\approx 0{,}71 \\cdot T_1$ — kortare, men inte precis hälften.',
+      'Periodtiden minskar med en faktor $\\sqrt{2}$, inte med en faktor 2 — det är lätt att glömma att *k* står under ett rottecken.',
     ],
   },
   {
@@ -6316,10 +6316,10 @@ window.EXITTICKETS = {
     choices: ['1,6 s', '0,40 s', '0,80 s', '3,2 s'],
     correct: 0,
     why: [
-      'Från det ena vändläget till det andra är bara en halv period. Hela perioden, fram och tillbaka, är $2 \\cdot 0{,}80 = 1{,}6$ s.',
-      'Halva tiden är en kvarts period, från vändläget till jämviktsläget. Perioden är längre än den uppmätta tiden, inte kortare.',
-      'Tiden mellan vändlägena är bara en halv period. Pendeln måste också svänga tillbaka för att en hel period ska ha gått.',
-      'Det motsvarar två hela perioder. En period är en svängning fram och tillbaka, alltså dubbla tiden mellan vändlägena.',
+      'Från det ena vändläget till det andra är bara en halv periodtid. Hela periodtiden, fram och tillbaka, är $2 \\cdot 0{,}80 = 1{,}6$ s.',
+      'Halva tiden är en kvarts periodtid, från vändläget till jämviktsläget. Periodtiden är längre än den uppmätta tiden, inte kortare.',
+      'Tiden mellan vändlägena är bara en halv periodtid. Pendeln måste också svänga tillbaka för att en hel periodtid ska ha gått.',
+      'Det motsvarar två hela svängningar. Periodtiden är tiden för en svängning fram och tillbaka, alltså dubbla tiden mellan vändlägena.',
     ],
   },
 ],
@@ -6352,9 +6352,9 @@ window.EXITTICKETS = {
     choices: ['$f = T$', '$f = \\dfrac{1}{T}$', '$f = 2T$', '$f = T^{2}$'],
     correct: 1,
     why: [
-      'Frekvens och period är inte samma tal — de är varandras inverser.',
+      'Frekvens och periodtid är inte samma tal — de är varandras inverser.',
       'Frekvensen är antalet svängningar per sekund, vilket är inversen av periodtiden: $f = \\dfrac{1}{T}$.',
-      'Detta samband stämmer inte dimensionsmässigt — frekvens och period är inverser av varandra, ingen faktor 2 är inblandad.',
+      'Detta samband stämmer inte dimensionsmässigt — frekvens och periodtid är inverser av varandra, ingen faktor 2 är inblandad.',
       'Att kvadrera periodtiden ger inte frekvensen — sambandet är en enkel invers, $f = 1/T$.',
     ],
   },
@@ -6374,11 +6374,11 @@ window.EXITTICKETS = {
 'fy2-2.7': [
   {
     question: 'Vad kallas en enstaka svängning i ett medium?',
-    choices: ['En våg', 'En period', 'En puls', 'En amplitud'],
+    choices: ['En våg', 'En periodtid', 'En puls', 'En amplitud'],
     correct: 2,
     why: [
       'En våg uppstår när flera pulser skickas iväg efter varandra med en viss frekvens — en enda svängning kallas puls.',
-      'Perioden är ett tidsmått (tiden för en hel svängning), inte namnet på en enstaka svängning.',
+      'Periodtiden är ett tidsmått (tiden för en hel svängning), inte namnet på en enstaka svängning.',
       'En enstaka svängning i ett medium kallas en puls.',
       'Amplituden är svängningens maximala utslag, inte namnet på en enstaka svängning i sig.',
     ],
@@ -6426,7 +6426,7 @@ window.EXITTICKETS = {
     choices: ['$v = \\lambda \\cdot T$', '$v = \\dfrac{f}{\\lambda}$', '$v = f \\cdot \\lambda$', '$v = \\dfrac{T}{\\lambda}$'],
     correct: 2,
     why: [
-      'Här är sambandet mellan våglängd och period felvänt — det ska vara en kvot, $\\lambda / T$, inte en produkt.',
+      'Här är sambandet mellan våglängd och periodtid felvänt — det ska vara en kvot, $\\lambda / T$, inte en produkt.',
       'Detta uttryck blandar ihop frekvens och våglängd på fel sätt — det korrekta sambandet är en produkt, $f \\cdot \\lambda$, inte en kvot.',
       'Utbredningshastigheten ges av $v = \\dfrac{\\lambda}{T} = f \\cdot \\lambda$ — eftersom $T = 1/f$ blir de två formerna av samma samband.',
       'Bråket är omvänt — det ska vara våglängden delat med periodtiden, $\\lambda / T$, inte tvärtom.',

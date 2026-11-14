@@ -14633,7 +14633,7 @@ $$ 0{,}80 = d \\quad\\Leftrightarrow\\quad d = 0{,}80\\ \\mathrm{m} $$
             level: 1,
             question: `Ett hjul snurrar med frekvensen $5{,}0\\ \\mathrm{Hz}$. Beräkna periodtiden (tiden för ett varv).`,
             answer: { value: 0.20, unit: 's' },
-            solution: `Period och frekvens är varandras invers:
+            solution: `Periodtid och frekvens är varandras invers:
 
 $$ T = \\frac{1}{f} = \\frac{1}{5{,}0} = 0{,}20\\ \\mathrm{s} $$
 
@@ -14782,9 +14782,9 @@ $$ F_C = \\frac{0{,}50 \\cdot 6{,}0^2}{1{,}2} = \\frac{18}{1{,}2} = 15\\ \\mathr
         },
         {
             level: 1,
-            question: `En vikt på $0{,}20\\ \\mathrm{kg}$ snurrar i en cirkel med radien $0{,}80\\ \\mathrm{m}$ och perioden $0{,}50\\ \\mathrm{s}$. Beräkna centripetalkraften.`,
+            question: `En vikt på $0{,}20\\ \\mathrm{kg}$ snurrar i en cirkel med radien $0{,}80\\ \\mathrm{m}$ och periodtiden $0{,}50\\ \\mathrm{s}$. Beräkna centripetalkraften.`,
             answer: { value: 25, unit: 'N' },
-            solution: `När perioden är given används formen med *T*:
+            solution: `När periodtiden är given används formen med *T*:
 
 $$ F_C = \\frac{4\\pi^2 \\cdot m \\cdot r}{T^2} $$
 
@@ -14801,7 +14801,7 @@ $$ F_C = \\frac{4\\pi^2 \\cdot 0{,}20 \\cdot 0{,}80}{0{,}50^2} = 25\\ \\mathrm{N
 
 **Svar:** Centripetalkraften är ungefär $25\\ \\mathrm{N}$.
 
-**Generell slutsats:** $F_C = \\dfrac{mv^2}{r} = \\dfrac{4\\pi^2 m r}{T^2}$ — välj formen efter om du har farten *v* eller perioden *T*.`,
+**Generell slutsats:** $F_C = \\dfrac{mv^2}{r} = \\dfrac{4\\pi^2 m r}{T^2}$ — välj formen efter om du har farten *v* eller periodtiden *T*.`,
         },
         {
             level: 1,
@@ -15010,7 +15010,7 @@ $$ v_\\text{botten} = \\sqrt{5gr} = \\sqrt{5 \\cdot 9{,}82 \\cdot 8{,}0} = 20\\ 
             level: 2,
             question: `En geostationär satellit går ett varv på ett dygn och står därför stilla över samma punkt på ekvatorn. Där ligger till exempel TV-satelliterna. Hur högt över jordytan ligger banan? (Jordens massa är $5{,}972 \\cdot 10^{24}\\ \\mathrm{kg}$ och jordens radie $6\\,378\\ \\mathrm{km}$.)`,
             answer: { value: 35900, unit: 'km' },
-            solution: `Gravitationskraften utgör centripetalkraften. Eftersom perioden är given använder vi formen med *T*:
+            solution: `Gravitationskraften utgör centripetalkraften. Eftersom periodtiden är given använder vi formen med *T*:
 
 $$ \\frac{4\\pi^2 \\cdot m \\cdot r}{T^2} = G \\cdot \\frac{m \\cdot m_j}{r^2} $$
 
@@ -15037,7 +15037,7 @@ $$ h = r - r_j = 42\\,240 - 6\\,378 = 35\\,862\\ \\mathrm{km} \\approx 35\\,900\
 
 **Svar:** Den geostationära banan ligger ungefär $35\\,900\\ \\mathrm{km}$ över jordytan.
 
-**Generell slutsats:** Perioden bestämmer banradien entydigt: det finns bara **en** höjd där ett varv tar precis ett dygn, och alla geostationära satelliter trängs därför i samma ring över ekvatorn. Räknar man med stjärndygnet 23 h 56 min (jordens verkliga rotationstid) blir svaret $35\\,786\\ \\mathrm{km}$.`,
+**Generell slutsats:** Periodtiden bestämmer banradien entydigt: det finns bara **en** höjd där ett varv tar precis ett dygn, och alla geostationära satelliter trängs därför i samma ring över ekvatorn. Räknar man med stjärndygnet 23 h 56 min (jordens verkliga rotationstid) blir svaret $35\\,786\\ \\mathrm{km}$.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
@@ -16214,7 +16214,7 @@ $$ k = \\frac{4\\pi^2 \\cdot 0{,}45}{0{,}80^2} = \\frac{17{,}77}{0{,}64} \\appro
 
 **Svar:** Fjäderkonstanten är ungefär $28\\ \\mathrm{N/m}$.
 
-**Generell slutsats:** Att läsa av en period från en sinuskurva är en grundfärdighet. Räkna från en topp till nästa (eller från en nollgenomgång i samma riktning till nästa) — inte från en topp till nästa botten, vilket bara är en halv period.`,
+**Generell slutsats:** Att läsa av en periodtid från en sinuskurva är en grundfärdighet. Räkna från en topp till nästa (eller från en nollgenomgång i samma riktning till nästa) — inte från en topp till nästa botten, vilket bara är en halv periodtid.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
@@ -16319,7 +16319,7 @@ $$ g = \\frac{4\\pi^2 \\cdot 0{,}30}{1{,}20^2} = \\frac{11{,}84}{1{,}44} \\appro
 
 **Svar:** Tyngdaccelerationen på planeten är ungefär $8{,}2\\ \\mathrm{m/s^2}$.
 
-**Generell slutsats:** En matematisk pendel är ett enkelt instrument för att mäta tyngdaccelerationen: perioden ger *g* direkt eftersom pendellängden lätt mäts med måttband.`,
+**Generell slutsats:** En matematisk pendel är ett enkelt instrument för att mäta tyngdaccelerationen: periodtiden ger *g* direkt eftersom pendellängden lätt mäts med måttband.`,
         },
         {
             level: 1,
@@ -16357,7 +16357,7 @@ ${makeSwing({ angle: 14, ropeLabel: 'l = 0,80 m', angleLabel: null })}`,
 
 $$ T \\propto \\sqrt{l} $$
 
-Om perioden ska fördubblas måste pendellängden bli **fyra gånger** så stor:
+Om periodtiden ska fördubblas måste pendellängden bli **fyra gånger** så stor:
 
 $$ \\frac{T_2}{T_1} = \\sqrt{\\frac{l_2}{l_1}} = 2 \\quad\\Leftrightarrow\\quad l_2 = 4\\cdot l_1 $$
 
@@ -16430,13 +16430,13 @@ $$ T = 2\\pi\\sqrt{\\frac{1{,}23}{9{,}82}} = 2\\pi \\cdot 0{,}3539\\ldots = 2{,}
 
 ${makeSwing({ angle: 12, ropeLabel: null, angleLabel: null })}`,
             answer: { value: 3.71, unit: 'm/s²' },
-            solution: `**Insikten är att en pendelklocka räknar antalet pendelslag, inte tid direkt.** Klockans visare visar tid genom att tro att varje slag tar den tid som motsvarar perioden *på jorden*. Om planetens *g* är lägre, går pendeln långsammare och klockan visar därför mindre tid än vad som faktiskt gått.
+            solution: `**Insikten är att en pendelklocka räknar antalet pendelslag, inte tid direkt.** Klockans visare visar tid genom att tro att varje slag tar den tid som motsvarar periodtiden *på jorden*. Om planetens *g* är lägre, går pendeln långsammare och klockan visar därför mindre tid än vad som faktiskt gått.
 
-**Steg 1: koppla klockans avläsning till periodtiderna.** Under den verkliga tiden $t_\\text{verklig} = 24$ h gör pendeln $n = t_\\text{verklig}/T_\\text{planet}$ svängningar. Klockan tolkar varje svängning som om perioden vore $T_\\text{jord}$, så klockan visar
+**Steg 1: koppla klockans avläsning till periodtiderna.** Under den verkliga tiden $t_\\text{verklig} = 24$ h gör pendeln $n = t_\\text{verklig}/T_\\text{planet}$ svängningar. Klockan tolkar varje svängning som om periodtiden vore $T_\\text{jord}$, så klockan visar
 
 $$ t_\\text{klocka} = n \\cdot T_\\text{jord} = t_\\text{verklig} \\cdot \\frac{T_\\text{jord}}{T_\\text{planet}} $$
 
-**Steg 2: bilda kvoten av perioderna.** Pendellängden är densamma, så
+**Steg 2: bilda kvoten av periodtiderna.** Pendellängden är densamma, så
 
 $$ \\frac{T_\\text{jord}}{T_\\text{planet}} = \\sqrt{\\frac{g_\\text{planet}}{g_\\text{jord}}} $$
 
@@ -19012,7 +19012,7 @@ $$ u = 325\\sin(100\\pi \\cdot 5{,}0\\cdot 10^{-3}) = 325\\sin(0{,}5\\pi) = 325\
 
 **Svar:** Spänningen är $325\\ \\mathrm{V}$ (= toppspänningen, eftersom $\\sin(\\pi/2) = 1$).
 
-**Generell slutsats:** Vid $t = T/4$ (en kvarts period) når spänningen sitt toppvärde — det är då rotationsslingan i generatorn är optimalt orienterad för maximal flödesändring.`,
+**Generell slutsats:** Vid $t = T/4$ (en kvarts periodtid) når spänningen sitt toppvärde — det är då rotationsslingan i generatorn är optimalt orienterad för maximal flödesändring.`,
         },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
@@ -19058,7 +19058,7 @@ $$ \\hat{u} = B\\cdot A\\cdot\\omega = 0{,}40 \\cdot (0{,}10)^2 \\cdot 100\\pi =
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `En glödlampa har en resistans på $230\\ \\mathrm{\\Omega}$ och är ansluten till det svenska elnätet ($U = 230\\ \\mathrm{V}$ effektivt, $f = 50\\ \\mathrm{Hz}$). Bestäm (a) toppströmmen $\\hat{\\imath}$ genom lampan, och (b) den **maximala effekten** under en period.`,
+            question: `En glödlampa har en resistans på $230\\ \\mathrm{\\Omega}$ och är ansluten till det svenska elnätet ($U = 230\\ \\mathrm{V}$ effektivt, $f = 50\\ \\mathrm{Hz}$). Bestäm (a) toppströmmen $\\hat{\\imath}$ genom lampan, och (b) den **maximala effekten** under en periodtid.`,
             answer: { value: 460, unit: 'W' },
             solution: `**(a) Toppströmmen.** Effektivströmmen är $I = U/R$:
 

@@ -275,7 +275,7 @@
 // En matematisk pendel: en kula i ett lätt snöre med längden l, släppt från
 // vinkeln α₀. Rörelsen räknas med hela ekvationen α'' = −(g/l) · sin α
 // (inte småvinkelapproximationen), så att ett stort utslag ger en lite
-// längre svängningstid, som i verkligheten. Den exakta perioden är
+// längre svängningstid, som i verkligheten. Den exakta periodtiden är
 //     T = 2π · √(l/g) / AGM(1, cos(α₀/2))
 // (aritmetisk-geometriskt medelvärde). Massan finns inte med: kulans massa
 // påverkar inte svängningstiden.
@@ -320,12 +320,12 @@
     }
     // Uppmätt tid för tio svängningar, avrundad till hundradelar som på ett stoppur.
     // En felmätning är att eleven räknat nio eller elva svängningar: tiden
-    // blir då en hel period fel, inte bara några tiondelar som osäkerheten.
+    // blir då en hel periodtid fel, inte bara några tiondelar som osäkerheten.
     function matning(l, a0, rng = Math.random, felmatning = 0) {
         const t = (N_SV + felmatning) * period(l, a0) + REAKTION * (normal(rng) - normal(rng));
         return Math.round(t * 100) / 100;
     }
-    // En mätning som avviker mer än en halv period från medianen i samma
+    // En mätning som avviker mer än en halv periodtid från medianen i samma
     // uppställning är troligen en felmätning (fel antal svängningar). Med två
     // mätningar går det inte att veta vilken som är fel, så båda pekas ut.
     function misstankt(rader) {
@@ -506,7 +506,7 @@
             const kol = [TB.x0 + 4, 740, 804, 858, 926, 984];
             const syns = rader.slice(-7);
             const forsta = rader.length - syns.length;
-            const rubrik = ['Nr', 'Massa', 'Längd', 'Utslag', 'Tid, 10 sv.', 'Period'];
+            const rubrik = ['Nr', 'Massa', 'Längd', 'Utslag', 'Tid, 10 sv.', 'Periodtid'];
             return (
                 <g fontFamily="'DM Sans', sans-serif">
                     <text x={TB.x0} y={TB.y0 - 16} fontSize="12" fontWeight="700" letterSpacing="0.06em" fill="#5a6170">MÄTNINGAR</text>
@@ -976,12 +976,12 @@
                         <div className="glass-card rounded-xl p-4 mb-6" style={{ color: 'var(--lab-ink)' }}>
                             <div className="flex flex-wrap items-center gap-x-10 gap-y-3">
                                 <div className="flex items-center gap-x-3">
-                                    <Vbl label="Period"><em>T</em></Vbl>
+                                    <Vbl label="Periodtid"><em>T</em></Vbl>
                                     <span className="fnum">=</span>
                                     <Brak t={<Vbl label="Tid för tio svängningar"><Sub s="t" i="10" /></Vbl>} n={<span className="fnum">10</span>} />
                                 </div>
                                 <div className="text-base" style={{ color: 'var(--lab-ink-soft)', maxWidth: 560 }}>
-                                    Perioden <em>T</em> är svängningstiden: tiden för en hel svängning, fram och tillbaka. Ta tiden för tio svängningar och
+                                    Periodtiden <em>T</em> är svängningstiden: tiden för en hel svängning, fram och tillbaka. Ta tiden för tio svängningar och
                                     dela med tio. Då delas också osäkerheten från din reaktionstid med tio.
                                 </div>
                             </div>
@@ -1009,14 +1009,14 @@
                                     Modellens antaganden: kulan hänger i ett lätt snöre och svänger utan luftmotstånd, och längden räknas till kulans mitt.
                                     Stoppuret startas och stoppas av en människa, och reaktionstiden gör att varje mätning avviker någon tiondels sekund åt
                                     ena eller andra hållet. Det är mätosäkerhet. Ibland räknar man dessutom fel antal svängningar, och det är en felmätning:
-                                    den avviker en hel period och ska strykas.
+                                    den avviker en hel periodtid och ska strykas.
                                 </p>
                                 {modell && (
                                     <div className="glass-card rounded-xl p-4 mt-3" style={{ color: 'var(--lab-ink)' }}>
                                         <h3 className="font-bold mb-1">Modellen: en matematisk pendel</h3>
                                         <div className="flex flex-wrap items-center gap-x-8 gap-y-2">
                                             <div className="flex items-center gap-x-3">
-                                                <Vbl label="Period"><em>T</em></Vbl><span className="fnum">=</span><span className="fnum">2π ·</span>
+                                                <Vbl label="Periodtid"><em>T</em></Vbl><span className="fnum">=</span><span className="fnum">2π ·</span>
                                                 <span className="fnum" style={{ display: 'inline-flex', alignItems: 'center' }}>√<span style={{ borderTop: '1.5px solid currentColor', paddingTop: 2 }}><Brak t={<Vbl label="Längd"><em>l</em></Vbl>} n={<Vbl label="Tyngdfaktor"><em>g</em></Vbl>} /></span></span>
                                             </div>
                                             <p className="text-sm" style={{ color: 'var(--lab-ink-soft)', maxWidth: 520 }}>

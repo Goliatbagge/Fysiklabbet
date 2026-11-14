@@ -327,7 +327,7 @@
  * (?embed=1&mini=1 — mini-läget visar bara scenen). Kortet har de
  * väsentliga verktygen (Knuffa till, Snurra, Börja om, glidaren
  * Gaffelvinkel) som styr sidan med postMessage; sidan rapporterar
- * tillbaka fallen/stabil/period/varvtal till kortets info-rad.
+ * tillbaka fallen/stabil/periodtid/varvtal till kortets info-rad.
  * Fullskärm startas med scenens egen .fs-btn inne i iframen och ger
  * exakt originalsimuleringens fullskärmsläge, med alla verktyg.
  *
@@ -5471,7 +5471,7 @@
     // de väsentliga verktygen — Knuffa till, Snurra, Börja om och
     // glidaren Gaffelvinkel — bor här i minisim-kortet och styr sidan
     // med postMessage. Sidan rapporterar tillbaka sitt läge
-    // (fallen/stabil/period/varvtal) till kortets info-rad.
+    // (fallen/stabil/periodtid/varvtal) till kortets info-rad.
     // FULLSKÄRM startas med scenens egen .fs-btn INNE i iframen (en
     // fullskärmsknapp i kortet kan inte skicka vidare klickgesten till
     // iframen) och ger då EXAKT originalsimuleringens fullskärmsläge:
@@ -11151,7 +11151,7 @@
             var cx = tx(tid);
             var fns = [function (t) { return Math.sin(OM * t); }, function (t) { return Math.cos(OM * t); },
                        function (t) { return -Math.sin(OM * t); }];
-            // stödlinjer och etiketter vid varje halv period (flyttar med axeln)
+            // stödlinjer och etiketter vid varje halv periodtid (flyttar med axeln)
             for (var k = Math.ceil(t0 / (T / 2) + 1e-6); k * T / 2 <= t0 + 2 * T + 1e-6; k++) {
                 var gxk = tx(k * T / 2);
                 PANEL.forEach(function (p) {
@@ -11678,7 +11678,7 @@
             return s.replace('.', ',').replace('-', '−');
         }
         function nyttFonster() {
-            // tidsfönstret rymmer ungefär två och en halv period
+            // tidsfönstret rymmer ungefär två och en halv periodtid
             fonster = Math.max(4, Math.min(18, Math.ceil(Tformel() * 2.6)));
         }
 
@@ -13401,7 +13401,7 @@
     // där dämpningen ζ gör förstärkningen ändlig vid resonans (≈ 1/(nπζ)).
     // ζ minskar svagt med n, så att alla bukarna blir ungefär lika höga.
     // Snöret svänger med vibratorns verkliga frekvens. Vid 12–48 Hz hinner
-    // skärmen bara visa några få bilder per period, så varje bild ritar
+    // skärmen bara visa några få bilder per periodtid, så varje bild ritar
     // snöret i flera lägen utspridda över bildens visningstid (rörelse-
     // oskärpa), och över höga frekvenser får fasen en slumpvis förskjutning
     // så att snöret inte ser ut att stå still (stroboskopeffekt). Det ger
@@ -16879,7 +16879,7 @@
     // Övre halvan är djupt vatten (h₁ = 4,0 m), nedre halvan grunt vatten med
     // ett djup h₂ som eleven väljer. Raka vågfronter (vågtoppar) kommer in
     // med infallsvinkeln i och knycker vid gränsen. Farten följer
-    // v ≈ √(g · h) och perioden är T = 10 s, så v₂/v₁ = √(h₂/h₁) och
+    // v ≈ √(g · h) och periodtiden är T = 10 s, så v₂/v₁ = √(h₂/h₁) och
     // sin b = (v₂/v₁) · sin i. Fasen är kontinuerlig längs gränsen, så att
     // varje front i det djupa vattnet fortsätter som en front i det grunda.
     // En stråle med normal och vinkelbågar visar i och b, och raden under
@@ -16888,8 +16888,8 @@
     function buildVagtank(node, cfg) {
         var INK = '#1f2530', BLA = '#2563c9', ROD = '#c0392b', GRA = '#7c828c';
         var W = 640, H = 300, YB = 150, PX = 250;
-        var G = 9.82, H1 = 4.0, TP = 10;                // tyngdfaktor, djup 1, period (s)
-        var LAM1 = 56, TANIM = 2.2;                       // λ₁ på skärmen (px), period i animationen (s)
+        var G = 9.82, H1 = 4.0, TP = 10;                // tyngdfaktor, djup 1, periodtid (s)
+        var LAM1 = 56, TANIM = 2.2;                       // λ₁ på skärmen (px), periodtid i animationen (s)
         var iDeg = 40, h2 = 2.0, tid = 0, visaStrale = true, visaFart = true, visaLambda = true;
         var GRN = '#1d7a46', LV = 60;                    // hastighetspilarnas färg, längd för v₁ (px)
         var id = 'ms-vt-rutnat-' + (++vtRaknare);
@@ -17748,7 +17748,7 @@
         var V = 340, FREQ = 480, LAM = V / FREQ;          // m/s, Hz, m
         var D = 2.0, CX = 320, YS = 74, YL = 372;         // högtalaravstånd (m), mitt, högtalarnas y, gånglinjens y
         var XL = [CX - D / 2 * S, CX + D / 2 * S];
-        var TANIM = 1.1;                                  // en period i animationen (s)
+        var TANIM = 1.1;                                  // en periodtid i animationen (s)
         var ex = CX + 0.62 * S, tid = 0, visaFronter = false, visaLinjer = false;
         var EXMIN = 34, EXMAX = W - 34;
         var id = 'ms-hp-rutnat-' + (++hpRaknare);

@@ -2228,6 +2228,17 @@ simuleringar och nyhetsartiklar.
   finns *θ* kvar i `handskrift.js`), men **allt nyskrivet och omskrivet
   använder α**.
 
+### T heter periodtid, aldrig bara period
+
+**Storheten *T* (tiden för ett varv eller en hel svängning) heter
+periodtid** i all fysiktext: teori, där-listor (`*T* = periodtid (s)`),
+övningar, exit tickets, prov, simuleringar, pennlösningar och filmer
+(användarkrav 2026-11-14; hela sajten gicks igenom samma dag med
+`.claude/periodtid-byte.py`). Räknas svängningar ("tio perioder") skrivs
+**svängningar** eller **varv**: "tar tid på tio svängningar". Undantag:
+matematikens period hos en funktion ("perioden för sin *x* är 360°") och
+sökorden, där "period" står kvar som synonym.
+
 ### Standardbeteckningar för krafter
 
 - **Tyngdkraften betecknas ALLTID `F_G` med STORT `G`** — aldrig `F_g`

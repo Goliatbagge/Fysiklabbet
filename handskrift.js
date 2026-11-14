@@ -22112,7 +22112,7 @@
       [['Skriver in det jag vet: vinkeln']],
       [['30° mot lodlinjen och kedjans']],
       [['längd 5,0 m. Tiden för ett varv']],
-      [['är perioden ', 0], ['T', 1]]
+      [['är periodtiden ', 0], ['T', 1]]
     ]);
     tanke(b2);
     /* vinkelbågen mellan lodlinjen och kedjan (tal/vinkel → blått) */
@@ -22151,8 +22151,8 @@
 
     var bF = bubble(120, bubbleTop(288), bw, [
       [['Formeln för konisk pendel ger']],
-      [['perioden direkt. Varken massan']],
-      [['eller banradien behövs!']]
+      [['periodtiden direkt. Varken']],
+      [['massan eller banradien behövs!']]
     ]);
     tanke(bF);
     /* INLEDANDE MOTIVERING (se REGEL): rubrik + formel i SAMMA steg */
@@ -25719,7 +25719,7 @@
     var b2 = figurBubble(272, [
       [['Skriver in sambandet ur']],
       [['uppgiften. Amplituden ', 0], ['A', 1], [' och', 0]],
-      [['perioden ', 0], ['T', 1], [' är det jag söker,', 0]],
+      [['periodtiden ', 0], ['T', 1], [' är det jag söker,', 0]],
       [['så de får bara sin beteckning.']]
     ]);
     tanke(b2);
@@ -25804,9 +25804,10 @@
      * värdet sätts in. */
     y += adv + 1.2 * F;
     var bF2 = bubble(140, bubbleTop(y - adv - 0.5 * F), bw, [
-      [['Perioden hänger ihop med vinkel-']],
-      [['hastigheten ', 0], ['ω', 1], ['. Den läser jag av', 0]],
-      [['med samma jämförelse som i a).']]
+      [['Periodtiden hänger ihop med']],
+      [['vinkelhastigheten ', 0], ['ω', 1], ['. Den', 0]],
+      [['läser jag av med samma jäm-']],
+      [['förelse som i a).']]
     ]);
     tanke(bF2);
     placeString('b) Läser av ω genom att jämföra', padL, y, s * 0.62, F * 0.62, acts);
@@ -25825,7 +25826,7 @@
     y += adv + 1.2 * F;
     var bFo = bubble(140, bubbleTop(y - adv - 0.5 * F), bw, [
       [['Sambandet mellan vinkelhastig-']],
-      [['heten och perioden ', 0], ['T', 1], [':', 0]]
+      [['heten och periodtiden ', 0], ['T', 1], [':', 0]]
     ]);
     tanke(bFo);
     placeString('Löser ut T ur vinkelhastigheten', padL, y, s * 0.62, F * 0.62, acts);
@@ -26220,10 +26221,10 @@
     var bw = 292;
 
     var bF = bubble(120, bubbleTop(292), bw, [
-      [['Perioden beror bara på massan']],
-      [['och fjäderkonstanten. Ampli-']],
-      [['tuden 5,0 cm behövs alltså inte']],
-      [['alls!']]
+      [['Periodtiden beror bara på']],
+      [['massan och fjäderkonstanten.']],
+      [['Amplituden 5,0 cm behövs']],
+      [['alltså inte alls!']]
     ]);
     tanke(bF);
     /* INLEDANDE MOTIVERING (se REGEL): rubrik + formel i SAMMA steg */
@@ -26421,8 +26422,8 @@
     /* ---- steg 2: annoteringar (blått) ---- */
     var b2 = figurBubble(272, [
       [['Skriver in fjäderkonstanten och']],
-      [['perioden. Massan ', 0], ['m', 1], [' är det jag', 0]],
-      [['söker, så den får bara sin']],
+      [['periodtiden. Massan ', 0], ['m', 1], [' är det', 0]],
+      [['jag söker, så den får bara sin']],
       [['beteckning.']]
     ]);
     tanke(b2);
@@ -26441,9 +26442,9 @@
     var bw = 292;
 
     var bF = bubble(120, bubbleTop(284), bw, [
-      [['Formeln för perioden innehåller']],
-      [['massan. Jag ställer upp den och']],
-      [['löser ut ', 0], ['m', 1]]
+      [['Formeln för periodtiden inne-']],
+      [['håller massan. Jag ställer upp']],
+      [['den och löser ut ', 0], ['m', 1]]
     ]);
     tanke(bF);
     /* INLEDANDE MOTIVERING (se REGEL): rubrik + formel i SAMMA steg */
@@ -26691,10 +26692,10 @@
     var b3 = figurBubble(276, [
       [['Ena vändläget till det andra är']],
       [['bara en HALV svängning. Hela']],
-      [['perioden är dubbelt så lång.']]
+      [['periodtiden är dubbelt så lång.']]
     ]);
     tanke(b3);
-    placeString('Halva perioden: 1,00 s', 424, 116, s * 0.62, F * 0.62, acts);
+    placeString('Halva periodtiden: 1,00 s', 424, 116, s * 0.62, F * 0.62, acts);
     placeString('T=2·1,00=2,00 s', 424, 146, s * 0.62, F * 0.62, acts);
     pause(200);
     /* hela perioden: fram OCH tillbaka, spets i båda ändar */
@@ -27029,8 +27030,8 @@
     T.tanke(T.figurBubble(286, [
       [['Skriver in det jag vet: längden']],
       [['till kulans tyngdpunkt och tiden']],
-      [['för tio hela perioder. ', 0], ['g', 1], [' är det', 0]],
-      [['jag söker.']]
+      [['för tio hela svängningar. ', 0], ['g', 1], [' är', 0]],
+      [['det jag söker.']]
     ]));
     T.lbl('l=0,850 m', px + 12, py + 84, BLUE);
     T.pause(160);
@@ -27038,7 +27039,7 @@
     for (var k = 0; k + 1 < bp.length; k++) T.line(bp[k], bp[k + 1], BLUE);
     T.arrowHead(bp[0][0], bp[0][1], bp[2][0], bp[2][1], 9, BLUE);
     T.arrowHead(bp[16][0], bp[16][1], bp[14][0], bp[14][1], 9, BLUE);
-    T.lbl('10 perioder: 18,5 s', px - 78, py + PL + 62, BLUE);
+    T.lbl('10 svängningar: 18,5 s', px - 78, py + PL + 62, BLUE);
     T.stepEnd();
 
     /* ---- formeln ---- */
@@ -27079,8 +27080,8 @@
     y += adv + 1.7 * F;
     T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
       [['Periodtiden är tiden för EN']],
-      [['period. Jag delar därför tiden']],
-      [['med antalet perioder.']]
+      [['svängning. Jag delar därför']],
+      [['tiden med antalet svängningar.']]
     ]));
     var klam = valueBracket(acts, [
       'l=0,850 m',

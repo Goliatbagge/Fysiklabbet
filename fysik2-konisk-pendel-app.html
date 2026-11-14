@@ -644,7 +644,7 @@
                         <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Konisk pendel</h1>
                         <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 760 }}>
                             En massa snurrar i en vågrät cirkel medan snöret sveper ut en kon. Snöret kan
-                            aldrig bli vågrätt. Utforska hur vinkeln <em>α</em>, perioden och spännkraften
+                            aldrig bli vågrätt. Utforska hur vinkeln <em>α</em>, periodtiden och spännkraften
                             beror på vinkelhastigheten <em>ω</em> — och upptäck att massan inte påverkar vinkeln.
                         </p>
 
@@ -813,7 +813,7 @@
                                 <Slider label="Vinkelhastighet (<em>ω</em>)" sub="<em>ω</em> styr systemet — vinkeln <em>α</em> ställer in sig själv."
                                         value={omega} min={0} max={8} step={0.1} unit="rad/s" onChange={setOmega} />
                                 <Slider label="Snörlängd (<em>l</em>)" value={L} min={0.3} max={2.0} step={0.05} unit="m" onChange={setL} decimals={2} />
-                                <Slider label="Massa (<em>m</em>)" sub="Testa: ändra massan — vad händer med vinkeln och perioden?"
+                                <Slider label="Massa (<em>m</em>)" sub="Testa: ändra massan — vad händer med vinkeln och periodtiden?"
                                         value={m} min={0.1} max={2.0} step={0.1} unit="kg" onChange={setM} decimals={2} />
                                 <Slider label="Tyngdfaktor (<em>g</em>)" value={g} min={1.6} max={9.82} step={0.01} unit="N/kg" onChange={setG} decimals={2} />
 

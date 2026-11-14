@@ -28,7 +28,7 @@ window.REPETITION['fy2-1'] = {
             instruktion: 'Dra rätt beskrivning till varje formel.',
             pairs: [
                 { a: '$M = F \\cdot l$', b: 'Kraftmoment' },
-                { a: '$T = \\dfrac{1}{f}$', b: 'Period givet frekvensen' },
+                { a: '$T = \\dfrac{1}{f}$', b: 'Periodtid givet frekvensen' },
                 { a: '$\\omega = \\dfrac{2\\pi}{T}$', b: 'Vinkelhastighet' },
                 { a: '$v = \\omega \\cdot r$', b: 'Fart i cirkulär bana' },
                 { a: '$a_C = \\dfrac{v^2}{r}$', b: 'Centripetalacceleration' },
@@ -74,7 +74,7 @@ window.REPETITION['fy2-1'] = {
                 { text: 'Kastvidden blir störst när elevationsvinkeln är 45°, om start- och sluthöjd är desamma.',
                   sant: true, varfor: 'Då är $\\sin(2\\alpha) = \\sin 90^\\circ = 1$, vilket är det största möjliga värdet.' },
                 { text: 'En konisk pendels periodtid beror på pendelns massa.',
-                  sant: false, varfor: 'Massan förekommer inte i formeln $T = 2\\pi\\sqrt{\\dfrac{l \\cdot \\cos\\alpha}{g}}$ — perioden beror bara på längden, vinkeln och $g$.' },
+                  sant: false, varfor: 'Massan förekommer inte i formeln $T = 2\\pi\\sqrt{\\dfrac{l \\cdot \\cos\\alpha}{g}}$ — periodtiden beror bara på längden, vinkeln och $g$.' },
             ],
         },
     ],

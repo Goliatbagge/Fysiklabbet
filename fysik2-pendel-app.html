@@ -443,7 +443,7 @@
               text: 'Med <em>l</em> = 0,995 m blir <em>T</em> = 2,00 s. Ljusgrinden slås ut en gång per sekund, varje gång pendeln passerar jämviktsläget.' },
             { id: 'stort', namn: 'Stort utslag (formeln slutar gälla)',
               set: { l: 1.0, a0: 60, m: 100, plats: 'jorden' }, ghost: { l: 1.0, m: 100, a0: 5 },
-              text: 'A släpps från 60° och B från 5°, båda med <em>l</em> = 1,00 m. A hänger efter: formeln gäller bara för små utslag, och vid 60° är perioden cirka 7 % längre.' },
+              text: 'A släpps från 60° och B från 5°, båda med <em>l</em> = 1,00 m. A hänger efter: formeln gäller bara för små utslag, och vid 60° är periodtiden cirka 7 % längre.' },
             { id: 'manen', namn: 'Pendeln på Månen',
               set: { l: 1.0, a0: 10, m: 100, plats: 'mon' }, ghost: null,
               text: 'På Månen är <em>g</em> = 1,62 m/s². Samma pendel behöver ungefär 2,5 gånger så lång tid: <em>T</em> = 4,94 s.' },
@@ -1215,7 +1215,7 @@
                 if (gst.forsok === 0) {
                     const dir = v < okand.g ? tr('Ditt värde är för litet') : tr('Ditt värde är för stort');
                     setGst({ ...gst, forsok: 1,
-                        fb: { ok: false, html: dir + tr('. Kontrollera att du kvadrerat <em>T</em> och att längden är mätt till kulans tyngdpunkt. Större <em>g</em> ger kortare period.') + stort + ' ' + tr('Försök en gång till.') } });
+                        fb: { ok: false, html: dir + tr('. Kontrollera att du kvadrerat <em>T</em> och att längden är mätt till kulans tyngdpunkt. Större <em>g</em> ger kortare periodtid.') + stort + ' ' + tr('Försök en gång till.') } });
                 } else {
                     setGst({ ...gst, klar: true, svit: 0,
                         fb: { ok: false, html: tr('Det stämmer inte. Pendeln hängde på <b>{namn}</b>, där <em>g</em> = {g} m/s².', { namn: okand.namn, g: fmt(okand.g, 2) }) + ' ' + hur + stort } });
@@ -1520,7 +1520,7 @@
                                 <li>Massan ingår inte i formeln. <em>F</em><sub>1</sub> är proportionell mot massan, men det är också kulans tröghet, så massan förkortas bort. Prova försöket med samma längd och olika massa.</li>
                                 <li>Kvadrerar du formeln får du <em>T</em>² = (4π²/<em>g</em>)&thinsp;·&thinsp;<em>l</em>, en rät linje genom origo med lutningen 4π²/<em>g</em>. Läs av lutningen och räkna ut <em>g</em> ur den.</li>
                                 <li>Formeln gäller bara för små utslag, eftersom den bygger på att sin&nbsp;<em>α</em> ≈ <em>α</em> (i radianer). Vid 23° blir felet cirka 1 %, vid 45° cirka 4 % och vid 60° cirka 7 %. Simuleringen räknar rörelsen exakt, så du ser avvikelsen själv.</li>
-                                <li>Sekundpendeln har perioden 2,00 s, så den passerar jämviktsläget en gång per sekund. Vid <em>g</em> = 9,82 m/s² är den knappt en meter lång, <em>l</em> ≈ 0,995 m.</li>
+                                <li>Sekundpendeln har periodtiden 2,00 s, så den passerar jämviktsläget en gång per sekund. Vid <em>g</em> = 9,82 m/s² är den knappt en meter lång, <em>l</em> ≈ 0,995 m.</li>
                             </ul>
                         </details>
                     </div>

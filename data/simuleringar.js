@@ -152,7 +152,7 @@ window.SIM_NAMES = {
   'fysik2-konisk-pendel.html': 'Konisk pendel',
   'fysik2-rorelse-app.html': 'Snett kast',
   'fysik2-svangningar-jamforelse.html': [
-    { name: 'Jämförelse av svängningar', desc: 'Sinusrörelse, amplitud, period och frekvens.',
+    { name: 'Jämförelse av svängningar', desc: 'Sinusrörelse, amplitud, periodtid och frekvens.',
       kw: ['vågor','svängning','jämförelse','jämföra svängningar','pendel','fjäderpendel','amplitud','period','frekvens','sinus'] },
     { name: 'Hjulet och fjädern', href: 'fysik2-hjul-och-fjader-app.html', desc: 'En lampa lyser på ett snurrande cykelhjul, och skuggan av ett stift på hjulet rör sig upp och ned på väggen i exakt samma takt som en vikt i en fjäder. Se hur en harmonisk svängning är projektionen av en cirkelrörelse, och hur grafen blir en sinuskurva.',
       kw: ['vågor', 'svängning', 'harmonisk svängning', 'cirkelrörelse', 'projektion', 'cykelhjul', 'hjul', 'stift', 'skugga', 'lampa', 'fjäder', 'fjäderpendel', 'sinus', 'sinuskurva', 'amplitud', 'periodtid', 'vinkelhastighet', 'elongation'] },

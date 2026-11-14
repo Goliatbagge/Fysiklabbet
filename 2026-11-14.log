@@ -1,0 +1,32 @@
+03:15:01  [idag] === Nyhetsjobb: start (2026-11-14) ===
+03:15:03  [idag] Dagens nyhet finns (förberedd i går).
+03:15:03  [idag] Startar Claude Code (headless, modell opus, nyckel)...
+03:20:02  [imorgon] === Nyhetsjobb: start (2026-11-14) ===
+03:20:02  [imorgon] En körning pågår redan (lås 5 min gammalt). Avslutar.
+03:25:36  [idag] Artikeln för 2026-11-15 är skriven, godkänd av utgivaren och committad på `nyhetsjobb` (d37be2ee). Jag har inte pushat och inte skickat något mejl.
+03:25:36  [idag] 
+03:25:36  [idag] **Artikeln:** ”En vit dvärg med natrium i atmosfären är den första stjärna som skulle se grön ut” (`2026-11-15-den-forsta-grona-stjarnan`, kategori Astronomi). Grannen 2026-11-14 är elektrostatik och den senaste astronominyheten är från 2026-11-03, så ämnet krockar inte.
+03:25:36  [idag] - **Källor:** studien är Hollands m.fl. i RAS Techniques and Instruments, kollegialt granskad och fri att använda (CC BY 4.0). Jag läste hela texten via förtrycket arXiv:2610.18966, som är samma som den godkända versionen. Pressmeddelandet från Warwick och Physics World användes för citaten.
+03:25:36  [idag] - **Ålder:** pressmeddelandet är från 15 oktober, alltså en månad gammalt. Physics World tog upp nyheten först 11 november.
+03:25:36  [idag] - **Bilder:** båda är tagna ur studiens egna figurer och får användas fritt. Huvudbilden är en sammanställning av studiens beräknade, färgtrogna bilder av stjärnorna, i blått, rosa, grönt, gult och blått. Bild 2 är den gröna stjärnans spektrum. Ingen AI-bild skapades. Warwicks pressbilder valde jag bort eftersom deras licens inte anges.
+03:25:36  [idag] - **Ordlistan:** två nya begrepp, färgtemperatur och randfördunkling.
+03:25:36  [idag] - **Länk till simulering:** rutan ”Prova själv” leder till Wiens förskjutningslag.
+03:25:36  [idag] - **Utgivaren:** sa först ”rätta först” på fem punkter, bland annat att rött ljus också blir kvar vid sidan av det gröna och att påståendet om glödlampan i faktarutan var fel. Alla fem är rättade, och efterkontrollen blev godkänd.
+03:25:36  [idag] - **Kontroller:** delningssidor, RSS och sitemap är byggda, och alla kontroller jag körde gav inga fel.
+03:25:36  [idag] - **I committen:** bara nyhetsfilerna. Byggskriptet ändrade radsluten i flera hundra delningssidor och i `i18n/`, utan någon ändring i innehållet. De filerna lämnade jag utanför.
+03:25:36  [idag] 
+03:25:36  [idag] **Säg till Sam:** artikeln om Mpembaeffekten i en qubit, som Sam ville ha senast lördag 2026-11-14, gick inte att skriva. Studien i Physical Review Letters ligger bakom betalvägg och har fortfarande inget förtryck på arXiv; jag sökte senast i dag. Fönstret har stängt, och det står nu i `ko.md`.
+03:25:36  [idag] 
+03:25:36  [idag] Uppslaget om Capotauro, som ska lockas med i nyhetsbrevet, ligger kvar orört tills brevet gått ut 2026-11-15.
+03:25:37  [idag] Claude avslutade med kod 0
+03:25:37  [idag] error: cannot pull with rebase: You have unstaged changes.
+03:25:37  [idag] error: Please commit or stash them.
+03:25:41  [idag] Pushat till main.
+03:25:41  [idag] Artikel 2026-11-15 pushad: 2026-11-15-den-forsta-grona-stjarnan
+03:27:11  [idag] https://fysiklabbet.se/nyheter.html?forhand=2026-11-15-den-forsta-grona-stjarnan
+03:27:12  [idag] Mejlet byggt av mallen (C:\claude\Fysiklabbet-nyhetsjobb\.claude\nyheter\logg\mejl-2026-11-15).
+03:27:12  [idag] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+03:28:25  [idag] Mejlet är skickat till [ägaren]. Utgivarraden fylldes i med: "Utgivaren bad om fyra rättningar: ljusets våglängd (synligt rött ljus 620–680 nm, inte djuprött), jämförelsen med glödlampan i faktarutan, generaliseringen 'blir turkosa' och rubrikens temperaturangivelse (kelvin, inte grader). Alla rättningar infördes och artikeln godkändes vid efterkontrollen."
+03:28:26  [idag] Claude avslutade med kod 0
+03:28:26  [idag] Mejlet till ägaren är skickat.
+03:28:26  [idag] === Nyhetsjobb: slut ===

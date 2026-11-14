@@ -4861,6 +4861,30 @@ window.BEGREPP = [
       { type: 'p', html: 'Modellen höll bara några år. År 1909 sköt Hans Geiger och Ernest Marsden alfapartiklar mot en tunn guldfolie i Ernest Rutherfords laboratorium. De flesta for rakt igenom, men några studsade tillbaka. Det gick inte ihop med en utspridd positiv laddning, och Rutherford drog slutsatsen att den positiva laddningen sitter samlad i en liten kärna i mitten av atomen.' },
       { type: 'p', html: 'Även om modellen var fel lämnade den ett spår. Frågan om hur lika laddningar ordnar sig på ett klot, Thomsonproblemet, är fortfarande ett levande forskningsområde inom matematik och fysik.' }
     ]
+  },
+  {
+    id: 'fargtemperatur',
+    term: 'Färgtemperatur',
+    former: ['färgtemperatur', 'färgtemperaturen', 'färgtemperaturer', 'färgtemperaturerna'],
+    kort: 'Ett sätt att beskriva en ljuskällas färg med en temperatur: den temperatur en idealiskt svart kropp skulle behöva ha för att lysa i samma färg.',
+    relaterade: ['svartkroppsstralning', 'spektrum'],
+    body: [
+      { type: 'p', html: 'Värm en järnspik i en låga, så börjar den så småningom glöda: först mörkrött, sedan orange, gult och till sist nästan vitt. Färgen följer temperaturen. En idealiserad kropp som bara strålar på grund av sin temperatur kallas en svartkropp, och för en sådan räcker det att veta temperaturen för att veta exakt vilken färg den har. Färgtemperaturen vänder på det: man tittar på en ljuskälla och frågar vilken temperatur en svartkropp skulle behöva ha för att lysa i just den färgen.' },
+      { type: 'p', html: 'Måttet används mest för lampor. Varmvitt ljus, som från en gammal glödlampa, har en färgtemperatur på omkring 3&nbsp;000&nbsp;K, och kallvitt kontorsljus omkring 6&nbsp;000&nbsp;K. En lysdiod med färgtemperaturen 6&nbsp;000&nbsp;K är förstås inte så varm, den bara ger ljus i samma färg som en så varm svartkropp. Lite förvirrande kallas lågt värde för ”varmt” ljus, eftersom rödaktigt ljus känns varmt för oss, fast det motsvarar den lägre temperaturen.' },
+      { type: 'p', html: 'Astronomer använder samma mått för stjärnor, eftersom de flesta stjärnor strålar nästan som svartkroppar. Men begreppet fungerar bara för färger som en svartkropp faktiskt kan ha: rött, orange, vitt och blåaktigt. En grön eller rosa ljuskälla har ingen meningsfull färgtemperatur, eftersom ingen svartkropp, hur varm den än är, lyser grönt eller rosa.' }
+    ]
+  },
+  {
+    id: 'randfordunkling',
+    term: 'Randfördunkling',
+    former: ['randfördunkling', 'randfördunklingen'],
+    kort: 'Att en stjärnas skiva ser mörkare och ofta rödare ut mot kanten än i mitten, eftersom man där ser in i stjärnans svalare yttre lager.',
+    relaterade: ['vit-dvarg'],
+    body: [
+      { type: 'p', html: 'Den som tittar på solen genom ett solfilter ser att skivan inte är jämnt ljus. Mitten är ljusast, och mot kanten blir den gradvis mörkare och lite mer gulröd. Det kallas randfördunkling, och det gäller i stort sett alla stjärnor.' },
+      { type: 'p', html: 'Förklaringen är att en stjärna inte har någon skarp yta. Ljuset som når oss kommer från ett lager av gas där det kan ta sig ut utan att stoppas. Tittar man rakt in mot skivans mitt ser man djupt ner, där gasen är varm och lyser starkt. Mot kanten går siktlinjen snett genom atmosfären, så man ser bara de yttre lagren, som är svalare. Svalare gas lyser svagare och rödare, och därför blir kanten mörkare.' },
+      { type: 'p', html: 'Randfördunklingen är viktig när astronomer studerar exoplaneter som passerar framför sin stjärna. Planeten skymmer olika mycket ljus beroende på om den passerar nära mitten eller nära kanten, och det måste räknas med för att planetens storlek ska bli rätt.' }
+    ]
   }
 ];
 

@@ -103,6 +103,71 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-15-den-forsta-grona-stjarnan",
+    date: "2026-11-15",
+    title: "En vit dvärg med natrium i atmosfären är den första stjärna som skulle se grön ut",
+    deck: "Astronomer vid University of Warwick har räknat ut vilken färg vita dvärgar skulle ha om man kunde se dem på nära håll. De flesta är vita, men en del är rosa, gula eller turkosa. En av dem, WD J1330+6435, skulle lysa blekt grön, och ingen stjärna har tidigare med goda skäl beskrivits som grön.",
+    category: "Astronomi",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-11-15-den-forsta-grona-stjarnan.jpg",
+    imageAlt: "Fem runda stjärnskivor på rad mot svart bakgrund. Från vänster en blekblå, en rosa, en större blekt gulgrön i mitten, en gul och en klarblå. Alla skivor är lite mörkare mot kanten.",
+    imageCredit: "Bilder ur studien: M. A. Hollands med flera, RAS Techniques and Instruments (2026) (CC BY 4.0). Sammanställning: Fysiklabbet. Skivorna är beräknade färgtrogna bilder, inte fotografier, och storlekarna är inte skalenliga.",
+    tags: ["astronomi", "vita dvärgar", "stjärnor", "färg", "svartkroppsstrålning", "wiens förskjutningslag", "spektrum", "absorption", "spektrallinjer", "natrium", "färgtemperatur", "färgseende", "university of warwick"],
+    sources: [
+      { name: "University of Warwick: Green, pink and purple: astronomers reveal the surprising true colours of white dwarf stars (15 oktober 2026)", url: "https://warwick.ac.uk/newsandevents/pressreleases/astronomers-reveal-true-colours-of-white-dwarf-stars" },
+      { name: "Physics World: White dwarf star glows an eerie green (Isabelle Dumé, 11 november 2026)", url: "https://physicsworld.com/a/white-dwarf-star-glows-an-eerie-green/" }
+    ],
+    research: {
+      citation: "M. A. Hollands, B. T. Gänsicke, P.-E. Tremblay och D. Koester, ”Any colour you like: The diverse chromaticities of white dwarfs”, RAS Techniques and Instruments (2026). Kollegialt granskad, öppet tillgänglig (CC BY 4.0). Förtryck: arXiv:2610.18966.",
+      url: "https://doi.org/10.1093/rasti/rzag069"
+    },
+    simulering: {
+      href: "fysik2-wiens-lag.html",
+      name: "Wiens förskjutningslag",
+      text: "Dra i temperaturreglaget och se hur toppen i en svartkropps spektrum flyttas mot kortare våglängder när temperaturen ökar."
+    },
+    larare: {
+      moment: [
+        { label: "Svartkroppsstrålning", href: "katalog.html?id=fy2-4.3" },
+        { label: "Spektrallinjer", href: "katalog.html?id=fy2-4.7" },
+        { label: "Solens färg", href: "katalog.html?id=fy2-5.4" }
+      ],
+      fragor: [
+        "Använd Wiens förskjutningslag med b = 0,00290 m·K. Var ligger toppen i spektrumet för en svartkropp med temperaturen 5 800 K, och för en med 4 240 K? I vilket färgområde hamnar de två topparna?",
+        "Solens strålning har sin topp i det blågröna, ändå ser solen vit ut för oss. Förklara varför, och förklara varför en svartkropp aldrig kan se grön ut, oavsett temperatur.",
+        "Natriumatomer i en tunn gas absorberar bara ljus med våglängden 589 nm. I den vita dvärgens täta atmosfär absorberar natrium över ett brett band av gult, orange och rött. Varför breddas absorptionen när gasen blir tätare?"
+      ]
+    },
+    body: [
+      { type: "p", html: "Stjärnorna på natthimlen har färger, men bara några få. Betelgeuse och Antares lyser orangeröda, solen är vit och Sirius och Rigel är svagt blåaktiga. Färgen styrs nästan helt av temperaturen, ungefär som hos ett järnstycke i en smedja, som glöder först rött, sedan orange och till sist vitt när det blir varmare. Grönt finns inte med i den skalan." },
+      { type: "p", html: "Nu har Mark Hollands och hans kollegor vid University of Warwick i England och universitetet i Kiel i Tyskland visat att vissa vita dvärgar bryter mot regeln. Om man kunde se dem på nära håll skulle en del lysa rosa, gula eller turkosa, och en av dem skulle lysa blekt grön. Studien är publicerad i tidskriften <em>RAS Techniques and Instruments</em>." },
+      { type: "h2", text: "Varför finns det inga gröna stjärnor?" },
+      { type: "p", html: "En vanlig stjärna strålar nästan som en svartkropp, en idealiserad kropp vars spektrum bara beror på temperaturen. Spektrumet är en bred kulle, och toppens våglängd ges av Wiens förskjutningslag, $\\lambda_\\mathrm{max} = \\dfrac{b}{T}$, där $b \\approx 2{,}90 \\cdot 10^{-3}\\ \\mathrm{m \\cdot K}$. Solens yta håller omkring 5&nbsp;800&nbsp;K, så toppen hamnar kring 500&nbsp;nm, i det blågröna." },
+      { type: "p", html: "Ändå ser solen inte grön ut. Kullen är så bred att alla färger i det synliga ljuset kommer med i ungefär lika stor mängd, och den blandningen uppfattar ögat som vitt. En svalare svartkropp väger över mot rött och ser orange ut, en varmare väger över mot blått. Därför kan en svartkropp bara se röd, orange, vit eller blåaktig ut. För att en stjärna ska bli grön måste något ta bort ljus ur spektrumet." },
+      { type: "h2", text: "En tät atmosfär suddar ut linjerna" },
+      { type: "p", html: "En vit dvärg är den utbrunna kärnan av en stjärna som solen, ungefär lika stor som jorden men med en massa i samma storleksordning som solens. De svalaste vita dvärgarna har en atmosfär av helium med en densitet på upp till omkring 1&nbsp;g/cm³, ungefär som vatten. Om atomer av kol, kalcium eller natrium finns i en så tät gas krockar de hela tiden med heliumatomer, och krockarna rubbar deras energinivåer. Absorptionslinjer som i en tunn gas är smala breddas då till band som täcker en stor del av det synliga ljuset." },
+      { type: "p", html: "Ingen vit dvärg ligger tillräckligt nära för att färgen ska kunna ses direkt. Forskarna utgick i stället från stjärnornas spektrum, uppmätt med teleskop eller beräknat med modeller av atmosfären. Spektrumet räknades om med en standardiserad modell av människans färgseende från 1931, samma som används för att kalibrera bildskärmar. Resultatet är den färg stjärnans yta skulle ha för ögat. Ljusstyrkan lämnades utanför: en verklig stjärna är långt ljusare än vad någon skärm kan visa." },
+      { type: "h2", text: "Natrium tar bort det orange" },
+      { type: "p", html: "Den gröna stjärnan heter WD J1330+6435 och har en yttemperatur på omkring 4&nbsp;240&nbsp;K. En svartkropp med den temperaturen har sin topp kring 680&nbsp;nm, i det röda, och skulle se orange ut. Men den vita dvärgen har dragit till sig stenigt material från sitt eget planetsystem, rester av asteroider eller kometer, och därför innehåller atmosfären natrium, kalcium och litium." },
+      { type: "p", html: "Natrium absorberar normalt bara ett smalt orange band vid 589&nbsp;nm, samma orange som i gamla natriumgatlampor. I den täta atmosfären breddas absorptionen över gult, orange och en del rött, och samtidigt absorberar kalcium det violetta ljuset. Kvar blir framför allt grönt ljus kring 500&nbsp;nm och rött ljus på andra sidan natriumbandet, där ögat är mindre känsligt, och färgen blir en blek gulgrön nyans som på engelska kallas chartreuse." },
+      { type: "image", src: "nyheter/bilder/2026-11-15-den-forsta-grona-stjarnan-2.jpg", alt: "Ett diagram med en blå kurva. Kurvan ligger nära noll till vänster, stiger till en topp kring 5000 på den vågräta axeln, sjunker till en djup dipp vid 5890 och har en smal dipp vid 6708 innan den planar ut nära 1 till höger.", caption: "Det beräknade spektrumet för WD J1330+6435. Våglängden anges i ångström (5000&nbsp;Å = 500&nbsp;nm). Kalcium tar bort nästan allt ljus under 430&nbsp;nm, den breda dippen vid 589&nbsp;nm kommer från natrium och den smala vid 671&nbsp;nm från litium.", credit: "Figur ur studien: M. A. Hollands med flera, RAS Techniques and Instruments (2026) (CC BY 4.0). Beskuren." },
+      { type: "quote", html: "Spåren av natrium i den här vita dvärgens atmosfär absorberar den orange delen av spektrumet och lämnar kvar ett spöklikt grönt sken. Föreställ dig att stå på en planet och titta upp på en grön stjärna. Det känns som något ur science fiction.", cite: "Mark Hollands, University of Warwick, i universitetets pressmeddelande (översatt)" },
+      { type: "p", html: "Forskarna påpekar att det uppmätta spektrumet för stjärnan är ganska brusigt, så den verkliga nyansen kan skilja sig något. En äldre modell av samma stjärna gav ändå nästan samma gröna färg. Såvitt forskarna vet har ingen annan stjärna med goda skäl beskrivits som grön. Två andra vita dvärgar i studien är också gröna, men mycket blekare." },
+      { type: "h2", text: "Rosa kol och en blå stjärna på 4 000 kelvin" },
+      { type: "p", html: "Andra grundämnen ger andra färger. I vita dvärgar där konvektionen i de yttre lagren nått ända ner till kärnan har kol förts upp till ytan och bildat molekyler av två kolatomer. De absorberar blått, grönt och gult ljus, och stjärnan blir rosa eller lila. WD J1011+2845, omkring 48&nbsp;ljusår bort, släpper igenom nästan bara ljus med våglängder över 600&nbsp;nm och får en djup laxrosa färg. Det är troligen den rödaste stjärnan som är känd, räknat i den färg ögat skulle uppfatta." },
+      { type: "p", html: "WD J2356−2054 har lika låg temperatur som den gröna stjärnan, omkring 4&nbsp;000&nbsp;K, men ännu mer natrium. Där sväljer natriumet nästan allt ljus mitt i spektrumet, och stjärnan blir klarblå trots att den är sval. Vissa svala vita dvärgar med en blandning av väte och helium blir i stället turkosa, eftersom krockar mellan vätemolekyler och heliumatomer tar bort det röda ljuset." },
+      { type: "h2", text: "De flesta vita dvärgar är vita" },
+      { type: "p", html: "För att se hur vanliga de ovanliga färgerna är gick forskarna igenom alla 152 kända vita dvärgar inom 20&nbsp;parsec, omkring 65&nbsp;ljusår, från solen. Bara fem avvek tydligt från en svartkropps färg, två gula och tre rosa, alltså omkring 3&nbsp;% av dem. För de övriga räknade de ut färgtemperaturen, alltså temperaturen hos den svartkropp som har samma färg. Medianen blev omkring 6&nbsp;800&nbsp;K, nära den vitpunkt på 6&nbsp;500&nbsp;K som bildskärmar ställs in efter." },
+      { type: "p", html: "Bilden av vita dvärgar som blåaktiga stämmer alltså inte. De varma, blå vita dvärgarna lyser starkare och syns på större avstånd, så de blir överrepresenterade när stjärnor väljs ut efter hur ljusa de är. ”Om vi tar medianen över en representativ grupp vita dvärgar fann vi att den genomsnittliga vita dvärgen verkligen är vit”, säger Boris Gänsicke, professor vid University of Warwick, i pressmeddelandet." },
+      { type: "p", html: "Fler färger lär dyka upp. Enligt Mark Hollands, som intervjuats av Physics World, känner astronomerna i dag till nästan 400&nbsp;000 vita dvärgar, de flesta hittade med rymdteleskopet Gaia, men omkring 90&nbsp;% av dem har ännu inte fått sitt spektrum uppmätt. Flera stora kartläggningar som mäter spektrum för miljontals stjärnor har nyligen kommit i gång." },
+      { type: "fact", title: "Visste du?", items: [
+        "Stjärnskivorna i bilden överst är beräknade i studien. De är mörkare mot kanten, eftersom man där ser in i atmosfärens svalare, yttre lager. Det kallas randfördunkling, och hos den gröna stjärnan blir den yttersta kanten svagt orange.",
+        "Färgtemperatur används också för glödlampor och lysdioder. Varmvitt ljus har omkring 3&nbsp;000&nbsp;K och kallvitt omkring 6&nbsp;000&nbsp;K. En lysdiod med färgtemperaturen 6&nbsp;000&nbsp;K är ändå inte alls så varm.",
+        "Sirius B, den vita dvärg som ligger närmast solsystemet, har en yttemperatur på omkring 26&nbsp;000&nbsp;K och skulle se blekblå ut."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-14-laddningarna-pa-heliumdroppen",
     date: "2026-11-14",
     title: "Guldkorn på heliumdroppar visar hur laddningar ordnar sig på ett klot",

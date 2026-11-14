@@ -402,5 +402,7 @@ window.BEGREPP = [
   {"id":"acceleratormasspektrometri","term":"Acceleratormasspektrometri","kort":"En metod att räkna sällsynta atomer, till exempel kol-14, en och en. Atomerna görs till joner, accelereras och sorteras efter massa, så att även mycket små prov räcker.","former":["acceleratormasspektrometri","acceleratormasspektrometrin"]},
   {"id":"thomsonproblemet","term":"Thomsonproblemet","kort":"Frågan om hur ett antal lika laddningar lägger sig på ytan av ett klot när de stöter bort varandra. Svaret är den placering som ger lägst sammanlagd elektrisk lägesenergi.","former":["thomsonproblemet","thomsonproblem"]},
   {"id":"plumpuddingmodellen","term":"Plumpuddingmodellen","kort":"J. J. Thomsons atommodell från början av 1900-talet. Atomen tänktes vara ett klot av utspridd positiv laddning med elektronerna inbäddade som russin i en kaka.","former":["plumpuddingmodellen","plumpuddingmodell","thomsons atommodell"]},
+  {"id":"fargtemperatur","term":"Färgtemperatur","kort":"Ett sätt att beskriva en ljuskällas färg med en temperatur: den temperatur en idealiskt svart kropp skulle behöva ha för att lysa i samma färg.","former":["färgtemperatur","färgtemperaturen","färgtemperaturer","färgtemperaturerna"]},
+  {"id":"randfordunkling","term":"Randfördunkling","kort":"Att en stjärnas skiva ser mörkare och ofta rödare ut mot kanten än i mitten, eftersom man där ser in i stjärnans svalare yttre lager.","former":["randfördunkling","randfördunklingen"]},
 ];
 if (window.I18N) window.I18N.overlay('begrepp-sok');

@@ -9984,7 +9984,7 @@ $$
 
 **Svar:** 8,0 m/s.
 
-**Generell slutsats:** Den enkla formeln $v_m = (v_0 + v)/2$ gäller **bara** vid **konstant** acceleration — annars måste man räkna med integraler eller arean i ett *v-t*-diagram.`,
+**Generell slutsats:** Den enkla formeln $v_m = (v_0 + v)/2$ gäller **bara** vid **konstant** acceleration. Annars måste man räkna med integraler eller arean i ett *v-t*-diagram.`,
         },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
@@ -10012,7 +10012,7 @@ $$
 
 **Svar:** Reaktionstiden är ca 0,19 s.
 
-**Generell slutsats:** En "normal" reaktionstid ligger runt 0,15–0,25 s. Att tänka och planera tar längre tid (sekunder), men en *reflex* — som att fånga en fallande linjal — är mycket snabbare.`,
+**Generell slutsats:** En "normal" reaktionstid ligger runt 0,15–0,25 s. Att tänka och planera tar längre tid (sekunder), men en *reflex* (som att fånga en fallande linjal) är mycket snabbare.`,
         },
         {
             level: 2,
@@ -10020,13 +10020,13 @@ $$
             answer: { value: 9.98, unit: 'm', tol: 0.03 },
             solution: `Vi räknar uppåt som positiv riktning. I bollens högsta punkt är *v* = 0.
 
-**Steg 1 — tiden till toppen** ur $v = v_0 + a \\cdot t$ med $a = -g$:
+**Steg 1: tiden till toppen** ur $v = v_0 + a \\cdot t$ med $a = -g$:
 
 $$
 t = \\frac{v - v_0}{a} = \\frac{0 - 14}{-9{,}82} \\approx 1{,}426\\ \\mathrm{s}
 $$
 
-**Steg 2 — höjden** ur $s = v_0 t + \\dfrac{1}{2} a t^{2}$:
+**Steg 2: höjden** ur $s = v_0 t + \\dfrac{1}{2} a t^{2}$:
 
 $$
 s = 14 \\cdot 1{,}426 + \\frac{(-9{,}82) \\cdot 1{,}426^{2}}{2}
@@ -10055,13 +10055,13 @@ c) Vilken är den totala stoppsträckan?
                 { del: 'b', value: 52, unit: 'm' },
                 { del: 'c', value: 72, unit: 'm' },
             ],
-            solution: `**a) Reaktionssträcka** — konstant hastighet:
+            solution: `**a) Reaktionssträcka** med konstant hastighet:
 
 $$
 s_1 = v_0 \\cdot t_\\text{reaktion} = 25 \\cdot 0{,}80 = 20\\ \\mathrm{m}
 $$
 
-**b) Bromssträcka** — bilen bromsar från 25 m/s till 0 med *a* = −6,0 m/s². Vi hittar först tiden:
+**b) Bromssträcka:** bilen bromsar från 25 m/s till 0 med *a* = −6,0 m/s². Vi hittar först tiden:
 
 $$
 t = \\frac{v - v_0}{a} = \\frac{0 - 25}{-6{,}0} \\approx 4{,}17\\ \\mathrm{s}
@@ -10090,7 +10090,7 @@ $$
 
 **Svar:** a) 20 m. b) 52 m. c) Cirka 72 m.
 
-**Generell slutsats:** Reaktionssträckan är **proportionell mot farten** (linjär), men bromssträckan är **proportionell mot fartens kvadrat** ($s = v_0^{2}/(2|a|)$). Dubblas hastigheten *fyrdubblas* bromssträckan — det är därför hastighet på landsväg och motorväg är så viktiga säkerhetsfaktorer.`,
+**Generell slutsats:** Reaktionssträckan är **proportionell mot farten** (linjär), men bromssträckan är **proportionell mot fartens kvadrat** ($s = v_0^{2}/(2|a|)$). Dubblas hastigheten *fyrdubblas* bromssträckan. Det är därför hastighet på landsväg och motorväg är så viktiga säkerhetsfaktorer.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
@@ -10120,7 +10120,7 @@ $$
 s_\\text{polis}(t) = \\frac{a \\cdot t^{2}}{2} = \\frac{4{,}0 \\cdot t^{2}}{2} = 2{,}0\\, t^{2}
 $$
 
-**a) Mötesvillkor** — polisen kommer ifatt bilen när $s_\\text{polis} = s_\\text{bil}$:
+**a) Mötesvillkor:** polisen kommer ifatt bilen när $s_\\text{polis} = s_\\text{bil}$:
 
 $$
 2{,}0\\, t^{2} = 25\\, t
@@ -10132,7 +10132,7 @@ $$
 2{,}0\\, t = 25 \\quad\\Leftrightarrow\\quad t = 12{,}5\\ \\mathrm{s}
 $$
 
-**b) Polisens hastighet vid mötet** — använd $v = a \\cdot t$ (eftersom polisens $v_0 = 0$):
+**b) Polisens hastighet vid mötet:** använd $v = a \\cdot t$ (eftersom polisens $v_0 = 0$):
 
 $$
 v_\\text{polis} = a \\cdot t = 4{,}0 \\cdot 12{,}5 = 50\\ \\mathrm{m/s}
@@ -10142,7 +10142,747 @@ Det är 180 km/h.
 
 **Svar:** a) Polisen hinner ifatt efter 12,5 s. b) Polisbilen har då hastigheten 50 m/s (180 km/h).
 
-**Generell slutsats:** Notera att polisens *slutfart* vid mötet är **dubbelt så stor** som bilens fart. Det är ingen tillfällighet — när en bil med konstant fart $v_0$ hinns upp av en bil som startar från vila och accelererar likformigt, sker mötet just när polisens medelhastighet är lika med bilens fart. Eftersom polisen har $v_0 = 0$ och hela tiden ökar är medelhastigheten exakt halva slutfarten, så slutfarten är $2 v_0$.`,
+**Generell slutsats:** Notera att polisens *slutfart* vid mötet är **dubbelt så stor** som bilens fart. Det är ingen tillfällighet: när en bil med konstant fart $v_0$ hinns upp av en bil som startar från vila och accelererar likformigt, sker mötet just när polisens medelhastighet är lika med bilens fart. Eftersom polisen har $v_0 = 0$ och hela tiden ökar är medelhastigheten exakt halva slutfarten, så slutfarten är $2 v_0$.`,
+        },
+        {
+            level: 1,
+            question: `Ett godståg står stilla på en bangård och börjar sedan accelerera med den konstanta accelerationen $a = 0{,}45\\ \\mathrm{m/s^2}$. Vilken hastighet har tåget efter 40 s? Ange svaret i m/s.`,
+            answer: { value: 18, unit: 'm/s', tol: 0.02 },
+            solution: `Tåget startar från vila, så $v_0 = 0$ och hastighetsformeln förenklas:
+
+$$
+v = v_0 + a \\cdot t = a \\cdot t
+$$
+
+$$
+\\left[ \\begin{array}{l}
+a = 0{,}45\\ \\mathrm{m/s^2} \\\\
+t = 40\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+v = 0{,}45 \\cdot 40 = 18\\ \\mathrm{m/s}
+$$
+
+Det motsvarar ungefär 65 km/h, en rimlig fart för ett tåg en dryg halvminut efter start.
+
+**Svar:** 18 m/s`,
+        },
+        {
+            level: 1,
+            question: `En spårvagn kör med hastigheten 14 m/s mot en hållplats. Föraren bromsar med den konstanta retardationen $1{,}6\\ \\mathrm{m/s^2}$ tills vagnen står stilla. Hur lång tid tar inbromsningen? Ange svaret i sekunder.`,
+            answer: { value: 8.8, unit: 's', tol: 0.02 },
+            solution: `Vi löser ut tiden ur formeln för hastighet vid konstant acceleration:
+
+$$
+v = v_0 + a \\cdot t \\quad\\Leftrightarrow\\quad t = \\frac{v - v_0}{a}
+$$
+
+En retardation är en negativ acceleration, så *a* sätts in med minustecken:
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = 14\\ \\mathrm{m/s} \\\\
+v = 0 \\\\
+a = -1{,}6\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$
+t = \\frac{0 - 14}{-1{,}6} = \\frac{-14}{-1{,}6} = 8{,}75\\ \\mathrm{s} \\approx 8{,}8\\ \\mathrm{s}
+$$
+
+**Svar:** 8,8 s`,
+        },
+        {
+            level: 1,
+            question: `En kula släpps från vila överst på en lång ramp och rullar nedför med konstant acceleration. Under den första sekunden rullar den 0,20 m. Hur långt har kulan rullat efter 3,0 s?`,
+            choices: [
+                `0,60 m`,
+                `0,90 m`,
+                `1,8 m`,
+                `1,2 m`,
+            ],
+            correct: 2,
+            solution: `Kulan startar från vila, så $v_0 = 0$ och sträckan är
+
+$$
+s = \\frac{a \\cdot t^{2}}{2}
+$$
+
+Sträckan är alltså proportionell mot tiden i kvadrat. Tre gånger så lång tid ger $3^{2} = 9$ gånger så lång sträcka:
+
+$$
+s = 9 \\cdot 0{,}20 = 1{,}8\\ \\mathrm{m}
+$$
+
+Samma sak med accelerationen uträknad: ur första sekunden får vi $a = \\dfrac{2 \\cdot 0{,}20}{1{,}0^{2}} = 0{,}40\\ \\mathrm{m/s^2}$, och då är
+
+$$
+s = \\frac{0{,}40 \\cdot 3{,}0^{2}}{2} = \\frac{3{,}6}{2} = 1{,}8\\ \\mathrm{m}
+$$
+
+Alternativet 0,60 m bygger på att sträckan växer i takt med tiden, men det gäller bara vid konstant hastighet.
+
+**Svar:** 1,8 m`,
+        },
+        {
+            level: 1,
+            question: `En skateboardåkare rullar nedför en jämn backe med konstant acceleration. Diagrammet visar hennes hastighet under 4,0 sekunder. Hur lång sträcka rullar hon under den tiden? Ange svaret i meter.
+
+${makeDiagram({
+    xMax: 5, xTicks: [0, 1, 2, 3, 4, 5],
+    yMax: 10, yTicks: [0, 2, 4, 6, 8, 10],
+    paths: [{ points: [[0, 2], [4, 8]] }],
+})}`,
+            answer: { value: 20, unit: 'm', tol: 0.02 },
+            solution: `Grafen är en rät linje, så accelerationen är konstant. Då är medelhastigheten medelvärdet av start- och sluthastigheten, och sträckan är medelhastigheten gånger tiden.
+
+$$
+v_m = \\frac{v_0 + v}{2} \\qquad s = v_m \\cdot t
+$$
+
+Ur diagrammet läser vi av:
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = 2{,}0\\ \\mathrm{m/s} \\\\
+v = 8{,}0\\ \\mathrm{m/s} \\\\
+t = 4{,}0\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+v_m = \\frac{2{,}0 + 8{,}0}{2} = \\frac{10{,}0}{2} = 5{,}0\\ \\mathrm{m/s}
+$$
+
+$$
+s = 5{,}0 \\cdot 4{,}0 = 20\\ \\mathrm{m}
+$$
+
+Kontroll med sträckformeln: accelerationen är $a = \\dfrac{8{,}0 - 2{,}0}{4{,}0} = 1{,}5\\ \\mathrm{m/s^2}$, och $s = 2{,}0 \\cdot 4{,}0 + \\dfrac{1{,}5 \\cdot 4{,}0^{2}}{2} = 8{,}0 + 12 = 20\\ \\mathrm{m}$.
+
+**Svar:** 20 m`,
+        },
+
+        {
+            level: 2,
+            question: `Ett passagerarflygplan startar från vila och accelererar konstant längs startbanan. Efter 32 s har det hastigheten 72 m/s och lyfter.<br>a) Hur stor är flygplanets acceleration? Ange svaret i m/s².<br>b) Hur lång sträcka rullar flygplanet på startbanan? Ange svaret i kilometer.
+
+*Ange sträckan i b) som ditt numeriska svar i km.*`,
+            answer: { value: 1.2, unit: 'km', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 2.3, unit: 'm/s²' },
+                { del: 'b', value: 1.2, unit: 'km' },
+            ],
+            solution: `**a)** Vi löser ut accelerationen ur hastighetsformeln:
+
+$$
+v = v_0 + a \\cdot t \\quad\\Leftrightarrow\\quad a = \\frac{v - v_0}{t}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = 0 \\\\
+v = 72\\ \\mathrm{m/s} \\\\
+t = 32\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+a = \\frac{72 - 0}{32} = 2{,}25\\ \\mathrm{m/s^2} \\approx 2{,}3\\ \\mathrm{m/s^2}
+$$
+
+**Svar:** 2,3 m/s²
+
+**b)** Accelerationen är konstant, så medelhastigheten är medelvärdet av start- och sluthastigheten:
+
+$$
+v_m = \\frac{v_0 + v}{2} = \\frac{0 + 72}{2} = 36\\ \\mathrm{m/s}
+$$
+
+Sträckan är medelhastigheten gånger tiden:
+
+$$
+s = v_m \\cdot t = 36 \\cdot 32 = 1\\,152\\ \\mathrm{m} \\approx 1{,}2\\ \\mathrm{km}
+$$
+
+Samma sträcka fås med det oavrundade värdet på *a* i sträckformeln: $s = \\dfrac{2{,}25 \\cdot 32^{2}}{2} = 1\\,152\\ \\mathrm{m}$. Startbanor på stora flygplatser är 2 till 4 km långa, så det finns marginal.
+
+**Svar:** 1,2 km`,
+        },
+        {
+            level: 2,
+            question: `Från en balkong 8,0 m över marken kastar Elin en boll rakt uppåt med hastigheten 12 m/s. Bollen passerar strax utanför balkongräcket på väg ned. Bortse från luftmotståndet.<br>a) Efter hur lång tid slår bollen i marken? Ange svaret i sekunder.<br>b) Vilken hastighet har bollen när den slår i marken? Ange svaret i m/s, med tecken.
+
+*Ange tiden i a) som ditt numeriska svar i sekunder.*`,
+            answer: { value: 3.0, unit: 's', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 3.0, unit: 's' },
+                { del: 'b', value: -17, unit: 'm/s' },
+            ],
+            solution: `Vi räknar uppåt som positiv riktning och lägger origo vid balkongen. Bollen är i fritt fall hela tiden, så $a = -g$, och när den slår i marken är läget $s = -8{,}0\\ \\mathrm{m}$ (8,0 m under startpunkten).
+
+$$
+\\left[ \\begin{array}{l}
+s = -8{,}0\\ \\mathrm{m} \\\\
+v_0 = 12\\ \\mathrm{m/s} \\\\
+g = 9{,}82\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+**a)** Formeln för förflyttning vid fritt fall ger
+
+$$
+s = v_0 \\cdot t - \\frac{g \\cdot t^{2}}{2}
+$$
+
+$$
+-8{,}0 = 12 \\cdot t - \\frac{9{,}82 \\cdot t^{2}}{2}
+$$
+
+$$
+-8{,}0 = 12 \\cdot t - 4{,}91 \\cdot t^{2}
+$$
+
+Det är en andragradsekvation. Vi flyttar över alla termer till ett led:
+
+$$
+4{,}91 \\cdot t^{2} - 12 \\cdot t - 8{,}0 = 0
+$$
+
+Jag löser ekvationen med CAS och får $t = -0{,}544\\ldots\\ \\mathrm{s}$ eller $t = 2{,}989\\ldots\\ \\mathrm{s}$. Den negativa lösningen gäller före kastet och förkastas.
+
+$$
+t = 2{,}989\\ldots\\ \\mathrm{s} \\approx 3{,}0\\ \\mathrm{s}
+$$
+
+**Svar:** 3,0 s
+
+**b)** Hastighetsformeln vid fritt fall, med den oavrundade tiden:
+
+$$
+v = v_0 - g \\cdot t = 12 - 9{,}82 \\cdot 2{,}989 = -17{,}35\\ldots\\ \\mathrm{m/s} \\approx -17\\ \\mathrm{m/s}
+$$
+
+Minustecknet betyder att bollen rör sig nedåt. Det är rimligt att farten nere är större än 12 m/s, eftersom bollen faller 8,0 m längre än den steg.
+
+**Svar:** −17 m/s`,
+        },
+        {
+            level: 2,
+            question: `Diagrammet visar hastigheten för en spårvagn som kör mellan två hållplatser.
+
+${makeDiagram({
+    xMax: 18, xTicks: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18],
+    yMax: 14, yTicks: [0, 2, 4, 6, 8, 10, 12, 14],
+    paths: [{ points: [[0, 0], [4, 12], [10, 12], [16, 0]] }],
+})}
+
+a) Bestäm spårvagnens acceleration under inbromsningen. Ange svaret i m/s².<br>b) Hur långt är det mellan hållplatserna? Ange svaret i meter.
+
+*Ange avståndet i b) som ditt numeriska svar i meter.*`,
+            answer: { value: 132, unit: 'm', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: -2.0, unit: 'm/s²' },
+                { del: 'b', value: 132, unit: 'm' },
+            ],
+            solution: `Grafen består av tre raka delar, så accelerationen är konstant i varje del.
+
+**a)** Inbromsningen pågår från $t = 10\\ \\mathrm{s}$ till $t = 16\\ \\mathrm{s}$. Ur hastighetsformeln löser vi ut accelerationen:
+
+$$
+v = v_0 + a \\cdot t \\quad\\Leftrightarrow\\quad a = \\frac{v - v_0}{t}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = 12\\ \\mathrm{m/s} \\\\
+v = 0 \\\\
+t = 16 - 10 = 6{,}0\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+a = \\frac{0 - 12}{6{,}0} = -2{,}0\\ \\mathrm{m/s^2}
+$$
+
+Minustecknet visar att hastigheten minskar.
+
+**Svar:** −2,0 m/s²
+
+**b)** I varje del är accelerationen konstant, så sträckan är medelhastigheten $v_m = \\dfrac{v_0 + v}{2}$ gånger tiden.
+
+Igångsättningen, 0 till 4,0 s:
+
+$$
+s_1 = \\frac{0 + 12}{2} \\cdot 4{,}0 = 6{,}0 \\cdot 4{,}0 = 24\\ \\mathrm{m}
+$$
+
+Konstant hastighet, 4,0 till 10 s:
+
+$$
+s_2 = 12 \\cdot 6{,}0 = 72\\ \\mathrm{m}
+$$
+
+Inbromsningen, 10 till 16 s:
+
+$$
+s_3 = \\frac{12 + 0}{2} \\cdot 6{,}0 = 6{,}0 \\cdot 6{,}0 = 36\\ \\mathrm{m}
+$$
+
+$$
+s = s_1 + s_2 + s_3 = 24 + 72 + 36 = 132\\ \\mathrm{m}
+$$
+
+Ett avstånd på drygt hundra meter mellan två hållplatser är rimligt i en stadskärna.
+
+**Svar:** 132 m`,
+        },
+        {
+            level: 2,
+            question: `En bil kör med hastigheten 20 m/s och tvärbromsar med konstant retardation tills den står stilla. Polisen mäter bromsspåren till 32 m.<br>a) Hur lång tid varade inbromsningen? Ange svaret i sekunder.<br>b) Hur stor var retardationen? Ange svaret i m/s².
+
+*Ange retardationen i b) som ditt numeriska svar i m/s².*`,
+            answer: { value: 6.3, unit: 'm/s²', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 3.2, unit: 's' },
+                { del: 'b', value: 6.3, unit: 'm/s²', ignoreSign: true },
+            ],
+            solution: `Varken tiden eller accelerationen är given, så vi kan inte sätta in i sträckformeln direkt. Men accelerationen är konstant, och då vet vi medelhastigheten.
+
+**a)** Medelhastigheten under inbromsningen är
+
+$$
+v_m = \\frac{v_0 + v}{2} = \\frac{20 + 0}{2} = 10\\ \\mathrm{m/s}
+$$
+
+Sträckan är medelhastigheten gånger tiden, $s = v_m \\cdot t$, så
+
+$$
+t = \\frac{s}{v_m} = \\frac{32}{10} = 3{,}2\\ \\mathrm{s}
+$$
+
+**Svar:** 3,2 s
+
+**b)** Nu när tiden är känd ger hastighetsformeln accelerationen:
+
+$$
+a = \\frac{v - v_0}{t}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = 20\\ \\mathrm{m/s} \\\\
+v = 0 \\\\
+t = 3{,}2\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+a = \\frac{0 - 20}{3{,}2} = -6{,}25\\ \\mathrm{m/s^2} \\approx -6{,}3\\ \\mathrm{m/s^2}
+$$
+
+Accelerationen är negativ eftersom bilen bromsar, och retardationen är beloppet 6,3 m/s². Det är ungefär vad en personbil klarar på torr asfalt.
+
+**Svar:** 6,3 m/s²`,
+        },
+
+        {
+            level: 3,
+            question: `En kula släpps från vila i en lång lutande ränna och rullar nedför med konstant acceleration. Under den första sekunden rullar den 0,15 m.<br>a) Visa att sträckan som kulan rullar under sekund nummer *n* är $(2n - 1)$ gånger sträckan under den första sekunden.<br>b) Hur långt rullar kulan under den femte sekunden? Ange svaret i meter.
+
+*Ange sträckan i b) som ditt numeriska svar i meter.*`,
+            answer: { value: 1.4, unit: 'm', tol: 0.04 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 1.4, unit: 'm' },
+            ],
+            solution: `**a)** Kulan startar från vila, så dess läge efter tiden *t* är
+
+$$
+s(t) = \\frac{a \\cdot t^{2}}{2}
+$$
+
+Sekund nummer *n* börjar vid $t = n - 1$ och slutar vid $t = n$ (tiden i sekunder). Sträckan under den sekunden är skillnaden mellan lägena:
+
+$$
+\\Delta s_n = s(n) - s(n - 1) = \\frac{a \\cdot n^{2}}{2} - \\frac{a \\cdot (n - 1)^{2}}{2} = \\frac{a}{2} \\cdot \\left( n^{2} - (n - 1)^{2} \\right)
+$$
+
+Vi utvecklar kvadraten: $(n - 1)^{2} = n^{2} - 2n + 1$, så parentesen blir
+
+$$
+n^{2} - (n^{2} - 2n + 1) = 2n - 1
+$$
+
+och därmed
+
+$$
+\\Delta s_n = \\frac{a}{2} \\cdot (2n - 1)
+$$
+
+För den första sekunden ($n = 1$) ger samma formel $\\Delta s_1 = \\dfrac{a}{2} \\cdot 1 = \\dfrac{a}{2}$. Vi kan alltså byta ut $\\dfrac{a}{2}$ mot $\\Delta s_1$:
+
+$$
+\\Delta s_n = (2n - 1) \\cdot \\Delta s_1
+$$
+
+Accelerationens värde behövs inte: sträckorna under varje sekund förhåller sig som de udda talen 1, 3, 5, 7 och så vidare. (Det var just detta mönster Galileo Galilei mätte upp med kulor i rännor.)
+
+**Svar:** Sträckan under sekund *n* är $(2n - 1) \\cdot \\Delta s_1$, vilket skulle visas.
+
+**b)** Med $n = 5$ och $\\Delta s_1 = 0{,}15\\ \\mathrm{m}$:
+
+$$
+\\Delta s_5 = (2 \\cdot 5 - 1) \\cdot 0{,}15 = 9 \\cdot 0{,}15 = 1{,}35\\ \\mathrm{m} \\approx 1{,}4\\ \\mathrm{m}
+$$
+
+Rimlighetskontroll: efter fem sekunder har kulan rullat $(1 + 3 + 5 + 7 + 9) \\cdot 0{,}15 = 25 \\cdot 0{,}15 = 3{,}75\\ \\mathrm{m}$, vilket stämmer med $s = \\dfrac{a \\cdot t^{2}}{2}$, eftersom $5^{2} = 25$.
+
+**Svar:** 1,4 m`,
+        },
+        {
+            level: 3,
+            question: `En bil kör med hastigheten 22 m/s på en landsväg i tät dimma. Föraren upptäcker plötsligt en traktor 30 m framför bilen. Traktorn kör med den konstanta hastigheten 8,0 m/s i samma riktning. Förarens reaktionstid är 0,60 s, och sedan bromsar bilen med retardationen $4{,}0\\ \\mathrm{m/s^2}$.<br>a) Undersök om bilen kör in i traktorn.<br>b) Hur lång reaktionstid kan föraren som mest ha för att bilen inte ska köra in i traktorn? Ange svaret i sekunder.
+
+*Ange reaktionstiden i b) som ditt numeriska svar i sekunder.*`,
+            answer: { value: 0.39, unit: 's', tol: 0.04 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 0.39, unit: 's' },
+            ],
+            solution: `Avståndet mellan bilen och traktorn minskar så länge bilen är snabbare än traktorn. När bilen har bromsat ned till traktorns hastighet slutar avståndet att minska. Det minsta avståndet nås alltså när hastigheterna är lika, inte när bilen stannar. Hinner avståndet krympa med mer än 30 m före det ögonblicket blir det en krock.
+
+**a)** *Under reaktionstiden* kör båda fordonen med konstant hastighet:
+
+$$
+s_\\text{bil} = 22 \\cdot 0{,}60 = 13{,}2\\ \\mathrm{m} \\qquad s_\\text{traktor} = 8{,}0 \\cdot 0{,}60 = 4{,}8\\ \\mathrm{m}
+$$
+
+Avståndet minskar med $13{,}2 - 4{,}8 = 8{,}4\\ \\mathrm{m}$.
+
+*Under inbromsningen* blir bilens hastighet lika med traktorns när $v = v_0 + a \\cdot t$ ger $8{,}0 = 22 - 4{,}0 \\cdot t$:
+
+$$
+t = \\frac{8{,}0 - 22}{-4{,}0} = \\frac{-14}{-4{,}0} = 3{,}5\\ \\mathrm{s}
+$$
+
+Under den tiden kör bilen
+
+$$
+s_\\text{bil} = v_0 \\cdot t + \\frac{a \\cdot t^{2}}{2} = 22 \\cdot 3{,}5 + \\frac{(-4{,}0) \\cdot 3{,}5^{2}}{2} = 77 - 24{,}5 = 52{,}5\\ \\mathrm{m}
+$$
+
+och traktorn
+
+$$
+s_\\text{traktor} = 8{,}0 \\cdot 3{,}5 = 28\\ \\mathrm{m}
+$$
+
+Avståndet minskar med ytterligare $52{,}5 - 28 = 24{,}5\\ \\mathrm{m}$. Totalt skulle avståndet minska med
+
+$$
+8{,}4 + 24{,}5 = 32{,}9\\ \\mathrm{m}
+$$
+
+Det är mer än de 30 m som fanns från början, så bilen hinner ifatt traktorn medan den fortfarande är snabbare än den.
+
+En vanlig fälla är att i stället jämföra lägena när bilen står still (5,5 s efter att den börjat bromsa). Då har traktorn hunnit dra ifrån igen, och räkningen visar felaktigt att bilen klarar sig.
+
+**Svar:** Ja, bilen kör in i traktorn.
+
+**b)** Inbromsningen minskar avståndet med 24,5 m oavsett reaktionstiden. Under reaktionstiden $t_r$ minskar avståndet med skillnaden i hastighet gånger tiden, $(22 - 8{,}0) \\cdot t_r = 14 \\cdot t_r$. Det får som mest bli 30 m tillsammans:
+
+$$
+14 \\cdot t_r + 24{,}5 = 30
+$$
+
+$$
+14 \\cdot t_r = 5{,}5
+$$
+
+$$
+t_r = \\frac{5{,}5}{14} = 0{,}392\\ldots\\ \\mathrm{s} \\approx 0{,}39\\ \\mathrm{s}
+$$
+
+Det är en mycket kort reaktionstid för en bilförare som inte väntar sig ett hinder, så i praktiken hade föraren kört för fort för sikten.
+
+**Svar:** 0,39 s`,
+        },
+        {
+            level: 3,
+            question: `En vattenraket skjuts rakt uppåt från marken. Under de första 0,40 s trycker vattenstrålen raketen uppåt med en okänd, konstant acceleration. Sedan är vattnet slut, och raketen rör sig fritt tills den landar på startplatsen 6,2 s efter starten. Bortse från luftmotståndet.<br>a) Bestäm raketens acceleration under de första 0,40 s. Ange svaret i m/s².<br>b) Hur högt når raketen som högst? Ange svaret i meter.
+
+*Ange höjden i b) som ditt numeriska svar i meter.*`,
+            answer: { value: 44, unit: 'm', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 69, unit: 'm/s²' },
+                { del: 'b', value: 44, unit: 'm' },
+            ],
+            solution: `Rörelsen har två delar med olika acceleration, och ingen av dem går att räkna ut för sig: under den första delen är accelerationen okänd, och under den andra är starthastigheten och starthöjden okända. Vi ställer därför upp båda delarna med *a* som okänd och låter landningen ge villkoret. Uppåt räknas som positiv riktning, och origo ligger vid startplatsen.
+
+**a)** *Första delen* ($t_1 = 0{,}40\\ \\mathrm{s}$). Raketen startar från vila, så efter $t_1$ är dess höjd och hastighet
+
+$$
+h_1 = \\frac{a \\cdot t_1^{2}}{2} \\tag{1}
+$$
+
+$$
+v_1 = a \\cdot t_1 \\tag{2}
+$$
+
+*Andra delen.* Nu faller raketen fritt med accelerationen $-g$. Den startar på höjden $h_1$ med hastigheten $v_1$ och landar i origo efter tiden $t_2 = 6{,}2 - 0{,}40 = 5{,}8\\ \\mathrm{s}$. Läget vid fritt fall, $s = s_0 + v_0 \\cdot t - \\dfrac{g \\cdot t^{2}}{2}$, ska då vara noll:
+
+$$
+0 = h_1 + v_1 \\cdot t_2 - \\frac{g \\cdot t_2^{2}}{2} \\tag{3}
+$$
+
+$h_1 = \\dfrac{a \\cdot t_1^{2}}{2}$ från (1) och $v_1 = a \\cdot t_1$ från (2) insatta i (3) ger en ekvation där bara *a* är okänd:
+
+$$
+0 = \\frac{a \\cdot t_1^{2}}{2} + a \\cdot t_1 \\cdot t_2 - \\frac{g \\cdot t_2^{2}}{2}
+$$
+
+Vi adderar $\\dfrac{g \\cdot t_2^{2}}{2}$ till båda leden:
+
+$$
+\\frac{g \\cdot t_2^{2}}{2} = \\frac{a \\cdot t_1^{2}}{2} + a \\cdot t_1 \\cdot t_2
+$$
+
+Båda termerna i högerledet innehåller *a*, som vi bryter ut:
+
+$$
+\\frac{g \\cdot t_2^{2}}{2} = a \\cdot \\left( \\frac{t_1^{2}}{2} + t_1 \\cdot t_2 \\right)
+$$
+
+Vi dividerar båda leden med parentesen:
+
+$$
+a = \\frac{\\dfrac{g \\cdot t_2^{2}}{2}}{\\dfrac{t_1^{2}}{2} + t_1 \\cdot t_2}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+t_1 = 0{,}40\\ \\mathrm{s} \\\\
+t_2 = 5{,}8\\ \\mathrm{s} \\\\
+g = 9{,}82\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$
+a = \\frac{\\dfrac{9{,}82 \\cdot 5{,}8^{2}}{2}}{\\dfrac{0{,}40^{2}}{2} + 0{,}40 \\cdot 5{,}8} = \\frac{165{,}1724}{0{,}08 + 2{,}32} = \\frac{165{,}1724}{2{,}40} = 68{,}82\\ldots\\ \\mathrm{m/s^2} \\approx 69\\ \\mathrm{m/s^2}
+$$
+
+Det är ungefär sju gånger tyngdaccelerationen. Vattenstrålen ger en kraftig men mycket kort knuff, vilket är rimligt för en vattenraket.
+
+**Svar:** 69 m/s²
+
+**b)** Med det oavrundade värdet på *a* ger (1) och (2) läget och hastigheten när vattnet tar slut:
+
+$$
+h_1 = \\frac{68{,}82 \\cdot 0{,}40^{2}}{2} = 5{,}505\\ldots\\ \\mathrm{m} \\qquad v_1 = 68{,}82 \\cdot 0{,}40 = 27{,}53\\ldots\\ \\mathrm{m/s}
+$$
+
+Raketen fortsätter uppåt tills hastigheten är noll. Hastighetsformeln vid fritt fall, $v = v_0 - g \\cdot t$, ger tiden dit:
+
+$$
+0 = 27{,}53 - 9{,}82 \\cdot t \\quad\\Leftrightarrow\\quad t = \\frac{27{,}53}{9{,}82} = 2{,}803\\ldots\\ \\mathrm{s}
+$$
+
+Accelerationen är konstant på vägen upp, så medelhastigheten är $v_m = \\dfrac{v_0 + v}{2} = \\dfrac{27{,}53 + 0}{2} = 13{,}76\\ \\mathrm{m/s}$, och raketen stiger ytterligare
+
+$$
+s = v_m \\cdot t = 13{,}76 \\cdot 2{,}803 = 38{,}58\\ldots\\ \\mathrm{m}
+$$
+
+Den högsta höjden är
+
+$$
+h_\\text{max} = h_1 + s = 5{,}51 + 38{,}58 = 44{,}09\\ \\mathrm{m} \\approx 44\\ \\mathrm{m}
+$$
+
+Kontroll: på vägen ned från toppen faller raketen under $5{,}8 - 2{,}803 = 2{,}997\\ \\mathrm{s}$, och $\\dfrac{9{,}82 \\cdot 2{,}997^{2}}{2} = 44{,}1\\ \\mathrm{m}$, samma höjd.
+
+**Svar:** 44 m`,
+        },
+        {
+            level: 3,
+            question: `En elbil testas på en provbana. Den passerar en startmarkering med en viss hastighet $v_0$ och accelererar samtidigt. En kamera mäter bilens läge *s* från markeringen en gång i sekunden:
+
+| *t* (s) | 0 | 1,0 | 2,0 | 3,0 | 4,0 |
+|---|---|---|---|---|---|
+| *s* (m) | 0 | 5,8 | 15,6 | 29,4 | 47,2 |
+
+a) Undersök om mätningarna stämmer med en rörelse med konstant acceleration.<br>b) Bestäm i så fall hastigheten $v_0$ vid startmarkeringen och accelerationen *a*. Ange svaren i m/s och m/s².
+
+*Ange accelerationen i b) som ditt numeriska svar i m/s².*`,
+            answer: { value: 4.0, unit: 'm/s²', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 3.8, unit: 'm/s', etikett: '$v_0 =$' },
+                { del: 'b', value: 4.0, unit: 'm/s²', etikett: '$a =$' },
+            ],
+            solution: `**a)** Vi räknar ut hur långt bilen kör under varje sekund och dividerar med tiden 1,0 s. Det ger medelhastigheten i varje intervall:
+
+| Intervall (s) | 0 till 1 | 1 till 2 | 2 till 3 | 3 till 4 |
+|---|---|---|---|---|
+| Δ*s* (m) | 5,8 | 9,8 | 13,8 | 17,8 |
+| *v*ₘ (m/s) | 5,8 | 9,8 | 13,8 | 17,8 |
+
+Vid konstant acceleration är medelhastigheten under ett intervall medelvärdet av hastigheten i början och i slutet, $v_m = \\dfrac{v_0 + v}{2}$. Eftersom hastigheten ändras i jämn takt är det samma sak som hastigheten mitt i intervallet. Medelhastigheterna ovan är alltså hastigheterna vid $t = 0{,}5\\ \\mathrm{s}$, $1{,}5\\ \\mathrm{s}$, $2{,}5\\ \\mathrm{s}$ och $3{,}5\\ \\mathrm{s}$.
+
+De ökar med exakt 4,0 m/s för varje sekund: $9{,}8 - 5{,}8 = 4{,}0$, $13{,}8 - 9{,}8 = 4{,}0$ och $17{,}8 - 13{,}8 = 4{,}0$. Hastigheten ökar alltså lika mycket varje sekund, vilket är just konstant acceleration.
+
+**Svar:** Ja. Hastigheten ökar med lika mycket varje sekund, så mätningarna stämmer med konstant acceleration.
+
+**b)** Accelerationen är hastighetsökningen per sekund:
+
+$$
+a = \\frac{\\Delta v}{\\Delta t} = \\frac{9{,}8 - 5{,}8}{1{,}5 - 0{,}5} = \\frac{4{,}0}{1{,}0} = 4{,}0\\ \\mathrm{m/s^2}
+$$
+
+Hastigheten vid $t = 0{,}5\\ \\mathrm{s}$ är 5,8 m/s. Hastighetsformeln $v = v_0 + a \\cdot t$ ger
+
+$$
+5{,}8 = v_0 + 4{,}0 \\cdot 0{,}5
+$$
+
+$$
+5{,}8 = v_0 + 2{,}0
+$$
+
+$$
+v_0 = 5{,}8 - 2{,}0 = 3{,}8\\ \\mathrm{m/s}
+$$
+
+Kontroll mot en mätpunkt som inte användes, $t = 4{,}0\\ \\mathrm{s}$:
+
+$$
+s = v_0 \\cdot t + \\frac{a \\cdot t^{2}}{2} = 3{,}8 \\cdot 4{,}0 + \\frac{4{,}0 \\cdot 4{,}0^{2}}{2} = 15{,}2 + 32 = 47{,}2\\ \\mathrm{m}
+$$
+
+vilket stämmer med tabellen.
+
+**Svar:** $v_0 = 3{,}8\\ \\mathrm{m/s}$ och $a = 4{,}0\\ \\mathrm{m/s^2}$`,
+        },
+        {
+            level: 3,
+            question: `Ett tåg startar från vila och accelererar konstant. Efter 60 s passerar det en signal som står sträckan *L* från startpunkten. Varken accelerationen eller *L* är känd.<br>a) Hur lång tid tog det för tåget att köra den första halvan av sträckan? Ange svaret i sekunder.<br>b) En passagerare påstår: ”När halva tiden har gått har tåget också kommit halvvägs.” Hur stor del av sträckan *L* har tåget i själva verket kört när 30 s har gått? Förklara varför passageraren har fel.
+
+*Ange tiden i a) som ditt numeriska svar i sekunder.*`,
+            answer: { value: 42, unit: 's', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 42, unit: 's' },
+                { del: 'b' },
+            ],
+            solution: `Vi kallar tiden till signalen $T = 60\\ \\mathrm{s}$. Tåget startar från vila, så hela sträckan är
+
+$$
+L = \\frac{a \\cdot T^{2}}{2}
+$$
+
+**a)** Den första halvan, $\\dfrac{L}{2}$, tar tiden $t_1$:
+
+$$
+\\frac{L}{2} = \\frac{a \\cdot t_1^{2}}{2}
+$$
+
+Vi sätter in $L = \\dfrac{a \\cdot T^{2}}{2}$ i vänsterledet:
+
+$$
+\\frac{a \\cdot T^{2}}{4} = \\frac{a \\cdot t_1^{2}}{2}
+$$
+
+Accelerationen *a* finns i båda leden. Vi dividerar båda leden med *a*:
+
+$$
+\\frac{T^{2}}{4} = \\frac{t_1^{2}}{2}
+$$
+
+Vi multiplicerar båda leden med 2:
+
+$$
+t_1^{2} = \\frac{T^{2}}{2}
+$$
+
+$$
+t_1 = \\frac{T}{\\sqrt{2}} = \\frac{60}{\\sqrt{2}} = 42{,}42\\ldots\\ \\mathrm{s} \\approx 42\\ \\mathrm{s}
+$$
+
+Det är rimligt att den första halvan tar mer än halva tiden, eftersom tåget går långsammast i början.
+
+**Svar:** 42 s
+
+**b)** Efter halva tiden, $\\dfrac{T}{2}$, har tåget kört
+
+$$
+s = \\frac{a \\cdot \\left( \\dfrac{T}{2} \\right)^{2}}{2} = \\frac{1}{4} \\cdot \\frac{a \\cdot T^{2}}{2} = \\frac{L}{4}
+$$
+
+Sträckan är proportionell mot tiden i kvadrat, så halva tiden ger en fjärdedel av sträckan. Passageraren tänker sig att tåget kör lika långt varje sekund, men det gäller bara vid konstant hastighet. Här ökar hastigheten hela tiden, så tåget kör kortare sträckor i början och längre i slutet. I ett *v-t*-diagram syns det som att triangeln under linjen fram till halva tiden bara är en fjärdedel av hela triangeln: både basen och höjden är hälften så stora.
+
+**Svar:** Tåget har kört en fjärdedel av sträckan. Passageraren har fel eftersom sträckan växer med tiden i kvadrat när tåget accelererar från vila.`,
+        },
+        {
+            level: 3,
+            question: `En bil kör med hastigheten 16 m/s mot ett trafikljus. När bilen är 36 m från stopplinjen slår ljuset om till gult, och 2,0 s senare blir det rött. Förarens reaktionstid är 0,60 s. Bilen kan bromsa med en retardation på högst $4{,}5\\ \\mathrm{m/s^2}$ eller accelerera med högst $1{,}5\\ \\mathrm{m/s^2}$.<br>a) Visa att föraren varken hinner stanna före stopplinjen eller hinner passera den innan ljuset blir rött.<br>b) Inom vilket intervall av avstånd till stopplinjen (när ljuset slår om till gult) hamnar en förare med samma bil, hastighet och reaktionstid i samma knipa?`,
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+            ],
+            solution: `Under reaktionstiden kör bilen med oförändrad hastighet, oavsett vad föraren sedan väljer:
+
+$$
+s_r = 16 \\cdot 0{,}60 = 9{,}6\\ \\mathrm{m}
+$$
+
+**a)** *Att stanna.* Inbromsningen från 16 m/s till 0 med $a = -4{,}5\\ \\mathrm{m/s^2}$ tar tiden
+
+$$
+t_b = \\frac{v - v_0}{a} = \\frac{0 - 16}{-4{,}5} = 3{,}555\\ldots\\ \\mathrm{s}
+$$
+
+Accelerationen är konstant, så medelhastigheten är $v_m = \\dfrac{16 + 0}{2} = 8{,}0\\ \\mathrm{m/s}$, och bromssträckan blir
+
+$$
+s_b = v_m \\cdot t_b = 8{,}0 \\cdot 3{,}555\\ldots = 28{,}44\\ldots\\ \\mathrm{m}
+$$
+
+Hela stoppsträckan är
+
+$$
+s_\\text{stopp} = 9{,}6 + 28{,}44 = 38{,}04\\ \\mathrm{m}
+$$
+
+Det är mer än 36 m, så bilen stannar först en bit efter stopplinjen.
+
+*Att passera.* Föraren har 2,0 s på sig. Efter reaktionstiden återstår $2{,}0 - 0{,}60 = 1{,}4\\ \\mathrm{s}$ med acceleration. Under den tiden kör bilen
+
+$$
+s_a = v_0 \\cdot t + \\frac{a \\cdot t^{2}}{2} = 16 \\cdot 1{,}4 + \\frac{1{,}5 \\cdot 1{,}4^{2}}{2} = 22{,}4 + 1{,}47 = 23{,}87\\ \\mathrm{m}
+$$
+
+När ljuset blir rött har bilen alltså kört
+
+$$
+s_\\text{passera} = 9{,}6 + 23{,}87 = 33{,}47\\ \\mathrm{m}
+$$
+
+Det är mindre än 36 m, så bilen är fortfarande före stopplinjen när ljuset blir rött.
+
+**Svar:** Stoppsträckan är 38 m och bilen hinner bara 33 m innan det blir rött. Med 36 m till linjen går inget av alternativen.
+
+**b)** Föraren hinner stanna om avståndet till linjen är minst stoppsträckan, 38,04 m. Föraren hinner passera om avståndet är högst 33,47 m. Det beror inte på det givna avståndet, bara på hastigheten, reaktionstiden och bilens förmåga. Mellan de två gränserna går inget av alternativen:
+
+$$
+33{,}47\\ \\mathrm{m} < d < 38{,}04\\ \\mathrm{m}
+$$
+
+En sådan dilemmazon på knappt 5 m är ett känt problem i trafikplanering. Den minskas genom att gult ljus görs längre på vägar där man kör fort.
+
+**Svar:** Mellan cirka 33 m och 38 m från stopplinjen.`,
         },
     ],
 
@@ -10162,19 +10902,19 @@ Det är 180 km/h.
                 `När man har **två obekanta storheter** (till exempel acceleration *a* och tid *t*) som båda måste bestämmas från given information.`,
             ],
             correct: 3,
-            solution: `En ekvation kan lösa **en** obekant variabel. Om problemet ger oss tillräckligt med information för att räkna ut två obekanta (till exempel både *a* och *t*) — men där vi inte direkt kan isolera någondera — måste vi ställa upp **två** ekvationer som båda innehåller de obekanta. Då bildar ekvationerna ett ekvationssystem som kan lösas algebraiskt eller med GeoGebra.
+            solution: `En ekvation kan lösa **en** obekant variabel. Om problemet ger oss tillräckligt med information för att räkna ut två obekanta (till exempel både *a* och *t*), men där vi inte direkt kan isolera någondera, måste vi ställa upp **två** ekvationer som båda innehåller de obekanta. Då bildar ekvationerna ett ekvationssystem som kan lösas algebraiskt eller med GeoGebra.
 
 **Svar:** När man har två obekanta som båda måste bestämmas.
 
-**Generell slutsats:** Tumregeln är: *en obekant kräver en ekvation, två obekanta kräver två*. På högre nivå kan det vara svårt att se direkt vilka ekvationer som ska kombineras — då lönar det sig att skriva upp alla rörelseformler man känner till och se vilka som innehåller bara de variabler man har eller söker.`,
+**Generell slutsats:** Tumregeln är: *en obekant kräver en ekvation, två obekanta kräver två*. På högre nivå kan det vara svårt att se direkt vilka ekvationer som ska kombineras. Då lönar det sig att skriva upp alla rörelseformler man känner till och se vilka som innehåller bara de variabler man har eller söker.`,
         },
         {
             level: 2,
             question: `En bil kör med den konstanta hastigheten 15 m/s och börjar sedan accelerera konstant. Under accelerationen rör sig bilen 400 m och får då hastigheten 28 m/s. Beräkna **bilens acceleration** i m/s².
 
-*(Tips: detta är exakt problemet från teorin. Tiden *t* är okänd — du behöver ställa upp två ekvationer och kan lösa systemet i GeoGebra eller algebraiskt.)*`,
+*(Tips: detta är exakt problemet från teorin. Tiden *t* är okänd, så du behöver ställa upp två ekvationer och kan lösa systemet i GeoGebra eller algebraiskt.)*`,
             answer: { value: 0.6988, unit: 'm/s²', tol: 0.03 },
-            solution: `Vi har två obekanta — accelerationen *a* och tiden *t* — och två kända storheter (*s* och slutfart *v*). Vi behöver alltså två ekvationer.
+            solution: `Vi har två obekanta (accelerationen *a* och tiden *t*) och två kända storheter (*s* och slutfart *v*). Vi behöver alltså två ekvationer.
 
 **Ekvation 1** (sträcka vid konstant acceleration):
 $$
@@ -10200,7 +10940,1011 @@ $$
 
 **Svar:** Accelerationen är ca 0,70 m/s².
 
-**Generell slutsats:** Detta system går att lösa algebraiskt (som ovan), men i mer komplicerade fall — t.ex. där båda ekvationerna är icke-linjära — blir det enklare att skriva in ekvationerna i GeoGebra och låta programmet lösa systemet med kommandot **Lös**.`,
+**Generell slutsats:** Detta system går att lösa algebraiskt (som ovan), men i mer komplicerade fall (till exempel där båda ekvationerna är icke-linjära) blir det enklare att skriva in ekvationerna i GeoGebra och låta programmet lösa systemet med kommandot **Lös**.`,
+        },
+        {
+            level: 1,
+            question: `En bil kör med hastigheten $12\\ \\mathrm{m/s}$ och börjar sedan öka farten med konstant acceleration. När bilen har kört 90 m har den hastigheten $18\\ \\mathrm{m/s}$. Både accelerationen och tiden är okända. Ställ upp ett ekvationssystem och bestäm hur lång tid accelerationen tar. Ange svaret i s.`,
+            answer: { value: 6.0, unit: 's', tol: 0.02 },
+            solution: `Vi har två okända storheter, accelerationen *a* och tiden *t*, så vi behöver två ekvationer. Vi tar dem ur formlerna för konstant acceleration:
+
+$$
+v = v_0 + a \\cdot t \\qquad\\qquad s = v_0 \\cdot t + \\frac{a \\cdot t^{2}}{2}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = 12\\ \\mathrm{m/s} \\\\
+v = 18\\ \\mathrm{m/s} \\\\
+s = 90\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+Insättning ger ekvationssystemet
+
+$$
+\\begin{cases}
+18 = 12 + a \\cdot t \\\\
+90 = 12 t + \\dfrac{a \\cdot t^{2}}{2}
+\\end{cases}
+$$
+
+Det går att lösa i GeoGebra med $a = x$ och $t = y$, men här går det också enkelt för hand. Den första ekvationen ger $a \\cdot t = 6$. Vi skriver om den sista termen i den andra ekvationen som $\\dfrac{(a \\cdot t) \\cdot t}{2}$ och sätter in $a \\cdot t = 6$:
+
+$$
+90 = 12 t + \\frac{6 \\cdot t}{2} = 12 t + 3 t = 15 t
+$$
+
+$$
+t = \\frac{90}{15} = 6{,}0\\ \\mathrm{s}
+$$
+
+(Accelerationen blir $a = \\dfrac{6}{6{,}0} = 1{,}0\\ \\mathrm{m/s^2}$.)
+
+**Svar:** 6,0 s`,
+        },
+        {
+            level: 1,
+            question: `En elev har ställt upp ekvationssystemet
+
+$$
+\\begin{cases}
+14 = 6 + a \\cdot t \\\\
+60 = 6 t + \\dfrac{a \\cdot t^{2}}{2}
+\\end{cases}
+$$
+
+och vill lösa det i GeoGebra med $a = x$ och $t = y$. Vilka ekvationer ska eleven skriva in?`,
+            choices: [
+                `$14 = 6 + x \\cdot y$ och $60 = 6x + \\dfrac{x \\cdot y^{2}}{2}$`,
+                `$14 = 6 + x \\cdot y$ och $60 = 6y + \\dfrac{x \\cdot y^{2}}{2}$`,
+                `$14 = 6 + x \\cdot y$ och $60 = 6y + \\dfrac{y \\cdot x^{2}}{2}$`,
+                `$14 = 6 + x + y$ och $60 = 6y + \\dfrac{x \\cdot y^{2}}{2}$`,
+            ],
+            correct: 1,
+            solution: `Varje *a* byts mot *x* och varje *t* byts mot *y*, och ingenting annat ändras.
+
+- I den första ekvationen blir $a \\cdot t$ produkten $x \\cdot y$, inte summan $x + y$.
+- I den andra ekvationen blir $6t$ termen $6y$, och $a \\cdot t^{2}$ blir $x \\cdot y^{2}$. Det är tiden som är upphöjd till två, inte accelerationen.
+
+GeoGebra ger sedan $x = \\dfrac{4}{3}$ och $y = 6$, alltså $a \\approx 1{,}3\\ \\mathrm{m/s^2}$ och $t = 6{,}0\\ \\mathrm{s}$.
+
+**Svar:** $14 = 6 + x \\cdot y$ och $60 = 6y + \\dfrac{x \\cdot y^{2}}{2}$`,
+        },
+        {
+            level: 1,
+            question: `En bil kör med hastigheten $5{,}0\\ \\mathrm{m/s}$ och accelererar sedan konstant. Efter 70 m har den hastigheten $12\\ \\mathrm{m/s}$. En elev ställer upp ett ekvationssystem med accelerationen $a = x$ och tiden $t = y$, och GeoGebra ger lösningen
+
+$$
+\\left\\{ x = \\frac{17}{20},\\ y = \\frac{140}{17} \\right\\}
+$$
+
+Bestäm<br>a) bilens acceleration&emsp;&emsp;b) hur lång tid accelerationen tar.`,
+            answer: { value: 0.85, unit: 'm/s²', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 0.85, unit: 'm/s²', etikett: 'accelerationen' },
+                { del: 'b', value: 8.2, unit: 's', etikett: 'tiden' },
+            ],
+            solution: `Vi översätter tillbaka från GeoGebras variabler: *x* är accelerationen och *y* är tiden.
+
+**a)**
+
+$$
+a = x = \\frac{17}{20} = 0{,}85\\ \\mathrm{m/s^2}
+$$
+
+**Svar:** 0,85 m/s²
+
+**b)**
+
+$$
+t = y = \\frac{140}{17} = 8{,}235\\ldots\\ \\mathrm{s} \\approx 8{,}2\\ \\mathrm{s}
+$$
+
+Givna värden har två värdesiffror, så svaret avrundas till två.
+
+Vi kan kontrollera lösningen i hastighetsformeln: $v = v_0 + a \\cdot t = 5{,}0 + 0{,}85 \\cdot 8{,}235 \\approx 12\\ \\mathrm{m/s}$, vilket stämmer.
+
+**Svar:** 8,2 s`,
+        },
+        {
+            level: 1,
+            question: `En elsparkcykel startar från vila och accelererar konstant. När den har kört 24 m har den hastigheten $6{,}0\\ \\mathrm{m/s}$. Bestäm elsparkcykelns acceleration. Ange svaret i m/s².`,
+            answer: { value: 0.75, unit: 'm/s²', tol: 0.02 },
+            solution: `Både accelerationen *a* och tiden *t* är okända, så vi behöver två ekvationer. Elsparkcykeln startar från vila, alltså är $v_0 = 0$:
+
+$$
+v = v_0 + a \\cdot t \\qquad\\qquad s = v_0 \\cdot t + \\frac{a \\cdot t^{2}}{2}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = 0 \\\\
+v = 6{,}0\\ \\mathrm{m/s} \\\\
+s = 24\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+\\begin{cases}
+6{,}0 = a \\cdot t \\\\
+24 = \\dfrac{a \\cdot t^{2}}{2}
+\\end{cases}
+$$
+
+Vi skriver den andra ekvationen som $24 = \\dfrac{(a \\cdot t) \\cdot t}{2}$ och sätter in $a \\cdot t = 6{,}0$ från den första:
+
+$$
+24 = \\frac{6{,}0 \\cdot t}{2} = 3{,}0 t \\quad\\Leftrightarrow\\quad t = \\frac{24}{3{,}0} = 8{,}0\\ \\mathrm{s}
+$$
+
+Nu ger den första ekvationen accelerationen:
+
+$$
+a = \\frac{6{,}0}{t} = \\frac{6{,}0}{8{,}0} = 0{,}75\\ \\mathrm{m/s^2}
+$$
+
+**Svar:** 0,75 m/s²`,
+        },
+        {
+            level: 1,
+            question: `I vilken av uppgifterna behöver du ställa upp ett ekvationssystem med två ekvationer? Alla rörelser sker med konstant acceleration.`,
+            choices: [
+                `En bil startar från vila med accelerationen $2{,}0\\ \\mathrm{m/s^2}$. Vilken hastighet har den efter 5,0 s?`,
+                `En bil i $10\\ \\mathrm{m/s}$ accelererar med $1{,}5\\ \\mathrm{m/s^2}$ i 4,0 s. Hur långt kör den?`,
+                `En bil i $10\\ \\mathrm{m/s}$ har hastigheten $20\\ \\mathrm{m/s}$ efter 150 m. Vilken är accelerationen?`,
+                `En bil ökar farten från $10\\ \\mathrm{m/s}$ till $20\\ \\mathrm{m/s}$ på 5,0 s. Vilken är accelerationen?`,
+            ],
+            correct: 2,
+            solution: `Vi räknar de okända storheterna i varje uppgift.
+
+- Första och fjärde uppgiften: bara en okänd, och den går att lösa ut direkt ur $v = v_0 + a \\cdot t$.
+- Andra uppgiften: bara sträckan är okänd, och den fås direkt ur $s = v_0 \\cdot t + \\dfrac{a \\cdot t^{2}}{2}$.
+- Tredje uppgiften: både accelerationen och tiden är okända. Ingen av formlerna innehåller bara en av dem, så vi behöver båda formlerna, alltså ett ekvationssystem.
+
+**Svar:** Bilen som har hastigheten 20 m/s efter 150 m.`,
+        },
+        {
+            level: 1,
+            question: `Ett tåg kör med hastigheten $72\\ \\mathrm{km/h}$ när det börjar bromsa med konstant acceleration. Det stannar efter 200 m. Bestäm<br>a) hur lång tid bromsningen tar&emsp;&emsp;b) tågets acceleration.`,
+            answer: { value: 20, unit: 's', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 20, unit: 's', etikett: 'tiden' },
+                { del: 'b', value: -1.0, unit: 'm/s²', etikett: 'accelerationen' },
+            ],
+            solution: `Vi gör om hastigheten till m/s: $72\\ \\mathrm{km/h} = \\dfrac{72}{3{,}6}\\ \\mathrm{m/s} = 20\\ \\mathrm{m/s}$. Tåget stannar, så sluthastigheten är noll.
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = 20\\ \\mathrm{m/s} \\\\
+v = 0 \\\\
+s = 200\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+Accelerationen *a* och tiden *t* är okända. Insättning i $v = v_0 + a \\cdot t$ och $s = v_0 \\cdot t + \\dfrac{a \\cdot t^{2}}{2}$ ger
+
+$$
+\\begin{cases}
+0 = 20 + a \\cdot t \\\\
+200 = 20 t + \\dfrac{a \\cdot t^{2}}{2}
+\\end{cases}
+$$
+
+**a)** Den första ekvationen ger $a \\cdot t = -20$. Vi sätter in det i den andra ekvationen, där $a \\cdot t^{2} = (a \\cdot t) \\cdot t$:
+
+$$
+200 = 20 t + \\frac{-20 \\cdot t}{2} = 20 t - 10 t = 10 t
+$$
+
+$$
+t = \\frac{200}{10} = 20\\ \\mathrm{s}
+$$
+
+**Svar:** 20 s
+
+**b)**
+
+$$
+a = \\frac{-20}{t} = \\frac{-20}{20} = -1{,}0\\ \\mathrm{m/s^2}
+$$
+
+Minustecknet visar att accelerationen är riktad mot rörelsen: tåget bromsar.
+
+**Svar:** −1,0 m/s²`,
+        },
+
+        {
+            level: 2,
+            question: `En bil kör ut på en motorväg och accelererar konstant. Under 5,0 s kör den 60 m och har då hastigheten $16\\ \\mathrm{m/s}$. Här är det starthastigheten $v_0$ och accelerationen *a* som är okända. Bestäm<br>a) bilens hastighet när accelerationen började&emsp;&emsp;b) accelerationen.`,
+            answer: { value: 8.0, unit: 'm/s', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 8.0, unit: 'm/s', etikett: '$v_0$' },
+                { del: 'b', value: 1.6, unit: 'm/s²', etikett: '$a$' },
+            ],
+            solution: `Vi har två okända, $v_0$ och *a*, och ställer upp en ekvation ur vardera rörelseformeln:
+
+$$
+v = v_0 + a \\cdot t \\qquad\\qquad s = v_0 \\cdot t + \\frac{a \\cdot t^{2}}{2}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+t = 5{,}0\\ \\mathrm{s} \\\\
+s = 60\\ \\mathrm{m} \\\\
+v = 16\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+Insättning ger, med $\\dfrac{5{,}0^{2}}{2} = 12{,}5$,
+
+$$
+\\begin{cases}
+16 = v_0 + 5{,}0 a \\\\
+60 = 5{,}0 v_0 + 12{,}5 a
+\\end{cases}
+$$
+
+Det går att lösa i GeoGebra med $v_0 = x$ och $a = y$. För hand löser vi ut $v_0$ ur den första ekvationen och sätter in i den andra:
+
+$$
+v_0 = 16 - 5{,}0 a
+$$
+
+$$
+60 = 5{,}0 \\cdot (16 - 5{,}0 a) + 12{,}5 a = 80 - 25 a + 12{,}5 a = 80 - 12{,}5 a
+$$
+
+$$
+12{,}5 a = 80 - 60 = 20 \\quad\\Leftrightarrow\\quad a = \\frac{20}{12{,}5} = 1{,}6\\ \\mathrm{m/s^2}
+$$
+
+**a)**
+
+$$
+v_0 = 16 - 5{,}0 \\cdot 1{,}6 = 16 - 8{,}0 = 8{,}0\\ \\mathrm{m/s}
+$$
+
+Rimligt: medelhastigheten är $\\dfrac{60}{5{,}0} = 12\\ \\mathrm{m/s}$, mitt emellan 8,0 och 16 m/s, precis som den ska vara vid konstant acceleration.
+
+**Svar:** 8,0 m/s
+
+**b)**
+
+**Svar:** 1,6 m/s²`,
+        },
+        {
+            level: 2,
+            question: `En bil accelererar konstant längs en rak väg med lyktstolpar på 20 m avstånd. Bilens front passerar den första stolpen vid $t = 0$, den andra vid $t = 2{,}0\\ \\mathrm{s}$ och den tredje vid $t = 3{,}5\\ \\mathrm{s}$.
+
+<svg viewBox="0 0 560 176" width="664" height="209" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En bil på en rak väg passerar tre lyktstolpar som står 20 m från varandra."><rect x="4" y="120" width="552" height="10" fill="#d9d0bf"/><line x1="4" y1="120" x2="556" y2="120" stroke="#8a8478" stroke-width="2"/><line x1="100" y1="120" x2="100" y2="44" stroke="#5a564d" stroke-width="3.2" stroke-linecap="butt"/><path d="M 100 46 Q 100 36 112 36 L 120 36" fill="none" stroke="#5a564d" stroke-width="2.6"/><rect x="116" y="35" width="12" height="6" rx="2" fill="#e2b33c" stroke="#5a564d" stroke-width="1.2"/><text x="100" y="22" text-anchor="middle" font-size="14" fill="#0f1620"><tspan font-style="italic">t</tspan> = 0</text><line x1="290" y1="120" x2="290" y2="44" stroke="#5a564d" stroke-width="3.2" stroke-linecap="butt"/><path d="M 290 46 Q 290 36 302 36 L 310 36" fill="none" stroke="#5a564d" stroke-width="2.6"/><rect x="306" y="35" width="12" height="6" rx="2" fill="#e2b33c" stroke="#5a564d" stroke-width="1.2"/><text x="290" y="22" text-anchor="middle" font-size="14" fill="#0f1620"><tspan font-style="italic">t</tspan> = 2,0 s</text><line x1="480" y1="120" x2="480" y2="44" stroke="#5a564d" stroke-width="3.2" stroke-linecap="butt"/><path d="M 480 46 Q 480 36 492 36 L 500 36" fill="none" stroke="#5a564d" stroke-width="2.6"/><rect x="496" y="35" width="12" height="6" rx="2" fill="#e2b33c" stroke="#5a564d" stroke-width="1.2"/><text x="480" y="22" text-anchor="middle" font-size="14" fill="#0f1620"><tspan font-style="italic">t</tspan> = 3,5 s</text><path d="M 24 108 L 24 94 Q 24 90 28 90 L 40 90 L 50 78 L 74 78 L 86 90 L 95 92 Q 98 93 98 98 L 98 108 Z" fill="#2f6fb0" stroke="#0f1620" stroke-width="1.4" stroke-linejoin="round"/><path d="M 44 89 L 52 81 L 61 81 L 61 89 Z" fill="#dbe8f4" stroke="#0f1620" stroke-width="1"/><path d="M 64 89 L 64 81 L 73 81 L 81 89 Z" fill="#dbe8f4" stroke="#0f1620" stroke-width="1"/><circle cx="40" cy="111" r="9" fill="#2a2d33" stroke="#0f1620" stroke-width="1.2"/><circle cx="40" cy="111" r="3.5" fill="#b9b2a3"/><circle cx="82" cy="111" r="9" fill="#2a2d33" stroke="#0f1620" stroke-width="1.2"/><circle cx="82" cy="111" r="3.5" fill="#b9b2a3"/><line x1="30" y1="62" x2="76" y2="62" stroke="#c8324a" stroke-width="2.4" stroke-linecap="butt"/><polygon points="76,57 86,62 76,67" fill="#c8324a"/><line x1="100" y1="132" x2="100" y2="156" stroke="#6b6454" stroke-width="1" stroke-dasharray="3 3"/><line x1="108" y1="150" x2="282" y2="150" stroke="#0f1620" stroke-width="1.3"/><polygon points="100,150 109,146 109,154" fill="#0f1620"/><polygon points="290,150 281,146 281,154" fill="#0f1620"/><text x="195" y="170" text-anchor="middle" font-size="14" fill="#0f1620">20 m</text><line x1="290" y1="132" x2="290" y2="156" stroke="#6b6454" stroke-width="1" stroke-dasharray="3 3"/><line x1="298" y1="150" x2="472" y2="150" stroke="#0f1620" stroke-width="1.3"/><polygon points="290,150 299,146 299,154" fill="#0f1620"/><polygon points="480,150 471,146 471,154" fill="#0f1620"/><text x="385" y="170" text-anchor="middle" font-size="14" fill="#0f1620">20 m</text><line x1="480" y1="132" x2="480" y2="156" stroke="#6b6454" stroke-width="1" stroke-dasharray="3 3"/></svg>
+
+Bestäm<br>a) bilens acceleration&emsp;&emsp;b) bilens hastighet vid den första stolpen.`,
+            answer: { value: 1.9, unit: 'm/s²', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 1.9, unit: 'm/s²', etikett: 'accelerationen' },
+                { del: 'b', value: 8.1, unit: 'm/s', etikett: 'hastigheten' },
+            ],
+            solution: `Vi räknar sträckan *s* från den första stolpen och tiden *t* från när bilen passerar den. Okända är bilens hastighet $v_0$ vid den första stolpen och accelerationen *a*. Formeln
+
+$$
+s = v_0 \\cdot t + \\frac{a \\cdot t^{2}}{2}
+$$
+
+gäller för varje ögonblick, så vi kan använda den två gånger:
+
+$$
+\\left[ \\begin{array}{l}
+s = 20\\ \\mathrm{m}\\ \\text{när}\\ t = 2{,}0\\ \\mathrm{s} \\\\
+s = 40\\ \\mathrm{m}\\ \\text{när}\\ t = 3{,}5\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+Med $\\dfrac{2{,}0^{2}}{2} = 2{,}0$ och $\\dfrac{3{,}5^{2}}{2} = 6{,}125$ blir ekvationssystemet
+
+$$
+\\begin{cases}
+20 = 2{,}0 v_0 + 2{,}0 a \\\\
+40 = 3{,}5 v_0 + 6{,}125 a
+\\end{cases}
+$$
+
+Vi skriver $v_0 = x$ och $a = y$ och löser systemet i GeoGebra:
+
+$$
+\\mathrm{L\\ddot{o}s}(\\{20 = 2x + 2y,\\ 40 = 3{,}5x + 6{,}125y\\}) = \\left\\{ x = \\frac{170}{21},\\ y = \\frac{40}{21} \\right\\}
+$$
+
+**a)**
+
+$$
+a = y = \\frac{40}{21} = 1{,}904\\ldots\\ \\mathrm{m/s^2} \\approx 1{,}9\\ \\mathrm{m/s^2}
+$$
+
+**Svar:** 1,9 m/s²
+
+**b)**
+
+$$
+v_0 = x = \\frac{170}{21} = 8{,}095\\ldots\\ \\mathrm{m/s} \\approx 8{,}1\\ \\mathrm{m/s}
+$$
+
+Rimligt: medelhastigheten på den första sträckan är $\\dfrac{20}{2{,}0} = 10\\ \\mathrm{m/s}$, alltså lite mer än hastigheten vid stolpen, eftersom bilen ökar farten.
+
+**Svar:** 8,1 m/s`,
+        },
+        {
+            level: 2,
+            question: `En bil bromsar med en acceleration vars belopp är $5{,}0\\ \\mathrm{m/s^2}$ tills den står still. Bromsspåren är 32 m långa. På vägen gäller hastighetsgränsen 50 km/h.<br>a) Vilken hastighet hade bilen när den började bromsa?<br>b) Körde bilen för fort?
+
+*Ange hastigheten i a) i km/h.*`,
+            answer: { value: 64, unit: 'km/h', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 64, unit: 'km/h', etikett: 'hastigheten' },
+                { del: 'b' },
+            ],
+            solution: `Vi väljer rörelseriktningen som positiv. Då är $a = -5{,}0\\ \\mathrm{m/s^2}$. Okända är starthastigheten $v_0$ och bromstiden *t*.
+
+$$
+\\left[ \\begin{array}{l}
+a = -5{,}0\\ \\mathrm{m/s^2} \\\\
+v = 0 \\\\
+s = 32\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+Insättning i $v = v_0 + a \\cdot t$ och $s = v_0 \\cdot t + \\dfrac{a \\cdot t^{2}}{2}$ ger
+
+$$
+\\begin{cases}
+0 = v_0 - 5{,}0 t \\\\
+32 = v_0 \\cdot t - 2{,}5 t^{2}
+\\end{cases}
+$$
+
+**a)** Den första ekvationen ger $v_0 = 5{,}0 t$. Insatt i den andra:
+
+$$
+32 = 5{,}0 t \\cdot t - 2{,}5 t^{2} = 2{,}5 t^{2}
+$$
+
+$$
+t^{2} = \\frac{32}{2{,}5} = 12{,}8 \\quad\\Leftrightarrow\\quad t = \\sqrt{12{,}8} \\approx 3{,}578\\ \\mathrm{s}
+$$
+
+Den negativa roten förkastas, eftersom tiden räknas från att bromsningen börjar.
+
+$$
+v_0 = 5{,}0 \\cdot 3{,}578 \\approx 17{,}89\\ \\mathrm{m/s}
+$$
+
+$$
+17{,}89\\ \\mathrm{m/s} = 17{,}89 \\cdot 3{,}6\\ \\mathrm{km/h} \\approx 64\\ \\mathrm{km/h}
+$$
+
+**Svar:** 64 km/h
+
+**b)** 64 km/h är mer än 50 km/h.
+
+**Svar:** Ja, bilen körde ungefär 14 km/h för fort.`,
+        },
+        {
+            level: 2,
+            question: `En ishockeypuck glider rakt fram över isen och bromsas med konstant acceleration. På 4,0 s glider den 24 m, och då har den hastigheten $3{,}0\\ \\mathrm{m/s}$. Vilket ekvationssystem ger puckens starthastighet $v_0$ och acceleration *a*?`,
+            choices: [
+                `$\\begin{cases} 24 = 4{,}0 v_0 + 8{,}0 a \\\\ 3{,}0 = v_0 + 4{,}0 a \\end{cases}$`,
+                `$\\begin{cases} 24 = 4{,}0 v_0 + 16 a \\\\ 3{,}0 = v_0 + 4{,}0 a \\end{cases}$`,
+                `$\\begin{cases} 24 = 3{,}0 \\cdot 4{,}0 + 8{,}0 a \\\\ 3{,}0 = v_0 + 4{,}0 a \\end{cases}$`,
+                `$\\begin{cases} 24 = 4{,}0 v_0 + 8{,}0 a \\\\ v_0 = 3{,}0 + 4{,}0 a \\end{cases}$`,
+            ],
+            correct: 0,
+            solution: `Vi sätter in $t = 4{,}0\\ \\mathrm{s}$, $s = 24\\ \\mathrm{m}$ och $v = 3{,}0\\ \\mathrm{m/s}$ i de två formlerna.
+
+$$
+s = v_0 \\cdot t + \\frac{a \\cdot t^{2}}{2} \\quad\\Rightarrow\\quad 24 = 4{,}0 v_0 + \\frac{a \\cdot 4{,}0^{2}}{2} = 4{,}0 v_0 + 8{,}0 a
+$$
+
+$$
+v = v_0 + a \\cdot t \\quad\\Rightarrow\\quad 3{,}0 = v_0 + 4{,}0 a
+$$
+
+De andra alternativen har var sitt fel: $16 a$ glömmer att dela med 2, $3{,}0 \\cdot 4{,}0$ använder sluthastigheten i stället för starthastigheten, och $v_0 = 3{,}0 + 4{,}0 a$ har fått fel tecken på accelerationstermen.
+
+Löser vi systemet får vi $a = -1{,}5\\ \\mathrm{m/s^2}$ och $v_0 = 9{,}0\\ \\mathrm{m/s}$. Accelerationen är negativ, som den ska vara när pucken bromsas.
+
+**Svar:** $\\begin{cases} 24 = 4{,}0 v_0 + 8{,}0 a \\\\ 3{,}0 = v_0 + 4{,}0 a \\end{cases}$`,
+        },
+        {
+            level: 2,
+            question: `En kula får en knuff uppför ett lutande plan och rullar sedan med konstant acceleration, först uppåt och sedan tillbaka nedåt. Den passerar punkten P, 3,0 m upp längs planet, två gånger: på väg upp 1,0 s efter knuffen och på väg ned 3,0 s efter knuffen.
+
+<svg viewBox="0 0 540 250" width="664" height="307" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En kula rullar uppför ett lutande plan. Punkten P ligger 3,0 m upp längs planet."><polygon points="30,220 477,74.8 477,220" fill="#ece3d2" stroke="#0f1620" stroke-width="1.6" stroke-linejoin="round"/><line x1="6" y1="220" x2="534" y2="220" stroke="#8a8478" stroke-width="2"/><circle cx="73.5" cy="192.2" r="13" fill="#c8324a" stroke="#0f1620" stroke-width="1.3"/><circle cx="69.5" cy="188.2" r="3.5" fill="#e88a99"/><line x1="85.9" y1="188.2" x2="142" y2="169.9" stroke="#1f5fa8" stroke-width="2.6" stroke-linecap="butt"/><polygon points="152.5,166.5 140.5,165.2 143.6,174.7" fill="#1f5fa8"/><text x="156.5" y="152.5" font-size="15" fill="#1f5fa8"><tspan font-style="italic">v</tspan>₀</text><line x1="365" y1="118.5" x2="360.7" y2="105.2" stroke="#0f1620" stroke-width="2.4"/><text x="373.8" y="98.6" text-anchor="start" font-size="15" fill="#0f1620">P</text><line x1="67.7" y1="174.1" x2="57.8" y2="143.7" stroke="#6b6454" stroke-width="1" stroke-dasharray="3 3"/><line x1="359.2" y1="100.4" x2="343.1" y2="51" stroke="#6b6454" stroke-width="1" stroke-dasharray="3 3"/><line x1="68.2" y1="146.6" x2="336.4" y2="59.5" stroke="#0f1620" stroke-width="1.3"/><polygon points="59.6,149.4 67,142.8 69.4,150.4" fill="#0f1620"/><polygon points="344.9,56.7 335.2,55.7 337.6,63.3" fill="#0f1620"/><text x="198.6" y="91.6" text-anchor="middle" font-size="15" fill="#0f1620" transform="rotate(-18 198.6 91.6)">3,0 m</text></svg>
+
+Bestäm<br>a) kulans starthastighet $v_0$&emsp;&emsp;b) kulans acceleration<br>c) hur långt upp längs planet kulan kommer.`,
+            answer: { value: 4.0, unit: 'm/s', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 4.0, unit: 'm/s', etikett: '$v_0$' },
+                { del: 'b', value: -2.0, unit: 'm/s²', etikett: '$a$' },
+                { del: 'c', value: 4.0, unit: 'm', etikett: 'sträckan' },
+            ],
+            solution: `Vi väljer riktningen uppför planet som positiv och räknar sträckan *s* från startpunkten. Kulan är i P, där $s = 3{,}0\\ \\mathrm{m}$, vid två tidpunkter. Formeln $s = v_0 \\cdot t + \\dfrac{a \\cdot t^{2}}{2}$ gäller hela tiden, både uppåt och nedåt, eftersom accelerationen är konstant. Vi använder den för båda passagerna:
+
+$$
+\\left[ \\begin{array}{l}
+s = 3{,}0\\ \\mathrm{m}\\ \\text{när}\\ t = 1{,}0\\ \\mathrm{s} \\\\
+s = 3{,}0\\ \\mathrm{m}\\ \\text{när}\\ t = 3{,}0\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+Med $\\dfrac{1{,}0^{2}}{2} = 0{,}5$ och $\\dfrac{3{,}0^{2}}{2} = 4{,}5$:
+
+$$
+\\begin{cases}
+3{,}0 = 1{,}0 v_0 + 0{,}5 a \\\\
+3{,}0 = 3{,}0 v_0 + 4{,}5 a
+\\end{cases}
+$$
+
+Den första ekvationen ger $v_0 = 3{,}0 - 0{,}5 a$. Insatt i den andra:
+
+$$
+3{,}0 = 3{,}0 \\cdot (3{,}0 - 0{,}5 a) + 4{,}5 a = 9{,}0 - 1{,}5 a + 4{,}5 a = 9{,}0 + 3{,}0 a
+$$
+
+$$
+3{,}0 a = 3{,}0 - 9{,}0 = -6{,}0 \\quad\\Leftrightarrow\\quad a = -2{,}0\\ \\mathrm{m/s^2}
+$$
+
+**a)**
+
+$$
+v_0 = 3{,}0 - 0{,}5 \\cdot (-2{,}0) = 3{,}0 + 1{,}0 = 4{,}0\\ \\mathrm{m/s}
+$$
+
+**Svar:** 4,0 m/s
+
+**b)** Accelerationen är negativ: den är riktad nedför planet, både när kulan rullar uppåt och när den rullar nedåt.
+
+**Svar:** −2,0 m/s²
+
+**c)** Kulan vänder när hastigheten är noll:
+
+$$
+0 = v_0 + a \\cdot t = 4{,}0 - 2{,}0 t \\quad\\Leftrightarrow\\quad t = 2{,}0\\ \\mathrm{s}
+$$
+
+$$
+s = 4{,}0 \\cdot 2{,}0 + \\frac{-2{,}0 \\cdot 2{,}0^{2}}{2} = 8{,}0 - 4{,}0 = 4{,}0\\ \\mathrm{m}
+$$
+
+Rimligt: kulan vänder vid 2,0 s, mitt emellan de två passagerna vid 1,0 s och 3,0 s, och högsta punkten ligger ovanför P.
+
+**Svar:** 4,0 m`,
+        },
+        {
+            level: 2,
+            question: `En bil bromsar med konstant acceleration tills den står still. Bromsningen tar 5,0 s, och under de första 3,0 s kör bilen 45 m.<br>a) Vilken hastighet hade bilen när den började bromsa?<br>b) Hur lång är hela bromssträckan?`,
+            answer: { value: 21, unit: 'm/s', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 21, unit: 'm/s', etikett: 'hastigheten' },
+                { del: 'b', value: 54, unit: 'm', etikett: 'bromssträckan' },
+            ],
+            solution: `Okända är starthastigheten $v_0$ och accelerationen *a*. Vi får en ekvation ur att bilen står still efter 5,0 s och en ur sträckan de första 3,0 s:
+
+$$
+v = v_0 + a \\cdot t \\qquad\\qquad s = v_0 \\cdot t + \\frac{a \\cdot t^{2}}{2}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+v = 0\\ \\text{när}\\ t = 5{,}0\\ \\mathrm{s} \\\\
+s = 45\\ \\mathrm{m}\\ \\text{när}\\ t = 3{,}0\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+Med $\\dfrac{3{,}0^{2}}{2} = 4{,}5$:
+
+$$
+\\begin{cases}
+0 = v_0 + 5{,}0 a \\\\
+45 = 3{,}0 v_0 + 4{,}5 a
+\\end{cases}
+$$
+
+**a)** Den första ekvationen ger $v_0 = -5{,}0 a$. Insatt i den andra:
+
+$$
+45 = 3{,}0 \\cdot (-5{,}0 a) + 4{,}5 a = -15 a + 4{,}5 a = -10{,}5 a
+$$
+
+$$
+a = \\frac{45}{-10{,}5} \\approx -4{,}286\\ \\mathrm{m/s^2}
+$$
+
+$$
+v_0 = -5{,}0 \\cdot (-4{,}286) \\approx 21{,}43\\ \\mathrm{m/s} \\approx 21\\ \\mathrm{m/s}
+$$
+
+Det motsvarar ungefär 77 km/h, en rimlig hastighet på en landsväg.
+
+**Svar:** 21 m/s
+
+**b)** Hela bromsningen varar 5,0 s:
+
+$$
+s = 21{,}43 \\cdot 5{,}0 + \\frac{-4{,}286 \\cdot 5{,}0^{2}}{2} \\approx 107{,}1 - 53{,}6 \\approx 53{,}6\\ \\mathrm{m}
+$$
+
+Rimligt: de första 3,0 s ger 45 m och de sista 2,0 s, när bilen redan rullar långsamt, bara cirka 9 m till.
+
+**Svar:** 54 m`,
+        },
+
+        {
+            level: 3,
+            question: `En bil ändrar hastigheten från $v_0$ till *v* med konstant acceleration *a* på sträckan *s*. Tiden *t* är okänd.<br>a) Ställ upp ekvationssystemet och visa genom att eliminera tiden att $a = \\dfrac{v^{2} - v_0^{2}}{2s}$.<br>b) Ett flygplan startar från vila och lyfter när hastigheten är $75\\ \\mathrm{m/s}$. Startbanan är 1,5 km lång, och av säkerhetsskäl ska planet lyfta innan det har använt 60 % av banan. Hur stor acceleration måste planet minst ha? Ange svaret i m/s².<br>c) En varm dag med tung last blir accelerationen bara 80 % av värdet i b). Hur stor andel av startbanan behöver planet då? Lös uppgiften utan att räkna ut någon ny acceleration.`,
+            answer: { value: 3.1, unit: 'm/s²', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 3.1, unit: 'm/s²', etikett: 'accelerationen' },
+                { del: 'c', value: 75, unit: '%', etikett: 'andelen' },
+            ],
+            solution: `**a)** De två formlerna för konstant acceleration ger systemet
+
+$$
+\\begin{cases}
+v = v_0 + a \\cdot t \\\\
+s = v_0 \\cdot t + \\dfrac{a \\cdot t^{2}}{2}
+\\end{cases}
+$$
+
+Vi löser ut tiden ur den första ekvationen:
+
+$$
+t = \\frac{v - v_0}{a}
+$$
+
+och sätter in den i den andra:
+
+$$
+s = v_0 \\cdot \\frac{v - v_0}{a} + \\frac{a}{2} \\cdot \\frac{(v - v_0)^{2}}{a^{2}} = \\frac{v_0 (v - v_0)}{a} + \\frac{(v - v_0)^{2}}{2a}
+$$
+
+Vi skriver båda termerna med nämnaren $2a$ och bryter ut $(v - v_0)$:
+
+$$
+s = \\frac{2 v_0 (v - v_0) + (v - v_0)^{2}}{2a} = \\frac{(v - v_0)(2 v_0 + v - v_0)}{2a} = \\frac{(v - v_0)(v + v_0)}{2a}
+$$
+
+Med konjugatregeln blir täljaren $v^{2} - v_0^{2}$:
+
+$$
+s = \\frac{v^{2} - v_0^{2}}{2a}
+$$
+
+Vi multiplicerar båda led med $2a$ och dividerar båda led med $2s$:
+
+$$
+a = \\frac{v^{2} - v_0^{2}}{2s}
+$$
+
+Tiden har försvunnit, så det här sambandet ger accelerationen direkt när *s*, $v_0$ och *v* är kända. Det är samma ekvationssystem som annars löses i GeoGebra, löst en gång för alla.
+
+**b)** Planet får använda högst 60 % av banan, alltså $0{,}60 \\cdot 1\\,500\\ \\mathrm{m} = 900\\ \\mathrm{m}$. Ju kortare sträcka, desto större acceleration krävs, så den minsta accelerationen är den som ger lyft efter precis 900 m.
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = 0 \\\\
+v = 75\\ \\mathrm{m/s} \\\\
+s = 900\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+a = \\frac{75^{2} - 0^{2}}{2 \\cdot 900} = \\frac{5\\,625}{1\\,800} = 3{,}125\\ \\mathrm{m/s^2} \\approx 3{,}1\\ \\mathrm{m/s^2}
+$$
+
+Rimligt: starten tar då $t = \\dfrac{75}{3{,}125} = 24\\ \\mathrm{s}$, en kort men möjlig flygstart.
+
+**Svar:** 3,1 m/s²
+
+**c)** Vi löser sambandet från a) för sträckan, med $v_0 = 0$:
+
+$$
+s = \\frac{v^{2}}{2a}
+$$
+
+Lyfthastigheten *v* är densamma, så sträckan är omvänt proportionell mot accelerationen. Blir accelerationen 0,80 gånger så stor blir sträckan $\\dfrac{1}{0{,}80} = 1{,}25$ gånger så lång:
+
+$$
+s = 1{,}25 \\cdot 900\\ \\mathrm{m} = 1\\,125\\ \\mathrm{m}
+$$
+
+$$
+\\frac{1\\,125}{1\\,500} = 0{,}75 = 75\\ \\%
+$$
+
+Planet lyfter fortfarande innan banan tar slut, men säkerhetsmarginalen på 40 % har krympt till 25 %.
+
+**Svar:** 75 % av startbanan`,
+        },
+        {
+            level: 3,
+            question: `En bil bromsar med konstant acceleration tills den står still. Hela bromssträckan är 40 m, och under bromsningens sista sekund rullar bilen 2,5 m. Bestäm<br>a) bilens acceleration&emsp;&emsp;b) bilens hastighet när den började bromsa.`,
+            answer: { value: -5.0, unit: 'm/s²', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: -5.0, unit: 'm/s²', etikett: 'accelerationen' },
+                { del: 'b', value: 20, unit: 'm/s', etikett: 'hastigheten' },
+            ],
+            solution: `Vi väljer rörelseriktningen som positiv. Okända är starthastigheten $v_0$, accelerationen *a* och bromstiden *T*.
+
+**a)** Den sista sekunden är nyckeln. Tänk dig filmen av bromsningen spelad baklänges: då startar bilen från vila och ökar farten med en acceleration som har samma belopp $|a|$. Den sista sekunden blir den första sekunden i den baklänges filmen, och då gäller
+
+$$
+s = v_0 \\cdot t + \\frac{|a| \\cdot t^{2}}{2} \\quad\\text{med}\\quad v_0 = 0,\\ t = 1{,}0\\ \\mathrm{s}
+$$
+
+$$
+2{,}5 = \\frac{|a| \\cdot 1{,}0^{2}}{2} \\quad\\Leftrightarrow\\quad |a| = 2 \\cdot 2{,}5 = 5{,}0\\ \\mathrm{m/s^2}
+$$
+
+Accelerationen är riktad mot rörelsen, så $a = -5{,}0\\ \\mathrm{m/s^2}$.
+
+(Samma resultat ges av ekvationssystemet med tre ekvationer: $0 = v_0 + a T$, $40 = v_0 T + \\dfrac{a T^{2}}{2}$ och $2{,}5 = s(T) - s(T - 1)$, som går att lösa i GeoGebra.)
+
+**Svar:** −5,0 m/s²
+
+**b)** Nu är $v_0$ och *T* okända:
+
+$$
+\\begin{cases}
+0 = v_0 - 5{,}0 T \\\\
+40 = v_0 \\cdot T - 2{,}5 T^{2}
+\\end{cases}
+$$
+
+Den första ekvationen ger $v_0 = 5{,}0 T$. Insatt i den andra:
+
+$$
+40 = 5{,}0 T^{2} - 2{,}5 T^{2} = 2{,}5 T^{2} \\quad\\Leftrightarrow\\quad T^{2} = \\frac{40}{2{,}5} = 16 \\quad\\Leftrightarrow\\quad T = 4{,}0\\ \\mathrm{s}
+$$
+
+(Den negativa roten förkastas.)
+
+$$
+v_0 = 5{,}0 \\cdot 4{,}0 = 20\\ \\mathrm{m/s}
+$$
+
+Rimligt: medelhastigheten är $\\dfrac{40}{4{,}0} = 10\\ \\mathrm{m/s}$, hälften av 20 m/s, som den ska vara när hastigheten minskar jämnt till noll. 20 m/s är 72 km/h.
+
+**Svar:** 20 m/s`,
+        },
+        {
+            level: 3,
+            question: `En boll släpps från vila från ett fönster 20 m över marken. I samma ögonblick kastas en annan boll rakt uppåt från marken, rakt under fönstret. Bollarna möts efter 1,25 s. Bortse från luftmotståndet och räkna med $g = 9{,}82\\ \\mathrm{m/s^2}$.<br>a) Med vilken hastighet kastades den nedre bollen?<br>b) På vilken höjd över marken möts bollarna?<br>c) Samma försök görs på månen, där tyngdaccelerationen är mindre, och den nedre bollen kastas med samma hastighet som i a). Möts bollarna då efter längre tid, kortare tid eller samma tid? Motivera.`,
+            answer: { value: 16, unit: 'm/s', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 16, unit: 'm/s', etikett: 'hastigheten' },
+                { del: 'b', value: 12, unit: 'm', etikett: 'höjden' },
+                { del: 'c' },
+            ],
+            solution: `Vi mäter höjden *h* från marken och väljer uppåt som positiv riktning. Båda bollarna har då accelerationen $a = -g = -9{,}82\\ \\mathrm{m/s^2}$. Okända är kasthastigheten $v_0$ och mötets höjd *h*. Höjden för varje boll ges av $h = h_0 + v_0 \\cdot t + \\dfrac{a \\cdot t^{2}}{2}$:
+
+$$
+\\begin{cases}
+h = 20 - \\dfrac{g \\cdot t^{2}}{2} & \\text{(den släppta bollen)} \\\\
+h = v_0 \\cdot t - \\dfrac{g \\cdot t^{2}}{2} & \\text{(den kastade bollen)}
+\\end{cases}
+$$
+
+**a)** När bollarna möts har de samma höjd vid samma tid, så högerleden är lika:
+
+$$
+20 - \\frac{g \\cdot t^{2}}{2} = v_0 \\cdot t - \\frac{g \\cdot t^{2}}{2}
+$$
+
+Vi adderar $\\dfrac{g \\cdot t^{2}}{2}$ till båda led. Termen med *g* försvinner helt:
+
+$$
+20 = v_0 \\cdot t \\quad\\Leftrightarrow\\quad v_0 = \\frac{20}{t} = \\frac{20}{1{,}25} = 16\\ \\mathrm{m/s}
+$$
+
+**Svar:** 16 m/s
+
+**b)**
+
+$$
+h = 20 - \\frac{9{,}82 \\cdot 1{,}25^{2}}{2} = 20 - 7{,}671875 \\approx 12{,}33\\ \\mathrm{m} \\approx 12\\ \\mathrm{m}
+$$
+
+Kontroll med den kastade bollen: $16 \\cdot 1{,}25 - 7{,}671875 \\approx 12{,}33\\ \\mathrm{m}$. Den kastade bollen är då fortfarande på väg upp, eftersom den vänder först efter $\\dfrac{16}{9{,}82} \\approx 1{,}6\\ \\mathrm{s}$.
+
+**Svar:** 12 m
+
+**c)** I a) försvann *g* ur ekvationen. Mötet sker när $v_0 \\cdot t = 20\\ \\mathrm{m}$, alltså efter $t = \\dfrac{20}{v_0}$, oavsett tyngdaccelerationen. Förklaringen är att tyngdaccelerationen drar båda bollarna lika mycket nedåt under samma tid, så avståndet mellan dem minskar bara på grund av kasthastigheten. På månen möts bollarna högre upp, eftersom båda faller mindre under tiden.
+
+**Svar:** Efter samma tid, 1,25 s, eftersom tyngdaccelerationen påverkar båda bollarna lika och tar ut sig själv.`,
+        },
+        {
+            level: 3,
+            question: `En pulka åker nedför en backe med konstant acceleration. En rörelsesensor högst upp i backen mäter pulkans avstånd *s* från sensorn vid tre tidpunkter. Tiden räknas från när mätningen startar, och då är pulkan redan i rörelse.
+
+| *t* (s) | 1,0 | 3,0 | 5,0 |
+|---|---|---|---|
+| *s* (m) | 3,9 | 10,1 | 19,5 |
+
+Bestäm<br>a) pulkans acceleration<br>b) pulkans hastighet när mätningen startar<br>c) pulkans avstånd från sensorn när mätningen startar.`,
+            answer: { value: 0.80, unit: 'm/s²', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 0.80, unit: 'm/s²', etikett: '$a$' },
+                { del: 'b', value: 1.5, unit: 'm/s', etikett: '$v_0$' },
+                { del: 'c', value: 2.0, unit: 'm', etikett: '$s_0$' },
+            ],
+            solution: `Pulkan startar inte vid sensorn och inte från vila, så vi behöver en modell med tre okända: avståndet $s_0$, hastigheten $v_0$ och accelerationen *a* när mätningen startar. Vid konstant acceleration gäller
+
+$$
+s = s_0 + v_0 \\cdot t + \\frac{a \\cdot t^{2}}{2}
+$$
+
+Tre okända kräver tre ekvationer, en för varje mätpunkt. Med $\\dfrac{1{,}0^{2}}{2} = 0{,}5$, $\\dfrac{3{,}0^{2}}{2} = 4{,}5$ och $\\dfrac{5{,}0^{2}}{2} = 12{,}5$:
+
+$$
+\\begin{cases}
+3{,}9 = s_0 + 1{,}0 v_0 + 0{,}5 a & (1) \\\\
+10{,}1 = s_0 + 3{,}0 v_0 + 4{,}5 a & (2) \\\\
+19{,}5 = s_0 + 5{,}0 v_0 + 12{,}5 a & (3)
+\\end{cases}
+$$
+
+Systemet kan lösas i GeoGebra (med till exempel $s_0 = x$, $v_0 = y$ och $a = z$). För hand blir $s_0$ av med att vi subtraherar ekvationerna parvis:
+
+$$
+(2) - (1): \\quad 6{,}2 = 2{,}0 v_0 + 4{,}0 a
+$$
+
+$$
+(3) - (2): \\quad 9{,}4 = 2{,}0 v_0 + 8{,}0 a
+$$
+
+**a)** Vi subtraherar den första av de nya ekvationerna från den andra:
+
+$$
+9{,}4 - 6{,}2 = 8{,}0 a - 4{,}0 a \\quad\\Leftrightarrow\\quad 3{,}2 = 4{,}0 a \\quad\\Leftrightarrow\\quad a = 0{,}80\\ \\mathrm{m/s^2}
+$$
+
+**Svar:** 0,80 m/s²
+
+**b)**
+
+$$
+6{,}2 = 2{,}0 v_0 + 4{,}0 \\cdot 0{,}80 = 2{,}0 v_0 + 3{,}2 \\quad\\Leftrightarrow\\quad v_0 = \\frac{6{,}2 - 3{,}2}{2{,}0} = 1{,}5\\ \\mathrm{m/s}
+$$
+
+**Svar:** 1,5 m/s
+
+**c)** Insättning i (1):
+
+$$
+s_0 = 3{,}9 - 1{,}5 - 0{,}5 \\cdot 0{,}80 = 3{,}9 - 1{,}5 - 0{,}40 = 2{,}0\\ \\mathrm{m}
+$$
+
+Kontroll i (3): $2{,}0 + 5{,}0 \\cdot 1{,}5 + 12{,}5 \\cdot 0{,}80 = 2{,}0 + 7{,}5 + 10 = 19{,}5\\ \\mathrm{m}$, vilket stämmer med tabellen.
+
+**Svar:** 2,0 m`,
+        },
+        {
+            level: 3,
+            question: `En buss står vid en hållplats. En cyklist kommer bakifrån med den konstanta hastigheten $6{,}0\\ \\mathrm{m/s}$. När cyklisten är 10 m bakom bussen startar bussen och accelererar konstant med $1{,}0\\ \\mathrm{m/s^2}$ i samma riktning.<br>a) Efter hur lång tid hinner cyklisten ifatt bussen?<br>b) Efter hur lång tid kör bussen om cyklisten igen?<br>c) Hur långt framför bussen är cyklisten som mest?`,
+            answer: { value: 2.0, unit: 's', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 2.0, unit: 's', etikett: 'tiden' },
+                { del: 'b', value: 10, unit: 's', etikett: 'tiden' },
+                { del: 'c', value: 8.0, unit: 'm', etikett: 'avståndet' },
+            ],
+            solution: `Vi räknar läget *s* från den punkt där cyklisten är när bussen startar, och tiden *t* från samma ögonblick. Bussen står då 10 m längre fram och startar från vila.
+
+$$
+\\begin{cases}
+s = 6{,}0 t & \\text{(cyklisten)} \\\\
+s = 10 + \\dfrac{1{,}0 \\cdot t^{2}}{2} & \\text{(bussen)}
+\\end{cases}
+$$
+
+Okända är tiden *t* och läget *s* där de är jämsides. Med $t = x$ och $s = y$ ger GeoGebra två lösningar: $(x = 2,\\ y = 12)$ och $(x = 10,\\ y = 60)$. För hand sätter vi lägena lika:
+
+$$
+6{,}0 t = 10 + 0{,}5 t^{2} \\quad\\Leftrightarrow\\quad 0{,}5 t^{2} - 6{,}0 t + 10 = 0 \\quad\\Leftrightarrow\\quad t^{2} - 12 t + 20 = 0
+$$
+
+$$
+t = 6 \\pm \\sqrt{6^{2} - 20} = 6 \\pm \\sqrt{16} = 6 \\pm 4
+$$
+
+Båda lösningarna betyder något. Cyklisten och bussen är jämsides två gånger.
+
+**a)** Den första gången är $t = 6 - 4 = 2{,}0\\ \\mathrm{s}$. Bussen har då hastigheten $1{,}0 \\cdot 2{,}0 = 2{,}0\\ \\mathrm{m/s}$, mindre än cyklistens, så cyklisten kör förbi.
+
+**Svar:** 2,0 s
+
+**b)** Den andra gången är $t = 6 + 4 = 10\\ \\mathrm{s}$. Bussen har då hastigheten $1{,}0 \\cdot 10 = 10\\ \\mathrm{m/s}$, mer än cyklistens, så bussen kör om.
+
+**Svar:** 10 s
+
+**c)** Avståndet mellan cyklisten och bussen ökar så länge cyklisten är snabbast och minskar när bussen blivit snabbast. Störst är det alltså när hastigheterna är lika:
+
+$$
+1{,}0 \\cdot t = 6{,}0 \\quad\\Leftrightarrow\\quad t = 6{,}0\\ \\mathrm{s}
+$$
+
+$$
+\\Delta s = 6{,}0 \\cdot 6{,}0 - \\left(10 + \\frac{1{,}0 \\cdot 6{,}0^{2}}{2}\\right) = 36 - 28 = 8{,}0\\ \\mathrm{m}
+$$
+
+Rimligt: tiden 6,0 s ligger mitt emellan de två mötena vid 2,0 s och 10 s.
+
+**Svar:** 8,0 m`,
+        },
+        {
+            level: 3,
+            question: `Bil A ökar farten med konstant acceleration från $v_0$ till $2v_0$ på sträckan *s*. Bil B ökar farten med konstant acceleration från $2v_0$ till $4v_0$ på sträckan $\\dfrac{s}{2}$.<br>a) Hur många gånger större är bil B:s acceleration än bil A:s?<br>b) Hur många gånger längre tid tar bil A:s acceleration än bil B:s?
+
+*Ange kvoten i a) som ditt numeriska svar.*`,
+            answer: { value: 8, unit: '', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 8, unit: '', etikett: '$\\dfrac{a_\\mathrm{B}}{a_\\mathrm{A}}$' },
+                { del: 'b', value: 4, unit: '', etikett: '$\\dfrac{t_\\mathrm{A}}{t_\\mathrm{B}}$' },
+            ],
+            solution: `Vi löser först det generella fallet: en bil ökar farten från $u$ till $2u$ på sträckan *d*, med okänd acceleration *a* och okänd tid *t*.
+
+$$
+\\begin{cases}
+2u = u + a \\cdot t \\\\
+d = u \\cdot t + \\dfrac{a \\cdot t^{2}}{2}
+\\end{cases}
+$$
+
+Den första ekvationen ger $a \\cdot t = u$. Vi skriver $a \\cdot t^{2} = (a \\cdot t) \\cdot t = u \\cdot t$ i den andra:
+
+$$
+d = u \\cdot t + \\frac{u \\cdot t}{2} = \\frac{3 u \\cdot t}{2} \\quad\\Leftrightarrow\\quad t = \\frac{2d}{3u}
+$$
+
+$$
+a = \\frac{u}{t} = \\frac{u \\cdot 3u}{2d} = \\frac{3u^{2}}{2d}
+$$
+
+Bil A har $u = v_0$ och $d = s$. Bil B har $u = 2v_0$ och $d = \\dfrac{s}{2}$.
+
+**a)**
+
+$$
+a_\\mathrm{A} = \\frac{3 v_0^{2}}{2s} \\qquad\\qquad a_\\mathrm{B} = \\frac{3 (2v_0)^{2}}{2 \\cdot \\dfrac{s}{2}} = \\frac{12 v_0^{2}}{s}
+$$
+
+$$
+\\frac{a_\\mathrm{B}}{a_\\mathrm{A}} = \\frac{12 v_0^{2}}{s} \\cdot \\frac{2s}{3 v_0^{2}} = \\frac{24}{3} = 8
+$$
+
+Förklaring: dubbla hastighetsändringen ger dubbelt, och halva sträckan med dubbel fart ger en fjärdedel av tiden. Accelerationen är hastighetsändring delat med tid, alltså $2 \\cdot 4 = 8$ gånger större.
+
+**Svar:** 8 gånger större
+
+**b)**
+
+$$
+t_\\mathrm{A} = \\frac{2s}{3 v_0} \\qquad\\qquad t_\\mathrm{B} = \\frac{2 \\cdot \\dfrac{s}{2}}{3 \\cdot 2 v_0} = \\frac{s}{6 v_0}
+$$
+
+$$
+\\frac{t_\\mathrm{A}}{t_\\mathrm{B}} = \\frac{2s}{3 v_0} \\cdot \\frac{6 v_0}{s} = \\frac{12}{3} = 4
+$$
+
+**Svar:** 4 gånger längre tid`,
+        },
+        {
+            level: 3,
+            question: `Vid en trafikövning mäts stoppsträckan för samma förare i samma bil två gånger: från att en lampa tänds på instrumentbrädan tills bilen står still. Under förarens reaktionstid kör bilen med oförändrad hastighet, och sedan bromsar den med konstant acceleration tills den står still. Reaktionstiden och accelerationen är okända men lika stora i båda försöken.
+
+| | Försök 1 | Försök 2 |
+|---|---|---|
+| Hastighet före inbromsningen | 36 km/h | 72 km/h |
+| Stoppsträcka | 17 m | 54 m |
+
+a) Ställ upp ett ekvationssystem och bestäm förarens reaktionstid.<br>b) Bestäm bilens acceleration under inbromsningen.<br>c) Hur lång stoppsträcka ger modellen vid 90 km/h?<br>d) Hastigheten är 2,5 gånger så stor vid 90 km/h som vid 36 km/h. Blir stoppsträckan mer eller mindre än 2,5 gånger så lång? Förklara med hjälp av modellen.`,
+            answer: { value: 0.70, unit: 's', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 0.70, unit: 's', etikett: 'reaktionstiden' },
+                { del: 'b', value: -5.0, unit: 'm/s²', etikett: 'accelerationen' },
+                { del: 'c', value: 80, unit: 'm', etikett: 'stoppsträckan' },
+                { del: 'd' },
+            ],
+            solution: `Vi väljer rörelseriktningen som positiv och kallar hastigheten före inbromsningen *v*. Okända är reaktionstiden $t_\\mathrm{r}$ och accelerationen *a* under inbromsningen (negativ, eftersom bilen bromsar). Vi gör om hastigheterna till m/s:
+
+$$
+36\\ \\mathrm{km/h} = \\frac{36}{3{,}6}\\ \\mathrm{m/s} = 10\\ \\mathrm{m/s} \\qquad\\qquad 72\\ \\mathrm{km/h} = \\frac{72}{3{,}6}\\ \\mathrm{m/s} = 20\\ \\mathrm{m/s}
+$$
+
+Först tar vi fram ett uttryck för stoppsträckan. Den består av två delar.
+
+**Reaktionssträckan.** Hastigheten är konstant, så sträckan är hastighet gånger tid: $s_\\mathrm{r} = v \\cdot t_\\mathrm{r}$.
+
+**Bromssträckan.** Bilen går från hastigheten *v* till stillastående. Bromstiden $t_\\mathrm{b}$ fås ur $v_\\mathrm{slut} = v + a \\cdot t_\\mathrm{b}$ med $v_\\mathrm{slut} = 0$:
+
+$$
+0 = v + a \\cdot t_\\mathrm{b} \\quad\\Leftrightarrow\\quad t_\\mathrm{b} = -\\frac{v}{a}
+$$
+
+Insättning i $s = v_0 \\cdot t + \\dfrac{a \\cdot t^{2}}{2}$, med $v_0 = v$ och $t = t_\\mathrm{b}$, ger
+
+$$
+s_\\mathrm{b} = v \\cdot \\left(-\\frac{v}{a}\\right) + \\frac{a}{2} \\cdot \\frac{v^{2}}{a^{2}} = -\\frac{v^{2}}{a} + \\frac{v^{2}}{2a} = -\\frac{v^{2}}{2a}
+$$
+
+Bromssträckan blir positiv, eftersom *a* är negativ. Hela stoppsträckan är
+
+$$
+s = s_\\mathrm{r} + s_\\mathrm{b} = v \\cdot t_\\mathrm{r} - \\frac{v^{2}}{2a}
+$$
+
+**a)** Varje försök ger en ekvation med de två okända $t_\\mathrm{r}$ och *a*:
+
+$$
+\\left[ \\begin{array}{l}
+s = 17\\ \\mathrm{m}\\ \\text{när}\\ v = 10\\ \\mathrm{m/s} \\\\
+s = 54\\ \\mathrm{m}\\ \\text{när}\\ v = 20\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+Med $\\dfrac{10^{2}}{2} = 50$ och $\\dfrac{20^{2}}{2} = 200$ blir ekvationssystemet
+
+$$
+\\begin{cases}
+17 = 10 t_\\mathrm{r} - \\dfrac{50}{a} & (1) \\\\
+54 = 20 t_\\mathrm{r} - \\dfrac{200}{a} & (2)
+\\end{cases}
+$$
+
+Med $t_\\mathrm{r} = x$ och $a = y$ ger GeoGebra lösningen $\\left\\{ x = \\dfrac{7}{10},\\ y = -5 \\right\\}$. För hand multiplicerar vi båda led i (1) med 2:
+
+$$
+34 = 20 t_\\mathrm{r} - \\frac{100}{a} \\qquad (3)
+$$
+
+Vi subtraherar (3) från (2). Termen $20 t_\\mathrm{r}$ försvinner:
+
+$$
+54 - 34 = -\\frac{200}{a} + \\frac{100}{a} \\quad\\Leftrightarrow\\quad 20 = -\\frac{100}{a} \\quad\\Leftrightarrow\\quad a = -\\frac{100}{20} = -5{,}0\\ \\mathrm{m/s^2}
+$$
+
+Insättning av $a = -5{,}0\\ \\mathrm{m/s^2}$ i (1), $17 = 10 t_\\mathrm{r} - \\dfrac{50}{a}$, ger
+
+$$
+17 = 10 t_\\mathrm{r} + 10 \\quad\\Leftrightarrow\\quad t_\\mathrm{r} = \\frac{17 - 10}{10} = 0{,}70\\ \\mathrm{s}
+$$
+
+Rimligt: en reaktionstid på knappt en sekund är normal för en uppmärksam förare.
+
+**Svar:** 0,70 s
+
+**b)** Accelerationen räknades fram i a). Minustecknet visar att den är riktad mot rörelsen.
+
+**Svar:** −5,0 m/s²
+
+**c)**
+
+$$
+90\\ \\mathrm{km/h} = \\frac{90}{3{,}6}\\ \\mathrm{m/s} = 25\\ \\mathrm{m/s}
+$$
+
+$$
+s = 25 \\cdot 0{,}70 - \\frac{25^{2}}{2 \\cdot (-5{,}0)} = 17{,}5 + 62{,}5 = 80\\ \\mathrm{m}
+$$
+
+**Svar:** 80 m
+
+**d)** Stoppsträckan blir $\\dfrac{80}{17} \\approx 4{,}7$ gånger så lång, alltså mer än 2,5 gånger. Modellen förklarar varför: reaktionssträckan $v \\cdot t_\\mathrm{r}$ är proportionell mot hastigheten och blir 2,5 gånger så lång, men bromssträckan $-\\dfrac{v^{2}}{2a}$ är proportionell mot kvadraten på hastigheten och blir $2{,}5^{2} = 6{,}25$ gånger så lång. Vid hög hastighet är det bromssträckan som dominerar.
+
+**Svar:** Mer än 2,5 gånger, ungefär 4,7 gånger, eftersom bromssträckan växer med kvadraten på hastigheten.`,
         },
     ],
 
@@ -10338,7 +12082,7 @@ $$
 h_\\text{max} = \\frac{v_0^{2}}{2g}
 $$
 
-— maxhöjden är proportionell mot *kvadraten* på utgångsfarten. Att fördubbla *v*₀ ger *fyra gånger* så hög max-höjd.`,
+Maxhöjden är alltså proportionell mot *kvadraten* på utgångsfarten. Att fördubbla *v*₀ ger *fyra gånger* så hög max-höjd.`,
         },
 
         {
@@ -10347,7 +12091,7 @@ $$
 
 Vilken **fart** har bollen när den slår i marken?
 
-*Tips: med Torricellis ekvation behöver du inte räkna ut tiden. Se upp med tecken — välj uppåt som positiv riktning och var noga med vad *s* (förflyttningen) är när bollen träffar marken.*`,
+*Tips: med Torricellis ekvation behöver du inte räkna ut tiden. Se upp med tecken: välj uppåt som positiv riktning och var noga med vad *s* (förflyttningen) är när bollen träffar marken.*`,
             answer: { value: 16.3, unit: 'm/s', tol: 0.03 },
             solution: `Vi väljer **uppåt som positiv riktning** och låter kastpunkten vara origo. Då är:
 
@@ -10376,7 +12120,7 @@ Eftersom vi söker farten (storleken) är svaret 16,3 m/s. Tecknet är negativt
 
 **Svar:** Bollen träffar marken med ca 16,3 m/s.
 
-**Generell slutsats:** Detta är en typisk fälla — om man slarvar med tecken (t.ex. sätter $s = +2{,}0$ m för markens läge) får man fel svar. Torricellis ekvation kräver att man håller koll på förflyttningens riktning. Notera också att ekvationen gav två rötter ($\\pm 16{,}3$) — den positiva motsvarar farten *uppåt* (matematiskt giltig, men inte den fysikaliska situationen här), den negativa motsvarar slutfarten nedåt.`,
+**Generell slutsats:** Detta är en typisk fälla. Om man slarvar med tecken (t.ex. sätter $s = +2{,}0$ m för markens läge) får man fel svar. Torricellis ekvation kräver att man håller koll på förflyttningens riktning. Notera också att ekvationen gav två rötter ($\\pm 16{,}3$). Den positiva motsvarar farten *uppåt* (matematiskt giltig, men inte den fysikaliska situationen här), den negativa motsvarar slutfarten nedåt.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
@@ -10408,19 +12152,19 @@ $$
 s_B(t) = 25\\, t - \\frac{g t^{2}}{2}
 $$
 
-**a) Mötesvillkor** — bollarna är på samma höjd när $s_A(t) = s_B(t)$:
+**a) Mötesvillkor:** bollarna är på samma höjd när $s_A(t) = s_B(t)$:
 
 $$
 50 - \\frac{g t^{2}}{2} = 25\\, t - \\frac{g t^{2}}{2}
 $$
 
-Termen $\\dfrac{g t^{2}}{2}$ försvinner från båda led — den är **samma** för båda bollarna, eftersom de har samma tyngdacceleration! Vi får ett enkelt linjärt samband:
+Termen $\\dfrac{g t^{2}}{2}$ försvinner från båda led. Den är **samma** för båda bollarna, eftersom de har samma tyngdacceleration! Vi får ett enkelt linjärt samband:
 
 $$
 50 = 25\\, t \\quad\\Leftrightarrow\\quad t = 2{,}0\\ \\mathrm{s}
 $$
 
-**b) Höjden vid mötet** — sätt in *t* = 2,0 s i (t.ex.) $s_A$:
+**b) Höjden vid mötet:** sätt in *t* = 2,0 s i (t.ex.) $s_A$:
 
 $$
 s_A(2{,}0) = 50 - \\frac{9{,}82 \\cdot 2{,}0^{2}}{2} = 50 - \\frac{9{,}82 \\cdot 4{,}0}{2} = 50 - 19{,}64 \\approx 30{,}4\\ \\mathrm{m}
@@ -10430,7 +12174,594 @@ $$
 
 **Svar:** a) De möts efter 2,0 s. b) På ca 30,4 m över marken.
 
-**Generell slutsats:** Den eleganta poängen här är att tyngdaccelerationen *påverkar båda bollarna lika mycket* och därför försvinner ur mötesvillkoret. Detta är grundläggande för Galileos klassiska experiment — *i fritt fall är alla föremål "viktlösa" relativt varandra*. Mötestiden ($t = h/v_0$) beror bara på utgångshöjden och bollens kasthastighet, inte på *g*. Tyngdkraften förändrar däremot **var** mötet sker — utan tyngdkraft skulle B möta A vid 50 m, men med tyngdkraft sker mötet 19,6 m lägre.`,
+**Generell slutsats:** Den eleganta poängen här är att tyngdaccelerationen *påverkar båda bollarna lika mycket* och därför försvinner ur mötesvillkoret. Detta är grundläggande för Galileos klassiska experiment: *i fritt fall är alla föremål "viktlösa" relativt varandra*. Mötestiden ($t = h/v_0$) beror bara på utgångshöjden och bollens kasthastighet, inte på *g*. Tyngdkraften förändrar däremot **var** mötet sker. Utan tyngdkraft skulle B möta A vid 50 m, men med tyngdkraft sker mötet 19,6 m lägre.`,
+        },
+        {
+            level: 1,
+            question: `I vilken av situationerna nedan går det **inte** att använda Torricellis ekvation för att beräkna farten?`,
+            choices: [
+                'En bil som bromsar in med konstant retardation',
+                'En sten som faller några meter, där luftmotståndet är försumbart',
+                'En fallskärmshoppare med utfälld skärm, där luftmotståndet beror på farten',
+                'En vagn som rullar nedför ett lutande plan utan energiförluster',
+            ],
+            correct: 2,
+            solution: `Torricellis ekvation, $v^{2} - v_0^{2} = 2as$, gäller bara när accelerationen $a$ är **konstant**.
+
+- Bilen bromsar med konstant retardation, alltså konstant $a$.
+- Stenen faller fritt med $a = -g$ när luftmotståndet är försumbart.
+- Vagnen på planet utan energiförluster har också konstant acceleration.
+- För fallskärmshopparen ändras luftmotståndet när farten ändras. Då ändras även den resulterande kraften och därmed accelerationen, så ekvationen gäller inte.
+
+**Svar:** Fallskärmshopparen med utfälld skärm.`,
+        },
+        {
+            level: 1,
+            question: `En skateboardåkare rullar nedför en backe. Farten ökar från 2,0 m/s till 6,0 m/s medan hon rullar 8,0 m. Beräkna hennes acceleration, om den är konstant. Ange svaret i m/s².`,
+            answer: { value: 2.0, unit: 'm/s²', tol: 0.02 },
+            solution: `Tiden är inte given, så Torricellis ekvation passar. Vi löser ut accelerationen:
+
+$$
+v^{2} - v_0^{2} = 2 a s \\quad\\Leftrightarrow\\quad a = \\frac{v^{2} - v_0^{2}}{2 s}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = 2{,}0\\ \\mathrm{m/s} \\\\
+v = 6{,}0\\ \\mathrm{m/s} \\\\
+s = 8{,}0\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+a = \\frac{6{,}0^{2} - 2{,}0^{2}}{2 \\cdot 8{,}0} = \\frac{36 - 4{,}0}{16} = \\frac{32}{16} = 2{,}0\\ \\mathrm{m/s^2}
+$$
+
+**Svar:** Accelerationen är 2,0 m/s².`,
+        },
+        {
+            level: 1,
+            question: `Ett flygplan sätter ned hjulen på landningsbanan och bromsar sedan med den konstanta retardationen 3,2 m/s² tills det står still. Bromssträckan är 900 m. Vilken fart hade planet när hjulen nådde banan? Ange svaret i m/s.`,
+            answer: { value: 76, unit: 'm/s', tol: 0.02 },
+            solution: `Planet stannar, så $v = 0$. Retardationen betyder att accelerationen är negativ: $a = -3{,}2\\ \\mathrm{m/s^2}$. Vi löser ut $v_0$ ur Torricellis ekvation:
+
+$$
+v^{2} - v_0^{2} = 2 a s \\quad\\Leftrightarrow\\quad v_0^{2} = v^{2} - 2 a s
+$$
+
+$$
+\\left[ \\begin{array}{l}
+v = 0 \\\\
+a = -3{,}2\\ \\mathrm{m/s^2} \\\\
+s = 900\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+v_0^{2} = 0 - 2 \\cdot (-3{,}2) \\cdot 900 = 5\\,760\\ \\mathrm{m^2/s^2}
+$$
+
+$$
+v_0 = \\sqrt{5\\,760} \\approx 75{,}9\\ \\mathrm{m/s} \\approx 76\\ \\mathrm{m/s}
+$$
+
+Det motsvarar ungefär 270 km/h, en rimlig landningsfart för ett stort passagerarplan.
+
+**Svar:** Planet hade farten 76 m/s.`,
+        },
+        {
+            level: 1,
+            question: `En bil med farten $v_0$ bromsar med den konstanta accelerationen $a$ tills den stannar. Eftersom bilen bromsar är $a < 0$. Vilket uttryck ger bromssträckan $s$?`,
+            choices: [
+                '$s = \\dfrac{v_0^{2}}{2a}$',
+                '$s = -\\dfrac{v_0^{2}}{2a}$',
+                '$s = \\dfrac{v_0}{2a}$',
+                '$s = \\dfrac{2a}{v_0^{2}}$',
+            ],
+            correct: 1,
+            solution: `Bilen stannar, så sluthastigheten är $v = 0$. Insatt i Torricellis ekvation:
+
+$$
+0 - v_0^{2} = 2 a s \\quad\\Leftrightarrow\\quad s = -\\frac{v_0^{2}}{2a}
+$$
+
+Minustecknet behövs: eftersom $a < 0$ blir kvoten $\\dfrac{v_0^{2}}{2a}$ negativ, och minustecknet gör bromssträckan positiv. Alternativet $\\dfrac{v_0}{2a}$ har fel enhet (sekunder, inte meter).
+
+**Svar:** $s = -\\dfrac{v_0^{2}}{2a}$`,
+        },
+        {
+            level: 2,
+            question: `Ett tåg i farten 30 m/s bromsar med den konstanta accelerationen $-1{,}5\\ \\mathrm{m/s^2}$ tills det stannar.<br>a) Hur lång är bromssträckan?<br>b) Vilken fart har tåget när det har bromsat halva bromssträckan?`,
+            answer: { value: 21, unit: 'm/s', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 300, unit: 'm', tol: 0.02 },
+                { del: 'b', value: 21, unit: 'm/s', tol: 0.03 },
+            ],
+            solution: `**a)** Tåget stannar, så $v = 0$.
+
+$$
+v^{2} - v_0^{2} = 2 a s \\quad\\Leftrightarrow\\quad s = \\frac{v^{2} - v_0^{2}}{2a}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = 30\\ \\mathrm{m/s} \\\\
+v = 0 \\\\
+a = -1{,}5\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$
+s = \\frac{0 - 30^{2}}{2 \\cdot (-1{,}5)} = \\frac{-900}{-3{,}0} = 300\\ \\mathrm{m}
+$$
+
+**Svar:** Bromssträckan är 300 m.
+
+**b)** Halva bromssträckan är 150 m. Nu söker vi $v$ efter $s = 150\\ \\mathrm{m}$:
+
+$$
+v^{2} = v_0^{2} + 2 a s = 30^{2} + 2 \\cdot (-1{,}5) \\cdot 150 = 900 - 450 = 450\\ \\mathrm{m^2/s^2}
+$$
+
+$$
+v = \\sqrt{450} \\approx 21{,}2\\ \\mathrm{m/s} \\approx 21\\ \\mathrm{m/s}
+$$
+
+Farten är alltså inte halverad (15 m/s) efter halva sträckan. Det är $v^{2}$ som minskar lika mycket för varje meter, inte $v$. Under första halvan av sträckan går tåget fortare, så det tar kortare tid än andra halvan.
+
+**Svar:** Farten är 21 m/s.`,
+        },
+        {
+            level: 2,
+            question: `En bil kör ut på en motorväg från en påfartsramp. Diagrammet visar bilens hastighet som funktion av tiden.
+
+${makeDiagram({
+    xMax: 6, xTicks: [0, 1, 2, 3, 4, 5, 6],
+    yMax: 14, yTicks: [0, 2, 4, 6, 8, 10, 12, 14],
+    paths: [{ points: [[0, 2], [6, 14]] }],
+})}
+
+a) Bestäm bilens acceleration.<br>b) Hur lång sträcka har bilen kört från $t = 0$ till dess att farten är 10 m/s? Använd Torricellis ekvation.`,
+            answer: { value: 24, unit: 'm', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 2.0, unit: 'm/s²', tol: 0.03 },
+                { del: 'b', value: 24, unit: 'm', tol: 0.03 },
+            ],
+            solution: `**a)** Grafen är en rät linje, alltså är accelerationen konstant och lika med linjens lutning. Vi läser av två punkter på linjen: $(0\\ \\mathrm{s};\\ 2{,}0\\ \\mathrm{m/s})$ och $(6{,}0\\ \\mathrm{s};\\ 14\\ \\mathrm{m/s})$.
+
+$$
+a = \\frac{\\Delta v}{\\Delta t} = \\frac{14 - 2{,}0}{6{,}0 - 0} = \\frac{12}{6{,}0} = 2{,}0\\ \\mathrm{m/s^2}
+$$
+
+**Svar:** Accelerationen är 2,0 m/s².
+
+**b)** Vid $t = 0$ är farten $v_0 = 2{,}0\\ \\mathrm{m/s}$. Vi söker sträckan fram till $v = 10\\ \\mathrm{m/s}$:
+
+$$
+v^{2} - v_0^{2} = 2 a s \\quad\\Leftrightarrow\\quad s = \\frac{v^{2} - v_0^{2}}{2a}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = 2{,}0\\ \\mathrm{m/s} \\\\
+v = 10\\ \\mathrm{m/s} \\\\
+a = 2{,}0\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$
+s = \\frac{10^{2} - 2{,}0^{2}}{2 \\cdot 2{,}0} = \\frac{100 - 4{,}0}{4{,}0} = \\frac{96}{4{,}0} = 24\\ \\mathrm{m}
+$$
+
+Kontroll med arean under grafen: farten 10 m/s nås vid $t = 4{,}0\\ \\mathrm{s}$, och arean av parallelltrapetset är $\\dfrac{2{,}0 + 10}{2} \\cdot 4{,}0 = 24\\ \\mathrm{m}$. Båda metoderna ger samma sträcka.
+
+**Svar:** Bilen har kört 24 m.`,
+        },
+        {
+            level: 2,
+            question: `Ett tåg startar från vila och accelererar med $0{,}80\\ \\mathrm{m/s^2}$ under de första 400 m. Sedan bromsar det med den konstanta retardationen $1{,}2\\ \\mathrm{m/s^2}$ tills det står still vid nästa station.<br>a) Vilken är tågets högsta fart?<br>b) Hur långt är det mellan stationerna?`,
+            answer: { value: 670, unit: 'm', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 25, unit: 'm/s', tol: 0.03 },
+                { del: 'b', value: 670, unit: 'm', tol: 0.03 },
+            ],
+            solution: `Rörelsen delas i två delar med var sin konstant acceleration. Torricellis ekvation används för varje del.
+
+**a)** Under accelerationen är $v_0 = 0$:
+
+$$
+v^{2} - v_0^{2} = 2 a s \\quad\\Leftrightarrow\\quad v^{2} = v_0^{2} + 2 a s
+$$
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = 0 \\\\
+a = 0{,}80\\ \\mathrm{m/s^2} \\\\
+s = 400\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+v^{2} = 0 + 2 \\cdot 0{,}80 \\cdot 400 = 640\\ \\mathrm{m^2/s^2}
+$$
+
+$$
+v = \\sqrt{640} \\approx 25{,}3\\ \\mathrm{m/s} \\approx 25\\ \\mathrm{m/s}
+$$
+
+**Svar:** Den högsta farten är 25 m/s.
+
+**b)** Under inbromsningen är begynnelsefarten den högsta farten, så $v_0^{2} = 640\\ \\mathrm{m^2/s^2}$ (vi räknar vidare med det oavrundade värdet). Tåget stannar, $v = 0$, och $a = -1{,}2\\ \\mathrm{m/s^2}$:
+
+$$
+s_\\text{broms} = \\frac{v^{2} - v_0^{2}}{2a} = \\frac{0 - 640}{2 \\cdot (-1{,}2)} = \\frac{-640}{-2{,}4} \\approx 266{,}7\\ \\mathrm{m}
+$$
+
+Hela sträckan:
+
+$$
+s_\\text{tot} = 400 + 266{,}7 = 666{,}7\\ \\mathrm{m} \\approx 670\\ \\mathrm{m}
+$$
+
+Rimligt: bromsningen är kraftigare än accelerationen, så bromssträckan blir kortare än accelerationssträckan.
+
+**Svar:** Det är 670 m mellan stationerna.`,
+        },
+        {
+            level: 2,
+            question: `Linnea står på en bro och kastar en sten rakt nedåt med farten 4,0 m/s. Stenen lämnar handen 18 m ovanför vattenytan. Bortse från luftmotståndet och räkna med $g = 9{,}82\\ \\mathrm{m/s^2}$.<br>a) Med vilken fart träffar stenen vattnet?<br>b) Hennes kompis kastar i stället en likadan sten rakt **uppåt** med farten 4,0 m/s från samma höjd. Med vilken fart träffar den stenen vattnet? Motivera.`,
+            answer: { value: 19, unit: 'm/s', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 19, unit: 'm/s', tol: 0.03 },
+                { del: 'b', value: 19, unit: 'm/s', tol: 0.03 },
+            ],
+            solution: `Vi väljer uppåt som positiv riktning och lägger origo där stenen lämnar handen. Vattenytan ligger 18 m nedanför, så förflyttningen är $s = -18\\ \\mathrm{m}$ och accelerationen $a = -g$.
+
+**a)** Stenen kastas nedåt, så $v_0 = -4{,}0\\ \\mathrm{m/s}$.
+
+$$
+v^{2} - v_0^{2} = 2 a s \\quad\\Leftrightarrow\\quad v^{2} = v_0^{2} + 2 a s
+$$
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = -4{,}0\\ \\mathrm{m/s} \\\\
+a = -9{,}82\\ \\mathrm{m/s^2} \\\\
+s = -18\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+v^{2} = (-4{,}0)^{2} + 2 \\cdot (-9{,}82) \\cdot (-18) = 16 + 353{,}52 = 369{,}52\\ \\mathrm{m^2/s^2}
+$$
+
+$$
+v = \\sqrt{369{,}52} \\approx 19{,}2\\ \\mathrm{m/s} \\approx 19\\ \\mathrm{m/s}
+$$
+
+**Svar:** Stenen träffar vattnet med farten 19 m/s.
+
+**b)** Nu är $v_0 = +4{,}0\\ \\mathrm{m/s}$, men i ekvationen står $v_0^{2}$, och $(+4{,}0)^{2} = (-4{,}0)^{2} = 16$. Förflyttningen från handen till vattnet är fortfarande $s = -18\\ \\mathrm{m}$, eftersom $s$ bara beror på start- och slutläget, inte på att stenen först stiger och sedan vänder. Därför blir $v^{2}$ exakt samma som i a).
+
+Det stämmer också med vad som händer: när stenen som kastades uppåt har vänt och kommit tillbaka till handens höjd har den farten 4,0 m/s nedåt, precis som den första stenen hade från början.
+
+**Svar:** Den träffar också vattnet med 19 m/s.`,
+        },
+        {
+            level: 3,
+            question: `En förare upptäcker ett hinder på vägen 40 m framför bilen. Det tar 0,80 s innan hon börjar bromsa (reaktionstiden), och under den tiden behåller bilen sin fart. Sedan bromsar bilen med den konstanta retardationen $7{,}0\\ \\mathrm{m/s^2}$.
+
+Vilken är den högsta fart bilen kan ha haft om den ska stanna före hindret? Ange svaret i km/h.`,
+            answer: { value: 67, unit: 'km/h', tol: 0.03 },
+            solution: `Låt bilens fart vara $v$ (i m/s). Stoppsträckan består av två delar.
+
+**Reaktionssträckan.** Farten är konstant under reaktionstiden $t_\\text{r}$:
+
+$$
+s_\\text{r} = v \\cdot t_\\text{r} = 0{,}80\\, v
+$$
+
+**Bromssträckan.** Bilen bromsar från $v$ till 0 med $a = -7{,}0\\ \\mathrm{m/s^2}$. Ur Torricellis ekvation:
+
+$$
+s_\\text{b} = \\frac{0 - v^{2}}{2a} = \\frac{-v^{2}}{2 \\cdot (-7{,}0)} = \\frac{v^{2}}{14}
+$$
+
+**Villkoret.** Högsta tillåtna fart ger en stoppsträcka på precis 40 m:
+
+$$
+0{,}80\\, v + \\frac{v^{2}}{14} = 40
+$$
+
+Multiplicera båda led med 14:
+
+$$
+11{,}2\\, v + v^{2} = 560
+$$
+
+$$
+v^{2} + 11{,}2\\, v - 560 = 0
+$$
+
+Med *pq*-formeln:
+
+$$
+v = -5{,}6 \\pm \\sqrt{5{,}6^{2} + 560} = -5{,}6 \\pm \\sqrt{591{,}36}
+$$
+
+Bara den positiva roten är en fart:
+
+$$
+v = -5{,}6 + \\sqrt{591{,}36} \\approx 18{,}72\\ \\mathrm{m/s}
+$$
+
+I km/h:
+
+$$
+18{,}72 \\cdot 3{,}6 \\approx 67{,}4\\ \\mathrm{km/h} \\approx 67\\ \\mathrm{km/h}
+$$
+
+**Kontroll:** reaktionssträckan blir $0{,}80 \\cdot 18{,}72 \\approx 15{,}0\\ \\mathrm{m}$ och bromssträckan $\\dfrac{18{,}72^{2}}{14} \\approx 25{,}0\\ \\mathrm{m}$, tillsammans 40 m. Det är rimligt att över en tredjedel av sträckan går åt innan föraren ens börjat bromsa.
+
+**Svar:** Bilen får ha haft högst 67 km/h.`,
+        },
+        {
+            level: 3,
+            question: `Härled Torricellis ekvation $v^{2} - v_0^{2} = 2as$ ur sambanden $v = v_0 + a \\cdot t$ och $s = v_0 \\cdot t + \\dfrac{1}{2} a \\cdot t^{2}$ genom att eliminera tiden $t$. Förklara sedan med hjälp av härledningen varför Torricellis ekvation inte gäller när accelerationen ändras under rörelsen.`,
+            solution: `**Steg 1: lös ut tiden.** Ur hastighetssambandet:
+
+$$
+v = v_0 + a t \\quad\\Leftrightarrow\\quad t = \\frac{v - v_0}{a}
+$$
+
+**Steg 2: sätt in tiden i sträckformeln.** $t = \\dfrac{v - v_0}{a}$ insatt i $s = v_0 t + \\dfrac{1}{2} a t^{2}$ ger
+
+$$
+s = v_0 \\cdot \\frac{v - v_0}{a} + \\frac{1}{2} a \\cdot \\frac{(v - v_0)^{2}}{a^{2}} = \\frac{v_0 (v - v_0)}{a} + \\frac{(v - v_0)^{2}}{2a}
+$$
+
+**Steg 3: gemensam nämnare $2a$.**
+
+$$
+s = \\frac{2 v_0 (v - v_0) + (v - v_0)^{2}}{2a}
+$$
+
+**Steg 4: bryt ut $(v - v_0)$ i täljaren.**
+
+$$
+s = \\frac{(v - v_0)\\,(2 v_0 + v - v_0)}{2a} = \\frac{(v - v_0)(v + v_0)}{2a}
+$$
+
+**Steg 5: konjugatregeln**, $(v - v_0)(v + v_0) = v^{2} - v_0^{2}$:
+
+$$
+s = \\frac{v^{2} - v_0^{2}}{2a}
+$$
+
+Multiplicera båda led med $2a$:
+
+$$
+2as = v^{2} - v_0^{2}
+$$
+
+vilket är Torricellis ekvation.
+
+**Varför den kräver konstant acceleration.** Båda utgångssambanden förutsätter att $a$ är ett och samma tal under hela rörelsen: $v = v_0 + at$ säger att farten ändras lika mycket varje sekund, och sträckformeln bygger på detsamma. I steg 1 delar vi dessutom med just detta $a$. Ändras accelerationen under rörelsen finns det inget enskilt $a$ att sätta in, och då gäller varken utgångssambanden eller ekvationen som härleddes ur dem. (Uppdelningen i steg 1 kräver också $a \\neq 0$. Vid $a = 0$ ger ekvationen direkt $v = v_0$, vilket stämmer.)`,
+        },
+        {
+            level: 3,
+            question: `En vagn släpps från vila på ett lutande spår. Med en fotogrind mäts vagnens fart $v$ på olika avstånd $s$ från startpunkten:
+
+| $s$ (m) | 0,20 | 0,40 | 0,60 | 0,80 | 1,00 |
+|---|---|---|---|---|---|
+| $v$ (m/s) | 0,43 | 0,60 | 0,73 | 0,85 | 0,95 |
+
+a) Visa med ett lämpligt diagram att mätningarna stämmer med en konstant acceleration.<br>b) Bestäm vagnens acceleration ur diagrammet.`,
+            answer: { value: 0.45, unit: 'm/s²', tol: 0.04 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 0.45, unit: 'm/s²', tol: 0.04 },
+            ],
+            solution: `**a)** Vagnen startar från vila, $v_0 = 0$. Om accelerationen är konstant ger Torricellis ekvation
+
+$$
+v^{2} = 2a \\cdot s
+$$
+
+Då är $v^{2}$ proportionell mot $s$. Ritar vi $v^{2}$ mot $s$ ska punkterna ligga på en rät linje genom origo, med lutningen $2a$. (Ritar vi i stället $v$ mot $s$ blir det en krökt kurva, som är svår att bedöma.)
+
+Vi räknar ut $v^{2}$ för varje mätning:
+
+| $s$ (m) | 0,20 | 0,40 | 0,60 | 0,80 | 1,00 |
+|---|---|---|---|---|---|
+| $v^{2}$ (m²/s²) | 0,185 | 0,360 | 0,533 | 0,723 | 0,903 |
+
+${makeDiagram({
+    xMax: 1.2, xTicks: [0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2],
+    yMax: 1.0, yTicks: [0, 0.2, 0.4, 0.6, 0.8, 1.0],
+    xLabel: '<tspan font-style="italic">s</tspan> (m)',
+    yLabel: '<tspan font-style="italic">v</tspan><tspan baseline-shift="super" font-size="10">2</tspan> (m<tspan baseline-shift="super" font-size="10">2</tspan>/s<tspan baseline-shift="super" font-size="10">2</tspan>)',
+    paths: [{ points: [[0, 0], [1.1, 0.99]] }],
+}).replace('</svg>', [[0.2, 0.1849], [0.4, 0.36], [0.6, 0.5329], [0.8, 0.7225], [1.0, 0.9025]].map(([x, y]) => '<circle cx="' + (60 + x / 1.2 * 400).toFixed(1) + '" cy="' + (290 - y / 1.0 * 260).toFixed(1) + '" r="4.5" fill="#0f1620"/>').join('') + '</svg>')}
+
+Punkterna ligger nära en rät linje genom origo. Alltså är $v^{2}$ proportionell mot $s$, vilket betyder att accelerationen är konstant.
+
+**Svar:** Diagrammet med $v^{2}$ mot $s$ ger en rät linje genom origo, vilket stämmer med en konstant acceleration.
+
+**b)** Linjens lutning är $k = 2a$. Vi läser av punkten $(1{,}00\\ \\mathrm{m};\\ 0{,}90\\ \\mathrm{m^2/s^2})$ på linjen:
+
+$$
+k = \\frac{\\Delta (v^{2})}{\\Delta s} = \\frac{0{,}90 - 0}{1{,}00 - 0} = 0{,}90\\ \\mathrm{m/s^2}
+$$
+
+(Enheten blir $\\dfrac{\\mathrm{m^2/s^2}}{\\mathrm{m}} = \\mathrm{m/s^2}$, precis som en acceleration ska ha.)
+
+$$
+2a = k \\quad\\Leftrightarrow\\quad a = \\frac{k}{2} = \\frac{0{,}90}{2} = 0{,}45\\ \\mathrm{m/s^2}
+$$
+
+Att använda linjen i stället för en enda mätpunkt gör att slumpfelen i de enskilda mätningarna jämnas ut. Värdet är rimligt för en vagn på ett svagt lutande spår, mycket mindre än $g$.
+
+**Svar:** Accelerationen är 0,45 m/s².`,
+        },
+        {
+            level: 3,
+            question: `En boll kastas rakt uppåt. Bortse från luftmotståndet. Hur högt har bollen kommit när farten har minskat till hälften av utgångsfarten? Ange höjden som en andel av bollens maximala höjd, i procent.`,
+            answer: { value: 75, unit: '%', tol: 0.02 },
+            solution: `Varken utgångsfarten eller höjden är given, så vi löser uppgiften generellt. Vi väljer uppåt som positiv riktning, och kallar utgångsfarten $v_0$. Då är $a = -g$.
+
+**Maximala höjden $H$.** I högsta punkten är $v = 0$:
+
+$$
+0 - v_0^{2} = 2 \\cdot (-g) \\cdot H \\quad\\Leftrightarrow\\quad H = \\frac{v_0^{2}}{2g}
+$$
+
+**Höjden $h$ där farten är halverad**, $v = \\dfrac{v_0}{2}$:
+
+$$
+\\left(\\frac{v_0}{2}\\right)^{2} - v_0^{2} = 2 \\cdot (-g) \\cdot h
+$$
+
+$$
+\\frac{v_0^{2}}{4} - v_0^{2} = -2gh \\quad\\Leftrightarrow\\quad -\\frac{3 v_0^{2}}{4} = -2gh \\quad\\Leftrightarrow\\quad h = \\frac{3 v_0^{2}}{8g}
+$$
+
+**Andelen:**
+
+$$
+\\frac{h}{H} = \\frac{\\dfrac{3 v_0^{2}}{8g}}{\\dfrac{v_0^{2}}{2g}} = \\frac{3 v_0^{2}}{8g} \\cdot \\frac{2g}{v_0^{2}} = \\frac{6}{8} = 0{,}75
+$$
+
+Både $v_0$ och $g$ tar ut varandra, så andelen är densamma för varje kast, och den skulle vara densamma på månen.
+
+Resultatet är rimligt. Torricellis ekvation säger att $v^{2}$ minskar lika mycket för varje meter bollen stiger. När farten halveras är $v^{2}$ en fjärdedel av $v_0^{2}$, så tre fjärdedelar av hela minskningen är redan gjord, och då har bollen också stigit tre fjärdedelar av hela höjden. Bollen har samma fart på samma höjd på väg ned, så svaret gäller båda gångerna bollen passerar den höjden.
+
+**Svar:** Bollen har nått 75 % av den maximala höjden.`,
+        },
+        {
+            level: 3,
+            question: `Ett tåg bromsar med konstant retardation på väg in mot en station. Det passerar två skyltar som står 100 m från varandra. Från den första skylten till den andra tar det 6,25 s, och vid den andra skylten är farten 12 m/s.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 156" width="664" height="199" style="max-width:100%;height:auto;display:block;margin:16px auto;font-family:Poppins,sans-serif">
+<g fill="#8a6a4a">${Array.from({ length: 20 }, (_, i) => '<rect x="' + (24 + i * 24) + '" y="101" width="12" height="5" rx="1"/>').join('')}</g>
+<line x1="16" y1="100" x2="504" y2="100" stroke="#0f1620" stroke-width="2.5"/>
+<rect x="30" y="66" width="78" height="27" rx="5" fill="#2f6fa3"/>
+<rect x="38" y="72" width="14" height="10" rx="2" fill="#f3eee4"/>
+<rect x="58" y="72" width="14" height="10" rx="2" fill="#f3eee4"/>
+<rect x="78" y="72" width="14" height="10" rx="2" fill="#f3eee4"/>
+<path d="M108 66 L108 93 L118 93 Q118 74 108 66 Z" fill="#2f6fa3"/>
+<circle cx="46" cy="95" r="5" fill="#0f1620"/>
+<circle cx="96" cy="95" r="5" fill="#0f1620"/>
+<line x1="140" y1="100" x2="140" y2="50" stroke="#0f1620" stroke-width="2.5"/>
+<line x1="420" y1="100" x2="420" y2="50" stroke="#0f1620" stroke-width="2.5"/>
+<rect x="122" y="32" width="36" height="20" rx="3" fill="#f3eee4" stroke="#0f1620" stroke-width="1.5"/>
+<rect x="402" y="32" width="36" height="20" rx="3" fill="#f3eee4" stroke="#0f1620" stroke-width="1.5"/>
+<text x="140" y="47" text-anchor="middle" font-size="13" fill="#0f1620">1</text>
+<text x="420" y="47" text-anchor="middle" font-size="13" fill="#0f1620">2</text>
+<text x="140" y="22" text-anchor="middle" font-size="14" fill="#0f1620"><tspan font-style="italic">t</tspan> = 0</text>
+<text x="420" y="22" text-anchor="middle" font-size="14" fill="#0f1620"><tspan font-style="italic">t</tspan> = 6,25 s</text>
+<line x1="140" y1="110" x2="140" y2="134" stroke="#0f1620" stroke-width="1" stroke-dasharray="3 3"/>
+<line x1="420" y1="110" x2="420" y2="134" stroke="#0f1620" stroke-width="1" stroke-dasharray="3 3"/>
+<line x1="149" y1="128" x2="411" y2="128" stroke="#0f1620" stroke-width="1.5" stroke-linecap="butt"/>
+<polygon points="140,128 149,124 149,132" fill="#0f1620"/>
+<polygon points="420,128 411,124 411,132" fill="#0f1620"/>
+<text x="280" y="148" text-anchor="middle" font-size="14" fill="#0f1620">100 m</text>
+</svg>
+
+Hur långt efter den andra skylten stannar tåget? Ange svaret i meter.`,
+            answer: { value: 56, unit: 'm', tol: 0.03 },
+            solution: `Varken farten vid skylt 1 eller retardationen är given. Båda går att bestämma ur avståndet, tiden och farten vid skylt 2, och sedan kan bromssträckan efter skylt 2 beräknas. Vi kallar farten vid skylt 1 för $v_1$ och farten vid skylt 2 för $v_2$.
+
+$$
+\\left[ \\begin{array}{l}
+d = 100\\ \\mathrm{m} \\\\
+t = 6{,}25\\ \\mathrm{s} \\\\
+v_2 = 12\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+**Steg 1: farten vid skylt 1.** Accelerationen är konstant, så medelhastigheten mellan skyltarna ligger mitt emellan farterna vid skyltarna. Medelhastigheten är också sträckan delad med tiden:
+
+$$
+v_m = \\frac{d}{t} = \\frac{100}{6{,}25} = 16\\ \\mathrm{m/s}
+$$
+
+$$
+v_m = \\frac{v_1 + v_2}{2} \\quad\\Leftrightarrow\\quad v_1 = 2 v_m - v_2 = 2 \\cdot 16 - 12 = 20\\ \\mathrm{m/s}
+$$
+
+**Steg 2: accelerationen mellan skyltarna.** Nu är båda farterna kända, så Torricellis ekvation ger accelerationen utan att tiden behövs:
+
+$$
+v_2^{2} - v_1^{2} = 2 a d \\quad\\Leftrightarrow\\quad a = \\frac{v_2^{2} - v_1^{2}}{2d}
+$$
+
+$$
+a = \\frac{12^{2} - 20^{2}}{2 \\cdot 100} = \\frac{144 - 400}{200} = \\frac{-256}{200} = -1{,}28\\ \\mathrm{m/s^2}
+$$
+
+(Kontroll med $v = v_0 + a \\cdot t$: $a = \\dfrac{12 - 20}{6{,}25} = -1{,}28\\ \\mathrm{m/s^2}$.)
+
+**Steg 3: sträckan $x$ från skylt 2 till stopp.** Begynnelsefarten är $v_2$ och sluthastigheten 0:
+
+$$
+0 - v_2^{2} = 2 a x \\quad\\Leftrightarrow\\quad x = \\frac{-v_2^{2}}{2a}
+$$
+
+$$
+x = \\frac{-144}{2 \\cdot (-1{,}28)} = \\frac{-144}{-2{,}56} = 56{,}25\\ \\mathrm{m} \\approx 56\\ \\mathrm{m}
+$$
+
+**Rimlighet.** Torricellis ekvation säger att $v^{2}$ minskar lika mycket för varje meter. Mellan skyltarna minskar $v^{2}$ med $400 - 144 = 256\\ \\mathrm{m^2/s^2}$ på 100 m. Det som återstår, $144\\ \\mathrm{m^2/s^2}$, är lite mer än halva den minskningen, och mycket riktigt är 56 m lite mer än halva 100 m.
+
+**Svar:** Tåget stannar 56 m efter den andra skylten.`,
+        },
+        {
+            level: 3,
+            question: `Regndroppar bildas ofta i moln ungefär 1,5 km över marken. Räkna med $g = 9{,}82\\ \\mathrm{m/s^2}$.<br>a) Beräkna med Torricellis ekvation vilken fart en droppe som faller från vila skulle ha vid marken om luftmotståndet saknades.<br>b) Stora regndroppar träffar i verkligheten marken med cirka 9 m/s. Förklara varför Torricellis ekvation ger ett så felaktigt svar.<br>c) Hur lång fallsträcka från vila räcker, enligt Torricellis ekvation, för att en droppe ska nå 9,0 m/s? Vad säger resultatet om hur länge modellen utan luftmotstånd fungerar för en regndroppe?`,
+            answer: { value: 4.1, unit: 'm', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 170, unit: 'm/s', tol: 0.03 },
+                { del: 'b' },
+                { del: 'c', value: 4.1, unit: 'm', tol: 0.03 },
+            ],
+            solution: `Vi räknar med farternas och sträckornas belopp, med nedåt som positiv riktning, så att $a = g$.
+
+**a)** Droppen faller från vila, $v_0 = 0$:
+
+$$
+v^{2} - v_0^{2} = 2 a s \\quad\\Leftrightarrow\\quad v = \\sqrt{2 g s}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = 0 \\\\
+g = 9{,}82\\ \\mathrm{m/s^2} \\\\
+s = 1{,}5\\ \\mathrm{km} = 1\\,500\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+v = \\sqrt{2 \\cdot 9{,}82 \\cdot 1\\,500} = \\sqrt{29\\,460} \\approx 171{,}6\\ \\mathrm{m/s} \\approx 170\\ \\mathrm{m/s}
+$$
+
+Det är över 600 km/h, snabbare än ett passagerarplan vid start.
+
+**Svar:** Droppen skulle träffa marken med 170 m/s.
+
+**b)** Torricellis ekvation gäller bara vid konstant acceleration. På en fallande droppe verkar både tyngdkraften och luftmotståndet, och luftmotståndet växer när farten ökar. Den resulterande kraften, och därmed accelerationen, blir då mindre och mindre. När luftmotståndet blivit lika stort som tyngdkraften är den resulterande kraften noll, och droppen faller med konstant fart (cirka 9 m/s). Under nästan hela fallet är accelerationen alltså inte $g$ och inte konstant, så ekvationen kan inte användas för hela fallsträckan.
+
+**Svar:** Luftmotståndet växer med farten, så accelerationen är inte konstant. Droppen når en gränshastighet där luftmotståndet är lika stort som tyngdkraften.
+
+**c)** Nu är $v = 9{,}0\\ \\mathrm{m/s}$ och vi söker $s$:
+
+$$
+s = \\frac{v^{2} - v_0^{2}}{2g} = \\frac{9{,}0^{2} - 0}{2 \\cdot 9{,}82} = \\frac{81}{19{,}64} \\approx 4{,}12\\ \\mathrm{m} \\approx 4{,}1\\ \\mathrm{m}
+$$
+
+Redan efter cirka 4 m skulle droppen alltså ha nått sin verkliga sluthastighet om luftmotståndet saknades. Luftmotståndet börjar dock märkas långt innan farten är 9 m/s, så i verkligheten tar det längre sträcka än 4,1 m att närma sig gränshastigheten. Modellen utan luftmotstånd fungerar därför bara under de allra första metrarna av fallet, medan farten är liten jämfört med 9 m/s. Under resten av den 1,5 km långa vägen faller droppen med i stort sett konstant fart.
+
+**Svar:** Fallsträckan är 4,1 m. Modellen utan luftmotstånd fungerar bara under de första metrarna av fallet.`,
         },
     ],
 
@@ -10479,7 +12810,7 @@ $$
                 `Att alla föremål med massa attraherar varandra med en gravitationskraft.`,
             ],
             correct: 1,
-            solution: `Newtons första lag säger att ett föremål inte ändrar sin rörelse om kraftresultanten är noll. Det betyder att ett föremål i vila förblir i vila, och ett föremål i likformig rörelse förblir i likformig rörelse (samma fart, samma riktning) — om inga (netto-)krafter verkar.
+            solution: `Newtons första lag säger att ett föremål inte ändrar sin rörelse om kraftresultanten är noll. Det betyder att ett föremål i vila förblir i vila, och ett föremål i likformig rörelse förblir i likformig rörelse (samma fart, samma riktning), om inga (netto-)krafter verkar.
 
 - Alternativ A beskriver Newtons **andra** lag ($F = ma$).
 - Alternativ C beskriver Newtons **tredje** lag (verkan och återverkan).
@@ -10505,7 +12836,7 @@ $$
 F_R = F_\\text{lyft} - F_G = 8\\,400 - 7\\,900 = 500\\ \\mathrm{N}
 $$
 
-**Svar:** Resultanten är 500 N riktad **uppåt** — ballongen accelererar alltså uppåt (den lättar).`,
+**Svar:** Resultanten är 500 N riktad **uppåt**. Ballongen accelererar alltså uppåt (den lättar).`,
         },
         {
             level: 1,
@@ -10515,16 +12846,16 @@ $$
                 `En framåtriktad kraft slungar passagerarna framåt när bussen bromsar.`,
                 `Bromskraftens motkraft enligt Newtons tredje lag verkar på passagerarna.`,
                 `Tyngdkraften på passagerarna byter riktning när bussen bromsar.`,
-                `Passagerarna fortsätter i sin likformiga rörelse framåt när bussen saktar in — det krävs en kraft för att bromsa in även dem.`,
+                `Passagerarna fortsätter i sin likformiga rörelse framåt när bussen saktar in. Det krävs en kraft för att bromsa in även dem.`,
             ],
             correct: 3,
-            solution: `Det finns ingen kraft som "kastar" passagerarna framåt — tvärtom är det **frånvaron** av en tillräcklig bromsande kraft som är förklaringen. Enligt Newtons första lag fortsätter passagerarna i sin likformiga rörelse (samma fart, samma riktning) tills en kraft ändrar den.
+            solution: `Det finns ingen kraft som "kastar" passagerarna framåt. Tvärtom är det **frånvaron** av en tillräcklig bromsande kraft som är förklaringen. Enligt Newtons första lag fortsätter passagerarna i sin likformiga rörelse (samma fart, samma riktning) tills en kraft ändrar den.
 
 När bussen bromsar verkar bromskraften på **bussen**, inte direkt på passagerarna. Passagerarna fortsätter därför framåt med sin gamla fart tills säkerhetsbältet eller sätet framför utövar den kraft som bromsar in dem.
 
-- Alternativ A beskriver en kraft som inte existerar — klassisk missuppfattning.
+- Alternativ A beskriver en kraft som inte existerar (en klassisk missuppfattning).
 - Alternativ B blandar ihop Newtons tredje lag: motkraften till bromskraften verkar på vägbanan, inte på passagerarna.
-- Alternativ C är fel — tyngdkraften pekar alltid mot jordens centrum.
+- Alternativ C är fel: tyngdkraften pekar alltid mot jordens centrum.
 
 **Svar:** Alternativ D.`,
         },
@@ -10543,7 +12874,7 @@ ${makeForceDiagram({
     ],
 })}`,
             answer: { value: 20, unit: 'N', tol: 0.02 },
-            solution: `Vinkelräta krafter bildar två kateter i en rätvinklig triangel — resultanten är hypotenusan. Pythagoras sats:
+            solution: `Vinkelräta krafter bildar två kateter i en rätvinklig triangel, och resultanten är hypotenusan. Pythagoras sats:
 
 $$
 F_R = \\sqrt{F_1^{2} + F_2^{2}} = \\sqrt{12^{2} + 16^{2}} = \\sqrt{144 + 256} = \\sqrt{400} = 20\\ \\mathrm{N}
@@ -10611,7 +12942,7 @@ ${makeForceDiagram({
 
 **Svar:** Resultanten är 1,6 kN riktad rakt framåt i färdriktningen.
 
-**Generell slutsats:** Vid symmetrisk dragning ($\\pm\\alpha$ kring färdriktningen) är resultanten alltid $2F\\cos\\alpha$ rakt framåt — sidokomposanterna tar ut varandra. Ju större vinkel, desto mer kraft "slösas" i sidled.`,
+**Generell slutsats:** Vid symmetrisk dragning ($\\pm\\alpha$ kring färdriktningen) är resultanten alltid $2F\\cos\\alpha$ rakt framåt, eftersom sidokomposanterna tar ut varandra. Ju större vinkel, desto mer kraft "slösas" i sidled.`,
         },
         {
             level: 2,
@@ -10703,6 +13034,476 @@ $$
 **Svar:** Repet drar i bilen med 1,7 kN.
 
 **Generell slutsats:** Repet fungerar som en **kraftväxel**: en måttlig kraft på 300 N växlas upp nästan 6 gånger. Ju mindre vinkeln är, desto större blir spännkraften ($F_S \\to \\infty$ när $\\alpha \\to 0$). Det är därför tricket fungerar så bra på ett nästan rakt rep, och därför man aldrig kan spänna en tvättlina helt rak när något hänger på den.`,
+        },
+        {
+            level: 1,
+            question: `En hiss åker uppåt med **konstant hastighet** mellan två våningar. Vad gäller för kraftresultanten på hissen under den delen av färden?`,
+            choices: [
+                `Kraftresultanten är riktad uppåt, annars skulle hissen inte röra sig uppåt.`,
+                `Kraftresultanten är lika stor som tyngdkraften på hissen.`,
+                `Kraftresultanten är noll.`,
+                `Kraftresultanten är riktad nedåt, eftersom tyngdkraften verkar nedåt.`,
+            ],
+            correct: 2,
+            solution: `Hastigheten är konstant: hissen har samma fart och samma riktning hela tiden. Enligt Newtons första lag är det just det som händer när kraftresultanten är noll. Föremålet är i vila **eller** rör sig med konstant hastighet.
+
+Kraften i hisslinan uppåt är alltså precis lika stor som tyngdkraften nedåt, och de tar ut varandra.
+
+- Att kraftresultanten skulle vara riktad uppåt är en vanlig missuppfattning: det behövs ingen resulterande kraft för att hålla igång en rörelse, bara för att **ändra** den.
+- En kraftresultant lika stor som tyngdkraften, eller riktad nedåt, skulle ändra hissens hastighet. Det stämmer inte med att hastigheten är konstant.
+
+**Svar:** Kraftresultanten är noll.`,
+        },
+        {
+            level: 1,
+            question: `En elev drar en låda längs golvet med en dynamometer. Lådan glider med **konstant hastighet**, och dynamometern håller sig vågrät. Figuren visar hur långt dynamometerns innerstav har dragits ut ur röret. Skalan är graderad i newton.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 68 560 108" width="664" height="128" role="img" aria-label="En låda på ett golv dras åt höger med en dynamometer. Dynamometerns innerstav med skala i newton har dragits ut ur röret." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><defs><linearGradient id="ovn-dyn-glas" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dfe6ec"/><stop offset="0.4" stop-color="#f4f6f8"/><stop offset="1" stop-color="#c9d2da"/></linearGradient><linearGradient id="ovn-dyn-tra" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e2c493"/><stop offset="1" stop-color="#c9a46a"/></linearGradient></defs><line x1="10" y1="160" x2="550" y2="160" stroke="#0f1620" stroke-width="1.8"/><line x1="16" y1="160" x2="8" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="30" y1="160" x2="22" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="44" y1="160" x2="36" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="58" y1="160" x2="50" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="72" y1="160" x2="64" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="86" y1="160" x2="78" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="100" y1="160" x2="92" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="114" y1="160" x2="106" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="128" y1="160" x2="120" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="142" y1="160" x2="134" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="156" y1="160" x2="148" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="170" y1="160" x2="162" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="184" y1="160" x2="176" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="198" y1="160" x2="190" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="212" y1="160" x2="204" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="226" y1="160" x2="218" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="240" y1="160" x2="232" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="254" y1="160" x2="246" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="268" y1="160" x2="260" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="282" y1="160" x2="274" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="296" y1="160" x2="288" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="310" y1="160" x2="302" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="324" y1="160" x2="316" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="338" y1="160" x2="330" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="352" y1="160" x2="344" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="366" y1="160" x2="358" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="380" y1="160" x2="372" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="394" y1="160" x2="386" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="408" y1="160" x2="400" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="422" y1="160" x2="414" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="436" y1="160" x2="428" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="450" y1="160" x2="442" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="464" y1="160" x2="456" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="478" y1="160" x2="470" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="492" y1="160" x2="484" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="506" y1="160" x2="498" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="520" y1="160" x2="512" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="534" y1="160" x2="526" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="548" y1="160" x2="540" y2="170" stroke="#0f1620" stroke-width="1" opacity="0.55"/><rect x="30" y="80" width="120" height="80" rx="2" fill="url(#ovn-dyn-tra)" stroke="#8a6f4e" stroke-width="1.5"/><path d="M 34 100 C 70 96, 110 104, 146 100" fill="none" stroke="#a8844e" stroke-width="0.8" opacity="0.6"/><path d="M 34 120 C 70 116, 110 124, 146 120" fill="none" stroke="#a8844e" stroke-width="0.8" opacity="0.6"/><path d="M 34 140 C 70 136, 110 144, 146 140" fill="none" stroke="#a8844e" stroke-width="0.8" opacity="0.6"/><circle cx="155" cy="120" r="5" fill="none" stroke="#6f767f" stroke-width="2.2"/><path d="M 180 120 L 157 120 C 151 120 150 127 155 128" fill="none" stroke="#6f767f" stroke-width="2.4" stroke-linecap="round"/><rect x="178" y="106" width="150" height="28" rx="2" fill="#f6f4ee" stroke="#6f767f" stroke-width="1.2"/><line x1="185" y1="106.6" x2="185" y2="116" stroke="#1f2530" stroke-width="1.2"/><text x="185" y="129" text-anchor="middle" font-size="11" fill="#1f2530">0</text><line x1="195" y1="106.6" x2="195" y2="112" stroke="#1f2530" stroke-width="0.9"/><line x1="205" y1="106.6" x2="205" y2="116" stroke="#1f2530" stroke-width="1.2"/><text x="205" y="129" text-anchor="middle" font-size="11" fill="#1f2530">2</text><line x1="215" y1="106.6" x2="215" y2="112" stroke="#1f2530" stroke-width="0.9"/><line x1="225" y1="106.6" x2="225" y2="116" stroke="#1f2530" stroke-width="1.2"/><text x="225" y="129" text-anchor="middle" font-size="11" fill="#1f2530">4</text><line x1="235" y1="106.6" x2="235" y2="112" stroke="#1f2530" stroke-width="0.9"/><line x1="245" y1="106.6" x2="245" y2="116" stroke="#1f2530" stroke-width="1.2"/><text x="245" y="129" text-anchor="middle" font-size="11" fill="#1f2530">6</text><line x1="255" y1="106.6" x2="255" y2="112" stroke="#1f2530" stroke-width="0.9"/><line x1="265" y1="106.6" x2="265" y2="116" stroke="#1f2530" stroke-width="1.2"/><text x="265" y="129" text-anchor="middle" font-size="11" fill="#1f2530">8</text><line x1="275" y1="106.6" x2="275" y2="112" stroke="#1f2530" stroke-width="0.9"/><line x1="285" y1="106.6" x2="285" y2="116" stroke="#1f2530" stroke-width="1.2"/><text x="285" y="129" text-anchor="middle" font-size="11" fill="#1f2530">10</text><line x1="295" y1="106.6" x2="295" y2="112" stroke="#1f2530" stroke-width="0.9"/><line x1="305" y1="106.6" x2="305" y2="116" stroke="#1f2530" stroke-width="1.2"/><text x="305" y="129" text-anchor="middle" font-size="11" fill="#1f2530">12</text><line x1="315" y1="106.6" x2="315" y2="112" stroke="#1f2530" stroke-width="0.9"/><line x1="325" y1="106.6" x2="325" y2="116" stroke="#1f2530" stroke-width="1.2"/><rect x="316.5" y="98" width="155.5" height="44" rx="6" fill="url(#ovn-dyn-glas)" stroke="#8f99a3" stroke-width="1.3"/><line x1="320" y1="120" x2="468" y2="120" stroke="#8f99a3" stroke-width="1" stroke-dasharray="3 3"/><text x="394" y="115" text-anchor="middle" font-size="13" fill="#1f2530">N</text><rect x="472" y="110" width="12" height="20" rx="2" fill="#a9b0b8" stroke="#6f767f" stroke-width="1"/><circle cx="493" cy="120" r="8" fill="none" stroke="#6f767f" stroke-width="2.4"/><path d="M 501 120 C 515 118, 530 122, 548 120" fill="none" stroke="#8a6f4e" stroke-width="2.6" stroke-linecap="round"/></svg>
+
+Läs av dynamometern och bestäm hur stora de bromsande krafterna på lådan (friktion och luftmotstånd) är tillsammans. Ange svaret i N.`,
+            answer: { value: 13, unit: 'N', tol: 0.02 },
+            solution: `**Avläsning:** Dynamometern visar kraften där innerstaven går in i röret. Där står skalstrecket mellan 12 och 14, alltså 13 N. Dynamometern drar lådan framåt med kraften 13 N.
+
+**Newtons första lag:** Lådan rör sig med konstant hastighet. Då är kraftresultanten noll, så de bromsande krafterna bakåt måste vara lika stora som dragkraften framåt (i lodrät led tar tyngdkraften och normalkraften ut varandra).
+
+$$
+F_R = F_\\text{drag} - F_\\text{broms} = 0 \\quad\\Leftrightarrow\\quad F_\\text{broms} = F_\\text{drag} = 13\\ \\mathrm{N}
+$$
+
+**Svar:** De bromsande krafterna är tillsammans 13 N, riktade bakåt.`,
+        },
+        {
+            level: 2,
+            question: `En liten båt ligger i en älv. Motorn driver båten med kraften $F_1 = 240\\ \\mathrm{N}$ rakt österut, och strömmen i älven trycker på båten med kraften $F_2 = 70\\ \\mathrm{N}$ rakt norrut, enligt figuren (sedd uppifrån, med norr uppåt).
+
+${makeForceDiagram({
+    box: true, boxSize: 26,
+    vectors: [
+        { label: 'F_1', magnitude: '240 N', angle: 0, length: 192 },
+        { label: 'F_2', magnitude: '70 N', angle: 90, length: 56 },
+    ],
+})}
+
+Bestäm<br>a) storleken av den resulterande kraften på båten<br>b) vinkeln mellan resultanten och den östliga riktningen.`,
+            answer: { value: 250, unit: 'N', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 250, unit: 'N', etikett: '$F_R =$' },
+                { del: 'b', value: 16, unit: '°', tol: 0.03, etikett: 'vinkel' },
+            ],
+            solution: `**a)** Krafterna är vinkelräta mot varandra. Resultanten är då hypotenusan i en rätvinklig krafttriangel där $F_1$ och $F_2$ är kateter, och Pythagoras sats ger storleken.
+
+$$
+F_R = \\sqrt{F_1^{2} + F_2^{2}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F_1 = 240\\ \\mathrm{N} \\\\
+F_2 = 70\\ \\mathrm{N}
+\\end{array} \\right]
+$$
+
+$$
+F_R = \\sqrt{240^{2} + 70^{2}} = \\sqrt{57\\,600 + 4\\,900} = \\sqrt{62\\,500} = 250\\ \\mathrm{N}
+$$
+
+**Svar:** Resultanten är 250 N.
+
+**b)** Kalla vinkeln mellan resultanten och den östliga riktningen $\\alpha$. I krafttriangeln är $F_2$ den motstående kateten och $F_1$ den närliggande kateten till $\\alpha$, så vi använder tangens.
+
+${makeForceDiagram({
+    box: true, boxSize: 26,
+    vectors: [
+        { label: 'F_R', magnitude: '250 N', angle: 16.26, length: 200, showAngle: true, angleLabel: 'α' },
+        { label: 'F_1', angle: 0, length: 192 },
+        { label: 'F_2', angle: 90, length: 56 },
+    ],
+})}
+
+$$
+\\tan \\alpha = \\dfrac{F_2}{F_1} = \\dfrac{70}{240} \\quad\\Leftrightarrow\\quad \\alpha = \\arctan \\dfrac{70}{240} = 16{,}26\\ldots^{\\circ} \\approx 16^{\\circ}
+$$
+
+Rimlighet: strömmen är mycket svagare än motorn, så resultanten ska peka nästan rakt österut. En liten vinkel stämmer med det.
+
+**Svar:** Resultanten bildar vinkeln 16° med den östliga riktningen, åt norr.`,
+        },
+        {
+            level: 2,
+            question: `I vilken av situationerna nedan är kraftresultanten på föremålet **noll**?`,
+            choices: [
+                `En regndroppe som faller rakt nedåt med konstant hastighet.`,
+                `En bil som kör genom en kurva med konstant fart.`,
+                `En boll i den högsta punkten av ett kast rakt uppåt.`,
+                `Ett tåg som rullar ut från en station och ökar farten.`,
+            ],
+            correct: 0,
+            solution: `Enligt Newtons första lag är kraftresultanten noll precis när föremålet är i vila eller rör sig med konstant hastighet, alltså med **samma fart och samma riktning**. Gå igenom alternativen:
+
+- **Regndroppen:** farten och riktningen är konstanta. Luftmotståndet uppåt är lika stort som tyngdkraften nedåt, så kraftresultanten är noll.
+- **Bilen i kurvan:** farten är konstant men riktningen ändras hela tiden. Hastigheten ändras, så kraftresultanten är inte noll.
+- **Bollen i högsta punkten:** bollen står still ett ögonblick, men bara just då. Tyngdkraften verkar fortfarande, och bollens hastighet ändras från uppåt till nedåt. Kraftresultanten är lika med tyngdkraften.
+- **Tåget:** farten ökar, så hastigheten ändras och kraftresultanten är inte noll.
+
+**Svar:** Regndroppen som faller med konstant hastighet.`,
+        },
+        {
+            level: 2,
+            question: `Två hundar drar en släde över en frusen sjö. Den ena hunden drar med kraften $F_1 = 50\\ \\mathrm{N}$ rakt framåt, och den andra med kraften $F_2 = 30\\ \\mathrm{N}$ i vinkeln $60^{\\circ}$ mot den första, enligt figuren (sedd uppifrån). Bestäm storleken av den resulterande kraften från hundarna. Ange svaret i N.
+
+${makeForceDiagram({
+    box: true, boxSize: 26,
+    vectors: [
+        { label: 'F_2', magnitude: '30 N', angle: 60, length: 90, showAngle: true },
+        { label: 'F_1', magnitude: '50 N', angle: 0, length: 150 },
+    ],
+})}`,
+            answer: { value: 70, unit: 'N', tol: 0.02 },
+            solution: `Krafterna är inte vinkelräta, så Pythagoras sats kan inte användas direkt. Dela i stället upp $F_2$ i komposanter: *x*-led framåt längs $F_1$ och *y*-led vinkelrätt mot den. $F_2$ är hypotenusan, komposanten i *x*-led är den närliggande kateten och komposanten i *y*-led den motstående kateten till vinkeln $60^{\\circ}$.
+
+$$
+F_{2x} = F_2 \\cos 60^{\\circ} = 30 \\cdot \\cos 60^{\\circ} = 15\\ \\mathrm{N}
+$$
+
+$$
+F_{2y} = F_2 \\sin 60^{\\circ} = 30 \\cdot \\sin 60^{\\circ} = 25{,}980\\ldots\\ \\mathrm{N}
+$$
+
+Lägg ihop komposanterna i varje led. $F_1$ ligger helt i *x*-led:
+
+$$
+F_{Rx} = F_1 + F_{2x} = 50 + 15 = 65\\ \\mathrm{N}, \\qquad F_{Ry} = F_{2y} = 25{,}980\\ldots\\ \\mathrm{N}
+$$
+
+Komposanterna av resultanten är vinkelräta, så nu ger Pythagoras sats storleken:
+
+$$
+F_R = \\sqrt{F_{Rx}^{2} + F_{Ry}^{2}} = \\sqrt{65^{2} + 25{,}980\\ldots^{2}} = \\sqrt{4\\,900} = 70\\ \\mathrm{N}
+$$
+
+Rimlighet: resultanten måste vara mindre än $50 + 30 = 80\\ \\mathrm{N}$ (samma riktning) och större än $\\sqrt{50^{2} + 30^{2}} \\approx 58\\ \\mathrm{N}$ (vinkelräta krafter), eftersom vinkeln ligger mellan $0^{\\circ}$ och $90^{\\circ}$. Svaret 70&nbsp;N ligger där.
+
+**Svar:** Den resulterande kraften är 70 N.`,
+        },
+        {
+            level: 3,
+            question: `Sara påstår: ”Om man drar i ett föremål med två krafter som är 50&nbsp;N vardera, blir den resulterande kraften alltid minst 50&nbsp;N, oavsett riktningarna.”
+
+Stämmer påståendet? Styrk ditt svar med fysikaliska resonemang och beräkningar, och bestäm den största vinkel mellan krafterna för vilken påståendet gäller. Ange vinkeln i grader.`,
+            answer: { value: 120, unit: '°', tol: 0.02 },
+            solution: `**Ställ upp generellt.** Kalla krafternas storlek $F$ och vinkeln mellan dem $\\alpha$. Lägg *x*-axeln längs bisektrisen mellan dem, så att krafterna bildar vinkeln $\\dfrac{\\alpha}{2}$ med *x*-axeln på var sin sida.
+
+${makeForceDiagram({
+    box: true, boxSize: 22,
+    vectors: [
+        { label: 'F', angle: 50, length: 150 },
+        { label: 'F', angle: -50, length: 150 },
+        { label: 'F_R', angle: 0, length: 193 },
+    ],
+})}
+
+Komposanterna vinkelrätt mot bisektrisen är lika stora och motriktade, $F \\sin \\dfrac{\\alpha}{2}$ åt var sitt håll, så de tar ut varandra. Komposanterna längs bisektrisen samverkar:
+
+$$
+F_R = F \\cos \\dfrac{\\alpha}{2} + F \\cos \\dfrac{\\alpha}{2} = 2F \\cos \\dfrac{\\alpha}{2}
+$$
+
+**Tolka sambandet.** När $\\alpha = 0^{\\circ}$ blir $F_R = 2F$, när $\\alpha = 180^{\\circ}$ blir $F_R = 0$. Resultanten minskar alltså hela tiden när vinkeln ökar, och den kan bli hur liten som helst.
+
+**När är resultanten lika stor som en av krafterna?** Sätt $F_R = F$:
+
+$$
+2F \\cos \\dfrac{\\alpha}{2} = F
+$$
+
+$$
+\\cos \\dfrac{\\alpha}{2} = \\dfrac{1}{2}
+$$
+
+$$
+\\dfrac{\\alpha}{2} = 60^{\\circ} \\quad\\Leftrightarrow\\quad \\alpha = 120^{\\circ}
+$$
+
+Kraftens storlek $F$ tog ut sig, så svaret gäller för alla lika stora krafter, inte bara för 50 N. Vid $\\alpha = 120^{\\circ}$ bildar krafterna och resultanten en liksidig triangel, vilket passar med att alla tre är lika stora.
+
+**Slutsats om påståendet.** För vinklar större än $120^{\\circ}$ är $\\cos \\dfrac{\\alpha}{2} < \\dfrac{1}{2}$, och då blir resultanten mindre än 50 N. Med $\\alpha = 150^{\\circ}$ blir till exempel $F_R = 2 \\cdot 50 \\cdot \\cos 75^{\\circ} \\approx 26\\ \\mathrm{N}$. Påståendet stämmer alltså inte.
+
+**Svar:** Påståendet stämmer inte. Resultanten är $2F \\cos \\dfrac{\\alpha}{2}$, och den är lika stor som var och en av krafterna när $\\alpha = 120^{\\circ}$. För större vinklar blir den mindre än 50 N, så påståendet gäller bara upp till $\\alpha = 120^{\\circ}$.`,
+        },
+        {
+            level: 3,
+            question: `En bil ska bogseras rakt framåt längs en väg. Ett rep från bärgningsbilen drar i bilen med kraften $F_1 = 600\\ \\mathrm{N}$ i vinkeln $30^{\\circ}$ mot vägens riktning, enligt figuren (sedd uppifrån). En person ska hjälpa till genom att dra i bilen med en kraft $F_2$, så att den resulterande kraften på bilen blir riktad rakt längs vägen.
+
+${makeForceDiagram({
+    box: true, boxSize: 28,
+    vectors: [
+        { label: 'F_1', magnitude: '600 N', angle: 30, length: 200, showAngle: true },
+    ],
+})}
+
+*Den streckade linjen visar vägens riktning.*
+
+Hur stor är den **minsta** kraft $F_2$ som personen kan dra med, och i vilken riktning ska den då verka? Ange storleken i N.`,
+            answer: { value: 300, unit: 'N', tol: 0.02 },
+            solution: `**Vad krävs?** Dela upp repkraften $F_1$ i en komposant längs vägen och en komposant vinkelrätt mot vägen. Repkraften är hypotenusan, och komposanten vinkelrätt mot vägen är den motstående kateten till $30^{\\circ}$:
+
+$$
+F_{1\\perp} = F_1 \\sin 30^{\\circ} = 600 \\cdot \\sin 30^{\\circ} = 300\\ \\mathrm{N}
+$$
+
+För att resultanten ska peka rakt längs vägen måste kraftresultanten vinkelrätt mot vägen vara noll. Personens kraft måste alltså ha en komposant på precis 300 N vinkelrätt mot vägen, åt motsatt håll mot $F_1$:s sidokomposant.
+
+**Varför är det minsta värdet just 300 N?** Personens kraft $F_2$ kan ha en komposant längs vägen och en vinkelrätt mot den. Komposanten vinkelrätt måste vara 300 N. Storleken av $F_2$ blir
+
+$$
+F_2 = \\sqrt{F_{2\\parallel}^{2} + F_{2\\perp}^{2}} = \\sqrt{F_{2\\parallel}^{2} + 300^{2}}
+$$
+
+som blir minst när $F_{2\\parallel} = 0$. Då är $F_2 = 300\\ \\mathrm{N}$, riktad **vinkelrätt mot vägen**, åt andra sidan än repet.
+
+${makeForceDiagram({
+    box: true, boxSize: 28,
+    vectors: [
+        { label: 'F_1', magnitude: '600 N', angle: 30, length: 200 },
+        { label: 'F_2', magnitude: '300 N', angle: -90, length: 100 },
+        { label: 'F_R', angle: 0, length: 173 },
+    ],
+})}
+
+Resultanten blir då $F_R = F_1 \\cos 30^{\\circ} = 600 \\cdot \\cos 30^{\\circ} = 519{,}6\\ldots \\approx 520\\ \\mathrm{N}$ rakt längs vägen.
+
+Rimlighet: att dra snett bakåt eller snett framåt ger också en sidokomposant på 300 N, men då måste kraften dessutom ha en komposant längs vägen, och då blir den totalt större än 300 N. Den kortaste vägen från repkraftens spets till vägens linje är den vinkelräta.
+
+**Svar:** Minst 300 N, riktad vinkelrätt mot vägen, åt motsatt sida mot repet.`,
+        },
+        {
+            level: 2,
+            question: `En passagerare står i en hiss som åker uppåt från bottenvåningen. Grafen visar hissens hastighet $v$ som funktion av tiden $t$. Passageraren påverkas av tyngdkraften $F_G$ nedåt och av normalkraften $F_N$ från hissgolvet uppåt.
+
+${makeDiagram({
+    xMin: 0, xMax: 12, yMin: 0, yMax: 3.5,
+    xTicks: [0, 2, 4, 6, 8, 10, 12],
+    yTicks: [0, 1, 2, 3],
+    xLabel: '<tspan font-style="italic">t</tspan> (s)',
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    paths: [{ points: [[0, 0], [2, 3], [8, 3], [10, 0], [12, 0]] }],
+})}
+
+Lukas påstår: ”Golvet måste trycka hårdast på mig när hissen har sin största fart.”
+
+Avgör, för varje tidsintervall i grafen, om normalkraften är större än, lika stor som eller mindre än tyngdkraften, och bemöt Lukas påstående. Motivera med Newtons första lag och kraftresultantens riktning.`,
+            solution: `**Utgångspunkt.** På passageraren verkar bara två krafter, båda lodräta: $F_N$ uppåt och $F_G$ nedåt. Kraftresultanten är skillnaden mellan dem. Enligt Newtons första lag är kraftresultanten noll precis när hastigheten är konstant. Ändras hastigheten, måste det finnas en kraftresultant, och den är riktad åt det håll som hastigheten ändras.
+
+**0–2 s:** Hastigheten uppåt ökar från 0 till 3 m/s. Hastigheten ändras uppåt, så kraftresultanten är riktad uppåt: $F_N > F_G$.
+
+**2–8 s:** Hastigheten är konstant, 3 m/s uppåt. Kraftresultanten är noll, så $F_N = F_G$.
+
+**8–10 s:** Hissen rör sig fortfarande uppåt, men farten minskar. Hastigheten ändras alltså nedåt, och kraftresultanten är riktad nedåt: $F_N < F_G$.
+
+**10–12 s:** Hissen står still. Kraftresultanten är noll, så $F_N = F_G$.
+
+**Lukas påstående.** Den största farten, 3 m/s, har hissen mellan 2 och 8 s. Just då är hastigheten konstant, och normalkraften är exakt lika stor som tyngdkraften, alltså samma som när hissen står still. Normalkraften är störst under de första två sekunderna, när farten **ökar**. Det är ändringen av hastigheten som kräver en kraftresultant, inte själva farten.
+
+**Svar:** $F_N > F_G$ under 0–2 s, $F_N = F_G$ under 2–8 s, $F_N < F_G$ under 8–10 s och $F_N = F_G$ under 10–12 s. Lukas har fel: vid största farten är hastigheten konstant och $F_N = F_G$. Golvet trycker hårdast när hissen ökar farten.`,
+        },
+        {
+            level: 3,
+            question: `Tre krafter med storlekarna $30{,}0\\ \\mathrm{N}$, $40{,}0\\ \\mathrm{N}$ och $50{,}0\\ \\mathrm{N}$ verkar i samma plan på en liten ring. Ringen är i kraftjämvikt. Bestäm vinkeln mellan kraften på $40{,}0\\ \\mathrm{N}$ och<br>a) kraften på $30{,}0\\ \\mathrm{N}$&emsp;&emsp;b) kraften på $50{,}0\\ \\mathrm{N}$.
+
+Ange vinklarna i grader.`,
+            answer: { value: 90, unit: '°', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 90, unit: '°', etikett: 'vinkel' },
+                { del: 'b', value: 143.13, unit: '°', etikett: 'vinkel' },
+            ],
+            solution: `**Kraftjämvikt betyder en sluten krafttriangel.** Ringen är i jämvikt, så kraftresultanten är noll. Om de tre kraftpilarna läggs efter varandra, spets mot bas, kommer man därför tillbaka till startpunkten: pilarna bildar en sluten triangel med sidorna 30,0, 40,0 och 50,0 (i newton).
+
+**a)** Kontrollera om triangeln är rätvinklig:
+
+$$
+30{,}0^{2} + 40{,}0^{2} = 900 + 1\\,600 = 2\\,500 = 50{,}0^{2}
+$$
+
+Pythagoras sats gäller, så triangeln är rätvinklig, och den räta vinkeln ligger mellan sidorna 30,0 och 40,0. Krafterna på 30,0 N och 40,0 N är alltså vinkelräta mot varandra. Resultanten av dem är då $\\sqrt{30{,}0^{2} + 40{,}0^{2}} = 50{,}0\\ \\mathrm{N}$, och den tredje kraften är lika stor och motriktad, precis som jämvikten kräver.
+
+${makeForceDiagram({
+    vectors: [
+        { label: 'F_1', magnitude: '30,0 N', angle: 90, length: 90 },
+        { label: 'F_2', magnitude: '40,0 N', angle: 0, length: 120 },
+        { label: 'F_3', magnitude: '50,0 N', angle: 216.87, length: 150 },
+    ],
+})}
+
+**Svar:** 90°
+
+**b)** Kalla krafterna $F_1 = 30{,}0\\ \\mathrm{N}$, $F_2 = 40{,}0\\ \\mathrm{N}$ och $F_3 = 50{,}0\\ \\mathrm{N}$. Resultanten $F_{12}$ av $F_1$ och $F_2$ bildar vinkeln $\\gamma$ med $F_2$. I den rätvinkliga krafttriangeln är $F_1$ motstående och $F_2$ närliggande katet till $\\gamma$:
+
+$$
+\\tan \\gamma = \\dfrac{F_1}{F_2} = \\dfrac{30{,}0}{40{,}0} \\quad\\Leftrightarrow\\quad \\gamma = 36{,}869\\ldots^{\\circ}
+$$
+
+$F_3$ är riktad rakt motsatt $F_{12}$. Vinkeln mellan $F_2$ och $F_3$ blir därför
+
+$$
+180^{\\circ} - \\gamma = 180^{\\circ} - 36{,}869\\ldots^{\\circ} = 143{,}130\\ldots^{\\circ} \\approx 143^{\\circ}
+$$
+
+Rimlighet: vinklarna mellan krafterna, räknade runt ringen, ska bli ett helt varv. Vinkeln mellan $F_3$ och $F_1$ är $180^{\\circ} - (90^{\\circ} - \\gamma) = 126{,}869\\ldots^{\\circ}$, och $90^{\\circ} + 143{,}130\\ldots^{\\circ} + 126{,}869\\ldots^{\\circ} = 360^{\\circ}$.
+
+**Svar:** 143°`,
+        },
+        {
+            level: 3,
+            question: `Ett segelflygplan glider utan motor längs en rak bana snett nedåt med **konstant hastighet**. Det sjunker $1{,}0\\ \\mathrm{m}$ för varje $40\\ \\mathrm{m}$ det flyttar sig i vågrät led. På planet verkar tre krafter: tyngdkraften $F_G$ rakt nedåt, lyftkraften $F_\\text{lyft}$ vinkelrätt mot banan och luftmotståndet $F_\\text{luft}$ rakt bakåt längs banan.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 182" width="664" height="216" role="img" aria-label="Ett segelflygplan glider snett nedåt längs en rak, streckad bana som bildar vinkeln alfa med det vågräta. En blå pil från nosen visar hastigheten v." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><path d="M 10 172 C 120 165, 220 176, 330 169 C 420 163, 490 172, 550 167" fill="none" stroke="#7a8f5a" stroke-width="1.6"/><line x1="40" y1="46" x2="530" y2="150.2" stroke="#0f1620" stroke-width="1.3" stroke-dasharray="7 5" opacity="0.7"/><line x1="40" y1="46" x2="230" y2="46" stroke="#8a8579" stroke-width="1.2" stroke-dasharray="5 4"/><path d="M 160 46 A 120 120 0 0 1 157.4 70.9" fill="none" stroke="#8a8579" stroke-width="1.4"/><text x="179.2" y="65.6" text-anchor="middle" font-size="15" font-style="italic" fill="#5e5a50">α</text><g transform="translate(300 101.3) rotate(12)"><path d="M -50 -3 L -68 -30 L -78 -30 L -71 -2 Z" fill="#d9dfe6" stroke="#0f1620" stroke-width="1.3" stroke-linejoin="round"/><path d="M 70 0 C 70 -7, 56 -11, 36 -11 L -55 -4 L -72 -3 L -72 2 L -55 3 L 36 8 C 56 8, 70 6, 70 0 Z" fill="#eef1f4" stroke="#0f1620" stroke-width="1.4" stroke-linejoin="round"/><path d="M 54 -8 C 47 -19, 27 -19, 20 -10.5 Z" fill="#b8d0e8" stroke="#0f1620" stroke-width="1.2" stroke-linejoin="round"/><ellipse cx="4" cy="-1" rx="44" ry="3.2" fill="#c3ccd6" stroke="#0f1620" stroke-width="1.1"/><ellipse cx="-66" cy="-2" rx="12" ry="2" fill="#c3ccd6" stroke="#0f1620" stroke-width="1"/></g><line x1="370.4" y1="116.2" x2="425.2" y2="127.9" stroke="#2563a8" stroke-width="2.6" stroke-linecap="butt"/><polygon points="435,130 426.2,123 424.2,132.8" fill="#2563a8"/><text x="406.6" y="109.6" text-anchor="middle" font-size="15" fill="#2563a8"><tspan font-style="italic">v</tspan></text></svg>
+
+*Vinkeln α är överdriven i figuren.*
+
+Hur många gånger större än luftmotståndet är lyftkraften?`,
+            answer: { value: 40, unit: '', tol: 0.02 },
+            solution: `**Newtons första lag.** Planet rör sig med konstant hastighet, alltså samma fart och samma riktning. Då är kraftresultanten noll, även om planet är i rörelse.
+
+**Komposanter längs och vinkelrätt mot banan.** Banan bildar vinkeln $\\alpha$ med det vågräta. Tyngdkraften är lodrät, så den bildar vinkeln $\\alpha$ med normalen till banan. Dela upp $F_G$ i en komposant längs banan framåt, $F_G \\sin \\alpha$, och en komposant vinkelrätt in mot banan, $F_G \\cos \\alpha$.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 330" width="418" height="418" role="img" aria-label="Kraftfigur för segelflygplanet: tyngdkraften rakt nedåt, lyftkraften vinkelrätt mot banan och luftmotståndet bakåt längs banan, med tyngdkraftens komposanter streckade." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="18.4" y1="117.1" x2="300.4" y2="219.7" stroke="#0f1620" stroke-width="1.2" stroke-dasharray="7 5" opacity="0.6"/><line x1="150" y1="165" x2="187.9" y2="178.8" stroke="#c8324a" stroke-width="2.6" stroke-linecap="butt" stroke-dasharray="6 4"/><polygon points="198.2,182.5 186.2,183.5 189.6,174.1" fill="#c8324a"/><line x1="150" y1="165" x2="105.6" y2="287.1" stroke="#c8324a" stroke-width="2.6" stroke-linecap="butt" stroke-dasharray="6 4"/><polygon points="101.8,297.5 100.9,285.4 110.3,288.8" fill="#c8324a"/><line x1="150" y1="165" x2="150" y2="304" stroke="#c8324a" stroke-width="2.6" stroke-linecap="butt"/><polygon points="150,315 145,304 155,304" fill="#c8324a"/><line x1="150" y1="165" x2="194.4" y2="42.9" stroke="#2563a8" stroke-width="2.6" stroke-linecap="butt"/><polygon points="198.2,32.5 199.1,44.6 189.7,41.2" fill="#2563a8"/><line x1="150" y1="165" x2="112.1" y2="151.2" stroke="#b8620e" stroke-width="2.6" stroke-linecap="butt"/><polygon points="101.8,147.5 113.8,146.5 110.4,155.9" fill="#b8620e"/><circle cx="150" cy="165" r="2.6" fill="#0f1620"/><path d="M 150 199 A 34 34 0 0 1 138.4 196.9" fill="none" stroke="#5e5a50" stroke-width="1.3"/><text x="141.3" y="219.2" text-anchor="middle" font-size="15" font-style="italic" fill="#5e5a50">α</text><text x="159" y="317" font-size="15" fill="#c8324a"><tspan font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="0.72em">G</tspan></text><text x="207.2" y="40.5" font-size="15" fill="#2563a8"><tspan font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="0.72em">lyft</tspan></text><text x="105.8" y="131.5" text-anchor="middle" font-size="15" fill="#b8620e"><tspan font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="0.72em">luft</tspan></text><text x="208.2" y="172.5" font-size="15" fill="#c8324a"><tspan font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="0.72em">G</tspan> sin <tspan font-style="italic">α</tspan></text><text x="93.8" y="302.5" text-anchor="end" font-size="15" fill="#c8324a"><tspan font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="0.72em">G</tspan> cos <tspan font-style="italic">α</tspan></text></svg>
+
+*Planet är ritat som en punkt i tyngdpunkten. Vinkeln α är överdriven och figuren är inte skalenlig: med de verkliga talen skulle luftmotståndets pil bli bara en fyrtiondel så lång som lyftkraftens.*
+
+Jämvikt i varje led ger två ekvationer:
+
+$$
+\\text{längs banan:}\\quad F_\\text{luft} = F_G \\sin \\alpha \\tag{1}
+$$
+
+$$
+\\text{vinkelrätt mot banan:}\\quad F_\\text{lyft} = F_G \\cos \\alpha \\tag{2}
+$$
+
+Dividera (2) med (1). Då tar $F_G$ ut sig, och därmed också massan:
+
+$$
+\\dfrac{F_\\text{lyft}}{F_\\text{luft}} = \\dfrac{F_G \\cos \\alpha}{F_G \\sin \\alpha} = \\dfrac{\\cos \\alpha}{\\sin \\alpha} = \\dfrac{1}{\\tan \\alpha}
+$$
+
+**Vinkeln ur glidbanan.** Banan, den vågräta sträckan och sjunkhöjden bildar en rätvinklig triangel. Sjunkhöjden är motstående och den vågräta sträckan närliggande katet till $\\alpha$:
+
+$$
+\\tan \\alpha = \\dfrac{1{,}0}{40}
+$$
+
+Insättning i $\\dfrac{F_\\text{lyft}}{F_\\text{luft}} = \\dfrac{1}{\\tan \\alpha}$ ger
+
+$$
+\\dfrac{F_\\text{lyft}}{F_\\text{luft}} = \\dfrac{1}{\\dfrac{1{,}0}{40}} = \\dfrac{40}{1{,}0} = 40
+$$
+
+Rimlighet: vinkeln är bara $\\alpha = \\arctan \\dfrac{1{,}0}{40} \\approx 1{,}4^{\\circ}$. Då är $\\cos \\alpha \\approx 1{,}00$, så lyftkraften är nästan lika stor som tyngdkraften, medan luftmotståndet bara är ungefär en fyrtiondel av den. Ett bra segelflygplan har just ett stort förhållande mellan lyftkraft och luftmotstånd, och därför kan det glida långt.
+
+**Svar:** Lyftkraften är 40 gånger större än luftmotståndet. Förhållandet är $\\dfrac{1}{\\tan \\alpha}$ och beror bara på banans lutning, inte på massan.`,
+        },
+        {
+            level: 3,
+            question: `En blomampel med massan $m = 3{,}0\\ \\mathrm{kg}$ hänger stilla i två linor som är fästa i taket, enligt figuren. Lina 1 bildar vinkeln $65^{\\circ}$ med taket och lina 2 vinkeln $40^{\\circ}$.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="30 20 440 234" width="597" height="318" role="img" aria-label="En blomampel hänger i två linor som är fästa i taket. Den vänstra linan, lina 1, bildar vinkeln 65 grader med taket och den högra, lina 2, bildar vinkeln 40 grader med taket." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="40" y="26" width="420" height="14" fill="#ece5d6"/><line x1="46" y1="40" x2="54" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="58" y1="40" x2="66" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="70" y1="40" x2="78" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="82" y1="40" x2="90" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="94" y1="40" x2="102" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="106" y1="40" x2="114" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="118" y1="40" x2="126" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="130" y1="40" x2="138" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="142" y1="40" x2="150" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="154" y1="40" x2="162" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="166" y1="40" x2="174" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="178" y1="40" x2="186" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="190" y1="40" x2="198" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="202" y1="40" x2="210" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="214" y1="40" x2="222" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="226" y1="40" x2="234" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="238" y1="40" x2="246" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="250" y1="40" x2="258" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="262" y1="40" x2="270" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="274" y1="40" x2="282" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="286" y1="40" x2="294" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="298" y1="40" x2="306" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="310" y1="40" x2="318" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="322" y1="40" x2="330" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="334" y1="40" x2="342" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="346" y1="40" x2="354" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="358" y1="40" x2="366" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="370" y1="40" x2="378" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="382" y1="40" x2="390" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="394" y1="40" x2="402" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="406" y1="40" x2="414" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="418" y1="40" x2="426" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="430" y1="40" x2="438" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="442" y1="40" x2="450" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="454" y1="40" x2="462" y2="30" stroke="#0f1620" stroke-width="1" opacity="0.55"/><line x1="40" y1="40" x2="460" y2="40" stroke="#0f1620" stroke-width="1.8"/><line x1="184.7" y1="40" x2="248.2" y2="176.4" stroke="#4a4237" stroke-width="1.8"/><line x1="416.8" y1="40" x2="251.8" y2="176.4" stroke="#4a4237" stroke-width="1.8"/><path d="M 214.7 40 A 30 30 0 0 1 197.4 67.2" fill="none" stroke="#5e5a50" stroke-width="1.3"/><text x="222" y="68" text-anchor="middle" font-size="13" fill="#1f2530">65°</text><path d="M 386.8 40 A 30 30 0 0 0 393.8 59.3" fill="none" stroke="#5e5a50" stroke-width="1.3"/><text x="374" y="61" text-anchor="middle" font-size="13" fill="#1f2530">40°</text><text x="205" y="114" text-anchor="end" font-size="14" fill="#1f2530">lina 1</text><text x="358" y="112" text-anchor="start" font-size="14" fill="#1f2530">lina 2</text><circle cx="250" cy="180" r="4" fill="none" stroke="#6f767f" stroke-width="2"/><line x1="248.5" y1="183.5" x2="227" y2="201" stroke="#6f767f" stroke-width="1.2"/><line x1="251.5" y1="183.5" x2="273" y2="201" stroke="#6f767f" stroke-width="1.2"/><line x1="250" y1="184" x2="250" y2="201" stroke="#6f767f" stroke-width="1.2"/><path d="M 223 206 L 277 206 L 270 242 L 230 242 Z" fill="#c4693f" stroke="#7a3b1e" stroke-width="1.3" stroke-linejoin="round"/><rect x="219" y="200" width="62" height="8" rx="2" fill="#d27b4f" stroke="#7a3b1e" stroke-width="1.3"/><path d="M 224 204 C 214 212, 210 224, 212 238" fill="none" stroke="#2f5122" stroke-width="1.4"/><path d="M 276 204 C 286 210, 292 222, 289 236" fill="none" stroke="#2f5122" stroke-width="1.4"/><ellipse cx="214" cy="213" rx="6" ry="3.2" transform="rotate(-50 214 213)" fill="#5d8a3f" stroke="#2f5122" stroke-width="1"/><ellipse cx="208.5" cy="226" rx="6" ry="3.2" transform="rotate(-70 208.5 226)" fill="#5d8a3f" stroke="#2f5122" stroke-width="1"/><ellipse cx="213" cy="239" rx="5.5" ry="3" transform="rotate(70 213 239)" fill="#5d8a3f" stroke="#2f5122" stroke-width="1"/><ellipse cx="287" cy="211" rx="6" ry="3.2" transform="rotate(45 287 211)" fill="#5d8a3f" stroke="#2f5122" stroke-width="1"/><ellipse cx="293" cy="224" rx="6" ry="3.2" transform="rotate(75 293 224)" fill="#5d8a3f" stroke="#2f5122" stroke-width="1"/><ellipse cx="288" cy="237" rx="5.5" ry="3" transform="rotate(-65 288 237)" fill="#5d8a3f" stroke="#2f5122" stroke-width="1"/><ellipse cx="238" cy="198" rx="7" ry="3.4" transform="rotate(-30 238 198)" fill="#5d8a3f" stroke="#2f5122" stroke-width="1"/><ellipse cx="262" cy="197" rx="7" ry="3.4" transform="rotate(25 262 197)" fill="#5d8a3f" stroke="#2f5122" stroke-width="1"/></svg>
+
+Bestäm kraften i var och en av linorna.
+
+Elin påstår: ”Krafterna i de två linorna kan tillsammans inte vara större än amplens tyngd.” Stämmer det? Förklara.`,
+            answer: { value: 23, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { value: 23, unit: 'N', tol: 0.03, etikett: 'lina 1' },
+                { value: 13, unit: 'N', tol: 0.03, etikett: 'lina 2' },
+            ],
+            solution: `**Newtons första lag.** Amplen hänger stilla, så kraftresultanten på den är noll. Det gäller i varje riktning för sig: de vågräta komposanterna tar ut varandra, och de lodräta komposanterna tar ut varandra.
+
+**Krafterna.** På amplen verkar tyngdkraften $F_G$ rakt nedåt och spännkrafterna $F_{\\mathrm{S}1}$ och $F_{\\mathrm{S}2}$ längs linorna, snett uppåt.
+
+$$
+F_G = m \\cdot g
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m = 3{,}0\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+F_G = 3{,}0 \\cdot 9{,}82 = 29{,}46\\ \\mathrm{N}
+$$
+
+**Komposanter.** Varje spännkraft är hypotenusan i en rätvinklig krafttriangel där den ena kateten är vågrät (längs taket) och den andra lodrät. Vinkeln mot taket ligger vid den vågräta kateten, så den vågräta komposanten är den närliggande kateten (cosinus) och den lodräta den motstående (sinus).
+
+${makeForceDiagram({
+    vectors: [
+        { label: 'F_S1', angle: 115, length: 117 },
+        { label: 'F_S2', angle: 40, length: 64 },
+        { label: 'F_G', angle: -90, length: 147 },
+    ],
+})}
+
+*Pilarna är ritade i skala.*
+
+Vågrätt drar lina 1 åt vänster och lina 2 åt höger. Lodrätt drar båda uppåt, och tillsammans ska de bära tyngdkraften:
+
+$$
+\\text{vågrätt:}\\quad F_{\\mathrm{S}1} \\cos 65^{\\circ} = F_{\\mathrm{S}2} \\cos 40^{\\circ} \\tag{1}
+$$
+
+$$
+\\text{lodrätt:}\\quad F_{\\mathrm{S}1} \\sin 65^{\\circ} + F_{\\mathrm{S}2} \\sin 40^{\\circ} = F_G \\tag{2}
+$$
+
+**Lös ut $F_{\\mathrm{S}2}$ ur (1).** Dividera båda led med $\\cos 40^{\\circ}$:
+
+$$
+F_{\\mathrm{S}2} = F_{\\mathrm{S}1} \\cdot \\dfrac{\\cos 65^{\\circ}}{\\cos 40^{\\circ}} = 0{,}5516\\ldots \\cdot F_{\\mathrm{S}1} \\tag{3}
+$$
+
+**Sätt in (3) i (2).** $F_{\\mathrm{S}2} = 0{,}5516\\ldots \\cdot F_{\\mathrm{S}1}$ insatt i (2), $F_{\\mathrm{S}1} \\sin 65^{\\circ} + F_{\\mathrm{S}2} \\sin 40^{\\circ} = F_G$, ger en ekvation med bara $F_{\\mathrm{S}1}$ som obekant:
+
+$$
+F_{\\mathrm{S}1} \\sin 65^{\\circ} + 0{,}5516\\ldots \\cdot F_{\\mathrm{S}1} \\cdot \\sin 40^{\\circ} = 29{,}46
+$$
+
+Bryt ut $F_{\\mathrm{S}1}$, så blir faktorn framför den $\\sin 65^{\\circ} + 0{,}5516\\ldots \\cdot \\sin 40^{\\circ} = 0{,}9063\\ldots + 0{,}3546\\ldots = 1{,}2609\\ldots$:
+
+$$
+1{,}2609\\ldots \\cdot F_{\\mathrm{S}1} = 29{,}46
+$$
+
+$$
+F_{\\mathrm{S}1} = \\dfrac{29{,}46}{1{,}2609\\ldots} = 23{,}36\\ldots \\approx 23\\ \\mathrm{N}
+$$
+
+Insättning i (3), $F_{\\mathrm{S}2} = 0{,}5516\\ldots \\cdot F_{\\mathrm{S}1}$, ger
+
+$$
+F_{\\mathrm{S}2} = 0{,}5516\\ldots \\cdot 23{,}36\\ldots = 12{,}88\\ldots \\approx 13\\ \\mathrm{N}
+$$
+
+Rimlighet: lina 1 är brantare och står närmare lodlinjen, så den bär den största delen av tyngden.
+
+**Svar:** Kraften i lina 1 är 23 N och kraften i lina 2 är 13 N.
+
+**Elins påstående.** Tillsammans blir krafterna i linorna
+
+$$
+F_{\\mathrm{S}1} + F_{\\mathrm{S}2} = 23{,}36\\ldots + 12{,}88\\ldots = 36{,}25\\ldots \\approx 36\\ \\mathrm{N}
+$$
+
+vilket är mer än tyngdkraften 29 N. Det beror på att bara de **lodräta** komposanterna bär amplen, enligt (2). Linorna drar snett, så varje lina måste dessutom ge en vågrät komposant, och den vågräta komposanten från lina 1 tar ut den från lina 2:
+
+$$
+F_{\\mathrm{S}1} \\cos 65^{\\circ} = 23{,}36\\ldots \\cdot \\cos 65^{\\circ} = 9{,}87\\ldots\\ \\mathrm{N}
+$$
+
+De vågräta komposanterna bär ingenting, men de kostar kraft i linorna. Ju flackare linorna är, desto större blir de vågräta komposanterna, och desto större blir krafterna i linorna. Bara om båda linorna hänger lodrätt blir summan lika med tyngden.
+
+**Svar:** Nej, Elin har fel. Krafterna i linorna är tillsammans 36 N, mer än tyngden 29 N, eftersom bara de lodräta komposanterna bär amplen medan de vågräta drar mot varandra.`,
         },
     ],
 
@@ -10800,7 +13601,7 @@ $$
 
 **Svar:** 0,080 m/s².
 
-**Generell slutsats:** Trots en dragkraft på 320 kN blir accelerationen liten — massan i nämnaren är enorm. Med denna acceleration tar det tåget över fem minuter att nå 90 km/h. Det är därför godståg behöver mycket långa sträckor för att komma upp i fart (och lika långa för att bromsa).`,
+**Generell slutsats:** Trots en dragkraft på 320 kN blir accelerationen liten, eftersom massan i nämnaren är enorm. Med denna acceleration tar det tåget över fem minuter att nå 90 km/h. Det är därför godståg behöver mycket långa sträckor för att komma upp i fart (och lika långa för att bromsa).`,
         },
         {
             level: 1,
@@ -10947,7 +13748,7 @@ Tiden $8{,}0\\ \\mathrm{s}$ har två värdesiffror, så svaret avrundas till tv�
 
 **Svar:** 940 N.
 
-**Generell slutsats:** Efter $t = 8{,}0\\ \\mathrm{s}$ är grafen vågrät — hastigheten är konstant och den resulterande kraften därför **noll** (motorns dragkraft balanserar exakt vattnets motstånd). En resulterande kraft behövs för att *ändra* hastigheten, inte för att *hålla* den.`,
+**Generell slutsats:** Efter $t = 8{,}0\\ \\mathrm{s}$ är grafen vågrät. Hastigheten är konstant och den resulterande kraften därför **noll** (motorns dragkraft balanserar exakt vattnets motstånd). En resulterande kraft behövs för att *ändra* hastigheten, inte för att *hålla* den.`,
         },
         {
             level: 2,
@@ -11008,7 +13809,7 @@ $$
 
 **Svar:** a) Accelerationen är 3,0 m/s². b) Spännkraften är 6,0 N.
 
-**Generell slutsats:** När flera kroppar är ihopkopplade har de samma acceleration men *olika netto-krafter* — varje kropp har sin egen Newton 2-ekvation. Tricket är att välja en lämplig **delkropp** (ofta den lättare av de två) där spännkraften är den enda obekanta horisontella kraften.`,
+**Generell slutsats:** När flera kroppar är ihopkopplade har de samma acceleration men *olika netto-krafter*: varje kropp har sin egen Newton 2-ekvation. Tricket är att välja en lämplig **delkropp** (ofta den lättare av de två) där spännkraften är den enda obekanta horisontella kraften.`,
         },
         {
             level: 3,
@@ -11027,7 +13828,7 @@ b) Hur stor är bilens drivkraft *F* vid just den accelerationen? (Bortse från 
                 { del: 'a', value: 1.22, unit: 'm/s²', tol: 0.03 },
                 { del: 'b', value: 2689, unit: 'N', tol: 0.03 },
             ],
-            solution: `**a) Linan drar bara husvagnen.** Nyckelinsikten är att spännkraften i linan är den enda horisontella kraften på **husvagnen** — det är alltså husvagnens massa (inte hela ekipagets) som avgör hur stor kraft linan måste överföra:
+            solution: `**a) Linan drar bara husvagnen.** Nyckelinsikten är att spännkraften i linan är den enda horisontella kraften på **husvagnen**. Det är alltså husvagnens massa (inte hela ekipagets) som avgör hur stor kraft linan måste överföra:
 
 $$
 F_\\mathrm{S} = m_\\text{husvagn} \\cdot a
@@ -11062,7 +13863,522 @@ Accelerationen räknas oavrundad, och svaret avrundas till två värdesiffror so
 
 **Svar:** a) 1,2 m/s². b) 2,7 kN.
 
-**Generell slutsats:** Samma teknik som i förra uppgiften: växla mellan **helheten** (för drivkraften) och en **delkropp** (för linkraften). Notera att bilen ensam hade tålt mycket större acceleration — det är den svagaste länken, bogserlinan, som sätter gränsen, och dess belastning bestäms enbart av husvagnens massa.`,
+**Generell slutsats:** Samma teknik som i förra uppgiften: växla mellan **helheten** (för drivkraften) och en **delkropp** (för linkraften). Notera att bilen ensam hade tålt mycket större acceleration. Det är den svagaste länken, bogserlinan, som sätter gränsen, och dess belastning bestäms enbart av husvagnens massa.`,
+        },
+        {
+            level: 1,
+            question: `Med hjälp av Newtons andra lag kan enheten newton skrivas i SI-grundenheter. Vilket av följande är lika med $1\\ \\mathrm{N}$?`,
+            choices: [
+                `$1\\ \\mathrm{kg \\cdot m/s}$`,
+                `$1\\ \\mathrm{kg/(m \\cdot s^2)}$`,
+                `$1\\ \\mathrm{m/s^2}$`,
+                `$1\\ \\mathrm{kg \\cdot m/s^2}$`,
+            ],
+            correct: 3,
+            solution: `Newtons andra lag säger att den resulterande kraften är massan gånger accelerationen:
+
+$$
+F_R = m \\cdot a
+$$
+
+1 N är den kraft som ger massan 1 kg accelerationen 1 m/s². Enheten för kraft blir därför enheten för massa gånger enheten för acceleration:
+
+$$
+1\\ \\mathrm{N} = 1\\ \\mathrm{kg} \\cdot 1\\ \\mathrm{m/s^2} = 1\\ \\mathrm{kg \\cdot m/s^2}
+$$
+
+Alternativet $\\mathrm{kg \\cdot m/s}$ saknar en sekund i nämnaren (det är enheten för massa gånger hastighet), och $\\mathrm{m/s^2}$ är bara enheten för acceleration, utan massan.
+
+**Svar:** $1\\ \\mathrm{kg \\cdot m/s^2}$`,
+        },
+
+        {
+            level: 2,
+            question: `En lyftkran lyfter en betongbalk med massan 450 kg. Vajern drar balken uppåt med spännkraften 4 900 N. Bestäm balkens acceleration till storlek och riktning. Ange storleken i m/s².`,
+            answer: { value: 1.1, unit: 'm/s²', tol: 0.04 },
+            solution: `Två krafter verkar på balken: spännkraften $F_\\mathrm{S}$ uppåt och tyngdkraften $F_\\mathrm{G}$ nedåt. Tyngdkraften är inte given, så vi räknar ut den först, med tyngdfaktorn $g = 9{,}82\\ \\mathrm{N/kg}$:
+
+$$
+F_\\mathrm{G} = m \\cdot g = 450 \\cdot 9{,}82 = 4\\,419\\ \\mathrm{N}
+$$
+
+Pilarna i figuren är ritade i skala.
+
+${makeForceDiagram({
+    box: true, boxSize: 34,
+    vectors: [
+        { label: 'F_S', magnitude: '4 900 N', angle: 90, length: 98, color: '#2563c9' },
+        { label: 'F_G', magnitude: '4 419 N', angle: 270, length: 88.4, color: '#c8324a' },
+    ],
+})}
+
+Spännkraften är större än tyngdkraften, så den resulterande kraften är riktad uppåt. Vi räknar uppåt som positiv riktning:
+
+$$
+F_R = F_\\mathrm{S} - F_\\mathrm{G} = 4\\,900 - 4\\,419 = 481\\ \\mathrm{N}
+$$
+
+Newtons andra lag med accelerationen utlöst:
+
+$$
+F_R = m \\cdot a \\quad\\Leftrightarrow\\quad a = \\frac{F_R}{m}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F_R = 481\\ \\mathrm{N} \\\\
+m = 450\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$
+a = \\frac{481}{450} = 1{,}068\\ldots\\ \\mathrm{m/s^2} \\approx 1{,}1\\ \\mathrm{m/s^2}
+$$
+
+Accelerationen har samma riktning som den resulterande kraften, alltså uppåt. Lägg märke till att det är skillnaden mellan krafterna som accelererar balken: hela spännkraften går inte åt till att ändra farten, eftersom den största delen bara bär upp balken. Den vanligaste missen är att räkna $a = \\dfrac{4\\,900}{450}$ och glömma tyngdkraften, vilket ger en tio gånger för stor acceleration.
+
+**Svar:** 1,1 m/s², riktad uppåt.`,
+        },
+        {
+            level: 2,
+            question: `En vagn står på en luftkuddebana, där friktionen kan försummas. Vagnen dras med olika stora konstanta krafter *F* från en kraftgivare, och accelerationen *a* mäts vid varje försök.
+
+| *F* (N) | 0,10 | 0,20 | 0,30 | 0,40 | 0,50 |
+|---|---|---|---|---|---|
+| *a* (m/s²) | 0,20 | 0,41 | 0,59 | 0,80 | 1,02 |
+
+a) Är accelerationen proportionell mot kraften? Motivera med mätvärdena.<br>b) Bestäm vagnens massa ur mätningarna.<br>c) Vilken acceleration kan man vänta sig om vagnen dras med kraften 0,75 N?
+
+*Ange massan i b) som ditt numeriska svar i kg.*`,
+            answer: { value: 0.50, unit: 'kg', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 0.50, unit: 'kg', tol: 0.03 },
+                { del: 'c', value: 1.5, unit: 'm/s²', tol: 0.04 },
+            ],
+            solution: `**a)** Två storheter är proportionella om kvoten mellan dem är konstant. Vi räknar kvoten $\\dfrac{a}{F}$ för varje försök:
+
+| *F* (N) | 0,10 | 0,20 | 0,30 | 0,40 | 0,50 |
+|---|---|---|---|---|---|
+| $\\dfrac{a}{F}$ (m/s² per N) | 2,0 | 2,05 | 1,97 | 2,0 | 2,04 |
+
+Kvoten är nästan densamma i alla försök, cirka 2,0. De små skillnaderna är mätfel. Dubbelt så stor kraft ger alltså dubbelt så stor acceleration, precis som Newtons andra lag säger när massan är oförändrad.
+
+**Svar:** Ja, kvoten $\\dfrac{a}{F}$ är ungefär lika stor i alla försök, så accelerationen är proportionell mot kraften.
+
+**b)** Ur Newtons andra lag löser vi ut massan:
+
+$$
+F_R = m \\cdot a \\quad\\Leftrightarrow\\quad m = \\frac{F_R}{a}
+$$
+
+Kraften från kraftgivaren är den resulterande kraften, eftersom friktionen försummas. Vi räknar massan ur varje försök och tar medelvärdet, så att mätfelen jämnas ut:
+
+$$
+m_1 = \\frac{0{,}10}{0{,}20} = 0{,}50\\ \\mathrm{kg} \\qquad m_2 = \\frac{0{,}20}{0{,}41} = 0{,}4878\\ldots\\ \\mathrm{kg} \\qquad m_3 = \\frac{0{,}30}{0{,}59} = 0{,}5084\\ldots\\ \\mathrm{kg}
+$$
+
+$$
+m_4 = \\frac{0{,}40}{0{,}80} = 0{,}50\\ \\mathrm{kg} \\qquad m_5 = \\frac{0{,}50}{1{,}02} = 0{,}4901\\ldots\\ \\mathrm{kg}
+$$
+
+$$
+m = \\frac{0{,}50 + 0{,}4878 + 0{,}5084 + 0{,}50 + 0{,}4901}{5} = 0{,}4972\\ldots\\ \\mathrm{kg} \\approx 0{,}50\\ \\mathrm{kg}
+$$
+
+**Svar:** 0,50 kg
+
+**c)** Massan från b), med det oavrundade värdet:
+
+$$
+a = \\frac{F_R}{m} = \\frac{0{,}75}{0{,}4972\\ldots} = 1{,}508\\ldots\\ \\mathrm{m/s^2} \\approx 1{,}5\\ \\mathrm{m/s^2}
+$$
+
+Rimligt: 0,75 N är en och en halv gång så stort som 0,50 N, och då ska accelerationen bli ungefär en och en halv gång så stor som 1,02 m/s².
+
+**Svar:** 1,5 m/s²`,
+        },
+        {
+            level: 2,
+            question: `En cyklist och hennes cykel har tillsammans massan 85 kg. Hon cyklar med farten 7,2 m/s och bromsar sedan med konstant retardation, så att hon stannar på sträckan 9,0 m. Hur stor är den resulterande kraften på cyklisten och cykeln under inbromsningen? Ange svaret i N.`,
+            answer: { value: 240, unit: 'N', tol: 0.03, ignoreSign: true },
+            solution: `Vi behöver accelerationen för att kunna använda Newtons andra lag. Tiden är inte given, men farten och bromssträckan är det, så vi använder sambandet mellan hastighet, acceleration och sträcka:
+
+$$
+v^{2} - v_0^{2} = 2as \\quad\\Leftrightarrow\\quad a = \\frac{v^{2} - v_0^{2}}{2s}
+$$
+
+Vi räknar framåt (rörelseriktningen) som positiv riktning:
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = 7{,}2\\ \\mathrm{m/s} \\\\
+v = 0 \\\\
+s = 9{,}0\\ \\mathrm{m} \\\\
+m = 85\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$
+a = \\frac{0 - 7{,}2^{2}}{2 \\cdot 9{,}0} = \\frac{-51{,}84}{18} = -2{,}88\\ \\mathrm{m/s^2}
+$$
+
+Minustecknet betyder att accelerationen är riktad bakåt, mot rörelsen. Newtons andra lag ger den resulterande kraften:
+
+$$
+F_R = m \\cdot a = 85 \\cdot (-2{,}88) = -244{,}8\\ \\mathrm{N} \\approx -240\\ \\mathrm{N}
+$$
+
+Givna värden har två värdesiffror, så svaret avrundas till två värdesiffror. Kraften är riktad bakåt, och det är framför allt friktionen mellan däcken och vägen som bromsar.
+
+**Svar:** 240 N, riktad bakåt (motsatt rörelseriktningen).`,
+        },
+
+        {
+            level: 3,
+            question: `Vid ett krocktest stoppas en krockdockas huvud två gånger från samma fart. Utan airbag slår huvudet i ratten och stannar på sträckan 2,0 cm. Med airbag stannar huvudet på sträckan 25 cm. Hur många gånger större är den genomsnittliga kraften på huvudet utan airbag? Anta att inbromsningen sker med konstant retardation i båda fallen. Diskutera också om den största kraften under en verklig inbromsning är större eller mindre än den genomsnittliga kraft du räknat med.`,
+            answer: { value: 12.5, unit: 'gånger', tol: 0.05 },
+            solution: `Varken huvudets massa eller farten är given. Vi kallar dem *m* och $v_0$ och låter dem stå kvar som beteckningar.
+
+**Accelerationen.** Huvudet stannar, så sluthastigheten är $v = 0$. Med konstant retardation på sträckan *s* gäller
+
+$$
+v^{2} - v_0^{2} = 2as \\quad\\Leftrightarrow\\quad a = \\frac{0 - v_0^{2}}{2s} = -\\frac{v_0^{2}}{2s}
+$$
+
+Minustecknet visar bara att accelerationen är riktad mot rörelsen. Beloppet är $\\dfrac{v_0^{2}}{2s}$.
+
+**Kraften.** Newtons andra lag ger den genomsnittliga kraftens belopp:
+
+$$
+F = m \\cdot \\frac{v_0^{2}}{2s}
+$$
+
+**Jämförelsen.** Vi dividerar kraften utan airbag ($s_1$) med kraften med airbag ($s_2$):
+
+$$
+\\frac{F_1}{F_2} = \\dfrac{m \\cdot \\dfrac{v_0^{2}}{2s_1}}{m \\cdot \\dfrac{v_0^{2}}{2s_2}} = \\frac{s_2}{s_1}
+$$
+
+Massan och farten är desamma i båda försöken och tar därför ut varandra. Kraften är omvänt proportionell mot bromssträckan.
+
+$$
+\\left[ \\begin{array}{l}
+s_1 = 2{,}0\\ \\mathrm{cm} \\\\
+s_2 = 25\\ \\mathrm{cm}
+\\end{array} \\right]
+$$
+
+$$
+\\frac{F_1}{F_2} = \\frac{25}{2{,}0} = 12{,}5
+$$
+
+Enheterna tar ut varandra i kvoten, så vi behöver inte göra om till meter.
+
+**Diskussion.** I verkligheten är retardationen inte konstant. Kraften byggs upp, når ett största värde och avtar igen. Medelvärdet av en kraft som varierar är alltid mindre än dess största värde, så den största kraften på huvudet är **större** än den genomsnittliga kraft vi räknat ut. Det gäller särskilt utan airbag, där en hård ratt ger en kort och spetsig krafttopp. Airbagen gör alltså mer nytta än kvoten antyder: den förlänger inte bara bromssträckan utan fördelar också kraften jämnare över tiden.
+
+**Svar:** Cirka 13 gånger större (kvoten är 12,5). Den största kraften under en verklig inbromsning är större än den genomsnittliga.`,
+        },
+        {
+            level: 3,
+            question: `På en isbana puttas en tom pulka med en kraft *F* och får då accelerationen 6,0 m/s². Sedan sätter sig en flicka i pulkan, och pulkan puttas med lika stor kraft *F*. Nu blir accelerationen 1,2 m/s². Friktionen mot isen kan försummas.<br>a) Hur många gånger större är flickans massa än pulkans?<br>b) Vilken acceleration skulle flickan få om hon stod ensam på skridskor och puttades med samma kraft *F*?
+
+*Ange flickans acceleration i b) som ditt numeriska svar i m/s².*`,
+            answer: { value: 1.5, unit: 'm/s²', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 4, unit: 'gånger', tol: 0.03 },
+                { del: 'b', value: 1.5, unit: 'm/s²', tol: 0.03 },
+            ],
+            solution: `Varken kraften eller massorna är kända. Vi kallar pulkans massa $m_1$ och flickans massa $m_2$, accelerationen för den tomma pulkan $a_1$ och för pulkan med flickan $a$.
+
+**a)** Friktionen försummas, så *F* är den resulterande kraften i varje försök. Newtons andra lag på den tomma pulkan och på pulkan med flickan, med massan utlöst:
+
+$$
+F = m_1 \\cdot a_1 \\quad\\Leftrightarrow\\quad m_1 = \\frac{F}{a_1}
+\\qquad\\qquad
+F = (m_1 + m_2) \\cdot a \\quad\\Leftrightarrow\\quad m_1 + m_2 = \\frac{F}{a}
+$$
+
+Flickans massa är skillnaden mellan den sammanlagda massan och pulkans massa:
+
+$$
+m_2 = \\frac{F}{a} - \\frac{F}{a_1}
+$$
+
+Vi dividerar med pulkans massa $m_1 = \\dfrac{F}{a_1}$:
+
+$$
+\\frac{m_2}{m_1} = \\dfrac{\\dfrac{F}{a} - \\dfrac{F}{a_1}}{\\dfrac{F}{a_1}} = \\frac{a_1}{a} - 1
+$$
+
+Kraften tar ut sig. Svaret beror bara på de två uppmätta accelerationerna.
+
+$$
+\\left[ \\begin{array}{l}
+a_1 = 6{,}0\\ \\mathrm{m/s^2} \\\\
+a = 1{,}2\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$
+\\frac{m_2}{m_1} = \\frac{6{,}0}{1{,}2} - 1 = 5{,}0 - 1 = 4{,}0
+$$
+
+Det går också att se direkt: samma kraft ger en femtedel så stor acceleration, så pulkan med flickan har fem gånger så stor massa som den tomma pulkan. Av den sammanlagda massan är alltså en femtedel pulkan och fyra femtedelar flickan.
+
+**Svar:** Flickans massa är 4,0 gånger så stor som pulkans.
+
+**b)** Flickan ensam har massan $m_2 = 4{,}0 \\cdot m_1$. Med samma kraft blir hennes acceleration
+
+$$
+a_2 = \\frac{F}{m_2} = \\frac{F}{4{,}0 \\cdot m_1} = \\frac{1}{4{,}0} \\cdot \\frac{F}{m_1} = \\frac{a_1}{4{,}0}
+$$
+
+eftersom $\\dfrac{F}{m_1} = a_1$ är den tomma pulkans acceleration.
+
+$$
+a_2 = \\frac{6{,}0}{4{,}0} = 1{,}5\\ \\mathrm{m/s^2}
+$$
+
+**Rimlighet.** Flickan ensam är lättare än pulkan med flickan, så hennes acceleration ska vara större än 1,2 m/s². Hon är tyngre än pulkan, så den ska vara mindre än 6,0 m/s². Båda villkoren stämmer.
+
+**Svar:** 1,5 m/s²`,
+        },
+        {
+            level: 3,
+            question: `En vikt hänger i en kraftmätare i taket på en hiss. Viktens massa är okänd. Hissen står still vid $t = 0$. Diagrammet visar vad kraftmätaren visar under en resa.
+
+${makeDiagram({
+    xMax: 12, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    yMin: 16, yMax: 24, yTicks: [16, 17, 18, 19, 20, 21, 22, 23, 24],
+    yLabel: '<tspan font-style="italic">F</tspan> (N)',
+    paths: [{ points: [[0, 20], [1, 20], [1, 22], [3, 22], [3, 20], [9, 20], [9, 18], [11, 18], [11, 20], [12, 20]] }],
+})}
+
+Åkte hissen uppåt eller nedåt, och hur långt? Motivera ditt svar. Ange sträckan i m.`,
+            answer: { value: 15.7, unit: 'm', tol: 0.04 },
+            solution: `**Vad kraftmätaren visar.** På vikten verkar två krafter: kraften $F$ från kraftmätaren uppåt och tyngdkraften $F_\mathrm{G}$ nedåt. Vid $t = 0$ står hissen still, och då är den resulterande kraften noll enligt Newtons första lag. Kraftmätaren visar alltså tyngdkraften, och ur den får vi viktens massa:
+
+$$
+F_\mathrm{G} = m \cdot g \quad\Leftrightarrow\quad m = \frac{F_\mathrm{G}}{g} = \frac{20}{9{,}82} = 2{,}036\ldots\ \mathrm{kg}
+$$
+
+När kraftmätaren visar något annat än 20 N är den resulterande kraften skild från noll, och vikten (och hissen) accelererar. Vi räknar uppåt som positiv riktning:
+
+$$
+F_R = F - F_\mathrm{G} \quad\text{och}\quad a = \frac{F_R}{m}
+$$
+
+**Mellan 1 s och 3 s** visar mätaren 22 N:
+
+$$
+a_1 = \frac{22 - 20}{2{,}036\ldots} = 0{,}982\ \mathrm{m/s^2}
+$$
+
+Accelerationen är riktad uppåt. Hissen stod still från början, så den börjar röra sig **uppåt**. Efter 2,0 s har den farten
+
+$$
+v = a_1 \cdot t = 0{,}982 \cdot 2{,}0 = 1{,}964\ \mathrm{m/s}
+$$
+
+och har åkt sträckan
+
+$$
+s_1 = \frac{a_1 \cdot t^{2}}{2} = \frac{0{,}982 \cdot 2{,}0^{2}}{2} = 1{,}964\ \mathrm{m}
+$$
+
+**Mellan 3 s och 9 s** visar mätaren 20 N. Den resulterande kraften är noll, så hissen åker med konstant fart 1,964 m/s i 6,0 s:
+
+$$
+s_2 = v \cdot t = 1{,}964 \cdot 6{,}0 = 11{,}784\ \mathrm{m}
+$$
+
+**Mellan 9 s och 11 s** visar mätaren 18 N:
+
+$$
+a_3 = \frac{18 - 20}{2{,}036\ldots} = -0{,}982\ \mathrm{m/s^2}
+$$
+
+Accelerationen är riktad nedåt, mot rörelsen, så hissen bromsar. På 2,0 s minskar farten med $0{,}982 \cdot 2{,}0 = 1{,}964\ \mathrm{m/s}$, alltså till noll, vilket stämmer med att mätaren visar 20 N igen efter 11 s. Inbromsningen är en spegelbild av starten, så sträckan blir densamma:
+
+$$
+s_3 = \frac{0{,}982 \cdot 2{,}0^{2}}{2} = 1{,}964\ \mathrm{m}
+$$
+
+**Hela resan:**
+
+$$
+s = s_1 + s_2 + s_3 = 1{,}964 + 11{,}784 + 1{,}964 = 15{,}712\ \mathrm{m} \approx 16\ \mathrm{m}
+$$
+
+Lägg märke till att mätaren inte visar åt vilket håll hissen rör sig, bara åt vilket håll den accelererar. Det är uppgiften att hissen står still från början som avgör att resan går uppåt. Hade hissen redan varit på väg nedåt hade samma diagram betytt en inbromsning. 16 m motsvarar ungefär fem våningar, vilket är rimligt för en hissresa på tolv sekunder.
+
+**Svar:** Hissen åkte uppåt, cirka 16 m.`,
+        },
+        {
+            level: 3,
+            question: `Luftmotståndet på en cyklist kan beskrivas med sambandet $F_\\text{luft} = k \\cdot v^{2}$, där *v* är farten och *k* är ett tal som beror på cyklistens form och storlek.<br>a) Bestäm enheten för *k* uttryckt i SI-grundenheter.<br>b) En cyklist har tillsammans med cykeln massan 80 kg och trampar med en konstant drivkraft på 60 N på plan väg. För henne är $k = 0{,}25$ i SI-enheter. Vilken är den högsta fart hon kan nå, och vilken acceleration har hon när farten är hälften av den högsta? Bortse från alla andra motståndskrafter.
+
+*Ange den högsta farten i b) som ditt numeriska svar i m/s.*`,
+            answer: { value: 15, unit: 'm/s', tol: 0.04 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 15, unit: 'm/s', tol: 0.04, etikett: 'högsta fart' },
+                { del: 'b', value: 0.56, unit: 'm/s²', tol: 0.03, etikett: 'acceleration vid halva farten' },
+            ],
+            solution: `**a)** Vi löser ut *k* och ersätter varje storhet med sin enhet:
+
+$$
+k = \\frac{F_\\text{luft}}{v^{2}}
+$$
+
+Kraft har enheten N, och enligt Newtons andra lag är $1\\ \\mathrm{N} = 1\\ \\mathrm{kg \\cdot m/s^2}$. Farten i kvadrat har enheten $\\mathrm{m^2/s^2}$. Enheten för *k* blir
+
+$$
+\\frac{\\mathrm{N}}{\\mathrm{m^2/s^2}} = \\frac{\\mathrm{kg \\cdot m/s^2}}{\\mathrm{m^2/s^2}} = \\frac{\\mathrm{kg \\cdot m}}{\\mathrm{s^2}} \\cdot \\frac{\\mathrm{s^2}}{\\mathrm{m^2}} = \\frac{\\mathrm{kg}}{\\mathrm{m}}
+$$
+
+**Svar:** kg/m
+
+**b) Den högsta farten.** Så länge drivkraften är större än luftmotståndet är den resulterande kraften framåt, och farten ökar. Men luftmotståndet växer med farten. Farten slutar öka när den resulterande kraften är noll, alltså när luftmotståndet är lika stort som drivkraften:
+
+$$
+F_\\text{luft} = F_\\text{driv} \\quad\\Leftrightarrow\\quad k \\cdot v_\\text{max}^{2} = F_\\text{driv} \\quad\\Leftrightarrow\\quad v_\\text{max} = \\sqrt{\\frac{F_\\text{driv}}{k}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F_\\text{driv} = 60\\ \\mathrm{N} \\\\
+k = 0{,}25\\ \\mathrm{kg/m} \\\\
+m = 80\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$
+v_\\text{max} = \\sqrt{\\frac{60}{0{,}25}} = \\sqrt{240} = 15{,}49\\ldots\\ \\mathrm{m/s} \\approx 15\\ \\mathrm{m/s}
+$$
+
+**Accelerationen vid halva farten.** Vid farten $\\dfrac{v_\\text{max}}{2}$ är luftmotståndet
+
+$$
+F_\\text{luft} = k \\cdot \\left(\\frac{v_\\text{max}}{2}\\right)^{2} = \\frac{k \\cdot v_\\text{max}^{2}}{4} = \\frac{F_\\text{driv}}{4}
+$$
+
+eftersom $k \\cdot v_\\text{max}^{2} = F_\\text{driv}$. Halva farten ger alltså en fjärdedel av luftmotståndet, oavsett värdet på *k*:
+
+$$
+F_\\text{luft} = \\frac{60}{4} = 15\\ \\mathrm{N}
+$$
+
+Den resulterande kraften är riktad framåt:
+
+$$
+F_R = F_\\text{driv} - F_\\text{luft} = 60 - 15 = 45\\ \\mathrm{N}
+$$
+
+$$
+a = \\frac{F_R}{m} = \\frac{45}{80} = 0{,}5625\\ \\mathrm{m/s^2} \\approx 0{,}56\\ \\mathrm{m/s^2}
+$$
+
+**Rimlighet.** 15 m/s är 56 km/h, en hög men möjlig toppfart på plan väg för en stark cyklist. I verkligheten finns också rullmotstånd, så den verkliga toppfarten blir något lägre.
+
+**Svar:** Högsta farten är 15 m/s. Vid halva farten är accelerationen 0,56 m/s².`,
+        },
+        {
+            level: 3,
+            question: `En vagn på en luftkuddebana dras med en konstant kraft *F* från en kraftgivare. Man lägger olika extra massor $m_\\text{extra}$ på vagnen och mäter accelerationen *a* vid varje försök. Varken kraften eller vagnens egen massa $m_\\text{vagn}$ är känd. Friktionen kan försummas.
+
+| $m_\\text{extra}$ (kg) | 0 | 0,20 | 0,40 | 0,60 | 0,80 |
+|---|---|---|---|---|---|
+| *a* (m/s²) | 1,52 | 0,98 | 0,76 | 0,59 | 0,50 |
+
+a) Visa att $\\dfrac{1}{a}$ ritad mot $m_\\text{extra}$ ska ge en rät linje. Vad betyder linjens lutning, och vad betyder punkten där den skär den lodräta axeln?<br>b) Rita diagrammet och bestäm kraften *F* och vagnens massa $m_\\text{vagn}$ ur det.
+
+*Ange vagnens massa i b) som ditt numeriska svar i kg.*`,
+            answer: { value: 0.40, unit: 'kg', tol: 0.06 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 0.60, unit: 'N', tol: 0.06, etikett: 'kraften $F$' },
+                { del: 'b', value: 0.40, unit: 'kg', tol: 0.06, etikett: 'vagnens massa' },
+            ],
+            solution: `**a)** Friktionen försummas, så *F* är den resulterande kraften. Den accelererar vagnen och den extra massan tillsammans, alltså massan $m_\\text{vagn} + m_\\text{extra}$. Newtons andra lag:
+
+$$
+F = (m_\\text{vagn} + m_\\text{extra}) \\cdot a
+$$
+
+Vi dividerar båda led med $F \\cdot a$, så att $\\dfrac{1}{a}$ står ensamt:
+
+$$
+\\frac{1}{a} = \\frac{m_\\text{vagn} + m_\\text{extra}}{F} = \\frac{1}{F} \\cdot m_\\text{extra} + \\frac{m_\\text{vagn}}{F}
+$$
+
+Uttrycket har samma form som ekvationen för en rät linje, med $\\dfrac{1}{a}$ i stället för *y* och $m_\\text{extra}$ i stället för *x*, eftersom *F* och $m_\\text{vagn}$ är desamma i alla försök. Diagrammet ska därför bli en rät linje.
+
+- Lutningen är $\\dfrac{1}{F}$. En större kraft ger en flackare linje.
+- Skärningen med den lodräta axeln (där $m_\\text{extra} = 0$) är $\\dfrac{m_\\text{vagn}}{F}$, alltså $\\dfrac{1}{a}$ för den tomma vagnen.
+
+Det är därför man ritar $\\dfrac{1}{a}$ och inte *a*: accelerationen själv är omvänt proportionell mot den totala massan, och den grafen blir krökt. En rät linje går att anpassa till mätpunkterna med linjal, så att mätfelen jämnas ut.
+
+**Svar:** $\\dfrac{1}{a} = \\dfrac{1}{F} \\cdot m_\\text{extra} + \\dfrac{m_\\text{vagn}}{F}$ är en rät linje. Lutningen är $\\dfrac{1}{F}$, och skärningen med den lodräta axeln är $\\dfrac{m_\\text{vagn}}{F}$.
+
+**b)** Vi räknar ut $\\dfrac{1}{a}$ för varje försök:
+
+| $m_\\text{extra}$ (kg) | 0 | 0,20 | 0,40 | 0,60 | 0,80 |
+|---|---|---|---|---|---|
+| $\\dfrac{1}{a}$ (s²/m) | 0,658 | 1,020 | 1,316 | 1,695 | 2,000 |
+
+Punkterna ritas i ett diagram, och en rät linje dras så att den följer punkterna så väl som möjligt (blå). Punkterna ligger inte exakt på linjen, på grund av mätfel.
+
+${makeDiagram({
+    xMax: 1.0, xTicks: [0, 0.2, 0.4, 0.6, 0.8, 1.0],
+    yMax: 2.4, yTicks: [0, 0.4, 0.8, 1.2, 1.6, 2.0, 2.4],
+    xLabel: '<tspan font-style="italic">m</tspan><tspan font-size="10" dy="3">extra</tspan><tspan dy="-3"> (kg)</tspan>',
+    yLabel: '1/<tspan font-style="italic">a</tspan> (s²/m)',
+    paths: [
+        { points: [[0, 0.67], [1.0, 2.345]], color: '#2563c9', width: 2 },
+        { points: [[0.8, 0.67], [0.8, 2.01]], color: '#8a8579', width: 1.4, dash: '5 4' },
+        { points: [[0, 0.67], [0.8, 0.67]], color: '#8a8579', width: 1.4, dash: '5 4' },
+        { points: [[-0.025, 0.568], [0.025, 0.748]], color: '#0f1620', width: 2 },
+        { points: [[-0.025, 0.748], [0.025, 0.568]], color: '#0f1620', width: 2 },
+        { points: [[0.175, 0.93], [0.225, 1.11]], color: '#0f1620', width: 2 },
+        { points: [[0.175, 1.11], [0.225, 0.93]], color: '#0f1620', width: 2 },
+        { points: [[0.375, 1.226], [0.425, 1.406]], color: '#0f1620', width: 2 },
+        { points: [[0.375, 1.406], [0.425, 1.226]], color: '#0f1620', width: 2 },
+        { points: [[0.575, 1.605], [0.625, 1.785]], color: '#0f1620', width: 2 },
+        { points: [[0.575, 1.785], [0.625, 1.605]], color: '#0f1620', width: 2 },
+        { points: [[0.775, 1.91], [0.825, 2.09]], color: '#0f1620', width: 2 },
+        { points: [[0.775, 2.09], [0.825, 1.91]], color: '#0f1620', width: 2 },
+    ],
+})}
+
+**Kraften.** Vi läser av två punkter på linjen som ligger långt från varandra, (0; 0,67) och (0,80; 2,01), och räknar lutningen:
+
+$$
+k = \\frac{\\Delta \\left(\\dfrac{1}{a}\\right)}{\\Delta m_\\text{extra}} = \\frac{2{,}01 - 0{,}67}{0{,}80 - 0} = \\frac{1{,}34}{0{,}80} = 1{,}675\\ \\mathrm{s^2/(m \\cdot kg)}
+$$
+
+Lutningen är $\\dfrac{1}{F}$, så kraften är det inverterade värdet:
+
+$$
+F = \\frac{1}{k} = \\frac{1}{1{,}675} = 0{,}5970\\ldots\\ \\mathrm{N} \\approx 0{,}60\\ \\mathrm{N}
+$$
+
+Enheten stämmer: $\\dfrac{1}{\\mathrm{s^2/(m \\cdot kg)}} = \\mathrm{kg \\cdot m/s^2} = \\mathrm{N}$.
+
+**Vagnens massa.** Linjen skär den lodräta axeln vid $\\dfrac{1}{a} = 0{,}67\\ \\mathrm{s^2/m}$. Den skärningen är $\\dfrac{m_\\text{vagn}}{F}$:
+
+$$
+\\frac{m_\\text{vagn}}{F} = 0{,}67 \\quad\\Leftrightarrow\\quad m_\\text{vagn} = 0{,}67 \\cdot F
+$$
+
+$$
+m_\\text{vagn} = 0{,}67 \\cdot 0{,}5970\\ldots = 0{,}40\\ \\mathrm{kg}
+$$
+
+**Rimlighet.** Den tomma vagnen ska då få accelerationen $\\dfrac{F}{m_\\text{vagn}} = \\dfrac{0{,}60}{0{,}40} = 1{,}5\\ \\mathrm{m/s^2}$, och den uppmätta var 1,52 m/s². Linjen ger ett bättre värde än det enskilda första försöket, eftersom den väger in alla fem mätningarna. En något annorlunda dragen linje ger svar som skiljer sig i andra värdesiffran, så 0,60 N och 0,40 kg ska ses som ungefärliga.
+
+**Svar:** Kraften är cirka 0,60 N och vagnens massa cirka 0,40 kg.`,
         },
     ],
 
@@ -11095,17 +14411,17 @@ Det är viktigt att inte blanda ihop motkrafter med jämviktskrafter:
             penna: 'ov-fy1-3.3-u2',
             question: `En vikt vilar på ett bord. Två krafter verkar på vikten: tyngdkraften $F_G$ nedåt och normalkraften $F_N$ från bordet uppåt. Är dessa två krafter **motkrafter enligt Newtons tredje lag**?`,
             choices: [
-                `Ja, de är lika stora och motriktade — det är ju definitionen av motkrafter.`,
-                `Nej, de verkar på samma föremål (vikten) — de är jämviktskrafter, inte motkrafter.`,
+                `Ja, de är lika stora och motriktade, och det är ju definitionen av motkrafter.`,
+                `Nej, de verkar på samma föremål (vikten). De är jämviktskrafter, inte motkrafter.`,
                 `Ja, men bara om vikten står helt stilla.`,
                 `Nej, eftersom normalkraften kan vara mindre än tyngdkraften.`,
             ],
             correct: 1,
-            solution: `Detta är en klassisk missuppfattning. Tyngdkraften och normalkraften på vikten är båda krafter som verkar på **samma föremål** (vikten). De är därför **jämviktskrafter** enligt Newtons första lag — de råkar vara lika stora och motriktade *eftersom vikten är i jämvikt*, inte för att de är motkrafter.
+            solution: `Detta är en klassisk missuppfattning. Tyngdkraften och normalkraften på vikten är båda krafter som verkar på **samma föremål** (vikten). De är därför **jämviktskrafter** enligt Newtons första lag. De råkar vara lika stora och motriktade *eftersom vikten är i jämvikt*, inte för att de är motkrafter.
 
-**Motkraften** till tyngdkraften (som är jordens dragning på vikten) är vikten*s* dragning på jorden (en lika stor gravitationskraft från vikten uppåt på jordklotet — vilket Newton 3 förutspår, även om effekten på jordklotet är försumbar).
+**Motkraften** till tyngdkraften (som är jordens dragning på vikten) är vikten*s* dragning på jorden (en lika stor gravitationskraft från vikten uppåt på jordklotet, vilket Newton 3 förutspår, även om effekten på jordklotet är försumbar).
 
-**Motkraften** till normalkraften (bordet trycker upp vikten) är vikten*s* tryck på bordet (vikten trycker ner bordet med samma kraft — vilket man känner när man håller något tungt).
+**Motkraften** till normalkraften (bordet trycker upp vikten) är vikten*s* tryck på bordet (vikten trycker ner bordet med samma kraft, vilket man känner när man håller något tungt).
 
 **Svar:** Alternativ B.`,
         },
@@ -11117,18 +14433,18 @@ Det är viktigt att inte blanda ihop motkrafter med jämviktskrafter:
                 `Handens kraft på vattnet.`,
                 `Lyftkraften från vattnet.`,
                 `Simmarens muskelkraft, som verkar direkt framåt på kroppen.`,
-                `Vattnets motkraft på handen — när handen trycker vattnet bakåt trycker vattnet handen framåt.`,
+                `Vattnets motkraft på handen: när handen trycker vattnet bakåt trycker vattnet handen framåt.`,
             ],
             correct: 3,
-            solution: `Muskelkraften är en **inre** kraft — den kan inte accelerera kroppen som helhet (lika lite som man kan lyfta sig själv i håret). Det som behövs är en **yttre** kraft, och den kommer från vattnet.
+            solution: `Muskelkraften är en **inre** kraft. Den kan inte accelerera kroppen som helhet (lika lite som man kan lyfta sig själv i håret). Det som behövs är en **yttre** kraft, och den kommer från vattnet.
 
 Handen trycker vattnet **bakåt** med en kraft. Enligt Newtons tredje lag trycker vattnet då handen (och därmed simmaren) **framåt** med en lika stor kraft. Det är denna motkraft som driver simmaren.
 
-Alternativ A är lömskt: handens kraft på vattnet är visserligen halva kraftparet, men den verkar på **vattnet** — inte på simmaren. En kraft kan bara accelerera det föremål den verkar på.
+Alternativ A är lömskt: handens kraft på vattnet är visserligen halva kraftparet, men den verkar på **vattnet**, inte på simmaren. En kraft kan bara accelerera det föremål den verkar på.
 
 **Svar:** Alternativ D.
 
-**Generell slutsats:** All framdrivning fungerar så här — gång (foten trycker marken bakåt), bilhjul (däcket trycker vägen bakåt), raket (motorn trycker avgaserna bakåt). Man rör sig framåt genom att trycka något annat bakåt.`,
+**Generell slutsats:** All framdrivning fungerar så här: gång (foten trycker marken bakåt), bilhjul (däcket trycker vägen bakåt), raket (motorn trycker avgaserna bakåt). Man rör sig framåt genom att trycka något annat bakåt.`,
         },
         {
             level: 1,
@@ -11141,9 +14457,9 @@ Alternativ A är lömskt: handens kraft på vattnet är visserligen halva kraftp
                 `Krafterna är exakt lika stora men motriktade.`,
             ],
             correct: 3,
-            solution: `Newtons tredje lag gäller **alltid** och **utan undantag** — även när föremålen är extremt olika stora. Kraften från lastbilen på myggan och kraften från myggan på lastbilen är exakt lika stora och motriktade, i varje ögonblick av kollisionen.
+            solution: `Newtons tredje lag gäller **alltid** och **utan undantag**, även när föremålen är extremt olika stora. Kraften från lastbilen på myggan och kraften från myggan på lastbilen är exakt lika stora och motriktade, i varje ögonblick av kollisionen.
 
-Det som skiljer sig dramatiskt är **effekten** av samma kraft: myggan har en massa på kanske $10^{-6}$ kg och får därför en enorm acceleration ($a = F/m$), medan lastbilens acceleration av samma kraft är fullständigt omätbar. Det är accelerationerna som är olika — inte krafterna.
+Det som skiljer sig dramatiskt är **effekten** av samma kraft: myggan har en massa på kanske $10^{-6}$ kg och får därför en enorm acceleration ($a = F/m$), medan lastbilens acceleration av samma kraft är fullständigt omätbar. Det är accelerationerna som är olika, inte krafterna.
 
 **Svar:** Alternativ D.`,
         },
@@ -11152,34 +14468,34 @@ Det som skiljer sig dramatiskt är **effekten** av samma kraft: myggan har en ma
             penna: 'ov-fy1-3.3-u5',
             question: `Två lag drar i ett rep i en dragkamp. Lag A vinner och drar lag B mot sig. Vilken av följande utsagor är korrekt om **spännkraften** i repet?`,
             choices: [
-                `Lag A drar i repet med större kraft än lag B — det är därför A vinner.`,
+                `Lag A drar i repet med större kraft än lag B, och det är därför A vinner.`,
                 `Spännkraften i repet är **lika stor** vid båda lagens händer. A vinner för att de har större friktion mot underlaget.`,
                 `Spännkraften är lika stor som tyngdkraften på det lättaste laget.`,
                 `Spännkraften är noll så länge ingen rör sig.`,
             ],
             correct: 1,
-            solution: `Detta är ett av de absolut mest klassiska missförstånden i krafter — även läroböcker gör fel ibland!
+            solution: `Detta är ett av de absolut mest klassiska missförstånden i krafter. Även läroböcker gör fel ibland!
 
-Spännkraften i ett (idealiserat masslöst) rep är **alltid lika stor i båda ändar** enligt Newtons tredje lag. Om lag A drar i repet med kraften *F*, så drar repet tillbaka på A med *F* — och samma sak vid B.
+Spännkraften i ett (idealiserat masslöst) rep är **alltid lika stor i båda ändar** enligt Newtons tredje lag. Om lag A drar i repet med kraften *F*, så drar repet tillbaka på A med *F*, och samma sak vid B.
 
 Det som avgör vem som vinner dragkampen är därför inte spännkraften i repet, utan **friktionskraften mot underlaget**. Det lag som kan stå emot en större friktionskraft mot marken (tyngre, bättre skor, bättre teknik) "håller emot" en större spännkraft i repet utan att glida bakåt.
 
 **Svar:** Alternativ B.
 
-**Generell slutsats:** I alla problem med rep, snören och trissor (utan massa och friktionsfria) är spännkraften samma längs hela snöret — annars skulle delar av snöret accelerera av sig själva, vilket bryter mot Newtons andra lag.`,
+**Generell slutsats:** I alla problem med rep, snören och trissor (utan massa och friktionsfria) är spännkraften samma längs hela snöret. Annars skulle delar av snöret accelerera av sig själva, vilket bryter mot Newtons andra lag.`,
         },
         {
             level: 2,
             question: `Astrid (55 kg) och Bo (75 kg) står stilla mitt emot varandra på blank is. Astrid puttar Bo, som under själva putten får accelerationen 1,2 m/s² bakåt. Vilken acceleration får Astrid under putten? (Bortse från friktionen mot isen.)`,
             answer: { value: 1.636, unit: 'm/s²', tol: 0.03 },
             penna: 'ov-fy1-3.3-u6',
-            solution: `**Steg 1 — kraften på Bo.** Newtons andra lag på Bo ger kraften Astrid puttar med:
+            solution: `**Steg 1: kraften på Bo.** Newtons andra lag på Bo ger kraften Astrid puttar med:
 
 $$
 F = m_\\text{Bo} \\cdot a_\\text{Bo} = 75 \\cdot 1{,}2 = 90\\ \\mathrm{N}
 $$
 
-**Steg 2 — motkraften på Astrid.** Enligt Newtons tredje lag puttar Bo tillbaka på Astrid med en **lika stor** kraft, 90 N, i motsatt riktning. Newtons andra lag på Astrid:
+**Steg 2: motkraften på Astrid.** Enligt Newtons tredje lag puttar Bo tillbaka på Astrid med en **lika stor** kraft, 90 N, i motsatt riktning. Newtons andra lag på Astrid:
 
 $$
 a_\\text{Astrid} = \\frac{F}{m_\\text{Astrid}} = \\frac{90}{55} = 1{,}636\\ldots \\approx 1{,}6\\ \\mathrm{m/s^2}
@@ -11193,7 +14509,7 @@ $$
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `En astronaut med massan 90 kg (inklusive dräkt) svävar stilla 15 m från rymdstationens luftsluss — utan säkerhetslina. För att ta sig tillbaka kastar hon sin verktygslåda (4,0 kg) rakt **bort** från stationen. Under kastet, som varar 0,40 s, verkar hon på lådan med den genomsnittliga kraften 54 N.
+            question: `En astronaut med massan 90 kg (inklusive dräkt) svävar stilla 15 m från rymdstationens luftsluss, utan säkerhetslina. För att ta sig tillbaka kastar hon sin verktygslåda (4,0 kg) rakt **bort** från stationen. Under kastet, som varar 0,40 s, verkar hon på lådan med den genomsnittliga kraften 54 N.
 
 a) Vilken fart får astronauten av kastet?
 
@@ -11206,7 +14522,7 @@ b) Hur lång tid tar det henne sedan att glida tillbaka till luftslussen?
                 { del: 'b', value: 62.5, unit: 's', tol: 0.03 },
             ],
             penna: 'ov-fy1-3.3-u7',
-            solution: `**a) Motkraften ger astronauten fart.** Enligt Newtons tredje lag verkar lådan tillbaka på astronauten med kraften 54 N — riktad **mot stationen**. Astronautens acceleration under kastet:
+            solution: `**a) Motkraften ger astronauten fart.** Enligt Newtons tredje lag verkar lådan tillbaka på astronauten med kraften 54 N, riktad **mot stationen**. Astronautens acceleration under kastet:
 
 $$
 a = \\frac{F}{m} = \\frac{54}{90} = 0{,}60\\ \\mathrm{m/s^2}
@@ -11218,7 +14534,7 @@ $$
 v = a \\cdot \\Delta t = 0{,}60 \\cdot 0{,}40 = 0{,}24\\ \\mathrm{m/s}
 $$
 
-**b) Likformig rörelse tillbaka.** Efter kastet verkar inga krafter på astronauten (Newtons första lag) — hon glider med konstant fart 0,24 m/s:
+**b) Likformig rörelse tillbaka.** Efter kastet verkar inga krafter på astronauten (Newtons första lag). Hon glider med konstant fart 0,24 m/s:
 
 $$
 t = \\frac{s}{v} = \\frac{15}{0{,}24} = 62{,}5 \\approx 63\\ \\mathrm{s}
@@ -11234,7 +14550,679 @@ alltså cirka 5 cm av de 15 m. Räknar man med accelerationsfasen blir den tot
 
 **Svar:** a) 0,24 m/s. b) Cirka 63 s, en dryg minut.
 
-**Generell slutsats:** I rymden finns inget att ta spjärn mot — det enda sättet att ändra sin rörelse är att kasta massa åt motsatt håll. Det är exakt raketmotorns princip: avgaserna är "verktygslådan" som kastas bakåt, kontinuerligt. Notera kedjan i lösningen: Newtons tredje lag (motkraften) → Newtons andra lag (accelerationen) → kinematik (fart och tid).`,
+**Generell slutsats:** I rymden finns inget att ta spjärn mot. Det enda sättet att ändra sin rörelse är att kasta massa åt motsatt håll. Det är exakt raketmotorns princip: avgaserna är "verktygslådan" som kastas bakåt, kontinuerligt. Notera kedjan i lösningen: Newtons tredje lag (motkraften) → Newtons andra lag (accelerationen) → kinematik (fart och tid).`,
+        },
+        {
+            level: 1,
+            question: `En snickare slår med en hammare på en spik. I slaget verkar hammaren på spiken med kraften $0{,}35\\ \\mathrm{kN}$ nedåt. Hur stor kraft verkar spiken med på hammaren, och åt vilket håll? Ange kraftens storlek i N.`,
+            answer: { value: 350, unit: 'N', tol: 0.02 },
+            solution: `Newtons tredje lag säger att kraften från spiken på hammaren är lika stor som kraften från hammaren på spiken, men motsatt riktad:
+
+$$
+\\vec{F}_{\\text{spik på hammare}} = -\\vec{F}_{\\text{hammare på spik}}
+$$
+
+Storleken omvandlas till newton:
+
+$$
+0{,}35\\ \\mathrm{kN} = 0{,}35 \\cdot 1\\,000\\ \\mathrm{N} = 350\\ \\mathrm{N}
+$$
+
+Hammaren trycker spiken nedåt, så spiken trycker hammaren uppåt. Det är den kraften som bromsar hammaren i slaget, och den känns som en stöt i handen.
+
+**Svar:** 350 N, riktad uppåt.`,
+        },
+        {
+            level: 1,
+            question: `En fotboll ligger stilla på en gräsmatta. Marken verkar på bollen med en normalkraft uppåt. Vilken kraft är **motkraften** till normalkraften enligt Newtons tredje lag?`,
+            choices: [
+                `Bollens tryckkraft nedåt på marken.`,
+                `Tyngdkraften på bollen.`,
+                `Bollens gravitationskraft uppåt på jorden.`,
+                `Det finns ingen motkraft, eftersom bollen ligger stilla.`,
+            ],
+            correct: 0,
+            solution: `En motkraft verkar på det **andra** föremålet och är av **samma sort**. Normalkraften är en tryckkraft från marken på bollen. Motkraften är därför en tryckkraft från bollen på marken, riktad nedåt.
+
+Tyngdkraften på bollen är lika stor och motriktad normalkraften, men den verkar på samma föremål (bollen). De två är jämviktskrafter, inte kraft och motkraft. Bollens gravitationskraft på jorden är motkraften till tyngdkraften, inte till normalkraften. Och Newtons tredje lag gäller alltid, också när föremålen ligger stilla.
+
+**Svar:** Alternativ A.`,
+        },
+        {
+            level: 1,
+            question: `Ange motkraften enligt Newtons tredje lag till var och en av krafterna nedan. Ange vilket föremål motkraften verkar på och åt vilket håll den är riktad.<br>a) En löpares fot trycker på startblocket bakåt.<br>b) Jorden drar en satellit mot jordens medelpunkt.<br>c) En kanotists paddel trycker vattnet bakåt.<br>d) En magnet drar ett gem mot sig.`,
+            solution: `Motkraften är alltid lika stor som kraften, motsatt riktad, av samma sort och verkar på det **andra** föremålet. Byt alltså plats på "vem" och "på vem", och vänd riktningen.
+
+**a)** Foten trycker på startblocket bakåt. Motkraften är startblockets tryckkraft på foten, riktad framåt. Det är den som ger löparen fart ur blocket.
+
+**Svar:** Startblockets kraft på foten, riktad framåt.
+
+**b)** Jorden drar satelliten med en gravitationskraft mot jordens medelpunkt. Motkraften är satellitens gravitationskraft på jorden, riktad mot satelliten.
+
+**Svar:** Satellitens gravitationskraft på jorden, riktad mot satelliten.
+
+**c)** Paddeln trycker vattnet bakåt. Motkraften är vattnets tryckkraft på paddeln, riktad framåt. Den driver kanoten framåt.
+
+**Svar:** Vattnets kraft på paddeln, riktad framåt.
+
+**d)** Magneten drar gemet mot sig med en magnetisk kraft. Motkraften är gemets magnetiska kraft på magneten, riktad mot gemet. Magneten dras alltså lika mycket mot gemet som gemet dras mot magneten.
+
+**Svar:** Gemets kraft på magneten, riktad mot gemet.`,
+        },
+        {
+            level: 2,
+            question: `Vid en straffspark är foten i kontakt med bollen i några millisekunder. Under kontakten får bollen, som har massan $0{,}43\\ \\mathrm{kg}$, medelaccelerationen $2\\,800\\ \\mathrm{m/s^2}$.<br>a) Hur stor medelkraft verkar bollen med på foten under sparken? Ange svaret i kN.<br>b) Hur många gånger större är den kraften än tyngdkraften på bollen?`,
+            answer: { value: 1.2, unit: 'kN', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 1.2, unit: 'kN', tol: 0.03 },
+                { del: 'b', value: 290, unit: '', tol: 0.03, etikett: 'antal gånger' },
+            ],
+            solution: `**a)** Kraften från foten på bollen ger bollen dess acceleration. Newtons andra lag på bollen:
+
+$$
+F = m \\cdot a
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m = 0{,}43\\ \\mathrm{kg} \\\\
+a = 2\\,800\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$
+F = 0{,}43 \\cdot 2\\,800 = 1\\,204\\ \\mathrm{N}
+$$
+
+Enligt Newtons tredje lag verkar bollen tillbaka på foten med en lika stor kraft, riktad bakåt mot foten. Med två värdesiffror blir den $1{,}2\\ \\mathrm{kN}$.
+
+**Svar:** 1,2 kN
+
+**b)** Tyngdkraften på bollen:
+
+$$
+F_G = m \\cdot g = 0{,}43 \\cdot 9{,}82 = 4{,}2226\\ \\mathrm{N}
+$$
+
+Kvoten mellan krafterna:
+
+$$
+\\frac{F}{F_G} = \\frac{1\\,204}{4{,}2226} = 285{,}1\\ldots \\approx 290
+$$
+
+Massan tar ut sig själv i kvoten, så den blir $\\dfrac{a}{g} = \\dfrac{2\\,800}{9{,}82}$. Det är därför en spark känns i foten trots att bollen är lätt: under den korta kontakten är kraften nästan 300 gånger bollens tyngdkraft.
+
+**Svar:** Cirka 290 gånger.`,
+        },
+        {
+            level: 2,
+            question: `En elev med massan $58\\ \\mathrm{kg}$ hoppar ned från en stol. Under fallet verkar bara tyngdkraften på eleven (bortse från luftmotståndet).<br>a) Hur stor kraft verkar eleven med på jorden under fallet? Ange kraftens riktning.<br>b) Vilken acceleration ger den kraften jorden? Jordens massa är $5{,}97 \\cdot 10^{24}\\ \\mathrm{kg}$.<br>c) Förklara varför ingen märker att jorden rör sig mot eleven.`,
+            answer: { value: 9.5e-23, unit: 'm/s²', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 570, unit: 'N', tol: 0.03 },
+                { del: 'b', value: 9.5e-23, unit: 'm/s²', tol: 0.03 },
+                { del: 'c' },
+            ],
+            solution: `**a)** Jorden drar eleven nedåt med tyngdkraften:
+
+$$
+F_G = m \\cdot g = 58 \\cdot 9{,}82 = 569{,}56\\ \\mathrm{N}
+$$
+
+Motkraften enligt Newtons tredje lag är en lika stor gravitationskraft från eleven på jorden, riktad uppåt mot eleven.
+
+**Svar:** Cirka 570 N, riktad uppåt mot eleven.
+
+**b)** Newtons andra lag på jorden, med accelerationen utlöst:
+
+$$
+a = \\frac{F}{M}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F = 569{,}56\\ \\mathrm{N} \\\\
+M = 5{,}97 \\cdot 10^{24}\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$
+a = \\frac{569{,}56}{5{,}97 \\cdot 10^{24}} = 9{,}54\\ldots \\cdot 10^{-23} \\approx 9{,}5 \\cdot 10^{-23}\\ \\mathrm{m/s^2}
+$$
+
+**Svar:** Cirka $9{,}5 \\cdot 10^{-23}\\ \\mathrm{m/s^2}$
+
+**c)** Krafterna är lika stora, men jordens massa är enorm, så accelerationen blir obegripligt liten. Fallet från en stol tar ungefär $0{,}3\\ \\mathrm{s}$. Under den tiden hinner jorden röra sig ungefär
+
+$$
+s = \\frac{a \\cdot t^2}{2} = \\frac{9{,}54 \\cdot 10^{-23} \\cdot 0{,}3^2}{2} \\approx 4 \\cdot 10^{-24}\\ \\mathrm{m}
+$$
+
+En proton, som är cirka $10^{-15}\\ \\mathrm{m}$ stor, är över hundra miljoner gånger större än så, och dessutom drar alla andra föremål på jorden åt alla möjliga håll samtidigt.
+
+**Svar:** Jordens massa är så stor att den lika stora kraften ger jorden en acceleration och en förflyttning som är alldeles för små för att märkas.`,
+        },
+        {
+            level: 2,
+            question: `En bil med massan $1\\,200\\ \\mathrm{kg}$ drar en släpvagn med massan $400\\ \\mathrm{kg}$. Ekipaget accelererar från ett rödljus med $1{,}5\\ \\mathrm{m/s^2}$. Bortse från luftmotstånd och rullmotstånd.<br>a) Hur stor kraft verkar bilen med på släpvagnen?<br>b) Hur stor är friktionskraften från vägen på bilens drivhjul? Ange svaret i kN.<br>c) Enligt Newtons tredje lag drar släpvagnen bilen bakåt med lika stor kraft som bilen drar släpvagnen framåt. Förklara varför ekipaget ändå kan accelerera.`,
+            answer: { value: 2.4, unit: 'kN', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 600, unit: 'N', tol: 0.03 },
+                { del: 'b', value: 2.4, unit: 'kN', tol: 0.03 },
+                { del: 'c' },
+            ],
+            solution: `Figuren visar bilen och släpvagnen ritade isär, med de vågräta krafterna på var och en i skala. Tyngdkrafterna och normalkrafterna tar ut varandra och är inte utritade.
+
+<svg viewBox="34 70 440 106" width="597" height="144" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En släpvagn till vänster och en bil till höger, ritade isär. På släpvagnens dragstång verkar en kraft på 600 N framåt. På bilens dragkrok verkar en kraft på 600 N bakåt. Vid bilens framhjul verkar friktionskraften 2 400 N framåt.">
+<line x1="34" y1="150" x2="474" y2="150" stroke="rgba(15,22,32,0.45)" stroke-width="1.4"/>
+<rect x="40" y="104" width="100" height="34" rx="3" fill="#c9d7e6" stroke="#4f7197" stroke-width="1.4"/>
+<circle cx="90" cy="142" r="8" fill="#33373d" stroke="#1a1c20" stroke-width="1.2"/>
+<circle cx="90" cy="142" r="3" fill="#9aa3ad"/>
+<line x1="140" y1="128" x2="160" y2="128" stroke="#5a6068" stroke-width="3"/>
+<rect x="256" y="100" width="150" height="38" rx="6" fill="#6f9fd0" stroke="#3f6f9f" stroke-width="1.4"/>
+<polygon points="286,100 304,78 358,78 376,100" fill="#cfe6f5" stroke="#3f6f9f" stroke-width="1.4" stroke-linejoin="round"/>
+<line x1="331" y1="78" x2="331" y2="100" stroke="#3f6f9f" stroke-width="1.2"/>
+<circle cx="291" cy="139" r="11" fill="#33373d" stroke="#1a1c20" stroke-width="1.2"/>
+<circle cx="291" cy="139" r="4" fill="#9aa3ad"/>
+<circle cx="371" cy="139" r="11" fill="#33373d" stroke="#1a1c20" stroke-width="1.2"/>
+<circle cx="371" cy="139" r="4" fill="#9aa3ad"/>
+<line x1="256" y1="128" x2="240" y2="128" stroke="#5a6068" stroke-width="3"/>
+<line x1="160" y1="128" x2="175" y2="128" stroke="#2563c9" stroke-width="3.6" stroke-linecap="butt"/>
+<polygon points="175,122 184,128 175,134" fill="#2563c9"/>
+<line x1="240" y1="128" x2="225" y2="128" stroke="#2563c9" stroke-width="3.6" stroke-linecap="butt"/>
+<polygon points="225,122 216,128 225,134" fill="#2563c9"/>
+<line x1="371" y1="150" x2="458" y2="150" stroke="#c4730f" stroke-width="3.6" stroke-linecap="butt"/>
+<polygon points="458,144 467,150 458,156" fill="#c4730f"/>
+<text x="172" y="114" text-anchor="middle" font-size="14" fill="#2563c9">600 N</text>
+<text x="228" y="114" text-anchor="middle" font-size="14" fill="#2563c9">600 N</text>
+<text x="438" y="170" text-anchor="middle" font-size="14" fill="#c4730f">2 400 N</text>
+<text x="90" y="170" text-anchor="middle" font-size="14" fill="#0f1620">släpvagn</text>
+<text x="331" y="170" text-anchor="middle" font-size="14" fill="#0f1620">bil</text>
+</svg>
+
+**a)** Den enda vågräta kraften på släpvagnen är kraften $F$ från bilen. Newtons andra lag på släpvagnen:
+
+$$
+F = m_\\text{släp} \\cdot a = 400 \\cdot 1{,}5 = 600\\ \\mathrm{N}
+$$
+
+**Svar:** 600 N
+
+**b)** På bilen verkar friktionskraften $F_f$ från vägen framåt och, enligt Newtons tredje lag, kraften 600 N från släpvagnen bakåt. Newtons andra lag på bilen, med framåt som positiv riktning:
+
+$$
+F_f - 600 = m_\\text{bil} \\cdot a = 1\\,200 \\cdot 1{,}5 = 1\\,800
+$$
+
+$$
+F_f = 600 + 1\\,800 = 2\\,400\\ \\mathrm{N}
+$$
+
+Kontroll: hela ekipaget har massan $1\\,600\\ \\mathrm{kg}$, och den enda yttre vågräta kraften är friktionen, så $F_f = 1\\,600 \\cdot 1{,}5 = 2\\,400\\ \\mathrm{N}$. Det stämmer.
+
+**Svar:** 2,4 kN
+
+**c)** Kraften och motkraften i kopplingen verkar på **olika** föremål, så de kan inte ta ut varandra. Släpvagnen påverkas bara av kraften framåt och accelererar därför framåt. Bilen påverkas av 600 N bakåt men också av friktionskraften 2 400 N framåt från vägen, så den resulterande kraften på bilen är framåt. Det som driver hela ekipaget är vägens kraft på drivhjulen, som är motkraften till att hjulen trycker vägen bakåt.
+
+**Svar:** Krafterna i kopplingen verkar på var sitt föremål. Bilen får dessutom en större kraft framåt från vägen, så båda fordonen får en resulterande kraft framåt.`,
+        },
+        {
+            level: 2,
+            question: `I en dragkamp drar lag A och lag B i var sin ände av ett rep. Lag A har den sammanlagda massan $340\\ \\mathrm{kg}$ och lag B har massan $310\\ \\mathrm{kg}$. Under några sekunder är spännkraften i repet $1{,}8\\ \\mathrm{kN}$, och båda lagen rör sig med accelerationen $0{,}25\\ \\mathrm{m/s^2}$ i riktning mot lag A:s sida. Repets massa kan försummas.<br>a) Hur stor är friktionskraften från marken på lag B? Ange svaret i kN.<br>b) Hur stor är friktionskraften från marken på lag A? Ange svaret i kN.<br>c) Lag A drar inte hårdare i repet än lag B gör. Förklara med Newtons tredje lag varför lag A ändå vinner.`,
+            answer: { value: 1.9, unit: 'kN', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 1.7, unit: 'kN', tol: 0.03 },
+                { del: 'b', value: 1.9, unit: 'kN', tol: 0.03 },
+                { del: 'c' },
+            ],
+            solution: `Repets massa är försumbar, så spännkraften är lika stor i hela repet: repet drar lag A mot lag B med $1\\,800\\ \\mathrm{N}$ och lag B mot lag A med $1\\,800\\ \\mathrm{N}$. Vi räknar riktningen mot lag A:s sida som positiv, eftersom båda lagen accelererar åt det hållet.
+
+**a)** På lag B verkar repets kraft $1\\,800\\ \\mathrm{N}$ mot A:s sida och friktionskraften $F_\\mathrm{fB}$ från marken åt andra hållet, eftersom lag B tar spjärn bakåt. Newtons andra lag på lag B:
+
+$$
+1\\,800 - F_\\mathrm{fB} = m_\\mathrm{B} \\cdot a
+$$
+
+$$
+F_\\mathrm{fB} = 1\\,800 - m_\\mathrm{B} \\cdot a = 1\\,800 - 310 \\cdot 0{,}25 = 1\\,722{,}5\\ \\mathrm{N}
+$$
+
+Med två värdesiffror blir det $1{,}7\\ \\mathrm{kN}$.
+
+**Svar:** 1,7 kN
+
+**b)** På lag A verkar repets kraft $1\\,800\\ \\mathrm{N}$ mot B:s sida och friktionskraften $F_\\mathrm{fA}$ från marken mot A:s sida. Newtons andra lag på lag A:
+
+$$
+F_\\mathrm{fA} - 1\\,800 = m_\\mathrm{A} \\cdot a
+$$
+
+$$
+F_\\mathrm{fA} = 1\\,800 + m_\\mathrm{A} \\cdot a = 1\\,800 + 340 \\cdot 0{,}25 = 1\\,885\\ \\mathrm{N}
+$$
+
+Kontroll: på båda lagen och repet tillsammans är de yttre vågräta krafterna bara de två friktionskrafterna. Skillnaden $1\\,885 - 1\\,722{,}5 = 162{,}5\\ \\mathrm{N}$ ska ge hela massan $650\\ \\mathrm{kg}$ accelerationen, och $650 \\cdot 0{,}25 = 162{,}5\\ \\mathrm{N}$. Det stämmer.
+
+**Svar:** 1,9 kN
+
+**c)** Lag A drar i repet och repet drar tillbaka i lag A med lika stor kraft, och likadant vid lag B. Kraften från repet är därför lika stor på båda lagen. Det som skiljer är kraften från marken. Lag A trycker med fötterna marken mot lag B, och enligt Newtons tredje lag trycker marken då lag A lika mycket åt andra hållet, $1{,}9\\ \\mathrm{kN}$. Den kraften är större än repets kraft på lag A. Lag B får bara $1{,}7\\ \\mathrm{kN}$ från marken, mindre än repets kraft. Båda lagen får därför en resulterande kraft mot A:s sida.
+
+**Svar:** Repet drar lika hårt i båda lagen. Lag A vinner eftersom marken trycker lag A bakåt med en större kraft än den kraft marken ger lag B, som motkraft till att lag A trycker hårdare mot marken.`,
+        },
+        {
+            level: 2,
+            question: `En vattenraket skjuts upp lodrätt. I ett visst ögonblick är raketens massa, med det vatten som finns kvar i den, $0{,}45\\ \\mathrm{kg}$, och raketen trycker ut vatten nedåt genom munstycket med kraften $38\\ \\mathrm{N}$. Bestäm raketens acceleration i detta ögonblick. Bortse från luftmotståndet. Ange svaret i m/s².`,
+            answer: { value: 75, unit: 'm/s²', tol: 0.03 },
+            solution: `**Kraften som driver raketen.** Raketen trycker vattnet nedåt med 38 N. Enligt Newtons tredje lag trycker vattnet då raketen uppåt med lika stor kraft, 38 N.
+
+**Krafterna på raketen.** Uppåt verkar vattnets kraft $F = 38\\ \\mathrm{N}$, nedåt tyngdkraften:
+
+$$
+F_G = m \\cdot g = 0{,}45 \\cdot 9{,}82 = 4{,}419\\ \\mathrm{N}
+$$
+
+Den resulterande kraften, med uppåt som positiv riktning:
+
+$$
+F_R = F - F_G = 38 - 4{,}419 = 33{,}581\\ \\mathrm{N}
+$$
+
+**Accelerationen.** Newtons andra lag:
+
+$$
+a = \\frac{F_R}{m}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F_R = 33{,}581\\ \\mathrm{N} \\\\
+m = 0{,}45\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$
+a = \\frac{33{,}581}{0{,}45} = 74{,}62\\ldots \\approx 75\\ \\mathrm{m/s^2}
+$$
+
+Rimlighet: det är ungefär åtta gånger tyngdfaktorn. En vattenraket försvinner uppåt på en bråkdels sekund när den släpps, så en så stor acceleration är rimlig i början av uppskjutningen.
+
+**Svar:** Cirka 75 m/s², riktad uppåt.`,
+        },
+        {
+            level: 3,
+            question: `Två klossar A och B står i kontakt med varandra på ett friktionsfritt underlag. En vågrät kraft $F$ verkar på kloss A, som i sin tur trycker på kloss B. Mellan klossarna sitter en tunn kraftgivare med försumbar massa, som visar hur stor kraft klossarna trycker på varandra med.
+
+<svg viewBox="52 70 274 94" width="326" height="112" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Två lika stora klossar i kontakt på ett vågrätt underlag, kloss A till vänster och kloss B till höger. Mellan dem sitter en tunn kraftgivare. Kraften F trycker åt höger på kloss A från vänster.">
+<line x1="60" y1="150" x2="320" y2="150" stroke="rgba(15,22,32,0.55)" stroke-width="1.4"/>
+<line x1="76" y1="150" x2="68" y2="158" stroke="rgba(15,22,32,0.3)" stroke-width="1"/>
+<line x1="100" y1="150" x2="92" y2="158" stroke="rgba(15,22,32,0.3)" stroke-width="1"/>
+<line x1="124" y1="150" x2="116" y2="158" stroke="rgba(15,22,32,0.3)" stroke-width="1"/>
+<line x1="148" y1="150" x2="140" y2="158" stroke="rgba(15,22,32,0.3)" stroke-width="1"/>
+<line x1="172" y1="150" x2="164" y2="158" stroke="rgba(15,22,32,0.3)" stroke-width="1"/>
+<line x1="196" y1="150" x2="188" y2="158" stroke="rgba(15,22,32,0.3)" stroke-width="1"/>
+<line x1="220" y1="150" x2="212" y2="158" stroke="rgba(15,22,32,0.3)" stroke-width="1"/>
+<line x1="244" y1="150" x2="236" y2="158" stroke="rgba(15,22,32,0.3)" stroke-width="1"/>
+<line x1="268" y1="150" x2="260" y2="158" stroke="rgba(15,22,32,0.3)" stroke-width="1"/>
+<line x1="292" y1="150" x2="284" y2="158" stroke="rgba(15,22,32,0.3)" stroke-width="1"/>
+<line x1="316" y1="150" x2="308" y2="158" stroke="rgba(15,22,32,0.3)" stroke-width="1"/>
+<rect x="110" y="96" width="68" height="54" fill="#d3e4f5" stroke="#4f7197" stroke-width="1.6"/>
+<rect x="182" y="96" width="68" height="54" fill="#bcd4ec" stroke="#4f7197" stroke-width="1.6"/>
+<rect x="178" y="108" width="4" height="30" fill="#4a4f57"/>
+<text x="144" y="128" text-anchor="middle" font-size="15" fill="#0f1620">A</text>
+<text x="216" y="128" text-anchor="middle" font-size="15" fill="#0f1620">B</text>
+<line x1="72" y1="123" x2="101" y2="123" stroke="#c8324a" stroke-width="3.6" stroke-linecap="butt"/>
+<polygon points="101,117 110,123 101,129" fill="#c8324a"/>
+<text x="86" y="111" text-anchor="middle" font-size="16" fill="#c8324a"><tspan font-style="italic">F</tspan></text>
+<text x="180" y="84" text-anchor="middle" font-size="13" fill="#4a4f57">kraftgivare</text>
+<line x1="180" y1="88" x2="180" y2="106" stroke="#4a4f57" stroke-width="1"/>
+</svg>
+
+Givaren visar $18\\ \\mathrm{N}$, och klossarna får accelerationen $3{,}0\\ \\mathrm{m/s^2}$. Sedan byter klossarna plats, så att samma kraft $F$ verkar på kloss B och B trycker på A. Givaren visar nu $6{,}0\\ \\mathrm{N}$.<br>a) Bestäm massan hos kloss A och hos kloss B.<br>b) Hur stor är kraften $F$?<br>c) Visa med Newtons andra och tredje lag att de två visningarna på givaren tillsammans alltid blir lika med $F$, oavsett klossarnas massor.`,
+            answer: { value: 24, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 2.0, unit: 'kg', tol: 0.03, etikett: '$m_\\mathrm{A} =$' },
+                { del: 'a', value: 6.0, unit: 'kg', tol: 0.03, etikett: '$m_\\mathrm{B} =$' },
+                { del: 'b', value: 24, unit: 'N', tol: 0.03 },
+                { del: 'c' },
+            ],
+            solution: `**a) Den främre klossen.** Underlaget är friktionsfritt, så den enda vågräta kraften på den främre klossen är kraften från givaren, alltså från den bakre klossen. Den kraften ger den främre klossen hela dess acceleration. Newtons andra lag på den främre klossen:
+
+$$
+F_\\mathrm{k} = m_\\text{främre} \\cdot a \\quad\\Leftrightarrow\\quad m_\\text{främre} = \\frac{F_\\mathrm{k}}{a}
+$$
+
+I den första uppställningen står B främst:
+
+$$
+m_\\mathrm{B} = \\frac{18}{3{,}0} = 6{,}0\\ \\mathrm{kg}
+$$
+
+Efter bytet verkar samma kraft $F$ på samma totala massa, så accelerationen är fortfarande $3{,}0\\ \\mathrm{m/s^2}$. Nu står A främst:
+
+$$
+m_\\mathrm{A} = \\frac{6{,}0}{3{,}0} = 2{,}0\\ \\mathrm{kg}
+$$
+
+**Svar:** $m_\\mathrm{A} = 2{,}0\\ \\mathrm{kg}$ och $m_\\mathrm{B} = 6{,}0\\ \\mathrm{kg}$
+
+**b)** Krafterna mellan klossarna är kraft och motkraft inom systemet och tar ut varandra. Den enda vågräta yttre kraften på båda klossarna tillsammans är $F$. Newtons andra lag på båda klossarna:
+
+$$
+F = (m_\\mathrm{A} + m_\\mathrm{B}) \\cdot a = (2{,}0 + 6{,}0) \\cdot 3{,}0 = 24\\ \\mathrm{N}
+$$
+
+Kontroll med den bakre klossen A i den första uppställningen: enligt Newtons tredje lag trycker B tillbaka på A med $18\\ \\mathrm{N}$, så den resulterande kraften på A är $24 - 18 = 6{,}0\\ \\mathrm{N}$, och $m_\\mathrm{A} \\cdot a = 2{,}0 \\cdot 3{,}0 = 6{,}0\\ \\mathrm{N}$. Det stämmer.
+
+**Svar:** 24 N
+
+**c)** Med massorna $m_\\mathrm{A}$ och $m_\\mathrm{B}$ blir accelerationen i båda uppställningarna, enligt Newtons andra lag på hela systemet,
+
+$$
+a = \\frac{F}{m_\\mathrm{A} + m_\\mathrm{B}}
+$$
+
+Givaren visar kraften på den främre klossen, som är den enda kraft som accelererar den. Med B främst respektive A främst:
+
+$$
+F_1 = m_\\mathrm{B} \\cdot a = \\frac{m_\\mathrm{B} \\cdot F}{m_\\mathrm{A} + m_\\mathrm{B}} \\qquad F_2 = m_\\mathrm{A} \\cdot a = \\frac{m_\\mathrm{A} \\cdot F}{m_\\mathrm{A} + m_\\mathrm{B}}
+$$
+
+Summan av visningarna:
+
+$$
+F_1 + F_2 = \\frac{(m_\\mathrm{A} + m_\\mathrm{B}) \\cdot F}{m_\\mathrm{A} + m_\\mathrm{B}} = F
+$$
+
+Newtons tredje lag förklarar varför det blir så. Den främre klossen trycker tillbaka på den bakre med lika stor kraft som givaren visar, så av kraften $F$ blir bara $F - F_\\mathrm{k}$ kvar till den bakre klossen. Givaren visar alltså precis den del av $F$ som går åt till att accelerera den främre klossen. Byter klossarna plats går resten av $F$, den del som förut accelererade den bakre klossen, i stället åt till den klossen när den står främst.
+
+**Svar:** Givaren visar i varje uppställning den främre klossens massa gånger $a$, så summan blir $(m_\\mathrm{A} + m_\\mathrm{B}) \\cdot a = F$.`,
+        },
+        {
+            level: 3,
+            question: `En planka med massan $20\\ \\mathrm{kg}$ och längden $4{,}0\\ \\mathrm{m}$ ligger på blank is, där friktionen mot isen kan försummas. En person med massan $60\\ \\mathrm{kg}$ står i plankans vänstra ände. Både personen och plankan är från början i vila. Personen går sedan till plankans högra ände och stannar där.<br>a) Förklara med Newtons tredje lag varför plankan rör sig, och åt vilket håll.<br>b) Hur långt har plankan förflyttat sig i förhållande till isen när personen har kommit fram?<br>c) Hur långt har personen förflyttat sig i förhållande till isen?`,
+            answer: { value: 3.0, unit: 'm', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 3.0, unit: 'm', tol: 0.03 },
+                { del: 'c', value: 1.0, unit: 'm', tol: 0.03 },
+            ],
+            solution: `**a)** För att gå åt höger trycker personen med fötterna på plankan åt vänster. Enligt Newtons tredje lag trycker plankan då personen åt höger med en lika stor kraft. Personen accelererar åt höger och plankan åt vänster. När personen stannar i högra änden bromsar fötterna mot plankan, och då bromsas plankan lika mycket åt andra hållet. Båda stannar samtidigt.
+
+**Svar:** Personen trycker plankan åt vänster, så plankan glider åt vänster medan personen går åt höger.
+
+**b)** Kraften mellan fötterna och plankan varierar under varje steg, och vi känner den inte. Men i varje ögonblick är kraften på personen och kraften på plankan lika stora enligt Newtons tredje lag. Newtons andra lag ger då i varje ögonblick
+
+$$
+m_\\text{p} \\cdot a_\\text{p} = m_\\text{pl} \\cdot a_\\text{pl} \\quad\\Leftrightarrow\\quad \\frac{a_\\text{p}}{a_\\text{pl}} = \\frac{m_\\text{pl}}{m_\\text{p}}
+$$
+
+där index p står för personen och pl för plankan. Båda startar från vila, och under varje litet tidsintervall ökar farterna med $a \\cdot \\Delta t$. Därför har farterna hela tiden samma förhållande, och eftersom farterna har det har även förflyttningarna det:
+
+$$
+\\frac{s_\\text{p}}{s_\\text{pl}} = \\frac{m_\\text{pl}}{m_\\text{p}} = \\frac{20}{60} = \\frac{1}{3}
+$$
+
+Personen och plankan rör sig åt var sitt håll, och tillsammans ska de förflytta sig plankans längd i förhållande till varandra:
+
+$$
+s_\\text{p} + s_\\text{pl} = 4{,}0
+$$
+
+Insättning av $s_\\text{p} = \\dfrac{s_\\text{pl}}{3}$ ger
+
+$$
+\\frac{s_\\text{pl}}{3} + s_\\text{pl} = 4{,}0 \\quad\\Leftrightarrow\\quad \\frac{4 \\cdot s_\\text{pl}}{3} = 4{,}0 \\quad\\Leftrightarrow\\quad s_\\text{pl} = 3{,}0\\ \\mathrm{m}
+$$
+
+Rimlighet: plankan har bara en tredjedel av personens massa, så den ska röra sig tre gånger så långt som personen. Det är oberoende av hur fort eller ojämnt personen går.
+
+**Svar:** 3,0 m åt vänster.
+
+**c)**
+
+$$
+s_\\text{p} = 4{,}0 - 3{,}0 = 1{,}0\\ \\mathrm{m}
+$$
+
+**Svar:** 1,0 m åt höger.`,
+        },
+        {
+            level: 3,
+            question: `Lea har byggt en lätt vagn med låg friktion. På vagnens bakre del sitter en batteridriven fläkt och på den främre delen ett segel. Fläkten blåser luft framåt mot seglet. Lea tror att vagnen ska rulla framåt när hon slår på fläkten.
+
+<svg viewBox="34 34 262 146" width="383" height="213" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En vagn på hjul. Längst bak på vagnen sitter en fläkt som blåser framåt, åt höger. Längst fram sitter en mast med ett segel som fläkten blåser på. Streckade linjer visar luftströmmen mellan fläkten och seglet.">
+<line x1="40" y1="170" x2="290" y2="170" stroke="rgba(15,22,32,0.55)" stroke-width="1.4"/>
+<rect x="60" y="130" width="200" height="20" rx="3" fill="#c9d7e6" stroke="#4f7197" stroke-width="1.4"/>
+<circle cx="95" cy="156" r="14" fill="#33373d" stroke="#1a1c20" stroke-width="1.2"/>
+<circle cx="95" cy="156" r="5" fill="#9aa3ad"/>
+<circle cx="225" cy="156" r="14" fill="#33373d" stroke="#1a1c20" stroke-width="1.2"/>
+<circle cx="225" cy="156" r="5" fill="#9aa3ad"/>
+<rect x="88" y="110" width="6" height="20" fill="#5a6068"/>
+<rect x="66" y="76" width="12" height="18" rx="2" fill="#4a4f57"/>
+<rect x="78" y="60" width="26" height="50" rx="6" fill="#6b7280" stroke="#4a4f57" stroke-width="1.2"/>
+<ellipse cx="104" cy="85" rx="7" ry="25" fill="#d6dbe0" stroke="#4a4f57" stroke-width="1.4"/>
+<line x1="104" y1="62" x2="104" y2="108" stroke="#4a4f57" stroke-width="1"/>
+<line x1="98" y1="73" x2="110" y2="97" stroke="#4a4f57" stroke-width="1"/>
+<line x1="110" y1="73" x2="98" y2="97" stroke="#4a4f57" stroke-width="1"/>
+<line x1="116" y1="72" x2="214" y2="72" stroke="#5b9bc9" stroke-width="1.6" stroke-dasharray="6 5"/>
+<line x1="118" y1="85" x2="216" y2="85" stroke="#5b9bc9" stroke-width="1.6" stroke-dasharray="6 5"/>
+<line x1="116" y1="98" x2="214" y2="98" stroke="#5b9bc9" stroke-width="1.6" stroke-dasharray="6 5"/>
+<line x1="226" y1="130" x2="226" y2="40" stroke="#6b4a2b" stroke-width="4" stroke-linecap="round"/>
+<path d="M228,46 Q256,86 228,124 Z" fill="#f1e6cf" stroke="#b08a55" stroke-width="1.4" stroke-linejoin="round"/>
+<text x="165" y="62" text-anchor="middle" font-size="13" fill="#3a6f96">luftström</text>
+</svg>
+
+a) Beskriv med Newtons tredje lag vilka vågräta krafter luften och vagnen verkar på varandra med, vid fläkten och vid seglet.<br>b) Anta att seglet bromsar upp luften helt, så att den sedan strömmar ut åt sidorna. Kommer vagnen att röra sig? Motivera.<br>c) Hur skulle Lea kunna få vagnen att röra sig så snabbt som möjligt framåt med samma fläkt? Motivera.`,
+            solution: `**a)** Vid fläkten: fläktbladen trycker luften **framåt**. Enligt Newtons tredje lag trycker luften då fläkten, och därmed vagnen, **bakåt** med lika stor kraft.
+
+Vid seglet: luften som träffar seglet bromsas, alltså trycker seglet luften **bakåt**. Enligt Newtons tredje lag trycker luften då seglet, och därmed vagnen, **framåt** med lika stor kraft.
+
+**Svar:** Vid fläkten trycker luften vagnen bakåt, vid seglet trycker luften vagnen framåt.
+
+**b)** Titta på luften i stället för på vagnen. Luften som sugs in bakom fläkten står ungefär stilla, och efter seglet strömmar den ut åt sidorna utan någon fart framåt eller bakåt. Luften har alltså ingen kvarvarande fart i rörelseriktningen, och då har vagnen, sett över tid, inte verkat på luften med någon resulterande vågrät kraft: fläktens kraft framåt på luften och seglets kraft bakåt på luften tar ut varandra. Enligt Newtons tredje lag är då också luftens resulterande kraft på vagnen noll. Vagnen står still.
+
+I verkligheten missar en del av luften seglet och fortsätter framåt. Då blir fläktens bakåtriktade kraft något större än seglets framåtriktade, och vagnen rullar i så fall långsamt **bakåt**.
+
+**Svar:** Nej, i stort sett inte. Krafterna vid fläkten och vid seglet tar ut varandra, och om något rullar vagnen svagt bakåt.
+
+**c)** Vagnen får en resulterande kraft framåt bara om luften till slut får fart **bakåt**. Det enklaste är att ta bort seglet och vända fläkten så att den blåser bakåt. Då trycker fläkten luften bakåt, luften trycker vagnen framåt och ingen kraft på ett segel motverkar det. Ett segel som studsade luften rakt tillbaka skulle i bästa fall ge samma sak, men i praktiken studsar luften aldrig tillbaka helt, och seglet ger dessutom luftmotstånd när vagnen rör sig.
+
+**Svar:** Ta bort seglet och vänd fläkten bakåt, så att luften får fart bakåt och motkraften driver vagnen framåt.`,
+        },
+        {
+            level: 3,
+            question: `En järnbit med massan $0{,}80\\ \\mathrm{kg}$ ligger på en våg. En magnet hänger i ett stativ strax ovanför järnbiten, och magneten och järnbiten drar i varandra med kraften $3{,}0\\ \\mathrm{N}$. Vågen visar den kraft som trycker på den, omräknad till kilogram (kraften dividerad med $g = 9{,}82\\ \\mathrm{N/kg}$).
+
+<svg viewBox="22 34 426 180" width="578" height="244" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Två uppställningar. I a står stativet med magneten på golvet bredvid vågen, och magneten hänger ovanför järnbiten som ligger på vågen. I b står stativet på vågen bredvid järnbiten, och magneten hänger på samma avstånd ovanför järnbiten.">
+<line x1="22" y1="210" x2="448" y2="210" stroke="rgba(15,22,32,0.55)" stroke-width="1.4"/>
+<text x="36" y="48" font-size="15" fill="#0f1620">a)</text>
+<rect x="40" y="192" width="130" height="18" rx="3" fill="#5a6068" stroke="#3d4248" stroke-width="1.2"/>
+<rect x="36" y="186" width="138" height="6" rx="2" fill="#9aa3ad" stroke="#5a6068" stroke-width="1.2"/>
+<rect x="90" y="196" width="30" height="10" rx="1.5" fill="#cfe6f5" stroke="#3f6f9f" stroke-width="1"/>
+<rect x="80" y="158" width="50" height="28" rx="2" fill="#8a8f98" stroke="#4a4f57" stroke-width="1.4"/>
+<rect x="190" y="202" width="56" height="8" rx="2" fill="#6b7280" stroke="#4a4f57" stroke-width="1.2"/>
+<rect x="214" y="56" width="6" height="146" fill="#9aa3ad" stroke="#5a6068" stroke-width="1.2"/>
+<rect x="96" y="56" width="124" height="6" fill="#9aa3ad" stroke="#5a6068" stroke-width="1.2"/>
+<rect x="93" y="62" width="24" height="30" fill="#ffffff" stroke="#4a4f57" stroke-width="1.2"/>
+<rect x="93" y="92" width="24" height="30" fill="#c8324a" stroke="#4a4f57" stroke-width="1.2"/>
+<text x="105" y="82" text-anchor="middle" font-size="15" font-weight="600" fill="#ffffff" stroke="#0f1620" stroke-width="1.3" paint-order="stroke">S</text>
+<text x="105" y="112" text-anchor="middle" font-size="15" font-weight="600" fill="#ffffff">N</text>
+<text x="270" y="48" font-size="15" fill="#0f1620">b)</text>
+<rect x="270" y="192" width="170" height="18" rx="3" fill="#5a6068" stroke="#3d4248" stroke-width="1.2"/>
+<rect x="266" y="186" width="178" height="6" rx="2" fill="#9aa3ad" stroke="#5a6068" stroke-width="1.2"/>
+<rect x="340" y="196" width="30" height="10" rx="1.5" fill="#cfe6f5" stroke="#3f6f9f" stroke-width="1"/>
+<rect x="286" y="158" width="50" height="28" rx="2" fill="#8a8f98" stroke="#4a4f57" stroke-width="1.4"/>
+<rect x="372" y="178" width="56" height="8" rx="2" fill="#6b7280" stroke="#4a4f57" stroke-width="1.2"/>
+<rect x="396" y="56" width="6" height="122" fill="#9aa3ad" stroke="#5a6068" stroke-width="1.2"/>
+<rect x="299" y="56" width="103" height="6" fill="#9aa3ad" stroke="#5a6068" stroke-width="1.2"/>
+<rect x="299" y="62" width="24" height="30" fill="#ffffff" stroke="#4a4f57" stroke-width="1.2"/>
+<rect x="299" y="92" width="24" height="30" fill="#c8324a" stroke="#4a4f57" stroke-width="1.2"/>
+<text x="311" y="82" text-anchor="middle" font-size="15" font-weight="600" fill="#ffffff" stroke="#0f1620" stroke-width="1.3" paint-order="stroke">S</text>
+<text x="311" y="112" text-anchor="middle" font-size="15" font-weight="600" fill="#ffffff">N</text>
+</svg>
+
+a) Stativet står på golvet bredvid vågen (figur a). Vad visar vågen?<br>b) Stativet, som tillsammans med magneten har massan $1{,}2\\ \\mathrm{kg}$, ställs i stället på vågen bredvid järnbiten (figur b). Avståndet mellan magneten och järnbiten är detsamma. Vad visar vågen nu? Motivera med Newtons tredje lag.<br>c) Spelar det någon roll för svaret i b) hur stark magneten är? Motivera.`,
+            answer: { value: 2.0, unit: 'kg', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 0.49, unit: 'kg', tol: 0.03 },
+                { del: 'b', value: 2.0, unit: 'kg', tol: 0.03 },
+                { del: 'c' },
+            ],
+            solution: `**a)** På järnbiten verkar tyngdkraften nedåt, magnetens kraft $3{,}0\\ \\mathrm{N}$ uppåt och normalkraften $F_N$ från vågen uppåt. Järnbiten är i jämvikt:
+
+$$
+F_N + 3{,}0 = F_G
+$$
+
+$$
+F_G = m \\cdot g = 0{,}80 \\cdot 9{,}82 = 7{,}856\\ \\mathrm{N}
+$$
+
+$$
+F_N = 7{,}856 - 3{,}0 = 4{,}856\\ \\mathrm{N}
+$$
+
+Enligt Newtons tredje lag trycker järnbiten på vågen med lika stor kraft, 4,856 N. Vågen visar
+
+$$
+\\frac{4{,}856}{9{,}82} = 0{,}494\\ldots \\approx 0{,}49\\ \\mathrm{kg}
+$$
+
+**Svar:** 0,49 kg
+
+**b)** Järnbiten trycker fortfarande 3,0 N mindre på vågen än sin tyngd. Men enligt Newtons tredje lag drar järnbiten samtidigt magneten **nedåt** med lika stor kraft, 3,0 N. Den kraften förs via stativet ned i vågen. Det vågen förlorar under järnbiten får den alltså tillbaka under stativet. Magnetkraften och dess motkraft verkar båda inom det som står på vågen och tar ut varandra, så vågen påverkas bara av tyngden av allt som står på den:
+
+$$
+F = (0{,}80 + 1{,}2) \\cdot 9{,}82 = 19{,}64\\ \\mathrm{N}
+$$
+
+$$
+\\frac{19{,}64}{9{,}82} = 2{,}0\\ \\mathrm{kg}
+$$
+
+**Svar:** 2,0 kg
+
+**c)** Nej. Hur stark magneten än är, är kraften på järnbiten och kraften på magneten lika stora och motriktade. Båda föremålen vilar på vågen, så krafterna tar alltid ut varandra i det vågen mäter. Det gäller till och med om magneten är så stark att den lyfter järnbiten och den fastnar på magneten: då bär stativet järnbitens hela tyngd ned i vågen.
+
+**Svar:** Nej, vågen visar 2,0 kg oavsett magnetens styrka, eftersom kraften och motkraften båda verkar på föremål som vilar på vågen.`,
+        },
+        {
+            level: 3,
+            question: `Två vagnar A och B kolliderar på en rak bana med försumbar friktion. Båda vagnarna har en accelerationsgivare, och storleken på accelerationerna mäts vid fem tidpunkter under stöten, medan kraften mellan vagnarna först växer och sedan avtar. Vagn A har massan $0{,}50\\ \\mathrm{kg}$.
+
+| Tidpunkt | 1 | 2 | 3 | 4 | 5 |
+|---|---|---|---|---|---|
+| $a_\\mathrm{A}$ (m/s²) | 1,6 | 4,7 | 8,0 | 6,5 | 3,3 |
+| $a_\\mathrm{B}$ (m/s²) | 1,0 | 3,0 | 5,0 | 4,1 | 2,0 |
+
+a) Visa med Newtons andra och tredje lag att kvoten $\\dfrac{a_\\mathrm{A}}{a_\\mathrm{B}}$ ska vara densamma vid alla tidpunkter, trots att kraften mellan vagnarna ändras.<br>b) Bestäm vagn B:s massa ur mätvärdena.<br>c) Hur stor var den största kraften mellan vagnarna vid de fem tidpunkterna? Ange svaret i N.`,
+            answer: { value: 0.80, unit: 'kg', tol: 0.03 },
+            delsvar: [
+                { del: 'b', value: 0.80, unit: 'kg', tol: 0.03 },
+                { del: 'c', value: 4.0, unit: 'N', tol: 0.03 },
+            ],
+            solution: `**a)** Vid varje tidpunkt verkar A på B med en kraft $F$, och enligt Newtons tredje lag verkar B på A med en lika stor kraft i motsatt riktning. Friktionen är försumbar, så det är den enda vågräta kraften på respektive vagn. Newtons andra lag på var och en:
+
+$$
+F = m_\\mathrm{A} \\cdot a_\\mathrm{A} \\qquad F = m_\\mathrm{B} \\cdot a_\\mathrm{B}
+$$
+
+Samma $F$ i båda ger
+
+$$
+m_\\mathrm{A} \\cdot a_\\mathrm{A} = m_\\mathrm{B} \\cdot a_\\mathrm{B} \\quad\\Leftrightarrow\\quad \\frac{a_\\mathrm{A}}{a_\\mathrm{B}} = \\frac{m_\\mathrm{B}}{m_\\mathrm{A}}
+$$
+
+Högerledet innehåller bara massorna, som inte ändras under stöten. Kvoten är därför densamma vid varje tidpunkt, hur stor kraften än är just då.
+
+**Svar:** Kraften på A och kraften på B är lika stora i varje ögonblick, så $\\dfrac{a_\\mathrm{A}}{a_\\mathrm{B}} = \\dfrac{m_\\mathrm{B}}{m_\\mathrm{A}}$, som är konstant.
+
+**b)** Kvoten vid varje tidpunkt:
+
+| Tidpunkt | 1 | 2 | 3 | 4 | 5 |
+|---|---|---|---|---|---|
+| $\\dfrac{a_\\mathrm{A}}{a_\\mathrm{B}}$ | 1,60 | 1,57 | 1,60 | 1,59 | 1,65 |
+
+Kvoterna skiljer sig något på grund av mätosäkerheten. Ett medelvärde av alla fem minskar inverkan av de slumpmässiga felen:
+
+$$
+\\frac{1{,}60 + 1{,}57 + 1{,}60 + 1{,}59 + 1{,}65}{5} = 1{,}602
+$$
+
+Från a) gäller $m_\\mathrm{B} = m_\\mathrm{A} \\cdot \\dfrac{a_\\mathrm{A}}{a_\\mathrm{B}}$:
+
+$$
+m_\\mathrm{B} = 0{,}50 \\cdot 1{,}602 = 0{,}801 \\approx 0{,}80\\ \\mathrm{kg}
+$$
+
+Rimlighet: B accelereras mindre än A av samma kraft, så B ska vara tyngre än A. Det stämmer.
+
+**Svar:** 0,80 kg
+
+**c)** Kraften är störst där accelerationerna är störst, vid tidpunkt 3. Newtons andra lag på A:
+
+$$
+F = m_\\mathrm{A} \\cdot a_\\mathrm{A} = 0{,}50 \\cdot 8{,}0 = 4{,}0\\ \\mathrm{N}
+$$
+
+Kontroll med B: $m_\\mathrm{B} \\cdot a_\\mathrm{B} = 0{,}80 \\cdot 5{,}0 = 4{,}0\\ \\mathrm{N}$, samma kraft som Newtons tredje lag kräver.
+
+**Svar:** 4,0 N`,
+        },
+        {
+            level: 3,
+            question: `Tre böcker ligger staplade på varandra på golvet i en hiss. Den översta boken har massan $0{,}50\\ \\mathrm{kg}$, den mittersta $1{,}2\\ \\mathrm{kg}$ och den nedersta $0{,}80\\ \\mathrm{kg}$. Mellan den mittersta och den nedersta boken ligger en tunn kraftgivare med försumbar massa, som visar hur stor kraft böckerna trycker på varandra med. Under en del av resan visar givaren $19{,}2\\ \\mathrm{N}$.<br>a) Vilka krafter verkar på den mittersta boken? Ange för var och en av dem vilken kraft som är dess motkraft och vilket föremål motkraften verkar på.<br>b) Bestäm hissens acceleration till storlek och riktning. Går det att avgöra om hissen åker uppåt eller nedåt? Motivera.<br>c) Hur stor kraft verkar hissgolvet med på den nedersta boken?`,
+            answer: { value: 1.5, unit: 'm/s²', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 1.5, unit: 'm/s²', tol: 0.03 },
+                { del: 'c', value: 28, unit: 'N', tol: 0.03 },
+            ],
+            solution: `**a)** Tre krafter verkar på den mittersta boken. Givaren har försumbar massa, så den för bara vidare kraften mellan den mittersta och den nedersta boken. Varje motkraft verkar på det föremål som utövar kraften:
+
+| Kraft på mittersta boken | Riktning | Motkraft |
+|---|---|---|
+| Tyngdkraften från jorden | nedåt | mittersta bokens gravitationskraft på jorden, uppåt |
+| Tryckkraft från översta boken | nedåt | mittersta bokens normalkraft på översta boken, uppåt |
+| Normalkraft från nedersta boken | uppåt | mittersta bokens tryckkraft på nedersta boken, nedåt |
+
+**Svar:** Tyngdkraften, tryckkraften från översta boken och normalkraften från nedersta boken. Motkrafterna verkar på jorden, på översta boken och på nedersta boken.
+
+**b) Välj vad som ska räknas på.** Kraften från översta boken på den mittersta känner vi inte. Den är kraft och motkraft med den mittersta bokens kraft på den översta, så om de två översta böckerna räknas som ett föremål tar de ut varandra. På de två översta böckerna tillsammans, med massan $0{,}50 + 1{,}2 = 1{,}7\\ \\mathrm{kg}$, verkar då bara tyngdkraften och givarens kraft $F_2 = 19{,}2\\ \\mathrm{N}$ uppåt.
+
+Tyngdkraften på de två böckerna:
+
+$$
+F_G = m \\cdot g = 1{,}7 \\cdot 9{,}82 = 16{,}694\\ \\mathrm{N}
+$$
+
+Givarens kraft är större än tyngdkraften, så den resulterande kraften och accelerationen är riktade uppåt. Newtons andra lag, med uppåt som positiv riktning:
+
+$$
+F_2 - F_G = m \\cdot a \\quad\\Leftrightarrow\\quad a = \\frac{F_2 - F_G}{m}
+$$
+
+$$
+a = \\frac{19{,}2 - 16{,}694}{1{,}7} = 1{,}474\\ldots \\approx 1{,}5\\ \\mathrm{m/s^2}
+$$
+
+Böckerna följer med hissen, så hissen har samma acceleration. En acceleration uppåt betyder att hastigheten ändras uppåt. Det händer både när hissen åker uppåt och ökar farten och när den åker nedåt och bromsar in. Givaren kan inte skilja de två fallen åt.
+
+**Svar:** 1,5 m/s² riktad uppåt. Det går inte att avgöra om hissen åker uppåt och ökar farten eller åker nedåt och bromsar.
+
+**c)** På hela stapeln, med massan $0{,}50 + 1{,}2 + 0{,}80 = 2{,}5\\ \\mathrm{kg}$, verkar tyngdkraften och normalkraften $F_3$ från golvet. Krafterna mellan böckerna är kraft och motkraft inom stapeln och tar ut varandra. Newtons andra lag på hela stapeln:
+
+$$
+F_3 - m \\cdot g = m \\cdot a \\quad\\Leftrightarrow\\quad F_3 = m \\cdot (g + a)
+$$
+
+$$
+F_3 = 2{,}5 \\cdot (9{,}82 + 1{,}474) = 28{,}235\\ \\mathrm{N}
+$$
+
+Rimlighet: kraften på en del av stapeln är proportionell mot massan ovanför den när alla böcker har samma acceleration. Golvet bär $2{,}5\\ \\mathrm{kg}$ och givaren $1{,}7\\ \\mathrm{kg}$, och $19{,}2 \\cdot \\dfrac{2{,}5}{1{,}7} \\approx 28{,}2\\ \\mathrm{N}$. Det stämmer.
+
+**Svar:** 28 N`,
         },
     ],
 
@@ -11275,7 +15263,7 @@ Massan har två värdesiffror, så svaret avrundas till två värdesiffror.
 
 **Svar:** Tyngdkraften är 740 N.
 
-**Generell slutsats:** I vardagsspråk säger vi att personen "väger 75 kg", men det är egentligen *massan*. **Tyngden** (i N) är massan gånger tyngdfaktorn — på månen skulle samma person ha massan 75 kg men en tyngd på bara cirka 120 N.`,
+**Generell slutsats:** I vardagsspråk säger vi att personen "väger 75 kg", men det är egentligen *massan*. **Tyngden** (i N) är massan gånger tyngdfaktorn. På månen skulle samma person ha massan 75 kg men en tyngd på bara cirka 120 N.`,
         },
         {
             level: 1,
@@ -11303,7 +15291,7 @@ $$
 
 **Svar:** 39 N.
 
-**Generell slutsats:** På jorden väger samma väska $24 \\cdot 9{,}82 \\approx 236\\ \\mathrm{N}$ — sex gånger mer. Massan (24 kg) är däremot exakt densamma på båda platserna. Det är därför astronauter kan bära utrustning på månen som de knappt kan rubba på jorden.`,
+**Generell slutsats:** På jorden väger samma väska $24 \\cdot 9{,}82 \\approx 236\\ \\mathrm{N}$, sex gånger mer. Massan (24 kg) är däremot exakt densamma på båda platserna. Det är därför astronauter kan bära utrustning på månen som de knappt kan rubba på jorden.`,
         },
         {
             level: 1,
@@ -11337,11 +15325,11 @@ $$
             correct: 2,
             solution: `**Massa** är ett mått på mängden materia (och trögheten) hos ett föremål. Den mäts i kilogram och är densamma överallt i universum.
 
-**Tyngd** (tyngdkraften $F_G = m \\cdot g$) är den gravitationskraft som verkar på föremålet. Den mäts i newton och beror på tyngdfaktorn $g$ på platsen — 9,82 N/kg på jordytan, 1,62 N/kg på månen, nästan noll långt ute i rymden.
+**Tyngd** (tyngdkraften $F_G = m \\cdot g$) är den gravitationskraft som verkar på föremålet. Den mäts i newton och beror på tyngdfaktorn $g$ på platsen: 9,82 N/kg på jordytan, 1,62 N/kg på månen, nästan noll långt ute i rymden.
 
-- Alternativ A: fel — massan ändras inte av platsen.
+- Alternativ A: fel, massan ändras inte av platsen.
 - Alternativ B: enheterna är omkastade.
-- Alternativ D: fel — i vardagsspråk blandas de ihop ("jag väger 70 kilo"), men fysikaliskt är de olika storheter.
+- Alternativ D: fel. I vardagsspråk blandas de ihop ("jag väger 70 kilo"), men fysikaliskt är de olika storheter.
 
 **Svar:** Alternativ C.`,
         },
@@ -11435,7 +15423,7 @@ ${makeForceDiagram({
 
 **Svar:** 760 N.
 
-**Generell slutsats:** Duken måste både **bära** gymnasten (motverka $m g \\approx 440\\ \\mathrm{N}$) och dessutom **accelerera** henne uppåt (ytterligare $m a \\approx 320\\ \\mathrm{N}$). Notera i figuren att pilarnas längder är proportionella mot krafterna — det är obalansen mellan dem som ger accelerationen uppåt.`,
+**Generell slutsats:** Duken måste både **bära** gymnasten (motverka $m g \\approx 440\\ \\mathrm{N}$) och dessutom **accelerera** henne uppåt (ytterligare $m a \\approx 320\\ \\mathrm{N}$). Notera i figuren att pilarnas längder är proportionella mot krafterna. Det är obalansen mellan dem som ger accelerationen uppåt.`,
         },
         {
             level: 2,
@@ -11468,7 +15456,7 @@ Accelerationen har två värdesiffror, så svaret avrundas till två värdesiffr
 
 **Svar:** 25 kN.
 
-**Generell slutsats:** Vajern belastas alltid som mest i början av lyftet (accelerationsfasen). När containern sedan höjs med **konstant** fart är spännkraften bara $m g \\approx 23{,}6\\ \\mathrm{kN}$ — det är därför lyftanordningar dimensioneras med marginal för just accelerationen.`,
+**Generell slutsats:** Vajern belastas alltid som mest i början av lyftet (accelerationsfasen). När containern sedan höjs med **konstant** fart är spännkraften bara $m g \\approx 23{,}6\\ \\mathrm{kN}$. Det är därför lyftanordningar dimensioneras med marginal för just accelerationen.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
@@ -11490,7 +15478,7 @@ c) Vad visar vågen när hissen accelererar **nedåt** med 1,2 m/s²?
                 { del: 'b', value: 813.4, unit: 'N' },
                 { del: 'c', value: 603.4, unit: 'N' },
             ],
-            solution: `Personvågen visar i grunden den normalkraft den utövar på personen ($F_N$). Den enligt Newtons tredje lag är lika stor som personens tryck nedåt på vågen — det är *den* kraften vågen registrerar.
+            solution: `Personvågen visar i grunden den normalkraft den utövar på personen ($F_N$). Den enligt Newtons tredje lag är lika stor som personens tryck nedåt på vågen, och det är *den* kraften vågen registrerar.
 
 Två krafter verkar på personen: tyngdkraft $F_G = m g$ nedåt och normalkraft $F_N$ uppåt. Personens acceleration är samma som hissens. Vi väljer **uppåt som positiv** riktning.
 
@@ -11597,7 +15585,536 @@ Massan och sträckorna har två värdesiffror, så svaren avrundas till två vä
 
 **Svar:** a) 4,1 m/s. b) 21 m/s². c) 2,4 kN, drygt tre gånger hans egen tyngd.
 
-**Generell slutsats:** Ju kortare sträcka frånskjutet sker på, desto större måste kraften vara för samma hopphöjd — det är därför man hoppar högre med djup knäböj än med styva ben. Samma resonemang (fast omvänt) förklarar varför man ska **böja på benen vid landning**: en längre bromssträcka ger mindre kraft på kroppen.`,
+**Generell slutsats:** Ju kortare sträcka frånskjutet sker på, desto större måste kraften vara för samma hopphöjd. Det är därför man hoppar högre med djup knäböj än med styva ben. Samma resonemang (fast omvänt) förklarar varför man ska **böja på benen vid landning**: en längre bromssträcka ger mindre kraft på kroppen.`,
+        },
+        {
+            level: 1,
+            question: `En låda står stilla på ett tak som lutar. Figuren visar fyra pilar som alla utgår från kontaktpunkten mitt under lådan. Vilken pil visar riktningen för **normalkraften** från taket på lådan?
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="16 18 438 230" width="520" height="273" role="img" aria-label="En låda står stilla på ett tak som lutar 30 grader. Från kontaktpunkten mitt under lådan utgår fyra pilar: A rakt uppåt, B snett uppåt till vänster vinkelrätt mot taket, C rakt nedåt och D snett nedåt till höger in i taket, vinkelrätt mot taket." style="max-width:100%;height:auto;display:block;margin:16px auto;font-family:Poppins,system-ui,sans-serif"><polygon points="30,235 393.7,25 393.7,235" fill="#efe3cf" stroke="none"/><line x1="62" y1="235" x2="393.7" y2="43.5" stroke="rgba(150,80,50,0.28)" stroke-width="1"/><line x1="94" y1="235" x2="393.7" y2="62" stroke="rgba(150,80,50,0.28)" stroke-width="1"/><line x1="126" y1="235" x2="393.7" y2="80.4" stroke="rgba(150,80,50,0.28)" stroke-width="1"/><line x1="158" y1="235" x2="393.7" y2="98.9" stroke="rgba(150,80,50,0.28)" stroke-width="1"/><line x1="190" y1="235" x2="393.7" y2="117.4" stroke="rgba(150,80,50,0.28)" stroke-width="1"/><line x1="222" y1="235" x2="393.7" y2="135.9" stroke="rgba(150,80,50,0.28)" stroke-width="1"/><line x1="254" y1="235" x2="393.7" y2="154.3" stroke="rgba(150,80,50,0.28)" stroke-width="1"/><line x1="286" y1="235" x2="393.7" y2="172.8" stroke="rgba(150,80,50,0.28)" stroke-width="1"/><line x1="318" y1="235" x2="393.7" y2="191.3" stroke="rgba(150,80,50,0.28)" stroke-width="1"/><line x1="350" y1="235" x2="393.7" y2="209.8" stroke="rgba(150,80,50,0.28)" stroke-width="1"/><line x1="382" y1="235" x2="393.7" y2="228.2" stroke="rgba(150,80,50,0.28)" stroke-width="1"/><line x1="30" y1="235" x2="393.7" y2="25" stroke="#8a4b32" stroke-width="3.4" stroke-linecap="round"/><line x1="30" y1="235" x2="393.7" y2="235" stroke="rgba(15,22,32,0.45)" stroke-width="1.4"/><line x1="393.7" y1="25" x2="393.7" y2="235" stroke="rgba(15,22,32,0.45)" stroke-width="1.4"/><polygon points="170.3,154 236.1,116 210.1,71 144.3,109" fill="#d3e4f5" stroke="#4f7197" stroke-width="1.6" stroke-linejoin="round"/><line x1="203.2" y1="135" x2="203.2" y2="46" stroke="#0f1620" stroke-width="3" stroke-linecap="butt"/><polygon points="209.8,46 203.2,35 196.6,46" fill="#0f1620"/><line x1="203.2" y1="135" x2="158.7" y2="57.9" stroke="#0f1620" stroke-width="3" stroke-linecap="butt"/><polygon points="164.4,54.6 153.2,48.4 153,61.2" fill="#0f1620"/><line x1="203.2" y1="135" x2="203.2" y2="224" stroke="#0f1620" stroke-width="3" stroke-linecap="butt"/><polygon points="196.6,224 203.2,235 209.8,224" fill="#0f1620"/><line x1="203.2" y1="135" x2="247.7" y2="212.1" stroke="#0f1620" stroke-width="3" stroke-linecap="butt"/><polygon points="242,215.4 253.2,221.6 253.4,208.8" fill="#0f1620"/><circle cx="203.2" cy="135" r="2.4" fill="#0f1620"/><text x="212.2" y="47" text-anchor="start" font-size="16" font-weight="600" fill="#0f1620">A</text><text x="146.2" y="56.4" text-anchor="end" font-size="16" font-weight="600" fill="#0f1620">B</text><text x="194.2" y="239" text-anchor="end" font-size="16" font-weight="600" fill="#0f1620">C</text><text x="262.2" y="227.6" text-anchor="start" font-size="16" font-weight="600" fill="#0f1620">D</text></svg>`,
+            choices: [
+                `Pil A`,
+                `Pil B`,
+                `Pil C`,
+                `Pil D`,
+            ],
+            correct: 1,
+            solution: `Normalkraften verkar alltid **vinkelrätt mot kontaktytan**, och den är riktad från ytan ut mot föremålet. Det är den kraft som hindrar lådan från att tränga in i taket. Taket lutar, så normalkraften pekar snett uppåt, vinkelrätt ut från takytan. Det är pil B.
+
+- Pil A, rakt uppåt, vore rätt om lådan stod på ett vågrätt underlag. På ett lutande underlag är rakt uppåt inte vinkelrätt mot ytan.
+- Pil C, rakt nedåt, är tyngdkraftens riktning.
+- Pil D, vinkelrätt in i taket, visar kraften från **lådan på taket**. Den är normalkraftens motkraft enligt Newtons tredje lag och verkar på taket, inte på lådan.
+
+Eftersom normalkraften inte pekar rakt uppåt kan den ensam inte ta ut tyngdkraften. Att lådan ändå står still beror på friktionen mellan lådan och taket, som du möter i ett senare avsnitt.
+
+**Svar:** Pil B.`,
+        },
+        {
+            level: 2,
+            question: `En flyttkartong med massan 16 kg står på en byrå med massan 42 kg, se figuren. Byrån står på ett vågrätt golv och har fyra ben som bär lika mycket var. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="36 3 368 209" width="466" height="265" role="img" aria-label="En flyttkartong med massan 16 kg står på en byrå med massan 42 kg. Byrån står på ett vågrätt golv." style="max-width:100%;height:auto;display:block;margin:16px auto;font-family:Poppins,system-ui,sans-serif"><line x1="40" y1="200" x2="400" y2="200" stroke="rgba(15,22,32,0.55)" stroke-width="1.6"/><line x1="48" y1="200" x2="40" y2="209" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="64" y1="200" x2="56" y2="209" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="80" y1="200" x2="72" y2="209" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="96" y1="200" x2="88" y2="209" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="112" y1="200" x2="104" y2="209" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="128" y1="200" x2="120" y2="209" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="144" y1="200" x2="136" y2="209" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="160" y1="200" x2="152" y2="209" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="176" y1="200" x2="168" y2="209" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="192" y1="200" x2="184" y2="209" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="208" y1="200" x2="200" y2="209" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="224" y1="200" x2="216" y2="209" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="240" y1="200" x2="232" y2="209" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="256" y1="200" x2="248" y2="209" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="272" y1="200" x2="264" y2="209" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="288" y1="200" x2="280" y2="209" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="304" y1="200" x2="296" y2="209" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="320" y1="200" x2="312" y2="209" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="336" y1="200" x2="328" y2="209" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="352" y1="200" x2="344" y2="209" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="368" y1="200" x2="360" y2="209" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="384" y1="200" x2="376" y2="209" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><rect x="153" y="186" width="10" height="14" fill="#8a5a36"/><rect x="277" y="186" width="10" height="14" fill="#8a5a36"/><rect x="145" y="82" width="150" height="104" rx="2" fill="#c99b6d" stroke="#6e4527" stroke-width="1.6"/><rect x="140" y="75" width="160" height="7" rx="1.5" fill="#b4855a" stroke="#6e4527" stroke-width="1.4"/><rect x="154" y="90" width="132" height="26" rx="2" fill="#d6ad80" stroke="#6e4527" stroke-width="1.1"/><rect x="208" y="101" width="24" height="4" rx="2" fill="#5a3820"/><rect x="154" y="122" width="132" height="26" rx="2" fill="#d6ad80" stroke="#6e4527" stroke-width="1.1"/><rect x="208" y="133" width="24" height="4" rx="2" fill="#5a3820"/><rect x="154" y="154" width="132" height="26" rx="2" fill="#d6ad80" stroke="#6e4527" stroke-width="1.1"/><rect x="208" y="165" width="24" height="4" rx="2" fill="#5a3820"/><rect x="170" y="11" width="96" height="64" fill="#d9b98a" stroke="#7a5a32" stroke-width="1.6"/><line x1="170" y1="23" x2="266" y2="23" stroke="#7a5a32" stroke-width="1" opacity="0.7"/><rect x="209" y="11" width="18" height="64" fill="#c8a36a" opacity="0.9"/><text x="278" y="48" font-size="15" fill="#0f1620">16 kg</text><text x="307" y="138" font-size="15" fill="#0f1620">42 kg</text></svg>
+
+Bestäm<br>a) normalkraften från byrån på kartongen<br>b) normalkraften från golvet på byrån<br>c) normalkraften från golvet på ett av byråns ben.<br>d) En person sätter sig på kartongen och lyfter fötterna från golvet. Normalkraften från golvet på vart och ett av benen blir då 330 N. Vilken massa har personen?
+
+Ange svaren i a), b) och c) i N och svaret i d) i kg.`,
+            answer: { value: 76.42, unit: 'kg', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 157.12, unit: 'N' },
+                { del: 'b', value: 569.56, unit: 'N' },
+                { del: 'c', value: 142.39, unit: 'N' },
+                { del: 'd', value: 76.42, unit: 'kg', tol: 0.03 },
+            ],
+            solution: `**a)** Kartongen står still, så kraftresultanten på den är noll (Newtons första lag). Två krafter verkar på kartongen: tyngdkraften nedåt och normalkraften $F_{\\mathrm{N}1}$ från byrån uppåt. De är alltså lika stora:
+
+$$
+F_{\\mathrm{N}1} = F_{\\mathrm{G}\\,\\text{kartong}} = m_\\text{kartong} \\cdot g = 16 \\cdot 9{,}82 = 157{,}12 \\approx 160\\ \\mathrm{N}
+$$
+
+**Svar:** Normalkraften från byrån på kartongen är 160 N.
+
+**b)** Golvet bär både byrån och kartongen. Se byrån och kartongen som en enda kropp i vila. På den verkar hela tyngden nedåt och normalkraften $F_{\\mathrm{N}2}$ från golvet uppåt:
+
+$$
+F_{\\mathrm{N}2} = F_{\\mathrm{G}\\,\\text{byrå}} + F_{\\mathrm{G}\\,\\text{kartong}} = (m_\\text{byrå} + m_\\text{kartong}) \\cdot g
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m_\\text{byrå} = 42\\ \\mathrm{kg} \\\\
+m_\\text{kartong} = 16\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+F_{\\mathrm{N}2} = (42 + 16) \\cdot 9{,}82 = 58 \\cdot 9{,}82 = 569{,}56 \\approx 570\\ \\mathrm{N}
+$$
+
+Samma svar får du om du bara ser på byrån. Nedåt verkar då byråns egen tyngd och kartongens tryck på byrån, som enligt Newtons tredje lag är lika stort som normalkraften i a).
+
+**Svar:** Normalkraften från golvet på byrån är 570 N.
+
+**c)** De fyra benen delar lika på normalkraften från b):
+
+$$
+F_{\\mathrm{N}\\,\\text{ben}} = \\frac{F_{\\mathrm{N}2}}{4} = \\frac{569{,}56}{4} = 142{,}39 \\approx 140\\ \\mathrm{N}
+$$
+
+Massorna har två värdesiffror, så svaren avrundas till två värdesiffror.
+
+**Svar:** Normalkraften på ett ben är 140 N.
+
+**d)** Nu ligger personen, kartongen och byrån ovanpå varandra, och golvet bär alla tre. Se dem som en enda kropp i vila. Uppåt verkar normalkrafterna på de fyra benen, nedåt den sammanlagda tyngden:
+
+$$
+4 \\cdot F_{\\mathrm{N}\\,\\text{ben}} = (m_\\text{person} + m_\\text{byrå} + m_\\text{kartong}) \\cdot g
+$$
+
+Dividera båda led med $g$:
+
+$$
+m_\\text{person} + m_\\text{byrå} + m_\\text{kartong} = \\frac{4 \\cdot F_{\\mathrm{N}\\,\\text{ben}}}{g}
+$$
+
+Subtrahera byråns och kartongens massor från båda led:
+
+$$
+m_\\text{person} = \\frac{4 \\cdot F_{\\mathrm{N}\\,\\text{ben}}}{g} - m_\\text{byrå} - m_\\text{kartong}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F_{\\mathrm{N}\\,\\text{ben}} = 330\\ \\mathrm{N} \\\\
+m_\\text{byrå} = 42\\ \\mathrm{kg} \\\\
+m_\\text{kartong} = 16\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+m_\\text{person} = \\frac{4 \\cdot 330}{9{,}82} - 42 - 16 = \\frac{1\\,320}{9{,}82} - 58 = 134{,}42 - 58 = 76{,}42 \\approx 76\\ \\mathrm{kg}
+$$
+
+Rimlighet: varje ben bär 330 N i stället för 142 N, alltså knappt 190 N mer per ben och 750 N mer totalt. Det motsvarar en tyngd på ungefär 75 kg, en vanlig massa för en vuxen.
+
+**Svar:** Personen har massan 76 kg.`,
+        },
+        {
+            level: 2,
+            question: `En rymdsond har landat på en okänd planet. För att bestämma tyngdfaktorn släpper sondens robotarm en sten från vila. Stenen faller 1,50 m på 0,90 s. Luftmotståndet är försumbart.<br>a) Bestäm tyngdfaktorn $g$ på planeten.<br>b) Hur stor tyngd har sondens robotbil på planeten? Robotbilen har massan 185 kg.
+
+Ange a) i N/kg och b) i N.`,
+            answer: { value: 685.2, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 3.704, unit: 'N/kg', tol: 0.03 },
+                { del: 'b', value: 685.2, unit: 'N', tol: 0.03 },
+            ],
+            solution: `**a)** Stenen faller fritt, så den enda kraft som verkar på den är tyngdkraften. Enligt Newtons andra lag är då
+
+$$
+F_\\mathrm{R} = F_\\mathrm{G} \\quad\\Rightarrow\\quad m \\cdot a = m \\cdot g \\quad\\Rightarrow\\quad a = g
+$$
+
+Tyngdfaktorn har alltså samma mätetal som stenens acceleration. Accelerationen får vi ur sträckan vid likformigt accelererad rörelse från vila:
+
+$$
+s = \\frac{a \\cdot t^2}{2} \\quad\\Leftrightarrow\\quad a = \\frac{2 s}{t^2}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+s = 1{,}50\\ \\mathrm{m} \\\\
+t = 0{,}90\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+a = \\frac{2 \\cdot 1{,}50}{0{,}90^2} = \\frac{3{,}00}{0{,}81} = 3{,}7037 \\approx 3{,}7\\ \\mathrm{m/s^2}
+$$
+
+Eftersom $1\\ \\mathrm{m/s^2} = 1\\ \\mathrm{N/kg}$ är tyngdfaktorn $g = 3{,}7\\ \\mathrm{N/kg}$. Tiden har två värdesiffror, så svaret avrundas till två värdesiffror.
+
+**Svar:** Tyngdfaktorn är 3,7 N/kg.
+
+**b)** Tyngden räknas med det oavrundade värdet från a):
+
+$$
+F_\\mathrm{G} = m \\cdot g = 185 \\cdot 3{,}7037 = 685{,}18 \\approx 690\\ \\mathrm{N}
+$$
+
+Rimlighet: på jorden har robotbilen tyngden $185 \\cdot 9{,}82 \\approx 1\\,800\\ \\mathrm{N}$. Planetens tyngdfaktor är bara drygt en tredjedel av jordens, och tyngden blir också drygt en tredjedel av tyngden på jorden. Massan, 185 kg, är densamma på båda ställena.
+
+**Svar:** Robotbilens tyngd är 690 N.`,
+        },
+        {
+            level: 2,
+            question: `En låda med massan 3,5 kg står på ett vågrätt bord. En dynamometer som hänger i ett stativ är fäst i lådan och drar lodrätt uppåt med kraften 18 N, men lådan står kvar på bordet. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="26 14 398 328" width="504" height="415" role="img" aria-label="En låda med massan 3,5 kilogram står på ett bord. En dynamometer som hänger i ett stativ är fäst i en ögla på lådans ovansida och drar lodrätt uppåt." style="max-width:100%;height:auto;display:block;margin:16px auto;font-family:Poppins,system-ui,sans-serif"><line x1="30" y1="330" x2="420" y2="330" stroke="rgba(15,22,32,0.55)" stroke-width="1.6"/><line x1="38" y1="330" x2="30" y2="339" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="54" y1="330" x2="46" y2="339" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="70" y1="330" x2="62" y2="339" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="86" y1="330" x2="78" y2="339" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="102" y1="330" x2="94" y2="339" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="118" y1="330" x2="110" y2="339" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="134" y1="330" x2="126" y2="339" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="150" y1="330" x2="142" y2="339" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="166" y1="330" x2="158" y2="339" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="182" y1="330" x2="174" y2="339" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="198" y1="330" x2="190" y2="339" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="214" y1="330" x2="206" y2="339" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="230" y1="330" x2="222" y2="339" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="246" y1="330" x2="238" y2="339" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="262" y1="330" x2="254" y2="339" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="278" y1="330" x2="270" y2="339" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="294" y1="330" x2="286" y2="339" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="310" y1="330" x2="302" y2="339" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="326" y1="330" x2="318" y2="339" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="342" y1="330" x2="334" y2="339" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="358" y1="330" x2="350" y2="339" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="374" y1="330" x2="366" y2="339" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="390" y1="330" x2="382" y2="339" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="406" y1="330" x2="398" y2="339" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><rect x="60" y="200" width="330" height="12" rx="2" fill="#c99b6d" stroke="#6e4527" stroke-width="1.5"/><rect x="78" y="212" width="12" height="118" fill="#b4855a" stroke="#6e4527" stroke-width="1.2"/><rect x="360" y="212" width="12" height="118" fill="#b4855a" stroke="#6e4527" stroke-width="1.2"/><rect x="100" y="190" width="70" height="10" rx="2" fill="#5b6570" stroke="#2a3038" stroke-width="1.2"/><rect x="124" y="22" width="7" height="168" fill="#9aa3ad" stroke="#4a525b" stroke-width="1"/><rect x="118" y="34" width="20" height="14" rx="2" fill="#5b6570" stroke="#2a3038" stroke-width="1"/><rect x="131" y="38" width="135" height="6" fill="#9aa3ad" stroke="#4a525b" stroke-width="1"/><circle cx="262" cy="52" r="6" fill="none" stroke="#4a525b" stroke-width="2"/><rect x="253" y="58" width="18" height="62" rx="4" fill="#e9eef2" stroke="#4a525b" stroke-width="1.4"/><rect x="258" y="118" width="8" height="12" fill="#f2d36b" stroke="#8a6d1c" stroke-width="1"/><line x1="258" y1="66" x2="265" y2="66" stroke="#4a525b" stroke-width="0.9"/><line x1="258" y1="75" x2="265" y2="75" stroke="#4a525b" stroke-width="0.9"/><line x1="258" y1="84" x2="265" y2="84" stroke="#4a525b" stroke-width="0.9"/><line x1="258" y1="93" x2="265" y2="93" stroke="#4a525b" stroke-width="0.9"/><line x1="258" y1="102" x2="265" y2="102" stroke="#4a525b" stroke-width="0.9"/><line x1="258" y1="111" x2="265" y2="111" stroke="#4a525b" stroke-width="0.9"/><rect x="222" y="148" width="80" height="52" rx="2" fill="#d3e4f5" stroke="#4f7197" stroke-width="1.6"/><path d="M 255 148 a 7 7 0 0 1 14 0" fill="none" stroke="#4a525b" stroke-width="2.2"/><line x1="262" y1="130" x2="262" y2="134" stroke="#4a525b" stroke-width="1.8"/><path d="M 262 134 q -6 2 -5 7 q 1 5 5 5" fill="none" stroke="#4a525b" stroke-width="1.8"/><text x="312" y="180" font-size="15" fill="#0f1620">3,5 kg</text></svg>
+
+a) Hur stor är normalkraften från bordet på lådan?<br>b) Stativets arm skjuts sakta uppåt, så att dynamometerns kraft ökar. Vad visar dynamometern i det ögonblick lådan precis lyfter från bordet?
+
+Ange svaren i N.`,
+            answer: { value: 16.37, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 16.37, unit: 'N', tol: 0.03 },
+                { del: 'b', value: 34.37, unit: 'N', tol: 0.03 },
+            ],
+            solution: `**a)** Tre krafter verkar på lådan:
+- tyngdkraften $F_\\mathrm{G}$ nedåt
+- dynamometerns kraft $F = 18\\ \\mathrm{N}$ uppåt
+- normalkraften $F_\\mathrm{N}$ från bordet uppåt
+
+Lådan står still, så de uppåtriktade krafterna är tillsammans lika stora som tyngdkraften:
+
+$$
+F_\\mathrm{N} + F = F_\\mathrm{G} \\quad\\Leftrightarrow\\quad F_\\mathrm{N} = F_\\mathrm{G} - F
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F_\\mathrm{G} = m \\cdot g = 3{,}5\\ \\mathrm{kg} \\cdot 9{,}82\\ \\mathrm{N/kg} = 34{,}37\\ \\mathrm{N} \\\\
+F = 18\\ \\mathrm{N}
+\\end{array} \\right]
+$$
+
+$$
+F_\\mathrm{N} = 34{,}37 - 18 = 16{,}37 \\approx 16\\ \\mathrm{N}
+$$
+
+Normalkraften är alltså mindre än tyngdkraften. Den är bara så stor som behövs för att lådan inte ska tränga ned i bordet, och dynamometern tar redan en del av tyngden.
+
+**Svar:** Normalkraften är 16 N.
+
+**b)** När dynamometerns kraft ökar minskar normalkraften lika mycket. I det ögonblick lådan lyfter har kontakten med bordet upphört, och då är $F_\\mathrm{N} = 0$:
+
+$$
+F = F_\\mathrm{G} - F_\\mathrm{N} = 34{,}37 - 0 = 34{,}37 \\approx 34\\ \\mathrm{N}
+$$
+
+Massan har två värdesiffror, så svaren avrundas till två värdesiffror.
+
+**Svar:** Dynamometern visar 34 N.`,
+        },
+        {
+            level: 3,
+            question: `Ett torn byggs av $N$ likadana block som staplas rakt på varandra på ett vågrätt golv. Varje block har massan $m$. Blocken numreras uppifrån, så att block 1 ligger överst och block $N$ står på golvet.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="56 90 336 222" width="399" height="264" role="img" aria-label="Ett torn av likadana block staplade på ett golv. Blocken är numrerade uppifrån: 1, 2, 3 och så vidare ned till block N längst ned." style="max-width:100%;height:auto;display:block;margin:16px auto;font-family:Poppins,system-ui,sans-serif"><line x1="60" y1="300" x2="360" y2="300" stroke="rgba(15,22,32,0.55)" stroke-width="1.6"/><line x1="68" y1="300" x2="60" y2="309" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="84" y1="300" x2="76" y2="309" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="100" y1="300" x2="92" y2="309" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="116" y1="300" x2="108" y2="309" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="132" y1="300" x2="124" y2="309" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="148" y1="300" x2="140" y2="309" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="164" y1="300" x2="156" y2="309" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="180" y1="300" x2="172" y2="309" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="196" y1="300" x2="188" y2="309" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="212" y1="300" x2="204" y2="309" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="228" y1="300" x2="220" y2="309" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="244" y1="300" x2="236" y2="309" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="260" y1="300" x2="252" y2="309" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="276" y1="300" x2="268" y2="309" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="292" y1="300" x2="284" y2="309" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="308" y1="300" x2="300" y2="309" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="324" y1="300" x2="316" y2="309" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="340" y1="300" x2="332" y2="309" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="356" y1="300" x2="348" y2="309" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><rect x="150" y="266" width="110" height="34" fill="#d9d4ca" stroke="#5f5a52" stroke-width="1.5"/><text x="205" y="289" text-anchor="middle" font-size="16" fill="#0f1620"><tspan font-style="italic">N</tspan></text><rect x="150" y="232" width="110" height="34" fill="#d9d4ca" stroke="#5f5a52" stroke-width="1.5"/><text x="205" y="255" text-anchor="middle" font-size="16" fill="#0f1620"><tspan font-style="italic">N</tspan> − 1</text><text x="205" y="222" text-anchor="middle" font-size="18" fill="#0f1620">⋮</text><rect x="150" y="164" width="110" height="34" fill="#d9d4ca" stroke="#5f5a52" stroke-width="1.5"/><text x="205" y="187" text-anchor="middle" font-size="16" fill="#0f1620">3</text><rect x="150" y="130" width="110" height="34" fill="#d9d4ca" stroke="#5f5a52" stroke-width="1.5"/><text x="205" y="153" text-anchor="middle" font-size="16" fill="#0f1620">2</text><rect x="150" y="96" width="110" height="34" fill="#d9d4ca" stroke="#5f5a52" stroke-width="1.5"/><text x="205" y="119" text-anchor="middle" font-size="16" fill="#0f1620">1</text><text x="274" y="120" font-size="15" fill="#0f1620">block 1 överst</text></svg>
+
+a) Visa att normalkraften från block $k + 1$ på block $k$ är $F_\\mathrm{N} = k \\cdot m \\cdot g$.<br>b) Blocken är betongblock med massan 12 kg vardera. Ovansidan på ett block spricker om blocken ovanpå trycker på den med en kraft som är större än 2,5 kN. Hur många block kan tornet högst bestå av på jorden, där $g = 9{,}82\\ \\mathrm{N/kg}$?<br>c) Tornet ska byggas på månen, där $g = 1{,}62\\ \\mathrm{N/kg}$. En elev resonerar: ”Tyngdfaktorn på jorden är $\\dfrac{9{,}82}{1{,}62} \\approx 6{,}1$ gånger så stor som på månen, så tornet kan bli 6,1 gånger så högt, alltså $6{,}1 \\cdot 22 \\approx 133$ block.” Undersök om elevens svar stämmer, och förklara var resonemanget brister.`,
+            answer: { value: 22, unit: 'block', tol: 0.001 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 22, unit: 'block', tol: 0.001 },
+                { del: 'c', value: 129, unit: 'block', tol: 0.001 },
+            ],
+            solution: `**a)** Se de $k$ översta blocken, block 1 till block $k$, som en enda kropp. Kroppen är i vila, så kraftresultanten på den är noll. Två yttre krafter verkar på kroppen:
+
+- tyngdkraften på de $k$ blocken, $k \\cdot m \\cdot g$, nedåt
+- normalkraften $F_\\mathrm{N}$ från block $k + 1$ på block $k$, uppåt
+
+Krafterna mellan blocken inne i kroppen (block 1 på block 2 och så vidare) är inre krafter. Enligt Newtons tredje lag kommer de i par som är lika stora och motriktade, så de tar ut varandra och påverkar inte jämvikten för kroppen som helhet. Kraftjämvikt ger
+
+$$
+F_\\mathrm{N} = k \\cdot m \\cdot g
+$$
+
+Samma sak syns om man går nedåt block för block: block 1 behöver normalkraften $m g$. Block 2 ska bära sin egen tyngd och dessutom block 1:s tryck $m g$ ovanifrån, så normalkraften på block 2 blir $2 m g$, och så vidare. Därmed är sambandet visat.
+
+**b)** Det block som belastas mest är det understa, block $N$. Ovanpå det ligger $N - 1$ block, och enligt a) med $k = N - 1$ trycker de på dess ovansida med kraften $(N - 1) \\cdot m \\cdot g$. Ovansidan håller så länge
+
+$$
+(N - 1) \\cdot m \\cdot g \\leq F_\\text{max} \\quad\\Leftrightarrow\\quad N - 1 \\leq \\frac{F_\\text{max}}{m \\cdot g}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m = 12\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+F_\\text{max} = 2{,}5\\ \\mathrm{kN} = 2\\,500\\ \\mathrm{N}
+\\end{array} \\right]
+$$
+
+$$
+N - 1 \\leq \\frac{2\\,500}{12 \\cdot 9{,}82} = \\frac{2\\,500}{117{,}84} = 21{,}215
+$$
+
+Antalet block ovanpå måste vara ett heltal, så högst 21 block får ligga ovanpå det understa. Kontroll: 21 block trycker med $21 \\cdot 117{,}84 = 2\\,474{,}64\\ \\mathrm{N}$, vilket håller, medan 22 block skulle trycka med $22 \\cdot 117{,}84 = 2\\,592{,}48\\ \\mathrm{N}$.
+
+**Svar:** Tornet kan högst bestå av 22 block.
+
+**c)** Samma villkor som i b), men med månens tyngdfaktor:
+
+$$
+N - 1 \\leq \\frac{2\\,500}{12 \\cdot 1{,}62} = \\frac{2\\,500}{19{,}44} = 128{,}60
+$$
+
+Högst 128 block får alltså ligga ovanpå det understa, och tornet kan ha $128 + 1 = 129$ block, inte 133. Elevens svar stämmer alltså inte.
+
+Resonemanget brister på två punkter:
+
+- **Det är antalet block ovanpå som skalas, inte hela tornet.** Gränsen gäller kraften på det understa blockets ovansida, och den kraften kommer från de $N - 1$ blocken ovanpå. Det understa blocket bär inget av sin egen tyngd med ovansidan. När tyngdfaktorn är 6,1 gånger så liten ryms 6,1 gånger så många block **ovanpå**: $6{,}06 \\cdot 21 \\approx 127$, och det understa blocket läggs till efteråt. Eleven multiplicerade även det understa blocket med 6,1.
+- **Antalet block är ett heltal som avrundats nedåt.** På jorden ger villkoret 21,2 block ovanpå, men bara 21 får plats. Att multiplicera det avrundade värdet ger inte samma sak som att räkna om gränsen: $6{,}06 \\cdot 21{,}215 = 128{,}6$ block ovanpå, alltså 128.
+
+**Svar:** Nej, tornet kan högst bestå av 129 block på månen. Eleven skalade hela tornet, fast det bara är blocken ovanpå det understa som belastar det, och utgick från ett avrundat antal block.`,
+        },
+        {
+            level: 3,
+            question: `En guldhandlare köper guld i norra Kanada, där $g = 9{,}832\\ \\mathrm{N/kg}$, och säljer det vid ekvatorn, där $g = 9{,}780\\ \\mathrm{N/kg}$. Hon väger guldet med samma fjädervåg på båda platserna. Vågen mäter kraften i fjädern, men skalan är graderad i kilogram och kalibrerad i Sverige, där $g = 9{,}82\\ \\mathrm{N/kg}$.<br>a) Förklara varför vågen visar olika värden för samma guld på de två platserna.<br>b) Hon köper en mängd guld som vågen i Kanada visar som 2,000 kg. Vad visar vågen för samma guld vid ekvatorn, och hur många gram guld förlorar hon enligt vågen? Ange vågens värde i kg och förlusten i gram.<br>c) Visa att den relativa skillnaden mellan vågens två värden inte beror på var vågen kalibrerades.<br>d) Vilken sorts våg borde hon och hennes kunder använda? Motivera.`,
+            answer: { value: 10.58, unit: 'g', tol: 0.06 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 1.989, unit: 'kg', tol: 0.001, etikett: 'vågens värde vid ekvatorn' },
+                { del: 'b', value: 10.58, unit: 'g', tol: 0.06, etikett: 'förlusten' },
+                { del: 'c' },
+                { del: 'd' },
+            ],
+            solution: `Kalla tyngdfaktorn i Sverige $g_0$, i Kanada $g_\\text{K}$ och vid ekvatorn $g_\\text{E}$.
+
+**a)** En fjädervåg mäter tyngden $F_\\mathrm{G} = m \\cdot g$, alltså kraften i fjädern, och omvandlar den till kilogram med Sveriges tyngdfaktor:
+
+$$
+m_\\text{visad} = \\frac{F_\\mathrm{G}}{g_0} = \\frac{m \\cdot g}{g_0}
+$$
+
+Guldets massa $m$ är densamma överallt, men tyngdfaktorn $g$ är större i Kanada än vid ekvatorn. Samma guld drar därför hårdare i fjädern i Kanada, och vågen visar mer där.
+
+**Svar:** Vågen mäter guldets tyngd, inte dess massa, och tyngden av samma massa är större där tyngdfaktorn är större.
+
+**b)** I Kanada visar vågen $m_\\text{K} = \\dfrac{m \\cdot g_\\text{K}}{g_0}$ och vid ekvatorn $m_\\text{E} = \\dfrac{m \\cdot g_\\text{E}}{g_0}$. Division ger
+
+$$
+\\frac{m_\\text{E}}{m_\\text{K}} = \\frac{g_\\text{E}}{g_\\text{K}} \\quad\\Leftrightarrow\\quad m_\\text{E} = m_\\text{K} \\cdot \\frac{g_\\text{E}}{g_\\text{K}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m_\\text{K} = 2{,}000\\ \\mathrm{kg} \\\\
+g_\\text{K} = 9{,}832\\ \\mathrm{N/kg} \\\\
+g_\\text{E} = 9{,}780\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+m_\\text{E} = 2{,}000 \\cdot \\frac{9{,}780}{9{,}832} = 1{,}98942 \\approx 1{,}989\\ \\mathrm{kg}
+$$
+
+Förlusten enligt vågen är skillnaden mellan värdena:
+
+$$
+\\Delta m = m_\\text{K} - m_\\text{E} = m_\\text{K} \\cdot \\frac{g_\\text{K} - g_\\text{E}}{g_\\text{K}} = 2{,}000 \\cdot \\frac{0{,}052}{9{,}832} = 0{,}010578\\ \\mathrm{kg} \\approx 11\\ \\mathrm{g}
+$$
+
+Skillnaden mellan tyngdfaktorerna, 0,052 N/kg, har bara två värdesiffror, så förlusten anges med två värdesiffror.
+
+Rimlighet: tyngdfaktorerna skiljer sig med ungefär en halv procent, och en halv procent av 2 kg är 10 g. Guldet har förstås inte blivit mindre, det är bara vågens värde som har ändrats.
+
+**Svar:** Vågen visar 1,989 kg vid ekvatorn, så hon förlorar cirka 11 g guld enligt vågen.
+
+**c)** Den relativa skillnaden är
+
+$$
+\\frac{m_\\text{K} - m_\\text{E}}{m_\\text{K}} = \\frac{\\dfrac{m g_\\text{K}}{g_0} - \\dfrac{m g_\\text{E}}{g_0}}{\\dfrac{m g_\\text{K}}{g_0}} = \\frac{g_\\text{K} - g_\\text{E}}{g_\\text{K}}
+$$
+
+Både $g_0$ och $m$ tar ut sig. Den relativa skillnaden beror bara på tyngdfaktorerna där guldet köps och säljs, inte på var vågen kalibrerades eller hur mycket guld det gäller. Därmed är det visat.
+
+**d)** En balansvåg (likarmad våg) jämför guldets tyngd med tyngden av vikter med känd massa. På en plats med större tyngdfaktor ökar båda tyngderna med samma faktor, så vågen väger jämnt vid samma massa överallt. En balansvåg mäter alltså massa, medan en fjädervåg mäter tyngd.
+
+**Svar:** De borde använda en balansvåg, eftersom den jämför massor och visar samma värde oberoende av tyngdfaktorn.`,
+        },
+        {
+            level: 3,
+            question: `En astronaut med massan 75 kg tränar inför en månlandning. På jorden kan hon precis resa sig från knäböj med en skivstång på 55 kg på axlarna, men inte med mer. På månen bär hon en rymddräkt med massan 82 kg, och tyngdfaktorn är $g_\\text{M} = 1{,}62\\ \\mathrm{N/kg}$. På jorden är $g_\\text{J} = 9{,}82\\ \\mathrm{N/kg}$.
+
+Anta att det som begränsar henne är hur hårt benen kan trycka mot marken, alltså hur stor normalkraften från marken på henne kan bli, och att den gränsen är densamma på månen. Anta också att hon reser sig så långsamt att accelerationen kan försummas.<br>a) Ställ upp ett generellt uttryck för den största extra massa $m_\\text{x}$ hon kan resa sig med på månen. Använd beteckningarna $m$ (astronautens massa), $m_\\text{J}$ (skivstången på jorden), $m_\\text{d}$ (dräkten), $g_\\text{J}$ och $g_\\text{M}$.<br>b) Beräkna $m_\\text{x}$. Ange svaret i kg.<br>c) Ge två skäl till att hon i verkligheten inte skulle kunna hantera en så stor massa lika lätt som modellen antyder.`,
+            answer: { value: 631, unit: 'kg', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 631, unit: 'kg', tol: 0.03 },
+                { del: 'c' },
+            ],
+            solution: `**a)** När hon reser sig utan acceleration är kraftresultanten på henne och lasten noll. Normalkraften från marken är då lika stor som hela tyngden hon står med. Den största normalkraft hon klarar kallar vi $F_\\text{max}$.
+
+På jorden står hon precis vid gränsen med sin egen massa och skivstången:
+
+$$
+F_\\text{max} = (m + m_\\text{J}) \\cdot g_\\text{J}
+$$
+
+På månen bär hon sin egen massa, dräkten och den extra massan:
+
+$$
+F_\\text{max} = (m + m_\\text{d} + m_\\text{x}) \\cdot g_\\text{M}
+$$
+
+Gränsen är densamma, så högerleden är lika:
+
+$$
+(m + m_\\text{d} + m_\\text{x}) \\cdot g_\\text{M} = (m + m_\\text{J}) \\cdot g_\\text{J}
+$$
+
+$$
+m + m_\\text{d} + m_\\text{x} = \\frac{(m + m_\\text{J}) \\cdot g_\\text{J}}{g_\\text{M}}
+$$
+
+$$
+m_\\text{x} = \\frac{(m + m_\\text{J}) \\cdot g_\\text{J}}{g_\\text{M}} - m - m_\\text{d}
+$$
+
+**Svar:** $m_\\text{x} = \\dfrac{(m + m_\\text{J}) \\cdot g_\\text{J}}{g_\\text{M}} - m - m_\\text{d}$
+
+**b)**
+
+$$
+\\left[ \\begin{array}{l}
+m = 75\\ \\mathrm{kg} \\\\
+m_\\text{J} = 55\\ \\mathrm{kg} \\\\
+m_\\text{d} = 82\\ \\mathrm{kg} \\\\
+g_\\text{J} = 9{,}82\\ \\mathrm{N/kg} \\\\
+g_\\text{M} = 1{,}62\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+m_\\text{x} = \\frac{(75 + 55) \\cdot 9{,}82}{1{,}62} - 75 - 82 = \\frac{1\\,276{,}6}{1{,}62} - 157 = 788{,}02 - 157 = 631{,}02 \\approx 630\\ \\mathrm{kg}
+$$
+
+Massorna har två värdesiffror, så svaret avrundas till två värdesiffror.
+
+Rimlighet: månens tyngdfaktor är ungefär en sjättedel av jordens, så benen orkar bära ungefär sex gånger så stor massa, $6 \\cdot 130\\ \\mathrm{kg} \\approx 790\\ \\mathrm{kg}$. Drar man bort astronauten och dräkten blir det drygt 600 kg kvar.
+
+**Svar:** Hon kan resa sig med ungefär 630 kg extra.
+
+**c)** Modellen räknar bara med tyngden. Två saker den bortser från:
+
+- **Trögheten är densamma som på jorden.** Massan 630 kg är lika svår att sätta i rörelse, bromsa och styra som på jorden. Varje gång lasten gungar till eller ska stoppas krävs lika stora krafter som för 630 kg här, och de krafterna är mycket större än vad tyngden på månen antyder.
+- **Balansen och rörligheten.** En så stor massa på axlarna flyttar den gemensamma tyngdpunkten högt upp, så att hon lätt tappar balansen, och rymddräkten gör det svårt att böja knän och höfter och att få grepp om lasten.
+
+**Svar:** Lastens tröghet är densamma som på jorden, och balansen och dräktens stelhet begränsar henne, vilket modellen inte tar hänsyn till.`,
+        },
+        {
+            level: 3,
+            question: `En elev skriver i sin labbrapport: ”En låda som står på golvet påverkas av normalkraften och tyngdkraften. De är alltid lika stora och motriktade, eftersom de är kraft och motkraft enligt Newtons tredje lag.”<br>a) Påståendet innehåller två fel. Förklara vilka och varför.<br>b) Samma låda, med massan 6,0 kg, trycks mot en lodrät vägg av en vågrät kraft på 120 N och hålls still ovanför golvet. Bestäm normalkraften från väggen på lådan och tyngdkraften på lådan. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaren i N.<br>c) Ange, för situationen i b), motkraften till normalkraften på lådan och motkraften till tyngdkraften på lådan. Ange för varje motkraft vilken kropp den verkar på och hur stor den är.`,
+            answer: { value: 120, unit: 'N', tol: 0.02 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 120, unit: 'N', tol: 0.02, etikett: 'normalkraften $F_\\mathrm{N}$' },
+                { del: 'b', value: 58.92, unit: 'N', tol: 0.02, etikett: 'tyngdkraften $F_\\mathrm{G}$' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Det första felet är att normalkraften **alltid** skulle vara lika stor som tyngdkraften och motriktad den. Normalkraften är bara så stor som behövs för att föremålet inte ska tränga in i ytan, och den verkar vinkelrätt mot ytan. Den är lika stor som tyngdkraften och motriktad den bara när föremålet vilar på ett vågrätt underlag och inga andra krafter verkar i lodrät led. Trycker någon nedåt på lådan blir normalkraften större än tyngdkraften, drar ett rep uppåt i lådan blir den mindre, och på ett lutande underlag pekar den snett.
+
+Det andra felet är hänvisningen till Newtons tredje lag. Kraft och motkraft verkar alltid på **två olika kroppar**, och de är av samma slag. Normalkraften och tyngdkraften verkar båda på lådan, så de kan aldrig vara kraft och motkraft. När de är lika stora beror det på Newtons första lag: lådan är i vila, så kraftresultanten på den är noll.
+
+**Svar:** Normalkraften är inte alltid lika stor som tyngdkraften, och de två krafterna är inte kraft och motkraft, eftersom de verkar på samma kropp. Likheten på ett vågrätt golv följer av Newtons första lag.
+
+**b)** I vågrät led verkar tryckkraften $F = 120\\ \\mathrm{N}$ mot väggen och normalkraften $F_\\mathrm{N}$ från väggen, vinkelrätt ut från väggen. Lådan rör sig inte i vågrät led, så
+
+$$
+F_\\mathrm{N} = F = 120\\ \\mathrm{N}
+$$
+
+Tyngdkraften är
+
+$$
+F_\\mathrm{G} = m \\cdot g = 6{,}0 \\cdot 9{,}82 = 58{,}92 \\approx 59\\ \\mathrm{N}
+$$
+
+Normalkraften är alltså varken lika stor som tyngdkraften eller motriktad den: de två krafterna är vinkelräta mot varandra. Det som håller emot tyngdkraften är friktionen mellan lådan och väggen, som du möter i ett senare avsnitt.
+
+**Svar:** Normalkraften från väggen är 120 N och tyngdkraften är 59 N.
+
+**c)** Motkraften hittar man genom att byta plats på de två kropparna i beskrivningen av kraften.
+
+- Normalkraften är kraften från **väggen på lådan**. Motkraften är kraften från **lådan på väggen**: 120 N, vågrätt in mot väggen, och den verkar på väggen.
+- Tyngdkraften är kraften från **jorden på lådan**. Motkraften är kraften från **lådan på jorden**: 59 N, riktad uppåt mot lådan, och den verkar på jorden.
+
+**Svar:** Motkraften till normalkraften är lådans tryck på väggen, 120 N, som verkar på väggen. Motkraften till tyngdkraften är lådans dragning i jorden, 59 N, som verkar på jorden.`,
+        },
+        {
+            level: 3,
+            question: `Sara med massan 58 kg och Omar med massan 81 kg står på var sin badrumsvåg. Ett rep går lodrätt upp från Saras händer, över en trissa som sitter fast i taket, och lodrätt ned till Omars händer. Båda håller i repet och står stilla. Vågarna mäter kraften från fötterna men visar den i kilogram, eftersom de delar kraften med $g = 9{,}82\\ \\mathrm{N/kg}$. Trissan och repet har försumbar massa och friktion.<br>a) Omar drar i repet tills Saras våg visar 21 kg. Vad visar Omars våg då?<br>b) Omar påstår att Sara kan få hans våg att visa 0 kg, om hon bara drar tillräckligt hårt i repet. Undersök om han har rätt, och bestäm det minsta värde Omars våg kan visa medan båda står kvar på sina vågar.
+
+Ange svaren i kg.`,
+            answer: { value: 23, unit: 'kg', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 44, unit: 'kg', tol: 0.03 },
+                { del: 'b', value: 23, unit: 'kg', tol: 0.03 },
+            ],
+            solution: `Repet är masslöst och trissan friktionsfri, så spännkraften $F_\\mathrm{S}$ är lika stor i hela repet. Repet drar alltså uppåt med samma kraft $F_\\mathrm{S}$ i Saras och i Omars händer, oavsett vem av dem som ”drar”.
+
+En badrumsvåg visar personens tryck på vågen, som enligt Newtons tredje lag är lika stort som normalkraften $F_\\mathrm{N}$ från vågen på personen. Vågen delar kraften med $g$, så den visar $m_\\text{visad} = \\dfrac{F_\\mathrm{N}}{g}$.
+
+**a)** Sara står still, så kraftresultanten på henne är noll. Uppåt verkar repets kraft $F_\\mathrm{S}$ och normalkraften $F_\\mathrm{N,S}$ från hennes våg, nedåt hennes tyngd $m_\\text{S} \\cdot g$:
+
+$$
+F_\\mathrm{N,S} + F_\\mathrm{S} = m_\\text{S} \\cdot g \\quad\\Leftrightarrow\\quad F_\\mathrm{S} = m_\\text{S} \\cdot g - F_\\mathrm{N,S}
+$$
+
+Saras våg visar 21 kg, så $F_\\mathrm{N,S} = 21\\ \\mathrm{kg} \\cdot g$. Insatt:
+
+$$
+F_\\mathrm{S} = 58 \\cdot 9{,}82 - 21 \\cdot 9{,}82 = (58 - 21) \\cdot 9{,}82 = 37 \\cdot 9{,}82 = 363{,}34\\ \\mathrm{N}
+$$
+
+Samma kraftjämvikt gäller för Omar, som också står still:
+
+$$
+F_\\mathrm{N,O} + F_\\mathrm{S} = m_\\text{O} \\cdot g \\quad\\Leftrightarrow\\quad F_\\mathrm{N,O} = m_\\text{O} \\cdot g - F_\\mathrm{S}
+$$
+
+$$
+F_\\mathrm{N,O} = 81 \\cdot 9{,}82 - 363{,}34 = 795{,}42 - 363{,}34 = 432{,}08\\ \\mathrm{N}
+$$
+
+Omars våg visar
+
+$$
+m_\\text{visad} = \\frac{F_\\mathrm{N,O}}{g} = \\frac{432{,}08}{9{,}82} = 44\\ \\mathrm{kg}
+$$
+
+Repet lättar alltså båda lika mycket, 37 kg, och $81 - 37 = 44$.
+
+Rimlighet: vågarna visar tillsammans $21 + 44 = 65\\ \\mathrm{kg}$, fast Sara och Omar har massan 139 kg tillsammans. Skillnaden, $2 \\cdot 37 = 74\\ \\mathrm{kg}$, bärs av trissan i taket, som repet drar nedåt i med $2 F_\\mathrm{S}$.
+
+**Svar:** Omars våg visar 44 kg.
+
+**b)** Omars våg visar 0 kg när $F_\\mathrm{N,O} = 0$. Enligt jämvikten för Omar kräver det att
+
+$$
+F_\\mathrm{S} = m_\\text{O} \\cdot g = 81 \\cdot 9{,}82 = 795{,}42\\ \\mathrm{N}
+$$
+
+Men samma spännkraft drar uppåt i Sara. Ur hennes jämvikt är
+
+$$
+F_\\mathrm{N,S} = m_\\text{S} \\cdot g - F_\\mathrm{S}
+$$
+
+En normalkraft kan bara trycka, aldrig dra, så $F_\\mathrm{N,S} \\geq 0$ så länge Sara står kvar. Det ger
+
+$$
+F_\\mathrm{S} \\leq m_\\text{S} \\cdot g = 58 \\cdot 9{,}82 = 569{,}56\\ \\mathrm{N}
+$$
+
+Drar Sara hårdare än så blir repets kraft uppåt i henne större än hennes tyngd, och hon lyfter från vågen. Spännkraften kan alltså aldrig bli 795,42 N medan båda står kvar, och Omar har fel.
+
+Den största spännkraften är $m_\\text{S} \\cdot g$, och då visar Omars våg minst:
+
+$$
+F_\\mathrm{N,O} = m_\\text{O} \\cdot g - m_\\text{S} \\cdot g = (m_\\text{O} - m_\\text{S}) \\cdot g
+$$
+
+$$
+m_\\text{visad} = \\frac{(m_\\text{O} - m_\\text{S}) \\cdot g}{g} = m_\\text{O} - m_\\text{S} = 81 - 58 = 23\\ \\mathrm{kg}
+$$
+
+Det gäller generellt: den lättare personen lyfter alltid först, och den tyngre personens våg kan som lägst visa skillnaden mellan deras massor.
+
+**Svar:** Omar har fel. Hans våg kan som minst visa 23 kg, och då lyfter Sara precis från sin våg.`,
         },
     ],
 
@@ -12019,6 +16536,618 @@ Svaret avrundas till tre värdesiffror, som *G* och Mars massa.
 
 **Generell slutsats:** Detta är knappt 38 % av jordens tyngdfaktor. En person som väger 700 N på jorden skulle väga drygt 260 N på Mars, fortfarande mer än på månen (knappt 120 N) men klart mindre än hemma. Notera att tyngdfaktorn beror på *två* saker: planetens massa och dess radie i kvadrat. En liten men extremt tät himlakropp (till exempel en neutronstjärna) skulle ha enorm tyngdfaktor.`,
         },
+        {
+            level: 1,
+            question: `En astronaut med massan 80 kg arbetar på rymdstationen ISS, som befinner sig $6{,}78 \\cdot 10^{6}\\ \\mathrm{m}$ från jordens centrum. Beräkna gravitationskraften från jorden på astronauten. Jordens massa är $5{,}972 \\cdot 10^{24}\\ \\mathrm{kg}$. Räkna med $G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}$ och ange svaret i N.`,
+            answer: { value: 690, unit: 'N', tol: 0.03 },
+            solution: `Vi använder Newtons gravitationslag, med astronautens massa som $m_1$ och jordens massa som $m_2$. Avståndet $r$ räknas från jordens centrum, eftersom det är avståndet mellan tyngdpunkterna.
+
+$$
+F_G = G \\cdot \\frac{m_1 \\cdot m_2}{r^{2}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2} \\\\
+m_1 = 80\\ \\mathrm{kg} \\\\
+m_2 = 5{,}972 \\cdot 10^{24}\\ \\mathrm{kg} \\\\
+r = 6{,}78 \\cdot 10^{6}\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+F_G = 6{,}67 \\cdot 10^{-11} \\cdot \\frac{80 \\cdot 5{,}972 \\cdot 10^{24}}{(6{,}78 \\cdot 10^{6})^{2}}
+= 693{,}22\\ldots\\ \\mathrm{N}
+\\approx 690\\ \\mathrm{N}
+$$
+
+Svaret avrundas till två värdesiffror, som astronautens massa 80 kg.
+
+**Svar:** 690 N
+
+**Generell slutsats:** På jordytan är tyngdkraften på astronauten $80 \\cdot 9{,}82 \\approx 790\\ \\mathrm{N}$. Ombord på ISS drar jorden alltså fortfarande nästan lika hårt. Att astronauterna svävar beror på att stationen och allt i den faller fritt runt jorden, inte på att gravitationen har försvunnit.`,
+        },
+
+        {
+            level: 2,
+            question: `Diagrammet visar gravitationskraften $F_G$ mellan två blykulor som funktion av avståndet $r$ mellan kulornas tyngdpunkter. Kraften anges i nanonewton, där $1\\ \\mathrm{nN} = 10^{-9}\\ \\mathrm{N}$.
+
+${makeDiagram({
+    xMin: 0, xMax: 0.5, yMin: 0, yMax: 130,
+    xTicks: [0, 0.1, 0.2, 0.3, 0.4, 0.5],
+    yTicks: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130],
+    xLabel: '<tspan font-style="italic">r</tspan> (m)',
+    yLabel: '<tspan font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="0.72em">G</tspan> (nN)',
+    paths: [{ points: Array.from({ length: 401 }, (_, i) => { const r = 0.1 + i * 0.001; return [r, 1.2 / (r * r)]; }), color: '#2563a8' }],
+})}
+
+<br>a) Läs av gravitationskraften när avståndet är 0,20 m.<br>b) Den ena kulan har massan 12 kg. Bestäm den andra kulans massa.<br>c) Visa med två avläsningar i diagrammet att kraften minskar till en fjärdedel när avståndet fördubblas.
+
+Räkna med $G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}$.`,
+            answer: { value: 1.5, unit: 'kg', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 30, unit: 'nN', tol: 0.05 },
+                { del: 'b', value: 1.5, unit: 'kg', tol: 0.04 },
+                { del: 'c' },
+            ],
+            solution: `**a)** Vi går upp från $r = 0{,}20\\ \\mathrm{m}$ på den vågräta axeln till kurvan och läser av kraften på den lodräta axeln. Kurvan går genom 30 nN.
+
+**Svar:** 30 nN
+
+**b)** Vi löser ut den okända massan $m_2$ ur Newtons gravitationslag genom att multiplicera båda led med $r^{2}$ och dividera med $G \\cdot m_1$:
+
+$$
+F_G = G \\cdot \\frac{m_1 \\cdot m_2}{r^{2}}
+\\quad\\Leftrightarrow\\quad
+m_2 = \\frac{F_G \\cdot r^{2}}{G \\cdot m_1}
+$$
+
+Vi använder avläsningen från a) och gör om kraften till newton.
+
+$$
+\\left[ \\begin{array}{l}
+F_G = 30\\ \\mathrm{nN} = 30 \\cdot 10^{-9}\\ \\mathrm{N} \\\\
+r = 0{,}20\\ \\mathrm{m} \\\\
+G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2} \\\\
+m_1 = 12\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$
+m_2 = \\frac{30 \\cdot 10^{-9} \\cdot 0{,}20^{2}}{6{,}67 \\cdot 10^{-11} \\cdot 12}
+= 1{,}499\\ldots\\ \\mathrm{kg}
+\\approx 1{,}5\\ \\mathrm{kg}
+$$
+
+Svaret avrundas till två värdesiffror, som avläsningen och avståndet.
+
+**Svar:** 1,5 kg
+
+**c)** Vi läser av kraften vid $r = 0{,}10\\ \\mathrm{m}$ och vid det dubbla avståndet $r = 0{,}20\\ \\mathrm{m}$. Kurvan går genom 120 nN respektive 30 nN. Kvoten mellan krafterna är
+
+$$
+\\frac{30}{120} = 0{,}25 = \\frac{1}{4}
+$$
+
+Kraften vid det dubbla avståndet är alltså en fjärdedel av kraften vid det enkla. Det stämmer med att avståndet står i kvadrat i nämnaren: $2^{2} = 4$.
+
+**Svar:** Kraften är 120 nN vid 0,10 m och 30 nN vid 0,20 m, och 30 nN är en fjärdedel av 120 nN.`,
+        },
+        {
+            level: 2,
+            question: `Planeten Jupiter har 318 gånger så stor massa som jorden, och dess radie är 11,2 gånger jordens radie.<br>a) Hur många gånger större än på jorden är tyngdfaktorn vid Jupiters yta?<br>b) Hur stor skulle tyngdkraften vara på en person med massan 60 kg vid Jupiters yta? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ på jorden och ange svaret i N.`,
+            answer: { value: 1500, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 2.54, unit: 'gånger', tol: 0.02 },
+                { del: 'b', value: 1500, unit: 'N', tol: 0.03 },
+            ],
+            solution: `**a)** Tyngdfaktorn vid ytan av en planet med massan $m$ och radien $r$ får vi ur gravitationslagen, på samma sätt som i genomgången för jorden:
+
+$$
+g = G \\cdot \\frac{m}{r^{2}}
+$$
+
+Vi kallar jordens massa och radie $m_j$ och $r_j$. Då är Jupiters massa $318 \\cdot m_j$ och Jupiters radie $11{,}2 \\cdot r_j$. Vi dividerar tyngdfaktorn på Jupiter med tyngdfaktorn på jorden:
+
+$$
+\\frac{g_\\text{Jupiter}}{g_\\text{jorden}} = \\frac{G \\cdot \\dfrac{318 \\cdot m_j}{(11{,}2 \\cdot r_j)^{2}}}{G \\cdot \\dfrac{m_j}{r_j^{2}}} = \\frac{318}{11{,}2^{2}}
+$$
+
+$G$, $m_j$ och $r_j^{2}$ finns i både täljare och nämnare och förkortas bort, så vi behöver inte veta jordens massa eller radie.
+
+$$
+\\frac{318}{11{,}2^{2}} = 2{,}535\\ldots \\approx 2{,}54
+$$
+
+Svaret avrundas till tre värdesiffror, som de givna kvoterna.
+
+**Svar:** 2,54 gånger större
+
+**b)** Tyngdfaktorn på Jupiter är $g_\\text{Jupiter} = 2{,}535\\ldots \\cdot 9{,}82\\ \\mathrm{N/kg}$. Vi använder det oavrundade värdet från a) i formeln för tyngdkraft:
+
+$$
+F_G = m \\cdot g_\\text{Jupiter}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m = 60\\ \\mathrm{kg} \\\\
+g_\\text{Jupiter} = 2{,}535\\ldots \\cdot 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+F_G = 60 \\cdot 2{,}5350 \\cdot 9{,}82 = 1\\,493{,}6\\ldots\\ \\mathrm{N} \\approx 1\\,500\\ \\mathrm{N}
+$$
+
+Svaret avrundas till två värdesiffror, som massan 60 kg. Det är rimligt: på jorden är tyngdkraften på personen knappt 600 N, och två och en halv gång så mycket är knappt 1 500 N.
+
+**Svar:** 1 500 N`,
+        },
+        {
+            level: 2,
+            question: `Två klot påverkar varandra med en gravitationskraft. Vilken av ändringarna nedan ger den **största** gravitationskraften mellan kloten?`,
+            choices: [
+                `Båda massorna fördubblas och avståndet fördubblas.`,
+                `Det ena klotets massa tredubblas.`,
+                `Avståndet halveras.`,
+                `Båda massorna halveras och avståndet blir en tredjedel så stort.`,
+            ],
+            correct: 2,
+            solution: `Vi undersöker hur varje ändring påverkar gravitationslagen
+
+$$
+F_G = G \\cdot \\frac{m_1 \\cdot m_2}{r^{2}}
+$$
+
+Massorna står i täljaren, så de påverkar kraften rakt proportionellt. Avståndet står i kvadrat i nämnaren, så en ändring av avståndet påverkar kraften i kvadrat, åt motsatt håll.
+
+- **A:** Täljaren blir $2 \\cdot 2 = 4$ gånger större och nämnaren $2^{2} = 4$ gånger större. Kraften ändras med faktorn $\\dfrac{4}{4} = 1$, alltså inte alls.
+- **B:** Täljaren blir 3 gånger större. Kraften blir 3 gånger större.
+- **C:** Nämnaren blir $\\left(\\frac{1}{2}\\right)^{2} = \\dfrac{1}{4}$ så stor. Kraften blir 4 gånger större.
+- **D:** Täljaren blir $\\dfrac{1}{2} \\cdot \\dfrac{1}{2} = \\dfrac{1}{4}$ så stor och nämnaren $\\left(\\frac{1}{3}\\right)^{2} = \\dfrac{1}{9}$ så stor. Kraften ändras med faktorn $\\dfrac{1}{4} \\cdot 9 = 2{,}25$.
+
+Den största ökningen, 4 gånger, ger alternativ C.
+
+**Svar:** Alternativ C.`,
+        },
+        {
+            level: 2,
+            question: `En astronaut på månen hänger en sten i en dynamometer. Dynamometern visar 3,2 N. Månens massa är $7{,}35 \\cdot 10^{22}\\ \\mathrm{kg}$ och dess radie är 1 737 km. Bestäm stenens massa. Räkna med $G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}$ och ange svaret i kg.`,
+            answer: { value: 2.0, unit: 'kg', tol: 0.03 },
+            solution: `Dynamometern visar tyngdkraften på stenen. För att få massan ur tyngdkraften behöver vi tyngdfaktorn vid månens yta, och den får vi ur gravitationslagen.
+
+Tyngdkraften på stenen kan skrivas på två sätt, med tyngdfaktorn och med gravitationslagen. Det är samma kraft, så uttrycken sätts lika. Stenens massa $m$ finns i båda leden och divideras bort:
+
+$$
+m \\cdot g_\\text{månen} = G \\cdot \\frac{m \\cdot m_\\text{månen}}{r^{2}}
+\\quad\\Leftrightarrow\\quad
+g_\\text{månen} = G \\cdot \\frac{m_\\text{månen}}{r^{2}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2} \\\\
+m_\\text{månen} = 7{,}35 \\cdot 10^{22}\\ \\mathrm{kg} \\\\
+r = 1\\,737\\ \\mathrm{km} = 1{,}737 \\cdot 10^{6}\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+g_\\text{månen} = 6{,}67 \\cdot 10^{-11} \\cdot \\frac{7{,}35 \\cdot 10^{22}}{(1{,}737 \\cdot 10^{6})^{2}}
+= 1{,}6248\\ldots\\ \\mathrm{N/kg}
+$$
+
+Nu löser vi ut massan ur formeln för tyngdkraft och använder det oavrundade värdet:
+
+$$
+F_G = m \\cdot g_\\text{månen} \\quad\\Leftrightarrow\\quad m = \\frac{F_G}{g_\\text{månen}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F_G = 3{,}2\\ \\mathrm{N} \\\\
+g_\\text{månen} = 1{,}6248\\ldots\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+m = \\frac{3{,}2}{1{,}6248} = 1{,}969\\ldots\\ \\mathrm{kg} \\approx 2{,}0\\ \\mathrm{kg}
+$$
+
+Svaret avrundas till två värdesiffror, som dynamometerns utslag 3,2 N. Det är rimligt: tyngdfaktorn på månen är ungefär en sjättedel av jordens, och på jorden hade tyngdkraften på stenen varit ungefär $2{,}0 \\cdot 9{,}82 \\approx 20\\ \\mathrm{N}$, sex gånger mer än på månen.
+
+**Svar:** 2,0 kg`,
+        },
+
+        {
+            level: 3,
+            question: `En rymdsond färdas rakt från jorden mot månen. Någonstans på vägen är gravitationskraften från jorden på sonden lika stor som gravitationskraften från månen på sonden, så att krafterna tar ut varandra.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 186" width="664" height="213" role="img" aria-label="Jorden till vänster och månen till höger med en rymdsond på linjen mellan dem. Avståndet x från jordens centrum till sonden och avståndet d mellan jordens och månens centrum är utmärkta. Figuren är inte skalenlig." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><defs><radialGradient id="ovn-g35-jord" cx="0.38" cy="0.35" r="0.7"><stop offset="0" stop-color="#7fb4e0"/><stop offset="1" stop-color="#2f6aa3"/></radialGradient><radialGradient id="ovn-g35-mane" cx="0.38" cy="0.35" r="0.7"><stop offset="0" stop-color="#e4e2dc"/><stop offset="1" stop-color="#9a978f"/></radialGradient><clipPath id="ovn-g35-jclip"><circle cx="60" cy="80" r="34"/></clipPath></defs><line x1="60" y1="80" x2="520" y2="80" stroke="#0f1620" stroke-width="1" stroke-dasharray="6 5" opacity="0.45"/><circle cx="60" cy="80" r="34" fill="url(#ovn-g35-jord)"/><g clip-path="url(#ovn-g35-jclip)" fill="#5f9a52" opacity="0.9"><path d="M 36 60 C 44 52, 58 54, 62 62 C 66 70, 58 76, 50 78 C 42 80, 34 74, 36 60 Z"/><path d="M 66 84 C 74 80, 86 84, 88 94 C 90 104, 80 110, 72 106 C 64 102, 60 90, 66 84 Z"/><path d="M 40 98 C 46 96, 52 100, 50 106 C 48 110, 40 110, 38 104 Z"/></g><circle cx="60" cy="80" r="34" fill="none" stroke="#0f1620" stroke-width="1.3"/><circle cx="520" cy="80" r="12" fill="url(#ovn-g35-mane)" stroke="#0f1620" stroke-width="1.2"/><circle cx="516" cy="77" r="2.6" fill="#8d8a83" opacity="0.7"/><circle cx="524" cy="84" r="1.8" fill="#8d8a83" opacity="0.7"/><circle cx="60" cy="80" r="2.4" fill="#0f1620"/><circle cx="520" cy="80" r="2" fill="#0f1620"/><rect x="308" y="75" width="13" height="10" fill="#3d5f8c" stroke="#0f1620" stroke-width="0.9"/><rect x="339" y="75" width="13" height="10" fill="#3d5f8c" stroke="#0f1620" stroke-width="0.9"/><line x1="321" y1="80" x2="339" y2="80" stroke="#0f1620" stroke-width="1.2"/><rect x="324" y="73" width="12" height="14" rx="2" fill="#d8b45a" stroke="#0f1620" stroke-width="1.1"/><text x="330" y="108" text-anchor="middle" font-size="13" fill="#0f1620">rymdsond</text><line x1="60" y1="42" x2="60" y2="18" stroke="#0f1620" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/><line x1="330" y1="70" x2="330" y2="18" stroke="#0f1620" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/><line x1="69" y1="26" x2="321" y2="26" stroke="#0f1620" stroke-width="1.3" stroke-linecap="butt"/><polygon points="60,26 69,22 69,30" fill="#0f1620"/><polygon points="330,26 321,22 321,30" fill="#0f1620"/><text x="195" y="18" text-anchor="middle" font-size="15" fill="#0f1620"><tspan font-style="italic">x</tspan></text><line x1="60" y1="118" x2="60" y2="148" stroke="#0f1620" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/><line x1="520" y1="96" x2="520" y2="148" stroke="#0f1620" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/><line x1="69" y1="140" x2="511" y2="140" stroke="#0f1620" stroke-width="1.3" stroke-linecap="butt"/><polygon points="60,140 69,136 69,144" fill="#0f1620"/><polygon points="520,140 511,136 511,144" fill="#0f1620"/><text x="290" y="160" text-anchor="middle" font-size="15" fill="#0f1620"><tspan font-style="italic">d</tspan></text><text x="60" y="180" text-anchor="middle" font-size="13" fill="#0f1620">Jorden</text><text x="520" y="180" text-anchor="middle" font-size="13" fill="#0f1620">Månen</text></svg>
+
+<br>a) Bestäm avståndet $x$ från jordens centrum till den punkten. Avståndet mellan jordens och månens centrum är $d = 3{,}84 \\cdot 10^{8}\\ \\mathrm{m}$, jordens massa $5{,}972 \\cdot 10^{24}\\ \\mathrm{kg}$ och månens massa $7{,}35 \\cdot 10^{22}\\ \\mathrm{kg}$. Ange svaret i m.<br>b) Förklara varför sondens massa inte behövs.`,
+            answer: { value: 3.46e8, unit: 'm', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 3.46e8, unit: 'm', tol: 0.02 },
+                { del: 'b' },
+            ],
+            solution: `**a)** Vi kallar sondens massa $m$, jordens massa $m_j$ och månens massa $m_m$. Sonden är på avståndet $x$ från jordens centrum och därmed på avståndet $d - x$ från månens centrum. Kraften från jorden och kraften från månen ska vara lika stora:
+
+$$
+G \\cdot \\frac{m \\cdot m_j}{x^{2}} = G \\cdot \\frac{m \\cdot m_m}{(d - x)^{2}}
+$$
+
+$G$ och $m$ finns som faktorer i båda leden, så vi dividerar båda led med $G \\cdot m$:
+
+$$
+\\frac{m_j}{x^{2}} = \\frac{m_m}{(d - x)^{2}}
+$$
+
+Vi multiplicerar båda led med $(d - x)^{2}$ och dividerar båda led med $m_j$:
+
+$$
+\\frac{(d - x)^{2}}{x^{2}} = \\frac{m_m}{m_j}
+$$
+
+Vänsterledet är $\\left(\\frac{d - x}{x}\\right)^{2}$. Vi drar roten ur båda led. Båda avstånden är positiva, så vi behåller bara den positiva roten:
+
+$$
+\\frac{d - x}{x} = \\sqrt{\\frac{m_m}{m_j}}
+$$
+
+Vi skriver vänsterledet som $\\dfrac{d}{x} - 1$ och adderar 1 till båda led:
+
+$$
+\\frac{d}{x} = 1 + \\sqrt{\\frac{m_m}{m_j}}
+\\quad\\Leftrightarrow\\quad
+x = \\frac{d}{1 + \\sqrt{\\dfrac{m_m}{m_j}}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+d = 3{,}84 \\cdot 10^{8}\\ \\mathrm{m} \\\\
+m_j = 5{,}972 \\cdot 10^{24}\\ \\mathrm{kg} \\\\
+m_m = 7{,}35 \\cdot 10^{22}\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+Först kvoten under rottecknet:
+
+$$
+\\sqrt{\\frac{7{,}35 \\cdot 10^{22}}{5{,}972 \\cdot 10^{24}}} = 0{,}11093\\ldots
+$$
+
+$$
+x = \\frac{3{,}84 \\cdot 10^{8}}{1 + 0{,}11093} = 3{,}4565\\ldots \\cdot 10^{8}\\ \\mathrm{m} \\approx 3{,}46 \\cdot 10^{8}\\ \\mathrm{m}
+$$
+
+Svaret avrundas till tre värdesiffror, som avståndet och månens massa. Rimlighet: punkten ligger cirka 90 % av vägen till månen, alltså närmare den lätta månen än den tunga jorden. Det är väntat, eftersom sonden måste komma nära månen för att dess svagare dragning ska väga upp jordens.
+
+**Svar:** $3{,}46 \\cdot 10^{8}\\ \\mathrm{m}$ från jordens centrum
+
+**b)** Båda krafterna är proportionella mot sondens massa $m$. En tyngre sond dras alltså hårdare av både jorden och månen, i samma förhållande. När krafterna sätts lika finns $m$ som faktor i båda leden och försvinner. Punkten där krafterna tar ut varandra är därför densamma för en liten satellit som för ett stort rymdskepp.
+
+**Svar:** Båda krafterna är proportionella mot sondens massa, så massan divideras bort när krafterna sätts lika.`,
+        },
+        {
+            level: 3,
+            question: `En exoplanet har samma medeldensitet $\\rho$ som jorden men en radie som är 1,80 gånger så stor som jordens radie. Ett klot med radien $R$ har volymen $V = \\dfrac{4 \\cdot \\pi \\cdot R^{3}}{3}$. Varken jordens massa eller densitet är given.<br>a) Bestäm tyngdfaktorn vid exoplanetens yta. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ vid jordytan och ange svaret i N/kg.<br>b) En elev resonerar: ”Planeten har mer massa, men vi står också längre från dess centrum. Det tar ut varandra, så tyngdfaktorn blir densamma som på jorden.” Granska resonemanget med hjälp av hur massan och tyngdfaktorn beror av radien.`,
+            answer: { value: 17.7, unit: 'N/kg', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 17.7, unit: 'N/kg', tol: 0.02 },
+                { del: 'b' },
+            ],
+            solution: `**a)** Vi känner inte planetens massa, men vi vet att densiteten är densamma som jordens. Vi tar därför fram ett generellt uttryck för tyngdfaktorn där massan är utbytt mot densitet och radie. Tyngdfaktorn vid ytan av en planet med massan $m$ och radien $R$ får vi ur gravitationslagen, som i genomgången:
+
+$$
+g = G \\cdot \\frac{m}{R^{2}}
+$$
+
+Massan är densiteten gånger volymen:
+
+$$
+m = \\rho \\cdot V = \\rho \\cdot \\frac{4 \\cdot \\pi \\cdot R^{3}}{3}
+$$
+
+Vi sätter in massan i uttrycket för $g$:
+
+$$
+g = G \\cdot \\frac{\\rho \\cdot \\dfrac{4 \\cdot \\pi \\cdot R^{3}}{3}}{R^{2}} = \\frac{4 \\cdot \\pi \\cdot G \\cdot \\rho \\cdot R^{3}}{3 \\cdot R^{2}}
+$$
+
+$R^{2}$ förkortas bort mot två av faktorerna i $R^{3}$, och kvar blir en faktor $R$:
+
+$$
+g = \\frac{4 \\cdot \\pi \\cdot G \\cdot \\rho \\cdot R}{3}
+$$
+
+Vid samma densitet är tyngdfaktorn alltså proportionell mot radien. Allt utom $R$ i uttrycket är lika för exoplaneten och jorden. Vi dividerar exoplanetens tyngdfaktor med jordens:
+
+$$
+\\frac{g_\\text{exo}}{g_\\text{jorden}} = \\frac{\\dfrac{4 \\cdot \\pi \\cdot G \\cdot \\rho \\cdot 1{,}80 \\cdot R}{3}}{\\dfrac{4 \\cdot \\pi \\cdot G \\cdot \\rho \\cdot R}{3}} = 1{,}80
+$$
+
+Vi multiplicerar båda led med $g_\\text{jorden}$:
+
+$$
+g_\\text{exo} = 1{,}80 \\cdot g_\\text{jorden}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+g_\\text{jorden} = 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+g_\\text{exo} = 1{,}80 \\cdot 9{,}82 = 17{,}676\\ \\mathrm{N/kg} \\approx 17{,}7\\ \\mathrm{N/kg}
+$$
+
+Svaret avrundas till tre värdesiffror, som radiekvoten och tyngdfaktorn.
+
+**Svar:** 17,7 N/kg
+
+**b)** Eleven har rätt i att båda effekterna finns, men de är inte lika stora. Massan är $m = \\rho \\cdot \\dfrac{4 \\cdot \\pi \\cdot R^{3}}{3}$. Densiteten är densamma, så massan är proportionell mot $R^{3}$ och blir
+
+$$
+1{,}80^{3} = 5{,}832 \\approx 5{,}83
+$$
+
+gånger större. I gravitationslagen står avståndet i kvadrat i nämnaren, så det större avståndet till centrum delar tyngdfaktorn med
+
+$$
+1{,}80^{2} = 3{,}24
+$$
+
+Sammantaget ändras tyngdfaktorn med faktorn $\\dfrac{5{,}832}{3{,}24} = 1{,}80$, alltså samma resultat som i a). Massan växer med $R^{3}$ men avståndseffekten bara med $R^{2}$, så massan vinner och tyngdfaktorn ökar proportionellt mot $R$.
+
+**Svar:** Resonemanget stämmer inte. Massan blir 5,83 gånger större medan avståndet i kvadrat bara blir 3,24 gånger större, så tyngdfaktorn blir 1,80 gånger större än på jorden.`,
+        },
+        {
+            level: 3,
+            question: `År 1798 mätte Henry Cavendish gravitationskraften mellan blyklot i laboratoriet och kunde därigenom bestämma jordens massa. I ett modernt försök av samma slag mäts kraften $1{,}46 \\cdot 10^{-7}\\ \\mathrm{N}$ mellan ett blyklot med massan 158 kg och ett mindre blyklot med massan 0,730 kg, när avståndet mellan klotens medelpunkter är 0,230 m. Använd bara mätningen, tyngdfaktorn $g = 9{,}82\\ \\mathrm{N/kg}$ och jordens radie 6 371 km, inte tabellvärdena för $G$ och jordens massa.<br>a) Bestäm jordens medeldensitet. Ett klot med radien $r$ har volymen $V = \\dfrac{4 \\cdot \\pi \\cdot r^{3}}{3}$. Ange svaret i kg/m³.<br>b) Berggrunden vid jordytan har en densitet på cirka 2 700 kg/m³. Vad säger ditt svar i a) om jordens inre?`,
+            answer: { value: 5500, unit: 'kg/m³', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 5500, unit: 'kg/m³', tol: 0.02 },
+                { del: 'b' },
+            ],
+            solution: `**a)** Densiteten är massan delad med volymen, så vi behöver jordens massa. Den kan vi få ur tyngdfaktorn vid jordytan, men då behövs gravitationskonstanten $G$, och den ger laboratoriemätningen. Vi går därför i tre steg: $G$ ur mätningen, jordens massa ur $G$ och $g$, och sist densiteten.
+
+**Steg 1: gravitationskonstanten.** Vi löser ut $G$ ur Newtons gravitationslag genom att multiplicera båda led med $r^{2}$ och dividera med $m_1 \\cdot m_2$:
+
+$$
+F_G = G \\cdot \\frac{m_1 \\cdot m_2}{r^{2}}
+\\quad\\Leftrightarrow\\quad
+G = \\frac{F_G \\cdot r^{2}}{m_1 \\cdot m_2}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F_G = 1{,}46 \\cdot 10^{-7}\\ \\mathrm{N} \\\\
+r = 0{,}230\\ \\mathrm{m} \\\\
+m_1 = 158\\ \\mathrm{kg} \\\\
+m_2 = 0{,}730\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$
+G = \\frac{1{,}46 \\cdot 10^{-7} \\cdot 0{,}230^{2}}{158 \\cdot 0{,}730}
+= 6{,}6962\\ldots \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}
+\\approx 6{,}70 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}
+$$
+
+Enheten blir $\\mathrm{N} \\cdot \\mathrm{m^2}/(\\mathrm{kg} \\cdot \\mathrm{kg}) = \\mathrm{Nm^2/kg^2}$, som den ska. Värdet ligger nära tabellvärdet $6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}$. Vi räknar vidare med det oavrundade värdet.
+
+**Steg 2: jordens massa.** Tyngdkraften på ett föremål med massan $m$ vid jordytan kan skrivas på två sätt. Uttrycken sätts lika, och $m$ divideras bort:
+
+$$
+m \\cdot g = G \\cdot \\frac{m \\cdot m_j}{r^{2}}
+\\quad\\Leftrightarrow\\quad
+g = G \\cdot \\frac{m_j}{r^{2}}
+$$
+
+Vi löser ut jordens massa genom att multiplicera båda led med $r^{2}$ och dividera med $G$:
+
+$$
+m_j = \\frac{g \\cdot r^{2}}{G}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+r = 6\\,371\\ \\mathrm{km} = 6{,}371 \\cdot 10^{6}\\ \\mathrm{m} \\\\
+G = 6{,}6962\\ldots \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}
+\\end{array} \\right]
+$$
+
+$$
+m_j = \\frac{9{,}82 \\cdot (6{,}371 \\cdot 10^{6})^{2}}{6{,}6962 \\cdot 10^{-11}}
+= 5{,}9524\\ldots \\cdot 10^{24}\\ \\mathrm{kg}
+\\approx 5{,}95 \\cdot 10^{24}\\ \\mathrm{kg}
+$$
+
+Det är det oavrundade $G$ från steg 1 som används, och vi räknar vidare med det oavrundade $m_j$.
+
+**Steg 3: densiteten.** Densiteten är massan delad med volymen:
+
+$$
+\\rho = \\frac{m_j}{V} \\qquad V = \\frac{4 \\cdot \\pi \\cdot r^{3}}{3}
+$$
+
+$$
+V = \\frac{4 \\cdot \\pi \\cdot (6{,}371 \\cdot 10^{6})^{3}}{3} = 1{,}0832\\ldots \\cdot 10^{21}\\ \\mathrm{m^3}
+$$
+
+$$
+\\rho = \\frac{5{,}9524 \\cdot 10^{24}}{1{,}0832 \\cdot 10^{21}} = 5\\,495\\ldots\\ \\mathrm{kg/m^3} \\approx 5{,}50 \\cdot 10^{3}\\ \\mathrm{kg/m^3}
+$$
+
+Svaret avrundas till tre värdesiffror, som mätvärdena. Rimlighet: tabellvärdet för jordens medeldensitet är cirka 5 500 kg/m³, så mätningen ger ett bra värde.
+
+**Svar:** $5{,}50 \\cdot 10^{3}\\ \\mathrm{kg/m^3}$
+
+**b)** Jordens medeldensitet är ungefär dubbelt så stor som berggrundens densitet vid ytan. Om hela jorden bestod av sådan berggrund skulle medeldensiteten vara cirka 2 700 kg/m³. Eftersom de yttre lagren är lättare än medelvärdet måste materialet längre in vara betydligt tätare än 5 500 kg/m³, så att medelvärdet blir så högt. Jordens inre måste alltså bestå av något mycket tätare än vanligt berg, till exempel tryckt metall. Det stämmer med att jorden har en kärna av järn och nickel.
+
+**Svar:** Jordens inre måste vara betydligt tätare än berggrunden vid ytan.`,
+        },
+        {
+            level: 3,
+            question: `Två likadana homogena blyklot med radien $R$ och densiteten $\\rho$ ligger an mot varandra.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 214" width="457" height="272" role="img" aria-label="Två likadana blyklot med radien R ligger an mot varandra. Avståndet r mellan klotens medelpunkter är utmärkt under kloten." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><defs><radialGradient id="ovn-g35-bly" cx="0.36" cy="0.32" r="0.75"><stop offset="0" stop-color="#e9ecef"/><stop offset="0.55" stop-color="#b9c0c7"/><stop offset="1" stop-color="#8a929b"/></radialGradient></defs><circle cx="110" cy="100" r="70" fill="url(#ovn-g35-bly)" stroke="#0f1620" stroke-width="1.4"/><circle cx="110" cy="100" r="2.6" fill="#0f1620"/><circle cx="250" cy="100" r="70" fill="url(#ovn-g35-bly)" stroke="#0f1620" stroke-width="1.4"/><circle cx="250" cy="100" r="2.6" fill="#0f1620"/><line x1="110" y1="100" x2="60.5" y2="50.5" stroke="#0f1620" stroke-width="1.5"/><text x="52.5" y="46.5" text-anchor="end" font-size="15" fill="#0f1620"><tspan font-style="italic">R</tspan></text><line x1="110" y1="104" x2="110" y2="192" stroke="#0f1620" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/><line x1="250" y1="104" x2="250" y2="192" stroke="#0f1620" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/><line x1="119" y1="186" x2="241" y2="186" stroke="#0f1620" stroke-width="1.3" stroke-linecap="butt"/><polygon points="110,186 119,182 119,190" fill="#0f1620"/><polygon points="250,186 241,182 241,190" fill="#0f1620"/><text x="180" y="207" text-anchor="middle" font-size="15" fill="#0f1620"><tspan font-style="italic">r</tspan></text></svg>
+
+Ett klot med radien $R$ har volymen $V = \\dfrac{4 \\cdot \\pi \\cdot R^{3}}{3}$.<br>a) Beräkna gravitationskraften mellan kloten när $R = 10{,}0\\ \\mathrm{cm}$ och $\\rho = 11\\,300\\ \\mathrm{kg/m^3}$. Räkna med $G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}$ och ange svaret i N.<br>b) Båda klotens radie fördubblas, och de ligger fortfarande an mot varandra. En elev påstår: ”Varje klot får 8 gånger så stor massa, så kraften blir $8 \\cdot 8 = 64$ gånger större.” Stämmer påståendet? Ta fram ett generellt uttryck för kraften och styrk ditt svar med det.`,
+            answer: { value: 3.74e-6, unit: 'N', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 3.74e-6, unit: 'N', tol: 0.02 },
+                { del: 'b', value: 16, unit: 'gånger', tol: 0.01 },
+            ],
+            solution: `**a)** Vi tar först fram ett generellt uttryck för kraften, uttryckt i radien och densiteten. Det behövs också i b). Varje klot har massan densiteten gånger volymen:
+
+$$
+m = \\rho \\cdot V = \\frac{4 \\cdot \\pi \\cdot \\rho \\cdot R^{3}}{3}
+$$
+
+Kloten ligger an mot varandra, så avståndet mellan deras tyngdpunkter (medelpunkterna) är två radier: $r = 2 \\cdot R$. Vi sätter in massan och avståndet i Newtons gravitationslag. Båda kloten har samma massa, så $m_1 \\cdot m_2 = m^{2}$:
+
+$$
+F_G = G \\cdot \\frac{m^{2}}{r^{2}} = G \\cdot \\frac{\\left(\\dfrac{4 \\cdot \\pi \\cdot \\rho \\cdot R^{3}}{3}\\right)^{2}}{(2 \\cdot R)^{2}}
+$$
+
+Vi kvadrerar täljaren och nämnaren:
+
+$$
+F_G = G \\cdot \\frac{\\dfrac{16 \\cdot \\pi^{2} \\cdot \\rho^{2} \\cdot R^{6}}{9}}{4 \\cdot R^{2}} = \\frac{16 \\cdot \\pi^{2} \\cdot G \\cdot \\rho^{2} \\cdot R^{6}}{36 \\cdot R^{2}}
+$$
+
+Vi förkortar $\\dfrac{16}{36} = \\dfrac{4}{9}$ och $\\dfrac{R^{6}}{R^{2}} = R^{4}$:
+
+$$
+F_G = \\frac{4 \\cdot \\pi^{2} \\cdot G \\cdot \\rho^{2} \\cdot R^{4}}{9}
+$$
+
+Nu sätter vi in värdena.
+
+$$
+\\left[ \\begin{array}{l}
+G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2} \\\\
+\\rho = 11\\,300\\ \\mathrm{kg/m^3} \\\\
+R = 10{,}0\\ \\mathrm{cm} = 0{,}100\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+F_G = \\frac{4 \\cdot \\pi^{2} \\cdot 6{,}67 \\cdot 10^{-11} \\cdot 11\\,300^{2} \\cdot 0{,}100^{4}}{9}
+$$
+
+$$
+F_G = 3{,}7359\\ldots \\cdot 10^{-6}\\ \\mathrm{N} \\approx 3{,}74 \\cdot 10^{-6}\\ \\mathrm{N}
+$$
+
+Rimlighet: varje klot har massan $\\dfrac{4 \\cdot \\pi \\cdot 11\\,300 \\cdot 0{,}100^{3}}{3} \\approx 47\\ \\mathrm{kg}$, ungefär som en tung kartong böcker. Ändå är kraften mellan dem bara några miljondelar av en newton, ungefär tyngden av ett sandkorn.
+
+**Svar:** $3{,}74 \\cdot 10^{-6}\\ \\mathrm{N}$
+
+**b)** Eleven har rätt om massorna: massan är proportionell mot $R^{3}$, så varje klot får $2^{3} = 8$ gånger så stor massa, och produkten $m_1 \\cdot m_2$ i täljaren blir $8 \\cdot 8 = 64$ gånger större. Men eleven glömmer avståndet. Kloten ligger an mot varandra, så avståndet mellan medelpunkterna är $r = 2 \\cdot R$ och fördubblas också. Avståndet står i kvadrat i nämnaren, som då blir $2^{2} = 4$ gånger större. Kraften ändras alltså med faktorn
+
+$$
+\\frac{64}{4} = 16
+$$
+
+Samma sak syns direkt i det generella uttrycket från a): kraften är proportionell mot $R^{4}$, eftersom allt annat i uttrycket är oförändrat, och $2^{4} = 16$.
+
+**Svar:** Påståendet stämmer inte. Kraften blir 16 gånger större, eftersom även avståndet mellan medelpunkterna fördubblas.`,
+        },
+        {
+            level: 3,
+            question: `Ett äpple med massan 0,20 kg lossnar från en gren och faller 2,0 m till marken. En elev förklarar: ”Jorden drar i äpplet med mycket större kraft än äpplet drar i jorden. Därför faller äpplet mot jorden, och inte jorden mot äpplet.” Jordens massa är $5{,}972 \\cdot 10^{24}\\ \\mathrm{kg}$ och dess radie 6 371 km. Räkna med $G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2}$ och bortse från luftmotståndet.<br>a) Stämmer elevens förklaring? Styrk ditt svar med fysikaliska resonemang och beräkningar av både krafterna och accelerationerna.<br>b) Hur långt rör sig jorden mot äpplet medan äpplet faller till marken? Ange svaret i m.`,
+            answer: { value: 6.7e-26, unit: 'm', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 6.7e-26, unit: 'm', tol: 0.03 },
+            ],
+            solution: `**a)** Vi räknar först ut kraften på äpplet med Newtons gravitationslag. Avståndet är från jordens centrum till äpplet, alltså i praktiken jordens radie:
+
+$$
+F_G = G \\cdot \\frac{m_1 \\cdot m_2}{r^{2}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{Nm^2/kg^2} \\\\
+m_1 = 0{,}20\\ \\mathrm{kg} \\\\
+m_2 = 5{,}972 \\cdot 10^{24}\\ \\mathrm{kg} \\\\
+r = 6\\,371\\ \\mathrm{km} = 6{,}371 \\cdot 10^{6}\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+F_G = 6{,}67 \\cdot 10^{-11} \\cdot \\frac{0{,}20 \\cdot 5{,}972 \\cdot 10^{24}}{(6{,}371 \\cdot 10^{6})^{2}}
+= 1{,}9627\\ldots\\ \\mathrm{N}
+\\approx 2{,}0\\ \\mathrm{N}
+$$
+
+Det är samma kraft som $m \\cdot g = 0{,}20 \\cdot 9{,}82 \\approx 2{,}0\\ \\mathrm{N}$, som det ska vara.
+
+Kraften på jorden får vi ur samma lag. I gravitationslagen ingår produkten $m_1 \\cdot m_2$ av **båda** massorna, så det spelar ingen roll vilken av kropparna vi räknar kraften på: kraften på jorden är också 1,9627… N. Det säger också Newtons tredje lag. Elevens påstående om krafterna stämmer alltså inte.
+
+Skillnaden ligger i massorna. Newtons andra lag ger accelerationerna:
+
+$$
+F_R = m \\cdot a \\quad\\Leftrightarrow\\quad a = \\frac{F_R}{m}
+$$
+
+För äpplet:
+
+$$
+a_\\text{äpple} = \\frac{1{,}9627}{0{,}20} = 9{,}813\\ldots\\ \\mathrm{m/s^2} \\approx 9{,}8\\ \\mathrm{m/s^2}
+$$
+
+För jorden:
+
+$$
+a_\\text{jorden} = \\frac{1{,}9627}{5{,}972 \\cdot 10^{24}} = 3{,}286\\ldots \\cdot 10^{-25}\\ \\mathrm{m/s^2} \\approx 3{,}3 \\cdot 10^{-25}\\ \\mathrm{m/s^2}
+$$
+
+Svaren avrundas till två värdesiffror, som äpplets massa. Äpplets acceleration är alltså cirka $3 \\cdot 10^{25}$ gånger större än jordens, precis lika många gånger som jordens massa är större än äpplets.
+
+**Svar:** Nej. Krafterna är lika stora, 2,0 N. Det är jordens enormt mycket större massa som gör att dess acceleration bara blir $3{,}3 \\cdot 10^{-25}\\ \\mathrm{m/s^2}$, medan äpplet får accelerationen 9,8 m/s². Båda rör sig mot varandra, men bara äpplets rörelse märks.
+
+**b)** Äpplet och jorden börjar i vila och påverkas under lika lång tid $t$, eftersom kraften verkar på båda tills äpplet når marken. Båda accelerationerna är i praktiken konstanta under fallet, så sträckan är $s = \\dfrac{a \\cdot t^{2}}{2}$ för båda. Vi dividerar jordens sträcka med äpplets:
+
+$$
+\\frac{s_\\text{jorden}}{s_\\text{äpple}} = \\frac{\\dfrac{a_\\text{jorden} \\cdot t^{2}}{2}}{\\dfrac{a_\\text{äpple} \\cdot t^{2}}{2}} = \\frac{a_\\text{jorden}}{a_\\text{äpple}}
+$$
+
+Tiden förkortas bort, så vi behöver inte räkna ut fallets längd. Kraften är densamma på båda, så kvoten mellan accelerationerna är omvänd kvot mellan massorna:
+
+$$
+\\frac{a_\\text{jorden}}{a_\\text{äpple}} = \\frac{\\dfrac{F_G}{m_\\text{jorden}}}{\\dfrac{F_G}{m_\\text{äpple}}} = \\frac{m_\\text{äpple}}{m_\\text{jorden}}
+$$
+
+Vi multiplicerar båda led i den första kvoten med $s_\\text{äpple}$:
+
+$$
+s_\\text{jorden} = s_\\text{äpple} \\cdot \\frac{m_\\text{äpple}}{m_\\text{jorden}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+s_\\text{äpple} = 2{,}0\\ \\mathrm{m} \\\\
+m_\\text{äpple} = 0{,}20\\ \\mathrm{kg} \\\\
+m_\\text{jorden} = 5{,}972 \\cdot 10^{24}\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$
+s_\\text{jorden} = 2{,}0 \\cdot \\frac{0{,}20}{5{,}972 \\cdot 10^{24}} = 6{,}697\\ldots \\cdot 10^{-26}\\ \\mathrm{m} \\approx 6{,}7 \\cdot 10^{-26}\\ \\mathrm{m}
+$$
+
+Svaret avrundas till två värdesiffror. Rimlighet: en atomkärna är ungefär $10^{-15}\\ \\mathrm{m}$ stor, så en atomkärna är ungefär 15 miljarder gånger större än jordens förflyttning. Det är därför vi aldrig märker jordens rörelse.
+
+**Svar:** $6{,}7 \\cdot 10^{-26}\\ \\mathrm{m}$`,
+        },
     ],
 
     // ═══════════════════════════════════════════════════════════════════
@@ -12082,12 +17211,12 @@ $$
 
 **Svar:** Friktionstalet är 0,34 (eller 34 %).
 
-**Generell slutsats:** Friktionstalet är dimensionslöst — det är en ren proportionalitetsfaktor mellan friktionskraft och normalkraft.`,
+**Generell slutsats:** Friktionstalet är dimensionslöst: det är en ren proportionalitetsfaktor mellan friktionskraft och normalkraft.`,
         },
         {
             level: 1,
             penna: 'ov-fy1-3.6-u4',
-            question: `En stekspade av stål glider mot en teflonpanna med friktionskraften 0,60 N. Friktionstalet mellan stål och teflon är bara 0,040 — ett av de lägsta som finns mellan fasta material. Hur stor är normalkraften mellan spaden och pannan?`,
+            question: `En stekspade av stål glider mot en teflonpanna med friktionskraften 0,60 N. Friktionstalet mellan stål och teflon är bara 0,040, ett av de lägsta som finns mellan fasta material. Hur stor är normalkraften mellan spaden och pannan?`,
             answer: { value: 15, unit: 'N', tol: 0.02 },
             solution: `Lös ut normalkraften ur friktionsformeln:
 
@@ -12097,26 +17226,26 @@ $$
 
 **Svar:** Normalkraften är 15 N.
 
-**Generell slutsats:** Teflonets extremt låga friktionstal är hela poängen med beläggningen — maten glider i pannan i stället för att fastna. Samma princip (fast ännu lägre $\\mu$) används i skidvalla och i ledbrosket i människans knän.`,
+**Generell slutsats:** Teflonets extremt låga friktionstal är hela poängen med beläggningen. Maten glider i pannan i stället för att fastna. Samma princip (fast ännu lägre $\\mu$) används i skidvalla och i ledbrosket i människans knän.`,
         },
         {
             level: 1,
             penna: 'ov-fy1-3.6-u5',
-            question: `En tung packlåda står stilla på golvet. Du puttar horisontellt på lådan med kraften 50 N — den står fortfarande stilla. Hur stor är friktionskraften på lådan i det ögonblicket?`,
+            question: `En tung packlåda står stilla på golvet. Du puttar horisontellt på lådan med kraften 50 N. Den står fortfarande stilla. Hur stor är friktionskraften på lådan i det ögonblicket?`,
             choices: [
-                `0 N — lådan rör sig ju inte, så det finns ingen friktion.`,
+                `0 N. Lådan rör sig ju inte, så det finns ingen friktion.`,
                 `Exakt 50 N, riktad mot din puttkraft.`,
                 `$\\mu \\cdot F_N$, oavsett hur hårt man puttar.`,
-                `Större än 50 N — det är därför lådan inte rör sig.`,
+                `Större än 50 N. Det är därför lådan inte rör sig.`,
             ],
             correct: 1,
-            solution: `Lådan står stilla — den är i **kraftjämvikt**. Då måste friktionskraften vara exakt lika stor som puttkraften, alltså 50 N (Newtons första lag).
+            solution: `Lådan står stilla, så den är i **kraftjämvikt**. Då måste friktionskraften vara exakt lika stor som puttkraften, alltså 50 N (Newtons första lag).
 
-**Vilofriktionen är en "smart" kraft**: den anpassar sig automatiskt efter behovet. Puttar du med 20 N håller den emot med 20 N; puttar du med 50 N håller den emot med 50 N — ända tills du når dess **maximala** värde $F_{f,\\max} = \\mu \\cdot F_N$. Först då börjar lådan glida.
+**Vilofriktionen är en "smart" kraft**: den anpassar sig automatiskt efter behovet. Puttar du med 20 N håller den emot med 20 N; puttar du med 50 N håller den emot med 50 N, ända tills du når dess **maximala** värde $F_{f,\\max} = \\mu \\cdot F_N$. Först då börjar lådan glida.
 
-- Alternativ A: fel — utan friktion skulle lådan accelerera av din 50-newtonskraft.
+- Alternativ A: fel. Utan friktion skulle lådan accelerera av din 50-newtonskraft.
 - Alternativ C: $\\mu F_N$ är friktionens **maximum**, inte dess aktuella värde.
-- Alternativ D: omöjligt — då skulle lådan accelerera **mot** dig!
+- Alternativ D: omöjligt. Då skulle lådan accelerera **mot** dig!
 
 **Svar:** Alternativ B.`,
         },
@@ -12164,7 +17293,7 @@ $$
 F_f = \\mu \\cdot m \\cdot g \\quad\\Rightarrow\\quad a = \\frac{F_f}{m} = \\mu \\cdot g
 $$
 
-Notera att massan **stryker bort sig** — bromsaccelerationen beror bara på friktionstalet och *g*:
+Notera att massan **stryker bort sig**: bromsaccelerationen beror bara på friktionstalet och *g*:
 
 $$
 a = -\\mu \\cdot g = -0{,}72 \\cdot 9{,}82 = -7{,}0704\\ \\mathrm{m/s^2}
@@ -12189,7 +17318,7 @@ $$
         {
             level: 2,
             penna: 'ov-fy1-3.6-u8',
-            question: `Ett hundspann med åtta draghundar drar en släde över snö. Släden med förare och last har massan 210 kg (hundarnas egen massa räknas inte hit — de bär sig själva). Varje hund drar med kraften 60 N i färdriktningen, och friktionstalet mellan medarna och snön är 0,14. Vilken acceleration får släden vid starten? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            question: `Ett hundspann med åtta draghundar drar en släde över snö. Släden med förare och last har massan 210 kg (hundarnas egen massa räknas inte hit, de bär sig själva). Varje hund drar med kraften 60 N i färdriktningen, och friktionstalet mellan medarna och snön är 0,14. Vilken acceleration får släden vid starten? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
             answer: { value: 0.91, unit: 'm/s²', tol: 0.04 },
             solution: `**Steg 1: den totala dragkraften.**
 
@@ -12211,7 +17340,7 @@ $$
 
 **Svar:** Cirka 0,91 m/s².
 
-**Generell slutsats:** Notera att över hälften av hundarnas samlade dragkraft går åt bara till att övervinna friktionen. Det är därför slädförare vallar medarna — sänks $\\mu$ från 0,14 till 0,05 mer än fördubblas accelerationen.`,
+**Generell slutsats:** Notera att över hälften av hundarnas samlade dragkraft går åt bara till att övervinna friktionen. Det är därför slädförare vallar medarna. Sänks $\\mu$ från 0,14 till 0,05 mer än fördubblas accelerationen.`,
         },
         {
             level: 2,
@@ -12238,7 +17367,7 @@ $$
 
 **Svar:** Friktionstalet är cirka 0,0088.
 
-**Generell slutsats:** Isens extremt låga friktionstal är hela förutsättningen för curling: stenen "minns" sin fart i tiotals meter. Sopningen framför stenen sänker $\\mu$ ytterligare en aning — det räcker för att förlänga glidsträckan flera meter och styra stenen.`,
+**Generell slutsats:** Isens extremt låga friktionstal är hela förutsättningen för curling: stenen "minns" sin fart i tiotals meter. Sopningen framför stenen sänker $\\mu$ ytterligare en aning, och det räcker för att förlänga glidsträckan flera meter och styra stenen.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
@@ -12266,7 +17395,7 @@ F_x = F \\cdot \\cos 25^{\\circ} \\quad (\\text{horisontellt, driver lådan fram
 $$
 
 $$
-F_y = F \\cdot \\sin 25^{\\circ} \\quad (\\text{vertikalt, uppåt — minskar } F_N)
+F_y = F \\cdot \\sin 25^{\\circ} \\quad (\\text{vertikalt, uppåt, minskar } F_N)
 $$
 
 **Steg 1: normalkraften.** Lådan rör sig inte vertikalt, så kraftbalansen i lodled ger:
@@ -12303,7 +17432,7 @@ $$
 
 **Svar:** Lådans acceleration är cirka 2,2 m/s².
 
-**Generell slutsats:** När en kraft drar i en vinkel uppåt på ett friktions­belastat föremål påverkar den **både** den drivande komposanten och normalkraften. Det finns alltid en **optimal vinkel** $\\alpha_\\text{opt}$ som maximerar accelerationen — för stora vinklar lyfter man föremålet effektivt men drar inte framåt; för små vinklar drar man bra framåt men maximerar friktionen.`,
+**Generell slutsats:** När en kraft drar i en vinkel uppåt på ett friktions­belastat föremål påverkar den **både** den drivande komposanten och normalkraften. Det finns alltid en **optimal vinkel** $\\alpha_\\text{opt}$ som maximerar accelerationen. För stora vinklar lyfter man föremålet effektivt men drar inte framåt; för små vinklar drar man bra framåt men maximerar friktionen.`,
         },
         {
             level: 3,
@@ -12316,7 +17445,7 @@ $$
                 { del: 'a', value: 4.42, unit: 'm/s²', tol: 0.03 },
                 { del: 'b', value: 6.29, unit: 's', tol: 0.03 },
             ],
-            solution: `**a) Bara drivhjulens normalkraft räknas.** Den drivande kraften är friktionen mellan drivhjulen och vägen — och den begränsas av normalkraften på **just drivhjulen**, som bara bär halva tyngden:
+            solution: `**a) Bara drivhjulens normalkraft räknas.** Den drivande kraften är friktionen mellan drivhjulen och vägen, och den begränsas av normalkraften på **just drivhjulen**, som bara bär halva tyngden:
 
 $$
 F_\\text{max} = \\mu \\cdot \\frac{m \\cdot g}{2} = 0{,}90 \\cdot \\frac{1\\,400 \\cdot 9{,}82}{2} = 6\\,186{,}6\\ \\mathrm{N}
@@ -12328,7 +17457,7 @@ $$
 m \\cdot a_\\text{max} = \\mu \\cdot \\frac{m \\cdot g}{2} \\quad\\Leftrightarrow\\quad a_\\text{max} = \\frac{\\mu \\cdot g}{2} = \\frac{0{,}90 \\cdot 9{,}82}{2} = 4{,}419 \\approx 4{,}4\\ \\mathrm{m/s^2}
 $$
 
-Notera att massan **stryker bort sig** — maxaccelerationen beror bara på $\\mu$ och viktfördelningen.
+Notera att massan **stryker bort sig**: maxaccelerationen beror bara på $\\mu$ och viktfördelningen.
 
 **b) Kortaste tiden till 100 km/h.** Bilen startar från stillastående med konstant acceleration, så $v = a \\cdot t$. Med $v = 100\\ \\mathrm{km/h} = 27{,}777\\ldots\\ \\mathrm{m/s}$ och den oavrundade accelerationen från a):
 
@@ -12338,7 +17467,589 @@ $$
 
 **Svar:** a) Cirka 4,4 m/s²&emsp;&emsp;b) Cirka 6,3 s
 
-**Generell slutsats:** Det är **friktionen, inte motorn**, som sätter den yttersta gränsen för acceleration — en starkare motor hjälper inte om hjulen spinner. Formeln $a_\\text{max} = \\mu g \\cdot (\\text{andel av tyngden på drivhjulen})$ förklarar varför sportbilar ofta har bakhjulsdrift och motorn baktill (tyngden förskjuts bakåt vid acceleration → mer normalkraft på drivhjulen) och varför fyrhjulsdrift ($\\text{andelen} = 1$) accelererar bäst.`,
+**Generell slutsats:** Det är **friktionen, inte motorn**, som sätter den yttersta gränsen för acceleration. En starkare motor hjälper inte om hjulen spinner. Formeln $a_\\text{max} = \\mu g \\cdot (\\text{andel av tyngden på drivhjulen})$ förklarar varför sportbilar ofta har bakhjulsdrift och motorn baktill (tyngden förskjuts bakåt vid acceleration → mer normalkraft på drivhjulen) och varför fyrhjulsdrift ($\\text{andelen} = 1$) accelererar bäst.`,
+        },
+        {
+            level: 1,
+            question: `Fyra lådor ska dras med konstant hastighet längs olika plana golv. Tabellen visar lådornas massa och friktionstalet mellan låda och golv.
+
+| Låda | Massa | Friktionstal |
+|---|---|---|
+| 1 | 20 kg | 0,10 |
+| 2 | 5,0 kg | 0,50 |
+| 3 | 10 kg | 0,30 |
+| 4 | 40 kg | 0,050 |
+
+Vilken låda kräver störst dragkraft?`,
+            choices: [
+                `Låda 1`,
+                `Låda 2`,
+                `Låda 3`,
+                `Låda 4`,
+            ],
+            correct: 2,
+            solution: `Vid konstant hastighet är dragkraften lika stor som friktionskraften. På plant golv är normalkraften lika stor som tyngdkraften, $F_N = m \\cdot g$, så
+
+$$
+F_\\text{drag} = F_f = \\mu \\cdot F_N = \\mu \\cdot m \\cdot g
+$$
+
+Vi räknar ut friktionskraften för varje låda med $g = 9{,}82\\ \\mathrm{N/kg}$:
+
+$$
+\\begin{aligned}
+\\text{Låda 1:}&\\quad 0{,}10 \\cdot 20 \\cdot 9{,}82 = 19{,}64\\ \\mathrm{N} \\\\
+\\text{Låda 2:}&\\quad 0{,}50 \\cdot 5{,}0 \\cdot 9{,}82 = 24{,}55\\ \\mathrm{N} \\\\
+\\text{Låda 3:}&\\quad 0{,}30 \\cdot 10 \\cdot 9{,}82 = 29{,}46\\ \\mathrm{N} \\\\
+\\text{Låda 4:}&\\quad 0{,}050 \\cdot 40 \\cdot 9{,}82 = 19{,}64\\ \\mathrm{N}
+\\end{aligned}
+$$
+
+Låda 3 kräver störst kraft, cirka 29 N. Lägg märke till att den tyngsta lådan (låda 4) inte kräver störst kraft: friktionskraften beror på produkten av friktionstalet och normalkraften, inte på någon av dem ensam.
+
+**Svar:** Låda 3`,
+        },
+        {
+            level: 1,
+            question: `En kloss med massan 0,80 kg ligger på ett bord. En elev drar i klossen med en dynamometer och ökar dragkraften jämnt. Vid tiden $t = 3{,}0\\ \\mathrm{s}$ börjar klossen glida, och därefter glider den med konstant hastighet. Grafen visar dynamometerns utslag $F_\\text{drag}$.
+
+${makeDiagram({
+    xMin: 0, xMax: 6, yMin: 0, yMax: 3.2,
+    xTicks: [0, 1, 2, 3, 4, 5, 6],
+    yTicks: [0, 0.4, 0.8, 1.2, 1.6, 2.0, 2.4, 2.8, 3.2],
+    xLabel: '<tspan font-style="italic">t</tspan> (s)',
+    yLabel: '<tspan font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="0.72em">drag</tspan> (N)',
+    paths: [{ points: [[0, 0], [3, 2.4], [6, 2.4]], color: '#2563c9' }],
+})}
+
+a) Hur stor är friktionskraften på klossen vid tiden $t = 1{,}0\\ \\mathrm{s}$?<br>b) Bestäm friktionstalet mellan klossen och bordet.`,
+            answer: { value: 0.31, unit: '', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 0.80, unit: 'N', tol: 0.03 },
+                { del: 'b', value: 0.31, unit: '', tol: 0.04 },
+            ],
+            solution: `**a)** Vid $t = 1{,}0\\ \\mathrm{s}$ ligger klossen fortfarande still. Den är i kraftjämvikt, så friktionskraften är precis lika stor som dragkraften (men motriktad). Ur grafen läser vi av $F_\\text{drag} = 0{,}80\\ \\mathrm{N}$ vid $t = 1{,}0\\ \\mathrm{s}$.
+
+$$
+F_f = F_\\text{drag} = 0{,}80\\ \\mathrm{N}
+$$
+
+**Svar:** 0,80 N
+
+**b)** När klossen glider med konstant hastighet är den också i kraftjämvikt, och friktionskraften har nu sitt största värde. Grafen visar $F_\\text{drag} = 2{,}4\\ \\mathrm{N}$ efter $t = 3{,}0\\ \\mathrm{s}$, så $F_f = 2{,}4\\ \\mathrm{N}$. Vi löser ut friktionstalet ur formeln för friktionskraft:
+
+$$
+F_f = \\mu \\cdot F_N \\quad\\Leftrightarrow\\quad \\mu = \\frac{F_f}{F_N}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F_f = 2{,}4\\ \\mathrm{N} \\\\
+F_N = F_G = m \\cdot g = 0{,}80\\ \\mathrm{kg} \\cdot 9{,}82\\ \\mathrm{N/kg} = 7{,}856\\ \\mathrm{N}
+\\end{array} \\right]
+$$
+
+$$
+\\mu = \\frac{2{,}4}{7{,}856} = 0{,}3054\\ldots \\approx 0{,}31
+$$
+
+**Svar:** 0,31`,
+        },
+
+        {
+            level: 2,
+            question: `Du håller en bok med massan 0,90 kg stilla mot en lodrät vägg genom att trycka vågrätt på den med kraften $F$, enligt figuren. Friktionstalet mellan boken och väggen är 0,40.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="86 14 160 160" width="217" height="217" role="img" aria-label="En bok trycks mot en lodrät vägg av en vågrät kraft F riktad mot väggen." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif">
+<rect x="200" y="18" width="42" height="152" fill="#e4dccd"/>
+<g stroke="rgba(15,22,32,0.28)" stroke-width="1.2">
+<line x1="200" y1="40" x2="222" y2="18"/><line x1="200" y1="62" x2="242" y2="20"/><line x1="200" y1="84" x2="242" y2="42"/><line x1="200" y1="106" x2="242" y2="64"/><line x1="200" y1="128" x2="242" y2="86"/><line x1="200" y1="150" x2="242" y2="108"/><line x1="208" y1="170" x2="242" y2="130"/><line x1="230" y1="170" x2="242" y2="152"/>
+</g>
+<line x1="200" y1="18" x2="200" y2="170" stroke="#0f1620" stroke-width="2"/>
+<rect x="177" y="60" width="23" height="88" rx="2" fill="#4f7197" stroke="#2c4a6b" stroke-width="1.4"/>
+<line x1="182" y1="64" x2="182" y2="144" stroke="#d3e4f5" stroke-width="1.2"/>
+<line x1="98" y1="104" x2="169" y2="104" stroke="#2563c9" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon points="169,98 177,104 169,110" fill="#2563c9"/>
+<text x="133" y="92" text-anchor="middle" font-size="14" fill="#2563c9" font-style="italic">F</text>
+</svg>
+
+a) Hur stor måste kraften $F$ minst vara för att boken inte ska glida ned?<br>b) Du trycker i stället med kraften 40 N. Hur stor är friktionskraften på boken då?
+
+*Ange svaren i N.*`,
+            answer: { value: 22, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 22, unit: 'N', tol: 0.03 },
+                { del: 'b', value: 8.8, unit: 'N', tol: 0.03 },
+            ],
+            solution: `Fyra krafter verkar på boken. Tyngdkraften $F_G$ är riktad nedåt. Friktionskraften $F_f$ från väggen motverkar att boken glider ned och är därför riktad uppåt. Din kraft $F$ trycker boken mot väggen, och väggen trycker tillbaka med normalkraften $F_N$. Normalkraften är alltså vågrät här, inte lodrät som när något ligger på ett golv.
+
+**a)** Boken är i vila, så krafterna tar ut varandra i båda led:
+
+$$
+\\text{Vågrätt: } F_N = F \\qquad \\text{Lodrätt: } F_f = F_G
+$$
+
+Friktionskraften kan högst bli $\\mu \\cdot F_N = \\mu \\cdot F$. För att boken inte ska glida måste den största friktionskraften räcka till att bära tyngden:
+
+$$
+\\mu \\cdot F = m \\cdot g \\quad\\Leftrightarrow\\quad F = \\frac{m \\cdot g}{\\mu}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m = 0{,}90\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+\\mu = 0{,}40
+\\end{array} \\right]
+$$
+
+$$
+F = \\frac{0{,}90 \\cdot 9{,}82}{0{,}40} = \\frac{8{,}838}{0{,}40} = 22{,}095\\ \\mathrm{N} \\approx 22\\ \\mathrm{N}
+$$
+
+Det är mer än dubbelt så mycket som bokens tyngd, vilket är rimligt eftersom friktionstalet är mindre än 1.
+
+**Svar:** Minst 22 N
+
+**b)** Boken ligger fortfarande stilla, så friktionskraften är lika stor som tyngdkraften. Formeln $\\mu \\cdot F_N = 0{,}40 \\cdot 40 = 16\\ \\mathrm{N}$ ger bara det största värde friktionen kan ha. Den verkliga friktionskraften blir aldrig större än vad som behövs för att hålla boken stilla:
+
+$$
+F_f = F_G = m \\cdot g = 0{,}90 \\cdot 9{,}82 = 8{,}838\\ \\mathrm{N} \\approx 8{,}8\\ \\mathrm{N}
+$$
+
+**Svar:** 8,8 N`,
+        },
+        {
+            level: 2,
+            question: `Två lådor är sammanbundna med ett lätt snöre och står på ett plant golv. Den främre lådan A har massan 6,0 kg och den bakre lådan B har massan 4,0 kg. Någon drar i låda A med den vågräta kraften 50 N, enligt figuren. Friktionstalet mellan lådorna och golvet är 0,25 för båda.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="14 64 384 102" width="486" height="129" role="img" aria-label="Två lådor på ett golv. Den bakre lådan B är bunden med ett snöre till den främre lådan A, som dras åt höger med kraften F lika med 50 newton." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif">
+<line x1="20" y1="130" x2="392" y2="130" stroke="#0f1620" stroke-width="1.6"/>
+<g stroke="rgba(15,22,32,0.3)" stroke-width="1.1">
+<line x1="30" y1="130" x2="22" y2="138"/><line x1="50" y1="130" x2="42" y2="138"/><line x1="70" y1="130" x2="62" y2="138"/><line x1="90" y1="130" x2="82" y2="138"/><line x1="110" y1="130" x2="102" y2="138"/><line x1="130" y1="130" x2="122" y2="138"/><line x1="150" y1="130" x2="142" y2="138"/><line x1="170" y1="130" x2="162" y2="138"/><line x1="190" y1="130" x2="182" y2="138"/><line x1="210" y1="130" x2="202" y2="138"/><line x1="230" y1="130" x2="222" y2="138"/><line x1="250" y1="130" x2="242" y2="138"/><line x1="270" y1="130" x2="262" y2="138"/><line x1="290" y1="130" x2="282" y2="138"/><line x1="310" y1="130" x2="302" y2="138"/><line x1="330" y1="130" x2="322" y2="138"/><line x1="350" y1="130" x2="342" y2="138"/><line x1="370" y1="130" x2="362" y2="138"/><line x1="390" y1="130" x2="382" y2="138"/>
+</g>
+<rect x="50" y="90" width="60" height="40" rx="2" fill="#e8d3b0" stroke="#9a7a4a" stroke-width="1.4"/>
+<rect x="170" y="74" width="80" height="56" rx="2" fill="#e8d3b0" stroke="#9a7a4a" stroke-width="1.4"/>
+<line x1="110" y1="112" x2="170" y2="112" stroke="#6b5a45" stroke-width="2"/>
+<line x1="250" y1="104" x2="312" y2="104" stroke="#2563c9" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon points="312,98 320,104 312,110" fill="#2563c9"/>
+<text x="326" y="109" text-anchor="start" font-size="15" fill="#2563c9"><tspan font-style="italic">F</tspan> = 50 N</text>
+<text x="80" y="156" text-anchor="middle" font-size="14" fill="#0f1620">B, 4,0 kg</text>
+<text x="210" y="156" text-anchor="middle" font-size="14" fill="#0f1620">A, 6,0 kg</text>
+</svg>
+
+a) Vilken acceleration får lådorna?<br>b) Hur stor är spännkraften i snöret?
+
+*Ange accelerationen i m/s² och spännkraften i N.*`,
+            answer: { value: 2.5, unit: 'm/s²', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 2.5, unit: 'm/s²', tol: 0.03 },
+                { del: 'b', value: 20, unit: 'N', tol: 0.03 },
+            ],
+            solution: `**a)** Lådorna rör sig tillsammans och får samma acceleration. Vi betraktar dem därför som en enda kropp med massan $m = m_A + m_B = 10{,}0\\ \\mathrm{kg}$. Snörets kraft är då en inre kraft som inte påverkar hela kroppens rörelse. I sidled verkar dragkraften $F$ framåt och friktionskraften på båda lådorna bakåt. Normalkraften från golvet är lika med den sammanlagda tyngdkraften, så den sammanlagda friktionskraften blir
+
+$$
+F_f = \\mu \\cdot F_N = \\mu \\cdot (m_A + m_B) \\cdot g = 0{,}25 \\cdot 10{,}0 \\cdot 9{,}82 = 24{,}55\\ \\mathrm{N}
+$$
+
+Newtons andra lag för båda lådorna tillsammans:
+
+$$
+F_R = F - F_f = (m_A + m_B) \\cdot a \\quad\\Leftrightarrow\\quad a = \\frac{F - F_f}{m_A + m_B}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F = 50\\ \\mathrm{N} \\\\
+F_f = 24{,}55\\ \\mathrm{N} \\\\
+m_A + m_B = 10{,}0\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$
+a = \\frac{50 - 24{,}55}{10{,}0} = 2{,}545\\ \\mathrm{m/s^2} \\approx 2{,}5\\ \\mathrm{m/s^2}
+$$
+
+**Svar:** 2,5 m/s²
+
+**b)** Nu betraktar vi bara låda B. Framåt drar snöret med spännkraften $F_S$, och bakåt verkar friktionen på låda B, $F_{fB} = \\mu \\cdot m_B \\cdot g$. Newtons andra lag för låda B:
+
+$$
+F_S - \\mu \\cdot m_B \\cdot g = m_B \\cdot a \\quad\\Leftrightarrow\\quad F_S = m_B \\cdot a + \\mu \\cdot m_B \\cdot g
+$$
+
+Vi sätter in den oavrundade accelerationen från a):
+
+$$
+F_S = 4{,}0 \\cdot 2{,}545 + 0{,}25 \\cdot 4{,}0 \\cdot 9{,}82 = 10{,}18 + 9{,}82 = 20{,}0\\ \\mathrm{N} \\approx 20\\ \\mathrm{N}
+$$
+
+Rimlighet: låda B har 40 % av den totala massan och får 40 % av dragkraften, $0{,}40 \\cdot 50\\ \\mathrm{N} = 20\\ \\mathrm{N}$. Det stämmer eftersom båda lådorna har samma friktionstal.
+
+**Svar:** 20 N`,
+        },
+        {
+            level: 2,
+            question: `En grupp elever undersöker hur friktionskraften beror på normalkraften. De lägger vikter på en träkloss och drar den med konstant hastighet längs en bänk med en dynamometer. Tabellen visar klossens totala massa $m$ och dragkraften $F_\\text{drag}$.
+
+| $m$ (kg) | 0,20 | 0,40 | 0,60 | 0,80 | 1,00 |
+|---|---|---|---|---|---|
+| $F_\\text{drag}$ (N) | 0,55 | 1,08 | 1,66 | 2,19 | 2,76 |
+
+a) Är friktionskraften proportionell mot normalkraften? Motivera med mätvärdena.<br>b) Bestäm friktionstalet mellan klossen och bänken.`,
+            answer: { value: 0.28, unit: '', tol: 0.04 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 0.28, unit: '', tol: 0.04 },
+            ],
+            solution: `**a)** Klossen dras med konstant hastighet, så den är i kraftjämvikt och friktionskraften är lika stor som dragkraften, $F_f = F_\\text{drag}$. Bänken är vågrät, så normalkraften är lika stor som tyngdkraften, $F_N = m \\cdot g$. Vi räknar ut normalkraften och kvoten $\\dfrac{F_f}{F_N}$ för varje mätning:
+
+| $m$ (kg) | 0,20 | 0,40 | 0,60 | 0,80 | 1,00 |
+|---|---|---|---|---|---|
+| $F_N$ (N) | 1,964 | 3,928 | 5,892 | 7,856 | 9,820 |
+| $F_f$ (N) | 0,55 | 1,08 | 1,66 | 2,19 | 2,76 |
+| $\\dfrac{F_f}{F_N}$ | 0,280 | 0,275 | 0,282 | 0,279 | 0,281 |
+
+Kvoten är nästan densamma i alla mätningar. Den lilla variationen beror på mätosäkerheten när dynamometern läses av. När normalkraften fördubblas fördubblas alltså också friktionskraften.
+
+**Svar:** Ja, eftersom kvoten mellan friktionskraft och normalkraft är nästan konstant, cirka 0,28.
+
+**b)** Friktionstalet är just kvoten $\\mu = \\dfrac{F_f}{F_N}$. Vi tar medelvärdet av de fem kvoterna (oavrundade):
+
+$$
+\\mu = \\frac{0{,}28004 + 0{,}27495 + 0{,}28174 + 0{,}27877 + 0{,}28106}{5} = 0{,}2793\\ldots \\approx 0{,}28
+$$
+
+Värdet ligger nära friktionstalet för trä mot trä i teorigenomgångens tabell (0,25), vilket är rimligt.
+
+**Svar:** 0,28`,
+        },
+
+        {
+            level: 3,
+            question: `En lastbil kör i 72 km/h. På det plana flaket står en låda som inte är fastspänd, 2,0 m bakom förarhyttens bakvägg, enligt figuren. Friktionstalet mellan lådan och flaket är 0,40, men lådans massa är okänd. Föraren tvärbromsar, och lastbilen får retardationen 6,0 m/s² ända tills den står still.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="30 20 312 116" width="424" height="158" role="img" aria-label="En lastbil med förarhytten till höger. På det plana flaket står en låda 2,0 meter bakom hyttens bakvägg." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif">
+<line x1="34" y1="130" x2="338" y2="130" stroke="#0f1620" stroke-width="1.6"/>
+<rect x="40" y="90" width="210" height="12" rx="1.5" fill="#c9b38f" stroke="#7a6448" stroke-width="1.4"/>
+<path d="M250,102 L250,50 Q250,46 254,46 L298,46 Q304,46 307,52 L318,74 L326,77 Q330,78 330,82 L330,102 Z" fill="#6f9fd0" stroke="#3f6f9f" stroke-width="1.4"/>
+<path d="M290,52 L301,52 L311,72 L290,72 Z" fill="#cfe6f5" stroke="#3f6f9f" stroke-width="1"/>
+<rect x="326" y="94" width="8" height="8" rx="1" fill="#33373d"/>
+<circle cx="78" cy="116" r="14" fill="#33373d" stroke="#1a1c20" stroke-width="1.4"/>
+<circle cx="78" cy="116" r="5.5" fill="#9aa3ad"/>
+<circle cx="112" cy="116" r="14" fill="#33373d" stroke="#1a1c20" stroke-width="1.4"/>
+<circle cx="112" cy="116" r="5.5" fill="#9aa3ad"/>
+<circle cx="296" cy="116" r="14" fill="#33373d" stroke="#1a1c20" stroke-width="1.4"/>
+<circle cx="296" cy="116" r="5.5" fill="#9aa3ad"/>
+<rect x="150" y="64" width="30" height="26" rx="2" fill="#e8d3b0" stroke="#9a7a4a" stroke-width="1.4"/>
+<line x1="157" y1="64" x2="157" y2="90" stroke="#9a7a4a" stroke-width="0.8"/>
+<line x1="180" y1="62" x2="180" y2="34" stroke="#0f1620" stroke-width="0.9" stroke-dasharray="3 3"/>
+<line x1="250" y1="44" x2="250" y2="34" stroke="#0f1620" stroke-width="0.9" stroke-dasharray="3 3"/>
+<line x1="187" y1="38" x2="243" y2="38" stroke="#0f1620" stroke-width="1.2"/>
+<polygon points="180,38 188,34.5 188,41.5" fill="#0f1620"/>
+<polygon points="250,38 242,34.5 242,41.5" fill="#0f1620"/>
+<text x="215" y="31" text-anchor="middle" font-size="13" fill="#0f1620">2,0 m</text>
+</svg>
+
+Med vilken fart i förhållande till lastbilen slår lådan i hyttens bakvägg? Ange farten i m/s.`,
+            answer: { value: 2.9, unit: 'm/s', tol: 0.03 },
+            solution: `**Följer lådan med?** Om lådan ska stå kvar på flaket måste den få samma retardation som lastbilen, 6,0 m/s². Den enda vågräta kraften på lådan är friktionskraften från flaket. Flaket är plant, så normalkraften är lika med tyngdkraften, $F_N = m \\cdot g$, och friktionskraften kan högst bli $\\mu \\cdot m \\cdot g$. Newtons andra lag för lådan när friktionen är som störst:
+
+$$
+\\mu \\cdot m \\cdot g = m \\cdot a_\\text{låda}
+$$
+
+Massan finns i båda leden. Vi dividerar båda led med $m$:
+
+$$
+a_\\text{låda} = \\mu \\cdot g = 0{,}40 \\cdot 9{,}82 = 3{,}928\\ \\mathrm{m/s^2}
+$$
+
+Det är mindre än lastbilens retardation $a_\\text{bil} = 6{,}0\\ \\mathrm{m/s^2}$, så friktionen räcker inte: lådan glider framåt på flaket. Medan den glider är friktionskraften $\\mu \\cdot m \\cdot g$, så lådans retardation är hela tiden 3,928 m/s². Därför behövs inte lådans massa.
+
+**När slår lådan i?** Lastbilen och lådan har samma fart $v_0$ när inbromsningen börjar. Sträckan vid konstant acceleration är $s = v_0 \\cdot t + \\dfrac{a \\cdot t^{2}}{2}$, och här är accelerationerna riktade bakåt:
+
+$$
+s_\\text{bil} = v_0 \\cdot t - \\frac{a_\\text{bil} \\cdot t^{2}}{2} \\qquad s_\\text{låda} = v_0 \\cdot t - \\frac{a_\\text{låda} \\cdot t^{2}}{2}
+$$
+
+Lådan slår i väggen när den har gått sträckan $d = 2{,}0\\ \\mathrm{m}$ längre än lastbilen:
+
+$$
+s_\\text{låda} - s_\\text{bil} = d \\quad\\Leftrightarrow\\quad \\frac{(a_\\text{bil} - a_\\text{låda}) \\cdot t^{2}}{2} = d \\quad\\Leftrightarrow\\quad t = \\sqrt{\\frac{2 \\cdot d}{a_\\text{bil} - a_\\text{låda}}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+d = 2{,}0\\ \\mathrm{m} \\\\
+a_\\text{bil} = 6{,}0\\ \\mathrm{m/s^2} \\\\
+a_\\text{låda} = 3{,}928\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$
+t = \\sqrt{\\frac{2 \\cdot 2{,}0}{6{,}0 - 3{,}928}} = \\sqrt{\\frac{4{,}0}{2{,}072}} = 1{,}3894\\ \\mathrm{s}
+$$
+
+Lastbilen måste fortfarande bromsa då, annars gäller inte formeln för $s_\\text{bil}$. Med $v_0 = 72\\ \\mathrm{km/h} = \\dfrac{72}{3{,}6}\\ \\mathrm{m/s} = 20\\ \\mathrm{m/s}$ står lastbilen still först efter
+
+$$
+t_\\text{stopp} = \\frac{v_0}{a_\\text{bil}} = \\frac{20}{6{,}0} = 3{,}33\\ \\mathrm{s}
+$$
+
+Det är senare än 1,3894 s, så lastbilen bromsar fortfarande när lådan slår i.
+
+**Farterna i det ögonblicket.** Med $v = v_0 - a \\cdot t$ för båda:
+
+$$
+\\begin{aligned}
+v_\\text{bil} &= 20 - 6{,}0 \\cdot 1{,}3894 = 11{,}66\\ \\mathrm{m/s} \\\\
+v_\\text{låda} &= 20 - 3{,}928 \\cdot 1{,}3894 = 14{,}54\\ \\mathrm{m/s}
+\\end{aligned}
+$$
+
+Lådans fart i förhållande till lastbilen är skillnaden:
+
+$$
+v_\\text{låda} - v_\\text{bil} = 14{,}54 - 11{,}66 = 2{,}88\\ \\mathrm{m/s} \\approx 2{,}9\\ \\mathrm{m/s}
+$$
+
+**Rimlighet:** 2,9 m/s är ungefär 10 km/h, alltså som när man springer lätt in i en vägg. Det är rimligt att en låda som glider ett par meter får en sådan fart, och det visar varför last ska spännas fast: med samma retardation hade lådan slagit i ännu hårdare om den stått längre bak på flaket.
+
+**Svar:** Cirka 2,9 m/s`,
+        },
+        {
+            level: 3,
+            question: `Två lag tävlar i dragkamp på ett vågrätt golv. Lag 1 har den sammanlagda massan 320 kg och bär gummiskor, med friktionstalet 0,80 mot golvet. Lag 2 är tyngre, 400 kg, men drar i strumplästen, med friktionstalet 0,45. Repet är lätt och hålls vågrätt. Anta att båda lagen orkar dra så hårt som behövs, så att det är fötternas grepp om golvet som avgör.
+
+a) Vilket lag vinner? Motivera med de krafter som verkar på lagen.<br>b) Hur stor sammanlagd massa måste lag 2 minst ha för att kunna hålla emot lag 1, med samma strumpor?
+
+*Ange massan i b) i kg.*`,
+            answer: { value: 570, unit: 'kg', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 570, unit: 'kg', tol: 0.03 },
+            ],
+            solution: `**a)** Betrakta varje lag som en kropp. I sidled verkar två krafter på ett lag: repets spännkraft $F_S$, som drar laget mot motståndarna, och friktionskraften från golvet på fötterna, som håller emot.
+
+Repet är lätt, så spännkraften är lika stor i hela repet. **Båda lagen dras alltså med samma kraft $F_S$**, oavsett vilket lag som drar hårdast. Det är det som gör dragkampen till en jämförelse av greppen. När lagen drar hårdare ökar $F_S$, och ett lag börjar glida när $F_S$ blir större än den största friktionskraft golvet kan ge det laget, $\\mu \\cdot F_N = \\mu \\cdot m \\cdot g$.
+
+$$
+\\begin{aligned}
+\\text{Lag 1:}&\\quad F_{f1,\\max} = 0{,}80 \\cdot 320 \\cdot 9{,}82 = 2\\,513{,}92\\ \\mathrm{N} \\\\
+\\text{Lag 2:}&\\quad F_{f2,\\max} = 0{,}45 \\cdot 400 \\cdot 9{,}82 = 1\\,767{,}6\\ \\mathrm{N}
+\\end{aligned}
+$$
+
+När spännkraften når cirka 1 800 N börjar lag 2 glida, medan lag 1 fortfarande står stadigt (lag 1 klarar upp till cirka 2 500 N). Lag 1 kan då fortsätta dra, och lag 2 glider mot mittlinjen. Att lag 2 är tyngre räcker inte, eftersom friktionen beror på produkten av friktionstalet och normalkraften.
+
+**Svar:** Lag 1 vinner, eftersom båda lagen dras med samma kraft i repet och lag 2 når gränsen för sin friktion först.
+
+**b)** Lag 2 kan hålla emot om dess största friktionskraft är minst lika stor som lag 1:s:
+
+$$
+\\mu_2 \\cdot m_2 \\cdot g = \\mu_1 \\cdot m_1 \\cdot g
+$$
+
+Vi dividerar båda led med $\\mu_2 \\cdot g$. Tyngdfaktorn tar ut sig:
+
+$$
+m_2 = \\frac{\\mu_1 \\cdot m_1}{\\mu_2}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\mu_1 = 0{,}80 \\\\
+m_1 = 320\\ \\mathrm{kg} \\\\
+\\mu_2 = 0{,}45
+\\end{array} \\right]
+$$
+
+$$
+m_2 = \\frac{0{,}80 \\cdot 320}{0{,}45} = \\frac{256}{0{,}45} = 568{,}8\\ldots\\ \\mathrm{kg} \\approx 570\\ \\mathrm{kg}
+$$
+
+**Rimlighet:** Friktionstalet för lag 2 är knappt 60 % av lag 1:s, så lag 2 behöver knappt dubbelt så stor massa som lag 1. Det stämmer med 570 kg mot 320 kg.
+
+**Svar:** Cirka 570 kg`,
+        },
+        {
+            level: 3,
+            question: `En bil bromsar med låsta hjul på torr asfalt, där friktionstalet mellan däck och väg är 0,80, och stannar efter 25 m. En annan dag kör samma bil med samma fart på våt asfalt, där friktionstalet bara är 0,50. Plötsligt hoppar ett rådjur ut på vägen 25 m framför bilen, och föraren låser hjulen direkt (reaktionstiden försummas).
+
+Med vilken fart träffar bilen rådjuret? Ange farten i km/h.`,
+            answer: { value: 44, unit: 'km/h', tol: 0.03 },
+            solution: `Varken bilens massa eller fart är given, så vi löser uppgiften generellt och sätter in värden först i slutet.
+
+**Retardationen.** När hjulen är låsta är friktionen den enda vågräta kraften på bilen. På plan väg är $F_N = m \\cdot g$, och Newtons andra lag ger
+
+$$
+\\mu \\cdot m \\cdot g = m \\cdot a \\quad\\Leftrightarrow\\quad a = \\mu \\cdot g
+$$
+
+Massan tar ut sig. Retardationen är $\\mu_1 \\cdot g$ på torr väg och $\\mu_2 \\cdot g$ på våt väg.
+
+**Farten före inbromsningen.** På torr väg stannar bilen på sträckan $s = 25\\ \\mathrm{m}$. Sambandet $v^{2} - v_0^{2} = 2 \\cdot a \\cdot s$ med slutfarten 0 och accelerationen $-\\mu_1 \\cdot g$ ger
+
+$$
+0 - v_0^{2} = -2 \\cdot \\mu_1 \\cdot g \\cdot s \\quad\\Leftrightarrow\\quad v_0^{2} = 2 \\cdot \\mu_1 \\cdot g \\cdot s \\tag{1}
+$$
+
+**Farten vid rådjuret.** På våt väg bromsar bilen samma sträcka $s$ men med accelerationen $-\\mu_2 \\cdot g$:
+
+$$
+v^{2} - v_0^{2} = -2 \\cdot \\mu_2 \\cdot g \\cdot s \\quad\\Leftrightarrow\\quad v^{2} = v_0^{2} - 2 \\cdot \\mu_2 \\cdot g \\cdot s
+$$
+
+Insättning av (1), $v_0^{2} = 2 \\cdot \\mu_1 \\cdot g \\cdot s$, ger
+
+$$
+v^{2} = 2 \\cdot \\mu_1 \\cdot g \\cdot s - 2 \\cdot \\mu_2 \\cdot g \\cdot s = 2 \\cdot g \\cdot s \\cdot (\\mu_1 - \\mu_2)
+$$
+
+$$
+v = \\sqrt{2 \\cdot g \\cdot s \\cdot (\\mu_1 - \\mu_2)}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+s = 25\\ \\mathrm{m} \\\\
+\\mu_1 = 0{,}80 \\\\
+\\mu_2 = 0{,}50
+\\end{array} \\right]
+$$
+
+$$
+v = \\sqrt{2 \\cdot 9{,}82 \\cdot 25 \\cdot (0{,}80 - 0{,}50)} = \\sqrt{147{,}3} = 12{,}136\\ldots\\ \\mathrm{m/s}
+$$
+
+Omräknat till km/h:
+
+$$
+v = 12{,}136\\ldots \\cdot 3{,}6 = 43{,}69\\ldots\\ \\mathrm{km/h} \\approx 44\\ \\mathrm{km/h}
+$$
+
+**Rimlighet:** Ur (1) är bilens ursprungliga fart $v_0 = \\sqrt{2 \\cdot 0{,}80 \\cdot 9{,}82 \\cdot 25} \\approx 19{,}8\\ \\mathrm{m/s}$, alltså cirka 71 km/h. Bromssträckan är omvänt proportionell mot friktionstalet, så på våt väg hade bilen behövt $25 \\cdot \\dfrac{0{,}80}{0{,}50} = 40\\ \\mathrm{m}$ för att stanna. Efter 25 m, alltså $\\dfrac{5}{8}$ av den sträckan, har $v^{2}$ minskat med $\\dfrac{5}{8}$ av $v_0^{2}$, så farten är $\\sqrt{\\dfrac{3}{8}} \\approx 0{,}61$ gånger den ursprungliga. Det stämmer med svaret, eftersom 44 km/h är ungefär 61 % av 71 km/h. Lägg märke till att bilen bara hunnit bromsa bort knappt 40 % av farten på 25 m, fast den på torr väg hade stått still.
+
+**Svar:** Cirka 44 km/h`,
+        },
+        {
+            level: 3,
+            question: `En kloss ligger på ett bord. Den puttas iväg från vila med en konstant vågrät kraft, och efter 1,0 s slutar puttandet. Klossen glider sedan vidare tills den stannar. Grafen visar klossens hastighet $v$ som funktion av tiden $t$. Klossens massa är inte känd.
+
+${makeDiagram({
+    xMin: 0, xMax: 2.5, yMin: 0, yMax: 1.8,
+    xTicks: [0, 0.5, 1, 1.5, 2, 2.5],
+    yTicks: [0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8],
+    xLabel: '<tspan font-style="italic">t</tspan> (s)',
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    paths: [{ points: [[0, 0], [1, 1.5], [2.5, 0]] }],
+})}
+
+Hur många procent större än friktionskraften var puttkraften?`,
+            answer: { value: 150, unit: '%', tol: 0.03 },
+            solution: `**Glidningen efter puttet.** Efter $t = 1{,}0\\ \\mathrm{s}$ är friktionskraften den enda vågräta kraften på klossen. Retardationen under den delen är grafens lutning: hastigheten minskar från 1,5 m/s till 0 på tiden $2{,}5 - 1{,}0 = 1{,}5\\ \\mathrm{s}$.
+
+$$
+a_2 = \\frac{\\Delta v}{\\Delta t} = \\frac{0 - 1{,}5}{1{,}5} = -1{,}0\\ \\mathrm{m/s^2}
+$$
+
+Newtons andra lag för glidningen, med retardationens storlek $|a_2|$, ger friktionskraften uttryckt i den okända massan:
+
+$$
+F_f = m \\cdot |a_2|
+$$
+
+**Puttandet.** Under de första 1,0 s ökar hastigheten från 0 till 1,5 m/s:
+
+$$
+a_1 = \\frac{\\Delta v}{\\Delta t} = \\frac{1{,}5 - 0}{1{,}0} = 1{,}5\\ \\mathrm{m/s^2}
+$$
+
+Friktionskraften är lika stor under hela förloppet, $F_f = \\mu \\cdot F_N$, eftersom normalkraften och friktionstalet inte ändras. Under puttandet verkar puttkraften $F$ framåt och friktionskraften bakåt:
+
+$$
+F - F_f = m \\cdot a_1 \\quad\\Leftrightarrow\\quad F = m \\cdot a_1 + F_f = m \\cdot a_1 + m \\cdot |a_2|
+$$
+
+Förhållandet mellan puttkraften och friktionskraften blir, när massan förkortas bort,
+
+$$
+\\frac{F}{F_f} = \\frac{m \\cdot (a_1 + |a_2|)}{m \\cdot |a_2|} = \\frac{a_1 + |a_2|}{|a_2|} = \\frac{1{,}5 + 1{,}0}{1{,}0} = 2{,}5
+$$
+
+Puttkraften var alltså 2,5 gånger så stor som friktionskraften, vilket är $2{,}5 - 1 = 1{,}5 = 150\\ \\%$ större.
+
+**Rimlighet:** Klossen ökar farten snabbare än den bromsas in (grafen är brantare i början). Det kräver att den resulterande kraften under puttandet, $F - F_f$, är större än friktionskraften ensam, alltså att $F$ är mer än dubbelt så stor som $F_f$. Det stämmer.
+
+**Svar:** 150 % större`,
+        },
+        {
+            level: 3,
+            question: `En låda med massan 5,0 kg står ovanpå en större låda med massan 15 kg, som i sin tur står på ett plant golv. Friktionstalet mellan de två lådorna är 0,30 och mellan den undre lådan och golvet 0,20. Man drar i den undre lådan med en vågrät kraft $F$, enligt figuren.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="36 64 328 98" width="416" height="124" role="img" aria-label="En mindre låda står ovanpå en större låda på ett golv. Den undre lådan dras åt höger med kraften F." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif">
+<line x1="40" y1="150" x2="360" y2="150" stroke="#0f1620" stroke-width="1.6"/>
+<g stroke="rgba(15,22,32,0.3)" stroke-width="1.1">
+<line x1="50" y1="150" x2="42" y2="158"/><line x1="70" y1="150" x2="62" y2="158"/><line x1="90" y1="150" x2="82" y2="158"/><line x1="110" y1="150" x2="102" y2="158"/><line x1="130" y1="150" x2="122" y2="158"/><line x1="150" y1="150" x2="142" y2="158"/><line x1="170" y1="150" x2="162" y2="158"/><line x1="190" y1="150" x2="182" y2="158"/><line x1="210" y1="150" x2="202" y2="158"/><line x1="230" y1="150" x2="222" y2="158"/><line x1="250" y1="150" x2="242" y2="158"/><line x1="270" y1="150" x2="262" y2="158"/><line x1="290" y1="150" x2="282" y2="158"/><line x1="310" y1="150" x2="302" y2="158"/><line x1="330" y1="150" x2="322" y2="158"/><line x1="350" y1="150" x2="342" y2="158"/>
+</g>
+<rect x="110" y="110" width="160" height="40" rx="2" fill="#d3e4f5" stroke="#4f7197" stroke-width="1.4"/>
+<rect x="155" y="72" width="70" height="38" rx="2" fill="#e8d3b0" stroke="#9a7a4a" stroke-width="1.4"/>
+<line x1="270" y1="130" x2="322" y2="130" stroke="#2563c9" stroke-width="3.4" stroke-linecap="butt"/>
+<polygon points="322,124 330,130 322,136" fill="#2563c9"/>
+<text x="340" y="135" text-anchor="start" font-size="15" fill="#2563c9" font-style="italic">F</text>
+<text x="147" y="96" text-anchor="end" font-size="14" fill="#0f1620">5,0 kg</text>
+<text x="102" y="135" text-anchor="end" font-size="14" fill="#0f1620">15 kg</text>
+</svg>
+
+Hur stor kan kraften $F$ högst vara om den övre lådan inte ska glida på den undre? Ange svaret i N.`,
+            answer: { value: 98, unit: 'N', tol: 0.03 },
+            solution: `Vi kallar den övre lådans massa $m_1 = 5{,}0\\ \\mathrm{kg}$ och den undre lådans $m_2 = 15\\ \\mathrm{kg}$, friktionstalet mellan lådorna $\\mu_1 = 0{,}30$ och mellan undre låda och golv $\\mu_2 = 0{,}20$.
+
+**Vad accelererar den övre lådan?** Ingen drar i den övre lådan. Den enda vågräta kraften på den är friktionen från den undre lådans ovansida. Den kraften är riktad framåt och ger lådan dess acceleration. Normalkraften mellan lådorna är den övre lådans tyngd, $m_1 \\cdot g$, så friktionen kan högst bli $\\mu_1 \\cdot m_1 \\cdot g$. Newtons andra lag för den övre lådan:
+
+$$
+\\mu_1 \\cdot m_1 \\cdot g = m_1 \\cdot a_\\text{max} \\quad\\Leftrightarrow\\quad a_\\text{max} = \\mu_1 \\cdot g
+$$
+
+$$
+a_\\text{max} = 0{,}30 \\cdot 9{,}82 = 2{,}946\\ \\mathrm{m/s^2}
+$$
+
+Accelererar den undre lådan snabbare än så kan friktionen inte hålla kvar den övre, och den börjar glida.
+
+**Båda lådorna tillsammans.** Så länge den övre lådan inte glider rör sig lådorna som en kropp med massan $m_1 + m_2$. Friktionen mellan lådorna är då en inre kraft. Den yttre friktionen från golvet beror på normalkraften mot golvet, och golvet bär **båda** lådorna: $F_N = (m_1 + m_2) \\cdot g$. Newtons andra lag för hela kroppen, när accelerationen är $a_\\text{max}$:
+
+$$
+F - \\mu_2 \\cdot (m_1 + m_2) \\cdot g = (m_1 + m_2) \\cdot a_\\text{max}
+$$
+
+$$
+F = (m_1 + m_2) \\cdot a_\\text{max} + \\mu_2 \\cdot (m_1 + m_2) \\cdot g
+$$
+
+Insättning av $a_\\text{max} = \\mu_1 \\cdot g$ ger ett enkelt uttryck:
+
+$$
+F = (m_1 + m_2) \\cdot \\mu_1 \\cdot g + \\mu_2 \\cdot (m_1 + m_2) \\cdot g = (m_1 + m_2) \\cdot g \\cdot (\\mu_1 + \\mu_2)
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m_1 + m_2 = 20\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+\\mu_1 + \\mu_2 = 0{,}50
+\\end{array} \\right]
+$$
+
+$$
+F = 20 \\cdot 9{,}82 \\cdot 0{,}50 = 98{,}2\\ \\mathrm{N} \\approx 98\\ \\mathrm{N}
+$$
+
+**Rimlighet:** Bara för att få lådorna att glida med konstant hastighet krävs $\\mu_2 \\cdot (m_1 + m_2) \\cdot g \\approx 39\\ \\mathrm{N}$. Resten, cirka 59 N, går till accelerationen. En vanlig fälla är att räkna golvets friktion med bara den undre lådans massa; då blir svaret 88 N, vilket är för lite eftersom golvet bär båda lådornas tyngd.
+
+**Svar:** Högst 98 N`,
         },
     ],
 
@@ -12379,16 +18090,16 @@ $$
 
 **Svar:** Cirka 34 N.
 
-**Generell slutsats:** $F_2$ är också lika med **normalkraften** $F_N$ på lådan från det lutande planet — eftersom lådan inte accelererar vinkelrätt mot planet.`,
+**Generell slutsats:** $F_2$ är också lika med **normalkraften** $F_N$ på lådan från det lutande planet, eftersom lådan inte accelererar vinkelrätt mot planet.`,
         },
         {
             level: 1,
             penna: 'ov-fy1-3.7-u3',
             question: `På ett lutande plan glider en låda **nedför planet med konstant hastighet**. Vad gäller då för friktionskraften $F_f$ och tyngdkraftens komposant nedför planet $F_1$?`,
             choices: [
-                `$F_f$ är större än $F_1$ — det är därför lådan inte glider snabbare.`,
-                `$F_f$ är lika med $F_1$ — kraftresultanten är noll vid konstant hastighet.`,
-                `$F_f$ är mindre än $F_1$ — annars skulle lådan stå stilla.`,
+                `$F_f$ är större än $F_1$, och det är därför lådan inte glider snabbare.`,
+                `$F_f$ är lika med $F_1$, eftersom kraftresultanten är noll vid konstant hastighet.`,
+                `$F_f$ är mindre än $F_1$, annars skulle lådan stå stilla.`,
                 `$F_f$ beror inte på lutningen.`,
             ],
             correct: 1,
@@ -12419,20 +18130,20 @@ Massan och vinkeln har två värdesiffror, så svaret avrundas till två värdes
 
 **Svar:** Cirka 170 N.
 
-**Generell slutsats:** Det är denna kraft skidåkarens skidor (via kantgrepp eller stavar) måste hålla emot för att hen ska stå stilla i backen — och samma kraft som accelererar åkaren nedför när hen släpper taget.`,
+**Generell slutsats:** Det är denna kraft skidåkarens skidor (via kantgrepp eller stavar) måste hålla emot för att hen ska stå stilla i backen. Det är också samma kraft som accelererar åkaren nedför när hen släpper taget.`,
         },
         {
             level: 1,
             penna: 'ov-fy1-3.7-u5',
             question: `Ett lutande plan görs allt **brantare**. Vad händer med tyngdkraftens komposanter $F_1$ (längs planet) och $F_2$ (vinkelrätt mot planet)?`,
             choices: [
-                `Båda är oförändrade — tyngdkraften ändras ju inte.`,
+                `Båda är oförändrade, eftersom tyngdkraften inte ändras.`,
                 `$F_1$ minskar och $F_2$ ökar.`,
                 `Båda komposanterna ökar.`,
                 `$F_1$ ökar och $F_2$ minskar.`,
             ],
             correct: 3,
-            solution: `Komposanterna är $F_1 = m g \\sin\\alpha$ och $F_2 = m g \\cos\\alpha$. När vinkeln $\\alpha$ växer ökar $\\sin\\alpha$ medan $\\cos\\alpha$ minskar — alltså växer $F_1$ och krymper $F_2$.
+            solution: `Komposanterna är $F_1 = m g \\sin\\alpha$ och $F_2 = m g \\cos\\alpha$. När vinkeln $\\alpha$ växer ökar $\\sin\\alpha$ medan $\\cos\\alpha$ minskar. Alltså växer $F_1$ och krymper $F_2$.
 
 Kontrollera gärna med ytterlighetsfallen:
 - **Plant golv** ($\\alpha = 0^{\\circ}$): $F_1 = 0$ (inget glider på plant golv) och $F_2 = m g$ (hela tyngden bärs av underlaget).
@@ -12490,7 +18201,7 @@ $$
 
 **Svar:** Accelerationen är cirka 3,7 m/s².
 
-**Generell slutsats:** På ett friktionsfritt lutande plan beror accelerationen **bara på vinkeln**, inte på massan. Detta var en av Galileos genialiska insikter — han använde lutande plan med små lutningar för att "späda ut" tyngdaccelerationen och kunna mäta tider med dåtidens primitiva instrument.`,
+**Generell slutsats:** På ett friktionsfritt lutande plan beror accelerationen **bara på vinkeln**, inte på massan. Detta var en av Galileos genialiska insikter: han använde lutande plan med små lutningar för att "späda ut" tyngdaccelerationen och kunna mäta tider med dåtidens primitiva instrument.`,
         },
         {
             level: 2,
@@ -12517,7 +18228,7 @@ ${makeInclinePlane({ angle: 23, forces: { G: 1, N: 1, F1: 1, f: 1 } })}
 
 **Svar:** Vid cirka 23° börjar lådorna glida.
 
-**Generell slutsats:** Gränsvinkeln $\\alpha = \\arctan\\mu$ kallas **friktionsvinkeln** och beror varken på lastens massa eller på flakets material i övrigt — bara på friktionstalet. Sambandet används baklänges som en enkel mätmetod: tippa underlaget tills föremålet börjar glida och läs av vinkeln, så är $\\mu = \\tan\\alpha$.`,
+**Generell slutsats:** Gränsvinkeln $\\alpha = \\arctan\\mu$ kallas **friktionsvinkeln** och beror varken på lastens massa eller på flakets material i övrigt, bara på friktionstalet. Sambandet används baklänges som en enkel mätmetod: tippa underlaget tills föremålet börjar glida och läs av vinkeln, så är $\\mu = \\tan\\alpha$.`,
         },
         {
             level: 2,
@@ -12559,7 +18270,7 @@ $$
 
 **Svar:** a) Cirka 1,1 m/s²&emsp;&emsp;b) Cirka 13 m/s, ungefär 47 km/h.
 
-**Generell slutsats:** En till synes blygsam backe (12°) och lång glidsträcka räcker alltså för rejäl fart. Jämför gärna med det friktionsfria fallet: utan friktion hade accelerationen varit $g \\sin 12^{\\circ} \\approx 2{,}0\\ \\mathrm{m/s^2}$ — snöns friktion "äter" nästan halva accelerationen.`,
+**Generell slutsats:** En till synes blygsam backe (12°) och lång glidsträcka räcker alltså för rejäl fart. Jämför gärna med det friktionsfria fallet: utan friktion hade accelerationen varit $g \\sin 12^{\\circ} \\approx 2{,}0\\ \\mathrm{m/s^2}$, så snöns friktion "äter" nästan halva accelerationen.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
@@ -12621,11 +18332,11 @@ $$
 a = g (\\sin\\alpha - \\mu \\cos\\alpha)
 $$
 
-- Om $\\tan\\alpha > \\mu$ — lådan glider och accelererar.
-- Om $\\tan\\alpha = \\mu$ — lådan glider med konstant hastighet (om den redan rör sig).
-- Om $\\tan\\alpha < \\mu$ — lådan står stilla.
+- Om $\\tan\\alpha > \\mu$: lådan glider och accelererar.
+- Om $\\tan\\alpha = \\mu$: lådan glider med konstant hastighet (om den redan rör sig).
+- Om $\\tan\\alpha < \\mu$: lådan står stilla.
 
-Notera massan stryker bort sig — accelerationen på ett lutande plan med friktion beror **inte på lådans massa**.`,
+Notera massan stryker bort sig: accelerationen på ett lutande plan med friktion beror **inte på lådans massa**.`,
         },
         {
             level: 3,
@@ -12644,7 +18355,7 @@ b) Blir klossen liggande i vändpunkten, eller glider den ner igen? Motivera med
                 { del: 'a', value: 1.844, unit: 'm', tol: 0.03 },
                 { del: 'b' },
             ],
-            solution: `**Fällan i uppgiften:** friktionen verkar alltid **mot rörelseriktningen**. På vägen upp glider klossen uppför — då pekar friktionen *nedför* planet och **samverkar** med tyngdkraftskomposanten i att bromsa klossen. Det är alltså inte samma acceleration som när en kloss glider nedför!
+            solution: `**Fällan i uppgiften:** friktionen verkar alltid **mot rörelseriktningen**. På vägen upp glider klossen uppför, och då pekar friktionen *nedför* planet och **samverkar** med tyngdkraftskomposanten i att bromsa klossen. Det är alltså inte samma acceleration som när en kloss glider nedför!
 
 **a) Sträckan uppför.** På vägen upp bromsas klossen av både $F_1 = m g \\sin\\alpha$ och $F_f = \\mu m g \\cos\\alpha$, båda riktade nedför planet. Med positiv riktning uppför planet ger Newtons andra lag $m \\cdot a = -(m \\cdot g \\cdot \\sin\\alpha + \\mu \\cdot m \\cdot g \\cdot \\cos\\alpha)$, och massan divideras bort.
 
@@ -12682,11 +18393,569 @@ $$
 \\tan 28^{\\circ} = 0{,}5317\\ldots > 0{,}25
 $$
 
-Klossen glider alltså **ner igen** — nu med friktionen riktad *uppför* planet, och den mindre accelerationen $a = g(\\sin\\alpha - \\mu\\cos\\alpha) = 2{,}442\\ldots\\ \\mathrm{m/s^2} \\approx 2{,}4\\ \\mathrm{m/s^2}$.
+Klossen glider alltså **ner igen**, nu med friktionen riktad *uppför* planet, och den mindre accelerationen $a = g(\\sin\\alpha - \\mu\\cos\\alpha) = 2{,}442\\ldots\\ \\mathrm{m/s^2} \\approx 2{,}4\\ \\mathrm{m/s^2}$.
 
 **Svar:** a) Cirka 1,8 m&emsp;&emsp;b) Ja, eftersom $\\tan 28^{\\circ} > \\mu$ glider den ner igen.
 
-**Generell slutsats:** Uppför och nedför är **inte** symmetriska när friktion finns: uppför bromsar $g(\\sin\\alpha + \\mu\\cos\\alpha)$, nedför driver bara $g(\\sin\\alpha - \\mu\\cos\\alpha)$. Klossen kommer därför tillbaka till startpunkten med **lägre** fart än den sköts iväg med — mellanskillnaden i rörelseenergi har friktionen omvandlat till värme. Att teckna friktionens riktning fel i uppförsfasen är ett av de vanligaste felen på prov.`,
+**Generell slutsats:** Uppför och nedför är **inte** symmetriska när friktion finns: uppför bromsar $g(\\sin\\alpha + \\mu\\cos\\alpha)$, nedför driver bara $g(\\sin\\alpha - \\mu\\cos\\alpha)$. Klossen kommer därför tillbaka till startpunkten med **lägre** fart än den sköts iväg med. Mellanskillnaden i rörelseenergi har friktionen omvandlat till värme. Att teckna friktionens riktning fel i uppförsfasen är ett av de vanligaste felen på prov.`,
+        },
+        {
+            level: 1,
+            question: `Ett barn drar en pulka över plan snö med ett snöre som bildar vinkeln 25° med marken. Kraften i snöret är 60 N, se figuren.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0.0 -22.0 420.0 172.0" style="max-width:567px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="20.0" y1="120.0" x2="400.0" y2="120.0" stroke="#0f1620" stroke-width="1.6"/><line x1="28.0" y1="120.0" x2="21.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="40.0" y1="120.0" x2="33.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="52.0" y1="120.0" x2="45.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="64.0" y1="120.0" x2="57.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="76.0" y1="120.0" x2="69.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="88.0" y1="120.0" x2="81.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="100.0" y1="120.0" x2="93.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="112.0" y1="120.0" x2="105.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="124.0" y1="120.0" x2="117.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="136.0" y1="120.0" x2="129.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="148.0" y1="120.0" x2="141.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="160.0" y1="120.0" x2="153.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="172.0" y1="120.0" x2="165.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="184.0" y1="120.0" x2="177.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="196.0" y1="120.0" x2="189.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="208.0" y1="120.0" x2="201.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="220.0" y1="120.0" x2="213.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="232.0" y1="120.0" x2="225.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="244.0" y1="120.0" x2="237.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="256.0" y1="120.0" x2="249.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="268.0" y1="120.0" x2="261.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="280.0" y1="120.0" x2="273.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="292.0" y1="120.0" x2="285.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="304.0" y1="120.0" x2="297.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="316.0" y1="120.0" x2="309.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="328.0" y1="120.0" x2="321.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="340.0" y1="120.0" x2="333.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="352.0" y1="120.0" x2="345.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="364.0" y1="120.0" x2="357.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="376.0" y1="120.0" x2="369.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><line x1="388.0" y1="120.0" x2="381.0" y2="128.0" stroke="#0f1620" stroke-width="1"/><g transform="translate(110.0,120.0) rotate(0)"><path d="M -45 0 L 39 0 Q 51 0 51 -9" fill="none" stroke="#0f1620" stroke-width="2.4" stroke-linecap="round"/><line x1="-35" y1="0" x2="-35" y2="-12" stroke="#0f1620" stroke-width="1.6"/><line x1="0" y1="0" x2="0" y2="-12" stroke="#0f1620" stroke-width="1.6"/><line x1="31" y1="0" x2="31" y2="-12" stroke="#0f1620" stroke-width="1.6"/><rect x="-43" y="-16" width="82" height="6" rx="2" fill="#c9844f" stroke="#7a4b26" stroke-width="1.3"/></g><line x1="149.0" y1="107.0" x2="339.3" y2="18.3" stroke="#6b5a45" stroke-width="1.6"/><circle cx="149.0" cy="107.0" r="2.2" fill="#6b5a45"/><line x1="149.0" y1="107.0" x2="269.0" y2="107.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><path d="M 201.0 107.0 A 52 52 0 0 0 196.1 85.0" fill="none" stroke="#8a8579" stroke-width="1.4"/><text x="221.2" y="97.0" font-size="14" fill="#8a8579" text-anchor="middle">25°</text><line x1="229.2" y1="54.2" x2="300.8" y2="20.8" stroke="#2563c9" stroke-width="3" stroke-linecap="butt"/><polygon points="310.8,16.1 303.1,25.8 298.5,15.8" fill="#2563c9"/><text x="294.8" y="2.1" font-size="15" fill="#2563c9" text-anchor="end"><tspan font-style="italic">F</tspan> = 60 N</text></svg>
+
+Dela upp kraften i en vågrät och en lodrät komposant. Beräkna<br>a)&nbsp;den vågräta komposanten $F_x$&emsp;&emsp;b)&nbsp;den lodräta komposanten $F_y$
+
+*Ange den vågräta komposanten (a) som ditt numeriska svar i N.*`,
+            answer: { value: 54.38, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 54.38, unit: 'N', tol: 0.03, etikett: '$F_x =$' },
+                { del: 'b', value: 25.36, unit: 'N', tol: 0.03, etikett: '$F_y =$' },
+            ],
+            solution: `Kraften $F$ i snöret är hypotenusan i en rätvinklig triangel där komposanterna är kateterna. Den vågräta komposanten ligger intill vinkeln 25° (närliggande katet) och den lodräta mittemot vinkeln (motstående katet):
+
+$$
+\\cos \\alpha = \\frac{F_x}{F} \\quad\\Leftrightarrow\\quad F_x = F \\cdot \\cos \\alpha
+$$
+
+$$
+\\sin \\alpha = \\frac{F_y}{F} \\quad\\Leftrightarrow\\quad F_y = F \\cdot \\sin \\alpha
+$$
+
+**a)**
+
+$$
+F_x = 60 \\cdot \\cos 25^{\\circ} = 54{,}378\\ldots\\ \\mathrm{N} \\approx 54\\ \\mathrm{N}
+$$
+
+**Svar:** Den vågräta komposanten är cirka 54 N.
+
+**b)**
+
+$$
+F_y = 60 \\cdot \\sin 25^{\\circ} = 25{,}357\\ldots\\ \\mathrm{N} \\approx 25\\ \\mathrm{N}
+$$
+
+**Svar:** Den lodräta komposanten är cirka 25 N.
+
+Rimligt: vinkeln är mindre än 45°, så den vågräta komposanten ska vara störst. Det är den vågräta komposanten som drar pulkan framåt. Den lodräta komposanten lyfter pulkan en aning, så att normalkraften från snön blir mindre än pulkans tyngd.`,
+        },
+        {
+            level: 1,
+            question: `En barnvagn med massan 22 kg står parkerad med bromsen i en backe som lutar 7,0° mot horisontalplanet. Beräkna normalkraften från backen på barnvagnen. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i N.`,
+            answer: { value: 214.4, unit: 'N', tol: 0.03 },
+            solution: `Normalkraften är lika stor som tyngdkraftens komposant vinkelrätt mot backen:
+
+$$
+F_N = F_2 = m \\cdot g \\cdot \\cos \\alpha
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m = 22\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+\\alpha = 7{,}0^{\\circ}
+\\end{array} \\right]
+$$
+
+$$
+F_N = 22 \\cdot 9{,}82 \\cdot \\cos 7{,}0^{\\circ} = 214{,}42\\ldots\\ \\mathrm{N} \\approx 210\\ \\mathrm{N}
+$$
+
+Givna värden har två värdesiffror, så svaret avrundas till två värdesiffror.
+
+Rimligt: på plan mark hade normalkraften varit lika stor som tyngdkraften, $22 \\cdot 9{,}82 = 216{,}04\\ \\mathrm{N}$. Backen är svag, så normalkraften blir bara lite mindre.
+
+**Svar:** Normalkraften är cirka 210 N.`,
+        },
+
+        {
+            level: 2,
+            question: `En båt står på en båtvagn, och båt och vagn har tillsammans massan 320 kg. Ekipaget dras uppför en sjösättningsramp som lutar 9,0° mot horisontalplanet. En vinsch drar i en vajer som är parallell med rampen, och ekipaget rör sig med konstant fart. Rullmotståndet kan räknas som en friktionskraft med friktionstalet 0,040. Hur stor är spännkraften i vajern? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i N.`,
+            answer: { value: 615.7, unit: 'N', tol: 0.03 },
+            solution: `Ekipaget rör sig med konstant fart, så kraftresultanten längs rampen är noll. Uppför rampen drar spännkraften $F_S$. Nedför rampen verkar två krafter: tyngdkraftens komposant $F_1$ och friktionskraften $F_f$, som är riktad mot rörelsen. Alltså
+
+$$
+F_S = F_1 + F_f
+$$
+
+Friktionskraften är $F_f = \\mu \\cdot F_N$, och normalkraften är lika stor som komposanten vinkelrätt mot rampen, $F_N = F_2 = m \\cdot g \\cdot \\cos \\alpha$:
+
+$$
+\\left[ \\begin{array}{l}
+F_1 = m \\cdot g \\cdot \\sin \\alpha = 320 \\cdot 9{,}82 \\cdot \\sin 9{,}0^{\\circ} = 491{,}57\\ldots\\ \\mathrm{N} \\\\
+F_f = \\mu \\cdot m \\cdot g \\cdot \\cos \\alpha = 0{,}040 \\cdot 320 \\cdot 9{,}82 \\cdot \\cos 9{,}0^{\\circ} = 124{,}14\\ldots\\ \\mathrm{N}
+\\end{array} \\right]
+$$
+
+$$
+F_S = 491{,}57\\ldots + 124{,}14\\ldots = 615{,}72\\ldots\\ \\mathrm{N} \\approx 620\\ \\mathrm{N}
+$$
+
+Lutningen och friktionstalet har två värdesiffror, så svaret avrundas till två värdesiffror.
+
+Rimligt: det mesta av kraften går åt till att lyfta ekipaget längs rampen, och rullmotståndet är en mindre del. Att lyfta båten rakt upp hade krävt hela tyngden, cirka 3 100 N, så rampen gör jobbet betydligt lättare.
+
+**Svar:** Spännkraften i vajern är cirka 620 N.`,
+        },
+        {
+            level: 2,
+            question: `En låda står stilla på en ramp. Med kraftgivare mäter man att normalkraften från rampen på lådan är 41 N och att friktionskraften på lådan är 15 N. Bestäm<br>a)&nbsp;rampens lutningsvinkel $\\alpha$&emsp;&emsp;b)&nbsp;lådans massa.
+
+*Ange massan (b) som ditt numeriska svar i kg. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
+            answer: { value: 4.446, unit: 'kg', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 20.10, unit: '°', tol: 0.03, etikett: '$\\alpha =$' },
+                { del: 'b', value: 4.446, unit: 'kg', tol: 0.03, etikett: '$m =$' },
+            ],
+            solution: `Lådan står stilla, så kraftresultanten är noll både längs rampen och vinkelrätt mot den. Längs rampen är friktionskraften lika stor som tyngdkraftens komposant nedför rampen, och vinkelrätt mot rampen är normalkraften lika stor som komposanten vinkelrätt mot rampen:
+
+$$
+F_f = F_1 = m \\cdot g \\cdot \\sin \\alpha \\qquad\\qquad F_N = F_2 = m \\cdot g \\cdot \\cos \\alpha
+$$
+
+**a)** Vi dividerar den första ekvationen med den andra. Då försvinner både massan och tyngdfaktorn:
+
+$$
+\\frac{F_f}{F_N} = \\frac{m \\cdot g \\cdot \\sin \\alpha}{m \\cdot g \\cdot \\cos \\alpha} = \\tan \\alpha
+$$
+
+$$
+\\tan \\alpha = \\frac{15}{41} \\quad\\Leftrightarrow\\quad \\alpha = \\arctan \\frac{15}{41} = 20{,}09\\ldots^{\\circ} \\approx 20^{\\circ}
+$$
+
+**Svar:** Rampen lutar cirka 20°.
+
+**b)** Komposanterna $F_1$ och $F_2$ är vinkelräta mot varandra och bildar tillsammans tyngdkraften $F_G$. Tyngdkraften är alltså hypotenusan i en rätvinklig triangel med kateterna 15 N och 41 N. Pythagoras sats ger
+
+$$
+F_G = \\sqrt{F_1^2 + F_2^2} = \\sqrt{15^2 + 41^2} = 43{,}657\\ldots\\ \\mathrm{N}
+$$
+
+Massan fås ur $F_G = m \\cdot g$:
+
+$$
+F_G = m \\cdot g \\quad\\Leftrightarrow\\quad m = \\frac{F_G}{g} = \\frac{43{,}657\\ldots}{9{,}82} = 4{,}445\\ldots\\ \\mathrm{kg} \\approx 4{,}4\\ \\mathrm{kg}
+$$
+
+Rimligt: tyngdkraften måste vara större än var och en av komposanterna, och 44 N är bara lite större än 41 N eftersom rampen inte är särskilt brant.
+
+**Svar:** Lådans massa är cirka 4,4 kg.`,
+        },
+        {
+            level: 2,
+            question: `Ida drar en kälke med massan 12 kg uppför en backe som lutar 10°. Snöret är parallellt med backen och dragkraften är 45 N, se figuren. Friktionstalet mellan kälken och snön är 0,080. Bestäm kälkens acceleration. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i m/s².
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0.0 40.0 470.0 130.0" style="max-width:635px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="12.0" y1="150.0" x2="446.0" y2="150.0" stroke="#0f1620" stroke-width="1.6"/><line x1="20.0" y1="150.0" x2="13.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="32.0" y1="150.0" x2="25.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="44.0" y1="150.0" x2="37.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="56.0" y1="150.0" x2="49.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="68.0" y1="150.0" x2="61.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="80.0" y1="150.0" x2="73.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="92.0" y1="150.0" x2="85.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="104.0" y1="150.0" x2="97.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="116.0" y1="150.0" x2="109.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="128.0" y1="150.0" x2="121.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="140.0" y1="150.0" x2="133.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="152.0" y1="150.0" x2="145.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="164.0" y1="150.0" x2="157.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="176.0" y1="150.0" x2="169.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="188.0" y1="150.0" x2="181.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="200.0" y1="150.0" x2="193.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="212.0" y1="150.0" x2="205.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="224.0" y1="150.0" x2="217.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="236.0" y1="150.0" x2="229.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="248.0" y1="150.0" x2="241.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="260.0" y1="150.0" x2="253.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="272.0" y1="150.0" x2="265.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="284.0" y1="150.0" x2="277.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="296.0" y1="150.0" x2="289.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="308.0" y1="150.0" x2="301.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="320.0" y1="150.0" x2="313.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="332.0" y1="150.0" x2="325.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="344.0" y1="150.0" x2="337.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="356.0" y1="150.0" x2="349.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="368.0" y1="150.0" x2="361.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="380.0" y1="150.0" x2="373.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="392.0" y1="150.0" x2="385.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="404.0" y1="150.0" x2="397.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="416.0" y1="150.0" x2="409.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="428.0" y1="150.0" x2="421.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><line x1="440.0" y1="150.0" x2="433.0" y2="158.0" stroke="#0f1620" stroke-width="1"/><polygon points="30.0,150.0 430.0,150.0 430.0,79.5" fill="rgba(15,22,32,0.05)" stroke="#0f1620" stroke-width="1.6" stroke-linejoin="round"/><path d="M 122.0 150.0 A 92 92 0 0 0 120.6 134.0" fill="none" stroke="#8a8579" stroke-width="1.4"/><text x="130.0" y="146.0" font-size="14" fill="#8a8579" text-anchor="start">10°</text><g transform="translate(198.0,120.4) rotate(-10)"><path d="M -40 0 L 34 0 Q 46 0 46 -9" fill="none" stroke="#0f1620" stroke-width="2.4" stroke-linecap="round"/><line x1="-30" y1="0" x2="-30" y2="-12" stroke="#0f1620" stroke-width="1.6"/><line x1="0" y1="0" x2="0" y2="-12" stroke="#0f1620" stroke-width="1.6"/><line x1="26" y1="0" x2="26" y2="-12" stroke="#0f1620" stroke-width="1.6"/><rect x="-38" y="-16" width="72" height="6" rx="2" fill="#c9844f" stroke="#7a4b26" stroke-width="1.3"/></g><line x1="229.2" y1="101.7" x2="367.1" y2="77.4" stroke="#6b5a45" stroke-width="1.6"/><circle cx="229.2" cy="101.7" r="2.2" fill="#6b5a45"/><line x1="256.0" y1="80.7" x2="327.9" y2="68.0" stroke="#2563c9" stroke-width="3" stroke-linecap="butt"/><polygon points="338.7,66.1 328.8,73.4 326.9,62.6" fill="#2563c9"/><text x="344.7" y="54.1" font-size="15" fill="#2563c9" text-anchor="start"><tspan font-style="italic">F</tspan> = 45 N</text></svg>`,
+            answer: { value: 1.271, unit: 'm/s²', tol: 0.03 },
+            solution: `Accelerationen beror på den resulterande kraften längs backen. Newtons andra lag ger
+
+$$
+F_R = m \\cdot a \\quad\\Leftrightarrow\\quad a = \\frac{F_R}{m}
+$$
+
+Längs backen drar snöret med kraften $F$ uppför. Nedför backen verkar tyngdkraftens komposant $F_1$ och friktionskraften $F_f$, eftersom friktionen är riktad mot rörelsen och kälken rör sig uppför. Med positiv riktning uppför backen blir
+
+$$
+F_R = F - F_1 - F_f
+$$
+
+Friktionskraften är $F_f = \\mu \\cdot F_N$, där normalkraften är lika stor som komposanten vinkelrätt mot backen, $F_N = F_2$:
+
+$$
+\\left[ \\begin{array}{l}
+F_1 = m \\cdot g \\cdot \\sin \\alpha = 12 \\cdot 9{,}82 \\cdot \\sin 10^{\\circ} = 20{,}462\\ldots\\ \\mathrm{N} \\\\
+F_N = m \\cdot g \\cdot \\cos \\alpha = 12 \\cdot 9{,}82 \\cdot \\cos 10^{\\circ} = 116{,}04\\ldots\\ \\mathrm{N} \\\\
+F_f = \\mu \\cdot F_N = 0{,}080 \\cdot 116{,}04\\ldots = 9{,}283\\ldots\\ \\mathrm{N}
+\\end{array} \\right]
+$$
+
+$$
+F_R = 45 - 20{,}462\\ldots - 9{,}283\\ldots = 15{,}253\\ldots\\ \\mathrm{N}
+$$
+
+$$
+a = \\frac{15{,}253\\ldots}{12} = 1{,}271\\ldots\\ \\mathrm{m/s^2} \\approx 1{,}3\\ \\mathrm{m/s^2}
+$$
+
+Rimligt: dragkraften är större än summan av de bromsande krafterna (cirka 30 N), så kälken ska accelerera uppför, men inte särskilt mycket.
+
+**Svar:** Kälkens acceleration är cirka 1,3 m/s² uppför backen.`,
+        },
+
+        {
+            level: 3,
+            question: `Två friktionsfria ramper har samma höjd $h$ men olika lutning: ramp 1 lutar 30° och ramp 2 lutar 60° mot horisontalplanet, se figuren. Två likadana lådor släpps samtidigt från vila högst upp på var sin ramp.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0.0 36.0 480.0 164.0" style="max-width:624px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="14.0" y1="160.0" x2="476.0" y2="160.0" stroke="#0f1620" stroke-width="1.6"/><line x1="22.0" y1="160.0" x2="15.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="34.0" y1="160.0" x2="27.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="46.0" y1="160.0" x2="39.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="58.0" y1="160.0" x2="51.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="70.0" y1="160.0" x2="63.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="82.0" y1="160.0" x2="75.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="94.0" y1="160.0" x2="87.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="106.0" y1="160.0" x2="99.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="118.0" y1="160.0" x2="111.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="130.0" y1="160.0" x2="123.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="142.0" y1="160.0" x2="135.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="154.0" y1="160.0" x2="147.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="166.0" y1="160.0" x2="159.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="178.0" y1="160.0" x2="171.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="190.0" y1="160.0" x2="183.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="202.0" y1="160.0" x2="195.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="214.0" y1="160.0" x2="207.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="226.0" y1="160.0" x2="219.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="238.0" y1="160.0" x2="231.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="250.0" y1="160.0" x2="243.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="262.0" y1="160.0" x2="255.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="274.0" y1="160.0" x2="267.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="286.0" y1="160.0" x2="279.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="298.0" y1="160.0" x2="291.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="310.0" y1="160.0" x2="303.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="322.0" y1="160.0" x2="315.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="334.0" y1="160.0" x2="327.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="346.0" y1="160.0" x2="339.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="358.0" y1="160.0" x2="351.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="370.0" y1="160.0" x2="363.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="382.0" y1="160.0" x2="375.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="394.0" y1="160.0" x2="387.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="406.0" y1="160.0" x2="399.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="418.0" y1="160.0" x2="411.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="430.0" y1="160.0" x2="423.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="442.0" y1="160.0" x2="435.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="454.0" y1="160.0" x2="447.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><line x1="466.0" y1="160.0" x2="459.0" y2="168.0" stroke="#0f1620" stroke-width="1"/><polygon points="40.0,160.0 230.5,160.0 230.5,50.0" fill="rgba(15,22,32,0.05)" stroke="#0f1620" stroke-width="1.6" stroke-linejoin="round"/><polygon points="300.5,160.0 364.0,160.0 364.0,50.0" fill="rgba(15,22,32,0.05)" stroke="#0f1620" stroke-width="1.6" stroke-linejoin="round"/><path d="M 80.0 160.0 A 40 40 0 0 0 74.6 140.0" fill="none" stroke="#8a8579" stroke-width="1.4"/><text x="97.1" y="150.8" font-size="14" fill="#8a8579" text-anchor="middle">30°</text><path d="M 326.5 160.0 A 26 26 0 0 0 313.5 137.5" fill="none" stroke="#8a8579" stroke-width="1.4"/><text x="340.0" y="144.5" font-size="14" fill="#8a8579" text-anchor="middle">60°</text><g transform="translate(203.9,65.4) rotate(-30)"><rect x="-10" y="-20" width="20" height="20" fill="#d3e4f5" stroke="#4f7197" stroke-width="1.6" rx="2"/></g><g transform="translate(351.3,72.0) rotate(-60)"><rect x="-10" y="-20" width="20" height="20" fill="#d3e4f5" stroke="#4f7197" stroke-width="1.6" rx="2"/></g><line x1="233.5" y1="50.0" x2="252.5" y2="50.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="3 3"/><line x1="246.5" y1="105.0" x2="246.5" y2="152.0" stroke="#0f1620" stroke-width="1.3" stroke-linecap="butt"/><polygon points="246.5,160.0 243.0,152.0 250.0,152.0" fill="#0f1620"/><line x1="246.5" y1="105.0" x2="246.5" y2="58.0" stroke="#0f1620" stroke-width="1.3" stroke-linecap="butt"/><polygon points="246.5,50.0 250.0,58.0 243.0,58.0" fill="#0f1620"/><text x="254.5" y="110.0" font-size="16" fill="#0f1620" text-anchor="start"><tspan font-style="italic">h</tspan></text><line x1="367.0" y1="50.0" x2="386.0" y2="50.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="3 3"/><line x1="380.0" y1="105.0" x2="380.0" y2="152.0" stroke="#0f1620" stroke-width="1.3" stroke-linecap="butt"/><polygon points="380.0,160.0 376.5,152.0 383.5,152.0" fill="#0f1620"/><line x1="380.0" y1="105.0" x2="380.0" y2="58.0" stroke="#0f1620" stroke-width="1.3" stroke-linecap="butt"/><polygon points="380.0,50.0 383.5,58.0 376.5,58.0" fill="#0f1620"/><text x="388.0" y="110.0" font-size="16" fill="#0f1620" text-anchor="start"><tspan font-style="italic">h</tspan></text><text x="165.3" y="188.0" font-size="13" fill="#8a8579" text-anchor="middle">ramp 1</text><text x="332.3" y="188.0" font-size="13" fill="#8a8579" text-anchor="middle">ramp 2</text></svg>
+
+a) Visa att lådorna får lika stor fart när de når marken.<br>b) Visa att tiden det tar att glida ned för en ramp med lutningen $\\alpha$ är $t = \\dfrac{1}{\\sin \\alpha} \\cdot \\sqrt{\\frac{2 \\cdot h}{g}}$.<br>c) Hur många gånger längre tid tar det att glida ned för ramp 1 än för ramp 2?
+
+*Ange svaret i c) som ditt numeriska svar.*`,
+            answer: { value: 1.732, unit: '', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+                { del: 'c', value: 1.732, unit: '', tol: 0.03, etikett: 'antal gånger' },
+            ],
+            solution: `**a)** Rampen är friktionsfri, så den enda kraften längs rampen är tyngdkraftens komposant $F_1 = m \\cdot g \\cdot \\sin \\alpha$. Normalkraften och komposanten $F_2$ tar ut varandra. Newtons andra lag längs rampen ger
+
+$$
+m \\cdot a = m \\cdot g \\cdot \\sin \\alpha \\quad\\Leftrightarrow\\quad a = g \\cdot \\sin \\alpha
+$$
+
+Rampens längd $L$ är hypotenusan i en rätvinklig triangel där höjden $h$ är kateten mittemot vinkeln $\\alpha$:
+
+$$
+\\sin \\alpha = \\frac{h}{L} \\quad\\Leftrightarrow\\quad L = \\frac{h}{\\sin \\alpha}
+$$
+
+Lådan startar från vila och har konstant acceleration, så sambandet $v^2 - v_0^2 = 2 \\cdot a \\cdot s$ med $v_0 = 0$ och $s = L$ ger
+
+$$
+v^2 = 2 \\cdot a \\cdot L = 2 \\cdot g \\cdot \\sin \\alpha \\cdot \\frac{h}{\\sin \\alpha} = 2 \\cdot g \\cdot h
+$$
+
+$$
+v = \\sqrt{2 \\cdot g \\cdot h}
+$$
+
+Vinkeln $\\alpha$ har strukits bort, och farten beror bara på höjden. Båda lådorna når alltså marken med samma fart. På den branta rampen är accelerationen större, men sträckan är kortare, och de två effekterna tar exakt ut varandra.
+
+**b)** Farten ökar likformigt från 0 till $v$, så $v = a \\cdot t$:
+
+$$
+t = \\frac{v}{a} = \\frac{\\sqrt{2 \\cdot g \\cdot h}}{g \\cdot \\sin \\alpha} = \\frac{1}{\\sin \\alpha} \\cdot \\frac{\\sqrt{2 \\cdot g \\cdot h}}{\\sqrt{g^2}} = \\frac{1}{\\sin \\alpha} \\cdot \\sqrt{\\frac{2 \\cdot h}{g}}
+$$
+
+där vi skrev $g = \\sqrt{g^2}$ för att kunna föra in $g$ under rottecknet. Detta skulle visas.
+
+**c)** Höjden är densamma, så faktorn $\\sqrt{\\frac{2 \\cdot h}{g}}$ är lika för båda ramperna och tar ut sig i kvoten:
+
+$$
+\\frac{t_1}{t_2} = \\frac{\\dfrac{1}{\\sin 30^{\\circ}}}{\\dfrac{1}{\\sin 60^{\\circ}}} = \\frac{\\sin 60^{\\circ}}{\\sin 30^{\\circ}} = \\frac{0{,}8660\\ldots}{0{,}5} = 1{,}732\\ldots \\approx 1{,}7
+$$
+
+Rimligt: på den flackare rampen är accelerationen mindre och vägen längre, så tiden ska bli längre. (Det exakta värdet är $\\sqrt{3}$.)
+
+**Svar:** Det tar cirka 1,7 gånger så lång tid att glida ned för ramp 1.`,
+        },
+        {
+            level: 3,
+            question: `En låda släpps från vila på ett plan som lutar 20° mot horisontalplanet. Lådan glider nedför planet med accelerationen 1,2 m/s².<br>a) Bestäm friktionstalet mellan lådan och planet.<br>b) Lådan skjuts sedan uppför samma plan med utgångsfarten 3,0 m/s. Hur långt uppför planet glider den innan den vänder?<br>c) Visa att sträckan i b) kan skrivas $s = \\dfrac{v_0^2}{2 \\cdot (2 \\cdot g \\cdot \\sin \\alpha - a_1)}$, där $a_1$ är accelerationen nedför planet. Friktionstalet behöver alltså aldrig räknas ut.
+
+*Ange sträckan (b) som ditt numeriska svar i m. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
+            answer: { value: 0.8156, unit: 'm', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 0.2339, unit: '', tol: 0.03, etikett: '$\\mu =$' },
+                { del: 'b', value: 0.8156, unit: 'm', tol: 0.03, etikett: '$s =$' },
+                { del: 'c' },
+            ],
+            solution: `**a)** När lådan glider nedför verkar komposanten $F_1 = m \\cdot g \\cdot \\sin \\alpha$ nedför planet och friktionskraften $F_f = \\mu \\cdot F_N = \\mu \\cdot m \\cdot g \\cdot \\cos \\alpha$ uppför planet. Newtons andra lag med positiv riktning nedför planet:
+
+$$
+m \\cdot a_1 = m \\cdot g \\cdot \\sin \\alpha - \\mu \\cdot m \\cdot g \\cdot \\cos \\alpha
+$$
+
+Massan förekommer i varje term och divideras bort:
+
+$$
+a_1 = g \\cdot \\sin \\alpha - \\mu \\cdot g \\cdot \\cos \\alpha
+$$
+
+Vi löser ut friktionstalet:
+
+$$
+\\mu \\cdot g \\cdot \\cos \\alpha = g \\cdot \\sin \\alpha - a_1 \\quad\\Leftrightarrow\\quad \\mu = \\frac{g \\cdot \\sin \\alpha - a_1}{g \\cdot \\cos \\alpha}
+$$
+
+$$
+\\mu = \\frac{9{,}82 \\cdot \\sin 20^{\\circ} - 1{,}2}{9{,}82 \\cdot \\cos 20^{\\circ}} = \\frac{3{,}358\\ldots - 1{,}2}{9{,}227\\ldots} = 0{,}2339\\ldots \\approx 0{,}23
+$$
+
+**Svar:** Friktionstalet är cirka 0,23.
+
+**b)** På vägen uppför är friktionen riktad nedför planet, alltså åt samma håll som $F_1$. Båda krafterna bromsar lådan. Med positiv riktning uppför planet blir accelerationen negativ, $a = -a_2$, där
+
+$$
+a_2 = g \\cdot \\sin \\alpha + \\mu \\cdot g \\cdot \\cos \\alpha = 3{,}358\\ldots + 0{,}2339\\ldots \\cdot 9{,}227\\ldots = 5{,}517\\ldots\\ \\mathrm{m/s^2}
+$$
+
+I vändpunkten är farten noll. Sambandet $v^2 - v_0^2 = 2 \\cdot a \\cdot s$ ger
+
+$$
+0 - v_0^2 = 2 \\cdot (-a_2) \\cdot s \\quad\\Leftrightarrow\\quad s = \\frac{v_0^2}{2 \\cdot a_2}
+$$
+
+$$
+s = \\frac{3{,}0^2}{2 \\cdot 5{,}517\\ldots} = 0{,}8156\\ldots\\ \\mathrm{m} \\approx 0{,}82\\ \\mathrm{m}
+$$
+
+Rimligt: på vägen uppför bromsas lådan mycket hårdare (5,5 m/s²) än den accelererar på vägen nedför (1,2 m/s²), så sträckan blir kort.
+
+**Svar:** Lådan glider cirka 0,82 m uppför planet.
+
+**c)** Ur a) vet vi att $\\mu \\cdot g \\cdot \\cos \\alpha = g \\cdot \\sin \\alpha - a_1$. Insatt i uttrycket för $a_2$ ger det
+
+$$
+a_2 = g \\cdot \\sin \\alpha + (g \\cdot \\sin \\alpha - a_1) = 2 \\cdot g \\cdot \\sin \\alpha - a_1
+$$
+
+och insatt i $s = \\dfrac{v_0^2}{2 \\cdot a_2}$ från b):
+
+$$
+s = \\frac{v_0^2}{2 \\cdot (2 \\cdot g \\cdot \\sin \\alpha - a_1)}
+$$
+
+Kontroll med talen: $\\dfrac{3{,}0^2}{2 \\cdot (2 \\cdot 3{,}358\\ldots - 1{,}2)} = 0{,}8156\\ldots\\ \\mathrm{m}$, samma som i b). Friktionen syns i formeln bara genom den uppmätta accelerationen $a_1$. Detta skulle visas.`,
+        },
+        {
+            level: 3,
+            question: `Några elever undersöker hur accelerationen hos en vagn på en lång bana beror på banans lutning $\\alpha$. Vagnen släpps från vila, och accelerationen mäts med en rörelsesensor. Resultatet:
+
+| Lutning $\\alpha$ | 4° | 8° | 12° | 16° | 20° |
+|---|---|---|---|---|---|
+| Acceleration $a$ (m/s²) | 0,52 | 1,13 | 1,87 | 2,55 | 3,14 |
+
+a) Visa att en modell där vagnen påverkas av en friktionskraft med friktionstalet $\\mu$ ger $a = g \\cdot \\sin \\alpha - \\mu \\cdot g \\cdot \\cos \\alpha$. Förklara varför $a$ med god noggrannhet blir en linjär funktion av $\\sin \\alpha$ när vinklarna är så små.<br>b) Rita ett diagram med $a$ på den lodräta axeln och $\\sin \\alpha$ på den vågräta, och anpassa en rät linje till punkterna. Bestäm linjens lutning och tolka vad den betyder.<br>c) Linjen går inte genom origo. Förklara varför, och använd diagrammet för att uppskatta friktionstalet $\\mu$.
+
+*Ange linjens lutning (b) som ditt numeriska svar i m/s².*`,
+            answer: { value: 9.8, unit: 'm/s²', tol: 0.05 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 9.8, unit: 'm/s²', tol: 0.05, etikett: 'lutning' },
+                { del: 'c', value: 0.019, unit: '', tol: 0.35, etikett: '$\\mu \\approx$' },
+            ],
+            solution: `**a)** Längs banan verkar tyngdkraftens komposant $F_1 = m \\cdot g \\cdot \\sin \\alpha$ nedför och friktionskraften $F_f = \\mu \\cdot F_N = \\mu \\cdot m \\cdot g \\cdot \\cos \\alpha$ uppför. Newtons andra lag:
+
+$$
+m \\cdot a = m \\cdot g \\cdot \\sin \\alpha - \\mu \\cdot m \\cdot g \\cdot \\cos \\alpha \\quad\\Leftrightarrow\\quad a = g \\cdot \\sin \\alpha - \\mu \\cdot g \\cdot \\cos \\alpha
+$$
+
+För vinklar mellan 4° och 20° ligger $\\cos \\alpha$ mellan $\\cos 20^{\\circ} = 0{,}94$ och $\\cos 4^{\\circ} = 1{,}00$. Termen $\\mu \\cdot g \\cdot \\cos \\alpha$ är därför nästan konstant, ungefär $\\mu \\cdot g$, och modellen blir
+
+$$
+a \\approx g \\cdot \\sin \\alpha - \\mu \\cdot g
+$$
+
+Det är en rät linje i ett diagram med $a$ mot $\\sin \\alpha$: lutningen är $g$ och linjen skär den lodräta axeln i $-\\mu \\cdot g$.
+
+**b)** Vi räknar först ut $\\sin \\alpha$ för varje lutning:
+
+| $\\alpha$ | 4° | 8° | 12° | 16° | 20° |
+|---|---|---|---|---|---|
+| $\\sin \\alpha$ | 0,070 | 0,139 | 0,208 | 0,276 | 0,342 |
+| $a$ (m/s²) | 0,52 | 1,13 | 1,87 | 2,55 | 3,14 |
+
+Punkterna ligger väl på en rät linje:
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 340" style="max-width:500px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><g stroke="rgba(15,22,32,0.15)" stroke-width="1"><line x1="62.0" y1="30" x2="62.0" y2="284"/><line x1="111.8" y1="30" x2="111.8" y2="284"/><line x1="161.5" y1="30" x2="161.5" y2="284"/><line x1="211.3" y1="30" x2="211.3" y2="284"/><line x1="261.0" y1="30" x2="261.0" y2="284"/><line x1="310.8" y1="30" x2="310.8" y2="284"/><line x1="360.5" y1="30" x2="360.5" y2="284"/><line x1="410.2" y1="30" x2="410.2" y2="284"/><line x1="460.0" y1="30" x2="460.0" y2="284"/><line x1="62" y1="284.0" x2="460" y2="284.0"/><line x1="62" y1="252.3" x2="460" y2="252.3"/><line x1="62" y1="220.5" x2="460" y2="220.5"/><line x1="62" y1="188.8" x2="460" y2="188.8"/><line x1="62" y1="157.0" x2="460" y2="157.0"/><line x1="62" y1="125.3" x2="460" y2="125.3"/><line x1="62" y1="93.5" x2="460" y2="93.5"/><line x1="62" y1="61.8" x2="460" y2="61.8"/><line x1="62" y1="30.0" x2="460" y2="30.0"/></g><line x1="62" y1="252.3" x2="468" y2="252.3" stroke="#0f1620" stroke-width="2"/><polygon points="468,248.3 476,252.3 468,256.3" fill="#0f1620"/><line x1="62" y1="284" x2="62" y2="22" stroke="#0f1620" stroke-width="2"/><polygon points="58,22 62,14 66,22" fill="#0f1620"/><text x="161.5" y="302.0" font-size="13" fill="#0f1620" text-anchor="middle">0,1</text><text x="261.0" y="302.0" font-size="13" fill="#0f1620" text-anchor="middle">0,2</text><text x="360.5" y="302.0" font-size="13" fill="#0f1620" text-anchor="middle">0,3</text><text x="460.0" y="302.0" font-size="13" fill="#0f1620" text-anchor="middle">0,4</text><text x="55.0" y="289.0" font-size="13" fill="#0f1620" text-anchor="end">−0,5</text><text x="55.0" y="225.5" font-size="13" fill="#0f1620" text-anchor="end">0,5</text><text x="55.0" y="193.8" font-size="13" fill="#0f1620" text-anchor="end">1</text><text x="55.0" y="162.0" font-size="13" fill="#0f1620" text-anchor="end">1,5</text><text x="55.0" y="130.3" font-size="13" fill="#0f1620" text-anchor="end">2</text><text x="55.0" y="98.5" font-size="13" fill="#0f1620" text-anchor="end">2,5</text><text x="55.0" y="66.8" font-size="13" fill="#0f1620" text-anchor="end">3</text><text x="55.0" y="35.0" font-size="13" fill="#0f1620" text-anchor="end">3,5</text><text x="55.0" y="257.3" font-size="13" fill="#0f1620" text-anchor="end">0</text><text x="494.0" y="324.0" font-size="14" fill="#0f1620" text-anchor="end">sin <tspan font-style="italic">α</tspan></text><text x="70.0" y="22.0" font-size="14" fill="#0f1620" text-anchor="start"><tspan font-style="italic">a</tspan> (m/s²)</text><line x1="62.0" y1="263.7" x2="440.1" y2="27.7" stroke="#2563c9" stroke-width="2.2"/><circle cx="131.7" cy="219.2" r="4" fill="#c8324a"/><circle cx="200.3" cy="180.5" r="4" fill="#c8324a"/><circle cx="269.0" cy="133.5" r="4" fill="#c8324a"/><circle cx="336.6" cy="90.3" r="4" fill="#c8324a"/><circle cx="402.3" cy="52.9" r="4" fill="#c8324a"/><circle cx="62.0" cy="263.7" r="3.5" fill="none" stroke="#2563c9" stroke-width="1.6"/><text x="72.0" y="281.7" font-size="13" fill="#2563c9" text-anchor="start">−0,18</text></svg>
+
+Vi läser av två punkter på linjen (inte mätpunkter), långt ifrån varandra: $(0;\\ -0{,}18)$ och $(0{,}35;\\ 3{,}24)$. Lutningen blir
+
+$$
+k = \\frac{\\Delta a}{\\Delta (\\sin \\alpha)} = \\frac{3{,}24 - (-0{,}18)}{0{,}35 - 0} = 9{,}771\\ldots\\ \\mathrm{m/s^2} \\approx 9{,}8\\ \\mathrm{m/s^2}
+$$
+
+Enligt modellen i a) är lutningen tyngdfaktorn $g$, och värdet stämmer väl med $g = 9{,}82\\ \\mathrm{N/kg}$ (1 N/kg = 1 m/s²).
+
+**Svar:** Lutningen är cirka 9,8 m/s², vilket motsvarar tyngdfaktorn $g$.
+
+**c)** Utan friktion hade modellen varit $a = g \\cdot \\sin \\alpha$, och linjen hade gått genom origo. Friktionen (rullmotståndet i vagnens hjul och axlar) bromsar vagnen med ungefär lika mycket vid alla de små vinklarna, så hela linjen förskjuts nedåt. Skärningen med den lodräta axeln är enligt a) $-\\mu \\cdot g$:
+
+$$
+-\\mu \\cdot g = -0{,}18 \\quad\\Leftrightarrow\\quad \\mu = \\frac{0{,}18}{9{,}82} = 0{,}0183\\ldots \\approx 0{,}02
+$$
+
+Rimligt: en vagn med hjul har mycket litet rullmotstånd, och ett friktionstal kring 0,02 är typiskt för hjul på en slät bana. Värdet är en uppskattning, eftersom skärningen är svår att läsa av noggrant och $\\cos \\alpha$ inte är exakt 1.
+
+**Svar:** Friktionen gör att linjen förskjuts nedåt, och friktionstalet är cirka 0,02.`,
+        },
+        {
+            level: 3,
+            question: `En låda med massan 15 kg ska skjutas uppför ett plan som lutar 25° mot horisontalplanet. Kraften $F$ som skjuter på lådan är vågrät, se figuren.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="10.0 50.0 380.0 196.0" style="max-width:513px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="22.0" y1="220.0" x2="392.0" y2="220.0" stroke="#0f1620" stroke-width="1.6"/><line x1="30.0" y1="220.0" x2="23.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="42.0" y1="220.0" x2="35.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="54.0" y1="220.0" x2="47.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="66.0" y1="220.0" x2="59.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="78.0" y1="220.0" x2="71.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="90.0" y1="220.0" x2="83.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="102.0" y1="220.0" x2="95.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="114.0" y1="220.0" x2="107.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="126.0" y1="220.0" x2="119.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="138.0" y1="220.0" x2="131.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="150.0" y1="220.0" x2="143.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="162.0" y1="220.0" x2="155.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="174.0" y1="220.0" x2="167.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="186.0" y1="220.0" x2="179.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="198.0" y1="220.0" x2="191.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="210.0" y1="220.0" x2="203.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="222.0" y1="220.0" x2="215.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="234.0" y1="220.0" x2="227.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="246.0" y1="220.0" x2="239.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="258.0" y1="220.0" x2="251.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="270.0" y1="220.0" x2="263.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="282.0" y1="220.0" x2="275.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="294.0" y1="220.0" x2="287.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="306.0" y1="220.0" x2="299.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="318.0" y1="220.0" x2="311.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="330.0" y1="220.0" x2="323.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="342.0" y1="220.0" x2="335.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="354.0" y1="220.0" x2="347.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="366.0" y1="220.0" x2="359.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="378.0" y1="220.0" x2="371.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="390.0" y1="220.0" x2="383.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><polygon points="40.0,220.0 370.0,220.0 370.0,66.1" fill="rgba(15,22,32,0.05)" stroke="#0f1620" stroke-width="1.6" stroke-linejoin="round"/><path d="M 84.0 220.0 A 44 44 0 0 0 79.9 201.4" fill="none" stroke="#8a8579" stroke-width="1.4"/><text x="101.6" y="212.2" font-size="14" fill="#8a8579" text-anchor="middle">25°</text><g transform="translate(221.5,135.4) rotate(-25)"><rect x="-25" y="-50" width="50" height="50" fill="#d3e4f5" stroke="#4f7197" stroke-width="1.6" rx="2"/><text x="0" y="-21" font-size="11" fill="#0f1620" text-anchor="middle">15 kg</text></g><line x1="96.3" y1="123.3" x2="177.3" y2="123.3" stroke="#2563c9" stroke-width="3" stroke-linecap="butt"/><polygon points="188.3,123.3 177.3,128.8 177.3,117.8" fill="#2563c9"/><text x="96.3" y="111.3" font-size="16" fill="#2563c9" text-anchor="start"><tspan font-style="italic">F</tspan></text></svg>
+
+a) Anta först att planet är friktionsfritt. Visa att den vågräta kraft som håller lådan i vila är $F = m \\cdot g \\cdot \\tan \\alpha$.<br>b) Friktionstalet mellan lådan och planet är i själva verket 0,20. Hur stor vågrät kraft krävs för att lådan ska glida uppför planet med konstant fart?<br>c) Visa att det inte går att skjuta lådan uppför planet med en vågrät kraft om $\\tan \\alpha \\geq \\dfrac{1}{\\mu}$, hur stor kraften än är.
+
+*Ange kraften (b) som ditt numeriska svar i N. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
+            answer: { value: 108.2, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 108.2, unit: 'N', tol: 0.03, etikett: '$F =$' },
+                { del: 'c' },
+            ],
+            solution: `Den vågräta kraften $F$ är inte riktad längs planet, så vi delar upp den i komposanter längs och vinkelrätt mot planet. Planet lutar vinkeln $\\alpha$ mot det vågräta, så vinkeln mellan $F$ och planet är också $\\alpha$:
+
+- längs planet, uppför: $F \\cdot \\cos \\alpha$
+- vinkelrätt mot planet, in mot planet: $F \\cdot \\sin \\alpha$
+
+Tyngdkraften delas som vanligt i $F_1 = m \\cdot g \\cdot \\sin \\alpha$ nedför planet och $F_2 = m \\cdot g \\cdot \\cos \\alpha$ in mot planet. Vinkelrätt mot planet är kraftresultanten noll, så normalkraften bär **båda** komposanterna som trycker in mot planet:
+
+$$
+F_N = m \\cdot g \\cdot \\cos \\alpha + F \\cdot \\sin \\alpha \\qquad (1)
+$$
+
+**a)** Utan friktion verkar längs planet bara $F \\cdot \\cos \\alpha$ uppför och $F_1$ nedför. Lådan är i vila, så
+
+$$
+F \\cdot \\cos \\alpha = m \\cdot g \\cdot \\sin \\alpha \\quad\\Leftrightarrow\\quad F = m \\cdot g \\cdot \\frac{\\sin \\alpha}{\\cos \\alpha} = m \\cdot g \\cdot \\tan \\alpha
+$$
+
+Detta skulle visas. (För lådan blir det $15 \\cdot 9{,}82 \\cdot \\tan 25^{\\circ} = 68{,}68\\ldots\\ \\mathrm{N}$.)
+
+**b)** Nu verkar dessutom friktionskraften $F_f = \\mu \\cdot F_N$ nedför planet, mot rörelsen. Konstant fart ger kraftjämvikt längs planet. Med normalkraften från (1), $F_N = m \\cdot g \\cdot \\cos \\alpha + F \\cdot \\sin \\alpha$:
+
+$$
+F \\cdot \\cos \\alpha = m \\cdot g \\cdot \\sin \\alpha + \\mu \\cdot (m \\cdot g \\cdot \\cos \\alpha + F \\cdot \\sin \\alpha)
+$$
+
+Vi samlar termerna med $F$ i vänstra ledet:
+
+$$
+F \\cdot \\cos \\alpha - \\mu \\cdot F \\cdot \\sin \\alpha = m \\cdot g \\cdot \\sin \\alpha + \\mu \\cdot m \\cdot g \\cdot \\cos \\alpha
+$$
+
+$$
+F \\cdot (\\cos \\alpha - \\mu \\cdot \\sin \\alpha) = m \\cdot g \\cdot (\\sin \\alpha + \\mu \\cdot \\cos \\alpha)
+$$
+
+$$
+F = \\frac{m \\cdot g \\cdot (\\sin \\alpha + \\mu \\cdot \\cos \\alpha)}{\\cos \\alpha - \\mu \\cdot \\sin \\alpha}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m \\cdot g = 15 \\cdot 9{,}82 = 147{,}3\\ \\mathrm{N} \\\\
+\\sin \\alpha + \\mu \\cdot \\cos \\alpha = \\sin 25^{\\circ} + 0{,}20 \\cdot \\cos 25^{\\circ} = 0{,}6038\\ldots \\\\
+\\cos \\alpha - \\mu \\cdot \\sin \\alpha = \\cos 25^{\\circ} - 0{,}20 \\cdot \\sin 25^{\\circ} = 0{,}8217\\ldots
+\\end{array} \\right]
+$$
+
+$$
+F = \\frac{147{,}3 \\cdot 0{,}6038\\ldots}{0{,}8217\\ldots} = 108{,}24\\ldots\\ \\mathrm{N} \\approx 110\\ \\mathrm{N}
+$$
+
+Rimligt: kraften är större än de 69 N som krävdes utan friktion. Dessutom ökar den vågräta kraften själv normalkraften och därmed friktionen, vilket gör att det krävs mer än om man hade skjutit parallellt med planet.
+
+**Svar:** Det krävs en vågrät kraft på cirka 110 N.
+
+**c)** Ekvationen i b) kan skrivas $F \\cdot (\\cos \\alpha - \\mu \\cdot \\sin \\alpha) = m \\cdot g \\cdot (\\sin \\alpha + \\mu \\cdot \\cos \\alpha)$. Högra ledet är alltid positivt. Om parentesen i vänstra ledet är noll eller negativ kan vänstra ledet aldrig bli positivt, oavsett hur stor $F$ är, och då finns ingen lösning:
+
+$$
+\\cos \\alpha - \\mu \\cdot \\sin \\alpha \\leq 0 \\quad\\Leftrightarrow\\quad \\cos \\alpha \\leq \\mu \\cdot \\sin \\alpha \\quad\\Leftrightarrow\\quad \\frac{1}{\\mu} \\leq \\frac{\\sin \\alpha}{\\cos \\alpha} = \\tan \\alpha
+$$
+
+(vi dividerade med $\\mu \\cdot \\cos \\alpha$, som är positivt). Fysikaliskt: på ett mycket brant plan trycker den vågräta kraften nästan rakt in mot planet. Varje ökning av $F$ ökar då friktionen mer än den ökar komposanten uppför planet. För $\\mu = 0{,}20$ inträffar det när $\\tan \\alpha \\geq 5$, det vill säga vid $\\alpha \\geq 78{,}7^{\\circ}$. Detta skulle visas.`,
+        },
+        {
+            level: 3,
+            question: `En kälke släpps från vila högst upp i en backe som är 40 m lång och lutar 15° mot horisontalplanet. Nedanför backen fortsätter snön som plan mark. Friktionstalet mellan kälken och snön är 0,060, både i backen och på den plana marken. Kälken behåller sin fart i övergången mellan backen och marken.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0.0 6.0 540.0 141.5" style="max-width:621px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><polygon points="30.0,50.0 252.2,109.5 30.0,109.5" fill="rgba(15,22,32,0.05)" stroke="#0f1620" stroke-width="1.6" stroke-linejoin="round"/><line x1="16.0" y1="109.5" x2="520.0" y2="109.5" stroke="#0f1620" stroke-width="1.6"/><line x1="24.0" y1="109.5" x2="17.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="36.0" y1="109.5" x2="29.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="48.0" y1="109.5" x2="41.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="60.0" y1="109.5" x2="53.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="72.0" y1="109.5" x2="65.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="84.0" y1="109.5" x2="77.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="96.0" y1="109.5" x2="89.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="108.0" y1="109.5" x2="101.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="120.0" y1="109.5" x2="113.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="132.0" y1="109.5" x2="125.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="144.0" y1="109.5" x2="137.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="156.0" y1="109.5" x2="149.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="168.0" y1="109.5" x2="161.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="180.0" y1="109.5" x2="173.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="192.0" y1="109.5" x2="185.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="204.0" y1="109.5" x2="197.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="216.0" y1="109.5" x2="209.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="228.0" y1="109.5" x2="221.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="240.0" y1="109.5" x2="233.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="252.0" y1="109.5" x2="245.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="264.0" y1="109.5" x2="257.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="276.0" y1="109.5" x2="269.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="288.0" y1="109.5" x2="281.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="300.0" y1="109.5" x2="293.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="312.0" y1="109.5" x2="305.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="324.0" y1="109.5" x2="317.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="336.0" y1="109.5" x2="329.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="348.0" y1="109.5" x2="341.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="360.0" y1="109.5" x2="353.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="372.0" y1="109.5" x2="365.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="384.0" y1="109.5" x2="377.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="396.0" y1="109.5" x2="389.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="408.0" y1="109.5" x2="401.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="420.0" y1="109.5" x2="413.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="432.0" y1="109.5" x2="425.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="444.0" y1="109.5" x2="437.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="456.0" y1="109.5" x2="449.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="468.0" y1="109.5" x2="461.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="480.0" y1="109.5" x2="473.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="492.0" y1="109.5" x2="485.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="504.0" y1="109.5" x2="497.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><line x1="516.0" y1="109.5" x2="509.0" y2="117.5" stroke="#0f1620" stroke-width="1"/><path d="M 208.2 109.5 A 44 44 0 0 1 209.7 98.1" fill="none" stroke="#8a8579" stroke-width="1.4"/><text x="178.2" y="103.5" font-size="14" fill="#8a8579" text-anchor="middle">15°</text><g transform="translate(59.0,57.8) rotate(15)"><g transform="translate(26,0)"><g><path d="M -28 0 L 22 0 Q 34 0 34 -9" fill="none" stroke="#0f1620" stroke-width="2.4" stroke-linecap="round"/><line x1="-18" y1="0" x2="-18" y2="-12" stroke="#0f1620" stroke-width="1.6"/><line x1="0" y1="0" x2="0" y2="-12" stroke="#0f1620" stroke-width="1.6"/><line x1="14" y1="0" x2="14" y2="-12" stroke="#0f1620" stroke-width="1.6"/><rect x="-26" y="-16" width="48" height="6" rx="2" fill="#c9844f" stroke="#7a4b26" stroke-width="1.3"/></g></g></g><line x1="30.0" y1="50.0" x2="37.8" y2="21.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="3 3"/><line x1="252.2" y1="109.5" x2="259.9" y2="80.6" stroke="#8a8579" stroke-width="1" stroke-dasharray="3 3"/><line x1="147.8" y1="54.7" x2="251.2" y2="82.3" stroke="#0f1620" stroke-width="1.3" stroke-linecap="butt"/><polygon points="258.9,84.4 250.3,85.7 252.1,79.0" fill="#0f1620"/><line x1="147.8" y1="54.7" x2="44.5" y2="27.0" stroke="#0f1620" stroke-width="1.3" stroke-linecap="butt"/><polygon points="36.7,24.9 45.4,23.6 43.6,30.3" fill="#0f1620"/><text x="150.9" y="43.1" font-size="14" fill="#0f1620" text-anchor="middle" transform="rotate(15 150.9 43.1)">40 m</text><line x1="252.2" y1="109.5" x2="252.2" y2="83.5" stroke="#8a8579" stroke-width="1" stroke-dasharray="3 3"/><line x1="500" y1="109.5" x2="500" y2="83.5" stroke="#8a8579" stroke-width="1" stroke-dasharray="3 3"/><line x1="376.1" y1="87.5" x2="492.0" y2="87.5" stroke="#0f1620" stroke-width="1.3" stroke-linecap="butt"/><polygon points="500.0,87.5 492.0,91.0 492.0,84.0" fill="#0f1620"/><line x1="376.1" y1="87.5" x2="260.2" y2="87.5" stroke="#0f1620" stroke-width="1.3" stroke-linecap="butt"/><polygon points="252.2,87.5 260.2,84.0 260.2,91.0" fill="#0f1620"/><text x="376.1" y="79.5" font-size="16" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">s</tspan></text><text x="500" y="135.5" font-size="13" fill="#8a8579" text-anchor="middle">stannar</text></svg>
+
+a) Visa att sträckan $s$ som kälken glider på den plana marken är $s = \\dfrac{L \\cdot (\\sin \\alpha - \\mu \\cdot \\cos \\alpha)}{\\mu}$, där $L$ är backens längd, och att kälkens massa inte påverkar sträckan.<br>b) Beräkna sträckan $s$.<br>c) Någon vill att kälken ska stanna efter halva sträckan på den plana marken, och byter därför till medar av ett material som ger ett större friktionstal, både i backen och på marken. Måste friktionstalet bli dubbelt så stort, mer än dubbelt så stort eller mindre än dubbelt så stort? Motivera.
+
+*Ange sträckan (b) som ditt numeriska svar i m. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
+            answer: { value: 133.9, unit: 'm', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 133.9, unit: 'm', tol: 0.03, etikett: '$s =$' },
+                { del: 'c' },
+            ],
+            solution: `**a)** *I backen.* Längs backen verkar $F_1 = m \\cdot g \\cdot \\sin \\alpha$ nedför och friktionskraften $F_f = \\mu \\cdot m \\cdot g \\cdot \\cos \\alpha$ uppför. Newtons andra lag ger accelerationen
+
+$$
+m \\cdot a_1 = m \\cdot g \\cdot \\sin \\alpha - \\mu \\cdot m \\cdot g \\cdot \\cos \\alpha \\quad\\Leftrightarrow\\quad a_1 = g \\cdot (\\sin \\alpha - \\mu \\cdot \\cos \\alpha)
+$$
+
+Kälken startar från vila, så farten vid backens fot fås ur $v^2 - v_0^2 = 2 \\cdot a \\cdot s$ med $v_0 = 0$ och sträckan $L$:
+
+$$
+v^2 = 2 \\cdot a_1 \\cdot L = 2 \\cdot g \\cdot L \\cdot (\\sin \\alpha - \\mu \\cdot \\cos \\alpha)
+$$
+
+*På den plana marken.* Normalkraften är lika stor som tyngdkraften, $F_N = m \\cdot g$, så friktionskraften är $\\mu \\cdot m \\cdot g$ och den enda kraften längs marken. Kälken bromsas med
+
+$$
+m \\cdot a_2 = \\mu \\cdot m \\cdot g \\quad\\Leftrightarrow\\quad a_2 = \\mu \\cdot g
+$$
+
+Kälken stannar ($v_\\text{slut} = 0$) efter sträckan $s$:
+
+$$
+0 - v^2 = 2 \\cdot (-a_2) \\cdot s \\quad\\Leftrightarrow\\quad s = \\frac{v^2}{2 \\cdot a_2}
+$$
+
+Vi sätter in $v^2 = 2 \\cdot g \\cdot L \\cdot (\\sin \\alpha - \\mu \\cdot \\cos \\alpha)$ och $a_2 = \\mu \\cdot g$:
+
+$$
+s = \\frac{2 \\cdot g \\cdot L \\cdot (\\sin \\alpha - \\mu \\cdot \\cos \\alpha)}{2 \\cdot \\mu \\cdot g} = \\frac{L \\cdot (\\sin \\alpha - \\mu \\cdot \\cos \\alpha)}{\\mu}
+$$
+
+Massan dividerades bort redan när accelerationerna räknades ut, och även $g$ tar ut sig. Sträckan beror alltså bara på backens längd, lutningen och friktionstalet. Detta skulle visas.
+
+**b)**
+
+$$
+\\left[ \\begin{array}{l}
+L = 40\\ \\mathrm{m} \\\\
+\\alpha = 15^{\\circ} \\\\
+\\mu = 0{,}060
+\\end{array} \\right]
+$$
+
+$$
+s = \\frac{40 \\cdot (\\sin 15^{\\circ} - 0{,}060 \\cdot \\cos 15^{\\circ})}{0{,}060} = \\frac{40 \\cdot 0{,}2008\\ldots}{0{,}060} = 133{,}9\\ldots\\ \\mathrm{m} \\approx 130\\ \\mathrm{m}
+$$
+
+Rimligt: farten vid backens fot blir $v = \\sqrt{2 \\cdot 9{,}82 \\cdot 40 \\cdot 0{,}2008\\ldots} = 12{,}56\\ldots\\ \\mathrm{m/s}$, ungefär 45 km/h, och på plan mark bromsas kälken bara med $0{,}060 \\cdot 9{,}82 = 0{,}5892\\ \\mathrm{m/s^2}$. Då blir glidsträckan lång.
+
+**Svar:** Kälken glider cirka 130 m på den plana marken.
+
+**c)** Skriv om uttrycket från a):
+
+$$
+s = \\frac{L \\cdot (\\sin \\alpha - \\mu \\cdot \\cos \\alpha)}{\\mu} = L \\cdot \\left( \\frac{\\sin \\alpha}{\\mu} - \\cos \\alpha \\right)
+$$
+
+Ett större friktionstal gör två saker: kälken får lägre fart vid backens fot, **och** den bromsas hårdare på marken. Om friktionstalet fördubblas till 0,12 blir
+
+$$
+s = 40 \\cdot \\left( \\frac{\\sin 15^{\\circ}}{0{,}12} - \\cos 15^{\\circ} \\right) = 47{,}6\\ldots\\ \\mathrm{m}
+$$
+
+vilket är betydligt mindre än halva sträckan, $\\dfrac{133{,}9\\ldots}{2} = 66{,}95\\ldots\\ \\mathrm{m}$. Det räcker alltså med en mindre ökning. Halva sträckan kräver
+
+$$
+L \\cdot \\left( \\frac{\\sin \\alpha}{\\mu_\\text{ny}} - \\cos \\alpha \\right) = \\frac{1}{2} \\cdot L \\cdot \\left( \\frac{\\sin \\alpha}{\\mu} - \\cos \\alpha \\right)
+$$
+
+Vi dividerar båda led med $L$ och adderar $\\cos \\alpha$ till båda led:
+
+$$
+\\frac{\\sin \\alpha}{\\mu_\\text{ny}} = \\frac{1}{2} \\cdot \\frac{\\sin \\alpha}{\\mu} - \\frac{1}{2} \\cdot \\cos \\alpha + \\cos \\alpha
+$$
+
+vilket ger
+
+$$
+\\frac{\\sin \\alpha}{\\mu_\\text{ny}} = \\frac{1}{2} \\cdot \\left( \\frac{\\sin \\alpha}{\\mu} + \\cos \\alpha \\right)
+$$
+
+$$
+\\frac{\\sin 15^{\\circ}}{\\mu_\\text{ny}} = \\frac{1}{2} \\cdot \\left( \\frac{0{,}2588\\ldots}{0{,}060} + 0{,}9659\\ldots \\right) = 2{,}639\\ldots
+$$
+
+$$
+\\mu_\\text{ny} = \\frac{0{,}2588\\ldots}{2{,}639\\ldots} = 0{,}098\\ldots
+$$
+
+Det är ungefär 1,6 gånger det ursprungliga friktionstalet.
+
+**Svar:** Friktionstalet behöver bli mindre än dubbelt så stort (cirka 0,098), eftersom ett större friktionstal både sänker farten i backen och ökar inbromsningen på marken.`,
         },
     ],
     // ═══════════════════════════════════════════════════════════════════
@@ -12901,6 +19170,703 @@ Kontroll: det brantare repet (rep 1) får den största spännkraften, och båda 
 
 **Generell slutsats:** I det asymmetriska fallet räcker det inte att dela tyngden på två. Man måste använda **båda** leden, vågrätt och lodrätt, och lösa ett ekvationssystem. Samma svar fås grafiskt med parallellogrammet i genomgången.`,
         },
+        {
+            level: 1,
+            question: `En skylt med massan 6,0 kg hänger stilla i två lika långa kedjor från taket. Kedjorna bildar vinkeln 70° **med varandra**, enligt figuren. Hur stor är spännkraften i vardera kedjan? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i N.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 296.0 224.0" style="max-width:385px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="30" y1="34" x2="266.0" y2="34" stroke="#0f1620" stroke-width="1.6"/><line x1="34.0" y1="34" x2="41.0" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="46.0" y1="34" x2="53.0" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="58.0" y1="34" x2="65.0" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="70.0" y1="34" x2="77.0" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="82.0" y1="34" x2="89.0" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="94.0" y1="34" x2="101.0" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="106.0" y1="34" x2="113.0" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="118.0" y1="34" x2="125.0" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="130.0" y1="34" x2="137.0" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="142.0" y1="34" x2="149.0" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="154.0" y1="34" x2="161.0" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="166.0" y1="34" x2="173.0" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="178.0" y1="34" x2="185.0" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="190.0" y1="34" x2="197.0" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="202.0" y1="34" x2="209.0" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="214.0" y1="34" x2="221.0" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="226.0" y1="34" x2="233.0" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="238.0" y1="34" x2="245.0" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="250.0" y1="34" x2="257.0" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="262.0" y1="34" x2="269.0" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="64.0" y1="34" x2="148.0" y2="154" stroke="#0f1620" stroke-width="1.8"/><line x1="232.0" y1="34" x2="148.0" y2="154" stroke="#0f1620" stroke-width="1.8"/><line x1="148.0" y1="154" x2="148.0" y2="178" stroke="#0f1620" stroke-width="1.8"/><circle cx="148.0" cy="154" r="2.6" fill="#0f1620"/><rect x="123.0" y="178" width="50" height="32" rx="2" fill="#d3e4f5" stroke="#4f7197" stroke-width="1.4"/><text x="148.0" y="198.5" font-size="13" fill="#0f1620" text-anchor="middle">6,0 kg</text><path d="M 130.8 129.4 A 30 30 0 0 1 165.2 129.4" stroke="#8a8579" stroke-width="1.4" fill="none"/><text x="148.0" y="115.0" font-size="13" fill="#8a8579" text-anchor="middle">70°</text></svg>`,
+            answer: { value: 36, unit: 'N', tol: 0.03 },
+            solution: `**Vinkeln mot det vågräta.** Kedjorna är lika långa, så uppställningen är symmetrisk, och den lodräta linjen genom knuten delar vinkeln 70° mitt itu. Varje kedja bildar alltså vinkeln 35° med det lodräta. Det lodräta och det vågräta står vinkelräta mot varandra, så vinkeln mot det vågräta är
+
+$$
+90^{\\circ} - 35^{\\circ} = 55^{\\circ}
+$$
+
+**Spännkraften.** Skylten hänger stilla, så kedjornas **lodräta komposanter** bär tillsammans tyngdkraften. Kedjorna lutar lika mycket, så de är lika hårt spända. Vi kallar spännkraften $F_\\mathrm{S}$.
+
+$$
+F_\\mathrm{G} = m \\cdot g = 6{,}0 \\cdot 9{,}82 = 58{,}92\\ \\mathrm{N}
+$$
+
+Den lodräta komposanten står mittemot vinkeln 55°, och spännkraften är hypotenusan. Komposanten är alltså $F_\\mathrm{S} \\cdot \\sin 55^{\\circ}$, och två kedjor ger
+
+$$
+2 \\cdot F_\\mathrm{S} \\cdot \\sin 55^{\\circ} = F_\\mathrm{G}
+\\quad\\Leftrightarrow\\quad
+F_\\mathrm{S} = \\frac{F_\\mathrm{G}}{2 \\cdot \\sin 55^{\\circ}}
+$$
+
+$$
+F_\\mathrm{S} = \\frac{58{,}92}{2 \\cdot \\sin 55^{\\circ}} = 35{,}964\\ldots\\ \\mathrm{N} \\approx 36\\ \\mathrm{N}
+$$
+
+Rimlighet: varje kedja bär halva tyngden, 29,46 N, med sin lodräta komposant. Kedjorna lutar, så spännkraften blir något större än så.
+
+**Svar:** Spännkraften i vardera kedjan är cirka 36 N.`,
+        },
+        {
+            level: 1,
+            question: `En lampa hänger stilla i två rep enligt figuren. Rep 1 bildar vinkeln 60° och rep 2 vinkeln 30° med det vågräta. Spännkraften i rep 1 är 30 N. Hur stor del av lampans tyngd bär rep 1, det vill säga hur stor är den **lodräta** komposanten av spännkraften i rep 1? Ange svaret i N.
+
+${makeHangingRopes({ angL: 60, angR: 30, ropeLabels: ['rep 1', 'rep 2'] })}`,
+            answer: { value: 26, unit: 'N', tol: 0.03 },
+            solution: `Spännkraften i rep 1 är riktad längs repet. Vi delar upp den i en vågrät och en lodrät komposant. Spännkraften är hypotenusan i en rätvinklig triangel, och den lodräta komposanten står mittemot vinkeln 60° (motstående katet). Den fås därför med sinus:
+
+$$
+\\sin 60^{\\circ} = \\frac{F_y}{F_\\mathrm{S1}} \\quad\\Leftrightarrow\\quad F_y = F_\\mathrm{S1} \\cdot \\sin 60^{\\circ}
+$$
+
+$$
+F_y = 30 \\cdot \\sin 60^{\\circ} = 25{,}980\\ldots\\ \\mathrm{N} \\approx 26\\ \\mathrm{N}
+$$
+
+Rimlighet: rep 1 är brant, så nästan hela spännkraften pekar uppåt. Den lodräta komposanten ska alltså vara något mindre än 30 N, och det är den. Resten av lampans tyngd bärs av rep 2.
+
+**Svar:** Rep 1 bär cirka 26 N av lampans tyngd.`,
+        },
+        {
+            level: 1,
+            question: `En lampa hänger stilla i två rep enligt figuren. Rep 1 bildar vinkeln 35° och rep 2 vinkeln 65° med det vågräta. I vilket rep är spännkraften störst?
+
+${makeHangingRopes({ angL: 35, angR: 65, ropeLabels: ['rep 1', 'rep 2'] })}`,
+            choices: [
+                `I rep 1.`,
+                `I rep 2.`,
+                `Spännkrafterna är lika stora.`,
+                `Det går inte att avgöra utan lampans massa.`,
+            ],
+            correct: 1,
+            solution: `Lampan rör sig inte i sidled, så de vågräta komposanterna är lika stora:
+
+$$
+F_\\mathrm{S1} \\cdot \\cos 35^{\\circ} = F_\\mathrm{S2} \\cdot \\cos 65^{\\circ}
+$$
+
+Här är $\\cos 65^{\\circ} \\approx 0{,}42$ mindre än $\\cos 35^{\\circ} \\approx 0{,}82$. För att produkterna ska bli lika stora måste $F_\\mathrm{S2}$ alltså vara större än $F_\\mathrm{S1}$, ungefär dubbelt så stor. Det gäller oavsett hur tung lampan är, eftersom massan inte finns med i villkoret i sidled.
+
+Det brantare repet bär alltid mest.
+
+**Svar:** Spännkraften är störst i rep 2, det brantare repet.`,
+        },
+        {
+            level: 1,
+            question: `En hängväxt hänger stilla i två snören som båda bildar vinkeln 45° med det vågräta, enligt figuren. Spännkraften i vardera snöret är 50 N. Bestäm hängväxtens massa. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i kg.
+
+${makeHangingRopes({ angL: 45, angR: 45 })}`,
+            answer: { value: 7.2, unit: 'kg', tol: 0.03 },
+            solution: `Hängväxten hänger stilla, så snörenas **lodräta komposanter** bär tillsammans tyngdkraften. Varje lodrät komposant står mittemot vinkeln och är $F_\\mathrm{S} \\cdot \\sin 45^{\\circ}$:
+
+$$
+F_\\mathrm{G} = 2 \\cdot F_\\mathrm{S} \\cdot \\sin 45^{\\circ} = 2 \\cdot 50 \\cdot \\sin 45^{\\circ} = 70{,}710\\ldots\\ \\mathrm{N}
+$$
+
+Massan fås ur $F_\\mathrm{G} = m \\cdot g$. Vi dividerar båda led med $g$.
+
+$$
+m = \\frac{F_\\mathrm{G}}{g} = \\frac{70{,}710\\ldots}{9{,}82} = 7{,}200\\ldots\\ \\mathrm{kg} \\approx 7{,}2\\ \\mathrm{kg}
+$$
+
+Rimlighet: hängde snörena lodrätt skulle de tillsammans bära 100 N. Nu lutar de, så bara en del av spännkraften pekar uppåt, och tyngden blir mindre än 100 N.
+
+**Svar:** Hängväxtens massa är cirka 7,2 kg.`,
+        },
+        {
+            level: 2,
+            question: `En lampa med massan 3,0 kg hålls uppe av två snören enligt figuren. Snöre 1 går snett upp till taket och bildar vinkeln 50° med det. Snöre 2 går vågrätt in till en vägg.<br>a) Bestäm spännkraften i snöre 1.<br>b) Bestäm spännkraften i snöre 2.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 212" style="max-width:429px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="24" y1="30" x2="300" y2="30" stroke="#0f1620" stroke-width="1.6"/><line x1="28" y1="30" x2="35" y2="22" stroke="#0f1620" stroke-width="1"/><line x1="40" y1="30" x2="47" y2="22" stroke="#0f1620" stroke-width="1"/><line x1="52" y1="30" x2="59" y2="22" stroke="#0f1620" stroke-width="1"/><line x1="64" y1="30" x2="71" y2="22" stroke="#0f1620" stroke-width="1"/><line x1="76" y1="30" x2="83" y2="22" stroke="#0f1620" stroke-width="1"/><line x1="88" y1="30" x2="95" y2="22" stroke="#0f1620" stroke-width="1"/><line x1="100" y1="30" x2="107" y2="22" stroke="#0f1620" stroke-width="1"/><line x1="112" y1="30" x2="119" y2="22" stroke="#0f1620" stroke-width="1"/><line x1="124" y1="30" x2="131" y2="22" stroke="#0f1620" stroke-width="1"/><line x1="136" y1="30" x2="143" y2="22" stroke="#0f1620" stroke-width="1"/><line x1="148" y1="30" x2="155" y2="22" stroke="#0f1620" stroke-width="1"/><line x1="160" y1="30" x2="167" y2="22" stroke="#0f1620" stroke-width="1"/><line x1="172" y1="30" x2="179" y2="22" stroke="#0f1620" stroke-width="1"/><line x1="184" y1="30" x2="191" y2="22" stroke="#0f1620" stroke-width="1"/><line x1="196" y1="30" x2="203" y2="22" stroke="#0f1620" stroke-width="1"/><line x1="208" y1="30" x2="215" y2="22" stroke="#0f1620" stroke-width="1"/><line x1="220" y1="30" x2="227" y2="22" stroke="#0f1620" stroke-width="1"/><line x1="232" y1="30" x2="239" y2="22" stroke="#0f1620" stroke-width="1"/><line x1="244" y1="30" x2="251" y2="22" stroke="#0f1620" stroke-width="1"/><line x1="256" y1="30" x2="263" y2="22" stroke="#0f1620" stroke-width="1"/><line x1="268" y1="30" x2="275" y2="22" stroke="#0f1620" stroke-width="1"/><line x1="280" y1="30" x2="287" y2="22" stroke="#0f1620" stroke-width="1"/><line x1="292" y1="30" x2="299" y2="22" stroke="#0f1620" stroke-width="1"/><line x1="300" y1="30" x2="300" y2="230" stroke="#0f1620" stroke-width="1.6"/><line x1="300" y1="36" x2="308" y2="29" stroke="#0f1620" stroke-width="1"/><line x1="300" y1="48" x2="308" y2="41" stroke="#0f1620" stroke-width="1"/><line x1="300" y1="60" x2="308" y2="53" stroke="#0f1620" stroke-width="1"/><line x1="300" y1="72" x2="308" y2="65" stroke="#0f1620" stroke-width="1"/><line x1="300" y1="84" x2="308" y2="77" stroke="#0f1620" stroke-width="1"/><line x1="300" y1="96" x2="308" y2="89" stroke="#0f1620" stroke-width="1"/><line x1="300" y1="108" x2="308" y2="101" stroke="#0f1620" stroke-width="1"/><line x1="300" y1="120" x2="308" y2="113" stroke="#0f1620" stroke-width="1"/><line x1="300" y1="132" x2="308" y2="125" stroke="#0f1620" stroke-width="1"/><line x1="300" y1="144" x2="308" y2="137" stroke="#0f1620" stroke-width="1"/><line x1="300" y1="156" x2="308" y2="149" stroke="#0f1620" stroke-width="1"/><line x1="300" y1="168" x2="308" y2="161" stroke="#0f1620" stroke-width="1"/><line x1="300" y1="180" x2="308" y2="173" stroke="#0f1620" stroke-width="1"/><line x1="300" y1="192" x2="308" y2="185" stroke="#0f1620" stroke-width="1"/><line x1="300" y1="204" x2="308" y2="197" stroke="#0f1620" stroke-width="1"/><line x1="300" y1="216" x2="308" y2="209" stroke="#0f1620" stroke-width="1"/><line x1="77.7" y1="30.0" x2="170.0" y2="140.0" stroke="#0f1620" stroke-width="1.8"/><line x1="170.0" y1="140.0" x2="300.0" y2="140.0" stroke="#0f1620" stroke-width="1.8"/><line x1="170.0" y1="140.0" x2="170.0" y2="164.0" stroke="#0f1620" stroke-width="1.8"/><circle cx="170.0" cy="140.0" r="2.6" fill="#0f1620"/><circle cx="77.7" cy="30.0" r="2.6" fill="#0f1620"/><circle cx="300.0" cy="140.0" r="2.6" fill="#0f1620"/><rect x="144.0" y="164.0" width="52" height="32" rx="2" fill="#d3e4f5" stroke="#4f7197" stroke-width="1.4"/><text x="170.0" y="184.5" font-size="13" fill="#0f1620" text-anchor="middle">3,0 kg</text><path d="M 107.7 30.0 A 30 30 0 0 1 97.0 53.0" stroke="#8a8579" stroke-width="1.4" fill="none"/><text x="117.6" y="53.1" font-size="13" fill="#8a8579" text-anchor="middle">50°</text><text x="118.2" y="95.0" font-size="13" fill="#0f1620" text-anchor="end">snöre 1</text><text x="240.0" y="132.0" font-size="13" fill="#0f1620" text-anchor="middle">snöre 2</text></svg>
+
+Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaren i N.`,
+            answer: { value: 38, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 38, unit: 'N', tol: 0.03 },
+                { del: 'b', value: 25, unit: 'N', tol: 0.03 },
+            ],
+            solution: `Snöre 2 är vågrätt, så det har **ingen lodrät komposant**. Hela tyngden måste därför bäras av snöre 1.
+
+$$
+F_\\mathrm{G} = m \\cdot g = 3{,}0 \\cdot 9{,}82 = 29{,}46\\ \\mathrm{N}
+$$
+
+**a)** Lodrätt: den lodräta komposanten av $F_\\mathrm{S1}$ står mittemot vinkeln 50° och ska vara lika stor som tyngdkraften.
+
+$$
+F_\\mathrm{S1} \\cdot \\sin 50^{\\circ} = F_\\mathrm{G}
+$$
+
+Vi dividerar båda led med $\\sin 50^{\\circ}$.
+
+$$
+F_\\mathrm{S1} = \\frac{29{,}46}{\\sin 50^{\\circ}} = 38{,}457\\ldots\\ \\mathrm{N} \\approx 38\\ \\mathrm{N}
+$$
+
+**Svar:** Spännkraften i snöre 1 är cirka 38 N.
+
+**b)** Vågrätt: lampan rör sig inte i sidled. Den vågräta komposanten av $F_\\mathrm{S1}$ ligger intill vinkeln, och den ska vara lika stor som hela spännkraften i det vågräta snöre 2.
+
+$$
+F_\\mathrm{S2} = F_\\mathrm{S1} \\cdot \\cos 50^{\\circ} = 38{,}457\\ldots \\cdot \\cos 50^{\\circ} = 24{,}719\\ldots\\ \\mathrm{N} \\approx 25\\ \\mathrm{N}
+$$
+
+Rimlighet: snöre 1 bär hela tyngden fast bara en del av kraften pekar uppåt, så $F_\\mathrm{S1}$ ska vara större än tyngdkraften 29,46 N. Det är den.
+
+**Svar:** Spännkraften i snöre 2 är cirka 25 N.`,
+        },
+        {
+            level: 2,
+            question: `En tvättlina tål en spännkraft på högst 200 N innan den går av. Ett blött täcke med massan 5,0 kg hängs mitt på linan, så att linans två halvor lutar lika mycket. Hur liten får vinkeln mellan linan och det vågräta bli innan linan går av? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i grader.`,
+            answer: { value: 7.1, unit: '°', tol: 0.03 },
+            solution: `Ju flackare linan är, desto större blir spännkraften, eftersom $\\sin \\alpha$ blir mindre. Den minsta tillåtna vinkeln är alltså den vinkel där spännkraften är precis 200 N.
+
+$$
+\\left[ \\begin{array}{l}
+F_\\mathrm{S} = 200\\ \\mathrm{N} \\\\
+F_\\mathrm{G} = m \\cdot g = 5{,}0 \\cdot 9{,}82 = 49{,}1\\ \\mathrm{N}
+\\end{array} \\right]
+$$
+
+Linans två halvor bär tillsammans tyngden med sina lodräta komposanter:
+
+$$
+2 \\cdot F_\\mathrm{S} \\cdot \\sin \\alpha = F_\\mathrm{G}
+$$
+
+Vi dividerar båda led med $2 \\cdot F_\\mathrm{S}$.
+
+$$
+\\sin \\alpha = \\frac{F_\\mathrm{G}}{2 \\cdot F_\\mathrm{S}} = \\frac{49{,}1}{2 \\cdot 200} = 0{,}12275
+$$
+
+$$
+\\alpha = \\sin^{-1} 0{,}12275 = 7{,}050\\ldots^{\\circ} \\approx 7{,}1^{\\circ}
+$$
+
+Rimlighet: vid en ännu mindre vinkel blir $\\sin \\alpha$ mindre än 0,12275, och då måste spännkraften bli större än 200 N för att bära täcket.
+
+**Svar:** Vinkeln får inte bli mindre än cirka 7,1°.`,
+        },
+        {
+            level: 2,
+            question: `En elev hänger en vikt i två snören som bildar lika stor vinkel *α* med det vågräta. Hon ändrar vinkeln och mäter varje gång spännkraften i det ena snöret med en dynamometer. Resultaten står i tabellen. Vid 90° hänger båda snörena lodrätt.
+
+| Vinkel *α* | 20° | 30° | 45° | 60° | 90° |
+|---|---|---|---|---|---|
+| Spännkraft $F_\\mathrm{S}$ (N) | 29 | 20 | 14 | 15 | 9,8 |
+
+a) Bestäm viktens massa. Ange svaret i kg.<br>b) En av mätningarna måste vara felaktig. Vilken? Motivera med en beräkning.
+
+Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            answer: { value: 2.0, unit: 'kg', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 2.0, unit: 'kg', tol: 0.03 },
+                { del: 'b' },
+            ],
+            solution: `**a)** Vid 90° hänger snörena lodrätt. Då pekar hela spännkraften uppåt, och varje snöre bär halva tyngden:
+
+$$
+F_\\mathrm{G} = 2 \\cdot 9{,}8 = 19{,}6\\ \\mathrm{N}
+$$
+
+Massan fås ur $F_\\mathrm{G} = m \\cdot g$:
+
+$$
+m = \\frac{F_\\mathrm{G}}{g} = \\frac{19{,}6}{9{,}82} = 1{,}995\\ldots\\ \\mathrm{kg} \\approx 2{,}0\\ \\mathrm{kg}
+$$
+
+**Svar:** Viktens massa är cirka 2,0 kg.
+
+**b)** I det symmetriska fallet gäller $2 \\cdot F_\\mathrm{S} \\cdot \\sin \\alpha = F_\\mathrm{G}$, alltså $F_\\mathrm{S} = \\dfrac{F_\\mathrm{G}}{2 \\cdot \\sin \\alpha}$. Med $F_\\mathrm{G} = 19{,}6\\ \\mathrm{N}$ blir de väntade värdena
+
+$$
+\\frac{19{,}6}{2 \\cdot \\sin 20^{\\circ}} = 28{,}653\\ldots\\ \\mathrm{N}
+\\qquad
+\\frac{19{,}6}{2 \\cdot \\sin 30^{\\circ}} = 19{,}6\\ \\mathrm{N}
+$$
+
+$$
+\\frac{19{,}6}{2 \\cdot \\sin 45^{\\circ}} = 13{,}859\\ldots\\ \\mathrm{N}
+\\qquad
+\\frac{19{,}6}{2 \\cdot \\sin 60^{\\circ}} = 11{,}316\\ldots\\ \\mathrm{N}
+$$
+
+Mätningarna vid 20°, 30° och 45° stämmer (29 N, 20 N och 14 N). Vid 60° borde spännkraften vara ungefär 11 N, men eleven har fått 15 N. Det syns också utan räkning: spännkraften ska minska när snörena blir brantare, men 15 N är mer än de 14 N som uppmättes vid 45°.
+
+**Svar:** Mätningen vid 60° är felaktig. Den borde ha gett cirka 11 N.`,
+        },
+        {
+            level: 2,
+            question: `En fågelholk hänger stilla i två snören enligt figuren. Snöre 1 bildar vinkeln 40° och snöre 2 vinkeln 25° med det vågräta. En dynamometer visar att spännkraften i snöre 1 är 30 N.<br>a) Hur stor är spännkraften i snöre 2? Ange svaret i N.<br>b) Hur stor är fågelholkens massa? Ange svaret i kg.
+
+${makeHangingRopes({ angL: 40, angR: 25, ropeLabels: ['snöre 1', 'snöre 2'] })}
+
+Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            answer: { value: 25, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 25, unit: 'N', tol: 0.03 },
+                { del: 'b', value: 3.1, unit: 'kg', tol: 0.03 },
+            ],
+            solution: `**a)** Vågrätt: holken rör sig inte i sidled, så de vågräta komposanterna (cosinus, intill vinklarna) är lika stora.
+
+$$
+F_\\mathrm{S1} \\cdot \\cos 40^{\\circ} = F_\\mathrm{S2} \\cdot \\cos 25^{\\circ}
+$$
+
+Vi dividerar båda led med $\\cos 25^{\\circ}$.
+
+$$
+F_\\mathrm{S2} = \\frac{30 \\cdot \\cos 40^{\\circ}}{\\cos 25^{\\circ}} = 25{,}357\\ldots\\ \\mathrm{N} \\approx 25\\ \\mathrm{N}
+$$
+
+**Svar:** Spännkraften i snöre 2 är cirka 25 N.
+
+**b)** Lodrätt: de lodräta komposanterna (sinus, mittemot vinklarna) bär tillsammans tyngdkraften.
+
+$$
+F_\\mathrm{G} = F_\\mathrm{S1} \\cdot \\sin 40^{\\circ} + F_\\mathrm{S2} \\cdot \\sin 25^{\\circ}
+$$
+
+$$
+F_\\mathrm{G} = 30 \\cdot \\sin 40^{\\circ} + 25{,}357\\ldots \\cdot \\sin 25^{\\circ} = 19{,}283\\ldots + 10{,}716\\ldots \\approx 30{,}0\\ \\mathrm{N}
+$$
+
+Massan fås ur $F_\\mathrm{G} = m \\cdot g$:
+
+$$
+m = \\frac{F_\\mathrm{G}}{g} = \\frac{30{,}0}{9{,}82} = 3{,}054\\ldots\\ \\mathrm{kg} \\approx 3{,}1\\ \\mathrm{kg}
+$$
+
+Rimlighet: det brantare snöre 1 har den största spännkraften. Snörena lutar ganska flackt, så bara en del av varje spännkraft pekar uppåt: de lodräta komposanterna ger tillsammans 30 N, fast spännkrafterna tillsammans är cirka 55 N.
+
+**Svar:** Fågelholkens massa är cirka 3,1 kg.`,
+        },
+        {
+            level: 2,
+            question: `En boxningssäck med massan 25 kg hänger mitt på ett rep som är spänt mellan två stolpar, enligt figuren. Repets två halvor bildar vinkeln 15° med det vågräta. Hur stor vågrät kraft drar repet i var och en av stolparna med? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i N.
+
+${makeHangingRopes({ angL: 15, angR: 15, mass: '25 kg', posts: true, half: 200 })}`,
+            answer: { value: 460, unit: 'N', tol: 0.03 },
+            solution: `Först spännkraften i repet. Säcken hänger stilla, och repets två halvor bär tillsammans tyngden med sina lodräta komposanter.
+
+$$
+F_\\mathrm{G} = m \\cdot g = 25 \\cdot 9{,}82 = 245{,}5\\ \\mathrm{N}
+$$
+
+$$
+2 \\cdot F_\\mathrm{S} \\cdot \\sin 15^{\\circ} = F_\\mathrm{G}
+\\quad\\Leftrightarrow\\quad
+F_\\mathrm{S} = \\frac{F_\\mathrm{G}}{2 \\cdot \\sin 15^{\\circ}}
+$$
+
+$$
+F_\\mathrm{S} = \\frac{245{,}5}{2 \\cdot \\sin 15^{\\circ}} = 474{,}269\\ldots\\ \\mathrm{N}
+$$
+
+Repet drar i stolpen längs sig självt. Den vågräta delen av den kraften är spännkraftens vågräta komposant, som ligger intill vinkeln och fås med cosinus:
+
+$$
+F_x = F_\\mathrm{S} \\cdot \\cos 15^{\\circ} = 474{,}269\\ldots \\cdot \\cos 15^{\\circ} = 458{,}109\\ldots\\ \\mathrm{N} \\approx 460\\ \\mathrm{N}
+$$
+
+Rimlighet: repet är ganska flackt, så stolparna dras inåt med nästan dubbelt så stor kraft som säckens tyngd. Därför behöver stolpar som håller ett spänt rep ofta stagas.
+
+**Svar:** Repet drar i varje stolpe med en vågrät kraft på cirka 460 N.`,
+        },
+        {
+            level: 3,
+            question: `En lampa hänger i två snören som bildar **rät vinkel** med varandra vid knuten. Snöre 1 bildar vinkeln *α* och snöre 2 vinkeln *β* med det vågräta, så att $\\alpha + \\beta = 90^{\\circ}$.<br>a) Visa att spännkrafterna är $F_\\mathrm{S1} = F_\\mathrm{G} \\cdot \\sin \\alpha$ och $F_\\mathrm{S2} = F_\\mathrm{G} \\cdot \\cos \\alpha$.<br>b) Visa att $F_\\mathrm{S1}^2 + F_\\mathrm{S2}^2 = F_\\mathrm{G}^2$ och förklara vad det betyder för hur krafterna kan ritas.<br>c) Lampans massa är 3,0 kg och $\\alpha = 70^{\\circ}$. Beräkna spännkrafterna. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaren i N.`,
+            answer: { value: 28, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+                { del: 'c', value: 28, unit: 'N', tol: 0.03, etikett: '$F_\\mathrm{S1}$' },
+                { del: 'c', value: 10, unit: 'N', tol: 0.03, etikett: '$F_\\mathrm{S2}$' },
+            ],
+            solution: `**a)** Snörena bildar rät vinkel med varandra, och tillsammans med det vågräta bildar de en rätvinklig triangel med de spetsiga vinklarna *α* och *β*. Den katet som står mittemot *α* ligger intill *β*, och tvärtom. Därför gäller
+
+$$
+\\cos \\beta = \\sin \\alpha \\qquad \\sin \\beta = \\cos \\alpha
+$$
+
+Jämviktsvillkoren blir då
+
+$$
+F_\\mathrm{S1} \\cdot \\cos \\alpha = F_\\mathrm{S2} \\cdot \\sin \\alpha \\tag{1}
+$$
+
+$$
+F_\\mathrm{S1} \\cdot \\sin \\alpha + F_\\mathrm{S2} \\cdot \\cos \\alpha = F_\\mathrm{G} \\tag{2}
+$$
+
+Ur (1) får vi, genom att dividera båda led med $\\sin \\alpha$,
+
+$$
+F_\\mathrm{S2} = F_\\mathrm{S1} \\cdot \\frac{\\cos \\alpha}{\\sin \\alpha}
+$$
+
+Detta insatt i (2), $F_\\mathrm{S1} \\cdot \\sin \\alpha + F_\\mathrm{S2} \\cdot \\cos \\alpha = F_\\mathrm{G}$, ger
+
+$$
+F_\\mathrm{S1} \\cdot \\sin \\alpha + F_\\mathrm{S1} \\cdot \\frac{\\cos^2 \\alpha}{\\sin \\alpha} = F_\\mathrm{G}
+$$
+
+Vi multiplicerar båda led med $\\sin \\alpha$ och bryter ut $F_\\mathrm{S1}$.
+
+$$
+F_\\mathrm{S1} \\cdot (\\sin^2 \\alpha + \\cos^2 \\alpha) = F_\\mathrm{G} \\cdot \\sin \\alpha
+$$
+
+Enligt Pythagoras sats i en rätvinklig triangel med hypotenusan 1 är $\\sin^2 \\alpha + \\cos^2 \\alpha = 1$ (trigonometriska ettan). Alltså är
+
+$$
+F_\\mathrm{S1} = F_\\mathrm{G} \\cdot \\sin \\alpha
+$$
+
+och insatt i uttrycket för $F_\\mathrm{S2}$:
+
+$$
+F_\\mathrm{S2} = F_\\mathrm{G} \\cdot \\sin \\alpha \\cdot \\frac{\\cos \\alpha}{\\sin \\alpha} = F_\\mathrm{G} \\cdot \\cos \\alpha
+$$
+
+**b)** Vi kvadrerar och adderar uttrycken från a):
+
+$$
+F_\\mathrm{S1}^2 + F_\\mathrm{S2}^2 = F_\\mathrm{G}^2 \\cdot \\sin^2 \\alpha + F_\\mathrm{G}^2 \\cdot \\cos^2 \\alpha = F_\\mathrm{G}^2 \\cdot (\\sin^2 \\alpha + \\cos^2 \\alpha) = F_\\mathrm{G}^2
+$$
+
+Det är Pythagoras sats. Ritas spännkrafterna efter varandra, spets mot svans, bildar de kateterna i en rätvinklig triangel vars hypotenusa är lika lång som tyngdkraften. Parallellogrammet från genomgången blir här en rektangel med diagonalen $F_\\mathrm{G}$.
+
+**c)**
+
+$$
+F_\\mathrm{G} = m \\cdot g = 3{,}0 \\cdot 9{,}82 = 29{,}46\\ \\mathrm{N}
+$$
+
+$$
+F_\\mathrm{S1} = 29{,}46 \\cdot \\sin 70^{\\circ} = 27{,}683\\ldots\\ \\mathrm{N} \\approx 28\\ \\mathrm{N}
+$$
+
+$$
+F_\\mathrm{S2} = 29{,}46 \\cdot \\cos 70^{\\circ} = 10{,}075\\ldots\\ \\mathrm{N} \\approx 10\\ \\mathrm{N}
+$$
+
+Rimlighet: det branta snöre 1 bär nästan hela tyngden, och båda spännkrafterna är mindre än $F_\\mathrm{G}$, som de ska vara när de är kateter till den.
+
+**Svar:** $F_\\mathrm{S1} \\approx 28\\ \\mathrm{N}$ och $F_\\mathrm{S2} \\approx 10\\ \\mathrm{N}$`,
+        },
+        {
+            level: 3,
+            question: `En lampa med massan 2,0 kg hänger i två snören från två krokar som sitter på samma höjd, 1,0 m från varandra. Snöre 1 är 0,60 m och snöre 2 är 0,80 m långt, enligt figuren. Inga vinklar är givna.<br>a) Bestäm spännkraften i snöre 1.<br>b) Bestäm spännkraften i snöre 2.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 262" style="max-width:550px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="46" y="42" width="348" height="8" fill="#c9b79a" stroke="#8a6f4e" stroke-width="1.2"/><line x1="70" y1="24" x2="370" y2="24" stroke="#8a8579" stroke-width="1.3"/><polygon points="70,24 77,20.5 77,27.5" fill="#8a8579"/><polygon points="370,24 363,20.5 363,27.5" fill="#8a8579"/><line x1="70" y1="28" x2="70" y2="40" stroke="#8a8579" stroke-width="1" stroke-dasharray="3 3"/><line x1="370" y1="28" x2="370" y2="40" stroke="#8a8579" stroke-width="1" stroke-dasharray="3 3"/><text x="220.0" y="18.0" font-size="13" fill="#8a8579" text-anchor="middle">1,0 m</text><line x1="70.0" y1="50.0" x2="178.0" y2="194.0" stroke="#0f1620" stroke-width="1.8"/><line x1="370.0" y1="50.0" x2="178.0" y2="194.0" stroke="#0f1620" stroke-width="1.8"/><line x1="178.0" y1="194.0" x2="178.0" y2="214.0" stroke="#0f1620" stroke-width="1.8"/><circle cx="70.0" cy="50.0" r="2.6" fill="#0f1620"/><circle cx="370.0" cy="50.0" r="2.6" fill="#0f1620"/><circle cx="178.0" cy="194.0" r="2.6" fill="#0f1620"/><rect x="150.0" y="214.0" width="56" height="32" rx="2" fill="#d3e4f5" stroke="#4f7197" stroke-width="1.4"/><text x="178.0" y="234.5" font-size="13" fill="#0f1620" text-anchor="middle">2,0 kg</text><text x="111.2" y="135.6" font-size="13" fill="#0f1620" text-anchor="end">snöre 1: 0,60 m</text><text x="283.6" y="138.8" font-size="13" fill="#0f1620" text-anchor="start">snöre 2: 0,80 m</text></svg>
+
+Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaren i N.`,
+            answer: { value: 16, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 16, unit: 'N', tol: 0.03 },
+                { del: 'b', value: 12, unit: 'N', tol: 0.03 },
+            ],
+            solution: `**Vinklarna.** Snörena och avståndet mellan krokarna bildar en triangel med sidorna 0,60 m, 0,80 m och 1,0 m. Eftersom
+
+$$
+0{,}60^2 + 0{,}80^2 = 0{,}36 + 0{,}64 = 1{,}0
+$$
+
+är triangeln rätvinklig (Pythagoras sats åt andra hållet), med den räta vinkeln vid knuten. Avståndet mellan krokarna är hypotenusan. Vid krok 1 ligger snöre 1 intill vinkeln *α*, och vid krok 2 ligger snöre 2 intill vinkeln *β*:
+
+$$
+\\cos \\alpha = \\frac{0{,}60}{1{,}0} = 0{,}60
+\\qquad
+\\cos \\beta = \\frac{0{,}80}{1{,}0} = 0{,}80
+$$
+
+Motstående kateter ger på samma sätt $\\sin \\alpha = 0{,}80$ och $\\sin \\beta = 0{,}60$. (Vill man inte se den räta vinkeln går vinklarna också att få med cosinussatsen. Det ger $\\alpha = 53{,}13\\ldots^{\\circ}$ och $\\beta = 36{,}86\\ldots^{\\circ}$.)
+
+**Jämvikt.** Med $F_\\mathrm{G} = m \\cdot g = 2{,}0 \\cdot 9{,}82 = 19{,}64\\ \\mathrm{N}$ blir villkoren
+
+$$
+F_\\mathrm{S1} \\cdot 0{,}60 = F_\\mathrm{S2} \\cdot 0{,}80 \\tag{1}
+$$
+
+$$
+F_\\mathrm{S1} \\cdot 0{,}80 + F_\\mathrm{S2} \\cdot 0{,}60 = 19{,}64 \\tag{2}
+$$
+
+Ur (1), genom att dividera båda led med 0,60:
+
+$$
+F_\\mathrm{S1} = \\frac{0{,}80}{0{,}60} \\cdot F_\\mathrm{S2} = 1{,}333\\ldots \\cdot F_\\mathrm{S2}
+$$
+
+Detta insatt i (2), $F_\\mathrm{S1} \\cdot 0{,}80 + F_\\mathrm{S2} \\cdot 0{,}60 = 19{,}64$, ger
+
+$$
+1{,}333\\ldots \\cdot 0{,}80 \\cdot F_\\mathrm{S2} + 0{,}60 \\cdot F_\\mathrm{S2} = 19{,}64
+$$
+
+$$
+1{,}666\\ldots \\cdot F_\\mathrm{S2} = 19{,}64
+$$
+
+Vi dividerar båda led med talet framför $F_\\mathrm{S2}$.
+
+$$
+F_\\mathrm{S2} = \\frac{19{,}64}{1{,}666\\ldots} = 11{,}784\\ \\mathrm{N}
+$$
+
+$$
+F_\\mathrm{S1} = 1{,}333\\ldots \\cdot 11{,}784 = 15{,}712\\ \\mathrm{N}
+$$
+
+Rimlighet: det kortare snöret är brantare och bär mest. Snörena står vinkelräta mot varandra, så spännkrafterna ska vara kateter till tyngdkraften: både $15{,}712^2 + 11{,}784^2$ och $19{,}64^2$ blir 385,7, så det stämmer.
+
+**a)** **Svar:** Spännkraften i snöre 1 är cirka 16 N.
+
+**b)** **Svar:** Spännkraften i snöre 2 är cirka 12 N.`,
+        },
+        {
+            level: 3,
+            question: `En lampa med massan 3,0 kg hänger i en ring som kan glida fritt längs ett 2,0 m långt rep. Repets ändar sitter i två väggar som står 1,6 m isär, och den ena fästpunkten sitter 0,40 m högre än den andra, enligt figuren. Friktionen mellan ringen och repet försummas.<br>a) Visa att repets två delar bildar lika stor vinkel med det vågräta.<br>b) Bestäm spännkraften i repet. Ange svaret i N.<br>c) Den högre fästpunkten flyttas 0,30 m längre upp. Hur ändras spännkraften? Motivera.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 266" style="max-width:468px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="50" y1="20" x2="50" y2="236" stroke="#0f1620" stroke-width="1.6"/><line x1="50" y1="24" x2="42" y2="31" stroke="#0f1620" stroke-width="1"/><line x1="50" y1="36" x2="42" y2="43" stroke="#0f1620" stroke-width="1"/><line x1="50" y1="48" x2="42" y2="55" stroke="#0f1620" stroke-width="1"/><line x1="50" y1="60" x2="42" y2="67" stroke="#0f1620" stroke-width="1"/><line x1="50" y1="72" x2="42" y2="79" stroke="#0f1620" stroke-width="1"/><line x1="50" y1="84" x2="42" y2="91" stroke="#0f1620" stroke-width="1"/><line x1="50" y1="96" x2="42" y2="103" stroke="#0f1620" stroke-width="1"/><line x1="50" y1="108" x2="42" y2="115" stroke="#0f1620" stroke-width="1"/><line x1="50" y1="120" x2="42" y2="127" stroke="#0f1620" stroke-width="1"/><line x1="50" y1="132" x2="42" y2="139" stroke="#0f1620" stroke-width="1"/><line x1="50" y1="144" x2="42" y2="151" stroke="#0f1620" stroke-width="1"/><line x1="50" y1="156" x2="42" y2="163" stroke="#0f1620" stroke-width="1"/><line x1="50" y1="168" x2="42" y2="175" stroke="#0f1620" stroke-width="1"/><line x1="50" y1="180" x2="42" y2="187" stroke="#0f1620" stroke-width="1"/><line x1="50" y1="192" x2="42" y2="199" stroke="#0f1620" stroke-width="1"/><line x1="50" y1="204" x2="42" y2="211" stroke="#0f1620" stroke-width="1"/><line x1="50" y1="216" x2="42" y2="223" stroke="#0f1620" stroke-width="1"/><line x1="50" y1="228" x2="42" y2="235" stroke="#0f1620" stroke-width="1"/><line x1="310" y1="20" x2="310" y2="236" stroke="#0f1620" stroke-width="1.6"/><line x1="310" y1="24" x2="318" y2="31" stroke="#0f1620" stroke-width="1"/><line x1="310" y1="36" x2="318" y2="43" stroke="#0f1620" stroke-width="1"/><line x1="310" y1="48" x2="318" y2="55" stroke="#0f1620" stroke-width="1"/><line x1="310" y1="60" x2="318" y2="67" stroke="#0f1620" stroke-width="1"/><line x1="310" y1="72" x2="318" y2="79" stroke="#0f1620" stroke-width="1"/><line x1="310" y1="84" x2="318" y2="91" stroke="#0f1620" stroke-width="1"/><line x1="310" y1="96" x2="318" y2="103" stroke="#0f1620" stroke-width="1"/><line x1="310" y1="108" x2="318" y2="115" stroke="#0f1620" stroke-width="1"/><line x1="310" y1="120" x2="318" y2="127" stroke="#0f1620" stroke-width="1"/><line x1="310" y1="132" x2="318" y2="139" stroke="#0f1620" stroke-width="1"/><line x1="310" y1="144" x2="318" y2="151" stroke="#0f1620" stroke-width="1"/><line x1="310" y1="156" x2="318" y2="163" stroke="#0f1620" stroke-width="1"/><line x1="310" y1="168" x2="318" y2="175" stroke="#0f1620" stroke-width="1"/><line x1="310" y1="180" x2="318" y2="187" stroke="#0f1620" stroke-width="1"/><line x1="310" y1="192" x2="318" y2="199" stroke="#0f1620" stroke-width="1"/><line x1="310" y1="204" x2="318" y2="211" stroke="#0f1620" stroke-width="1"/><line x1="310" y1="216" x2="318" y2="223" stroke="#0f1620" stroke-width="1"/><line x1="310" y1="228" x2="318" y2="235" stroke="#0f1620" stroke-width="1"/><line x1="50" y1="46.0" x2="223.3" y2="176.0" stroke="#0f1620" stroke-width="1.8"/><line x1="310" y1="111.0" x2="223.3" y2="176.0" stroke="#0f1620" stroke-width="1.8"/><circle cx="50" cy="46.0" r="2.6" fill="#0f1620"/><circle cx="310" cy="111.0" r="2.6" fill="#0f1620"/><line x1="223.3" y1="180.5" x2="223.3" y2="198.0" stroke="#0f1620" stroke-width="1.8"/><circle cx="223.3" cy="176.0" r="4.5" fill="#fff" stroke="#0f1620" stroke-width="1.6"/><rect x="198.3" y="198.0" width="50" height="30" rx="2" fill="#d3e4f5" stroke="#4f7197" stroke-width="1.4"/><text x="223.3" y="217.5" font-size="13" fill="#0f1620" text-anchor="middle">3,0 kg</text><line x1="50" y1="46.0" x2="310" y2="46.0" stroke="#8a8579" stroke-width="1.2" stroke-dasharray="5 4"/><line x1="296" y1="47.0" x2="296" y2="110.0" stroke="#8a8579" stroke-width="1.3"/><polygon points="296,47.0 292.5,54.0 299.5,54.0" fill="#8a8579"/><polygon points="296,110.0 292.5,103.0 299.5,103.0" fill="#8a8579"/><text x="289" y="83.0" font-size="13" fill="#8a8579" text-anchor="end">0,40 m</text><line x1="51" y1="252" x2="309" y2="252" stroke="#8a8579" stroke-width="1.3"/><polygon points="51,252 58,248.5 58,255.5" fill="#8a8579"/><polygon points="309,252 302,248.5 302,255.5" fill="#8a8579"/><line x1="50" y1="236" x2="50" y2="258" stroke="#8a8579" stroke-width="1" stroke-dasharray="3 3"/><line x1="310" y1="236" x2="310" y2="258" stroke="#8a8579" stroke-width="1" stroke-dasharray="3 3"/><text x="180" y="246" font-size="13" fill="#8a8579" text-anchor="middle">1,6 m</text></svg>
+
+Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            answer: { value: 25, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 25, unit: 'N', tol: 0.03 },
+                { del: 'c' },
+            ],
+            solution: `**a)** Ringen glider fritt, så repet kan löpa genom den. Vore den ena delen hårdare spänd än den andra skulle repet glida genom ringen tills spännkrafterna blev lika. När lampan hänger stilla är därför spännkraften $F_\\mathrm{S}$ lika stor i båda delarna, precis som i ett snöre över en friktionsfri trissa.
+
+Kalla delarnas vinklar mot det vågräta *α* och *β*. Ringen rör sig inte i sidled, så de vågräta komposanterna (intill vinklarna, cosinus) är lika stora:
+
+$$
+F_\\mathrm{S} \\cdot \\cos \\alpha = F_\\mathrm{S} \\cdot \\cos \\beta
+$$
+
+Vi dividerar båda led med $F_\\mathrm{S}$.
+
+$$
+\\cos \\alpha = \\cos \\beta
+$$
+
+Båda vinklarna ligger mellan 0° och 90°, så de är lika stora: $\\alpha = \\beta$.
+
+**Svar:** Repets två delar bildar samma vinkel *α* med det vågräta, eftersom de är lika hårt spända och deras vågräta komposanter ska ta ut varandra.
+
+**b)** **Vinkeln ur geometrin.** Kalla delarnas längder $L_1$ och $L_2$, där $L_1 + L_2 = 2{,}0\\ \\mathrm{m}$. Varje del är hypotenusan i en rätvinklig triangel, och den vågräta kateten ligger intill vinkeln *α*. De två vågräta kateterna når tillsammans från vägg till vägg:
+
+$$
+L_1 \\cdot \\cos \\alpha + L_2 \\cdot \\cos \\alpha = 1{,}6
+$$
+
+Vi bryter ut $\\cos \\alpha$ och sätter in $L_1 + L_2 = 2{,}0$.
+
+$$
+2{,}0 \\cdot \\cos \\alpha = 1{,}6
+$$
+
+Vi dividerar båda led med 2,0.
+
+$$
+\\cos \\alpha = \\frac{1{,}6}{2{,}0} = 0{,}80
+\\quad\\Leftrightarrow\\quad
+\\alpha = \\cos^{-1} 0{,}80 = 36{,}869\\ldots^{\\circ}
+$$
+
+**Spännkraften.** Delarna har samma spännkraft och samma vinkel, så deras lodräta komposanter (mittemot vinkeln, sinus) är lika stora och bär tillsammans tyngdkraften:
+
+$$
+\\left[ \\begin{array}{l}
+F_\\mathrm{G} = m \\cdot g = 3{,}0 \\cdot 9{,}82 = 29{,}46\\ \\mathrm{N} \\\\
+\\alpha = 36{,}869\\ldots^{\\circ}
+\\end{array} \\right]
+$$
+
+$$
+2 \\cdot F_\\mathrm{S} \\cdot \\sin \\alpha = F_\\mathrm{G}
+\\quad\\Leftrightarrow\\quad
+F_\\mathrm{S} = \\frac{F_\\mathrm{G}}{2 \\cdot \\sin \\alpha}
+$$
+
+$$
+F_\\mathrm{S} = \\frac{29{,}46}{2 \\cdot \\sin 36{,}869\\ldots^{\\circ}} = 24{,}55\\ \\mathrm{N} \\approx 25\\ \\mathrm{N}
+$$
+
+Rimlighet: varje del bär halva tyngden, 14,73 N, med sin lodräta komposant. Repet lutar, så spännkraften ska vara större än så, och det är den.
+
+**Svar:** Spännkraften i repet är cirka 25 N.
+
+**c)** I b) bestämdes vinkeln enbart av repets längd och avståndet mellan väggarna, $\\cos \\alpha = \\dfrac{1{,}6}{2{,}0}$. Höjdskillnaden mellan fästpunkterna fanns aldrig med. När fästpunkten flyttas uppåt glider ringen till ett nytt läge längs repet, men vinkeln blir densamma, och därmed också spännkraften $F_\\mathrm{S} = \\dfrac{F_\\mathrm{G}}{2 \\cdot \\sin \\alpha}$.
+
+**Svar:** Spännkraften ändras inte. Den är fortfarande cirka 25 N, eftersom vinkeln bara beror på repets längd och avståndet mellan väggarna.`,
+        },
+        {
+            level: 3,
+            question: `En lampa med massan 4,0 kg hänger i två snören. Snöre 1 bildar alltid vinkeln 60° med det vågräta. Snöre 2 kan fästas i olika punkter i taket, så att dess vinkel *β* mot det vågräta kan ändras.<br>a) Vilken vinkel *β* ger den minsta spännkraften i snöre 2? Ange svaret i grader.<br>b) Hur stor är den minsta spännkraften? Ange svaret i N.
+
+Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            answer: { value: 20, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 30, unit: '°', tol: 0.03 },
+                { del: 'b', value: 20, unit: 'N', tol: 0.03 },
+            ],
+            solution: `**Ett uttryck för spännkraften i snöre 2.** Vi ställer upp jämvikten med en godtycklig vinkel *β*.
+
+$$
+F_\\mathrm{S1} \\cdot \\cos 60^{\\circ} = F_\\mathrm{S2} \\cdot \\cos \\beta \\tag{1}
+$$
+
+$$
+F_\\mathrm{S1} \\cdot \\sin 60^{\\circ} + F_\\mathrm{S2} \\cdot \\sin \\beta = F_\\mathrm{G} \\tag{2}
+$$
+
+Ur (1), genom att dividera båda led med $\\cos 60^{\\circ}$:
+
+$$
+F_\\mathrm{S1} = F_\\mathrm{S2} \\cdot \\frac{\\cos \\beta}{\\cos 60^{\\circ}}
+$$
+
+Detta insatt i (2), $F_\\mathrm{S1} \\cdot \\sin 60^{\\circ} + F_\\mathrm{S2} \\cdot \\sin \\beta = F_\\mathrm{G}$, ger, eftersom $\\dfrac{\\sin 60^{\\circ}}{\\cos 60^{\\circ}} = \\tan 60^{\\circ}$,
+
+$$
+F_\\mathrm{S2} \\cdot \\cos \\beta \\cdot \\tan 60^{\\circ} + F_\\mathrm{S2} \\cdot \\sin \\beta = F_\\mathrm{G}
+$$
+
+Vi bryter ut $F_\\mathrm{S2}$ och dividerar båda led med parentesen.
+
+$$
+F_\\mathrm{S2} = \\frac{F_\\mathrm{G}}{\\tan 60^{\\circ} \\cdot \\cos \\beta + \\sin \\beta}
+$$
+
+**Undersök vinkeln.** Med $F_\\mathrm{G} = m \\cdot g = 4{,}0 \\cdot 9{,}82 = 39{,}28\\ \\mathrm{N}$ ger uttrycket
+
+| *β* | 0° | 10° | 20° | 30° | 40° | 50° | 60° |
+|---|---|---|---|---|---|---|---|
+| $F_\\mathrm{S2}$ (N) | 22,7 | 20,9 | 19,9 | 19,6 | 19,9 | 20,9 | 22,7 |
+
+Spännkraften är minst vid 30°, och värdena är symmetriska kring den vinkeln. Vid $\\beta = 30^{\\circ}$ är $\\alpha + \\beta = 90^{\\circ}$, alltså står snörena **vinkelräta** mot varandra.
+
+Det går också att se med en kraftfigur. Spännkrafterna ska tillsammans ta ut tyngdkraften. Ritas $F_\\mathrm{S1}$ och $F_\\mathrm{S2}$ efter varandra ska de nå från föremålet till spetsen av en pil rakt uppåt som är lika lång som $F_\\mathrm{G}$. $F_\\mathrm{S1}$ ligger alltid längs samma linje, och $F_\\mathrm{S2}$ går från den linjen till pilens spets. Den kortaste vägen från en punkt till en linje är vinkelrät mot linjen, så $F_\\mathrm{S2}$ blir minst när den är vinkelrät mot $F_\\mathrm{S1}$.
+
+**a)** **Svar:** Spännkraften i snöre 2 blir minst när $\\beta = 30^{\\circ}$.
+
+**b)**
+
+$$
+F_\\mathrm{S2} = \\frac{39{,}28}{\\tan 60^{\\circ} \\cdot \\cos 30^{\\circ} + \\sin 30^{\\circ}} = 19{,}64\\ \\mathrm{N} \\approx 20\\ \\mathrm{N}
+$$
+
+Det är precis halva tyngdkraften, $F_\\mathrm{G} \\cdot \\cos 60^{\\circ}$, som väntat för två vinkelräta snören.
+
+**Svar:** Den minsta spännkraften i snöre 2 är cirka 20 N.`,
+        },
+        {
+            level: 3,
+            question: `En lina spänns mellan två stolpar som står 10 m isär. Mitt på linan hängs en säck med massan 70 kg, och linan hänger då ned 0,50 m, enligt figuren.<br>a) Beräkna spännkraften i linan. Ange svaret i kN.<br>b) Visa att spännkraften för en lina som bara hänger ned lite ungefär ges av $F_\\mathrm{S} \\approx \\dfrac{F_\\mathrm{G} \\cdot L}{4 \\cdot h}$, där *L* är avståndet mellan stolparna och *h* hur mycket linan hänger ned.<br>c) Linan spänns hårdare, så att den bara hänger ned 0,25 m. Uppskatta spännkraften med uttrycket i b). Ange svaret i kN.
+
+${makeHangingRopes({ angL: 5.71, angR: 5.71, mass: '70 kg', posts: true, half: 300, showAngles: false, spanLabel: '10 m', sagLabel: '0,50 m' })}
+
+Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            answer: { value: 3.5, unit: 'kN', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 3.5, unit: 'kN', tol: 0.03 },
+                { del: 'b' },
+                { del: 'c', value: 6.9, unit: 'kN', tol: 0.03 },
+            ],
+            solution: `**a)** Varje halva av linan bildar en rätvinklig triangel med den vågräta kateten 5,0 m och den lodräta kateten 0,50 m. Vinkeln *α* mot det vågräta fås med tangens:
+
+$$
+\\tan \\alpha = \\frac{0{,}50}{5{,}0} = 0{,}10
+\\quad\\Leftrightarrow\\quad
+\\alpha = \\tan^{-1} 0{,}10 = 5{,}710\\ldots^{\\circ}
+$$
+
+Linans två halvor bär tillsammans tyngden:
+
+$$
+F_\\mathrm{G} = m \\cdot g = 70 \\cdot 9{,}82 = 687{,}4\\ \\mathrm{N}
+$$
+
+$$
+F_\\mathrm{S} = \\frac{F_\\mathrm{G}}{2 \\cdot \\sin \\alpha} = \\frac{687{,}4}{2 \\cdot \\sin 5{,}710\\ldots^{\\circ}} = 3\\,454{,}1\\ldots\\ \\mathrm{N} \\approx 3{,}5\\ \\mathrm{kN}
+$$
+
+**Svar:** Spännkraften i linan är cirka 3,5 kN.
+
+**b)** I det symmetriska fallet gäller exakt $F_\\mathrm{S} = \\dfrac{F_\\mathrm{G}}{2 \\cdot \\sin \\alpha}$. Vinkeln fås ur $\\tan \\alpha = \\dfrac{h}{L/2} = \\dfrac{2 \\cdot h}{L}$.
+
+När linan bara hänger ned lite är triangeln mycket flack. Hypotenusan (linans halva) är då nästan lika lång som den vågräta kateten ($L/2$), och därför är
+
+$$
+\\sin \\alpha = \\frac{h}{\\text{hypotenusan}} \\approx \\frac{h}{L/2} = \\tan \\alpha = \\frac{2 \\cdot h}{L}
+$$
+
+Insatt i uttrycket för spännkraften ger det
+
+$$
+F_\\mathrm{S} \\approx \\frac{F_\\mathrm{G}}{2 \\cdot \\dfrac{2 \\cdot h}{L}} = \\frac{F_\\mathrm{G} \\cdot L}{4 \\cdot h}
+$$
+
+Kontroll med a): $\\dfrac{687{,}4 \\cdot 10}{4 \\cdot 0{,}50} = 3\\,437\\ \\mathrm{N}$, mindre än en procent från det exakta värdet.
+
+**c)**
+
+$$
+F_\\mathrm{S} \\approx \\frac{F_\\mathrm{G} \\cdot L}{4 \\cdot h} = \\frac{687{,}4 \\cdot 10}{4 \\cdot 0{,}25} = 6\\,874\\ \\mathrm{N} \\approx 6{,}9\\ \\mathrm{kN}
+$$
+
+Uttrycket visar att spännkraften är omvänt proportionell mot nedhängningen. Halveras *h* fördubblas spännkraften, och när *h* går mot noll växer spännkraften obegränsat. Därför går det aldrig att spänna en lina helt rak med något hängande på den.
+
+**Svar:** Spännkraften blir cirka 6,9 kN, ungefär dubbelt så stor som förut.`,
+        },
+        {
+            level: 3,
+            question: `Två likadana lampor, var och en med massan 1,5 kg, hänger i ett rep mellan två krokar på samma höjd, enligt figuren. Repet består av tre delar: en yttre del till vänster, en mittersta del och en yttre del till höger. Uppställningen är symmetrisk, och de yttre delarna bildar vinkeln 40° med taket.<br>a) Förklara varför den mittersta delen måste vara vågrät.<br>b) Bestäm spännkraften i de yttre delarna. Ange svaret i N.<br>c) Bestäm spännkraften i den mittersta delen. Ange svaret i N.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 190" style="max-width:552px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="36" y1="34" x2="424" y2="34" stroke="#0f1620" stroke-width="1.6"/><line x1="40" y1="34" x2="47" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="52" y1="34" x2="59" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="64" y1="34" x2="71" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="76" y1="34" x2="83" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="88" y1="34" x2="95" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="100" y1="34" x2="107" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="112" y1="34" x2="119" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="124" y1="34" x2="131" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="136" y1="34" x2="143" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="148" y1="34" x2="155" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="160" y1="34" x2="167" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="172" y1="34" x2="179" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="184" y1="34" x2="191" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="196" y1="34" x2="203" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="208" y1="34" x2="215" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="220" y1="34" x2="227" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="232" y1="34" x2="239" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="244" y1="34" x2="251" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="256" y1="34" x2="263" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="268" y1="34" x2="275" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="280" y1="34" x2="287" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="292" y1="34" x2="299" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="304" y1="34" x2="311" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="316" y1="34" x2="323" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="328" y1="34" x2="335" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="340" y1="34" x2="347" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="352" y1="34" x2="359" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="364" y1="34" x2="371" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="376" y1="34" x2="383" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="388" y1="34" x2="395" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="400" y1="34" x2="407" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="412" y1="34" x2="419" y2="26" stroke="#0f1620" stroke-width="1"/><line x1="70.0" y1="34.0" x2="177.3" y2="124.0" stroke="#0f1620" stroke-width="1.8"/><line x1="177.3" y1="124.0" x2="282.7" y2="124.0" stroke="#0f1620" stroke-width="1.8"/><line x1="282.7" y1="124.0" x2="390.0" y2="34.0" stroke="#0f1620" stroke-width="1.8"/><line x1="177.3" y1="124.0" x2="177.3" y2="146.0" stroke="#0f1620" stroke-width="1.8"/><circle cx="177.3" cy="124.0" r="2.6" fill="#0f1620"/><rect x="152.3" y="146.0" width="50" height="30" rx="2" fill="#d3e4f5" stroke="#4f7197" stroke-width="1.4"/><text x="177.3" y="165.5" font-size="13" fill="#0f1620" text-anchor="middle">1,5 kg</text><line x1="282.7" y1="124.0" x2="282.7" y2="146.0" stroke="#0f1620" stroke-width="1.8"/><circle cx="282.7" cy="124.0" r="2.6" fill="#0f1620"/><rect x="257.7" y="146.0" width="50" height="30" rx="2" fill="#d3e4f5" stroke="#4f7197" stroke-width="1.4"/><text x="282.7" y="165.5" font-size="13" fill="#0f1620" text-anchor="middle">1,5 kg</text><circle cx="70.0" cy="34.0" r="2.6" fill="#0f1620"/><circle cx="390.0" cy="34.0" r="2.6" fill="#0f1620"/><path d="M 100.0 34.0 A 30 30 0 0 1 93.0 53.3" stroke="#8a8579" stroke-width="1.4" fill="none"/><text x="113.2" y="54.2" font-size="13" fill="#8a8579" text-anchor="middle">40°</text><path d="M 360.0 34.0 A 30 30 0 0 0 367.0 53.3" stroke="#8a8579" stroke-width="1.4" fill="none"/><text x="346.8" y="54.2" font-size="13" fill="#8a8579" text-anchor="middle">40°</text></svg>
+
+Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            answer: { value: 23, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 23, unit: 'N', tol: 0.03 },
+                { del: 'c', value: 18, unit: 'N', tol: 0.03 },
+            ],
+            solution: `Vi betraktar en knut i taget. I varje knut verkar tre krafter: spännkraften i den yttre delen, spännkraften i den mittersta delen och lampans tyngdkraft. Knuten hänger stilla, så kraftresultanten på den är noll.
+
+**a)** Den mittersta delen drar i de två knutarna åt var sitt håll längs sig själv. Om den lutade, till exempel uppåt åt höger, skulle den dra den vänstra knuten snett uppåt och den högra knuten snett nedåt. Då skulle den hjälpa till att bära den ena lampan men lägga extra tyngd på den andra, och uppställningen kunde inte vara symmetrisk. Eftersom allt är likadant på båda sidor måste den mittersta delens lodräta komposant vara noll. Den mittersta delen är alltså vågrät.
+
+**Svar:** Den mittersta delen är vågrät, eftersom en lutning skulle göra de två sidorna olika.
+
+**b)** Den mittersta delen har ingen lodrät komposant. I den vänstra knuten bär därför den yttre delen ensam lampans tyngd med sin lodräta komposant:
+
+$$
+F_\\mathrm{G} = m \\cdot g = 1{,}5 \\cdot 9{,}82 = 14{,}73\\ \\mathrm{N}
+$$
+
+$$
+F_\\mathrm{yttre} \\cdot \\sin 40^{\\circ} = F_\\mathrm{G}
+$$
+
+Vi dividerar båda led med $\\sin 40^{\\circ}$.
+
+$$
+F_\\mathrm{yttre} = \\frac{14{,}73}{\\sin 40^{\\circ}} = 22{,}915\\ldots\\ \\mathrm{N} \\approx 23\\ \\mathrm{N}
+$$
+
+**Svar:** Spännkraften i de yttre delarna är cirka 23 N.
+
+**c)** Vågrätt i den vänstra knuten: den yttre delens vågräta komposant drar åt vänster och den mittersta delen drar åt höger. De ska vara lika stora.
+
+$$
+F_\\mathrm{mitt} = F_\\mathrm{yttre} \\cdot \\cos 40^{\\circ} = 22{,}915\\ldots \\cdot \\cos 40^{\\circ} = 17{,}554\\ldots\\ \\mathrm{N} \\approx 18\\ \\mathrm{N}
+$$
+
+Rimlighet: de två yttre delarna bär tillsammans båda lamporna, $2 \\cdot 22{,}915\\ldots \\cdot \\sin 40^{\\circ} = 29{,}46\\ \\mathrm{N}$, vilket är precis två lampors tyngd. Den mittersta delen bär ingenting lodrätt, men den måste ändå vara spänd för att hålla isär knutarna.
+
+**Svar:** Spännkraften i den mittersta delen är cirka 18 N.`,
+        },
     ],
 
     // ═══════════════════════════════════════════════════════════════════
@@ -13046,6 +20012,531 @@ Rimlighet: under studsen ska bollen först bromsas från 5,0 m/s till stillast�
 **Svar:** Medelaccelerationen är $900\\ \\mathrm{m/s^2}$, riktad uppåt.
 
 **Generell slutsats:** Accelerationen är ungefär 90 gånger tyngdaccelerationen. Det är golvets normalkraft som ger den, och den är under studsen mycket större än bollens tyngd.`,
+        },
+        {
+            level: 1,
+            question: `Positiv riktning är åt **höger**. En cyklist cyklar åt **vänster** och ökar farten från 2,0 m/s till 6,0 m/s på 4,0 s. Bestäm cyklistens acceleration med tecken och ange svaret i m/s².`,
+            answer: { value: -1.0, unit: 'm/s²', tol: 0.03 },
+            solution: `Cyklisten rör sig åt vänster, alltså i negativ riktning. Båda hastigheterna är därför negativa:
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = -2{,}0\\ \\mathrm{m/s} \\\\
+v = -6{,}0\\ \\mathrm{m/s} \\\\
+\\Delta t = 4{,}0\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+Accelerationen är hastighetens ändring per tidsenhet:
+
+$$
+a = \\frac{v - v_0}{\\Delta t} = \\frac{-6{,}0 - (-2{,}0)}{4{,}0} = \\frac{-4{,}0}{4{,}0} = -1{,}0\\ \\mathrm{m/s^2}
+$$
+
+Hastigheten går från $-2{,}0$ till $-6{,}0\\ \\mathrm{m/s}$, alltså **minskar** den, och då ska accelerationen vara negativ.
+
+**Svar:** Accelerationen är $-1{,}0\\ \\mathrm{m/s^2}$.
+
+**Generell slutsats:** Farten ökar, men eftersom cyklisten rör sig i negativ riktning blir accelerationen ändå negativ.`,
+        },
+        {
+            level: 1,
+            question: `Diagrammet visar hastigheten för en vagn på en rak bana under 4,0 s. Positiv riktning är åt höger. Bestäm vagnens acceleration med tecken och ange svaret i m/s².
+
+${makeDiagram({
+    xMin: 0, xMax: 5, xTicks: [0, 1, 2, 3, 4, 5],
+    yMin: -8, yMax: 8, yTicks: [-8, -6, -4, -2, 0, 2, 4, 6, 8],
+    xLabel: '<tspan font-style="italic">t</tspan> (s)',
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    paths: [{ points: [[0, -6], [4, 0]] }],
+})}`,
+            answer: { value: 1.5, unit: 'm/s²', tol: 0.03 },
+            solution: `Ur diagrammet läser vi av hastigheten i början och i slutet:
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = -6{,}0\\ \\mathrm{m/s} \\\\
+v = 0 \\\\
+\\Delta t = 4{,}0\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+a = \\frac{v - v_0}{\\Delta t} = \\frac{0 - (-6{,}0)}{4{,}0} = \\frac{6{,}0}{4{,}0} = 1{,}5\\ \\mathrm{m/s^2}
+$$
+
+Hastigheten är negativ hela tiden, så vagnen rör sig åt vänster och bromsar in. Hastigheten går från $-6{,}0\\ \\mathrm{m/s}$ upp mot 0, alltså **ökar** den, och accelerationen blir positiv. Det syns också på att grafen lutar uppåt.
+
+**Svar:** Accelerationen är $+1{,}5\\ \\mathrm{m/s^2}$.`,
+        },
+        {
+            level: 1,
+            question: `Ett äpple faller fritt från en gren. Den här gången väljer vi positiv riktning **nedåt**. Vilken acceleration har äpplet medan det faller? Bortse från luftmotståndet.`,
+            choices: [
+                `$-9{,}82\\ \\mathrm{m/s^2}$`,
+                `$+9{,}82\\ \\mathrm{m/s^2}$`,
+                `0, eftersom äpplet faller med jämnt ökande fart.`,
+                `Det beror på hur högt upp grenen sitter.`,
+            ],
+            correct: 1,
+            solution: `Äpplet rör sig nedåt, alltså i positiv riktning, och farten ökar. Hastigheten går till exempel från 0 till $+5\\ \\mathrm{m/s}$ och sedan till $+10\\ \\mathrm{m/s}$. Den **ökar**, så accelerationen är positiv.
+
+Storleken är tyngdaccelerationen, $g = 9{,}82\\ \\mathrm{m/s^2}$, oavsett från vilken höjd äpplet faller.
+
+**Svar:** Alternativ B, $a = +9{,}82\\ \\mathrm{m/s^2}$.
+
+**Generell slutsats:** Tecknet beror på vilken riktning vi själva väljer som positiv. Med positiv riktning uppåt hade svaret blivit $-9{,}82\\ \\mathrm{m/s^2}$. Accelerationen pekar ändå nedåt i båda fallen, det är bara beskrivningen som ändras.`,
+        },
+        {
+            level: 1,
+            question: `Positiv riktning är åt **väster**. Ett tåg kör åt **öster** och ökar farten. Vilket tecken har tågets hastighet och tågets acceleration?`,
+            choices: [
+                `Hastigheten är positiv och accelerationen positiv.`,
+                `Hastigheten är negativ och accelerationen positiv.`,
+                `Hastigheten är positiv och accelerationen negativ.`,
+                `Hastigheten är negativ och accelerationen negativ.`,
+            ],
+            correct: 3,
+            solution: `Tåget kör åt öster, det vill säga åt det negativa hållet. Hastigheten är därför **negativ**, till exempel $-10\\ \\mathrm{m/s}$.
+
+När farten ökar blir hastigheten till exempel $-15\\ \\mathrm{m/s}$ och sedan $-20\\ \\mathrm{m/s}$. Hastigheten **minskar** alltså (den blir mer negativ), och då är accelerationen **negativ**.
+
+**Svar:** Alternativ D, både hastigheten och accelerationen är negativa.`,
+        },
+        {
+            level: 2,
+            question: `En bil med massan 1 200 kg kör åt **vänster** och bromsar jämnt från 20 m/s till 8,0 m/s på 3,0 s. Positiv riktning är åt höger. Bestäm den resulterande kraften på bilen med tecken och ange svaret i N.`,
+            answer: { value: 4800, unit: 'N', tol: 0.03 },
+            solution: `Bilen kör åt vänster, så båda hastigheterna är negativa:
+
+$$
+\\left[ \\begin{array}{l}
+m = 1\\,200\\ \\mathrm{kg} \\\\
+v_0 = -20\\ \\mathrm{m/s} \\\\
+v = -8{,}0\\ \\mathrm{m/s} \\\\
+\\Delta t = 3{,}0\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+Först accelerationen:
+
+$$
+a = \\frac{v - v_0}{\\Delta t} = \\frac{-8{,}0 - (-20)}{3{,}0} = \\frac{12}{3{,}0} = 4{,}0\\ \\mathrm{m/s^2}
+$$
+
+Sedan Newtons andra lag:
+
+$$
+F_\\mathrm{R} = m \\cdot a = 1\\,200 \\cdot 4{,}0 = 4\\,800\\ \\mathrm{N}
+$$
+
+Rimlighet: bilen bromsar på väg åt vänster, så den bromsande kraften (friktionen från vägen) måste peka åt höger. Det stämmer med det positiva tecknet.
+
+**Svar:** Den resulterande kraften är $+4\\,800\\ \\mathrm{N}$, alltså 4,8 kN riktad åt höger.
+
+**Generell slutsats:** Den resulterande kraften har alltid samma riktning som accelerationen. Vet man åt vilket håll accelerationen pekar vet man också åt vilket håll den resulterande kraften pekar.`,
+        },
+        {
+            level: 2,
+            question: `I ett laborationsförsök får en kula en knuff uppför en lång lutande skena. En rörelsesensor mäter kulans hastighet en gång per sekund. Positiv riktning är uppför skenan.
+
+| $t$ (s) | 0 | 1,0 | 2,0 | 3,0 | 4,0 | 5,0 |
+|---|---|---|---|---|---|---|
+| $v$ (m/s) | 3,0 | 1,8 | 0,6 | −0,6 | −1,8 | −3,0 |
+
+Bestäm<br>a) kulans acceleration med tecken, i m/s²<br>b) vid vilken tidpunkt kulan vänder<br>c) om kulans fart ökar eller minskar mellan $t = 3{,}0\\ \\mathrm{s}$ och $t = 5{,}0\\ \\mathrm{s}$, och vilket tecken accelerationen har där.`,
+            delsvar: [
+                { del: 'a', value: -1.2, unit: 'm/s²', tol: 0.03 },
+                { del: 'b', value: 2.5, unit: 's', tol: 0.03 },
+                { del: 'c' },
+            ],
+            solution: `**a)** Hastigheten minskar med 1,2 m/s varje sekund under hela försöket, så accelerationen är konstant. Vi använder första och sista mätningen:
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = 3{,}0\\ \\mathrm{m/s} \\\\
+v = -3{,}0\\ \\mathrm{m/s} \\\\
+\\Delta t = 5{,}0\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+a = \\frac{v - v_0}{\\Delta t} = \\frac{-3{,}0 - 3{,}0}{5{,}0} = \\frac{-6{,}0}{5{,}0} = -1{,}2\\ \\mathrm{m/s^2}
+$$
+
+**Svar:** Accelerationen är $-1{,}2\\ \\mathrm{m/s^2}$.
+
+**b)** Kulan vänder när hastigheten är noll. Hastigheten är $+0{,}6\\ \\mathrm{m/s}$ vid 2,0 s och $-0{,}6\\ \\mathrm{m/s}$ vid 3,0 s, och den ändras lika mycket varje sekund. Noll nås därför mitt emellan. Räknat från $t = 2{,}0\\ \\mathrm{s}$ tar det
+
+$$
+\\Delta t = \\frac{0 - 0{,}6}{-1{,}2} = 0{,}5\\ \\mathrm{s}
+$$
+
+**Svar:** Kulan vänder vid $t = 2{,}5\\ \\mathrm{s}$.
+
+**c)** Mellan 3,0 s och 5,0 s går hastigheten från $-0{,}6$ till $-3{,}0\\ \\mathrm{m/s}$. Kulan rullar nedför och farten **ökar** från 0,6 m/s till 3,0 m/s. Hastigheten **minskar** ändå, så accelerationen är fortfarande **negativ**, $-1{,}2\\ \\mathrm{m/s^2}$.
+
+**Svar:** Farten ökar, och accelerationen är negativ.
+
+**Generell slutsats:** Accelerationen är densamma på väg upp, i vändläget och på väg ned. Det är tyngdkraftens komposant längs skenan som ger den, och den pekar hela tiden nedför.`,
+        },
+        {
+            level: 2,
+            question: `Diagrammet visar hastigheten för en hiss under en resa. Positiv riktning är uppåt.
+
+${makeDiagram({
+    xMin: 0, xMax: 9, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    yMin: -4, yMax: 4, yTicks: [-4, -3, -2, -1, 0, 1, 2, 3, 4],
+    xLabel: '<tspan font-style="italic">t</tspan> (s)',
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    paths: [{ points: [[0, 0], [2, -3], [6, -3], [8, 0]] }],
+})}
+
+a) Åt vilket håll åker hissen?<br>b) Bestäm hissens acceleration med tecken under de första 2,0 s och under de sista 2,0 s. Ange svaren i m/s².<br>c) Under vilken del av resan är normalkraften från golvet på en passagerare större än passagerarens tyngdkraft? Motivera.`,
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: -1.5, unit: 'm/s²', tol: 0.03, etikett: 'de första 2,0 s' },
+                { del: 'b', value: 1.5, unit: 'm/s²', tol: 0.03, etikett: 'de sista 2,0 s' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Hastigheten är negativ eller noll under hela resan. Med positiv riktning uppåt betyder det att hissen rör sig nedåt.
+
+**Svar:** Hissen åker nedåt.
+
+**b)** Under de första 2,0 s går hastigheten från 0 till $-3{,}0\\ \\mathrm{m/s}$:
+
+$$
+a_1 = \\frac{v - v_0}{\\Delta t} = \\frac{-3{,}0 - 0}{2{,}0} = -1{,}5\\ \\mathrm{m/s^2}
+$$
+
+Under de sista 2,0 s (från 6,0 s till 8,0 s) går hastigheten från $-3{,}0\\ \\mathrm{m/s}$ till 0:
+
+$$
+a_2 = \\frac{v - v_0}{\\Delta t} = \\frac{0 - (-3{,}0)}{2{,}0} = 1{,}5\\ \\mathrm{m/s^2}
+$$
+
+**Svar:** Accelerationen är $-1{,}5\\ \\mathrm{m/s^2}$ under de första 2,0 s och $+1{,}5\\ \\mathrm{m/s^2}$ under de sista 2,0 s.
+
+**c)** På passageraren verkar tyngdkraften $F_\\mathrm{G}$ nedåt och normalkraften $F_\\mathrm{N}$ från golvet uppåt. Den resulterande kraften har samma riktning som accelerationen. Normalkraften är större än tyngdkraften bara när den resulterande kraften pekar uppåt, alltså när accelerationen är positiv. Det gäller under inbromsningen mellan 6,0 s och 8,0 s. Mellan 2,0 s och 6,0 s är accelerationen noll och krafterna lika stora, och under de första 2,0 s är normalkraften mindre än tyngdkraften.
+
+**Svar:** Under inbromsningen mellan $t = 6{,}0\\ \\mathrm{s}$ och $t = 8{,}0\\ \\mathrm{s}$, när accelerationen är riktad uppåt.`,
+        },
+        {
+            level: 2,
+            question: `En fallskärmshoppare har just vecklat ut skärmen och faller nedåt med **minskande** fart. Positiv riktning är uppåt. Vilket påstående stämmer?`,
+            choices: [
+                `Accelerationen är positiv, och luftmotståndet är större än tyngdkraften.`,
+                `Accelerationen är negativ, och tyngdkraften är större än luftmotståndet.`,
+                `Accelerationen är positiv, och tyngdkraften är större än luftmotståndet.`,
+                `Accelerationen är negativ, och luftmotståndet är större än tyngdkraften.`,
+            ],
+            correct: 0,
+            solution: `Hopparen rör sig nedåt, så hastigheten är negativ, till exempel $-40\\ \\mathrm{m/s}$. När farten minskar blir hastigheten till exempel $-30\\ \\mathrm{m/s}$. Hastigheten **ökar** (från $-40$ mot 0), så accelerationen är **positiv**, alltså riktad uppåt.
+
+Enligt Newtons andra lag har den resulterande kraften samma riktning som accelerationen. Den resulterande kraften pekar därför uppåt, och då måste luftmotståndet uppåt vara större än tyngdkraften nedåt.
+
+**Svar:** Alternativ A.
+
+**Generell slutsats:** Att hopparen fortfarande faller nedåt säger ingenting om åt vilket håll den resulterande kraften pekar. Det är hastighetens **ändring** som avgör det.`,
+        },
+        {
+            level: 2,
+            question: `En boll kastas rakt nedåt från en bro med farten 4,0 m/s. Positiv riktning är uppåt. Bestäm bollens hastighet med tecken 1,5 s senare. Bortse från luftmotståndet och ange svaret i m/s.`,
+            answer: { value: -19, unit: 'm/s', tol: 0.03 },
+            solution: `Bollen kastas nedåt, så starthastigheten är negativ. Den enda kraften är tyngdkraften, och med positiv riktning uppåt är accelerationen $a = -g$:
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = -4{,}0\\ \\mathrm{m/s} \\\\
+a = -9{,}82\\ \\mathrm{m/s^2} \\\\
+t = 1{,}5\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+v = v_0 + a \\cdot t = -4{,}0 + (-9{,}82) \\cdot 1{,}5 = -4{,}0 - 14{,}73 = -18{,}73\\ \\mathrm{m/s} \\approx -19\\ \\mathrm{m/s}
+$$
+
+Rimlighet: bollen rör sig nedåt med ökande fart, så hastigheten ska vara negativ och till beloppet större än 4,0 m/s. Det är den.
+
+**Svar:** Hastigheten är $-19\\ \\mathrm{m/s}$, alltså 19 m/s riktad nedåt.
+
+**Generell slutsats:** En vanlig miss är att skriva $v_0 = +4{,}0\\ \\mathrm{m/s}$ för att "farten är 4,0 m/s". Då blir svaret $-10{,}73\\ \\mathrm{m/s}$, som om bollen först hade rört sig uppåt.`,
+        },
+        {
+            level: 3,
+            question: `En astronaut kastar en sten rakt upp på en okänd himlakropp utan atmosfär. En sensor mäter stenens fart men inte åt vilket håll den rör sig. Den visar farten 4,6 m/s 1,0 s efter kastet och farten 6,5 m/s 4,0 s efter kastet.
+
+| Himlakropp | Månen | Mars | Venus | Jorden |
+|---|---|---|---|---|
+| Tyngdacceleration (m/s²) | 1,6 | 3,7 | 8,9 | 9,8 |
+
+a) Bestäm tyngdaccelerationen på himlakroppen, i m/s². Vilken av himlakropparna i tabellen kan det vara?<br>b) Med vilken fart kastades stenen, och hur länge steg den?`,
+            delsvar: [
+                { del: 'a', value: 3.7, unit: 'm/s²', tol: 0.03 },
+                { del: 'b', value: 8.3, unit: 'm/s', tol: 0.03, etikett: 'kastfarten' },
+                { del: 'b', value: 2.2, unit: 's', tol: 0.03, etikett: 'tiden uppåt' },
+            ],
+            solution: `Vi väljer positiv riktning uppåt. Stenen påverkas bara av tyngdkraften, så accelerationen är konstant och riktad nedåt, alltså negativ. För att räkna ut den måste vi först veta åt vilket håll stenen rör sig vid de två mätningarna. Vi prövar de tre möjligheterna.
+
+- **Uppåt vid båda mätningarna:** En sten på väg uppåt bromsas av tyngdkraften, så farten kan inte ha ökat från 4,6 till 6,5 m/s. Det går inte.
+- **Nedåt vid båda mätningarna:** Då är $v_1 = -4{,}6\\ \\mathrm{m/s}$ och $v_2 = -6{,}5\\ \\mathrm{m/s}$, och accelerationen blir $\\dfrac{-6{,}5 - (-4{,}6)}{3{,}0} \\approx -0{,}63\\ \\mathrm{m/s^2}$. Starthastigheten blir då $v_0 = v_1 - a \\cdot t_1 \\approx -4{,}6 + 0{,}63 \\approx -4{,}0\\ \\mathrm{m/s}$, alltså nedåt. Men stenen kastades uppåt, så inte heller detta går.
+- **Uppåt vid 1,0 s och nedåt vid 4,0 s:** Stenen har vänt mellan mätningarna. Det är den enda möjligheten som återstår.
+
+$$
+\\left[ \\begin{array}{l}
+t_1 = 1{,}0\\ \\mathrm{s} \\\\
+v_1 = +4{,}6\\ \\mathrm{m/s} \\\\
+t_2 = 4{,}0\\ \\mathrm{s} \\\\
+v_2 = -6{,}5\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+**a)** Accelerationen är hastighetens ändring per tidsenhet:
+
+$$
+a = \\frac{v_2 - v_1}{t_2 - t_1} = \\frac{-6{,}5 - 4{,}6}{4{,}0 - 1{,}0} = \\frac{-11{,}1}{3{,}0} = -3{,}7\\ \\mathrm{m/s^2}
+$$
+
+Accelerationen är riktad nedåt, som den ska vara, och tyngdaccelerationen är dess belopp, $3{,}7\\ \\mathrm{m/s^2}$. Det stämmer med Mars i tabellen.
+
+**Svar:** Tyngdaccelerationen är $3{,}7\\ \\mathrm{m/s^2}$, så det kan vara Mars.
+
+**b)** Under den första sekunden ändrades hastigheten med $a \\cdot t_1$. Starthastigheten fås ur $v_1 = v_0 + a \\cdot t_1$:
+
+$$
+v_0 = v_1 - a \\cdot t_1 = 4{,}6 - (-3{,}7) \\cdot 1{,}0 = 8{,}3\\ \\mathrm{m/s}
+$$
+
+Stenen stiger tills hastigheten är noll:
+
+$$
+0 = v_0 + a \\cdot t_\\text{upp} \\quad\\Leftrightarrow\\quad t_\\text{upp} = \\frac{-v_0}{a} = \\frac{-8{,}3}{-3{,}7} = 2{,}243\\ldots\\ \\mathrm{s} \\approx 2{,}2\\ \\mathrm{s}
+$$
+
+Rimlighet: vändläget ska ligga mellan de två mätningarna, eftersom stenen rör sig uppåt vid 1,0 s och nedåt vid 4,0 s. Det gör 2,2 s. Kontroll: vid $t = 4{,}0\\ \\mathrm{s}$ ger modellen $v = 8{,}3 - 3{,}7 \\cdot 4{,}0 = -6{,}5\\ \\mathrm{m/s}$, precis som sensorn visade.
+
+**Svar:** Stenen kastades med farten 8,3 m/s och steg i 2,2 s.`,
+        },
+        {
+            level: 3,
+            question: `Många säger att "negativ acceleration betyder att föremålet bromsar". Visa att farten ökar när hastighet och acceleration har **samma** tecken, och minskar när de har **olika** tecken. Använd resultatet för att förklara vad som är fel med påståendet.`,
+            solution: `Kalla hastigheten vid ett visst ögonblick för $v$ och accelerationen för $a$. En kort stund $\\Delta t$ senare är hastigheten
+
+$$
+v' = v + a \\cdot \\Delta t
+$$
+
+**Farten** är hastighetens belopp, $|v|$. Vi går igenom de fyra teckenkombinationerna. Tiden $\\Delta t$ väljs så kort att hastigheten inte hinner byta tecken.
+
+- **$v > 0$ och $a > 0$:** $a \\cdot \\Delta t > 0$, så $v' > v > 0$. Farten $|v'| = v'$ är större än $|v| = v$. Farten **ökar**.
+- **$v < 0$ och $a < 0$:** $v' = v + a \\cdot \\Delta t < v < 0$. Farten blir $|v'| = -v' = -v - a \\cdot \\Delta t = |v| + |a| \\cdot \\Delta t$, alltså större än $|v|$. Farten **ökar**.
+- **$v > 0$ och $a < 0$:** $v' = v - |a| \\cdot \\Delta t$ är mindre än $v$ men fortfarande positiv, så $|v'| = |v| - |a| \\cdot \\Delta t$. Farten **minskar**.
+- **$v < 0$ och $a > 0$:** $v' = v + a \\cdot \\Delta t$ ligger närmare noll än $v$, så $|v'| = |v| - a \\cdot \\Delta t$. Farten **minskar**.
+
+I alla fyra fallen gäller alltså att farten ändras med $|a| \\cdot \\Delta t$ per tidsintervall, och att den ökar när $v$ och $a$ pekar åt samma håll och minskar när de pekar åt olika håll.
+
+**Svar:** Farten ökar när hastighet och acceleration har samma tecken och minskar när de har olika tecken. Påståendet är fel eftersom accelerationens tecken ensamt inte avgör om farten minskar. En bil som kör i negativ riktning och gasar har negativ acceleration men ökande fart, och en bil som kör i negativ riktning och bromsar har positiv acceleration. Det är jämförelsen mellan hastighetens och accelerationens tecken som avgör om föremålet bromsar.`,
+        },
+        {
+            level: 3,
+            question: `Lisa står på en badrumsvåg i en hiss. Vågen mäter kraften från Lisa och visar den som en massa, genom att dela kraften med $g = 9{,}82\\ \\mathrm{N/kg}$. När hissen står still visar vågen alltså Lisas massa. Under en del av resan visar vågen 13 % mindre än när hissen står still.<br>a) Bestäm hissens acceleration med tecken, med positiv riktning uppåt. Ange svaret i m/s².<br>b) Lisa säger: "Hissen måste vara på väg nedåt, eftersom jag känner mig lättare." Har hon rätt? Motivera.`,
+            delsvar: [
+                { del: 'a', value: -1.3, unit: 'm/s²', tol: 0.03 },
+                { del: 'b' },
+            ],
+            solution: `**a)** Lisas massa är okänd, så vi kallar den $m$ och räknar med den som en bokstav. Vågen trycker på Lisa med lika stor kraft som Lisa trycker på vågen (Newtons tredje lag), så vågen visar normalkraften $F_\\mathrm{N}$ på Lisa. När hissen står still är $F_\\mathrm{N} = F_\\mathrm{G} = m \\cdot g$. Under resan är normalkraften 13 % mindre, alltså 87 % av tyngdkraften:
+
+$$
+\\left[ \\begin{array}{l}
+F_\\mathrm{G} = m \\cdot g \\\\
+F_\\mathrm{N} = 0{,}87 \\cdot m \\cdot g
+\\end{array} \\right]
+$$
+
+Två krafter verkar på Lisa: normalkraften uppåt och tyngdkraften nedåt. Med positiv riktning uppåt ger Newtons andra lag
+
+$$
+F_\\mathrm{N} - F_\\mathrm{G} = m \\cdot a
+$$
+
+Insättning av uttrycken för $F_\\mathrm{N}$ och $F_\\mathrm{G}$ ger
+
+$$
+0{,}87 \\cdot m \\cdot g - m \\cdot g = m \\cdot a
+$$
+
+Vi dividerar båda led med $m$, och massan tar ut sig:
+
+$$
+a = 0{,}87 \\cdot g - g = -0{,}13 \\cdot g = -0{,}13 \\cdot 9{,}82 = -1{,}2766\\ \\mathrm{m/s^2} \\approx -1{,}3\\ \\mathrm{m/s^2}
+$$
+
+Rimlighet: normalkraften är mindre än tyngdkraften, så den resulterande kraften och därmed accelerationen ska peka nedåt. Vågen visar 13 % för lite, och accelerationens belopp är just 13 % av $g$.
+
+**Svar:** Accelerationen är $-1{,}3\\ \\mathrm{m/s^2}$, alltså riktad nedåt.
+
+**b)** Vågen avslöjar bara accelerationen, inte hastigheten. En negativ acceleration betyder att hastigheten **minskar**, och det kan ske på två sätt:
+
+- Hissen är på väg **nedåt** och ökar farten. Hastigheten går till exempel från $-1$ till $-2\\ \\mathrm{m/s}$.
+- Hissen är på väg **uppåt** och bromsar in. Hastigheten går till exempel från $+2$ till $+1\\ \\mathrm{m/s}$.
+
+I båda fallen pekar accelerationen nedåt, och i båda fallen visar vågen mindre än Lisas massa. Ur vågens utslag går det alltså inte att avgöra åt vilket håll hissen åker.
+
+**Svar:** Nej. Hissen kan lika gärna vara på väg uppåt och bromsa in. Det enda vågen visar är att accelerationen är riktad nedåt.`,
+        },
+        {
+            level: 3,
+            question: `En motorbåt kör framåt på en sjö. Föraren lägger i backen, och propellern ger båten en konstant acceleration bakåt tills båten backar. Diagrammet visar båtens hastighet. Positiv riktning är framåt.
+
+${makeDiagram({
+    xMin: 0, xMax: 7, xTicks: [0, 1, 2, 3, 4, 5, 6, 7],
+    yMin: -5, yMax: 5, yTicks: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5],
+    xLabel: '<tspan font-style="italic">t</tspan> (s)',
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    paths: [{ points: [[0, 4], [6, -2]] }],
+})}
+
+a) Hur långt framåt från startpunkten kommer båten som längst, och hur långt från startpunkten är den vid $t = 6{,}0\\ \\mathrm{s}$? Ange svaren i m.<br>b) En elev räknar ut hela arean mellan grafen och $t$-axeln och får 10 m. Vad har eleven räknat ut, och varför är det inte båtens avstånd från startpunkten?<br>c) Föraren låter backen ligga i, så att accelerationen fortsätter som i diagrammet. Vid vilken tidpunkt är båten tillbaka vid startpunkten?`,
+            delsvar: [
+                { del: 'a', value: 8.0, unit: 'm', tol: 0.03, etikett: 'längst framåt' },
+                { del: 'a', value: 6.0, unit: 'm', tol: 0.03, etikett: 'vid 6,0 s' },
+                { del: 'b' },
+                { del: 'c', value: 8.0, unit: 's', tol: 0.03 },
+            ],
+            solution: `**a)** Förflyttningen är arean mellan grafen och $t$-axeln, räknad med tecken: area ovanför axeln är förflyttning framåt och area under axeln förflyttning bakåt.
+
+${makeDiagram({
+    xMin: 0, xMax: 7, xTicks: [0, 1, 2, 3, 4, 5, 6, 7],
+    yMin: -5, yMax: 5, yTicks: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5],
+    xLabel: '<tspan font-style="italic">t</tspan> (s)',
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    paths: [{ points: [[0, 4], [6, -2]] }],
+    fills: [
+        { points: [[0, 0], [0, 4], [4, 0]], color: 'rgba(42,94,168,0.18)' },
+        { points: [[4, 0], [6, -2], [6, 0]], color: 'rgba(200,50,74,0.18)' },
+    ],
+})}
+
+Båten kör framåt så länge hastigheten är positiv, alltså fram till $t = 4{,}0\\ \\mathrm{s}$ där grafen skär $t$-axeln. Där är den som längst fram. Den blå triangeln ger
+
+$$
+s_1 = \\frac{4{,}0 \\cdot 4{,}0}{2} = 8{,}0\\ \\mathrm{m}
+$$
+
+Mellan 4,0 s och 6,0 s backar båten. Den röda triangeln ger
+
+$$
+s_2 = \\frac{2{,}0 \\cdot (-2{,}0)}{2} = -2{,}0\\ \\mathrm{m}
+$$
+
+Vid $t = 6{,}0\\ \\mathrm{s}$ är förflyttningen
+
+$$
+s = s_1 + s_2 = 8{,}0 + (-2{,}0) = 6{,}0\\ \\mathrm{m}
+$$
+
+**Svar:** Båten kommer som längst 8,0 m framåt, och vid $t = 6{,}0\\ \\mathrm{s}$ är den 6,0 m framför startpunkten.
+
+**b)** Eleven har lagt ihop triangelarean under axeln som om den vore positiv: $8{,}0 + 2{,}0 = 10\\ \\mathrm{m}$. Det är den **sträcka** som båten har färdats totalt, 8,0 m framåt och sedan 2,0 m bakåt. Avståndet från startpunkten ges av förflyttningen, och där räknas de 2,0 m bakåt med minustecken eftersom hastigheten är negativ.
+
+**Svar:** Eleven har räknat ut den totala sträckan, 10 m. Avståndet till startpunkten är förflyttningen, och där drar de 2,0 m bakåt ifrån de 8,0 m framåt.
+
+**c)** Grafen är en rät linje, så accelerationen är konstant:
+
+$$
+a = \\frac{\\Delta v}{\\Delta t} = \\frac{-2{,}0 - 4{,}0}{6{,}0 - 0} = \\frac{-6{,}0}{6{,}0} = -1{,}0\\ \\mathrm{m/s^2}
+$$
+
+Båten är tillbaka vid startpunkten när förflyttningen är noll. Då måste arean under $t$-axeln vara lika stor som den blå triangeln ovanför, 8,0 m. Kalla tidpunkten då båten är tillbaka för $T$. Efter vändningen vid 4,0 s har båten backat i tiden $T - 4{,}0$, och hastigheten har då nått $a \\cdot (T - 4{,}0) = -1{,}0 \\cdot (T - 4{,}0)$. Triangeln under axeln har alltså basen $T - 4{,}0$ och höjden $1{,}0 \\cdot (T - 4{,}0)$, och dess area ska vara 8,0 m:
+
+$$
+\\frac{(T - 4{,}0) \\cdot 1{,}0 \\cdot (T - 4{,}0)}{2} = 8{,}0
+$$
+
+Vi multiplicerar båda led med 2:
+
+$$
+(T - 4{,}0)^2 = 16
+$$
+
+Vi drar roten ur båda led:
+
+$$
+T - 4{,}0 = \\pm\\sqrt{16} = \\pm 4{,}0
+$$
+
+Bara den positiva roten duger, eftersom $T$ ligger efter vändningen vid 4,0 s:
+
+$$
+T - 4{,}0 = 4{,}0
+$$
+
+$$
+T = 8{,}0\\ \\mathrm{s}
+$$
+
+Rimlighet: med konstant acceleration tar det lika lång tid att backa tillbaka 8,0 m från stillastående som det tog att bromsa in från 4,0 m/s på samma sträcka, alltså 4,0 s. Båten passerar startpunkten med farten 4,0 m/s, samma fart som den hade från början.
+
+**Svar:** Båten är tillbaka vid startpunkten vid $t = 8{,}0\\ \\mathrm{s}$.`,
+        },
+        {
+            level: 3,
+            question: `En badmintonboll slås rakt upp. Luftmotståndet på en badmintonboll är stort och verkar alltid mot rörelseriktningen. Positiv riktning är uppåt.
+
+Jämför bollens acceleration i tre lägen: på väg upp, i vändläget och på väg ned. Ange accelerationens tecken i varje läge, och rangordna lägena efter accelerationens storlek. Motivera med de krafter som verkar på bollen. Anta att bollen på väg ned ännu inte har nått sin gränshastighet.`,
+            solution: `På bollen verkar tyngdkraften $F_\\mathrm{G} = m \\cdot g$ nedåt hela tiden och luftmotståndet $F_\\text{luft}$ mot rörelseriktningen. Accelerationen ges av Newtons andra lag, $a = \\dfrac{F_\\mathrm{R}}{m}$, och har samma riktning som den resulterande kraften.
+
+- **På väg upp:** Bollen rör sig uppåt, så luftmotståndet pekar nedåt, åt samma håll som tyngdkraften. Den resulterande kraften är $F_\\mathrm{R} = -(F_\\mathrm{G} + F_\\text{luft})$, och accelerationens storlek blir $\\dfrac{F_\\mathrm{G} + F_\\text{luft}}{m} = g + \\dfrac{F_\\text{luft}}{m}$, alltså **större än $g$**. Accelerationen är **negativ**.
+- **I vändläget:** Hastigheten är noll, så luftmotståndet är noll. Bara tyngdkraften verkar, och accelerationen är $-g$. Accelerationen är **negativ** med storleken **exakt $g$**.
+- **På väg ned:** Bollen rör sig nedåt, så luftmotståndet pekar uppåt, mot tyngdkraften. Den resulterande kraften är $F_\\mathrm{R} = -(F_\\mathrm{G} - F_\\text{luft})$. Så länge gränshastigheten inte är nådd är $F_\\text{luft} < F_\\mathrm{G}$, så den resulterande kraften pekar fortfarande nedåt och accelerationen är **negativ**. Storleken är $g - \\dfrac{F_\\text{luft}}{m}$, alltså **mindre än $g$**.
+
+Rimlighet: på väg upp minskar hastigheten snabbt, eftersom både tyngdkraften och luftmotståndet bromsar. På väg ned ökar farten långsammare och långsammare, tills luftmotståndet blir lika stort som tyngdkraften och accelerationen blir noll.
+
+**Svar:** Accelerationen är negativ i alla tre lägena. Den är störst på väg upp (större än $g$), lika med $g$ i vändläget och minst på väg ned (mindre än $g$).`,
+        },
+        {
+            level: 3,
+            question: `En puck glider uppför ett friktionsfritt lutande plan med lutningsvinkeln $\\alpha$. Den har farten $v_0$ längs planet när den passerar en markering, glider upp, vänder och glider ned igen.
+
+Bestäm hur lång tid det tar innan pucken är tillbaka vid markeringen, uttryckt i $v_0$, $g$ och $\\alpha$. Visa också att pucken då har samma fart som när den passerade markeringen på väg upp.`,
+            solution: `Vi väljer positiv riktning uppför planet och lägger origo vid markeringen. På pucken verkar tyngdkraften och normalkraften. Normalkraften är vinkelrät mot planet, så längs planet verkar bara tyngdkraftens komposant $F_\\mathrm{G} \\cdot \\sin \\alpha$, riktad nedför. Newtons andra lag längs planet ger
+
+$$
+m \\cdot a = -m \\cdot g \\cdot \\sin \\alpha \\quad\\Leftrightarrow\\quad a = -g \\cdot \\sin \\alpha
+$$
+
+Massan tar ut sig, och accelerationen är konstant och negativ under hela förloppet, både på väg upp, i vändläget och på väg ned.
+
+Med konstant acceleration är förflyttningen längs planet
+
+$$
+s = v_0 \\cdot t + \\frac{a \\cdot t^2}{2} = v_0 \\cdot t - \\frac{g \\cdot \\sin \\alpha \\cdot t^2}{2}
+$$
+
+Pucken är tillbaka vid markeringen när $s = 0$:
+
+$$
+t \\cdot \\left( v_0 - \\frac{g \\cdot \\sin \\alpha \\cdot t}{2} \\right) = 0
+$$
+
+Lösningen $t = 0$ är ögonblicket då pucken passerar markeringen på väg upp. Den andra lösningen är
+
+$$
+v_0 - \\frac{g \\cdot \\sin \\alpha \\cdot t}{2} = 0 \\quad\\Leftrightarrow\\quad t = \\frac{2 v_0}{g \\cdot \\sin \\alpha}
+$$
+
+Hastigheten vid den tidpunkten är
+
+$$
+v = v_0 + a \\cdot t = v_0 - g \\cdot \\sin \\alpha \\cdot \\frac{2 v_0}{g \\cdot \\sin \\alpha} = v_0 - 2 v_0 = -v_0
+$$
+
+Hastigheten är $-v_0$: pucken rör sig nedför med farten $v_0$, samma fart som på väg upp men i motsatt riktning.
+
+Rimlighet: pucken vänder när $v = 0$, alltså vid $t = \\dfrac{v_0}{g \\cdot \\sin \\alpha}$, precis halva den totala tiden. Uppfärden och nedfärden tar lika lång tid, vilket stämmer med att accelerationen är densamma åt båda hållen. Vid $\\alpha = 90^\\circ$ blir $t = \\dfrac{2 v_0}{g}$, som för ett kast rakt upp, och när $\\alpha$ går mot noll växer tiden obegränsat, eftersom pucken på ett vågrätt plan aldrig skulle vända.
+
+**Svar:** Pucken är tillbaka efter tiden $t = \\dfrac{2 v_0}{g \\cdot \\sin \\alpha}$, och då är hastigheten $-v_0$, alltså samma fart $v_0$ riktad nedför planet.`,
         },
     ],
 
@@ -13261,6 +20752,692 @@ Kontroll: $F_R = 0{,}7672\\ldots \\cdot 9{,}82 = 7{,}534\\ldots\\ \\mathrm{N}$ o
 
 **Generell slutsats:** Den vanligaste missen är att glömma viktens egen massa och räkna $m \\cdot g = 3{,}0 \\cdot a$, vilket ger 0,61 kg. Då blir accelerationen för liten, eftersom en del av den drivande kraften går åt till att accelerera vikten själv.`,
         },
+        {
+            level: 1,
+            question: `En vagn med massan 2,5 kg står på ett vågrätt bord och kan rulla utan friktion. Ett snöre går från vagnen över en friktionsfri trissa vid bordskanten till en vikt med massan 0,50 kg, enligt figuren. Vikten släpps. Beräkna systemets acceleration. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i m/s².
+
+${makePulley({ kind: 'bord', table: '2,5 kg', hanging: '0,50 kg' })}`,
+            answer: { value: 1.6, unit: 'm/s²', tol: 0.03 },
+            solution: `Vi ser vagnen, snöret och vikten som **ett system**. Vagnens tyngdkraft tas ut av normalkraften från bordet, och friktion saknas. Den enda kraft som driver systemet är därför den hängande viktens tyngdkraft:
+
+$$
+F_R = F_{\\mathrm{G}2} = m_2 \\cdot g = 0{,}50 \\cdot 9{,}82 = 4{,}91\\ \\mathrm{N}
+$$
+
+Både vagnen och vikten ska accelereras, så massan är hela systemets massa:
+
+$$
+m_\\text{tot} = m_1 + m_2 = 2{,}5 + 0{,}50 = 3{,}0\\ \\mathrm{kg}
+$$
+
+Newtons andra lag ger
+
+$$
+a = \\frac{F_R}{m_\\text{tot}} = \\frac{4{,}91}{3{,}0} = 1{,}636\\ldots\\ \\mathrm{m/s^2} \\approx 1{,}6\\ \\mathrm{m/s^2}
+$$
+
+Accelerationen är mindre än $g$, vilket den ska vara: viktens tyngd ska accelerera sex gånger så stor massa som vikten själv.
+
+**Svar:** Systemet får accelerationen cirka 1,6 m/s².`,
+        },
+        {
+            level: 1,
+            question: `Två vikter med massorna 2,0 kg och 5,0 kg hänger i var sin ände av ett snöre över en friktionsfri trissa. Vikterna släpps och börjar accelerera. Vilket påstående om spännkraften $F_\\mathrm{S}$ i snöret stämmer?`,
+            choices: [
+                `$F_\\mathrm{S}$ är lika stor som tyngdkraften på 5,0-kilosvikten.`,
+                `$F_\\mathrm{S}$ är lika stor som summan av vikternas tyngdkrafter.`,
+                `$F_\\mathrm{S}$ är lika stor som tyngdkraften på 2,0-kilosvikten.`,
+                `$F_\\mathrm{S}$ är större än tyngdkraften på 2,0-kilosvikten men mindre än tyngdkraften på 5,0-kilosvikten.`,
+            ],
+            correct: 3,
+            solution: `Spännkraften är lika stor i hela snöret. Titta på en vikt i taget.
+
+- **2,0-kilosvikten** accelererar uppåt. Då måste den resulterande kraften på den peka uppåt, så spännkraften uppåt är **större** än viktens tyngdkraft $19{,}64\\ \\mathrm{N}$.
+- **5,0-kilosvikten** accelererar nedåt. Då pekar den resulterande kraften på den nedåt, så spännkraften är **mindre** än viktens tyngdkraft $49{,}1\\ \\mathrm{N}$.
+
+Spännkraften hamnar alltså mellan de två tyngdkrafterna. Räknar man ut den blir accelerationen $a = \\dfrac{(5{,}0 - 2{,}0) \\cdot 9{,}82}{7{,}0} = 4{,}208\\ldots\\ \\mathrm{m/s^2}$, och för den lätta vikten gäller $F_\\mathrm{S} = m \\cdot (g + a) = 2{,}0 \\cdot 14{,}028\\ldots = 28{,}05\\ldots\\ \\mathrm{N}$, som mycket riktigt ligger mellan 19,64 N och 49,1 N.
+
+Summan av tyngdkrafterna är den kraft som trissans upphängning skulle bära om vikterna hängde stilla, inte kraften i snöret.
+
+**Svar:** $F_\\mathrm{S}$ är större än tyngdkraften på 2,0-kilosvikten men mindre än tyngdkraften på 5,0-kilosvikten.`,
+        },
+        {
+            level: 1,
+            question: `En blomkruka med massan 4,5 kg hissas upp med ett rep som löper över en friktionsfri trissa i taket, enligt figuren. Hur stor kraft *F* måste man dra i repets andra ände med för att krukan ska stiga med konstant fart? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i N.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 246" style="max-width:338px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="60" y1="20" x2="240" y2="20" stroke="#0f1620" stroke-width="1.6"/><line x1="64" y1="20" x2="71" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="76" y1="20" x2="83" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="88" y1="20" x2="95" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="100" y1="20" x2="107" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="112" y1="20" x2="119" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="124" y1="20" x2="131" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="136" y1="20" x2="143" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="148" y1="20" x2="155" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="160" y1="20" x2="167" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="172" y1="20" x2="179" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="184" y1="20" x2="191" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="196" y1="20" x2="203" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="208" y1="20" x2="215" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="220" y1="20" x2="227" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="232" y1="20" x2="239" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="150" y1="20" x2="150" y2="66" stroke="#8a8579" stroke-width="3"/><circle cx="150.0" cy="66.0" r="28" fill="#eaf2fb" stroke="#4f7197" stroke-width="1.6"/><circle cx="150.0" cy="66.0" r="3" fill="#9aa3ad"/><path d="M 122 66 A 28 28 0 0 1 178 66" fill="none" stroke="#0f1620" stroke-width="1.8"/><line x1="122.0" y1="66.0" x2="122.0" y2="170.0" stroke="#0f1620" stroke-width="1.8"/><line x1="122.0" y1="170.0" x2="100.0" y2="186.0" stroke="#0f1620" stroke-width="1.8"/><line x1="122.0" y1="170.0" x2="144.0" y2="186.0" stroke="#0f1620" stroke-width="1.8"/><rect x="94" y="186" width="56" height="9" rx="1.5" fill="#c8734a" stroke="#8a4a2c" stroke-width="1.3"/><polygon points="98,195 146,195 140,234 104,234" fill="#d98a5f" stroke="#8a4a2c" stroke-width="1.3"/><path d="M 116 186 C 104 166 92 170 88 160 C 100 158 112 168 116 186 Z" fill="#6f9a4f" stroke="#4d6e35" stroke-width="1"/><path d="M 126 186 C 134 168 146 162 156 158 C 152 172 138 176 126 186 Z" fill="#6f9a4f" stroke="#4d6e35" stroke-width="1"/><text x="88" y="220" font-size="13" fill="#0f1620" text-anchor="end">4,5 kg</text><line x1="178.0" y1="66.0" x2="178.0" y2="160.0" stroke="#0f1620" stroke-width="1.8"/><rect x="164" y="160" width="28" height="9" rx="4" fill="#8a8579" stroke="#0f1620" stroke-width="1.2"/><line x1="178" y1="169" x2="178" y2="214" stroke="#c8324a" stroke-width="3.4" stroke-linecap="butt"/><polygon points="172,214 178,224 184,214" fill="#c8324a"/><text x="188" y="222" font-size="15" fill="#c8324a" font-style="italic">F</text></svg>`,
+            answer: { value: 44, unit: 'N', tol: 0.03 },
+            solution: `Krukan stiger med **konstant fart**. Enligt Newtons första lag är den resulterande kraften på krukan då noll, så spännkraften uppåt är lika stor som tyngdkraften nedåt:
+
+$$
+F_\\mathrm{S} = F_\\mathrm{G} = m \\cdot g = 4{,}5 \\cdot 9{,}82 = 44{,}19\\ \\mathrm{N}
+$$
+
+Trissan är friktionsfri och byter bara riktning på repets kraft. Spännkraften är lika stor i hela repet, så i den ände man drar i är kraften också 44,19 N:
+
+$$
+F = F_\\mathrm{S} = 44{,}19\\ \\mathrm{N} \\approx 44\\ \\mathrm{N}
+$$
+
+En sådan trissa gör alltså inte lyftet lättare. Fördelen är att man kan dra nedåt i stället för att lyfta.
+
+**Svar:** Man måste dra med kraften cirka 44 N.`,
+        },
+        {
+            level: 1,
+            question: `En vikt med massan 0,60 kg hänger i ena änden av ett snöre som går över en trissa. Snöret drar vikten uppåt med kraften 7,0 N.<br>a) Hur stor är den resulterande kraften på vikten?<br>b) Hur stor acceleration får vikten, och åt vilket håll?
+
+*Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
+            answer: { value: 1.1, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 1.1, unit: 'N', tol: 0.03 },
+                { del: 'b', value: 1.8, unit: 'm/s²', tol: 0.03 },
+            ],
+            solution: `**a)** På vikten verkar två krafter: spännkraften $F_\\mathrm{S}$ uppåt och tyngdkraften $F_\\mathrm{G}$ nedåt.
+
+$$
+\\left[ \\begin{array}{l}
+F_\\mathrm{S} = 7{,}0\\ \\mathrm{N} \\\\
+F_\\mathrm{G} = m \\cdot g = 0{,}60 \\cdot 9{,}82 = 5{,}892\\ \\mathrm{N}
+\\end{array} \\right]
+$$
+
+Spännkraften är störst, så den resulterande kraften pekar uppåt:
+
+$$
+F_R = F_\\mathrm{S} - F_\\mathrm{G} = 7{,}0 - 5{,}892 = 1{,}108\\ \\mathrm{N} \\approx 1{,}1\\ \\mathrm{N}
+$$
+
+**Svar:** Den resulterande kraften är cirka 1,1 N, riktad uppåt.
+
+**b)** Newtons andra lag för vikten ensam, med bara viktens egen massa:
+
+$$
+a = \\frac{F_R}{m} = \\frac{1{,}108}{0{,}60} = 1{,}846\\ldots\\ \\mathrm{m/s^2} \\approx 1{,}8\\ \\mathrm{m/s^2}
+$$
+
+Accelerationen har samma riktning som den resulterande kraften, alltså uppåt.
+
+**Svar:** Vikten får accelerationen cirka 1,8 m/s² uppåt.`,
+        },
+        {
+            level: 2,
+            question: `En låda med massan 5,0 kg ligger på ett vågrätt bord. Ett snöre går från lådan över en friktionsfri trissa vid bordskanten till en hängande vikt med massan 2,0 kg, enligt figuren. Efter en lätt knuff glider lådan med konstant fart mot trissan.<br>a) Bestäm friktionstalet mellan lådan och bordet.<br>b) Hur stor är spännkraften i snöret?
+
+${makePulley({ kind: 'bord', table: '5,0 kg', hanging: '2,0 kg' })}
+
+*Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
+            answer: { value: 0.40, unit: '', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 0.40, unit: '', tol: 0.03 },
+                { del: 'b', value: 20, unit: 'N', tol: 0.03 },
+            ],
+            solution: `Båda kropparna rör sig med **konstant fart**. Enligt Newtons första lag är den resulterande kraften då noll på var och en av dem.
+
+**a)** Vi börjar med den hängande vikten. Spännkraften uppåt är lika stor som tyngdkraften nedåt:
+
+$$
+F_\\mathrm{S} = F_{\\mathrm{G}2} = m_2 \\cdot g = 2{,}0 \\cdot 9{,}82 = 19{,}64\\ \\mathrm{N}
+$$
+
+Spännkraften är lika stor i hela snöret. På lådan drar snöret framåt och friktionen bromsar bakåt, och eftersom lådan inte accelererar är de lika stora: $F_\\mathrm{f} = F_\\mathrm{S} = 19{,}64\\ \\mathrm{N}$.
+
+Bordet är vågrätt, så normalkraften på lådan är lika stor som lådans tyngdkraft:
+
+$$
+F_\\mathrm{N} = m_1 \\cdot g = 5{,}0 \\cdot 9{,}82 = 49{,}1\\ \\mathrm{N}
+$$
+
+Friktionskraften är $F_\\mathrm{f} = \\mu \\cdot F_\\mathrm{N}$, och vi löser ut friktionstalet:
+
+$$
+\\mu = \\frac{F_\\mathrm{f}}{F_\\mathrm{N}} = \\frac{19{,}64}{49{,}1} = 0{,}40
+$$
+
+Tyngdfaktorn tar ut sig, och friktionstalet blir helt enkelt kvoten mellan massorna, $\\dfrac{2{,}0}{5{,}0}$.
+
+**Svar:** Friktionstalet är 0,40.
+
+**b)** Spännkraften räknades fram i a):
+
+$$
+F_\\mathrm{S} = 19{,}64\\ \\mathrm{N} \\approx 20\\ \\mathrm{N}
+$$
+
+**Svar:** Spännkraften är cirka 20 N.`,
+        },
+        {
+            level: 2,
+            question: `Två vikter med massorna 1,0 kg och 1,5 kg hänger i ett snöre över en friktionsfri trissa. Den tunga vikten hänger 0,80 m ovanför golvet, enligt figuren. Vikterna släpps från vila.<br>a) Hur lång tid tar det innan den tunga vikten slår i golvet?<br>b) Hur stor fart har den då?
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 312" style="max-width:351px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="40" y1="16" x2="230" y2="16" stroke="#0f1620" stroke-width="1.6"/><line x1="44" y1="16" x2="51" y2="8" stroke="#0f1620" stroke-width="1"/><line x1="56" y1="16" x2="63" y2="8" stroke="#0f1620" stroke-width="1"/><line x1="68" y1="16" x2="75" y2="8" stroke="#0f1620" stroke-width="1"/><line x1="80" y1="16" x2="87" y2="8" stroke="#0f1620" stroke-width="1"/><line x1="92" y1="16" x2="99" y2="8" stroke="#0f1620" stroke-width="1"/><line x1="104" y1="16" x2="111" y2="8" stroke="#0f1620" stroke-width="1"/><line x1="116" y1="16" x2="123" y2="8" stroke="#0f1620" stroke-width="1"/><line x1="128" y1="16" x2="135" y2="8" stroke="#0f1620" stroke-width="1"/><line x1="140" y1="16" x2="147" y2="8" stroke="#0f1620" stroke-width="1"/><line x1="152" y1="16" x2="159" y2="8" stroke="#0f1620" stroke-width="1"/><line x1="164" y1="16" x2="171" y2="8" stroke="#0f1620" stroke-width="1"/><line x1="176" y1="16" x2="183" y2="8" stroke="#0f1620" stroke-width="1"/><line x1="188" y1="16" x2="195" y2="8" stroke="#0f1620" stroke-width="1"/><line x1="200" y1="16" x2="207" y2="8" stroke="#0f1620" stroke-width="1"/><line x1="212" y1="16" x2="219" y2="8" stroke="#0f1620" stroke-width="1"/><line x1="224" y1="16" x2="231" y2="8" stroke="#0f1620" stroke-width="1"/><line x1="135" y1="16" x2="135" y2="58" stroke="#8a8579" stroke-width="3"/><circle cx="135.0" cy="58.0" r="32" fill="#eaf2fb" stroke="#4f7197" stroke-width="1.6"/><circle cx="135.0" cy="58.0" r="3" fill="#9aa3ad"/><path d="M 103 58 A 32 32 0 0 1 167 58" fill="none" stroke="#0f1620" stroke-width="1.8"/><line x1="103.0" y1="58.0" x2="103.0" y2="96.0" stroke="#0f1620" stroke-width="1.8"/><line x1="167.0" y1="58.0" x2="167.0" y2="158.0" stroke="#0f1620" stroke-width="1.8"/><rect x="78.0" y="96.0" width="50" height="36" rx="2" fill="#d3e4f5" stroke="#4f7197" stroke-width="1.4"/><text x="103.0" y="118.5" font-size="13" fill="#0f1620" text-anchor="middle">1,0 kg</text><rect x="142.0" y="158.0" width="50" height="36" rx="2" fill="#d3e4f5" stroke="#4f7197" stroke-width="1.4"/><text x="167.0" y="180.5" font-size="13" fill="#0f1620" text-anchor="middle">1,5 kg</text><line x1="20" y1="296" x2="260" y2="296" stroke="#0f1620" stroke-width="1.6"/><line x1="26" y1="296" x2="19" y2="304" stroke="#0f1620" stroke-width="1"/><line x1="38" y1="296" x2="31" y2="304" stroke="#0f1620" stroke-width="1"/><line x1="50" y1="296" x2="43" y2="304" stroke="#0f1620" stroke-width="1"/><line x1="62" y1="296" x2="55" y2="304" stroke="#0f1620" stroke-width="1"/><line x1="74" y1="296" x2="67" y2="304" stroke="#0f1620" stroke-width="1"/><line x1="86" y1="296" x2="79" y2="304" stroke="#0f1620" stroke-width="1"/><line x1="98" y1="296" x2="91" y2="304" stroke="#0f1620" stroke-width="1"/><line x1="110" y1="296" x2="103" y2="304" stroke="#0f1620" stroke-width="1"/><line x1="122" y1="296" x2="115" y2="304" stroke="#0f1620" stroke-width="1"/><line x1="134" y1="296" x2="127" y2="304" stroke="#0f1620" stroke-width="1"/><line x1="146" y1="296" x2="139" y2="304" stroke="#0f1620" stroke-width="1"/><line x1="158" y1="296" x2="151" y2="304" stroke="#0f1620" stroke-width="1"/><line x1="170" y1="296" x2="163" y2="304" stroke="#0f1620" stroke-width="1"/><line x1="182" y1="296" x2="175" y2="304" stroke="#0f1620" stroke-width="1"/><line x1="194" y1="296" x2="187" y2="304" stroke="#0f1620" stroke-width="1"/><line x1="206" y1="296" x2="199" y2="304" stroke="#0f1620" stroke-width="1"/><line x1="218" y1="296" x2="211" y2="304" stroke="#0f1620" stroke-width="1"/><line x1="230" y1="296" x2="223" y2="304" stroke="#0f1620" stroke-width="1"/><line x1="242" y1="296" x2="235" y2="304" stroke="#0f1620" stroke-width="1"/><line x1="254" y1="296" x2="247" y2="304" stroke="#0f1620" stroke-width="1"/><line x1="195" y1="194" x2="220" y2="194" stroke="#8a8579" stroke-width="1" stroke-dasharray="3 3"/><line x1="214" y1="201" x2="214" y2="289" stroke="#8a8579" stroke-width="1.3"/><polygon points="210,201 214,194 218,201" fill="#8a8579"/><polygon points="210,289 214,296 218,289" fill="#8a8579"/><text x="222" y="250" font-size="13" fill="#0f1620">0,80 m</text></svg>
+
+*Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
+            answer: { value: 0.90, unit: 's', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 0.90, unit: 's', tol: 0.03 },
+                { del: 'b', value: 1.8, unit: 'm/s', tol: 0.03 },
+            ],
+            solution: `**a)** Först behövs accelerationen. Vi ser vikterna och snöret som ett system, där den tunga viktens tyngd driver och den lätta viktens tyngd bromsar:
+
+$$
+F_R = m_2 \\cdot g - m_1 \\cdot g = 1{,}5 \\cdot 9{,}82 - 1{,}0 \\cdot 9{,}82 = 4{,}91\\ \\mathrm{N}
+$$
+
+$$
+a = \\frac{F_R}{m_\\text{tot}} = \\frac{4{,}91}{1{,}5 + 1{,}0} = \\frac{4{,}91}{2{,}5} = 1{,}964\\ \\mathrm{m/s^2}
+$$
+
+Accelerationen är konstant och vikterna startar från vila, så sträckan ges av
+
+$$
+s = v_0 \\cdot t + \\frac{a \\cdot t^2}{2}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+s = 0{,}80\\ \\mathrm{m} \\\\
+v_0 = 0 \\\\
+a = 1{,}964\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+Med $v_0 = 0$ blir $s = \\dfrac{a \\cdot t^2}{2}$, och vi löser ut tiden:
+
+$$
+t = \\sqrt{\\frac{2 \\cdot s}{a}} = \\sqrt{\\frac{2 \\cdot 0{,}80}{1{,}964}} = \\sqrt{0{,}8146\\ldots} = 0{,}9025\\ldots\\ \\mathrm{s} \\approx 0{,}90\\ \\mathrm{s}
+$$
+
+Rimlighet: i fritt fall hade vikten fallit 0,80 m på ungefär 0,4 s. Här bromsar den lätta vikten, så fallet tar längre tid.
+
+**Svar:** Det tar cirka 0,90 s.
+
+**b)** Farten när vikten når golvet:
+
+$$
+v = v_0 + a \\cdot t = 0 + 1{,}964 \\cdot 0{,}9025\\ldots = 1{,}772\\ldots\\ \\mathrm{m/s} \\approx 1{,}8\\ \\mathrm{m/s}
+$$
+
+**Svar:** Vikten har farten cirka 1,8 m/s.`,
+        },
+        {
+            level: 2,
+            question: `Vid en laboration drar en hängande vikt med massan $m$ en vagn med massan 0,90 kg över ett bord. Snöret går över en trissa vid bordskanten, och både vagnen och trissan kan räknas som friktionsfria. Eleverna mäter accelerationen $a$ för fyra olika vikter:
+
+| Mätning | $m$ (kg) | $a$ (m/s²) |
+|---|---|---|
+| 1 | 0,050 | 0,52 |
+| 2 | 0,100 | 0,98 |
+| 3 | 0,150 | 1,85 |
+| 4 | 0,200 | 1,79 |
+
+En av mätningarna är uppenbart felaktig. Vilken?`,
+            choices: [
+                `Mätning 1`,
+                `Mätning 2`,
+                `Mätning 3`,
+                `Mätning 4`,
+            ],
+            correct: 2,
+            solution: `Den hängande viktens tyngdkraft är den enda kraft som driver systemet, och både vagnen och vikten ska accelereras. Newtons andra lag ger därför
+
+$$
+a = \\frac{m \\cdot g}{0{,}90 + m}
+$$
+
+Vi räknar ut vad modellen förutsäger för varje mätning:
+
+$$
+\\begin{array}{l}
+\\text{Mätning 1:}\\quad a = \\dfrac{0{,}050 \\cdot 9{,}82}{0{,}90 + 0{,}050} = \\dfrac{0{,}491}{0{,}95} = 0{,}516\\ldots\\ \\mathrm{m/s^2} \\\\[6pt]
+\\text{Mätning 2:}\\quad a = \\dfrac{0{,}100 \\cdot 9{,}82}{0{,}90 + 0{,}100} = \\dfrac{0{,}982}{1{,}00} = 0{,}982\\ \\mathrm{m/s^2} \\\\[6pt]
+\\text{Mätning 3:}\\quad a = \\dfrac{0{,}150 \\cdot 9{,}82}{0{,}90 + 0{,}150} = \\dfrac{1{,}473}{1{,}05} = 1{,}402\\ldots\\ \\mathrm{m/s^2} \\\\[6pt]
+\\text{Mätning 4:}\\quad a = \\dfrac{0{,}200 \\cdot 9{,}82}{0{,}90 + 0{,}200} = \\dfrac{1{,}964}{1{,}10} = 1{,}785\\ldots\\ \\mathrm{m/s^2}
+\\end{array}
+$$
+
+Mätning 1, 2 och 4 stämmer väl med modellen. Mätning 3 ger 1,85 m/s² där modellen förutsäger ungefär 1,40 m/s². Det syns också utan räkning: en tyngre vikt ger alltid större acceleration, men mätning 3 har större acceleration än mätning 4 trots att vikten är lättare.
+
+**Svar:** Mätning 3`,
+        },
+        {
+            level: 2,
+            question: `En byggarbetare hissar upp en hink med murbruk med ett rep som löper över en friktionsfri trissa, enligt figuren. Trissan hänger i en balk, och repet är lodrätt på båda sidor om trissan. Hinken med murbruket har massan 12 kg. Den startar från vila och har farten 0,60 m/s efter 1,5 s, med konstant acceleration.<br>a) Med hur stor kraft *F* drar arbetaren i repet?<br>b) Hur stor kraft verkar på trissans upphängning i balken? Trissans massa kan försummas.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 246" style="max-width:338px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="60" y1="20" x2="240" y2="20" stroke="#0f1620" stroke-width="1.6"/><line x1="64" y1="20" x2="71" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="76" y1="20" x2="83" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="88" y1="20" x2="95" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="100" y1="20" x2="107" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="112" y1="20" x2="119" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="124" y1="20" x2="131" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="136" y1="20" x2="143" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="148" y1="20" x2="155" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="160" y1="20" x2="167" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="172" y1="20" x2="179" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="184" y1="20" x2="191" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="196" y1="20" x2="203" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="208" y1="20" x2="215" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="220" y1="20" x2="227" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="232" y1="20" x2="239" y2="12" stroke="#0f1620" stroke-width="1"/><line x1="150" y1="20" x2="150" y2="66" stroke="#8a8579" stroke-width="3"/><circle cx="150.0" cy="66.0" r="28" fill="#eaf2fb" stroke="#4f7197" stroke-width="1.6"/><circle cx="150.0" cy="66.0" r="3" fill="#9aa3ad"/><path d="M 122 66 A 28 28 0 0 1 178 66" fill="none" stroke="#0f1620" stroke-width="1.8"/><line x1="122.0" y1="66.0" x2="122.0" y2="166.0" stroke="#0f1620" stroke-width="1.8"/><path d="M 102 192 Q 122 140 142 192" fill="none" stroke="#4b5563" stroke-width="2"/><polygon points="98,190 146,190 140,234 104,234" fill="#b8c2cc" stroke="#4b5563" stroke-width="1.3"/><rect x="96" y="187" width="52" height="6" rx="2" fill="#9aa6b2" stroke="#4b5563" stroke-width="1.2"/><line x1="101" y1="206" x2="143" y2="206" stroke="#4b5563" stroke-width="1"/><line x1="102.5" y1="220" x2="141.5" y2="220" stroke="#4b5563" stroke-width="1"/><text x="90" y="222" font-size="13" fill="#0f1620" text-anchor="end">12 kg</text><line x1="178.0" y1="66.0" x2="178.0" y2="160.0" stroke="#0f1620" stroke-width="1.8"/><rect x="164" y="160" width="28" height="9" rx="4" fill="#8a8579" stroke="#0f1620" stroke-width="1.2"/><line x1="178" y1="169" x2="178" y2="214" stroke="#c8324a" stroke-width="3.4" stroke-linecap="butt"/><polygon points="172,214 178,224 184,214" fill="#c8324a"/><text x="188" y="222" font-size="15" fill="#c8324a" font-style="italic">F</text></svg>
+
+*Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
+            answer: { value: 120, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 120, unit: 'N', tol: 0.03 },
+                { del: 'b', value: 250, unit: 'N', tol: 0.03 },
+            ],
+            solution: `**a)** Först behövs hinkens acceleration. Den är konstant och hinken startar från vila, så $v = v_0 + a \\cdot t$ ger
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = 0 \\\\
+v = 0{,}60\\ \\mathrm{m/s} \\\\
+t = 1{,}5\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+a = \\frac{v - v_0}{t} = \\frac{0{,}60 - 0}{1{,}5} = 0{,}40\\ \\mathrm{m/s^2}
+$$
+
+På hinken verkar två krafter: spännkraften $F_\\mathrm{S}$ uppåt och tyngdkraften $F_\\mathrm{G}$ nedåt. Hinken accelererar uppåt, så den resulterande kraften pekar uppåt och spännkraften är större än tyngdkraften. Newtons andra lag för hinken:
+
+$$
+F_R = F_\\mathrm{S} - F_\\mathrm{G} \\quad\\Leftrightarrow\\quad F_\\mathrm{S} = F_R + F_\\mathrm{G}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F_R = m \\cdot a = 12 \\cdot 0{,}40 = 4{,}8\\ \\mathrm{N} \\\\
+F_\\mathrm{G} = m \\cdot g = 12 \\cdot 9{,}82 = 117{,}84\\ \\mathrm{N}
+\\end{array} \\right]
+$$
+
+$$
+F_\\mathrm{S} = 4{,}8 + 117{,}84 = 122{,}64\\ \\mathrm{N}
+$$
+
+Trissan är friktionsfri, så spännkraften är lika stor i hela repet. Arbetaren drar alltså med $F = F_\\mathrm{S} = 122{,}64\\ \\mathrm{N} \\approx 120\\ \\mathrm{N}$. Det är lite mer än hinkens tyngdkraft, vilket är rimligt: en del av kraften går åt till att öka hinkens fart.
+
+**Svar:** Arbetaren drar med kraften cirka 120 N.
+
+**b)** Repet går runt trissan och drar i den nedåt på **båda** sidor, med spännkraften $F_\\mathrm{S}$ på var sida. Trissan själv står still, så upphängningen måste hålla emot med en lika stor kraft uppåt:
+
+$$
+F_\\text{upph} = 2 \\cdot F_\\mathrm{S} = 2 \\cdot 122{,}64 = 245{,}28\\ \\mathrm{N} \\approx 250\\ \\mathrm{N}
+$$
+
+Upphängningen bär alltså mer än dubbla hinkens tyngdkraft så länge hinken accelererar. Ett vanligt misstag är att svara med hinkens tyngdkraft, men balken bär både repet som håller hinken och repet som arbetaren drar i.
+
+**Svar:** Kraften på upphängningen är cirka 250 N.`,
+        },
+        {
+            level: 2,
+            question: `Två lådor A och B ligger på ett vågrätt bord och är förbundna med ett snöre. Från låda B går ett annat snöre över en friktionsfri trissa vid bordskanten till en hängande vikt C, enligt figuren. Lådorna glider utan friktion. Systemet släpps från vila.<br>a) Bestäm systemets acceleration.<br>b) Bestäm spännkraften i snöret mellan A och B.<br>c) Bestäm spännkraften i snöret mellan B och C.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 276" style="max-width:559px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="10" y1="262" x2="420" y2="262" stroke="#0f1620" stroke-width="1.6"/><line x1="16" y1="262" x2="9" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="28" y1="262" x2="21" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="40" y1="262" x2="33" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="52" y1="262" x2="45" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="64" y1="262" x2="57" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="76" y1="262" x2="69" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="88" y1="262" x2="81" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="100" y1="262" x2="93" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="112" y1="262" x2="105" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="124" y1="262" x2="117" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="136" y1="262" x2="129" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="148" y1="262" x2="141" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="160" y1="262" x2="153" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="172" y1="262" x2="165" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="184" y1="262" x2="177" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="196" y1="262" x2="189" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="208" y1="262" x2="201" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="220" y1="262" x2="213" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="232" y1="262" x2="225" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="244" y1="262" x2="237" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="256" y1="262" x2="249" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="268" y1="262" x2="261" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="280" y1="262" x2="273" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="292" y1="262" x2="285" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="304" y1="262" x2="297" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="316" y1="262" x2="309" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="328" y1="262" x2="321" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="340" y1="262" x2="333" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="352" y1="262" x2="345" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="364" y1="262" x2="357" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="376" y1="262" x2="369" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="388" y1="262" x2="381" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="400" y1="262" x2="393" y2="270" stroke="#0f1620" stroke-width="1"/><line x1="412" y1="262" x2="405" y2="270" stroke="#0f1620" stroke-width="1"/><rect x="20" y="120" width="310" height="8" fill="#c9b79a" stroke="#8a6f4e" stroke-width="1.2"/><rect x="34" y="128" width="8" height="134" fill="#c9b79a" stroke="#8a6f4e" stroke-width="1.2"/><rect x="308" y="128" width="8" height="134" fill="#c9b79a" stroke="#8a6f4e" stroke-width="1.2"/><line x1="330" y1="124" x2="344" y2="119" stroke="#8a8579" stroke-width="3"/><rect x="56.0" y="80.0" width="74" height="40" rx="2" fill="#d3e4f5" stroke="#4f7197" stroke-width="1.4"/><text x="93.0" y="104.5" font-size="13" fill="#0f1620" text-anchor="middle">2,0 kg</text><rect x="184.0" y="86.0" width="56" height="34" rx="2" fill="#d3e4f5" stroke="#4f7197" stroke-width="1.4"/><text x="212.0" y="107.5" font-size="13" fill="#0f1620" text-anchor="middle">1,0 kg</text><text x="93" y="72" font-size="14" fill="#0f1620" text-anchor="middle">A</text><text x="212" y="78" font-size="14" fill="#0f1620" text-anchor="middle">B</text><line x1="130.0" y1="103.0" x2="184.0" y2="103.0" stroke="#0f1620" stroke-width="1.8"/><line x1="240.0" y1="103.0" x2="344.0" y2="103.0" stroke="#0f1620" stroke-width="1.8"/><circle cx="344.0" cy="119.0" r="16" fill="#eaf2fb" stroke="#4f7197" stroke-width="1.6"/><circle cx="344.0" cy="119.0" r="3" fill="#9aa3ad"/><path d="M 344 103 A 16 16 0 0 1 360 119" fill="none" stroke="#0f1620" stroke-width="1.8"/><line x1="360.0" y1="119.0" x2="360.0" y2="186.0" stroke="#0f1620" stroke-width="1.8"/><rect x="338.0" y="186.0" width="44" height="36" rx="2" fill="#d3e4f5" stroke="#4f7197" stroke-width="1.4"/><text x="360.0" y="208.5" font-size="13" fill="#0f1620" text-anchor="middle">1,0 kg</text><text x="360" y="244" font-size="14" fill="#0f1620" text-anchor="middle">C</text></svg>
+
+*Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
+            answer: { value: 2.5, unit: 'm/s²', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 2.5, unit: 'm/s²', tol: 0.03 },
+                { del: 'b', value: 4.9, unit: 'N', tol: 0.03 },
+                { del: 'c', value: 7.4, unit: 'N', tol: 0.03 },
+            ],
+            solution: `**a)** Vi ser alla tre kropparna som ett system. Lådornas tyngdkrafter tas ut av normalkrafterna, så den enda drivande kraften är tyngdkraften på C:
+
+$$
+\\left[ \\begin{array}{l}
+F_R = m_\\mathrm{C} \\cdot g = 1{,}0 \\cdot 9{,}82 = 9{,}82\\ \\mathrm{N} \\\\
+m_\\text{tot} = 2{,}0 + 1{,}0 + 1{,}0 = 4{,}0\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$
+a = \\frac{F_R}{m_\\text{tot}} = \\frac{9{,}82}{4{,}0} = 2{,}455\\ \\mathrm{m/s^2} \\approx 2{,}5\\ \\mathrm{m/s^2}
+$$
+
+**Svar:** Accelerationen är cirka 2,5 m/s².
+
+**b)** Snöret mellan A och B är det enda som drar i låda A. Spännkraften i det snöret är alltså A:s resulterande kraft, och bara A:s massa räknas:
+
+$$
+F_{\\mathrm{S},\\mathrm{AB}} = m_\\mathrm{A} \\cdot a = 2{,}0 \\cdot 2{,}455 = 4{,}91\\ \\mathrm{N} \\approx 4{,}9\\ \\mathrm{N}
+$$
+
+**Svar:** Spännkraften mellan A och B är cirka 4,9 N.
+
+**c)** Snöret mellan B och C drar både B och, via det första snöret, A. Vi ser A och B tillsammans som en kropp:
+
+$$
+F_{\\mathrm{S},\\mathrm{BC}} = (m_\\mathrm{A} + m_\\mathrm{B}) \\cdot a = 3{,}0 \\cdot 2{,}455 = 7{,}365\\ \\mathrm{N} \\approx 7{,}4\\ \\mathrm{N}
+$$
+
+Kontroll med vikten C, som accelererar nedåt: $F_{\\mathrm{S},\\mathrm{BC}} = m_\\mathrm{C} \\cdot g - m_\\mathrm{C} \\cdot a = 9{,}82 - 2{,}455 = 7{,}365\\ \\mathrm{N}$.
+
+De två snörena har olika spännkraft. Regeln att spännkraften är lika stor i hela snöret gäller för **ett** snöre, och här finns två.
+
+**Svar:** Spännkraften mellan B och C är cirka 7,4 N.`,
+        },
+        {
+            level: 3,
+            question: `En elev vill undersöka hur en vagn med massan $M$ accelererar när den dras med en känd kraft. Hon låter en hängande vikt med massan $m$ dra vagnen via ett snöre över en trissa (försök A i figuren). I sin beräkning antar hon att vagnen dras med kraften $m \\cdot g$, precis som om den drogs vågrätt med en konstant kraft lika stor som viktens tyngdkraft (försök B), och räknar därför med accelerationen $\\dfrac{m \\cdot g}{M}$. Vagnen och trissan är friktionsfria.<br>a) Förklara varför vagnens verkliga acceleration i försök A blir mindre än elevens beräknade värde.<br>b) Hur stor får viktens massa högst vara, i procent av vagnens massa, om elevens beräknade acceleration ska vara högst 5,0 % för stor?
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 574 252" style="max-width:631px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="4" y1="236" x2="276" y2="236" stroke="#0f1620" stroke-width="1.6"/><line x1="10" y1="236" x2="3" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="22" y1="236" x2="15" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="34" y1="236" x2="27" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="46" y1="236" x2="39" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="58" y1="236" x2="51" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="70" y1="236" x2="63" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="82" y1="236" x2="75" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="94" y1="236" x2="87" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="106" y1="236" x2="99" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="118" y1="236" x2="111" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="130" y1="236" x2="123" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="142" y1="236" x2="135" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="154" y1="236" x2="147" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="166" y1="236" x2="159" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="178" y1="236" x2="171" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="190" y1="236" x2="183" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="202" y1="236" x2="195" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="214" y1="236" x2="207" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="226" y1="236" x2="219" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="238" y1="236" x2="231" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="250" y1="236" x2="243" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="262" y1="236" x2="255" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="274" y1="236" x2="267" y2="244" stroke="#0f1620" stroke-width="1"/><rect x="14" y="112" width="206" height="8" fill="#c9b79a" stroke="#8a6f4e" stroke-width="1.2"/><rect x="28" y="120" width="8" height="116" fill="#c9b79a" stroke="#8a6f4e" stroke-width="1.2"/><rect x="198" y="120" width="8" height="116" fill="#c9b79a" stroke="#8a6f4e" stroke-width="1.2"/><rect x="80.0" y="66.0" width="74" height="34" rx="2" fill="#d3e4f5" stroke="#4f7197" stroke-width="1.4"/><text x="117.0" y="87.5" font-size="13" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">M</tspan></text><circle cx="95" cy="106" r="6" fill="#4b5563" stroke="#0f1620" stroke-width="1.2"/><circle cx="95" cy="106" r="1.8" fill="#d1d5db"/><circle cx="139" cy="106" r="6" fill="#4b5563" stroke="#0f1620" stroke-width="1.2"/><circle cx="139" cy="106" r="1.8" fill="#d1d5db"/><line x1="220" y1="116" x2="232" y2="96" stroke="#8a8579" stroke-width="3"/><line x1="154.0" y1="82.0" x2="232.0" y2="82.0" stroke="#0f1620" stroke-width="1.8"/><circle cx="232.0" cy="96.0" r="14" fill="#eaf2fb" stroke="#4f7197" stroke-width="1.6"/><circle cx="232.0" cy="96.0" r="3" fill="#9aa3ad"/><path d="M 232 82 A 14 14 0 0 1 246 96" fill="none" stroke="#0f1620" stroke-width="1.8"/><line x1="246.0" y1="96.0" x2="246.0" y2="150.0" stroke="#0f1620" stroke-width="1.8"/><rect x="224.0" y="150.0" width="44" height="32" rx="2" fill="#d3e4f5" stroke="#4f7197" stroke-width="1.4"/><text x="246.0" y="170.5" font-size="13" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">m</tspan></text><text x="140" y="28" font-size="14" fill="#0f1620" text-anchor="middle">Försök A</text><line x1="294" y1="236" x2="566" y2="236" stroke="#0f1620" stroke-width="1.6"/><line x1="300" y1="236" x2="293" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="312" y1="236" x2="305" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="324" y1="236" x2="317" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="336" y1="236" x2="329" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="348" y1="236" x2="341" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="360" y1="236" x2="353" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="372" y1="236" x2="365" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="384" y1="236" x2="377" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="396" y1="236" x2="389" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="408" y1="236" x2="401" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="420" y1="236" x2="413" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="432" y1="236" x2="425" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="444" y1="236" x2="437" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="456" y1="236" x2="449" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="468" y1="236" x2="461" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="480" y1="236" x2="473" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="492" y1="236" x2="485" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="504" y1="236" x2="497" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="516" y1="236" x2="509" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="528" y1="236" x2="521" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="540" y1="236" x2="533" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="552" y1="236" x2="545" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="564" y1="236" x2="557" y2="244" stroke="#0f1620" stroke-width="1"/><rect x="304" y="112" width="206" height="8" fill="#c9b79a" stroke="#8a6f4e" stroke-width="1.2"/><rect x="318" y="120" width="8" height="116" fill="#c9b79a" stroke="#8a6f4e" stroke-width="1.2"/><rect x="488" y="120" width="8" height="116" fill="#c9b79a" stroke="#8a6f4e" stroke-width="1.2"/><rect x="370.0" y="66.0" width="74" height="34" rx="2" fill="#d3e4f5" stroke="#4f7197" stroke-width="1.4"/><text x="407.0" y="87.5" font-size="13" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">M</tspan></text><circle cx="385" cy="106" r="6" fill="#4b5563" stroke="#0f1620" stroke-width="1.2"/><circle cx="385" cy="106" r="1.8" fill="#d1d5db"/><circle cx="429" cy="106" r="6" fill="#4b5563" stroke="#0f1620" stroke-width="1.2"/><circle cx="429" cy="106" r="1.8" fill="#d1d5db"/><line x1="444" y1="82" x2="510" y2="82" stroke="#c8324a" stroke-width="3.4" stroke-linecap="butt"/><polygon points="510,76 520,82 510,88" fill="#c8324a"/><text x="452" y="70" font-size="14" fill="#c8324a"><tspan font-style="italic">F</tspan> = <tspan font-style="italic">m</tspan> · <tspan font-style="italic">g</tspan></text><text x="430" y="28" font-size="14" fill="#0f1620" text-anchor="middle">Försök B</text><line x1="284" y1="14" x2="284" y2="246" stroke="rgba(15,22,32,0.18)" stroke-width="1"/></svg>`,
+            answer: { value: 5, unit: '%', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 5, unit: '%', tol: 0.03 },
+            ],
+            solution: `**a)** I försök B är kraften $m \\cdot g$ den enda vågräta kraften på vagnen, och den ska bara accelerera vagnen. Det ger elevens värde:
+
+$$
+a_\\mathrm{B} = \\frac{m \\cdot g}{M}
+$$
+
+I försök A driver viktens tyngdkraft $m \\cdot g$ hela systemet, och nu ska **både** vagnen och vikten accelereras. Newtons andra lag för hela systemet:
+
+$$
+a_\\mathrm{A} = \\frac{m \\cdot g}{M + m}
+$$
+
+Nämnaren är större, så accelerationen blir mindre. Samma sak syns om man tittar på vikten ensam. Den accelererar nedåt, så den resulterande kraften på den pekar nedåt, och då är spännkraften uppåt **mindre** än viktens tyngdkraft. Det är spännkraften som drar vagnen, och den är
+
+$$
+F_\\mathrm{S} = M \\cdot a_\\mathrm{A} = \\frac{M}{M + m} \\cdot m \\cdot g
+$$
+
+alltså mindre än $m \\cdot g$. En del av viktens tyngdkraft går åt till att accelerera vikten själv.
+
+**Svar:** Vikten ska också accelereras. Därför är spännkraften som drar vagnen mindre än viktens tyngdkraft, och vagnens acceleration blir mindre än $\\dfrac{m \\cdot g}{M}$.
+
+**b)** Vi jämför elevens värde med det verkliga genom att dividera dem med varandra:
+
+$$
+\\frac{a_\\mathrm{B}}{a_\\mathrm{A}} = \\frac{m \\cdot g}{M} \\cdot \\frac{M + m}{m \\cdot g} = \\frac{M + m}{M} = 1 + \\frac{m}{M}
+$$
+
+Massorna och tyngdfaktorn behövs alltså inte var för sig: felet beror bara på kvoten $\\dfrac{m}{M}$. Att elevens värde är högst 5,0 % för stort betyder att kvoten mellan värdena är högst 1,050:
+
+$$
+1 + \\frac{m}{M} \\leq 1{,}050
+$$
+
+$$
+1 + \\frac{m}{M} \\mathbin{\\boldsymbol{-}} \\boldsymbol{1} \\leq 1{,}050 \\mathbin{\\boldsymbol{-}} \\boldsymbol{1}
+$$
+
+$$
+\\frac{m}{M} \\leq 0{,}050
+$$
+
+Kontroll med påhittade värden, $M = 2{,}0\\ \\mathrm{kg}$ och $m = 0{,}10\\ \\mathrm{kg}$: elevens värde blir $\\dfrac{0{,}10 \\cdot 9{,}82}{2{,}0} = 0{,}491\\ \\mathrm{m/s^2}$ och det verkliga $\\dfrac{0{,}10 \\cdot 9{,}82}{2{,}1} = 0{,}4676\\ldots\\ \\mathrm{m/s^2}$, och kvoten mellan dem är $1{,}05$.
+
+Därför används lätta vikter och en tung vagn när man vill att den hängande viktens tyngdkraft ska vara en bra uppskattning av kraften på vagnen.
+
+**Svar:** Viktens massa får högst vara 5,0 % av vagnens massa.`,
+        },
+        {
+            level: 3,
+            question: `En låda med massan 5,0 kg står på ett lutande plan med lutningsvinkeln $\\alpha = 25^\\circ$. Ett snöre går från lådan, parallellt med planet, över en friktionsfri trissa i planets topp till en hängande vikt med massan $m$, enligt figuren. Friktionstalet mellan lådan och planet är 0,30, och friktionskraften kan som mest bli $\\mu \\cdot F_\\mathrm{N}$. Inom vilket intervall kan $m$ ligga utan att lådan börjar glida?<br>a) Bestäm den minsta massan.&emsp;&emsp;b) Bestäm den största massan.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 256" style="max-width:546px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="10" y1="240" x2="420" y2="240" stroke="#0f1620" stroke-width="1.6"/><line x1="16" y1="240" x2="9" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="28" y1="240" x2="21" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="40" y1="240" x2="33" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="52" y1="240" x2="45" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="64" y1="240" x2="57" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="76" y1="240" x2="69" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="88" y1="240" x2="81" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="100" y1="240" x2="93" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="112" y1="240" x2="105" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="124" y1="240" x2="117" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="136" y1="240" x2="129" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="148" y1="240" x2="141" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="160" y1="240" x2="153" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="172" y1="240" x2="165" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="184" y1="240" x2="177" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="196" y1="240" x2="189" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="208" y1="240" x2="201" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="220" y1="240" x2="213" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="232" y1="240" x2="225" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="244" y1="240" x2="237" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="256" y1="240" x2="249" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="268" y1="240" x2="261" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="280" y1="240" x2="273" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="292" y1="240" x2="285" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="304" y1="240" x2="297" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="316" y1="240" x2="309" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="328" y1="240" x2="321" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="340" y1="240" x2="333" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="352" y1="240" x2="345" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="364" y1="240" x2="357" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="376" y1="240" x2="369" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="388" y1="240" x2="381" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="400" y1="240" x2="393" y2="248" stroke="#0f1620" stroke-width="1"/><line x1="412" y1="240" x2="405" y2="248" stroke="#0f1620" stroke-width="1"/><polygon points="30,240 330,240 330.0,100.1" fill="#efe7d8" stroke="#0f1620" stroke-width="1.6" stroke-linejoin="round"/><polygon points="149.6,184.2 209.4,156.3 193.4,121.9 133.6,149.8" fill="#d3e4f5" stroke="#4f7197" stroke-width="1.4" stroke-linejoin="round"/><text x="171.5" y="153.0" font-size="13" fill="#0f1620" text-anchor="middle" dominant-baseline="middle" transform="rotate(-25 171.5 153.0)">5,0 kg</text><line x1="330.0" y1="100.1" x2="346.0" y2="87.1" stroke="#8a8579" stroke-width="3"/><line x1="201.4" y1="139.1" x2="340.1" y2="74.4" stroke="#0f1620" stroke-width="1.8"/><circle cx="346.0" cy="87.1" r="14" fill="#eaf2fb" stroke="#4f7197" stroke-width="1.6"/><circle cx="346.0" cy="87.1" r="3" fill="#9aa3ad"/><path d="M 340.1 74.4 A 14 14 0 0 1 360.0 87.1" fill="none" stroke="#0f1620" stroke-width="1.8"/><line x1="360.0" y1="87.1" x2="360.0" y2="160.0" stroke="#0f1620" stroke-width="1.8"/><rect x="340.0" y="160.0" width="40" height="34" rx="2" fill="#d3e4f5" stroke="#4f7197" stroke-width="1.4"/><text x="360.0" y="181.5" font-size="13" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">m</tspan></text><path d="M 72.0 240.0 A 42 42 0 0 0 68.1 222.3" fill="none" stroke="#0f1620" stroke-width="1.3"/><text x="82.7" y="232.3" font-size="14" fill="#0f1620" font-style="italic">α</text></svg>
+
+*Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
+            answer: { value: 0.75, unit: 'kg', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 0.75, unit: 'kg', tol: 0.03 },
+                { del: 'b', value: 3.5, unit: 'kg', tol: 0.03 },
+            ],
+            solution: `Vikten hänger stilla, så spännkraften i snöret är lika stor som viktens tyngdkraft: $F_\\mathrm{S} = m \\cdot g$.
+
+Lådans tyngdkraft delas upp i en komposant längs planet och en vinkelrätt mot planet:
+
+$$
+\\left[ \\begin{array}{l}
+F_\\mathrm{G} = 5{,}0 \\cdot 9{,}82 = 49{,}1\\ \\mathrm{N} \\\\
+F_\\mathrm{G} \\cdot \\sin \\alpha = 49{,}1 \\cdot \\sin 25^\\circ = 20{,}75\\ldots\\ \\mathrm{N} \\quad (\\text{längs planet, nedåt}) \\\\
+F_\\mathrm{N} = F_\\mathrm{G} \\cdot \\cos \\alpha = 49{,}1 \\cdot \\cos 25^\\circ = 44{,}49\\ldots\\ \\mathrm{N}
+\\end{array} \\right]
+$$
+
+Den största friktionskraft underlaget kan ge är
+
+$$
+F_{\\mathrm{f},\\max} = \\mu \\cdot F_\\mathrm{N} = 0{,}30 \\cdot 44{,}49\\ldots = 13{,}34\\ldots\\ \\mathrm{N}
+$$
+
+Friktionen är inte bestämd i förväg: den riktar sig alltid **mot** den rörelse som annars skulle uppstå. Därför finns det två gränsfall.
+
+**a)** Är vikten lätt vill lådan glida **nedför** planet. Friktionen pekar då uppför planet och hjälper snöret. I gränsfallet är krafterna längs planet i jämvikt:
+
+$$
+m \\cdot g + F_{\\mathrm{f},\\max} = F_\\mathrm{G} \\cdot \\sin \\alpha
+$$
+
+$$
+m \\cdot g = 20{,}75\\ldots - 13{,}34\\ldots = 7{,}400\\ldots\\ \\mathrm{N}
+$$
+
+$$
+m = \\frac{7{,}400\\ldots}{9{,}82} = 0{,}7536\\ldots\\ \\mathrm{kg} \\approx 0{,}75\\ \\mathrm{kg}
+$$
+
+**Svar:** Den minsta massan är cirka 0,75 kg.
+
+**b)** Är vikten tung vill lådan glida **uppför** planet. Nu pekar friktionen nedför planet, åt samma håll som tyngdkraftens komposant:
+
+$$
+m \\cdot g = F_\\mathrm{G} \\cdot \\sin \\alpha + F_{\\mathrm{f},\\max}
+$$
+
+$$
+m \\cdot g = 20{,}75\\ldots + 13{,}34\\ldots = 34{,}10\\ldots\\ \\mathrm{N}
+$$
+
+$$
+m = \\frac{34{,}10\\ldots}{9{,}82} = 3{,}472\\ldots\\ \\mathrm{kg} \\approx 3{,}5\\ \\mathrm{kg}
+$$
+
+**Svar:** Den största massan är cirka 3,5 kg.
+
+Rimlighet: utan friktion finns bara ett värde som ger jämvikt, $m = 5{,}0 \\cdot \\sin 25^\\circ = 2{,}1\\ \\mathrm{kg}$, och det ligger mitt i intervallet. Friktionen breddar alltså intervallet åt båda hållen. Generellt blir gränserna $m = M \\cdot (\\sin \\alpha \\pm \\mu \\cdot \\cos \\alpha)$, där $M$ är lådans massa, och tyngdfaktorn tar ut sig.`,
+        },
+        {
+            level: 3,
+            question: `En forskningsrobot på en främmande himlakropp har med sig en trissa med två vikter. Den ena vikten har tre gånger så stor massa som den andra, men massorna är okända. Vikterna släpps från vila, och roboten mäter att den tunga vikten faller 1,20 m på 0,80 s. Bestäm tyngdfaktorn på himlakroppen. Bortse från friktion och luftmotstånd. Ange svaret i N/kg.
+
+${makePulley({ kind: 'atwood', left: '3<tspan font-style="italic">m</tspan>', right: '<tspan font-style="italic">m</tspan>' })}`,
+            answer: { value: 7.5, unit: 'N/kg', tol: 0.03 },
+            solution: `Massorna är okända, så vi låter den lätta vikten ha massan $m$ och den tunga $3m$, och räknar med bokstäver tills $m$ tar ut sig. Tyngdfaktorn kallas $g$.
+
+**Accelerationen enligt modellen.** Den tunga viktens tyngdkraft driver systemet och den lätta viktens bromsar. Hela systemets massa ska accelereras:
+
+$$
+a = \\frac{F_R}{m_\\text{tot}} = \\frac{3m \\cdot g - m \\cdot g}{3m + m} = \\frac{2m \\cdot g}{4m} = \\frac{g}{2}
+$$
+
+Massan $m$ förkortas bort, så den behövs inte.
+
+**Accelerationen ur mätningen.** Vikterna startar från vila och har konstant acceleration:
+
+$$
+s = \\frac{a \\cdot t^2}{2} \\quad\\Leftrightarrow\\quad a = \\frac{2 \\cdot s}{t^2}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+s = 1{,}20\\ \\mathrm{m} \\\\
+t = 0{,}80\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+a = \\frac{2 \\cdot 1{,}20}{0{,}80^2} = \\frac{2{,}40}{0{,}64} = 3{,}75\\ \\mathrm{m/s^2}
+$$
+
+**Tyngdfaktorn.** Modellen gav $a = \\dfrac{g}{2}$, alltså $g = 2 \\cdot a$:
+
+$$
+g = 2 \\cdot 3{,}75 = 7{,}5\\ \\mathrm{m/s^2} = 7{,}5\\ \\mathrm{N/kg}
+$$
+
+Rimlighet: värdet ligger mellan tyngdfaktorn på Mars (ungefär 3,7 N/kg) och på jorden (9,82 N/kg), vilket är rimligt för en himlakropp av planetstorlek. Trissan gör fallet långsammare, så att tiden blir lätt att mäta, men eftersom massförhållandet är känt går tyngdfaktorn ändå att räkna fram. Ett vanligt misstag är att sätta $a = g$, vilket ger hälften så stort värde.
+
+**Svar:** Tyngdfaktorn är cirka 7,5 N/kg.`,
+        },
+        {
+            level: 3,
+            question: `Ett snöre tål en spännkraft på högst 30 N innan det går av. Snöret läggs över en friktionsfri trissa, och i ena änden hänger en vikt med massan 2,0 kg. Hur stor massa $M$ kan man som mest hänga i den andra änden utan att snöret går av när vikterna släpps? Ange svaret i kg.
+
+${makePulley({ kind: 'atwood', left: '<tspan font-style="italic">M</tspan>', right: '2,0 kg' })}
+
+*Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
+            answer: { value: 6.5, unit: 'kg', tol: 0.03 },
+            solution: `Vi kallar den kända massan $m = 2{,}0\\ \\mathrm{kg}$. Om $M$ är större än $m$ sjunker $M$ och den lätta vikten lyfts. Spännkraften ändras när $M$ ändras, så vi tar först fram ett generellt uttryck för den.
+
+**Accelerationen** ur hela systemet:
+
+$$
+a = \\frac{M \\cdot g - m \\cdot g}{M + m} = \\frac{(M - m) \\cdot g}{M + m} \\tag{1}
+$$
+
+**Spännkraften** ur den lätta vikten, som accelererar uppåt:
+
+$$
+F_\\mathrm{S} - m \\cdot g = m \\cdot a \\quad\\Leftrightarrow\\quad F_\\mathrm{S} = m \\cdot (g + a) \\tag{2}
+$$
+
+Uttrycket för $a$ från (1) insatt i (2), $F_\\mathrm{S} = m \\cdot (g + a)$, ger
+
+$$
+F_\\mathrm{S} = m \\cdot g \\cdot \\left( 1 + \\frac{M - m}{M + m} \\right) = m \\cdot g \\cdot \\frac{(M + m) + (M - m)}{M + m} = \\frac{2 \\cdot m \\cdot M \\cdot g}{M + m}
+$$
+
+Uttrycket växer när $M$ växer, men aldrig förbi $2 \\cdot m \\cdot g = 2 \\cdot 2{,}0 \\cdot 9{,}82 = 39{,}28\\ \\mathrm{N}$: när $M$ är mycket stor faller den nästan fritt, och den lätta vikten dras uppåt med nästan accelerationen $g$. Snöret tål 30 N, som ligger mellan $m \\cdot g = 19{,}64\\ \\mathrm{N}$ och 39,28 N, så det finns en största massa. Vi sätter $F_\\mathrm{S} = 30\\ \\mathrm{N}$:
+
+$$
+\\frac{2 \\cdot 2{,}0 \\cdot 9{,}82 \\cdot M}{M + 2{,}0} = 30
+$$
+
+$$
+\\frac{39{,}28 \\cdot M}{M + 2{,}0} \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{(M + 2{,}0)} = 30 \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{(M + 2{,}0)}
+$$
+
+$$
+39{,}28 \\cdot M = 30 \\cdot M + 60
+$$
+
+$$
+39{,}28 \\cdot M \\mathbin{\\boldsymbol{-}} \\boldsymbol{30 \\cdot M} = 30 \\cdot M + 60 \\mathbin{\\boldsymbol{-}} \\boldsymbol{30 \\cdot M}
+$$
+
+$$
+9{,}28 \\cdot M = 60
+$$
+
+$$
+\\frac{9{,}28 \\cdot M}{\\boldsymbol{9{,}28}} = \\frac{60}{\\boldsymbol{9{,}28}}
+$$
+
+$$
+M = 6{,}465\\ldots\\ \\mathrm{kg} \\approx 6{,}5\\ \\mathrm{kg}
+$$
+
+Kontroll: med $M = 6{,}465\\ldots\\ \\mathrm{kg}$ ger (1) accelerationen $a = \\dfrac{4{,}465\\ldots \\cdot 9{,}82}{8{,}465\\ldots} = 5{,}18\\ldots\\ \\mathrm{m/s^2}$, och (2) ger $F_\\mathrm{S} = 2{,}0 \\cdot (9{,}82 + 5{,}18\\ldots) = 30\\ \\mathrm{N}$.
+
+En lätt att göra miss är att sätta $M \\cdot g = 30\\ \\mathrm{N}$, vilket ger 3,1 kg. Men spännkraften är mindre än $M$:s tyngdkraft, eftersom $M$ accelererar nedåt. Hade snöret tålt 40 N hade det aldrig gått av, hur tung $M$ än var.
+
+**Svar:** Massan får vara högst cirka 6,5 kg.`,
+        },
+        {
+            level: 3,
+            question: `En elev hänger två vikter med massorna 0,50 kg och 0,70 kg i ett snöre över en trissa. Hon mäter accelerationen till 1,40 m/s², vilket är mindre än vad modellen med en friktionsfri trissa förutsäger. Hon drar slutsatsen att friktionen i trissans lager bromsar rörelsen med en konstant kraft.<br>a) Hur stor är den bromsande kraften, om elevens slutsats stämmer?<br>b) Diskutera om det är rimligt att hela skillnaden beror på friktion i lagret.
+
+${makePulley({ kind: 'atwood', left: '0,70 kg', right: '0,50 kg' })}
+
+*Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
+            answer: { value: 0.28, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 0.28, unit: 'N', tol: 0.03 },
+                { del: 'b' },
+            ],
+            solution: `**a)** Utan friktion skulle accelerationen bli
+
+$$
+a_0 = \\frac{0{,}70 \\cdot 9{,}82 - 0{,}50 \\cdot 9{,}82}{0{,}70 + 0{,}50} = \\frac{1{,}964}{1{,}20} = 1{,}636\\ldots\\ \\mathrm{m/s^2}
+$$
+
+Den uppmätta accelerationen är alltså lägre. Med en bromsande kraft $F_\\mathrm{b}$ blir den resulterande kraften på systemet den tunga viktens tyngdkraft minus den lätta viktens tyngdkraft minus $F_\\mathrm{b}$. Newtons andra lag för hela systemet:
+
+$$
+m_\\text{tot} \\cdot a = 0{,}70 \\cdot g - 0{,}50 \\cdot g - F_\\mathrm{b}
+\\quad\\Leftrightarrow\\quad
+F_\\mathrm{b} = 0{,}20 \\cdot g - m_\\text{tot} \\cdot a
+$$
+
+$$
+\\left[ \\begin{array}{l}
+0{,}20 \\cdot g = 0{,}20 \\cdot 9{,}82 = 1{,}964\\ \\mathrm{N} \\\\
+m_\\text{tot} \\cdot a = 1{,}20 \\cdot 1{,}40 = 1{,}68\\ \\mathrm{N}
+\\end{array} \\right]
+$$
+
+$$
+F_\\mathrm{b} = 1{,}964 - 1{,}68 = 0{,}284\\ \\mathrm{N} \\approx 0{,}28\\ \\mathrm{N}
+$$
+
+**Svar:** Den bromsande kraften är cirka 0,28 N.
+
+**b)** Skillnaden mellan 1,64 m/s² och 1,40 m/s² är ungefär 15 %, vilket är mer än man brukar få av slumpmässiga mätfel med en noggrann mätning. Något i modellen saknas alltså. Men friktion är inte det enda modellen bortser från:
+
+- **Trissans massa.** Trissan själv måste sättas i rotation. En del av den drivande kraften går åt till det, och accelerationen blir lägre även med ett helt friktionsfritt lager. En lätt plasttrissa påverkar lite, en tung metalltrissa mycket.
+- **Luftmotstånd** på vikterna är mycket litet vid så låga farter.
+- **Snörets massa** har bortsetts från och är oftast försumbar.
+
+Eftersom även trissans massa bromsar accelerationen är 0,28 N en **övre gräns** för friktionskraften i lagret. Den verkliga friktionen kan vara mindre. För att avgöra hur stor del som är friktion behöver eleven veta mer om trissan, till exempel dess massa och form.
+
+**Svar:** Inte helt. Skillnaden beror sannolikt både på friktion och på att trissan själv ska accelereras, så 0,28 N är en övre gräns för friktionskraften.`,
+        },
+        {
+            level: 3,
+            question: `En låda med massan 2,0 kg ligger på ett vågrätt bord och är förbunden med ett snöre över en friktionsfri trissa vid bordskanten med en hängande vikt på 1,0 kg, enligt figuren. Friktionstalet mellan lådan och bordet är 0,25. Lådan får en knuff så att den glider bort från trissan med farten 3,0 m/s, och vikten lyfts. Hur långt glider lådan innan den stannar, och vad händer sedan? Motivera ditt svar. Ange sträckan i m.
+
+${makePulley({ kind: 'bord', table: '2,0 kg', hanging: '1,0 kg' })}
+
+*Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.*`,
+            answer: { value: 0.92, unit: 'm', tol: 0.03 },
+            solution: `**På väg bort från trissan.** Lådan glider bort från trissan, så friktionen på lådan pekar **mot** trissan, motsatt rörelsen. Även viktens tyngdkraft drar systemet mot trissan. Båda krafterna bromsar alltså:
+
+$$
+\\left[ \\begin{array}{l}
+F_{\\mathrm{G},\\text{vikt}} = 1{,}0 \\cdot 9{,}82 = 9{,}82\\ \\mathrm{N} \\\\
+F_\\mathrm{f} = \\mu \\cdot F_\\mathrm{N} = 0{,}25 \\cdot 2{,}0 \\cdot 9{,}82 = 4{,}91\\ \\mathrm{N}
+\\end{array} \\right]
+$$
+
+$$
+F_R = 9{,}82 + 4{,}91 = 14{,}73\\ \\mathrm{N}
+$$
+
+Lådan och vikten rör sig tillsammans, så hela systemets massa ska bromsas:
+
+$$
+a = \\frac{F_R}{m_\\text{tot}} = \\frac{14{,}73}{2{,}0 + 1{,}0} = 4{,}91\\ \\mathrm{m/s^2}
+$$
+
+Är snöret sträckt hela tiden? Vikten bromsas med 4,91 m/s², alltså mindre än $g$. Den skulle bromsas med hela $g$ om snöret var slakt, så snöret drar fortfarande i vikten, och modellen med ett gemensamt system håller.
+
+**Sträckan.** Med rörelseriktningen som positiv har lådan $v_0 = 3{,}0\\ \\mathrm{m/s}$ och accelerationen $-4{,}91\\ \\mathrm{m/s^2}$. Tiden tills den stannar ($v = 0$) ges av $v = v_0 + a \\cdot t$:
+
+$$
+t = \\frac{0 - 3{,}0}{-4{,}91} = 0{,}6109\\ldots\\ \\mathrm{s}
+$$
+
+$$
+s = v_0 \\cdot t + \\frac{a \\cdot t^2}{2} = 3{,}0 \\cdot 0{,}6109\\ldots + \\frac{-4{,}91 \\cdot 0{,}6109\\ldots^2}{2}
+$$
+
+$$
+s = 1{,}832\\ldots - 0{,}9164\\ldots = 0{,}9164\\ldots\\ \\mathrm{m} \\approx 0{,}92\\ \\mathrm{m}
+$$
+
+**Vad händer sedan?** När lådan står still drar vikten med 9,82 N mot trissan. Friktionen kan som mest bli 4,91 N, och den byter nu riktning och pekar bort från trissan. Den räcker inte för att hålla emot, så lådan börjar glida tillbaka mot trissan med accelerationen
+
+$$
+a = \\frac{9{,}82 - 4{,}91}{3{,}0} = 1{,}636\\ldots\\ \\mathrm{m/s^2} \\approx 1{,}6\\ \\mathrm{m/s^2}
+$$
+
+Accelerationen är mindre på vägen tillbaka än vid inbromsningen, eftersom friktionen nu motverkar vikten i stället för att samverka med den.
+
+**Svar:** Lådan glider cirka 0,92 m. Sedan börjar den glida tillbaka mot trissan med accelerationen cirka 1,6 m/s², eftersom viktens tyngdkraft är större än den största friktionskraften.`,
+        },
     ],
 
     // ═══════════════════════════════════════════════════════════════════
@@ -13305,14 +21482,14 @@ $$
                 `Arbetet är negativt eftersom han bär lådan.`,
                 `Arbetet är $W = m g s = 8{,}0 \\cdot 9{,}82 \\cdot 20 \\approx 1\\,570$ J.`,
                 `Arbetet är $\\dfrac{1}{2} m g s$.`,
-                `Arbetet är 0 J — rörelsen sker vinkelrätt mot kraften.`,
+                `Arbetet är 0 J, eftersom rörelsen sker vinkelrätt mot kraften.`,
             ],
             correct: 3,
             solution: `Arbete kräver att kraften har en komponent **i rörelsens riktning**. Här är rörelsen horisontell (åt höger), men både tyngdkraften och Martins lyftande kraft är vertikala (uppåt/nedåt). Kraften i rörelsens riktning $F_s = 0$, så arbetet blir noll oavsett hur lång sträckan är.
 
 **Svar:** Alternativ D.
 
-**Generell slutsats:** I vardagsspråk säger man "det är jobbigt att bära lådan", men *fysikaliskt* är det inget arbete. Den ansträngning man känner kommer från muskelarbete för att hålla emot lådans tyngd statiskt — inte från arbete på själva lådan.`,
+**Generell slutsats:** I vardagsspråk säger man "det är jobbigt att bära lådan", men *fysikaliskt* är det inget arbete. Den ansträngning man känner kommer från muskelarbete för att hålla emot lådans tyngd statiskt, inte från arbete på själva lådan.`,
         },
         {
             level: 2,
@@ -13357,7 +21534,7 @@ $$
 
 **Svar:** Ca 423 J.
 
-**Generell slutsats:** Samma resultat fås om man räknar via lägesenergin: höjdökningen är $h = s \\sin\\alpha = 4{,}5 \\cdot \\sin 20^{\\circ} \\approx 1{,}54$ m, och $W = mgh = 28 \\cdot 9{,}82 \\cdot 1{,}54 \\approx 423$ J. *Höjdökningen* är det som spelar roll — inte den sträcka lådan glider.`,
+**Generell slutsats:** Samma resultat fås om man räknar via lägesenergin: höjdökningen är $h = s \\sin\\alpha = 4{,}5 \\cdot \\sin 20^{\\circ} \\approx 1{,}54$ m, och $W = mgh = 28 \\cdot 9{,}82 \\cdot 1{,}54 \\approx 423$ J. *Höjdökningen* är det som spelar roll, inte den sträcka lådan glider.`,
         },
         {
             level: 3,
@@ -13367,25 +21544,25 @@ Beräkna **det netto-arbete** som verkar på kälken (det vill säga det arbete 
             answer: { value: 3160, unit: 'J', tol: 0.05 },
             solution: `Netto-arbetet är arbetet av den resulterande kraften $F_R = F_x - F_f$ längs rörelsen.
 
-**Steg 1 — drivande komposant:**
+**Steg 1: drivande komposant.**
 
 $$
 F_x = F \\cos\\alpha = 250 \\cdot \\cos 28^{\\circ} \\approx 220{,}8\\ \\mathrm{N}
 $$
 
-**Steg 2 — normalkraft.** Vertikalt jämvikt: $F_N + F \\sin\\alpha = m g$:
+**Steg 2: normalkraft.** Jämvikt i lodled: $F_N + F \\sin\\alpha = m g$:
 
 $$
 F_N = m g - F \\sin\\alpha = 90 \\cdot 9{,}82 - 250 \\cdot \\sin 28^{\\circ} \\approx 883{,}8 - 117{,}4 \\approx 766{,}4\\ \\mathrm{N}
 $$
 
-**Steg 3 — friktionskraft:**
+**Steg 3: friktionskraft.**
 
 $$
 F_f = \\mu F_N = 0{,}15 \\cdot 766{,}4 \\approx 115{,}0\\ \\mathrm{N}
 $$
 
-**Steg 4 — netto-arbete:**
+**Steg 4: netto-arbete.**
 
 $$
 W_\\text{netto} = (F_x - F_f) \\cdot s = (220{,}8 - 115{,}0) \\cdot 30 \\approx 105{,}8 \\cdot 30 \\approx 3\\,160\\ \\mathrm{J}
@@ -13393,7 +21570,727 @@ $$
 
 **Svar:** Netto-arbetet är ca 3,2 kJ.
 
-**Generell slutsats:** Netto-arbetet motsvarar ökningen av kälkens rörelseenergi (arbetsenergi-satsen): $W_\\text{netto} = \\Delta E_k$. Hela det dragna arbetet $W_\\text{drag} = F \\cos\\alpha \\cdot s \\approx 6{,}6$ kJ — hälften försvinner som friktionsvärme, hälften blir rörelseenergi.`,
+**Generell slutsats:** Netto-arbetet motsvarar ökningen av kälkens rörelseenergi (arbetsenergi-satsen): $W_\\text{netto} = \\Delta E_k$. Hela det dragna arbetet $W_\\text{drag} = F \\cos\\alpha \\cdot s \\approx 6{,}6$ kJ. Hälften försvinner som friktionsvärme, hälften blir rörelseenergi.`,
+        },
+        {
+            level: 1,
+            question: `En solcell på ett garagetak driver en liten elektrisk pump. Pumpen lyfter regnvatten från en tunna på marken upp till en tank under taket. Vilken kedja beskriver bäst de viktigaste energiomvandlingarna?`,
+            choices: [
+                `Kemisk energi → elektrisk energi → lägesenergi`,
+                `Strålningsenergi → värmeenergi → rörelseenergi`,
+                `Strålningsenergi → elektrisk energi → rörelseenergi → lägesenergi`,
+                `Elektrisk energi → strålningsenergi → lägesenergi`,
+            ],
+            correct: 2,
+            solution: `Följ energin från början till slut.
+
+- Solljuset bär **strålningsenergi**. Solcellen omvandlar den till **elektrisk energi**.
+- Den elektriska energin driver pumpens motor, som får vattnet att röra sig: **rörelseenergi**.
+- Vattnet lyfts upp till tanken och får där **lägesenergi**, eftersom energi lagras med ökad höjd.
+
+En del av energin blir dessutom värmeenergi i solcellen, i motorn och genom friktion i slangen, men huvudvägen är den ovan. Kemisk energi finns inte med, eftersom inget bränsle eller batteri används.
+
+**Svar:** Strålningsenergi → elektrisk energi → rörelseenergi → lägesenergi.`,
+        },
+        {
+            level: 1,
+            question: `En byggkran lyfter en pall med takpannor rakt uppåt 14 m med konstant fart. Lyftkraften i kranens vajer är $F = 6{,}2\\ \\mathrm{kN}$. Hur stort arbete uträttar kranen på pallen? Ange svaret i kJ.`,
+            answer: { value: 87, unit: 'kJ', tol: 0.02 },
+            solution: `Vi skriver formeln för arbete.
+
+$$
+W = F_\\mathrm{s} \\cdot s
+$$
+
+Pallen rör sig rakt uppåt, och lyftkraften är också riktad rakt uppåt. Hela lyftkraften verkar alltså i rörelsens riktning, så $F_\\mathrm{s} = F$. Kilonewton räknas om till newton.
+
+$$
+\\left[ \\begin{array}{l}
+F_\\mathrm{s} = 6{,}2\\ \\mathrm{kN} = 6\\,200\\ \\mathrm{N} \\\\
+s = 14\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+W = 6\\,200 \\cdot 14 = 86\\,800\\ \\mathrm{J} \\approx 87\\ \\mathrm{kJ}
+$$
+
+Båda givna värden har två värdesiffror, så svaret avrundas till två värdesiffror.
+
+**Svar:** Kranen uträttar arbetet 87 kJ.`,
+        },
+        {
+            level: 1,
+            question: `Ali skjuter en bokhylla på hjul längs ett vågrätt golv. Han skjuter med en vågrät kraft på 150 N och uträttar arbetet 540 J. Hur långt flyttar han bokhyllan? Ange svaret i m.`,
+            answer: { value: 3.6, unit: 'm', tol: 0.02 },
+            solution: `Vi skriver formeln för arbete och löser ut sträckan.
+
+$$
+W = F_\\mathrm{s} \\cdot s \\quad \\Longleftrightarrow \\quad s = \\dfrac{W}{F_\\mathrm{s}}
+$$
+
+Kraften är vågrät, precis som rörelsen, så hela kraften verkar i rörelsens riktning.
+
+$$
+\\left[ \\begin{array}{l}
+W = 540\\ \\mathrm{J} \\\\
+F_\\mathrm{s} = 150\\ \\mathrm{N}
+\\end{array} \\right]
+$$
+
+$$
+s = \\frac{540}{150} = 3{,}6\\ \\mathrm{m}
+$$
+
+Enheten blir rätt: $\\dfrac{\\mathrm{J}}{\\mathrm{N}} = \\dfrac{\\mathrm{Nm}}{\\mathrm{N}} = \\mathrm{m}$.
+
+**Svar:** Han flyttar bokhyllan 3,6 m.`,
+        },
+        {
+            level: 1,
+            question: `I vilken av situationerna uträttar personen ett arbete på föremålet, i fysikalisk mening?`,
+            choices: [
+                `Elsa håller en tung matkasse stilla i fem minuter medan hon väntar på bussen.`,
+                `Elsa drar en pulka framåt längs en plan snöyta.`,
+                `Elsa trycker så hårt hon kan mot en vägg som inte rör sig.`,
+                `Elsa bär en bricka vågrätt genom matsalen med konstant fart.`,
+            ],
+            correct: 1,
+            solution: `Ett arbete kräver att föremålet förflyttas **och** att kraften har en del i rörelsens riktning, $W = F_\\mathrm{s} \\cdot s$.
+
+- Kassen står still: $s = 0$, alltså inget arbete.
+- Väggen rör sig inte: $s = 0$, alltså inget arbete.
+- Brickan rör sig vågrätt, men Elsas kraft på den är riktad uppåt. Kraften i rörelsens riktning är $F_\\mathrm{s} = 0$, alltså inget arbete.
+- Pulkan rör sig framåt, och dragkraften har en del framåt. Här är både $F_\\mathrm{s}$ och $s$ större än noll.
+
+Att det känns ansträngande att hålla kassen eller trycka mot väggen beror på att musklerna omvandlar kemisk energi till värmeenergi, inte på att något arbete uträttas på föremålet.
+
+**Svar:** När Elsa drar pulkan framåt.`,
+        },
+        {
+            level: 2,
+            question: `Lea skjuter en skottkärra med jord längs en vågrät gång. Diagrammet visar hur stor kraft hon skjuter med i rörelsens riktning, som funktion av sträckan $s$ hon har gått.
+
+${makeDiagram({
+    xMax: 12, yMax: 70,
+    xTicks: [0, 2, 4, 6, 8, 10, 12],
+    yTicks: [0, 10, 20, 30, 40, 50, 60, 70],
+    xLabel: '<tspan font-style="italic">s</tspan> (m)',
+    yLabel: '<tspan font-style="italic">F</tspan> (N)',
+    paths: [{ points: [[0, 60], [4, 60], [4, 30], [10, 30], [10, 0], [12, 0]] }],
+})}
+
+a) Hur stort arbete uträttar Lea på skottkärran under hela förflyttningen?<br>b) Hur stor konstant kraft skulle ge samma arbete om hon skjutit med den kraften de första 10 metrarna?
+
+Ange svaren i J och N.`,
+            answer: { value: 420, unit: 'J', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 420, unit: 'J', tol: 0.02 },
+                { del: 'b', value: 42, unit: 'N', tol: 0.02 },
+            ],
+            solution: `**a)** Kraften är inte konstant, men den är konstant på varje del av sträckan. Vi räknar därför arbetet för varje del för sig med
+
+$$
+W = F_\\mathrm{s} \\cdot s
+$$
+
+och lägger ihop. Ur diagrammet läser vi av tre delar:
+
+- de första 4 m: $F_\\mathrm{s} = 60\\ \\mathrm{N}$
+- från 4 m till 10 m, alltså 6 m: $F_\\mathrm{s} = 30\\ \\mathrm{N}$
+- från 10 m till 12 m: $F_\\mathrm{s} = 0$, så där uträttas inget arbete (kärran rullar ut av sig själv).
+
+$$
+W_1 = 60 \\cdot 4 = 240\\ \\mathrm{J}
+$$
+
+$$
+W_2 = 30 \\cdot 6 = 180\\ \\mathrm{J}
+$$
+
+$$
+W = W_1 + W_2 = 240 + 180 = 420\\ \\mathrm{J}
+$$
+
+Lägg märke till att varje arbete är arean av en rektangel under grafen: höjden är kraften och bredden är sträckan.
+
+**Svar:** Lea uträttar arbetet 420 J.
+
+**b)** Samma arbete, $W = 420\\ \\mathrm{J}$, ska uträttas på sträckan $s = 10\\ \\mathrm{m}$:
+
+$$
+F_\\mathrm{s} = \\frac{W}{s} = \\frac{420}{10} = 42\\ \\mathrm{N}
+$$
+
+Rimligt: kraften hamnar mellan 30 N och 60 N, närmare 30 N eftersom hon sköt längst sträcka med den mindre kraften.
+
+**Svar:** En konstant kraft på 42 N.`,
+        },
+        {
+            level: 2,
+            question: `En pulka med ett barn har den sammanlagda massan 35 kg. En förälder drar pulkan 250 m längs en vågrät snöig väg med konstant fart. Repet är vågrätt, och friktionstalet mellan pulkan och snön är 0,12. Hur stort arbete uträttar föräldern? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i kJ.`,
+            answer: { value: 10, unit: 'kJ', tol: 0.04 },
+            solution: `Vi skriver formeln för arbete.
+
+$$
+W = F_\\mathrm{s} \\cdot s
+$$
+
+Dragkraften $F_\\mathrm{s}$ är inte given, men pulkan rör sig med **konstant fart**. Enligt Newtons första lag är då kraftresultanten noll: dragkraften framåt är lika stor som friktionskraften bakåt.
+
+I lodled tar normalkraften ut tyngdkraften, $F_\\mathrm{N} = F_\\mathrm{G} = m \\cdot g$, eftersom repet är vågrätt. Friktionskraften blir
+
+$$
+F_\\mathrm{f} = \\mu \\cdot F_\\mathrm{N} = \\mu \\cdot m \\cdot g = 0{,}12 \\cdot 35 \\cdot 9{,}82 = 41{,}244\\ \\mathrm{N}
+$$
+
+Dragkraften är alltså $F_\\mathrm{s} = F_\\mathrm{f} = 41{,}244\\ \\mathrm{N}$.
+
+$$
+\\left[ \\begin{array}{l}
+F_\\mathrm{s} = 41{,}244\\ \\mathrm{N} \\\\
+s = 250\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+W = 41{,}244 \\cdot 250 = 10\\,311\\ \\mathrm{J} \\approx 1{,}0 \\cdot 10^{4}\\ \\mathrm{J} = 10\\ \\mathrm{kJ}
+$$
+
+Friktionstalet har två värdesiffror, så svaret avrundas till två värdesiffror. Hela arbetet blir värmeenergi genom friktionen mot snön, eftersom pulkans fart inte ändras.
+
+**Svar:** Föräldern uträttar arbetet 10 kJ.`,
+        },
+        {
+            level: 2,
+            question: `Noor drar sin resväska 120 m genom en flygplatsterminal med konstant fart. Hon drar i handtaget med kraften 40 N, riktad snett uppåt i vinkeln $\\alpha$ mot golvet. Det arbete hon uträttar på väskan blir 3,9 kJ. Bestäm vinkeln $\\alpha$. Ange svaret i grader.`,
+            answer: { value: 36, unit: '°', tol: 0.02 },
+            solution: `Bara den del av kraften som är riktad längs golvet, i rörelsens riktning, uträttar arbete. Den delen är den närliggande kateten i den rätvinkliga triangel som kraften $F$ bildar med sina komposanter:
+
+$$
+F_\\mathrm{s} = F \\cdot \\cos \\alpha
+$$
+
+Insatt i formeln för arbete ger det
+
+$$
+W = F_\\mathrm{s} \\cdot s = F \\cdot \\cos \\alpha \\cdot s \\quad \\Longleftrightarrow \\quad \\cos \\alpha = \\frac{W}{F \\cdot s}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+W = 3{,}9\\ \\mathrm{kJ} = 3\\,900\\ \\mathrm{J} \\\\
+F = 40\\ \\mathrm{N} \\\\
+s = 120\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+\\cos \\alpha = \\frac{3\\,900}{40 \\cdot 120} = \\frac{3\\,900}{4\\,800} = 0{,}8125
+$$
+
+$$
+\\alpha = \\cos^{-1} 0{,}8125 = 35{,}659\\ldots^{\\circ} \\approx 36^{\\circ}
+$$
+
+Rimligt: om hon dragit vågrätt hade arbetet blivit $40 \\cdot 120 = 4\\,800\\ \\mathrm{J}$. Arbetet är mindre än så, så kraften måste luta, men inte särskilt mycket.
+
+**Svar:** Vinkeln är 36°.`,
+        },
+        {
+            level: 2,
+            question: `Saga har massan 62 kg och går med konstant fart uppför en trappa med 18 steg. Varje steg är 17 cm högt. Trappan sträcker sig 4,5 m i vågrät led. Hur stort arbete uträttar hon mot tyngdkraften? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i kJ.`,
+            answer: { value: 1.9, unit: 'kJ', tol: 0.03 },
+            solution: `Att arbeta mot tyngdkraften betyder att lyfta kroppen. Den kraft som krävs är riktad rakt uppåt och är lika stor som tyngdkraften, eftersom farten är konstant:
+
+$$
+F = F_\\mathrm{G} = m \\cdot g = 62 \\cdot 9{,}82 = 608{,}84\\ \\mathrm{N}
+$$
+
+Bara förflyttningen i kraftens riktning räknas, alltså den **lodräta** förflyttningen. De 4,5 m i vågrät led är vinkelräta mot kraften och bidrar inte till arbetet mot tyngdkraften. Höjden är
+
+$$
+s = 18 \\cdot 0{,}17 = 3{,}06\\ \\mathrm{m}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F_\\mathrm{s} = 608{,}84\\ \\mathrm{N} \\\\
+s = 3{,}06\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+W = F_\\mathrm{s} \\cdot s = 608{,}84 \\cdot 3{,}06 = 1\\,863{,}05\\ldots\\ \\mathrm{J} \\approx 1{,}9\\ \\mathrm{kJ}
+$$
+
+Rimligt: 3 m motsvarar ungefär en våning, och att lyfta drygt 600 N en våning ger knappt 2 kJ.
+
+**Svar:** Hon uträttar arbetet 1,9 kJ mot tyngdkraften.`,
+        },
+        {
+            level: 2,
+            question: `En flyttkartong ska upp på ett flak som ligger 1,2 m över marken. Tre förslag diskuteras:
+
+1. Lyfta kartongen rakt upp.
+2. Skjuta den uppför en friktionsfri ramp som är 3,0 m lång.
+3. Skjuta den uppför en friktionsfri ramp som är 2,0 m lång.
+
+Kartongen flyttas med konstant fart i alla tre fallen. I vilket fall uträttas störst arbete på kartongen?`,
+            choices: [
+                `Fall 1, eftersom kraften är störst när man lyfter rakt upp.`,
+                `Fall 2, eftersom sträckan är längst.`,
+                `Fall 3, eftersom rampen är brantast.`,
+                `Arbetet är lika stort i alla tre fallen.`,
+            ],
+            correct: 3,
+            solution: `Kalla kartongens massa $m$, rampens längd $L$ och höjden $h = 1{,}2\\ \\mathrm{m}$.
+
+**Lyft rakt upp:** kraften är $F = m \\cdot g$ och sträckan $h$, så $W = m \\cdot g \\cdot h$.
+
+**Ramp utan friktion:** på ett lutande plan med vinkeln $\\alpha$ behöver man bara skjuta med en kraft som är lika stor som tyngdkraftens komposant längs planet, $F = m \\cdot g \\cdot \\sin\\alpha$. Sträckan är $L$, och $L \\cdot \\sin\\alpha = h$. Arbetet blir
+
+$$
+W = m \\cdot g \\cdot \\sin\\alpha \\cdot L = m \\cdot g \\cdot h
+$$
+
+Den längre rampen kräver mindre kraft men längre sträcka, och produkten blir densamma. Rampens längd spelar alltså ingen roll så länge friktionen kan försummas.
+
+**Svar:** Arbetet är lika stort i alla tre fallen.`,
+        },
+        {
+            level: 3,
+            question: `En kälke med last har massan $m$ och dras med konstant fart en sträcka $s$ längs en vågrät snöyta. Repet bildar vinkeln $\\alpha$ med det vågräta, och friktionstalet mellan kälken och snön är $\\mu$.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="10 18 420 200" width="499" height="238" role="img" aria-label="En kälke med last står på en vågrät snöyta. Ett rep är fäst framtill och dras snett uppåt åt höger med kraften F i vinkeln alfa mot det vågräta. Rörelseriktningen är åt höger." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="20" y="170" width="400" height="10" fill="#eef3f8"/><line x1="20" y1="170" x2="420" y2="170" stroke="rgba(15,22,32,0.6)" stroke-width="1.6"/><line x1="28" y1="170" x2="20" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="42" y1="170" x2="34" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="56" y1="170" x2="48" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="70" y1="170" x2="62" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="84" y1="170" x2="76" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="98" y1="170" x2="90" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="112" y1="170" x2="104" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="126" y1="170" x2="118" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="140" y1="170" x2="132" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="154" y1="170" x2="146" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="168" y1="170" x2="160" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="182" y1="170" x2="174" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="196" y1="170" x2="188" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="210" y1="170" x2="202" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="224" y1="170" x2="216" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="238" y1="170" x2="230" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="252" y1="170" x2="244" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="266" y1="170" x2="258" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="280" y1="170" x2="272" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="294" y1="170" x2="286" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="308" y1="170" x2="300" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="322" y1="170" x2="314" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="336" y1="170" x2="328" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="350" y1="170" x2="342" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="364" y1="170" x2="356" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="378" y1="170" x2="370" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="392" y1="170" x2="384" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="406" y1="170" x2="398" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="420" y1="170" x2="412" y2="179" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><path d="M 70 169 L 238 169 Q 262 169 262 152" fill="none" stroke="#4a4f57" stroke-width="3.2" stroke-linecap="round"/><line x1="92" y1="168" x2="92" y2="154" stroke="#7a5230" stroke-width="3"/><line x1="140" y1="168" x2="140" y2="154" stroke="#7a5230" stroke-width="3"/><line x1="188" y1="168" x2="188" y2="154" stroke="#7a5230" stroke-width="3"/><line x1="232" y1="168" x2="232" y2="154" stroke="#7a5230" stroke-width="3"/><rect x="78" y="146" width="170" height="8" rx="2" fill="#c99b6d" stroke="#6e4527" stroke-width="1.3"/><line x1="120" y1="146" x2="120" y2="154" stroke="#6e4527" stroke-width="1"/><line x1="162" y1="146" x2="162" y2="154" stroke="#6e4527" stroke-width="1"/><line x1="204" y1="146" x2="204" y2="154" stroke="#6e4527" stroke-width="1"/><rect x="92" y="98" width="70" height="48" rx="2" fill="#d9b98a" stroke="#7a5a32" stroke-width="1.5"/><line x1="92" y1="110" x2="162" y2="110" stroke="#7a5a32" stroke-width="1" opacity="0.7"/><rect x="166" y="112" width="64" height="34" rx="2" fill="#c4d9f0" stroke="#4f7197" stroke-width="1.5"/><line x1="166" y1="122" x2="230" y2="122" stroke="rgba(79,113,151,0.6)" stroke-width="1"/><line x1="256" y1="148" x2="407.6" y2="60.5" stroke="#8a6d3b" stroke-width="2.4" stroke-linecap="round"/><circle cx="256" cy="148" r="3" fill="#4a4f57"/><line x1="256.0" y1="148.0" x2="346.9" y2="95.5" stroke="#c8324a" stroke-width="3.4" stroke-linecap="butt"/><polygon points="350.1,100.9 358.2,89.0 343.8,90.1" fill="#c8324a"/><text x="356.2" y="77.0" font-size="16" fill="#c8324a" text-anchor="middle"><tspan font-style="italic">F</tspan></text><line x1="256" y1="148" x2="348" y2="148" stroke="rgba(15,22,32,0.55)" stroke-width="1.2" stroke-dasharray="5 4"/><path d="M 310.0 148.0 A 54 54 0 0 0 302.8 121.0" fill="none" stroke="rgba(15,22,32,0.7)" stroke-width="1.3"/><text x="321.7" y="135.4" font-size="15" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">α</tspan></text><line x1="110.0" y1="196.0" x2="221.0" y2="196.0" stroke="rgba(15,22,32,0.7)" stroke-width="1.6" stroke-linecap="butt"/><polygon points="221.0,200.3 230.0,196.0 221.0,191.7" fill="rgba(15,22,32,0.7)"/><text x="245" y="201" font-size="14" fill="#0f1620">rörelseriktning</text></svg>
+
+a) Visa att det arbete som den som drar uträttar på kälken är
+$$
+W = \\dfrac{\\mu \\cdot m \\cdot g \\cdot s}{1 + \\mu \\cdot \\tan\\alpha}
+$$
+b) Kälken har massan 40 kg, sträckan är 50 m och friktionstalet är 0,30. Beräkna arbetet när repet är vågrätt och när $\\alpha = 30^{\\circ}$. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.<br>c) Förklara varför arbetet blir mindre när repet lutar, fast en del av dragkraften inte verkar i rörelsens riktning.
+
+Ange svaren i b) i kJ.`,
+            answer: { value: 5.0, unit: 'kJ', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 5.9, unit: 'kJ', tol: 0.03, etikett: 'vågrätt rep' },
+                { del: 'b', value: 5.0, unit: 'kJ', tol: 0.03, etikett: '$\\alpha = 30^{\\circ}$' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Dela upp dragkraften $F$ i en vågrät komposant $F \\cdot \\cos\\alpha$ framåt och en lodrät komposant $F \\cdot \\sin\\alpha$ uppåt. På kälken verkar dessutom tyngdkraften $F_\\mathrm{G} = m \\cdot g$ nedåt, normalkraften $F_\\mathrm{N}$ uppåt och friktionskraften $F_\\mathrm{f} = \\mu \\cdot F_\\mathrm{N}$ bakåt.
+
+Farten är konstant, så kraftresultanten är noll i båda riktningarna (Newtons första lag).
+
+Lodrätt: repet lyfter lite i kälken, så underlaget behöver inte bära hela tyngden.
+
+$$
+F_\\mathrm{N} + F \\cdot \\sin\\alpha = m \\cdot g \\quad \\Longleftrightarrow \\quad F_\\mathrm{N} = m \\cdot g - F \\cdot \\sin\\alpha \\tag{1}
+$$
+
+Vågrätt: den vågräta komposanten är lika stor som friktionskraften.
+
+$$
+F \\cdot \\cos\\alpha = \\mu \\cdot F_\\mathrm{N} \\tag{2}
+$$
+
+Insättning av $F_\\mathrm{N}$ från (1) i (2), $F \\cdot \\cos\\alpha = \\mu \\cdot F_\\mathrm{N}$, ger
+
+$$
+F \\cdot \\cos\\alpha = \\mu \\cdot (m \\cdot g - F \\cdot \\sin\\alpha)
+$$
+
+$$
+F \\cdot \\cos\\alpha \\mathbin{\\boldsymbol{+}} \\boldsymbol{\\mu \\cdot F \\cdot \\sin\\alpha} = \\mu \\cdot m \\cdot g - \\mu \\cdot F \\cdot \\sin\\alpha \\mathbin{\\boldsymbol{+}} \\boldsymbol{\\mu \\cdot F \\cdot \\sin\\alpha}
+$$
+
+$$
+F \\cdot (\\cos\\alpha + \\mu \\cdot \\sin\\alpha) = \\mu \\cdot m \\cdot g
+$$
+
+Arbetet uträttas bara av den vågräta komposanten, eftersom rörelsen är vågrät: $W = F_\\mathrm{s} \\cdot s$ med $F_\\mathrm{s} = F \\cdot \\cos\\alpha$. Vi multiplicerar därför båda led med $\\cos\\alpha \\cdot s$ och dividerar med parentesen:
+
+$$
+W = F \\cdot \\cos\\alpha \\cdot s = \\frac{\\mu \\cdot m \\cdot g \\cdot s \\cdot \\cos\\alpha}{\\cos\\alpha + \\mu \\cdot \\sin\\alpha}
+$$
+
+Dividera täljare och nämnare med $\\cos\\alpha$. Eftersom $\\dfrac{\\sin\\alpha}{\\cos\\alpha} = \\tan\\alpha$ blir det
+
+$$
+W = \\frac{\\mu \\cdot m \\cdot g \\cdot s}{1 + \\mu \\cdot \\tan\\alpha}
+$$
+
+vilket skulle visas. Kontroll: med vågrätt rep är $\\tan 0^{\\circ} = 0$, och då blir $W = \\mu \\cdot m \\cdot g \\cdot s$, friktionskraften gånger sträckan, som väntat.
+
+**b)**
+
+$$
+\\left[ \\begin{array}{l}
+\\mu = 0{,}30 \\\\
+m = 40\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+s = 50\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+Vågrätt rep, $\\alpha = 0^{\\circ}$:
+
+$$
+W_0 = 0{,}30 \\cdot 40 \\cdot 9{,}82 \\cdot 50 = 5\\,892\\ \\mathrm{J} \\approx 5{,}9\\ \\mathrm{kJ}
+$$
+
+Med $\\alpha = 30^{\\circ}$:
+
+$$
+W_{30} = \\frac{5\\,892}{1 + 0{,}30 \\cdot \\tan 30^{\\circ}} = \\frac{5\\,892}{1{,}1732\\ldots} = 5\\,022{,}1\\ldots\\ \\mathrm{J} \\approx 5{,}0\\ \\mathrm{kJ}
+$$
+
+Värdena har två värdesiffror, så svaren avrundas till två värdesiffror.
+
+**Svar:** 5,9 kJ med vågrätt rep och 5,0 kJ med $\\alpha = 30^{\\circ}$.
+
+**c)** När repet lutar lyfter den lodräta komposanten $F \\cdot \\sin\\alpha$ lite i kälken. Normalkraften blir då mindre än tyngdkraften, se (1), och eftersom friktionskraften är $\\mu \\cdot F_\\mathrm{N}$ blir även friktionen mindre. Den vågräta komposant som behövs för att hålla farten konstant är lika stor som friktionen, så den minskar också. Arbetet är den vågräta komposanten gånger sträckan och blir därför mindre.
+
+Den lodräta komposanten uträttar inget arbete alls, eftersom kälken inte rör sig uppåt. Men den gör att friktionen minskar, och därmed också den värmeenergi som bildas mot snön.
+
+**Svar:** Det lutande repet minskar normalkraften och därmed friktionen, så det behövs en mindre kraft framåt längs samma sträcka.`,
+        },
+        {
+            level: 3,
+            question: `En låda ska upp på en lastkaj med höjden $h = 1{,}1\\ \\mathrm{m}$. Man kan lyfta den rakt upp eller skjuta den uppför en planka med längden $L$, se figuren. Friktionstalet mellan lådan och plankan är 0,25. Lådan skjuts med en kraft parallell med plankan och med konstant fart. Lådans massa är inte känd.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="6 40 450 162" width="534" height="192" role="img" aria-label="En planka lutar från marken upp till överkanten på en lastkaj. Plankans längd är L och kajens höjd är h. En låda står på marken vid plankans nedre ände." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="320" y="90" width="90" height="100" fill="#d8d2c6" stroke="rgba(15,22,32,0.6)" stroke-width="1.5"/><line x1="320" y1="106" x2="410" y2="106" stroke="rgba(15,22,32,0.18)" stroke-width="1"/><line x1="320" y1="122" x2="410" y2="122" stroke="rgba(15,22,32,0.18)" stroke-width="1"/><line x1="320" y1="138" x2="410" y2="138" stroke="rgba(15,22,32,0.18)" stroke-width="1"/><line x1="320" y1="154" x2="410" y2="154" stroke="rgba(15,22,32,0.18)" stroke-width="1"/><line x1="320" y1="170" x2="410" y2="170" stroke="rgba(15,22,32,0.18)" stroke-width="1"/><line x1="320" y1="186" x2="410" y2="186" stroke="rgba(15,22,32,0.18)" stroke-width="1"/><line x1="14" y1="190" x2="430" y2="190" stroke="rgba(15,22,32,0.6)" stroke-width="1.6"/><line x1="22" y1="190" x2="14" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="36" y1="190" x2="28" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="50" y1="190" x2="42" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="64" y1="190" x2="56" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="78" y1="190" x2="70" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="92" y1="190" x2="84" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="106" y1="190" x2="98" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="120" y1="190" x2="112" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="134" y1="190" x2="126" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="148" y1="190" x2="140" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="162" y1="190" x2="154" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="176" y1="190" x2="168" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="190" y1="190" x2="182" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="204" y1="190" x2="196" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="218" y1="190" x2="210" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="232" y1="190" x2="224" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="246" y1="190" x2="238" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="260" y1="190" x2="252" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="274" y1="190" x2="266" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="288" y1="190" x2="280" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="302" y1="190" x2="294" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="316" y1="190" x2="308" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="330" y1="190" x2="322" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="344" y1="190" x2="336" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="358" y1="190" x2="350" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="372" y1="190" x2="364" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="386" y1="190" x2="378" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="400" y1="190" x2="392" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="414" y1="190" x2="406" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><line x1="428" y1="190" x2="420" y2="199" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><polygon points="106,190 320,90 320.0,97.0 122.0,190" fill="#c99b6d" stroke="#6e4527" stroke-width="1.4"/><rect x="18" y="156" width="40" height="34" rx="2" fill="#c4d9f0" stroke="#4f7197" stroke-width="1.5"/><line x1="18" y1="166" x2="58" y2="166" stroke="rgba(79,113,151,0.6)" stroke-width="1"/><line x1="106" y1="190" x2="93.7" y2="163.7" stroke="rgba(15,22,32,0.45)" stroke-width="1" stroke-dasharray="3 3"/><line x1="320" y1="90" x2="307.7" y2="63.7" stroke="rgba(15,22,32,0.45)" stroke-width="1" stroke-dasharray="3 3"/><line x1="103.1" y1="164.9" x2="302.6" y2="71.6" stroke="#0f1620" stroke-width="1.3"/><polygon points="104.6,168.1 95.8,168.3 101.6,161.6" fill="#0f1620"/><polygon points="304.1,74.9 309.8,68.3 301.1,68.4" fill="#0f1620"/><text x="196.9" y="110.6" font-size="16" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">L</tspan></text><line x1="410" y1="90" x2="435" y2="90" stroke="rgba(15,22,32,0.45)" stroke-width="1" stroke-dasharray="3 3"/><line x1="430.0" y1="98.0" x2="430.0" y2="182.0" stroke="#0f1620" stroke-width="1.3"/><polygon points="426.4,98.0 430.0,90.0 433.6,98.0" fill="#0f1620"/><polygon points="426.4,182.0 430.0,190.0 433.6,182.0" fill="#0f1620"/><text x="438" y="145" font-size="16" fill="#0f1620"><tspan font-style="italic">h</tspan></text></svg>
+
+a) Hur lång ska plankan vara för att arbetet uppför plankan ska bli 50 % större än arbetet för att lyfta lådan rakt upp?<br>b) Förklara varför en längre planka gör det lättare att få upp lådan men ändå kräver ett större arbete.
+
+Ange svaret i a) i m.`,
+            answer: { value: 2.5, unit: 'm', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 2.5, unit: 'm', tol: 0.03 },
+                { del: 'b' },
+            ],
+            solution: `**a)** Kalla lådans massa $m$ och plankans lutning $\\alpha$. Plankans vågräta längd är $d = L \\cdot \\cos\\alpha$, och höjden är $h = L \\cdot \\sin\\alpha$.
+
+**Lyft rakt upp.** Kraften är lika stor som tyngdkraften och sträckan är $h$:
+
+$$
+W_\\text{lyft} = m \\cdot g \\cdot h \\tag{1}
+$$
+
+**Uppför plankan.** Lådan rör sig med konstant fart, så kraften längs plankan är lika stor som summan av tyngdkraftens komposant nedför plankan och friktionskraften. Normalkraften är lika stor som tyngdkraftens komposant vinkelrätt mot plankan, $F_\\mathrm{N} = m \\cdot g \\cdot \\cos\\alpha$.
+
+$$
+F = m \\cdot g \\cdot \\sin\\alpha + \\mu \\cdot m \\cdot g \\cdot \\cos\\alpha
+$$
+
+Kraften är parallell med rörelsen och sträckan är $L$:
+
+$$
+W_\\text{planka} = F \\cdot L = m \\cdot g \\cdot (L \\cdot \\sin\\alpha + \\mu \\cdot L \\cdot \\cos\\alpha)
+$$
+
+Med $L \\cdot \\sin\\alpha = h$ och $L \\cdot \\cos\\alpha = d$ blir det
+
+$$
+W_\\text{planka} = m \\cdot g \\cdot (h + \\mu \\cdot d) \\tag{2}
+$$
+
+Villkoret är att (2) ska vara 1,5 gånger (1):
+
+$$
+m \\cdot g \\cdot (h + \\mu \\cdot d) = 1{,}5 \\cdot m \\cdot g \\cdot h
+$$
+
+Massan och $g$ finns i båda led och kan divideras bort. Det är därför massan inte behövs.
+
+$$
+h + \\mu \\cdot d = 1{,}5 \\cdot h
+$$
+
+$$
+h + \\mu \\cdot d \\mathbin{\\boldsymbol{-}} \\boldsymbol{h} = 1{,}5 \\cdot h \\mathbin{\\boldsymbol{-}} \\boldsymbol{h}
+$$
+
+$$
+\\mu \\cdot d = 0{,}5 \\cdot h
+$$
+
+$$
+\\frac{\\mu \\cdot d}{\\boldsymbol{\\mu}} = \\frac{0{,}5 \\cdot h}{\\boldsymbol{\\mu}}
+$$
+
+$$
+d = \\frac{0{,}5 \\cdot h}{\\mu} = \\frac{0{,}5 \\cdot 1{,}1}{0{,}25} = 2{,}2\\ \\mathrm{m}
+$$
+
+Plankan, höjden och den vågräta längden bildar en rätvinklig triangel där plankan är hypotenusan. Pythagoras sats ger
+
+$$
+L = \\sqrt{h^2 + d^2} = \\sqrt{1{,}1^2 + 2{,}2^2} = \\sqrt{6{,}05} = 2{,}4596\\ldots\\ \\mathrm{m} \\approx 2{,}5\\ \\mathrm{m}
+$$
+
+Rimligt: en planka på 2,5 m till en kaj på 1,1 m är en vanlig, ganska flack ramp.
+
+**Svar:** Plankan ska vara 2,5 m lång.
+
+**b)** Ju längre planka, desto mindre lutning. Då blir tyngdkraftens komposant längs plankan mindre, och man behöver skjuta med en mindre kraft. Det är det som gör det lättare.
+
+Arbetet uppför plankan är enligt (2) $W = m \\cdot g \\cdot (h + \\mu \\cdot d)$. Delen $m \\cdot g \\cdot h$ är densamma som vid ett rakt lyft och beror inte på plankans längd. Delen $\\mu \\cdot m \\cdot g \\cdot d$ är arbetet mot friktionen, och den växer med plankans vågräta längd $d$. En längre planka ger alltså mindre kraft men längre sträcka, och friktionen verkar längs hela sträckan. Det extra arbetet blir värmeenergi mellan lådan och plankan.
+
+**Svar:** En längre planka minskar kraften, men friktionen verkar längs en längre sträcka, så arbetet mot friktionen och därmed hela arbetet ökar.`,
+        },
+        {
+            level: 3,
+            question: `En kätting med längden 12 m och massan 30 kg hänger lodrätt ned i ett schakt från en vinsch. Vinschen drar upp kättingen helt, med konstant och låg fart. Kättingens massa är jämnt fördelad längs den. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+
+a) Hur stor kraft måste vinschen dra med i början och i slutet?<br>b) Skissa hur kraften beror på den sträcka $s$ som kättingen har dragits upp, och bestäm det arbete som vinschen uträttar.<br>c) Visa att arbetet för en kätting med längden $L$ och massan $m$ alltid blir hälften så stort som om hela kättingen lyftes sträckan $L$.
+
+Ange svaren i N och kJ.`,
+            answer: { value: 1.8, unit: 'kJ', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 290, unit: 'N', tol: 0.03, etikett: 'i början' },
+                { del: 'a', value: 0, unit: 'N', tol: 0.03, etikett: 'i slutet' },
+                { del: 'b', value: 1.8, unit: 'kJ', tol: 0.03 },
+                { del: 'c' },
+            ],
+            solution: `**a)** Farten är konstant, så vinschens kraft är lika stor som tyngdkraften på den del av kättingen som fortfarande hänger. I början hänger hela kättingen:
+
+$$
+F_\\text{start} = m \\cdot g = 30 \\cdot 9{,}82 = 294{,}6\\ \\mathrm{N} \\approx 290\\ \\mathrm{N}
+$$
+
+I slutet är hela kättingen uppe och ingenting hänger kvar, så kraften är 0.
+
+**Svar:** 290 N i början och 0 i slutet.
+
+**b)** Massan är jämnt fördelad. När kättingen dragits upp sträckan $s$ hänger längden $12 - s$ kvar, och kraften är tyngdkraften på den delen. Kraften minskar därför **linjärt** från 294,6 N till 0:
+
+${makeDiagram({
+    xMax: 12, yMax: 350,
+    xTicks: [0, 2, 4, 6, 8, 10, 12],
+    yTicks: [0, 50, 100, 150, 200, 250, 300, 350],
+    xLabel: '<tspan font-style="italic">s</tspan> (m)',
+    yLabel: '<tspan font-style="italic">F</tspan> (N)',
+    paths: [{ points: [[0, 294.6], [12, 0]] }],
+    fills: [{ points: [[0, 0], [0, 294.6], [12, 0]] }],
+})}
+
+Formeln $W = F_\\mathrm{s} \\cdot s$ gäller för en konstant kraft. Dela upp sträckan i korta bitar där kraften är nästan konstant: arbetet på varje bit är en smal rektangel under grafen, och tillsammans blir de arean under grafen. Här är arean en triangel:
+
+$$
+W = \\frac{F_\\text{start} \\cdot L}{2} = \\frac{294{,}6 \\cdot 12}{2} = 1\\,767{,}6\\ \\mathrm{J} \\approx 1{,}8\\ \\mathrm{kJ}
+$$
+
+Man kan också se det så att vinschen i medel drar med halva startkraften, 147,3 N, längs hela sträckan 12 m.
+
+**Svar:** Vinschen uträttar arbetet 1,8 kJ.
+
+**c)** Med längden $L$ och massan $m$ minskar kraften linjärt från $m \\cdot g$ till 0 längs sträckan $L$. Arean under grafen är en triangel:
+
+$$
+W_\\text{kätting} = \\frac{m \\cdot g \\cdot L}{2}
+$$
+
+Om hela kättingen i stället lyftes sträckan $L$ vore kraften $m \\cdot g$ hela vägen, och arbetet $W_\\text{hel} = m \\cdot g \\cdot L$. Kvoten blir
+
+$$
+\\frac{W_\\text{kätting}}{W_\\text{hel}} = \\frac{\\dfrac{m \\cdot g \\cdot L}{2}}{m \\cdot g \\cdot L} = \\frac{1}{2}
+$$
+
+vilket skulle visas. Förklaringen är att den nedersta länken lyfts hela sträckan $L$, medan den översta knappt lyfts alls. I medel lyfts kättingen sträckan $\\dfrac{L}{2}$.`,
+        },
+        {
+            level: 3,
+            question: `En talja består av två block med två trissor i varje, se figuren. Repet går fram och tillbaka mellan blocken, så att fyra repparter bär det nedre blocket. En låda med massan 80 kg ska lyftas 2,5 m med konstant fart. Trissorna är friktionsfria, och blockens och repets massor kan försummas. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="30 2 300 324" width="356" height="385" role="img" aria-label="En talja hänger i taket. Det övre blocket har två trissor och det nedre blocket två trissor. Repet går fram och tillbaka mellan blocken så att fyra repparter bär det nedre blocket. I det nedre blocket hänger en låda med massan 80 kg. Repets fria ände dras nedåt med kraften F." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="60" y="8" width="240" height="12" fill="#d8d2c6" stroke="rgba(15,22,32,0.6)" stroke-width="1.4"/><line x1="66" y1="8" x2="74" y2="20" stroke="rgba(15,22,32,0.25)" stroke-width="1"/><line x1="80" y1="8" x2="88" y2="20" stroke="rgba(15,22,32,0.25)" stroke-width="1"/><line x1="94" y1="8" x2="102" y2="20" stroke="rgba(15,22,32,0.25)" stroke-width="1"/><line x1="108" y1="8" x2="116" y2="20" stroke="rgba(15,22,32,0.25)" stroke-width="1"/><line x1="122" y1="8" x2="130" y2="20" stroke="rgba(15,22,32,0.25)" stroke-width="1"/><line x1="136" y1="8" x2="144" y2="20" stroke="rgba(15,22,32,0.25)" stroke-width="1"/><line x1="150" y1="8" x2="158" y2="20" stroke="rgba(15,22,32,0.25)" stroke-width="1"/><line x1="164" y1="8" x2="172" y2="20" stroke="rgba(15,22,32,0.25)" stroke-width="1"/><line x1="178" y1="8" x2="186" y2="20" stroke="rgba(15,22,32,0.25)" stroke-width="1"/><line x1="192" y1="8" x2="200" y2="20" stroke="rgba(15,22,32,0.25)" stroke-width="1"/><line x1="206" y1="8" x2="214" y2="20" stroke="rgba(15,22,32,0.25)" stroke-width="1"/><line x1="220" y1="8" x2="228" y2="20" stroke="rgba(15,22,32,0.25)" stroke-width="1"/><line x1="234" y1="8" x2="242" y2="20" stroke="rgba(15,22,32,0.25)" stroke-width="1"/><line x1="248" y1="8" x2="256" y2="20" stroke="rgba(15,22,32,0.25)" stroke-width="1"/><line x1="262" y1="8" x2="270" y2="20" stroke="rgba(15,22,32,0.25)" stroke-width="1"/><line x1="276" y1="8" x2="284" y2="20" stroke="rgba(15,22,32,0.25)" stroke-width="1"/><line x1="290" y1="8" x2="298" y2="20" stroke="rgba(15,22,32,0.25)" stroke-width="1"/><line x1="200" y1="20" x2="200" y2="48" stroke="#4a4f57" stroke-width="3"/><rect x="116" y="50" width="136" height="44" rx="10" fill="#e3e6ea" stroke="#5b6470" stroke-width="1.5"/><rect x="116" y="176" width="108" height="40" rx="10" fill="#e3e6ea" stroke="#5b6470" stroke-width="1.5"/><circle cx="170" cy="78" r="15" fill="#f4f6f8" stroke="#4f7197" stroke-width="1.6"/><circle cx="170" cy="78" r="3" fill="#5b6470"/><circle cx="230" cy="78" r="15" fill="#f4f6f8" stroke="#4f7197" stroke-width="1.6"/><circle cx="230" cy="78" r="3" fill="#5b6470"/><circle cx="140" cy="196" r="15" fill="#f4f6f8" stroke="#4f7197" stroke-width="1.6"/><circle cx="140" cy="196" r="3" fill="#5b6470"/><circle cx="200" cy="196" r="15" fill="#f4f6f8" stroke="#4f7197" stroke-width="1.6"/><circle cx="200" cy="196" r="3" fill="#5b6470"/><circle cx="125" cy="94" r="3" fill="#5b6470"/><line x1="125" y1="94" x2="125" y2="196" stroke="#8a6d3b" stroke-width="2.6"/><path d="M 125 196 A 15 15 0 0 0 155 196" fill="none" stroke="#8a6d3b" stroke-width="2.6"/><line x1="155" y1="196" x2="155" y2="78" stroke="#8a6d3b" stroke-width="2.6"/><path d="M 155 78 A 15 15 0 0 1 185 78" fill="none" stroke="#8a6d3b" stroke-width="2.6"/><line x1="185" y1="78" x2="185" y2="196" stroke="#8a6d3b" stroke-width="2.6"/><path d="M 185 196 A 15 15 0 0 0 215 196" fill="none" stroke="#8a6d3b" stroke-width="2.6"/><line x1="215" y1="196" x2="215" y2="78" stroke="#8a6d3b" stroke-width="2.6"/><path d="M 215 78 A 15 15 0 0 1 245 78" fill="none" stroke="#8a6d3b" stroke-width="2.6"/><line x1="245" y1="78" x2="245" y2="262" stroke="#8a6d3b" stroke-width="2.6"/><line x1="245.0" y1="262.0" x2="245.0" y2="305.0" stroke="#c8324a" stroke-width="3.4" stroke-linecap="butt"/><polygon points="238.8,305.0 245.0,318.0 251.2,305.0" fill="#c8324a"/><text x="255" y="312" font-size="16" fill="#c8324a"><tspan font-style="italic">F</tspan></text><line x1="170" y1="216" x2="170" y2="242" stroke="#4a4f57" stroke-width="3"/><rect x="128" y="242" width="84" height="58" rx="3" fill="#d9b98a" stroke="#7a5a32" stroke-width="1.6"/><line x1="128" y1="256" x2="212" y2="256" stroke="#7a5a32" stroke-width="1" opacity="0.7"/><text x="170" y="285" font-size="15" fill="#0f1620" text-anchor="middle">80 kg</text></svg>
+
+a) Hur stor kraft $F$ måste man dra i repets fria ände med?<br>b) Hur lång bit av repet måste man dra ut?<br>c) Hur stort arbete uträttar man?<br>d) En försäljare påstår att taljan sparar tre fjärdedelar av arbetet jämfört med att lyfta lådan direkt. Bemöt påståendet, och diskutera hur en verklig talja skiljer sig från modellen.
+
+Ange svaren i N, m och kJ.`,
+            answer: { value: 2.0, unit: 'kJ', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 200, unit: 'N', tol: 0.03 },
+                { del: 'b', value: 10, unit: 'm', tol: 0.02 },
+                { del: 'c', value: 2.0, unit: 'kJ', tol: 0.03 },
+                { del: 'd' },
+            ],
+            solution: `**a)** Se på det nedre blocket med lådan. Det rör sig med konstant fart, så kraftresultanten är noll. Uppåt verkar de fyra repparterna. Det är samma rep, och trissorna är friktionsfria, så spännkraften är lika stor i hela repet och lika stor som dragkraften $F$. Nedåt verkar tyngdkraften på lådan.
+
+$$
+4 \\cdot F = m \\cdot g \\quad \\Longleftrightarrow \\quad F = \\frac{m \\cdot g}{4} = \\frac{80 \\cdot 9{,}82}{4} = 196{,}4\\ \\mathrm{N} \\approx 2{,}0 \\cdot 10^{2}\\ \\mathrm{N}
+$$
+
+**Svar:** Man drar med kraften 200 N.
+
+**b)** När lådan lyfts 2,5 m blir var och en av de fyra repparterna mellan blocken 2,5 m kortare. Det repet tar vägen ut genom den fria änden:
+
+$$
+s = 4 \\cdot 2{,}5 = 10\\ \\mathrm{m}
+$$
+
+**Svar:** Man drar ut 10 m rep.
+
+**c)** Dragkraften och repets rörelse har samma riktning, så $F_\\mathrm{s} = F$:
+
+$$
+\\left[ \\begin{array}{l}
+F_\\mathrm{s} = 196{,}4\\ \\mathrm{N} \\\\
+s = 10\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+W = F_\\mathrm{s} \\cdot s = 196{,}4 \\cdot 10 = 1\\,964\\ \\mathrm{J} \\approx 2{,}0\\ \\mathrm{kJ}
+$$
+
+**Svar:** Man uträttar arbetet 2,0 kJ.
+
+**d)** Att lyfta lådan direkt kräver kraften $m \\cdot g = 80 \\cdot 9{,}82 = 785{,}6\\ \\mathrm{N}$ längs sträckan $s = 2{,}5\\ \\mathrm{m}$:
+
+$$
+W_\\text{direkt} = 785{,}6 \\cdot 2{,}5 = 1\\,964\\ \\mathrm{J}
+$$
+
+Det är exakt samma arbete som med taljan. Taljan delar kraften med fyra, men man måste dra fyra gånger så lång sträcka, och produkten $F_\\mathrm{s} \\cdot s$ blir densamma. Taljan sparar alltså **kraft**, inte arbete. Försäljaren har förväxlat de två.
+
+I en verklig talja finns friktion i trissornas axlar och när repet böjs runt trissorna, och det nedre blocket har en massa som också ska lyftas. Båda gör att man måste dra med en något större kraft än 196 N, längs samma 10 m. Arbetet blir därför **större** än 2,0 kJ, och skillnaden blir värmeenergi i taljan. En verklig talja kan aldrig kräva mindre arbete än ett direkt lyft.
+
+**Svar:** Påståendet är fel. Taljan minskar kraften till en fjärdedel men fyrdubblar sträckan, så arbetet är detsamma, och i en verklig talja blir det till och med lite större.`,
+        },
+        {
+            level: 3,
+            question: `En grupp elever vill bestämma friktionstalet mellan en trälåda och golvet i korridoren. De lägger olika stor extra last $m$ i lådan och drar den 5,0 m med konstant fart och vågrät dragkraft. Dragkraften mäts med en kraftgivare, och ur den räknar de ut det arbete $W$ som krävs. Lådans egen massa vet de inte. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+
+| $m$ (kg) | 0 | 10 | 20 | 30 | 40 |
+|---|---|---|---|---|---|
+| $W$ (J) | 139 | 306 | 484 | 650 | 826 |
+
+a) Rita en graf över $W$ som funktion av $m$ och bestäm friktionstalet.<br>b) Bestäm lådans egen massa.`,
+            answer: { value: 0.35, unit: '', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 0.35, unit: '', tol: 0.04, etikett: '$\\mu =$' },
+                { del: 'b', value: 8.0, unit: 'kg', tol: 0.05 },
+            ],
+            solution: `**a)** Ställ först upp en modell. Kalla lådans egen massa $M$. Dragkraften är vågrät och farten konstant, så dragkraften är lika stor som friktionskraften, och normalkraften är lika stor som tyngdkraften på lådan med last:
+
+$$
+F_\\mathrm{s} = F_\\mathrm{f} = \\mu \\cdot F_\\mathrm{N} = \\mu \\cdot (M + m) \\cdot g
+$$
+
+Arbetet längs sträckan $s = 5{,}0\\ \\mathrm{m}$ blir
+
+$$
+W = F_\\mathrm{s} \\cdot s = \\mu \\cdot g \\cdot s \\cdot (M + m) = \\mu \\cdot g \\cdot s \\cdot m + \\mu \\cdot g \\cdot s \\cdot M
+$$
+
+Det är en rät linje $W = k \\cdot m + b$, med lutningen $k = \\mu \\cdot g \\cdot s$ och skärningen med *W*-axeln $b = \\mu \\cdot g \\cdot s \\cdot M$. Mätpunkterna och en anpassad linje:
+
+${makeDiagram({
+    xMax: 45, yMax: 900,
+    xTicks: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45],
+    yTicks: [0, 100, 200, 300, 400, 500, 600, 700, 800, 900],
+    xLabel: '<tspan font-style="italic">m</tspan> (kg)',
+    yLabel: '<tspan font-style="italic">W</tspan> (J)',
+    paths: [
+        { points: [[0, 137], [44, 893.8]], width: 2 },
+        { points: [[-0.6, 139], [0.6, 139]], color: '#0f1620', width: 2 },
+        { points: [[0, 125], [0, 153]], color: '#0f1620', width: 2 },
+        { points: [[9.4, 306], [10.6, 306]], color: '#0f1620', width: 2 },
+        { points: [[10, 292], [10, 320]], color: '#0f1620', width: 2 },
+        { points: [[19.4, 484], [20.6, 484]], color: '#0f1620', width: 2 },
+        { points: [[20, 470], [20, 498]], color: '#0f1620', width: 2 },
+        { points: [[29.4, 650], [30.6, 650]], color: '#0f1620', width: 2 },
+        { points: [[30, 636], [30, 664]], color: '#0f1620', width: 2 },
+        { points: [[39.4, 826], [40.6, 826]], color: '#0f1620', width: 2 },
+        { points: [[40, 812], [40, 840]], color: '#0f1620', width: 2 },
+    ],
+})}
+
+Punkterna ligger väl på en rät linje, så modellen håller. Linjen går genom ungefär $(0,\\ 137)$ och $(40,\\ 825)$. Använd punkter på linjen, inte enskilda mätvärden, så jämnas mätfelen ut:
+
+$$
+k = \\frac{\\Delta W}{\\Delta m} = \\frac{825 - 137}{40 - 0} = \\frac{688}{40} = 17{,}2\\ \\mathrm{J/kg}
+$$
+
+Lutningen är $k = \\mu \\cdot g \\cdot s$, så
+
+$$
+\\mu = \\frac{k}{g \\cdot s} = \\frac{17{,}2}{9{,}82 \\cdot 5{,}0} = 0{,}35030\\ldots \\approx 0{,}35
+$$
+
+Rimligt: friktionstal mellan trä och ett golv brukar ligga mellan 0,2 och 0,5.
+
+**Svar:** Friktionstalet är 0,35.
+
+**b)** Skärningen med *W*-axeln, $b = 137\\ \\mathrm{J}$, är arbetet när ingen extra last finns, alltså arbetet för den tomma lådan. Eftersom $b = \\mu \\cdot g \\cdot s \\cdot M = k \\cdot M$ gäller
+
+$$
+M = \\frac{b}{k} = \\frac{137}{17{,}2} = 7{,}965\\ldots\\ \\mathrm{kg} \\approx 8{,}0\\ \\mathrm{kg}
+$$
+
+Lägg märke till att friktionstalet aldrig behövdes i b): förhållandet mellan skärning och lutning ger massan direkt. Att bestämma lutningen ur en linje genom alla punkter är säkrare än att räkna med en enda mätning, eftersom en enskild mätning kan ha ett stort fel.
+
+**Svar:** Lådans egen massa är 8,0 kg.`,
+        },
+        {
+            level: 3,
+            question: `En cyklist cyklar 12 km på en vågrät väg i stilla luft. En enkel modell för luftmotståndet är $F = k \\cdot v^2$, där $v$ är farten och $k = 0{,}20\\ \\mathrm{kg/m}$ för den här cyklisten. Bortse från all annan friktion.
+
+a) Beräkna det arbete som cyklisten måste uträtta mot luftmotståndet om hen cyklar med den konstanta farten 18 km/h, och om hen cyklar med 36 km/h.<br>b) En kamrat säger: ”Arbetet är kraft gånger sträcka. Sträckan är ju densamma, så det kostar lika mycket energi att cykla till skolan oavsett hur fort man cyklar.” Bemöt påståendet med ett generellt uttryck för arbetet.<br>c) Med vilken fart ska cyklisten cykla för att arbetet mot luftmotståndet ska bli hälften så stort som vid 36 km/h?
+
+Ange svaren i kJ och km/h.`,
+            answer: { value: 25, unit: 'km/h', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 60, unit: 'kJ', tol: 0.03, etikett: '18 km/h' },
+                { del: 'a', value: 240, unit: 'kJ', tol: 0.03, etikett: '36 km/h' },
+                { del: 'b' },
+                { del: 'c', value: 25, unit: 'km/h', tol: 0.03 },
+            ],
+            solution: `**a)** Farten är konstant, så cyklistens kraft framåt är lika stor som luftmotståndet, $F_\\mathrm{s} = k \\cdot v^2$. Farterna räknas om till m/s genom division med 3,6, och sträckan till meter.
+
+$$
+\\left[ \\begin{array}{l}
+k = 0{,}20\\ \\mathrm{kg/m} \\\\
+v_1 = 18\\ \\mathrm{km/h} = 5{,}0\\ \\mathrm{m/s} \\\\
+v_2 = 36\\ \\mathrm{km/h} = 10\\ \\mathrm{m/s} \\\\
+s = 12\\ \\mathrm{km} = 12\\,000\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+F_1 = 0{,}20 \\cdot 5{,}0^2 = 5{,}0\\ \\mathrm{N} \\qquad W_1 = 5{,}0 \\cdot 12\\,000 = 60\\,000\\ \\mathrm{J} = 60\\ \\mathrm{kJ}
+$$
+
+$$
+F_2 = 0{,}20 \\cdot 10^2 = 20\\ \\mathrm{N} \\qquad W_2 = 20 \\cdot 12\\,000 = 240\\,000\\ \\mathrm{J} = 240\\ \\mathrm{kJ}
+$$
+
+Enheten stämmer: $\\mathrm{kg/m} \\cdot (\\mathrm{m/s})^2 = \\mathrm{kg \\cdot m/s^2} = \\mathrm{N}$.
+
+**Svar:** 60 kJ vid 18 km/h och 240 kJ vid 36 km/h.
+
+**b)** Sträckan är visserligen densamma, men kraften är det inte. Insättning av $F_\\mathrm{s} = k \\cdot v^2$ i $W = F_\\mathrm{s} \\cdot s$ ger
+
+$$
+W = k \\cdot v^2 \\cdot s
+$$
+
+Arbetet är alltså proportionellt mot farten i kvadrat. Dubblas farten blir luftmotståndet fyra gånger så stort, och då blir arbetet längs samma sträcka också fyra gånger så stort, precis som i a). Att resan tar halva tiden ändrar inte det, eftersom arbetet inte beror på tiden utan på kraft och sträcka.
+
+Kamratens resonemang hade varit rätt om kraften inte berott på farten, till exempel för ren rullfriktion. I den här modellen växer däremot luftmotståndet med farten.
+
+**Svar:** Påståendet är fel. Kraften beror på farten, och arbetet $W = k \\cdot v^2 \\cdot s$ fyrdubblas när farten dubblas.
+
+**c)** Halva arbetet kräver halva kraften, eftersom sträckan är densamma. Med $W = k \\cdot v^2 \\cdot s$ ska $v^2$ halveras:
+
+$$
+v^2 = \\frac{v_2^2}{2} \\quad \\Longleftrightarrow \\quad v = \\frac{v_2}{\\sqrt{2}} = \\frac{36}{\\sqrt{2}} = 25{,}455\\ldots\\ \\mathrm{km/h} \\approx 25\\ \\mathrm{km/h}
+$$
+
+Rimligt: farten behöver inte halveras för att arbetet ska halveras, eftersom arbetet växer med farten i kvadrat.
+
+**Svar:** Cyklisten ska cykla med farten 25 km/h.`,
         },
     ],
 
@@ -13496,7 +22393,652 @@ $$
 
 **Svar:** Cirka 39 J.
 
-**Generell slutsats:** För att hitta lägesenergi (eller arbete vid lyft) av ett *utbrett* föremål — kedja, stege, vatten i en cylinder — räknar man som om hela massan satt i föremålets **tyngdpunkt**. Detta är samma trick som används i exempel om att lyfta vatten ur en brunn eller att räkna gravitationsenergi för en stång som faller över.`,
+**Generell slutsats:** För att hitta lägesenergi (eller arbete vid lyft) av ett *utbrett* föremål (kedja, stege, vatten i en cylinder) räknar man som om hela massan satt i föremålets **tyngdpunkt**. Detta är samma trick som används i exempel om att lyfta vatten ur en brunn eller att räkna gravitationsenergi för en stång som faller över.`,
+        },
+        {
+            level: 1,
+            question: `En byggkran lyfter en betongbalk med massan 450 kg från marken upp till höjden 12 m. Hur mycket ökar balkens lägesenergi? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i kJ.`,
+            answer: { value: 53, unit: 'kJ', tol: 0.03 },
+            solution: `Med nollnivån vid marken är ökningen av lägesenergi lika med lägesenergin på 12 m höjd:
+
+$$
+\\Delta E_\\mathrm{p} = m \\cdot g \\cdot h
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m = 450\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+h = 12\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+\\Delta E_\\mathrm{p} = 450 \\cdot 9{,}82 \\cdot 12 = 53\\,028\\ \\mathrm{J} \\approx 53\\ \\mathrm{kJ}
+$$
+
+**Svar:** 53 kJ`,
+        },
+        {
+            level: 1,
+            question: `En tegelsten har måtten 25 cm × 12 cm × 6,5 cm. Den kan läggas på ett bord på tre olika sätt. I vilket läge har tegelstenen störst lägesenergi relativt bordsytan?`,
+            choices: [
+                `Liggande platt på sin största sida`,
+                `På högkant, så att den är 12 cm hög`,
+                `Stående på sin minsta sida, så att den är 25 cm hög`,
+                `Lika stor i alla tre lägena, eftersom massan är densamma`,
+            ],
+            correct: 2,
+            solution: `Det är **tyngdpunktens** höjd över nollnivån (bordsytan) som avgör lägesenergin, $E_\\mathrm{p} = m \\cdot g \\cdot h$. Tegelstenens tyngdpunkt ligger i dess mitt, alltså på halva höjden:
+
+- liggande platt: $h = \\dfrac{6{,}5}{2} \\approx 3{,}3\\ \\mathrm{cm}$
+- på högkant: $h = \\dfrac{12}{2} = 6{,}0\\ \\mathrm{cm}$
+- stående: $h = \\dfrac{25}{2} = 12{,}5\\ \\mathrm{cm}$
+
+Massan och tyngdfaktorn är desamma i alla lägen, så lägesenergin blir störst där tyngdpunkten ligger högst.
+
+**Svar:** Stående på sin minsta sida, så att den är 25 cm hög`,
+        },
+        {
+            level: 1,
+            question: `En hink med vatten har den sammanlagda massan 12 kg. Den hänger i ett rep 6,5 m under markytan i en brunn. Nollnivån för lägesenergin sätts vid markytan. Vilken lägesenergi har hinken? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i kJ.`,
+            answer: { value: -0.77, unit: 'kJ', tol: 0.03 },
+            solution: `Hinken befinner sig under nollnivån, så dess höjd över nollnivån är negativ: $h = -6{,}5\\ \\mathrm{m}$.
+
+$$
+E_\\mathrm{p} = m \\cdot g \\cdot h
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m = 12\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+h = -6{,}5\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+E_\\mathrm{p} = 12 \\cdot 9{,}82 \\cdot (-6{,}5) = -765{,}96\\ \\mathrm{J} \\approx -0{,}77\\ \\mathrm{kJ}
+$$
+
+Det negativa tecknet betyder att hinken har 0,77 kJ mindre lägesenergi än den skulle ha vid markytan. Man måste alltså uträtta arbetet 0,77 kJ för att lyfta upp den till markytan. Energin i sig är inte negativ, det är valet av nollnivå som ger tecknet.
+
+**Svar:** −0,77 kJ`,
+        },
+        {
+            level: 1,
+            question: `Grafen visar hur lägesenergin $E_\\mathrm{p}$ för en medicinboll beror på bollens höjd $h$ över golvet. Bestäm medicinbollens massa. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+
+${makeDiagram({
+    xMin: 0, xMax: 4, yMin: 0, yMax: 90,
+    xTicks: [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4],
+    yTicks: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90],
+    xLabel: '<tspan font-style="italic">h</tspan> (m)',
+    yLabel: '<tspan font-style="italic">E</tspan><tspan baseline-shift="sub" font-size="0.72em">p</tspan> (J)',
+    paths: [{ points: [[0, 0], [4, 80]], color: '#2563c9' }],
+})}`,
+            answer: { value: 2, unit: 'kg', tol: 0.03 },
+            solution: `Vi läser av en punkt på linjen där den skär rutnätet tydligt, till exempel $h = 4{,}0\\ \\mathrm{m}$ och $E_\\mathrm{p} = 80\\ \\mathrm{J}$. Vi löser ut massan ur formeln för lägesenergi:
+
+$$
+E_\\mathrm{p} = m \\cdot g \\cdot h \\quad\\Leftrightarrow\\quad m = \\frac{E_\\mathrm{p}}{g \\cdot h}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+E_\\mathrm{p} = 80\\ \\mathrm{J} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+h = 4{,}0\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+m = \\frac{80}{9{,}82 \\cdot 4{,}0} = 2{,}0366\\ldots\\ \\mathrm{kg} \\approx 2{,}0\\ \\mathrm{kg}
+$$
+
+En annan punkt ger samma resultat, till exempel $h = 2{,}0\\ \\mathrm{m}$ och $E_\\mathrm{p} = 40\\ \\mathrm{J}$, eftersom lägesenergin är proportionell mot höjden.
+
+**Svar:** 2,0 kg`,
+        },
+        {
+            level: 2,
+            question: `En simhopperska med massan 55 kg står på ett hopptorn 10 m ovanför vattenytan. Bassängen är 4,5 m djup. Räkna som om hennes tyngdpunkt befinner sig på de angivna höjderna, och räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.<br>a) Hur stor är hennes lägesenergi om nollnivån läggs vid vattenytan?<br>b) Hur stor är hennes lägesenergi om nollnivån i stället läggs vid bassängens botten?<br>c) Efter hoppet vänder hon 2,0 m under vattenytan. Hur mycket har hennes lägesenergi ändrats från tornet till vändpunkten? Spelar valet av nollnivå någon roll för svaret?
+
+Ange svaren i kJ.`,
+            answer: { value: -6.5, unit: 'kJ', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 5.4, unit: 'kJ', tol: 0.03 },
+                { del: 'b', value: 7.8, unit: 'kJ', tol: 0.03 },
+                { del: 'c', value: -6.5, unit: 'kJ', tol: 0.03 },
+            ],
+            solution: `Lägesenergin är $E_\\mathrm{p} = m \\cdot g \\cdot h$, där $h$ är höjden över den nollnivå vi väljer.
+
+**a)** Med nollnivån vid vattenytan är $h = 10\\ \\mathrm{m}$.
+
+$$
+E_\\mathrm{p} = 55 \\cdot 9{,}82 \\cdot 10 = 5\\,401\\ \\mathrm{J} \\approx 5{,}4\\ \\mathrm{kJ}
+$$
+
+**Svar:** 5,4 kJ
+
+**b)** Med nollnivån vid botten ligger tornet $10 + 4{,}5 = 14{,}5\\ \\mathrm{m}$ över nollnivån.
+
+$$
+E_\\mathrm{p} = 55 \\cdot 9{,}82 \\cdot 14{,}5 = 7\\,831{,}45\\ \\mathrm{J} \\approx 7{,}8\\ \\mathrm{kJ}
+$$
+
+**Svar:** 7,8 kJ
+
+**c)** Vi räknar ändringen med båda nollnivåerna.
+
+Nollnivå vid vattenytan: vändpunkten ligger på $h = -2{,}0\\ \\mathrm{m}$.
+
+$$
+E_\\mathrm{p,\\,slut} = 55 \\cdot 9{,}82 \\cdot (-2{,}0) = -1\\,080{,}2\\ \\mathrm{J}
+$$
+
+$$
+\\Delta E_\\mathrm{p} = -1\\,080{,}2 - 5\\,401 = -6\\,481{,}2\\ \\mathrm{J}
+$$
+
+Nollnivå vid botten: vändpunkten ligger på $h = 4{,}5 - 2{,}0 = 2{,}5\\ \\mathrm{m}$.
+
+$$
+E_\\mathrm{p,\\,slut} = 55 \\cdot 9{,}82 \\cdot 2{,}5 = 1\\,350{,}25\\ \\mathrm{J}
+$$
+
+$$
+\\Delta E_\\mathrm{p} = 1\\,350{,}25 - 7\\,831{,}45 = -6\\,481{,}2\\ \\mathrm{J}
+$$
+
+Båda valen ger samma ändring, eftersom ändringen bara beror på höjdskillnaden, $10 + 2{,}0 = 12\\ \\mathrm{m}$ nedåt: $55 \\cdot 9{,}82 \\cdot (-12) = -6\\,481{,}2\\ \\mathrm{J}$. Själva värdet på lägesenergin beror på nollnivån, men inte ändringen.
+
+**Svar:** Lägesenergin minskar med 6,5 kJ (ändringen är −6,5 kJ). Valet av nollnivå spelar ingen roll för ändringen.`,
+        },
+        {
+            level: 2,
+            question: `I en vattenkraftsdamm ligger vattenytan 45 m ovanför kraftverkets turbiner. Vattnets densitet är $1\\,000\\ \\mathrm{kg/m^3}$. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.<br>a) Hur stor lägesenergi har 1,0 m³ vatten vid ytan, relativt turbinerna? Ange svaret i MJ.<br>b) Energin 1,0 kWh är lika med 3,6 MJ. Hur många kubikmeter vatten måste falla från ytan ned till turbinerna för att lägesenergin ska minska med 1,0 kWh?`,
+            answer: { value: 8.1, unit: 'm³', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 0.44, unit: 'MJ', tol: 0.03 },
+                { del: 'b', value: 8.1, unit: 'm³', tol: 0.03 },
+            ],
+            solution: `**a)** Först massan av 1,0 m³ vatten:
+
+$$
+m = \\rho \\cdot V = 1\\,000 \\cdot 1{,}0 = 1\\,000\\ \\mathrm{kg}
+$$
+
+Med nollnivån vid turbinerna är höjden $h = 45\\ \\mathrm{m}$:
+
+$$
+E_\\mathrm{p} = m \\cdot g \\cdot h = 1\\,000 \\cdot 9{,}82 \\cdot 45 = 441\\,900\\ \\mathrm{J} \\approx 0{,}44\\ \\mathrm{MJ}
+$$
+
+**Svar:** 0,44 MJ
+
+**b)** Vi söker den massa som ger $E_\\mathrm{p} = 3{,}6\\ \\mathrm{MJ} = 3{,}6 \\cdot 10^{6}\\ \\mathrm{J}$ när den faller 45 m:
+
+$$
+E_\\mathrm{p} = m \\cdot g \\cdot h \\quad\\Leftrightarrow\\quad m = \\frac{E_\\mathrm{p}}{g \\cdot h}
+$$
+
+$$
+m = \\frac{3{,}6 \\cdot 10^{6}}{9{,}82 \\cdot 45} = 8\\,146{,}6\\ldots\\ \\mathrm{kg}
+$$
+
+Volymen ur densiteten:
+
+$$
+V = \\frac{m}{\\rho} = \\frac{8\\,146{,}6\\ldots}{1\\,000} = 8{,}1466\\ldots\\ \\mathrm{m^3} \\approx 8{,}1\\ \\mathrm{m^3}
+$$
+
+Rimlighet: varje kubikmeter ger 0,44 MJ, och $\\dfrac{3{,}6}{0{,}44} \\approx 8$. Det är ungefär lika mycket vatten som i fyrtio fulla badkar, vilket visar att det behövs stora mängder vatten för att få ut mycket energi.
+
+**Svar:** 8,1 m³`,
+        },
+        {
+            level: 2,
+            question: `Fem likadana böcker ligger platt bredvid varandra på ett bord. Varje bok har massan 0,60 kg och är 4,0 cm tjock. Du staplar böckerna på varandra, se figuren. Hur mycket ökar böckernas sammanlagda lägesenergi? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i J.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 25 360 112" width="526" height="164" role="img" aria-label="Fem böcker ligger platt bredvid varandra på ett bord, och sedan staplade på varandra." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="6" y="110" width="348" height="10" fill="#c9a77c" stroke="#0f1620" stroke-width="1.4"/><rect x="20" y="120" width="9" height="15" fill="#b08d62" stroke="#0f1620" stroke-width="1.2"/><rect x="331" y="120" width="9" height="15" fill="#b08d62" stroke="#0f1620" stroke-width="1.2"/><rect x="14" y="98" width="44" height="12" rx="1.5" fill="#4f7197" stroke="#0f1620" stroke-width="1.2"/><rect x="51" y="100.5" width="4.5" height="7" fill="#f3eee4"/><rect x="64" y="98" width="44" height="12" rx="1.5" fill="#a8473b" stroke="#0f1620" stroke-width="1.2"/><rect x="101" y="100.5" width="4.5" height="7" fill="#f3eee4"/><rect x="114" y="98" width="44" height="12" rx="1.5" fill="#3f7a5a" stroke="#0f1620" stroke-width="1.2"/><rect x="151" y="100.5" width="4.5" height="7" fill="#f3eee4"/><rect x="164" y="98" width="44" height="12" rx="1.5" fill="#c08a2e" stroke="#0f1620" stroke-width="1.2"/><rect x="201" y="100.5" width="4.5" height="7" fill="#f3eee4"/><rect x="214" y="98" width="44" height="12" rx="1.5" fill="#6b4f8a" stroke="#0f1620" stroke-width="1.2"/><rect x="251" y="100.5" width="4.5" height="7" fill="#f3eee4"/><rect x="290" y="98" width="44" height="12" rx="1.5" fill="#4f7197" stroke="#0f1620" stroke-width="1.2"/><rect x="327" y="100.5" width="4.5" height="7" fill="#f3eee4"/><rect x="290" y="86" width="44" height="12" rx="1.5" fill="#a8473b" stroke="#0f1620" stroke-width="1.2"/><rect x="327" y="88.5" width="4.5" height="7" fill="#f3eee4"/><rect x="290" y="74" width="44" height="12" rx="1.5" fill="#3f7a5a" stroke="#0f1620" stroke-width="1.2"/><rect x="327" y="76.5" width="4.5" height="7" fill="#f3eee4"/><rect x="290" y="62" width="44" height="12" rx="1.5" fill="#c08a2e" stroke="#0f1620" stroke-width="1.2"/><rect x="327" y="64.5" width="4.5" height="7" fill="#f3eee4"/><rect x="290" y="50" width="44" height="12" rx="1.5" fill="#6b4f8a" stroke="#0f1620" stroke-width="1.2"/><rect x="327" y="52.5" width="4.5" height="7" fill="#f3eee4"/><text x="136" y="40" font-size="13" fill="#0f1620" text-anchor="middle">Före</text><text x="312" y="40" font-size="13" fill="#0f1620" text-anchor="middle">Efter</text></svg>`,
+            answer: { value: 2.4, unit: 'J', tol: 0.03 },
+            solution: `Lägesenergin bestäms av hur högt **tyngdpunkten** ligger. Vi låter bordsytan vara nollnivå.
+
+Före: varje bok ligger platt, så alla tyngdpunkter ligger på halva tjockleken, $2{,}0\\ \\mathrm{cm}$ över bordet. Tyngdpunkten för alla fem böckerna ligger alltså 2,0 cm upp.
+
+Efter: stapeln är $5 \\cdot 4{,}0 = 20\\ \\mathrm{cm}$ hög. Böckerna är likadana, så stapelns tyngdpunkt ligger mitt i stapeln, $10\\ \\mathrm{cm}$ över bordet.
+
+Tyngdpunkten för hela massan $m = 5 \\cdot 0{,}60 = 3{,}0\\ \\mathrm{kg}$ har lyfts
+
+$$
+\\Delta h = 10 - 2{,}0 = 8{,}0\\ \\mathrm{cm} = 0{,}080\\ \\mathrm{m}
+$$
+
+$$
+\\Delta E_\\mathrm{p} = m \\cdot g \\cdot \\Delta h = 3{,}0 \\cdot 9{,}82 \\cdot 0{,}080 = 2{,}3568\\ \\mathrm{J} \\approx 2{,}4\\ \\mathrm{J}
+$$
+
+Kontroll bok för bok: den understa boken lyfts inte alls, nästa lyfts 4,0 cm, sedan 8,0 cm, 12 cm och 16 cm. Sammanlagt $0 + 4{,}0 + 8{,}0 + 12 + 16 = 40\\ \\mathrm{cm} = 0{,}40\\ \\mathrm{m}$, och $0{,}60 \\cdot 9{,}82 \\cdot 0{,}40 = 2{,}3568\\ \\mathrm{J}$. Samma resultat.
+
+**Svar:** 2,4 J`,
+        },
+        {
+            level: 2,
+            question: `Du skjuter en kärra med massan 45 kg uppför en 6,0 m lång ramp till ett lastbilsflak som ligger 1,2 m högre än marken. Kärran rör sig hela tiden med låg, konstant fart, och du uträttar arbetet 750 J. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.<br>a) Hur mycket ökar kärrans lägesenergi?<br>b) Hur mycket energi omvandlas till värme genom friktion?<br>c) Hur stor är friktionskraften längs rampen i genomsnitt?`,
+            answer: { value: 37, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 530, unit: 'J', tol: 0.03 },
+                { del: 'b', value: 220, unit: 'J', tol: 0.03 },
+                { del: 'c', value: 37, unit: 'N', tol: 0.03 },
+            ],
+            solution: `**a)** Lägesenergin beror bara på höjdskillnaden, inte på rampens längd:
+
+$$
+\\Delta E_\\mathrm{p} = m \\cdot g \\cdot h = 45 \\cdot 9{,}82 \\cdot 1{,}2 = 530{,}28\\ \\mathrm{J} \\approx 530\\ \\mathrm{J}
+$$
+
+**Svar:** 530 J
+
+**b)** Farten är konstant, så kärrans rörelseenergi ändras inte. Ditt arbete blir därför antingen lägesenergi eller värme. Sambandet $W = \\Delta E_\\mathrm{p}$ gäller bara utan friktion. Här är arbetet större än ökningen av lägesenergi, och skillnaden har blivit värme:
+
+$$
+E_\\text{värme} = W - \\Delta E_\\mathrm{p} = 750 - 530{,}28 = 219{,}72\\ \\mathrm{J} \\approx 220\\ \\mathrm{J}
+$$
+
+**Svar:** 220 J
+
+**c)** Värmen är det arbete som friktionskraften gör längs rampen, och arbete = kraft · sträcka:
+
+$$
+E_\\text{värme} = F_f \\cdot s \\quad\\Leftrightarrow\\quad F_f = \\frac{E_\\text{värme}}{s} = \\frac{219{,}72}{6{,}0} = 36{,}62\\ \\mathrm{N} \\approx 37\\ \\mathrm{N}
+$$
+
+Rimlighet: kärrans tyngd är $45 \\cdot 9{,}82 \\approx 440\\ \\mathrm{N}$, och en friktionskraft på knappt en tiondel av tyngden är rimlig för en kärra med hjul.
+
+**Svar:** 37 N`,
+        },
+        {
+            level: 2,
+            question: `Ella har massan 52 kg och går uppför en trappa till en plattform 4,2 m över marken. Omar har massan 64 kg och går uppför en 30 m lång ramp till en annan plattform, som ligger 3,2 m över marken. Vem har fått störst ökning av lägesenergi?`,
+            choices: [
+                `Ella`,
+                `Omar`,
+                `Lika stor för båda`,
+                `Det går inte att avgöra utan att veta rampens lutning`,
+            ],
+            correct: 0,
+            solution: `Ökningen av lägesenergi är $\\Delta E_\\mathrm{p} = m \\cdot g \\cdot h$, där $h$ är höjdskillnaden. Hur lång vägen upp är, trappa eller ramp, spelar ingen roll. Med $g = 9{,}82\\ \\mathrm{N/kg}$:
+
+$$
+\\Delta E_\\mathrm{p,\\,Ella} = 52 \\cdot 9{,}82 \\cdot 4{,}2 = 2\\,144{,}688\\ \\mathrm{J} \\approx 2{,}1\\ \\mathrm{kJ}
+$$
+
+$$
+\\Delta E_\\mathrm{p,\\,Omar} = 64 \\cdot 9{,}82 \\cdot 3{,}2 = 2\\,011{,}136\\ \\mathrm{J} \\approx 2{,}0\\ \\mathrm{kJ}
+$$
+
+Omar är tyngre, men Ella kommer så mycket högre upp att hennes ökning blir störst. Rampens längd behövs inte.
+
+**Svar:** Ella`,
+        },
+        {
+            level: 3,
+            question: `En låda med massan $m$ dras med konstant fart uppför ett friktionsfritt lutande plan med lutningsvinkeln $\\alpha$. Lådan förflyttas sträckan $s$ längs planet och hamnar då höjden $h$ över utgångsläget, se figuren. Dragkraften $F$ är riktad längs planet.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="8 22 262 130" width="333" height="165" role="img" aria-label="Ett lutande plan med lutningsvinkeln alfa. En låda dras sträckan s längs planet och höjden h." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><polygon points="20,140 240,140 240,37.4" fill="rgba(15,22,32,0.05)" stroke="#0f1620" stroke-width="1.6"/><path d="M 230 140 L 230 130 L 240 130" fill="none" stroke="#0f1620" stroke-width="1.2"/><path d="M 56 140 A 36 36 0 0 0 52.6 124.8" fill="none" stroke="#8a8579" stroke-width="1.4"/><text x="68.8" y="134.2" font-size="15" fill="#0f1620" font-style="italic" text-anchor="middle">α</text><text x="248" y="93.7" font-size="15" fill="#0f1620" font-style="italic">h</text><text x="183.2" y="46.2" font-size="15" fill="#0f1620" font-style="italic" text-anchor="middle">s</text><g transform="translate(141,83.6) rotate(-25)"><rect x="-15" y="-26" width="30" height="26" rx="2" fill="#d9b98a" stroke="#0f1620" stroke-width="1.4"/></g><line x1="10" y1="140" x2="262" y2="140" stroke="#0f1620" stroke-width="1.6"/><line x1="16" y1="140" x2="10" y2="148" stroke="#0f1620" stroke-width="1"/><line x1="26" y1="140" x2="20" y2="148" stroke="#0f1620" stroke-width="1"/><line x1="36" y1="140" x2="30" y2="148" stroke="#0f1620" stroke-width="1"/><line x1="46" y1="140" x2="40" y2="148" stroke="#0f1620" stroke-width="1"/><line x1="56" y1="140" x2="50" y2="148" stroke="#0f1620" stroke-width="1"/><line x1="66" y1="140" x2="60" y2="148" stroke="#0f1620" stroke-width="1"/><line x1="76" y1="140" x2="70" y2="148" stroke="#0f1620" stroke-width="1"/><line x1="86" y1="140" x2="80" y2="148" stroke="#0f1620" stroke-width="1"/><line x1="96" y1="140" x2="90" y2="148" stroke="#0f1620" stroke-width="1"/><line x1="106" y1="140" x2="100" y2="148" stroke="#0f1620" stroke-width="1"/><line x1="116" y1="140" x2="110" y2="148" stroke="#0f1620" stroke-width="1"/><line x1="126" y1="140" x2="120" y2="148" stroke="#0f1620" stroke-width="1"/><line x1="136" y1="140" x2="130" y2="148" stroke="#0f1620" stroke-width="1"/><line x1="146" y1="140" x2="140" y2="148" stroke="#0f1620" stroke-width="1"/><line x1="156" y1="140" x2="150" y2="148" stroke="#0f1620" stroke-width="1"/><line x1="166" y1="140" x2="160" y2="148" stroke="#0f1620" stroke-width="1"/><line x1="176" y1="140" x2="170" y2="148" stroke="#0f1620" stroke-width="1"/><line x1="186" y1="140" x2="180" y2="148" stroke="#0f1620" stroke-width="1"/><line x1="196" y1="140" x2="190" y2="148" stroke="#0f1620" stroke-width="1"/><line x1="206" y1="140" x2="200" y2="148" stroke="#0f1620" stroke-width="1"/><line x1="216" y1="140" x2="210" y2="148" stroke="#0f1620" stroke-width="1"/><line x1="226" y1="140" x2="220" y2="148" stroke="#0f1620" stroke-width="1"/><line x1="236" y1="140" x2="230" y2="148" stroke="#0f1620" stroke-width="1"/><line x1="246" y1="140" x2="240" y2="148" stroke="#0f1620" stroke-width="1"/><line x1="256" y1="140" x2="250" y2="148" stroke="#0f1620" stroke-width="1"/></svg>
+
+a) Bestäm först dragkraften $F$ uttryckt i $m$, $g$ och $\\alpha$. Visa sedan med sambandet arbete = kraft · sträcka att arbetet blir $W = m \\cdot g \\cdot h$, oberoende av lutningsvinkeln.<br>b) Ett brantare plan kräver en större kraft. Förklara med hjälp av resultatet i a) varför arbetet ändå blir lika stort.<br>c) En ramp till en entré som ligger 0,50 m upp får ha lutningen högst 1 : 12, alltså höjden $h$ delat med sträckan $s$ längs rampen högst $\\dfrac{1}{12}$. Hur lång måste rampen minst vara, och hur stor dragkraft behövs då för att dra en rullstol med person, sammanlagt 95 kg, uppför rampen om friktionen försummas? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            answer: { value: 78, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+                { del: 'c', value: 6, unit: 'm', tol: 0.03, etikett: 'rampens längd' },
+                { del: 'c', value: 78, unit: 'N', tol: 0.03, etikett: 'dragkraft' },
+            ],
+            solution: `**a)** Tyngdkraften $F_\\mathrm{G} = m \\cdot g$ delas upp i en komposant vinkelrätt mot planet och en komposant längs planet, $F_1 = m \\cdot g \\cdot \\sin\\alpha$, som drar lådan nedför planet. Normalkraften tar ut den vinkelräta komposanten. Lådan rör sig med konstant fart, så kraftsumman är noll, och planet är friktionsfritt. Dragkraften måste därför vara lika stor som komposanten längs planet:
+
+$$
+F = F_1 = m \\cdot g \\cdot \\sin\\alpha
+$$
+
+Kraften och förflyttningen har samma riktning, längs planet, så arbetet är
+
+$$
+W = F \\cdot s = m \\cdot g \\cdot \\sin\\alpha \\cdot s
+$$
+
+I den rätvinkliga triangeln i figuren är $h$ motstående katet till vinkeln $\\alpha$ och $s$ hypotenusa, så
+
+$$
+\\sin\\alpha = \\frac{h}{s} \\quad\\Leftrightarrow\\quad s \\cdot \\sin\\alpha = h
+$$
+
+Insättning av $s \\cdot \\sin\\alpha = h$ i uttrycket för arbetet ger
+
+$$
+W = m \\cdot g \\cdot h
+$$
+
+Vinkeln $\\alpha$ har försvunnit ur uttrycket, så arbetet beror bara på massan och höjdskillnaden. Det stämmer med att arbetet utan friktion är lika med ökningen av lägesenergi, $W = \\Delta E_\\mathrm{p}$.
+
+**Svar:** Dragkraften är $F = m \\cdot g \\cdot \\sin\\alpha$, och arbetet blir $W = m \\cdot g \\cdot h$.
+
+**b)** När planet blir brantare ökar $\\sin\\alpha$, så kraften $F$ blir större. Men samtidigt blir sträckan $s = \\dfrac{h}{\\sin\\alpha}$ kortare i exakt samma förhållande. Produkten $F \\cdot s$ blir därför oförändrad: en dubbelt så stor kraft verkar bara längs halva sträckan.
+
+**Svar:** Kraften ökar lika mycket som sträckan minskar, så produkten kraft · sträcka blir densamma, $m \\cdot g \\cdot h$.
+
+**c)** Den kortaste tillåtna rampen har $\\dfrac{h}{s} = \\dfrac{1}{12}$:
+
+$$
+s = 12 \\cdot h = 12 \\cdot 0{,}50 = 6{,}0\\ \\mathrm{m}
+$$
+
+Dragkraften får vi ur resultatet i a), $F \\cdot s = m \\cdot g \\cdot h$:
+
+$$
+F = \\frac{m \\cdot g \\cdot h}{s} = \\frac{95 \\cdot 9{,}82 \\cdot 0{,}50}{6{,}0} = 77{,}74\\ldots\\ \\mathrm{N} \\approx 78\\ \\mathrm{N}
+$$
+
+Rimlighet: att lyfta rullstolen rakt upp kräver kraften $95 \\cdot 9{,}82 \\approx 930\\ \\mathrm{N}$. Med rampen blir kraften en tolftedel så stor, och $\\dfrac{930}{12} \\approx 78$. Arbetet är detsamma, cirka 0,47 kJ, i båda fallen.
+
+**Svar:** Rampen måste vara minst 6,0 m lång, och dragkraften är 78 N.`,
+        },
+        {
+            level: 3,
+            question: `En cylinderformad cistern är nedgrävd så att dess överkant ligger i nivå med marken. Cisternen är 3,0 m djup, har diametern 1,2 m och är helt fylld med vatten med densiteten $1\\,000\\ \\mathrm{kg/m^3}$. Vattnet ska pumpas upp och ut genom ett utlopp 1,0 m över marken, se figuren. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och anta att vattnet lämnar utloppet med försumbar fart.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="20 20 250 240" width="365" height="350" role="img" aria-label="En nedgrävd cylinderformad cistern fylld med vatten. Ett rör med pump leder upp till ett utlopp över marken." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="92" y="80" width="70" height="143" fill="#e4dccd"/><rect x="100" y="80" width="54" height="135" fill="#cfe3f3"/><path d="M 100 80 L 100 215 L 154 215 L 154 80" fill="none" stroke="#0f1620" stroke-width="2"/><line x1="20" y1="80" x2="92" y2="80" stroke="#0f1620" stroke-width="1.6"/><line x1="26" y1="80" x2="20" y2="88" stroke="#0f1620" stroke-width="1"/><line x1="36" y1="80" x2="30" y2="88" stroke="#0f1620" stroke-width="1"/><line x1="46" y1="80" x2="40" y2="88" stroke="#0f1620" stroke-width="1"/><line x1="56" y1="80" x2="50" y2="88" stroke="#0f1620" stroke-width="1"/><line x1="66" y1="80" x2="60" y2="88" stroke="#0f1620" stroke-width="1"/><line x1="76" y1="80" x2="70" y2="88" stroke="#0f1620" stroke-width="1"/><line x1="86" y1="80" x2="80" y2="88" stroke="#0f1620" stroke-width="1"/><line x1="162" y1="80" x2="290" y2="80" stroke="#0f1620" stroke-width="1.6"/><line x1="168" y1="80" x2="162" y2="88" stroke="#0f1620" stroke-width="1"/><line x1="178" y1="80" x2="172" y2="88" stroke="#0f1620" stroke-width="1"/><line x1="188" y1="80" x2="182" y2="88" stroke="#0f1620" stroke-width="1"/><line x1="198" y1="80" x2="192" y2="88" stroke="#0f1620" stroke-width="1"/><line x1="208" y1="80" x2="202" y2="88" stroke="#0f1620" stroke-width="1"/><line x1="218" y1="80" x2="212" y2="88" stroke="#0f1620" stroke-width="1"/><line x1="228" y1="80" x2="222" y2="88" stroke="#0f1620" stroke-width="1"/><line x1="238" y1="80" x2="232" y2="88" stroke="#0f1620" stroke-width="1"/><line x1="248" y1="80" x2="242" y2="88" stroke="#0f1620" stroke-width="1"/><line x1="258" y1="80" x2="252" y2="88" stroke="#0f1620" stroke-width="1"/><line x1="268" y1="80" x2="262" y2="88" stroke="#0f1620" stroke-width="1"/><line x1="278" y1="80" x2="272" y2="88" stroke="#0f1620" stroke-width="1"/><line x1="288" y1="80" x2="282" y2="88" stroke="#0f1620" stroke-width="1"/><line x1="92" y1="80" x2="162" y2="80" stroke="#0f1620" stroke-width="1" stroke-dasharray="3 3"/><path d="M 124 208 L 124 35 L 200 35" fill="none" stroke="#5a5f66" stroke-width="5" stroke-linejoin="round"/><rect x="114" y="46" width="20" height="16" rx="2" fill="#8a8579" stroke="#0f1620" stroke-width="1.2"/><text x="140" y="58" font-size="13" fill="#0f1620" >pump</text><line x1="100" y1="215" x2="100" y2="238" stroke="#0f1620" stroke-width="0.8" stroke-dasharray="3 2"/><line x1="154" y1="215" x2="154" y2="238" stroke="#0f1620" stroke-width="0.8" stroke-dasharray="3 2"/><line x1="106" y1="234" x2="148" y2="234" stroke="#0f1620" stroke-width="1.2"/><polygon points="106,230.5 100,234 106,237.5" fill="#0f1620"/><polygon points="148,230.5 154,234 148,237.5" fill="#0f1620"/><text x="127" y="252" font-size="13" fill="#0f1620" text-anchor="middle">1,2 m</text><line x1="76" y1="215" x2="92" y2="215" stroke="#0f1620" stroke-width="0.8" stroke-dasharray="3 2"/><line x1="80" y1="86" x2="80" y2="209" stroke="#0f1620" stroke-width="1.2"/><polygon points="76.5,86 80,80 83.5,86" fill="#0f1620"/><polygon points="76.5,209 80,215 83.5,209" fill="#0f1620"/><text x="74" y="152" font-size="13" fill="#0f1620" text-anchor="end">3,0 m</text><line x1="206" y1="35" x2="222" y2="35" stroke="#0f1620" stroke-width="0.8" stroke-dasharray="3 2"/><line x1="216" y1="41" x2="216" y2="74" stroke="#0f1620" stroke-width="1.2"/><polygon points="212.5,41 216,35 219.5,41" fill="#0f1620"/><polygon points="212.5,74 216,80 219.5,74" fill="#0f1620"/><text x="222" y="62" font-size="13" fill="#0f1620" >1,0 m</text><text x="212" y="104" font-size="13" fill="#0f1620" >mark</text></svg>
+
+a) Vilket arbete måste pumpen minst uträtta för att tömma cisternen? Ange svaret i kJ.<br>b) Hur stor andel av arbetet i a) går åt till att pumpa upp den övre halvan av vattnet? Ange svaret i procent.`,
+            answer: { value: 83, unit: 'kJ', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 83, unit: 'kJ', tol: 0.03 },
+                { del: 'b', value: 35, unit: '%', tol: 0.03 },
+            ],
+            solution: `**a)** Vattnet längst upp behöver bara lyftas 1,0 m, medan vattnet vid botten lyfts 4,0 m. Vi behöver därför inte räkna på varje vattenlager för sig: ökningen av lägesenergi blir densamma som om hela massan satt i vattnets **tyngdpunkt**.
+
+Massan:
+
+Cisternens volym är bottenytan $\\pi \\cdot r^2$ gånger djupet 3,0 m, där radien är $r = \\dfrac{1{,}2}{2} = 0{,}60\\ \\mathrm{m}$:
+
+$$
+V = \\pi \\cdot r^2 \\cdot 3{,}0 = \\pi \\cdot 0{,}60^2 \\cdot 3{,}0 = 3{,}3929\\ldots\\ \\mathrm{m^3}
+$$
+
+$$
+m = \\rho \\cdot V = 1\\,000 \\cdot 3{,}3929\\ldots = 3\\,392{,}9\\ldots\\ \\mathrm{kg}
+$$
+
+Vattnet är jämnt fördelat i cisternen, så tyngdpunkten ligger mitt i, $1{,}5\\ \\mathrm{m}$ under marken. Allt vatten lämnar cisternen genom utloppet, 1,0 m över marken. Tyngdpunkten flyttas alltså
+
+$$
+\\Delta h = 1{,}5 + 1{,}0 = 2{,}5\\ \\mathrm{m}
+$$
+
+Utan friktion och utan rörelseenergi i utloppet är arbetet lika med ökningen av lägesenergi:
+
+$$
+W = m \\cdot g \\cdot \\Delta h = 3\\,392{,}9\\ldots \\cdot 9{,}82 \\cdot 2{,}5 = 83\\,296\\ldots\\ \\mathrm{J} \\approx 83\\ \\mathrm{kJ}
+$$
+
+Det här är ett minsta värde. En verklig pump måste också övervinna friktionen i röret och ge vattnet fart ut genom utloppet.
+
+**Svar:** 83 kJ
+
+**b)** Den övre halvan har halva massan, $\\dfrac{m}{2}$, och dess tyngdpunkt ligger mitt i den övre halvan, $0{,}75\\ \\mathrm{m}$ under marken. Den lyfts alltså $0{,}75 + 1{,}0 = 1{,}75\\ \\mathrm{m}$.
+
+$$
+W_\\text{övre} = \\frac{m}{2} \\cdot g \\cdot 1{,}75
+$$
+
+Andelen av hela arbetet blir
+
+$$
+\\frac{W_\\text{övre}}{W} = \\frac{\\dfrac{m}{2} \\cdot g \\cdot 1{,}75}{m \\cdot g \\cdot 2{,}5} = \\frac{0{,}5 \\cdot 1{,}75}{2{,}5} = 0{,}35 = 35\\ \\%
+$$
+
+Massan och tyngdfaktorn tar ut varandra, så andelen beror bara på höjderna. Rimlighet: den övre halvan behöver lyftas kortare väg än den undre, så den bör kräva mindre än hälften av arbetet. Den undre halvan kräver resten, 65 %.
+
+**Svar:** 35 %`,
+        },
+        {
+            level: 3,
+            question: `En jämntjock planka med längden 4,0 m och massan 18 kg ligger på marken. Du lyfter den ena änden så att plankan vrids kring den andra änden, som ligger kvar mot marken, tills plankan står lodrätt, se figuren. Plankans tjocklek kan försummas. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -32 250 182" width="339" height="247" role="img" aria-label="En planka som vrids upp kring sin nedre ände. Plankan bildar vinkeln alfa med marken." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="10" y1="130" x2="250" y2="130" stroke="#0f1620" stroke-width="1.6"/><line x1="16" y1="130" x2="10" y2="138" stroke="#0f1620" stroke-width="1"/><line x1="26" y1="130" x2="20" y2="138" stroke="#0f1620" stroke-width="1"/><line x1="36" y1="130" x2="30" y2="138" stroke="#0f1620" stroke-width="1"/><line x1="46" y1="130" x2="40" y2="138" stroke="#0f1620" stroke-width="1"/><line x1="56" y1="130" x2="50" y2="138" stroke="#0f1620" stroke-width="1"/><line x1="66" y1="130" x2="60" y2="138" stroke="#0f1620" stroke-width="1"/><line x1="76" y1="130" x2="70" y2="138" stroke="#0f1620" stroke-width="1"/><line x1="86" y1="130" x2="80" y2="138" stroke="#0f1620" stroke-width="1"/><line x1="96" y1="130" x2="90" y2="138" stroke="#0f1620" stroke-width="1"/><line x1="106" y1="130" x2="100" y2="138" stroke="#0f1620" stroke-width="1"/><line x1="116" y1="130" x2="110" y2="138" stroke="#0f1620" stroke-width="1"/><line x1="126" y1="130" x2="120" y2="138" stroke="#0f1620" stroke-width="1"/><line x1="136" y1="130" x2="130" y2="138" stroke="#0f1620" stroke-width="1"/><line x1="146" y1="130" x2="140" y2="138" stroke="#0f1620" stroke-width="1"/><line x1="156" y1="130" x2="150" y2="138" stroke="#0f1620" stroke-width="1"/><line x1="166" y1="130" x2="160" y2="138" stroke="#0f1620" stroke-width="1"/><line x1="176" y1="130" x2="170" y2="138" stroke="#0f1620" stroke-width="1"/><line x1="186" y1="130" x2="180" y2="138" stroke="#0f1620" stroke-width="1"/><line x1="196" y1="130" x2="190" y2="138" stroke="#0f1620" stroke-width="1"/><line x1="206" y1="130" x2="200" y2="138" stroke="#0f1620" stroke-width="1"/><line x1="216" y1="130" x2="210" y2="138" stroke="#0f1620" stroke-width="1"/><line x1="226" y1="130" x2="220" y2="138" stroke="#0f1620" stroke-width="1"/><line x1="236" y1="130" x2="230" y2="138" stroke="#0f1620" stroke-width="1"/><line x1="246" y1="130" x2="240" y2="138" stroke="#0f1620" stroke-width="1"/><line x1="40" y1="125" x2="203.8" y2="10.3" stroke="#0f1620" stroke-width="11" stroke-linecap="butt"/><line x1="40" y1="125" x2="203.8" y2="10.3" stroke="#c99a62" stroke-width="8" stroke-linecap="butt"/><path d="M 80 130 A 40 40 0 0 0 72.8 107.1" fill="none" stroke="#8a8579" stroke-width="1.4"/><text x="97.2" y="117" font-size="14" fill="#0f1620" font-style="italic" text-anchor="middle">α</text><text x="114" y="56" font-size="13" fill="#0f1620" text-anchor="end">4,0 m</text><line x1="203.8" y1="1.3" x2="203.8" y2="-18.7" stroke="#2563c9" stroke-width="2.2" stroke-linecap="butt"/><polygon points="198.8,-16.7 203.8,-26.7 208.8,-16.7" fill="#2563c9"/><text x="213.8" y="-8.7" font-size="13" fill="#0f1620">lyft</text></svg>
+
+a) Vilket arbete uträttar du minst? Ange svaret i kJ.<br>b) Ställ upp ett uttryck för plankans lägesenergi $E_\\mathrm{p}$ som funktion av vinkeln $\\alpha$ mellan plankan och marken, uttryckt i plankans massa $m$, längd $L$ och tyngdfaktorn $g$. Låt marken vara nollnivå.<br>c) Vid vilken vinkel $\\alpha$ har du uträttat halva arbetet i a)?`,
+            answer: { value: 30, unit: '°', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 0.35, unit: 'kJ', tol: 0.03 },
+                { del: 'b' },
+                { del: 'c', value: 30, unit: '°', tol: 0.02 },
+            ],
+            solution: `**a)** Plankan är jämntjock, så dess tyngdpunkt ligger mitt på plankan, $\\dfrac{L}{2} = 2{,}0\\ \\mathrm{m}$ från ändarna. När plankan ligger på marken ligger tyngdpunkten på höjden 0, och när den står lodrätt ligger tyngdpunkten 2,0 m upp. Det minsta arbetet är ökningen av lägesenergi (om plankan lyfts långsamt och friktionen i den nedre änden försummas):
+
+$$
+W = \\Delta E_\\mathrm{p} = m \\cdot g \\cdot \\Delta h = 18 \\cdot 9{,}82 \\cdot 2{,}0 = 353{,}52\\ \\mathrm{J} \\approx 0{,}35\\ \\mathrm{kJ}
+$$
+
+**Svar:** 0,35 kJ
+
+**b)** Tyngdpunkten ligger på avståndet $\\dfrac{L}{2}$ från vridningspunkten, längs plankan. När plankan bildar vinkeln $\\alpha$ med marken är tyngdpunktens höjd motstående katet i en rätvinklig triangel med hypotenusan $\\dfrac{L}{2}$:
+
+$$
+h = \\frac{L}{2} \\cdot \\sin\\alpha
+$$
+
+$$
+E_\\mathrm{p} = m \\cdot g \\cdot h = m \\cdot g \\cdot \\frac{L}{2} \\cdot \\sin\\alpha
+$$
+
+**Svar:** $E_\\mathrm{p} = m \\cdot g \\cdot \\dfrac{L}{2} \\cdot \\sin\\alpha$
+
+**c)** Hela arbetet är lägesenergin vid $\\alpha = 90^\\circ$, där $\\sin 90^\\circ = 1$: $W = m \\cdot g \\cdot \\dfrac{L}{2}$. Halva arbetet är uträttat när lägesenergin är hälften så stor:
+
+$$
+m \\cdot g \\cdot \\frac{L}{2} \\cdot \\sin\\alpha = \\frac{1}{2} \\cdot m \\cdot g \\cdot \\frac{L}{2}
+$$
+
+Vi dividerar båda led med $m \\cdot g \\cdot \\dfrac{L}{2}$:
+
+$$
+\\sin\\alpha = \\frac{1}{2} \\quad\\Leftrightarrow\\quad \\alpha = 30^\\circ
+$$
+
+Svaret är alltså inte 45°, som man kanske gissar. I början, när plankan ligger nästan plant, stiger tyngdpunkten snabbt för varje grad plankan vrids. Nära lodrätt stiger den nästan inte alls. Därför är halva arbetet gjort redan vid 30°. Massan och längden tar ut varandra, så svaret gäller för alla jämntjocka plankor.
+
+**Svar:** 30°`,
+        },
+        {
+            level: 3,
+            question: `En massiv betongkub med sidan 0,30 m och massan 60 kg ska flyttas längs ett plant golv genom att tippas över en kant i taget, se figuren. Vid varje tippning vrids kuben kring sin nedre kant tills den faller ned på nästa sidoyta. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30 28 255 154" width="372" height="225" role="img" aria-label="En kub på golvet tippas över sin högra nedre kant. Streckat visas kuben när den balanserar på kanten." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="-20" y1="150" x2="225" y2="150" stroke="#0f1620" stroke-width="1.6"/><line x1="-14" y1="150" x2="-20" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="-4" y1="150" x2="-10" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="6" y1="150" x2="0" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="16" y1="150" x2="10" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="26" y1="150" x2="20" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="36" y1="150" x2="30" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="46" y1="150" x2="40" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="56" y1="150" x2="50" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="66" y1="150" x2="60" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="76" y1="150" x2="70" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="86" y1="150" x2="80" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="96" y1="150" x2="90" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="106" y1="150" x2="100" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="116" y1="150" x2="110" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="126" y1="150" x2="120" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="136" y1="150" x2="130" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="146" y1="150" x2="140" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="156" y1="150" x2="150" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="166" y1="150" x2="160" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="176" y1="150" x2="170" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="186" y1="150" x2="180" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="196" y1="150" x2="190" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="206" y1="150" x2="200" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="216" y1="150" x2="210" y2="158" stroke="#0f1620" stroke-width="1"/><rect x="40" y="70" width="80" height="80" fill="#c9c4b8" stroke="#0f1620" stroke-width="1.6"/><polygon points="120,150 63.4,93.4 120,36.9 176.6,93.4" fill="none" stroke="#8a8579" stroke-width="1.4" stroke-dasharray="5 4"/><path d="M 33.4 100 A 100 100 0 0 1 89.1 54.9" fill="none" stroke="#2563c9" stroke-width="1.8"/><polygon points="96.7,52.4 90.3,58.7 87.9,51.1" fill="#2563c9"/><circle cx="120" cy="150" r="2.6" fill="#0f1620"/><text x="124" y="176" font-size="13" fill="#0f1620" >vridningskant</text><line x1="16" y1="70" x2="38" y2="70" stroke="#0f1620" stroke-width="0.8" stroke-dasharray="3 2"/><line x1="22" y1="76" x2="22" y2="144" stroke="#0f1620" stroke-width="1.2"/><polygon points="18.5,76 22,70 25.5,76" fill="#0f1620"/><polygon points="18.5,144 22,150 25.5,144" fill="#0f1620"/><text x="16" y="114" font-size="13" fill="#0f1620" text-anchor="end">0,30 m</text></svg>
+
+a) Hur mycket arbete måste du minst uträtta för att tippa kuben en gång? Ange svaret i J.<br>b) Hur mycket arbete måste du minst uträtta för att flytta kuben 9,0 m på det här sättet? Ange svaret i kJ.<br>c) När kuben faller ned på nästa sidoyta minskar lägesenergin igen. Förklara varför den energin inte kan användas till nästa tippning.`,
+            answer: { value: 1.1, unit: 'kJ', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 37, unit: 'J', tol: 0.03 },
+                { del: 'b', value: 1.1, unit: 'kJ', tol: 0.03 },
+                { del: 'c' },
+            ],
+            solution: `**a)** Kubens tyngdpunkt ligger i dess mitt. Du behöver bara lyfta tyngdpunkten till dess högsta läge, när kuben balanserar på kanten. Efter det faller kuben över av sig själv.
+
+Vi kallar kubens sida $a = 0{,}30\\ \\mathrm{m}$. När kuben vilar på golvet ligger tyngdpunkten på halva sidan,
+
+$$
+h_1 = \\frac{a}{2} = \\frac{0{,}30}{2} = 0{,}15\\ \\mathrm{m}
+$$
+
+När kuben balanserar på kanten ligger tyngdpunkten rakt ovanför kanten. Avståndet från kanten till kubens mitt är halva diagonalen i en sidoyta. Diagonalen är enligt Pythagoras sats $\\sqrt{a^2 + a^2} = a\\sqrt{2}$, så
+
+$$
+h_2 = \\frac{a\\sqrt{2}}{2} = \\frac{0{,}30 \\cdot \\sqrt{2}}{2} = 0{,}21213\\ldots\\ \\mathrm{m}
+$$
+
+Tyngdpunkten lyfts
+
+$$
+\\Delta h = h_2 - h_1 = 0{,}21213\\ldots - 0{,}15 = 0{,}06213\\ldots\\ \\mathrm{m}
+$$
+
+$$
+W_1 = m \\cdot g \\cdot \\Delta h = 60 \\cdot 9{,}82 \\cdot 0{,}06213\\ldots = 36{,}60\\ldots\\ \\mathrm{J} \\approx 37\\ \\mathrm{J}
+$$
+
+**Svar:** 37 J
+
+**b)** Vid varje tippning flyttas kuben en sidlängd, 0,30 m. För att flytta den 9,0 m krävs
+
+$$
+n = \\frac{9{,}0}{0{,}30} = 30\\ \\text{tippningar}
+$$
+
+Varje tippning kräver samma arbete, eftersom kuben börjar och slutar i samma läge varje gång:
+
+$$
+W = 30 \\cdot 36{,}60\\ldots = 1\\,098{,}2\\ldots\\ \\mathrm{J} \\approx 1{,}1\\ \\mathrm{kJ}
+$$
+
+**Svar:** 1,1 kJ
+
+**c)** När kuben faller från balansläget ned på nästa sidoyta minskar lägesenergin med lika mycket som du tillförde, 37 J. Den energin blir först rörelseenergi, men när kuben slår i golvet stannar den tvärt, och energin omvandlas till värme, ljud och vibrationer i golvet. Kuben ligger sedan stilla i samma läge som från början, så ingen energi finns kvar som kan hjälpa till vid nästa tippning. Därför måste du tillföra 37 J på nytt varje gång.
+
+**Svar:** Energin som frigörs när kuben faller omvandlas till värme och ljud när kuben slår i golvet, och kuben hamnar i vila i samma läge som innan. Ingen lagrad energi finns kvar till nästa tippning.`,
+        },
+        {
+            level: 3,
+            question: `Samma instrumentlåda lyfts rakt uppåt i ett försök på jorden och i ett försök på månen. På jorden står lådan från början på golvet. På månen står den från början på en hylla. I båda försöken ligger nollnivån för lägesenergin vid golvet, och $h$ är hur högt lådan har lyfts från sitt startläge. Grafen visar lådans lägesenergi $E_\\mathrm{p}$ som funktion av $h$ i de två försöken. Lådans massa och hyllans höjd är inte kända.
+
+${makeDiagram({
+    xMin: 0, xMax: 2.5, yMin: 0, yMax: 80,
+    xTicks: [0, 0.5, 1, 1.5, 2, 2.5],
+    yTicks: [0, 10, 20, 30, 40, 50, 60, 70, 80],
+    xLabel: '<tspan font-style="italic">h</tspan> (m)',
+    yLabel: '<tspan font-style="italic">E</tspan><tspan baseline-shift="sub" font-size="0.72em">p</tspan> (J)',
+    paths: [{ points: [[0, 0], [2.5, 75]], color: '#c8324a' }, { points: [[0, 2.5], [2.5, 15]], color: '#2563c9' }],
+}).replace('</svg>', '<text x="452" y="36" font-size="14" fill="#c8324a" text-anchor="end">jorden</text><text x="452" y="226" font-size="14" fill="#2563c9" text-anchor="end">månen</text></svg>')}
+
+a) Bestäm tyngdfaktorn på månen. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ på jorden.<br>b) Bestäm lådans massa.<br>c) Hur högt över golvet ligger hyllan?`,
+            answer: { value: 1.6, unit: 'N/kg', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 1.6, unit: 'N/kg', tol: 0.03 },
+                { del: 'b', value: 3.1, unit: 'kg', tol: 0.03 },
+                { del: 'c', value: 0.5, unit: 'm', tol: 0.03 },
+            ],
+            solution: `**a)** Månens linje börjar inte i origo, eftersom lådan redan har lägesenergi när den står på hyllan. En enda avläsning på månlinjen ger därför inte $m \\cdot g \\cdot h$. Det som bara beror på lyfthöjden är **ändringen** av lägesenergi, alltså linjens lutning:
+
+$$
+\\Delta E_\\mathrm{p} = m \\cdot g \\cdot \\Delta h \\quad\\Leftrightarrow\\quad \\frac{\\Delta E_\\mathrm{p}}{\\Delta h} = m \\cdot g
+$$
+
+Vi läser av lutningen för båda linjerna mellan $h = 0$ och $h = 2{,}0\\ \\mathrm{m}$.
+
+Jorden: $E_\\mathrm{p}$ går från 0 till 60 J.
+
+$$
+m \\cdot g_\\text{jorden} = \\frac{60 - 0}{2{,}0} = 30\\ \\mathrm{J/m}
+$$
+
+Månen: $E_\\mathrm{p}$ går från 2,5 J till 12,5 J.
+
+$$
+m \\cdot g_\\text{månen} = \\frac{12{,}5 - 2{,}5}{2{,}0} = 5{,}0\\ \\mathrm{J/m}
+$$
+
+Massan är densamma i båda försöken. Vi dividerar det andra sambandet med det första, så att massan tar ut sig själv:
+
+$$
+\\frac{m \\cdot g_\\text{månen}}{m \\cdot g_\\text{jorden}} = \\frac{5{,}0}{30} \\quad\\Leftrightarrow\\quad \\frac{g_\\text{månen}}{g_\\text{jorden}} = \\frac{5{,}0}{30}
+$$
+
+Vi multiplicerar båda led med $g_\\text{jorden}$:
+
+$$
+g_\\text{månen} = g_\\text{jorden} \\cdot \\frac{5{,}0}{30} = 9{,}82 \\cdot \\frac{5{,}0}{30} = 1{,}6366\\ldots\\ \\mathrm{N/kg} \\approx 1{,}6\\ \\mathrm{N/kg}
+$$
+
+Rimlighet: tyngdfaktorn på månen är ungefär en sjättedel av jordens, och månens linje är just sex gånger flackare än jordens. Den som i stället läser av en enda punkt på månlinjen, till exempel 12,5 J vid 2,0 m, får ett för stort värde, eftersom hyllans höjd då räknas med.
+
+**Svar:** 1,6 N/kg
+
+**b)** Ur jordförsöket, där tyngdfaktorn är känd:
+
+$$
+m \\cdot g_\\text{jorden} = 30\\ \\mathrm{J/m} \\quad\\Leftrightarrow\\quad m = \\frac{30}{9{,}82} = 3{,}0549\\ldots\\ \\mathrm{kg} \\approx 3{,}1\\ \\mathrm{kg}
+$$
+
+**Svar:** 3,1 kg
+
+**c)** Vid $h = 0$ står lådan på hyllan, och grafen ger då $E_\\mathrm{p} = 2{,}5\\ \\mathrm{J}$. Det är lådans lägesenergi på hyllans höjd $h_\\text{hylla}$ över golvet, på månen:
+
+$$
+E_\\mathrm{p} = m \\cdot g_\\text{månen} \\cdot h_\\text{hylla} \\quad\\Leftrightarrow\\quad h_\\text{hylla} = \\frac{E_\\mathrm{p}}{m \\cdot g_\\text{månen}}
+$$
+
+Produkten $m \\cdot g_\\text{månen}$ är månlinjens lutning, 5,0 J/m, från a):
+
+$$
+h_\\text{hylla} = \\frac{2{,}5}{5{,}0} = 0{,}50\\ \\mathrm{m}
+$$
+
+**Svar:** 0,50 m`,
+        },
+        {
+            level: 3,
+            question: `Två lodräta, cylinderformade kärl står bredvid varandra på ett bord. Det högra kärlet har dubbelt så stor bottenarea som det vänstra. Kärlen är förbundna med ett tunt rör vid botten, och kranen i röret är stängd. Det vänstra kärlet är fyllt med vatten till höjden $H$, och det högra är tomt, se figuren.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 25 300 150" width="407" height="204" role="img" aria-label="Två cylinderformade kärl förbundna med ett rör med kran vid botten. Det högra kärlet är dubbelt så brett. Det vänstra är fyllt med vatten till höjden H, det högra är tomt." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="14" y1="160" x2="286" y2="160" stroke="#0f1620" stroke-width="1.6"/><line x1="20" y1="160" x2="14" y2="168" stroke="#0f1620" stroke-width="1"/><line x1="30" y1="160" x2="24" y2="168" stroke="#0f1620" stroke-width="1"/><line x1="40" y1="160" x2="34" y2="168" stroke="#0f1620" stroke-width="1"/><line x1="50" y1="160" x2="44" y2="168" stroke="#0f1620" stroke-width="1"/><line x1="60" y1="160" x2="54" y2="168" stroke="#0f1620" stroke-width="1"/><line x1="70" y1="160" x2="64" y2="168" stroke="#0f1620" stroke-width="1"/><line x1="80" y1="160" x2="74" y2="168" stroke="#0f1620" stroke-width="1"/><line x1="90" y1="160" x2="84" y2="168" stroke="#0f1620" stroke-width="1"/><line x1="100" y1="160" x2="94" y2="168" stroke="#0f1620" stroke-width="1"/><line x1="110" y1="160" x2="104" y2="168" stroke="#0f1620" stroke-width="1"/><line x1="120" y1="160" x2="114" y2="168" stroke="#0f1620" stroke-width="1"/><line x1="130" y1="160" x2="124" y2="168" stroke="#0f1620" stroke-width="1"/><line x1="140" y1="160" x2="134" y2="168" stroke="#0f1620" stroke-width="1"/><line x1="150" y1="160" x2="144" y2="168" stroke="#0f1620" stroke-width="1"/><line x1="160" y1="160" x2="154" y2="168" stroke="#0f1620" stroke-width="1"/><line x1="170" y1="160" x2="164" y2="168" stroke="#0f1620" stroke-width="1"/><line x1="180" y1="160" x2="174" y2="168" stroke="#0f1620" stroke-width="1"/><line x1="190" y1="160" x2="184" y2="168" stroke="#0f1620" stroke-width="1"/><line x1="200" y1="160" x2="194" y2="168" stroke="#0f1620" stroke-width="1"/><line x1="210" y1="160" x2="204" y2="168" stroke="#0f1620" stroke-width="1"/><line x1="220" y1="160" x2="214" y2="168" stroke="#0f1620" stroke-width="1"/><line x1="230" y1="160" x2="224" y2="168" stroke="#0f1620" stroke-width="1"/><line x1="240" y1="160" x2="234" y2="168" stroke="#0f1620" stroke-width="1"/><line x1="250" y1="160" x2="244" y2="168" stroke="#0f1620" stroke-width="1"/><line x1="260" y1="160" x2="254" y2="168" stroke="#0f1620" stroke-width="1"/><line x1="270" y1="160" x2="264" y2="168" stroke="#0f1620" stroke-width="1"/><line x1="280" y1="160" x2="274" y2="168" stroke="#0f1620" stroke-width="1"/><rect x="42" y="64" width="56" height="96" fill="#cfe3f3"/><path d="M 40 38 L 40 160 L 100 160 L 100 38" fill="none" stroke="#0f1620" stroke-width="2"/><path d="M 150 38 L 150 160 L 270 160 L 270 38" fill="none" stroke="#0f1620" stroke-width="2"/><rect x="100" y="148" width="50" height="7" fill="#cfe3f3" stroke="#0f1620" stroke-width="1.2"/><polygon points="117,143 117,160 125,151.5" fill="#8a8579" stroke="#0f1620" stroke-width="1"/><polygon points="133,143 133,160 125,151.5" fill="#8a8579" stroke="#0f1620" stroke-width="1"/><text x="125" y="134" font-size="13" fill="#0f1620" text-anchor="middle">kran</text><line x1="22" y1="64" x2="40" y2="64" stroke="#0f1620" stroke-width="0.8" stroke-dasharray="3 2"/><line x1="28" y1="70" x2="28" y2="154" stroke="#0f1620" stroke-width="1.2"/><polygon points="24.5,70 28,64 31.5,70" fill="#0f1620"/><polygon points="24.5,154 28,160 31.5,154" fill="#0f1620"/><text x="20" y="117" font-size="14" fill="#0f1620" font-style="italic" text-anchor="end">H</text></svg>
+
+Kranen öppnas, och vatten strömmar över tills ytorna står lika högt och vattnet har slutat röra sig. Hur stor andel av vattnets lägesenergi, räknad med nollnivån vid kärlens botten, har då omvandlats till andra energiformer? Vattnet i röret kan försummas. Ange svaret i procent och motivera.`,
+            answer: { value: 67, unit: '%', tol: 0.02 },
+            solution: `Vi kallar vattnets massa $M$ och det vänstra kärlets bottenarea $A$. Lägesenergin bestäms av tyngdpunktens höjd över nollnivån (kärlens botten).
+
+Före: allt vatten står i det vänstra kärlet till höjden $H$. Vattnet är jämnt fördelat, så tyngdpunkten ligger på halva höjden:
+
+$$
+E_1 = M \\cdot g \\cdot \\frac{H}{2}
+$$
+
+Efter: ytorna står lika högt, på en höjd som vi kallar $x$. Vattnets volym är densamma före och efter. Före är volymen $A \\cdot H$, och efter fyller vattnet båda kärlen, med den sammanlagda bottenarean $A + 2A = 3A$:
+
+$$
+3A \\cdot x = A \\cdot H
+$$
+
+Vi dividerar båda led med $3A$:
+
+$$
+x = \\frac{H}{3}
+$$
+
+Vattnet står nu lika högt i båda kärlen, så tyngdpunkten i varje kärl ligger på halva vattenhöjden, $\\dfrac{x}{2} = \\dfrac{H}{6}$. Hela vattnets tyngdpunkt ligger alltså också där:
+
+$$
+E_2 = M \\cdot g \\cdot \\frac{H}{6}
+$$
+
+Lägesenergin har minskat med
+
+$$
+E_1 - E_2 = M \\cdot g \\cdot \\frac{H}{2} - M \\cdot g \\cdot \\frac{H}{6} = M \\cdot g \\cdot \\frac{H}{3}
+$$
+
+Andelen av den ursprungliga lägesenergin:
+
+$$
+\\frac{E_1 - E_2}{E_1} = \\frac{M \\cdot g \\cdot \\dfrac{H}{3}}{M \\cdot g \\cdot \\dfrac{H}{2}} = \\frac{2}{3} = 0{,}666\\ldots \\approx 67\\ \\%
+$$
+
+Massan, tyngdfaktorn och höjden tar ut varandra, så resultatet gäller oavsett hur mycket vatten det är. Vattnet har slutat röra sig, så energin finns inte kvar som rörelseenergi. Den har omvandlats till värme genom friktion och virvlar i vattnet medan det strömmade och skvalpade fram och tillbaka.
+
+Rimlighet: med två lika stora kärl hade ytan stannat på $\\dfrac{H}{2}$, tyngdpunkten på $\\dfrac{H}{4}$, och hälften av lägesenergin hade omvandlats. Med ett bredare högerkärl sjunker vattnet längre, så en större andel, $\\dfrac{2}{3}$, är rimlig.
+
+Lägg märke till att procentandelen beror på att nollnivån ligger vid botten. Själva energimängden som omvandlats, $M \\cdot g \\cdot \\dfrac{H}{3}$, är däremot densamma vilken nollnivå man än väljer.
+
+**Svar:** 67 %`,
         },
     ],
 
@@ -13553,7 +23095,7 @@ $$
 W = F_s \\cdot s = \\Delta E_k = \\frac{m v_0^{2}}{2}
 $$
 
-(Hela rörelseenergin försvinner — slutfarten är 0.)
+(Hela rörelseenergin försvinner, eftersom slutfarten är 0.)
 
 Lös ut $F_s$:
 
@@ -13599,9 +23141,743 @@ $$
 s_2 = 4 \\cdot s_1 = 4 \\cdot 18 = 72\\ \\mathrm{m}
 $$
 
-**Svar:** Bromssträckan blir 72 m — fyra gånger så lång.
+**Svar:** Bromssträckan blir 72 m, alltså fyra gånger så lång.
 
-**Generell slutsats:** Detta är en av de viktigaste praktiska konsekvenserna av rörelseenergiformeln $E_k \\propto v^{2}$. Att fördubbla hastigheten ger inte dubbel utan **fyrdubbel** bromssträcka — det är därför hastighetsbegränsningar på vägar är så viktiga. Det är också därför kollisioner i hög hastighet är så förödande: krocksäkerheten ska absorbera fyra gånger så mycket energi vid 100 km/h som vid 50 km/h.`,
+**Generell slutsats:** Detta är en av de viktigaste praktiska konsekvenserna av rörelseenergiformeln $E_k \\propto v^{2}$. Att fördubbla hastigheten ger inte dubbel utan **fyrdubbel** bromssträcka. Det är därför hastighetsbegränsningar på vägar är så viktiga. Det är också därför kollisioner i hög hastighet är så förödande: krocksäkerheten ska absorbera fyra gånger så mycket energi vid 100 km/h som vid 50 km/h.`,
+        },
+        {
+            level: 1,
+            question: `Två lika tunga bilar kör på samma väg. Bil B kör tre gånger så fort som bil A. Hur många gånger större rörelseenergi har bil B än bil A?`,
+            choices: ['3 gånger', '6 gånger', '9 gånger', '27 gånger'],
+            correct: 2,
+            solution: `Rörelseenergin är
+
+$$
+E_k = \\frac{m \\cdot v^{2}}{2}
+$$
+
+Massan är densamma för båda bilarna, så bara hastigheten skiljer. Hastigheten står i kvadrat: tre gånger så hög hastighet ger $3^{2} = 9$ gånger så stor rörelseenergi.
+
+$$
+\\frac{E_{kB}}{E_{kA}} = \\frac{m \\cdot (3v)^{2} / 2}{m \\cdot v^{2} / 2} = 3^{2} = 9
+$$
+
+**Svar:** 9 gånger`,
+        },
+        {
+            level: 1,
+            question: `En löpare med massan 62 kg springer med farten 18 km/h. Hur stor är löparens rörelseenergi? Ange svaret i J.`,
+            answer: { value: 780, unit: 'J', tol: 0.02 },
+            solution: `$$
+E_k = \\frac{m \\cdot v^{2}}{2}
+$$
+
+Farten räknas först om till m/s:
+
+$$
+\\left[ \\begin{array}{l}
+m = 62\\ \\mathrm{kg} \\\\
+v = 18\\ \\mathrm{km/h} = \\dfrac{18}{3{,}6}\\ \\mathrm{m/s} = 5{,}0\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$
+E_k = \\frac{62 \\cdot 5{,}0^{2}}{2} = \\frac{62 \\cdot 25}{2} = 775\\ \\mathrm{J} \\approx 780\\ \\mathrm{J}
+$$
+
+Givna värden har två värdesiffror, så svaret avrundas till två värdesiffror.
+
+**Svar:** Cirka 780 J`,
+        },
+        {
+            level: 1,
+            question: `Tabellen visar massa och fart för fyra föremål i rörelse.
+
+| Föremål | Massa | Fart |
+|---|---|---|
+| Tennisboll | 58 g | 50 m/s |
+| Fotboll | 0,43 kg | 20 m/s |
+| Bowlingklot | 7,0 kg | 5,0 m/s |
+| Ishockeypuck | 0,17 kg | 40 m/s |
+
+Vilket av föremålen har störst rörelseenergi?`,
+            choices: ['Tennisbollen', 'Fotbollen', 'Bowlingklotet', 'Ishockeypucken'],
+            correct: 3,
+            solution: `Beräkna rörelseenergin $E_k = \\dfrac{m \\cdot v^{2}}{2}$ för vart och ett av föremålen. Tennisbollens massa räknas först om: $58\\ \\mathrm{g} = 0{,}058\\ \\mathrm{kg}$.
+
+$$
+E_{k,\\text{tennis}} = \\frac{0{,}058 \\cdot 50^{2}}{2} = 72{,}5\\ \\mathrm{J}
+$$
+
+$$
+E_{k,\\text{fotboll}} = \\frac{0{,}43 \\cdot 20^{2}}{2} = 86\\ \\mathrm{J}
+$$
+
+$$
+E_{k,\\text{bowling}} = \\frac{7{,}0 \\cdot 5{,}0^{2}}{2} = 87{,}5\\ \\mathrm{J}
+$$
+
+$$
+E_{k,\\text{puck}} = \\frac{0{,}17 \\cdot 40^{2}}{2} = 136\\ \\mathrm{J}
+$$
+
+Pucken är lättast av de tre sista men har högst fart, och farten står i kvadrat.
+
+**Svar:** Ishockeypucken`,
+        },
+        {
+            level: 1,
+            question: `En vagn står still på ett vågrätt och friktionsfritt underlag. En konstant kraft på 40 N skjuter vagnen framåt längs sträckan 3,0 m, i kraftens riktning. Hur stor rörelseenergi har vagnen efter de 3,0 metrarna? Ange svaret i J.`,
+            answer: { value: 120, unit: 'J', tol: 0.02 },
+            solution: `Vagnen startar från vila, och underlaget är friktionsfritt. Hela arbetet som kraften uträttar blir då rörelseenergi:
+
+$$
+E_k = W = F \\cdot s
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F = 40\\ \\mathrm{N} \\\\
+s = 3{,}0\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+E_k = 40 \\cdot 3{,}0 = 120\\ \\mathrm{J}
+$$
+
+**Svar:** 120 J`,
+        },
+        {
+            level: 2,
+            question: `En elsparkcykel med förare har den sammanlagda massan 95 kg. Från stillastående accelererar den till farten 20 km/h på en sträcka av 12 m på plan mark.<br>a) Hur stor rörelseenergi har den när den når 20 km/h?<br>b) Hur stor är den genomsnittliga resulterande kraften framåt under accelerationen?
+
+*Ange kraften i b) som ditt numeriska svar i N.*`,
+            answer: { value: 120, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 1500, unit: 'J', tol: 0.03, etikett: '$E_k =$' },
+                { del: 'b', value: 120, unit: 'N', tol: 0.03, etikett: '$F =$' },
+            ],
+            solution: `**a)**
+
+$$
+E_k = \\frac{m \\cdot v^{2}}{2}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m = 95\\ \\mathrm{kg} \\\\
+v = 20\\ \\mathrm{km/h} = \\dfrac{20}{3{,}6}\\ \\mathrm{m/s} = 5{,}556\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$
+E_k = \\frac{95 \\cdot 5{,}556^{2}}{2} = 1\\,466\\ \\mathrm{J} \\approx 1{,}5\\ \\mathrm{kJ}
+$$
+
+**Svar:** Cirka 1,5 kJ
+
+**b)** Elsparkcykeln startar från vila. Arbetet som den resulterande kraften uträttar är lika med ökningen av rörelseenergin:
+
+$$
+F \\cdot s = E_k \\quad\\Leftrightarrow\\quad F = \\frac{E_k}{s}
+$$
+
+Det oavrundade värdet från a) används:
+
+$$
+F = \\frac{1\\,466}{12} = 122{,}2\\ \\mathrm{N} \\approx 120\\ \\mathrm{N}
+$$
+
+Rimlighet: 120 N motsvarar ungefär tyngden av 12 kg, en kraft som en elmotor i den storleken klarar.
+
+**Svar:** Cirka 120 N`,
+        },
+        {
+            level: 2,
+            question: `En bil med massan 1 350 kg accelererar först från stillastående till 50 km/h och sedan från 50 km/h till 90 km/h.<br>a) Hur mycket ökar bilens rörelseenergi i det första steget?<br>b) Hur mycket ökar den i det andra steget?<br>c) Fartökningen är 50 km/h i det första steget och bara 40 km/h i det andra. Förklara varför det ändå krävs mer energi i det andra steget.
+
+*Ange ökningen i b) som ditt numeriska svar i kJ.*`,
+            answer: { value: 290, unit: 'kJ', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 130, unit: 'kJ', tol: 0.03, etikett: '$\\Delta E_k =$' },
+                { del: 'b', value: 290, unit: 'kJ', tol: 0.03, etikett: '$\\Delta E_k =$' },
+                { del: 'c' },
+            ],
+            solution: `$$
+E_k = \\frac{m \\cdot v^{2}}{2}
+$$
+
+Farterna räknas om till m/s:
+
+$$
+\\left[ \\begin{array}{l}
+m = 1\\,350\\ \\mathrm{kg} \\\\
+v_1 = 50\\ \\mathrm{km/h} = \\dfrac{50}{3{,}6}\\ \\mathrm{m/s} = 13{,}89\\ \\mathrm{m/s} \\\\
+v_2 = 90\\ \\mathrm{km/h} = \\dfrac{90}{3{,}6}\\ \\mathrm{m/s} = 25\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+**a)** Från vila är rörelseenergin noll, så ökningen är hela rörelseenergin vid 50 km/h:
+
+$$
+\\Delta E_{k1} = \\frac{1\\,350 \\cdot 13{,}89^{2}}{2} = 130\\,208\\ \\mathrm{J} \\approx 130\\ \\mathrm{kJ}
+$$
+
+**Svar:** Cirka 130 kJ
+
+**b)** Rörelseenergin vid 90 km/h:
+
+$$
+E_{k2} = \\frac{1\\,350 \\cdot 25^{2}}{2} = 421\\,875\\ \\mathrm{J}
+$$
+
+Ökningen är skillnaden:
+
+$$
+\\Delta E_{k2} = 421\\,875 - 130\\,208 = 291\\,667\\ \\mathrm{J} \\approx 290\\ \\mathrm{kJ}
+$$
+
+**Svar:** Cirka 290 kJ
+
+**c)** Rörelseenergin är proportionell mot hastighetens **kvadrat**, inte mot hastigheten. Kurvan $E_k(v)$ blir därför brantare ju högre farten är: varje km/h kostar mer energi vid hög fart än vid låg. Vid 90 km/h är $v^{2}$ drygt tre gånger så stort som vid 50 km/h, fast farten inte ens är dubbelt så hög.
+
+**Svar:** Rörelseenergin växer med hastighetens kvadrat, så samma fartökning kräver mer energi ju högre farten redan är.`,
+        },
+        {
+            level: 2,
+            question: `En vagn på en luftkuddebana knuffas i gång med olika farter. För varje fart beräknas vagnens rörelseenergi, och resultatet visas i diagrammet.
+
+${makeDiagram({
+    xMax: 7, xTicks: [0, 1, 2, 3, 4, 5, 6, 7],
+    yMax: 40, yTicks: [0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40],
+    xLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    yLabel: '<tspan font-style="italic">E</tspan><tspan baseline-shift="sub" font-size="0.72em">k</tspan> (J)',
+    paths: [{ points: Array.from({ length: 63 }, (_, i) => { const v = i / 10; return [v, v * v]; }) }],
+})}
+
+a) Bestäm vagnens massa.<br>b) Hur stor rörelseenergi har vagnen om farten är 9,0 m/s?
+
+*Ange massan i a) som ditt numeriska svar i kg.*`,
+            answer: { value: 2.0, unit: 'kg', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 2.0, unit: 'kg', tol: 0.03, etikett: '$m =$' },
+                { del: 'b', value: 81, unit: 'J', tol: 0.03, etikett: '$E_k =$' },
+            ],
+            solution: `**a)** Läs av en punkt på kurvan där det är lätt att avgöra båda värdena, till exempel $v = 4{,}0\\ \\mathrm{m/s}$, där $E_k = 16\\ \\mathrm{J}$. Lös ut massan ur
+
+$$
+E_k = \\frac{m \\cdot v^{2}}{2} \\quad\\Leftrightarrow\\quad m = \\frac{2 E_k}{v^{2}}
+$$
+
+$$
+m = \\frac{2 \\cdot 16}{4{,}0^{2}} = \\frac{32}{16} = 2{,}0\\ \\mathrm{kg}
+$$
+
+Kontroll med en annan punkt: vid $v = 6{,}0\\ \\mathrm{m/s}$ är $E_k = 36\\ \\mathrm{J}$, och $\\dfrac{2 \\cdot 36}{6{,}0^{2}} = 2{,}0$ ger samma massa.
+
+**Svar:** 2,0 kg
+
+**b)** Farten 9,0 m/s ligger utanför diagrammet, så vi räknar med massan från a):
+
+$$
+E_k = \\frac{2{,}0 \\cdot 9{,}0^{2}}{2} = 81\\ \\mathrm{J}
+$$
+
+**Svar:** 81 J`,
+        },
+        {
+            level: 2,
+            question: `En curlingsten med massan 19 kg glider över isen och stannar efter 28 m. Friktionskraften från isen på stenen är 2,3 N under hela glidningen. Vilken fart hade stenen när den började glida sträckan? Ange svaret i m/s.`,
+            answer: { value: 2.6, unit: 'm/s', tol: 0.03 },
+            solution: `Friktionskraften bromsar stenen tills den stannar. Friktionens arbete är lika stort som stenens rörelseenergi från början:
+
+$$
+F_f \\cdot s = \\frac{m \\cdot v^{2}}{2}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m = 19\\ \\mathrm{kg} \\\\
+F_f = 2{,}3\\ \\mathrm{N} \\\\
+s = 28\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+Friktionens arbete:
+
+$$
+F_f \\cdot s = 2{,}3 \\cdot 28 = 64{,}4\\ \\mathrm{J}
+$$
+
+Lös ut farten:
+
+$$
+v = \\sqrt{\\frac{2 \\cdot F_f \\cdot s}{m}} = \\sqrt{\\frac{2 \\cdot 64{,}4}{19}} = 2{,}604\\ \\mathrm{m/s} \\approx 2{,}6\\ \\mathrm{m/s}
+$$
+
+Rimlighet: en curlingsten släpps med några meter per sekund, så värdet är rimligt.
+
+**Svar:** Cirka 2,6 m/s`,
+        },
+        {
+            level: 2,
+            question: `Vagn A har massan $m$ och farten $2v$. Vagn B har massan $4m$ och farten $v$. Vilket påstående om vagnarnas rörelseenergi stämmer?`,
+            choices: ['A har dubbelt så stor rörelseenergi som B', 'De har lika stor rörelseenergi', 'B har dubbelt så stor rörelseenergi som A', 'B har fyra gånger så stor rörelseenergi som A'],
+            correct: 1,
+            solution: `Ställ upp rörelseenergin för vardera vagnen med $E_k = \\dfrac{m \\cdot v^{2}}{2}$.
+
+Vagn A:
+
+$$
+E_{kA} = \\frac{m \\cdot (2v)^{2}}{2} = \\frac{4 m v^{2}}{2} = 2 m v^{2}
+$$
+
+Vagn B:
+
+$$
+E_{kB} = \\frac{4m \\cdot v^{2}}{2} = 2 m v^{2}
+$$
+
+Dubbla farten ger fyra gånger så stor rörelseenergi, och det väger exakt upp att A bara har en fjärdedel av B:s massa.
+
+**Svar:** De har lika stor rörelseenergi`,
+        },
+        {
+            level: 3,
+            question: `a) Med hur många procent måste ett föremåls fart öka för att rörelseenergin ska öka med 50 %?<br>b) En cyklist byter till en cykel som gör att den totala massan minskar med 20 %, och hon kör samtidigt 20 % fortare än förut. Med hur många procent ändras hennes rörelseenergi?
+
+Lös uppgifterna generellt, utan att anta någon massa eller fart.
+
+*Ange procentökningen i a) som ditt numeriska svar.*`,
+            answer: { value: 22, unit: '%', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 22, unit: '%', tol: 0.03, etikett: 'Farten ökar med' },
+                { del: 'b', value: 15, unit: '%', tol: 0.04, etikett: 'Rörelseenergin ökar med' },
+            ],
+            solution: `**a)** Kalla farten före $v_1$ och efter $v_2$. Massan är densamma. Kvoten mellan rörelseenergierna ska vara 1,5:
+
+$$
+\\frac{E_{k2}}{E_{k1}} = \\frac{m \\cdot v_2^{2} / 2}{m \\cdot v_1^{2} / 2} = \\left(\\frac{v_2}{v_1}\\right)^{2} = 1{,}5
+$$
+
+Massan och tvåan tar ut varandra, så svaret gäller alla föremål. Dra roten ur båda led:
+
+$$
+\\frac{v_2}{v_1} = \\sqrt{1{,}5} = 1{,}2247
+$$
+
+Farten ska alltså bli 1,2247 gånger så stor, en ökning med 22,47 %.
+
+Rimlighet: ökningen ska vara mindre än 50 %, eftersom farten står i kvadrat och en liten fartökning därför ger en större energiökning.
+
+**Svar:** Cirka 22 %
+
+**b)** Den nya massan är $0{,}80\\,m$ och den nya farten $1{,}20\\,v$:
+
+$$
+\\frac{E_{k2}}{E_{k1}} = \\frac{0{,}80\\,m \\cdot (1{,}20\\,v)^{2} / 2}{m \\cdot v^{2} / 2} = 0{,}80 \\cdot 1{,}20^{2}
+$$
+
+$$
+0{,}80 \\cdot 1{,}20^{2} = 0{,}80 \\cdot 1{,}44 = 1{,}152
+$$
+
+Rörelseenergin blir 1,152 gånger så stor. Att massan och farten ändras med lika många procent i var sin riktning tar alltså inte ut varandra: farten väger tyngre eftersom den står i kvadrat.
+
+**Svar:** Rörelseenergin ökar med cirka 15 %`,
+        },
+        {
+            level: 3,
+            question: `En bil bromsar på vågrät väg tills den stannar. Bromskraften är konstant och lika med en viss andel $k$ av bilens tyngd, alltså $F = k \\cdot m \\cdot g$.<br>a) Visa att bromssträckan $s$ inte beror på bilens massa, och ställ upp ett uttryck för $s$ med farten $v$ före inbromsningen, andelen $k$ och tyngdfaktorn $g$.<br>b) En bilist kör i 90 km/h och upptäcker ett hinder på vägen. Reaktionstiden är 1,0 s, och under den tiden kör bilen vidare med oförändrad fart. Sedan bromsar bilen med $k = 0{,}70$. Hur lång är den totala stoppsträckan?<br>c) Hindret ligger 60 m framför bilen när bilisten upptäcker det. Vilken är den högsta fart bilen kan ha för att hinna stanna före hindret, med samma reaktionstid och samma $k$?
+
+Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+
+*Ange farten i c) som ditt numeriska svar i km/h.*`,
+            answer: { value: 82, unit: 'km/h', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 70, unit: 'm', tol: 0.03, etikett: '$s_\\text{stopp} =$' },
+                { del: 'c', value: 82, unit: 'km/h', tol: 0.03, etikett: '$v =$' },
+            ],
+            solution: `**a)** Bromskraftens arbete tar bort hela bilens rörelseenergi, eftersom bilen stannar:
+
+$$
+F \\cdot s = \\frac{m \\cdot v^{2}}{2}
+$$
+
+Sätt in $F = k \\cdot m \\cdot g$:
+
+$$
+k \\cdot m \\cdot g \\cdot s = \\frac{m \\cdot v^{2}}{2}
+$$
+
+Massan $m$ finns i båda led och kan förkortas bort. Dividera sedan båda led med $k \\cdot g$:
+
+$$
+s = \\frac{v^{2}}{2 \\cdot k \\cdot g}
+$$
+
+Uttrycket innehåller inte $m$. En tung bil har visserligen mer rörelseenergi, men den trycks också hårdare mot vägen och får en lika mycket större bromskraft.
+
+**Svar:** $s = \\dfrac{v^{2}}{2 \\cdot k \\cdot g}$, som inte beror på massan.
+
+**b)** Stoppsträckan består av två delar: reaktionssträckan, där bilen kör med konstant fart, och bromssträckan från a).
+
+$$
+\\left[ \\begin{array}{l}
+v = 90\\ \\mathrm{km/h} = \\dfrac{90}{3{,}6}\\ \\mathrm{m/s} = 25\\ \\mathrm{m/s} \\\\
+t_r = 1{,}0\\ \\mathrm{s} \\\\
+k = 0{,}70 \\\\
+g = 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+Reaktionssträckan är sträcka = fart · tid:
+
+$$
+s_r = v \\cdot t_r = 25 \\cdot 1{,}0 = 25\\ \\mathrm{m}
+$$
+
+Bromssträckan enligt a):
+
+$$
+s_b = \\frac{25^{2}}{2 \\cdot 0{,}70 \\cdot 9{,}82} = \\frac{625}{13{,}748} = 45{,}46\\ \\mathrm{m}
+$$
+
+$$
+s_\\text{stopp} = s_r + s_b = 25 + 45{,}46 = 70{,}46\\ \\mathrm{m} \\approx 70\\ \\mathrm{m}
+$$
+
+**Svar:** Cirka 70 m
+
+**c)** Nu är stoppsträckan given, 60 m, och farten $v$ är okänd. Stoppsträckan är reaktionssträckan plus bromssträckan:
+
+$$
+v \\cdot t_r + \\frac{v^{2}}{2 \\cdot k \\cdot g} = 60
+$$
+
+Med $t_r = 1{,}0\\ \\mathrm{s}$ och $2 \\cdot k \\cdot g = 13{,}748\\ \\mathrm{m/s^{2}}$:
+
+$$
+v + \\frac{v^{2}}{13{,}748} = 60
+$$
+
+Multiplicera båda led med 13,748 och samla alla termer i vänsterledet:
+
+$$
+v^{2} + 13{,}748 \\cdot v - 824{,}88 = 0
+$$
+
+En andragradsekvation. Med *pq*-formeln, där $p = 13{,}748$ och $q = -824{,}88$:
+
+$$
+v = -\\frac{13{,}748}{2} \\pm \\sqrt{\\left(\\frac{13{,}748}{2}\\right)^{2} + 824{,}88}
+$$
+
+$$
+v = -6{,}874 \\pm \\sqrt{47{,}25 + 824{,}88} = -6{,}874 \\pm 29{,}53
+$$
+
+Bara den positiva roten är en fart: $v = 22{,}66\\ \\mathrm{m/s}$. Omräknat till km/h:
+
+$$
+v = 22{,}66 \\cdot 3{,}6\\ \\mathrm{km/h} = 81{,}57\\ \\mathrm{km/h} \\approx 82\\ \\mathrm{km/h}
+$$
+
+Kontroll: reaktionssträckan blir 22,66 m och bromssträckan $\\dfrac{22{,}66^{2}}{13{,}748} = 37{,}34\\ \\mathrm{m}$, tillsammans 60,0 m.
+
+Rimlighet: farten ska vara lägre än 90 km/h, eftersom stoppsträckan vid 90 km/h var 70 m, alltså längre än 60 m.
+
+**Svar:** Cirka 82 km/h`,
+        },
+        {
+            level: 3,
+            question: `En bil med massan 1 200 kg kör rakt in i ett betongblock i 50 km/h. Bilens front trycks ihop 0,60 m innan bilen står still. Föraren har massan 75 kg och hålls kvar av bilbältet, som ger efter 0,30 m i förhållande till bilen. Föraren bromsas alltså in på totalt 0,90 m.<br>a) Hur stor är den genomsnittliga kraften på bilen under krocken?<br>b) Hur stor är den genomsnittliga kraften från bältet på föraren, och hur många gånger förarens tyngd är den?<br>c) Samma bil krockar i stället i 70 km/h. Anta att fronten är byggd så att den bromsar bilen med samma medelkraft som i a), och att bältet ger efter lika mycket som förut. Hur stor blir kraften på föraren? Jämför med svaret i b) och förklara skillnaden.
+
+Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+
+*Ange kraften på föraren i c) som ditt numeriska svar i kN.*`,
+            answer: { value: 9.6, unit: 'kN', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 190, unit: 'kN', tol: 0.03, etikett: '$F_\\text{bil} =$' },
+                { del: 'b', value: 8.0, unit: 'kN', tol: 0.03, etikett: '$F_\\text{förare} =$' },
+                { del: 'b', value: 11, unit: 'gånger tyngden', tol: 0.05, etikett: 'Kraften är' },
+                { del: 'c', value: 9.6, unit: 'kN', tol: 0.03, etikett: '$F_\\text{förare} =$' },
+            ],
+            solution: `Modell: kraften under inbromsningen ersätts med en konstant medelkraft. Dess arbete är lika med rörelseenergin som försvinner, $F \\cdot s = \\dfrac{m \\cdot v^{2}}{2}$, så
+
+$$
+F = \\frac{m \\cdot v^{2}}{2 s}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+v = 50\\ \\mathrm{km/h} = \\dfrac{50}{3{,}6}\\ \\mathrm{m/s} = 13{,}89\\ \\mathrm{m/s} \\\\
+m_\\text{bil} = 1\\,200\\ \\mathrm{kg} \\\\
+s_\\text{bil} = 0{,}60\\ \\mathrm{m} \\\\
+m_\\text{förare} = 75\\ \\mathrm{kg} \\\\
+s_\\text{förare} = 0{,}90\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+**a)** Bilens rörelseenergi före krocken:
+
+$$
+E_{k,\\text{bil}} = \\frac{1\\,200 \\cdot 13{,}89^{2}}{2} = 115\\,741\\ \\mathrm{J}
+$$
+
+$$
+F_\\text{bil} = \\frac{115\\,741}{0{,}60} = 192\\,901\\ \\mathrm{N} \\approx 1{,}9 \\cdot 10^{5}\\ \\mathrm{N}
+$$
+
+**Svar:** Cirka 190 kN
+
+**b)** Förarens rörelseenergi före krocken:
+
+$$
+E_{k,\\text{förare}} = \\frac{75 \\cdot 13{,}89^{2}}{2} = 7\\,234\\ \\mathrm{J}
+$$
+
+$$
+F_\\text{förare} = \\frac{7\\,234}{0{,}90} = 8\\,038\\ \\mathrm{N}
+$$
+
+Förarens tyngd är $F_G = m \\cdot g = 75 \\cdot 9{,}82 = 736{,}5\\ \\mathrm{N}$, så
+
+$$
+\\frac{F_\\text{förare}}{F_G} = \\frac{8\\,038}{736{,}5} = 10{,}91
+$$
+
+**Svar:** Cirka 8,0 kN, ungefär 11 gånger förarens tyngd
+
+**c)** Bilens rörelseenergi vid 70 km/h:
+
+$$
+v = 70\\ \\mathrm{km/h} = \\dfrac{70}{3{,}6}\\ \\mathrm{m/s} = 19{,}44\\ \\mathrm{m/s}
+$$
+
+$$
+E_{k,\\text{bil}} = \\frac{1\\,200 \\cdot 19{,}44^{2}}{2} = 226\\,852\\ \\mathrm{J}
+$$
+
+Fronten bromsar med samma kraft som i a), 192 901 N. Med $F \\cdot s = E_k$ blir ihoptryckningen
+
+$$
+s_\\text{bil} = \\frac{E_{k,\\text{bil}}}{F_\\text{bil}} = \\frac{226\\,852}{192\\,901} = 1{,}176\\ \\mathrm{m}
+$$
+
+Föraren bromsas på fronten plus bältets 0,30 m:
+
+$$
+s_\\text{förare} = 1{,}176 + 0{,}30 = 1{,}476\\ \\mathrm{m}
+$$
+
+Förarens rörelseenergi och den nya kraften:
+
+$$
+E_{k,\\text{förare}} = \\frac{75 \\cdot 19{,}44^{2}}{2} = 14\\,178\\ \\mathrm{J}
+$$
+
+$$
+F_\\text{förare} = \\frac{14\\,178}{1{,}476} = 9\\,606\\ \\mathrm{N} \\approx 9{,}6\\ \\mathrm{kN}
+$$
+
+Jämförelse: $\\dfrac{9\\,606}{8\\,038} = 1{,}20$. Rörelseenergin är $\\left(\\dfrac{70}{50}\\right)^{2} = 1{,}96$ gånger så stor, men kraften på föraren ökar bara med 20 %. Skälet är att den extra rörelseenergin tas upp av att fronten trycks ihop längre, så förarens inbromsningssträcka växer nästan lika mycket som energin. Hade inbromsningssträckan varit densamma hade kraften blivit 1,96 gånger så stor. I verkligheten har fronten en begränsad längd, så modellen gäller bara så länge det finns front kvar att trycka ihop.
+
+**Svar:** Cirka 9,6 kN, bara 20 % mer än i b), eftersom den längre ihoptryckningen ger föraren en längre inbromsningssträcka.`,
+        },
+        {
+            level: 3,
+            question: `En liten stålkula skjuts ut ur en fjäderkanon och flyger vågrätt genom en rad likadana skivor av frigolit, som står upprätt med lite mellanrum. Kulan har farten 12 m/s när den når den första skivan och 10 m/s när den har gått igenom den. Anta att skivorna bromsar kulan med samma medelkraft och att luftmotståndet kan försummas. Kulans massa är inte känd.<br>a) Vilken fart har kulan när den har gått igenom den andra skivan?<br>b) Hur många skivor går kulan igenom innan den fastnar? Hur stor fart har den när den kommer ut ur den sista skivan den går igenom?
+
+*Ange farten i a) som ditt numeriska svar i m/s.*`,
+            answer: { value: 7.5, unit: 'm/s', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 7.5, unit: 'm/s', tol: 0.03, etikett: '$v_2 =$' },
+                { del: 'b', value: 3, unit: 'skivor', tol: 0.01, etikett: 'Kulan går igenom' },
+                { del: 'b', value: 3.5, unit: 'm/s', tol: 0.03, etikett: '$v_3 =$' },
+            ],
+            solution: `Skivorna är likadana och bromsar med samma medelkraft $F$ längs samma sträcka $d$, skivans tjocklek. Varje skiva uträttar alltså samma bromsande arbete $F \\cdot d$, och kulan förlorar lika mycket rörelseenergi i varje skiva. Det är rörelseenergin som minskar lika mycket varje gång, inte farten.
+
+Energiförlusten i första skivan, med $v_0 = 12\\ \\mathrm{m/s}$ och $v_1 = 10\\ \\mathrm{m/s}$:
+
+$$
+F \\cdot d = \\frac{m \\cdot v_0^{2}}{2} - \\frac{m \\cdot v_1^{2}}{2} = \\frac{m}{2} \\cdot (12^{2} - 10^{2}) = \\frac{m}{2} \\cdot 44 \\qquad (1)
+$$
+
+Massan är okänd, men det spelar ingen roll: alla rörelseenergier kan skrivas som $\\dfrac{m}{2}$ gånger ett tal, och då räcker det att räkna med $v^{2}$. Från början är $v_0^{2} = 144\\ \\mathrm{m^{2}/s^{2}}$, och varje skiva minskar $v^{2}$ med $44\\ \\mathrm{m^{2}/s^{2}}$.
+
+**a)** Efter två skivor har energin $2 \\cdot F \\cdot d$ försvunnit. Enligt (1), $F \\cdot d = \\dfrac{m}{2} \\cdot 44$, gäller
+
+$$
+\\frac{m \\cdot v_2^{2}}{2} = \\frac{m}{2} \\cdot 144 - 2 \\cdot \\frac{m}{2} \\cdot 44
+$$
+
+Multiplicera båda led med $\\dfrac{2}{m}$:
+
+$$
+v_2^{2} = 144 - 88 = 56
+$$
+
+Dra roten ur båda led:
+
+$$
+v_2 = \\sqrt{56} = 7{,}483\\ \\mathrm{m/s} \\approx 7{,}5\\ \\mathrm{m/s}
+$$
+
+Rimlighet: farten sjönk med 2 m/s i första skivan men med 2,5 m/s i den andra. Det stämmer med att samma energiförlust ger en större fartminskning när farten är lägre.
+
+**Svar:** Cirka 7,5 m/s
+
+**b)** Hela rörelseenergin motsvarar $\\dfrac{144}{44} = 3{,}27$ skivors bromsarbete. Kulan går alltså igenom tre skivor och fastnar i den fjärde, efter ungefär en fjärdedel av dess tjocklek. Efter den tredje skivan:
+
+$$
+v_3^{2} = 144 - 3 \\cdot 44 = 12
+$$
+
+$$
+v_3 = \\sqrt{12} = 3{,}464\\ \\mathrm{m/s} \\approx 3{,}5\\ \\mathrm{m/s}
+$$
+
+**Svar:** Kulan går igenom tre skivor och kommer ut ur den tredje med farten cirka 3,5 m/s.`,
+        },
+        {
+            level: 3,
+            question: `I en laboration dras en vagn från vila av en konstant resulterande kraft på 2,0 N längs en vågrät bana. En fartgivare mäter vagnens fart $v$ efter olika sträckor $s$.
+
+| $s$ (m) | $v$ (m/s) |
+|---|---|
+| 0,20 | 0,98 |
+| 0,40 | 1,43 |
+| 0,60 | 1,72 |
+| 0,80 | 2,02 |
+| 1,00 | 2,22 |
+
+a) Visa med sambandet mellan arbete och rörelseenergi att $v^{2}$ ska vara proportionell mot $s$, och ange vad proportionalitetskonstanten står för.<br>b) Bestäm vagnens massa grafiskt ur mätvärdena.
+
+*Ange massan i b) som ditt numeriska svar i kg.*`,
+            answer: { value: 0.80, unit: 'kg', tol: 0.05 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 0.80, unit: 'kg', tol: 0.05, etikett: '$m =$' },
+            ],
+            solution: `**a)** Vagnen startar från vila, och den resulterande kraften $F$ uträttar arbetet $F \\cdot s$, som blir rörelseenergi:
+
+$$
+F \\cdot s = \\frac{m \\cdot v^{2}}{2}
+$$
+
+Multiplicera båda led med $\\dfrac{2}{m}$:
+
+$$
+v^{2} = \\frac{2F}{m} \\cdot s
+$$
+
+Med konstant kraft och massa är $\\dfrac{2F}{m}$ en konstant. Alltså är $v^{2}$ proportionell mot $s$, och en graf med $v^{2}$ mot $s$ blir en rät linje genom origo med lutningen
+
+$$
+k = \\frac{2F}{m}
+$$
+
+**Svar:** $v^{2} = \\dfrac{2F}{m} \\cdot s$, där proportionalitetskonstanten är $\\dfrac{2F}{m}$.
+
+**b)** Beräkna $v^{2}$ för varje mätning:
+
+| $s$ (m) | $v^{2}$ (m²/s²) |
+|---|---|
+| 0,20 | 0,96 |
+| 0,40 | 2,04 |
+| 0,60 | 2,96 |
+| 0,80 | 4,08 |
+| 1,00 | 4,93 |
+
+Rita $v^{2}$ mot $s$ och lägg en rät linje genom origo som passar punkterna så bra som möjligt:
+
+${makeDiagram({
+    xMax: 1.2, xTicks: [0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2],
+    yMax: 6, yTicks: [0, 1, 2, 3, 4, 5, 6],
+    xLabel: '<tspan font-style="italic">s</tspan> (m)',
+    yLabel: '<tspan font-style="italic">v</tspan><tspan baseline-shift="super" font-size="0.72em">2</tspan> (m<tspan baseline-shift="super" font-size="0.72em">2</tspan>/s<tspan baseline-shift="super" font-size="0.72em">2</tspan>)',
+    paths: [{ points: [[0, 0], [1.2, 6]], color: '#2563c9', width: 2 }].concat(
+        [[0.2, 0.9604], [0.4, 2.0449], [0.6, 2.9584], [0.8, 4.0804], [1.0, 4.9284]].flatMap(([x, y]) => [
+            { points: [[x - 0.02, y - 0.15], [x + 0.02, y + 0.15]], color: '#0f1620', width: 2 },
+            { points: [[x - 0.02, y + 0.15], [x + 0.02, y - 0.15]], color: '#0f1620', width: 2 },
+        ])
+    ),
+})}
+
+Punkterna ligger nära en rät linje genom origo, vilket bekräftar sambandet i a). Linjen går genom punkten $(1{,}00;\\ 5{,}0)$, så lutningen är
+
+$$
+k = \\frac{\\Delta (v^{2})}{\\Delta s} = \\frac{5{,}0}{1{,}00} = 5{,}0\\ \\mathrm{m/s^{2}}
+$$
+
+Lös ut massan ur $k = \\dfrac{2F}{m}$:
+
+$$
+m = \\frac{2F}{k} = \\frac{2 \\cdot 2{,}0}{5{,}0} = 0{,}80\\ \\mathrm{kg}
+$$
+
+Den grafiska metoden använder alla mätpunkter samtidigt, så en enskild felaktig mätning påverkar resultatet mindre än om massan räknades ur bara en punkt.
+
+**Svar:** Cirka 0,80 kg`,
+        },
+        {
+            level: 3,
+            question: `En bil kör i 72 km/h och bromsar med konstant bromskraft tills den stannar.<br>a) Vilken fart har bilen när den har kört halva bromssträckan?<br>b) Hur stor andel av bromssträckan har bilen kört när farten har sjunkit till hälften, 36 km/h?
+
+*Ange farten i a) som ditt numeriska svar i km/h.*`,
+            answer: { value: 51, unit: 'km/h', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 51, unit: 'km/h', tol: 0.03, etikett: '$v =$' },
+                { del: 'b', value: 75, unit: '%', tol: 0.03, etikett: 'Andel av bromssträckan' },
+            ],
+            solution: `Kalla bromskraften $F$, bromssträckan $s$ och farten från början $v_0$. Hela bromssträckan tar bort hela rörelseenergin:
+
+$$
+F \\cdot s = \\frac{m \\cdot v_0^{2}}{2} \\qquad (1)
+$$
+
+Med konstant kraft är bromsarbetet proportionellt mot sträckan. Efter en viss del av bromssträckan har lika stor del av rörelseenergin försvunnit.
+
+**a)** Efter halva sträckan är hälften av rörelseenergin borta, och hälften är kvar:
+
+$$
+\\frac{m \\cdot v^{2}}{2} = \\frac{1}{2} \\cdot \\frac{m \\cdot v_0^{2}}{2}
+$$
+
+Multiplicera båda led med $\\dfrac{2}{m}$:
+
+$$
+v^{2} = \\frac{v_0^{2}}{2}
+$$
+
+Dra roten ur båda led:
+
+$$
+v = \\frac{v_0}{\\sqrt{2}}
+$$
+
+$$
+v = \\frac{72}{\\sqrt{2}} = 50{,}91\\ \\mathrm{km/h} \\approx 51\\ \\mathrm{km/h}
+$$
+
+Farten har alltså sjunkit med bara cirka 21 km/h under den första halvan, och resten av farten försvinner på den andra halvan.
+
+**Svar:** Cirka 51 km/h
+
+**b)** Vid halva farten är rörelseenergin
+
+$$
+\\frac{m \\cdot (v_0/2)^{2}}{2} = \\frac{1}{4} \\cdot \\frac{m \\cdot v_0^{2}}{2}
+$$
+
+En fjärdedel av rörelseenergin är kvar, så tre fjärdedelar har försvunnit. Enligt (1) motsvarar det tre fjärdedelar av bromssträckan.
+
+Rimlighet: svaret stämmer med a). Efter halva sträckan är farten fortfarande högre än halva farten, så halva farten nås först senare än halva sträckan.
+
+**Svar:** 75 % av bromssträckan`,
         },
     ],
 

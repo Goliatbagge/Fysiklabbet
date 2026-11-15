@@ -60,3 +60,17 @@
 13:44:38  [svar] https://github.com/Goliatbagge/Fysiklabbet/actions/runs/43715383638
 13:44:39  [svar] Larmet skickat till GitHub (Nyhetsjobb-larm).
 13:44:39  [svar] === Nyhetsjobb: slut ===
+15:45:03  [svar] === Nyhetsjobb: start (2026-11-15) ===
+15:45:09  [svar] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+15:46:09  [svar] I checked Gmail for review emails from the news job. Result: **no threads with a `[Nyhet` subject exist within the last 4 days** — the search `subject:[Nyhet newer_than:4d` returned zero threads, and a broader search without the date filter confirms the last such email was from 2026-10-29 (fusion plasma article).
+15:46:09  [svar] 
+15:46:09  [svar] The reason showed up in the inbox itself: a GitHub issue arrived today (2026-11-15, Issue #20 in Goliatbagge/Fysiklabbet, "Nyhetsjobbet kan inte mejla") saying:
+15:46:09  [svar] 
+15:46:09  [svar] > "Kontrollen av dina svar på granskningsmejlen gick inte. Claude-sessionen hade ingen Gmail-koppling."
+15:46:09  [svar] 
+15:46:09  [svar] So the nightly job's headless Claude session lost its Gmail connection and couldn't send the review/check-reply emails for recent days — matching the memory note [Setup-token saknar kopplingar] (headless sessions using the OAuth token don't get Gmail access). That's likely also why the two latest articles (2026-11-15 and 2026-11-16, per the git log) went out without the usual owner preview step.
+15:46:09  [svar] 
+15:46:09  [svar] Since there are no `[Nyhet ...]` threads from the last 4 days, there's nothing to process for step 2 — no replies to check or act on. You may want to look at Issue #20 on the Windows machine to restore the Gmail connection for the job.
+15:46:16  [svar] Claude avslutade med kod 0
+15:46:16  [svar] VARNING: svarskontrollen gav inget SVAR-besked. Försöker igen vid nästa körning.
+15:46:16  [svar] === Nyhetsjobb: slut ===

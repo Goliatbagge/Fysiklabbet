@@ -1,0 +1,33 @@
+03:15:02  [idag] === Nyhetsjobb: start (2026-11-15) ===
+03:15:08  [idag] Dagens nyhet finns (förberedd i går).
+03:15:09  [idag] Startar Claude Code (headless, modell opus, nyckel)...
+03:20:02  [imorgon] === Nyhetsjobb: start (2026-11-15) ===
+03:20:03  [imorgon] En körning pågår redan (lås 5 min gammalt). Avslutar.
+03:27:31  [idag] Morgondagens nyhet är klar och committad på grenen `nyhetsjobb` (commit `8edd412d`). Enligt uppdraget har jag varken pushat eller skickat något mejl.
+03:27:31  [idag] 
+03:27:31  [idag] **Artikeln:** ”Randigt ljus ger film i 3D med 150 000 bilder i sekunden”, daterad 2026-11-16, kategori Optik. Den handlar om en mätmetod från INRS i Kanada, publicerad i *Nature Communications* 17, 11567 (2026). Systemet mäter föremåls form i 3D med upp till 150 000 bilder per sekund, med vanliga lysdioder och en industrikamera. Försöken som beskrivs är en öronpropp som studsar mot en snurrande fläkt, lönnfrön som börjar snurra i fallet, svävning hos högtalare som spelar ultraljud och ordet ”hi” som räknas fram ur ett plastmembrans skälvningar.
+03:27:31  [idag] 
+03:27:31  [idag] - **Källa:** studien är öppet tillgänglig, och jag läste hela texten, inklusive metoddelen.
+03:27:31  [idag] - **Granskning:** utgivaren svarade först RÄTTA FÖRST med fem punkter. Studien har bara två författare, och det fanns bara ett frö med en vinge, som släpptes tre gånger. Ingressen vände på orsakssambandet, ”noggrannhet” skulle vara ”djupupplösning” och ett hårt mellanslag saknades. Allt är rättat, och omgranskningen blev GODKÄND.
+03:27:31  [idag] - **Bilder:** huvudbilden är ett fritt foto av lönnfrön från Wikimedia Commons (CC BY 2.5). I brödtexten finns två figurer ur studien (CC BY 4.0). INRS pressfoton valde jag bort, eftersom licensen inte anges.
+03:27:31  [idag] - **Ordlistan:** fyra nya begrepp, triangulering, svävning, amplitudmodulering och autorotation.
+03:27:31  [idag] - **Kontroller:** `verify-begrepp`, `verify-navigation` och `verify-sitemap` är gröna. `verify-sprak` ger tre fel i hela `data/nyheter.js`, men inget av dem ligger i den nya artikeln.
+03:27:31  [idag] - **Längd:** brödtexten är drygt 1 000 ord, längre än riktvärdet 350–600 ord.
+03:27:31  [idag] 
+03:27:32  [idag] **Att känna till:**
+03:27:32  [idag] - **Capotauro**, veckans utlovade nyhet från brevet, kunde inte tas i morgon, eftersom 2026-11-15 också är astronomi. I `ko.md` står nu att den ska ut den 17 november, och senast lördag 2026-11-21.
+03:27:32  [idag] - **Mpembaeffekten i en qubit**, ditt önskemål, gick inte att skriva inom fönstret som stängde i lördags. Det finns fortfarande ingen fritt läsbar fulltext. Säg till om den ska stå kvar i kön eller strykas.
+03:27:32  [idag] - **Ny post i kön:** en plasmanyhet om fusion (Communications Physics, öppet tillgänglig).
+03:27:32  [idag] - **Filer som inte committats:** bygget ändrade radsluten i flera andra filer, bland annat gamla delningssidor och `i18n/manifest.js`. Där finns inga ändringar i innehållet, så de ingår inte i committen. Loggmappen `.claude/nyheter/logg/` är inte heller med.
+03:27:32  [idag] Claude avslutade med kod 0
+03:27:33  [idag] error: cannot pull with rebase: You have unstaged changes.
+03:27:33  [idag] error: Please commit or stash them.
+03:27:43  [idag] Pushat till main.
+03:27:43  [idag] Artikel 2026-11-16 pushad: 2026-11-16-randerna-som-ser-i-3d
+03:29:14  [idag] https://fysiklabbet.se/nyheter.html?forhand=2026-11-16-randerna-som-ser-i-3d
+03:29:15  [idag] Mejlet byggt av mallen (C:\claude\Fysiklabbet-nyhetsjobb\.claude\nyheter\logg\mejl-2026-11-16).
+03:29:15  [idag] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+03:30:10  [idag] Mejlet är skickat till [ägaren] med ämnet "[Nyhet 2026-11-16] Att granska: Randigt ljus ger film i 3D med 150 000 bilder i sekunden". Utgivarraden beskriver kort de fyra rättningarna som gjordes (författare, antal frön, ingressens orsak, "noggrannhet" → djupupplösning) innan artikeln gick från RÄTTA FÖRST till GODKÄND.
+03:30:13  [idag] Claude avslutade med kod 0
+03:30:13  [idag] Mejlet till ägaren är skickat.
+03:30:13  [idag] === Nyhetsjobb: slut ===

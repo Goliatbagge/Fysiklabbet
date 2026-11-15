@@ -1984,6 +1984,43 @@ button.lab-card-disabled { pointer-events: none; }
     background: rgba(15, 22, 32, 0.07);
 }
 
+/* Tabeller i övningarna (fråga, lösning och flervalsalternativ): samma
+   utseende som i teorin, med en kantlinje runt varje cell. Utan regeln
+   ritades övningarnas tabeller helt utan linjer, eftersom reglerna ovan
+   bara gäller teorins text (påpekat 2026-11-15, fy2-1.8). */
+.lab-ovning table {
+    border-collapse: collapse;
+    margin: 14px 0 18px;
+    width: auto;
+    background: var(--lab-bg-raised);
+    border: 1px solid var(--lab-line-strong);
+    font-size: 0.95em;
+}
+
+.lab-ovning th,
+.lab-ovning td {
+    border: 1px solid var(--lab-line-strong);
+    padding: 7px 14px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.lab-ovning th {
+    background: #ddd2bd;
+    font-weight: 600;
+}
+
+.lab-ovning .lab-tabell > table {
+    margin: 0;
+}
+
+@media (max-width: 560px) {
+    .lab-ovning th,
+    .lab-ovning td {
+        padding: 6px 9px;
+    }
+}
+
 /* ── Breda tabeller: scrolla i sidled inuti en egen ruta ────────────────
    En värdetabell eller ett teckenschema kan ha 6–8 kolumner, och KaTeX-
    celler ($x$, $f'(x)$) bryter aldrig rad. På mobil blir tabellen då
@@ -3901,6 +3938,54 @@ body.laborans u .lab-term {
 }
 
 .lab-ovning-choice-text p { margin: 0; }
+
+/* Formler i flervalsalternativen sticker aldrig ut ur rutan. Utan
+   min-width: 0 får textkolumnen inte krympa under formelns bredd, och
+   .katex är nowrap, så f(x) = (x − 2)(x − 5) + k gick långt utanför
+   rutan på en telefon (påpekat 2026-11-15, ma2c-3.3). fitValformler()
+   i katalog.html krymper formeln (högst till 75 %) och låter den bryta
+   rad först när det inte räcker. Ryms ändå en del inte rullar den i
+   sidled i stället för att spilla ut över rutans kant. */
+.lab-ovning-choice-text {
+    min-width: 0;
+    position: relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+/* Smal skärm: radioknappen döljs (bokstaven och rutans markering visar
+   valet), så att formeln får 30 px mer bredd. Den finns kvar för
+   tangentbord och skärmläsare, och rutan får fokusram i stället. */
+@media (max-width: 560px) {
+    .lab-ovning-choice {
+        position: relative;
+        gap: 10px;
+        padding: 10px 12px;
+    }
+    .lab-ovning-choice input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+        width: 1px;
+        height: 1px;
+        margin: 0;
+    }
+    .lab-ovning-choice:focus-within {
+        outline: 2px solid var(--lab-ink);
+        outline-offset: 1px;
+    }
+    /* Övningskortet låg fem lådor djupt med egen innermarginal i varje,
+       så att en 390 px bred skärm gav kortet 248 px och formeln i ett
+       flervalsalternativ 141 px. I övningsvyn behövs ingen marginal runt
+       listan (korten har egen ram), och kortets egen kan vara mindre. */
+    .lab-section-content:has(> .lab-ovningar) {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .lab-ovning {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
 
 .lab-ovning-choice.is-selected {
     border-color: var(--lab-line-strong);

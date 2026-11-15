@@ -8,8 +8,9 @@
 //   (Nivåerna märks aldrig med betygsbokstäverna E, C och A: betyg sätts
 //   på en avslutad kurs, inte på enskilda uppgifter.)
 //
-// Per avsnitt: 3+2+1 (3 st Nivå 1, 2 st Nivå 2, 1 st Nivå 3). För korta
-// avsnitt får principen frångås. Minst en uppgift per formel i avsnittet.
+// Per avsnitt: minst 7 + 7 + 7 (Grund, Mellan, Avancerad), kalibrerade mot
+// nationella prov (se OVNINGAR.md). För mycket introducerande avsnitt får
+// principen frångås. Minst en uppgift per formel i avsnittet.
 //
 // Question och solution är markdown-strängar som renderas via samma
 // marked + KaTeX-pipeline som teori-texten.
@@ -92,7 +93,7 @@ function makeDiagram(opts) {
     const xScale = t => padL + (t - xMin) / (xMax - xMin) * plotW;
     const yScale = v => H - padB - (v - yMin) / (yMax - yMin) * plotH;
     const xAxisY = (yMin <= 0 && yMax >= 0) ? yScale(0) : H - padB;
-    const fmt = n => (typeof n === 'number' ? String(+n.toFixed(4)).replace('.', ',') : String(n));
+    const fmt = n => (typeof n === 'number' ? String(+n.toFixed(4)).replace('.', ',').replace('-', '−') : String(n));
 
     let grid = '';
     for (const t of xTicks) {
@@ -3010,7 +3011,7 @@ $$ t = \\frac{270}{90} = 3{,}0\\ \\mathrm{h} $$
             level: 2,
             question: `Tom cyklar 5,0 km på 20 minuter. Sedan promenerar han 2,0 km på 30 minuter. Vilken är hans medelfart i km/h under hela sträckan?`,
             answer: { value: 8.4, unit: 'km/h', tol: 0.03 },
-            solution: `Medelfarten under hela sträckan är **total sträcka** delat med **total tid** — inte medelvärdet av delarnas farter.
+            solution: `Medelfarten under hela sträckan är **total sträcka** delat med **total tid**, inte medelvärdet av delarnas farter.
 
 Mätvärden:
 $$
@@ -3064,7 +3065,7 @@ $$ v_\\mathrm{m} = \\frac{s_\\mathrm{tot}}{t_\\mathrm{tot}} = \\frac{110}{1{,}30
 
 *Tips: Det är frestande att svara $(5{,}0 + 4{,}0)/2 = 4{,}5$ m/s. Tänk efter om det är rätt!*`,
             answer: { value: 4.44, unit: 'm/s', tol: 0.03 },
-            solution: `**Fel sätt** är att ta medelvärdet av de två farterna (4,5 m/s). Det stämmer bara om personen tillbringar lika lång tid med varje fart — men hon tillbringar **olika lång tid** på varje delsträcka. Medelfart räknas alltid utifrån total sträcka och total tid.
+            solution: `**Fel sätt** är att ta medelvärdet av de två farterna (4,5 m/s). Det stämmer bara om personen tillbringar lika lång tid med varje fart, men hon tillbringar **olika lång tid** på varje delsträcka. Medelfart räknas alltid utifrån total sträcka och total tid.
 
 Mätvärden:
 $$
@@ -3090,7 +3091,601 @@ $$ v_\\mathrm{m} = \\frac{s_\\mathrm{tot}}{t_\\mathrm{tot}} = \\frac{200}{45} \\
 
 **Generell slutsats:** För två lika långa sträckor med olika farter $v_1$ och $v_2$ blir medelfarten det *harmoniska medelvärdet*:
 $$ v_\\mathrm{m} = \\frac{2 \\cdot v_1 \\cdot v_2}{v_1 + v_2} $$
-Det är *alltid lägre* än det aritmetiska medelvärdet $(v_1 + v_2)/2$ — den långsammare delen "väger tyngre" eftersom den tar längre tid.`,
+Det är *alltid lägre* än det aritmetiska medelvärdet $(v_1 + v_2)/2$. Den långsammare delen "väger tyngre" eftersom den tar längre tid.`,
+        },
+        {
+            level: 1,
+            question: `Ett tåg har farten $54\\ \\mathrm{km/h}$. Vilken är tågets fart i m/s?`,
+            choices: [
+                `$194{,}4\\ \\mathrm{m/s}$`,
+                `$5{,}4\\ \\mathrm{m/s}$`,
+                `$15\\ \\mathrm{m/s}$`,
+                `$54\\ \\mathrm{m/s}$`,
+            ],
+            correct: 2,
+            solution: `Från km/h till m/s **dividerar** vi med omvandlingsfaktorn 3,6, eftersom $1\\ \\mathrm{km/h} = \\dfrac{1\\,000\\ \\mathrm{m}}{3\\,600\\ \\mathrm{s}} = \\dfrac{1}{3{,}6}\\ \\mathrm{m/s}$.
+
+$$ 54\\ \\mathrm{km/h} = \\frac{54}{3{,}6}\\ \\mathrm{m/s} = 15\\ \\mathrm{m/s} $$
+
+Rimlighet: farten i m/s ska alltid vara ett mindre tal än i km/h. Alternativet $194{,}4\\ \\mathrm{m/s}$ får man om man multiplicerar med 3,6 i stället för att dividera.
+
+**Svar:** $15\\ \\mathrm{m/s}$`,
+        },
+        {
+            level: 1,
+            question: `Under ett åskväder ser Elsa en blixt och hör åskknallen $4{,}5\\ \\mathrm{s}$ senare. Ljudets fart i luft är $340\\ \\mathrm{m/s}$. Ljuset hinner fram nästan på en gång, så du kan bortse från dess färdtid. Hur långt från Elsa slog blixten ned? Ange svaret i km.`,
+            answer: { value: 1.5, unit: 'km' },
+            solution: `Ljudet går sträckan från blixten till Elsa med farten $340\\ \\mathrm{m/s}$ på tiden $4{,}5\\ \\mathrm{s}$. Vi löser ut sträckan ur formeln för medelfart:
+
+$$ v_\\mathrm{m} = \\frac{s}{t} \\quad\\Leftrightarrow\\quad s = v_\\mathrm{m} \\cdot t $$
+
+$$
+\\left[ \\begin{array}{l}
+v_\\mathrm{m} = 340\\ \\mathrm{m/s} \\\\
+t = 4{,}5\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ s = 340 \\cdot 4{,}5 = 1\\,530\\ \\mathrm{m} \\approx 1{,}5\\ \\mathrm{km} $$
+
+Tiden har två värdesiffror, så svaret avrundas till två värdesiffror.
+
+**Svar:** $1{,}5\\ \\mathrm{km}$`,
+        },
+        {
+            level: 1,
+            question: `En sprinter springer 100 m på $10{,}40\\ \\mathrm{s}$. Beräkna sprinterns medelfart<br>a) i m/s&emsp;&emsp;b) i km/h`,
+            answer: { value: 9.62, unit: 'm/s' },
+            delsvar: [
+                { del: 'a', value: 9.62, unit: 'm/s', etikett: '$v_\\mathrm{m} =$' },
+                { del: 'b', value: 34.6, unit: 'km/h', etikett: '$v_\\mathrm{m} =$' },
+            ],
+            solution: `Medelfarten är sträckan delat med tiden:
+
+$$ v_\\mathrm{m} = \\frac{s}{t} $$
+
+$$
+\\left[ \\begin{array}{l}
+s = 100\\ \\mathrm{m} \\\\
+t = 10{,}40\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+**a)**
+
+$$ v_\\mathrm{m} = \\frac{100}{10{,}40} = 9{,}6153\\ldots\\ \\mathrm{m/s} \\approx 9{,}62\\ \\mathrm{m/s} $$
+
+**Svar:** $9{,}62\\ \\mathrm{m/s}$
+
+**b)** Från m/s till km/h **multiplicerar** vi med 3,6. Vi använder det oavrundade värdet från a):
+
+$$ v_\\mathrm{m} = 9{,}6153\\ldots \\cdot 3{,}6\\ \\mathrm{km/h} = 34{,}615\\ldots\\ \\mathrm{km/h} \\approx 34{,}6\\ \\mathrm{km/h} $$
+
+**Svar:** $34{,}6\\ \\mathrm{km/h}$`,
+        },
+        {
+            level: 1,
+            question: `En sköldpadda kryper med medelfarten $0{,}25\\ \\mathrm{km/h}$. Hur lång tid tar det för den att krypa 15 m över en gräsmatta? Ange svaret i minuter.`,
+            answer: { value: 3.6, unit: 'min' },
+            solution: `Vi löser ut tiden ur formeln för medelfart:
+
+$$ v_\\mathrm{m} = \\frac{s}{t} \\quad\\Leftrightarrow\\quad t = \\frac{s}{v_\\mathrm{m}} $$
+
+Farten räknas först om till m/s, så att den har samma längdenhet som sträckan:
+
+$$
+\\left[ \\begin{array}{l}
+s = 15\\ \\mathrm{m} \\\\
+v_\\mathrm{m} = 0{,}25\\ \\mathrm{km/h} = \\dfrac{0{,}25}{3{,}6}\\ \\mathrm{m/s} = 0{,}069444\\ldots\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$ t = \\frac{15}{0{,}069444\\ldots} = 216\\ \\mathrm{s} = \\frac{216}{60}\\ \\mathrm{min} = 3{,}6\\ \\mathrm{min} $$
+
+**Svar:** $3{,}6$ minuter`,
+        },
+        {
+            level: 2,
+            question: `Tabellen visar en del av ett tågs tidtabell.
+
+| Station | Avstånd från Ekby (km) | Ankomst | Avgång |
+|---|---|---|---|
+| Ekby | 0 | | 08.12 |
+| Lunda | 46 | 08.41 | 08.44 |
+| Norrvik | 118 | 09.27 | |
+
+Beräkna tågets medelfart<br>a) mellan Ekby och Lunda<br>b) under hela resan från Ekby till Norrvik, uppehållet i Lunda inräknat.<br>Ange svaren i km/h.`,
+            answer: { value: 95, unit: 'km/h', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 95, unit: 'km/h', tol: 0.03, etikett: '$v_\\mathrm{m} =$' },
+                { del: 'b', value: 94, unit: 'km/h', tol: 0.03, etikett: '$v_\\mathrm{m} =$' },
+            ],
+            solution: `Medelfarten är den totala sträckan delat med den totala tiden. Tiderna läses av i tabellen som skillnaden mellan två klockslag.
+
+$$ v_\\mathrm{m} = \\frac{s}{t} $$
+
+**a)** Tåget lämnar Ekby 08.12 och kommer till Lunda 08.41. Det tar 29 minuter.
+
+$$
+\\left[ \\begin{array}{l}
+s = 46\\ \\mathrm{km} \\\\
+t = 29\\ \\mathrm{min} = \\dfrac{29}{60}\\ \\mathrm{h} = 0{,}48333\\ldots\\ \\mathrm{h}
+\\end{array} \\right]
+$$
+
+$$ v_\\mathrm{m} = \\frac{46}{0{,}48333\\ldots} = 95{,}17\\ldots\\ \\mathrm{km/h} \\approx 95\\ \\mathrm{km/h} $$
+
+**Svar:** $95\\ \\mathrm{km/h}$
+
+**b)** Tåget lämnar Ekby 08.12 och kommer till Norrvik 09.27. Det tar 1 timme och 15 minuter. Tiden som tåget står stilla i Lunda räknas med, eftersom medelfarten gäller hela resan.
+
+$$
+\\left[ \\begin{array}{l}
+s = 118\\ \\mathrm{km} \\\\
+t = 75\\ \\mathrm{min} = \\dfrac{75}{60}\\ \\mathrm{h} = 1{,}25\\ \\mathrm{h}
+\\end{array} \\right]
+$$
+
+$$ v_\\mathrm{m} = \\frac{118}{1{,}25} = 94{,}4\\ \\mathrm{km/h} \\approx 94\\ \\mathrm{km/h} $$
+
+Rimlighet: sträckan mellan Lunda och Norrvik (72 km på 43 minuter) går något fortare än den första, men de tre minuterna i Lunda drar ned medelfarten för hela resan.
+
+**Svar:** $94\\ \\mathrm{km/h}$`,
+        },
+        {
+            level: 2,
+            question: `Två tåg kör mot varandra på två parallella spår. När avståndet mellan tågens fronter är 32 km har tåg A farten $90\\ \\mathrm{km/h}$ och tåg B farten $70\\ \\mathrm{km/h}$. Båda tågen håller sin fart.<br>a) Hur lång tid dröjer det innan tågens fronter möts? Ange svaret i minuter.<br>b) Hur långt har tåg A kört när fronterna möts? Ange svaret i km.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 214" style="max-width:560px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="24.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="42.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="60.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="78.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="96.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="114.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="132.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="150.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="168.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="186.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="204.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="222.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="240.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="258.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="276.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="294.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="312.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="330.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="348.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="366.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="384.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="402.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="420.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="438.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="456.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="474.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="492.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="510.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="528.0" y="111.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="16" y="106.0" width="528" height="5" fill="#6b7280"/><line x1="16" y1="106.0" x2="544" y2="106.0" stroke="#0f1620" stroke-width="1.2"/><rect x="24.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="42.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="60.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="78.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="96.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="114.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="132.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="150.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="168.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="186.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="204.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="222.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="240.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="258.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="276.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="294.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="312.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="330.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="348.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="366.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="384.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="402.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="420.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="438.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="456.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="474.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="492.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="510.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="528.0" y="173.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="16" y="168.0" width="528" height="5" fill="#6b7280"/><line x1="16" y1="168.0" x2="544" y2="168.0" stroke="#0f1620" stroke-width="1.2"/><path d="M 30 99 L 30 72 Q 30 68 34 68 L 128 68 Q 150 70 150 93 L 150 99 Z" fill="#c8324a" stroke="#0f1620" stroke-width="1.3" stroke-linejoin="round"/><rect x="30" y="90" width="120" height="3" fill="#ffffff" opacity="0.55"/><rect x="36.0" y="75" width="13" height="10" rx="2" fill="#e7edf4" stroke="#0f1620" stroke-width="0.8"/><rect x="61.7" y="75" width="13" height="10" rx="2" fill="#e7edf4" stroke="#0f1620" stroke-width="0.8"/><rect x="87.3" y="75" width="13" height="10" rx="2" fill="#e7edf4" stroke="#0f1620" stroke-width="0.8"/><rect x="113.0" y="75" width="13" height="10" rx="2" fill="#e7edf4" stroke="#0f1620" stroke-width="0.8"/><rect x="132" y="75" width="12" height="10" rx="2" fill="#e7edf4" stroke="#0f1620" stroke-width="0.8"/><circle cx="44" cy="101" r="5" fill="#3a3f47" stroke="#0f1620" stroke-width="1"/><circle cx="44" cy="101" r="1.6" fill="#c9ccd1"/><circle cx="60" cy="101" r="5" fill="#3a3f47" stroke="#0f1620" stroke-width="1"/><circle cx="60" cy="101" r="1.6" fill="#c9ccd1"/><circle cx="120" cy="101" r="5" fill="#3a3f47" stroke="#0f1620" stroke-width="1"/><circle cx="120" cy="101" r="1.6" fill="#c9ccd1"/><circle cx="136" cy="101" r="5" fill="#3a3f47" stroke="#0f1620" stroke-width="1"/><circle cx="136" cy="101" r="1.6" fill="#c9ccd1"/><path d="M 530 161 L 530 134 Q 530 130 526 130 L 432 130 Q 410 132 410 155 L 410 161 Z" fill="#3f6fa8" stroke="#0f1620" stroke-width="1.3" stroke-linejoin="round"/><rect x="410" y="152" width="120" height="3" fill="#ffffff" opacity="0.55"/><rect x="434.0" y="137" width="13" height="10" rx="2" fill="#e7edf4" stroke="#0f1620" stroke-width="0.8"/><rect x="459.7" y="137" width="13" height="10" rx="2" fill="#e7edf4" stroke="#0f1620" stroke-width="0.8"/><rect x="485.3" y="137" width="13" height="10" rx="2" fill="#e7edf4" stroke="#0f1620" stroke-width="0.8"/><rect x="511.0" y="137" width="13" height="10" rx="2" fill="#e7edf4" stroke="#0f1620" stroke-width="0.8"/><rect x="416" y="137" width="12" height="10" rx="2" fill="#e7edf4" stroke="#0f1620" stroke-width="0.8"/><circle cx="424" cy="163" r="5" fill="#3a3f47" stroke="#0f1620" stroke-width="1"/><circle cx="424" cy="163" r="1.6" fill="#c9ccd1"/><circle cx="440" cy="163" r="5" fill="#3a3f47" stroke="#0f1620" stroke-width="1"/><circle cx="440" cy="163" r="1.6" fill="#c9ccd1"/><circle cx="500" cy="163" r="5" fill="#3a3f47" stroke="#0f1620" stroke-width="1"/><circle cx="500" cy="163" r="1.6" fill="#c9ccd1"/><circle cx="516" cy="163" r="5" fill="#3a3f47" stroke="#0f1620" stroke-width="1"/><circle cx="516" cy="163" r="1.6" fill="#c9ccd1"/><text x="162.0" y="94.0" font-size="14" fill="#0f1620" text-anchor="start">Tåg A</text><text x="398.0" y="156.0" font-size="14" fill="#0f1620" text-anchor="end">Tåg B</text><line x1="95.0" y1="140.0" x2="145.0" y2="140.0" stroke="#c8324a" stroke-width="2.6" stroke-linecap="butt"/><polygon points="155.0,140.0 145.0,145.5 145.0,134.5" fill="#c8324a"/><text x="88.0" y="145.0" font-size="15" fill="#c8324a" text-anchor="end">90 km/h</text><line x1="465.0" y1="198.0" x2="415.0" y2="198.0" stroke="#1c3d6b" stroke-width="2.6" stroke-linecap="butt"/><polygon points="405.0,198.0 415.0,192.5 415.0,203.5" fill="#1c3d6b"/><text x="472.0" y="203.0" font-size="15" fill="#1c3d6b" text-anchor="start">70 km/h</text><line x1="150.0" y1="36.0" x2="150.0" y2="64.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><line x1="410.0" y1="36.0" x2="410.0" y2="126.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><line x1="157.0" y1="40.0" x2="403.0" y2="40.0" stroke="#8a8579" stroke-width="1.3"/><polygon points="150.0,40.0 157.0,36.5 157.0,43.5" fill="#8a8579"/><polygon points="410.0,40.0 403.0,36.5 403.0,43.5" fill="#8a8579"/><text x="280.0" y="30.0" font-size="15" fill="#0f1620" text-anchor="middle">32 km</text></svg>`,
+            answer: { value: 12, unit: 'min' },
+            delsvar: [
+                { del: 'a', value: 12, unit: 'min', etikett: '$t =$' },
+                { del: 'b', value: 18, unit: 'km', etikett: '$s_\\mathrm{A} =$' },
+            ],
+            solution: `Tåg A kör $90\\ \\mathrm{km}$ på en timme och tåg B kör $70\\ \\mathrm{km}$ på en timme åt motsatt håll. Avståndet mellan fronterna minskar därför med $90 + 70 = 160\\ \\mathrm{km}$ varje timme. Det är som om avståndet krymper med farten $160\\ \\mathrm{km/h}$.
+
+**a)** Tiden tills fronterna möts:
+
+$$ t = \\frac{s}{v_\\mathrm{m}} $$
+
+$$
+\\left[ \\begin{array}{l}
+s = 32\\ \\mathrm{km} \\\\
+v_\\mathrm{m} = 90 + 70 = 160\\ \\mathrm{km/h}
+\\end{array} \\right]
+$$
+
+$$ t = \\frac{32}{160} = 0{,}20\\ \\mathrm{h} = 0{,}20 \\cdot 60\\ \\mathrm{min} = 12\\ \\mathrm{min} $$
+
+**Svar:** 12 minuter
+
+**b)** Tåg A kör med $90\\ \\mathrm{km/h}$ under $0{,}20\\ \\mathrm{h}$:
+
+$$ s_\\mathrm{A} = v_\\mathrm{A} \\cdot t = 90 \\cdot 0{,}20 = 18\\ \\mathrm{km} $$
+
+Kontroll: tåg B kör $70 \\cdot 0{,}20 = 14\\ \\mathrm{km}$, och $18 + 14 = 32\\ \\mathrm{km}$, som är hela avståndet.
+
+**Svar:** $18\\ \\mathrm{km}$`,
+        },
+        {
+            level: 2,
+            question: `Vem av de fyra har störst medelfart?`,
+            choices: [
+                `En cyklist som cyklar 18 km på 40 minuter.`,
+                `En löpare som springer 400 m på 50 s.`,
+                `En skidåkare som åker med medelfarten $7{,}0\\ \\mathrm{m/s}$.`,
+                `En kanotist som paddlar 12 km på en halvtimme.`,
+            ],
+            correct: 1,
+            solution: `Farterna kan bara jämföras när de står i samma enhet. Vi uttrycker alla farter i km/h med $v_\\mathrm{m} = \\dfrac{s}{t}$.
+
+**Cyklisten:** $40\\ \\mathrm{min} = \\dfrac{40}{60}\\ \\mathrm{h}$
+
+$$ v_\\mathrm{m} = \\frac{18}{40/60} = 27\\ \\mathrm{km/h} $$
+
+**Löparen:**
+
+$$ v_\\mathrm{m} = \\frac{400}{50} = 8{,}0\\ \\mathrm{m/s} = 8{,}0 \\cdot 3{,}6\\ \\mathrm{km/h} = 28{,}8\\ \\mathrm{km/h} $$
+
+**Skidåkaren:**
+
+$$ v_\\mathrm{m} = 7{,}0\\ \\mathrm{m/s} = 7{,}0 \\cdot 3{,}6\\ \\mathrm{km/h} = 25{,}2\\ \\mathrm{km/h} $$
+
+**Kanotisten:** en halvtimme är $0{,}5\\ \\mathrm{h}$
+
+$$ v_\\mathrm{m} = \\frac{12}{0{,}5} = 24\\ \\mathrm{km/h} $$
+
+Löparen har störst medelfart, trots att hennes sträcka är kortast.
+
+**Svar:** Löparen`,
+        },
+        {
+            level: 2,
+            question: `På en vägsträcka mäts bilarnas medelfart med två kameror som sitter 2,40 km från varandra. En bil passerar kamera 1 klockan 14.06.10 och kamera 2 klockan 14.07.34. Högsta tillåtna hastighet är $80\\ \\mathrm{km/h}$.<br>a) Beräkna bilens medelfart mellan kamerorna. Ange svaret i km/h.<br>b) Hur lång tid måste det minst ta mellan kamerorna för att en bil inte ska ha kört för fort i genomsnitt? Ange svaret i sekunder.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 210" style="max-width:560px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="10" y="120" width="540" height="40" fill="#e4e0d7"/><line x1="10" y1="120" x2="550" y2="120" stroke="#0f1620" stroke-width="1.6"/><line x1="10" y1="160" x2="550" y2="160" stroke="#0f1620" stroke-width="1.6"/><line x1="16" y1="140" x2="546" y2="140" stroke="#ffffff" stroke-width="2.5" stroke-dasharray="16 12"/><rect x="87.5" y="72" width="5" height="48" fill="#5b6470" stroke="#0f1620" stroke-width="1"/><rect x="75" y="58" width="30" height="16" rx="3" fill="#e9e4d8" stroke="#0f1620" stroke-width="1.3"/><rect x="105" y="62" width="6" height="8" fill="#3a3f47" stroke="#0f1620" stroke-width="1"/><circle cx="113" cy="66" r="3" fill="#1c3d6b"/><text x="90.0" y="32.0" font-size="14" fill="#0f1620" text-anchor="middle">Kamera 1</text><text x="90.0" y="50.0" font-size="14" fill="#1c3d6b" text-anchor="middle" font-weight="600">14.06.10</text><rect x="467.5" y="72" width="5" height="48" fill="#5b6470" stroke="#0f1620" stroke-width="1"/><rect x="455" y="58" width="30" height="16" rx="3" fill="#e9e4d8" stroke="#0f1620" stroke-width="1.3"/><rect x="485" y="62" width="6" height="8" fill="#3a3f47" stroke="#0f1620" stroke-width="1"/><circle cx="493" cy="66" r="3" fill="#1c3d6b"/><text x="470.0" y="32.0" font-size="14" fill="#0f1620" text-anchor="middle">Kamera 2</text><text x="470.0" y="50.0" font-size="14" fill="#1c3d6b" text-anchor="middle" font-weight="600">14.07.34</text><path d="M 215 132 L 215 120 Q 217 116 225 116 L 237 116 L 249 104 L 275 104 L 287 116 L 297 118 Q 301 120 301 126 L 301 132 Z" fill="#c8324a" stroke="#0f1620" stroke-width="1.3" stroke-linejoin="round"/><path d="M 241 116 L 251 107 L 261 107 L 261 116 Z" fill="#e7edf4" stroke="#0f1620" stroke-width="0.8"/><path d="M 265 116 L 265 107 L 273 107 L 282 116 Z" fill="#e7edf4" stroke="#0f1620" stroke-width="0.8"/><circle cx="235" cy="132" r="6.5" fill="#3a3f47" stroke="#0f1620" stroke-width="1"/><circle cx="235" cy="132" r="2.4" fill="#c9ccd1"/><circle cx="283" cy="132" r="6.5" fill="#3a3f47" stroke="#0f1620" stroke-width="1"/><circle cx="283" cy="132" r="2.4" fill="#c9ccd1"/><line x1="310.0" y1="86.0" x2="350.0" y2="86.0" stroke="#c8324a" stroke-width="2.6" stroke-linecap="butt"/><polygon points="360.0,86.0 350.0,91.5 350.0,80.5" fill="#c8324a"/><line x1="90.0" y1="162.0" x2="90.0" y2="190.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><line x1="470.0" y1="162.0" x2="470.0" y2="190.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><line x1="97.0" y1="182.0" x2="463.0" y2="182.0" stroke="#8a8579" stroke-width="1.3"/><polygon points="90.0,182.0 97.0,178.5 97.0,185.5" fill="#8a8579"/><polygon points="470.0,182.0 463.0,178.5 463.0,185.5" fill="#8a8579"/><text x="280.0" y="204.0" font-size="15" fill="#0f1620" text-anchor="middle">2,40 km</text></svg>`,
+            answer: { value: 103, unit: 'km/h' },
+            delsvar: [
+                { del: 'a', value: 103, unit: 'km/h', etikett: '$v_\\mathrm{m} =$' },
+                { del: 'b', value: 108, unit: 's', etikett: '$t =$' },
+            ],
+            solution: `Kamerorna mäter medelfarten som sträckan mellan dem delat med tiden mellan passagerna:
+
+$$ v_\\mathrm{m} = \\frac{s}{t} $$
+
+**a)** Från 14.06.10 till 14.07.34 är det 1 minut och 24 sekunder.
+
+$$
+\\left[ \\begin{array}{l}
+s = 2{,}40\\ \\mathrm{km} = 2\\,400\\ \\mathrm{m} \\\\
+t = 1\\ \\mathrm{min}\\ 24\\ \\mathrm{s} = 60 + 24 = 84\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ v_\\mathrm{m} = \\frac{2\\,400}{84} = 28{,}571\\ldots\\ \\mathrm{m/s} $$
+
+Från m/s till km/h multiplicerar vi med 3,6:
+
+$$ v_\\mathrm{m} = 28{,}571\\ldots \\cdot 3{,}6\\ \\mathrm{km/h} = 102{,}857\\ldots\\ \\mathrm{km/h} \\approx 103\\ \\mathrm{km/h} $$
+
+Bilen har alltså i genomsnitt kört över $80\\ \\mathrm{km/h}$ mellan kamerorna.
+
+**Svar:** $103\\ \\mathrm{km/h}$
+
+**b)** Vi löser ut tiden ur formeln och sätter in den högsta tillåtna farten:
+
+$$ v_\\mathrm{m} = \\frac{s}{t} \\quad\\Leftrightarrow\\quad t = \\frac{s}{v_\\mathrm{m}} $$
+
+$$
+\\left[ \\begin{array}{l}
+s = 2\\,400\\ \\mathrm{m} \\\\
+v_\\mathrm{m} = 80\\ \\mathrm{km/h} = \\dfrac{80}{3{,}6}\\ \\mathrm{m/s} = 22{,}222\\ldots\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$ t = \\frac{2\\,400}{22{,}222\\ldots} = 108\\ \\mathrm{s} $$
+
+Rimlighet: 108 s är längre än bilens 84 s, vilket stämmer med att bilen körde för fort.
+
+**Svar:** 108 s, alltså 1 minut och 48 sekunder`,
+        },
+        {
+            level: 2,
+            question: `Grafen visar hur långt en cyklist har cyklat från starten som funktion av tiden.<br>a) Beräkna cyklistens medelfart under hela den tid som grafen visar.<br>b) Under vilken del av turen är farten störst, och hur stor är medelfarten där?<br>Ange svaren i m/s.
+
+${makeDiagram({
+    xMin: 0, xMax: 16, yMin: 0, yMax: 5,
+    xTicks: [0, 3, 6, 9, 12, 15],
+    yTicks: [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5],
+    xLabel: '<tspan font-style="italic">t</tspan> (min)',
+    yLabel: '<tspan font-style="italic">s</tspan> (km)',
+    paths: [{ points: [[0, 0], [6, 1.5], [9, 1.5], [15, 4.5]] }],
+})}`,
+            answer: { value: 5.0, unit: 'm/s' },
+            delsvar: [
+                { del: 'a', value: 5.0, unit: 'm/s', etikett: '$v_\\mathrm{m} =$' },
+                { del: 'b', value: 8.3, unit: 'm/s', tol: 0.03, etikett: '$v_\\mathrm{m} =$' },
+            ],
+            solution: `Ur grafen läser vi av tre delar av turen:
+
+- Från 0 till 6 min ökar sträckan från 0 till 1,5 km.
+- Från 6 till 9 min är sträckan oförändrad, 1,5 km. Cyklisten står still.
+- Från 9 till 15 min ökar sträckan från 1,5 km till 4,5 km.
+
+**a)** Hela turen: total sträcka delat med total tid, stoppet inräknat.
+
+$$ v_\\mathrm{m} = \\frac{s}{t} $$
+
+$$
+\\left[ \\begin{array}{l}
+s = 4{,}5\\ \\mathrm{km} = 4\\,500\\ \\mathrm{m} \\\\
+t = 15\\ \\mathrm{min} = 15 \\cdot 60\\ \\mathrm{s} = 900\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ v_\\mathrm{m} = \\frac{4\\,500}{900} = 5{,}0\\ \\mathrm{m/s} $$
+
+**Svar:** $5{,}0\\ \\mathrm{m/s}$
+
+**b)** Vi räknar medelfarten för de två delar där cyklisten rör sig. Båda varar i 6 min, alltså $6 \\cdot 60 = 360\\ \\mathrm{s}$.
+
+Första delen, $1{,}5\\ \\mathrm{km} = 1\\,500\\ \\mathrm{m}$:
+
+$$ v_1 = \\frac{1\\,500}{360} = 4{,}166\\ldots\\ \\mathrm{m/s} $$
+
+Sista delen, $4{,}5 - 1{,}5 = 3{,}0\\ \\mathrm{km} = 3\\,000\\ \\mathrm{m}$:
+
+$$ v_3 = \\frac{3\\,000}{360} = 8{,}333\\ldots\\ \\mathrm{m/s} \\approx 8{,}3\\ \\mathrm{m/s} $$
+
+Under sista delen hinner cyklisten dubbelt så långt på samma tid. Det syns i grafen som att linjen är brantast där.
+
+**Svar:** Under sista delen, från 9 till 15 min, med medelfarten $8{,}3\\ \\mathrm{m/s}$`,
+        },
+        {
+            level: 3,
+            question: `Alva och Bo cyklar samma väg till en badplats och startar samtidigt. Alva cyklar med farten $v_1$ under halva **tiden** och med farten $v_2$ under andra halva tiden. Bo cyklar halva **sträckan** med farten $v_1$ och andra halva sträckan med farten $v_2$. Farterna $v_1$ och $v_2$ är olika.
+
+Vem kommer fram först? Motivera ditt svar generellt, utan att anta några värden på farterna.`,
+            solution: `Den som har störst medelfart på samma sträcka kommer fram först. Vi tar fram ett uttryck för vardera medelfarten med $v_\\mathrm{m} = \\dfrac{s}{t}$.
+
+**Alva.** Kalla hennes totala tid $t$. Under tiden $\\dfrac{t}{2}$ hinner hon sträckan $v_1 \\cdot \\dfrac{t}{2}$ och under resten sträckan $v_2 \\cdot \\dfrac{t}{2}$. Hela sträckan blir
+
+$$ s = v_1 \\cdot \\frac{t}{2} + v_2 \\cdot \\frac{t}{2} = \\frac{(v_1 + v_2) \\cdot t}{2} $$
+
+och hennes medelfart
+
+$$ v_\\mathrm{A} = \\frac{s}{t} = \\frac{v_1 + v_2}{2} \\tag{1} $$
+
+**Bo.** Kalla hela sträckan $s$. Varje halva är $\\dfrac{s}{2}$, och tiden för en halva är sträckan delat med farten:
+
+$$ t_\\mathrm{B} = \\frac{s/2}{v_1} + \\frac{s/2}{v_2} = \\frac{s}{2} \\cdot \\frac{v_1 + v_2}{v_1 \\cdot v_2} $$
+
+Hans medelfart blir
+
+$$ v_\\mathrm{B} = \\frac{s}{t_\\mathrm{B}} = \\frac{2 \\cdot v_1 \\cdot v_2}{v_1 + v_2} \\tag{2} $$
+
+**Jämförelse.** Vi bildar skillnaden mellan (1), $v_\\mathrm{A} = \\dfrac{v_1 + v_2}{2}$, och (2), $v_\\mathrm{B} = \\dfrac{2 \\cdot v_1 \\cdot v_2}{v_1 + v_2}$, och skriver den på gemensamt bråkstreck:
+
+$$ v_\\mathrm{A} - v_\\mathrm{B} = \\frac{(v_1 + v_2)^2 - 4 \\cdot v_1 \\cdot v_2}{2 \\cdot (v_1 + v_2)} = \\frac{v_1^2 - 2 \\cdot v_1 \\cdot v_2 + v_2^2}{2 \\cdot (v_1 + v_2)} = \\frac{(v_1 - v_2)^2}{2 \\cdot (v_1 + v_2)} $$
+
+Täljaren är en kvadrat och är positiv eftersom $v_1 \\neq v_2$. Nämnaren är positiv eftersom farterna är positiva. Alltså är $v_\\mathrm{A} > v_\\mathrm{B}$, oavsett vilka farter det är.
+
+Förklaringen i ord: Bo cyklar lika långa sträckor med båda farterna, och då tar den långsamma delen längre tid. Han tillbringar alltså mer än halva tiden med den lägre farten. Alva tillbringar lika lång tid med båda farterna.
+
+Kontroll med påhittade värden, $v_1 = 10\\ \\mathrm{km/h}$ och $v_2 = 20\\ \\mathrm{km/h}$: Alva får $15\\ \\mathrm{km/h}$ och Bo $\\dfrac{2 \\cdot 10 \\cdot 20}{30} = 13{,}3\\ \\mathrm{km/h}$.
+
+**Svar:** Alva kommer fram först, eftersom hennes medelfart $\\dfrac{v_1 + v_2}{2}$ alltid är större än Bos medelfart $\\dfrac{2 \\cdot v_1 \\cdot v_2}{v_1 + v_2}$ när farterna är olika.`,
+        },
+        {
+            level: 3,
+            question: `En skridskoåkare åker ett varv på en 400 m lång bana med medelfarten $5{,}0\\ \\mathrm{m/s}$. Hon vill att medelfarten för två varv tillsammans ska bli $10\\ \\mathrm{m/s}$. Med vilken medelfart måste hon åka det andra varvet? Undersök också vilken medelfart för de två varven hon som mest kan nå.`,
+            solution: `Medelfarten för båda varven är den totala sträckan delat med den totala tiden. Vi tar reda på hur mycket tid hon får använda totalt och hur mycket som redan gått åt.
+
+$$ v_\\mathrm{m} = \\frac{s}{t} \\quad\\Leftrightarrow\\quad t = \\frac{s}{v_\\mathrm{m}} $$
+
+Tiden som två varv får ta med medelfarten $10\\ \\mathrm{m/s}$:
+
+$$ t_\\mathrm{tot} = \\frac{800}{10} = 80\\ \\mathrm{s} $$
+
+Tiden som det första varvet tog:
+
+$$ t_1 = \\frac{400}{5{,}0} = 80\\ \\mathrm{s} $$
+
+Hela tidsbudgeten är redan förbrukad efter första varvet. Det andra varvet skulle behöva ta 0 s, och det kräver en oändligt stor fart. Det är alltså omöjligt.
+
+**Den högsta möjliga medelfarten.** Om hon åker andra varvet med medelfarten $v_2$ blir medelfarten för båda varven
+
+$$ v_\\mathrm{m} = \\frac{800}{80 + \\dfrac{400}{v_2}} $$
+
+Nämnaren är alltid större än 80 s, så $v_\\mathrm{m}$ är alltid mindre än $\\dfrac{800}{80} = 10\\ \\mathrm{m/s}$. Ju större $v_2$ är, desto närmare 10 m/s kommer hon, men hon når aldrig ända fram:
+
+- $v_2 = 20\\ \\mathrm{m/s}$ ger $v_\\mathrm{m} = \\dfrac{800}{80 + 20} = 8{,}0\\ \\mathrm{m/s}$
+- $v_2 = 40\\ \\mathrm{m/s}$ ger $v_\\mathrm{m} = \\dfrac{800}{80 + 10} = 8{,}9\\ \\mathrm{m/s}$
+
+Även med fyra gånger så hög fart på andra varvet blir medelfarten inte mer än knappt $9\\ \\mathrm{m/s}$, eftersom det långsamma första varvet tar så stor del av tiden.
+
+**Svar:** Det går inte. Första varvet förbrukar redan hela tiden som två varv får ta. Medelfarten för två varv kan som mest närma sig $10\\ \\mathrm{m/s}$, alltså dubbla farten på första varvet, men aldrig nå den.`,
+        },
+        {
+            level: 3,
+            question: `En bil med farten $100\\ \\mathrm{km/h}$ kör om en 18 m lång lastbil som håller farten $80\\ \\mathrm{km/h}$. Bilen är 4,5 m lång. Omkörningen börjar när bilens front är 20 m bakom lastbilens bakre ände och är klar när bilens bakre ände är 20 m framför lastbilens front. Båda fordonen håller sin fart, och du kan bortse från tiden det tar att byta körfält.<br>a) Hur lång tid tar omkörningen? Ange svaret i sekunder.<br>b) I det andra körfältet kommer en mötande bil med farten $90\\ \\mathrm{km/h}$. Hur långt från den omkörande bilen måste den mötande bilen minst vara när omkörningen börjar? Ange svaret i meter.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 236" style="max-width:580px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="10" y="60" width="560" height="80" fill="#e4e0d7"/><line x1="10" y1="60" x2="570" y2="60" stroke="#0f1620" stroke-width="1.6"/><line x1="10" y1="140" x2="570" y2="140" stroke="#0f1620" stroke-width="1.6"/><line x1="16" y1="100" x2="566" y2="100" stroke="#ffffff" stroke-width="2.5" stroke-dasharray="16 12"/><path d="M 127.5 133 L 127.5 125 Q 128 122 131 122 L 134 122 L 137 116.5 L 144 116.5 L 147 122 L 148.5 122.5 Q 150 123.5 150 126 L 150 133 Z" fill="#c8324a" stroke="#0f1620" stroke-width="1.1" stroke-linejoin="round"/><circle cx="133" cy="133.5" r="3" fill="#3a3f47" stroke="#0f1620" stroke-width="0.9"/><circle cx="145" cy="133.5" r="3" fill="#3a3f47" stroke="#0f1620" stroke-width="0.9"/><rect x="250" y="103" width="70" height="29" rx="1.5" fill="#e9e4d8" stroke="#0f1620" stroke-width="1.3"/><path d="M 321 132 L 321 111 L 333 111 Q 340 112 340 120 L 340 132 Z" fill="#3f6fa8" stroke="#0f1620" stroke-width="1.3" stroke-linejoin="round"/><rect x="330" y="114" width="7" height="7" rx="1" fill="#e7edf4" stroke="#0f1620" stroke-width="0.8"/><circle cx="262" cy="134" r="4" fill="#3a3f47" stroke="#0f1620" stroke-width="1"/><circle cx="273" cy="134" r="4" fill="#3a3f47" stroke="#0f1620" stroke-width="1"/><circle cx="306" cy="134" r="4" fill="#3a3f47" stroke="#0f1620" stroke-width="1"/><circle cx="331" cy="134" r="4" fill="#3a3f47" stroke="#0f1620" stroke-width="1"/><path d="M 492.5 93 L 492.5 85 Q 492 82 489 82 L 486 82 L 483 76.5 L 476 76.5 L 473 82 L 471.5 82.5 Q 470 83.5 470 86 L 470 93 Z" fill="#5f8a4a" stroke="#0f1620" stroke-width="1.1" stroke-linejoin="round"/><circle cx="487" cy="93.5" r="3" fill="#3a3f47" stroke="#0f1620" stroke-width="0.9"/><circle cx="475" cy="93.5" r="3" fill="#3a3f47" stroke="#0f1620" stroke-width="0.9"/><text x="470.0" y="24.0" font-size="14" fill="#0f1620" text-anchor="middle">Mötande bil</text><line x1="490.0" y1="42.0" x2="460.0" y2="42.0" stroke="#3a6b2a" stroke-width="2.6" stroke-linecap="butt"/><polygon points="450.0,42.0 460.0,36.5 460.0,47.5" fill="#3a6b2a"/><text x="498.0" y="47.0" font-size="14" fill="#3a6b2a" text-anchor="start">90 km/h</text><line x1="150.0" y1="137.0" x2="150.0" y2="172.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><line x1="250.0" y1="137.0" x2="250.0" y2="172.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><line x1="340.0" y1="137.0" x2="340.0" y2="172.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><line x1="157.0" y1="166.0" x2="243.0" y2="166.0" stroke="#8a8579" stroke-width="1.3"/><polygon points="150.0,166.0 157.0,162.5 157.0,169.5" fill="#8a8579"/><polygon points="250.0,166.0 243.0,162.5 243.0,169.5" fill="#8a8579"/><line x1="257.0" y1="166.0" x2="333.0" y2="166.0" stroke="#8a8579" stroke-width="1.3"/><polygon points="250.0,166.0 257.0,162.5 257.0,169.5" fill="#8a8579"/><polygon points="340.0,166.0 333.0,162.5 333.0,169.5" fill="#8a8579"/><text x="200.0" y="187.0" font-size="14" fill="#0f1620" text-anchor="middle">20 m</text><text x="295.0" y="187.0" font-size="14" fill="#0f1620" text-anchor="middle">18 m</text><text x="100.0" y="212.0" font-size="14" fill="#c8324a" text-anchor="middle">Bil, 100 km/h</text><line x1="82.0" y1="226.0" x2="108.0" y2="226.0" stroke="#c8324a" stroke-width="2.6" stroke-linecap="butt"/><polygon points="118.0,226.0 108.0,220.5 108.0,231.5" fill="#c8324a"/><text x="420.0" y="212.0" font-size="14" fill="#1c3d6b" text-anchor="middle">Lastbil, 80 km/h</text><line x1="402.0" y1="226.0" x2="428.0" y2="226.0" stroke="#1c3d6b" stroke-width="2.6" stroke-linecap="butt"/><polygon points="438.0,226.0 428.0,220.5 428.0,231.5" fill="#1c3d6b"/></svg>`,
+            answer: { value: 11, unit: 's', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 11, unit: 's', tol: 0.03, etikett: '$t =$' },
+                { del: 'b', value: 590, unit: 'm', tol: 0.03, etikett: '$d =$' },
+            ],
+            solution: `**a)** Båda fordonen rör sig framåt under omkörningen. Det som avgör tiden är därför inte hur långt bilen kör, utan **hur mycket längre bilen kör än lastbilen**. Vi följer bilens front: den ska gå från 20 m bakom lastbilen till en punkt där bilens bakre ände är 20 m framför lastbilen. Räknat i förhållande till lastbilen är den sträckan
+
+$$ \\Delta s = 20 + 18 + 20 + 4{,}5 = 62{,}5\\ \\mathrm{m} $$
+
+Under tiden $t$ kör bilen sträckan $v_\\mathrm{bil} \\cdot t$ och lastbilen sträckan $v_\\mathrm{lb} \\cdot t$, eftersom $v_\\mathrm{m} = \\dfrac{s}{t}$ ger $s = v_\\mathrm{m} \\cdot t$. Skillnaden ska vara $\\Delta s$:
+
+$$ v_\\mathrm{bil} \\cdot t - v_\\mathrm{lb} \\cdot t = \\Delta s $$
+
+$$ (v_\\mathrm{bil} - v_\\mathrm{lb}) \\cdot t = \\Delta s $$
+
+$$ \\frac{(v_\\mathrm{bil} - v_\\mathrm{lb}) \\cdot t}{\\boldsymbol{v_\\mathrm{bil} - v_\\mathrm{lb}}} = \\frac{\\Delta s}{\\boldsymbol{v_\\mathrm{bil} - v_\\mathrm{lb}}} $$
+
+$$ t = \\frac{\\Delta s}{v_\\mathrm{bil} - v_\\mathrm{lb}} $$
+
+$$
+\\left[ \\begin{array}{l}
+\\Delta s = 62{,}5\\ \\mathrm{m} \\\\
+v_\\mathrm{bil} = 100\\ \\mathrm{km/h} = \\dfrac{100}{3{,}6}\\ \\mathrm{m/s} = 27{,}777\\ldots\\ \\mathrm{m/s} \\\\
+v_\\mathrm{lb} = 80\\ \\mathrm{km/h} = \\dfrac{80}{3{,}6}\\ \\mathrm{m/s} = 22{,}222\\ldots\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$ t = \\frac{62{,}5}{27{,}777\\ldots - 22{,}222\\ldots} = \\frac{62{,}5}{5{,}555\\ldots} = 11{,}25\\ \\mathrm{s} \\approx 11\\ \\mathrm{s} $$
+
+Bilen tar sig alltså förbi lastbilen med bara $20\\ \\mathrm{km/h}$, skillnaden mellan farterna. Hade bilen hållit $90\\ \\mathrm{km/h}$ hade skillnaden halverats och omkörningen tagit dubbelt så lång tid, $22{,}5\\ \\mathrm{s}$.
+
+**Svar:** Cirka 11 s
+
+**b)** Bilarna kör mot varandra, så avståndet mellan dem krymper med båda bilarnas sträckor tillsammans. De får inte mötas förrän omkörningen är klar, alltså inte förrän efter $11{,}25\\ \\mathrm{s}$. Vi räknar ut hur långt var och en kör under den tiden, med $s = v_\\mathrm{m} \\cdot t$ och det oavrundade värdet från a).
+
+$$
+\\left[ \\begin{array}{l}
+t = 11{,}25\\ \\mathrm{s} \\\\
+v_\\mathrm{bil} = 27{,}777\\ldots\\ \\mathrm{m/s} \\\\
+v_\\mathrm{möt} = 90\\ \\mathrm{km/h} = \\dfrac{90}{3{,}6}\\ \\mathrm{m/s} = 25\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+Den omkörande bilen:
+
+$$ s_\\mathrm{bil} = 27{,}777\\ldots \\cdot 11{,}25 = 312{,}5\\ \\mathrm{m} $$
+
+Den mötande bilen:
+
+$$ s_\\mathrm{möt} = 25 \\cdot 11{,}25 = 281{,}25\\ \\mathrm{m} $$
+
+Det minsta avståndet är summan av sträckorna:
+
+$$ d = s_\\mathrm{bil} + s_\\mathrm{möt} = 312{,}5 + 281{,}25 = 593{,}75\\ \\mathrm{m} \\approx 590\\ \\mathrm{m} $$
+
+Rimlighet: en omkörning som bara tar elva sekunder kräver ändå mer än en halv kilometer fri sikt, eftersom bilen själv kör över 300 m under tiden och den mötande bilen nästan lika långt. I verkligheten behövs ännu mer, eftersom bilen också måste byta körfält två gånger.
+
+**Svar:** Minst cirka 590 m`,
+        },
+        {
+            level: 3,
+            question: `På en flygplats står Bea stilla på ett rullband medan Ali går på golvet bredvid bandet. De startar samtidigt vid bandets ena ände. Ali är framme vid bandets andra ände efter 50 s och Bea efter 75 s. Bandets längd är inte given.<br>a) Hur lång tid hade det tagit för Ali om han i stället hade gått på bandet, i samma takt som på golvet?<br>b) Vid bandets slut märker Ali att han tappat sin biljett där bandet börjar. Han går tillbaka på bandet, mot bandets rörelseriktning och i samma takt. Hur lång tid tar det för honom att komma tillbaka till början?`,
+            answer: { value: 30, unit: 's', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 30, unit: 's', tol: 0.03, etikett: '$t =$' },
+                { del: 'b', value: 150, unit: 's', tol: 0.03, etikett: '$t =$' },
+            ],
+            solution: `Bandets längd är inte given, så vi kallar den $L$ och skriver farterna med den. Med $v_\\mathrm{m} = \\dfrac{s}{t}$ får vi
+
+$$ v_\\mathrm{Ali} = \\frac{L}{50} \\qquad v_\\mathrm{band} = \\frac{L}{75} $$
+
+Bea står still på bandet, så hennes fart är bandets fart. Går Ali på bandet i samma takt som på golvet rör han sig med farten $v_\\mathrm{Ali}$ i förhållande till bandet, samtidigt som bandet själv flyttar honom med farten $v_\\mathrm{band}$.
+
+**a)** Med bandets rörelseriktning läggs farterna ihop:
+
+$$ v = v_\\mathrm{Ali} + v_\\mathrm{band} = \\frac{L}{50} + \\frac{L}{75} = \\frac{3 \\cdot L}{150} + \\frac{2 \\cdot L}{150} = \\frac{5 \\cdot L}{150} = \\frac{L}{30} $$
+
+Tiden ur $t = \\dfrac{s}{v_\\mathrm{m}}$, där sträckan är bandets längd $L$:
+
+$$ t = \\frac{L}{L/30} = 30\\ \\mathrm{s} $$
+
+Längden $L$ tar ut sig själv, och därför behövde den aldrig vara given.
+
+**Svar:** 30 s
+
+**b)** Mot bandets rörelseriktning drar bandet honom bakåt, så farterna ska subtraheras:
+
+$$ v = v_\\mathrm{Ali} - v_\\mathrm{band} = \\frac{L}{50} - \\frac{L}{75} = \\frac{3 \\cdot L}{150} - \\frac{2 \\cdot L}{150} = \\frac{L}{150} $$
+
+$$ t = \\frac{L}{L/150} = 150\\ \\mathrm{s} $$
+
+Rimlighet: bandet gör honom 20 s snabbare åt ena hållet men 100 s långsammare åt det andra. Det är ingen motsägelse. Åt det långsamma hållet är han kvar på bandet mycket längre, och då hinner bandet föra honom bakåt under lång tid. Hade Ali gått långsammare än bandet hade han aldrig kommit tillbaka på det sättet, eftersom bandet då hade fört honom bakåt hela tiden.
+
+**Svar:** 150 s, alltså 2,5 minuter`,
+        },
+        {
+            level: 3,
+            question: `En järnvägsarbetare slår med en hammare på en räls. En bit bort längs rälsen står en mätstation med en sensor fäst på rälsen och en mikrofon i luften. Loggern registrerar att ljudet genom luften kommer fram $1{,}20\\ \\mathrm{s}$ senare än ljudet genom rälsen. Ljudets fart är $340\\ \\mathrm{m/s}$ i luft och $5\\,100\\ \\mathrm{m/s}$ i stål. Hur långt från mätstationen slog arbetaren på rälsen? Ange svaret i meter.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 200" style="max-width:580px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="22.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="40.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="58.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="76.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="94.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="112.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="130.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="148.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="166.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="184.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="202.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="220.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="238.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="256.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="274.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="292.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="310.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="328.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="346.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="364.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="382.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="400.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="418.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="436.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="454.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="472.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="490.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="508.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="526.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="544.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="562.0" y="131.0" width="9" height="7" fill="#8b6b4a" opacity="0.75"/><rect x="14" y="126.0" width="552" height="5" fill="#6b7280"/><line x1="14" y1="126.0" x2="566" y2="126.0" stroke="#0f1620" stroke-width="1.2"/><g transform="rotate(-18 70 125)"><rect x="67" y="54" width="6" height="58" rx="2" fill="#a0784f" stroke="#0f1620" stroke-width="1.1"/><rect x="54" y="111" width="32" height="14" rx="2" fill="#5b6470" stroke="#0f1620" stroke-width="1.3"/></g><line x1="54.599999999999994" y1="120" x2="42" y2="114" stroke="#0f1620" stroke-width="1.2" stroke-linecap="round"/><line x1="53.5" y1="125.6" x2="40" y2="128" stroke="#0f1620" stroke-width="1.2" stroke-linecap="round"/><line x1="86.5" y1="121.6" x2="100" y2="118" stroke="#0f1620" stroke-width="1.2" stroke-linecap="round"/><text x="70.0" y="40.0" font-size="14" fill="#0f1620" text-anchor="middle">Hammarslag</text><rect x="491" y="117" width="18" height="9" rx="1.5" fill="#1c3d6b" stroke="#0f1620" stroke-width="1"/><text x="500.0" y="158.0" font-size="13" fill="#0f1620" text-anchor="middle">Sensor på rälsen</text><line x1="450" y1="126" x2="450" y2="76" stroke="#0f1620" stroke-width="2"/><line x1="438" y1="126" x2="450" y2="114" stroke="#0f1620" stroke-width="1.6"/><line x1="462" y1="126" x2="450" y2="114" stroke="#0f1620" stroke-width="1.6"/><rect x="444" y="54" width="12" height="22" rx="6" fill="#3a3f47" stroke="#0f1620" stroke-width="1.1"/><text x="436.0" y="48.0" font-size="13" fill="#0f1620" text-anchor="end">Mikrofon</text><rect x="510" y="30" width="58" height="40" rx="4" fill="#e9e4d8" stroke="#0f1620" stroke-width="1.3"/><rect x="516" y="36" width="46" height="22" fill="#1d2633"/><path d="M 518 50 L 524 50 L 526 41 L 528 50 L 546 50 L 548 43 L 550 50 L 560 50" stroke="#7fd1a8" stroke-width="1.2" fill="none"/><text x="539.0" y="24.0" font-size="13" fill="#0f1620" text-anchor="middle">Logger</text><path d="M 450 54 Q 460 60 510 60" stroke="#8a8579" stroke-width="1.2" fill="none"/><path d="M 509 121 Q 568 118 550 70" stroke="#8a8579" stroke-width="1.2" fill="none"/><line x1="70.0" y1="140.0" x2="70.0" y2="178.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><line x1="500.0" y1="168.0" x2="500.0" y2="178.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><line x1="77.0" y1="174.0" x2="493.0" y2="174.0" stroke="#8a8579" stroke-width="1.3"/><polygon points="70.0,174.0 77.0,170.5 77.0,177.5" fill="#8a8579"/><polygon points="500.0,174.0 493.0,170.5 493.0,177.5" fill="#8a8579"/><text x="285.0" y="194.0" font-size="16" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">d</tspan></text></svg>`,
+            answer: { value: 437, unit: 'm', tol: 0.02 },
+            solution: `Vi vet inte när hammaren slog, bara hur stor skillnaden är mellan ljudens ankomsttider. Avståndet $d$ är detsamma för båda ljuden, så vi skriver båda färdtiderna med $d$ och använder att skillnaden är $1{,}20\\ \\mathrm{s}$.
+
+Ur $v_\\mathrm{m} = \\dfrac{s}{t}$ får vi $t = \\dfrac{s}{v_\\mathrm{m}}$, så färdtiderna är
+
+$$ t_\\mathrm{luft} = \\frac{d}{v_\\mathrm{luft}} \\qquad t_\\mathrm{stål} = \\frac{d}{v_\\mathrm{stål}} $$
+
+Ljudet i luften är långsammare och kommer fram senare:
+
+$$ t_\\mathrm{luft} - t_\\mathrm{stål} = \\Delta t $$
+
+$$ \\frac{d}{v_\\mathrm{luft}} - \\frac{d}{v_\\mathrm{stål}} = \\Delta t $$
+
+Vi bryter ut $d$:
+
+$$ d \\cdot \\left( \\frac{1}{v_\\mathrm{luft}} - \\frac{1}{v_\\mathrm{stål}} \\right) = \\Delta t $$
+
+och skriver det som står inom parentesen på gemensamt bråkstreck:
+
+$$ d \\cdot \\frac{v_\\mathrm{stål} - v_\\mathrm{luft}}{v_\\mathrm{luft} \\cdot v_\\mathrm{stål}} = \\Delta t $$
+
+Vi multiplicerar båda led med det omvända bråket, $\\dfrac{v_\\mathrm{luft} \\cdot v_\\mathrm{stål}}{v_\\mathrm{stål} - v_\\mathrm{luft}}$, så att $d$ blir ensamt i vänsterledet:
+
+$$ d =\\frac{\\Delta t \\cdot v_\\mathrm{luft} \\cdot v_\\mathrm{stål}}{v_\\mathrm{stål} - v_\\mathrm{luft}} $$
+
+$$
+\\left[ \\begin{array}{l}
+\\Delta t = 1{,}20\\ \\mathrm{s} \\\\
+v_\\mathrm{luft} = 340\\ \\mathrm{m/s} \\\\
+v_\\mathrm{stål} = 5\\,100\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$ d = \\frac{1{,}20 \\cdot 340 \\cdot 5\\,100}{5\\,100 - 340} = 437{,}14\\ldots\\ \\mathrm{m} \\approx 437\\ \\mathrm{m} $$
+
+Kontroll: ljudet i luften tar $\\dfrac{437{,}14}{340} = 1{,}2857\\ \\mathrm{s}$ och ljudet i rälsen $\\dfrac{437{,}14}{5\\,100} = 0{,}0857\\ \\mathrm{s}$. Skillnaden är $1{,}20\\ \\mathrm{s}$, som den ska. Att ljudet i stål nästan är framme direkt gör att svaret bara är lite större än $340 \\cdot 1{,}20 = 408\\ \\mathrm{m}$.
+
+**Svar:** $437\\ \\mathrm{m}$`,
+        },
+        {
+            level: 3,
+            question: `Ett tåg kör varje dag samma sträcka med samma medelfart. En dag kör det med en medelfart som är $10\\ \\mathrm{km/h}$ högre än vanligt och kommer fram 12 minuter tidigare. En annan dag är medelfarten $10\\ \\mathrm{km/h}$ lägre än vanligt, och då kommer tåget fram 15 minuter senare. Hur lång är sträckan? Ange svaret i km.`,
+            answer: { value: 180, unit: 'km' },
+            solution: `Varken sträckan, den vanliga farten eller den vanliga tiden är given. Vi kallar den vanliga medelfarten $v$ (i km/h) och den vanliga tiden $t$ (i h), och använder att sträckan $s = v \\cdot t$ är densamma alla tre dagarna. Tiderna skrivs i timmar: $12\\ \\mathrm{min} = 0{,}20\\ \\mathrm{h}$ och $15\\ \\mathrm{min} = 0{,}25\\ \\mathrm{h}$.
+
+$$ s = v \\cdot t \\tag{1} $$
+
+$$ s = (v + 10) \\cdot (t - 0{,}20) \\tag{2} $$
+
+$$ s = (v - 10) \\cdot (t + 0{,}25) \\tag{3} $$
+
+**(1) och (2).** Högerleden i $s = v \\cdot t$ och $s = (v + 10) \\cdot (t - 0{,}20)$ är lika. Vi multiplicerar ut parentesen:
+
+$$ v \\cdot t = v \\cdot t - 0{,}20 \\cdot v + 10 \\cdot t - 2{,}0 $$
+
+$$ v \\cdot t \\mathbin{\\boldsymbol{-}} \\boldsymbol{v \\cdot t} = v \\cdot t - 0{,}20 \\cdot v + 10 \\cdot t - 2{,}0 \\mathbin{\\boldsymbol{-}} \\boldsymbol{v \\cdot t} $$
+
+$$ 0 = -0{,}20 \\cdot v + 10 \\cdot t - 2{,}0 \\tag{4} $$
+
+**(1) och (3).** På samma sätt med $s = v \\cdot t$ och $s = (v - 10) \\cdot (t + 0{,}25)$:
+
+$$ v \\cdot t = v \\cdot t + 0{,}25 \\cdot v - 10 \\cdot t - 2{,}5 $$
+
+$$ v \\cdot t \\mathbin{\\boldsymbol{-}} \\boldsymbol{v \\cdot t} = v \\cdot t + 0{,}25 \\cdot v - 10 \\cdot t - 2{,}5 \\mathbin{\\boldsymbol{-}} \\boldsymbol{v \\cdot t} $$
+
+$$ 0 = 0{,}25 \\cdot v - 10 \\cdot t - 2{,}5 \\tag{5} $$
+
+**Ekvationssystemet.** Vi adderar (4), $0 = -0{,}20 \\cdot v + 10 \\cdot t - 2{,}0$, och (5), $0 = 0{,}25 \\cdot v - 10 \\cdot t - 2{,}5$, så att termerna med $t$ tar ut varandra:
+
+$$ 0 = 0{,}05 \\cdot v - 4{,}5 $$
+
+$$ 0 \\mathbin{\\boldsymbol{+}} \\boldsymbol{4{,}5} = 0{,}05 \\cdot v - 4{,}5 \\mathbin{\\boldsymbol{+}} \\boldsymbol{4{,}5} $$
+
+$$ 4{,}5 = 0{,}05 \\cdot v $$
+
+$$ \\frac{4{,}5}{\\boldsymbol{0{,}05}} = \\frac{0{,}05 \\cdot v}{\\boldsymbol{0{,}05}} $$
+
+$$ v = 90\\ \\mathrm{km/h} $$
+
+Insättning av $v = 90$ i (4), $0 = -0{,}20 \\cdot v + 10 \\cdot t - 2{,}0$, ger
+
+$$ 0 = -0{,}20 \\cdot 90 + 10 \\cdot t - 2{,}0 = 10 \\cdot t - 20 $$
+
+$$ t = 2{,}0\\ \\mathrm{h} $$
+
+Sträckan ur (1), $s = v \\cdot t$:
+
+$$ s = 90 \\cdot 2{,}0 = 180\\ \\mathrm{km} $$
+
+Kontroll: med $100\\ \\mathrm{km/h}$ tar resan $\\dfrac{180}{100} = 1{,}8\\ \\mathrm{h}$, alltså 12 minuter mindre än 2,0 h. Med $80\\ \\mathrm{km/h}$ tar den $\\dfrac{180}{80} = 2{,}25\\ \\mathrm{h}$, alltså 15 minuter mer. Båda villkoren stämmer. Att förseningen blir större än tidsvinsten beror på att tiden är omvänt proportionell mot farten.
+
+**Svar:** Sträckan är 180 km (den vanliga medelfarten är 90 km/h).`,
+        },
+        {
+            level: 3,
+            question: `En bilist påstår att det lönar sig mest att höja farten där man redan kör fort. Pröva påståendet genom att jämföra tidsvinsten på en 12 km lång sträcka när medelfarten höjs från 50 till 60 km/h och när den höjs från 110 till 130 km/h. Visa också med ett generellt uttryck för tidsvinsten varför det blir så.`,
+            solution: `**Generellt uttryck.** Tiden för sträckan $s$ med medelfarten $v$ är $t = \\dfrac{s}{v}$. Höjs medelfarten från $v_1$ till $v_2$ blir tidsvinsten
+
+$$ \\Delta t = \\frac{s}{v_1} - \\frac{s}{v_2} = \\frac{s \\cdot v_2 - s \\cdot v_1}{v_1 \\cdot v_2} = \\frac{s \\cdot (v_2 - v_1)}{v_1 \\cdot v_2} $$
+
+Tidsvinsten växer med höjningen $v_2 - v_1$, men minskar med produkten $v_1 \\cdot v_2$ i nämnaren. Vid höga farter är den produkten mycket stor.
+
+**Från 50 till 60 km/h**, med $s = 12\\ \\mathrm{km}$:
+
+$$ \\Delta t = \\frac{12 \\cdot (60 - 50)}{50 \\cdot 60} = \\frac{120}{3\\,000} = 0{,}040\\ \\mathrm{h} = 0{,}040 \\cdot 60\\ \\mathrm{min} = 2{,}4\\ \\mathrm{min} $$
+
+**Från 110 till 130 km/h:**
+
+$$ \\Delta t = \\frac{12 \\cdot (130 - 110)}{110 \\cdot 130} = \\frac{240}{14\\,300} = 0{,}016783\\ldots\\ \\mathrm{h} = 1{,}0069\\ldots\\ \\mathrm{min} \\approx 1{,}0\\ \\mathrm{min} $$
+
+Höjningen är dubbelt så stor i det andra fallet, men tidsvinsten är mindre än hälften så stor. Produkten i nämnaren har nästan femdubblats ($14\\,300$ mot $3\\,000$), och det äter upp mer än vad den dubbla höjningen ger.
+
+Rimlighet: vid låg fart tar varje kilometer lång tid, så där finns mest tid att vinna. Vid 110 km/h tar en kilometer redan bara drygt en halv minut.
+
+**Svar:** Påståendet stämmer inte. Tidsvinsten blir 2,4 minuter när farten höjs från 50 till 60 km/h men bara cirka 1,0 minut när den höjs från 110 till 130 km/h, eftersom tidsvinsten $\\Delta t = \\dfrac{s \\cdot (v_2 - v_1)}{v_1 \\cdot v_2}$ har farternas produkt i nämnaren.`,
         },
     ],
 
@@ -3109,7 +3704,7 @@ Det är *alltid lägre* än det aritmetiska medelvärdet $(v_1 + v_2)/2$ — den
                 `En lag som upprepade gånger har bekräftats och aldrig motbevisats.`,
             ],
             correct: 2,
-            solution: `En hypotes är ett *förslag* på en förklaring — en gissning som man sedan testar genom experiment. Om hypotesen inte motbevisas av experimenten kan den så småningom övergå till att kallas en **lag**, och flera lagar tillsammans kan bilda en **teori**.
+            solution: `En hypotes är ett *förslag* på en förklaring, en gissning som man sedan testar genom experiment. Om hypotesen inte motbevisas av experimenten kan den så småningom övergå till att kallas en **lag**, och flera lagar tillsammans kan bilda en **teori**.
 
 **Svar:** En hypotes är en gissning som ska prövas i experiment.`,
         },
@@ -3123,28 +3718,28 @@ Det är *alltid lägre* än det aritmetiska medelvärdet $(v_1 + v_2)/2$ — den
                 `Observation → hypotes → hypotesprövning → lagar och teorier`,
             ],
             correct: 3,
-            solution: `Den naturvetenskapliga metoden börjar med en **observation** — vi ser något hända. Utifrån det formulerar vi en **hypotes** om varför det händer, **prövar** hypotesen genom att göra experiment, och om hypotesen håller blir den till slut en del av etablerade **lagar och teorier**.
+            solution: `Den naturvetenskapliga metoden börjar med en **observation**: vi ser något hända. Utifrån det formulerar vi en **hypotes** om varför det händer, **prövar** hypotesen genom att göra experiment, och om hypotesen håller blir den till slut en del av etablerade **lagar och teorier**.
 
 **Svar:** Observation → hypotes → hypotesprövning → lagar och teorier.`,
         },
         {
             level: 2,
-            question: `En vän säger: *"Evolutionsteorin är ju 'bara en teori' — det är inte säkert att den stämmer."* Vad är problemet med det påståendet ur ett naturvetenskapligt perspektiv?`,
+            question: `En vän säger: *"Evolutionsteorin är ju 'bara en teori', det är inte säkert att den stämmer."* Vad är problemet med det påståendet ur ett naturvetenskapligt perspektiv?`,
             choices: [
                 `Ordet "teori" används i vardagstal om osäkra gissningar, men i naturvetenskaplig mening är en teori ett väl belagt system av lagar som testats många gånger.`,
-                `Evolutionsteorin är inte längre en teori — den har övergått till att vara en lag.`,
-                `Vetenskapliga teorier är inte avsedda att vara sanna — de är bara modeller.`,
+                `Evolutionsteorin är inte längre en teori. Den har övergått till att vara en lag.`,
+                `Vetenskapliga teorier är inte avsedda att vara sanna. De är bara modeller.`,
                 `Vännen har rätt: alla teorier är osäkra tills något kan bevisas matematiskt.`,
             ],
             correct: 0,
             solution: `Vardagsspråk och naturvetenskaplig terminologi använder ordet *teori* på två olika sätt:
 
 - I **vardagligt tal** betyder "teori" ofta en osäker gissning (*"jag har en teori om vem som tog mjölken"*).
-- I **naturvetenskap** betyder en *teori* tvärtom någonting *väldigt säkert* — ett ramverk av lagar och förklaringar som har testats många gånger utan att motbevisas.
+- I **naturvetenskap** betyder en *teori* tvärtom någonting *väldigt säkert*: ett ramverk av lagar och förklaringar som har testats många gånger utan att motbevisas.
 
 Att kalla evolutionsteorin "bara en teori" är därför ett missförstånd av vad ordet teori betyder i naturvetenskaplig mening.
 
-**Svar:** Alternativ A — vännen blandar ihop vardagligt och naturvetenskapligt språkbruk.`,
+**Svar:** Alternativ A. Vännen blandar ihop vardagligt och naturvetenskapligt språkbruk.`,
         },
         {
             level: 2,
@@ -3156,11 +3751,528 @@ Att kalla evolutionsteorin "bara en teori" är därför ett missförstånd av va
                 `För att modeller alltid ger exakt samma svar som verkligheten om man räknar tillräckligt noga.`,
             ],
             correct: 1,
-            solution: `Verkligheten är ofta komplicerad — en boll är inte en perfekt sfär, en gas består av oerhört många molekyler och en kraftpåverkan är aldrig helt friktionsfri. **Modeller** är förenklingar av verkligheten som plockar bort detaljer som inte är viktiga för det vi studerar, samtidigt som de *tillräckligt bra* beskriver det vi vill förstå.
+            solution: `Verkligheten är ofta komplicerad: en boll är inte en perfekt sfär, en gas består av oerhört många molekyler och en kraftpåverkan är aldrig helt friktionsfri. **Modeller** är förenklingar av verkligheten som plockar bort detaljer som inte är viktiga för det vi studerar, samtidigt som de *tillräckligt bra* beskriver det vi vill förstå.
 
 Det är just därför fysik fungerar: vi kan förutsäga vad som händer utan att behöva räkna på varenda molekyl i ett system.
 
-**Svar:** Alternativ B — modeller är tillräckligt bra förenklingar.`,
+**Svar:** Alternativ B. Modeller är tillräckligt bra förenklingar.`,
+        },
+        {
+            level: 1,
+            question: `Ordet fysik kommer från grekiskans *physikos*. Vad betyder det ordet?`,
+            choices: [
+                `Rörelse`,
+                `Natur`,
+                `Kraft`,
+                `Mätning`,
+            ],
+            correct: 1,
+            solution: `Grekiskans *physikos* betyder **natur**. Fysiken är alltså läran om naturen: hur materian är uppbyggd och vilka lagar som styr den.
+
+**Svar:** Alternativ B, natur.`,
+        },
+        {
+            level: 1,
+            question: `En hypotes har prövats i många olika experiment och har aldrig motbevisats. Vad kallas den då?`,
+            choices: [
+                `En observation`,
+                `En modell`,
+                `En gissning`,
+                `En lag`,
+            ],
+            correct: 3,
+            solution: `En hypotes är från början en gissning om hur något kan förklaras. När hypotesen har genomgått flera experiment utan att motbevisas övergår den till att bli en **lag**. Flera lagar tillsammans bildar sedan en **teori**.
+
+**Svar:** Alternativ D, en lag.`,
+        },
+        {
+            level: 1,
+            question: `Figuren visar stegen i den naturvetenskapliga metoden. Ett av stegen har ersatts med ett frågetecken.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 128" style="max-width:650px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="10" y="14" width="135" height="50" rx="6" fill="#f3eee4" stroke="#0f1620" stroke-width="1.6"/><text x="77.5" y="44" font-size="14" fill="#0f1620" text-anchor="middle">Observation</text><rect x="175" y="14" width="135" height="50" rx="6" fill="#f3eee4" stroke="#0f1620" stroke-width="1.6"/><text x="242.5" y="44" font-size="14" fill="#0f1620" text-anchor="middle">Hypotes</text><rect x="340" y="14" width="135" height="50" rx="6" fill="#ffffff" stroke="#2c6fb7" stroke-width="1.8" stroke-dasharray="6 4"/><text x="407.5" y="47" font-size="22" font-weight="600" fill="#2c6fb7" text-anchor="middle">?</text><rect x="505" y="14" width="135" height="50" rx="6" fill="#f3eee4" stroke="#0f1620" stroke-width="1.6"/><text x="572.5" y="44" font-size="14" fill="#0f1620" text-anchor="middle">Lagar och teorier</text><line x1="148" y1="39" x2="163" y2="39" stroke="#0f1620" stroke-width="1.8" stroke-linecap="butt"/><polygon points="163,34 172,39 163,44" fill="#0f1620"/><line x1="313" y1="39" x2="328" y2="39" stroke="#0f1620" stroke-width="1.8" stroke-linecap="butt"/><polygon points="328,34 337,39 328,44" fill="#0f1620"/><line x1="478" y1="39" x2="493" y2="39" stroke="#0f1620" stroke-width="1.8" stroke-linecap="butt"/><polygon points="493,34 502,39 493,44" fill="#0f1620"/><path d="M 407.5 64 L 407.5 92 L 242.5 92 L 242.5 76" fill="none" stroke="#c8324a" stroke-width="1.8" stroke-dasharray="5 4" stroke-linecap="butt"/><polygon points="237.5,76 242.5,67 247.5,76" fill="#c8324a"/><text x="325" y="114" font-size="13" fill="#c8324a" text-anchor="middle">hypotesen motbevisas</text></svg>
+
+a) Vilket steg ska stå i rutan med frågetecknet?<br>b) Den streckade pilen går tillbaka till hypotesen. Förklara vad den visar.`,
+            solution: `**a)** Efter att en hypotes har formulerats ska den testas, oftast med experiment. Det steget kallas **hypotesprövning**.
+
+**Svar:** Hypotesprövning.
+
+**b)** Om experimenten visar att hypotesen inte stämmer kan den inte bli en lag. Då går man tillbaka och formulerar en ny eller ändrad hypotes, som sedan prövas på nytt. Metoden är alltså inte en rak väg utan kan behöva gås igenom flera varv.
+
+**Svar:** Motbevisas hypotesen formulerar man en ny hypotes och prövar den.`,
+        },
+        {
+            level: 1,
+            question: `Ange vilket steg i den naturvetenskapliga metoden varje beskrivning hör till.<br>a) Ebba ser att isen på en vattenpöl smälter först där solen lyser.<br>b) Ebba tror att isen smälter snabbare där den får mer solljus.<br>c) Ebba lägger två lika stora isbitar ute, en i solen och en i skuggan, och tar tid på hur länge det dröjer innan de har smält.`,
+            solution: `Stegen är observation, hypotes, hypotesprövning samt lagar och teorier.
+
+**a)** Ebba *ser* hur något beter sig. Det är en **observation**.
+
+**Svar:** Observation.
+
+**b)** Ebba *gissar* en förklaring till det hon har sett. Det är en **hypotes**.
+
+**Svar:** Hypotes.
+
+**c)** Ebba *testar* sin gissning med ett experiment, där bara solljuset skiljer de två isbitarna åt. Det är **hypotesprövning**.
+
+**Svar:** Hypotesprövning.`,
+        },
+        {
+            level: 1,
+            question: `En jordglob är en modell av jorden.<br>a) Vad menas med en modell i fysiken?<br>b) Ge ett exempel på något som den riktiga jorden har men som jordgloben inte visar.`,
+            solution: `**a)** Verkliga fenomen är ofta för invecklade för att beskrivas exakt i alla detaljer. En **modell** är en förenklad beskrivning som ändå stämmer tillräckligt bra med det vi observerar. Jordgloben visar till exempel hur kontinenter och hav ligger i förhållande till varandra, och det räcker för att planera en resa.
+
+**Svar:** En modell är en förenklad beskrivning av verkligheten som stämmer tillräckligt bra med det vi vill beskriva.
+
+**b)** Det finns många rimliga svar. Jordgloben visar inte berg och dalar i rätt höjd (den är slät eller nästan slät), den visar inte vädret, och den är inte heller tillplattad vid polerna som den riktiga jorden.
+
+**Svar:** Till exempel att jordytan har berg och dalar. Jordgloben är nästan helt slät.`,
+        },
+        {
+            level: 2,
+            question: `Alva observerar att en gunga verkar svänga fram och tillbaka lika snabbt oavsett om hennes lillebror eller hennes pappa sitter i den.<br>a) Formulera en hypotes utifrån observationen.<br>b) Beskriv ett experiment med ett snöre och några vikter som prövar hypotesen. Ange vad som ska ändras, vad som ska mätas och vad som ska hållas lika.`,
+            solution: `**a)** Hypotesen ska vara en förklaring som går att testa. Observationen säger att personen i gungan inte verkar spela någon roll, och det som skiljer lillebrodern från pappan är framför allt massan.
+
+**Svar:** Tiden för en svängning beror inte på massan hos det som svänger.
+
+**b)** Snöret och en vikt bildar en liten gunga, en pendel, som hängs upp i ett stativ.
+
+- **Det som ändras:** massan. Byt mellan till exempel $50\\ \\mathrm{g}$, $100\\ \\mathrm{g}$ och $200\\ \\mathrm{g}$.
+- **Det som mäts:** tiden för till exempel tio hela svängningar, med ett stoppur. Tiden för en svängning blir den uppmätta tiden delad med tio. Upprepa varje mätning några gånger och räkna medelvärdet.
+- **Det som hålls lika:** snörets längd och hur långt vikten dras ut innan den släpps. Annars vet man inte om en skillnad i tid beror på massan eller på något annat.
+
+Blir tiden densamma för alla massor (inom mätnoggrannheten) stöds hypotesen. Blir tiden tydligt olika för olika massor är hypotesen motbevisad.
+
+**Svar:** Ändra vikten, mät tiden för tio svängningar flera gånger och håll snörets längd och utslaget lika.`,
+        },
+        {
+            level: 2,
+            question: `Några elever vill pröva hypotesen *ett tyngre föremål faller snabbare än ett lättare*. De släpper tre kulor med olika massa från samma höjd och mäter falltiden tre gånger för varje kula.
+
+| Kula | Massa | Mätning 1 | Mätning 2 | Mätning 3 |
+|---|---|---|---|---|
+| A | 10 g | 0,62 s | 0,59 s | 0,61 s |
+| B | 50 g | 0,60 s | 0,62 s | 0,59 s |
+| C | 200 g | 0,61 s | 0,60 s | 0,60 s |
+
+a) Beräkna medelvärdet av falltiden för varje kula. Ange svaren i s.<br>b) Stöder mätningarna hypotesen? Motivera ditt svar.`,
+            answer: { value: 0.61, unit: 's' },
+            delsvar: [
+                { del: 'a', value: 0.61, unit: 's', etikett: 'kula A' },
+                { del: 'a', value: 0.60, unit: 's', etikett: 'kula B' },
+                { del: 'a', value: 0.60, unit: 's', etikett: 'kula C' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Medelvärdet är summan av mätningarna delad med antalet mätningar.
+
+$$
+t_A = \\dfrac{0{,}62 + 0{,}59 + 0{,}61}{3} = 0{,}6066\\ldots\\ \\mathrm{s} \\approx 0{,}61\\ \\mathrm{s}
+$$
+
+$$
+t_B = \\dfrac{0{,}60 + 0{,}62 + 0{,}59}{3} = 0{,}6033\\ldots\\ \\mathrm{s} \\approx 0{,}60\\ \\mathrm{s}
+$$
+
+$$
+t_C = \\dfrac{0{,}61 + 0{,}60 + 0{,}60}{3} = 0{,}6033\\ldots\\ \\mathrm{s} \\approx 0{,}60\\ \\mathrm{s}
+$$
+
+**Svar:** Kula A: 0,61 s, kula B: 0,60 s, kula C: 0,60 s.
+
+**b)** Om hypotesen stämde skulle kula C, som är tjugo gånger så tung som kula A, ha en tydligt kortare falltid. Medelvärdena skiljer sig bara med några tusendels sekunder, och de tre mätningarna av en och samma kula varierar mer än så (för kula A mellan 0,59 s och 0,62 s). Skillnaden mellan kulorna är alltså mindre än mätnoggrannheten, och den tyngsta kulan faller inte snabbare.
+
+**Svar:** Nej. Medelvärdena är i stort sett lika, och skillnaden är mindre än spridningen mellan mätningarna av samma kula.`,
+        },
+        {
+            level: 2,
+            question: `Fysiken beskriver *hur* något sker, men inte nödvändigtvis *varför*. Vilket påstående är en beskrivning av *hur* en sten faller?`,
+            choices: [
+                `Stenen faller allt snabbare, och farten ökar lika mycket varje sekund.`,
+                `Stenen faller eftersom den strävar efter att komma tillbaka till jorden.`,
+                `Massor drar i varandra för att naturen vill att materia ska samlas.`,
+                `Det går inte att beskriva stenens fall innan man vet varför den faller.`,
+            ],
+            correct: 0,
+            solution: `En beskrivning av *hur* något sker talar om vad som händer och går att mäta och pröva: farten ökar, och den ökar lika mycket varje sekund. Det påståendet kan testas med ett experiment.
+
+Påståendena om att stenen strävar efter jorden och att naturen vill samla materia försöker förklara *varför* stenen faller genom att ge stenen eller naturen en vilja. Det går inte att mäta en vilja, så de påståendena kan inte prövas. Påståendet att man först måste veta varför är fel, eftersom fysiken just kan beskriva hur något sker utan att veta varför.
+
+**Svar:** Alternativ A.`,
+        },
+        {
+            level: 2,
+            question: `När man räknar på jordens bana runt solen kan jorden behandlas som en punkt utan utbredning. Jordens radie är cirka $6\\,400\\ \\mathrm{km}$, och avståndet till solen är cirka $150\\,000\\,000\\ \\mathrm{km}$.<br>a) Förklara varför modellen är tillräckligt bra när man beskriver jordens bana.<br>b) Ge ett exempel på en situation där jorden inte kan behandlas som en punkt, och förklara varför.`,
+            solution: `**a)** En modell är tillräckligt bra när det den bortser från inte påverkar det man vill beskriva. Jämför jordens radie med avståndet till solen:
+
+$$
+\\dfrac{6\\,400}{150\\,000\\,000} = 0{,}0000426\\ldots
+$$
+
+Jordens radie är alltså bara ungefär fyra hundradels promille av avståndet till solen. Sett från solen är jorden mycket liten, och det spelar ingen roll för banan var på jorden en viss punkt ligger.
+
+**Svar:** Jorden är mycket liten jämfört med avståndet till solen, så dess storlek påverkar inte beskrivningen av banan.
+
+**b)** Det finns flera rimliga svar. Ett exempel är dag och natt: de uppstår för att jorden roterar och bara den halva som är vänd mot solen blir belyst. En punkt har ingen framsida och baksida, så modellen kan inte beskriva dygnet. Ett annat exempel är en flygresa mellan två städer, där avståndet och jordens krökning är just det man vill beskriva.
+
+**Svar:** Till exempel dag och natt, som beror på att jorden har en utbredning och roterar.`,
+        },
+        {
+            level: 2,
+            question: `Klassen mäter hur lång tid det tar för en kula att rulla ned för en ränna. Alla grupper har likadan utrustning. En grupp får en tid som är dubbelt så lång som alla andra gruppers. Vad är det mest naturvetenskapliga sättet att hantera resultatet?`,
+            choices: [
+                `Stryka mätningen, eftersom den inte stämmer med de andra.`,
+                `Dra slutsatsen att de andra grupperna har mätt fel.`,
+                `Undersöka gruppens uppställning och upprepa mätningen innan någon slutsats dras.`,
+                `Räkna medelvärdet av alla gruppers tider, med den avvikande tiden inräknad.`,
+            ],
+            correct: 2,
+            solution: `Ett enskilt avvikande resultat kan bero på ett mätfel, till exempel att rännan lutade mindre, att kulan släpptes fel eller att stoppuret startades för tidigt. Det kan också vara något nytt och viktigt. Det går inte att veta förrän man har undersökt saken.
+
+Att stryka mätningen direkt betyder att man bortser från ett resultat bara för att det är obekvämt. Att räkna in den i medelvärdet ger ett missvisande värde om den beror på ett fel. Det naturvetenskapliga sättet är att undersöka uppställningen och upprepa mätningen. Först därefter går det att avgöra hur resultatet ska användas.
+
+**Svar:** Alternativ C.`,
+        },
+        {
+            level: 3,
+            question: `Sara lägger en laser precis vid vattenytan på en stor, spegelblank sjö och riktar strålen vågrätt ut över sjön. I den enklaste modellen är jordytan ett plan, och då ligger strålen hela vägen precis vid vattenytan. Men jordytan är krökt. Figuren visar situationen med kraftigt överdriven krökning. Jordens radie är $R = 6\\,370\\ \\mathrm{km}$.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 300" style="max-width:460px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><path d="M 120 270 L 41.3 53.9 A 230 230 0 0 1 323.1 162 Z" fill="#e8f1f9" stroke="none"/><path d="M 41.3 53.9 A 230 230 0 0 1 323.1 162" fill="none" stroke="#2c6fb7" stroke-width="2"/><line x1="120" y1="270" x2="120" y2="40" stroke="#5c6670" stroke-width="1.4" stroke-dasharray="5 4"/><line x1="120" y1="270" x2="296.2" y2="122.2" stroke="#5c6670" stroke-width="1.4" stroke-dasharray="5 4"/><line x1="296.2" y1="122.2" x2="394.1" y2="40" stroke="#0f1620" stroke-width="2.2" stroke-linecap="butt"/><path d="M 120 52 L 132 52 L 132 40" fill="none" stroke="#0f1620" stroke-width="1.2"/><rect x="98" y="31" width="22" height="9" rx="1.5" fill="#0f1620"/><line x1="120" y1="40" x2="394.1" y2="40" stroke="#c8324a" stroke-width="2" stroke-linecap="butt"/><circle cx="394.1" cy="40" r="3" fill="#c8324a"/><circle cx="120" cy="270" r="2.6" fill="#0f1620"/><text x="257" y="31" font-size="16" fill="#0f1620" text-anchor="middle" font-style="italic">d</text><text x="110" y="165" font-size="16" fill="#0f1620" text-anchor="end" font-style="italic">R</text><text x="217" y="207" font-size="16" fill="#0f1620" text-anchor="start" font-style="italic">R</text><text x="353" y="95" font-size="16" fill="#0f1620" text-anchor="start" font-style="italic">h</text><text x="132" y="286" font-size="12" fill="#5c6670" text-anchor="start">jordens medelpunkt</text><text x="450" y="290" font-size="12" fill="#5c6670" text-anchor="end">inte skalenlig</text></svg>
+
+a) Visa att strålens höjd $h$ över vattenytan på avståndet $d$ från lasern uppfyller $(R + h)^2 = R^2 + d^2$, och att $h \\approx \\dfrac{d^2}{2R}$ när $h$ är mycket mindre än $R$.<br>b) Hur högt över vattenytan ligger strålen $5{,}0\\ \\mathrm{km}$ från lasern? Ange svaret i m.<br>c) Planmodellen räknas som tillräckligt bra så länge strålen ligger högst $1{,}0\\ \\mathrm{cm}$ över vattenytan. Upp till vilket avstånd från lasern gäller det? Ange svaret i m.<br>d) I verkligheten böjs ljuset lite nedåt, mot marken, när det går genom luften. Blir strålens verkliga höjd vid $5{,}0\\ \\mathrm{km}$ större eller mindre än i b)? Vad betyder det för planmodellens giltighetsområde?`,
+            answer: { value: 2.0, unit: 'm' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 2.0, unit: 'm', etikett: '$h =$' },
+                { del: 'c', value: 360, unit: 'm', etikett: '$d =$' },
+                { del: 'd' },
+            ],
+            solution: `**a)** Strålen är vågrät där lasern står, så den är vinkelrät mot jordradien just där. Jordens medelpunkt, lasern och den punkt på strålen som ligger på avståndet $d$ bildar därför en rätvinklig triangel med den räta vinkeln vid lasern. Kateterna är $R$ och $d$. Hypotenusan går från medelpunkten upp till strålen: först en radie $R$ till vattenytan och sedan höjden $h$ ovanför den, alltså $R + h$. Pythagoras sats ger
+
+$$
+(R + h)^2 = R^2 + d^2
+$$
+
+Parentesen utvecklas med kvadreringsregeln:
+
+$$
+R^2 + 2Rh + h^2 = R^2 + d^2
+$$
+
+$$
+R^2 + 2Rh + h^2 \\mathbin{\\boldsymbol{-}} \\boldsymbol{R^2} = R^2 + d^2 \\mathbin{\\boldsymbol{-}} \\boldsymbol{R^2}
+$$
+
+$$
+2Rh + h^2 = d^2
+$$
+
+Höjden $h$ är högst några meter, medan $R$ är tusentals kilometer. Termen $h^2$ är då försumbar jämfört med $2Rh$ (till exempel $h = 2\\ \\mathrm{m}$ ger $h^2 = 4\\ \\mathrm{m^2}$ men $2Rh \\approx 2{,}5 \\cdot 10^{7}\\ \\mathrm{m^2}$), och den kan strykas:
+
+$$
+2Rh \\approx d^2
+$$
+
+$$
+\\dfrac{2Rh}{\\boldsymbol{2R}} \\approx \\dfrac{d^2}{\\boldsymbol{2R}}
+$$
+
+$$
+h \\approx \\dfrac{d^2}{2R}
+$$
+
+**b)**
+
+$$
+\\left[ \\begin{array}{l}
+d = 5{,}0\\ \\mathrm{km} = 5\\,000\\ \\mathrm{m} \\\\
+R = 6\\,370\\ \\mathrm{km} = 6\\,370\\,000\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+h \\approx \\dfrac{d^2}{2R} = \\dfrac{5\\,000^2}{2 \\cdot 6\\,370\\,000} = 1{,}962\\ldots\\ \\mathrm{m} \\approx 2{,}0\\ \\mathrm{m}
+$$
+
+Rimlighet: $h^2 \\approx 4\\ \\mathrm{m^2}$ är försumbart mot $2Rh \\approx 2{,}5 \\cdot 10^{7}\\ \\mathrm{m^2}$, så närmevärdet i a) gäller.
+
+**Svar:** Cirka 2,0 m över vattenytan.
+
+**c)** Nu är $h = 1{,}0\\ \\mathrm{cm} = 0{,}010\\ \\mathrm{m}$ känt och $d$ söks. Utgå från sambandet i a):
+
+$$
+h = \\dfrac{d^2}{2R}
+$$
+
+$$
+h \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{2R} = \\dfrac{d^2}{2R} \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{2R}
+$$
+
+$$
+d^2 = 2Rh
+$$
+
+$$
+d = \\sqrt{2Rh} = \\sqrt{2 \\cdot 6\\,370\\,000 \\cdot 0{,}010} = 356{,}9\\ldots\\ \\mathrm{m} \\approx 360\\ \\mathrm{m}
+$$
+
+Rimlighet: höjden ska bli en tvåhundradel av den i b), och eftersom $h$ växer med $d^2$ ska avståndet bli ungefär en fjortondel ($\\sqrt{200} \\approx 14$). Det stämmer: $\\dfrac{5\\,000\\ \\mathrm{m}}{14} \\approx 360\\ \\mathrm{m}$.
+
+**Svar:** Upp till cirka 360 m från lasern.
+
+**d)** När ljuset böjs nedåt följer strålen jordytan en liten bit på vägen. Den kommer då inte lika högt upp som den raka strålen i beräkningen, så den verkliga höjden vid 5,0 km är **mindre** än 2,0 m.
+
+Planmodellens fel är just strålens höjd över vattnet. Blir höjden mindre än beräknat blir också felet mindre, och gränsen 1,0 cm nås först en bit längre bort än 360 m. Beräkningen i c) är alltså en nedre gräns för hur långt planmodellen räcker. Det ändrar ändå inte slutsatsen: över en sjö på några kilometer räcker inte planmodellen, men för en husgrund eller en idrottsplats är den fullt tillräcklig.
+
+**Svar:** Mindre. Planmodellen räcker då en bit längre än 360 m, så svaret i c) är en nedre gräns.`,
+        },
+        {
+            level: 3,
+            question: `Ida släpper en boll från olika höjder $h$ och mäter falltiden $t$. Hon har hypotesen att falltiden är proportionell mot höjden.
+
+| $h$ (m) | 0,50 | 1,00 | 1,50 | 2,00 |
+|---|---|---|---|---|
+| $t$ (s) | 0,32 | 0,45 | 0,55 | 0,64 |
+
+a) Visa att mätningarna inte stöder Idas hypotes.<br>b) Undersök hur falltiden ändras när höjden fyrdubblas, och föreslå utifrån det ett annat samband mellan $t$ och $h$. Visa att alla mätningarna stöder ditt samband.<br>c) Använd ditt samband för att förutsäga falltiden från höjden $h = 3{,}0\\ \\mathrm{m}$. Ange svaret i s.`,
+            answer: { value: 0.78, unit: 's' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+                { del: 'c', value: 0.78, unit: 's', etikett: '$t =$' },
+            ],
+            solution: `Två storheter är proportionella om kvoten mellan dem är konstant. Då ger dubbelt så stort värde på den ena dubbelt så stort värde på den andra.
+
+**a)** Om $t$ är proportionell mot $h$ ska kvoten $\\dfrac{t}{h}$ vara lika stor i alla mätningar:
+
+| $h$ (m) | 0,50 | 1,00 | 1,50 | 2,00 |
+|---|---|---|---|---|
+| $\\dfrac{t}{h}$ (s/m) | 0,64 | 0,45 | 0,37 | 0,32 |
+
+Kvoten minskar till hälften över mätserien, så den är inte konstant. Ett annat sätt att se det: när höjden fördubblas från 0,50 m till 1,00 m borde falltiden fördubblas till 0,64 s, men den blir bara 0,45 s.
+
+**Svar:** Kvoten $\\dfrac{t}{h}$ är inte konstant, utan minskar från 0,64 s/m till 0,32 s/m.
+
+**b)** Från $h = 0{,}50\\ \\mathrm{m}$ till $h = 2{,}00\\ \\mathrm{m}$ fyrdubblas höjden, medan falltiden bara fördubblas, från $0{,}32\\ \\mathrm{s}$ till $0{,}64\\ \\mathrm{s}$. Kvadraten på tiden blir då $2^2 = 4$ gånger så stor, alltså lika många gånger större som höjden. Det tyder på att $t^2$ är proportionell mot $h$.
+
+Om det stämmer ska kvoten $\\dfrac{t^2}{h}$ vara konstant i alla fyra mätningarna:
+
+$$
+\\dfrac{0{,}32^2}{0{,}50} = 0{,}2048 \\qquad \\dfrac{0{,}45^2}{1{,}00} = 0{,}2025 \\qquad \\dfrac{0{,}55^2}{1{,}50} = 0{,}2016\\ldots \\qquad \\dfrac{0{,}64^2}{2{,}00} = 0{,}2048
+$$
+
+Alla fyra kvoterna ligger mellan $0{,}201\\ \\mathrm{s^2/m}$ och $0{,}205\\ \\mathrm{s^2/m}$. Skillnaden är under två procent och kan förklaras av att tiderna bara är mätta med hundradels sekund.
+
+**Svar:** $t^2$ är proportionell mot $h$. Kvoten $\\dfrac{t^2}{h}$ är nästan konstant i alla mätningar, cirka $0{,}20\\ \\mathrm{s^2/m}$.
+
+**c)** Medelvärdet av de fyra kvoterna:
+
+$$
+\\dfrac{0{,}2048 + 0{,}2025 + 0{,}2017 + 0{,}2048}{4} = 0{,}2034\\ \\mathrm{s^2/m}
+$$
+
+Med $t^2 = 0{,}2034 \\cdot h$ blir
+
+$$
+t^2 = 0{,}2034 \\cdot 3{,}0 = 0{,}6102\\ \\mathrm{s^2}
+$$
+
+$$
+t = \\sqrt{0{,}6102} = 0{,}7811\\ldots\\ \\mathrm{s} \\approx 0{,}78\\ \\mathrm{s}
+$$
+
+Rimlighet: höjden 3,0 m är större än 2,0 m, så tiden ska vara längre än 0,64 s. Men den ska inte öka i samma takt som höjden, och 0,78 s är betydligt mindre än $1{,}5 \\cdot 0{,}64\\ \\mathrm{s}$. Det stämmer.
+
+**Svar:** 0,78 s`,
+        },
+        {
+            level: 3,
+            question: `En elev påstår: *"Om en lag har bekräftats i tusen experiment är den bevisad och gäller alltid."*<br>a) Förklara varför tusen bekräftelser ändå inte bevisar att lagen alltid gäller.<br>b) En forskargrupp får ett resultat som går emot lagen. Ska lagen överges direkt? Resonera om vad som krävs innan man kan säga att lagen inte gäller.`,
+            solution: `**a)** Ett experiment visar bara vad som händer under just de förhållanden som experimentet hade: vissa temperaturer, vissa hastigheter, vissa storlekar. Tusen experiment som stämmer säger att lagen har fungerat i alla fall som har testats, men inget om de fall som ingen ännu har prövat. Nästa experiment, under nya förhållanden, kan ge ett annat resultat. Därför kallas en lag säker, men aldrig slutgiltigt bevisad.
+
+Ett exempel är lagarna för hur föremål rör sig. De stämde i alla experiment under mycket lång tid, men vid hastigheter nära ljusets fart visade det sig att de inte längre gäller. De är fortfarande användbara, men de har ett giltighetsområde.
+
+**Svar:** Experimenten visar bara att lagen gäller under de förhållanden som har prövats, inte under alla förhållanden.
+
+**b)** Ett enda resultat som går emot lagen räcker i princip för att visa att lagen inte gäller i alla fall. Men innan man drar den slutsatsen måste man vara säker på att resultatet är riktigt:
+
+- **Mätfel:** utrustning, kalibrering och metod ska granskas. Ett felkopplat instrument eller en störning utifrån ger ofta ett resultat som ser sensationellt ut.
+- **Upprepning:** gruppen själv ska kunna upprepa försöket med samma resultat.
+- **Oberoende kontroll:** andra forskargrupper, med egen utrustning, ska kunna göra om försöket och få samma resultat.
+
+Håller resultatet efter allt detta gäller lagen inte under just de förhållandena. Ofta överges den då inte helt, utan man inser att den har ett giltighetsområde och söker en ny hypotes som förklarar även det nya resultatet.
+
+**Svar:** Nej. Resultatet måste först granskas för mätfel och upprepas, även av andra. Håller det visar det att lagen inte gäller under de förhållandena, och en ny hypotes behövs.`,
+        },
+        {
+            level: 3,
+            question: `Ett gummiband hängs upp, och olika vikter hängs i det. Tabellen visar bandets förlängning $s$ för olika massor $m$.
+
+| $m$ (g) | 0 | 100 | 200 | 300 | 400 | 500 | 600 |
+|---|---|---|---|---|---|---|---|
+| $s$ (cm) | 0 | 2,0 | 4,0 | 6,1 | 8,0 | 10,6 | 14,0 |
+
+En elev använder modellen att förlängningen är proportionell mot massan, $s = k \\cdot m$.<br>a) Bestäm konstanten $k$ med hjälp av mätningen vid $100\\ \\mathrm{g}$. Ange svaret i cm/g.<br>b) Modellen räknas som tillräckligt bra om den avviker mindre än $5\\ \\%$ från mätningen. Upp till vilken massa är modellen tillräckligt bra? Ange svaret i g.<br>c) Är modellen fel? Resonera.`,
+            answer: { value: 400, unit: 'g' },
+            delsvar: [
+                { del: 'a', value: 0.020, unit: 'cm/g', etikett: '$k =$' },
+                { del: 'b', value: 400, unit: 'g', etikett: '$m =$' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Ur modellen $s = k \\cdot m$ fås $k = \\dfrac{s}{m}$.
+
+$$
+\\left[ \\begin{array}{l}
+s = 2{,}0\\ \\mathrm{cm} \\\\
+m = 100\\ \\mathrm{g}
+\\end{array} \\right]
+$$
+
+$$
+k = \\dfrac{2{,}0}{100} = 0{,}020\\ \\mathrm{cm/g}
+$$
+
+**Svar:** $k = 0{,}020\\ \\mathrm{cm/g}$
+
+**b)** Modellen ger $s = 0{,}020 \\cdot m$. Jämför med mätningarna och räkna avvikelsen i procent av mätvärdet:
+
+| $m$ (g) | 200 | 300 | 400 | 500 | 600 |
+|---|---|---|---|---|---|
+| modellen (cm) | 4,0 | 6,0 | 8,0 | 10,0 | 12,0 |
+| mätningen (cm) | 4,0 | 6,1 | 8,0 | 10,6 | 14,0 |
+| avvikelse | 0 % | 1,6 % | 0 % | 5,7 % | 14 % |
+
+Avvikelserna är räknade som
+
+$$
+\\dfrac{6{,}1 - 6{,}0}{6{,}1} = 0{,}016\\ldots \\qquad \\dfrac{10{,}6 - 10{,}0}{10{,}6} = 0{,}0566\\ldots \\qquad \\dfrac{14{,}0 - 12{,}0}{14{,}0} = 0{,}142\\ldots
+$$
+
+Upp till och med $400\\ \\mathrm{g}$ är avvikelsen under $5\\ \\%$. Vid $500\\ \\mathrm{g}$ är den större.
+
+**Svar:** Upp till 400 g.
+
+**c)** Modellen är inte fel, men den har ett **giltighetsområde**. Under 400 g stämmer den med mätningarna inom några procent, och där är den en bra och enkel beskrivning som går att räkna med. För större massor börjar bandet töjas mer än modellen säger, kanske för att gummit ändrar sig när det sträcks långt. Där räcker modellen inte, och den som vill beskriva hela mätserien behöver en annan modell. Alla modeller är förenklingar: frågan är inte om de är exakta, utan om de är tillräckligt bra för det man använder dem till.
+
+**Svar:** Nej. Modellen är tillräckligt bra upp till 400 g men gäller inte för större massor. Den har ett giltighetsområde.`,
+        },
+        {
+            level: 3,
+            question: `En sten och ett kaffefilter släpps från höjden $2{,}0\\ \\mathrm{m}$. En modell som bortser från luftmotståndet förutsäger att båda ska nå golvet efter $0{,}638\\ \\mathrm{s}$. Mätningarna ger falltiden $0{,}650\\ \\mathrm{s}$ för stenen och $1{,}62\\ \\mathrm{s}$ för kaffefiltret.<br>a) Hur många procent längre än modellens tid tog stenens fall? Ange svaret i procent.<br>b) Hur många gånger så lång tid som modellen förutsäger tog kaffefiltrets fall?<br>c) Förklara varför samma modell är bra för stenen men dålig för kaffefiltret, och föreslå hur modellen kan förbättras för kaffefiltret.<br>d) Ett kaffefilter når nästan direkt en konstant fart. En förbättrad modell låter därför filtret falla med konstant fart hela vägen. Bestäm den farten ur mätningen. Är den verkliga konstanta farten större eller mindre än ditt värde? Motivera.`,
+            answer: { value: 1.9, unit: '%' },
+            delsvar: [
+                { del: 'a', value: 1.9, unit: '%', etikett: 'avvikelse' },
+                { del: 'b', value: 2.5, unit: 'gånger', etikett: 'kvot' },
+                { del: 'c' },
+                { del: 'd', value: 1.2, unit: 'm/s', etikett: '$v =$' },
+            ],
+            solution: `**a)** Avvikelsen i procent av modellens tid:
+
+$$
+\\dfrac{0{,}650 - 0{,}638}{0{,}638} = 0{,}01880\\ldots \\approx 1{,}9\\ \\%
+$$
+
+**Svar:** 1,9 %
+
+**b)** Kvoten mellan mätt tid och modellens tid:
+
+$$
+\\dfrac{1{,}62}{0{,}638} = 2{,}539\\ldots \\approx 2{,}5
+$$
+
+**Svar:** 2,5 gånger så lång tid.
+
+**c)** Modellen bortser från luftmotståndet. För stenen är luftmotståndet litet jämfört med tyngdkraften, eftersom stenen är tung i förhållande till sin storlek. Det modellen bortser från påverkar då nästan inte resultatet, och avvikelsen blir bara ett par procent. Kaffefiltret är lätt och har en stor yta som tar emot luften. Där är luftmotståndet lika viktigt som tyngdkraften, och modellen ger mindre än hälften av den verkliga tiden.
+
+En förbättrad modell för kaffefiltret måste ta med luftmotståndet, alltså en kraft som bromsar och som blir större ju fortare filtret faller. Mätningar visar att ett kaffefilter efter en kort stund faller med nästan konstant fart, så en enkel förbättring är att låta filtret falla med en konstant fart som mäts upp i ett försök.
+
+**Svar:** Luftmotståndet är försumbart för den tunga stenen men inte för det lätta filtret med stor yta. Modellen förbättras genom att luftmotståndet tas med.
+
+**d)** Faller filtret med konstant fart hela vägen är farten sträckan delad med tiden.
+
+$$
+\\left[ \\begin{array}{l}
+s = 2{,}0\\ \\mathrm{m} \\\\
+t = 1{,}62\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+v = \\dfrac{s}{t} = \\dfrac{2{,}0}{1{,}62} = 1{,}234\\ldots\\ \\mathrm{m/s} \\approx 1{,}2\\ \\mathrm{m/s}
+$$
+
+I verkligheten startar filtret från vila. Under den första korta stunden går det långsammare än den konstanta farten, och den tiden räknas in i de 1,62 s. Värdet 1,2 m/s är därför ett medelvärde för hela fallet, och den konstanta fart som filtret håller under resten av vägen måste vara lite **större**. Modellens värde är alltså en nedre gräns.
+
+**Svar:** Cirka 1,2 m/s. Den verkliga konstanta farten är något större, eftersom filtret går långsammare i början av fallet.`,
+        },
+        {
+            level: 3,
+            question: `Hugo märker att hans mobil laddar ur snabbare de dagar det är kallt ute. Han noterar också att han de dagarna använder mobilen mer, eftersom bussen ofta är sen när det är kallt och han får vänta längre.<br>a) Formulera två olika hypoteser som var för sig kan förklara observationen.<br>b) Beskriv hur Hugo kan pröva vilken av hypoteserna som stämmer.<br>c) Kan båda hypoteserna stämma samtidigt? Resonera om vad det betyder för hur försöket ska utformas.`,
+            solution: `**a)** Observationen är att batteriet räcker kortare tid kalla dagar. Två saker ändras samtidigt de dagarna: temperaturen och hur mycket mobilen används.
+
+**Svar:** Hypotes 1: batteriet laddar ur snabbare när det är kallt. Hypotes 2: mobilen laddar ur snabbare de dagarna för att den används mer.
+
+**b)** För att skilja hypoteserna åt måste en sak i taget ändras medan den andra hålls lika.
+
+- **Pröva temperaturen:** låt mobilen göra exakt samma sak (till exempel spela samma film med samma ljusstyrka) i en timme, en gång i rumstemperatur och en gång i kyla, till exempel ute en kall dag eller i ett kylskåp. Mät hur många procent batteriet sjunker. Börja med fulladdat batteri båda gångerna.
+- **Pröva användningen:** låt mobilen ligga i samma temperatur och jämför en timme med filmuppspelning mot en timme i viloläge.
+
+Varje försök upprepas några gånger. Laddar mobilen ur tydligt mer i kylan trots samma användning stöds hypotes 1. Laddar den ur mer vid mer användning trots samma temperatur stöds hypotes 2.
+
+**Svar:** Gör ett försök där bara temperaturen ändras och ett där bara användningen ändras, med allt annat lika, och jämför hur mycket batteriet sjunker.
+
+**c)** Ja. Att den ena hypotesen stämmer utesluter inte den andra: batteriet kan både påverkas av kylan och laddas ur mer när mobilen används mer. Därför räcker det inte att ett av försöken visar en effekt för att avfärda den andra förklaringen. Varje faktor måste prövas för sig, med den andra hållen konstant. Annars kan Hugo tro att han har hittat orsaken när det i själva verket är två orsaker som samverkar. Med de två försöken kan han också jämföra hur stor varje effekt är.
+
+**Svar:** Ja, båda kan bidra. Därför måste varje faktor prövas för sig med den andra hållen lika, och båda försöken behövs.`,
+        },
+        {
+            level: 3,
+            question: `En pendel består av en vikt i ett snöre. Tiden för en hel svängning fram och tillbaka kallas periodtiden $T$. Två hypoteser förutsäger olika periodtider för en viss pendel: hypotes 1 ger $T = 1{,}40\\ \\mathrm{s}$ och hypotes 2 ger $T = 1{,}46\\ \\mathrm{s}$. Tiden mäts med ett stoppur som startas och stoppas för hand, och det ger en osäkerhet på cirka $0{,}2\\ \\mathrm{s}$ i varje uppmätt tid.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" style="max-width:300px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="18" y="216" width="130" height="12" rx="2" fill="#b98a55" stroke="#0f1620" stroke-width="1.2"/><rect x="37" y="30" width="6" height="186" fill="#5c6670"/><rect x="37" y="30" width="116" height="6" fill="#5c6670"/><line x1="140" y1="36" x2="140" y2="186" stroke="#8a8579" stroke-width="1.2" stroke-dasharray="4 4"/><path d="M 88.7 177.0 L 93.6 178.7 L 98.7 180.2 L 103.7 181.5 L 108.8 182.7 L 114.0 183.7 L 119.1 184.5 L 124.3 185.2 L 129.5 185.6 L 134.8 185.9 L 140.0 186.0 L 145.2 185.9 L 150.5 185.6 L 155.7 185.2 L 160.9 184.5 L 166.0 183.7 L 171.2 182.7 L 176.3 181.5 L 181.3 180.2 L 186.4 178.7 L 191.3 177.0" fill="none" stroke="#2c6fb7" stroke-width="1.4" stroke-dasharray="5 4"/><line x1="140" y1="36" x2="191.3" y2="177.0" stroke="#0f1620" stroke-width="1.4"/><circle cx="140" cy="36" r="2.6" fill="#0f1620"/><circle cx="191.3" cy="177.0" r="12" fill="#c8324a" stroke="#0f1620" stroke-width="1.2"/></svg>
+
+a) Hur stor blir den relativa osäkerheten om eleven mäter tiden för en enda svängning, och hur stor blir den om eleven mäter tiden för tio svängningar? Räkna med att $T$ är cirka $1{,}4\\ \\mathrm{s}$. Ange svaren i procent.<br>b) Vilken av metoderna kan avgöra mellan hypoteserna? Motivera.<br>c) Tio svängningar tar $14{,}5\\ \\mathrm{s}$. Vilken hypotes stöds av mätningen?`,
+            answer: { value: 14, unit: '%' },
+            delsvar: [
+                { del: 'a', value: 14, unit: '%', etikett: 'en svängning' },
+                { del: 'a', value: 1.4, unit: '%', etikett: 'tio svängningar' },
+                { del: 'b' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Den relativa osäkerheten är osäkerheten delad med den uppmätta tiden.
+
+En svängning tar cirka 1,4 s:
+
+$$
+\\dfrac{0{,}2}{1{,}4} = 0{,}1428\\ldots \\approx 14\\ \\%
+$$
+
+Tio svängningar tar cirka $10 \\cdot 1{,}4\\ \\mathrm{s} = 14\\ \\mathrm{s}$, men osäkerheten är fortfarande 0,2 s, eftersom stoppuret bara startas och stoppas en gång:
+
+$$
+\\dfrac{0{,}2}{14} = 0{,}01428\\ldots \\approx 1{,}4\\ \\%
+$$
+
+**Svar:** 14 % för en svängning och 1,4 % för tio svängningar.
+
+**b)** Hypoteserna skiljer sig med
+
+$$
+\\dfrac{1{,}46 - 1{,}40}{1{,}40} = 0{,}0428\\ldots \\approx 4\\ \\%
+$$
+
+Med en svängning är osäkerheten 14 %, mycket större än skillnaden mellan hypoteserna, så båda hypoteserna stämmer med vilken mätning som helst. Med tio svängningar är osäkerheten 1,4 %, alltså mindre än skillnaden på 4 %. Då kan mätningen visa att bara en av hypoteserna stämmer.
+
+**Svar:** Bara mätningen av tio svängningar, eftersom dess osäkerhet är mindre än skillnaden mellan hypoteserna.
+
+**c)** Periodtiden och dess osäkerhet blir
+
+$$
+T = \\dfrac{14{,}5}{10} = 1{,}45\\ \\mathrm{s} \\qquad \\Delta T = \\dfrac{0{,}2}{10} = 0{,}02\\ \\mathrm{s}
+$$
+
+Den verkliga periodtiden ligger alltså mellan $1{,}43\\ \\mathrm{s}$ och $1{,}47\\ \\mathrm{s}$. Hypotes 2, $T = 1{,}46\\ \\mathrm{s}$, ligger inom intervallet. Hypotes 1, $T = 1{,}40\\ \\mathrm{s}$, ligger utanför och motbevisas av mätningen.
+
+**Svar:** Hypotes 2 stöds. Hypotes 1 motbevisas.`,
         },
     ],
 
@@ -3173,7 +4285,7 @@ Det är just därför fysik fungerar: vi kan förutsäga vad som händer utan at
         // ── Nivå 1 (Grund) ───────────────────────────────────────────────
         {
             level: 1,
-            question: `I meningen *"sträckan är 2 500 meter"* — vad är **mätetalet**?`,
+            question: `I meningen *"sträckan är 2 500 meter"* finns ett **mätetal**. Vilket är det?`,
             choices: [
                 `m (symbolen för meter)`,
                 `sträckan`,
@@ -3183,9 +4295,9 @@ Det är just därför fysik fungerar: vi kan förutsäga vad som händer utan at
             correct: 3,
             solution: `En storhet anges som *mätetal* gånger *enhet*:
 
-- **Storhet** — egenskapen som mäts. Här: *sträcka*.
-- **Mätetal** — det numeriska värdet. Här: *2 500*.
-- **Enhet** — måttstorleken som mätetalet anges i. Här: *meter*.
+- **Storhet**: egenskapen som mäts. Här: *sträcka*.
+- **Mätetal**: det numeriska värdet. Här: *2 500*.
+- **Enhet**: måttstorleken som mätetalet anges i. Här: *meter*.
 
 **Svar:** Mätetalet är 2 500.`,
         },
@@ -3293,7 +4405,7 @@ $$
 
 **Svar:** 12,8.
 
-**Generell slutsats:** Det är lätt att förväxla reglerna — vid *addition/subtraktion* tittar man på *decimaler*, vid *multiplikation/division* tittar man på *värdesiffror*.`,
+**Generell slutsats:** Det är lätt att förväxla reglerna. Vid *addition/subtraktion* tittar man på *decimaler*, vid *multiplikation/division* tittar man på *värdesiffror*.`,
         },
 
         {
@@ -3306,11 +4418,11 @@ Mätvärden:
 $$
 \\left[ \\begin{array}{l}
 d = 0{,}084\\ \\mathrm{mm} = 8{,}4 \\cdot 10^{-5}\\ \\mathrm{m} \\quad (\\text{2 värdesiffror}) \\\\
-n = 250 \\quad (\\text{exakt antal — ingen mätosäkerhet})
+n = 250 \\quad (\\text{exakt antal, ingen mätosäkerhet})
 \\end{array} \\right]
 $$
 
-Notera att inledande nollor i 0,084 **inte** räknas som värdesiffror — det är bara 8 och 4 som är värdesiffror.
+Notera att inledande nollor i 0,084 **inte** räknas som värdesiffror. Det är bara 8 och 4 som är värdesiffror.
 
 Total tjocklek:
 $$
@@ -3325,12 +4437,12 @@ $$
 
 **Svar:** 0,021 m (= 2,1 cm).
 
-**Generell slutsats:** När man räknar med en *exakt* faktor (t.ex. antal ark, antal sidor på en tärning) påverkar den faktorn inte antalet värdesiffror i svaret — det styrs helt av mätvärdets precision.`,
+**Generell slutsats:** När man räknar med en *exakt* faktor (t.ex. antal ark, antal sidor på en tärning) påverkar den faktorn inte antalet värdesiffror i svaret. Det styrs helt av mätvärdets precision.`,
         },
 
         {
             level: 2,
-            question: `En glaskub har sidan 5,00 cm (mätt med skjutmått — alltså 3 värdesiffror). En elev räknar ut kubens **totala utomyta** (alla 6 sidor sammanlagt) och vill ange resultatet med korrekt antal värdesiffror. Vilket av följande är det **enda otvetydigt korrekta** sättet att skriva svaret?`,
+            question: `En glaskub har sidan 5,00 cm (mätt med skjutmått, alltså 3 värdesiffror). En elev räknar ut kubens **totala utomyta** (alla 6 sidor sammanlagt) och vill ange resultatet med korrekt antal värdesiffror. Vilket av följande är det **enda otvetydigt korrekta** sättet att skriva svaret?`,
             choices: [
                 `$150\\ \\mathrm{cm^2}$`,
                 `$1{,}5 \\cdot 10^{2}\\ \\mathrm{cm^2}$`,
@@ -3350,14 +4462,559 @@ $$
 
 Men nu kommer **fällan**: hur skriver vi 150 så att det entydigt har just 3 värdesiffror?
 
-- **A) 150 cm²** — *tvetydigt*. Det kan tolkas som 2 värdesiffror (nollan är osäker) *eller* 3 värdesiffror. Otydligt!
-- **B) 1,5 · 10² cm²** — bara **2 värdesiffror**. För få.
-- **C) 1,50 · 10² cm²** — **3 värdesiffror**, helt entydigt. ✓
-- **D) 150,0 cm²** — **4 värdesiffror**. Att lägga till ",0" på slutet hittar på en värdesiffra som mätvärdet inte har.
+- **A) 150 cm²**: *tvetydigt*. Det kan tolkas som 2 värdesiffror (nollan är osäker) *eller* 3 värdesiffror. Otydligt!
+- **B) 1,5 · 10² cm²**: bara **2 värdesiffror**. För få.
+- **C) 1,50 · 10² cm²**: **3 värdesiffror**, helt entydigt. ✓
+- **D) 150,0 cm²**: **4 värdesiffror**. Att lägga till ",0" på slutet hittar på en värdesiffra som mätvärdet inte har.
 
-**Svar:** Alternativ C — 1,50 · 10² cm².
+**Svar:** Alternativ C, 1,50 · 10² cm².
 
-**Generell slutsats:** När ett tal slutar på *nollor till vänster om decimalkommat* (t.ex. 150, 2 400, 50 000) blir antalet värdesiffror i den vanliga skrivformen tvetydigt — nollorna kan vara värdesiffror eller bara platshållare. Lösningen är att skriva talet i **grundpotensform**, där varje siffra som skrivs ut räknas som en värdesiffra. Det är därför fysiker ofta skriver tal i grundpotensform även när det inte skulle behövas för platsens skull.`,
+**Generell slutsats:** När ett tal slutar på *nollor till vänster om decimalkommat* (t.ex. 150, 2 400, 50 000) blir antalet värdesiffror i den vanliga skrivformen tvetydigt, eftersom nollorna kan vara värdesiffror eller bara platshållare. Lösningen är att skriva talet i **grundpotensform**, där varje siffra som skrivs ut räknas som en värdesiffra. Det är därför fysiker ofta skriver tal i grundpotensform även när det inte skulle behövas för platsens skull.`,
+        },
+        {
+            level: 1,
+            question: `Processorn i en dator har klockfrekvensen 3,2 GHz. Frekvens anges i enheten hertz (Hz). Skriv klockfrekvensen i Hz i grundpotensform.`,
+            answer: { value: 3.2e9, unit: 'Hz', tol: 0.02 },
+            solution: `Prefixet **giga** (G) betyder $10^{9}$:
+
+$$
+1\\ \\mathrm{GHz} = 10^{9}\\ \\mathrm{Hz}
+$$
+
+Vi byter ut prefixet mot sin tiopotens:
+
+$$
+3{,}2\\ \\mathrm{GHz} = 3{,}2 \\cdot 10^{9}\\ \\mathrm{Hz}
+$$
+
+Talet 3,2 ligger mellan 1 och 10, så uttrycket står redan i grundpotensform.
+
+**Svar:** $3{,}2 \\cdot 10^{9}\\ \\mathrm{Hz}$`,
+        },
+        {
+            level: 1,
+            question: `Vilken av följande enheter är en av de sju **grundenheterna** i SI-systemet?`,
+            choices: [
+                `newton (N)`,
+                `kelvin (K)`,
+                `liter (l)`,
+                `gram (g)`,
+            ],
+            correct: 1,
+            solution: `SI-systemets sju grundenheter är meter, kilogram, sekund, ampere, kelvin, mol och candela.
+
+- **Newton** är SI-enheten för kraft, men den är byggd av grundenheterna: $1\\ \\mathrm{N} = 1\\ \\mathrm{kg \\cdot m/s^2}$.
+- **Kelvin** är grundenheten för temperatur.
+- **Liter** är ingen SI-enhet. En liter är en kubikdecimeter, $1\\ \\mathrm{l} = 10^{-3}\\ \\mathrm{m^3}$.
+- **Gram** är inte grundenheten för massa. Grundenheten är **kilogram**, som redan bär prefixet kilo.
+
+**Svar:** Alternativ B, kelvin (K).`,
+        },
+        {
+            level: 1,
+            question: `Hur många värdesiffror har vart och ett av mätvärdena nedan?<br>a)&nbsp;$0{,}0450\\ \\mathrm{m}$&emsp;&emsp;b)&nbsp;$7{,}0 \\cdot 10^{5}\\ \\mathrm{kg}$`,
+            answer: { value: 3, unit: '', tol: 0.01 },
+            delsvar: [
+                { del: 'a', value: 3, unit: 'värdesiffror' },
+                { del: 'b', value: 2, unit: 'värdesiffror' },
+            ],
+            solution: `**a)** Nollorna i början av 0,0450 visar bara var decimalkommat står. De räknas inte som värdesiffror. Nollan **sist** däremot har mätaren skrivit ut med avsikt: den säger att mätningen är noggrann ned till tiotusendelar av en meter. Värdesiffrorna är alltså 4, 5 och 0.
+
+**Svar:** 3 värdesiffror
+
+**b)** I grundpotensform räknas varje siffra i talet framför tiopotensen. Talet 7,0 har två siffror. Tiopotensen $10^{5}$ anger bara storleksordningen och påverkar inte antalet värdesiffror.
+
+**Svar:** 2 värdesiffror`,
+        },
+        {
+            level: 1,
+            question: `Ett akvarium rymmer 54 liter vatten. Hur stor är volymen i SI-enheten m³?`,
+            answer: { value: 0.054, unit: 'm³', tol: 0.02 },
+            solution: `En liter är lika med en kubikdecimeter. Eftersom $1\\ \\mathrm{dm} = 0{,}1\\ \\mathrm{m}$ blir
+
+$$
+1\\ \\mathrm{l} = 1\\ \\mathrm{dm^3} = 0{,}1\\ \\mathrm{m} \\cdot 0{,}1\\ \\mathrm{m} \\cdot 0{,}1\\ \\mathrm{m} = 0{,}001\\ \\mathrm{m^3}
+$$
+
+Volymen i kubikmeter blir då
+
+$$
+54\\ \\mathrm{l} = 54 \\cdot 0{,}001\\ \\mathrm{m^3} = 0{,}054\\ \\mathrm{m^3}
+$$
+
+En kubikmeter är en kub med sidan en meter, och ett akvarium är mycket mindre än så. Att svaret är en liten del av en kubikmeter är alltså rimligt.
+
+**Svar:** $0{,}054\\ \\mathrm{m^3}$ (eller $5{,}4 \\cdot 10^{-2}\\ \\mathrm{m^3}$)`,
+        },
+        {
+            level: 2,
+            question: `Bildsensorn i en mobilkamera är 5,6 mm bred och 4,2 mm hög. Den är indelad i kvadratiska bildpunkter (pixlar) med sidan 1,4 μm.<br>a) Hur stor area har en pixel? Ange svaret i m² i grundpotensform.<br>b) Hur många pixlar ryms på sensorn? Ange svaret i grundpotensform.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 20 460 210" width="624" height="285" style="max-width:100%;height:auto;display:block;margin:16px auto;font-family:Poppins,sans-serif"><text x="170" y="31" font-size="13" fill="#5b6470" text-anchor="middle" dominant-baseline="middle">Sensor</text><rect x="70" y="40" width="200" height="150" fill="#e3e9f0" stroke="#0f1620" stroke-width="1.6"/><g stroke="rgba(15,22,32,0.10)" stroke-width="0.8"><line x1="90" y1="40" x2="90" y2="190"/><line x1="110" y1="40" x2="110" y2="190"/><line x1="130" y1="40" x2="130" y2="190"/><line x1="150" y1="40" x2="150" y2="190"/><line x1="170" y1="40" x2="170" y2="190"/><line x1="190" y1="40" x2="190" y2="190"/><line x1="210" y1="40" x2="210" y2="190"/><line x1="230" y1="40" x2="230" y2="190"/><line x1="250" y1="40" x2="250" y2="190"/><line x1="70" y1="60" x2="270" y2="60"/><line x1="70" y1="80" x2="270" y2="80"/><line x1="70" y1="100" x2="270" y2="100"/><line x1="70" y1="120" x2="270" y2="120"/><line x1="70" y1="140" x2="270" y2="140"/><line x1="70" y1="160" x2="270" y2="160"/><line x1="70" y1="180" x2="270" y2="180"/></g><rect x="80" y="50" width="10" height="10" fill="none" stroke="#0f1620" stroke-width="1.4"/><line x1="90" y1="50" x2="320" y2="50" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><line x1="90" y1="60" x2="320" y2="170" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><line x1="70" y1="194" x2="70" y2="212" stroke="#5b6470" stroke-width="1"/><line x1="270" y1="194" x2="270" y2="212" stroke="#5b6470" stroke-width="1"/><line x1="78" y1="206" x2="262" y2="206" stroke="#0f1620" stroke-width="1.2"/><polygon points="70,206 78,202.5 78,209.5" fill="#0f1620"/><polygon points="270,206 262,202.5 262,209.5" fill="#0f1620"/><text x="170" y="221" font-size="14" fill="#0f1620" text-anchor="middle" dominant-baseline="middle">5,6 mm</text><line x1="50" y1="40" x2="66" y2="40" stroke="#5b6470" stroke-width="1"/><line x1="50" y1="190" x2="66" y2="190" stroke="#5b6470" stroke-width="1"/><line x1="56" y1="48" x2="56" y2="182" stroke="#0f1620" stroke-width="1.2"/><polygon points="56,40 52.5,48 59.5,48" fill="#0f1620"/><polygon points="56,190 52.5,182 59.5,182" fill="#0f1620"/><text x="49" y="115" font-size="14" fill="#0f1620" text-anchor="end" dominant-baseline="middle">4,2 mm</text><text x="380" y="38" font-size="13" fill="#5b6470" text-anchor="middle" dominant-baseline="middle">Förstorat</text><g stroke="#0f1620" stroke-width="0.8"><rect x="320" y="50" width="30" height="30" fill="rgba(200,50,74,0.30)"/><rect x="350" y="50" width="30" height="30" fill="rgba(47,138,87,0.30)"/><rect x="380" y="50" width="30" height="30" fill="rgba(200,50,74,0.30)"/><rect x="410" y="50" width="30" height="30" fill="rgba(47,138,87,0.30)"/><rect x="320" y="80" width="30" height="30" fill="rgba(47,138,87,0.30)"/><rect x="350" y="80" width="30" height="30" fill="rgba(44,111,179,0.30)"/><rect x="380" y="80" width="30" height="30" fill="rgba(47,138,87,0.30)"/><rect x="410" y="80" width="30" height="30" fill="rgba(44,111,179,0.30)"/><rect x="320" y="110" width="30" height="30" fill="rgba(200,50,74,0.30)"/><rect x="350" y="110" width="30" height="30" fill="rgba(47,138,87,0.30)"/><rect x="380" y="110" width="30" height="30" fill="rgba(200,50,74,0.30)"/><rect x="410" y="110" width="30" height="30" fill="rgba(47,138,87,0.30)"/><rect x="320" y="140" width="30" height="30" fill="rgba(47,138,87,0.30)"/><rect x="350" y="140" width="30" height="30" fill="rgba(44,111,179,0.30)"/><rect x="380" y="140" width="30" height="30" fill="rgba(47,138,87,0.30)"/><rect x="410" y="140" width="30" height="30" fill="rgba(44,111,179,0.30)"/></g><rect x="320" y="50" width="120" height="120" fill="none" stroke="#0f1620" stroke-width="1.6"/><line x1="320" y1="174" x2="320" y2="192" stroke="#5b6470" stroke-width="1"/><line x1="350" y1="174" x2="350" y2="192" stroke="#5b6470" stroke-width="1"/><line x1="327" y1="186" x2="343" y2="186" stroke="#0f1620" stroke-width="1.2"/><polygon points="320,186 327,183 327,189" fill="#0f1620"/><polygon points="350,186 343,183 343,189" fill="#0f1620"/><text x="335" y="204" font-size="14" fill="#0f1620" text-anchor="middle" dominant-baseline="middle">1,4 μm</text></svg>`,
+            answer: { value: 1.2e7, unit: '', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 2.0e-12, unit: 'm²', etikett: 'area per pixel' },
+                { del: 'b', value: 1.2e7, unit: 'pixlar', etikett: 'antal pixlar' },
+            ],
+            solution: `Prefixet μ (mikro) betyder $10^{-6}$ och prefixet m (milli) betyder $10^{-3}$. Vi skriver alla längder i meter.
+
+$$
+\\left[ \\begin{array}{l}
+d = 1{,}4\\ \\text{μm} = 1{,}4 \\cdot 10^{-6}\\ \\mathrm{m} \\\\
+b = 5{,}6\\ \\mathrm{mm} = 5{,}6 \\cdot 10^{-3}\\ \\mathrm{m} \\\\
+h = 4{,}2\\ \\mathrm{mm} = 4{,}2 \\cdot 10^{-3}\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+**a)** En pixel är en kvadrat, så dess area är sidan gånger sidan. Både talet och tiopotensen ska kvadreras:
+
+$$
+A_\\text{pixel} = d \\cdot d = (1{,}4 \\cdot 10^{-6}\\ \\mathrm{m})^{2} = 1{,}96 \\cdot 10^{-12}\\ \\mathrm{m^2}
+$$
+
+Sidan har två värdesiffror, så arean avrundas till två värdesiffror.
+
+**Svar:** $2{,}0 \\cdot 10^{-12}\\ \\mathrm{m^2}$
+
+**b)** Sensorns area är bredden gånger höjden:
+
+$$
+A_\\text{sensor} = b \\cdot h = 5{,}6 \\cdot 10^{-3} \\cdot 4{,}2 \\cdot 10^{-3} = 2{,}352 \\cdot 10^{-5}\\ \\mathrm{m^2}
+$$
+
+Antalet pixlar är sensorns area delad med en pixels area. Vi använder det oavrundade värdet från a):
+
+$$
+N = \\dfrac{A_\\text{sensor}}{A_\\text{pixel}} = \\dfrac{2{,}352 \\cdot 10^{-5}}{1{,}96 \\cdot 10^{-12}} = 1{,}2 \\cdot 10^{7}
+$$
+
+Alla givna mätvärden har två värdesiffror, så svaret får två värdesiffror. $1{,}2 \\cdot 10^{7}$ är 12 miljoner pixlar, vilket stämmer med vad mobilkameror brukar ha (12 megapixlar).
+
+**Svar:** $1{,}2 \\cdot 10^{7}$ pixlar`,
+        },
+        {
+            level: 2,
+            question: `En ljussignal färdas genom en optisk fiber med farten $2{,}0 \\cdot 10^{8}\\ \\mathrm{m/s}$. Hur lång tid tar det för signalen att passera en 48 cm lång fiber? Ange svaret i ns (nanosekunder).`,
+            answer: { value: 2.4, unit: 'ns', tol: 0.02 },
+            solution: `Signalen har konstant fart, så farten är sträckan delad med tiden. Vi löser ut tiden:
+
+$$
+v = \\dfrac{s}{t} \\quad\\Leftrightarrow\\quad t = \\dfrac{s}{v}
+$$
+
+Sträckan skrivs i SI-enheten meter:
+
+$$
+\\left[ \\begin{array}{l}
+s = 48\\ \\mathrm{cm} = 0{,}48\\ \\mathrm{m} \\\\
+v = 2{,}0 \\cdot 10^{8}\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$
+t = \\dfrac{0{,}48\\ \\mathrm{m}}{2{,}0 \\cdot 10^{8}\\ \\mathrm{m/s}} = 2{,}4 \\cdot 10^{-9}\\ \\mathrm{s}
+$$
+
+Prefixet n (nano) betyder $10^{-9}$, så vi byter tiopotensen mot prefixet:
+
+$$
+t = 2{,}4 \\cdot 10^{-9}\\ \\mathrm{s} = 2{,}4\\ \\mathrm{ns}
+$$
+
+Båda mätvärdena har två värdesiffror, och svaret har två värdesiffror.
+
+**Svar:** 2,4 ns`,
+        },
+        {
+            level: 2,
+            question: `En trappa har 18 lika höga steg. En elev mäter höjden på fyra av stegen med en tumstock och får värdena i tabellen.
+
+| Steg | 1 | 2 | 3 | 4 |
+| --- | --- | --- | --- | --- |
+| Höjd (cm) | 17,2 | 17,6 | 16,9 | 17,4 |
+
+Använd medelvärdet av mätningarna för att bestämma trappans totala höjd. Ange svaret i meter med korrekt antal värdesiffror.`,
+            answer: { value: 3.11, unit: 'm', tol: 0.01 },
+            solution: `Vi räknar först ut medelvärdet av de fyra mätningarna. Summan:
+
+$$
+17{,}2 + 17{,}6 + 16{,}9 + 17{,}4 = 69{,}1\\ \\mathrm{cm}
+$$
+
+Alla fyra värdena har en decimal, så summan har också en decimal och tre värdesiffror. Medelvärdet är summan delad med antalet mätningar:
+
+$$
+h_\\text{steg} = \\dfrac{69{,}1}{4} = 17{,}275\\ \\mathrm{cm}
+$$
+
+Talet 4 är ett **exakt** antal och påverkar inte antalet värdesiffror, så medelvärdet har tre värdesiffror. Vi avrundar ändå inte här, utan först i sista steget.
+
+Trappan har 18 steg, och 18 är också ett exakt antal:
+
+$$
+h = 18 \\cdot 17{,}275 = 310{,}95\\ \\mathrm{cm} = 3{,}1095\\ \\mathrm{m}
+$$
+
+Svaret ska ha tre värdesiffror, som medelvärdet:
+
+$$
+h \\approx 3{,}11\\ \\mathrm{m}
+$$
+
+Ett trappsteg är knappt två decimeter högt, och 18 steg motsvarar ungefär en våningshöjd. Svaret är rimligt.
+
+**Svar:** 3,11 m`,
+        },
+        {
+            level: 3,
+            question: `Luftmotståndet på en cyklist kan beskrivas med sambandet $F = k \\cdot v^{2}$, där *F* är kraften i newton och *v* är farten i m/s. Det gäller att $1\\ \\mathrm{N} = 1\\ \\mathrm{kg \\cdot m/s^2}$.<br>a) Bestäm enheten för konstanten *k*, uttryckt i SI-grundenheter.<br>b) Konstanten kan i sin tur skrivas $k = \\dfrac{C \\cdot \\rho \\cdot A}{2}$, där *ρ* är luftens densitet i kg/m³, *A* är cyklistens tvärsnittsarea och *C* är ett tal utan enhet. Visa att detta uttryck ger samma enhet som du fick i a).`,
+            solution: `**a)** Vi löser ut *k* ur sambandet:
+
+$$
+F = k \\cdot v^{2} \\quad\\Leftrightarrow\\quad k = \\dfrac{F}{v^{2}}
+$$
+
+Enheten för *k* får vi genom att sätta in enheterna för *F* och *v*. Hakparenteserna betyder "enheten för":
+
+$$
+[k] = \\dfrac{[F]}{[v]^{2}} = \\dfrac{\\mathrm{kg \\cdot m/s^2}}{(\\mathrm{m/s})^{2}} = \\dfrac{\\mathrm{kg \\cdot m/s^2}}{\\mathrm{m^2/s^2}}
+$$
+
+Faktorn $\\mathrm{s^2}$ finns både i täljaren och nämnaren och tar ut sig. Av metrarna blir en kvar i nämnaren:
+
+$$
+[k] = \\dfrac{\\mathrm{kg \\cdot m}}{\\mathrm{m^2}} = \\mathrm{kg/m}
+$$
+
+**Svar:** kg/m
+
+**b)** Talet *C* och talet 2 saknar enhet. Enheten för uttrycket bestäms därför av *ρ* och *A*. Densiteten har enheten kg/m³, och en area har enheten m²:
+
+$$
+\\left[\\dfrac{C \\cdot \\rho \\cdot A}{2}\\right] = [\\rho] \\cdot [A] = \\dfrac{\\mathrm{kg}}{\\mathrm{m^3}} \\cdot \\mathrm{m^2} = \\dfrac{\\mathrm{kg}}{\\mathrm{m}} = \\mathrm{kg/m}
+$$
+
+Det är samma enhet som i a). Uttrycket för *k* är alltså möjligt ur enhetssynpunkt. En sådan kontroll kan avslöja ett felaktigt samband, men den kan aldrig visa att sambandet är rätt: talet $\\dfrac{C}{2}$ har ingen enhet och syns inte i enhetsanalysen.`,
+        },
+        {
+            level: 3,
+            question: `En pendel består av en liten tyngd i ett snöre med längden *l*. En elev antar att periodtiden *T* (tiden för en hel svängning fram och tillbaka) bara beror på snörets längd *l* (i m) och tyngdfaktorn *g* (i m/s²), enligt sambandet $T = C \\cdot l^{x} \\cdot g^{y}$, där *C* är ett tal utan enhet.<br>a) Använd enhetsanalys för att bestämma exponenterna *x* och *y*.<br>b) En pendel med längden $1{,}00\\ \\mathrm{m}$ har periodtiden $2{,}01\\ \\mathrm{s}$. Bestäm periodtiden för en pendel med längden $4{,}00\\ \\mathrm{m}$ på samma plats, utan att bestämma *C*. Ange svaret i sekunder.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="238" height="238" style="max-width:100%;height:auto;display:block;margin:16px auto;font-family:Poppins,sans-serif"><g stroke="#0f1620" stroke-width="1"><line x1="54" y1="20" x2="46" y2="12"/><line x1="66" y1="20" x2="58" y2="12"/><line x1="78" y1="20" x2="70" y2="12"/><line x1="90" y1="20" x2="82" y2="12"/><line x1="102" y1="20" x2="94" y2="12"/><line x1="114" y1="20" x2="106" y2="12"/><line x1="126" y1="20" x2="118" y2="12"/><line x1="138" y1="20" x2="130" y2="12"/><line x1="150" y1="20" x2="142" y2="12"/></g><line x1="44" y1="20" x2="156" y2="20" stroke="#0f1620" stroke-width="2"/><path d="M 48.7 161.0 A 150 150 0 0 0 151.3 161.0" fill="none" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><line x1="100" y1="20" x2="151.3" y2="161.0" stroke="#0f1620" stroke-width="1.4"/><circle cx="100" cy="20" r="2.6" fill="#0f1620"/><circle cx="151.3" cy="161.0" r="10" fill="#5b6470" stroke="#0f1620" stroke-width="1.4"/><line x1="96.2" y1="21.4" x2="79.3" y2="27.5" stroke="#5b6470" stroke-width="1"/><line x1="141" y1="164.8" x2="130.6" y2="168.5" stroke="#5b6470" stroke-width="1"/><line x1="85.8" y1="33.7" x2="131.7" y2="159.6" stroke="#2a8c8c" stroke-width="1.4"/><polygon points="83.1,26.2 82.1,35 89.6,32.3" fill="#2a8c8c"/><polygon points="134.4,167.1 127.9,161 135.4,158.2" fill="#2a8c8c"/><text x="96" y="101" font-size="16" fill="#2a8c8c" text-anchor="middle" dominant-baseline="middle" font-style="italic">l</text></svg>`,
+            answer: { value: 4.02, unit: 's', tol: 0.01 },
+            delsvar: [
+                { del: 'a', value: 0.5, unit: '', etikett: '$x =$' },
+                { del: 'a', value: -0.5, unit: '', etikett: '$y =$' },
+                { del: 'b', value: 4.02, unit: 's', etikett: '$T =$' },
+            ],
+            solution: `**a)** Enheten i vänsterledet måste vara densamma som i högerledet. Talet *C* saknar enhet, så vi får
+
+$$
+\\mathrm{s} = \\mathrm{m}^{x} \\cdot \\left(\\dfrac{\\mathrm{m}}{\\mathrm{s^2}}\\right)^{y} = \\mathrm{m}^{x + y} \\cdot \\mathrm{s}^{-2y}
+$$
+
+Vänsterledet innehåller sekunder upphöjt till 1 och meter upphöjt till 0. Exponenterna för varje grundenhet måste stämma var för sig:
+
+$$
+\\left\\{ \\begin{array}{ll}
+\\text{meter:} & x + y = 0 \\\\
+\\text{sekund:} & -2y = 1
+\\end{array} \\right.
+$$
+
+Ur den andra ekvationen får vi
+
+$$
+y = -\\dfrac{1}{2} = -0{,}5
+$$
+
+Insättning i den första ekvationen, $x + y = 0$, ger
+
+$$
+x = -y = 0{,}5
+$$
+
+Sambandet blir alltså $T = C \\cdot l^{0{,}5} \\cdot g^{-0{,}5} = C \\cdot \\sqrt{\\dfrac{l}{g}}$.
+
+**Svar:** $x = 0{,}5$ och $y = -0{,}5$
+
+**b)** Vi skriver sambandet för de två pendlarna. Båda svänger på samma plats, så *g* är densamma:
+
+$$
+T_1 = C \\cdot \\sqrt{\\dfrac{l_1}{g}} \\qquad T_2 = C \\cdot \\sqrt{\\dfrac{l_2}{g}}
+$$
+
+Vi dividerar den andra ekvationen med den första. Både *C* och *g* tar då ut sig:
+
+$$
+\\dfrac{T_2}{T_1} = \\sqrt{\\dfrac{l_2}{l_1}} \\quad\\Leftrightarrow\\quad T_2 = T_1 \\cdot \\sqrt{\\dfrac{l_2}{l_1}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+T_1 = 2{,}01\\ \\mathrm{s} \\\\
+l_1 = 1{,}00\\ \\mathrm{m} \\\\
+l_2 = 4{,}00\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+T_2 = 2{,}01 \\cdot \\sqrt{\\dfrac{4{,}00}{1{,}00}} = 2{,}01 \\cdot 2 = 4{,}02\\ \\mathrm{s}
+$$
+
+Alla mätvärden har tre värdesiffror, och svaret har tre värdesiffror. En fyra gånger så lång pendel svänger alltså bara dubbelt så långsamt, eftersom periodtiden växer med roten ur längden.
+
+**Svar:** 4,02 s`,
+        },
+        {
+            level: 3,
+            question: `Uppskatta hur många gånger ett människohjärta slår under ett 80 år långt liv. Redovisa vilka antaganden du gör, och svara i grundpotensform med en lämplig noggrannhet. Vilket av dina antaganden påverkar svaret mest?`,
+            answer: { value: 3e9, unit: '', tol: 0.5 },
+            solution: `Vi behöver en hjärtfrekvens och livets längd i minuter.
+
+**Antaganden:** En vuxen människa i vila har en puls på cirka 70 slag per minut. Pulsen är högre vid ansträngning och hos barn, och lägre under sömn. Vi låter 70 slag per minut vara ett medelvärde över hela livet. Ett år har 365 dygn.
+
+Antalet minuter under ett år:
+
+$$
+60 \\cdot 24 \\cdot 365 = 525\\,600\\ \\mathrm{min}
+$$
+
+Antalet minuter under 80 år:
+
+$$
+80 \\cdot 525\\,600 = 42\\,048\\,000\\ \\mathrm{min}
+$$
+
+Antalet hjärtslag:
+
+$$
+N = 70 \\cdot 42\\,048\\,000 = 2\\,943\\,360\\,000
+$$
+
+Pulsen är bara känd ungefär, kanske på 10 till 20 slag per minut när. Att ange svaret med fler än en värdesiffra skulle påstå en noggrannhet vi inte har:
+
+$$
+N \\approx 3 \\cdot 10^{9}
+$$
+
+**Svar:** Cirka $3 \\cdot 10^{9}$ hjärtslag
+
+**Vilket antagande påverkar mest?** Livslängden 80 år är given, och antalet minuter per år är exakt. Det osäkra är medelpulsen. Antar man 60 slag per minut i stället för 70 blir svaret cirka $2{,}5 \\cdot 10^{9}$, och med 80 slag per minut cirka $3{,}4 \\cdot 10^{9}$. Svaret är alltså direkt proportionellt mot pulsen, och det är pulsen som avgör den första siffran. Storleksordningen, några miljarder slag, ändras däremot inte.`,
+        },
+        {
+            level: 3,
+            question: `En elev vill bestämma massan av en vattendroppe. Hon väger en tom bägare på en enkel våg och får 83,9 g. Sedan droppar hon 20 droppar i bägaren och väger den på en noggrannare våg, som visar 84,62 g.<br>a) Bestäm massan av en droppe med korrekt antal värdesiffror. Ange svaret i gram.<br>b) Förklara varför svaret får så få värdesiffror fast båda vägningarna har tre eller fyra värdesiffror, och föreslå två ändringar av försöket som ger ett noggrannare resultat.`,
+            answer: { value: 0.04, unit: 'g', tol: 0.15 },
+            delsvar: [
+                { del: 'a', value: 0.04, unit: 'g', etikett: 'massa per droppe' },
+                { del: 'b' },
+            ],
+            solution: `**a)** De 20 dropparnas massa är skillnaden mellan de två vägningarna:
+
+$$
+m_{20} = 84{,}62 - 83{,}9 = 0{,}72\\ \\mathrm{g}
+$$
+
+Vid subtraktion bestäms noggrannheten av värdet med minst antal **decimaler**. Värdet 83,9 g har en decimal, så skillnaden är bara säker på en decimal: cirka 0,7 g. Det är **en** värdesiffra.
+
+En droppes massa är den totala massan delad med antalet droppar. Talet 20 är ett exakt antal och påverkar inte antalet värdesiffror. Vi räknar med det oavrundade värdet:
+
+$$
+m = \\dfrac{m_{20}}{20} = \\dfrac{0{,}72}{20} = 0{,}036\\ \\mathrm{g}
+$$
+
+Svaret får en värdesiffra:
+
+$$
+m \\approx 0{,}04\\ \\mathrm{g}
+$$
+
+**Svar:** 0,04 g
+
+**b)** Vägningarna har tre respektive fyra värdesiffror, men de är nästan lika stora. När två nästan lika stora tal subtraheras försvinner de första siffrorna, som är lika i båda talen, och kvar blir bara skillnaden, 0,7 g. Den tomma bägarens massa är bara känd på en tiondels gram när, så skillnaden är också bara säker på en tiondels gram. Felet i en tiondel är stort jämfört med 0,7 g. Vägningen på den noggranna vågen hjälper inte när den andra vägningen är grov.
+
+Två sätt att göra resultatet noggrannare:
+
+- **Väg den tomma bägaren på den noggranna vågen också.** Då har båda vägningarna två decimaler, och skillnaden får två värdesiffror.
+- **Droppa fler droppar**, till exempel 200 i stället för 20. Massan som ska bestämmas blir då tio gånger större, medan vågens osäkerhet är lika stor, så den relativa osäkerheten blir en tiondel så stor.
+
+**Svar:** Subtraktionen av två nästan lika stora tal lämnar bara en säker siffra. Väg båda gångerna på den noggranna vågen och droppa fler droppar.`,
+        },
+        {
+            level: 3,
+            question: `En guldkub med sidan 1,0 cm delas i tanken upp i lika stora små kuber. Alla de små kuberna läggs sedan i en rak rad, kant i kant. Hur liten måste de små kubernas sida vara för att raden ska räcka ända till månen, $3{,}84 \\cdot 10^{8}\\ \\mathrm{m}$ bort? Ange svaret med lämpligt prefix.`,
+            answer: { value: 51, unit: 'nm', tol: 0.03 },
+            solution: `Vi kallar den stora kubens sida *L*, de små kubernas sida *d* och avståndet till månen *R*. Vi tar först fram radens längd generellt, uttryckt i *L* och *d*.
+
+Längs en kant av den stora kuben ryms $\\dfrac{L}{d}$ små kuber. Kuben har tre dimensioner, så det totala antalet små kuber är
+
+$$
+N = \\dfrac{L}{d} \\cdot \\dfrac{L}{d} \\cdot \\dfrac{L}{d} = \\dfrac{L^{3}}{d^{3}}
+$$
+
+Varje liten kub bidrar med sin sida *d* till radens längd:
+
+$$
+L_\\text{rad} = N \\cdot d = \\dfrac{L^{3}}{d^{3}} \\cdot d = \\dfrac{L^{3}}{d^{2}}
+$$
+
+Raden blir alltså längre ju mindre bitarna är: halveras sidan *d* blir raden fyra gånger så lång. Raden ska vara lika lång som avståndet till månen:
+
+$$
+\\dfrac{L^{3}}{d^{2}} = R
+$$
+
+Vi multiplicerar båda leden med $d^{2}$ och dividerar med *R*:
+
+$$
+d^{2} = \\dfrac{L^{3}}{R}
+$$
+
+Sidan *d* är positiv, så vi drar den positiva roten ur båda leden:
+
+$$
+d = \\sqrt{\\dfrac{L^{3}}{R}}
+$$
+
+Vi skriver längderna i meter. Prefixet c (centi) betyder $10^{-2}$:
+
+$$
+\\left[ \\begin{array}{l}
+L = 1{,}0\\ \\mathrm{cm} = 1{,}0 \\cdot 10^{-2}\\ \\mathrm{m} \\\\
+R = 3{,}84 \\cdot 10^{8}\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+d = \\sqrt{\\dfrac{(1{,}0 \\cdot 10^{-2})^{3}}{3{,}84 \\cdot 10^{8}}}\\ \\mathrm{m} = \\sqrt{\\dfrac{1{,}0 \\cdot 10^{-6}}{3{,}84 \\cdot 10^{8}}}\\ \\mathrm{m} = 5{,}103\\ldots \\cdot 10^{-8}\\ \\mathrm{m}
+$$
+
+Kubens sida har två värdesiffror, så svaret avrundas till två värdesiffror. Vi skriver talet så att tiopotensen blir $10^{-9}$, som har prefixet n (nano):
+
+$$
+d \\approx 5{,}1 \\cdot 10^{-8}\\ \\mathrm{m} = 51 \\cdot 10^{-9}\\ \\mathrm{m} = 51\\ \\mathrm{nm}
+$$
+
+En guldatom är ungefär 0,3 nm bred, så varje liten kub skulle fortfarande vara drygt hundra atomer bred. Uppdelningen är alltså tänkbar, och svaret är rimligt.
+
+**Svar:** Cirka 51 nm`,
+        },
+        {
+            level: 3,
+            question: `Effekten *P* som en vindsnurra kan ta ut ur vinden beror på luftens densitet *ρ* (i kg/m³), den area *A* som rotorbladen sveper över och vindens fart *v* (i m/s). Sambandet kan skrivas $P = C \\cdot \\rho^{x} \\cdot A^{y} \\cdot v^{z}$, där *C* är ett tal utan enhet. Effekt mäts i watt, och det gäller att $1\\ \\mathrm{W} = 1\\ \\mathrm{J/s}$, $1\\ \\mathrm{J} = 1\\ \\mathrm{N \\cdot m}$ och $1\\ \\mathrm{N} = 1\\ \\mathrm{kg \\cdot m/s^2}$.<br>Ett företag ersätter en vindsnurra med en ny vars rotorblad är 20 % längre, och ställer samtidigt upp den på en plats där vinden har 20 % lägre fart. Ökar eller minskar effekten, och med hur många procent?`,
+            answer: { value: 26, unit: '%', tol: 0.05 },
+            solution: `Vi bestämmer först exponenterna med enhetsanalys, och undersöker sedan hur effekten ändras.
+
+**Effektens enhet i grundenheter.** Vi sätter in sambanden i tur och ordning:
+
+$$
+\\mathrm{W} = \\dfrac{\\mathrm{J}}{\\mathrm{s}} = \\dfrac{\\mathrm{N \\cdot m}}{\\mathrm{s}} = \\dfrac{\\mathrm{kg \\cdot m/s^2} \\cdot \\mathrm{m}}{\\mathrm{s}} = \\mathrm{kg \\cdot m^{2} \\cdot s^{-3}}
+$$
+
+**Högerledets enhet.** Talet *C* saknar enhet. Densiteten har enheten $\\mathrm{kg \\cdot m^{-3}}$, arean $\\mathrm{m^{2}}$ och farten $\\mathrm{m \\cdot s^{-1}}$:
+
+$$
+(\\mathrm{kg \\cdot m^{-3}})^{x} \\cdot (\\mathrm{m^{2}})^{y} \\cdot (\\mathrm{m \\cdot s^{-1}})^{z} = \\mathrm{kg}^{x} \\cdot \\mathrm{m}^{-3x + 2y + z} \\cdot \\mathrm{s}^{-z}
+$$
+
+Exponenten för varje grundenhet måste vara densamma i båda leden:
+
+$$
+\\left\\{ \\begin{array}{ll}
+\\text{kilogram:} & x = 1 \\\\
+\\text{sekund:} & -z = -3 \\\\
+\\text{meter:} & -3x + 2y + z = 2
+\\end{array} \\right.
+$$
+
+De två första ekvationerna ger direkt $x = 1$ och $z = 3$. Insättning av dessa i den tredje ekvationen, $-3x + 2y + z = 2$, ger
+
+$$
+-3 + 2y + 3 = 2
+$$
+
+$$
+2y = 2
+$$
+
+$$
+y = 1
+$$
+
+Sambandet är alltså
+
+$$
+P = C \\cdot \\rho \\cdot A \\cdot v^{3}
+$$
+
+**Hur arean beror på bladens längd.** Rotorbladen sveper över en cirkel vars radie är bladets längd *l* (vi bortser från navet i mitten). Arean är därför $A = \\pi \\cdot l^{2}$, och effekten blir
+
+$$
+P = C \\cdot \\rho \\cdot \\pi \\cdot l^{2} \\cdot v^{3}
+$$
+
+**Jämförelse.** Vi kallar den gamla vindsnurran 1 och den nya 2. Luften har samma densitet på båda platserna. Vi dividerar uttrycken med varandra, och då tar *C*, *ρ* och *π* ut sig:
+
+$$
+\\dfrac{P_2}{P_1} = \\dfrac{C \\cdot \\rho \\cdot \\pi \\cdot l_2^{2} \\cdot v_2^{3}}{C \\cdot \\rho \\cdot \\pi \\cdot l_1^{2} \\cdot v_1^{3}} = \\left(\\dfrac{l_2}{l_1}\\right)^{2} \\cdot \\left(\\dfrac{v_2}{v_1}\\right)^{3}
+$$
+
+Bladen är 20 % längre, så $l_2 = 1{,}20 \\cdot l_1$. Farten är 20 % lägre, så $v_2 = 0{,}80 \\cdot v_1$:
+
+$$
+\\dfrac{P_2}{P_1} = 1{,}20^{2} \\cdot 0{,}80^{3} = 1{,}44 \\cdot 0{,}512 = 0{,}737\\ldots
+$$
+
+Den nya vindsnurran ger alltså cirka 74 % av den gamla effekten, en minskning med $100\\ \\% - 74\\ \\% = 26\\ \\%$.
+
+Att effekten minskar fast bladen blivit lika mycket längre som vinden blivit svagare är rimligt: arean beror på längden i kvadrat, men effekten beror på farten i kubik, så farten väger tyngst.
+
+**Svar:** Effekten minskar med cirka 26 %.`,
+        },
+        {
+            level: 3,
+            question: `Ett mätvärde kan behöva skrivas om när enheten byts från meter till centimeter.<br>a) Visa att om en storhet har enheten $\\mathrm{m}^{n}$ (där *n* är ett heltal, positivt eller negativt) så blir mätetalet $10^{2n}$ gånger större när storheten i stället anges i $\\mathrm{cm}^{n}$.<br>b) Kvicksilver har densiteten 13 600 kg/m³ (tre värdesiffror). Använd resultatet i a) för att skriva densiteten i g/cm³.`,
+            answer: { value: 13.6, unit: 'g/cm³', tol: 0.01 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 13.6, unit: 'g/cm³', etikett: '$\\rho =$' },
+            ],
+            solution: `**a)** En meter är hundra centimeter:
+
+$$
+1\\ \\mathrm{m} = 100\\ \\mathrm{cm} = 10^{2}\\ \\mathrm{cm}
+$$
+
+Vi upphöjer båda leden till *n*. Både talet och enheten ska upphöjas:
+
+$$
+1\\ \\mathrm{m}^{n} = (10^{2}\\ \\mathrm{cm})^{n} = 10^{2n}\\ \\mathrm{cm}^{n}
+$$
+
+En storhet med mätetalet *x* i enheten $\\mathrm{m}^{n}$ blir då
+
+$$
+x\\ \\mathrm{m}^{n} = x \\cdot 10^{2n}\\ \\mathrm{cm}^{n}
+$$
+
+Mätetalet multipliceras alltså med $10^{2n}$. Räkningen gäller för alla heltal *n*, eftersom potenslagen $(a \\cdot b)^{n} = a^{n} \\cdot b^{n}$ gäller även för negativa exponenter. Exempel: en area ($n = 2$) får ett 10 000 gånger större mätetal, och en volym ($n = 3$) ett miljon gånger större. För $n = -3$, som i en densitet, blir faktorn $10^{-6}$, och mätetalet blir alltså mindre.
+
+**b)** Enheten kg/m³ är $\\mathrm{kg} \\cdot \\mathrm{m}^{-3}$, så här är $n = -3$. Enligt a) är
+
+$$
+1\\ \\mathrm{m}^{-3} = 10^{2 \\cdot (-3)}\\ \\mathrm{cm}^{-3} = 10^{-6}\\ \\mathrm{cm}^{-3}
+$$
+
+Dessutom är $1\\ \\mathrm{kg} = 10^{3}\\ \\mathrm{g}$. Vi byter båda enheterna:
+
+$$
+\\rho = 13\\,600\\ \\mathrm{kg} \\cdot \\mathrm{m}^{-3} = 13\\,600 \\cdot 10^{3}\\ \\mathrm{g} \\cdot 10^{-6}\\ \\mathrm{cm}^{-3} = 13\\,600 \\cdot 10^{-3}\\ \\mathrm{g/cm^3} = 13{,}6\\ \\mathrm{g/cm^3}
+$$
+
+Vatten har densiteten 1 000 kg/m³, alltså 1,00 g/cm³, och kvicksilver har ungefär 14 gånger så stor densitet som vatten. Svaret är rimligt.
+
+**Svar:** 13,6 g/cm³`,
         },
     ],
 
@@ -3613,7 +5270,7 @@ $$
             solution: `En **vektor** är en storhet som har *både storlek och riktning*. En **skalär** har bara *storlek*.
 
 - Massa, tid och energi har bara storlek (skalärer).
-- Hastighet har både storlek (m/s) och riktning (åt vilket håll föremålet rör sig) — alltså en vektor.
+- Hastighet har både storlek (m/s) och riktning (åt vilket håll föremålet rör sig). Den är alltså en vektor.
 
 **Svar:** Hastighet.
 
@@ -3623,7 +5280,7 @@ $$
             level: 1,
             question: `Anna joggar 600 m rakt österut och vänder sedan tillbaka 200 m åt väster. Vilken är hennes **förflyttning** (i meter) från startpunkten? Räkna österut som positiv riktning.`,
             answer: { value: 400, unit: 'm', tol: 0.01 },
-            solution: `**Förflyttning** är en vektor — den anger nettoförändringen i position, *med tecken* för riktningen.
+            solution: `**Förflyttning** är en vektor. Den anger nettoförändringen i position, *med tecken* för riktningen.
 
 Mätvärden (öster = positiv):
 $$
@@ -3709,7 +5366,7 @@ $$
 v \\approx 257\\ \\mathrm{km/h}
 $$
 
-**Svar:** Den resulterande farten är ca 257 km/h. Notera att riktningen avviker något åt öster — planet "driver" alltså ur sin kurs om piloten inte korrigerar.`,
+**Svar:** Den resulterande farten är ca 257 km/h. Notera att riktningen avviker något åt öster: planet "driver" alltså ur sin kurs om piloten inte korrigerar.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
@@ -3755,7 +5412,675 @@ $$
 
 **Svar:** a) Ca 37° motströms (öster om rakt nord). b) 67 s.
 
-**Generell slutsats:** Detta är ett *kompensationsproblem* — om simmaren istället simmade rakt mot norra stranden skulle hon driva med strömmen och hamna nedströms. Tiden för rakt-över-simning är då kortare ($t = 80/1{,}5 \\approx 53$ s) men resultatet är inte rakt över.`,
+**Generell slutsats:** Detta är ett *kompensationsproblem*: om simmaren istället simmade rakt mot norra stranden skulle hon driva med strömmen och hamna nedströms. Tiden för rakt-över-simning är då kortare ($t = 80/1{,}5 \\approx 53$ s) men resultatet är inte rakt över.`,
+        },
+        {
+            level: 1,
+            question: `Ett löparspår är $400\\ \\mathrm{m}$ långt. Lisa springer exakt ett varv och stannar på samma plats som hon startade. Vilket påstående stämmer om hennes sträcka $s$ och hennes förflyttning $\\Delta s$?`,
+            choices: [
+                `$s = 400\\ \\mathrm{m}$ och $\\Delta s = 400\\ \\mathrm{m}$`,
+                `$s = 0$ och $\\Delta s = 400\\ \\mathrm{m}$`,
+                `$s = 0$ och $\\Delta s = 0$`,
+                `$s = 400\\ \\mathrm{m}$ och $\\Delta s = 0$`,
+            ],
+            correct: 3,
+            solution: `**Sträckan** är hela väglängden som Lisa har sprungit. Ett varv på spåret är $400\\ \\mathrm{m}$, så $s = 400\\ \\mathrm{m}$.
+
+**Förflyttningen** är vektorn från startpunkten till slutpunkten. Lisa slutar på samma plats som hon började, så vektorn har ingen längd: $\\Delta s = 0$.
+
+**Svar:** $s = 400\\ \\mathrm{m}$ och $\\Delta s = 0$.
+
+Sträckan kan aldrig vara mindre än förflyttningens storlek, men förflyttningen kan vara mycket mindre än sträckan, ända ned till noll.`,
+        },
+        {
+            level: 1,
+            question: `En robotdammsugare kör först $2{,}4\\ \\mathrm{m}$ rakt österut. Sedan svänger den och kör $1{,}0\\ \\mathrm{m}$ rakt norrut, se figuren.<br>a) Hur lång sträcka har robotdammsugaren kört?<br>b) Hur stor är robotdammsugarens förflyttning?<br>Ange svaren i meter.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="10 10 310 160" style="max-width:400px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif" role="img" aria-label="Robotdammsugarens väg sedd uppifrån: 2,4 m österut och sedan 1,0 m norrut."><rect x="20" y="20" width="290" height="140" fill="rgba(160,120,70,0.07)" stroke="#0f1620" stroke-width="2"/><line x1="50" y1="21" x2="50" y2="159" stroke="rgba(160,120,70,0.18)" stroke-width="1"/><line x1="80" y1="21" x2="80" y2="159" stroke="rgba(160,120,70,0.18)" stroke-width="1"/><line x1="110" y1="21" x2="110" y2="159" stroke="rgba(160,120,70,0.18)" stroke-width="1"/><line x1="140" y1="21" x2="140" y2="159" stroke="rgba(160,120,70,0.18)" stroke-width="1"/><line x1="170" y1="21" x2="170" y2="159" stroke="rgba(160,120,70,0.18)" stroke-width="1"/><line x1="200" y1="21" x2="200" y2="159" stroke="rgba(160,120,70,0.18)" stroke-width="1"/><line x1="230" y1="21" x2="230" y2="159" stroke="rgba(160,120,70,0.18)" stroke-width="1"/><line x1="260" y1="21" x2="260" y2="159" stroke="rgba(160,120,70,0.18)" stroke-width="1"/><line x1="290" y1="21" x2="290" y2="159" stroke="rgba(160,120,70,0.18)" stroke-width="1"/><line x1="56" y1="128" x2="238" y2="128" stroke="#c8324a" stroke-width="2.6" stroke-linecap="butt"/><polygon points="238,133 248,128 238,123" fill="#c8324a"/><line x1="248" y1="128" x2="248" y2="58" stroke="#c8324a" stroke-width="2.6" stroke-linecap="butt"/><polygon points="253,58 248,48 243,58" fill="#c8324a"/><circle cx="56" cy="128" r="3.4" fill="#0f1620"/><circle cx="248" cy="48" r="3.4" fill="#0f1620"/><text x="152" y="148" text-anchor="middle" font-size="14" fill="#c8324a">2,4 m</text><text x="258" y="93" text-anchor="start" font-size="14" fill="#c8324a">1,0 m</text><text x="56" y="114" text-anchor="middle" font-size="13" fill="#0f1620">Start</text><text x="236" y="44" text-anchor="end" font-size="13" fill="#0f1620">Slut</text><line x1="292" y1="152" x2="292" y2="126" stroke="#0f1620" stroke-width="1.8" stroke-linecap="butt"/><polygon points="296,126 292,118 288,126" fill="#0f1620"/><text x="283" y="142" text-anchor="end" font-size="12" fill="#0f1620">N</text></svg>`,
+            answer: { value: 2.6, unit: 'm' },
+            delsvar: [
+                { del: 'a', value: 3.4, unit: 'm', etikett: '$s =$' },
+                { del: 'b', value: 2.6, unit: 'm', etikett: '$\\Delta s =$' },
+            ],
+            solution: `**a)** Sträckan är hela väglängden, så de två delsträckorna läggs ihop utan hänsyn till riktningen.
+
+$$
+s = 2{,}4 + 1{,}0 = 3{,}4\\ \\mathrm{m}
+$$
+
+**Svar:** 3,4 m
+
+**b)** Förflyttningen är vektorn från startpunkten direkt till slutpunkten. De två delförflyttningarna är vinkelräta mot varandra, så förflyttningen blir hypotenusan i en rätvinklig triangel med kateterna $2{,}4\\ \\mathrm{m}$ och $1{,}0\\ \\mathrm{m}$. Pythagoras sats ger dess storlek.
+
+$$
+\\left[ \\begin{array}{l}
+\\Delta s_1 = 2{,}4\\ \\mathrm{m} \\\\
+\\Delta s_2 = 1{,}0\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+\\Delta s = \\sqrt{\\Delta s_1^{2} + \\Delta s_2^{2}} = \\sqrt{2{,}4^{2} + 1{,}0^{2}} = \\sqrt{5{,}76 + 1{,}00} = \\sqrt{6{,}76} = 2{,}6\\ \\mathrm{m}
+$$
+
+**Svar:** 2,6 m, snett åt nordost men mest österut
+
+Förflyttningen är mindre än sträckan, som den ska vara när robotdammsugaren har svängt.`,
+        },
+        {
+            level: 1,
+            question: `En hiss åker först $18\\ \\mathrm{m}$ uppåt och sedan $27\\ \\mathrm{m}$ nedåt. Räkna uppåt som positiv riktning.<br>a) Bestäm hissens förflyttning.<br>b) Bestäm den sträcka hissen har åkt.<br>Ange svaren i meter.`,
+            answer: { value: 45, unit: 'm' },
+            delsvar: [
+                { del: 'a', value: -9, unit: 'm', etikett: '$\\Delta s =$' },
+                { del: 'b', value: 45, unit: 'm', etikett: '$s =$' },
+            ],
+            solution: `**a)** Båda förflyttningarna ligger längs samma lodräta linje. Uppåt är positivt, så förflyttningen nedåt får ett minustecken.
+
+$$
+\\left[ \\begin{array}{l}
+\\Delta s_1 = 18\\ \\mathrm{m} \\\\
+\\Delta s_2 = -27\\ \\mathrm{m} \\quad (\\text{nedåt})
+\\end{array} \\right]
+$$
+
+$$
+\\Delta s = \\Delta s_1 + \\Delta s_2 = 18 + (-27) = -9\\ \\mathrm{m}
+$$
+
+**Svar:** $\\Delta s = -9\\ \\mathrm{m}$, det vill säga 9 m nedåt från startläget.
+
+**b)** Sträckan är en skalär och räknas utan tecken, så delsträckorna läggs ihop.
+
+$$
+s = 18 + 27 = 45\\ \\mathrm{m}
+$$
+
+**Svar:** 45 m`,
+        },
+        {
+            level: 1,
+            question: `En brevduva flyger hem till sitt duvslag, som ligger $12\\ \\mathrm{km}$ bort. Duvan flyger med farten $15\\ \\mathrm{m/s}$ relativt luften, men hela vägen blåser det motvind med farten $5{,}0\\ \\mathrm{m/s}$. Hur lång tid tar flygningen? Ange svaret i minuter.`,
+            answer: { value: 20, unit: 'min' },
+            solution: `Duvans hastighet relativt marken är summan av dess hastighet relativt luften och vindens hastighet. Vi räknar duvans flygriktning som positiv. Motvinden är riktad åt andra hållet och får då ett minustecken.
+
+$$
+v_\\text{tot} = v_1 + v_2
+$$
+
+$$
+\\left[ \\begin{array}{l}
+v_1 = 15\\ \\mathrm{m/s} \\quad (\\text{duvan relativt luften}) \\\\
+v_2 = -5{,}0\\ \\mathrm{m/s} \\quad (\\text{motvinden})
+\\end{array} \\right]
+$$
+
+$$
+v_\\text{tot} = 15 + (-5{,}0) = 10\\ \\mathrm{m/s}
+$$
+
+Med den farten flyger duvan sträckan $s = 12\\ \\mathrm{km} = 12\\,000\\ \\mathrm{m}$. Medelhastighet är sträcka delad med tid, och vi löser ut tiden.
+
+$$
+v_\\text{tot} = \\frac{s}{t} \\quad\\Leftrightarrow\\quad t = \\frac{s}{v_\\text{tot}} = \\frac{12\\,000}{10} = 1\\,200\\ \\mathrm{s}
+$$
+
+$$
+t = \\frac{1\\,200}{60}\\ \\mathrm{min} = 20\\ \\mathrm{min}
+$$
+
+**Svar:** 20 min
+
+I stiltje hade flygningen tagit $\\dfrac{12\\,000}{15} = 800\\ \\mathrm{s}$, alltså drygt 13 min. Motvinden gör att det tar längre tid, som väntat.`,
+        },
+        {
+            level: 2,
+            question: `En drönare ska leverera ett paket till en plats $2{,}4\\ \\mathrm{km}$ rakt norr om startplatsen. Den flyger med farten $12\\ \\mathrm{m/s}$ relativt luften och hela tiden med nosen rakt norrut. Det blåser från väster, så att luften rör sig österut med farten $5{,}0\\ \\mathrm{m/s}$.<br>a) Hur långt från leveransplatsen är drönaren när den har kommit lika långt norrut som platsen?<br>b) Därifrån flyger drönaren rakt västerut, mot vinden och med samma fart relativt luften, till leveransplatsen. Hur lång tid tar hela flygningen?<br>c) Batteriet räcker till $6{,}0\\ \\mathrm{min}$ flygning. Räcker det till flygningen? Motivera.<br>Ange svaret i a) i meter och svaret i b) i minuter.`,
+            answer: { value: 5.7, unit: 'min' },
+            delsvar: [
+                { del: 'a', value: 1000, unit: 'm', etikett: 'avstånd' },
+                { del: 'b', value: 5.7, unit: 'min', etikett: '$t =$' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Drönarens hastighet relativt marken är summan av två vinkelräta hastigheter: dess egen hastighet $v_1$ rakt norrut och vindens hastighet $v_2$ österut. Vinden för den inte norrut alls, så tiden att komma $s_1 = 2{,}4\\ \\mathrm{km}$ norrut avgörs bara av $v_1$. Medelhastighet är sträcka delad med tid:
+
+$$
+v_1 = \\frac{s_1}{t_1} \\quad\\Leftrightarrow\\quad t_1 = \\frac{s_1}{v_1}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+s_1 = 2{,}4\\ \\mathrm{km} = 2\\,400\\ \\mathrm{m} \\\\
+v_1 = 12\\ \\mathrm{m/s} \\\\
+v_2 = 5{,}0\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$
+t_1 = \\frac{2\\,400}{12} = 200\\ \\mathrm{s}
+$$
+
+Under samma tid för vinden drönaren österut sträckan $s_2$:
+
+$$
+v_2 = \\frac{s_2}{t_1} \\quad\\Leftrightarrow\\quad s_2 = v_2 \\cdot t_1 = 5{,}0 \\cdot 200 = 1\\,000\\ \\mathrm{m}
+$$
+
+Drönaren är då rakt öster om leveransplatsen.
+
+**Svar:** 1 000 m
+
+**b)** Nu ligger drönarens egen hastighet och vindens hastighet längs samma linje. Vi räknar västerut som positivt. Vinden är riktad österut och får ett minustecken:
+
+$$
+v_\\text{väst} = 12 + (-5{,}0) = 7{,}0\\ \\mathrm{m/s}
+$$
+
+Tiden för de $1\\,000\\ \\mathrm{m}$ tillbaka västerut:
+
+$$
+t_2 = \\frac{s_2}{v_\\text{väst}} = \\frac{1\\,000}{7{,}0} = 142{,}8\\ldots\\ \\mathrm{s}
+$$
+
+Hela flygningen:
+
+$$
+t = t_1 + t_2 = 200 + 142{,}8\\ldots = 342{,}8\\ldots\\ \\mathrm{s} = \\frac{342{,}8\\ldots}{60}\\ \\mathrm{min} = 5{,}71\\ldots\\ \\mathrm{min} \\approx 5{,}7\\ \\mathrm{min}
+$$
+
+**Svar:** 5,7 min
+
+**c)** Flygningen tar $5{,}7\\ \\mathrm{min}$ och batteriet räcker $6{,}0\\ \\mathrm{min}$, så det räcker, men marginalen är bara drygt $0{,}2\\ \\mathrm{min}$, ungefär 15 s. Blåser det lite mer räcker det inte.
+
+**Svar:** Ja, men med liten marginal.
+
+Hade drönaren i stället siktat snett mot vinden från början, så att den flugit rakt norrut över marken, hade resan blivit kortare. Att låta vinden föra den ur kurs och sedan flyga tillbaka mot vinden kostar mycket tid.`,
+        },
+        {
+            level: 2,
+            question: `Kartan visar en orienterares väg från start till mål. Hon springer rakt mellan kontrollerna, längs pilarna. Varje ruta på kartan har sidan $100\\ \\mathrm{m}$.<br>a) Hur lång sträcka springer hon från start till mål?<br>b) Hur stor är hennes förflyttning från start till mål?<br>Ange svaren i meter.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="14 14 384 346" style="max-width:470px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif" role="img" aria-label="Orienteringskarta med rutnät. Löparens väg från start till mål är ritad med pilar mellan kontrollerna."><rect x="30" y="42" width="324" height="288" fill="rgba(90,150,80,0.08)"/><line x1="30" y1="42" x2="30" y2="330" stroke="rgba(37,99,201,0.22)" stroke-width="1"/><line x1="66" y1="42" x2="66" y2="330" stroke="rgba(37,99,201,0.22)" stroke-width="1"/><line x1="102" y1="42" x2="102" y2="330" stroke="rgba(37,99,201,0.22)" stroke-width="1"/><line x1="138" y1="42" x2="138" y2="330" stroke="rgba(37,99,201,0.22)" stroke-width="1"/><line x1="174" y1="42" x2="174" y2="330" stroke="rgba(37,99,201,0.22)" stroke-width="1"/><line x1="210" y1="42" x2="210" y2="330" stroke="rgba(37,99,201,0.22)" stroke-width="1"/><line x1="246" y1="42" x2="246" y2="330" stroke="rgba(37,99,201,0.22)" stroke-width="1"/><line x1="282" y1="42" x2="282" y2="330" stroke="rgba(37,99,201,0.22)" stroke-width="1"/><line x1="318" y1="42" x2="318" y2="330" stroke="rgba(37,99,201,0.22)" stroke-width="1"/><line x1="354" y1="42" x2="354" y2="330" stroke="rgba(37,99,201,0.22)" stroke-width="1"/><line x1="30" y1="330" x2="354" y2="330" stroke="rgba(37,99,201,0.22)" stroke-width="1"/><line x1="30" y1="294" x2="354" y2="294" stroke="rgba(37,99,201,0.22)" stroke-width="1"/><line x1="30" y1="258" x2="354" y2="258" stroke="rgba(37,99,201,0.22)" stroke-width="1"/><line x1="30" y1="222" x2="354" y2="222" stroke="rgba(37,99,201,0.22)" stroke-width="1"/><line x1="30" y1="186" x2="354" y2="186" stroke="rgba(37,99,201,0.22)" stroke-width="1"/><line x1="30" y1="150" x2="354" y2="150" stroke="rgba(37,99,201,0.22)" stroke-width="1"/><line x1="30" y1="114" x2="354" y2="114" stroke="rgba(37,99,201,0.22)" stroke-width="1"/><line x1="30" y1="78" x2="354" y2="78" stroke="rgba(37,99,201,0.22)" stroke-width="1"/><line x1="30" y1="42" x2="354" y2="42" stroke="rgba(37,99,201,0.22)" stroke-width="1"/><line x1="75" y1="330" x2="299" y2="330" stroke="#c8324a" stroke-width="2.6" stroke-linecap="butt"/><polygon points="299,335 309,330 299,325" fill="#c8324a"/><line x1="318" y1="321" x2="318" y2="205" stroke="#c8324a" stroke-width="2.6" stroke-linecap="butt"/><polygon points="323,205 318,195 313,205" fill="#c8324a"/><line x1="309" y1="186" x2="301" y2="186" stroke="#c8324a" stroke-width="2.6" stroke-linecap="butt"/><polygon points="301,181 291,186 301,191" fill="#c8324a"/><line x1="282" y1="177" x2="282" y2="61" stroke="#c8324a" stroke-width="2.6" stroke-linecap="butt"/><polygon points="287,61 282,51 277,61" fill="#c8324a"/><circle cx="318" cy="330" r="7" fill="none" stroke="#a3238e" stroke-width="2"/><circle cx="318" cy="186" r="7" fill="none" stroke="#a3238e" stroke-width="2"/><circle cx="282" cy="186" r="7" fill="none" stroke="#a3238e" stroke-width="2"/><polygon points="66,321 58,335 74,335" fill="none" stroke="#a3238e" stroke-width="2"/><circle cx="282" cy="42" r="7" fill="none" stroke="#a3238e" stroke-width="2"/><circle cx="282" cy="42" r="4" fill="none" stroke="#a3238e" stroke-width="1.6"/><text x="66" y="352" text-anchor="middle" font-size="13" fill="#0f1620">Start</text><text x="282" y="30" text-anchor="middle" font-size="13" fill="#0f1620">Mål</text><line x1="380" y1="120" x2="380" y2="82" stroke="#0f1620" stroke-width="1.8" stroke-linecap="butt"/><polygon points="384,82 380,74 376,82" fill="#0f1620"/><text x="380" y="136" text-anchor="middle" font-size="12" fill="#0f1620">N</text><text x="354" y="352" text-anchor="end" font-size="12" fill="#8a8579">rutans sida: 100 m</text></svg>`,
+            answer: { value: 1000, unit: 'm' },
+            delsvar: [
+                { del: 'a', value: 1600, unit: 'm', etikett: '$s =$' },
+                { del: 'b', value: 1000, unit: 'm', etikett: '$\\Delta s =$' },
+            ],
+            solution: `Vi räknar rutor längs varje pil. Vägen består av fyra delförflyttningar:
+
+- 7 rutor österut: $700\\ \\mathrm{m}$
+- 4 rutor norrut: $400\\ \\mathrm{m}$
+- 1 ruta västerut: $100\\ \\mathrm{m}$
+- 4 rutor norrut: $400\\ \\mathrm{m}$
+
+**a)** Sträckan är hela väglängden, så alla delsträckor läggs ihop.
+
+$$
+s = 700 + 400 + 100 + 400 = 1\\,600\\ \\mathrm{m}
+$$
+
+**Svar:** 1 600 m
+
+**b)** Vektorerna får parallellförflyttas och adderas i valfri ordning. Vi samlar därför först alla delförflyttningar i öst-västlig led och sedan alla i nord-sydlig led. Österut räknas som positivt i den ena riktningen och norrut som positivt i den andra.
+
+$$
+\\Delta s_\\text{öst} = 700 + (-100) = 600\\ \\mathrm{m}
+$$
+
+$$
+\\Delta s_\\text{norr} = 400 + 400 = 800\\ \\mathrm{m}
+$$
+
+De två summorna är vinkelräta mot varandra, så förflyttningens storlek ges av Pythagoras sats.
+
+$$
+\\Delta s = \\sqrt{\\Delta s_\\text{öst}^{2} + \\Delta s_\\text{norr}^{2}} = \\sqrt{600^{2} + 800^{2}} = \\sqrt{1\\,000\\,000} = 1\\,000\\ \\mathrm{m}
+$$
+
+**Svar:** 1 000 m (snett åt nordost)
+
+Kontroll i kartan: målet ligger 6 rutor öster om och 8 rutor norr om starten, och $\\sqrt{6^{2} + 8^{2}} = 10$ rutor.`,
+        },
+        {
+            level: 2,
+            question: `Två hastighetsvektorer med storlekarna $3{,}0\\ \\mathrm{m/s}$ och $4{,}0\\ \\mathrm{m/s}$ ska adderas, men vi vet inte vilka riktningar de har. Vilken storlek kan resultanten **inte** få?`,
+            choices: [
+                `$1{,}0\\ \\mathrm{m/s}$`,
+                `$5{,}0\\ \\mathrm{m/s}$`,
+                `$8{,}0\\ \\mathrm{m/s}$`,
+                `$6{,}5\\ \\mathrm{m/s}$`,
+            ],
+            correct: 2,
+            solution: `Resultantens storlek beror på vinkeln mellan vektorerna. Vi ser på ytterfallen.
+
+- **Samma riktning:** vektorerna läggs efter varandra på en linje, och resultanten blir så stor som möjligt: $3{,}0 + 4{,}0 = 7{,}0\\ \\mathrm{m/s}$.
+- **Motsatt riktning:** den ena tar ut en del av den andra, och resultanten blir så liten som möjligt: $4{,}0 + (-3{,}0) = 1{,}0\\ \\mathrm{m/s}$.
+- **Vinkelräta:** Pythagoras sats ger $\\sqrt{3{,}0^{2} + 4{,}0^{2}} = 5{,}0\\ \\mathrm{m/s}$.
+
+När vinkeln ändras steg för steg från samma riktning till motsatt riktning krymper resultanten från $7{,}0\\ \\mathrm{m/s}$ till $1{,}0\\ \\mathrm{m/s}$, och den kan få alla värden däremellan, till exempel $6{,}5\\ \\mathrm{m/s}$. Ett värde större än $7{,}0\\ \\mathrm{m/s}$ går aldrig att få.
+
+**Svar:** $8{,}0\\ \\mathrm{m/s}$`,
+        },
+        {
+            level: 2,
+            question: `En färja korsar en $150\\ \\mathrm{m}$ bred älv. Föraren styr hela tiden rakt mot den motsatta stranden, men strömmen för färjan med sig. Färjan når andra stranden efter $75\\ \\mathrm{s}$, på en plats $60\\ \\mathrm{m}$ nedströms från punkten mitt emot startplatsen.<br>a) Bestäm färjans fart relativt vattnet.<br>b) Bestäm strömmens fart.<br>c) Bestäm färjans fart relativt stranden.<br>Ange svaren i m/s.`,
+            answer: { value: 2.2, unit: 'm/s' },
+            delsvar: [
+                { del: 'a', value: 2.0, unit: 'm/s', etikett: '$v_1 =$' },
+                { del: 'b', value: 0.80, unit: 'm/s', etikett: '$v_2 =$' },
+                { del: 'c', value: 2.2, unit: 'm/s', etikett: '$v =$' },
+            ],
+            solution: `Färjans hastighet relativt stranden är summan av två vinkelräta hastigheter: färjans egen hastighet $v_1$ rakt över älven och strömmens hastighet $v_2$ längs älven. Båda verkar under hela överfarten, $t = 75\\ \\mathrm{s}$.
+
+**a)** Bara $v_1$ för färjan över älven, så $v_1$ och älvens bredd $s_1$ bestämmer tiden. Medelhastighet är sträcka delad med tid:
+
+$$
+v_1 = \\frac{s_1}{t}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+s_1 = 150\\ \\mathrm{m} \\\\
+t = 75\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+v_1 = \\frac{150}{75} = 2{,}0\\ \\mathrm{m/s}
+$$
+
+**Svar:** 2,0 m/s
+
+**b)** Bara strömmen för färjan längs älven, och under samma tid har den förts $s_2 = 60\\ \\mathrm{m}$ nedströms.
+
+$$
+v_2 = \\frac{s_2}{t}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+s_2 = 60\\ \\mathrm{m} \\\\
+t = 75\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+v_2 = \\frac{60}{75} = 0{,}80\\ \\mathrm{m/s}
+$$
+
+**Svar:** 0,80 m/s
+
+**c)** Hastigheterna $v_1$ och $v_2$ är vinkelräta, så resultantens storlek ges av Pythagoras sats.
+
+$$
+v = \\sqrt{v_1^{2} + v_2^{2}} = \\sqrt{2{,}0^{2} + 0{,}80^{2}} = \\sqrt{4{,}00 + 0{,}64} = \\sqrt{4{,}64} = 2{,}154\\ldots \\approx 2{,}2\\ \\mathrm{m/s}
+$$
+
+**Svar:** 2,2 m/s
+
+Kontroll: färjan har färdats snett över älven, $\\sqrt{150^{2} + 60^{2}} = 161{,}5\\ldots\\ \\mathrm{m}$, på $75\\ \\mathrm{s}$. Det ger också $2{,}2\\ \\mathrm{m/s}$.`,
+        },
+        {
+            level: 2,
+            question: `Ett tåg kör rakt fram med farten $30\\ \\mathrm{m/s}$. En passagerare rullar en boll tvärs över golvet i vagnen, vinkelrätt mot färdriktningen, med farten $2{,}0\\ \\mathrm{m/s}$ relativt vagnen. Vagnen är $3{,}0\\ \\mathrm{m}$ bred.<br>a) Vilken fart har bollen relativt marken?<br>b) Hur lång tid tar det för bollen att rulla tvärs över vagnen?<br>c) Hur stor förflyttning gör bollen relativt marken under den tiden?<br>Ange svaren i m/s, s och m.`,
+            answer: { value: 45, unit: 'm' },
+            delsvar: [
+                { del: 'a', value: 30, unit: 'm/s', etikett: '$v =$' },
+                { del: 'b', value: 1.5, unit: 's', etikett: '$t =$' },
+                { del: 'c', value: 45, unit: 'm', etikett: '$\\Delta s =$' },
+            ],
+            solution: `**a)** Relativt marken har bollen både tågets hastighet framåt och sin egen hastighet tvärs över vagnen. De är vinkelräta, så Pythagoras sats ger resultanten.
+
+$$
+\\left[ \\begin{array}{l}
+v_1 = 30\\ \\mathrm{m/s} \\quad (\\text{tåget}) \\\\
+v_2 = 2{,}0\\ \\mathrm{m/s} \\quad (\\text{bollen relativt vagnen})
+\\end{array} \\right]
+$$
+
+$$
+v = \\sqrt{v_1^{2} + v_2^{2}} = \\sqrt{30^{2} + 2{,}0^{2}} = \\sqrt{904} = 30{,}06\\ldots \\approx 30\\ \\mathrm{m/s}
+$$
+
+**Svar:** 30 m/s
+
+**b)** Tvärs över vagnen rör sig bollen med $v_2 = 2{,}0\\ \\mathrm{m/s}$, och vagnens bredd är $s_2 = 3{,}0\\ \\mathrm{m}$.
+
+$$
+v_2 = \\frac{s_2}{t} \\quad\\Leftrightarrow\\quad t = \\frac{s_2}{v_2} = \\frac{3{,}0}{2{,}0} = 1{,}5\\ \\mathrm{s}
+$$
+
+**Svar:** 1,5 s
+
+**c)** Under $1{,}5\\ \\mathrm{s}$ följer bollen med tåget framåt och rullar samtidigt $3{,}0\\ \\mathrm{m}$ åt sidan. Förflyttningen framåt är
+
+$$
+s_1 = v_1 \\cdot t = 30 \\cdot 1{,}5 = 45\\ \\mathrm{m}
+$$
+
+De två förflyttningarna är vinkelräta, så Pythagoras sats ger den totala förflyttningen.
+
+$$
+\\Delta s = \\sqrt{s_1^{2} + s_2^{2}} = \\sqrt{45^{2} + 3{,}0^{2}} = \\sqrt{2\\,034} = 45{,}09\\ldots \\approx 45\\ \\mathrm{m}
+$$
+
+**Svar:** 45 m
+
+För passageraren ser det ut som om bollen bara rullar 3 m, men relativt marken har den flyttats 45 m, nästan helt i tågets färdriktning.`,
+        },
+        {
+            level: 3,
+            question: `En simmare korsar en flod med bredden $b$. Simmarens fart relativt vattnet är $u$, och vattnet strömmar med farten $w$, där $w < u$.<br>a) Simmaren håller hela tiden kroppen riktad rakt mot motsatta stranden. Visa att tiden för att korsa floden blir $t_1 = \\dfrac{b}{u}$, oberoende av strömmen. Ställ också upp ett uttryck för hur långt nedströms hon hamnar.<br>b) Simmaren siktar i stället snett uppströms, så att hon hamnar mitt emot startpunkten. Visa att tiden då blir $t_2 = \\dfrac{b}{\\sqrt{u^{2} - w^{2}}}$, och förklara varför det inte går när $w \\geq u$.<br>c) Strömmen är hälften så snabb som simmaren. Hur många procent längre tid tar det att simma enligt b) än enligt a)?`,
+            answer: { value: 15, unit: '%' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+                { del: 'c', value: 15, unit: '%', etikett: 'längre tid' },
+            ],
+            solution: `Simmarens hastighet relativt stranden är summan av hennes hastighet relativt vattnet och vattnets hastighet.
+
+**a)** Hennes egen hastighet $u$ är riktad rakt över floden och strömmens hastighet $w$ längs floden. Vektorerna är vinkelräta. Strömmen för henne bara längs floden, så den ändrar inte hur fort hon kommer över. Över floden rör hon sig med farten $u$ hela sträckan $b$:
+
+$$
+u = \\frac{b}{t_1} \\quad\\Leftrightarrow\\quad t_1 = \\frac{b}{u}
+$$
+
+Uttrycket innehåller inte $w$, så tiden beror inte på strömmen. Under samma tid för strömmen henne sträckan $d$ nedströms:
+
+$$
+d = w \\cdot t_1 = w \\cdot \\frac{b}{u} = \\frac{b \\cdot w}{u}
+$$
+
+**Svar:** $t_1 = \\dfrac{b}{u}$, och hon hamnar $d = \\dfrac{b \\cdot w}{u}$ nedströms.
+
+**b)** För att hamna mitt emot startpunkten måste resultanten vara riktad rakt över floden. Hennes egen hastighet $u$ måste då ha en komposant uppströms som exakt tar ut strömmens $w$. Vi parallellförflyttar vektorerna: $u$ blir hypotenusan i en rätvinklig triangel, med $w$ som ena kateten och farten rakt över floden, $v_\\text{tvärs}$, som den andra.
+
+$$
+u^{2} = v_\\text{tvärs}^{2} + w^{2} \\quad\\Leftrightarrow\\quad v_\\text{tvärs} = \\sqrt{u^{2} - w^{2}}
+$$
+
+Hon rör sig sträckan $b$ över floden med farten $v_\\text{tvärs}$:
+
+$$
+t_2 = \\frac{b}{v_\\text{tvärs}} = \\frac{b}{\\sqrt{u^{2} - w^{2}}}
+$$
+
+Om $w \\geq u$ blir $u^{2} - w^{2} \\leq 0$, och det finns ingen fart över floden kvar. Hypotenusan $u$ kan inte vara kortare än, eller lika lång som, kateten $w$: hela hennes fart räcker inte ens till att stå emot strömmen.
+
+**Svar:** $t_2 = \\dfrac{b}{\\sqrt{u^{2} - w^{2}}}$. När $w \\geq u$ räcker simmarens fart inte till för att ta ut strömmen.
+
+**c)** Vi jämför tiderna genom att dela dem med varandra. Bredden $b$ tar ut sig:
+
+$$
+\\frac{t_2}{t_1} = \\frac{\\dfrac{b}{\\sqrt{u^{2} - w^{2}}}}{\\dfrac{b}{u}} = \\frac{u}{\\sqrt{u^{2} - w^{2}}}
+$$
+
+Med $w = \\dfrac{u}{2}$ tar även $u$ ut sig:
+
+$$
+\\frac{t_2}{t_1} = \\frac{u}{\\sqrt{u^{2} - \\dfrac{u^{2}}{4}}} = \\frac{1}{\\sqrt{0{,}75}} = 1{,}154\\ldots \\approx 1{,}15
+$$
+
+**Svar:** Cirka 15 % längre tid
+
+Det är rimligt att b) tar längre tid: en del av simmarens fart går åt till att stå emot strömmen, i stället för att föra henne över floden.`,
+        },
+        {
+            level: 3,
+            question: `Ett litet flygplan har farten $200\\ \\mathrm{km/h}$ relativt luften. Det flyger från ort A till ort B, som ligger $240\\ \\mathrm{km}$ bort, och direkt tillbaka. Under hela resan blåser det $80\\ \\mathrm{km/h}$.<br>a) Hur lång tid tar resan fram och tillbaka om vinden blåser från A mot B?<br>b) Hur lång tid tar resan om vinden i stället blåser vinkelrätt mot linjen AB? Piloten styr då snett mot vinden, så att planet hela tiden flyger längs linjen AB.<br>c) Visa att resan fram och tillbaka alltid tar längst tid med vinden längs banan, kortare tid med vinden vinkelrätt mot banan och kortast tid i stiltje, oavsett hur hårt det blåser (så länge vinden är svagare än planets fart).<br>Ange svaren i a) och b) i timmar.`,
+            answer: { value: 2.9, unit: 'h' },
+            delsvar: [
+                { del: 'a', value: 2.9, unit: 'h', etikett: '$t =$' },
+                { del: 'b', value: 2.6, unit: 'h', etikett: '$t =$' },
+                { del: 'c' },
+            ],
+            solution: `Planets hastighet relativt marken är summan av dess hastighet relativt luften och vindens hastighet.
+
+**a)** Från A till B har planet medvind, och vindens hastighet läggs till. Tillbaka har det motvind, och vindens hastighet dras ifrån.
+
+$$
+\\left[ \\begin{array}{l}
+v = 200\\ \\mathrm{km/h} \\\\
+w = 80\\ \\mathrm{km/h} \\\\
+L = 240\\ \\mathrm{km}
+\\end{array} \\right]
+$$
+
+$$
+v_\\text{dit} = 200 + 80 = 280\\ \\mathrm{km/h} \\qquad v_\\text{hem} = 200 + (-80) = 120\\ \\mathrm{km/h}
+$$
+
+Tiden för varje sträcka är sträckan delad med farten, $t = \\dfrac{L}{v}$:
+
+$$
+t_\\text{a} = \\frac{240}{280} + \\frac{240}{120} = 0{,}857\\ldots + 2{,}000 = 2{,}857\\ldots \\approx 2{,}9\\ \\mathrm{h}
+$$
+
+**Svar:** 2,9 h
+
+**b)** Planets hastighet relativt marken ska ligga längs AB, alltså vinkelrätt mot vinden. Vi parallellförflyttar: planets hastighet relativt luften, $200\\ \\mathrm{km/h}$, blir hypotenusan i en rätvinklig triangel där vinden är ena kateten och farten längs AB, $v_\\text{mark}$, den andra. Det gäller både dit och hem.
+
+$$
+v^{2} = v_\\text{mark}^{2} + w^{2} \\quad\\Leftrightarrow\\quad v_\\text{mark} = \\sqrt{v^{2} - w^{2}} = \\sqrt{200^{2} - 80^{2}} = \\sqrt{33\\,600} = 183{,}3\\ldots\\ \\mathrm{km/h}
+$$
+
+$$
+t_\\text{b} = \\frac{2 \\cdot 240}{183{,}30\\ldots} = 2{,}618\\ldots \\approx 2{,}6\\ \\mathrm{h}
+$$
+
+**Svar:** 2,6 h
+
+I stiltje tar resan $\\dfrac{480}{200} = 2{,}4\\ \\mathrm{h}$, så båda vindarna förlänger resan.
+
+**c)** Låt sträckan vara $L$, planets fart $v$ och vindens fart $w$, och inför kvoten $k = \\dfrac{w}{v}$, där $0 < k < 1$. I stiltje tar resan $t_0 = \\dfrac{2L}{v}$.
+
+Med vinden längs banan:
+
+$$
+t_\\text{längs} = \\frac{L}{v + w} + \\frac{L}{v - w} = \\frac{L(v - w) + L(v + w)}{(v + w)(v - w)} = \\frac{2Lv}{v^{2} - w^{2}} = \\frac{2L}{v} \\cdot \\frac{1}{1 - k^{2}} = \\frac{t_0}{1 - k^{2}}
+$$
+
+Med vinden vinkelrätt mot banan (som i b):
+
+$$
+t_\\text{tvärs} = \\frac{2L}{\\sqrt{v^{2} - w^{2}}} = \\frac{2L}{v} \\cdot \\frac{1}{\\sqrt{1 - k^{2}}} = \\frac{t_0}{\\sqrt{1 - k^{2}}}
+$$
+
+Talet $x = 1 - k^{2}$ ligger mellan 0 och 1. För ett sådant tal gäller $x < \\sqrt{x} < 1$ (till exempel $0{,}25 < 0{,}5 < 1$). Att dela $t_0$ med ett mindre tal ger ett större resultat, så
+
+$$
+t_\\text{längs} > t_\\text{tvärs} > t_0
+$$
+
+**Svar:** Uttrycken ovan visar att ordningen gäller för varje vind som är svagare än planets fart.
+
+Förklaringen i ord: med vinden längs banan hjälper medvinden under kortare tid än motvinden stjälper, eftersom planet hinner fram fortare när det har medvind.`,
+        },
+        {
+            level: 3,
+            question: `En bil kör med farten $72\\ \\mathrm{km/h}$ en dag när det regnar i vindstilla väder, så att regndropparna faller lodrätt med konstant fart. På bilens sidoruta bildar regnspåren vinkeln $70^\\circ$ med lodlinjen, se figuren.<br>a) Bestäm regndropparnas fallfart. Ange svaret i m/s.<br>b) Vilken vinkel mot lodlinjen får spåren när bilen i stället kör med farten $36\\ \\mathrm{km/h}$?
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="30 46 330 150" style="max-width:430px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif" role="img" aria-label="Sidoruta på en bil som kör åt höger. Regnspåren på rutan lutar bakåt och bildar vinkeln 70 grader med lodlinjen."><path d="M 40 150 L 60 70 Q 64 56 80 56 L 250 56 Q 268 56 280 72 L 330 150 Z" fill="rgba(140,180,210,0.22)" stroke="#0f1620" stroke-width="2.4"/><line x1="186" y1="56" x2="186" y2="150" stroke="#0f1620" stroke-width="4"/><line x1="118" y1="62" x2="84.2" y2="74.3" stroke="#3a6f9a" stroke-width="1.8" stroke-linecap="round"/><line x1="176" y1="70" x2="142.2" y2="82.3" stroke="#3a6f9a" stroke-width="1.8" stroke-linecap="round"/><line x1="150" y1="100" x2="116.2" y2="112.3" stroke="#3a6f9a" stroke-width="1.8" stroke-linecap="round"/><line x1="96" y1="106" x2="62.2" y2="118.3" stroke="#3a6f9a" stroke-width="1.8" stroke-linecap="round"/><line x1="246" y1="64" x2="212.2" y2="76.3" stroke="#3a6f9a" stroke-width="1.8" stroke-linecap="round"/><line x1="306" y1="120" x2="272.2" y2="132.3" stroke="#3a6f9a" stroke-width="1.8" stroke-linecap="round"/><line x1="120" y1="134" x2="86.2" y2="146.3" stroke="#3a6f9a" stroke-width="1.8" stroke-linecap="round"/><line x1="262" y1="66" x2="196.2" y2="89.9" stroke="#3a6f9a" stroke-width="2.2" stroke-linecap="round"/><line x1="262" y1="66" x2="262" y2="132" stroke="#8a8579" stroke-width="1.3" stroke-dasharray="4 3"/><path d="M 262 106 A 40 40 0 0 1 224.4 79.7" fill="none" stroke="#8a8579" stroke-width="1.4"/><text x="235.6" y="108.7" text-anchor="end" font-size="14" fill="#0f1620">70°</text><line x1="120" y1="180" x2="220" y2="180" stroke="#c8324a" stroke-width="2.6" stroke-linecap="butt"/><polygon points="220,185 230,180 220,175" fill="#c8324a"/><text x="240" y="185" text-anchor="start" font-size="13" fill="#c8324a">färdriktning</text></svg>`,
+            answer: { value: 7.3, unit: 'm/s' },
+            delsvar: [
+                { del: 'a', value: 7.3, unit: 'm/s', etikett: 'fallfart' },
+                { del: 'b', value: 54, unit: '°', etikett: 'vinkel' },
+            ],
+            solution: `Spåren visar åt vilket håll dropparna rör sig **relativt rutan**. Relativt marken faller en droppe rakt ned med farten $v_\\text{d}$. Relativt bilen rör sig hela omgivningen, och därmed också droppen, bakåt med bilens fart $v_\\text{bil}$. Droppens hastighet relativt bilen är därför summan av två vinkelräta vektorer: $v_\\text{d}$ nedåt och $v_\\text{bil}$ bakåt. Vi parallellförflyttar dem och får en rätvinklig triangel där resultanten har spårens riktning.
+
+Vinkeln $\\alpha$ mot lodlinjen ligger vid den lodräta kateten $v_\\text{d}$. Den motstående kateten är $v_\\text{bil}$:
+
+$$
+\\tan \\alpha = \\frac{v_\\text{bil}}{v_\\text{d}} \\quad\\Leftrightarrow\\quad v_\\text{d} = \\frac{v_\\text{bil}}{\\tan \\alpha}
+$$
+
+**a)**
+
+$$
+\\left[ \\begin{array}{l}
+v_\\text{bil} = 72\\ \\mathrm{km/h} = \\dfrac{72}{3{,}6}\\ \\mathrm{m/s} = 20\\ \\mathrm{m/s} \\\\
+\\alpha = 70^\\circ
+\\end{array} \\right]
+$$
+
+$$
+v_\\text{d} = \\frac{20}{\\tan 70^\\circ} = \\frac{20}{2{,}747\\ldots} = 7{,}279\\ldots \\approx 7{,}3\\ \\mathrm{m/s}
+$$
+
+Stora regndroppar faller med några meter per sekund upp till knappt $10\\ \\mathrm{m/s}$, så värdet är rimligt.
+
+**Svar:** 7,3 m/s
+
+**b)** Nu är $v_\\text{bil} = \\dfrac{36}{3{,}6} = 10\\ \\mathrm{m/s}$, och dropparna faller lika fort som förut. Vi kallar den nya vinkeln $\\beta$ och räknar med det oavrundade värdet från a).
+
+$$
+\\tan \\beta = \\frac{v_\\text{bil}}{v_\\text{d}} = \\frac{10}{7{,}279\\ldots} = 1{,}373\\ldots
+$$
+
+$$
+\\beta = 53{,}9\\ldots^\\circ \\approx 54^\\circ
+$$
+
+**Svar:** 54°
+
+Det är rimligt att spåren blir brantare (mindre vinkel mot lodlinjen) när bilen kör långsammare. Står bilen still faller regnet rakt ned längs rutan.`,
+        },
+        {
+            level: 3,
+            question: `En motorbåt kör en sträcka uppströms längs en älv på $45\\ \\mathrm{min}$. Tillbaka nedströms, med samma motorinställning, tar samma sträcka $30\\ \\mathrm{min}$. Sträckans längd är inte känd.<br>a) En flotte utan motor driver med strömmen samma sträcka nedströms. Hur lång tid tar det?<br>b) Efter ett kraftigt regn strömmar älven dubbelt så snabbt. Hur lång tid tar då båtens resa uppströms?<br>Ange svaren i minuter.`,
+            answer: { value: 180, unit: 'min' },
+            delsvar: [
+                { del: 'a', value: 180, unit: 'min', etikett: '$t =$' },
+                { del: 'b', value: 60, unit: 'min', etikett: '$t =$' },
+            ],
+            solution: `Kalla sträckan $s$, båtens fart relativt vattnet $v$ och strömmens fart $w$. Ingen av dem är känd, men vi kan räkna med $s$ som en bokstav och se om den tar ut sig.
+
+Uppströms är strömmen riktad mot båtens färdriktning och dras ifrån. Nedströms är den riktad med båten och läggs till. Farten relativt stranden är sträcka delad med tid, med tiderna i minuter:
+
+$$
+v - w = \\frac{s}{45} \\tag{1}
+$$
+
+$$
+v + w = \\frac{s}{30} \\tag{2}
+$$
+
+**a)** Flotten har bara strömmens fart $w$. Vi subtraherar (1), $v - w = \\dfrac{s}{45}$, från (2), $v + w = \\dfrac{s}{30}$. Då tar $v$ ut sig:
+
+$$
+2w = \\frac{s}{30} - \\frac{s}{45} = \\frac{3s}{90} - \\frac{2s}{90} = \\frac{s}{90} \\quad\\Leftrightarrow\\quad w = \\frac{s}{180}
+$$
+
+Flottens tid är sträckan delad med farten:
+
+$$
+t_\\text{flotte} = \\frac{s}{w} = \\frac{s}{\\dfrac{s}{180}} = 180\\ \\mathrm{min}
+$$
+
+Sträckan $s$ tog ut sig, så svaret gäller hur lång sträckan än är.
+
+**Svar:** 180 min, det vill säga 3,0 h
+
+**b)** Vi behöver också båtens fart $v$. Vi adderar (1), $v - w = \\dfrac{s}{45}$, och (2), $v + w = \\dfrac{s}{30}$. Då tar $w$ ut sig:
+
+$$
+2v = \\frac{s}{45} + \\frac{s}{30} = \\frac{2s}{90} + \\frac{3s}{90} = \\frac{5s}{90} \\quad\\Leftrightarrow\\quad v = \\frac{5s}{180} = \\frac{s}{36}
+$$
+
+Efter regnet är strömmens fart $2w = \\dfrac{2s}{180} = \\dfrac{s}{90}$, medan $v$ är oförändrad. Farten uppströms blir
+
+$$
+v - 2w = \\frac{s}{36} - \\frac{s}{90} = \\frac{5s}{180} - \\frac{2s}{180} = \\frac{3s}{180} = \\frac{s}{60}
+$$
+
+$$
+t = \\frac{s}{v - 2w} = \\frac{s}{\\dfrac{s}{60}} = 60\\ \\mathrm{min}
+$$
+
+**Svar:** 60 min
+
+Rimlighet: båten är fem gånger så snabb som strömmen ($v = \\dfrac{s}{36}$ mot $w = \\dfrac{s}{180}$), så en fördubbling av strömmen förlänger resan uppströms måttligt, från 45 min till 60 min. Flotten tar sex gånger så lång tid som båten nedströms, vilket stämmer med att $v + w$ är sex gånger $w$.`,
+        },
+        {
+            level: 3,
+            question: `På en flygplats tar det $50\\ \\mathrm{s}$ att åka hela rullbandet om man står still på det. Att gå samma sträcka på golvet bredvid tar $30\\ \\mathrm{s}$. Rullbandets längd är inte känd.<br>a) Hur lång tid tar det att gå på rullbandet i dess rörelseriktning, med samma gångfart?<br>b) Hur lång tid tar det att gå på rullbandet mot dess rörelseriktning?<br>Ange svaren i sekunder.`,
+            answer: { value: 19, unit: 's' },
+            delsvar: [
+                { del: 'a', value: 19, unit: 's', etikett: '$t =$' },
+                { del: 'b', value: 75, unit: 's', etikett: '$t =$' },
+            ],
+            solution: `Kalla rullbandets längd $L$. Ingen fart är given, men båda kan uttryckas i $L$ med medelhastighet som sträcka delad med tid:
+
+$$
+v_\\text{band} = \\frac{L}{50}\\ \\mathrm{m/s} \\qquad v_\\text{gång} = \\frac{L}{30}\\ \\mathrm{m/s}
+$$
+
+**a)** Gångens och bandets hastigheter har samma riktning och läggs ihop. Tiden är sträckan delad med farten, och $L$ tar ut sig:
+
+$$
+t = \\frac{L}{v_\\text{gång} + v_\\text{band}} = \\frac{L}{\\dfrac{L}{30} + \\dfrac{L}{50}} = \\frac{1}{\\dfrac{1}{30} + \\dfrac{1}{50}}
+$$
+
+Vi förlänger med $30 \\cdot 50 = 1\\,500$:
+
+$$
+t = \\frac{1\\,500}{50 + 30} = \\frac{1\\,500}{80} = 18{,}75 \\approx 19\\ \\mathrm{s}
+$$
+
+**Svar:** 19 s
+
+Tiden är kortare än både 30 s och 50 s, vilket den måste vara när båda farterna hjälps åt.
+
+**b)** Nu är bandets hastighet riktad mot gångriktningen och dras ifrån. Gångfarten är störst, så personen kommer ändå fram:
+
+$$
+t = \\frac{L}{v_\\text{gång} - v_\\text{band}} = \\frac{1}{\\dfrac{1}{30} - \\dfrac{1}{50}} = \\frac{1\\,500}{50 - 30} = \\frac{1\\,500}{20} = 75\\ \\mathrm{s}
+$$
+
+**Svar:** 75 s
+
+Generellt gäller, med tiderna $t_\\text{gång}$ och $t_\\text{band}$, att $t = \\dfrac{t_\\text{gång} \\cdot t_\\text{band}}{t_\\text{band} + t_\\text{gång}}$ med bandet och $t = \\dfrac{t_\\text{gång} \\cdot t_\\text{band}}{t_\\text{band} - t_\\text{gång}}$ mot bandet. Längden behövs aldrig.`,
+        },
+        {
+            level: 3,
+            question: `Maja går $40\\ \\mathrm{m}$ rakt fram på ett stort, plant fält. Sedan vänder hon sig i en ny riktning och går $30\\ \\mathrm{m}$ rakt fram, och till sist vänder hon sig igen och går $20\\ \\mathrm{m}$. Hon får själv välja riktningarna.<br>a) Hur stor är den största förflyttning hon kan få?<br>b) Kan förflyttningen bli noll? Motivera.<br>c) Den sista sträckan är i stället $5{,}0\\ \\mathrm{m}$. Hur stor är då den minsta förflyttning hon kan få? Motivera.<br>Ange svaren i a) och c) i meter.`,
+            answer: { value: 90, unit: 'm' },
+            delsvar: [
+                { del: 'a', value: 90, unit: 'm', etikett: 'störst' },
+                { del: 'b' },
+                { del: 'c', value: 5.0, unit: 'm', etikett: 'minst' },
+            ],
+            solution: `Förflyttningen är resultanten av tre förflyttningsvektorer, lagda så att varje vektor börjar där den förra slutar.
+
+**a)** Resultanten blir störst när alla tre vektorerna pekar åt samma håll och ligger efter varandra på en linje:
+
+$$
+\\Delta s_\\text{max} = 40 + 30 + 20 = 90\\ \\mathrm{m}
+$$
+
+**Svar:** 90 m
+
+**b)** Förflyttningen är noll om Maja slutar där hon började. Då bildar de tre vektorerna en sluten triangel med sidorna $40\\ \\mathrm{m}$, $30\\ \\mathrm{m}$ och $20\\ \\mathrm{m}$. En sådan triangel finns om den längsta sidan är kortare än de två andra tillsammans:
+
+$$
+40 < 30 + 20 = 50
+$$
+
+Villkoret är uppfyllt, så Maja kan välja riktningarna längs sidorna i en sådan triangel och komma tillbaka till startpunkten.
+
+Det är lätt att tro att det minsta svaret är att gå fram 40 m och sedan tillbaka, $40 + (-30) + (-20) = -10\\ \\mathrm{m}$, alltså 10 m. Men riktningarna behöver inte ligga på samma linje, och snett ställda vektorer kan stänga triangeln.
+
+**Svar:** Ja. De tre sträckorna kan bilda en triangel, eftersom $40\\ \\mathrm{m}$ är mindre än $30 + 20 = 50\\ \\mathrm{m}$.
+
+**c)** Nu är $30 + 5{,}0 = 35\\ \\mathrm{m}$, vilket är mindre än $40\\ \\mathrm{m}$, och någon triangel går inte att bilda. Efter de första $40\\ \\mathrm{m}$ är Maja $40\\ \\mathrm{m}$ från starten. De två sista sträckorna kan tillsammans föra henne högst $35\\ \\mathrm{m}$ närmare starten, och det sker när båda pekar rakt tillbaka mot den. Varje annan riktning för henne mindre närmare.
+
+$$
+\\Delta s_\\text{min} = 40 + (-30) + (-5{,}0) = 5{,}0\\ \\mathrm{m}
+$$
+
+**Svar:** 5,0 m
+
+Sammanfattat: den minsta förflyttningen blir noll när den längsta sträckan är kortare än de andra tillsammans, och annars skillnaden mellan den längsta och summan av de övriga.`,
         },
     ],
 
@@ -3777,7 +6102,7 @@ ${makeDiagram({
     paths: [{ points: [[0, 0], [10, 50]] }],
 })}`,
             answer: { value: 5.0, unit: 'm/s', tol: 0.05 },
-            solution: `Lutningen i ett *s-t*-diagram motsvarar hastigheten. Vi väljer två lämpliga punkter på linjen — gärna där linjen skär rutnätskorsningar — till exempel (0; 0) och (10 s; 50 m).
+            solution: `Lutningen i ett *s-t*-diagram motsvarar hastigheten. Vi väljer två lämpliga punkter på linjen, gärna där linjen skär rutnätskorsningar, till exempel (0; 0) och (10 s; 50 m).
 
 $$
 v = \\frac{\\Delta s}{\\Delta t} = \\frac{s_2 - s_1}{t_2 - t_1}
@@ -3797,7 +6122,7 @@ $$
 
 **Svar:** 5,0 m/s.
 
-**Generell slutsats:** Vilka två punkter man väljer på linjen spelar ingen roll så länge båda ligger på linjen — lutningen blir densamma. Välj punkter där det är lätt att läsa av exakta värden (rutnätskorsningar).`,
+**Generell slutsats:** Vilka två punkter man väljer på linjen spelar ingen roll så länge båda ligger på linjen. Lutningen blir densamma. Välj punkter där det är lätt att läsa av exakta värden (rutnätskorsningar).`,
         },
         {
             level: 1,
@@ -3809,7 +6134,7 @@ $$
                 `Föremålets medelhastighet under ett tidsintervall.`,
             ],
             correct: 3,
-            solution: `En **sekant** är en rät linje som skär grafen i två punkter. Lutningen mellan dessa två punkter motsvarar förflyttningen dividerat med tidsintervallet — alltså **medelhastigheten** under intervallet.
+            solution: `En **sekant** är en rät linje som skär grafen i två punkter. Lutningen mellan dessa två punkter motsvarar förflyttningen dividerat med tidsintervallet, alltså **medelhastigheten** under intervallet.
 
 En **tangent** däremot snuddar grafen i *en* punkt, och dess lutning är **momentanhastigheten** i just den punkten.
 
@@ -3845,7 +6170,7 @@ $$
             level: 2,
             question: `Bertil cyklar från affären till sitt hem. Vid *t*₁ = 0 är han vid läget *s*₁ = 6,0 km (affären). Vid *t*₂ = 25 min är han vid läget *s*₂ = 0 (hemma). Vad är hans **medelhastighet** mellan dessa tidpunkter, angiven i m/s?`,
             answer: { value: -4.0, unit: 'm/s', tol: 0.03 },
-            solution: `Medelhastigheten är en vektor — den får tecken efter förflyttningens riktning.
+            solution: `Medelhastigheten är en vektor. Den får tecken efter förflyttningens riktning.
 
 Mätvärden efter omvandling till SI-enheter:
 $$
@@ -3863,13 +6188,13 @@ $$
 
 **Svar:** −4,0 m/s.
 
-**Generell slutsats:** Minustecknet säger att Bertil rör sig i *negativ riktning* — alltså tillbaka mot lägre *s*-värde. Hans **fart** är 4,0 m/s, men hans **hastighet** är −4,0 m/s.`,
+**Generell slutsats:** Minustecknet säger att Bertil rör sig i *negativ riktning*, alltså tillbaka mot lägre *s*-värde. Hans **fart** är 4,0 m/s, men hans **hastighet** är −4,0 m/s.`,
         },
         {
             level: 2,
             question: `En joggare springer 1,8 km rakt norrut, vänder och springer sedan 0,6 km rakt söderut. Hela rörelsen tar 12 minuter. Vad är hennes **medelhastighet**? Räkna nord som positiv riktning och ange svaret i m/s.`,
             answer: { value: 1.67, unit: 'm/s', tol: 0.03 },
-            solution: `Medelhastigheten är **förflyttningen** delat med tiden — inte sträckan.
+            solution: `Medelhastigheten är **förflyttningen** delat med tiden, inte sträckan.
 
 Mätvärden:
 $$
@@ -3932,17 +6257,17 @@ $$
 v_{\\mathrm{m},b} = \\frac{\\Delta s}{\\Delta t} = \\frac{60 - 20}{8 - 4} = \\frac{40}{4} = 10\\ \\mathrm{m/s}
 $$
 
-**c)** Grafen är **konvex** (lutar uppåt allt brantare) — det syns tydligt om man jämför kurvans lutning vid *t* = 1 s med lutningen vid *t* = 7 s. Det innebär att föremålet *accelererar*.
+**c)** Grafen är **konvex** (lutar uppåt allt brantare). Det syns tydligt om man jämför kurvans lutning vid *t* = 1 s med lutningen vid *t* = 7 s. Det innebär att föremålet *accelererar*.
 
-Eftersom medelhastigheten är **större** under den senare halvan (10 m/s) än under hela intervallet (7,5 m/s) bekräftas att rörelsen blir snabbare och snabbare. **Momentanhastigheten vid *t* = 8 s** — tangentens lutning där — är därför **större än båda** medelhastigheterna:
+Eftersom medelhastigheten är **större** under den senare halvan (10 m/s) än under hela intervallet (7,5 m/s) bekräftas att rörelsen blir snabbare och snabbare. **Momentanhastigheten vid *t* = 8 s** (tangentens lutning där) är därför **större än båda** medelhastigheterna:
 
 $$
 v_\\text{momentan}(8\\ \\mathrm{s}) > v_{\\mathrm{m},b} = 10\\ \\mathrm{m/s} > v_{\\mathrm{m},a} = 7{,}5\\ \\mathrm{m/s}
 $$
 
-**Svar:** a) 7,5 m/s. b) 10 m/s. c) Större än båda — föremålet accelererar.
+**Svar:** a) 7,5 m/s. b) 10 m/s. c) Större än båda, eftersom föremålet accelererar.
 
-**Generell slutsats:** För en konvex *s-t*-graf (accelererande rörelse) ligger medelhastigheten över ett *senare* intervall alltid närmare momentanhastigheten vid slutet. För att uppskatta momentanhastigheten ännu bättre kan man välja allt kortare intervall runt punkten — eller rita ut en tangent och mäta dess lutning.`,
+**Generell slutsats:** För en konvex *s-t*-graf (accelererande rörelse) ligger medelhastigheten över ett *senare* intervall alltid närmare momentanhastigheten vid slutet. För att uppskatta momentanhastigheten ännu bättre kan man välja allt kortare intervall runt punkten, eller rita ut en tangent och mäta dess lutning.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
@@ -3960,7 +6285,7 @@ b) Hur långt från startpunkten är de båda när Beata har hunnit ifatt?
                 { del: 'a', value: 90, unit: 's' },
                 { del: 'b', value: 360, unit: 'm' },
             ],
-            solution: `Båda cyklisterna rör sig med konstant fart längs samma linje. Vi sätter upp deras lägesfunktioner — sträckan som en funktion av tiden — där *t* räknas från Annas start.
+            solution: `Båda cyklisterna rör sig med konstant fart längs samma linje. Vi sätter upp deras lägesfunktioner (sträckan som en funktion av tiden), där *t* räknas från Annas start.
 
 För **Anna** (startar vid *t* = 0):
 $$
@@ -3972,7 +6297,7 @@ $$
 s_B(t) = v_B \\cdot (t - 30) = 6{,}0\\, (t - 30)
 $$
 
-**a) Mötesvillkor** — de är på samma plats när $s_A(t) = s_B(t)$:
+**a) Mötesvillkor:** de är på samma plats när $s_A(t) = s_B(t)$:
 
 $$
 4{,}0\\, t = 6{,}0\\, (t - 30)
@@ -3986,7 +6311,7 @@ $$
 2{,}0\\, t = 180 \\quad\\Leftrightarrow\\quad t = 90\\ \\mathrm{s}
 $$
 
-**b) Avstånd från startpunkten** — sätt in i någon av lägesfunktionerna:
+**b) Avstånd från startpunkten:** sätt in i någon av lägesfunktionerna:
 
 $$
 s = 4{,}0 \\cdot 90 = 360\\ \\mathrm{m}
@@ -3996,7 +6321,568 @@ $$
 
 **Svar:** a) Vid *t* = 90 s (mätt från Annas start, alltså 60 s efter Beatas start). b) 360 m från startpunkten.
 
-**Generell slutsats:** Mötesproblem löses alltid genom att ställa upp två lägesfunktioner $s_1(t)$ och $s_2(t)$ med en gemensam tidsaxel och sätta dem lika. Tricket är att korrekt hantera **tidsfördröjningar** — Beata har inte cyklat i *t* sekunder utan i $t - 30$ sekunder.`,
+**Generell slutsats:** Mötesproblem löses alltid genom att ställa upp två lägesfunktioner $s_1(t)$ och $s_2(t)$ med en gemensam tidsaxel och sätta dem lika. Tricket är att korrekt hantera **tidsfördröjningar**: Beata har inte cyklat i *t* sekunder utan i $t - 30$ sekunder.`,
+        },
+        {
+            level: 1,
+            question: `Ett pendeltåg kör 48 km mellan två stationer på 32 minuter. Beräkna tågets medelhastighet. Ange svaret i m/s.`,
+            answer: { value: 25, unit: 'm/s', tol: 0.02 },
+            solution: `Medelhastigheten är förflyttningen delat med tiden:
+
+$$
+v_\\mathrm{m} = \\frac{\\Delta s}{\\Delta t}
+$$
+
+Vi gör om till SI-enheter:
+
+$$
+\\left[ \\begin{array}{l}
+\\Delta s = 48\\ \\mathrm{km} = 48\\,000\\ \\mathrm{m} \\\\
+\\Delta t = 32\\ \\mathrm{min} = 32 \\cdot 60\\ \\mathrm{s} = 1\\,920\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+v_\\mathrm{m} = \\frac{48\\,000}{1\\,920} = 25\\ \\mathrm{m/s}
+$$
+
+**Svar:** 25 m/s`,
+        },
+        {
+            level: 1,
+            question: `En rullstolsburen person åker med konstant hastighet mot en dörr. Hennes läge *s* mäts från dörren och visas i *s-t*-diagrammet nedan. Bestäm hennes hastighet, med tecken. Ange svaret i m/s.
+
+${makeDiagram({
+    xMax: 8, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+    yMax: 12, yTicks: [0, 2, 4, 6, 8, 10, 12],
+    yLabel: '<tspan font-style="italic">s</tspan> (m)',
+    paths: [{ points: [[0, 10], [8, 0]] }],
+})}`,
+            answer: { value: -1.3, unit: 'm/s', tol: 0.04 },
+            solution: `Hastigheten är linjens lutning. Vi väljer två punkter där linjen går genom rutnätskorsningar, till exempel (0 s; 10 m) och (8,0 s; 0 m).
+
+$$
+v = \\frac{\\Delta s}{\\Delta t} = \\frac{s_2 - s_1}{t_2 - t_1}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+t_1 = 0 \\\\
+s_1 = 10\\ \\mathrm{m} \\\\
+t_2 = 8{,}0\\ \\mathrm{s} \\\\
+s_2 = 0
+\\end{array} \\right]
+$$
+
+$$
+v = \\frac{0 - 10}{8{,}0 - 0} = \\frac{-10}{8{,}0} = -1{,}25\\ \\mathrm{m/s} \\approx -1{,}3\\ \\mathrm{m/s}
+$$
+
+Minustecknet betyder att läget minskar, alltså att hon rör sig mot dörren.
+
+**Svar:** −1,3 m/s`,
+        },
+        {
+            level: 1,
+            question: `Grafen i ett *s-t*-diagram är en vågrät linje mellan $t = 2\\ \\mathrm{s}$ och $t = 6\\ \\mathrm{s}$. Vad betyder det?`,
+            choices: [
+                `Föremålet har konstant acceleration.`,
+                `Föremålet står still.`,
+                `Föremålet rör sig med konstant hastighet som inte är noll.`,
+                `Föremålet rör sig tillbaka mot startpunkten.`,
+            ],
+            correct: 1,
+            solution: `En vågrät linje har lutningen noll. Lutningen i ett *s-t*-diagram är hastigheten, så hastigheten är noll: läget ändras inte medan tiden går.
+
+En rät linje som lutar betyder konstant hastighet som inte är noll, och en linje som lutar nedåt betyder att läget minskar.
+
+**Svar:** Föremålet står still.`,
+        },
+        {
+            level: 1,
+            question: `En vinbergssnäcka kryper med medelhastigheten $1{,}2\\ \\mathrm{mm/s}$ längs en rak trädgårdskant. Hur lång tid tar det för den att krypa 0,84 m? Ange svaret i minuter.`,
+            answer: { value: 12, unit: 'min', tol: 0.03 },
+            solution: `Vi löser ut tiden ur formeln för medelhastighet:
+
+$$
+v_\\mathrm{m} = \\frac{\\Delta s}{\\Delta t} \\quad\\Leftrightarrow\\quad \\Delta t = \\frac{\\Delta s}{v_\\mathrm{m}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\Delta s = 0{,}84\\ \\mathrm{m} \\\\
+v_\\mathrm{m} = 1{,}2\\ \\mathrm{mm/s} = 0{,}0012\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$
+\\Delta t = \\frac{0{,}84}{0{,}0012} = 700\\ \\mathrm{s} = \\frac{700}{60}\\ \\mathrm{min} = 11{,}66\\ldots\\ \\mathrm{min} \\approx 12\\ \\mathrm{min}
+$$
+
+**Svar:** 12 min`,
+        },
+
+        {
+            level: 2,
+            question: `Under ett sprinttest mäts en löpares läge *s* från startlinjen varannan sekund. Resultatet står i tabellen.
+
+| *t* (s) | 0 | 2,0 | 4,0 | 6,0 | 8,0 | 10,0 |
+|---|---|---|---|---|---|---|
+| *s* (m) | 0 | 6,0 | 14,0 | 24,0 | 36,0 | 50,0 |
+
+a) Beräkna löparens medelhastighet mellan $t = 0$ och $t = 4{,}0\\ \\mathrm{s}$.<br>b) Beräkna medelhastigheten mellan $t = 6{,}0\\ \\mathrm{s}$ och $t = 10{,}0\\ \\mathrm{s}$.<br>c) Ökar, minskar eller är löparens hastighet konstant under testet? Motivera med tabellen.
+
+*Ange medelhastigheten i a) som ditt numeriska svar i m/s.*`,
+            answer: { value: 3.5, unit: 'm/s', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 3.5, unit: 'm/s' },
+                { del: 'b', value: 6.5, unit: 'm/s' },
+                { del: 'c' },
+            ],
+            solution: `Medelhastigheten är förflyttningen delat med tiden:
+
+$$
+v_\\mathrm{m} = \\frac{\\Delta s}{\\Delta t} = \\frac{s_2 - s_1}{t_2 - t_1}
+$$
+
+**a)**
+
+$$
+v_\\mathrm{m} = \\frac{14{,}0 - 0}{4{,}0 - 0} = \\frac{14{,}0}{4{,}0} = 3{,}5\\ \\mathrm{m/s}
+$$
+
+**Svar:** 3,5 m/s
+
+**b)**
+
+$$
+v_\\mathrm{m} = \\frac{50{,}0 - 24{,}0}{10{,}0 - 6{,}0} = \\frac{26{,}0}{4{,}0} = 6{,}5\\ \\mathrm{m/s}
+$$
+
+**Svar:** 6,5 m/s
+
+**c)** Under varje tvåsekundersintervall springer löparen längre än under det förra: 6,0 m, 8,0 m, 10,0 m, 12,0 m och 14,0 m. Medelhastigheten i intervallen blir då 3,0 m/s, 4,0 m/s, 5,0 m/s, 6,0 m/s och 7,0 m/s. Eftersom medelhastigheten blir större för varje intervall ökar hastigheten under hela testet. I ett *s-t*-diagram skulle punkterna ligga på en kurva som blir allt brantare.
+
+**Svar:** Hastigheten ökar, eftersom löparen springer längre för varje tvåsekundersintervall.`,
+        },
+        {
+            level: 2,
+            question: `En hund springer ut från sin husse längs en rak stig, stannar och nosar en stund och springer sedan tillbaka. Hundens läge *s* mäts från husse, som står still.
+
+${makeDiagram({
+    xMax: 10, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    yMax: 25, yTicks: [0, 5, 10, 15, 20, 25],
+    yLabel: '<tspan font-style="italic">s</tspan> (m)',
+    paths: [{ points: [[0, 0], [4, 20], [6, 20], [10, 0]] }],
+})}
+
+a) Bestäm hundens medelhastighet under hela förloppet, från $t = 0$ till $t = 10\\ \\mathrm{s}$.<br>b) Bestäm hundens medelfart under samma tid.<br>c) Bestäm hundens hastighet, med tecken, när den springer tillbaka.
+
+*Ange medelfarten i b) som ditt numeriska svar i m/s.*`,
+            answer: { value: 4.0, unit: 'm/s', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 0, unit: 'm/s' },
+                { del: 'b', value: 4.0, unit: 'm/s' },
+                { del: 'c', value: -5.0, unit: 'm/s' },
+            ],
+            solution: `Vi läser av grafen: hunden är vid husse ($s = 0$) när $t = 0$, når $s = 20\\ \\mathrm{m}$ vid $t = 4{,}0\\ \\mathrm{s}$, står still till $t = 6{,}0\\ \\mathrm{s}$ och är tillbaka vid husse när $t = 10\\ \\mathrm{s}$.
+
+**a)** Medelhastigheten bygger på förflyttningen, alltså skillnaden mellan slutläge och startläge:
+
+$$
+v_\\mathrm{m} = \\frac{s_2 - s_1}{t_2 - t_1} = \\frac{0 - 0}{10 - 0} = 0
+$$
+
+Hunden slutar där den började, så förflyttningen är noll.
+
+**Svar:** 0 m/s
+
+**b)** Medelfarten bygger i stället på hela den sträcka hunden har sprungit: 20 m ut och 20 m tillbaka.
+
+$$
+\\text{medelfart} = \\frac{\\text{sträcka}}{\\text{tid}} = \\frac{20 + 20}{10}\\ \\mathrm{m/s} = \\frac{40}{10}\\ \\mathrm{m/s} = 4{,}0\\ \\mathrm{m/s}
+$$
+
+**Svar:** 4,0 m/s
+
+**c)** På väg tillbaka är grafen en rät linje från (6,0 s; 20 m) till (10 s; 0 m). Lutningen är hastigheten:
+
+$$
+v = \\frac{0 - 20}{10 - 6{,}0} = \\frac{-20}{4{,}0} = -5{,}0\\ \\mathrm{m/s}
+$$
+
+Minustecknet betyder att hunden rör sig mot husse.
+
+**Svar:** −5,0 m/s`,
+        },
+        {
+            level: 2,
+            question: `En leksaksbil rullar ned för en lång ramp, och dess läge *s* visas i *s-t*-diagrammet nedan (den heldragna kurvan). Den streckade blå linjen är tangenten till kurvan i punkten där $t = 4{,}0\\ \\mathrm{s}$.
+
+${makeDiagram({
+    xMax: 6, xTicks: [0, 1, 2, 3, 4, 5, 6],
+    yMax: 18, yTicks: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18],
+    yLabel: '<tspan font-style="italic">s</tspan> (m)',
+    paths: [
+        { points: Array.from({ length: 61 }, (_, i) => { const t = i / 10; return [t, 0.5 * t * t]; }) },
+        { points: [[2, 0], [6, 16]], color: '#2563c9', width: 2, dash: '7 5' },
+    ],
+})}
+
+a) Bestäm bilens momentanhastighet vid $t = 4{,}0\\ \\mathrm{s}$.<br>b) Bestäm bilens medelhastighet mellan $t = 0$ och $t = 4{,}0\\ \\mathrm{s}$.<br>c) Förklara med hjälp av grafen varför svaren i a) och b) skiljer sig åt.
+
+*Ange momentanhastigheten i a) som ditt numeriska svar i m/s.*`,
+            answer: { value: 4.0, unit: 'm/s', tol: 0.05 },
+            delsvar: [
+                { del: 'a', value: 4.0, unit: 'm/s' },
+                { del: 'b', value: 2.0, unit: 'm/s' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Momentanhastigheten är tangentens lutning. Vi väljer två punkter på tangenten där den går genom rutnätskorsningar, till exempel (2,0 s; 0 m) och (6,0 s; 16 m).
+
+$$
+v = \\frac{s_2 - s_1}{t_2 - t_1}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+t_1 = 2{,}0\\ \\mathrm{s} \\\\
+s_1 = 0 \\\\
+t_2 = 6{,}0\\ \\mathrm{s} \\\\
+s_2 = 16\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+v = \\frac{16 - 0}{6{,}0 - 2{,}0} = \\frac{16}{4{,}0} = 4{,}0\\ \\mathrm{m/s}
+$$
+
+**Svar:** 4,0 m/s
+
+**b)** Medelhastigheten är sekantens lutning mellan kurvans punkter (0 s; 0 m) och (4,0 s; 8,0 m):
+
+$$
+v_\\mathrm{m} = \\frac{8{,}0 - 0}{4{,}0 - 0} = \\frac{8{,}0}{4{,}0} = 2{,}0\\ \\mathrm{m/s}
+$$
+
+**Svar:** 2,0 m/s
+
+**c)** Kurvan blir brantare och brantare, så bilen rullar allt fortare. Medelhastigheten i b) är ett genomsnitt över hela intervallet, där bilen i början rullade långsamt. Momentanhastigheten i a) gäller bara i slutet av intervallet, när bilen redan har hunnit bli snabb. Därför är tangenten i $t = 4{,}0\\ \\mathrm{s}$ brantare än sekanten från origo till samma punkt.
+
+**Svar:** Bilen rullar allt fortare, så hastigheten i slutet av intervallet är större än genomsnittet över intervallet.`,
+        },
+        {
+            level: 2,
+            question: `Avståndet mellan två städer är 120 km. Hur många minuter tjänar man på att köra med medelhastigheten 90 km/h i stället för 80 km/h? Ange svaret i minuter.`,
+            answer: { value: 10, unit: 'min', tol: 0.02 },
+            solution: `Vi löser ut tiden ur formeln för medelhastighet och räknar ut restiden för båda hastigheterna:
+
+$$
+v_\\mathrm{m} = \\frac{\\Delta s}{\\Delta t} \\quad\\Leftrightarrow\\quad \\Delta t = \\frac{\\Delta s}{v_\\mathrm{m}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\Delta s = 120\\ \\mathrm{km} \\\\
+v_1 = 80\\ \\mathrm{km/h} \\\\
+v_2 = 90\\ \\mathrm{km/h}
+\\end{array} \\right]
+$$
+
+Med 80 km/h:
+
+$$
+\\Delta t_1 = \\frac{120}{80}\\ \\mathrm{h} = 1{,}5\\ \\mathrm{h} = 1{,}5 \\cdot 60\\ \\mathrm{min} = 90\\ \\mathrm{min}
+$$
+
+Med 90 km/h:
+
+$$
+\\Delta t_2 = \\frac{120}{90}\\ \\mathrm{h} = 1{,}333\\ldots\\ \\mathrm{h} = 1{,}333\\ldots \\cdot 60\\ \\mathrm{min} = 80\\ \\mathrm{min}
+$$
+
+Tidsvinsten är skillnaden:
+
+$$
+\\Delta t_1 - \\Delta t_2 = 90\\ \\mathrm{min} - 80\\ \\mathrm{min} = 10\\ \\mathrm{min}
+$$
+
+Rimlighet: hastigheten ökar med ungefär 12 %, och tiden minskar med ungefär 11 %. Det stämmer väl.
+
+**Svar:** 10 min`,
+        },
+
+        {
+            level: 3,
+            question: `En cyklist cyklar uppför en backe med medelhastigheten 12 km/h och vänder sedan och cyklar samma väg ned med medelhastigheten 36 km/h. Backens längd är okänd. Bestäm hennes medelfart för hela turen, upp och ned. Ange svaret i km/h.`,
+            answer: { value: 18, unit: 'km/h', tol: 0.02 },
+            solution: `Medelfarten är hela sträckan delat med hela tiden. Vi kallar backens längd för *L*. Den behövs inte som tal, eftersom den kommer att förkortas bort.
+
+$$
+\\left[ \\begin{array}{l}
+v_1 = 12\\ \\mathrm{km/h} \\quad (\\text{uppför}) \\\\
+v_2 = 36\\ \\mathrm{km/h} \\quad (\\text{nedför}) \\\\
+\\text{sträcka åt varje håll} = L
+\\end{array} \\right]
+$$
+
+Tiden för varje del får vi ur $v_\\mathrm{m} = \\dfrac{\\Delta s}{\\Delta t}$, alltså $\\Delta t = \\dfrac{\\Delta s}{v_\\mathrm{m}}$:
+
+$$
+t_1 = \\frac{L}{v_1} \\qquad t_2 = \\frac{L}{v_2}
+$$
+
+Hela sträckan är $2L$ och hela tiden $t_1 + t_2$:
+
+$$
+\\text{medelfart} = \\frac{2L}{t_1 + t_2} = \\frac{2L}{\\dfrac{L}{v_1} + \\dfrac{L}{v_2}}
+$$
+
+Vi förkortar med *L* i täljare och nämnare:
+
+$$
+\\text{medelfart} = \\frac{2}{\\dfrac{1}{v_1} + \\dfrac{1}{v_2}} = \\frac{2 v_1 v_2}{v_1 + v_2}
+$$
+
+Insättning:
+
+$$
+\\text{medelfart} = \\frac{2 \\cdot 12 \\cdot 36}{12 + 36}\\ \\mathrm{km/h} = \\frac{864}{48}\\ \\mathrm{km/h} = 18\\ \\mathrm{km/h}
+$$
+
+Rimlighet: medelvärdet av de två hastigheterna är 24 km/h, men det är fel svar. Uppför tar tre gånger så lång tid som nedför, så hon cyklar med den låga hastigheten under tre fjärdedelar av tiden. Medelfarten hamnar därför närmare 12 km/h än 36 km/h. Med $L = 6\\ \\mathrm{km}$ blir tiderna 0,5 h och 0,17 h, och $\\dfrac{12}{0{,}667} = 18\\ \\mathrm{km/h}$, samma svar.
+
+**Svar:** 18 km/h`,
+        },
+        {
+            level: 3,
+            question: `En kälke glider ut på en plan isyta och bromsas av friktionen. Kälkens läge *s* visas i *s-t*-diagrammet nedan.
+
+${makeDiagram({
+    xMax: 6, xTicks: [0, 1, 2, 3, 4, 5, 6],
+    yMax: 40, yTicks: [0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40],
+    yLabel: '<tspan font-style="italic">s</tspan> (m)',
+    paths: [{ points: Array.from({ length: 61 }, (_, i) => { const t = i / 10; return [t, 12 * t - t * t]; }) }],
+})}
+
+Vid vilken tidpunkt är kälkens momentanhastighet lika stor som dess medelhastighet under hela intervallet från $t = 0$ till $t = 6{,}0\\ \\mathrm{s}$? Ange svaret i sekunder.`,
+            answer: { value: 3.0, unit: 's', tol: 0.07 },
+            solution: `**Medelhastigheten** under hela intervallet är lutningen hos sekanten mellan kurvans ändpunkter, (0 s; 0 m) och (6,0 s; 36 m):
+
+$$
+v_\\mathrm{m} = \\frac{s_2 - s_1}{t_2 - t_1} = \\frac{36 - 0}{6{,}0 - 0} = 6{,}0\\ \\mathrm{m/s}
+$$
+
+**Momentanhastigheten** i en punkt är lutningen hos tangenten i den punkten. De två är lika stora där tangenten har samma lutning som sekanten, alltså där tangenten är **parallell med sekanten**.
+
+Vi lägger en linjal parallellt med sekanten och skjuter den uppåt tills den bara snuddar kurvan. Det sker vid $t = 3{,}0\\ \\mathrm{s}$, där kurvan går genom (3,0 s; 27 m).
+
+${makeDiagram({
+    xMax: 6, xTicks: [0, 1, 2, 3, 4, 5, 6],
+    yMax: 40, yTicks: [0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40],
+    yLabel: '<tspan font-style="italic">s</tspan> (m)',
+    paths: [
+        { points: Array.from({ length: 61 }, (_, i) => { const t = i / 10; return [t, 12 * t - t * t]; }) },
+        { points: [[0, 0], [6, 36]], color: '#0f1620', width: 1.6, dash: '6 4' },
+        { points: [[0.5, 12], [31 / 6, 40]], color: '#2563c9', width: 2.2 },
+    ],
+})}
+
+Den streckade linjen är sekanten och den blå linjen tangenten i $t = 3{,}0\\ \\mathrm{s}$. Kontroll av tangentens lutning med två punkter på den, (1,0 s; 15 m) och (5,0 s; 39 m):
+
+$$
+v = \\frac{39 - 15}{5{,}0 - 1{,}0} = \\frac{24}{4{,}0} = 6{,}0\\ \\mathrm{m/s}
+$$
+
+Det är samma lutning som sekantens, så momentanhastigheten är 6,0 m/s just där.
+
+Rimlighet: kälken bromsas jämnt och har hastigheten noll vid $t = 6{,}0\\ \\mathrm{s}$, där kurvan blir vågrät. Då är det rimligt att den har sin medelhastighet mitt i intervallet.
+
+**Svar:** Vid 3,0 s`,
+        },
+        {
+            level: 3,
+            question: `Ett föremål rör sig fram och tillbaka längs en rät linje, utan att göra några ryck eller hopp i läget.<br>a) Under ett tidsintervall är föremålets medelhastighet noll. Måste momentanhastigheten ha varit noll vid någon tidpunkt under intervallet? Motivera med hjälp av ett *s-t*-diagram.<br>b) Gäller det omvända? Om momentanhastigheten är noll vid någon tidpunkt, måste då medelhastigheten under intervallet vara noll? Motivera.`,
+            solution: `**a)** Medelhastigheten är sekantens lutning i *s-t*-diagrammet:
+
+$$
+v_\\mathrm{m} = \\frac{s_2 - s_1}{t_2 - t_1}
+$$
+
+Att $v_\\mathrm{m} = 0$ betyder att $s_2 = s_1$: föremålet är på samma plats i slutet som i början, och sekanten är vågrät.
+
+Det finns då två möjligheter.
+
+- Föremålet står still hela tiden. Grafen är en vågrät linje, och momentanhastigheten är noll vid varje tidpunkt.
+- Föremålet rör sig. Om läget först ökar måste det sedan minska igen för att komma tillbaka till $s_1$ (eller tvärtom). Grafen går då upp och ned igen och har en högsta punkt (eller lägsta punkt) någonstans i intervallet. I den punkten är tangenten vågrät, och tangentens lutning är momentanhastigheten. Där är alltså momentanhastigheten noll: det är ögonblicket då föremålet vänder.
+
+Eftersom grafen inte har några hopp kan den inte ta sig tillbaka utan att vända, och vändningen kräver att hastigheten passerar noll.
+
+**Svar:** Ja. Medelhastigheten noll betyder att föremålet kommer tillbaka till startläget, och för att vända måste det ha momentanhastigheten noll i vändpunkten.
+
+**b)** Nej. Ett motexempel: en bil kör 200 m fram till ett rödljus, stannar och kör sedan vidare 300 m. När bilen står still är momentanhastigheten noll, och i *s-t*-diagrammet är grafen vågrät just där. Men bilen slutar 500 m från starten, så sekanten lutar uppåt och medelhastigheten är större än noll.
+
+**Svar:** Nej. En bil som stannar vid ett rödljus och sedan fortsätter framåt har momentanhastigheten noll när den står still, men medelhastigheten är inte noll eftersom förflyttningen inte är noll.`,
+        },
+        {
+            level: 3,
+            question: `En spårvagn står vid en hållplats. I samma ögonblick som den startar springer en löpare förbi spårvagnens front, och båda rör sig sedan åt samma håll längs en rak gata. Läget *s* mäts från spårvagnens front vid starten. I *s-t*-diagrammet visar den röda kurvan spårvagnens läge och den blå linjen löparens.
+
+${makeDiagram({
+    xMax: 9, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    yMax: 48, yTicks: [0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48],
+    yLabel: '<tspan font-style="italic">s</tspan> (m)',
+    paths: [
+        { points: Array.from({ length: 91 }, (_, i) => { const t = i / 10; return [t, 0.5 * t * t]; }) },
+        { points: [[0, 0], [9, 36]], color: '#2563c9', width: 2.2 },
+    ],
+})}
+
+a) Hur lång tid efter starten och hur långt från startpunkten kommer spårvagnen ikapp löparen?<br>b) Innan spårvagnen kommer ikapp ligger löparen före. Bestäm det största avstånd som löparen har till spårvagnen. Motivera med hjälp av grafen varför avståndet är störst just vid den tidpunkt du väljer.
+
+*Ange det största avståndet i b) som ditt numeriska svar i m.*`,
+            answer: { value: 8.0, unit: 'm', tol: 0.07 },
+            delsvar: [
+                { del: 'a', value: 8.0, unit: 's', tol: 0.04, etikett: 'tid' },
+                { del: 'a', value: 32, unit: 'm', tol: 0.04, etikett: 'läge' },
+                { del: 'b', value: 8.0, unit: 'm', tol: 0.07 },
+            ],
+            solution: `**a)** Spårvagnen är ikapp när båda är på samma plats samtidigt, alltså där graferna skär varandra. Det sker i punkten (8,0 s; 32 m).
+
+**Svar:** Efter 8,0 s, 32 m från startpunkten.
+
+**b)** Avståndet mellan löparen och spårvagnen vid en viss tidpunkt är det lodräta avståndet mellan den blå linjen och den röda kurvan vid den tidpunkten.
+
+Lutningen i ett *s-t*-diagram är hastigheten. Löparens hastighet är den blå linjens lutning. Vi använder punkterna (0 s; 0 m) och (8,0 s; 32 m):
+
+$$
+v_\\mathrm{L} = \\frac{s_2 - s_1}{t_2 - t_1} = \\frac{32 - 0}{8{,}0 - 0} = 4{,}0\\ \\mathrm{m/s}
+$$
+
+Spårvagnens momentanhastighet är lutningen hos tangenten till den röda kurvan.
+
+- I början är kurvan flackare än linjen. Spårvagnen är då långsammare än löparen, och avståndet växer.
+- Senare är kurvan brantare än linjen. Spårvagnen är då snabbare än löparen, och avståndet krymper.
+
+Avståndet slutar alltså växa och börjar krympa i det ögonblick då de två har **lika stor hastighet**. Där är tangenten till kurvan parallell med den blå linjen. Vi lägger en linjal parallellt med den blå linjen och skjuter den tills den bara snuddar kurvan. Det sker vid $t = 4{,}0\\ \\mathrm{s}$, där kurvan går genom (4,0 s; 8,0 m).
+
+${makeDiagram({
+    xMax: 9, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    yMax: 48, yTicks: [0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48],
+    yLabel: '<tspan font-style="italic">s</tspan> (m)',
+    paths: [
+        { points: Array.from({ length: 91 }, (_, i) => { const t = i / 10; return [t, 0.5 * t * t]; }) },
+        { points: [[0, 0], [9, 36]], color: '#2563c9', width: 2.2 },
+        { points: [[2, 0], [7, 20]], color: '#0f1620', width: 1.6, dash: '6 4' },
+        { points: [[4, 8], [4, 16]], color: '#0f1620', width: 2.4 },
+    ],
+})}
+
+Den streckade linjen är tangenten i $t = 4{,}0\\ \\mathrm{s}$ och det svarta lodräta strecket avståndet mellan löparen och spårvagnen just då. Kontroll av tangentens lutning med två punkter på den, (2,0 s; 0 m) och (6,0 s; 16 m):
+
+$$
+v_\\mathrm{S} = \\frac{16 - 0}{6{,}0 - 2{,}0} = \\frac{16}{4{,}0} = 4{,}0\\ \\mathrm{m/s}
+$$
+
+Det är samma hastighet som löparens. Vid $t = 4{,}0\\ \\mathrm{s}$ är löparen vid 16 m, eftersom $4{,}0\\ \\mathrm{m/s} \\cdot 4{,}0\\ \\mathrm{s} = 16\\ \\mathrm{m}$, och spårvagnen vid 8,0 m. Avståndet är
+
+$$
+16\\ \\mathrm{m} - 8{,}0\\ \\mathrm{m} = 8{,}0\\ \\mathrm{m}
+$$
+
+Rimlighet: det är hastigheterna som avgör. Före $t = 4{,}0\\ \\mathrm{s}$ drar löparen ifrån, efter knappar spårvagnen in. Avläser vi avståndet vid till exempel 3,0 s (12 m och 4,5 m) och 5,0 s (20 m och 12,5 m) blir det 7,5 m båda gångerna, alltså mindre än 8,0 m.
+
+**Svar:** Det största avståndet är 8,0 m. Det inträffar efter 4,0 s, när spårvagnen har fått samma hastighet som löparen.`,
+        },
+        {
+            level: 3,
+            question: `En elev filmar en vagn som rullar längs ett bord och läser av vagnens läge *s* i varje bildruta med en sekunds mellanrum.
+
+| *t* (s) | 0 | 1,0 | 2,0 | 3,0 | 4,0 | 5,0 | 6,0 |
+|---|---|---|---|---|---|---|---|
+| *s* (cm) | 0 | 2,8 | 7,2 | 13,2 | 20,8 | 30,0 | 40,8 |
+
+Uppskatta vagnens momentanhastighet vid $t = 3{,}0\\ \\mathrm{s}$ så noggrant som tabellen tillåter. Motivera varför du väljer den metod du gör. Ange svaret i cm/s.`,
+            answer: { value: 6.8, unit: 'cm/s', tol: 0.03 },
+            solution: `Momentanhastigheten är tangentens lutning i punkten. Med bara en tabell kan vi inte rita en exakt tangent, men vi kan beräkna sekanters lutning, alltså medelhastigheter, i korta intervall nära $t = 3{,}0\\ \\mathrm{s}$.
+
+Först ser vi hur rörelsen ser ut. Förflyttningarna under varje sekund är 2,8 cm, 4,4 cm, 6,0 cm, 7,6 cm, 9,2 cm och 10,8 cm. De växer, så vagnen blir snabbare och snabbare, och grafen i ett *s-t*-diagram blir allt brantare.
+
+Tre sekanter som går genom eller börjar i $t = 3{,}0\\ \\mathrm{s}$:
+
+Sekunden före, från 2,0 s till 3,0 s:
+
+$$
+v_\\mathrm{före} = \\frac{13{,}2 - 7{,}2}{3{,}0 - 2{,}0} = \\frac{6{,}0}{1{,}0} = 6{,}0\\ \\mathrm{cm/s}
+$$
+
+Sekunden efter, från 3,0 s till 4,0 s:
+
+$$
+v_\\mathrm{efter} = \\frac{20{,}8 - 13{,}2}{4{,}0 - 3{,}0} = \\frac{7{,}6}{1{,}0} = 7{,}6\\ \\mathrm{cm/s}
+$$
+
+Eftersom vagnen accelererar är medelhastigheten sekunden före för liten (vagnen var långsammare innan) och sekunden efter för stor (vagnen blev snabbare efteråt). Den bästa uppskattningen får vi med ett intervall som ligger **symmetriskt kring** $t = 3{,}0\\ \\mathrm{s}$, från 2,0 s till 4,0 s. Då tar felen före och efter ut varandra i stort sett, och sekanten blir nästan parallell med tangenten.
+
+$$
+v(3{,}0\\ \\mathrm{s}) \\approx \\frac{20{,}8 - 7{,}2}{4{,}0 - 2{,}0} = \\frac{13{,}6}{2{,}0} = 6{,}8\\ \\mathrm{cm/s}
+$$
+
+Rimlighet: värdet ligger mellan 6,0 cm/s och 7,6 cm/s, precis som det ska när vagnen accelererar jämnt. Det är också medelvärdet av de två ensidiga uppskattningarna.
+
+**Svar:** Cirka 6,8 cm/s, beräknat som medelhastigheten i intervallet från 2,0 s till 4,0 s, som ligger symmetriskt kring 3,0 s.`,
+        },
+        {
+            level: 3,
+            question: `Ett tåg ska enligt tidtabellen köra sträckan mellan två stationer med medelhastigheten *v*. På grund av ett spårarbete kör tåget den första halvan av sträckan med en medelhastighet som bara är 75 % av *v*.<br>a) Hur många procent högre än *v* måste medelhastigheten vara på den andra halvan för att tåget ska komma fram enligt tidtabellen?<br>b) Hur går det om spårarbetet i stället gör att tåget kör den första halvan med halva den planerade medelhastigheten? Motivera.
+
+*Ange svaret i a) som ditt numeriska svar i procent.*`,
+            answer: { value: 50, unit: '%', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 50, unit: '%' },
+                { del: 'b' },
+            ],
+            solution: `Vi kallar sträckan mellan stationerna för *L*. Varken *L* eller *v* behövs som tal. Ur $v_\\mathrm{m} = \\dfrac{\\Delta s}{\\Delta t}$ får vi tiden $\\Delta t = \\dfrac{\\Delta s}{v_\\mathrm{m}}$.
+
+Tiden enligt tidtabellen för hela sträckan:
+
+$$
+T = \\frac{L}{v}
+$$
+
+**a)** Första halvan, sträckan $\\dfrac{L}{2}$, körs med medelhastigheten $0{,}75\\,v$:
+
+$$
+t_1 = \\frac{L/2}{0{,}75\\,v} = \\frac{L}{1{,}5\\,v} = \\frac{2}{3} \\cdot \\frac{L}{v} = \\frac{2}{3}\\,T
+$$
+
+Kvar för andra halvan är
+
+$$
+t_2 = T - \\frac{2}{3}\\,T = \\frac{1}{3}\\,T = \\frac{L}{3v}
+$$
+
+Den medelhastighet som krävs på andra halvan blir
+
+$$
+v_2 = \\frac{L/2}{t_2} = \\frac{L/2}{\\dfrac{L}{3v}} = \\frac{L}{2} \\cdot \\frac{3v}{L} = 1{,}5\\,v
+$$
+
+$1{,}5\\,v$ är 50 % högre än *v*.
+
+Rimlighet: man kunde tro att 25 % för långsamt ska tas igen med 25 % för fort, men tåget kör den långsamma halvan under längre tid än den snabba. Därför krävs mer än 25 %.
+
+**Svar:** 50 % högre
+
+**b)** Med halva hastigheten tar första halvan tiden
+
+$$
+t_1 = \\frac{L/2}{0{,}5\\,v} = \\frac{L}{v} = T
+$$
+
+Hela den planerade restiden går alltså åt till den första halvan. När tåget är halvvägs borde det redan ha varit framme. Den andra halvan skulle behöva köras på tiden noll, vilket kräver en oändligt hög hastighet.
+
+**Svar:** Tåget kan inte komma fram i tid, hur fort det än kör på andra halvan, eftersom hela den planerade tiden redan är förbrukad när det är halvvägs.`,
         },
     ],
 
@@ -4092,7 +6978,7 @@ $$
 \\left[ \\begin{array}{l}
 v_0 = 90\\ \\mathrm{km/h} = 90 / 3{,}6\\ \\mathrm{m/s} = 25\\ \\mathrm{m/s} \\\\
 v = 30\\ \\mathrm{km/h} = 30 / 3{,}6\\ \\mathrm{m/s} \\approx 8{,}33\\ \\mathrm{m/s} \\\\
-a = -5{,}0\\ \\mathrm{m/s^2} \\quad (\\text{retardation — negativ})
+a = -5{,}0\\ \\mathrm{m/s^2} \\quad (\\text{retardation, negativ})
 \\end{array} \\right]
 $$
 
@@ -4130,7 +7016,7 @@ $$
 
 **Svar:** Bollen når sin högsta punkt efter ca 1,22 s.
 
-**Generell slutsats:** På vägen ned tar det lika lång tid att falla tillbaka till kasthöjden (om vi bortser från luftmotstånd) — total flygtid är alltså $\\approx 2{,}44$ s.`,
+**Generell slutsats:** På vägen ned tar det lika lång tid att falla tillbaka till kasthöjden (om vi bortser från luftmotstånd). Den totala flygtiden är alltså $\\approx 2{,}44$ s.`,
         },
 
         {
@@ -4161,16 +7047,16 @@ $$
 a_\\mathrm{m} = \\frac{\\Delta v}{\\Delta t} = \\frac{22{,}22 - 13{,}89}{8{,}0} \\approx 1{,}04\\ \\mathrm{m/s^2}
 $$
 
-**b)** Medelaccelerationen säger *bara* att hastigheten har ökat med ca 8,3 m/s totalt över 8,0 s — den säger ingenting om hur ökningen fördelades. Föraren kan ha:
+**b)** Medelaccelerationen säger *bara* att hastigheten har ökat med ca 8,3 m/s totalt över 8,0 s. Den säger ingenting om hur ökningen fördelades. Föraren kan ha:
 
 - accelererat *konstant* med 1,04 m/s² hela tiden (då är momentan = medel hela vägen), eller
 - accelererat hårdare i början och svagare i slutet (eller tvärtom).
 
-I praktiken är det näst intill omöjligt att hålla *exakt* konstant acceleration i en bil. Men någonstans i intervallet **måste** den momentana accelerationen vara lika med medelaccelerationen — det följer av **medelvärdessatsen**: om en kontinuerlig funktion har medelvärde *m* i ett intervall, så antar den värdet *m* åtminstone en gång i intervallet.
+I praktiken är det näst intill omöjligt att hålla *exakt* konstant acceleration i en bil. Men någonstans i intervallet **måste** den momentana accelerationen vara lika med medelaccelerationen. Det följer av **medelvärdessatsen**: om en kontinuerlig funktion har medelvärde *m* i ett intervall, så antar den värdet *m* åtminstone en gång i intervallet.
 
 **Svar:** a) Medelaccelerationen är ca 1,04 m/s². b) Den är inte nödvändigtvis lika med momentanaccelerationen i hela intervallet, men sammanfaller med den åtminstone en gång under intervallet.
 
-**Generell slutsats:** Detta är en klassisk källa till missförstånd — *medel* över ett intervall säger något om summan av rörelsen, inte om vad som hände vid någon specifik tidpunkt.`,
+**Generell slutsats:** Detta är en klassisk källa till missförstånd: *medel* över ett intervall säger något om summan av rörelsen, inte om vad som hände vid någon specifik tidpunkt.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
@@ -4222,7 +7108,551 @@ $$
 
 **Svar:** Stenen har fallit ca 4,57 s totalt när den når marken.
 
-**Generell slutsats:** Detta är en klassisk fälla — den frestande "kortvägen" är att räkna ut hastigheten just innan markträff ($v = 40$ m/s eftersom 40 m / 1 s = 40 m/s) men det blir fel, eftersom stenens hastighet *under* den sista sekunden inte är konstant. Den ökar från $v(t-1)$ till $v(t)$, och 40 m är den *genomsnittliga* förflyttningen under sekunden. Rätt metod är att jämföra två tidpunkter via fallformeln.`,
+**Generell slutsats:** Detta är en klassisk fälla. Den frestande "kortvägen" är att räkna ut hastigheten just innan markträff ($v = 40$ m/s eftersom 40 m / 1 s = 40 m/s) men det blir fel, eftersom stenens hastighet *under* den sista sekunden inte är konstant. Den ökar från $v(t-1)$ till $v(t)$, och 40 m är den *genomsnittliga* förflyttningen under sekunden. Rätt metod är att jämföra två tidpunkter via fallformeln.`,
+        },
+        {
+            level: 1,
+            question: `En moped har accelerationen $a = 2{,}5\\ \\mathrm{m/s^2}$. Vad betyder det?`,
+            choices: [
+                'Mopeden färdas 2,5 m varje sekund.',
+                'Mopedens hastighet ökar med 2,5 m/s varje sekund.',
+                'Mopeden har hastigheten 2,5 m/s.',
+                'Mopedens hastighet ökar med 2,5 m/s² varje sekund.',
+            ],
+            correct: 1,
+            solution: `Accelerationen talar om hur snabbt hastigheten ändras. Enheten m/s² kan läsas som (m/s) per sekund: så många meter per sekund ändras hastigheten under varje sekund.
+
+Med $a = 2{,}5\\ \\mathrm{m/s^2}$ ökar alltså hastigheten med $2{,}5\\ \\mathrm{m/s}$ för varje sekund som går. Efter en sekund går mopeden $2{,}5\\ \\mathrm{m/s}$ fortare än från början, efter två sekunder $5{,}0\\ \\mathrm{m/s}$ fortare och så vidare.
+
+De andra alternativen blandar ihop accelerationen med hastighet (2,5 m varje sekund och 2,5 m/s) eller anger fel enhet på hastighetsökningen.
+
+**Svar:** Mopedens hastighet ökar med 2,5 m/s varje sekund.`,
+        },
+        {
+            level: 1,
+            question: `En skidåkare i en nedförsbacke ökar sin hastighet från $4{,}0\\ \\mathrm{m/s}$ till $13{,}0\\ \\mathrm{m/s}$ på $6{,}0\\ \\mathrm{s}$. Beräkna skidåkarens medelacceleration. Ange svaret i m/s².`,
+            answer: { value: 1.5, unit: 'm/s²', tol: 0.02 },
+            solution: `Medelaccelerationen är hastighetsändringen delat med tidsintervallet:
+
+$$
+a_m = \\frac{\\Delta v}{\\Delta t} = \\frac{v_2 - v_1}{t_2 - t_1}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+v_1 = 4{,}0\\ \\mathrm{m/s} \\\\
+v_2 = 13{,}0\\ \\mathrm{m/s} \\\\
+\\Delta t = 6{,}0\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+a_m = \\frac{13{,}0 - 4{,}0}{6{,}0} = \\frac{9{,}0}{6{,}0} = 1{,}5\\ \\mathrm{m/s^2}
+$$
+
+Hastigheten ökar, så accelerationen ska vara positiv. Det stämmer.
+
+**Svar:** 1,5 m/s²`,
+        },
+        {
+            level: 1,
+            question: `En cyklist som färdas med hastigheten $8{,}0\\ \\mathrm{m/s}$ bromsar och står still efter $2{,}5\\ \\mathrm{s}$. Beräkna cyklistens acceleration under inbromsningen, med tecken. Ange svaret i m/s².`,
+            answer: { value: -3.2, unit: 'm/s²', tol: 0.02 },
+            solution: `En inbromsning är också en acceleration. Vi räknar med cyklistens färdriktning som positiv riktning.
+
+$$
+a = \\frac{\\Delta v}{\\Delta t} = \\frac{v_2 - v_1}{\\Delta t}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+v_1 = 8{,}0\\ \\mathrm{m/s} \\\\
+v_2 = 0 \\\\
+\\Delta t = 2{,}5\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+a = \\frac{0 - 8{,}0}{2{,}5} = \\frac{-8{,}0}{2{,}5} = -3{,}2\\ \\mathrm{m/s^2}
+$$
+
+Accelerationen är negativ eftersom hastigheten minskar. En sådan negativ acceleration kallas retardation.
+
+**Svar:** $-3{,}2\\ \\mathrm{m/s^2}$`,
+        },
+        {
+            level: 1,
+            question: `Från en bro kastas en liten sten rakt nedåt med hastigheten $3{,}0\\ \\mathrm{m/s}$. Hur stor är stenens fart $1{,}2\\ \\mathrm{s}$ senare? Bortse från luftmotståndet och räkna med $g = 9{,}82\\ \\mathrm{m/s^2}$. Ange svaret i m/s.`,
+            answer: { value: 15, unit: 'm/s', tol: 0.03 },
+            solution: `Stenen faller fritt, så accelerationen är tyngdaccelerationen. Hela rörelsen sker nedåt, och därför väljer vi nedåt som positiv riktning. Då är både begynnelsehastigheten och accelerationen positiva.
+
+$$
+v = v_0 + a \\cdot t
+$$
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = 3{,}0\\ \\mathrm{m/s} \\\\
+a = g = 9{,}82\\ \\mathrm{m/s^2} \\\\
+t = 1{,}2\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+v = 3{,}0 + 9{,}82 \\cdot 1{,}2 = 3{,}0 + 11{,}784 = 14{,}784\\ \\mathrm{m/s} \\approx 15\\ \\mathrm{m/s}
+$$
+
+En sten som bara släpps hade fått farten $11{,}784\\ \\mathrm{m/s}$, och den här stenen har dessutom fått en knuff på $3{,}0\\ \\mathrm{m/s}$ från början. Svaret är rimligt.
+
+**Svar:** 15 m/s`,
+        },
+        {
+            level: 2,
+            question: `En studsboll träffar ett golv med hastigheten $6{,}0\\ \\mathrm{m/s}$ rakt nedåt och lämnar golvet med hastigheten $4{,}5\\ \\mathrm{m/s}$ rakt uppåt. Bollen är i kontakt med golvet under $0{,}015\\ \\mathrm{s}$. Bestäm bollens medelacceleration under studsen, både storlek och riktning. Ange storleken i m/s².
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" style="max-width:486px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><text x="110" y="26" font-size="14" fill="#0f1620" text-anchor="middle">Före studsen</text><text x="250" y="26" font-size="14" fill="#0f1620" text-anchor="middle">Efter studsen</text><line x1="20" y1="178" x2="340" y2="178" stroke="#0f1620" stroke-width="1.6"/><line x1="32" y1="178" x2="25" y2="186" stroke="#0f1620" stroke-width="1"/><line x1="52" y1="178" x2="45" y2="186" stroke="#0f1620" stroke-width="1"/><line x1="72" y1="178" x2="65" y2="186" stroke="#0f1620" stroke-width="1"/><line x1="92" y1="178" x2="85" y2="186" stroke="#0f1620" stroke-width="1"/><line x1="112" y1="178" x2="105" y2="186" stroke="#0f1620" stroke-width="1"/><line x1="132" y1="178" x2="125" y2="186" stroke="#0f1620" stroke-width="1"/><line x1="152" y1="178" x2="145" y2="186" stroke="#0f1620" stroke-width="1"/><line x1="172" y1="178" x2="165" y2="186" stroke="#0f1620" stroke-width="1"/><line x1="192" y1="178" x2="185" y2="186" stroke="#0f1620" stroke-width="1"/><line x1="212" y1="178" x2="205" y2="186" stroke="#0f1620" stroke-width="1"/><line x1="232" y1="178" x2="225" y2="186" stroke="#0f1620" stroke-width="1"/><line x1="252" y1="178" x2="245" y2="186" stroke="#0f1620" stroke-width="1"/><line x1="272" y1="178" x2="265" y2="186" stroke="#0f1620" stroke-width="1"/><line x1="292" y1="178" x2="285" y2="186" stroke="#0f1620" stroke-width="1"/><line x1="312" y1="178" x2="305" y2="186" stroke="#0f1620" stroke-width="1"/><line x1="332" y1="178" x2="325" y2="186" stroke="#0f1620" stroke-width="1"/><circle cx="110" cy="62" r="14" fill="#e07b39" stroke="#0f1620" stroke-width="1.4"/><path d="M 101 55 Q 110 50 119 55" fill="none" stroke="rgba(15,22,32,0.45)" stroke-width="1.2"/><line x1="110" y1="76" x2="110" y2="151" stroke="#c8324a" stroke-width="2.6" stroke-linecap="butt"/><polygon points="104,151 110,160 116,151" fill="#c8324a"/><text x="122" y="152" font-size="14" fill="#c8324a" text-anchor="start"><tspan font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="0.72em">1</tspan> = 6,0 m/s</text><circle cx="250" cy="150" r="14" fill="#e07b39" stroke="#0f1620" stroke-width="1.4"/><path d="M 241 143 Q 250 138 259 143" fill="none" stroke="rgba(15,22,32,0.45)" stroke-width="1.2"/><line x1="250" y1="136" x2="250" y2="82" stroke="#c8324a" stroke-width="2.6" stroke-linecap="butt"/><polygon points="244,82 250,73 256,82" fill="#c8324a"/><text x="262" y="84" font-size="14" fill="#c8324a" text-anchor="start"><tspan font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="0.72em">2</tspan> = 4,5 m/s</text></svg>`,
+            answer: { value: 700, unit: 'm/s²', tol: 0.02 },
+            solution: `Hastigheten är en vektor, så riktningen måste vara med i räkningen. Vi väljer uppåt som positiv riktning. Då är hastigheten före studsen negativ och hastigheten efter studsen positiv.
+
+$$
+a_m = \\frac{\\Delta v}{\\Delta t} = \\frac{v_2 - v_1}{\\Delta t}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+v_1 = -6{,}0\\ \\mathrm{m/s} \\\\
+v_2 = 4{,}5\\ \\mathrm{m/s} \\\\
+\\Delta t = 0{,}015\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+Hastighetsändringen är
+
+$$
+\\Delta v = 4{,}5 - (-6{,}0) = 10{,}5\\ \\mathrm{m/s}
+$$
+
+Bollen måste först bromsas från $6{,}0\\ \\mathrm{m/s}$ till stillastående och sedan få farten $4{,}5\\ \\mathrm{m/s}$ åt andra hållet. Därför adderas farterna. Att räkna $6{,}0 - 4{,}5$ vore fel.
+
+$$
+a_m = \\frac{10{,}5}{0{,}015} = 700\\ \\mathrm{m/s^2}
+$$
+
+Svaret är positivt, alltså riktat uppåt. Det är rimligt: golvet bromsar bollen och skjuter upp den igen, och kontakttiden är mycket kort, så accelerationen blir mer än 70 gånger så stor som tyngdaccelerationen.
+
+**Svar:** $7{,}0 \\cdot 10^{2}\\ \\mathrm{m/s^2}$ riktad uppåt`,
+        },
+        {
+            level: 2,
+            question: `En mätsond släpps ut från en landare som svävar över ytan på en himlakropp utan atmosfär. Sonden mäter sin egen hastighet nedåt:
+
+| Tid efter utsläppet (s) | Hastighet nedåt (m/s) |
+| --- | --- |
+| 1,50 | 3,33 |
+| 4,00 | 7,38 |
+
+| Himlakropp | Tyngdacceleration vid ytan (m/s²) |
+| --- | --- |
+| Titan | 1,35 |
+| Månen | 1,62 |
+| Io | 1,80 |
+| Mars | 3,71 |
+
+a) Bestäm tyngdaccelerationen och avgör vilken av himlakropparna i tabellen sonden befinner sig vid.<br>b) Släpptes sonden från vila? Motivera med en beräkning.`,
+            answer: { value: 1.62, unit: 'm/s²', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 1.62, unit: 'm/s²', tol: 0.02, etikett: '$g =$' },
+                { del: 'b', value: 0.90, unit: 'm/s', tol: 0.03, etikett: '$v_0 =$' },
+            ],
+            solution: `**a)** Utan atmosfär finns inget luftmotstånd, så sonden faller fritt med konstant acceleration. Accelerationen är då lika med medelaccelerationen mellan de två mätningarna. Vi räknar nedåt som positiv riktning.
+
+$$
+\\left[ \\begin{array}{l}
+t_1 = 1{,}50\\ \\mathrm{s} \\\\
+v_1 = 3{,}33\\ \\mathrm{m/s} \\\\
+t_2 = 4{,}00\\ \\mathrm{s} \\\\
+v_2 = 7{,}38\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$
+a = \\frac{v_2 - v_1}{t_2 - t_1} = \\frac{7{,}38 - 3{,}33}{4{,}00 - 1{,}50} = \\frac{4{,}05}{2{,}50} = 1{,}62\\ \\mathrm{m/s^2}
+$$
+
+Värdet stämmer med Månen i tabellen.
+
+**Svar:** 1,62 m/s², sonden befinner sig vid Månen.
+
+**b)** Vi använder $v = v_0 + a \\cdot t$ för den första mätningen och löser ut begynnelsehastigheten:
+
+$$
+v_1 = v_0 + a \\cdot t_1 \\quad\\Leftrightarrow\\quad v_0 = v_1 - a \\cdot t_1
+$$
+
+$$
+v_0 = 3{,}33 - 1{,}62 \\cdot 1{,}50 = 3{,}33 - 2{,}43 = 0{,}90\\ \\mathrm{m/s}
+$$
+
+Kontroll med den andra mätningen: $0{,}90 + 1{,}62 \\cdot 4{,}00 = 7{,}38\\ \\mathrm{m/s}$, vilket stämmer med tabellen.
+
+Hade sonden släppts från vila hade begynnelsehastigheten varit noll. Den är i stället $0{,}90\\ \\mathrm{m/s}$ nedåt, så sonden sköts ut nedåt.
+
+**Svar:** Nej, sonden hade redan hastigheten 0,90 m/s nedåt när den släpptes.`,
+        },
+        {
+            level: 2,
+            question: `En modellraket skjuts upp rakt uppåt från marken. Under de första $3{,}5\\ \\mathrm{s}$ har raketen accelerationen $22\\ \\mathrm{m/s^2}$ uppåt. Sedan tar bränslet slut och raketen rör sig fritt, utan luftmotstånd. Hur lång tid efter starten når raketen sin högsta punkt? Räkna med $g = 9{,}82\\ \\mathrm{m/s^2}$ och ange svaret i sekunder.`,
+            answer: { value: 11, unit: 's', tol: 0.05 },
+            solution: `Rörelsen består av två delar med olika acceleration. Vi räknar uppåt som positiv riktning och tar en del i taget.
+
+**Del 1: motorn brinner.** Raketen startar från vila.
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = 0 \\\\
+a_1 = 22\\ \\mathrm{m/s^2} \\\\
+t_1 = 3{,}5\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+v_1 = v_0 + a_1 \\cdot t_1 = 0 + 22 \\cdot 3{,}5 = 77\\ \\mathrm{m/s}
+$$
+
+**Del 2: fri rörelse uppåt.** Nu verkar bara tyngdkraften, så accelerationen är $a_2 = -g$. Raketen fortsätter uppåt men saktar in, och i den högsta punkten är hastigheten noll.
+
+$$
+\\left[ \\begin{array}{l}
+v_1 = 77\\ \\mathrm{m/s} \\\\
+v_2 = 0 \\\\
+a_2 = -9{,}82\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$
+v_2 = v_1 + a_2 \\cdot t_2 \\quad\\Leftrightarrow\\quad t_2 = \\frac{v_2 - v_1}{a_2}
+$$
+
+$$
+t_2 = \\frac{0 - 77}{-9{,}82} = 7{,}8411\\ldots\\ \\mathrm{s}
+$$
+
+**Den totala tiden** fram till högsta punkten:
+
+$$
+t = t_1 + t_2 = 3{,}5 + 7{,}8411 = 11{,}3411\\ \\mathrm{s} \\approx 11\\ \\mathrm{s}
+$$
+
+Det är rimligt att den fria delen tar längre tid än motordelen: raketen fick hastigheten med en acceleration som är drygt dubbelt så stor som den som bromsar den.
+
+**Svar:** 11 s`,
+        },
+        {
+            level: 2,
+            question: `En boll kastas rakt uppåt. Vilket påstående stämmer om bollen i dess högsta punkt? Bortse från luftmotståndet.`,
+            choices: [
+                'Både hastigheten och accelerationen är noll.',
+                'Hastigheten är noll och accelerationen är riktad uppåt.',
+                'Hastigheten är riktad uppåt och accelerationen är noll.',
+                'Hastigheten är noll och accelerationen är 9,82 m/s² riktad nedåt.',
+            ],
+            correct: 3,
+            solution: `I den högsta punkten vänder bollen. Precis där byter hastigheten riktning, från uppåt till nedåt, och just i det ögonblicket är hastigheten noll.
+
+Accelerationen beror däremot inte på hur fort bollen rör sig. Bollen faller fritt hela tiden, både på väg upp och på väg ned, så accelerationen är tyngdaccelerationen $g = 9{,}82\\ \\mathrm{m/s^2}$ riktad nedåt, också i den högsta punkten.
+
+Hade accelerationen varit noll i toppen hade hastigheten inte ändrats där. Bollen hade då blivit hängande i luften med hastigheten noll i stället för att börja falla.
+
+**Svar:** Hastigheten är noll och accelerationen är 9,82 m/s² riktad nedåt.`,
+        },
+        {
+            level: 3,
+            question: `Ett tåg startar från vila och accelererar med den konstanta accelerationen $a_1$ tills det når sin högsta hastighet $v$. Därefter bromsar det direkt med en konstant retardation vars storlek är $a_2$, tills det står still vid nästa station. Hela resan tar tiden $T$.<br>a) Härled ett uttryck för tågets högsta hastighet $v$, uttryckt i $a_1$, $a_2$ och $T$.<br>b) Ett pendeltåg har $a_1 = 0{,}90\\ \\mathrm{m/s^2}$ och $a_2 = 1{,}2\\ \\mathrm{m/s^2}$, och resan mellan två stationer tar $50\\ \\mathrm{s}$. Beräkna tågets högsta hastighet i km/h.<br>c) Vilken av de två delarna av resan tar längst tid? Motivera generellt.`,
+            answer: { value: 93, unit: 'km/h', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 93, unit: 'km/h', tol: 0.03, etikett: '$v =$' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Kalla tiden för accelerationen $t_1$ och tiden för inbromsningen $t_2$. Då är
+
+$$
+t_1 + t_2 = T \\tag{1}
+$$
+
+Under accelerationen går hastigheten från 0 till $v$:
+
+$$
+v = 0 + a_1 \\cdot t_1 \\quad\\Leftrightarrow\\quad t_1 = \\frac{v}{a_1} \\tag{2}
+$$
+
+Under inbromsningen går hastigheten från $v$ till 0, med accelerationen $-a_2$:
+
+$$
+0 = v - a_2 \\cdot t_2 \\quad\\Leftrightarrow\\quad t_2 = \\frac{v}{a_2} \\tag{3}
+$$
+
+Uttrycken (2) och (3) insatta i (1), $t_1 + t_2 = T$, ger
+
+$$
+\\frac{v}{a_1} + \\frac{v}{a_2} = T
+$$
+
+Vi bryter ut $v$ och skriver bråken med gemensam nämnare, $\\dfrac{1}{a_1} + \\dfrac{1}{a_2} = \\dfrac{a_2 + a_1}{a_1 \\cdot a_2}$:
+
+$$
+v \\cdot \\frac{a_2 + a_1}{a_1 \\cdot a_2} = T
+$$
+
+Multiplikation av båda led med $\\dfrac{a_1 \\cdot a_2}{a_1 + a_2}$ ger
+
+$$
+v = \\frac{a_1 \\cdot a_2 \\cdot T}{a_1 + a_2}
+$$
+
+**Svar:** $v = \\dfrac{a_1 \\cdot a_2 \\cdot T}{a_1 + a_2}$
+
+**b)**
+
+$$
+\\left[ \\begin{array}{l}
+a_1 = 0{,}90\\ \\mathrm{m/s^2} \\\\
+a_2 = 1{,}2\\ \\mathrm{m/s^2} \\\\
+T = 50\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+v = \\frac{0{,}90 \\cdot 1{,}2 \\cdot 50}{0{,}90 + 1{,}2} = \\frac{54}{2{,}1} = 25{,}714\\ldots\\ \\mathrm{m/s}
+$$
+
+Omvandling till km/h (multiplicera med 3,6):
+
+$$
+v = 25{,}714 \\cdot 3{,}6 = 92{,}57\\ \\mathrm{km/h} \\approx 93\\ \\mathrm{km/h}
+$$
+
+Det är en rimlig toppfart för ett pendeltåg mellan två närliggande stationer.
+
+**Svar:** 93 km/h
+
+**c)** Enligt (2) och (3) är kvoten mellan tiderna
+
+$$
+\\frac{t_1}{t_2} = \\frac{v / a_1}{v / a_2} = \\frac{a_2}{a_1}
+$$
+
+Båda delarna har samma hastighetsändring, lika stor som $v$. Den del som har minst acceleration (till beloppet) behöver därför längst tid för att ändra hastigheten lika mycket. För pendeltåget är $a_1 < a_2$, så accelerationen tar längst tid: $t_1 = \\dfrac{25{,}714}{0{,}90} \\approx 29\\ \\mathrm{s}$ mot $t_2 = \\dfrac{25{,}714}{1{,}2} \\approx 21\\ \\mathrm{s}$.
+
+**Svar:** Den del som har minst acceleration till beloppet tar längst tid, eftersom tiderna förhåller sig som $\\dfrac{t_1}{t_2} = \\dfrac{a_2}{a_1}$. För pendeltåget är det accelerationen från stationen.`,
+        },
+        {
+            level: 3,
+            question: `Från en hög bro släpps boll A från vila. Exakt $0{,}40\\ \\mathrm{s}$ senare kastas boll B rakt nedåt från samma ställe med hastigheten $6{,}0\\ \\mathrm{m/s}$. Bortse från luftmotståndet och räkna med $g = 9{,}82\\ \\mathrm{m/s^2}$.<br>a) Visa att skillnaden mellan bollarnas hastigheter är konstant så länge båda faller, och beräkna skillnaden i m/s.<br>b) Kommer boll B ikapp boll A om bron är tillräckligt hög? Motivera med resultatet i a), utan att räkna ut några sträckor.`,
+            answer: { value: 2.1, unit: 'm/s', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 2.1, unit: 'm/s', tol: 0.03, etikett: '$v_B - v_A =$' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Vi räknar nedåt som positiv riktning och låter $t$ vara tiden från det ögonblick då B kastas. Boll A har då redan fallit i $t + 0{,}40\\ \\mathrm{s}$. Båda bollarna faller fritt, så båda har accelerationen $g$. Med $v = v_0 + a \\cdot t$ för var och en:
+
+$$
+v_A = 0 + g \\cdot (t + 0{,}40) = g \\cdot t + 0{,}40 \\cdot g
+$$
+
+$$
+v_B = 6{,}0 + g \\cdot t
+$$
+
+Skillnaden blir
+
+$$
+v_B - v_A = 6{,}0 + g \\cdot t - g \\cdot t - 0{,}40 \\cdot g = 6{,}0 - 0{,}40 \\cdot g
+$$
+
+Termen $g \\cdot t$ tar ut sig själv, så skillnaden beror inte på tiden. Den är konstant, eftersom båda bollarna ändrar sin hastighet lika mycket varje sekund. Insättning av $g = 9{,}82\\ \\mathrm{m/s^2}$:
+
+$$
+v_B - v_A = 6{,}0 - 0{,}40 \\cdot 9{,}82 = 6{,}0 - 3{,}928 = 2{,}072\\ \\mathrm{m/s} \\approx 2{,}1\\ \\mathrm{m/s}
+$$
+
+**Svar:** Skillnaden är konstant, och boll B är hela tiden 2,1 m/s snabbare än boll A.
+
+**b)** När B kastas har A redan ett försprång nedåt. Men B rör sig hela tiden $2{,}072\\ \\mathrm{m/s}$ snabbare än A, i samma riktning. Avståndet mellan bollarna minskar därför med $2{,}072\\ \\mathrm{m}$ varje sekund, och ett avstånd som minskar lika mycket varje sekund blir till slut noll. B kommer alltså ikapp efter en bestämd tid, förutsatt att bollarna inte hunnit nå vattnet under bron dessförinnan.
+
+Hade B kastats med en hastighet som är mindre än $0{,}40 \\cdot g \\approx 3{,}9\\ \\mathrm{m/s}$ hade skillnaden varit negativ, och då hade B aldrig kommit ikapp.
+
+**Svar:** Ja, eftersom B hela tiden är 2,1 m/s snabbare än A minskar avståndet mellan dem lika mycket varje sekund tills B kommer ikapp.`,
+        },
+        {
+            level: 3,
+            question: `Ett kaffefilter släpps från vila, och en rörelsesensor mäter dess hastighet nedåt:
+
+| Tid (s) | 0 | 0,10 | 0,20 | 0,30 | 0,40 | 0,50 | 0,60 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Hastighet (m/s) | 0 | 0,91 | 1,51 | 1,80 | 1,92 | 1,97 | 1,99 |
+
+a) Beräkna filtrets medelacceleration i tidsintervallen 0 till 0,10 s och 0,40 till 0,50 s. Ange svaren i m/s².<br>b) Jämför med tyngdaccelerationen $g = 9{,}82\\ \\mathrm{m/s^2}$ och förklara vad som händer med filtret under fallet. Vad kan du säga om filtrets hastighet om fallet fortsätter längre?<br>c) En elev vill räkna på filtret med formeln för fritt fall, $v = g \\cdot t$. Under ungefär hur lång tid efter utsläppet ger formeln en hastighet som avviker mindre än 10 % från mätningarna? Motivera med tabellen.`,
+            answer: { value: 9.1, unit: 'm/s²', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 9.1, unit: 'm/s²', tol: 0.03, etikett: '0 till 0,10 s' },
+                { del: 'a', value: 0.50, unit: 'm/s²', tol: 0.05, etikett: '0,40 till 0,50 s' },
+                { del: 'b' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Medelaccelerationen i ett intervall är $a_m = \\dfrac{\\Delta v}{\\Delta t}$.
+
+Intervallet 0 till 0,10 s:
+
+$$
+a_m = \\frac{0{,}91 - 0}{0{,}10 - 0} = 9{,}1\\ \\mathrm{m/s^2}
+$$
+
+**Svar:** 9,1 m/s² i det första intervallet
+
+Intervallet 0,40 till 0,50 s:
+
+$$
+a_m = \\frac{1{,}97 - 1{,}92}{0{,}50 - 0{,}40} = \\frac{0{,}05}{0{,}10} = 0{,}5\\ \\mathrm{m/s^2}
+$$
+
+**Svar:** 0,5 m/s² i det senare intervallet
+
+**b)** I början är accelerationen nästan lika stor som $g$: filtret faller nästan fritt, eftersom farten är liten och luftmotståndet därför litet. Ju fortare filtret faller, desto större blir luftmotståndet, och accelerationen minskar. Mellan 0,40 och 0,50 s är den bara ungefär en tjugondel av $g$. Hastigheten ökar alltså allt långsammare, med 0,60, 0,29, 0,12, 0,05 och 0,02 m/s per tiondels sekund.
+
+Om fallet fortsätter närmar sig accelerationen noll, och hastigheten blir i stort sett konstant. Enligt tabellen planar den ut strax under 2,0 m/s.
+
+**Svar:** Luftmotståndet växer med farten och gör accelerationen allt mindre. Hastigheten närmar sig ett konstant värde, ungefär 2,0 m/s.
+
+**c)** Vi jämför formelns värden med mätningarna:
+
+| Tid (s) | $v = g \\cdot t$ (m/s) | Uppmätt (m/s) | Avvikelse |
+| --- | --- | --- | --- |
+| 0,10 | 0,982 | 0,91 | cirka 8 % |
+| 0,20 | 1,964 | 1,51 | cirka 30 % |
+
+Avvikelserna är räknade som $\\dfrac{0{,}982 - 0{,}91}{0{,}91} = 0{,}0791\\ldots$ och $\\dfrac{1{,}964 - 1{,}51}{1{,}51} = 0{,}3006\\ldots$.
+
+Vid 0,10 s är felet under 10 %, men vid 0,20 s är det redan 30 %. Formeln fungerar alltså bara under ungefär den första tiondels sekunden. Det stämmer med genomgången: formlerna för fritt fall går att använda för korta tider, men för ett lätt föremål med stor yta blir tiden mycket kort.
+
+**Svar:** Ungefär under de första 0,1 sekunderna.`,
+        },
+        {
+            level: 3,
+            question: `Tyngdaccelerationen är $9{,}83\\ \\mathrm{m/s^2}$ vid polerna och $9{,}78\\ \\mathrm{m/s^2}$ vid ekvatorn. En elev vill visa skillnaden genom att kasta en boll rakt uppåt med hastigheten $15{,}0\\ \\mathrm{m/s}$, både vid nordpolen och vid ekvatorn, och ta tid på hur länge bollen är på väg upp till sin högsta punkt. Bortse från luftmotståndet.<br>a) Ställ upp ett generellt uttryck för tidsskillnaden $\\Delta t$ mellan de två platserna, uttryckt i utkasthastigheten $v_0$ och tyngdaccelerationerna $g_P$ vid polen och $g_E$ vid ekvatorn.<br>b) Beräkna tidsskillnaden i millisekunder.<br>c) Bedöm om försöket fungerar när eleven tar tid med ett handhållet stoppur, och föreslå en bättre metod.`,
+            answer: { value: 8, unit: 'ms', tol: 0.05 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 8, unit: 'ms', tol: 0.05, etikett: '$\\Delta t =$' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Vi räknar uppåt som positiv riktning. I högsta punkten är hastigheten noll, och accelerationen är $-g$. Ur $v = v_0 + a \\cdot t$ får vi stigtiden:
+
+$$
+0 = v_0 - g \\cdot t \\quad\\Leftrightarrow\\quad t = \\frac{v_0}{g}
+$$
+
+Vid ekvatorn är $g$ mindre, så där tar stigningen längre tid. Tidsskillnaden blir
+
+$$
+\\Delta t = \\frac{v_0}{g_E} - \\frac{v_0}{g_P} = v_0 \\cdot \\frac{g_P - g_E}{g_E \\cdot g_P}
+$$
+
+**Svar:** $\\Delta t = v_0 \\cdot \\dfrac{g_P - g_E}{g_E \\cdot g_P}$
+
+**b)**
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = 15{,}0\\ \\mathrm{m/s} \\\\
+g_P = 9{,}83\\ \\mathrm{m/s^2} \\\\
+g_E = 9{,}78\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$
+\\Delta t = 15{,}0 \\cdot \\frac{9{,}83 - 9{,}78}{9{,}78 \\cdot 9{,}83} = 15{,}0 \\cdot \\frac{0{,}05}{96{,}1374} = 0{,}0078013\\ldots\\ \\mathrm{s} \\approx 8\\ \\mathrm{ms}
+$$
+
+Skillnaden $9{,}83 - 9{,}78 = 0{,}05$ har bara en värdesiffra, och därför anges svaret med en värdesiffra.
+
+Stigtiden är ungefär $1{,}5\\ \\mathrm{s}$ på båda platserna, och $g$ skiljer sig med cirka en halv procent. En tidsskillnad på en halv procent av $1{,}5\\ \\mathrm{s}$, alltså några millisekunder, är rimlig.
+
+**Svar:** Cirka 8 ms
+
+**c)** En människas reaktionstid är ungefär 0,2 s, och den varierar med flera hundradels sekunder från gång till gång. Det är mycket mer än 8 ms, så ett handhållet stoppur kan inte visa skillnaden. Dessutom måste bollen kastas med exakt samma hastighet båda gångerna: redan en skillnad på en halv procent i utkasthastigheten, cirka $0{,}08\\ \\mathrm{m/s}$, ger lika stor tidsskillnad som den eleven vill mäta.
+
+En bättre metod är att släppa bollen från vila, så att utkasthastigheten inte kan variera, och mäta hastigheten efter en bestämd tid med en rörelsesensor eller två ljusgrindar som mäter tiden elektroniskt. Då kan $g = \\dfrac{\\Delta v}{\\Delta t}$ bestämmas på båda platserna, och mätningen upprepas många gånger så att ett medelvärde kan beräknas.
+
+**Svar:** Nej, skillnaden är mycket mindre än reaktionstiden och variationen i kastet. Släpp i stället bollen från vila och mät med ljusgrindar eller rörelsesensor, med många upprepningar.`,
+        },
+        {
+            level: 3,
+            question: `En bil kör in i en rondell. Vid tiden $t = 0$ kör bilen österut med hastigheten $12\\ \\mathrm{m/s}$, och $4{,}0\\ \\mathrm{s}$ senare kör den norrut med samma fart, $12\\ \\mathrm{m/s}$. Se figuren, där rondellen är ritad sedd uppifrån.<br>a) Bestäm bilens medelacceleration under de 4,0 sekunderna, både storlek och riktning. Ange storleken i m/s².<br>b) Föraren påstår att bilen inte accelererade alls i rondellen, eftersom farten var 12 m/s hela tiden. Bemöt påståendet.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 260" style="max-width:470px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><circle cx="150" cy="130" r="80" fill="none" stroke="rgba(15,22,32,0.10)" stroke-width="34"/><circle cx="150" cy="130" r="97" fill="none" stroke="rgba(15,22,32,0.55)" stroke-width="1.2"/><circle cx="150" cy="130" r="63" fill="rgba(46,139,87,0.14)" stroke="rgba(15,22,32,0.55)" stroke-width="1.2"/><line x1="40" y1="64" x2="40" y2="36" stroke="#0f1620" stroke-width="1.6" stroke-linecap="butt"/><polygon points="35,38 40,28 45,38" fill="#0f1620"/><text x="40" y="22" font-size="14" fill="#0f1620" text-anchor="middle">N</text><rect x="140" y="205" width="20" height="10" rx="2" fill="#2a5d9f" stroke="#0f1620" stroke-width="1"/><rect x="225" y="120" width="10" height="20" rx="2" fill="#2a5d9f" stroke="#0f1620" stroke-width="1"/><line x1="160" y1="210" x2="211" y2="210" stroke="#c8324a" stroke-width="2.6" stroke-linecap="butt"/><polygon points="211,204 220,210 211,216" fill="#c8324a"/><text x="226" y="215" font-size="14" fill="#c8324a" text-anchor="start"><tspan font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="0.72em">1</tspan> = 12 m/s</text><line x1="230" y1="120" x2="230" y2="69" stroke="#c8324a" stroke-width="2.6" stroke-linecap="butt"/><polygon points="224,69 230,60 236,69" fill="#c8324a"/><text x="242" y="66" font-size="14" fill="#c8324a" text-anchor="start"><tspan font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="0.72em">2</tspan> = 12 m/s</text><text x="150" y="244" font-size="13" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">t</tspan> = 0</text><text x="250" y="160" font-size="13" fill="#0f1620" text-anchor="start"><tspan font-style="italic">t</tspan> = 4,0 s</text></svg>`,
+            answer: { value: 4.2, unit: 'm/s²', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 4.2, unit: 'm/s²', tol: 0.03, etikett: '$a_m =$' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Accelerationen är en vektor, och medelaccelerationen är hastighetsändringen delat med tiden: $\\vec{a}_m = \\dfrac{\\Delta \\vec{v}}{\\Delta t}$. Hastighetsändringen är vektorskillnaden
+
+$$
+\\Delta \\vec{v} = \\vec{v}_2 - \\vec{v}_1 = \\vec{v}_2 + (-\\vec{v}_1)
+$$
+
+Att dra bort $\\vec{v}_1$ (12 m/s österut) är samma sak som att lägga till 12 m/s västerut. Hastighetsändringen består alltså av 12 m/s norrut och 12 m/s västerut. De två delarna är vinkelräta, så storleken fås med Pythagoras sats:
+
+$$
+|\\Delta \\vec{v}| = \\sqrt{12^{2} + 12^{2}} = \\sqrt{288} = 16{,}9705\\ldots\\ \\mathrm{m/s}
+$$
+
+Delarna är lika stora, så $\\Delta \\vec{v}$ pekar mitt emellan norr och väster, alltså mot nordväst.
+
+$$
+\\left[ \\begin{array}{l}
+|\\Delta \\vec{v}| = 16{,}9705\\ \\mathrm{m/s} \\\\
+\\Delta t = 4{,}0\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+a_m = \\frac{16{,}9705}{4{,}0} = 4{,}2426\\ \\mathrm{m/s^2} \\approx 4{,}2\\ \\mathrm{m/s^2}
+$$
+
+Riktningen mot nordväst är rimlig: bilen svänger runt rondellens mitt, och mitt under svängen ligger rondellens mitt just åt nordväst från bilen.
+
+**Svar:** 4,2 m/s² riktad mot nordväst
+
+**b)** Acceleration är ändring av **hastighet**, och hastighet är en vektor med både storlek och riktning. Farten, alltså hastighetens storlek, var visserligen densamma, men riktningen ändrades från öster till norr. Då har hastigheten ändrats, och bilen har accelererat. Föraren märker det också: kroppen vill fortsätta rakt fram, och när bilen svänger pressas föraren mot dörren.
+
+**Svar:** Påståendet är fel. Hastighetens riktning ändrades, så hastigheten ändrades och bilen hade en acceleration, trots att farten var konstant.`,
+        },
+        {
+            level: 3,
+            question: `En sten släpps och faller fritt. Med uppåt som positiv riktning är stenens acceleration $a = -9{,}82\\ \\mathrm{m/s^2}$, och enligt genomgången betyder en negativ acceleration att hastigheten minskar. Ändå faller stenen allt fortare.<br>a) Förklara hur båda sakerna kan stämma samtidigt.<br>b) Ge ett exempel på en rörelse där accelerationen är positiv och farten samtidigt minskar.<br>c) Formulera en allmän regel för när farten ökar och när den minskar, uttryckt i tecknen på hastigheten och accelerationen.`,
+            solution: `**a)** Med uppåt som positiv riktning har den fallande stenen en negativ hastighet. Den släpps med $v = 0$, och enligt $v = v_0 + a \\cdot t$ är hastigheten $-9{,}82\\ \\mathrm{m/s}$ efter en sekund och $-19{,}64\\ \\mathrm{m/s}$ efter två sekunder. Hastigheten, med tecken, minskar alltså: $-19{,}64$ är ett mindre tal än $-9{,}82$. Men **farten**, hastighetens storlek, ökar från 9,82 till 19,64 m/s.
+
+Påståendet i genomgången handlar alltså om hastigheten med tecken, medan det vi ser, att stenen faller allt fortare, handlar om farten. Båda stämmer.
+
+**Svar:** Hastigheten, räknad med tecken, blir allt mer negativ och minskar alltså, medan farten (beloppet) ökar.
+
+**b)** Välj uppåt som positiv riktning. En fallskärmshoppare som just fällt ut skärmen rör sig nedåt (negativ hastighet) men bromsas av skärmen, så accelerationen är riktad uppåt (positiv). Hastigheten går till exempel från $-50\\ \\mathrm{m/s}$ mot $-5\\ \\mathrm{m/s}$, alltså ökar den, men farten minskar från 50 till 5 m/s.
+
+Ett annat exempel är en bil som backar och bromsar, med framåt som positiv riktning.
+
+**Svar:** Till exempel en fallskärmshoppare som bromsas av skärmen, med uppåt som positiv riktning.
+
+**c)** Accelerationen ändrar hastigheten i sin egen riktning.
+
+- Har hastigheten och accelerationen **samma tecken** (samma riktning) ökar farten.
+- Har de **olika tecken** (motsatt riktning) minskar farten.
+- Är accelerationen noll är farten konstant.
+
+Regeln fungerar oavsett vilken riktning man väljer som positiv, eftersom båda tecknen byts om man byter riktning.
+
+**Svar:** Farten ökar när hastigheten och accelerationen har samma tecken och minskar när de har olika tecken.`,
         },
     ],
 
@@ -4244,7 +7674,7 @@ ${makeDiagram({
     paths: [{ points: [[0, 0], [10, 25]] }],
 })}`,
             answer: { value: 2.5, unit: 'm/s²', tol: 0.05 },
-            solution: `Lutningen i ett *v-t*-diagram motsvarar accelerationen. Vi väljer två punkter på linjen där det är lätt att läsa av exakta värden — till exempel (0; 0) och (10 s; 25 m/s).
+            solution: `Lutningen i ett *v-t*-diagram motsvarar accelerationen. Vi väljer två punkter på linjen där det är lätt att läsa av exakta värden, till exempel (0; 0) och (10 s; 25 m/s).
 
 $$
 a = \\frac{\\Delta v}{\\Delta t} = \\frac{v_2 - v_1}{t_2 - t_1}
@@ -4274,7 +7704,7 @@ $$
                 `Förflyttningen`,
             ],
             correct: 3,
-            solution: `Arean i ett *v-t*-diagram bildas av hastighet ($\\mathrm{m/s}$) gånger tid ($\\mathrm{s}$) — vilket har enheten meter ($\\mathrm{m}$). Det stämmer alltså inte med acceleration eller hastighet, utan med en sträcka/förflyttning.
+            solution: `Arean i ett *v-t*-diagram bildas av hastighet ($\\mathrm{m/s}$) gånger tid ($\\mathrm{s}$), vilket har enheten meter ($\\mathrm{m}$). Det stämmer alltså inte med acceleration eller hastighet, utan med en sträcka/förflyttning.
 
 Mer formellt: vi vet att $\\Delta s = v \\cdot \\Delta t$ vid konstant hastighet, vilket är basen gånger höjden på en rektangel under grafen. För variabel hastighet generaliseras det till hela arean under kurvan.
 
@@ -4335,7 +7765,7 @@ ${makeDiagram({
     paths: [{ points: [[0, 0], [8, 24]] }],
 })}`,
             answer: { value: 96, unit: 'm', tol: 0.02 },
-            solution: `Förflyttningen motsvaras av **arean under grafen** — i det här fallet en triangel med basen $\\Delta t = 8{,}0$ s och höjden $v = 24$ m/s:
+            solution: `Förflyttningen motsvaras av **arean under grafen**, i det här fallet en triangel med basen $\\Delta t = 8{,}0$ s och höjden $v = 24$ m/s:
 
 ${makeDiagram({
     xMax: 10, xTicks: [0, 2, 4, 6, 8, 10],
@@ -4363,11 +7793,11 @@ $$
 
 **Svar:** Förflyttningen är 96 m.
 
-**Generell slutsats:** Det är samma resultat som man får ur formeln $s = v_0 t + \\dfrac{1}{2} a t^{2}$ — där $v_0 = 0$, $a = 24/8{,}0 = 3{,}0$ m/s² och $t = 8{,}0$ s.`,
+**Generell slutsats:** Det är samma resultat som man får ur formeln $s = v_0 t + \\dfrac{1}{2} a t^{2}$, där $v_0 = 0$, $a = 24/8{,}0 = 3{,}0$ m/s² och $t = 8{,}0$ s.`,
         },
         {
             level: 2,
-            question: `Ett tåg rör sig enligt *v-t*-diagrammet nedan — först med konstant hastighet, sedan bromsar det jämnt tills det stannar. Beräkna tågets totala förflyttning.
+            question: `Ett tåg rör sig enligt *v-t*-diagrammet nedan: först med konstant hastighet, sedan bromsar det jämnt tills det stannar. Beräkna tågets totala förflyttning.
 
 ${makeDiagram({
     xMax: 14, xTicks: [0, 2, 4, 6, 8, 10, 12, 14],
@@ -4376,7 +7806,7 @@ ${makeDiagram({
     paths: [{ points: [[0, 18], [5, 18], [12, 0]] }],
 })}`,
             answer: { value: 153, unit: 'm', tol: 0.02 },
-            solution: `Förflyttningen är **arean under grafen**. Vi delar arean i två delar — en rektangel **A** mellan *t* = 0 och *t* = 5 s, och en triangel **B** mellan *t* = 5 s och *t* = 12 s:
+            solution: `Förflyttningen är **arean under grafen**. Vi delar arean i två delar: en rektangel **A** mellan *t* = 0 och *t* = 5 s, och en triangel **B** mellan *t* = 5 s och *t* = 12 s:
 
 ${makeDiagram({
     xMax: 14, xTicks: [0, 2, 4, 6, 8, 10, 12, 14],
@@ -4389,12 +7819,12 @@ ${makeDiagram({
     paths: [{ points: [[0, 18], [5, 18], [12, 0]] }],
 })}
 
-**Del A — rektangel** (mellan *t* = 0 och *t* = 5,0 s):
+**Del A, rektangel** (mellan *t* = 0 och *t* = 5,0 s):
 $$
 A = v \\cdot \\Delta t = 18 \\cdot 5{,}0 = 90\\ \\mathrm{m}
 $$
 
-**Del B — triangel** (mellan *t* = 5,0 s och *t* = 12 s, hastigheten sjunker linjärt från 18 till 0):
+**Del B, triangel** (mellan *t* = 5,0 s och *t* = 12 s, hastigheten sjunker linjärt från 18 till 0):
 $$
 B = \\frac{\\Delta t \\cdot v}{2} = \\frac{(12 - 5{,}0) \\cdot 18}{2} = \\frac{7{,}0 \\cdot 18}{2} = 63\\ \\mathrm{m}
 $$
@@ -4428,7 +7858,7 @@ b) Vilken är dess **tillryggalagda sträcka** under samma intervall?
                 { del: 'a', value: 0, unit: 'm' },
                 { del: 'b', value: 50, unit: 'm' },
             ],
-            solution: `Arean under grafen motsvarar förflyttningen — men areor **under** *x*-axeln räknas som *negativa* (rörelsen är åt motsatt håll). Vi delar in i två trianglar:
+            solution: `Arean under grafen motsvarar förflyttningen, men areor **under** *x*-axeln räknas som *negativa* (rörelsen är åt motsatt håll). Vi delar in i två trianglar:
 
 ${makeDiagram({
     xMax: 10, xTicks: [0, 2, 4, 6, 8, 10],
@@ -4446,21 +7876,21 @@ $$
 |A_1| = |A_2| = \\frac{5{,}0 \\cdot 10}{2} = 25\\ \\mathrm{m}
 $$
 
-**a) Förflyttning** — räknar areor med tecken (negativ under *x*-axeln):
+**a) Förflyttning.** Vi räknar areor med tecken (negativ under *x*-axeln):
 $$
 \\Delta s = A_1 + A_2 = +25 + (-25) = 0\\ \\mathrm{m}
 $$
 
 Föremålet slutar alltså på exakt samma position som det startade.
 
-**b) Tillryggalagd sträcka** — räknar alla areor som positiva:
+**b) Tillryggalagd sträcka.** Vi räknar alla areor som positiva:
 $$
 s = |A_1| + |A_2| = 25 + 25 = 50\\ \\mathrm{m}
 $$
 
 **Svar:** a) Förflyttning = 0 m. b) Sträcka = 50 m.
 
-**Generell slutsats:** En boll som kastas rakt uppåt och fångas på samma höjd är ett typexempel på rörelsen ovan — den fysiska *förflyttningen* är noll, men *sträckan* (uppåt + nedåt) är skild från noll. När man räknar med energi eller bränsleförbrukning är det ofta sträckan som spelar roll, inte förflyttningen.`,
+**Generell slutsats:** En boll som kastas rakt uppåt och fångas på samma höjd är ett typexempel på rörelsen ovan: den fysiska *förflyttningen* är noll, men *sträckan* (uppåt + nedåt) är skild från noll. När man räknar med energi eller bränsleförbrukning är det ofta sträckan som spelar roll, inte förflyttningen.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
@@ -4485,7 +7915,7 @@ b) I vilket av de fyra delintervallen är cyklistens acceleration **störst i ab
                 { del: 'a', value: 180, unit: 'm', tol: 0.03 },
                 { del: 'b', value: 2.4, unit: 'm/s²', etikett: 'största accelerationen', tol: 0.03, ignoreSign: true },
             ],
-            solution: `**a) Total förflyttning** — arean under hela *v-t*-grafen, uppdelad i fyra delar:
+            solution: `**a) Total förflyttning** är arean under hela *v-t*-grafen, uppdelad i fyra delar:
 
 ${makeDiagram({
     xMax: 27, xTicks: [0, 5, 10, 15, 20, 25],
@@ -4528,7 +7958,842 @@ $$
 
 **Svar:** a) Förflyttningen är 180 m. b) Den största accelerationen i absolutbelopp är inbromsningen vid målet, 2,4 m/s².
 
-**Generell slutsats:** Komplexa *v-t*-grafer hanteras genom att dela upp dem i geometriska standardformer (rektanglar, trianglar, trapets). Acceleration är *lutningen* i varje delintervall — den behöver inte vara densamma i hela rörelsen.`,
+**Generell slutsats:** Komplexa *v-t*-grafer hanteras genom att dela upp dem i geometriska standardformer (rektanglar, trianglar, trapets). Acceleration är *lutningen* i varje delintervall, och den behöver inte vara densamma i hela rörelsen.`,
+        },
+        {
+            level: 1,
+            question: `En bil rör sig rakt fram enligt *v-t*-diagrammet nedan. Vilket påstående beskriver bilens rörelse?
+
+${makeDiagram({
+    xMax: 10, xTicks: [0, 2, 4, 6, 8, 10],
+    yMax: 14, yTicks: [0, 2, 4, 6, 8, 10, 12, 14],
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    paths: [{ points: [[0, 12], [8, 4]] }],
+})}`,
+            choices: [
+                'Bilen backar med allt högre fart.',
+                'Bilen står still.',
+                'Bilen kör framåt och bromsar in jämnt.',
+                'Bilen kör framåt med allt större acceleration.',
+            ],
+            correct: 2,
+            solution: `Grafen ligger hela tiden ovanför *t*-axeln. Hastigheten är alltså positiv hela tiden, och bilen rör sig framåt.
+
+Grafen är en rät linje som lutar nedåt. Lutningen i ett *v-t*-diagram är accelerationen, så accelerationen är negativ och lika stor hela tiden. Bilen bromsar alltså in jämnt, från $12\\ \\mathrm{m/s}$ till $4\\ \\mathrm{m/s}$.
+
+Bilen backar inte (då hade grafen legat under *t*-axeln), den står inte still (då hade grafen legat på *t*-axeln), och accelerationen ändras inte (då hade grafen varit krökt).
+
+**Svar:** Bilen kör framåt och bromsar in jämnt.`,
+        },
+        {
+            level: 1,
+            question: `En rullskridskoåkare slutar ta skär och glider ut tills hon står still. Hennes hastighet visas i *v-t*-diagrammet nedan.
+
+${makeDiagram({
+    xMax: 7, xTicks: [0, 1, 2, 3, 4, 5, 6, 7],
+    yMax: 10, yTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    paths: [{ points: [[0, 9], [6, 0]] }],
+})}
+
+a) Vilken hastighet har hon vid tidpunkten $t = 2{,}0\\ \\mathrm{s}$?<br>b) Bestäm hennes acceleration, med tecken. Ange svaret i m/s².`,
+            answer: { value: -1.5, unit: 'm/s²', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 6, unit: 'm/s' },
+                { del: 'b', value: -1.5, unit: 'm/s²', tol: 0.03 },
+            ],
+            solution: `**a)** Vi går upp från $t = 2$ på *t*-axeln till grafen och läser av hastigheten på *v*-axeln: grafen passerar punkten (2, 6).
+
+**Svar:** 6 m/s
+
+**b)** Grafen är en rät linje, så accelerationen är konstant och lika med linjens lutning. Vi väljer två punkter på linjen som är lätta att läsa av, till exempel där den börjar och där den slutar.
+
+$$
+a = \\frac{\\Delta v}{\\Delta t} = \\frac{v_2 - v_1}{t_2 - t_1}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+t_1 = 0,\\quad v_1 = 9\\ \\mathrm{m/s} \\\\
+t_2 = 6\\ \\mathrm{s},\\quad v_2 = 0
+\\end{array} \\right]
+$$
+
+$$
+a = \\frac{0 - 9}{6 - 0} = \\frac{-9}{6} = -1{,}5\\ \\mathrm{m/s^2}
+$$
+
+Accelerationen är negativ eftersom farten minskar. Det stämmer med att hon glider ut och stannar.
+
+**Svar:** $-1{,}5\\ \\mathrm{m/s^2}$`,
+        },
+        {
+            level: 1,
+            question: `En kajakpaddlare ökar sin hastighet jämnt enligt *v-t*-diagrammet nedan. Hur lång sträcka paddlar hon under de 6 sekunder som grafen visar? Ange svaret i meter.
+
+${makeDiagram({
+    xMax: 8, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+    yMax: 12, yTicks: [0, 2, 4, 6, 8, 10, 12],
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    paths: [{ points: [[0, 4], [6, 10]] }],
+})}`,
+            answer: { value: 42, unit: 'm', tol: 0.02 },
+            solution: `Sträckan motsvaras av arean mellan grafen och *t*-axeln. Hastigheten är hela tiden positiv, så förflyttning och sträcka är lika stora här.
+
+Ytan under grafen mellan $t = 0$ och $t = 6\\ \\mathrm{s}$ är ett parallelltrapets (en rektangel med en triangel ovanpå):
+
+${makeDiagram({
+    xMax: 8, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+    yMax: 12, yTicks: [0, 2, 4, 6, 8, 10, 12],
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    fills: [
+        { points: [[0, 0], [0, 4], [6, 4], [6, 0]], color: 'rgba(28,61,107,0.14)' },
+        { points: [[0, 4], [6, 10], [6, 4]], color: 'rgba(200,50,74,0.16)' },
+    ],
+    paths: [{ points: [[0, 4], [6, 10]] }],
+})}
+
+$$
+\\left[ \\begin{array}{l}
+v_1 = 4\\ \\mathrm{m/s} \\\\
+v_2 = 10\\ \\mathrm{m/s} \\\\
+\\Delta t = 6\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+Rektangeln har basen $6\\ \\mathrm{s}$ och höjden $4\\ \\mathrm{m/s}$. Triangeln har basen $6\\ \\mathrm{s}$ och höjden $10 - 4 = 6\\ \\mathrm{m/s}$.
+
+$$
+s = 6 \\cdot 4 + \\frac{6 \\cdot 6}{2} = 24 + 18 = 42\\ \\mathrm{m}
+$$
+
+**Svar:** 42 m`,
+        },
+        {
+            level: 1,
+            question: `En pulka glider nedför en backe som blir allt brantare. Pulkans hastighet visas i *v-t*-diagrammet nedan. Beräkna pulkans medelacceleration mellan $t = 2\\ \\mathrm{s}$ och $t = 8\\ \\mathrm{s}$. Ange svaret i m/s².
+
+${makeDiagram({
+    xMax: 10, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    yMax: 18, yTicks: [0, 3, 6, 9, 12, 15, 18],
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    paths: [{ points: Array.from({ length: 201 }, (_, i) => { const t = i * 0.05; return [t, 0.15 * t * t + 2.4]; }) }],
+})}`,
+            answer: { value: 1.5, unit: 'm/s²', tol: 0.03 },
+            solution: `Medelaccelerationen mellan två tidpunkter är lutningen hos **sekanten**, den räta linje som går genom grafens punkter vid de två tidpunkterna. Vi läser av hastigheten vid $t = 2\\ \\mathrm{s}$ och vid $t = 8\\ \\mathrm{s}$ och drar sekanten (streckad):
+
+${makeDiagram({
+    xMax: 10, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    yMax: 18, yTicks: [0, 3, 6, 9, 12, 15, 18],
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    paths: [
+        { points: Array.from({ length: 201 }, (_, i) => { const t = i * 0.05; return [t, 0.15 * t * t + 2.4]; }) },
+        { points: [[2, 3], [8, 12]], color: '#1c3d6b', width: 2, dash: '6 4' },
+    ],
+})}
+
+$$
+a = \\frac{\\Delta v}{\\Delta t} = \\frac{v_2 - v_1}{t_2 - t_1}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+t_1 = 2\\ \\mathrm{s},\\quad v_1 = 3\\ \\mathrm{m/s} \\\\
+t_2 = 8\\ \\mathrm{s},\\quad v_2 = 12\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$
+a = \\frac{12 - 3}{8 - 2} = \\frac{9}{6} = 1{,}5\\ \\mathrm{m/s^2}
+$$
+
+Grafen är krökt, så den verkliga accelerationen ändras hela tiden: den är mindre än $1{,}5\\ \\mathrm{m/s^2}$ i början av intervallet och större i slutet, där backen är brantare.
+
+**Svar:** 1,5 m/s²`,
+        },
+        {
+            level: 2,
+            question: `En buss kör mellan två hållplatser enligt *v-t*-diagrammet nedan.
+
+${makeDiagram({
+    xMax: 28, xTicks: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28],
+    yMax: 14, yTicks: [0, 2, 4, 6, 8, 10, 12, 14],
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    paths: [{ points: [[0, 0], [8, 12], [20, 12], [26, 0]] }],
+})}
+
+a) Hur långt är det mellan hållplatserna? Ange svaret i meter.<br>b) Beräkna bussens medelhastighet mellan hållplatserna. Ange svaret i m/s.`,
+            answer: { value: 8.8, unit: 'm/s', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 228, unit: 'm', tol: 0.02 },
+                { del: 'b', value: 8.8, unit: 'm/s', tol: 0.02 },
+            ],
+            solution: `**a)** Avståndet är arean mellan grafen och *t*-axeln. Vi delar ytan i en triangel *A* (bussen accelererar), en rektangel *B* (konstant hastighet) och en triangel *C* (bussen bromsar):
+
+${makeDiagram({
+    xMax: 28, xTicks: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28],
+    yMax: 14, yTicks: [0, 2, 4, 6, 8, 10, 12, 14],
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    fills: [
+        { points: [[0, 0], [8, 12], [8, 0]], color: 'rgba(200,50,74,0.14)' },
+        { points: [[8, 0], [8, 12], [20, 12], [20, 0]], color: 'rgba(28,61,107,0.14)' },
+        { points: [[20, 0], [20, 12], [26, 0]], color: 'rgba(200,50,74,0.14)' },
+    ],
+    paths: [{ points: [[0, 0], [8, 12], [20, 12], [26, 0]] }],
+})}
+
+$$
+\\left[ \\begin{array}{l}
+A = \\dfrac{8 \\cdot 12}{2} = 48\\ \\mathrm{m} \\\\
+B = (20 - 8) \\cdot 12 = 12 \\cdot 12 = 144\\ \\mathrm{m} \\\\
+C = \\dfrac{(26 - 20) \\cdot 12}{2} = \\dfrac{6 \\cdot 12}{2} = 36\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+s = A + B + C = 48 + 144 + 36 = 228\\ \\mathrm{m}
+$$
+
+**Svar:** 228 m
+
+**b)** Medelhastigheten är förflyttningen delat med tiden det tar. Bussen står still igen vid $t = 26\\ \\mathrm{s}$.
+
+$$
+v_m = \\frac{\\Delta s}{\\Delta t} = \\frac{228}{26} = 8{,}769\\ldots\\ \\mathrm{m/s} \\approx 8{,}8\\ \\mathrm{m/s}
+$$
+
+Medelhastigheten ska ligga mellan 0 och den högsta hastigheten $12\\ \\mathrm{m/s}$, och bussen kör med full fart under ungefär halva tiden. Värdet är rimligt.
+
+**Svar:** 8,8 m/s`,
+        },
+        {
+            level: 2,
+            question: `En radiostyrd bil kör längs en rak gång. Den kör först framåt, bromsar och backar sedan. Riktningen framåt räknas som positiv. Bilens hastighet visas i *v-t*-diagrammet nedan.
+
+${makeDiagram({
+    xMax: 11, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+    yMin: -8, yMax: 8, yTicks: [-8, -6, -4, -2, 0, 2, 4, 6, 8],
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    paths: [{ points: [[0, 6], [4, 6], [10, -6]] }],
+})}
+
+a) Vid vilken tidpunkt är bilen längst bort från startpunkten?<br>b) Hur långt från startpunkten är bilen då?<br>c) Hur långt från startpunkten är bilen vid $t = 10\\ \\mathrm{s}$, och hur lång sträcka har den kört då?`,
+            answer: { value: 24, unit: 'm', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 7, unit: 's' },
+                { del: 'b', value: 33, unit: 'm', tol: 0.02 },
+                { del: 'c', value: 24, unit: 'm', etikett: 'avstånd till start', tol: 0.02 },
+                { del: 'c', value: 42, unit: 'm', etikett: 'sträcka', tol: 0.02 },
+            ],
+            solution: `**a)** Så länge hastigheten är positiv rör sig bilen bort från startpunkten. När grafen passerar *t*-axeln byter bilen riktning och börjar backa tillbaka. Bilen är därför längst bort när hastigheten är noll.
+
+Linjen mellan (4, 6) och (10, −6) passerar *t*-axeln mitt emellan, vid $t = 7\\ \\mathrm{s}$.
+
+**Svar:** 7 s
+
+**b)** Förflyttningen fram till $t = 7\\ \\mathrm{s}$ är arean ovanför *t*-axeln: en rektangel *A* och en triangel *B*.
+
+${makeDiagram({
+    xMax: 11, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+    yMin: -8, yMax: 8, yTicks: [-8, -6, -4, -2, 0, 2, 4, 6, 8],
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    fills: [
+        { points: [[0, 0], [0, 6], [4, 6], [4, 0]], color: 'rgba(200,50,74,0.14)' },
+        { points: [[4, 0], [4, 6], [7, 0]], color: 'rgba(200,50,74,0.24)' },
+        { points: [[7, 0], [10, -6], [10, 0]], color: 'rgba(28,61,107,0.18)' },
+    ],
+    paths: [{ points: [[0, 6], [4, 6], [10, -6]] }],
+})}
+
+$$
+\\left[ \\begin{array}{l}
+A = 4 \\cdot 6 = 24\\ \\mathrm{m} \\\\
+B = \\dfrac{(7 - 4) \\cdot 6}{2} = \\dfrac{3 \\cdot 6}{2} = 9\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+\\Delta s = A + B = 24 + 9 = 33\\ \\mathrm{m}
+$$
+
+**Svar:** 33 m
+
+**c)** Mellan $t = 7\\ \\mathrm{s}$ och $t = 10\\ \\mathrm{s}$ backar bilen. Den ytan (*C*, blå) ligger under *t*-axeln och räknas negativ:
+
+$$
+C = -\\frac{(10 - 7) \\cdot 6}{2} = -\\frac{3 \\cdot 6}{2} = -9\\ \\mathrm{m}
+$$
+
+Förflyttningen från start blir
+
+$$
+\\Delta s = 33 + (-9) = 24\\ \\mathrm{m}
+$$
+
+Bilen står alltså $24\\ \\mathrm{m}$ framför startpunkten. Sträckan räknar alla areor som positiva:
+
+$$
+s = 33 + 9 = 42\\ \\mathrm{m}
+$$
+
+**Svar:** Bilen är 24 m från startpunkten och har kört sträckan 42 m.`,
+        },
+        {
+            level: 2,
+            question: `En bilist kör med hastigheten $20\\ \\mathrm{m/s}$ när ett rådjur hoppar ut på vägen. Det tar $0{,}80\\ \\mathrm{s}$ innan bilisten börjar bromsa (reaktionstiden), och sedan bromsar bilen med en konstant acceleration som har storleken $5{,}0\\ \\mathrm{m/s^2}$ tills den står still.
+
+Rita bilens *v-t*-diagram och bestäm med hjälp av diagrammet bilens stoppsträcka, alltså sträckan från att bilisten ser rådjuret tills bilen står still. Ange svaret i meter.`,
+            answer: { value: 56, unit: 'm', tol: 0.02 },
+            solution: `Först tar vi reda på hur lång tid inbromsningen tar. Hastigheten ska minska med $20\\ \\mathrm{m/s}$, och den minskar med $5{,}0\\ \\mathrm{m/s}$ varje sekund:
+
+$$
+a = \\frac{\\Delta v}{\\Delta t} \\quad \\Longleftrightarrow \\quad \\Delta t = \\frac{\\Delta v}{a}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\Delta v = 0 - 20 = -20\\ \\mathrm{m/s} \\\\
+a = -5{,}0\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$
+\\Delta t = \\frac{-20}{-5{,}0} = 4{,}0\\ \\mathrm{s}
+$$
+
+Bilen står alltså still vid $t = 0{,}80 + 4{,}0 = 4{,}8\\ \\mathrm{s}$. Diagrammet blir en vågrät linje under reaktionstiden och sedan en rät linje ned till noll:
+
+${makeDiagram({
+    xMax: 6, xTicks: [0, 1, 2, 3, 4, 5, 6],
+    yMax: 24, yTicks: [0, 4, 8, 12, 16, 20, 24],
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    fills: [
+        { points: [[0, 0], [0, 20], [0.8, 20], [0.8, 0]], color: 'rgba(28,61,107,0.16)' },
+        { points: [[0.8, 0], [0.8, 20], [4.8, 0]], color: 'rgba(200,50,74,0.16)' },
+    ],
+    paths: [{ points: [[0, 20], [0.8, 20], [4.8, 0]] }],
+})}
+
+Stoppsträckan är arean under grafen: reaktionssträckan (rektangeln, blå) plus bromssträckan (triangeln, röd).
+
+$$
+\\left[ \\begin{array}{l}
+s_\\text{reaktion} = 0{,}80 \\cdot 20 = 16\\ \\mathrm{m} \\\\
+s_\\text{broms} = \\dfrac{4{,}0 \\cdot 20}{2} = 40\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+s = 16 + 40 = 56\\ \\mathrm{m}
+$$
+
+Hastigheten $20\\ \\mathrm{m/s}$ är $72\\ \\mathrm{km/h}$, och en stoppsträcka på drygt femtio meter vid den farten är rimlig.
+
+**Svar:** 56 m`,
+        },
+        {
+            level: 2,
+            question: `Två cyklister, *A* och *B*, står bredvid varandra vid ett övergångsställe. Vid $t = 0$ passerar *A* med konstant hastighet, och samtidigt startar *B* från vila. Deras hastigheter visas i *v-t*-diagrammet nedan. Graferna skär varandra vid $t = 5\\ \\mathrm{s}$. Vilket påstående stämmer?
+
+${makeDiagram({
+    xMax: 12, xTicks: [0, 2, 4, 6, 8, 10, 12],
+    yMax: 14, yTicks: [0, 2, 4, 6, 8, 10, 12, 14],
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    paths: [
+        { points: [[0, 6], [10, 6]], color: '#1c3d6b' },
+        { points: [[0, 0], [10, 12]], color: '#c8324a' },
+    ],
+}).replace('</svg>', '<text x="402" y="173" font-size="15" fill="#1c3d6b">A</text><text x="402" y="70" font-size="15" fill="#c8324a">B</text></svg>')}`,
+            choices: [
+                'Vid $t = 5\\ \\mathrm{s}$ cyklar *A* och *B* sida vid sida.',
+                'Vid $t = 10\\ \\mathrm{s}$ har *A* och *B* cyklat lika långt.',
+                'Cyklist *B* har accelerationen $12\\ \\mathrm{m/s^2}$.',
+                'Vid $t = 10\\ \\mathrm{s}$ har *B* cyklat dubbelt så långt som *A*.',
+            ],
+            correct: 1,
+            solution: `Sträckan varje cyklist har cyklat är arean under respektive graf.
+
+Vid $t = 10\\ \\mathrm{s}$:
+
+$$
+\\left[ \\begin{array}{l}
+s_A = 10 \\cdot 6 = 60\\ \\mathrm{m} \\quad (\\text{rektangel}) \\\\
+s_B = \\dfrac{10 \\cdot 12}{2} = 60\\ \\mathrm{m} \\quad (\\text{triangel})
+\\end{array} \\right]
+$$
+
+De har alltså cyklat lika långt och är sida vid sida igen vid $t = 10\\ \\mathrm{s}$.
+
+Där graferna skär varandra, vid $t = 5\\ \\mathrm{s}$, har cyklisterna samma **hastighet**, inte samma position. Då har *A* cyklat $5 \\cdot 6 = 30\\ \\mathrm{m}$ och *B* bara $\\dfrac{5 \\cdot 6}{2} = 15\\ \\mathrm{m}$. Det är just då avståndet mellan dem är som störst.
+
+Accelerationen för *B* är lutningen $\\dfrac{12 - 0}{10 - 0} = 1{,}2\\ \\mathrm{m/s^2}$, inte $12\\ \\mathrm{m/s^2}$.
+
+**Svar:** Vid $t = 10\\ \\mathrm{s}$ har *A* och *B* cyklat lika långt.`,
+        },
+        {
+            level: 3,
+            question: `En bilist kör förbi en parkerad polisbil med den konstanta hastigheten $25{,}0\\ \\mathrm{m/s}$. I samma ögonblick startar polisbilen från vila och accelererar med $3{,}00\\ \\mathrm{m/s^2}$ tills den når hastigheten $30{,}0\\ \\mathrm{m/s}$. Därefter håller polisbilen den hastigheten.
+
+Lös uppgiften med hjälp av ett *v-t*-diagram.<br>a) Hur lång tid efter starten hinner polisbilen ifatt bilisten?<br>b) Hur stort är det största avståndet mellan bilarna innan polisbilen hinner ifatt?`,
+            answer: { value: 30.0, unit: 's', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 30.0, unit: 's', tol: 0.02 },
+                { del: 'b', value: 104, unit: 'm', tol: 0.03 },
+            ],
+            solution: `Vi räknar tiden från det ögonblick bilisten passerar, och båda bilarnas förflyttning från polisbilens plats.
+
+Polisbilen når $30{,}0\\ \\mathrm{m/s}$ efter tiden
+
+$$
+\\Delta t = \\frac{\\Delta v}{a} = \\frac{30{,}0 - 0}{3{,}00} = 10{,}0\\ \\mathrm{s}
+$$
+
+Båda bilarnas *v-t*-grafer i samma diagram (bilisten blå, polisbilen röd):
+
+${makeDiagram({
+    xMax: 34, xTicks: [0, 5, 10, 15, 20, 25, 30],
+    yMax: 35, yTicks: [0, 5, 10, 15, 20, 25, 30, 35],
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    paths: [
+        { points: [[0, 25], [32, 25]], color: '#1c3d6b' },
+        { points: [[0, 0], [10, 30], [32, 30]], color: '#c8324a' },
+    ],
+})}
+
+**a)** Polisbilen hinner ifatt när de två bilarnas förflyttningar, alltså areorna under graferna, är lika stora. Det sker efter $t = 10{,}0\\ \\mathrm{s}$, eftersom polisbilen före dess har lägre medelhastighet än bilisten. För en tidpunkt $t$ efter $10{,}0\\ \\mathrm{s}$ är bilistens area en rektangel. Polisbilens area är en triangel fram till $10{,}0\\ \\mathrm{s}$, $\\dfrac{10{,}0 \\cdot 30{,}0}{2} = 150\\ \\mathrm{m}$, plus en rektangel efter det:
+
+$$
+\\left[ \\begin{array}{l}
+s_\\text{bil} = 25{,}0 \\cdot t \\\\
+s_\\text{polis} = 150 + 30{,}0 \\cdot (t - 10{,}0)
+\\end{array} \\right]
+$$
+
+Villkoret $s_\\text{polis} = s_\\text{bil}$ ger
+
+$$
+150 + 30{,}0t - 300 = 25{,}0t
+$$
+
+$$
+30{,}0t - 150 = 25{,}0t
+$$
+
+$$
+30{,}0t - 150 \\mathbin{\\boldsymbol{-}} \\boldsymbol{25{,}0t} \\mathbin{\\boldsymbol{+}} \\boldsymbol{150} = 25{,}0t \\mathbin{\\boldsymbol{-}} \\boldsymbol{25{,}0t} \\mathbin{\\boldsymbol{+}} \\boldsymbol{150}
+$$
+
+$$
+5{,}0t = 150
+$$
+
+$$
+t = \\frac{150}{5{,}0} = 30{,}0\\ \\mathrm{s}
+$$
+
+Kontroll: bilisten har då kört $25{,}0 \\cdot 30{,}0 = 750\\ \\mathrm{m}$ och polisbilen $150 + 30{,}0 \\cdot 20{,}0 = 750\\ \\mathrm{m}$.
+
+**Svar:** 30,0 s
+
+**b)** Så länge bilisten kör fortare än polisbilen ökar avståndet mellan dem. När polisbilen kör fortare minskar det. Avståndet är alltså störst när bilarna har **samma hastighet**, där graferna skär varandra, inte när polisbilen startar.
+
+Polisbilen har hastigheten $25{,}0\\ \\mathrm{m/s}$ vid
+
+$$
+t = \\frac{25{,}0}{3{,}00} = 8{,}333\\ldots\\ \\mathrm{s}
+$$
+
+Avståndet är skillnaden mellan areorna fram till den tidpunkten:
+
+$$
+\\left[ \\begin{array}{l}
+s_\\text{bil} = 25{,}0 \\cdot 8{,}333\\ldots = 208{,}33\\ldots\\ \\mathrm{m} \\\\
+s_\\text{polis} = \\dfrac{8{,}333\\ldots \\cdot 25{,}0}{2} = 104{,}166\\ldots\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+\\Delta s = 208{,}33\\ldots - 104{,}166\\ldots = 104{,}166\\ldots\\ \\mathrm{m} \\approx 104\\ \\mathrm{m}
+$$
+
+Avståndet är precis hälften av bilistens sträcka, eftersom triangeln under polisbilens graf är halva rektangeln under bilistens graf. Det är rimligt.
+
+**Svar:** 104 m`,
+        },
+        {
+            level: 3,
+            question: `Ett fordon som har hastigheten $v_0$ bromsar med en konstant acceleration som har storleken $a$ tills det står still.
+
+a) Använd fordonets *v-t*-diagram för att visa att bromssträckan är $s = \\dfrac{v_0^2}{2a}$.<br>b) En bilist som kör i $50\\ \\mathrm{km/h}$ börjar bromsa när en älg står på vägen en bit framför bilen, och bilen stannar precis framför älgen. Samma bilist kör en annan dag i $70\\ \\mathrm{km/h}$, börjar bromsa på samma ställe och bromsar lika kraftigt. Med vilken fart når bilen då platsen där älgen står? Ange svaret i km/h.`,
+            answer: { value: 49, unit: 'km/h', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 49, unit: 'km/h', tol: 0.03 },
+            ],
+            solution: `**a)** Grafen är en rät linje från $v_0$ ned till noll. Vi kallar tiden det tar att stanna för $t_\\text{b}$.
+
+${makeDiagram({
+    xMax: 6, xTicks: [0],
+    yMax: 5, yTicks: [0],
+    yLabel: '<tspan font-style="italic">v</tspan>',
+    xLabel: '<tspan font-style="italic">t</tspan>',
+    fills: [{ points: [[0, 0], [0, 4], [5, 0]], color: 'rgba(200,50,74,0.14)' }],
+    paths: [{ points: [[0, 4], [5, 0]] }],
+}).replace('</svg>', '<text x="52" y="87" font-size="15" fill="#0f1620" text-anchor="end"><tspan font-style="italic">v</tspan>₀</text><text x="393" y="310" font-size="15" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">t</tspan><tspan font-size="11" dy="4">b</tspan></text></svg>')}
+
+Accelerationen är lutningen. Linjen sjunker med $v_0$ på tiden $t_\\text{b}$, så storleken på accelerationen är
+
+$$
+a = \\frac{v_0}{t_\\text{b}} \\quad \\Longleftrightarrow \\quad t_\\text{b} = \\frac{v_0}{a}
+$$
+
+Bromssträckan är arean under grafen, en triangel med basen $t_\\text{b}$ och höjden $v_0$:
+
+$$
+s = \\frac{t_\\text{b} \\cdot v_0}{2}
+$$
+
+Vi sätter in $t_\\text{b} = \\dfrac{v_0}{a}$:
+
+$$
+s = \\frac{\\dfrac{v_0}{a} \\cdot v_0}{2} = \\frac{v_0^2}{2a}
+$$
+
+vilket skulle visas.
+
+**b)** Vi kallar hastigheterna $v_1 = 50\\ \\mathrm{km/h}$ och $v_2 = 70\\ \\mathrm{km/h}$, och avståndet från bromsstället till älgen för $s$. Varken $s$ eller $a$ är givna, men de är desamma båda dagarna.
+
+Första dagen stannar bilen precis på sträckan $s$. Enligt a) gäller då
+
+$$
+s = \\frac{v_1^2}{2a} \\tag{1}
+$$
+
+Andra dagen hinner farten bara sjunka från $v_2$ till en fart $v$ på sträckan $s$. Grafen är samma räta linje som förut, med lutningen $-a$, men den slutar vid $v$ i stället för vid noll. Ytan under den är ett parallelltrapets:
+
+${makeDiagram({
+    xMax: 8, xTicks: [0],
+    yMax: 5, yTicks: [0],
+    yLabel: '<tspan font-style="italic">v</tspan>',
+    xLabel: '<tspan font-style="italic">t</tspan>',
+    fills: [{ points: [[0, 0], [0, 4.2], [3, 2.4], [3, 0]], color: 'rgba(200,50,74,0.14)' }],
+    paths: [{ points: [[0, 4.2], [3, 2.4]] }, { points: [[3, 2.4], [7, 0]], color: '#1c3d6b', width: 1.6, dash: '5 4' }],
+}).replace('</svg>', '<line x1="60" y1="165.2" x2="210" y2="165.2" stroke="#0f1620" stroke-width="1.2" stroke-dasharray="4 4"/><text x="52" y="76.6" font-size="15" fill="#0f1620" text-anchor="end"><tspan font-style="italic">v</tspan>₂</text><text x="52" y="170.2" font-size="15" fill="#0f1620" text-anchor="end"><tspan font-style="italic">v</tspan></text><text x="135" y="312" font-size="15" fill="#0f1620" text-anchor="middle">Δ<tspan font-style="italic">t</tspan></text></svg>')}
+
+Den streckade fortsättningen visar hur bilen hade fortsatt att bromsa efter älgens plats.
+
+Tiden det tar att bromsa från $v_2$ till $v$ är, med samma resonemang om lutningen som i a), $\\Delta t = \\dfrac{v_2 - v}{a}$. Trapetsets area är medelvärdet av de parallella sidorna gånger bredden:
+
+$$
+s = \\frac{(v_2 + v) \\cdot \\Delta t}{2} = \\frac{(v_2 + v)(v_2 - v)}{2a} = \\frac{v_2^2 - v^2}{2a} \\tag{2}
+$$
+
+Sträckan är densamma båda dagarna, så $s$ från (1), $s = \\dfrac{v_1^2}{2a}$, ska vara lika med $s$ från (2):
+
+$$
+\\frac{v_1^2}{2a} = \\frac{v_2^2 - v^2}{2a}
+$$
+
+Vi multiplicerar båda led med $2a$. Accelerationen tar ut sig, så vi behöver varken känna till den eller räkna om hastigheterna till m/s:
+
+$$
+v_1^2 = v_2^2 - v^2
+$$
+
+$$
+v^2 = v_2^2 - v_1^2
+$$
+
+$$
+v = \\sqrt{v_2^2 - v_1^2} = \\sqrt{70^2 - 50^2} = \\sqrt{2\\,400} = 48{,}98\\ldots\\ \\mathrm{km/h} \\approx 49\\ \\mathrm{km/h}
+$$
+
+Rimlighet: farten måste ligga mellan 0 och $70\\ \\mathrm{km/h}$. Att den bara sjunker med $21\\ \\mathrm{km/h}$ på den sträcka där bilen förut bromsade hela vägen från $50\\ \\mathrm{km/h}$ stämmer med grafen: vid hög fart rör sig bilen långt på kort tid, så den hinner bromsa under kortare tid innan sträckan $s$ är slut. Bilen når alltså älgen i nästan den fart den förut körde i.
+
+**Svar:** Cirka 49 km/h`,
+        },
+        {
+            level: 3,
+            question: `En hiss åker från bottenvåningen upp $27\\ \\mathrm{m}$ och stannar. Hissens *v-t*-diagram visas nedan, men skalan på *v*-axeln saknas: den högsta hastigheten är bara utmärkt som $v_\\text{max}$. Hissen accelererar och bromsar lika kraftigt.
+
+${makeDiagram({
+    xMax: 12, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    yMax: 4, yTicks: [0],
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    paths: [{ points: [[0, 0], [2, 3], [9, 3], [11, 0]] }],
+}).replace('</svg>', '<line x1="60" y1="95" x2="126.7" y2="95" stroke="#0f1620" stroke-width="1.2" stroke-dasharray="4 4"/><text x="54" y="100" font-size="15" fill="#0f1620" text-anchor="end"><tspan font-style="italic">v</tspan><tspan font-size="11" dy="4">max</tspan></text></svg>')}
+
+a) Bestäm $v_\\text{max}$ och hissens acceleration när den sätter fart.<br>b) Hur lång tid tar en resa på $12\\ \\mathrm{m}$ om hissen accelererar, bromsar och högst får köra lika fort som i a)?<br>c) Hur lång tid tar en resa på $3{,}0\\ \\mathrm{m}$ (en våning) med samma acceleration och inbromsning?`,
+            answer: { value: 3.0, unit: 'm/s', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 3.0, unit: 'm/s', etikett: '$v_\\text{max}$', tol: 0.02 },
+                { del: 'a', value: 1.5, unit: 'm/s²', etikett: 'acceleration', tol: 0.02 },
+                { del: 'b', value: 6.0, unit: 's', tol: 0.02 },
+                { del: 'c', value: 2.8, unit: 's', tol: 0.03 },
+            ],
+            solution: `**a)** Förflyttningen är arean under grafen, och den vet vi är $27\\ \\mathrm{m}$. Arean är ett parallelltrapets med höjden $v_\\text{max}$, där den nedre sidan är hela restiden $11\\ \\mathrm{s}$ och den övre sidan tiden med konstant fart, $9 - 2 = 7\\ \\mathrm{s}$.
+
+$$
+s = \\frac{(11 + 7) \\cdot v_\\text{max}}{2} = 9 \\cdot v_\\text{max}
+$$
+
+$$
+9 \\cdot v_\\text{max} = 27
+$$
+
+$$
+v_\\text{max} = \\frac{27}{9} = 3{,}0\\ \\mathrm{m/s}
+$$
+
+Accelerationen är lutningen under de första $2\\ \\mathrm{s}$:
+
+$$
+a = \\frac{\\Delta v}{\\Delta t} = \\frac{3{,}0 - 0}{2 - 0} = 1{,}5\\ \\mathrm{m/s^2}
+$$
+
+**Svar:** $v_\\text{max} = 3{,}0\\ \\mathrm{m/s}$ och accelerationen är $1{,}5\\ \\mathrm{m/s^2}$.
+
+**b)** Att sätta fart tar $2{,}0\\ \\mathrm{s}$ som förut, och hissen hinner då (triangeln)
+
+$$
+s_1 = \\frac{2{,}0 \\cdot 3{,}0}{2} = 3{,}0\\ \\mathrm{m}
+$$
+
+Inbromsningen tar lika lång tid och lika lång sträcka, $3{,}0\\ \\mathrm{m}$. Tillsammans är det $6{,}0\\ \\mathrm{m}$, mindre än $12\\ \\mathrm{m}$, så hissen hinner nå $v_\\text{max}$. Resten åker den med konstant fart:
+
+$$
+\\Delta t_\\text{konstant} = \\frac{12 - 6{,}0}{3{,}0} = \\frac{6{,}0}{3{,}0} = 2{,}0\\ \\mathrm{s}
+$$
+
+$$
+t = 2{,}0 + 2{,}0 + 2{,}0 = 6{,}0\\ \\mathrm{s}
+$$
+
+**Svar:** 6,0 s
+
+**c)** Accelerationen och inbromsningen behöver tillsammans $6{,}0\\ \\mathrm{m}$ för att hissen ska nå $v_\\text{max}$. En våning är bara $3{,}0\\ \\mathrm{m}$, så hissen måste börja bromsa innan den når full fart. Grafen blir en triangel: hissen accelererar under en tid $t_1$ och bromsar sedan lika länge, så $t_1$ är halva restiden. Under accelerationen åker hissen halva sträckan, $1{,}5\\ \\mathrm{m}$. Den högsta hastigheten blir $a \\cdot t_1$, och arean under den första halvan av triangeln är
+
+$$
+\\frac{t_1 \\cdot a \\cdot t_1}{2} = 1{,}5
+$$
+
+$$
+\\frac{1{,}5 \\cdot t_1^2}{2} = 1{,}5
+$$
+
+$$
+t_1^2 = 2{,}0
+$$
+
+$$
+t_1 = \\sqrt{2{,}0} = 1{,}414\\ldots\\ \\mathrm{s}
+$$
+
+$$
+t = 2 \\cdot t_1 = 2{,}828\\ldots\\ \\mathrm{s} \\approx 2{,}8\\ \\mathrm{s}
+$$
+
+Den högsta hastigheten blir $1{,}5 \\cdot 1{,}414\\ldots = 2{,}1\\ \\mathrm{m/s}$, alltså lägre än $v_\\text{max}$, som det ska vara. Resan tar knappt hälften så lång tid som i b) trots att sträckan är en fjärdedel, eftersom hissen aldrig hinner upp i full fart.
+
+**Svar:** 2,8 s`,
+        },
+        {
+            level: 3,
+            question: `En stor regndroppe släpps från vila och faller genom luften. Diagrammet nedan visar droppens fart under de första $4\\ \\mathrm{s}$.
+
+${makeDiagram({
+    xMax: 4, xTicks: [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4],
+    yMax: 10, yTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    paths: [{ points: Array.from({ length: 161 }, (_, i) => { const t = i * 0.025; return [t, 9 * (1 - Math.exp(-t * 9.82 / 9))]; }) }],
+})}
+
+a) Bestäm droppens acceleration i det ögonblick den släpps. Ange svaret i m/s².<br>b) Uppskatta hur långt droppen faller under de första $3{,}0\\ \\mathrm{s}$. Ange svaret i meter.<br>c) Beskriv med hjälp av grafen hur droppens acceleration ändras under fallet, och ge en fysikalisk förklaring.`,
+            answer: { value: 19, unit: 'm', tol: 0.1 },
+            delsvar: [
+                { del: 'a', value: 9.8, unit: 'm/s²', tol: 0.15 },
+                { del: 'b', value: 19, unit: 'm', tol: 0.1 },
+                { del: 'c' },
+            ],
+            solution: `**a)** Accelerationen i ett ögonblick är lutningen hos **tangenten** till grafen i den punkten. Vi drar tangenten i origo (streckad). Den når $9\\ \\mathrm{m/s}$ ungefär vid $t = 0{,}92\\ \\mathrm{s}$:
+
+${makeDiagram({
+    xMax: 4, xTicks: [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4],
+    yMax: 10, yTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    paths: [
+        { points: Array.from({ length: 161 }, (_, i) => { const t = i * 0.025; return [t, 9 * (1 - Math.exp(-t * 9.82 / 9))]; }) },
+        { points: [[0, 0], [1.0, 9.82]], color: '#1c3d6b', width: 2, dash: '6 4' },
+    ],
+})}
+
+$$
+a = \\frac{\\Delta v}{\\Delta t} = \\frac{9 - 0}{0{,}92 - 0} = 9{,}78\\ldots\\ \\mathrm{m/s^2} \\approx 9{,}8\\ \\mathrm{m/s^2}
+$$
+
+Det är ungefär lika mycket som tyngdaccelerationen $g = 9{,}82\\ \\mathrm{m/s^2}$. Det är rimligt: i starten har droppen ingen fart och därför inget luftmotstånd, så den faller fritt. (En avläst tangent ger förstås ett ungefärligt värde.)
+
+**Svar:** Cirka 9,8 m/s²
+
+**b)** Sträckan är arean under grafen mellan $t = 0$ och $t = 3{,}0\\ \\mathrm{s}$. Grafen är krökt, så vi delar ytan i smala parallelltrapets, ett per halvsekund, med de avlästa farterna i tabellen:
+
+| $t$ (s) | 0 | 0,5 | 1,0 | 1,5 | 2,0 | 2,5 | 3,0 |
+|---|---|---|---|---|---|---|---|
+| $v$ (m/s) | 0 | 3,8 | 6,0 | 7,3 | 8,0 | 8,4 | 8,7 |
+
+Varje trapets har arean $\\dfrac{(v_\\text{före} + v_\\text{efter}) \\cdot 0{,}5}{2}$.
+
+Alla trapets har samma bas, så vi kan lägga ihop summorna $v_\\text{före} + v_\\text{efter}$ först. De är, intervall för intervall, $0 + 3{,}8 = 3{,}8$, $3{,}8 + 6{,}0 = 9{,}8$, $6{,}0 + 7{,}3 = 13{,}3$, $7{,}3 + 8{,}0 = 15{,}3$, $8{,}0 + 8{,}4 = 16{,}4$ och $8{,}4 + 8{,}7 = 17{,}1$.
+
+$$
+s \\approx \\frac{0{,}5}{2} \\cdot (3{,}8 + 9{,}8 + 13{,}3 + 15{,}3 + 16{,}4 + 17{,}1)
+$$
+
+$$
+s \\approx 0{,}25 \\cdot 75{,}7 = 18{,}925\\ \\mathrm{m} \\approx 19\\ \\mathrm{m}
+$$
+
+Rimlighet: med den högsta farten $8{,}7\\ \\mathrm{m/s}$ hela tiden hade droppen fallit $26\\ \\mathrm{m}$, och i fritt fall utan luftmotstånd hade den fallit $\\dfrac{9{,}82 \\cdot 3{,}0^2}{2} = 44\\ \\mathrm{m}$. Den verkliga sträckan ska vara mindre än båda, och det är den.
+
+**Svar:** Cirka 19 m
+
+**c)** Tangentens lutning är accelerationen. I början är grafen brant, och accelerationen är lika stor som tyngdaccelerationen. Sedan planar grafen ut, så accelerationen minskar hela tiden. Efter ungefär $3\\ \\mathrm{s}$ är grafen nästan vågrät: accelerationen är nästan noll, och farten närmar sig ungefär $9\\ \\mathrm{m/s}$.
+
+Förklaringen är luftmotståndet. Det växer när farten ökar och verkar uppåt, mot tyngdkraften $F_G$. Den resulterande kraften nedåt blir därför allt mindre, och då blir också accelerationen allt mindre. När luftmotståndet är lika stort som tyngdkraften är den resulterande kraften noll, och droppen faller med konstant fart.
+
+**Svar:** Accelerationen minskar från ungefär *g* till nästan noll, eftersom luftmotståndet växer med farten tills det tar ut tyngdkraften.`,
+        },
+        {
+            level: 3,
+            question: `En tränare mäter en sprinters fart under ett 100-meterslopp. Farten varje sekund under de första sex sekunderna står i tabellen.
+
+| $t$ (s) | 0 | 1,0 | 2,0 | 3,0 | 4,0 | 5,0 | 6,0 |
+|---|---|---|---|---|---|---|---|
+| $v$ (m/s) | 0 | 4,6 | 7,4 | 8,9 | 9,6 | 10,0 | 10,1 |
+
+a) Uppskatta hur långt sprintern har sprungit efter $6{,}0\\ \\mathrm{s}$. Ange svaret i meter.<br>b) Anta att sprintern håller farten $10{,}1\\ \\mathrm{m/s}$ resten av loppet. Vilken tid får hon på 100 meter? Ange svaret i sekunder.<br>c) Är uppskattningen i a) troligen för stor eller för liten? Vad betyder det för tiden i b)? Motivera.`,
+            answer: { value: 11.4, unit: 's', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 46, unit: 'm', tol: 0.03 },
+                { del: 'b', value: 11.4, unit: 's', tol: 0.02 },
+                { del: 'c' },
+            ],
+            solution: `**a)** Sträckan är arean under sprinterns *v-t*-graf. Vi känner bara farten varje sekund, så vi antar att farten ändras jämnt under varje sekund. Då blir ytan under grafen sex parallelltrapets med basen $1{,}0\\ \\mathrm{s}$:
+
+${makeDiagram({
+    xMax: 7, xTicks: [0, 1, 2, 3, 4, 5, 6, 7],
+    yMax: 12, yTicks: [0, 2, 4, 6, 8, 10, 12],
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    fills: [{ points: [[0, 0], [0, 0], [1, 4.6], [2, 7.4], [3, 8.9], [4, 9.6], [5, 10.0], [6, 10.1], [6, 0]], color: 'rgba(28,61,107,0.14)' }],
+    paths: [{ points: [[0, 0], [1, 4.6], [2, 7.4], [3, 8.9], [4, 9.6], [5, 10.0], [6, 10.1]], color: '#1c3d6b', width: 2 }],
+})}
+
+$$
+\\left[ \\begin{array}{l}
+s_{0\\to1} = \\dfrac{(0 + 4{,}6) \\cdot 1{,}0}{2} = 2{,}3\\ \\mathrm{m} \\\\[6pt]
+s_{1\\to2} = \\dfrac{(4{,}6 + 7{,}4) \\cdot 1{,}0}{2} = 6{,}0\\ \\mathrm{m} \\\\[6pt]
+s_{2\\to3} = \\dfrac{(7{,}4 + 8{,}9) \\cdot 1{,}0}{2} = 8{,}15\\ \\mathrm{m} \\\\[6pt]
+s_{3\\to4} = \\dfrac{(8{,}9 + 9{,}6) \\cdot 1{,}0}{2} = 9{,}25\\ \\mathrm{m} \\\\[6pt]
+s_{4\\to5} = \\dfrac{(9{,}6 + 10{,}0) \\cdot 1{,}0}{2} = 9{,}8\\ \\mathrm{m} \\\\[6pt]
+s_{5\\to6} = \\dfrac{(10{,}0 + 10{,}1) \\cdot 1{,}0}{2} = 10{,}05\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+s = 2{,}3 + 6{,}0 + 8{,}15 + 9{,}25 + 9{,}8 + 10{,}05 = 45{,}55\\ \\mathrm{m} \\approx 46\\ \\mathrm{m}
+$$
+
+**Svar:** Cirka 46 m
+
+**b)** Det återstår $100 - 45{,}55 = 54{,}45\\ \\mathrm{m}$, som sprintern springer med konstant fart:
+
+$$
+\\Delta t = \\frac{\\Delta s}{v} = \\frac{54{,}45}{10{,}1} = 5{,}391\\ldots\\ \\mathrm{s}
+$$
+
+$$
+t = 6{,}0 + 5{,}391\\ldots = 11{,}391\\ldots\\ \\mathrm{s} \\approx 11{,}4\\ \\mathrm{s}
+$$
+
+Världsrekordet för damer är strax under $10{,}5\\ \\mathrm{s}$, och en duktig klubbsprinter springer på en dryg sekund mer. Tiden är rimlig.
+
+**Svar:** Cirka 11,4 s
+
+**c)** Farten ökar allt långsammare: ökningen är $4{,}6\\ \\mathrm{m/s}$ den första sekunden men bara $0{,}1\\ \\mathrm{m/s}$ den sista. Den verkliga *v-t*-grafen är alltså krökt och buktar uppåt, så att den ligger **ovanför** de raka strecken mellan mätpunkterna. Trapetsen missar en liten bit yta under varje båge, och uppskattningen i a) är därför troligen något för liten.
+
+Har sprintern i själva verket sprungit lite längre än $45{,}55\\ \\mathrm{m}$ efter $6{,}0\\ \\mathrm{s}$, återstår lite kortare sträcka, och den verkliga tiden blir något kortare än $11{,}4\\ \\mathrm{s}$.
+
+**Svar:** Uppskattningen är troligen för liten, så den verkliga tiden är något kortare än 11,4 s.`,
+        },
+        {
+            level: 3,
+            question: `En vagn står på en rak luftkuddebana. Den får en knuff bort från startpunkten och bromsas sedan av en fläkt som blåser mot den med konstant kraft. Riktningen bort från startpunkten räknas som positiv. Vagnens *v-t*-diagram visas nedan.
+
+${makeDiagram({
+    xMax: 16, xTicks: [0, 2, 4, 6, 8, 10, 12, 14, 16],
+    yMin: -4, yMax: 4, yTicks: [-4, -3, -2, -1, 0, 1, 2, 3, 4],
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    paths: [{ points: [[0, 0], [2, 3], [14, -3]] }],
+})}
+
+a) Hur långt från startpunkten kommer vagnen som längst?<br>b) Anta att fläkten fortsätter att bromsa vagnen på samma sätt även efter $t = 14\\ \\mathrm{s}$. Vid vilken tidpunkt passerar vagnen startpunkten på väg tillbaka?<br>c) Hur stor är vagnens fart när den passerar startpunkten?`,
+            answer: { value: 15, unit: 's', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 12, unit: 'm', tol: 0.02 },
+                { del: 'b', value: 15, unit: 's', tol: 0.03 },
+                { del: 'c', value: 3.5, unit: 'm/s', tol: 0.03, ignoreSign: true },
+            ],
+            solution: `**a)** Vagnen rör sig bort från startpunkten så länge hastigheten är positiv, och är längst bort när grafen skär *t*-axeln. Linjen mellan (2, 3) och (14, −3) sjunker med $6\\ \\mathrm{m/s}$ på $12\\ \\mathrm{s}$, alltså har den lutningen
+
+$$
+a = \\frac{-3 - 3}{14 - 2} = \\frac{-6}{12} = -0{,}5\\ \\mathrm{m/s^2}
+$$
+
+och skär *t*-axeln mitt emellan, vid $t = 8\\ \\mathrm{s}$. Förflyttningen fram till dess är arean ovanför axeln, två trianglar:
+
+$$
+\\Delta s = \\frac{2 \\cdot 3}{2} + \\frac{(8 - 2) \\cdot 3}{2} = 3 + 9 = 12\\ \\mathrm{m}
+$$
+
+**Svar:** 12 m
+
+**b)** Efter $t = 8\\ \\mathrm{s}$ rör sig vagnen tillbaka. Grafen fortsätter som samma räta linje, och hastigheten efter tiden $\\tau = t - 8$ är $v = -0{,}5 \\cdot \\tau$. Ytan under axeln mellan $t = 8\\ \\mathrm{s}$ och tidpunkten $t$ är en triangel med basen $\\tau$ och höjden $0{,}5 \\cdot \\tau$:
+
+$$
+\\frac{\\tau \\cdot 0{,}5 \\cdot \\tau}{2} = 0{,}25 \\cdot \\tau^2
+$$
+
+Vagnen är tillbaka i startpunkten när den negativa ytan är lika stor som den positiva, $12\\ \\mathrm{m}$:
+
+$$
+0{,}25 \\cdot \\tau^2 = 12
+$$
+
+$$
+\\tau^2 = \\frac{12}{0{,}25} = 48
+$$
+
+$$
+\\tau = \\sqrt{48} = 6{,}928\\ldots\\ \\mathrm{s}
+$$
+
+$$
+t = 8 + 6{,}928\\ldots = 14{,}928\\ldots\\ \\mathrm{s} \\approx 15\\ \\mathrm{s}
+$$
+
+Tidpunkten ligger strax efter $t = 14\\ \\mathrm{s}$. Det stämmer med diagrammet: fram till $t = 14\\ \\mathrm{s}$ har vagnen bara rullat tillbaka $\\dfrac{6 \\cdot 3}{2} = 9\\ \\mathrm{m}$ av sina $12\\ \\mathrm{m}$.
+
+**Svar:** Cirka 15 s
+
+**c)** Hastigheten vid den tidpunkten är
+
+$$
+v = -0{,}5 \\cdot 6{,}928\\ldots = -3{,}464\\ldots\\ \\mathrm{m/s}
+$$
+
+Minustecknet betyder att vagnen rör sig mot startpunkten. Farten är $3{,}464\\ldots \\approx 3{,}5\\ \\mathrm{m/s}$. Den är större än den högsta farten bort från startpunkten, $3\\ \\mathrm{m/s}$. Det är rimligt: på vägen bort bromsade fläkten vagnen från $3\\ \\mathrm{m/s}$ under de sista $9\\ \\mathrm{m}$, men på vägen tillbaka skjuter fläkten på vagnen under hela sträckan på $12\\ \\mathrm{m}$, som är längre.
+
+**Svar:** Cirka 3,5 m/s`,
         },
     ],
 
@@ -4588,7 +8853,7 @@ $$
                 `Den genomsnittliga accelerationen`,
             ],
             correct: 2,
-            solution: `Arean i ett *a-t*-diagram bildas av acceleration ($\\mathrm{m/s^2}$) gånger tid ($\\mathrm{s}$), vilket har enheten m/s — alltså en *hastighet*, närmare bestämt **hastighetsändringen**.
+            solution: `Arean i ett *a-t*-diagram bildas av acceleration ($\\mathrm{m/s^2}$) gånger tid ($\\mathrm{s}$), vilket har enheten m/s. Det är alltså en *hastighet*, närmare bestämt **hastighetsändringen**.
 
 Formellt: från $a = \\Delta v / \\Delta t$ följer $\\Delta v = a \\cdot \\Delta t$, vilket vid variabel acceleration blir hela arean under kurvan.
 
@@ -4607,7 +8872,7 @@ ${makeDiagram({
     paths: [{ points: [[0, 4], [3, 4], [3, 0], [7, 0]] }],
 })}`,
             answer: { value: 18, unit: 'm/s', tol: 0.02 },
-            solution: `Total hastighetsändring är **arean under hela *a-t*-grafen**. Här är det bara den första delen (rektangeln mellan *t* = 0 och *t* = 3 s) som ger ett bidrag — den andra delen ligger på *x*-axeln och har area noll:
+            solution: `Total hastighetsändring är **arean under hela *a-t*-grafen**. Här är det bara den första delen (rektangeln mellan *t* = 0 och *t* = 3 s) som ger ett bidrag. Den andra delen ligger på *x*-axeln och har area noll:
 
 ${makeDiagram({
     xMax: 8, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8],
@@ -4634,7 +8899,1008 @@ $$
 
 **Svar:** 18 m/s.
 
-**Generell slutsats:** När accelerationen är noll förändras inte hastigheten — föremålet rör sig då med konstant hastighet (Newtons första lag).`,
+**Generell slutsats:** När accelerationen är noll förändras inte hastigheten. Föremålet rör sig då med konstant hastighet (Newtons första lag).`,
+        },
+        {
+            level: 1,
+            question: `En cyklist har hastigheten $v_0 = 9{,}0\\ \\mathrm{m/s}$ när hon börjar bromsa. Cyklistens acceleration visas i *a-t*-diagrammet nedan, med färdriktningen som positiv riktning. Vilken hastighet har cyklisten vid $t = 6{,}0\\ \\mathrm{s}$? Ange svaret i m/s.
+
+${makeDiagram({
+    xMax: 6.5, xTicks: [0, 1, 2, 3, 4, 5, 6],
+    yMin: -2, yMax: 1, yTicks: [-2, -1.5, -1, -0.5, 0, 0.5, 1],
+    yLabel: '<tspan font-style="italic">a</tspan> (m/s²)',
+    paths: [{ points: [[0, -1.5], [4, -1.5], [4, 0], [6, 0]] }],
+})}`,
+            answer: { value: 3.0, unit: 'm/s', tol: 0.03 },
+            solution: `Arean mellan grafen och *t*-axeln är hastighetsändringen. Här ligger arean **under** *t*-axeln, och därför är den negativ: hastigheten minskar.
+
+${makeDiagram({
+    xMax: 6.5, xTicks: [0, 1, 2, 3, 4, 5, 6],
+    yMin: -2, yMax: 1, yTicks: [-2, -1.5, -1, -0.5, 0, 0.5, 1],
+    yLabel: '<tspan font-style="italic">a</tspan> (m/s²)',
+    fills: [{ points: [[0, 0], [0, -1.5], [4, -1.5], [4, 0]], color: 'rgba(37,99,201,0.16)' }],
+    paths: [{ points: [[0, -1.5], [4, -1.5], [4, 0], [6, 0]] }],
+})}
+
+$$
+\\Delta v = a \\cdot \\Delta t
+$$
+
+$$
+\\left[ \\begin{array}{l}
+a = -1{,}5\\ \\mathrm{m/s^2} \\\\
+\\Delta t = 4{,}0\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+\\Delta v = -1{,}5 \\cdot 4{,}0 = -6{,}0\\ \\mathrm{m/s}
+$$
+
+Mellan $t = 4{,}0\\ \\mathrm{s}$ och $t = 6{,}0\\ \\mathrm{s}$ är accelerationen noll. Där är arean noll, och hastigheten ändras inte.
+
+$$
+v = v_0 + \\Delta v = 9{,}0 + (-6{,}0) = 3{,}0\\ \\mathrm{m/s}
+$$
+
+**Svar:** 3,0 m/s`,
+        },
+        {
+            level: 1,
+            question: `I ett *a-t*-diagram ligger grafen på *t*-axeln mellan $t = 2\\ \\mathrm{s}$ och $t = 5\\ \\mathrm{s}$. Vad gäller för föremålets rörelse under den tiden?`,
+            choices: [
+                'Hastigheten är konstant.',
+                'Föremålet står still.',
+                'Hastigheten minskar jämnt.',
+                'Föremålet rör sig bakåt.',
+            ],
+            correct: 0,
+            solution: `Arean mellan grafen och *t*-axeln är hastighetsändringen $\\Delta v$. När grafen ligger på *t*-axeln är accelerationen noll, och arean under tiden $2\\ \\mathrm{s}$ till $5\\ \\mathrm{s}$ blir noll:
+
+$$
+\\Delta v = a \\cdot \\Delta t = 0 \\cdot 3 = 0
+$$
+
+Hastigheten ändras alltså inte, men den behöver inte vara noll. Föremålet kan mycket väl röra sig, bara med samma hastighet hela tiden. Diagrammet säger heller ingenting om åt vilket håll föremålet rör sig, eftersom det inte visar själva hastigheten.
+
+**Svar:** Hastigheten är konstant.`,
+        },
+        {
+            level: 1,
+            question: `En elsparkcykel startar från vila. Dess acceleration under de första sekunderna visas i *a-t*-diagrammet. Vilken hastighet har elsparkcykeln vid $t = 3{,}0\\ \\mathrm{s}$? Ange svaret i m/s.
+
+${makeDiagram({
+    xMax: 5, xTicks: [0, 1, 2, 3, 4, 5],
+    yMax: 5, yTicks: [0, 1, 2, 3, 4, 5],
+    yLabel: '<tspan font-style="italic">a</tspan> (m/s²)',
+    paths: [{ points: [[0, 0], [3, 4], [3, 0], [4.6, 0]] }],
+})}`,
+            answer: { value: 6.0, unit: 'm/s', tol: 0.03 },
+            solution: `Hastighetsändringen är arean mellan grafen och *t*-axeln. Fram till $t = 3{,}0\\ \\mathrm{s}$ är arean en triangel med basen $3{,}0\\ \\mathrm{s}$ och höjden $4{,}0\\ \\mathrm{m/s^2}$:
+
+${makeDiagram({
+    xMax: 5, xTicks: [0, 1, 2, 3, 4, 5],
+    yMax: 5, yTicks: [0, 1, 2, 3, 4, 5],
+    yLabel: '<tspan font-style="italic">a</tspan> (m/s²)',
+    fills: [{ points: [[0, 0], [3, 4], [3, 0]] }],
+    paths: [{ points: [[0, 0], [3, 4], [3, 0], [4.6, 0]] }],
+})}
+
+$$
+\\Delta v = \\frac{\\text{bas} \\cdot \\text{höjd}}{2} = \\frac{3{,}0 \\cdot 4{,}0}{2} = \\frac{12}{2} = 6{,}0\\ \\mathrm{m/s}
+$$
+
+Elsparkcykeln startade från vila, $v_0 = 0$, så
+
+$$
+v = v_0 + \\Delta v = 0 + 6{,}0 = 6{,}0\\ \\mathrm{m/s}
+$$
+
+Det motsvarar ungefär 22 km/h, en rimlig fart för en elsparkcykel.
+
+**Svar:** 6,0 m/s`,
+        },
+        {
+            level: 1,
+            question: `Ett pendeltåg startar från vila vid en station. *a-t*-diagrammet visar tågets acceleration under de första 40 sekunderna. Vilken hastighet har tåget vid $t = 40\\ \\mathrm{s}$? Ange svaret i m/s.
+
+${makeDiagram({
+    xMax: 45, xTicks: [0, 5, 10, 15, 20, 25, 30, 35, 40],
+    yMax: 0.6, yTicks: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6],
+    yLabel: '<tspan font-style="italic">a</tspan> (m/s²)',
+    paths: [{ points: [[0, 0.5], [20, 0.5], [20, 0.25], [40, 0.25]] }],
+})}`,
+            answer: { value: 15, unit: 'm/s', tol: 0.03 },
+            solution: `Hastighetsändringen är arean mellan grafen och *t*-axeln. Arean består av två rektanglar, en för varje del av resan.
+
+**Mellan 0 och 20 s** är $a = 0{,}50\\ \\mathrm{m/s^2}$:
+
+$$
+\\Delta v_1 = a_1 \\cdot \\Delta t_1 = 0{,}50 \\cdot 20 = 10\\ \\mathrm{m/s}
+$$
+
+**Mellan 20 och 40 s** är $a = 0{,}25\\ \\mathrm{m/s^2}$:
+
+$$
+\\Delta v_2 = a_2 \\cdot \\Delta t_2 = 0{,}25 \\cdot 20 = 5{,}0\\ \\mathrm{m/s}
+$$
+
+Tåget startade från vila, $v_0 = 0$:
+
+$$
+v = v_0 + \\Delta v_1 + \\Delta v_2 = 0 + 10 + 5{,}0 = 15\\ \\mathrm{m/s}
+$$
+
+Det är 54 km/h, en rimlig fart för ett pendeltåg en bit från stationen.
+
+**Svar:** 15 m/s`,
+        },
+        {
+            level: 1,
+            question: `En bil har accelerationen $a = -2{,}0\\ \\mathrm{m/s^2}$ under $3{,}0\\ \\mathrm{s}$. Bilens färdriktning är positiv riktning. Hur ändras bilens hastighet?`,
+            choices: [
+                'Den ökar med 6,0 m/s.',
+                'Den minskar med 1,5 m/s.',
+                'Den minskar med 2,0 m/s.',
+                'Den minskar med 6,0 m/s.',
+            ],
+            correct: 3,
+            solution: `I ett *a-t*-diagram blir grafen en vågrät linje på höjden $-2{,}0\\ \\mathrm{m/s^2}$, under *t*-axeln. Arean mellan grafen och *t*-axeln är hastighetsändringen:
+
+$$
+\\Delta v = a \\cdot \\Delta t = -2{,}0 \\cdot 3{,}0 = -6{,}0\\ \\mathrm{m/s}
+$$
+
+Arean ligger under *t*-axeln och är därför negativ. Hastigheten minskar alltså med $6{,}0\\ \\mathrm{m/s}$. Alternativet 2,0 m/s blandar ihop accelerationen med hastighetsändringen, och 1,5 m/s får man om man delar i stället för att multiplicera.
+
+**Svar:** Den minskar med 6,0 m/s.`,
+        },
+
+        {
+            level: 2,
+            question: `En hiss står still på bottenvåningen och börjar åka uppåt. *a-t*-diagrammet visar hissens acceleration, med uppåt som positiv riktning.
+
+${makeDiagram({
+    xMax: 11, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    yMin: -1.6, yMax: 1.6, yTicks: [-1.6, -1.2, -0.8, -0.4, 0, 0.4, 0.8, 1.2, 1.6],
+    yLabel: '<tspan font-style="italic">a</tspan> (m/s²)',
+    paths: [{ points: [[0, 1.2], [2, 1.2], [2, 0], [8, 0], [8, -1.2], [10, -1.2], [10, 0]] }],
+})}
+
+a) Bestäm hissens högsta hastighet.<br>b) Bestäm hissens hastighet vid $t = 9{,}0\\ \\mathrm{s}$.<br>c) Hissen stannar vid $t = 10\\ \\mathrm{s}$. Hur långt har den åkt då?`,
+            answer: { value: 19, unit: 'm', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 2.4, unit: 'm/s', etikett: 'högsta hastighet' },
+                { del: 'b', value: 1.2, unit: 'm/s', etikett: '$v =$' },
+                { del: 'c', value: 19, unit: 'm', etikett: 'sträcka' },
+            ],
+            solution: `**a)** Hastighetsändringen är arean mellan grafen och *t*-axeln. Mellan 0 och 2,0 s ökar hastigheten:
+
+$$
+\\Delta v_1 = a \\cdot \\Delta t = 1{,}2 \\cdot 2{,}0 = 2{,}4\\ \\mathrm{m/s}
+$$
+
+Mellan 2,0 s och 8,0 s är accelerationen noll, så hastigheten är konstant. Efter 8,0 s är arean negativ och hastigheten minskar. Den högsta hastigheten är därför den som hissen har mellan 2,0 s och 8,0 s:
+
+$$
+v_\\mathrm{max} = 0 + 2{,}4 = 2{,}4\\ \\mathrm{m/s}
+$$
+
+**Svar:** 2,4 m/s
+
+**b)** Mellan 8,0 s och 9,0 s är arean negativ:
+
+$$
+\\Delta v_2 = -1{,}2 \\cdot 1{,}0 = -1{,}2\\ \\mathrm{m/s}
+$$
+
+$$
+v = 2{,}4 + (-1{,}2) = 1{,}2\\ \\mathrm{m/s}
+$$
+
+**Svar:** 1,2 m/s
+
+**c)** Sträckan får vi inte ur *a-t*-diagrammet, men ur ett *v-t*-diagram, där arean är förflyttningen. Med hastigheterna från a) och b) blir *v-t*-diagrammet:
+
+${makeDiagram({
+    xMax: 11, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    yMax: 2.8, yTicks: [0, 0.4, 0.8, 1.2, 1.6, 2.0, 2.4, 2.8],
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    fills: [{ points: [[0, 0], [2, 2.4], [8, 2.4], [10, 0]] }],
+    paths: [{ points: [[0, 0], [2, 2.4], [8, 2.4], [10, 0]] }],
+})}
+
+Arean består av två trianglar och en rektangel:
+
+$$
+s = \\frac{2{,}0 \\cdot 2{,}4}{2} + 6{,}0 \\cdot 2{,}4 + \\frac{2{,}0 \\cdot 2{,}4}{2} = 2{,}4 + 14{,}4 + 2{,}4 = 19{,}2\\ \\mathrm{m} \\approx 19\\ \\mathrm{m}
+$$
+
+Med ungefär 3 m per våning motsvarar det sex våningar, vilket är rimligt för en hissresa på tio sekunder.
+
+**Svar:** 19 m`,
+        },
+        {
+            level: 2,
+            question: `En bil kör ut på en motorväg och accelererar. Bilens acceleration avtar jämnt enligt *a-t*-diagrammet. Vid $t = 0$ har bilen hastigheten $15\\ \\mathrm{m/s}$.
+
+${makeDiagram({
+    xMax: 9, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    yMax: 4, yTicks: [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4],
+    yLabel: '<tspan font-style="italic">a</tspan> (m/s²)',
+    paths: [{ points: [[0, 3], [8, 1]] }],
+})}
+
+a) Bestäm bilens hastighet vid $t = 8{,}0\\ \\mathrm{s}$.<br>b) Bestäm bilens medelacceleration under de 8,0 sekunderna och jämför den med accelerationen vid $t = 4{,}0\\ \\mathrm{s}$.`,
+            answer: { value: 31, unit: 'm/s', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 31, unit: 'm/s', etikett: '$v =$' },
+                { del: 'b', value: 2.0, unit: 'm/s²', etikett: 'medelacceleration' },
+            ],
+            solution: `**a)** Hastighetsändringen är arean mellan grafen och *t*-axeln. Arean är en parallelltrapets med de parallella sidorna $3{,}0\\ \\mathrm{m/s^2}$ och $1{,}0\\ \\mathrm{m/s^2}$ och höjden $8{,}0\\ \\mathrm{s}$:
+
+${makeDiagram({
+    xMax: 9, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    yMax: 4, yTicks: [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4],
+    yLabel: '<tspan font-style="italic">a</tspan> (m/s²)',
+    fills: [{ points: [[0, 0], [0, 3], [8, 1], [8, 0]] }],
+    paths: [{ points: [[0, 3], [8, 1]] }],
+})}
+
+$$
+\\Delta v = \\frac{3{,}0 + 1{,}0}{2} \\cdot 8{,}0 = 2{,}0 \\cdot 8{,}0 = 16\\ \\mathrm{m/s}
+$$
+
+$$
+v = v_0 + \\Delta v = 15 + 16 = 31\\ \\mathrm{m/s}
+$$
+
+Det är cirka 112 km/h, en rimlig fart på en motorväg.
+
+**Svar:** 31 m/s
+
+**b)** Medelaccelerationen är hastighetsändringen delat med tiden:
+
+$$
+a_m = \\frac{\\Delta v}{\\Delta t} = \\frac{16}{8{,}0} = 2{,}0\\ \\mathrm{m/s^2}
+$$
+
+Ur diagrammet läser vi av att accelerationen vid $t = 4{,}0\\ \\mathrm{s}$ också är $2{,}0\\ \\mathrm{m/s^2}$. Värdena är lika eftersom accelerationen ändras jämnt: parallelltrapetsen har samma area som en rektangel med höjden mitt emellan $3{,}0$ och $1{,}0$.
+
+**Svar:** Medelaccelerationen är 2,0 m/s², lika stor som accelerationen vid 4,0 s.`,
+        },
+        {
+            level: 2,
+            question: `En radiostyrd bil står still på ett golv och startar vid $t = 0$. *a-t*-diagrammet visar bilens acceleration, med framåt som positiv riktning.
+
+${makeDiagram({
+    xMax: 11, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    yMin: -2, yMax: 3, yTicks: [-2, -1, 0, 1, 2, 3],
+    yLabel: '<tspan font-style="italic">a</tspan> (m/s²)',
+    paths: [{ points: [[0, 2], [3, 2], [3, -1], [10, -1]] }],
+})}
+
+a) Bestäm bilens hastighet vid $t = 3{,}0\\ \\mathrm{s}$.<br>b) Vid vilken tidpunkt står bilen still igen?<br>c) Bestäm bilens hastighet vid $t = 10\\ \\mathrm{s}$ och förklara vad tecknet betyder.`,
+            answer: { value: 9.0, unit: 's', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 6.0, unit: 'm/s', etikett: '$v =$' },
+                { del: 'b', value: 9.0, unit: 's', etikett: '$t =$' },
+                { del: 'c', value: -1.0, unit: 'm/s', etikett: '$v =$' },
+            ],
+            solution: `**a)** Hastighetsändringen är arean mellan grafen och *t*-axeln. Mellan 0 och 3,0 s ligger arean ovanför axeln:
+
+$$
+\\Delta v_1 = 2{,}0 \\cdot 3{,}0 = 6{,}0\\ \\mathrm{m/s}
+$$
+
+$$
+v = 0 + 6{,}0 = 6{,}0\\ \\mathrm{m/s}
+$$
+
+**Svar:** 6,0 m/s
+
+**b)** Efter 3,0 s är accelerationen $-1{,}0\\ \\mathrm{m/s^2}$. Arean under *t*-axeln växer då med $1{,}0\\ \\mathrm{m/s}$ för varje sekund. Bilen står still när den negativa arean är lika stor som den positiva, alltså $6{,}0\\ \\mathrm{m/s}$:
+
+$$
+1{,}0 \\cdot \\Delta t = 6{,}0
+$$
+
+$$
+\\Delta t = 6{,}0\\ \\mathrm{s}
+$$
+
+Bromsningen börjar vid 3,0 s, så bilen står still vid
+
+$$
+t = 3{,}0 + 6{,}0 = 9{,}0\\ \\mathrm{s}
+$$
+
+**Svar:** Vid 9,0 s
+
+**c)** Mellan 3,0 s och 10 s är arean negativ:
+
+$$
+\\Delta v_2 = -1{,}0 \\cdot 7{,}0 = -7{,}0\\ \\mathrm{m/s}
+$$
+
+$$
+v = 6{,}0 + (-7{,}0) = -1{,}0\\ \\mathrm{m/s}
+$$
+
+Minustecknet betyder att bilen rör sig bakåt. Accelerationen åt bakåt fortsatte efter att bilen stannat vid 9,0 s, så bilen började backa.
+
+**Svar:** $-1{,}0\\ \\mathrm{m/s}$, bilen backar med farten 1,0 m/s.`,
+        },
+        {
+            level: 2,
+            question: `En vagn rör sig enligt *v-t*-diagrammet nedan. Vilka värden har accelerationen i intervallen 0 till 2 s, 2 till 5 s och 5 till 8 s, i den ordningen? Alla värden är i m/s².
+
+${makeDiagram({
+    xMax: 9, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    yMax: 7, yTicks: [0, 1, 2, 3, 4, 5, 6, 7],
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    paths: [{ points: [[0, 0], [2, 6], [5, 6], [8, 0]] }],
+})}`,
+            choices: [
+                '$3{,}0$, $6{,}0$ och $-2{,}0$',
+                '$3{,}0$, $0$ och $-2{,}0$',
+                '$3{,}0$, $0$ och $2{,}0$',
+                '$6{,}0$, $0$ och $-6{,}0$',
+            ],
+            correct: 1,
+            solution: `Accelerationen är lutningen i *v-t*-diagrammet, $a = \\dfrac{\\Delta v}{\\Delta t}$.
+
+$$
+a_1 = \\frac{6{,}0 - 0}{2{,}0} = 3{,}0\\ \\mathrm{m/s^2}
+$$
+
+$$
+a_2 = \\frac{6{,}0 - 6{,}0}{3{,}0} = 0
+$$
+
+$$
+a_3 = \\frac{0 - 6{,}0}{3{,}0} = -2{,}0\\ \\mathrm{m/s^2}
+$$
+
+Ritar vi accelerationen i ett *a-t*-diagram kan vi kontrollera svaret med areorna:
+
+${makeDiagram({
+    xMax: 9, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    yMin: -3, yMax: 4, yTicks: [-3, -2, -1, 0, 1, 2, 3, 4],
+    yLabel: '<tspan font-style="italic">a</tspan> (m/s²)',
+    fills: [
+        { points: [[0, 0], [0, 3], [2, 3], [2, 0]] },
+        { points: [[5, 0], [5, -2], [8, -2], [8, 0]], color: 'rgba(37,99,201,0.16)' },
+    ],
+    paths: [{ points: [[0, 3], [2, 3], [2, 0], [5, 0], [5, -2], [8, -2]] }],
+})}
+
+Den positiva arean är $3{,}0 \\cdot 2{,}0 = 6{,}0\\ \\mathrm{m/s}$, precis den hastighetsökning som syns i *v-t*-diagrammet. Den negativa arean är $-2{,}0 \\cdot 3{,}0 = -6{,}0\\ \\mathrm{m/s}$, och vagnen stannar. Alternativet med 6,0 i mitten har tagit hastigheten i stället för accelerationen.
+
+**Svar:** $3{,}0$, $0$ och $-2{,}0$`,
+        },
+        {
+            level: 2,
+            question: `Ett flygplan rullar på startbanan och har hastigheten $4{,}0\\ \\mathrm{m/s}$ vid $t = 0$. I en förenklad modell är accelerationen $a_1$ under de första 10 sekunderna och hälften så stor därefter, enligt *a-t*-diagrammet. Vid $t = 30\\ \\mathrm{s}$ har flygplanet hastigheten $74\\ \\mathrm{m/s}$ och lättar. Bestäm $a_1$. Ange svaret i m/s².
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 350" style="max-width:500px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><g stroke="rgba(15,22,32,0.15)" stroke-width="1"><line x1="60.0" y1="30" x2="60.0" y2="290"/><line x1="122.5" y1="30" x2="122.5" y2="290"/><line x1="185.0" y1="30" x2="185.0" y2="290"/><line x1="247.5" y1="30" x2="247.5" y2="290"/><line x1="310.0" y1="30" x2="310.0" y2="290"/><line x1="372.5" y1="30" x2="372.5" y2="290"/><line x1="435.0" y1="30" x2="435.0" y2="290"/><line x1="60" y1="186.0" x2="460" y2="186.0"/><line x1="60" y1="82.0" x2="460" y2="82.0"/></g><line x1="60" y1="290.0" x2="468" y2="290.0" stroke="#0f1620" stroke-width="2"/><line x1="60" y1="290" x2="60" y2="22" stroke="#0f1620" stroke-width="2"/><polygon points="468,286.0 476,290.0 468,294.0" fill="#0f1620"/><polygon points="56,22 60,14 64,22" fill="#0f1620"/><text x="494" y="284.0" font-size="14" fill="#0f1620" text-anchor="end"><tspan font-style="italic">t</tspan> (s)</text><text x="66" y="22" font-size="14" fill="#0f1620" text-anchor="start"><tspan font-style="italic">a</tspan> (m/s²)</text><g><text x="60.0" y="308.0" text-anchor="middle" font-size="13" fill="#0f1620">0</text><text x="122.5" y="308.0" text-anchor="middle" font-size="13" fill="#0f1620">5</text><text x="185.0" y="308.0" text-anchor="middle" font-size="13" fill="#0f1620">10</text><text x="247.5" y="308.0" text-anchor="middle" font-size="13" fill="#0f1620">15</text><text x="310.0" y="308.0" text-anchor="middle" font-size="13" fill="#0f1620">20</text><text x="372.5" y="308.0" text-anchor="middle" font-size="13" fill="#0f1620">25</text><text x="435.0" y="308.0" text-anchor="middle" font-size="13" fill="#0f1620">30</text><text x="53" y="87.0" text-anchor="end" font-size="13" fill="#0f1620"><tspan font-style="italic">a</tspan><tspan baseline-shift="sub" font-size="0.72em">1</tspan></text><text x="53" y="191.0" text-anchor="end" font-size="13" fill="#0f1620"><tspan font-style="italic">a</tspan><tspan baseline-shift="sub" font-size="0.72em">1</tspan>/2</text></g><path d="M 60.0 82.0 L 185.0 82.0 L 185.0 186.0 L 435.0 186.0" stroke="#c8324a" stroke-width="2.5" fill="none" stroke-linejoin="round" stroke-linecap="round"/></svg>`,
+            answer: { value: 3.5, unit: 'm/s²', tol: 0.03 },
+            solution: `Hastighetsändringen under de 30 sekunderna är
+
+$$
+\\Delta v = v - v_0 = 74 - 4{,}0 = 70\\ \\mathrm{m/s}
+$$
+
+Hastighetsändringen är också arean mellan grafen och *t*-axeln. Arean består av två rektanglar: höjden $a_1$ under 10 s och höjden $\\dfrac{a_1}{2}$ under $30 - 10 = 20\\ \\mathrm{s}$.
+
+$$
+\\Delta v = a_1 \\cdot 10 + \\frac{a_1}{2} \\cdot 20 = 10 \\cdot a_1 + 10 \\cdot a_1 = 20 \\cdot a_1
+$$
+
+Arean ska vara lika med hastighetsändringen:
+
+$$
+20 \\cdot a_1 = 70
+$$
+
+$$
+\\frac{20 \\cdot a_1}{\\boldsymbol{20}} = \\frac{70}{\\boldsymbol{20}}
+$$
+
+$$
+a_1 = 3{,}5\\ \\mathrm{m/s^2}
+$$
+
+Kontroll: $3{,}5 \\cdot 10 + 1{,}75 \\cdot 20 = 35 + 35 = 70\\ \\mathrm{m/s}$. En acceleration på drygt en tredjedel av tyngdaccelerationen är rimlig för ett flygplan som startar.
+
+**Svar:** 3,5 m/s²`,
+        },
+        {
+            level: 2,
+            question: `Två bilar, A och B, kör bredvid varandra med hastigheten $10\\ \\mathrm{m/s}$ vid $t = 0$ och accelererar sedan på olika sätt. *a-t*-diagrammet visar bil A som röd heldragen linje och bil B som blå streckad linje.
+
+${makeDiagram({
+    xMax: 7, xTicks: [0, 1, 2, 3, 4, 5, 6, 7],
+    yMax: 5, yTicks: [0, 1, 2, 3, 4, 5],
+    yLabel: '<tspan font-style="italic">a</tspan> (m/s²)',
+    paths: [
+        { points: [[0, 2], [6, 2]] },
+        { points: [[0, 0], [6, 4]], color: '#2563c9', dash: '8 5' },
+    ],
+})}
+
+a) Bestäm hastigheten för varje bil vid $t = 6{,}0\\ \\mathrm{s}$.<br>b) Vilken av bilarna har kört längst under de 6,0 sekunderna? Motivera.`,
+            answer: { value: 22, unit: 'm/s', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 22, unit: 'm/s', etikett: 'bil A' },
+                { del: 'a', value: 22, unit: 'm/s', etikett: 'bil B' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Hastighetsändringen är arean mellan grafen och *t*-axeln.
+
+För bil A är arean en rektangel:
+
+$$
+\\Delta v_\\mathrm{A} = 2{,}0 \\cdot 6{,}0 = 12\\ \\mathrm{m/s}
+$$
+
+För bil B är arean en triangel:
+
+$$
+\\Delta v_\\mathrm{B} = \\frac{6{,}0 \\cdot 4{,}0}{2} = 12\\ \\mathrm{m/s}
+$$
+
+Båda bilarna startade med $10\\ \\mathrm{m/s}$:
+
+$$
+v_\\mathrm{A} = v_\\mathrm{B} = 10 + 12 = 22\\ \\mathrm{m/s}
+$$
+
+**Svar:** Båda bilarna har hastigheten 22 m/s.
+
+**b)** Jämför hastigheterna under resans gång, till exempel vid $t = 3{,}0\\ \\mathrm{s}$. Då har bil A fått arean $2{,}0 \\cdot 3{,}0 = 6{,}0\\ \\mathrm{m/s}$ men bil B bara triangeln $\\dfrac{3{,}0 \\cdot 2{,}0}{2} = 3{,}0\\ \\mathrm{m/s}$. Bil A har alltså hastigheten 16 m/s och bil B 13 m/s.
+
+Bil B:s area hinner i fatt bil A:s först precis vid 6,0 s. Vid varje tidpunkt mellan 0 och 6,0 s har bil A därför fått en större hastighetsökning och kör fortare än bil B. *v-t*-diagrammet visar samma sak: A:s graf ligger över B:s hela vägen, och arean under grafen, alltså sträckan, blir större för A.
+
+${makeDiagram({
+    xMax: 7, xTicks: [0, 1, 2, 3, 4, 5, 6, 7],
+    yMax: 24, yTicks: [0, 4, 8, 12, 16, 20, 24],
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    paths: [
+        { points: [[0, 10], [6, 22]] },
+        { points: Array.from({ length: 25 }, (_, i) => [i / 4, 10 + (i / 4) * (i / 4) / 3]), color: '#2563c9', dash: '8 5' },
+    ],
+})}
+
+**Svar:** Bil A, eftersom den har högre hastighet än bil B under hela tiden mellan start och 6,0 s.`,
+        },
+
+        {
+            level: 3,
+            question: `En fallskärmshoppare hoppar ut från ett flygplan. Luftmotståndet växer med farten, och därför avtar hennes acceleration nedåt enligt *a-t*-diagrammet. Nedåt är positiv riktning, och hopparen har ingen lodrät hastighet vid $t = 0$.
+
+${makeDiagram({
+    xMax: 26, xTicks: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26],
+    yMax: 10, yTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    yLabel: '<tspan font-style="italic">a</tspan> (m/s²)',
+    paths: [{ points: Array.from({ length: 101 }, (_, i) => [i / 4, 9.82 * Math.exp(-i / 20)]) }],
+})}
+
+a) Uppskatta hopparens fart efter $10\\ \\mathrm{s}$.<br>b) Efter ungefär 25 s har accelerationen nästan försvunnit. Uppskatta den högsta fart hopparen når.<br>c) Accelerationen är positiv hela tiden. Förklara med hjälp av diagrammet varför farten ändå inte växer hur mycket som helst.`,
+            answer: { value: 50, unit: 'm/s', tol: 0.07 },
+            delsvar: [
+                { del: 'a', value: 43, unit: 'm/s', etikett: 'fart efter 10 s', tol: 0.07 },
+                { del: 'b', value: 50, unit: 'm/s', etikett: 'högsta fart', tol: 0.07 },
+                { del: 'c' },
+            ],
+            solution: `**a)** Farten är hastighetsändringen, alltså arean mellan kurvan och *t*-axeln, eftersom hopparen startar utan lodrät hastighet. Kurvan är krökt, så vi delar upp arean i parallelltrapetser som är $2{,}0\\ \\mathrm{s}$ breda. Avläsning ger accelerationen
+
+| $t$ (s) | 0 | 2 | 4 | 6 | 8 | 10 |
+| --- | --- | --- | --- | --- | --- | --- |
+| $a$ (m/s²) | 9,8 | 6,6 | 4,4 | 3,0 | 2,0 | 1,3 |
+
+Varje parallelltrapets har arean $2{,}0 \\cdot$ medelvärdet av sina två sidor. När de läggs ihop räknas de inre värdena två gånger och ändvärdena en gång:
+
+$$
+\\Delta v \\approx 2{,}0 \\cdot \\left( \\frac{9{,}8 + 1{,}3}{2} + 6{,}6 + 4{,}4 + 3{,}0 + 2{,}0 \\right)
+$$
+
+$$
+\\Delta v \\approx 2{,}0 \\cdot (5{,}55 + 16{,}0) = 2{,}0 \\cdot 21{,}55 = 43{,}1\\ \\mathrm{m/s}
+$$
+
+Mellan avläsningspunkterna ligger kurvan något under de raka trapetssidorna, så trapetserna blir lite för stora och uppskattningen blir något för stor. Att räkna rutor ger nästan samma värde, ungefär 42 till 43 m/s.
+
+**Svar:** Cirka 43 m/s
+
+**b)** Efter 10 s är kurvan flack, så det räcker med parallelltrapetser som är $5{,}0\\ \\mathrm{s}$ breda. Avläsning: $a \\approx 1{,}3$, $0{,}5$, $0{,}2$ och $0{,}1\\ \\mathrm{m/s^2}$ vid 10, 15, 20 och 25 s.
+
+$$
+\\Delta v_{10 \\to 25} \\approx 5{,}0 \\cdot \\left( \\frac{1{,}3 + 0{,}1}{2} + 0{,}5 + 0{,}2 \\right)
+$$
+
+$$
+\\Delta v_{10 \\to 25} \\approx 5{,}0 \\cdot (0{,}7 + 0{,}7) = 5{,}0 \\cdot 1{,}4 = 7{,}0\\ \\mathrm{m/s}
+$$
+
+Efter 25 s är arean som tillkommer försumbar. Den högsta farten blir
+
+$$
+v_\\mathrm{max} \\approx 43{,}1 + 7{,}0 = 50{,}1\\ \\mathrm{m/s} \\approx 50\\ \\mathrm{m/s}
+$$
+
+Det är cirka 180 km/h, vilket stämmer med den fart fallskärmshoppare brukar nå innan de vecklar ut skärmen.
+
+**Svar:** Cirka 50 m/s
+
+**c)** Så länge accelerationen är positiv växer arean, och därmed farten. Men kurvan närmar sig *t*-axeln allt mer: för varje sekund som går tillkommer en allt smalare remsa. Arean under hela kurvan blir därför ändlig, ungefär 50 m/s, och farten närmar sig det värdet utan att passera det.
+
+Orsaken är luftmotståndet. När farten ökar blir luftmotståndet allt större, och den resulterande kraften nedåt, tyngdkraften minus luftmotståndet, blir allt mindre. När luftmotståndet är lika stort som tyngdkraften är accelerationen noll, och farten är konstant.
+
+**Svar:** Arean, som är farten, växer allt långsammare eftersom kurvan närmar sig *t*-axeln, så farten närmar sig ett gränsvärde på ungefär 50 m/s. Det beror på att luftmotståndet växer tills det är lika stort som tyngdkraften.`,
+        },
+        {
+            level: 3,
+            question: `Ett föremål startar från vila och har den konstanta accelerationen $a_0$ under tiden $T$. Därefter har det en konstant negativ acceleration, och vid tidpunkten $t = 3T$ står det still. Svara med uttryck i $a_0$ och $T$.<br>a) Bestäm den negativa accelerationen och rita föremålets *a-t*-diagram.<br>b) Hur stor del av föremålets totala förflyttning sker medan det bromsar?`,
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Hastighetsändringen är arean mellan grafen och *t*-axeln. Fram till $t = T$ är arean en rektangel ovanför axeln:
+
+$$
+\\Delta v_1 = a_0 \\cdot T
+$$
+
+Kalla den negativa accelerationen $a_2$. Den verkar från $T$ till $3T$, alltså under tiden $3T - T = 2T$, och ger arean
+
+$$
+\\Delta v_2 = a_2 \\cdot 2T
+$$
+
+Föremålet startade från vila och står still igen vid $3T$, så den totala arean är noll:
+
+$$
+a_0 \\cdot T + a_2 \\cdot 2T = 0
+$$
+
+$$
+a_0 \\cdot T + a_2 \\cdot 2T \\mathbin{\\boldsymbol{-}} \\boldsymbol{a_0 \\cdot T} = 0 \\mathbin{\\boldsymbol{-}} \\boldsymbol{a_0 \\cdot T}
+$$
+
+$$
+a_2 \\cdot 2T = -a_0 \\cdot T
+$$
+
+$$
+\\frac{a_2 \\cdot 2T}{\\boldsymbol{2T}} = \\frac{-a_0 \\cdot T}{\\boldsymbol{2T}}
+$$
+
+$$
+a_2 = -\\frac{a_0}{2}
+$$
+
+Det är rimligt: inbromsningen tar dubbelt så lång tid som accelerationen, så samma hastighet bromsas bort med en hälften så stor acceleration. I *a-t*-diagrammet är den röda och den blå rektangeln lika stora.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 330" style="max-width:500px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><g stroke="rgba(15,22,32,0.15)" stroke-width="1"><line x1="180.0" y1="30" x2="180.0" y2="290"/><line x1="300.0" y1="30" x2="300.0" y2="290"/><line x1="420.0" y1="30" x2="420.0" y2="290"/><line x1="60" y1="70" x2="440" y2="70"/><line x1="60" y1="235" x2="440" y2="235"/></g><path d="M 60 180 L 60 70 L 180.0 70 L 180.0 180 Z" fill="rgba(200,50,74,0.12)"/><path d="M 180.0 180 L 180.0 235 L 420.0 235 L 420.0 180 Z" fill="rgba(37,99,201,0.16)"/><line x1="60" y1="180" x2="468" y2="180" stroke="#0f1620" stroke-width="2"/><polygon points="468,176 476,180 468,184" fill="#0f1620"/><text x="494" y="172" font-size="14" fill="#0f1620" text-anchor="end"><tspan font-style="italic">t</tspan></text><g><text x="53" y="75" text-anchor="end" font-size="13" fill="#0f1620"><tspan font-style="italic">a</tspan><tspan baseline-shift="sub" font-size="0.72em">0</tspan></text><text x="53" y="240" text-anchor="end" font-size="13" fill="#0f1620">−<tspan font-style="italic">a</tspan><tspan baseline-shift="sub" font-size="0.72em">0</tspan>/2</text><text x="53" y="185" text-anchor="end" font-size="13" fill="#0f1620">0</text><text x="180.0" y="308" text-anchor="middle" font-size="13" fill="#0f1620"><tspan font-style="italic">T</tspan></text><text x="300.0" y="308" text-anchor="middle" font-size="13" fill="#0f1620">2<tspan font-style="italic">T</tspan></text><text x="420.0" y="308" text-anchor="middle" font-size="13" fill="#0f1620">3<tspan font-style="italic">T</tspan></text></g><path d="M 60 70 L 180.0 70 L 180.0 235 L 420.0 235 L 420.0 180" stroke="#c8324a" stroke-width="2.5" fill="none" stroke-linejoin="round" stroke-linecap="butt"/><line x1="60" y1="290" x2="60" y2="22" stroke="#0f1620" stroke-width="2"/><polygon points="56,22 60,14 64,22" fill="#0f1620"/><text x="66" y="22" font-size="14" fill="#0f1620" text-anchor="start"><tspan font-style="italic">a</tspan></text></svg>
+
+**Svar:** Den negativa accelerationen är $-\\dfrac{a_0}{2}$.
+
+**b)** Förflyttningen är arean i ett *v-t*-diagram. Hastigheten växer jämnt till $a_0 T$ vid $t = T$ och minskar sedan jämnt till noll vid $t = 3T$:
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 330" style="max-width:500px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><g stroke="rgba(15,22,32,0.15)" stroke-width="1"><line x1="180.0" y1="30" x2="180.0" y2="270"/><line x1="300.0" y1="30" x2="300.0" y2="270"/><line x1="420.0" y1="30" x2="420.0" y2="270"/><line x1="60" y1="80" x2="440" y2="80"/></g><path d="M 60 270 L 180.0 80 L 180.0 270 Z" fill="rgba(200,50,74,0.12)"/><path d="M 180.0 270 L 180.0 80 L 420.0 270 Z" fill="rgba(37,99,201,0.16)"/><line x1="60" y1="270" x2="468" y2="270" stroke="#0f1620" stroke-width="2"/><polygon points="468,266 476,270 468,274" fill="#0f1620"/><text x="494" y="262" font-size="14" fill="#0f1620" text-anchor="end"><tspan font-style="italic">t</tspan></text><g><text x="53" y="85" text-anchor="end" font-size="13" fill="#0f1620"><tspan font-style="italic">a</tspan><tspan baseline-shift="sub" font-size="0.72em">0</tspan><tspan font-style="italic">T</tspan></text><text x="53" y="275" text-anchor="end" font-size="13" fill="#0f1620">0</text><text x="180.0" y="288" text-anchor="middle" font-size="13" fill="#0f1620"><tspan font-style="italic">T</tspan></text><text x="300.0" y="288" text-anchor="middle" font-size="13" fill="#0f1620">2<tspan font-style="italic">T</tspan></text><text x="420.0" y="288" text-anchor="middle" font-size="13" fill="#0f1620">3<tspan font-style="italic">T</tspan></text></g><text x="140" y="215" text-anchor="middle" font-size="13" fill="#0f1620"><tspan font-style="italic">s</tspan><tspan baseline-shift="sub" font-size="0.72em">1</tspan></text><text x="260" y="215" text-anchor="middle" font-size="13" fill="#0f1620"><tspan font-style="italic">s</tspan><tspan baseline-shift="sub" font-size="0.72em">2</tspan></text><path d="M 60 270 L 180.0 80 L 420.0 270" stroke="#c8324a" stroke-width="2.5" fill="none" stroke-linejoin="round" stroke-linecap="round"/><line x1="60" y1="290" x2="60" y2="22" stroke="#0f1620" stroke-width="2"/><polygon points="56,22 60,14 64,22" fill="#0f1620"/><text x="66" y="22" font-size="14" fill="#0f1620" text-anchor="start"><tspan font-style="italic">v</tspan></text></svg>
+
+Förflyttningen medan föremålet accelererar är triangeln $s_1$, med basen $T$ och höjden $a_0 T$:
+
+$$
+s_1 = \\frac{T \\cdot a_0 T}{2} = \\frac{a_0 T^2}{2}
+$$
+
+Förflyttningen medan det bromsar är triangeln $s_2$, med basen $2T$ och samma höjd:
+
+$$
+s_2 = \\frac{2T \\cdot a_0 T}{2} = a_0 T^2
+$$
+
+Andelen av hela förflyttningen är
+
+$$
+\\frac{s_2}{s_1 + s_2} = \\frac{a_0 T^2}{\\dfrac{a_0 T^2}{2} + a_0 T^2} = \\frac{a_0 T^2}{\\dfrac{3 a_0 T^2}{2}} = \\frac{2}{3}
+$$
+
+Både $a_0$ och $T$ tar ut sig, så andelen är densamma för alla värden. Det går också att se utan räkning: medelhastigheten är $\\dfrac{a_0 T}{2}$ i båda delarna, och inbromsningen pågår dubbelt så länge, så den ger dubbelt så lång sträcka.
+
+**Svar:** $\\dfrac{2}{3}$ av förflyttningen sker under inbromsningen.`,
+        },
+        {
+            level: 3,
+            question: `En hiss i ett höghus ska åka $30\\ \\mathrm{m}$ uppåt, från stillastående till stillastående. För att resan ska kännas behaglig får accelerationen och retardationen vara högst $1{,}0\\ \\mathrm{m/s^2}$, och hastigheten får vara högst $2{,}0\\ \\mathrm{m/s}$. Hissen ska alltid göra resan så snabbt som gränserna tillåter.<br>a) Bestäm hur lång tid resan tar, och rita hissens *a-t*-diagram.<br>b) Hissen ska också kunna åka en enda våning, $3{,}0\\ \\mathrm{m}$, med samma gränser. Hur lång tid tar den resan? Rita *a-t*-diagrammet även för den.`,
+            answer: { value: 17, unit: 's', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 17, unit: 's', etikett: 'restid' },
+                { del: 'b', value: 3.5, unit: 's', etikett: 'restid' },
+            ],
+            solution: `**a)** Resan går snabbast om hissen kommer upp i den högsta tillåtna hastigheten så fort som möjligt, håller den så länge som möjligt och bromsar så sent som möjligt. I *a-t*-diagrammet är arean hastighetsändringen. Hissen ska nå $2{,}0\\ \\mathrm{m/s}$ med accelerationen $1{,}0\\ \\mathrm{m/s^2}$, så rektangeln måste ha arean $2{,}0\\ \\mathrm{m/s}$:
+
+$$
+a \\cdot \\Delta t_1 = \\Delta v
+$$
+
+$$
+1{,}0 \\cdot \\Delta t_1 = 2{,}0
+$$
+
+$$
+\\Delta t_1 = 2{,}0\\ \\mathrm{s}
+$$
+
+Inbromsningen tar lika lång tid, $2{,}0\\ \\mathrm{s}$. Sträckan under accelerationen är arean i *v-t*-diagrammet, en triangel:
+
+$$
+s_1 = \\frac{2{,}0 \\cdot 2{,}0}{2} = 2{,}0\\ \\mathrm{m}
+$$
+
+Bromssträckan är också $2{,}0\\ \\mathrm{m}$. Resten av sträckan åker hissen med konstant hastighet:
+
+$$
+s_2 = 30 - 2{,}0 - 2{,}0 = 26\\ \\mathrm{m}
+$$
+
+$$
+\\Delta t_2 = \\frac{s_2}{v} = \\frac{26}{2{,}0} = 13\\ \\mathrm{s}
+$$
+
+$$
+t_\\mathrm{tot} = 2{,}0 + 13 + 2{,}0 = 17\\ \\mathrm{s}
+$$
+
+*a-t*-diagrammet består av en rektangel med höjden $1{,}0\\ \\mathrm{m/s^2}$ mellan 0 och 2,0 s, accelerationen noll mellan 2,0 s och 15 s och en rektangel med höjden $-1{,}0\\ \\mathrm{m/s^2}$ mellan 15 s och 17 s. De två areorna är lika stora, så hissen står still när resan är slut.
+
+${makeDiagram({
+    xMax: 18, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+    yMin: -1.5, yMax: 1.5, yTicks: [-1.5, -1, -0.5, 0, 0.5, 1, 1.5],
+    yLabel: '<tspan font-style="italic">a</tspan> (m/s²)',
+    fills: [
+        { points: [[0, 0], [0, 1], [2, 1], [2, 0]] },
+        { points: [[15, 0], [15, -1], [17, -1], [17, 0]], color: 'rgba(37,99,201,0.16)' },
+    ],
+    paths: [{ points: [[0, 1], [2, 1], [2, 0], [15, 0], [15, -1], [17, -1], [17, 0]] }],
+})}
+
+**Svar:** Resan tar 17 s.
+
+**b)** Hissen hinner inte upp i den högsta hastigheten. Enligt a) behövs $2{,}0\\ \\mathrm{m}$ för att accelerera till $2{,}0\\ \\mathrm{m/s}$ och lika mycket för att bromsa, sammanlagt $4{,}0\\ \\mathrm{m}$. Det är mer än de $3{,}0\\ \\mathrm{m}$ som resan är lång.
+
+Snabbast går det då om hissen accelererar med $1{,}0\\ \\mathrm{m/s^2}$ halva vägen och bromsar med $1{,}0\\ \\mathrm{m/s^2}$ resten av vägen. Accelerationen och inbromsningen tar lika lång tid, $t_1$, och var och en av dem ger halva sträckan, $1{,}5\\ \\mathrm{m}$.
+
+Efter tiden $t_1$ har hissen hastigheten $v_1 = a \\cdot t_1 = 1{,}0 \\cdot t_1$, eftersom arean i *a-t*-diagrammet är en rektangel. Sträckan under accelerationen är arean i *v-t*-diagrammet, en triangel med basen $t_1$ och höjden $1{,}0 \\cdot t_1$:
+
+$$
+\\frac{t_1 \\cdot 1{,}0 \\cdot t_1}{2} = 1{,}5
+$$
+
+$$
+\\frac{1{,}0 \\cdot t_1^2}{2} \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{2} = 1{,}5 \\mathbin{\\boldsymbol{\\cdot}} \\boldsymbol{2}
+$$
+
+$$
+t_1^2 = 3{,}0
+$$
+
+$$
+t_1 = \\pm\\sqrt{3{,}0} \\approx \\pm 1{,}732\\ \\mathrm{s}
+$$
+
+Bara den positiva roten har betydelse, eftersom $t_1$ är en tid. Hela resan tar
+
+$$
+t_\\mathrm{tot} = 2 \\cdot t_1 = 2 \\cdot 1{,}732 \\approx 3{,}46\\ \\mathrm{s} \\approx 3{,}5\\ \\mathrm{s}
+$$
+
+Kontroll: den högsta hastigheten blir $1{,}0 \\cdot 1{,}732 \\approx 1{,}7\\ \\mathrm{m/s}$, som är under gränsen $2{,}0\\ \\mathrm{m/s}$. Hissen har ingen tid med konstant hastighet, så *a-t*-diagrammet är två lika stora rektanglar på var sin sida om *t*-axeln, utan något uppehåll emellan:
+
+${makeDiagram({
+    xMax: 4, xTicks: [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4],
+    yMin: -1.5, yMax: 1.5, yTicks: [-1.5, -1, -0.5, 0, 0.5, 1, 1.5],
+    yLabel: '<tspan font-style="italic">a</tspan> (m/s²)',
+    fills: [
+        { points: [[0, 0], [0, 1], [1.732, 1], [1.732, 0]] },
+        { points: [[1.732, 0], [1.732, -1], [3.464, -1], [3.464, 0]], color: 'rgba(37,99,201,0.16)' },
+    ],
+    paths: [{ points: [[0, 1], [1.732, 1], [1.732, -1], [3.464, -1], [3.464, 0]] }],
+})}
+
+Den korta resan går alltså långsammare i genomsnitt, $\\dfrac{3{,}0}{3{,}46} \\approx 0{,}87\\ \\mathrm{m/s}$ mot $\\dfrac{30}{17} \\approx 1{,}8\\ \\mathrm{m/s}$ för den långa, eftersom hissen aldrig når sin högsta hastighet.
+
+**Svar:** Resan tar 3,5 s. Hissen accelererar i 1,7 s och bromsar direkt i 1,7 s, utan någon del med konstant hastighet.`,
+        },
+        {
+            level: 3,
+            question: `En vagn står still vid $t = 0$ och får sedan accelerationen i *a-t*-diagrammet. Framåt är positiv riktning.
+
+${makeDiagram({
+    xMax: 9, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    yMin: -4, yMax: 4, yTicks: [-4, -3, -2, -1, 0, 1, 2, 3, 4],
+    yLabel: '<tspan font-style="italic">a</tspan> (m/s²)',
+    paths: [{ points: [[0, 3], [8, -3]] }],
+})}
+
+En elev säger: ”Vid $t = 4{,}0\\ \\mathrm{s}$ är accelerationen noll, så där står vagnen still. Efter det är accelerationen negativ, och då rullar vagnen bakåt.”
+
+Utred om eleven har rätt. Beskriv vagnens rörelse under de 8,0 sekunderna med hjälp av diagrammet: när vagnen har sin största hastighet, hur stor den är, och om vagnen någon gång rör sig bakåt. Motivera varje slutsats.`,
+            solution: `Accelerationen talar om hur snabbt hastigheten **ändras**, inte hur stor den är. Hastigheten får vi i stället ur arean mellan grafen och *t*-axeln, eftersom arean är hastighetsändringen och vagnen startar från vila.
+
+**När hastigheten är störst.** Mellan 0 och 4,0 s ligger grafen ovanför *t*-axeln. Arean växer, så hastigheten ökar hela tiden, även om den ökar allt långsammare. Efter 4,0 s ligger grafen under axeln, och hastigheten minskar. Hastigheten är därför störst precis vid 4,0 s, där accelerationen är noll. Elevens första påstående är alltså fel: vid 4,0 s står vagnen inte still, den kör som fortast.
+
+**Hur stor den största hastigheten är.** Fram till 4,0 s är arean en triangel med basen $4{,}0\\ \\mathrm{s}$ och höjden $3{,}0\\ \\mathrm{m/s^2}$:
+
+$$
+v_\\mathrm{max} = 0 + \\frac{4{,}0 \\cdot 3{,}0}{2} = 6{,}0\\ \\mathrm{m/s}
+$$
+
+**Om vagnen rör sig bakåt.** Vagnen rör sig bakåt först när hastigheten blir negativ, alltså när den negativa arean efter 4,0 s har blivit större än den positiva arean före. Grafen är en rät linje, så triangeln mellan 4,0 s och 8,0 s har samma bas, $4{,}0\\ \\mathrm{s}$, och samma höjd, $3{,}0\\ \\mathrm{m/s^2}$, som triangeln före:
+
+$$
+\\Delta v = -\\frac{4{,}0 \\cdot 3{,}0}{2} = -6{,}0\\ \\mathrm{m/s}
+$$
+
+$$
+v(8{,}0) = 6{,}0 + (-6{,}0) = 0
+$$
+
+Före 8,0 s är den negativa arean mindre än $6{,}0\\ \\mathrm{m/s}$, så hastigheten är fortfarande positiv. Vagnen saktar alltså bara in efter 4,0 s och står still först vid 8,0 s. Den rör sig aldrig bakåt under de 8,0 sekunderna. Elevens andra påstående blandar ihop riktningen på accelerationen med riktningen på rörelsen: när vagnen rör sig framåt betyder en negativ acceleration att hastigheten minskar, inte att vagnen rör sig bakåt.
+
+**Svar:** Eleven har fel på båda punkterna. Vagnens hastighet ökar fram till 4,0 s, där den är som störst, 6,0 m/s. Sedan saktar vagnen in och står still vid 8,0 s, utan att någon gång röra sig bakåt.`,
+        },
+        {
+            level: 3,
+            question: `Ett rymdskepp långt från alla himlakroppar glider fram med motorn avstängd. Vid $t = 0$ startas motorn, och dragkraften ökas sedan jämnt, så att accelerationen växer jämnt med tiden enligt *a-t*-diagrammet. Skalan på *a*-axeln är borttagen. Skeppets hastighet jämfört med en rymdstation mäts två gånger:
+
+| Tid (s) | Hastighet (m/s) |
+| --- | --- |
+| 2,0 | 5,0 |
+| 8,0 | 17 |
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 350" style="max-width:500px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><g stroke="rgba(15,22,32,0.15)" stroke-width="1"><line x1="60.0" y1="30" x2="60.0" y2="290"/><line x1="98.1" y1="30" x2="98.1" y2="290"/><line x1="136.2" y1="30" x2="136.2" y2="290"/><line x1="174.3" y1="30" x2="174.3" y2="290"/><line x1="212.4" y1="30" x2="212.4" y2="290"/><line x1="250.5" y1="30" x2="250.5" y2="290"/><line x1="288.6" y1="30" x2="288.6" y2="290"/><line x1="326.7" y1="30" x2="326.7" y2="290"/><line x1="364.8" y1="30" x2="364.8" y2="290"/><line x1="402.9" y1="30" x2="402.9" y2="290"/><line x1="441.0" y1="30" x2="441.0" y2="290"/></g><line x1="60" y1="290.0" x2="468" y2="290.0" stroke="#0f1620" stroke-width="2"/><line x1="60" y1="290" x2="60" y2="22" stroke="#0f1620" stroke-width="2"/><polygon points="468,286.0 476,290.0 468,294.0" fill="#0f1620"/><polygon points="56,22 60,14 64,22" fill="#0f1620"/><text x="494" y="284.0" font-size="14" fill="#0f1620" text-anchor="end"><tspan font-style="italic">t</tspan> (s)</text><text x="66" y="22" font-size="14" fill="#0f1620" text-anchor="start"><tspan font-style="italic">a</tspan> (m/s²)</text><g><text x="60.0" y="308.0" text-anchor="middle" font-size="13" fill="#0f1620">0</text><text x="98.1" y="308.0" text-anchor="middle" font-size="13" fill="#0f1620">1</text><text x="136.2" y="308.0" text-anchor="middle" font-size="13" fill="#0f1620">2</text><text x="174.3" y="308.0" text-anchor="middle" font-size="13" fill="#0f1620">3</text><text x="212.4" y="308.0" text-anchor="middle" font-size="13" fill="#0f1620">4</text><text x="250.5" y="308.0" text-anchor="middle" font-size="13" fill="#0f1620">5</text><text x="288.6" y="308.0" text-anchor="middle" font-size="13" fill="#0f1620">6</text><text x="326.7" y="308.0" text-anchor="middle" font-size="13" fill="#0f1620">7</text><text x="364.8" y="308.0" text-anchor="middle" font-size="13" fill="#0f1620">8</text><text x="402.9" y="308.0" text-anchor="middle" font-size="13" fill="#0f1620">9</text><text x="441.0" y="308.0" text-anchor="middle" font-size="13" fill="#0f1620">10</text><text x="53" y="295.0" text-anchor="end" font-size="13" fill="#0f1620">0</text></g><path d="M 60.0 290.0 L 441.0 53.6" stroke="#c8324a" stroke-width="2.5" fill="none" stroke-linejoin="round" stroke-linecap="round"/></svg>
+
+a) Bestäm skeppets acceleration vid $t = 8{,}0\\ \\mathrm{s}$.<br>b) Bestäm skeppets hastighet vid $t = 0$.`,
+            answer: { value: 4.2, unit: 'm/s', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 3.2, unit: 'm/s²', etikett: '$a =$' },
+                { del: 'b', value: 4.2, unit: 'm/s', etikett: '$v_0 =$' },
+            ],
+            solution: `**a)** Grafen är en rät linje genom origo, så accelerationen är proportionell mot tiden. Vi skriver $a = k \\cdot t$, där $k$ är hur mycket accelerationen ökar per sekund (enheten är $\\mathrm{m/s^3}$).
+
+Mellan 2,0 s och 8,0 s har hastigheten ändrats med
+
+$$
+\\Delta v = 17 - 5{,}0 = 12\\ \\mathrm{m/s}
+$$
+
+Det är arean mellan grafen och *t*-axeln i intervallet, en parallelltrapets med de parallella sidorna $a(2{,}0) = 2{,}0k$ och $a(8{,}0) = 8{,}0k$ och höjden $6{,}0\\ \\mathrm{s}$:
+
+$$
+\\Delta v = \\frac{2{,}0k + 8{,}0k}{2} \\cdot 6{,}0 = 5{,}0k \\cdot 6{,}0 = 30k
+$$
+
+$$
+30k = 12
+$$
+
+$$
+\\frac{30k}{\\boldsymbol{30}} = \\frac{12}{\\boldsymbol{30}}
+$$
+
+$$
+k = 0{,}40\\ \\mathrm{m/s^3}
+$$
+
+$$
+a(8{,}0) = 0{,}40 \\cdot 8{,}0 = 3{,}2\\ \\mathrm{m/s^2}
+$$
+
+**Svar:** 3,2 m/s²
+
+**b)** Mellan 0 och 2,0 s är arean en triangel med basen $2{,}0\\ \\mathrm{s}$ och höjden $a(2{,}0) = 0{,}40 \\cdot 2{,}0 = 0{,}80\\ \\mathrm{m/s^2}$:
+
+$$
+\\Delta v_{0 \\to 2} = \\frac{2{,}0 \\cdot 0{,}80}{2} = 0{,}80\\ \\mathrm{m/s}
+$$
+
+Hastigheten vid 2,0 s är begynnelsehastigheten plus denna ändring:
+
+$$
+v_0 + 0{,}80 = 5{,}0
+$$
+
+$$
+v_0 + 0{,}80 \\mathbin{\\boldsymbol{-}} \\boldsymbol{0{,}80} = 5{,}0 \\mathbin{\\boldsymbol{-}} \\boldsymbol{0{,}80}
+$$
+
+$$
+v_0 = 4{,}2\\ \\mathrm{m/s}
+$$
+
+Kontroll med hela triangeln fram till 8,0 s: $4{,}2 + \\dfrac{8{,}0 \\cdot 3{,}2}{2} = 4{,}2 + 12{,}8 = 17\\ \\mathrm{m/s}$, vilket stämmer med den andra mätningen.
+
+**Svar:** 4,2 m/s`,
+        },
+        {
+            level: 3,
+            question: `En bil kör rakt in i en betongvägg med farten $50\\ \\mathrm{km/h}$ och står still efter $0{,}12\\ \\mathrm{s}$. Diagrammet visar två modeller av bilens acceleration under krocken, med färdriktningen som positiv riktning. I modell 1 (blå streckad linje) är accelerationen konstant, $a_1$. I modell 2 (röd linje) växer retardationen jämnt till sitt största värde vid $t = 0{,}06\\ \\mathrm{s}$, där accelerationen är $a_2$, och avtar sedan jämnt till noll.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 350" style="max-width:500px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><g stroke="rgba(15,22,32,0.15)" stroke-width="1"><line x1="237.8" y1="30" x2="237.8" y2="290"/><line x1="415.6" y1="30" x2="415.6" y2="290"/><line x1="60" y1="160.0" x2="460" y2="160.0"/><line x1="60" y1="252.9" x2="460" y2="252.9"/></g><line x1="60" y1="67.1" x2="468" y2="67.1" stroke="#0f1620" stroke-width="2"/><line x1="60" y1="290" x2="60" y2="22" stroke="#0f1620" stroke-width="2"/><polygon points="468,63.1 476,67.1 468,71.1" fill="#0f1620"/><polygon points="56,22 60,14 64,22" fill="#0f1620"/><text x="494" y="87.1" font-size="14" fill="#0f1620" text-anchor="end"><tspan font-style="italic">t</tspan> (s)</text><text x="66" y="22" font-size="14" fill="#0f1620" text-anchor="start"><tspan font-style="italic">a</tspan> (m/s²)</text><g><text x="237.8" y="59.1" text-anchor="middle" font-size="13" fill="#0f1620">0,06</text><text x="415.6" y="59.1" text-anchor="middle" font-size="13" fill="#0f1620">0,12</text><text x="53" y="72.1" text-anchor="end" font-size="13" fill="#0f1620">0</text><text x="53" y="165.0" text-anchor="end" font-size="13" fill="#0f1620"><tspan font-style="italic">a</tspan><tspan baseline-shift="sub" font-size="0.72em">1</tspan></text><text x="53" y="257.9" text-anchor="end" font-size="13" fill="#0f1620"><tspan font-style="italic">a</tspan><tspan baseline-shift="sub" font-size="0.72em">2</tspan></text></g><path d="M 60.0 67.1 L 60.0 160.0 L 415.6 160.0 L 415.6 67.1" stroke="#2563c9" stroke-width="2.5" fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="7 5"/><path d="M 60.0 67.1 L 237.8 252.9 L 415.6 67.1" stroke="#c8324a" stroke-width="2.5" fill="none" stroke-linejoin="round" stroke-linecap="round"/></svg>
+
+a) Bestäm $a_1$ och $a_2$.<br>b) Hur många gånger större är den största retardationen i modell 2 än retardationen i modell 1? Gäller samma förhållande för alla farter och krocktider? Motivera.<br>c) Passagerarna skadas främst av den största retardationen. Vad bör den som konstruerar bilens deformationszon sträva efter? Motivera med diagrammet.`,
+            delsvar: [
+                { del: 'a', value: -120, unit: 'm/s²', etikett: '$a_1 =$', tol: 0.05 },
+                { del: 'a', value: -230, unit: 'm/s²', etikett: '$a_2 =$', tol: 0.05 },
+                { del: 'b', value: 2, unit: '', etikett: 'antal gånger' },
+                { del: 'c' },
+            ],
+            solution: `**a)** I båda modellerna är arean mellan grafen och *t*-axeln bilens hastighetsändring. Bilen stannar, så
+
+$$
+v_0 = \\frac{50}{3{,}6} \\approx 13{,}89\\ \\mathrm{m/s}
+$$
+
+$$
+\\Delta v = 0 - 13{,}89 = -13{,}89\\ \\mathrm{m/s}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\Delta v = -13{,}89\\ \\mathrm{m/s} \\\\
+\\Delta t = 0{,}12\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+**Modell 1.** Arean är en rektangel, $a_1 \\cdot \\Delta t = \\Delta v$:
+
+$$
+a_1 = \\frac{\\Delta v}{\\Delta t} = \\frac{-13{,}89}{0{,}12} \\approx -115{,}7\\ \\mathrm{m/s^2} \\approx -120\\ \\mathrm{m/s^2}
+$$
+
+**Modell 2.** Arean är en triangel med basen $\\Delta t$ och höjden $a_2$, alltså $\\dfrac{a_2 \\cdot \\Delta t}{2} = \\Delta v$:
+
+$$
+a_2 = \\frac{2 \\cdot \\Delta v}{\\Delta t} = \\frac{2 \\cdot (-13{,}89)}{0{,}12} \\approx -231{,}5\\ \\mathrm{m/s^2} \\approx -230\\ \\mathrm{m/s^2}
+$$
+
+Retardationen i modell 2 motsvarar mer än 20 gånger tyngdaccelerationen, vilket är realistiskt för en krock i den farten.
+
+**Svar:** $a_1 \\approx -120\\ \\mathrm{m/s^2}$ och $a_2 \\approx -230\\ \\mathrm{m/s^2}$
+
+**b)** I båda modellerna måste arean vara lika med samma hastighetsändring $\\Delta v$ under samma tid $\\Delta t$:
+
+$$
+a_1 \\cdot \\Delta t = \\Delta v \\quad\\Leftrightarrow\\quad a_1 = \\frac{\\Delta v}{\\Delta t}
+$$
+
+$$
+\\frac{a_2 \\cdot \\Delta t}{2} = \\Delta v \\quad\\Leftrightarrow\\quad a_2 = \\frac{2 \\cdot \\Delta v}{\\Delta t}
+$$
+
+Division ger
+
+$$
+\\frac{a_2}{a_1} = \\frac{2 \\cdot \\Delta v}{\\Delta t} \\cdot \\frac{\\Delta t}{\\Delta v} = 2
+$$
+
+Kvoten innehåller varken $\\Delta v$ eller $\\Delta t$, så den gäller för alla farter och krocktider. En triangel med samma bas och samma area som en rektangel måste vara dubbelt så hög.
+
+**Svar:** Den största retardationen i modell 2 är dubbelt så stor, för alla farter och krocktider.
+
+**c)** Arean, alltså hastighetsändringen, är bestämd av farten före krocken. Den största retardationen blir då så liten som möjligt om arean fördelas jämnt, så att grafen blir så låg och platt som möjligt. Två saker hjälper:
+
+- **Längre krocktid.** Om bilen deformeras under längre tid blir basen bredare, och samma area ryms med lägre höjd.
+- **Jämn retardation.** En rektangel har den lägsta höjden för en given bas och area. En spetsig puls som i modell 2 ger dubbelt så stor största retardation som en jämn puls.
+
+**Svar:** Deformationszonen bör göra krocken så lång som möjligt och hålla retardationen så jämn som möjligt, eftersom samma area då ryms under en lägre graf.`,
+        },
+        {
+            level: 3,
+            question: `Två vagnar står bredvid varandra på parallella spår vid $t = 0$. Vagn A står still och vagn B har hastigheten $6{,}0\\ \\mathrm{m/s}$ framåt. *a-t*-diagrammet visar vagnarnas acceleration, vagn A som röd heldragen linje och vagn B som blå streckad linje. Framåt är positiv riktning.
+
+${makeDiagram({
+    xMax: 11, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    yMin: -1.5, yMax: 1.5, yTicks: [-1.5, -1, -0.5, 0, 0.5, 1, 1.5],
+    yLabel: '<tspan font-style="italic">a</tspan> (m/s²)',
+    paths: [
+        { points: [[0, 1], [10, 1]] },
+        { points: [[0, -0.5], [10, -0.5]], color: '#2563c9', dash: '8 5' },
+    ],
+})}
+
+a) Hur stort är det största avståndet mellan vagnarna innan A kommer i kapp B?<br>b) Vid vilken tidpunkt kommer A i kapp B?`,
+            answer: { value: 8.0, unit: 's', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 12, unit: 'm', etikett: 'största avstånd' },
+                { del: 'b', value: 8.0, unit: 's', etikett: '$t =$' },
+            ],
+            solution: `**a)** Hastighetsändringen fram till tiden $t$ är arean mellan grafen och *t*-axeln. Båda areorna är rektanglar:
+
+$$
+v_\\mathrm{A} = 0 + 1{,}0 \\cdot t \\qquad v_\\mathrm{B} = 6{,}0 - 0{,}50 \\cdot t
+$$
+
+Så länge B kör fortare än A växer avståndet mellan vagnarna, och när A kör fortare än B krymper det. Avståndet är alltså störst just när hastigheterna är lika:
+
+$$
+1{,}0 \\cdot t = 6{,}0 - 0{,}50 \\cdot t
+$$
+
+$$
+1{,}0 \\cdot t \\mathbin{\\boldsymbol{+}} \\boldsymbol{0{,}50 \\cdot t} = 6{,}0 - 0{,}50 \\cdot t \\mathbin{\\boldsymbol{+}} \\boldsymbol{0{,}50 \\cdot t}
+$$
+
+$$
+1{,}5 \\cdot t = 6{,}0
+$$
+
+$$
+\\frac{1{,}5 \\cdot t}{\\boldsymbol{1{,}5}} = \\frac{6{,}0}{\\boldsymbol{1{,}5}}
+$$
+
+$$
+t = 4{,}0\\ \\mathrm{s}
+$$
+
+Då har båda vagnarna hastigheten $4{,}0\\ \\mathrm{m/s}$. För att få avståndet ritar vi vagnarnas *v-t*-diagram. Arean under en graf är vagnens förflyttning, så arean **mellan** graferna är hur mycket längre den ena vagnen har kört.
+
+${makeDiagram({
+    xMax: 10.5, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    yMax: 10, yTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    fills: [
+        { points: [[0, 0], [0, 6], [4, 4]], color: 'rgba(37,99,201,0.16)' },
+        { points: [[4, 4], [8, 8], [8, 2]] },
+    ],
+    paths: [
+        { points: [[0, 0], [10, 10]] },
+        { points: [[0, 6], [10, 1]], color: '#2563c9', dash: '8 5' },
+    ],
+})}
+
+Före 4,0 s kör B fortare än A, och avståndet växer. Efter 4,0 s kör A fortare, och avståndet krymper. Avståndet är alltså störst vid 4,0 s, när hastigheterna är lika. Det är den blå triangeln, med basen $4{,}0\\ \\mathrm{s}$ och höjden $6{,}0 - 0 = 6{,}0\\ \\mathrm{m/s}$:
+
+$$
+\\Delta s_\\mathrm{max} = \\frac{4{,}0 \\cdot 6{,}0}{2} = 12\\ \\mathrm{m}
+$$
+
+**Svar:** 12 m
+
+**b)** A kommer i kapp när A har tagit igen de 12 metrarna, alltså när den röda triangeln efter 4,0 s också har arean 12 m. Efter tiden $\\tau = t - 4{,}0$ är skillnaden i hastighet $1{,}5 \\cdot \\tau$, eftersom avståndet mellan graferna växer med $1{,}0 + 0{,}50 = 1{,}5\\ \\mathrm{m/s}$ varje sekund. Triangelns area är
+
+$$
+\\frac{\\tau \\cdot 1{,}5 \\cdot \\tau}{2} = 12
+$$
+
+$$
+0{,}75 \\cdot \\tau^2 = 12
+$$
+
+$$
+\\frac{0{,}75 \\cdot \\tau^2}{\\boldsymbol{0{,}75}} = \\frac{12}{\\boldsymbol{0{,}75}}
+$$
+
+$$
+\\tau^2 = 16
+$$
+
+$$
+\\tau = \\pm\\sqrt{16} = \\pm 4{,}0\\ \\mathrm{s}
+$$
+
+Bara den positiva roten har betydelse, eftersom $\\tau$ är tiden efter 4,0 s:
+
+$$
+t = 4{,}0 + 4{,}0 = 8{,}0\\ \\mathrm{s}
+$$
+
+Det är rimligt: figuren är symmetrisk kring $t = 4{,}0\\ \\mathrm{s}$, så det tar lika lång tid att ta igen avståndet som det tog att bygga upp det. Vagn B har fortfarande hastigheten $6{,}0 - 0{,}50 \\cdot 8{,}0 = 2{,}0\\ \\mathrm{m/s}$, så den har inte hunnit stanna.
+
+**Svar:** Vid 8,0 s`,
         },
     ],
 
@@ -15248,7 +20514,7 @@ $$ x = v_0 \\cdot t = 4{,}0 \\cdot 1{,}43 = 5{,}7\\ \\mathrm{m} $$
 
 **Svar:** Han landar ungefär $5{,}7\\ \\mathrm{m}$ ut från tornet.
 
-**Generell slutsats:** Rörelsen i *x*-led och *y*-led är oberoende av varandra. Falltiden bestäms helt av höjden — den vågräta farten påverkar bara *hur långt* han hinner under den tiden.`,
+**Generell slutsats:** Rörelsen i *x*-led och *y*-led är oberoende av varandra. Falltiden bestäms helt av höjden. Den vågräta farten påverkar bara *hur långt* han hinner under den tiden.`,
         },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
@@ -15300,16 +20566,16 @@ $$ x = v_0 \\cdot t \\quad\\Leftrightarrow\\quad v_0 = \\frac{x}{t} = \\frac{15}
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `En fotbollsspelare sparkar bollen från marken med utgångsfarten $20\\ \\mathrm{m/s}$ och vinkeln $35^\\circ$. På avståndet $30\\ \\mathrm{m}$ står en $2{,}5\\ \\mathrm{m}$ hög mur. Hur högt över marken befinner sig bollen när den når muren — och går den över? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+            question: `En fotbollsspelare sparkar bollen från marken med utgångsfarten $20\\ \\mathrm{m/s}$ och vinkeln $35^\\circ$. På avståndet $30\\ \\mathrm{m}$ står en $2{,}5\\ \\mathrm{m}$ hög mur. Hur högt över marken befinner sig bollen när den når muren, och går den över? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
 
 ${makeProjectile({ kind: 'angle', angle: 35, v0Label: 'v_0 = 20 m/s', wall: { atFracX: 0.78, hFrac: 0.37, label: '2,5 m' } })}`,
             answer: { value: 4.5, unit: 'm' },
-            solution: `Här går det **inte** att använda kastviddsformeln — vi måste behandla rörelsen i *x*- och *y*-led var för sig och ta reda på höjden vid en *specifik* vågrät position.
+            solution: `Här går det **inte** att använda kastviddsformeln. Vi måste behandla rörelsen i *x*- och *y*-led var för sig och ta reda på höjden vid en *specifik* vågrät position.
 
-**Steg 1 — tiden att nå muren** (vågrät rörelse, konstant fart):
+**Steg 1: tiden att nå muren** (vågrät rörelse, konstant fart):
 $$ x = v_0\\cos\\alpha \\cdot t \\;\\Leftrightarrow\\; t = \\frac{x}{v_0\\cos\\alpha} = \\frac{30}{20 \\cdot \\cos 35^\\circ} = 1{,}83\\ \\mathrm{s} $$
 
-**Steg 2 — höjden vid den tiden** (lodrät rörelse):
+**Steg 2: höjden vid den tiden** (lodrät rörelse):
 $$ y = v_0\\sin\\alpha \\cdot t - \\frac{g t^2}{2} = 20\\sin 35^\\circ \\cdot 1{,}83 - \\frac{9{,}82 \\cdot 1{,}83^2}{2} $$
 $$ y = 21{,}0 - 16{,}5 = 4{,}5\\ \\mathrm{m} $$
 
@@ -15317,7 +20583,853 @@ Eftersom $4{,}5\\ \\mathrm{m} > 2{,}5\\ \\mathrm{m}$ går bollen över muren med
 
 **Svar:** Bollen är ungefär $4{,}5\\ \\mathrm{m}$ över marken vid muren och går alltså **över** den (med drygt $2\\ \\mathrm{m}$ till godo).
 
-**Generell slutsats:** Tricket är att den vågräta rörelsen ger *tiden* att nå muren, och att den tiden sedan sätts in i höjdformeln. När man frågar efter höjden vid en bestämd punkt (mur, nät, ribba) duger inga färdiga vidd-/höjdformler — man måste följa de två rörelserna separat.`,
+**Generell slutsats:** Tricket är att den vågräta rörelsen ger *tiden* att nå muren, och att den tiden sedan sätts in i höjdformeln. När man frågar efter höjden vid en bestämd punkt (mur, nät, ribba) duger inga färdiga vidd-/höjdformler. Man måste följa de två rörelserna separat.`,
+        },
+        {
+            level: 1,
+            question: `En pil skjuts iväg med farten $32\\ \\mathrm{m/s}$ i vinkeln $25^\\circ$ mot horisontalplanet. Bestäm pilens hastighet i utskjutningsögonblicket<br>a) i *x*-led&emsp;&emsp;b) i *y*-led.<br>Ange svaren i m/s.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 34 360 138" style="max-width:360px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="20" y1="156" x2="340" y2="156" stroke="#0f1620" stroke-width="1.6"/><line x1="28" y1="156" x2="21" y2="164" stroke="#0f1620" stroke-width="1"/><line x1="40" y1="156" x2="33" y2="164" stroke="#0f1620" stroke-width="1"/><line x1="52" y1="156" x2="45" y2="164" stroke="#0f1620" stroke-width="1"/><line x1="64" y1="156" x2="57" y2="164" stroke="#0f1620" stroke-width="1"/><line x1="76" y1="156" x2="69" y2="164" stroke="#0f1620" stroke-width="1"/><line x1="88" y1="156" x2="81" y2="164" stroke="#0f1620" stroke-width="1"/><line x1="100" y1="156" x2="93" y2="164" stroke="#0f1620" stroke-width="1"/><line x1="112" y1="156" x2="105" y2="164" stroke="#0f1620" stroke-width="1"/><line x1="124" y1="156" x2="117" y2="164" stroke="#0f1620" stroke-width="1"/><line x1="136" y1="156" x2="129" y2="164" stroke="#0f1620" stroke-width="1"/><line x1="148" y1="156" x2="141" y2="164" stroke="#0f1620" stroke-width="1"/><line x1="160" y1="156" x2="153" y2="164" stroke="#0f1620" stroke-width="1"/><line x1="172" y1="156" x2="165" y2="164" stroke="#0f1620" stroke-width="1"/><line x1="184" y1="156" x2="177" y2="164" stroke="#0f1620" stroke-width="1"/><line x1="196" y1="156" x2="189" y2="164" stroke="#0f1620" stroke-width="1"/><line x1="208" y1="156" x2="201" y2="164" stroke="#0f1620" stroke-width="1"/><line x1="220" y1="156" x2="213" y2="164" stroke="#0f1620" stroke-width="1"/><line x1="232" y1="156" x2="225" y2="164" stroke="#0f1620" stroke-width="1"/><line x1="244" y1="156" x2="237" y2="164" stroke="#0f1620" stroke-width="1"/><line x1="256" y1="156" x2="249" y2="164" stroke="#0f1620" stroke-width="1"/><line x1="268" y1="156" x2="261" y2="164" stroke="#0f1620" stroke-width="1"/><line x1="280" y1="156" x2="273" y2="164" stroke="#0f1620" stroke-width="1"/><line x1="292" y1="156" x2="285" y2="164" stroke="#0f1620" stroke-width="1"/><line x1="304" y1="156" x2="297" y2="164" stroke="#0f1620" stroke-width="1"/><line x1="316" y1="156" x2="309" y2="164" stroke="#0f1620" stroke-width="1"/><line x1="328" y1="156" x2="321" y2="164" stroke="#0f1620" stroke-width="1"/><line x1="70" y1="150" x2="320" y2="150" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><path d="M 122.0 150 A 52 52 0 0 0 117.1 128.0" fill="none" stroke="#8a8579" stroke-width="1.4"/><text x="140.4" y="135.3" font-size="14" fill="#8a8579" text-anchor="start" dominant-baseline="middle">25°</text><line x1="70" y1="150" x2="232.2" y2="74.4" stroke="#c8324a" stroke-width="2.6" stroke-linecap="butt"/><polygon points="242.2,69.7 234.1,78.4 230.3,70.3" fill="#c8324a"/><text x="172.2" y="51.7" font-size="15" fill="#c8324a" text-anchor="start" dominant-baseline="middle"><tspan font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="0.72em">0</tspan> = 32 m/s</text><circle cx="70" cy="150" r="3.2" fill="#0f1620"/></svg>`,
+            answer: { value: 29, unit: 'm/s' },
+            delsvar: [
+                { del: 'a', value: 29, unit: 'm/s', etikett: '$v_{0x} =$' },
+                { del: 'b', value: 14, unit: 'm/s', etikett: '$v_{0y} =$' },
+            ],
+            solution: `Utgångshastigheten $v_0$ är hypotenusan i en rätvinklig triangel där komposanterna $v_{0x}$ och $v_{0y}$ är kateterna. Komposanten i *x*-led är den närliggande kateten till vinkeln $\\alpha$, och komposanten i *y*-led är den motstående kateten.
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = 32\\ \\mathrm{m/s} \\\\
+\\alpha = 25^\\circ
+\\end{array} \\right]
+$$
+
+**a)** Hastigheten i *x*-led:
+
+$$
+v_{0x} = v_0 \\cdot \\cos \\alpha = 32 \\cdot \\cos 25^\\circ = 29{,}001\\ldots\\ \\mathrm{m/s} \\approx 29\\ \\mathrm{m/s}
+$$
+
+**Svar:** 29 m/s
+
+**b)** Hastigheten i *y*-led:
+
+$$
+v_{0y} = v_0 \\cdot \\sin \\alpha = 32 \\cdot \\sin 25^\\circ = 13{,}523\\ldots\\ \\mathrm{m/s} \\approx 14\\ \\mathrm{m/s}
+$$
+
+**Svar:** 14 m/s
+
+Vinkeln är mindre än $45^\\circ$, så komposanten i *x*-led ska vara störst. Det stämmer.`,
+        },
+        {
+            level: 1,
+            question: `Två likadana kulor rullar av kanten på samma bord i samma ögonblick. Kula A har farten $1{,}0\\ \\mathrm{m/s}$ och kula B farten $3{,}0\\ \\mathrm{m/s}$ när de lämnar bordskanten. Vilket påstående stämmer? Bortse från luftmotståndet.`,
+            choices: [
+                'Kula A landar först, eftersom den har kortare väg att färdas.',
+                'Kula B landar först, eftersom den rör sig snabbare.',
+                'Kulorna landar samtidigt, och kula B landar tre gånger så långt från bordet som kula A.',
+                'Kulorna landar samtidigt och lika långt från bordet.',
+            ],
+            correct: 2,
+            solution: `Båda kulorna lämnar bordet vågrätt. Det är ett horisontellt kast, så ingen av dem har någon hastighet i *y*-led från början.
+
+**I *y*-led** faller båda kulorna som om de hade släppts rakt ned:
+
+$$
+y = -\\dfrac{g \\cdot t^{2}}{2}
+$$
+
+Falltiden beror alltså bara på bordets höjd, inte på farten. Kulorna landar samtidigt.
+
+**I *x*-led** är hastigheten konstant, och sträckan blir
+
+$$
+x = v_0 \\cdot t
+$$
+
+Falltiden $t$ är densamma för båda, så sträckan är proportionell mot $v_0$. Kula B har tre gånger så stor fart och landar därför tre gånger så långt bort.
+
+**Svar:** Alternativ C. Kulorna landar samtidigt, och kula B landar tre gånger så långt från bordet som kula A.`,
+        },
+        {
+            level: 1,
+            question: `En boll kastas snett uppåt. Vilket påstående om bollen i banans högsta punkt är rätt? Bortse från luftmotståndet.`,
+            choices: [
+                'Hastigheten är noll.',
+                'Hastigheten är riktad vågrätt, och accelerationen är riktad nedåt med storleken $g$.',
+                'Accelerationen är noll, eftersom bollen vänder.',
+                'Både hastigheten och accelerationen är riktade vågrätt.',
+            ],
+            correct: 1,
+            solution: `Dela upp rörelsen i *x*-led och *y*-led.
+
+**I *x*-led** verkar ingen kraft, så hastigheten $v_x = v_0 \\cdot \\cos \\alpha$ är konstant under hela kastet. Den är inte noll i toppen.
+
+**I *y*-led** verkar bara tyngdkraften. Accelerationen är $a_y = -g$ under hela kastet, också i toppen. I högsta punkten har bollen slutat stiga men inte börjat falla, så där är $v_y = 0$.
+
+Hastigheten i toppen består alltså bara av $v_x$ och är riktad vågrätt, medan accelerationen är riktad nedåt med storleken $g$. Alternativ A glömmer att $v_x$ finns kvar, och alternativ C och D glömmer att tyngdkraften verkar hela tiden.
+
+**Svar:** Alternativ B. Hastigheten är riktad vågrätt, och accelerationen är riktad nedåt med storleken $g$.`,
+        },
+        {
+            level: 1,
+            question: `En tennisspelare slår en lobb, så att bollen lämnar racketen i vinkeln $58^\\circ$ mot horisontalplanet. Bollen når banans högsta punkt $1{,}1\\ \\mathrm{s}$ efter slaget. Med vilken fart lämnade bollen racketen? Bortse från luftmotståndet och använd $g = 9{,}82\\ \\mathrm{m/s^2}$. Ange svaret i m/s.`,
+            answer: { value: 13, unit: 'm/s' },
+            solution: `I banans högsta punkt är hastigheten i *y*-led noll, $v_y = 0$. Vi ställer upp formeln för hastigheten i *y*-led och löser ut utgångsfarten.
+
+$$
+v_y = v_0 \\cdot \\sin \\alpha - g \\cdot t \\quad\\Leftrightarrow\\quad v_0 = \\dfrac{v_y + g \\cdot t}{\\sin \\alpha}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+v_y = 0 \\\\
+t = 1{,}1\\ \\mathrm{s} \\\\
+\\alpha = 58^\\circ \\\\
+g = 9{,}82\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$
+v_0 = \\dfrac{0 + 9{,}82 \\cdot 1{,}1}{\\sin 58^\\circ} = 12{,}737\\ldots\\ \\mathrm{m/s} \\approx 13\\ \\mathrm{m/s}
+$$
+
+Bollen stiger i drygt en sekund, och hastigheten i *y*-led minskar med cirka $10\\ \\mathrm{m/s}$ per sekund. Då ska $v_{0y}$ vara drygt $10\\ \\mathrm{m/s}$, och $13 \\cdot \\sin 58^\\circ \\approx 11\\ \\mathrm{m/s}$ stämmer med det.
+
+**Svar:** 13 m/s`,
+        },
+        {
+            level: 2,
+            question: `Ett flygplan flyger vågrätt med farten $60\\ \\mathrm{m/s}$ på höjden $180\\ \\mathrm{m}$ över en slätt. Ett paket med förnödenheter ska släppas så att det landar vid ett mål på marken. Bortse från luftmotståndet och använd $g = 9{,}82\\ \\mathrm{m/s^2}$.<br>a) Hur långt före målet, räknat i vågrätt led, ska paketet släppas? Ange svaret i meter.<br>b) Var befinner sig flygplanet i förhållande till paketet när paketet slår i marken? Motivera ditt svar.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 270" style="max-width:520px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="20" y1="224" x2="500" y2="224" stroke="#0f1620" stroke-width="1.6"/><line x1="28" y1="224" x2="21" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="40" y1="224" x2="33" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="52" y1="224" x2="45" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="64" y1="224" x2="57" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="76" y1="224" x2="69" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="88" y1="224" x2="81" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="100" y1="224" x2="93" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="112" y1="224" x2="105" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="124" y1="224" x2="117" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="136" y1="224" x2="129" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="148" y1="224" x2="141" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="160" y1="224" x2="153" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="172" y1="224" x2="165" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="184" y1="224" x2="177" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="196" y1="224" x2="189" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="208" y1="224" x2="201" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="220" y1="224" x2="213" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="232" y1="224" x2="225" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="244" y1="224" x2="237" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="256" y1="224" x2="249" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="268" y1="224" x2="261" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="280" y1="224" x2="273" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="292" y1="224" x2="285" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="304" y1="224" x2="297" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="316" y1="224" x2="309" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="328" y1="224" x2="321" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="340" y1="224" x2="333" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="352" y1="224" x2="345" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="364" y1="224" x2="357" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="376" y1="224" x2="369" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="388" y1="224" x2="381" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="400" y1="224" x2="393" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="412" y1="224" x2="405" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="424" y1="224" x2="417" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="436" y1="224" x2="429" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="448" y1="224" x2="441" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="460" y1="224" x2="453" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="472" y1="224" x2="465" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="484" y1="224" x2="477" y2="232" stroke="#0f1620" stroke-width="1"/><line x1="496" y1="224" x2="489" y2="232" stroke="#0f1620" stroke-width="1"/><g fill="#d9dde3" stroke="#0f1620" stroke-width="1.4" stroke-linejoin="round"><path d="M 52 49 L 44 32 L 54 32 L 68 47 Z"/><path d="M 50 48 C 70 42, 130 41, 144 46 C 154 49, 156 55, 144 58 C 120 61, 70 60, 50 55 Z"/><path d="M 104 54 L 80 68 L 92 68 L 122 55 Z"/></g><path d="M 136 46 C 142 46, 146 48, 148 51" fill="none" stroke="#0f1620" stroke-width="1.2"/><circle cx="80" cy="50" r="1.6" fill="#0f1620"/><circle cx="90" cy="50" r="1.6" fill="#0f1620"/><circle cx="100" cy="50" r="1.6" fill="#0f1620"/><circle cx="110" cy="50" r="1.6" fill="#0f1620"/><circle cx="120" cy="50" r="1.6" fill="#0f1620"/><rect x="104" y="68" width="12" height="12" fill="#c9a66b" stroke="#0f1620" stroke-width="1.2"/><line x1="104" y1="74" x2="116" y2="74" stroke="#0f1620" stroke-width="0.8"/><line x1="110" y1="68" x2="110" y2="80" stroke="#0f1620" stroke-width="0.8"/><path d="M110.0 80.0 L115.0 80.0 L120.0 80.2 L125.0 80.4 L130.0 80.6 L135.0 81.0 L140.0 81.4 L145.0 82.0 L150.0 82.6 L155.0 83.2 L160.0 84.0 L165.0 84.8 L170.0 85.8 L175.0 86.8 L180.0 87.8 L185.0 89.0 L190.0 90.2 L195.0 91.6 L200.0 93.0 L205.0 94.4 L210.0 96.0 L215.0 97.6 L220.0 99.4 L225.0 101.2 L230.0 103.0 L235.0 105.0 L240.0 107.0 L245.0 109.2 L250.0 111.4 L255.0 113.6 L260.0 116.0 L265.0 118.4 L270.0 121.0 L275.0 123.6 L280.0 126.2 L285.0 129.0 L290.0 131.8 L295.0 134.8 L300.0 137.8 L305.0 140.8 L310.0 144.0 L315.0 147.2 L320.0 150.6 L325.0 154.0 L330.0 157.4 L335.0 161.0 L340.0 164.6 L345.0 168.4 L350.0 172.2 L355.0 176.0 L360.0 180.0 L365.0 184.0 L370.0 188.2 L375.0 192.4 L380.0 196.6 L385.0 201.0 L390.0 205.4 L395.0 210.0 L400.0 214.6 L405.0 219.2 L410.0 224.0" fill="none" stroke="#c8324a" stroke-width="2" stroke-dasharray="6 4"/><line x1="403" y1="217" x2="417" y2="231" stroke="#c8324a" stroke-width="2.4"/><line x1="403" y1="231" x2="417" y2="217" stroke="#c8324a" stroke-width="2.4"/><text x="424.0" y="210.0" font-size="13" fill="#0f1620" text-anchor="start" dominant-baseline="middle">mål</text><line x1="157.0" y1="52.0" x2="210.0" y2="52.0" stroke="#c8324a" stroke-width="2.6" stroke-linecap="butt"/><polygon points="220.0,52.0 210.0,47.5 210.0,56.5" fill="#c8324a"/><text x="224.0" y="38.0" font-size="15" fill="#c8324a" text-anchor="start" dominant-baseline="middle"><tspan font-style="italic">v</tspan> = 60 m/s</text><line x1="110.0" y1="82.0" x2="110.0" y2="224.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><line x1="30.0" y1="74.0" x2="100.0" y2="74.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><line x1="36.0" y1="81.0" x2="36.0" y2="217.0" stroke="#8a8579" stroke-width="1.3"/><polygon points="36.0,74.0 33.0,81.0 39.0,81.0" fill="#8a8579"/><polygon points="36.0,224.0 39.0,217.0 33.0,217.0" fill="#8a8579"/><text x="44.0" y="159.0" font-size="14" fill="#0f1620" text-anchor="start" dominant-baseline="middle"><tspan font-style="italic">h</tspan> = 180 m</text><line x1="110.0" y1="230.0" x2="110.0" y2="258.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><line x1="410.0" y1="230.0" x2="410.0" y2="258.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><line x1="117.0" y1="252.0" x2="403.0" y2="252.0" stroke="#8a8579" stroke-width="1.3"/><polygon points="110.0,252.0 117.0,255.0 117.0,249.0" fill="#8a8579"/><polygon points="410.0,252.0 403.0,249.0 403.0,255.0" fill="#8a8579"/><text x="260.0" y="266.0" font-size="15" fill="#0f1620" text-anchor="middle" dominant-baseline="middle"><tspan font-style="italic">d</tspan></text></svg>`,
+            answer: { value: 360, unit: 'm', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 360, unit: 'm', tol: 0.03, etikett: '$d =$' },
+                { del: 'b' },
+            ],
+            solution: `**a)** När paketet släpps har det samma hastighet som flygplanet, $60\\ \\mathrm{m/s}$ vågrätt. Det är alltså ett horisontellt kast. Vi lägger origo i den punkt där paketet släpps. Paketet slår i marken då $y = -180\\ \\mathrm{m}$, och falltiden får vi ur formeln för läget i *y*-led.
+
+$$
+y = -\\dfrac{g \\cdot t^{2}}{2} \\quad\\Leftrightarrow\\quad t = \\sqrt{\\dfrac{-2y}{g}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+y = -180\\ \\mathrm{m} \\\\
+g = 9{,}82\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$
+t = \\sqrt{\\dfrac{-2 \\cdot (-180)}{9{,}82}} = 6{,}054\\ldots\\ \\mathrm{s}
+$$
+
+Under falltiden rör sig paketet med konstant hastighet i *x*-led:
+
+$$
+d = v_0 \\cdot t = 60 \\cdot 6{,}054\\ldots = 363{,}28\\ldots\\ \\mathrm{m} \\approx 3{,}6 \\cdot 10^{2}\\ \\mathrm{m}
+$$
+
+Givna data har två värdesiffror, så svaret avrundas till två värdesiffror.
+
+**Svar:** Cirka 360 m före målet.
+
+**b)** Ingen kraft verkar på paketet i *x*-led, eftersom vi bortser från luftmotståndet. Paketets hastighet i *x*-led är därför hela tiden $60\\ \\mathrm{m/s}$, precis som flygplanets. Paketet och flygplanet hinner alltså lika långt i vågrätt led under falltiden, och paketet ligger hela tiden rakt under planet medan det faller.
+
+**Svar:** Flygplanet befinner sig rakt ovanför paketet, 180 m upp, när paketet slår i marken.`,
+        },
+        {
+            level: 2,
+            question: `En boll kastas snett uppåt från marken. Med en filmanalys mäts bollens hastighet i *y*-led vid några tidpunkter efter kastet, se tabellen. Hastigheten i *x*-led är hela tiden $7{,}0\\ \\mathrm{m/s}$. Bortse från luftmotståndet och använd $g = 9{,}82\\ \\mathrm{m/s^2}$.
+
+| $t$ (s) | 0 | 0,20 | 0,40 | 0,60 | 0,80 |
+| --- | --- | --- | --- | --- | --- |
+| $v_y$ (m/s) | 9,0 | 7,0 | 5,1 | 3,1 | 1,1 |
+
+a) Bestäm bollens utgångsfart och elevationsvinkel.<br>b) Bestäm bollens stighöjd. Ange svaret i meter.`,
+            answer: { value: 11, unit: 'm/s' },
+            delsvar: [
+                { del: 'a', value: 11, unit: 'm/s', etikett: '$v_0 =$' },
+                { del: 'a', value: 52, unit: '°', etikett: '$\\alpha =$' },
+                { del: 'b', value: 4.1, unit: 'm', etikett: '$y_{\\max} =$' },
+            ],
+            solution: `**a)** I tabellen är $v_y = 9{,}0\\ \\mathrm{m/s}$ vid $t = 0$. Det är utgångshastighetens komposant i *y*-led, $v_{0y}$. Komposanten i *x*-led är $v_{0x} = 7{,}0\\ \\mathrm{m/s}$.
+
+$$
+\\left[ \\begin{array}{l}
+v_{0x} = 7{,}0\\ \\mathrm{m/s} \\\\
+v_{0y} = 9{,}0\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+Komposanterna är kateter i en rätvinklig triangel med utgångshastigheten $v_0$ som hypotenusa. Pythagoras sats ger farten:
+
+$$
+v_0 = \\sqrt{v_{0x}^{2} + v_{0y}^{2}} = \\sqrt{7{,}0^{2} + 9{,}0^{2}} = 11{,}401\\ldots\\ \\mathrm{m/s} \\approx 11\\ \\mathrm{m/s}
+$$
+
+Vinkeln $\\alpha$ har $v_{0y}$ som motstående och $v_{0x}$ som närliggande katet:
+
+$$
+\\tan \\alpha = \\dfrac{v_{0y}}{v_{0x}} = \\dfrac{9{,}0}{7{,}0} \\quad\\Leftrightarrow\\quad \\alpha = 52{,}12\\ldots^\\circ \\approx 52^\\circ
+$$
+
+Tabellen stämmer med teorin: $v_y$ minskar med cirka $2{,}0\\ \\mathrm{m/s}$ på varje $0{,}20\\ \\mathrm{s}$, det vill säga cirka $9{,}8\\ \\mathrm{m/s}$ per sekund. Det är tyngdaccelerationen.
+
+**Svar:** Utgångsfarten är 11 m/s och elevationsvinkeln 52°.
+
+**b)** Vi använder formeln för stighöjd. Täljaren innehåller $v_0 \\cdot \\sin \\alpha$, som är just $v_{0y}$, så vi kan sätta in tabellens värde direkt:
+
+$$
+y_{\\max} = \\dfrac{v_0^{2} \\cdot \\sin^{2}(\\alpha)}{2g} = \\dfrac{(v_0 \\cdot \\sin \\alpha)^{2}}{2g} = \\dfrac{v_{0y}^{2}}{2g}
+$$
+
+$$
+y_{\\max} = \\dfrac{9{,}0^{2}}{2 \\cdot 9{,}82} = 4{,}124\\ldots\\ \\mathrm{m} \\approx 4{,}1\\ \\mathrm{m}
+$$
+
+**Svar:** 4,1 m`,
+        },
+        {
+            level: 2,
+            question: `Från en bro kastas en sten snett nedåt med farten $8{,}0\\ \\mathrm{m/s}$ i vinkeln $20^\\circ$ under horisontalplanet. Stenen lämnar handen $12\\ \\mathrm{m}$ över vattenytan. Bortse från luftmotståndet och använd $g = 9{,}82\\ \\mathrm{m/s^2}$.<br>a) Hur lång tid tar det innan stenen når vattnet? Ange svaret i sekunder.<br>b) Hur långt från utkastpunkten, räknat i vågrätt led, slår stenen i vattnet? Ange svaret i meter.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 260" style="max-width:480px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="10" y="210" width="460" height="40" fill="rgba(28,61,107,0.10)"/><path d="M 10 210 Q 15 206, 20 210 Q 25 214, 30 210 Q 35 206, 40 210 Q 45 214, 50 210 Q 55 206, 60 210 Q 65 214, 70 210 Q 75 206, 80 210 Q 85 214, 90 210 Q 95 206, 100 210 Q 105 214, 110 210 Q 115 206, 120 210 Q 125 214, 130 210 Q 135 206, 140 210 Q 145 214, 150 210 Q 155 206, 160 210 Q 165 214, 170 210 Q 175 206, 180 210 Q 185 214, 190 210 Q 195 206, 200 210 Q 205 214, 210 210 Q 215 206, 220 210 Q 225 214, 230 210 Q 235 206, 240 210 Q 245 214, 250 210 Q 255 206, 260 210 Q 265 214, 270 210 Q 275 206, 280 210 Q 285 214, 290 210 Q 295 206, 300 210 Q 305 214, 310 210 Q 315 206, 320 210 Q 325 214, 330 210 Q 335 206, 340 210 Q 345 214, 350 210 Q 355 206, 360 210 Q 365 214, 370 210 Q 375 206, 380 210 Q 385 214, 390 210 Q 395 206, 400 210 Q 405 214, 410 210 Q 415 206, 420 210 Q 425 214, 430 210 Q 435 206, 440 210 Q 445 214, 450 210 Q 455 206, 460 210 Q 465 214, 470 210" fill="none" stroke="#1c3d6b" stroke-width="1.4"/><rect x="60" y="72" width="28" height="138" fill="rgba(15,22,32,0.08)" stroke="#0f1620" stroke-width="1.4"/><rect x="20" y="60" width="140" height="12" fill="#e8e1d3" stroke="#0f1620" stroke-width="1.4"/><line x1="24" y1="34" x2="156" y2="34" stroke="#0f1620" stroke-width="1.6"/><line x1="28" y1="34" x2="28" y2="60" stroke="#0f1620" stroke-width="1.2"/><line x1="44" y1="34" x2="44" y2="60" stroke="#0f1620" stroke-width="1.2"/><line x1="60" y1="34" x2="60" y2="60" stroke="#0f1620" stroke-width="1.2"/><line x1="76" y1="34" x2="76" y2="60" stroke="#0f1620" stroke-width="1.2"/><line x1="92" y1="34" x2="92" y2="60" stroke="#0f1620" stroke-width="1.2"/><line x1="108" y1="34" x2="108" y2="60" stroke="#0f1620" stroke-width="1.2"/><line x1="124" y1="34" x2="124" y2="60" stroke="#0f1620" stroke-width="1.2"/><line x1="140" y1="34" x2="140" y2="60" stroke="#0f1620" stroke-width="1.2"/><line x1="156" y1="34" x2="156" y2="60" stroke="#0f1620" stroke-width="1.2"/><path d="M164.0 46.0 L166.1 46.8 L168.1 47.6 L170.2 48.5 L172.2 49.5 L174.3 50.5 L176.3 51.5 L178.4 52.7 L180.4 53.8 L182.5 55.1 L184.5 56.4 L186.6 57.7 L188.6 59.2 L190.7 60.6 L192.7 62.2 L194.8 63.8 L196.8 65.4 L198.9 67.1 L200.9 68.9 L203.0 70.7 L205.0 72.6 L207.1 74.6 L209.1 76.6 L211.2 78.6 L213.2 80.7 L215.3 82.9 L217.3 85.2 L219.4 87.5 L221.4 89.8 L223.5 92.2 L225.5 94.7 L227.6 97.2 L229.6 99.8 L231.7 102.5 L233.7 105.2 L235.8 107.9 L237.8 110.7 L239.9 113.6 L241.9 116.6 L244.0 119.6 L246.0 122.6 L248.1 125.7 L250.1 128.9 L252.2 132.1 L254.2 135.4 L256.3 138.8 L258.3 142.2 L260.4 145.6 L262.4 149.2 L264.5 152.7 L266.5 156.4 L268.6 160.1 L270.6 163.8 L272.7 167.7 L274.7 171.5 L276.8 175.5 L278.8 179.5 L280.9 183.5 L282.9 187.6 L285.0 191.8 L287.0 196.0 L289.0 200.3 L291.0 204.6 L293.0 209.0" fill="none" stroke="#c8324a" stroke-width="2" stroke-dasharray="6 4"/><circle cx="164" cy="46" r="5" fill="#7c828c" stroke="#0f1620" stroke-width="1.2"/><line x1="168.7" y1="47.7" x2="220.4" y2="66.5" stroke="#c8324a" stroke-width="2.6" stroke-linecap="butt"/><polygon points="229.8,69.9 221.9,62.3 218.8,70.7" fill="#c8324a"/><text x="239.5" y="83.9" font-size="15" fill="#c8324a" text-anchor="start" dominant-baseline="middle"><tspan font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="0.72em">0</tspan> = 8,0 m/s</text><line x1="164.0" y1="46.0" x2="264.0" y2="46.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><path d="M 216.0 46.0 A 52 52 0 0 1 212.9 63.8" fill="none" stroke="#8a8579" stroke-width="1.4"/><text x="232.9" y="61.2" font-size="13" fill="#8a8579" text-anchor="start" dominant-baseline="middle">20°</text><line x1="274.0" y1="46.0" x2="404.0" y2="46.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="3 3"/><line x1="400.0" y1="53.0" x2="400.0" y2="203.0" stroke="#8a8579" stroke-width="1.3"/><polygon points="400.0,46.0 397.0,53.0 403.0,53.0" fill="#8a8579"/><polygon points="400.0,210.0 403.0,203.0 397.0,203.0" fill="#8a8579"/><text x="408.0" y="128.0" font-size="14" fill="#0f1620" text-anchor="start" dominant-baseline="middle"><tspan font-style="italic">h</tspan> = 12 m</text></svg>`,
+            answer: { value: 9.8, unit: 'm' },
+            delsvar: [
+                { del: 'a', value: 1.3, unit: 's', etikett: '$t =$' },
+                { del: 'b', value: 9.8, unit: 'm', etikett: '$x =$' },
+            ],
+            solution: `**a)** Vi lägger origo i utkastpunkten med positiv riktning uppåt. Ett kast snett nedåt har en negativ elevationsvinkel, $\\alpha = -20^\\circ$, så komposanten i *y*-led blir negativ. Stenen når vattnet då $y = -12\\ \\mathrm{m}$. Vi ställer upp formeln för läget i *y*-led.
+
+$$
+y = v_0 \\cdot \\sin \\alpha \\cdot t - \\dfrac{g \\cdot t^{2}}{2}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+y = -12\\ \\mathrm{m} \\\\
+v_0 = 8{,}0\\ \\mathrm{m/s} \\\\
+\\alpha = -20^\\circ \\\\
+g = 9{,}82\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$
+-12 = 8{,}0 \\cdot \\sin(-20^\\circ) \\cdot t - \\dfrac{9{,}82 \\cdot t^{2}}{2}
+$$
+
+$$
+-12 = -2{,}736\\ldots \\cdot t - 4{,}91 \\cdot t^{2}
+$$
+
+Vi flyttar över alla termer till vänster led och delar med $4{,}91$, så att andragradsekvationen får formen för *pq*-formeln:
+
+$$
+4{,}91 \\cdot t^{2} + 2{,}736\\ldots \\cdot t - 12 = 0
+$$
+
+$$
+t^{2} + 0{,}5572\\ldots \\cdot t - 2{,}4439\\ldots = 0
+$$
+
+$$
+t = -0{,}2786\\ldots \\pm \\sqrt{0{,}2786\\ldots^{2} + 2{,}4439\\ldots} = -0{,}2786\\ldots \\pm 1{,}5879\\ldots
+$$
+
+Lösningarna är $t \\approx 1{,}309\\ \\mathrm{s}$ och $t \\approx -1{,}867\\ \\mathrm{s}$. Den negativa lösningen saknar betydelse här.
+
+En sten som bara släpps från $12\\ \\mathrm{m}$ faller i cirka $1{,}6\\ \\mathrm{s}$. Stenen kastas nedåt och bör därför nå vattnet lite snabbare, vilket stämmer.
+
+**Svar:** 1,3 s
+
+**b)** I *x*-led är hastigheten konstant:
+
+$$
+x = v_0 \\cdot \\cos \\alpha \\cdot t = 8{,}0 \\cdot \\cos(-20^\\circ) \\cdot 1{,}309\\ldots = 9{,}842\\ldots\\ \\mathrm{m} \\approx 9{,}8\\ \\mathrm{m}
+$$
+
+**Svar:** 9,8 m`,
+        },
+        {
+            level: 2,
+            question: `En vattenspridare i en trädgård sprutar vatten med farten $15\\ \\mathrm{m/s}$ från marknivå. Munstycket kan ställas in på vinkeln $30^\\circ$ eller $60^\\circ$ mot horisontalplanet. Bortse från luftmotståndet och använd $g = 9{,}82\\ \\mathrm{m/s^2}$.<br>a) Visa med beräkningar att vattnet når lika långt med båda inställningarna, och bestäm hur långt. Ange svaret i meter.<br>b) Hur länge är en vattendroppe i luften med respektive inställning? Ange svaren i sekunder.`,
+            answer: { value: 20, unit: 'm' },
+            delsvar: [
+                { del: 'a', value: 20, unit: 'm', etikett: '$x_{\\max} =$' },
+                { del: 'b', value: 1.5, unit: 's', etikett: '$30^\\circ$:' },
+                { del: 'b', value: 2.6, unit: 's', etikett: '$60^\\circ$:' },
+            ],
+            solution: `**a)** Vattnet startar och landar i samma horisontalplan, så vi kan använda formeln för kastvidd.
+
+$$
+x_{\\max} = \\dfrac{v_0^{2} \\cdot \\sin(2\\alpha)}{g}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = 15\\ \\mathrm{m/s} \\\\
+g = 9{,}82\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+Med vinkeln $30^\\circ$:
+
+$$
+x_{\\max} = \\dfrac{15^{2} \\cdot \\sin(2 \\cdot 30^\\circ)}{9{,}82} = \\dfrac{225 \\cdot \\sin 60^\\circ}{9{,}82} = 19{,}84\\ldots\\ \\mathrm{m}
+$$
+
+Med vinkeln $60^\\circ$:
+
+$$
+x_{\\max} = \\dfrac{15^{2} \\cdot \\sin(2 \\cdot 60^\\circ)}{9{,}82} = \\dfrac{225 \\cdot \\sin 120^\\circ}{9{,}82} = 19{,}84\\ldots\\ \\mathrm{m}
+$$
+
+Kastvidderna blir lika eftersom $\\sin 120^\\circ = \\sin 60^\\circ$. Det gäller generellt för två vinklar som tillsammans blir $90^\\circ$.
+
+**Svar:** Vattnet når cirka 20 m med båda inställningarna.
+
+**b)** Kastbanan är symmetrisk, så tiden i luften är dubbla stigtiden. Stigtiden får vi ur villkoret $v_y = 0$ i toppen:
+
+$$
+0 = v_0 \\cdot \\sin \\alpha - g \\cdot t \\quad\\Leftrightarrow\\quad t_\\text{stig} = \\dfrac{v_0 \\cdot \\sin \\alpha}{g}
+$$
+
+$$
+t_\\text{luft} = 2 \\cdot t_\\text{stig} = \\dfrac{2 \\cdot v_0 \\cdot \\sin \\alpha}{g}
+$$
+
+Med vinkeln $30^\\circ$:
+
+$$
+t_\\text{luft} = \\dfrac{2 \\cdot 15 \\cdot \\sin 30^\\circ}{9{,}82} = 1{,}527\\ldots\\ \\mathrm{s} \\approx 1{,}5\\ \\mathrm{s}
+$$
+
+Med vinkeln $60^\\circ$:
+
+$$
+t_\\text{luft} = \\dfrac{2 \\cdot 15 \\cdot \\sin 60^\\circ}{9{,}82} = 2{,}645\\ldots\\ \\mathrm{s} \\approx 2{,}6\\ \\mathrm{s}
+$$
+
+Den branta strålen går högre och är därför längre tid i luften, men den har mindre hastighet i *x*-led. De två effekterna tar ut varandra, så kastvidden blir densamma.
+
+**Svar:** 1,5 s med inställningen $30^\\circ$ och 2,6 s med inställningen $60^\\circ$.`,
+        },
+        {
+            level: 2,
+            question: `Ur ett munstycke i en trädgårdsmur sprutar en vattenstråle ut vågrätt. Munstycket sitter $0{,}45\\ \\mathrm{m}$ över den plana marken. Vattnet lämnar munstycket med farten $3{,}2\\ \\mathrm{m/s}$. Bortse från luftmotståndet och använd $g = 9{,}82\\ \\mathrm{m/s^2}$.<br>a) Hur långt från munstycket, räknat i vågrätt led, träffar strålen marken? Ange svaret i meter.<br>b) Vilken vinkel $\\beta$ bildar strålen med marken där den träffar? Ange svaret i grader.
+
+${makeProjectile({ kind: 'horizontal', platformH: 110, v0Label: 'v_0 = 3,2 m/s', heightLabel: 'h = 0,45 m', distLabel: 'x' })}`,
+            answer: { value: 0.97, unit: 'm' },
+            delsvar: [
+                { del: 'a', value: 0.97, unit: 'm', etikett: '$x =$' },
+                { del: 'b', value: 43, unit: '°', etikett: '$\\beta =$' },
+            ],
+            solution: `**a)** Strålen lämnar munstycket vågrätt, så det är ett horisontellt kast. Med origo i munstycket träffar vattnet marken då $y = -0{,}45\\ \\mathrm{m}$. Falltiden får vi ur formeln för läget i *y*-led.
+
+$$
+y = -\\dfrac{g \\cdot t^{2}}{2} \\quad\\Leftrightarrow\\quad t = \\sqrt{\\dfrac{-2y}{g}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+y = -0{,}45\\ \\mathrm{m} \\\\
+v_0 = 3{,}2\\ \\mathrm{m/s} \\\\
+g = 9{,}82\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$
+t = \\sqrt{\\dfrac{-2 \\cdot (-0{,}45)}{9{,}82}} = 0{,}3027\\ldots\\ \\mathrm{s}
+$$
+
+I *x*-led är hastigheten konstant:
+
+$$
+x = v_0 \\cdot t = 3{,}2 \\cdot 0{,}3027\\ldots = 0{,}9687\\ldots\\ \\mathrm{m} \\approx 0{,}97\\ \\mathrm{m}
+$$
+
+**Svar:** 0,97 m
+
+**b)** Strålens riktning är hastighetens riktning. Vid nedslaget är komposanterna
+
+$$
+\\left[ \\begin{array}{l}
+v_x = v_0 = 3{,}2\\ \\mathrm{m/s} \\\\
+v_y = -g \\cdot t = -9{,}82 \\cdot 0{,}3027\\ldots = -2{,}972\\ldots\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+Hastigheten och dess komposanter bildar en rätvinklig triangel. Vinkeln $\\beta$ mot den vågräta marken har $|v_y|$ som motstående och $v_x$ som närliggande katet:
+
+$$
+\\tan \\beta = \\dfrac{|v_y|}{v_x} = \\dfrac{2{,}972\\ldots}{3{,}2} \\quad\\Leftrightarrow\\quad \\beta = 42{,}89\\ldots^\\circ \\approx 43^\\circ
+$$
+
+**Svar:** 43°`,
+        },
+        {
+            level: 3,
+            question: `En snöboll kastas från marken i vinkeln $50^\\circ$ mot horisontalplanet, mot ett staket som är $2{,}0\\ \\mathrm{m}$ högt och står $8{,}0\\ \\mathrm{m}$ bort. Vilken är den minsta utgångsfart snöbollen måste ha för att gå över staketet? Bortse från luftmotståndet och från snöbollens storlek, och använd $g = 9{,}82\\ \\mathrm{m/s^2}$. Ange svaret i m/s.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 240" style="max-width:440px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="20" y1="196" x2="420" y2="196" stroke="#0f1620" stroke-width="1.6"/><line x1="28" y1="196" x2="21" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="40" y1="196" x2="33" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="52" y1="196" x2="45" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="64" y1="196" x2="57" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="76" y1="196" x2="69" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="88" y1="196" x2="81" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="100" y1="196" x2="93" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="112" y1="196" x2="105" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="124" y1="196" x2="117" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="136" y1="196" x2="129" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="148" y1="196" x2="141" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="160" y1="196" x2="153" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="172" y1="196" x2="165" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="184" y1="196" x2="177" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="196" y1="196" x2="189" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="208" y1="196" x2="201" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="220" y1="196" x2="213" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="232" y1="196" x2="225" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="244" y1="196" x2="237" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="256" y1="196" x2="249" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="268" y1="196" x2="261" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="280" y1="196" x2="273" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="292" y1="196" x2="285" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="304" y1="196" x2="297" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="316" y1="196" x2="309" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="328" y1="196" x2="321" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="340" y1="196" x2="333" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="352" y1="196" x2="345" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="364" y1="196" x2="357" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="376" y1="196" x2="369" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="388" y1="196" x2="381" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="400" y1="196" x2="393" y2="204" stroke="#0f1620" stroke-width="1"/><line x1="412" y1="196" x2="405" y2="204" stroke="#0f1620" stroke-width="1"/><path d="M46.0 191.0 L51.1 185.1 L56.1 179.3 L61.2 173.8 L66.2 168.5 L71.3 163.4 L76.4 158.4 L81.4 153.7 L86.5 149.2 L91.6 144.9 L96.6 140.7 L101.7 136.8 L106.7 133.1 L111.8 129.6 L116.9 126.3 L121.9 123.1 L127.0 120.2 L132.1 117.5 L137.1 115.0 L142.2 112.7 L147.2 110.6 L152.3 108.7 L157.4 106.9 L162.4 105.4 L167.5 104.1 L172.5 103.0 L177.6 102.1 L182.7 101.4 L187.7 100.9 L192.8 100.6 L197.9 100.5 L202.9 100.6 L208.0 100.9 L213.0 101.4 L218.1 102.1 L223.2 103.0 L228.2 104.1 L233.3 105.4 L238.4 106.9 L243.4 108.7 L248.5 110.6 L253.5 112.7 L258.6 115.0 L263.7 117.5 L268.7 120.2 L273.8 123.1 L278.8 126.3 L283.9 129.6 L289.0 133.1 L294.0 136.8 L299.1 140.7 L304.2 144.9 L309.2 149.2 L314.3 153.7 L319.3 158.4 L324.4 163.4 L329.5 168.5 L334.5 173.8 L339.6 179.3 L344.6 185.1 L349.7 191.0" fill="none" stroke="#c8324a" stroke-width="2" stroke-dasharray="6 4"/><rect x="282" y="136" width="8" height="60" fill="#c9a66b" stroke="#0f1620" stroke-width="1.4"/><rect x="272" y="148" width="28" height="5" fill="#c9a66b" stroke="#0f1620" stroke-width="1"/><rect x="272" y="174" width="28" height="5" fill="#c9a66b" stroke="#0f1620" stroke-width="1"/><circle cx="46" cy="191" r="5" fill="#f3eee4" stroke="#0f1620" stroke-width="1.4"/><line x1="49.2" y1="187.2" x2="80.7" y2="149.6" stroke="#c8324a" stroke-width="2.6" stroke-linecap="butt"/><polygon points="87.1,142.0 77.3,146.7 84.2,152.5" fill="#c8324a"/><text x="79.1" y="136.0" font-size="15" fill="#c8324a" text-anchor="end" dominant-baseline="middle"><tspan font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="0.72em">0</tspan></text><line x1="46.0" y1="191.0" x2="106.0" y2="191.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><path d="M 76.0 191.0 A 30 30 0 0 0 65.3 168.0" fill="none" stroke="#8a8579" stroke-width="1.4"/><text x="89.9" y="172.4" font-size="13" fill="#8a8579" text-anchor="middle" dominant-baseline="middle">50°</text><line x1="46.0" y1="202.0" x2="46.0" y2="228.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><line x1="286.0" y1="202.0" x2="286.0" y2="228.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><line x1="53.0" y1="222.0" x2="279.0" y2="222.0" stroke="#8a8579" stroke-width="1.3"/><polygon points="46.0,222.0 53.0,225.0 53.0,219.0" fill="#8a8579"/><polygon points="286.0,222.0 279.0,219.0 279.0,225.0" fill="#8a8579"/><text x="166.0" y="234.0" font-size="14" fill="#0f1620" text-anchor="middle" dominant-baseline="middle">8,0 m</text><line x1="302.0" y1="136.0" x2="332.0" y2="136.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><line x1="326.0" y1="143.0" x2="326.0" y2="189.0" stroke="#8a8579" stroke-width="1.3"/><polygon points="326.0,136.0 323.0,143.0 329.0,143.0" fill="#8a8579"/><polygon points="326.0,196.0 329.0,189.0 323.0,189.0" fill="#8a8579"/><text x="334.0" y="166.0" font-size="14" fill="#0f1620" text-anchor="start" dominant-baseline="middle">2,0 m</text></svg>`,
+            answer: { value: 10, unit: 'm/s' },
+            solution: `Varken tiden eller farten är känd, så vi börjar med att ta fram ett samband mellan läget i *x*-led och läget i *y*-led. Origo ligger i utkastpunkten.
+
+$$
+x = v_0 \\cdot \\cos \\alpha \\cdot t \\quad\\Leftrightarrow\\quad t = \\dfrac{x}{v_0 \\cdot \\cos \\alpha} \\qquad (1)
+$$
+
+$$
+y = v_0 \\cdot \\sin \\alpha \\cdot t - \\dfrac{g \\cdot t^{2}}{2} \\qquad (2)
+$$
+
+Tiden från (1), $t = \\dfrac{x}{v_0 \\cdot \\cos \\alpha}$, insatt i (2) ger banans ekvation:
+
+$$
+y = x \\cdot \\tan \\alpha - \\dfrac{g \\cdot x^{2}}{2 \\cdot v_0^{2} \\cdot \\cos^{2} \\alpha} \\qquad (3)
+$$
+
+Vid staketet är *x* bestämt. Den sista termen i (3) blir mindre ju större $v_0$ är, så snöbollen passerar staketet högre ju större utgångsfarten är. Den minsta farten ger alltså en bana som går precis genom staketets topp, $x = 8{,}0\\ \\mathrm{m}$ och $y = 2{,}0\\ \\mathrm{m}$. Vi löser ut $v_0$ ur (3):
+
+$$
+\\dfrac{g \\cdot x^{2}}{2 \\cdot v_0^{2} \\cdot \\cos^{2} \\alpha} = x \\cdot \\tan \\alpha - y \\quad\\Leftrightarrow\\quad v_0 = \\sqrt{\\dfrac{g \\cdot x^{2}}{2 \\cdot \\cos^{2} \\alpha \\cdot (x \\cdot \\tan \\alpha - y)}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+x = 8{,}0\\ \\mathrm{m} \\\\
+y = 2{,}0\\ \\mathrm{m} \\\\
+\\alpha = 50^\\circ \\\\
+g = 9{,}82\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$
+v_0 = \\sqrt{\\dfrac{9{,}82 \\cdot 8{,}0^{2}}{2 \\cdot \\cos^{2} 50^\\circ \\cdot (8{,}0 \\cdot \\tan 50^\\circ - 2{,}0)}} = \\sqrt{\\dfrac{628{,}48}{6{,}2257\\ldots}} = 10{,}047\\ldots\\ \\mathrm{m/s}
+$$
+
+**Kontroll:** Med denna fart når snöbollen staketet efter $t = \\dfrac{8{,}0}{10{,}047\\ldots \\cdot \\cos 50^\\circ} = 1{,}238\\ldots\\ \\mathrm{s}$, och höjden är då $y = 10{,}047\\ldots \\cdot \\sin 50^\\circ \\cdot 1{,}238\\ldots - 4{,}91 \\cdot 1{,}238\\ldots^{2} = 2{,}0\\ \\mathrm{m}$, precis staketets höjd. Kastvidden på plan mark skulle bli cirka $10\\ \\mathrm{m}$, så snöbollen är ännu i luften vid staketet. En fart på drygt $10\\ \\mathrm{m/s}$ är ett lätt kast, så svaret är rimligt.
+
+**Svar:** Snöbollen måste ha minst cirka 10 m/s.`,
+        },
+        {
+            level: 3,
+            question: `En sten kastas från höjden $h$ över marken med utgångsfarten $v_0$ i en godtycklig elevationsvinkel $\\alpha$. Bortse från luftmotståndet.<br>a) Visa att stenen slår i marken med farten $v = \\sqrt{v_0^{2} + 2gh}$, oberoende av elevationsvinkeln.<br>b) En sten kastas från en $25\\ \\mathrm{m}$ hög klippa med farten $12\\ \\mathrm{m/s}$. Med vilken fart slår den i marken? Använd $g = 9{,}82\\ \\mathrm{m/s^2}$ och ange svaret i m/s.`,
+            answer: { value: 25, unit: 'm/s' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 25, unit: 'm/s', etikett: '$v =$' },
+            ],
+            solution: `**a)** Vi lägger origo i utkastpunkten med positiv riktning uppåt. Formlerna för kaströrelse ger
+
+$$
+v_x = v_0 \\cdot \\cos \\alpha \\qquad (1)
+$$
+
+$$
+v_y = v_0 \\cdot \\sin \\alpha - g \\cdot t \\qquad (2)
+$$
+
+$$
+y = v_0 \\cdot \\sin \\alpha \\cdot t - \\dfrac{g \\cdot t^{2}}{2} \\qquad (3)
+$$
+
+Tiden är okänd, så vi försöker få bort den. Vi kvadrerar (2) och bryter ut $-2g$ ur de två sista termerna:
+
+$$
+v_y^{2} = v_0^{2} \\cdot \\sin^{2} \\alpha - 2 \\cdot v_0 \\cdot \\sin \\alpha \\cdot g \\cdot t + g^{2} \\cdot t^{2} = v_0^{2} \\cdot \\sin^{2} \\alpha - 2g \\cdot \\left( v_0 \\cdot \\sin \\alpha \\cdot t - \\dfrac{g \\cdot t^{2}}{2} \\right)
+$$
+
+Parentesen är precis läget *y* i (3), $y = v_0 \\cdot \\sin \\alpha \\cdot t - \\dfrac{g \\cdot t^{2}}{2}$, så
+
+$$
+v_y^{2} = v_0^{2} \\cdot \\sin^{2} \\alpha - 2g \\cdot y
+$$
+
+Stenen slår i marken då $y = -h$:
+
+$$
+v_y^{2} = v_0^{2} \\cdot \\sin^{2} \\alpha + 2gh \\qquad (4)
+$$
+
+Farten vid nedslaget får vi ur $v = \\sqrt{v_x^{2} + v_y^{2}}$. Insättning av (1), $v_x = v_0 \\cdot \\cos \\alpha$, och (4) ger
+
+$$
+v^{2} = v_0^{2} \\cdot \\cos^{2} \\alpha + v_0^{2} \\cdot \\sin^{2} \\alpha + 2gh = v_0^{2} \\cdot (\\cos^{2} \\alpha + \\sin^{2} \\alpha) + 2gh
+$$
+
+Eftersom $\\cos^{2} \\alpha + \\sin^{2} \\alpha = 1$ (trigonometriska ettan) blir
+
+$$
+v^{2} = v_0^{2} + 2gh \\quad\\Leftrightarrow\\quad v = \\sqrt{v_0^{2} + 2gh}
+$$
+
+Vinkeln $\\alpha$ har försvunnit, så nedslagsfarten är densamma vare sig stenen kastas snett uppåt, vågrätt eller snett nedåt. Bara riktningen och tiden i luften beror på vinkeln. Resultatet stämmer med energiprincipen: lägesenergin $mgh$ går över i rörelseenergi, $\\dfrac{m v_0^{2}}{2} + mgh = \\dfrac{m v^{2}}{2}$. Med $h = 0$ får vi $v = v_0$, som i den symmetriska kastparabeln.
+
+**b)**
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = 12\\ \\mathrm{m/s} \\\\
+h = 25\\ \\mathrm{m} \\\\
+g = 9{,}82\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$
+v = \\sqrt{12^{2} + 2 \\cdot 9{,}82 \\cdot 25} = \\sqrt{635} = 25{,}19\\ldots\\ \\mathrm{m/s} \\approx 25\\ \\mathrm{m/s}
+$$
+
+**Svar:** 25 m/s`,
+        },
+        {
+            level: 3,
+            question: `En boll rullar vågrätt ut över krönet på en gräsbacke med farten $6{,}0\\ \\mathrm{m/s}$. Backen sluttar jämnt nedåt med lutningen $\\alpha = 30^\\circ$ mot horisontalplanet, och bollen landar i punkten P på sluttningen, se figuren. Bortse från luftmotståndet och från bollens storlek, och använd $g = 9{,}82\\ \\mathrm{m/s^2}$.<br>a) Hur långt från krönet, mätt längs sluttningen, landar bollen? Ange svaret i meter.<br>b) Bollens hastighet bildar vinkeln $\\beta$ med horisontalplanet när den landar. Visa att $\\tan \\beta = 2 \\cdot \\tan \\alpha$, oberoende av bollens fart vid krönet.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" style="max-width:480px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><path d="M 10 60 L 110 60 L 470 267.8 L 470 294 L 10 294 Z" fill="rgba(15,22,32,0.06)" stroke="none"/><path d="M 10 60 L 110 60 L 470 267.8" fill="none" stroke="#0f1620" stroke-width="1.8"/><path d="M110.0 60.0 L114.2 60.0 L118.5 60.2 L122.7 60.4 L126.9 60.7 L131.2 61.0 L135.4 61.5 L139.6 62.0 L143.9 62.6 L148.1 63.3 L152.3 64.1 L156.6 64.9 L160.8 65.9 L165.0 66.9 L169.3 68.0 L173.5 69.2 L177.7 70.4 L182.0 71.8 L186.2 73.2 L190.4 74.7 L194.7 76.3 L198.9 78.0 L203.1 79.7 L207.4 81.5 L211.6 83.5 L215.8 85.5 L220.1 87.5 L224.3 89.7 L228.5 91.9 L232.8 94.3 L237.0 96.7 L241.2 99.1 L245.5 101.7 L249.7 104.4 L253.9 107.1 L258.2 109.9 L262.4 112.8 L266.6 115.8 L270.9 118.8 L275.1 122.0 L279.3 125.2 L283.6 128.5 L287.8 131.9 L292.0 135.3 L296.3 138.9 L300.5 142.5 L304.7 146.2 L309.0 150.0 L313.2 153.8 L317.4 157.8 L321.7 161.8 L325.9 165.9 L330.1 170.1 L334.4 174.4 L338.6 178.8 L342.8 183.2 L347.1 187.7 L351.3 192.3 L355.5 197.0 L359.8 201.8 L364.0 206.6" fill="none" stroke="#c8324a" stroke-width="2" stroke-dasharray="6 4"/><circle cx="364.0" cy="206.6" r="3.5" fill="#c8324a"/><text x="368.0" y="190.6" font-size="15" fill="#0f1620" text-anchor="end" dominant-baseline="middle">P</text><circle cx="104" cy="54" r="6" fill="#b8bec6" stroke="#0f1620" stroke-width="1.4"/><line x1="110.0" y1="54.0" x2="166.0" y2="54.0" stroke="#c8324a" stroke-width="2.6" stroke-linecap="butt"/><polygon points="176.0,54.0 166.0,49.5 166.0,58.5" fill="#c8324a"/><text x="180.0" y="42.0" font-size="15" fill="#c8324a" text-anchor="start" dominant-baseline="middle"><tspan font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="0.72em">0</tspan> = 6,0 m/s</text><line x1="110.0" y1="60.0" x2="240.0" y2="60.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><path d="M 168.0 60.0 A 58 58 0 0 1 160.2 89.0" fill="none" stroke="#8a8579" stroke-width="1.4"/><text x="177.7" y="86.6" font-size="15" fill="#8a8579" text-anchor="middle" dominant-baseline="middle"><tspan font-style="italic">α</tspan></text></svg>`,
+            answer: { value: 4.9, unit: 'm' },
+            delsvar: [
+                { del: 'a', value: 4.9, unit: 'm', etikett: '$s =$' },
+                { del: 'b' },
+            ],
+            solution: `Här betecknar $\\alpha$ backens lutning. Själva kastet är vågrätt. Vi lägger origo i krönet med *x* åt höger och *y* uppåt.
+
+**a)** Bollens läge efter tiden *t* (horisontellt kast):
+
+$$
+x = v_0 \\cdot t \\qquad (1)
+$$
+
+$$
+y = -\\dfrac{g \\cdot t^{2}}{2} \\qquad (2)
+$$
+
+Sluttningen sjunker $\\tan \\alpha$ meter för varje meter i *x*-led, så punkterna på backen uppfyller
+
+$$
+y = -x \\cdot \\tan \\alpha \\qquad (3)
+$$
+
+Bollen landar när dess läge uppfyller både (2) och (3). Med *x* från (1), $x = v_0 \\cdot t$, insatt i (3):
+
+$$
+-\\dfrac{g \\cdot t^{2}}{2} = -v_0 \\cdot t \\cdot \\tan \\alpha
+$$
+
+Lösningen $t = 0$ är krönet. För landningen delar vi båda led med $-t$:
+
+$$
+\\dfrac{g \\cdot t}{2} = v_0 \\cdot \\tan \\alpha \\quad\\Leftrightarrow\\quad t = \\dfrac{2 \\cdot v_0 \\cdot \\tan \\alpha}{g} \\qquad (4)
+$$
+
+$$
+\\left[ \\begin{array}{l}
+v_0 = 6{,}0\\ \\mathrm{m/s} \\\\
+\\alpha = 30^\\circ \\\\
+g = 9{,}82\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$
+t = \\dfrac{2 \\cdot 6{,}0 \\cdot \\tan 30^\\circ}{9{,}82} = 0{,}7055\\ldots\\ \\mathrm{s}
+$$
+
+Insättning i (1), $x = v_0 \\cdot t$, ger den vågräta sträckan:
+
+$$
+x = 6{,}0 \\cdot 0{,}7055\\ldots = 4{,}233\\ldots\\ \\mathrm{m}
+$$
+
+Sträckan längs sluttningen är hypotenusan i en rätvinklig triangel där *x* är den närliggande kateten till vinkeln $\\alpha$:
+
+$$
+s = \\dfrac{x}{\\cos \\alpha} = \\dfrac{4{,}233\\ldots}{\\cos 30^\\circ} = 4{,}887\\ldots\\ \\mathrm{m} \\approx 4{,}9\\ \\mathrm{m}
+$$
+
+**Kontroll:** Bollen har fallit $\\dfrac{9{,}82 \\cdot 0{,}7055\\ldots^{2}}{2} = 2{,}443\\ldots\\ \\mathrm{m}$, och backen har sjunkit $4{,}233\\ldots \\cdot \\tan 30^\\circ = 2{,}443\\ldots\\ \\mathrm{m}$ på samma vågräta sträcka. Bollen är alltså på backen.
+
+**Svar:** 4,9 m
+
+**b)** Vid landningen är hastighetens komposanter
+
+$$
+v_x = v_0 \\qquad\\text{och}\\qquad v_y = -g \\cdot t
+$$
+
+Med landningstiden från (4), $t = \\dfrac{2 \\cdot v_0 \\cdot \\tan \\alpha}{g}$, blir
+
+$$
+v_y = -g \\cdot \\dfrac{2 \\cdot v_0 \\cdot \\tan \\alpha}{g} = -2 \\cdot v_0 \\cdot \\tan \\alpha
+$$
+
+Vinkeln $\\beta$ mot horisontalplanet har $|v_y|$ som motstående och $v_x$ som närliggande katet:
+
+$$
+\\tan \\beta = \\dfrac{|v_y|}{v_x} = \\dfrac{2 \\cdot v_0 \\cdot \\tan \\alpha}{v_0} = 2 \\cdot \\tan \\alpha
+$$
+
+Farten $v_0$ förkortas bort, så riktningen vid landningen är densamma hur fort bollen än rullar. En snabbare boll landar längre ned i backen, men i samma vinkel. Med $\\alpha = 30^\\circ$ blir $\\tan \\beta = 1{,}154\\ldots$, det vill säga $\\beta \\approx 49^\\circ$, vilket är brantare än backen, som det ska vara när bollen träffar den uppifrån.
+
+**Svar:** $\\tan \\beta = 2 \\cdot \\tan \\alpha$ gäller för varje fart $v_0$, eftersom $v_0$ förkortas bort.`,
+        },
+        {
+            level: 3,
+            question: `En lärare filmar ett kast med en tennisboll och läser av bollens läge i två bildrutor. Lägena mäts från utkastpunkten, med *x* vågrätt och *y* uppåt:
+
+| | $x$ (m) | $y$ (m) |
+| --- | --- | --- |
+| Bildruta 1 | 3,00 | 2,07 |
+| Bildruta 2 | 9,00 | 3,54 |
+
+Tidpunkterna för bildrutorna går inte att läsa av. Bortse från luftmotståndet och använd $g = 9{,}82\\ \\mathrm{m/s^2}$.<br>a) Bestäm bollens elevationsvinkel.<br>b) Bestäm bollens utgångsfart. Ange svaret i m/s.`,
+            answer: { value: 13, unit: 'm/s' },
+            delsvar: [
+                { del: 'a', value: 40, unit: '°', etikett: '$\\alpha =$' },
+                { del: 'b', value: 13, unit: 'm/s', etikett: '$v_0 =$' },
+            ],
+            solution: `Tiderna är okända, så vi tar fram ett samband mellan *x* och *y* där tiden inte finns med. Ur formlerna för kaströrelse:
+
+$$
+x = v_0 \\cdot \\cos \\alpha \\cdot t \\quad\\Leftrightarrow\\quad t = \\dfrac{x}{v_0 \\cdot \\cos \\alpha} \\qquad (1)
+$$
+
+$$
+y = v_0 \\cdot \\sin \\alpha \\cdot t - \\dfrac{g \\cdot t^{2}}{2} \\qquad (2)
+$$
+
+Tiden från (1), $t = \\dfrac{x}{v_0 \\cdot \\cos \\alpha}$, insatt i (2) ger banans ekvation. Hastigheten i *x*-led skriver vi $v_x = v_0 \\cdot \\cos \\alpha$:
+
+$$
+y = x \\cdot \\tan \\alpha - \\dfrac{g}{2 \\cdot v_x^{2}} \\cdot x^{2}
+$$
+
+Ekvationen har två okända konstanter, $\\tan \\alpha$ och $v_x$. Vi inför beteckningarna $k = \\tan \\alpha$ och $K = \\dfrac{g}{2 \\cdot v_x^{2}}$ och delar båda led med *x*:
+
+$$
+\\dfrac{y}{x} = k - K \\cdot x \\qquad (3)
+$$
+
+Varje bildruta ger en ekvation. Insättning av mätvärdena i (3):
+
+$$
+\\dfrac{2{,}07}{3{,}00} = k - 3{,}00 \\cdot K \\quad\\Leftrightarrow\\quad 0{,}69 = k - 3{,}00 \\cdot K \\qquad (4)
+$$
+
+$$
+\\dfrac{3{,}54}{9{,}00} = k - 9{,}00 \\cdot K \\quad\\Leftrightarrow\\quad 0{,}3933\\ldots = k - 9{,}00 \\cdot K \\qquad (5)
+$$
+
+Vi subtraherar (5) från (4), så att *k* försvinner:
+
+$$
+0{,}69 - 0{,}3933\\ldots = 6{,}00 \\cdot K \\quad\\Leftrightarrow\\quad K = \\dfrac{0{,}2966\\ldots}{6{,}00} = 0{,}04944\\ldots\\ \\mathrm{m^{-1}}
+$$
+
+Insättning i (4), $0{,}69 = k - 3{,}00 \\cdot K$, ger
+
+$$
+k = 0{,}69 + 3{,}00 \\cdot 0{,}04944\\ldots = 0{,}8383\\ldots
+$$
+
+**a)** Elevationsvinkeln:
+
+$$
+\\tan \\alpha = 0{,}8383\\ldots \\quad\\Leftrightarrow\\quad \\alpha = 39{,}97\\ldots^\\circ \\approx 40^\\circ
+$$
+
+**Svar:** 40°
+
+**b)** Ur $K = \\dfrac{g}{2 \\cdot v_x^{2}}$ löser vi ut hastigheten i *x*-led:
+
+$$
+v_x = \\sqrt{\\dfrac{g}{2K}} = \\sqrt{\\dfrac{9{,}82}{2 \\cdot 0{,}04944\\ldots}} = 9{,}965\\ldots\\ \\mathrm{m/s}
+$$
+
+Hastigheten i *x*-led är den närliggande kateten till $\\alpha$ i triangeln där $v_0$ är hypotenusan:
+
+$$
+v_0 = \\dfrac{v_x}{\\cos \\alpha} = \\dfrac{9{,}965\\ldots}{\\cos 39{,}97\\ldots^\\circ} = 13{,}00\\ldots\\ \\mathrm{m/s} \\approx 13\\ \\mathrm{m/s}
+$$
+
+**Kontroll:** Med $v_0 = 13\\ \\mathrm{m/s}$ och $\\alpha = 40^\\circ$ ger banans ekvation $y \\approx 2{,}07\\ \\mathrm{m}$ vid $x = 3{,}00\\ \\mathrm{m}$ och $y \\approx 3{,}54\\ \\mathrm{m}$ vid $x = 9{,}00\\ \\mathrm{m}$, alltså båda mätvärdena. En kastad tennisboll med farten $13\\ \\mathrm{m/s}$ är rimligt.
+
+**Svar:** 13 m/s`,
+        },
+        {
+            level: 3,
+            question: `En kulstötare stöter kulan $23\\ \\mathrm{m}$. Bortse från luftmotståndet och använd $g = 9{,}82\\ \\mathrm{m/s^2}$.<br>a) Anta som en första modell att kulan lämnar handen i marknivå och stöts i vinkeln $45^\\circ$. Vilken utgångsfart har kulan enligt modellen? Ange svaret i m/s.<br>b) I verkligheten lämnar kulan handen cirka $2{,}1\\ \\mathrm{m}$ över marken. Hur långt skulle kulan nå med utgångsfarten från a) och vinkeln $45^\\circ$ från den höjden? Ange svaret i meter.<br>c) Undersök med beräkningar om stöten med samma fart och från samma höjd blir längre eller kortare med vinkeln $42^\\circ$, och förklara resultatet.`,
+            answer: { value: 15, unit: 'm/s' },
+            delsvar: [
+                { del: 'a', value: 15, unit: 'm/s', etikett: '$v_0 =$' },
+                { del: 'b', value: 25, unit: 'm', etikett: '$x =$' },
+                { del: 'c' },
+            ],
+            solution: `**a)** I modellen startar och landar kulan i samma horisontalplan, så formeln för kastvidd gäller. Vi löser ut utgångsfarten.
+
+$$
+x_{\\max} = \\dfrac{v_0^{2} \\cdot \\sin(2\\alpha)}{g} \\quad\\Leftrightarrow\\quad v_0 = \\sqrt{\\dfrac{g \\cdot x_{\\max}}{\\sin(2\\alpha)}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+x_{\\max} = 23\\ \\mathrm{m} \\\\
+\\alpha = 45^\\circ \\\\
+g = 9{,}82\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$
+v_0 = \\sqrt{\\dfrac{9{,}82 \\cdot 23}{\\sin 90^\\circ}} = 15{,}028\\ldots\\ \\mathrm{m/s} \\approx 15\\ \\mathrm{m/s}
+$$
+
+**Svar:** 15 m/s
+
+**b)** Nu startar kulan $2{,}1\\ \\mathrm{m}$ över marken, så kastviddsformeln gäller inte. Vi lägger origo i utkastpunkten och tar först fram tiden tills kulan når marken, $y = -2{,}1\\ \\mathrm{m}$. Komposanterna är
+
+$$
+v_{0x} = v_{0y} = 15{,}028\\ldots \\cdot \\cos 45^\\circ = 10{,}626\\ldots\\ \\mathrm{m/s}
+$$
+
+Formeln för läget i *y*-led ger
+
+$$
+-2{,}1 = 10{,}626\\ldots \\cdot t - 4{,}91 \\cdot t^{2}
+$$
+
+Vi skriver om ekvationen och delar med $4{,}91$ för att kunna använda *pq*-formeln:
+
+$$
+t^{2} - 2{,}1643\\ldots \\cdot t - 0{,}4276\\ldots = 0
+$$
+
+$$
+t = 1{,}0821\\ldots \\pm \\sqrt{1{,}0821\\ldots^{2} + 0{,}4276\\ldots} = 1{,}0821\\ldots \\pm 1{,}2644\\ldots
+$$
+
+Den positiva lösningen är $t = 2{,}346\\ldots\\ \\mathrm{s}$. I *x*-led är hastigheten konstant:
+
+$$
+x = v_{0x} \\cdot t = 10{,}626\\ldots \\cdot 2{,}346\\ldots = 24{,}93\\ldots\\ \\mathrm{m} \\approx 25\\ \\mathrm{m}
+$$
+
+Den första modellen överskattar alltså den fart som behövs. Kulan behöver inte riktigt $15\\ \\mathrm{m/s}$ för att nå $23\\ \\mathrm{m}$, eftersom den får en extra fallsträcka på $2{,}1\\ \\mathrm{m}$.
+
+**Svar:** Cirka 25 m
+
+**c)** Samma räkning med vinkeln $42^\\circ$:
+
+$$
+\\left[ \\begin{array}{l}
+v_{0x} = 15{,}028\\ldots \\cdot \\cos 42^\\circ = 11{,}168\\ldots\\ \\mathrm{m/s} \\\\
+v_{0y} = 15{,}028\\ldots \\cdot \\sin 42^\\circ = 10{,}056\\ldots\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+Ekvationen $-2{,}1 = 10{,}056\\ldots \\cdot t - 4{,}91 \\cdot t^{2}$ löses på samma sätt och ger den positiva lösningen $t = 2{,}239\\ldots\\ \\mathrm{s}$. Då blir
+
+$$
+x = 11{,}168\\ldots \\cdot 2{,}239\\ldots = 25{,}007\\ldots\\ \\mathrm{m}
+$$
+
+Med $45^\\circ$ var stöten $24{,}93\\ldots\\ \\mathrm{m}$. Vinkeln $42^\\circ$ ger alltså en något längre stöt. Skillnaden är bara några centimeter, så vi jämför med fler siffror än givna data egentligen motiverar. Men riktningen på skillnaden är säker, eftersom båda räkningarna bygger på samma fart och höjd.
+
+**Förklaring:** Kastvidden är produkten av hastigheten i *x*-led och tiden i luften. När kastet startar och slutar på samma höjd beror tiden i luften bara på $v_{0y}$, och den bästa kompromissen mellan stor $v_{0x}$ och stor $v_{0y}$ är $45^\\circ$. När kulan startar $2{,}1\\ \\mathrm{m}$ upp får den en extra falltid för den sista biten ned till marken, som den får oavsett vinkel. Tiden i luften blir då mindre känslig för vinkeln, och det lönar sig att lägga en större del av farten i *x*-led, alltså att stöta lite flackare än $45^\\circ$.
+
+**Svar:** Stöten blir något längre med $42^\\circ$, cirka 25,01 m mot 24,94 m, eftersom utkasthöjden ger extra tid i luften och det då lönar sig med större hastighet i *x*-led.`,
+        },
+        {
+            level: 3,
+            question: `En brandman riktar en vattenstråle mot ett fönster. Munstycket hålls nära marken $15\\ \\mathrm{m}$ från husväggen, och fönstret sitter $10\\ \\mathrm{m}$ högre än munstycket. Vattnet lämnar munstycket med farten $20\\ \\mathrm{m/s}$. Bortse från luftmotståndet och använd $g = 9{,}82\\ \\mathrm{m/s^2}$.<br>a) Det finns två elevationsvinklar som gör att strålen träffar fönstret. Bestäm båda.<br>b) Med vilken av vinklarna når vattnet fönstret snabbast, och hur lång tid tar det då? Ange tiden i sekunder.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 280" style="max-width:460px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="20" y1="236" x2="440" y2="236" stroke="#0f1620" stroke-width="1.6"/><line x1="28" y1="236" x2="21" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="40" y1="236" x2="33" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="52" y1="236" x2="45" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="64" y1="236" x2="57" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="76" y1="236" x2="69" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="88" y1="236" x2="81" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="100" y1="236" x2="93" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="112" y1="236" x2="105" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="124" y1="236" x2="117" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="136" y1="236" x2="129" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="148" y1="236" x2="141" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="160" y1="236" x2="153" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="172" y1="236" x2="165" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="184" y1="236" x2="177" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="196" y1="236" x2="189" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="208" y1="236" x2="201" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="220" y1="236" x2="213" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="232" y1="236" x2="225" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="244" y1="236" x2="237" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="256" y1="236" x2="249" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="268" y1="236" x2="261" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="280" y1="236" x2="273" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="292" y1="236" x2="285" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="304" y1="236" x2="297" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="316" y1="236" x2="309" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="328" y1="236" x2="321" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="340" y1="236" x2="333" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="352" y1="236" x2="345" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="364" y1="236" x2="357" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="376" y1="236" x2="369" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="388" y1="236" x2="381" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="400" y1="236" x2="393" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="412" y1="236" x2="405" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="424" y1="236" x2="417" y2="244" stroke="#0f1620" stroke-width="1"/><line x1="436" y1="236" x2="429" y2="244" stroke="#0f1620" stroke-width="1"/><rect x="275" y="40" width="110" height="196" fill="#e8e1d3" stroke="#0f1620" stroke-width="1.6"/><line x1="275" y1="54" x2="385" y2="54" stroke="rgba(15,22,32,0.10)" stroke-width="1"/><line x1="275" y1="68" x2="385" y2="68" stroke="rgba(15,22,32,0.10)" stroke-width="1"/><line x1="275" y1="82" x2="385" y2="82" stroke="rgba(15,22,32,0.10)" stroke-width="1"/><line x1="275" y1="96" x2="385" y2="96" stroke="rgba(15,22,32,0.10)" stroke-width="1"/><line x1="275" y1="110" x2="385" y2="110" stroke="rgba(15,22,32,0.10)" stroke-width="1"/><line x1="275" y1="124" x2="385" y2="124" stroke="rgba(15,22,32,0.10)" stroke-width="1"/><line x1="275" y1="138" x2="385" y2="138" stroke="rgba(15,22,32,0.10)" stroke-width="1"/><line x1="275" y1="152" x2="385" y2="152" stroke="rgba(15,22,32,0.10)" stroke-width="1"/><line x1="275" y1="166" x2="385" y2="166" stroke="rgba(15,22,32,0.10)" stroke-width="1"/><line x1="275" y1="180" x2="385" y2="180" stroke="rgba(15,22,32,0.10)" stroke-width="1"/><line x1="275" y1="194" x2="385" y2="194" stroke="rgba(15,22,32,0.10)" stroke-width="1"/><line x1="275" y1="208" x2="385" y2="208" stroke="rgba(15,22,32,0.10)" stroke-width="1"/><line x1="275" y1="222" x2="385" y2="222" stroke="rgba(15,22,32,0.10)" stroke-width="1"/><rect x="275" y="68" width="30" height="36" fill="#cfdbe8" stroke="#0f1620" stroke-width="1.4"/><line x1="290" y1="68" x2="290" y2="104" stroke="#0f1620" stroke-width="1"/><line x1="275" y1="86" x2="305" y2="86" stroke="#0f1620" stroke-width="1"/><rect x="337" y="126" width="30" height="36" fill="#cfdbe8" stroke="#0f1620" stroke-width="1.4"/><g transform="rotate(-62 50 230)"><rect x="38" y="225" width="24" height="10" rx="2" fill="#7c828c" stroke="#0f1620" stroke-width="1.2"/><rect x="62" y="226.5" width="8" height="7" fill="#b8bec6" stroke="#0f1620" stroke-width="1.1"/></g><line x1="59.4" y1="212.3" x2="82.9" y2="168.2" stroke="#c8324a" stroke-width="2.6" stroke-linecap="butt"/><polygon points="87.6,159.4 78.9,166.1 86.8,170.3" fill="#c8324a"/><text x="95.6" y="163.4" font-size="15" fill="#c8324a" text-anchor="start" dominant-baseline="middle"><tspan font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="0.72em">0</tspan> = 20 m/s</text><line x1="64.0" y1="230.0" x2="126.0" y2="230.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><path d="M 90.0 230.0 A 40 40 0 0 0 68.8 194.7" fill="none" stroke="#8a8579" stroke-width="1.4"/><text x="98.3" y="204.2" font-size="15" fill="#8a8579" text-anchor="middle" dominant-baseline="middle"><tspan font-style="italic">α</tspan></text><line x1="50.0" y1="242.0" x2="50.0" y2="266.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><line x1="275.0" y1="242.0" x2="275.0" y2="266.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><line x1="57.0" y1="260.0" x2="268.0" y2="260.0" stroke="#8a8579" stroke-width="1.3"/><polygon points="50.0,260.0 57.0,263.0 57.0,257.0" fill="#8a8579"/><polygon points="275.0,260.0 268.0,257.0 268.0,263.0" fill="#8a8579"/><text x="162.5" y="272.0" font-size="14" fill="#0f1620" text-anchor="middle" dominant-baseline="middle">15 m</text><line x1="305.0" y1="86.0" x2="407.0" y2="86.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><line x1="401.0" y1="93.0" x2="401.0" y2="229.0" stroke="#8a8579" stroke-width="1.3"/><polygon points="401.0,86.0 398.0,93.0 404.0,93.0" fill="#8a8579"/><polygon points="401.0,236.0 404.0,229.0 398.0,229.0" fill="#8a8579"/><text x="408.0" y="161.0" font-size="14" fill="#0f1620" text-anchor="start" dominant-baseline="middle">10 m</text></svg>`,
+            answer: { value: 1.1, unit: 's' },
+            delsvar: [
+                { del: 'a', values: [77, 47], unit: '°', etikett: '$\\alpha =$' },
+                { del: 'b', value: 1.1, unit: 's', etikett: '$t =$' },
+            ],
+            solution: `**a)** Vinkeln är okänd, och därmed också tiden till fönstret. Vi tar därför fram banans ekvation, där tiden inte finns med. Origo ligger i munstycket.
+
+$$
+x = v_0 \\cdot \\cos \\alpha \\cdot t \\quad\\Leftrightarrow\\quad t = \\dfrac{x}{v_0 \\cdot \\cos \\alpha} \\qquad (1)
+$$
+
+$$
+y = v_0 \\cdot \\sin \\alpha \\cdot t - \\dfrac{g \\cdot t^{2}}{2} \\qquad (2)
+$$
+
+Tiden från (1), $t = \\dfrac{x}{v_0 \\cdot \\cos \\alpha}$, insatt i (2):
+
+$$
+y = x \\cdot \\tan \\alpha - \\dfrac{g \\cdot x^{2}}{2 \\cdot v_0^{2} \\cdot \\cos^{2} \\alpha}
+$$
+
+Ekvationen innehåller både $\\tan \\alpha$ och $\\cos \\alpha$. Med sambandet $\\dfrac{1}{\\cos^{2} \\alpha} = 1 + \\tan^{2} \\alpha$ (trigonometriska ettan delad med $\\cos^{2} \\alpha$) blir den en andragradsekvation i $\\tan \\alpha$:
+
+$$
+y = x \\cdot \\tan \\alpha - \\dfrac{g \\cdot x^{2}}{2 \\cdot v_0^{2}} \\cdot (1 + \\tan^{2} \\alpha) \\qquad (3)
+$$
+
+$$
+\\left[ \\begin{array}{l}
+x = 15\\ \\mathrm{m} \\\\
+y = 10\\ \\mathrm{m} \\\\
+v_0 = 20\\ \\mathrm{m/s} \\\\
+g = 9{,}82\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+Faktorn framför parentesen är
+
+$$
+\\dfrac{g \\cdot x^{2}}{2 \\cdot v_0^{2}} = \\dfrac{9{,}82 \\cdot 15^{2}}{2 \\cdot 20^{2}} = 2{,}7618\\ldots\\ \\mathrm{m}
+$$
+
+Insättning i (3), med beteckningen $T = \\tan \\alpha$:
+
+$$
+10 = 15 \\cdot T - 2{,}7618\\ldots \\cdot (1 + T^{2})
+$$
+
+$$
+2{,}7618\\ldots \\cdot T^{2} - 15 \\cdot T + 12{,}7618\\ldots = 0
+$$
+
+Vi delar med $2{,}7618\\ldots$ och använder *pq*-formeln:
+
+$$
+T^{2} - 5{,}4310\\ldots \\cdot T + 4{,}6207\\ldots = 0
+$$
+
+$$
+T = 2{,}7155\\ldots \\pm \\sqrt{2{,}7155\\ldots^{2} - 4{,}6207\\ldots} = 2{,}7155\\ldots \\pm 1{,}6593\\ldots
+$$
+
+$$
+\\tan \\alpha_1 = 4{,}374\\ldots \\quad\\Leftrightarrow\\quad \\alpha_1 = 77{,}12\\ldots^\\circ \\approx 77^\\circ
+$$
+
+$$
+\\tan \\alpha_2 = 1{,}056\\ldots \\quad\\Leftrightarrow\\quad \\alpha_2 = 46{,}56\\ldots^\\circ \\approx 47^\\circ
+$$
+
+**Svar:** 77° och 47°
+
+**b)** Tiden till fönstret ges av (1), $t = \\dfrac{x}{v_0 \\cdot \\cos \\alpha}$:
+
+$$
+t_1 = \\dfrac{15}{20 \\cdot \\cos 77{,}12\\ldots^\\circ} = 3{,}365\\ldots\\ \\mathrm{s}
+$$
+
+$$
+t_2 = \\dfrac{15}{20 \\cdot \\cos 46{,}56\\ldots^\\circ} = 1{,}090\\ldots\\ \\mathrm{s} \\approx 1{,}1\\ \\mathrm{s}
+$$
+
+Den flackare strålen har större hastighet i *x*-led och tar sig därför snabbare fram till väggen. Med vinkeln $47^\\circ$ är stigtiden $\\dfrac{20 \\cdot \\sin 46{,}56\\ldots^\\circ}{9{,}82} = 1{,}478\\ldots\\ \\mathrm{s}$, så strålen träffar fönstret medan den fortfarande stiger. Den branta strålen går först högt över fönstret och träffar det på väg ned.
+
+**Svar:** Med vinkeln 47°, efter cirka 1,1 s.`,
         },
     ],
 
@@ -36829,7 +42941,7 @@ $$ k = -2 $$
             question: `När behöver man använda metoden med **tre punkter** (utvecklad form) i stället för faktorform?`,
             choices: [
                 `När funktionen har en maximipunkt`,
-                `Alltid — faktorform fungerar bara för positiva nollställen`,
+                `Alltid, eftersom faktorform bara fungerar för positiva nollställen`,
                 `När grafen går genom origo`,
                 `När nollställena är okända eller saknas`,
             ],
@@ -36882,7 +42994,7 @@ $$ 2a = 4 \\iff a = 2 $$
             level: 3,
             question: `En boll kastas från marken och landar 6 meter bort. Kastbanans högsta höjd är $4{,}5$ meter. Banan beskrivs av $h(x) = kx(x - 6)$, där $x$ är avståndet i meter. Bestäm $k$.`,
             answer: { value: -0.5, unit: '' },
-            solution: `Nyckelinsikten: den högsta punkten ligger på symmetrilinjen — mitt emellan nollställena $x = 0$ och $x = 6$, det vill säga vid $x = 3$. Där är höjden $4{,}5$ m, så punkten (3; 4,5) ligger på banan.
+            solution: `Nyckelinsikten: den högsta punkten ligger på symmetrilinjen, mitt emellan nollställena $x = 0$ och $x = 6$, det vill säga vid $x = 3$. Där är höjden $4{,}5$ m, så punkten (3; 4,5) ligger på banan.
 
 Insättning i $h(x) = kx(x - 6)$:
 
@@ -36892,9 +43004,675 @@ $$ 4{,}5 = k \\cdot 3 \\cdot (-3) = -9k $$
 
 $$ k = \\frac{4{,}5}{-9} = -0{,}5 $$
 
-Rimlighet: $k$ är negativ — banan är en "sur mun" med maximipunkt. Stämmer för en kastbana!
+Rimlighet: $k$ är negativ, så banan är en "sur mun" med maximipunkt. Stämmer för en kastbana!
 
 **Svar:** $k = -0{,}5$`,
+        },
+        // ── Nya uppgifter 2026-11: Grund ─────────────────────────────────
+        {
+            level: 1,
+            question: `Figuren visar grafen till andragradsfunktionen $f(x)$. Funktionen kan skrivas i faktorform $f(x) = k(x - x_1)(x - x_2)$. Bestäm konstanten $k$.
+
+<svg style="max-width:100%;height:auto;display:block;margin:12px auto" viewBox="0 0 212 256" width="310" height="374" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En parabel som öppnar sig nedåt med nollställen i minus 4 och 1. Grafen går genom den markerade punkten minus 3 komma 4."><line x1="25" y1="22" x2="25" y2="242" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="47" y1="22" x2="47" y2="242" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="69" y1="22" x2="69" y2="242" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="91" y1="22" x2="91" y2="242" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="113" y1="22" x2="113" y2="242" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="157" y1="22" x2="157" y2="242" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="179" y1="22" x2="179" y2="242" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="231" x2="190" y2="231" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="209" x2="190" y2="209" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="165" x2="190" y2="165" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="143" x2="190" y2="143" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="121" x2="190" y2="121" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="99" x2="190" y2="99" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="77" x2="190" y2="77" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="55" x2="190" y2="55" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="33" x2="190" y2="33" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="187" x2="190" y2="187" stroke="#1f2530" stroke-width="1.6"/><polygon points="198,187 188,182.5 188,191.5" fill="#1f2530"/><line x1="135" y1="242" x2="135" y2="20" stroke="#1f2530" stroke-width="1.6"/><polygon points="135,12 130.5,22 139.5,22" fill="#1f2530"/><text x="196" y="203" font-size="13" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="144" y="21" font-size="13" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="164" y="201" font-size="11" text-anchor="middle" fill="#1f2530">1</text><text x="179" y="201" font-size="11" text-anchor="middle" fill="#1f2530">2</text><text x="39" y="201" font-size="11" text-anchor="middle" fill="#1f2530">−4</text><text x="69" y="201" font-size="11" text-anchor="middle" fill="#1f2530">−3</text><text x="91" y="201" font-size="11" text-anchor="middle" fill="#1f2530">−2</text><text x="113" y="201" font-size="11" text-anchor="middle" fill="#1f2530">−1</text><text x="129" y="147" font-size="11" text-anchor="end" fill="#1f2530">2</text><text x="129" y="103" font-size="11" text-anchor="end" fill="#1f2530">4</text><text x="129" y="59" font-size="11" text-anchor="end" fill="#1f2530">6</text><path d="M 37.2,240.7 L 37.4,239.1 L 37.7,237.5 L 38.0,235.9 L 38.2,234.3 L 38.5,232.7 L 38.8,231.2 L 39.1,229.6 L 39.3,228.1 L 39.6,226.5 L 39.9,225.0 L 40.1,223.5 L 40.4,221.9 L 40.7,220.4 L 40.9,218.9 L 41.2,217.4 L 41.5,215.9 L 41.8,214.4 L 42.0,212.9 L 42.3,211.5 L 42.6,210.0 L 42.8,208.5 L 43.1,207.1 L 43.4,205.6 L 43.7,204.2 L 43.9,202.8 L 44.2,201.3 L 44.5,199.9 L 44.7,198.5 L 45.0,197.1 L 45.3,195.7 L 45.6,194.3 L 45.8,192.9 L 46.1,191.5 L 46.4,190.1 L 46.6,188.8 L 46.9,187.4 L 47.2,186.0 L 47.5,184.7 L 47.7,183.4 L 48.0,182.0 L 48.3,180.7 L 48.5,179.4 L 48.8,178.1 L 49.1,176.7 L 49.4,175.4 L 49.6,174.2 L 49.9,172.9 L 50.2,171.6 L 50.4,170.3 L 50.7,169.0 L 51.0,167.8 L 51.3,166.5 L 51.5,165.3 L 51.8,164.0 L 52.1,162.8 L 52.3,161.6 L 52.6,160.3 L 52.9,159.1 L 53.2,157.9 L 53.4,156.7 L 53.7,155.5 L 54.0,154.3 L 54.2,153.2 L 54.5,152.0 L 54.8,150.8 L 55.1,149.7 L 55.3,148.5 L 55.6,147.4 L 55.9,146.2 L 56.1,145.1 L 56.4,144.0 L 56.7,142.8 L 57.0,141.7 L 57.2,140.6 L 57.5,139.5 L 57.8,138.4 L 58.0,137.3 L 58.3,136.2 L 58.6,135.2 L 58.9,134.1 L 59.1,133.0 L 59.4,132.0 L 59.7,130.9 L 59.9,129.9 L 60.2,128.9 L 60.5,127.8 L 60.8,126.8 L 61.0,125.8 L 61.3,124.8 L 61.6,123.8 L 61.8,122.8 L 62.1,121.8 L 62.4,120.8 L 62.7,119.9 L 62.9,118.9 L 63.2,117.9 L 63.5,117.0 L 63.7,116.0 L 64.0,115.1 L 64.3,114.2 L 64.6,113.2 L 64.8,112.3 L 65.1,111.4 L 65.4,110.5 L 65.6,109.6 L 65.9,108.7 L 66.2,107.8 L 66.5,106.9 L 66.7,106.1 L 67.0,105.2 L 67.3,104.3 L 67.5,103.5 L 67.8,102.6 L 68.1,101.8 L 68.4,101.0 L 68.6,100.1 L 68.9,99.3 L 69.2,98.5 L 69.4,97.7 L 69.7,96.9 L 70.0,96.1 L 70.3,95.3 L 70.5,94.5 L 70.8,93.8 L 71.1,93.0 L 71.3,92.2 L 71.6,91.5 L 71.9,90.7 L 72.2,90.0 L 72.4,89.3 L 72.7,88.5 L 73.0,87.8 L 73.2,87.1 L 73.5,86.4 L 73.8,85.7 L 74.1,85.0 L 74.3,84.3 L 74.6,83.6 L 74.9,83.0 L 75.1,82.3 L 75.4,81.6 L 75.7,81.0 L 76.0,80.3 L 76.2,79.7 L 76.5,79.1 L 76.8,78.4 L 77.0,77.8 L 77.3,77.2 L 77.6,76.6 L 77.9,76.0 L 78.1,75.4 L 78.4,74.8 L 78.7,74.3 L 78.9,73.7 L 79.2,73.1 L 79.5,72.6 L 79.8,72.0 L 80.0,71.5 L 80.3,70.9 L 80.6,70.4 L 80.8,69.9 L 81.1,69.3 L 81.4,68.8 L 81.6,68.3 L 81.9,67.8 L 82.2,67.3 L 82.5,66.8 L 82.7,66.4 L 83.0,65.9 L 83.3,65.4 L 83.5,65.0 L 83.8,64.5 L 84.1,64.1 L 84.4,63.6 L 84.6,63.2 L 84.9,62.8 L 85.2,62.4 L 85.4,62.0 L 85.7,61.5 L 86.0,61.1 L 86.3,60.8 L 86.5,60.4 L 86.8,60.0 L 87.1,59.6 L 87.3,59.3 L 87.6,58.9 L 87.9,58.5 L 88.2,58.2 L 88.4,57.9 L 88.7,57.5 L 89.0,57.2 L 89.2,56.9 L 89.5,56.6 L 89.8,56.3 L 90.1,56.0 L 90.3,55.7 L 90.6,55.4 L 90.9,55.1 L 91.1,54.9 L 91.4,54.6 L 91.7,54.3 L 92.0,54.1 L 92.2,53.8 L 92.5,53.6 L 92.8,53.4 L 93.0,53.1 L 93.3,52.9 L 93.6,52.7 L 93.9,52.5 L 94.1,52.3 L 94.4,52.1 L 94.7,51.9 L 94.9,51.8 L 95.2,51.6 L 95.5,51.4 L 95.8,51.3 L 96.0,51.1 L 96.3,51.0 L 96.6,50.8 L 96.8,50.7 L 97.1,50.6 L 97.4,50.5 L 97.7,50.4 L 97.9,50.3 L 98.2,50.2 L 98.5,50.1 L 98.7,50.0 L 99.0,49.9 L 99.3,49.8 L 99.6,49.8 L 99.8,49.7 L 100.1,49.7 L 100.4,49.6 L 100.6,49.6 L 100.9,49.6 L 101.2,49.5 L 101.5,49.5 L 101.7,49.5 L 102.0,49.5 L 102.3,49.5 L 102.5,49.5 L 102.8,49.5 L 103.1,49.6 L 103.4,49.6 L 103.6,49.6 L 103.9,49.7 L 104.2,49.7 L 104.4,49.8 L 104.7,49.8 L 105.0,49.9 L 105.3,50.0 L 105.5,50.1 L 105.8,50.2 L 106.1,50.3 L 106.3,50.4 L 106.6,50.5 L 106.9,50.6 L 107.2,50.7 L 107.4,50.8 L 107.7,51.0 L 108.0,51.1 L 108.2,51.3 L 108.5,51.4 L 108.8,51.6 L 109.1,51.8 L 109.3,51.9 L 109.6,52.1 L 109.9,52.3 L 110.1,52.5 L 110.4,52.7 L 110.7,52.9 L 111.0,53.1 L 111.2,53.4 L 111.5,53.6 L 111.8,53.8 L 112.0,54.1 L 112.3,54.3 L 112.6,54.6 L 112.9,54.9 L 113.1,55.1 L 113.4,55.4 L 113.7,55.7 L 113.9,56.0 L 114.2,56.3 L 114.5,56.6 L 114.8,56.9 L 115.0,57.2 L 115.3,57.5 L 115.6,57.9 L 115.8,58.2 L 116.1,58.5 L 116.4,58.9 L 116.7,59.3 L 116.9,59.6 L 117.2,60.0 L 117.5,60.4 L 117.7,60.8 L 118.0,61.1 L 118.3,61.5 L 118.6,62.0 L 118.8,62.4 L 119.1,62.8 L 119.4,63.2 L 119.6,63.6 L 119.9,64.1 L 120.2,64.5 L 120.5,65.0 L 120.7,65.4 L 121.0,65.9 L 121.3,66.4 L 121.5,66.8 L 121.8,67.3 L 122.1,67.8 L 122.3,68.3 L 122.6,68.8 L 122.9,69.3 L 123.2,69.9 L 123.4,70.4 L 123.7,70.9 L 124.0,71.5 L 124.2,72.0 L 124.5,72.6 L 124.8,73.1 L 125.1,73.7 L 125.3,74.3 L 125.6,74.8 L 125.9,75.4 L 126.1,76.0 L 126.4,76.6 L 126.7,77.2 L 127.0,77.8 L 127.2,78.4 L 127.5,79.1 L 127.8,79.7 L 128.0,80.3 L 128.3,81.0 L 128.6,81.6 L 128.9,82.3 L 129.1,83.0 L 129.4,83.6 L 129.7,84.3 L 129.9,85.0 L 130.2,85.7 L 130.5,86.4 L 130.8,87.1 L 131.0,87.8 L 131.3,88.5 L 131.6,89.3 L 131.8,90.0 L 132.1,90.7 L 132.4,91.5 L 132.7,92.2 L 132.9,93.0 L 133.2,93.8 L 133.5,94.5 L 133.7,95.3 L 134.0,96.1 L 134.3,96.9 L 134.6,97.7 L 134.8,98.5 L 135.1,99.3 L 135.4,100.1 L 135.6,101.0 L 135.9,101.8 L 136.2,102.6 L 136.5,103.5 L 136.7,104.3 L 137.0,105.2 L 137.3,106.1 L 137.5,106.9 L 137.8,107.8 L 138.1,108.7 L 138.4,109.6 L 138.6,110.5 L 138.9,111.4 L 139.2,112.3 L 139.4,113.2 L 139.7,114.2 L 140.0,115.1 L 140.3,116.0 L 140.5,117.0 L 140.8,117.9 L 141.1,118.9 L 141.3,119.9 L 141.6,120.8 L 141.9,121.8 L 142.2,122.8 L 142.4,123.8 L 142.7,124.8 L 143.0,125.8 L 143.2,126.8 L 143.5,127.8 L 143.8,128.9 L 144.1,129.9 L 144.3,130.9 L 144.6,132.0 L 144.9,133.0 L 145.1,134.1 L 145.4,135.2 L 145.7,136.2 L 146.0,137.3 L 146.2,138.4 L 146.5,139.5 L 146.8,140.6 L 147.0,141.7 L 147.3,142.8 L 147.6,144.0 L 147.9,145.1 L 148.1,146.2 L 148.4,147.4 L 148.7,148.5 L 148.9,149.7 L 149.2,150.8 L 149.5,152.0 L 149.8,153.2 L 150.0,154.3 L 150.3,155.5 L 150.6,156.7 L 150.8,157.9 L 151.1,159.1 L 151.4,160.3 L 151.7,161.6 L 151.9,162.8 L 152.2,164.0 L 152.5,165.3 L 152.7,166.5 L 153.0,167.8 L 153.3,169.0 L 153.6,170.3 L 153.8,171.6 L 154.1,172.9 L 154.4,174.2 L 154.6,175.4 L 154.9,176.7 L 155.2,178.1 L 155.5,179.4 L 155.7,180.7 L 156.0,182.0 L 156.3,183.4 L 156.5,184.7 L 156.8,186.0 L 157.1,187.4 L 157.4,188.8 L 157.6,190.1 L 157.9,191.5 L 158.2,192.9 L 158.4,194.3 L 158.7,195.7 L 159.0,197.1 L 159.3,198.5 L 159.5,199.9 L 159.8,201.3 L 160.1,202.8 L 160.3,204.2 L 160.6,205.6 L 160.9,207.1 L 161.2,208.5 L 161.4,210.0 L 161.7,211.5 L 162.0,212.9 L 162.2,214.4 L 162.5,215.9 L 162.8,217.4 L 163.0,218.9 L 163.3,220.4 L 163.6,221.9 L 163.9,223.5 L 164.1,225.0 L 164.4,226.5 L 164.7,228.1 L 164.9,229.6 L 165.2,231.2 L 165.5,232.7 L 165.8,234.3 L 166.0,235.9 L 166.3,237.5 L 166.6,239.1 L 166.8,240.7" fill="none" stroke="#2563c9" stroke-width="2"/><circle cx="47" cy="187" r="3" fill="#1f2530"/><circle cx="157" cy="187" r="3" fill="#1f2530"/><circle cx="69" cy="99" r="3.5" fill="#c8324a"/><text x="61" y="93" font-size="12" text-anchor="end" fill="#c8324a">(−3, 4)</text></svg>`,
+            answer: { value: -1, unit: '' },
+            solution: `Vi läser av nollställena i figuren: $x_1 = -4$ och $x_2 = 1$. Faktorformen blir
+
+$$ f(x) = k(x - (-4))(x - 1) = k(x + 4)(x - 1) \\qquad (1) $$
+
+Grafen går genom den markerade punkten (−3, 4), som inte är ett nollställe. Vi sätter in $x = -3$ och $f(x) = 4$ i (1), $f(x) = k(x + 4)(x - 1)$:
+
+$$ 4 = k(-3 + 4)(-3 - 1) $$
+
+$$ 4 = k \\cdot 1 \\cdot (-4) $$
+
+$$ 4 = -4k \\iff k = \\frac{4}{-4} = -1 $$
+
+Kontroll: $k$ är negativ, och grafen öppnar sig mycket riktigt nedåt. Dessutom ger (1) att $f(0) = -1 \\cdot 4 \\cdot (-1) = 4$, och i figuren skär grafen $y$-axeln i 4.
+
+**Svar:** $k = -1$, alltså $f(x) = -(x + 4)(x - 1)$`,
+        },
+        {
+            level: 1,
+            question: `Figuren visar grafen till andragradsfunktionen $f(x)$. Grafen vänder på $x$-axeln.<br>a) Bestäm $f(x)$ och svara på formen $f(x) = ax^2 + bx + c$.<br>b) Beräkna $f(3)$.
+
+<svg style="max-width:100%;height:auto;display:block;margin:12px auto" viewBox="0 0 231 218" width="338" height="319" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En parabel som öppnar sig uppåt och vänder på x-axeln i x lika med minus 1. Grafen går genom den markerade punkten 1 komma 2."><line x1="27" y1="22" x2="27" y2="204" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="53" y1="22" x2="53" y2="204" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="79" y1="22" x2="79" y2="204" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="105" y1="22" x2="105" y2="204" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="157" y1="22" x2="157" y2="204" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="183" y1="22" x2="183" y2="204" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="209" y1="22" x2="209" y2="204" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="191" x2="209" y2="191" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="139" x2="209" y2="139" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="113" x2="209" y2="113" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="87" x2="209" y2="87" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="61" x2="209" y2="61" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="35" x2="209" y2="35" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="165" x2="209" y2="165" stroke="#1f2530" stroke-width="1.6"/><polygon points="217,165 207,160.5 207,169.5" fill="#1f2530"/><line x1="131" y1="204" x2="131" y2="20" stroke="#1f2530" stroke-width="1.6"/><polygon points="131,12 126.5,22 135.5,22" fill="#1f2530"/><text x="215" y="181" font-size="13" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="140" y="21" font-size="13" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="27" y="179" font-size="11" text-anchor="middle" fill="#1f2530">−4</text><text x="53" y="179" font-size="11" text-anchor="middle" fill="#1f2530">−3</text><text x="79" y="179" font-size="11" text-anchor="middle" fill="#1f2530">−2</text><text x="105" y="179" font-size="11" text-anchor="middle" fill="#1f2530">−1</text><text x="157" y="179" font-size="11" text-anchor="middle" fill="#1f2530">1</text><text x="183" y="179" font-size="11" text-anchor="middle" fill="#1f2530">2</text><text x="125" y="143" font-size="11" text-anchor="end" fill="#1f2530">1</text><text x="125" y="117" font-size="11" text-anchor="end" fill="#1f2530">2</text><text x="125" y="91" font-size="11" text-anchor="end" fill="#1f2530">3</text><text x="125" y="65" font-size="11" text-anchor="end" fill="#1f2530">4</text><text x="125" y="39" font-size="11" text-anchor="end" fill="#1f2530">5</text><path d="M 16.6,14.7 L 16.9,15.8 L 17.3,16.9 L 17.6,18 L 17.9,19.1 L 18.2,20.2 L 18.5,21.3 L 18.9,22.4 L 19.2,23.4 L 19.5,24.5 L 19.8,25.6 L 20.2,26.6 L 20.5,27.7 L 20.8,28.7 L 21.2,29.8 L 21.5,30.8 L 21.8,31.9 L 22.1,32.9 L 22.5,34 L 22.8,35 L 23.1,36 L 23.4,37 L 23.8,38 L 24.1,39.1 L 24.4,40.1 L 24.7,41.1 L 25,42.1 L 25.4,43.1 L 25.7,44.1 L 26,45.1 L 26.3,46 L 26.7,47 L 27,48 L 27.3,49 L 27.7,49.9 L 28,50.9 L 28.3,51.9 L 28.6,52.8 L 29,53.8 L 29.3,54.7 L 29.6,55.7 L 29.9,56.6 L 30.3,57.5 L 30.6,58.5 L 30.9,59.4 L 31.2,60.3 L 31.6,61.3 L 31.9,62.2 L 32.2,63.1 L 32.5,64 L 32.9,64.9 L 33.2,65.8 L 33.5,66.7 L 33.8,67.6 L 34.2,68.5 L 34.5,69.4 L 34.8,70.2 L 35.1,71.1 L 35.5,72 L 35.8,72.8 L 36.1,73.7 L 36.4,74.6 L 36.8,75.4 L 37.1,76.3 L 37.4,77.1 L 37.7,78 L 38.1,78.8 L 38.4,79.6 L 38.7,80.5 L 39,81.3 L 39.4,82.1 L 39.7,82.9 L 40,83.8 L 40.3,84.6 L 40.7,85.4 L 41,86.2 L 41.3,87 L 41.6,87.8 L 42,88.6 L 42.3,89.3 L 42.6,90.1 L 42.9,90.9 L 43.3,91.7 L 43.6,92.4 L 43.9,93.2 L 44.2,94 L 44.6,94.7 L 44.9,95.5 L 45.2,96.2 L 45.5,97 L 45.9,97.7 L 46.2,98.5 L 46.5,99.2 L 46.8,99.9 L 47.2,100.6 L 47.5,101.4 L 47.8,102.1 L 48.1,102.8 L 48.5,103.5 L 48.8,104.2 L 49.1,104.9 L 49.4,105.6 L 49.8,106.3 L 50.1,107 L 50.4,107.7 L 50.7,108.4 L 51.1,109 L 51.4,109.7 L 51.7,110.4 L 52,111 L 52.4,111.7 L 52.7,112.3 L 53,113 L 53.3,113.6 L 53.7,114.3 L 54,114.9 L 54.3,115.6 L 54.6,116.2 L 55,116.8 L 55.3,117.5 L 55.6,118.1 L 55.9,118.7 L 56.3,119.3 L 56.6,119.9 L 56.9,120.5 L 57.2,121.1 L 57.6,121.7 L 57.9,122.3 L 58.2,122.9 L 58.5,123.5 L 58.9,124 L 59.2,124.6 L 59.5,125.2 L 59.8,125.8 L 60.2,126.3 L 60.5,126.9 L 60.8,127.4 L 61.1,128 L 61.5,128.5 L 61.8,129.1 L 62.1,129.6 L 62.4,130.1 L 62.8,130.7 L 63.1,131.2 L 63.4,131.7 L 63.7,132.2 L 64.1,132.8 L 64.4,133.3 L 64.7,133.8 L 65,134.3 L 65.4,134.8 L 65.7,135.3 L 66,135.8 L 66.3,136.2 L 66.7,136.7 L 67,137.2 L 67.3,137.7 L 67.6,138.1 L 68,138.6 L 68.3,139.1 L 68.6,139.5 L 68.9,140 L 69.3,140.4 L 69.6,140.9 L 69.9,141.3 L 70.2,141.7 L 70.6,142.2 L 70.9,142.6 L 71.2,143 L 71.5,143.5 L 71.9,143.9 L 72.2,144.3 L 72.5,144.7 L 72.8,145.1 L 73.2,145.5 L 73.5,145.9 L 73.8,146.3 L 74.1,146.7 L 74.5,147.1 L 74.8,147.4 L 75.1,147.8 L 75.4,148.2 L 75.8,148.5 L 76.1,148.9 L 76.4,149.3 L 76.7,149.6 L 77.1,150 L 77.4,150.3 L 77.7,150.7 L 78,151 L 78.4,151.3 L 78.7,151.7 L 79,152 L 79.3,152.3 L 79.6,152.6 L 80,153 L 80.3,153.3 L 80.6,153.6 L 81,153.9 L 81.3,154.2 L 81.6,154.5 L 81.9,154.8 L 82.3,155 L 82.6,155.3 L 82.9,155.6 L 83.2,155.9 L 83.6,156.2 L 83.9,156.4 L 84.2,156.7 L 84.5,156.9 L 84.9,157.2 L 85.2,157.4 L 85.5,157.7 L 85.8,157.9 L 86.1,158.2 L 86.5,158.4 L 86.8,158.6 L 87.1,158.9 L 87.5,159.1 L 87.8,159.3 L 88.1,159.5 L 88.4,159.7 L 88.8,159.9 L 89.1,160.1 L 89.4,160.3 L 89.7,160.5 L 90.1,160.7 L 90.4,160.9 L 90.7,161.1 L 91,161.2 L 91.4,161.4 L 91.7,161.6 L 92,161.8 L 92.3,161.9 L 92.6,162.1 L 93,162.2 L 93.3,162.4 L 93.6,162.5 L 94,162.7 L 94.3,162.8 L 94.6,162.9 L 94.9,163 L 95.3,163.2 L 95.6,163.3 L 95.9,163.4 L 96.2,163.5 L 96.6,163.6 L 96.9,163.7 L 97.2,163.8 L 97.5,163.9 L 97.9,164 L 98.2,164.1 L 98.5,164.2 L 98.8,164.3 L 99.1,164.3 L 99.5,164.4 L 99.8,164.5 L 100.1,164.5 L 100.5,164.6 L 100.8,164.7 L 101.1,164.7 L 101.4,164.8 L 101.8,164.8 L 102.1,164.8 L 102.4,164.9 L 102.7,164.9 L 103.1,164.9 L 103.4,164.9 L 103.7,165 L 104,165 L 104.4,165 L 104.7,165 L 105,165 L 105.3,165 L 105.7,165 L 106,165 L 106.3,165 L 106.6,164.9 L 107,164.9 L 107.3,164.9 L 107.6,164.9 L 107.9,164.8 L 108.3,164.8 L 108.6,164.8 L 108.9,164.7 L 109.2,164.7 L 109.6,164.6 L 109.9,164.5 L 110.2,164.5 L 110.5,164.4 L 110.9,164.3 L 111.2,164.3 L 111.5,164.2 L 111.8,164.1 L 112.2,164 L 112.5,163.9 L 112.8,163.8 L 113.1,163.7 L 113.5,163.6 L 113.8,163.5 L 114.1,163.4 L 114.4,163.3 L 114.8,163.2 L 115.1,163 L 115.4,162.9 L 115.7,162.8 L 116.1,162.7 L 116.4,162.5 L 116.7,162.4 L 117,162.2 L 117.4,162.1 L 117.7,161.9 L 118,161.8 L 118.3,161.6 L 118.7,161.4 L 119,161.2 L 119.3,161.1 L 119.6,160.9 L 120,160.7 L 120.3,160.5 L 120.6,160.3 L 120.9,160.1 L 121.3,159.9 L 121.6,159.7 L 121.9,159.5 L 122.2,159.3 L 122.6,159.1 L 122.9,158.9 L 123.2,158.6 L 123.5,158.4 L 123.9,158.2 L 124.2,157.9 L 124.5,157.7 L 124.8,157.4 L 125.2,157.2 L 125.5,156.9 L 125.8,156.7 L 126.1,156.4 L 126.5,156.2 L 126.8,155.9 L 127.1,155.6 L 127.4,155.3 L 127.8,155 L 128.1,154.8 L 128.4,154.5 L 128.7,154.2 L 129.1,153.9 L 129.4,153.6 L 129.7,153.3 L 130,153 L 130.4,152.6 L 130.7,152.3 L 131,152 L 131.3,151.7 L 131.7,151.3 L 132,151 L 132.3,150.7 L 132.6,150.3 L 133,150 L 133.3,149.6 L 133.6,149.3 L 133.9,148.9 L 134.3,148.5 L 134.6,148.2 L 134.9,147.8 L 135.2,147.4 L 135.6,147.1 L 135.9,146.7 L 136.2,146.3 L 136.5,145.9 L 136.9,145.5 L 137.2,145.1 L 137.5,144.7 L 137.8,144.3 L 138.2,143.9 L 138.5,143.5 L 138.8,143 L 139.1,142.6 L 139.5,142.2 L 139.8,141.7 L 140.1,141.3 L 140.4,140.9 L 140.8,140.4 L 141.1,140 L 141.4,139.5 L 141.7,139.1 L 142,138.6 L 142.4,138.1 L 142.7,137.7 L 143,137.2 L 143.4,136.7 L 143.7,136.2 L 144,135.8 L 144.3,135.3 L 144.7,134.8 L 145,134.3 L 145.3,133.8 L 145.6,133.3 L 146,132.8 L 146.3,132.2 L 146.6,131.7 L 146.9,131.2 L 147.3,130.7 L 147.6,130.1 L 147.9,129.6 L 148.2,129.1 L 148.5,128.5 L 148.9,128 L 149.2,127.4 L 149.5,126.9 L 149.9,126.3 L 150.2,125.8 L 150.5,125.2 L 150.8,124.6 L 151.2,124 L 151.5,123.5 L 151.8,122.9 L 152.1,122.3 L 152.5,121.7 L 152.8,121.1 L 153.1,120.5 L 153.4,119.9 L 153.8,119.3 L 154.1,118.7 L 154.4,118.1 L 154.7,117.5 L 155,116.8 L 155.4,116.2 L 155.7,115.6 L 156,114.9 L 156.4,114.3 L 156.7,113.6 L 157,113 L 157.3,112.3 L 157.7,111.7 L 158,111 L 158.3,110.4 L 158.6,109.7 L 159,109 L 159.3,108.4 L 159.6,107.7 L 159.9,107 L 160.3,106.3 L 160.6,105.6 L 160.9,104.9 L 161.2,104.2 L 161.5,103.5 L 161.9,102.8 L 162.2,102.1 L 162.5,101.4 L 162.9,100.6 L 163.2,99.9 L 163.5,99.2 L 163.8,98.5 L 164.2,97.7 L 164.5,97 L 164.8,96.2 L 165.1,95.5 L 165.5,94.7 L 165.8,94 L 166.1,93.2 L 166.4,92.4 L 166.8,91.7 L 167.1,90.9 L 167.4,90.1 L 167.7,89.3 L 168,88.6 L 168.4,87.8 L 168.7,87 L 169,86.2 L 169.4,85.4 L 169.7,84.6 L 170,83.8 L 170.3,82.9 L 170.7,82.1 L 171,81.3 L 171.3,80.5 L 171.6,79.6 L 172,78.8 L 172.3,78 L 172.6,77.1 L 172.9,76.3 L 173.3,75.4 L 173.6,74.6 L 173.9,73.7 L 174.2,72.8 L 174.5,72 L 174.9,71.1 L 175.2,70.2 L 175.5,69.4 L 175.9,68.5 L 176.2,67.6 L 176.5,66.7 L 176.8,65.8 L 177.2,64.9 L 177.5,64 L 177.8,63.1 L 178.1,62.2 L 178.5,61.3 L 178.8,60.3 L 179.1,59.4 L 179.4,58.5 L 179.8,57.5 L 180.1,56.6 L 180.4,55.7 L 180.7,54.7 L 181,53.8 L 181.4,52.8 L 181.7,51.9 L 182,50.9 L 182.4,49.9 L 182.7,49 L 183,48 L 183.3,47 L 183.7,46 L 184,45.1 L 184.3,44.1 L 184.6,43.1 L 185,42.1 L 185.3,41.1 L 185.6,40.1 L 185.9,39.1 L 186.3,38 L 186.6,37 L 186.9,36 L 187.2,35 L 187.5,34 L 187.9,32.9 L 188.2,31.9 L 188.5,30.8 L 188.9,29.8 L 189.2,28.7 L 189.5,27.7 L 189.8,26.6 L 190.2,25.6 L 190.5,24.5 L 190.8,23.4 L 191.1,22.4 L 191.5,21.3 L 191.8,20.2 L 192.1,19.1 L 192.4,18 L 192.8,16.9 L 193.1,15.8 L 193.4,14.7" fill="none" stroke="#2563c9" stroke-width="2"/><circle cx="105" cy="165" r="3" fill="#1f2530"/><circle cx="157" cy="113" r="3.5" fill="#c8324a"/><text x="165" y="125" font-size="12" text-anchor="start" fill="#c8324a">(1, 2)</text></svg>`,
+            answer: { value: 8, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 8, unit: '', etikett: '$f(3) =$' },
+            ],
+            solution: `**a)** Grafen vänder på $x$-axeln i $x = -1$. Funktionen har alltså en dubbelrot, $x_1 = x_2 = -1$, och faktorformen blir
+
+$$ f(x) = k(x + 1)(x + 1) = k(x + 1)^2 \\qquad (1) $$
+
+Grafen går genom punkten (1, 2). Vi sätter in $x = 1$ och $f(x) = 2$ i (1), $f(x) = k(x + 1)^2$:
+
+$$ 2 = k(1 + 1)^2 $$
+
+$$ 2 = 4k \\iff k = \\frac{2}{4} = 0{,}5 $$
+
+Vi sätter in $k = 0{,}5$ i (1) och utvecklar med kvadreringsregeln:
+
+$$ f(x) = 0{,}5(x + 1)^2 = 0{,}5(x^2 + 2x + 1) = 0{,}5x^2 + x + 0{,}5 $$
+
+**Svar:** $f(x) = 0{,}5x^2 + x + 0{,}5$
+
+**b)** Vi sätter in $x = 3$ i faktorformen, där räkningen blir enklast:
+
+$$ f(3) = 0{,}5(3 + 1)^2 = 0{,}5 \\cdot 16 = 8 $$
+
+**Svar:** $f(3) = 8$`,
+        },
+        {
+            level: 1,
+            question: `Figuren visar grafen till en andragradsfunktion. Vilket av uttrycken beskriver grafen?
+
+<svg style="max-width:100%;height:auto;display:block;margin:12px auto" viewBox="0 0 212 278" width="310" height="406" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En parabel som öppnar sig nedåt med nollställen i minus 1 och 4. Grafen skär y-axeln i y lika med 4."><line x1="25" y1="22" x2="25" y2="264" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="47" y1="22" x2="47" y2="264" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="91" y1="22" x2="91" y2="264" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="113" y1="22" x2="113" y2="264" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="135" y1="22" x2="135" y2="264" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="157" y1="22" x2="157" y2="264" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="179" y1="22" x2="179" y2="264" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="253" x2="190" y2="253" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="231" x2="190" y2="231" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="209" x2="190" y2="209" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="165" x2="190" y2="165" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="143" x2="190" y2="143" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="121" x2="190" y2="121" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="99" x2="190" y2="99" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="77" x2="190" y2="77" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="55" x2="190" y2="55" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="33" x2="190" y2="33" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="187" x2="190" y2="187" stroke="#1f2530" stroke-width="1.6"/><polygon points="198,187 188,182.5 188,191.5" fill="#1f2530"/><line x1="69" y1="264" x2="69" y2="20" stroke="#1f2530" stroke-width="1.6"/><polygon points="69,12 64.5,22 73.5,22" fill="#1f2530"/><text x="196" y="203" font-size="13" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="78" y="21" font-size="13" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="39" y="201" font-size="11" text-anchor="middle" fill="#1f2530">−1</text><text x="91" y="201" font-size="11" text-anchor="middle" fill="#1f2530">1</text><text x="113" y="201" font-size="11" text-anchor="middle" fill="#1f2530">2</text><text x="135" y="201" font-size="11" text-anchor="middle" fill="#1f2530">3</text><text x="165" y="201" font-size="11" text-anchor="middle" fill="#1f2530">4</text><text x="75" y="235" font-size="11" text-anchor="start" fill="#1f2530">−2</text><text x="75" y="147" font-size="11" text-anchor="start" fill="#1f2530">2</text><text x="63" y="103" font-size="11" text-anchor="end" fill="#1f2530">4</text><text x="63" y="59" font-size="11" text-anchor="end" fill="#1f2530">6</text><path d="M 33.4,263.7 L 33.7,261.8 L 33.9,260 L 34.2,258.2 L 34.5,256.4 L 34.8,254.6 L 35.1,252.8 L 35.4,251 L 35.7,249.3 L 36,247.5 L 36.3,245.7 L 36.6,244 L 36.9,242.3 L 37.2,240.5 L 37.5,238.8 L 37.8,237.1 L 38.1,235.4 L 38.3,233.7 L 38.6,232 L 38.9,230.3 L 39.2,228.6 L 39.5,226.9 L 39.8,225.3 L 40.1,223.6 L 40.4,222 L 40.7,220.3 L 41,218.7 L 41.3,217.1 L 41.6,215.5 L 41.9,213.9 L 42.2,212.3 L 42.5,210.7 L 42.7,209.1 L 43,207.5 L 43.3,205.9 L 43.6,204.4 L 43.9,202.8 L 44.2,201.3 L 44.5,199.7 L 44.8,198.2 L 45.1,196.7 L 45.4,195.2 L 45.7,193.7 L 46,192.2 L 46.3,190.7 L 46.6,189.2 L 46.9,187.7 L 47.1,186.3 L 47.4,184.8 L 47.7,183.4 L 48,181.9 L 48.3,180.5 L 48.6,179.1 L 48.9,177.6 L 49.2,176.2 L 49.5,174.8 L 49.8,173.4 L 50.1,172 L 50.4,170.7 L 50.7,169.3 L 51,167.9 L 51.3,166.6 L 51.5,165.2 L 51.8,163.9 L 52.1,162.5 L 52.4,161.2 L 52.7,159.9 L 53,158.6 L 53.3,157.3 L 53.6,156 L 53.9,154.7 L 54.2,153.4 L 54.5,152.1 L 54.8,150.9 L 55.1,149.6 L 55.4,148.4 L 55.7,147.1 L 55.9,145.9 L 56.2,144.7 L 56.5,143.5 L 56.8,142.3 L 57.1,141.1 L 57.4,139.9 L 57.7,138.7 L 58,137.5 L 58.3,136.3 L 58.6,135.2 L 58.9,134 L 59.2,132.9 L 59.5,131.7 L 59.8,130.6 L 60.1,129.5 L 60.3,128.4 L 60.6,127.3 L 60.9,126.2 L 61.2,125.1 L 61.5,124 L 61.8,122.9 L 62.1,121.8 L 62.4,120.8 L 62.7,119.7 L 63,118.7 L 63.3,117.6 L 63.6,116.6 L 63.9,115.6 L 64.2,114.6 L 64.5,113.6 L 64.7,112.6 L 65,111.6 L 65.3,110.6 L 65.6,109.6 L 65.9,108.7 L 66.2,107.7 L 66.5,106.8 L 66.8,105.8 L 67.1,104.9 L 67.4,104 L 67.7,103 L 68,102.1 L 68.3,101.2 L 68.6,100.3 L 68.9,99.4 L 69.1,98.6 L 69.4,97.7 L 69.7,96.8 L 70,96 L 70.3,95.1 L 70.6,94.3 L 70.9,93.4 L 71.2,92.6 L 71.5,91.8 L 71.8,91 L 72.1,90.2 L 72.4,89.4 L 72.7,88.6 L 73,87.8 L 73.3,87.1 L 73.5,86.3 L 73.8,85.5 L 74.1,84.8 L 74.4,84.1 L 74.7,83.3 L 75,82.6 L 75.3,81.9 L 75.6,81.2 L 75.9,80.5 L 76.2,79.8 L 76.5,79.1 L 76.8,78.4 L 77.1,77.8 L 77.4,77.1 L 77.7,76.4 L 77.9,75.8 L 78.2,75.2 L 78.5,74.5 L 78.8,73.9 L 79.1,73.3 L 79.4,72.7 L 79.7,72.1 L 80,71.5 L 80.3,70.9 L 80.6,70.3 L 80.9,69.8 L 81.2,69.2 L 81.5,68.7 L 81.8,68.1 L 82.1,67.6 L 82.3,67.1 L 82.6,66.5 L 82.9,66 L 83.2,65.5 L 83.5,65 L 83.8,64.5 L 84.1,64.1 L 84.4,63.6 L 84.7,63.1 L 85,62.7 L 85.3,62.2 L 85.6,61.8 L 85.9,61.3 L 86.2,60.9 L 86.5,60.5 L 86.7,60.1 L 87,59.7 L 87.3,59.3 L 87.6,58.9 L 87.9,58.5 L 88.2,58.1 L 88.5,57.8 L 88.8,57.4 L 89.1,57.1 L 89.4,56.7 L 89.7,56.4 L 90,56.1 L 90.3,55.8 L 90.6,55.4 L 90.9,55.1 L 91.1,54.9 L 91.4,54.6 L 91.7,54.3 L 92,54 L 92.3,53.8 L 92.6,53.5 L 92.9,53.3 L 93.2,53 L 93.5,52.8 L 93.8,52.6 L 94.1,52.4 L 94.4,52.1 L 94.7,51.9 L 95,51.8 L 95.3,51.6 L 95.5,51.4 L 95.8,51.2 L 96.1,51.1 L 96.4,50.9 L 96.7,50.8 L 97,50.6 L 97.3,50.5 L 97.6,50.4 L 97.9,50.3 L 98.2,50.2 L 98.5,50.1 L 98.8,50 L 99.1,49.9 L 99.4,49.8 L 99.7,49.8 L 99.9,49.7 L 100.2,49.6 L 100.5,49.6 L 100.8,49.6 L 101.1,49.5 L 101.4,49.5 L 101.7,49.5 L 102,49.5 L 102.3,49.5 L 102.6,49.5 L 102.9,49.5 L 103.2,49.6 L 103.5,49.6 L 103.8,49.6 L 104.1,49.7 L 104.3,49.8 L 104.6,49.8 L 104.9,49.9 L 105.2,50 L 105.5,50.1 L 105.8,50.2 L 106.1,50.3 L 106.4,50.4 L 106.7,50.5 L 107,50.6 L 107.3,50.8 L 107.6,50.9 L 107.9,51.1 L 108.2,51.2 L 108.5,51.4 L 108.7,51.6 L 109,51.8 L 109.3,51.9 L 109.6,52.1 L 109.9,52.4 L 110.2,52.6 L 110.5,52.8 L 110.8,53 L 111.1,53.3 L 111.4,53.5 L 111.7,53.8 L 112,54 L 112.3,54.3 L 112.6,54.6 L 112.9,54.9 L 113.1,55.1 L 113.4,55.4 L 113.7,55.8 L 114,56.1 L 114.3,56.4 L 114.6,56.7 L 114.9,57.1 L 115.2,57.4 L 115.5,57.8 L 115.8,58.1 L 116.1,58.5 L 116.4,58.9 L 116.7,59.3 L 117,59.7 L 117.3,60.1 L 117.5,60.5 L 117.8,60.9 L 118.1,61.3 L 118.4,61.8 L 118.7,62.2 L 119,62.7 L 119.3,63.1 L 119.6,63.6 L 119.9,64.1 L 120.2,64.5 L 120.5,65 L 120.8,65.5 L 121.1,66 L 121.4,66.5 L 121.7,67.1 L 121.9,67.6 L 122.2,68.1 L 122.5,68.7 L 122.8,69.2 L 123.1,69.8 L 123.4,70.3 L 123.7,70.9 L 124,71.5 L 124.3,72.1 L 124.6,72.7 L 124.9,73.3 L 125.2,73.9 L 125.5,74.5 L 125.8,75.2 L 126.1,75.8 L 126.3,76.4 L 126.6,77.1 L 126.9,77.8 L 127.2,78.4 L 127.5,79.1 L 127.8,79.8 L 128.1,80.5 L 128.4,81.2 L 128.7,81.9 L 129,82.6 L 129.3,83.3 L 129.6,84.1 L 129.9,84.8 L 130.2,85.5 L 130.5,86.3 L 130.7,87.1 L 131,87.8 L 131.3,88.6 L 131.6,89.4 L 131.9,90.2 L 132.2,91 L 132.5,91.8 L 132.8,92.6 L 133.1,93.4 L 133.4,94.3 L 133.7,95.1 L 134,96 L 134.3,96.8 L 134.6,97.7 L 134.9,98.6 L 135.1,99.4 L 135.4,100.3 L 135.7,101.2 L 136,102.1 L 136.3,103 L 136.6,104 L 136.9,104.9 L 137.2,105.8 L 137.5,106.8 L 137.8,107.7 L 138.1,108.7 L 138.4,109.6 L 138.7,110.6 L 139,111.6 L 139.3,112.6 L 139.5,113.6 L 139.8,114.6 L 140.1,115.6 L 140.4,116.6 L 140.7,117.6 L 141,118.7 L 141.3,119.7 L 141.6,120.8 L 141.9,121.8 L 142.2,122.9 L 142.5,124 L 142.8,125.1 L 143.1,126.2 L 143.4,127.3 L 143.7,128.4 L 143.9,129.5 L 144.2,130.6 L 144.5,131.7 L 144.8,132.9 L 145.1,134 L 145.4,135.2 L 145.7,136.3 L 146,137.5 L 146.3,138.7 L 146.6,139.9 L 146.9,141.1 L 147.2,142.3 L 147.5,143.5 L 147.8,144.7 L 148.1,145.9 L 148.3,147.1 L 148.6,148.4 L 148.9,149.6 L 149.2,150.9 L 149.5,152.1 L 149.8,153.4 L 150.1,154.7 L 150.4,156 L 150.7,157.3 L 151,158.6 L 151.3,159.9 L 151.6,161.2 L 151.9,162.5 L 152.2,163.9 L 152.5,165.2 L 152.7,166.6 L 153,167.9 L 153.3,169.3 L 153.6,170.7 L 153.9,172 L 154.2,173.4 L 154.5,174.8 L 154.8,176.2 L 155.1,177.6 L 155.4,179.1 L 155.7,180.5 L 156,181.9 L 156.3,183.4 L 156.6,184.8 L 156.9,186.3 L 157.1,187.7 L 157.4,189.2 L 157.7,190.7 L 158,192.2 L 158.3,193.7 L 158.6,195.2 L 158.9,196.7 L 159.2,198.2 L 159.5,199.7 L 159.8,201.3 L 160.1,202.8 L 160.4,204.4 L 160.7,205.9 L 161,207.5 L 161.3,209.1 L 161.5,210.7 L 161.8,212.3 L 162.1,213.9 L 162.4,215.5 L 162.7,217.1 L 163,218.7 L 163.3,220.3 L 163.6,222 L 163.9,223.6 L 164.2,225.3 L 164.5,226.9 L 164.8,228.6 L 165.1,230.3 L 165.4,232 L 165.7,233.7 L 165.9,235.4 L 166.2,237.1 L 166.5,238.8 L 166.8,240.5 L 167.1,242.3 L 167.4,244 L 167.7,245.7 L 168,247.5 L 168.3,249.3 L 168.6,251 L 168.9,252.8 L 169.2,254.6 L 169.5,256.4 L 169.8,258.2 L 170.1,260 L 170.3,261.8 L 170.6,263.7" fill="none" stroke="#2563c9" stroke-width="2"/><circle cx="47" cy="187" r="3" fill="#1f2530"/><circle cx="157" cy="187" r="3" fill="#1f2530"/><circle cx="69" cy="99" r="3.5" fill="#c8324a"/></svg>`,
+            choices: [
+                `$f(x) = (x + 1)(x - 4)$`,
+                `$f(x) = -(x + 1)(x - 4)$`,
+                `$f(x) = -2(x + 1)(x - 4)$`,
+                `$f(x) = -(x - 1)(x + 4)$`,
+            ],
+            correct: 1,
+            solution: `Grafen har nollställena $x = -1$ och $x = 4$, så faktorformen är $f(x) = k(x + 1)(x - 4)$. Det utesluter $f(x) = -(x - 1)(x + 4)$, som har nollställena $x = 1$ och $x = -4$.
+
+Grafen öppnar sig nedåt, så $k$ är negativ. Det utesluter $f(x) = (x + 1)(x - 4)$.
+
+Grafen skär $y$-axeln i $y = 4$. Vi sätter in $x = 0$ i de två kvarvarande uttrycken:
+
+$$ -(0 + 1)(0 - 4) = -(-4) = 4 $$
+
+$$ -2(0 + 1)(0 - 4) = -2 \\cdot (-4) = 8 $$
+
+Bara det första ger 4.
+
+**Svar:** $f(x) = -(x + 1)(x - 4)$`,
+        },
+        {
+            level: 1,
+            question: `Grafen till andragradsfunktionen $f(x) = ax^2 + bx + c$ går genom punkterna (0, 4), (1, 3) och (2, 6).<br>a) Bestäm $c$.<br>b) Bestäm $f(x)$.`,
+            answer: { value: 4, unit: '' },
+            delsvar: [
+                { del: 'a', value: 4, unit: '', etikett: '$c =$' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Punkten (0, 4) ligger på $y$-axeln. Vi sätter in $x = 0$ och $f(x) = 4$:
+
+$$ a \\cdot 0^2 + b \\cdot 0 + c = 4 \\iff c = 4 $$
+
+**Svar:** $c = 4$
+
+**b)** Vi sätter in de två andra punkterna i $f(x) = ax^2 + bx + 4$:
+
+$$
+\\begin{cases}
+a \\cdot 1^2 + b \\cdot 1 + 4 = 3 \\\\
+a \\cdot 2^2 + b \\cdot 2 + 4 = 6
+\\end{cases}
+\\iff
+\\begin{cases}
+a + b = -1 & (1) \\\\
+4a + 2b = 2 & (2)
+\\end{cases}
+$$
+
+Vi löser ut $b$ ur (1): $b = -1 - a$. Insättning i (2), $4a + 2b = 2$, ger
+
+$$ 4a + 2(-1 - a) = 2 $$
+
+$$ 4a - 2 - 2a = 2 $$
+
+$$ 2a = 4 \\iff a = 2 $$
+
+och därmed $b = -1 - 2 = -3$.
+
+Kontroll med punkten (2, 6): $2 \\cdot 2^2 - 3 \\cdot 2 + 4 = 8 - 6 + 4 = 6$. Det stämmer.
+
+**Svar:** $f(x) = 2x^2 - 3x + 4$`,
+        },
+        // ── Nya uppgifter 2026-11: Mellan ────────────────────────────────
+        {
+            level: 2,
+            question: `Tabellen visar några värden på andragradsfunktionen $f(x)$.
+
+| $x$ | 0 | 1 | 2 | 3 | 4 |
+|---|---|---|---|---|---|
+| $f(x)$ | −6 | 0 | 2 | 0 | −6 |
+
+a) Bestäm $f(x)$ och svara på formen $f(x) = ax^2 + bx + c$.<br>b) Beräkna $f(6)$.`,
+            answer: { value: -30, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: -30, unit: '', etikett: '$f(6) =$' },
+            ],
+            solution: `**a)** I tabellen är $f(1) = 0$ och $f(3) = 0$, så funktionen har nollställena $x_1 = 1$ och $x_2 = 3$. Faktorformen blir
+
+$$ f(x) = k(x - 1)(x - 3) \\qquad (1) $$
+
+Vi bestämmer $k$ med en punkt som inte är ett nollställe, till exempel $f(0) = -6$. Insättning i (1), $f(x) = k(x - 1)(x - 3)$, ger
+
+$$ -6 = k(0 - 1)(0 - 3) $$
+
+$$ -6 = k \\cdot (-1) \\cdot (-3) $$
+
+$$ -6 = 3k \\iff k = -2 $$
+
+Vi sätter in $k = -2$ i (1) och utvecklar:
+
+$$ f(x) = -2(x - 1)(x - 3) = -2(x^2 - 3x - x + 3) = -2(x^2 - 4x + 3) = -2x^2 + 8x - 6 $$
+
+Kontroll med $x = 2$: $-2 \\cdot 2^2 + 8 \\cdot 2 - 6 = -8 + 16 - 6 = 2$, som i tabellen.
+
+**Svar:** $f(x) = -2x^2 + 8x - 6$
+
+**b)** Vi sätter in $x = 6$ i faktorformen:
+
+$$ f(6) = -2(6 - 1)(6 - 3) = -2 \\cdot 5 \\cdot 3 = -30 $$
+
+**Svar:** $f(6) = -30$`,
+        },
+        {
+            level: 2,
+            question: `En andragradsfunktion $f(x)$ har minimipunkten (2, −18). Ett av funktionens nollställen är $x = 5$.<br>a) Bestäm $f(x)$ och svara på formen $f(x) = ax^2 + bx + c$.<br>b) I vilken punkt skär grafen $y$-axeln?`,
+            answer: { value: -10, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: -10, unit: '', etikett: '$y =$' },
+            ],
+            solution: `**a)** Grafen är symmetrisk kring en lodrät linje genom minimipunkten, alltså kring $x = 2$. Nollställena ligger lika långt från symmetrilinjen på var sin sida. Nollstället $x = 5$ ligger 3 steg till höger om $x = 2$, så det andra nollstället ligger 3 steg till vänster:
+
+$$ x_1 = 2 - 3 = -1 $$
+
+Faktorformen blir
+
+$$ f(x) = k(x + 1)(x - 5) \\qquad (1) $$
+
+Vi sätter in minimipunkten, $x = 2$ och $f(x) = -18$, i (1), $f(x) = k(x + 1)(x - 5)$:
+
+$$ -18 = k(2 + 1)(2 - 5) $$
+
+$$ -18 = k \\cdot 3 \\cdot (-3) $$
+
+$$ -18 = -9k \\iff k = 2 $$
+
+$k$ är positiv, så grafen öppnar sig uppåt och har en minimipunkt, som det ska vara. Vi utvecklar:
+
+$$ f(x) = 2(x + 1)(x - 5) = 2(x^2 - 5x + x - 5) = 2(x^2 - 4x - 5) = 2x^2 - 8x - 10 $$
+
+**Svar:** $f(x) = 2x^2 - 8x - 10$
+
+**b)** Grafen skär $y$-axeln där $x = 0$:
+
+$$ f(0) = 2 \\cdot 0^2 - 8 \\cdot 0 - 10 = -10 $$
+
+**Svar:** I punkten (0, −10)`,
+        },
+        {
+            level: 2,
+            question: `Grafen till andragradsfunktionen $f(x)$ går genom punkterna (1, 5), (2, 4) och (3, 7).<br>a) Bestäm $f(x)$.<br>b) Förklara varför det inte går att bestämma $f(x)$ med faktorform.`,
+            answer: { value: 2, unit: '' },
+            delsvar: [
+                { del: 'a', value: 2, unit: '', etikett: '$a =$' },
+                { del: 'a', value: -7, unit: '', etikett: '$b =$' },
+                { del: 'a', value: 10, unit: '', etikett: '$c =$' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Ingen av punkterna ligger på en axel, så vi skriver funktionen i utvecklad form $f(x) = ax^2 + bx + c$ och sätter in de tre punkterna:
+
+$$
+\\begin{cases}
+a + b + c = 5 & (1) \\\\
+4a + 2b + c = 4 & (2) \\\\
+9a + 3b + c = 7 & (3)
+\\end{cases}
+$$
+
+Vi eliminerar $c$ genom att subtrahera ekvationerna parvis. (2) − (1) och (3) − (2) ger
+
+$$
+\\begin{cases}
+3a + b = -1 & (4) \\\\
+5a + b = 3 & (5)
+\\end{cases}
+$$
+
+(5) − (4) ger
+
+$$ 2a = 4 \\iff a = 2 $$
+
+Insättning av $a = 2$ i (4), $3a + b = -1$:
+
+$$ 6 + b = -1 \\iff b = -7 $$
+
+Insättning av $a = 2$ och $b = -7$ i (1), $a + b + c = 5$:
+
+$$ 2 - 7 + c = 5 \\iff c = 10 $$
+
+Kontroll med (3, 7): $2 \\cdot 9 - 7 \\cdot 3 + 10 = 18 - 21 + 10 = 7$. Det stämmer.
+
+**Svar:** $f(x) = 2x^2 - 7x + 10$
+
+**b)** Faktorformen bygger på nollställena. Vi undersöker om $f(x) = 0$ har några lösningar. Vi dividerar $2x^2 - 7x + 10 = 0$ med 2 och får
+
+$$ x^2 - 3{,}5x + 5 = 0 $$
+
+Med $p = -3{,}5$ och $q = 5$ blir uttrycket under rottecknet i *pq*-formeln
+
+$$ \\left(\\frac{p}{2}\\right)^2 - q = 1{,}75^2 - 5 = 3{,}0625 - 5 = -1{,}9375 $$
+
+Det är negativt, så ekvationen saknar reella lösningar.
+
+**Svar:** Funktionen saknar nollställen, och faktorformen $k(x - x_1)(x - x_2)$ kräver nollställen.`,
+        },
+        {
+            level: 2,
+            question: `Figuren visar grafen till andragradsfunktionen $f(x)$. Maximipunkten (2, 3) och skärningen med $y$-axeln är markerade.<br>a) Bestäm $f(x)$.<br>b) Bestäm funktionens nollställen. Svara exakt.
+
+<svg style="max-width:100%;height:auto;display:block;margin:12px auto" viewBox="0 0 218 244" width="319" height="357" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En parabel som öppnar sig nedåt med maximipunkten 2 komma 3, markerad. Grafen skär y-axeln i den markerade punkten 0 komma minus 1. Nollställena ligger inte på rutnätets linjer."><line x1="27" y1="22" x2="27" y2="230" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="79" y1="22" x2="79" y2="230" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="105" y1="22" x2="105" y2="230" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="131" y1="22" x2="131" y2="230" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="157" y1="22" x2="157" y2="230" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="183" y1="22" x2="183" y2="230" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="217" x2="196" y2="217" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="191" x2="196" y2="191" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="165" x2="196" y2="165" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="113" x2="196" y2="113" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="87" x2="196" y2="87" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="61" x2="196" y2="61" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="35" x2="196" y2="35" stroke="rgba(31,37,48,0.15)" stroke-width="1"/><line x1="14" y1="139" x2="196" y2="139" stroke="#1f2530" stroke-width="1.6"/><polygon points="204,139 194,134.5 194,143.5" fill="#1f2530"/><line x1="53" y1="230" x2="53" y2="20" stroke="#1f2530" stroke-width="1.6"/><polygon points="53,12 48.5,22 57.5,22" fill="#1f2530"/><text x="202" y="155" font-size="13" text-anchor="end" fill="#1f2530"><tspan font-style="italic">x</tspan></text><text x="62" y="21" font-size="13" text-anchor="start" fill="#1f2530"><tspan font-style="italic">y</tspan></text><text x="27" y="153" font-size="11" text-anchor="middle" fill="#1f2530">−1</text><text x="79" y="153" font-size="11" text-anchor="middle" fill="#1f2530">1</text><text x="105" y="153" font-size="11" text-anchor="middle" fill="#1f2530">2</text><text x="131" y="153" font-size="11" text-anchor="middle" fill="#1f2530">3</text><text x="165" y="153" font-size="11" text-anchor="middle" fill="#1f2530">4</text><text x="59" y="221" font-size="11" text-anchor="start" fill="#1f2530">−3</text><text x="47" y="169" font-size="11" text-anchor="end" fill="#1f2530">−1</text><text x="47" y="117" font-size="11" text-anchor="end" fill="#1f2530">1</text><text x="47" y="91" font-size="11" text-anchor="end" fill="#1f2530">2</text><text x="47" y="65" font-size="11" text-anchor="end" fill="#1f2530">3</text><text x="47" y="39" font-size="11" text-anchor="end" fill="#1f2530">4</text><path d="M 38.6,230.7 L 38.9,229.2 L 39.2,227.6 L 39.5,226.1 L 39.8,224.6 L 40.1,223.1 L 40.4,221.6 L 40.7,220.1 L 41,218.6 L 41.3,217.1 L 41.6,215.6 L 41.9,214.1 L 42.2,212.6 L 42.5,211.2 L 42.8,209.7 L 43.1,208.3 L 43.4,206.8 L 43.7,205.4 L 44,204 L 44.3,202.6 L 44.6,201.1 L 44.9,199.7 L 45.2,198.3 L 45.5,196.9 L 45.9,195.6 L 46.2,194.2 L 46.5,192.8 L 46.8,191.5 L 47.1,190.1 L 47.4,188.8 L 47.7,187.4 L 48,186.1 L 48.3,184.8 L 48.6,183.4 L 48.9,182.1 L 49.2,180.8 L 49.5,179.5 L 49.8,178.2 L 50.1,176.9 L 50.4,175.7 L 50.7,174.4 L 51,173.1 L 51.3,171.9 L 51.6,170.6 L 51.9,169.4 L 52.2,168.1 L 52.5,166.9 L 52.8,165.7 L 53.1,164.5 L 53.4,163.3 L 53.7,162.1 L 54,160.9 L 54.3,159.7 L 54.6,158.5 L 55,157.3 L 55.3,156.2 L 55.6,155 L 55.9,153.9 L 56.2,152.7 L 56.5,151.6 L 56.8,150.5 L 57.1,149.3 L 57.4,148.2 L 57.7,147.1 L 58,146 L 58.3,144.9 L 58.6,143.8 L 58.9,142.8 L 59.2,141.7 L 59.5,140.6 L 59.8,139.6 L 60.1,138.5 L 60.4,137.5 L 60.7,136.4 L 61,135.4 L 61.3,134.4 L 61.6,133.4 L 61.9,132.4 L 62.2,131.4 L 62.5,130.4 L 62.8,129.4 L 63.1,128.4 L 63.4,127.4 L 63.7,126.5 L 64.1,125.5 L 64.4,124.5 L 64.7,123.6 L 65,122.7 L 65.3,121.7 L 65.6,120.8 L 65.9,119.9 L 66.2,119 L 66.5,118.1 L 66.8,117.2 L 67.1,116.3 L 67.4,115.4 L 67.7,114.5 L 68,113.7 L 68.3,112.8 L 68.6,112 L 68.9,111.1 L 69.2,110.3 L 69.5,109.4 L 69.8,108.6 L 70.1,107.8 L 70.4,107 L 70.7,106.2 L 71,105.4 L 71.3,104.6 L 71.6,103.8 L 71.9,103 L 72.2,102.3 L 72.5,101.5 L 72.8,100.8 L 73.2,100 L 73.5,99.3 L 73.8,98.5 L 74.1,97.8 L 74.4,97.1 L 74.7,96.4 L 75,95.7 L 75.3,95 L 75.6,94.3 L 75.9,93.6 L 76.2,92.9 L 76.5,92.3 L 76.8,91.6 L 77.1,91 L 77.4,90.3 L 77.7,89.7 L 78,89 L 78.3,88.4 L 78.6,87.8 L 78.9,87.2 L 79.2,86.6 L 79.5,86 L 79.8,85.4 L 80.1,84.8 L 80.4,84.2 L 80.7,83.6 L 81,83.1 L 81.3,82.5 L 81.6,82 L 81.9,81.4 L 82.3,80.9 L 82.6,80.4 L 82.9,79.9 L 83.2,79.3 L 83.5,78.8 L 83.8,78.3 L 84.1,77.8 L 84.4,77.4 L 84.7,76.9 L 85,76.4 L 85.3,76 L 85.6,75.5 L 85.9,75 L 86.2,74.6 L 86.5,74.2 L 86.8,73.7 L 87.1,73.3 L 87.4,72.9 L 87.7,72.5 L 88,72.1 L 88.3,71.7 L 88.6,71.3 L 88.9,70.9 L 89.2,70.6 L 89.5,70.2 L 89.8,69.8 L 90.1,69.5 L 90.4,69.2 L 90.7,68.8 L 91,68.5 L 91.4,68.2 L 91.7,67.9 L 92,67.5 L 92.3,67.2 L 92.6,66.9 L 92.9,66.7 L 93.2,66.4 L 93.5,66.1 L 93.8,65.8 L 94.1,65.6 L 94.4,65.3 L 94.7,65.1 L 95,64.9 L 95.3,64.6 L 95.6,64.4 L 95.9,64.2 L 96.2,64 L 96.5,63.8 L 96.8,63.6 L 97.1,63.4 L 97.4,63.2 L 97.7,63 L 98,62.9 L 98.3,62.7 L 98.6,62.6 L 98.9,62.4 L 99.2,62.3 L 99.5,62.1 L 99.8,62 L 100.1,61.9 L 100.5,61.8 L 100.8,61.7 L 101.1,61.6 L 101.4,61.5 L 101.7,61.4 L 102,61.4 L 102.3,61.3 L 102.6,61.2 L 102.9,61.2 L 103.2,61.1 L 103.5,61.1 L 103.8,61.1 L 104.1,61 L 104.4,61 L 104.7,61 L 105,61 L 105.3,61 L 105.6,61 L 105.9,61 L 106.2,61.1 L 106.5,61.1 L 106.8,61.1 L 107.1,61.2 L 107.4,61.2 L 107.7,61.3 L 108,61.4 L 108.3,61.4 L 108.6,61.5 L 108.9,61.6 L 109.2,61.7 L 109.6,61.8 L 109.9,61.9 L 110.2,62 L 110.5,62.1 L 110.8,62.3 L 111.1,62.4 L 111.4,62.6 L 111.7,62.7 L 112,62.9 L 112.3,63 L 112.6,63.2 L 112.9,63.4 L 113.2,63.6 L 113.5,63.8 L 113.8,64 L 114.1,64.2 L 114.4,64.4 L 114.7,64.6 L 115,64.9 L 115.3,65.1 L 115.6,65.3 L 115.9,65.6 L 116.2,65.8 L 116.5,66.1 L 116.8,66.4 L 117.1,66.7 L 117.4,66.9 L 117.7,67.2 L 118,67.5 L 118.3,67.9 L 118.7,68.2 L 119,68.5 L 119.3,68.8 L 119.6,69.2 L 119.9,69.5 L 120.2,69.8 L 120.5,70.2 L 120.8,70.6 L 121.1,70.9 L 121.4,71.3 L 121.7,71.7 L 122,72.1 L 122.3,72.5 L 122.6,72.9 L 122.9,73.3 L 123.2,73.7 L 123.5,74.2 L 123.8,74.6 L 124.1,75 L 124.4,75.5 L 124.7,76 L 125,76.4 L 125.3,76.9 L 125.6,77.4 L 125.9,77.8 L 126.2,78.3 L 126.5,78.8 L 126.8,79.3 L 127.1,79.9 L 127.4,80.4 L 127.8,80.9 L 128.1,81.4 L 128.4,82 L 128.7,82.5 L 129,83.1 L 129.3,83.6 L 129.6,84.2 L 129.9,84.8 L 130.2,85.4 L 130.5,86 L 130.8,86.6 L 131.1,87.2 L 131.4,87.8 L 131.7,88.4 L 132,89 L 132.3,89.7 L 132.6,90.3 L 132.9,91 L 133.2,91.6 L 133.5,92.3 L 133.8,92.9 L 134.1,93.6 L 134.4,94.3 L 134.7,95 L 135,95.7 L 135.3,96.4 L 135.6,97.1 L 135.9,97.8 L 136.2,98.5 L 136.5,99.3 L 136.9,100 L 137.2,100.8 L 137.5,101.5 L 137.8,102.3 L 138.1,103 L 138.4,103.8 L 138.7,104.6 L 139,105.4 L 139.3,106.2 L 139.6,107 L 139.9,107.8 L 140.2,108.6 L 140.5,109.4 L 140.8,110.3 L 141.1,111.1 L 141.4,112 L 141.7,112.8 L 142,113.7 L 142.3,114.5 L 142.6,115.4 L 142.9,116.3 L 143.2,117.2 L 143.5,118.1 L 143.8,119 L 144.1,119.9 L 144.4,120.8 L 144.7,121.7 L 145,122.7 L 145.3,123.6 L 145.6,124.5 L 146,125.5 L 146.3,126.5 L 146.6,127.4 L 146.9,128.4 L 147.2,129.4 L 147.5,130.4 L 147.8,131.4 L 148.1,132.4 L 148.4,133.4 L 148.7,134.4 L 149,135.4 L 149.3,136.4 L 149.6,137.5 L 149.9,138.5 L 150.2,139.6 L 150.5,140.6 L 150.8,141.7 L 151.1,142.8 L 151.4,143.8 L 151.7,144.9 L 152,146 L 152.3,147.1 L 152.6,148.2 L 152.9,149.3 L 153.2,150.5 L 153.5,151.6 L 153.8,152.7 L 154.1,153.9 L 154.4,155 L 154.7,156.2 L 155,157.3 L 155.4,158.5 L 155.7,159.7 L 156,160.9 L 156.3,162.1 L 156.6,163.3 L 156.9,164.5 L 157.2,165.7 L 157.5,166.9 L 157.8,168.1 L 158.1,169.4 L 158.4,170.6 L 158.7,171.9 L 159,173.1 L 159.3,174.4 L 159.6,175.7 L 159.9,176.9 L 160.2,178.2 L 160.5,179.5 L 160.8,180.8 L 161.1,182.1 L 161.4,183.4 L 161.7,184.8 L 162,186.1 L 162.3,187.4 L 162.6,188.8 L 162.9,190.1 L 163.2,191.5 L 163.5,192.8 L 163.8,194.2 L 164.2,195.6 L 164.5,196.9 L 164.8,198.3 L 165.1,199.7 L 165.4,201.1 L 165.7,202.6 L 166,204 L 166.3,205.4 L 166.6,206.8 L 166.9,208.3 L 167.2,209.7 L 167.5,211.2 L 167.8,212.6 L 168.1,214.1 L 168.4,215.6 L 168.7,217.1 L 169,218.6 L 169.3,220.1 L 169.6,221.6 L 169.9,223.1 L 170.2,224.6 L 170.5,226.1 L 170.8,227.6 L 171.1,229.2 L 171.4,230.7" fill="none" stroke="#2563c9" stroke-width="2"/><circle cx="53" cy="165" r="3.5" fill="#c8324a"/><text x="61" y="181" font-size="12" text-anchor="start" fill="#c8324a">(0, −1)</text><circle cx="105" cy="61" r="3.5" fill="#c8324a"/><text x="105" y="51" font-size="12" text-anchor="middle" fill="#c8324a">(2, 3)</text></svg>`,
+            answer: { value: -1, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', values: [3.732, 0.268], unit: '', tol: 0.01, etikett: '$x =$' },
+            ],
+            solution: `**a)** Nollställena ligger inte på rutnätets linjer och går inte att läsa av exakt, så vi använder utvecklad form $f(x) = ax^2 + bx + c$ med tre punkter. Två punkter är markerade: (0, −1) och (2, 3).
+
+Den tredje punkten får vi ur symmetrin. Grafen är symmetrisk kring $x = 2$, där maximipunkten ligger. Punkten (0, −1) ligger 2 steg till vänster om symmetrilinjen, så grafen går också genom punkten 2 steg till höger, (4, −1).
+
+Punkten (0, −1) ger direkt $c = -1$. Insättning av (2, 3) och (4, −1) ger
+
+$$
+\\begin{cases}
+4a + 2b - 1 = 3 \\\\
+16a + 4b - 1 = -1
+\\end{cases}
+\\iff
+\\begin{cases}
+2a + b = 2 & (1) \\\\
+4a + b = 0 & (2)
+\\end{cases}
+$$
+
+(2) − (1) ger
+
+$$ 2a = -2 \\iff a = -1 $$
+
+och insättning i (1), $2a + b = 2$, ger $-2 + b = 2 \\iff b = 4$.
+
+**Svar:** $f(x) = -x^2 + 4x - 1$
+
+**b)** Vi löser $f(x) = 0$:
+
+$$ -x^2 + 4x - 1 = 0 $$
+
+Vi multiplicerar båda led med $-1$ för att få normalform:
+
+$$ x^2 - 4x + 1 = 0 $$
+
+*pq*-formeln med $p = -4$ och $q = 1$:
+
+$$ x = 2 \\pm \\sqrt{2^2 - 1} $$
+
+$$ x = 2 \\pm \\sqrt{3} $$
+
+Rimlighet: $\\sqrt{3} \\approx 1{,}73$ ger $x \\approx 0{,}27$ och $x \\approx 3{,}73$, och i figuren skär grafen $x$-axeln strax till höger om 0 och strax till vänster om 4.
+
+**Svar:** $x_1 = 2 - \\sqrt{3}$ och $x_2 = 2 + \\sqrt{3}$`,
+        },
+        {
+            level: 2,
+            question: `En andragradsfunktion $f(x)$ har nollställena $x = -1$ och $x = 5$. Dessutom gäller att $f(1) = 12$. Vilket värde har $f(3)$?`,
+            choices: [
+                `$-12$`,
+                `$4$`,
+                `$20$`,
+                `$12$`,
+            ],
+            correct: 3,
+            solution: `Grafen är symmetrisk kring en lodrät linje mitt emellan nollställena:
+
+$$ x = \\frac{-1 + 5}{2} = 2 $$
+
+$x = 1$ ligger 1 steg till vänster om $x = 2$ och $x = 3$ ligger 1 steg till höger. Punkter på samma avstånd från symmetrilinjen har samma funktionsvärde, så $f(3) = f(1) = 12$.
+
+Kontroll med faktorform: $f(x) = k(x + 1)(x - 5)$ och $f(1) = 12$ ger
+
+$$ 12 = k \\cdot 2 \\cdot (-4) = -8k \\iff k = -1{,}5 $$
+
+$$ f(3) = -1{,}5 \\cdot 4 \\cdot (-2) = 12 $$
+
+**Svar:** $f(3) = 12$`,
+        },
+        // ── Nya uppgifter 2026-11: Avancerad ─────────────────────────────
+        {
+            level: 3,
+            question: `En port i en stenmur har formen av en parabel. Porten är $4{,}0$ m bred vid marken och $3{,}2$ m hög på mitten.<br>a) Ett skåp som är $1{,}2$ m brett ska bäras upprätt genom porten, mitt i öppningen. Hur högt får skåpet vara som mest?<br>b) Ett annat skåp är $2{,}5$ m högt. Hur brett får det vara som mest för att kunna bäras upprätt genom porten?<br>Svara i meter.
+
+<svg style="max-width:100%;height:auto;display:block;margin:12px auto" viewBox="0 24 420 256" width="614" height="374" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En stenvägg med en port i form av en parabel. Porten är 4,0 meter bred vid marken och 3,2 meter hög på mitten."><line x1="10" y1="230" x2="410" y2="230" stroke="#1f2530" stroke-width="1.8"/><line x1="14" y1="231" x2="7" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="26" y1="231" x2="19" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="38" y1="231" x2="31" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="50" y1="231" x2="43" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="62" y1="231" x2="55" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="74" y1="231" x2="67" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="86" y1="231" x2="79" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="98" y1="231" x2="91" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="110" y1="231" x2="103" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="122" y1="231" x2="115" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="134" y1="231" x2="127" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="146" y1="231" x2="139" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="158" y1="231" x2="151" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="170" y1="231" x2="163" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="182" y1="231" x2="175" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="194" y1="231" x2="187" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="206" y1="231" x2="199" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="218" y1="231" x2="211" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="230" y1="231" x2="223" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="242" y1="231" x2="235" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="254" y1="231" x2="247" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="266" y1="231" x2="259" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="278" y1="231" x2="271" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="290" y1="231" x2="283" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="302" y1="231" x2="295" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="314" y1="231" x2="307" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="326" y1="231" x2="319" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="338" y1="231" x2="331" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="350" y1="231" x2="343" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="362" y1="231" x2="355" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="374" y1="231" x2="367" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="386" y1="231" x2="379" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><line x1="398" y1="231" x2="391" y2="238" stroke="rgba(31,37,48,0.35)" stroke-width="1"/><path d="M 40,230 L 40,30 L 380,30 L 380,230 Z M 110,230 L 110,230 L 112.5,222.1 L 115,214.4 L 117.5,206.9 L 120,199.6 L 122.5,192.5 L 125,185.6 L 127.5,178.9 L 130,172.4 L 132.5,166.1 L 135,160 L 137.5,154.1 L 140,148.4 L 142.5,142.9 L 145,137.6 L 147.5,132.5 L 150,127.6 L 152.5,122.9 L 155,118.4 L 157.5,114.1 L 160,110 L 162.5,106.1 L 165,102.4 L 167.5,98.9 L 170,95.6 L 172.5,92.5 L 175,89.6 L 177.5,86.9 L 180,84.4 L 182.5,82.1 L 185,80 L 187.5,78.1 L 190,76.4 L 192.5,74.9 L 195,73.6 L 197.5,72.5 L 200,71.6 L 202.5,70.9 L 205,70.4 L 207.5,70.1 L 210,70 L 212.5,70.1 L 215,70.4 L 217.5,70.9 L 220,71.6 L 222.5,72.5 L 225,73.6 L 227.5,74.9 L 230,76.4 L 232.5,78.1 L 235,80 L 237.5,82.1 L 240,84.4 L 242.5,86.9 L 245,89.6 L 247.5,92.5 L 250,95.6 L 252.5,98.9 L 255,102.4 L 257.5,106.1 L 260,110 L 262.5,114.1 L 265,118.4 L 267.5,122.9 L 270,127.6 L 272.5,132.5 L 275,137.6 L 277.5,142.9 L 280,148.4 L 282.5,154.1 L 285,160 L 287.5,166.1 L 290,172.4 L 292.5,178.9 L 295,185.6 L 297.5,192.5 L 300,199.6 L 302.5,206.9 L 305,214.4 L 307.5,222.1 L 310,230 Z" fill="#e4d6bd" fill-rule="evenodd" stroke="#1f2530" stroke-width="1.6"/><clipPath id="vagg33"><path d="M 40,230 L 40,30 L 380,30 L 380,230 Z M 110,230 L 110,230 L 112.5,222.1 L 115,214.4 L 117.5,206.9 L 120,199.6 L 122.5,192.5 L 125,185.6 L 127.5,178.9 L 130,172.4 L 132.5,166.1 L 135,160 L 137.5,154.1 L 140,148.4 L 142.5,142.9 L 145,137.6 L 147.5,132.5 L 150,127.6 L 152.5,122.9 L 155,118.4 L 157.5,114.1 L 160,110 L 162.5,106.1 L 165,102.4 L 167.5,98.9 L 170,95.6 L 172.5,92.5 L 175,89.6 L 177.5,86.9 L 180,84.4 L 182.5,82.1 L 185,80 L 187.5,78.1 L 190,76.4 L 192.5,74.9 L 195,73.6 L 197.5,72.5 L 200,71.6 L 202.5,70.9 L 205,70.4 L 207.5,70.1 L 210,70 L 212.5,70.1 L 215,70.4 L 217.5,70.9 L 220,71.6 L 222.5,72.5 L 225,73.6 L 227.5,74.9 L 230,76.4 L 232.5,78.1 L 235,80 L 237.5,82.1 L 240,84.4 L 242.5,86.9 L 245,89.6 L 247.5,92.5 L 250,95.6 L 252.5,98.9 L 255,102.4 L 257.5,106.1 L 260,110 L 262.5,114.1 L 265,118.4 L 267.5,122.9 L 270,127.6 L 272.5,132.5 L 275,137.6 L 277.5,142.9 L 280,148.4 L 282.5,154.1 L 285,160 L 287.5,166.1 L 290,172.4 L 292.5,178.9 L 295,185.6 L 297.5,192.5 L 300,199.6 L 302.5,206.9 L 305,214.4 L 307.5,222.1 L 310,230 Z" clip-rule="evenodd"/></clipPath><g clip-path="url(#vagg33)" stroke="rgba(31,37,48,0.22)" stroke-width="1"><line x1="40" y1="205" x2="380" y2="205"/><line x1="90" y1="205" x2="90" y2="230"/><line x1="140" y1="205" x2="140" y2="230"/><line x1="190" y1="205" x2="190" y2="230"/><line x1="240" y1="205" x2="240" y2="230"/><line x1="290" y1="205" x2="290" y2="230"/><line x1="340" y1="205" x2="340" y2="230"/><line x1="40" y1="180" x2="380" y2="180"/><line x1="115" y1="180" x2="115" y2="205"/><line x1="165" y1="180" x2="165" y2="205"/><line x1="215" y1="180" x2="215" y2="205"/><line x1="265" y1="180" x2="265" y2="205"/><line x1="315" y1="180" x2="315" y2="205"/><line x1="365" y1="180" x2="365" y2="205"/><line x1="40" y1="155" x2="380" y2="155"/><line x1="90" y1="155" x2="90" y2="180"/><line x1="140" y1="155" x2="140" y2="180"/><line x1="190" y1="155" x2="190" y2="180"/><line x1="240" y1="155" x2="240" y2="180"/><line x1="290" y1="155" x2="290" y2="180"/><line x1="340" y1="155" x2="340" y2="180"/><line x1="40" y1="130" x2="380" y2="130"/><line x1="115" y1="130" x2="115" y2="155"/><line x1="165" y1="130" x2="165" y2="155"/><line x1="215" y1="130" x2="215" y2="155"/><line x1="265" y1="130" x2="265" y2="155"/><line x1="315" y1="130" x2="315" y2="155"/><line x1="365" y1="130" x2="365" y2="155"/><line x1="40" y1="105" x2="380" y2="105"/><line x1="90" y1="105" x2="90" y2="130"/><line x1="140" y1="105" x2="140" y2="130"/><line x1="190" y1="105" x2="190" y2="130"/><line x1="240" y1="105" x2="240" y2="130"/><line x1="290" y1="105" x2="290" y2="130"/><line x1="340" y1="105" x2="340" y2="130"/><line x1="40" y1="80" x2="380" y2="80"/><line x1="115" y1="80" x2="115" y2="105"/><line x1="165" y1="80" x2="165" y2="105"/><line x1="215" y1="80" x2="215" y2="105"/><line x1="265" y1="80" x2="265" y2="105"/><line x1="315" y1="80" x2="315" y2="105"/><line x1="365" y1="80" x2="365" y2="105"/><line x1="40" y1="55" x2="380" y2="55"/><line x1="90" y1="55" x2="90" y2="80"/><line x1="140" y1="55" x2="140" y2="80"/><line x1="190" y1="55" x2="190" y2="80"/><line x1="240" y1="55" x2="240" y2="80"/><line x1="290" y1="55" x2="290" y2="80"/><line x1="340" y1="55" x2="340" y2="80"/></g><path d="M 110,230 L 110,230 L 112.5,222.1 L 115,214.4 L 117.5,206.9 L 120,199.6 L 122.5,192.5 L 125,185.6 L 127.5,178.9 L 130,172.4 L 132.5,166.1 L 135,160 L 137.5,154.1 L 140,148.4 L 142.5,142.9 L 145,137.6 L 147.5,132.5 L 150,127.6 L 152.5,122.9 L 155,118.4 L 157.5,114.1 L 160,110 L 162.5,106.1 L 165,102.4 L 167.5,98.9 L 170,95.6 L 172.5,92.5 L 175,89.6 L 177.5,86.9 L 180,84.4 L 182.5,82.1 L 185,80 L 187.5,78.1 L 190,76.4 L 192.5,74.9 L 195,73.6 L 197.5,72.5 L 200,71.6 L 202.5,70.9 L 205,70.4 L 207.5,70.1 L 210,70 L 212.5,70.1 L 215,70.4 L 217.5,70.9 L 220,71.6 L 222.5,72.5 L 225,73.6 L 227.5,74.9 L 230,76.4 L 232.5,78.1 L 235,80 L 237.5,82.1 L 240,84.4 L 242.5,86.9 L 245,89.6 L 247.5,92.5 L 250,95.6 L 252.5,98.9 L 255,102.4 L 257.5,106.1 L 260,110 L 262.5,114.1 L 265,118.4 L 267.5,122.9 L 270,127.6 L 272.5,132.5 L 275,137.6 L 277.5,142.9 L 280,148.4 L 282.5,154.1 L 285,160 L 287.5,166.1 L 290,172.4 L 292.5,178.9 L 295,185.6 L 297.5,192.5 L 300,199.6 L 302.5,206.9 L 305,214.4 L 307.5,222.1 L 310,230" fill="none" stroke="#1f2530" stroke-width="1.8"/><line x1="110" y1="234" x2="110" y2="260" stroke="#1f2530" stroke-width="1" stroke-dasharray="3 3"/><line x1="310" y1="234" x2="310" y2="260" stroke="#1f2530" stroke-width="1" stroke-dasharray="3 3"/><line x1="119" y1="254" x2="301" y2="254" stroke="#1f2530" stroke-width="1.4"/><polygon points="110,254 119,250 119,258" fill="#1f2530"/><polygon points="310,254 301,250 301,258" fill="#1f2530"/><text x="210" y="272" font-size="13" text-anchor="middle" fill="#1f2530">4,0 m</text><line x1="210" y1="221" x2="210" y2="79" stroke="#1f2530" stroke-width="1.4"/><polygon points="210,70 206,79 214,79" fill="#1f2530"/><polygon points="210,230 206,221 214,221" fill="#1f2530"/><text x="218" y="155" font-size="13" text-anchor="start" fill="#1f2530">3,2 m</text></svg>`,
+            answer: { value: 2.9, unit: 'm', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 2.9, unit: 'm', tol: 0.02 },
+                { del: 'b', value: 1.9, unit: 'm', tol: 0.03 },
+            ],
+            solution: `Vi lägger in porten i ett koordinatsystem med origo på marken mitt under portens högsta punkt, och $x$-axeln längs marken. Då ligger portens ändar vid $x = -2{,}0$ och $x = 2{,}0$, och högsta punkten är (0; 3,2). Vi låter $h(x)$ vara portens höjd i meter på avståndet $x$ meter från mitten.
+
+Nollställena ger faktorformen
+
+$$ h(x) = k(x + 2)(x - 2) \\qquad (1) $$
+
+Insättning av (0; 3,2) i (1), $h(x) = k(x + 2)(x - 2)$:
+
+$$ 3{,}2 = k \\cdot 2 \\cdot (-2) = -4k \\iff k = -0{,}8 $$
+
+Med konjugatregeln blir modellen
+
+$$ h(x) = -0{,}8(x^2 - 4) = -0{,}8x^2 + 3{,}2 $$
+
+**a)** Skåpet bärs mitt i öppningen, så dess kanter är $0{,}6$ m från mitten, vid $x = -0{,}6$ och $x = 0{,}6$. Parabeln är lägst vid kanterna och högre mellan dem, så det är höjden vid kanterna som begränsar:
+
+$$ h(0{,}6) = -0{,}8 \\cdot 0{,}6^2 + 3{,}2 = -0{,}288 + 3{,}2 = 2{,}912 $$
+
+Rimlighet: skåpet får vara lite lägre än portens högsta höjd $3{,}2$ m.
+
+**Svar:** Högst $2{,}9$ m
+
+**b)** Vi söker de $x$ där porten är just $2{,}5$ m hög:
+
+$$ -0{,}8x^2 + 3{,}2 = 2{,}5 $$
+
+$$ -0{,}8x^2 + 3{,}2 \\mathbin{\\boldsymbol{-}} \\boldsymbol{3{,}2} = 2{,}5 \\mathbin{\\boldsymbol{-}} \\boldsymbol{3{,}2} $$
+
+$$ -0{,}8x^2 = -0{,}7 $$
+
+$$ \\frac{-0{,}8x^2}{\\boldsymbol{-0{,}8}} = \\frac{-0{,}7}{\\boldsymbol{-0{,}8}} $$
+
+$$ x^2 = 0{,}875 $$
+
+$$ x = \\pm\\sqrt{0{,}875} = \\pm 0{,}935\\ldots $$
+
+Skåpet ryms mellan $x = -0{,}935\\ldots$ och $x = 0{,}935\\ldots$, så den största bredden är
+
+$$ 2 \\cdot 0{,}935\\ldots = 1{,}870\\ldots $$
+
+Rimlighet: skåpet i b) är lägre än $2{,}9$ m och får därför vara bredare än skåpet i a), men smalare än portens $4{,}0$ m. Här får vi inte avrunda uppåt till $1{,}9$ m: ett skåp som är $1{,}9$ m brett tar i porten.
+
+**Svar:** Skåpet får vara knappt $1{,}9$ m brett (högst $1{,}87$ m).`,
+        },
+        {
+            level: 3,
+            question: `Grafen till andragradsfunktionen $f(x)$ har nollställena $x = -1$ och $x = 3$ och skär $y$-axeln i punkten $(0, c)$, där $c \\neq 0$.<br>a) Bestäm koordinaterna för grafens extrempunkt, uttryckta i $c$. Ange också för vilka värden på $c$ den är en maximipunkt.<br>b) För vilket värde på $c$ ligger extrempunkten på linjen $y = x + 5$?`,
+            answer: { value: 4.5, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 4.5, unit: '', etikett: '$c =$' },
+            ],
+            solution: `**a)** Nollställena ger faktorformen
+
+$$ f(x) = k(x + 1)(x - 3) \\qquad (1) $$
+
+Vi uttrycker $k$ i $c$ med punkten $(0, c)$. Insättning i (1), $f(x) = k(x + 1)(x - 3)$:
+
+$$ c = k(0 + 1)(0 - 3) = -3k \\iff k = -\\frac{c}{3} $$
+
+Extrempunkten ligger på symmetrilinjen, mitt emellan nollställena:
+
+$$ x = \\frac{-1 + 3}{2} = 1 $$
+
+Funktionsvärdet där är
+
+$$ f(1) = -\\frac{c}{3}(1 + 1)(1 - 3) = -\\frac{c}{3} \\cdot 2 \\cdot (-2) = \\frac{4c}{3} $$
+
+Extrempunkten är en maximipunkt när grafen öppnar sig nedåt, det vill säga när $k = -\\dfrac{c}{3} < 0$, vilket gäller när $c > 0$.
+
+**Svar:** Extrempunkten är $\\left(1, \\dfrac{4c}{3}\\right)$. Den är en maximipunkt när $c > 0$ och en minimipunkt när $c < 0$.
+
+**b)** Punkten $\\left(1, \\dfrac{4c}{3}\\right)$ ligger på linjen $y = x + 5$ när $y$-koordinaten är lika med linjens värde i $x = 1$:
+
+$$ \\frac{4c}{3} = 1 + 5 $$
+
+$$ \\frac{4c}{3} \\cdot \\boldsymbol{3} = 6 \\cdot \\boldsymbol{3} $$
+
+$$ 4c = 18 $$
+
+$$ \\frac{4c}{\\boldsymbol{4}} = \\frac{18}{\\boldsymbol{4}} $$
+
+$$ c = 4{,}5 $$
+
+Kontroll: $c = 4{,}5$ ger extrempunkten $\\left(1, \\dfrac{4 \\cdot 4{,}5}{3}\\right) = (1, 6)$, och $1 + 5 = 6$.
+
+**Svar:** $c = 4{,}5$`,
+        },
+        {
+            level: 3,
+            question: `Om andragradsfunktionen $f(x)$ vet man följande:
+
+- grafen skär $y$-axeln i punkten (0, 5)
+- funktionen har två nollställen, och de ligger $6$ enheter från varandra
+- funktionens största värde är $9$
+
+a) Undersök vilka funktioner $f(x)$ som uppfyller villkoren. Svara på formen $f(x) = ax^2 + bx + c$.<br>b) Ange maximipunkten för var och en av funktionerna.`,
+            answer: { value: 2, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', values: [2, -2], unit: '', etikett: 'maximipunkternas $x$-koordinater' },
+            ],
+            solution: `**a)** Vi vet inte var nollställena ligger, bara avståndet mellan dem. Vi kallar därför det mindre nollstället $s$. Då är det större $s + 6$, och faktorformen blir
+
+$$ f(x) = k(x - s)(x - s - 6) \\qquad (1) $$
+
+Vi har två obekanta, $k$ och $s$, och två villkor kvar att använda: det största värdet och skärningen med $y$-axeln.
+
+*Det största värdet.* Funktionen har ett största värde, så grafen öppnar sig nedåt och $k < 0$. Det största värdet antas på symmetrilinjen, mitt emellan nollställena:
+
+$$ x = \\frac{s + (s + 6)}{2} = s + 3 $$
+
+Insättning av $x = s + 3$ i (1), $f(x) = k(x - s)(x - s - 6)$:
+
+$$ f(s + 3) = k(s + 3 - s)(s + 3 - s - 6) = k \\cdot 3 \\cdot (-3) = -9k $$
+
+Det största värdet är 9:
+
+$$ -9k = 9 $$
+
+$$ \\frac{-9k}{\\boldsymbol{-9}} = \\frac{9}{\\boldsymbol{-9}} $$
+
+$$ k = -1 $$
+
+$k$ är negativ, som det ska vara. Värdet på $k$ beror alltså inte på var nollställena ligger, bara på avståndet mellan dem och det största värdet.
+
+*Skärningen med $y$-axeln.* Vi sätter in $k = -1$, $x = 0$ och $f(x) = 5$ i (1):
+
+$$ 5 = -1 \\cdot (0 - s)(0 - s - 6) $$
+
+$$ 5 = -(-s)(-s - 6) $$
+
+$$ 5 = -(s^2 + 6s) $$
+
+$$ 5 = -s^2 - 6s $$
+
+$$ 5 \\mathbin{\\boldsymbol{+}} \\boldsymbol{s^2 + 6s} = -s^2 - 6s \\mathbin{\\boldsymbol{+}} \\boldsymbol{s^2 + 6s} $$
+
+$$ s^2 + 6s + 5 = 0 $$
+
+*pq*-formeln med $p = 6$ och $q = 5$ ger
+
+$$ s = -3 \\pm \\sqrt{3^2 - 5} $$
+
+$$ s = -3 \\pm \\sqrt{4} $$
+
+$$ s = -3 \\pm 2 $$
+
+Ekvationen har två lösningar, $s = -1$ och $s = -5$, och båda ger en funktion som uppfyller alla villkoren.
+
+- $s = -1$: nollställena är $-1$ och $5$, och
+$$ f(x) = -(x + 1)(x - 5) = -(x^2 - 5x + x - 5) = -(x^2 - 4x - 5) = -x^2 + 4x + 5 $$
+- $s = -5$: nollställena är $-5$ och $1$, och
+$$ f(x) = -(x + 5)(x - 1) = -(x^2 - x + 5x - 5) = -(x^2 + 4x - 5) = -x^2 - 4x + 5 $$
+
+Kontroll: båda funktionerna ger $f(0) = 5$, och nollställena ligger $6$ enheter från varandra. De två graferna är varandras spegelbilder i $y$-axeln, och det är rimligt: villkoren säger ingenting om åt vilket håll från $y$-axeln grafen ligger.
+
+**Svar:** Två funktioner uppfyller villkoren: $f(x) = -x^2 + 4x + 5$ och $f(x) = -x^2 - 4x + 5$
+
+**b)** Maximipunkten ligger på symmetrilinjen $x = s + 3$, och funktionsvärdet där är det största värdet 9.
+
+- $s = -1$ ger $x = -1 + 3 = 2$.
+- $s = -5$ ger $x = -5 + 3 = -2$.
+
+Kontroll i den första funktionen: $f(2) = -2^2 + 4 \\cdot 2 + 5 = -4 + 8 + 5 = 9$.
+
+**Svar:** (2, 9) för $f(x) = -x^2 + 4x + 5$ och (−2, 9) för $f(x) = -x^2 - 4x + 5$`,
+        },
+        {
+            level: 3,
+            question: `Punkterna (−1, 5), (1, 1) och $(3, t)$ är givna, där $t$ är en konstant. Bestäm det värde på $t$ för vilket det **inte** finns någon andragradsfunktion vars graf går genom alla tre punkterna. Motivera ditt svar.`,
+            answer: { value: -3, unit: '' },
+            solution: `Vi söker en funktion $f(x) = ax^2 + bx + c$ med $a \\neq 0$ (annars är den inte en andragradsfunktion). Insättning av de tre punkterna ger
+
+$$
+\\begin{cases}
+a - b + c = 5 & (1) \\\\
+a + b + c = 1 & (2) \\\\
+9a + 3b + c = t & (3)
+\\end{cases}
+$$
+
+(2) − (1) ger
+
+$$ 2b = -4 \\iff b = -2 $$
+
+Insättning av $b = -2$ i (2), $a + b + c = 1$, ger
+
+$$ a - 2 + c = 1 \\iff c = 3 - a \\qquad (4) $$
+
+Vi sätter in $b = -2$ och (4), $c = 3 - a$, i (3), $9a + 3b + c = t$:
+
+$$ 9a + 3 \\cdot (-2) + 3 - a = t $$
+
+$$ 8a - 3 = t $$
+
+$$ a = \\frac{t + 3}{8} $$
+
+För varje värde på $t$ har systemet alltså exakt en lösning. Den lösningen är en andragradsfunktion precis när $a \\neq 0$, och $a = 0$ inträffar bara när
+
+$$ \\frac{t + 3}{8} = 0 \\iff t = -3 $$
+
+Då blir $b = -2$ och $c = 3$, och den enda funktion som går genom punkterna är $y = -2x + 3$, en rät linje. De tre punkterna ligger då på en rät linje, och en parabel kan inte gå genom tre punkter på en rät linje.
+
+Kontroll: $y = -2x + 3$ ger $y = 5$ för $x = -1$, $y = 1$ för $x = 1$ och $y = -3$ för $x = 3$.
+
+**Svar:** $t = -3$. Då ligger de tre punkterna på linjen $y = -2x + 3$. För alla andra värden på $t$ finns exakt en andragradsfunktion vars graf går genom punkterna.`,
+        },
+        {
+            level: 3,
+            question: `Grafen till en andragradsfunktion $f(x) = k(x - x_1)(x - x_2)$ har nollställena $x_1 = p$ och $x_2 = p + d$, där $d > 0$. Funktionens största värde är $M$, där $M > 0$.<br>a) Visa att $k = -\\dfrac{4M}{d^2}$.<br>b) I en fontän sprutar två vattenstrålar upp ur munstycken som sitter i vattenytan. Strålarnas banor beskrivs av andragradsfunktioner med samma värde på $k$. Den ena strålen träffar vattnet $1{,}2$ m från sitt munstycke och når som högst $0{,}90$ m över vattenytan. Den andra strålen når som högst $2{,}5$ m över vattenytan. Hur långt från sitt munstycke träffar den andra strålen vattnet?`,
+            answer: { value: 2.0, unit: 'm', tol: 0.02 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 2.0, unit: 'm', tol: 0.02 },
+            ],
+            solution: `**a)** Med de givna nollställena är
+
+$$ f(x) = k(x - p)(x - p - d) $$
+
+Grafen är symmetrisk kring en lodrät linje mitt emellan nollställena. Där antas funktionens största värde:
+
+$$ x = \\frac{p + (p + d)}{2} = p + \\frac{d}{2} $$
+
+Vi sätter in $x = p + \\dfrac{d}{2}$ i funktionen:
+
+$$ f\\left(p + \\frac{d}{2}\\right) = k\\left(p + \\frac{d}{2} - p\\right)\\left(p + \\frac{d}{2} - p - d\\right) = k \\cdot \\frac{d}{2} \\cdot \\left(-\\frac{d}{2}\\right) = -\\frac{kd^2}{4} $$
+
+Det största värdet är $M$, så
+
+$$ -\\frac{kd^2}{4} = M $$
+
+$$ -\\frac{kd^2}{4} \\cdot \\boldsymbol{\\left(-\\frac{4}{d^2}\\right)} = M \\cdot \\boldsymbol{\\left(-\\frac{4}{d^2}\\right)} $$
+
+$$ k = -\\frac{4M}{d^2} $$
+
+Divisionen med $d^2$ är tillåten eftersom $d > 0$. Eftersom $M > 0$ blir $k < 0$, och grafen öppnar sig nedåt, som den måste göra när funktionen har ett största värde. Därmed är sambandet visat för alla $p$, $d > 0$ och $M > 0$.
+
+**b)** Vi lägger varje stråle i ett koordinatsystem med $x$-axeln i vattenytan. Då är nollställena munstycket och platsen där strålen träffar vattnet, så $d$ är strålens längd längs vattenytan och $M$ är dess högsta höjd. Sambandet från a), $k = -\\dfrac{4M}{d^2}$, gäller för båda strålarna, var vi än lägger origo.
+
+För den första strålen är $d = 1{,}2$ och $M = 0{,}90$:
+
+$$ k = -\\frac{4 \\cdot 0{,}90}{1{,}2^2} = -\\frac{3{,}6}{1{,}44} = -2{,}5 $$
+
+Den andra strålen har samma $k = -2{,}5$ och $M = 2{,}5$. Vi sätter in i $k = -\\dfrac{4M}{d^2}$ och löser ut $d$:
+
+$$ -2{,}5 = -\\frac{4 \\cdot 2{,}5}{d^2} $$
+
+$$ -2{,}5 = -\\frac{10}{d^2} $$
+
+$$ -2{,}5 \\cdot \\boldsymbol{d^2} = -\\frac{10}{d^2} \\cdot \\boldsymbol{d^2} $$
+
+$$ -2{,}5d^2 = -10 $$
+
+$$ \\frac{-2{,}5d^2}{\\boldsymbol{-2{,}5}} = \\frac{-10}{\\boldsymbol{-2{,}5}} $$
+
+$$ d^2 = 4 $$
+
+$$ d = \\pm\\sqrt{4} $$
+
+$$ d = \\pm 2{,}0 $$
+
+$d$ är ett avstånd och $d > 0$, så $d = 2{,}0$.
+
+Rimlighet: med samma $k$ växer höjden med kvadraten på längden. Strålen är $\\dfrac{2{,}0}{1{,}2} \\approx 1{,}7$ gånger så lång och $\\dfrac{2{,}5}{0{,}90} \\approx 2{,}8$ gånger så hög, och $1{,}7^2 \\approx 2{,}8$.
+
+**Svar:** Cirka $2{,}0$ m från munstycket`,
+        },
+        {
+            level: 3,
+            question: `Vi undersöker alla andragradsfunktioner $f(x)$ vars grafer går genom punkterna (0, 3) och (2, 3).<br>a) Visa att varje sådan funktion kan skrivas $f(x) = kx(x - 2) + 3$, där $k \\neq 0$.<br>b) Bestäm $k$ så att grafen har exakt en gemensam punkt med $x$-axeln.<br>c) För vilka värden på $k$ saknar funktionen nollställen?`,
+            answer: { value: 3, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 3, unit: '', etikett: '$k =$' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Låt $f(x)$ vara en sådan funktion och bilda $g(x) = f(x) - 3$. Då är $g(x)$ också en andragradsfunktion, och
+
+$$ g(0) = f(0) - 3 = 3 - 3 = 0, \\qquad g(2) = f(2) - 3 = 3 - 3 = 0 $$
+
+Alltså har $g(x)$ nollställena $x = 0$ och $x = 2$. En andragradsfunktion har högst två nollställen, så faktorformen blir $g(x) = kx(x - 2)$ med $k \\neq 0$. Därmed är
+
+$$ f(x) = g(x) + 3 = kx(x - 2) + 3 $$
+
+**b)** Nollställena ges av
+
+$$ kx(x - 2) + 3 = 0 $$
+
+$$ kx^2 - 2kx + 3 = 0 $$
+
+Vi dividerar båda led med $k$, vilket går eftersom $k \\neq 0$:
+
+$$ x^2 - 2x + \\frac{3}{k} = 0 $$
+
+*pq*-formeln med $p = -2$ och $q = \\dfrac{3}{k}$:
+
+$$ x = 1 \\pm \\sqrt{1 - \\frac{3}{k}} \\qquad (1) $$
+
+Grafen har exakt en gemensam punkt med $x$-axeln när ekvationen har en dubbelrot, det vill säga när uttrycket under rottecknet i (1) är noll:
+
+$$ 1 - \\frac{3}{k} = 0 \\iff \\frac{3}{k} = 1 \\iff k = 3 $$
+
+Kontroll: $f(x) = 3x(x - 2) + 3 = 3x^2 - 6x + 3 = 3(x - 1)^2$, som har dubbelroten $x = 1$.
+
+**Svar:** $k = 3$
+
+**c)** Funktionen saknar nollställen när uttrycket under rottecknet i (1), $x = 1 \\pm \\sqrt{1 - \\dfrac{3}{k}}$, är negativt:
+
+$$ 1 - \\frac{3}{k} < 0 \\iff \\frac{3}{k} > 1 $$
+
+Vi delar upp i två fall.
+
+- Om $k < 0$ är $\\dfrac{3}{k}$ negativt och alltså inte större än 1. Då finns två nollställen. Grafen öppnar sig nedåt och går genom (0, 3), som ligger ovanför $x$-axeln, så den måste skära axeln.
+- Om $k > 0$ kan vi multiplicera båda led i $\\dfrac{3}{k} > 1$ med $k$ utan att vända olikhetstecknet, och får $3 > k$.
+
+Kontroll: för $k > 0$ är funktionens minsta värde $f(1) = k \\cdot 1 \\cdot (1 - 2) + 3 = 3 - k$, som är positivt precis när $k < 3$.
+
+**Svar:** När $0 < k < 3$`,
         },
     ],
 

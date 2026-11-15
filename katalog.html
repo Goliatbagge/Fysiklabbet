@@ -1526,6 +1526,29 @@
 
         // Renderar en markdown-sträng med samma pipeline som TeoriBody
         // (protect math, preprocesseringar, marked, restore, KaTeX, fit).
+        // Formler i flervalsalternativ (övningar och exit tickets) ska rymmas
+        // i sin ruta. En inline-formel är nowrap, så f(x) = (x − 2)(x − 5) + k
+        // stack ut ur rutan på en telefon (påpekat 2026-11-15). Formeln krymps
+        // därför ned till 75 % av normal storlek; räcker inte det får den
+        // bryta rad efter ett likhetstecken eller räknetecken, hellre än att
+        // brytas mitt i en parentes vid full storlek.
+        const VALFORMEL_MINSTA = 0.75;
+        function fitValformler(root) {
+            if (!root || !root.classList.contains('lab-ovning-choice-text')) return;
+            const avail = root.clientWidth;
+            if (!avail) return;
+            root.querySelectorAll('.katex').forEach(k => {
+                if (k.closest('.katex-display')) return;
+                k.style.fontSize = '';
+                k.style.whiteSpace = '';
+                const w = k.getBoundingClientRect().width;
+                if (w <= avail + 0.5) return;
+                const s = avail / w;
+                if (s >= VALFORMEL_MINSTA) k.style.fontSize = (1.21 * Math.floor(s * 1000) / 1000) + 'em';
+                else k.style.whiteSpace = 'normal';
+            });
+        }
+
         function MarkdownBody({ source, className }) {
             const ref = useRef(null);
             const html = useMemo(() => {
@@ -1546,14 +1569,16 @@
                     throwOnError: false,
                 });
                 const root = ref.current;
-                const fit = () => fitMathDisplays(root);
+                const fit = () => { fitMathDisplays(root); fitValformler(root); };
                 let cancelled = false;
                 const safeFit = () => { if (!cancelled) fit(); };
                 requestAnimationFrame(safeFit);
                 if (document.fonts && document.fonts.ready) {
                     document.fonts.ready.then(safeFit);
                 }
-                return () => { cancelled = true; };
+                const valRuta = root.classList.contains('lab-ovning-choice-text');
+                if (valRuta) window.addEventListener('resize', safeFit);
+                return () => { cancelled = true; if (valRuta) window.removeEventListener('resize', safeFit); };
             }, [html]);
             if (!html) return null;
             return (
@@ -3463,9 +3488,15 @@
             const NIVANAMN = { 1: 'Grund', 2: 'Mellan', 3: 'Avancerad' };
             const counts = { 1: 0, 2: 0, 3: 0 };
             for (const u of list) counts[u.level] = (counts[u.level] || 0) + 1;
+            // Sorterad på nivå (stabilt, källordningen behålls inom en nivå):
+            // nya uppgifter läggs sist i avsnittets array, så utan sortering
+            // hamnar nivåerna om vartannat i läget Alla (påpekat 2026-11-15).
+            const sorted = list.map((u, i) => [u, i])
+                .sort((a, b) => (a[0].level - b[0].level) || (a[1] - b[1]))
+                .map(p => p[0]);
             const filtered = selectedLevel === null
-                ? list
-                : list.filter(u => u.level === selectedLevel);
+                ? sorted
+                : sorted.filter(u => u.level === selectedLevel);
             return (
                 <div className="lab-ovningar">
                     <h3 className="lab-ovningar-heading">Övningar</h3>

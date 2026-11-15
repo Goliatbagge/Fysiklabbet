@@ -188,11 +188,27 @@ innehållet. Konkretiserat för Fysik 2:
 
 ## Antal per avsnitt
 
-Riktlinje: **minst 3 övningar N1 + 2 N2 + 1 N3**. Det är ett golv, inte
-ett tak: fler övningar är aldrig en nackdel (användarbeslut 2026-11-10).
-Lägg gärna till en uppgift när avsnittet förtjänar det, till exempel en
-begreppsuppgift vid sidan av räkneuppgifterna eller en uppgift som fångar
-en vanlig fälla. Korta avsnitt får ha färre.
+Riktlinje: **minst 7 Grund + 7 Mellan + 7 Avancerad** (användarbeslut
+2026-11-15, tidigare 3 + 2 + 1). Det är ett golv, inte ett tak: fler
+övningar är aldrig en nackdel (användarbeslut 2026-11-10). Undantag får
+göras för enstaka mycket introducerande avsnitt som inte bär sju olika
+uppgifter på en nivå.
+
+- **Nivåerna kalibreras mot nationella prov och kursprov.** Grund
+  motsvarar uppgifter som ger E-poäng, Mellan C-poäng och Avancerad
+  A-poäng. Kalibreringen per kurs står i
+  `.claude/ovningar-nya/kalibrering/<kurs>.md`. En Avancerad-uppgift får
+  inte vara enkel: den ska kräva flera steg utan given väg, en generell
+  lösning, modellering eller ett fullständigt resonemang.
+- **Uppgifterna är egna.** Skriv aldrig av eller skriv lätt om uppgifter ur
+  nationella prov, kursprov, läroböcker eller teorigenomgångens exempel.
+- **Figurer, diagram och tabeller** läggs in där de gör uppgiften
+  tydligare, ritade med samma omsorg som teorins figurer.
+- **Verktyg för påfyllning:** skriv nya uppgifter som ett fragment i
+  `.claude/ovningar-nya/<id>.js`, kör
+  `node .claude/ovningar-nya/testa.js <id> --bilder` (kontroller och
+  skärmdumpar av figurerna) och lägg in dem med
+  `node .claude/ovningar-nya/merga.js <id>`. Se filhuvudena.
 
 ### Minst en uppgift per formel
 

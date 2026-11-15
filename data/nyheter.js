@@ -103,6 +103,62 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-16-randerna-som-ser-i-3d",
+    date: "2026-11-16",
+    title: "Randigt ljus ger film i 3D med 150 000 bilder i sekunden",
+    deck: "Forskare vid INRS i Kanada har byggt ett system som mäter formen på föremål i tre dimensioner upp till 150 000 gånger per sekund, med vanliga lysdioder och en industrikamera. De har följt ett lönnfrö som börjar snurra, en öronpropp som studsar mot en fläkt och högtalarmembran som skälver tiotusentals gånger per sekund när de sänder ut ultraljud.",
+    category: "Optik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-11-16-randerna-som-ser-i-3d.jpg",
+    imageAlt: "Två par gröna lönnfrön med breda, ådriga vingar hänger på tunna skaft mot en helt svart bakgrund.",
+    imageCredit: "Foto: Fcb981, frön av skogslönn (Acer platanoides), via Wikimedia Commons (CC BY 2.5). Beskuren till bredformat. Bilden visar inte fröna i studien.",
+    tags: ["optik", "3d-mätning", "triangulering", "lysdiod", "höghastighetsfilm", "ljud", "ultraljud", "svävning", "frekvens", "amplitudmodulering", "rotation", "luftmotstånd", "autorotation", "lönnfrö", "inrs"],
+    sources: [
+      { name: "Phys.org: Ultrafast 3D imaging captures fleeting motion at 150,000 frames per second (INRS, 12 november 2026)", url: "https://phys.org/news/2026-11-ultrafast-3d-imaging-captures-fleeting.html" }
+    ],
+    research: {
+      citation: "C. Jiang och J. Liang, ”Ultrahigh-speed chromatically band-limited illumination profilometry”, Nature Communications 17, 11567 (2026). Kollegialt granskad, öppet tillgänglig (CC BY 4.0).",
+      url: "https://doi.org/10.1038/s41467-026-78478-w"
+    },
+    larare: {
+      moment: [
+        { label: "Periodtid, frekvens och vinkelhastighet", href: "katalog.html?id=fy2-1.4" },
+        { label: "Pulser, vågor och utbredningshastighet", href: "katalog.html?id=fy2-2.7" },
+        { label: "Ljudvågor", href: "katalog.html?id=fy2-2.10" }
+      ],
+      fragor: [
+        "Leksaksfläkten har 22 blad, och ett nytt blad passerar samma punkt var 1,73 ms. Beräkna fläktens periodtid, varvtalet i varv per minut och vinkelhastigheten i rad/s.",
+        "En högtalare spelar samtidigt två toner på 24 kHz och 26 kHz. Förklara med hjälp av hur vågor adderas varför membranets utslag växer och avtar, och varför det sker 2 000 gånger per sekund.",
+        "En ton på 25 kHz ska följas genom att membranets läge mäts många gånger per sekund. Varför skulle 30 000 mätningar per sekund ge en missvisande bild av rörelsen, medan 150 000 räcker?"
+      ]
+    },
+    body: [
+      { type: "p", html: "På hösten singlar skogslönnens frön ned som små helikoptrar. Den som vill se exakt hur ett frö börjar snurra måste följa dess form i tre dimensioner, tusentals gånger per sekund. Det har forskare vid Institut national de la recherche scientifique (INRS) i Québec i Kanada nu gjort, med ett system som mäter ytor i 3D med upp till 150&nbsp;000 bilder per sekund. Studien, med Cheng Jiang som försteförfattare och Jinyang Liang som ledare, är publicerad i <em>Nature Communications</em>." },
+      { type: "h2", text: "Ränder som böjer sig" },
+      { type: "p", html: "Principen går att prova hemma. Lys snett med ett mönster av raka ljusa och mörka ränder mot ett föremål och titta från ett annat håll. På ett plant golv ser ränderna raka ut, men där de faller på en kopp böjs de. Hur mycket en rand förskjuts beror på hur långt fram eller bak ytan ligger. Eftersom avståndet och vinkeln mellan projektorn och kameran är kända kan en dator räkna ut djupet i varje punkt med triangulering, samma geometri som en lantmätare använder." },
+      { type: "p", html: "Svårigheten är farten. Mönstren skapas oftast av ett chip täckt av mikroskopiska speglar, där varje spegel kan vinklas så att ljuset antingen når föremålet eller inte. Speglarna är bara av eller på, så mönstret blir svartvitt med skarpa kanter, medan mätningen kräver mjuka ränder som går jämnt från ljust till mörkt. För att få dem har man fått filtrera laserljus eller ställa projektorn lite ur fokus, vilket försämrar noggrannheten. Enligt forskarna har sådana system stannat vid omkring 22&nbsp;000 bilder per sekund. Snabbare system, upp till 100&nbsp;000 bilder per sekund, har krävt dyra höghastighetskameror som lagrar bilderna i ett internt minne och därför bara kan filma en kort stund." },
+      { type: "h2", text: "Lysdiodernas suddighet blir en fördel" },
+      { type: "p", html: "Gruppen löste problemet genom att utnyttja något som brukar ses som en brist. En lysdiod sänder inte ut en enda våglängd som en laser, utan ett band som här är 50 till 90&nbsp;nanometer brett. Forskarna konstruerade en projektionslins av färdiga linser i ett 3D-utskrivet rör, och den ger skarpast bild just vid lysdiodernas mittvåglängder, 460&nbsp;nm (blått), 527&nbsp;nm (grönt) och 620&nbsp;nm (rött). Övriga våglängder i bandet avbildas lite suddigare, och tillsammans jämnar de ut speglarnas skarpa kanter till mjuka ränder. Lysdioderna är dessutom ofarliga för ögonen, till skillnad från många lasrar." },
+      { type: "p", html: "Farten kommer av att varje kamerabild gör flera jobb. Medan kameran exponerar en bild visar speglarna fyra randmönster efter varandra, med olika vinklar och olika tätt mellan ränderna, och ränder i olika riktningar kan räknas isär i efterhand. I det snabbaste läget tänds dessutom den blå, den gröna och den röda lysdioden i tur och ordning under varje mönster, och färgkameran håller isär färgerna. En bild rymmer då tolv randmönster från tolv olika ögonblick. Spegelchipet byter mönster 50&nbsp;000 gånger per sekund och kameran tar 12&nbsp;500 bilder per sekund, vilket ger 150&nbsp;000 tredimensionella bilder per sekund. Kameran är en vanlig industrikamera som skickar bilderna vidare hela tiden, så filmen behöver inte rymmas i ett minne." },
+      { type: "image", src: "nyheter/bilder/2026-11-16-randerna-som-ser-i-3d-2.jpg", alt: "Fyra bilder i rad. Längst till vänster ett foto av något som ser ut som en lång korridor med tavlor på väggarna. De tre andra visar samma föremål som uppmätt 3D-form från tre håll, och från sidan syns att mitten sticker ut som spetsen på en pyramid.", caption: "Ett av forskarnas tester. Till vänster ett vanligt foto av en modell som ser ut som en lång korridor (skalstrecket är 10&nbsp;mm). Till höger den uppmätta formen sedd från tre håll: det som ser ut att ligga längst bort sticker i själva verket ut mot kameran.", credit: "Figur ur studien: C. Jiang och J. Liang, Nature Communications (2026) (CC BY 4.0). Beskuren." },
+      { type: "h2", text: "Fläkten och fröet" },
+      { type: "p", html: "I ett försök sköt forskarna en orange öronpropp mot en snurrande leksaksfläkt med 22 blad och filmade i färg med 25&nbsp;000 bilder per sekund. Bladen passerade en punkt med 1,73&nbsp;millisekunders mellanrum, så ett varv tog 38,1&nbsp;ms och fläkten snurrade omkring 1&nbsp;580 varv per minut. Öronproppen kom med farten 0,54&nbsp;m/s, trycktes ihop mot bladen i 1,72&nbsp;ms och for iväg med 1,03&nbsp;m/s. Fläkten hade alltså gett den rörelseenergi." },
+      { type: "p", html: "Lönnfröna filmades med 75&nbsp;000 bilder per sekund. Ett frö med en enda vinge släpptes tre gånger, i olika lägen, och varje gång började det snurra som en helikopter. Det kallas autorotation: luften som strömmar förbi det fallande fröet håller själv igång snurrandet. Vingen lutade först allt brantare, upp till mellan 50 och 60&nbsp;grader mot det vågräta, och planade sedan ut när rotationen stabiliserades. I alla tre försöken slutade vingen luta omkring 28&nbsp;grader. Fröna föll allt fortare de första 150&nbsp;millisekunderna, men när snurrandet kommit i gång bromsades de till omkring 1,3&nbsp;m/s. De två fröna där två vingar satt ihop började inte snurra, utan fortsatte att öka farten." },
+      { type: "image", src: "nyheter/bilder/2026-11-16-randerna-som-ser-i-3d-3.jpg", alt: "Överst tre foton av lönnfrön: ett med en vinge och två med två vingar. Under dem fem höga lådor där fröets uppmätta form ritats som grå punktmoln var 32:a millisekund på väg nedåt, med streckade banor. I de tre vänstra lådorna vrider sig fröet, i de två högra faller det nästan rakt.", caption: "Lönnfröna i försöket. Överst foton av ett frö med en vinge och två frön med två vingar. Under dem fröets uppmätta form var 32:a millisekund under fallet, med banorna för fröet och vingspetsarna streckade. De tre till vänster börjar snurra, de två till höger gör det inte.", credit: "Figur ur studien: C. Jiang och J. Liang, Nature Communications (2026) (CC BY 4.0). Beskuren." },
+      { type: "h2", text: "Högtalare som skälver i ultraljudstakt" },
+      { type: "p", html: "Mest oväntade var försöken med högtalare. Två högtalare bredvid varandra spelade ultraljud, alltså ljud med frekvenser över 20&nbsp;000&nbsp;Hz som människan inte hör. Den ena spelade samtidigt två toner på 24 och 26&nbsp;kHz. Två toner med nästan samma frekvens ger svävning: membranet svänger snabbt, men utslaget växer och avtar i takt med skillnaden mellan frekvenserna, 2&nbsp;kHz. Ur den uppmätta rörelsen fick forskarna fram svävningsfrekvensen 1,92&nbsp;kHz. Med 150&nbsp;000 bilder per sekund tas omkring sex bilder under varje svängning av en sådan ton." },
+      { type: "p", html: "Forskarna gömde också de fyra bokstäverna ”LACI” i morsekod på två ultraljudsfrekvenser, 25 och 30&nbsp;kHz, och lät den andra högtalaren fylla i luckorna, så att en ultraljudsmikrofon bara skulle uppfatta en jämn blandning. Kameran såg varje membran för sig och kunde läsa ut meddelandet." },
+      { type: "p", html: "I det sista försöket spelade en högtalare ordet ”hi”, men omvandlat till ultraljud: talet lades på en bärvåg på 25&nbsp;kHz med amplitudmodulering, på samma sätt som en AM-radiostation lägger ljud på en radiovåg. 1,7&nbsp;meter bort hängde ett tunt plastmembran som skulle efterlikna en gardin. Ur membranets skälvningar räknade forskarna fram talet igen och spelade upp det som ljud, med en avvikelse från originalet på drygt 13&nbsp;%. Det var alltså inget vanligt samtal som avlyssnades, utan tal som först hade flyttats upp till ultraljud." },
+      { type: "h2", text: "Ännu inte i realtid" },
+      { type: "p", html: "Forskarna ser tillämpningar i provning av roterande maskiner, i studier av frön för robotar som efterliknar naturen och i mätningar av droppar i små kanaler och av smält metall vid 3D-utskrift. Än så länge finns begränsningar. I det snabbaste läget är synfältet bara 3,5&nbsp;cm gånger 24,9&nbsp;cm, och djupupplösningen är omkring en millimeter. Lysdioderna kan bli varma vid långa mätningar, så att färgerna glider. Bilderna räknas dessutom om till 3D i efterhand, och nästa steg är att låta ett grafikkort göra det medan försöket pågår." },
+      { type: "fact", title: "Visste du?", items: [
+        "Med 150&nbsp;000 bilder per sekund går det 6,67&nbsp;mikrosekunder mellan bilderna. Under den tiden hinner ljudet i luft bara gå drygt 2&nbsp;mm.",
+        "Svävning hörs när en gitarr stäms. Två strängar med nästan samma ton ger ett pulserande ljud, och pulserna kommer glesare ju närmare varandra tonerna ligger. Svävningsfrekvensen är skillnaden mellan de två frekvenserna.",
+        "Ett snurrande lönnfrö faller långsammare än ett som inte snurrar, så vinden hinner föra det längre bort från moderträdet."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-15-den-forsta-grona-stjarnan",
     date: "2026-11-15",
     title: "En vit dvärg med natrium i atmosfären är den första stjärna som skulle se grön ut",

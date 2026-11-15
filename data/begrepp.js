@@ -4885,6 +4885,53 @@ window.BEGREPP = [
       { type: 'p', html: 'Förklaringen är att en stjärna inte har någon skarp yta. Ljuset som når oss kommer från ett lager av gas där det kan ta sig ut utan att stoppas. Tittar man rakt in mot skivans mitt ser man djupt ner, där gasen är varm och lyser starkt. Mot kanten går siktlinjen snett genom atmosfären, så man ser bara de yttre lagren, som är svalare. Svalare gas lyser svagare och rödare, och därför blir kanten mörkare.' },
       { type: 'p', html: 'Randfördunklingen är viktig när astronomer studerar exoplaneter som passerar framför sin stjärna. Planeten skymmer olika mycket ljus beroende på om den passerar nära mitten eller nära kanten, och det måste räknas med för att planetens storlek ska bli rätt.' }
     ]
+  },
+  {
+    id: 'triangulering',
+    term: 'Triangulering',
+    former: ['triangulering', 'trianguleringen', 'triangulera', 'triangulerar', 'triangulerade'],
+    kort: 'Att räkna ut avståndet till en punkt genom att se den från två olika ställen och mäta vinklarna, med geometrin hos en triangel.',
+    relaterade: ['svavning'],
+    body: [
+      { type: 'p', html: 'Håll upp en tumme framför ansiktet och blunda växelvis med vänster och höger öga. Tummen hoppar i sidled mot bakgrunden, och den hoppar mer ju närmare ansiktet den är. Hjärnan använder just den skillnaden mellan ögonens bilder för att bedöma avstånd. Det är triangulering: två observationspunkter med känt avstånd emellan, en punkt som ska mätas, och tillsammans bildar de en triangel.' },
+      { type: 'p', html: 'Känner man en sida i triangeln, baslinjen mellan de två observationspunkterna, och vinklarna vid dess ändar, går de övriga sidorna att räkna ut med trigonometri. Så har lantmätare kartlagt hela länder, och så mäter astronomer avståndet till närliggande stjärnor, med jordens bana runt solen som baslinje.' },
+      { type: 'p', html: 'Många 3D-skannrar bygger på samma idé, men byter ut det ena ögat mot en projektor. Projektorn lyser med en ljuspunkt, en linje eller ett randmönster, och en kamera vid sidan av ser var ljuset hamnar på föremålet. Ju längre fram ytan ligger, desto mer förskjuts ljuset i kamerans bild, och ur förskjutningen beräknas djupet punkt för punkt.' }
+    ]
+  },
+  {
+    id: 'svavning',
+    term: 'Svävning',
+    former: ['svävning', 'svävningen', 'svävningar', 'svävningarna', 'svävningsfrekvens', 'svävningsfrekvensen'],
+    kort: 'Ett pulserande ljud, eller en svängning vars utslag växer och avtar, som uppstår när två vågor med nästan samma frekvens läggs ihop.',
+    relaterade: ['interferens', 'amplitudmodulering'],
+    body: [
+      { type: 'p', html: 'Slå an två gitarrsträngar som nästan, men inte riktigt, är stämda till samma ton. Ljudet blir inte jämnt utan pulserar: starkt, svagt, starkt, svagt. När strängarna stäms närmare varandra kommer pulserna allt glesare, och när de är helt rätt stämda försvinner de. Pulserna kallas svävning, och gitarrister använder dem för att stämma instrumentet.' },
+      { type: 'p', html: 'Förklaringen är att vågor läggs ihop. Ibland är de två vågorna i takt, så att topp hamnar på topp och ljudet blir starkt. Eftersom den ena svänger lite fortare glider de sedan isär, tills topp hamnar på dal och de nästan släcker ut varandra. Sedan kommer de i takt igen. Antalet pulser per sekund, svävningsfrekvensen, är skillnaden mellan de två frekvenserna. Toner på 440&nbsp;Hz och 443&nbsp;Hz ger tre pulser per sekund.' },
+      { type: 'p', html: 'Svävning finns för alla sorters vågor och svängningar, inte bara för ljud. Två toner med ultraljud som ligger nära varandra kan till exempel ge en svävning som ligger inom det hörbara området, även om ingen av tonerna själv går att höra.' }
+    ]
+  },
+  {
+    id: 'amplitudmodulering',
+    term: 'Amplitudmodulering',
+    former: ['amplitudmodulering', 'amplitudmoduleringen', 'amplitudmodulerad', 'amplitudmodulerat', 'amplitudmodulerade', 'bärvåg', 'bärvågen', 'bärvågor', 'bärvågorna'],
+    kort: 'Ett sätt att skicka en signal, till exempel tal, med hjälp av en snabb bärvåg vars utslag får växa och avta i takt med signalen. Förkortas AM.',
+    relaterade: ['svavning'],
+    body: [
+      { type: 'p', html: 'Tal och musik består av svängningar på några hundra till några tusen hertz. Sådana långsamma svängningar går inte att sända direkt som radiovågor över långa avstånd. Lösningen är att ta en våg med mycket högre frekvens, en bärvåg, och låta talet styra hur stort dess utslag är. När talet är starkt blir bärvågens utslag stort, när det är svagt blir utslaget litet. Bärvågen svänger lika snabbt hela tiden, men dess höjd ritar av talets form.' },
+      { type: 'p', html: 'Det kallas amplitudmodulering, eftersom det är amplituden, utslaget, som förändras. Det är så AM-radio fungerar. Mottagaren gör det omvända: den följer hur bärvågens utslag växer och avtar och får tillbaka den ursprungliga signalen. Det steget kallas demodulering.' },
+      { type: 'p', html: 'Samma princip kan användas med andra slags vågor än radiovågor. Tal kan till exempel läggas på en bärvåg av ultraljud, som är för hög för att höras, och plockas fram igen hos mottagaren. Ett annat vanligt sätt att lägga en signal på en bärvåg är att låta frekvensen variera i stället för amplituden, och det kallas frekvensmodulering, FM.' }
+    ]
+  },
+  {
+    id: 'autorotation',
+    term: 'Autorotation',
+    former: ['autorotation', 'autorotationen'],
+    kort: 'När luften som strömmar förbi ett fallande föremål med vingar får det att snurra av sig självt, så att snurrandet bromsar fallet. Så faller lönnfrön och helikoptrar utan motorkraft.',
+    body: [
+      { type: 'p', html: 'Släpp ett lönnfrö med en vinge från en balkong. Först faller det nästan som en sten, men efter en kort stund börjar det snurra, och sedan singlar det ned mycket långsammare. Ingenting driver fröet runt. Det är luften som strömmar förbi när fröet faller som sätter fart på snurrandet, och det kallas autorotation, ungefär självrotation.' },
+      { type: 'p', html: 'Vingen fungerar som ett rotorblad på en helikopter. När den snurrar möter den luften snett, och luften trycker då på vingen med en kraft som dels håller igång rotationen, dels pekar uppåt och bromsar fallet. Fröet når därför en jämn fart som är mycket lägre än för ett frö som inte snurrar, och vinden hinner föra det längre bort från trädet.' },
+      { type: 'p', html: 'Helikopterpiloter övar autorotation för det fall att motorn stannar. Rotorn får då snurra fritt, driven av luften som strömmar upp genom den när helikoptern sjunker, och piloten kan landa under kontroll. Ingenjörer studerar också lönnfrön för att bygga små flygande sensorer och drönare som kan singla ned långsamt.' }
+    ]
   }
 ];
 

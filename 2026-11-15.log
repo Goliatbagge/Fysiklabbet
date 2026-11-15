@@ -97,3 +97,11 @@
 19:17:56  [svar] Claude avslutade med kod 0
 19:17:56  [svar] VARNING: svarskontrollen gav inget SVAR-besked. Försöker igen vid nästa körning.
 19:17:56  [svar] === Nyhetsjobb: slut ===
+21:29:38  [svar] === Nyhetsjobb: start (2026-11-15) ===
+21:29:46  [svar] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+21:30:44  [svar] I checked Gmail for review-email threads. Using the exact query (`subject:[Nyhet newer_than:4d`) returned no results, and widening the search to all threads with "[Nyhet" in the subject found just **one** such thread ever sent — from 2026-10-29 (the fusion-plasma article review), which is well outside the 4-day window and has no reply (`messageCount: 1`).
+21:30:44  [svar] 
+21:30:44  [svar] So: **no `[Nyhet` review threads exist from the last 4 days**, and nothing needs processing. This likely means the daily news job hasn't sent a review mail recently — possibly worth checking why (e.g. via the `nyhetsjobb-logg` branch) if you expected one.
+21:30:45  [svar] Claude avslutade med kod 0
+21:30:45  [svar] VARNING: svarskontrollen gav inget SVAR-besked. Försöker igen vid nästa körning.
+21:30:45  [svar] === Nyhetsjobb: slut ===

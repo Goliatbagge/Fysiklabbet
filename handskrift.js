@@ -28471,9 +28471,32 @@
     T.lbl('AD', 252, 150, BLUE);
     T.stepEnd();
 
-    /* ---- vägskillnaden ---- */
+    /* ---- först formeln för det som söks: då syns vad som behövs ---- */
     var y = 424;
     T.tanke(T.bubble(120, T.bubbleTop(340 + 96), bw, [
+      [['Frekvensen söks. Jag börjar med']],
+      [['formeln som ger f, så ser jag']],
+      [['vad jag behöver ta reda på.']]
+    ]));
+    T.str('Frekvens', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.35 * F;
+    T.fracH('v', 'λ', T.str('v=f·λ⟺f=', padL, y), y);
+    T.stepEnd();
+
+    y += adv + 1.7 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['Ljudets hastighet i luft slår']],
+      [['jag upp i tabellen. Våglängden']],
+      [['måste jag räkna fram.']]
+    ]));
+    var klam = valueBracket(acts, ['v=340 m/s', 'λ=?'], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+
+    /* ---- vägskillnaden ---- */
+    y += adv + 2.2 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
       [['Vid D är ljudet svagast. Det']],
       [['beror på hur mycket längre']],
       [['ljudet från A har gått.']]
@@ -28489,7 +28512,7 @@
       [['Triangeln ABD är rätvinklig, så']],
       [['AD får jag med Pythagoras sats.']]
     ]));
-    var klam = valueBracket(acts, [
+    klam = valueBracket(acts, [
       ['AD=', { rot: 'AB^2+BD^2' }, '=', { rot: '6,4^2+12^2' }, ' m=13,6 m'],
       'BD=12 m'
     ], padL, y, T.s, F);
@@ -28549,20 +28572,10 @@
 
     /* ---- frekvensen ---- */
     y += adv + 2.2 * F;
-    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
-      [['Med våglängden och ljudets']],
-      [['hastighet får jag frekvensen.']]
-    ]));
-    T.str('Frekvens', padL, y, null, 0.62);
-    T.pause(300);
-    y += 2.35 * F;
-    T.fracH('v', 'λ', T.str('v=f·λ⟺f=', padL, y), y);
-    T.stepEnd();
-
-    y += adv + 1.7 * F;
     T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
-      [['Ljudets hastighet i luft slår']],
-      [['jag upp i tabellen.']]
+      [['Nu har jag våglängden. Både v']],
+      [['och λ är kända, så jag kan']],
+      [['räkna ut frekvensen.']]
     ]));
     klam = valueBracket(acts, ['v=340 m/s', 'λ=3,2 m'], padL, y, T.s, F);
     T.stepEnd();
@@ -28573,9 +28586,9 @@
       [['Nu sätter jag in värdena ur']],
       [['klammern i formeln.']]
     ]));
-    var xIns = T.str('=106,25 Hz',
-                     T.fracH('340', '3,2', T.str('f=', padL, y), y) + 0.15 * F,
-                     y);
+    var xIns = T.fracH('v', 'λ', T.str('f=', padL, y), y) + 0.15 * F;
+    xIns = T.fracH('340', '3,2', T.str('=', xIns, y), y) + 0.15 * F;
+    xIns = T.str('=106,25 Hz', xIns, y);
     T.stepEnd();
 
     T.tanke(T.bubble(140, T.bubbleTop(y + 1.1 * F), bw, [

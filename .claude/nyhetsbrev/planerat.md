@@ -222,13 +222,14 @@ Bocka av eller stryk punkter när de är klara och har nämnts i ett brev.
 
 - **Genomgångar på film i Fysik nivå 2: SKA MED I BREVET 2026-11-22**
   (uttryckligt önskemål 2026-11-16: "ta också upp det i nästa veckas
-  veckobrev"). Fyra avsnitt i kapitel 1 har fått en animerad genomgångsfilm
+  veckobrev"). Fem avsnitt i kapitel 1 har fått en animerad genomgångsfilm
   med berättarrösten, inbäddad överst i avsnittet (pushat 2026-11-16, commit
   6c065670). Filmerna ligger också på YouTube-kanalen, i spellistan Fysik
   nivå 2:
   - 1.1 Kraftmoment: `https://fysiklabbet.se/katalog.html?id=fy2-1.1&block=genomgang-film` (YouTube VBMcXQEvcL0)
   - 1.2 Mer kraftmoment: `https://fysiklabbet.se/katalog.html?id=fy2-1.2&block=genomgang-film` (eSxZe6982IA)
   - 1.3 Stabilitet: `https://fysiklabbet.se/katalog.html?id=fy2-1.3&block=genomgang-film` (7-zVSmAQ-0A)
+  - 1.4 Periodtid, frekvens, radianer och vinkelhastighet: `https://fysiklabbet.se/katalog.html?id=fy2-1.4&block=genomgang-film` (mpqDiYrvbqQ, tillkom senare samma dag)
   - 1.5 Cirkulär rörelse: `https://fysiklabbet.se/katalog.html?id=fy2-1.5&block=genomgang-film` (rhM0lhXNhpo)
   Ge det en egen punkt med bild under "Nytt på Fysiklabbet". Det här ska fram:
   begreppen och formlerna förklaras steg för steg med animerade figurer, utan

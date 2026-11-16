@@ -1,0 +1,35 @@
+03:15:02  [idag] === Nyhetsjobb: start (2026-11-16) ===
+03:15:06  [idag] Dagens nyhet finns (förberedd i går).
+03:15:06  [idag] Startar Claude Code (headless, modell opus, nyckel)...
+03:20:02  [imorgon] === Nyhetsjobb: start (2026-11-16) ===
+03:20:02  [imorgon] En körning pågår redan (lås 5 min gammalt). Avslutar.
+03:28:24  [idag] Artikeln för 17 november är committad på `nyhetsjobb` (f30a207f). Jag har inte pushat och inte skickat något mejl.
+03:28:24  [idag] 
+03:28:24  [idag] **Rubrik:** *Den rekordavlägsna galaxen var en kall brun dvärg i Vintergatan* (id `2026-11-17-galaxen-som-var-en-brun-dvarg`, kategori Astronomi)
+03:28:24  [idag] 
+03:28:24  [idag] - **Valet:** Capotauro var uppslaget som teasades i nyhetsbrevet 2026-11-15, och den här artikeln löser in det löftet inom fönstret måndag–lördag. Grannartikeln 2026-11-16 handlar om optik, så det blir inte samma område två dagar i rad.
+03:28:24  [idag] - **Innehåll:** Capotauro såg ut att kunna vara en galax vid z ≈ 32. Nya bilder från James Webb 3,5 år senare visar att den har flyttat sig 0,132 bågsekunder på himlen. Det är alltså en Y-dvärg på omkring 350 K, cirka 730 parsec (ungefär 2 400 ljusår) bort, med en fart tvärs synlinjen på omkring 130 km/s. Studien är Liu m.fl., MNRAS 553 (2026), kollegialt granskad och öppen (CC BY 4.0).
+03:28:24  [idag] - **Källa:** OUP spärrade fulltexten, så jag läste studien i förtrycket arXiv:2608.07461v1. Utgivaren kontrollerade att den publicerade sammanfattningen stämmer med förtrycket.
+03:28:24  [idag] - **Granskning:** Utgivaren gav först RÄTTA FÖRST med två punkter:
+03:28:24  [idag]   - Det är jämförelsedvärgarna som slutar vid typ Y1, inte de kända Y-dvärgarna.
+03:28:24  [idag]   - Det är rörelsen, inte den oförändrade ljusstyrkan, som utesluter supernovatolkningen.
+03:28:24  [idag] 
+03:28:24  [idag]   Båda är rättade, och efterkontrollen gav GODKÄND.
+03:28:24  [idag] - **Bilder:** Inga AI-bilder. Huvudbilden är en konstnärlig tolkning av en brun dvärg från NASA/ESA (CC BY 4.0), och bildkrediten säger att den inte visar Capotauro. I brödtexten ligger James Webbs mosaik över CEERS-fältet (CC BY 4.0).
+03:28:24  [idag] - **Ordlistan:** Tre nya begrepp: brun dvärg (inklusive formerna för Y-dvärg), egenrörelse och parallax.
+03:28:24  [idag] - **Kontroller:** `build-nyheter-og.js` är körd. `verify-navigation`, `verify-begrepp`, `verify-sitemap` och `verify-nbsp-enhet` ger inga fel. `verify-sprak` ger bara tre fel, alla i äldre artiklar.
+03:28:24  [idag] - **Loggar:** `publicerat.md` och `granskningar.md` är uppdaterade. I `ko.md` är Capotauro borttagen och brevteasern flyttad till uppslaget om KM3NeT/ORCA och Lorentzinvariansen. En dubblettpost om samma studie är också borttagen.
+03:28:24  [idag] 
+03:28:24  [idag] Bygget skrev om många delningssidor och några i18n-filer, men git visade bara radslutsvarningar för dem och jag jämförde aldrig innehållet. Jag har inte committat dem utan återställt dem. Det enda okommittade som finns kvar är jobbets egen loggkatalog.
+03:28:24  [idag] 
+03:28:24  [idag] **Mpemba-uppslaget går fortfarande inte att skriva.** Det fanns inget förtryck på arXiv i dag heller, och fönstret för ditt önskemål (senast lördag 2026-11-14) har stängt.
+03:28:25  [idag] Claude avslutade med kod 0
+03:28:32  [idag] Pushat till main.
+03:28:32  [idag] Artikel 2026-11-17 pushad: 2026-11-17-galaxen-som-var-en-brun-dvarg
+03:30:02  [idag] https://fysiklabbet.se/nyheter.html?forhand=2026-11-17-galaxen-som-var-en-brun-dvarg
+03:30:02  [idag] Mejlet byggt av mallen (C:\claude\Fysiklabbet-nyhetsjobb\.claude\nyheter\logg\mejl-2026-11-17).
+03:30:02  [idag] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+03:30:53  [idag] Mejlet är skickat till [ägaren]. [[UTGIVARE]] ersattes i båda texterna med: utgivaren bad att "de kända Y-dvärgarna" skulle rättas till jämförelsedvärgarna (inga mallar senare än Y1) och att det är rörelsen, inte den oförändrade ljusstyrkan, som avfärdar supernovatolkningen — båda rättelserna är införda enligt granskningsloggen.
+03:30:54  [idag] Claude avslutade med kod 0
+03:30:54  [idag] Mejlet till ägaren är skickat.
+03:30:54  [idag] === Nyhetsjobb: slut ===

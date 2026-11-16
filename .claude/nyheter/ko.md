@@ -12,17 +12,14 @@ Format per post:
 
 ## Kö
 
-- **En kall brun dvärg utklädd till tidig galax (”Capotauro”, påstådd galax vid z ≈ 32)** **[BREVTEASER — teasad i brevet 2026-11-15, publiceras TIDIGAST måndag 2026-11-16, senast lördag 2026-11-21. OBS astronomi: inte 2026-11-16 (grannen 2026-11-15 är astronomi), ta den 2026-11-17]** (nominerad 2026-11-09: udda och lätt att sammanfatta, en ”galax” från universums barndom som visade sig vara en kall brun dvärg i närheten, avslöjad av att den flyttat sig på himlen; originalet ÖPPET, MNRAS CC BY 4.0 enligt Crossref, förtryck arXiv 2608.07461, titel ”A clear detection of proper motion confirms that the claimed z ≃ 32 galaxy candidate, Capotauro, is a Y-type brown dwarf”; tidigare förtryck arXiv 2509.01664) — astronomi/JWST; en liten förskjutning avslöjade förväxlingen. MNRAS 2026, DOI 10.1093/mnras/stag2055 (öppen). OBS astronomi 2026-11-03. Källa (Phys.org 2026-11-03): https://phys.org/news/2026-11-tiny-shift-exposes-cold-brown.html
-  (tillagd 2026-11-04)
+- **KM3NeT/ORCA prövar Lorentzinvariansen med atmosfäriska neutriner från Medelhavets botten** **[BREVTEASER]** (nominerad 2026-11-16: Einsteins relativitetsteori prövad med neutriner som fångas av ljussensorer på havsbotten, lätt att sammanfatta; förtrycket arXiv 2603.04264 öppet, läs fulltexten före publicering) — partikelfysik/relativitet; 5 828 händelser på 1,4 år med sex detektorenheter, inga avvikelser. JCAP 2026, arXiv 2603.04264 (öppen). OBS partikelfysik 2026-11-05. Källa (Phys.org 2026-11-04): https://phys.org/news/2026-11-einstein-laws-bottom-mediterranean-sea.html
+  (tillagd 2026-11-05)
 
 - **Instabil plasma värmer sig själv med vågor den skapar (Large Helical Device, NIFS, Japan)** — plasmafysik/fusion; vågor från instabiliteter förvränger partiklarnas hastighetsfördelning, som sedan breds ut (uppvärmning). Katsumi Ida m.fl., ”Direct observation of phase-space dynamics during energetic-particle-driven MHD bursts”, Communications Physics (2026), DOI 10.1038/s42005-026-02939-3, ÖPPEN (nature.com laddade 2026-11-15). Teknisk men fusionsvinkeln är bra. Källa (Phys.org 2026-11-13): https://phys.org/news/2026-11-unstable-plasma-generates-reveal.html
   (tillagd 2026-11-15)
 
-- **Mpembaeffekten i en enda qubit: tillståndet som börjar ”längst bort” når jämvikt först (stark kvant-Mpembaeffekt)** **[ANVÄNDARENS ÖNSKEMÅL 2026-11-09: skriv om den här veckan, publiceras TIDIGAST 2026-11-11 och SENAST lördag 2026-11-14; går före övriga uppslag utom en teaser-skuld]** — Southeast University (Xiang Zhan, Peng Xue), ”Genuine Quantum Strong Mpemba Effect by Eliminating Coherence”, Physical Review Letters 2026, DOI 10.1103/z9t9-mwgv (peer review-granskad). En qubit kodad i en fotons polarisation, Davies-avbildningen byggd av vågplattor (temperatur och tid i plattornas vinklar); ett energiegentillstånd (utan koherens) och en superposition (med koherens) följs med kvanttillståndstomografi, och egentillståndet når jämvikt snabbare trots högre fri energi utanför jämvikt. Bygger på teorin från Trinity College Dublin/LMU München 2024. Ingång: Mpembaeffekten (varmt vatten som fryser fortare), termisk jämvikt, superposition, polarisation. Kvantfysik, senast 2026-10-19, så ingen krock. OBS: originalet ej läst, PRL ligger bakom betalvägg; leta arXiv-förtryck. KONTROLLERAT 2026-11-10: bara abstractet på journals.aps.org (pdf ger 401), inget förtryck på arXiv (sökt på titel, författare Zhan/Xue och Davies+Mpemba); därför skrevs lönnlövsnyheten 2026-11-11 i stället. KONTROLLERAT IGEN 2026-11-11: fortfarande inget förtryck på arXiv; snurrnyheten 2026-11-12 skrevs i stället. KONTROLLERAT 2026-11-12: fortfarande inget förtryck; fibernyheten 2026-11-13 skrevs i stället. KONTROLLERAT 2026-11-13: fortfarande inget förtryck (arXiv-API abs:Mpemba AND abs:coherence, senaste träffar andra grupper); heliumdroppsnyheten 2026-11-14 skrevs i stället. KONTROLLERAT 2026-11-14: fortfarande inget förtryck; den gröna vita dvärgen 2026-11-15 skrevs i stället. FÖNSTRET HAR STÄNGT (lördag 2026-11-14) utan att artikeln kunde skrivas: SÄG TILL ANVÄNDAREN att den inte går att skriva utan fulltext. Försök igen, annars säg till användaren att den inte går att skriva utan fulltext. Källa (Phys.org 2026-11-09): https://phys.org/news/2026-11-optical-strong-mpemba-effect-qubit.html
+- **Mpembaeffekten i en enda qubit: tillståndet som börjar ”längst bort” når jämvikt först (stark kvant-Mpembaeffekt)** **[ANVÄNDARENS ÖNSKEMÅL 2026-11-09: skriv om den här veckan, publiceras TIDIGAST 2026-11-11 och SENAST lördag 2026-11-14; går före övriga uppslag utom en teaser-skuld]** — Southeast University (Xiang Zhan, Peng Xue), ”Genuine Quantum Strong Mpemba Effect by Eliminating Coherence”, Physical Review Letters 2026, DOI 10.1103/z9t9-mwgv (peer review-granskad). En qubit kodad i en fotons polarisation, Davies-avbildningen byggd av vågplattor (temperatur och tid i plattornas vinklar); ett energiegentillstånd (utan koherens) och en superposition (med koherens) följs med kvanttillståndstomografi, och egentillståndet når jämvikt snabbare trots högre fri energi utanför jämvikt. Bygger på teorin från Trinity College Dublin/LMU München 2024. Ingång: Mpembaeffekten (varmt vatten som fryser fortare), termisk jämvikt, superposition, polarisation. Kvantfysik, senast 2026-10-19, så ingen krock. OBS: originalet ej läst, PRL ligger bakom betalvägg; leta arXiv-förtryck. KONTROLLERAT 2026-11-10: bara abstractet på journals.aps.org (pdf ger 401), inget förtryck på arXiv (sökt på titel, författare Zhan/Xue och Davies+Mpemba); därför skrevs lönnlövsnyheten 2026-11-11 i stället. KONTROLLERAT IGEN 2026-11-11: fortfarande inget förtryck på arXiv; snurrnyheten 2026-11-12 skrevs i stället. KONTROLLERAT 2026-11-12: fortfarande inget förtryck; fibernyheten 2026-11-13 skrevs i stället. KONTROLLERAT 2026-11-13: fortfarande inget förtryck (arXiv-API abs:Mpemba AND abs:coherence, senaste träffar andra grupper); heliumdroppsnyheten 2026-11-14 skrevs i stället. KONTROLLERAT 2026-11-14: fortfarande inget förtryck; den gröna vita dvärgen 2026-11-15 skrevs i stället. KONTROLLERAT 2026-11-16: fortfarande inget förtryck (arXiv abs:Mpemba AND abs:coherence, senaste träffar andra grupper); Capotauro 2026-11-17 skrevs i stället. FÖNSTRET HAR STÄNGT (lördag 2026-11-14) utan att artikeln kunde skrivas: SÄG TILL ANVÄNDAREN att den inte går att skriva utan fulltext. Försök igen, annars säg till användaren att den inte går att skriva utan fulltext. Källa (Phys.org 2026-11-09): https://phys.org/news/2026-11-optical-strong-mpemba-effect-qubit.html
   (tillagd 2026-11-09)
-
-- **KM3NeT/ORCA prövar Lorentzinvarians med 5 828 atmosfäriska neutriner på Medelhavets botten** — partikelfysik/relativitet; inga avvikelser. JCAP 2026(11) 012, DOI 10.1088/1475-7516/2026/11/012 (troligen förtryck på arXiv, ej kontrollerat). Källa (Phys.org 2026-11-04): https://phys.org/news/2026-11-einstein-laws-bottom-mediterranean-sea.html
-  (tillagd 2026-11-13)
 
 - **Misstänkt svart hål i NGC 1850 (Stora magellanska molnet) visar sig vara en snabbt roterande stjärna** — astronomi; förtryck arXiv 2610.37262 (ej granskat), Seeburger m.fl., Liverpool John Moores. Källa (Phys.org 2026-11-12): https://phys.org/news/2026-11-black-hole-rapidly-star.html
   (tillagd 2026-11-13)
@@ -73,9 +70,6 @@ Format per post:
   (tillagd 2026-11-06)
 
 - **SLAC: kiralt altermagnon i MnTe, cirkulärpolariserad röntgenspridning vid ESRF** — magnetism; ”avgörande belägg” för altermagnetism. Jost m.fl., Science 394, 541 (2026), DOI 10.1126/science.adv3196 (öppenhet ej kontrollerad). Altermagnetism kördes 2026-07-26, så vinkeln måste vara ny. Källa (ScienceDaily 2026-11-04): https://www.sciencedaily.com/releases/2026/11/261104012256.htm
-  (tillagd 2026-11-05)
-
-- **KM3NeT/ORCA prövar Lorentzinvariansen med atmosfäriska neutriner från Medelhavets botten** — partikelfysik/relativitet; 5 828 händelser på 1,4 år med sex detektorenheter, inga avvikelser. JCAP 2026, arXiv 2603.04264 (öppen). OBS partikelfysik 2026-11-05. Källa (Phys.org 2026-11-04): https://phys.org/news/2026-11-einstein-laws-bottom-mediterranean-sea.html
   (tillagd 2026-11-05)
 
 - **Japan skjuter upp MMX, provhämtning från Mars måne Phobos** — rymdforskning. Källa (Physics World): https://physicsworld.com/a/japan-launches-sample-return-mission-to-marss-moon-phobos/
@@ -219,7 +213,6 @@ Format per post:
 - **Tjernobyls bränslepartiklar har hållit ihop i 40 år** — sex heta partiklar (8–50 mikrometer) från 1986 analyserade med synkrotronröntgendiffraktion (Hannover + HZDR, Rossendorf Beamline i Grenoble): UO2 och U4O9 i stort sett intakta, även U3O8 och zirkoniumblandade faser. Ingång: radioaktivitet, kristallstruktur, röntgendiffraktion (Bragg). OBS 2026-10-07: studien är öppen (CC BY 4.0) men ScienceDirect visade robotkontroll för både curl och Chrome, så fulltexten gick inte att läsa; bara abstractet via Europe PMC. Försök igen från annan väg (HZDR-publikationsdatabasen, Hannovers repositorium). Journal of Hazardous Materials 505, 141533, DOI 10.1016/j.jhazmat.2026.141533. OBS 2026-10-08: fortfarande 403 från ScienceDirect via curl; Europe PMC har bara abstractet (PMID 41722407), ingen PMC-fulltext. Källa (Phys.org 2026-10-06): https://phys.org/news/2026-10-chernobyl-particles-reveal-unexpectedly-stable.html
   (tillagd 2026-10-07)
 
-
 - **Fusionständning: värm först, fyll på bränsle sedan** — PPPL har räknat om Lawsonkriteriet med heliumaska, föroreningar (volfram: en del på 10 000 fördubblar trycket som krävs), synkrotronstrålning och temperaturberoende värmeförluster, och föreslår en energisnålare väg runt toppen. Ingång: fusion, Lawsonkriteriet, varför plasma måste vara både hett och tätt. OBS: teoretiskt, PRL (DOI 10.1103/mmc9-nzfx) troligen låst, inget arXiv-förtryck hittat 2026-10-06. Källa (Phys.org 2026-10-05): https://phys.org/news/2026-10-path-fusion-ignition-fuel.html
   (tillagd 2026-10-06)
 
@@ -257,7 +250,6 @@ Format per post:
   inte för allt. Källa (Phys.org 2026-09-29):
   https://phys.org/news/2026-09-glass-transparent-terahertz.html
   (tillagd 2026-09-29)
-
 
 - **Laserns frekvens avläst ur en enda bild** — ett roterande ljusmönster gör att våglängden går att läsa av i
   en ögonblicksbild i stället för med ett spektrometersvep. Ingång: interferens, våglängd och frekvens, och
@@ -346,7 +338,6 @@ Format per post:
   OBS: optik behandlades 2026-09-12 och 2026-09-14, låt det gå tid. Källa (ScienceDaily 2026-09-15):
   https://www.sciencedaily.com/releases/2026/09/260914102432.htm
   (tillagd 2026-09-16)
-
 
 - **Ett ekonomiskt Q för fusionskraftverk** — forskare föreslår ett nytt nyckeltal vid sidan av det
   fysikaliska Q: hur mycket el anläggningen levererar jämfört med vad hela bygget och driften kostar.

@@ -654,3 +654,13 @@ gånger** — kontrollera den här listan först. Nyast överst.
 > Bifynd som inte användes: Cygnus-bubblan/mikrokvasaren Cygnus X-3, NASA:s
 > flygburna koronaobservation under förmörkelsen 12 augusti, KAIST:s
 > vindsnurrestrukturer och Aaltos kvantvärmemotor — lagda i ko.md.
+
+## 2026-11-17 — 2026-11-17-galaxen-som-var-en-brun-dvarg
+**Den rekordavlägsna galaxen var en kall brun dvärg i Vintergatan** (Astronomi)
+Källa: Phys.org 2026-11-03; original F.-Y. F. Liu m.fl., MNRAS 553 (2026), DOI 10.1093/mnras/stag2055 (CC BY 4.0), läst i förtrycket arXiv:2608.07461v1; första studien Gandolfi m.fl. arXiv:2509.01664.
+> Skriven 2026-11-16 av nattjobbet, ett dygn i förväg. Löser in brevteasern från brevet 2026-11-15 (inom fönstret mån–lör). Grannar: 2026-11-16 optik, 2026-11-15 astronomi (två dagar bort, ingen krock i rad).
+> Utgivaren: RÄTTA FÖRST (jämförelsedvärgarna, inte de kända Y-dvärgarna, slutar vid Y1; rörelsen, inte ljusstyrkan, avfärdar supernovatolkningen), sedan GODKÄND.
+> OBS: den publicerade MNRAS-versionen gick inte att läsa i fulltext (OUP 403); siffrorna kommer från förtrycket v1, och utgivaren bekräftade att den publicerade sammanfattningen stämmer.
+> Bilder: huvudbild NASA/ESA/J. Olmsted (STScI) heic2405a, konstnärlig tolkning av en brun dvärg (CC BY 4.0, märkt som inte Capotauro); CEERS-mosaiken (NASA/ESA/CSA/Finkelstein m.fl., CC BY 4.0) i brödtexten. Ingen AI-bild.
+> Nya begrepp: brun dvärg (med y-dvärg-formerna), egenrörelse, parallax.
+> Brevteasern flyttad till KM3NeT/ORCA och Lorentzinvariansen i ko.md.

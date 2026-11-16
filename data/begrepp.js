@@ -4932,6 +4932,42 @@ window.BEGREPP = [
       { type: 'p', html: 'Vingen fungerar som ett rotorblad på en helikopter. När den snurrar möter den luften snett, och luften trycker då på vingen med en kraft som dels håller igång rotationen, dels pekar uppåt och bromsar fallet. Fröet når därför en jämn fart som är mycket lägre än för ett frö som inte snurrar, och vinden hinner föra det längre bort från trädet.' },
       { type: 'p', html: 'Helikopterpiloter övar autorotation för det fall att motorn stannar. Rotorn får då snurra fritt, driven av luften som strömmar upp genom den när helikoptern sjunker, och piloten kan landa under kontroll. Ingenjörer studerar också lönnfrön för att bygga små flygande sensorer och drönare som kan singla ned långsamt.' }
     ]
+  },
+  {
+    id: 'brun-dvarg',
+    term: 'Brun dvärg',
+    former: ['brun dvärg', 'bruna dvärgen', 'bruna dvärgar', 'bruna dvärgarna', 'y-dvärg', 'y-dvärgen', 'y-dvärgar', 'y-dvärgarna'],
+    kort: 'Ett klot av gas som är för lätt för att bli en stjärna men tyngre än en vanlig planet. Den tänder aldrig någon varaktig vätefusion och svalnar långsamt under hela sitt liv.',
+    relaterade: ['vit-dvarg', 'solmassa', 'vintergatan', 'parallax'],
+    body: [
+      { type: 'p', html: 'En stjärna föds när ett moln av gas drar ihop sig under sin egen tyngd. Trycket och temperaturen i mitten stiger, och om klotet är tungt nog blir det till slut så hett att väteatomernas kärnor börjar slås samman till helium. Då har en stjärna tänts, och den kan lysa i miljarder år. Men alla gasklot blir inte tillräckligt tunga. Under ungefär 80 gånger Jupiters massa, ungefär en trettondel av solens, blir det aldrig varmt nog i mitten. Resultatet är en brun dvärg.' },
+      { type: 'p', html: 'En brun dvärg lyser ändå, men bara av värmen den fick när den drog ihop sig. Den är som en kokplatta som stängts av: den strålar ut sin värme och blir kallare och mörkare år för år. Unga bruna dvärgar kan ha en yta på över 2&nbsp;000&nbsp;°C, medan de äldsta och lättaste har svalnat till rumstemperatur eller ännu lägre. Astronomer delar in dem i typer efter temperaturen. De kallaste kallas Y-dvärgar, och deras yta håller ofta bara några hundra kelvin.' },
+      { type: 'p', html: 'Eftersom de är så kalla sänder bruna dvärgar ut nästan allt sitt ljus som infraröd strålning, och i atmosfären absorberar vatten, metan och ammoniak stora delar av spektrumet. De är därför mycket svåra att se, och de flesta kända Y-dvärgar ligger nära solen, inom omkring hundra ljusår. Rymdteleskop som är byggda för infrarött ljus har börjat hitta dem längre bort. Bruna dvärgar är intressanta också för att de liknar jätteplaneter: en kall brun dvärg och en ensam gasjätte kan vara nästan omöjliga att skilja åt.' }
+    ]
+  },
+  {
+    id: 'egenrorelse',
+    term: 'Egenrörelse',
+    former: ['egenrörelse', 'egenrörelsen', 'egenrörelser', 'egenrörelserna'],
+    kort: 'Hur snabbt en stjärna eller ett annat föremål i Vintergatan glider över himlen, mätt som en vinkel per år. Avlägsna galaxer har i praktiken ingen egenrörelse alls.',
+    relaterade: ['parallax', 'vintergatan', 'parsec', 'brun-dvarg'],
+    body: [
+      { type: 'p', html: 'Stjärnbilderna ser likadana ut år efter år, men de är inte fastnaglade. Alla stjärnor i Vintergatan rör sig runt galaxens centrum, var och en med sin egen fart och riktning, och eftersom solen också rör sig ändras stjärnornas lägen mot varandra långsamt. Den rörelsen över himlen kallas egenrörelse. Den mäts som en vinkel per år, oftast i bågsekunder eller tusendels bågsekunder per år. En bågsekund är en 3&nbsp;600-del av en grad.' },
+      { type: 'p', html: 'Vinklarna är små. Barnards stjärna, som har den största egenrörelse som är känd, flyttar sig drygt tio bågsekunder per år. Det betyder att den behöver omkring 180 år för att flytta sig lika långt som fullmånens bredd på himlen. De flesta stjärnor flyttar sig bara några tusendels bågsekunder per år, och det krävs noggranna mätningar med flera års mellanrum för att se rörelsen.' },
+      { type: 'p', html: 'Egenrörelsen är bara den del av rörelsen som går tvärs synlinjen. Om avståndet är känt kan den räknas om till en fart, eftersom farten är avståndet gånger vinkelhastigheten. Mätningen är också ett bra sätt att sortera ut vad som ligger nära. En galax miljoner eller miljarder ljusår bort rör sig visserligen snabbt, men den är så långt bort att den står stilla på himlen. Ett föremål som har flyttat sig mellan två bilder måste därför ligga i vår egen galax.' }
+    ]
+  },
+  {
+    id: 'parallax',
+    term: 'Parallax',
+    former: ['parallax', 'parallaxen', 'parallaxer', 'parallaxerna', 'parallaxmätning', 'parallaxmätningen', 'parallaxmätningar'],
+    kort: 'Den lilla förflyttning en närbelägen stjärna tycks göra mot bakgrunden när jorden rör sig runt solen. Ju närmare stjärnan är, desto större är förflyttningen, så parallaxen ger avståndet direkt.',
+    relaterade: ['parsec', 'egenrorelse', 'ljusar'],
+    body: [
+      { type: 'p', html: 'Håll upp en tumme på armlängds avstånd och titta på den växelvis med höger och vänster öga. Tummen tycks hoppa fram och tillbaka mot det som finns längre bort. Det beror på att ögonen ser tummen från två olika platser. Flytta tummen närmare ansiktet, och hoppet blir större. Det skenbara hoppet kallas parallax, och hjärnan använder det hela tiden för att bedöma avstånd.' },
+      { type: 'p', html: 'Astronomer gör samma sak, fast ögonen är jorden på två sidor om solen. På ett halvår flyttar sig jorden omkring 300 miljoner kilometer, och en närbelägen stjärna tycks då ha flyttat sig en aning mot de mycket avlägsnare stjärnorna och galaxerna bakom. Vinkeln är minimal: även för de närmaste stjärnorna är den mindre än en bågsekund, en 3&nbsp;600-del av en grad. Eftersom jordbanans storlek är känd ger vinkeln ändå avståndet med ren geometri, utan några antaganden om hur stjärnan fungerar.' },
+      { type: 'p', html: 'Därför är parallaxen grunden för alla avståndsmätningar i rymden. Avståndsenheten parsec är definierad efter den: en stjärna med parallaxen en bågsekund ligger en parsec bort. Rymdteleskopet Gaia har mätt parallaxer för mer än en miljard stjärnor. För föremål som ligger mycket långt bort blir vinkeln till slut för liten att mäta, och då får astronomerna i stället uppskatta avståndet på andra sätt, till exempel genom att jämföra hur ljusstarkt föremålet ser ut med hur ljusstarka liknande föremål är.' }
+    ]
   }
 ];
 

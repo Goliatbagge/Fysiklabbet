@@ -103,6 +103,62 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-17-galaxen-som-var-en-brun-dvarg",
+    date: "2026-11-17",
+    title: "Den rekordavlägsna galaxen var en kall brun dvärg i Vintergatan",
+    deck: "En liten röd prick i bilder från rymdteleskopet James Webb såg ut att kunna vara en galax från knappt 100 miljoner år efter big bang. Nya bilder tre och ett halvt år senare visar att pricken har flyttat sig på himlen. Det är en brun dvärg omkring 2 400 ljusår bort, med en yta som är kallare än kokande vatten.",
+    category: "Astronomi",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-11-17-galaxen-som-var-en-brun-dvarg.jpg",
+    imageAlt: "Ett orangerött klot med vågiga ljusa och mörka molnband ligger till höger i bilden, framför ett stjärnfyllt band av Vintergatan mot svart rymd.",
+    imageCredit: "Illustration: NASA, ESA och J. Olmsted (STScI), via Wikimedia Commons (CC BY 4.0). Konstnärlig tolkning av en brun dvärg, inte av Capotauro.",
+    tags: ["astronomi", "brun dvärg", "y-dvärg", "egenrörelse", "parallax", "rödförskjutning", "lymanbrytning", "infrarött ljus", "james webb", "ceers", "vintergatan", "vinkelhastighet", "university of edinburgh"],
+    sources: [
+      { name: "Phys.org: A tiny shift exposes a cold brown dwarf masquerading as an early galaxy (Andrew Zinin, 3 november 2026)", url: "https://phys.org/news/2026-11-tiny-shift-exposes-cold-brown.html" },
+      { name: "arXiv: G. Gandolfi med flera, Capotauro: an anomalous F356W-dropout in CEERS (studien som först beskrev föremålet)", url: "https://arxiv.org/abs/2509.01664" }
+    ],
+    research: {
+      citation: "F.-Y. F. Liu, D. J. McLeod, B. J. Sutlieff, T. J. Dupuy, J. S. Dunlop med flera, ”A clear detection of proper motion confirms that the claimed z ≃ 32 galaxy candidate, ’Capotauro’, is a Y-type brown dwarf”, Monthly Notices of the Royal Astronomical Society 553 (2026). Kollegialt granskad, öppet tillgänglig (CC BY 4.0). Förtryck: arXiv:2608.07461.",
+      url: "https://doi.org/10.1093/mnras/stag2055"
+    },
+    larare: {
+      moment: [
+        { label: "Mäta avstånd i rymden", href: "katalog.html?id=fy2-5.2" },
+        { label: "Periodtid, frekvens, radianer och vinkelhastighet", href: "katalog.html?id=fy2-1.4" },
+        { label: "Universums struktur", href: "katalog.html?id=fy2-5.1" }
+      ],
+      fragor: [
+        "Capotauro flyttade sig 0,132 bågsekunder på 3,5 år och ligger omkring 730 parsec bort (1 parsec = 3,086 · 10^16 m). Beräkna vinkelhastigheten i rad/s och farten tvärs synlinjen med v = r · ω.",
+        "En galax med rödförskjutningen z = 32 och en brun dvärg i Vintergatan kan ge nästan samma färger i bilderna. Förklara varför ljuset från galaxen saknas under en viss våglängd, och varför den våglängden beror på z.",
+        "Forskarna kunde inte mäta avståndet till Capotauro direkt, utan räknade ut det genom att jämföra med kända bruna dvärgar. Vilket antagande gör de då, och hur skulle avståndet och farten ändras om Capotauro i själva verket är kallare och ljussvagare än jämförelsedvärgarna?"
+      ]
+    },
+    body: [
+      { type: "p", html: "I september 2025 beskrev en grupp astronomer ett föremål som väckte stor uppmärksamhet. I djupa bilder från rymdteleskopet James Webb, tagna i december 2022 inom kartläggningen CEERS, fanns en liten röd prick som syntes vid de längsta våglängderna men försvann helt vid kortare. Den fick smeknamnet Capotauro. Om pricken var en galax låg den vid rödförskjutningen $z \\approx 32$, och ljuset skulle då ha lämnat den knappt 100&nbsp;miljoner år efter big bang. Ingen galax har hittills bekräftats längre bort än omkring $z = 14$." },
+      { type: "image", src: "nyheter/bilder/2026-11-17-galaxen-som-var-en-brun-dvarg-2.jpg", alt: "En lång, smal mosaik av rektangulära bildrutor mot svart bakgrund. Rutorna är fulla av små röda, orange och vita galaxer och några blå stjärnor med spetsiga strålar.", caption: "Kartläggningen CEERS, sammansatt av bilder från James Webbs kamera NIRCam. Varje prick är en galax eller en stjärna. Capotauro hittades i det här himmelsområdet men är för ljussvag för att synas i bilden.", credit: "Bild: NASA, ESA, CSA, S. Finkelstein, M. Bagley och R. Larson (UT Austin) och A. Pagan (STScI), via Wikimedia Commons (CC BY 4.0). Beskuren." },
+      { type: "h2", text: "Ett trappsteg i ljuset" },
+      { type: "p", html: "Det som gjorde Capotauro så intressant var ett brant trappsteg i ljuset. Mellan våglängderna 4,5 och 3,5&nbsp;mikrometer, långt in i det infraröda, föll ljusstyrkan till mindre än en femtondel, och vid kortare våglängder syntes ingenting alls." },
+      { type: "p", html: "Ett sådant trappsteg är precis vad en mycket avlägsen galax ska visa. Vätgasen mellan galaxerna i det unga universum slukade nästan allt ultraviolett ljus med kortare våglängd än 121,6&nbsp;nm. Medan ljuset sedan färdas mot oss sträcks det ut av universums expansion, och varje våglängd växer med faktorn $1 + z$: $\\lambda_\\mathrm{obs} = (1 + z) \\cdot \\lambda$. Med $z = 32$ hamnar trappsteget vid $33 \\cdot 121{,}6\\ \\mathrm{nm} \\approx 4{,}0\\ \\mathrm{\\mu m}$, just där Capotauro tändes." },
+      { type: "p", html: "Forskarna bakom upptäckten, Giovanni Gandolfi med kollegor, pekade själva på en annan möjlighet: en mycket kall brun dvärg i vår egen galax. En brun dvärg är ett klot av gas som är för lätt för att tända vätefusion i sitt inre, ett mellanting mellan stjärna och planet. De kallaste kallas Y-dvärgar. I deras atmosfär absorberar vatten, metan och ammoniak nästan allt ljus upp till omkring 3,5&nbsp;mikrometer, och därefter stiger ljuset brant. Färgerna blir nästan desamma som hos en galax vid $z \\approx 30$. Bilderna räckte inte för att avgöra vilket som var rätt." },
+      { type: "h2", text: "Det som ligger nära flyttar sig" },
+      { type: "p", html: "Fengyuan Liu och kollegor vid University of Edinburgh använde ett enkelt test. En galax så långt bort står i praktiken stilla på himlen. Stjärnor och bruna dvärgar i Vintergatan rör sig däremot runt galaxens centrum med något olika fart, och sett från oss glider de långsamt mot bakgrunden. Det kallas egenrörelse. Jämför man två bilder tagna med flera års mellanrum visar rörelsen var föremålet hör hemma." },
+      { type: "p", html: "I juni 2026 fotograferade två andra forskningsprogram med James Webb samma himmelsområde, tre och ett halvt år efter de första bilderna. Forskarna bestämde Capotauros läge i fyra bilder, två från varje tillfälle. För att bilderna skulle ligga exakt rätt mot varandra använde de 68 små bakgrundsföremål, mest galaxer, som referenspunkter. De lade också in konstgjorda punkter i de riktiga bilderna för att se hur mycket bruset kan rubba en lägesmätning." },
+      { type: "p", html: "Capotauro hade flyttat sig 0,132&nbsp;bågsekunder, plus minus 0,020. En bågsekund är en 3&nbsp;600-del av en grad, och vinkeln motsvarar en enkrona sedd från drygt 30&nbsp;kilometers avstånd. Rörelsen är ändå tydlig. Den är säkerställd på 6,2&nbsp;sigma, vilket betyder att risken att den bara beror på slumpmässiga mätfel är mindre än en på en miljard. Därmed är både en galax, en supernova och ett aktivt svart hål uteslutna." },
+      { type: "h2", text: "Kallare än kokande vatten" },
+      { type: "p", html: "Forskarna jämförde sedan ljuset i de olika filtren med 19 kända kalla bruna dvärgar som James Webb redan har mätt upp. Bäst stämde en Y-dvärg med yttemperaturen omkring 350&nbsp;K, ungefär 77&nbsp;°C. Avstånden till jämförelsedvärgarna är kända, så det gick att räkna ut hur långt bort Capotauro måste ligga för att vara så ljussvag: omkring 730&nbsp;parsec, ungefär 2&nbsp;400&nbsp;ljusår. De flesta kända Y-dvärgar ligger inom 30&nbsp;parsec, knappt 100&nbsp;ljusår, så Capotauro är en av de mest avlägsna som hittats." },
+      { type: "p", html: "Svaret har ett viktigt förbehåll. Jämförelsedvärgarna räcker inte ner till de allra kallaste Y-dvärgarna, och Capotauro kan vara ännu kallare och ljussvagare än dem. Då ligger den också närmare. Förflyttningen på himlen beror nästan helt på dvärgens egen rörelse. Den del som kommer av att teleskopet själv följer jorden runt solen, parallaxen, är bara omkring 2&nbsp;% av förflyttningen. Ett tredje fotograferingstillfälle, väl valt i tiden, kan mäta parallaxen och därmed avståndet direkt." },
+      { type: "p", html: "Avståndet och vinkelhastigheten ger tillsammans dvärgens fart tvärs synlinjen: omkring 130&nbsp;km/s. Det är ovanligt snabbt för den tunna skivan i Vintergatan, där de flesta stjärnor i solens närhet går. Enligt forskarnas modell av galaxen är en sådan fart vanligare bland stjärnorna i den tjocka skivan, som är 10 till 12&nbsp;miljarder år gamla. Capotauro kan alltså vara en mycket gammal brun dvärg, men osäkerheten är stor." },
+      { type: "h2", text: "En varning till galaxjägarna" },
+      { type: "p", html: "Capotauro är inte ensam. I bilder kring galaxhopen Bullet Cluster hittades två föremål som såg ut att kunna ligga vid rödförskjutningen omkring 30, men spektrum och nya bilder ett år senare visade att även de var Y-dvärgar i rörelse. Eftersom trappsteget i en kall brun dvärgs spektrum hamnar kring 4&nbsp;mikrometer kan de kallaste dvärgarna ge upphov till en egen liten samling falska galaxer kring $z \\approx 30$, skriver forskarna. Den som letar efter de första galaxerna bör därför jämföra med kalla bruna dvärgar och helst fotografera samma fält flera gånger." },
+      { type: "p", html: "Studien är publicerad i <em>Monthly Notices of the Royal Astronomical Society</em>. Rörelsen avfärdar också ett tredje förslag, att Capotauro kunde vara en exploderande jättestjärna vid $z \\approx 15$, och ljusstyrkan har dessutom inte ändrats märkbart mellan de två tillfällena. För de bruna dvärgarnas forskare är fyndet ändå en vinst. Dvärgen har ungefär samma temperatur som de kallaste jätteplaneter som har fotograferats direkt, och den visar att James Webbs djupa bilder kan användas för att räkna bruna dvärgar långt ut i Vintergatan." },
+      { type: "fact", title: "Visste du?", items: [
+        "Farten tvärs synlinjen fås ur $v = r \\cdot \\omega$. Vinkelhastigheten är 0,0383&nbsp;bågsekunder per år, ungefär $5{,}9 \\cdot 10^{-15}\\ \\mathrm{rad/s}$, och 730&nbsp;parsec är ungefär $2{,}3 \\cdot 10^{19}\\ \\mathrm{m}$. Produkten blir omkring $1{,}3 \\cdot 10^{5}\\ \\mathrm{m/s}$, alltså 130&nbsp;km/s.",
+        "Ett klot av gas måste väga omkring 80 gånger så mycket som Jupiter för att tända vätefusion och bli en stjärna. Y-dvärgar väger typiskt mellan 3 och 25&nbsp;Jupitermassor.",
+        "Bruna dvärgar lyser svagt eftersom de långsamt svalnar efter att ha bildats. Ju äldre en brun dvärg är, desto kallare och ljussvagare blir den."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-16-randerna-som-ser-i-3d",
     date: "2026-11-16",
     title: "Randigt ljus ger film i 3D med 150 000 bilder i sekunden",

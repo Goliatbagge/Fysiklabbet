@@ -862,7 +862,8 @@ const WaveSimulator = () => {
             bank.position.y = -36; scene.add(bank);
             // det som byts med läget: källor, skärm, glasskiva
             const extra = new THREE.Group(); scene.add(extra);
-            return { renderer, scene, camera, geo, yta, extra, nyckel: '' };
+            const linjer = new THREE.Group(); scene.add(linjer);
+            return { renderer, scene, camera, geo, yta, extra, linjer, nyckel: '', lnyckel: '' };
         }
         function bygglage(p) {
             const g = tre.extra;
@@ -891,6 +892,53 @@ const WaveSimulator = () => {
                 bar.name = 'alstrare'; g.add(bar);
             }
         }
+        // Nod- och maximilinjerna i 3D: samma hyperbler som i 2D, ritade som
+        // platta streckade band (WebGL ritar linjer bara 1 px breda) ovanpå
+        // vattenytan (depthTest av), klippta till tanken och, med två
+        // öppningar, till vattnet bakom skärmen.
+        function bygg3DLinjer(p, lam) {
+            const g = tre.linjer;
+            while (g.children.length) { const c = g.children[0]; g.remove(c); c.geometry.dispose(); c.material.dispose(); }
+            let F1, F2, y0 = RAM;
+            if (p.mode === 'double') { F1 = p.k1; F2 = p.k2; }
+            else if (p.mode === 'diffraction-double') { F1 = { x: W / 2 - p.d / 2, y: YB_SPALT }; F2 = { x: W / 2 + p.d / 2, y: YB_SPALT }; y0 = YB_SPALT + 6; }
+            else return;
+            const inne = (x, y) => x > RAM && x < W - RAM && y > y0 && y < H - RAM;
+            const BRED = 2.6, STRECK = 16, LUCKA = 11;
+            // ett band per streck: följ polylinjen och lägg fyrhörningar
+            const band = (bit, farg) => {
+                const pos = [];
+                let kvar = STRECK, rit = true;
+                for (let i = 1; i < bit.length; i++) {
+                    let [ax, ay] = bit[i - 1]; const [bx, by] = bit[i];
+                    let L = Math.hypot(bx - ax, by - ay); if (L < 1e-6) continue;
+                    const ux = (bx - ax) / L, uy = (by - ay) / L, nx = -uy * BRED, ny = ux * BRED;
+                    while (L > 0) {
+                        const st = Math.min(kvar, L), cx = ax + ux * st, cy = ay + uy * st;
+                        if (rit) pos.push(ax + nx, 2, ay + ny, ax - nx, 2, ay - ny, cx + nx, 2, cy + ny,
+                                          ax - nx, 2, ay - ny, cx - nx, 2, cy - ny, cx + nx, 2, cy + ny);
+                        ax = cx; ay = cy; L -= st; kvar -= st;
+                        if (kvar <= 1e-6) { rit = !rit; kvar = rit ? STRECK : LUCKA; }
+                    }
+                }
+                if (!pos.length) return;
+                const geo = new THREE.BufferGeometry();
+                geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3));
+                const m = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: farg, depthTest: false, side: THREE.DoubleSide }));
+                m.renderOrder = 10; g.add(m);
+            };
+            for (const [typ, pa, farg] of [['nod', p.visa.nod, ROD], ['max', p.visa.max, GRON]]) {
+                if (!pa) continue;
+                for (const pts of interferensLinjer(F1, F2, lam, typ)) {
+                    let bit = [];
+                    const slut = () => { if (bit.length > 1) band(bit, farg); bit = []; };
+                    for (const [x, y] of pts) {
+                        if (inne(x, y)) bit.push([x - W / 2, y - H / 2]); else slut();
+                    }
+                    slut();
+                }
+            }
+        }
         function rita3D(ctx, p) {
             if (!window.THREE) return;
             if (!tre) tre = byggTre();
@@ -901,6 +949,8 @@ const WaveSimulator = () => {
             if (lk !== tre.nyckel) { tre.nyckel = lk; bygglage(p); }
             const phi = fas.current, lam = V / p.f;
             info.current = { f: p.f, lam, v: V };
+            const ln = [p.mode, p.d, p.f, p.k1 && p.k1.x, p.k1 && p.k1.y, p.k2 && p.k2.x, p.k2 && p.k2.y, p.visa.nod, p.visa.max].join('|');
+            if (ln !== tre.lnyckel) { tre.lnyckel = ln; bygg3DLinjer(p, lam); }
             const pos = tre.geo.attributes.position, col = tre.geo.attributes.color, nx = GX3 + 1;
             const AMP = 13;
             const satt = (idx, zn, pal) => {
@@ -1069,17 +1119,16 @@ const WaveSimulator = () => {
     };
 
     const visaRutor = () => {
-        if (vy === '3D') return null;
         const r = [];
         const cb = (n, txt, swatch) => (
             <label key={n}><input type="checkbox" checked={!!visa[n]} onChange={() => tVisa(n)} />{swatch}<span dangerouslySetInnerHTML={{ __html: txt }} /></label>
         );
-        if (mode === 'single' || mode === 'planar' || mode === 'refraction') r.push(cb('toppar', 'Vågtoppar (vågfronter)', <span className="st-swatch" style={{ background: '#0f1620' }}></span>));
-        if (mode === 'single' || mode === 'planar' || mode === 'refraction' || mode === 'doppler') r.push(cb('lambda', 'Våglängd <em>λ</em>'));
-        if (mode === 'refraction') r.push(cb('stralen', 'Stråle, normal och vinklar'));
+        if (vy !== '3D' && (mode === 'single' || mode === 'planar' || mode === 'refraction')) r.push(cb('toppar', 'Vågtoppar (vågfronter)', <span className="st-swatch" style={{ background: '#0f1620' }}></span>));
+        if (vy !== '3D' && (mode === 'single' || mode === 'planar' || mode === 'refraction' || mode === 'doppler')) r.push(cb('lambda', 'Våglängd <em>λ</em>'));
+        if (vy !== '3D' && mode === 'refraction') r.push(cb('stralen', 'Stråle, normal och vinklar'));
         if (mode === 'double' || mode === 'diffraction-double') {
-            r.push(cb('nod', 'Nodlinjer', <span className="st-swatch streck" style={{ borderColor: ROD }}></span>));
-            r.push(cb('max', 'Maximilinjer', <span className="st-swatch streck" style={{ borderColor: GRON }}></span>));
+            r.push(cb('max', 'Visa maximilinjer', <span className="st-swatch streck" style={{ borderColor: GRON }}></span>));
+            r.push(cb('nod', 'Visa nodlinjer', <span className="st-swatch streck" style={{ borderColor: ROD }}></span>));
         }
         return r;
     };

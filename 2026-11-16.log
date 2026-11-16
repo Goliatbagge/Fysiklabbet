@@ -94,3 +94,14 @@
 19:16:35  [svar] Claude avslutade med kod 0
 19:16:35  [svar] VARNING: svarskontrollen gav inget SVAR-besked. Försöker igen vid nästa körning.
 19:16:35  [svar] === Nyhetsjobb: slut ===
+22:15:02  [svar] === Nyhetsjobb: start (2026-11-16) ===
+22:15:04  [svar] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+22:15:51  [svar] I checked for owner replies to the news-review emails. Summary:
+22:15:51  [svar] 
+22:15:51  [svar] - A search for `subject:"[Nyhet"` turned up only **one** real match: *"[Nyhet 2026-10-30] Att granska: Elektroner surfar på radiovågor och driver strömmen i ett fusionsplasma"*, sent 2026-10-29. That's 18 days old, well outside the 4-day window (today is 2026-11-16).
+22:15:51  [svar] - No threads with a `[Nyhet` subject exist from the last 4 days at all — so there's nothing to check for replies on, and no pending review mail to act on.
+22:15:51  [svar] 
+22:15:51  [svar] The daily-news job (per CLAUDE.md) sends these review emails the night before each article, and that single old one looks like a leftover from before the reviewing-emails routine ran correctly or was later retired/changed. There's no action needed right now since there's no recent `[Nyhet` thread awaiting a reply.
+22:15:51  [svar] Claude avslutade med kod 0
+22:15:52  [svar] VARNING: svarskontrollen gav inget SVAR-besked. Försöker igen vid nästa körning.
+22:15:52  [svar] === Nyhetsjobb: slut ===

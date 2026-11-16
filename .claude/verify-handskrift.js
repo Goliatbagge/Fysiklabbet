@@ -641,6 +641,37 @@ for (const typ of valda) {
   }
 }
 
+/* ROTTECKNET ÖVER HELA UTTRYCKET (användarkrav 2026-11-16): '√(' i en
+ * sträng till pennan ger ett rottecken framför en parentes, som på en
+ * räknare. Rita roten med T.rot, {rot: '…'} i valueBracket eller
+ * rootSign(). UNDANTAG_ROTPARENTES är arvsskulden från 2026-11-16 och ska
+ * bara krympa. */
+{
+  const UNDANTAG_ROTPARENTES = [
+    "T.fracH('2x+3', '2√(x^2+3x)'",
+    "T.fracH('1', '3√(x^2)'",
+    "T.fracH('√(b^2-4ac)', '2a'",
+    "T.fracH('√(64-48)', '4'",
+  ];
+  const src = [path.join(ROOT, 'handskrift.js'), ...pennaFiler()]
+    .map(f => fs.readFileSync(f, 'utf8')).join('\n');
+  const rader = src.split('\n');
+  const fel = [];
+  rader.forEach((rad, i) => {
+    if (/^\s*(\/\*|\*|\/\/)/.test(rad)) return;              /* kommentar */
+    if (/\[\['/.test(rad)) return;                              /* tankebubbla */
+    if (!/'[^'\n]*√\(/.test(rad)) return;
+    if (UNDANTAG_ROTPARENTES.some(u => rad.includes(u))) return;
+    fel.push((i + 1) + ': ' + rad.trim().slice(0, 70));
+  });
+  if (fel.length) {
+    felTot += fel.length;
+    console.log('\n\x1b[31mFEL\x1b[0m  rottecken framför en parentes ("√(…)"); ' +
+                'rita strecket över hela uttrycket med T.rot, {rot} eller rootSign():');
+    fel.slice(0, 12).forEach(r => console.log('      - rad ' + r));
+  }
+}
+
 /* SVARSRAD UTAN DELUPPGIFTSBOKSTAV (användarkrav 2026-09-20): svaret till
  * en deluppgift skrivs "Svar: nollställen", aldrig "Svar a: nollställen".
  * Raden står redan under sin deluppgift. Källkodsgranskning av strängarna

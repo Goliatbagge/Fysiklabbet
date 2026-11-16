@@ -587,6 +587,14 @@
  * (regelNotT/regelNotGom). Eleven ska aldrig kunna missa vändningen.
  * Referens: layoutLosolikhet (ma1c-2.11 ex 1b).
  *
+ * REGEL (ROTTECKNET ÖVER HELA UTTRYCKET, användarkrav 2026-11-16):
+ * rotstrecket går över hela radikanden, så som man skriver för hand:
+ * √ med streck över AB² + BD². Skriv aldrig '√(AB^2+BD^2)' i en sträng
+ * till pennan: då står tecknet framför en parentes, som på en räknare.
+ * Använd T.rot(…) på en rad, {rot: '…'} i valueBracket eller rootSign()
+ * med innehållets bredd. verify-handskrift.js ger fel på '√(' i
+ * scensträngarna (äldre fall står i UNDANTAG_ROTPARENTES där).
+ *
  * REGEL (ROTINDEX FÅR ALDRIG TRÄNGA IN I ROTKILEN, användarkrav
  * 2026-09-21): rotindexet (3 i tredjeroten, 14 i fjortonderoten) skrivs
  * litet i kilens vinkel och får skjutas in en aning under rottecknet —
@@ -2112,7 +2120,12 @@
      * En rad är en sträng ELLER en array av segment: strängar och
      * {frac:['täljare','nämnare']} — bråk med VÅGRÄTT divisionsstreck
      * (se REGEL DIVISION MED VÅGRÄTT STRECK; snedstreck i uträkningar är
-     * förbjudet). Bråkrader får automatiskt extra radhöjd. */
+     * förbjudet). Bråkrader får automatiskt extra radhöjd.
+     *
+     * {rot: 'AB^2+BD^2'} ritar ett rottecken vars streck går över HELA
+     * uttrycket, som för hand (REGEL ROTTECKNET ÖVER HELA UTTRYCKET).
+     * Skriv aldrig '√(…)' i en sträng: då hamnar tecknet framför en
+     * parentes, som på en räknare. */
     var rs = (opt && opt.rs) || 0.8;
     var ss = s * rs, sF = F * rs;
     function segsOf(r) { return typeof r === 'string' ? [r] : r; }
@@ -2120,10 +2133,13 @@
       return Math.max(stringAdvance(sg.frac[0], ss, sF),
                       stringAdvance(sg.frac[1], ss, sF)) + 0.3 * sF;
     }
+    function rotW(sg) {
+      return 0.56 * sF + stringAdvance(sg.rot, ss, sF) + 0.34 * sF;
+    }
     function rowW(r) {
       return segsOf(r).reduce(function (w, sg) {
-        return w + (typeof sg === 'string'
-          ? stringAdvance(sg, ss, sF) : fracW(sg) + 1.5);
+        return w + (typeof sg === 'string' ? stringAdvance(sg, ss, sF)
+          : sg.rot != null ? rotW(sg) : fracW(sg) + 1.5);
       }, 0);
     }
     function hasFrac(r) {
@@ -2184,6 +2200,13 @@
       segsOf(r).forEach(function (sg) {
         if (typeof sg === 'string') {
           x = placeString(sg, x, yi, ss, sF, acts);
+        } else if (sg.rot != null) {
+          var cw = stringAdvance(sg.rot, ss, sF);
+          /* exponenter i radikanden når högre än en vanlig rad */
+          var xs = rootSign(acts, x + 0.04 * sF, yi, cw, sF,
+            { yTop: yi - (/\^/.test(sg.rot) ? 1.42 : 1.18) * sF });
+          placeString(sg.rot, xs, yi, ss, sF, acts);
+          x += rotW(sg);
         } else {
           var ybar = yi - 0.34 * sF;
           var nw = stringAdvance(sg.frac[0], ss, sF),
@@ -28467,7 +28490,7 @@
       [['AD får jag med Pythagoras sats.']]
     ]));
     var klam = valueBracket(acts, [
-      'AD=√(AB^2+BD^2)=√(6,4^2+12^2) m=13,6 m',
+      ['AD=', { rot: 'AB^2+BD^2' }, '=', { rot: '6,4^2+12^2' }, ' m=13,6 m'],
       'BD=12 m'
     ], padL, y, T.s, F);
     T.stepEnd();

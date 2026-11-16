@@ -28467,6 +28467,26 @@
   function layoutHogtalare(cfg, F) {
     var T = physTools(F), acts = T.acts, padL = T.padL;
     var adv = 1.7 * F, bw = 292;
+    /* bråk vars nämnare är "pre + 1/2", med det lilla bråket ½ skrivet med
+     * rakt streck i nämnaren: λ = Δs / (n + ½). Skrivordning som för hand:
+     * täljare, långt bråkstreck, nämnare. Returnerar x efter bråket. */
+    function brakHalv(numS, preS, x0, yb) {
+      var sc = 0.7, f = F * sc;
+      var ybar = yb - 0.34 * F, yd = ybar + 1.24 * F;
+      var sw = T.adv('1', sc) + 0.3 * f;
+      var dw = T.adv(preS) + 0.06 * F + sw, nw = T.adv(numS);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      T.str(numS, x0 + (w - nw) / 2, ybar - 0.14 * F);
+      T.pause(130);
+      T.line([x0, ybar], [x0 + w, ybar]);
+      T.pause(130);
+      var xd = T.str(preS, x0 + (w - dw) / 2, yd) + 0.06 * F;
+      var sbar = yd - 0.34 * F;
+      T.str('1', xd + (sw - T.adv('1', sc)) / 2, sbar - 0.14 * f, null, sc);
+      T.line([xd, sbar], [xd + sw, sbar]);
+      T.str('2', xd + (sw - T.adv('2', sc)) / 2, sbar + 1.04 * f, null, sc);
+      return x0 + w + 1.5;
+    }
     /* skala 20 px/m, precis som teorifiguren: AB=6,4 m=128 px,
      * BD=12 m=240 px */
     var hx = 150, wx = 390, yA = 110, yB = 238, yC = 174, yE = 290;
@@ -28583,42 +28603,38 @@
     T.str('Destruktiv interferens', padL, y, null, 0.62);
     T.pause(300);
     y += 2.6 * F;
+    /* formeln, och direkt efter ekvivalenspilen λ utlöst */
     var xd = T.str('Δs=(n+', padL, y);
     xd = T.fracH('1', '2', xd, y);
-    T.str(')·λ', xd, y);
+    xd = T.str(')·λ', xd, y);
+    T.pause(300);
+    xd = T.str('⟺λ=', xd + 0.12 * F, y);
+    brakHalv('Δs', 'n+', xd, y);
     T.stepEnd();
 
-    y += adv + 2.4 * F;
-    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
-      [['D är den FÖRSTA tysta punkten,']],
-      [['alltså 0:e nodlinjen: ', 0], ['n', 1], ['=0.', 0]],
-      [['Då är vägskillnaden en halv']],
-      [['våglängd.']]
-    ]));
-    var xn = T.str('n=0:  Δs=', padL, y);
-    xn = T.fracH('λ', '2', xn, y);
-    T.str('⟺λ=2·Δs', xn + 0.12 * F, y);
-    T.stepEnd();
-
-    y += adv + 2.2 * F;
-    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.2), bw, [
+    y += adv + 2.8 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv, 1.4), bw, [
       [['Vägskillnaden räknade jag ut']],
-      [['nyss.']]
+      [['nyss. D är den FÖRSTA tysta']],
+      [['punkten, alltså 0:e nodlinjen:']],
+      [['n', 1], ['=0.', 0]]
     ]));
-    klam = valueBracket(acts, ['Δs=1,6 m'], padL, y, T.s, F);
+    klam = valueBracket(acts, ['Δs=1,6 m', 'n=0'], padL, y, T.s, F);
     T.stepEnd();
     y = klam.yEnd;
 
-    y += adv + 1.5 * F;
+    y += adv + 1.7 * F;
     T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
-      [['Nu sätter jag in värdet ur']],
+      [['Nu sätter jag in värdena ur']],
       [['klammern i formeln.']]
     ]));
-    T.str('λ=2·1,6=3,2 m', padL, y);
+    var xl = T.str('λ=', padL, y);
+    xl = brakHalv('1,6', '0+', xl, y);
+    T.str('=3,2 m', xl + 0.12 * F, y);
     T.stepEnd();
 
     /* ---- frekvensen ---- */
-    y += adv + 2.2 * F;
+    y += adv + 2.6 * F;
     T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
       [['Nu har jag våglängden. Både v']],
       [['och λ är kända, så jag kan']],

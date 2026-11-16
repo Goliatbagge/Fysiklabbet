@@ -28419,27 +28419,32 @@
       T.str('D', 400, yB + 6, null, 0.62);
       T.str('E', 400, yE + 6, null, 0.62);
     });
+    /* först måtten som är givna i uppgiften, sedan paus: i mellansteget
+     * kan klassen diskutera hur långt AB är innan pennan visar det */
     T.tanke(T.figurBubble(292, [
-      [['Drar sträckorna som ljudet går']],
-      [['från A och från B fram till D.']]
+      [['Skriver först in måtten som']],
+      [['är givna i uppgiften.']]
     ], 340));
+    T.lbl('CD=3,2 m', 412, 212, BLUE, 0.5);
+    T.pause(150);
     T.line([hx + 13, yB], [wx, yB]);              /* BD */
-    T.line([hx + 13, yA + 5], [wx, yB]);          /* AD */
+    T.lbl('BD=12 m', 244, yB + 26, BLUE);
     T.stepEnd();
 
     T.tanke(T.figurBubble(292, [
-      [['Skriver in måtten. C ligger mitt']],
-      [['emellan A och B, och CD är']],
-      [['3,2 m, så AB är dubbelt så']],
-      [['långt: 6,4 m.']]
+      [['C ligger mitt emellan A och B,']],
+      [['och CD är 3,2 m, så AB är']],
+      [['dubbelt så långt: 6,4 m.']]
     ], 340));
     T.dblArrow([124, yA], [124, yB], BLUE);
     T.lbl('AB=6,4 m', 30, 180, BLUE, 0.46);
-    T.pause(150);
-    T.lbl('CD=3,2 m', 412, 212, BLUE, 0.5);
-    T.pause(150);
-    T.lbl('BD=12 m', 244, yB + 26, BLUE);
-    T.pause(150);
+    T.stepEnd();
+
+    T.tanke(T.figurBubble(292, [
+      [['Drar sträckan som ljudet från']],
+      [['A går fram till D.']]
+    ], 340));
+    T.line([hx + 13, yA + 5], [wx, yB]);          /* AD */
     T.lbl('AD', 252, 150, BLUE);
     T.stepEnd();
 

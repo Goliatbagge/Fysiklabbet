@@ -17853,9 +17853,9 @@
             } else {
                 lage = 'Örat står mellan en maximilinje och en nodlinje.';
             }
-            info.innerHTML = 'Tonen 480&nbsp;Hz har våglängden <em>λ</em> = 340&nbsp;/&nbsp;480 = ' + fmt(LAM, 2) + '&nbsp;m. ' +
+            info.innerHTML = 'Tonen 480&nbsp;Hz har våglängden <span style="white-space:nowrap"><em>λ</em> = 340&nbsp;/&nbsp;480 = ' + fmt(LAM, 2) + '&nbsp;m</span>. ' +
                 'Avstånd till högtalarna: ' + fmt(r1, 2) + '&nbsp;m och ' + fmt(r2, 2) + '&nbsp;m. Vägskillnad ' +
-                'Δ<em>s</em> = ' + fmt(ds, 2) + '&nbsp;m = ' + fmt(q, 2) + '&nbsp;<em>λ</em>.<br>' + lage;
+                '<span style="white-space:nowrap">Δ<em>s</em> = ' + fmt(ds, 2) + '&nbsp;m = ' + fmt(q, 2) + '&nbsp;<em>λ</em></span>.<br>' + lage;
             ljudNiva(a);
         }
 
@@ -18067,8 +18067,8 @@
             s += t1 + b.s;
             dyn.innerHTML = s;
             info.innerHTML = '<em>P</em> ligger på ' + L.namn + '. ' + (L.max
-                ? 'Vägskillnaden är ett helt antal våglängder, Δ<em>s</em> = <em>n</em> · <em>λ</em> med <em>n</em> = ' + Math.abs(L.c) + ', och vågorna möts i fas.'
-                : 'Vägskillnaden är ett halvt antal våglängder, Δ<em>s</em> = (<em>n</em> + ½) · <em>λ</em> med <em>n</em> = ' + Math.floor(Math.abs(L.c)) + ', och vågorna möts i motfas.') +
+                ? 'Vägskillnaden är ett helt antal våglängder, <span style="white-space:nowrap">Δ<em>s</em> = <em>n</em> · <em>λ</em></span> med <span style="white-space:nowrap"><em>n</em> = ' + Math.abs(L.c) + '</span>, och vågorna möts i fas.'
+                : 'Vägskillnaden är ett halvt antal våglängder, <span style="white-space:nowrap">Δ<em>s</em> = (<em>n</em> + ½) · <em>λ</em></span> med <span style="white-space:nowrap"><em>n</em> = ' + Math.floor(Math.abs(L.c)) + '</span>, och vågorna möts i motfas.') +
                 ' Dra i punkten: <em>PA</em> och <em>PB</em> ändras, men skillnaden står still. Klicka på en annan linje för att flytta dit.';
         }
 

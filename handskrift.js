@@ -593,7 +593,8 @@
  * till pennan: då står tecknet framför en parentes, som på en räknare.
  * Använd T.rot(…) på en rad, {rot: '…'} i valueBracket eller rootSign()
  * med innehållets bredd. verify-handskrift.js ger fel på '√(' i
- * scensträngarna (äldre fall står i UNDANTAG_ROTPARENTES där).
+ * scensträngarna. I T.fracH (mathTools) ritas '√(…)' i täljare och
+ * nämnare automatiskt med strecket över hela radikanden.
  *
  * REGEL (ROTINDEX FÅR ALDRIG TRÄNGA IN I ROTKILEN, användarkrav
  * 2026-09-21): rotindexet (3 i tredjeroten, 14 i fjortonderoten) skrivs
@@ -3048,8 +3049,50 @@
     /* gångertecken mellan två bråk: '·' är ingen OPS-glyf och får därför
      * ingen automatisk luft — utan den klistrar bråkstrecken ihop sig */
     function mul(x, yb) { return str('·', x + 0.10 * F, yb) + 0.10 * F; }
+    /* ROTTECKNET ÖVER HELA UTTRYCKET (REGEL i filhuvudet): '√(…)' i en
+     * täljare eller nämnare skrivs aldrig som tecken + parentes. rotDelar
+     * delar strängen i vanlig text och radikander, och strR ritar varje
+     * radikand under ett rotstreck (rootSign) som når över hela den.
+     * advR mäter likadant, så att bråkstrecket blir lagom brett. */
+    function rotDelar(t) {
+      var delar = [], i = 0, j;
+      while ((j = t.indexOf('√(', i)) >= 0) {
+        if (j > i) delar.push({ txt: t.slice(i, j) });
+        var d = 0, k = j + 1;
+        for (; k < t.length; k++) {
+          if (t[k] === '(') d++;
+          else if (t[k] === ')' && --d === 0) break;
+        }
+        delar.push({ rot: t.slice(j + 2, k) });
+        i = k + 1;
+      }
+      if (i < t.length) delar.push({ txt: t.slice(i) });
+      return delar;
+    }
+    function harRot(t) { return t.indexOf('√(') >= 0; }
+    function advR(t) {
+      if (!harRot(t)) return adv(t);
+      return rotDelar(t).reduce(function (w, d) {
+        return w + (d.txt != null ? adv(d.txt) : 0.60 * F + adv(d.rot) + 0.30 * F);
+      }, 0);
+    }
+    /* tat: rotstrecket tätt över radikanden (i en nämnare, där det annars
+     * skär bråkstrecket) */
+    function strR(t, x, yb, col, tat) {
+      if (!harRot(t)) return str(t, x, yb, col);
+      rotDelar(t).forEach(function (d) {
+        if (d.txt != null) { x = str(d.txt, x, yb, col); return; }
+        var cw = adv(d.rot);
+        var xs = rootSign(acts, x + 0.08 * F, yb, cw, F,
+          { yTop: yb - (d.rot.indexOf('^') >= 0 ? (tat ? 1.22 : 1.42) : (tat ? 0.92 : 1.18)) * F,
+            yBot: tat ? yb + 0.04 * F : undefined, color: col || null });
+        str(d.rot, xs, yb, col);
+        x += 0.60 * F + cw + 0.30 * F;
+      });
+      return x;
+    }
     function fracW(numS, denS) {
-      return Math.max(adv(numS), adv(denS)) + 0.3 * F;
+      return Math.max(advR(numS), advR(denS)) + 0.3 * F;
     }
     /* bråk med rakt divisionsstreck; skrivordning täljare → streck →
      * nämnare, precis som för hand. col färgar hela bråket; dcol färgar
@@ -3058,9 +3101,10 @@
     function fracH(numS, denS, x0, yb, col, dcol) {
       var ybar = yb - 0.34 * F;
       var bc = dcol || col || null;
-      var nw = adv(numS), dw = adv(denS);
+      var nw = advR(numS), dw = advR(denS);
       var w = Math.max(nw, dw) + 0.3 * F;
-      str(numS, x0 + (w - nw) / 2, ybar - 0.14 * F, col);
+      /* ett rottecken i täljaren når ned under baslinjen: lyft täljaren */
+      strR(numS, x0 + (w - nw) / 2, ybar - (harRot(numS) ? 0.36 : 0.14) * F, col);
       pause(130);
       acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]),
                   color: bc });
@@ -3070,7 +3114,10 @@
        * Nämnaren sänks därför en aning när den innehåller ett upphöjt
        * tecken (påverkar inte vanliga nämnare). */
       var dsink = denS.indexOf('^') >= 0 ? 0.20 * F : 0;
-      str(denS, x0 + (w - dw) / 2, ybar + 1.04 * F + dsink, bc);
+      /* rotstrecket i nämnaren når högt: sänk nämnaren så att strecket
+       * inte skär bråkstrecket */
+      if (harRot(denS)) dsink = (denS.indexOf('^') >= 0 ? 0.46 : 0.20) * F;
+      strR(denS, x0 + (w - dw) / 2, ybar + 1.04 * F + dsink, bc, true);
       return x0 + w + 1.5;
     }
     /* BRÅK SOM EXPONENT (ma1c-1.8): en rationell exponent skrivs med rakt
@@ -48045,13 +48092,13 @@
     y += 5.2 * F;
     xx = T.str('=', padL, y);
     xe = T.fracH('2x+3', '2√(x^2+3x)', xx, y);
-    T.underline(xe, y + 0.95 * F);
+    T.underline(xe, y + 1.40 * F);           /* under rotens nämnare */
     T.stepEnd();
 
     y += 4.6 * F;
     xe = T.str('Svar: y′=', padL, y);
     xe = T.fracH('2x+3', '2√(x^2+3x)', xe, y);
-    T.underline(xe, y + 0.95 * F);
+    T.underline(xe, y + 1.40 * F);           /* under rotens nämnare */
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 2.0 * F, padL: padL };
@@ -55865,7 +55912,7 @@
     xx = T.fracH('1', '2√x', xx, y);
     xx = T.str('+', xx, y);
     xe = T.fracH('1', '3√(x^2)', xx, y);
-    T.underline(xe, y + 0.95 * F);
+    T.underline(xe, y + 1.40 * F);           /* under rotens nämnare */
     T.stepEnd();
 
     /* ---- e) ---- */

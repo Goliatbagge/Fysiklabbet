@@ -644,15 +644,9 @@ for (const typ of valda) {
 /* ROTTECKNET ÖVER HELA UTTRYCKET (användarkrav 2026-11-16): '√(' i en
  * sträng till pennan ger ett rottecken framför en parentes, som på en
  * räknare. Rita roten med T.rot, {rot: '…'} i valueBracket eller
- * rootSign(). UNDANTAG_ROTPARENTES är arvsskulden från 2026-11-16 och ska
- * bara krympa. */
+ * rootSign(). T.fracH (mathTools) ritar '√(…)' i täljare och nämnare med
+ * strecket över hela radikanden, så där är skrivsättet tillåtet. */
 {
-  const UNDANTAG_ROTPARENTES = [
-    "T.fracH('2x+3', '2√(x^2+3x)'",
-    "T.fracH('1', '3√(x^2)'",
-    "T.fracH('√(b^2-4ac)', '2a'",
-    "T.fracH('√(64-48)', '4'",
-  ];
   const src = [path.join(ROOT, 'handskrift.js'), ...pennaFiler()]
     .map(f => fs.readFileSync(f, 'utf8')).join('\n');
   const rader = src.split('\n');
@@ -661,7 +655,8 @@ for (const typ of valda) {
     if (/^\s*(\/\*|\*|\/\/)/.test(rad)) return;              /* kommentar */
     if (/\[\['/.test(rad)) return;                              /* tankebubbla */
     if (!/'[^'\n]*√\(/.test(rad)) return;
-    if (UNDANTAG_ROTPARENTES.some(u => rad.includes(u))) return;
+    if (/T\.fracH\(/.test(rad)) return;                         /* ritas med rotstreck */
+    if (rad.includes("indexOf('√('")) return;                  /* motorn själv */
     fel.push((i + 1) + ': ' + rad.trim().slice(0, 70));
   });
   if (fel.length) {

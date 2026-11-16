@@ -1617,6 +1617,38 @@ fel på en ruta som skrollar i sig själv eller är nålad fast trots att den
 är högre än sin takhöjd. Kör den vid ändringar i frågekorten,
 uppgiftspanelen eller figurernas CSS.
 
+## ⚠️ Genomgångsfilmer läggs in i sitt avsnitt så snart de finns på YouTube
+
+**När en genomgångsfilm (ett teoriavsnitt som animerad film, se
+`.claude/genomgangsvideor.md`) har laddats upp på YouTube ska den i SAMMA
+arbetspass bäddas in i sitt avsnitt på sajten och pushas till main**
+(uttryckligt krav 2026-11-16). Uppladdningen är inte klar förrän filmen syns
+på sajten. Gör så här:
+
+1. Lägg ett `::: video`-block direkt under avsnittets `# Rubrik` i
+   `data/teori/<id>.md`, med meningen före:
+   ```
+   Hela genomgången finns också som film, där begreppen och formlerna förklaras steg för steg.
+
+   ::: video
+   ankare: genomgang-film
+   titel: Genomgång: <avsnittets titel>
+   youtube: <video-id>
+   :::
+   ```
+   Ingen `länk:`-rad: spelaren har redan "Titta på YouTube".
+2. `node data/teori/build.js`, och committa bara md-filen och
+   `data/teori/bundle.js` (inte de engelska filerna, som byggs om av sig själv).
+3. En rad i `UPDATES` i `index.html` med
+   `href: 'katalog.html?id=<id>&block=genomgang-film'`. Kommer flera filmer
+   samma dag räcker en gemensam rad.
+4. En punkt i `.claude/nyhetsbrev/planerat.md`, så att filmen nämns i nästa
+   veckobrev.
+
+Delade avsnitt (fy2-1.1–1.3, som också visas som fy1-3.11–3.13) och härledda
+kurser (1b, 2b, 3b) får filmen automatiskt. Redigera alltid källavsnittet.
+Första filmerna: fy2-1.1, 1.2, 1.3 och 1.5 (2026-11-16).
+
 ## Fritt filmmaterial (`::: video` + video-block i nyheter)
 
 **REGEL: När en text (teoriavsnitt, nyhetsartikel, simulering) refererar

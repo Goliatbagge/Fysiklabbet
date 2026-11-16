@@ -16931,8 +16931,7 @@
   }
 
   /* ---------------- scen: bestäm C ur en punkt (ma1c-4.12 ex 3) -------
-   * f(x) = C·x² går genom (3, 18). a) C = 2, b) f(6) = 72. Sista bubblan
-   * knyter ihop med skalningen: dubbelt x ger 2² = 4 gånger värdet. */
+   * f(x) = C·x² går genom (3, 18). Ur punkten fås C = 2. */
   function layoutPotensbestamc(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe;
     var tanke = mkTanke(T);
@@ -16967,6 +16966,169 @@
 
     y += 2.3 * F;
     xe = T.str('Svar: C=2', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 640, lastBase: y + 0.9 * F, padL: padL,
+             ekvval: 1 };
+  }
+
+  /* ---------------- scen: belysningen från en lampa (ma1c-4.12 ex 4) ---
+   * Avancerad tillämpning: E(x) = C·x^a, E(1) = 180 lux och E(3) = 20 lux.
+   * a) 1^a = 1 ger C = 180 direkt. 180·3^a = 20 ger 3^a = 1/9 = 1/3² =
+   *    3^(−2), och samma bas ger a = −2 (exponenterna ringas in).
+   * b) 180·x^(−2) = 5 ger x^(−2) = 1/36, 1/x² = 1/36, x² = 36, x = ±6.
+   *    Avståndet är positivt: 6 m. Kontroll 180/36 = 5.
+   * Samma tal som textlösningen i ma1c-4.12. */
+  function layoutPotensljus(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe, r;
+    var tanke = mkTanke(T);
+    var vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    var X = padL;   /* ekvationskedjorna står på samma x (REGEL 3r) */
+    var xwA = X + T.adv('180·3^a=20') + 0.9 * F;
+    var xwB = X + T.adv('180·x^−^2=5') + 0.9 * F;
+    /* ring kring en exponent: lägre och mindre än en vanlig ring */
+    function expRing(x0, x1, yb) {
+      return [x0, x1, yb, F, { cy: yb - 0.92 * F, ry: 0.46 * F }];
+    }
+
+    var yM = 166;
+    T.str('Belysningen är en potensfunktion', padL, yM - 1.6 * F, null, 0.62);
+    T.str('E(x)=C·x^a', padL, yM);
+    T.stepEnd();
+
+    y = yM + 2.6 * F;
+    T.str('E(1)=180  och  E(3)=20', padL, y);
+    T.stepEnd();
+
+    /* ---- a) C ur avståndet 1 m ---- */
+    tanke(y, [
+      [['1 upphöjt till vad som helst']],
+      [['är 1. Avståndet 1 m ger']],
+      [['därför C direkt.']]
+    ]);
+    y += 4.0 * F;
+    T.str('a) Avståndet 1 m ger C', padL, y - 1.6 * F, null, 0.62);
+    T.str('C·1^a=180', X, y);
+    T.stepEnd();
+
+    y += 2.3 * F;
+    T.str('C=180', X, y);
+    T.stepEnd();
+
+    /* ---- a) a ur avståndet 3 m ---- */
+    tanke(y, [
+      [['Nu är C känt. Avståndet 3 m']],
+      [['ger en ekvation där bara']],
+      [['exponenten a är okänd.']]
+    ]);
+    y += 4.0 * F;
+    T.str('Avståndet 3 m ger a', padL, y - 1.6 * F, null, 0.62);
+    T.str('180·3^a=20', X, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/180', xwA, '180·3^a=20', { x0: X, dyVagg: 2.6 });
+    xx = T.str('3^a=', X, y);
+    xx = T.fracH('20', '180', xx, y);
+    T.stepEnd();
+
+    xx = T.str('=', xx, y);
+    T.fracH('1', '9', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['9 är 3^2. Ett delat med en']],
+      [['potens skrivs som en negativ']],
+      [['exponent.']]
+    ], 1.0);
+    y += 4.2 * F;
+    xx = T.str('3^a=', X, y);
+    T.fracH('1', '3^2', xx, y);
+    T.stepEnd();
+
+    y += 3.0 * F;
+    T.str('3^a=3^−^2', X, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Samma bas på båda sidor.']],
+      [['Då måste exponenterna vara']],
+      [['lika.']]
+    ]);
+    var xr = X + T.adv('3^a=');
+    r = substRings(acts, [expRing(X + T.adv('3'), X + T.adv('3^a'), y),
+                          expRing(xr + T.adv('3'), xr + T.adv('3^−^2'), y)]);
+    y += 2.3 * F;
+    T.str('a=−2', X, y);
+    fadeRings(acts, r);
+    T.stepEnd();
+
+    y += 2.6 * F;
+    xe = T.str('Svar: C=180 och a=−2', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+
+    /* ---- b) avståndet där belysningen är 5 lux ---- */
+    tanke(y, [
+      [['Modellen är E(x) = 180 · x^−^2.']],
+      [['Belysningen ska vara 5 lux,']],
+      [['så nu söks x.']]
+    ], 0.5);
+    y += 4.6 * F;
+    T.str('b) Belysningen 5 lux ger', padL, y - 1.6 * F, null, 0.62);
+    T.str('180·x^−^2=5', X, y);
+    T.stepEnd();
+
+    y = ekvOp(y, '/180', xwB, '180·x^−^2=5', { x0: X, dyVagg: 2.6 });
+    xx = T.str('x^−^2=', X, y);
+    xx = T.fracH('5', '180', xx, y);
+    T.stepEnd();
+
+    xx = T.str('=', xx, y);
+    T.fracH('1', '36', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Negativ exponent: x^−^2 är']],
+      [['samma sak som 1 delat']],
+      [['med x^2.']]
+    ], 1.0);
+    y += 4.4 * F;
+    xx = T.fracH('1', 'x^2', X, y);
+    xx = T.str('=', xx, y);
+    T.fracH('1', '36', xx, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Täljarna är lika, så']],
+      [['nämnarna måste också']],
+      [['vara lika.']]
+    ], 1.0);
+    y += 3.9 * F;
+    T.str('x^2=36', X, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Exponenten 2 är jämn. Jag']],
+      [['drar roten ur båda led och']],
+      [['får två lösningar.']]
+    ]);
+    y += 2.6 * F;
+    xx = T.str('x=±', X, y);
+    T.rot('36', xx + 4, y);
+    T.stepEnd();
+
+    y += 2.5 * F;
+    T.str('x=±6', X, y);
+    T.stepEnd();
+
+    tanke(y, [
+      [['Ett avstånd kan inte vara']],
+      [['negativt, så bara x = 6 duger.']],
+      [['Kontroll: 180/36 = 5. Rimligt.']]
+    ]);
+    y += 2.8 * F;
+    xe = T.str('Svar: 6 m från lampan', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -65436,6 +65598,7 @@
                    potensavlas: layoutPotensavlas,
                    potensekvuddajamn: layoutPotensekvuddajamn,
                    potensbestamc: layoutPotensbestamc,
+                   potensljus: layoutPotensljus,
                    funktionifunktion: layoutFunktionifunktion,
                    /* ma1c kapitel 5 — Statistik och sannolikhetslära */
                    enkatfraga: layoutEnkatfraga,

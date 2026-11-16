@@ -265,6 +265,109 @@ $$
 :::
 :::
 
+::: exempel "Exempel 4 — Belysningen från en lampa (Avancerad)"
+**En fotograf mäter belysningen från en lampa med en ljusmätare. På avståndet 1 m från lampan är belysningen 180 lux, och på avståndet 3 m är den 20 lux. Belysningen $E(x)$ lux på avståndet $x$ meter kan beskrivas med en potensfunktion $E(x) = C \cdot x^a$.<br>a) Bestäm konstanterna $C$ och $a$.<br>b) På vilket avstånd från lampan är belysningen 5 lux?**
+
+::: handskrift
+typ: potensljus
+:::
+
+::: textlosning
+**a)** Mätningarna ger $E(1) = 180$ och $E(3) = 20$. Talet 1 upphöjt
+till vilken exponent som helst är 1, så avståndet 1 m ger $C$ direkt:
+
+$$
+C \cdot 1^a = 180
+$$
+
+$$
+C = 180
+$$
+
+Nu är $C$ känt, och avståndet 3 m ger en ekvation där bara exponenten
+$a$ är okänd:
+
+$$
+180 \cdot 3^a = 20
+$$
+
+Vi dividerar båda led med 180:
+
+$$
+\dfrac{180 \cdot 3^a}{180} = \dfrac{20}{180}
+$$
+
+$$
+3^a = \dfrac{20}{180} = \dfrac{1}{9}
+$$
+
+Talet 9 är $3^2$, och ett delat med en potens kan skrivas som en potens
+med negativ exponent:
+
+$$
+3^a = \dfrac{1}{3^2}
+$$
+
+$$
+3^a = 3^{-2}
+$$
+
+Basen är 3 på båda sidor, så exponenterna måste vara lika:
+
+$$
+a = -2
+$$
+
+**Svar:** $C = 180$ och $a = -2$
+
+**b)** Modellen är $E(x) = 180 \cdot x^{-2}$. Belysningen ska vara
+5 lux:
+
+$$
+180 \cdot x^{-2} = 5
+$$
+
+Vi dividerar båda led med 180:
+
+$$
+\dfrac{180 \cdot x^{-2}}{180} = \dfrac{5}{180}
+$$
+
+$$
+x^{-2} = \dfrac{5}{180} = \dfrac{1}{36}
+$$
+
+Den negativa exponenten betyder ett delat med $x^2$:
+
+$$
+\dfrac{1}{x^2} = \dfrac{1}{36}
+$$
+
+Täljarna är lika, så nämnarna måste också vara lika:
+
+$$
+x^2 = 36
+$$
+
+Exponenten 2 är jämn, så när vi drar roten ur båda led får vi två
+lösningar:
+
+$$
+x = \pm\sqrt{36}
+$$
+
+$$
+x = \pm 6
+$$
+
+Ett avstånd kan inte vara negativt, så bara $x = 6$ är en lösning till
+problemet. Kontroll: $E(6) = 180 \cdot 6^{-2} = \dfrac{180}{36} = 5$,
+vilket stämmer.
+
+**Svar:** 6 m från lampan
+:::
+:::
+
 ::: härledning "OBS! Tre vanliga fel"
 - **Att blanda ihop $x^2$ och $2^x$.** Titta på var $x$ står. I basen är
   det en potensfunktion, i exponenten en exponentialfunktion.
@@ -298,7 +401,7 @@ $$
 
 ::: sampunkt "Räkna med dem"
 - Funktionsvärde: sätt in *x*-värdet. $f(x) = x^{4}$ ger $f(2) = 16$.
-- Bestäm $C$: sätt in en känd punkt och lös ekvationen.
+- Bestäm $C$ och $a$: sätt in kända punkter. $x = 1$ ger $C$ direkt.
 - Läs av ur grafen: $f(2)$ lodrätt från $x = 2$, $f(x) = 8$ vågrätt från $y = 8$.
 :::
 :::

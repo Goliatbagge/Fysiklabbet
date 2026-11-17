@@ -1,0 +1,35 @@
+03:15:01  [idag] === Nyhetsjobb: start (2026-11-17) ===
+03:15:03  [idag] Dagens nyhet finns (förberedd i går).
+03:15:03  [idag] Startar Claude Code (headless, modell opus, nyckel)...
+03:20:02  [imorgon] === Nyhetsjobb: start (2026-11-17) ===
+03:20:02  [imorgon] Dagens och morgondagens nyhet finns redan. Inget att göra.
+03:20:02  [imorgon] === Nyhetsjobb: slut ===
+03:25:56  [idag] Artikeln till den 18 november är klar och committad på grenen `nyhetsjobb` (edb201f5). Jag har inte pushat och inte mejlat. Datumgrinden döljer artikeln till midnatt.
+03:25:56  [idag] 
+03:25:56  [idag] **Artikeln: ”Atomkärnor kan sända ut alfa- och betastrålning i ett enda sönderfall, föreslår fysiker”** (Kärnfysik, id `2026-11-18-karnan-som-sander-ut-tva-partiklar-pa-en-gang`)
+03:25:56  [idag] - **Studien:** Wenqiang Zhang (Kinesiska vetenskapsakademien, Lanzhou) och Chong Qi (KTH). Den är teoretisk och föreslår att en atomkärna kan skjuta ut en alfapartikel och en betapartikel i en och samma händelse. Hittills har sex kortlivade jod-, xenon- och cesiumkärnor tolkats som sönderfall i två steg. Den nya modellen kan förklara formen på deras alfatoppar, som inte har stämt med de vanliga modellerna sedan 1970-talet.
+03:25:56  [idag] - **Källor:** Jag läste hela förtrycket arXiv:2606.10567v3 med tabeller. Studien är accepterad i Physical Review Letters (6 november) men ännu inte publicerad i ett nummer, och artikeln säger just det. Studiens förbehåll står kvar: inga avgörande belägg finns än, och toppens läge blir omkring 1 MeV fel för fyra av kärnorna.
+03:25:56  [idag] - **Ämnesområde:** Inte samma som grannarna. Den 17 november handlade om astronomi, och senaste kärnfysiknyheten var den 11 november.
+03:25:56  [idag] - **Bild:** Ett foto av mätstationen ISOLDE Decay Station vid Cern (Julien Marius Ordan, CC BY 4.0), beskuret till bredformat. Bildtexten säger att studien är teoretisk. Jag använde inte studiens figur, eftersom arXiv-licensen inte tillåter det. Ingen AI-bild behövdes.
+03:25:56  [idag] - **Simuleringsrutan** leder till ”Radioaktivt sönderfall”, och lärarrutan har tre frågor.
+03:25:56  [idag] - **Ordlistan** har fått två nya uppslag: magiskt tal och virtuellt tillstånd.
+03:25:56  [idag] 
+03:25:56  [idag] **Utgivaren:** Första utslaget var RÄTTA FÖRST, med sex punkter som måste rättas och fem rekommendationer. Bland annat stod studien som publicerad fast den bara är accepterad, ingressen lovade för mycket och citatet stod som sagt ”till Phys.org”. Jag rättade alla elva punkterna, och omgranskningen gav GODKÄND.
+03:25:56  [idag] 
+03:25:56  [idag] **Verifiering:** `verify-navigation`, `verify-begrepp` och `verify-sitemap` är gröna, och sökningen på ”upphets” ger inga träffar. `verify-sprak` visar tre fel av typen ”gånger mindre”, men de ligger alla i äldre artiklar.
+03:25:56  [idag] 
+03:25:56  [idag] **Fil- och loggändringar:**
+03:25:56  [idag] - `node data/build-nyheter-og.js` skrev om hundratals filer bara med andra radslut, inget innehåll ändrades. Jag återställde dem, så committen innehåller bara nyhetsfilerna.
+03:25:56  [idag] - `publicerat.md`, `ko.md` och `granskningar.md` är uppdaterade. I kön ligger nu även ett uppslag om materia och antimateria från LHCb. Brevteasern om KM3NeT står kvar orörd.
+03:25:56  [idag] 
+03:25:56  [idag] **Säg till ägaren:** Enligt anteckningen i `ko.md` ska ägaren få veta att den önskade artikeln om Mpembaeffekten i en qubit inte går att skriva. Fönstret stängde den 14 november, och studien finns fortfarande bara bakom betalvägg, utan förtryck.
+03:25:57  [idag] Claude avslutade med kod 0
+03:26:03  [idag] Pushat till main.
+03:26:03  [idag] Artikel 2026-11-18 pushad: 2026-11-18-karnan-som-sander-ut-tva-partiklar-pa-en-gang
+03:27:34  [idag] https://fysiklabbet.se/nyheter.html?forhand=2026-11-18-karnan-som-sander-ut-tva-partiklar-pa-en-gang
+03:27:34  [idag] Mejlet byggt av mallen (C:\claude\Fysiklabbet-nyhetsjobb\.claude\nyheter\logg\mejl-2026-11-18).
+03:27:34  [idag] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+03:28:27  [idag] Mejlet är skickat till [ägaren] med utgivarplaceholdern ersatt: utgivaren bad om elva rättningar (bland annat att studien bara är accepterad i PRL än, fem alfaspektrum i stället för sex, "i stort" i stället för "bredd stämmer", och korrekt källhänvisning för citatet), och alla är införda vid omgranskningen som ledde till GODKÄND.
+03:28:28  [idag] Claude avslutade med kod 0
+03:28:28  [idag] Mejlet till ägaren är skickat.
+03:28:28  [idag] === Nyhetsjobb: slut ===

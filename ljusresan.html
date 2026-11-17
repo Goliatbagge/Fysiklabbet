@@ -2904,7 +2904,7 @@ function fyllStopptext(i) {
       <div class="s-stråle"></div>
       <p class="s-ingress">${p.ingress}</p>
       ${dataRad(p)}
-      <div class="s-knappar"><button class="knapp prim" data-omlopp="${i}">Gå in i omloppsbana <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="10" ry="5" transform="rotate(-20 12 12)"/></svg></button><button class="knapp sek" data-omlopp="${i}" data-flik="spektrum">Spektrum</button></div>`;
+      <div class="s-knappar"><button class="knapp prim" data-omlopp="${i}">Gå in i omloppsbana <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="10" ry="5" transform="rotate(-20 12 12)"/></svg></button><button class="knapp sek" data-omlopp="${i}" data-flik="spektrum">Spektrum</button><button class="knapp sek" data-till="${i + 1}">Fortsätt resan <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>`;
   }
   const acc = i < PLANETER.length ? PLANETER[i].acc : '#ffd27a';
   document.documentElement.style.setProperty('--acc', acc);

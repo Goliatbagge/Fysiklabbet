@@ -601,12 +601,25 @@
     if (!drag.igang) {
       if (Math.hypot(e.clientX - drag.x, e.clientY - drag.y) < 6) return;
       drag.igang = true;
+      // Själva namnrutan följer pekaren: en kopia i samma storlek, som hålls
+      // i samma punkt där man tog tag. Den läggs i arket (inte i body), så att
+      // den syns också i storskärmsläget och får samma mått som där.
+      const r = drag.li.getBoundingClientRect();
+      const kopia = drag.li.cloneNode(true);
+      kopia.classList.remove('vald', 'mal');
+      kopia.style.width = r.width + 'px';
+      const cs = getComputedStyle(drag.li);
+      kopia.style.fontSize = cs.fontSize;
+      kopia.style.setProperty('--g', cs.getPropertyValue('--g'));
+      drag.spok = h('ul', { class: 'namn spok', 'aria-hidden': 'true' }, kopia);
+      drag.dx = drag.x - r.left;
+      drag.dy = drag.y - r.top;
+      A.append(drag.spok);
       drag.li.classList.add('dras');
-      drag.spok = h('div', { class: 'spok', text: drag.li.textContent });
-      document.body.append(drag.spok);
+      document.body.classList.add('drar-namn');
     }
-    drag.spok.style.left = e.clientX + 'px';
-    drag.spok.style.top = e.clientY + 'px';
+    drag.spok.style.left = (e.clientX - drag.dx) + 'px';
+    drag.spok.style.top = (e.clientY - drag.dy) + 'px';
     const m = malVid(e.clientX, e.clientY);
     if (drag.mal && drag.mal.el) drag.mal.el.classList.remove('mal');
     drag.mal = m && !(m.g === drag.fran.g && (m.e == null || m.e === drag.fran.e)) ? m : null;
@@ -616,6 +629,7 @@
     if (!drag) return;
     const d = drag; drag = null;
     if (d.spok) d.spok.remove();
+    document.body.classList.remove('drar-namn');
     if (!d.igang) { klick(d.fran); return; }
     const m = malVid(e.clientX, e.clientY);
     vald = null;

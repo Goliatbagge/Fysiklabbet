@@ -565,7 +565,7 @@ import * as THREE from 'three';
    av mönsterregler. Canvas-text och tal formateras direkt i koden.
    ===================================================================== */
 const EN = !!window.LR_EN;
-if (EN) await import('./ljusresan-en.js?v=1');
+if (EN) await import('./ljusresan-en.js?v=2');
 const LE = window.LJUS_EN || { data: {}, ui: {}, regler: [] };
 const T = (s) => (EN && LE.ui[s]) || s;
 function laggEngelska(rot, namn) {
@@ -2770,7 +2770,9 @@ function startaRealtid() {
   realtid.start = k;
   realtid.t0 = performance.now();
   realtid.seg = k;
-  realtid.not = k === 0 ? 'Ljuset lämnar solen nu' : `Ljuset lämnar ${PLANETER[k].namn} nu`;
+  realtid.not = EN
+    ? (k === 0 ? 'The light is leaving the Sun now' : `The light is leaving ${PLANETER[k].namn} now`)
+    : (k === 0 ? 'Ljuset lämnar solen nu' : `Ljuset lämnar ${PLANETER[k].namn} nu`);
   realtid.notTill = realtid.t0 + 6000;
   realtidKnapp.setAttribute('aria-pressed', 'true');
   klockaEl.classList.add('realtid');
@@ -2795,7 +2797,7 @@ function uppdateraRealtid(nu) {
   if (ae >= slut) {
     realtid.ae = slut; realtid.s = NS - 1;
     stoppaRealtid();
-    $('kNot').textContent = `Ljuset har nått Voyager 1 efter ${tidText(ljusTid(slut))}`.replace(/ /g, NB);
+    $('kNot').textContent = (EN ? `The light has reached Voyager 1 after ${tidText(ljusTid(slut))}` : `Ljuset har nått Voyager 1 efter ${tidText(ljusTid(slut))}`).replace(/ /g, NB);
     window.scrollTo({ top: (NS - 1) * stoppH, behavior: 'instant' });
     return;
   }
@@ -2809,9 +2811,13 @@ function uppdateraRealtid(nu) {
     // ljuset har passerat en eller flera världar sedan förra bildrutan
     realtid.seg = i;
     const namn = PLANETER[i].namn;
-    realtid.not = i === 4
-      ? `Ljuset har nått jorden efter ${tidText(ljusTid(AE_AVST.jorden))} och månen ${fmt(ljusTid(a - AE_AVST.jorden), 1)} s senare`
-      : `Ljuset har nått ${namn} efter ${tidText(ljusTid(a))}`;
+    realtid.not = EN
+      ? (i === 4
+        ? `The light has reached Earth after ${tidText(ljusTid(AE_AVST.jorden))} and the Moon ${fmt(ljusTid(a - AE_AVST.jorden), 1)} s later`
+        : `The light has reached ${namn} after ${tidText(ljusTid(a))}`)
+      : (i === 4
+        ? `Ljuset har nått jorden efter ${tidText(ljusTid(AE_AVST.jorden))} och månen ${fmt(ljusTid(a - AE_AVST.jorden), 1)} s senare`
+        : `Ljuset har nått ${namn} efter ${tidText(ljusTid(a))}`);
     realtid.notTill = nu + 9000;
     musik.ankomst();
   }
@@ -3097,7 +3103,7 @@ function kopplaRaknare(p) {
     const kannsSomTxt = kannsSom >= 10 ? fmt(Math.round(kannsSom)) : sig(kannsSom, 2);
     const rader = [
       [`Din tyngd, <i>F</i><sub>G</sub> = <i>m</i> · <i>g</i>`, `${sig(tyngd, 3)}${NB}N`
-        + (p.id === 'jorden' ? '' : `<span style="display:block;text-align:right;font-weight:400;font-size:12px;color:var(--dim)">(känns som ${kannsSomTxt}${NB}kg på jorden)</span>`)],
+        + (p.id === 'jorden' ? '' : `<span style="display:block;text-align:right;font-weight:400;font-size:12px;color:var(--dim)">${EN ? `(feels like ${kannsSomTxt}${NB}kg on Earth)` : `(känns som ${kannsSomTxt}${NB}kg på jorden)`}</span>`)],
       ['Tyngden jämfört med på jorden', `${sig(p.g / 9.82, 2)} gånger så stor`],
       ['Ett hopp på 50 cm på jorden blir här', hopp >= 1 ? `${sig(hopp, 2)}${NB}m` : `${sig(hopp * 100, 2)}${NB}cm`],
       ['Ett fall från 10 m höjd tar', `${sig(fall, 2)}${NB}s`],
@@ -4092,7 +4098,10 @@ function uppdateraHUD(s, info) {
   else if (realtid.aktiv) {
     const nasta = Math.min(realtid.seg + 1, NS - 1);
     const namn = STOPP[nasta] === 'slut' ? 'Voyager 1' : PLANETER[nasta].namn;
-    st = `Realtid · på väg mot <b>${namn}</b> · framme om ${nb(tidText(Math.max(0, ljusTid(AE_AVST[STOPP[nasta]] - realtid.ae))))}<span class="titta">Skrolla för att lämna realtiden</span>`;
+    const kvar = nb(tidText(Math.max(0, ljusTid(AE_AVST[STOPP[nasta]] - realtid.ae))));
+    st = EN
+      ? `Real time · heading for <b>${namn}</b> · arriving in ${kvar}<span class="titta">Scroll to leave real time</span>`
+      : `Realtid · på väg mot <b>${namn}</b> · framme om ${kvar}<span class="titta">Skrolla för att lämna realtiden</span>`;
   } else if (info.t > 0.02 && info.t < 0.98 && i + 1 < NS) {
     const namn = STOPP[i + 1] === 'slut' ? 'Voyager 1' : PLANETER[i + 1].namn;
     st = `På väg mot <b>${namn}</b> · framme om ${nb(tidText(Math.max(0, ljusTid(b - ae))))}<span class="titta">Håll ned musknappen och dra för att se dig omkring</span>`;

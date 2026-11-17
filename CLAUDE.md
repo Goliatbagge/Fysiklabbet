@@ -747,6 +747,16 @@ Så här bygger du scenen:
    ritade scenen en kulle från (−1, 0) med toppen i (0,5; 4), medan
    uppgiftens graf är y = 4 − x² med tom ring i (−1, 3)). Se REGEL
    "SAMMA GRAF SOM I UPPGIFTEN" i filhuvudet.
+3u. **Integralgränserna står bredvid tecknet, aldrig på det.** Den övre
+   gränsen står till höger om integraltecknets övre krok och den undre
+   till höger om den nedre kroken (användarkrav 2026-11-17: "1" och "4"
+   satt på krokarna i `ma4-3.2` exempel 1 och gjorde integralen
+   svårläst). Skriv gränserna med `'∫_1^4'` eller `mkIntegral()`, som
+   använder konstanterna `INT_SUP_X`/`INT_SUB_X` i `handskrift.js`. En
+   egen hjälpare för bråk- eller flerteckensgränser räknar från
+   tecknets BÖRJAN med samma tal. `verify-handskrift.js` ger fel när
+   bläck nuddar integraltecknet. Se REGEL "INTEGRALGRÄNSERNA BREDVID
+   TECKNET" i filhuvudet.
 3r. **En ekvation som skrivs om rad för rad börjar på samma x varje rad.**
    `−3 = 2 · 4 + m` och raden under, `−3 = 8 + m`, ska stå rakt under
    varandra. Tidigare stod kedjans första rad på `padL` och resten på

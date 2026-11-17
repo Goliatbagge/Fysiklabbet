@@ -305,6 +305,31 @@ function zonPunkt(pts, zonX, zonY) {
   return null;
 }
 
+/* minsta avstånd mellan två polylinjer (segment mot segment) */
+const INTEGRAL_LUFT = 1.5;   /* px; under detta nuddar bläcket ∫-tecknet */
+function segAvstand(p, q, r, s) {
+  const d = (a, b, c) => {
+    const vx = c[0] - b[0], vy = c[1] - b[1], L2 = vx * vx + vy * vy;
+    let t = L2 ? ((a[0] - b[0]) * vx + (a[1] - b[1]) * vy) / L2 : 0;
+    t = Math.max(0, Math.min(1, t));
+    return Math.hypot(a[0] - b[0] - t * vx, a[1] - b[1] - t * vy);
+  };
+  const kors = (a, b, c, e) => {
+    const o = (u, v, w) => (v[0] - u[0]) * (w[1] - u[1]) - (v[1] - u[1]) * (w[0] - u[0]);
+    return o(a, b, c) * o(a, b, e) < 0 && o(c, e, a) * o(c, e, b) < 0;
+  };
+  if (kors(p, q, r, s)) return 0;
+  return Math.min(d(p, r, s), d(q, r, s), d(r, p, q), d(s, p, q));
+}
+function linjeAvstand(A, B) {
+  let m = Infinity;
+  if (A.length === 1) A = [A[0], A[0]];
+  for (let i = 0; i + 1 < A.length; i++)
+    for (let j = 0; j + 1 < B.length; j++)
+      m = Math.min(m, segAvstand(A[i], A[i + 1], B[j], B[j + 1]));
+  return m;
+}
+
 function granska(HK, typ, cfg) {
   const fel = [];
   const varn = [];
@@ -363,6 +388,33 @@ function granska(HK, typ, cfg) {
       }
       const bb = nyBox(); bboxAvPunkter(a.pts, bb);
       fore.push(bb);
+    }
+  }
+
+  /* INTEGRALGRÄNSERNA BREDVID TECKNET (REGEL i handskrift.js,
+   * användarkrav 2026-11-17): inget annat bläck får nudda ∫-tecknet.
+   * Gränserna hamnade förut på krokarna ("1" och "4" i ma4-3.2 exempel 1)
+   * och tecknet blev svårläst. ∫-strecken märks med integral: 1 av
+   * placeGlyph. Ringar (blå inringningar) får korsa tecknet. */
+  {
+    const ints = L.acts.filter(a => a.kind === 'stroke' && a.integral &&
+                                    a.pts && a.pts.length > 1);
+    for (const s of ints) {
+      const bb = nyBox(); bboxAvPunkter(s.pts, bb);
+      let min = Infinity;
+      for (const a of L.acts) {
+        if (a.kind !== 'stroke' || a.integral || a.ring || !a.pts) continue;
+        const ab = nyBox(); bboxAvPunkter(a.pts, ab);
+        if (ab.x1 < bb.x0 - 4 || ab.x0 > bb.x1 + 4 ||
+            ab.y1 < bb.y0 - 4 || ab.y0 > bb.y1 + 4) continue;
+        min = Math.min(min, linjeAvstand(a.pts, s.pts));
+      }
+      if (min < INTEGRAL_LUFT) {
+        fel.push('bläck nuddar integraltecknet vid x=' +
+                 ((bb.x0 + bb.x1) / 2).toFixed(0) + ', y=' + bb.y1.toFixed(0) +
+                 ' (avstånd ' + min.toFixed(1) + ' px): gränserna ska stå ' +
+                 'till höger om krokarna');
+      }
     }
   }
 

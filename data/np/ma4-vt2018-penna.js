@@ -32,11 +32,11 @@
 
   function reg(nr, fn) { HK.registrera('ma4-vt2018-u' + nr, fn); }
 
-  /* Ensiffrig ÖVRE integralgräns: sätts till höger om och ovanför ∫-
-   * tecknets krok (samma läge som i ma4-vt2022-penna.js). */
+  /* Ensiffrig ÖVRE integralgräns när den undre skrivs med undreGrans:
+   * till höger om den övre kroken (x = efter ∫-tecknet). */
   function ovreTal(T, F, x, yb, ch) {
-    var x0 = x + 0.36 * F;
-    return T.str(ch, x0, yb - 1.08 * F, null, 0.6) + 0.12 * F;
+    var x0 = x + 0.16 * F;
+    return T.str(ch, x0, yb - 0.62 * F, null, 0.6) + 0.12 * F;
   }
   /* Flerteckens UNDRE integralgräns (−3): pennans _-syntax staplar bara
    * ett tecken, så gränsen skrivs här, vid krokens nederdel.
@@ -45,7 +45,8 @@
     /* minustecknet ritas som eget streck i siffrans mitthöjd (pennans
      * '-' i 0,6-skala hamnar för lågt och läses som ett understreck) */
     var neg = s.charAt(0) === '-', dig = neg ? s.slice(1) : s;
-    var xs = x0 + 0.26 * F, yl = yb + 0.52 * F;
+    /* till höger om den nedre kroken, som pennans _-gräns */
+    var xs = x0 + 0.52 * F, yl = yb + 0.24 * F;
     if (neg) {
       T.line([xs, yl - 0.27 * F], [xs + 0.26 * F, yl - 0.27 * F]);
       T.pause(80);
@@ -2357,17 +2358,15 @@
     }
   }
 
-  /* Integraltecken med gränser som pennan inte klarar själv: en undre
-   * gräns med flera tecken (1,5 eller −3) ritas till vänster om krokens
-   * nederdel, och den övre gränsen till höger om och ovanför kroken (samma
-   * läge som ovreTal i ma4-vt2022-penna.js). Returnerar x efter tecknet
-   * och gränserna. */
+  /* Integraltecken med gränser med flera tecken (1,5, −3, 40): den övre
+   * gränsen till höger om den övre kroken och den undre till höger om den
+   * nedre, aldrig på tecknet (REGEL "INTEGRALGRÄNSERNA BREDVID TECKNET" i
+   * handskrift.js). Returnerar x efter tecknet och gränserna. */
   function integral(T, F, x, yb, lo, hi) {
-    var xs = x + 0.42 * F + Math.max(0, T.adv(lo, 0.62) - 0.40 * F);
-    var x1 = T.str('∫', xs, yb);
-    T.str(lo, xs + 0.10 * F - T.adv(lo, 0.62), yb + 0.30 * F, null, 0.62);
-    var x2 = T.str(hi, x1 + 0.06 * F, yb - 1.10 * F, null, 0.62);
-    return Math.max(x1, x2) + 0.14 * F;
+    var x1 = T.str('∫', x, yb);
+    var x2 = T.str(hi, x + 0.70 * F, yb - 0.62 * F, null, 0.62);
+    var x3 = T.str(lo, x + 0.46 * F, yb + 0.22 * F, null, 0.62);
+    return Math.max(x1, x2, x3) + 0.14 * F;
   }
 
   /* Högt rottecken över en integrand med bråk och stora parenteser: en

@@ -36,12 +36,14 @@
   /* Litet stående bråk som ÖVRE GRÄNS efter ∫ eller ] (π/2 som gräns).
    * Pennans ^-syntax klarar bara ett tecken per gräns, och en gräns får
    * aldrig skrivas med snedstreck. kind = '∫' eller ']'. x = där
-   * gränsen börjar (x efter tecknet). Returnerar x efter bråket. */
+   * ∫-tecknet börjar, eller x efter ]. Returnerar x efter bråket. */
   function ovreGrans(T, F, x, yb, num, den, kind) {
     var sc = 0.6, f = F * sc;
-    var ybar = yb - (kind === '∫' ? 1.40 : 1.18) * F;
-    /* efter ∫ sticker krokens topp ut ~5 px förbi tecknets bredd */
-    var x0 = x + (kind === '∫' ? 0.36 * F : 0.12 * F);
+    var ybar = yb - 1.18 * F;
+    /* efter ∫ är x där TECKNET börjar, och bråket ställs till höger om
+     * den övre kroken (REGEL "INTEGRALGRÄNSERNA BREDVID TECKNET" i
+     * handskrift.js); efter ] är x där gränsen börjar */
+    var x0 = x + (kind === '∫' ? 0.70 * F : 0.12 * F);
     var nw = T.adv(num, sc), dw = T.adv(den, sc);
     var w = Math.max(nw, dw) + 0.3 * f;
     T.str(num, x0 + (w - nw) / 2, ybar - 0.32 * f, null, sc);
@@ -50,14 +52,6 @@
     T.pause(100);
     T.str(den, x0 + (w - dw) / 2, ybar + 1.04 * f, null, sc);
     return x0 + w + 0.12 * F;
-  }
-
-  /* Ensiffrig ÖVRE integralgräns: pennans egen ^-gräns hamnar på ∫-tecknets
-   * krok, så den sätts här en bit till höger om och ovanför kroken (samma
-   * läge som ovreGrans). Returnerar x efter gränsen. */
-  function ovreTal(T, F, x, yb, ch) {
-    var x0 = x + 0.36 * F;
-    return T.str(ch, x0, yb - 1.08 * F, null, 0.6) + 0.12 * F;
   }
 
   /* Streckad linje (asymptoter, speglingslinjer) med n delsträckor. */
@@ -402,8 +396,8 @@
 
     /* raden når x > 420 och gränsen sticker upp 1,7·F: läggs under y = 150 */
     y = 210;
-    xx = T.str('∫_0', padL + 12, y);
-    xx = ovreGrans(T, F, xx, y, 'π', '2', '∫');
+    xx = Math.max(T.str('∫_0', padL + 12, y),
+                  ovreGrans(T, F, padL + 12, y, 'π', '2', '∫'));
     var yE = y, xs0 = xx + 0.3 * F;
     var xs1 = T.str('(sin^2 x+cos^2 x', xs0, y);
     T.str('+sin x) dx', xs1, y);
@@ -417,8 +411,8 @@
     var ring = substRings(acts, [[xs0 + 0.3 * F, xs1, yE, F]]);
     y += 3.0 * F;
     xx = T.str('=', padL, y);
-    xx = T.str('∫_0', xx + 0.45 * F, y);
-    xx = ovreGrans(T, F, xx, y, 'π', '2', '∫');
+    var xi = xx + 0.45 * F;
+    xx = Math.max(T.str('∫_0', xi, y), ovreGrans(T, F, xi, y, 'π', '2', '∫'));
     T.str('(1+sin x) dx', xx + 0.3 * F, y);
     fadeRings(acts, ring);
     T.stepEnd();
@@ -704,8 +698,7 @@
     T.str('h(x)=x^2', padL, y + 2.0 * F);
     y += 2.0 * F;
     y += 3.0 * F;
-    xx = T.str('∫_0', padL + 12, y);
-    xx = ovreTal(T, F, xx, y, 'π');
+    xx = T.str('∫_0^π', padL + 12, y) + 0.12 * F;
     passa(T, '(g’(x)·h(x)+g(x)·h’(x)) dx', xx + 0.2 * F, y);
     T.stepEnd();
 
@@ -879,8 +872,7 @@
     T.str('Rotation kring y-axeln', padL, y - 1.75 * F, null, 0.62);
     /* undre gränsen hamnar till vänster om ∫: luft efter π */
     xx = T.str('V=π', padL, y);
-    xx = T.str('∫_0', xx + 0.45 * F, y);
-    xx = ovreTal(T, F, xx, y, '2');
+    xx = T.str('∫_0^2', xx + 0.45 * F, y) + 0.12 * F;
     T.str('x^2 dy', xx + 0.2 * F, y);
     T.stepEnd();
 
@@ -927,8 +919,7 @@
 
     y += 2.8 * F;
     xx = T.str('V=π', padL, y);
-    xx = T.str('∫_0', xx + 0.45 * F, y);
-    xx = ovreTal(T, F, xx, y, '2');
+    xx = T.str('∫_0^2', xx + 0.45 * F, y) + 0.12 * F;
     T.str('y^8 dy', xx + 0.2 * F, y);
     T.stepEnd();
 

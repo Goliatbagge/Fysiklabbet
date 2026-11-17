@@ -122,6 +122,18 @@
  * kurvan. Granska alltid pennscenens skärmdump SIDA VID SIDA med
  * uppgiftens figur innan scenen räknas som klar.
  *
+ * REGEL (INTEGRALGRÄNSERNA BREDVID TECKNET, användarkrav 2026-11-17):
+ * gränserna får aldrig stå PÅ integraltecknet. Den övre gränsen står till
+ * höger om den övre kroken och den undre till höger om den nedre kroken,
+ * som i en tryckt formel. Tidigare satt "4" på den övre kroken och "1" på
+ * den nedre (ma4-3.2 exempel 1) och tecknet blev svårläst. Lägena finns i
+ * konstanterna INT_SUP_X/INT_SUP_Y/INT_SUB_X/INT_SUB_Y och används av
+ * '∫_1^4'-syntaxen (placeString) och mkIntegral(). Skriv gränserna med
+ * dem, aldrig med egna förskjutningar räknade från tecknets slut. En
+ * hjälpare för gränser som pennan inte klarar själv (bråk, flera tecken)
+ * räknar från ∫-tecknets BÖRJAN med samma tal. verify-handskrift.js ger
+ * fel när annat bläck kommer närmare tecknet än 1,5 px.
+ *
  * REGEL (figurscener, t.ex. hage/gungbrada): i de handritade DIAGRAMMEN
  * (till skillnad från algebra-raderna) ritas grundscenen — streckgubbar,
  * bräda/vägg/hage-linjer, skraffering — alltid i grafit. Alla
@@ -1357,7 +1369,10 @@
         var ry = cy + (X - cx) * sinR + (Y - cy) * cosR;
         return [rx, ry];
       });
-      out.push({ kind: 'stroke', pts: humanize(pts), color: color });
+      var akt = { kind: 'stroke', pts: humanize(pts), color: color };
+      /* märks för verify-handskrift.js (INTEGRALGRÄNSERNA BREDVID TECKNET) */
+      if (ch === '∫') akt.integral = 1;
+      out.push(akt);
     });
     out.push({ kind: 'pause', ms: 60 });
     return x + g.w * s + 1.5;
@@ -1374,6 +1389,14 @@
     return w;
   }
 
+  /* Integralgränsernas läge, i F räknat från ∫-tecknets början. Den övre
+   * kroken går från 0,45·F till 0,70·F och den nedre från 0,19·F till
+   * 0,40·F, så gränserna ställs utanför krokarna (se REGEL "INTEGRAL-
+   * GRÄNSERNA BREDVID TECKNET"). Den undre gränsen går inte lägre än
+   * 0,22·F under baslinjen, för svarsradens understrykning ligger 0,26·F
+   * under. Används av placeString, stringAdvance och mkIntegral. */
+  var INT_SUP_X = 0.70, INT_SUP_Y = -0.62, INT_SUB_X = 0.46, INT_SUB_Y = 0.22;
+
   /* Skriv en teckensträng, med luft kring binära operatorer.
    * ^c = upphöjt (exponent/övre gräns), _c = nedsänkt (undre gräns).
    * Efter ∫ och ] placeras gränserna högt/lågt (integralgränser resp.
@@ -1388,15 +1411,9 @@
         if (sc == null) break;
         var sub = ch === '_';
         var sb;
-        if (prevBase === '∫') sb = baseline + (sub ? 0.22 : -0.95) * F;
+        if (prevBase === '∫') sb = baseline + (sub ? INT_SUB_Y : INT_SUP_Y) * F;
         else if (prevBase === ']') sb = baseline + (sub ? 0.30 : -0.78) * F;
         else sb = baseline + (sub ? 0.15 : -0.5) * F;
-        if (prevBase === '∫' && sub) {
-          /* undre integralgräns: till VÄNSTER om krokens nederdel */
-          var aw = (GLYPHS[sc] ? GLYPHS[sc].w : 40) * s * 0.62;
-          placeGlyph(sc, prevBaseX - aw * 0.85, sb, s * 0.62, out, color);
-          continue;
-        }
         /* FLERTECKENSINDEX (2026-08-02, för x_max/y_max): upphöjda och
          * nedsänkta tecken flödar vidare i VAR SIN x-kolumn (skriv
          * 'x_m_a_x'), medan sup+sub efter ] fortsatt staplas i samma
@@ -1404,14 +1421,16 @@
          * samma anker. */
         if (scriptAnchor == null) {
           scriptAnchor = x;
-          scriptX = { sup: x, sub: x };
+          /* INTEGRALGRÄNSERNA (användarkrav 2026-11-17): övre gränsen till
+           * HÖGER om den övre kroken, undre gränsen till höger om den
+           * nedre kroken, aldrig på tecknet. Se REGEL "INTEGRALGRÄNSERNA
+           * BREDVID TECKNET" i filhuvudet. */
+          scriptX = prevBase === '∫'
+            ? { sup: prevBaseX + INT_SUP_X * F, sub: prevBaseX + INT_SUB_X * F }
+            : { sup: x, sub: x };
         }
         var dir = sub ? 'sub' : 'sup';
-        /* övre integralgräns: in över krokens topp, inte helt till höger —
-         * minskar också luften fram till integranden */
-        var ax = (prevBase === '∫' && scriptX[dir] === scriptAnchor)
-          ? scriptX[dir] - 0.13 * F : scriptX[dir];
-        var nx = placeGlyph(sc, ax, sb, s * 0.62, out, color);
+        var nx = placeGlyph(sc, scriptX[dir], sb, s * 0.62, out, color);
         scriptX[dir] = nx;
         if (prevBase === ']') {
           LASTLIM[sub ? 'sub' : 'sup'] =
@@ -1438,16 +1457,27 @@
 
   function stringAdvance(str, s, F) {
     str = tillBmp(str);
-    var x = 0;
+    var x = 0, prevBase = null, gx = 0, col = null;
     for (var i = 0; i < str.length; i++) {
       var ch = str[i];
       if (ch === '^' || ch === '_') {
         var sc = str[++i];
         var sg = GLYPHS[sc];
-        x += (sg ? sg.w : 40) * s * 0.62 + 1.5;
+        var sw = (sg ? sg.w : 40) * s * 0.62 + 1.5;
+        if (prevBase === '∫') {
+          /* samma kolumner som placeString */
+          if (!col) col = { sup: gx + INT_SUP_X * F, sub: gx + INT_SUB_X * F };
+          var d = ch === '_' ? 'sub' : 'sup';
+          col[d] += sw;
+          x = Math.max(x, col[d]);
+        } else {
+          x += sw;
+        }
         continue;
       }
       if (COMBINING[ch]) continue;         /* momentpil: inget advance */
+      col = null;
+      if (ch !== ' ') { prevBase = ch; gx = x; }
       var g = GLYPHS[ch];
       x += (g ? g.w : 40) * s + 1.5;
       if (OPS[ch]) x += 0.52 * F;
@@ -50014,10 +50044,14 @@
     return {
       /* ∫ med undre och övre gräns */
       tecken: function (x, yb, sub, sup) {
+        /* gränserna till höger om krokarna, aldrig på tecknet; ett bråk
+         * som gräns lyfts/sänks så att det inte når in i integranden */
         var xt = T.str('∫', x, yb);
         var x1 = xt, x2 = xt;
-        if (sup != null) x1 = grans(sup, x + 0.34 * F, yb - 1.02 * F, 0.55);
-        if (sub != null) x2 = grans(sub, x + 0.16 * F, yb + 0.54 * F, 0.55);
+        if (sup != null) x1 = grans(sup, x + INT_SUP_X * F,
+          yb + (sup.indexOf('/') < 0 ? INT_SUP_Y : -1.02) * F, 0.55);
+        if (sub != null) x2 = grans(sub, x + INT_SUB_X * F,
+          yb + (sub.indexOf('/') < 0 ? INT_SUB_Y : 0.54) * F, 0.55);
         return Math.max(xt, x1, x2) + 0.14 * F;
       },
       /* vänsterklammer */

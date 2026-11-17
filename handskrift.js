@@ -1108,7 +1108,9 @@
                               [125, 89], [127, 76], [118, 67]]] },
     /* tillagt 2026-08-08 (ma1c kapitel 6, Trigonometri och vektorer) */
     /* lodrätt streck: beloppstecken kring en vektor, |AB| */
-    '|': { w: 34, strokes: [[[17, 8], [15, 104]]] },
+    /* 2026-11-17: når ned under baslinjen (till 118), annars läses
+     * ln|x| som "lnlxl", eftersom l går mellan 10 och 97. */
+    '|': { w: 36, strokes: [[[18, 16], [17, 118]]] },
     /* beta (β-sönderfall): ögla med nedstapel och dubbelbuk — jämför
      * med gemena 'b' vid granskning, betat har en spets upptill */
     'β': { w: 68, strokes: [[[26, 40], [30, 84], [28, 126]],
@@ -50059,16 +50061,17 @@
     y += 5.2 * F;
     xx = T.str('F(x)=', padL, y);
     xx = T.fracH('5x^5', '5', xx, y);
-    T.str('+ln x', xx, y);
+    T.str('+ln|x|', xx, y);
     T.stepEnd();
 
     tanke(y, [
       [['Och 1/x är det enda undantaget']],
-      [['från potensregeln: dess']],
-      [['primitiva funktion är ln x.']]
+      [['från potensregeln: dess primitiva']],
+      [['funktion är ln|x|. Beloppet behövs']],
+      [['eftersom x kan vara negativt.']]
     ], 1.05);
     y += 5.2 * F;
-    xe = T.str('=x^5+ln x', padL, y);
+    xe = T.str('=x^5+ln|x|', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -50111,12 +50114,12 @@
 
     tanke(y, [
       [['Båda termerna är av typen']],
-      [['1/x, så båda ger logaritmer.']],
+      [['1/x, så båda ger ln med belopp.']],
       [['Och samtliga primitiva']],
       [['funktioner kräver ett +C.']]
     ], 1.05);
     y += 5.2 * F;
-    xe = T.str('F(x)=7ln x+8ln(x-5)+C', padL, y);
+    xe = T.str('F(x)=7ln|x|+8ln|x-5|+C', padL, y);
     T.underline(xe, y);
     T.stepEnd();
 
@@ -50163,9 +50166,9 @@
       [['kan integrera termvis.']]
     ], 1.05);
     y += 5.2 * F;
-    xx = T.str('F(x)=ln(x+5)-', padL, y);
+    xx = T.str('F(x)=ln|x+5|-', padL, y);
     xx = T.fracH('x^2', '2', xx, y);
-    xe = T.str('-5ln x+C', xx, y);
+    xe = T.str('-5ln|x|+C', xx, y);
     T.underline(xe, y + 0.95 * F);
     T.stepEnd();
 

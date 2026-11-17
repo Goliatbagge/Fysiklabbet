@@ -66686,18 +66686,18 @@ $$
             question: `Ange samtliga primitiva funktioner till $f(x) = \\dfrac{2}{x} + \\sin x$.`,
             choices: [
                 `$F(x) = -\\dfrac{2}{x^2} + \\cos x + C$`,
-                `$F(x) = 2\\ln x + \\cos x + C$`,
-                `$F(x) = 2\\ln x - \\cos x + C$`,
-                `$F(x) = 2\\ln x - \\cos x$`,
+                `$F(x) = 2\\ln|x| + \\cos x + C$`,
+                `$F(x) = 2\\ln|x| - \\cos x + C$`,
+                `$F(x) = 2\\ln|x| - \\cos x$`,
             ],
             correct: 2,
-            solution: `Vi tar en primitiv funktion term för term. Termen $\\dfrac{2}{x}$ ger $2\\ln x$, och $\\sin x$ har den primitiva funktionen $-\\cos x$. Eftersom vi ska ange *samtliga* primitiva funktioner lägger vi till konstanten $C$.
+            solution: `Vi tar en primitiv funktion term för term. Termen $\\dfrac{2}{x}$ ger $2\\ln|x|$ (beloppet behövs eftersom $f$ är definierad även för negativa $x$), och $\\sin x$ har den primitiva funktionen $-\\cos x$. Eftersom vi ska ange *samtliga* primitiva funktioner lägger vi till konstanten $C$.
 
 $$
-F(x) = 2\\ln x - \\cos x + C
+F(x) = 2\\ln|x| - \\cos x + C, \\quad x \\neq 0
 $$
 
-**Svar:** $F(x) = 2\\ln x - \\cos x + C$`,
+**Svar:** $F(x) = 2\\ln|x| - \\cos x + C$`,
         },
         {
             level: 2,

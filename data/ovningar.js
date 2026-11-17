@@ -5145,7 +5145,7 @@ $$
 
 **Svar:** Stenens densitet är ca 2 800 kg/m³.
 
-**Generell slutsats:** Vattenförträngning är en klassisk metod att mäta volymen av oregelbundna föremål — den fungerar för allt som sjunker och inte löser sig i vattnet.`,
+**Generell slutsats:** Vattenförträngning är en klassisk metod att mäta volymen av oregelbundna föremål. Den fungerar för allt som sjunker och inte löser sig i vattnet.`,
         },
 
         {
@@ -5187,7 +5187,7 @@ Eftersom densitet är en *materialegenskap* som inte beror på föremålets stor
 
 **Svar:** a) 16,9 g/cm³&emsp;&emsp;b) Nej. Densiteten är klart lägre än guldets 19,3 g/cm³, så kronan är inte av rent guld.
 
-**Generell slutsats:** Densitetsmätning via vattenförträngning är en icke-förstörande metod att avgöra om ett föremål är av det material det utger sig för att vara — historiskt sett samma metod som ska ha avslöjat Arkimedes "guld-i-kronan"-fall.`,
+**Generell slutsats:** Densitetsmätning via vattenförträngning är en icke-förstörande metod att avgöra om ett föremål är av det material det utger sig för att vara (historiskt sett samma metod som ska ha avslöjat Arkimedes "guld-i-kronan"-fall).`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
@@ -5195,7 +5195,7 @@ Eftersom densitet är en *materialegenskap* som inte beror på föremålets stor
             level: 3,
             question: `En liten kub är gjuten av en legering av **guld** ($\\rho_\\text{guld} = 19{,}3\\ \\mathrm{g/cm^3}$) och **silver** ($\\rho_\\text{silver} = 10{,}5\\ \\mathrm{g/cm^3}$). Kuben har sidan 2,0 cm och den totala massan 130 g. Beräkna hur många **procent av kubens massa** som är guld. Bortse från att volymen kan ändras något vid själva legeringen.`,
             answer: { value: 77.6, unit: '%', tol: 0.03 },
-            solution: `Vi har två okända — massan guld $m_g$ och massan silver $m_s$ — och behöver två ekvationer.
+            solution: `Vi har två okända (massan guld $m_g$ och massan silver $m_s$) och behöver två ekvationer.
 
 Mätvärden:
 $$
@@ -5207,12 +5207,12 @@ m_\\text{tot} = 130\\ \\mathrm{g} \\\\
 \\end{array} \\right]
 $$
 
-**Ekvation 1** — massa-balans (totala massan är summan av delarnas):
+**Ekvation 1**: massa-balans (totala massan är summan av delarnas):
 $$
 m_g + m_s = 130
 $$
 
-**Ekvation 2** — volym-balans (totala volymen är summan av delarnas volymer):
+**Ekvation 2**: volym-balans (totala volymen är summan av delarnas volymer):
 $$
 V_g + V_s = V \\quad\\Leftrightarrow\\quad \\frac{m_g}{\\rho_g} + \\frac{m_s}{\\rho_s} = 8{,}0
 $$
@@ -5246,6 +5246,653 @@ $$
 **Svar:** Ungefär 78 % av kubens massa är guld.
 
 **Generell slutsats:** Massfraktioner i en legering kan bestämmas ur en *densitetsmätning* + den totala massan, eftersom de två komponenterna har olika densitet. Samma princip används i verkligheten av guldsmeder och vid kontroll av mynt eller smycken.`,
+        },
+        {
+            level: 1,
+            question: `Bensin har densiteten 750 kg/m³. Vilken densitet har bensinen uttryckt i g/cm³?`,
+            choices: ['$7{,}5\\ \\mathrm{g/cm^3}$', '$750\\,000\\ \\mathrm{g/cm^3}$', '$0{,}75\\ \\mathrm{g/cm^3}$', '$0{,}075\\ \\mathrm{g/cm^3}$'],
+            correct: 2,
+            solution: `Omvandlingsfaktorn mellan kg/m³ och g/cm³ är 1 000:
+
+$$
+1\\ \\mathrm{kg/m^3} = \\frac{1}{1\\,000}\\ \\mathrm{g/cm^3}
+$$
+
+Från kg/m³ till g/cm³ ska vi alltså **dividera** med 1 000:
+
+$$
+750\\ \\mathrm{kg/m^3} = \\frac{750}{1\\,000}\\ \\mathrm{g/cm^3} = 0{,}75\\ \\mathrm{g/cm^3}
+$$
+
+Rimligt: bensin flyter på vatten, så densiteten ska vara mindre än vattnets 1 g/cm³. Talet 750 000 får man om man multiplicerar i stället för att dividera.
+
+**Svar:** $0{,}75\\ \\mathrm{g/cm^3}$`,
+        },
+        {
+            level: 1,
+            question: `En burk honung innehåller 0,50 kg honung. Honungens densitet är 1 420 kg/m³. Hur stor volym honung finns i burken? Ange svaret i cm³.`,
+            answer: { value: 350, unit: 'cm³', tol: 0.02 },
+            solution: `Vi löser ut volymen ur densitetsformeln:
+
+$$
+\\rho = \\frac{m}{V} \\quad\\Leftrightarrow\\quad V = \\frac{m}{\\rho}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m = 0{,}50\\ \\mathrm{kg} \\\\
+\\rho = 1\\,420\\ \\mathrm{kg/m^3}
+\\end{array} \\right]
+$$
+
+$$
+V = \\frac{0{,}50}{1\\,420} = 3{,}521\\ldots \\cdot 10^{-4}\\ \\mathrm{m^3}
+$$
+
+Eftersom $1\\ \\mathrm{m^3} = 10^{6}\\ \\mathrm{cm^3}$ blir det
+
+$$
+V = 3{,}521\\ldots \\cdot 10^{-4} \\cdot 10^{6}\\ \\mathrm{cm^3} = 352{,}1\\ldots\\ \\mathrm{cm^3} \\approx 350\\ \\mathrm{cm^3}
+$$
+
+Massan har två värdesiffror, så svaret avrundas till två värdesiffror. Rimligt: honung har högre densitet än vatten, så ett halvt kilo honung tar mindre plats än en halv liter (500 cm³).
+
+**Svar:** Cirka 350 cm³`,
+        },
+        {
+            level: 1,
+            question: `En elev mäter massan och volymen för flera bitar av samma metall och ritar sambandet i diagrammet nedan. Bestäm metallens densitet. Ange svaret i kg/m³.
+
+${makeDiagram({
+    xMin: 0, xMax: 25, yMin: 0, yMax: 200,
+    xTicks: [0, 5, 10, 15, 20, 25],
+    yTicks: [0, 40, 80, 120, 160, 200],
+    xLabel: '<tspan font-style="italic">V</tspan> (cm³)',
+    yLabel: '<tspan font-style="italic">m</tspan> (g)',
+    paths: [{ points: [[0, 0], [25, 200]] }],
+})}`,
+            answer: { value: 8000, unit: 'kg/m³', tol: 0.03 },
+            solution: `Grafen är en rät linje genom origo, så kvoten $\\dfrac{m}{V}$ är lika stor för alla bitarna. Den kvoten är densiteten. Vi läser av en punkt där linjen går genom ett rutnätshörn, till exempel $V = 20\\ \\mathrm{cm^3}$ och $m = 160\\ \\mathrm{g}$:
+
+$$
+\\rho = \\frac{m}{V}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m = 160\\ \\mathrm{g} \\\\
+V = 20\\ \\mathrm{cm^3}
+\\end{array} \\right]
+$$
+
+$$
+\\rho = \\frac{160}{20} = 8{,}0\\ \\mathrm{g/cm^3}
+$$
+
+Från g/cm³ till kg/m³ multiplicerar vi med 1 000:
+
+$$
+\\rho = 8{,}0 \\cdot 1\\,000\\ \\mathrm{kg/m^3} = 8\\,000\\ \\mathrm{kg/m^3}
+$$
+
+Det ligger nära densiteten för stål och järn.
+
+**Svar:** Cirka 8 000 kg/m³`,
+        },
+        {
+            level: 1,
+            question: `Ett akvarium har innermåtten 60 cm (längd) och 30 cm (bredd). Vattnet i akvariet står 30 cm högt. Hur stor massa har vattnet? Ange svaret i kg.`,
+            answer: { value: 54, unit: 'kg', tol: 0.02 },
+            solution: `Vattnets volym är ett rätblock. Vi skriver måtten i meter innan vi multiplicerar:
+
+$$
+\\left[ \\begin{array}{l}
+l = 60\\ \\mathrm{cm} = 0{,}60\\ \\mathrm{m} \\\\
+b = 30\\ \\mathrm{cm} = 0{,}30\\ \\mathrm{m} \\\\
+h = 30\\ \\mathrm{cm} = 0{,}30\\ \\mathrm{m} \\\\
+\\rho_\\text{vatten} = 1\\,000\\ \\mathrm{kg/m^3}
+\\end{array} \\right]
+$$
+
+$$
+V = l \\cdot b \\cdot h = 0{,}60 \\cdot 0{,}30 \\cdot 0{,}30 = 0{,}054\\ \\mathrm{m^3}
+$$
+
+Massan får vi ur densitetsformeln:
+
+$$
+\\rho = \\frac{m}{V} \\quad\\Leftrightarrow\\quad m = \\rho \\cdot V
+$$
+
+$$
+m = 1\\,000 \\cdot 0{,}054 = 54\\ \\mathrm{kg}
+$$
+
+Kontroll: $0{,}054\\ \\mathrm{m^3}$ är 54 liter, och en liter vatten väger ett kilo.
+
+**Svar:** 54 kg`,
+        },
+        {
+            level: 2,
+            question: `En rulle koppartråd väger 1,40 kg (själva rullen är borträknad). Tråden har diametern 2,0 mm, och kopparns densitet är 8 960 kg/m³. Hur lång är tråden? Ange svaret i m.`,
+            answer: { value: 50, unit: 'm', tol: 0.03 },
+            solution: `Tråden är en lång cylinder. Dess volym kan vi få på två sätt: ur massan och densiteten, och ur tvärsnittsarean gånger längden. Vi sätter dem lika.
+
+$$
+\\left[ \\begin{array}{l}
+m = 1{,}40\\ \\mathrm{kg} \\\\
+\\rho = 8\\,960\\ \\mathrm{kg/m^3} \\\\
+d = 2{,}0\\ \\mathrm{mm} \\;\\Rightarrow\\; r = 1{,}0\\ \\mathrm{mm} = 1{,}0 \\cdot 10^{-3}\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+Volymen ur densiteten:
+
+$$
+V = \\frac{m}{\\rho} = \\frac{1{,}40}{8\\,960} = 1{,}5625 \\cdot 10^{-4}\\ \\mathrm{m^3}
+$$
+
+Tvärsnittsarean är en cirkel:
+
+$$
+A = \\pi \\cdot r^{2} = \\pi \\cdot (1{,}0 \\cdot 10^{-3})^{2} = 3{,}1415\\ldots \\cdot 10^{-6}\\ \\mathrm{m^2}
+$$
+
+Volymen är också $V = A \\cdot L$, så längden blir
+
+$$
+L = \\frac{V}{A} = \\frac{1{,}5625 \\cdot 10^{-4}}{3{,}1415\\ldots \\cdot 10^{-6}} = 49{,}73\\ldots\\ \\mathrm{m} \\approx 50\\ \\mathrm{m}
+$$
+
+Diametern har två värdesiffror, så svaret får två värdesiffror.
+
+**Svar:** Cirka 50 m`,
+        },
+        {
+            level: 2,
+            question: `Fyra metallföremål vägs, och deras volym mäts genom att de sänks ner i ett mätglas med vatten. Resultaten står i tabellen.
+
+| Föremål | Massa (g) | Volym (cm³) |
+|---|---|---|
+| A | 54 | 20 |
+| B | 158 | 20 |
+| C | 135 | 50 |
+| D | 89,6 | 10 |
+
+Vilka två föremål kan vara gjorda av samma material?`,
+            choices: ['B och D', 'A och C', 'A och B', 'C och D'],
+            correct: 1,
+            solution: `Två föremål av samma material har samma densitet, oavsett hur stora de är. Vi räknar ut densiteten för vart och ett:
+
+$$
+\\rho = \\frac{m}{V}
+$$
+
+$$
+\\rho_\\mathrm{A} = \\frac{54}{20} = 2{,}7\\ \\mathrm{g/cm^3} \\qquad
+\\rho_\\mathrm{B} = \\frac{158}{20} = 7{,}9\\ \\mathrm{g/cm^3}
+$$
+
+$$
+\\rho_\\mathrm{C} = \\frac{135}{50} = 2{,}7\\ \\mathrm{g/cm^3} \\qquad
+\\rho_\\mathrm{D} = \\frac{89{,}6}{10} = 8{,}96\\ \\mathrm{g/cm^3}
+$$
+
+A och C har samma densitet, 2,7 g/cm³ (aluminium), fast C är mer än dubbelt så stort. B och D har lika stor volym men olika densitet, så de är av olika material (järn respektive koppar).
+
+**Svar:** A och C`,
+        },
+        {
+            level: 2,
+            question: `För att bestämma densiteten hos en matolja väger en elev en tom glasflaska, samma flaska fylld med vatten och sedan flaskan fylld med olja.
+
+| Flaskan | Massa (g) |
+|---|---|
+| tom | 240 |
+| fylld med vatten | 740 |
+| fylld med olja | 700 |
+
+Vattnets densitet är 1 000 kg/m³. Bestäm oljans densitet. Ange svaret i kg/m³.`,
+            answer: { value: 920, unit: 'kg/m³', tol: 0.02 },
+            solution: `Flaskan rymmer lika stor volym vatten som olja. Volymen får vi ur vattnet, eftersom vi känner vattnets densitet.
+
+$$
+\\left[ \\begin{array}{l}
+m_\\text{vatten} = 740 - 240 = 500\\ \\mathrm{g} = 0{,}500\\ \\mathrm{kg} \\\\
+m_\\text{olja} = 700 - 240 = 460\\ \\mathrm{g} = 0{,}460\\ \\mathrm{kg} \\\\
+\\rho_\\text{vatten} = 1\\,000\\ \\mathrm{kg/m^3}
+\\end{array} \\right]
+$$
+
+Flaskans volym:
+
+$$
+V = \\frac{m_\\text{vatten}}{\\rho_\\text{vatten}} = \\frac{0{,}500}{1\\,000} = 5{,}00 \\cdot 10^{-4}\\ \\mathrm{m^3}
+$$
+
+Oljans densitet:
+
+$$
+\\rho_\\text{olja} = \\frac{m_\\text{olja}}{V} = \\frac{0{,}460}{5{,}00 \\cdot 10^{-4}} = 920\\ \\mathrm{kg/m^3}
+$$
+
+Rimligt: olja flyter på vatten, så densiteten ska vara lite mindre än vattnets.
+
+**Svar:** 920 kg/m³`,
+        },
+        {
+            level: 2,
+            question: `En massiv kula av bly och en massiv kula av aluminium har exakt samma massa. Blyets densitet är 11,3 g/cm³ och aluminiumets är 2,70 g/cm³.<br>a) Hur många gånger större volym har aluminiumkulan än blykulan?<br>b) Hur många gånger större radie har aluminiumkulan än blykulan?`,
+            answer: { value: 4.19, unit: '', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 4.19, unit: 'gånger', tol: 0.02, etikett: '$\\dfrac{V_\\text{Al}}{V_\\text{Pb}} =$' },
+                { del: 'b', value: 1.61, unit: 'gånger', tol: 0.02, etikett: '$\\dfrac{r_\\text{Al}}{r_\\text{Pb}} =$' },
+            ],
+            solution: `**a)** Ur densitetsformeln är $V = \\dfrac{m}{\\rho}$. Kulorna har samma massa $m$, så
+
+$$
+\\frac{V_\\text{Al}}{V_\\text{Pb}} = \\frac{\\dfrac{m}{\\rho_\\text{Al}}}{\\dfrac{m}{\\rho_\\text{Pb}}} = \\frac{\\rho_\\text{Pb}}{\\rho_\\text{Al}}
+$$
+
+Massan förkortas bort, så vi behöver inte veta den.
+
+$$
+\\frac{V_\\text{Al}}{V_\\text{Pb}} = \\frac{11{,}3}{2{,}70} = 4{,}185\\ldots \\approx 4{,}19
+$$
+
+**Svar:** Cirka 4,19 gånger större volym
+
+**b)** Ett klots volym är $V = \\dfrac{4 \\pi r^{3}}{3}$, så volymen är proportionell mot radien i kubik. Kvoten mellan volymerna är därför kvoten mellan radierna i kubik:
+
+$$
+\\frac{V_\\text{Al}}{V_\\text{Pb}} = \\left( \\frac{r_\\text{Al}}{r_\\text{Pb}} \\right)^{3} \\quad\\Leftrightarrow\\quad \\frac{r_\\text{Al}}{r_\\text{Pb}} = \\sqrt[3]{4{,}185\\ldots} = 1{,}611\\ldots \\approx 1{,}61
+$$
+
+Rimligt: fyra gånger så stor volym kräver inte alls fyra gånger så stor radie, eftersom volymen växer i tre riktningar samtidigt.
+
+**Svar:** Cirka 1,61 gånger större radie`,
+        },
+        {
+            level: 3,
+            question: `En kula av koppar är ihålig. Hålrummet är ett klot med radien $r$ som har samma medelpunkt som kulan. Kulans yttre radie är $R$ och dess massa är $m$. Kopparns densitet är $\\rho$. Figuren visar kulan i genomskärning.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 200" width="329" height="253" style="max-width:100%;height:auto;display:block;margin:16px auto;font-family:Poppins,sans-serif">
+<circle cx="120" cy="100" r="80" fill="#c9864f" stroke="#0f1620" stroke-width="2"/>
+<circle cx="120" cy="100" r="56" fill="#f7f2e8" stroke="#0f1620" stroke-width="1.6"/>
+<line x1="120" y1="100" x2="185.5" y2="54.1" stroke="#0f1620" stroke-width="1.6"/>
+<circle cx="120" cy="100" r="2.6" fill="#0f1620"/>
+<text x="140" y="66" font-size="16" fill="#0f1620" font-style="italic">R</text>
+<line x1="120" y1="100" x2="71.5" y2="128" stroke="#0f1620" stroke-width="1.4" stroke-dasharray="4 3"/>
+<text x="88" y="110" font-size="16" fill="#0f1620" font-style="italic">r</text>
+<text x="120" y="130" font-size="13" fill="#0f1620" text-anchor="middle">hålrum</text>
+<line x1="176" y1="139" x2="200" y2="156" stroke="#0f1620" stroke-width="1.2"/>
+<text x="203" y="161" font-size="13" fill="#0f1620">koppar</text>
+</svg>
+
+a) Visa att hålrummets radie är $r = \\sqrt[3]{R^{3} - \\dfrac{3m}{4\\pi\\rho}}$.<br>b) En sådan kula har den yttre radien 2,00 cm och massan 200 g. Kopparns densitet är 8,96 g/cm³. Hur stor är hålrummets radie? Ange svaret i cm.`,
+            answer: { value: 1.39, unit: 'cm', tol: 0.02 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 1.39, unit: 'cm', tol: 0.02, etikett: '$r =$' },
+            ],
+            solution: `**a)** Kopparns volym är skillnaden mellan hela klotets volym och hålrummets volym. Samtidigt ger densitetsformeln kopparns volym ur massan, eftersom all massa sitter i kopparn:
+
+$$
+V_\\text{koppar} = \\frac{m}{\\rho}
+$$
+
+$$
+V_\\text{koppar} = \\frac{4\\pi R^{3}}{3} - \\frac{4\\pi r^{3}}{3}
+$$
+
+Vi sätter de två uttrycken lika och löser ut $r$:
+
+$$
+\\frac{4\\pi R^{3}}{3} - \\frac{4\\pi r^{3}}{3} = \\frac{m}{\\rho}
+$$
+
+Multiplicera båda led med $\\dfrac{3}{4\\pi}$:
+
+$$
+R^{3} - r^{3} = \\frac{3m}{4\\pi\\rho}
+$$
+
+$$
+r^{3} = R^{3} - \\frac{3m}{4\\pi\\rho}
+$$
+
+$$
+r = \\sqrt[3]{R^{3} - \\frac{3m}{4\\pi\\rho}}
+$$
+
+Kontroll: är $m = 0$ (ingen koppar alls) blir $r = R$, och är kulan massiv blir $r = 0$, alltså $m = \\rho \\cdot \\dfrac{4\\pi R^{3}}{3}$. Båda gränsfallen stämmer.
+
+**b)** Vi räknar i g och cm, så att densiteten kan sättas in i g/cm³ direkt:
+
+$$
+\\left[ \\begin{array}{l}
+R = 2{,}00\\ \\mathrm{cm} \\\\
+m = 200\\ \\mathrm{g} \\\\
+\\rho = 8{,}96\\ \\mathrm{g/cm^3}
+\\end{array} \\right]
+$$
+
+$$
+r = \\sqrt[3]{2{,}00^{3} - \\frac{3 \\cdot 200}{4\\pi \\cdot 8{,}96}} = \\sqrt[3]{8{,}00 - 5{,}328\\ldots}
+$$
+
+$$
+r = \\sqrt[3]{2{,}671\\ldots} = 1{,}387\\ldots\\ \\mathrm{cm} \\approx 1{,}39\\ \\mathrm{cm}
+$$
+
+Rimlighet: hålrummets radie är mindre än den yttre radien 2,00 cm, och kopparskalet blir drygt 6 mm tjockt. En massiv kopparkula med samma radie hade vägt $8{,}96 \\cdot 33{,}5 \\approx 300\\ \\mathrm{g}$, så en kula på 200 g måste mycket riktigt vara ihålig.
+
+**Svar:** Cirka 1,39 cm`,
+        },
+        {
+            level: 3,
+            question: `Två vätskor med densiteterna $\\rho_1$ och $\\rho_2$ blandas. Anta att blandningens volym är summan av de två vätskornas volymer.<br>a) Visa att blandningens densitet blir $\\dfrac{\\rho_1 + \\rho_2}{2}$ om lika stora volymer av vätskorna blandas.<br>b) Visa att blandningens densitet blir $\\dfrac{2\\rho_1\\rho_2}{\\rho_1 + \\rho_2}$ om lika stora massor av vätskorna blandas.<br>c) Beräkna blandningens densitet i båda fallen för vatten (1 000 kg/m³) och etanol (789 kg/m³).<br>d) Visa att blandningen med lika stora volymer alltid får högre densitet än blandningen med lika stora massor, när $\\rho_1 \\neq \\rho_2$. Förklara också resultatet i ord.`,
+            answer: { value: 895, unit: 'kg/m³', tol: 0.02 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+                { del: 'c', value: 895, unit: 'kg/m³', tol: 0.01, etikett: 'lika volymer' },
+                { del: 'c', value: 882, unit: 'kg/m³', tol: 0.01, etikett: 'lika massor' },
+                { del: 'd' },
+            ],
+            solution: `Blandningens densitet är hela massan delad med hela volymen:
+
+$$
+\\rho_\\text{blandning} = \\frac{m_1 + m_2}{V_1 + V_2}
+$$
+
+**a)** Lika stora volymer, $V_1 = V_2 = V$. Massorna blir $m_1 = \\rho_1 V$ och $m_2 = \\rho_2 V$:
+
+$$
+\\rho_\\text{blandning} = \\frac{\\rho_1 V + \\rho_2 V}{V + V} = \\frac{V \\cdot (\\rho_1 + \\rho_2)}{2V} = \\frac{\\rho_1 + \\rho_2}{2}
+$$
+
+Volymen $V$ förkortas bort, så resultatet gäller hur mycket vi än blandar.
+
+**b)** Lika stora massor, $m_1 = m_2 = m$. Volymerna blir $V_1 = \\dfrac{m}{\\rho_1}$ och $V_2 = \\dfrac{m}{\\rho_2}$:
+
+$$
+\\rho_\\text{blandning} = \\frac{2m}{\\dfrac{m}{\\rho_1} + \\dfrac{m}{\\rho_2}} = \\frac{2}{\\dfrac{1}{\\rho_1} + \\dfrac{1}{\\rho_2}} = \\frac{2}{\\dfrac{\\rho_1 + \\rho_2}{\\rho_1 \\rho_2}} = \\frac{2\\rho_1\\rho_2}{\\rho_1 + \\rho_2}
+$$
+
+Här förkortas massan $m$ bort.
+
+**c)** Med $\\rho_1 = 1\\,000\\ \\mathrm{kg/m^3}$ och $\\rho_2 = 789\\ \\mathrm{kg/m^3}$:
+
+$$
+\\text{Lika volymer:}\\quad \\frac{1\\,000 + 789}{2} = 894{,}5\\ \\mathrm{kg/m^3} \\approx 895\\ \\mathrm{kg/m^3}
+$$
+
+$$
+\\text{Lika massor:}\\quad \\frac{2 \\cdot 1\\,000 \\cdot 789}{1\\,000 + 789} = \\frac{1\\,578\\,000}{1\\,789} = 882{,}05\\ldots\\ \\mathrm{kg/m^3} \\approx 882\\ \\mathrm{kg/m^3}
+$$
+
+**Svar:** Cirka 895 kg/m³ med lika volymer och cirka 882 kg/m³ med lika massor. (I verkligheten krymper en blandning av vatten och etanol lite, så den uppmätta densiteten blir något högre än modellens.)
+
+**d)** Vi undersöker skillnaden mellan de två uttrycken och skriver dem på gemensamt bråkstreck:
+
+$$
+\\frac{\\rho_1 + \\rho_2}{2} - \\frac{2\\rho_1\\rho_2}{\\rho_1 + \\rho_2} = \\frac{(\\rho_1 + \\rho_2)^{2} - 4\\rho_1\\rho_2}{2(\\rho_1 + \\rho_2)} = \\frac{\\rho_1^{2} - 2\\rho_1\\rho_2 + \\rho_2^{2}}{2(\\rho_1 + \\rho_2)} = \\frac{(\\rho_1 - \\rho_2)^{2}}{2(\\rho_1 + \\rho_2)}
+$$
+
+Täljaren är en kvadrat och därför större än noll när $\\rho_1 \\neq \\rho_2$. Nämnaren är positiv, eftersom densiteter är positiva. Skillnaden är alltså positiv, och blandningen med lika stora volymer har den högre densiteten.
+
+Förklaring i ord: ett kilo av den lättare vätskan tar större plats än ett kilo av den tyngre. Blandar vi lika stora massor består alltså mer än halva volymen av den lättare vätskan, och då hamnar densiteten närmare den lättare vätskans. Med lika stora volymer väger de två vätskorna lika mycket i medelvärdet.
+
+**Svar:** Skillnaden är $\\dfrac{(\\rho_1 - \\rho_2)^{2}}{2(\\rho_1 + \\rho_2)} > 0$, så lika stora volymer ger alltid högre densitet än lika stora massor.`,
+        },
+        {
+            level: 3,
+            question: `En skulptör gör först en massiv modell av en staty i plast. Modellen är byggd i skala 1 : 8 och väger 0,90 kg. Den färdiga statyn ska gjutas i brons och få exakt samma yttre form som modellen. Plastens densitet är 1,2 g/cm³ och bronsens är 8,8 g/cm³.<br>a) Hur stor massa skulle statyn få om den gjuts massiv? Ange svaret i kg.<br>b) Statyn får väga högst 1,0 ton och gjuts därför ihålig, med samma yttre form. Hur stor andel av statyns volym måste då vara hålrum? Ange svaret i procent.`,
+            answer: { value: 3400, unit: 'kg', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 3400, unit: 'kg', tol: 0.03, etikett: '$m_\\text{staty} =$' },
+                { del: 'b', value: 70, unit: '%', tol: 0.03, etikett: 'andel hålrum' },
+            ],
+            solution: `Vi känner inte modellens volym, men vi behöver den inte heller. Det räcker att veta hur volymen och densiteten ändras.
+
+**a)** **Volymen.** Skala 1 : 8 betyder att varje längd på statyn är 8 gånger så lång som på modellen: höjden, bredden och djupet. Volymen växer då med faktorn $8 \\cdot 8 \\cdot 8$:
+
+$$
+\\frac{V_\\text{staty}}{V_\\text{modell}} = 8^{3} = 512
+$$
+
+**Massan.** Ur densitetsformeln är $m = \\rho \\cdot V$, så
+
+$$
+\\frac{m_\\text{staty}}{m_\\text{modell}} = \\frac{\\rho_\\text{brons} \\cdot V_\\text{staty}}{\\rho_\\text{plast} \\cdot V_\\text{modell}} = \\frac{\\rho_\\text{brons}}{\\rho_\\text{plast}} \\cdot 512
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m_\\text{modell} = 0{,}90\\ \\mathrm{kg} \\\\
+\\rho_\\text{plast} = 1{,}2\\ \\mathrm{g/cm^3} \\\\
+\\rho_\\text{brons} = 8{,}8\\ \\mathrm{g/cm^3}
+\\end{array} \\right]
+$$
+
+Enheterna för densiteterna förkortas bort i kvoten, så de behöver inte räknas om:
+
+$$
+m_\\text{staty} = 0{,}90 \\cdot 512 \\cdot \\frac{8{,}8}{1{,}2} = 3\\,379{,}2\\ \\mathrm{kg} \\approx 3\\,400\\ \\mathrm{kg}
+$$
+
+Rimlighet: om statyn hade varit i plast hade den vägt $0{,}90 \\cdot 512 \\approx 460\\ \\mathrm{kg}$. Brons är drygt sju gånger tätare än plasten, så drygt tre ton är rimligt.
+
+**Svar:** Cirka 3 400 kg (3,4 ton)
+
+**b)** Den ihåliga statyn har samma yttre volym $V_\\text{staty}$ som den massiva, men bara en del av volymen är brons. Med samma densitet är massan proportionell mot bronsets volym, $m = \\rho_\\text{brons} \\cdot V_\\text{brons}$. Andelen brons är därför kvoten mellan den tillåtna massan och den massiva statyns massa:
+
+$$
+\\left[ \\begin{array}{l}
+m_\\text{tillåten} = 1{,}0\\ \\mathrm{ton} = 1\\,000\\ \\mathrm{kg} \\\\
+m_\\text{massiv} = 3\\,379{,}2\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$
+\\frac{V_\\text{brons}}{V_\\text{staty}} = \\frac{\\dfrac{m_\\text{tillåten}}{\\rho_\\text{brons}}}{\\dfrac{m_\\text{massiv}}{\\rho_\\text{brons}}} = \\frac{m_\\text{tillåten}}{m_\\text{massiv}} = \\frac{1\\,000}{3\\,379{,}2} = 0{,}2959\\ldots
+$$
+
+Resten av volymen är hålrum:
+
+$$
+\\frac{V_\\text{hålrum}}{V_\\text{staty}} = 1 - 0{,}2959\\ldots = 0{,}7040\\ldots \\approx 70\\ \\%
+$$
+
+Vi använder det oavrundade värdet från a), och svaret får två värdesiffror som massorna. Rimlighet: statyn får väga ungefär en tredjedel av den massiva statyns massa, så ungefär två tredjedelar av volymen ska vara tom. Det visar varför stora bronsstatyer nästan alltid gjuts ihåliga.
+
+**Svar:** Cirka 70 % av volymen måste vara hålrum.`,
+        },
+        {
+            level: 3,
+            question: `En elev vill ta reda på om en liten metallkub är av aluminium (2,70 g/cm³). Eleven mäter kubens sida med en linjal till 2,0 cm och läser av att mätosäkerheten är 0,05 cm åt vardera hållet. En våg visar massan 21,6 g med osäkerheten 0,1 g åt vardera hållet.<br>a) Beräkna kubens densitet ur mätvärdena. Ange svaret i g/cm³.<br>b) Bestäm den minsta och den största densitet som är förenlig med mätosäkerheterna. Kan eleven påstå att kuben är av aluminium och inte av titan (4,5 g/cm³) eller magnesium (1,7 g/cm³)?<br>c) Vilken av de två mätningarna bidrar mest till osäkerheten i densiteten? Förklara varför och föreslå hur mätningen kan förbättras.`,
+            answer: { value: 2.7, unit: 'g/cm³', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 2.7, unit: 'g/cm³', tol: 0.02, etikett: '$\\rho =$' },
+                { del: 'b', value: 2.5, unit: 'g/cm³', tol: 0.03, etikett: 'minsta $\\rho$' },
+                { del: 'b', value: 2.9, unit: 'g/cm³', tol: 0.03, etikett: 'största $\\rho$' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Kubens volym är sidan i kubik.
+
+$$
+\\left[ \\begin{array}{l}
+s = 2{,}0\\ \\mathrm{cm} \\\\
+m = 21{,}6\\ \\mathrm{g}
+\\end{array} \\right]
+$$
+
+$$
+V = s^{3} = 2{,}0^{3} = 8{,}0\\ \\mathrm{cm^3}
+$$
+
+$$
+\\rho = \\frac{m}{V} = \\frac{21{,}6}{8{,}0} = 2{,}7\\ \\mathrm{g/cm^3}
+$$
+
+Sidan har två värdesiffror, så densiteten anges med två.
+
+**Svar:** 2,7 g/cm³
+
+**b)** Densiteten blir minst när massan är så liten som möjligt och volymen så stor som möjligt, och störst i det omvända fallet. Sidan ligger mellan 1,95 cm och 2,05 cm, och massan mellan 21,5 g och 21,7 g.
+
+$$
+\\rho_\\text{min} = \\frac{21{,}5}{2{,}05^{3}} = \\frac{21{,}5}{8{,}615\\ldots} = 2{,}495\\ldots \\approx 2{,}5\\ \\mathrm{g/cm^3}
+$$
+
+$$
+\\rho_\\text{max} = \\frac{21{,}7}{1{,}95^{3}} = \\frac{21{,}7}{7{,}414\\ldots} = 2{,}926\\ldots \\approx 2{,}9\\ \\mathrm{g/cm^3}
+$$
+
+Aluminiumets 2,70 g/cm³ ligger inne i intervallet 2,5 till 2,9 g/cm³, medan titanets 4,5 g/cm³ och magnesiumets 1,7 g/cm³ ligger långt utanför. Mätningen räcker alltså för att skilja aluminium från de två andra metallerna, men inte för att utesluta ett material vars densitet ligger nära aluminiumets.
+
+**Svar:** Densiteten ligger mellan cirka 2,5 och 2,9 g/cm³. Kuben kan vara av aluminium men inte av titan eller magnesium.
+
+**c)** Vi jämför de relativa osäkerheterna:
+
+$$
+\\text{sidan:}\\ \\frac{0{,}05}{2{,}0} = 0{,}025 = 2{,}5\\ \\%
+\\qquad
+\\text{massan:}\\ \\frac{0{,}1}{21{,}6} \\approx 0{,}005 = 0{,}5\\ \\%
+$$
+
+Sidans osäkerhet ser liten ut, men sidan förekommer i kubik i volymen. En sida som är 2,5 % för lång ger en volym som är ungefär $3 \\cdot 2{,}5\\ \\% = 7{,}5\\ \\%$ för stor ($1{,}025^{3} \\approx 1{,}077$). Längdmätningen bidrar därför ungefär femton gånger så mycket som vägningen.
+
+Förbättringar: mät sidan med ett skjutmått, som läser av till 0,005 cm eller bättre, och mät flera sidor och räkna med medelvärdet. Ett annat sätt är att mäta en större bit av samma material, så att samma absoluta osäkerhet blir en mindre andel av längden.
+
+**Svar:** Längdmätningen bidrar mest, eftersom sidan står i kubik i volymen. Mät sidan noggrannare (skjutmått, flera mätningar) eller använd ett större föremål.`,
+        },
+        {
+            level: 3,
+            question: `En elev vill bestämma densiteten hos sandkornen i en påse torr sand, utan att kunna mäta kornens volym direkt. Eleven fyller en hink med volymen 10,0 liter till kanten med sanden, och sanden väger då 16,0 kg. Sedan häller eleven långsamt i vatten tills vattnet precis når sandens yta, och nu väger sanden och vattnet tillsammans 20,0 kg. Hinkens egen massa är borträknad i båda vägningarna, och sanden antas inte sjunka ihop.<br>a) Bestäm densiteten hos själva sandkornen. Ange svaret i kg/m³.<br>b) Hur stor andel av den torra sandens volym är luft? Ange svaret i procent.<br>c) I verkligheten packas sanden ofta ihop lite när vattnet rinner ner mellan kornen, så att sandens yta sjunker en bit innan vattnet når den. Blir det värde eleven räknar ut i a) då för högt eller för lågt? Motivera.`,
+            answer: { value: 2700, unit: 'kg/m³', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 2700, unit: 'kg/m³', tol: 0.03, etikett: '$\\rho_\\text{korn} =$' },
+                { del: 'b', value: 40, unit: '%', tol: 0.03, etikett: 'andel luft' },
+                { del: 'c' },
+            ],
+            solution: `I den torra sanden delas hinkens volym mellan sandkornen och luften mellan dem. Vattnet tar luftens plats, så vattnets volym är lika stor som luftens. Den får vi ur vattnets massa, och då är kornens volym det som blir över.
+
+$$
+\\left[ \\begin{array}{l}
+V_\\text{hink} = 10{,}0\\ \\mathrm{l} = 1{,}00 \\cdot 10^{-2}\\ \\mathrm{m^3} \\\\
+m_\\text{sand} = 16{,}0\\ \\mathrm{kg} \\\\
+m_\\text{sand + vatten} = 20{,}0\\ \\mathrm{kg} \\\\
+\\rho_\\text{vatten} = 1\\,000\\ \\mathrm{kg/m^3}
+\\end{array} \\right]
+$$
+
+**a)** Vattnets massa är skillnaden mellan de två vägningarna:
+
+$$
+m_\\text{vatten} = 20{,}0 - 16{,}0 = 4{,}0\\ \\mathrm{kg}
+$$
+
+Vattnets volym, som är lika stor som luftens volym i den torra sanden:
+
+$$
+V_\\text{luft} = \\frac{m_\\text{vatten}}{\\rho_\\text{vatten}} = \\frac{4{,}0}{1\\,000} = 4{,}0 \\cdot 10^{-3}\\ \\mathrm{m^3}
+$$
+
+Kornens volym är resten av hinken:
+
+$$
+V_\\text{korn} = V_\\text{hink} - V_\\text{luft} = 1{,}00 \\cdot 10^{-2} - 4{,}0 \\cdot 10^{-3} = 6{,}0 \\cdot 10^{-3}\\ \\mathrm{m^3}
+$$
+
+Luftens massa (cirka 1,2 kg/m³ gånger 4 liter, alltså några gram) är försumbar, så hela sandens massa sitter i kornen:
+
+$$
+\\rho_\\text{korn} = \\frac{m_\\text{sand}}{V_\\text{korn}} = \\frac{16{,}0}{6{,}0 \\cdot 10^{-3}} = 2\\,666{,}6\\ldots\\ \\mathrm{kg/m^3} \\approx 2\\,700\\ \\mathrm{kg/m^3}
+$$
+
+Vattnets massa är en skillnad och har bara två värdesiffror, så svaret får två. Rimlighet: det ligger nära densiteten för kvarts (2 650 kg/m³), som de flesta sandkorn består av.
+
+**Svar:** Cirka 2 700 kg/m³
+
+**b)**
+
+$$
+\\frac{V_\\text{luft}}{V_\\text{hink}} = \\frac{4{,}0 \\cdot 10^{-3}}{1{,}00 \\cdot 10^{-2}} = 0{,}40 = 40\\ \\%
+$$
+
+**Svar:** 40 % av volymen är luft.
+
+**c)** Sjunker sanden ihop tar sanden och porerna mindre plats än hela hinken. Vattnet fyller då bara porerna i den hopsjunkna sanden, så eleven häller i mindre vatten än med orörd sand. I beräkningen räknas ändå kornens volym som hela hinkens volym minus vattnets volym:
+
+$$
+V_\\text{korn, beräknad} = V_\\text{hink} - V_\\text{vatten}
+$$
+
+Men egentligen är kornens volym sandens nya, mindre volym minus vattnets volym. Den beräknade kornvolymen blir alltså för stor, och eftersom $\\rho_\\text{korn} = \\dfrac{m_\\text{sand}}{V_\\text{korn}}$ blir densiteten för låg.
+
+**Svar:** För lågt, eftersom kornens volym överskattas när hela hinkens volym räknas som sand.`,
+        },
+        {
+            level: 3,
+            question: `När vatten fryser till is ökar volymen med 9,0 %, medan massan är densamma. Vattnets densitet är 1 000 kg/m³.<br>a) Bestäm isens densitet. Ange svaret i kg/m³.<br>b) En glasflaska med volymen 0,50 liter fylls till 95 % med vatten, skruvas igen och läggs i frysen. Avgör med en beräkning om isen får plats i flaskan, eller om flaskan riskerar att spricka.<br>c) Visa att flaskan högst får fyllas till andelen $\\dfrac{1}{1{,}09}$ av sin volym för att isen ska få plats. Hur många procent motsvarar det?`,
+            answer: { value: 920, unit: 'kg/m³', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 920, unit: 'kg/m³', tol: 0.02, etikett: '$\\rho_\\text{is} =$' },
+                { del: 'b' },
+                { del: 'c', value: 92, unit: '%', tol: 0.02, etikett: 'högsta fyllnadsgrad' },
+            ],
+            solution: `**a)** Vi kallar vattnets massa $m$ och dess volym $V$. Isen har samma massa men volymen $1{,}090 \\cdot V$. Varken $m$ eller $V$ är givna, men de behövs inte:
+
+$$
+\\rho_\\text{is} = \\frac{m}{1{,}090 \\cdot V} = \\frac{1}{1{,}090} \\cdot \\frac{m}{V} = \\frac{\\rho_\\text{vatten}}{1{,}090}
+$$
+
+$$
+\\rho_\\text{is} = \\frac{1\\,000}{1{,}090} = 917{,}4\\ldots\\ \\mathrm{kg/m^3} \\approx 920\\ \\mathrm{kg/m^3}
+$$
+
+Volymökningen har två värdesiffror, så svaret avrundas till två värdesiffror. Rimligt: is flyter på vatten, så isens densitet ska vara lite lägre än vattnets.
+
+**Svar:** Cirka 920 kg/m³
+
+**b)** Vattnets volym och isens volym:
+
+$$
+\\left[ \\begin{array}{l}
+V_\\text{flaska} = 0{,}50\\ \\mathrm{l} \\\\
+V_\\text{vatten} = 0{,}95 \\cdot 0{,}50 = 0{,}475\\ \\mathrm{l}
+\\end{array} \\right]
+$$
+
+$$
+V_\\text{is} = 1{,}090 \\cdot 0{,}475 = 0{,}517\\ldots\\ \\mathrm{l}
+$$
+
+Isen behöver alltså cirka 0,52 liter, men flaskan rymmer bara 0,50 liter. Luften ovanför vattnet räcker inte till för att ta emot volymökningen, så isen trycker på glaset.
+
+**Svar:** Isen får inte plats, och flaskan riskerar att spricka.
+
+**c)** Anta att flaskan har volymen $V_\\text{f}$ och fylls till andelen $x$. Då är vattnets volym $x \\cdot V_\\text{f}$, och isens volym $1{,}090 \\cdot x \\cdot V_\\text{f}$. Isen får plats om
+
+$$
+1{,}090 \\cdot x \\cdot V_\\text{f} \\leq V_\\text{f}
+$$
+
+Dividera båda led med $1{,}090 \\cdot V_\\text{f}$, som är positivt:
+
+$$
+x \\leq \\frac{1}{1{,}090}
+$$
+
+Flaskans volym förkortas bort, så gränsen gäller alla flaskor, stora som små.
+
+$$
+\\frac{1}{1{,}090} = 0{,}917\\ldots \\approx 92\\ \\%
+$$
+
+**Svar:** Flaskan får högst fyllas till cirka 92 % av sin volym.`,
         },
     ],
 
@@ -23902,7 +24549,7 @@ $$
 
 **Svar:** Ca 12,5 m/s.
 
-**Generell slutsats:** Slutfarten beror **inte på massan** — alla föremål faller lika fort i fritt fall.`,
+**Generell slutsats:** Slutfarten beror **inte på massan**: alla föremål faller lika fort i fritt fall.`,
         },
         {
             level: 1,
@@ -23925,9 +24572,9 @@ $$
             question: `En boll med massan 0,50 kg har lägesenergin 30 J ovanför marken. Hur stor blir bollens **rörelseenergi** precis innan den slår i marken, om luftmotståndet kan försummas?`,
             choices: [
                 `Kan inte beräknas utan att veta bollens fart.`,
-                `60 J — rörelseenergin är dubbelt så stor.`,
-                `30 J — all lägesenergi omvandlas till rörelseenergi.`,
-                `15 J — hälften av lägesenergin går förlorad.`,
+                `60 J, rörelseenergin är dubbelt så stor.`,
+                `30 J, all lägesenergi omvandlas till rörelseenergi.`,
+                `15 J, hälften av lägesenergin går förlorad.`,
             ],
             correct: 2,
             solution: `Enligt energiprincipen kan energi varken skapas eller förstöras. Utan luftmotstånd omvandlas **all** lägesenergi till rörelseenergi när bollen faller:
@@ -23978,7 +24625,7 @@ $$
 
 **Svar:** Ca 18 m/s.
 
-**Generell slutsats:** Notera att kastvinkeln *inte* spelar roll för slutfarten — bara starthöjden och startfartens *storlek*.`,
+**Generell slutsats:** Notera att kastvinkeln *inte* spelar roll för slutfarten, bara starthöjden och startfartens *storlek*.`,
         },
         {
             level: 3,
@@ -24010,6 +24657,823 @@ $$
 **Svar:** Ca 6,7 kJ blev friktionsvärme.
 
 **Generell slutsats:** Utan friktion skulle cyklisten nått farten $v = \\sqrt{2gh} \\approx 22{,}2$ m/s vid dalens botten. Att hen istället har 18 m/s betyder att ca $1 - (18/22{,}2)^{2} \\approx 34\\,\\%$ av lägesenergin gick till friktion (luftmotstånd, friktion i lager och däck).`,
+        },
+        {
+            level: 1,
+            question: `En drönare med massan 1,2 kg flyger på höjden 15 m över marken med farten 8,0 m/s. Beräkna drönarens mekaniska energi med marken som nollnivå. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i J.`,
+            answer: { value: 220, unit: 'J', tol: 0.03 },
+            solution: `Den mekaniska energin är summan av lägesenergin och rörelseenergin:
+
+$$
+E_m = E_p + E_k = m \\cdot g \\cdot h + \\frac{m \\cdot v^{2}}{2}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m = 1{,}2\\ \\mathrm{kg} \\\\
+g \\approx 9{,}82\\ \\mathrm{N/kg} \\\\
+h = 15\\ \\mathrm{m} \\\\
+v = 8{,}0\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+Lägesenergin:
+
+$$
+E_p = 1{,}2 \\cdot 9{,}82 \\cdot 15 = 176{,}76\\ \\mathrm{J}
+$$
+
+Rörelseenergin:
+
+$$
+E_k = \\frac{1{,}2 \\cdot 8{,}0^{2}}{2} = \\frac{1{,}2 \\cdot 64}{2} = 38{,}4\\ \\mathrm{J}
+$$
+
+Summan:
+
+$$
+E_m = 176{,}76 + 38{,}4 = 215{,}16\\ \\mathrm{J} \\approx 220\\ \\mathrm{J}
+$$
+
+Givna värden har två värdesiffror, så svaret avrundas till två värdesiffror.
+
+**Svar:** 220 J`,
+        },
+        {
+            level: 1,
+            question: `En hockeypuck glider 24 m rakt fram över en vågrät is innan den stannar. Friktionskraften från isen på pucken är 0,45 N. Hur mycket värmeenergi har friktionen utvecklat när pucken har stannat? Ange svaret i J.`,
+            answer: { value: 11, unit: 'J', tol: 0.03 },
+            solution: `Friktionsvärmen är det arbete som friktionskraften uträttar längs sträckan:
+
+$$
+E_v = F_f \\cdot s
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F_f = 0{,}45\\ \\mathrm{N} \\\\
+s = 24\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+E_v = 0{,}45 \\cdot 24 = 10{,}8\\ \\mathrm{J} \\approx 11\\ \\mathrm{J}
+$$
+
+Isen är vågrät, så puckens lägesenergi ändras inte. Hela rörelseenergin som pucken hade från början har alltså blivit värme.
+
+**Svar:** 11 J`,
+        },
+        {
+            level: 1,
+            question: `En skateboardåkare rullar fram och tillbaka i en ramp. Energiförluster genom friktion och luftmotstånd kan försummas. Vad gäller för hennes **mekaniska energi** $E_m = E_p + E_k$ under rörelsen?`,
+            choices: [
+                `Den är störst i rampens lägsta punkt, där farten är störst.`,
+                `Den är lika stor i varje punkt av rörelsen.`,
+                `Den är störst i vändlägena, där lägesenergin är störst.`,
+                `Den är noll i vändlägena, där farten är noll.`,
+            ],
+            correct: 1,
+            solution: `Utan friktion och luftmotstånd omvandlas ingen energi till värme. Enligt energiprincipen kan energi inte skapas eller förstöras, så summan av lägesenergi och rörelseenergi är densamma hela tiden.
+
+På vägen ned blir lägesenergi till rörelseenergi, och på vägen upp blir rörelseenergi till lägesenergi. I vändlägena är rörelseenergin noll, men där är lägesenergin som störst, så den mekaniska energin är inte noll där.
+
+**Svar:** Den är lika stor i varje punkt av rörelsen.`,
+        },
+        {
+            level: 1,
+            question: `En kula rullar från vila i punkten A längs banan i figuren, utan energiförluster. Tabellen visar kulans lägesenergi och rörelseenergi i tre punkter, med marken som nollnivå.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 200" style="max-width:567px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><path d="M 20.0 32.0 L 22.0 32.0 L 24.0 32.0 L 26.0 32.0 L 28.0 32.0 L 30.0 32.0 L 32.0 32.0 L 34.0 32.0 L 36.0 32.0 L 38.0 32.0 L 40.0 32.0 L 42.0 32.0 L 44.0 32.0 L 46.0 32.0 L 48.0 32.0 L 50.0 32.0 L 52.0 32.2 L 54.0 32.7 L 56.0 33.7 L 58.0 34.9 L 60.0 36.6 L 62.0 38.5 L 64.0 40.8 L 66.0 43.5 L 68.0 46.4 L 70.0 49.6 L 72.0 53.1 L 74.0 56.9 L 76.0 60.8 L 78.0 65.0 L 80.0 69.4 L 82.0 74.0 L 84.0 78.6 L 86.0 83.4 L 88.0 88.3 L 90.0 93.3 L 92.0 98.3 L 94.0 103.2 L 96.0 108.2 L 98.0 113.1 L 100.0 118.0 L 102.0 122.7 L 104.0 127.3 L 106.0 131.8 L 108.0 136.1 L 110.0 140.2 L 112.0 144.0 L 114.0 147.7 L 116.0 151.0 L 118.0 154.1 L 120.0 156.9 L 122.0 159.4 L 124.0 161.5 L 126.0 163.3 L 128.0 164.8 L 130.0 165.9 L 132.0 166.6 L 134.0 167.0 L 136.0 167.0 L 138.0 166.7 L 140.0 166.2 L 142.0 165.5 L 144.0 164.5 L 146.0 163.3 L 148.0 161.8 L 150.0 160.2 L 152.0 158.3 L 154.0 156.2 L 156.0 154.0 L 158.0 151.6 L 160.0 149.0 L 162.0 146.3 L 164.0 143.5 L 166.0 140.5 L 168.0 137.5 L 170.0 134.4 L 172.0 131.3 L 174.0 128.1 L 176.0 124.9 L 178.0 121.7 L 180.0 118.6 L 182.0 115.5 L 184.0 112.5 L 186.0 109.5 L 188.0 106.7 L 190.0 104.0 L 192.0 101.4 L 194.0 99.0 L 196.0 96.8 L 198.0 94.7 L 200.0 92.8 L 202.0 91.2 L 204.0 89.7 L 206.0 88.5 L 208.0 87.5 L 210.0 86.8 L 212.0 86.3 L 214.0 86.0 L 216.0 86.0 L 218.0 86.2 L 220.0 86.7 L 222.0 87.3 L 224.0 88.2 L 226.0 89.3 L 228.0 90.6 L 230.0 92.1 L 232.0 93.7 L 234.0 95.6 L 236.0 97.6 L 238.0 99.8 L 240.0 102.1 L 242.0 104.5 L 244.0 107.1 L 246.0 109.8 L 248.0 112.6 L 250.0 115.4 L 252.0 118.3 L 254.0 121.3 L 256.0 124.3 L 258.0 127.2 L 260.0 130.2 L 262.0 133.2 L 264.0 136.1 L 266.0 139.0 L 268.0 141.8 L 270.0 144.6 L 272.0 147.2 L 274.0 149.7 L 276.0 152.1 L 278.0 154.3 L 280.0 156.4 L 282.0 158.4 L 284.0 160.1 L 286.0 161.7 L 288.0 163.1 L 290.0 164.3 L 292.0 165.2 L 294.0 166.0 L 296.0 166.6 L 298.0 166.9 L 300.0 167.0 L 302.0 167.0 L 304.0 166.9 L 306.0 166.8 L 308.0 166.7 L 310.0 166.5 L 312.0 166.3 L 314.0 166.0 L 316.0 165.7 L 318.0 165.4 L 320.0 165.0 L 322.0 164.7 L 324.0 164.2 L 326.0 163.8 L 328.0 163.3 L 330.0 162.8 L 332.0 162.3 L 334.0 161.8 L 336.0 161.3 L 338.0 160.7 L 340.0 160.2 L 342.0 159.6 L 344.0 159.1 L 346.0 158.5 L 348.0 158.0 L 350.0 157.4 L 352.0 156.9 L 354.0 156.4 L 356.0 155.9 L 358.0 155.4 L 360.0 155.0 L 362.0 154.6 L 364.0 154.1 L 366.0 153.8 L 368.0 153.4 L 370.0 153.1 L 372.0 152.8 L 374.0 152.6 L 376.0 152.4 L 378.0 152.2 L 380.0 152.1 L 382.0 152.0 L 384.0 152.0 L 386.0 152.0 L 388.0 152.0 L 390.0 152.0 L 392.0 152.0 L 394.0 152.0 L 396.0 152.0 L 398.0 152.0 L 400.0 152.0 L 400 176 L 20 176 Z" fill="#efe9dc" stroke="none"/><path d="M 20.0 32.0 L 22.0 32.0 L 24.0 32.0 L 26.0 32.0 L 28.0 32.0 L 30.0 32.0 L 32.0 32.0 L 34.0 32.0 L 36.0 32.0 L 38.0 32.0 L 40.0 32.0 L 42.0 32.0 L 44.0 32.0 L 46.0 32.0 L 48.0 32.0 L 50.0 32.0 L 52.0 32.2 L 54.0 32.7 L 56.0 33.7 L 58.0 34.9 L 60.0 36.6 L 62.0 38.5 L 64.0 40.8 L 66.0 43.5 L 68.0 46.4 L 70.0 49.6 L 72.0 53.1 L 74.0 56.9 L 76.0 60.8 L 78.0 65.0 L 80.0 69.4 L 82.0 74.0 L 84.0 78.6 L 86.0 83.4 L 88.0 88.3 L 90.0 93.3 L 92.0 98.3 L 94.0 103.2 L 96.0 108.2 L 98.0 113.1 L 100.0 118.0 L 102.0 122.7 L 104.0 127.3 L 106.0 131.8 L 108.0 136.1 L 110.0 140.2 L 112.0 144.0 L 114.0 147.7 L 116.0 151.0 L 118.0 154.1 L 120.0 156.9 L 122.0 159.4 L 124.0 161.5 L 126.0 163.3 L 128.0 164.8 L 130.0 165.9 L 132.0 166.6 L 134.0 167.0 L 136.0 167.0 L 138.0 166.7 L 140.0 166.2 L 142.0 165.5 L 144.0 164.5 L 146.0 163.3 L 148.0 161.8 L 150.0 160.2 L 152.0 158.3 L 154.0 156.2 L 156.0 154.0 L 158.0 151.6 L 160.0 149.0 L 162.0 146.3 L 164.0 143.5 L 166.0 140.5 L 168.0 137.5 L 170.0 134.4 L 172.0 131.3 L 174.0 128.1 L 176.0 124.9 L 178.0 121.7 L 180.0 118.6 L 182.0 115.5 L 184.0 112.5 L 186.0 109.5 L 188.0 106.7 L 190.0 104.0 L 192.0 101.4 L 194.0 99.0 L 196.0 96.8 L 198.0 94.7 L 200.0 92.8 L 202.0 91.2 L 204.0 89.7 L 206.0 88.5 L 208.0 87.5 L 210.0 86.8 L 212.0 86.3 L 214.0 86.0 L 216.0 86.0 L 218.0 86.2 L 220.0 86.7 L 222.0 87.3 L 224.0 88.2 L 226.0 89.3 L 228.0 90.6 L 230.0 92.1 L 232.0 93.7 L 234.0 95.6 L 236.0 97.6 L 238.0 99.8 L 240.0 102.1 L 242.0 104.5 L 244.0 107.1 L 246.0 109.8 L 248.0 112.6 L 250.0 115.4 L 252.0 118.3 L 254.0 121.3 L 256.0 124.3 L 258.0 127.2 L 260.0 130.2 L 262.0 133.2 L 264.0 136.1 L 266.0 139.0 L 268.0 141.8 L 270.0 144.6 L 272.0 147.2 L 274.0 149.7 L 276.0 152.1 L 278.0 154.3 L 280.0 156.4 L 282.0 158.4 L 284.0 160.1 L 286.0 161.7 L 288.0 163.1 L 290.0 164.3 L 292.0 165.2 L 294.0 166.0 L 296.0 166.6 L 298.0 166.9 L 300.0 167.0 L 302.0 167.0 L 304.0 166.9 L 306.0 166.8 L 308.0 166.7 L 310.0 166.5 L 312.0 166.3 L 314.0 166.0 L 316.0 165.7 L 318.0 165.4 L 320.0 165.0 L 322.0 164.7 L 324.0 164.2 L 326.0 163.8 L 328.0 163.3 L 330.0 162.8 L 332.0 162.3 L 334.0 161.8 L 336.0 161.3 L 338.0 160.7 L 340.0 160.2 L 342.0 159.6 L 344.0 159.1 L 346.0 158.5 L 348.0 158.0 L 350.0 157.4 L 352.0 156.9 L 354.0 156.4 L 356.0 155.9 L 358.0 155.4 L 360.0 155.0 L 362.0 154.6 L 364.0 154.1 L 366.0 153.8 L 368.0 153.4 L 370.0 153.1 L 372.0 152.8 L 374.0 152.6 L 376.0 152.4 L 378.0 152.2 L 380.0 152.1 L 382.0 152.0 L 384.0 152.0 L 386.0 152.0 L 388.0 152.0 L 390.0 152.0 L 392.0 152.0 L 394.0 152.0 L 396.0 152.0 L 398.0 152.0 L 400.0 152.0" fill="none" stroke="#0f1620" stroke-width="2.4" stroke-linejoin="round"/><line x1="12" y1="176" x2="408" y2="176" stroke="#0f1620" stroke-width="1.6"/><line x1="18" y1="176" x2="11" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="30" y1="176" x2="23" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="42" y1="176" x2="35" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="54" y1="176" x2="47" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="66" y1="176" x2="59" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="78" y1="176" x2="71" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="90" y1="176" x2="83" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="102" y1="176" x2="95" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="114" y1="176" x2="107" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="126" y1="176" x2="119" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="138" y1="176" x2="131" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="150" y1="176" x2="143" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="162" y1="176" x2="155" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="174" y1="176" x2="167" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="186" y1="176" x2="179" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="198" y1="176" x2="191" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="210" y1="176" x2="203" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="222" y1="176" x2="215" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="234" y1="176" x2="227" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="246" y1="176" x2="239" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="258" y1="176" x2="251" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="270" y1="176" x2="263" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="282" y1="176" x2="275" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="294" y1="176" x2="287" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="306" y1="176" x2="299" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="318" y1="176" x2="311" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="330" y1="176" x2="323" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="342" y1="176" x2="335" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="354" y1="176" x2="347" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="366" y1="176" x2="359" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="378" y1="176" x2="371" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="390" y1="176" x2="383" y2="184" stroke="#0f1620" stroke-width="1"/><line x1="402" y1="176" x2="395" y2="184" stroke="#0f1620" stroke-width="1"/><circle cx="35" cy="23.0" r="9" fill="#1c3d6b"/><circle cx="50" cy="32.0" r="3.2" fill="#0f1620"/><text x="50" y="20.0" font-size="16" font-weight="600" fill="#0f1620" text-anchor="middle">A</text><circle cx="215" cy="86.0" r="3.2" fill="#0f1620"/><text x="215" y="74.0" font-size="16" font-weight="600" fill="#0f1620" text-anchor="middle">B</text><circle cx="385" cy="152.0" r="3.2" fill="#0f1620"/><text x="385" y="140.0" font-size="16" font-weight="600" fill="#0f1620" text-anchor="middle">C</text></svg>
+
+| Punkt | $E_p$ (J) | $E_k$ (J) |
+|---|---|---|
+| A | 48 | 0 |
+| B | 30 | ? |
+| C | ? | 40 |
+
+a) Bestäm kulans rörelseenergi i punkten B.<br>b) Bestäm kulans lägesenergi i punkten C.`,
+            answer: { value: 18, unit: 'J', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 18, unit: 'J', etikett: '$E_k$ i B' },
+                { del: 'b', value: 8, unit: 'J', etikett: '$E_p$ i C' },
+            ],
+            solution: `Utan energiförluster är den mekaniska energin lika stor i alla punkter:
+
+$$
+E_m = E_p + E_k
+$$
+
+I punkten A är kulan i vila:
+
+$$
+E_m = 48 + 0 = 48\\ \\mathrm{J}
+$$
+
+**a)** I punkten B är den mekaniska energin fortfarande 48 J:
+
+$$
+E_{k} = E_m - E_{p} = 48 - 30 = 18\\ \\mathrm{J}
+$$
+
+**Svar:** 18 J
+
+**b)** I punkten C:
+
+$$
+E_{p} = E_m - E_{k} = 48 - 40 = 8\\ \\mathrm{J}
+$$
+
+Det stämmer med figuren: C ligger lägre än B men en bit över marken.
+
+**Svar:** 8 J`,
+        },
+
+        {
+            level: 2,
+            question: `Ett barn gungar på en gunga. I vändläget, där gungan står stilla ett ögonblick, är sätet 0,85 m högre än i den lägsta punkten. Bortse från friktion och luftmotstånd och räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+
+${makeSwing({ angle: 40, hLabel: 'h = 0,85 m', angleLabel: null })}
+
+a) Med vilken fart passerar barnet den lägsta punkten?<br>b) Hur stor är farten när sätet befinner sig 0,40 m över den lägsta punkten?`,
+            answer: { value: 4.1, unit: 'm/s', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 4.1, unit: 'm/s', tol: 0.03 },
+                { del: 'b', value: 3.0, unit: 'm/s', tol: 0.03 },
+            ],
+            solution: `Vi sätter nollnivån i den lägsta punkten. Energiprincipen ger
+
+$$
+E_{p1} + E_{k1} = E_{p2} + E_{k2}
+$$
+
+Läge 1 är vändläget, där farten är noll. Barnets massa *m* finns i varje term och kan divideras bort, så den behövs inte.
+
+**a)** I den lägsta punkten är lägesenergin noll:
+
+$$
+m \\cdot g \\cdot h + 0 = 0 + \\frac{m \\cdot v^{2}}{2}
+\\quad\\Leftrightarrow\\quad
+v = \\sqrt{2 \\cdot g \\cdot h}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+g \\approx 9{,}82\\ \\mathrm{N/kg} \\\\
+h = 0{,}85\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+v = \\sqrt{2 \\cdot 9{,}82 \\cdot 0{,}85} = \\sqrt{16{,}694} = 4{,}0858\\ldots\\ \\mathrm{m/s} \\approx 4{,}1\\ \\mathrm{m/s}
+$$
+
+**Svar:** 4,1 m/s
+
+**b)** Nu ligger läge 2 på höjden $h_2 = 0{,}40\\ \\mathrm{m}$:
+
+$$
+m \\cdot g \\cdot h_1 + 0 = m \\cdot g \\cdot h_2 + \\frac{m \\cdot v_2^{2}}{2}
+\\quad\\Leftrightarrow\\quad
+v_2 = \\sqrt{2 \\cdot g \\cdot (h_1 - h_2)}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+h_1 = 0{,}85\\ \\mathrm{m} \\\\
+h_2 = 0{,}40\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+v_2 = \\sqrt{2 \\cdot 9{,}82 \\cdot (0{,}85 - 0{,}40)} = \\sqrt{2 \\cdot 9{,}82 \\cdot 0{,}45} = \\sqrt{8{,}838} = 2{,}9728\\ldots\\ \\mathrm{m/s} \\approx 3{,}0\\ \\mathrm{m/s}
+$$
+
+Farten är lägre än i a), vilket är rimligt eftersom barnet bara har sjunkit drygt halva höjden.
+
+**Svar:** 3,0 m/s`,
+        },
+        {
+            level: 2,
+            question: `En pulka med ett barn har den sammanlagda massan 24 kg. Den passerar krönet på en backe med farten 2,0 m/s. Krönet ligger 6,0 m högre än backens fot, och pulkan åker 40 m längs backen från krönet till foten. Längs hela vägen bromsas pulkan av en friktionskraft på 12 N. Nedanför backen fortsätter pulkan ut på en vågrät snöyta, där friktionskraften också är 12 N. Luftmotståndet kan försummas, och $g = 9{,}82\\ \\mathrm{N/kg}$.<br>a) Med vilken fart når pulkan backens fot?<br>b) Hur långt glider pulkan på den vågräta snöytan innan den stannar?`,
+            answer: { value: 9.0, unit: 'm/s', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 9.0, unit: 'm/s', tol: 0.03 },
+                { del: 'b', value: 82, unit: 'm', tol: 0.04 },
+            ],
+            solution: `Vi sätter nollnivån vid backens fot och kallar friktionsvärmen $E_v$.
+
+**a)** Energiprincipen med friktion ger
+
+$$
+E_{p1} + E_{k1} = E_{p2} + E_{k2} + E_v
+$$
+
+Friktionsvärmen i backen är friktionskraftens arbete längs backen, $E_v = F_f \\cdot s_1$. Vid foten är lägesenergin noll:
+
+$$
+m \\cdot g \\cdot h + \\frac{m \\cdot v_1^{2}}{2} = 0 + E_{k2} + F_f \\cdot s_1
+$$
+
+Vi räknar först ut rörelseenergin vid foten:
+
+$$
+E_{k2} = m \\cdot g \\cdot h + \\frac{m \\cdot v_1^{2}}{2} - F_f \\cdot s_1
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m = 24\\ \\mathrm{kg} \\\\
+g \\approx 9{,}82\\ \\mathrm{N/kg} \\\\
+h = 6{,}0\\ \\mathrm{m} \\\\
+v_1 = 2{,}0\\ \\mathrm{m/s} \\\\
+F_f = 12\\ \\mathrm{N} \\\\
+s_1 = 40\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+E_{k2} = 24 \\cdot 9{,}82 \\cdot 6{,}0 + \\frac{24 \\cdot 2{,}0^{2}}{2} - 12 \\cdot 40 = 1\\,414{,}08 + 48 - 480 = 982{,}08\\ \\mathrm{J}
+$$
+
+Farten löses ut ur rörelseenergin:
+
+$$
+E_{k2} = \\frac{m \\cdot v_2^{2}}{2}
+\\quad\\Leftrightarrow\\quad
+v_2 = \\sqrt{\\frac{2 \\cdot E_{k2}}{m}}
+$$
+
+$$
+v_2 = \\sqrt{\\frac{2 \\cdot 982{,}08}{24}} = \\sqrt{81{,}84} = 9{,}046\\ldots\\ \\mathrm{m/s} \\approx 9{,}0\\ \\mathrm{m/s}
+$$
+
+Rimlighet: utan friktion hade farten blivit $\\sqrt{2{,}0^{2} + 2 \\cdot 9{,}82 \\cdot 6{,}0} \\approx 11\\ \\mathrm{m/s}$, så friktionen ska ge en lägre fart, och det gör den.
+
+**Svar:** 9,0 m/s
+
+**b)** På den vågräta snöytan ändras inte lägesenergin. Hela rörelseenergin vid foten blir friktionsvärme på sträckan $s_2$:
+
+$$
+E_{k2} = F_f \\cdot s_2
+\\quad\\Leftrightarrow\\quad
+s_2 = \\frac{E_{k2}}{F_f}
+$$
+
+$$
+s_2 = \\frac{982{,}08}{12} = 81{,}84\\ \\mathrm{m} \\approx 82\\ \\mathrm{m}
+$$
+
+**Svar:** 82 m`,
+        },
+        {
+            level: 2,
+            question: `En vagn rullar längs en bana med två backar, utan energiförluster. Diagrammet visar vagnens lägesenergi $E_p$ som funktion av läget *x* längs banan. Vagnen har massan 2,0 kg och passerar $x = 0$ med rörelseenergin 15 J, på väg åt höger.
+
+${makeDiagram({
+    xMax: 10, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    yMax: 110, yTicks: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110],
+    xLabel: '<tspan font-style="italic">x</tspan> (m)',
+    yLabel: '<tspan font-style="italic">E</tspan><tspan baseline-shift="sub" font-size="0.72em">p</tspan> (J)',
+    paths: [{ points: Array.from({ length: 101 }, (_, i) => { const x = i / 10; return [x, 50 + 30 * Math.cos(Math.PI * x / 4) + 2.5 * x]; }) }],
+})}
+
+a) Hur stor är vagnens rörelseenergi i $x = 6{,}0\\ \\mathrm{m}$?<br>b) Med vilken fart passerar vagnen $x = 4{,}0\\ \\mathrm{m}$?<br>c) Tar sig vagnen över den andra backen? Om inte, i vilket läge *x* vänder den?`,
+            answer: { value: 30, unit: 'J', tol: 0.1 },
+            delsvar: [
+                { del: 'a', value: 30, unit: 'J', tol: 0.1 },
+                { del: 'b', value: 8.1, unit: 'm/s', tol: 0.05 },
+                { del: 'c', value: 7.4, unit: 'm', tol: 0.03, etikett: 'läget där vagnen vänder' },
+            ],
+            solution: `Utan energiförluster är den mekaniska energin konstant:
+
+$$
+E_m = E_p + E_k
+$$
+
+I $x = 0$ läser vi av $E_p = 80\\ \\mathrm{J}$, och rörelseenergin är 15 J:
+
+$$
+E_m = 80 + 15 = 95\\ \\mathrm{J}
+$$
+
+**a)** I $x = 6{,}0\\ \\mathrm{m}$ läser vi av $E_p = 65\\ \\mathrm{J}$ (mitt emellan 60 J och 70 J):
+
+$$
+E_k = E_m - E_p = 95 - 65 = 30\\ \\mathrm{J}
+$$
+
+**Svar:** 30 J
+
+**b)** I $x = 4{,}0\\ \\mathrm{m}$ läser vi av $E_p = 30\\ \\mathrm{J}$, så
+
+$$
+E_k = 95 - 30 = 65\\ \\mathrm{J}
+$$
+
+Farten löses ut ur rörelseenergin:
+
+$$
+E_k = \\frac{m \\cdot v^{2}}{2}
+\\quad\\Leftrightarrow\\quad
+v = \\sqrt{\\frac{2 \\cdot E_k}{m}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+E_k = 65\\ \\mathrm{J} \\\\
+m = 2{,}0\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$
+v = \\sqrt{\\frac{2 \\cdot 65}{2{,}0}} = \\sqrt{65} = 8{,}062\\ldots\\ \\mathrm{m/s} \\approx 8{,}1\\ \\mathrm{m/s}
+$$
+
+**Svar:** 8,1 m/s
+
+**c)** Toppen på den andra backen ligger vid $x = 8\\ \\mathrm{m}$ och har $E_p = 100\\ \\mathrm{J}$. Det är mer än vagnens mekaniska energi 95 J, så vagnen kommer inte över. Den vänder där hela energin är lägesenergi, alltså där $E_p = 95\\ \\mathrm{J}$ och $E_k = 0$. Grafen når 95 J ungefär vid $x = 7{,}4\\ \\mathrm{m}$. Där rullar vagnen tillbaka åt vänster.
+
+**Svar:** Nej, vagnen vänder vid ungefär $x = 7{,}4\\ \\mathrm{m}$.`,
+        },
+        {
+            level: 2,
+            question: `En stavhoppare springer med farten 9,0 m/s när hon sätter ned staven. Hennes tyngdpunkt ligger då 1,0 m över marken. När hon passerar över ribban har hon farten 1,0 m/s. Anta att ingen energi blir värme när staven böjs och rätas ut, och att luftmotståndet kan försummas. Hur högt över marken ligger hennes tyngdpunkt när hon passerar ribban? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i m.`,
+            answer: { value: 5.1, unit: 'm', tol: 0.03 },
+            solution: `Läge 1 är när staven sätts ned och läge 2 när hon passerar ribban. Vi sätter nollnivån vid marken. Energiprincipen ger
+
+$$
+E_{p1} + E_{k1} = E_{p2} + E_{k2}
+$$
+
+$$
+m \\cdot g \\cdot h_1 + \\frac{m \\cdot v_1^{2}}{2} = m \\cdot g \\cdot h_2 + \\frac{m \\cdot v_2^{2}}{2}
+$$
+
+Massan finns i varje term, så vi dividerar båda led med *m*:
+
+$$
+g \\cdot h_1 + \\frac{v_1^{2}}{2} = g \\cdot h_2 + \\frac{v_2^{2}}{2}
+$$
+
+Vi löser ut $h_2$:
+
+$$
+h_2 = h_1 + \\frac{v_1^{2} - v_2^{2}}{2 \\cdot g}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+h_1 = 1{,}0\\ \\mathrm{m} \\\\
+v_1 = 9{,}0\\ \\mathrm{m/s} \\\\
+v_2 = 1{,}0\\ \\mathrm{m/s} \\\\
+g \\approx 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+h_2 = 1{,}0 + \\frac{9{,}0^{2} - 1{,}0^{2}}{2 \\cdot 9{,}82} = 1{,}0 + \\frac{80}{19{,}64} = 1{,}0 + 4{,}0733\\ldots = 5{,}0733\\ldots\\ \\mathrm{m} \\approx 5{,}1\\ \\mathrm{m}
+$$
+
+Det är rimligt: de bästa stavhopparna tar sig över ribbor på omkring 5 m och mer. I verkligheten trycker hopparen också ifrån med armarna, vilket ger lite extra energi.
+
+**Svar:** 5,1 m`,
+        },
+        {
+            level: 2,
+            question: `En studsboll släpps från höjden 2,0 m. Vid varje studs blir 20 % av bollens mekaniska energi värme, och luftmotståndet kan försummas. Hur högt studsar bollen efter den andra studsen?`,
+            choices: [
+                `0,80 m`,
+                `1,2 m`,
+                `1,6 m`,
+                `1,3 m`,
+            ],
+            correct: 3,
+            solution: `I varje vändläge är rörelseenergin noll, så den mekaniska energin är då bara lägesenergi, $E_m = m \\cdot g \\cdot h$. Höjden är alltså proportionell mot den mekaniska energin.
+
+Efter varje studs finns 80 % av den mekaniska energin kvar, och då når bollen 80 % av den förra höjden:
+
+$$
+h_1 = 0{,}80 \\cdot 2{,}0 = 1{,}6\\ \\mathrm{m}
+$$
+
+$$
+h_2 = 0{,}80 \\cdot 1{,}6 = 1{,}28\\ \\mathrm{m} \\approx 1{,}3\\ \\mathrm{m}
+$$
+
+Alternativet 1,2 m får man om man drar bort 20 % av den ursprungliga energin två gånger. Men vid den andra studsen förloras 20 % av den energi som fanns kvar, och den är mindre än från början.
+
+**Svar:** 1,3 m`,
+        },
+
+        {
+            level: 3,
+            question: `En låda släpps från vila överst på en ramp. Rampens övre ände ligger på höjden *h* över golvet, och lådan glider sträckan *s* längs rampen ned till golvet. Under hela färden verkar en friktionskraft som är 0,20 gånger lådans tyngd, $F_f = 0{,}20 \\cdot m \\cdot g$. Luftmotståndet kan försummas.<br>a) Visa att lådans fart vid rampens nedre ände är $v = \\sqrt{2 \\cdot g \\cdot (h - 0{,}20 \\cdot s)}$.<br>b) Beräkna farten när $h = 3{,}0\\ \\mathrm{m}$ och $s = 6{,}0\\ \\mathrm{m}$. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.<br>c) En längre ramp med samma höjd blir flackare. Anta att friktionskraften fortfarande är $0{,}20 \\cdot m \\cdot g$. Hur lång får rampen högst vara om lådan ska ta sig ända ned?`,
+            answer: { value: 5.9, unit: 'm/s', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 5.9, unit: 'm/s', tol: 0.03 },
+                { del: 'c', value: 15, unit: 'm', tol: 0.03 },
+            ],
+            solution: `**a)** Vi sätter nollnivån vid golvet. Överst är lådan i vila, och nederst är lägesenergin noll. En del av lägesenergin blir friktionsvärme $E_v$:
+
+$$
+E_{p1} + E_{k1} = E_{p2} + E_{k2} + E_v
+$$
+
+Friktionsvärmen är friktionskraftens arbete längs sträckan *s*:
+
+$$
+E_v = F_f \\cdot s = 0{,}20 \\cdot m \\cdot g \\cdot s
+$$
+
+Insättning av $E_v$ i energiprincipen ger
+
+$$
+m \\cdot g \\cdot h + 0 = 0 + \\frac{m \\cdot v^{2}}{2} + 0{,}20 \\cdot m \\cdot g \\cdot s
+$$
+
+Massan finns i varje term, så vi dividerar båda led med *m*:
+
+$$
+g \\cdot h = \\frac{v^{2}}{2} + 0{,}20 \\cdot g \\cdot s
+$$
+
+$$
+\\frac{v^{2}}{2} = g \\cdot h - 0{,}20 \\cdot g \\cdot s = g \\cdot (h - 0{,}20 \\cdot s)
+$$
+
+$$
+v^{2} = 2 \\cdot g \\cdot (h - 0{,}20 \\cdot s)
+\\quad\\Leftrightarrow\\quad
+v = \\sqrt{2 \\cdot g \\cdot (h - 0{,}20 \\cdot s)}
+$$
+
+vilket skulle visas. Lägg märke till att svaret inte beror på lådans massa.
+
+**b)**
+
+$$
+\\left[ \\begin{array}{l}
+g \\approx 9{,}82\\ \\mathrm{N/kg} \\\\
+h = 3{,}0\\ \\mathrm{m} \\\\
+s = 6{,}0\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+v = \\sqrt{2 \\cdot 9{,}82 \\cdot (3{,}0 - 0{,}20 \\cdot 6{,}0)} = \\sqrt{2 \\cdot 9{,}82 \\cdot 1{,}8} = \\sqrt{35{,}352} = 5{,}9457\\ldots\\ \\mathrm{m/s} \\approx 5{,}9\\ \\mathrm{m/s}
+$$
+
+Rimlighet: utan friktion hade farten blivit $\\sqrt{2 \\cdot 9{,}82 \\cdot 3{,}0} \\approx 7{,}7\\ \\mathrm{m/s}$, så friktionen ska ge en lägre fart, och det gör den.
+
+**Svar:** 5,9 m/s
+
+**c)** Lådan når ända ned så länge uttrycket under rottecknet inte är negativt. Gränsen är när all lägesenergi har blivit friktionsvärme just när lådan når golvet:
+
+$$
+h - 0{,}20 \\cdot s = 0
+\\quad\\Leftrightarrow\\quad
+s = \\frac{h}{0{,}20} = 5 \\cdot h
+$$
+
+$$
+s = \\frac{3{,}0}{0{,}20} = 15\\ \\mathrm{m}
+$$
+
+På en längre ramp skulle friktionsvärmen bli större än hela lägesenergin, och uttrycket under rottecknet blir negativt. Det går inte, så lådan kan inte nå golvet. Med krafter ser man samma sak: tyngdkraftens komposant längs rampen är $m \\cdot g \\cdot \\dfrac{h}{s}$, och när $s = 5 \\cdot h$ är den lika stor som friktionskraften $0{,}20 \\cdot m \\cdot g$. På en ännu flackare ramp räcker tyngdkraften inte för att få lådan att glida alls.
+
+**Svar:** Högst 15 m`,
+        },
+        {
+            level: 3,
+            question: `En boll kastas rakt uppåt strax utanför räcket på en balkong, 6,0 m över marken. På väg ned passerar bollen balkongen och slår i marken med farten 15 m/s. Luftmotståndet kan försummas, och $g = 9{,}82\\ \\mathrm{N/kg}$.<br>a) Hur högt över marken når bollen som högst?<br>b) Med vilken fart kastades bollen?<br>c) Bollen kastas i stället snett uppåt med samma fart från samma ställe. I banans högsta punkt har den nu farten 6,0 m/s. Hur högt över marken når bollen, och med vilken fart slår den i marken?`,
+            answer: { value: 11, unit: 'm', tol: 0.05 },
+            delsvar: [
+                { del: 'a', value: 11, unit: 'm', tol: 0.05 },
+                { del: 'b', value: 10, unit: 'm/s', tol: 0.05 },
+                { del: 'c', value: 9.6, unit: 'm', tol: 0.03, etikett: 'högsta höjden' },
+            ],
+            solution: `Vi sätter nollnivån vid marken. Utan luftmotstånd är den mekaniska energin densamma under hela kastet. Massan finns i varje term och kan divideras bort, så den behövs inte.
+
+**a)** I den högsta punkten är farten noll, och vid nedslaget är lägesenergin noll. Vi jämför de två lägena direkt:
+
+$$
+m \\cdot g \\cdot h_\\mathrm{max} + 0 = 0 + \\frac{m \\cdot v^{2}}{2}
+\\quad\\Leftrightarrow\\quad
+h_\\mathrm{max} = \\frac{v^{2}}{2 \\cdot g}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+v = 15\\ \\mathrm{m/s} \\\\
+g \\approx 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+h_\\mathrm{max} = \\frac{15^{2}}{2 \\cdot 9{,}82} = \\frac{225}{19{,}64} = 11{,}456\\ldots\\ \\mathrm{m} \\approx 11\\ \\mathrm{m}
+$$
+
+**Svar:** 11 m
+
+**b)** Nu jämför vi kastet (höjden $h_1 = 6{,}0\\ \\mathrm{m}$, farten $v_0$) med nedslaget:
+
+$$
+m \\cdot g \\cdot h_1 + \\frac{m \\cdot v_0^{2}}{2} = 0 + \\frac{m \\cdot v^{2}}{2}
+\\quad\\Leftrightarrow\\quad
+v_0 = \\sqrt{v^{2} - 2 \\cdot g \\cdot h_1}
+$$
+
+$$
+v_0 = \\sqrt{15^{2} - 2 \\cdot 9{,}82 \\cdot 6{,}0} = \\sqrt{225 - 117{,}84} = \\sqrt{107{,}16} = 10{,}351\\ldots\\ \\mathrm{m/s} \\approx 10\\ \\mathrm{m/s}
+$$
+
+Kontroll: bollen stiger då $\\dfrac{10{,}351^{2}}{2 \\cdot 9{,}82} \\approx 5{,}5\\ \\mathrm{m}$ över balkongen, alltså till cirka 11 m över marken, som i a).
+
+**Svar:** 10 m/s
+
+**c)** Energiprincipen innehåller bara höjder och farter, inte riktningar. Bollen startar på samma höjd med samma fart, så den har samma mekaniska energi som i a) och b). Vid nedslaget är all lägesenergi omvandlad, och farten blir därför densamma som förut, 15 m/s.
+
+I den högsta punkten är farten nu inte noll, eftersom bollen fortfarande rör sig i sidled. Vi jämför den högsta punkten (höjden $h_\\mathrm{max}$, farten $v_\\mathrm{top}$) med nedslaget:
+
+$$
+m \\cdot g \\cdot h_\\mathrm{max} + \\frac{m \\cdot v_\\mathrm{top}^{2}}{2} = 0 + \\frac{m \\cdot v^{2}}{2}
+\\quad\\Leftrightarrow\\quad
+h_\\mathrm{max} = \\frac{v^{2} - v_\\mathrm{top}^{2}}{2 \\cdot g}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+v = 15\\ \\mathrm{m/s} \\\\
+v_\\mathrm{top} = 6{,}0\\ \\mathrm{m/s} \\\\
+g \\approx 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+h_\\mathrm{max} = \\frac{15^{2} - 6{,}0^{2}}{2 \\cdot 9{,}82} = \\frac{189}{19{,}64} = 9{,}623\\ldots\\ \\mathrm{m} \\approx 9{,}6\\ \\mathrm{m}
+$$
+
+Rimlighet: höjden blir lägre än 11 m, eftersom en del av energin finns kvar som rörelseenergi i den högsta punkten.
+
+**Svar:** Bollen når 9,6 m över marken och slår i marken med farten 15 m/s.`,
+        },
+        {
+            level: 3,
+            question: `Vid en laboration släpps en vagn från vila på olika ställen längs samma raka ramp. Eleverna mäter hur mycket vagnen sjunker i höjd, *h*, och vagnens fart *v* i rampens nedre ände.
+
+| *h* (m) | 0,20 | 0,40 | 0,60 | 0,80 | 1,00 |
+|---|---|---|---|---|---|
+| *v* (m/s) | 1,78 | 2,52 | 3,09 | 3,57 | 3,99 |
+
+a) Hur stor andel av vagnens lägesenergi har inte blivit rörelseenergi när vagnen når rampens nedre ände? Använd alla mätvärdena, räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i procent.<br>b) Andelen är nästan densamma för alla höjder. Förklara varför, om friktionskraften på vagnen är lika stor i alla försök.`,
+            answer: { value: 19, unit: '%', tol: 0.06 },
+            delsvar: [
+                { del: 'a', value: 19, unit: '%', tol: 0.06 },
+                { del: 'b' },
+            ],
+            solution: `**a)** Vagnens massa är inte given, men den behövs inte. Andelen av lägesenergin som har blivit rörelseenergi är kvoten mellan rörelseenergin nere och lägesenergin uppe:
+
+$$
+\\frac{E_k}{E_p} = \\frac{\\dfrac{m \\cdot v^{2}}{2}}{m \\cdot g \\cdot h} = \\frac{v^{2}}{2 \\cdot g \\cdot h}
+$$
+
+För det första mätvärdet:
+
+$$
+\\frac{v^{2}}{2 \\cdot g \\cdot h} = \\frac{1{,}78^{2}}{2 \\cdot 9{,}82 \\cdot 0{,}20} = \\frac{3{,}1684}{3{,}928} = 0{,}8066\\ldots
+$$
+
+På samma sätt för alla mätvärden:
+
+| *h* (m) | 0,20 | 0,40 | 0,60 | 0,80 | 1,00 |
+|---|---|---|---|---|---|
+| $v^{2}$ (m²/s²) | 3,1684 | 6,3504 | 9,5481 | 12,7449 | 15,9201 |
+| $\\dfrac{E_k}{E_p}$ | 0,8066 | 0,8084 | 0,8103 | 0,8112 | 0,8106 |
+
+Medelvärdet av kvoterna:
+
+$$
+\\frac{0{,}8066 + 0{,}8084 + 0{,}8103 + 0{,}8112 + 0{,}8106}{5} = \\frac{4{,}0471}{5} = 0{,}80942
+$$
+
+Cirka 81 % av lägesenergin har blivit rörelseenergi. Resten har inte blivit det:
+
+$$
+1 - 0{,}80942 = 0{,}19058 \\approx 19\\ \\%
+$$
+
+(Man kan också rita $v^{2}$ mot *h*. Punkterna hamnar på en rät linje genom origo med lutningen cirka $15{,}9\\ \\mathrm{m/s^2}$, och kvoten blir då $\\dfrac{15{,}9}{2 \\cdot 9{,}82} \\approx 0{,}81$.)
+
+**Svar:** Cirka 19 %
+
+**b)** Den energi som inte blir rörelseenergi blir framför allt friktionsvärme, $E_v = F_f \\cdot s$, där *s* är sträckan vagnen rullar längs rampen. Rampen är rak och har samma lutning i alla försök. Därför är sträckan proportionell mot höjden: släpps vagnen dubbelt så högt upp rullar den dubbelt så långt. Med samma friktionskraft blir då friktionsvärmen dubbelt så stor.
+
+Lägesenergin $m \\cdot g \\cdot h$ är också proportionell mot höjden. När både förlusten och lägesenergin ökar i samma takt med *h* blir kvoten mellan dem densamma. En liten del av energin går dessutom till att få hjulen att rotera, och även den delen följer med i samma proportion.
+
+**Svar:** Både friktionsvärmen och lägesenergin är proportionella mot höjden, eftersom sträckan längs den raka rampen är proportionell mot höjden. Då blir andelen som går förlorad densamma.`,
+        },
+        {
+            level: 3,
+            question: `En pendel består av en liten tung kula i ett snöre med längden *l*. Kulan släpps från vila när snöret bildar vinkeln *α* med lodlinjen. Luftmotståndet kan försummas.
+
+${makeSwing({ angle: 35, angleLabel: '<tspan font-style="italic">α</tspan>', ropeLabel: 'l' })}
+
+a) Visa att kulans fart i den lägsta punkten är $v = \\sqrt{2 \\cdot g \\cdot l \\cdot (1 - \\cos\\alpha)}$.<br>b) Kulan släpps först från vinkeln $\\alpha = 30^\\circ$. Från vilken vinkel ska den släppas för att farten i den lägsta punkten ska bli dubbelt så stor?`,
+            answer: { value: 62, unit: '°', tol: 0.02 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 62, unit: '°', tol: 0.02 },
+            ],
+            solution: `**a)** Kulan rör sig längs en cirkelbåge med radien *l* runt fästet. I den lägsta punkten ligger kulan sträckan *l* under fästet. I utgångsläget är snöret snett, och kulan ligger då bara sträckan $l \\cdot \\cos\\alpha$ under fästet (närliggande katet i den rätvinkliga triangel som snöret och lodlinjen bildar). Kulans fallhöjd är skillnaden:
+
+$$
+h = l - l \\cdot \\cos\\alpha = l \\cdot (1 - \\cos\\alpha)
+$$
+
+Med nollnivån i den lägsta punkten ger energiprincipen
+
+$$
+m \\cdot g \\cdot h + 0 = 0 + \\frac{m \\cdot v^{2}}{2}
+\\quad\\Leftrightarrow\\quad
+v = \\sqrt{2 \\cdot g \\cdot h}
+$$
+
+Insättning av $h = l \\cdot (1 - \\cos\\alpha)$ ger
+
+$$
+v = \\sqrt{2 \\cdot g \\cdot l \\cdot (1 - \\cos\\alpha)}
+$$
+
+vilket skulle visas. Snörets kraft på kulan är hela tiden vinkelrät mot rörelsen och uträttar inget arbete, så den ändrar inte den mekaniska energin.
+
+**b)** Vi kallar den första vinkeln $\\alpha_1 = 30^\\circ$ och den sökta $\\alpha_2$. Farten ska bli dubbelt så stor, $v_2 = 2 \\cdot v_1$. Då blir $v_2^{2} = 4 \\cdot v_1^{2}$, och med uttrycket från a):
+
+$$
+2 \\cdot g \\cdot l \\cdot (1 - \\cos\\alpha_2) = 4 \\cdot 2 \\cdot g \\cdot l \\cdot (1 - \\cos\\alpha_1)
+$$
+
+Vi dividerar båda led med $2 \\cdot g \\cdot l$. Snörets längd behövs alltså inte:
+
+$$
+1 - \\cos\\alpha_2 = 4 \\cdot (1 - \\cos 30^\\circ) = 4 \\cdot 0{,}13397 = 0{,}53590
+$$
+
+$$
+\\cos\\alpha_2 = 1 - 0{,}53590 = 0{,}46410
+$$
+
+$$
+\\alpha_2 = \\cos^{-1}(0{,}46410) = 62{,}35\\ldots^\\circ \\approx 62^\\circ
+$$
+
+Det räcker alltså inte att fördubbla vinkeln. Fallhöjden måste bli fyra gånger så stor, eftersom farten är proportionell mot roten ur fallhöjden. Vid 60° blir fallhöjden bara $\\dfrac{1 - \\cos 60^\\circ}{1 - \\cos 30^\\circ} = \\dfrac{0{,}5}{0{,}134} \\approx 3{,}7$ gånger så stor.
+
+**Svar:** Från cirka 62°`,
+        },
+        {
+            level: 3,
+            question: `En cyklist och hennes cykel har den sammanlagda massan 90 kg. Hon rullar utan att trampa nedför en lång backe med jämn lutning och har hela tiden samma fart, 12 m/s. På 500 m längs vägen sjunker hon 20 m i höjd. Nedanför backen fortsätter vägen vågrätt, och hon rullar vidare utan att trampa tills hon stannar. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.<br>a) Hur mycket energi blir värme genom friktion och luftmotstånd på dessa 500 m i backen? Ange svaret i kJ.<br>b) Hur stor är den genomsnittliga kraft som bromsar henne i backen?<br>c) Anta att den bromsande kraften på den vågräta vägen är lika stor som i backen. Hur långt rullar hon då på den vågräta vägen? Blir den verkliga sträckan längre eller kortare än ditt svar? Motivera.`,
+            answer: { value: 18, unit: 'kJ', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 18, unit: 'kJ', tol: 0.03 },
+                { del: 'b', value: 35, unit: 'N', tol: 0.03 },
+                { del: 'c', value: 180, unit: 'm', tol: 0.04, etikett: 'sträckan med samma bromskraft' },
+            ],
+            solution: `**a)** Läge 1 är där sträckan i backen börjar och läge 2 där den slutar, 20 m längre ned. Vi sätter nollnivån i läge 2. Energiprincipen med värmen $E_v$ ger
+
+$$
+E_{p1} + E_{k1} = E_{p2} + E_{k2} + E_v
+$$
+
+Farten är densamma i båda lägena, så $E_{k1} = E_{k2}$, och rörelseenergin tar ut sig själv i båda led. Därför behövs inte farten 12 m/s i den här deluppgiften:
+
+$$
+m \\cdot g \\cdot h + E_{k1} = 0 + E_{k1} + E_v
+\\quad\\Leftrightarrow\\quad
+E_v = m \\cdot g \\cdot h
+$$
+
+All lägesenergi som cyklisten förlorar blir alltså värme.
+
+$$
+\\left[ \\begin{array}{l}
+m = 90\\ \\mathrm{kg} \\\\
+g \\approx 9{,}82\\ \\mathrm{N/kg} \\\\
+h = 20\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+E_v = 90 \\cdot 9{,}82 \\cdot 20 = 17\\,676\\ \\mathrm{J} \\approx 18\\ \\mathrm{kJ}
+$$
+
+**Svar:** 18 kJ
+
+**b)** Värmen är den bromsande kraftens arbete längs sträckan $s = 500\\ \\mathrm{m}$:
+
+$$
+E_v = F_f \\cdot s
+\\quad\\Leftrightarrow\\quad
+F_f = \\frac{E_v}{s}
+$$
+
+$$
+F_f = \\frac{17\\,676}{500} = 35{,}352\\ \\mathrm{N} \\approx 35\\ \\mathrm{N}
+$$
+
+Det motsvarar tyngden av knappt 4 kg, vilket är ett rimligt luftmotstånd för en cyklist i den farten.
+
+**Svar:** 35 N
+
+**c)** På den vågräta vägen ändras inte lägesenergin. Hela rörelseenergin hon har vid backens slut blir värme på sträckan $s_2$:
+
+$$
+\\frac{m \\cdot v^{2}}{2} = F_f \\cdot s_2
+\\quad\\Leftrightarrow\\quad
+s_2 = \\frac{m \\cdot v^{2}}{2 \\cdot F_f}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m = 90\\ \\mathrm{kg} \\\\
+v = 12\\ \\mathrm{m/s} \\\\
+F_f = 35{,}352\\ \\mathrm{N}
+\\end{array} \\right]
+$$
+
+$$
+s_2 = \\frac{90 \\cdot 12^{2}}{2 \\cdot 35{,}352} = \\frac{12\\,960}{70{,}704} = 183{,}3\\ldots\\ \\mathrm{m} \\approx 180\\ \\mathrm{m}
+$$
+
+Den bromsande kraften består mest av luftmotstånd, och luftmotståndet blir mindre när farten minskar. På den vågräta vägen bromsas hon alltså av en kraft som är mindre än 35 N under nästan hela sträckan, och då räcker rörelseenergin till en längre sträcka. Svaret 180 m är därför en undre gräns.
+
+**Svar:** Cirka 180 m. Den verkliga sträckan blir längre, eftersom luftmotståndet minskar när farten minskar.`,
+        },
+        {
+            level: 3,
+            question: `En skateboardåkare startar från vila på kanten av en ramp som i figuren. På rampens böjda delar kan energiförlusterna försummas. Den plana botten, som är 5,0 m lång, har en grov yta där friktionskraften är 0,060 gånger åkarens tyngd. Åkaren sparkar inte fart, och luftmotståndet kan försummas.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 236" style="max-width:661px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><path d="M 86 52 L 100 52 A 128 128 0 0 0 228 180 L 428 180 A 128 128 0 0 0 556 52 L 570 52 L 570 194 L 86 194 Z" fill="#efe9dc" stroke="none"/><rect x="228" y="180" width="200" height="6" fill="#cbbfa6"/><circle cx="233" cy="183" r="1.2" fill="#0f1620" opacity="0.55"/><circle cx="242" cy="183" r="1.2" fill="#0f1620" opacity="0.55"/><circle cx="251" cy="183" r="1.2" fill="#0f1620" opacity="0.55"/><circle cx="260" cy="183" r="1.2" fill="#0f1620" opacity="0.55"/><circle cx="269" cy="183" r="1.2" fill="#0f1620" opacity="0.55"/><circle cx="278" cy="183" r="1.2" fill="#0f1620" opacity="0.55"/><circle cx="287" cy="183" r="1.2" fill="#0f1620" opacity="0.55"/><circle cx="296" cy="183" r="1.2" fill="#0f1620" opacity="0.55"/><circle cx="305" cy="183" r="1.2" fill="#0f1620" opacity="0.55"/><circle cx="314" cy="183" r="1.2" fill="#0f1620" opacity="0.55"/><circle cx="323" cy="183" r="1.2" fill="#0f1620" opacity="0.55"/><circle cx="332" cy="183" r="1.2" fill="#0f1620" opacity="0.55"/><circle cx="341" cy="183" r="1.2" fill="#0f1620" opacity="0.55"/><circle cx="350" cy="183" r="1.2" fill="#0f1620" opacity="0.55"/><circle cx="359" cy="183" r="1.2" fill="#0f1620" opacity="0.55"/><circle cx="368" cy="183" r="1.2" fill="#0f1620" opacity="0.55"/><circle cx="377" cy="183" r="1.2" fill="#0f1620" opacity="0.55"/><circle cx="386" cy="183" r="1.2" fill="#0f1620" opacity="0.55"/><circle cx="395" cy="183" r="1.2" fill="#0f1620" opacity="0.55"/><circle cx="404" cy="183" r="1.2" fill="#0f1620" opacity="0.55"/><circle cx="413" cy="183" r="1.2" fill="#0f1620" opacity="0.55"/><circle cx="422" cy="183" r="1.2" fill="#0f1620" opacity="0.55"/><path d="M 100 52 A 128 128 0 0 0 228 180" fill="none" stroke="#0f1620" stroke-width="2.4"/><path d="M 428 180 A 128 128 0 0 0 556 52" fill="none" stroke="#0f1620" stroke-width="2.4"/><line x1="228" y1="180" x2="428" y2="180" stroke="#0f1620" stroke-width="2.4"/><line x1="86" y1="52" x2="100" y2="52" stroke="#0f1620" stroke-width="2.4"/><line x1="556" y1="52" x2="570" y2="52" stroke="#0f1620" stroke-width="2.4"/><circle cx="100" cy="52" r="4" fill="#1c3d6b"/><text x="110" y="42" font-size="14" fill="#1c3d6b" text-anchor="start">Start</text><line x1="66" y1="52" x2="84" y2="52" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><line x1="66" y1="180" x2="220" y2="180" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><line x1="70" y1="60" x2="70" y2="172" stroke="#8a8579" stroke-width="1.3"/><polygon points="70,52 66,60 74,60" fill="#8a8579"/><polygon points="70,180 66,172 74,172" fill="#8a8579"/><text x="62" y="121" font-size="15" fill="#0f1620" text-anchor="end">3,2 m</text><line x1="236" y1="204" x2="420" y2="204" stroke="#8a8579" stroke-width="1.3"/><polygon points="228,204 236,200 236,208" fill="#8a8579"/><polygon points="428,204 420,200 420,208" fill="#8a8579"/><line x1="228" y1="188" x2="228" y2="209" stroke="#8a8579" stroke-width="1" stroke-dasharray="3 3"/><line x1="428" y1="188" x2="428" y2="209" stroke="#8a8579" stroke-width="1" stroke-dasharray="3 3"/><text x="328" y="224" font-size="15" fill="#0f1620" text-anchor="middle">5,0 m</text><text x="328" y="168" font-size="14" fill="#8a8579" text-anchor="middle">grov yta</text></svg>
+
+a) Hur högt upp på andra sidan kommer åkaren första gången?<br>b) Var på den plana delen stannar åkaren till slut? Ange avståndet från den plana delens vänstra ände.`,
+            answer: { value: 2.9, unit: 'm', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 2.9, unit: 'm', tol: 0.03 },
+                { del: 'b', value: 3.3, unit: 'm', tol: 0.03, etikett: 'från vänstra änden' },
+            ],
+            solution: `Åkarens massa är inte given. Friktionskraften på den plana delen är $F_f = 0{,}060 \\cdot m \\cdot g$, och vid varje passage av den plana delen blir friktionsvärmen
+
+$$
+E_v = F_f \\cdot s = 0{,}060 \\cdot m \\cdot g \\cdot L
+$$
+
+där $L = 5{,}0\\ \\mathrm{m}$. Vi sätter nollnivån vid den plana botten.
+
+**a)** Energiprincipen mellan starten (höjden $h_0 = 3{,}2\\ \\mathrm{m}$, i vila) och vändläget på andra sidan (höjden $h_1$, i vila):
+
+$$
+m \\cdot g \\cdot h_0 = m \\cdot g \\cdot h_1 + 0{,}060 \\cdot m \\cdot g \\cdot L
+$$
+
+Vi dividerar båda led med $m \\cdot g$:
+
+$$
+h_0 = h_1 + 0{,}060 \\cdot L
+\\quad\\Leftrightarrow\\quad
+h_1 = h_0 - 0{,}060 \\cdot L
+$$
+
+$$
+h_1 = 3{,}2 - 0{,}060 \\cdot 5{,}0 = 3{,}2 - 0{,}30 = 2{,}9\\ \\mathrm{m}
+$$
+
+**Svar:** 2,9 m
+
+**b)** Till slut står åkaren stilla på den plana delen. Då har hela lägesenergin blivit friktionsvärme längs den totala sträckan $s_\\mathrm{tot}$ som åkaren har rullat på den grova ytan:
+
+$$
+m \\cdot g \\cdot h_0 = 0{,}060 \\cdot m \\cdot g \\cdot s_\\mathrm{tot}
+\\quad\\Leftrightarrow\\quad
+s_\\mathrm{tot} = \\frac{h_0}{0{,}060}
+$$
+
+$$
+s_\\mathrm{tot} = \\frac{3{,}2}{0{,}060} = 53{,}33\\ldots\\ \\mathrm{m}
+$$
+
+En passage är 5,0 m, så
+
+$$
+\\frac{53{,}33}{5{,}0} = 10{,}67
+$$
+
+Åkaren hinner alltså 10 hela passager (50 m) och sedan $53{,}33 - 50 = 3{,}33\\ \\mathrm{m}$ till. Den första passagen går åt höger, den andra åt vänster och så vidare, så efter 10 passager (ett jämnt antal) är åkaren tillbaka vid den vänstra änden. Där åker hon upp en bit i den vänstra böjen, $3{,}2 - 10 \\cdot 0{,}30 = 0{,}20\\ \\mathrm{m}$ högt, vänder och rullar 3,33 m åt höger innan hon stannar.
+
+Kontroll: $\\dfrac{0{,}20}{0{,}060} = 3{,}33\\ \\mathrm{m}$, samma sträcka.
+
+**Svar:** Cirka 3,3 m från den vänstra änden`,
         },
     ],
 
@@ -24116,7 +25580,727 @@ $$
 
 **Svar:** Ca 58 kW.
 
-**Generell slutsats:** Detta är *medel*effekten — den verkliga maxeffekten kan vara klart högre, eftersom effekten varierar under accelerationen (oftast lägre i början, högre när motorn nått sitt optimala varvtal). 58 kW motsvarar ca 78 hk, vilket är rimligt för en bil i sin "0-100"-prestanda. För en sportbil med starkare motor (200+ hk) når man 100 km/h snabbare.`,
+**Generell slutsats:** Detta är *medel*effekten. Den verkliga maxeffekten kan vara klart högre, eftersom effekten varierar under accelerationen (oftast lägre i början, högre när motorn nått sitt optimala varvtal). 58 kW motsvarar ca 78 hk, vilket är rimligt för en bil i sin "0-100"-prestanda. För en sportbil med starkare motor (200+ hk) når man 100 km/h snabbare.`,
+        },
+        {
+            level: 1,
+            question: `Vilken av enheterna nedan är samma sak som 1 W?`,
+            choices: ['$1\\ \\mathrm{J \\cdot s}$', '$1\\ \\mathrm{J/s}$', '$1\\ \\mathrm{N \\cdot m}$', '$1\\ \\mathrm{Ws}$'],
+            correct: 1,
+            solution: `Effekt är omvandlad energi per tidsenhet:
+
+$$
+P = \\frac{\\Delta E}{\\Delta t}
+$$
+
+Energin mäts i J och tiden i s, så effektens enhet blir J/s. Det är just det som kallas watt:
+
+$$
+1\\ \\mathrm{W} = 1\\ \\mathrm{J/s}
+$$
+
+De andra alternativen är fel: N · m och Ws är båda enheter för energi (1 Nm = 1 J och 1 Ws = 1 J), och J · s är varken energi eller effekt.
+
+**Svar:** $1\\ \\mathrm{J/s}$`,
+        },
+        {
+            level: 1,
+            question: `Batteriet i en elcykel lagrar energin 0,50 kWh när det är fulladdat. Hur mycket energi är det uttryckt i MJ?`,
+            answer: { value: 1.8, unit: 'MJ', tol: 0.02 },
+            solution: `Omvandlingen mellan kilowattimmar och joule är
+
+$$
+1\\ \\mathrm{kWh} = 3{,}6 \\cdot 10^{6}\\ \\mathrm{J}
+$$
+
+Från kWh till J ska vi alltså multiplicera med $3{,}6 \\cdot 10^{6}$:
+
+$$
+0{,}50\\ \\mathrm{kWh} = 0{,}50 \\cdot 3{,}6 \\cdot 10^{6}\\ \\mathrm{J} = 1{,}8 \\cdot 10^{6}\\ \\mathrm{J} = 1{,}8\\ \\mathrm{MJ}
+$$
+
+**Svar:** 1,8 MJ`,
+        },
+        {
+            level: 1,
+            question: `En mobilladdare levererar effekten 18 W till telefonens batteri. Hur lång tid tar det att föra över energin 54 kJ? Ange svaret i minuter.`,
+            answer: { value: 50, unit: 'min', tol: 0.02 },
+            solution: `Vi löser ut tiden ur formeln för effekt.
+
+$$
+P = \\frac{\\Delta E}{\\Delta t} \\quad\\Leftrightarrow\\quad \\Delta t = \\frac{\\Delta E}{P}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\Delta E = 54\\ \\mathrm{kJ} = 54\\,000\\ \\mathrm{J} \\\\
+P = 18\\ \\mathrm{W}
+\\end{array} \\right]
+$$
+
+$$
+\\Delta t = \\frac{54\\,000}{18} = 3\\,000\\ \\mathrm{s}
+$$
+
+Tiden räknas om till minuter:
+
+$$
+3\\,000\\ \\mathrm{s} = \\frac{3\\,000}{60}\\ \\mathrm{min} = 50\\ \\mathrm{min}
+$$
+
+**Svar:** 50 minuter`,
+        },
+        {
+            level: 1,
+            question: `Tabellen visar fyra apparater, deras effekt och hur länge de används under en dag.
+
+| Apparat | Effekt | Användningstid |
+|---|---|---|
+| Hårtork | 1 800 W | 6 min |
+| Tv | 120 W | 3 h |
+| Laptopladdare | 65 W | 8 h |
+| Strykjärn | 2 400 W | 10 min |
+
+Vilken av apparaterna omvandlar mest energi under dagen?`,
+            choices: ['Hårtorken', 'Tv:n', 'Laptopladdaren', 'Strykjärnet'],
+            correct: 2,
+            solution: `Energin är effekten gånger tiden:
+
+$$
+\\Delta E = P \\cdot \\Delta t
+$$
+
+Det räcker att jämföra apparaterna i samma enhet. Med effekten i W och tiden i timmar blir energin i Wh. Minuterna räknas först om till timmar: $6\\ \\mathrm{min} = 0{,}1\\ \\mathrm{h}$ och $10\\ \\mathrm{min} = \\dfrac{10}{60}\\ \\mathrm{h}$.
+
+$$
+\\Delta E_\\text{hårtork} = 1\\,800 \\cdot 0{,}1 = 180\\ \\mathrm{Wh}
+$$
+
+$$
+\\Delta E_\\text{tv} = 120 \\cdot 3 = 360\\ \\mathrm{Wh}
+$$
+
+$$
+\\Delta E_\\text{laptop} = 65 \\cdot 8 = 520\\ \\mathrm{Wh}
+$$
+
+$$
+\\Delta E_\\text{strykjärn} = 2\\,400 \\cdot \\frac{10}{60} = 400\\ \\mathrm{Wh}
+$$
+
+Laptopladdaren har lägst effekt men används längst, och därför omvandlar den mest energi.
+
+**Svar:** Laptopladdaren`,
+        },
+        {
+            level: 2,
+            question: `En hiss utan motvikt lyfter hisskorgen med passagerare, sammanlagt 1 100 kg, från bottenvåningen upp till 18 m höjd på 24 s med konstant fart.<br>a) Hur stor effekt utvecklar hissmotorn mot tyngdkraften under färden?<br>b) Under en dag gör hissen 150 sådana resor uppåt. Hur mycket energi går åt till dem? Ange svaret i kWh.
+
+*Ange energin i b) som ditt numeriska svar i kWh.*`,
+            answer: { value: 8.1, unit: 'kWh', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 8.1, unit: 'kW', tol: 0.03, etikett: '$P =$' },
+                { del: 'b', value: 8.1, unit: 'kWh', tol: 0.03, etikett: '$\\Delta E =$' },
+            ],
+            solution: `**a)** Farten är konstant, så rörelseenergin ändras inte. Motorns arbete blir ökningen av lägesenergi.
+
+$$
+P = \\frac{\\Delta E}{\\Delta t}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\Delta E = m \\cdot g \\cdot \\Delta h = 1\\,100\\ \\mathrm{kg} \\cdot 9{,}82\\ \\mathrm{N/kg} \\cdot 18\\ \\mathrm{m} = 194\\,436\\ \\mathrm{J} \\\\
+\\Delta t = 24\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+P = \\frac{194\\,436}{24} = 8\\,101{,}5\\ \\mathrm{W} \\approx 8{,}1\\ \\mathrm{kW}
+$$
+
+**Svar:** Cirka 8,1 kW
+
+**b)** Varje resa kräver energin 194 436 J, så 150 resor kräver
+
+$$
+\\Delta E_\\text{dag} = 150 \\cdot 194\\,436 = 29\\,165\\,400\\ \\mathrm{J}
+$$
+
+Från J till kWh dividerar vi med $3{,}6 \\cdot 10^{6}$:
+
+$$
+\\Delta E_\\text{dag} = \\frac{29\\,165\\,400}{3{,}6 \\cdot 10^{6}}\\ \\mathrm{kWh} = 8{,}1015\\ \\mathrm{kWh} \\approx 8{,}1\\ \\mathrm{kWh}
+$$
+
+Att talet blir detsamma som i a) är en slump: 150 resor på 24 s är precis en timme, och 8,1 kW under en timme är 8,1 kWh.
+
+**Svar:** Cirka 8,1 kWh`,
+        },
+        {
+            level: 2,
+            question: `Diagrammet visar effekten $P$ som en diskmaskin drar under ett diskprogram. Först värms vattnet, sedan diskas det, och sist torkas disken.
+
+${makeDiagram({
+    xMin: 0, xMax: 100, yMin: 0, yMax: 2.5,
+    xTicks: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+    yTicks: [0, 0.5, 1, 1.5, 2, 2.5],
+    xLabel: '<tspan font-style="italic">t</tspan> (min)',
+    yLabel: '<tspan font-style="italic">P</tspan> (kW)',
+    paths: [{ points: [[0, 2.0], [20, 2.0], [20, 0.5], [80, 0.5], [80, 1.5], [95, 1.5], [95, 0], [100, 0]] }],
+})}
+
+a) Hur mycket energi omvandlar diskmaskinen under hela programmet? Ange svaret i kWh.<br>b) Vad kostar ett diskprogram om elpriset är 2,40 kr/kWh?
+
+*Ange kostnaden i b) som ditt numeriska svar i kr.*`,
+            answer: { value: 3.7, unit: 'kr', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 1.5, unit: 'kWh', tol: 0.04, etikett: '$\\Delta E =$' },
+                { del: 'b', value: 3.7, unit: 'kr', tol: 0.03, etikett: 'kostnad' },
+            ],
+            solution: `**a)** Effekten är konstant inom varje del av programmet, så energin för varje del är $\\Delta E = P \\cdot \\Delta t$. Med effekten i kW och tiden i timmar blir energin direkt i kWh. Vi läser av diagrammet:
+
+| Del | Effekt | Tid |
+|---|---|---|
+| Uppvärmning | 2,0 kW | 20 min |
+| Disk | 0,5 kW | 60 min |
+| Torkning | 1,5 kW | 15 min |
+
+$$
+\\Delta E_1 = 2{,}0 \\cdot \\frac{20}{60} = 0{,}6667\\ \\mathrm{kWh}
+$$
+
+$$
+\\Delta E_2 = 0{,}5 \\cdot \\frac{60}{60} = 0{,}5\\ \\mathrm{kWh}
+$$
+
+$$
+\\Delta E_3 = 1{,}5 \\cdot \\frac{15}{60} = 0{,}375\\ \\mathrm{kWh}
+$$
+
+$$
+\\Delta E = 0{,}6667 + 0{,}5 + 0{,}375 = 1{,}5417\\ \\mathrm{kWh} \\approx 1{,}5\\ \\mathrm{kWh}
+$$
+
+Energin är alltså arean under kurvan i diagrammet.
+
+**Svar:** Cirka 1,5 kWh
+
+**b)** Kostnaden är energin i kWh gånger priset. Det oavrundade värdet från a) används:
+
+$$
+1{,}5417\\ \\mathrm{kWh} \\cdot 2{,}40\\ \\mathrm{kr/kWh} = 3{,}70\\ \\mathrm{kr} \\approx 3{,}7\\ \\mathrm{kr}
+$$
+
+**Svar:** Cirka 3,7 kr`,
+        },
+        {
+            level: 2,
+            question: `I ett hushåll står flera apparater i viloläge dygnet runt, året om. Tillsammans drar de effekten 18 W.<br>a) Vad kostar viloläget på ett år om elpriset är 1,90 kr/kWh?<br>b) Hur länge skulle en vattenkokare på 2,0 kW kunna vara igång med samma energi? Ange svaret i timmar.
+
+*Ange tiden i b) som ditt numeriska svar i h.*`,
+            answer: { value: 79, unit: 'h', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 300, unit: 'kr', tol: 0.03, etikett: 'kostnad' },
+                { del: 'b', value: 79, unit: 'h', tol: 0.03, etikett: '$\\Delta t =$' },
+            ],
+            solution: `**a)** Energin under ett år är effekten gånger tiden:
+
+$$
+\\Delta E = P \\cdot \\Delta t
+$$
+
+$$
+\\left[ \\begin{array}{l}
+P = 18\\ \\mathrm{W} = 0{,}018\\ \\mathrm{kW} \\\\
+\\Delta t = 365 \\cdot 24\\ \\mathrm{h} = 8\\,760\\ \\mathrm{h}
+\\end{array} \\right]
+$$
+
+$$
+\\Delta E = 0{,}018 \\cdot 8\\,760 = 157{,}68\\ \\mathrm{kWh}
+$$
+
+Kostnaden är energin gånger priset:
+
+$$
+157{,}68\\ \\mathrm{kWh} \\cdot 1{,}90\\ \\mathrm{kr/kWh} = 299{,}6\\ \\mathrm{kr} \\approx 300\\ \\mathrm{kr}
+$$
+
+**Svar:** Cirka 300 kr
+
+**b)** Samma energi, 157,68 kWh, ska räcka för vattenkokaren. Vi löser ut tiden:
+
+$$
+\\Delta t = \\frac{\\Delta E}{P} = \\frac{157{,}68\\ \\mathrm{kWh}}{2{,}0\\ \\mathrm{kW}} = 78{,}84\\ \\mathrm{h} \\approx 79\\ \\mathrm{h}
+$$
+
+En liten effekt som drar hela tiden kan alltså motsvara en stor apparat som är igång i flera dygn.
+
+**Svar:** Cirka 79 timmar`,
+        },
+        {
+            level: 2,
+            question: `Sara har massan 52 kg och springer uppför tre trappor, sammanlagt 9,6 m i höjd, på 12 s. Omar har massan 75 kg och går samma trappor på 22 s. Vem av dem utvecklar störst effekt mot tyngdkraften?`,
+            choices: ['Sara', 'Omar', 'De utvecklar lika stor effekt', 'Det går inte att avgöra utan deras fart'],
+            correct: 0,
+            solution: `Effekten är ökningen av lägesenergi delad med tiden:
+
+$$
+P = \\frac{\\Delta E}{\\Delta t} = \\frac{m \\cdot g \\cdot \\Delta h}{\\Delta t}
+$$
+
+Sara:
+
+$$
+P_\\text{Sara} = \\frac{52 \\cdot 9{,}82 \\cdot 9{,}6}{12} = \\frac{4\\,902{,}1}{12} = 408{,}5\\ \\mathrm{W} \\approx 410\\ \\mathrm{W}
+$$
+
+Omar:
+
+$$
+P_\\text{Omar} = \\frac{75 \\cdot 9{,}82 \\cdot 9{,}6}{22} = \\frac{7\\,070{,}4}{22} = 321{,}4\\ \\mathrm{W} \\approx 320\\ \\mathrm{W}
+$$
+
+Omar uträttar mest arbete, eftersom han är tyngre, men Sara gör sitt arbete på mycket kortare tid. Farten behövs inte: höjden och tiden räcker.
+
+**Svar:** Sara`,
+        },
+        {
+            level: 2,
+            question: `En dränkbar pump i en brunn lyfter vatten 15 m upp till ett hus. Pumpen lyfter 1 200 liter vatten per timme. Hur stor effekt utvecklar pumpen mot tyngdkraften? En liter vatten har massan 1,0 kg. Ange svaret i W.`,
+            answer: { value: 49, unit: 'W', tol: 0.03 },
+            solution: `Under en timme lyfts 1 200 liter, alltså 1 200 kg vatten. Vi räknar ut ökningen av lägesenergi under den tiden och delar med tiden.
+
+$$
+P = \\frac{\\Delta E}{\\Delta t}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\Delta E = m \\cdot g \\cdot \\Delta h = 1\\,200\\ \\mathrm{kg} \\cdot 9{,}82\\ \\mathrm{N/kg} \\cdot 15\\ \\mathrm{m} = 176\\,760\\ \\mathrm{J} \\\\
+\\Delta t = 1\\ \\mathrm{h} = 3\\,600\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+P = \\frac{176\\,760}{3\\,600} = 49{,}1\\ \\mathrm{W} \\approx 49\\ \\mathrm{W}
+$$
+
+Rimlighet: det är ungefär lika mycket som en vanlig lampa, vilket passar en liten pump som går länge.
+
+**Svar:** Cirka 49 W`,
+        },
+        {
+            level: 3,
+            question: `En lastbil med massan 18 ton kör uppför en lång backe med den konstanta farten 72 km/h. Vägen stiger 4,0 m för varje 100 m som lastbilen kör längs vägen. Bortse från friktion och luftmotstånd.<br>a) Hur stor effekt måste motorn utveckla? Ange svaret i kW.<br>b) Visa att effekten kan skrivas $P = F \\cdot v$ när en konstant kraft $F$ verkar i rörelseriktningen på ett föremål som rör sig med den konstanta farten $v$.<br>c) Hur stor kraft framåt verkar på lastbilen? Ange svaret i kN.
+
+*Ange effekten i a) som ditt numeriska svar i kW.*`,
+            answer: { value: 140, unit: 'kW', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 140, unit: 'kW', tol: 0.03, etikett: '$P =$' },
+                { del: 'b' },
+                { del: 'c', value: 7.1, unit: 'kN', tol: 0.03, etikett: '$F =$' },
+            ],
+            solution: `**a)** Farten är konstant, så rörelseenergin ändras inte. Allt motorn uträttar går till att öka lägesenergin. Vi räknar ut hur mycket lastbilen stiger varje sekund.
+
+$$
+\\left[ \\begin{array}{l}
+m = 18\\ \\mathrm{ton} = 18\\,000\\ \\mathrm{kg} \\\\
+v = 72\\ \\mathrm{km/h} = \\dfrac{72}{3{,}6}\\ \\mathrm{m/s} = 20\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+På en sekund kör lastbilen 20 m längs vägen. Vägen stiger 4,0 m per 100 m, alltså $\\dfrac{4{,}0}{100} = 0{,}040$ meter per meter väg. Höjdökningen på en sekund blir
+
+$$
+\\Delta h = 0{,}040 \\cdot 20 = 0{,}80\\ \\mathrm{m}
+$$
+
+Lägesenergin ökar under den sekunden med
+
+$$
+\\Delta E = m \\cdot g \\cdot \\Delta h = 18\\,000 \\cdot 9{,}82 \\cdot 0{,}80 = 141\\,408\\ \\mathrm{J}
+$$
+
+$$
+P = \\frac{\\Delta E}{\\Delta t} = \\frac{141\\,408}{1} = 141\\,408\\ \\mathrm{W} \\approx 140\\ \\mathrm{kW}
+$$
+
+Rimlighet: en tung lastbil har en motor på några hundra kW, så 140 kW bara för att lyfta lasten uppför backen är rimligt.
+
+**Svar:** Cirka 140 kW
+
+**b)** En konstant kraft $F$ i rörelseriktningen uträttar arbetet $W = F \\cdot s$ när föremålet flyttas sträckan $s$. Effekten är arbetet per tidsenhet:
+
+$$
+P = \\frac{W}{\\Delta t} = \\frac{F \\cdot s}{\\Delta t}
+$$
+
+Farten är konstant, så $\\dfrac{s}{\\Delta t} = v$. Insatt ger det
+
+$$
+P = F \\cdot \\frac{s}{\\Delta t} = F \\cdot v
+$$
+
+**Svar:** $P = F \\cdot v$, vilket skulle visas.
+
+**c)** Vi löser ut kraften ur $P = F \\cdot v$ och använder det oavrundade värdet från a):
+
+$$
+F = \\frac{P}{v} = \\frac{141\\,408}{20} = 7\\,070{,}4\\ \\mathrm{N} \\approx 7{,}1\\ \\mathrm{kN}
+$$
+
+Kontroll: kraften framåt ska väga upp den del av tyngdkraften som drar lastbilen bakåt längs backen, $F_G \\cdot 0{,}040 = 18\\,000 \\cdot 9{,}82 \\cdot 0{,}040 = 7\\,070{,}4\\ \\mathrm{N}$. Det stämmer.
+
+**Svar:** Cirka 7,1 kN`,
+        },
+        {
+            level: 3,
+            question: `En rulltrappa i en tunnelbanestation lyfter passagerarna höjden 12 m. Den som står stilla på trappan kommer upp på 40 s. Under rusningstid kliver det i genomsnitt på 90 personer per minut, och deras medelmassa är 70 kg. Bortse från friktion.<br>a) Hur stor effekt måste motorn utveckla för att lyfta passagerarna när alla står stilla? Ange svaret i kW.<br>b) Visa att effekten i a) inte beror på hur fort trappan går, så länge lika många personer kliver på per minut.<br>c) En passagerare med massan 70 kg går uppför de rörliga stegen och kommer upp på 20 s i stället för 40 s. Hur mycket av den energi som behövs för att lyfta henne kommer då från motorn? Ange svaret i kJ.
+
+*Ange effekten i a) som ditt numeriska svar i kW.*`,
+            answer: { value: 12, unit: 'kW', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 12, unit: 'kW', tol: 0.04, etikett: '$P =$' },
+                { del: 'b' },
+                { del: 'c', value: 4.1, unit: 'kJ', tol: 0.03, etikett: '$\\Delta E =$' },
+            ],
+            solution: `**a)** Trappan går med konstant fart, så rörelseenergin ändras inte. Motorns effekt går till att öka passagerarnas lägesenergi. När trappan har gått en stund är det lika många som kliver av uppe som kliver på nere, så varje minut lyfts 90 personer hela höjden 12 m.
+
+$$
+P = \\frac{\\Delta E}{\\Delta t}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m = 90 \\cdot 70\\ \\mathrm{kg} = 6\\,300\\ \\mathrm{kg} \\\\
+\\Delta h = 12\\ \\mathrm{m} \\\\
+\\Delta t = 1\\ \\mathrm{min} = 60\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+\\Delta E = m \\cdot g \\cdot \\Delta h = 6\\,300 \\cdot 9{,}82 \\cdot 12 = 742\\,392\\ \\mathrm{J}
+$$
+
+$$
+P = \\frac{742\\,392}{60} = 12\\,373{,}2\\ \\mathrm{W} \\approx 12\\ \\mathrm{kW}
+$$
+
+Kontroll med ett annat sätt att räkna: varje person står 40 s på trappan, och på 40 s kliver $1{,}5 \\cdot 40 = 60$ personer på. Det står alltså 60 personer på trappan samtidigt, och var och en stiger $\\dfrac{12\\ \\mathrm{m}}{40\\ \\mathrm{s}} = 0{,}30\\ \\mathrm{m/s}$ i höjdled. Varje sekund ökar då lägesenergin med $60 \\cdot 70 \\cdot 9{,}82 \\cdot 0{,}30 = 12\\,373{,}2\\ \\mathrm{J}$, alltså samma effekt.
+
+**Svar:** Cirka 12 kW
+
+**b)** Låt $n$ vara antalet personer som kliver på per tidsenhet, $m$ en persons massa, $h$ höjden och $T$ den tid det tar att åka upp. Vi räknar som i kontrollen i a).
+
+Antalet personer på trappan samtidigt är de som kliver på under tiden $T$:
+
+$$
+N = n \\cdot T
+$$
+
+Var och en stiger höjden $h$ på tiden $T$, alltså med farten $\\dfrac{h}{T}$ i höjdled. Under en kort tid $\\Delta t$ stiger var och en $\\dfrac{h}{T} \\cdot \\Delta t$, och lägesenergin för alla på trappan ökar med
+
+$$
+\\Delta E = N \\cdot m \\cdot g \\cdot \\frac{h}{T} \\cdot \\Delta t
+$$
+
+Effekten blir
+
+$$
+P = \\frac{\\Delta E}{\\Delta t} = N \\cdot m \\cdot g \\cdot \\frac{h}{T}
+$$
+
+$N = n \\cdot T$ insatt:
+
+$$
+P = n \\cdot T \\cdot m \\cdot g \\cdot \\frac{h}{T} = n \\cdot m \\cdot g \\cdot h
+$$
+
+Tiden $T$, och därmed trappans fart, har tagit ut sig själv. Går trappan fortare står färre personer på den samtidigt, men var och en lyfts fortare, och de två effekterna tar ut varandra.
+
+**Svar:** $P = n \\cdot m \\cdot g \\cdot h$, som inte innehåller trappans fart, vilket skulle visas.
+
+**c)** Trappstegen stiger fortfarande med $0{,}30\\ \\mathrm{m/s}$ i höjdled, och det är bara stegens rörelse som motorn står för. Passageraren står på rörliga steg i 20 s, så motorn lyfter henne
+
+$$
+\\Delta h_\\text{motor} = 0{,}30\\ \\mathrm{m/s} \\cdot 20\\ \\mathrm{s} = 6{,}0\\ \\mathrm{m}
+$$
+
+Resten av höjden, $12 - 6{,}0 = 6{,}0\\ \\mathrm{m}$, tar hon sig upp med egna ben genom att kliva uppför stegen.
+
+$$
+\\Delta E_\\text{motor} = m \\cdot g \\cdot \\Delta h_\\text{motor} = 70 \\cdot 9{,}82 \\cdot 6{,}0 = 4\\,124{,}4\\ \\mathrm{J} \\approx 4{,}1\\ \\mathrm{kJ}
+$$
+
+Rimlighet: hela lyftet kräver $70 \\cdot 9{,}82 \\cdot 12 = 8\\,248{,}8\\ \\mathrm{J}$. Hon kommer upp på halva tiden, så motorn hinner bara göra halva lyftet, och hennes egna muskler gör den andra halvan.
+
+**Svar:** Cirka 4,1 kJ, hälften av energin för hela lyftet`,
+        },
+        {
+            level: 3,
+            question: `Ett litet vattenkraftverk i en å leder vatten genom en tub ned till en turbin. Varje sekund passerar 3,5 m³ vatten, och fallhöjden är 22 m. Vattnets densitet är $\\rho = 1\\,000\\ \\mathrm{kg/m^3}$.<br>a) Låt $Q$ vara den volym vatten som passerar varje sekund. Visa att den största effekt kraftverket kan få ut av vattnet är $P = \\rho \\cdot Q \\cdot g \\cdot h$.<br>b) En villa med elvärme använder ungefär 20 000 kWh per år. Hur många sådana villor kan kraftverket som mest försörja under ett år?<br>c) Ge två skäl till att det verkliga antalet villor blir mindre än svaret i b).
+
+*Ange antalet villor i b) som ditt numeriska svar.*`,
+            answer: { value: 330, unit: 'villor', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 330, unit: 'villor', tol: 0.03, etikett: 'antal' },
+                { del: 'c' },
+            ],
+            solution: `**a)** På tiden $\\Delta t$ passerar volymen $V = Q \\cdot \\Delta t$, med massan $m = \\rho \\cdot V = \\rho \\cdot Q \\cdot \\Delta t$. När vattnet faller höjden $h$ minskar dess lägesenergi med
+
+$$
+\\Delta E = m \\cdot g \\cdot h = \\rho \\cdot Q \\cdot \\Delta t \\cdot g \\cdot h
+$$
+
+Kan all lägesenergi tas tillvara blir effekten
+
+$$
+P = \\frac{\\Delta E}{\\Delta t} = \\frac{\\rho \\cdot Q \\cdot \\Delta t \\cdot g \\cdot h}{\\Delta t} = \\rho \\cdot Q \\cdot g \\cdot h
+$$
+
+Det är den största möjliga effekten, eftersom kraftverket aldrig kan få ut mer energi än den lägesenergi vattnet förlorar.
+
+**Svar:** $P = \\rho \\cdot Q \\cdot g \\cdot h$, vilket skulle visas.
+
+**b)**
+
+$$
+\\left[ \\begin{array}{l}
+\\rho = 1\\,000\\ \\mathrm{kg/m^3} \\\\
+Q = 3{,}5\\ \\mathrm{m^3/s} \\\\
+h = 22\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+P = 1\\,000 \\cdot 3{,}5 \\cdot 9{,}82 \\cdot 22 = 756\\,140\\ \\mathrm{W} = 756{,}14\\ \\mathrm{kW}
+$$
+
+Energin under ett år, med $1\\ \\mathrm{år} = 365 \\cdot 24\\ \\mathrm{h} = 8\\,760\\ \\mathrm{h}$:
+
+$$
+\\Delta E = P \\cdot \\Delta t = 756{,}14\\ \\mathrm{kW} \\cdot 8\\,760\\ \\mathrm{h} = 6\\,623\\,786\\ \\mathrm{kWh}
+$$
+
+Antalet villor:
+
+$$
+\\frac{6\\,623\\,786}{20\\,000} = 331{,}2 \\approx 330
+$$
+
+**Svar:** Som mest cirka 330 villor
+
+**c)** Till exempel:
+
+- Turbinen och generatorn omvandlar inte all lägesenergi till elektrisk energi. En del blir värme genom friktion i tuben, i turbinen och i generatorn, och en del rörelseenergi följer med vattnet ut.
+- Vattenflödet i en å är inte detsamma hela året. Under torra perioder och när ån fryser passerar mindre än 3,5 m³ per sekund.
+- Villorna använder mest el på vintern och kvällar, inte jämnt fördelat över året, och en del energi förloras i elnätet på vägen.
+
+Alla tre faktorerna gör att svaret i b) är en övre gräns.
+
+**Svar:** Kraftverket kan inte omvandla all lägesenergi till el, och vattenflödet är inte lika stort hela året.`,
+        },
+        {
+            level: 3,
+            question: `En elbil har ett batteri som rymmer 82 kWh. Bilen kommer till en snabbladdare när batteriet är laddat till 10 %. Diagrammet visar laddeffekten $P$ under de 40 minuter som bilen står vid laddaren.
+
+${makeDiagram({
+    xMin: 0, xMax: 45, yMin: 0, yMax: 175,
+    xTicks: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45],
+    yTicks: [0, 25, 50, 75, 100, 125, 150, 175],
+    xLabel: '<tspan font-style="italic">t</tspan> (min)',
+    yLabel: '<tspan font-style="italic">P</tspan> (kW)',
+    paths: [{ points: [[0, 150], [30, 50], [40, 50], [40, 0], [45, 0]] }],
+})}
+
+a) Hur många procent är batteriet laddat när bilen åker? Bortse från förluster.<br>b) Hur stor är medeleffekten under laddningen? Ange svaret i kW.<br>c) Hur lång tid hade det tagit att föra över samma energi med en hemmaladdare som har den konstanta effekten 11 kW? Ange svaret i timmar.
+
+*Ange laddningsnivån i a) som ditt numeriska svar i procent.*`,
+            answer: { value: 81, unit: '%', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 81, unit: '%', tol: 0.03, etikett: 'laddat' },
+                { del: 'b', value: 88, unit: 'kW', tol: 0.03, etikett: '$P_\\text{medel} =$' },
+                { del: 'c', value: 5.3, unit: 'h', tol: 0.03, etikett: '$\\Delta t =$' },
+            ],
+            solution: `**a)** Effekten är inte konstant, så vi kan inte bara multiplicera en effekt med tiden. I varje litet tidsintervall är energin $P \\cdot \\Delta t$, och summan av alla sådana bitar är **arean under kurvan** i diagrammet. Med effekten i kW och tiden i timmar blir arean energin i kWh.
+
+Arean delas i två delar. De första 30 minuterna minskar effekten jämnt från 150 kW till 50 kW, så den delen är en parallelltrapets. Medeleffekten där är $\\dfrac{150 + 50}{2} = 100\\ \\mathrm{kW}$ under $30\\ \\mathrm{min} = 0{,}5\\ \\mathrm{h}$:
+
+$$
+\\Delta E_1 = 100 \\cdot 0{,}5 = 50\\ \\mathrm{kWh}
+$$
+
+De sista 10 minuterna är effekten konstant 50 kW:
+
+$$
+\\Delta E_2 = 50 \\cdot \\frac{10}{60} = 8{,}333\\ \\mathrm{kWh}
+$$
+
+$$
+\\Delta E = 50 + 8{,}333 = 58{,}333\\ \\mathrm{kWh}
+$$
+
+Från början innehöll batteriet $0{,}10 \\cdot 82 = 8{,}2\\ \\mathrm{kWh}$. Efter laddningen innehåller det
+
+$$
+8{,}2 + 58{,}333 = 66{,}533\\ \\mathrm{kWh}
+$$
+
+Andelen av batteriets kapacitet:
+
+$$
+\\frac{66{,}533}{82} = 0{,}8114 \\approx 81\\ \\%
+$$
+
+**Svar:** Cirka 81 %
+
+**b)** Medeleffekten är hela energin delad med hela tiden, $40\\ \\mathrm{min} = \\dfrac{40}{60}\\ \\mathrm{h}$:
+
+$$
+P_\\text{medel} = \\frac{\\Delta E}{\\Delta t} = 58{,}333 \\cdot \\frac{60}{40} = 87{,}5\\ \\mathrm{kW} \\approx 88\\ \\mathrm{kW}
+$$
+
+Rimlighet: medeleffekten ligger mellan den lägsta (50 kW) och den högsta (150 kW), och närmare den lägre eftersom laddaren stod på 50 kW de sista tio minuterna.
+
+**Svar:** Cirka 88 kW
+
+**c)** Samma energi med konstant effekt 11 kW:
+
+$$
+\\Delta t = \\frac{\\Delta E}{P} = \\frac{58{,}333\\ \\mathrm{kWh}}{11\\ \\mathrm{kW}} = 5{,}303\\ \\mathrm{h} \\approx 5{,}3\\ \\mathrm{h}
+$$
+
+**Svar:** Cirka 5,3 timmar`,
+        },
+        {
+            level: 3,
+            question: `När en cyklist håller konstant fart på plan väg går nästan all effekt åt till att övervinna luftmotståndet. Luftmotståndet kan beskrivas med $F = k \\cdot v^{2}$, där $v$ är farten och $k = 0{,}20\\ \\mathrm{kg/m}$ för en viss cyklist.<br>a) Visa att den effekt som krävs för att hålla farten $v$ är $P = k \\cdot v^{3}$.<br>b) Cyklisten orkar hålla effekten 300 W. Vilken fart kan hen då hålla? Ange svaret i km/h.<br>c) Hur många procent större effekt krävs för att hålla en fart som är 10 % högre?
+
+*Ange farten i b) som ditt numeriska svar i km/h.*`,
+            answer: { value: 41, unit: 'km/h', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 41, unit: 'km/h', tol: 0.03, etikett: '$v =$' },
+                { del: 'c', value: 33, unit: '%', tol: 0.03, etikett: 'ökning' },
+            ],
+            solution: `**a)** Farten är konstant, så cyklisten måste trampa med en kraft framåt som är lika stor som luftmotståndet, $F = k \\cdot v^{2}$. När cykeln rör sig sträckan $s$ uträttar den kraften arbetet $W = F \\cdot s$. Effekten är arbetet per tidsenhet:
+
+$$
+P = \\frac{W}{\\Delta t} = \\frac{F \\cdot s}{\\Delta t} = F \\cdot \\frac{s}{\\Delta t} = F \\cdot v
+$$
+
+Luftmotståndet $F = k \\cdot v^{2}$ insatt ger
+
+$$
+P = k \\cdot v^{2} \\cdot v = k \\cdot v^{3}
+$$
+
+**Svar:** $P = k \\cdot v^{3}$, vilket skulle visas.
+
+**b)** Vi löser ut farten:
+
+$$
+P = k \\cdot v^{3} \\quad\\Leftrightarrow\\quad v^{3} = \\frac{P}{k} \\quad\\Leftrightarrow\\quad v = \\sqrt[3]{\\frac{P}{k}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+P = 300\\ \\mathrm{W} \\\\
+k = 0{,}20\\ \\mathrm{kg/m}
+\\end{array} \\right]
+$$
+
+$$
+v = \\sqrt[3]{\\frac{300}{0{,}20}} = \\sqrt[3]{1\\,500} = 11{,}447\\ \\mathrm{m/s}
+$$
+
+$$
+11{,}447\\ \\mathrm{m/s} = 11{,}447 \\cdot 3{,}6\\ \\mathrm{km/h} = 41{,}2\\ \\mathrm{km/h} \\approx 41\\ \\mathrm{km/h}
+$$
+
+Rimlighet: 41 km/h är en hög men möjlig fart för en vältränad cyklist på racercykel.
+
+**Svar:** Cirka 41 km/h
+
+**c)** Den nya farten är $1{,}10 \\cdot v$. Effekten blir
+
+$$
+P_\\text{ny} = k \\cdot (1{,}10 \\cdot v)^{3} = 1{,}10^{3} \\cdot k \\cdot v^{3} = 1{,}331 \\cdot P
+$$
+
+Effekten måste alltså öka med 33,1 %. Svaret beror inte på $k$ eller på farten: varje gång farten ökar med 10 % ökar effekten med cirka en tredjedel. Det är därför de sista km/h är så tunga att vinna.
+
+**Svar:** Cirka 33 % större effekt`,
+        },
+        {
+            level: 3,
+            question: `Figuren visar en hiss med motvikt. Korgen och motvikten hänger i var sin ände av samma lina, som går över en drivskiva med motor. När korgen åker uppåt åker motvikten nedåt med samma fart. Korgen har massan 800 kg och får lasta högst 600 kg. Motvikten har massan 1 100 kg. Hissen åker med den konstanta farten 1,5 m/s.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 292" width="342" height="370" role="img" aria-label="En hisskorg hänger i vänstra änden av en lina och en motvikt i den högra. Linan går över en drivskiva med motor uppe i maskinrummet. Korgen åker uppåt med farten v och motvikten nedåt med farten v." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><text x="150" y="30" font-size="13" fill="#0f1620" text-anchor="middle">motor och drivskiva</text><polygon points="140,70 160,70 168,96 132,96" fill="#8a8579" stroke="#0f1620" stroke-width="1.2"/><rect x="30" y="96" width="86" height="10" fill="#d8d2c6" stroke="rgba(15,22,32,0.6)" stroke-width="1.2"/><rect x="132" y="96" width="36" height="10" fill="#d8d2c6" stroke="rgba(15,22,32,0.6)" stroke-width="1.2"/><rect x="184" y="96" width="66" height="10" fill="#d8d2c6" stroke="rgba(15,22,32,0.6)" stroke-width="1.2"/><circle cx="150" cy="70" r="26" fill="#e3e6ea" stroke="#5b6470" stroke-width="1.6"/><circle cx="150" cy="70" r="17" fill="none" stroke="#5b6470" stroke-width="1"/><circle cx="150" cy="70" r="4" fill="#5b6470"/><path d="M 124 147 L 124 70 A 26 26 0 0 1 176 70 L 176 200" fill="none" stroke="#8a6d3b" stroke-width="2.4"/><rect x="117" y="145" width="14" height="5" fill="#5b6470"/><rect x="89" y="150" width="70" height="90" rx="3" fill="#c4d9f0" stroke="#4f7197" stroke-width="1.6"/><rect x="96" y="160" width="56" height="74" rx="2" fill="none" stroke="rgba(79,113,151,0.55)" stroke-width="1"/><line x1="124" y1="160" x2="124" y2="234" stroke="rgba(79,113,151,0.55)" stroke-width="1"/><rect x="162" y="200" width="28" height="64" rx="2" fill="#5b6470" stroke="#0f1620" stroke-width="1.2"/><line x1="162" y1="216" x2="190" y2="216" stroke="rgba(15,22,32,0.55)" stroke-width="1"/><line x1="162" y1="232" x2="190" y2="232" stroke="rgba(15,22,32,0.55)" stroke-width="1"/><line x1="162" y1="248" x2="190" y2="248" stroke="rgba(15,22,32,0.55)" stroke-width="1"/><line x1="74" y1="228" x2="74" y2="177" stroke="#2c6fb7" stroke-width="2.6" stroke-linecap="butt"/><polygon points="68.5,177 74,165 79.5,177" fill="#2c6fb7"/><text x="64" y="178" font-size="15" fill="#2c6fb7" text-anchor="end"><tspan font-style="italic">v</tspan></text><line x1="214" y1="206" x2="214" y2="252" stroke="#2c6fb7" stroke-width="2.6" stroke-linecap="butt"/><polygon points="208.5,252 214,264 219.5,252" fill="#2c6fb7"/><text x="224" y="262" font-size="15" fill="#2c6fb7"><tspan font-style="italic">v</tspan></text><text x="124" y="258" font-size="13" fill="#0f1620" text-anchor="middle">korg</text><text x="176" y="282" font-size="13" fill="#0f1620" text-anchor="middle">motvikt</text></svg>
+
+Bortse från friktion och från linans massa.<br>a) Låt $m_\\mathrm{k}$ vara korgens massa, $m_\\mathrm{L}$ lastens massa och $m_\\mathrm{m}$ motviktens massa. Visa att den effekt motorn utvecklar mot tyngdkraften när korgen åker uppåt är $P = (m_\\mathrm{k} + m_\\mathrm{L} - m_\\mathrm{m}) \\cdot g \\cdot v$. Ett negativt värde betyder att motorn i stället måste bromsa.<br>b) Hur stor effekt krävs när korgen åker uppåt med full last? Ange svaret i kW.<br>c) Hur stor är effekten när korgen åker uppåt tom? Förklara resultatet.<br>d) Vid vilken last behöver motorn inte utveckla någon effekt alls? Ange svaret i kg.
+
+*Ange effekten i b) som ditt numeriska svar i kW.*`,
+            answer: { value: 4.4, unit: 'kW', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 4.4, unit: 'kW', tol: 0.03, etikett: '$P =$' },
+                { del: 'c', value: 4.4, unit: 'kW', tol: 0.03, ignoreSign: true, etikett: '$|P| =$' },
+                { del: 'd', value: 300, unit: 'kg', tol: 0.03, etikett: '$m_\\mathrm{L} =$' },
+            ],
+            solution: `**a)** Farten är konstant, så rörelseenergin ändras inte. Motorns arbete är därför lika med ändringen av hela systemets lägesenergi. Under tiden $\\Delta t$ stiger korgen med last sträckan $\\Delta h = v \\cdot \\Delta t$, medan motvikten sjunker lika mycket.
+
+$$
+\\Delta E = (m_\\mathrm{k} + m_\\mathrm{L}) \\cdot g \\cdot \\Delta h - m_\\mathrm{m} \\cdot g \\cdot \\Delta h = (m_\\mathrm{k} + m_\\mathrm{L} - m_\\mathrm{m}) \\cdot g \\cdot v \\cdot \\Delta t
+$$
+
+$$
+P = \\frac{\\Delta E}{\\Delta t} = \\frac{(m_\\mathrm{k} + m_\\mathrm{L} - m_\\mathrm{m}) \\cdot g \\cdot v \\cdot \\Delta t}{\\Delta t} = (m_\\mathrm{k} + m_\\mathrm{L} - m_\\mathrm{m}) \\cdot g \\cdot v
+$$
+
+Den lägesenergi som motvikten förlorar hjälper alltså till att lyfta korgen.
+
+**Svar:** $P = (m_\\mathrm{k} + m_\\mathrm{L} - m_\\mathrm{m}) \\cdot g \\cdot v$, vilket skulle visas.
+
+**b)**
+
+$$
+\\left[ \\begin{array}{l}
+m_\\mathrm{k} = 800\\ \\mathrm{kg} \\\\
+m_\\mathrm{L} = 600\\ \\mathrm{kg} \\\\
+m_\\mathrm{m} = 1\\,100\\ \\mathrm{kg} \\\\
+v = 1{,}5\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$
+P = (800 + 600 - 1\\,100) \\cdot 9{,}82 \\cdot 1{,}5 = 300 \\cdot 9{,}82 \\cdot 1{,}5 = 4\\,419\\ \\mathrm{W} \\approx 4{,}4\\ \\mathrm{kW}
+$$
+
+Jämförelse: utan motvikt hade motorn behövt lyfta 1 400 kg, alltså $1\\,400 \\cdot 9{,}82 \\cdot 1{,}5 = 20\\,622\\ \\mathrm{W} \\approx 21\\ \\mathrm{kW}$. Motvikten minskar effekten till ungefär en femtedel.
+
+**Svar:** Cirka 4,4 kW
+
+**c)** Med $m_\\mathrm{L} = 0$:
+
+$$
+P = (800 + 0 - 1\\,100) \\cdot 9{,}82 \\cdot 1{,}5 = -300 \\cdot 9{,}82 \\cdot 1{,}5 = -4\\,419\\ \\mathrm{W}
+$$
+
+Effekten är lika stor som med full last men negativ. Den tomma korgen är 300 kg lättare än motvikten, så motvikten skulle dra upp korgen allt fortare om motorn inte bromsade. Motorn måste alltså ta upp 4,4 kW. Motvikten är vald som korgen plus halva maxlasten, och då är obalansen lika stor, 300 kg, för tom och för full hiss.
+
+**Svar:** Lika stort belopp, cirka 4,4 kW, men nu måste motorn bromsa i stället för att lyfta.
+
+**d)** Ingen effekt behövs när $P = 0$, det vill säga när $m_\\mathrm{k} + m_\\mathrm{L} - m_\\mathrm{m} = 0$:
+
+$$
+m_\\mathrm{L} = m_\\mathrm{m} - m_\\mathrm{k} = 1\\,100 - 800 = 300\\ \\mathrm{kg}
+$$
+
+**Svar:** 300 kg, halva maxlasten`,
         },
     ],
 
@@ -24181,7 +26365,7 @@ $$
 
 **Svar:** Ca 64 MJ.
 
-**Generell slutsats:** Resterande $E_t - E_n \\approx 46{,}3$ MJ försvinner som värme (avgaser, kylsystem). Det är därför bilar har stora kylare — överskottsvärmen är **mer** än det nyttiga arbetet.`,
+**Generell slutsats:** Resterande $E_t - E_n \\approx 46{,}3$ MJ försvinner som värme (avgaser, kylsystem). Det är därför bilar har stora kylare: överskottsvärmen är **mer** än det nyttiga arbetet.`,
         },
         {
             level: 2,
@@ -24195,13 +26379,13 @@ $$
 
 **Svar:** Ca 45 %.
 
-**Generell slutsats:** Teoretiskt maximum för ett vindkraftverk är Betzs gräns på 59,3 % (man kan inte ta ut all energi från vinden — då skulle vinden stanna helt bakom kraftverket). Moderna vindkraftverk når 40–50 %.`,
+**Generell slutsats:** Teoretiskt maximum för ett vindkraftverk är Betzs gräns på 59,3 % (man kan inte ta ut all energi från vinden, för då skulle vinden stanna helt bakom kraftverket). Moderna vindkraftverk når 40–50 %.`,
         },
         {
             level: 3,
             question: `Ett vattenkraftverk har en fallhöjd på 95 m och 320 ton vatten per sekund passerar turbinerna. Turbinernas verkningsgrad är 0,90 och generatorernas är 0,95. Beräkna kraftverkets **nyttiga uteffekt** (i MW). Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
             answer: { value: 255, unit: 'MW', tol: 0.03 },
-            solution: `**Steg 1 — tillförd effekt** (vattnets lägesenergi per sekund):
+            solution: `**Steg 1: tillförd effekt** (vattnets lägesenergi per sekund):
 
 $$
 P_t = \\frac{E_t}{t} = \\frac{m g h}{t} = \\dot m \\cdot g \\cdot h
@@ -24213,13 +26397,13 @@ $$
 P_t = 320\\,000 \\cdot 9{,}82 \\cdot 95 \\approx 2{,}985 \\cdot 10^{8}\\ \\mathrm{W} \\approx 298{,}5\\ \\mathrm{MW}
 $$
 
-**Steg 2 — total verkningsgrad** (kombinerad turbin + generator):
+**Steg 2: total verkningsgrad** (kombinerad turbin + generator):
 
 $$
 \\eta_\\text{tot} = \\eta_\\text{turbin} \\cdot \\eta_\\text{gen} = 0{,}90 \\cdot 0{,}95 = 0{,}855
 $$
 
-**Steg 3 — nyttig uteffekt:**
+**Steg 3: nyttig uteffekt**
 
 $$
 P_n = \\eta_\\text{tot} \\cdot P_t = 0{,}855 \\cdot 298{,}5 \\approx 255\\ \\mathrm{MW}
@@ -24227,7 +26411,603 @@ $$
 
 **Svar:** Ca 255 MW.
 
-**Generell slutsats:** Ett system av seriekopplade processer (vatten → turbin → generator) har en *total* verkningsgrad som är produkten av de enskilda. Om varje steg har 90 % verkningsgrad blir den totala $0{,}9^{3} = 0{,}73$ för tre steg — det är därför man försöker minimera antal energiomvandlings­steg i ett kraftverk.`,
+**Generell slutsats:** Ett system av seriekopplade processer (vatten → turbin → generator) har en *total* verkningsgrad som är produkten av de enskilda. Om varje steg har 90 % verkningsgrad blir den totala $0{,}9^{3} = 0{,}73$ för tre steg. Det är därför man försöker minimera antal energiomvandlings­steg i ett kraftverk.`,
+        },
+        {
+            level: 1,
+            question: `En borrmaskin tillförs den elektriska effekten 650 W. Den nyttiga mekaniska effekten som får borren att rotera är 0,52 kW. Bestäm borrmaskinens verkningsgrad. Ange svaret i procent.`,
+            answer: { value: 80, unit: '%', tol: 0.02 },
+            solution: `Verkningsgraden kan räknas med effekter:
+
+$$
+\\eta = \\frac{P_n}{P_t}
+$$
+
+Täljare och nämnare ska ha samma enhet, så den nyttiga effekten räknas om till watt:
+
+$$
+\\left[ \\begin{array}{l}
+P_n = 0{,}52\\ \\mathrm{kW} = 520\\ \\mathrm{W} \\\\
+P_t = 650\\ \\mathrm{W}
+\\end{array} \\right]
+$$
+
+$$
+\\eta = \\frac{520}{650} = 0{,}80 = 80\\ \\%
+$$
+
+Resten av den tillförda effekten, 130 W, blir värme i motorn och i växlarna.
+
+**Svar:** 80 %`,
+        },
+        {
+            level: 1,
+            question: `Fyra elever har mätt och beräknat verkningsgraden hos var sin apparat. Ett av resultaten måste vara fel, oavsett vilken apparat det gäller. Vilket?`,
+            choices: ['0,08', '0,93', '1,15', '0,50'],
+            correct: 2,
+            solution: `Verkningsgraden är kvoten mellan nyttig och tillförd energi:
+
+$$
+\\eta = \\frac{E_n}{E_t}
+$$
+
+En apparat kan aldrig avge mer energi än den tar emot. Den nyttiga energin $E_n$ är därför högst lika stor som den tillförda $E_t$, och verkningsgraden ligger alltid mellan 0 och 1.
+
+Verkningsgraden 1,15 skulle betyda att apparaten ger ut 15 % mer nyttig energi än den tillförs, alltså att energi skapas. Det strider mot energiprincipen. De övriga tre värdena är möjliga: 0,08 är en mycket ineffektiv apparat och 0,93 en mycket effektiv.
+
+**Svar:** 1,15`,
+        },
+        {
+            level: 1,
+            question: `En solpanel på ett hustak träffas av solljus med effekten 1 200 W. Panelens verkningsgrad är 0,21. Hur stor elektrisk effekt levererar panelen? Ange svaret i W.`,
+            answer: { value: 250, unit: 'W', tol: 0.03 },
+            solution: `Den elektriska effekten är den nyttiga effekten. Lös ut den ur formeln för verkningsgrad:
+
+$$
+\\eta = \\frac{P_n}{P_t} \\quad\\Leftrightarrow\\quad P_n = \\eta \\cdot P_t
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\eta = 0{,}21 \\\\
+P_t = 1\\,200\\ \\mathrm{W}
+\\end{array} \\right]
+$$
+
+$$
+P_n = 0{,}21 \\cdot 1\\,200 = 252\\ \\mathrm{W} \\approx 250\\ \\mathrm{W}
+$$
+
+Verkningsgraden är given med två värdesiffror, så svaret avrundas till två värdesiffror.
+
+**Svar:** Cirka 250 W`,
+        },
+        {
+            level: 1,
+            question: `Energiflödesdiagrammet visar vad som händer med energin i en bensinmotor under en kort körning. Pilarnas bredd är proportionell mot energin.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="44 4 518 244" width="664" height="313" role="img" aria-label="Energiflödesdiagram för en bensinmotor. Tillförd energi 150 kJ går in i motorn. Ut går nyttigt arbete, okänd mängd, värme i avgaserna 63 kJ och värme i kylvattnet 42 kJ. Pilarnas bredd är proportionell mot energin." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><path d="M 150 30 L 205 30 L 205 180 L 150 180 L 160 105 Z" fill="rgba(15,22,32,0.12)" stroke="#0f1620" stroke-width="1.4" stroke-linejoin="round"/><path d="M 265 30 C 300 30, 300 14, 335 14 L 395 14 L 395 7 L 415 36.5 L 395 66 L 395 59 L 335 59 C 300 59, 300 75, 265 75 Z" fill="rgba(42,111,176,0.28)" stroke="#2a6fb0" stroke-width="1.4" stroke-linejoin="round"/><text x="424" y="33.5" font-size="14" fill="#0f1620">Nyttigt arbete</text><text x="424" y="51.5" font-size="14" font-weight="600" fill="#0f1620">?</text><path d="M 265 75 C 300 75, 300 92, 335 92 L 395 92 L 395 85 L 415 123.5 L 395 162 L 395 155 L 335 155 C 300 155, 300 138, 265 138 Z" fill="rgba(200,50,74,0.18)" stroke="#c8324a" stroke-width="1.4" stroke-linejoin="round"/><text x="424" y="120.5" font-size="14" fill="#0f1620">Värme i avgaserna</text><text x="424" y="138.5" font-size="14" font-weight="600" fill="#0f1620">63 kJ</text><path d="M 265 138 C 300 138, 300 192, 335 192 L 395 192 L 395 185 L 415 213 L 395 241 L 395 234 L 335 234 C 300 234, 300 180, 265 180 Z" fill="rgba(200,50,74,0.18)" stroke="#c8324a" stroke-width="1.4" stroke-linejoin="round"/><text x="424" y="210" font-size="14" fill="#0f1620">Värme i kylvattnet</text><text x="424" y="228" font-size="14" font-weight="600" fill="#0f1620">42 kJ</text><rect x="205" y="20" width="60" height="170" rx="6" fill="#f3eee4" stroke="#0f1620" stroke-width="1.8"/><text x="235" y="110" font-size="14" font-weight="600" text-anchor="middle" fill="#0f1620">Motor</text><text x="146" y="100" font-size="14" text-anchor="end" fill="#0f1620">Tillförd energi</text><text x="146" y="118" font-size="14" font-weight="600" text-anchor="end" fill="#0f1620">150 kJ</text></svg>
+
+Bestäm motorns verkningsgrad. Ange svaret i procent.`,
+            answer: { value: 30, unit: '%', tol: 0.02 },
+            solution: `Ingen energi försvinner i motorn, den byter bara form. Den tillförda energin är därför lika med summan av allt som kommer ut, och det nyttiga arbetet är det som blir kvar när värmen räknats bort:
+
+$$
+E_n = 150 - 63 - 42 = 45\\ \\mathrm{kJ}
+$$
+
+Verkningsgraden blir
+
+$$
+\\eta = \\frac{E_n}{E_t}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+E_n = 45\\ \\mathrm{kJ} \\\\
+E_t = 150\\ \\mathrm{kJ}
+\\end{array} \\right]
+$$
+
+$$
+\\eta = \\frac{45}{150} = 0{,}30 = 30\\ \\%
+$$
+
+Det stämmer med tabellen i genomgången, där en bensinmotor har en verkningsgrad på ungefär 30 %.
+
+**Svar:** 30 %`,
+        },
+        {
+            level: 2,
+            question: `En rulltrappa lyfter 12 personer med den sammanlagda massan 900 kg upp till en våning som ligger 6,0 m högre. Färden tar 20 s, och under tiden tillförs rulltrappans motor den elektriska effekten 4,0 kW. Bestäm rulltrappans verkningsgrad, räknat på att lyfta personerna. Ange svaret i procent. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            answer: { value: 66, unit: '%', tol: 0.03 },
+            solution: `$$
+\\eta = \\frac{E_n}{E_t}
+$$
+
+Den nyttiga energin är den lägesenergi som personerna får när de lyfts 6,0 m. Den tillförda energin är den elektriska effekten gånger tiden, eftersom $P = \\dfrac{E}{\\Delta t}$ ger $E = P \\cdot \\Delta t$.
+
+$$
+\\left[ \\begin{array}{l}
+E_n = \\Delta E_p = m \\cdot g \\cdot h = 900 \\cdot 9{,}82 \\cdot 6{,}0 = 53\\,028\\ \\mathrm{J} \\\\
+E_t = P_t \\cdot \\Delta t = 4\\,000 \\cdot 20 = 80\\,000\\ \\mathrm{J}
+\\end{array} \\right]
+$$
+
+$$
+\\eta = \\frac{53\\,028}{80\\,000} = 0{,}6628\\ldots \\approx 0{,}66 = 66\\ \\%
+$$
+
+Rimlighet: en del av effekten går åt till att hålla trappstegen och kedjorna i rörelse, och friktionen i dem blir värme. Att ungefär en tredjedel går förlorad är därför rimligt.
+
+**Svar:** Cirka 66 %`,
+        },
+        {
+            level: 2,
+            question: `En elbil med massan 1 800 kg accelererar från stillastående till farten 72 km/h på en plan väg. Elmotorn och växellådan har tillsammans verkningsgraden 0,85. Bortse från luftmotstånd och rullmotstånd. Hur mycket energi måste batteriet leverera under accelerationen? Ange svaret i kJ.`,
+            answer: { value: 420, unit: 'kJ', tol: 0.03 },
+            solution: `Den nyttiga energin är bilens rörelseenergi efter accelerationen. Batteriet levererar den tillförda energin, som löses ut ur formeln för verkningsgrad:
+
+$$
+\\eta = \\frac{E_n}{E_t} \\quad\\Leftrightarrow\\quad E_t = \\frac{E_n}{\\eta}
+$$
+
+Farten räknas först om till m/s:
+
+$$
+\\left[ \\begin{array}{l}
+m = 1\\,800\\ \\mathrm{kg} \\\\
+v = 72\\ \\mathrm{km/h} = \\dfrac{72}{3{,}6}\\ \\mathrm{m/s} = 20\\ \\mathrm{m/s} \\\\
+\\eta = 0{,}85
+\\end{array} \\right]
+$$
+
+Bilen startar från vila, så den nyttiga energin är hela rörelseenergin:
+
+$$
+E_n = \\frac{m \\cdot v^{2}}{2} = \\frac{1\\,800 \\cdot 20^{2}}{2} = 360\\,000\\ \\mathrm{J}
+$$
+
+$$
+E_t = \\frac{360\\,000}{0{,}85} = 423\\,529\\ \\mathrm{J} \\approx 420\\ \\mathrm{kJ}
+$$
+
+Rimlighet: batteriet måste leverera mer än de 360 kJ som bilen får i rörelseenergi, eftersom en del blir värme i motorn och växellådan.
+
+**Svar:** Cirka 420 kJ`,
+        },
+        {
+            level: 2,
+            question: `En dränkbar pump lyfter 750 kg vatten ur en brunn upp till en tank som ligger 5,0 m högre. Diagrammet visar den elektriska effekt som pumpen tillförs medan den arbetar.
+
+${makeDiagram({
+    xMax: 60, xTicks: [0, 10, 20, 30, 40, 50, 60],
+    yMax: 1.4, yTicks: [0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4],
+    xLabel: '<tspan font-style="italic">t</tspan> (s)',
+    yLabel: '<tspan font-style="italic">P</tspan> (kW)',
+    paths: [{ points: [[0, 0], [10, 1.2], [50, 1.2], [60, 0]] }],
+})}
+
+a) Hur mycket energi tillförs pumpen? Ange svaret i kJ.<br>b) Bestäm pumpens verkningsgrad. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+
+*Ange verkningsgraden i b) som ditt numeriska svar i procent.*`,
+            answer: { value: 61, unit: '%', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 60, unit: 'kJ', tol: 0.03, etikett: '$E_t =$' },
+                { del: 'b', value: 61, unit: '%', tol: 0.03, etikett: '$\\eta =$' },
+            ],
+            solution: `**a)** Effekten är energi per tidsenhet, $P = \\dfrac{E}{\\Delta t}$. När effekten är konstant är energin $E = P \\cdot \\Delta t$, alltså arean av en rektangel i diagrammet. När effekten ändras är energin på samma sätt arean under grafen.
+
+Arean delas upp i tre delar: en triangel när pumpen startar (0 till 10 s), en rektangel när den går för fullt (10 till 50 s) och en triangel när den stannar (50 till 60 s). Med effekten i kW och tiden i s blir energin i kJ.
+
+$$
+E_1 = \\frac{10 \\cdot 1{,}2}{2} = 6{,}0\\ \\mathrm{kJ}
+$$
+
+$$
+E_2 = 40 \\cdot 1{,}2 = 48\\ \\mathrm{kJ}
+$$
+
+$$
+E_3 = \\frac{10 \\cdot 1{,}2}{2} = 6{,}0\\ \\mathrm{kJ}
+$$
+
+$$
+E_t = 6{,}0 + 48 + 6{,}0 = 60\\ \\mathrm{kJ}
+$$
+
+**Svar:** 60 kJ
+
+**b)** Den nyttiga energin är vattnets ökning i lägesenergi:
+
+$$
+\\eta = \\frac{E_n}{E_t}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+E_n = \\Delta E_p = m \\cdot g \\cdot h = 750 \\cdot 9{,}82 \\cdot 5{,}0 = 36\\,825\\ \\mathrm{J} \\\\
+E_t = 60\\ \\mathrm{kJ} = 60\\,000\\ \\mathrm{J}
+\\end{array} \\right]
+$$
+
+$$
+\\eta = \\frac{36\\,825}{60\\,000} = 0{,}6137\\ldots \\approx 0{,}61 = 61\\ \\%
+$$
+
+**Svar:** Cirka 61 %`,
+        },
+        {
+            level: 2,
+            question: `En glödlampa med effekten 40 W har verkningsgraden 5,0 %, räknat som den andel av energin som blir synligt ljus. En LED-lampa med effekten 6,0 W ger lika mycket synligt ljus som glödlampan.<br>a) Hur stor effekt sänder glödlampan ut som synligt ljus? Ange svaret i W.<br>b) Bestäm LED-lampans verkningsgrad. Ange svaret i procent.
+
+*Ange verkningsgraden i b) som ditt numeriska svar i procent.*`,
+            answer: { value: 33, unit: '%', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 2.0, unit: 'W', tol: 0.03, etikett: '$P_n =$' },
+                { del: 'b', value: 33, unit: '%', tol: 0.03, etikett: '$\\eta =$' },
+            ],
+            solution: `**a)** Det synliga ljuset är glödlampans nyttiga effekt:
+
+$$
+\\eta = \\frac{P_n}{P_t} \\quad\\Leftrightarrow\\quad P_n = \\eta \\cdot P_t
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\eta = 5{,}0\\ \\% = 0{,}050 \\\\
+P_t = 40\\ \\mathrm{W}
+\\end{array} \\right]
+$$
+
+$$
+P_n = 0{,}050 \\cdot 40 = 2{,}0\\ \\mathrm{W}
+$$
+
+**Svar:** 2,0 W
+
+**b)** LED-lampan ger lika mycket synligt ljus, så dess nyttiga effekt är också 2,0 W. Den tillförda effekten är 6,0 W:
+
+$$
+\\eta = \\frac{P_n}{P_t} = \\frac{2{,}0}{6{,}0} = 0{,}333\\ldots \\approx 0{,}33 = 33\\ \\%
+$$
+
+Rimlighet: glödlampan behöver $\\dfrac{40}{6{,}0} = 6{,}66\\ldots$ gånger så stor effekt som LED-lampan för samma ljus, så LED-lampans verkningsgrad ska vara lika många gånger så hög som glödlampans: $\\dfrac{40}{6{,}0} \\cdot 5{,}0 = 33{,}3\\ldots \\approx 33$, alltså cirka 33 %. Det stämmer.
+
+**Svar:** Cirka 33 %`,
+        },
+        {
+            level: 2,
+            question: `Motor A har verkningsgraden 0,30 och motor B verkningsgraden 0,45. Båda motorerna ska uträtta samma nyttiga arbete. Hur mycket mer energi måste motor A tillföras än motor B?`,
+            choices: ['50 % mer', '15 % mer', '67 % mer', '33 % mer'],
+            correct: 0,
+            solution: `Lös ut den tillförda energin ur formeln för verkningsgrad:
+
+$$
+\\eta = \\frac{E_n}{E_t} \\quad\\Leftrightarrow\\quad E_t = \\frac{E_n}{\\eta}
+$$
+
+Det nyttiga arbetet $E_n$ är detsamma för båda motorerna. Kvoten mellan de tillförda energierna blir då
+
+$$
+\\frac{E_{t,A}}{E_{t,B}} = \\frac{E_n / 0{,}30}{E_n / 0{,}45} = \\frac{0{,}45}{0{,}30} = 1{,}5
+$$
+
+Motor A behöver alltså 1,5 gånger så mycket energi, det vill säga 50 % mer än motor B.
+
+Alternativet 15 % är skillnaden mellan verkningsgraderna i procentenheter, inte skillnaden i energi. Alternativet 33 % jämför åt andra hållet: motor B behöver 33 % mindre energi än motor A.
+
+**Svar:** 50 % mer`,
+        },
+        {
+            level: 3,
+            question: `I en debatt påstås: ”En elbil använder alltid mindre energi än en bensinbil, eftersom elmotorn har så hög verkningsgrad.” Tabellen visar ungefärliga verkningsgrader för stegen från energikällan till bilens rörelse.
+
+| Steg | Verkningsgrad |
+|---|---|
+| Bensinmotor med växellåda | 0,25 |
+| Kolkraftverk | 0,38 |
+| Vattenkraftverk | 0,90 |
+| Elnätet fram till laddstationen | 0,93 |
+| Laddning av batteriet | 0,90 |
+| Elmotor med växellåda | 0,88 |
+
+Stämmer påståendet? Styrk ditt svar med beräkningar och ett resonemang om vad svaret beror på.`,
+            solution: `**Verkningsgraden för en kedja av steg.** Den nyttiga energin från ett steg är den tillförda energin till nästa steg. Kallas energin från källan $E_0$ blir energin efter första steget $E_1 = \\eta_1 \\cdot E_0$, efter andra steget $E_2 = \\eta_2 \\cdot E_1 = \\eta_2 \\cdot \\eta_1 \\cdot E_0$ och så vidare. Hela kedjans verkningsgrad är därför produkten av stegens verkningsgrader:
+
+$$
+\\eta_\\text{tot} = \\frac{E_\\text{slut}}{E_0} = \\eta_1 \\cdot \\eta_2 \\cdot \\eta_3 \\cdot \\eta_4
+$$
+
+**Elbil som laddas med el från ett kolkraftverk:**
+
+$$
+\\eta_\\text{tot} = 0{,}38 \\cdot 0{,}93 \\cdot 0{,}90 \\cdot 0{,}88 = 0{,}2798\\ldots \\approx 0{,}28
+$$
+
+**Elbil som laddas med el från ett vattenkraftverk:**
+
+$$
+\\eta_\\text{tot} = 0{,}90 \\cdot 0{,}93 \\cdot 0{,}90 \\cdot 0{,}88 = 0{,}6629\\ldots \\approx 0{,}66
+$$
+
+**Bensinbilen** har bara ett steg i tabellen, med verkningsgraden 0,25.
+
+**Jämförelse.** För samma nyttiga arbete på hjulen gäller $E_t = \\dfrac{E_n}{\\eta_\\text{tot}}$, så den tillförda energin är omvänt proportionell mot verkningsgraden. Med el från kolkraft behöver bensinbilen $\\dfrac{0{,}28}{0{,}25} = 1{,}12$ gånger så mycket energi, alltså bara cirka 12 % mer. Tabellens värden är ungefärliga, så skillnaden ryms inom osäkerheten, och de två bilarna är i praktiken lika energieffektiva. Med el från vattenkraft behöver bensinbilen $\\dfrac{0{,}66}{0{,}25} \\approx 2{,}7$ gånger så mycket energi, och elbilen klarar sig alltså med $\\dfrac{0{,}25}{0{,}66} \\approx 0{,}38$, knappt 40 %, av bensinbilens energi.
+
+**Slutsats.** Elmotorn själv har hög verkningsgrad, men det som avgör är hela kedjan från energikällan. Den största förlusten för elbilen ligger i kraftverket: i ett kolkraftverk blir drygt 60 % av bränslets energi värme innan elen ens lämnar verket. Påståendet ”alltid” stämmer därför inte. Hur mycket elbilen vinner beror på hur elen produceras.
+
+**Svar:** Nej. Med el från kolkraft är hela kedjans verkningsgrad cirka 0,28, nästan samma som bensinbilens 0,25. Med el från vattenkraft är den cirka 0,66, och då använder elbilen bara knappt 40 % så mycket energi som bensinbilen.`,
+        },
+        {
+            level: 3,
+            question: `En vandrare med massan 68 kg, packningen inräknad, går från en fjällstation upp till en topp som ligger 1 250 m högre. Uppstigningen tar 4,0 timmar. En pulsklocka uppskattar att kroppen under uppstigningen omsätter energi med den genomsnittliga effekten 480 W. Samma person omsätter 90 W när hon sitter stilla.
+
+Bestäm hur stor andel av den energi som går åt på grund av vandringen som blir lägesenergi. Diskutera varför andelen blir mindre än musklernas verkningsgrad, som är ungefär 0,20. Ange andelen i procent.`,
+            answer: { value: 15, unit: '%', tol: 0.04 },
+            solution: `**Vad som är nyttigt och vad som är tillfört.** Den nyttiga energin är ökningen av vandrarens lägesenergi. Den tillförda energin ska vara den energi som går åt *på grund av vandringen*. Kroppen omsätter 90 W även när den sitter stilla (hjärta, andning, kroppstemperatur), och den energin hade gått åt ändå. Den räknas därför bort, och den effekt som vandringen kostar är
+
+$$
+P_t = 480 - 90 = 390\\ \\mathrm{W}
+$$
+
+$$
+\\eta = \\frac{E_n}{E_t}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m = 68\\ \\mathrm{kg} \\\\
+h = 1\\,250\\ \\mathrm{m} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+P_t = 390\\ \\mathrm{W} \\\\
+\\Delta t = 4{,}0\\ \\mathrm{h} = 4{,}0 \\cdot 3\\,600\\ \\mathrm{s} = 14\\,400\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+Den nyttiga energin är lägesenergin:
+
+$$
+E_n = \\Delta E_p = m \\cdot g \\cdot h = 68 \\cdot 9{,}82 \\cdot 1\\,250 = 834\\,700\\ \\mathrm{J}
+$$
+
+Den tillförda energin är effekten gånger tiden, eftersom $P = \\dfrac{E}{\\Delta t}$ ger $E = P \\cdot \\Delta t$:
+
+$$
+E_t = P_t \\cdot \\Delta t = 390 \\cdot 14\\,400 = 5\\,616\\,000\\ \\mathrm{J}
+$$
+
+$$
+\\eta = \\frac{834\\,700}{5\\,616\\,000} = 0{,}1486\\ldots \\approx 0{,}15 = 15\\ \\%
+$$
+
+Hade vilan inte räknats bort hade andelen blivit $\\dfrac{834\\,700}{480 \\cdot 14\\,400} = 0{,}12$. Det är för lågt, eftersom energin för att hålla kroppen i gång inte har med vandringen att göra.
+
+**Diskussion.** Musklernas verkningsgrad 0,20 gäller när all muskelkraft går till att lyfta kroppen. Under vandringen går en del av musklernas arbete till annat än lyftet:
+
+- vandraren förflyttar sig också framåt längs en stig som är många kilometer lång, och varje steg kostar energi även där stigen är plan,
+- ojämn terräng kräver att kroppen hela tiden parerar och bromsar, och går stigen ibland nedför måste den förlorade höjden vinnas tillbaka,
+- kroppen kan behöva extra energi för att hålla värmen i kall fjälluft.
+
+Inget av detta blir lägesenergi, så andelen som blir lägesenergi måste bli mindre än 0,20. Pulsklockans effekt är dessutom bara en uppskattning, så värdet 0,15 är osäkert.
+
+**Svar:** Cirka 15 %. Andelen blir mindre än 0,20 eftersom en del av musklernas arbete går till att förflytta kroppen framåt och att parera terrängen, och inte till att lyfta den.`,
+        },
+        {
+            level: 3,
+            question: `Den som planerar små vattenkraftverk använder ibland tumregeln
+
+$$
+P \\approx 8 \\cdot Q \\cdot h
+$$
+
+där *P* är den elektriska effekt som kraftverket levererar i kW, *Q* är vattenflödet genom turbinerna i m³/s (kubikmeter per sekund) och *h* är fallhöjden i meter. Förklara var tumregeln kommer ifrån, och bestäm vilken verkningsgrad för hela kraftverket den förutsätter. Vattnets densitet är 1 000 kg/m³. Ange verkningsgraden i procent.`,
+            answer: { value: 81, unit: '%', tol: 0.03 },
+            solution: `**Tillförd effekt.** Under tiden $\\Delta t$ passerar volymen $V = Q \\cdot \\Delta t$ genom turbinerna. Vattnets massa är
+
+$$
+m = \\rho \\cdot V = \\rho \\cdot Q \\cdot \\Delta t
+$$
+
+När vattnet faller höjden *h* avger det lägesenergin
+
+$$
+E_t = m \\cdot g \\cdot h = \\rho \\cdot Q \\cdot \\Delta t \\cdot g \\cdot h
+$$
+
+Den tillförda effekten är energin per tidsenhet, och tiden $\\Delta t$ tar ut sig:
+
+$$
+P_t = \\frac{E_t}{\\Delta t} = \\frac{\\rho \\cdot Q \\cdot \\Delta t \\cdot g \\cdot h}{\\Delta t} = \\rho \\cdot g \\cdot Q \\cdot h
+$$
+
+Enhetskontroll: $\\mathrm{kg/m^{3}} \\cdot \\mathrm{N/kg} \\cdot \\mathrm{m^{3}/s} \\cdot \\mathrm{m} = \\mathrm{N \\cdot m/s} = \\mathrm{J/s} = \\mathrm{W}$.
+
+**Levererad effekt.** Med kraftverkets verkningsgrad $\\eta$ blir den elektriska effekten
+
+$$
+P = \\eta \\cdot P_t = \\eta \\cdot \\rho \\cdot g \\cdot Q \\cdot h
+$$
+
+Faktorn framför *Q* · *h* är $\\rho \\cdot g = 1\\,000 \\cdot 9{,}82 = 9\\,820\\ \\mathrm{W}$ per m³/s och meter, alltså 9,82 kW. Med *P* i kW gäller därför
+
+$$
+P = \\eta \\cdot 9{,}82 \\cdot Q \\cdot h
+$$
+
+**Jämförelse med tumregeln.** Tumregeln har faktorn 8 i stället för $\\eta \\cdot 9{,}82$:
+
+$$
+\\eta \\cdot 9{,}82 = 8 \\quad\\Leftrightarrow\\quad \\eta = \\frac{8}{9{,}82} = 0{,}8146\\ldots \\approx 0{,}81 = 81\\ \\%
+$$
+
+Tumregeln är alltså formeln för lägesenergi per sekund, multiplicerad med en verkningsgrad på ungefär 0,8 och med *g* och vattnets densitet inbakade i talet 8.
+
+Rimlighet: ett kraftverk består av en turbin och en generator, som var för sig kan ha verkningsgrader omkring 0,9. Tillsammans ger de ungefär $0{,}9 \\cdot 0{,}9 \\approx 0{,}8$, och dessutom försvinner lite energi i tuberna som leder vattnet. Värdet 0,81 är därför rimligt. Tumregeln gäller bara när kraftverket verkligen har en sådan verkningsgrad.
+
+**Svar:** Tumregeln förutsätter verkningsgraden cirka 81 %.`,
+        },
+        {
+            level: 3,
+            question: `En uppfinnare har byggt en maskin där en elmotor driver en generator, och generatorns el leds tillbaka till motorn. Motorn har verkningsgraden 0,90 och generatorn verkningsgraden 0,92. För att hålla maskinen i gång har uppfinnaren kopplat in ett batteri som ger motorn den effekt som saknas. Samtidigt tar han ut effekten 60 W från generatorn till en lampa. Motorn tillförs hela tiden effekten 500 W, från generatorn och batteriet tillsammans.
+
+Uppfinnaren påstår att maskinen förstärker batteriets effekt, eftersom 500 W går in i motorn men batteriet bara behöver hjälpa till lite. Bestäm hur stor effekt batteriet levererar, och bemöt påståendet med energiprincipen och verkningsgrad. Ange batteriets effekt i W.`,
+            answer: { value: 150, unit: 'W', tol: 0.03 },
+            solution: `**Följ effekten ett varv genom maskinen.** Den nyttiga effekten från ett steg är den tillförda effekten till nästa steg, och för varje steg gäller $P_n = \\eta \\cdot P_t$.
+
+$$
+\\left[ \\begin{array}{l}
+\\eta_\\text{motor} = 0{,}90 \\\\
+\\eta_\\text{gen} = 0{,}92 \\\\
+P_\\text{motor} = 500\\ \\mathrm{W} \\\\
+P_\\text{lampa} = 60\\ \\mathrm{W}
+\\end{array} \\right]
+$$
+
+Motorn tillförs 500 W och ger generatorn den mekaniska effekten
+
+$$
+P_1 = \\eta_\\text{motor} \\cdot P_\\text{motor} = 0{,}90 \\cdot 500 = 450\\ \\mathrm{W}
+$$
+
+Generatorn gör om den till den elektriska effekten
+
+$$
+P_2 = \\eta_\\text{gen} \\cdot P_1 = 0{,}92 \\cdot 450 = 414\\ \\mathrm{W}
+$$
+
+Av den går 60 W till lampan, så tillbaka till motorn går
+
+$$
+P_\\text{tillbaka} = 414 - 60 = 354\\ \\mathrm{W}
+$$
+
+Motorn ska tillföras 500 W, och resten kommer från batteriet:
+
+$$
+P_\\text{batteri} = 500 - 354 = 146\\ \\mathrm{W} \\approx 150\\ \\mathrm{W}
+$$
+
+**Kontroll med energiprincipen.** Energi skapas inte, så det som maskinen tar emot måste vara lika med det som lämnar den. Maskinen tar bara emot effekt från batteriet. Den lämnar effekt till lampan och som värme i motorn och generatorn:
+
+$$
+P_\\text{värme} = (500 - 450) + (450 - 414) = 50 + 36 = 86\\ \\mathrm{W}
+$$
+
+$$
+P_\\text{lampa} + P_\\text{värme} = 60 + 86 = 146\\ \\mathrm{W} = P_\\text{batteri}
+$$
+
+Det stämmer.
+
+**Bemötande.** De 500 W som går in i motorn är inte ny energi: 354 W av dem är samma energi som cirkulerar runt i maskinen, och på varje varv blir en del av den värme. Batteriet måste leverera 146 W för att lampan ska få 60 W, så hela maskinens verkningsgrad räknat från batteriet till lampan är
+
+$$
+\\eta = \\frac{P_\\text{lampa}}{P_\\text{batteri}} = \\frac{60}{146} = 0{,}41
+$$
+
+Kopplas lampan i stället direkt till batteriet behöver batteriet bara leverera 60 W. Maskinen förstärker alltså ingenting, den slösar bort mer än hälften av batteriets effekt. Utan batteriet skulle maskinen dessutom stanna, eftersom bara $0{,}90 \\cdot 0{,}92 = 0{,}828$ av effekten kommer tillbaka efter varje varv, även om ingen lampa var inkopplad. En maskin som håller sig själv i gång kräver verkningsgraden 1 i varje steg, och det strider mot att varje verklig omvandling ger förluster till värme.
+
+**Svar:** Batteriet levererar cirka 150 W. Påståendet stämmer inte: batteriets effekt räcker precis till lampan och till förlusterna i motorn och generatorn, och lampan hade klarat sig med 60 W om den kopplats direkt till batteriet.`,
+        },
+        {
+            level: 3,
+            question: `En byggkran lyfter en betongbalk med massan 600 kg rakt uppåt med den konstanta farten 0,50 m/s. Under lyftet tillförs kranens motor den elektriska effekten 3,6 kW. Bestäm kranens verkningsgrad. Ange svaret i procent.`,
+            answer: { value: 82, unit: '%', tol: 0.03 },
+            solution: `Lyfthöjden och lyftets tid är inte givna. Vi räknar därför generellt på en godtycklig tid $\\Delta t$ under lyftet och ser vad som händer med den.
+
+$$
+\\eta = \\frac{E_n}{E_t}
+$$
+
+**Nyttig energi.** Farten är konstant, så balkens rörelseenergi ändras inte. Den nyttiga energin är därför bara ökningen av lägesenergin. Med konstant fart *v* lyfts balken höjden $h = v \\cdot \\Delta t$ under tiden $\\Delta t$:
+
+$$
+E_n = \\Delta E_p = m \\cdot g \\cdot h = m \\cdot g \\cdot v \\cdot \\Delta t
+$$
+
+**Tillförd energi.** Motorn tillförs effekten $P_t$, och eftersom $P = \\dfrac{E}{\\Delta t}$ är den tillförda energin under samma tid
+
+$$
+E_t = P_t \\cdot \\Delta t
+$$
+
+**Verkningsgraden.** $E_n = m \\cdot g \\cdot v \\cdot \\Delta t$ och $E_t = P_t \\cdot \\Delta t$ insatta i $\\eta = \\dfrac{E_n}{E_t}$ ger
+
+$$
+\\eta = \\frac{m \\cdot g \\cdot v \\cdot \\Delta t}{P_t \\cdot \\Delta t} = \\frac{m \\cdot g \\cdot v}{P_t}
+$$
+
+Tiden $\\Delta t$ tar ut sig, och därmed också lyfthöjden. Både den nyttiga och den tillförda energin växer i samma takt med tiden, så andelen som blir nyttig är densamma varje sekund, hur högt balken än lyfts. Därför behövs varken höjden eller tiden.
+
+$$
+\\left[ \\begin{array}{l}
+m = 600\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+v = 0{,}50\\ \\mathrm{m/s} \\\\
+P_t = 3{,}6\\ \\mathrm{kW} = 3\\,600\\ \\mathrm{W}
+\\end{array} \\right]
+$$
+
+$$
+\\eta = \\frac{600 \\cdot 9{,}82 \\cdot 0{,}50}{3\\,600} = \\frac{2\\,946}{3\\,600} = 0{,}8183\\ldots \\approx 0{,}82 = 82\\ \\%
+$$
+
+Rimlighet: täljaren, 2 946 W, är den effekt som går åt till själva lyftet. Den är mindre än de tillförda 3 600 W, som den måste vara, och verkningsgraden ligger nära en elmotors typiska 90 %. Resten förloras som värme i motorn, växellådan och vajertrumman.
+
+**Svar:** Cirka 82 %`,
+        },
+        {
+            level: 3,
+            question: `En bil kör med den konstanta farten 90 km/h på en plan motorväg. Luftmotståndet och rullmotståndet ger tillsammans en motståndskraft på 520 N. Motorns verkningsgrad är 0,28, och en liter bensin ger energin 32 MJ när den förbränns.<br>a) Hur långt kan bilen köra på en liter bensin? Ange svaret i km.<br>b) Vid 120 km/h är motståndskraften 850 N. Hur många procent mer bensin går det åt per kilometer vid 120 km/h än vid 90 km/h, om motorns verkningsgrad är densamma? Ange svaret i procent.
+
+*Ange sträckan i a) som ditt numeriska svar i km.*`,
+            answer: { value: 17, unit: 'km', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 17, unit: 'km', tol: 0.03, etikett: '$s =$' },
+                { del: 'b', value: 63, unit: '%', tol: 0.03, etikett: 'mer bensin' },
+            ],
+            solution: `**a)** Bilen kör med konstant fart, så enligt Newtons första lag är den resulterande kraften noll. Motorns drivande kraft är då lika stor som motståndskraften, $F_\\text{mot} = 520\\ \\mathrm{N}$. Det nyttiga arbetet på sträckan *s* är
+
+$$
+E_n = W = F_\\text{mot} \\cdot s
+$$
+
+Den tillförda energin är bensinens energi $E_t$, och $E_n = \\eta \\cdot E_t$. Sätts de två uttrycken för den nyttiga energin lika får vi
+
+$$
+F_\\text{mot} \\cdot s = \\eta \\cdot E_t \\quad\\Leftrightarrow\\quad s = \\frac{\\eta \\cdot E_t}{F_\\text{mot}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\eta = 0{,}28 \\\\
+E_t = 32\\ \\mathrm{MJ} = 32 \\cdot 10^{6}\\ \\mathrm{J} \\\\
+F_\\text{mot} = 520\\ \\mathrm{N}
+\\end{array} \\right]
+$$
+
+$$
+s = \\frac{0{,}28 \\cdot 32 \\cdot 10^{6}}{520} = 17\\,230\\ \\mathrm{m} \\approx 17\\ \\mathrm{km}
+$$
+
+Farten ingår inte direkt i räkningen: vid konstant fart avgörs arbetet bara av kraften och sträckan. Farten påverkar ändå förbrukningen, men genom att motståndskraften blir större vid högre fart.
+
+Rimlighet: 17 km per liter motsvarar knappt 0,6 liter per mil, vilket är en vanlig förbrukning för en snål bil på landsväg.
+
+**Svar:** Cirka 17 km
+
+**b)** Ur a) är den energi som går åt per meter $\\dfrac{E_t}{s} = \\dfrac{F_\\text{mot}}{\\eta}$. Med samma verkningsgrad är bensinåtgången per kilometer alltså proportionell mot motståndskraften, och kvoten mellan förbrukningarna blir
+
+$$
+\\frac{850}{520} = 1{,}6346\\ldots \\approx 1{,}63
+$$
+
+Bilen drar alltså cirka 63 % mer bensin per kilometer vid 120 km/h.
+
+Rimlighet: farten ökar med en tredjedel men förbrukningen med nästan två tredjedelar. Det beror på att luftmotståndet växer ungefär med kvadraten på farten, medan rullmotståndet är ungefär konstant. I verkligheten ändras dessutom motorns verkningsgrad något med farten, så svaret är en uppskattning.
+
+**Svar:** Cirka 63 %`,
         },
     ],
 
@@ -24343,13 +27123,13 @@ $$
 
 I båda fallen ska denna rörelsemängd bli noll, vilket kräver impulsen $I = 1\\,250$ Ns (riktad bakåt).
 
-**b) Utan airbag** — $\\Delta t = 0{,}10$ s:
+**b) Utan airbag**, $\\Delta t = 0{,}10$ s:
 
 $$
 F = \\frac{I}{\\Delta t} = \\frac{1\\,250}{0{,}10} = 12\\,500\\ \\mathrm{N} = 12{,}5\\ \\mathrm{kN}
 $$
 
-**c) Med airbag** — $\\Delta t = 0{,}40$ s (fyra gånger så lång stopptid):
+**c) Med airbag**, $\\Delta t = 0{,}40$ s (fyra gånger så lång stopptid):
 
 $$
 F = \\frac{1\\,250}{0{,}40} = 3\\,125\\ \\mathrm{N} \\approx 3{,}1\\ \\mathrm{kN}
@@ -24357,7 +27137,656 @@ $$
 
 **Svar:** a) ca 1 250 kg·m/s. b) ca 12,5 kN. c) ca 3,1 kN.
 
-**Generell slutsats:** Att förlänga stopptiden med en faktor 4 (från 0,10 s till 0,40 s) **minskar kraften** på passageraren med samma faktor 4. Detta är hela grundprincipen bakom alla "krocksäkerheter" — airbags, krocksäkra bilskal, halkmattor i bilen, fallskärmar — de förlänger den tid under vilken impulsen verkar, och därmed minskar de toppkraften.`,
+**Generell slutsats:** Att förlänga stopptiden med en faktor 4 (från 0,10 s till 0,40 s) **minskar kraften** på passageraren med samma faktor 4. Detta är hela grundprincipen bakom alla "krocksäkerheter" (airbags, krocksäkra bilskal, halkmattor i bilen, fallskärmar): de förlänger den tid under vilken impulsen verkar, och därmed minskar de toppkraften.`,
+        },
+        {
+            level: 1,
+            question: `En cyklist och hennes cykel har tillsammans massan 82 kg. Hon cyklar med farten 27 km/h. Hur stor rörelsemängd har cyklisten och cykeln tillsammans? Ange svaret i kg · m/s.`,
+            answer: { value: 620, unit: 'kg·m/s', tol: 0.02 },
+            solution: `$$
+p = m \\cdot v
+$$
+
+Farten räknas först om till m/s:
+
+$$
+\\left[ \\begin{array}{l}
+m = 82\\ \\mathrm{kg} \\\\
+v = 27\\ \\mathrm{km/h} = \\dfrac{27}{3{,}6}\\ \\mathrm{m/s} = 7{,}5\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$
+p = 82 \\cdot 7{,}5 = 615\\ \\mathrm{kg \\cdot m/s} \\approx 620\\ \\mathrm{kg \\cdot m/s}
+$$
+
+Givna värden har två värdesiffror, så svaret avrundas till två värdesiffror.
+
+**Svar:** Cirka 620 kg · m/s`,
+        },
+        {
+            level: 1,
+            question: `En tennisboll med massan 0,057 kg flyger med farten 30 m/s åt vänster. Vi väljer positiv riktning åt höger. Vilken rörelsemängd har bollen?`,
+            choices: ['$1{,}7\\ \\mathrm{kg \\cdot m/s}$', '$-26\\ \\mathrm{kg \\cdot m/s}$', '$-1{,}7\\ \\mathrm{kg \\cdot m/s}$', '$-0{,}86\\ \\mathrm{kg \\cdot m/s}$'],
+            correct: 2,
+            solution: `Rörelsemängden är en vektor med samma riktning som hastigheten. Bollen rör sig åt vänster, alltså mot den positiva riktningen, så hastigheten får ett minustecken.
+
+$$
+p = m \\cdot v
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m = 0{,}057\\ \\mathrm{kg} \\\\
+v = -30\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$
+p = 0{,}057 \\cdot (-30) = -1{,}71\\ \\mathrm{kg \\cdot m/s} \\approx -1{,}7\\ \\mathrm{kg \\cdot m/s}
+$$
+
+Alternativet utan minustecken har glömt riktningen. Talet 26 får man om man i stället räknar rörelseenergin, $\\dfrac{m \\cdot v^{2}}{2}$, som har enheten J och aldrig är negativ.
+
+**Svar:** $-1{,}7\\ \\mathrm{kg \\cdot m/s}$`,
+        },
+        {
+            level: 1,
+            question: `En ishockeypuck med massan 0,17 kg ligger stilla på isen. En spelare slår till den, och klubban ger pucken impulsen 5,1 Ns. Vilken fart får pucken? Ange svaret i m/s.`,
+            answer: { value: 30, unit: 'm/s', tol: 0.02 },
+            solution: `Impulslagen säger att impulsen är lika med ändringen av rörelsemängden. Pucken ligger still från början, så $v_1 = 0$:
+
+$$
+I = m v_2 - m v_1 = m v_2 \\quad\\Leftrightarrow\\quad v_2 = \\frac{I}{m}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+I = 5{,}1\\ \\mathrm{Ns} \\\\
+m = 0{,}17\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$
+v_2 = \\frac{5{,}1}{0{,}17} = 30\\ \\mathrm{m/s}
+$$
+
+**Svar:** 30 m/s`,
+        },
+        {
+            level: 1,
+            question: `Ett hammarslag på en spik mäts med en kraftgivare. Diagrammet visar kraften på spiken under slaget. Hur stor impuls ger hammaren spiken? Ange svaret i Ns.
+
+${makeDiagram({
+    xMax: 7, xTicks: [0, 1, 2, 3, 4, 5, 6, 7],
+    yMax: 1000, yTicks: [0, 200, 400, 600, 800, 1000],
+    xLabel: '<tspan font-style="italic">t</tspan> (ms)',
+    yLabel: '<tspan font-style="italic">F</tspan> (N)',
+    paths: [{ points: [[0, 0], [2, 800], [6, 0]] }],
+})}`,
+            answer: { value: 2.4, unit: 'Ns', tol: 0.02 },
+            solution: `I ett *F-t*-diagram är impulsen lika med arean under grafen. Här är arean en triangel med basen 6 ms och höjden 800 N. Tiden räknas först om till sekunder: $6\\ \\mathrm{ms} = 0{,}006\\ \\mathrm{s}$.
+
+$$
+I = \\frac{\\text{bas} \\cdot \\text{höjd}}{2} = \\frac{0{,}006 \\cdot 800}{2} = 2{,}4\\ \\mathrm{Ns}
+$$
+
+**Svar:** 2,4 Ns`,
+        },
+        {
+            level: 2,
+            question: `En basketboll med massan 0,60 kg kastas vågrätt mot en vägg. Den träffar väggen med farten 9,0 m/s och studsar rakt tillbaka med farten 6,0 m/s, som i figuren. Bollen har kontakt med väggen i 0,050 s.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 8 420 162" width="613" height="237" role="img" aria-label="En basketboll kastas vågrätt mot en tegelvägg med farten 9,0 meter per sekund och studsar rakt tillbaka med farten 6,0 meter per sekund." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="380" y="12" width="34" height="156" fill="#c98a5e"/><g stroke="#f3eee4" stroke-width="1.4"><line x1="388" y1="12" x2="388" y2="28"/><line x1="406" y1="12" x2="406" y2="28"/><line x1="380" y1="28" x2="414" y2="28"/><line x1="397" y1="28" x2="397" y2="44"/><line x1="380" y1="44" x2="414" y2="44"/><line x1="388" y1="44" x2="388" y2="60"/><line x1="406" y1="44" x2="406" y2="60"/><line x1="380" y1="60" x2="414" y2="60"/><line x1="397" y1="60" x2="397" y2="76"/><line x1="380" y1="76" x2="414" y2="76"/><line x1="388" y1="76" x2="388" y2="92"/><line x1="406" y1="76" x2="406" y2="92"/><line x1="380" y1="92" x2="414" y2="92"/><line x1="397" y1="92" x2="397" y2="108"/><line x1="380" y1="108" x2="414" y2="108"/><line x1="388" y1="108" x2="388" y2="124"/><line x1="406" y1="108" x2="406" y2="124"/><line x1="380" y1="124" x2="414" y2="124"/><line x1="397" y1="124" x2="397" y2="140"/><line x1="380" y1="140" x2="414" y2="140"/><line x1="388" y1="140" x2="388" y2="156"/><line x1="406" y1="140" x2="406" y2="156"/><line x1="380" y1="156" x2="414" y2="156"/><line x1="397" y1="156" x2="397" y2="168"/></g><rect x="380" y="12" width="34" height="156" fill="none" stroke="#7a4a2a" stroke-width="1.2"/><text x="20" y="60" font-size="13" fill="#0f1620">Före studsen</text><text x="20" y="135" font-size="13" fill="#0f1620">Efter studsen</text><circle cx="250" cy="55" r="18" fill="#e07b2a" stroke="#7a3a10" stroke-width="1.3"/><line x1="250" y1="37" x2="250" y2="73" stroke="#7a3a10" stroke-width="1.1"/><line x1="232" y1="55" x2="268" y2="55" stroke="#7a3a10" stroke-width="1.1"/><path d="M239,40.8 Q246,55 239,69.2" fill="none" stroke="#7a3a10" stroke-width="1.1"/><path d="M261,40.8 Q254,55 261,69.2" fill="none" stroke="#7a3a10" stroke-width="1.1"/><ellipse cx="244" cy="47" rx="4" ry="2.5" fill="#f3a866" opacity="0.7"/><line x1="268" y1="55" x2="354" y2="55" stroke="#1f5fa8" stroke-width="2.6" stroke-linecap="butt"/><polygon points="354,50.5 364,55 354,59.5" fill="#1f5fa8"/><text x="316" y="44" text-anchor="middle" font-size="13" fill="#1f5fa8">9,0 m/s</text><circle cx="250" cy="130" r="18" fill="#e07b2a" stroke="#7a3a10" stroke-width="1.3"/><line x1="250" y1="112" x2="250" y2="148" stroke="#7a3a10" stroke-width="1.1"/><line x1="232" y1="130" x2="268" y2="130" stroke="#7a3a10" stroke-width="1.1"/><path d="M239,115.8 Q246,130 239,144.2" fill="none" stroke="#7a3a10" stroke-width="1.1"/><path d="M261,115.8 Q254,130 261,144.2" fill="none" stroke="#7a3a10" stroke-width="1.1"/><ellipse cx="244" cy="122" rx="4" ry="2.5" fill="#f3a866" opacity="0.7"/><line x1="232" y1="130" x2="178" y2="130" stroke="#1f5fa8" stroke-width="2.6" stroke-linecap="butt"/><polygon points="178,125.5 168,130 178,134.5" fill="#1f5fa8"/><text x="202" y="119" text-anchor="middle" font-size="13" fill="#1f5fa8">6,0 m/s</text></svg>
+
+a) Hur stor impuls ger väggen bollen?<br>b) Hur stor är medelkraften från väggen på bollen?`,
+            answer: { value: 180, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 9.0, unit: 'Ns', tol: 0.03, ignoreSign: true, etikett: '$I =$' },
+                { del: 'b', value: 180, unit: 'N', tol: 0.03, ignoreSign: true, etikett: '$F =$' },
+            ],
+            solution: `Vi väljer positiv riktning åt höger, mot väggen. Då är hastigheten före studsen positiv och hastigheten efter studsen negativ.
+
+**a)**
+
+$$
+I = m v_2 - m v_1 = m (v_2 - v_1)
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m = 0{,}60\\ \\mathrm{kg} \\\\
+v_1 = 9{,}0\\ \\mathrm{m/s} \\\\
+v_2 = -6{,}0\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$
+I = 0{,}60 \\cdot (-6{,}0 - 9{,}0) = 0{,}60 \\cdot (-15) = -9{,}0\\ \\mathrm{Ns}
+$$
+
+Hastighetsändringen är 15 m/s och inte 3,0 m/s: bollen måste först bromsas från 9,0 m/s till stillastående och sedan få 6,0 m/s åt andra hållet. Minustecknet visar att impulsen är riktad bort från väggen.
+
+**Svar:** 9,0 Ns, riktad bort från väggen
+
+**b)**
+
+$$
+I = F \\cdot \\Delta t \\quad\\Leftrightarrow\\quad F = \\frac{I}{\\Delta t}
+$$
+
+$$
+F = \\frac{-9{,}0}{0{,}050} = -180\\ \\mathrm{N}
+$$
+
+Kraften har samma riktning som impulsen, bort från väggen.
+
+**Svar:** 180 N, riktad bort från väggen`,
+        },
+        {
+            level: 2,
+            question: `En bil med massan 1 200 kg kör med farten 72 km/h på en vågrät väg. Föraren bromsar, och den resulterande bromskraften är konstant 6,0 kN tills bilen står still.<br>a) Hur lång tid tar inbromsningen?<br>b) Hur lång är bromssträckan?`,
+            answer: { value: 40, unit: 'm', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 4.0, unit: 's', tol: 0.02, etikett: '$\\Delta t =$' },
+                { del: 'b', value: 40, unit: 'm', tol: 0.02, etikett: '$s =$' },
+            ],
+            solution: `**a)** Bromskraftens impuls tar bort hela bilens rörelsemängd. Vi räknar med beloppen:
+
+$$
+F \\cdot \\Delta t = m \\cdot \\Delta v \\quad\\Leftrightarrow\\quad \\Delta t = \\frac{m \\cdot \\Delta v}{F}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m = 1\\,200\\ \\mathrm{kg} \\\\
+\\Delta v = 72\\ \\mathrm{km/h} = \\dfrac{72}{3{,}6}\\ \\mathrm{m/s} = 20\\ \\mathrm{m/s} \\\\
+F = 6{,}0\\ \\mathrm{kN} = 6\\,000\\ \\mathrm{N}
+\\end{array} \\right]
+$$
+
+$$
+\\Delta t = \\frac{1\\,200 \\cdot 20}{6\\,000} = \\frac{24\\,000}{6\\,000} = 4{,}0\\ \\mathrm{s}
+$$
+
+**Svar:** 4,0 s
+
+**b)** Kraften är konstant, så retardationen är konstant och farten minskar jämnt från 20 m/s till 0. Medelhastigheten är då medelvärdet av start- och slutfarten, och sträckan är medelhastigheten gånger tiden:
+
+$$
+s = \\frac{v_1 + v_2}{2} \\cdot \\Delta t = \\frac{20 + 0}{2} \\cdot 4{,}0 = 10 \\cdot 4{,}0 = 40\\ \\mathrm{m}
+$$
+
+**Svar:** 40 m`,
+        },
+        {
+            level: 2,
+            question: `En vagn med massan 2,5 kg rullar på en vågrät bana. Diagrammet visar vagnens hastighet under 5,0 s.
+
+${makeDiagram({
+    xMax: 6, xTicks: [0, 1, 2, 3, 4, 5, 6],
+    yMax: 5, yTicks: [0, 1, 2, 3, 4, 5],
+    xLabel: '<tspan font-style="italic">t</tspan> (s)',
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    paths: [{ points: [[0, 1], [3, 4], [5, 4]] }],
+})}
+
+a)&nbsp;Hur stor impuls har den resulterande kraften gett vagnen mellan $t = 0$ och $t = 5{,}0\\ \\mathrm{s}$?<br>b)&nbsp;Hur stor är den resulterande kraften på vagnen under de första 3,0 sekunderna?`,
+            answer: { value: 2.5, unit: 'N', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 7.5, unit: 'Ns', tol: 0.02, etikett: '$I =$' },
+                { del: 'b', value: 2.5, unit: 'N', tol: 0.02, etikett: '$F =$' },
+            ],
+            solution: `**a)** Ur diagrammet: farten är $v_1 = 1{,}0\\ \\mathrm{m/s}$ vid $t = 0$ och $v_2 = 4{,}0\\ \\mathrm{m/s}$ vid $t = 5{,}0\\ \\mathrm{s}$. Enligt impulslagen är impulsen lika med ändringen av rörelsemängden:
+
+$$
+I = m v_2 - m v_1 = m (v_2 - v_1)
+$$
+
+$$
+I = 2{,}5 \\cdot (4{,}0 - 1{,}0) = 2{,}5 \\cdot 3{,}0 = 7{,}5\\ \\mathrm{Ns}
+$$
+
+Mellan 3,0 s och 5,0 s är farten konstant. Där verkar ingen resulterande kraft, så hela impulsen ges under de första 3,0 sekunderna.
+
+**Svar:** 7,5 Ns
+
+**b)** Grafen är en rät linje mellan 0 och 3,0 s, så accelerationen och därmed den resulterande kraften är konstant där. Impulsen 7,5 Ns ges under $\\Delta t = 3{,}0\\ \\mathrm{s}$:
+
+$$
+I = F \\cdot \\Delta t \\quad\\Leftrightarrow\\quad F = \\frac{I}{\\Delta t}
+$$
+
+$$
+F = \\frac{7{,}5}{3{,}0} = 2{,}5\\ \\mathrm{N}
+$$
+
+**Svar:** 2,5 N`,
+        },
+        {
+            level: 2,
+            question: `Två föremål A och B har lika stor rörelsemängd. A har massan 2,0 kg och B har massan 8,0 kg. Vilket påstående om föremålens rörelseenergi stämmer?`,
+            choices: ['A har fyra gånger så stor rörelseenergi som B', 'De har lika stor rörelseenergi', 'B har fyra gånger så stor rörelseenergi som A', 'A har dubbelt så stor rörelseenergi som B'],
+            correct: 0,
+            solution: `Lika stor rörelsemängd betyder att $m_A \\cdot v_A = m_B \\cdot v_B$. Det ger sambandet mellan farterna:
+
+$$
+2{,}0 \\cdot v_A = 8{,}0 \\cdot v_B \\quad\\Leftrightarrow\\quad v_A = 4 \\cdot v_B
+$$
+
+Det lätta föremålet måste alltså röra sig fyra gånger så fort. Rörelseenergin är $E_k = \\dfrac{m \\cdot v^{2}}{2}$, och farten står i kvadrat:
+
+$$
+\\frac{E_{kA}}{E_{kB}} = \\frac{2{,}0 \\cdot (4 v_B)^{2} / 2}{8{,}0 \\cdot v_B^{2} / 2} = \\frac{2{,}0 \\cdot 16}{8{,}0} = 4
+$$
+
+Rörelsemängd och rörelseenergi är alltså olika storheter: lika stor rörelsemängd betyder inte lika stor rörelseenergi.
+
+**Svar:** A har fyra gånger så stor rörelseenergi som B`,
+        },
+        {
+            level: 2,
+            question: `En vagn med massan 12 kg står stilla på ett vågrätt golv. Diagrammet visar den resulterande kraften på vagnen. Positiv kraft är riktad framåt.
+
+${makeDiagram({
+    xMax: 8, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+    yMin: -30, yMax: 40, yTicks: [-30, -20, -10, 0, 10, 20, 30, 40],
+    xLabel: '<tspan font-style="italic">t</tspan> (s)',
+    yLabel: '<tspan font-style="italic">F</tspan> (N)',
+    paths: [{ points: [[0, 30], [4, 30], [4, -20], [7, -20], [7, 0], [8, 0]] }],
+})}
+
+a)&nbsp;Vilken är den högsta fart vagnen når?<br>b)&nbsp;Vilken fart har vagnen vid $t = 8{,}0\\ \\mathrm{s}$?<br>Ange svaren i m/s.`,
+            answer: { value: 5.0, unit: 'm/s', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 10, unit: 'm/s', tol: 0.02, etikett: '$v =$' },
+                { del: 'b', value: 5.0, unit: 'm/s', tol: 0.02, etikett: '$v =$' },
+            ],
+            solution: `Impulsen är arean mellan grafen och *t*-axeln. Area ovanför axeln är en impuls framåt och area under axeln en impuls bakåt. Vagnen står still från början, så enligt impulslagen är $I = m v_2 - 0$, alltså $v_2 = \\dfrac{I}{m}$.
+
+**a)** Under de första 4,0 sekunderna är kraften riktad framåt, och farten ökar. Därefter är kraften riktad bakåt och farten minskar. Den högsta farten nås alltså vid $t = 4{,}0\\ \\mathrm{s}$. Impulsen fram till dess är en rektangel:
+
+$$
+I_1 = 30 \\cdot 4{,}0 = 120\\ \\mathrm{Ns}
+$$
+
+$$
+v = \\frac{I_1}{m} = \\frac{120}{12} = 10\\ \\mathrm{m/s}
+$$
+
+**Svar:** 10 m/s
+
+**b)** Mellan 4,0 s och 7,0 s ger den bakåtriktade kraften en negativ impuls:
+
+$$
+I_2 = -20 \\cdot 3{,}0 = -60\\ \\mathrm{Ns}
+$$
+
+Efter 7,0 s är den resulterande kraften noll, så farten ändras inte mer. Den totala impulsen är
+
+$$
+I = I_1 + I_2 = 120 + (-60) = 60\\ \\mathrm{Ns}
+$$
+
+$$
+v = \\frac{I}{m} = \\frac{60}{12} = 5{,}0\\ \\mathrm{m/s}
+$$
+
+Farten är positiv, så vagnen rör sig fortfarande framåt.
+
+**Svar:** 5,0 m/s`,
+        },
+        {
+            level: 3,
+            question: `En brandman riktar vattenstrålen från en slang vågrätt mot en vägg. Slangen ger 150 liter vatten per minut, och vattnet träffar väggen med farten 18 m/s. Vattnet studsar inte tillbaka utan rinner ned längs väggen. En liter vatten har massan 1,0 kg.<br>a) Hur stor kraft verkar på väggen från vattenstrålen?<br>b) Anta i stället att vattnet hade studsat rakt tillbaka med samma fart. Hur stor hade kraften på väggen blivit då?<br>Ange svaren i N.`,
+            answer: { value: 45, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 45, unit: 'N', tol: 0.03, etikett: '$F =$' },
+                { del: 'b', value: 90, unit: 'N', tol: 0.03, etikett: '$F =$' },
+            ],
+            solution: `Strålen är en ström av vatten, inte ett enda föremål. Vi tittar därför på det vatten som träffar väggen under en kort tid $\\Delta t$ och bestämmer hur stor impuls väggen måste ge just det vattnet.
+
+Varje sekund träffar
+
+$$
+\\frac{150\\ \\mathrm{kg}}{60\\ \\mathrm{s}} = 2{,}5\\ \\mathrm{kg/s}
+$$
+
+väggen. Under tiden $\\Delta t$ träffar alltså massan $\\Delta m = 2{,}5 \\cdot \\Delta t$ väggen.
+
+**a)** Vattnet bromsas från 18 m/s till stillastående (vinkelrätt mot väggen). Enligt impulslagen är väggens impuls på vattnet lika med ändringen av vattnets rörelsemängd:
+
+$$
+F \\cdot \\Delta t = \\Delta m \\cdot \\Delta v \\quad\\Leftrightarrow\\quad F = \\frac{\\Delta m}{\\Delta t} \\cdot \\Delta v
+$$
+
+$$
+F = 2{,}5 \\cdot 18 = 45\\ \\mathrm{N}
+$$
+
+Det är kraften från väggen på vattnet. Enligt Newtons tredje lag verkar en lika stor kraft från vattnet på väggen. Tiden $\\Delta t$ tog ut sig själv, så svaret beror inte på hur lång tid vi tittade på. Kraften motsvarar tyngden av knappt 5 kg, vilket är rimligt för en kraftig stråle.
+
+**Svar:** 45 N
+
+**b)** Om vattnet studsar tillbaka med 18 m/s måste det först bromsas till stillastående och sedan få 18 m/s åt andra hållet. Hastighetsändringen blir
+
+$$
+\\Delta v = 18 - (-18) = 36\\ \\mathrm{m/s}
+$$
+
+$$
+F = 2{,}5 \\cdot 36 = 90\\ \\mathrm{N}
+$$
+
+Kraften fördubblas, eftersom ändringen av rörelsemängden fördubblas medan vattenmängden per sekund är densamma.
+
+**Svar:** 90 N`,
+        },
+        {
+            level: 3,
+            question: `En gymnast med massan 50 kg hoppar ned från en bom och faller fritt 1,8 m innan fötterna når golvet.<br>a) Hon landar stelbent och stannar på 0,050 s. Hur stor är den genomsnittliga normalkraften från golvet under inbromsningen?<br>b) Visa att den genomsnittliga normalkraften är $\\dfrac{v}{g \\cdot \\Delta t} + 1$ gånger så stor som tyngdkraften, där $v$ är farten när fötterna når golvet och $\\Delta t$ är inbromsningstiden.<br>c) Tränaren vill att normalkraften i genomsnitt ska vara högst tre gånger så stor som tyngdkraften. Hur lång måste inbromsningstiden då minst vara när hon hoppar ned från samma höjd? Spelar hennes massa någon roll?`,
+            answer: { value: 0.30, unit: 's', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 6400, unit: 'N', tol: 0.03, etikett: '$F_N =$' },
+                { del: 'b' },
+                { del: 'c', value: 0.30, unit: 's', tol: 0.04, etikett: '$\\Delta t =$' },
+            ],
+            solution: `Först behövs farten när fötterna når golvet. Lägesenergin blir rörelseenergi under fallet (luftmotståndet försummas):
+
+$$
+m \\cdot g \\cdot h = \\frac{m \\cdot v^{2}}{2} \\quad\\Leftrightarrow\\quad v = \\sqrt{2 g h}
+$$
+
+$$
+v = \\sqrt{2 \\cdot 9{,}82 \\cdot 1{,}8} = \\sqrt{35{,}352} = 5{,}946\\ \\mathrm{m/s}
+$$
+
+Under inbromsningen verkar två krafter på gymnasten: normalkraften $F_N$ uppåt och tyngdkraften $F_G = m \\cdot g$ nedåt. Det är den **resulterande** kraften $F_R = F_N - m \\cdot g$ som ändrar rörelsemängden från $m \\cdot v$ till noll. Med beloppen gäller impulslagen
+
+$$
+F_R \\cdot \\Delta t = m \\cdot v \\quad\\Leftrightarrow\\quad F_R = \\frac{m \\cdot v}{\\Delta t}
+$$
+
+Normalkraften måste dessutom bära tyngden:
+
+$$
+F_N = F_R + m \\cdot g
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m \\cdot v = 50 \\cdot 5{,}946 = 297{,}3\\ \\mathrm{kg \\cdot m/s} \\\\
+m \\cdot g = 50 \\cdot 9{,}82 = 491\\ \\mathrm{N}
+\\end{array} \\right]
+$$
+
+**a)** $\\Delta t = 0{,}050\\ \\mathrm{s}$:
+
+$$
+F_R = \\frac{297{,}3}{0{,}050} = 5\\,946\\ \\mathrm{N}
+$$
+
+$$
+F_N = 5\\,946 + 491 = 6\\,437\\ \\mathrm{N} \\approx 6{,}4\\ \\mathrm{kN}
+$$
+
+Normalkraften är ungefär 13 gånger så stor som tyngdkraften.
+
+**Svar:** Cirka 6,4 kN
+
+**b)** Utgå från uttrycken ovan och dividera normalkraften med tyngdkraften:
+
+$$
+F_N = \\frac{m \\cdot v}{\\Delta t} + m \\cdot g
+$$
+
+$$
+\\frac{F_N}{m \\cdot g} = \\frac{m \\cdot v}{\\Delta t \\cdot m \\cdot g} + \\frac{m \\cdot g}{m \\cdot g} = \\frac{v}{g \\cdot \\Delta t} + 1
+$$
+
+Massan tar ut sig själv, så förhållandet gäller för alla som landar med samma fart och samma inbromsningstid. Kontroll med a): $\\dfrac{5{,}946}{9{,}82 \\cdot 0{,}050} + 1 = 13{,}1$, och $13{,}1 \\cdot 491\\ \\mathrm{N} = 6{,}4\\ \\mathrm{kN}$.
+
+**c)** Kravet är att kvoten från b) högst får vara 3:
+
+$$
+\\frac{v}{g \\cdot \\Delta t} + 1 \\leq 3
+$$
+
+$$
+\\frac{v}{g \\cdot \\Delta t} + 1 \\mathbin{\\boldsymbol{-}} \\boldsymbol{1} \\leq 3 \\mathbin{\\boldsymbol{-}} \\boldsymbol{1}
+$$
+
+$$
+\\frac{v}{g \\cdot \\Delta t} \\leq 2
+$$
+
+Både $\\Delta t$ och $g$ är positiva, så vi kan multiplicera med $\\Delta t$ och dividera med $2g$ utan att olikheten vänds:
+
+$$
+\\Delta t \\geq \\frac{v}{2g}
+$$
+
+Farten $v = 5{,}946\\ \\mathrm{m/s}$ från början av lösningen ger
+
+$$
+\\Delta t \\geq \\frac{5{,}946}{2 \\cdot 9{,}82} = \\frac{5{,}946}{19{,}64} = 0{,}3027\\ \\mathrm{s} \\approx 0{,}30\\ \\mathrm{s}
+$$
+
+Massan finns inte med i uttrycket, så svaret gäller för alla som hoppar ned från 1,8 m. Inbromsningen måste vara sex gånger så lång som den stelbenta landningen i a), vilket är rimligt för en landning där knäna böjs djupt.
+
+**Svar:** Minst 0,30 s. Massan spelar ingen roll, eftersom den tar ut sig själv i kvoten.`,
+        },
+        {
+            level: 3,
+            question: `Vid en volleybollmottagning kommer bollen, med massan 0,27 kg, rakt emot spelarens händer med farten 8,0 m/s och slås rakt tillbaka. En kraftgivare i händerna mäter kraften på bollen under slaget, och resultatet visas i diagrammet.
+
+${makeDiagram({
+    xMax: 11, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+    yMax: 1000, yTicks: [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+    xLabel: '<tspan font-style="italic">t</tspan> (ms)',
+    yLabel: '<tspan font-style="italic">F</tspan> (N)',
+    paths: [{ points: Array.from({ length: 101 }, (_, i) => [i / 10, 900 * Math.sin(Math.PI * i / 100)]) }],
+})}
+
+a)&nbsp;Uppskatta hur stor impuls händerna ger bollen.<br>b)&nbsp;Med vilken fart lämnar bollen händerna?<br>c)&nbsp;Hur stor är medelkraften på bollen under slaget? Förklara varför den är mindre än den största kraften i diagrammet.`,
+            answer: { value: 13, unit: 'm/s', tol: 0.08 },
+            delsvar: [
+                { del: 'a', value: 5.8, unit: 'Ns', tol: 0.06, etikett: '$I \\approx$' },
+                { del: 'b', value: 13, unit: 'm/s', tol: 0.08, etikett: '$v =$' },
+                { del: 'c', value: 580, unit: 'N', tol: 0.06, etikett: '$F =$' },
+            ],
+            solution: `**a)** Impulsen är arean under grafen. Grafen är krökt, så vi delar upp arean i tio smala staplar, en för varje millisekund, och läser av kraften mitt i varje stapel. Grafen är symmetrisk kring $t = 5\\ \\mathrm{ms}$, så det räcker att läsa av de fem första:
+
+| Intervall (ms) | 0–1 | 1–2 | 2–3 | 3–4 | 4–5 |
+|---|---|---|---|---|---|
+| Kraft mitt i intervallet (N) | 140 | 410 | 640 | 800 | 890 |
+
+Varje stapel är 1 ms bred, så dess area är kraften gånger 0,001 s. Summan för hela slaget blir
+
+$$
+I \\approx 2 \\cdot (140 + 410 + 640 + 800 + 890) \\cdot 0{,}001 = 2 \\cdot 2\\,880 \\cdot 0{,}001 = 5{,}76\\ \\mathrm{Ns}
+$$
+
+Man kan också räkna rutor: varje ruta i diagrammet motsvarar $100\\ \\mathrm{N} \\cdot 0{,}001\\ \\mathrm{s} = 0{,}1\\ \\mathrm{Ns}$, och under grafen ryms ungefär 57 till 58 rutor.
+
+**Svar:** Cirka 5,8 Ns
+
+**b)** Vi väljer positiv riktning i den riktning bollen slås tillbaka. Då är $v_1 = -8{,}0\\ \\mathrm{m/s}$, och impulsen är positiv. Impulslagen:
+
+$$
+I = m v_2 - m v_1 \\quad\\Leftrightarrow\\quad v_2 = \\frac{I}{m} + v_1
+$$
+
+$$
+v_2 = \\frac{5{,}76}{0{,}27} + (-8{,}0) = 21{,}33 - 8{,}0 = 13{,}3\\ \\mathrm{m/s} \\approx 13\\ \\mathrm{m/s}
+$$
+
+En stor del av impulsen går åt till att bara stoppa bollen. Hade bollen legat still hade den fått farten 21 m/s.
+
+**Svar:** Cirka 13 m/s
+
+**c)** Medelkraften är den konstanta kraft som under samma tid, $\\Delta t = 10\\ \\mathrm{ms} = 0{,}010\\ \\mathrm{s}$, ger samma impuls:
+
+$$
+F = \\frac{I}{\\Delta t} = \\frac{5{,}76}{0{,}010} = 576\\ \\mathrm{N} \\approx 580\\ \\mathrm{N}
+$$
+
+Kraften är bara nära 900 N en kort stund mitt i slaget. I början och slutet, när händerna precis nuddar bollen, är den mycket mindre. Medelkraften gånger tiden ska ge samma area som den krökta grafen, och då måste den ligga en bra bit under toppvärdet.
+
+**Svar:** Cirka 580 N`,
+        },
+        {
+            level: 3,
+            question: `a) Visa att ett föremåls rörelseenergi kan skrivas $E_k = \\dfrac{p^{2}}{2m}$, där $p$ är rörelsemängden och $m$ massan.<br>b) En lastbil med massan 12 000 kg och en personbil med massan 1 500 kg har lika stor rörelsemängd. Båda bromsar på vågrät väg med samma konstanta bromskraft tills de står still. Vilket fordon stannar på kortast tid, och hur många gånger längre är personbilens bromssträcka än lastbilens? Motivera.`,
+            answer: { value: 8, unit: 'gånger', tol: 0.02 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 8, unit: 'gånger', tol: 0.02, etikett: '$\\dfrac{s_\\text{personbil}}{s_\\text{lastbil}} =$' },
+            ],
+            solution: `**a)** Utgå från definitionen av rörelsemängd och lös ut farten:
+
+$$
+p = m \\cdot v \\quad\\Leftrightarrow\\quad v = \\frac{p}{m}
+$$
+
+Sätt in farten i formeln för rörelseenergi:
+
+$$
+E_k = \\frac{m \\cdot v^{2}}{2} = \\frac{m}{2} \\cdot \\left(\\frac{p}{m}\\right)^{2} = \\frac{m \\cdot p^{2}}{2 m^{2}} = \\frac{p^{2}}{2m}
+$$
+
+**b)** *Tiden.* Bromskraftens impuls tar bort fordonets rörelsemängd:
+
+$$
+F \\cdot \\Delta t = p \\quad\\Leftrightarrow\\quad \\Delta t = \\frac{p}{F}
+$$
+
+Båda fordonen har samma $p$ och samma $F$, så de stannar på **lika lång tid**. Inget av dem stannar fortare.
+
+*Sträckan.* Bromskraftens arbete tar bort fordonets rörelseenergi. Med uttrycket från a):
+
+$$
+F \\cdot s = \\frac{p^{2}}{2m} \\quad\\Leftrightarrow\\quad s = \\frac{p^{2}}{2m \\cdot F}
+$$
+
+Med samma $p$ och $F$ är bromssträckan omvänt proportionell mot massan. Kvoten blir
+
+$$
+\\frac{s_\\text{personbil}}{s_\\text{lastbil}} = \\frac{p^{2} / (2 m_\\text{personbil} F)}{p^{2} / (2 m_\\text{lastbil} F)} = \\frac{m_\\text{lastbil}}{m_\\text{personbil}} = \\frac{12\\,000}{1\\,500} = 8
+$$
+
+Förklaringen är att personbilen måste köra åtta gånger så fort för att ha samma rörelsemängd som lastbilen. Under samma bromstid hinner den därför åtta gånger så långt.
+
+**Svar:** De stannar på lika lång tid, och personbilens bromssträcka är 8 gånger så lång som lastbilens.`,
+        },
+        {
+            level: 3,
+            question: `En modellraket med massan 80 g skjuts upp lodrätt från en ramp. Diagrammet visar motorns kraft på raketen under bränntiden. Räkna med att raketens massa är konstant och bortse från luftmotståndet.
+
+${makeDiagram({
+    xMax: 1.2, xTicks: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2],
+    yMax: 14, yTicks: [0, 2, 4, 6, 8, 10, 12, 14],
+    xLabel: '<tspan font-style="italic">t</tspan> (s)',
+    yLabel: '<tspan font-style="italic">F</tspan> (N)',
+    paths: [{ points: [[0, 0], [0.2, 12], [0.4, 4], [1.0, 4], [1.0, 0]] }],
+})}
+
+a)&nbsp;Hur stor impuls ger motorn raketen?<br>b)&nbsp;Vilken fart har raketen när motorn slocknar?<br>c)&nbsp;I verkligheten förbränns bränslet under färden, så raketen blir lättare, och luften bromsar den. Hur påverkar var och en av dessa förenklingar svaret i b)?`,
+            answer: { value: 55, unit: 'm/s', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 5.2, unit: 'Ns', tol: 0.03, etikett: '$I =$' },
+                { del: 'b', value: 55, unit: 'm/s', tol: 0.03, etikett: '$v =$' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Motorns impuls är arean under grafen. Vi delar arean i en triangel, ett parallelltrapets och en rektangel:
+
+$$
+I_\\text{motor} = \\frac{0{,}2 \\cdot 12}{2} + \\frac{12 + 4}{2} \\cdot 0{,}2 + 4 \\cdot 0{,}6 = 1{,}2 + 1{,}6 + 2{,}4 = 5{,}2\\ \\mathrm{Ns}
+$$
+
+**Svar:** 5,2 Ns
+
+**b)** Motorns impuls är inte hela impulsen på raketen. Under bränntiden verkar också tyngdkraften nedåt, och det är den resulterande kraftens impuls som ändrar rörelsemängden. Vi väljer positiv riktning uppåt.
+
+Tyngdkraftens impuls under bränntiden $\\Delta t = 1{,}0\\ \\mathrm{s}$:
+
+$$
+\\left[ \\begin{array}{l}
+m = 80\\ \\mathrm{g} = 0{,}080\\ \\mathrm{kg} \\\\
+I_G = -m \\cdot g \\cdot \\Delta t = -0{,}080 \\cdot 9{,}82 \\cdot 1{,}0 = -0{,}7856\\ \\mathrm{Ns}
+\\end{array} \\right]
+$$
+
+(De allra första millisekunderna är motorkraften mindre än tyngden, $0{,}080 \\cdot 9{,}82 = 0{,}79\\ \\mathrm{N}$, och raketen vilar på rampen. Den tiden är så kort att den inte påverkar svaret.)
+
+Raketen startar från vila. Impulslagen:
+
+$$
+I_\\text{motor} + I_G = m v_2 - 0 \\quad\\Leftrightarrow\\quad v_2 = \\frac{I_\\text{motor} + I_G}{m}
+$$
+
+$$
+v_2 = \\frac{5{,}2 - 0{,}7856}{0{,}080} = \\frac{4{,}414}{0{,}080} = 55{,}2\\ \\mathrm{m/s} \\approx 55\\ \\mathrm{m/s}
+$$
+
+Glömmer man tyngdkraften blir svaret $\\dfrac{5{,}2}{0{,}080} = 65\\ \\mathrm{m/s}$, alltså nästan 20 % för högt.
+
+**Svar:** Cirka 55 m/s
+
+**c)** *Bränslet:* när raketen blir lättare ger samma impuls en större hastighetsändring, och tyngdkraftens impuls blir mindre. Den verkliga farten blir därför högre än 55 m/s.
+
+*Luftmotståndet:* det är en kraft riktad nedåt medan raketen stiger, och dess impuls minskar rörelsemängden. Den verkliga farten blir därför lägre.
+
+De två förenklingarna drar alltså svaret åt olika håll, så 55 m/s är en uppskattning och varken en övre eller en undre gräns.`,
+        },
+        {
+            level: 3,
+            question: `En personbil med massan 1 200 kg och en lastbil med massan 9 600 kg kolliderar frontalt. Under krocken minskar lastbilens fart med 2,5 m/s.<br>a) En kamrat påstår att lastbilen ger personbilen en större kraft och en större impuls än personbilen ger lastbilen, eftersom lastbilen är tyngre. Stämmer påståendet? Styrk ditt svar med fysikaliska resonemang.<br>b) Hur mycket ändras personbilens fart under krocken?<br>c) Krocken varar 0,10 s. Hur stor medelacceleration får föraren i personbilen om hon följer med bilen? Jämför med lastbilsföraren.`,
+            answer: { value: 200, unit: 'm/s²', tol: 0.02 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 20, unit: 'm/s', tol: 0.02, etikett: '$\\Delta v =$' },
+                { del: 'c', value: 200, unit: 'm/s²', tol: 0.02, etikett: '$a =$' },
+            ],
+            solution: `**a)** Enligt Newtons tredje lag är kraften från lastbilen på personbilen lika stor som kraften från personbilen på lastbilen, men motriktad. Krafterna verkar dessutom exakt lika länge, eftersom de bara finns så länge fordonen har kontakt med varandra. Impulsen är kraft gånger tid, $I = F \\cdot \\Delta t$, så även impulserna är lika stora och motriktade.
+
+Det som skiljer fordonen åt är inte kraften utan vad kraften gör: samma impuls ger den lätta bilen en mycket större hastighetsändring, vilket b) visar.
+
+**Svar:** Nej. Krafterna är lika stora och motriktade, och därför är även impulserna lika stora och motriktade.
+
+**b)** Impulsen på lastbilen bestäms med impulslagen (beloppet):
+
+$$
+I = m_\\text{lastbil} \\cdot \\Delta v_\\text{lastbil} = 9\\,600 \\cdot 2{,}5 = 24\\,000\\ \\mathrm{Ns}
+$$
+
+Personbilen får en lika stor impuls, och impulslagen för personbilen ger
+
+$$
+I = m_\\text{personbil} \\cdot \\Delta v_\\text{personbil} \\quad\\Leftrightarrow\\quad \\Delta v_\\text{personbil} = \\frac{I}{m_\\text{personbil}}
+$$
+
+$$
+\\Delta v_\\text{personbil} = \\frac{24\\,000}{1\\,200} = 20\\ \\mathrm{m/s}
+$$
+
+Personbilen har en åttondel av lastbilens massa och får därför åtta gånger så stor hastighetsändring av samma impuls.
+
+**Svar:** 20 m/s
+
+**c)** Medelaccelerationen är hastighetsändringen delad med tiden:
+
+$$
+a_\\text{personbil} = \\frac{\\Delta v}{\\Delta t} = \\frac{20}{0{,}10} = 200\\ \\mathrm{m/s^{2}}
+$$
+
+$$
+a_\\text{lastbil} = \\frac{2{,}5}{0{,}10} = 25\\ \\mathrm{m/s^{2}}
+$$
+
+Personbilsföraren får en acceleration som är ungefär 20 gånger tyngdfaktorn ($\\dfrac{200}{9{,}82} \\approx 20$), medan lastbilsföraren får ungefär 2,5 gånger tyngdfaktorn. Krafterna mellan fordonen är lika stora, men det är accelerationen som avgör hur hårt föraren skadas, och den är åtta gånger större i den lätta bilen.
+
+**Svar:** 200 m/s², åtta gånger större än lastbilsförarens 25 m/s²`,
         },
     ],
 
@@ -24371,7 +27800,7 @@ $$
             level: 1,
             question: `Två godsvagnar kolliderar och **hakar ihop**. Vagn A (12 000 kg) rör sig med 4,0 m/s åt höger, vagn B (8 000 kg) står still. Vilken gemensam hastighet får de efter krocken?`,
             answer: { value: 2.4, unit: 'm/s', tol: 0.02 },
-            solution: `Inelastisk stöt — rörelsemängden bevaras, vagnarna har gemensam slutfart:
+            solution: `Inelastisk stöt. Rörelsemängden bevaras, och vagnarna har gemensam slutfart:
 
 $$
 m_A v_{A0} + m_B v_{B0} = (m_A + m_B) v
@@ -24477,11 +27906,11 @@ $$
 I = m (v_2 - v_1) = 0{,}30 \\cdot (-6{,}0 - 8{,}0) = 0{,}30 \\cdot (-14) = -4{,}2\\ \\mathrm{Ns}
 $$
 
-Impulsens *storlek* är 4,2 Ns (riktad åt vänster — vägg pushar bollen bakåt).
+Impulsens *storlek* är 4,2 Ns (riktad åt vänster: väggen trycker bollen bakåt).
 
 **Svar:** 4,2 Ns.
 
-**Generell slutsats:** Notera att $|\\Delta v| = 14$ m/s — inte 2 m/s. Vid en studs vänder hastigheten *helt*, så hastighetsändringen är summan av in- och utfartens belopp. Detta är varför studande bollar känns hårdare än bollar som bara bromsar in.`,
+**Generell slutsats:** Notera att $|\\Delta v| = 14$ m/s, inte 2 m/s. Vid en studs vänder hastigheten *helt*, så hastighetsändringen är summan av in- och utfartens belopp. Detta är varför studande bollar känns hårdare än bollar som bara bromsar in.`,
         },
         {
             level: 3,
@@ -24491,7 +27920,7 @@ Hur högt (vertikalt) svänger blocket + kula upp innan det stannar? Räkna med 
             answer: { value: 3.10, unit: 'm', tol: 0.05 },
             solution: `Tvådelat problem: **(I)** rörelsemängdens bevarande vid krocken, **(II)** energiprincipen för svingen uppåt.
 
-**Steg I — gemensam fart direkt efter krocken.** Inelastisk stöt:
+**Steg I: gemensam fart direkt efter krocken.** Inelastisk stöt:
 
 $$
 m_k v_k = (m_k + m_b) v_g \\quad\\Leftrightarrow\\quad v_g = \\frac{m_k v_k}{m_k + m_b}
@@ -24501,7 +27930,7 @@ $$
 v_g = \\frac{0{,}050 \\cdot 320}{0{,}050 + 2{,}0} = \\frac{16}{2{,}050} \\approx 7{,}80\\ \\mathrm{m/s}
 $$
 
-**Steg II — hur högt svänger blocket + kula?** Energi­principen: rörelseenergin direkt efter krocken omvandlas helt till lägesenergi i toppen.
+**Steg II: hur högt svänger blocket + kula?** Energi­principen: rörelseenergin direkt efter krocken omvandlas helt till lägesenergi i toppen.
 
 $$
 \\frac{(m_k + m_b) v_g^{2}}{2} = (m_k + m_b) g h \\quad\\Leftrightarrow\\quad h = \\frac{v_g^{2}}{2 g}
@@ -24515,13 +27944,727 @@ $$
 
 **Svar:** Blocket och kulan svänger upp cirka 3,1 m vertikalt.
 
-**Generell slutsats:** Detta är en **ballistisk pendel** — historisk metod att mäta projektilers fart. Genom att mäta upphöjningen $h$ kan man räkna baklänges:
+**Generell slutsats:** Detta är en **ballistisk pendel**, en historisk metod att mäta projektilers fart. Genom att mäta upphöjningen $h$ kan man räkna baklänges:
 
 $$
 v_k = \\frac{m_k + m_b}{m_k} \\sqrt{2 g h}
 $$
 
-Notera att **rörelseenergin INTE bevaras** i krocken — bara en bråkdel av kulans ursprungliga $E_k$ blir den gemensamma rörelseenergin (resten blir värme i träet och deformation). Det är därför vi behöver *två separata* fysikaliska principer för uppgiften — rörelsemängd vid krocken, energi vid svingen.`,
+Notera att **rörelseenergin INTE bevaras** i krocken. Bara en bråkdel av kulans ursprungliga $E_k$ blir den gemensamma rörelseenergin (resten blir värme i träet och deformation). Det är därför vi behöver *två separata* fysikaliska principer för uppgiften: rörelsemängd vid krocken, energi vid svingen.`,
+        },
+        {
+            level: 1,
+            question: `En mamma med massan 60 kg och hennes son med massan 30 kg står stilla på skridskor på blank is. De knuffar iväg varandra så att de glider åt var sitt håll. Vilket påstående om deras farter direkt efter knuffen stämmer? Bortse från friktionen mot isen.`,
+            choices: ['De får lika hög fart', 'Mamman får dubbelt så hög fart som sonen', 'Sonen får dubbelt så hög fart som mamman', 'Sonen får fyra gånger så hög fart som mamman'],
+            correct: 2,
+            solution: `Före knuffen står båda stilla, så den totala rörelsemängden är 0. Rörelsemängden bevaras, så den är 0 även efter knuffen. Vi väljer positiv riktning åt sonens håll:
+
+$$
+m_A \\cdot v_{A0} + m_B \\cdot v_{B0} = m_A \\cdot v_A + m_B \\cdot v_B
+$$
+
+Med mamman som A och sonen som B blir vänsterledet 0:
+
+$$
+0 = 60 \\cdot v_A + 30 \\cdot v_B \\quad\\Leftrightarrow\\quad v_B = -\\frac{60}{30} \\cdot v_A = -2 \\cdot v_A
+$$
+
+Minustecknet visar att de rör sig åt motsatta håll. Sonen har hälften så stor massa och får därför dubbelt så hög fart, så att rörelsemängderna blir lika stora och motriktade.
+
+**Svar:** Sonen får dubbelt så hög fart som mamman.`,
+        },
+        {
+            level: 1,
+            question: `Två vagnar rullar åt samma håll på en vågrät bana, som i figuren. Vagn A kommer ikapp vagn B. Vagnarna har kardborreband på de sidor som möts, så när de krockar fastnar de i varandra. Vilken hastighet har vagnarna tillsammans direkt efter krocken? Bortse från friktionen. Ange svaret i m/s.
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 20 520 132" width="664" height="169" role="img" aria-label="Två vagnar på en bana rullar åt höger. Vagn A till vänster har massan 0,50 kg och rör sig med 0,90 m/s. Vagn B till höger har massan 0,25 kg och rör sig med 0,30 m/s. Vagnarna har kardborreband på de sidor som vetter mot varandra." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><defs><linearGradient id="vgA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d8743f"/><stop offset="1" stop-color="#ad4f22"/></linearGradient><linearGradient id="vgB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6a9e5c"/><stop offset="1" stop-color="#447a3a"/></linearGradient><linearGradient id="bana" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d3d9de"/><stop offset="1" stop-color="#a9b2ba"/></linearGradient></defs><rect x="14" y="111" width="492" height="9" rx="2" fill="url(#bana)" stroke="#8a949d" stroke-width="0.8"/><rect x="14" y="120" width="492" height="4" fill="#8a949d"/><line x1="40" y1="112" x2="40" y2="116" stroke="#7d8790" stroke-width="0.8"/><line x1="80" y1="112" x2="80" y2="116" stroke="#7d8790" stroke-width="0.8"/><line x1="120" y1="112" x2="120" y2="116" stroke="#7d8790" stroke-width="0.8"/><line x1="160" y1="112" x2="160" y2="116" stroke="#7d8790" stroke-width="0.8"/><line x1="200" y1="112" x2="200" y2="116" stroke="#7d8790" stroke-width="0.8"/><line x1="240" y1="112" x2="240" y2="116" stroke="#7d8790" stroke-width="0.8"/><line x1="280" y1="112" x2="280" y2="116" stroke="#7d8790" stroke-width="0.8"/><line x1="320" y1="112" x2="320" y2="116" stroke="#7d8790" stroke-width="0.8"/><line x1="360" y1="112" x2="360" y2="116" stroke="#7d8790" stroke-width="0.8"/><line x1="400" y1="112" x2="400" y2="116" stroke="#7d8790" stroke-width="0.8"/><line x1="440" y1="112" x2="440" y2="116" stroke="#7d8790" stroke-width="0.8"/><line x1="480" y1="112" x2="480" y2="116" stroke="#7d8790" stroke-width="0.8"/><rect x="10" y="88" width="8" height="32" rx="2" fill="#5b636b"/><rect x="502" y="88" width="8" height="32" rx="2" fill="#5b636b"/><rect x="40" y="66" width="100" height="32" rx="4" fill="url(#vgA)" stroke="#8a3c18" stroke-width="1.2"/><rect x="46" y="61" width="88" height="5" rx="1.5" fill="#9aa4ad" stroke="#6f7881" stroke-width="0.8"/><line x1="46" y1="75" x2="134" y2="75" stroke="rgba(255,255,255,0.35)" stroke-width="1.4"/><rect x="140" y="72" width="5" height="20" rx="1" fill="#2c3238"/><line x1="140" y1="75" x2="145" y2="75" stroke="#5b636b" stroke-width="0.8"/><line x1="140" y1="78" x2="145" y2="78" stroke="#5b636b" stroke-width="0.8"/><line x1="140" y1="81" x2="145" y2="81" stroke="#5b636b" stroke-width="0.8"/><line x1="140" y1="84" x2="145" y2="84" stroke="#5b636b" stroke-width="0.8"/><line x1="140" y1="87" x2="145" y2="87" stroke="#5b636b" stroke-width="0.8"/><line x1="140" y1="90" x2="145" y2="90" stroke="#5b636b" stroke-width="0.8"/><circle cx="54" cy="104" r="7" fill="#2a2e35"/><circle cx="54" cy="104" r="2.6" fill="#b9c1c8"/><circle cx="126" cy="104" r="7" fill="#2a2e35"/><circle cx="126" cy="104" r="2.6" fill="#b9c1c8"/><rect x="320" y="66" width="66" height="32" rx="-56" fill="url(#vgB)" stroke="#335e2b" stroke-width="1.2"/><rect x="326" y="61" width="54" height="5" rx="-58.5" fill="#9aa4ad" stroke="#6f7881" stroke-width="0.8"/><line x1="326" y1="75" x2="380" y2="75" stroke="rgba(255,255,255,0.35)" stroke-width="1.4"/><rect x="315" y="72" width="5" height="20" rx="-59" fill="#2c3238"/><line x1="315" y1="75" x2="320" y2="75" stroke="#5b636b" stroke-width="0.8"/><line x1="315" y1="78" x2="320" y2="78" stroke="#5b636b" stroke-width="0.8"/><line x1="315" y1="81" x2="320" y2="81" stroke="#5b636b" stroke-width="0.8"/><line x1="315" y1="84" x2="320" y2="84" stroke="#5b636b" stroke-width="0.8"/><line x1="315" y1="87" x2="320" y2="87" stroke="#5b636b" stroke-width="0.8"/><line x1="315" y1="90" x2="320" y2="90" stroke="#5b636b" stroke-width="0.8"/><circle cx="334" cy="104" r="7" fill="#2a2e35"/><circle cx="334" cy="104" r="2.6" fill="#b9c1c8"/><circle cx="372" cy="104" r="7" fill="#2a2e35"/><circle cx="372" cy="104" r="2.6" fill="#b9c1c8"/><line x1="145" y1="81" x2="195" y2="81" stroke="#1f5fa8" stroke-width="2.6" stroke-linecap="butt"/><polygon points="195,76.3 205,81 195,85.7" fill="#1f5fa8"/><line x1="386" y1="81" x2="416" y2="81" stroke="#1f5fa8" stroke-width="2.6" stroke-linecap="butt"/><polygon points="416,76.3 426,81 416,85.7" fill="#1f5fa8"/><text x="145" y="56" font-size="13" fill="#1f5fa8"><tspan font-style="italic">v</tspan><tspan font-size="10" dy="3">A</tspan> = 0,90 m/s</text><text x="386" y="56" font-size="13" fill="#1f5fa8"><tspan font-style="italic">v</tspan><tspan font-size="10" dy="3">B</tspan> = 0,30 m/s</text><text x="90" y="142" font-size="13" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">m</tspan><tspan font-size="10" dy="3">A</tspan> = 0,50 kg</text><text x="353" y="142" font-size="13" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">m</tspan><tspan font-size="10" dy="3">B</tspan> = 0,25 kg</text><text x="90" y="38" font-size="13" fill="#0f1620" text-anchor="middle">Vagn A</text><text x="353" y="38" font-size="13" fill="#0f1620" text-anchor="middle">Vagn B</text></svg>`,
+            answer: { value: 0.70, unit: 'm/s', tol: 0.03 },
+            solution: `Vagnarna fastnar i varandra, så stöten är fullkomligt inelastisk och de får en gemensam hastighet $v$. Vi väljer positiv riktning åt höger. Båda vagnarna rör sig åt höger, så båda hastigheterna är positiva.
+
+$$
+m_A \\cdot v_A + m_B \\cdot v_B = (m_A + m_B) \\cdot v
+\\quad\\Leftrightarrow\\quad
+v = \\frac{m_A \\cdot v_A + m_B \\cdot v_B}{m_A + m_B}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m_A = 0{,}50\\ \\mathrm{kg} \\\\
+v_A = 0{,}90\\ \\mathrm{m/s} \\\\
+m_B = 0{,}25\\ \\mathrm{kg} \\\\
+v_B = 0{,}30\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$
+v = \\frac{0{,}50 \\cdot 0{,}90 + 0{,}25 \\cdot 0{,}30}{0{,}50 + 0{,}25} = \\frac{0{,}45 + 0{,}075}{0{,}75} = \\frac{0{,}525}{0{,}75} = 0{,}70\\ \\mathrm{m/s}
+$$
+
+Den gemensamma farten hamnar mellan vagnarnas farter före krocken, 0,30 m/s och 0,90 m/s, och närmare A:s fart eftersom A är tyngst. Det är rimligt.
+
+**Svar:** 0,70 m/s åt höger`,
+        },
+        {
+            level: 1,
+            question: `En målvakt i handboll med massan 70 kg står stilla på ett golv med hala sulor. Hon fångar en medicinboll med massan 4,0 kg som kastas vågrätt mot henne med farten 6,0 m/s. Med vilken fart glider hon bakåt direkt efter att hon fångat bollen? Bortse från friktionen mot golvet. Ange svaret i m/s.`,
+            answer: { value: 0.32, unit: 'm/s', tol: 0.03 },
+            solution: `Målvakten håller fast bollen, så de rör sig tillsammans efteråt. Det är en fullkomligt inelastisk stöt. Vi väljer positiv riktning i bollens rörelseriktning, och målvakten är A med $v_A = 0$.
+
+$$
+m_A \\cdot v_A + m_B \\cdot v_B = (m_A + m_B) \\cdot v
+\\quad\\Leftrightarrow\\quad
+v = \\frac{m_A \\cdot v_A + m_B \\cdot v_B}{m_A + m_B}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m_A = 70\\ \\mathrm{kg} \\\\
+v_A = 0 \\\\
+m_B = 4{,}0\\ \\mathrm{kg} \\\\
+v_B = 6{,}0\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$
+v = \\frac{70 \\cdot 0 + 4{,}0 \\cdot 6{,}0}{70 + 4{,}0} = \\frac{24}{74} = 0{,}324\\ldots\\ \\mathrm{m/s} \\approx 0{,}32\\ \\mathrm{m/s}
+$$
+
+Målvakten och bollen är tillsammans drygt 18 gånger tyngre än bollen, så farten blir ungefär en artondel av bollens fart, vilket stämmer.
+
+**Svar:** 0,32 m/s`,
+        },
+        {
+            level: 1,
+            question: `Ett bowlingklot med massan 6,0 kg rullar med farten 4,0 m/s rakt mot en kägla med massan 1,5 kg som står still. Efter stöten fortsätter klotet rakt fram med farten 2,4 m/s, och käglan flyger iväg i samma riktning. Vilken fart får käglan? Bortse från friktionen. Ange svaret i m/s.`,
+            answer: { value: 6.4, unit: 'm/s', tol: 0.02 },
+            solution: `Klotet och käglan studsar isär och får olika hastigheter efteråt. Vi väljer klotets rörelseriktning som positiv, låter klotet vara A och käglan B, och löser ut $v_B$ ur rörelsemängdslagen.
+
+$$
+m_A \\cdot v_{A0} + m_B \\cdot v_{B0} = m_A \\cdot v_A + m_B \\cdot v_B
+\\quad\\Leftrightarrow\\quad
+v_B = \\frac{m_A \\cdot v_{A0} + m_B \\cdot v_{B0} - m_A \\cdot v_A}{m_B}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m_A = 6{,}0\\ \\mathrm{kg} \\\\
+v_{A0} = 4{,}0\\ \\mathrm{m/s} \\\\
+m_B = 1{,}5\\ \\mathrm{kg} \\\\
+v_{B0} = 0 \\\\
+v_A = 2{,}4\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$
+v_B = \\frac{6{,}0 \\cdot 4{,}0 + 1{,}5 \\cdot 0 - 6{,}0 \\cdot 2{,}4}{1{,}5} = \\frac{24 - 14{,}4}{1{,}5} = \\frac{9{,}6}{1{,}5} = 6{,}4\\ \\mathrm{m/s}
+$$
+
+Klotet är fyra gånger tyngre än käglan, så käglan får en högre fart än klotet hade, vilket är rimligt.
+
+**Svar:** 6,4 m/s`,
+        },
+        {
+            level: 2,
+            question: `Två vagnar med magneter som stöter bort varandra rullar på en vågrät bana. Vagn A har massan 0,40 kg och rullar mot vagn B, som står still. Magneterna gör att vagnarna aldrig nuddar varandra, men de påverkar varandra under en kort stund. Diagrammet visar vagnarnas hastigheter, med positiv riktning i A:s rörelseriktning.<br>a) Bestäm massan för vagn B. Ange svaret i kg.<br>b) Hur stor är medelkraften på vagn B under den tid som vagnarna påverkar varandra? Ange svaret i N.
+
+${makeDiagram({
+    xMin: 0, xMax: 3, yMin: 0, yMax: 0.9,
+    xTicks: [0, 0.5, 1, 1.5, 2, 2.5, 3],
+    yTicks: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+    xLabel: '<tspan font-style="italic">t</tspan> (s)',
+    yLabel: '<tspan font-style="italic">v</tspan> (m/s)',
+    paths: [
+        { points: [[0, 0.6], [1, 0.6], [1.5, 0.2], [3, 0.2]], color: '#c8324a' },
+        { points: [[0, 0], [1, 0], [1.5, 0.8], [3, 0.8]], color: '#1f5fa8' },
+    ],
+}).replace('</svg>', '<text x="380" y="191" font-size="14" fill="#c8324a">Vagn A</text><text x="380" y="88" font-size="14" fill="#1f5fa8">Vagn B</text></svg>')}`,
+            answer: { value: 0.20, unit: 'kg', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 0.20, unit: 'kg', tol: 0.03, etikett: '$m_B =$' },
+                { del: 'b', value: 0.32, unit: 'N', tol: 0.03, etikett: '$F =$' },
+            ],
+            solution: `Ur diagrammet läser vi av:
+
+- Före växelverkan: vagn A har $0{,}60\\ \\mathrm{m/s}$ och vagn B står still.
+- Efter växelverkan, från $t = 1{,}5\\ \\mathrm{s}$: vagn A har $0{,}20\\ \\mathrm{m/s}$ och vagn B har $0{,}80\\ \\mathrm{m/s}$.
+- Vagnarna påverkar varandra från $t = 1{,}0\\ \\mathrm{s}$ till $t = 1{,}5\\ \\mathrm{s}$, alltså under $\\Delta t = 0{,}50\\ \\mathrm{s}$.
+
+**a)** Vagnarna studsar isär (via magneterna), så vi använder rörelsemängdslagen med olika sluthastigheter och löser ut $m_B$.
+
+$$
+m_A \\cdot v_{A0} + m_B \\cdot v_{B0} = m_A \\cdot v_A + m_B \\cdot v_B
+$$
+
+Eftersom $v_{B0} = 0$ blir det
+
+$$
+m_A \\cdot v_{A0} = m_A \\cdot v_A + m_B \\cdot v_B
+\\quad\\Leftrightarrow\\quad
+m_B = \\frac{m_A \\cdot (v_{A0} - v_A)}{v_B}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m_A = 0{,}40\\ \\mathrm{kg} \\\\
+v_{A0} = 0{,}60\\ \\mathrm{m/s} \\\\
+v_A = 0{,}20\\ \\mathrm{m/s} \\\\
+v_B = 0{,}80\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$
+m_B = \\frac{0{,}40 \\cdot (0{,}60 - 0{,}20)}{0{,}80} = \\frac{0{,}16}{0{,}80} = 0{,}20\\ \\mathrm{kg}
+$$
+
+**Svar:** 0,20 kg
+
+**b)** Impulsen på vagn B är lika med ändringen av dess rörelsemängd, och impulsen är också medelkraften gånger tiden:
+
+$$
+F \\cdot \\Delta t = m_B \\cdot \\Delta v \\quad\\Leftrightarrow\\quad F = \\frac{m_B \\cdot \\Delta v}{\\Delta t}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m_B = 0{,}20\\ \\mathrm{kg} \\\\
+\\Delta v = (0{,}80 - 0)\\ \\mathrm{m/s} = 0{,}80\\ \\mathrm{m/s} \\\\
+\\Delta t = 0{,}50\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$
+F = \\frac{0{,}20 \\cdot 0{,}80}{0{,}50} = 0{,}32\\ \\mathrm{N}
+$$
+
+Kontroll: vagn A ändrar sin rörelsemängd med $0{,}40 \\cdot (0{,}20 - 0{,}60) = -0{,}16\\ \\mathrm{Ns}$ och vagn B med $0{,}20 \\cdot 0{,}80 = 0{,}16\\ \\mathrm{Ns}$. Impulserna är lika stora och motriktade, som de ska vara.
+
+**Svar:** 0,32 N`,
+        },
+        {
+            level: 2,
+            question: `På en bangård rullar en lastad godsvagn med farten 2,4 m/s mot en tom godsvagn med massan 14 ton, som står still. Vagnarna kopplas ihop vid krocken och rullar sedan vidare tillsammans med farten 1,6 m/s. De två vagnarna är likadana när de är tomma. Hur stor massa har lasten? Bortse från friktionen. Ange svaret i ton.`,
+            answer: { value: 14, unit: 'ton', tol: 0.03 },
+            solution: `Vagnarna kopplas ihop, så stöten är fullkomligt inelastisk. Den lastade vagnen är A med den okända massan $m_A$, och den tomma vagnen är B med $v_B = 0$.
+
+$$
+m_A \\cdot v_A + m_B \\cdot v_B = (m_A + m_B) \\cdot v
+$$
+
+Med $v_B = 0$ ger det
+
+$$
+m_A \\cdot v_A = m_A \\cdot v + m_B \\cdot v
+\\quad\\Leftrightarrow\\quad
+m_A \\cdot (v_A - v) = m_B \\cdot v
+\\quad\\Leftrightarrow\\quad
+m_A = \\frac{m_B \\cdot v}{v_A - v}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m_B = 14\\ \\mathrm{ton} = 14\\,000\\ \\mathrm{kg} \\\\
+v_A = 2{,}4\\ \\mathrm{m/s} \\\\
+v = 1{,}6\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$
+m_A = \\frac{14\\,000 \\cdot 1{,}6}{2{,}4 - 1{,}6} = \\frac{22\\,400}{0{,}8} = 28\\,000\\ \\mathrm{kg}
+$$
+
+Den lastade vagnen väger alltså 28 ton. En tom vagn väger 14 ton, så lasten är
+
+$$
+m_\\text{last} = 28\\ \\mathrm{ton} - 14\\ \\mathrm{ton} = 14\\ \\mathrm{ton}
+$$
+
+Rimlighet: farten sjönk till två tredjedelar av 2,4 m/s, så den lastade vagnen ska utgöra två tredjedelar av den totala massan, alltså dubbelt så mycket som den tomma vagnen. Det stämmer med 28 ton mot 14 ton.
+
+**Svar:** Lasten har massan 14 ton.`,
+        },
+        {
+            level: 2,
+            question: `En astronaut med massan 95 kg, dräkten inräknad, svävar stilla 12 m från rymdstationen. Säkerhetslinan har släppt. Hon kastar en skiftnyckel med massan 2,0 kg rakt bort från stationen med farten 8,0 m/s.<br>a) Med vilken fart rör hon sig mot stationen efter kastet? Ange svaret i m/s.<br>b) Hur lång tid tar det innan hon når stationen? Ange svaret i s.`,
+            answer: { value: 71, unit: 's', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 0.17, unit: 'm/s', tol: 0.04, etikett: '$v =$' },
+                { del: 'b', value: 71, unit: 's', tol: 0.03, etikett: '$t =$' },
+            ],
+            solution: `**a)** Före kastet är både astronauten och skiftnyckeln i vila, så den totala rörelsemängden är 0. Vi väljer positiv riktning mot stationen. Skiftnyckeln (B) kastas bort från stationen och får därför negativ hastighet. Astronauten är A.
+
+$$
+m_A \\cdot v_{A0} + m_B \\cdot v_{B0} = m_A \\cdot v_A + m_B \\cdot v_B
+\\quad\\Leftrightarrow\\quad
+v_A = \\frac{m_A \\cdot v_{A0} + m_B \\cdot v_{B0} - m_B \\cdot v_B}{m_A}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m_A = 95\\ \\mathrm{kg} \\\\
+v_{A0} = 0 \\\\
+m_B = 2{,}0\\ \\mathrm{kg} \\\\
+v_{B0} = 0 \\\\
+v_B = -8{,}0\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$
+v_A = \\frac{95 \\cdot 0 + 2{,}0 \\cdot 0 - 2{,}0 \\cdot (-8{,}0)}{95} = \\frac{16}{95} = 0{,}168\\ldots\\ \\mathrm{m/s} \\approx 0{,}17\\ \\mathrm{m/s}
+$$
+
+**Svar:** 0,17 m/s
+
+**b)** I rymden finns ingen friktion, så astronauten rör sig med konstant fart. Tiden är sträckan delat med farten, och vi använder det oavrundade värdet från a):
+
+$$
+t = \\frac{s}{v} = \\frac{12}{0{,}1684} = 71{,}25\\ \\mathrm{s} \\approx 71\\ \\mathrm{s}
+$$
+
+Drygt en minut är rimligt för en så låg fart som 17 cm per sekund.
+
+**Svar:** Cirka 71 s`,
+        },
+        {
+            level: 2,
+            question: `En öppen vagn rullar utan energiförluster längs en vågrät räls. Det börjar regna, och regnet faller lodrätt ned i vagnen, där vattnet blir kvar. Vad händer med vagnens fart medan den fylls med vatten?`,
+            choices: ['Farten minskar', 'Farten ökar', 'Farten är oförändrad', 'Vagnen stannar efter en stund och står sedan still'],
+            correct: 0,
+            solution: `Regndropparna faller lodrätt och har därför ingen rörelsemängd i vågrät led. Inga vågräta krafter verkar utifrån på systemet vagn och vatten, så den vågräta rörelsemängden bevaras.
+
+Det är som en fullkomligt inelastisk stöt: vagnen (A) "fångar" vattnet (B), som har $v_B = 0$ i vågrät led.
+
+$$
+m_A \\cdot v_A + m_B \\cdot 0 = (m_A + m_B) \\cdot v
+\\quad\\Leftrightarrow\\quad
+v = \\frac{m_A}{m_A + m_B} \\cdot v_A
+$$
+
+Kvoten $\\dfrac{m_A}{m_A + m_B}$ är mindre än 1, så farten minskar hela tiden medan massan växer. Den blir däremot aldrig noll: rörelsemängden $m_A \\cdot v_A$ finns kvar och delas på allt större massa.
+
+**Svar:** Farten minskar.`,
+        },
+        {
+            level: 2,
+            question: `Två radiobilar krockar frontalt och studsar mot varandra. Bil A har tillsammans med föraren massan 210 kg och kör åt höger med farten 1,5 m/s. Bil B har tillsammans med föraren massan 160 kg och kör åt vänster med farten 1,2 m/s. Efter krocken rullar bil A åt vänster med farten 0,30 m/s.<br>a) Bestäm bil B:s hastighet efter krocken. Ange storlek och riktning, med svaret i m/s.<br>b) Beräkna storleken på den impuls som var och en av bilarna utsätts för. Ange svaret i Ns.`,
+            answer: { value: 1.2, unit: 'm/s', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 1.2, unit: 'm/s', tol: 0.04, etikett: '$v_B =$' },
+                { del: 'b', value: 380, unit: 'Ns', tol: 0.03, etikett: '$I =$' },
+            ],
+            solution: `Vi väljer positiv riktning åt höger. Hastigheter åt vänster sätts in med minustecken.
+
+**a)** Bilarna studsar isär, så vi använder rörelsemängdslagen med olika sluthastigheter och löser ut $v_B$.
+
+$$
+m_A \\cdot v_{A0} + m_B \\cdot v_{B0} = m_A \\cdot v_A + m_B \\cdot v_B
+\\quad\\Leftrightarrow\\quad
+v_B = \\frac{m_A \\cdot v_{A0} + m_B \\cdot v_{B0} - m_A \\cdot v_A}{m_B}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m_A = 210\\ \\mathrm{kg} \\\\
+v_{A0} = 1{,}5\\ \\mathrm{m/s} \\\\
+m_B = 160\\ \\mathrm{kg} \\\\
+v_{B0} = -1{,}2\\ \\mathrm{m/s} \\\\
+v_A = -0{,}30\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$
+v_B = \\frac{210 \\cdot 1{,}5 + 160 \\cdot (-1{,}2) - 210 \\cdot (-0{,}30)}{160} = \\frac{315 - 192 + 63}{160} = \\frac{186}{160} = 1{,}1625\\ \\mathrm{m/s} \\approx 1{,}2\\ \\mathrm{m/s}
+$$
+
+Värdet är positivt, så bil B rullar åt höger efter krocken.
+
+**Svar:** 1,2 m/s åt höger
+
+**b)** Impulsen på en bil är lika med ändringen av bilens rörelsemängd:
+
+$$
+I = m \\cdot \\Delta v
+$$
+
+För bil A:
+
+$$
+I_A = 210 \\cdot (-0{,}30 - 1{,}5) = 210 \\cdot (-1{,}8) = -378\\ \\mathrm{Ns}
+$$
+
+För bil B, med det oavrundade värdet från a):
+
+$$
+I_B = 160 \\cdot (1{,}1625 - (-1{,}2)) = 160 \\cdot 2{,}3625 = 378\\ \\mathrm{Ns}
+$$
+
+Impulserna är lika stora och motriktade. Det måste de vara: bilarna påverkar varandra med lika stora och motriktade krafter under samma tid, och det är just därför rörelsemängden bevaras.
+
+**Svar:** Båda bilarna utsätts för en impuls på cirka 380 Ns, åt var sitt håll.`,
+        },
+        {
+            level: 3,
+            question: `En kropp A med massan $m_A$ och farten $v_0$ krockar med en kropp B med massan $m_B$ som står still. Kropparna fastnar i varandra.<br>a) Visa att andelen av rörelseenergin som finns kvar direkt efter krocken är $\\dfrac{m_A}{m_A + m_B}$, oberoende av farten $v_0$.<br>b) En bil med massan 1,2 ton kör in i en stillastående bil med massan 1,8 ton, och bilarna fastnar i varandra. Hur stor andel av rörelseenergin omvandlas vid krocken till andra energiformer? Ange svaret i procent.<br>c) Hur många gånger så stor som $m_A$ måste $m_B$ vara för att bara en fjärdedel av rörelseenergin ska finnas kvar efter krocken?`,
+            answer: { value: 60, unit: '%', tol: 0.02 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 60, unit: '%', tol: 0.02, etikett: 'andel som omvandlas' },
+                { del: 'c', value: 3, unit: 'gånger', tol: 0.02, etikett: '$m_B / m_A =$' },
+            ],
+            solution: `**a)** Kropparna fastnar i varandra, så stöten är fullkomligt inelastisk. Rörelsemängdslagen med $v_B = 0$ ger den gemensamma farten $v$:
+
+$$
+m_A \\cdot v_0 + m_B \\cdot 0 = (m_A + m_B) \\cdot v
+\\quad\\Leftrightarrow\\quad
+v = \\frac{m_A \\cdot v_0}{m_A + m_B}
+$$
+
+Rörelseenergin före och efter krocken:
+
+$$
+E_{k,\\text{före}} = \\frac{m_A \\cdot v_0^{2}}{2}
+$$
+
+$$
+E_{k,\\text{efter}} = \\frac{(m_A + m_B) \\cdot v^{2}}{2} = \\frac{(m_A + m_B)}{2} \\cdot \\frac{m_A^{2} \\cdot v_0^{2}}{(m_A + m_B)^{2}} = \\frac{m_A^{2} \\cdot v_0^{2}}{2 \\cdot (m_A + m_B)}
+$$
+
+Kvoten mellan dem:
+
+$$
+\\frac{E_{k,\\text{efter}}}{E_{k,\\text{före}}} = \\frac{m_A^{2} \\cdot v_0^{2}}{2 \\cdot (m_A + m_B)} \\cdot \\frac{2}{m_A \\cdot v_0^{2}} = \\frac{m_A}{m_A + m_B}
+$$
+
+Farten $v_0$ tar ut sig, så andelen beror bara på massorna. Den är alltid mindre än 1: vid en stöt där kropparna fastnar i varandra går alltid en del av rörelseenergin över till värme och deformation, trots att rörelsemängden bevaras.
+
+**b)** Andelen som finns kvar är
+
+$$
+\\frac{m_A}{m_A + m_B} = \\frac{1{,}2}{1{,}2 + 1{,}8} = \\frac{1{,}2}{3{,}0} = 0{,}40
+$$
+
+Alltså finns 40 % kvar, och $100\\ \\% - 40\\ \\% = 60\\ \\%$ omvandlas till andra energiformer, främst deformation av bilarna och värme.
+
+**Svar:** 60 %
+
+**c)** Vi sätter andelen lika med en fjärdedel och skriver $m_B = n \\cdot m_A$:
+
+$$
+\\frac{m_A}{m_A + n \\cdot m_A} = \\frac{1}{4}
+\\quad\\Leftrightarrow\\quad
+\\frac{1}{1 + n} = \\frac{1}{4}
+\\quad\\Leftrightarrow\\quad
+1 + n = 4
+\\quad\\Leftrightarrow\\quad
+n = 3
+$$
+
+Kontroll: med $m_B = 3 \\cdot m_A$ blir andelen $\\dfrac{1}{1 + 3} = \\dfrac{1}{4}$.
+
+**Svar:** $m_B$ måste vara 3 gånger så stor som $m_A$.`,
+        },
+        {
+            level: 3,
+            question: `En skridskoåkare med massan 70 kg står stilla på blank is framför en vägg. Hon håller en boll med massan 2,0 kg. Hon kastar bollen rakt mot väggen med farten 10 m/s i förhållande till isen. Bollen studsar mot väggen och kommer tillbaka med samma fart, och hon fångar den. Sedan upprepar hon samma sak: kastar mot väggen med 10 m/s, fångar bollen, och så vidare. Bortse från friktionen mot isen och från luftmotståndet.<br>a) Vilken fart har hon direkt efter att hon fångat bollen första gången? Ange svaret i m/s.<br>b) Hur många gånger måste hon fånga bollen för att farten bort från väggen ska bli minst 2,0 m/s?`,
+            answer: { value: 4, unit: 'gånger', tol: 0.01 },
+            delsvar: [
+                { del: 'a', value: 0.56, unit: 'm/s', tol: 0.03, etikett: '$v =$' },
+                { del: 'b', value: 4, unit: 'gånger', tol: 0.01, etikett: 'antal fångster' },
+            ],
+            solution: `Vi väljer positiv riktning mot väggen och kallar skridskoåkaren A och bollen B. Vi kan räkna kast för kast, men det går snabbare att se vad som händer med hela systemet åkare och boll.
+
+**Systemets rörelsemängd.** När hon kastar och fångar bollen påverkar åkaren och bollen bara varandra, så rörelsemängden för systemet ändras inte. Den enda yttre påverkan i vågrät led är väggens. Vid varje studs ändras bollens hastighet från $+10\\ \\mathrm{m/s}$ till $-10\\ \\mathrm{m/s}$, så väggen ger systemet impulsen
+
+$$
+I = m_B \\cdot \\Delta v = 2{,}0 \\cdot (-10 - 10) = -40\\ \\mathrm{Ns}
+$$
+
+Från början är rörelsemängden 0. Efter $n$ studsar är den alltså $-40 \\cdot n\\ \\mathrm{Ns}$. När hon just fångat bollen rör sig åkare och boll med samma hastighet $v_n$:
+
+$$
+(m_A + m_B) \\cdot v_n = -40 \\cdot n
+\\quad\\Leftrightarrow\\quad
+v_n = -\\frac{40 \\cdot n}{m_A + m_B} = -\\frac{40 \\cdot n}{72}
+$$
+
+**a)** Efter första fångsten, $n = 1$:
+
+$$
+v_1 = -\\frac{40 \\cdot 1}{72} = -0{,}555\\ldots\\ \\mathrm{m/s} \\approx -0{,}56\\ \\mathrm{m/s}
+$$
+
+Kontroll kast för kast: efter kastet är $70 \\cdot v_A + 2{,}0 \\cdot 10 = 0$, så $v_A = -\\dfrac{20}{70} = -0{,}2857\\ \\mathrm{m/s}$. När hon fångar bollen som kommer tillbaka med $-10\\ \\mathrm{m/s}$:
+
+$$
+v_1 = \\frac{70 \\cdot (-0{,}2857) + 2{,}0 \\cdot (-10)}{72} = \\frac{-20 - 20}{72} = -0{,}5556\\ \\mathrm{m/s}
+$$
+
+Samma resultat. Minustecknet betyder att hon glider bort från väggen.
+
+**Svar:** 0,56 m/s bort från väggen
+
+**b)** Farten bort från väggen ska vara minst 2,0 m/s:
+
+$$
+\\frac{40 \\cdot n}{72} \\geq 2{,}0
+\\quad\\Leftrightarrow\\quad
+n \\geq \\frac{2{,}0 \\cdot 72}{40} = 3{,}6
+$$
+
+Antalet fångster är ett heltal, så det krävs 4 fångster. Då är farten $\\dfrac{40 \\cdot 4}{72} = 2{,}22\\ \\mathrm{m/s}$, medan tre fångster bara ger $\\dfrac{40 \\cdot 3}{72} = 1{,}67\\ \\mathrm{m/s}$.
+
+Modellen fungerar så länge bollen hinner ikapp henne. Bollen kommer tillbaka med 10 m/s och hon glider bort med som mest drygt 2 m/s, så bollen når henne varje gång.
+
+**Svar:** 4 gånger`,
+        },
+        {
+            level: 3,
+            question: `En fyrverkeripjäs med massan 0,60 kg skjuts upp snett. I banans högsta punkt rör den sig vågrätt med farten 12 m/s, som i figuren. Där, 45 m över marken, exploderar den och delas i två bitar med massorna 0,20 kg och 0,40 kg. Båda bitarna rör sig vågrätt direkt efter explosionen, den lättare biten bakåt och den tyngre framåt. Explosionen ökar den sammanlagda rörelseenergin med 135 J. Bortse från luftmotståndet.<br>a) Bestäm båda bitarnas hastigheter direkt efter explosionen.<br>b) Hur långt från varandra landar bitarna? Ange svaret i m.
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 20 520 242" width="664" height="309" role="img" aria-label="En fyrverkeripjäs skjuts upp snett och följer en streckad bana. I banans högsta punkt rör den sig vågrätt åt höger med farten 12 meter per sekund. Pjäsen har massan 0,60 kg." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><defs><linearGradient id="himmel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f6f9"/><stop offset="1" stop-color="#e9eef3"/></linearGradient><linearGradient id="hylsa" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d8484a"/><stop offset="1" stop-color="#9c2f3a"/></linearGradient></defs><rect x="0" y="20" width="520" height="212" fill="url(#himmel)"/><rect x="0" y="232" width="520" height="30" fill="#d9cdb4"/><line x1="0" y1="232" x2="520" y2="232" stroke="#a8977a" stroke-width="1.5"/><polyline points="40,232 43,228.3 46,224.6 49,221 52,217.4 55,213.8 58,210.3 61,206.9 64,203.5 67,200.1 70,196.8 73,193.5 76,190.2 79,187 82,183.9 85,180.8 88,177.7 91,174.7 94,171.7 97,168.8 100,165.9 103,163 106,160.2 109,157.4 112,154.7 115,152 118,149.4 121,146.8 124,144.2 127,141.7 130,139.3 133,136.8 136,134.5 139,132.1 142,129.8 145,127.6 148,125.4 151,123.2 154,121.1 157,119 160,117 163,115 166,113 169,111.1 172,109.3 175,107.4 178,105.7 181,103.9 184,102.2 187,100.6 190,99 193,97.4 196,95.9 199,94.4 202,93 205,91.6 208,90.3 211,89 214,87.7 217,86.5 220,85.3 223,84.2 226,83.1 229,82.1 232,81.1 235,80.1 238,79.2 241,78.3 244,77.5 247,76.7 250,76 253,75.3 256,74.6 259,74 262,73.5 265,72.9 268,72.5 271,72 274,71.6 277,71.3" fill="none" stroke="rgba(15,22,32,0.55)" stroke-width="1.8" stroke-dasharray="6 5"/><path d="M30,232 L46,232 L38,216 Z" fill="#7a6a52"/><rect x="280" y="65" width="30" height="10" rx="2" fill="url(#hylsa)" stroke="#6e1f28" stroke-width="0.8"/><path d="M310,65 L322,70 L310,75 Z" fill="#e3b04a" stroke="#8a6a20" stroke-width="0.8"/><path d="M280,65 L273,61 L276,70 L273,79 L280,75 Z" fill="#6e1f28"/><line x1="289" y1="65" x2="289" y2="75" stroke="#f3e3c2" stroke-width="1.4"/><line x1="324" y1="70" x2="374" y2="70" stroke="#1f5fa8" stroke-width="2.6" stroke-linecap="butt"/><polygon points="374,65.3 384,70 374,74.7" fill="#1f5fa8"/><text x="354" y="58" font-size="13" fill="#1f5fa8" text-anchor="middle"><tspan font-style="italic">v</tspan> = 12 m/s</text><text x="291" y="96" font-size="13" fill="#0f1620" text-anchor="middle">0,60 kg</text><text x="36" y="252" font-size="13" fill="#0f1620" text-anchor="start">Uppskjutning</text></svg>`,
+            answer: { value: 27, unit: 'm/s', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 27, unit: 'm/s', tol: 0.02, etikett: 'den tyngre bitens fart' },
+                { del: 'b', value: 140, unit: 'm', tol: 0.04, etikett: 'avstånd mellan bitarna' },
+            ],
+            solution: `Vi väljer positiv riktning framåt, i pjäsens rörelseriktning, och kallar den tyngre biten A ($m_A = 0{,}40\\ \\mathrm{kg}$) och den lättare biten B ($m_B = 0{,}20\\ \\mathrm{kg}$).
+
+**a)** Två villkor gäller vid explosionen, och vi behöver båda eftersom det finns två okända hastigheter.
+
+**Rörelsemängden bevaras.** Explosionen pågår så kort tid att tyngdkraften inte hinner ändra rörelsemängden märkbart, och krafterna mellan bitarna är inre krafter. Rörelsemängden före, när pjäsen är en kropp med farten $v_0$, är lika med summan efter:
+
+$$
+(m_A + m_B) \\cdot v_0 = m_A \\cdot v_A + m_B \\cdot v_B \\tag{1}
+$$
+
+**Rörelseenergin ökar med 135 J.** Explosionen omvandlar kemisk energi i krutet till rörelseenergi hos bitarna:
+
+$$
+\\frac{(m_A + m_B) \\cdot v_0^{2}}{2} + 135 = \\frac{m_A \\cdot v_A^{2}}{2} + \\frac{m_B \\cdot v_B^{2}}{2} \\tag{2}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m_A = 0{,}40\\ \\mathrm{kg} \\\\
+m_B = 0{,}20\\ \\mathrm{kg} \\\\
+v_0 = 12\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+Insatta värden i (1):
+
+$$
+0{,}60 \\cdot 12 = 0{,}40 \\cdot v_A + 0{,}20 \\cdot v_B
+\\quad\\Leftrightarrow\\quad
+7{,}2 = 0{,}40 \\cdot v_A + 0{,}20 \\cdot v_B
+\\quad\\Leftrightarrow\\quad
+v_B = 36 - 2 \\cdot v_A
+$$
+
+Insatta värden i (2). Rörelseenergin före explosionen är $\\dfrac{0{,}60 \\cdot 12^{2}}{2} = 43{,}2\\ \\mathrm{J}$:
+
+$$
+43{,}2 + 135 = 0{,}20 \\cdot v_A^{2} + 0{,}10 \\cdot v_B^{2}
+\\quad\\Leftrightarrow\\quad
+178{,}2 = 0{,}20 \\cdot v_A^{2} + 0{,}10 \\cdot v_B^{2}
+$$
+
+Vi sätter in $v_B = 36 - 2 \\cdot v_A$ från (1) och utvecklar kvadraten:
+
+$$
+178{,}2 = 0{,}20 \\cdot v_A^{2} + 0{,}10 \\cdot (1\\,296 - 144 \\cdot v_A + 4 \\cdot v_A^{2})
+$$
+
+$$
+178{,}2 = 0{,}60 \\cdot v_A^{2} - 14{,}4 \\cdot v_A + 129{,}6
+$$
+
+$$
+0 = 0{,}60 \\cdot v_A^{2} - 14{,}4 \\cdot v_A - 48{,}6
+$$
+
+Vi delar båda led med 0,60:
+
+$$
+v_A^{2} - 24 \\cdot v_A - 81 = 0
+$$
+
+*pq*-formeln ger
+
+$$
+v_A = 12 \\pm \\sqrt{12^{2} + 81} = 12 \\pm \\sqrt{225} = 12 \\pm 15
+$$
+
+alltså $v_A = 27\\ \\mathrm{m/s}$ eller $v_A = -3\\ \\mathrm{m/s}$. Med $v_B = 36 - 2 \\cdot v_A$ hör de ihop med $v_B = -18\\ \\mathrm{m/s}$ respektive $v_B = 42\\ \\mathrm{m/s}$.
+
+Båda lösningarna uppfyller villkoren. I den andra flyger den lättare biten framåt, men enligt uppgiften flyger den bakåt. Den lösningen faller därför bort, och det är den första som gäller: $v_A = 27\\ \\mathrm{m/s}$ och $v_B = -18\\ \\mathrm{m/s}$.
+
+Kontroll i (1): $0{,}40 \\cdot 27 + 0{,}20 \\cdot (-18) = 10{,}8 - 3{,}6 = 7{,}2\\ \\mathrm{Ns}$, samma som före. Den tyngre biten ändrar farten med $15\\ \\mathrm{m/s}$ och den lättare med $30\\ \\mathrm{m/s}$. Bitarna får lika stora och motriktade impulser, så den med halva massan får dubbelt så stor hastighetsändring. Det är rimligt.
+
+**Svar:** Den tyngre biten får farten 27 m/s framåt och den lättare 18 m/s bakåt.
+
+**b)** Direkt efter explosionen rör sig båda bitarna vågrätt, alltså utan fart i lodrät led, och de befinner sig på samma höjd. I lodrät led påverkas båda bara av tyngdkraften och faller fritt med samma acceleration $g$ från samma höjd. De når därför marken samtidigt. Falltiden får vi ur sambandet för fritt fall från vila, $h = \\dfrac{g \\cdot t^{2}}{2}$:
+
+$$
+h = \\frac{g \\cdot t^{2}}{2}
+\\quad\\Leftrightarrow\\quad
+t = \\sqrt{\\frac{2 \\cdot h}{g}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+h = 45\\ \\mathrm{m} \\\\
+g = 9{,}82\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$
+t = \\sqrt{\\frac{2 \\cdot 45}{9{,}82}} = 3{,}027\\ldots\\ \\mathrm{s}
+$$
+
+I vågrät led verkar ingen kraft när vi bortser från luftmotståndet, så bitarna behåller sina vågräta farter under hela fallet. Den tyngre biten rör sig framåt och den lättare bakåt, så avståndet mellan dem växer med $27 + 18 = 45\\ \\mathrm{m/s}$. Avståndet när de landar är
+
+$$
+s = (27 + 18) \\cdot 3{,}027 = 136{,}2\\ \\mathrm{m} \\approx 140\\ \\mathrm{m}
+$$
+
+**Svar:** Cirka 140 m`,
+        },
+        {
+            level: 3,
+            question: `En bil med massan 1 200 kg kör rakt bakifrån in i en bil med massan 1 500 kg, som står still vid ett rödljus. Bilarna hakar i varandra och glider sedan tillsammans 3,1 m med låsta hjul innan de stannar. Friktionstalet mellan däcken och vägen är 0,60. På gatan gäller hastighetsgränsen 40 km/h.<br>a) Körde den bakre bilen fortare än tillåtet när den träffade den främre bilen? Visa med beräkningar.<br>b) Den bakre bilens förare säger att han hann bromsa en bit före krocken. Är svaret i a) då ett för högt eller ett för lågt värde på den fart han hade innan han började bromsa? Motivera, och förklara också varför det är rimligt att bortse från friktionen mot vägen under själva krocken.`,
+            answer: { value: 49, unit: 'km/h', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 49, unit: 'km/h', tol: 0.03, etikett: 'bakre bilens fart' },
+                { del: 'b' },
+            ],
+            solution: `Förloppet har två delar som måste behandlas var för sig, med olika lagar. Under själva krocken bevaras rörelsemängden men inte rörelseenergin, eftersom en del av den går åt till att deforma bilarna. Under glidningen efteråt bromsar friktionen bilarna, och då gäller energiprincipen. Vi räknar baklänges, från glidningen till krocken.
+
+**a)** **Glidningen.** Bilarna glider tillsammans med massan $m_A + m_B$ och låsta hjul. Normalkraften är lika med tyngden, så friktionskraften är
+
+$$
+F_f = \\mu \\cdot F_N = \\mu \\cdot (m_A + m_B) \\cdot g
+$$
+
+Friktionskraften uträttar arbetet $F_f \\cdot s$ under glidsträckan $s$, och det arbetet tar hela rörelseenergin direkt efter krocken. Med den gemensamma farten $v$:
+
+$$
+\\frac{(m_A + m_B) \\cdot v^{2}}{2} = \\mu \\cdot (m_A + m_B) \\cdot g \\cdot s
+$$
+
+Massan $m_A + m_B$ finns i båda led och tar ut sig:
+
+$$
+\\frac{v^{2}}{2} = \\mu \\cdot g \\cdot s
+\\quad\\Leftrightarrow\\quad
+v = \\sqrt{2 \\cdot \\mu \\cdot g \\cdot s}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\mu = 0{,}60 \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+s = 3{,}1\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+v = \\sqrt{2 \\cdot 0{,}60 \\cdot 9{,}82 \\cdot 3{,}1} = \\sqrt{36{,}53\\ldots} = 6{,}044\\ldots\\ \\mathrm{m/s}
+$$
+
+**Krocken.** Bilarna hakar i varandra, så stöten är fullkomligt inelastisk. Den bakre bilen är A och den främre bilen B, som står still. Rörelsemängdslagen ger A:s fart före krocken:
+
+$$
+m_A \\cdot v_A + m_B \\cdot v_B = (m_A + m_B) \\cdot v
+\\quad\\Leftrightarrow\\quad
+v_A = \\frac{(m_A + m_B) \\cdot v - m_B \\cdot v_B}{m_A}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m_A = 1\\,200\\ \\mathrm{kg} \\\\
+m_B = 1\\,500\\ \\mathrm{kg} \\\\
+v_B = 0 \\\\
+v = 6{,}044\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$
+v_A = \\frac{(1\\,200 + 1\\,500) \\cdot 6{,}044 - 1\\,500 \\cdot 0}{1\\,200} = \\frac{16\\,319}{1\\,200} = 13{,}599\\ldots\\ \\mathrm{m/s}
+$$
+
+Omräknat till km/h:
+
+$$
+13{,}599\\ \\mathrm{m/s} = 13{,}599 \\cdot 3{,}6\\ \\mathrm{km/h} = 48{,}96\\ \\mathrm{km/h} \\approx 49\\ \\mathrm{km/h}
+$$
+
+Det går inte att räkna med energiprincipen genom krocken, alltså att sätta den bakre bilens rörelseenergi lika med båda bilarnas rörelseenergi efteråt. Före krocken har den bakre bilen rörelseenergin $\\dfrac{1\\,200 \\cdot 13{,}599^{2}}{2} \\approx 111\\ \\mathrm{kJ}$, men efter krocken har bilarna tillsammans bara $\\dfrac{2\\,700 \\cdot 6{,}044^{2}}{2} \\approx 49\\ \\mathrm{kJ}$. Resten blev deformation och värme.
+
+**Svar:** Ja. Den bakre bilen körde i cirka 49 km/h när den träffade den främre bilen, alltså fortare än 40 km/h.
+
+**b)** Bromsade föraren före krocken var farten när han började bromsa högre än farten vid krocken. Beräkningen i a) ger farten i krockögonblicket, så 49 km/h är ett för lågt värde på hans fart före inbromsningen. Han körde alltså minst 49 km/h, och förarens uppgift stärker slutsatsen att han körde för fort.
+
+Friktionen mot vägen verkar även under krocken, men krocken tar bara ungefär en tiondels sekund. Friktionskraften på bilarna är högst $\\mu \\cdot (m_A + m_B) \\cdot g = 0{,}60 \\cdot 2\\,700 \\cdot 9{,}82 \\approx 16\\,000\\ \\mathrm{N}$, och impulsen från den under 0,1 s blir högst cirka $1\\,600\\ \\mathrm{Ns}$. Det är litet jämfört med den bakre bilens rörelsemängd, $1\\,200 \\cdot 13{,}6 \\approx 16\\,000\\ \\mathrm{Ns}$. Krafterna mellan bilarna är mycket större än friktionen och avgör förloppet, så systemet kan räknas som slutet under krocken. Den lilla impuls som friktionen ändå ger bromsar bilarna under krocken, så den bakre bilen körde i så fall ännu lite fortare än 49 km/h.
+
+**Svar:** För lågt, han körde minst 49 km/h. Friktionens impuls under den korta krocken är liten jämfört med bilarnas rörelsemängd.`,
+        },
+        {
+            level: 3,
+            question: `En godsvagn A rullar med farten $v_0$ mot en lång rad likadana godsvagnar som står stilla, som i figuren. Varje gång den rullande delen når nästa vagn kopplas de ihop. Alla vagnar har samma massa $m$. Bortse från friktionen.<br>a) Ställ upp ett uttryck för farten efter att $n$ stillastående vagnar har kopplats på.<br>b) Hur många vagnar måste kopplas på innan farten har sjunkit under en tiondel av $v_0$?
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 22 560 118" width="664" height="140" role="img" aria-label="En godsvagn A rullar åt höger med farten v noll mot en rad likadana godsvagnar som står stilla, numrerade 1, 2, 3 och så vidare." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><defs><linearGradient id="gv" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a5503c"/><stop offset="1" stop-color="#7a3424"/></linearGradient></defs><rect x="6" y="105" width="548" height="4" fill="#6f767d"/><rect x="12" y="109" width="10" height="5" fill="#8a7259"/><rect x="30" y="109" width="10" height="5" fill="#8a7259"/><rect x="48" y="109" width="10" height="5" fill="#8a7259"/><rect x="66" y="109" width="10" height="5" fill="#8a7259"/><rect x="84" y="109" width="10" height="5" fill="#8a7259"/><rect x="102" y="109" width="10" height="5" fill="#8a7259"/><rect x="120" y="109" width="10" height="5" fill="#8a7259"/><rect x="138" y="109" width="10" height="5" fill="#8a7259"/><rect x="156" y="109" width="10" height="5" fill="#8a7259"/><rect x="174" y="109" width="10" height="5" fill="#8a7259"/><rect x="192" y="109" width="10" height="5" fill="#8a7259"/><rect x="210" y="109" width="10" height="5" fill="#8a7259"/><rect x="228" y="109" width="10" height="5" fill="#8a7259"/><rect x="246" y="109" width="10" height="5" fill="#8a7259"/><rect x="264" y="109" width="10" height="5" fill="#8a7259"/><rect x="282" y="109" width="10" height="5" fill="#8a7259"/><rect x="300" y="109" width="10" height="5" fill="#8a7259"/><rect x="318" y="109" width="10" height="5" fill="#8a7259"/><rect x="336" y="109" width="10" height="5" fill="#8a7259"/><rect x="354" y="109" width="10" height="5" fill="#8a7259"/><rect x="372" y="109" width="10" height="5" fill="#8a7259"/><rect x="390" y="109" width="10" height="5" fill="#8a7259"/><rect x="408" y="109" width="10" height="5" fill="#8a7259"/><rect x="426" y="109" width="10" height="5" fill="#8a7259"/><rect x="444" y="109" width="10" height="5" fill="#8a7259"/><rect x="462" y="109" width="10" height="5" fill="#8a7259"/><rect x="480" y="109" width="10" height="5" fill="#8a7259"/><rect x="498" y="109" width="10" height="5" fill="#8a7259"/><rect x="516" y="109" width="10" height="5" fill="#8a7259"/><rect x="534" y="109" width="10" height="5" fill="#8a7259"/><rect x="20" y="52" width="78" height="36" rx="3" fill="url(#gv)" stroke="#5a2a1f" stroke-width="1.1"/><line x1="33" y1="55" x2="33" y2="85" stroke="rgba(40,15,10,0.35)" stroke-width="1"/><line x1="46" y1="55" x2="46" y2="85" stroke="rgba(40,15,10,0.35)" stroke-width="1"/><line x1="59" y1="55" x2="59" y2="85" stroke="rgba(40,15,10,0.35)" stroke-width="1"/><line x1="72" y1="55" x2="72" y2="85" stroke="rgba(40,15,10,0.35)" stroke-width="1"/><line x1="85" y1="55" x2="85" y2="85" stroke="rgba(40,15,10,0.35)" stroke-width="1"/><rect x="18" y="48" width="82" height="5" rx="1.5" fill="#4a4f55"/><rect x="24" y="88" width="70" height="5" fill="#33373c"/><rect x="15" y="81" width="5" height="4" fill="#33373c"/><rect x="98" y="81" width="5" height="4" fill="#33373c"/><circle cx="35" cy="99" r="6" fill="#2a2e35"/><circle cx="35" cy="99" r="2" fill="#9aa3ab"/><circle cx="48" cy="99" r="6" fill="#2a2e35"/><circle cx="48" cy="99" r="2" fill="#9aa3ab"/><circle cx="70" cy="99" r="6" fill="#2a2e35"/><circle cx="70" cy="99" r="2" fill="#9aa3ab"/><circle cx="83" cy="99" r="6" fill="#2a2e35"/><circle cx="83" cy="99" r="2" fill="#9aa3ab"/><rect x="196" y="52" width="78" height="36" rx="3" fill="url(#gv)" stroke="#5a2a1f" stroke-width="1.1"/><line x1="209" y1="55" x2="209" y2="85" stroke="rgba(40,15,10,0.35)" stroke-width="1"/><line x1="222" y1="55" x2="222" y2="85" stroke="rgba(40,15,10,0.35)" stroke-width="1"/><line x1="235" y1="55" x2="235" y2="85" stroke="rgba(40,15,10,0.35)" stroke-width="1"/><line x1="248" y1="55" x2="248" y2="85" stroke="rgba(40,15,10,0.35)" stroke-width="1"/><line x1="261" y1="55" x2="261" y2="85" stroke="rgba(40,15,10,0.35)" stroke-width="1"/><rect x="194" y="48" width="82" height="5" rx="1.5" fill="#4a4f55"/><rect x="200" y="88" width="70" height="5" fill="#33373c"/><rect x="191" y="81" width="5" height="4" fill="#33373c"/><rect x="274" y="81" width="5" height="4" fill="#33373c"/><circle cx="211" cy="99" r="6" fill="#2a2e35"/><circle cx="211" cy="99" r="2" fill="#9aa3ab"/><circle cx="224" cy="99" r="6" fill="#2a2e35"/><circle cx="224" cy="99" r="2" fill="#9aa3ab"/><circle cx="246" cy="99" r="6" fill="#2a2e35"/><circle cx="246" cy="99" r="2" fill="#9aa3ab"/><circle cx="259" cy="99" r="6" fill="#2a2e35"/><circle cx="259" cy="99" r="2" fill="#9aa3ab"/><rect x="284" y="52" width="78" height="36" rx="3" fill="url(#gv)" stroke="#5a2a1f" stroke-width="1.1"/><line x1="297" y1="55" x2="297" y2="85" stroke="rgba(40,15,10,0.35)" stroke-width="1"/><line x1="310" y1="55" x2="310" y2="85" stroke="rgba(40,15,10,0.35)" stroke-width="1"/><line x1="323" y1="55" x2="323" y2="85" stroke="rgba(40,15,10,0.35)" stroke-width="1"/><line x1="336" y1="55" x2="336" y2="85" stroke="rgba(40,15,10,0.35)" stroke-width="1"/><line x1="349" y1="55" x2="349" y2="85" stroke="rgba(40,15,10,0.35)" stroke-width="1"/><rect x="282" y="48" width="82" height="5" rx="1.5" fill="#4a4f55"/><rect x="288" y="88" width="70" height="5" fill="#33373c"/><rect x="279" y="81" width="5" height="4" fill="#33373c"/><rect x="362" y="81" width="5" height="4" fill="#33373c"/><circle cx="299" cy="99" r="6" fill="#2a2e35"/><circle cx="299" cy="99" r="2" fill="#9aa3ab"/><circle cx="312" cy="99" r="6" fill="#2a2e35"/><circle cx="312" cy="99" r="2" fill="#9aa3ab"/><circle cx="334" cy="99" r="6" fill="#2a2e35"/><circle cx="334" cy="99" r="2" fill="#9aa3ab"/><circle cx="347" cy="99" r="6" fill="#2a2e35"/><circle cx="347" cy="99" r="2" fill="#9aa3ab"/><rect x="372" y="52" width="78" height="36" rx="3" fill="url(#gv)" stroke="#5a2a1f" stroke-width="1.1"/><line x1="385" y1="55" x2="385" y2="85" stroke="rgba(40,15,10,0.35)" stroke-width="1"/><line x1="398" y1="55" x2="398" y2="85" stroke="rgba(40,15,10,0.35)" stroke-width="1"/><line x1="411" y1="55" x2="411" y2="85" stroke="rgba(40,15,10,0.35)" stroke-width="1"/><line x1="424" y1="55" x2="424" y2="85" stroke="rgba(40,15,10,0.35)" stroke-width="1"/><line x1="437" y1="55" x2="437" y2="85" stroke="rgba(40,15,10,0.35)" stroke-width="1"/><rect x="370" y="48" width="82" height="5" rx="1.5" fill="#4a4f55"/><rect x="376" y="88" width="70" height="5" fill="#33373c"/><rect x="367" y="81" width="5" height="4" fill="#33373c"/><rect x="450" y="81" width="5" height="4" fill="#33373c"/><circle cx="387" cy="99" r="6" fill="#2a2e35"/><circle cx="387" cy="99" r="2" fill="#9aa3ab"/><circle cx="400" cy="99" r="6" fill="#2a2e35"/><circle cx="400" cy="99" r="2" fill="#9aa3ab"/><circle cx="422" cy="99" r="6" fill="#2a2e35"/><circle cx="422" cy="99" r="2" fill="#9aa3ab"/><circle cx="435" cy="99" r="6" fill="#2a2e35"/><circle cx="435" cy="99" r="2" fill="#9aa3ab"/><rect x="460" y="52" width="78" height="36" rx="3" fill="url(#gv)" stroke="#5a2a1f" stroke-width="1.1"/><line x1="473" y1="55" x2="473" y2="85" stroke="rgba(40,15,10,0.35)" stroke-width="1"/><line x1="486" y1="55" x2="486" y2="85" stroke="rgba(40,15,10,0.35)" stroke-width="1"/><line x1="499" y1="55" x2="499" y2="85" stroke="rgba(40,15,10,0.35)" stroke-width="1"/><line x1="512" y1="55" x2="512" y2="85" stroke="rgba(40,15,10,0.35)" stroke-width="1"/><line x1="525" y1="55" x2="525" y2="85" stroke="rgba(40,15,10,0.35)" stroke-width="1"/><rect x="458" y="48" width="82" height="5" rx="1.5" fill="#4a4f55"/><rect x="464" y="88" width="70" height="5" fill="#33373c"/><rect x="455" y="81" width="5" height="4" fill="#33373c"/><rect x="538" y="81" width="5" height="4" fill="#33373c"/><circle cx="475" cy="99" r="6" fill="#2a2e35"/><circle cx="475" cy="99" r="2" fill="#9aa3ab"/><circle cx="488" cy="99" r="6" fill="#2a2e35"/><circle cx="488" cy="99" r="2" fill="#9aa3ab"/><circle cx="510" cy="99" r="6" fill="#2a2e35"/><circle cx="510" cy="99" r="2" fill="#9aa3ab"/><circle cx="523" cy="99" r="6" fill="#2a2e35"/><circle cx="523" cy="99" r="2" fill="#9aa3ab"/><line x1="103" y1="70" x2="148" y2="70" stroke="#1f5fa8" stroke-width="2.6" stroke-linecap="butt"/><polygon points="148,65.3 158,70 148,74.7" fill="#1f5fa8"/><text x="130" y="40" font-size="14" fill="#1f5fa8" text-anchor="middle"><tspan font-style="italic">v</tspan><tspan font-size="11" dy="3">0</tspan></text><text x="59" y="132" font-size="14" fill="#0f1620" text-anchor="middle">A</text><text x="235" y="132" font-size="14" fill="#0f1620" text-anchor="middle">1</text><text x="323" y="132" font-size="14" fill="#0f1620" text-anchor="middle">2</text><text x="411" y="132" font-size="14" fill="#0f1620" text-anchor="middle">3</text><text x="499" y="132" font-size="14" fill="#0f1620" text-anchor="middle">4</text><text x="548" y="74" font-size="14" fill="#0f1620" text-anchor="end"></text></svg>`,
+            answer: { value: 10, unit: 'vagnar', tol: 0.01 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 10, unit: 'vagnar', tol: 0.01, etikett: 'antal vagnar' },
+            ],
+            solution: `**a)** Varje ihopkoppling är en fullkomligt inelastisk stöt där den stillastående vagnen har hastigheten 0. Vi behöver inte räkna stöt för stöt: under hela förloppet verkar inga yttre krafter i vågrät led, så rörelsemängden för alla vagnar tillsammans bevaras. Före den första stöten är den $m \\cdot v_0$.
+
+När $n$ vagnar har kopplats på rör sig $n + 1$ vagnar tillsammans med farten $v_n$:
+
+$$
+m \\cdot v_0 = (n + 1) \\cdot m \\cdot v_n
+\\quad\\Leftrightarrow\\quad
+v_n = \\frac{v_0}{n + 1}
+$$
+
+Massan $m$ tar ut sig. Kontroll med den första stöten: rörelsemängdslagen ger $m \\cdot v_0 + m \\cdot 0 = 2m \\cdot v_1$, alltså $v_1 = \\dfrac{v_0}{2}$, vilket stämmer med uttrycket för $n = 1$.
+
+**Svar:** $v_n = \\dfrac{v_0}{n + 1}$
+
+**b)** Farten ska vara mindre än en tiondel av $v_0$:
+
+$$
+\\frac{v_0}{n + 1} < \\frac{v_0}{10}
+\\quad\\Leftrightarrow\\quad
+n + 1 > 10
+\\quad\\Leftrightarrow\\quad
+n > 9
+$$
+
+Med 9 påkopplade vagnar är farten precis $\\dfrac{v_0}{10}$, inte under. Det krävs alltså 10 vagnar, och då är farten $\\dfrac{v_0}{11}$.
+
+Rörelsemängden är densamma hela tiden, men rörelseenergin $\\dfrac{(n+1) \\cdot m \\cdot v_n^{2}}{2} = \\dfrac{m \\cdot v_0^{2}}{2 \\cdot (n + 1)}$ minskar. Efter 10 vagnar finns bara en elftedel kvar, resten har gått åt till värme och deformation i kopplingarna.
+
+**Svar:** 10 vagnar`,
+        },
+        {
+            level: 3,
+            question: `Vagn A med massan $m$ rullar med farten $v$ mot vagn B, som har samma massa och står still. Fyra elever föreslår vad som kan hända efter stöten. Bara ett av förslagen är fysikaliskt möjligt. Vilket? Bortse från friktionen. (Positiv riktning är A:s ursprungliga rörelseriktning.)`,
+            choices: ['A står still och B får hastigheten $2v$', 'A får hastigheten $-\\dfrac{v}{2}$ och B får $\\dfrac{3v}{2}$', 'Båda vagnarna får hastigheten $v$', 'A får hastigheten $\\dfrac{v}{4}$ och B får $\\dfrac{3v}{4}$'],
+            correct: 3,
+            solution: `Ett möjligt utfall måste uppfylla två villkor:
+
+1. **Rörelsemängden bevaras:** summan av hastigheterna efteråt (massorna är lika) måste vara $v$.
+2. **Rörelseenergin kan inte öka** vid en stöt utan någon energikälla, som en fjäder eller ett sprängämne. Summan av hastigheternas kvadrater får alltså inte bli större än $v^{2}$.
+
+Vi prövar förslagen:
+
+- **A står still, B får $2v$:** summan är $0 + 2v = 2v \\neq v$. Rörelsemängden fördubblas, så förslaget är omöjligt.
+- **A får $-\\dfrac{v}{2}$, B får $\\dfrac{3v}{2}$:** summan är $-\\dfrac{v}{2} + \\dfrac{3v}{2} = v$, så rörelsemängden bevaras. Men kvadratsumman är $\\dfrac{v^{2}}{4} + \\dfrac{9v^{2}}{4} = \\dfrac{10v^{2}}{4} = 2{,}5v^{2}$. Rörelseenergin skulle bli 2,5 gånger så stor som före stöten, så förslaget är omöjligt.
+- **Båda får $v$:** summan är $2v \\neq v$, så förslaget är omöjligt.
+- **A får $\\dfrac{v}{4}$, B får $\\dfrac{3v}{4}$:** summan är $\\dfrac{v}{4} + \\dfrac{3v}{4} = v$, så rörelsemängden bevaras. Kvadratsumman är $\\dfrac{v^{2}}{16} + \\dfrac{9v^{2}}{16} = \\dfrac{10v^{2}}{16} = 0{,}625v^{2}$, alltså mindre än $v^{2}$. En del av rörelseenergin har blivit värme, vilket är möjligt.
+
+Lägg märke till det andra förslaget: att rörelsemängden stämmer räcker inte. Energin måste också kontrolleras.
+
+**Svar:** A får hastigheten $\\dfrac{v}{4}$ och B får $\\dfrac{3v}{4}$.`,
         },
     ],
 
@@ -24620,7 +28763,7 @@ $$
 
 **Svar:** Friktionstalet är cirka 0,093.
 
-**Generell slutsats:** Friktion mellan en gummiluftig hockeypuck och nyspolad is brukar ligga på 0,05–0,10 — vilket stämmer med detta resultat. Detta är *bland de lägsta friktionstalen* i vardagliga material.`,
+**Generell slutsats:** Friktion mellan en gummiluftig hockeypuck och nyspolad is brukar ligga på 0,05–0,10, vilket stämmer med detta resultat. Detta är *bland de lägsta friktionstalen* i vardagliga material.`,
         },
         {
             level: 3,
@@ -24667,6 +28810,669 @@ $$
 **Svar:** a) Friktionskraften är ca 28 N. b) Friktionstalet är ca 0,034.
 
 **Generell slutsats:** Värdet är flera gånger större än det typiska rullningsmotståndet för cykeldäck mot asfalt, som ligger kring 0,003–0,008. Förklaringen är att uppgiften bortser från luftmotståndet. I verkligheten står luftmotståndet för en stor del av energiförlusten, och vid 14 m/s är det förmodligen den **större** kraften. Den beräknade friktionskraften rymmer alltså i praktiken båda förlusterna.`,
+        },
+        {
+            level: 1,
+            question: `En kälke dras med konstant fart uppför en backe. Kälken dras 40 m längs backen och hamnar 12 m högre upp än där den startade, se figuren.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0.0 10.0 440.0 172.0" style="max-width:557px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><polygon points="30,170 354.3,170 354.3,68.0" fill="#eef3f7" stroke="#0f1620" stroke-width="1.6"/><line x1="354.3" y1="68.0" x2="394.3" y2="68.0" stroke="#0f1620" stroke-width="1.6"/><line x1="14.0" y1="170.0" x2="394.3" y2="170.0" stroke="#0f1620" stroke-width="1.6"/><line x1="22.0" y1="170.0" x2="15.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="34.0" y1="170.0" x2="27.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="46.0" y1="170.0" x2="39.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="58.0" y1="170.0" x2="51.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="70.0" y1="170.0" x2="63.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="82.0" y1="170.0" x2="75.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="94.0" y1="170.0" x2="87.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="106.0" y1="170.0" x2="99.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="118.0" y1="170.0" x2="111.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="130.0" y1="170.0" x2="123.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="142.0" y1="170.0" x2="135.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="154.0" y1="170.0" x2="147.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="166.0" y1="170.0" x2="159.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="178.0" y1="170.0" x2="171.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="190.0" y1="170.0" x2="183.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="202.0" y1="170.0" x2="195.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="214.0" y1="170.0" x2="207.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="226.0" y1="170.0" x2="219.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="238.0" y1="170.0" x2="231.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="250.0" y1="170.0" x2="243.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="262.0" y1="170.0" x2="255.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="274.0" y1="170.0" x2="267.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="286.0" y1="170.0" x2="279.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="298.0" y1="170.0" x2="291.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="310.0" y1="170.0" x2="303.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="322.0" y1="170.0" x2="315.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="334.0" y1="170.0" x2="327.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="346.0" y1="170.0" x2="339.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="358.0" y1="170.0" x2="351.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="370.0" y1="170.0" x2="363.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="382.0" y1="170.0" x2="375.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><line x1="394.0" y1="170.0" x2="387.0" y2="178.0" stroke="#0f1620" stroke-width="1"/><g transform="translate(185.7,121.0) rotate(-17.5)"><path d="M -38 0 L 32 0 Q 43 0 43 -9" fill="none" stroke="#0f1620" stroke-width="2.4" stroke-linecap="round"/><line x1="-29" y1="0" x2="-29" y2="-11" stroke="#0f1620" stroke-width="1.6"/><line x1="0" y1="0" x2="0" y2="-11" stroke="#0f1620" stroke-width="1.6"/><line x1="26" y1="0" x2="26" y2="-11" stroke="#0f1620" stroke-width="1.6"/><rect x="-36" y="-15" width="70" height="6" rx="2" fill="#c9844f" stroke="#7a4b26" stroke-width="1.3"/></g><line x1="30.0" y1="170.0" x2="19.2" y2="135.7" stroke="#4a5563" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="354.3" y1="68.0" x2="343.5" y2="33.7" stroke="#4a5563" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="27.7" y1="139.3" x2="338.7" y2="41.5" stroke="#4a5563" stroke-width="1.3"/><polygon points="21.0,141.4 28.6,142.3 26.7,136.2" fill="#4a5563"/><polygon points="345.3,39.4 339.6,44.5 337.7,38.4" fill="#4a5563"/><text x="175.0" y="77.0" font-size="15" fill="#4a5563" text-anchor="end">40 m</text><line x1="380.3" y1="75.0" x2="380.3" y2="163.0" stroke="#4a5563" stroke-width="1.3"/><polygon points="380.3,68.0 377.1,75.0 383.5,75.0" fill="#4a5563"/><polygon points="380.3,170.0 377.1,163.0 383.5,163.0" fill="#4a5563"/><text x="388.3" y="124.0" font-size="15" fill="#4a5563" text-anchor="start">12 m</text></svg>
+
+Friktionsvärmen beräknas med $E_v = F_f \\cdot s$. Vilken sträcka ska sättas in som $s$?`,
+            choices: ['12 m', '28 m', '40 m', '52 m'],
+            correct: 2,
+            solution: `Friktionskraften verkar längs underlaget hela vägen som kälken glider. Friktionsvärmen är friktionskraftens arbete, och då är det den **verkliga sträckan längs backen** som räknas:
+
+$$
+s = 40\\ \\mathrm{m}
+$$
+
+Höjdskillnaden 12 m används i stället när lägesenergins ökning beräknas, $\\Delta E_p = m \\cdot g \\cdot h$. De två sträckorna ska inte blandas ihop, och de ska inte heller adderas eller subtraheras.
+
+**Svar:** 40 m`,
+        },
+        {
+            level: 1,
+            question: `En curlingsten glider 32 m längs isen innan den stannar. Under glidningen omvandlas 180 J till friktionsvärme. Hur stor är friktionskraften mellan stenen och isen? Ange svaret i N.`,
+            answer: { value: 5.625, unit: 'N', tol: 0.03 },
+            solution: `Friktionsvärmen är friktionskraften gånger sträckan:
+
+$$
+E_v = F_f \\cdot s \\quad\\Leftrightarrow\\quad F_f = \\frac{E_v}{s}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+E_v = 180\\ \\mathrm{J} \\\\
+s = 32\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+F_f = \\frac{180}{32} = 5{,}625\\ \\mathrm{N} \\approx 5{,}6\\ \\mathrm{N}
+$$
+
+Sträckan har två värdesiffror, så svaret avrundas till två värdesiffror.
+
+**Svar:** Friktionskraften är cirka 5,6 N.`,
+        },
+        {
+            level: 1,
+            question: `En flyttkartong med massan 15 kg skjuts uppför en ramp in i en skåpbil, så att den hamnar 0,80 m högre än där den startade. Under förflyttningen blir 95 J friktionsvärme. Vilket arbete uträttar den som skjuter kartongen? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i J.`,
+            answer: { value: 212.84, unit: 'J', tol: 0.03 },
+            solution: `Med friktion går arbetet både till ökad lägesenergi och till friktionsvärme:
+
+$$
+W = \\Delta E_p + E_v = m \\cdot g \\cdot h + E_v
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m = 15\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+h = 0{,}80\\ \\mathrm{m} \\\\
+E_v = 95\\ \\mathrm{J}
+\\end{array} \\right]
+$$
+
+$$
+W = 15 \\cdot 9{,}82 \\cdot 0{,}80 + 95 = 117{,}84 + 95 = 212{,}84\\ \\mathrm{J} \\approx 210\\ \\mathrm{J}
+$$
+
+Givna värden har två värdesiffror, så svaret avrundas till två värdesiffror.
+
+**Svar:** Arbetet är cirka 210 J.`,
+        },
+        {
+            level: 1,
+            question: `En släplift drar en skidåkare uppför en backe med konstant fart. Liften uträttar arbetet 5,0 kJ på skidåkaren, och skidåkarens lägesenergi ökar under tiden med 3,8 kJ. Hur mycket av arbetet blir friktionsvärme mellan skidorna och snön? Ange svaret i kJ.`,
+            answer: { value: 1.2, unit: 'kJ', tol: 0.03 },
+            solution: `Farten är konstant, så rörelseenergin ändras inte. Arbetet går då till ökad lägesenergi och friktionsvärme:
+
+$$
+W = \\Delta E_p + E_v \\quad\\Leftrightarrow\\quad E_v = W - \\Delta E_p
+$$
+
+$$
+\\left[ \\begin{array}{l}
+W = 5{,}0\\ \\mathrm{kJ} \\\\
+\\Delta E_p = 3{,}8\\ \\mathrm{kJ}
+\\end{array} \\right]
+$$
+
+$$
+E_v = 5{,}0 - 3{,}8 = 1{,}2\\ \\mathrm{kJ}
+$$
+
+**Svar:** 1,2 kJ blir friktionsvärme.`,
+        },
+        {
+            level: 1,
+            question: `Samma låda skjuts med konstant fart uppför samma ramp till samma höjd två gånger. Första gången är rampen helt hal, så att friktionen kan försummas. Andra gången finns friktion mellan lådan och rampen. Vilket påstående stämmer?`,
+            choices: ['Arbetet är lika stort båda gångerna', 'Mer arbete krävs med friktion, men lägesenergin ökar lika mycket', 'Mer arbete krävs med friktion, och lägesenergin ökar mer', 'Mindre arbete krävs med friktion, eftersom friktionen håller kvar lådan'],
+            correct: 1,
+            solution: `Lådan hamnar på samma höjd båda gångerna, så lägesenergins ökning $\\Delta E_p = m \\cdot g \\cdot h$ är lika stor.
+
+Utan friktion går hela arbetet till lägesenergi:
+
+$$
+W = \\Delta E_p
+$$
+
+Med friktion blir en del av arbetet dessutom friktionsvärme:
+
+$$
+W = \\Delta E_p + E_v
+$$
+
+Eftersom $E_v$ är positivt krävs alltså mer arbete med friktion.
+
+**Svar:** Mer arbete krävs med friktion, men lägesenergin ökar lika mycket.`,
+        },
+        {
+            level: 2,
+            question: `En släde med ved dras med konstant fart först över snö och sedan över en grusväg. Diagrammet visar friktionskraften $F_f$ på släden som funktion av sträckan $s$.
+
+${makeDiagram({ xMax: 40, yMax: 100, xTicks: [0, 5, 10, 15, 20, 25, 30, 35, 40], yTicks: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100], xLabel: '<tspan font-style="italic">s</tspan> (m)', yLabel: '<tspan font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="0.72em">f</tspan> (N)', paths: [{ points: [[0, 30], [20, 30], [20, 90], [35, 90]], color: '#2563c9' }] })}
+
+Bestäm<br>a)&nbsp;den totala friktionsvärmen under hela förflyttningen<br>b)&nbsp;den friktionskraft som, om den varit lika stor hela vägen, hade gett samma friktionsvärme.
+
+*Ange friktionsvärmen (a) som ditt numeriska svar i J.*`,
+            answer: { value: 1950, unit: 'J', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 1950, unit: 'J', tol: 0.03, etikett: '$E_v =$' },
+                { del: 'b', value: 55.71, unit: 'N', tol: 0.03, etikett: '$F_f =$' },
+            ],
+            solution: `**a)** Friktionskraften är konstant på varje del av vägen, så friktionsvärmen räknas med $E_v = F_f \\cdot s$ för varje del. I diagrammet motsvarar det arean under grafen.
+
+Snön: $F_f = 30\\ \\mathrm{N}$ från 0 till 20 m, alltså $s = 20\\ \\mathrm{m}$.
+
+$$
+E_{v,\\text{snö}} = 30 \\cdot 20 = 600\\ \\mathrm{J}
+$$
+
+Gruset: $F_f = 90\\ \\mathrm{N}$ från 20 till 35 m, alltså $s = 15\\ \\mathrm{m}$.
+
+$$
+E_{v,\\text{grus}} = 90 \\cdot 15 = 1\\,350\\ \\mathrm{J}
+$$
+
+$$
+E_v = 600 + 1\\,350 = 1\\,950\\ \\mathrm{J}
+$$
+
+**Svar:** Friktionsvärmen är 1 950 J, alltså cirka 2,0 kJ.
+
+**b)** Den sökta kraften ska ge samma friktionsvärme längs hela sträckan 35 m:
+
+$$
+E_v = F_f \\cdot s \\quad\\Leftrightarrow\\quad F_f = \\frac{E_v}{s} = \\frac{1\\,950}{35} = 55{,}71\\ldots\\ \\mathrm{N} \\approx 56\\ \\mathrm{N}
+$$
+
+Rimligt: värdet ligger mellan 30 N och 90 N, och under mitten (60 N), eftersom släden dras en längre sträcka på snön än på gruset.
+
+**Svar:** Friktionskraften hade varit cirka 56 N.`,
+        },
+        {
+            level: 2,
+            question: `En låda med massan 12 kg släpps från vila högst upp på en lastramp och glider ned. Rampen är 2,4 m lång och lutar 35° mot marken, se figuren. Friktionstalet mellan lådan och rampen är 0,30.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0.0 4.0 420.0 236.0" style="max-width:532px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="269.4" y="59.4" width="110" height="160.6" fill="#e7e1d4" stroke="#0f1620" stroke-width="1.6"/><polygon points="40.0,220.0 269.4,59.4 272.8,64.3 50.5,220.0" fill="#c9844f" stroke="#7a4b26" stroke-width="1.3"/><line x1="20.0" y1="220.0" x2="395.4" y2="220.0" stroke="#0f1620" stroke-width="1.6"/><line x1="28.0" y1="220.0" x2="21.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="40.0" y1="220.0" x2="33.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="52.0" y1="220.0" x2="45.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="64.0" y1="220.0" x2="57.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="76.0" y1="220.0" x2="69.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="88.0" y1="220.0" x2="81.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="100.0" y1="220.0" x2="93.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="112.0" y1="220.0" x2="105.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="124.0" y1="220.0" x2="117.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="136.0" y1="220.0" x2="129.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="148.0" y1="220.0" x2="141.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="160.0" y1="220.0" x2="153.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="172.0" y1="220.0" x2="165.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="184.0" y1="220.0" x2="177.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="196.0" y1="220.0" x2="189.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="208.0" y1="220.0" x2="201.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="220.0" y1="220.0" x2="213.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="232.0" y1="220.0" x2="225.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="244.0" y1="220.0" x2="237.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="256.0" y1="220.0" x2="249.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="268.0" y1="220.0" x2="261.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="280.0" y1="220.0" x2="273.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="292.0" y1="220.0" x2="285.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="304.0" y1="220.0" x2="297.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="316.0" y1="220.0" x2="309.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="328.0" y1="220.0" x2="321.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="340.0" y1="220.0" x2="333.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="352.0" y1="220.0" x2="345.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="364.0" y1="220.0" x2="357.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="376.0" y1="220.0" x2="369.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><line x1="388.0" y1="220.0" x2="381.0" y2="228.0" stroke="#0f1620" stroke-width="1"/><g transform="translate(237.3,81.9) rotate(-35.0)"><rect x="-17" y="-34" width="34" height="34" fill="#d9b27c" stroke="#7a4b26" stroke-width="1.5" rx="1.5"/><line x1="-17" y1="-17" x2="17" y2="-17" stroke="#a8804a" stroke-width="2"/></g><path d="M 86.0 220.0 A 46 46 0 0 0 77.7 193.6" fill="none" stroke="#8a8579" stroke-width="1.4"/><text x="101.0" y="205.8" font-size="14" fill="#8a8579" text-anchor="middle">35°</text><line x1="40.0" y1="220.0" x2="5.6" y2="170.9" stroke="#4a5563" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="269.4" y1="59.4" x2="234.9" y2="10.2" stroke="#4a5563" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="14.8" y1="171.8" x2="232.7" y2="19.2" stroke="#4a5563" stroke-width="1.3"/><polygon points="9.0,175.8 16.6,174.4 12.9,169.1" fill="#4a5563"/><polygon points="238.4,15.2 234.5,21.8 230.8,16.6" fill="#4a5563"/><text x="114.8" y="85.6" font-size="15" fill="#4a5563" text-anchor="end">2,4 m</text></svg>
+
+Hur stor fart har lådan när den når rampens fot? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i m/s.`,
+            answer: { value: 3.931, unit: 'm/s', tol: 0.03 },
+            solution: `Lägesenergin högst upp blir rörelseenergi och friktionsvärme när lådan glider ned:
+
+$$
+E_p = E_k + E_v \\quad\\Leftrightarrow\\quad E_k = E_p - E_v
+$$
+
+**Lägesenergin.** Höjden är den lodräta kateten, som ligger mittemot vinkeln:
+
+$$
+h = s \\cdot \\sin \\alpha = 2{,}4 \\cdot \\sin 35^{\\circ} = 1{,}3765\\ldots\\ \\mathrm{m}
+$$
+
+$$
+E_p = m \\cdot g \\cdot h = 12 \\cdot 9{,}82 \\cdot 1{,}3765\\ldots = 162{,}21\\ldots\\ \\mathrm{J}
+$$
+
+**Friktionsvärmen.** Normalkraften är lika stor som tyngdkraftens komposant vinkelrätt mot rampen:
+
+$$
+\\left[ \\begin{array}{l}
+F_N = m \\cdot g \\cdot \\cos \\alpha = 12 \\cdot 9{,}82 \\cdot \\cos 35^{\\circ} = 96{,}528\\ldots\\ \\mathrm{N} \\\\
+F_f = \\mu \\cdot F_N = 0{,}30 \\cdot 96{,}528\\ldots = 28{,}958\\ldots\\ \\mathrm{N}
+\\end{array} \\right]
+$$
+
+$$
+E_v = F_f \\cdot s = 28{,}958\\ldots \\cdot 2{,}4 = 69{,}500\\ldots\\ \\mathrm{J}
+$$
+
+**Rörelseenergin och farten.**
+
+$$
+E_k = 162{,}21\\ldots - 69{,}500\\ldots = 92{,}71\\ldots\\ \\mathrm{J}
+$$
+
+$$
+E_k = \\frac{m \\cdot v^{2}}{2} \\quad\\Leftrightarrow\\quad v = \\sqrt{\\frac{2 \\cdot E_k}{m}}
+$$
+
+$$
+v = \\sqrt{\\frac{2 \\cdot 92{,}71\\ldots}{12}} = 3{,}930\\ldots\\ \\mathrm{m/s} \\approx 3{,}9\\ \\mathrm{m/s}
+$$
+
+Rimligt: utan friktion hade hela lägesenergin blivit rörelseenergi, och farten hade blivit $\\sqrt{2 \\cdot 9{,}82 \\cdot 1{,}3765\\ldots} = 5{,}19\\ldots\\ \\mathrm{m/s}$. Med friktion ska farten vara lägre.
+
+**Svar:** Farten är cirka 3,9 m/s.`,
+        },
+        {
+            level: 2,
+            question: `En bil med massan 1 200 kg kör i 50 km/h på en vågrät väg. Föraren tvärbromsar så att hjulen låser sig, och bilen glider tills den stannar. Friktionstalet mellan däcken och vägen är 0,70. Hur lång blir bromssträckan? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i m.`,
+            answer: { value: 14.03, unit: 'm', tol: 0.03 },
+            solution: `Under inbromsningen blir hela rörelseenergin friktionsvärme:
+
+$$
+E_k = E_v = F_f \\cdot s \\quad\\Leftrightarrow\\quad s = \\frac{E_k}{F_f}
+$$
+
+Vägen är vågrät, så normalkraften är lika stor som tyngdkraften, och $F_f = \\mu \\cdot m \\cdot g$.
+
+$$
+\\left[ \\begin{array}{l}
+m = 1\\,200\\ \\mathrm{kg} \\\\
+v = 50\\ \\mathrm{km/h} = \\dfrac{50}{3{,}6}\\ \\mathrm{m/s} = 13{,}888\\ldots\\ \\mathrm{m/s} \\\\
+\\mu = 0{,}70 \\\\
+g = 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+E_k = \\frac{m \\cdot v^{2}}{2} = \\frac{1\\,200 \\cdot 13{,}888\\ldots^{2}}{2} = 115\\,740{,}7\\ldots\\ \\mathrm{J}
+$$
+
+$$
+F_f = \\mu \\cdot m \\cdot g = 0{,}70 \\cdot 1\\,200 \\cdot 9{,}82 = 8\\,248{,}8\\ \\mathrm{N}
+$$
+
+$$
+s = \\frac{115\\,740{,}7\\ldots}{8\\,248{,}8} = 14{,}03\\ldots\\ \\mathrm{m} \\approx 14\\ \\mathrm{m}
+$$
+
+Rimligt: en bil som tvärbromsar från 50 km/h på torr asfalt stannar efter drygt tio meter, så 14 m är en rimlig bromssträcka. Reaktionssträckan, som bilen hinner köra innan föraren trycker ned bromsen, är då inte medräknad.
+
+**Svar:** Bromssträckan är cirka 14 m.`,
+        },
+        {
+            level: 2,
+            question: `En förälder drar en pulka med ett barn 30 m över plan snö med konstant fart. Snöret bildar vinkeln 30° med marken, och kraften i snöret är 50 N, se figuren. Pulkan och barnet har tillsammans massan 28 kg.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0.0 -10.0 420.0 160.0" style="max-width:532px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="20.0" y1="130.0" x2="400.0" y2="130.0" stroke="#0f1620" stroke-width="1.6"/><line x1="28.0" y1="130.0" x2="21.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="40.0" y1="130.0" x2="33.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="52.0" y1="130.0" x2="45.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="64.0" y1="130.0" x2="57.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="76.0" y1="130.0" x2="69.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="88.0" y1="130.0" x2="81.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="100.0" y1="130.0" x2="93.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="112.0" y1="130.0" x2="105.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="124.0" y1="130.0" x2="117.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="136.0" y1="130.0" x2="129.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="148.0" y1="130.0" x2="141.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="160.0" y1="130.0" x2="153.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="172.0" y1="130.0" x2="165.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="184.0" y1="130.0" x2="177.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="196.0" y1="130.0" x2="189.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="208.0" y1="130.0" x2="201.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="220.0" y1="130.0" x2="213.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="232.0" y1="130.0" x2="225.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="244.0" y1="130.0" x2="237.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="256.0" y1="130.0" x2="249.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="268.0" y1="130.0" x2="261.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="280.0" y1="130.0" x2="273.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="292.0" y1="130.0" x2="285.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="304.0" y1="130.0" x2="297.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="316.0" y1="130.0" x2="309.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="328.0" y1="130.0" x2="321.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="340.0" y1="130.0" x2="333.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="352.0" y1="130.0" x2="345.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="364.0" y1="130.0" x2="357.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="376.0" y1="130.0" x2="369.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><line x1="388.0" y1="130.0" x2="381.0" y2="138.0" stroke="#0f1620" stroke-width="1"/><g transform="translate(110.0,130.0) rotate(0.0)"><path d="M -38 0 L 32 0 Q 43 0 43 -9" fill="none" stroke="#0f1620" stroke-width="2.4" stroke-linecap="round"/><line x1="-29" y1="0" x2="-29" y2="-11" stroke="#0f1620" stroke-width="1.6"/><line x1="0" y1="0" x2="0" y2="-11" stroke="#0f1620" stroke-width="1.6"/><line x1="26" y1="0" x2="26" y2="-11" stroke="#0f1620" stroke-width="1.6"/><rect x="-36" y="-15" width="70" height="6" rx="2" fill="#c9844f" stroke="#7a4b26" stroke-width="1.3"/></g><line x1="153" y1="121" x2="352.2" y2="6.0" stroke="#6b5a45" stroke-width="1.6"/><circle cx="153" cy="121" r="2.2" fill="#6b5a45"/><line x1="153" y1="121" x2="278" y2="121" stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"/><path d="M 209.0 121.0 A 56 56 0 0 0 201.5 93.0" fill="none" stroke="#8a8579" stroke-width="1.4"/><text x="226.4" y="106.3" font-size="14" fill="#8a8579" text-anchor="middle">30°</text><line x1="206.6" y1="73.9" x2="290.6" y2="25.4" stroke="#2563c9" stroke-width="3" stroke-linecap="butt"/><polygon points="300.2,19.9 287.9,20.6 293.4,30.1" fill="#2563c9"/><text x="294.2" y="7.9" font-size="15" fill="#2563c9" text-anchor="end"><tspan font-style="italic">F</tspan> = 50 N</text></svg>
+
+Bestäm<br>a)&nbsp;friktionsvärmen under förflyttningen<br>b)&nbsp;friktionstalet mellan pulkan och snön.
+
+Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$. *Ange friktionsvärmen (a) som ditt numeriska svar i J.*`,
+            answer: { value: 1299, unit: 'J', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 1299, unit: 'J', tol: 0.03, etikett: '$E_v =$' },
+                { del: 'b', value: 0.1732, unit: '', tol: 0.04, etikett: '$\\mu =$' },
+            ],
+            solution: `**a)** Kraften i snöret delas upp i en vågrät komposant $F_x$ (närliggande katet till vinkeln) och en lodrät komposant $F_y$ (motstående katet):
+
+$$
+\\left[ \\begin{array}{l}
+F_x = F \\cdot \\cos \\alpha = 50 \\cdot \\cos 30^{\\circ} = 43{,}301\\ldots\\ \\mathrm{N} \\\\
+F_y = F \\cdot \\sin \\alpha = 50 \\cdot \\sin 30^{\\circ} = 25\\ \\mathrm{N}
+\\end{array} \\right]
+$$
+
+Farten är konstant, så kraftresultanten i vågrät led är noll. Friktionskraften är då lika stor som den vågräta komposanten, $F_f = F_x = 43{,}301\\ldots\\ \\mathrm{N}$.
+
+$$
+E_v = F_f \\cdot s = 43{,}301\\ldots \\cdot 30 = 1\\,299{,}0\\ldots\\ \\mathrm{J} \\approx 1{,}3\\ \\mathrm{kJ}
+$$
+
+**Svar:** Friktionsvärmen är cirka 1,3 kJ.
+
+**b)** Snöret lyfter pulkan en aning, så normalkraften blir tyngdkraften minus den lodräta komposanten:
+
+$$
+F_N = m \\cdot g - F_y = 28 \\cdot 9{,}82 - 25 = 274{,}96 - 25 = 249{,}96\\ \\mathrm{N}
+$$
+
+$$
+F_f = \\mu \\cdot F_N \\quad\\Leftrightarrow\\quad \\mu = \\frac{F_f}{F_N} = \\frac{43{,}301\\ldots}{249{,}96} = 0{,}1732\\ldots \\approx 0{,}17
+$$
+
+Rimligt: friktionstalet för en pulka på snö är litet, och 0,17 ligger i rätt storleksordning. Den som glömmer $F_y$ och räknar med $F_N = m \\cdot g$ får ett något för litet friktionstal, 0,16.
+
+**Svar:** Friktionstalet är cirka 0,17.`,
+        },
+        {
+            level: 2,
+            question: `En skottkärra med sand har massan 95 kg. Den skjuts med konstant fart uppför en 3,2 m lång ramp till en container, och höjdskillnaden mellan rampens ändar är 0,60 m. Kraften från den som skjuter är 230 N och riktad längs rampen.<br>a)&nbsp;Hur mycket friktionsvärme bildas?<br>b)&nbsp;Hur stor är friktionskraften (rullmotståndet) på skottkärran?
+
+Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$. *Ange friktionsvärmen (a) som ditt numeriska svar i J.*`,
+            answer: { value: 176.26, unit: 'J', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 176.26, unit: 'J', tol: 0.03, etikett: '$E_v =$' },
+                { del: 'b', value: 55.08, unit: 'N', tol: 0.03, etikett: '$F_f =$' },
+            ],
+            solution: `**a)** Kraften är riktad längs rampen, alltså i rörelsens riktning, så arbetet är kraften gånger sträckan. Farten är konstant, så arbetet går till ökad lägesenergi och friktionsvärme:
+
+$$
+W = \\Delta E_p + E_v \\quad\\Leftrightarrow\\quad E_v = W - \\Delta E_p = F \\cdot s - m \\cdot g \\cdot h
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F = 230\\ \\mathrm{N} \\\\
+s = 3{,}2\\ \\mathrm{m} \\\\
+m = 95\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+h = 0{,}60\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+W = 230 \\cdot 3{,}2 = 736\\ \\mathrm{J}
+$$
+
+$$
+\\Delta E_p = 95 \\cdot 9{,}82 \\cdot 0{,}60 = 559{,}74\\ \\mathrm{J}
+$$
+
+$$
+E_v = 736 - 559{,}74 = 176{,}26\\ \\mathrm{J} \\approx 180\\ \\mathrm{J}
+$$
+
+**Svar:** Cirka 180 J blir friktionsvärme.
+
+**b)** Friktionsvärmen är friktionskraften gånger sträckan längs rampen:
+
+$$
+E_v = F_f \\cdot s \\quad\\Leftrightarrow\\quad F_f = \\frac{E_v}{s} = \\frac{176{,}26}{3{,}2} = 55{,}08\\ldots\\ \\mathrm{N} \\approx 55\\ \\mathrm{N}
+$$
+
+Rimligt: det mesta av kraften behövs för att hålla emot tyngdkraftens komposant längs rampen, $m \\cdot g \\cdot \\dfrac{h}{s} = 95 \\cdot 9{,}82 \\cdot \\dfrac{0{,}60}{3{,}2} = 174{,}9\\ldots\\ \\mathrm{N}$, och rullmotståndet är resten av de 230 N.
+
+**Svar:** Friktionskraften är cirka 55 N.`,
+        },
+        {
+            level: 3,
+            question: `En kälke får farten $v_0$ vid foten av en backe och glider sedan uppför backen tills den stannar. Backen lutar vinkeln $\\alpha$ mot horisontalplanet, och friktionstalet mellan kälken och snön är $\\mu$.<br>a)&nbsp;Hur långt uppför backen glider kälken när $v_0 = 6{,}0\\ \\mathrm{m/s}$, $\\alpha = 12^{\\circ}$ och $\\mu = 0{,}10$?<br>b)&nbsp;Avgör om kälken glider tillbaka ned, och bestäm i så fall farten när den är tillbaka vid foten. Anta att friktionstalet är 0,10 även när kälken står still.
+
+Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$. *Ange sträckan (a) som ditt numeriska svar i m.*`,
+            answer: { value: 5.996, unit: 'm', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 5.996, unit: 'm', tol: 0.03, etikett: '$s =$' },
+                { del: 'b', value: 3.601, unit: 'm/s', tol: 0.03, etikett: '$v =$' },
+            ],
+            solution: `**a)** På väg uppför blir rörelseenergin dels lägesenergi, dels friktionsvärme:
+
+$$
+E_k = \\Delta E_p + E_v
+$$
+
+Kälken glider sträckan $s$ längs backen och kommer då höjden $h = s \\cdot \\sin \\alpha$ upp (den lodräta kateten mittemot vinkeln). Normalkraften är tyngdkraftens komposant vinkelrätt mot backen, $F_N = m \\cdot g \\cdot \\cos \\alpha$, så friktionskraften är $F_f = \\mu \\cdot m \\cdot g \\cdot \\cos \\alpha$. Insatt:
+
+$$
+\\frac{m \\cdot v_0^{2}}{2} = m \\cdot g \\cdot s \\cdot \\sin \\alpha + \\mu \\cdot m \\cdot g \\cdot \\cos \\alpha \\cdot s
+$$
+
+Massan finns i varje term och kan förkortas bort. Bryt sedan ut $g \\cdot s$:
+
+$$
+\\frac{v_0^{2}}{2} = g \\cdot s \\cdot (\\sin \\alpha + \\mu \\cdot \\cos \\alpha)
+$$
+
+$$
+s = \\frac{v_0^{2}}{2 \\cdot g \\cdot (\\sin \\alpha + \\mu \\cdot \\cos \\alpha)}
+$$
+
+Kälkens massa behövs alltså inte, den förkortas bort. Med de givna värdena:
+
+$$
+\\sin 12^{\\circ} + 0{,}10 \\cdot \\cos 12^{\\circ} = 0{,}20791\\ldots + 0{,}097814\\ldots = 0{,}30572\\ldots
+$$
+
+$$
+s = \\frac{6{,}0^{2}}{2 \\cdot 9{,}82 \\cdot 0{,}30572\\ldots} = \\frac{36}{6{,}0044\\ldots} = 5{,}995\\ldots\\ \\mathrm{m} \\approx 6{,}0\\ \\mathrm{m}
+$$
+
+Rimligt: utan friktion ($\\mu = 0$) ger formeln $s = \\dfrac{36}{2 \\cdot 9{,}82 \\cdot 0{,}20791\\ldots} = 8{,}8\\ \\mathrm{m}$. Friktionen ska göra sträckan kortare, och det gör den.
+
+**Svar:** Kälken glider cirka 6,0 m uppför backen.
+
+**b)** När kälken står still verkar tyngdkraftens komposant $m \\cdot g \\cdot \\sin \\alpha$ nedför backen. Friktionen kan som mest bli $\\mu \\cdot m \\cdot g \\cdot \\cos \\alpha$. Kälken glider ned om
+
+$$
+m \\cdot g \\cdot \\sin \\alpha > \\mu \\cdot m \\cdot g \\cdot \\cos \\alpha \\quad\\Leftrightarrow\\quad \\tan \\alpha > \\mu
+$$
+
+Här är $\\tan 12^{\\circ} = 0{,}2125\\ldots$, som är större än $\\mu = 0{,}10$, så kälken glider tillbaka.
+
+På vägen ned blir lägesenergin rörelseenergi och friktionsvärme. Friktionen är lika stor som på vägen upp men motverkar nu rörelsen nedför:
+
+$$
+m \\cdot g \\cdot s \\cdot \\sin \\alpha = \\frac{m \\cdot v^{2}}{2} + \\mu \\cdot m \\cdot g \\cdot \\cos \\alpha \\cdot s
+$$
+
+Förkorta bort massan och lös ut $v$:
+
+$$
+v = \\sqrt{2 \\cdot g \\cdot s \\cdot (\\sin \\alpha - \\mu \\cdot \\cos \\alpha)}
+$$
+
+$$
+\\sin 12^{\\circ} - 0{,}10 \\cdot \\cos 12^{\\circ} = 0{,}20791\\ldots - 0{,}097814\\ldots = 0{,}11009\\ldots
+$$
+
+$$
+v = \\sqrt{2 \\cdot 9{,}82 \\cdot 5{,}995\\ldots \\cdot 0{,}11009\\ldots} = \\sqrt{12{,}96\\ldots} = 3{,}600\\ldots\\ \\mathrm{m/s} \\approx 3{,}6\\ \\mathrm{m/s}
+$$
+
+Rimligt: kälken har förlorat energi till friktionsvärme både upp och ned, så den ska komma tillbaka med lägre fart än 6,0 m/s.
+
+**Svar:** Kälken glider tillbaka och har farten cirka 3,6 m/s vid foten.`,
+        },
+        {
+            level: 3,
+            question: `En cyklist bromsar hela vägen nedför en 1,2 km lång backe så att farten hålls konstant. Höjdskillnaden mellan backens topp och botten är 85 m, och cyklist och cykel har tillsammans massan 90 kg.<br>a)&nbsp;Hur stor är i medeltal den sammanlagda kraft som bromsar cykeln (friktionen i bromsarna, rullmotståndet och luftmotståndet tillsammans)?<br>b)&nbsp;Cykeln har skivbromsar, och de två bromsskivorna av stål har tillsammans massan 0,25 kg. Den energi som behövs för att värma ett föremål är $E = c \\cdot m \\cdot \\Delta T$, där stålets specifika värmekapacitet är $c = 460\\ \\mathrm{J/(kg \\cdot K)}$. Beräkna hur mycket bromsskivornas temperatur skulle öka om all värme hamnade i dem, och diskutera resultatet.
+
+Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$. *Ange kraften (a) som ditt numeriska svar i N.*`,
+            answer: { value: 62.6, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 62.6, unit: 'N', tol: 0.03, etikett: '$F =$' },
+                { del: 'b', value: 653, unit: 'K', tol: 0.03, etikett: '$\\Delta T =$' },
+            ],
+            solution: `**a)** Farten är konstant, så rörelseenergin ändras inte. Hela minskningen av lägesenergi blir värme genom de krafter som bromsar cykeln:
+
+$$
+E_v = \\Delta E_p = m \\cdot g \\cdot h = 90 \\cdot 9{,}82 \\cdot 85 = 75\\,123\\ \\mathrm{J}
+$$
+
+Värmen är den bromsande kraften gånger sträckan längs backen:
+
+$$
+E_v = F \\cdot s \\quad\\Leftrightarrow\\quad F = \\frac{E_v}{s} = \\frac{75\\,123}{1\\,200} = 62{,}60\\ldots\\ \\mathrm{N} \\approx 63\\ \\mathrm{N}
+$$
+
+**Svar:** Den bromsande kraften är i medeltal cirka 63 N.
+
+**b)** Om all värme, 75 123 J, hamnade i bromsskivorna:
+
+$$
+E = c \\cdot m \\cdot \\Delta T \\quad\\Leftrightarrow\\quad \\Delta T = \\frac{E}{c \\cdot m} = \\frac{75\\,123}{460 \\cdot 0{,}25} = \\frac{75\\,123}{115} = 653{,}2\\ldots\\ \\mathrm{K} \\approx 650\\ \\mathrm{K}
+$$
+
+En temperaturökning på cirka 650 K skulle få skivorna att glöda, och så går det inte till i verkligheten. Beräkningen ger en **övre gräns**, av två skäl:
+
+- Bara en del av värmen bildas i bromsarna. Luftmotståndet och rullmotståndet tar också emot en del av energin, och den värmen hamnar i luften och i däcken.
+- Skivorna avger hela tiden värme till luften som strömmar förbi, så de blir aldrig hur varma som helst. Under en lång nedförsbacke ställer sig temperaturen där skivorna avger lika mycket värme som de tar emot.
+
+Den verkliga temperaturökningen blir därför mycket lägre. Resultatet visar ändå varför man inte ska bromsa oavbrutet med bara en broms i en lång backe: skivorna kan bli så varma att bromsförmågan försämras.
+
+**Svar:** Temperaturen skulle öka med cirka 650 K, men det är en övre gräns. Den verkliga ökningen är mycket mindre eftersom en del av energin blir värme i luft och däck och skivorna hela tiden kyls av luften.`,
+        },
+        {
+            level: 3,
+            question: `En elev påstår: ”Om en låda dras med konstant fart uppför en ramp till en viss höjd krävs lika mycket arbete hur brant rampen än är, eftersom lägesenergin ökar lika mycket.”<br>a)&nbsp;Stämmer påståendet när det finns friktion? Styrk ditt svar med ett generellt uttryck för arbetet $W$ uttryckt i $m$, $g$, $h$, $\\mu$ och rampens lutning $\\alpha$.<br>b)&nbsp;Friktionstalet är 0,30. Hur många procent större är arbetet med en ramp som lutar 15° än med en ramp som lutar 45°, om lådan ska upp till samma höjd?
+
+*Ange svaret på b i procent.*`,
+            answer: { value: 63.05, unit: '%', tol: 0.03 },
+            solution: `**a)** Arbetet går till ökad lägesenergi och friktionsvärme:
+
+$$
+W = \\Delta E_p + E_v = m \\cdot g \\cdot h + F_f \\cdot s
+$$
+
+Rampens längd $s$ är hypotenusan i en rätvinklig triangel där höjden $h$ är kateten mittemot $\\alpha$, så $\\sin \\alpha = \\dfrac{h}{s}$ och $s = \\dfrac{h}{\\sin \\alpha}$. Friktionskraften är $F_f = \\mu \\cdot F_N = \\mu \\cdot m \\cdot g \\cdot \\cos \\alpha$. Insatt:
+
+$$
+W = m \\cdot g \\cdot h + \\mu \\cdot m \\cdot g \\cdot \\cos \\alpha \\cdot \\frac{h}{\\sin \\alpha}
+$$
+
+Med $\\dfrac{\\cos \\alpha}{\\sin \\alpha} = \\dfrac{1}{\\tan \\alpha}$ och $m \\cdot g \\cdot h$ utbrutet:
+
+$$
+W = m \\cdot g \\cdot h \\cdot \\left( 1 + \\frac{\\mu}{\\tan \\alpha} \\right)
+$$
+
+Utan friktion ($\\mu = 0$) blir $W = m \\cdot g \\cdot h$, och då stämmer påståendet. Med friktion beror arbetet på $\\alpha$: ju flackare ramp, desto mindre $\\tan \\alpha$ och desto större arbete. Den flacka rampen ger visserligen en mindre friktionskraft (mindre normalkraft), men sträckan blir så mycket längre att friktionsvärmen ändå växer.
+
+**Svar:** Nej. Med friktion är $W = m \\cdot g \\cdot h \\cdot \\left( 1 + \\dfrac{\\mu}{\\tan \\alpha} \\right)$, så en flackare ramp kräver mer arbete. Påståendet gäller bara utan friktion.
+
+**b)** Faktorn $m \\cdot g \\cdot h$ är densamma för båda ramperna och tar ut sig i kvoten:
+
+$$
+\\frac{W_{15}}{W_{45}} = \\frac{1 + \\dfrac{0{,}30}{\\tan 15^{\\circ}}}{1 + \\dfrac{0{,}30}{\\tan 45^{\\circ}}} = \\frac{1 + 1{,}1196\\ldots}{1 + 0{,}30} = \\frac{2{,}1196\\ldots}{1{,}30} = 1{,}6304\\ldots
+$$
+
+Arbetet med den flacka rampen är alltså 1,63 gånger så stort, det vill säga cirka 63 % större.
+
+Rimligt: med 15° lutning är rampen nästan tre gånger så lång som rampen med 45° lutning ($\\dfrac{\\sin 45^{\\circ}}{\\sin 15^{\\circ}} = 2{,}7$ gånger längre), och friktionsvärmen blir då större än själva lägesenergin.
+
+**Svar:** Arbetet är cirka 63 % större med rampen som lutar 15°.`,
+        },
+        {
+            level: 3,
+            question: `I en laboration skjuts en träkloss iväg längs ett vågrätt bord med olika starthastigheter $v_0$, och sträckan $s$ som klossen glider innan den stannar mäts. Resultaten står i tabellen.
+
+| $v_0$ (m/s) | 1,0 | 1,5 | 2,0 | 2,5 | 3,0 |
+|---|---|---|---|---|---|
+| $s$ (m) | 0,13 | 0,28 | 0,52 | 0,79 | 1,16 |
+
+Undersök med hjälp av energiprincipen och en lämplig graf om mätningarna stämmer med modellen att friktionskraften är konstant, och bestäm friktionstalet mellan klossen och bordet. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            answer: { value: 0.40, unit: '', tol: 0.05 },
+            solution: `**Modellen.** När klossen glider tills den stannar blir hela rörelseenergin friktionsvärme. På ett vågrätt bord är $F_N = m \\cdot g$, så $F_f = \\mu \\cdot m \\cdot g$:
+
+$$
+\\frac{m \\cdot v_0^{2}}{2} = \\mu \\cdot m \\cdot g \\cdot s
+$$
+
+Massan förkortas bort, och sträckan löses ut:
+
+$$
+s = \\frac{1}{2 \\cdot \\mu \\cdot g} \\cdot v_0^{2}
+$$
+
+Om modellen stämmer är $s$ proportionell mot $v_0^{2}$. En graf med $s$ mot $v_0^{2}$ ska då ge en rät linje genom origo med lutningen $k = \\dfrac{1}{2 \\cdot \\mu \\cdot g}$.
+
+**Grafen.** Räkna först ut $v_0^{2}$:
+
+| $v_0^{2}$ (m²/s²) | 1,0 | 2,25 | 4,0 | 6,25 | 9,0 |
+|---|---|---|---|---|---|
+| $s$ (m) | 0,13 | 0,28 | 0,52 | 0,79 | 1,16 |
+
+${makeDiagram({ xMax: 10, yMax: 1.4, xTicks: [0, 2, 4, 6, 8, 10], yTicks: [0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4], xLabel: '<tspan font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="0.72em">0</tspan>² (m²/s²)', yLabel: '<tspan font-style="italic">s</tspan> (m)', paths: [{ points: [[0, 0], [10, 1.282]], color: '#2563c9', width: 2 }, { points: [[1, 0.13], [1, 0.13]], color: '#0f1620', width: 8 }, { points: [[2.25, 0.28], [2.25, 0.28]], color: '#0f1620', width: 8 }, { points: [[4, 0.52], [4, 0.52]], color: '#0f1620', width: 8 }, { points: [[6.25, 0.79], [6.25, 0.79]], color: '#0f1620', width: 8 }, { points: [[9, 1.16], [9, 1.16]], color: '#0f1620', width: 8 }] })}
+
+Punkterna ligger väl på en rät linje genom origo, så mätningarna stämmer med modellen att friktionskraften är konstant. (Hade friktionen ökat med farten, till exempel genom luftmotstånd, hade punkterna för stora $v_0$ hamnat under linjen.)
+
+**Friktionstalet.** Linjen som passar punkterna bäst går genom origo och punkten $(10;\\ 1{,}28)$. Lutningen är
+
+$$
+k = \\frac{\\Delta s}{\\Delta (v_0^{2})} = \\frac{1{,}28}{10} = 0{,}128\\ \\mathrm{s^2/m}
+$$
+
+$$
+k = \\frac{1}{2 \\cdot \\mu \\cdot g} \\quad\\Leftrightarrow\\quad \\mu = \\frac{1}{2 \\cdot g \\cdot k} = \\frac{1}{2 \\cdot 9{,}82 \\cdot 0{,}128} = 0{,}3977\\ldots \\approx 0{,}40
+$$
+
+Rimligt: friktionstalet för trä mot trä brukar ligga mellan 0,25 och 0,5. Att använda lutningen av en linje genom alla punkter är bättre än att räkna med en enda mätning, eftersom mätfelen i de enskilda sträckorna då jämnas ut.
+
+**Svar:** Punkterna ligger på en rät linje genom origo i en graf med $s$ mot $v_0^{2}$, så modellen med konstant friktionskraft stämmer. Friktionstalet är cirka 0,40.`,
+        },
+        {
+            level: 3,
+            question: `En pulka åker från vila ned för en backe som lutar vinkeln $\\alpha$ och glider sedan vidare ut på plan snö tills den stannar, se figuren. Backens topp ligger höjden $h$ över den plana snön, och friktionstalet $\\mu$ mellan pulkan och snön är lika stort i backen som på den plana snön. Bortse från luftmotståndet och från energiförluster i övergången mellan backen och den plana snön.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0.0 60.0 600.0 150.0" style="max-width:664px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><polygon points="40.0,80.0 275.9,190 40.0,190" fill="#eef3f7" stroke="none"/><line x1="20.0" y1="80.0" x2="40.0" y2="80.0" stroke="#0f1620" stroke-width="1.6"/><line x1="40.0" y1="80.0" x2="275.9" y2="190" stroke="#0f1620" stroke-width="1.6"/><line x1="269.9" y1="190.0" x2="580.0" y2="190.0" stroke="#0f1620" stroke-width="1.6"/><line x1="277.9" y1="190.0" x2="270.9" y2="198.0" stroke="#0f1620" stroke-width="1"/><line x1="289.9" y1="190.0" x2="282.9" y2="198.0" stroke="#0f1620" stroke-width="1"/><line x1="301.9" y1="190.0" x2="294.9" y2="198.0" stroke="#0f1620" stroke-width="1"/><line x1="313.9" y1="190.0" x2="306.9" y2="198.0" stroke="#0f1620" stroke-width="1"/><line x1="325.9" y1="190.0" x2="318.9" y2="198.0" stroke="#0f1620" stroke-width="1"/><line x1="337.9" y1="190.0" x2="330.9" y2="198.0" stroke="#0f1620" stroke-width="1"/><line x1="349.9" y1="190.0" x2="342.9" y2="198.0" stroke="#0f1620" stroke-width="1"/><line x1="361.9" y1="190.0" x2="354.9" y2="198.0" stroke="#0f1620" stroke-width="1"/><line x1="373.9" y1="190.0" x2="366.9" y2="198.0" stroke="#0f1620" stroke-width="1"/><line x1="385.9" y1="190.0" x2="378.9" y2="198.0" stroke="#0f1620" stroke-width="1"/><line x1="397.9" y1="190.0" x2="390.9" y2="198.0" stroke="#0f1620" stroke-width="1"/><line x1="409.9" y1="190.0" x2="402.9" y2="198.0" stroke="#0f1620" stroke-width="1"/><line x1="421.9" y1="190.0" x2="414.9" y2="198.0" stroke="#0f1620" stroke-width="1"/><line x1="433.9" y1="190.0" x2="426.9" y2="198.0" stroke="#0f1620" stroke-width="1"/><line x1="445.9" y1="190.0" x2="438.9" y2="198.0" stroke="#0f1620" stroke-width="1"/><line x1="457.9" y1="190.0" x2="450.9" y2="198.0" stroke="#0f1620" stroke-width="1"/><line x1="469.9" y1="190.0" x2="462.9" y2="198.0" stroke="#0f1620" stroke-width="1"/><line x1="481.9" y1="190.0" x2="474.9" y2="198.0" stroke="#0f1620" stroke-width="1"/><line x1="493.9" y1="190.0" x2="486.9" y2="198.0" stroke="#0f1620" stroke-width="1"/><line x1="505.9" y1="190.0" x2="498.9" y2="198.0" stroke="#0f1620" stroke-width="1"/><line x1="517.9" y1="190.0" x2="510.9" y2="198.0" stroke="#0f1620" stroke-width="1"/><line x1="529.9" y1="190.0" x2="522.9" y2="198.0" stroke="#0f1620" stroke-width="1"/><line x1="541.9" y1="190.0" x2="534.9" y2="198.0" stroke="#0f1620" stroke-width="1"/><line x1="553.9" y1="190.0" x2="546.9" y2="198.0" stroke="#0f1620" stroke-width="1"/><line x1="565.9" y1="190.0" x2="558.9" y2="198.0" stroke="#0f1620" stroke-width="1"/><line x1="577.9" y1="190.0" x2="570.9" y2="198.0" stroke="#0f1620" stroke-width="1"/><line x1="40.0" y1="80.0" x2="40.0" y2="190" stroke="#0f1620" stroke-width="1" stroke-dasharray="3 3"/><g transform="translate(81.7,99.4) rotate(25.0)"><path d="M -38 0 L 32 0 Q 43 0 43 -9" fill="none" stroke="#0f1620" stroke-width="2.4" stroke-linecap="round"/><line x1="-29" y1="0" x2="-29" y2="-11" stroke="#0f1620" stroke-width="1.6"/><line x1="0" y1="0" x2="0" y2="-11" stroke="#0f1620" stroke-width="1.6"/><line x1="26" y1="0" x2="26" y2="-11" stroke="#0f1620" stroke-width="1.6"/><rect x="-36" y="-15" width="70" height="6" rx="2" fill="#c9844f" stroke="#7a4b26" stroke-width="1.3"/></g><line x1="26.0" y1="87.0" x2="26.0" y2="183.0" stroke="#4a5563" stroke-width="1.3"/><polygon points="26.0,80.0 22.8,87.0 29.2,87.0" fill="#4a5563"/><polygon points="26.0,190.0 22.8,183.0 29.2,183.0" fill="#4a5563"/><text x="18.0" y="140.0" font-size="16" fill="#4a5563" text-anchor="end"><tspan font-style="italic">h</tspan></text><path d="M 234.2 170.6 A 46 46 0 0 0 229.9 190.0" fill="none" stroke="#8a8579" stroke-width="1.4"/><text x="211.5" y="180.7" font-size="16" fill="#8a8579" text-anchor="middle"><tspan font-style="italic">α</tspan></text><line x1="520" y1="172" x2="520" y2="190" stroke="#0f1620" stroke-width="1.4"/><text x="526.0" y="184.0" font-size="13" fill="#0f1620" text-anchor="start">stopp</text><line x1="275.9" y1="190.0" x2="275.9" y2="156.0" stroke="#4a5563" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="282.9" y1="162.0" x2="513.0" y2="162.0" stroke="#4a5563" stroke-width="1.3"/><polygon points="275.9,162.0 282.9,165.2 282.9,158.8" fill="#4a5563"/><polygon points="520.0,162.0 513.0,165.2 513.0,158.8" fill="#4a5563"/><text x="397.9" y="154.0" font-size="16" fill="#4a5563" text-anchor="middle"><tspan font-style="italic">d</tspan></text></svg>
+
+a)&nbsp;Visa att den vågräta sträckan från startpunkten till punkten där pulkan stannar är $\\dfrac{h}{\\mu}$, oberoende av backens lutning och pulkans massa.<br>b)&nbsp;Backen är 15 m hög och lutar 25°, och friktionstalet är 0,12. Hur långt glider pulkan på den plana snön, sträckan $d$ i figuren?
+
+Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$. *Ange sträckan $d$ (b) som ditt numeriska svar i m.*`,
+            answer: { value: 92.83, unit: 'm', tol: 0.03 },
+            solution: `**a)** Pulkan startar och slutar i vila, så rörelseenergin är noll i båda ändarna. Hela lägesenergin blir friktionsvärme, dels i backen och dels på den plana snön:
+
+$$
+m \\cdot g \\cdot h = E_{v,\\text{backe}} + E_{v,\\text{plan}}
+$$
+
+**I backen** är normalkraften tyngdkraftens komposant vinkelrätt mot backen, $F_N = m \\cdot g \\cdot \\cos \\alpha$. Backens längd $L$ är hypotenusan i en rätvinklig triangel där $h$ är kateten mittemot $\\alpha$, så $L = \\dfrac{h}{\\sin \\alpha}$:
+
+$$
+E_{v,\\text{backe}} = \\mu \\cdot m \\cdot g \\cdot \\cos \\alpha \\cdot \\frac{h}{\\sin \\alpha} = \\mu \\cdot m \\cdot g \\cdot \\frac{h}{\\tan \\alpha}
+$$
+
+**På den plana snön** är $F_N = m \\cdot g$:
+
+$$
+E_{v,\\text{plan}} = \\mu \\cdot m \\cdot g \\cdot d
+$$
+
+Insatt i energiekvationen:
+
+$$
+m \\cdot g \\cdot h = \\mu \\cdot m \\cdot g \\cdot \\frac{h}{\\tan \\alpha} + \\mu \\cdot m \\cdot g \\cdot d
+$$
+
+Dividera båda led med $m \\cdot g$ (massan försvinner) och sedan med $\\mu$:
+
+$$
+\\frac{h}{\\mu} = \\frac{h}{\\tan \\alpha} + d
+$$
+
+Backens vågräta längd är den närliggande kateten, $\\dfrac{h}{\\tan \\alpha}$. Högerledet är alltså backens vågräta längd plus sträckan på den plana snön, det vill säga hela den vågräta sträckan från start till stopp. Den är $\\dfrac{h}{\\mu}$, och varken $\\alpha$ eller $m$ finns med, vilket skulle visas.
+
+En brantare backe ger alltså en kortare backe i vågrät led men en lika mycket längre glidning på den plana snön.
+
+**b)** Ur sambandet i a:
+
+$$
+d = \\frac{h}{\\mu} - \\frac{h}{\\tan \\alpha}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+h = 15\\ \\mathrm{m} \\\\
+\\mu = 0{,}12 \\\\
+\\alpha = 25^{\\circ}
+\\end{array} \\right]
+$$
+
+$$
+d = \\frac{15}{0{,}12} - \\frac{15}{\\tan 25^{\\circ}} = 125 - 32{,}167\\ldots = 92{,}83\\ldots\\ \\mathrm{m} \\approx 93\\ \\mathrm{m}
+$$
+
+Rimligt: pulkan kan bara glida ned om $\\tan \\alpha > \\mu$, och här är $\\tan 25^{\\circ} = 0{,}47$, som är större än 0,12. Dessutom ska $d$ vara positivt, vilket kräver samma villkor.
+
+**Svar:** Pulkan glider cirka 93 m på den plana snön.`,
+        },
+        {
+            level: 3,
+            question: `En släplift drar skidåkare uppför en 600 m lång backe med konstant fart 2,5 m/s. Höjdskillnaden mellan liftens nedre och övre ände är 150 m. En ny skidåkare kopplas på var tionde sekund, och en skidåkare med utrustning har i medeltal massan 75 kg. Friktionstalet mellan skidorna och spåret är 0,050.
+
+Vilken effekt måste liften i medeltal leverera till skidåkarna när den är fullt belagd? Diskutera också om motorn behöver ha större eller mindre effekt än så. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange effekten i kW.`,
+            answer: { value: 13.19, unit: 'kW', tol: 0.03 },
+            solution: `**Idé.** Liften går med konstant fart, och var tionde sekund kommer en skidåkare upp till toppen medan en ny kopplas på nederst. Allt som händer i liften under tio sekunder motsvarar därför att **en** skidåkare dras hela vägen upp. Effekten är då arbetet för en hel tur dividerat med 10 s.
+
+**Arbetet för en skidåkare.** Farten är konstant, så arbetet går till lägesenergi och friktionsvärme:
+
+$$
+W_1 = m \\cdot g \\cdot h + \\mu \\cdot m \\cdot g \\cdot \\cos \\alpha \\cdot s
+$$
+
+Lutningen ges av den rätvinkliga triangeln med hypotenusan $s = 600\\ \\mathrm{m}$ och kateten $h = 150\\ \\mathrm{m}$ mittemot $\\alpha$:
+
+$$
+\\sin \\alpha = \\frac{150}{600} = 0{,}25 \\quad\\Rightarrow\\quad \\cos \\alpha = \\sqrt{1 - 0{,}25^{2}} = 0{,}96824\\ldots
+$$
+
+$$
+\\Delta E_p = 75 \\cdot 9{,}82 \\cdot 150 = 110\\,475\\ \\mathrm{J}
+$$
+
+$$
+E_v = 0{,}050 \\cdot 75 \\cdot 9{,}82 \\cdot 0{,}96824\\ldots \\cdot 600 = 21\\,393{,}3\\ldots\\ \\mathrm{J}
+$$
+
+$$
+W_1 = 110\\,475 + 21\\,393{,}3\\ldots = 131\\,868{,}3\\ldots\\ \\mathrm{J}
+$$
+
+**Effekten.**
+
+$$
+P = \\frac{W_1}{t} = \\frac{131\\,868{,}3\\ldots}{10} = 13\\,186{,}8\\ldots\\ \\mathrm{W} \\approx 13\\ \\mathrm{kW}
+$$
+
+**Kontroll på ett annat sätt.** Avståndet mellan två skidåkare är $2{,}5 \\cdot 10 = 25\\ \\mathrm{m}$, så i liften finns $\\dfrac{600}{25} = 24$ skidåkare. Varje skidåkare drar med kraften $m \\cdot g \\cdot (\\sin \\alpha + \\mu \\cdot \\cos \\alpha) = 219{,}78\\ldots\\ \\mathrm{N}$, och effekten blir $24 \\cdot 219{,}78\\ldots \\cdot 2{,}5 = 13\\,186{,}8\\ldots\\ \\mathrm{W}$, samma som ovan.
+
+**Diskussion.** 13 kW är den effekt som når skidåkarna. Motorn måste ha **större** effekt, av flera skäl: det finns friktion i liftens hjul, trissor och växellåda, vajern och byglarna ska också hållas i rörelse, och en elmotor har en verkningsgrad under 100 %. Dessutom är 75 kg ett medelvärde: en tung skidåkare eller en mjuk och trög snö (större friktionstal) kräver mer. Motorn bör därför ha god marginal.
+
+**Svar:** Liften levererar cirka 13 kW till skidåkarna. Motorn behöver ha större effekt eftersom en del av dess energi går förlorad i liftens egna delar och i själva motorn.`,
         },
     ],
 
@@ -24807,7 +29613,7 @@ $$
 
 **Svar:** Klackens tryck är ca 60 gånger större än stridsvagnens.
 
-**Generell slutsats:** Det är därför stilettklackar kan ge bestående märken i parkettgolv medan en panservagn på samma golv (om det orkade hålla för tyngden) inte gör det. Liten kontaktyta ger stort tryck — det är också därför skidor och snöskor fungerar.`,
+**Generell slutsats:** Det är därför stilettklackar kan ge bestående märken i parkettgolv medan en panservagn på samma golv (om det orkade hålla för tyngden) inte gör det. Liten kontaktyta ger stort tryck. Det är också därför skidor och snöskor fungerar.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
@@ -24852,7 +29658,648 @@ $$
 
 **Svar:** a) ca 3,1 kPa, 6,2 kPa, 12,3 kPa. b) $p = \\rho \\cdot g \\cdot a$.
 
-**Generell slutsats:** Många elever gissar att den **minsta** kuben ger störst tryck — eftersom "liten yta = stort tryck" är en stark intuition från klackuppgiften. Men för kuber av samma material växer tyngden snabbare ($a^{3}$) än basytan ($a^{2}$), så **större** kub ger faktiskt **högre** tryck. Detta är samma princip som varför stora djur (elefanter) behöver pelarliknande ben och inte kan vara skalkopior av små djur (myror).`,
+**Generell slutsats:** Många elever gissar att den **minsta** kuben ger störst tryck, eftersom "liten yta = stort tryck" är en stark intuition från klackuppgiften. Men för kuber av samma material växer tyngden snabbare ($a^{3}$) än basytan ($a^{2}$), så **större** kub ger faktiskt **högre** tryck. Detta är samma princip som varför stora djur (elefanter) behöver pelarliknande ben och inte kan vara skalkopior av små djur (myror).`,
+        },
+        {
+            level: 1,
+            question: `En flyttlåda står först på sin största sida (läge 1). Sedan vänds den så att den står på sin minsta sida (läge 2), se figuren.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -4 420 188" width="567" height="254" style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><polygon points="40,100 58,89 198,89 180,100" fill="#e6bf8a" stroke="#7a4b26" stroke-width="1.4"/><polygon points="180,100 198,89 198,139 180,150" fill="#c08a52" stroke="#7a4b26" stroke-width="1.4"/><rect x="40" y="100" width="140" height="50" fill="#d9a86c" stroke="#7a4b26" stroke-width="1.4"/><line x1="110" y1="100" x2="110" y2="114" stroke="#7a4b26" stroke-width="1"/><line x1="20" y1="150" x2="215" y2="150" stroke="#0f1620" stroke-width="1.6"/><line x1="28" y1="150" x2="21" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="40" y1="150" x2="33" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="52" y1="150" x2="45" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="64" y1="150" x2="57" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="76" y1="150" x2="69" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="88" y1="150" x2="81" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="100" y1="150" x2="93" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="112" y1="150" x2="105" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="124" y1="150" x2="117" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="136" y1="150" x2="129" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="148" y1="150" x2="141" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="160" y1="150" x2="153" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="172" y1="150" x2="165" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="184" y1="150" x2="177" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="196" y1="150" x2="189" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="208" y1="150" x2="201" y2="158" stroke="#0f1620" stroke-width="1"/><polygon points="285,10 303,-1 353,-1 335,10" fill="#e6bf8a" stroke="#7a4b26" stroke-width="1.4"/><polygon points="335,10 353,-1 353,139 335,150" fill="#c08a52" stroke="#7a4b26" stroke-width="1.4"/><rect x="285" y="10" width="50" height="140" fill="#d9a86c" stroke="#7a4b26" stroke-width="1.4"/><line x1="310" y1="10" x2="310" y2="24" stroke="#7a4b26" stroke-width="1"/><line x1="250" y1="150" x2="395" y2="150" stroke="#0f1620" stroke-width="1.6"/><line x1="258" y1="150" x2="251" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="270" y1="150" x2="263" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="282" y1="150" x2="275" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="294" y1="150" x2="287" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="306" y1="150" x2="299" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="318" y1="150" x2="311" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="330" y1="150" x2="323" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="342" y1="150" x2="335" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="354" y1="150" x2="347" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="366" y1="150" x2="359" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="378" y1="150" x2="371" y2="158" stroke="#0f1620" stroke-width="1"/><line x1="390" y1="150" x2="383" y2="158" stroke="#0f1620" stroke-width="1"/><text x="110" y="178" font-size="14" fill="#0f1620" text-anchor="middle">Läge 1</text><text x="320" y="178" font-size="14" fill="#0f1620" text-anchor="middle">Läge 2</text></svg>
+
+Hur ändras tryckkraften mot golvet och trycket mot golvet när lådan vänds från läge 1 till läge 2?`,
+            choices: [
+                'Tryckkraften ökar, trycket är oförändrat',
+                'Båda är oförändrade',
+                'Tryckkraften är oförändrad, trycket ökar',
+                'Båda ökar',
+            ],
+            correct: 2,
+            solution: `Tryckkraften mot golvet är lådans tyngd:
+
+$$
+F = m \\cdot g
+$$
+
+Lådan har samma massa i båda lägena, så tryckkraften är lika stor i läge 1 och läge 2.
+
+Trycket är tryckkraften per areaenhet:
+
+$$
+p = \\frac{F}{A}
+$$
+
+I läge 2 vilar lådan på en mindre area. Samma kraft fördelas då på en mindre yta, och kvoten $\\dfrac{F}{A}$ blir större.
+
+**Svar:** Tryckkraften är oförändrad, trycket ökar.`,
+        },
+        {
+            level: 1,
+            question: `Du trycker in ett häftstift i en anslagstavla med kraften 18 N. Häftstiftets spets har arean $0{,}060\\ \\mathrm{mm^2}$. Hur stort tryck verkar mellan spetsen och tavlan? Ange svaret i Pa.`,
+            answer: { value: 300000000, unit: 'Pa', tol: 0.03 },
+            solution: `Trycket är tryckkraften delad med arean:
+
+$$
+p = \\frac{F}{A}
+$$
+
+Arean räknas om till kvadratmeter. Eftersom $1\\ \\mathrm{mm^2} = 10^{-6}\\ \\mathrm{m^2}$ gäller:
+
+$$
+\\left[ \\begin{array}{l}
+F = 18\\ \\mathrm{N} \\\\
+A = 0{,}060\\ \\mathrm{mm^2} = 0{,}060 \\cdot 10^{-6}\\ \\mathrm{m^2} = 6{,}0 \\cdot 10^{-8}\\ \\mathrm{m^2}
+\\end{array} \\right]
+$$
+
+$$
+p = \\frac{18}{6{,}0 \\cdot 10^{-8}} = 3{,}0 \\cdot 10^{8}\\ \\mathrm{Pa} = 300\\ \\mathrm{MPa}
+$$
+
+Samma kraft verkar också mellan tummen och häftstiftets huvud. Har huvudet arean $1{,}5\\ \\mathrm{cm^2}$ blir trycket där $\\dfrac{18}{1{,}5 \\cdot 10^{-4}} = 1{,}2 \\cdot 10^{5}\\ \\mathrm{Pa}$, och trycket mot spetsen är alltså ungefär 2 500 gånger så stort som trycket mot tummen. Därför går spetsen in i tavlan medan tummen klarar sig.
+
+**Svar:** Trycket är $3{,}0 \\cdot 10^{8}\\ \\mathrm{Pa}$ (300 MPa).`,
+        },
+        {
+            level: 1,
+            question: `En elefant med massan 4 800 kg står stilla på alla fyra fötterna. Trycket mellan fötterna och marken är $p = 1{,}5 \\cdot 10^{5}\\ \\mathrm{Pa}$. Hur stor är fötternas sammanlagda area? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i m².`,
+            answer: { value: 0.31424, unit: 'm²', tol: 0.03 },
+            solution: `Arean löses ut ur formeln för tryck:
+
+$$
+p = \\frac{F}{A} \\quad\\Leftrightarrow\\quad A = \\frac{F}{p}
+$$
+
+Tryckkraften mot marken är elefantens tyngd:
+
+$$
+\\left[ \\begin{array}{l}
+F = m \\cdot g = 4\\,800 \\cdot 9{,}82 = 47\\,136\\ \\mathrm{N} \\\\
+p = 1{,}5 \\cdot 10^{5}\\ \\mathrm{Pa}
+\\end{array} \\right]
+$$
+
+$$
+A = \\frac{47\\,136}{1{,}5 \\cdot 10^{5}} = 0{,}31424\\ \\mathrm{m^2} \\approx 0{,}31\\ \\mathrm{m^2}
+$$
+
+Rimlighet: varje fot får arean $\\dfrac{0{,}31424}{4} \\approx 0{,}079\\ \\mathrm{m^2}$, vilket motsvarar en rund fot med en diameter på drygt 30 cm. Det stämmer med hur stora elefantfötter är.
+
+**Svar:** Fötterna har den sammanlagda arean $0{,}31\\ \\mathrm{m^2}$.`,
+        },
+        {
+            level: 1,
+            question: `Vilket av trycken nedan är störst?`,
+            choices: [
+                '$4\\,800\\ \\mathrm{hPa}$',
+                '$52\\ \\mathrm{N/cm^2}$',
+                '$0{,}50\\ \\mathrm{MPa}$',
+                '$49\\,000\\ \\mathrm{N/m^2}$',
+            ],
+            correct: 1,
+            solution: `Trycken jämförs genom att alla räknas om till samma enhet, här kPa. Kom ihåg att $1\\ \\mathrm{Pa} = 1\\ \\mathrm{N/m^2}$ och $1\\ \\mathrm{cm^2} = 10^{-4}\\ \\mathrm{m^2}$.
+
+$$
+4\\,800\\ \\mathrm{hPa} = 4\\,800 \\cdot 100\\ \\mathrm{Pa} = 480\\,000\\ \\mathrm{Pa} = 480\\ \\mathrm{kPa}
+$$
+
+$$
+52\\ \\mathrm{N/cm^2} = \\frac{52\\ \\mathrm{N}}{10^{-4}\\ \\mathrm{m^2}} = 520\\,000\\ \\mathrm{Pa} = 520\\ \\mathrm{kPa}
+$$
+
+$$
+0{,}50\\ \\mathrm{MPa} = 500\\,000\\ \\mathrm{Pa} = 500\\ \\mathrm{kPa}
+$$
+
+$$
+49\\,000\\ \\mathrm{N/m^2} = 49\\,000\\ \\mathrm{Pa} = 49\\ \\mathrm{kPa}
+$$
+
+Störst är alltså $520\\ \\mathrm{kPa}$.
+
+**Svar:** $52\\ \\mathrm{N/cm^2}$`,
+        },
+        {
+            level: 2,
+            question: `En vandrare med massan 72 kg bär en ryggsäck med massan 13 kg. Hon ska gå över ett fält med lös snö, som bär trycket $4{,}0\\ \\mathrm{kPa}$ utan att man sjunker igenom. När hon går vilar hela tyngden ibland på en enda snösko. Hur stor area måste varje snösko minst ha? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i m².`,
+            answer: { value: 0.208675, unit: 'm²', tol: 0.03 },
+            solution: `Den minsta arean fås när trycket är precis så stort som snön bär:
+
+$$
+p = \\frac{F}{A} \\quad\\Leftrightarrow\\quad A = \\frac{F}{p}
+$$
+
+Tryckkraften är tyngden av vandraren och ryggsäcken tillsammans. Den största belastningen på en snösko uppstår när hela tyngden vilar på just den skon, så det är det fallet som ska räknas:
+
+$$
+\\left[ \\begin{array}{l}
+F = (72 + 13) \\cdot 9{,}82 = 834{,}7\\ \\mathrm{N} \\\\
+p = 4{,}0\\ \\mathrm{kPa} = 4\\,000\\ \\mathrm{Pa}
+\\end{array} \\right]
+$$
+
+$$
+A = \\frac{834{,}7}{4\\,000} = 0{,}2087\\ \\mathrm{m^2} \\approx 0{,}21\\ \\mathrm{m^2}
+$$
+
+Hade hon räknat med att stå på båda skorna samtidigt hade hon fått halva arean, ungefär $0{,}10\\ \\mathrm{m^2}$. Den arean räcker när hon står still, men inte när hon går.
+
+Rimlighet: $0{,}21\\ \\mathrm{m^2}$ motsvarar till exempel en sko som är 60 cm lång och 35 cm bred. Det är en stor snösko, vilket passar för mycket lös snö.
+
+**Svar:** Varje snösko måste ha arean minst $0{,}21\\ \\mathrm{m^2}$.`,
+        },
+        {
+            level: 2,
+            question: `I en laboration pressas träklossar med olika stora undersidor ned i en skiva av mjukt skumgummi. För varje kloss mäts den kraft som krävs för att klossen ska sjunka ned exakt 1,0 cm. Grafen visar kraften $F$ som funktion av klossens area $A$.
+
+${makeDiagram({ xMin: 0, xMax: 60, yMin: 0, yMax: 160, xTicks: [0, 10, 20, 30, 40, 50, 60], yTicks: [0, 20, 40, 60, 80, 100, 120, 140, 160], xLabel: '<tspan font-style="italic">A</tspan> (cm²)', yLabel: '<tspan font-style="italic">F</tspan> (N)', paths: [{ points: [[0, 0], [60, 144]] }] })}
+
+a) Hur stort tryck krävs för att skumgummit ska tryckas ned 1,0 cm? Ange svaret i Pa.<br>b) Hur stor kraft krävs för en kloss med arean $120\\ \\mathrm{cm^2}$? Ange svaret i N.`,
+            answer: { value: 24000, unit: 'Pa', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 24000, unit: 'Pa', tol: 0.04 },
+                { del: 'b', value: 288, unit: 'N', tol: 0.04 },
+            ],
+            solution: `**a)** Grafen är en rät linje genom origo. Kraften är alltså proportionell mot arean, och kvoten $\\dfrac{F}{A}$ är densamma för alla klossar. Den kvoten är just trycket:
+
+$$
+p = \\frac{F}{A}
+$$
+
+Vi läser av en punkt där linjen går genom ett rutnätskryss, till exempel $A = 50\\ \\mathrm{cm^2}$ och $F = 120\\ \\mathrm{N}$:
+
+$$
+\\left[ \\begin{array}{l}
+F = 120\\ \\mathrm{N} \\\\
+A = 50\\ \\mathrm{cm^2} = 50 \\cdot 10^{-4}\\ \\mathrm{m^2} = 5{,}0 \\cdot 10^{-3}\\ \\mathrm{m^2}
+\\end{array} \\right]
+$$
+
+$$
+p = \\frac{120}{5{,}0 \\cdot 10^{-3}} = 24\\,000\\ \\mathrm{Pa}
+$$
+
+Trycket är alltså linjens lutning, räknad om till pascal.
+
+**Svar:** Det krävs trycket $24\\,000\\ \\mathrm{Pa}$ (24 kPa).
+
+**b)** Samma tryck krävs för alla klossar, så tryckkraften löses ut ur formeln:
+
+$$
+p = \\frac{F}{A} \\quad\\Leftrightarrow\\quad F = p \\cdot A
+$$
+
+$$
+\\left[ \\begin{array}{l}
+p = 24\\,000\\ \\mathrm{Pa} \\\\
+A = 120\\ \\mathrm{cm^2} = 120 \\cdot 10^{-4}\\ \\mathrm{m^2} = 0{,}0120\\ \\mathrm{m^2}
+\\end{array} \\right]
+$$
+
+$$
+F = 24\\,000 \\cdot 0{,}0120 = 288\\ \\mathrm{N} \\approx 290\\ \\mathrm{N}
+$$
+
+Rimlighet: arean är 2,4 gånger så stor som vid avläsningen i a), och kraften blir $2{,}4 \\cdot 120 = 288\\ \\mathrm{N}$.
+
+**Svar:** Det krävs en kraft på cirka 290 N.`,
+        },
+        {
+            level: 2,
+            question: `En person med massan 65 kg sitter stilla på en stol med massan 6,0 kg. Stolen har fyra cirkulära ben, vart och ett med diametern 2,5 cm. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaren i Pa.<br>a) Hur stort tryck verkar mellan stolsbenen och golvet när tyngden fördelas lika på alla fyra benen?<br>b) Personen lutar sig bakåt så att stolen balanserar på de två bakre benen. Hur stort blir trycket då?`,
+            answer: { value: 355091, unit: 'Pa', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 355091, unit: 'Pa', tol: 0.03 },
+                { del: 'b', value: 710182, unit: 'Pa', tol: 0.03 },
+            ],
+            solution: `**a)** Tryckkraften mot golvet är tyngden av personen och stolen tillsammans, och den verkar på de fyra benens sammanlagda area.
+
+$$
+p = \\frac{F}{A}
+$$
+
+Varje ben har en cirkulär undersida med radien $r = 1{,}25\\ \\mathrm{cm} = 0{,}0125\\ \\mathrm{m}$, så arean för ett ben är $\\pi r^2$:
+
+$$
+\\left[ \\begin{array}{l}
+F = (65 + 6{,}0) \\cdot 9{,}82 = 697{,}22\\ \\mathrm{N} \\\\
+A = 4 \\cdot \\pi \\cdot 0{,}0125^2 = 1{,}9635 \\cdot 10^{-3}\\ \\mathrm{m^2}
+\\end{array} \\right]
+$$
+
+$$
+p = \\frac{697{,}22}{1{,}9635 \\cdot 10^{-3}} = 355\\,091\\ \\mathrm{Pa} \\approx 3{,}6 \\cdot 10^{5}\\ \\mathrm{Pa}
+$$
+
+**Svar:** Trycket är $3{,}6 \\cdot 10^{5}\\ \\mathrm{Pa}$.
+
+**b)** Tryckkraften är lika stor som förut, men nu bär bara två ben, så arean halveras:
+
+$$
+\\left[ \\begin{array}{l}
+F = 697{,}22\\ \\mathrm{N} \\\\
+A = 2 \\cdot \\pi \\cdot 0{,}0125^2 = 9{,}8175 \\cdot 10^{-4}\\ \\mathrm{m^2}
+\\end{array} \\right]
+$$
+
+$$
+p = \\frac{697{,}22}{9{,}8175 \\cdot 10^{-4}} = 710\\,182\\ \\mathrm{Pa} \\approx 7{,}1 \\cdot 10^{5}\\ \\mathrm{Pa}
+$$
+
+Halv area med samma kraft ger dubbelt så stort tryck, vilket stämmer med svaret i a). Det är därför en stol som gungas på två ben lättare lämnar märken i ett mjukt golv.
+
+**Svar:** Trycket blir $7{,}1 \\cdot 10^{5}\\ \\mathrm{Pa}$.`,
+        },
+        {
+            level: 2,
+            question: `En spikmatta har 4 500 spikar, och varje spikspets har arean $0{,}80\\ \\mathrm{mm^2}$. En person med massan 60 kg lägger sig på mattan. Anta att alla spikar bär lika mycket av tyngden, och räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.<br>a) Hur stort tryck verkar mellan spikspetsarna och huden? Ange svaret i Pa.<br>b) Hur många spikar skulle mattan behöva ha för att trycket inte ska överstiga $50\\ \\mathrm{kPa}$?`,
+            answer: { value: 163667, unit: 'Pa', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 163667, unit: 'Pa', tol: 0.03 },
+                { del: 'b', value: 14730, unit: 'spikar', tol: 0.03 },
+            ],
+            solution: `**a)** Tyngden fördelas på alla spikspetsarnas sammanlagda area.
+
+$$
+p = \\frac{F}{A}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F = 60 \\cdot 9{,}82 = 589{,}2\\ \\mathrm{N} \\\\
+A = 4\\,500 \\cdot 0{,}80 \\cdot 10^{-6}\\ \\mathrm{m^2} = 3{,}6 \\cdot 10^{-3}\\ \\mathrm{m^2}
+\\end{array} \\right]
+$$
+
+$$
+p = \\frac{589{,}2}{3{,}6 \\cdot 10^{-3}} = 163\\,667\\ \\mathrm{Pa} \\approx 1{,}6 \\cdot 10^{5}\\ \\mathrm{Pa}
+$$
+
+**Svar:** Trycket är $1{,}6 \\cdot 10^{5}\\ \\mathrm{Pa}$.
+
+**b)** Först bestäms den sammanlagda area som behövs för att trycket ska bli $50\\ \\mathrm{kPa}$:
+
+$$
+p = \\frac{F}{A} \\quad\\Leftrightarrow\\quad A = \\frac{F}{p}
+$$
+
+$$
+A = \\frac{589{,}2}{50\\,000} = 0{,}011784\\ \\mathrm{m^2}
+$$
+
+Antalet spikar är den arean delad med arean för en spikspets:
+
+$$
+n = \\frac{0{,}011784}{0{,}80 \\cdot 10^{-6}} = 14\\,730
+$$
+
+Rimlighet: trycket ska sänkas från cirka 164 kPa till 50 kPa, alltså med en faktor $\\dfrac{163\\,667}{50\\,000} \\approx 3{,}3$. Då behövs ungefär 3,3 gånger så många spikar, och $3{,}3 \\cdot 4\\,500 \\approx 14\\,700$.
+
+**Svar:** Mattan skulle behöva cirka 15 000 spikar.`,
+        },
+        {
+            level: 2,
+            question: `Lufttrycket är $101\\ \\mathrm{kPa}$. En bordsskiva är 1,2 m lång och 0,80 m bred.<br>a) Hur stor tryckkraft verkar luften med på bordsskivans ovansida? Ange svaret i N.<br>b) Kraften i a) är lika stor som tyngden av nästan tio ton. Förklara varför bordet ändå inte trycks ned.`,
+            answer: { value: 96960, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 96960, unit: 'N', tol: 0.03 },
+                { del: 'b' },
+            ],
+            solution: `**a)** Tryckkraften löses ut ur formeln för tryck:
+
+$$
+p = \\frac{F}{A} \\quad\\Leftrightarrow\\quad F = p \\cdot A
+$$
+
+$$
+\\left[ \\begin{array}{l}
+p = 101\\ \\mathrm{kPa} = 101\\,000\\ \\mathrm{Pa} \\\\
+A = 1{,}2 \\cdot 0{,}80 = 0{,}96\\ \\mathrm{m^2}
+\\end{array} \\right]
+$$
+
+$$
+F = 101\\,000 \\cdot 0{,}96 = 96\\,960\\ \\mathrm{N} \\approx 97\\ \\mathrm{kN}
+$$
+
+**Svar:** Luften trycker på ovansidan med kraften cirka 97 kN.
+
+**b)** Luften finns på alla sidor om bordsskivan, också under den. Lufttrycket under skivan är i stort sett lika stort som ovanför, och undersidan har samma area. Därför trycker luften uppåt på undersidan med en lika stor kraft, cirka 97 kN. De två tryckkrafterna är motriktade och tar ut varandra, så luften ger ingen resulterande kraft på skivan. Bordsbenen behöver bara bära skivans egen tyngd och det som står på den.
+
+**Svar:** Luften trycker lika mycket uppåt på undersidan, så krafterna tar ut varandra.`,
+        },
+        {
+            level: 3,
+            question: `Två massiva kuber av samma material staplas på ett bord. Den undre kuben har kantlängden $a$ och den övre kantlängden $b$, där $b \\leq a$. Den övre kuben står mitt på den undre, se figuren.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="10 -0.5 280 232.5" width="314" height="260" style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><polygon points="80,100 106,85 226,85 200,100" fill="#d6dee6" stroke="#0f1620" stroke-width="1.4"/><polygon points="200,100 226,85 226,205 200,220" fill="#97a7b6" stroke="#0f1620" stroke-width="1.4"/><rect x="80" y="100" width="120" height="120" fill="#b9c6d2" stroke="#0f1620" stroke-width="1.4"/><polygon points="118,22.5 144,7.5 214,7.5 188,22.5" fill="#c3d0dc" stroke="#0f1620" stroke-width="1.4"/><polygon points="188,22.5 214,7.5 214,77.5 188,92.5" fill="#7f95a8" stroke="#0f1620" stroke-width="1.4"/><rect x="118" y="22.5" width="70" height="70" fill="#9fb3c4" stroke="#0f1620" stroke-width="1.4"/><line x1="30" y1="220" x2="270" y2="220" stroke="#0f1620" stroke-width="1.6"/><line x1="38" y1="220" x2="31" y2="228" stroke="#0f1620" stroke-width="1"/><line x1="50" y1="220" x2="43" y2="228" stroke="#0f1620" stroke-width="1"/><line x1="62" y1="220" x2="55" y2="228" stroke="#0f1620" stroke-width="1"/><line x1="74" y1="220" x2="67" y2="228" stroke="#0f1620" stroke-width="1"/><line x1="86" y1="220" x2="79" y2="228" stroke="#0f1620" stroke-width="1"/><line x1="98" y1="220" x2="91" y2="228" stroke="#0f1620" stroke-width="1"/><line x1="110" y1="220" x2="103" y2="228" stroke="#0f1620" stroke-width="1"/><line x1="122" y1="220" x2="115" y2="228" stroke="#0f1620" stroke-width="1"/><line x1="134" y1="220" x2="127" y2="228" stroke="#0f1620" stroke-width="1"/><line x1="146" y1="220" x2="139" y2="228" stroke="#0f1620" stroke-width="1"/><line x1="158" y1="220" x2="151" y2="228" stroke="#0f1620" stroke-width="1"/><line x1="170" y1="220" x2="163" y2="228" stroke="#0f1620" stroke-width="1"/><line x1="182" y1="220" x2="175" y2="228" stroke="#0f1620" stroke-width="1"/><line x1="194" y1="220" x2="187" y2="228" stroke="#0f1620" stroke-width="1"/><line x1="206" y1="220" x2="199" y2="228" stroke="#0f1620" stroke-width="1"/><line x1="218" y1="220" x2="211" y2="228" stroke="#0f1620" stroke-width="1"/><line x1="230" y1="220" x2="223" y2="228" stroke="#0f1620" stroke-width="1"/><line x1="242" y1="220" x2="235" y2="228" stroke="#0f1620" stroke-width="1"/><line x1="254" y1="220" x2="247" y2="228" stroke="#0f1620" stroke-width="1"/><line x1="266" y1="220" x2="259" y2="228" stroke="#0f1620" stroke-width="1"/><text x="72" y="166" font-size="17" fill="#0f1620" text-anchor="end" font-style="italic">a</text><text x="110" y="63.5" font-size="17" fill="#0f1620" text-anchor="end" font-style="italic">b</text></svg>
+
+Ella påstår att om den övre kuben görs tillräckligt stor, men inte större än den undre, kan trycket mellan kuberna bli större än trycket mellan den undre kuben och bordet. Undersök om Ella har rätt. Lösningen ska gälla för alla värden på $a$ och $b$.`,
+            solution: `Materialets densitet kallas $\\rho$. En kub med kantlängden $b$ har volymen $b^3$, massan $\\rho \\cdot b^3$ och en sida med arean $b^2$. Vi tecknar de två trycken med formeln
+
+$$
+p = \\frac{F}{A}
+$$
+
+**Trycket mellan kuberna.** Tryckkraften är den övre kubens tyngd, och den verkar på den övre kubens undersida, som har arean $b^2$:
+
+$$
+p_1 = \\frac{\\rho \\cdot b^3 \\cdot g}{b^2} = \\rho \\cdot g \\cdot b
+$$
+
+**Trycket mot bordet.** Tryckkraften är nu båda kubernas tyngd, och den verkar på den undre kubens undersida, som har arean $a^2$:
+
+$$
+p_2 = \\frac{\\rho \\cdot (a^3 + b^3) \\cdot g}{a^2} = \\rho \\cdot g \\cdot \\left( a + \\frac{b^3}{a^2} \\right)
+$$
+
+**Jämförelse.** Vi bildar skillnaden:
+
+$$
+p_2 - p_1 = \\rho \\cdot g \\cdot \\left( a + \\frac{b^3}{a^2} \\right) - \\rho \\cdot g \\cdot b = \\rho \\cdot g \\cdot \\left( a - b + \\frac{b^3}{a^2} \\right)
+$$
+
+Eftersom $b \\leq a$ är $a - b \\geq 0$, och $\\dfrac{b^3}{a^2}$ är alltid större än noll. Parentesen är därför positiv för alla värden på $a$ och $b$, och $\\rho$ och $g$ är också positiva. Alltså är $p_2 > p_1$ alltid.
+
+Kontroll med ett specialfall: om kuberna är lika stora, $b = a$, blir $p_1 = \\rho \\cdot g \\cdot a$ och $p_2 = 2 \\cdot \\rho \\cdot g \\cdot a$. Bordet bär då dubbel tyngd på samma area, och trycket mot bordet blir dubbelt så stort.
+
+**Svar:** Ella har fel. Trycket mot bordet är alltid större än trycket mellan kuberna, hur stora kuberna än är.`,
+        },
+        {
+            level: 3,
+            question: `Ett trägolv får bestående märken om trycket mot det överstiger $25\\ \\mathrm{MPa}$. En person med massan 62 kg går i skor med cirkulära klackar. I det ögonblick klacken sätts i golvet vilar hela tyngden på klacken, och kraften från klacken mot golvet blir då ungefär 1,5 gånger personens tyngd. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.<br>a) Hur stor diameter måste klacken minst ha för att golvet inte ska få märken? Ange svaret i mm.<br>b) En annan person har dubbelt så stor massa och går på samma sätt. Hur många gånger större diameter måste hennes klack ha för att ge samma tryck? Visa generellt.`,
+            answer: { value: 6.82, unit: 'mm', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 6.82, unit: 'mm', tol: 0.03 },
+                { del: 'b', value: 1.414, unit: 'gånger', tol: 0.03 },
+            ],
+            solution: `**a)** Den minsta arean fås när trycket är precis $25\\ \\mathrm{MPa}$:
+
+$$
+p = \\frac{F}{A} \\quad\\Leftrightarrow\\quad A = \\frac{F}{p}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F = 1{,}5 \\cdot m \\cdot g = 1{,}5 \\cdot 62 \\cdot 9{,}82 = 913{,}26\\ \\mathrm{N} \\\\
+p = 25\\ \\mathrm{MPa} = 25 \\cdot 10^{6}\\ \\mathrm{Pa}
+\\end{array} \\right]
+$$
+
+$$
+A = \\frac{913{,}26}{25 \\cdot 10^{6}} = 3{,}6530 \\cdot 10^{-5}\\ \\mathrm{m^2}
+$$
+
+Klacken är en cirkel med diametern $d$, så arean är $A = \\dfrac{\\pi \\cdot d^2}{4}$. Vi löser ut $d$:
+
+$$
+\\frac{\\pi \\cdot d^2}{4} = A \\quad\\Leftrightarrow\\quad d = \\sqrt{\\frac{4 \\cdot A}{\\pi}}
+$$
+
+$$
+d = \\sqrt{\\frac{4 \\cdot 3{,}6530 \\cdot 10^{-5}}{\\pi}} = 6{,}820 \\cdot 10^{-3}\\ \\mathrm{m} \\approx 6{,}8\\ \\mathrm{mm}
+$$
+
+Rimlighet: en tunn stilettklack är ungefär 7 till 10 mm bred, så en sådan klack ligger nära gränsen. Faktorn 1,5 är en uppskattning. Sätter personen ned foten hårdare blir kraften större, och då behövs en ännu större klack. Värdet är därför en nedre gräns.
+
+**Svar:** Klacken måste ha diametern minst 6,8 mm.
+
+**b)** Vi tecknar trycket generellt, med $k$ för faktorn 1,5:
+
+$$
+p = \\frac{F}{A} = \\frac{k \\cdot m \\cdot g}{\\dfrac{\\pi \\cdot d^2}{4}} = \\frac{4 \\cdot k \\cdot m \\cdot g}{\\pi \\cdot d^2}
+$$
+
+Om trycket ska vara detsamma för båda personerna måste kvoten $\\dfrac{m}{d^2}$ vara densamma, eftersom $k$, $g$ och $\\pi$ inte ändras:
+
+$$
+\\frac{m}{d_1^2} = \\frac{2 \\cdot m}{d_2^2} \\quad\\Leftrightarrow\\quad d_2^2 = 2 \\cdot d_1^2 \\quad\\Leftrightarrow\\quad d_2 = \\sqrt{2} \\cdot d_1
+$$
+
+Diametern ska alltså bli $\\sqrt{2} \\approx 1{,}4$ gånger större. Den behöver inte fördubblas, eftersom arean växer med diametern i kvadrat.
+
+**Svar:** Diametern måste bli $\\sqrt{2} \\approx 1{,}4$ gånger större.`,
+        },
+        {
+            level: 3,
+            question: `Ett hus ska byggas på lerig mark som tål trycket $50\\ \\mathrm{kPa}$. Huset har massan 85 ton, sulan inräknad, och vilar på en betongsula med bredden $b$ som går runt hela husets ytterkant. Huset är 12 m långt och 8,0 m brett, se figuren.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="8 2 412 284" width="490" height="338" style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="40" y="40" width="300" height="200" fill="#c9cfd6" stroke="#0f1620" stroke-width="1.6"/><rect x="55" y="55" width="270" height="170" fill="#f7f2e8" stroke="#0f1620" stroke-width="1.2"/><text x="190" y="145" font-size="14" fill="#4a5563" text-anchor="middle">huset sett uppifrån</text><line x1="40" y1="36" x2="40" y2="16" stroke="#4a5563" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="340" y1="36" x2="340" y2="16" stroke="#4a5563" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="47" y1="22" x2="333" y2="22" stroke="#4a5563" stroke-width="1.3"/><polygon points="40,22 47,25.2 47,18.8" fill="#4a5563"/><polygon points="340,22 333,25.2 333,18.8" fill="#4a5563"/><text x="190" y="16" font-size="15" fill="#4a5563" text-anchor="middle">12 m</text><line x1="344" y1="40" x2="364" y2="40" stroke="#4a5563" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="344" y1="240" x2="364" y2="240" stroke="#4a5563" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="358" y1="47" x2="358" y2="233" stroke="#4a5563" stroke-width="1.3"/><polygon points="358,40 354.8,47 361.2,47" fill="#4a5563"/><polygon points="358,240 354.8,233 361.2,233" fill="#4a5563"/><text x="366" y="145" font-size="15" fill="#4a5563" text-anchor="start">8,0 m</text><line x1="40" y1="244" x2="40" y2="264" stroke="#4a5563" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="55" y1="244" x2="55" y2="264" stroke="#4a5563" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="18" y1="258" x2="77" y2="258" stroke="#4a5563" stroke-width="1.3"/><polygon points="40,258 33,254.8 33,261.2" fill="#4a5563"/><polygon points="55,258 62,254.8 62,261.2" fill="#4a5563"/><text x="83" y="263" font-size="16" fill="#4a5563" text-anchor="start" font-style="italic">b</text><text x="101" y="263" font-size="13" fill="#4a5563" text-anchor="start">(sulans bredd, grå)</text></svg>
+
+Räkna sulans area som husets omkrets gånger bredden $b$, och räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.<br>a) Hur bred måste sulan minst vara? Ange svaret i m.<br>b) Ett annat hus ska byggas på samma mark. Det är dubbelt så långt och dubbelt så brett, och dess massa är proportionell mot golvarean. Hur många gånger bredare måste sulan vara? Motivera generellt.`,
+            answer: { value: 0.41735, unit: 'm', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 0.41735, unit: 'm', tol: 0.03 },
+                { del: 'b', value: 2, unit: 'gånger', tol: 0.02 },
+            ],
+            solution: `**a)** Hela husets tyngd vilar på sulan. Den minsta arean fås när trycket mot marken är precis $50\\ \\mathrm{kPa}$:
+
+$$
+p = \\frac{F}{A} \\quad\\Leftrightarrow\\quad A = \\frac{F}{p}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F = m \\cdot g = 85\\,000 \\cdot 9{,}82 = 834\\,700\\ \\mathrm{N} \\\\
+p = 50\\ \\mathrm{kPa} = 50\\,000\\ \\mathrm{Pa}
+\\end{array} \\right]
+$$
+
+$$
+A = \\frac{834\\,700}{50\\,000} = 16{,}694\\ \\mathrm{m^2}
+$$
+
+Sulans area är omkretsen gånger bredden, $A = O \\cdot b$, där omkretsen är $O = 2 \\cdot (12 + 8{,}0) = 40\\ \\mathrm{m}$:
+
+$$
+O \\cdot b = A \\quad\\Leftrightarrow\\quad b = \\frac{A}{O}
+$$
+
+$$
+b = \\frac{16{,}694}{40} = 0{,}41735\\ \\mathrm{m} \\approx 0{,}42\\ \\mathrm{m}
+$$
+
+Rimlighet: modellen räknar hörnen två gånger, så den verkliga arean blir något mindre än $O \\cdot b$. Sulan behöver därför vara någon centimeter bredare än 0,42 m. En bredd på ett par decimeter till en halv meter är normalt för en husgrund.
+
+**Svar:** Sulan måste vara minst 0,42 m bred.
+
+**b)** Vi kallar husets längd $L$ och bredd $B$. Massan är proportionell mot golvarean, $m = k \\cdot L \\cdot B$ där $k$ är en konstant, och sulan har arean $2 \\cdot (L + B) \\cdot b$. Med trycket $p$ lika med vad marken tål gäller
+
+$$
+p = \\frac{F}{A} = \\frac{k \\cdot L \\cdot B \\cdot g}{2 \\cdot (L + B) \\cdot b} \\quad\\Leftrightarrow\\quad b = \\frac{k \\cdot L \\cdot B \\cdot g}{2 \\cdot (L + B) \\cdot p}
+$$
+
+Det nya huset har längden $2L$ och bredden $2B$:
+
+$$
+b_\\text{ny} = \\frac{k \\cdot 2L \\cdot 2B \\cdot g}{2 \\cdot (2L + 2B) \\cdot p} = \\frac{4}{2} \\cdot \\frac{k \\cdot L \\cdot B \\cdot g}{2 \\cdot (L + B) \\cdot p} = 2 \\cdot b
+$$
+
+Massan blir fyra gånger så stor, men omkretsen bara dubbelt så stor. Varje meter sula måste därför bära dubbelt så mycket, och då måste sulan vara dubbelt så bred.
+
+**Svar:** Sulan måste vara 2 gånger så bred.`,
+        },
+        {
+            level: 3,
+            question: `En snöskoter med förare har den sammanlagda massan 320 kg, och skoterns band har kontaktarean $0{,}45\\ \\mathrm{m^2}$ mot snön. En skidåkare med massan 78 kg står på två likadana skidor som var och en är 7,0 cm bred.<br>a) Hur långa måste skidorna minst vara för att skidåkaren inte ska ge större tryck mot snön än skotern? Ange svaret i m.<br>b) Skidåkaren har i stället skidor som är 1,8 m långa och 7,0 cm breda. Hur tung ryggsäck kan hon bära innan hon ger lika stort tryck mot snön som skotern? Ange svaret i kg.`,
+            answer: { value: 0.7835, unit: 'm', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 0.7835, unit: 'm', tol: 0.03 },
+                { del: 'b', value: 101.2, unit: 'kg', tol: 0.03 },
+            ],
+            solution: `**a)** Vi kallar skoterns massa och area $m_s$ och $A_s$, skidåkarens massa $m$, skidornas längd $L$ och bredd $w$. De två skidorna har tillsammans arean $2 \\cdot L \\cdot w$. Gränsfallet är att trycken är lika stora:
+
+$$
+\\frac{m_s \\cdot g}{A_s} = \\frac{m \\cdot g}{2 \\cdot L \\cdot w}
+$$
+
+Tyngdfaktorn $g$ finns i båda leden och kan förkortas bort. Trycken är alltså lika när massan per area är lika:
+
+$$
+\\frac{m_s}{A_s} = \\frac{m}{2 \\cdot L \\cdot w} \\quad\\Leftrightarrow\\quad L = \\frac{m \\cdot A_s}{2 \\cdot w \\cdot m_s}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m_s = 320\\ \\mathrm{kg} \\\\
+A_s = 0{,}45\\ \\mathrm{m^2} \\\\
+m = 78\\ \\mathrm{kg} \\\\
+w = 7{,}0\\ \\mathrm{cm} = 0{,}070\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+L = \\frac{78 \\cdot 0{,}45}{2 \\cdot 0{,}070 \\cdot 320} = \\frac{35{,}1}{44{,}8} = 0{,}7835\\ \\mathrm{m} \\approx 0{,}78\\ \\mathrm{m}
+$$
+
+**Svar:** Skidorna måste vara minst 0,78 m långa.
+
+**b)** Nu är skidornas area känd, och vi söker den totala massa $m_\\text{tot}$ som ger samma tryck som skotern. Med samma resonemang som i a):
+
+$$
+\\frac{m_s}{A_s} = \\frac{m_\\text{tot}}{2 \\cdot L \\cdot w} \\quad\\Leftrightarrow\\quad m_\\text{tot} = \\frac{m_s \\cdot 2 \\cdot L \\cdot w}{A_s}
+$$
+
+$$
+m_\\text{tot} = \\frac{320 \\cdot 2 \\cdot 1{,}8 \\cdot 0{,}070}{0{,}45} = \\frac{80{,}64}{0{,}45} = 179{,}2\\ \\mathrm{kg}
+$$
+
+Ryggsäckens massa är skillnaden mot skidåkarens egen massa:
+
+$$
+m_\\text{ryggsäck} = 179{,}2 - 78 = 101{,}2\\ \\mathrm{kg} \\approx 1{,}0 \\cdot 10^{2}\\ \\mathrm{kg}
+$$
+
+Rimlighet: ingen bär en ryggsäck på 100 kg. Med vanliga skidor och en vanlig packning ger en skidåkare alltså mindre tryck mot snön än en skoter, trots att skotern har mycket större kontaktyta.
+
+**Svar:** Ryggsäcken kan väga cirka 100 kg.`,
+        },
+        {
+            level: 3,
+            question: `Ett massivt rätblock av metall har massan 3,0 kg. När det läggs på sina tre olika sidor mot ett bord blir trycket mot bordet $2{,}0\\ \\mathrm{kPa}$, $5{,}0\\ \\mathrm{kPa}$ respektive $8{,}0\\ \\mathrm{kPa}$. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.<br>a) Bestäm rätblockets kantlängder. Ange svaren i cm.<br>b) Bestäm metallens densitet. Ange svaret i kg/m³.`,
+            answer: { value: 5307, unit: 'kg/m³', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 15.35, unit: 'cm', etikett: 'längsta kanten', tol: 0.03 },
+                { del: 'a', value: 9.595, unit: 'cm', etikett: 'mellersta kanten', tol: 0.03 },
+                { del: 'a', value: 3.838, unit: 'cm', etikett: 'kortaste kanten', tol: 0.03 },
+                { del: 'b', value: 5307, unit: 'kg/m³', tol: 0.03 },
+            ],
+            solution: `**a)** Kalla kantlängderna $x$, $y$ och $z$, där $x > y > z$. Tryckkraften är tyngden i alla tre lägena:
+
+$$
+F = m \\cdot g = 3{,}0 \\cdot 9{,}82 = 29{,}46\\ \\mathrm{N}
+$$
+
+Med $p = \\dfrac{F}{A}$ blir arean $A = \\dfrac{F}{p}$. Störst area ger minst tryck, så sidan $x \\cdot y$ hör ihop med $2{,}0\\ \\mathrm{kPa}$ och sidan $y \\cdot z$ med $8{,}0\\ \\mathrm{kPa}$:
+
+$$
+\\left[ \\begin{array}{l}
+x \\cdot y = \\dfrac{29{,}46}{2\\,000} = 1{,}4730 \\cdot 10^{-2}\\ \\mathrm{m^2} \\\\
+x \\cdot z = \\dfrac{29{,}46}{5\\,000} = 5{,}8920 \\cdot 10^{-3}\\ \\mathrm{m^2} \\\\
+y \\cdot z = \\dfrac{29{,}46}{8\\,000} = 3{,}6825 \\cdot 10^{-3}\\ \\mathrm{m^2}
+\\end{array} \\right]
+$$
+
+Produkten av de tre areorna är $(x \\cdot y) \\cdot (x \\cdot z) \\cdot (y \\cdot z) = (x \\cdot y \\cdot z)^2 = V^2$, där $V$ är rätblockets volym:
+
+$$
+V = \\sqrt{1{,}4730 \\cdot 10^{-2} \\cdot 5{,}8920 \\cdot 10^{-3} \\cdot 3{,}6825 \\cdot 10^{-3}} = 5{,}6533 \\cdot 10^{-4}\\ \\mathrm{m^3}
+$$
+
+Varje kant fås genom att volymen delas med arean av den sida som kanten inte ingår i:
+
+$$
+x = \\frac{V}{y \\cdot z} = \\frac{5{,}6533 \\cdot 10^{-4}}{3{,}6825 \\cdot 10^{-3}} = 0{,}15352\\ \\mathrm{m}
+$$
+
+$$
+y = \\frac{V}{x \\cdot z} = \\frac{5{,}6533 \\cdot 10^{-4}}{5{,}8920 \\cdot 10^{-3}} = 0{,}095949\\ \\mathrm{m}
+$$
+
+$$
+z = \\frac{V}{x \\cdot y} = \\frac{5{,}6533 \\cdot 10^{-4}}{1{,}4730 \\cdot 10^{-2}} = 0{,}038380\\ \\mathrm{m}
+$$
+
+Kontroll: $x \\cdot y = 0{,}15352 \\cdot 0{,}095949 = 1{,}4730 \\cdot 10^{-2}\\ \\mathrm{m^2}$, som det ska vara.
+
+**Svar:** Kantlängderna är cirka 15 cm, 9,6 cm och 3,8 cm.
+
+**b)** Densiteten är massan delad med volymen:
+
+$$
+\\rho = \\frac{m}{V} = \\frac{3{,}0}{5{,}6533 \\cdot 10^{-4}} = 5\\,307\\ \\mathrm{kg/m^3} \\approx 5{,}3 \\cdot 10^{3}\\ \\mathrm{kg/m^3}
+$$
+
+Rimlighet: värdet ligger mellan titan (cirka $4\\,500\\ \\mathrm{kg/m^3}$) och järn (cirka $7\\,900\\ \\mathrm{kg/m^3}$), vilket är rimligt för en metall eller en legering.
+
+**Svar:** Metallens densitet är $5{,}3 \\cdot 10^{3}\\ \\mathrm{kg/m^3}$.`,
+        },
+        {
+            level: 3,
+            question: `Den stora pyramiden i Giza är i dag ungefär 139 m hög och har en kvadratisk bas med sidan 230 m. Den är byggd av kalksten med densiteten $2\\,600\\ \\mathrm{kg/m^3}$. Räkna som om pyramiden vore massiv, och räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.<br>a) Bestäm medeltrycket mellan pyramiden och marken. Ange svaret i Pa.<br>b) Visa att medeltrycket under en massiv pyramid inte beror på basens storlek. Jämför med trycket under ett massivt rätblock av samma material, med samma bas och samma höjd.`,
+            answer: { value: 1182983, unit: 'Pa', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 1182983, unit: 'Pa', tol: 0.03 },
+                { del: 'b' },
+            ],
+            solution: `**a)** Tryckkraften är pyramidens tyngd, och den verkar på basen:
+
+$$
+p = \\frac{F}{A}
+$$
+
+En pyramid har volymen $V = \\dfrac{A \\cdot h}{3}$, där $A$ är basens area och $h$ höjden.
+
+$$
+\\left[ \\begin{array}{l}
+A = 230^2 = 52\\,900\\ \\mathrm{m^2} \\\\
+V = \\dfrac{52\\,900 \\cdot 139}{3} = 2{,}4510 \\cdot 10^{6}\\ \\mathrm{m^3} \\\\
+F = \\rho \\cdot V \\cdot g = 2\\,600 \\cdot 2{,}4510 \\cdot 10^{6} \\cdot 9{,}82 = 6{,}2580 \\cdot 10^{10}\\ \\mathrm{N}
+\\end{array} \\right]
+$$
+
+$$
+p = \\frac{6{,}2580 \\cdot 10^{10}}{52\\,900} = 1{,}1830 \\cdot 10^{6}\\ \\mathrm{Pa} \\approx 1{,}2 \\cdot 10^{6}\\ \\mathrm{Pa}
+$$
+
+**Svar:** Medeltrycket är cirka $1{,}2 \\cdot 10^{6}\\ \\mathrm{Pa}$ (1,2 MPa).
+
+**b)** Vi tecknar trycket generellt. Pyramidens massa är $m = \\rho \\cdot V = \\rho \\cdot \\dfrac{A \\cdot h}{3}$, så
+
+$$
+p = \\frac{F}{A} = \\frac{\\rho \\cdot \\dfrac{A \\cdot h}{3} \\cdot g}{A} = \\frac{\\rho \\cdot g \\cdot h}{3}
+$$
+
+Basens area $A$ förkortas bort. Trycket beror bara på materialets densitet och pyramidens höjd. Kontroll med a): $\\dfrac{2\\,600 \\cdot 9{,}82 \\cdot 139}{3} = 1{,}1830 \\cdot 10^{6}\\ \\mathrm{Pa}$, samma värde som förut.
+
+Ett rätblock med samma bas och höjd har volymen $V = A \\cdot h$, alltså tre gånger så stor volym:
+
+$$
+p_\\text{rätblock} = \\frac{\\rho \\cdot A \\cdot h \\cdot g}{A} = \\rho \\cdot g \\cdot h
+$$
+
+Rätblocket ger alltså tre gånger så stort tryck mot marken som pyramiden, eftersom det väger tre gånger så mycket och vilar på samma area.
+
+**Svar:** Medeltrycket under pyramiden är $p = \\dfrac{\\rho \\cdot g \\cdot h}{3}$, som inte beror på basen. Ett rätblock med samma bas och höjd ger tre gånger så stort tryck.`,
         },
     ],
 
@@ -24928,7 +30375,7 @@ $$
 
 **Svar:** Ca 99 m.
 
-**Generell slutsats:** En tumregel: i havet ökar vätsketrycket med ungefär 1 atm (≈ 100 kPa) per 10 m djup. På 100 m djup har man alltså ca 10 atm vätsketryck — det är gränsen för vad ett tränat sportdykarsystem klarar.`,
+**Generell slutsats:** En tumregel: i havet ökar vätsketrycket med ungefär 1 atm (≈ 100 kPa) per 10 m djup. På 100 m djup har man alltså ca 10 atm vätsketryck. Det är gränsen för vad ett tränat sportdykarsystem klarar.`,
         },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
@@ -24938,13 +30385,13 @@ $$
             answer: { value: 3.18, unit: 'N', tol: 0.05 },
             solution: `Vi behöver först beräkna vätsketrycket och sedan använda det för att hitta tryckkraften.
 
-**Steg 1 — vätsketryck:**
+**Steg 1 (vätsketryck):**
 
 $$
 p = \\rho \\cdot g \\cdot h = 998 \\cdot 9{,}82 \\cdot 5{,}0 \\approx 49\\,000\\ \\mathrm{Pa}
 $$
 
-**Steg 2 — tryckkraft från $p = F/A$:**
+**Steg 2 (tryckkraft från $p = F/A$):**
 
 $$
 F = p \\cdot A
@@ -24967,9 +30414,9 @@ $$
         },
         {
             level: 2,
-            question: `Ett U-rör är till vänster fyllt med en okänd vätska och till höger med vatten. Vattenpelaren är 24 cm hög och vätskan i vänster skänkel är 30 cm hög — och båda vätskeytorna är i jämvikt. Bestäm den okända vätskans densitet. Räkna med vattnets densitet 998 kg/m³.`,
+            question: `Ett U-rör är till vänster fyllt med en okänd vätska och till höger med vatten. Vattenpelaren är 24 cm hög och vätskan i vänster skänkel är 30 cm hög, och båda vätskeytorna är i jämvikt. Bestäm den okända vätskans densitet. Räkna med vattnets densitet 998 kg/m³.`,
             answer: { value: 798, unit: 'kg/m³', tol: 0.03 },
-            solution: `I ett U-rör måste vätsketrycket vid U-rörets botten (eller på samma höjd i båda skänklarna) vara lika stort — annars skulle vätska flyta över. Vi sätter:
+            solution: `I ett U-rör måste vätsketrycket vid U-rörets botten (eller på samma höjd i båda skänklarna) vara lika stort, annars skulle vätska flyta över. Vi sätter:
 
 $$
 \\rho_\\mathrm{okänd} \\cdot g \\cdot h_\\mathrm{okänd} = \\rho_\\mathrm{vatten} \\cdot g \\cdot h_\\mathrm{vatten}
@@ -24995,7 +30442,7 @@ $$
 
 **Svar:** Den okända vätskan har densiteten ca 800 kg/m³ (vilket motsvarar ungefär matolja eller fotogen).
 
-**Generell slutsats:** Detta är hur ett **U-rör** kan användas som densitometer — du behöver bara mäta två pelarhöjder. Notera att enheten för *h* inte behöver vara meter; så länge båda sidor använder samma enhet (cm) får man rätt förhållande.`,
+**Generell slutsats:** Detta är hur ett **U-rör** kan användas som densitometer: du behöver bara mäta två pelarhöjder. Notera att enheten för *h* inte behöver vara meter; så länge båda sidor använder samma enhet (cm) får man rätt förhållande.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
@@ -25044,7 +30491,695 @@ $$
 
 **Svar:** a) ca 294 kPa. b) ca 78 kPa. c) ca 11 N (motsvarande tyngden av ungefär 1,2 kg).
 
-**Generell slutsats:** Det är därför vattentryckkranar i toppvåningar känns "svagare" — höjdskillnaden mellan vattenkällan och kranen är mindre. En vanlig fälla i (c) är att använda **totaltrycket** ($p_0 + \\rho g h$) istället för övertrycket. Men eftersom lufttrycket ändå pressar lika hårt på tummens utsida tar de ut varandra, och bara övertrycket bidrar till nettokraften.`,
+**Generell slutsats:** Det är därför vattentryckkranar i toppvåningar känns "svagare": höjdskillnaden mellan vattenkällan och kranen är mindre. En vanlig fälla i (c) är att använda **totaltrycket** ($p_0 + \\rho g h$) istället för övertrycket. Men eftersom lufttrycket ändå pressar lika hårt på tummens utsida tar de ut varandra, och bara övertrycket bidrar till nettokraften.`,
+        },
+        {
+            level: 1,
+            question: `Kärlet i figuren är fyllt med vatten. Det har en bred del och en smal ficka till höger som går längre ned än den breda delens botten. I vilken av punkterna P, Q, R och S är vätsketrycket störst?
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="16 30 236 206" width="345" height="301" role="img" aria-label="Ett kärl fyllt med vatten. Kärlet har en bred del och till höger en smal ficka som går längre ned än den breda delens botten. Punkten P ligger nära ytan i den breda delen, Q nära den breda delens botten, S mitt i den breda delen och R längst ned i den smala fickan." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><polygon points="31,60 31,149 201,149 201,224 235,224 235,60" fill="rgba(63,127,168,0.24)"/><path d="M 31 60 L 33 60.36 L 35 60.68 L 37 60.93 L 39 61.07 L 41 61.09 L 43 61.00 L 45 60.80 L 47 60.50 L 49 60.16 L 51 59.79 L 53 59.45 L 55 59.17 L 57 58.98 L 59 58.90 L 61 58.95 L 63 59.11 L 65 59.36 L 67 59.69 L 69 60.06 L 71 60.41 L 73 60.72 L 75 60.95 L 77 61.08 L 79 61.09 L 81 60.98 L 83 60.76 L 85 60.45 L 87 60.10 L 89 59.74 L 91 59.40 L 93 59.13 L 95 58.96 L 97 58.90 L 99 58.96 L 101 59.14 L 103 59.41 L 105 59.75 L 107 60.11 L 109 60.46 L 111 60.76 L 113 60.98 L 115 61.09 L 117 61.08 L 119 60.95 L 121 60.72 L 123 60.40 L 125 60.05 L 127 59.68 L 129 59.36 L 131 59.10 L 133 58.94 L 135 58.90 L 137 58.98 L 139 59.17 L 141 59.46 L 143 59.80 L 145 60.16 L 147 60.51 L 149 60.80 L 151 61.00 L 153 61.10 L 155 61.07 L 157 60.92 L 159 60.67 L 161 60.35 L 163 59.99 L 165 59.63 L 167 59.31 L 169 59.07 L 171 58.93 L 173 58.91 L 175 59.00 L 177 59.21 L 179 59.51 L 181 59.85 L 183 60.22 L 185 60.56 L 187 60.84 L 189 61.03 L 191 61.10 L 193 61.05 L 195 60.89 L 197 60.63 L 199 60.30 L 201 59.94 L 203 59.58 L 205 59.27 L 207 59.04 L 209 58.92 L 211 58.91 L 213 59.03 L 215 59.25 L 217 59.56 L 219 59.91 L 221 60.27 L 223 60.61 L 225 60.87 L 227 61.04 L 229 61.10 L 231 61.03 L 233 60.86 L 235 60.58" fill="none" stroke="#2a5a78" stroke-width="1.5"/><polyline points="30,40 30,150 200,150 200,225 236,225 236,40" fill="none" stroke="#0f1620" stroke-width="2.2" stroke-linejoin="round"/><circle cx="110" cy="84" r="3.4" fill="#0f1620"/><text x="117" y="88.5" font-size="13" fill="#0f1620" text-anchor="start">P</text><circle cx="62" cy="136" r="3.4" fill="#0f1620"/><text x="69" y="140.5" font-size="13" fill="#0f1620" text-anchor="start">Q</text><circle cx="212" cy="211" r="3.4" fill="#0f1620"/><text x="219" y="215.5" font-size="13" fill="#0f1620" text-anchor="start">R</text><circle cx="160" cy="112" r="3.4" fill="#0f1620"/><text x="167" y="116.5" font-size="13" fill="#0f1620" text-anchor="start">S</text></svg>`,
+            choices: ['P', 'Q', 'R', 'S'],
+            correct: 2,
+            solution: `Vätsketrycket ges av
+
+$$
+p = \\rho \\cdot g \\cdot h
+$$
+
+Hela kärlet innehåller samma vätska, så $\\rho$ och $g$ är desamma i alla fyra punkterna. Trycket avgörs alltså enbart av djupet $h$ under vattenytan. Hur mycket vatten som finns ovanför eller bredvid punkten, och hur smal fickan är, spelar ingen roll.
+
+Punkten R ligger längst ned under ytan, alltså på störst djup. Därför är vätsketrycket störst där.
+
+**Svar:** I punkten R`,
+        },
+        {
+            level: 1,
+            question: `En tryckgivare i botten av en tank visar vätsketrycket 25,4 kPa. Vätskan i tanken är en blandning av glykol och vatten, och vätskedjupet är 2,40 m. Vilken densitet har vätskan? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i kg/m³.`,
+            answer: { value: 1080, unit: 'kg/m³', tol: 0.02 },
+            solution: `Vi löser ut densiteten ur formeln för vätsketryck.
+
+$$
+p = \\rho \\cdot g \\cdot h \\quad\\Leftrightarrow\\quad \\rho = \\frac{p}{g \\cdot h}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+p = 25{,}4\\ \\mathrm{kPa} = 25\\,400\\ \\mathrm{Pa} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+h = 2{,}40\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+\\rho = \\frac{25\\,400}{9{,}82 \\cdot 2{,}40} = 1\\,077{,}7 \\ldots\\ \\mathrm{kg/m^3} \\approx 1{,}08 \\cdot 10^{3}\\ \\mathrm{kg/m^3}
+$$
+
+Blandningen är något tätare än rent vatten, vilket stämmer med att glykol har högre densitet än vatten.
+
+**Svar:** Cirka $1{,}08 \\cdot 10^{3}\\ \\mathrm{kg/m^3}$`,
+        },
+        {
+            level: 1,
+            question: `En dykare mäter vätsketrycket 58,8 kPa på djupet 6,0 m i en sjö. Hur stort är vätsketrycket på djupet 15 m i samma sjö? Ange svaret i kPa.`,
+            answer: { value: 150, unit: 'kPa', tol: 0.03 },
+            solution: `Vätsketrycket är
+
+$$
+p = \\rho \\cdot g \\cdot h
+$$
+
+I samma sjö är $\\rho$ och $g$ desamma på båda djupen. Trycket är alltså proportionellt mot djupet: dubbelt så djupt ger dubbelt så stort tryck. Djupet ökar från 6,0 m till 15 m, det vill säga med faktorn
+
+$$
+\\frac{15}{6{,}0} = 2{,}5
+$$
+
+Trycket ökar med samma faktor:
+
+$$
+p_{15} = 2{,}5 \\cdot 58{,}8\\ \\mathrm{kPa} = 147\\ \\mathrm{kPa} \\approx 150\\ \\mathrm{kPa}
+$$
+
+Vi behöver alltså inte känna vattnets densitet. Det räcker att veta att trycket växer i takt med djupet.
+
+**Svar:** Cirka 150 kPa`,
+        },
+        {
+            level: 1,
+            question: `En sten ligger helt under vatten på botten av en sjö. Hur är tryckkrafterna från vattnet på stenens yta riktade?`,
+            choices: ['Rakt nedåt på alla delar av ytan', 'Vinkelrätt mot ytan, in mot stenen', 'Rakt uppåt på alla delar av ytan', 'Längs med ytan'],
+            correct: 1,
+            solution: `Vätsketrycket på ett visst djup är lika stort åt alla håll, och tryckkraften från en vätska verkar alltid **vinkelrätt mot ytan** den trycker på.
+
+På stenens ovansida trycker vattnet därför snett eller rakt nedåt, på sidorna mer eller mindre vågrätt och på eventuella delar av undersidan som vattnet når uppåt. Överallt pekar kraften vinkelrätt in mot stenens yta. Kraften verkar aldrig längs med ytan, och den är inte riktad åt samma håll överallt.
+
+**Svar:** Vinkelrätt mot ytan, in mot stenen`,
+        },
+        {
+            level: 2,
+            question: `Nära botten av en damm sitter en rektangulär lucka i den lodräta dammväggen. Luckan är 0,80 m bred och 0,60 m hög, och dess mitt ligger 9,5 m under vattenytan. Hur stor kraft trycker vattnet mot luckan med? Räkna med trycket vid luckans mitt, vattnets densitet 998 kg/m³ och $g = 9{,}82\\ \\mathrm{N/kg}$. Ange svaret i kN.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="4 20 352 196" width="514" height="286" role="img" aria-label="Tvärsnitt genom en damm. Till vänster står vattnet mot dammväggens lodräta sida. Nära botten sitter en lucka i väggen. Djupet från vattenytan ned till luckans mitt är 9,5 meter." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="12" y="40" width="208" height="160" fill="rgba(63,127,168,0.24)"/><path d="M 12 40 L 14 40.36 L 16 40.68 L 18 40.93 L 20 41.07 L 22 41.09 L 24 41.00 L 26 40.80 L 28 40.50 L 30 40.16 L 32 39.79 L 34 39.45 L 36 39.17 L 38 38.98 L 40 38.90 L 42 38.95 L 44 39.11 L 46 39.36 L 48 39.69 L 50 40.06 L 52 40.41 L 54 40.72 L 56 40.95 L 58 41.08 L 60 41.09 L 62 40.98 L 64 40.76 L 66 40.45 L 68 40.10 L 70 39.74 L 72 39.40 L 74 39.13 L 76 38.96 L 78 38.90 L 80 38.96 L 82 39.14 L 84 39.41 L 86 39.75 L 88 40.11 L 90 40.46 L 92 40.76 L 94 40.98 L 96 41.09 L 98 41.08 L 100 40.95 L 102 40.72 L 104 40.40 L 106 40.05 L 108 39.68 L 110 39.36 L 112 39.10 L 114 38.94 L 116 38.90 L 118 38.98 L 120 39.17 L 122 39.46 L 124 39.80 L 126 40.16 L 128 40.51 L 130 40.80 L 132 41.00 L 134 41.10 L 136 41.07 L 138 40.92 L 140 40.67 L 142 40.35 L 144 39.99 L 146 39.63 L 148 39.31 L 150 39.07 L 152 38.93 L 154 38.91 L 156 39.00 L 158 39.21 L 160 39.51 L 162 39.85 L 164 40.22 L 166 40.56 L 168 40.84 L 170 41.03 L 172 41.10 L 174 41.05 L 176 40.89 L 178 40.63 L 180 40.30 L 182 39.94 L 184 39.58 L 186 39.27 L 188 39.04 L 190 38.92 L 192 38.91 L 194 39.03 L 196 39.25 L 198 39.56 L 200 39.91 L 202 40.27 L 204 40.61 L 206 40.87 L 208 41.04 L 210 41.10 L 212 41.03 L 214 40.86 L 216 40.58 L 218 40.24 L 220 39.88" fill="none" stroke="#2a5a78" stroke-width="1.5"/><polygon points="220,26 252,26 300,200 220,200" fill="#d6cfc1" stroke="#0f1620" stroke-width="1.8" stroke-linejoin="round"/><rect x="220" y="160.7" width="7" height="12" fill="#5a4a3a" stroke="#0f1620" stroke-width="1.2"/><line x1="8" y1="200" x2="350" y2="200" stroke="#0f1620" stroke-width="2"/><line x1="14" y1="201" x2="7" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="26" y1="201" x2="19" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="38" y1="201" x2="31" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="50" y1="201" x2="43" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="62" y1="201" x2="55" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="74" y1="201" x2="67" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="86" y1="201" x2="79" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="98" y1="201" x2="91" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="110" y1="201" x2="103" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="122" y1="201" x2="115" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="134" y1="201" x2="127" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="146" y1="201" x2="139" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="158" y1="201" x2="151" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="170" y1="201" x2="163" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="182" y1="201" x2="175" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="194" y1="201" x2="187" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="206" y1="201" x2="199" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="218" y1="201" x2="211" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="230" y1="201" x2="223" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="242" y1="201" x2="235" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="254" y1="201" x2="247" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="266" y1="201" x2="259" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="278" y1="201" x2="271" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="290" y1="201" x2="283" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="302" y1="201" x2="295" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="314" y1="201" x2="307" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="326" y1="201" x2="319" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="338" y1="201" x2="331" y2="208" stroke="rgba(15,22,32,0.6)" stroke-width="1"/><line x1="110" y1="46" x2="110" y2="160.66666666666669" stroke="rgba(15,22,32,0.6)" stroke-width="1.3" stroke-linecap="butt"/><polygon points="106.5,46 110,40 113.5,46" fill="rgba(15,22,32,0.6)"/><polygon points="106.5,160.66666666666669 110,166.66666666666669 113.5,160.66666666666669" fill="rgba(15,22,32,0.6)"/><text x="118" y="107.33333333333334" font-size="13" fill="#0f1620" text-anchor="start"><tspan font-style="italic">h</tspan> = 9,5 m</text><line x1="114" y1="166.7" x2="218" y2="166.7" stroke="rgba(15,22,32,0.4)" stroke-width="1" stroke-dasharray="4 3"/><text x="212" y="156.66666666666669" font-size="13" fill="#0f1620" text-anchor="end">lucka</text><text x="268" y="72" font-size="13" fill="#0f1620" text-anchor="start">damm</text></svg>`,
+            answer: { value: 45, unit: 'kN', tol: 0.03 },
+            solution: `Först beräknar vi vätsketrycket vid luckans mitt och sedan tryckkraften på luckans area.
+
+**Vätsketrycket:**
+
+$$
+p = \\rho \\cdot g \\cdot h
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\rho = 998\\ \\mathrm{kg/m^3} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+h = 9{,}5\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+p = 998 \\cdot 9{,}82 \\cdot 9{,}5 = 93\\,103{,}42\\ \\mathrm{Pa}
+$$
+
+**Tryckkraften:** Ur $p = \\dfrac{F}{A}$ får vi $F = p \\cdot A$. Luckans area är
+
+$$
+A = 0{,}80 \\cdot 0{,}60 = 0{,}48\\ \\mathrm{m^2}
+$$
+
+$$
+F = 93\\,103{,}42 \\cdot 0{,}48 = 44\\,689{,}6 \\ldots\\ \\mathrm{N} \\approx 45\\ \\mathrm{kN}
+$$
+
+Kraften motsvarar tyngden av ungefär 4,5 ton. Därför öppnas sådana luckor med motorer och kraftiga gångjärn, inte för hand.
+
+**Svar:** Cirka 45 kN`,
+        },
+        {
+            level: 2,
+            question: `Grafen visar hur vätsketrycket $p$ beror på djupet $h$ i en okänd vätska.<br>a) Bestäm vätskans densitet. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i kg/m³.<br>b) Hur mycket lägre hade vätsketrycket på djupet 2,0 m varit om kärlet i stället innehållit vatten med densiteten 998 kg/m³? Ange svaret i kPa.
+
+${makeDiagram({ xMax: 2.5, xTicks: [0, 0.5, 1, 1.5, 2, 2.5], yMax: 35, yTicks: [0, 5, 10, 15, 20, 25, 30, 35], xLabel: '<tspan font-style="italic">h</tspan> (m)', yLabel: '<tspan font-style="italic">p</tspan> (kPa)', paths: [{ points: [[0, 0], [2.5, 31.25]] }] })}
+
+*Ange svaret i b) som ditt numeriska svar.*`,
+            answer: { value: 5.4, unit: 'kPa', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 1300, unit: 'kg/m³', tol: 0.03, etikett: '$\\rho =$' },
+                { del: 'b', value: 5.4, unit: 'kPa', tol: 0.04, etikett: 'skillnad' },
+            ],
+            solution: `**a)** Grafen är en rät linje genom origo, precis som $p = \\rho \\cdot g \\cdot h$ förutsäger. Vi läser av en punkt där linjen går genom ett rutnätshörn: på djupet $h = 2{,}0\\ \\mathrm{m}$ är trycket $p = 25\\ \\mathrm{kPa}$. Vi löser ut densiteten:
+
+$$
+p = \\rho \\cdot g \\cdot h \\quad\\Leftrightarrow\\quad \\rho = \\frac{p}{g \\cdot h}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+p = 25\\ \\mathrm{kPa} = 25\\,000\\ \\mathrm{Pa} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+h = 2{,}0\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+\\rho = \\frac{25\\,000}{9{,}82 \\cdot 2{,}0} = 1\\,272{,}9 \\ldots\\ \\mathrm{kg/m^3} \\approx 1{,}3 \\cdot 10^{3}\\ \\mathrm{kg/m^3}
+$$
+
+Det är ungefär densiteten hos glycerol.
+
+**Svar:** Cirka $1{,}3 \\cdot 10^{3}\\ \\mathrm{kg/m^3}$
+
+**b)** I vatten är trycket på samma djup
+
+$$
+p_\\text{vatten} = 998 \\cdot 9{,}82 \\cdot 2{,}0 = 19\\,600{,}72\\ \\mathrm{Pa}
+$$
+
+Skillnaden mot den okända vätskan är
+
+$$
+\\Delta p = 25\\,000 - 19\\,600{,}72 = 5\\,399{,}28\\ \\mathrm{Pa} \\approx 5{,}4\\ \\mathrm{kPa}
+$$
+
+Vattnets linje hade alltså varit flackare, eftersom vatten har lägre densitet.
+
+**Svar:** Cirka 5,4 kPa lägre`,
+        },
+        {
+            level: 2,
+            question: `Blodet i kroppen fungerar som en vätskepelare. Hos en stående person är blodtrycket i stora artärer i höjd med hjärtat 13,3 kPa (övertryck). Blodets densitet är 1 060 kg/m³. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.<br>a) Hur mycket större är blodtrycket i en fot som befinner sig 1,3 m under hjärtat, jämfört med vid hjärtat?<br>b) Hur stort är blodtrycket i foten?<br>c) Personen sträcker upp armen så att handen hamnar 0,45 m över hjärtat. Hur stort är blodtrycket i handen?
+
+Ange alla svar i kPa.
+
+*Ange svaret i c) som ditt numeriska svar.*`,
+            answer: { value: 8.6, unit: 'kPa', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 14, unit: 'kPa', tol: 0.04, etikett: 'ökning' },
+                { del: 'b', value: 27, unit: 'kPa', tol: 0.03, etikett: 'i foten' },
+                { del: 'c', value: 8.6, unit: 'kPa', tol: 0.03, etikett: 'i handen' },
+            ],
+            solution: `Blodet i ett kärl följer samma lag som vatten i en sjö: trycket ökar med $\\rho \\cdot g \\cdot h$ när man går nedåt sträckan $h$, och minskar lika mycket när man går uppåt.
+
+**a)** Tryckskillnaden mellan hjärtat och foten är
+
+$$
+\\Delta p = \\rho \\cdot g \\cdot h
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\rho = 1\\,060\\ \\mathrm{kg/m^3} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+h = 1{,}3\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+\\Delta p = 1\\,060 \\cdot 9{,}82 \\cdot 1{,}3 = 13\\,531{,}96\\ \\mathrm{Pa} \\approx 14\\ \\mathrm{kPa}
+$$
+
+**Svar:** Cirka 14 kPa större
+
+**b)** I foten läggs tryckökningen till trycket vid hjärtat:
+
+$$
+p_\\text{fot} = 13\\,300 + 13\\,531{,}96 = 26\\,831{,}96\\ \\mathrm{Pa} \\approx 27\\ \\mathrm{kPa}
+$$
+
+**Svar:** Cirka 27 kPa
+
+**c)** Handen ligger över hjärtat, så där är trycket lägre. Minskningen är
+
+$$
+\\Delta p = 1\\,060 \\cdot 9{,}82 \\cdot 0{,}45 = 4\\,684{,}14\\ \\mathrm{Pa}
+$$
+
+$$
+p_\\text{hand} = 13\\,300 - 4\\,684{,}14 = 8\\,615{,}86\\ \\mathrm{Pa} \\approx 8{,}6\\ \\mathrm{kPa}
+$$
+
+Trycket i foten är alltså ungefär tre gånger så stort som i den upplyfta handen. Det är därför blodtrycket alltid mäts på överarmen, i höjd med hjärtat.
+
+**Svar:** Cirka 8,6 kPa`,
+        },
+        {
+            level: 2,
+            question: `I en tank ligger ett 0,40 m tjockt lager olja ovanpå 0,60 m vatten. Oljan blandas inte med vattnet. Oljans densitet är 900 kg/m³ och vattnets 998 kg/m³. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.<br>a) Hur stort är vätsketrycket vid gränsytan mellan oljan och vattnet?<br>b) Hur stort är vätsketrycket vid tankens botten?
+
+Ange svaren i kPa.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="44 14 260 196" width="380" height="286" role="img" aria-label="En tank med 0,60 meter vatten i botten och ett 0,40 meter tjockt lager olja ovanpå vattnet." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="61" y="40" width="158" height="64" fill="rgba(214,158,46,0.34)"/><rect x="61" y="104" width="158" height="96" fill="rgba(63,127,168,0.24)"/><line x1="60" y1="40" x2="220" y2="40" stroke="#9a6a12" stroke-width="1.5"/><line x1="60" y1="104" x2="220" y2="104" stroke="#2a5a78" stroke-width="1.5"/><polyline points="60,24 60,200 220,200 220,24" fill="none" stroke="#0f1620" stroke-width="2.2" stroke-linejoin="round"/><text x="140" y="77" font-size="13" fill="#0f1620" text-anchor="middle">olja</text><text x="140" y="157" font-size="13" fill="#0f1620" text-anchor="middle">vatten</text><line x1="240" y1="46" x2="240" y2="98" stroke="rgba(15,22,32,0.6)" stroke-width="1.3" stroke-linecap="butt"/><polygon points="236.5,46 240,40 243.5,46" fill="rgba(15,22,32,0.6)"/><polygon points="236.5,98 240,104 243.5,98" fill="rgba(15,22,32,0.6)"/><text x="248" y="77" font-size="13" fill="#0f1620" text-anchor="start">0,40 m</text><line x1="240" y1="110" x2="240" y2="194" stroke="rgba(15,22,32,0.6)" stroke-width="1.3" stroke-linecap="butt"/><polygon points="236.5,110 240,104 243.5,110" fill="rgba(15,22,32,0.6)"/><polygon points="236.5,194 240,200 243.5,194" fill="rgba(15,22,32,0.6)"/><text x="248" y="157" font-size="13" fill="#0f1620" text-anchor="start">0,60 m</text></svg>
+
+*Ange svaret i b) som ditt numeriska svar.*`,
+            answer: { value: 9.4, unit: 'kPa', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 3.5, unit: 'kPa', tol: 0.03, etikett: 'vid gränsytan' },
+                { del: 'b', value: 9.4, unit: 'kPa', tol: 0.03, etikett: 'vid botten' },
+            ],
+            solution: `**a)** Vid gränsytan är det bara oljan som trycker ovanifrån:
+
+$$
+p_1 = \\rho_\\text{olja} \\cdot g \\cdot h_\\text{olja}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\rho_\\text{olja} = 900\\ \\mathrm{kg/m^3} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+h_\\text{olja} = 0{,}40\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+p_1 = 900 \\cdot 9{,}82 \\cdot 0{,}40 = 3\\,535{,}2\\ \\mathrm{Pa} \\approx 3{,}5\\ \\mathrm{kPa}
+$$
+
+**Svar:** Cirka 3,5 kPa
+
+**b)** Från gränsytan ned till botten ökar trycket som i vanligt vatten, med $\\rho_\\text{vatten} \\cdot g \\cdot h_\\text{vatten}$. Trycket vid botten blir trycket vid gränsytan plus vattnets bidrag:
+
+$$
+p_2 = p_1 + \\rho_\\text{vatten} \\cdot g \\cdot h_\\text{vatten}
+$$
+
+$$
+p_2 = 3\\,535{,}2 + 998 \\cdot 9{,}82 \\cdot 0{,}60 = 3\\,535{,}2 + 5\\,880{,}216 = 9\\,415{,}416\\ \\mathrm{Pa} \\approx 9{,}4\\ \\mathrm{kPa}
+$$
+
+Om hela tanken hade varit full med vatten hade trycket vid botten blivit $998 \\cdot 9{,}82 \\cdot 1{,}00 \\approx 9{,}8\\ \\mathrm{kPa}$. Vårt svar är något mindre, vilket är rimligt eftersom oljan är lättare än vatten.
+
+**Svar:** Cirka 9,4 kPa`,
+        },
+        {
+            level: 2,
+            question: `En forskningsubåt har ett runt fönster med diametern 20 cm. Hur stor kraft trycker havsvattnet mot fönstret när ubåten befinner sig 180 m under ytan? Räkna med att havsvattnets densitet är 1 028 kg/m³ och $g = 9{,}82\\ \\mathrm{N/kg}$, och ange svaret i kN.`,
+            answer: { value: 57, unit: 'kN', tol: 0.03 },
+            solution: `Vi beräknar först vätsketrycket på djupet 180 m och sedan kraften på fönstrets area.
+
+**Vätsketrycket:**
+
+$$
+p = \\rho \\cdot g \\cdot h = 1\\,028 \\cdot 9{,}82 \\cdot 180 = 1\\,817\\,092{,}8\\ \\mathrm{Pa}
+$$
+
+**Fönstrets area:** Radien är halva diametern, $r = 10\\ \\mathrm{cm} = 0{,}10\\ \\mathrm{m}$.
+
+$$
+A = \\pi \\cdot r^{2} = \\pi \\cdot 0{,}10^{2} = 0{,}031\\,415\\,9 \\ldots\\ \\mathrm{m^2}
+$$
+
+**Tryckkraften:**
+
+$$
+F = p \\cdot A = 1\\,817\\,092{,}8 \\cdot 0{,}031\\,415\\,9 = 57\\,085{,}6 \\ldots\\ \\mathrm{N} \\approx 57\\ \\mathrm{kN}
+$$
+
+Kraften motsvarar tyngden av nästan sex ton, på ett fönster som är lika stort som en tallrik. Därför görs sådana fönster av decimetertjock akrylplast.
+
+**Svar:** Cirka 57 kN`,
+        },
+        {
+            level: 3,
+            question: `Ett kärl består av en bred, låg bottendel och en smal, hög hals. Bottendelen har basytan 0,050 m² och höjden 0,10 m. Halsen har tvärsnittsarean 0,0020 m² och höjden 0,40 m. Kärlet fylls med vatten (densitet 998 kg/m³) ända upp till halsens överkant. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.<br>a) Hur stor är tyngden av vattnet i kärlet?<br>b) Hur stor tryckkraft verkar på kärlets botten?<br>c) Kraften på botten är mycket större än vattnets tyngd. Förklara hur det är möjligt, och visa med en beräkning att krafterna på vattnet går ihop.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="28 16 290 216" width="424" height="316" role="img" aria-label="Ett kärl med en bred och låg bottendel och en smal, hög hals ovanpå. Bottendelen är 0,10 meter hög och halsen 0,40 meter. Vattnet når upp till halsens överkant." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><polygon points="41,219 41,181 124,181 124,40 156,40 156,181 239,181 239,219" fill="rgba(63,127,168,0.24)"/><path d="M 124 40 L 126 40.36 L 128 40.68 L 130 40.93 L 132 41.07 L 134 41.09 L 136 41.00 L 138 40.80 L 140 40.50 L 142 40.16 L 144 39.79 L 146 39.45 L 148 39.17 L 150 38.98 L 152 38.90 L 154 38.95 L 156 39.11" fill="none" stroke="#2a5a78" stroke-width="1.5"/><polyline points="124,26 124,180 40,180 40,220 240,220 240,180 156,180 156,26" fill="none" stroke="#0f1620" stroke-width="2.2" stroke-linejoin="round"/><line x1="258" y1="186" x2="258" y2="214" stroke="rgba(15,22,32,0.6)" stroke-width="1.3" stroke-linecap="butt"/><polygon points="254.5,186 258,180 261.5,186" fill="rgba(15,22,32,0.6)"/><polygon points="254.5,214 258,220 261.5,214" fill="rgba(15,22,32,0.6)"/><text x="266" y="205" font-size="13" fill="#0f1620" text-anchor="start">0,10 m</text><line x1="178" y1="46" x2="178" y2="174" stroke="rgba(15,22,32,0.6)" stroke-width="1.3" stroke-linecap="butt"/><polygon points="174.5,46 178,40 181.5,46" fill="rgba(15,22,32,0.6)"/><polygon points="174.5,174 178,180 181.5,174" fill="rgba(15,22,32,0.6)"/><text x="186" y="115" font-size="13" fill="#0f1620" text-anchor="start">0,40 m</text></svg>
+
+*Ange svaret i b) som ditt numeriska svar.*`,
+            answer: { value: 250, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 57, unit: 'N', tol: 0.03, etikett: '$F_G =$' },
+                { del: 'b', value: 250, unit: 'N', tol: 0.03, etikett: '$F =$' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Vattnets volym är bottendelens volym plus halsens volym:
+
+$$
+V = 0{,}050 \\cdot 0{,}10 + 0{,}0020 \\cdot 0{,}40 = 0{,}005\\,0 + 0{,}000\\,80 = 0{,}005\\,8\\ \\mathrm{m^3}
+$$
+
+Massan och tyngden blir
+
+$$
+m = \\rho \\cdot V = 998 \\cdot 0{,}005\\,8 = 5{,}788\\,4\\ \\mathrm{kg}
+$$
+
+$$
+F_G = m \\cdot g = 5{,}788\\,4 \\cdot 9{,}82 = 56{,}84 \\ldots\\ \\mathrm{N} \\approx 57\\ \\mathrm{N}
+$$
+
+**Svar:** Cirka 57 N
+
+**b)** Vätsketrycket vid botten beror bara på djupet, som är hela vattenpelarens höjd, $h = 0{,}10 + 0{,}40 = 0{,}50\\ \\mathrm{m}$:
+
+$$
+p = \\rho \\cdot g \\cdot h = 998 \\cdot 9{,}82 \\cdot 0{,}50 = 4\\,900{,}18\\ \\mathrm{Pa}
+$$
+
+Trycket verkar på hela bottenytan:
+
+$$
+F = p \\cdot A = 4\\,900{,}18 \\cdot 0{,}050 = 245{,}009\\ \\mathrm{N} \\approx 2{,}5 \\cdot 10^{2}\\ \\mathrm{N}
+$$
+
+**Svar:** Cirka 250 N
+
+**c)** Vattnet trycker inte bara på botten utan på alla ytor det rör vid, och alltid vinkelrätt mot ytan. Taket i bottendelen (den vågräta ringen runt halsen) ligger 0,40 m under vattenytan. Där är trycket
+
+$$
+p_\\text{tak} = 998 \\cdot 9{,}82 \\cdot 0{,}40 = 3\\,920{,}144\\ \\mathrm{Pa}
+$$
+
+och det trycker uppåt mot taket, vars area är bottenytan minus halsens tvärsnitt, $0{,}050 - 0{,}0020 = 0{,}048\\ \\mathrm{m^2}$:
+
+$$
+F_\\text{tak} = 3\\,920{,}144 \\cdot 0{,}048 = 188{,}17 \\ldots\\ \\mathrm{N}
+$$
+
+Enligt Newtons tredje lag trycker taket lika hårt **nedåt** på vattnet. Vattnet är i vila, så kraften uppåt från botten måste balansera både tyngden och takets kraft nedåt:
+
+$$
+F_G + F_\\text{tak} = 56{,}84 + 188{,}17 = 245{,}01\\ \\mathrm{N}
+$$
+
+Det är precis kraften på botten från b). Kraften på botten är alltså större än vattnets tyngd eftersom taket pressar vattnet nedåt. Kärlet som helhet trycker ändå bara med vattnets tyngd (plus sin egen) mot ett bord, eftersom vattnet samtidigt trycker kärlets tak uppåt med 188 N.
+
+**Svar:** Taket runt halsen trycker vattnet nedåt med cirka 188 N, och tillsammans med vattnets tyngd 57 N ger det kraften cirka 250 N mot botten.`,
+        },
+        {
+            level: 3,
+            question: `Vattnet står mot den lodräta väggen i en damm. Väggen är $b$ meter bred och vattendjupet är $h$.<br>a) Visa att den totala tryckkraften från vattnet på väggen är $F = \\dfrac{\\rho \\cdot g \\cdot b \\cdot h^{2}}{2}$, där $\\rho$ är vattnets densitet.<br>b) Beräkna kraften för en damm där väggen är 40 m bred och vattendjupet 15 m. Räkna med $\\rho = 998\\ \\mathrm{kg/m^3}$ och $g = 9{,}82\\ \\mathrm{N/kg}$, och ange svaret i MN.<br>c) Efter ett kraftigt regn stiger vattnet så att djupet blir dubbelt så stort. Hur många gånger större blir kraften på väggen? Förklara också varför dammväggar görs tjockare längst ned.
+
+*Ange svaret i b) som ditt numeriska svar.*`,
+            answer: { value: 44, unit: 'MN', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 44, unit: 'MN', tol: 0.03, etikett: '$F =$' },
+                { del: 'c', value: 4, unit: 'gånger', tol: 0.01, etikett: 'faktor' },
+            ],
+            solution: `**a)** Trycket mot väggen är inte lika stort överallt. Vid ytan är djupet 0 och trycket 0, och vid botten är trycket $\\rho \\cdot g \\cdot h$. Eftersom $p = \\rho \\cdot g \\cdot h$ växer **linjärt** med djupet ökar trycket jämnt hela vägen ned. Medeltrycket över väggen blir då medelvärdet av trycket vid ytan och vid botten:
+
+$$
+p_\\text{medel} = \\frac{0 + \\rho \\cdot g \\cdot h}{2} = \\frac{\\rho \\cdot g \\cdot h}{2}
+$$
+
+(Väggen kan delas i lika höga remsor. Varje remsa på djupet $x$ under ytan har en partner på djupet $h - x$, och de två har tillsammans trycket $\\rho \\cdot g \\cdot h$, alltså i medel halva bottentrycket.)
+
+Vattnet trycker på väggens våta yta, med arean $A = b \\cdot h$. Kraften är medeltrycket gånger arean:
+
+$$
+F = p_\\text{medel} \\cdot A = \\frac{\\rho \\cdot g \\cdot h}{2} \\cdot b \\cdot h = \\frac{\\rho \\cdot g \\cdot b \\cdot h^{2}}{2}
+$$
+
+vilket skulle visas.
+
+**b)**
+
+$$
+\\left[ \\begin{array}{l}
+\\rho = 998\\ \\mathrm{kg/m^3} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+b = 40\\ \\mathrm{m} \\\\
+h = 15\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+F = \\frac{998 \\cdot 9{,}82 \\cdot 40 \\cdot 15^{2}}{2} = \\frac{88\\,203\\,240}{2} = 44\\,101\\,620\\ \\mathrm{N} \\approx 44\\ \\mathrm{MN}
+$$
+
+Som rimlighetskontroll: bottentrycket är $998 \\cdot 9{,}82 \\cdot 15 \\approx 147\\ \\mathrm{kPa}$, halva det är cirka 74 kPa, och den våta ytan är $40 \\cdot 15 = 600\\ \\mathrm{m^2}$. Det ger $74\\,000 \\cdot 600 \\approx 44 \\cdot 10^{6}\\ \\mathrm{N}$.
+
+**Svar:** Cirka 44 MN
+
+**c)** Kraften är proportionell mot $h^{2}$. Om djupet fördubblas blir kraften
+
+$$
+\\frac{F_\\text{ny}}{F} = \\frac{(2h)^{2}}{h^{2}} = 4
+$$
+
+gånger så stor. Djupet påverkar två gånger: både trycket och den våta arean blir dubbelt så stora.
+
+Längst ned i dammen är trycket störst, eftersom djupet är störst där. Den nedersta delen av väggen måste därför tåla de största krafterna per kvadratmeter, och därför byggs den tjockast.
+
+**Svar:** Kraften blir 4 gånger större. Väggen görs tjockast längst ned eftersom vätsketrycket är störst vid botten.`,
+        },
+        {
+            level: 3,
+            question: `Ett U-rör med lika tjocka skänklar innehåller vatten, och vattenytorna står lika högt i båda skänklarna. I den vänstra skänkeln hälls sedan olja, som inte blandas med vattnet utan lägger sig ovanpå. När allt har stillnat är oljepelaren 15 cm hög. Oljans densitet är 820 kg/m³ och vattnets 998 kg/m³.<br>a) Hur mycket har vattenytan i den högra skänkeln stigit jämfört med före? Ange svaret i cm.<br>b) Försöket görs om i ett U-rör där den högra skänkeln har dubbelt så stor tvärsnittsarea som den vänstra. Även nu blir oljepelaren 15 cm hög. Stiger vattenytan i den högra skänkeln mer, mindre eller lika mycket som i a)? Motivera med en beräkning.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 16 290 260" width="424" height="380" role="img" aria-label="Ett U-rör med vatten i botten. I vänster skänkel ligger en 15 cm hög oljepelare ovanpå vattnet. En streckad linje visar var vattenytorna stod innan oljan hälldes i. I höger skänkel har vattenytan stigit sträckan x över den linjen." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><path d="M 61 150 L 61 200 A 69 69 0 0 0 199 200 L 199 84.4 L 171 84.4 L 171 200 A 41 41 0 0 1 89 200 L 89 150 Z" fill="rgba(63,127,168,0.24)"/><rect x="61" y="70" width="28" height="80" fill="rgba(214,158,46,0.34)"/><line x1="60" y1="70" x2="90" y2="70" stroke="#9a6a12" stroke-width="1.5"/><line x1="60" y1="150" x2="90" y2="150" stroke="#2a5a78" stroke-width="1.5"/><line x1="170" y1="84.4" x2="200" y2="84.4" stroke="#2a5a78" stroke-width="1.5"/><path d="M 60 40 L 60 200 A 70 70 0 0 0 200 200 L 200 40" fill="none" stroke="#0f1620" stroke-width="2.2"/><path d="M 90 40 L 90 200 A 40 40 0 0 1 170 200 L 170 40" fill="none" stroke="#0f1620" stroke-width="2.2"/><line x1="62" y1="117.2" x2="258" y2="117.2" stroke="rgba(15,22,32,0.45)" stroke-width="1" stroke-dasharray="4 3"/><line x1="204" y1="84.4" x2="244" y2="84.4" stroke="rgba(15,22,32,0.4)" stroke-width="1" stroke-dasharray="4 3"/><line x1="42" y1="76" x2="42" y2="144" stroke="rgba(15,22,32,0.6)" stroke-width="1.3" stroke-linecap="butt"/><polygon points="38.5,76 42,70 45.5,76" fill="rgba(15,22,32,0.6)"/><polygon points="38.5,144 42,150 45.5,144" fill="rgba(15,22,32,0.6)"/><text x="37" y="114" font-size="13" fill="#0f1620" text-anchor="end">15 cm</text><line x1="236" y1="90.4" x2="236" y2="111.2" stroke="rgba(15,22,32,0.6)" stroke-width="1.3" stroke-linecap="butt"/><polygon points="232.5,90.4 236,84.4 239.5,90.4" fill="rgba(15,22,32,0.6)"/><polygon points="232.5,111.2 236,117.2 239.5,111.2" fill="rgba(15,22,32,0.6)"/><text x="244" y="105" font-size="13" fill="#0f1620" text-anchor="start"><tspan font-style="italic">x</tspan></text><text x="206" y="133" font-size="12" fill="rgba(15,22,32,0.75)" text-anchor="start">ytan före</text><text x="75" y="32" font-size="13" fill="#0f1620" text-anchor="middle">olja</text><text x="185" y="32" font-size="13" fill="#0f1620" text-anchor="middle">vatten</text></svg>
+
+*Ange svaret i a) som ditt numeriska svar.*`,
+            answer: { value: 6.2, unit: 'cm', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 6.2, unit: 'cm', tol: 0.03, etikett: '$x =$' },
+                { del: 'b', value: 4.1, unit: 'cm', tol: 0.03, etikett: '$x =$' },
+            ],
+            solution: `**a)** Två samband behövs: ett för hur vattnet flyttar sig och ett för trycket.
+
+**Vattnets volym är densamma.** Oljan trycker ned vattenytan i den vänstra skänkeln en sträcka $x$. Det vatten som lämnar den vänstra skänkeln hamnar i den högra, och eftersom skänklarna är lika tjocka stiger vattenytan där lika mycket, sträckan $x$. Gränsytan mellan olja och vatten ligger alltså $x$ under den gamla nivån, och vattenytan till höger $x$ över den. Mellan gränsytans nivå och vattenytan till höger finns därför en vattenpelare med höjden $2x$.
+
+**Trycket är lika på samma höjd.** Under gränsytans nivå finns bara vatten i vila. Trycket i vattnet måste därför vara lika stort på samma höjd i båda skänklarna, annars skulle vattnet strömma. I nivå med gränsytan trycker oljepelaren i den vänstra skänkeln och vattenpelaren $2x$ i den högra:
+
+$$
+\\rho_\\text{olja} \\cdot g \\cdot h_\\text{olja} = \\rho_\\text{vatten} \\cdot g \\cdot 2x
+$$
+
+Vi dividerar båda leden med $2 \\cdot \\rho_\\text{vatten} \\cdot g$. Tyngdfaktorn förkortas bort:
+
+$$
+x = \\frac{\\rho_\\text{olja} \\cdot h_\\text{olja}}{2 \\cdot \\rho_\\text{vatten}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\rho_\\text{olja} = 820\\ \\mathrm{kg/m^3} \\\\
+\\rho_\\text{vatten} = 998\\ \\mathrm{kg/m^3} \\\\
+h_\\text{olja} = 15\\ \\mathrm{cm}
+\\end{array} \\right]
+$$
+
+$$
+x = \\frac{820 \\cdot 15}{2 \\cdot 998} = 6{,}162\\ldots\\ \\mathrm{cm} \\approx 6{,}2\\ \\mathrm{cm}
+$$
+
+Rimlighet: vattenpelaren som balanserar oljan är $2x \\approx 12{,}3\\ \\mathrm{cm}$, alltså något kortare än oljepelaren på 15 cm, vilket stämmer med att oljan är lättare än vatten. Oljeytan står då cirka 2,7 cm över vattenytan till höger. Den som bara jämför oljepelaren med vattenpelaren och glömmer att vattnet också sjunker till vänster får dubbla svaret, 12 cm.
+
+**Svar:** Cirka 6,2 cm
+
+**b)** Kalla sträckan som vattenytan sjunker i den vänstra skänkeln för $y$. Vattnet som lämnar den vänstra skänkeln fördelar sig i den högra på dubbelt så stor tvärsnittsarea, så där stiger ytan bara $\\dfrac{y}{2}$. Vattenpelaren mellan gränsytans nivå och vattenytan till höger blir
+
+$$
+y + \\frac{y}{2} = \\frac{3y}{2}
+$$
+
+Trycket i nivå med gränsytan är lika i båda skänklarna:
+
+$$
+\\rho_\\text{olja} \\cdot g \\cdot h_\\text{olja} = \\rho_\\text{vatten} \\cdot g \\cdot \\frac{3y}{2}
+$$
+
+Vi multiplicerar båda leden med 2 och dividerar med $3 \\cdot \\rho_\\text{vatten} \\cdot g$:
+
+$$
+y = \\frac{2 \\cdot \\rho_\\text{olja} \\cdot h_\\text{olja}}{3 \\cdot \\rho_\\text{vatten}} = \\frac{2 \\cdot 820 \\cdot 15}{3 \\cdot 998} = 8{,}216\\ldots\\ \\mathrm{cm}
+$$
+
+Vattenytan till höger stiger hälften så mycket:
+
+$$
+\\frac{y}{2} = \\frac{\\rho_\\text{olja} \\cdot h_\\text{olja}}{3 \\cdot \\rho_\\text{vatten}} = \\frac{820 \\cdot 15}{3 \\cdot 998} = 4{,}108\\ldots\\ \\mathrm{cm} \\approx 4{,}1\\ \\mathrm{cm}
+$$
+
+Höjdskillnaden mellan oljeytan och vattenytan till höger är fortfarande densamma, eftersom vattenpelaren som balanserar oljan även nu är $\\dfrac{3y}{2} \\approx 12{,}3\\ \\mathrm{cm}$. Men en större del av den sträckan står nu för sjunkningen i den smala skänkeln, och den breda skänkelns yta behöver inte stiga lika mycket.
+
+**Svar:** Mindre, cirka 4,1 cm i stället för 6,2 cm.`,
+        },
+        {
+            level: 3,
+            question: `Andningsmusklerna klarar att andas in mot en tryckskillnad på högst 8,0 kPa mellan luften i lungorna och omgivningen runt bröstkorgen. En uppfinnare föreslår en 3,0 m lång snorkel, så att man kan simma omkring och andas på 3,0 m djup.<br>a) Undersök med en beräkning om förslaget fungerar, och bestäm hur djupt bröstkorgen som mest kan befinna sig när man andas genom en snorkel. Räkna med vattnets densitet 998 kg/m³ och $g = 9{,}82\\ \\mathrm{N/kg}$, och ange djupet i m.<br>b) En dykare med lufttub kan andas utan besvär på 20 m djup. Förklara med hjälp av fysiken varför det går.
+
+*Ange svaret i a) som ditt numeriska svar.*`,
+            answer: { value: 0.82, unit: 'm', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 0.82, unit: 'm', tol: 0.03, etikett: '$h =$' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Vi tar reda på trycket på båda sidor om bröstkorgen.
+
+**Inuti:** Snorkeln förbinder lungorna med luften ovanför ytan, så luften i lungorna har samma tryck som lufttrycket vid ytan, oavsett hur lång snorkeln är.
+
+**Utanpå:** Bröstkorgen befinner sig på djupet $h$. Där är trycket lufttrycket vid ytan plus vätsketrycket $\\rho \\cdot g \\cdot h$.
+
+Lufttrycket finns på båda sidor och tar ut sig. Tryckskillnaden som musklerna måste övervinna är alltså just vätsketrycket:
+
+$$
+\\Delta p = \\rho \\cdot g \\cdot h
+$$
+
+På 3,0 m djup blir tryckskillnaden
+
+$$
+\\Delta p = 998 \\cdot 9{,}82 \\cdot 3{,}0 = 29\\,401{,}08\\ \\mathrm{Pa} \\approx 29\\ \\mathrm{kPa}
+$$
+
+Det är nästan fyra gånger mer än de 8,0 kPa som musklerna klarar, så förslaget fungerar inte.
+
+Det största djupet får vi när tryckskillnaden är precis 8,0 kPa:
+
+$$
+\\rho \\cdot g \\cdot h = \\Delta p_\\text{max} \\quad\\Leftrightarrow\\quad h = \\frac{\\Delta p_\\text{max}}{\\rho \\cdot g}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\Delta p_\\text{max} = 8{,}0\\ \\mathrm{kPa} = 8\\,000\\ \\mathrm{Pa} \\\\
+\\rho = 998\\ \\mathrm{kg/m^3} \\\\
+g = 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+h = \\frac{8\\,000}{998 \\cdot 9{,}82} = 0{,}816\\,2 \\ldots\\ \\mathrm{m} \\approx 0{,}82\\ \\mathrm{m}
+$$
+
+Rimlighet: tio meter vatten motsvarar ungefär 100 kPa, så 8 kPa motsvarar knappt en meter. Det stämmer också med att vanliga snorklar är korta, omkring 30 till 40 cm. (En lång snorkel gör det dessutom värre av ett annat skäl: luften i röret andas man bara fram och tillbaka utan att den byts ut.)
+
+**Svar:** Nej, på 3,0 m djup blir tryckskillnaden cirka 29 kPa. Bröstkorgen kan som mest vara cirka 0,82 m under ytan.
+
+**b)** Det som gör inandningen tung är inte djupet i sig utan **tryckskillnaden** mellan luften i lungorna och vattnet utanpå bröstkorgen. På 20 m djup är vattnets tryck lufttrycket plus
+
+$$
+\\rho \\cdot g \\cdot h = 998 \\cdot 9{,}82 \\cdot 20 = 196\\,018{,}72\\ \\mathrm{Pa} \\approx 0{,}20\\ \\mathrm{MPa}
+$$
+
+Dykarens regulator släpper ut luft ur tuben med **samma tryck som vattnet runt omkring**, alltså ungefär tre gånger lufttrycket vid ytan. Då är trycket lika stort inuti lungorna som utanpå bröstkorgen, tryckskillnaden blir nästan noll, och musklerna behöver inte arbeta mot vätsketrycket.
+
+**Svar:** Regulatorn ger luft med samma tryck som vattnet på djupet, så tryckskillnaden över bröstkorgen blir nästan noll.`,
+        },
+        {
+            level: 3,
+            question: `I en tank med en okänd vätska sitter två tryckgivare på samma lodräta linje. Givare 1 sitter sträckan $d$ ovanför givare 2, som sitter på tankens botten. Givarna mäter vätsketrycket $p_1$ respektive $p_2$. Varken vätskans densitet eller vätskedjupet är känt.<br>a) Visa att vätskedjupet $h$ vid botten kan bestämmas med $h = \\dfrac{p_2 \\cdot d}{p_2 - p_1}$.<br>b) Givarna visar $p_1 = 22{,}4\\ \\mathrm{kPa}$ och $p_2 = 34{,}8\\ \\mathrm{kPa}$, och avståndet mellan dem är $d = 1{,}20\\ \\mathrm{m}$. Hur djup är vätskan? Ange svaret i m.<br>c) Bestäm vätskans densitet. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i kg/m³.
+
+*Ange svaret i b) som ditt numeriska svar.*`,
+            answer: { value: 3.37, unit: 'm', tol: 0.02 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 3.37, unit: 'm', tol: 0.02, etikett: '$h =$' },
+                { del: 'c', value: 1050, unit: 'kg/m³', tol: 0.02, etikett: '$\\rho =$' },
+            ],
+            solution: `**a)** Givare 2 sitter på djupet $h$ och givare 1 på djupet $h - d$. Med $p = \\rho \\cdot g \\cdot h$ gäller
+
+$$
+p_2 = \\rho \\cdot g \\cdot h \\tag{1}
+$$
+
+$$
+p_1 = \\rho \\cdot g \\cdot (h - d) \\tag{2}
+$$
+
+Vi subtraherar (2) från (1), så att det okända djupet försvinner ur högerledet:
+
+$$
+p_2 - p_1 = \\rho \\cdot g \\cdot h - \\rho \\cdot g \\cdot (h - d) = \\rho \\cdot g \\cdot d \\tag{3}
+$$
+
+Nu dividerar vi (1), $p_2 = \\rho \\cdot g \\cdot h$, med (3), $p_2 - p_1 = \\rho \\cdot g \\cdot d$. Den okända produkten $\\rho \\cdot g$ förkortas bort:
+
+$$
+\\frac{p_2}{p_2 - p_1} = \\frac{\\rho \\cdot g \\cdot h}{\\rho \\cdot g \\cdot d} = \\frac{h}{d}
+$$
+
+Vi multiplicerar båda leden med $d$:
+
+$$
+h = \\frac{p_2 \\cdot d}{p_2 - p_1}
+$$
+
+vilket skulle visas.
+
+**b)**
+
+$$
+\\left[ \\begin{array}{l}
+p_1 = 22{,}4\\ \\mathrm{kPa} \\\\
+p_2 = 34{,}8\\ \\mathrm{kPa} \\\\
+d = 1{,}20\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+h = \\frac{34{,}8 \\cdot 1{,}20}{34{,}8 - 22{,}4} = \\frac{41{,}76}{12{,}4} = 3{,}367\\,7 \\ldots\\ \\mathrm{m} \\approx 3{,}37\\ \\mathrm{m}
+$$
+
+Enheten kPa förkortas bort, så trycken behöver inte räknas om till Pa. Rimlighet: trycket ökar med 12,4 kPa på 1,20 m, och bottentrycket 34,8 kPa är knappt tre gånger så stort som ökningen. Djupet bör alltså vara knappt tre gånger 1,20 m, vilket stämmer.
+
+**Svar:** Cirka 3,37 m
+
+**c)** Ur (3), $p_2 - p_1 = \\rho \\cdot g \\cdot d$, får vi
+
+$$
+\\rho = \\frac{p_2 - p_1}{g \\cdot d} = \\frac{12\\,400}{9{,}82 \\cdot 1{,}20} = 1\\,052{,}2 \\ldots\\ \\mathrm{kg/m^3} \\approx 1{,}05 \\cdot 10^{3}\\ \\mathrm{kg/m^3}
+$$
+
+Vätskan är alltså något tätare än vatten.
+
+**Svar:** Cirka $1{,}05 \\cdot 10^{3}\\ \\mathrm{kg/m^3}$`,
+        },
+        {
+            level: 3,
+            question: `Ett luftfyllt rör hålls lodrätt och trycks ned i en vattenhink med den nedre öppningen först. Öppningen täcks av ett löst, platt stållock med massan $m$ som är lika stort som rörets tvärsnitt, med arean $A$. Lockets undersida befinner sig på djupet $h$ under vattenytan. Inuti röret finns bara luft med samma tryck som luften ovanför hinken.<br>a) Visa att locket sitter kvar så länge $h \\geq \\dfrac{m}{\\rho \\cdot A}$, där $\\rho$ är vattnets densitet.<br>b) Locket väger 85 g och har diametern 5,0 cm. Hur djupt måste lockets undersida minst befinna sig för att locket ska sitta kvar? Räkna med vattnets densitet 998 kg/m³ och ange svaret i cm.<br>c) Samma försök görs i en månbas, där tyngdfaktorn bara är en sjättedel av den på jorden. Måste locket då hållas djupare, grundare eller lika djupt för att sitta kvar? Motivera.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="16 14 268 228" width="392" height="333" role="img" aria-label="Ett rör står lodrätt nedsänkt i en bägare med vatten. Röret är fyllt med luft, och dess nedre öppning täcks av ett löst platt lock. Djupet från vattenytan ned till lockets undersida är h." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="31" y="70" width="238" height="160" fill="rgba(63,127,168,0.24)"/><rect x="132" y="68" width="36" height="92" fill="#fff"/><path d="M 31 70 L 33 70.36 L 35 70.68 L 37 70.93 L 39 71.07 L 41 71.09 L 43 71.00 L 45 70.80 L 47 70.50 L 49 70.16 L 51 69.79 L 53 69.45 L 55 69.17 L 57 68.98 L 59 68.90 L 61 68.95 L 63 69.11 L 65 69.36 L 67 69.69 L 69 70.06 L 71 70.41 L 73 70.72 L 75 70.95 L 77 71.08 L 79 71.09 L 81 70.98 L 83 70.76 L 85 70.45 L 87 70.10 L 89 69.74 L 91 69.40 L 93 69.13 L 95 68.96 L 97 68.90 L 99 68.96 L 101 69.14 L 103 69.41 L 105 69.75 L 107 70.11 L 109 70.46 L 111 70.76 L 113 70.98 L 115 71.09 L 117 71.08 L 119 70.95 L 121 70.72 L 123 70.40 L 125 70.05 L 127 69.68" fill="none" stroke="#2a5a78" stroke-width="1.5"/><path d="M 172 70 L 174 70.36 L 176 70.68 L 178 70.93 L 180 71.07 L 182 71.09 L 184 71.00 L 186 70.80 L 188 70.50 L 190 70.16 L 192 69.79 L 194 69.45 L 196 69.17 L 198 68.98 L 200 68.90 L 202 68.95 L 204 69.11 L 206 69.36 L 208 69.69 L 210 70.06 L 212 70.41 L 214 70.72 L 216 70.95 L 218 71.08 L 220 71.09 L 222 70.98 L 224 70.76 L 226 70.45 L 228 70.10 L 230 69.74 L 232 69.40 L 234 69.13 L 236 68.96 L 238 68.90 L 240 68.96 L 242 69.14 L 244 69.41 L 246 69.75 L 248 70.11 L 250 70.46 L 252 70.76 L 254 70.98 L 256 71.09 L 258 71.08 L 260 70.95 L 262 70.72 L 264 70.40 L 266 70.05 L 268 69.68" fill="none" stroke="#2a5a78" stroke-width="1.5"/><polyline points="30,46 30,230 270,230 270,46" fill="none" stroke="#0f1620" stroke-width="2.2" stroke-linejoin="round"/><line x1="130" y1="24" x2="130" y2="160" stroke="#0f1620" stroke-width="3"/><line x1="170" y1="24" x2="170" y2="160" stroke="#0f1620" stroke-width="3"/><rect x="128" y="160" width="44" height="6" fill="#7d8790" stroke="#0f1620" stroke-width="1.2"/><text x="150" y="112" font-size="13" fill="rgba(15,22,32,0.6)" text-anchor="middle">luft</text><line x1="214" y1="76" x2="214" y2="160" stroke="rgba(15,22,32,0.6)" stroke-width="1.3" stroke-linecap="butt"/><polygon points="210.5,76 214,70 217.5,76" fill="rgba(15,22,32,0.6)"/><polygon points="210.5,160 214,166 217.5,160" fill="rgba(15,22,32,0.6)"/><text x="222" y="123" font-size="13" fill="#0f1620" text-anchor="start"><tspan font-style="italic">h</tspan></text><line x1="180" y1="166" x2="210" y2="166" stroke="rgba(15,22,32,0.4)" stroke-width="1" stroke-dasharray="4 3"/><text x="150" y="186" font-size="13" fill="#0f1620" text-anchor="middle">lock</text></svg>
+
+*Ange svaret i b) som ditt numeriska svar.*`,
+            answer: { value: 4.3, unit: 'cm', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 4.3, unit: 'cm', tol: 0.03, etikett: '$h =$' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Vi ser på krafterna på locket. Ovanför locket finns bara luften i röret. Luftens tryck är lika stort som lufttrycket över hinken, som i sin tur verkar på vattenytan och därmed även på lockets undersida, så lufttryckets bidrag tar ut varandra. Kvar blir två krafter:
+
+- Vattnets tryckkraft uppåt på undersidan: $F = p \\cdot A = \\rho \\cdot g \\cdot h \\cdot A$
+- Tyngdkraften nedåt: $F_G = m \\cdot g$
+
+Locket sitter kvar så länge kraften uppåt är minst lika stor som tyngdkraften:
+
+$$
+\\rho \\cdot g \\cdot h \\cdot A \\geq m \\cdot g
+$$
+
+Vi dividerar båda leden med $\\rho \\cdot g \\cdot A$, som är positivt så olikheten behåller sin riktning:
+
+$$
+h \\geq \\frac{m}{\\rho \\cdot A}
+$$
+
+vilket skulle visas.
+
+**b)**
+
+$$
+\\left[ \\begin{array}{l}
+m = 85\\ \\mathrm{g} = 0{,}085\\ \\mathrm{kg} \\\\
+r = 2{,}5\\ \\mathrm{cm} = 0{,}025\\ \\mathrm{m} \\\\
+A = \\pi \\cdot r^{2} = \\pi \\cdot 0{,}025^{2} = 0{,}001\\,963\\,5 \\ldots\\ \\mathrm{m^2} \\\\
+\\rho = 998\\ \\mathrm{kg/m^3}
+\\end{array} \\right]
+$$
+
+$$
+h = \\frac{0{,}085}{998 \\cdot 0{,}001\\,963\\,5} = 0{,}043\\,37 \\ldots\\ \\mathrm{m} \\approx 4{,}3\\ \\mathrm{cm}
+$$
+
+Rimlighet: en vattenpelare på 4,3 cm ovanpå lockets area har volymen $0{,}0434 \\cdot 0{,}001\\,96 \\approx 8{,}5 \\cdot 10^{-5}\\ \\mathrm{m^3}$ och massan cirka 85 g, alltså samma massa som locket. Det stämmer med villkoret.
+
+**Svar:** Minst cirka 4,3 cm
+
+**c)** Tyngdfaktorn $g$ förkortades bort i a), så gränsdjupet $h = \\dfrac{m}{\\rho \\cdot A}$ beror inte på $g$. På månen blir både lockets tyngd och vattnets tryck bara en sjättedel så stora som på jorden, och förhållandet mellan dem är detsamma.
+
+**Svar:** Lika djupt, eftersom både tyngdkraften och vätsketrycket är proportionella mot $g$.`,
         },
     ],
 
@@ -25069,7 +31204,7 @@ $$
 - 1 kPa = 1 000 Pa, så 101,3 kPa = 101 300 Pa.
 - 1 bar = 100 000 Pa, så 101 300 Pa / 100 000 = 1,013 bar.
 
-**Svar:** Alternativ A — 101 300 Pa och 1,013 bar.
+**Svar:** Alternativ A: 101 300 Pa och 1,013 bar.
 
 **Generell slutsats:** Lufttrycket vid havsytan brukar avrundas till $1\\ \\mathrm{atm} = 101\\,325\\ \\mathrm{Pa} \\approx 1\\ \\mathrm{bar} = 100\\ \\mathrm{kPa}$. Skillnaden mellan atm och bar är bara ca 1 %, så man kan ofta använda dem som likvärdiga i grova uppskattningar.`,
         },
@@ -25150,7 +31285,7 @@ $$
 F = \\Delta p \\cdot A = 2{,}0 \\cdot 10^{6} \\cdot 3{,}46 \\cdot 10^{-4} \\approx 693\\ \\mathrm{N}
 $$
 
-**Svar:** Ca 690 N — motsvarande tyngden av cirka 70 kg.
+**Svar:** Ca 690 N, motsvarande tyngden av cirka 70 kg.
 
 **Generell slutsats:** Det är därför korkar i kolsyrade flaskor (champagne, ölflaskor i höghöjd-flygplan) kan fara iväg med stor fart om man inte öppnar dem kontrollerat. Med en hastighet på ca 12–15 m/s utgör en lös kork en faktisk skaderisk för ögat.`,
         },
@@ -25212,7 +31347,688 @@ $$
 
 **Svar:** a) ca 111 MPa. b) ca 1 100 gånger lufttrycket. c) ca 7,9 MN (motsvarar tyngden av ca 800 ton).
 
-**Generell slutsats:** Det är därför bemannade dykrobotar till sådana djup behöver titanskal med decimeter-tjocka väggar. Notera att lufttrycket vid ytan (101 kPa) är försumbart jämfört med vätsketrycket (111 MPa) — vid stora djup kan man helt strunta i $p_0$.`,
+**Generell slutsats:** Det är därför bemannade dykrobotar till sådana djup behöver titanskal med decimeter-tjocka väggar. Notera att lufttrycket vid ytan (101 kPa) är försumbart jämfört med vätsketrycket (111 MPa). Vid stora djup kan man helt strunta i $p_0$.`,
+        },
+        {
+            level: 1,
+            question: `Trycket i en cykelslang är 65 psi enligt pumpens mätare. Hur stort är trycket i kPa? Använd att 1 psi är ungefär 6 895 Pa.`,
+            answer: { value: 450, unit: 'kPa', tol: 0.02 },
+            solution: `Varje psi motsvarar 6 895 Pa, så trycket i pascal blir 65 gånger så mycket:
+
+$$
+p = 65 \\cdot 6\\,895 = 448\\,175\\ \\mathrm{Pa}
+$$
+
+Eftersom $1\\ \\mathrm{kPa} = 1\\,000\\ \\mathrm{Pa}$ delar vi med 1 000:
+
+$$
+p = \\dfrac{448\\,175}{1\\,000} = 448{,}175\\ \\mathrm{kPa} \\approx 450\\ \\mathrm{kPa}
+$$
+
+Mätvärdet 65 psi har två värdesiffror, så svaret avrundas till två värdesiffror.
+
+**Svar:** Trycket är cirka 450 kPa, alltså drygt fyra gånger normalt lufttryck.`,
+        },
+        {
+            level: 1,
+            question: `En simbassäng är 2,50 m djup. Lufttrycket över vattenytan är 100,8 kPa. Räkna med vattnets densitet 998 kg/m³ och $g = 9{,}82\\ \\mathrm{N/kg}$.<br>a) Hur stort är det totala trycket vid bassängens botten?<br>b) Några dagar senare har ett högtryck gjort att lufttrycket stigit till 102,8 kPa. Hur mycket har det totala trycket vid botten ökat?
+
+*Ange trycket i a) som ditt numeriska svar i kPa.*`,
+            answer: { value: 125, unit: 'kPa', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 125, unit: 'kPa', tol: 0.02, etikett: '$p =$' },
+                { del: 'b', value: 2.0, unit: 'kPa', tol: 0.03, etikett: '$\\Delta p =$' },
+            ],
+            solution: `**a)** Det totala trycket är lufttrycket mot vattenytan plus vätsketrycket:
+
+$$
+p = p_0 + \\rho \\cdot g \\cdot h
+$$
+
+$$
+\\left[ \\begin{array}{l}
+p_0 = 100{,}8\\ \\mathrm{kPa} = 100\\,800\\ \\mathrm{Pa} \\\\
+\\rho = 998\\ \\mathrm{kg/m^3} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+h = 2{,}50\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+p = 100\\,800 + 998 \\cdot 9{,}82 \\cdot 2{,}50 = 100\\,800 + 24\\,500{,}9 = 125\\,300{,}9\\ \\mathrm{Pa} \\approx 125\\ \\mathrm{kPa}
+$$
+
+**Svar:** Det totala trycket är cirka 125 kPa.
+
+**b)** Vattnet går nästan inte att pressa ihop, så lufttrycket mot vattenytan fortplantas oförändrat ned till botten. Vätsketrycket $\\rho \\cdot g \\cdot h$ är detsamma som förut, eftersom djupet inte ändrats. Hela ökningen kommer alltså från lufttrycket:
+
+$$
+\\Delta p = 102{,}8 - 100{,}8 = 2{,}0\\ \\mathrm{kPa}
+$$
+
+**Svar:** Det totala trycket vid botten har ökat med 2,0 kPa, lika mycket som lufttrycket.`,
+        },
+        {
+            level: 1,
+            question: `En barometer visar 101 kPa vid havet och 70 kPa på toppen av ett högt berg. Vilken förklaring till att lufttrycket är lägre på berget är riktig?`,
+            choices: [
+                `Luften är kallare på berget, och kall luft trycker inte`,
+                `Tyngdkraften verkar inte på luften så högt upp`,
+                `Det finns mindre luft ovanför, och luften är tunnare`,
+                `Vinden blåser bort trycket från bergstoppen`,
+            ],
+            correct: 2,
+            solution: `Lufttrycket orsakas av tyngden av luften ovanför, på samma sätt som vätsketrycket orsakas av tyngden av vätskan ovanför.
+
+- På berget finns en mindre volym luft ovanför barometern, precis som det är mindre vatten ovanför en dykare nära ytan.
+- Luften högt upp har dessutom lägre densitet, så varje meter luft väger mindre.
+
+Tyngdkraften verkar på luften även på bergstoppen, och kall luft har också ett tryck.
+
+**Svar:** Det finns mindre luft ovanför, och luften är tunnare.`,
+        },
+        {
+            level: 1,
+            question: `En dykare läser av sin dykdator, som visar att det totala trycket är 250 kPa. Lufttrycket vid havsytan är 101 kPa och havsvattnets densitet är 1 025 kg/m³. På vilket djup befinner sig dykaren? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i m.`,
+            answer: { value: 14.8, unit: 'm', tol: 0.03 },
+            solution: `Vi utgår från formeln för totalt tryck och löser ut djupet $h$:
+
+$$
+p = p_0 + \\rho \\cdot g \\cdot h \\quad\\Leftrightarrow\\quad h = \\dfrac{p - p_0}{\\rho \\cdot g}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+p = 250\\ \\mathrm{kPa} = 250\\,000\\ \\mathrm{Pa} \\\\
+p_0 = 101\\ \\mathrm{kPa} = 101\\,000\\ \\mathrm{Pa} \\\\
+\\rho = 1\\,025\\ \\mathrm{kg/m^3} \\\\
+g = 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+h = \\dfrac{250\\,000 - 101\\,000}{1\\,025 \\cdot 9{,}82} = \\dfrac{149\\,000}{10\\,065{,}5} = 14{,}803\\ldots\\ \\mathrm{m} \\approx 14{,}8\\ \\mathrm{m}
+$$
+
+**Svar:** Dykaren befinner sig på cirka 14,8 m djup.`,
+        },
+        {
+            level: 2,
+            question: `En sugkopp med diametern 6,0 cm trycks mot undersidan av en vågrät glasskiva så att nästan all luft mellan koppen och glaset pressas ut. I sugkoppens krok hängs en last rakt nedåt. Lufttrycket är 101 kPa. Vilken är den största massa som i teorin kan hängas i kroken innan sugkoppen lossnar? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i kg.`,
+            answer: { value: 29, unit: 'kg', tol: 0.03 },
+            solution: `Mellan koppen och glaset finns nästan ingen luft, så där är trycket nästan noll. Luften under koppen trycker däremot uppåt med lufttrycket, och den kraften håller koppen mot glaset. Lasten drar rakt nedåt, alltså rakt bort från glaset. I teorin lossnar koppen först när lastens tyngd är lika stor som tryckkraften från luften.
+
+Koppens area är en cirkel med radien 3,0 cm:
+
+$$
+A = \\pi \\cdot r^2 = \\pi \\cdot 0{,}030^2 = 0{,}002\\,827\\ldots\\ \\mathrm{m^2}
+$$
+
+Tryckkraften från luften:
+
+$$
+p = \\dfrac{F}{A} \\quad\\Leftrightarrow\\quad F = p \\cdot A
+$$
+
+$$
+\\left[ \\begin{array}{l}
+p = 101\\ \\mathrm{kPa} = 101\\,000\\ \\mathrm{Pa} \\\\
+A = 0{,}002\\,827\\ldots\\ \\mathrm{m^2}
+\\end{array} \\right]
+$$
+
+$$
+F = 101\\,000 \\cdot 0{,}002\\,827\\,4 = 285{,}57\\ \\mathrm{N}
+$$
+
+Lastens tyngd får högst vara lika stor, $F_G = m \\cdot g$:
+
+$$
+m = \\dfrac{F_G}{g} = \\dfrac{285{,}57}{9{,}82} \\approx 29{,}08\\ \\mathrm{kg} \\approx 29\\ \\mathrm{kg}
+$$
+
+I verkligheten läcker lite luft in under kanten och gummikanten ger efter, så en riktig sugkopp bär betydligt mindre.
+
+**Svar:** I teorin cirka 29 kg.`,
+        },
+        {
+            level: 2,
+            question: `Ett flygplan flyger på 11 000 m höjd. Kabinen är trycksatt till samma tryck som råder på 2 000 m höjd. Tabellen visar lufttrycket på några höjder.
+
+| Höjd (m) | Lufttryck (kPa) |
+| --- | --- |
+| 0 | 101,3 |
+| 2 000 | 79,5 |
+| 5 000 | 54,0 |
+| 8 000 | 35,6 |
+| 11 000 | 22,7 |
+
+Ett av kabinens fönster är 25 cm brett och 35 cm högt.<br>a) Hur stor är den kraft som trycker fönstret utåt?<br>b) Hur många procent större skulle kraften bli om kabinen i stället hade samma tryck som vid havsytan? Ge ett skäl till att kabinen inte trycksätts så högt.
+
+*Ange kraften i a) som ditt numeriska svar i kN.*`,
+            answer: { value: 5.0, unit: 'kN', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 5.0, unit: 'kN', tol: 0.03, etikett: '$F =$' },
+                { del: 'b', value: 38, unit: '%', tol: 0.04 },
+            ],
+            solution: `**a)** Inne i kabinen är trycket detsamma som på 2 000 m höjd och utanför detsamma som på 11 000 m höjd. Ur tabellen:
+
+$$
+\\left[ \\begin{array}{l}
+p_\\text{inne} = 79{,}5\\ \\mathrm{kPa} \\\\
+p_\\text{ute} = 22{,}7\\ \\mathrm{kPa}
+\\end{array} \\right]
+$$
+
+Luften trycker på fönstret från båda hållen. Det som ger en kraft utåt är skillnaden:
+
+$$
+\\Delta p = p_\\text{inne} - p_\\text{ute} = 79{,}5 - 22{,}7 = 56{,}8\\ \\mathrm{kPa} = 56\\,800\\ \\mathrm{Pa}
+$$
+
+Fönstrets area:
+
+$$
+A = 0{,}25 \\cdot 0{,}35 = 0{,}0875\\ \\mathrm{m^2}
+$$
+
+Kraften:
+
+$$
+F = \\Delta p \\cdot A = 56\\,800 \\cdot 0{,}0875 = 4\\,970\\ \\mathrm{N} \\approx 5{,}0\\ \\mathrm{kN}
+$$
+
+Måtten på fönstret har två värdesiffror, så svaret avrundas till två värdesiffror. Kraften motsvarar tyngden av ungefär en halv ton, och därför är flygplansfönster små och tjocka.
+
+**Svar:** Kraften är cirka 5,0 kN.
+
+**b)** Med havsytans tryck i kabinen blir tryckskillnaden större:
+
+$$
+\\Delta p = 101{,}3 - 22{,}7 = 78{,}6\\ \\mathrm{kPa} = 78\\,600\\ \\mathrm{Pa}
+$$
+
+$$
+F = \\Delta p \\cdot A = 78\\,600 \\cdot 0{,}0875 = 6\\,877{,}5\\ \\mathrm{N} \\approx 6{,}9\\ \\mathrm{kN}
+$$
+
+Arean är densamma, så kraften ökar i samma förhållande som tryckskillnaden:
+
+$$
+\\dfrac{6\\,877{,}5}{4\\,970} = 1{,}383\\ldots \\approx 1{,}38
+$$
+
+Kraften blir alltså cirka 38 % större. Samma sak gäller varje kvadratmeter av flygkroppen, som då måste byggas starkare och tyngre. Flygkroppen töjs dessutom ut en aning vid varje flygning och drar ihop sig efter landningen, och ju större tryckskillnaden är, desto snabbare utmattas metallen.
+
+**Svar:** Kraften skulle bli cirka 38 % större. Flygkroppen skulle då behöva vara starkare och tyngre, så kabinen trycksätts bara till trycket på cirka 2 000 m höjd.`,
+        },
+        {
+            level: 2,
+            question: `Lufttrycket vid havsytan är 101,3 kPa och havsvattnets densitet är 1 025 kg/m³. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.<br>a) På vilket djup är det totala trycket dubbelt så stort som lufttrycket vid ytan?<br>b) På vilket djup är det totala trycket tre gånger så stort?
+
+*Ange djupet i a) som ditt numeriska svar i m.*`,
+            answer: { value: 10.1, unit: 'm', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 10.1, unit: 'm', tol: 0.03, etikett: '$h =$' },
+                { del: 'b', value: 20.1, unit: 'm', tol: 0.03, etikett: '$h =$' },
+            ],
+            solution: `**a)** Det totala trycket ska vara $p = 2 \\cdot p_0$. Insättning i $p = p_0 + \\rho \\cdot g \\cdot h$ ger
+
+$$
+2 \\cdot p_0 = p_0 + \\rho \\cdot g \\cdot h
+$$
+
+$$
+p_0 = \\rho \\cdot g \\cdot h \\quad\\Leftrightarrow\\quad h = \\dfrac{p_0}{\\rho \\cdot g}
+$$
+
+Vätsketrycket ska alltså vara lika stort som lufttrycket.
+
+$$
+\\left[ \\begin{array}{l}
+p_0 = 101{,}3\\ \\mathrm{kPa} = 101\\,300\\ \\mathrm{Pa} \\\\
+\\rho = 1\\,025\\ \\mathrm{kg/m^3} \\\\
+g = 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+h = \\dfrac{101\\,300}{1\\,025 \\cdot 9{,}82} = \\dfrac{101\\,300}{10\\,065{,}5} = 10{,}064\\ldots\\ \\mathrm{m} \\approx 10{,}1\\ \\mathrm{m}
+$$
+
+**Svar:** På cirka 10,1 m djup.
+
+**b)** Nu ska $p = 3 \\cdot p_0$:
+
+$$
+3 \\cdot p_0 = p_0 + \\rho \\cdot g \\cdot h
+$$
+
+$$
+2 \\cdot p_0 = \\rho \\cdot g \\cdot h \\quad\\Leftrightarrow\\quad h = \\dfrac{2 \\cdot p_0}{\\rho \\cdot g}
+$$
+
+$$
+h = \\dfrac{2 \\cdot 101\\,300}{10\\,065{,}5} = 20{,}128\\ldots\\ \\mathrm{m} \\approx 20{,}1\\ \\mathrm{m}
+$$
+
+Varje cirka tionde meter under ytan ökar alltså trycket med ungefär en atmosfär. Det är en tumregel som dykare använder.
+
+**Svar:** På cirka 20,1 m djup.`,
+        },
+        {
+            level: 2,
+            question: `En U-rörsmanometer används för att mäta trycket i en gasbehållare. Den ena änden av röret är kopplad till behållaren och den andra är öppen mot luften. Röret innehåller vatten, och vattenytan i den öppna skänkeln står 18 cm högre än i den andra, se figuren.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 12 330 258" width="418" height="327" style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="20" y="70" width="96" height="130" rx="14" fill="#f1ece2" stroke="#0f1620" stroke-width="2"/><text x="68" y="141" font-size="15" fill="#0f1620" text-anchor="middle">gas</text><path d="M116,92 L146,92 Q170,92 170,116 L170,205 A30,30 0 0 0 230,205 L230,40" fill="none" stroke="#0f1620" stroke-width="19"/><path d="M116,92 L146,92 Q170,92 170,116 L170,205 A30,30 0 0 0 230,205 L230,40" fill="none" stroke="#ffffff" stroke-width="15"/><path d="M170,150 L170,205 A30,30 0 0 0 230,205 L230,114" fill="none" stroke="#8fbde6" stroke-width="15" stroke-linecap="butt"/><line x1="162.5" y1="150" x2="177.5" y2="150" stroke="#2563c9" stroke-width="1.6"/><line x1="222.5" y1="114" x2="237.5" y2="114" stroke="#2563c9" stroke-width="1.6"/><line x1="180" y1="150" x2="270" y2="150" stroke="#4a5563" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="240" y1="114" x2="270" y2="114" stroke="#4a5563" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="262" y1="122" x2="262" y2="142" stroke="#4a5563" stroke-width="1.3"/><polygon points="258,122 262,114 266,122" fill="#4a5563"/><polygon points="258,142 262,150 266,142" fill="#4a5563"/><text x="272" y="137" font-size="15" fill="#4a5563">18 cm</text><text x="230" y="27" font-size="14" fill="#0f1620" text-anchor="middle">öppet mot luften</text><text x="200" y="262" font-size="14" fill="#0f1620" text-anchor="middle">vatten</text></svg>
+
+Lufttrycket är 101,0 kPa och vattnets densitet är 998 kg/m³. Hur stort är trycket i gasen? Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och ange svaret i kPa.`,
+            answer: { value: 102.8, unit: 'kPa', tol: 0.01 },
+            solution: `Vattnet i den öppna skänkeln står högre. Gasen trycker alltså hårdare på sin vattenyta än luften gör på den andra, och skjuter vattnet över mot den öppna sidan.
+
+Jämför trycket på samma nivå i båda skänklarna, vid den lägre vattenytan. På gassidan är trycket där gasens tryck. På den öppna sidan finns lufttrycket plus trycket från 18 cm vatten ovanför den nivån. Vattnet står still, så trycken är lika:
+
+$$
+p_\\text{gas} = p_0 + \\rho \\cdot g \\cdot h
+$$
+
+$$
+\\left[ \\begin{array}{l}
+p_0 = 101{,}0\\ \\mathrm{kPa} = 101\\,000\\ \\mathrm{Pa} \\\\
+\\rho = 998\\ \\mathrm{kg/m^3} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+h = 18\\ \\mathrm{cm} = 0{,}18\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+p_\\text{gas} = 101\\,000 + 998 \\cdot 9{,}82 \\cdot 0{,}18 = 101\\,000 + 1\\,764{,}06 = 102\\,764{,}06\\ \\mathrm{Pa} \\approx 102{,}8\\ \\mathrm{kPa}
+$$
+
+Gasens tryck är bara knappt 2 % högre än lufttrycket. En vattenmanometer är alltså ett känsligt instrument för små tryckskillnader.
+
+**Svar:** Trycket i gasen är cirka 102,8 kPa.`,
+        },
+        {
+            level: 2,
+            question: `En plastback är 0,60 m lång och 0,40 m bred. Den står ute med vatten upp till 0,25 m. Lufttrycket är 101 kPa.<br>a) Hur stor är vattnets tyngd?<br>b) Visa att den tryckkraft som verkar på backens botten inifrån är mycket större än vattnets tyngd, och förklara varför backen ändå inte trycks ned i marken.
+
+Räkna med vattnets densitet 998 kg/m³ och $g = 9{,}82\\ \\mathrm{N/kg}$.
+
+*Ange vattnets tyngd i a) som ditt numeriska svar i N.*`,
+            answer: { value: 590, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 590, unit: 'N', tol: 0.03, etikett: '$F_G =$' },
+            ],
+            solution: `**a)** Vattnets volym och massa:
+
+$$
+V = 0{,}60 \\cdot 0{,}40 \\cdot 0{,}25 = 0{,}060\\ \\mathrm{m^3}
+$$
+
+$$
+m = \\rho \\cdot V = 998 \\cdot 0{,}060 = 59{,}88\\ \\mathrm{kg}
+$$
+
+$$
+F_G = m \\cdot g = 59{,}88 \\cdot 9{,}82 = 588{,}0\\ldots\\ \\mathrm{N} \\approx 590\\ \\mathrm{N}
+$$
+
+**Svar:** Vattnets tyngd är cirka 590 N.
+
+**b)** Bottnens area är $A = 0{,}60 \\cdot 0{,}40 = 0{,}24\\ \\mathrm{m^2}$. Det totala trycket vid botten:
+
+$$
+p = p_0 + \\rho \\cdot g \\cdot h = 101\\,000 + 998 \\cdot 9{,}82 \\cdot 0{,}25 = 101\\,000 + 2\\,450{,}09 = 103\\,450{,}09\\ \\mathrm{Pa}
+$$
+
+Tryckkraften på bottnen inifrån:
+
+$$
+F = p \\cdot A = 103\\,450{,}09 \\cdot 0{,}24 \\approx 24\\,828\\ \\mathrm{N} \\approx 25\\ \\mathrm{kN}
+$$
+
+Det är drygt 40 gånger vattnets tyngd. Nästan hela kraften kommer från lufttrycket, $p_0 \\cdot A = 101\\,000 \\cdot 0{,}24 = 24\\,240\\ \\mathrm{N}$.
+
+Backen trycks ändå inte ned, eftersom luften också trycker på bottnens undersida. Marken är inte lufttät, så lufttrycket verkar på båda sidor om bottnen och de två tryckkrafterna från luften tar ut varandra. Det som blir kvar är vätsketrycket gånger arean, $2\\,450{,}09 \\cdot 0{,}24 \\approx 588\\ \\mathrm{N}$, alltså precis vattnets tyngd.
+
+**Svar:** Tryckkraften inifrån är cirka 25 kN, men lufttrycket verkar lika mycket på undersidan, så nettokraften blir bara vattnets tyngd, cirka 590 N.`,
+        },
+        {
+            level: 3,
+            question: `En sugpump står vid markytan ovanför en brunn. Ett rör går från pumpen ned i brunnens vatten, och pumpen suger ut luften ur röret så att vattnet stiger i det. Pumpen kan som bäst sänka trycket i röret ovanför vattenpelaren till 12 kPa. Vattnets densitet är 998 kg/m³.<br>a) Förklara vad det är som får vattnet att stiga i röret.<br>b) En dag med lufttrycket 101,3 kPa ligger brunnens vattenyta 8,2 m under pumpen. Visa att pumpen ger vatten, och bestäm hur lågt lufttrycket kan sjunka innan pumpen slutar ge vatten.<br>c) Under en torrperiod sjunker vattenytan ytterligare 1,2 m. Utred om pumpen fortfarande kan ge vatten, och föreslå hur vattnet ändå kan pumpas upp.
+
+Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+
+*Ange det lägsta lufttrycket i b) som ditt numeriska svar i kPa.*`,
+            answer: { value: 92.4, unit: 'kPa', tol: 0.01 },
+            delsvar: [
+                { del: 'b', value: 92.4, unit: 'kPa', tol: 0.01, etikett: '$p_0 =$' },
+            ],
+            solution: `**a)** Pumpen suger inte upp vattnet. Den tar bort luft ovanför vattnet i röret, så att trycket där blir lägre. Lufttrycket mot brunnens fria vattenyta är oförändrat, och det trycker vattnet uppåt i röret tills trycken är i balans.
+
+**Svar:** Det är lufttrycket mot vattenytan i brunnen som trycker upp vattnet i röret.
+
+**b)** Jämför trycket vid brunnens vattenyta inne i röret och utanför. Utanför är det lufttrycket $p_0$. Inne i röret är det trycket $p_\\text{rör}$ ovanför vattenpelaren plus vätsketrycket från pelaren med höjden $h$. Vattnet står still när trycken är lika:
+
+$$
+p_0 = p_\\text{rör} + \\rho \\cdot g \\cdot h \\quad\\Leftrightarrow\\quad h = \\dfrac{p_0 - p_\\text{rör}}{\\rho \\cdot g}
+$$
+
+Det är den högsta höjd pumpen kan lyfta vattnet till. Når den höjden ända upp till pumpen ger pumpen vatten.
+
+$$
+\\left[ \\begin{array}{l}
+p_0 = 101{,}3\\ \\mathrm{kPa} = 101\\,300\\ \\mathrm{Pa} \\\\
+p_\\text{rör} = 12\\ \\mathrm{kPa} = 12\\,000\\ \\mathrm{Pa} \\\\
+\\rho = 998\\ \\mathrm{kg/m^3} \\\\
+g = 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+h = \\dfrac{101\\,300 - 12\\,000}{998 \\cdot 9{,}82} = \\dfrac{89\\,300}{9\\,800{,}36} = 9{,}111\\ldots\\ \\mathrm{m}
+$$
+
+Vattnet kan alltså lyftas cirka 9,1 m, och det är mer än de 8,2 m som behövs. Pumpen ger vatten.
+
+Sjunker lufttrycket blir höjden lägre. Pumpen slutar ge vatten när den största höjden är precis 8,2 m. Vi löser ut lufttrycket ur samma jämvikt:
+
+$$
+p_0 = p_\\text{rör} + \\rho \\cdot g \\cdot h
+$$
+
+$$
+p_0 = 12\\,000 + 998 \\cdot 9{,}82 \\cdot 8{,}2 = 12\\,000 + 80\\,362{,}95 = 92\\,362{,}95\\ \\mathrm{Pa} \\approx 92{,}4\\ \\mathrm{kPa}
+$$
+
+Ett så lågt lufttryck förekommer bara i mycket kraftiga oväder, så pumpen fungerar nästan alltid.
+
+**Svar:** Pumpen kan lyfta vattnet cirka 9,1 m, mer än de 8,2 m som behövs. Den slutar ge vatten om lufttrycket sjunker under cirka 92,4 kPa.
+
+**c)** Nu ligger vattenytan $8{,}2 + 1{,}2 = 9{,}4\\ \\mathrm{m}$ under pumpen. Det är mer än de 9,1 m som pumpen klarar vid normalt lufttryck. Lufttrycket som skulle behövas är
+
+$$
+p_0 = 12\\,000 + 998 \\cdot 9{,}82 \\cdot 9{,}4 = 104\\,123{,}38\\ \\mathrm{Pa} \\approx 104\\ \\mathrm{kPa}
+$$
+
+Så högt lufttryck förekommer bara vid ovanligt kraftiga högtryck. En bättre pump skulle kunna lyfta vattnet något högre, men inte hur högt som helst. Även om röret blev helt lufttomt, $p_\\text{rör} = 0$, skulle vattnet kunna lyftas högst
+
+$$
+h = \\dfrac{101\\,300}{9\\,800{,}36} = 10{,}3\\ \\mathrm{m}
+$$
+
+Det skulle räcka, men med liten marginal, och 10,3 m är en gräns som ingen sugpump kan komma förbi, hur stark den än är. Sjunker vattnet lite till går det inte alls. Den säkra lösningen är att placera pumpen nere i brunnen, under vattenytan. En sådan pump trycker vattnet uppåt i stället för att suga, och kan ge ett tryck som är mycket större än lufttrycket.
+
+**Svar:** Nej, i praktiken inte. Den skulle behöva ett lufttryck på cirka 104 kPa, som bara förekommer vid ovanligt kraftiga högtryck. Pumpen bör sänkas ned i brunnen, så att den trycker upp vattnet i stället för att suga.`,
+        },
+        {
+            level: 3,
+            question: `Två halvklot av metall med radien 25 cm läggs mot varandra, och luften pumpas ut så att trycket inuti blir 15 kPa. Lufttrycket utanför är 101 kPa. Rep fästs i ringar på båda halvkloten, se figuren.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 5 420 270" width="500" height="321" style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="20" y1="140" x2="112" y2="140" stroke="#8a6a3e" stroke-width="3.2"/><line x1="308" y1="140" x2="400" y2="140" stroke="#8a6a3e" stroke-width="3.2"/><circle cx="118" cy="140" r="10" fill="none" stroke="#0f1620" stroke-width="2.4"/><circle cx="302" cy="140" r="10" fill="none" stroke="#0f1620" stroke-width="2.4"/><circle cx="210" cy="140" r="80" fill="#eef1f4" stroke="#0f1620" stroke-width="2"/><rect x="206" y="54" width="8" height="172" rx="2" fill="#c9ced5" stroke="#0f1620" stroke-width="1.6"/><line x1="101.7" y1="77.5" x2="127.7" y2="92.5" stroke="#2563c9" stroke-width="2.4" stroke-linecap="butt"/><polygon points="130.2,88.2 135.5,97.0 125.2,96.8" fill="#2563c9"/><line x1="147.5" y1="31.7" x2="162.5" y2="57.7" stroke="#2563c9" stroke-width="2.4" stroke-linecap="butt"/><polygon points="166.8,55.2 167.0,65.5 158.2,60.2" fill="#2563c9"/><line x1="210.0" y1="15.0" x2="210.0" y2="45.0" stroke="#2563c9" stroke-width="2.4" stroke-linecap="butt"/><polygon points="215.0,45.0 210.0,54.0 205.0,45.0" fill="#2563c9"/><line x1="272.5" y1="31.7" x2="257.5" y2="57.7" stroke="#2563c9" stroke-width="2.4" stroke-linecap="butt"/><polygon points="261.8,60.2 253.0,65.5 253.2,55.2" fill="#2563c9"/><line x1="318.3" y1="77.5" x2="292.3" y2="92.5" stroke="#2563c9" stroke-width="2.4" stroke-linecap="butt"/><polygon points="294.8,96.8 284.5,97.0 289.8,88.2" fill="#2563c9"/><line x1="318.3" y1="202.5" x2="292.3" y2="187.5" stroke="#2563c9" stroke-width="2.4" stroke-linecap="butt"/><polygon points="289.8,191.8 284.5,183.0 294.8,183.2" fill="#2563c9"/><line x1="272.5" y1="248.3" x2="257.5" y2="222.3" stroke="#2563c9" stroke-width="2.4" stroke-linecap="butt"/><polygon points="253.2,224.8 253.0,214.5 261.8,219.8" fill="#2563c9"/><line x1="210.0" y1="265.0" x2="210.0" y2="235.0" stroke="#2563c9" stroke-width="2.4" stroke-linecap="butt"/><polygon points="205.0,235.0 210.0,226.0 215.0,235.0" fill="#2563c9"/><line x1="147.5" y1="248.3" x2="162.5" y2="222.3" stroke="#2563c9" stroke-width="2.4" stroke-linecap="butt"/><polygon points="158.2,219.8 167.0,214.5 166.8,224.8" fill="#2563c9"/><line x1="101.7" y1="202.5" x2="127.7" y2="187.5" stroke="#2563c9" stroke-width="2.4" stroke-linecap="butt"/><polygon points="125.2,183.2 135.5,183.0 130.2,191.8" fill="#2563c9"/><line x1="210" y1="140" x2="266.6" y2="83.4" stroke="#0f1620" stroke-width="1.4"/><circle cx="210" cy="140" r="2.6" fill="#0f1620"/><text x="246.3" y="125.7" font-size="16" fill="#0f1620" font-style="italic">r</text><text x="224" y="30" font-size="16" fill="#2563c9"><tspan font-style="italic">p</tspan><tspan baseline-shift="sub" font-size="0.72em">0</tspan></text></svg>
+
+a) Bestäm den kraft som krävs för att dra isär halvkloten.<br>b) En häst kan dra med kraften 1,5 kN. Hur många hästar behövs på varje sida om hästar spänns för på båda sidorna?<br>c) Ett av repen knyts i stället fast i ett grovt träd. Hur många hästar behövs nu? Motivera.
+
+*Ange kraften i a) som ditt numeriska svar i kN.*`,
+            answer: { value: 17, unit: 'kN', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 17, unit: 'kN', tol: 0.04, etikett: '$F =$' },
+                { del: 'b', value: 12, unit: 'hästar', tol: 0.01 },
+                { del: 'c', value: 12, unit: 'hästar', tol: 0.01 },
+            ],
+            solution: `**a)** Betrakta det högra halvklotet. Luften utanför trycker vinkelrätt mot ytan överallt, och den sammanlagda kraften pekar åt vänster, mot det andra halvklotet. Gasen inuti trycker åt höger.
+
+Komposanterna uppåt och nedåt tar ut varandra, eftersom halvklotet är symmetriskt. Den kraft som blir kvar åt vänster är lika stor som om trycket verkade på den platta cirkelskivan där halvkloten möts. Det är alltså cirkelns area, inte halvklotets buktiga yta, som ska användas:
+
+$$
+A = \\pi \\cdot r^2 = \\pi \\cdot 0{,}25^2 = 0{,}196\\,35\\ldots\\ \\mathrm{m^2}
+$$
+
+Tryckskillnaden mellan utsidan och insidan:
+
+$$
+\\Delta p = p_\\text{ute} - p_\\text{inne} = 101 - 15 = 86\\ \\mathrm{kPa} = 86\\,000\\ \\mathrm{Pa}
+$$
+
+$$
+F = \\Delta p \\cdot A = 86\\,000 \\cdot 0{,}196\\,35 \\approx 16\\,886\\ \\mathrm{N} \\approx 17\\ \\mathrm{kN}
+$$
+
+**Svar:** Det krävs cirka 17 kN.
+
+**b)** Varje rep måste dra med lika stor kraft som den som håller ihop halvkloten:
+
+$$
+\\dfrac{16\\,886}{1\\,500} \\approx 11{,}26
+$$
+
+Elva hästar räcker inte, så det behövs tolv.
+
+**Svar:** Tolv hästar på varje sida.
+
+**c)** Halvkloten är i vila tills de lossnar, så krafterna från de två repen är lika stora. När hästar drar på båda sidorna gör hästarna på den ena sidan bara samma sak som trädet gör: de håller emot. Trädet kan alltså ersätta den ena sidans hästar, men det behövs fortfarande en kraft på 17 kN i det andra repet.
+
+**Svar:** Tolv hästar, eftersom trädet bara tar över den ena sidans uppgift att hålla emot.`,
+        },
+        {
+            level: 3,
+            question: `Ett kärl med plana, lodräta väggar har bottenarean $A$. Kärlet är öppet uppåt och innehåller en vätska med densiteten $\\rho$ till höjden $h$. Lufttrycket är $p_0$ och vätskans massa är $m$.<br>a) Visa att den tryckkraft som verkar på kärlets botten inifrån är $F = p_0 \\cdot A + m \\cdot g$.<br>b) Tolka de två termerna och förklara vad som händer med tryckkraften på bottnen om vätskan hälls över i ett kärl med dubbelt så stor bottenarea.`,
+            solution: `**a)** Det totala trycket vid botten är
+
+$$
+p = p_0 + \\rho \\cdot g \\cdot h
+$$
+
+och tryckkraften är tryck gånger area:
+
+$$
+F = p \\cdot A = (p_0 + \\rho \\cdot g \\cdot h) \\cdot A = p_0 \\cdot A + \\rho \\cdot g \\cdot h \\cdot A
+$$
+
+Väggarna är lodräta, så vätskan är en rak pelare med volymen $V = A \\cdot h$. Dess massa är $m = \\rho \\cdot V = \\rho \\cdot A \\cdot h$. Insättning av $m = \\rho \\cdot A \\cdot h$ i den sista termen ger
+
+$$
+F = p_0 \\cdot A + m \\cdot g
+$$
+
+vilket skulle visas.
+
+**b)** Den första termen, $p_0 \\cdot A$, är tyngden av luftpelaren ovanför bottnen. Den andra termen, $m \\cdot g$, är vätskans egen tyngd. Bottnen bär alltså både vätskan och all luft ovanför den.
+
+I kärlet med dubbelt så stor bottenarea har vätskan samma massa $m$, så termen $m \\cdot g$ är oförändrad. Vätskan står bara hälften så högt, och vätsketrycket halveras, men det verkar på dubbelt så stor area. Termen $p_0 \\cdot A$ fördubblas däremot, eftersom en dubbelt så stor bottenarea har dubbelt så mycket luft ovanför sig.
+
+**Svar:** Tryckkraften från vätskan blir densamma, men tryckkraften från luften fördubblas, så den totala tryckkraften på bottnen inifrån ökar.`,
+        },
+        {
+            level: 3,
+            question: `Med en snorkel kan man andas luft från ytan medan man simmar under vattnet. Luften i lungorna har då samma tryck som luften ovanför vattnet. Bröstkorgen kan räknas som en yta med arean $0{,}10\\ \\mathrm{m^2}$.<br>a) Förklara varför det bara är vätsketrycket som ger en nettokraft på bröstkorgen, och beräkna den kraften när bröstkorgen är 1,5 m under ytan.<br>b) Andningsmusklerna orkar lyfta bröstkorgen mot en nettokraft på högst cirka 0,5 kN. Hur djupt kan man som mest ha bröstkorgen och fortfarande andas genom en snorkel? En snorkel är vanligen 30 till 40 cm lång. Är det rimligt?<br>c) En fridykare som håller andan kan dyka till 20 m djup, där vätsketrycket är många gånger större än på 1,5 m. Förklara varför bröstkorgen ändå inte trycks in av en kraft av den storlek som räknades fram i a), och vad som händer med luften i lungorna.
+
+Räkna med vattnets densitet 998 kg/m³ och $g = 9{,}82\\ \\mathrm{N/kg}$.
+
+*Ange kraften i a) som ditt numeriska svar i kN.*`,
+            answer: { value: 1.5, unit: 'kN', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 1.5, unit: 'kN', tol: 0.03, etikett: '$F =$' },
+                { del: 'b', value: 0.5, unit: 'm', tol: 0.05, etikett: '$h =$' },
+            ],
+            solution: `**a)** Utanför bröstkorgen är trycket $p_0 + \\rho \\cdot g \\cdot h$. Inne i lungorna är trycket $p_0$, eftersom luften kommer från ytan genom snorkeln. Lufttrycket finns alltså på båda sidor och tar ut sig självt, precis som för trumhinnan. Nettotrycket som trycker in bröstkorgen är skillnaden:
+
+$$
+\\Delta p = (p_0 + \\rho \\cdot g \\cdot h) - p_0 = \\rho \\cdot g \\cdot h
+$$
+
+Kraften blir
+
+$$
+F = \\Delta p \\cdot A = \\rho \\cdot g \\cdot h \\cdot A
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\rho = 998\\ \\mathrm{kg/m^3} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+h = 1{,}5\\ \\mathrm{m} \\\\
+A = 0{,}10\\ \\mathrm{m^2}
+\\end{array} \\right]
+$$
+
+$$
+F = 998 \\cdot 9{,}82 \\cdot 1{,}5 \\cdot 0{,}10 = 1\\,470{,}054\\ \\mathrm{N} \\approx 1{,}5\\ \\mathrm{kN}
+$$
+
+Det motsvarar tyngden av cirka 150 kg på bröstet.
+
+**Svar:** Nettokraften är cirka 1,5 kN.
+
+**b)** Vi löser ut djupet ur $F = \\rho \\cdot g \\cdot h \\cdot A$:
+
+$$
+h = \\dfrac{F}{\\rho \\cdot g \\cdot A}
+$$
+
+$$
+h = \\dfrac{500}{998 \\cdot 9{,}82 \\cdot 0{,}10} = \\dfrac{500}{980{,}036} = 0{,}510\\ldots\\ \\mathrm{m} \\approx 0{,}5\\ \\mathrm{m}
+$$
+
+Kraften 0,5 kN är bara en ungefärlig uppgift, så svaret anges med en värdesiffra.
+
+Med en snorkel på 30 till 40 cm ligger bröstkorgen ungefär 30 till 40 cm under ytan när man simmar med snorkelns topp ovanför vattnet. Det är mindre än 0,5 m, så andningen går att klara. En längre snorkel skulle inte hjälpa, eftersom man då skulle hamna så djupt att musklerna inte längre orkar andas in.
+
+**Svar:** Bröstkorgen kan som mest vara cirka 0,5 m under ytan. Snorkelns längd är rimlig, eftersom den håller bröstkorgen grundare än så.
+
+**c)** Kraften i a) uppstår för att trycken på bröstkorgens två sidor är olika: utanför $p_0 + \\rho \\cdot g \\cdot h$, i lungorna bara $p_0$, eftersom snorkeln förbinder lungorna med luften ovanför vattnet.
+
+Fridykaren har ingen sådan förbindelse. Luften i lungorna är instängd. När dykaren sjunker trycker vattnet in bröstkorgen en aning, och lungluften pressas då ihop till en mindre volym. Det fortsätter tills trycket i lungorna har blivit lika stort som trycket i vattnet utanför. Då är trycken på bröstkorgens två sidor lika, och nettokraften på bröstkorgen är nästan noll, hur djupt dykaren än är.
+
+Priset är att luften i lungorna får en mindre volym ju djupare dykaren kommer. När dykaren stiger mot ytan igen sjunker trycket, och luften återtar sin volym.
+
+**Svar:** För fridykaren pressas den instängda lungluften ihop tills trycket i lungorna är lika stort som trycket utanför. Trycken på bröstkorgens två sidor blir då lika, så ingen stor nettokraft uppstår, men luften i lungorna får en mindre volym.`,
+        },
+        {
+            level: 3,
+            question: `Ett öppet kärl innehåller 30 cm vatten och ovanpå det 20 cm matolja, se figuren. Oljan blandas inte med vattnet. Lufttrycket är 101,3 kPa, oljans densitet 900 kg/m³ och vattnets 998 kg/m³.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="40 14 350 236" width="443" height="299" style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="122" y="40" width="136" height="80" fill="#f3d98a"/><rect x="122" y="120" width="136" height="120" fill="#a9cdec"/><line x1="122" y1="40" x2="258" y2="40" stroke="#b8902f" stroke-width="1.4"/><line x1="122" y1="120" x2="258" y2="120" stroke="#2563c9" stroke-width="1.4"/><path d="M120,24 L120,242 L260,242 L260,24" fill="none" stroke="#0f1620" stroke-width="3" stroke-linejoin="miter"/><text x="108" y="85" font-size="15" fill="#0f1620" text-anchor="end">olja</text><text x="108" y="185" font-size="15" fill="#0f1620" text-anchor="end">vatten</text><line x1="266" y1="40" x2="300" y2="40" stroke="#4a5563" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="266" y1="120" x2="300" y2="120" stroke="#4a5563" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="266" y1="240" x2="300" y2="240" stroke="#4a5563" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="292" y1="48" x2="292" y2="112" stroke="#4a5563" stroke-width="1.3"/><polygon points="288,48 292,40 296,48" fill="#4a5563"/><polygon points="288,112 292,120 296,112" fill="#4a5563"/><line x1="292" y1="128" x2="292" y2="232" stroke="#4a5563" stroke-width="1.3"/><polygon points="288,128 292,120 296,128" fill="#4a5563"/><polygon points="288,232 292,240 296,232" fill="#4a5563"/><text x="300" y="85" font-size="15" fill="#4a5563">20 cm</text><text x="300" y="185" font-size="15" fill="#4a5563">30 cm</text></svg>
+
+a) Bestäm det totala trycket vid kärlets botten.<br>b) Trycket $p$ ritas i ett diagram som funktion av djupet under oljeytan. Beskriv grafens form från oljeytan till botten och bestäm grafens lutning i kPa/m i oljan och i vattnet.
+
+Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.
+
+*Ange trycket i a) som ditt numeriska svar i kPa.*`,
+            answer: { value: 106.0, unit: 'kPa', tol: 0.01 },
+            delsvar: [
+                { del: 'a', value: 106.0, unit: 'kPa', tol: 0.01, etikett: '$p =$' },
+            ],
+            solution: `**a)** Formeln $p = p_0 + \\rho \\cdot g \\cdot h$ gäller för en vätska med en enda densitet. Här ligger två vätskor på varandra, och vi använder samma tanke i två steg: trycket som verkar mot en vätskeyta fortplantas genom vätskan.
+
+Mot vattenytan, under oljan, trycker luften och oljan tillsammans:
+
+$$
+p_1 = p_0 + \\rho_\\text{olja} \\cdot g \\cdot h_\\text{olja}
+$$
+
+Det trycket spelar samma roll för vattnet som $p_0$ gör för en vätska i ett öppet kärl. Vid botten blir alltså
+
+$$
+p = p_1 + \\rho_\\text{vatten} \\cdot g \\cdot h_\\text{vatten} = p_0 + \\rho_\\text{olja} \\cdot g \\cdot h_\\text{olja} + \\rho_\\text{vatten} \\cdot g \\cdot h_\\text{vatten}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+p_0 = 101{,}3\\ \\mathrm{kPa} = 101\\,300\\ \\mathrm{Pa} \\\\
+\\rho_\\text{olja} = 900\\ \\mathrm{kg/m^3} \\\\
+h_\\text{olja} = 0{,}20\\ \\mathrm{m} \\\\
+\\rho_\\text{vatten} = 998\\ \\mathrm{kg/m^3} \\\\
+h_\\text{vatten} = 0{,}30\\ \\mathrm{m} \\\\
+g = 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+p = 101\\,300 + 900 \\cdot 9{,}82 \\cdot 0{,}20 + 998 \\cdot 9{,}82 \\cdot 0{,}30
+$$
+
+$$
+p = 101\\,300 + 1\\,767{,}6 + 2\\,940{,}108 = 106\\,007{,}708\\ \\mathrm{Pa} \\approx 106{,}0\\ \\mathrm{kPa}
+$$
+
+Rimlighet: utan oljan och vattnet hade trycket varit 101,3 kPa. En halv meter vätska ger knappt 5 kPa till, vilket stämmer med att 10 m vatten ger ungefär en atmosfär.
+
+**Svar:** Det totala trycket vid botten är cirka 106,0 kPa.
+
+**b)** Grafen startar i $p_0 = 101{,}3\\ \\mathrm{kPa}$ vid oljeytan. Inom varje vätska ökar trycket lika mycket för varje meter, så grafen består av två räta linjer. Lutningen är $\\rho \\cdot g$, ökningen i tryck per meter djup.
+
+I oljan:
+
+$$
+\\rho_\\text{olja} \\cdot g = 900 \\cdot 9{,}82 = 8\\,838\\ \\mathrm{Pa/m} \\approx 8{,}8\\ \\mathrm{kPa/m}
+$$
+
+I vattnet:
+
+$$
+\\rho_\\text{vatten} \\cdot g = 998 \\cdot 9{,}82 = 9\\,800{,}36\\ \\mathrm{Pa/m} \\approx 9{,}8\\ \\mathrm{kPa/m}
+$$
+
+Vid gränsytan, 20 cm ned, har grafen ett knä: den blir brantare eftersom vattnet har större densitet än oljan. Grafen gör inget hopp där, för trycket är detsamma strax ovanför och strax under gränsytan.
+
+**Svar:** Två räta linjer som möts i ett knä vid gränsytan. Lutningen är cirka 8,8 kPa/m i oljan och 9,8 kPa/m i vattnet.`,
+        },
+        {
+            level: 3,
+            question: `Lufttrycket vid jordytan beror på tyngden av all luft ovanför. Räkna med att lufttrycket är 101,3 kPa överallt vid jordytan, att jordens radie är 6 370 km och att $g = 9{,}82\\ \\mathrm{N/kg}$ i hela atmosfären.<br>a) Hur stor massa har den luft som finns ovanför en kvadratmeter av jordytan?<br>b) Uppskatta hela atmosfärens massa. Jordens yta har arean $4\\pi R^2$, där $R$ är jordens radie.<br>c) Anta att luften hade samma densitet, 1,20 kg/m³, ända upp. Hur hög skulle atmosfären då vara? Jämför med att det finns luft att andas, med trycket 31 kPa, på toppen av Mount Everest, 8,8 km över havet, och förklara vad som är fel med antagandet.
+
+*Ange massan i a) som ditt numeriska svar i kg.*`,
+            answer: { value: 10300, unit: 'kg', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 10300, unit: 'kg', tol: 0.02, etikett: '$m =$' },
+                { del: 'b', value: 5.26e18, unit: 'kg', tol: 0.02, etikett: '$m =$' },
+                { del: 'c', value: 8.60, unit: 'km', tol: 0.02, etikett: '$h =$' },
+            ],
+            solution: `**a)** Lufttrycket är tyngden av luften ovanför, fördelad på ytan:
+
+$$
+p_0 = \\dfrac{F_G}{A} = \\dfrac{m \\cdot g}{A} \\quad\\Leftrightarrow\\quad m = \\dfrac{p_0 \\cdot A}{g}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+p_0 = 101{,}3\\ \\mathrm{kPa} = 101\\,300\\ \\mathrm{Pa} \\\\
+A = 1{,}0\\ \\mathrm{m^2} \\\\
+g = 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+m = \\dfrac{101\\,300 \\cdot 1{,}0}{9{,}82} = 10\\,315{,}68\\ldots\\ \\mathrm{kg} \\approx 10\\,300\\ \\mathrm{kg}
+$$
+
+**Svar:** Cirka 10 300 kg, alltså ungefär tio ton luft över varje kvadratmeter.
+
+**b)** Samma samband används för hela jordytan:
+
+$$
+A = 4\\pi R^2 = 4\\pi \\cdot (6{,}37 \\cdot 10^{6})^2 = 5{,}099 \\cdot 10^{14}\\ \\mathrm{m^2}
+$$
+
+$$
+m = \\dfrac{p_0 \\cdot A}{g} = \\dfrac{101\\,300 \\cdot 5{,}099 \\cdot 10^{14}}{9{,}82} = 5{,}260\\ldots \\cdot 10^{18}\\ \\mathrm{kg} \\approx 5{,}26 \\cdot 10^{18}\\ \\mathrm{kg}
+$$
+
+Det är en uppskattning: i verkligheten är lufttrycket lite lägre på höga berg och $g$ minskar något med höjden.
+
+**Svar:** Atmosfärens massa är cirka $5{,}26 \\cdot 10^{18}\\ \\mathrm{kg}$.
+
+**c)** Med konstant densitet fungerar luften som en vätska, och lufttrycket vid ytan blir $p_0 = \\rho \\cdot g \\cdot h$:
+
+$$
+h = \\dfrac{p_0}{\\rho \\cdot g} = \\dfrac{101\\,300}{1{,}20 \\cdot 9{,}82} = \\dfrac{101\\,300}{11{,}784} = 8\\,596{,}4\\ldots\\ \\mathrm{m} \\approx 8{,}60\\ \\mathrm{km}
+$$
+
+Enligt den modellen skulle atmosfären ta slut under Mount Everests topp, och där skulle trycket vara noll. I själva verket är trycket 31 kPa där, nästan en tredjedel av trycket vid havet. Felet är antagandet om konstant densitet. Luft går lätt att pressa ihop, så den är tätast längst ned, där den bär tyngden av all luft ovanför. Högre upp blir luften allt tunnare, och atmosfären sträcker sig därför mycket högre än 8,60 km, även om trycket avtar.
+
+**Svar:** Cirka 8,60 km. Modellen håller inte, eftersom luftens densitet minskar med höjden.`,
         },
     ],
 
@@ -25256,7 +32072,7 @@ $$
 \\rho \\cdot g \\cdot V = m \\cdot g \\quad\\Leftrightarrow\\quad V = \\frac{m}{\\rho}
 $$
 
-Tyngdfaktorn *g* stryker bort sig — märk att svaret inte beror på *g*!
+Tyngdfaktorn *g* stryker bort sig. Märk att svaret inte beror på *g*!
 
 $$
 \\left[ \\begin{array}{l}
@@ -25289,9 +32105,9 @@ $$
 V = \\frac{F_\\mathrm{L}}{\\rho \\cdot g} = \\frac{1{,}96}{998 \\cdot 9{,}82} \\approx 2{,}00 \\cdot 10^{-4}\\ \\mathrm{m^3} = 200\\ \\mathrm{cm^3}
 $$
 
-Det visar att hela volymen är under vattnet — kuben är alltså helt nedsänkt (och sjunker).
+Det visar att hela volymen är under vattnet. Kuben är alltså helt nedsänkt (och sjunker).
 
-**Svar:** Alternativ A — hela volymen är under vattnet.`,
+**Svar:** Alternativ A, hela volymen är under vattnet.`,
         },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
@@ -25328,7 +32144,7 @@ $$
 F = 26{,}5 - 9{,}80 \\approx 16{,}7\\ \\mathrm{N}
 $$
 
-**Svar:** Ca 17 N — som motsvarar tyngden av ungefär 1,7 kg. Kuben känns alltså 1,7 kg "tung" under vatten, trots att den egentligen väger 2,7 kg.
+**Svar:** Ca 17 N, som motsvarar tyngden av ungefär 1,7 kg. Kuben känns alltså 1,7 kg "tung" under vatten, trots att den egentligen väger 2,7 kg.
 
 **Generell slutsats:** Generellt gäller att den **upplevda vikten** under vattnet ges av $m_\\mathrm{upplevd} = m \\cdot (1 - \\rho_\\mathrm{vatten}/\\rho_\\mathrm{kropp})$. Ju mindre densitetsskillnad mellan kroppen och vätskan, desto "lättare" känns föremålet.`,
         },
@@ -25390,7 +32206,735 @@ $$
 
 **Svar:** Ca 89,5 % av isbergets volym ligger under ytan.
 
-**Generell slutsats:** Den klassiska "isbergstoppen-regeln": ungefär 90 % av isberget är under ytan, bara 10 % syns. Detta är en allmän regel: när ett föremål med densitet $\\rho_\\mathrm{kropp}$ flyter i en vätska med densitet $\\rho_\\mathrm{vätska}$, är andelen under ytan alltid $\\rho_\\mathrm{kropp}/\\rho_\\mathrm{vätska}$. Detta är också varför Titanic — och så många andra fartyg — drabbats av kollisioner med isberg: man ser bara "10 % av problemet" från ytan.`,
+**Generell slutsats:** Den klassiska "isbergstoppen-regeln": ungefär 90 % av isberget är under ytan, bara 10 % syns. Detta är en allmän regel: när ett föremål med densitet $\\rho_\\mathrm{kropp}$ flyter i en vätska med densitet $\\rho_\\mathrm{vätska}$, är andelen under ytan alltid $\\rho_\\mathrm{kropp}/\\rho_\\mathrm{vätska}$. Detta är också varför Titanic (och så många andra fartyg) drabbats av kollisioner med isberg: man ser bara "10 % av problemet" från ytan.`,
+        },
+        {
+            level: 1,
+            question: `En sten hänger i en dynamometer. Dynamometern visar 12,4 N när stenen hänger i luften och 8,3 N när stenen är helt nedsänkt i vatten, se figuren.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="10 8 310 262" width="421" height="356" role="img" aria-label="Till vänster hänger en sten i en dynamometer i luften, dynamometern visar 12,4 N. Till höger hänger samma sten helt nedsänkt i en bägare med vatten, dynamometern visar 8,3 N." style="max-width:421px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="20" y="16" width="290" height="6" rx="2" fill="#8a93a0" stroke="#0f1620" stroke-width="1"/><line x1="90" y1="22" x2="90" y2="32" stroke="#0f1620" stroke-width="1.6"/><rect x="79" y="32" width="22" height="84" rx="4" fill="#e9edf1" stroke="#0f1620" stroke-width="1.4"/><line x1="83" y1="40" x2="90" y2="40" stroke="#4a5563" stroke-width="0.9"/><line x1="83" y1="49" x2="88" y2="49" stroke="#4a5563" stroke-width="0.9"/><line x1="83" y1="58" x2="90" y2="58" stroke="#4a5563" stroke-width="0.9"/><line x1="83" y1="67" x2="88" y2="67" stroke="#4a5563" stroke-width="0.9"/><line x1="83" y1="76" x2="90" y2="76" stroke="#4a5563" stroke-width="0.9"/><line x1="83" y1="85" x2="88" y2="85" stroke="#4a5563" stroke-width="0.9"/><line x1="83" y1="94" x2="90" y2="94" stroke="#4a5563" stroke-width="0.9"/><line x1="83" y1="103" x2="88" y2="103" stroke="#4a5563" stroke-width="0.9"/><line x1="83" y1="112" x2="90" y2="112" stroke="#4a5563" stroke-width="0.9"/><rect x="91" y="102" width="7" height="4" fill="#d12f2f"/><line x1="90" y1="116" x2="90" y2="150" stroke="#0f1620" stroke-width="1.8"/><line x1="90" y1="150" x2="90" y2="163" stroke="#0f1620" stroke-width="1"/><path d="M 70 174 C 72 162 86 160 98 163 C 110 166 112 178 108 187 C 102 194 82 195 74 188 C 69 184 69 179 70 174 Z" fill="#aeb4bc" stroke="#7c828c" stroke-width="1.4"/><text x="74" y="108" font-size="14" fill="#0f1620" text-anchor="end">12,4 N</text><text x="90" y="262" font-size="14" fill="#4a5563" text-anchor="middle">I luft</text><rect x="190" y="146" width="110" height="98" fill="#c7e3f1"/><line x1="190" y1="146" x2="300" y2="146" stroke="#7fb4d4" stroke-width="1.4"/><polyline points="190,128 190,244 300,244 300,128" fill="none" stroke="#5b86a8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="245" y1="22" x2="245" y2="32" stroke="#0f1620" stroke-width="1.6"/><rect x="234" y="32" width="22" height="84" rx="4" fill="#e9edf1" stroke="#0f1620" stroke-width="1.4"/><line x1="238" y1="40" x2="245" y2="40" stroke="#4a5563" stroke-width="0.9"/><line x1="238" y1="49" x2="243" y2="49" stroke="#4a5563" stroke-width="0.9"/><line x1="238" y1="58" x2="245" y2="58" stroke="#4a5563" stroke-width="0.9"/><line x1="238" y1="67" x2="243" y2="67" stroke="#4a5563" stroke-width="0.9"/><line x1="238" y1="76" x2="245" y2="76" stroke="#4a5563" stroke-width="0.9"/><line x1="238" y1="85" x2="243" y2="85" stroke="#4a5563" stroke-width="0.9"/><line x1="238" y1="94" x2="245" y2="94" stroke="#4a5563" stroke-width="0.9"/><line x1="238" y1="103" x2="243" y2="103" stroke="#4a5563" stroke-width="0.9"/><line x1="238" y1="112" x2="245" y2="112" stroke="#4a5563" stroke-width="0.9"/><rect x="246" y="84" width="7" height="4" fill="#d12f2f"/><line x1="245" y1="116" x2="245" y2="180" stroke="#0f1620" stroke-width="1.8"/><line x1="245" y1="180" x2="245" y2="193" stroke="#0f1620" stroke-width="1"/><path d="M 225 204 C 227 192 241 190 253 193 C 265 196 267 208 263 217 C 257 224 237 225 229 218 C 224 214 224 209 225 204 Z" fill="#aeb4bc" stroke="#7c828c" stroke-width="1.4"/><text x="229" y="90" font-size="14" fill="#0f1620" text-anchor="end">8,3 N</text><text x="245" y="262" font-size="14" fill="#4a5563" text-anchor="middle">I vatten</text></svg>
+
+Hur stor lyftkraft verkar på stenen när den är i vattnet? Ange svaret i N.`,
+            answer: { value: 4.1, unit: 'N', tol: 0.03 },
+            solution: `Dynamometern visar hur stor kraft som behövs för att hålla stenen still.
+
+I luften håller dynamometern ensam emot tyngdkraften, så $F_\\mathrm{G} = 12{,}4\\ \\mathrm{N}$.
+
+I vattnet hjälper lyftkraften till att hålla stenen. Stenen är i vila, så krafterna uppåt är lika stora som kraften nedåt:
+
+$$
+F + F_\\mathrm{L} = F_\\mathrm{G} \\quad\\Leftrightarrow\\quad F_\\mathrm{L} = F_\\mathrm{G} - F
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F_\\mathrm{G} = 12{,}4\\ \\mathrm{N} \\\\
+F = 8{,}3\\ \\mathrm{N}
+\\end{array} \\right]
+$$
+
+$$
+F_\\mathrm{L} = 12{,}4 - 8{,}3 = 4{,}1\\ \\mathrm{N}
+$$
+
+Stenens massa är densamma i vattnet. Det är bara den kraft som behövs för att hålla den som har minskat.
+
+**Svar:** Lyftkraften är 4,1 N.`,
+        },
+        {
+            level: 1,
+            question: `En stålkula sänks ned helt i en bägare med matolja. Lyftkraften på kulan beräknas med $F_\\mathrm{L} = \\rho \\cdot g \\cdot V$. Vilken densitet ska sättas in som $\\rho$?`,
+            choices: [
+                `Stålets densitet`,
+                `Oljans densitet`,
+                `Medelvärdet av stålets och oljans densitet`,
+                `Skillnaden mellan stålets och oljans densitet`,
+            ],
+            correct: 1,
+            solution: `Enligt Arkimedes princip är lyftkraften lika stor som tyngden hos den **undanträngda vätskan**. Kulan tränger undan olja, så det är oljans massa som ska räknas fram:
+
+$$
+F_\\mathrm{L} = m_\\mathrm{olja} \\cdot g = \\rho_\\mathrm{olja} \\cdot V \\cdot g
+$$
+
+Stålets densitet behövs först när man vill veta kulans tyngdkraft, $F_\\mathrm{G} = \\rho_\\mathrm{stål} \\cdot g \\cdot V$, till exempel för att avgöra om kulan sjunker.
+
+**Svar:** Oljans densitet.`,
+        },
+        {
+            level: 1,
+            question: `En tom glasflaska med kork flyter i ett akvarium. Du märker ut vattenytan, tar upp flaskan och ser att vattenytan sjunker. För att höja vattenytan till märket igen behöver du hälla i 0,32 liter vatten. Vilken massa har flaskan? Vattnets densitet är 998 kg/m³. Ange svaret i gram.`,
+            answer: { value: 320, unit: 'g', tol: 0.03 },
+            solution: `De 0,32 liter som behövs för att fylla upp till märket är precis den volym vatten som flaskan trängde undan när den flöt.
+
+Flaskan flyter, så lyftkraften är lika stor som tyngdkraften. Lyftkraften ges av Arkimedes princip:
+
+$$
+F_\\mathrm{L} = F_\\mathrm{G} \\quad\\Leftrightarrow\\quad \\rho \\cdot g \\cdot V = m \\cdot g
+$$
+
+Tyngdfaktorn finns i båda leden och kan strykas:
+
+$$
+m = \\rho \\cdot V
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\rho = 998\\ \\mathrm{kg/m^3} \\\\
+V = 0{,}32\\ \\mathrm{liter} = 0{,}32 \\cdot 10^{-3}\\ \\mathrm{m^3}
+\\end{array} \\right]
+$$
+
+$$
+m = 998 \\cdot 0{,}32 \\cdot 10^{-3} = 0{,}31936\\ \\mathrm{kg} \\approx 320\\ \\mathrm{g}
+$$
+
+Volymen har två värdesiffror, så svaret avrundas till två värdesiffror. Flaskans massa är alltså lika stor som massan av det vatten den tränger undan.
+
+**Svar:** Flaskan har massan cirka 320 g.`,
+        },
+        {
+            level: 1,
+            question: `En sluten plåtburk är helt nedsänkt i en bassäng. Den sänks långsamt från 1,0 m till 3,0 m djup utan att tryckas ihop. Hur ändras lyftkraften på burken?`,
+            choices: [
+                `Den blir tre gånger så stor`,
+                `Den blir mindre`,
+                `Den är lika stor`,
+                `Den ökar, men inte till det tredubbla`,
+            ],
+            correct: 2,
+            solution: `Lyftkraften är enligt Arkimedes princip
+
+$$
+F_\\mathrm{L} = \\rho \\cdot g \\cdot V
+$$
+
+Vattnets densitet, tyngdfaktorn och burkens volym är desamma på båda djupen. Djupet finns inte med i formeln, så lyftkraften ändras inte.
+
+Det går också att förstå med trycket: längre ned ökar vätsketrycket både mot burkens undersida och mot dess översida, och lika mycket på båda ställena. Skillnaden mellan tryckkraften uppåt och tryckkraften nedåt, alltså lyftkraften, blir därför densamma.
+
+**Svar:** Lyftkraften är lika stor.`,
+        },
+        {
+            level: 2,
+            question: `En metallbit hänger i en dynamometer. I luft visar dynamometern 3,60 N, och när metallbiten är helt nedsänkt i vatten visar den 2,25 N. Räkna med vattnets densitet 998 kg/m³ och $g = 9{,}82\\ \\mathrm{N/kg}$.
+
+| Metall | Densitet (kg/m³) |
+|---|---|
+| Aluminium | 2 700 |
+| Zink | 7 130 |
+| Järn | 7 870 |
+| Koppar | 8 960 |
+
+a) Bestäm metallbitens volym. Ange svaret i cm³.<br>b) Bestäm metallbitens densitet. Ange svaret i kg/m³.<br>c) Vilken av metallerna i tabellen är metallbiten troligen gjord av?
+
+*Ange volymen (a) som ditt numeriska svar i cm³.*`,
+            answer: { value: 138, unit: 'cm³', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 138, unit: 'cm³', tol: 0.03, etikett: '$V =$' },
+                { del: 'b', value: 2660, unit: 'kg/m³', tol: 0.03, etikett: '$\\rho =$' },
+                { del: 'c' },
+            ],
+            solution: `**a)** I luften är dynamometerns utslag lika med tyngdkraften, $F_\\mathrm{G} = 3{,}60\\ \\mathrm{N}$. I vattnet hjälper lyftkraften till, så lyftkraften är skillnaden mellan utslagen:
+
+$$
+F_\\mathrm{L} = 3{,}60 - 2{,}25 = 1{,}35\\ \\mathrm{N}
+$$
+
+Metallbiten är helt nedsänkt, så den undanträngda volymen är hela metallbitens volym. Volymen löses ut ur Arkimedes princip:
+
+$$
+F_\\mathrm{L} = \\rho \\cdot g \\cdot V \\quad\\Leftrightarrow\\quad V = \\dfrac{F_\\mathrm{L}}{\\rho \\cdot g}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F_\\mathrm{L} = 1{,}35\\ \\mathrm{N} \\\\
+\\rho = 998\\ \\mathrm{kg/m^3} \\\\
+g = 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+V = \\dfrac{1{,}35}{998 \\cdot 9{,}82} = 1{,}3775\\ldots \\cdot 10^{-4}\\ \\mathrm{m^3} \\approx 138\\ \\mathrm{cm^3}
+$$
+
+(1 m³ = 1 000 000 cm³.)
+
+**Svar:** Volymen är cirka 138 cm³.
+
+**b)** Massan fås ur tyngdkraften:
+
+$$
+m = \\dfrac{F_\\mathrm{G}}{g} = \\dfrac{3{,}60}{9{,}82} = 0{,}36659\\ldots\\ \\mathrm{kg}
+$$
+
+Densiteten är massan per volym. Vi använder det oavrundade värdet på volymen från a):
+
+$$
+\\rho_\\mathrm{metall} = \\dfrac{m}{V} = \\dfrac{0{,}36659\\ldots}{1{,}3775\\ldots \\cdot 10^{-4}} = 2\\,661{,}3\\ldots\\ \\mathrm{kg/m^3} \\approx 2\\,660\\ \\mathrm{kg/m^3}
+$$
+
+Mätvärdena har tre värdesiffror, så svaret avrundas till tre värdesiffror.
+
+**Svar:** Densiteten är cirka 2 660 kg/m³.
+
+**c)** Den beräknade densiteten ligger mycket nära aluminiums 2 700 kg/m³ och långt från de övriga metallerna, som alla har en densitet över 7 000 kg/m³. Skillnaden på drygt 1 % ryms i mätosäkerheten.
+
+**Svar:** Metallbiten är troligen gjord av aluminium.`,
+        },
+        {
+            level: 2,
+            question: `En flotte är gjord av ett block av cellplast med måtten 2,0 m × 1,5 m × 0,20 m. Cellplasten har densiteten 25 kg/m³. Hur många personer med massan 70 kg kan stå på flotten utan att den trycks ned under vattenytan? Vattnets densitet är 998 kg/m³.`,
+            answer: { value: 8, unit: 'personer', tol: 0.01 },
+            solution: `Flotten kan bära som mest när hela blocket är under ytan, för då är den undanträngda volymen störst. Då gäller kraftjämvikt mellan lyftkraften och tyngdkraften på flotten och personerna:
+
+$$
+F_\\mathrm{L} = F_\\mathrm{G} \\quad\\Leftrightarrow\\quad \\rho_\\mathrm{vatten} \\cdot g \\cdot V = (m_\\mathrm{flotte} + m_\\mathrm{last}) \\cdot g
+$$
+
+Tyngdfaktorn finns i båda leden och kan strykas, och flottens massa är $m_\\mathrm{flotte} = \\rho_\\mathrm{cellplast} \\cdot V$:
+
+$$
+m_\\mathrm{last} = \\rho_\\mathrm{vatten} \\cdot V - \\rho_\\mathrm{cellplast} \\cdot V
+$$
+
+$$
+\\left[ \\begin{array}{l}
+V = 2{,}0 \\cdot 1{,}5 \\cdot 0{,}20 = 0{,}60\\ \\mathrm{m^3} \\\\
+\\rho_\\mathrm{vatten} = 998\\ \\mathrm{kg/m^3} \\\\
+\\rho_\\mathrm{cellplast} = 25\\ \\mathrm{kg/m^3}
+\\end{array} \\right]
+$$
+
+$$
+m_\\mathrm{last} = 998 \\cdot 0{,}60 - 25 \\cdot 0{,}60 = 598{,}8 - 15 = 583{,}8\\ \\mathrm{kg}
+$$
+
+Antalet personer blir
+
+$$
+\\dfrac{583{,}8}{70} = 8{,}34
+$$
+
+En nionde person skulle göra lasten för stor, så vi avrundar nedåt.
+
+**Svar:** Högst 8 personer kan stå på flotten.`,
+        },
+        {
+            level: 2,
+            question: `Ett lastfartyg med massan $2{,}4 \\cdot 10^{6}$ kg går från havet, där vattnet har densiteten 1 025 kg/m³, in i en flod med sötvatten, densitet 998 kg/m³.<br>a) Hur mycket större blir den undanträngda volymen i floden? Ange svaret i m³.<br>b) Fartygets skrov är lodrätt vid vattenlinjen, och arean som vattenlinjen omsluter är 1 800 m². Hur mycket djupare går fartyget i floden? Ange svaret i cm.
+
+*Ange volymökningen (a) som ditt numeriska svar i m³.*`,
+            answer: { value: 63, unit: 'm³', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 63, unit: 'm³', tol: 0.04, etikett: '$\\Delta V =$' },
+                { del: 'b', value: 3.5, unit: 'cm', tol: 0.04, etikett: '$\\Delta h =$' },
+            ],
+            solution: `**a)** Fartyget flyter i båda fallen, så lyftkraften är lika stor som tyngdkraften:
+
+$$
+\\rho \\cdot g \\cdot V = m \\cdot g \\quad\\Leftrightarrow\\quad V = \\dfrac{m}{\\rho}
+$$
+
+Lyftkraften är alltså densamma i havet och i floden, men i sötvattnet, som har lägre densitet, måste fartyget tränga undan mer vatten för att få den.
+
+$$
+\\left[ \\begin{array}{l}
+m = 2{,}4 \\cdot 10^{6}\\ \\mathrm{kg} \\\\
+\\rho_\\mathrm{hav} = 1\\,025\\ \\mathrm{kg/m^3} \\\\
+\\rho_\\mathrm{flod} = 998\\ \\mathrm{kg/m^3}
+\\end{array} \\right]
+$$
+
+$$
+V_\\mathrm{hav} = \\dfrac{2{,}4 \\cdot 10^{6}}{1\\,025} = 2\\,341{,}46\\ldots\\ \\mathrm{m^3}
+$$
+
+$$
+V_\\mathrm{flod} = \\dfrac{2{,}4 \\cdot 10^{6}}{998} = 2\\,404{,}80\\ldots\\ \\mathrm{m^3}
+$$
+
+$$
+\\Delta V = V_\\mathrm{flod} - V_\\mathrm{hav} = 2\\,404{,}80\\ldots - 2\\,341{,}46\\ldots = 63{,}34\\ldots\\ \\mathrm{m^3} \\approx 63\\ \\mathrm{m^3}
+$$
+
+**Svar:** Den undanträngda volymen blir cirka 63 m³ större.
+
+**b)** Skrovet är lodrätt vid vattenlinjen, så den extra volymen är ett skikt med arean $A$ och tjockleken $\\Delta h$:
+
+$$
+\\Delta V = A \\cdot \\Delta h \\quad\\Leftrightarrow\\quad \\Delta h = \\dfrac{\\Delta V}{A}
+$$
+
+$$
+\\Delta h = \\dfrac{63{,}34\\ldots}{1\\,800} = 0{,}03519\\ldots\\ \\mathrm{m} \\approx 3{,}5\\ \\mathrm{cm}
+$$
+
+Rimlighet: sötvattnets densitet är bara knappt 3 % lägre än havsvattnets, så fartyget sjunker bara en liten bit djupare.
+
+**Svar:** Fartyget går cirka 3,5 cm djupare i floden.`,
+        },
+        {
+            level: 2,
+            question: `En badboll har radien 18 cm och massan 250 g. Hur stor kraft måste du trycka med för att hålla bollen helt under vattenytan? Ett klot med radien $r$ har volymen $V = \\dfrac{4 \\pi r^{3}}{3}$. Räkna med vattnets densitet 998 kg/m³ och $g = 9{,}82\\ \\mathrm{N/kg}$, och ange svaret i N.`,
+            answer: { value: 240, unit: 'N', tol: 0.03 },
+            solution: `Bollen påverkas av lyftkraften $F_\\mathrm{L}$ uppåt, tyngdkraften $F_\\mathrm{G}$ nedåt och din kraft $F$ nedåt. Bollen hålls i vila, så
+
+$$
+F_\\mathrm{L} = F_\\mathrm{G} + F \\quad\\Leftrightarrow\\quad F = F_\\mathrm{L} - F_\\mathrm{G}
+$$
+
+Bollens volym, som också är den undanträngda volymen:
+
+$$
+V = \\dfrac{4 \\pi \\cdot 0{,}18^{3}}{3} = 0{,}024429\\ldots\\ \\mathrm{m^3}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+V = 0{,}024429\\ldots\\ \\mathrm{m^3} \\\\
+m = 0{,}250\\ \\mathrm{kg} \\\\
+\\rho = 998\\ \\mathrm{kg/m^3} \\\\
+g = 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+F_\\mathrm{L} = \\rho \\cdot g \\cdot V = 998 \\cdot 9{,}82 \\cdot 0{,}024429\\ldots = 239{,}41\\ldots\\ \\mathrm{N}
+$$
+
+$$
+F_\\mathrm{G} = m \\cdot g = 0{,}250 \\cdot 9{,}82 = 2{,}455\\ \\mathrm{N}
+$$
+
+$$
+F = 239{,}41\\ldots - 2{,}455 = 236{,}95\\ldots\\ \\mathrm{N} \\approx 240\\ \\mathrm{N}
+$$
+
+Radien har två värdesiffror, så svaret avrundas till två värdesiffror.
+
+Rimlighet: kraften motsvarar tyngden av ungefär 24 kg. Det stämmer med erfarenheten att en stor badboll är mycket svår att hålla under ytan. Bollens egen tyngd spelar nästan ingen roll.
+
+**Svar:** Du måste trycka med cirka 240 N.`,
+        },
+        {
+            level: 2,
+            question: `En cylinder av metall hänger i en dynamometer och sänks långsamt ned i vatten med densiteten 998 kg/m³. Diagrammet visar dynamometerns utslag $F$ som funktion av hur djupt cylinderns underkant är, $d$. Cylindern står upprätt hela tiden.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="22 8 340 230" width="461" height="312" role="img" aria-label="Diagram med djupet d i centimeter på den vågräta axeln och dynamometerns utslag F i newton på den lodräta. Grafen går rakt från 6 N vid d = 0 ned till 4 N vid d = 8 cm och är sedan konstant 4 N fram till d = 14 cm." style="max-width:461px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="92" y1="212" x2="92" y2="37" stroke="#dbe3ea" stroke-width="1"/><line x1="132" y1="212" x2="132" y2="37" stroke="#dbe3ea" stroke-width="1"/><line x1="172" y1="212" x2="172" y2="37" stroke="#dbe3ea" stroke-width="1"/><line x1="212" y1="212" x2="212" y2="37" stroke="#dbe3ea" stroke-width="1"/><line x1="252" y1="212" x2="252" y2="37" stroke="#dbe3ea" stroke-width="1"/><line x1="292" y1="212" x2="292" y2="37" stroke="#dbe3ea" stroke-width="1"/><line x1="332" y1="212" x2="332" y2="37" stroke="#dbe3ea" stroke-width="1"/><line x1="52" y1="187" x2="332" y2="187" stroke="#dbe3ea" stroke-width="1"/><line x1="52" y1="162" x2="332" y2="162" stroke="#dbe3ea" stroke-width="1"/><line x1="52" y1="137" x2="332" y2="137" stroke="#dbe3ea" stroke-width="1"/><line x1="52" y1="112" x2="332" y2="112" stroke="#dbe3ea" stroke-width="1"/><line x1="52" y1="87" x2="332" y2="87" stroke="#dbe3ea" stroke-width="1"/><line x1="52" y1="62" x2="332" y2="62" stroke="#dbe3ea" stroke-width="1"/><line x1="52" y1="37" x2="332" y2="37" stroke="#dbe3ea" stroke-width="1"/><line x1="52" y1="212" x2="346" y2="212" stroke="#0f1620" stroke-width="1.6"/><polygon points="354,212 344,207.5 344,216.5" fill="#0f1620"/><line x1="52" y1="212" x2="52" y2="25" stroke="#0f1620" stroke-width="1.6"/><polygon points="52,17 47.5,27 56.5,27" fill="#0f1620"/><text x="52" y="229" font-size="13" fill="#0f1620" text-anchor="middle">0</text><text x="92" y="229" font-size="13" fill="#0f1620" text-anchor="middle">2</text><text x="132" y="229" font-size="13" fill="#0f1620" text-anchor="middle">4</text><text x="172" y="229" font-size="13" fill="#0f1620" text-anchor="middle">6</text><text x="212" y="229" font-size="13" fill="#0f1620" text-anchor="middle">8</text><text x="252" y="229" font-size="13" fill="#0f1620" text-anchor="middle">10</text><text x="292" y="229" font-size="13" fill="#0f1620" text-anchor="middle">12</text><text x="332" y="229" font-size="13" fill="#0f1620" text-anchor="middle">14</text><text x="46" y="191.5" font-size="13" fill="#0f1620" text-anchor="end">1</text><text x="46" y="166.5" font-size="13" fill="#0f1620" text-anchor="end">2</text><text x="46" y="141.5" font-size="13" fill="#0f1620" text-anchor="end">3</text><text x="46" y="116.5" font-size="13" fill="#0f1620" text-anchor="end">4</text><text x="46" y="91.5" font-size="13" fill="#0f1620" text-anchor="end">5</text><text x="46" y="66.5" font-size="13" fill="#0f1620" text-anchor="end">6</text><text x="46" y="41.5" font-size="13" fill="#0f1620" text-anchor="end">7</text><text x="61" y="25" font-size="14" fill="#0f1620"><tspan font-style="italic">F</tspan> (N)</text><text x="354" y="203" font-size="14" fill="#0f1620" text-anchor="end"><tspan font-style="italic">d</tspan> (cm)</text><polyline points="52,62 212,112 332,112" fill="none" stroke="#1f6fb2" stroke-width="2.6" stroke-linejoin="round"/></svg>
+
+a) Hur hög är cylindern? Ange svaret i cm.<br>b) Bestäm cylinderns volym. Ange svaret i cm³.<br>c) Bestäm cylinderns bottenarea. Ange svaret i cm².
+
+Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$. *Ange höjden (a) som ditt numeriska svar i cm.*`,
+            answer: { value: 8.0, unit: 'cm', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 8.0, unit: 'cm', tol: 0.03, etikett: '$h =$' },
+                { del: 'b', value: 200, unit: 'cm³', tol: 0.04, etikett: '$V =$' },
+                { del: 'c', value: 26, unit: 'cm²', tol: 0.04, etikett: '$A =$' },
+            ],
+            solution: `**a)** När cylindern sänks ned tränger den undan allt mer vatten. Lyftkraften ökar då, och dynamometerns utslag minskar. När hela cylindern är under ytan ökar inte den undanträngda volymen längre, och utslaget blir konstant. Det sker vid $d = 8{,}0\\ \\mathrm{cm}$, så då har cylinderns översida just nått vattenytan.
+
+**Svar:** Cylindern är 8,0 cm hög.
+
+**b)** Vid $d = 0$ hänger cylindern i luften, så $F_\\mathrm{G} = 6{,}0\\ \\mathrm{N}$. Helt nedsänkt visar dynamometern 4,0 N, och lyftkraften är skillnaden:
+
+$$
+F_\\mathrm{L} = 6{,}0 - 4{,}0 = 2{,}0\\ \\mathrm{N}
+$$
+
+$$
+F_\\mathrm{L} = \\rho \\cdot g \\cdot V \\quad\\Leftrightarrow\\quad V = \\dfrac{F_\\mathrm{L}}{\\rho \\cdot g}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F_\\mathrm{L} = 2{,}0\\ \\mathrm{N} \\\\
+\\rho = 998\\ \\mathrm{kg/m^3} \\\\
+g = 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+V = \\dfrac{2{,}0}{998 \\cdot 9{,}82} = 2{,}0407\\ldots \\cdot 10^{-4}\\ \\mathrm{m^3} \\approx 2{,}0 \\cdot 10^{2}\\ \\mathrm{cm^3}
+$$
+
+**Svar:** Volymen är cirka 200 cm³.
+
+**c)** Cylindern står upprätt och har samma tvärsnitt hela vägen, så dess volym är bottenarean gånger höjden. Bottenarean löses ut med höjden från a) och det oavrundade värdet på volymen från b):
+
+$$
+V = A \\cdot h \\quad\\Leftrightarrow\\quad A = \\dfrac{V}{h}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+V = 2{,}0407\\ldots \\cdot 10^{-4}\\ \\mathrm{m^3} \\\\
+h = 8{,}0\\ \\mathrm{cm} = 0{,}080\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+A = \\dfrac{2{,}0407\\ldots \\cdot 10^{-4}}{0{,}080} = 2{,}5509\\ldots \\cdot 10^{-3}\\ \\mathrm{m^2} \\approx 26\\ \\mathrm{cm^2}
+$$
+
+(1 m² = 10 000 cm².) Höjden och lyftkraften har två värdesiffror, så svaret avrundas till två värdesiffror.
+
+Rimlighet: en cirkel med arean 26 cm² har diametern knappt 6 cm, och en metallcylinder som är 6 cm bred och 8 cm hög är ett rimligt lod att hänga i en dynamometer.
+
+**Svar:** Bottenarean är cirka 26 cm².`,
+        },
+        {
+            level: 3,
+            question: `Ett stearinljus flyter upprätt i vatten med 12 % av sin volym ovanför ytan. Hur stor andel av ljusets volym hamnar under ytan om det i stället får flyta i rapsolja med densiteten 915 kg/m³? Vattnets densitet är 998 kg/m³. Ange svaret i procent.`,
+            answer: { value: 96, unit: '%', tol: 0.02 },
+            solution: `Låt ljusets volym vara $V$, dess densitet $\\rho_\\mathrm{ljus}$ och volymen under ytan $V_\\mathrm{u}$. Ljuset flyter, så lyftkraften är lika stor som tyngdkraften i vilken vätska det än flyter i:
+
+$$
+\\rho_\\mathrm{vätska} \\cdot g \\cdot V_\\mathrm{u} = \\rho_\\mathrm{ljus} \\cdot g \\cdot V
+\\quad\\Leftrightarrow\\quad
+\\dfrac{V_\\mathrm{u}}{V} = \\dfrac{\\rho_\\mathrm{ljus}}{\\rho_\\mathrm{vätska}}
+$$
+
+Andelen under ytan är alltså kvoten mellan ljusets och vätskans densitet. Varken ljusets storlek eller tyngdfaktorn behövs.
+
+**I vattnet** är andelen under ytan $100 - 12 = 88\\ \\%$, vilket ger ljusets densitet:
+
+$$
+\\rho_\\mathrm{ljus} = 0{,}88 \\cdot \\rho_\\mathrm{vatten} = 0{,}88 \\cdot 998 = 878{,}24\\ \\mathrm{kg/m^3}
+$$
+
+Ljusets densitet är lägre än oljans 915 kg/m³, så ljuset flyter även i oljan.
+
+**I oljan** blir andelen under ytan
+
+$$
+\\dfrac{V_\\mathrm{u}}{V} = \\dfrac{\\rho_\\mathrm{ljus}}{\\rho_\\mathrm{olja}} = \\dfrac{878{,}24}{915} = 0{,}9598\\ldots \\approx 96\\ \\%
+$$
+
+Andelen 12 % har två värdesiffror, så svaret avrundas till två värdesiffror.
+
+Rimlighet: oljan har lägre densitet än vattnet, så ljuset måste tränga undan en större volym för att få samma lyftkraft. Andelen under ytan ska alltså öka, och det gör den.
+
+**Svar:** Cirka 96 % av ljusets volym hamnar under ytan.`,
+        },
+        {
+            level: 3,
+            question: `En bägare med vatten står på en digital våg, som visar 850,0 g. En metallbit hänger i en dynamometer, som visar 2,65 N när metallbiten är i luften. Metallbiten sänks ned i vattnet tills den är helt under ytan, utan att röra bägarens botten eller väggar. Vågen visar då 948,0 g. Vattnets densitet är 998 kg/m³, och räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.<br>a) Vad visar dynamometern när metallbiten är helt under ytan?<br>b) Bestäm metallens densitet.<br>c) Snöret släpps, och metallbiten lägger sig på bägarens botten. Vad visar vågen nu?
+
+*Ange dynamometerns utslag (a) som ditt numeriska svar i N.*`,
+            answer: { value: 1.69, unit: 'N', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 1.69, unit: 'N', tol: 0.02, etikett: '$F =$' },
+                { del: 'b', value: 2750, unit: 'kg/m³', tol: 0.03, etikett: '$\\rho =$' },
+                { del: 'c', value: 1120, unit: 'g', tol: 0.01, etikett: '$m =$' },
+            ],
+            solution: `**a)** Vattnet påverkar metallbiten med lyftkraften $F_\\mathrm{L}$ uppåt. Enligt Newtons tredje lag påverkar då metallbiten vattnet med en lika stor kraft nedåt, och den kraften förs vidare genom bägarens botten till vågen. Vågens utslag ökar därför med lika mycket som lyftkraften, och vi kan räkna ut lyftkraften ur ökningen:
+
+$$
+\\Delta m = 948{,}0 - 850{,}0 = 98{,}0\\ \\mathrm{g} = 0{,}0980\\ \\mathrm{kg}
+$$
+
+$$
+F_\\mathrm{L} = \\Delta m \\cdot g = 0{,}0980 \\cdot 9{,}82 = 0{,}96236\\ \\mathrm{N}
+$$
+
+Metallbiten hänger stilla, så krafterna uppåt (dynamometerns kraft $F$ och lyftkraften) är lika stora som tyngdkraften nedåt:
+
+$$
+F + F_\\mathrm{L} = F_\\mathrm{G} \\quad\\Leftrightarrow\\quad F = F_\\mathrm{G} - F_\\mathrm{L}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F_\\mathrm{G} = 2{,}65\\ \\mathrm{N} \\\\
+F_\\mathrm{L} = 0{,}96236\\ \\mathrm{N}
+\\end{array} \\right]
+$$
+
+$$
+F = 2{,}65 - 0{,}96236 = 1{,}68764\\ \\mathrm{N} \\approx 1{,}69\\ \\mathrm{N}
+$$
+
+**Svar:** Dynamometern visar cirka 1,69 N.
+
+**b)** Lyftkraften är enligt Arkimedes princip tyngden av det undanträngda vattnet, alltså $F_\\mathrm{L} = \\rho_\\mathrm{v} \\cdot g \\cdot V$. Samtidigt är $F_\\mathrm{L} = \\Delta m \\cdot g$ från a). Tyngdfaktorn kan strykas, så metallbitens volym är
+
+$$
+\\rho_\\mathrm{v} \\cdot g \\cdot V = \\Delta m \\cdot g \\quad\\Leftrightarrow\\quad V = \\dfrac{\\Delta m}{\\rho_\\mathrm{v}}
+$$
+
+Metallbitens massa fås ur tyngdkraften, $m = \\dfrac{F_\\mathrm{G}}{g}$. Densiteten är massan per volym:
+
+$$
+\\rho_\\mathrm{metall} = \\dfrac{m}{V} = \\dfrac{F_\\mathrm{G}}{g} \\cdot \\dfrac{\\rho_\\mathrm{v}}{\\Delta m} = \\dfrac{F_\\mathrm{G} \\cdot \\rho_\\mathrm{v}}{g \\cdot \\Delta m}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F_\\mathrm{G} = 2{,}65\\ \\mathrm{N} \\\\
+\\rho_\\mathrm{v} = 998\\ \\mathrm{kg/m^3} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+\\Delta m = 0{,}0980\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$
+\\rho_\\mathrm{metall} = \\dfrac{2{,}65 \\cdot 998}{9{,}82 \\cdot 0{,}0980} = 2\\,748{,}1\\ldots\\ \\mathrm{kg/m^3} \\approx 2{,}75 \\cdot 10^{3}\\ \\mathrm{kg/m^3}
+$$
+
+Rimlighet: tyngdkraften 2,65 N är knappt tre gånger så stor som lyftkraften 0,96 N, så metallen ska vara knappt tre gånger så tät som vattnet. Värdet ligger nära aluminiums densitet.
+
+**Svar:** Metallens densitet är cirka 2 750 kg/m³.
+
+**c)** När metallbiten vilar på botten bär dynamometern ingenting längre. Metallbiten trycker då på vattnet med lyftkraftens motkraft, som i a), och på bägarens botten med resten av sin tyngd. Tillsammans blir det hela tyngden, så vågen visar bägaren, vattnet och hela metallbiten. Metallbitens massa:
+
+$$
+m = \\dfrac{F_\\mathrm{G}}{g} = \\dfrac{2{,}65}{9{,}82} = 0{,}26985\\ldots\\ \\mathrm{kg} = 269{,}85\\ldots\\ \\mathrm{g}
+$$
+
+$$
+850{,}0 + 269{,}85\\ldots = 1\\,119{,}85\\ldots\\ \\mathrm{g} \\approx 1\\,120\\ \\mathrm{g}
+$$
+
+Dynamometerns värde har tre värdesiffror, så metallbitens massa är bara känd på ungefär ett halvt gram när. Svaret avrundas därför till hela gram.
+
+**Svar:** Vågen visar cirka 1 120 g.`,
+        },
+        {
+            level: 3,
+            question: `I en bägare ligger ett tjockt lager matolja med densiteten 800 kg/m³ ovanpå vatten med densiteten 998 kg/m³. En kub av plast med densiteten 940 kg/m³ släpps ned i bägaren. Den lägger sig så att översidan är täckt av olja och en del av kuben är nere i vattnet. Hur stor andel av kubens volym är i vattnet? Ange svaret i procent.`,
+            answer: { value: 71, unit: '%', tol: 0.03 },
+            solution: `Kuben tränger undan både vatten och olja. Enligt Arkimedes princip är lyftkraften lika stor som tyngden av all undanträngd vätska, alltså summan av vattnets och oljans bidrag.
+
+Låt kubens volym vara $V$ och andelen i vattnet $x$. Volymen i vattnet är då $x \\cdot V$ och volymen i oljan $(1 - x) \\cdot V$. Kuben flyter i vila, så lyftkraften är lika stor som tyngdkraften:
+
+$$
+\\rho_\\mathrm{v} \\cdot g \\cdot x \\cdot V + \\rho_\\mathrm{o} \\cdot g \\cdot (1 - x) \\cdot V = \\rho_\\mathrm{k} \\cdot g \\cdot V
+$$
+
+Faktorn $g \\cdot V$ finns i varje term och kan strykas. Kubens storlek spelar alltså ingen roll:
+
+$$
+\\rho_\\mathrm{v} \\cdot x + \\rho_\\mathrm{o} \\cdot (1 - x) = \\rho_\\mathrm{k}
+\\quad\\Leftrightarrow\\quad
+x \\cdot (\\rho_\\mathrm{v} - \\rho_\\mathrm{o}) = \\rho_\\mathrm{k} - \\rho_\\mathrm{o}
+\\quad\\Leftrightarrow\\quad
+x = \\dfrac{\\rho_\\mathrm{k} - \\rho_\\mathrm{o}}{\\rho_\\mathrm{v} - \\rho_\\mathrm{o}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\rho_\\mathrm{k} = 940\\ \\mathrm{kg/m^3} \\\\
+\\rho_\\mathrm{o} = 800\\ \\mathrm{kg/m^3} \\\\
+\\rho_\\mathrm{v} = 998\\ \\mathrm{kg/m^3}
+\\end{array} \\right]
+$$
+
+$$
+x = \\dfrac{940 - 800}{998 - 800} = \\dfrac{140}{198} = 0{,}7070\\ldots \\approx 71\\ \\%
+$$
+
+Rimlighet: kubens densitet ligger mellan oljans och vattnets men närmare vattnets, så den ska ligga mest i vattnet. Kontroll i gränsfallen: hade kuben haft oljans densitet hade formeln gett $x = 0$, och med vattnets densitet $x = 1$.
+
+**Svar:** Cirka 71 % av kubens volym är i vattnet.`,
+        },
+        {
+            level: 3,
+            question: `En areometer är en flytande glasstav med en tyngd i nederänden, som används för att mäta en vätskas densitet. Modellera areometern som en rak stav med konstant tvärsnittsarea som flyter lodrätt. I vatten med densiteten 998 kg/m³ är den nedsänkt 12,0 cm, och i en okänd vätska är den nedsänkt 13,6 cm, se figuren.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="22 8 353 258" width="479" height="350" role="img" aria-label="Två mätglas. I vänstra glaset med vatten flyter en areometer, en rak stav med en tyngd i nederänden, och den är nedsänkt 12,0 cm. I högra glaset med en okänd vätska är samma areometer nedsänkt 13,6 cm." style="max-width:479px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="40" y="82" width="80" height="156" fill="#c7e3f1"/><line x1="40" y1="82" x2="120" y2="82" stroke="#4a5563" stroke-width="1.2"/><polyline points="40,44 40,238 120,238 120,44" fill="none" stroke="#5b86a8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="73" y="25.6" width="14" height="169.2" rx="3" fill="#f4f6f8" stroke="#0f1620" stroke-width="1.3"/><rect x="73" y="178.8" width="14" height="16" rx="3" fill="#59606b" stroke="#0f1620" stroke-width="1.3"/><line x1="76" y1="47.6" x2="84" y2="47.6" stroke="#4a5563" stroke-width="0.8"/><line x1="76" y1="59.6" x2="84" y2="59.6" stroke="#4a5563" stroke-width="0.8"/><line x1="76" y1="71.6" x2="84" y2="71.6" stroke="#4a5563" stroke-width="0.8"/><line x1="76" y1="83.6" x2="84" y2="83.6" stroke="#4a5563" stroke-width="0.8"/><line x1="76" y1="95.6" x2="84" y2="95.6" stroke="#4a5563" stroke-width="0.8"/><line x1="76" y1="107.6" x2="84" y2="107.6" stroke="#4a5563" stroke-width="0.8"/><line x1="76" y1="119.6" x2="84" y2="119.6" stroke="#4a5563" stroke-width="0.8"/><line x1="76" y1="131.6" x2="84" y2="131.6" stroke="#4a5563" stroke-width="0.8"/><line x1="89" y1="194.8" x2="138" y2="194.8" stroke="#4a5563" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="120" y1="82" x2="138" y2="82" stroke="#4a5563" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="134" y1="89" x2="134" y2="187.8" stroke="#4a5563" stroke-width="1.3"/><polygon points="134,82 130.8,89 137.2,89" fill="#4a5563"/><polygon points="134,194.8 130.8,187.8 137.2,187.8" fill="#4a5563"/><text x="141" y="143.4" font-size="14" fill="#4a5563">12,0 cm</text><text x="80" y="258" font-size="14" fill="#4a5563" text-anchor="middle">Vatten</text><rect x="210" y="82" width="80" height="156" fill="#efe1b4"/><line x1="210" y1="82" x2="290" y2="82" stroke="#4a5563" stroke-width="1.2"/><polyline points="210,44 210,238 290,238 290,44" fill="none" stroke="#5b86a8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="243" y="40.6" width="14" height="169.2" rx="3" fill="#f4f6f8" stroke="#0f1620" stroke-width="1.3"/><rect x="243" y="193.8" width="14" height="16" rx="3" fill="#59606b" stroke="#0f1620" stroke-width="1.3"/><line x1="246" y1="62.6" x2="254" y2="62.6" stroke="#4a5563" stroke-width="0.8"/><line x1="246" y1="74.6" x2="254" y2="74.6" stroke="#4a5563" stroke-width="0.8"/><line x1="246" y1="86.6" x2="254" y2="86.6" stroke="#4a5563" stroke-width="0.8"/><line x1="246" y1="98.6" x2="254" y2="98.6" stroke="#4a5563" stroke-width="0.8"/><line x1="246" y1="110.6" x2="254" y2="110.6" stroke="#4a5563" stroke-width="0.8"/><line x1="246" y1="122.6" x2="254" y2="122.6" stroke="#4a5563" stroke-width="0.8"/><line x1="246" y1="134.6" x2="254" y2="134.6" stroke="#4a5563" stroke-width="0.8"/><line x1="246" y1="146.6" x2="254" y2="146.6" stroke="#4a5563" stroke-width="0.8"/><line x1="259" y1="209.8" x2="308" y2="209.8" stroke="#4a5563" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="290" y1="82" x2="308" y2="82" stroke="#4a5563" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="304" y1="89" x2="304" y2="202.8" stroke="#4a5563" stroke-width="1.3"/><polygon points="304,82 300.8,89 307.2,89" fill="#4a5563"/><polygon points="304,209.8 300.8,202.8 307.2,202.8" fill="#4a5563"/><text x="311" y="150.9" font-size="14" fill="#4a5563">13,6 cm</text><text x="250" y="258" font-size="14" fill="#4a5563" text-anchor="middle">Okänd vätska</text></svg>
+
+a) Bestäm den okända vätskans densitet. Ange svaret i kg/m³.<br>b) På areometerns skala ska densiteterna 800, 900, 1 000 och 1 100 kg/m³ markeras. Visa att markeringarna inte hamnar på lika stort avstånd från varandra, och avgör om de hamnar tätare vid låga eller vid höga densiteter.
+
+*Ange densiteten (a) som ditt numeriska svar i kg/m³.*`,
+            answer: { value: 881, unit: 'kg/m³', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 881, unit: 'kg/m³', tol: 0.02, etikett: '$\\rho =$' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Låt areometerns massa vara $m$, tvärsnittsarean $A$ och djupet den är nedsänkt $h$. Den undanträngda volymen är $V = A \\cdot h$. Areometern flyter, så
+
+$$
+\\rho \\cdot g \\cdot A \\cdot h = m \\cdot g \\quad\\Leftrightarrow\\quad h = \\dfrac{m}{\\rho \\cdot A}
+$$
+
+Massan och arean är desamma i båda vätskorna, så produkten $\\rho \\cdot h = \\dfrac{m}{A}$ är densamma:
+
+$$
+\\rho_\\mathrm{x} \\cdot h_\\mathrm{x} = \\rho_\\mathrm{v} \\cdot h_\\mathrm{v}
+\\quad\\Leftrightarrow\\quad
+\\rho_\\mathrm{x} = \\dfrac{\\rho_\\mathrm{v} \\cdot h_\\mathrm{v}}{h_\\mathrm{x}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\rho_\\mathrm{v} = 998\\ \\mathrm{kg/m^3} \\\\
+h_\\mathrm{v} = 12{,}0\\ \\mathrm{cm} \\\\
+h_\\mathrm{x} = 13{,}6\\ \\mathrm{cm}
+\\end{array} \\right]
+$$
+
+$$
+\\rho_\\mathrm{x} = \\dfrac{998 \\cdot 12{,}0}{13{,}6} = 880{,}58\\ldots\\ \\mathrm{kg/m^3} \\approx 881\\ \\mathrm{kg/m^3}
+$$
+
+Rimlighet: areometern sjunker djupare i den okända vätskan, så vätskan ska ha lägre densitet än vatten, och det är den.
+
+**Svar:** Densiteten är cirka 881 kg/m³.
+
+**b)** Ur a) gäller $h = \\dfrac{m}{\\rho \\cdot A}$, så djupet är omvänt proportionellt mot densiteten. Konstanten $\\dfrac{m}{A}$ fås ur mätningen i vatten:
+
+$$
+\\dfrac{m}{A} = \\rho_\\mathrm{v} \\cdot h_\\mathrm{v} = 998 \\cdot 0{,}120 = 119{,}76\\ \\mathrm{kg/m^2}
+$$
+
+Djupet för varje markering, $h = \\dfrac{119{,}76}{\\rho}$:
+
+| Densitet (kg/m³) | Djup (cm) |
+|---|---|
+| 800 | 14,97 |
+| 900 | 13,31 |
+| 1 000 | 11,98 |
+| 1 100 | 10,89 |
+
+Avstånden mellan markeringarna blir
+
+$$
+14{,}97 - 13{,}31 = 1{,}66\\ \\mathrm{cm}
+$$
+
+$$
+13{,}31 - 11{,}98 = 1{,}33\\ \\mathrm{cm}
+$$
+
+$$
+11{,}98 - 10{,}89 = 1{,}09\\ \\mathrm{cm}
+$$
+
+Densiteten ökar i lika stora steg, men avstånden minskar. Det beror på att $h$ är proportionellt mot $\\dfrac{1}{\\rho}$ och inte mot $\\rho$: samma ökning av densiteten ändrar djupet mindre ju större densiteten redan är.
+
+**Svar:** Markeringarna hamnar inte på lika stort avstånd. De hamnar tätare vid höga densiteter.`,
+        },
+        {
+            level: 3,
+            question: `Du vill bygga en flotte av tomma, korkade PET-flaskor som surras fast i en ram av trä. Varje flaska har volymen 1,5 liter och massan 40 g. Träramen har massan 12 kg, och träets densitet är 600 kg/m³. Hur många flaskor behövs minst för att flotten ska bära dig, 70 kg, i sötvatten med densiteten 998 kg/m³? Bortse från repen.`,
+            answer: { value: 43, unit: 'flaskor', tol: 0.01 },
+            solution: `Flotten bär som mest när både flaskorna och ramen är helt under ytan. Då ger både flaskorna och träramen lyftkraft, och både flaskorna, ramen och du har tyngd. Låt antalet flaskor vara $N$.
+
+Ramens volym:
+
+$$
+V_\\mathrm{ram} = \\dfrac{m_\\mathrm{ram}}{\\rho_\\mathrm{trä}} = \\dfrac{12}{600} = 0{,}020\\ \\mathrm{m^3}
+$$
+
+Villkoret för att flotten inte sjunker är att den största möjliga lyftkraften är minst lika stor som tyngdkraften:
+
+$$
+\\rho_\\mathrm{v} \\cdot g \\cdot (N \\cdot V_\\mathrm{f} + V_\\mathrm{ram}) \\geq (m_\\mathrm{du} + m_\\mathrm{ram} + N \\cdot m_\\mathrm{f}) \\cdot g
+$$
+
+Tyngdfaktorn stryks. Termerna med $N$ samlas i vänsterledet:
+
+$$
+N \\cdot (\\rho_\\mathrm{v} \\cdot V_\\mathrm{f} - m_\\mathrm{f}) \\geq m_\\mathrm{du} + m_\\mathrm{ram} - \\rho_\\mathrm{v} \\cdot V_\\mathrm{ram}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\rho_\\mathrm{v} = 998\\ \\mathrm{kg/m^3} \\\\
+V_\\mathrm{f} = 1{,}5\\ \\mathrm{liter} = 0{,}0015\\ \\mathrm{m^3} \\\\
+m_\\mathrm{f} = 0{,}040\\ \\mathrm{kg} \\\\
+m_\\mathrm{du} + m_\\mathrm{ram} = 70 + 12 = 82\\ \\mathrm{kg} \\\\
+V_\\mathrm{ram} = 0{,}020\\ \\mathrm{m^3}
+\\end{array} \\right]
+$$
+
+Varje flaska kan bära $998 \\cdot 0{,}0015 - 0{,}040 = 1{,}497 - 0{,}040 = 1{,}457\\ \\mathrm{kg}$, och ramens lyftkraft motsvarar $998 \\cdot 0{,}020 = 19{,}96\\ \\mathrm{kg}$:
+
+$$
+N \\geq \\dfrac{82 - 19{,}96}{1{,}457} = \\dfrac{62{,}04}{1{,}457} = 42{,}58\\ldots
+$$
+
+Antalet flaskor måste vara ett heltal, och 42 flaskor räcker inte, så vi avrundar uppåt till 43.
+
+Rimlighet: en flaska bär ungefär 1,5 kg, så 70 kg kräver i grova drag 47 flaskor. Ramen bär sig själv och lite till, eftersom träet har lägre densitet än vatten, så det behövs några flaskor färre. Med 43 flaskor flyter flotten bara precis, och i praktiken vill man ha marginal.
+
+**Svar:** Det behövs minst 43 flaskor.`,
+        },
+        {
+            level: 3,
+            question: `En träkloss med volymen 2,0 dm³ och densiteten 650 kg/m³ flyter i vatten med densiteten 998 kg/m³. Man vill få klossen att flyta precis helt nedsänkt, med översidan i vattenytan, med hjälp av en järnbit. I fall 1 läggs järnbiten ovanpå klossen, och i fall 2 hänger den i ett snöre under klossen, se figuren. Järn har densiteten 7 870 kg/m³.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="10 16 330 180" width="448" height="244" role="img" aria-label="Två bassänger med vatten. I fall 1 flyter en träkloss med översidan precis i vattenytan och en järnbit ligger ovanpå klossen. I fall 2 flyter en likadan träkloss med översidan i vattenytan och en järnbit hänger i ett snöre under klossen." style="max-width:448px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="20" y="70" width="145" height="118" fill="#c7e3f1"/><line x1="20" y1="70" x2="165" y2="70" stroke="#7fb4d4" stroke-width="1.4"/><polyline points="20,46 20,188 165,188 165,46" fill="none" stroke="#5b86a8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="47" y="70" width="90" height="44" fill="#c9844f" stroke="#7a4b26" stroke-width="1.4"/><path d="M 52 82 Q 82 79 107 82 T 132 82" fill="none" stroke="#a8693a" stroke-width="0.9"/><path d="M 52 93 Q 82 90 107 93 T 132 93" fill="none" stroke="#a8693a" stroke-width="0.9"/><path d="M 52 104 Q 82 101 107 104 T 132 104" fill="none" stroke="#a8693a" stroke-width="0.9"/><rect x="76" y="56" width="32" height="14" rx="1.5" fill="#59606b" stroke="#0f1620" stroke-width="1.2"/><text x="92" y="34" font-size="14" fill="#4a5563" text-anchor="middle">Fall 1</text><rect x="185" y="70" width="145" height="118" fill="#c7e3f1"/><line x1="185" y1="70" x2="330" y2="70" stroke="#7fb4d4" stroke-width="1.4"/><polyline points="185,46 185,188 330,188 330,46" fill="none" stroke="#5b86a8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="212" y="70" width="90" height="44" fill="#c9844f" stroke="#7a4b26" stroke-width="1.4"/><path d="M 217 82 Q 247 79 272 82 T 297 82" fill="none" stroke="#a8693a" stroke-width="0.9"/><path d="M 217 93 Q 247 90 272 93 T 297 93" fill="none" stroke="#a8693a" stroke-width="0.9"/><path d="M 217 104 Q 247 101 272 104 T 297 104" fill="none" stroke="#a8693a" stroke-width="0.9"/><line x1="257" y1="114" x2="257" y2="140" stroke="#0f1620" stroke-width="1.2"/><rect x="241" y="140" width="32" height="14" rx="1.5" fill="#59606b" stroke="#0f1620" stroke-width="1.2"/><text x="257" y="34" font-size="14" fill="#4a5563" text-anchor="middle">Fall 2</text></svg>
+
+a) Hur stor massa måste järnbiten ha i fall 1? Ange svaret i kg.<br>b) Hur stor massa måste järnbiten ha i fall 2? Ange svaret i kg.<br>c) Visa att kvoten mellan järnbitarnas massor i fall 2 och fall 1 bara beror på järnets och vattnets densitet, och inte på klossen.
+
+*Ange massan i fall 1 (a) som ditt numeriska svar i kg.*`,
+            answer: { value: 0.70, unit: 'kg', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 0.70, unit: 'kg', tol: 0.03, etikett: '$m_1 =$' },
+                { del: 'b', value: 0.80, unit: 'kg', tol: 0.03, etikett: '$m_2 =$' },
+                { del: 'c' },
+            ],
+            solution: `Låt klossens volym vara $V_\\mathrm{t}$ och dess densitet $\\rho_\\mathrm{t}$, så att klossens massa är $\\rho_\\mathrm{t} \\cdot V_\\mathrm{t}$.
+
+**a)** I fall 1 ligger järnbiten ovanför ytan och tränger inte undan något vatten. Bara klossen tränger undan vatten. Kraftjämvikt:
+
+$$
+\\rho_\\mathrm{v} \\cdot g \\cdot V_\\mathrm{t} = (\\rho_\\mathrm{t} \\cdot V_\\mathrm{t} + m_1) \\cdot g
+\\quad\\Leftrightarrow\\quad
+m_1 = V_\\mathrm{t} \\cdot (\\rho_\\mathrm{v} - \\rho_\\mathrm{t})
+$$
+
+$$
+\\left[ \\begin{array}{l}
+V_\\mathrm{t} = 2{,}0\\ \\mathrm{dm^3} = 0{,}0020\\ \\mathrm{m^3} \\\\
+\\rho_\\mathrm{v} = 998\\ \\mathrm{kg/m^3} \\\\
+\\rho_\\mathrm{t} = 650\\ \\mathrm{kg/m^3}
+\\end{array} \\right]
+$$
+
+$$
+m_1 = 0{,}0020 \\cdot (998 - 650) = 0{,}0020 \\cdot 348 = 0{,}696\\ \\mathrm{kg} \\approx 0{,}70\\ \\mathrm{kg}
+$$
+
+**Svar:** Järnbiten måste ha massan cirka 0,70 kg.
+
+**b)** I fall 2 är järnbiten också under vattnet och får en egen lyftkraft. Dess volym är $\\dfrac{m_2}{\\rho_\\mathrm{j}}$. Kraftjämvikt för klossen och järnbiten tillsammans:
+
+$$
+\\rho_\\mathrm{v} \\cdot g \\cdot \\left( V_\\mathrm{t} + \\dfrac{m_2}{\\rho_\\mathrm{j}} \\right) = (\\rho_\\mathrm{t} \\cdot V_\\mathrm{t} + m_2) \\cdot g
+$$
+
+Tyngdfaktorn stryks, och termerna med $m_2$ samlas i högerledet:
+
+$$
+V_\\mathrm{t} \\cdot (\\rho_\\mathrm{v} - \\rho_\\mathrm{t}) = m_2 \\cdot \\left( 1 - \\dfrac{\\rho_\\mathrm{v}}{\\rho_\\mathrm{j}} \\right)
+\\quad\\Leftrightarrow\\quad
+m_2 = \\dfrac{V_\\mathrm{t} \\cdot (\\rho_\\mathrm{v} - \\rho_\\mathrm{t})}{1 - \\dfrac{\\rho_\\mathrm{v}}{\\rho_\\mathrm{j}}}
+$$
+
+Täljaren är just $m_1$ från a), alltså 0,696 kg:
+
+$$
+m_2 = \\dfrac{0{,}696}{1 - \\dfrac{998}{7\\,870}} = \\dfrac{0{,}696}{0{,}87318\\ldots} = 0{,}79707\\ldots\\ \\mathrm{kg} \\approx 0{,}80\\ \\mathrm{kg}
+$$
+
+Rimlighet: under vattnet bär lyftkraften en del av järnbitens tyngd, så det behövs en tyngre järnbit för att få samma effekt.
+
+**Svar:** Järnbiten måste ha massan cirka 0,80 kg.
+
+**c)** I b) syntes att täljaren är $m_1$, alltså $m_2 = \\dfrac{m_1}{1 - \\dfrac{\\rho_\\mathrm{v}}{\\rho_\\mathrm{j}}}$. Kvoten blir
+
+$$
+\\dfrac{m_2}{m_1} = \\dfrac{1}{1 - \\dfrac{\\rho_\\mathrm{v}}{\\rho_\\mathrm{j}}} = \\dfrac{\\rho_\\mathrm{j}}{\\rho_\\mathrm{j} - \\rho_\\mathrm{v}}
+$$
+
+Klossens volym och densitet har strukits bort, och bara järnets och vattnets densitet finns kvar. Med talen i uppgiften är kvoten $\\dfrac{7\\,870}{7\\,870 - 998} = \\dfrac{7\\,870}{6\\,872} = 1{,}145\\ldots$, alltså behövs ungefär 15 % mer järn när järnbiten hänger under klossen.
+
+**Svar:** Kvoten är $\\dfrac{m_2}{m_1} = \\dfrac{\\rho_\\mathrm{j}}{\\rho_\\mathrm{j} - \\rho_\\mathrm{v}}$, som bara innehåller järnets och vattnets densitet.`,
         },
     ],
 
@@ -25435,7 +32979,7 @@ $$
 
 **Svar:** Ca 26 mN.
 
-**Generell slutsats:** Heliumets densitet är ungefär en sjundedel av luftens (0,178 vs 1,293 kg/m³), så heliumet bidrar nästan inget till ballongens totala tyngd — det är därför ballongen kan flyga.`,
+**Generell slutsats:** Heliumets densitet är ungefär en sjundedel av luftens (0,178 vs 1,293 kg/m³), så heliumet bidrar nästan inget till ballongens totala tyngd. Det är därför ballongen kan flyga.`,
         },
         {
             level: 1,
@@ -25454,7 +32998,7 @@ $$
 - Helium (0,178 kg/m³): ca 7 ggr lägre densitet än luft → stiger.
 - Argon (1,78 kg/m³): tyngre än luft → sjunker.
 
-**Svar:** Alternativ C — heliumet stiger.`,
+**Svar:** Alternativ C, heliumet stiger.`,
         },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
@@ -25462,7 +33006,7 @@ $$
             level: 2,
             question: `Algot håller i en heliumballong med snöre. Ballongen rymmer 11 liter helium och själva ballonghöljet väger 4,0 g. Hur stor är **spännkraften** i snöret? Räkna med $\\rho_\\mathrm{luft} = 1{,}293\\ \\mathrm{kg/m^3}$, $\\rho_\\mathrm{He} = 0{,}178\\ \\mathrm{kg/m^3}$ och $g = 9{,}82\\ \\mathrm{N/kg}$.`,
             answer: { value: 0.0811, unit: 'N', tol: 0.05 },
-            solution: `Ballongen är i jämvikt — lyftkraften uppåt balanseras av tyngdkraften nedåt (ballonghölje + helium) **plus** spännkraften i snöret. För en stillahängande ballong:
+            solution: `Ballongen är i jämvikt: lyftkraften uppåt balanseras av tyngdkraften nedåt (ballonghölje + helium) **plus** spännkraften i snöret. För en stillahängande ballong:
 
 $$
 F_\\mathrm{S} = F_\\mathrm{L} - F_\\mathrm{G}
@@ -25495,7 +33039,7 @@ $$
 
 **Svar:** Ca 81 mN.
 
-**Generell slutsats:** Tyngdkraften från höljet (4 g) dominerar jämfört med heliumets vikt (knappt 2 g). Om man tar bort höljet skulle ballongen lyfta nästan dubbelt så mycket — men då har man förstås inget att fylla med helium i!`,
+**Generell slutsats:** Tyngdkraften från höljet (4 g) dominerar jämfört med heliumets vikt (knappt 2 g). Om man tar bort höljet skulle ballongen lyfta nästan dubbelt så mycket, men då har man förstås inget att fylla med helium i!`,
         },
         {
             level: 2,
@@ -25528,7 +33072,7 @@ $$
 
 **Svar:** Ca 0,11 m³ = 108 liter helium.
 
-**Generell slutsats:** Den effektiva "lyftande densiteten" hos en gas är skillnaden mellan luftens och gasens densitet, $\\rho_\\mathrm{luft} - \\rho_\\mathrm{gas}$. För helium är detta ca 1,1 kg/m³ — alltså lyfter 1 m³ helium ungefär 1,1 kg. För varmluft är skillnaden mycket mindre (ca 0,3 kg/m³), vilket är därför varmluftsballonger måste vara så enorma.`,
+**Generell slutsats:** Den effektiva "lyftande densiteten" hos en gas är skillnaden mellan luftens och gasens densitet, $\\rho_\\mathrm{luft} - \\rho_\\mathrm{gas}$. För helium är detta ca 1,1 kg/m³, alltså lyfter 1 m³ helium ungefär 1,1 kg. För varmluft är skillnaden mycket mindre (ca 0,3 kg/m³), vilket är därför varmluftsballonger måste vara så enorma.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
@@ -25570,9 +33114,614 @@ $$
 T_2 = T_1 \\cdot \\frac{\\rho_1}{\\rho_2} = 273 \\cdot \\frac{1{,}293}{1{,}063} \\approx 332\\ \\mathrm{K} = 59\\ ^{\\circ}\\mathrm{C}
 $$
 
-**Svar:** a) Varmluften behöver ha densiteten 1,063 kg/m³. b) Det motsvarar en temperatur på ca 332 K = 59 °C — bara 60 °C varmare än omgivningen.
+**Svar:** a) Varmluften behöver ha densiteten 1,063 kg/m³. b) Det motsvarar en temperatur på ca 332 K = 59 °C, bara 60 °C varmare än omgivningen.
 
-**Generell slutsats:** Det här visar varför varmluftballonger inte behöver vara orimligt heta — bara några tiotals grader varmare än omgivningen räcker. Bränslet i brännaren används mest för att kompensera värmeförluster genom ballongtyget, inte för att skapa stora temperaturskillnader.`,
+**Generell slutsats:** Det här visar varför varmluftballonger inte behöver vara orimligt heta: bara några tiotals grader varmare än omgivningen räcker. Bränslet i brännaren används mest för att kompensera värmeförluster genom ballongtyget, inte för att skapa stora temperaturskillnader.`,
+        },
+        {
+            level: 1,
+            question: `Ett kylskåp har formen av ett rätblock med måtten $0{,}60\\ \\mathrm{m} \\times 0{,}60\\ \\mathrm{m} \\times 1{,}8\\ \\mathrm{m}$. Hur stor lyftkraft verkar på kylskåpet från den omgivande luften? Räkna med $\\rho_\\text{luft} = 1{,}293\\ \\mathrm{kg/m^3}$ och $g = 9{,}82\\ \\mathrm{N/kg}$. Ange svaret i N.`,
+            answer: { value: 8.2, unit: 'N', tol: 0.02 },
+            solution: `Arkimedes princip gäller även för gaser: lyftkraften är lika stor som tyngden av den luft som kylskåpet tränger undan. Vi behöver därför kylskåpets volym.
+
+$$
+V = 0{,}60 \\cdot 0{,}60 \\cdot 1{,}8 = 0{,}648\\ \\mathrm{m^3}
+$$
+
+$$
+F_\\mathrm{L} = \\rho_\\text{luft} \\cdot V \\cdot g
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\rho_\\text{luft} = 1{,}293\\ \\mathrm{kg/m^3} \\\\
+V = 0{,}648\\ \\mathrm{m^3} \\\\
+g = 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+F_\\mathrm{L} = 1{,}293 \\cdot 0{,}648 \\cdot 9{,}82 = 8{,}2278\\ldots\\ \\mathrm{N} \\approx 8{,}2\\ \\mathrm{N}
+$$
+
+**Svar:** 8,2 N`,
+        },
+        {
+            level: 1,
+            question: `Ett klassrum är 8,0 m långt, 6,0 m brett och 3,0 m högt. Hur stor massa har luften i rummet? Räkna med $\\rho_\\text{luft} = 1{,}293\\ \\mathrm{kg/m^3}$. Ange svaret i kg.`,
+            answer: { value: 190, unit: 'kg', tol: 0.03 },
+            solution: `Luftens massa får vi ur densiteten och rummets volym, $m = \\rho \\cdot V$. Först volymen:
+
+$$
+V = 8{,}0 \\cdot 6{,}0 \\cdot 3{,}0 = 144\\ \\mathrm{m^3}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\rho_\\text{luft} = 1{,}293\\ \\mathrm{kg/m^3} \\\\
+V = 144\\ \\mathrm{m^3}
+\\end{array} \\right]
+$$
+
+$$
+m = \\rho_\\text{luft} \\cdot V = 1{,}293 \\cdot 144 = 186{,}192\\ \\mathrm{kg} \\approx 190\\ \\mathrm{kg}
+$$
+
+Måtten är givna med två värdesiffror, så svaret avrundas till två värdesiffror. Luften i ett vanligt klassrum väger alltså ungefär lika mycket som två till tre vuxna människor.
+
+**Svar:** Cirka 190 kg`,
+        },
+        {
+            level: 1,
+            question: `Varför kan en varmluftsballong stiga?`,
+            choices: [
+                `Varm luft strävar alltid uppåt, oavsett vad som finns omkring den.`,
+                `Den undanträngda kalla luften väger mer än ballongen, korgen och varmluften tillsammans.`,
+                `Brännarens låga trycker ballongen uppåt på samma sätt som en raketmotor.`,
+                `Varm luft har högre densitet än kall luft och ger därför en större lyftkraft.`,
+            ],
+            correct: 1,
+            solution: `Lyftkraften på ballongen är lika stor som tyngden av den kalla luft som ballongen tränger undan. Varm luft har **lägre** densitet än kall luft, så luften inne i ballongen väger mindre än lika mycket kall luft. Om tyngden av den undanträngda kalla luften är större än tyngden av ballong, korg och varmluft tillsammans blir den resulterande kraften riktad uppåt.
+
+- Varm luft stiger inte av sig själv i tomma intet. Den stiger bara därför att den omgivande kalla luften är tätare.
+- Brännaren värmer luften, men lågan trycker inte ballongen uppåt.
+- Varm luft har lägre densitet, inte högre. Lyftkraften beror dessutom på den omgivande luftens densitet, inte på varmluftens.
+
+**Svar:** Alternativ B`,
+        },
+        {
+            level: 1,
+            question: `I demonstrationen "Väga luft" pumpar en elev ut luft ur en e-kolv och väger kolven före och efter. Sedan öppnas ventilen under vatten, och den volym vatten som strömmar in mäts. Mätvärdena står i tabellen.
+
+| Mätning | Värde |
+|---|---|
+| E-kolvens massa före utpumpningen | 152,64 g |
+| E-kolvens massa efter utpumpningen | 152,35 g |
+| Volym vatten som strömmade in | 225 ml |
+
+Bestäm luftens densitet. Ange svaret i kg/m³.`,
+            answer: { value: 1.3, unit: 'kg/m³', tol: 0.05 },
+            solution: `Den utpumpade luftens massa är skillnaden mellan de två vägningarna. Vattnet som strömmar in fyller just den volym som den utpumpade luften tog upp, så vattnets volym är luftens volym.
+
+$$
+\\rho = \\frac{m}{V}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m = 152{,}64 - 152{,}35 = 0{,}29\\ \\mathrm{g} = 2{,}9 \\cdot 10^{-4}\\ \\mathrm{kg} \\\\
+V = 225\\ \\mathrm{ml} = 2{,}25 \\cdot 10^{-4}\\ \\mathrm{m^3}
+\\end{array} \\right]
+$$
+
+$$
+\\rho = \\frac{2{,}9 \\cdot 10^{-4}}{2{,}25 \\cdot 10^{-4}} = 1{,}288\\ldots\\ \\mathrm{kg/m^3} \\approx 1{,}3\\ \\mathrm{kg/m^3}
+$$
+
+Massskillnaden har bara två värdesiffror, så svaret får två värdesiffror. Det stämmer väl med tabellvärdet 1,293 kg/m³.
+
+**Svar:** 1,3 kg/m³`,
+        },
+        {
+            level: 2,
+            question: `En väderballong fylls med $3{,}5\\ \\mathrm{m^3}$ vätgas, som har densiteten $0{,}0899\\ \\mathrm{kg/m^3}$. Ballonghöljet och instrumentlådan som hänger under ballongen väger tillsammans 1,8 kg.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 268" style="max-width:339px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif" role="img" aria-label="En stor ljus väderballong med en instrumentlåda som hänger i ett snöre under den."><circle cx="120" cy="92" r="72" fill="#ece6da" stroke="#9a8f7d" stroke-width="1.6"/><ellipse cx="94" cy="62" rx="18" ry="26" fill="#f8f5ef" opacity="0.85"/><path d="M 112 162 L 128 162 L 124 172 L 116 172 Z" fill="#d8cfbf" stroke="#9a8f7d" stroke-width="1.2"/><line x1="120" y1="172" x2="120" y2="226" stroke="#6b5f4f" stroke-width="1.3"/><rect x="104" y="226" width="32" height="26" rx="2" fill="#dfe4ea" stroke="#5b6570" stroke-width="1.4"/><rect x="110" y="232" width="20" height="7" rx="1" fill="#5b6570"/><line x1="120" y1="252" x2="120" y2="262" stroke="#5b6570" stroke-width="1.2"/><text x="120" y="97" text-anchor="middle" font-size="14" fill="#0f1620">vätgas</text><text x="144" y="244" font-size="13" fill="#0f1620">instrumentlåda</text></svg>
+
+Bestäm den resulterande kraften på ballongen i det ögonblick den släpps vid marken. Räkna med $\\rho_\\text{luft} = 1{,}293\\ \\mathrm{kg/m^3}$ och $g = 9{,}82\\ \\mathrm{N/kg}$, och försumma instrumentlådans volym. Ange svaret i N.`,
+            answer: { value: 24, unit: 'N', tol: 0.03 },
+            solution: `På ballongen verkar lyftkraften $F_\\mathrm{L}$ uppåt och tyngdkraften $F_\\mathrm{G}$ nedåt. Tyngden gäller höljet, instrumentlådan **och** vätgasen. Den resulterande kraften är
+
+$$
+F_\\mathrm{R} = F_\\mathrm{L} - F_\\mathrm{G}
+$$
+
+**Lyftkraften** från den undanträngda luften:
+
+$$
+F_\\mathrm{L} = \\rho_\\text{luft} \\cdot V \\cdot g = 1{,}293 \\cdot 3{,}5 \\cdot 9{,}82 = 44{,}440\\ldots\\ \\mathrm{N}
+$$
+
+**Tyngdkraften.** Vätgasens massa är
+
+$$
+m_\\text{vätgas} = \\rho_\\text{vätgas} \\cdot V = 0{,}0899 \\cdot 3{,}5 = 0{,}31465\\ \\mathrm{kg}
+$$
+
+$$
+F_\\mathrm{G} = (m_\\text{hölje} + m_\\text{vätgas}) \\cdot g = (1{,}8 + 0{,}31465) \\cdot 9{,}82 = 20{,}766\\ldots\\ \\mathrm{N}
+$$
+
+**Resulterande kraft:**
+
+$$
+F_\\mathrm{R} = 44{,}440\\ldots - 20{,}766\\ldots = 23{,}674\\ldots\\ \\mathrm{N} \\approx 24\\ \\mathrm{N}
+$$
+
+Lyftkraften är drygt dubbelt så stor som tyngden, så det är rimligt att ballongen snabbt stiger.
+
+**Svar:** 24 N, riktad uppåt`,
+        },
+        {
+            level: 2,
+            question: `Ett stort frigolitblock med volymen $0{,}0500\\ \\mathrm{m^3}$ vägs på en digital våg, som visar 1,500 kg. Vågen mäter kraften från blocket och räknar om den till en massa genom att dela med $g$, som om det inte fanns någon luft omkring blocket. Vilken är blockets verkliga massa? Räkna med $\\rho_\\text{luft} = 1{,}293\\ \\mathrm{kg/m^3}$. Ange svaret i kg.`,
+            answer: { value: 1.565, unit: 'kg', tol: 0.002 },
+            solution: `På blocket verkar tyngdkraften $F_\\mathrm{G} = m \\cdot g$ nedåt, och två krafter uppåt: normalkraften $F_\\mathrm{N}$ från vågen och lyftkraften $F_\\mathrm{L}$ från luften. Blocket ligger still, så
+
+$$
+F_\\mathrm{N} + F_\\mathrm{L} = F_\\mathrm{G}
+$$
+
+Vågen känner bara normalkraften och visar $m_\\text{våg} = \\dfrac{F_\\mathrm{N}}{g}$, alltså $F_\\mathrm{N} = m_\\text{våg} \\cdot g$. Med $F_\\mathrm{L} = \\rho_\\text{luft} \\cdot V \\cdot g$ blir
+
+$$
+m_\\text{våg} \\cdot g + \\rho_\\text{luft} \\cdot V \\cdot g = m \\cdot g
+\\quad\\Leftrightarrow\\quad
+m = m_\\text{våg} + \\rho_\\text{luft} \\cdot V
+$$
+
+där vi dividerat båda led med $g$.
+
+$$
+\\left[ \\begin{array}{l}
+m_\\text{våg} = 1{,}500\\ \\mathrm{kg} \\\\
+\\rho_\\text{luft} = 1{,}293\\ \\mathrm{kg/m^3} \\\\
+V = 0{,}0500\\ \\mathrm{m^3}
+\\end{array} \\right]
+$$
+
+$$
+m = 1{,}500 + 1{,}293 \\cdot 0{,}0500 = 1{,}500 + 0{,}06465 = 1{,}56465\\ \\mathrm{kg} \\approx 1{,}565\\ \\mathrm{kg}
+$$
+
+Vågen visar alltså drygt 4 % för lite. För frigolit, som har mycket låg densitet, är luftens lyftkraft en märkbar del av tyngden.
+
+**Svar:** 1,565 kg`,
+        },
+        {
+            level: 2,
+            question: `En heliumballong är bunden till en dynamometer som sitter fast i ett bord, se figuren. Dynamometern visar 0,12 N, och ballonghöljet väger 6,0 g.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 270" style="max-width:380px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif" role="img" aria-label="En röd heliumballong i ett snöre som är fäst i övre änden av en dynamometer. Dynamometerns nedre ände är krokad i en ögla i bordsskivan."><ellipse cx="130" cy="62" rx="36" ry="42" fill="#d83a36" stroke="#a82824" stroke-width="1.5"/><ellipse cx="118" cy="47" rx="8.5" ry="12" fill="#ec6b66" opacity="0.7"/><polygon points="130,103 125,110 135,110" fill="#a82824"/><line x1="130" y1="110" x2="130" y2="142" stroke="#6b5f4f" stroke-width="1.3"/><circle cx="130" cy="146" r="4" fill="none" stroke="#0f1620" stroke-width="1.6"/><line x1="130" y1="150" x2="130" y2="158" stroke="#0f1620" stroke-width="2"/><rect x="121" y="158" width="18" height="70" rx="3" fill="#e9edf1" stroke="#0f1620" stroke-width="1.3"/><g stroke="#0f1620" stroke-width="1"><line x1="124" y1="168" x2="131" y2="168"/><line x1="124" y1="177" x2="128" y2="177"/><line x1="124" y1="186" x2="131" y2="186"/><line x1="124" y1="195" x2="128" y2="195"/><line x1="124" y1="204" x2="131" y2="204"/><line x1="124" y1="213" x2="128" y2="213"/><line x1="124" y1="222" x2="131" y2="222"/></g><line x1="130" y1="228" x2="130" y2="236" stroke="#0f1620" stroke-width="2"/><circle cx="130" cy="240" r="4" fill="none" stroke="#0f1620" stroke-width="1.6"/><circle cx="130" cy="247" r="4" fill="none" stroke="#5b6570" stroke-width="1.8"/><line x1="130" y1="251" x2="130" y2="256" stroke="#5b6570" stroke-width="2.4"/><rect x="20" y="256" width="220" height="10" fill="#c9a46c" stroke="#8a6a3a" stroke-width="1.2"/><path d="M 34 261 Q 80 259 120 262 M 150 260 Q 190 262 228 260" fill="none" stroke="#a8844f" stroke-width="0.8"/><text x="148" y="197" font-size="13" fill="#0f1620">dynamometer</text></svg>
+
+Hur stor volym helium innehåller ballongen? Räkna med $\\rho_\\text{luft} = 1{,}293\\ \\mathrm{kg/m^3}$, $\\rho_\\text{helium} = 0{,}178\\ \\mathrm{kg/m^3}$ och $g = 9{,}82\\ \\mathrm{N/kg}$. Ange svaret i liter.`,
+            answer: { value: 16, unit: 'liter', tol: 0.03 },
+            solution: `Ballongen står still, så det råder kraftjämvikt. Uppåt verkar lyftkraften, nedåt verkar tyngdkraften på hölje och helium samt spännkraften i snöret, som är det dynamometern visar:
+
+$$
+F_\\mathrm{L} = F_\\mathrm{G} + F_\\mathrm{S}
+$$
+
+Med $F_\\mathrm{L} = \\rho_\\text{luft} \\cdot V \\cdot g$ och $F_\\mathrm{G} = (m_\\text{hölje} + \\rho_\\text{helium} \\cdot V) \\cdot g$ får vi
+
+$$
+\\rho_\\text{luft} \\cdot V \\cdot g = m_\\text{hölje} \\cdot g + \\rho_\\text{helium} \\cdot V \\cdot g + F_\\mathrm{S}
+$$
+
+Vi subtraherar $\\rho_\\text{helium} \\cdot V \\cdot g$ från båda led och bryter ut $V$:
+
+$$
+(\\rho_\\text{luft} - \\rho_\\text{helium}) \\cdot V \\cdot g = m_\\text{hölje} \\cdot g + F_\\mathrm{S}
+\\quad\\Leftrightarrow\\quad
+V = \\frac{m_\\text{hölje} \\cdot g + F_\\mathrm{S}}{(\\rho_\\text{luft} - \\rho_\\text{helium}) \\cdot g}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m_\\text{hölje} = 6{,}0\\ \\mathrm{g} = 0{,}0060\\ \\mathrm{kg} \\\\
+F_\\mathrm{S} = 0{,}12\\ \\mathrm{N} \\\\
+\\rho_\\text{luft} - \\rho_\\text{helium} = 1{,}293 - 0{,}178 = 1{,}115\\ \\mathrm{kg/m^3} \\\\
+g = 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+V = \\frac{0{,}0060 \\cdot 9{,}82 + 0{,}12}{1{,}115 \\cdot 9{,}82} = \\frac{0{,}17892}{10{,}9493} = 0{,}016340\\ldots\\ \\mathrm{m^3} \\approx 16\\ \\mathrm{liter}
+$$
+
+En ballong på 16 liter är ungefär lika stor som en vanlig festballong, så svaret är rimligt.
+
+**Svar:** 16 liter`,
+        },
+        {
+            level: 2,
+            question: `En ballong har volymen $0{,}030\\ \\mathrm{m^3}$ och ett hölje med massan 15 g. Ballongen ska fyllas med någon av gaserna i tabellen.
+
+| Gas | Densitet (kg/m³) |
+|---|---|
+| Vätgas | 0,0899 |
+| Helium | 0,178 |
+| Metan | 0,717 |
+| Neon | 0,900 |
+| Kväve | 1,251 |
+
+Vilka av gaserna får ballongen att stiga i luft med densiteten $1{,}293\\ \\mathrm{kg/m^3}$? Motivera med en beräkning.`,
+            solution: `Ballongen stiger om lyftkraften är större än tyngden av hölje och gas:
+
+$$
+F_\\mathrm{L} > F_\\mathrm{G}
+\\quad\\Leftrightarrow\\quad
+\\rho_\\text{luft} \\cdot V \\cdot g > (m_\\text{hölje} + \\rho_\\text{gas} \\cdot V) \\cdot g
+$$
+
+Vi dividerar båda led med $g$, subtraherar $m_\\text{hölje}$ och dividerar med $V$:
+
+$$
+\\rho_\\text{gas} < \\rho_\\text{luft} - \\frac{m_\\text{hölje}}{V}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\rho_\\text{luft} = 1{,}293\\ \\mathrm{kg/m^3} \\\\
+m_\\text{hölje} = 15\\ \\mathrm{g} = 0{,}015\\ \\mathrm{kg} \\\\
+V = 0{,}030\\ \\mathrm{m^3}
+\\end{array} \\right]
+$$
+
+$$
+\\rho_\\text{gas} < 1{,}293 - \\frac{0{,}015}{0{,}030} = 1{,}293 - 0{,}50 = 0{,}793\\ \\mathrm{kg/m^3}
+$$
+
+Gasens densitet måste alltså vara lägre än 0,793 kg/m³. Det gäller vätgas, helium och metan. Neon är visserligen lättare än luft, men inte tillräckligt mycket för att också bära höljet, och kväve är nästan lika tätt som luft.
+
+**Svar:** Vätgas, helium och metan`,
+        },
+        {
+            level: 2,
+            question: `En varmluftsballong har volymen 2 800 m³. Den omgivande luften har densiteten 1,25 kg/m³ och varmluften inne i ballongen har densiteten 0,95 kg/m³. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.<br>a) Hur stor lyftkraft verkar på ballongen från den omgivande luften? Ange svaret i kN.<br>b) Hur stor massa får ballongtyget, korgen, brännaren och passagerarna tillsammans högst ha för att ballongen ska kunna lyfta? Ange svaret i kg.`,
+            answer: { value: 840, unit: 'kg', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 34, unit: 'kN', tol: 0.03 },
+                { del: 'b', value: 840, unit: 'kg', tol: 0.02 },
+            ],
+            solution: `**a)** Lyftkraften är tyngden av den kalla luft som ballongen tränger undan:
+
+$$
+F_\\mathrm{L} = \\rho_\\text{kall} \\cdot V \\cdot g
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\rho_\\text{kall} = 1{,}25\\ \\mathrm{kg/m^3} \\\\
+V = 2\\,800\\ \\mathrm{m^3} \\\\
+g = 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+F_\\mathrm{L} = 1{,}25 \\cdot 2\\,800 \\cdot 9{,}82 = 34\\,370\\ \\mathrm{N} \\approx 34\\ \\mathrm{kN}
+$$
+
+**Svar:** 34 kN
+
+**b)** Ballongen kan lyfta om lyftkraften är minst lika stor som tyngden av lasten $m$ och varmluften:
+
+$$
+\\rho_\\text{kall} \\cdot V \\cdot g \\geq (m + \\rho_\\text{varm} \\cdot V) \\cdot g
+\\quad\\Leftrightarrow\\quad
+m \\leq (\\rho_\\text{kall} - \\rho_\\text{varm}) \\cdot V
+$$
+
+där vi dividerat båda led med $g$ och subtraherat $\\rho_\\text{varm} \\cdot V$.
+
+$$
+m \\leq (1{,}25 - 0{,}95) \\cdot 2\\,800 = 0{,}30 \\cdot 2\\,800 = 840\\ \\mathrm{kg}
+$$
+
+Varmluften i ballongen väger själv $0{,}95 \\cdot 2\\,800 = 2\\,660\\ \\mathrm{kg}$, alltså mycket mer än lasten. Det är skälet till att varmluftsballonger måste vara så stora.
+
+**Svar:** 840 kg`,
+        },
+        {
+            level: 3,
+            question: `En klasskamrat säger: "Vätgas har ungefär halva heliumets densitet, så en ballong fylld med vätgas lyfter dubbelt så mycket som samma ballong fylld med helium."
+
+Undersök påståendet. Hur många procent större last kan en ballong lyfta om heliumet byts mot vätgas, när ballongens volym är densamma? Med last menas allt utom gasen, alltså höljet och det som hänger under ballongen. Använd $\\rho_\\text{luft} = 1{,}293\\ \\mathrm{kg/m^3}$, $\\rho_\\text{helium} = 0{,}178\\ \\mathrm{kg/m^3}$ och $\\rho_\\text{vätgas} = 0{,}0899\\ \\mathrm{kg/m^3}$. Ange svaret i procent.`,
+            answer: { value: 7.9, unit: '%', tol: 0.03 },
+            solution: `Kalla ballongens volym $V$ och den största last den kan lyfta $m$. Ballongen lyfter precis lasten när lyftkraften är lika stor som tyngden av last och gas:
+
+$$
+\\rho_\\text{luft} \\cdot V \\cdot g = (m + \\rho_\\text{gas} \\cdot V) \\cdot g
+\\quad\\Leftrightarrow\\quad
+m = (\\rho_\\text{luft} - \\rho_\\text{gas}) \\cdot V
+$$
+
+Lasten bestäms alltså av **skillnaden** mellan luftens och gasens densitet, inte av gasens densitet ensam. Kvoten mellan lasterna med de två gaserna blir
+
+$$
+\\frac{m_\\text{vätgas}}{m_\\text{helium}} = \\frac{(\\rho_\\text{luft} - \\rho_\\text{vätgas}) \\cdot V}{(\\rho_\\text{luft} - \\rho_\\text{helium}) \\cdot V} = \\frac{\\rho_\\text{luft} - \\rho_\\text{vätgas}}{\\rho_\\text{luft} - \\rho_\\text{helium}}
+$$
+
+Volymen förkortas bort, så resultatet gäller för en ballong av vilken storlek som helst.
+
+$$
+\\frac{m_\\text{vätgas}}{m_\\text{helium}} = \\frac{1{,}293 - 0{,}0899}{1{,}293 - 0{,}178} = \\frac{1{,}2031}{1{,}115} = 1{,}0790\\ldots
+$$
+
+Lasten blir alltså ungefär 7,9 % större. Påståendet stämmer inte. Båda gaserna är mycket lättare än luft, så skillnaden mot luftens densitet blir nästan densamma: 1,203 mot 1,115 kg/m³. Att halvera gasens densitet hade bara spelat stor roll om gasen från början hade haft en densitet nära luftens.
+
+**Svar:** Ungefär 7,9 % större last, inte dubbelt så stor`,
+        },
+        {
+            level: 3,
+            question: `En frigolitkloss och en järnvikt ligger på var sin skål på en likarmad balansvåg, se figuren. Vågen är i jämvikt i luften.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 210" style="max-width:496px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif" role="img" aria-label="En likarmad balansvåg i jämvikt. På vänstra skålen ligger en stor vit frigolitkloss, på högra skålen en liten järnvikt."><rect x="36" y="62" width="68" height="62" fill="#f6f4ee" stroke="#8f98a1" stroke-width="1.4"/><g fill="#d9dde2"><circle cx="48" cy="74" r="2.2"/><circle cx="66" cy="70" r="1.6"/><circle cx="86" cy="78" r="2"/><circle cx="56" cy="92" r="1.8"/><circle cx="78" cy="96" r="2.4"/><circle cx="94" cy="104" r="1.6"/><circle cx="46" cy="110" r="2"/><circle cx="68" cy="114" r="1.6"/><circle cx="90" cy="118" r="1.8"/></g><rect x="266" y="96" width="8" height="6" fill="#4a525b"/><ellipse cx="270" cy="95" rx="7" ry="3.2" fill="#4a525b"/><rect x="257" y="102" width="26" height="22" rx="2" fill="#4a525b"/><rect x="261" y="104" width="4" height="18" rx="1" fill="#6f7882"/><rect x="30" y="124" width="80" height="4" fill="#8a939c"/><rect x="230" y="124" width="80" height="4" fill="#8a939c"/><rect x="68" y="128" width="4" height="18" fill="#8a939c"/><rect x="268" y="128" width="4" height="18" fill="#8a939c"/><rect x="60" y="146" width="220" height="6" rx="1.5" fill="#5b6570"/><polygon points="170,152 162,166 178,166" fill="#0f1620"/><rect x="166" y="166" width="8" height="28" fill="#8a939c"/><rect x="130" y="194" width="80" height="10" rx="2" fill="#5b6570"/><text x="70" y="181" text-anchor="middle" font-size="13" fill="#0f1620">frigolit</text><text x="270" y="181" text-anchor="middle" font-size="13" fill="#0f1620">järn</text></svg>
+
+a) Visa att kvoten mellan frigolitklossens massa $m_\\text{f}$ och järnviktens massa $m_\\text{j}$ är
+
+$$
+\\frac{m_\\text{f}}{m_\\text{j}} = \\frac{1 - \\dfrac{\\rho_\\text{luft}}{\\rho_\\text{j}}}{1 - \\dfrac{\\rho_\\text{luft}}{\\rho_\\text{f}}}
+$$
+
+där $\\rho_\\text{f}$ och $\\rho_\\text{j}$ är frigolitens och järnets densitet.<br>b) Frigolit har densiteten 20 kg/m³ och järn 7 870 kg/m³. Hur många procent större massa än järnvikten har frigolitklossen? Räkna med $\\rho_\\text{luft} = 1{,}293\\ \\mathrm{kg/m^3}$. Ange svaret i procent.`,
+            answer: { value: 6.9, unit: '%', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 6.9, unit: '%', tol: 0.03 },
+            ],
+            solution: `**a)** Vågen har lika långa armar, så den är i jämvikt när föremålen trycker lika hårt på var sin skål. Den kraft ett föremål trycker på skålen med är tyngden minus lyftkraften från luften:
+
+$$
+F = F_\\mathrm{G} - F_\\mathrm{L} = m \\cdot g - \\rho_\\text{luft} \\cdot V \\cdot g
+$$
+
+Föremålets volym är $V = \\dfrac{m}{\\rho}$, där $\\rho$ är föremålets densitet. Insatt ger det
+
+$$
+F = m \\cdot g - \\rho_\\text{luft} \\cdot \\frac{m}{\\rho} \\cdot g = m \\cdot g \\cdot \\left(1 - \\frac{\\rho_\\text{luft}}{\\rho}\\right)
+$$
+
+Jämvikt betyder att kraften är lika stor på båda skålarna:
+
+$$
+m_\\text{f} \\cdot g \\cdot \\left(1 - \\frac{\\rho_\\text{luft}}{\\rho_\\text{f}}\\right) = m_\\text{j} \\cdot g \\cdot \\left(1 - \\frac{\\rho_\\text{luft}}{\\rho_\\text{j}}\\right)
+$$
+
+Vi dividerar båda led med $g$, med $m_\\text{j}$ och med parentesen på vänster sida:
+
+$$
+\\frac{m_\\text{f}}{m_\\text{j}} = \\frac{1 - \\dfrac{\\rho_\\text{luft}}{\\rho_\\text{j}}}{1 - \\dfrac{\\rho_\\text{luft}}{\\rho_\\text{f}}}
+$$
+
+vilket skulle visas.
+
+**b)** Vi sätter in densiteterna:
+
+$$
+\\frac{m_\\text{f}}{m_\\text{j}} = \\frac{1 - \\dfrac{1{,}293}{7\\,870}}{1 - \\dfrac{1{,}293}{20}} = \\frac{0{,}99983\\ldots}{0{,}93535} = 1{,}0689\\ldots
+$$
+
+Frigolitklossen har alltså ungefär 6,9 % större massa än järnvikten, trots att vågen står i jämvikt. Det är rimligt: lyftkraften på frigoliten är ungefär 6,5 % av dess tyngd, medan lyftkraften på järnet är försumbar.
+
+**Svar:** Ungefär 6,9 % större massa`,
+        },
+        {
+            level: 3,
+            question: `En grupp gör demonstrationen "Väga luft". Deras pump klarar bara att få ut ungefär 70 % av luften ur e-kolven. Gruppen väger kolven före och efter utpumpningen och finner att massan har minskat med 0,52 g. När ventilen sedan öppnas under vatten strömmar 405 ml vatten in i kolven. Gruppen beräknar luftens densitet som kvoten mellan massminskningen och vattnets volym.<br>a) En elev menar att resultatet måste bli fel, eftersom 30 % av luften är kvar i kolven. Har eleven rätt? Motivera.<br>b) Hur stor är e-kolvens inre volym? Anta att temperaturen är densamma hela tiden. Ange svaret i ml.<br>c) E-kolven påverkas av en lyftkraft från luften när den vägs. Förklara varför den lyftkraften inte påverkar gruppens resultat.`,
+            answer: { value: 580, unit: 'ml', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 580, unit: 'ml', tol: 0.03 },
+                { del: 'c' },
+            ],
+            solution: `**a)** Nej. Metoden kräver inte att kolven töms helt. Den mäter massa och volym för **samma** luft, nämligen den luft som pumpades ut. Massminskningen är den utpumpade luftens massa. När ventilen öppnas trycker den yttre luften in vatten tills luften som finns kvar i kolven har samma tryck som omgivningen igen. Den kvarvarande luften trycks då ihop till den volym den hade från början, och vattnet fyller resten, alltså precis den volym som den utpumpade luften tog upp vid samma tryck. Kvoten mellan massminskningen och vattnets volym blir därför luftens densitet, hur mycket luft som än är kvar. (Det förutsätter att temperaturen är densamma hela tiden.) Gruppens värden ger också ett rimligt resultat:
+
+$$
+\\rho = \\frac{m}{V} = \\frac{5{,}2 \\cdot 10^{-4}\\ \\mathrm{kg}}{4{,}05 \\cdot 10^{-4}\\ \\mathrm{m^3}} = 1{,}2839\\ldots\\ \\mathrm{kg/m^3} \\approx 1{,}3\\ \\mathrm{kg/m^3}
+$$
+
+vilket stämmer med tabellvärdet 1,293 kg/m³. Att 30 % är kvar gör bara massskillnaden mindre och därmed svårare att mäta noggrant.
+
+**Svar:** Nej, massan och volymen gäller båda den utpumpade luften, så resultatet påverkas inte av att luft är kvar
+
+**b)** Före utpumpningen fyllde luften hela kolven. Den luft som är kvar, 30 % av den, trycks efter öppningen ihop till samma tryck som från början och tar då upp 30 % av kolvens volym. Vattnet fyller resten, alltså 70 % av kolvens inre volym $V_\\text{kolv}$:
+
+$$
+0{,}70 \\cdot V_\\text{kolv} = V_\\text{vatten}
+$$
+
+Vi dividerar båda led med 0,70:
+
+$$
+V_\\text{kolv} = \\frac{V_\\text{vatten}}{0{,}70} = \\frac{405}{0{,}70} = 578{,}57\\ldots\\ \\mathrm{ml} \\approx 580\\ \\mathrm{ml}
+$$
+
+Andelen 70 % är bara ungefärlig, så svaret ges med två värdesiffror. Som kontroll väger luften i en full kolv $1{,}2839 \\cdot 5{,}79 \\cdot 10^{-4} \\approx 7{,}4 \\cdot 10^{-4}\\ \\mathrm{kg} = 0{,}74\\ \\mathrm{g}$, och 70 % av det är 0,52 g, precis den massminskning gruppen mätte.
+
+**Svar:** Ungefär 580 ml
+
+**c)** Lyftkraften på kolven är tyngden av den luft som kolven tränger undan, och den bestäms av kolvens **yttre** volym. Den volymen är densamma vid båda vägningarna, så lyftkraften är lika stor båda gångerna. När gruppen tar skillnaden mellan vägningarna tar lyftkraften ut sig, och kvar blir bara den utpumpade luftens massa.
+
+**Svar:** Lyftkraften är lika stor vid båda vägningarna och tar ut sig när massorna subtraheras`,
+        },
+        {
+            level: 3,
+            question: `En ballong av tunn aluminiumfolie är helt tät och kan inte utvidgas, så dess volym är hela tiden $0{,}40\\ \\mathrm{m^3}$. Den är fylld med helium och har en liten last hängande under sig. Vid marken, där luftens densitet är $1{,}225\\ \\mathrm{kg/m^3}$, hålls ballongen kvar av ett snöre, och spännkraften i snöret är 1,87 N. Diagrammet visar hur luftens densitet $\\rho$ avtar med höjden $h$ över marken en dag när det är 15 °C vid marken.
+
+${makeDiagram({
+    xMin: 0, xMax: 10, yMin: 0, yMax: 1.4,
+    xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    yTicks: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4],
+    xLabel: '<tspan font-style="italic">h</tspan> (km)',
+    yLabel: '<tspan font-style="italic">ρ</tspan> (kg/m³)',
+    paths: [{ points: Array.from({ length: 201 }, (_, i) => { const h = i * 0.05; return [h, 1.225 * Math.pow(1 - 0.0065 * h * 1000 / 288.15, 4.2559)]; }), color: '#2563c9' }],
+})}
+
+a) Snöret släpps. På vilken höjd kommer ballongen att sväva stilla? Försumma lastens volym, och räkna med $g = 9{,}82\\ \\mathrm{N/kg}$. Ange svaret i km.<br>b) Förklara varför ballongen stannar på den höjden om den knuffas en bit uppåt eller nedåt.`,
+            answer: { value: 4.8, unit: 'km', tol: 0.05 },
+            delsvar: [
+                { del: 'a', value: 4.8, unit: 'km', tol: 0.05 },
+                { del: 'b' },
+            ],
+            solution: `**a)** Ballongens massa är inte given, men den går att bestämma ur läget vid marken. Kalla hela massan (folie, last och helium) $m$. Ballongen är tät och kan inte utvidgas, så $m$ och $V$ är desamma på alla höjder.
+
+**Vid marken** står ballongen still i snöret. Uppåt verkar lyftkraften, nedåt verkar tyngdkraften och spännkraften i snöret:
+
+$$
+F_\\mathrm{L} = F_\\mathrm{G} + F_\\mathrm{S}
+\\quad\\Leftrightarrow\\quad
+\\rho_0 \\cdot V \\cdot g = m \\cdot g + F_\\mathrm{S}
+$$
+
+Vi subtraherar $F_\\mathrm{S}$ från båda led och dividerar båda led med $g$:
+
+$$
+m = \\rho_0 \\cdot V - \\frac{F_\\mathrm{S}}{g}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\rho_0 = 1{,}225\\ \\mathrm{kg/m^3} \\\\
+V = 0{,}40\\ \\mathrm{m^3} \\\\
+F_\\mathrm{S} = 1{,}87\\ \\mathrm{N} \\\\
+g = 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+m = 1{,}225 \\cdot 0{,}40 - \\frac{1{,}87}{9{,}82} = 0{,}49 - 0{,}19042\\ldots = 0{,}29957\\ldots\\ \\mathrm{kg}
+$$
+
+**På svävhöjden** finns inget snöre, så där är lyftkraften lika stor som tyngden. Vi söker luftens densitet $\\rho$ på den höjden:
+
+$$
+F_\\mathrm{L} = F_\\mathrm{G}
+\\quad\\Leftrightarrow\\quad
+\\rho \\cdot V \\cdot g = m \\cdot g
+\\quad\\Leftrightarrow\\quad
+\\rho = \\frac{m}{V}
+$$
+
+där vi dividerat båda led med $V \\cdot g$.
+
+$$
+\\rho = \\frac{0{,}29957\\ldots}{0{,}40} = 0{,}7489\\ldots\\ \\mathrm{kg/m^3} \\approx 0{,}75\\ \\mathrm{kg/m^3}
+$$
+
+Ballongen svävar alltså där luftens densitet är 0,75 kg/m³. I diagrammet ligger det värdet mellan 4 km och 5 km, nära 5 km. Avläsningen ger ungefär 4,8 km. Det är rimligt att höjden blir några kilometer: ballongen väger ungefär 60 % av den luft den tränger undan vid marken, och först på några kilometers höjd har luftens densitet sjunkit till 60 % av värdet vid marken.
+
+**Svar:** Ungefär 4,8 km
+
+**b)** Tyngden av ballongen är densamma på alla höjder, men lyftkraften är proportionell mot luftens densitet. Om ballongen knuffas uppåt kommer den till tunnare luft, där lyftkraften är mindre än tyngden. Den resulterande kraften pekar då nedåt, och ballongen sjunker tillbaka. Om den knuffas nedåt kommer den till tätare luft, där lyftkraften är större än tyngden, och den resulterande kraften för den uppåt igen. Höjden 4,8 km är därför ett stabilt jämviktsläge.
+
+**Svar:** Lyftkraften minskar med höjden medan tyngden är oförändrad, så den resulterande kraften för alltid ballongen tillbaka mot 4,8 km`,
+        },
+        {
+            level: 3,
+            question: `En varmluftsballong flyger en dag då luften utanför har temperaturen 10 °C. Piloten funderar på att värma varmluften till 120 °C i stället för till 80 °C. Ballongens volym är densamma i båda fallen. Anta att luftens densitet är omvänt proportionell mot dess temperatur i kelvin, $\\rho \\cdot T = \\text{konstant}$, och att trycket inne i ballongen är detsamma som utanför. Hur många procent större last (ballongtyg, korg och passagerare) kan ballongen lyfta vid 120 °C än vid 80 °C? Ange svaret i procent.`,
+            answer: { value: 41, unit: '%', tol: 0.03 },
+            solution: `Kalla ballongens volym $V$ och den största last den kan lyfta $m$. Precis som för en gasballong gäller
+
+$$
+\\rho_\\text{kall} \\cdot V \\cdot g = (m + \\rho_\\text{varm} \\cdot V) \\cdot g
+\\quad\\Leftrightarrow\\quad
+m = (\\rho_\\text{kall} - \\rho_\\text{varm}) \\cdot V
+$$
+
+Eftersom $\\rho \\cdot T$ är konstant är $\\rho_\\text{varm} \\cdot T_\\text{varm} = \\rho_\\text{kall} \\cdot T_\\text{kall}$, alltså
+
+$$
+\\rho_\\text{varm} = \\rho_\\text{kall} \\cdot \\frac{T_\\text{kall}}{T_\\text{varm}}
+$$
+
+Insatt i uttrycket för lasten:
+
+$$
+m = \\left(\\rho_\\text{kall} - \\rho_\\text{kall} \\cdot \\frac{T_\\text{kall}}{T_\\text{varm}}\\right) \\cdot V = \\rho_\\text{kall} \\cdot V \\cdot \\left(1 - \\frac{T_\\text{kall}}{T_\\text{varm}}\\right)
+$$
+
+Kvoten mellan lasterna vid de två temperaturerna blir
+
+$$
+\\frac{m_{120}}{m_{80}} = \\frac{\\rho_\\text{kall} \\cdot V \\cdot \\left(1 - \\dfrac{T_\\text{kall}}{T_{120}}\\right)}{\\rho_\\text{kall} \\cdot V \\cdot \\left(1 - \\dfrac{T_\\text{kall}}{T_{80}}\\right)} = \\frac{1 - \\dfrac{T_\\text{kall}}{T_{120}}}{1 - \\dfrac{T_\\text{kall}}{T_{80}}}
+$$
+
+Varken volymen eller luftens densitet behövs, de förkortas bort.
+
+$$
+\\left[ \\begin{array}{l}
+T_\\text{kall} = 10 + 273 = 283\\ \\mathrm{K} \\\\
+T_{80} = 80 + 273 = 353\\ \\mathrm{K} \\\\
+T_{120} = 120 + 273 = 393\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+$$
+\\frac{m_{120}}{m_{80}} = \\frac{1 - \\dfrac{283}{393}}{1 - \\dfrac{283}{353}} = \\frac{0{,}27989\\ldots}{0{,}19830\\ldots} = 1{,}4114\\ldots
+$$
+
+Lasten kan alltså bli ungefär 41 % större. Det kan verka mycket när den absoluta temperaturen bara ökar från 353 K till 393 K, alltså med cirka 11 %. Men lasten beror på hur mycket lättare varmluften är än den kalla luften, och den skillnaden växer betydligt mer.
+
+**Svar:** Ungefär 41 % större last`,
+        },
+        {
+            level: 3,
+            question: `En varmluftsballong med volymen 2 200 m³ svävar stilla på en viss höjd, där den omgivande luften har densiteten 1,20 kg/m³. Piloten släpper då ut 40 kg sand. Bestäm ballongens acceleration direkt efter att sanden släppts. Försumma luftmotståndet och volymen av korgen och sanden. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$. Ange svaret i m/s².`,
+            answer: { value: 0.15, unit: 'm/s²', tol: 0.04 },
+            solution: `Varmluftens densitet är inte given, men den behövs inte. Kalla ballongens hela massa när den svävar $M$, varmluften inräknad. Eftersom ballongen svävar stilla är lyftkraften lika stor som tyngden:
+
+$$
+F_\\mathrm{L} = M \\cdot g
+\\quad\\Leftrightarrow\\quad
+\\rho_\\text{kall} \\cdot V \\cdot g = M \\cdot g
+\\quad\\Leftrightarrow\\quad
+M = \\rho_\\text{kall} \\cdot V
+$$
+
+$$
+M = 1{,}20 \\cdot 2\\,200 = 2\\,640\\ \\mathrm{kg}
+$$
+
+Ballongen svävar alltså när hela dess massa är lika stor som massan av den luft den tränger undan.
+
+När sanden med massan $\\Delta m$ släpps är lyftkraften oförändrad, eftersom ballongens volym och den omgivande luften är desamma. Tyngden minskar med $\\Delta m \\cdot g$, så den resulterande kraften blir
+
+$$
+F_\\mathrm{R} = F_\\mathrm{L} - (M - \\Delta m) \\cdot g = M \\cdot g - (M - \\Delta m) \\cdot g = \\Delta m \\cdot g
+$$
+
+Newtons andra lag ger accelerationen för den massa som är kvar:
+
+$$
+a = \\frac{F_\\mathrm{R}}{M - \\Delta m} = \\frac{\\Delta m \\cdot g}{M - \\Delta m}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+\\Delta m = 40\\ \\mathrm{kg} \\\\
+M = 2\\,640\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+a = \\frac{40 \\cdot 9{,}82}{2\\,640 - 40} = \\frac{392{,}8}{2\\,600} = 0{,}15107\\ldots\\ \\mathrm{m/s^2} \\approx 0{,}15\\ \\mathrm{m/s^2}
+$$
+
+Accelerationen är liten, eftersom 40 kg bara är 1,5 % av ballongens hela massa. I verkligheten blir den ännu mindre, eftersom luftmotståndet växer så snart ballongen börjar röra sig.
+
+**Svar:** 0,15 m/s² uppåt`,
         },
     ],
 
@@ -25614,11 +33763,11 @@ $$
 
 **Svar:** 400 kPa.
 
-**Generell slutsats:** När du halverar volymen vid konstant temperatur fördubblas trycket — detta är **Boyles lag**. Det är denna princip cykelpumpar och kompressorer bygger på.`,
+**Generell slutsats:** När du halverar volymen vid konstant temperatur fördubblas trycket. Detta är **Boyles lag**. Det är denna princip cykelpumpar och kompressorer bygger på.`,
         },
         {
             level: 1,
-            question: `En sluten gasbehållare har trycket 200 kPa vid temperaturen 20 °C. Vilket blir trycket om temperaturen höjs till 80 °C? (Behållaren är stel — volymen är konstant.)`,
+            question: `En sluten gasbehållare har trycket 200 kPa vid temperaturen 20 °C. Vilket blir trycket om temperaturen höjs till 80 °C? (Behållaren är stel, så volymen är konstant.)`,
             answer: { value: 241, unit: 'kPa', tol: 0.02 },
             solution: `Vid konstant volym ($V_1 = V_2$) förkortas $V$ bort:
 
@@ -25676,7 +33825,7 @@ $$
 
 **Svar:** Ca 4,5 atm.
 
-**Generell slutsats:** Det är därför en cykelpump blir varm när man pumpar hårt — gasen komprimeras snabbt och temperaturen stiger. Om kompressionen vore *isoterm* (mycket långsam) skulle vi få $p_2 = 4{,}0$ atm; den 14 %-iga extra-tryckhöjningen kommer från temperaturökningen.`,
+**Generell slutsats:** Det är därför en cykelpump blir varm när man pumpar hårt: gasen komprimeras snabbt och temperaturen stiger. Om kompressionen vore *isoterm* (mycket långsam) skulle vi få $p_2 = 4{,}0$ atm; den 14 %-iga extra-tryckhöjningen kommer från temperaturökningen.`,
         },
         {
             level: 2,
@@ -25702,9 +33851,9 @@ $$
 V_2 = 3{,}0 \\cdot \\frac{101 \\cdot 233}{30 \\cdot 293} \\approx 8{,}03\\ \\mathrm{liter}
 $$
 
-**Svar:** Ca 8,0 liter — ballongen har expanderat till ungefär 2,7 gånger sin ursprungsvolym.
+**Svar:** Ca 8,0 liter. Ballongen har expanderat till ungefär 2,7 gånger sin ursprungsvolym.
 
-**Generell slutsats:** Det är därför heliumballonger som släpps upp ofta **spricker** på hög höjd — det yttre trycket sjunker snabbare än temperaturen, och ballonghöljet klarar inte expansionen. Väderballonger är specialdesignade för att kunna expandera flera gånger om innan de spricker.`,
+**Generell slutsats:** Det är därför heliumballonger som släpps upp ofta **spricker** på hög höjd: det yttre trycket sjunker snabbare än temperaturen, och ballonghöljet klarar inte expansionen. Väderballonger är specialdesignade för att kunna expandera flera gånger om innan de spricker.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
@@ -25790,7 +33939,685 @@ Kontrollkontroll: $p_2 V_2 = 188\\,500 \\cdot (2{,}0 - 0{,}93) \\approx 188\\,50
 
 **Svar:** a) Vattnet stiger ca 0,93 m upp inne i klockan. b) Trycket är ca 189 kPa.
 
-**Generell slutsats:** En dykarklocka skyddar dykaren genom att luften i klockan är trycksatt till samma tryck som vattnet utanför — annars skulle vattnet bara strömma in. Notera att luften halveras till volym när trycket fördubblas (Boyles lag) — vid 100 m djup där totaltrycket är ca 11 atm skulle 2 m luft komprimeras till bara ca 18 cm.`,
+**Generell slutsats:** En dykarklocka skyddar dykaren genom att luften i klockan är trycksatt till samma tryck som vattnet utanför. Annars skulle vattnet bara strömma in. Notera att luften halveras till volym när trycket fördubblas (Boyles lag). Vid 100 m djup där totaltrycket är ca 11 atm skulle 2 m luft komprimeras till bara ca 18 cm.`,
+        },
+        {
+            level: 1,
+            question: `Flytande kväve används för att frysa prover snabbt. Det kokar vid temperaturen 77 K. Vilken temperatur är det i grader celsius? Ange svaret i °C.`,
+            answer: { value: -196, unit: '°C', tol: 0.01 },
+            solution: `Kelvinskalan och celsiusskalan har lika stora skalsteg men olika nollpunkt:
+
+$$
+T_K = T_C + 273 \\quad\\Leftrightarrow\\quad T_C = T_K - 273
+$$
+
+$$
+T_C = 77 - 273 = -196\\ ^{\\circ}\\mathrm{C}
+$$
+
+Rimligt: 77 K ligger nära den absoluta nollpunkten 0 K, alltså nära $-273\\ ^{\\circ}\\mathrm{C}$, och långt under vattnets fryspunkt.
+
+**Svar:** $-196\\ ^{\\circ}\\mathrm{C}$`,
+        },
+        {
+            level: 1,
+            question: `En sluten stålbehållare med luft värms från 10 °C till 20 °C. Volymen ändras inte. Vad händer med trycket i behållaren?`,
+            choices: [
+                'Trycket fördubblas',
+                'Trycket är oförändrat',
+                'Trycket ökar med ungefär 3,5 %',
+                'Trycket halveras',
+            ],
+            correct: 2,
+            solution: `Celsiustemperaturen fördubblas, men det är kelvintemperaturen som står i ideala gaslagen. Vid konstant volym förkortas $V$ bort:
+
+$$
+\\frac{p_1}{T_1} = \\frac{p_2}{T_2} \\quad\\Leftrightarrow\\quad \\frac{p_2}{p_1} = \\frac{T_2}{T_1}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+T_1 = 10 + 273 = 283\\ \\mathrm{K} \\\\
+T_2 = 20 + 273 = 293\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+$$
+\\frac{p_2}{p_1} = \\frac{293}{283} = 1{,}0353\\ldots
+$$
+
+Trycket blir alltså ungefär 1,035 gånger så stort, en ökning med ungefär 3,5 %. Svaret "fördubblas" får man om man räknar med grader celsius, och det är fel eftersom 20 °C inte är dubbelt så hög temperatur som 10 °C.
+
+**Svar:** Trycket ökar med ungefär 3,5 %.`,
+        },
+        {
+            level: 1,
+            question: `En ballong innehåller 2,5 liter luft vid rumstemperaturen 22 °C. Ballongen läggs i en frys där temperaturen är −18 °C. Trycket i ballongen är detsamma före och efter. Vilken volym har ballongen i frysen? Ange svaret i liter.`,
+            answer: { value: 2.2, unit: 'liter', tol: 0.03 },
+            solution: `Trycket är konstant ($p_1 = p_2$), så $p$ förkortas bort ur ideala gaslagen:
+
+$$
+\\frac{p_1 \\cdot V_1}{T_1} = \\frac{p_2 \\cdot V_2}{T_2}
+\\quad\\Rightarrow\\quad
+\\frac{V_1}{T_1} = \\frac{V_2}{T_2}
+\\quad\\Leftrightarrow\\quad
+V_2 = \\frac{V_1 \\cdot T_2}{T_1}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+V_1 = 2{,}5\\ \\mathrm{liter} \\\\
+T_1 = 22 + 273 = 295\\ \\mathrm{K} \\\\
+T_2 = -18 + 273 = 255\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+$$
+V_2 = \\frac{2{,}5 \\cdot 255}{295} = 2{,}161\\ldots\\ \\mathrm{liter} \\approx 2{,}2\\ \\mathrm{liter}
+$$
+
+Rimligt: luften blir kallare, så ballongen krymper, men bara lite eftersom kelvintemperaturen minskar med drygt 13 %.
+
+**Svar:** Cirka 2,2 liter`,
+        },
+        {
+            level: 1,
+            question: `Diagrammet visar hur trycket i en sluten flaska med gas beror på gasens temperatur i kelvin. Volymen är konstant. Vid vilken temperatur är trycket 100 kPa? Ange svaret i °C.
+
+${makeDiagram({
+    xMin: 0, xMax: 400, yMin: 0, yMax: 160,
+    xTicks: [0, 50, 100, 150, 200, 250, 300, 350, 400],
+    yTicks: [0, 20, 40, 60, 80, 100, 120, 140, 160],
+    xLabel: '<tspan font-style="italic">T</tspan> (K)',
+    yLabel: '<tspan font-style="italic">p</tspan> (kPa)',
+    paths: [{ points: [[0, 0], [400, 160]] }],
+})}`,
+            answer: { value: -23, unit: '°C', tol: 0.02 },
+            solution: `Vi följer den vågräta linjen vid $p = 100\\ \\mathrm{kPa}$ fram till grafen och läser av temperaturen rakt nedanför på den vågräta axeln:
+
+$$
+T_K = 250\\ \\mathrm{K}
+$$
+
+Diagrammet är ritat i kelvin, men svaret ska ges i grader celsius:
+
+$$
+T_C = T_K - 273 = 250 - 273 = -23\\ ^{\\circ}\\mathrm{C}
+$$
+
+Kontroll: grafen är en rät linje genom origo, så $\\dfrac{p}{T}$ är konstant. Punkten $(400\\ \\mathrm{K};\\ 160\\ \\mathrm{kPa})$ ger $\\dfrac{p}{T} = 0{,}4\\ \\mathrm{kPa/K}$, och $\\dfrac{100}{0{,}4} = 250\\ \\mathrm{K}$.
+
+**Svar:** $-23\\ ^{\\circ}\\mathrm{C}$`,
+        },
+        {
+            level: 2,
+            question: `En tryckmätare för bildäck visar **övertrycket**, alltså hur mycket högre trycket i däcket är än lufttrycket utanför. En kall morgon, när däcken har temperaturen 5 °C, visar mätaren 220 kPa. Lufttrycket är 100 kPa. Efter en lång körning har luften i däcket temperaturen 35 °C. Däckets volym ändras inte. Vad visar tryckmätaren nu? Ange svaret i kPa.`,
+            answer: { value: 255, unit: 'kPa', tol: 0.03 },
+            solution: `Ideala gaslagen gäller gasens **verkliga** tryck, inte övertrycket. Vi räknar därför först ut trycket i däcket:
+
+$$
+p_1 = 220 + 100 = 320\\ \\mathrm{kPa}
+$$
+
+Volymen är konstant ($V_1 = V_2$), så $V$ förkortas bort:
+
+$$
+\\frac{p_1}{T_1} = \\frac{p_2}{T_2} \\quad\\Leftrightarrow\\quad p_2 = \\frac{p_1 \\cdot T_2}{T_1}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+p_1 = 320\\ \\mathrm{kPa} \\\\
+T_1 = 5 + 273 = 278\\ \\mathrm{K} \\\\
+T_2 = 35 + 273 = 308\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+$$
+p_2 = \\frac{320 \\cdot 308}{278} = 354{,}53\\ldots\\ \\mathrm{kPa}
+$$
+
+Mätaren visar övertrycket, så vi drar bort lufttrycket igen:
+
+$$
+354{,}53 - 100 = 254{,}53\\ \\mathrm{kPa} \\approx 255\\ \\mathrm{kPa}
+$$
+
+Räknar man med övertrycket direkt i gaslagen får man $\\dfrac{220 \\cdot 308}{278} \\approx 244\\ \\mathrm{kPa}$, vilket är fel eftersom övertrycket inte är gasens tryck.
+
+**Svar:** Cirka 255 kPa`,
+        },
+        {
+            level: 2,
+            question: `En dykare på djupet 15 m andas ut en luftbubbla med volymen 2,0 cm³. Vattnet har temperaturen 8 °C på djupet och 18 °C vid ytan. Lufttrycket vid vattenytan är 101 kPa. Vilken volym har bubblan när den når ytan? Räkna med vattnets densitet $1\\,000\\ \\mathrm{kg/m^3}$ och $g = 9{,}82\\ \\mathrm{N/kg}$. Ange svaret i cm³.`,
+            answer: { value: 5.1, unit: 'cm³', tol: 0.03 },
+            solution: `Trycket i bubblan är lika stort som trycket i vattnet runt den. På djupet är det lufttrycket plus vätsketrycket:
+
+$$
+p_1 = p_0 + \\rho \\cdot g \\cdot h
+$$
+
+$$
+\\left[ \\begin{array}{l}
+p_0 = 101\\,000\\ \\mathrm{Pa} \\\\
+\\rho = 1\\,000\\ \\mathrm{kg/m^3} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+h = 15\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+p_1 = 101\\,000 + 1\\,000 \\cdot 9{,}82 \\cdot 15 = 248\\,300\\ \\mathrm{Pa} = 248{,}3\\ \\mathrm{kPa}
+$$
+
+Vid ytan är trycket $p_2 = 101\\ \\mathrm{kPa}$. Nu använder vi ideala gaslagen och löser ut $V_2$:
+
+$$
+\\frac{p_1 \\cdot V_1}{T_1} = \\frac{p_2 \\cdot V_2}{T_2}
+\\quad\\Leftrightarrow\\quad
+V_2 = \\frac{p_1 \\cdot V_1 \\cdot T_2}{p_2 \\cdot T_1}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+p_1 = 248{,}3\\ \\mathrm{kPa} \\\\
+V_1 = 2{,}0\\ \\mathrm{cm^3} \\\\
+T_1 = 8 + 273 = 281\\ \\mathrm{K} \\\\
+p_2 = 101\\ \\mathrm{kPa} \\\\
+T_2 = 18 + 273 = 291\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+$$
+V_2 = \\frac{248{,}3 \\cdot 2{,}0 \\cdot 291}{101 \\cdot 281} = 5{,}091\\ldots\\ \\mathrm{cm^3} \\approx 5{,}1\\ \\mathrm{cm^3}
+$$
+
+Rimligt: trycket minskar till ungefär 40 % och temperaturen ökar något, så bubblan blir drygt 2,5 gånger så stor.
+
+**Svar:** Cirka 5,1 cm³`,
+        },
+        {
+            level: 2,
+            question: `En elev värmer luften i en sluten glaskolv i ett vattenbad och mäter trycket vid olika temperaturer. Kolvens volym är konstant. En av mätningarna är felaktig.
+
+| Temperatur (°C) | 0 | 20 | 40 | 60 | 80 |
+| --- | --- | --- | --- | --- | --- |
+| Tryck (kPa) | 100,0 | 107,3 | 114,7 | 132,0 | 129,3 |
+
+Vilken mätning är felaktig, och vilket tryck borde eleven ha fått vid den temperaturen? Ange det tryck som borde ha uppmätts, i kPa.`,
+            answer: { value: 122, unit: 'kPa', tol: 0.01 },
+            solution: `Vid konstant volym ger ideala gaslagen
+
+$$
+\\frac{p_1}{T_1} = \\frac{p_2}{T_2}
+$$
+
+alltså ska kvoten $\\dfrac{p}{T}$ vara lika stor i alla mätningarna, **med temperaturen i kelvin**. Vi räknar kvoten för varje mätning:
+
+| $T_C$ (°C) | $T_K$ (K) | $p$ (kPa) | $\\dfrac{p}{T_K}$ (kPa/K) |
+| --- | --- | --- | --- |
+| 0 | 273 | 100,0 | 0,3663 |
+| 20 | 293 | 107,3 | 0,3662 |
+| 40 | 313 | 114,7 | 0,3665 |
+| 60 | 333 | 132,0 | 0,3964 |
+| 80 | 353 | 129,3 | 0,3663 |
+
+Mätningen vid 60 °C sticker ut. Den syns också utan räkning: trycket kan inte vara högre vid 60 °C än vid 80 °C när gasen värms i en sluten kolv.
+
+Det rätta trycket får vi ur första mätningen:
+
+$$
+\\frac{p_1}{T_1} = \\frac{p_2}{T_2} \\quad\\Leftrightarrow\\quad p_2 = \\frac{p_1 \\cdot T_2}{T_1}
+$$
+
+$$
+p_2 = \\frac{100{,}0 \\cdot 333}{273} = 121{,}97\\ldots\\ \\mathrm{kPa} \\approx 122\\ \\mathrm{kPa}
+$$
+
+Eleven har troligen skrivit 132,0 i stället för 122,0.
+
+**Svar:** Mätningen vid 60 °C är felaktig. Trycket borde ha varit cirka 122 kPa.`,
+        },
+        {
+            level: 2,
+            question: `På en sprayburk står det: "Utsätt inte burken för temperaturer över 50 °C." Gasen i en full burk har trycket 300 kPa vid 20 °C, och burken tål ett inre tryck på 450 kPa innan den spricker. Volymen av gasen i burken kan räknas som konstant.<br>a) Burken ligger på instrumentbrädan i en bil i solen och blir 70 °C varm. Vilket tryck har gasen då?<br>b) Vid vilken temperatur spricker burken?`,
+            answer: { value: 167, unit: '°C', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 351, unit: 'kPa', tol: 0.02 },
+                { del: 'b', value: 167, unit: '°C', tol: 0.03 },
+            ],
+            solution: `Volymen är konstant, så ideala gaslagen blir
+
+$$
+\\frac{p_1}{T_1} = \\frac{p_2}{T_2}
+$$
+
+**a)** Vi löser ut $p_2$:
+
+$$
+p_2 = \\frac{p_1 \\cdot T_2}{T_1}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+p_1 = 300\\ \\mathrm{kPa} \\\\
+T_1 = 20 + 273 = 293\\ \\mathrm{K} \\\\
+T_2 = 70 + 273 = 343\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+$$
+p_2 = \\frac{300 \\cdot 343}{293} = 351{,}19\\ldots\\ \\mathrm{kPa} \\approx 351\\ \\mathrm{kPa}
+$$
+
+**Svar:** Cirka 351 kPa
+
+**b)** Nu är trycket känt, $p_2 = 450\\ \\mathrm{kPa}$, och vi löser ut $T_2$:
+
+$$
+T_2 = \\frac{p_2 \\cdot T_1}{p_1} = \\frac{450 \\cdot 293}{300} = 439{,}5\\ \\mathrm{K}
+$$
+
+$$
+T_C = 439{,}5 - 273 = 166{,}5\\ ^{\\circ}\\mathrm{C} \\approx 167\\ ^{\\circ}\\mathrm{C}
+$$
+
+Burken skulle alltså klara långt mer än 50 °C. Varningen har en stor säkerhetsmarginal: i en verklig sprayburk finns också vätska som förångas när den värms, så trycket stiger snabbare än gaslagen ensam säger.
+
+**Svar:** Cirka 167 °C`,
+        },
+        {
+            level: 2,
+            question: `Diagrammet visar hur trycket beror på volymen för en bestämd mängd gas vid två olika temperaturer. Under ett försök hålls temperaturen konstant, och man får kurva A när temperaturen är 27 °C och kurva B vid en annan temperatur. Bestäm temperaturen för kurva B. Ange svaret i °C.
+
+${makeDiagram({
+    xMin: 0, xMax: 6, yMin: 0, yMax: 300,
+    xTicks: [0, 1, 2, 3, 4, 5, 6],
+    yTicks: [0, 50, 100, 150, 200, 250, 300],
+    xLabel: '<tspan font-style="italic">V</tspan> (liter)',
+    yLabel: '<tspan font-style="italic">p</tspan> (kPa)',
+    paths: [
+        { points: Array.from({ length: 226 }, (_, i) => { const v = 1.5 + i * 0.02; return [v, 300 / v]; }), color: '#2563a8' },
+        { points: Array.from({ length: 214 }, (_, i) => { const v = 1.74 + i * 0.02; return [v, 400 / v]; }) },
+    ],
+}).replace('</svg>', '<text x="232" y="238" font-size="15" font-weight="600" fill="#2563a8">A</text><text x="300" y="180" font-size="15" font-weight="600" fill="#c8324a">B</text></svg>')}`,
+            answer: { value: 127, unit: '°C', tol: 0.02 },
+            solution: `Vi läser av båda kurvorna vid samma volym, där de går genom rutnätets hörn. Vid $V = 2\\ \\mathrm{liter}$ har kurva A trycket 150 kPa och kurva B trycket 200 kPa.
+
+Gasmängden är densamma, så ideala gaslagen gäller mellan en punkt på A och en punkt på B:
+
+$$
+\\frac{p_\\mathrm{A} \\cdot V_\\mathrm{A}}{T_\\mathrm{A}} = \\frac{p_\\mathrm{B} \\cdot V_\\mathrm{B}}{T_\\mathrm{B}}
+$$
+
+Volymen är lika i de två punkterna vi valt, så $V$ förkortas bort:
+
+$$
+\\frac{p_\\mathrm{A}}{T_\\mathrm{A}} = \\frac{p_\\mathrm{B}}{T_\\mathrm{B}} \\quad\\Leftrightarrow\\quad T_\\mathrm{B} = \\frac{p_\\mathrm{B} \\cdot T_\\mathrm{A}}{p_\\mathrm{A}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+p_\\mathrm{A} = 150\\ \\mathrm{kPa} \\\\
+p_\\mathrm{B} = 200\\ \\mathrm{kPa} \\\\
+T_\\mathrm{A} = 27 + 273 = 300\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+$$
+T_\\mathrm{B} = \\frac{200 \\cdot 300}{150} = 400\\ \\mathrm{K}
+$$
+
+$$
+T_C = 400 - 273 = 127\\ ^{\\circ}\\mathrm{C}
+$$
+
+Rimligt: kurva B ligger högre än kurva A överallt, alltså har gasen högre tryck vid samma volym. Det kräver högre temperatur. Samma svar får man vid $V = 4\\ \\mathrm{liter}$, där trycken är 75 kPa och 100 kPa.
+
+**Svar:** Cirka 127 °C`,
+        },
+        {
+            level: 3,
+            question: `En chipspåse förseglas i en fabrik. Påsen är inte fullt spänd, så gasen i den kan utvidgas fritt. Påsen tas sedan med upp till en fjällstation där lufttrycket är 22 % lägre och den absoluta temperaturen 6,0 % lägre än i fabriken.<br>a) Med hur många procent har volymen av gasen i påsen ändrats? Ange svaret i procent.<br>b) Förklara varför påsen kan bli mer spänd fast det är kallare på fjällstationen.`,
+            answer: { value: 21, unit: '%', tol: 0.05 },
+            delsvar: [
+                { del: 'a', value: 21, unit: '%', tol: 0.05 },
+                { del: 'b' },
+            ],
+            solution: `**a)** Inga absoluta värden är givna, så vi löser uppgiften generellt. Påsen är inte spänd, så trycket i påsen är lika med lufttrycket utanför. Läge 1 är fabriken och läge 2 fjällstationen:
+
+$$
+p_2 = (1 - 0{,}22) \\cdot p_1 = 0{,}78 \\cdot p_1
+\\qquad
+T_2 = (1 - 0{,}060) \\cdot T_1 = 0{,}94 \\cdot T_1
+$$
+
+Ideala gaslagen löst för $V_2$:
+
+$$
+\\frac{p_1 \\cdot V_1}{T_1} = \\frac{p_2 \\cdot V_2}{T_2}
+\\quad\\Leftrightarrow\\quad
+V_2 = \\frac{p_1 \\cdot V_1 \\cdot T_2}{p_2 \\cdot T_1}
+$$
+
+Insättning av uttrycken för $p_2$ och $T_2$:
+
+$$
+V_2 = \\frac{p_1 \\cdot V_1 \\cdot 0{,}94 \\cdot T_1}{0{,}78 \\cdot p_1 \\cdot T_1}
+$$
+
+$p_1$ och $T_1$ förkortas bort:
+
+$$
+V_2 = \\frac{0{,}94}{0{,}78} \\cdot V_1 = 1{,}2051\\ldots \\cdot V_1
+$$
+
+Volymen blir alltså cirka 1,21 gånger så stor, en ökning med 21 %.
+
+**Svar:** Volymen ökar med cirka 21 %.
+
+**b)** Två ändringar verkar åt var sitt håll. Lägre temperatur minskar volymen, med faktorn 0,94. Lägre yttre tryck ökar volymen, med faktorn $\\dfrac{1}{0{,}78} \\approx 1{,}28$, eftersom gasen trycker ut påsen tills trycket inne är lika lågt som utanför. Tryckminskningen är procentuellt mycket större än temperaturminskningen, så nettoeffekten blir att volymen ökar och påsen spänns.
+
+**Svar:** Lufttrycket minskar med mycket större andel än den absoluta temperaturen, så gasen utvidgas mer av tryckfallet än den drar ihop sig av kylan.`,
+        },
+        {
+            level: 3,
+            question: `En glasburk med ett tätt lock stängs när luften i burken har temperaturen 80 °C och trycket 101 kPa, lika med lufttrycket utanför. Burken ställs sedan i ett kylskåp och svalnar till 6 °C. Locket är cirkulärt med diametern 12 cm. Bortse från vattenånga och från lockets egen tyngd.<br>a) Hur stor kraft behövs för att dra loss locket rakt uppåt? Ange svaret i N.<br>b) Är locket lättare eller svårare att få loss om burken i stället stängs och kyls på samma sätt på en fjällstation där lufttrycket är 85 kPa? Motivera med ett generellt uttryck.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 226" width="407" height="307" style="max-width:100%;height:auto;display:block;margin:16px auto;font-family:Poppins,sans-serif">
+<line x1="90" y1="40" x2="90" y2="52" stroke="#0f1620" stroke-width="1" stroke-dasharray="3 3"/>
+<line x1="210" y1="40" x2="210" y2="52" stroke="#0f1620" stroke-width="1" stroke-dasharray="3 3"/>
+<line x1="98" y1="36" x2="202" y2="36" stroke="#0f1620" stroke-width="1.4" stroke-linecap="butt"/>
+<polygon points="90,36 98,32 98,40" fill="#0f1620"/>
+<polygon points="210,36 202,32 202,40" fill="#0f1620"/>
+<text x="150" y="27" font-size="14" text-anchor="middle" fill="#0f1620">12 cm</text>
+<path d="M 92 74 L 92 196 Q 92 206 102 206 L 198 206 Q 208 206 208 196 L 208 74" fill="rgba(37,99,168,0.07)" stroke="#0f1620" stroke-width="2.2" stroke-linejoin="round"/>
+<line x1="99" y1="88" x2="99" y2="176" stroke="rgba(37,99,168,0.35)" stroke-width="2.5" stroke-linecap="round"/>
+<path d="M 94 150 Q 120 142 150 148 T 206 146 L 206 196 Q 206 204 198 204 L 102 204 Q 94 204 94 196 Z" fill="#d9a441" opacity="0.55"/>
+<rect x="86" y="56" width="128" height="18" rx="3" fill="#3a6ea5" stroke="#0f1620" stroke-width="1.6"/>
+<line x1="92" y1="65" x2="208" y2="65" stroke="rgba(15,22,32,0.35)" stroke-width="1"/>
+<text x="150" y="116" font-size="14" text-anchor="middle" fill="#0f1620">luft</text>
+<line x1="60" y1="218" x2="240" y2="218" stroke="#0f1620" stroke-width="1.6"/>
+</svg>`,
+            answer: { value: 240, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 240, unit: 'N', tol: 0.03 },
+                { del: 'b' },
+            ],
+            solution: `**a)** Luften i burken har konstant volym. Ideala gaslagen ger trycket efter avsvalningen:
+
+$$
+\\frac{p_1}{T_1} = \\frac{p_2}{T_2} \\quad\\Leftrightarrow\\quad p_2 = \\frac{p_1 \\cdot T_2}{T_1}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+p_1 = 101\\ \\mathrm{kPa} \\\\
+T_1 = 80 + 273 = 353\\ \\mathrm{K} \\\\
+T_2 = 6 + 273 = 279\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+$$
+p_2 = \\frac{101 \\cdot 279}{353} = 79{,}827\\ldots\\ \\mathrm{kPa}
+$$
+
+Luften utanför trycker locket nedåt med 101 kPa, och luften inne trycker det uppåt med bara 79,827 kPa. Skillnaden är det tryck som håller fast locket:
+
+$$
+\\Delta p = 101 - 79{,}827 = 21{,}173\\ \\mathrm{kPa} = 21\\,173\\ \\mathrm{Pa}
+$$
+
+Lockets area, med radien $r = 0{,}060\\ \\mathrm{m}$:
+
+$$
+A = \\pi \\cdot r^2 = \\pi \\cdot 0{,}060^2 = 0{,}011310\\ \\mathrm{m^2}
+$$
+
+Kraften får vi ur $p = \\dfrac{F}{A}$:
+
+$$
+F = \\Delta p \\cdot A = 21\\,173 \\cdot 0{,}011310 = 239{,}47\\ \\mathrm{N} \\approx 240\\ \\mathrm{N}
+$$
+
+Rimligt: det motsvarar att lyfta ungefär 24 kg, och det stämmer med erfarenheten att en sådan burk kan vara mycket svår att öppna.
+
+**Svar:** Cirka 240 N
+
+**b)** Vi skriver tryckskillnaden generellt, med lufttrycket $p_0$ när burken stängs:
+
+$$
+p_2 = \\frac{p_0 \\cdot T_2}{T_1}
+\\qquad
+\\Delta p = p_0 - \\frac{p_0 \\cdot T_2}{T_1} = p_0 \\cdot \\left(1 - \\frac{T_2}{T_1}\\right)
+$$
+
+Temperaturerna är desamma som förut, så parentesen är oförändrad. Tryckskillnaden, och därmed kraften $F = \\Delta p \\cdot A$, är proportionell mot lufttrycket $p_0$. Med $p_0 = 85\\ \\mathrm{kPa}$ blir kraften $\\dfrac{85}{101} \\approx 0{,}84$ gånger så stor, cirka 200 N.
+
+**Svar:** Locket är lättare att få loss, eftersom kraften är proportionell mot lufttrycket när burken stängs.`,
+        },
+        {
+            level: 3,
+            question: `En gas i en cylinder med en lätt rörlig kolv har temperaturen $t$ grader celsius. Gasen värms så att celsiustemperaturen fördubblas till $2t$. Trycket är hela tiden detsamma.<br>a) Ställ upp ett uttryck för hur många gånger större volymen blir, uttryckt i $t$.<br>b) Vilken starttemperatur ger att volymen ökar med 10 %? Ange svaret i °C.<br>c) En elev påstår att volymen fördubblas när celsiustemperaturen fördubblas, bara temperaturen är tillräckligt hög. Har eleven rätt? Motivera.`,
+            answer: { value: 30, unit: '°C', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 30, unit: '°C', tol: 0.03 },
+                { del: 'c' },
+            ],
+            solution: `**a)** Vid konstant tryck förkortas $p$ bort ur ideala gaslagen:
+
+$$
+\\frac{V_1}{T_1} = \\frac{V_2}{T_2} \\quad\\Leftrightarrow\\quad \\frac{V_2}{V_1} = \\frac{T_2}{T_1}
+$$
+
+Temperaturerna i kelvin är $T_1 = t + 273$ och $T_2 = 2t + 273$. Insatta:
+
+$$
+\\frac{V_2}{V_1} = \\frac{2t + 273}{t + 273}
+$$
+
+**Svar:** Volymen blir $\\dfrac{2t + 273}{t + 273}$ gånger så stor.
+
+**b)** En ökning med 10 % betyder att kvoten är 1,10:
+
+$$
+\\frac{2t + 273}{t + 273} = 1{,}10
+$$
+
+Vi multiplicerar båda led med $t + 273$:
+
+$$
+2t + 273 = 1{,}10 \\cdot (t + 273) = 1{,}10\\,t + 300{,}3
+$$
+
+Vi subtraherar $1{,}10\\,t$ och $273$ från båda led:
+
+$$
+0{,}90\\,t = 27{,}3
+$$
+
+Vi dividerar båda led med 0,90:
+
+$$
+t = \\frac{27{,}3}{0{,}90} = 30{,}33\\ldots\\ ^{\\circ}\\mathrm{C} \\approx 30\\ ^{\\circ}\\mathrm{C}
+$$
+
+Kontroll: från 30 °C till 60 °C går kelvintemperaturen från 303 K till 333 K, och $\\dfrac{333}{303} \\approx 1{,}10$.
+
+**Svar:** Cirka 30 °C
+
+**c)** Volymen fördubblas om kvoten blir 2:
+
+$$
+\\frac{2t + 273}{t + 273} = 2 \\quad\\Leftrightarrow\\quad 2t + 273 = 2t + 546
+$$
+
+Det ger $273 = 546$, vilket aldrig stämmer. Täljaren är alltid 273 mindre än dubbla nämnaren, så kvoten är alltid mindre än 2. När $t$ blir mycket stort närmar sig kvoten 2, men den når aldrig dit. Volymen fördubblas bara när **kelvintemperaturen** fördubblas.
+
+**Svar:** Nej. Kvoten $\\dfrac{2t + 273}{t + 273}$ är mindre än 2 för varje temperatur, även om den kommer nära 2 vid mycket höga temperaturer.`,
+        },
+        {
+            level: 3,
+            question: `En dykarflaska har volymen 12 liter och fylls med luft till trycket 20,0 MPa en dag då luften har temperaturen 20 °C. Dykaren går ned till djupet 20 m, där vattnet har temperaturen 10 °C, och flaskan antar vattnets temperatur. Dykaren andas där 25 liter luft per minut, räknat vid det tryck och den temperatur som luften har när den andas in, alltså vattnets tryck och temperatur på djupet. Dykaren ska börja stiga när trycket i flaskan sjunkit till 5,0 MPa. Lufttrycket vid ytan är 101 kPa, vattnets densitet $1\\,000\\ \\mathrm{kg/m^3}$ och $g = 9{,}82\\ \\mathrm{N/kg}$.
+
+Hur många minuter kan dykaren stanna på djupet? Ange svaret i minuter.`,
+            answer: { value: 23, unit: 'min', tol: 0.04 },
+            solution: `**Steg 1: trycket i flaskan när den svalnat.** Flaskans volym är konstant:
+
+$$
+\\frac{p_1}{T_1} = \\frac{p_2}{T_2} \\quad\\Leftrightarrow\\quad p_2 = \\frac{p_1 \\cdot T_2}{T_1}
+$$
+
+$$
+p_2 = \\frac{20{,}0 \\cdot 283}{293} = 19{,}317\\ \\mathrm{MPa}
+$$
+
+**Steg 2: trycket på djupet.** Det är lufttrycket plus vätsketrycket:
+
+$$
+p_\\text{djup} = p_0 + \\rho \\cdot g \\cdot h = 101\\,000 + 1\\,000 \\cdot 9{,}82 \\cdot 20 = 297\\,400\\ \\mathrm{Pa} = 297{,}4\\ \\mathrm{kPa}
+$$
+
+**Steg 3: hur mycket luft som får lämna flaskan.** Ideala gaslagen gäller ett bestämt antal molekyler, så vi delar upp luften i flaskan i två delar: den som stannar kvar och den som andas ut. Luften som stannar kvar fyller hela flaskan, 12 liter, vid 5,0 MPa. Vid 19,317 MPa och samma temperatur tar samma luft upp volymen
+
+$$
+V_\\text{kvar} = \\frac{12 \\cdot 5{,}0}{19{,}317} = 3{,}106\\ \\mathrm{liter}
+$$
+
+Resten av flaskan, vid 19,317 MPa, är den luft dykaren får andas:
+
+$$
+V_\\text{ut} = 12 - 3{,}106 = 8{,}894\\ \\mathrm{liter}
+$$
+
+**Steg 4: den luftens volym på djupet.** Temperaturen är densamma, 10 °C, så $T$ förkortas bort. Vi räknar trycken i kPa:
+
+$$
+V_\\text{andas} = \\frac{8{,}894 \\cdot 19\\,317}{297{,}4} = 577{,}7\\ \\mathrm{liter}
+$$
+
+**Steg 5: tiden.**
+
+$$
+t = \\frac{577{,}7}{25} = 23{,}1\\ \\mathrm{min} \\approx 23\\ \\mathrm{min}
+$$
+
+Rimligt: vid ytan skulle samma luft räcka ungefär tre gånger så länge, eftersom trycket på 20 m djup är ungefär tre gånger lufttrycket. Avsvalningen i vattnet sänker trycket i flaskan med ungefär 3 %, och det kostar knappt 5 % av den luft dykaren får andas.
+
+**Svar:** Cirka 23 minuter`,
+        },
+        {
+            level: 3,
+            question: `En gastermometer består av en glaskolv med konstant volym, kopplad till en tryckmätare. Kolven sänks först ned i isvatten, 0 °C, och mätaren visar 90,0 kPa. Sedan sänks den ned i kokande vatten, 100 °C, och mätaren visar 123,0 kPa.<br>a) Anta att trycket ändras lika mycket för varje grad. Vid vilken temperatur skulle trycket bli noll enligt mätningarna? Ange svaret i °C.<br>b) Tryckmätaren har en osäkerhet på ±0,5 kPa i varje avläsning. Hur mycket kan svaret i a) som mest avvika på grund av det? Ange svaret i °C.`,
+            answer: { value: -273, unit: '°C', tol: 0.01 },
+            delsvar: [
+                { del: 'a', value: -273, unit: '°C', tol: 0.01 },
+                { del: 'b', value: 10, unit: '°C', tol: 0.1 },
+            ],
+            solution: `**a)** Trycket ökar lika mycket för varje grad, så trycket är en rät linje mot celsiustemperaturen. Lutningen är
+
+$$
+k = \\frac{\\Delta p}{\\Delta T} = \\frac{123{,}0 - 90{,}0}{100 - 0} = 0{,}33\\ \\mathrm{kPa/^{\\circ}C}
+$$
+
+Från 0 °C, där trycket är 90,0 kPa, ska trycket minska med 90,0 kPa. Det kräver en temperatursänkning med
+
+$$
+\\frac{90{,}0}{0{,}33} = 272{,}7\\ ^{\\circ}\\mathrm{C}
+$$
+
+Trycket blir alltså noll vid $0 - 272{,}7 = -272{,}7\\ ^{\\circ}\\mathrm{C} \\approx -273\\ ^{\\circ}\\mathrm{C}$. Det är den absoluta nollpunkten, och det är skälet till att ideala gaslagen kräver kelvin: trycket är proportionellt mot temperaturen räknad därifrån.
+
+**Svar:** Cirka $-273\\ ^{\\circ}\\mathrm{C}$
+
+**b)** Svaret blir som mest fel när de två avläsningarna är fel åt var sitt håll, eftersom lutningen då ändras mest.
+
+*Lägsta lutningen:* 90,5 kPa vid 0 °C och 122,5 kPa vid 100 °C.
+
+$$
+k = \\frac{122{,}5 - 90{,}5}{100} = 0{,}32\\ \\mathrm{kPa/^{\\circ}C}
+\\qquad
+\\frac{90{,}5}{0{,}32} = 282{,}8\\ ^{\\circ}\\mathrm{C}
+$$
+
+Nollpunkten hamnar vid $-282{,}8\\ ^{\\circ}\\mathrm{C}$, cirka 10 °C för lågt.
+
+*Högsta lutningen:* 89,5 kPa vid 0 °C och 123,5 kPa vid 100 °C.
+
+$$
+k = \\frac{123{,}5 - 89{,}5}{100} = 0{,}34\\ \\mathrm{kPa/^{\\circ}C}
+\\qquad
+\\frac{89{,}5}{0{,}34} = 263{,}2\\ ^{\\circ}\\mathrm{C}
+$$
+
+Nollpunkten hamnar vid $-263{,}2\\ ^{\\circ}\\mathrm{C}$, cirka 10 °C för högt.
+
+En osäkerhet på bara 0,5 kPa ger alltså en osäkerhet på ungefär 10 °C. Skälet är att linjen förlängs nästan tre gånger så långt som mätintervallet, så ett litet fel i lutningen förstoras. Bättre värden får man med fler mätpunkter över ett större temperaturintervall.
+
+**Svar:** Cirka 10 °C åt vardera hållet`,
+        },
+        {
+            level: 3,
+            question: `En varmluftsballong har volymen 2 500 m³. Utomhusluften har temperaturen 10 °C och densiteten 1,25 kg/m³. Luften i ballongen värms till 100 °C. Ballongen är öppen i botten, så trycket inne är lika med lufttrycket utanför.<br>a) Hur stor massa kan ballongen lyfta (hölje, korg och passagerare tillsammans)? Ange svaret i kg.<br>b) Till vilken temperatur måste luften i ballongen värmas för att den ska kunna lyfta 900 kg? Ange svaret i °C.`,
+            answer: { value: 750, unit: 'kg', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 750, unit: 'kg', tol: 0.03 },
+                { del: 'b', value: 124, unit: '°C', tol: 0.03 },
+            ],
+            solution: `**Densiteten hos den varma luften.** Tänk på en bestämd mängd luft med massan $m$ som värms vid konstant tryck. Ideala gaslagen ger
+
+$$
+\\frac{V_1}{T_1} = \\frac{V_2}{T_2} \\quad\\Leftrightarrow\\quad V_2 = \\frac{V_1 \\cdot T_2}{T_1}
+$$
+
+Massan är densamma, så densiteten $\\rho = \\dfrac{m}{V}$ minskar lika mycket som volymen ökar:
+
+$$
+\\rho_2 = \\frac{m}{V_2} = \\frac{m \\cdot T_1}{V_1 \\cdot T_2} = \\rho_1 \\cdot \\frac{T_1}{T_2}
+$$
+
+**a)** Med $T_1 = 10 + 273 = 283\\ \\mathrm{K}$ och $T_2 = 100 + 273 = 373\\ \\mathrm{K}$:
+
+$$
+\\rho_\\text{inne} = 1{,}25 \\cdot \\frac{283}{373} = 0{,}94839\\ \\mathrm{kg/m^3}
+$$
+
+Lyftkraften på ballongen är tyngden av den utomhusluft den tränger undan (Arkimedes princip), och den motverkas av tyngden av den varma luften inne. Resten kan bära lasten:
+
+$$
+m_\\text{last} \\cdot g = \\rho_\\text{ute} \\cdot V \\cdot g - \\rho_\\text{inne} \\cdot V \\cdot g
+\\quad\\Leftrightarrow\\quad
+m_\\text{last} = (\\rho_\\text{ute} - \\rho_\\text{inne}) \\cdot V
+$$
+
+$$
+m_\\text{last} = (1{,}25 - 0{,}94839) \\cdot 2\\,500 = 754{,}0\\ \\mathrm{kg} \\approx 750\\ \\mathrm{kg}
+$$
+
+Rimligt: ett hölje och en korg väger några hundra kilo, så det räcker till ett par passagerare.
+
+**Svar:** Cirka 750 kg
+
+**b)** Vi löser ut den densitet som krävs:
+
+$$
+\\rho_\\text{inne} = \\rho_\\text{ute} - \\frac{m_\\text{last}}{V} = 1{,}25 - \\frac{900}{2\\,500} = 1{,}25 - 0{,}36 = 0{,}89\\ \\mathrm{kg/m^3}
+$$
+
+Sambandet $\\rho_2 = \\rho_1 \\cdot \\dfrac{T_1}{T_2}$ löst för $T_2$:
+
+$$
+T_2 = \\frac{\\rho_1 \\cdot T_1}{\\rho_2} = \\frac{1{,}25 \\cdot 283}{0{,}89} = 397{,}47\\ \\mathrm{K}
+$$
+
+$$
+T_C = 397{,}47 - 273 = 124{,}47\\ ^{\\circ}\\mathrm{C} \\approx 124\\ ^{\\circ}\\mathrm{C}
+$$
+
+Rimligt: en tyngre last kräver tunnare luft i ballongen, alltså varmare luft. Verkliga varmluftsballonger värms ungefär till mellan 100 °C och 120 °C.
+
+**Svar:** Cirka 124 °C`,
         },
     ],
 
@@ -25818,7 +34645,7 @@ A_2 = 50\\ \\mathrm{cm^2}
 \\end{array} \\right]
 $$
 
-Notera att areorna inte behöver vara i SI — bara samma enhet på båda sidor.
+Notera att areorna inte behöver vara i SI, bara samma enhet på båda sidor.
 
 $$
 F_2 = 80 \\cdot \\frac{50}{5{,}0} = 800\\ \\mathrm{N}
@@ -25852,7 +34679,7 @@ $$
 
 **Svar:** 64 gånger.
 
-**Generell slutsats:** En klassisk fälla är att svara 8 (= förhållandet mellan diametrarna). Men det är **areorna** som spelar roll, och cirkelarean växer med kvadraten av diametern — alltså är kraftförstärkningen $(d_2/d_1)^{2}$.`,
+**Generell slutsats:** En klassisk fälla är att svara 8 (= förhållandet mellan diametrarna). Men det är **areorna** som spelar roll, och cirkelarean växer med kvadraten av diametern. Alltså är kraftförstärkningen $(d_2/d_1)^{2}$.`,
         },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
@@ -25912,7 +34739,7 @@ $$
 
 **Svar:** a) 3 000 N (= 3,0 kN). b) 0,80 cm.
 
-**Generell slutsats:** Det finns ingen "gratis" kraftförstärkning. Vad du vinner i kraft förlorar du i sträcka — produkten $F \\cdot s$ (= arbetet) är densamma på båda sidor. Kontroll: $F_1 s_1 = 120 \\cdot 0{,}20 = 24$ J och $F_2 s_2 = 3\\,000 \\cdot 0{,}0080 = 24$ J. ✓ Detta är **mekanikens gyllene regel**.`,
+**Generell slutsats:** Det finns ingen "gratis" kraftförstärkning. Vad du vinner i kraft förlorar du i sträcka: produkten $F \\cdot s$ (= arbetet) är densamma på båda sidor. Kontroll: $F_1 s_1 = 120 \\cdot 0{,}20 = 24$ J och $F_2 s_2 = 3\\,000 \\cdot 0{,}0080 = 24$ J. ✓ Detta är **mekanikens gyllene regel**.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
@@ -25971,7 +34798,720 @@ $$
 
 **Svar:** Ca 380 N (kraften måste vara så stor att den balanserar både lastens tyngd och vätskepelaren i slangen).
 
-**Generell slutsats:** I idealfallet (om kolvarna hade varit på samma höjd) skulle insatskraften ha varit bara $F_1 = F_\\mathrm{last} \\cdot A_1/A_2 = 14\\,730 \\cdot 5{,}0/200 \\approx 368$ N. De extra ~13 N kommer från att man måste "trycka upp" vätskan 3 m i slangen — vilket ger ett extra vätsketryck $\\rho g h \\approx 26$ kPa som multiplicerat med lilla areans 5,0 · 10⁻⁴ m² ger just 13 N.`,
+**Generell slutsats:** I idealfallet (om kolvarna hade varit på samma höjd) skulle insatskraften ha varit bara $F_1 = F_\\mathrm{last} \\cdot A_1/A_2 = 14\\,730 \\cdot 5{,}0/200 \\approx 368$ N. De extra ~13 N kommer från att man måste "trycka upp" vätskan 3 m i slangen, vilket ger ett extra vätsketryck $\\rho g h \\approx 26$ kPa som multiplicerat med lilla areans 5,0 · 10⁻⁴ m² ger just 13 N.`,
+        },
+        {
+            level: 1,
+            question: `En plastflaska är helt fylld med vatten och har tre små hål: ett nära korken, ett mitt på och ett nära botten. Flaskan ligger ned på ett bord så att alla hålen är på samma höjd. Du klämmer på flaskans mitt. Var blir tryckökningen i vattnet störst?`,
+            choices: [
+                `Vid hålet närmast där du klämmer`,
+                `Vid hålet längst bort från där du klämmer`,
+                `Lika stor vid alla tre hålen`,
+                `Ingen tryckökning alls, eftersom vattnet rinner ut`,
+            ],
+            correct: 2,
+            solution: `Enligt Pascals princip fortplantas en tryckökning som en yttre kraft orsakar **i hela vätskan**. Vatten går nästan inte att pressa ihop, så tryckökningen blir lika stor överallt i flaskan, oavsett var du klämmer.
+
+Därför sprutar vattnet ut lika hårt ur alla tre hålen (när de ligger på samma höjd).
+
+**Svar:** Lika stor vid alla tre hålen.`,
+        },
+        {
+            level: 1,
+            question: `I en sluten slang fylld med olja sitter en kolv med arean 1,5 cm². Du trycker på kolven med kraften 30 N.<br>a) Hur stor blir tryckökningen i oljan vid kolven?<br>b) Hur stor blir tryckökningen i oljan vid slangens andra ände?<br>Ange svaren i kPa.`,
+            answer: { value: 200, unit: 'kPa', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 200, unit: 'kPa', tol: 0.02 },
+                { del: 'b', value: 200, unit: 'kPa', tol: 0.02 },
+            ],
+            solution: `**a)** Trycket är kraft per area:
+
+$$
+p = \\dfrac{F}{A}
+$$
+
+Här måste arean vara i SI-enheten m², eftersom vi vill ha trycket i pascal.
+
+$$
+\\left[ \\begin{array}{l}
+F = 30\\ \\mathrm{N} \\\\
+A = 1{,}5\\ \\mathrm{cm^2} = 1{,}5 \\cdot 10^{-4}\\ \\mathrm{m^2}
+\\end{array} \\right]
+$$
+
+$$
+p = \\dfrac{30}{1{,}5 \\cdot 10^{-4}} = 200\\,000\\ \\mathrm{Pa} = 200\\ \\mathrm{kPa}
+$$
+
+**Svar:** 200 kPa.
+
+**b)** Enligt Pascals princip fortplantas tryckökningen i hela oljan och blir lika stor överallt, alltså även vid slangens andra ände.
+
+**Svar:** 200 kPa.`,
+        },
+        {
+            level: 1,
+            question: `En lyftplattform i en bilverkstad drivs hydrauliskt. Den stora kolven har arean 300 cm² och ska lyfta med kraften 18 kN. Den lilla kolven, som pumpen trycker på, har arean 6,0 cm². Hur stor kraft måste pumpen trycka med på den lilla kolven? Ange svaret i N.`,
+            answer: { value: 360, unit: 'N', tol: 0.02 },
+            solution: `Pascals princip:
+
+$$
+\\dfrac{F_1}{A_1} = \\dfrac{F_2}{A_2}
+$$
+
+Vi multiplicerar båda led med $A_1$ och får
+
+$$
+F_1 = \\dfrac{F_2 \\cdot A_1}{A_2}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F_2 = 18\\ \\mathrm{kN} = 18\\,000\\ \\mathrm{N} \\\\
+A_1 = 6{,}0\\ \\mathrm{cm^2} \\\\
+A_2 = 300\\ \\mathrm{cm^2}
+\\end{array} \\right]
+$$
+
+Areorna har samma enhet, så de behöver inte göras om till m².
+
+$$
+F_1 = \\dfrac{18\\,000 \\cdot 6{,}0}{300} = 360\\ \\mathrm{N}
+$$
+
+Rimligt: den stora kolven är 50 gånger större än den lilla, och 360 N är en femtiondel av 18 000 N.
+
+**Svar:** 360 N.`,
+        },
+        {
+            level: 1,
+            question: `En hydraulisk domkraft ska ge kraften 6,0 kN på den stora kolven när man trycker med 150 N på den lilla kolven. Den lilla kolven har arean 4,0 cm². Hur stor area måste den stora kolven ha? Ange svaret i cm².`,
+            answer: { value: 160, unit: 'cm²', tol: 0.02 },
+            solution: `Pascals princip:
+
+$$
+\\dfrac{F_1}{A_1} = \\dfrac{F_2}{A_2}
+$$
+
+Vi löser ut $A_2$: multiplicera båda led med $A_1 \\cdot A_2$ och dividera med $F_1$.
+
+$$
+A_2 = \\dfrac{F_2 \\cdot A_1}{F_1}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F_1 = 150\\ \\mathrm{N} \\\\
+F_2 = 6{,}0\\ \\mathrm{kN} = 6\\,000\\ \\mathrm{N} \\\\
+A_1 = 4{,}0\\ \\mathrm{cm^2}
+\\end{array} \\right]
+$$
+
+Krafterna måste ha samma enhet (N). Då får $A_2$ samma enhet som $A_1$.
+
+$$
+A_2 = \\dfrac{6\\,000 \\cdot 4{,}0}{150} = 160\\ \\mathrm{cm^2}
+$$
+
+**Svar:** 160 cm².`,
+        },
+        {
+            level: 2,
+            question: `I en bils bromssystem trycker bromspedalen på en kolv i huvudcylindern med kraften 300 N. Huvudcylinderns kolv har diametern 2,0 cm. Bromsoljan leder trycket till kolvarna vid hjulen, som har diametern 5,0 cm.<br>a) Hur stor blir tryckökningen i bromsoljan? Ange svaret i MPa.<br>b) Hur stor kraft trycker varje kolv vid hjulen med på bromsbeläggen? Ange svaret i kN.`,
+            answer: { value: 1.9, unit: 'kN', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 0.95, unit: 'MPa', tol: 0.03 },
+                { del: 'b', value: 1.9, unit: 'kN', tol: 0.03 },
+            ],
+            solution: `**a)** Kolvarna är cirkelformade, så arean är $A = \\pi r^{2}$ där radien är halva diametern.
+
+$$
+\\left[ \\begin{array}{l}
+F_1 = 300\\ \\mathrm{N} \\\\
+r_1 = 1{,}0\\ \\mathrm{cm} = 0{,}010\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$
+A_1 = \\pi \\cdot 0{,}010^{2} = 3{,}1416 \\cdot 10^{-4}\\ \\mathrm{m^2}
+$$
+
+$$
+p = \\dfrac{F_1}{A_1} = \\dfrac{300}{3{,}1416 \\cdot 10^{-4}} = 954\\,930\\ \\mathrm{Pa} \\approx 0{,}95\\ \\mathrm{MPa}
+$$
+
+**Svar:** 0,95 MPa.
+
+**b)** Tryckökningen fortplantas i hela bromsoljan (Pascals princip), så samma tryck verkar på varje kolv vid hjulen:
+
+$$
+\\dfrac{F_1}{A_1} = \\dfrac{F_2}{A_2} \\quad\\Leftrightarrow\\quad F_2 = F_1 \\cdot \\dfrac{A_2}{A_1}
+$$
+
+Kvoten mellan två cirkelareor är kvoten mellan radierna i kvadrat, eftersom $\\pi$ tar ut sig, och det är samma sak som kvoten mellan diametrarna i kvadrat:
+
+$$
+\\dfrac{A_2}{A_1} = \\dfrac{\\pi r_2^{2}}{\\pi r_1^{2}} = \\left(\\dfrac{5{,}0}{2{,}0}\\right)^{2} = 6{,}25
+$$
+
+$$
+F_2 = 300 \\cdot 6{,}25 = 1\\,875\\ \\mathrm{N} \\approx 1{,}9\\ \\mathrm{kN}
+$$
+
+Varje kolv vid hjulen får alltså drygt sex gånger så stor kraft som pedalen ger, och det gäller för alla hjul samtidigt.
+
+**Svar:** 1,9 kN.`,
+        },
+        {
+            level: 2,
+            question: `En frisörstol höjs och sänks hydrauliskt. Stolen och kunden har tillsammans massan 110 kg och vilar på en kolv med arean 75 cm². Frisören pumpar med foten på en kolv med arean 2,5 cm². Bortse från friktion och räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.<br>a) Hur stor kraft måste foten trycka med för att stolen ska höjas? Ange svaret i N.<br>b) Stolen ska höjas 6,0 cm. Hur lång sträcka måste den lilla kolven sammanlagt tryckas ned? Ange svaret i m.`,
+            answer: { value: 1.8, unit: 'm', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 36, unit: 'N', tol: 0.03 },
+                { del: 'b', value: 1.8, unit: 'm', tol: 0.03 },
+            ],
+            solution: `**a)** Den stora kolven ska bära stolens och kundens tyngd:
+
+$$
+F_2 = m \\cdot g = 110 \\cdot 9{,}82 = 1\\,080{,}2\\ \\mathrm{N}
+$$
+
+Pascals princip ger
+
+$$
+\\dfrac{F_1}{A_1} = \\dfrac{F_2}{A_2} \\quad\\Leftrightarrow\\quad F_1 = \\dfrac{F_2 \\cdot A_1}{A_2}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F_2 = 1\\,080{,}2\\ \\mathrm{N} \\\\
+A_1 = 2{,}5\\ \\mathrm{cm^2} \\\\
+A_2 = 75\\ \\mathrm{cm^2}
+\\end{array} \\right]
+$$
+
+$$
+F_1 = \\dfrac{1\\,080{,}2 \\cdot 2{,}5}{75} = 36{,}007\\ \\mathrm{N} \\approx 36\\ \\mathrm{N}
+$$
+
+**Svar:** 36 N.
+
+**b)** Oljan kan inte pressas ihop. Den volym olja som den lilla kolven trycker undan är lika stor som den volym som den stora kolven lyfts av:
+
+$$
+A_1 \\cdot s_1 = A_2 \\cdot s_2 \\quad\\Leftrightarrow\\quad s_1 = \\dfrac{A_2 \\cdot s_2}{A_1}
+$$
+
+$$
+s_1 = \\dfrac{75 \\cdot 6{,}0}{2{,}5} = 180\\ \\mathrm{cm} = 1{,}8\\ \\mathrm{m}
+$$
+
+Kraften blir en trettiondel så stor, men sträckan blir 30 gånger längre. Därför pumpar frisören många korta tag i stället för ett enda långt.
+
+**Svar:** 1,8 m.`,
+        },
+        {
+            level: 2,
+            question: `I en laboration mäter en elevgrupp hur stor kraft $F_2$ den stora kolven i en hydraulisk press ger när man trycker med olika krafter $F_1$ på den lilla kolven. Resultatet visas i diagrammet.
+
+${makeDiagram({
+    xMin: 0, xMax: 100, yMin: 0, yMax: 2.4,
+    xTicks: [0, 20, 40, 60, 80, 100],
+    yTicks: [0, 0.4, 0.8, 1.2, 1.6, 2.0, 2.4],
+    xLabel: '<tspan font-style="italic">F</tspan>₁ (N)',
+    yLabel: '<tspan font-style="italic">F</tspan>₂ (kN)',
+    paths: [{ points: [[0, 0], [100, 2.4]] }],
+})}
+
+a) Hur många gånger större är den stora kolvens area än den lilla kolvens?<br>b) Den lilla kolven har arean 3,0 cm². Vilken area har den stora kolven? Ange svaret i cm².<br>c) Hur stor kraft $F_1$ behövs för att den stora kolven ska ge 3,6 kN? Ange svaret i N.`,
+            answer: { value: 150, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 24, unit: 'gånger', tol: 0.03 },
+                { del: 'b', value: 72, unit: 'cm²', tol: 0.03 },
+                { del: 'c', value: 150, unit: 'N', tol: 0.03 },
+            ],
+            solution: `**a)** Pascals princip ger
+
+$$
+\\dfrac{F_1}{A_1} = \\dfrac{F_2}{A_2} \\quad\\Leftrightarrow\\quad \\dfrac{F_2}{F_1} = \\dfrac{A_2}{A_1}
+$$
+
+Kraftförstärkningen är alltså lika med areaförhållandet. Vi läser av en tydlig punkt på linjen: $F_1 = 100\\ \\mathrm{N}$ ger $F_2 = 2{,}4\\ \\mathrm{kN} = 2\\,400\\ \\mathrm{N}$.
+
+$$
+\\dfrac{A_2}{A_1} = \\dfrac{F_2}{F_1} = \\dfrac{2\\,400}{100} = 24
+$$
+
+**Svar:** 24 gånger.
+
+**b)**
+
+$$
+A_2 = 24 \\cdot A_1 = 24 \\cdot 3{,}0 = 72\\ \\mathrm{cm^2}
+$$
+
+**Svar:** 72 cm².
+
+**c)** 3,6 kN ligger utanför diagrammet, men linjen går genom origo, så förstärkningen är 24 för alla krafter:
+
+$$
+F_1 = \\dfrac{F_2}{24} = \\dfrac{3\\,600}{24} = 150\\ \\mathrm{N}
+$$
+
+**Svar:** 150 N.`,
+        },
+        {
+            level: 2,
+            question: `I en hydraulisk domkraft byts den stora kolven ut mot en kolv med dubbelt så stor diameter. Den lilla kolven och kraften på den är desamma som förut. Vad händer med kraften från den stora kolven?`,
+            choices: [
+                `Den halveras`,
+                `Den blir oförändrad`,
+                `Den fördubblas`,
+                `Den blir fyra gånger så stor`,
+            ],
+            correct: 3,
+            solution: `Pascals princip ger
+
+$$
+F_2 = F_1 \\cdot \\dfrac{A_2}{A_1}
+$$
+
+Med $F_1$ och $A_1$ oförändrade är $F_2$ proportionell mot $A_2$. Kolvens area är en cirkelarea, $A = \\pi r^{2}$. Dubbelt så stor diameter ger dubbelt så stor radie, och då blir arean
+
+$$
+\\pi \\cdot (2r)^{2} = 4 \\cdot \\pi r^{2}
+$$
+
+alltså fyra gånger så stor. Kraften blir därför också fyra gånger så stor. Den vanliga fällan är att svara att kraften fördubblas, som om kraften berodde på diametern och inte på arean.
+
+**Svar:** Den blir fyra gånger så stor.`,
+        },
+        {
+            level: 2,
+            question: `En verkstad ska välja mellan två hydrauliska domkrafter.
+
+| Domkraft | Lilla kolven | Stora kolven |
+|---|---|---|
+| X | diameter 1,2 cm | diameter 6,0 cm |
+| Y | area 1,5 cm² | area 40 cm² |
+
+a) Beräkna kraftförstärkningen $\\dfrac{F_2}{F_1}$ för båda domkrafterna.<br>b) Med vilken av dem kan en mekaniker lyfta störst last med samma kraft på den lilla kolven?`,
+            answer: { value: 27, unit: '', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 25, unit: '', etikett: 'domkraft X', tol: 0.03 },
+                { del: 'a', value: 27, unit: '', etikett: 'domkraft Y', tol: 0.03 },
+                { del: 'b' },
+            ],
+            solution: `**a)** Enligt Pascals princip är kraftförstärkningen lika med areaförhållandet:
+
+$$
+\\dfrac{F_1}{A_1} = \\dfrac{F_2}{A_2} \\quad\\Leftrightarrow\\quad \\dfrac{F_2}{F_1} = \\dfrac{A_2}{A_1}
+$$
+
+*Domkraft X:* här är diametrarna givna. Arean är $A = \\pi r^{2}$, och i kvoten tar $\\pi$ ut sig, så areaförhållandet är diameterförhållandet i kvadrat:
+
+$$
+\\dfrac{F_2}{F_1} = \\dfrac{A_2}{A_1} = \\left(\\dfrac{6{,}0}{1{,}2}\\right)^{2} = 5{,}0^{2} = 25
+$$
+
+*Domkraft Y:* här är areorna givna direkt.
+
+$$
+\\dfrac{F_2}{F_1} = \\dfrac{40}{1{,}5} = 26{,}67 \\approx 27
+$$
+
+**Svar:** Domkraft X förstärker kraften 25 gånger och domkraft Y cirka 27 gånger.
+
+**b)** Störst last med samma insatskraft får man med den domkraft som har störst förstärkning. Skillnaden är liten, cirka 7 %, men den finns.
+
+**Svar:** Med domkraft Y.`,
+        },
+        {
+            level: 3,
+            question: `I en bils bromssystem har det kommit in en liten luftbubbla i bromsoljan. Vid atmosfärstrycket 100 kPa har bubblan volymen 1,5 cm³. Kolven i huvudcylindern, som bromspedalen trycker på, har arean 3,0 cm². Temperaturen är konstant, och oljan går inte att pressa ihop. Hur mycket längre måste kolven i huvudcylindern tryckas in på grund av bubblan<br>a) vid en lätt inbromsning, när trycket i oljan ökar med 0,20 MPa?<br>b) vid en kraftig inbromsning, när trycket i oljan ökar med 2,0 MPa?<br>c) Föraren tycker att bromspedalen ”känns sviktande”. Förklara med hjälp av dina resultat varför, och varför en verkstad tar bort luften ur bromssystemet.<br>Ange svaren på a) och b) i mm.`,
+            answer: { value: 4.8, unit: 'mm', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 3.3, unit: 'mm', tol: 0.03 },
+                { del: 'b', value: 4.8, unit: 'mm', tol: 0.03 },
+                { del: 'c' },
+            ],
+            solution: `**a)** Enligt Pascals princip fortplantas tryckökningen i hela oljan, så bubblan får samma tryckökning som oljan, 0,20 MPa. Bubblan är en gas, och ideala gaslagen ger
+
+$$
+\\dfrac{p_1 \\cdot V_1}{T_1} = \\dfrac{p_2 \\cdot V_2}{T_2}
+$$
+
+Temperaturen är konstant, $T_1 = T_2$, så vi multiplicerar båda led med $T_1$:
+
+$$
+p_1 \\cdot V_1 = p_2 \\cdot V_2
+$$
+
+Gaslagen gäller det **totala** trycket i gasen, inte tryckökningen. Före inbromsningen är trycket i bubblan atmosfärstrycket, och under inbromsningen är det atmosfärstrycket plus tryckökningen.
+
+$$
+\\left[ \\begin{array}{l}
+p_1 = 100\\ \\mathrm{kPa} \\\\
+V_1 = 1{,}5\\ \\mathrm{cm^3} \\\\
+p_2 = 100\\ \\mathrm{kPa} + 200\\ \\mathrm{kPa} = 300\\ \\mathrm{kPa}
+\\end{array} \\right]
+$$
+
+Vi dividerar båda led med $p_2$. Trycken förekommer bara som kvot, så de kan stå kvar i kPa.
+
+$$
+V_2 = \\dfrac{p_1 \\cdot V_1}{p_2} = \\dfrac{100 \\cdot 1{,}5}{300} = 0{,}50\\ \\mathrm{cm^3}
+$$
+
+Bubblan krymper alltså med
+
+$$
+\\Delta V = V_1 - V_2 = 1{,}5 - 0{,}50 = 1{,}0\\ \\mathrm{cm^3}
+$$
+
+Oljan kan inte pressas ihop, så den volymen måste kolven i huvudcylindern trycka in utöver det den annars hade behövt. En kolv med arean $A$ som flyttas sträckan $s$ trycker in volymen $A \\cdot s$:
+
+$$
+A \\cdot s = \\Delta V \\quad\\Leftrightarrow\\quad s = \\dfrac{\\Delta V}{A} = \\dfrac{1{,}0}{3{,}0} = 0{,}333\\ \\mathrm{cm} \\approx 3{,}3\\ \\mathrm{mm}
+$$
+
+Hade man räknat med bara tryckökningen, 200 kPa, som tryck i bubblan hade svaret blivit 2,5 mm, alltså klart fel.
+
+**Svar:** Cirka 3,3 mm.
+
+**b)** Samma räkning med $p_2 = 100\\ \\mathrm{kPa} + 2\\,000\\ \\mathrm{kPa} = 2\\,100\\ \\mathrm{kPa}$:
+
+$$
+V_2 = \\dfrac{p_1 \\cdot V_1}{p_2} = \\dfrac{100 \\cdot 1{,}5}{2\\,100} = 0{,}0714\\ \\mathrm{cm^3}
+$$
+
+$$
+\\Delta V = V_1 - V_2 = 1{,}5 - 0{,}0714 = 1{,}4286\\ \\mathrm{cm^3}
+$$
+
+$$
+s = \\dfrac{\\Delta V}{A} = \\dfrac{1{,}4286}{3{,}0} = 0{,}476\\ \\mathrm{cm} \\approx 4{,}8\\ \\mathrm{mm}
+$$
+
+**Svar:** Cirka 4,8 mm.
+
+**c)** Tryckökningen i b) är tio gånger så stor som i a), men den extra sträckan blir bara 4,8 mm i stället för 3,3 mm. Bubblans volym är omvänt proportionell mot trycket, så den pressas ihop mest i början, medan trycket är lågt: redan vid den lätta inbromsningen har den krympt från 1,5 cm³ till 0,50 cm³.
+
+Det betyder att pedalens första rörelse går åt till att pressa ihop luften i stället för att trycka fram bromsbeläggen. Pedalen sjunker en bit utan att bilen bromsar ordentligt, och det känns som att den sviktar. Oljan själv går nästan inte att pressa ihop, så utan luft fortplantas tryckökningen direkt till hjulen. Därför luftar en verkstad bromsarna: all luft tas bort så att systemet bara innehåller olja.
+
+**Svar:** Luften pressas ihop mest vid lågt tryck, så pedalen sjunker en bit innan bromsningen tar. Luften tas bort för att bromsen ska verka direkt när man trycker på pedalen.`,
+        },
+        {
+            level: 3,
+            question: `En flaskdomkraft har ett pumphandtag som sitter fast i en led, se figuren (figuren är inte skalenlig). Handen trycker rakt nedåt på handtaget 48 cm från leden, och pumpkolvens stång är fäst i handtaget 6,0 cm från leden. Pumpkolven har diametern 1,2 cm och lyftkolven diametern 4,8 cm. Ventiler gör att oljan bara kan strömma från pumpen till lyftkolven. Vid varje pumptag rör sig handen 24 cm nedåt. Domkraften ska lyfta ena sidan av en bil, vilket kräver kraften 6,4 kN. Bortse från friktion och från handtagets och kolvarnas massor.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="24 0 392 206" width="533" height="280" role="img" aria-label="En flaskdomkraft. Till vänster en bred cylinder med lyftkolven, som bär lasten. En kanal med olja leder till en smal pumpcylinder. Pumpkolvens stång är fäst i ett vågrätt handtag som kan vridas kring en led. Leden sitter 6,0 cm från stången och 48 cm från det ställe där handen trycker nedåt." style="max-width:533px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><path d="M 42 132 L 128 132 L 128 186 L 208 186 L 208 141 L 222 141 L 222 198 L 42 198 Z" fill="#bfe0f0"/><polyline points="40,100 40,200 224,200 224,104" fill="none" stroke="#5b6573" stroke-width="3" stroke-linejoin="round"/><polyline points="130,100 130,184 206,184 206,104" fill="none" stroke="#5b6573" stroke-width="3" stroke-linejoin="round"/><rect x="42" y="122" width="86" height="10" fill="#d83a36" stroke="#a82824" stroke-width="1"/><rect x="78" y="92" width="14" height="30" fill="#b8bcc4" stroke="#7a808a" stroke-width="1"/><rect x="62" y="84" width="46" height="8" fill="#8a93a0" stroke="#0f1620" stroke-width="1"/><text x="85" y="76" font-size="13" fill="#0f1620" text-anchor="middle">last</text><rect x="208" y="132" width="14" height="9" fill="#d83a36" stroke="#a82824" stroke-width="1"/><rect x="213" y="72" width="4" height="60" fill="#b8bcc4" stroke="#7a808a" stroke-width="1"/><rect x="186" y="72" width="8" height="111" fill="#8a93a0" stroke="#0f1620" stroke-width="1"/><rect x="186" y="64" width="216" height="8" rx="3" fill="#5b6573" stroke="#0f1620" stroke-width="1"/><circle cx="190" cy="68" r="4" fill="#ffffff" stroke="#0f1620" stroke-width="1.4"/><text x="180" y="92" font-size="13" fill="#0f1620" text-anchor="end">led</text><text x="232" y="160" font-size="13" fill="#0f1620">pumpkolv</text><line x1="390" y1="34" x2="390" y2="55" stroke="#6d4ca8" stroke-width="2.8" stroke-linecap="butt"/><polygon points="385,55 390,64 395,55" fill="#6d4ca8"/><text x="382" y="54" font-size="14" fill="#6d4ca8" text-anchor="end"><tspan font-style="italic">F</tspan><tspan font-size="10" dy="4">hand</tspan></text><line x1="190" y1="62" x2="190" y2="14" stroke="#1f2530" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="390" y1="32" x2="390" y2="14" stroke="#1f2530" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="215" y1="62" x2="215" y2="44" stroke="#1f2530" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="196" y1="20" x2="384" y2="20" stroke="#1f2530" stroke-width="1.2"/><polygon points="190,20 197,17 197,23" fill="#1f2530"/><polygon points="390,20 383,17 383,23" fill="#1f2530"/><text x="290" y="15" font-size="13" fill="#1f2530" text-anchor="middle">48 cm</text><line x1="195" y1="48" x2="210" y2="48" stroke="#1f2530" stroke-width="1.2"/><polygon points="190,48 196,45.5 196,50.5" fill="#1f2530"/><polygon points="215,48 209,45.5 209,50.5" fill="#1f2530"/><text x="222" y="52" font-size="13" fill="#1f2530">6,0 cm</text></svg>
+
+a) Hur stor kraft måste handen trycka med? Ange svaret i N.<br>b) Hur många pumptag krävs för att lyfta bilen 12 cm?`,
+            answer: { value: 64, unit: 'tag', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 50, unit: 'N', tol: 0.03 },
+                { del: 'b', value: 64, unit: 'tag', tol: 0.02 },
+            ],
+            solution: `**a)** Kraften förstärks i två steg: först av handtaget, som är en hävstång, och sedan av oljan. Vi börjar i oljan och går baklänges till handen.
+
+*Oljan.* Pascals princip ger kraften $F_1$ som pumpkolven måste trycka med för att lyftkolven ska ge $F_2 = 6{,}4\\ \\mathrm{kN}$:
+
+$$
+\\dfrac{F_1}{A_1} = \\dfrac{F_2}{A_2} \\quad\\Leftrightarrow\\quad F_1 = F_2 \\cdot \\dfrac{A_1}{A_2}
+$$
+
+Kolvarna är cirkulära, $A = \\pi r^{2}$. I kvoten tar $\\pi$ ut sig, så areaförhållandet är diameterförhållandet i kvadrat:
+
+$$
+\\dfrac{A_1}{A_2} = \\left(\\dfrac{1{,}2}{4{,}8}\\right)^{2} = \\left(\\dfrac{1}{4}\\right)^{2} = \\dfrac{1}{16}
+$$
+
+$$
+F_1 = 6\\,400 \\cdot \\dfrac{1}{16} = 400\\ \\mathrm{N}
+$$
+
+*Handtaget.* Pumpkolven trycker lika hårt tillbaka på handtaget, alltså med 400 N uppåt, 6,0 cm från leden. Handen trycker nedåt 48 cm från leden. Vi tar moment kring leden, så att kraften från leden inte ger något moment. Handens kraft vrider handtaget medurs och kolvens kraft moturs, och i jämvikt är momenten lika stora:
+
+$$
+\\overset{\\displaystyle\\curvearrowleft}{M} = \\overset{\\displaystyle\\curvearrowright}{M}
+$$
+
+$$
+F_1 \\cdot l_1 = F_\\mathrm{hand} \\cdot l_\\mathrm{hand}
+$$
+
+Vi dividerar båda led med $l_\\mathrm{hand}$:
+
+$$
+F_\\mathrm{hand} = \\dfrac{F_1 \\cdot l_1}{l_\\mathrm{hand}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F_1 = 400\\ \\mathrm{N} \\\\
+l_1 = 6{,}0\\ \\mathrm{cm} \\\\
+l_\\mathrm{hand} = 48\\ \\mathrm{cm}
+\\end{array} \\right]
+$$
+
+Längderna förekommer bara som kvot, så de kan stå kvar i cm.
+
+$$
+F_\\mathrm{hand} = \\dfrac{400 \\cdot 6{,}0}{48} = 50\\ \\mathrm{N}
+$$
+
+Rimligt: handtaget förstärker kraften 8 gånger och oljan 16 gånger, sammanlagt 128 gånger, och $\\dfrac{6\\,400}{128} = 50$.
+
+**Svar:** 50 N.
+
+**b)** Handen och stången sitter på samma raka handtag, så när handtaget vrids rör sig de lika många gånger mer som avståndet till leden är större. Pumpkolven rör sig alltså
+
+$$
+s_1 = 24 \\cdot \\dfrac{6{,}0}{48} = 3{,}0\\ \\mathrm{cm}
+$$
+
+vid varje pumptag. Oljan kan inte pressas ihop, så den volym $A_1 \\cdot s_1$ som pumpkolven trycker undan hamnar under lyftkolven, som då stiger sträckan $s_2$:
+
+$$
+A_1 \\cdot s_1 = A_2 \\cdot s_2 \\quad\\Leftrightarrow\\quad s_2 = \\dfrac{A_1}{A_2} \\cdot s_1 = \\dfrac{1}{16} \\cdot 3{,}0 = 0{,}1875\\ \\mathrm{cm}
+$$
+
+Antalet pumptag $n$ för att lyfta bilen 12 cm:
+
+$$
+n = \\dfrac{12}{0{,}1875} = 64
+$$
+
+Kontroll med arbetet: handen gör arbetet $50 \\cdot 64 \\cdot 0{,}24 = 768\\ \\mathrm{J}$, och domkraften gör arbetet $6\\,400 \\cdot 0{,}12 = 768\\ \\mathrm{J}$ på bilen. Det som vinns i kraft förloras i sträcka.
+
+**Svar:** 64 pumptag.`,
+        },
+        {
+            level: 3,
+            question: `En konstruktör ska bygga en hydraulisk lyft för bilar med massan 900 kg. Två krav gäller: den som pumpar ska aldrig behöva trycka med mer än 250 N på pumpkolven, och trycket i oljan får aldrig bli högre än 10 MPa, eftersom slangarna inte tål mer. Lyftkolven ska vara så smal som möjligt, och pumpkolven så bred som möjligt, så att det behövs få pumptag. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och bortse från friktion och kolvarnas massor.<br>a) Vilken diameter får lyftkolven, och vilken diameter får pumpkolven? Ange svaren i cm.<br>b) Lyften byggs om för bilar med dubbelt så stor massa, med samma krav. Hur ändras de två diametrarna?`,
+            answer: { value: 3.4, unit: 'cm', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 3.4, unit: 'cm', etikett: 'lyftkolven', tol: 0.03 },
+                { del: 'a', value: 0.56, unit: 'cm', etikett: 'pumpkolven', tol: 0.03 },
+                { del: 'b', value: 4.7, unit: 'cm', etikett: 'lyftkolven', tol: 0.03 },
+                { del: 'b', value: 0.56, unit: 'cm', etikett: 'pumpkolven', tol: 0.03 },
+            ],
+            solution: `**a)** *Lyftkolven.* Lyftkolven ska bära bilens tyngd:
+
+$$
+F_2 = m \\cdot g = 900 \\cdot 9{,}82 = 8\\,838\\ \\mathrm{N}
+$$
+
+Trycket i oljan är kraften på lyftkolven delad med dess area, $p = \\dfrac{F_2}{A_2}$. Ju smalare lyftkolven är, desto högre blir trycket, så den smalaste kolven är den som ger precis det högsta tillåtna trycket:
+
+$$
+p_\\mathrm{max} = \\dfrac{F_2}{A_2} \\quad\\Leftrightarrow\\quad A_2 = \\dfrac{F_2}{p_\\mathrm{max}}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+F_2 = 8\\,838\\ \\mathrm{N} \\\\
+p_\\mathrm{max} = 10\\ \\mathrm{MPa} = 10 \\cdot 10^{6}\\ \\mathrm{Pa}
+\\end{array} \\right]
+$$
+
+$$
+A_2 = \\dfrac{8\\,838}{10 \\cdot 10^{6}} = 8{,}838 \\cdot 10^{-4}\\ \\mathrm{m^2} = 8{,}838\\ \\mathrm{cm^2}
+$$
+
+Diametern får vi ur cirkelns area, $A = \\pi r^{2}$ med $r = \\dfrac{d}{2}$:
+
+$$
+A_2 = \\pi \\cdot \\left(\\dfrac{d_2}{2}\\right)^{2} \\quad\\Leftrightarrow\\quad d_2 = 2 \\cdot \\sqrt{\\dfrac{A_2}{\\pi}} = 2 \\cdot \\sqrt{\\dfrac{8{,}838}{\\pi}} = 3{,}355\\ \\mathrm{cm} \\approx 3{,}4\\ \\mathrm{cm}
+$$
+
+*Pumpkolven.* Enligt Pascals princip är trycket lika stort i hela oljan, alltså 10 MPa även vid pumpkolven. Kraften på pumpkolven är $F_1 = p_\\mathrm{max} \\cdot A_1$, och den får högst vara 250 N. Den bredaste pumpkolven ger precis 250 N:
+
+$$
+F_1 = p_\\mathrm{max} \\cdot A_1 \\quad\\Leftrightarrow\\quad A_1 = \\dfrac{F_1}{p_\\mathrm{max}} = \\dfrac{250}{10 \\cdot 10^{6}} = 2{,}5 \\cdot 10^{-5}\\ \\mathrm{m^2} = 0{,}25\\ \\mathrm{cm^2}
+$$
+
+$$
+d_1 = 2 \\cdot \\sqrt{\\dfrac{A_1}{\\pi}} = 2 \\cdot \\sqrt{\\dfrac{0{,}25}{\\pi}} = 0{,}564\\ \\mathrm{cm} \\approx 0{,}56\\ \\mathrm{cm}
+$$
+
+Kontroll med Pascals princip: $\\dfrac{A_2}{A_1} = \\dfrac{8{,}838}{0{,}25} = 35{,}4$ och $\\dfrac{F_2}{F_1} = \\dfrac{8\\,838}{250} = 35{,}4$. Rimligt: en pumpkolv på drygt en halv centimeter och en lyftkolv på drygt tre centimeter liknar en vanlig domkraft.
+
+**Svar:** Lyftkolven får diametern 3,4 cm och pumpkolven 0,56 cm.
+
+**b)** Med dubbelt så stor massa blir $F_2$ dubbelt så stor. Lyftkolvens area är $A_2 = \\dfrac{F_2}{p_\\mathrm{max}}$, så den blir också dubbelt så stor. Diametern växer med kvadratroten ur arean:
+
+$$
+d_2 = 3{,}355 \\cdot \\sqrt{2} = 4{,}74\\ \\mathrm{cm} \\approx 4{,}7\\ \\mathrm{cm}
+$$
+
+Pumpkolvens area är $A_1 = \\dfrac{F_1}{p_\\mathrm{max}}$, och där finns ingen massa med. Trycket i oljan är fortfarande 10 MPa och handen trycker fortfarande med 250 N, så pumpkolven blir **oförändrad**, 0,56 cm. Det som ändras är areaförhållandet, som blir dubbelt så stort, och därmed behövs dubbelt så många pumptag för samma lyfthöjd.
+
+**Svar:** Lyftkolvens diameter ökar till 4,7 cm (med faktorn $\\sqrt{2}$), medan pumpkolvens diameter är oförändrad, 0,56 cm.`,
+        },
+        {
+            level: 3,
+            question: `En elevgrupp bygger en hydraulisk press av två vattenfyllda sprutor som kopplas ihop med en slang. Den lilla sprutan har innerdiametern 1,4 cm och den stora 2,9 cm. Gruppen trycker med kraften 10 N på den lilla kolven och mäter med en dynamometer att den stora kolven trycker med kraften 38 N.<br>a) Vilken kraft från den stora kolven ger Pascals princip? Ange svaret i N.<br>b) Gruppen tror att skillnaden beror på att det finns en luftbubbla i slangen. Bedöm om det kan förklara att den uppmätta kraften är mindre när kolvarna står stilla, och föreslå en bättre förklaring.<br>c) Hur kan gruppen ändra försöket så att mätningen bättre prövar Pascals princip?`,
+            answer: { value: 43, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 43, unit: 'N', tol: 0.03 },
+                { del: 'b' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Pascals princip:
+
+$$
+\\dfrac{F_1}{A_1} = \\dfrac{F_2}{A_2} \\quad\\Leftrightarrow\\quad F_2 = F_1 \\cdot \\dfrac{A_2}{A_1}
+$$
+
+För cirkulära kolvar är areaförhållandet diameterförhållandet i kvadrat:
+
+$$
+F_2 = 10 \\cdot \\left(\\dfrac{2{,}9}{1{,}4}\\right)^{2} = 10 \\cdot 4{,}2908 = 42{,}9\\ \\mathrm{N} \\approx 43\\ \\mathrm{N}
+$$
+
+**Svar:** Cirka 43 N.
+
+**b)** En luftbubbla går att pressa ihop, så den lilla kolven måste tryckas in en bit längre innan trycket byggs upp. Men när kolvarna står stilla och trycket väl har byggts upp är trycket i luften lika stort som i vattnet runt den, och tryckökningen fortplantas ändå till hela vätskan. Bubblan ändrar alltså inte kraften i jämvikt, bara hur långt kolven måste röra sig.
+
+En bättre förklaring är **friktion** mellan kolvarnas gummitätningar och sprutornas väggar. Friktionen motverkar rörelsen i båda sprutorna, så en del av de 10 N går åt till att övervinna friktionen i den lilla sprutan, och den stora kolven ger mindre kraft utåt. Skillnaden är $42{,}9 - 38 \\approx 5\\ \\mathrm{N}$, vilket är rimligt för friktion i plastsprutor. Dessutom ger en osäkerhet i den uppmätta diametern stort utslag eftersom diametern kvadreras: om den lilla sprutans innerdiameter i själva verket är 1,5 cm blir den förväntade kraften bara 37 N.
+
+**Svar:** Luftbubblan kan inte förklara skillnaden i jämvikt. Troligare är friktion i sprutorna, och en osäkerhet i diametrarna.
+
+**c)** Några förbättringar:
+
+- Mät innerdiametrarna noggrant, till exempel med skjutmått, eller beräkna arean ur sprutans volymskala (volym delad med skalans längd).
+- Mät kraften både när kolven precis börjar röra sig inåt och när den precis börjar röra sig utåt. Medelvärdet minskar inverkan av friktionen, eftersom friktionen byter riktning.
+- Upprepa för flera olika krafter $F_1$ och rita $F_2$ mot $F_1$. Lutningen ska vara $\\dfrac{A_2}{A_1}$, och en eventuell friktion syns då som en förskjutning av linjen i stället för att blandas ihop med förstärkningen.
+
+**Svar:** Mät areorna noggrannare, mät åt båda hållen och ta medelvärdet, och gör en serie med flera krafter som analyseras grafiskt.`,
+        },
+        {
+            level: 3,
+            question: `En hydraulisk press pressar ihop en provbit mellan en stämpel och en fast ram, se figuren (figuren är inte skalenlig). Oljan pumpas med en liten kolv med arean 1,0 cm². Den stora kolven har arean 80 cm² och för upp en stämpel vars ände har arean 12 cm², lika stor som provbitens yta. För att provbiten ska formas krävs trycket 25 MPa i provbiten.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="20 30 380 176" width="517" height="239" role="img" aria-label="En hydraulisk press. Till vänster en smal cylinder med en liten kolv som trycks ned med kraften F-1. En kanal med olja leder till en bred cylinder till höger. Den stora kolven bär en smal stämpel som pressar en provbit mot en fast ram." style="max-width:517px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><path d="M 40 100 L 64 100 L 64 180 L 180 180 L 180 130 L 260 130 L 260 196 L 40 196 Z" fill="#bfe0f0"/><polyline points="38,90 38,198 262,198 262,108" fill="none" stroke="#5b6573" stroke-width="3" stroke-linejoin="round"/><polyline points="66,90 66,178 178,178 178,108" fill="none" stroke="#5b6573" stroke-width="3" stroke-linejoin="round"/><rect x="40" y="92" width="24" height="9" fill="#d83a36" stroke="#a82824" stroke-width="1"/><rect x="49" y="70" width="6" height="22" fill="#b8bcc4" stroke="#7a808a" stroke-width="1"/><line x1="52" y1="38" x2="52" y2="58" stroke="#6d4ca8" stroke-width="2.8" stroke-linecap="butt"/><polygon points="47,58 52,67 57,58" fill="#6d4ca8"/><text x="60" y="54" font-size="14" fill="#6d4ca8"><tspan font-style="italic">F</tspan>₁</text><rect x="180" y="120" width="80" height="11" fill="#d83a36" stroke="#a82824" stroke-width="1"/><rect x="212" y="96" width="16" height="24" fill="#b8bcc4" stroke="#7a808a" stroke-width="1"/><rect x="204" y="84" width="32" height="12" fill="#c9a46a" stroke="#8a6d3b" stroke-width="1"/><rect x="168" y="72" width="108" height="12" fill="#8a93a0" stroke="#0f1620" stroke-width="1"/><rect x="268" y="84" width="8" height="114" fill="#8a93a0" stroke="#0f1620" stroke-width="1"/><text x="72" y="140" font-size="14" fill="#0f1620"><tspan font-style="italic">A</tspan>₁ = 1,0 cm²</text><text x="284" y="160" font-size="14" fill="#0f1620"><tspan font-style="italic">A</tspan>₂ = 80 cm²</text><text x="284" y="94" font-size="14" fill="#0f1620">provbit</text><text x="284" y="112" font-size="14" fill="#0f1620">12 cm²</text><text x="222" y="64" font-size="13" fill="#4a5563" text-anchor="middle">fast ram</text></svg>
+
+a) Hur stor kraft måste stämpeln trycka med på provbiten? Ange svaret i kN.<br>b) Hur stor kraft måste den lilla kolven tryckas ned med? Ange svaret i N.<br>c) Trycket i provbiten är större än trycket i oljan. Beräkna trycket i oljan och förklara varför det inte strider mot Pascals princip.`,
+            answer: { value: 380, unit: 'N', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 30, unit: 'kN', tol: 0.03 },
+                { del: 'b', value: 380, unit: 'N', tol: 0.03 },
+                { del: 'c', value: 3.8, unit: 'MPa', tol: 0.03, etikett: 'trycket i oljan' },
+            ],
+            solution: `**a)** Trycket i provbiten är stämpelns kraft delad med provbitens area:
+
+$$
+p_\\mathrm{prov} = \\dfrac{F}{A_\\mathrm{prov}} \\quad\\Leftrightarrow\\quad F = p_\\mathrm{prov} \\cdot A_\\mathrm{prov}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+p_\\mathrm{prov} = 25\\ \\mathrm{MPa} = 25 \\cdot 10^{6}\\ \\mathrm{Pa} \\\\
+A_\\mathrm{prov} = 12\\ \\mathrm{cm^2} = 12 \\cdot 10^{-4}\\ \\mathrm{m^2}
+\\end{array} \\right]
+$$
+
+$$
+F = 25 \\cdot 10^{6} \\cdot 12 \\cdot 10^{-4} = 30\\,000\\ \\mathrm{N} = 30\\ \\mathrm{kN}
+$$
+
+**Svar:** 30 kN.
+
+**b)** Stämpeln sitter på den stora kolven, så den stora kolven ska ge kraften $F_2 = 30\\,000\\ \\mathrm{N}$ (stämpelns massa försummas). Pascals princip ger
+
+$$
+\\dfrac{F_1}{A_1} = \\dfrac{F_2}{A_2} \\quad\\Leftrightarrow\\quad F_1 = \\dfrac{F_2 \\cdot A_1}{A_2} = \\dfrac{30\\,000 \\cdot 1{,}0}{80} = 375\\ \\mathrm{N} \\approx 3{,}8 \\cdot 10^{2}\\ \\mathrm{N}
+$$
+
+**Svar:** Cirka 380 N.
+
+**c)** Trycket i oljan är den stora kolvens kraft delad med den stora kolvens area:
+
+$$
+p_\\mathrm{olja} = \\dfrac{F_2}{A_2} = \\dfrac{30\\,000}{80 \\cdot 10^{-4}} = 3\\,750\\,000\\ \\mathrm{Pa} \\approx 3{,}8\\ \\mathrm{MPa}
+$$
+
+Kontroll: den lilla kolven ger samma tryck, $\\dfrac{375}{1{,}0 \\cdot 10^{-4}} = 3{,}75\\ \\mathrm{MPa}$.
+
+Pascals princip gäller bara **inuti vätskan**: tryckökningen är lika stor överallt i oljan. Provbiten och stämpeln är fasta föremål, inte en del av oljan. Den stora kolven tar emot oljetrycket över hela sin area, 80 cm², och samlar kraften 30 kN i stämpeln, som sedan för kraften vidare till en mindre area, 12 cm². Samma kraft på en mindre area ger ett större tryck: $\\dfrac{80}{12} \\approx 6{,}7$ gånger större. Pressen förstärker alltså först kraften med oljan och sedan trycket med stämpeln.
+
+**Svar:** Trycket i oljan är cirka 3,8 MPa. Pascals princip säger bara att trycket är lika stort i hela oljan; stämpeln är ett fast föremål som samlar kraften på en mindre area och därmed ger ett större tryck.`,
+        },
+        {
+            level: 3,
+            question: `En hydraulisk lyft har en lyftplatta som vilar på den stora kolven, och lasten ställs på plattan. Pumpen kan som mest trycka med en viss kraft på den lilla kolven, och kolvarna är på samma höjd. Lyftplattans massa är 2,0 % av den största last som lyften kan bära.<br>a) Plattan byts mot en platta med halva massan. Hur många procent större last kan lyften då bära?<br>b) I stället behålls den gamla plattan, men den lilla kolven byts mot en kolv med 10 % mindre diameter. Hur många procent större last kan lyften då bära?`,
+            answer: { value: 24, unit: '%', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 1.0, unit: '%', tol: 0.05 },
+                { del: 'b', value: 24, unit: '%', tol: 0.04 },
+            ],
+            solution: `Varken pumpens kraft, kolvarnas areor eller massorna är givna, så vi löser uppgiften generellt och ser vad som tar ut sig.
+
+Kalla pumpens största kraft $F_1$, den lilla kolvens area $A_1$, den stora kolvens area $A_2$, plattans massa $M$ och lastens massa $m$. Den stora kolven bär både lasten och plattan, så i jämvikt är kraften på den
+
+$$
+F_2 = (m + M) \\cdot g
+$$
+
+Pascals princip:
+
+$$
+\\dfrac{F_1}{A_1} = \\dfrac{F_2}{A_2}
+$$
+
+Insättning av $F_2 = (m + M) \\cdot g$ ger
+
+$$
+\\dfrac{F_1}{A_1} = \\dfrac{(m + M) \\cdot g}{A_2}
+$$
+
+Vi multiplicerar båda led med $A_2$ och dividerar med $g$:
+
+$$
+m + M = \\dfrac{F_1 \\cdot A_2}{g \\cdot A_1} \\tag{1}
+$$
+
+Med pumpens största kraft är högerledet en konstant så länge pumpen och kolvarna är desamma. Lyften kan alltså bära en viss **sammanlagd** massa, och det plattan väger tas från lasten.
+
+Kalla den största lasten från början $m_\\mathrm{max}$. Plattan väger $M = 0{,}020 \\cdot m_\\mathrm{max}$, så den sammanlagda massan är
+
+$$
+m_\\mathrm{max} + M = m_\\mathrm{max} + 0{,}020 \\cdot m_\\mathrm{max} = 1{,}020 \\cdot m_\\mathrm{max}
+$$
+
+**a)** Pumpen och kolvarna är desamma, så enligt (1), $m + M = \\dfrac{F_1 \\cdot A_2}{g \\cdot A_1}$, är den sammanlagda massan fortfarande $1{,}020 \\cdot m_\\mathrm{max}$. Den nya plattan väger $0{,}010 \\cdot m_\\mathrm{max}$, så den nya största lasten är
+
+$$
+m_\\mathrm{ny} = 1{,}020 \\cdot m_\\mathrm{max} - 0{,}010 \\cdot m_\\mathrm{max} = 1{,}010 \\cdot m_\\mathrm{max}
+$$
+
+Lasten kan alltså bli 1,0 % större. Rimligt: lasten får öka med precis det som plattan blev lättare.
+
+**Svar:** 1,0 % större last.
+
+**b)** Enligt (1), $m + M = \\dfrac{F_1 \\cdot A_2}{g \\cdot A_1}$, är den sammanlagda massan omvänt proportionell mot $A_1$. Arean är proportionell mot diametern i kvadrat, så med 10 % mindre diameter blir arean
+
+$$
+A_{1,\\mathrm{ny}} = 0{,}90^{2} \\cdot A_1 = 0{,}81 \\cdot A_1
+$$
+
+Den sammanlagda massan blir då
+
+$$
+m_\\mathrm{ny} + M = \\dfrac{1{,}020 \\cdot m_\\mathrm{max}}{0{,}81} = 1{,}2593 \\cdot m_\\mathrm{max}
+$$
+
+Plattan är densamma, $M = 0{,}020 \\cdot m_\\mathrm{max}$. Vi subtraherar $M$ från båda led:
+
+$$
+m_\\mathrm{ny} = 1{,}2593 \\cdot m_\\mathrm{max} - 0{,}020 \\cdot m_\\mathrm{max} = 1{,}2393 \\cdot m_\\mathrm{max}
+$$
+
+Lasten kan alltså bli $23{,}9\\ \\% \\approx 24\\ \\%$ större. Rimligt: kraftförstärkningen ökar med $\\dfrac{1}{0{,}81} = 1{,}235$, alltså 23,5 %. Lasten ökar lite mer än så, eftersom hela ökningen går till lasten medan plattan väger lika mycket som förut.
+
+**Svar:** Cirka 24 % större last.`,
         },
     ],
 
@@ -26010,7 +35550,7 @@ $$ T_K = T_C + 273 = -18 + 273 = 255\\ \\mathrm{K} $$
             level: 1,
             question: `En isbit och en aluminiumplatta ligger sida vid sida på köksbänken och har båda samma temperatur som rummet (ca 20 °C). När du lägger handen på respektive föremål känns aluminiumplattan **kallare**. Vilken är orsaken?`,
             choices: [
-                `Aluminiumplattan har faktiskt lägre temperatur än rummet — temperaturmätare brukar visa fel på metall.`,
+                `Aluminiumplattan har faktiskt lägre temperatur än rummet. Temperaturmätare brukar visa fel på metall.`,
                 `Aluminium leder värme bättre än is, så värme strömmar snabbare från handen till aluminium.`,
                 `Aluminiumets atomer rör sig långsammare än is-atomerna trots samma temperatur.`,
                 `Aluminium "drar till sig kyla" från rummet och blir därför kallt.`,
@@ -26020,7 +35560,7 @@ $$ T_K = T_C + 273 = -18 + 273 = 255\\ \\mathrm{K} $$
 
 **Svar:** Alternativ B.
 
-**Generell slutsats:** "Kyla" finns inte som ett fysikaliskt fenomen — bara värmeöverföring i olika riktning. Hur kallt något känns beror lika mycket på materialets värmeledningsförmåga som på dess faktiska temperatur.`,
+**Generell slutsats:** "Kyla" finns inte som ett fysikaliskt fenomen, bara värmeöverföring i olika riktning. Hur kallt något känns beror lika mycket på materialets värmeledningsförmåga som på dess faktiska temperatur.`,
         },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
@@ -26028,10 +35568,10 @@ $$ T_K = T_C + 273 = -18 + 273 = 255\\ \\mathrm{K} $$
             level: 2,
             question: `Tre kärl A, B och C innehåller olika gaser med temperaturerna 27 °C, 127 °C och 327 °C. I vilket kärl är atomernas medelrörelseenergi exakt **dubbelt** så stor som i kärl A?`,
             choices: [
-                `Kärl B — för 127 är dubbelt så mycket som lite mer än hälften av 327.`,
-                `Kärl B — för 127 °C ÷ 27 °C ≈ 5.`,
-                `Kärl C — för det är dubbelt så hög temperatur som A i kelvinskalan.`,
-                `Inget av kärlen — ingen av temperaturerna är exakt dubbelt så hög som 27.`,
+                `Kärl B, för 127 är dubbelt så mycket som lite mer än hälften av 327.`,
+                `Kärl B, för 127 °C ÷ 27 °C ≈ 5.`,
+                `Kärl C, eftersom det är dubbelt så hög temperatur som A i kelvinskalan.`,
+                `Inget av kärlen: ingen av temperaturerna är exakt dubbelt så hög som 27.`,
             ],
             correct: 2,
             solution: `Atomernas medelrörelseenergi är proportionell mot temperaturen i **kelvin**, inte i celsius. Vi omvandlar alla tre temperaturer:
@@ -26048,21 +35588,21 @@ Vi söker det kärl där $T = 2 \\cdot T_A = 2 \\cdot 300 = 600\\ \\mathrm{K}$. 
 
 **Svar:** Alternativ C.
 
-**Generell slutsats:** En klassisk fälla — att tro att "dubbla celsiustemperaturen" ger dubbla rörelseenergin. Det är bara i kelvinskalan som proportionalitet gäller. Det är därför kelvin används i alla fysikaliska samband med temperatur (t.ex. ideala gaslagen).`,
+**Generell slutsats:** En klassisk fälla: att tro att "dubbla celsiustemperaturen" ger dubbla rörelseenergin. Det är bara i kelvinskalan som proportionalitet gäller. Det är därför kelvin används i alla fysikaliska samband med temperatur (t.ex. ideala gaslagen).`,
         },
         {
             level: 2,
-            question: `Du har en aluminiumplatta och en plastplatta som båda håller rumstemperatur 20 °C. Du lägger en isbit på vardera plattan. På vilken platta smälter isen snabbast — och varför?`,
+            question: `Du har en aluminiumplatta och en plastplatta som båda håller rumstemperatur 20 °C. Du lägger en isbit på vardera plattan. På vilken platta smälter isen snabbast, och varför?`,
             choices: [
-                `Aluminiumplattan — eftersom aluminium leder värme bättre, transporterar plattan snabbare energi från rummet till isen.`,
-                `Plastplattan — eftersom plast känns varmare, är den faktiskt varmare och smälter isen snabbare.`,
-                `Båda lika snabbt — de har samma temperatur, så samma värme flödar till isen.`,
-                `Plastplattan — eftersom plast isolerar bättre håller den värmen kvar mot isen istället för att tappa den till rummet.`,
+                `Aluminiumplattan, eftersom aluminium leder värme bättre, transporterar plattan snabbare energi från rummet till isen.`,
+                `Plastplattan, eftersom plast känns varmare, är den faktiskt varmare och smälter isen snabbare.`,
+                `Båda lika snabbt: de har samma temperatur, så samma värme flödar till isen.`,
+                `Plastplattan, eftersom plast isolerar bättre håller den värmen kvar mot isen istället för att tappa den till rummet.`,
             ],
             correct: 0,
             solution: `Båda plattorna har samma temperatur, men det är **värmeledningen** som avgör hur snabbt energi når isen. Aluminium leder värme mycket bättre än plast, så aluminiumplattan kan snabbt "hämta" energi från sig själv och rummet och föra över den till isen. Plasten isolerar och förser isen med energi mycket långsammare.
 
-**Svar:** Alternativ A — på aluminiumplattan.
+**Svar:** Alternativ A, på aluminiumplattan.
 
 **Generell slutsats:** Att ett material *känns* kallt betyder att det leder värme effektivt. Samma egenskap som gör aluminium "kall mot handen" gör att det också smälter is snabbare. Plast känns "varm" men är en sämre värmeöverförare.`,
         },
@@ -26090,7 +35630,412 @@ $$
 
 **Svar:** Ca 1,7 % högre.
 
-**Generell slutsats:** Trots att febern känns dramatisk är ökningen av molekylernas rörelseenergi mycket liten i fysikalisk mening — under 2 %. Men kroppens biokemiska processer är ändå så finkalibrerade att den lilla förändringen är tillräckligt stor för att proteiner ska börja fungera fel. Tar man fel på celsius och kelvin här ((42,2 − 37,0) / 37,0 ≈ 14 %) blir man fel med nästan en faktor 10.`,
+**Generell slutsats:** Trots att febern känns dramatisk är ökningen av molekylernas rörelseenergi mycket liten i fysikalisk mening, under 2 %. Men kroppens biokemiska processer är ändå så finkalibrerade att den lilla förändringen är tillräckligt stor för att proteiner ska börja fungera fel. Tar man fel på celsius och kelvin här ((42,2 − 37,0) / 37,0 ≈ 14 %) blir man fel med nästan en faktor 10.`,
+        },
+        {
+            level: 1,
+            question: `Glödtråden i en gammaldags glödlampa är mycket varm, men glaset utanpå har temperaturen $350\\ \\mathrm{K}$ när lampan har lyst en stund. Vilken temperatur har glaset i grader Celsius? Ange svaret i °C.`,
+            answer: { value: 77, unit: '°C', tol: 0.01 },
+            solution: `Vi använder sambandet mellan kelvinskalan och celsiusskalan och löser ut $T_C$:
+
+$$
+T_K = T_C + 273 \\quad \\Longleftrightarrow \\quad T_C = T_K - 273
+$$
+
+$$
+T_C = 350 - 273 = 77\\ ^\\circ\\mathrm{C}
+$$
+
+Det är varmare än det varmaste vatten i en dusch, så glaset bränns om man tar i det. Det låter rimligt för en lampa som lyst en stund.
+
+**Svar:** 77 °C`,
+        },
+        {
+            level: 1,
+            question: `Solens värme når jorden genom rymden, där det i stort sett är vakuum. Hur transporteras värmen från solen till jorden?`,
+            choices: [
+                `Genom ledning`,
+                `Genom strömning (konvektion)`,
+                `Genom strålning`,
+                `Genom både ledning och strömning`,
+            ],
+            correct: 2,
+            solution: `Ledning kräver material som har kontakt, och strömning kräver en gas eller vätska som kan virvla runt. I vakuum finns inget av det. Strålning är det enda sättet att transportera värme som inte kräver något medium, och därför är det strålning som för solens värme till jorden.
+
+**Svar:** Alternativ C`,
+        },
+        {
+            level: 1,
+            question: `Vilket påstående beskriver vad temperaturen hos ett föremål är ett mått på?`,
+            choices: [
+                `Den totala energin som finns lagrad i föremålets kemiska bindningar`,
+                `Hur mycket värme föremålet innehåller`,
+                `Summan av atomernas potentiella energi och rörelseenergi`,
+                `Den genomsnittliga rörelseenergin hos föremålets atomer`,
+            ],
+            correct: 3,
+            solution: `Temperaturen är den **genomsnittliga rörelseenergin** hos atomerna. Ju fortare atomerna rör sig, desto högre temperatur.
+
+- Energin i de kemiska bindningarna är potentiell energi, och den påverkar inte temperaturen.
+- Ett föremål "innehåller" ingen värme. Värme är energi under transport från varmare till kallare.
+- Summan av potentiell energi och rörelseenergi kallas **inre energi**, inte temperatur.
+
+**Svar:** Alternativ D`,
+        },
+        {
+            level: 1,
+            question: `Ordna temperaturerna från den lägsta till den högsta.<br>$250\\ \\mathrm{K}$&emsp;&emsp;$-30\\ ^\\circ\\mathrm{C}$&emsp;&emsp;$0\\ ^\\circ\\mathrm{C}$&emsp;&emsp;$260\\ \\mathrm{K}$`,
+            choices: [
+                `−30 °C, 250 K, 260 K, 0 °C`,
+                `250 K, 260 K, −30 °C, 0 °C`,
+                `−30 °C, 0 °C, 250 K, 260 K`,
+                `250 K, −30 °C, 260 K, 0 °C`,
+            ],
+            correct: 0,
+            solution: `Temperaturer i olika skalor går bara att jämföra när de står i samma skala. Vi omvandlar de två celsiustemperaturerna till kelvin med
+
+$$
+T_K = T_C + 273
+$$
+
+$$
+\\left[ \\begin{array}{l}
+-30\\ ^\\circ\\mathrm{C}: \\quad T_K = -30 + 273 = 243\\ \\mathrm{K} \\\\
+0\\ ^\\circ\\mathrm{C}: \\quad T_K = 0 + 273 = 273\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+Nu står alla fyra i kelvin: 243 K, 250 K, 260 K och 273 K. Den lägsta är alltså $-30\\ ^\\circ\\mathrm{C}$ och den högsta $0\\ ^\\circ\\mathrm{C}$. De två kelvintemperaturerna ligger båda under vattnets fryspunkt, 273 K.
+
+**Svar:** Alternativ A`,
+        },
+
+        {
+            level: 2,
+            question: `Ett badkar innehåller $150\\ \\mathrm{kg}$ vatten med temperaturen $40\\ ^\\circ\\mathrm{C}$. En kopp innehåller $0{,}20\\ \\mathrm{kg}$ kaffe med temperaturen $80\\ ^\\circ\\mathrm{C}$. Kaffe består nästan bara av vatten.<br>a) I vilket av dem har vattenmolekylerna störst genomsnittlig rörelseenergi? Motivera.<br>b) Vilket av dem har störst inre energi? Motivera.<br>c) Kaffet hälls i badkaret. Åt vilket håll flödar värmen? Motivera.`,
+            solution: `**a)** Temperaturen är ett mått på den genomsnittliga rörelseenergin hos molekylerna. Kaffet har den högsta temperaturen, $80\\ ^\\circ\\mathrm{C}$ mot $40\\ ^\\circ\\mathrm{C}$, och därför rör sig molekylerna i kaffet i genomsnitt snabbast.
+
+**Svar:** I kaffet
+
+**b)** Den inre energin är summan av **alla** molekylers potentiella energi och rörelseenergi. Den beror alltså på hur många molekyler det finns, inte bara på hur snabbt de rör sig. Badkaret innehåller
+
+$$
+\\dfrac{150}{0{,}20} = 750
+$$
+
+gånger så mycket vatten som koppen, och därmed ungefär 750 gånger så många molekyler. Varje molekyl i kaffet har visserligen större rörelseenergi, men i kelvin är temperaturerna $80 + 273 = 353\\ \\mathrm{K}$ och $40 + 273 = 313\\ \\mathrm{K}$, och $\\dfrac{353}{313} \\approx 1{,}13$. Molekylerna i kaffet har alltså bara cirka 13 % större rörelseenergi i genomsnitt, och det väger inte alls upp att badkaret har 750 gånger fler molekyler.
+
+**Svar:** Badkaret
+
+**c)** Värme flödar av sig själv från ett varmare föremål till ett kallare, alltså från högre till lägre temperatur. Det är temperaturen som avgör riktningen, inte vilket föremål som har mest inre energi. Kaffet har högst temperatur, så värme flödar från kaffet till badvattnet, trots att badvattnet har mycket större inre energi.
+
+**Svar:** Från kaffet till badvattnet`,
+        },
+        {
+            level: 2,
+            question: `En kastrull med vatten står på en spisplatta som ger lika mycket värme varje minut. Diagrammet visar vattnets temperatur som funktion av tiden.
+
+${makeDiagram({
+    xMin: 0, xMax: 12, xTicks: [0, 2, 4, 6, 8, 10, 12],
+    yMin: 0, yMax: 120, yTicks: [0, 20, 40, 60, 80, 100, 120],
+    xLabel: '<tspan font-style="italic">t</tspan> (min)',
+    yLabel: '<tspan font-style="italic">T</tspan> (°C)',
+    paths: [ { points: [[0, 20], [5, 100], [12, 100]] } ],
+})}
+
+a) Under vilken tid ökar vattenmolekylernas medelrörelseenergi?<br>b) Ökar vattnets inre energi mellan 5 och 12 minuter? Motivera ditt svar.`,
+            solution: `**a)** Temperaturen är ett mått på atomernas och molekylernas genomsnittliga rörelseenergi. I diagrammet stiger temperaturen från $20\\ ^\\circ\\mathrm{C}$ till $100\\ ^\\circ\\mathrm{C}$ under de första 5 minuterna, och sedan är den konstant.
+
+**Svar:** Under de första 5 minuterna (från 0 till 5 min)
+
+**b)** Plattan tillför värme hela tiden, även när temperaturen står still på $100\\ ^\\circ\\mathrm{C}$. Vattnet kokar då. Den tillförda energin bryter upp bindningarna mellan vattenmolekylerna så att vattnet blir ånga, och det ökar molekylernas **potentiella** energi. Rörelseenergin, och därmed temperaturen, ändras inte. Den inre energin är summan av potentiell energi och rörelseenergi, så den ökar ändå.
+
+**Svar:** Ja. Den tillförda värmen ökar den potentiella energin när vattnet förångas, så den inre energin ökar fast temperaturen är konstant.`,
+        },
+        {
+            level: 2,
+            question: `Elementet i ett klassrum sitter nästan alltid under fönstret. Förklara hur elementet värmer upp luften i hela rummet, och varför det är en fördel att det sitter just under fönstret. Använd begreppen ledning, strömning och strålning där de passar.`,
+            solution: `**Hur rummet värms upp.** Elementet är varmt och för över värme till luften som rör vid det, genom **ledning**. Den uppvärmda luften utvidgar sig, får lägre densitet och stiger mot taket. Kallare luft strömmar in längs golvet och ersätter den, värms vid elementet och stiger i sin tur. Så uppstår en cirkulation i hela rummet, en **strömning (konvektion)**. Elementet avger dessutom värme genom **strålning**, som värmer föremål och människor i närheten.
+
+**Varför under fönstret.** Fönstret är rummets kallaste yta. Luften närmast glaset kyls av, får högre densitet och sjunker mot golvet. Utan element skulle det bildas ett kallt drag längs golvet under fönstret. När elementet sitter där värms den nedsjunkande kalla luften direkt och stiger igen, så att det kalla draget motverkas och luften blandas jämnare i rummet.
+
+**Svar:** Elementet värmer luften genom ledning, och den varma luften stiger och sätter igång en strömning som för runt värmen i rummet. Under fönstret värms den kalla luft som sjunker från glaset innan den hinner bli ett kallt drag längs golvet.`,
+        },
+        {
+            level: 2,
+            question: `När du blåser på en sked varm soppa svalnar den snabbare än om du låter den stå. Förklara med två olika skäl varför soppan svalnar snabbare när du blåser. Din utandningsluft har ungefär temperaturen $35\\ ^\\circ\\mathrm{C}$ och soppan $70\\ ^\\circ\\mathrm{C}$.`,
+            solution: `Värme flödar av sig själv från varmare till kallare. Hur snabbt det går beror på temperaturskillnaden mellan soppan och luften som rör vid den.
+
+**Skäl 1: kallare luft vid ytan.** Luften närmast soppan värms upp av soppan och blir nästan lika varm som den. Då är temperaturskillnaden liten, och värmen leds långsamt bort. När du blåser förs den varma luften bort och ersätts av din utandningsluft och rumsluft, som är mycket kallare än $70\\ ^\\circ\\mathrm{C}$. Temperaturskillnaden blir större, och värmen leds snabbare från soppan till luften.
+
+**Skäl 2: mer avdunstning.** Vattenmolekyler lämnar hela tiden soppans yta. Det kräver energi, som tas från soppan, så avdunstningen kyler. Ovanför ytan samlas fuktig luft, som bromsar avdunstningen. När du blåser förs den fuktiga luften bort, avdunstningen går fortare och soppan förlorar mer energi.
+
+**Svar:** Blåsandet ersätter den uppvärmda luften vid ytan med kallare luft, så att temperaturskillnaden och värmeflödet blir större, och det för bort fuktig luft, så att avdunstningen, som kräver energi ur soppan, går fortare.`,
+        },
+        {
+            level: 2,
+            question: `Flytande kväve kokar vid $77\\ \\mathrm{K}$ och används för att frysa ned prover snabbt. Torris (fast koldioxid) har temperaturen $-78\\ ^\\circ\\mathrm{C}$.<br>a) Vilken temperatur har det kokande kvävet i grader Celsius?<br>b) Hur många kelvin kallare än torrisen är det kokande kvävet?`,
+            answer: { value: -196, unit: '°C', tol: 0.01 },
+            delsvar: [
+                { del: 'a', value: -196, unit: '°C' },
+                { del: 'b', value: 118, unit: 'K' },
+            ],
+            solution: `**a)** Vi löser ut $T_C$ ur sambandet mellan skalorna:
+
+$$
+T_K = T_C + 273 \\quad \\Longleftrightarrow \\quad T_C = T_K - 273
+$$
+
+$$
+T_C = 77 - 273 = -196\\ ^\\circ\\mathrm{C}
+$$
+
+**Svar:** −196 °C
+
+**b)** Ett skalsteg i kelvinskalan är lika stort som ett skalsteg i celsiusskalan. En temperaturskillnad har därför samma mätetal i kelvin som i grader Celsius. Vi räknar skillnaden i celsius:
+
+$$
+\\Delta T = -78 - (-196) = 118\\ ^\\circ\\mathrm{C} = 118\\ \\mathrm{K}
+$$
+
+Vi kan kontrollera i kelvin: torrisen har $T_K = -78 + 273 = 195\\ \\mathrm{K}$, och $195 - 77 = 118\\ \\mathrm{K}$. Samma svar.
+
+**Svar:** 118 K kallare`,
+        },
+
+        {
+            level: 3,
+            question: `En fahrenheittermometer visar $32\\ ^\\circ\\mathrm{F}$ när vatten fryser och $212\\ ^\\circ\\mathrm{F}$ när vatten kokar vid normalt lufttryck. Finns det en temperatur där en kelvintermometer och en fahrenheittermometer visar samma tal? Bestäm i så fall temperaturen i kelvin, och förklara varför en kelvintermometer och en celsiustermometer aldrig kan visa samma tal.`,
+            answer: { value: 574, unit: 'K', tol: 0.01 },
+            solution: `**Sambandet mellan fahrenheit och celsius.** Mellan vattnets fryspunkt och kokpunkt ligger 100 skalsteg i celsiusskalan men $212 - 32 = 180$ skalsteg i fahrenheitskalan. Ett skalsteg i fahrenheitskalan motsvarar därför
+
+$$
+\\dfrac{100}{180} = \\dfrac{5}{9}
+$$
+
+skalsteg i celsiusskalan. En fahrenheittemperatur $T_F$ ligger $T_F - 32$ fahrenheitsteg över fryspunkten, och fryspunkten är $0\\ ^\\circ\\mathrm{C}$. Alltså är
+
+$$
+T_C = \\dfrac{5}{9} \\cdot (T_F - 32) \\tag{1}
+$$
+
+**Sambandet mellan fahrenheit och kelvin.** Med $T_K = T_C + 273$ och (1), $T_C = \\dfrac{5}{9} \\cdot (T_F - 32)$, blir
+
+$$
+T_K = \\dfrac{5}{9} \\cdot (T_F - 32) + 273 \\tag{2}
+$$
+
+**Samma tal på båda termometrarna.** Vi kallar talet $y$ och sätter $T_K = T_F = y$ i (2):
+
+$$
+y = \\dfrac{5}{9} \\cdot (y - 32) + 273
+$$
+
+Vi multiplicerar båda led med 9:
+
+$$
+9y = 5 \\cdot (y - 32) + 2\\,457 = 5y - 160 + 2\\,457
+$$
+
+Vi subtraherar $5y$ från båda led:
+
+$$
+4y = 2\\,297
+$$
+
+$$
+y = \\dfrac{2\\,297}{4} = 574{,}25 \\approx 574
+$$
+
+Kontroll: $574{,}25\\ \\mathrm{K}$ är $574{,}25 - 273 = 301{,}25\\ ^\\circ\\mathrm{C}$, och (1) baklänges ger $T_F = \\dfrac{9}{5} \\cdot 301{,}25 + 32 = 574{,}25\\ ^\\circ\\mathrm{F}$. Det stämmer.
+
+Rimlighet: vid den absoluta nollpunkten, 0 K, visar fahrenheittermometern $\\dfrac{9}{5} \\cdot (-273) + 32 \\approx -459\\ ^\\circ\\mathrm{F}$, alltså ett mycket lägre tal. Men fahrenheittalet växer med 1,8 för varje kelvin, så det hinner i kapp kelvintalet. Därför måste det finnas en sådan temperatur, och den ligger högt.
+
+**Kelvin och celsius.** Ett skalsteg i kelvinskalan är lika stort som ett skalsteg i celsiusskalan, och $T_K = T_C + 273$. Kelvintalet är därför alltid exakt 273 större än celsiustalet, vid varje temperatur, och de två talen kan aldrig bli lika.
+
+**Svar:** Ja, vid cirka 574 K. En kelvintermometer visar alltid 273 mer än en celsiustermometer eftersom skalstegen är lika stora, så de visar aldrig samma tal.`,
+        },
+        {
+            level: 3,
+            question: `En gas har celsiustemperaturen $T_C$, där $T_C > 0$. Gasen värms så att celsiustemperaturen fördubblas.<br>a) Ta fram ett uttryck för den faktor som molekylernas medelrörelseenergi ökar med, och visa att faktorn alltid är mindre än 2.<br>b) Vid vilken celsiustemperatur måste gasen börja för att medelrörelseenergin ska öka med 50 % när celsiustemperaturen fördubblas? Ange svaret i °C.`,
+            answer: { value: 273, unit: '°C', tol: 0.01 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 273, unit: '°C' },
+            ],
+            solution: `Molekylernas medelrörelseenergi är proportionell mot temperaturen i kelvin. Kvoten mellan två medelrörelseenergier är alltså lika med kvoten mellan kelvintemperaturerna.
+
+**a)** Före uppvärmningen är kelvintemperaturen $T_1 = T_C + 273$. Efter uppvärmningen är celsiustemperaturen $2T_C$, så kelvintemperaturen är $T_2 = 2T_C + 273$. Faktorn som medelrörelseenergin ökar med är
+
+$$
+\\dfrac{T_2}{T_1} = \\dfrac{2T_C + 273}{T_C + 273}
+$$
+
+Vi jämför täljaren med två gånger nämnaren:
+
+$$
+2 \\cdot (T_C + 273) = 2T_C + 546
+$$
+
+Täljaren $2T_C + 273$ är alltså alltid 273 mindre än två gånger nämnaren. Kvoten är därför alltid mindre än 2, oavsett hur stor $T_C$ är. Skälet är att celsiusskalans nollpunkt inte ligger vid den absoluta nollpunkten: att fördubbla celsiustalet fördubblar inte avståndet från den absoluta nollpunkten.
+
+**Svar:** Faktorn är $\\dfrac{2T_C + 273}{T_C + 273}$, och den är alltid mindre än 2 eftersom täljaren alltid är 273 mindre än två gånger nämnaren.
+
+**b)** En ökning med 50 % betyder faktorn 1,5. Vi löser ekvationen
+
+$$
+\\dfrac{2T_C + 273}{T_C + 273} = 1{,}5
+$$
+
+$$
+2T_C + 273 = 1{,}5 \\cdot (T_C + 273) = 1{,}5T_C + 409{,}5
+$$
+
+$$
+0{,}5T_C = 136{,}5
+$$
+
+$$
+T_C = 273\\ ^\\circ\\mathrm{C}
+$$
+
+Kontroll: $273\\ ^\\circ\\mathrm{C}$ är $546\\ \\mathrm{K}$, och $546\\ ^\\circ\\mathrm{C}$ är $819\\ \\mathrm{K}$. Kvoten är $\\dfrac{819}{546} = 1{,}5$. Det stämmer.
+
+**Svar:** 273 °C`,
+        },
+        {
+            level: 3,
+            question: `En elev har en gasbehållare med fast volym och en tryckmätare. Hon mäter gasens tryck $p$ vid fyra temperaturer $T_C$.
+
+| $T_C$ (°C) | 0 | 20 | 50 | 100 |
+|---|---|---|---|---|
+| $p$ (kPa) | 101,3 | 108,7 | 119,9 | 138,4 |
+
+Gasens tryck beror på hur hårt och hur ofta molekylerna krockar med väggarna, och trycket är noll när molekylerna står helt stilla.<br>a) Använd mätvärdena för att uppskatta den absoluta nollpunkten i grader Celsius.<br>b) Förklara varför resultatet stöder att det finns en lägsta möjliga temperatur, men ingen högsta.`,
+            answer: { value: -273, unit: '°C', tol: 0.01 },
+            delsvar: [
+                { del: 'a', value: -273, unit: '°C' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Vi undersöker först om trycket ökar lika mycket för varje grad. Från 0 till 100 °C:
+
+$$
+k = \\dfrac{\\Delta p}{\\Delta T_C} = \\dfrac{138{,}4 - 101{,}3}{100 - 0} = \\dfrac{37{,}1}{100} = 0{,}371\\ \\mathrm{kPa/^\\circ C}
+$$
+
+Med detta $k$ förutsäger vi trycket vid 20 °C och 50 °C:
+
+$$
+101{,}3 + 0{,}371 \\cdot 20 = 108{,}72\\ \\mathrm{kPa} \\qquad 101{,}3 + 0{,}371 \\cdot 50 = 119{,}85\\ \\mathrm{kPa}
+$$
+
+Båda stämmer med mätvärdena (108,7 och 119,9 kPa), så trycket är en linjär funktion av temperaturen:
+
+$$
+p = 101{,}3 + 0{,}371 \\cdot T_C
+$$
+
+Vid den absoluta nollpunkten står molekylerna stilla och trycket är noll. Vi sätter $p = 0$:
+
+$$
+0 = 101{,}3 + 0{,}371 \\cdot T_C
+$$
+
+$$
+T_C = -\\dfrac{101{,}3}{0{,}371} = -273{,}04\\ldots \\approx -273\\ ^\\circ\\mathrm{C}
+$$
+
+Rimlighet: det ligger mycket nära det kända värdet $-273{,}15\\ ^\\circ\\mathrm{C}$. I verkligheten övergår gasen till vätska långt innan dess, så nollpunkten nås genom att förlänga den räta linjen, inte genom att mäta där.
+
+**Svar:** Cirka −273 °C
+
+**b)** Trycket minskar lika mycket för varje grad som temperaturen sjunker. Vid cirka $-273\\ ^\\circ\\mathrm{C}$ skulle trycket bli noll, och lägre än noll kan det inte bli: molekylerna kan inte röra sig mindre än att stå helt stilla. Det finns alltså en lägsta temperatur. Åt andra hållet finns ingen motsvarande gräns. Molekylerna kan röra sig allt snabbare, trycket kan växa hur mycket som helst, och linjen fortsätter uppåt utan något slut.
+
+**Svar:** Linjen når trycket noll, alltså stillastående molekyler, vid cirka −273 °C, och lägre än stillastående går inte. Uppåt kan rörelseenergin och trycket öka utan gräns.`,
+        },
+        {
+            level: 3,
+            question: `I två slutna behållare finns samma sorts gas. I behållare B är molekylernas medelrörelseenergi 20 % större än i behållare A, och temperaturskillnaden mellan behållarna är $60\\ ^\\circ\\mathrm{C}$. Bestäm temperaturen i<br>a) behållare A&emsp;&emsp;b) behållare B<br>Ange båda svaren i °C.`,
+            answer: { value: 27, unit: '°C', tol: 0.01 },
+            delsvar: [
+                { del: 'a', value: 27, unit: '°C' },
+                { del: 'b', value: 87, unit: '°C' },
+            ],
+            solution: `Medelrörelseenergin är proportionell mot temperaturen i kelvin. Kalla kelvintemperaturerna $T_A$ och $T_B$. Att medelrörelseenergin är 20 % större i B betyder
+
+$$
+T_B = 1{,}20 \\cdot T_A \\tag{1}
+$$
+
+En temperaturskillnad har samma mätetal i kelvin som i grader Celsius, så
+
+$$
+T_B - T_A = 60\\ \\mathrm{K} \\tag{2}
+$$
+
+Sambandet (1), $T_B = 1{,}20 \\cdot T_A$, insatt i (2) ger
+
+$$
+1{,}20 \\cdot T_A - T_A = 60
+$$
+
+$$
+0{,}20 \\cdot T_A = 60
+$$
+
+$$
+T_A = \\dfrac{60}{0{,}20} = 300\\ \\mathrm{K}
+$$
+
+och med (2) blir $T_B = 300 + 60 = 360\\ \\mathrm{K}$. Till sist omvandlar vi till grader Celsius med $T_C = T_K - 273$:
+
+**a)**
+
+$$
+T_{C,A} = 300 - 273 = 27\\ ^\\circ\\mathrm{C}
+$$
+
+**Svar:** 27 °C
+
+**b)**
+
+$$
+T_{C,B} = 360 - 273 = 87\\ ^\\circ\\mathrm{C}
+$$
+
+Kontroll: $\\dfrac{360}{300} = 1{,}20$, alltså 20 % större medelrörelseenergi, och skillnaden är $87 - 27 = 60\\ ^\\circ\\mathrm{C}$. Hade man räknat med celsiustemperaturerna direkt, $T_{C,B} = 1{,}20 \\cdot T_{C,A}$, hade man fått 300 °C och 360 °C, vilket är fel eftersom celsiusskalans nollpunkt inte är den absoluta nollpunkten.
+
+**Svar:** 87 °C`,
+        },
+        {
+            level: 3,
+            question: `En klar och vindstilla höstnatt håller luften temperaturen $+3\\ ^\\circ\\mathrm{C}$ hela natten. Ändå är taket på en bil som står ute täckt av frost på morgonen, medan en likadan bil som står under ett skärmtak (ett tak utan väggar) inte har någon frost alls. Förklara med de tre sätten att transportera värme hur biltaket kan bli kallare än luften omkring det, och varför bilen under skärmtaket klarar sig.`,
+            solution: `**Utgångspunkt.** Frost bildas när fukt i luften fryser till is på en yta som är kallare än $0\\ ^\\circ\\mathrm{C}$. Biltaket måste alltså ha blivit minst 3 grader kallare än luften omkring det. Taket både förlorar och får värme, och dess temperatur sjunker så länge det förlorar mer energi än det får.
+
+**Strålning ut mot himlen.** Allt som har en temperatur över den absoluta nollpunkten strålar, även biltaket. Strålning kräver inget medium, så den går rakt ut genom den klara luften mot rymden, som är mycket kall. Den klara natthimlen strålar bara lite tillbaka mot taket. Taket strålar därför ut mycket mer energi än det tar emot genom strålning, och det kyls.
+
+**Ledning och strömning från luften.** När taket har blivit kallare än luften flödar värme från luften till taket. Men luft leder värme dåligt. En vindstilla natt förs heller ingen ny luft fram: luften närmast taket kyls av taket, får högre densitet och blir liggande i stället för att stiga och ersättas. Ledningen och strömningen för därför bara lite värme till taket.
+
+**Följden.** Taket förlorar energi genom strålning snabbare än luften hinner föra tillbaka värme. Temperaturen sjunker tills förlusten och tillförseln är lika stora, och en klar och vindstilla natt sker det först när taket är kallare än $0\\ ^\\circ\\mathrm{C}$, fast luften är $+3\\ ^\\circ\\mathrm{C}$.
+
+**Under skärmtaket.** Nu strålar biltaket mot skärmtakets undersida i stället för mot himlen. Skärmtaket har ungefär luftens temperatur och strålar därför tillbaka nästan lika mycket energi som biltaket strålar ut. Nettoförlusten genom strålning blir liten, ledningen och strömningen från luften hinner ersätta den, och biltaket stannar nära luftens temperatur, över $0\\ ^\\circ\\mathrm{C}$. (Av samma skäl bildas det sällan frost en molnig natt: molnen strålar tillbaka mot taket.)
+
+**Svar:** Biltaket strålar ut mer energi mot den kalla, klara himlen än det får tillbaka, medan luften en vindstilla natt bara leder och strömmar fram lite värme. Taket kyls därför under luftens temperatur och under 0 °C. Under skärmtaket strålar biltaket mot en yta med ungefär luftens temperatur, som strålar tillbaka nästan lika mycket, så taket blir aldrig så kallt.`,
+        },
+        {
+            level: 3,
+            question: `I en bastu är luften $85\\ ^\\circ\\mathrm{C}$, och träbänken man sitter på har samma temperatur. Ändå kan man sitta där i flera minuter utan att bränna sig. Om man i stället nuddar en metallspik i bänken, som också är $85\\ ^\\circ\\mathrm{C}$, bränner man sig nästan genast, och vatten med temperaturen $85\\ ^\\circ\\mathrm{C}$ skulle skålla huden på ett ögonblick.<br>Förklara varför tre saker med samma temperatur ger så olika verkan på huden. Huden har ungefär temperaturen $35\\ ^\\circ\\mathrm{C}$.`,
+            solution: `**Utgångspunkt.** Det huden reagerar på är inte föremålets temperatur i sig, utan hur mycket värme som strömmar in i huden per sekund. Värme flödar från varmare till kallare, och temperaturskillnaden mot huden är lika stor i alla tre fallen, $85 - 35 = 50\\ ^\\circ\\mathrm{C}$. Skillnaden ligger i hur snabbt de tre materialen kan föra värme till huden.
+
+**Luften.** Luft leder värme mycket dåligt. Det skikt luft som ligger närmast huden kyls dessutom av huden och blir svalare än resten av bastun, så temperaturskillnaden precis vid huden blir mindre än 50 °C. Svetten som avdunstar tar energi från huden och kyler den ytterligare. Värmen når huden så långsamt att kroppen hinner föra bort den med blodet.
+
+**Träbänken.** Trä leder också värme dåligt. Den del av träet som rör vid huden kyls snabbt ned mot hudens temperatur, och ny värme leds bara långsamt fram från resten av bänken. Därför blir ytan där man sitter inte särskilt het.
+
+**Metallspiken.** Metall leder värme mycket bra, på samma sätt som aluminiumplattan som känns kall i rumstemperatur. Spiken kyls knappt ned vid kontaktytan, eftersom ny värme genast leds fram från resten av spiken, och värmen förs därför snabbt in i huden. Huden hettas upp nästan direkt, och man bränner sig.
+
+**Vattnet.** Vatten leder värme betydligt bättre än luft och har kontakt med hela hudytan. Dessutom kan vattnet strömma, så att vatten som har svalnat mot huden hela tiden ersätts av nytt $85\\ ^\\circ\\mathrm{C}$ vatten. Ingen avdunstning kan kyla huden under vattnet. Värmen strömmar in mycket snabbt, och huden skållas.
+
+**Svar:** Alla tre har samma temperatur, men de för över värme olika snabbt. Luft och trä leder värme dåligt, så ytan mot huden kyls och värmen kommer in så långsamt att kroppen hinner med. Metallen leder värme bra och vattnet både leder bra och strömmar, så de för in värme i huden så snabbt att den bränns.`,
         },
     ],
 
@@ -26179,7 +36124,7 @@ $$ t = \\frac{4\\,180 \\cdot 0{,}40 \\cdot 80}{2\\,200} = \\frac{133\\,760}{2\\,
             level: 2,
             question: `Du blandar 0,30 kg vatten med temperaturen 80 °C med 0,50 kg vatten med temperaturen 20 °C i en isolerad behållare. Vilken sluttemperatur får blandningen? Bortse från energiförluster till omgivningen. Ange svaret i °C.`,
             answer: { value: 42.5, unit: '°C', tol: 0.02 },
-            solution: `Värme flödar från varmt till kallt — varmvattnet avger energi som upptas av kallvattnet. Eftersom det är samma vätska (samma *c*) förkortas värmekapaciteten bort.
+            solution: `Värme flödar från varmt till kallt: varmvattnet avger energi som upptas av kallvattnet. Eftersom det är samma vätska (samma *c*) förkortas värmekapaciteten bort.
 
 $$ E_\\mathrm{avg} = E_\\mathrm{upp} \\quad\\Rightarrow\\quad c \\cdot m_v \\cdot \\Delta T_v = c \\cdot m_k \\cdot \\Delta T_k $$
 
@@ -26237,7 +36182,7 @@ $$ 28{,}7 = 0{,}875\\,T \\quad\\Leftrightarrow\\quad T \\approx 32{,}8\\ ^{\\cir
 
 **Svar:** Ca 33 °C.
 
-**Generell slutsats:** Trots att kopparbiten är 175 grader varmare än vattnet blir vattnet bara ca 8 grader varmare. Det beror på att vattnets specifika värmekapacitet är ca 11 gånger högre än kopparets — vatten "behöver" mycket mer energi för att värmas. Det är därför vatten är så bra som kylvätska, värmeöverförare i element och temperaturreglerare i havet.`,
+**Generell slutsats:** Trots att kopparbiten är 175 grader varmare än vattnet blir vattnet bara ca 8 grader varmare. Det beror på att vattnets specifika värmekapacitet är ca 11 gånger högre än kopparets. Vatten "behöver" mycket mer energi för att värmas. Det är därför vatten är så bra som kylvätska, värmeöverförare i element och temperaturreglerare i havet.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
@@ -26271,7 +36216,639 @@ $$ c_x = \\frac{4{,}18 \\cdot 0{,}300 \\cdot 8{,}5 + 0{,}90 \\cdot 0{,}200 \\cdo
 
 **Svar:** Ca 0,47 kJ/(kg·K).
 
-**Generell slutsats:** Värdet 0,47 kJ/(kg·K) ligger nära järns specifika värmekapacitet (0,46 kJ/(kg·K) i tabell) — den okända metallen är alltså troligen järn. Detta är en klassisk kalorimetri-metod för att identifiera metaller. Lägg märke till hur viktigt det är att inkludera kalorimeterns egen värmeupptagning — utelämnar man den får man $c_x \\approx 0{,}414\\ \\mathrm{kJ/(kg \\cdot K)}$, vilket skulle peka mot ett helt fel material.`,
+**Generell slutsats:** Värdet 0,47 kJ/(kg·K) ligger nära järns specifika värmekapacitet (0,46 kJ/(kg·K) i tabell). Den okända metallen är alltså troligen järn. Detta är en klassisk kalorimetri-metod för att identifiera metaller. Lägg märke till hur viktigt det är att inkludera kalorimeterns egen värmeupptagning: utelämnar man den får man $c_x \\approx 0{,}414\\ \\mathrm{kJ/(kg \\cdot K)}$, vilket skulle peka mot ett helt fel material.`,
+        },
+        {
+            level: 1,
+            question: `En stekpanna av gjutjärn har massan 1,8 kg. Efter stekningen har den temperaturen 220 °C, och sedan svalnar den på spisen till rumstemperaturen 25 °C. Hur mycket energi avger pannan? Räkna med $c_\\mathrm{järn} = 0{,}45\\ \\mathrm{kJ/(kg \\cdot K)}$. Ange svaret i kJ.`,
+            answer: { value: 160, unit: 'kJ', tol: 0.03 },
+            solution: `Vid avsvalning avges energi, och den beräknas med samma formel som vid uppvärmning.
+
+$$ E = c \\cdot m \\cdot \\Delta T $$
+
+$$
+\\left[ \\begin{array}{l}
+c = 0{,}45\\ \\mathrm{kJ/(kg \\cdot K)} \\\\
+m = 1{,}8\\ \\mathrm{kg} \\\\
+\\Delta T = 220 - 25 = 195\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+Temperaturändringen räknas som ett positivt tal: pannan svalnar 195 grader, och en temperaturskillnad är lika stor i kelvin som i celsius.
+
+$$ E = 0{,}45 \\cdot 1{,}8 \\cdot 195 = 157{,}95\\ \\mathrm{kJ} \\approx 160\\ \\mathrm{kJ} $$
+
+Värmekapaciteten och massan är givna med två värdesiffror, så svaret avrundas till två värdesiffror.
+
+**Svar:** Cirka 160 kJ`,
+        },
+        {
+            level: 1,
+            question: `Diagrammet visar hur temperaturen *T* hos 0,50 kg matolja i en kastrull ändras när energin *E* tillförs oljan. Bestäm oljans specifika värmekapacitet. Bortse från energiförluster och från kastrullen. Ange svaret i kJ/(kg·K).
+
+${makeDiagram({ xMin: 0, xMax: 40, yMin: 0, yMax: 70, xTicks: [0, 5, 10, 15, 20, 25, 30, 35, 40], yTicks: [0, 10, 20, 30, 40, 50, 60, 70], xLabel: '<tspan font-style="italic">E</tspan> (kJ)', yLabel: '<tspan font-style="italic">T</tspan> (°C)', paths: [{ points: [[0, 20], [40, 60]] }] })}`,
+            answer: { value: 2.0, unit: 'kJ/(kg·K)', tol: 0.03 },
+            solution: `Vi läser av två punkter på linjen. När ingen energi har tillförts är temperaturen 20 °C, och när 40 kJ har tillförts är den 60 °C.
+
+Vi löser ut den specifika värmekapaciteten ur formeln för uppvärmning.
+
+$$ E = c \\cdot m \\cdot \\Delta T \\quad\\Leftrightarrow\\quad c = \\frac{E}{m \\cdot \\Delta T} $$
+
+$$
+\\left[ \\begin{array}{l}
+E = 40\\ \\mathrm{kJ} \\\\
+m = 0{,}50\\ \\mathrm{kg} \\\\
+\\Delta T = 60 - 20 = 40\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+$$ c = \\frac{40}{0{,}50 \\cdot 40} = \\frac{40}{20} = 2{,}0\\ \\mathrm{kJ/(kg \\cdot K)} $$
+
+Eftersom energin står i kJ blir värmekapaciteten i kJ/(kg · K). Värdet är ungefär hälften av vattnets, vilket stämmer med tabellvärden för matolja.
+
+**Svar:** 2,0 kJ/(kg · K)`,
+        },
+        {
+            level: 1,
+            question: `Fyra metallklossar har samma massa, 1,0 kg, och samma starttemperatur. Varje kloss får 10 kJ energi. Tabellen visar metallernas specifika värmekapacitet.
+
+| Metall | Specifik värmekapacitet (kJ/(kg · K)) |
+|---|---|
+| Järn | 0,45 |
+| Aluminium | 0,90 |
+| Bly | 0,13 |
+| Koppar | 0,39 |
+
+Vilken kloss får högst sluttemperatur?`,
+            choices: [
+                `Järnklossen`,
+                `Aluminiumklossen`,
+                `Blyklossen`,
+                `Kopparklossen`,
+            ],
+            correct: 2,
+            solution: `Vi löser ut temperaturändringen ur formeln för uppvärmning.
+
+$$ E = c \\cdot m \\cdot \\Delta T \\quad\\Leftrightarrow\\quad \\Delta T = \\frac{E}{c \\cdot m} $$
+
+Energin och massan är lika för alla klossar, så temperaturändringen blir störst för den metall som har **minst** specifik värmekapacitet. Det är bly. Räknar vi ut det blir
+
+$$ \\Delta T_\\mathrm{bly} = \\frac{10}{0{,}13 \\cdot 1{,}0} = 76{,}9\\ldots\\ \\mathrm{K} \\approx 77\\ \\mathrm{K} $$
+
+medan aluminiumklossen bara blir $\\Delta T_\\mathrm{Al} = \\dfrac{10}{0{,}90 \\cdot 1{,}0} \\approx 11\\ \\mathrm{K}$ varmare. Eftersom alla klossar startar på samma temperatur får blyklossen högst sluttemperatur.
+
+**Svar:** Alternativ C`,
+        },
+        {
+            level: 1,
+            question: `En solfångare på ett hustak ger 1,0 MJ energi till vattnet i en ackumulatortank under en molnig dag. Hur många kilogram vatten kan den energin värma från 15 °C till 55 °C? Räkna med $c_\\mathrm{vatten} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$ och bortse från energiförluster. Ange svaret i kg.`,
+            answer: { value: 6.0, unit: 'kg', tol: 0.03 },
+            solution: `Vi löser ut massan ur formeln för uppvärmning.
+
+$$ E = c \\cdot m \\cdot \\Delta T \\quad\\Leftrightarrow\\quad m = \\frac{E}{c \\cdot \\Delta T} $$
+
+Energin och värmekapaciteten görs om till samma prefix, J.
+
+$$
+\\left[ \\begin{array}{l}
+E = 1{,}0\\ \\mathrm{MJ} = 1{,}0 \\cdot 10^{6}\\ \\mathrm{J} \\\\
+c = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)} = 4\\,180\\ \\mathrm{J/(kg \\cdot K)} \\\\
+\\Delta T = 55 - 15 = 40\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+$$ m = \\frac{1{,}0 \\cdot 10^{6}}{4\\,180 \\cdot 40} = \\frac{1{,}0 \\cdot 10^{6}}{167\\,200} = 5{,}98\\ldots\\ \\mathrm{kg} \\approx 6{,}0\\ \\mathrm{kg} $$
+
+Det motsvarar ungefär sex liter vatten.
+
+**Svar:** Cirka 6,0 kg`,
+        },
+        {
+            level: 2,
+            question: `En vattenkokare har effekten 2,0 kW. Den värmer 1,2 liter vatten från 12 °C till 100 °C på 4 minuter och 10 sekunder. Bestäm vattenkokarens verkningsgrad. Räkna med $c_\\mathrm{vatten} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$. Ange svaret i procent.`,
+            answer: { value: 88, unit: '%', tol: 0.02 },
+            solution: `Verkningsgraden är den andel av den tillförda energin som blir nyttig energi.
+
+$$ \\eta = \\frac{E_n}{E_t} $$
+
+Den nyttiga energin är den energi som vattnet tar upp när det värms, $E_n = c \\cdot m \\cdot \\Delta T$. Den tillförda energin är den elektriska energi som kokaren tar under tiden *t*. Den får vi genom att lösa ut energin ur $P = \\dfrac{E}{t}$, så $E_t = P \\cdot t$.
+
+$$
+\\left[ \\begin{array}{l}
+c = 4\\,180\\ \\mathrm{J/(kg \\cdot K)} \\\\
+m = 1{,}2\\ \\mathrm{kg}\\ (\\text{1 liter vatten väger ungefär 1 kg}) \\\\
+\\Delta T = 100 - 12 = 88\\ \\mathrm{K} \\\\
+P = 2{,}0\\ \\mathrm{kW} = 2\\,000\\ \\mathrm{W} \\\\
+t = 4 \\cdot 60 + 10 = 250\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+Nyttig energi:
+
+$$ E_n = 4\\,180 \\cdot 1{,}2 \\cdot 88 = 441\\,408\\ \\mathrm{J} $$
+
+Tillförd energi:
+
+$$ E_t = 2\\,000 \\cdot 250 = 500\\,000\\ \\mathrm{J} $$
+
+Verkningsgraden:
+
+$$ \\eta = \\frac{441\\,408}{500\\,000} = 0{,}882\\ldots \\approx 0{,}88 = 88\\ \\% $$
+
+Resten av energin, ungefär 12 %, värmer kokarens eget material och luften omkring. Det är rimligt att en vattenkokare inte når 100 %.
+
+**Svar:** Verkningsgraden är cirka 88 %`,
+        },
+        {
+            level: 2,
+            question: `I ett badkar finns 40 liter vatten med temperaturen 15 °C. Hur många liter vatten med temperaturen 65 °C måste du fylla på för att badvattnet ska få temperaturen 38 °C? Bortse från energiförluster till badkaret och luften. Ange svaret i liter.`,
+            answer: { value: 34, unit: 'liter', tol: 0.03 },
+            solution: `Det varma vattnet avger energi när det svalnar till 38 °C, och det kalla vattnet upptar lika mycket energi när det värms till 38 °C.
+
+$$ E_\\mathrm{avg} = E_\\mathrm{upp} $$
+
+$$ c \\cdot m_v \\cdot \\Delta T_v = c \\cdot m_k \\cdot \\Delta T_k $$
+
+Det är samma vätska på båda sidor, så vi dividerar med *c* i båda led.
+
+$$ m_v \\cdot \\Delta T_v = m_k \\cdot \\Delta T_k $$
+
+Massan av det varma vattnet söks, så vi löser ut $m_v$.
+
+$$ m_v = \\frac{m_k \\cdot \\Delta T_k}{\\Delta T_v} $$
+
+$$
+\\left[ \\begin{array}{l}
+m_k = 40\\ \\mathrm{kg}\\ (\\text{40 liter vatten väger ungefär 40 kg}) \\\\
+\\Delta T_k = 38 - 15 = 23\\ \\mathrm{K} \\\\
+\\Delta T_v = 65 - 38 = 27\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+$$ m_v = \\frac{40 \\cdot 23}{27} = \\frac{920}{27} = 34{,}07\\ldots\\ \\mathrm{kg} \\approx 34\\ \\mathrm{kg} $$
+
+Det är rimligt att det behövs något mindre varmt än kallt vatten: det varma vattnet ska svalna 27 grader, medan det kalla bara ska värmas 23 grader.
+
+**Svar:** Cirka 34 liter`,
+        },
+        {
+            level: 2,
+            question: `Två bägare innehåller vardera 0,40 kg vätska, den ena vatten och den andra en okänd vätska. Bägarna står på två likadana värmeplattor som ger lika stor effekt till vätskorna. Diagrammet visar hur temperaturen *T* i vätskorna A och B ändras med tiden *t*.
+
+${makeDiagram({ xMin: 0, xMax: 8, yMin: 0, yMax: 80, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8], yTicks: [0, 10, 20, 30, 40, 50, 60, 70, 80], xLabel: '<tspan font-style="italic">t</tspan> (min)', yLabel: '<tspan font-style="italic">T</tspan> (°C)', paths: [{ points: [[0, 20], [8, 70]] }, { points: [[0, 20], [8, 45]], color: '#2a5a78' }] }).replace('</svg>', '<text x="467" y="68" font-size="15" fill="#c8324a">A</text><text x="467" y="149" font-size="15" fill="#2a5a78">B</text></svg>')}
+
+a) Vilken av vätskorna har störst specifik värmekapacitet? Motivera ditt svar.<br>b) Bestäm den okända vätskans specifika värmekapacitet. Räkna med $c_\\mathrm{vatten} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$ och bortse från energiförluster. Ange svaret i kJ/(kg·K).`,
+            answer: { value: 2.1, unit: 'kJ/(kg·K)', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 2.1, unit: 'kJ/(kg·K)', etikett: 'den okända vätskans $c$' },
+            ],
+            solution: `**a)** Värmeplattorna ger lika stor effekt, så under samma tid tar båda vätskorna upp lika mycket energi, $E = P \\cdot t$. Massorna är också lika. Ur $E = c \\cdot m \\cdot \\Delta T$ följer då att den vätska som får **minst** temperaturändring har **störst** specifik värmekapacitet.
+
+Under 8 minuter stiger A från 20 °C till 70 °C, alltså 50 K, medan B stiger från 20 °C till 45 °C, alltså 25 K. Vätskan B har därför störst specifik värmekapacitet.
+
+**Svar:** Vätskan B
+
+**b)** Vatten har en ovanligt hög specifik värmekapacitet. Om A vore vatten skulle B ha dubbelt så hög värmekapacitet som vatten, vilket ingen vanlig vätska har. Alltså är B vatten och A den okända vätskan.
+
+Vätskorna tar upp lika mycket energi under 8 minuter.
+
+$$ E_\\mathrm{A} = E_\\mathrm{B} $$
+
+$$ c_\\mathrm{A} \\cdot m \\cdot \\Delta T_\\mathrm{A} = c_\\mathrm{B} \\cdot m \\cdot \\Delta T_\\mathrm{B} $$
+
+Massan är lika på båda sidor, så vi dividerar med *m* i båda led och löser ut $c_\\mathrm{A}$.
+
+$$ c_\\mathrm{A} = \\frac{c_\\mathrm{B} \\cdot \\Delta T_\\mathrm{B}}{\\Delta T_\\mathrm{A}} $$
+
+$$
+\\left[ \\begin{array}{l}
+c_\\mathrm{B} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)} \\\\
+\\Delta T_\\mathrm{B} = 45 - 20 = 25\\ \\mathrm{K} \\\\
+\\Delta T_\\mathrm{A} = 70 - 20 = 50\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+$$ c_\\mathrm{A} = \\frac{4{,}18 \\cdot 25}{50} = 2{,}09\\ \\mathrm{kJ/(kg \\cdot K)} \\approx 2{,}1\\ \\mathrm{kJ/(kg \\cdot K)} $$
+
+**Svar:** Cirka 2,1 kJ/(kg · K)`,
+        },
+        {
+            level: 2,
+            question: `För att bestämma temperaturen i en ugn lägger en elev in en stålkula med massan 0,20 kg tills kulan har samma temperatur som ugnen. Sedan släpper eleven snabbt ned kulan i 0,50 kg vatten med temperaturen 18 °C i en isolerad behållare. Vattnets temperatur stiger till 26 °C. Bestäm ugnens temperatur. Räkna med $c_\\mathrm{stål} = 0{,}46\\ \\mathrm{kJ/(kg \\cdot K)}$ och $c_\\mathrm{vatten} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$. Bortse från energiförluster. Ange svaret i °C.`,
+            answer: { value: 210, unit: '°C', tol: 0.03 },
+            solution: `Kulan avger energi när den svalnar från ugnens temperatur till 26 °C, och vattnet upptar samma energi.
+
+$$ E_\\mathrm{avg} = E_\\mathrm{upp} $$
+
+Vi börjar med det vi känner till helt, energin som vattnet upptar.
+
+$$ E_\\mathrm{upp} = c_\\mathrm{vatten} \\cdot m_\\mathrm{vatten} \\cdot \\Delta T_\\mathrm{vatten} $$
+
+$$
+\\left[ \\begin{array}{l}
+c_\\mathrm{vatten} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)} \\\\
+m_\\mathrm{vatten} = 0{,}50\\ \\mathrm{kg} \\\\
+\\Delta T_\\mathrm{vatten} = 26 - 18 = 8\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+$$ E_\\mathrm{upp} = 4{,}18 \\cdot 0{,}50 \\cdot 8 = 16{,}72\\ \\mathrm{kJ} $$
+
+Kulan avger lika mycket energi, $E_\\mathrm{avg} = c_\\mathrm{stål} \\cdot m_\\mathrm{kula} \\cdot \\Delta T_\\mathrm{kula}$. Vi löser ut kulans temperaturändring.
+
+$$ \\Delta T_\\mathrm{kula} = \\frac{E_\\mathrm{avg}}{c_\\mathrm{stål} \\cdot m_\\mathrm{kula}} $$
+
+$$
+\\left[ \\begin{array}{l}
+E_\\mathrm{avg} = 16{,}72\\ \\mathrm{kJ} \\\\
+c_\\mathrm{stål} = 0{,}46\\ \\mathrm{kJ/(kg \\cdot K)} \\\\
+m_\\mathrm{kula} = 0{,}20\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$ \\Delta T_\\mathrm{kula} = \\frac{16{,}72}{0{,}46 \\cdot 0{,}20} = \\frac{16{,}72}{0{,}092} = 181{,}7\\ldots\\ \\mathrm{K} $$
+
+Kulan har alltså svalnat ungefär 182 grader och slutar på 26 °C. Dess temperatur i ugnen var
+
+$$ T_\\mathrm{ugn} = 26 + 181{,}7\\ldots = 207{,}7\\ldots\\ ^{\\circ}\\mathrm{C} \\approx 210\\ ^{\\circ}\\mathrm{C} $$
+
+En vanlig ugn kan ställas på ungefär 200 °C, så resultatet är rimligt. Lite energi försvinner ändå när kulan flyttas, så ugnen var i verkligheten något varmare än det beräknade värdet.
+
+**Svar:** Cirka 210 °C`,
+        },
+        {
+            level: 2,
+            question: `En friluftskock har 1,0 kg nykokt vatten som håller 90 °C och vill snabbt kyla det. Hon lägger ned en ren sten med massan 1,0 kg som håller bäckvattnets temperatur, 10 °C, och påstår: "Nu får jag 50-gradigt vatten, eftersom 50 °C ligger mitt emellan." Stämmer påståendet? Beräkna sluttemperaturen. Räkna med $c_\\mathrm{sten} = 0{,}80\\ \\mathrm{kJ/(kg \\cdot K)}$ och $c_\\mathrm{vatten} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$, och bortse från energiförluster. Ange svaret i °C.`,
+            answer: { value: 77, unit: '°C', tol: 0.02 },
+            solution: `Påståendet stämmer inte. Mittpunkten 50 °C hade bara varit rätt om stenen och vattnet hade haft samma värmekapacitet per kilogram. Vattnets specifika värmekapacitet är mer än fem gånger så stor som stenens, så vattnet svalnar mycket mindre än stenen värms.
+
+Vattnet avger energi och stenen upptar den.
+
+$$ E_\\mathrm{avg} = E_\\mathrm{upp} $$
+
+$$ c_\\mathrm{vatten} \\cdot m_\\mathrm{vatten} \\cdot (T_\\mathrm{vatten} - T) = c_\\mathrm{sten} \\cdot m_\\mathrm{sten} \\cdot (T - T_\\mathrm{sten}) $$
+
+där *T* är sluttemperaturen.
+
+$$
+\\left[ \\begin{array}{l}
+c_\\mathrm{vatten} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)} \\\\
+m_\\mathrm{vatten} = 1{,}0\\ \\mathrm{kg} \\\\
+T_\\mathrm{vatten} = 90\\ ^{\\circ}\\mathrm{C} \\\\
+c_\\mathrm{sten} = 0{,}80\\ \\mathrm{kJ/(kg \\cdot K)} \\\\
+m_\\mathrm{sten} = 1{,}0\\ \\mathrm{kg} \\\\
+T_\\mathrm{sten} = 10\\ ^{\\circ}\\mathrm{C}
+\\end{array} \\right]
+$$
+
+$$ 4{,}18 \\cdot 1{,}0 \\cdot (90 - T) = 0{,}80 \\cdot 1{,}0 \\cdot (T - 10) $$
+
+$$ 376{,}2 - 4{,}18\\,T = 0{,}80\\,T - 8{,}0 $$
+
+$$ 376{,}2 - 4{,}18\\,T \\mathbin{\\boldsymbol{+}} \\boldsymbol{4{,}18\\,T} = 0{,}80\\,T - 8{,}0 \\mathbin{\\boldsymbol{+}} \\boldsymbol{4{,}18\\,T} $$
+
+$$ 376{,}2 = 4{,}98\\,T - 8{,}0 $$
+
+$$ 376{,}2 \\mathbin{\\boldsymbol{+}} \\boldsymbol{8{,}0} = 4{,}98\\,T - 8{,}0 \\mathbin{\\boldsymbol{+}} \\boldsymbol{8{,}0} $$
+
+$$ 384{,}2 = 4{,}98\\,T $$
+
+$$ T = \\frac{384{,}2}{4{,}98} = 77{,}1\\ldots\\ ^{\\circ}\\mathrm{C} \\approx 77\\ ^{\\circ}\\mathrm{C} $$
+
+Vattnet svalnar bara cirka 13 grader medan stenen värms cirka 67 grader, i förhållande ungefär 0,80 mot 4,18.
+
+**Svar:** Påståendet stämmer inte. Sluttemperaturen blir cirka 77 °C`,
+        },
+        {
+            level: 3,
+            question: `Två mängder av samma vätska blandas i ett isolerat kärl. Den ena har massan $m_1$ och temperaturen $T_1$, den andra massan $m_2$ och den lägre temperaturen $T_2$.<br>Visa att sluttemperaturen blir det viktade medelvärdet
+$$ T = \\frac{m_1 \\cdot T_1 + m_2 \\cdot T_2}{m_1 + m_2} $$
+och förklara varför man i formeln får räkna med volymer i deciliter i stället för massor i kilogram. Undersök också om formeln gäller när två olika vätskor blandas, och ställ i så fall upp den formel som gäller i stället.`,
+            solution: `**Antaganden.** Inga energiförluster till kärlet eller omgivningen, ingen fasövergång och ingen kemisk reaktion, och den specifika värmekapaciteten *c* är densamma i hela temperaturintervallet. Sluttemperaturen *T* ligger då mellan $T_2$ och $T_1$.
+
+**Energibalans.** Den varmare mängden avger energi när den svalnar från $T_1$ till *T*, och den kallare upptar samma energi när den värms från $T_2$ till *T*.
+
+$$ E_\\mathrm{avg} = E_\\mathrm{upp} $$
+
+$$ c \\cdot m_1 \\cdot (T_1 - T) = c \\cdot m_2 \\cdot (T - T_2) $$
+
+Det är samma vätska, så *c* är lika på båda sidor. Vi dividerar med *c* i båda led.
+
+$$ m_1 \\cdot (T_1 - T) = m_2 \\cdot (T - T_2) $$
+
+Parenteserna multipliceras ut.
+
+$$ m_1 T_1 - m_1 T = m_2 T - m_2 T_2 $$
+
+Vi samlar termerna med *T* på högra sidan genom att addera $m_1 T$ i båda led.
+
+$$ m_1 T_1 \\mathbin{\\boldsymbol{+}} \\boldsymbol{m_1 T} - m_1 T = m_2 T - m_2 T_2 \\mathbin{\\boldsymbol{+}} \\boldsymbol{m_1 T} $$
+
+$$ m_1 T_1 = m_2 T + m_1 T - m_2 T_2 $$
+
+Vi adderar $m_2 T_2$ i båda led.
+
+$$ m_1 T_1 \\mathbin{\\boldsymbol{+}} \\boldsymbol{m_2 T_2} = m_2 T + m_1 T - m_2 T_2 \\mathbin{\\boldsymbol{+}} \\boldsymbol{m_2 T_2} $$
+
+$$ m_1 T_1 + m_2 T_2 = (m_1 + m_2) \\cdot T $$
+
+Vi dividerar med $(m_1 + m_2)$ i båda led.
+
+$$ T = \\frac{m_1 \\cdot T_1 + m_2 \\cdot T_2}{m_1 + m_2} $$
+
+vilket skulle visas.
+
+**Volymer i stället för massor.** Massan är $m = \\rho \\cdot V$. Två mängder av samma vätska har (nästan) samma densitet ρ, så
+
+$$ T = \\frac{\\rho V_1 \\cdot T_1 + \\rho V_2 \\cdot T_2}{\\rho V_1 + \\rho V_2} = \\frac{\\rho \\cdot (V_1 T_1 + V_2 T_2)}{\\rho \\cdot (V_1 + V_2)} = \\frac{V_1 \\cdot T_1 + V_2 \\cdot T_2}{V_1 + V_2} $$
+
+Densiteten förkortas bort, och eftersom volymerna står både i täljaren och i nämnaren förkortas även enheten bort. Då spelar det ingen roll om volymerna anges i deciliter, liter eller kubikmeter, bara båda anges i samma enhet. Temperaturerna får av samma skäl stå i °C.
+
+**Två olika vätskor.** Har vätskorna olika specifik värmekapacitet, $c_1$ och $c_2$, går det inte att dividera bort *c*. Samma räkning med $c_1 m_1$ i stället för $m_1$ och $c_2 m_2$ i stället för $m_2$ ger
+
+$$ c_1 m_1 \\cdot (T_1 - T) = c_2 m_2 \\cdot (T - T_2) \\quad\\Leftrightarrow\\quad T = \\frac{c_1 m_1 \\cdot T_1 + c_2 m_2 \\cdot T_2}{c_1 m_1 + c_2 m_2} $$
+
+Det är fortfarande ett viktat medelvärde, men vikten är produkten $c \\cdot m$, alltså hur mycket energi varje mängd behöver per grad. Det enkla viktade medelvärdet med bara massor gäller därför inte: den vätska som har störst $c \\cdot m$ drar sluttemperaturen mot sin egen temperatur. Volymer får inte heller användas, eftersom densiteterna oftast är olika.
+
+**Svar:** Formeln följer ur $E_\\mathrm{avg} = E_\\mathrm{upp}$ när *c* förkortas bort. Volymer går att använda eftersom densiteten förkortas bort. För två olika vätskor gäller $T = \\dfrac{c_1 m_1 T_1 + c_2 m_2 T_2}{c_1 m_1 + c_2 m_2}$`,
+        },
+        {
+            level: 3,
+            question: `En doppvärmare med effekten 300 W sänks ned i en plastbalja med 1,5 kg vatten. Vattnet och rummet håller från början 20 °C. Diagrammet visar vattnets temperatur *T* som funktion av tiden *t* efter att doppvärmaren har slagits på.
+
+${makeDiagram({ xMin: 0, xMax: 60, yMin: 0, yMax: 100, xTicks: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60], yTicks: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100], xLabel: '<tspan font-style="italic">t</tspan> (min)', yLabel: '<tspan font-style="italic">T</tspan> (°C)', paths: [{ points: Array.from({ length: 121 }, (_, i) => [i * 0.5, 80 - 60 * Math.exp(-i * 0.5 / 20.9)]) }] })}
+
+Bestäm med hjälp av grafen hur stor effekt vattnet förlorar till omgivningen när det har temperaturen 50 °C. Förklara också varför vattnet aldrig börjar koka. Räkna med $c_\\mathrm{vatten} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$ och bortse från baljans egen uppvärmning. Ange svaret i W.`,
+            answer: { value: 150, unit: 'W', tol: 0.2 },
+            solution: `**Idé.** Doppvärmaren tillför hela tiden 300 J per sekund. En del av den energin stannar i vattnet och höjer temperaturen, och resten går förlorad till luften och baljan. Hur mycket som stannar i vattnet syns på hur snabbt temperaturen stiger, alltså på kurvans lutning. Förlusteffekten är därför skillnaden mellan den tillförda effekten *P* och den effekt som värmer vattnet.
+
+$$ P_\\mathrm{förlust} = P - P_\\mathrm{vatten} \\qquad (1) $$
+
+**Lutningen vid 50 °C.** Kurvan passerar 50 °C vid ungefär $t = 14{,}5\\ \\mathrm{min}$. Vi ritar en tangent till kurvan i den punkten och läser av två punkter långt isär på tangenten.
+
+${makeDiagram({ xMin: 0, xMax: 60, yMin: 0, yMax: 100, xTicks: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60], yTicks: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100], xLabel: '<tspan font-style="italic">t</tspan> (min)', yLabel: '<tspan font-style="italic">T</tspan> (°C)', paths: [{ points: Array.from({ length: 121 }, (_, i) => [i * 0.5, 80 - 60 * Math.exp(-i * 0.5 / 20.9)]) }, { points: [[0, 29.21], [45, 93.80]], color: '#2a5a78', width: 2, dash: '7 5' }] })}
+
+Tangenten går ungefär genom $(0\\ \\mathrm{min};\\ 29\\ ^{\\circ}\\mathrm{C})$ och $(40\\ \\mathrm{min};\\ 87\\ ^{\\circ}\\mathrm{C})$. Lutningen är
+
+$$ \\frac{\\Delta T}{\\Delta t} = \\frac{87 - 29}{40 - 0} = \\frac{58}{40} = 1{,}45\\ \\mathrm{K/min} $$
+
+Vattnet värms alltså 1,45 grader per minut när det har 50 °C. Per sekund blir det
+
+$$ \\frac{1{,}45}{60} = 0{,}02416\\ldots\\ \\mathrm{K/s} $$
+
+**Effekten som värmer vattnet.** Under en kort tid $\\Delta t$ tar vattnet upp energin $E = c \\cdot m \\cdot \\Delta T$. Effekten är energi per tid, så
+
+$$ P_\\mathrm{vatten} = \\frac{E}{\\Delta t} = c \\cdot m \\cdot \\frac{\\Delta T}{\\Delta t} $$
+
+$$
+\\left[ \\begin{array}{l}
+c = 4\\,180\\ \\mathrm{J/(kg \\cdot K)} \\\\
+m = 1{,}5\\ \\mathrm{kg} \\\\
+\\dfrac{\\Delta T}{\\Delta t} = 0{,}02416\\ldots\\ \\mathrm{K/s}
+\\end{array} \\right]
+$$
+
+$$ P_\\mathrm{vatten} = 4\\,180 \\cdot 1{,}5 \\cdot 0{,}02416\\ldots = 151{,}5\\ldots\\ \\mathrm{W} $$
+
+**Förlusteffekten.** $P = 300\\ \\mathrm{W}$ och $P_\\mathrm{vatten} = 151{,}5\\ldots\\ \\mathrm{W}$ insatta i (1), $P_\\mathrm{förlust} = P - P_\\mathrm{vatten}$, ger
+
+$$ P_\\mathrm{förlust} = 300 - 151{,}5\\ldots = 148{,}4\\ldots\\ \\mathrm{W} \\approx 150\\ \\mathrm{W} $$
+
+Ungefär hälften av doppvärmarens effekt går alltså förlorad när vattnet har 50 °C.
+
+**Varför vattnet aldrig kokar.** Förlusterna växer med temperaturskillnaden mot rummet. Vid start har vattnet samma temperatur som rummet, förlusterna är nära noll och kurvan är som brantast. Vid 50 °C, 30 grader över rummets temperatur, är förlusterna redan ungefär 150 W. Ju varmare vattnet blir, desto större del av de 300 W går förlorad och desto flackare blir kurvan. Kurvan planar ut mot ungefär 80 °C, alltså 60 grader över rummets temperatur. Där är förlusterna lika stora som hela den tillförda effekten, och då stiger temperaturen inte längre. Det stämmer med avläsningen: dubbelt så stor temperaturskillnad som vid 50 °C ger ungefär dubbelt så stor förlust, 300 W.
+
+**Rimlighet.** Tangenten ritas för hand, så avläsningen är osäker med några procent. Svar mellan cirka 130 W och 170 W är lika bra.
+
+**Svar:** Cirka 150 W. Vattnet kokar aldrig, eftersom förlusterna växer med temperaturen och vid ungefär 80 °C är lika stora som doppvärmarens hela effekt`,
+        },
+        {
+            level: 3,
+            question: `Vid ett vattenfall flyter älven långsamt över krönet och faller 50 m ned i en bassäng, där vattnet bromsas upp. En turist påstår: "Vattnet nedanför fallet borde vara åtminstone en grad varmare än vattnet ovanför, så mycket energi som frigörs här." Stämmer påståendet? Styrk ditt svar med en beräkning av den största möjliga temperaturökningen, och förklara varför den är en övre gräns. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och $c_\\mathrm{vatten} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$. Ange svaret i K.`,
+            answer: { value: 0.12, unit: 'K', tol: 0.05 },
+            solution: `**Modell.** Vi följer en godtycklig vattenmängd med massan *m* (massan är okänd, så vi låter den stå kvar som en symbol). Vid krönet har vattnet nästan ingen fart, och lägesenergin räknas från bassängens yta. Under fallet blir lägesenergin rörelseenergi, och när vattnet bromsas upp i bassängen blir rörelseenergin till sist inre energi i vattnet. Temperaturen blir högst om **all** lägesenergi blir inre energi i just den vattenmängd som föll.
+
+Då gäller energiprincipen:
+
+$$ E_p = E $$
+
+$$ m \\cdot g \\cdot h = c \\cdot m \\cdot \\Delta T $$
+
+Massan står i båda led och förkortas bort. Vi dividerar med $c \\cdot m$ i båda led.
+
+$$ \\Delta T = \\frac{g \\cdot h}{c} $$
+
+Temperaturökningen beror alltså bara på fallhöjden, inte på hur mycket vatten som faller.
+
+$$
+\\left[ \\begin{array}{l}
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+h = 50\\ \\mathrm{m} \\\\
+c = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)} = 4\\,180\\ \\mathrm{J/(kg \\cdot K)}
+\\end{array} \\right]
+$$
+
+$$ \\Delta T = \\frac{9{,}82 \\cdot 50}{4\\,180} = \\frac{491}{4\\,180} = 0{,}117\\ldots\\ \\mathrm{K} \\approx 0{,}12\\ \\mathrm{K} $$
+
+**Varför en övre gräns.** I beräkningen antogs att all energi stannar i vattnet. I verkligheten går en del av energin till luften (luftmotstånd under fallet och stänk), till berget och botten i bassängen och till ljud. En del vatten avdunstar också under fallet, och avdunstning tar energi från det kvarvarande vattnet. Allt detta gör att den verkliga temperaturökningen blir mindre än 0,12 K.
+
+**Rimlighet.** En ökning på ungefär en tiondels grad är för liten för att märkas med handen, vilket stämmer med att vattenfall inte känns varmare nedtill. Vattnets stora specifika värmekapacitet är skälet till att även ett högt fall ger så liten effekt.
+
+**Svar:** Påståendet stämmer inte. Vattnet kan högst bli cirka 0,12 K varmare, knappt en åttondel av en grad. Det är en övre gräns eftersom en del av energin går till omgivningen och till avdunstning i stället för att värma vattnet`,
+        },
+        {
+            level: 3,
+            question: `En varmvattenberedare värmer kallvatten från ledningen till 60 °C. På sommaren håller det inkommande kallvattnet 12 °C, men på vintern bara 4 °C. Beredarens effekt är densamma året runt. I duschen blandas varmvattnet med kallvatten så att duschvattnet får 38 °C, och duschflödet är detsamma året runt. Anta att beredaren levererar 60-gradigt vatten ända tills det varma vattnet tar slut, och bortse från energiförluster. Ange svaren i procent.<br>a) Hur många procent längre tid tar det att värma en full beredare på vintern än på sommaren?<br>b) Hur många procent kortare tid kan man duscha på vintern innan det varma vattnet i en full beredare tar slut?`,
+            answer: { value: 17, unit: '%', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 17, unit: '%', etikett: 'längre uppvärmningstid' },
+                { del: 'b', value: 11, unit: '%', etikett: 'kortare duschtid' },
+            ],
+            solution: `**a)** Varken beredarens volym eller effekt är given, så vi låter vattnets massa vara *m* och effekten *P* och ser om de tar ut sig.
+
+Den energi som beredaren avger under tiden *t* är $E_\\mathrm{avg} = P \\cdot t$, och den tas upp av vattnet.
+
+$$ E_\\mathrm{avg} = E_\\mathrm{upp} $$
+
+$$ P \\cdot t = c \\cdot m \\cdot \\Delta T $$
+
+Vi dividerar med *P* i båda led.
+
+$$ t = \\frac{c \\cdot m \\cdot \\Delta T}{P} $$
+
+Samma beredare med samma vatten året runt betyder att *c*, *m* och *P* är lika på sommaren och vintern. Kvoten mellan tiderna blir då
+
+$$ \\frac{t_\\mathrm{vinter}}{t_\\mathrm{sommar}} = \\frac{\\dfrac{c \\cdot m \\cdot \\Delta T_\\mathrm{vinter}}{P}}{\\dfrac{c \\cdot m \\cdot \\Delta T_\\mathrm{sommar}}{P}} = \\frac{\\Delta T_\\mathrm{vinter}}{\\Delta T_\\mathrm{sommar}} $$
+
+Tiden är alltså proportionell mot temperaturändringen.
+
+$$
+\\left[ \\begin{array}{l}
+\\Delta T_\\mathrm{vinter} = 60 - 4 = 56\\ \\mathrm{K} \\\\
+\\Delta T_\\mathrm{sommar} = 60 - 12 = 48\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+$$ \\frac{t_\\mathrm{vinter}}{t_\\mathrm{sommar}} = \\frac{56}{48} = 1{,}1666\\ldots $$
+
+Vintertiden är alltså 1,1666… gånger sommartiden, det vill säga $0{,}1666\\ldots \\approx 0{,}17 = 17\\ \\%$ längre. Observera att kvoten mellan temperaturerna (12 °C mot 4 °C) inte säger något, det är temperaturändringarna som ska jämföras.
+
+**Svar:** Cirka 17 % längre tid
+
+**b)** Duschtiden beror på hur mycket varmvatten som går åt per sekund, och det beror på kallvattnets temperatur. I duschen avger varmvattnet energi när det svalnar från 60 °C till 38 °C, och kallvattnet upptar samma energi när det värms från sin temperatur $T_k$ till 38 °C. Vi kallar massan varmvatten per sekund $m_v$ och massan kallvatten per sekund $m_k$.
+
+$$ E_\\mathrm{avg} = E_\\mathrm{upp} $$
+
+$$ c \\cdot m_v \\cdot (60 - 38) = c \\cdot m_k \\cdot (38 - T_k) $$
+
+Det är vatten på båda sidor, så vi dividerar med *c* i båda led.
+
+$$ m_v \\cdot 22 = m_k \\cdot (38 - T_k) $$
+
+Vi löser ut $m_k$ genom att dividera med $(38 - T_k)$ i båda led.
+
+$$ m_k = \\frac{22 \\cdot m_v}{38 - T_k} $$
+
+Andelen varmvatten *x* i duschvattnet är massan varmvatten delad med hela massan.
+
+$$ x = \\frac{m_v}{m_v + m_k} = \\frac{m_v}{m_v + \\dfrac{22 \\cdot m_v}{38 - T_k}} $$
+
+Vi förlänger bråket med $(38 - T_k)$, och då förkortas $m_v$ bort.
+
+$$ x = \\frac{38 - T_k}{(38 - T_k) + 22} = \\frac{38 - T_k}{60 - T_k} $$
+
+Andelen varmvatten är alltså den temperaturhöjning kallvattnet behöver, delad med hela skillnaden mellan varmt och kallt.
+
+$$
+\\left[ \\begin{array}{l}
+x_\\mathrm{sommar} = \\dfrac{38 - 12}{60 - 12} = \\dfrac{26}{48} = 0{,}5416\\ldots \\\\
+x_\\mathrm{vinter} = \\dfrac{38 - 4}{60 - 4} = \\dfrac{34}{56} = 0{,}6071\\ldots
+\\end{array} \\right]
+$$
+
+Beredaren rymmer lika mycket varmvatten *M* året runt, och duschflödet *q* är detsamma. Varmvattnet går åt med $x \\cdot q$ per sekund, så det räcker i tiden
+
+$$ t = \\frac{M}{x \\cdot q} $$
+
+Med samma *M* och *q* blir kvoten mellan duschtiderna
+
+$$ \\frac{t_\\mathrm{vinter}}{t_\\mathrm{sommar}} = \\frac{x_\\mathrm{sommar}}{x_\\mathrm{vinter}} = \\frac{0{,}5416\\ldots}{0{,}6071\\ldots} = 0{,}892\\ldots $$
+
+Duschtiden på vintern är alltså $1 - 0{,}892\\ldots = 0{,}107\\ldots \\approx 0{,}11 = 11\\ \\%$ kortare.
+
+**Rimlighet.** På vintern behövs mer varmvatten för att lyfta det kallare kallvattnet till 38 °C, så varmvattnet tar slut fortare. Beredaren tar alltså både längre tid att värma och räcker kortare tid. Skillnaden i b är mindre än i a, eftersom kallvattnet bara står för en del av duschvattnet. På vintern är dessutom källaren och rören ofta kallare, så förlusterna ökar och de verkliga skillnaderna blir något större.
+
+**Svar:** Cirka 11 % kortare tid`,
+        },
+        {
+            level: 3,
+            question: `En elektrisk genomströmningsvärmare med effekten 9,0 kW värmer duschvattnet medan det strömmar igenom, utan någon tank. Kallvattnet kommer in med 10 °C, och en bekväm dusch kräver 9,0 liter vatten per minut med temperaturen 38 °C. Det klarar inte värmaren, så familjen installerar en värmeväxlare i golvbrunnen. Duschvattnet rinner ned i brunnen med 34 °C, och växlaren förvärmer allt inkommande kallvatten innan det når värmaren. Växlaren tar tillvara 60 % av den energi som spillvattnet skulle avge om det kyldes ända ned till kallvattnets temperatur. Räcker värmaren nu för en bekväm dusch? Bestäm den effekt som behövs. Räkna med $c_\\mathrm{vatten} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$ och bortse från övriga energiförluster. Ange svaret i kW.`,
+            answer: { value: 8.5, unit: 'kW', tol: 0.03 },
+            solution: `**Modell.** Värmaren har ingen tank, så det finns ingen bestämd vattenmängd att värma. I stället betraktar vi vattnet som strömmar igenom under en tid *t*. Det har massan *m*, och 9,0 liter vatten väger ungefär 9,0 kg, så massflödet är
+
+$$ \\frac{m}{t} = \\frac{9{,}0\\ \\mathrm{kg}}{60\\ \\mathrm{s}} = 0{,}15\\ \\mathrm{kg/s} $$
+
+**Förvärmningen i växlaren.** Allt vatten som kommer in till duschen rinner till sist ut genom brunnen. Under tiden *t* passerar alltså lika stor massa *m* spillvatten och kallvatten genom växlaren. Om spillvattnet kyldes från 34 °C ned till 10 °C skulle det avge $c \\cdot m \\cdot (34 - 10)$. Växlaren tar tillvara 60 % av den energin, och den upptas av kallvattnet, som värms med $\\Delta T_\\mathrm{förvärm}$.
+
+$$ E_\\mathrm{avg} = E_\\mathrm{upp} $$
+
+$$ 0{,}60 \\cdot c \\cdot m \\cdot (34 - 10) = c \\cdot m \\cdot \\Delta T_\\mathrm{förvärm} $$
+
+Både *c* och *m* står i båda led, så vi dividerar med $c \\cdot m$ i båda led.
+
+$$ \\Delta T_\\mathrm{förvärm} = 0{,}60 \\cdot (34 - 10) = 0{,}60 \\cdot 24 = 14{,}4\\ \\mathrm{K} $$
+
+Kallvattnet når alltså värmaren med temperaturen $10 + 14{,}4 = 24{,}4\\ ^{\\circ}\\mathrm{C}$.
+
+**Effekten som behövs.** Värmaren ska nu bara värma vattnet från 24,4 °C till 38 °C. Under tiden *t* avger värmaren energin $P \\cdot t$, och den upptas av vattnet.
+
+$$ E_\\mathrm{avg} = E_\\mathrm{upp} $$
+
+$$ P \\cdot t = c \\cdot m \\cdot \\Delta T $$
+
+Vi dividerar med *t* i båda led.
+
+$$ P = c \\cdot \\frac{m}{t} \\cdot \\Delta T $$
+
+$$
+\\left[ \\begin{array}{l}
+c = 4\\,180\\ \\mathrm{J/(kg \\cdot K)} \\\\
+\\dfrac{m}{t} = 0{,}15\\ \\mathrm{kg/s} \\\\
+\\Delta T = 38 - 24{,}4 = 13{,}6\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+$$ P = 4\\,180 \\cdot 0{,}15 \\cdot 13{,}6 = 8\\,527{,}2\\ \\mathrm{W} \\approx 8{,}5\\ \\mathrm{kW} $$
+
+**Slutsats.** Det behövs cirka 8,5 kW, och värmaren ger 9,0 kW, så den räcker. Utan växlaren hade värmaren behövt värma vattnet hela vägen från 10 °C, och då hade det krävts
+
+$$ P = 4\\,180 \\cdot 0{,}15 \\cdot (38 - 10) = 17\\,556\\ \\mathrm{W} \\approx 18\\ \\mathrm{kW} $$
+
+Växlaren halverar alltså ungefär effektbehovet.
+
+**Rimlighet.** Marginalen är bara cirka 0,5 kW. Spillvattnet svalnar lite på vägen ned i brunnen, rören avger värme, och en växlare tar tillvara en mindre andel när den blir smutsig, så i praktiken kan det bli knappt. Att det krävs cirka 18 kW utan växlare stämmer med att genomströmningsvärmare för en hel dusch brukar ha effekter på 18 kW eller mer.
+
+**Svar:** Det behövs cirka 8,5 kW, så värmaren på 9,0 kW räcker`,
+        },
+        {
+            level: 3,
+            question: `Ett aluminiumblock med massan 0,50 kg och temperaturen 100 °C ska kylas med 1,0 kg vatten som håller 20 °C. Två elever föreslår olika sätt.
+
+- Elev 1 sänker ned blocket i en hink med allt vatten och väntar tills temperaturen har jämnat ut sig.
+- Elev 2 delar vattnet i två hinkar med 0,50 kg vardera. Blocket sänks först ned i den ena hinken tills temperaturen har jämnat ut sig, och flyttas sedan över till den andra.
+
+Vilket sätt ger blocket lägst sluttemperatur? Bestäm blockets sluttemperatur med båda sätten. Räkna med $c_\\mathrm{Al} = 0{,}90\\ \\mathrm{kJ/(kg \\cdot K)}$ och $c_\\mathrm{vatten} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$, och bortse från energiförluster. Ange svaren i °C.`,
+            answer: { value: 23, unit: '°C', tol: 0.03 },
+            delsvar: [
+                { value: 28, unit: '°C', etikett: 'elev 1, en hink' },
+                { value: 23, unit: '°C', etikett: 'elev 2, två hinkar' },
+            ],
+            solution: `**Energibalansen i en hink.** I varje steg avger blocket energi och vattnet i hinken upptar samma energi. Om blocket har temperaturen $T_\\mathrm{b}$ och vattnet $T_\\mathrm{v}$ före, och båda har temperaturen *T* efter, gäller
+
+$$ E_\\mathrm{avg} = E_\\mathrm{upp} $$
+
+$$ c_\\mathrm{Al} \\cdot m_\\mathrm{Al} \\cdot (T_\\mathrm{b} - T) = c_\\mathrm{vatten} \\cdot m_\\mathrm{v} \\cdot (T - T_\\mathrm{v}) $$
+
+Blockets produkt $c_\\mathrm{Al} \\cdot m_\\mathrm{Al} = 0{,}90 \\cdot 0{,}50 = 0{,}45\\ \\mathrm{kJ/K}$ är lika i alla steg. Den anger hur mycket energi blocket avger per grad det svalnar.
+
+**Elev 1: allt vatten på en gång.** Här är $m_\\mathrm{v} = 1{,}0\\ \\mathrm{kg}$, så $c_\\mathrm{vatten} \\cdot m_\\mathrm{v} = 4{,}18 \\cdot 1{,}0 = 4{,}18\\ \\mathrm{kJ/K}$.
+
+$$ 0{,}45 \\cdot (100 - T) = 4{,}18 \\cdot (T - 20) $$
+
+$$ 45 - 0{,}45\\,T = 4{,}18\\,T - 83{,}6 $$
+
+$$ 45 - 0{,}45\\,T \\mathbin{\\boldsymbol{+}} \\boldsymbol{0{,}45\\,T} \\mathbin{\\boldsymbol{+}} \\boldsymbol{83{,}6} = 4{,}18\\,T - 83{,}6 \\mathbin{\\boldsymbol{+}} \\boldsymbol{0{,}45\\,T} \\mathbin{\\boldsymbol{+}} \\boldsymbol{83{,}6} $$
+
+$$ 128{,}6 = 4{,}63\\,T $$
+
+$$ T = \\frac{128{,}6}{4{,}63} = 27{,}77\\ldots\\ ^{\\circ}\\mathrm{C} \\approx 28\\ ^{\\circ}\\mathrm{C} $$
+
+**Svar:** Med elev 1:s sätt blir blocket cirka 28 °C
+
+**Elev 2, första hinken.** Här är $m_\\mathrm{v} = 0{,}50\\ \\mathrm{kg}$, så $c_\\mathrm{vatten} \\cdot m_\\mathrm{v} = 4{,}18 \\cdot 0{,}50 = 2{,}09\\ \\mathrm{kJ/K}$. Blockets temperatur efter första hinken kallar vi $T_1$.
+
+$$ 0{,}45 \\cdot (100 - T_1) = 2{,}09 \\cdot (T_1 - 20) $$
+
+$$ 45 - 0{,}45\\,T_1 = 2{,}09\\,T_1 - 41{,}8 $$
+
+$$ 86{,}8 = 2{,}54\\,T_1 \\quad\\Leftrightarrow\\quad T_1 = \\frac{86{,}8}{2{,}54} = 34{,}17\\ldots\\ ^{\\circ}\\mathrm{C} $$
+
+Värdet avrundas inte, eftersom det används i nästa steg.
+
+**Elev 2, andra hinken.** Blocket startar nu på $T_1 = 34{,}17\\ldots\\ ^{\\circ}\\mathrm{C}$ och möter nytt vatten med 20 °C. Sluttemperaturen kallar vi $T_2$.
+
+$$ 0{,}45 \\cdot (34{,}17\\ldots - T_2) = 2{,}09 \\cdot (T_2 - 20) $$
+
+$$ 15{,}37\\ldots - 0{,}45\\,T_2 = 2{,}09\\,T_2 - 41{,}8 $$
+
+$$ 57{,}17\\ldots = 2{,}54\\,T_2 \\quad\\Leftrightarrow\\quad T_2 = \\frac{57{,}17\\ldots}{2{,}54} = 22{,}51\\ldots\\ ^{\\circ}\\mathrm{C} \\approx 23\\ ^{\\circ}\\mathrm{C} $$
+
+**Svar:** Med elev 2:s sätt blir blocket cirka 23 °C
+
+**Varför två hinkar är bättre.** Med en hink slutar blocket på samma temperatur som allt vatten, och vattnet har då värmts till 28 °C. Med två hinkar möter blocket i sista steget vatten som fortfarande håller 20 °C, och blocket kan aldrig bli kallare än det vatten det står i. Vattnet i första hinken värms till 34 °C och vattnet i andra hinken bara till 23 °C. Samma vattenmängd tar alltså emot energin vid två olika temperaturnivåer, och blocket kommer närmare 20 °C. Delar man vattnet i ännu fler portioner närmar sig blockets sluttemperatur 20 °C ännu mer. Samma princip används i värmeväxlare där det kalla och det varma flödet går åt motsatta håll.
+
+**Svar:** Elev 2:s sätt ger lägst sluttemperatur, cirka 23 °C jämfört med cirka 28 °C med elev 1:s sätt`,
         },
     ],
 

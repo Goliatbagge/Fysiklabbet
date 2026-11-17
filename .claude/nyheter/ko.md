@@ -15,6 +15,9 @@ Format per post:
 - **KM3NeT/ORCA prövar Lorentzinvariansen med atmosfäriska neutriner från Medelhavets botten** **[BREVTEASER]** (nominerad 2026-11-16: Einsteins relativitetsteori prövad med neutriner som fångas av ljussensorer på havsbotten, lätt att sammanfatta; förtrycket arXiv 2603.04264 öppet, läs fulltexten före publicering) — partikelfysik/relativitet; 5 828 händelser på 1,4 år med sex detektorenheter, inga avvikelser. JCAP 2026, arXiv 2603.04264 (öppen). OBS partikelfysik 2026-11-05. Källa (Phys.org 2026-11-04): https://phys.org/news/2026-11-einstein-laws-bottom-mediterranean-sea.html
   (tillagd 2026-11-05)
 
+- **LHCb: första mätningen av CP-asymmetrin i sönderfallet Bₛ⁰ → Ds⁻π⁺ (materia–antimateria)** — partikelfysik; R. Aaij m.fl. (LHCb), PRL 2026, DOI 10.1103/ljtv-y278. OBS kärnfysik 2026-11-18, vänta några dagar. Originalet ej kontrollerat (leta arXiv). Källa (Phys.org 2026-11): https://phys.org/news/2026-11-matterantimatter-asymmetry-evidence-physics.html
+  (tillagd 2026-11-17)
+
 - **Instabil plasma värmer sig själv med vågor den skapar (Large Helical Device, NIFS, Japan)** — plasmafysik/fusion; vågor från instabiliteter förvränger partiklarnas hastighetsfördelning, som sedan breds ut (uppvärmning). Katsumi Ida m.fl., ”Direct observation of phase-space dynamics during energetic-particle-driven MHD bursts”, Communications Physics (2026), DOI 10.1038/s42005-026-02939-3, ÖPPEN (nature.com laddade 2026-11-15). Teknisk men fusionsvinkeln är bra. Källa (Phys.org 2026-11-13): https://phys.org/news/2026-11-unstable-plasma-generates-reveal.html
   (tillagd 2026-11-15)
 

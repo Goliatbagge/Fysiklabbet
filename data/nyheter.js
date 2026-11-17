@@ -103,6 +103,65 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-18-karnan-som-sander-ut-tva-partiklar-pa-en-gang",
+    date: "2026-11-18",
+    title: "Atomkärnor kan sända ut alfa- och betastrålning i ett enda sönderfall, föreslår fysiker",
+    deck: "En atomkärna sönderfaller på ett av några få kända sätt: den skjuter ut en alfapartikel, en elektron eller en positron, eller en foton. Två fysiker i Kina och Sverige föreslår nu ett nytt sätt, där en alfapartikel och en positron eller elektron lämnar kärnan i en och samma händelse. Modellen kan förklara formen på de alfatoppar som har uppmätts hos kortlivade kärnor sedan 1970-talet, men den träffar inte toppens läge för alla kärnor, och mätningarna kan ännu inte avgöra vilken förklaring som är rätt.",
+    category: "Kärnfysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-11-18-karnan-som-sander-ut-tva-partiklar-pa-en-gang.jpg",
+    imageAlt: "En forskare med munskydd och skyddshandskar arbetar med en blank metallkammare inlindad i aluminiumfolie, omgiven av kablar. Bilden är tagen genom ett metallstativ med stora runda hål i förgrunden.",
+    imageCredit: "Foto: Julien Marius Ordan, Cern, mätstationen ISOLDE Decay Station, via Wikimedia Commons (CC BY 4.0). Beskuren till bredformat. Studien är teoretisk, och bilden visar ingen mätning ur den.",
+    tags: ["kärnfysik", "radioaktivt sönderfall", "alfasönderfall", "betasönderfall", "positron", "tunneleffekt", "svag växelverkan", "stark växelverkan", "magiska tal", "virtuellt tillstånd", "cesium", "isolde", "kth"],
+    sources: [
+      { name: "Phys.org: Model of 'alpha-beta decay' could solve a decades-old nuclear mystery (Sam Jarman, 16 november 2026)", url: "https://phys.org/news/2026-11-alpha-beta-decay-decades-nuclear.html" },
+      { name: "arXiv: W. Q. Zhang och C. Qi, Simultaneous αβ Decay: A New Mode of Nuclear Instability (förtrycket, version 3)", url: "https://arxiv.org/abs/2606.10567" },
+      { name: "Physical Review Letters: J. Dey med flera, Multifaceted Decay of 116Cs (mätningen vid Isolde 2026)", url: "https://journals.aps.org/prl/abstract/10.1103/ztcl-lpdf" }
+    ],
+    research: {
+      citation: "W. Q. Zhang och C. Qi, ”Simultaneous αβ decay: A new mode of nuclear instability”, Physical Review Letters (2026), accepterad för publicering 6 november 2026 (ännu inte publicerad i ett nummer). Kollegialt granskad. Förtryck: arXiv:2606.10567.",
+      url: "https://doi.org/10.1103/76pc-tspc"
+    },
+    simulering: {
+      href: "fysik1-sonderfall.html",
+      name: "Radioaktivt sönderfall",
+      text: "Låt en atomkärna sönderfalla genom alfa-, beta⁻- och beta⁺-sönderfall och se vilka partiklar som lämnar kärnan och vad den blir i stället."
+    },
+    larare: {
+      moment: [
+        { label: "Atomkärnan", href: "katalog.html?id=fy1-9.1" },
+        { label: "Radioaktivt sönderfall", href: "katalog.html?id=fy1-9.3" },
+        { label: "Aktivitet och halveringstid", href: "katalog.html?id=fy1-9.4" }
+      ],
+      fragor: [
+        "Cesium-114 (atomnummer 55) är den kärna som enligt studien har störst chans att sönderfalla genom samtidigt alfa- och beta⁺-sönderfall. Skriv reaktionsformeln och bestäm vilken kärna som blir kvar. Kontrollera att antalet nukleoner och laddningen bevaras.",
+        "Cesium-114 har halveringstiden 0,57 s, och 0,19 % av sönderfallen ger både en alfapartikel och en positron. Hur lång skulle halveringstiden vara om kärnan bara kunde sönderfalla på det sättet?",
+        "I ett vanligt betasönderfall kan elektronen få alla energier från noll upp till ett största värde. Varför? Förklara med samma resonemang varför alfapartikeln i det föreslagna sönderfallet inte får en bestämd energi, utan en topp med en viss bredd."
+      ]
+    },
+    body: [
+      { type: "p", html: "Sedan början av 1900-talet vet fysiker att en instabil atomkärna kan sönderfalla på tre huvudsakliga sätt. Vid alfasönderfall skjuter den ut en alfapartikel, två protoner och två neutroner som sitter ihop. Vid betasönderfall omvandlas en neutron till en proton eller en proton till en neutron, och kärnan skickar ut en elektron eller en positron tillsammans med en neutrino eller antineutrino. Vid gammasönderfall gör sig kärnan av med energi som en foton med mycket kort våglängd." },
+      { type: "p", html: "Under de senaste årtiondena har forskare också hittat och letat efter sönderfall där två likadana partiklar lämnar kärnan samtidigt, till exempel två elektroner, två protoner eller två fotoner. Två <em>olika</em> sorters sönderfall i en och samma händelse har däremot nästan aldrig undersökts. Det gör nu Wenqiang Zhang vid Kinesiska vetenskapsakademien i Lanzhou och Chong Qi vid KTH i Stockholm, i en studie som har accepterats för publicering i <em>Physical Review Letters</em>." },
+      { type: "h2", text: "Två krafter i samma händelse" },
+      { type: "p", html: "I det sönderfall de föreslår lämnar en alfapartikel och en betapartikel kärnan i en enda kvantövergång. Alfapartikeln hålls kvar i kärnan av den starka växelverkan, medan betasönderfallet styrs av den svaga växelverkan. I det nya sönderfallet verkar alltså båda krafterna i samma händelse. Inga kända lagar hindrar det: antalet nukleoner, laddningen och energin bevaras precis som vid vanliga sönderfall." },
+      { type: "p", html: "Varken alfasönderfallet eller betasönderfallet kan ensamt ge det slutresultat som det nya sönderfallet leder till. I räkningen kopplas de därför ihop genom virtuella tillstånd, mellansteg som kärnan aldrig faktiskt befinner sig i. Kärnan går direkt från början till slut, och de två partiklarna lämnar den i samma ögonblick." },
+      { type: "p", html: "Den frigjorda energin delas mellan alfapartikeln och leptonerna, alltså positronen eller elektronen och neutrinon. För att ta sig ut ur kärnan måste alfapartikeln tunnla genom en energibarriär, och ju mer energi den får, desto lättare går det. Men varje bit energi som alfapartikeln tar finns inte kvar åt leptonerna. ”De två faktorerna konkurrerar”, säger Wenqiang Zhang enligt Phys.org. Därför hamnar alfapartikelns energi oftast kring ett visst värde, och fördelningen blir en klockformad topp i stället för en skarp linje." },
+      { type: "h2", text: "Kärnor som inte stämde med teorin" },
+      { type: "p", html: "Forskarna gick igenom alla kända atomkärnor för att se vilka som kan sönderfalla på det nya sättet. Bara fem kärnor kan göra det utan att också kunna sönderfalla genom vanligt alfa- eller betasönderfall: neodym-150, gadolinium-157, terbium-159, dysprosium-163 och kvicksilver-204. Alla fem finns i naturen. För den mest lovande, dysprosium-163, frigörs bara 727&nbsp;keV (kiloelektronvolt, en energienhet som passar för enskilda partiklar), och halveringstiden blir minst omkring 10<sup>67</sup>&nbsp;år. Det är långt mer än vad något experiment kan upptäcka." },
+      { type: "p", html: "Mer intressanta är kärnor som också kan sönderfalla på vanligt sätt, men där det nya sönderfallet kan stå för en del av händelserna. Kandidaterna med positron ligger kring tenn-100, de med elektron kring tenn-132 och bly-208. Alla tre är dubbelmagiska kärnor, där både antalet protoner och antalet neutroner är så kallade magiska tal, och sådana kärnor är särskilt stabila jämfört med sina grannar." },
+      { type: "p", html: "Sex av de tio bästa kandidaterna med positron, jod-110 och jod-112, xenon-113 samt cesium-114, cesium-116 och cesium-118, har redan uppmätts med en alfapartikel och en positron. Hittills har det tolkats som ett sönderfall i två steg: först ett betasönderfall till en exciterad kärna, och kort därefter skjuter den nya kärnan ut en alfapartikel. Alfapartiklarnas energier har dock inte stämt med de vanliga modellerna för den förklaringen. För fem av kärnorna finns uppmätta alfaspektrum, och mätningarna från 1970- och 1980-talen visar klockformade toppar med en bredd på omkring en MeV eller mer, och modellerna gav för breda toppar och för få alfapartiklar. För att få dem att stämma behövdes tre extra antaganden." },
+      { type: "h2", text: "En förklaring utan extra antaganden" },
+      { type: "p", html: "Med det nya sönderfallet blir alfapartiklarnas energier klockformade av sig själva, och topparnas bredd stämmer i stort med mätningarna utan att forskarna behöver lägga till något. Toppens läge träffar dock inte rätt för alla kärnor: för fyra av de sex ligger den beräknade toppen omkring 1&nbsp;MeV fel. Forskarna skriver att det nya sönderfallet kan stå för en stor del av händelserna, kanske de flesta, men att mätningarna ännu inte kan avgöra vilken förklaring som är rätt." },
+      { type: "p", html: "Svårigheten är att de två förklaringarna ser likadana ut i en detektor. I båda fallen kommer positronen och alfapartikeln så tätt efter varandra att de verkar samtidiga, och skillnaden syns främst i hur energin fördelas. Forskarna lyfter ändå fram ett problem för tvåstegsförklaringen. Om en sådan bred topp kommer från en enda exciterad kärna skulle kärnan ha en halveringstid på omkring 10<sup>−22</sup>&nbsp;sekunder, och då skulle alfapartikeln lämna den orimligt fort för sin energi. En mätning på cesium-116 vid Cerns anläggning Isolde, publicerad tidigare i år, kopplade ändå alfapartiklarna till ett enda sådant tillstånd. Vid samma energi syntes en mycket smalare topp bland protonerna som kärnan också sänder ut, men ingen motsvarande topp bland alfapartiklarna." },
+      { type: "p", html: "Forskarna föreslår därför nya mätningar på de sex kärnorna, och en på iridium-170. Där förutsäger modellen en topp kring 13&nbsp;MeV, betydligt högre än i de kända fallen, och den kärnan ligger i en helt annan del av kärnkartan, där alla kända kärnor ordnas efter antalet protoner och neutroner. För att kunna räkna ut exakt hur ofta sönderfallet sker behövs dessutom mycket mer detaljerade beräkningar av kärnans inre." },
+      { type: "fact", title: "Visste du?", items: [
+        "Dysprosium-163 skulle enligt studien ha en halveringstid på minst omkring 10<sup>67</sup>&nbsp;år för det nya sönderfallet. Universum är omkring 1,4&nbsp;·&nbsp;10<sup>10</sup>&nbsp;år gammalt, så halveringstiden är mer än 10<sup>56</sup> gånger universums ålder.",
+        "Hos cesium-114, som har halveringstiden 0,57&nbsp;s, ger 0,19&nbsp;% av sönderfallen både en alfapartikel och en positron. Om alla de händelserna är det nya sönderfallet motsvarar det en halveringstid på omkring 300&nbsp;s för just det sönderfallet.",
+        "De magiska talen är 2, 8, 20, 28, 50 och 82 för både protoner och neutroner, och 126 för neutroner. Bly-208 har 82 protoner och 126 neutroner och är den tyngsta stabila kärnan med två magiska tal."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-17-galaxen-som-var-en-brun-dvarg",
     date: "2026-11-17",
     title: "Den rekordavlägsna galaxen var en kall brun dvärg i Vintergatan",

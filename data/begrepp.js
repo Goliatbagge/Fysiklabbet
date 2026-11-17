@@ -63,6 +63,30 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'magiskt-tal',
+    term: 'Magiskt tal',
+    former: ['magiskt tal', 'magiska tal', 'magiska talen', 'magiska talet', 'dubbelmagisk', 'dubbelmagiska', 'dubbelmagiskt'],
+    kort: 'Ett antal protoner eller neutroner som gör en atomkärna ovanligt stabil: 2, 8, 20, 28, 50 eller 82, och för neutroner även 126. En kärna där både protonerna och neutronerna har ett magiskt tal kallas dubbelmagisk.',
+    relaterade: ['isotop', 'radioaktivt-sonderfall', 'stark-vaxelverkan'],
+    body: [
+      { type: 'p', html: 'Ädelgaserna helium, neon och argon reagerar nästan inte alls med andra ämnen. Skälet är att deras elektroner fyller elektronskalen precis, så att atomen varken vill lämna ifrån sig eller ta emot någon elektron. Protonerna och neutronerna i en atomkärna ordnar sig på ett liknande sätt i skal. När ett skal är fyllt blir kärnan extra stabil, och de antal som fyller skalen kallas magiska tal: 2, 8, 20, 28, 50 och 82 för både protoner och neutroner, och 126 för neutroner.' },
+      { type: 'p', html: 'Det syns tydligt i naturen. Kärnor med ett magiskt antal protoner eller neutroner är svårare att bryta sönder och har ofta fler stabila isotoper än sina grannar. Tenn har 50 protoner och har tio stabila isotoper, fler än något annat grundämne. Är både antalet protoner och antalet neutroner magiskt kallas kärnan dubbelmagisk. Exempel är helium-4 med 2 och 2, syre-16 med 8 och 8 och bly-208 med 82 protoner och 126 neutroner.' },
+      { type: 'p', html: 'De magiska talen hjälper fysikerna att förutsäga vilka kärnor som kan finnas och hur de sönderfaller. Kärnor nära en dubbelmagisk kärna, till exempel tenn-100 och tenn-132, som båda är mycket instabila, är därför populära att undersöka. Forskarna letar också efter en ”stabilitetens ö” bland de allra tyngsta grundämnena, där nästa magiska tal kan göra konstgjorda kärnor mer långlivade än sina grannar.' }
+    ]
+  },
+  {
+    id: 'virtuellt-tillstand',
+    term: 'Virtuellt tillstånd',
+    former: ['virtuellt tillstånd', 'virtuella tillstånd', 'virtuella tillstånden', 'virtuellt mellantillstånd', 'virtuella mellantillstånd'],
+    kort: 'Ett mellansteg i en kvantmekanisk beräkning, som systemet aldrig faktiskt befinner sig i och som inte går att mäta. Det behövs för att räkna ut processer där flera saker händer i en enda övergång.',
+    relaterade: ['vakuumfluktuation', 'tunneleffekt'],
+    body: [
+      { type: 'p', html: 'Ibland kan en atom eller en atomkärna inte nå ett visst slutläge i ett enda enkelt steg. Det krävs två saker samtidigt, till exempel att två fotoner tas upp på en gång, eller att två olika partiklar skickas ut. I kvantmekaniken räknar man ut hur sannolik en sådan händelse är genom att låta den gå via ett mellansteg. Mellansteget kallas ett virtuellt tillstånd.' },
+      { type: 'p', html: 'Det virtuella tillståndet är inte ett riktigt läge som systemet stannar i, ens för en kort stund. Det går inte att mäta, och det behöver inte ens ha rätt energi. Man kan jämföra med att gå från ena sidan av en bäck till den andra med ett enda långt kliv: i tanken passerar foten en punkt mitt över vattnet, men den sätts aldrig ner där. Den som tittar ser bara att man stod på ena sidan och sedan på den andra.' },
+      { type: 'p', html: 'Virtuella tillstånd finns i många delar av fysiken. De förklarar hur en atom kan ta upp två fotoner som var för sig har för lite energi, och de används för att beskriva sönderfall där två partiklar lämnar en atomkärna i samma händelse. Ju längre det virtuella tillståndet ligger från den energi som faktiskt finns, desto ovanligare blir händelsen.' }
+    ]
+  },
+  {
     id: 'precession',
     term: 'Precession',
     former: ['precession', 'precessionen', 'precessionsrörelse', 'precessionsrörelsen', 'precesserar'],

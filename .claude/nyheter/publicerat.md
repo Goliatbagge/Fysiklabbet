@@ -664,3 +664,13 @@ Källa: Phys.org 2026-11-03; original F.-Y. F. Liu m.fl., MNRAS 553 (2026), DOI 
 > Bilder: huvudbild NASA/ESA/J. Olmsted (STScI) heic2405a, konstnärlig tolkning av en brun dvärg (CC BY 4.0, märkt som inte Capotauro); CEERS-mosaiken (NASA/ESA/CSA/Finkelstein m.fl., CC BY 4.0) i brödtexten. Ingen AI-bild.
 > Nya begrepp: brun dvärg (med y-dvärg-formerna), egenrörelse, parallax.
 > Brevteasern flyttad till KM3NeT/ORCA och Lorentzinvariansen i ko.md.
+
+## 2026-11-18 — 2026-11-18-karnan-som-sander-ut-tva-partiklar-pa-en-gang
+**Atomkärnor kan sända ut alfa- och betastrålning i ett enda sönderfall, föreslår fysiker** (Kärnfysik)
+Källa: Phys.org 2026-11-16 (Sam Jarman); original W. Q. Zhang (IMP, Kinesiska vetenskapsakademien, Lanzhou) och C. Qi (KTH), ”Simultaneous αβ decay: A new mode of nuclear instability”, Physical Review Letters, accepterad 2026-11-06, DOI 10.1103/76pc-tspc, läst i förtrycket arXiv:2606.10567v3 (HTML-versionen, hela texten med tabell 1–3). Isolde-mätningen på cesium-116: Dey med flera, PRL 137, 012501 (2026).
+> Skriven 2026-11-17 av nattjobbet, ett dygn i förväg. Kom inte ur kön utan ur dagens svepning på Phys.org. Grannar: 2026-11-17 astronomi, 2026-11-16 optik; senaste kärnfysik 2026-11-11 och partikelfysik 2026-11-05, ingen krock i rad.
+> Teoretisk studie: förbehållen behållna (ingen avgörande evidens, toppläget omkring 1 MeV fel för fyra av kärnorna, absoluta sannolikheter kräver mikroskopiska beräkningar).
+> Utgivaren: RÄTTA FÖRST (studien bara accepterad, ingressen överdrev, alfaspektrum finns för fem av sex kärnor, citatet ”enligt Phys.org”, ”stämmer i stort”, 126 magiskt bara för neutroner med mera), alla elva punkter införda; omgranskningen GODKÄND.
+> Bild: ISOLDE Decay Station, foto Julien Marius Ordan, Cern (CC BY 4.0, Wikimedia Commons), beskuren 16:9; bildtexten säger att studien är teoretisk. Studiens figur 2 användes INTE (arXiv-licensen är inte fri). Ingen AI-bild.
+> Nya begrepp: magiskt tal (med dubbelmagisk), virtuellt tillstånd.
+> Simuleringsruta: Radioaktivt sönderfall (fysik1-sonderfall.html).

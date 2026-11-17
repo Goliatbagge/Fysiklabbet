@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Mon, 16 Nov 2026 02:26:56 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 17 Nov 2026 02:24:51 GMT</lastBuildDate>
+    <item>
+      <title>Den rekordavlägsna galaxen var en kall brun dvärg i Vintergatan</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-11-17-galaxen-som-var-en-brun-dvarg</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-11-17-galaxen-som-var-en-brun-dvarg</guid>
+      <pubDate>Tue, 17 Nov 2026 04:00:00 GMT</pubDate>
+      <category>Astronomi</category>
+      <description>En liten röd prick i bilder från rymdteleskopet James Webb såg ut att kunna vara en galax från knappt 100 miljoner år efter big bang. Nya bilder tre och ett halvt år senare visar att pricken har flyttat sig på himlen. Det är en brun dvärg omkring 2 400 ljusår bort, med en yta som är kallare än kokande vatten.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-11-17-galaxen-som-var-en-brun-dvarg.jpg" length="475951" type="image/jpeg"/>
+    </item>
     <item>
       <title>Randigt ljus ger film i 3D med 150 000 bilder i sekunden</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-11-16-randerna-som-ser-i-3d</link>
@@ -177,15 +186,6 @@
       <category>Termodynamik</category>
       <description>Hur snabbt kan något anta omgivningens temperatur? Fysiker i Wien, Barcelona och Genève har bevisat att kvantmekaniken sätter en nedre gräns för tiden, och att gränsen bara beror på temperaturen och två naturkonstanter. Vid rumstemperatur är den omkring 13 femtosekunder.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-29-hastighetsgransen-for-jamvikt.jpg" length="356057" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Platt lins växlar mellan två brännpunkter när spänningen ändras</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-10-28-linsen-som-byter-fokus</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-10-28-linsen-som-byter-fokus</guid>
-      <pubDate>Wed, 28 Oct 2026 04:00:00 GMT</pubDate>
-      <category>Optik</category>
-      <description>Forskare i Sydkorea har byggt en platt lins av pelare som är en tusendels millimeter höga, och den har två brännpunkter, en för vardera vridningsriktningen hos cirkulärpolariserat ljus. En flytande kristall väljer brännpunkt när spänningen ändras, och mikroskopet kan då ta skarpa bilder av blodkärl på två olika djup i ett råttöga utan att någon lins eller annan optisk del flyttas.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-28-linsen-som-byter-fokus.jpg" length="105402" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

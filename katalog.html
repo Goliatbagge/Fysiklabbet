@@ -1594,10 +1594,29 @@
         // stegas dessutom rad för rad (formel → insättning → svar).
         // Tangenter: → ↓ Space Enter = nästa · ← ↑ = föregående ·
         // Home/End = början/slutet · Esc = avsluta.
-        function buildPresSteps(root) {
+        function buildPresSteps(root, opt) {
             const steps = [];
             const blocks = [];
+            // EN PUNKT I TAGET I KAPITELSAMMANFATTNINGARNA (påpekat
+            // 2026-11-18, ma1c-4.S): "Begrepp att kunna", "Viktiga samband
+            // och metoder" och "Inför provet" är långa punktlistor, och som
+            // ETT steg tändes ett tiotal punkter på en gång. I en
+            // kapitelsammanfattning (id som slutar på .S) blir därför varje
+            // punktlista på toppnivå ett block där punkterna klickas fram en
+            // och en. Formelrutan delas redan per fetstilsrubrik (EN
+            // NAMNGIVEN REGEL I TAGET nedan) och figurerna är egna steg.
+            const punktVis = !!(opt && opt.punktVis);
             for (const el of Array.from(root.children)) {
+                if (punktVis && (el.tagName === 'UL' || el.tagName === 'OL') &&
+                    el.children.length > 1) {
+                    el.classList.add('pres-block');
+                    blocks.push(el);
+                    for (const li of Array.from(el.children)) {
+                        li.classList.add('pres-sub');
+                        steps.push({ el: li, block: el });
+                    }
+                    continue;
+                }
                 // H1 dubblerar titelbilden — hoppa över.
                 if (el.tagName === 'H1') { el.classList.add('pres-skip'); continue; }
                 if (el.classList.contains('lab-block-exempel')) {
@@ -2273,7 +2292,7 @@
                 if (window.FYSIKGRAF) window.FYSIKGRAF.mountAll(root);
                 if (window.HANDSKRIFT) window.HANDSKRIFT.mountAll(root);
                 if (window.FYSIKMINISIM) window.FYSIKMINISIM.mountAll(root);
-                const { steps, blocks } = buildPresSteps(root);
+                const { steps, blocks } = buildPresSteps(root, { punktVis: /\.S$/.test(id || '') });
                 root.querySelectorAll('.lab-block-textlosning').forEach(tl => {
                     tl.__tlChunks = tlChunks(tl);
                     setTlPos(tl, 1, false);

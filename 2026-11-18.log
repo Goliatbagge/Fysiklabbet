@@ -1,0 +1,35 @@
+03:15:01  [idag] === Nyhetsjobb: start (2026-11-18) ===
+03:15:05  [idag] Dagens nyhet finns (förberedd i går).
+03:15:05  [idag] Startar Claude Code (headless, modell opus, nyckel)...
+03:20:02  [imorgon] === Nyhetsjobb: start (2026-11-18) ===
+03:20:02  [imorgon] En körning pågår redan (lås 5 min gammalt). Avslutar.
+03:26:50  [idag] The article for 2026-11-19 is written, reviewed and committed on the `nyhetsjobb` branch (commit `bee8e62f`). Nothing is pushed and no email has been sent.
+03:26:50  [idag] 
+03:26:50  [idag] **Article:** "Turbinblad av gummi viker undan när tidvattnet drar för hårt", category Strömningslära (fluid mechanics), id `2026-11-19-gummibladen-som-viker-undan`.
+03:26:50  [idag] - **Story:** Zhang and colleagues at the University of Edinburgh, together with Michelin, published "Flexible rubber blades for tidal turbines" in Nature on 11 November 2026 (DOI 10.1038/s41586-026-11278-w). The paper is peer reviewed and open access, and I read the full text including the methods section. In a model turbine and in simulations of a full tidal cycle, the rubber blades gave the same energy as blades twisted by motors. The rapid load swings that wear turbines out dropped by up to one third.
+03:26:50  [idag] - **Neighbour check:** the 2026-11-18 article is nuclear physics and 2026-11-17 is astronomy, so there is no clash. The last mechanics article was on 2026-11-10.
+03:26:50  [idag] - **Teaser:** the KM3NeT item marked as the newsletter teaser stays frozen until the 2026-11-22 newsletter has gone out, and I didn't touch it.
+03:26:50  [idag] - **Images:** no AI image was needed.
+03:26:50  [idag]   - The main photo is the TGL DeepGen IV tidal turbine on Orkney, from Wikimedia Commons (CC BY-SA 4.0). The credit says the turbine is not part of the study.
+03:26:50  [idag]   - Figures 4 and 2 from the paper (CC BY 4.0) are in the article text.
+03:26:50  [idag]   - I didn't use Edinburgh's own press photos because they have no stated licence.
+03:26:50  [idag] - **Review:** the `utgivare` agent first ruled "fix first". The main points were that the paper has seven authors, not three; the figure 2 caption was wrong; and the deck made a computed result sound like a measurement. I fixed every point. Its follow-up check found that no new review was needed, so the verdict is approved, and both entries are logged in `granskningar.md`.
+03:26:50  [idag] - **Glossary:** two new terms, *materialutmattning* (material fatigue) and *bladvinkelreglering* (blade pitch control). I deliberately avoided the word "tidvattenkraft" in the article, because the existing glossary entry with that name means tidal force (gravity's stretching), not tidal power.
+03:26:50  [idag] - **Checks:** `verify-begrepp` and `verify-navigation` pass, and so does `verify-sitemap` after running `build-nyheter-og.js`. `verify-sprak` reports three errors, all in older articles.
+03:26:50  [idag] - **Logs:** `publicerat.md` and `granskningar.md` are updated, and two new leads are in `ko.md`.
+03:26:50  [idag] 
+03:26:50  [idag] **Left out of the commit:** the build script also touched hundreds of sharing pages (`katalog/dela/*` and the older `nyheter/dela/*`) and `i18n/manifest.js`. For those I checked, Git shows no content change, so it looks like line endings only. They were not committed and are still modified in the worktree. `feed.xml` was committed. Its diff includes yesterday's 2026-11-18 article entering the feed, which the date gate now allows.
+03:26:50  [idag] 
+03:26:50  [idag] **Needs your decision:** the queue says to tell you that the Mpemba qubit story (your request from 2026-11-09) can't be written. As of the last check on 2026-11-16, the paper was still behind a paywall with no preprint, and its publishing window closed on 2026-11-14. I didn't check again today.
+03:26:51  [idag] Claude avslutade med kod 0
+03:26:52  [idag] error: cannot pull with rebase: You have unstaged changes.
+03:26:52  [idag] error: Please commit or stash them.
+03:26:57  [idag] Pushat till main.
+03:26:57  [idag] Artikel 2026-11-19 pushad: 2026-11-19-gummibladen-som-viker-undan
+03:28:27  [idag] https://fysiklabbet.se/nyheter.html?forhand=2026-11-19-gummibladen-som-viker-undan
+03:28:27  [idag] Mejlet byggt av mallen (C:\claude\Fysiklabbet-nyhetsjobb\.claude\nyheter\logg\mejl-2026-11-19).
+03:28:27  [idag] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+03:29:19  [idag] Mejlet skickat till [ägaren] med den granskade artikeln för förhandsvisning. [[UTGIVARE]] ersattes i båda kropparna med en kort sammanfattning: utgivaren bad först om rättelser (fel antal författare, en beräknad jämförelse framställd som försök, en för liten hastighetsskillnad), alla rättelser är nu införda och artikeln är godkänd.
+03:29:19  [idag] Claude avslutade med kod 0
+03:29:19  [idag] Mejlet till ägaren är skickat.
+03:29:19  [idag] === Nyhetsjobb: slut ===

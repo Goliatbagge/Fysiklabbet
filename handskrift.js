@@ -28299,7 +28299,32 @@
     ]));
     var xN = T.parenFrac('I', '10^−^1^2', null, T.str('NLös(93=10·lg', padL, y), y);
     T.str(') i CAS ger', xN, y);
-    y += adv + 1.6 * F;
+    T.stepEnd();
+
+    /* Filmen: så här ser det ut i GeoGebras CAS-räknare, från "nlös" i
+       inmatningsfältet till svaret (.claude/geogebra/spela-in-nlos.js).
+       Rutan 640 × 360 lämnas tom på arket, och filmen läggs över den. */
+    var filmY = y + 0.9 * F, filmW = 640, filmH = 360;
+    T.tanke(T.bubble(140, T.bubbleTop(y + 1.0 * F), bw, [
+      [['Så här ser det ut på riktigt']],
+      [['i GeoGebra. Filmen visar hur']],
+      [['jag skriver in ekvationen.']]
+    ]));
+    acts.push({ kind: 'show', obj: {
+      film: 1, x: padL, y: filmY, w: filmW, h: filmH, wins: [],
+      src: 'media/video/geogebra-nlos-ljudniva.mp4',
+      poster: 'media/video/geogebra-nlos-ljudniva.jpg',
+      titel: 'NLös i GeoGebras CAS-räknare, steg för steg'
+    } });
+    T.pause(600);
+    T.stepEnd();
+
+    y = filmY + filmH + 2.0 * F;
+    T.tanke(T.bubble(140, T.bubbleTop(y - adv), bw, [
+      [['GeoGebra skriver 0.001995...']],
+      [['med decimalpunkt. Två värde-']],
+      [['siffror ger 0,0020.']]
+    ]));
     T.str('I≈0,0020 W/m^2=2,0 mW/m^2', padL, y);
     T.stepEnd();
 
@@ -44571,6 +44596,34 @@
     return g;
   }
 
+  /* FILMRUTA ({film: 1, src, poster, x, y, w, h}): en video som fälls in
+   * på arket när steget klickas fram, till exempel en inspelning av hur
+   * ekvationen skrivs in i GeoGebra (fy2-2.11 exempel 2). Den är ett
+   * HTML-element ovanpå arket (inte en foreignObject i svg:n, som Safari
+   * ritar på fel ställe) och läggs av renderFilm() i mount över rutan
+   * x, y, w, h som scenen har lämnat tom. Filmen startar av sig själv
+   * (ljudlös) när den tonar in och spolas tillbaka när man stegar bakåt
+   * förbi den. Klick i den stegar INTE lösningen framåt. */
+  function makeFilm(o) {
+    var d = document.createElement('div');
+    d.className = 'hk-film no-i18n';
+    var v = document.createElement('video');
+    v.src = o.src;
+    if (o.poster) v.poster = o.poster;
+    v.controls = true;
+    v.muted = true;
+    v.playsInline = true;
+    v.setAttribute('playsinline', '');
+    v.preload = 'metadata';
+    if (o.titel) v.setAttribute('aria-label', o.titel);
+    d.appendChild(v);
+    ['click', 'pointerdown', 'keydown'].forEach(function (typ) {
+      d.addEventListener(typ, function (e) { e.stopPropagation(); });
+    });
+    o.video = v;
+    return d;
+  }
+
   function makeNote(o) {
     var g = el('g', { opacity: 0 });
     var t = el('text', { x: o.x, y: o.y,
@@ -44698,6 +44751,13 @@
         'box-shadow:0 2px 10px rgba(15,22,32,.10),0 1px 3px rgba(15,22,32,.08);' +
         'border:1px solid rgba(15,22,32,.12);background:' + PAPER + '}' +
       '.hk-paper svg{display:block;width:100%;height:auto}' +
+      /* FILMRUTA (film: 1, se makeFilm): en riktig inspelning, till exempel
+       * hur en ekvation skrivs in i GeoGebra, fälld in på arket */
+      '.hk-film{position:absolute;z-index:3;display:none;cursor:default;' +
+        'background:#fff;border-radius:8px;overflow:hidden;' +
+        'border:1px solid rgba(15,22,32,.22);' +
+        'box-shadow:0 3px 14px rgba(15,22,32,.16)}' +
+      '.hk-film video{display:block;width:100%;height:auto;background:#fff}' +
       '.hk-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}' +
       /* MOBIL: svg:n bredare än rutan + sidledsskroll med pennföljning —
        * annars krymper handskriften till oläslighet på smal skärm */
@@ -66269,6 +66329,12 @@
     var bubbleG = el('g', null, svg);
     L.acts.forEach(function (a) {
       if (a.kind !== 'show' || a.obj.el || a.obj.tryck) return;
+      if (a.obj.film) {
+        a.obj.el = makeFilm(a.obj);
+        paperDiv.appendChild(a.obj.el);
+        objs.push(a.obj);
+        return;
+      }
       if (a.obj.pop) {
         /* REGELNOT: pennans egna glyfer (blå) som tonar in på en gång i
          * stället för att skrivas streck för streck — ligger i bläck-
@@ -66608,6 +66674,37 @@
       o.el.setAttribute('transform', 'translate(' + o.x + ' ' + o.y + ') scale(' + sk.toFixed(3) + ')');
     }
 
+    /* FILMRUTAN (se makeFilm): läggs över den del av arket som scenen
+     * reserverat. Rutan mäts om varje gång, så att den följer arket i
+     * helskärm, vid sidledsskroll och när fönstret ändrar storlek. På en
+     * smal skärm, där arket är bredare än rutan (se .hk-scroll), krymps
+     * filmen så att den ryms i den synliga bredden. */
+    function renderFilm(o, time) {
+      var op = winOpacity(o.wins, time), d = o.el, v = o.video;
+      if (op <= 0) {
+        if (d.style.display !== 'none') {
+          d.style.display = 'none';
+          try { v.pause(); v.currentTime = 0; } catch (e) {}
+        }
+        o._spelad = false;
+        return;
+      }
+      d.style.display = 'block';
+      d.style.opacity = op.toFixed(3);
+      var pr = paperDiv.getBoundingClientRect(), sr = svg.getBoundingClientRect();
+      var sk = sr.width / W;
+      var bredd = Math.min(o.w * sk, pr.width - 16);
+      var vanster = sr.left - pr.left + o.x * sk;
+      vanster = Math.max(8, Math.min(vanster, pr.width - bredd - 8));
+      d.style.left = vanster.toFixed(1) + 'px';
+      d.style.top = (sr.top - pr.top + o.y * sk).toFixed(1) + 'px';
+      d.style.width = bredd.toFixed(1) + 'px';
+      if (!o._spelad && op > 0.5) {
+        o._spelad = true;
+        try { var pl = v.play(); if (pl && pl.catch) pl.catch(function () {}); } catch (e) {}
+      }
+    }
+
     function render(time) {
       for (var i = 0; i < strokes.length; i++) {
         var a = strokes[i];
@@ -66626,6 +66723,7 @@
       for (var j = 0; j < objs.length; j++) {
         if (objs[j].lagg) { renderLagg(objs[j], time); continue; }
         if (objs[j].stamp) { renderStamp(objs[j], time); continue; }
+        if (objs[j].film) { renderFilm(objs[j], time); continue; }
         objs[j].el.setAttribute('opacity', winOpacity(objs[j].wins, time));
       }
       var pp = penPosAt(time);

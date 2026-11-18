@@ -674,3 +674,13 @@ Källa: Phys.org 2026-11-16 (Sam Jarman); original W. Q. Zhang (IMP, Kinesiska v
 > Bild: ISOLDE Decay Station, foto Julien Marius Ordan, Cern (CC BY 4.0, Wikimedia Commons), beskuren 16:9; bildtexten säger att studien är teoretisk. Studiens figur 2 användes INTE (arXiv-licensen är inte fri). Ingen AI-bild.
 > Nya begrepp: magiskt tal (med dubbelmagisk), virtuellt tillstånd.
 > Simuleringsruta: Radioaktivt sönderfall (fysik1-sonderfall.html).
+
+## 2026-11-19 — 2026-11-19-gummibladen-som-viker-undan
+**Turbinblad av gummi viker undan när tidvattnet drar för hårt** (Strömningslära)
+Källa: University of Edinburgh, pressmeddelande 2026-11-11 (hittad via Nature:s artikellista); original Z. Zhang, J. Tan, E.-C. Neba, S. Morival, K. Frankowski, B. Daval och I. M. Viola, ”Flexible rubber blades for tidal turbines”, Nature (2026), DOI 10.1038/s41586-026-11278-w, öppen (CC BY 4.0), läst i fulltext med metoddel och figurer.
+> Skriven 2026-11-18 av nattjobbet, ett dygn i förväg. Kom inte ur kön. Grannar: 2026-11-18 kärnfysik, 2026-11-17 astronomi; senaste mekanik 2026-11-10, senaste strömningslära långt tidigare. KM3NeT-teasern är fryst till efter brevet 2026-11-22 och rördes inte.
+> Utgivaren: RÄTTA FÖRST (sju författare, figur 2-texten, ingressen överdrev försöket, "något större"), alla punkter och rekommendationer införda; efterkontroll GODKÄND.
+> Bilder: huvudbild TGL DeepGen IV vid Hatston Pier, Orkney, foto Drnoble (CC BY-SA 4.0, Wikimedia Commons), beskuren 16:9, märkt som inte ingående i studien; figur 4 och figur 2 ur studien (CC BY 4.0) i brödtexten. Ingen AI-bild. Edinburghs egna pressbilder användes inte (licens ej angiven).
+> OBS: ordet "tidvattenkraft" undveks medvetet, ordlistans post med det namnet betyder tidvattenkraft i betydelsen gravitationens sträckande kraft (tidal force).
+> Nya begrepp: materialutmattning, bladvinkelreglering.
+> Ingen simuleringsruta (Vattenkraftverket på labbänken tangerar bara ämnet); Växelströmsgenerator m.m. i larare.moment.

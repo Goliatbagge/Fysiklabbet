@@ -103,6 +103,63 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-19-gummibladen-som-viker-undan",
+    date: "2026-11-19",
+    title: "Turbinblad av gummi viker undan när tidvattnet drar för hårt",
+    deck: "Under vattnet i starka tidvattenströmmar slits turbinerna hårt, och de största behöver motorer som vrider bladen ur strömmen när den blir för stark. Ingenjörer i Edinburgh har provat blad av gummi som böjer sig själva. Beräkningar byggda på försök med en modellturbin visar att de ger lika mycket energi som blad med motorstyrning. I försöken minskade de snabba lastsvängningarna, som sliter på turbinen, med upp till en tredjedel.",
+    category: "Strömningslära",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-11-19-gummibladen-som-viker-undan.jpg",
+    imageAlt: "En stor gul tidvattenturbin står på land vid en kaj, omgiven av ställningar och trappor. Ett av de tre långa bladen pekar rakt upp mot en blå himmel med vita moln.",
+    imageCredit: "Foto: Drnoble, tidvattenturbinen TGL DeepGen IV (1 MW) vid Hatston Pier på Orkneyöarna 2014, via Wikimedia Commons (CC BY-SA 4.0). Beskuren till bredformat. Turbinen har vanliga styva blad och ingår inte i studien.",
+    tags: ["strömningslära", "tidvatten", "förnybar energi", "turbin", "effekt", "rörelseenergi", "kraftmoment", "materialutmattning", "bladvinkelreglering", "elasticitet", "turbulens", "gummi", "university of edinburgh", "michelin"],
+    sources: [
+      { name: "University of Edinburgh: Flexible blades could make tidal power cheaper (pressmeddelande, 11 november 2026)", url: "https://www.ed.ac.uk/news/flexible-blades-could-make-tidal-power-cheaper" },
+      { name: "Nature: Z. Zhang med flera, Flexible rubber blades for tidal turbines (studien, öppet tillgänglig)", url: "https://www.nature.com/articles/s41586-026-11278-w" }
+    ],
+    research: {
+      citation: "Z. Zhang, J. Tan, E.-C. Neba, S. Morival, K. Frankowski, B. Daval och I. M. Viola, ”Flexible rubber blades for tidal turbines”, Nature (2026), publicerad online 11 november 2026. Kollegialt granskad, öppet tillgänglig (CC BY 4.0).",
+      url: "https://doi.org/10.1038/s41586-026-11278-w"
+    },
+    larare: {
+      moment: [
+        { label: "Rörelseenergi", href: "katalog.html?id=fy1-4.3" },
+        { label: "Effekt", href: "katalog.html?id=fy1-4.5" },
+        { label: "Kraftmoment", href: "katalog.html?id=fy2-1.1" },
+        { label: "Växelströmsgenerator", href: "katalog.html?id=fy2-3.10" }
+      ],
+      fragor: [
+        "Effekten i strömmande vatten som passerar en yta A är P = ½ · ρ · A · v^3. Härled formeln genom att tänka på hur stor massa vatten som passerar ytan på en sekund och vilken rörelseenergi den massan har.",
+        "Hur många gånger större blir effekten i strömmen om strömhastigheten ökar med 20 %? Och hur många gånger större blir kraften på bladen, om den växer med v^2? Förklara med svaren varför en turbin måste kunna göra sig av med kraft när strömmen är som starkast.",
+        "En tidvattenturbin ger lika mycket effekt som ett vindkraftverk med mycket större rotor, trots att vattnet strömmar långsammare än vinden. Vilken storhet i formeln förklarar det? Uppskatta hur mycket långsammare vattnet kan strömma för att samma rotor ska få lika stor effekt ur vatten som ur luft."
+      ]
+    },
+    body: [
+      { type: "p", html: "Tidvattnet går att förutsäga flera år i förväg, eftersom det styrs av månens och solens rörelser. Det gör tidvattenströmmar till en lockande källa till förnybar el. I trånga sund kan vattnet strömma flera meter per sekund, och en turbin på botten kan ta tillvara rörelseenergin ungefär som ett vindkraftverk tar tillvara vindens. Storbritannien vill ha turbiner med en sammanlagd effekt på 1&nbsp;gigawatt på plats till 2035." },
+      { type: "p", html: "Problemet är att havet är en mycket svår arbetsplats. Strömmen ändrar fart med tidvattnet, den är turbulent och virvlig, den går fortare nära ytan än vid botten, och vågorna ovanför får den att gunga fram och tillbaka. Bladen utsätts därför för krafter som hela tiden växlar. Det sliter på materialet genom så kallad materialutmattning, förkortar turbinens liv och gör den dyr att bygga och underhålla." },
+      { type: "h2", text: "Motorer som vrider bladen" },
+      { type: "p", html: "De största turbinerna skyddar sig med bladvinkelreglering. Motorer, givare och lager vrider bladen kring sin egen längdaxel, så att de vänds ur strömmen när den blir för stark. Systemet är dyrt, svårt att laga under vattnet, och i vindkraftverk har forskning visat att de flesta haverierna kommer från just den delen. Det reagerar dessutom för långsamt för att hinna med de snabba stötarna från virvlarna i vattnet." },
+      { type: "p", html: "Zhehong Zhang, Junchen Tan och Ignazio Maria Viola vid University of Edinburgh har tillsammans med däcktillverkaren Michelin prövat en annan väg, med fiskar och träd som förebild: låt bladen själva ge efter för strömmen. Deras blad består av gummi som har gjutits runt en styv stålbalk. Bladets främre, tjockaste del är styv, medan den bakre kanten är böjlig hela vägen från roten till spetsen." },
+      { type: "image", src: "nyheter/bilder/2026-11-19-gummibladen-som-viker-undan-2.jpg", alt: "Diagram med flera bladprofiler sedda från sidan, med framkanten till vänster. Den svarta profilen är det styva bladet. Den röda profilen har en bakkant som är kraftigt nedböjd, och de blå profilerna ligger allt närmare den svarta.", caption: "Gummibladets tvärsnitt vid spetsen, uppmätt med kameror under vattnet. Utan ström (rött) är bladet kraftigt välvt. Ju fortare vattnet strömmar (allt mörkare blått), desto mer böjs bakkanten tillbaka, och profilen närmar sig det styva bladets (svart). Koordinaterna är angivna i förhållande till bladets bredd.", credit: "Figur: Z. Zhang med flera, Nature (2026), figur 4 (CC BY 4.0)." },
+      { type: "h2", text: "Ett blad som plattas till" },
+      { type: "p", html: "Knepet ligger i bladets form. I vila är gummibladet mer välvt än ett vanligt turbinblad, ungefär som en flygplansvinge med kraftigt nedböjd bakkant. När vattnet strömmar förbi trycker det bakkanten åt andra hållet, och bladet plattas till. Ett plattare blad tar emot mindre kraft. Formen och styvheten är beräknade så att bladet böjs precis till det vanliga bladets form när strömmen har den fart turbinen är byggd för. Blir strömmen ännu starkare plattas bladet till ännu mer, och en del av kraften släpps förbi." },
+      { type: "p", html: "Forskarna provade en modellturbin med tre blad och 1,26&nbsp;meters diameter i FloWave, en rund bassäng i Edinburgh med 25&nbsp;meters diameter där strömmen är lika turbulent som vid riktiga tidvattenplatser. De jämförde gummibladen med styva blad av rostfritt stål vid strömhastigheter mellan 0,44 och 0,92&nbsp;m/s. Krafterna mättes 128 gånger per sekund i fem minuter för varje inställning, och kameror under vattnet filmade hur bladen ändrade form." },
+      { type: "quote", html: "Havet är så obarmhärtigt att turbinerna har behövt komplicerade maskiner bara för att klara sig där. Våra blad gör det jobbet själva. Genom att helt enkelt böja sig gör de sig av med överskottet av last och jämnar ut skadliga svängningar, samtidigt som de ger lika mycket energi.", cite: "Ignazio Maria Viola, professor vid University of Edinburgh, i universitetets pressmeddelande" },
+      { type: "h2", text: "Samma energi, mindre slitage" },
+      { type: "p", html: "Vid den strömhastighet turbinen är byggd för, 0,88&nbsp;m/s, tog båda bladtyperna tillvara ungefär 37&nbsp;% av energin i den vattenmängd som passerade rotorn. Fullstora turbiner når högre värden, och skillnaden beror på att modellen är liten och vattnet strömmar långsamt. Forskarna räknade sedan på en hel tidvattencykel, där strömmen ökar från stillastående till sitt högsta värde och avtar igen. Gummibladen styrdes bara genom att turbinens varvtal reglerades, utan bladvinkelreglering. Ändå gav de lika mycket energi som en turbin med modern bladvinkelreglering, och den största kraften på turbinen blev nästan lika stor. Med styva blad, där bara varvtalet regleras, blev kraften som störst omkring 1,65 gånger så stor som vid den nominella hastigheten." },
+      { type: "p", html: "Den största vinsten gäller de snabba svängningarna. Vid den nominella hastigheten minskade svängningarna i effekten med 18&nbsp;%, i kraften på rotorn med 23&nbsp;% och i böjmomentet vid bladroten med 28&nbsp;%. I starkare ström blev minskningen ännu något större, och för böjmomentet nära en tredjedel. Det är just sådana svängningar som orsakar utmattning. Vid de lägsta hastigheterna blev svängningarna i stället större med gummibladen, men där är krafterna små." },
+      { type: "image", src: "nyheter/bilder/2026-11-19-gummibladen-som-viker-undan-3.jpg", alt: "Fyra diagram över en tidvattencykel. Det första visar strömhastigheten som en mjuk puckel. I det sista diagrammet, kraften på rotorn, går en streckad röd kurva högt upp mitt i cykeln, medan en grön och en grå kurva sjunker där.", caption: "En beräknad tidvattencykel. Överst strömhastigheten och effekten, nederst löptalet (bladspetsens fart delad med strömmens fart) och kraften på rotorn, alla i förhållande till värdena vid den nominella hastigheten. Styva blad med bara varvtalsreglering (streckat rött) får en hög topp i kraften när strömmen är som starkast. Gummibladen (grönt) följer nästan turbinen med både bladvinkel- och varvtalsreglering (grått) och ger samma effekt.", credit: "Figur: Z. Zhang med flera, Nature (2026), figur 2 (CC BY 4.0)." },
+      { type: "p", html: "Gummi har ungefär samma densitet som vatten, så bladen kan göras så att de varken sjunker eller flyter upp. Då slipper turbinen de svängande krafter som tunga blad ger när de roterar. Datorberäkningar av en turbin med 20&nbsp;meters diameter i en ström på 3,0&nbsp;m/s, en storlek som liknar dagens kommersiella turbiner, tyder på att bladen fungerar lika bra i full skala. Gummit måste då vara ungefär tio gånger styvare än i modellen, och forskarnas preliminära beräkningar tyder på att det skulle klara mer än de 20&nbsp;år som en turbin ska hålla." },
+      { type: "p", html: "Det återstår mycket. Försöken är gjorda i en bassäng med en turbin som är mindre än en tiondel så stor som en riktig, och ingen har ännu provat bladen i havet. Universitetet skriver att arbetet fortfarande är forskning och att mer utveckling och provning krävs innan tekniken kan användas i industrin. Michelin har sökt patent på bladen." },
+      { type: "fact", title: "Visste du?", items: [
+        "Effekten i strömmande vatten som passerar en yta $A$ med farten $v$ är $P = \\dfrac{1}{2} \\cdot \\rho \\cdot A \\cdot v^{3}$. Fördubblas farten blir effekten åtta gånger så stor, medan kraften på bladen växer ungefär med $v^{2}$.",
+        "Ett överslag för modellturbinen: med $\\rho = 1\\,000\\ \\mathrm{kg/m^3}$, rotorns radie 0,63&nbsp;m och farten 0,878&nbsp;m/s strömmar omkring 420&nbsp;W genom rotorn. 37&nbsp;% av det är ungefär 160&nbsp;W.",
+        "Vatten har omkring 800 gånger så stor densitet som luft. Därför kan en tidvattenturbin vara betydligt mindre än ett vindkraftverk med samma effekt, trots att vattnet strömmar långsammare än vinden.",
+        "Ingen turbin kan ta tillvara all rörelseenergi i en fri ström, eftersom vattnet måste kunna strömma vidare bakom rotorn. Den teoretiska gränsen, Betz gräns, är $\\dfrac{16}{27}$, knappt 60&nbsp;%."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-18-karnan-som-sander-ut-tva-partiklar-pa-en-gang",
     date: "2026-11-18",
     title: "Atomkärnor kan sända ut alfa- och betastrålning i ett enda sönderfall, föreslår fysiker",

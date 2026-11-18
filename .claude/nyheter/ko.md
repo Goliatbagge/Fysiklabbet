@@ -15,6 +15,12 @@ Format per post:
 - **KM3NeT/ORCA prövar Lorentzinvariansen med atmosfäriska neutriner från Medelhavets botten** **[BREVTEASER]** (nominerad 2026-11-16: Einsteins relativitetsteori prövad med neutriner som fångas av ljussensorer på havsbotten, lätt att sammanfatta; förtrycket arXiv 2603.04264 öppet, läs fulltexten före publicering) — partikelfysik/relativitet; 5 828 händelser på 1,4 år med sex detektorenheter, inga avvikelser. JCAP 2026, arXiv 2603.04264 (öppen). OBS partikelfysik 2026-11-05. Källa (Phys.org 2026-11-04): https://phys.org/news/2026-11-einstein-laws-bottom-mediterranean-sea.html
   (tillagd 2026-11-05)
 
+- **Nät som skördar kroppens rörelseenergi kan ersätta batterier i pacemakrar (UMass Amherst, ”biohybrid mesh harvester”)** — ellära/energiomvandling; Jun Yao, Siqi Wang m.fl., Science Advances (2026), DOI 10.1126/sciadv.aei5963 (troligen öppen, science.org kan ge Cloudflare-spärr; leta PMC-kopia). Originalet ej läst. Källa (Physics World 2026-11-17): https://physicsworld.com/a/energy-harvesting-mesh-device-could-replace-batteries-in-implantable-medical-devices/
+  (tillagd 2026-11-18)
+
+- **Hera flyger i rektanglar runt asteroider (ESA)** — mekanik/rymdfart, banor i svagt gravitationsfält. Originalkälla oklar (ESA-meddelande, leta teknisk rapport). Källa (ScienceDaily 2026-11-15): https://www.sciencedaily.com/releases/2026/11/261115085545.htm
+  (tillagd 2026-11-18)
+
 - **LHCb: första mätningen av CP-asymmetrin i sönderfallet Bₛ⁰ → Ds⁻π⁺ (materia–antimateria)** — partikelfysik; R. Aaij m.fl. (LHCb), PRL 2026, DOI 10.1103/ljtv-y278. OBS kärnfysik 2026-11-18, vänta några dagar. Originalet ej kontrollerat (leta arXiv). Källa (Phys.org 2026-11): https://phys.org/news/2026-11-matterantimatter-asymmetry-evidence-physics.html
   (tillagd 2026-11-17)
 

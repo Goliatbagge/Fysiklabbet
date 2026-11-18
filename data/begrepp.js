@@ -63,6 +63,30 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'materialutmattning',
+    term: 'Materialutmattning',
+    former: ['materialutmattning', 'materialutmattningen', 'utmattning', 'utmattningen', 'utmattningsskada', 'utmattningsskador', 'utmattningsskadorna'],
+    kort: 'När ett material försvagas och till slut spricker av krafter som växlar om och om igen, fast varje enskild kraft är för liten för att knäcka det.',
+    relaterade: ['turbulens'],
+    body: [
+      { type: 'p', html: 'Ta ett gem och böj det fram och tillbaka. Första böjningen klarar det utan problem, men efter tio eller tjugo gånger går det av. Ingen av böjningarna var tillräckligt kraftig för att knäcka tråden på en gång. Det är de upprepade böjningarna tillsammans som gör det. Det fenomenet kallas materialutmattning, eller bara utmattning.' },
+      { type: 'p', html: 'Förklaringen finns i materialets inre. Varje gång materialet belastas och avlastas uppstår små förskjutningar mellan atomlagren, oftast vid en liten defekt eller en repa i ytan. Där bildas en mikroskopisk spricka som växer en aning för varje belastning. Till slut är sprickan så stor att den kvarvarande delen inte orkar bära lasten, och föremålet brister plötsligt. Det som avgör livslängden är framför allt hur stora svängningarna i kraften är och hur många gånger de upprepas, inte hur stor kraften är i genomsnitt.' },
+      { type: 'p', html: 'Utmattning är en av de vanligaste orsakerna till att maskiner och konstruktioner går sönder. Flygplansvingar, broar, cykelramar, vindkraftverk och turbiner under vattnet utsätts alla för krafter som växlar miljontals gånger under sin livstid. Ingenjörer räknar därför ut hur många belastningar en del tål och bygger den så att den håller med god marginal. Ett annat sätt är att minska själva svängningarna i kraften, så att varje belastning sliter mindre.' }
+    ]
+  },
+  {
+    id: 'bladvinkelreglering',
+    term: 'Bladvinkelreglering',
+    former: ['bladvinkelreglering', 'bladvinkelregleringen', 'bladvinkelregleringar'],
+    kort: 'Ett system av motorer och givare som vrider bladen på en turbin eller ett vindkraftverk kring deras egen längdaxel, så att de tar emot lagom mycket kraft från vinden eller vattnet.',
+    relaterade: ['materialutmattning'],
+    body: [
+      { type: 'p', html: 'Håll ut handen genom fönstret i en bil som kör. Håller du handflatan platt, parallellt med vägen, känns luftens kraft ganska svag. Vrider du handen så att handflatan vänds mot fartvinden blir kraften mycket större. Vinkeln mellan handen och luftströmmen avgör alltså hur stor kraft du får. Bladen på ett vindkraftverk eller en tidvattenturbin fungerar på samma sätt.' },
+      { type: 'p', html: 'När det blåser svagt vill man att bladen ska ta tillvara så mycket som möjligt av vindens energi. När det blåser hårt blir krafterna däremot farligt stora, och generatorn klarar inte hur mycket effekt som helst. Därför har de flesta stora vindkraftverk och de största tidvattenturbinerna bladvinkelreglering. Givare mäter vindens eller strömmens fart, och motorer i navet vrider varje blad en bit, så att det vänds ur strömmen och tar emot mindre kraft. I en storm kan bladen vridas så att de nästan inte tar emot någon kraft alls, och rotorn står stilla.' },
+      { type: 'p', html: 'Systemet fungerar bra men har nackdelar. Det består av många rörliga delar, och för en turbin på havets botten är det svårt och dyrt att laga när något går sönder. Motorerna hinner inte heller med de allra snabbaste kastningarna i vinden eller vattnet. Därför försöker forskare hitta blad som anpassar sig av sig själva, till exempel blad som böjer sig när kraften blir stor.' }
+    ]
+  },
+  {
     id: 'magiskt-tal',
     term: 'Magiskt tal',
     former: ['magiskt tal', 'magiska tal', 'magiska talen', 'magiska talet', 'dubbelmagisk', 'dubbelmagiska', 'dubbelmagiskt'],

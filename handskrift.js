@@ -50464,9 +50464,12 @@
     var tanke = mkTanke(T), I = mkIntegral(T, F);
     var G = mkTrigGraf(T, F, { ox: padL + 150, oy: 240, ux: 52, uy: 11 });
 
-    G.axlar(-2, 2.6, -4, 4, 'x', 'y');
-    G.kurva(function (v) { return v * v * v - 4 * v; }, -2.2, 2.4);
-    T.stepEnd();
+    // Grafen står i uppgiftens figur (y = x^3 - 4x, -2,2 <= x <= 2,4) och
+    // står därför färdig på arket från början (regel 3p).
+    forritad(T, function () {
+      G.axlar(-2, 2.6, -4, 4, 'x', 'y');
+      G.kurva(function (v) { return v * v * v - 4 * v; }, -2.2, 2.4);
+    });
 
     y = G.oy + 4 * 11 + 3.4 * F;
     tanke(G.oy + 4 * 11, [

@@ -2202,7 +2202,11 @@
                     if (!overlay) return;
                     const vh = overlay.clientHeight;
                     const py = ctl.pennaY();
-                    const low = py > vh * 0.80;
+                    // En inskjuten filmruta (se blickY i handskrift.js)
+                    // rullas ända upp till mitten, inte bara förbi 80 %,
+                    // annars ligger filmen kvar i nederkanten.
+                    const film = ctl.filmIFokus && ctl.filmIFokus();
+                    const low = film ? py > vh * 0.50 : py > vh * 0.80;
                     const before = overlay.scrollTop;
                     if (low) overlay.scrollTop += Math.max(1, (py - vh * 0.45) * 0.10);
                     if (ctl.skriver() || (low && overlay.scrollTop !== before))

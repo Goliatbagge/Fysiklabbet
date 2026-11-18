@@ -44835,7 +44835,7 @@
         '{position:fixed;top:0;bottom:0}' +
       '.hk-wrap:fullscreen .hk-controls,.hk-wrap:-webkit-full-screen .hk-controls' +
         '{position:fixed;left:0;right:0;bottom:0;margin:0;padding:10px 18px;' +
-        'justify-content:center;background:rgba(243,238,228,.93);' +
+        'justify-content:center;background:rgba(243,238,228,.93);z-index:6;' +
         'border-top:1px solid rgba(15,22,32,.15)}' +
       '.hk-controls{display:flex;gap:8px;align-items:center;margin-top:12px;flex-wrap:wrap}' +
       '.hk-btn{border:1.5px solid ' + LABINK + ';background:' + PAPER + ';color:' + LABINK + ';' +
@@ -66694,10 +66694,16 @@
       var pr = paperDiv.getBoundingClientRect(), sr = svg.getBoundingClientRect();
       var sk = sr.width / W;
       var bredd = Math.min(o.w * sk, pr.width - 16);
-      var vanster = sr.left - pr.left + o.x * sk;
+      /* I arkets helskärm (även presentationsläget) får filmen inte vara
+       * högre än den fria ytan mellan uppgiftspanelen och knappraden,
+       * annars hamnar den bakom dem. Den krymps då och centreras i sin
+       * reserverade ruta. */
+      var fri = friYta();
+      if (fri) bredd = Math.min(bredd, (fri.ned - fri.upp - 24) * o.w / o.h);
+      var vanster = sr.left - pr.left + o.x * sk + (Math.min(o.w * sk, pr.width - 16) - bredd) / 2;
       vanster = Math.max(8, Math.min(vanster, pr.width - bredd - 8));
       d.style.left = vanster.toFixed(1) + 'px';
-      d.style.top = (sr.top - pr.top + o.y * sk).toFixed(1) + 'px';
+      d.style.top = (sr.top - pr.top + o.y * sk + (o.h * sk - bredd * o.h / o.w) / 2).toFixed(1) + 'px';
       d.style.width = bredd.toFixed(1) + 'px';
       if (!o._spelad && op > 0.5) {
         o._spelad = true;
@@ -67204,6 +67210,33 @@
       { passive: true });
     wrap.addEventListener('touchmove', function () { scrollTarget = null; },
       { passive: true });
+    /* BLICKPUNKTEN (y i arkets koordinater) som skrollen ska följa: oftast
+     * pennan, men när en filmruta just fällts in (se makeFilm) står pennan
+     * kvar på raden OVANFÖR filmen, och följningen lade då filmen i
+     * skärmens nederkant (påpekat 2026-11-18, presentationsläget i
+     * fy2-2.11 exempel 2). Så länge filmen syns och pennan inte skrivit
+     * något under den följs i stället filmrutans mitt. */
+    function blickY(time) {
+      var y = penPosAt(time).pos[1];
+      for (var i = 0; i < objs.length; i++) {
+        var o = objs[i];
+        if (o.film && winOpacity(o.wins, time) > 0 && y < o.y) return o.y + o.h / 2;
+      }
+      return y;
+    }
+    function filmIFokus(time) { return blickY(time) !== penPosAt(time).pos[1]; }
+    /* den fria ytan (skärmens y) mellan uppgiftspanelen och knappraden i
+     * arkets helskärm, annars null */
+    function friYta() {
+      if (document.fullscreenElement !== wrap) return null;
+      var upp = 0, ned = window.innerHeight;
+      if (upgPanel && !upgPanel.classList.contains('hk-los')) {
+        upp = Math.max(0, Math.min(upgPanel.getBoundingClientRect().bottom, ned * 0.6));
+      }
+      if (ctrls) ned = Math.min(ned, ctrls.getBoundingClientRect().top);
+      return { upp: upp, ned: ned };
+    }
+
     function followPen(instant) {
       if (document.fullscreenElement !== wrap) {
         scrollTarget = null;
@@ -67217,7 +67250,7 @@
        * arkets faktiska offset, annars siktar följningen för högt */
       var off = paperDiv.getBoundingClientRect().top -
                 wrap.getBoundingClientRect().top + wrap.scrollTop;
-      var py = pp.pos[1] * sc + off;
+      var py = blickY(tNow) * sc + off;
       var vh = window.innerHeight;
       /* den sticky uppgiftspanelen täcker skärmens ÖVRE del — pennan
        * ska hållas i sikte i den fria ytan NEDANFÖR panelen, annars
@@ -67244,6 +67277,16 @@
           if (figT < tg) tg = Math.max(figT, py - (ph + 0.9 * fri));
         }
         return clampT(tg);
+      }
+      if (filmIFokus(tNow)) {
+        var fy = friYta();
+        scrollTarget = clampT(py - (fy ? (fy.upp + fy.ned) / 2 : ph + 0.5 * fri));
+        if (instant || Math.abs(scrollTarget - wrap.scrollTop) > 0.8 * fri) {
+          wrap.scrollTop = scrollTarget;
+        } else {
+          wrap.scrollTop += (scrollTarget - wrap.scrollTop) * 0.12;
+        }
+        return;
       }
       if (instant) {
         scrollTarget = sikta(0.45);
@@ -67358,9 +67401,12 @@
                 klar: function () { return tNow >= TOTAL; },
                 vidStart: function () { return tNow <= 0; },
                 skriver: function () { return playing; },
+                /* sant när skrollen följer en filmruta i stället för
+                 * pennan (se blickY) — presentationsläget centrerar då */
+                filmIFokus: function () { return filmIFokus(tNow); },
                 pennaY: function () {
                   var r = svg.getBoundingClientRect();
-                  return r.top + (penPosAt(tNow).pos[1] / H) * r.height;
+                  return r.top + (blickY(tNow) / H) * r.height;
                 } };
     /* controllern nås även via containern — vy-växeln (buildVyval) slår
      * upp den där, så att den pekar rätt även efter en ombyggnad vid

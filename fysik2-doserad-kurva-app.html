@@ -340,7 +340,7 @@
         // Delat läge mellan React och scenen (scenen byggs bara en gång)
         const SIM = {
             p: { v: 20, alfa: 15, r: 60, mu: 0.8, running: true, slow: false,
-                 show: { krafter: true, fc: true, fart: true, radie: true } },
+                 show: { krafter: true, fc: true, fart: true, radie: true, varden: true, kompos: false } },
             ut: { d: 0, w: 0, glider: false, kant: 0, av: 0, N: 0, f: 0, acc: 0, rc: 60 },
             cb: {},
             vy: null,
@@ -356,7 +356,8 @@
             color: linjar(hex), emissive: linjar(hex).multiplyScalar(glod),
             roughness: 0.55, metalness: 0, toneMapped: false, depthTest: false, transparent: true });
 
-        const textSprite = (parts) => {
+        const textSprite = (parts0) => {
+            let parts = parts0;
             const c = document.createElement('canvas');
             const ctx = c.getContext('2d');
             const FS = 64, PAD = 12;
@@ -376,22 +377,39 @@
                     x += ctx.measureText(p.t).width;
                 });
             };
-            rita();
-            const tex = new THREE.CanvasTexture(c);
-            tex.minFilter = THREE.LinearFilter;
-            tex.encoding = THREE.sRGBEncoding;
-            const spr = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false, toneMapped: false }));
+            const spr = new THREE.Sprite(new THREE.SpriteMaterial({ transparent: true, depthTest: false, toneMapped: false }));
             spr.renderOrder = 30;
-            spr.userData.aspect = c.width / c.height;
+            const bygg = () => {
+                rita();
+                const gammal = spr.material.map;
+                const tex = new THREE.CanvasTexture(c);
+                tex.minFilter = THREE.LinearFilter;
+                tex.encoding = THREE.sRGBEncoding;
+                spr.material.map = tex;
+                spr.material.needsUpdate = true;
+                if (gammal) gammal.dispose();
+                spr.userData.aspect = c.width / c.height;
+            };
+            bygg();
+            // ny text: ritas bara om när texten verkligen ändrats
+            spr.userData.satt = (nya) => {
+                const nyckel = nya.map(q => q.t).join('|');
+                if (nyckel === spr.userData.nyckel) return;
+                spr.userData.nyckel = nyckel;
+                parts = nya;
+                bygg();
+            };
             // rita om när Poppins har laddats (annars blir det reservtypsnittet)
-            if (document.fonts) Promise.all([document.fonts.load('600 64px Poppins'), document.fonts.load('italic 600 64px Poppins')]).then(() => {
-                rita(); tex.dispose(); spr.userData.aspect = c.width / c.height;
-                const ny = new THREE.CanvasTexture(c); ny.minFilter = THREE.LinearFilter; ny.encoding = THREE.sRGBEncoding;
-                spr.material.map = ny; spr.material.needsUpdate = true;
-            });
+            if (document.fonts) Promise.all([document.fonts.load('600 64px Poppins'), document.fonts.load('italic 600 64px Poppins'),
+                document.fonts.load('500 64px Poppins')]).then(bygg);
             return spr;
         };
-        const kraftEtikett = (sym, sub, color) => textSprite([{ t: sym, italic: true, color }, { t: sub, color, small: true, sub: true }]);
+        // Kraftens beteckning, och med värde: F_N = 13,5 kN
+        const kraftDelar = (sub, color, varde) => {
+            const d = [{ t: 'F', italic: true, color }, { t: sub, color, small: true, sub: true }];
+            if (varde != null) d.push({ t: ' = ' + varde, color, weight: 500 });
+            return d;
+        };
 
         // Platta pilar, ritade som på papper: en polygon i det plan som innehåller
         // pilen och vetter mot kameran. Bredden anges i skärmpixlar, så att
@@ -822,10 +840,14 @@
                 // ── Krafter och hastighet ──
                 const pFG = pil(COL.tyngd), pFN = pil(COL.norm), pFf = pil(COL.frik), pFC = streckPil(COL.fc), pV = pil(COL.fart);
                 scene.add(pFG, pFN, pFf, pFC, pV);
+                // komposanter: vågrätt och lodrätt, för normalkraften och friktionen
+                const kNx = streckPil(COL.norm, 2.2), kNy = streckPil(COL.norm, 2.2),
+                      kFx = streckPil(COL.frik, 2.2), kFy = streckPil(COL.frik, 2.2);
+                scene.add(kNx, kNy, kFx, kFy);
                 const tpPrick = new THREE.Mesh(new THREE.SphereGeometry(0.1, 16, 12), markMat(COL.tyngd, 0.4));
                 tpPrick.renderOrder = 26; scene.add(tpPrick);
-                const lFG = kraftEtikett('F', 'G', COL.tyngd), lFN = kraftEtikett('F', 'N', COL.norm),
-                      lFf = kraftEtikett('F', 'f', COL.frik), lFC = kraftEtikett('F', 'C', COL.fc),
+                const lFG = textSprite(kraftDelar('G', COL.tyngd)), lFN = textSprite(kraftDelar('N', COL.norm)),
+                      lFf = textSprite(kraftDelar('f', COL.frik)), lFC = textSprite(kraftDelar('C', COL.fc)),
                       lV = textSprite([{ t: 'v', italic: true, color: COL.fart }]);
                 const lappar = [lFG, lFN, lFf, lFC, lV, centrumLapp];
                 scene.add(lFG, lFN, lFf, lFC, lV);
@@ -1039,13 +1061,28 @@
                     tpPrick.position.copy(tp);
                     pFf.visible = sh.krafter && Math.abs(ut.f) * K3 > 0.06;
                     pFC.visible = sh.fc && vFC.length() > 0.06;
-                    pV.visible = sh.fart && p.v > 0.2;
-                    const tipp = (lapp, from, vec, extra = 0.42) => {
-                        const n = vec.clone().normalize();
-                        lapp.position.copy(from).add(vec).addScaledVector(n, extra);
+                    pV.visible = sh.fart && p.v > 0.2 && vy !== 'bakifran';
+                    // komposanterna ritas bara i vyn bakifrån: i perspektiv ser de inte vinkelräta ut
+                    const visaK = sh.krafter && sh.kompos && vy === 'bakifran';
+                    const vag = (vec) => vec.clone().setY(0), lod = (vec) => new THREE.Vector3(0, vec.y, 0);
+                    stallStreckPil(kNx, P, vag(vFN)); stallStreckPil(kNy, P, lod(vFN));
+                    stallStreckPil(kFx, P, vag(vFf)); stallStreckPil(kFy, P, lod(vFf));
+                    kNx.visible = kNx.visible && visaK; kNy.visible = kNy.visible && visaK;
+                    kFx.visible = kFx.visible && visaK && pFf.visible; kFy.visible = kFy.visible && visaK && pFf.visible;
+                    const tipp = (lapp, from, vec) => {
+                        lapp.userData.fran = from.clone();
+                        lapp.userData.spets = from.clone().add(vec);
                     };
-                    tipp(lFG, tp, vFG); tipp(lFN, P, vFN); tipp(lFf, P, vFf, 0.45); tipp(lFC, tp, vFC, 0.5);
-                    tipp(lV, tmp, fram.clone().multiplyScalar(p.v * 0.1), 0.35);
+                    tipp(lFG, tp, vFG); tipp(lFN, P, vFN); tipp(lFf, P, vFf); tipp(lFC, tp, vFC);
+                    tipp(lV, tmp, fram.clone().multiplyScalar(p.v * 0.1));
+                    // texterna, med eller utan värde
+                    const vd = sh.varden;
+                    const kNt = (x) => fmt(Math.abs(x) / 1000, 1) + ' kN';
+                    lFG.userData.satt(kraftDelar('G', COL.tyngd, vd ? kNt(MASSA * G) : null));
+                    lFN.userData.satt(kraftDelar('N', COL.norm, vd ? kNt(ut.N) : null));
+                    lFf.userData.satt(kraftDelar('f', COL.frik, vd ? kNt(ut.f) : null));
+                    lFC.userData.satt(kraftDelar('C', COL.fc, vd ? kNt(vFC.length() / K3) : null));
+
                     lFG.visible = pFG.visible; lFN.visible = pFN.visible; lFf.visible = pFf.visible;
                     lFC.visible = pFC.visible; lV.visible = pV.visible;
 
@@ -1109,6 +1146,19 @@
                         tpPrick.scale.setScalar(4.2 * perPx / 0.1);
                     }
                     ritaPilar(camera, H());
+                    // Etiketten börjar en bit bortom pilspetsen och växer bort från pilen:
+                    // spriten förankras i den kant som vetter mot spetsen.
+                    const tanH = Math.tan(rad(camera.fov / 2));
+                    [lFG, lFN, lFf, lFC, lV].forEach((l) => {
+                        if (!l.visible || !l.userData.fran) return;
+                        const a = l.userData.fran.clone().project(camera), b = l.userData.spets.clone().project(camera);
+                        const dx = (b.x - a.x) * camera.aspect, dy = b.y - a.y, L = Math.hypot(dx, dy) || 1;
+                        const ux = dx / L, uy = dy / L;
+                        l.center.set(ux > 0.38 ? 0 : ux < -0.38 ? 1 : 0.5, uy > 0.38 ? 0 : uy < -0.38 ? 1 : 0.5);
+                        const perPx = 2 * camera.position.distanceTo(l.userData.spets) * tanH / H();
+                        const dir = l.userData.spets.clone().sub(l.userData.fran).normalize();
+                        l.position.copy(l.userData.spets).addScaledVector(dir, 8 * perPx);
+                    });
                     renderer.render(scene, camera);
                 };
                 tick();
@@ -1156,10 +1206,11 @@
                 </g>
             );
         };
-        const KraftNamn = ({ x, y, sub, color, anchor = 'middle' }) => (
+        const KraftNamn = ({ x, y, sub, color, anchor = 'middle', varde }) => (
             <text x={x} y={y} textAnchor={anchor} fill={color} fontSize="17" fontWeight="600"
                   fontFamily="Poppins, sans-serif">
                 <tspan fontStyle="italic">F</tspan><tspan fontSize="12" dy="5">{sub}</tspan>
+                {varde && <tspan dy="-5" fontWeight="500" fontSize="16">{'\u00a0=\u00a0' + varde}</tspan>}
             </text>
         );
 
@@ -1175,6 +1226,7 @@
             }, []);
             return smal;
         }
+        const kN2 = (x) => fmt(Math.abs(x) / 1000, 1) + '\u00a0kN';
         const VB_W = 540, VB_H = 340;
         const C0 = { x: 280, y: 196 };      // kontaktpunktens mitt
         const PX = 58;                       // px per meter i bilritningen
@@ -1214,8 +1266,9 @@
             );
         }
 
-        function Tvarsnitt({ alfa, N, f, acc, kompos, visaFC, glider }) {
+        function Tvarsnitt({ alfa, N, f, acc, kompos, visaFC, glider, varden: vardenVal }) {
             const smal = useSmal();
+            const varden = vardenVal && !smal;   // på smal skärm står värdena i tabellen under figuren
             // På en smal skärm visas ett tätare utsnitt kring bilen, så att
             // etiketterna blir lika stora som brödtexten.
             const VX = smal ? 112 : 0, VW = smal ? 340 : VB_W;
@@ -1259,6 +1312,15 @@
             // hamnar etiketten på bilen flyttas den längs vägbanan, i pilens riktning, tills den är fri
             for (let i = 0; i < 30 && iBil(eF); i++) eF = { x: eF.x + u.x * fs * 8, y: eF.y + u.y * fs * 8 };
             eF = { x: eF.x, y: eF.y + 6, anchor: fs > 0 ? 'start' : 'end' };
+            // Etiketterna hålls innanför figuren. Måste en etikett flyttas i sidled
+            // lyfts den också ovanför sin pil, så att den inte hamnar på pilen.
+            const bredd = varden ? 112 : 26;
+            const innanfor = (e) => {
+                const v0 = e.anchor === 'end' ? e.x - bredd : e.anchor === 'middle' ? e.x - bredd / 2 : e.x;
+                const fel = Math.max(0, VX + 4 - v0) - Math.max(0, v0 + bredd - (VX + VW - 4));
+                return fel === 0 ? e : { ...e, x: e.x + fel, y: e.y - 18 };
+            };
+            const [gG, gN, gF, gC] = [eG, eN, eF, eC].map(innanfor);
 
             // vinkelbågen vid vägbanans nedre ände
             const bR = 64;
@@ -1287,11 +1349,6 @@
                         <text x={alfaLapp.x} y={alfaLapp.y} textAnchor="middle" fontSize="16" fontStyle="italic"
                               fontFamily="Poppins, sans-serif" fill={COL.ink}>α</text>
                     )}
-                    {/* riktningen mot centrum */}
-                    <g opacity="0.85">
-                        <polygon points={pilPunkter(VX + 96, 30, VX + 14, 30, 2, 10)} fill="#5a6170" />
-                        <text x={VX + 104} y="35" fontSize={smal ? 15 : 13} fill="#5a6170" fontFamily="DM Sans, sans-serif">mot kurvans centrum</text>
-                    </g>
 
                     <g transform={`translate(${C0.x} ${C0.y}) rotate(${-alfa})`} opacity={glider ? 0.92 : 1}>
                         <BilBakifran />
@@ -1314,10 +1371,10 @@
                     {visaFC && <Pil x1={TP.x} y1={TP.y} x2={TP.x + vC.x} y2={TP.y + vC.y} color={COL.fc} streckad />}
                     <circle cx={TP.x} cy={TP.y} r="3.2" fill={COL.tyngd} />
 
-                    <KraftNamn {...eG} sub="G" color={COL.tyngd} />
-                    <KraftNamn {...eN} sub="N" color={COL.norm} />
-                    {visaF && <KraftNamn {...eF} sub="f" color={COL.frik} />}
-                    {visaFC && Math.hypot(vC.x, vC.y) > 16 && <KraftNamn {...eC} sub="C" color={COL.fc} />}
+                    <KraftNamn {...gG} sub="G" color={COL.tyngd} varde={varden && kN2(MASSA * G)} />
+                    <KraftNamn {...gN} sub="N" color={COL.norm} varde={varden && kN2(N)} />
+                    {visaF && <KraftNamn {...gF} sub="f" color={COL.frik} varde={varden && kN2(f)} />}
+                    {visaFC && Math.hypot(vC.x, vC.y) > 16 && <KraftNamn {...gC} sub="C" color={COL.fc} varde={varden && kN2(Math.hypot(sum.x, sum.y) / K2)} />}
                 </svg>
             );
         }
@@ -1511,7 +1568,6 @@
             const [running, setRunning] = useState(true);
             const [slow, setSlow] = useState(false);
             const [show, setShow] = useState({ ...SIM.p.show });
-            const [kompos, setKompos] = useState(false);
             const [vy, setVy] = useState('folj');
             const [isFullscreen, setIsFullscreen] = useState(false);
             const [togglesOpen, setTogglesOpen] = useState(true);
@@ -1606,6 +1662,17 @@
                         <label><input type="checkbox" checked={show.radie} onChange={() => tShow('radie')} />
                             <span className="st-swatch" style={{ background: `repeating-linear-gradient(90deg, ${COL.ink} 0 4px, transparent 4px 6px)` }}></span>
                             <span>Radien <em>r</em></span></label>
+                        <label><input type="checkbox" checked={show.varden} onChange={() => tShow('varden')} />
+                            <span className="st-swatch" style={{ background: 'transparent' }}></span><span>Värden vid pilarna</span></label>
+                        <label><input type="checkbox" checked={show.kompos}
+                                      onChange={() => { const pa = !show.kompos; tShow('kompos'); if (pa && vy !== 'bakifran') valjVy('bakifran'); }} />
+                            <span className="st-swatch" style={{ background: `repeating-linear-gradient(90deg, ${COL.norm} 0 3px, transparent 3px 5px)` }}></span>
+                            <span>Dela upp i komposanter</span></label>
+                        {show.kompos && vy !== 'bakifran' && (
+                            <div style={{ fontSize: 11.5, color: 'var(--lab-ink-muted)', marginLeft: 22, lineHeight: 1.3 }}>
+                                syns i vyn Bakifrån och i tvärsnittet
+                            </div>
+                        )}
                         <div className="st-title mt">Scen</div>
                         <label><input type="checkbox" checked={slow} onChange={() => setSlow(s => !s)} /><span>Ultrarapid</span></label>
                         {isFullscreen && (
@@ -1757,13 +1824,25 @@
                         <div className="mt-6 grid lg:grid-cols-2 gap-5">
                             <div className="glass-card rounded-xl p-4">
                                 <div className="flex items-baseline justify-between flex-wrap gap-2">
-                                    <div className="flbl">Tvärsnitt, sett bakifrån</div>
+                                    <div>
+                                        <div className="flbl">Tvärsnitt, sett bakifrån</div>
+                                        <div className="flex items-center gap-1 mt-1" style={{ fontSize: 12.5, color: 'var(--lab-ink-muted)' }}>
+                                            <svg width="26" height="10" viewBox="0 0 26 10" aria-hidden="true">
+                                                <polygon points="0,5 8,0.5 8,4 26,4 26,6 8,6 8,9.5" fill="currentColor" />
+                                            </svg>
+                                            kurvans centrum ligger åt vänster
+                                        </div>
+                                    </div>
                                     <label className="text-sm flex items-center gap-2 cursor-pointer" style={{ color: 'var(--lab-ink)' }}>
-                                        <input type="checkbox" checked={kompos} onChange={() => setKompos(k => !k)} style={{ accentColor: 'var(--lab-accent)' }} />
-                                        Visa komposanterna
+                                        <input type="checkbox" checked={show.varden} onChange={() => tShow('varden')} style={{ accentColor: 'var(--lab-accent)' }} />
+                                        Visa värden
+                                    </label>
+                                    <label className="text-sm flex items-center gap-2 cursor-pointer" style={{ color: 'var(--lab-ink)' }}>
+                                        <input type="checkbox" checked={show.kompos} onChange={() => tShow('kompos')} style={{ accentColor: 'var(--lab-accent)' }} />
+                                        Dela upp krafterna i komposanter
                                     </label>
                                 </div>
-                                <Tvarsnitt alfa={alfa} N={ut.N} f={ut.f} acc={ut.acc} kompos={kompos} visaFC={show.fc} glider={ut.glider} />
+                                <Tvarsnitt alfa={alfa} N={ut.N} f={ut.f} acc={ut.acc} kompos={show.kompos} visaFC={show.fc} glider={ut.glider} varden={show.varden} />
                                 <div className="grid sm:grid-cols-2 gap-x-5 mt-2">
                                     <div className="rd-row"><span>Tyngdkraft <em>F</em><sub>G</sub></span><span className="rv" style={{ color: COL.tyngd }}>{kN(MASSA * G)}</span></div>
                                     <div className="rd-row"><span>Normalkraft <em>F</em><sub>N</sub></span><span className="rv" style={{ color: COL.norm }}>{kN(ut.N)}</span></div>

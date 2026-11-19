@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Wed, 18 Nov 2026 02:25:59 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 19 Nov 2026 02:26:25 GMT</lastBuildDate>
+    <item>
+      <title>Turbinblad av gummi viker undan när tidvattnet drar för hårt</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-11-19-gummibladen-som-viker-undan</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-11-19-gummibladen-som-viker-undan</guid>
+      <pubDate>Thu, 19 Nov 2026 04:00:00 GMT</pubDate>
+      <category>Strömningslära</category>
+      <description>Under vattnet i starka tidvattenströmmar slits turbinerna hårt, och de största behöver motorer som vrider bladen ur strömmen när den blir för stark. Ingenjörer i Edinburgh har provat blad av gummi som böjer sig själva. Beräkningar byggda på försök med en modellturbin visar att de ger lika mycket energi som blad med motorstyrning. I försöken minskade de snabba lastsvängningarna, som sliter på turbinen, med upp till en tredjedel.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-11-19-gummibladen-som-viker-undan.jpg" length="188344" type="image/jpeg"/>
+    </item>
     <item>
       <title>Atomkärnor kan sända ut alfa- och betastrålning i ett enda sönderfall, föreslår fysiker</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-11-18-karnan-som-sander-ut-tva-partiklar-pa-en-gang</link>
@@ -177,15 +186,6 @@
       <category>Atomfysik</category>
       <description>Med nålen i ett sveptunnelmikroskop har fysiker i Delft gjort magnetisk resonans på kärnan i en enda titanatom. Kärnans spinn gick att vända även när det knappt var kopplat till atomens elektron, och mekanismen bakom är ännu inte förklarad.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-31-karnan-som-lyssnar.jpg" length="345011" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Elektroner surfar på radiovågor och driver strömmen i ett fusionsplasma</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-10-30-elektronerna-som-surfar-pa-radiovagor</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-10-30-elektronerna-som-surfar-pa-radiovagor</guid>
-      <pubDate>Fri, 30 Oct 2026 04:00:00 GMT</pubDate>
-      <category>Plasmafysik</category>
-      <description>I en fusionsreaktor av typen tokamak måste en ström på en miljon ampere eller mer gå runt i det heta plasmat, och i dag drivs den nästan alltid av en transformator som bara kan hålla den igång en stund i taget. Fysiker vid forskningstokamaken DIII-D i San Diego har nu för första gången visat att en särskild sorts radiovågor, helikonvågor, kan driva en del av strömmen i stället.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-10-30-elektronerna-som-surfar-pa-radiovagor.jpg" length="618990" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

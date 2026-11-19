@@ -684,3 +684,12 @@ Källa: University of Edinburgh, pressmeddelande 2026-11-11 (hittad via Nature:s
 > OBS: ordet "tidvattenkraft" undveks medvetet, ordlistans post med det namnet betyder tidvattenkraft i betydelsen gravitationens sträckande kraft (tidal force).
 > Nya begrepp: materialutmattning, bladvinkelreglering.
 > Ingen simuleringsruta (Vattenkraftverket på labbänken tangerar bara ämnet); Växelströmsgenerator m.m. i larare.moment.
+
+## 2026-11-20 — 2026-11-20-bruset-som-bar-ett-meddelande
+**Värmebrus bär meddelanden utan att någon radiosignal sänds ut** (Elektromagnetism)
+Källa: Physics World 2026-11-18 (Isabelle Dumé); original G. Ecola, J. Zhang, J. M. Kahn och Z. Kapetanovic (Stanford University), ”First-principles channel model and capacity-achieving transmission scheme in thermal noise backscatter links”, PNAS 123 (43), e2606732123, online 2026-10-20, DOI 10.1073/pnas.2606732123 (CC BY-NC-ND 4.0). pnas.org gav 403, så hela texten (inklusive metoddel och appendix) lästes i författarnas godkända manus arXiv:2611.02562v1.
+> Skriven 2026-11-19 av nattjobbet, ett dygn i förväg. Kom inte ur kön utan ur dagens svepning på Physics World. Grannar: 2026-11-19 strömningslära, 2026-11-18 kärnfysik; senaste elektromagnetism/elektrostatik 2026-11-14, ingen krock i rad. KM3NeT-teasern är fryst till efter brevet 2026-11-22 och rördes inte.
+> Utgivaren: RÄTTA FÖRST (kontrasten ΔP = (P1−P0)/(P1+P0) är halva den relativa skillnaden, så brödtext och faktaruta var fel med faktor 2; lärarlänken till fy2-2.8 hade fel namn), allt infört samt rekommendationerna (”i idealfallet”, 0,76 dB som SNR-förlust, 1/r²-interferensen i faktarutan); efterkontrollen krävde en omformulering av 0,76 dB-meningen, införd ordagrant, sedan GODKÄND.
+> Bilder: huvudbild ekofri mikrovågskammare vid UNSW Canberra, foto Kurt Barnett (CC BY-SA 3.0, Wikimedia Commons), beskuren 16:9, märkt som inte ingående i studien; Holmdel-hornantennen 1962, NASA (allmän egendom) i brödtexten. Studiens figurer användes inte (CC BY-NC-ND), inte heller Stanfords pressbilder (licens ej angiven). Ingen AI-bild.
+> Nya begrepp: brustemperatur, ekofri kammare, felrättande kod (med polära koder).
+> Ingen simuleringsruta; Reflexion, transmission och superposition, Intensitet och ljudnivå, Elektromagnetiska vågor och ljus samt kelvinskalan i larare.moment.

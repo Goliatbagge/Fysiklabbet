@@ -15,6 +15,12 @@ Format per post:
 - **KM3NeT/ORCA prövar Lorentzinvariansen med atmosfäriska neutriner från Medelhavets botten** **[BREVTEASER]** (nominerad 2026-11-16: Einsteins relativitetsteori prövad med neutriner som fångas av ljussensorer på havsbotten, lätt att sammanfatta; förtrycket arXiv 2603.04264 öppet, läs fulltexten före publicering) — partikelfysik/relativitet; 5 828 händelser på 1,4 år med sex detektorenheter, inga avvikelser. JCAP 2026, arXiv 2603.04264 (öppen). OBS partikelfysik 2026-11-05. Källa (Phys.org 2026-11-04): https://phys.org/news/2026-11-einstein-laws-bottom-mediterranean-sea.html
   (tillagd 2026-11-05)
 
+- **Legering som förblir seg i extrem kyla (Physics World)** — materialfysik/mekanik. Originalet ej kontrollerat. Källa: https://physicsworld.com/a/versatile-metal-alloy-stays-tough-through-extreme-cold/
+  (tillagd 2026-11-19)
+
+- **Hårda röntgenpulser på attosekunder når rekordintensitet (Physics World)** — optik/atomfysik; OBS attosekundnyhet 2026-10-18. Originalet ej kontrollerat. Källa: https://physicsworld.com/a/attosecond-hard-x-ray-pulses-reach-record-high-intensities/
+  (tillagd 2026-11-19)
+
 - **Nät som skördar kroppens rörelseenergi kan ersätta batterier i pacemakrar (UMass Amherst, ”biohybrid mesh harvester”)** — ellära/energiomvandling; Jun Yao, Siqi Wang m.fl., Science Advances (2026), DOI 10.1126/sciadv.aei5963 (troligen öppen, science.org kan ge Cloudflare-spärr; leta PMC-kopia). Originalet ej läst. Källa (Physics World 2026-11-17): https://physicsworld.com/a/energy-harvesting-mesh-device-could-replace-batteries-in-implantable-medical-devices/
   (tillagd 2026-11-18)
 

@@ -103,6 +103,63 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-20-bruset-som-bar-ett-meddelande",
+    date: "2026-11-20",
+    title: "Värmebrus bär meddelanden utan att någon radiosignal sänds ut",
+    deck: "Varje ledare som är varm susar av termiskt brus. Ingenjörer vid Stanford University har byggt en sändare som inte sänder ut någon radiosignal alls, utan bara växlar mellan att antennen är öppen och kortsluten. Mottagaren läser av meddelandet ur små förändringar i sitt eget brus, med en kilobit per sekund på en halv meters avstånd.",
+    category: "Elektromagnetism",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-11-20-bruset-som-bar-ett-meddelande.jpg",
+    imageAlt: "En person i kamouflageuniform står inne i ett rum där väggar, golv och tak är täckta av blå skumplastpyramider och håller upp en antenn på en stång.",
+    imageCredit: "Foto: Kurt Barnett, UNSW Canberra, ekofri mikrovågskammare (2010), via Wikimedia Commons (CC BY-SA 3.0). Beskuren till bredformat. Kammaren ingår inte i studien.",
+    tags: ["elektromagnetism", "termiskt brus", "brustemperatur", "reflexion", "interferens", "antenn", "mikrovågor", "trådlös kommunikation", "felrättande kod", "ekofri kammare", "boltzmanns konstant", "stanford university"],
+    sources: [
+      { name: "Physics World: Thermal noise system transmits data without an active radio signal (18 november 2026)", url: "https://physicsworld.com/a/thermal-noise-system-transmits-data-without-an-active-radio-signal/" },
+      { name: "arXiv: G. Ecola med flera, författarnas godkända manuskript till PNAS-artikeln (öppet tillgängligt)", url: "https://arxiv.org/abs/2611.02562" }
+    ],
+    research: {
+      citation: "G. Ecola, J. Zhang, J. M. Kahn och Z. Kapetanovic, ”First-principles channel model and capacity-achieving transmission scheme in thermal noise backscatter links”, Proceedings of the National Academy of Sciences 123 (43), e2606732123, publicerad 20 oktober 2026. Kollegialt granskad, öppet tillgänglig (CC BY-NC-ND 4.0).",
+      url: "https://doi.org/10.1073/pnas.2606732123"
+    },
+    larare: {
+      moment: [
+        { label: "Reflexion, transmission och superposition", href: "katalog.html?id=fy2-2.8" },
+        { label: "Intensitet och ljudnivå", href: "katalog.html?id=fy2-2.11" },
+        { label: "Elektromagnetiska vågor och ljus", href: "katalog.html?id=fy2-4.1" },
+        { label: "Ideala gaslagen och kelvinskalan", href: "katalog.html?id=fy1-5.7" }
+      ],
+      fragor: [
+        "En puls på ett rep vänds upp och ner när den reflekteras mot en fast ände, men inte mot en fri ände. På samma sätt vänds spänningen i en elektrisk våg vid en kortsluten ände men inte vid en öppen. Förklara varför det gör att mottagaren mäter olika mycket brus när sändaren växlar mellan de två lägena.",
+        "Ett rumsvarmt motstånd lämnar effekten P = k · T · B till en mottagare. Hur stor blir effekten vid 295 K och bandbredden 50 MHz? Hur mycket mindre blir den om motståndet kyls till 55 K, och varför går det ändå inte att bygga en sändare av bara rumsvarma, passiva komponenter som skickar ett meddelande till en lika varm mottagare?",
+        "Forskarna fick mest information igenom när de skickade bitarna så fort att många av dem blev fel, och lät en felrättande kod rätta felen i efterhand. Varför kan det löna sig att skicka fler bitar som var och en är osäkrare, i stället för färre bitar som är säkra?"
+      ]
+    },
+    body: [
+      { type: "p", html: "Laddningarna i en ledare står aldrig stilla. Så länge ledaren är varmare än absoluta nollpunkten knuffas de omkring av värmerörelsen, och det ger en liten spänning som hoppar slumpmässigt upp och ner. Det kallas termiskt brus. Den effekt som en ledare kan lämna till en mottagare är $P = k \\cdot T \\cdot B$, där $k$ är Boltzmanns konstant, $T$ ledarens absoluta temperatur och $B$ den bandbredd som mottagaren lyssnar över. För den som bygger radioapparater är bruset en fiende, eftersom det sätter gränsen för hur svaga signaler som alls går att uppfatta." },
+      { type: "p", html: "Ibland är bruset ändå själva fyndet. År 1964 mätte Arno Penzias och Robert Wilson upp ett envist brus i en stor hornantenn i Holmdel i New Jersey, som motsvarade en temperatur på omkring 3,5&nbsp;kelvin och kom lika starkt från alla håll på himlen. Det visade sig vara den kosmiska bakgrundsstrålningen, eftervärmen från universums barndom, och upptäckten gav dem nobelpriset i fysik 1978." },
+      { type: "image", src: "nyheter/bilder/2026-11-20-bruset-som-bar-ett-meddelande-2.jpg", alt: "Svartvitt foto av en stor, ljus hornantenn av metall som står på en vridbar ställning med en stor hjulformad ram. Två män står på en plattform intill.", caption: "Hornantennen i Holmdel, byggd 1959 för att ta emot radiosignaler som studsat mot ballongsatelliter. I den här antennen hittade Arno Penzias och Robert Wilson det brus som visade sig vara den kosmiska bakgrundsstrålningen. Fotot är från 1962.", credit: "Foto: NASA, restaurerat av Bammesk, via Wikimedia Commons (allmän egendom)." },
+      { type: "p", html: "Nu har Geneva Ecola, Jida Zhang, Joseph Kahn och Zerina Kapetanovic vid Stanford University visat hur bruset kan bära ett meddelande. Deras sändare skapar ingen radiosignal alls. Den består av en antenn, en strömbrytare för höga frekvenser och två olika avslutningar: antingen är antennens ledning öppen, så att ingenting är kopplat till den, eller så är den kortsluten. Det ena läget betyder 0 och det andra 1. Studien publicerades i <em>Proceedings of the National Academy of Sciences</em> den 20 oktober." },
+      { type: "h2", text: "Allt är lika varmt, så var kommer signalen ifrån?" },
+      { type: "p", html: "Här finns en gåta. Försöken gjordes i rumstemperatur, mellan 290 och 300&nbsp;kelvin. Enligt termodynamiken har en passiv komponent, till exempel ett motstånd eller en kabel, en brustemperatur som är lika med dess verkliga temperatur. Om allt kring mottagaren är lika varmt borde den mäta samma brus vad sändaren än gör. Tidigare försök hade visat att det ändå gick att skicka data på det här sättet, men ingen hade kunnat förklara fullt ut var skillnaden i bruset kom ifrån." },
+      { type: "p", html: "Svaret sitter i mottagaren själv. Den har en lågbrusförstärkare som får ström, och en sådan aktiv krets kan ha en brustemperatur som skiljer sig från omgivningens. Förstärkaren skickar nämligen ut brus bakåt, genom sin egen ingång och ut ur mottagarens antenn, och det bruset är kallt: i forskarnas förstärkare motsvarade det 55&nbsp;kelvin, mer än 230&nbsp;grader kallare än rummet." },
+      { type: "p", html: "När sändarens antenn är öppen eller kortsluten kan den inte ta upp någon energi. Allt som träffar den reflekteras, och antennen fungerar som en spegel. Mottagaren ser då i princip sitt eget kalla brus speglat tillbaka. Kopplas sändarens antenn i stället till ett motstånd som passar den, tar antennen upp strålningen och sänder ut rumsvarmt brus som allt annat i rummet." },
+      { type: "h2", text: "Brus som interfererar med sig självt" },
+      { type: "p", html: "Två oberoende bruskällor kan inte interferera med varandra, eftersom de saknar fast fas. Men ekot från sändaren är en kopia av förstärkarens eget brus, och samma krets skapar också det brus som går framåt in i förstärkaren. De två är alltså besläktade. Ekot kommer tillbaka efter några nanosekunder, och så länge fördröjningen är kort jämfört med hur fort bruset ändrar sig kan de två förstärka eller försvaga varandra, precis som två vågor." },
+      { type: "p", html: "Det är här de två lägena gör skillnad. En puls på ett rep vänds upp och ner när den studsar mot en fast ände, men inte mot en fri ände. På samma sätt vänds spänningen i en elektrisk våg vid en kortsluten ände men inte vid en öppen. Att växla mellan de två lägena byter alltså, i idealfallet, tecken på ekot, och det ger den största skillnaden i det brus som mottagaren mäter. Forskarna flyttade sändarens antenn i steg med en tiondels millimeters noggrannhet och såg bruset växa och avta med avståndet. Deras modell följde mätningarna med i genomsnitt 0,02&nbsp;decibels avvikelse." },
+      { type: "h2", text: "Fel som rättas i efterhand" },
+      { type: "p", html: "Skillnaden i bruseffekt mellan en etta och en nolla var bara mellan två tusendelar och två hundradelar. För varje bit räknar mottagaren ut medelvärdet av bruseffekten under bitens tid, och ju längre den lyssnar, desto säkrare blir avläsningen. Ändå visade forskarnas beräkningar att det lönar sig att skicka bitarna så fort att många av dem blir fel, och låta en felrättande kod rätta dem i efterhand. De använde så kallade polära koder, som också används i mobilnätet 5G, och kom nära det teoretiska taket: överföringen gick i genomsnitt lika fort som teorin medger för en signal som är bara 0,76&nbsp;decibel svagare i förhållande till bruset." },
+      { type: "p", html: "Sändaren och mottagaren hade likadana hornantenner och arbetade kring frekvensen 11,2&nbsp;GHz, i en ekofri kammare som forskarna själva byggt av plåt och skumplast som tar upp radiovågor. På 50&nbsp;centimeters avstånd överfördes 1&nbsp;kilobit per sekund, och på 80&nbsp;centimeter 65&nbsp;bit per sekund. Det är mer än hundra gånger snabbare än tidigare försök med att skicka data med brus." },
+      { type: "quote", html: "Hittills har vår utvärdering begränsats till en kontrollerad miljö med minimal yttre störning. Nu vill vi undersöka hur systemet fungerar under verkliga förhållanden och utforska praktiska tillämpningar.", cite: "Jida Zhang, Stanford University, till Physics World" },
+      { type: "p", html: "Det återstår alltså mycket. Utanför kammaren finns radiosignaler överallt, och de kan dränka det svaga bruset. Med större antenner och en lägre frekvens, 800&nbsp;MHz, visar forskarnas beräkningar att det skulle gå att nå 80&nbsp;meter med 1&nbsp;bit per sekund, men det är inte prövat. Tanken är små givare som bara behöver skicka lite data och som ska störa så lite som möjligt, till exempel nära radioteleskop eller känslig utrustning på sjukhus. Sändaren behöver bara energi för att slå om strömbrytaren, medan förstärkaren i mottagaren hela tiden behöver ström." },
+      { type: "fact", title: "Visste du?", items: [
+        "Med $T = 295\\ \\mathrm{K}$ och bandbredden $B = 50\\ \\mathrm{MHz}$ ger ett rumsvarmt motstånd effekten $P = k \\cdot T \\cdot B \\approx 2{,}0 \\cdot 10^{-13}\\ \\mathrm{W}$ till en mottagare, ungefär en femtedels miljondels miljondels watt.",
+        "Signalen från en sändare sprids över en sfär med arean $4\\pi \\cdot r^{2}$, så den mottagna effekten avtar som $\\dfrac{1}{r^{2}}$. Ett eko som går fram och tillbaka försvagas ännu snabbare, och den kalla bruseffekten som studsar tillbaka avtar som $\\dfrac{1}{r^{4}}$. Interferensen mellan ekot och förstärkarens eget brus avtar däremot bara som $\\dfrac{1}{r^{2}}$, och den dominerade i dataöverföringen.",
+        "Studiens tak för hur många bit per sekund som går att föra över är $R = \\dfrac{(\\Delta P)^{2} \\cdot B}{2 \\ln 2}$, där $\\Delta P = \\dfrac{P_1 - P_0}{P_1 + P_0}$ är kontrasten mellan bruseffekterna $P_1$ och $P_0$ i de två lägena. Med kontrasten $\\Delta P = 0{,}01$ och bandbredden 50&nbsp;MHz blir taket ungefär 3&nbsp;600&nbsp;bit per sekund.",
+        "Förstärkarens kalla brus på 55&nbsp;kelvin motsvarar −218&nbsp;°C, fast förstärkaren själv har rumstemperatur."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-19-gummibladen-som-viker-undan",
     date: "2026-11-19",
     title: "Turbinblad av gummi viker undan när tidvattnet drar för hårt",

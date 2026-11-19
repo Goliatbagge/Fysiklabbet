@@ -63,6 +63,42 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'brustemperatur',
+    term: 'Brustemperatur',
+    former: ['brustemperatur', 'brustemperaturen', 'brustemperaturer', 'brustemperaturerna'],
+    kort: 'Ett sätt att ange hur mycket brus något skickar ut: den temperatur ett vanligt motstånd skulle behöva ha för att ge lika mycket brus.',
+    relaterade: ['termiskt-brus', 'svartkroppsstralning', 'kosmisk-mikrovagsbakgrund'],
+    body: [
+      { type: 'p', html: 'Ett motstånd som är varmt ger ifrån sig ett svagt, slumpmässigt elektriskt brus, och ju varmare det är, desto mer brus blir det. Sambandet är så enkelt att det går att vända på: i stället för att ange bruset i watt kan man ange vilken temperatur ett motstånd skulle behöva ha för att ge precis lika mycket. Det talet kallas brustemperatur, och det används för allt som ger brus, inte bara för motstånd.' },
+      { type: 'p', html: 'För en vanlig, passiv sak som ett motstånd, en kabel eller en stenvägg är brustemperaturen lika med den verkliga temperaturen. Så måste det vara enligt termodynamiken: annars skulle två lika varma föremål kunna skicka värme till varandra på egen hand. Saker som får ström, till exempel en förstärkare, följer inte den regeln. En förstärkare kan ha en brustemperatur på bara några tiotals kelvin, fast den själv står i ett rumsvarmt rum.' },
+      { type: 'p', html: 'Måttet är praktiskt eftersom det går att lägga ihop. En radiomottagares brus, bruset från marken och bruset från himlen kan alla anges i kelvin och adderas. Radioastronomer jämför sina mottagare på det sättet, och den kosmiska bakgrundsstrålningen upptäcktes som ett brus med en brustemperatur på några få kelvin som inte gick att förklara på något annat sätt.' }
+    ]
+  },
+  {
+    id: 'ekofri-kammare',
+    term: 'Ekofri kammare',
+    former: ['ekofri kammare', 'ekofria kammaren', 'ekofria kammare', 'ekofria kamrar', 'ekofria kamrarna'],
+    kort: 'Ett rum vars väggar tar upp ljud eller radiovågor i stället för att reflektera dem, så att inga ekon stör mätningen.',
+    relaterade: ['termiskt-brus', 'interferens'],
+    body: [
+      { type: 'p', html: 'Ropa i ett tomt rum med kala väggar, och ljudet studsar fram och tillbaka länge. Ropa i en ekofri kammare, och ljudet försvinner direkt. Väggarna, golvet och taket är där täckta av kilar eller pyramider av ett material som tar upp vågorna i stället för att kasta tillbaka dem. Det som når en mikrofon eller en antenn i rummet kommer då bara rakt från källan.' },
+      { type: 'p', html: 'Formen är det viktiga. En våg som träffar en pyramid studsar oftast in mot nästa pyramid i stället för ut i rummet, och för varje studs tas mer av energin upp. Spetsarna gör också att övergången från luft till material blir gradvis, så att vågen inte reflekteras mot en skarp yta. För ljud används skumplast eller mineralull, och för radiovågor skumplast som blandats med kol så att den leder ström lite grand och omvandlar vågens energi till värme.' },
+      { type: 'p', html: 'Kammare för radiovågor har ofta också plåt i väggarna, som håller ute signalerna från mobiltelefoner, radiostationer och trådlösa nätverk. I sådana rum provas antenner, mobiltelefoner och satelliter, och där görs mätningar av så svaga signaler att minsta störning utifrån skulle dränka dem.' }
+    ]
+  },
+  {
+    id: 'felrattande-kod',
+    term: 'Felrättande kod',
+    former: ['felrättande kod', 'felrättande koden', 'felrättande koder', 'felrättande koderna', 'polär kod', 'polära koden', 'polära koder', 'polära koderna'],
+    kort: 'Ett sätt att lägga till extra bitar i ett meddelande, så att mottagaren kan hitta och rätta de bitar som blivit fel på vägen.',
+    relaterade: ['termiskt-brus'],
+    body: [
+      { type: 'p', html: 'Den enklaste felrättande koden är att säga allt tre gånger. Skickar man 111 i stället för 1 och mottagaren får 101, är det troligast att det var en etta som skickades och att en av bitarna blev fel. Metoden fungerar, men den är slösaktig: meddelandet blir tre gånger så långt. Riktiga koder är mycket smartare. De lägger till ett fåtal extra bitar som är uträknade ur alla de andra, ungefär som en kontrollsiffra i ett personnummer, och kan ändå rätta många fel.' },
+      { type: 'p', html: 'År 1948 visade matematikern Claude Shannon att varje kanal, till exempel en brusig radiolänk, har ett tak för hur mycket information som går att föra över per sekund. Under taket går det i princip att få felen hur små som helst, om koden är tillräckligt bra. Över taket går det inte, hur man än bär sig åt. Det tog ungefär sextio år innan någon hittade koder som når taket och samtidigt är enkla nog att använda i praktiken.' },
+      { type: 'p', html: 'Ett exempel är polära koder, som uppfanns av Erdal Arıkan och publicerades 2009. De används i mobilnätet 5G. Felrättande koder finns också i QR-koder, som kan läsas fast en del av dem är smutsiga, i CD-skivor som går att spela fast de är repiga, och i rymdsonder som skickar data över miljarder kilometer.' }
+    ]
+  },
+  {
     id: 'materialutmattning',
     term: 'Materialutmattning',
     former: ['materialutmattning', 'materialutmattningen', 'utmattning', 'utmattningen', 'utmattningsskada', 'utmattningsskador', 'utmattningsskadorna'],

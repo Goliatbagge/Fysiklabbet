@@ -231,6 +231,7 @@
         const B_JORD = 1.6e-5;       // jordfältets vågräta del i Sverige (T), mot norr
         const AC_F = 0.35;           // växelströmmens frekvens i simuleringen (Hz, slow motion)
         const B_GEM = 2.5e-3;        // flödestätheten som krävs för att ett gem ska glida (T)
+        const B_HALL = 1.0e-3;       // under detta släpper ett gem som sitter fast (kontakt håller bättre än avstånd drar)
 
         const COL = {
             falt: '#c0392b',         // fältlinjer
@@ -394,7 +395,7 @@
               text: 'Ställ provkompassen mitt i spolen och läs av <em>B</em>. Dra sedan varvtalet från 300 till 600: flödestätheten fördubblas. Samma sak händer om du fördubblar strömmen, eftersom <em>B</em> är proportionell mot både <em>n</em> och <em>I</em>.' },
             { id: 'jarn', namn: 'Järnkärnan lyfter gemen',
               set: { on: true, ac: false, I: 1.5, n: 600, core: 'luft', kalla: 'spole', gem: true },
-              text: 'Utan järnkärna är fältet för svagt för att rubba gemen. Stoppa in järnkärnan: fältet blir ungefär tio gånger starkare, och de närmaste gemen dras till spolens ände. Öka strömmen så hämtar magneten gem längre bort.' },
+              text: 'Utan järnkärna är fältet för svagt för att rubba gemen. Stoppa in järnkärnan: fältet blir ungefär tio gånger starkare, och de närmaste gemen dras till spolens ände. Öka strömmen så hämtar magneten gem längre bort. Slå av strömmen så släpper gemen.' },
             { id: 'stav', namn: 'Elektromagnet eller stavmagnet?',
               set: { on: true, ac: false, I: 1.5, n: 600, core: 'luft', kalla: 'stav' },
               text: 'En stavmagnet med samma form har exakt samma fält som spolen. Växla mellan dem och se att varken fältlinjerna eller kompassnålarna rör sig. Skillnaden är att elektromagnetens fält går att slå av, göra starkare och vända.' },
@@ -1166,6 +1167,9 @@
                     // gemen: järn dras mot den närmaste änden när fältet räcker
                     const gemOn = p.show.gem && !p.gissar && !stav;
                     if (gemOn) {
+                        // Gemen reagerar på fältets storlek. Vid växelström hinner de inte släppa
+                        // varje gång strömmen passerar noll, så där räknas effektivvärdet.
+                        const scaleGem = p.on ? MU0 * p.n * p.I / L_M * coreF * sgn * (p.ac ? Math.SQRT1_2 : 1) : 0;
                         const slots = [[0, -0.55], [0, 0.0], [0, 0.55], [1, -0.28], [1, 0.28]];
                         st.clips.forEach((g, k) => {
                             if (g.held) return;
@@ -1175,12 +1179,22 @@
                             const sx = (side > 0 ? E.outR + half * (1 + 1.75 * sl[0]) : E.outL - half * (1 + 1.75 * sl[0]));
                             const sy = st.coil.y + sl[1] * st.ap * (p.core === 'jarn' ? 1.0 : 1.4);
                             if (g.stuck) {
+                                const [hx, hy] = coilB(sx, sy, scaleGem);
+                                if (Math.hypot(hx, hy) < B_HALL) {
+                                    // fältet räcker inte längre: gemet släpper och glider en bit ut på bänken
+                                    g.stuck = null;
+                                    g.vx = side * (70 + 50 * Math.random());
+                                    g.vy = (Math.random() - 0.5) * 70 + Math.sign(sl[1] || (Math.random() - 0.5)) * 35;
+                                    g.spin = (Math.random() - 0.5) * 7;
+                                    return;
+                                }
                                 g.x += (sx - g.x) * Math.min(1, dt * 12); g.y += (sy - g.y) * Math.min(1, dt * 12);
                                 g.ang += ((0) - (((g.ang + Math.PI / 2) % Math.PI + Math.PI) % Math.PI - Math.PI / 2)) * Math.min(1, dt * 8);
                                 return;
                             }
-                            const [bx, by] = coilB(g.x, g.y, scale);
+                            const [bx, by] = coilB(g.x, g.y, scaleGem);
                             const B = Math.hypot(bx, by);
+                            if (g.spin) { g.ang += g.spin * dt; g.spin *= Math.max(0, 1 - 4 * dt); }
                             if (B > B_GEM) {
                                 const dx = sx - g.x, dy = sy - g.y, dd = Math.hypot(dx, dy) || 1;
                                 const acc = 1800 * Math.min(6, B / B_GEM);
@@ -1625,6 +1639,12 @@
                                     avslagen pekar alla nålar därför mot norr, och långt från en svag spole tar jordfältet över.</li>
                                 <li>En stavmagnet och en spole med samma form har precis samma fält utanför. Inuti magneten går
                                     fältlinjerna från sydändan till nordändan, precis som inuti spolen.</li>
+                                <li>Ett gem börjar glida mot spolen när flödestätheten där det ligger är minst 2,5 mT, och det
+                                    släpper först när fältet vid spolens ände sjunker under 1 mT: ett gem som redan sitter fast
+                                    hålls kvar av ett svagare fält än det som krävs för att dra det till sig. Gränserna är valda
+                                    för att effekten ska synas och beror i verkligheten på gemets massa och friktionen mot bänken.
+                                    Järnkärnan är av mjukt järn, som nästan inte behåller någon magnetism, så gemen släpper även
+                                    med kärnan i när strömmen slås av.</li>
                                 <li>Järnkärnans förstärkning är satt till tio gånger. Det är rimligt för en kort, rak järnstav;
                                     en sluten järnkärna, som i en transformator, kan förstärka tusentals gånger.</li>
                                 <li>Växelströmmen går i slow motion, 0,35 perioder per sekund. Elnätets ström har frekvensen 50 Hz

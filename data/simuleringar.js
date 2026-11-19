@@ -56,6 +56,7 @@ window.SIM_NAMES = {
   'fysik1-arbete-app.html': 'Arbete',
   'fysik1-energiforluster-app.html': 'Förlust av mekanisk energi',
   'fysik1-effekt-verkningsgrad-app.html': 'Effekt och verkningsgrad',
+  'fysik1-trekropparsproblemet-app.html?kurs=fy2': 'Trekropparsproblemet: dubbelstjärnor och utkastade stjärnor',
   'fysik1-effekt-verkningsgrad-app.html?lage=apparater': 'Verkningsgrad: lampor och apparater',
   'fysik1-trissor-app.html': 'Sammansatta system',
   'fysik1-vatsketryck-app.html': [

@@ -454,6 +454,8 @@
               text: 'Dra stjärnorna dit du vill i scenen och välj massorna. Stjärnorna släpps från vila.' },
         ];
         const forsokMed = (id) => FORSOK.find((f) => f.id === id);
+        // Simuleringen hör till både fy1-3.5 och fy2-5.6; från Fysik nivå 2 länkas den med ?kurs=fy2.
+        const FRAN_FY2 = new URLSearchParams(location.search).get('kurs') === 'fy2';
 
         // Flytta systemet så att masscentrum ligger i origo och står still.
         function centrera(m, s) {
@@ -1526,7 +1528,9 @@
                 <div className="min-h-screen px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                     <div className="max-w-6xl mx-auto pt-6">
                         <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
-                            <a href="index.html">Hem</a> / <a href="katalog.html?id=fy1">Fysik nivå 1</a> / Trekropparsproblemet
+                            <a href="index.html">Hem</a> / {FRAN_FY2
+                                ? <React.Fragment><a href="katalog.html?id=fy2">Fysik nivå 2</a> / <a href="katalog.html?id=fy2-5.6">Stjärnbildning</a></React.Fragment>
+                                : <a href="katalog.html?id=fy1">Fysik nivå 1</a>} / Trekropparsproblemet
                         </div>
                         <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Trekropparsproblemet</h1>
                         <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 840 }}>

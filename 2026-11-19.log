@@ -86,3 +86,9 @@
 19:15:22  [svar] Claude avslutade med kod 0
 19:15:22  [svar] VARNING: svarskontrollen gav inget SVAR-besked. Försöker igen vid nästa körning.
 19:15:22  [svar] === Nyhetsjobb: slut ===
+22:15:02  [svar] === Nyhetsjobb: start (2026-11-19) ===
+22:15:04  [svar] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+22:15:22  [svar] Sökningen gav inga träffar — det finns inga trådar med ämne som börjar på "[Nyhet" från de senaste 4 dagarna. Inget att gå vidare med i steg 2.
+22:15:23  [svar] Claude avslutade med kod 0
+22:15:23  [svar] VARNING: svarskontrollen gav inget SVAR-besked. Försöker igen vid nästa körning.
+22:15:23  [svar] === Nyhetsjobb: slut ===

@@ -48,6 +48,7 @@ const HTML_FILES_TO_CHECK = [
     'fysik2-induktion-app.html',
     'fysik2-lenz-lag-app.html',
     'fysik2-magnetfalt-spole-app.html',
+    'fysik2-elektromagnet-app.html',
     'fysik2-stavmagnet-app.html',
     'fysik2-magnetpoler-app.html',
     'fysik2-laddade-partiklar-app.html',

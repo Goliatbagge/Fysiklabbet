@@ -194,6 +194,12 @@ window.SIM_NAMES = {
     { name: 'Attraktion och repulsion', href: 'fysik2-magnetpoler-app.html', desc: 'Två stavmagneter på en labbänk — vänd polerna, släpp magneterna och se när magnetkraften övervinner friktionen. Lika poler repellerar, olika attraherar.',
       kw: ['magnetism','elektromagnetism','magnetkraft','attraktion','repulsion','attrahera','repellera','poler','nordpol','sydpol','nordända','sydända','stavmagnet','kraft på avstånd','newtons tredje lag'] },
   ],
+  'fysik2-magnetfalt-spole-app.html': [
+    { name: 'Magnetfält i spole', desc: 'En solenoid i 3D som du kan rotera fritt. Ändra strömmen, varvtalet och spolens längd och se hur flödestätheten B = μ₀ · n · I/l ändras.',
+      kw: ['elektromagnetism','magnetism','magnetfält','spole','solenoid','slinga','varvtal','lindning','flödestäthet','permeabilitet','tumregeln','homogent fält','spolens längd','3d'] },
+    { name: 'Elektromagneten', href: 'fysik2-elektromagnet-app.html', desc: 'En spole och ett nätaggregat på labbänken. Slå på strömmen och se kompassnålarna svänga in sig, mät flödestätheten, stoppa in en järnkärna och lyft gem, prova växelström och jämför med en stavmagnet.',
+      kw: ['elektromagnetism','magnetism','elektromagnet','spole','magnetfält','kompass','kompassnål','provkompass','fältmätare','flödestäthet','järnkärna','järn','gem','lyftmagnet','växelström','likström','nätaggregat','strömbrytare','stavmagnet','tumregeln','nordända','sydända','nordpol','sydpol','poler','fältlinjer','jordens magnetfält'] },
+  ],
   'fysik2-magnetfalt-app.html': 'Magnetfält runt en rak ledare',
   'fysik2-jordmagnetiska-faltet.html': 'Jordmagnetiska fältet',
   'fysik2-magnetiskt-flode.html': 'Magnetiskt flöde',

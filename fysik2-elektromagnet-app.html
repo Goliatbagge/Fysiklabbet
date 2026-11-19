@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <script src="i18n.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elektromagneten — Fysiklabbet</title>
+    <meta name="description" content="Bygg en elektromagnet på labbänken: en spole, ett nätaggregat och en strömbrytare. Slå på strömmen och se kompassnålarna svänga in sig, mät flödestätheten med en provkompass, stoppa in en järnkärna och lyft gem, byt till växelström och jämför fältet med en stavmagnets. Med ett läge där du själv avgör var nordändan hamnar.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik2-elektromagnet-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Elektromagneten — Fysik nivå 2">
+    <meta property="og:description" content="Slå på strömmen genom en spole och se kompassnålarna svänga in sig. Mät flödestätheten, stoppa in en järnkärna och lyft gem, prova växelström och jämför fältet med en stavmagnets.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik2-elektromagnet-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Elektromagneten — Fysik nivå 2">
+    <meta name="twitter:description" content="Slå på strömmen genom en spole och se kompassnålarna svänga in sig. Mät flödestätheten, stoppa in en järnkärna och lyft gem, prova växelström och jämför fältet med en stavmagnets.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <style>
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 19px; white-space: nowrap; }
+        .fk-grupp { display: inline-flex; align-items: center; gap: 0.5rem; flex-wrap: nowrap; }
+        @media (max-width: 600px) {
+            .formula-card .fnum { font-size: 15px; }
+            .fk-grupp { gap: 0.4rem; }
+        }
+
+        .scene-wrap {
+            position: relative; width: 100%; height: 580px;
+            border-radius: 12px; overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none; -webkit-user-select: none;
+            background: #f3eee4;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        .scene-wrap > canvas { display: block; touch-action: none; }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 236px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+            padding-right: 22px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; padding-right: 0; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles label.av { opacity: 0.45; cursor: not-allowed; }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease; font-size: 14px;
+        }
+        .btn-toggle:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle:disabled { opacity: 0.45; cursor: not-allowed; }
+        .btn-prim { background: var(--lab-accent, #c8324a); color: #fff; border-color: var(--lab-accent, #c8324a); }
+        .btn-prim:hover:not(:disabled) { filter: brightness(1.08); }
+        .btn-pa { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; }
+        .btn-pa .led { width: 9px; height: 9px; border-radius: 50%; background: #9aa0a8; flex-shrink: 0; }
+        .btn-pa.on .led { background: #2f9e57; box-shadow: 0 0 0 3px rgba(47,158,87,0.22); }
+
+        .seg { display: grid; gap: 1px; border-radius: 9px; overflow: hidden;
+               border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+               background: var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .seg button {
+            padding: 8px 6px; font-weight: 600; cursor: pointer; font-size: 13px;
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620); border: none;
+        }
+        .seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+        .seg button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        .reg { display: flex; flex-direction: column; gap: 4px; }
+        .reg-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
+                   font-size: 13.5px; color: var(--lab-ink-soft, #3a4151); }
+        .reg-top b { font-family: 'JetBrains Mono', monospace; font-weight: 600; color: var(--lab-ink); white-space: nowrap; }
+        .reg input[type="range"] { width: 100%; cursor: pointer; }
+
+        .forsok { display: flex; flex-direction: column; gap: 6px; }
+        .forsok button {
+            text-align: left; padding: 7px 11px; border-radius: 8px; cursor: pointer;
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            font-weight: 600; font-size: 13.5px; transition: all 0.15s ease;
+        }
+        .forsok button:hover { border-color: var(--lab-accent, #c8324a); }
+        .forsok button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); border-color: var(--lab-ink, #0f1620); }
+        .anm { font-size: 12.5px; line-height: 1.5; color: var(--lab-ink-soft, #3a4151); }
+        .fraga { font-size: 14.5px; font-weight: 600; color: var(--lab-ink); line-height: 1.4; }
+        .svar-ok { border-left: 4px solid #2f8f4e; padding-left: 10px; }
+        .svar-fel { border-left: 4px solid #c8324a; padding-left: 10px; }
+        .poang { display: flex; gap: 14px; font-size: 12.5px; color: var(--lab-ink-muted, #5a6170); }
+        .poang b { color: var(--lab-ink); font-size: 15px; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2b">Nivå 2b</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3b">Nivå 1b</a>
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // ── Konstanter ──────────────────────────────────────────────────
+        // Spolen har längden l = 10 cm och radien 1,6 cm (radie/längd 0,16),
+        // så att fältet mitt i den ligger nära värdet ur formeln för en lång
+        // rak spole, B = μ0 · n · I / l (genomgången fy2-3.3).
+        const MU0 = 4 * Math.PI * 1e-7;
+        const L_M = 0.10;            // spolens längd (m)
+        const A_N = 0.16;            // radie / längd
+        const KARNA = 10;            // järnkärnans förstärkning (öppen stavkärna, l/d ≈ 3)
+        const B_JORD = 1.6e-5;       // jordfältets vågräta del i Sverige (T), mot norr
+        const AC_F = 0.35;           // växelströmmens frekvens i simuleringen (Hz, slow motion)
+        const B_GEM = 2.5e-3;        // flödestätheten som krävs för att ett gem ska glida (T)
+
+        const COL = {
+            falt: '#c0392b',         // fältlinjer
+            npol: '#c0392b',         // nordända röd
+            spol: '#f6f3ec',         // sydända vit
+            strom: '#1f5fbf',        // ström blå
+            ink: '#30363f',
+            nal: '#5d646e',
+            koppar: '#b8692f',
+        };
+
+        const fmt = (v, d) => {
+            const s = v.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            const [ip, fr] = s.split('.');
+            const g = ip.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+            return fr !== undefined ? g + ',' + fr : g;
+        };
+        // Flödestäthet i mT med rimligt antal siffror
+        const fmtB = (T) => {
+            const v = Math.abs(T) * 1000;
+            if (v >= 10) return fmt(v, 0);
+            if (v >= 1) return fmt(v, 1);
+            if (v >= 0.1) return fmt(v, 2);
+            return fmt(v, 3);
+        };
+
+        // ── Fältmodell ──────────────────────────────────────────────────
+        // Spolen är NM cirkulära strömslingor utlagda längs spolens längd.
+        // Varje slingas fält räknas exakt (elliptiska integraler via AGM), och
+        // summan läggs i en tabell över (|z|, ρ) i enheter av spolens längd.
+        // Fältet anges i enheter av μ0 · n · I / l, så att en oändligt lång
+        // spole skulle ge exakt 1 inuti. En stavmagnet med samma form och
+        // magnetisering har PRECIS samma B-fält, och därför används samma
+        // tabell i jämförelseläget.
+        const NM = 32, TH = 0.025, ZM = 5, TN = Math.round(ZM / TH) + 1;
+        const EPS = Math.pow(0.5 / NM, 2);
+
+        const ellipKE = (m) => {
+            let a = 1, b = Math.sqrt(Math.max(0, 1 - m)), c = Math.sqrt(m);
+            let pow = 0.5, sum = pow * c * c;
+            for (let i = 0; i < 14; i++) {
+                const an = (a + b) / 2, bn = Math.sqrt(a * b);
+                c = (a - b) / 2; a = an; b = bn;
+                pow *= 2; sum += pow * c * c;
+                if (Math.abs(c) < 1e-12) break;
+            }
+            const K = Math.PI / (2 * a);
+            return [K, K * (1 - sum)];
+        };
+        const buildTable = () => {
+            const bz = new Float32Array(TN * TN), br = new Float32Array(TN * TN);
+            const a = A_N, I = 1 / NM;
+            const zs = [];
+            for (let k = 0; k < NM; k++) zs.push(-0.5 + (k + 0.5) / NM);
+            for (let i = 0; i < TN; i++) {
+                const z = i * TH;
+                for (let j = 0; j < TN; j++) {
+                    const rho = j * TH;
+                    let sz = 0, sr = 0;
+                    for (let k = 0; k < NM; k++) {
+                        const dz = z - zs[k];
+                        const D1 = (a + rho) * (a + rho) + dz * dz + EPS;
+                        const D2 = (a - rho) * (a - rho) + dz * dz + EPS;
+                        const [K, E] = ellipKE(4 * a * rho / D1);
+                        const sq = Math.sqrt(D1);
+                        sz += I / (2 * Math.PI) / sq * (K + (a * a - rho * rho - dz * dz) / D2 * E);
+                        if (rho > 1e-6)
+                            sr += I / (2 * Math.PI) * dz / (rho * sq) * (-K + (a * a + rho * rho + dz * dz) / D2 * E);
+                    }
+                    bz[i * TN + j] = sz; br[i * TN + j] = sr;
+                }
+            }
+            return { bz, br };
+        };
+        let TAB = null;
+        // Fält i punkten (z, r) i spolens enheter: z längs axeln, r tvärs
+        // (positivt nedåt i bilden). Ger [Bx, By] i bildens riktningar för en
+        // spole vars fält inuti pekar åt höger.
+        const fieldNorm = (z, r) => {
+            const az = Math.abs(z), ar = Math.abs(r);
+            const sz = z < 0 ? -1 : 1, sr = r < 0 ? -1 : 1;
+            if (az < ZM - TH && ar < ZM - TH) {
+                const fx = az / TH, fy = ar / TH;
+                const i = fx | 0, j = fy | 0, u = fx - i, v = fy - j;
+                const k = i * TN + j;
+                const T = TAB;
+                const bz = (T.bz[k] * (1 - v) + T.bz[k + 1] * v) * (1 - u) + (T.bz[k + TN] * (1 - v) + T.bz[k + TN + 1] * v) * u;
+                const br = (T.br[k] * (1 - v) + T.br[k + 1] * v) * (1 - u) + (T.br[k + TN] * (1 - v) + T.br[k + TN + 1] * v) * u;
+                return [bz, br * sr * sz];
+            }
+            // långt bort: dipolfält med spolens magnetiska moment
+            const R2 = z * z + r * r, R = Math.sqrt(R2);
+            const c = Math.PI * A_N * A_N / (4 * Math.PI * R2 * R);
+            const mr = z / R;
+            return [c * (3 * mr * z / R - 1), c * (3 * mr * r / R)];
+        };
+
+        const mulberry = (seed) => () => {
+            seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+            let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+            t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+            return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        };
+
+        // ── Formelkort ──────────────────────────────────────────────────
+        const Vbl = ({ label, under, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl" style={under ? { visibility: 'hidden' } : {}} aria-hidden={under ? 'true' : undefined}>{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" style={under ? {} : { visibility: 'hidden' }} aria-hidden={under ? undefined : 'true'}>{label}</span>
+            </div>
+        );
+        const LFrac = ({ topLbl, top, botLbl, bot }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.15 }}>
+                <span className="flbl brak-etikett">{topLbl}</span>
+                <span className="fnum" style={{ padding: '0 3px 3px' }}>{top}</span>
+                <span className="fnum" style={{ padding: '3px 3px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bot}</span>
+                <span className="flbl brak-etikett">{botLbl}</span>
+            </div>
+        );
+        const Frac = ({ top, bot }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.15 }}>
+                <span className="fnum" style={{ padding: '0 3px 3px' }}>{top}</span>
+                <span className="fnum" style={{ padding: '3px 3px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bot}</span>
+            </div>
+        );
+        const FormulaCard = ({ n, I, core, ac }) => {
+            const B = MU0 * n * I / L_M;
+            return (
+                <div className="formula-card glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-4 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
+                    <div className="fk-grupp">
+                        <Vbl label="Flödestäthet"><em>B</em></Vbl>
+                        <span className="fnum">=</span>
+                        <Vbl label="Permeabilitet" under><em>μ</em><sub style={{ fontSize: 12 }}>0</sub></Vbl>
+                        <span className="fnum">·</span>
+                        <LFrac topLbl="Varv · ström" top={<React.Fragment><em>n</em> · <em>I</em></React.Fragment>}
+                               botLbl="Längd" bot={<em>l</em>} />
+                    </div>
+                    <div className="fk-grupp">
+                        <span className="fnum">=</span>
+                        <span className="fnum">4<em>π</em> · 10<sup style={{ fontSize: 12 }}>−7</sup> ·</span>
+                        <Frac top={<React.Fragment>{fmt(n, 0)} · {fmt(I, 1)}</React.Fragment>} bot={fmt(L_M, 2)} />
+                        <span className="fnum">{'≈'} {fmtB(B)} mT</span>
+                    </div>
+                    <div style={{ color: 'var(--lab-ink-muted)', fontSize: 12.5, lineHeight: 1.45, maxWidth: 300 }}>
+                        <em>μ</em><sub>0</sub> = 4<em>π</em> · 10<sup>−7</sup> T·m/A. Fältet inuti spolen, utan järnkärna.
+                        {core === 'jarn' && <React.Fragment> Med järnkärnan blir det ungefär tio gånger starkare, cirka {fmtB(B * KARNA)} mT.</React.Fragment>}
+                        {ac && <React.Fragment> Vid växelström är <em>I</em> strömmens toppvärde.</React.Fragment>}
+                    </div>
+                </div>
+            );
+        };
+
+        const FORSOK = [
+            { id: 'start', namn: 'Slå på strömmen',
+              set: { on: true, ac: false, I: 1.5, n: 600, core: 'luft', kalla: 'spole' },
+              text: 'Strömmen går genom spolen, och kompassnålarna nära den svänger in sig i ett fält som ser ut precis som en stavmagnets. Långt bort pekar nålarna fortfarande mot norr: där är jordens magnetfält starkare än spolens.' },
+            { id: 'varv', namn: 'Fler varv, starkare fält',
+              set: { on: true, ac: false, I: 1.5, n: 300, core: 'luft', kalla: 'spole' },
+              text: 'Ställ provkompassen mitt i spolen och läs av <em>B</em>. Dra sedan varvtalet från 300 till 600: flödestätheten fördubblas. Samma sak händer om du fördubblar strömmen, eftersom <em>B</em> är proportionell mot både <em>n</em> och <em>I</em>.' },
+            { id: 'jarn', namn: 'Järnkärnan lyfter gemen',
+              set: { on: true, ac: false, I: 1.5, n: 600, core: 'luft', kalla: 'spole', gem: true },
+              text: 'Utan järnkärna är fältet för svagt för att rubba gemen. Stoppa in järnkärnan: fältet blir ungefär tio gånger starkare, och de närmaste gemen dras till spolens ände. Öka strömmen så hämtar magneten gem längre bort.' },
+            { id: 'stav', namn: 'Elektromagnet eller stavmagnet?',
+              set: { on: true, ac: false, I: 1.5, n: 600, core: 'luft', kalla: 'stav' },
+              text: 'En stavmagnet med samma form har exakt samma fält som spolen. Växla mellan dem och se att varken fältlinjerna eller kompassnålarna rör sig. Skillnaden är att elektromagnetens fält går att slå av, göra starkare och vända.' },
+            { id: 'ac', namn: 'Växelström',
+              set: { on: true, ac: true, I: 2, n: 600, core: 'jarn', kalla: 'spole', gem: true },
+              text: 'Strömmen byter riktning hela tiden, och då byter nordändan och sydändan plats. Kompassnålarna svänger fram och tillbaka. Gemen dras ändå till spolen, eftersom järn dras till en magnet oavsett vilken pol som vetter mot det. Här går det i slow motion: elnätets ström byter riktning 100 gånger per sekund.' },
+        ];
+
+        // ── Huvudapp ────────────────────────────────────────────────────
+        const App = () => {
+            const q = new URLSearchParams(location.search);
+            const [on, setOn] = useState(q.get('av') !== '1');
+            const [ac, setAc] = useState(q.get('ac') === '1');
+            const [I, setI] = useState(isFinite(parseFloat(q.get('i'))) ? Math.min(3, Math.max(0, parseFloat(q.get('i')))) : 1.5);
+            const [n, setN] = useState(isFinite(parseFloat(q.get('n'))) ? Math.min(1000, Math.max(100, parseFloat(q.get('n')))) : 600);
+            const [core, setCore] = useState(q.get('karna') === 'jarn' ? 'jarn' : 'luft');
+            const [kalla, setKalla] = useState(q.get('kalla') === 'stav' ? 'stav' : 'spole');
+            const [pol, setPol] = useState(q.get('vand') === '1' ? -1 : 1);
+            const [wind, setWind] = useState(1);
+            const [show, setShow] = useState({
+                linjer: true, kompass: true, strom: true, poler: true,
+                snitt: q.get('snitt') === '1', tumregel: q.get('tumregel') === '1', prov: true, gem: true,
+            });
+            const [lage, setLage] = useState(q.get('lage') === 'gissa' ? 'gissa' : 'fri');
+            const [gissa, setGissa] = useState({ fas: 'fraga', pol: 1, wind: 1, svar: null });
+            const [poang, setPoang] = useState({ ratt: 0, totalt: 0, svit: 0 });
+            const [forsok, setForsok] = useState('start');
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [togglesOpen, setTogglesOpen] = useState(true);
+            const [probeB, setProbeB] = useState(0);
+            const [gemNyckel, setGemNyckel] = useState(0);
+
+            const sceneWrapRef = useRef(null);
+            const canvasRef = useRef(null);
+            const stRef = useRef(null);
+            const pRef = useRef({});
+            const svaraRef = useRef(null);
+
+            const gissar = lage === 'gissa';
+            const effPol = gissar ? gissa.pol : pol;
+            const effWind = gissar ? gissa.wind : wind;
+            const effOn = gissar ? gissa.fas === 'svar' : on;
+            const effAc = gissar ? false : ac;
+            const effKalla = gissar ? 'spole' : kalla;
+            pRef.current = { on: effOn, ac: effAc, I: gissar ? 1.5 : I, n: gissar ? 600 : n, core: gissar ? 'luft' : core,
+                             kalla: effKalla, pol: effPol, wind: effWind, show, gissar, fas: gissa.fas, setOn };
+
+            // ── Scenen ──────────────────────────────────────────────────
+            useEffect(() => {
+                const wrap = sceneWrapRef.current;
+                const canvas = canvasRef.current;
+                if (!wrap || !canvas) return;
+                const ctx = canvas.getContext('2d');
+                if (!TAB) TAB = buildTable();
+
+                const st = {
+                    W: 0, H: 0, dpr: 1, pw: 0, ph: 0, placed: false,
+                    coil: { x: 0, y: 0 }, Lp: 200, ap: 32,
+                    probe: { x: 0, y: 0, ang: -Math.PI / 2, w: 0 },
+                    needles: [], clips: [],
+                    lines: [], arrows: [], linesDirty: true,
+                    drag: null, t: 0, phase: 0, lastInfo: 0, hover: null,
+                };
+                stRef.current = st;
+
+                const sceneH = (w) => {
+                    const narrow = window.matchMedia('(max-width: 600px)').matches;
+                    const fs = document.fullscreenElement === wrap || document.webkitFullscreenElement === wrap;
+                    if (fs) return narrow ? Math.round(window.innerHeight * 0.56) : wrap.clientHeight;
+                    if (narrow) return Math.min(Math.round(w * 1.05), 470);
+                    return wrap.clientHeight;
+                };
+                const geom = () => {
+                    st.Lp = Math.round(Math.min(Math.max(st.W * 0.30, 150), 250));
+                    st.ap = st.Lp * A_N;
+                    st.sc = st.Lp / 220;
+                };
+                const placeClips = () => {
+                    const c = st.coil, L = st.Lp;
+                    const rel = [[0.80, 0.02, 0.4], [0.92, -0.19, -0.5], [1.05, 0.17, 1.2], [1.18, -0.04, 2.3], [1.33, 0.21, -1.1]];
+                    st.clips = rel.map(([dx, dy, a], i) => ({
+                        x: c.x + dx * L, y: c.y + dy * L, ang: a, vx: 0, vy: 0, stuck: null, i,
+                    }));
+                };
+                const resize = () => {
+                    const w = wrap.clientWidth, h = sceneH(w);
+                    if (!w || !h) return;
+                    if (w === st.W && h === st.H) return;
+                    st.dpr = Math.min(window.devicePixelRatio || 1, 2);
+                    canvas.width = Math.round(w * st.dpr); canvas.height = Math.round(h * st.dpr);
+                    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+                    if (st.placed) {
+                        const fx = w / st.pw, fy = h / st.ph;
+                        st.coil.x *= fx; st.coil.y *= fy;
+                        st.probe.x *= fx; st.probe.y *= fy;
+                        st.clips.forEach((g) => { g.x *= fx; g.y *= fy; });
+                    }
+                    st.pw = w; st.ph = h; st.W = w; st.H = h;
+                    geom();
+                    if (!st.placed) {
+                        st.coil.x = w * (w < 520 ? 0.42 : 0.40); st.coil.y = h * (w < 520 ? 0.40 : 0.47);
+                        if (w < 520) { st.probe.x = w * 0.80; st.probe.y = h * 0.74; }
+                        else { st.probe.x = st.coil.x - st.Lp * 0.5 - st.Lp * 0.36; st.probe.y = st.coil.y - st.ap * 2.6; }
+                        placeClips();
+                        st.placed = true;
+                    }
+                    clampCoil();
+                    st.probe.x = Math.min(Math.max(st.probe.x, 30), w - 30);
+                    st.probe.y = Math.min(Math.max(st.probe.y, 30), h - 30);
+                    buildNeedles();
+                    st.linesDirty = true;
+                };
+                const clampCoil = () => {
+                    const mx = st.Lp / 2 + 30, my = st.ap + 34;
+                    st.coil.x = Math.min(Math.max(st.coil.x, mx), st.W - mx);
+                    st.coil.y = Math.min(Math.max(st.coil.y, my), st.H - my - 40);
+                };
+                const buildNeedles = () => {
+                    st.needles = [];
+                    const gap = st.W < 520 ? 40 : 50;
+                    const nx = Math.floor(st.W / gap), ny = Math.floor(st.H / gap);
+                    const ox = (st.W - (nx - 1) * gap) / 2, oy = (st.H - (ny - 1) * gap) / 2;
+                    for (let i = 0; i < nx; i++)
+                        for (let j = 0; j < ny; j++)
+                            st.needles.push({ x: ox + i * gap, y: oy + j * gap, ang: -Math.PI / 2, w: 0 });
+                };
+
+                // nätaggregatets placering (nere till vänster)
+                const supply = () => {
+                    const s = st.W < 520 ? 0.74 : 1;
+                    const w = 186 * s, h = 98 * s;
+                    const x = 14, y = st.H - h - 14;
+                    return {
+                        s, x, y, w, h,
+                        disp: { x: x + 12 * s, y: y + 12 * s, w: 132 * s, h: 34 * s },
+                        sw: { x: x + 14 * s, y: y + 58 * s, w: 54 * s, h: 28 * s },
+                        plus: { x: x + 118 * s, y: y + 72 * s },
+                        minus: { x: x + 156 * s, y: y + 72 * s },
+                        led: { x: x + 166 * s, y: y + 29 * s },
+                    };
+                };
+                const coilEnds = () => {
+                    const c = st.coil, L = st.Lp;
+                    const fw = Math.max(6, L * 0.035);
+                    const p = pRef.current;
+                    const ext = p.core === 'jarn' && p.kalla === 'spole' ? L * 0.09 : (p.kalla === 'stav' ? 0 : fw);
+                    return { fw, ext, left: c.x - L / 2, right: c.x + L / 2, outL: c.x - L / 2 - ext, outR: c.x + L / 2 + ext };
+                };
+                const leads = () => {
+                    const c = st.coil, L = st.Lp, ap = st.ap;
+                    return { L: { x: c.x - L / 2 + 10, y: c.y + ap }, R: { x: c.x + L / 2 - 10, y: c.y + ap } };
+                };
+
+                // fält i bildpunkt, i tesla, för given skalfaktor
+                const coilB = (x, y, scale) => {
+                    const [bx, by] = fieldNorm((x - st.coil.x) / st.Lp, (y - st.coil.y) / st.Lp);
+                    return [bx * scale, by * scale];
+                };
+
+                // ── fältlinjer: slutna kurvor genom spolens inre ──
+                const traceFrom = (x0, y0, sgn) => {
+                    const pts = [[x0, y0]];
+                    let x = x0, y = y0, len = 0;
+                    const dir = (px, py) => {
+                        const [bx, by] = fieldNorm((px - st.coil.x) / st.Lp, (py - st.coil.y) / st.Lp);
+                        const nn = Math.hypot(bx, by) || 1;
+                        return [sgn * bx / nn, sgn * by / nn];
+                    };
+                    const M = 90, ds = 3.2;
+                    let closed = false;
+                    for (let i = 0; i < 2600; i++) {
+                        const k1 = dir(x, y);
+                        const k2 = dir(x + 0.5 * ds * k1[0], y + 0.5 * ds * k1[1]);
+                        const k3 = dir(x + 0.5 * ds * k2[0], y + 0.5 * ds * k2[1]);
+                        const k4 = dir(x + ds * k3[0], y + ds * k3[1]);
+                        const nx = x + ds * (k1[0] + 2 * k2[0] + 2 * k3[0] + k4[0]) / 6;
+                        const ny = y + ds * (k1[1] + 2 * k2[1] + 2 * k3[1] + k4[1]) / 6;
+                        len += ds;
+                        // tillbaka genom mittplanet, inne i spolen, på samma sida → sluten
+                        if (len > 60 && (x - x0) * (nx - x0) <= 0 && Math.abs(ny - y0) < 6) {
+                            pts.push([x0, y0]); closed = true; break;
+                        }
+                        x = nx; y = ny;
+                        pts.push([x, y]);
+                        if (x < -M || x > st.W + M || y < -M || y > st.H + M) break;
+                    }
+                    return { pts, closed };
+                };
+                const rebuildLines = () => {
+                    st.lines = []; st.arrows = [];
+                    const c = st.coil, ap = st.ap;
+                    const K = 5;
+                    const seeds = [0];
+                    for (let i = 0; i < K; i++) { const r = ap * (i + 0.5) / K; seeds.push(-r, r); }
+                    for (const r of seeds) {
+                        const x0 = c.x, y0 = c.y + r;
+                        const f = traceFrom(x0, y0, 1);
+                        let pts = f.pts;
+                        if (!f.closed) {
+                            const b = traceFrom(x0, y0, -1).pts;
+                            pts = b.slice(1).reverse().concat(pts);
+                        }
+                        st.lines.push(pts);
+                        // pilspetsar mitt på linjen: där den korsar spolens mittplan
+                        for (let i = 1; i < pts.length; i++) {
+                            const a0 = pts[i - 1][0] - c.x, a1 = pts[i][0] - c.x;
+                            if (a0 * a1 <= 0 && a0 !== a1) {
+                                const yy = pts[i][1];
+                                const inside = Math.abs(yy - c.y) < ap;
+                                if (yy < -10 || yy > st.H + 10) continue;
+                                // inuti bara en pil per linje (vid fröet)
+                                if (inside && Math.abs(yy - y0) > 4) continue;
+                                const ang = Math.atan2(pts[i][1] - pts[i - 1][1], pts[i][0] - pts[i - 1][0]);
+                                if (!st.arrows.some((q) => Math.hypot(q.x - pts[i][0], q.y - yy) < 8))
+                                    st.arrows.push({ x: c.x, y: yy, ang, inside });
+                            }
+                        }
+                    }
+                    st.linesDirty = false;
+                };
+
+                // ── Pekare ──
+                const pos = (e) => { const r = canvas.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+                const hitCoil = (x, y) => {
+                    const e = coilEnds();
+                    return x > e.outL - 6 && x < e.outR + 6 && Math.abs(y - st.coil.y) < st.ap + 12;
+                };
+                const hitSwitch = (x, y) => {
+                    const S = supply().sw;
+                    return x > S.x - 6 && x < S.x + S.w + 6 && y > S.y - 6 && y < S.y + S.h + 6;
+                };
+                const onDown = (e) => {
+                    const [x, y] = pos(e);
+                    const p = pRef.current;
+                    if (p.gissar && p.fas === 'fraga') {
+                        if (hitCoil(x, y)) { svaraRef.current && svaraRef.current(x < st.coil.x ? 'v' : 'h'); return; }
+                    }
+                    if (p.show.prov && Math.hypot(x - st.probe.x, y - st.probe.y) < 30) {
+                        st.drag = { what: 'probe', dx: st.probe.x - x, dy: st.probe.y - y };
+                    } else if (!p.gissar && p.show.gem && p.kalla === 'spole' &&
+                               st.clips.some((g) => Math.hypot(x - g.x, y - g.y) < 16 * st.sc + 4)) {
+                        let best = null, bd = 1e9;
+                        st.clips.forEach((g) => { const d = Math.hypot(x - g.x, y - g.y); if (d < bd) { bd = d; best = g; } });
+                        best.stuck = null; best.vx = 0; best.vy = 0; best.held = true;
+                        st.drag = { what: 'clip', g: best, dx: best.x - x, dy: best.y - y };
+                    } else if (!p.gissar && p.kalla === 'spole' && hitSwitch(x, y)) {
+                        p.setOn((v) => !v);
+                        return;
+                    } else if (hitCoil(x, y)) {
+                        st.drag = { what: 'coil', dx: st.coil.x - x, dy: st.coil.y - y };
+                    }
+                    if (st.drag) { canvas.setPointerCapture(e.pointerId); e.preventDefault(); }
+                };
+                const onMove = (e) => {
+                    const [x, y] = pos(e);
+                    if (!st.drag) {
+                        const p = pRef.current;
+                        let cur = 'default';
+                        if (p.gissar && p.fas === 'fraga' && hitCoil(x, y)) { cur = 'pointer'; st.hover = x < st.coil.x ? 'v' : 'h'; }
+                        else {
+                            st.hover = null;
+                            if ((p.show.prov && Math.hypot(x - st.probe.x, y - st.probe.y) < 30) || hitCoil(x, y)) cur = 'grab';
+                            else if (!p.gissar && p.kalla === 'spole' && hitSwitch(x, y)) cur = 'pointer';
+                        }
+                        canvas.style.cursor = cur;
+                        return;
+                    }
+                    if (st.drag.what === 'probe') {
+                        st.probe.x = Math.min(Math.max(x + st.drag.dx, 30), st.W - 30);
+                        st.probe.y = Math.min(Math.max(y + st.drag.dy, 30), st.H - 30);
+                    } else if (st.drag.what === 'clip') {
+                        const g = st.drag.g;
+                        g.x = Math.min(Math.max(x + st.drag.dx, 12), st.W - 12);
+                        g.y = Math.min(Math.max(y + st.drag.dy, 12), st.H - 12);
+                    } else {
+                        const ox = st.coil.x, oy = st.coil.y;
+                        st.coil.x = x + st.drag.dx; st.coil.y = y + st.drag.dy;
+                        clampCoil();
+                        const dx = st.coil.x - ox, dy = st.coil.y - oy;
+                        st.clips.forEach((g) => { if (g.stuck) { g.x += dx; g.y += dy; } });
+                        st.linesDirty = true;
+                    }
+                };
+                const onUp = (e) => {
+                    if (st.drag && st.drag.what === 'clip') st.drag.g.held = false;
+                    st.drag = null;
+                    try { canvas.releasePointerCapture(e.pointerId); } catch (err) {}
+                };
+                const onLeave = () => { st.hover = null; };
+                canvas.addEventListener('pointerdown', onDown);
+                canvas.addEventListener('pointermove', onMove);
+                canvas.addEventListener('pointerup', onUp);
+                canvas.addEventListener('pointercancel', onUp);
+                canvas.addEventListener('pointerleave', onLeave);
+                st.resetClips = () => { placeClips(); };
+
+                const ro = new ResizeObserver(resize);
+                ro.observe(wrap);
+                resize();
+
+                // ── Ritverktyg ──
+                const rr = (x, y, w, h, r) => {
+                    ctx.beginPath();
+                    if (!r) { ctx.rect(x, y, w, h); return; }
+                    ctx.moveTo(x + r, y);
+                    ctx.arcTo(x + w, y, x + w, y + h, r);
+                    ctx.arcTo(x + w, y + h, x, y + h, r);
+                    ctx.arcTo(x, y + h, x, y, r);
+                    ctx.arcTo(x, y, x + w, y, r);
+                    ctx.closePath();
+                };
+                const drawPaper = () => {
+                    const g = ctx.createLinearGradient(0, 0, 0, st.H);
+                    g.addColorStop(0, '#f7f2e8'); g.addColorStop(1, '#ece3d2');
+                    ctx.fillStyle = g; ctx.fillRect(0, 0, st.W, st.H);
+                    ctx.strokeStyle = 'rgba(96,130,175,0.16)'; ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    for (let x = 25; x < st.W; x += 25) { ctx.moveTo(x + 0.5, 0); ctx.lineTo(x + 0.5, st.H); }
+                    for (let y = 25; y < st.H; y += 25) { ctx.moveTo(0, y + 0.5); ctx.lineTo(st.W, y + 0.5); }
+                    ctx.stroke();
+                };
+                const needleShape = (r) => {
+                    ctx.beginPath();
+                    ctx.moveTo(r, 0); ctx.lineTo(0, -r * 0.26); ctx.lineTo(0, r * 0.26);
+                    ctx.closePath();
+                };
+                const drawCompass = (x, y, ang, r, bezel, alpha) => {
+                    ctx.save();
+                    ctx.translate(x, y);
+                    ctx.globalAlpha = alpha == null ? 1 : alpha;
+                    ctx.beginPath(); ctx.arc(0, 0, r, 0, 2 * Math.PI);
+                    ctx.fillStyle = bezel ? '#fdfaf3' : 'rgba(253,250,243,0.7)'; ctx.fill();
+                    ctx.lineWidth = bezel ? 2.2 : 1;
+                    ctx.strokeStyle = bezel ? '#5d646e' : 'rgba(93,100,110,0.5)'; ctx.stroke();
+                    if (bezel) {
+                        ctx.strokeStyle = 'rgba(93,100,110,0.5)'; ctx.lineWidth = 1.4;
+                        for (let k = 0; k < 8; k++) {
+                            const t = k * Math.PI / 4, l = k % 2 === 0 ? 5 : 3;
+                            ctx.beginPath();
+                            ctx.moveTo(Math.cos(t) * (r - 2.5), Math.sin(t) * (r - 2.5));
+                            ctx.lineTo(Math.cos(t) * (r - 2.5 - l), Math.sin(t) * (r - 2.5 - l));
+                            ctx.stroke();
+                        }
+                    }
+                    ctx.rotate(ang);
+                    ctx.fillStyle = COL.npol; needleShape(r * 0.82); ctx.fill();
+                    ctx.rotate(Math.PI);
+                    ctx.fillStyle = COL.nal; needleShape(r * 0.82); ctx.fill();
+                    ctx.rotate(-Math.PI);
+                    ctx.beginPath(); ctx.arc(0, 0, bezel ? 2.6 : 1.6, 0, 2 * Math.PI);
+                    ctx.fillStyle = '#30363f'; ctx.fill();
+                    ctx.restore();
+                };
+                const chevron = (x, y, ang, s, color) => {
+                    ctx.save();
+                    ctx.translate(x, y); ctx.rotate(ang);
+                    ctx.fillStyle = color;
+                    ctx.beginPath();
+                    ctx.moveTo(4.5 * s, 0); ctx.lineTo(-3.5 * s, -3.6 * s); ctx.lineTo(-1.6 * s, 0); ctx.lineTo(-3.5 * s, 3.6 * s);
+                    ctx.closePath(); ctx.fill();
+                    ctx.restore();
+                };
+                const bez = (P0, P1, P2, P3, N) => {
+                    const pts = [];
+                    for (let i = 0; i <= N; i++) {
+                        const t = i / N, u = 1 - t;
+                        pts.push([u * u * u * P0.x + 3 * u * u * t * P1.x + 3 * u * t * t * P2.x + t * t * t * P3.x,
+                                  u * u * u * P0.y + 3 * u * u * t * P1.y + 3 * u * t * t * P2.y + t * t * t * P3.y]);
+                    }
+                    return pts;
+                };
+                const wirePath = (T, P) => {
+                    const dy = T.y - P.y;
+                    return bez(T, { x: T.x, y: T.y - Math.max(30, dy * 0.45) }, { x: P.x, y: P.y + Math.max(40, dy * 0.55) }, P, 40);
+                };
+                const strokePts = (pts) => {
+                    ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]);
+                    for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+                    ctx.stroke();
+                };
+                // pilar längs en polylinje, förskjutna med fasen
+                const flowAlong = (pts, phase, dir, s) => {
+                    const seg = []; let tot = 0;
+                    for (let i = 1; i < pts.length; i++) {
+                        const l = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]);
+                        seg.push(l); tot += l;
+                    }
+                    const gap = 30;
+                    let o = ((phase * dir) % gap + gap) % gap;
+                    for (let d = o + 8; d < tot - 8; d += gap) {
+                        let acc = 0, i = 0;
+                        while (i < seg.length && acc + seg[i] < d) { acc += seg[i]; i++; }
+                        if (i >= seg.length) break;
+                        const t = (d - acc) / seg[i];
+                        const a = pts[i], b = pts[i + 1];
+                        let ang = Math.atan2(b[1] - a[1], b[0] - a[0]);
+                        if (dir < 0) ang += Math.PI;
+                        chevron(a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, ang, s, COL.strom);
+                    }
+                };
+
+                const drawSupply = (p, I, iNow) => {
+                    const S = supply(), s = S.s;
+                    ctx.save();
+                    // skugga + låda
+                    ctx.fillStyle = 'rgba(15,22,32,0.16)'; rr(S.x + 3, S.y + 5, S.w, S.h, 10 * s); ctx.fill();
+                    const g = ctx.createLinearGradient(0, S.y, 0, S.y + S.h);
+                    g.addColorStop(0, '#4a5462'); g.addColorStop(1, '#323a46');
+                    ctx.fillStyle = g; rr(S.x, S.y, S.w, S.h, 10 * s); ctx.fill();
+                    ctx.strokeStyle = '#1f252e'; ctx.lineWidth = 1.2; ctx.stroke();
+                    // display
+                    const D = S.disp;
+                    ctx.fillStyle = '#171c22'; rr(D.x, D.y, D.w, D.h, 4 * s); ctx.fill();
+                    ctx.fillStyle = p.on ? '#ffc76a' : '#5c5446';
+                    ctx.font = `600 ${Math.round(17 * s)}px 'JetBrains Mono', monospace`;
+                    ctx.textBaseline = 'middle'; ctx.textAlign = 'left';
+                    const shown = p.on ? (p.ac ? Math.abs(iNow) : I) : 0;
+                    ctx.fillText(fmt(shown, 2) + ' A', D.x + 8 * s, D.y + D.h / 2 + 1);
+                    ctx.font = `600 ${Math.round(10 * s)}px Poppins, sans-serif`;
+                    ctx.textAlign = 'right';
+                    ctx.fillStyle = p.on ? '#ffc76a' : '#5c5446';
+                    ctx.fillText(p.ac ? 'AC' : 'DC', D.x + D.w - 7 * s, D.y + D.h / 2 + 1);
+                    // lampa
+                    ctx.beginPath(); ctx.arc(S.led.x, S.led.y, 5 * s, 0, 2 * Math.PI);
+                    ctx.fillStyle = p.on ? '#3ccf6e' : '#26301f'; ctx.fill();
+                    if (p.on) { ctx.strokeStyle = 'rgba(60,207,110,0.35)'; ctx.lineWidth = 4 * s; ctx.stroke(); }
+                    // strömbrytare (vippa)
+                    const W2 = S.sw;
+                    ctx.fillStyle = '#1b2027'; rr(W2.x, W2.y, W2.w, W2.h, 5 * s); ctx.fill();
+                    const kx = p.on ? W2.x + W2.w * 0.5 : W2.x + 2 * s;
+                    const kg = ctx.createLinearGradient(0, W2.y, 0, W2.y + W2.h);
+                    kg.addColorStop(0, p.on ? '#e15b55' : '#9aa1aa'); kg.addColorStop(1, p.on ? '#a8302b' : '#6c737c');
+                    ctx.fillStyle = kg; rr(kx, W2.y + 2 * s, W2.w * 0.5 - 2 * s, W2.h - 4 * s, 4 * s); ctx.fill();
+                    ctx.fillStyle = '#e8e2d6';
+                    ctx.font = `600 ${Math.round(9.5 * s)}px Poppins, sans-serif`; ctx.textAlign = 'center';
+                    ctx.fillText(p.on ? 'PÅ' : 'AV', p.on ? W2.x + W2.w * 0.25 : W2.x + W2.w * 0.75, W2.y + W2.h / 2 + 1);
+                    // anslutningar
+                    const term = (T, red, label) => {
+                        ctx.beginPath(); ctx.arc(T.x, T.y, 10 * s, 0, 2 * Math.PI);
+                        ctx.fillStyle = red ? '#c0392b' : '#1b1f25'; ctx.fill();
+                        ctx.strokeStyle = 'rgba(255,255,255,0.25)'; ctx.lineWidth = 1; ctx.stroke();
+                        ctx.beginPath(); ctx.arc(T.x, T.y, 4 * s, 0, 2 * Math.PI);
+                        ctx.fillStyle = '#c9ccd1'; ctx.fill();
+                        ctx.fillStyle = '#e8e2d6';
+                        ctx.font = `700 ${Math.round(12 * s)}px Poppins, sans-serif`;
+                        ctx.textBaseline = 'middle'; ctx.fillText(label, T.x - 16 * s, T.y);
+                    };
+                    term(S.plus, true, p.ac ? '~' : '+');
+                    term(S.minus, false, p.ac ? '~' : '−');
+                    ctx.restore();
+                    return S;
+                };
+
+                const drawCoilBody = (p, E) => {
+                    const c = st.coil, L = st.Lp, ap = st.ap;
+                    // skugga på bänken
+                    ctx.fillStyle = 'rgba(15,22,32,0.13)';
+                    rr(E.outL + 3, c.y - ap + 6, E.outR - E.outL, ap * 2 + 2, 6); ctx.fill();
+                    if (p.core === 'jarn') {
+                        const cr = ap * 0.62;
+                        const g = ctx.createLinearGradient(0, c.y - cr, 0, c.y + cr);
+                        g.addColorStop(0, '#4c535c'); g.addColorStop(0.35, '#a3abb5'); g.addColorStop(0.5, '#c2c9d1');
+                        g.addColorStop(0.7, '#7d858f'); g.addColorStop(1, '#3f454d');
+                        ctx.fillStyle = g; rr(E.outL, c.y - cr, E.outR - E.outL, cr * 2, 3); ctx.fill();
+                        ctx.strokeStyle = '#353a41'; ctx.lineWidth = 1; ctx.stroke();
+                    }
+                    // spolstommen (genomskinlig plast), så att fältet syns inuti
+                    const g = ctx.createLinearGradient(0, c.y - ap, 0, c.y + ap);
+                    g.addColorStop(0, 'rgba(206,214,222,0.55)'); g.addColorStop(0.45, 'rgba(244,247,250,0.42)');
+                    g.addColorStop(1, 'rgba(180,190,200,0.55)');
+                    ctx.fillStyle = g; ctx.fillRect(c.x - L / 2, c.y - ap, L, ap * 2);
+                };
+                const drawStrips = (p, E, Bdir, flowOn) => {
+                    const c = st.coil, L = st.Lp, ap = st.ap;
+                    const Ns = Math.min(25, Math.max(4, Math.round(p.n / 40)));
+                    const x0 = c.x - L / 2 + E.fw, span = L - 2 * E.fw;
+                    const sp = span / Ns;
+                    const tk = Math.min(10, Math.max(2.6, sp * 0.7));
+                    const sl = p.wind * Math.max(sp * 0.9, 6);
+                    if (!p.show.snitt) {
+                        const g = ctx.createLinearGradient(0, c.y - ap, 0, c.y + ap);
+                        g.addColorStop(0, '#6e3712'); g.addColorStop(0.3, '#cf8a4f'); g.addColorStop(0.5, '#f1b781');
+                        g.addColorStop(0.72, '#c47a3f'); g.addColorStop(1, '#5e2f10');
+                        ctx.strokeStyle = g; ctx.lineWidth = tk; ctx.lineCap = 'butt';
+                        for (let i = 0; i < Ns; i++) {
+                            const xm = x0 + (i + 0.5) * sp;
+                            ctx.beginPath(); ctx.moveTo(xm - sl / 2, c.y - ap); ctx.lineTo(xm + sl / 2, c.y + ap); ctx.stroke();
+                        }
+                        // strömmen över spolens ovansida
+                        if (flowOn) {
+                            const dir = Bdir > 0 ? 1 : -1;     // ner i bilden när fältet pekar åt höger
+                            const step = Ns > 14 ? 2 : 1;
+                            for (let i = 0; i < Ns; i += step) {
+                                const xm = x0 + (i + 0.5) * sp;
+                                const pts = [[xm - sl / 2, c.y - ap], [xm + sl / 2, c.y + ap]];
+                                flowAlong(pts, st.phase * 0.6, dir, 0.85);
+                            }
+                        }
+                    } else {
+                        // genomskärning: ledarnas tvärsnitt längs norra och södra kanten
+                        const rC = Math.min(sp * 0.42, 7.5);
+                        const mark = (x, y, out) => {
+                            ctx.beginPath(); ctx.arc(x, y, rC, 0, 2 * Math.PI);
+                            ctx.fillStyle = '#d58c50'; ctx.fill();
+                            ctx.strokeStyle = '#6e3712'; ctx.lineWidth = 1.1; ctx.stroke();
+                            if (Bdir === 0) return;
+                            ctx.strokeStyle = COL.strom; ctx.fillStyle = COL.strom;
+                            if (out) { ctx.beginPath(); ctx.arc(x, y, Math.max(1.8, rC * 0.36), 0, 2 * Math.PI); ctx.fill(); }
+                            else {
+                                const d = rC * 0.55; ctx.lineWidth = Math.max(1.3, rC * 0.24);
+                                ctx.beginPath(); ctx.moveTo(x - d, y - d); ctx.lineTo(x + d, y + d);
+                                ctx.moveTo(x + d, y - d); ctx.lineTo(x - d, y + d); ctx.stroke();
+                            }
+                        };
+                        // fältet åt höger ⇒ ström ut ur bänken (⊙) vid norra kanten, in (⊗) vid södra
+                        for (let i = 0; i < Ns; i++) {
+                            const xm = x0 + (i + 0.5) * sp;
+                            mark(xm, c.y - ap, Bdir > 0);
+                            mark(xm, c.y + ap, Bdir < 0);
+                        }
+                        // små fältcirklar kring två ledare: fälten samverkar inuti spolen
+                        if (Bdir !== 0) {
+                            const xm = x0 + (Math.floor(Ns / 2) + 0.5) * sp;
+                            const ring = (y, ccw) => {
+                                const R = rC + 7;
+                                ctx.strokeStyle = COL.falt; ctx.lineWidth = 1.3;
+                                ctx.beginPath(); ctx.arc(xm, y, R, 0, 2 * Math.PI); ctx.stroke();
+                                // pilspetsen på cirkelns insida (mot spolens axel)
+                                const ay = y < c.y ? y + R : y - R;
+                                const right = (y < c.y) === ccw;
+                                chevronRed(xm, ay, right ? 0 : Math.PI);
+                            };
+                            ring(c.y - ap, Bdir > 0);
+                            ring(c.y + ap, Bdir < 0);
+                        }
+                    }
+                };
+                const chevronRed = (x, y, ang) => {
+                    ctx.save(); ctx.translate(x, y); ctx.rotate(ang);
+                    ctx.fillStyle = COL.falt;
+                    ctx.beginPath(); ctx.moveTo(5, 0); ctx.lineTo(-4, -3.8); ctx.lineTo(-4, 3.8); ctx.closePath(); ctx.fill();
+                    ctx.restore();
+                };
+                const drawFlanges = (E) => {
+                    const c = st.coil, L = st.Lp, ap = st.ap;
+                    const fh = ap + 8;
+                    [c.x - L / 2, c.x + L / 2 - E.fw].forEach((fx) => {
+                        const g = ctx.createLinearGradient(fx, 0, fx + E.fw, 0);
+                        g.addColorStop(0, '#2f3a49'); g.addColorStop(0.5, '#56657a'); g.addColorStop(1, '#2b3442');
+                        ctx.fillStyle = g; rr(fx, c.y - fh, E.fw, fh * 2, 2); ctx.fill();
+                    });
+                };
+                const drawBar = (Bdir) => {
+                    const c = st.coil, L = st.Lp, ap = st.ap;
+                    ctx.fillStyle = 'rgba(15,22,32,0.14)'; rr(c.x - L / 2 + 3, c.y - ap + 5, L, ap * 2, 4); ctx.fill();
+                    const nRight = Bdir >= 0;
+                    ctx.fillStyle = nRight ? COL.spol : COL.npol; ctx.fillRect(c.x - L / 2, c.y - ap, L / 2, ap * 2);
+                    ctx.fillStyle = nRight ? COL.npol : COL.spol; ctx.fillRect(c.x, c.y - ap, L / 2, ap * 2);
+                    const gl = ctx.createLinearGradient(0, c.y - ap, 0, c.y + ap);
+                    gl.addColorStop(0, 'rgba(255,255,255,0.34)'); gl.addColorStop(0.45, 'rgba(255,255,255,0.05)');
+                    gl.addColorStop(1, 'rgba(15,22,32,0.13)');
+                    ctx.fillStyle = gl; ctx.fillRect(c.x - L / 2, c.y - ap, L, ap * 2);
+                    ctx.strokeStyle = '#5d646e'; ctx.lineWidth = 1.4; ctx.strokeRect(c.x - L / 2, c.y - ap, L, ap * 2);
+                    ctx.font = `600 ${Math.round(Math.min(22, ap * 0.8))}px Poppins, sans-serif`;
+                    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+                    const sx = c.x + (nRight ? -L / 4 : L / 4), nx = c.x + (nRight ? L / 4 : -L / 4);
+                    ctx.fillStyle = '#ffffff'; ctx.fillText('N', nx, c.y + 1);
+                    ctx.lineWidth = 3.5; ctx.strokeStyle = '#0f1620'; ctx.lineJoin = 'round';
+                    ctx.strokeText('S', sx, c.y + 1); ctx.fillStyle = '#ffffff'; ctx.fillText('S', sx, c.y + 1);
+                };
+                const drawLines = (alpha, width, Bdir) => {
+                    ctx.save();
+                    ctx.globalAlpha = alpha;
+                    ctx.strokeStyle = COL.falt; ctx.lineWidth = width; ctx.lineJoin = 'round';
+                    for (const pts of st.lines) strokePts(pts);
+                    ctx.restore();
+                };
+                const drawArrows = (alpha, Bdir) => {
+                    ctx.save(); ctx.globalAlpha = alpha;
+                    for (const a of st.arrows) {
+                        if (a.inside && pRef.current.kalla === 'stav') continue;   // inuti magneten syns inga linjer
+                        chevronRed(a.x, a.y, a.ang + (Bdir < 0 ? Math.PI : 0));
+                    }
+                    ctx.restore();
+                };
+                const badge = (x, y, isN, alpha) => {
+                    ctx.save(); ctx.globalAlpha = alpha;
+                    ctx.beginPath(); ctx.arc(x, y, 13, 0, 2 * Math.PI);
+                    ctx.fillStyle = isN ? COL.npol : COL.spol; ctx.fill();
+                    ctx.strokeStyle = isN ? '#8e2219' : '#5d646e'; ctx.lineWidth = 1.4; ctx.stroke();
+                    ctx.font = '700 15px Poppins, sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+                    if (isN) { ctx.fillStyle = '#ffffff'; ctx.fillText('N', x, y + 1); }
+                    else {
+                        ctx.lineWidth = 3; ctx.strokeStyle = '#0f1620'; ctx.lineJoin = 'round';
+                        ctx.strokeText('S', x, y + 1); ctx.fillStyle = '#ffffff'; ctx.fillText('S', x, y + 1);
+                    }
+                    ctx.restore();
+                };
+                const drawClip = (g) => {
+                    const s = st.sc * 1.05;
+                    ctx.save(); ctx.translate(g.x, g.y); ctx.rotate(g.ang); ctx.scale(s, s);
+                    const path = () => {
+                        ctx.beginPath();
+                        ctx.moveTo(-5, 1.4); ctx.lineTo(8, 1.4);
+                        ctx.arc(8, -0.4, 1.8, Math.PI / 2, -Math.PI / 2, true);
+                        ctx.lineTo(-10, -2.2);
+                        ctx.arc(-10, 0.4, 2.6, -Math.PI / 2, Math.PI / 2, true);
+                        ctx.lineTo(11.5, 3.0);
+                        ctx.arc(11.5, -0.3, 3.3, Math.PI / 2, -Math.PI / 2, true);
+                        ctx.lineTo(-1, -3.6);
+                    };
+                    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+                    ctx.strokeStyle = 'rgba(15,22,32,0.18)'; ctx.lineWidth = 1.9;
+                    ctx.save(); ctx.translate(0.8, 1.4); path(); ctx.stroke(); ctx.restore();
+                    ctx.strokeStyle = '#6f7782'; ctx.lineWidth = 1.5; path(); ctx.stroke();
+                    ctx.strokeStyle = 'rgba(235,240,245,0.75)'; ctx.lineWidth = 0.5; path(); ctx.stroke();
+                    ctx.restore();
+                };
+                const drawProbe = (B) => {
+                    drawCompass(st.probe.x, st.probe.y, st.probe.ang, 25, true);
+                    // fältmätarens avläsning bredvid provkompassen
+                    const txtV = '= ' + fmtB(B) + ' mT';
+                    ctx.font = "600 13px 'JetBrains Mono', monospace";
+                    const wV = ctx.measureText(txtV).width;
+                    ctx.font = "italic 600 14px Poppins, sans-serif";
+                    const wB = ctx.measureText('B').width;
+                    const w = wB + 6 + wV + 18, h = 26;
+                    let tx = st.probe.x + 32, ty = st.probe.y - h / 2;
+                    if (tx + w > st.W - 6) tx = st.probe.x - 32 - w;
+                    ty = Math.min(Math.max(ty, 6), st.H - h - 6);
+                    ctx.fillStyle = 'rgba(253,250,243,0.96)'; rr(tx, ty, w, h, 6); ctx.fill();
+                    ctx.strokeStyle = '#5d646e'; ctx.lineWidth = 1.2; ctx.stroke();
+                    ctx.textBaseline = 'middle'; ctx.textAlign = 'left'; ctx.fillStyle = '#0f1620';
+                    ctx.font = "italic 600 14px Poppins, sans-serif";
+                    ctx.fillText('B', tx + 9, ty + h / 2 + 1);
+                    ctx.font = "600 13px 'JetBrains Mono', monospace";
+                    ctx.fillText(txtV, tx + 9 + wB + 6, ty + h / 2 + 1);
+                };
+                const drawThumbRule = (Bdir, E) => {
+                    if (Bdir === 0) return;
+                    const c = st.coil, ap = st.ap;
+                    const rx = Math.max(9, ap * 0.32), ry = ap + 20;
+                    const ex = c.x;
+                    ctx.save();
+                    ctx.strokeStyle = COL.strom; ctx.lineWidth = 3;
+                    ctx.beginPath(); ctx.ellipse(ex, c.y, rx, ry, 0, 0, 2 * Math.PI); ctx.stroke();
+                    // fingrarna: strömmen går ner i bilden över spolens ovansida när fältet pekar åt höger
+                    const down = Bdir > 0;
+                    const head = (x, y, ang) => {
+                        ctx.save(); ctx.translate(x, y); ctx.rotate(ang); ctx.fillStyle = COL.strom;
+                        ctx.beginPath(); ctx.moveTo(8, 0); ctx.lineTo(-5, -6); ctx.lineTo(-5, 6); ctx.closePath(); ctx.fill();
+                        ctx.restore();
+                    };
+                    head(ex + rx, c.y, down ? Math.PI / 2 : -Math.PI / 2);
+                    head(ex - rx, c.y, down ? -Math.PI / 2 : Math.PI / 2);
+                    // tummen: fältets riktning ut ur nordändan
+                    const xN = Bdir > 0 ? E.outR + 8 : E.outL - 8;
+                    const len = Math.min(78, st.Lp * 0.36);
+                    const x2 = xN + (Bdir > 0 ? len : -len);
+                    ctx.strokeStyle = COL.falt; ctx.lineWidth = 5; ctx.lineCap = 'butt';
+                    const hb = x2 - (Bdir > 0 ? 12 : -12);
+                    ctx.beginPath(); ctx.moveTo(xN, c.y); ctx.lineTo(hb, c.y); ctx.stroke();
+                    ctx.fillStyle = COL.falt;
+                    ctx.beginPath(); ctx.moveTo(x2, c.y); ctx.lineTo(hb, c.y - 8); ctx.lineTo(hb, c.y + 8); ctx.closePath(); ctx.fill();
+                    // etiketter i fri yta
+                    ctx.font = '600 13px Poppins, sans-serif'; ctx.textBaseline = 'bottom';
+                    ctx.fillStyle = COL.strom; ctx.textAlign = 'center';
+                    ctx.fillText('Fingrarna: strömmen', ex, c.y - ry - 6);
+                    ctx.fillStyle = '#8e2219'; ctx.textAlign = Bdir > 0 ? 'left' : 'right';
+                    ctx.textBaseline = 'top';
+                    ctx.fillText('Tummen: fältet', xN, c.y + 12);
+                    ctx.restore();
+                };
+
+                // ── Animationsloop ──
+                let raf, last = performance.now();
+                const loop = (now) => {
+                    raf = requestAnimationFrame(loop);
+                    const dt = Math.min((now - last) / 1000, 0.05);
+                    last = now;
+                    const p = pRef.current;
+                    st.t += dt;
+                    if (st.linesDirty) rebuildLines();
+
+                    // strömmens tidsfaktor (−1…1) och fältets riktning
+                    const stav = p.kalla === 'stav';
+                    let f = p.on ? (p.ac ? Math.sin(2 * Math.PI * AC_F * st.t) : 1) : 0;
+                    let Ieff = p.I;
+                    if (stav) { f = 1; if (Ieff < 0.05) Ieff = 1.5; }
+                    const sgn = p.pol * p.wind;
+                    const coreF = p.core === 'jarn' ? KARNA : 1;
+                    const scale = MU0 * p.n * Ieff / L_M * coreF * f * sgn;   // T per tabellenhet
+                    const Bdir = Math.abs(scale) < 1e-9 ? 0 : (scale > 0 ? 1 : -1);
+                    const Bc = Math.abs(scale) * 0.95;
+                    const iNow = Ieff * f;
+                    const E = coilEnds();
+
+                    // nålarna: spolens fält + jordens fält (norr = uppåt i bilden)
+                    const settle = (nd) => {
+                        const [bx, by] = coilB(nd.x, nd.y, scale);
+                        const target = Math.atan2(by - B_JORD, bx);
+                        let d = target - nd.ang;
+                        while (d > Math.PI) d -= 2 * Math.PI;
+                        while (d < -Math.PI) d += 2 * Math.PI;
+                        nd.w += (d * 130 - nd.w * 11) * dt;
+                        nd.ang += nd.w * dt;
+                    };
+                    st.needles.forEach(settle);
+                    settle(st.probe);
+
+                    // gemen: järn dras mot den närmaste änden när fältet räcker
+                    const gemOn = p.show.gem && !p.gissar && !stav;
+                    if (gemOn) {
+                        const slots = [[0, -0.55], [0, 0.0], [0, 0.55], [1, -0.28], [1, 0.28]];
+                        st.clips.forEach((g, k) => {
+                            if (g.held) return;
+                            const side = g.stuck || (g.x < st.coil.x ? -1 : 1);
+                            const half = 12 * st.sc;
+                            const sl = slots[k % slots.length];
+                            const sx = (side > 0 ? E.outR + half * (1 + 1.75 * sl[0]) : E.outL - half * (1 + 1.75 * sl[0]));
+                            const sy = st.coil.y + sl[1] * st.ap * (p.core === 'jarn' ? 1.0 : 1.4);
+                            if (g.stuck) {
+                                g.x += (sx - g.x) * Math.min(1, dt * 12); g.y += (sy - g.y) * Math.min(1, dt * 12);
+                                g.ang += ((0) - (((g.ang + Math.PI / 2) % Math.PI + Math.PI) % Math.PI - Math.PI / 2)) * Math.min(1, dt * 8);
+                                return;
+                            }
+                            const [bx, by] = coilB(g.x, g.y, scale);
+                            const B = Math.hypot(bx, by);
+                            if (B > B_GEM) {
+                                const dx = sx - g.x, dy = sy - g.y, dd = Math.hypot(dx, dy) || 1;
+                                const acc = 1800 * Math.min(6, B / B_GEM);
+                                g.vx += acc * dx / dd * dt; g.vy += acc * dy / dd * dt;
+                                // gemet vrider sig längs fältet
+                                const fa = Math.atan2(by, bx);
+                                let da = fa - g.ang;
+                                da = ((da + Math.PI / 2) % Math.PI + Math.PI) % Math.PI - Math.PI / 2;
+                                g.ang += da * Math.min(1, dt * 6);
+                                if (dd < 4) { g.stuck = side; g.vx = 0; g.vy = 0; }
+                            }
+                            g.vx *= Math.max(0, 1 - 7 * dt); g.vy *= Math.max(0, 1 - 7 * dt);
+                            g.x += g.vx * dt; g.y += g.vy * dt;
+                        });
+                    }
+
+                    st.phase += dt * 38 * Math.min(1.6, Math.abs(iNow) / 1.5 + 0.25) * (f >= 0 ? 1 : -1);
+
+                    // ── rita ──
+                    ctx.setTransform(st.dpr, 0, 0, st.dpr, 0, 0);
+                    drawPaper();
+
+                    const S = supply();
+                    const hidden = (x, y) => {
+                        if (x > E.outL - 18 && x < E.outR + 18 && Math.abs(y - st.coil.y) < st.ap + 20) return true;
+                        if (!stav && x > S.x - 12 && x < S.x + S.w + 12 && y > S.y - 26 && y < S.y + S.h + 12) return true;
+                        if (p.show.prov && Math.hypot(x - st.probe.x, y - st.probe.y) < 40) return true;
+                        if (gemOn && st.clips.some((g) => Math.hypot(x - g.x, y - g.y) < 20)) return true;
+                        return false;
+                    };
+                    if (p.show.kompass) {
+                        for (const nd of st.needles) if (!hidden(nd.x, nd.y)) drawCompass(nd.x, nd.y, nd.ang, 10, false);
+                    }
+
+                    // norrpil
+                    ctx.save();
+                    ctx.strokeStyle = 'rgba(48,54,63,0.55)'; ctx.fillStyle = 'rgba(48,54,63,0.65)'; ctx.lineWidth = 1.6;
+                    const nx0 = 32, ny0 = 104;
+                    ctx.beginPath(); ctx.moveTo(nx0, ny0); ctx.lineTo(nx0, ny0 - 22); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(nx0, ny0 - 30); ctx.lineTo(nx0 - 5, ny0 - 20); ctx.lineTo(nx0 + 5, ny0 - 20); ctx.closePath(); ctx.fill();
+                    ctx.font = '600 11px Poppins, sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+                    ctx.fillText('Norr', nx0, ny0 + 3);
+                    ctx.restore();
+
+                    const showField = Bdir !== 0 && (!p.gissar || p.fas === 'svar');
+                    const s01 = Math.min(1, Math.max(0, (Math.log10(Math.max(Bc, 1e-6)) - Math.log10(1.5e-4)) / (Math.log10(0.4) - Math.log10(1.5e-4))));
+                    const alpha = 0.22 + 0.78 * s01;
+                    const lw = 1.3 + 1.1 * s01;
+
+                    if (!stav) {
+                        // sladdar från nätaggregatet till spolens ändar
+                        const Ld = leads();
+                        const toPlus = p.pol > 0 ? Ld.L : Ld.R, toMinus = p.pol > 0 ? Ld.R : Ld.L;
+                        const wRed = wirePath(S.plus, toPlus), wBlack = wirePath(S.minus, toMinus);
+                        drawSupply(p, p.I, iNow);
+                        ctx.lineCap = 'round';
+                        [[wBlack, '#22262c'], [wRed, '#b8322a']].forEach(([pts, col]) => {
+                            ctx.strokeStyle = 'rgba(15,22,32,0.15)'; ctx.lineWidth = 6;
+                            ctx.save(); ctx.translate(1.5, 3); strokePts(pts); ctx.restore();
+                            ctx.strokeStyle = col; ctx.lineWidth = 4.2; strokePts(pts);
+                        });
+                        // banankontakterna
+                        [[S.plus, '#b8322a'], [S.minus, '#22262c']].forEach(([T, col]) => {
+                            ctx.beginPath(); ctx.arc(T.x, T.y, 6 * S.s, 0, 2 * Math.PI);
+                            ctx.fillStyle = col; ctx.fill();
+                            ctx.strokeStyle = 'rgba(255,255,255,0.35)'; ctx.lineWidth = 1; ctx.stroke();
+                        });
+                        drawCoilBody(p, E);
+                        if (showField && p.show.linjer) drawLines(alpha, lw, Bdir);
+                        const flowOn = Bdir !== 0 && p.show.strom && (!p.gissar || p.fas === 'svar');
+                        drawStrips(p, E, (!p.gissar || p.fas === 'svar') ? Bdir : 0, flowOn);
+                        drawFlanges(E);
+                        // ledningarnas ändar in i spolen
+                        ctx.strokeStyle = '#b8692f'; ctx.lineWidth = 2.4;
+                        [Ld.L, Ld.R].forEach((P) => { ctx.beginPath(); ctx.moveTo(P.x, P.y); ctx.lineTo(P.x, P.y - 5); ctx.stroke(); });
+                        if (flowOn) {
+                            // konventionell strömriktning: ut ur pluspolen, in i minuspolen
+                            flowAlong(wRed, st.phase, 1, 1);
+                            flowAlong(wBlack, st.phase, -1, 1);
+                        }
+                    } else {
+                        if (showField && p.show.linjer) drawLines(alpha, lw, Bdir);
+                        drawBar(Bdir);
+                    }
+                    if (showField && p.show.linjer) drawArrows(alpha, Bdir);
+
+                    // polerna
+                    if (!stav && p.show.poler && showField) {
+                        const a = Math.min(1, Math.abs(f) * 2.5);
+                        const yb = st.coil.y - st.ap - 22;
+                        badge(E.outR + 6, yb, Bdir > 0, a);
+                        badge(E.outL - 6, yb, Bdir < 0, a);
+                    }
+                    // gissa-läget: markera änden man pekar på
+                    if (p.gissar && p.fas === 'fraga' && st.hover) {
+                        ctx.save();
+                        ctx.strokeStyle = 'rgba(200,50,74,0.85)'; ctx.lineWidth = 2.5; ctx.setLineDash([6, 4]);
+                        const xL = st.hover === 'v' ? E.outL - 10 : st.coil.x + 4, xR = st.hover === 'v' ? st.coil.x - 4 : E.outR + 10;
+                        rr(xL, st.coil.y - st.ap - 14, xR - xL, st.ap * 2 + 28, 8); ctx.stroke();
+                        ctx.restore();
+                    }
+                    if (p.show.tumregel && showField && !stav) drawThumbRule(Bdir, E);
+
+                    if (gemOn) st.clips.forEach(drawClip);
+
+                    let Bp = 0;
+                    {
+                        const [bx, by] = coilB(st.probe.x, st.probe.y, scale);
+                        Bp = Math.hypot(bx, by - B_JORD);
+                    }
+                    if (p.show.prov) drawProbe(Bp);
+
+                    if (now - st.lastInfo > 160) {
+                        st.lastInfo = now;
+                        st.onInfo && st.onInfo(Bp);
+                    }
+                };
+                raf = requestAnimationFrame(loop);
+
+                return () => {
+                    cancelAnimationFrame(raf);
+                    ro.disconnect();
+                    canvas.removeEventListener('pointerdown', onDown);
+                    canvas.removeEventListener('pointermove', onMove);
+                    canvas.removeEventListener('pointerup', onUp);
+                    canvas.removeEventListener('pointercancel', onUp);
+                    canvas.removeEventListener('pointerleave', onLeave);
+                };
+            }, []);
+
+            useEffect(() => {
+                const st = stRef.current;
+                if (st) st.onInfo = (b) => setProbeB((old) => (Math.abs(old - b) < 1e-7 ? old : b));
+            }, []);
+            // kärnan ändrar spolens ytterkanter → gemens platser
+            useEffect(() => { const st = stRef.current; if (st) st.linesDirty = true; }, [core, kalla]);
+            useEffect(() => { const st = stRef.current; if (st && st.resetClips && gemNyckel) st.resetClips(); }, [gemNyckel]);
+
+            // ── Fullskärm ──
+            useEffect(() => {
+                const handler = () => {
+                    const fs = document.fullscreenElement === sceneWrapRef.current ||
+                        document.webkitFullscreenElement === sceneWrapRef.current;
+                    setIsFullscreen(fs);
+                };
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            const tShow = (k) => setShow((s) => ({ ...s, [k]: !s[k] }));
+            const valjForsok = (fo) => {
+                setForsok(fo.id);
+                const s = fo.set;
+                setOn(s.on); setAc(s.ac); setI(s.I); setN(s.n); setCore(s.core); setKalla(s.kalla);
+                if (s.gem) { setShow((sh) => ({ ...sh, gem: true })); setGemNyckel((k) => k + 1); }
+            };
+            const nyGissning = () => {
+                setGissa({ fas: 'fraga', pol: Math.random() < 0.5 ? 1 : -1, wind: Math.random() < 0.5 ? 1 : -1, svar: null });
+            };
+            const valjLage = (l) => {
+                setLage(l);
+                if (l === 'gissa') nyGissning();
+            };
+            const ratt = gissa.pol * gissa.wind > 0 ? 'h' : 'v';
+            const svara = (sida) => {
+                if (gissa.fas !== 'fraga') return;
+                const ok = sida === ratt;
+                setGissa((g) => ({ ...g, fas: 'svar', svar: sida }));
+                setPoang((p) => ({ ratt: p.ratt + (ok ? 1 : 0), totalt: p.totalt + 1, svit: ok ? p.svit + 1 : 0 }));
+            };
+            svaraRef.current = svara;
+
+            const forsokObj = FORSOK.find((f) => f.id === forsok);
+            const stav = kalla === 'stav';
+
+            const regI = (
+                <div className="reg">
+                    <div className="reg-top"><span>Ström <em>I</em>{ac ? ' (toppvärde)' : ''}</span><b>{fmt(I, 1)} A</b></div>
+                    <input type="range" min="0" max="3" step="0.1" value={I} disabled={gissar}
+                           onChange={(e) => { setI(parseFloat(e.target.value)); setForsok(null); }} aria-label="Ström" />
+                </div>
+            );
+            const regN = (
+                <div className="reg">
+                    <div className="reg-top"><span>Varvtal <em>n</em></span><b>{fmt(n, 0)} varv</b></div>
+                    <input type="range" min="100" max="1000" step="50" value={n} disabled={gissar}
+                           onChange={(e) => { setN(parseFloat(e.target.value)); setForsok(null); }} aria-label="Varvtal" />
+                </div>
+            );
+            const paKnapp = (
+                <button className={'btn-toggle btn-pa' + (on && !stav ? ' on' : '')} disabled={gissar || stav} onClick={() => setOn((v) => !v)}>
+                    <span className="led"></span>{on ? 'Slå av strömmen' : 'Slå på strömmen'}
+                </button>
+            );
+
+            const visaRad = (k, text, farg, av) => (
+                <label className={av ? 'av' : ''}>
+                    <input type="checkbox" checked={show[k] && !av} disabled={av} onChange={() => tShow(k)} />
+                    {farg && <span className="st-swatch" style={{ background: farg }}></span>}
+                    <span>{text}</span>
+                </label>
+            );
+
+            const sceneToggles = () => {
+                if (!togglesOpen) return (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)}
+                            aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" /><circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" /><circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                );
+                return (
+                    <div className="scene-toggles">
+                        <button className="st-hide" onClick={() => setTogglesOpen(false)}
+                                aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+                        </button>
+                        <div className="st-title">Visa</div>
+                        {visaRad('linjer', 'Fältlinjer', COL.falt, gissar && gissa.fas === 'fraga')}
+                        {visaRad('kompass', 'Kompassnålar', COL.nal, false)}
+                        {visaRad('prov', 'Provkompass', '#a08a5c', false)}
+                        {visaRad('strom', 'Strömmens riktning', COL.strom, stav || (gissar && gissa.fas === 'fraga'))}
+                        {visaRad('poler', 'Polerna (N och S)', COL.npol, stav || (gissar && gissa.fas === 'fraga'))}
+                        {visaRad('snitt', 'Genomskärning av spolen', COL.koppar, stav)}
+                        {visaRad('tumregel', 'Tumregeln', COL.strom, stav || (gissar && gissa.fas === 'fraga'))}
+                        {visaRad('gem', 'Gem på bänken', '#6f7782', stav || gissar)}
+                        {isFullscreen && !gissar && (
+                            <React.Fragment>
+                                <div className="st-title mt">Reglage</div>
+                                <div className="st-sliders">
+                                    <div className="st-slider">
+                                        <div className="st-slider-top"><span>Ström <em>I</em></span><b>{fmt(I, 1)} A</b></div>
+                                        <input type="range" min="0" max="3" step="0.1" value={I} onChange={(e) => { setI(parseFloat(e.target.value)); setForsok(null); }} />
+                                    </div>
+                                    <div className="st-slider">
+                                        <div className="st-slider-top"><span>Varvtal <em>n</em></span><b>{fmt(n, 0)} varv</b></div>
+                                        <input type="range" min="100" max="1000" step="50" value={n} onChange={(e) => { setN(parseFloat(e.target.value)); setForsok(null); }} />
+                                    </div>
+                                </div>
+                                <div className="st-title mt">Spolen</div>
+                                <label className={stav ? 'av' : ''}><input type="checkbox" checked={core === 'jarn'} disabled={stav} onChange={() => setCore((c) => c === 'jarn' ? 'luft' : 'jarn')} /><span>Järnkärna</span></label>
+                                <label className={stav ? 'av' : ''}><input type="checkbox" checked={ac} disabled={stav} onChange={() => setAc((v) => !v)} /><span>Växelström</span></label>
+                                <label><input type="checkbox" checked={stav} onChange={() => setKalla((k) => k === 'stav' ? 'spole' : 'stav')} /><span>Byt till stavmagnet</span></label>
+                                <div className="st-actions">
+                                    {paKnapp}
+                                    <button className="btn-toggle" disabled={stav} onClick={() => setPol((v) => -v)}>Vänd strömmen</button>
+                                </div>
+                            </React.Fragment>
+                        )}
+                    </div>
+                );
+            };
+
+            const forklaring = () => {
+                const nRight = ratt === 'h';
+                const inV = gissa.pol > 0;
+                return (
+                    <React.Fragment>
+                        Strömmen går ut ur pluspolen och kommer in i spolens {inV ? 'vänstra' : 'högra'} ände. Följ tråden runt
+                        spolen: över ovansidan går strömmen {nRight ? 'nedåt' : 'uppåt'} i bilden. Böj högerhandens fingrar i
+                        strömmens riktning runt spolen, så pekar tummen åt {nRight ? 'höger' : 'vänster'}. Där kommer
+                        fältlinjerna ut, och där är nordändan.
+                    </React.Fragment>
+                );
+            };
+
+            return (
+                <div className="min-h-screen px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html?id=fy2">Fysik nivå 2</a> / Elektromagneten
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Elektromagneten</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 840 }}>
+                            En spole med 600 varv koppartråd ligger på bänken, kopplad till ett nätaggregat. Slå på strömmen så
+                            blir spolen en <strong>elektromagnet</strong>: kompassnålarna runt den svänger in sig i ett fält som ser ut
+                            precis som en stavmagnets. Flytta provkompassen för att mäta flödestätheten <em>B</em>, dra i spolen, stoppa
+                            in en järnkärna och se gemen dras till, och vänd strömmen så byter nordändan och sydändan plats.
+                        </p>
+
+                        <FormulaCard n={gissar ? 600 : n} I={gissar ? 1.5 : I} core={gissar ? 'luft' : core} ac={!gissar && ac} />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            <div className="lg:w-2/3 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    <canvas ref={canvasRef} />
+                                    {sceneToggles()}
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                                <p className="anm mt-2">
+                                    {gissar
+                                        ? 'Klicka på den ände av spolen som du tror blir nordända, eller svara i rutan bredvid.'
+                                        : 'Dra i spolen, i provkompassen och i gemen. Klicka på strömbrytaren på nätaggregatet för att slå av och på.'}
+                                </p>
+                            </div>
+
+                            <div className="lg:w-1/3 order-2 flex flex-col gap-3">
+                                <div className="glass-card rounded-xl p-3">
+                                    <div className="flbl mb-2">Läge</div>
+                                    <div className="seg" style={{ gridTemplateColumns: '1fr 1fr' }}>
+                                        <button className={!gissar ? 'active' : ''} onClick={() => valjLage('fri')}>Utforska</button>
+                                        <button className={gissar ? 'active' : ''} onClick={() => valjLage('gissa')}>Var är nordändan?</button>
+                                    </div>
+                                    {gissar && (
+                                        <div className="mt-3 flex flex-col gap-3">
+                                            <div className="poang">
+                                                <span><b>{poang.ratt}</b> av {poang.totalt} rätt</span>
+                                                <span>Svit: <b>{poang.svit}</b></span>
+                                            </div>
+                                            <p className="fraga">
+                                                Följ tråden från pluspolen genom spolen. Vilken ände blir nordända när strömmen slås på?
+                                            </p>
+                                            {gissa.fas === 'fraga' ? (
+                                                <div className="seg" style={{ gridTemplateColumns: '1fr 1fr' }}>
+                                                    <button onClick={() => svara('v')}>Vänstra änden</button>
+                                                    <button onClick={() => svara('h')}>Högra änden</button>
+                                                </div>
+                                            ) : (
+                                                <React.Fragment>
+                                                    <div className={gissa.svar === ratt ? 'svar-ok' : 'svar-fel'}>
+                                                        <p className="fraga mb-1">{gissa.svar === ratt ? 'Rätt.' : 'Inte riktigt.'} Nordändan är den {ratt === 'h' ? 'högra' : 'vänstra'} änden.</p>
+                                                        <p className="anm">{forklaring()}</p>
+                                                    </div>
+                                                    <button className="btn-toggle btn-prim" onClick={nyGissning}>Ny spole</button>
+                                                </React.Fragment>
+                                            )}
+                                            <p className="anm">
+                                                Tips: lindningen kan gå åt två håll. Titta på hur trådarna lutar på spolens ovansida
+                                                och på vilken ände den röda sladden från pluspolen går till.
+                                            </p>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {!gissar && (
+                                    <React.Fragment>
+                                        <div className="glass-card rounded-xl p-3 flex flex-col gap-3">
+                                            <div className="flbl">Strömkälla</div>
+                                            {paKnapp}
+                                            <div className="seg" style={{ gridTemplateColumns: '1fr 1fr' }}>
+                                                <button className={!ac ? 'active' : ''} disabled={stav} onClick={() => { setAc(false); setForsok(null); }}>Likström</button>
+                                                <button className={ac ? 'active' : ''} disabled={stav} onClick={() => { setAc(true); setForsok(null); }}>Växelström</button>
+                                            </div>
+                                            {regI}
+                                            <button className="btn-toggle" disabled={stav} onClick={() => setPol((v) => -v)}>Vänd strömmen</button>
+                                        </div>
+
+                                        <div className="glass-card rounded-xl p-3 flex flex-col gap-3">
+                                            <div className="flbl">Spolen</div>
+                                            {regN}
+                                            <div>
+                                                <div className="anm mb-1">Kärna</div>
+                                                <div className="seg" style={{ gridTemplateColumns: '1fr 1fr' }}>
+                                                    <button className={core === 'luft' ? 'active' : ''} disabled={stav} onClick={() => { setCore('luft'); setForsok(null); }}>Ingen (luft)</button>
+                                                    <button className={core === 'jarn' ? 'active' : ''} disabled={stav} onClick={() => { setCore('jarn'); setForsok(null); }}>Järnkärna</button>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div className="anm mb-1">Jämför</div>
+                                                <div className="seg" style={{ gridTemplateColumns: '1fr 1fr' }}>
+                                                    <button className={!stav ? 'active' : ''} onClick={() => setKalla('spole')}>Elektromagnet</button>
+                                                    <button className={stav ? 'active' : ''} onClick={() => setKalla('stav')}>Stavmagnet</button>
+                                                </div>
+                                            </div>
+                                            <button className="btn-toggle" disabled={stav} onClick={() => setWind((v) => -v)}>Linda spolen åt andra hållet</button>
+                                            <div className="anm">
+                                                Vid provkompassen: <strong><em>B</em> = {fmtB(probeB)} mT</strong>
+                                                {probeB < 3e-5 ? ' (nästan bara jordens magnetfält)' : ''}
+                                            </div>
+                                        </div>
+
+                                        <div className="glass-card rounded-xl p-3">
+                                            <div className="flbl mb-2">Färdiga försök</div>
+                                            <div className="forsok">
+                                                {FORSOK.map((fo) => (
+                                                    <button key={fo.id} className={forsok === fo.id ? 'active' : ''} onClick={() => valjForsok(fo)}>{fo.namn}</button>
+                                                ))}
+                                            </div>
+                                            {forsokObj && <p className="anm mt-2" dangerouslySetInnerHTML={{ __html: forsokObj.text }} />}
+                                            <button className="btn-toggle mt-3 w-full" onClick={() => setGemNyckel((k) => k + 1)}>Lägg tillbaka gemen</button>
+                                        </div>
+                                    </React.Fragment>
+                                )}
+                            </div>
+                        </main>
+
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Varför blir spolen en magnet?</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Runt varje strömförande ledare finns ett magnetfält som går i cirklar. Slå på
+                                    genomskärningen: inne i spolen pekar fälten från alla varv åt samma håll och förstärker
+                                    varandra, medan de utanför till stor del tar ut varandra. Därför blir fältet starkt och
+                                    nästan homogent inuti, och utanför ser det ut som en stavmagnets.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Tumregeln för spolen</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Låt högerhandens fingrar följa strömmen runt spolen. Tummen pekar då i fältets riktning
+                                    inuti spolen, alltså mot nordändan. Det är tvärtom mot regeln för en rak ledare, där tummen
+                                    pekar i strömmens riktning och fingrarna visar fältet.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Starkare med järn</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Järn har mycket högre permeabilitet än luft. Fältet från spolen ställer in järnets små
+                                    magnetiska områden åt samma håll, och de bidrar med ett eget fält. Därför har nästan alla
+                                    elektromagneter en järnkärna: i lyftmagneter, reläer, dörrklockor och högtalare.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Bra att veta om simuleringen</span><span style={{ color: 'var(--lab-ink-muted)' }}>+</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)', paddingLeft: 18, listStyle: 'disc' }}>
+                                <li>Spolen är 10 cm lång och 3,2 cm i diameter. Fältet räknas fram ur alla varvens bidrag,
+                                    så mitt i spolen blir <em>B</em> nästan lika stort som formeln för en lång rak spole ger.
+                                    Formeln gäller bara inuti spolen; utanför blir fältet snabbt svagare.</li>
+                                <li>Kompassnålarna känner också av jordens magnetfält, cirka 0,016 mT mot norr. När strömmen är
+                                    avslagen pekar alla nålar därför mot norr, och långt från en svag spole tar jordfältet över.</li>
+                                <li>En stavmagnet och en spole med samma form har precis samma fält utanför. Inuti magneten går
+                                    fältlinjerna från sydändan till nordändan, precis som inuti spolen.</li>
+                                <li>Järnkärnans förstärkning är satt till tio gånger. Det är rimligt för en kort, rak järnstav;
+                                    en sluten järnkärna, som i en transformator, kan förstärka tusentals gånger.</li>
+                                <li>Växelströmmen går i slow motion, 0,35 perioder per sekund. Elnätets ström har frekvensen 50 Hz
+                                    och byter alltså riktning 100 gånger per sekund.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+    <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

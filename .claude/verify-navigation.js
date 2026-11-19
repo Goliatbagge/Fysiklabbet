@@ -37,6 +37,7 @@ const LABORANS_NAV = [
 
 // Files to check
 const HTML_FILES_TO_CHECK = [
+    'fysik1-trekropparsproblemet-app.html',
     'fysik2-transformator-app.html',
     'fysik2-hastighetsvaljare-app.html',
     'fysik2-virvelstrommar-app.html',

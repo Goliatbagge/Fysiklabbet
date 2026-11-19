@@ -46,7 +46,12 @@ window.SIM_NAMES = {
     { name: 'Flugan i bägaren', href: 'fysik1-flugan-i-bagaren-app.html', desc: 'En fluga lyfter inne i en bägare på en känslig våg — ändras utslaget? Följ luftens nedsvep, vågens utslag och rörelsemängden, i realtid och ultrarapid.',
       kw: ['krafter','newton','tredje lagen','aktion','reaktion','motkraft','fluga','bägare','våg','vågutslag','laboratorievåg','rörelsemängd','lyftkraft','hovra','hovring','luft','nedsvep','vakuum','lock','impuls','fritt fall','mekanik'] },
   ],
-  'fysik1-newtons-gravitationslag.html': 'Newtons gravitationslag',
+  'fysik1-newtons-gravitationslag.html': [
+    { name: 'Newtons gravitationslag', desc: 'Kraften mellan två massor, F = G · m₁ · m₂ / r².',
+      kw: ['krafter','mekanik','newton','gravitation','gravitationslag','gravitationskraft','tyngdkraft','planet','invers kvadratlag','massa','avstånd','rymd','astronomi'] },
+    { name: 'Trekropparsproblemet', href: 'fysik1-trekropparsproblemet-app.html', desc: 'Tre stjärnor drar i varandra med gravitationslagen. Släpp dem från vila och se vem som slungas ut, följ krafterna mellan paren och se fjärilseffekten.',
+      kw: ['krafter','mekanik','gravitation','gravitationslag','gravitationskraft','trekropparsproblemet','tre kroppar','tre stjärnor','stjärna','stjärnor','dubbelstjärna','trippelstjärna','kaos','kaotisk','fjärilseffekten','pythagoreiska problemet','utkastning','slangbella','omloppsbana','astronomi','rymd'] },
+  ],
   'fysik1-hiss-app.html': 'Krafter i hissen',
   'fysik1-arbete-app.html': 'Arbete',
   'fysik1-energiforluster-app.html': 'Förlust av mekanisk energi',

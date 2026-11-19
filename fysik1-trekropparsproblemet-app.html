@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trekropparsproblemet — Fysiklabbet</title>
+    <meta name="description" content="Tre stjärnor drar i varandra med Newtons gravitationslag. Släpp dem från vila och se vem som slungas ut, följ krafterna mellan paren när avståndet krymper, se fjärilseffekten när en stjärna flyttas 0,01 AU och gissa själv vilken stjärna som kastas ut.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik1-trekropparsproblemet-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Trekropparsproblemet — Fysik nivå 1">
+    <meta property="og:description" content="Tre stjärnor drar i varandra med Newtons gravitationslag. Släpp dem från vila och se vem som slungas ut, och gissa själv vilken stjärna som kastas ut.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik1-trekropparsproblemet-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Trekropparsproblemet — Fysik nivå 1">
+    <meta name="twitter:description" content="Tre stjärnor drar i varandra med Newtons gravitationslag. Släpp dem från vila och se vem som slungas ut, och gissa själv vilken stjärna som kastas ut.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+
+        /* Formelkortet: variablerna i sidans vanliga typsnitt (Formelpresentation
+           punkt 10), etiketter i versaler över och under symbolerna. */
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 19px; white-space: nowrap; }
+        /* Etikett i ett bråk: bredden 0, så att ordet går ut lika långt åt
+           båda håll och bråkstrecket bara blir så brett som symbolerna. */
+        .flbl.brak-etikett { width: 0; display: flex; justify-content: center; white-space: nowrap; }
+        .fk-grupp { display: inline-flex; align-items: center; column-gap: 8px; flex-wrap: nowrap; }
+        .par-chips { display: inline-flex; gap: 4px; flex-wrap: wrap; }
+        .par-chips button {
+            display: inline-flex; align-items: center; gap: 5px; padding: 4px 9px; border-radius: 999px;
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); background: var(--lab-bg, #f3eee4);
+            font-size: 12.5px; font-weight: 600; color: var(--lab-ink); cursor: pointer;
+        }
+        .par-chips button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); border-color: var(--lab-ink, #0f1620); }
+        .prick { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex-shrink: 0;
+                 box-shadow: 0 0 0 1px rgba(15,22,32,0.35); }
+        @media (max-width: 600px) {
+            .formula-card { justify-content: flex-start; }
+            .formula-card .fnum { font-size: 15px; }
+            .fk-grupp { column-gap: 5px; }
+            .formula-card .flbl { font-size: 8px; letter-spacing: 0; }
+            .scene-wrap:not(:fullscreen) > canvas { aspect-ratio: 1 / 1; }
+        }
+        /* Kraftpanelen i den smala inställningsrutan: värdena under varandra */
+        .scene-toggles .par-varden { flex-direction: column; gap: 0; }
+
+        /* Scenen: en canvas med rymdbakgrund. Mörk scen är motiverad här
+           (stjärnor i rymden), precis som tomteblosset. */
+        .scene-wrap {
+            position: relative; width: 100%;
+            border-radius: 12px; overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.35);
+            user-select: none; -webkit-user-select: none; background: #05060d;
+        }
+        .scene-wrap > canvas { display: block; width: 100%; aspect-ratio: 16 / 10; touch-action: none; }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0; border: none;
+        }
+        .scene-wrap:fullscreen > canvas, .scene-wrap:-webkit-full-screen > canvas { height: 100%; aspect-ratio: auto; }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+            max-width: 252px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles label.av { opacity: 0.45; cursor: not-allowed; }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles select {
+            font-size: 13px; padding: 4px 6px; border-radius: 6px; width: 100%;
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+        .scene-toggles .st-panels { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+        .scene-toggles .st-panels .glass-card { background: rgba(255,255,255,0.55); }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease; font-size: 14px;
+        }
+        .btn-toggle:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle:disabled { opacity: 0.45; cursor: not-allowed; }
+        .btn-prim { background: var(--lab-accent, #c8324a); color: #fff; border-color: var(--lab-accent, #c8324a); }
+        .btn-prim:hover:not(:disabled) { filter: brightness(1.08); }
+        .styr { display: flex; flex-wrap: wrap; gap: 8px; }
+        .styr .btn-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 7px; }
+        .styr .btn-spela { flex: 1 1 140px; }
+        .styr .btn-om { flex: 1 1 100px; }
+
+        .seg { display: grid; gap: 1px; border-radius: 9px; overflow: hidden;
+               border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+               background: var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .seg button {
+            padding: 8px 6px; font-weight: 600; cursor: pointer; font-size: 13px;
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620); border: none;
+        }
+        .seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+
+        .forsok { display: flex; flex-direction: column; gap: 6px; }
+        .forsok button {
+            text-align: left; padding: 7px 11px; border-radius: 8px; cursor: pointer;
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            font-weight: 600; font-size: 13.5px; transition: all 0.15s ease;
+        }
+        .forsok button:hover { border-color: var(--lab-accent, #c8324a); }
+        .forsok button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); border-color: var(--lab-ink, #0f1620); }
+        .anm { font-size: 12.5px; line-height: 1.45; color: var(--lab-ink-soft, #3a4151); }
+
+        .sl-rad { display: flex; flex-direction: column; gap: 3px; }
+        .sl-top { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; color: var(--lab-ink); }
+        .sl-top b { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; white-space: nowrap; }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); width: 100%; }
+
+        /* Krafterna mellan paren: en rad per par, med logaritmisk stapel. */
+        .par-rad { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; align-items: center; padding: 6px 0;
+                   border-top: 1px solid var(--lab-line, rgba(15,22,32,0.12)); }
+        .par-rad:first-of-type { border-top: none; }
+        .par-namn { display: inline-flex; align-items: center; gap: 4px; font-size: 12.5px; font-weight: 600; color: var(--lab-ink); white-space: nowrap; }
+        .par-varden { display: flex; justify-content: space-between; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--lab-ink); }
+        .par-varden span { white-space: nowrap; }
+        .par-stapel { grid-column: 1 / -1; height: 7px; border-radius: 4px; background: rgba(15,22,32,0.08); overflow: hidden; }
+        .par-stapel i { display: block; height: 100%; border-radius: 4px; transition: width 0.12s linear; }
+        .skala-rad { display: flex; justify-content: space-between; font-size: 10.5px; color: var(--lab-ink-muted, #5a6170); font-family: 'JetBrains Mono', monospace; }
+
+        .rd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .rd { text-align: center; }
+        .rd b { display: block; font-size: 15px; font-weight: 700; color: var(--lab-ink); white-space: nowrap; font-family: 'JetBrains Mono', monospace; }
+        .rd span { font-size: 11.5px; color: var(--lab-ink-muted, #5a6170); }
+
+        .svar-ok { border-left: 4px solid #2f8f4e; padding-left: 10px; }
+        .svar-fel { border-left: 4px solid #c8324a; padding-left: 10px; }
+        .gissa-knappar { display: flex; flex-direction: column; gap: 6px; }
+        .gissa-knappar button {
+            display: flex; align-items: center; gap: 9px; padding: 8px 11px; border-radius: 8px; cursor: pointer;
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); background: var(--lab-bg, #f3eee4);
+            font-weight: 600; font-size: 13.5px; color: var(--lab-ink); text-align: left;
+        }
+        .gissa-knappar button:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .gissa-knappar button.vald { background: var(--lab-ink); color: var(--lab-bg); border-color: var(--lab-ink); }
+        .gissa-knappar button:disabled { cursor: default; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2b">Nivå 2b</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3b">Nivå 1b</a>
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useCallback } = React;
+
+        /* ════════════════════════════════════════════════════════════════
+           TREKROPPARSPROBLEMET
+           Tre stjärnor som bara påverkas av varandras gravitation, enligt
+           Newtons gravitationslag F_G = G · m₁ · m₂ / r² för vart och ett av
+           de tre paren. Ingen formel ger förloppet, så det räknas fram steg
+           för steg (Dormand–Prince 5(4) med adaptivt tidssteg och
+           toleransen 10⁻¹²; stegen krymper av sig själva vid nära passager).
+
+           Enheter i räkningen: G = 1, massa i solmassor, längd i 100 AU.
+           Då blir tidsenheten 1000/(2π) år ≈ 159 år och hastighetsenheten
+           ≈ 2,98 km/s. Kontrollerat i Node: det pythagoreiska problemet
+           (3, 4, 5) slutar med att 3 kastas ut efter t ≈ 60,6 (≈ 9 600 år)
+           och 4 + 5 blir en dubbelstjärna; energin bevaras på 2 · 10⁻⁸.
+           Flyttas 3 med 10⁻⁴ (0,01 AU) kastas i stället 4 ut.
+           ════════════════════════════════════════════════════════════════ */
+
+        const AU_PER_L = 100;
+        const AR_PER_T = 1000 / (2 * Math.PI);
+        const KMS_PER_V = 1.495978707e10 / (AR_PER_T * 3.15576e7);
+        const N_PER_F = 6.674e-11 * 1.98892e30 * 1.98892e30 / Math.pow(1.495978707e13, 2);
+        const MSUN = 1.989e30, AU_M = 1.496e11;
+        const HMAX = 0.02;              // största tidssteg (≈ 3 år), ger mjuk uppspelning
+        const PAR = [[0, 1], [0, 2], [1, 2]];
+        const FARG = ['#ffb347', '#4fd1c5', '#b49cff'];      // bärnsten, turkos, violett
+        const FARG_RGB = [[255, 179, 71], [79, 209, 197], [180, 156, 255]];
+        const GHOST_DX = 1e-4;          // 0,01 AU
+        const KROCK = 1.5e-4;           // 0,015 AU: närmare än så rör stjärnorna vid varandra
+
+        // ── Talformat ──
+        const fmt = (n, d = 0) => {
+            const s = n.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            const [ip, fr] = s.split('.');
+            const neg = ip.startsWith('-');
+            const g = (neg ? ip.slice(1) : ip).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+            return (neg ? '−' : '') + g + (fr !== undefined ? ',' + fr : '');
+        };
+        const sciDelar = (x, d = 1) => {
+            if (!(x > 0)) return { m: '0', e: null };
+            let e = Math.floor(Math.log10(x));
+            let m = x / Math.pow(10, e);
+            if (parseFloat(m.toFixed(d)) >= 10) { m /= 10; e += 1; }
+            return { m: m.toFixed(d).replace('.', ','), e: String(e).replace('-', '−') };
+        };
+        const Sci = ({ x, d = 1, enhet }) => {
+            const { m, e } = sciDelar(x, d);
+            return <span style={{ whiteSpace: 'nowrap' }}>{m}{e !== null && <React.Fragment>{' '}·{' '}10<sup>{e}</sup></React.Fragment>}{enhet ? ' ' + enhet : ''}</span>;
+        };
+        const massaText = (m) => fmt(m, Number.isInteger(m) ? 0 : 1) + (m === 1 ? ' solmassa' : ' solmassor');
+        const avstText = (au) => au >= 100 ? fmt(au, 0) + ' AU' : au >= 1 ? fmt(au, 1) + ' AU' : fmt(au, 2) + ' AU';
+
+        // ── Integratorn (Dormand–Prince 5(4)) ──
+        const DP_A = [[], [1/5], [3/40, 9/40], [44/45, -56/15, 32/9],
+            [19372/6561, -25360/2187, 64448/6561, -212/729],
+            [9017/3168, -355/33, 46732/5247, 49/176, -5103/18656],
+            [35/384, 0, 500/1113, 125/192, -2187/6784, 11/84]];
+        const DP_B = [35/384, 0, 500/1113, 125/192, -2187/6784, 11/84, 0];
+        const DP_E = [71/57600, 0, -71/16695, 71/1920, -17253/339200, 22/525, -1/40];
+
+        function derivera(m, s, ut) {
+            for (let i = 0; i < 3; i++) { ut[4*i] = s[4*i+2]; ut[4*i+1] = s[4*i+3]; ut[4*i+2] = 0; ut[4*i+3] = 0; }
+            for (let p = 0; p < 3; p++) {
+                const i = PAR[p][0], j = PAR[p][1];
+                const dx = s[4*j] - s[4*i], dy = s[4*j+1] - s[4*i+1];
+                const r2 = dx*dx + dy*dy, f = 1 / (r2 * Math.sqrt(r2));
+                ut[4*i+2] += m[j]*f*dx; ut[4*i+3] += m[j]*f*dy;
+                ut[4*j+2] -= m[i]*f*dx; ut[4*j+3] -= m[i]*f*dy;
+            }
+        }
+
+        class System {
+            constructor(m, s0) {
+                this.m = m.slice();
+                this.s = Float64Array.from(s0);
+                this.prev = Float64Array.from(s0);
+                this.t = 0; this.prevT = 0; this.h = 1e-3;
+                this.k = Array.from({ length: 7 }, () => new Float64Array(12));
+                this.tmp = new Float64Array(12); this.y = new Float64Array(12);
+                this.steg = 0;
+            }
+            // Ett accepterat steg. Steglängden styrs bara av integratorn, aldrig
+            // av bildrutorna, så att samma start alltid ger samma förlopp
+            // (viktigt i gissa-läget, där utfallet räknas fram i förväg).
+            steg1() {
+                const { m, s, k, tmp, y } = this;
+                for (let forsok = 0; forsok < 60; forsok++) {
+                    const h = Math.min(this.h, HMAX);
+                    derivera(m, s, k[0]);
+                    for (let st = 1; st < 7; st++) {
+                        for (let q = 0; q < 12; q++) { let v = s[q]; for (let j = 0; j < st; j++) v += h * DP_A[st][j] * k[j][q]; tmp[q] = v; }
+                        derivera(m, tmp, k[st]);
+                    }
+                    let err = 0;
+                    for (let q = 0; q < 12; q++) {
+                        let v = s[q], e = 0;
+                        for (let j = 0; j < 7; j++) { v += h * DP_B[j] * k[j][q]; e += h * DP_E[j] * k[j][q]; }
+                        y[q] = v;
+                        const sk = 1e-12 + 1e-12 * Math.max(Math.abs(s[q]), Math.abs(v));
+                        err = Math.max(err, Math.abs(e) / sk);
+                    }
+                    const fakt = Math.min(5, Math.max(0.2, 0.9 * Math.pow(err || 1e-10, -0.2)));
+                    if (err <= 1 && isFinite(err)) {
+                        this.prev.set(s); this.prevT = this.t;
+                        s.set(y); this.t += h; this.steg++;
+                        this.h = h * fakt;
+                        return true;
+                    }
+                    this.h = h * fakt;
+                }
+                return false;
+            }
+            lage(tv, ut) {
+                // Linjär interpolation mellan de två senaste stegen för visningen.
+                const a = this.t > this.prevT ? Math.min(1, Math.max(0, (tv - this.prevT) / (this.t - this.prevT))) : 1;
+                for (let q = 0; q < 12; q++) ut[q] = this.prev[q] + (this.s[q] - this.prev[q]) * a;
+                return ut;
+            }
+        }
+
+        function parData(m, s) {
+            return PAR.map(([i, j]) => {
+                const r = Math.hypot(s[4*j] - s[4*i], s[4*j+1] - s[4*i+1]);
+                return { i, j, r, F: m[i] * m[j] / (r * r) };
+            });
+        }
+        function energi(m, s) {
+            let K = 0, U = 0;
+            for (let i = 0; i < 3; i++) K += 0.5 * m[i] * (s[4*i+2] ** 2 + s[4*i+3] ** 2);
+            for (const p of parData(m, s)) U -= m[p.i] * m[p.j] / p.r;
+            return K + U;
+        }
+        // Har en stjärna kastats ut? Den ska ha positiv energi relativt de två
+        // andras masscentrum, de två andra ska vara bundna till varandra, den
+        // ska vara långt borta jämfört med parets avstånd och vara på väg bort.
+        function utkastad(m, s) {
+            for (let i = 0; i < 3; i++) {
+                const [a, b] = [0, 1, 2].filter((x) => x !== i);
+                const M = m[a] + m[b];
+                const cx = (m[a]*s[4*a] + m[b]*s[4*b]) / M, cy = (m[a]*s[4*a+1] + m[b]*s[4*b+1]) / M;
+                const vx = (m[a]*s[4*a+2] + m[b]*s[4*b+2]) / M, vy = (m[a]*s[4*a+3] + m[b]*s[4*b+3]) / M;
+                const dx = s[4*i] - cx, dy = s[4*i+1] - cy, dvx = s[4*i+2] - vx, dvy = s[4*i+3] - vy;
+                const r = Math.hypot(dx, dy);
+                const dab = Math.hypot(s[4*a] - s[4*b], s[4*a+1] - s[4*b+1]);
+                const Eut = 0.5 * (dvx*dvx + dvy*dvy) - (M + m[i]) / r;
+                const Ein = 0.5 * ((s[4*a+2] - s[4*b+2]) ** 2 + (s[4*a+3] - s[4*b+3]) ** 2) - M / dab;
+                if (Eut > 0 && Ein < 0 && r > 4 * dab && r > 3 && dx*dvx + dy*dvy > 0) {
+                    const vinf = Math.sqrt(2 * Eut) * M / (M + m[i]);      // stjärnans egen fart långt bort
+                    const aa = -M / (2 * Ein);
+                    const P = 2 * Math.PI * Math.sqrt(aa * aa * aa / M);
+                    return { i, vinf, P };
+                }
+            }
+            return null;
+        }
+
+        // ── Färdiga försök ──
+        function lagrange() {
+            const R = 1.5, v = Math.sqrt(1 / (Math.sqrt(3) * R)), s = [];
+            for (let i = 0; i < 3; i++) {
+                const a = Math.PI / 2 + i * 2 * Math.PI / 3;
+                s.push(R * Math.cos(a), R * Math.sin(a), -v * Math.sin(a), v * Math.cos(a));
+            }
+            s[0] += 1e-6;
+            return s;
+        }
+        function hierarki() {
+            const a = 0.4, vb = Math.sqrt(4 / a) / 2, Rf = 4, vf = Math.sqrt(5 / Rf);
+            const s = [-a / 2, 0, 0, -vb, a / 2, 0, 0, vb, Rf, 0, 0, vf];
+            s[3] -= vf / 4; s[7] -= vf / 4;           // parets rörelsemängd tar ut den tredjes
+            s[0] -= 0.8; s[4] -= 0.8; s[8] -= 0.8;   // masscentrum i origo (Rf · 1/5)
+            return s;
+        }
+        const V3 = [-0.93240737, -0.86473146];
+        const FORSOK = [
+            { id: 'pyth', namn: 'Tre stjärnor från vila (3, 4 och 5)', m: [3, 4, 5],
+              s: [1, 3, 0, 0, -2, -1, 0, 0, 1, -1, 0, 0],
+              text: 'Stjärnor med 3, 4 och 5 solmassor står i hörnen av en rätvinklig triangel med sidorna 300, 400 och 500 AU och släpps från vila. Varje stjärna står mitt emot den sida som har dess massa i längd. Problemet ställdes 1913 men gick inte att lösa för hand. Först 1967 räknade en dator fram hur det slutar.' },
+            { id: 'atta', namn: 'Åttan', m: [1, 1, 1],
+              s: [0.97000436, -0.24308753, -V3[0] / 2, -V3[1] / 2, -0.97000436, 0.24308753, -V3[0] / 2, -V3[1] / 2, 0, 0, V3[0], V3[1]],
+              text: 'Tre lika tunga stjärnor jagar varandra längs samma åttformade bana. Banan hittades med dator 1993 och bevisades år 2000. Den är stabil, men bara om starten är precis rätt.' },
+            { id: 'lagrange', namn: 'Snurrande triangel', m: [1, 1, 1], s: lagrange(),
+              text: 'Tre lika tunga stjärnor i en liksidig triangel som snurrar runt mitten. Gravitationen från de två andra ger varje stjärna precis den kraft som håller den i cirkelbana. Men jämvikten är instabil: en störning på en tiotusendels AU växer tills triangeln bryts sönder.' },
+            { id: 'hierarki', namn: 'Dubbelstjärna och en tredje', m: [2, 2, 1], s: hierarki(),
+              text: 'Två stjärnor kretsar tätt runt varandra och en tredje går i en vid bana runt paret. Så ser många verkliga trippelsystem ut, till exempel Alfa Centauri, där Proxima Centauri går långt utanför paret A och B. Ett sådant system kan hålla ihop i miljarder år.' },
+            { id: 'egen', namn: 'Egen uppställning', m: [3, 4, 5], s: null,
+              text: 'Dra stjärnorna dit du vill i scenen och välj massorna. Stjärnorna släpps från vila.' },
+        ];
+        const forsokMed = (id) => FORSOK.find((f) => f.id === id);
+
+        // Flytta systemet så att masscentrum ligger i origo och står still.
+        function centrera(m, s) {
+            const M = m[0] + m[1] + m[2]; let cx = 0, cy = 0, vx = 0, vy = 0;
+            for (let i = 0; i < 3; i++) { cx += m[i]*s[4*i]; cy += m[i]*s[4*i+1]; vx += m[i]*s[4*i+2]; vy += m[i]*s[4*i+3]; }
+            const u = s.slice();
+            for (let i = 0; i < 3; i++) { u[4*i] -= cx/M; u[4*i+1] -= cy/M; u[4*i+2] -= vx/M; u[4*i+3] -= vy/M; }
+            return u;
+        }
+
+        // ── Gissa-läget: slumpa en vilostart och räkna fram utfallet i förväg ──
+        function slumpaStart() {
+            const m = [0, 1, 2].map(() => 1 + Math.floor(Math.random() * 7));
+            if (m[0] === m[1] && m[1] === m[2]) m[Math.floor(Math.random() * 3)] += 2;
+            let s;
+            for (;;) {
+                s = [];
+                for (let i = 0; i < 3; i++) s.push((Math.random() - 0.5) * 5.4, (Math.random() - 0.5) * 4.2, 0, 0);
+                const d = PAR.map(([i, j]) => Math.hypot(s[4*i] - s[4*j], s[4*i+1] - s[4*j+1]));
+                if (Math.min(...d) > 1.3) break;
+            }
+            return { m, s: centrera(m, s) };
+        }
+        function forberakna(start, klar) {
+            const sys = new System(start.m, start.s);
+            let avbruten = false;
+            const bit = () => {
+                if (avbruten) return;
+                const t0 = performance.now();
+                while (performance.now() - t0 < 14) {
+                    for (let n = 0; n < 400; n++) {
+                        if (!sys.steg1() || sys.steg > 600000 || sys.t > 230) { klar(null); return; }
+                        if (parData(sys.m, sys.s).some((q) => q.r < 3 * KROCK)) { klar(null); return; }
+                        if ((sys.steg & 7) === 0) {
+                            const u = utkastad(sys.m, sys.s);
+                            if (u) { klar(sys.t >= 10 ? { ...u, t: sys.t } : null); return; }
+                        }
+                    }
+                }
+                setTimeout(bit, 0);
+            };
+            setTimeout(bit, 0);
+            return () => { avbruten = true; };
+        }
+
+        // ── Bakgrunden: rymd med nebulosa och stjärnfält, ritad en gång ──
+        function ritaBakgrund(w, h, dpr) {
+            const c = document.createElement('canvas');
+            c.width = Math.max(1, Math.round(w * dpr)); c.height = Math.max(1, Math.round(h * dpr));
+            const g = c.getContext('2d'); g.scale(dpr, dpr);
+            const bg = g.createLinearGradient(0, 0, w * 0.3, h);
+            bg.addColorStop(0, '#060814'); bg.addColorStop(0.55, '#0a0d1f'); bg.addColorStop(1, '#070611');
+            g.fillStyle = bg; g.fillRect(0, 0, w, h);
+            let fro = 7;
+            const rnd = () => { fro = (fro * 16807) % 2147483647; return (fro - 1) / 2147483646; };
+            const moln = [[0.22, 0.30, 0.55, [70, 40, 120], 0.22], [0.78, 0.68, 0.6, [20, 70, 110], 0.2],
+                          [0.6, 0.2, 0.35, [110, 40, 80], 0.12], [0.3, 0.85, 0.45, [30, 50, 100], 0.14]];
+            g.globalCompositeOperation = 'lighter';
+            for (const [x, y, r, col, a] of moln) {
+                const R = r * Math.max(w, h);
+                const gr = g.createRadialGradient(x * w, y * h, 0, x * w, y * h, R);
+                gr.addColorStop(0, `rgba(${col[0]},${col[1]},${col[2]},${a})`);
+                gr.addColorStop(0.5, `rgba(${col[0]},${col[1]},${col[2]},${a * 0.35})`);
+                gr.addColorStop(1, 'rgba(0,0,0,0)');
+                g.fillStyle = gr; g.fillRect(0, 0, w, h);
+            }
+            // Stoftband av små mjuka fläckar
+            for (let i = 0; i < 70; i++) {
+                const x = rnd() * w, y = rnd() * h, r = 20 + rnd() * 70;
+                const gr = g.createRadialGradient(x, y, 0, x, y, r);
+                gr.addColorStop(0, `rgba(${90 + rnd() * 60 | 0},${60 + rnd() * 40 | 0},${130 + rnd() * 80 | 0},0.035)`);
+                gr.addColorStop(1, 'rgba(0,0,0,0)');
+                g.fillStyle = gr; g.fillRect(x - r, y - r, 2 * r, 2 * r);
+            }
+            const antal = Math.round(w * h / 1300);
+            for (let i = 0; i < antal; i++) {
+                const x = rnd() * w, y = rnd() * h, b = rnd();
+                const r = b > 0.985 ? 1.4 : b > 0.9 ? 0.9 : 0.55;
+                const ton = rnd();
+                const col = ton < 0.15 ? '255,214,170' : ton < 0.3 ? '180,205,255' : '235,238,255';
+                g.fillStyle = `rgba(${col},${0.25 + b * 0.6})`;
+                g.beginPath(); g.arc(x, y, r, 0, Math.PI * 2); g.fill();
+                if (b > 0.985) {
+                    const gr = g.createRadialGradient(x, y, 0, x, y, 5);
+                    gr.addColorStop(0, `rgba(${col},0.35)`); gr.addColorStop(1, 'rgba(0,0,0,0)');
+                    g.fillStyle = gr; g.fillRect(x - 5, y - 5, 10, 10);
+                }
+            }
+            g.globalCompositeOperation = 'source-over';
+            const vig = g.createRadialGradient(w / 2, h / 2, Math.min(w, h) * 0.35, w / 2, h / 2, Math.max(w, h) * 0.75);
+            vig.addColorStop(0, 'rgba(0,0,0,0)'); vig.addColorStop(1, 'rgba(0,0,0,0.45)');
+            g.fillStyle = vig; g.fillRect(0, 0, w, h);
+            return c;
+        }
+
+        // Ett "snyggt" avstånd i AU för ringarna och skalan.
+        const fintAvstand = (au) => {
+            const steg = [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000];
+            for (const s of steg) if (s >= au) return s;
+            return steg[steg.length - 1];
+        };
+
+        function rundRekt(g, x, y, w, h, r) {
+            g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r);
+            g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath();
+        }
+        function radbryt(g, text, maxW) {
+            const ord = text.split(' '), rader = []; let rad = '';
+            for (const o of ord) {
+                const prov = rad ? rad + ' ' + o : o;
+                if (g.measureText(prov).width > maxW && rad) { rader.push(rad); rad = o; } else rad = prov;
+            }
+            if (rad) rader.push(rad);
+            return rader;
+        }
+
+        /* ════════════════════════════════════════════════════════════════
+           Formelkortet: Newtons gravitationslag med insatta värden för det
+           valda paret, i SI-enheter.
+           ════════════════════════════════════════════════════════════════ */
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+        const Brak = ({ top, bottom, over, under, size }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.15 }}>
+                <span className="flbl brak-etikett" style={{ marginBottom: 3, visibility: over ? 'visible' : 'hidden' }}>{over || '.'}</span>
+                <span className="fnum" style={{ padding: '0 3px 3px', fontSize: size }}>{top}</span>
+                <span className="fnum" style={{ padding: '3px 3px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center', fontSize: size }}>{bottom}</span>
+                <span className="flbl brak-etikett" style={{ marginTop: 3, visibility: under ? 'visible' : 'hidden' }}>{under || '.'}</span>
+            </div>
+        );
+        const FormulaCard = ({ snap, valtPar, setValtPar, massor }) => {
+            const p = snap.par[valtPar];
+            const [i, j] = PAR[valtPar];
+            const m1 = massor[i] * MSUN, m2 = massor[j] * MSUN, r = p.r * AU_PER_L * AU_M;
+            const F = 6.674e-11 * m1 * m2 / (r * r);
+            return (
+                <div className="formula-card glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-2 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
+                    <span className="fk-grupp">
+                        <Vbl label="Gravitationskraft"><em>F</em><sub>G</sub></Vbl>
+                        <span className="fnum">=</span>
+                        <Vbl label="Gravitationskonstant"><em>G</em></Vbl>
+                        <span className="fnum">·</span>
+                        <Brak over="Massorna" under="Avstånd" top={<span><em>m</em>₁ · <em>m</em>₂</span>} bottom={<span><em>r</em><sup>2</sup></span>} />
+                    </span>
+                    <span className="fk-grupp">
+                        <span className="fnum">=</span>
+                        <span className="fnum" style={{ fontSize: 15 }}>6,67 · 10<sup>−11</sup> Nm²/kg² ·</span>
+                        <Brak size={15} top={<span><Sci x={m1} enhet="kg" /> · <Sci x={m2} enhet="kg" /></span>}
+                              bottom={<span>(<Sci x={r} d={2} enhet="m" />)<sup>2</sup></span>} />
+                    </span>
+                    <span className="fk-grupp">
+                        <span className="fnum">≈</span>
+                        <span className="fnum"><Sci x={F} d={1} enhet="N" /></span>
+                    </span>
+                    <span className="par-chips" style={{ marginLeft: 'auto' }}>
+                        {PAR.map(([a, b], k) => (
+                            <button key={k} className={k === valtPar ? 'active' : ''} onClick={() => setValtPar(k)} title="Visa insättningen för detta par">
+                                <span className="prick" style={{ background: FARG[a] }}></span>
+                                <span className="prick" style={{ background: FARG[b] }}></span>
+                                {fmt(massor[a], 0)} och {fmt(massor[b], 0)}
+                            </button>
+                        ))}
+                    </span>
+                </div>
+            );
+        };
+
+        // Krafterna mellan de tre paren just nu (logaritmisk stapel 10²² … 10²⁸ N).
+        const KraftPanel = ({ snap, massor }) => {
+            const LO = 22, HI = 28;
+            return (
+                <div className="glass-card rounded-xl p-3">
+                    <div className="flbl mb-1">Krafterna mellan paren</div>
+                    {snap.par.map((p, k) => {
+                        const F = p.F * N_PER_F;
+                        const andel = Math.max(0.02, Math.min(1, (Math.log10(F) - LO) / (HI - LO)));
+                        return (
+                            <div className="par-rad" key={k}>
+                                <span className="par-namn">
+                                    <span className="prick" style={{ background: FARG[p.i] }}></span>
+                                    <span className="prick" style={{ background: FARG[p.j] }}></span>
+                                    {fmt(massor[p.i], 0)}–{fmt(massor[p.j], 0)}
+                                </span>
+                                <span className="par-varden">
+                                    <span><em>r</em> = {avstText(p.r * AU_PER_L)}</span>
+                                    <span><em>F</em><sub>G</sub> = <Sci x={F} /> N</span>
+                                </span>
+                                <span className="par-stapel">
+                                    <i style={{ width: (andel * 100) + '%', background: `linear-gradient(90deg, ${FARG[p.i]}, ${FARG[p.j]})` }}></i>
+                                </span>
+                            </div>
+                        );
+                    })}
+                    <div className="skala-rad mt-1"><span>10<sup>22</sup> N</span><span>10<sup>25</sup> N</span><span>10<sup>28</sup> N</span></div>
+                    <p className="anm mt-2">
+                        Staplarna växer tio gånger för varje steg på skalan. Halveras avståndet blir kraften fyra gånger så stor,
+                        eftersom <em>r</em> är kvadrerat. Som jämförelse drar solen i jorden med 3,5 · 10<sup>22</sup> N.
+                    </p>
+                </div>
+            );
+        };
+
+        const Avlasning = ({ snap }) => (
+            <div className="glass-card rounded-xl p-3">
+                <div className="rd-grid">
+                    <div className="rd"><b>{fmt(snap.t * AR_PER_T, 0)}</b><span>år</span></div>
+                    <div className="rd"><b>{fmt(snap.vmax * KMS_PER_V, snap.vmax * KMS_PER_V < 10 ? 1 : 0)}</b><span>högsta fart hittills, km/s</span></div>
+                    <div className="rd"><b>{snap.rmin === null ? '–' : snap.rmin * AU_PER_L < 0.01 ? 'under 0,01 AU' : avstText(snap.rmin * AU_PER_L)}</b><span>närmaste passage</span></div>
+                </div>
+                {snap.ghost !== null && (
+                    <p className="anm mt-2" style={{ textAlign: 'center' }}>
+                        Kopian avviker <b style={{ whiteSpace: 'nowrap' }}>{avstText(snap.ghost * AU_PER_L)}</b> från originalet.
+                    </p>
+                )}
+            </div>
+        );
+
+        const GissaPanel = ({ g, massor, onVal, onNy }) => {
+            const ordning = [0, 1, 2];
+            return (
+                <div className="glass-card rounded-xl p-3">
+                    <div className="flbl mb-2">Vilken stjärna kastas ut?</div>
+                    {g.fas === 'raknar' ? (
+                        <p className="anm">Ställer upp tre nya stjärnor …</p>
+                    ) : (
+                        <React.Fragment>
+                            <div className="gissa-knappar">
+                                {ordning.map((i) => (
+                                    <button key={i} className={g.val === i ? 'vald' : ''} disabled={g.fas !== 'valj'} onClick={() => onVal(i)}>
+                                        <span className="prick" style={{ background: FARG[i] }}></span>
+                                        {massaText(massor[i])}
+                                    </button>
+                                ))}
+                            </div>
+                            {g.fas === 'valj' && <p className="anm mt-2">Klicka på en stjärna i scenen eller välj här. Sedan släpps de från vila.</p>}
+                            {g.fas === 'kor' && <p className="anm mt-2">Du gissade på stjärnan med {massaText(massor[g.val])}. Vänta och se …</p>}
+                            {g.fas === 'klar' && g.facit && (
+                                <div className={'mt-3 anm ' + (g.val === g.facit.i ? 'svar-ok' : 'svar-fel')}>
+                                    <b>{g.val === g.facit.i ? 'Rätt gissat.' : 'Inte den här gången.'}</b>{' '}
+                                    Stjärnan med {massaText(massor[g.facit.i])} kastades ut efter {fmt(g.facit.t * AR_PER_T, 0)} år.{' '}
+                                    {massor[g.facit.i] === Math.min(...massor)
+                                        ? 'Det var den lättaste, och så blir det oftast: samma kraft ger den lätta stjärnan störst acceleration, a = F/m, så den får störst fart vid en nära passage.'
+                                        : 'Den var inte den lättaste. Oftast är det den lättaste som kastas ut, men ingen formel kan säga säkert vilken det blir. Förloppet måste räknas fram.'}
+                                </div>
+                            )}
+                            <div className="flex items-center justify-between mt-3 gap-2">
+                                <span className="anm">Poäng <b>{g.poang}</b> av {g.antal}{g.svit > 1 ? ` · ${g.svit} i rad` : ''}</span>
+                                <button className="btn-toggle" onClick={onNy} disabled={g.fas === 'kor'}>Nya stjärnor</button>
+                            </div>
+                        </React.Fragment>
+                    )}
+                </div>
+            );
+        };
+
+        /* ════════════════════════════════════════════════════════════════
+           Appen
+           ════════════════════════════════════════════════════════════════ */
+        const App = () => {
+            const [forsok, setForsok] = useState('pyth');
+            const [massor, setMassor] = useState([3, 4, 5]);
+            const [running, setRunning] = useState(false);
+            const [fart, setFart] = useState(400);                 // år per sekund
+            const [show, setShow] = useState({ spar: true, langa: false, band: true, krafter: false, namn: true, kopia: false });
+            const [lage, setLage] = useState('fri');
+            const [gis, setGis] = useState({ fas: 'raknar', val: null, facit: null, poang: 0, antal: 0, svit: 0 });
+            const [valtPar, setValtPar] = useState(2);
+            const [togglesOpen, setTogglesOpen] = useState(true);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [narrow, setNarrow] = useState(() => window.matchMedia('(max-width: 600px)').matches);
+            const [snap, setSnap] = useState({ t: 0, vmax: 0, rmin: null, ghost: null, par: PAR.map(([i, j]) => ({ i, j, r: 1, F: 1 })) });
+
+            const canvasRef = useRef(null);
+            const sceneWrapRef = useRef(null);
+            const S = useRef(null);                  // all simuleringsdata som ändras varje bildruta
+            const runRef = useRef(running); runRef.current = running;
+            const fartRef = useRef(fart); fartRef.current = fart;
+            const showRef = useRef(show); showRef.current = show;
+            const lageRef = useRef(lage); lageRef.current = lage;
+            const gisRef = useRef(gis); gisRef.current = gis;
+            const togRef = useRef(togglesOpen); togRef.current = togglesOpen;
+            const fsRef = useRef(isFullscreen); fsRef.current = isFullscreen;
+            const narrowRef = useRef(narrow); narrowRef.current = narrow;
+            const startRef = useRef({ m: [3, 4, 5], s: forsokMed('pyth').s.slice() });
+            const avbrytRef = useRef(null);
+
+            // ── Bygg om simuleringen från en start ──
+            const bygg = useCallback((start, kopia, ejCentrera) => {
+                const m = start.m.slice(), s0 = ejCentrera ? start.s.slice() : centrera(m, start.s);
+                const sys = new System(m, s0);
+                let gh = null;
+                if (kopia) { const s1 = s0.slice(); s1[0] += GHOST_DX; gh = new System(m, s1); }
+                const st = S.current || {};
+                S.current = {
+                    ...st, sys, gh, tv: 0, m,
+                    spar: [[], [], []], gspar: [[], [], []],
+                    vis: new Float64Array(s0), gvis: new Float64Array(s0),
+                    vmax: 0, rmin: null, rminPar: null, handelse: null, krock: null, ghandelse: null,
+                    flammor: [], narFore: [Infinity, Infinity, Infinity], narFore2: [Infinity, Infinity, Infinity], stopp: false,
+                    kamera: null, Fskala: null, skarmPos: [], folj: 0,
+                };
+                const p0 = parData(m, s0);
+                S.current.Fskala = 62 / Math.max(...p0.map((p) => p.F));
+            }, []);
+
+            const valjForsok = (id, opts = {}) => {
+                const f = forsokMed(id);
+                setForsok(id);
+                setRunning(false);
+                let start;
+                if (id === 'egen') {
+                    const fore = S.current ? S.current.sys : null;
+                    const s = fore ? Array.from(fore.t === 0 ? fore.s : startRef.current.s) : forsokMed('pyth').s.slice();
+                    for (let i = 0; i < 3; i++) { s[4*i+2] = 0; s[4*i+3] = 0; }
+                    start = { m: opts.m || massor.slice(), s };
+                } else {
+                    start = { m: f.m.slice(), s: f.s.slice() };
+                    setMassor(f.m.slice());
+                    if (id === 'pyth') setValtPar(2);
+                }
+                startRef.current = start;
+                bygg(start, showRef.current.kopia && lageRef.current === 'fri');
+            };
+
+            const borjaOm = () => {
+                setRunning(false);
+                bygg(startRef.current, showRef.current.kopia && lage === 'fri');
+            };
+
+            // Första uppställningen
+            if (!S.current) bygg(startRef.current, false);
+
+            // Kopian slås av och på
+            useEffect(() => {
+                if (lage !== 'fri') return;
+                const st = S.current;
+                if (show.kopia && !st.gh) {
+                    if (st.sys.t === 0) { bygg(startRef.current, true); return; }
+                    // Mitt i ett förlopp: börja om, så att kopian startar samtidigt.
+                    setRunning(false); bygg(startRef.current, true);
+                } else if (!show.kopia && st.gh) {
+                    st.gh = null; st.gspar = [[], [], []]; st.ghandelse = null;
+                }
+            }, [show.kopia]);
+
+            // ── Gissa-läget ──
+            const nyGissning = () => {
+                if (avbrytRef.current) avbrytRef.current();
+                setRunning(false);
+                setGis((g) => ({ ...g, fas: 'raknar', val: null, facit: null }));
+                const forsokEn = () => {
+                    const start = slumpaStart();
+                    avbrytRef.current = forberakna(start, (facit) => {
+                        if (!facit) { forsokEn(); return; }
+                        startRef.current = start;
+                        setMassor(start.m.slice());
+                        bygg(start, false);
+                        S.current.facit = facit;
+                        setGis((g) => ({ ...g, fas: 'valj', val: null, facit }));
+                    });
+                };
+                forsokEn();
+            };
+            const valjLage = (nytt) => {
+                if (nytt === lage) return;
+                setLage(nytt);
+                setRunning(false);
+                if (nytt === 'gissa') nyGissning();
+                else { if (avbrytRef.current) avbrytRef.current(); valjForsok('pyth'); }
+            };
+            const gissa = (i) => {
+                if (gisRef.current.fas !== 'valj') return;
+                setGis((g) => ({ ...g, fas: 'kor', val: i }));
+                setFart((f) => Math.max(f, 600));
+                setRunning(true);
+            };
+
+            // ── Fullskärm och smal skärm ──
+            useEffect(() => {
+                const handler = () => {
+                    const w = sceneWrapRef.current;
+                    setIsFullscreen(!!w && (document.fullscreenElement === w || document.webkitFullscreenElement === w));
+                };
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                const mq = window.matchMedia('(max-width: 600px)');
+                const mqh = () => setNarrow(mq.matches);
+                mq.addEventListener('change', mqh);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                    mq.removeEventListener('change', mqh);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            // ── Dra stjärnorna (före start) och klicka för att gissa ──
+            const dragRef = useRef(null);
+            const traff = (e) => {
+                const c = canvasRef.current, rc = c.getBoundingClientRect();
+                const x = e.clientX - rc.left, y = e.clientY - rc.top;
+                let bast = -1, bd = 30;
+                (S.current.skarmPos || []).forEach((p, i) => { const d = Math.hypot(p[0] - x, p[1] - y); if (d < bd) { bd = d; bast = i; } });
+                return { i: bast, x, y };
+            };
+            const tillVarld = (x, y) => {
+                const k = S.current.kamera;
+                return [(x - k.ox) / k.sk + k.cx, -(y - k.oy) / k.sk + k.cy];
+            };
+            const onDown = (e) => {
+                const h = traff(e);
+                if (h.i < 0) return;
+                if (lageRef.current === 'gissa') { gissa(h.i); return; }
+                if (S.current.sys.t !== 0) return;
+                e.preventDefault();
+                try { canvasRef.current.setPointerCapture(e.pointerId); } catch (err) {}
+                dragRef.current = { i: h.i };
+                if (forsok !== 'egen') {
+                    // Byt till en egen uppställning från vila, med samma lägen och massor.
+                    const s = Array.from(S.current.sys.s);
+                    for (let i = 0; i < 3; i++) { s[4*i+2] = 0; s[4*i+3] = 0; }
+                    startRef.current = { m: S.current.m.slice(), s };
+                    setForsok('egen');
+                }
+            };
+            const onMove = (e) => {
+                const c = canvasRef.current;
+                if (!dragRef.current) {
+                    if (!S.current) return;
+                    const h = traff(e);
+                    const kan = h.i >= 0 && ((lageRef.current === 'gissa' && gisRef.current.fas === 'valj') || (lageRef.current === 'fri' && S.current.sys.t === 0));
+                    c.style.cursor = kan ? (lageRef.current === 'gissa' ? 'pointer' : 'grab') : 'default';
+                    return;
+                }
+                const rc = c.getBoundingClientRect();
+                const [wx, wy] = tillVarld(e.clientX - rc.left, e.clientY - rc.top);
+                const i = dragRef.current.i;
+                const s = startRef.current.s.slice();
+                // Inte närmare än 30 AU till en annan stjärna
+                for (let j = 0; j < 3; j++) if (j !== i && Math.hypot(wx - s[4*j], wy - s[4*j+1]) < 0.3) return;
+                s[4*i] = wx; s[4*i+1] = wy;
+                startRef.current = { m: startRef.current.m, s };
+                const kam = S.current.kamera;
+                bygg({ m: startRef.current.m, s }, showRef.current.kopia, true);
+                S.current.kamera = kam;       // kameran står still medan man drar
+                S.current.hallKamera = true;
+            };
+            const onUp = () => {
+                if (dragRef.current) {
+                    dragRef.current = null;
+                    // Starten är redan centrerad i bygg(); spara den centrerade varianten.
+                    const fore = Array.from(S.current.sys.s), mm = S.current.m, kam = S.current.kamera;
+                    const M = mm[0] + mm[1] + mm[2];
+                    const cx = (mm[0]*fore[0] + mm[1]*fore[4] + mm[2]*fore[8]) / M, cy = (mm[0]*fore[1] + mm[1]*fore[5] + mm[2]*fore[9]) / M;
+                    startRef.current = { m: mm.slice(), s: centrera(mm, fore) };
+                    bygg(startRef.current, showRef.current.kopia);
+                    // Kameran flyttas lika mycket som systemet, så att ingenting hoppar.
+                    if (kam) S.current.kamera = { ...kam, cx: kam.cx - cx, cy: kam.cy - cy };
+                    S.current.hallKamera = false;
+                }
+            };
+
+            const satMassa = (i, v) => {
+                const nm = massor.slice(); nm[i] = v; setMassor(nm);
+                setRunning(false);
+                const s = startRef.current.s.slice();
+                for (let k = 0; k < 3; k++) { s[4*k+2] = 0; s[4*k+3] = 0; }
+                startRef.current = { m: nm, s };
+                if (forsok !== 'egen') setForsok('egen');
+                bygg(startRef.current, showRef.current.kopia);
+            };
+
+            // ── Ritloopen ──
+            useEffect(() => {
+                const c = canvasRef.current;
+                let raf, last = performance.now(), bg = null, bgKey = '', senastSnap = 0;
+                const sk = { w: 0, h: 0, dpr: 1 };
+                const anpassa = () => {
+                    const rc = c.getBoundingClientRect();
+                    const dpr = Math.min(2, window.devicePixelRatio || 1);
+                    if (!isFinite(rc.width) || !isFinite(rc.height) || rc.width < 2 || rc.height < 2) return;
+                    const w = rc.width, h = rc.height;
+                    if (w !== sk.w || h !== sk.h || dpr !== sk.dpr) {
+                        sk.w = w; sk.h = h; sk.dpr = dpr;
+                        c.width = Math.round(w * dpr); c.height = Math.round(h * dpr);
+                    }
+                    const key = `${Math.round(w)}x${Math.round(h)}@${dpr}`;
+                    if (key !== bgKey) { bg = ritaBakgrund(w, h, dpr); bgKey = key; }
+                };
+                const ro = new ResizeObserver(anpassa); ro.observe(c);
+                anpassa();
+
+                const spara = (spar, s, tid, minD) => {
+                    for (let i = 0; i < 3; i++) {
+                        const a = spar[i], n = a.length;
+                        if (n >= 3) {
+                            const dx = s[4*i] - a[n - 3], dy = s[4*i+1] - a[n - 2];
+                            if (dx*dx + dy*dy < minD * minD) continue;
+                        }
+                        a.push(s[4*i], s[4*i+1], tid);
+                        if (a.length > 3 * 24000) {      // gallra bort varannan punkt i den äldre halvan
+                            const ny = [];
+                            for (let k = 0; k < a.length; k += 3) if (k > a.length / 2 || (k / 3) % 2 === 0) ny.push(a[k], a[k+1], a[k+2]);
+                            spar[i] = ny;
+                        }
+                    }
+                };
+                const trimma = (spar, tid, langd) => {
+                    for (let i = 0; i < 3; i++) {
+                        const a = spar[i]; let k = 0;
+                        while (k < a.length && tid - a[k + 2] > langd) k += 3;
+                        if (k > 300) spar[i] = a.slice(k);
+                    }
+                };
+
+                const loop = (now) => {
+                    const dt = Math.min(0.05, (now - last) / 1000); last = now;
+                    const st = S.current, g = c.getContext('2d');
+                    const W = sk.w, H = sk.h;
+                    const sh = showRef.current;
+                    const fs = fsRef.current, smal = narrowRef.current || W < 520;
+                    // Fri yta (inställningsrutan ligger uppe till höger på bred skärm)
+                    const hoger = !smal && togRef.current ? (fs ? 300 : 218) : 0;
+                    const harMsg = st.handelse || (st.sys.t === 0 && !runRef.current) || lageRef.current === 'gissa';
+                    const mobFs = smal && fs;
+                    const vy = { x0: 14, y0: smal ? 56 : 60, x1: W - 14 - hoger, y1: H - (mobFs ? 190 : smal ? 30 : 40) - (harMsg ? (smal ? 64 : 56) : 0) };
+
+                    // Kameran: passa in stjärnorna, men den utkastade bara så länge den är nära.
+                    const kameraMal = () => {
+                        let xs = [], ys = [];
+                        const s = st.vis;
+                        for (let i = 0; i < 3; i++) {
+                            if (st.handelse && st.handelse.i === i) {
+                                const [a, b] = [0, 1, 2].filter((x) => x !== i);
+                                const d = Math.hypot(s[4*i] - (s[4*a] + s[4*b]) / 2, s[4*i+1] - (s[4*a+1] + s[4*b+1]) / 2);
+                                if (d > 4.5) continue;
+                            }
+                            xs.push(s[4*i]); ys.push(s[4*i+1]);
+                        }
+                        let x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
+                        const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+                        const hw = Math.max(0.55, (x1 - x0) / 2) * 1.28 + 0.12, hh = Math.max(0.55, (y1 - y0) / 2) * 1.28 + 0.12;
+                        const skm = Math.min((vy.x1 - vy.x0) / (2 * hw), (vy.y1 - vy.y0) / (2 * hh));
+                        return { cx, cy, sk: skm };
+                    };
+
+                    // ── Fysiken ──
+                    const kor = runRef.current;
+                    if (kor && !st.stopp) {
+                        st.tv += dt * fartRef.current / AR_PER_T;
+                        const minD = 1.1 / (st.kamera ? st.kamera.sk : 100);
+                        const langd = sh.langa ? 400 : 9;
+                        let budget = 8000;
+                        while (st.sys.t < st.tv && budget-- > 0) {
+                            if (!st.sys.steg1()) { st.stopp = true; break; }
+                            spara(st.spar, st.sys.s, st.sys.t, minD);
+                            // nära passager: blixt vid minsta avståndet
+                            const pd = parData(st.m, st.sys.s);
+                            for (let p = 0; p < 3; p++) {
+                                const r = pd[p].r;
+                                if (st.rmin === null || r < st.rmin) { st.rmin = r; }
+                                if (r < KROCK && !st.krock) { st.krock = { i: PAR[p][0], j: PAR[p][1], t: st.sys.t }; st.stopp = true; }
+                                // lokalt minimum under 3 AU: blixt där passagen skedde
+                                if (!st.handelse && st.narFore[p] < 0.03 && r > st.narFore[p] && st.narFore[p] <= st.narFore2[p]) {
+                                    const [i, j] = PAR[p];
+                                    st.flammor.push({ i, j, x: (st.sys.s[4*i] + st.sys.s[4*j]) / 2, y: (st.sys.s[4*i+1] + st.sys.s[4*j+1]) / 2, liv: 1 });
+                                }
+                                st.narFore2[p] = st.narFore[p]; st.narFore[p] = r;
+                            }
+                            if (st.krock) { st.tv = st.sys.t; break; }
+                            for (let i = 0; i < 3; i++) st.vmax = Math.max(st.vmax, Math.hypot(st.sys.s[4*i+2], st.sys.s[4*i+3]));
+                            if (!st.handelse && (st.sys.steg & 7) === 0) {
+                                const u = utkastad(st.m, st.sys.s);
+                                if (u) st.handelse = { ...u, t: st.sys.t };
+                            }
+                        }
+                        if (budget <= 0) st.tv = st.sys.t;
+                        if (st.gh) {
+                            let b2 = 8000;
+                            while (st.gh.t < st.tv && b2-- > 0) {
+                                if (!st.gh.steg1()) break;
+                                spara(st.gspar, st.gh.s, st.gh.t, minD);
+                                if (!st.ghandelse && (st.gh.steg & 7) === 0) {
+                                    const u = utkastad(st.m, st.gh.s);
+                                    if (u) st.ghandelse = { ...u, t: st.gh.t };
+                                }
+                            }
+                        }
+                        trimma(st.spar, st.tv, langd);
+                        if (st.gh) trimma(st.gspar, st.tv, langd);
+                    }
+                    st.sys.lage(st.tv, st.vis);
+                    if (st.gh) st.gh.lage(st.tv, st.gvis);
+
+                    // Gissa-läget: avgör när utkastet syns
+                    if (lageRef.current === 'gissa' && st.handelse && gisRef.current.fas === 'kor') {
+                        const g0 = gisRef.current, ratt = g0.val === st.handelse.i;
+                        setGis({ ...g0, fas: 'klar', facit: st.handelse, antal: g0.antal + 1,
+                                 poang: g0.poang + (ratt ? 1 : 0), svit: ratt ? g0.svit + 1 : 0 });
+                    }
+
+                    // ── Kameran ──
+                    const mal = kameraMal();
+                    const ox = (vy.x0 + vy.x1) / 2, oy = (vy.y0 + vy.y1) / 2;
+                    if (!st.kamera) st.kamera = { cx: mal.cx, cy: mal.cy, sk: mal.sk, ox, oy };
+                    else if (!st.hallKamera) {
+                        const k = st.kamera;
+                        const fl = Math.log(mal.sk / k.sk);
+                        // ut snabbt, in långsamt och bara när det behövs (ingen pumpande zoom)
+                        const takt = fl < 0 ? 2.2 : (fl > Math.log(1.45) ? 0.9 : 0);
+                        k.sk *= Math.exp(fl * (1 - Math.exp(-dt * takt)));
+                        // Efter utkastet låses kameran gradvis fast på dubbelstjärnan,
+                        // som kan rekylera snabbt åt motsatt håll.
+                        if (st.handelse) st.folj = Math.min(1, (st.folj || 0) + dt * 0.8);
+                        const a = Math.max(1 - Math.exp(-dt * 1.6), st.folj || 0);
+                        k.cx += (mal.cx - k.cx) * a; k.cy += (mal.cy - k.cy) * a;
+                        k.ox += (ox - k.ox) * Math.min(1, dt * 6); k.oy += (oy - k.oy) * Math.min(1, dt * 6);
+                    }
+                    const K = st.kamera;
+                    const X = (x) => K.ox + (x - K.cx) * K.sk, Y = (y) => K.oy - (y - K.cy) * K.sk;
+                    const tk = Math.max(0.82, Math.min(1.2, W / 860));
+
+                    // ── Ritning ──
+                    g.setTransform(sk.dpr, 0, 0, sk.dpr, 0, 0);
+                    if (bg) g.drawImage(bg, 0, 0, W, H); else { g.fillStyle = '#05060d'; g.fillRect(0, 0, W, H); }
+
+                    // Avståndsringar runt masscentrum (origo), en tunn stjärnkarta
+                    {
+                        const auPx = K.sk / AU_PER_L;
+                        const steg = fintAvstand(90 / auPx);
+                        const ox0 = X(0), oy0 = Y(0);
+                        g.save();
+                        g.font = `500 ${Math.round(10.5 * tk)}px Poppins, sans-serif`;
+                        g.textAlign = 'left'; g.textBaseline = 'bottom';
+                        for (let n = 1; n <= 8; n++) {
+                            const r = n * steg * auPx;
+                            if (r > Math.hypot(W, H)) break;
+                            g.strokeStyle = n % 2 === 0 ? 'rgba(160,180,230,0.09)' : 'rgba(160,180,230,0.055)';
+                            g.lineWidth = 1; g.setLineDash(n % 2 === 0 ? [] : [3, 6]);
+                            g.beginPath(); g.arc(ox0, oy0, r, 0, Math.PI * 2); g.stroke();
+                            if (n % 2 === 0 || n === 1) {
+                                const lx = ox0 + r * Math.cos(-Math.PI / 4) + 4, ly = oy0 + r * Math.sin(-Math.PI / 4) - 2;
+                                if (lx > 8 && lx < W - 60 && ly > 20 && ly < H - 8) {
+                                    g.fillStyle = 'rgba(170,186,225,0.42)';
+                                    g.fillText(fmt(n * steg, 0) + ' AU', lx, ly);
+                                }
+                            }
+                        }
+                        g.setLineDash([]);
+                        // masscentrum
+                        g.strokeStyle = 'rgba(190,200,235,0.35)'; g.lineWidth = 1;
+                        g.beginPath(); g.moveTo(ox0 - 5, oy0); g.lineTo(ox0 + 5, oy0); g.moveTo(ox0, oy0 - 5); g.lineTo(ox0, oy0 + 5); g.stroke();
+                        g.restore();
+                    }
+
+                    // Spår
+                    const ritaSpar = (spar, sist, alfa, streckad) => {
+                        const langd = sh.langa ? 400 : 9;
+                        g.save(); g.globalCompositeOperation = 'lighter'; g.lineCap = 'butt'; g.lineJoin = 'round';
+                        if (streckad) g.setLineDash([4, 5]);
+                        for (let i = 0; i < 3; i++) {
+                            const a = spar[i]; const n = a.length / 3; if (n < 1) continue;
+                            const [R, G2, B] = FARG_RGB[i];
+                            for (let pass = 0; pass < (streckad ? 1 : 2); pass++) {
+                                const bredd = pass === 0 ? (streckad ? 1.3 : 4.2) : 1.5;
+                                const styrka = pass === 0 ? (streckad ? 0.55 : 0.16) : 0.85;
+                                g.lineWidth = bredd * tk;
+                                const BIT = 10;
+                                for (let k0 = 0; k0 < n; k0 += BIT) {
+                                    const ald = st.tv - a[3 * k0 + 2];
+                                    let f = sh.langa ? 0.35 + 0.65 * Math.max(0, 1 - ald / langd) : Math.max(0, 1 - ald / langd);
+                                    f = Math.pow(f, 1.4) * alfa * styrka;
+                                    if (f < 0.01) continue;
+                                    g.strokeStyle = `rgba(${R},${G2},${B},${f})`;
+                                    g.beginPath();
+                                    g.moveTo(X(a[3 * k0]), Y(a[3 * k0 + 1]));
+                                    const k1 = Math.min(n - 1, k0 + BIT);
+                                    for (let k = k0 + 1; k <= k1; k++) g.lineTo(X(a[3 * k]), Y(a[3 * k + 1]));
+                                    if (k1 === n - 1) g.lineTo(X(sist[4 * i]), Y(sist[4 * i + 1]));
+                                    g.stroke();
+                                }
+                            }
+                        }
+                        g.restore();
+                    };
+                    if (sh.spar) {
+                        if (st.gh) ritaSpar(st.gspar, st.gvis, 0.75, true);
+                        ritaSpar(st.spar, st.vis, 1, false);
+                    }
+
+                    const pos = [0, 1, 2].map((i) => [X(st.vis[4*i]), Y(st.vis[4*i+1])]);
+                    st.skarmPos = pos;
+                    const pd = parData(st.m, st.vis);
+
+                    // Gravitationsband: en tråd mellan varje par, starkare ju större kraften är
+                    if (sh.band) {
+                        g.save(); g.globalCompositeOperation = 'lighter';
+                        const Fref = st.Fskala ? 62 / st.Fskala : 1;
+                        for (const p of pd) {
+                            const styrka = Math.max(0, Math.min(1, (Math.log10(p.F / Fref) + 1.2) / 3));
+                            const [a, b] = [pos[p.i], pos[p.j]];
+                            if (![a[0], a[1], b[0], b[1]].every(isFinite)) continue;
+                            const gr = g.createLinearGradient(a[0], a[1], b[0], b[1]);
+                            const ca = FARG_RGB[p.i], cb = FARG_RGB[p.j];
+                            const al = 0.05 + 0.45 * styrka;
+                            gr.addColorStop(0, `rgba(${ca[0]},${ca[1]},${ca[2]},${al})`);
+                            gr.addColorStop(0.5, `rgba(${(ca[0] + cb[0]) / 2 | 0},${(ca[1] + cb[1]) / 2 | 0},${(ca[2] + cb[2]) / 2 | 0},${al * 0.55})`);
+                            gr.addColorStop(1, `rgba(${cb[0]},${cb[1]},${cb[2]},${al})`);
+                            g.strokeStyle = gr;
+                            g.lineWidth = (0.8 + 3.2 * styrka) * tk;
+                            g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(b[0], b[1]); g.stroke();
+                            // mjukt sken runt tråden när kraften är stor
+                            if (styrka > 0.55) {
+                                g.lineWidth = (6 + 10 * styrka) * tk; g.strokeStyle = `rgba(${(ca[0] + cb[0]) / 2 | 0},${(ca[1] + cb[1]) / 2 | 0},${(ca[2] + cb[2]) / 2 | 0},${0.06 * styrka})`;
+                                g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(b[0], b[1]); g.stroke();
+                            }
+                        }
+                        g.restore();
+                    }
+
+                    // Blixtar vid nära passager
+                    g.save(); g.globalCompositeOperation = 'lighter';
+                    st.flammor = st.flammor.filter((f) => f.liv > 0.02);
+                    for (const f of st.flammor) {
+                        const x = X(f.x), y = Y(f.y), R = (18 + 50 * (1 - f.liv)) * tk;
+                        const gr = g.createRadialGradient(x, y, 0, x, y, R);
+                        gr.addColorStop(0, `rgba(255,245,230,${0.55 * f.liv})`);
+                        gr.addColorStop(0.4, `rgba(255,200,160,${0.18 * f.liv})`);
+                        gr.addColorStop(1, 'rgba(0,0,0,0)');
+                        g.fillStyle = gr; g.beginPath(); g.arc(x, y, R, 0, Math.PI * 2); g.fill();
+                        if (kor) f.liv *= Math.exp(-dt * 3);
+                    }
+                    g.restore();
+
+                    // Kopians stjärnor: ringar
+                    if (st.gh) {
+                        for (let i = 0; i < 3; i++) {
+                            const x = X(st.gvis[4*i]), y = Y(st.gvis[4*i+1]);
+                            g.strokeStyle = FARG[i]; g.globalAlpha = 0.8; g.lineWidth = 1.6;
+                            g.setLineDash([3, 3]);
+                            g.beginPath(); g.arc(x, y, (5 + 2 * Math.cbrt(st.m[i])) * tk, 0, Math.PI * 2); g.stroke();
+                            g.setLineDash([]); g.globalAlpha = 1;
+                        }
+                    }
+
+                    // Stjärnorna
+                    const radie = (i) => (3.2 + 2.3 * Math.cbrt(st.m[i])) * tk;
+                    g.save(); g.globalCompositeOperation = 'lighter';
+                    for (let i = 0; i < 3; i++) {
+                        const [x, y] = pos[i]; const [R, G2, B] = FARG_RGB[i]; const r = radie(i);
+                        // stor, svag ljuspöl som färgar rymden runt stjärnan
+                        const pol = r * (16 + 2 * st.m[i]);
+                        let gr = g.createRadialGradient(x, y, 0, x, y, pol);
+                        gr.addColorStop(0, `rgba(${R},${G2},${B},0.16)`);
+                        gr.addColorStop(0.35, `rgba(${R},${G2},${B},0.05)`);
+                        gr.addColorStop(1, 'rgba(0,0,0,0)');
+                        g.fillStyle = gr; g.beginPath(); g.arc(x, y, pol, 0, Math.PI * 2); g.fill();
+                        const sken = r * 8;
+                        gr = g.createRadialGradient(x, y, 0, x, y, sken);
+                        gr.addColorStop(0, `rgba(${R},${G2},${B},0.8)`);
+                        gr.addColorStop(0.16, `rgba(${R},${G2},${B},0.32)`);
+                        gr.addColorStop(0.45, `rgba(${R},${G2},${B},0.07)`);
+                        gr.addColorStop(1, 'rgba(0,0,0,0)');
+                        g.fillStyle = gr; g.beginPath(); g.arc(x, y, sken, 0, Math.PI * 2); g.fill();
+                        // diffraktionsspikar
+                        const sp = r * (3.4 + 0.5 * st.m[i] / 3);
+                        for (const [dx, dy, l] of [[1, 0, 1], [0, 1, 1], [0.707, 0.707, 0.45], [0.707, -0.707, 0.45]]) {
+                            const L = sp * l;
+                            const lg = g.createLinearGradient(x - dx * L, y - dy * L, x + dx * L, y + dy * L);
+                            lg.addColorStop(0, 'rgba(0,0,0,0)'); lg.addColorStop(0.5, `rgba(${R},${G2},${B},0.5)`); lg.addColorStop(1, 'rgba(0,0,0,0)');
+                            g.strokeStyle = lg; g.lineWidth = 1.1;
+                            g.beginPath(); g.moveTo(x - dx * L, y - dy * L); g.lineTo(x + dx * L, y + dy * L); g.stroke();
+                        }
+                    }
+                    g.restore();
+                    for (let i = 0; i < 3; i++) {
+                        const [x, y] = pos[i]; const r = radie(i);
+                        const gr = g.createRadialGradient(x - r * 0.25, y - r * 0.25, 0, x, y, r);
+                        gr.addColorStop(0, '#ffffff'); gr.addColorStop(0.45, '#fffaf0'); gr.addColorStop(1, FARG[i]);
+                        g.fillStyle = gr; g.beginPath(); g.arc(x, y, r, 0, Math.PI * 2); g.fill();
+                    }
+
+                    // Kraftpilar: två per stjärna, skalenliga (kapas om de blir för långa)
+                    if (sh.krafter && st.Fskala) {
+                        const KAP = 150 * tk;
+                        for (const p of pd) {
+                            for (const [fran, mot] of [[p.i, p.j], [p.j, p.i]]) {
+                                const [x, y] = pos[fran], [x2, y2] = pos[mot];
+                                const d = Math.hypot(x2 - x, y2 - y); if (d < 1) continue;
+                                const ux = (x2 - x) / d, uy = (y2 - y) / d;
+                                let L = p.F * st.Fskala * tk; const kapad = L > KAP; if (kapad) L = KAP;
+                                if (L < 6) continue;
+                                const hl = Math.min(10, L * 0.5), hw = Math.min(5.5, L * 0.28);
+                                const ex = x + ux * L, ey = y + uy * L;
+                                g.strokeStyle = FARG[mot]; g.fillStyle = FARG[mot]; g.lineWidth = 2.4; g.lineCap = 'butt';
+                                g.beginPath(); g.moveTo(x, y); g.lineTo(ex - ux * hl, ey - uy * hl); g.stroke();
+                                g.beginPath(); g.moveTo(ex, ey);
+                                g.lineTo(ex - ux * hl - uy * hw, ey - uy * hl + ux * hw);
+                                g.lineTo(ex - ux * hl + uy * hw, ey - uy * hl - ux * hw); g.closePath(); g.fill();
+                                if (kapad) {      // två snedstreck: pilen är längre än den ritas
+                                    const mx = x + ux * L * 0.55, my = y + uy * L * 0.55;
+                                    g.strokeStyle = 'rgba(240,244,255,0.9)'; g.lineWidth = 1.4;
+                                    for (const o of [-3, 3]) {
+                                        const cx2 = mx + ux * o, cy2 = my + uy * o;
+                                        g.beginPath(); g.moveTo(cx2 - uy * 6 - ux * 2, cy2 + ux * 6 - uy * 2); g.lineTo(cx2 + uy * 6 + ux * 2, cy2 - ux * 6 + uy * 2); g.stroke();
+                                    }
+                                }
+                            }
+                            // tyngdpunkten markeras med en prick
+                        }
+                        for (let i = 0; i < 3; i++) { g.fillStyle = '#0b0f1f'; g.beginPath(); g.arc(pos[i][0], pos[i][1], 2.2, 0, Math.PI * 2); g.fill(); }
+                    }
+
+                    // Namn intill stjärnorna, bort från masscentrum
+                    const vyRekt = { x0: 6, y0: 6, x1: W - 6 - hoger, y1: H - 6 };
+                    if (sh.namn) {
+                        // Varje etikett prövar några lägen runt stjärnan och tar det
+                        // första som varken krockar med en annan etikett, en stjärna
+                        // eller kanten (inställningsrutan räknas som kant).
+                        const fh = Math.round(13 * tk);
+                        g.font = `600 ${fh}px Poppins, sans-serif`;
+                        g.textBaseline = 'middle'; g.textAlign = 'left';
+                        const lagda = [smal ? { x0: 0, x1: 270, y0: 0, y1: 48 } : { x0: 0, x1: 340 * tk, y0: 0, y1: 60 }];   // avläsningen
+                        const krockar = (r) => r.x0 < 6 || r.x1 > W - 6 - hoger || r.y0 < 4 || r.y1 > H - 4
+                            || lagda.some((q) => r.x0 < q.x1 + 4 && r.x1 > q.x0 - 4 && r.y0 < q.y1 + 2 && r.y1 > q.y0 - 2)
+                            || pos.some(([sx, sy], k) => sx > r.x0 - radie(k) - 2 && sx < r.x1 + radie(k) + 2 && sy > r.y0 - radie(k) - 2 && sy < r.y1 + radie(k) + 2);
+                        const ordning = [0, 1, 2].sort((a, b) => st.m[b] - st.m[a]);
+                        for (const i of ordning) {
+                            const [x, y] = pos[i];
+                            if (x < vyRekt.x0 || x > vyRekt.x1 || y < vyRekt.y0 || y > vyRekt.y1) continue;
+                            const t = massaText(st.m[i]);
+                            const tw = g.measureText(t).width;
+                            let dx = x - X(0), dy = y - Y(0); const d = Math.hypot(dx, dy) || 1; dx /= d; dy /= d;
+                            if (d < 2) { dx = 0.7; dy = -0.7; }
+                            const off = radie(i) + 9 * tk;
+                            const kand = [[dx, dy, 1], [1, 0, 1], [-1, 0, 1], [0, -1, 1], [0, 1, 1], [0.7, -0.7, 1], [-0.7, -0.7, 1], [0.7, 0.7, 1], [-0.7, 0.7, 1],
+                                          [0, -1, 2.2], [0, 1, 2.2], [-0.7, -0.7, 2], [-0.7, 0.7, 2], [0.7, -0.7, 2], [0.7, 0.7, 2]];
+                            let val = null;
+                            for (const [ux, uy, f] of kand) {
+                                const cx = x + ux * (off + tw / 2 * Math.abs(ux)), cy = y + uy * (off * f + fh * 0.4);
+                                const r = { x0: cx - tw / 2, x1: cx + tw / 2, y0: cy - fh * 0.6, y1: cy + fh * 0.6 };
+                                if (!krockar(r)) { val = r; break; }
+                            }
+                            if (!val) continue;       // hellre ingen etikett än en som ligger på en annan
+                            lagda.push(val);
+                            g.fillStyle = FARG[i];
+                            g.fillText(t, val.x0, (val.y0 + val.y1) / 2);
+                        }
+                    }
+
+                    // Pekare mot stjärnor utanför bilden
+                    const pekade = [];
+                    for (let i = 0; i < 3; i++) {
+                        const [x, y] = pos[i];
+                        const m = 22, Wf = W - hoger;
+                        if (x >= m && x <= Wf - m && y >= m && y <= H - m) continue;
+                        const cx = Wf / 2, cy = H / 2; let dx = x - cx, dy = y - cy;
+                        const sx = (Wf / 2 - m) / Math.abs(dx || 1e-9), sy = (H / 2 - m - 50) / Math.abs(dy || 1e-9);
+                        const f = Math.min(sx, sy); const px = cx + dx * f, py = cy + dy * f;
+                        const a = Math.atan2(dy, dx);
+                        g.save(); g.translate(px, py); g.rotate(a);
+                        g.fillStyle = FARG[i];
+                        g.beginPath(); g.moveTo(9, 0); g.lineTo(-5, -6); g.lineTo(-2, 0); g.lineTo(-5, 6); g.closePath(); g.fill();
+                        g.restore();
+                        const d = Math.hypot(st.vis[4*i], st.vis[4*i+1]) * AU_PER_L;
+                        if (pekade.some(([qx, qy]) => Math.hypot(qx - px, qy - py) < 40)) continue;
+                        pekade.push([px, py]);
+                        g.font = `600 ${Math.round(12 * tk)}px Poppins, sans-serif`;
+                        g.fillStyle = FARG[i]; g.textBaseline = 'middle';
+                        g.textAlign = px > Wf / 2 ? 'right' : 'left';
+                        const tx = px + (px > Wf / 2 ? -16 : 16), ty = Math.max(14, Math.min(H - 14, py + (py > H / 2 ? -14 : 14)));
+                        g.fillText(`${massaText(st.m[i])}, ${avstText(d)} bort`, tx, ty);
+                    }
+
+                    // Avläsning uppe till vänster (bredvid fullskärmsknappen)
+                    {
+                        const hx = smal ? 54 : 70, hy = smal ? 12 : 20;
+                        g.textAlign = 'left'; g.textBaseline = 'top';
+                        g.fillStyle = 'rgba(176,190,228,0.75)';
+                        g.font = `600 ${Math.round(9.5 * tk)}px Poppins, sans-serif`;
+                        g.fillText('TID', hx, hy);
+                        g.fillText('SNABBASTE STJÄRNAN', hx + (smal ? 112 : 150) * tk, hy);
+                        g.fillStyle = '#eef1fb';
+                        g.font = `600 ${Math.round((smal ? 16 : 19) * tk)}px 'JetBrains Mono', monospace`;
+                        g.fillText(fmt(st.tv * AR_PER_T, 0) + ' år', hx, hy + 13 * tk);
+                        let vnu = 0;
+                        for (let i = 0; i < 3; i++) vnu = Math.max(vnu, Math.hypot(st.vis[4*i+2], st.vis[4*i+3]));
+                        const v = vnu * KMS_PER_V;
+                        g.fillText(fmt(v, v < 10 ? 1 : 0) + ' km/s', hx + (smal ? 112 : 150) * tk, hy + 13 * tk);
+                    }
+
+                    // Skalstreck nere till vänster
+                    {
+                        const auPx = K.sk / AU_PER_L;
+                        const L = fintAvstand(70 / auPx), px = L * auPx;
+                        const x0 = 16, y0 = mobFs ? 92 : H - 16;
+                        g.strokeStyle = 'rgba(214,222,245,0.7)'; g.lineWidth = 1.5;
+                        g.beginPath(); g.moveTo(x0, y0 - 4); g.lineTo(x0, y0); g.lineTo(x0 + px, y0); g.lineTo(x0 + px, y0 - 4); g.stroke();
+                        g.fillStyle = 'rgba(214,222,245,0.85)'; g.font = `500 ${Math.round(11 * tk)}px Poppins, sans-serif`;
+                        g.textAlign = 'left'; g.textBaseline = 'bottom';
+                        g.fillText(fmt(L, 0) + ' AU', x0 + px + 6, y0 + 2);
+                    }
+
+                    // Meddelande längst ned i mitten
+                    let msg = null;
+                    if (lageRef.current === 'gissa') {
+                        const g0 = gisRef.current;
+                        if (g0.fas === 'valj') msg = 'Vilken stjärna kastas ut? Klicka på den.';
+                        else if (g0.fas === 'raknar') msg = 'Ställer upp tre nya stjärnor …';
+                    } else if (st.sys.t === 0 && !kor) {
+                        msg = 'Dra en stjärna för att flytta den, eller tryck på Släpp stjärnorna.';
+                    }
+                    if (st.handelse && (lageRef.current === 'fri' || gisRef.current.fas === 'klar')) {
+                        const h = st.handelse;
+                        msg = `Stjärnan med ${massaText(st.m[h.i])} kastas ut med ${fmt(h.vinf * KMS_PER_V, 1)} km/s efter ${fmt(h.t * AR_PER_T, 0)} år. Kvar blir en dubbelstjärna som varvar på ${fmt(h.P * AR_PER_T, 0)} år.`;
+                        if (st.gh && st.ghandelse && st.ghandelse.i !== h.i) msg += ` I kopian kastas i stället stjärnan med ${massaText(st.m[st.ghandelse.i])} ut.`;
+                    }
+                    if (st.krock) {
+                        msg = `Stjärnorna med ${massaText(st.m[st.krock.i])} och ${massaText(st.m[st.krock.j])} krockar efter ${fmt(st.krock.t * AR_PER_T, 0)} år. Riktiga stjärnor har en storlek, så så nära kan de inte passera. Flytta någon stjärna och försök igen.`;
+                    }
+                    if (msg) {
+                        g.font = `500 ${Math.round(13 * tk)}px Poppins, sans-serif`;
+                        const maxW = Math.min(560 * tk, W - hoger - 120);
+                        const rader = radbryt(g, msg, maxW);
+                        const lh = 18 * tk, bw = Math.max(...rader.map((r) => g.measureText(r).width)) + 26, bh = rader.length * lh + 14;
+                        const bx = Math.max(10, (W - hoger) / 2 - bw / 2), by = mobFs ? H - 190 - bh : H - bh - (smal ? 34 : 36);
+                        g.fillStyle = 'rgba(8,10,24,0.72)'; rundRekt(g, bx, by, bw, bh, 9); g.fill();
+                        g.strokeStyle = 'rgba(170,186,230,0.25)'; g.lineWidth = 1; g.stroke();
+                        g.fillStyle = '#e8ecf8'; g.textAlign = 'center'; g.textBaseline = 'top';
+                        rader.forEach((r, k) => g.fillText(r, bx + bw / 2, by + 7 + k * lh));
+                    }
+
+                    // Ögonblicksbild till React-panelerna, tio gånger i sekunden
+                    if (now - senastSnap > 100) {
+                        senastSnap = now;
+                        let ghost = null;
+                        if (st.gh) { ghost = 0; for (let i = 0; i < 3; i++) ghost = Math.max(ghost, Math.hypot(st.vis[4*i] - st.gvis[4*i], st.vis[4*i+1] - st.gvis[4*i+1])); }
+                        setSnap({ t: st.tv, vmax: st.vmax, rmin: st.rmin, ghost, par: pd });
+                    }
+                    raf = requestAnimationFrame(loop);
+                };
+                raf = requestAnimationFrame(loop);
+                return () => { cancelAnimationFrame(raf); ro.disconnect(); };
+            }, []);
+
+            // ── Knappar ──
+            const primar = () => {
+                if (lage === 'gissa' && gis.fas !== 'kor' && gis.fas !== 'klar') return;
+                setRunning((r) => !r);
+            };
+            const primarText = running ? 'Pausa' : (snap.t === 0 ? 'Släpp stjärnorna' : 'Fortsätt');
+            const fartTillReg = (f) => Math.round(100 * Math.log(f / 50) / Math.log(3000 / 50));
+            const regTillFart = (v) => Math.round(50 * Math.pow(3000 / 50, v / 100) / 10) * 10;
+            const tShow = (k) => setShow((s) => ({ ...s, [k]: !s[k] }));
+            const forsokObj = forsokMed(forsok);
+            const gissaLage = lage === 'gissa';
+
+            const styrknappar = (
+                <div className="styr">
+                    <button className="btn-toggle btn-prim btn-spela" onClick={primar} disabled={gissaLage && gis.fas !== 'kor' && gis.fas !== 'klar'}>
+                        {running
+                            ? <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1" /><rect x="14" y="5" width="4" height="14" rx="1" /></svg>
+                            : <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15L19.5 12z" /></svg>}
+                        <span>{primarText}</span>
+                    </button>
+                    <button className="btn-toggle btn-om" onClick={borjaOm} disabled={gissaLage}>Börja om</button>
+                </div>
+            );
+
+            const fartReglage = (
+                <div className="sl-rad">
+                    <div className="sl-top"><span>Tidsförlopp</span><b>{fmt(fart, 0)} år/s</b></div>
+                    <input type="range" min="0" max="100" value={fartTillReg(fart)} onChange={(e) => setFart(regTillFart(+e.target.value))} aria-label="Tidsförlopp" />
+                </div>
+            );
+
+            const massReglage = (
+                <div className="flex flex-col gap-2">
+                    {[0, 1, 2].map((i) => (
+                        <div className="sl-rad" key={i}>
+                            <div className="sl-top">
+                                <span className="inline-flex items-center gap-2"><span className="prick" style={{ background: FARG[i] }}></span>Stjärna {i + 1}</span>
+                                <b>{massaText(massor[i])}</b>
+                            </div>
+                            <input type="range" min="1" max="10" step="1" value={massor[i]} onChange={(e) => satMassa(i, +e.target.value)} aria-label={`Massa för stjärna ${i + 1}`} />
+                        </div>
+                    ))}
+                </div>
+            );
+
+            const paneler = (
+                <React.Fragment>
+                    {gissaLage && <GissaPanel g={gis} massor={massor} onVal={gissa} onNy={nyGissning} />}
+                    <Avlasning snap={snap} />
+                    <KraftPanel snap={snap} massor={massor} />
+                </React.Fragment>
+            );
+
+            const visaRad = (k, text, farg, av) => (
+                <label className={av ? 'av' : ''}>
+                    <input type="checkbox" checked={show[k] && !av} disabled={av} onChange={() => tShow(k)} />
+                    {farg && <span className="st-swatch" style={{ background: farg }}></span>}
+                    <span>{text}</span>
+                </label>
+            );
+
+            const sceneToggles = () => {
+                if (!togglesOpen) return (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)}
+                            aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" /><circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" /><circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                );
+                return (
+                    <div className="scene-toggles">
+                        <button className="st-hide" onClick={() => setTogglesOpen(false)}
+                                aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 strokeWidth="2.4" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+                        </button>
+                        <div className="st-title">Visa</div>
+                        {visaRad('spar', 'Spår', null, false)}
+                        {visaRad('langa', 'Långa spår', null, !show.spar)}
+                        {visaRad('band', 'Gravitationsband', null, false)}
+                        {visaRad('krafter', 'Kraftpilar', null, false)}
+                        {visaRad('namn', 'Massorna', null, false)}
+                        {visaRad('kopia', 'Kopia med en stjärna flyttad 0,01 AU', null, gissaLage)}
+                        {isFullscreen && (
+                            <React.Fragment>
+                                <div className="st-title mt">Läge</div>
+                                <label><input type="radio" name="lage-fs" checked={!gissaLage} onChange={() => valjLage('fri')} /><span>Utforska</span></label>
+                                <label><input type="radio" name="lage-fs" checked={gissaLage} onChange={() => valjLage('gissa')} /><span>Vem kastas ut?</span></label>
+                                {!gissaLage && (
+                                    <React.Fragment>
+                                        <div className="st-title mt">Färdigt försök</div>
+                                        <select value={forsok} onChange={(e) => valjForsok(e.target.value)} aria-label="Färdigt försök">
+                                            {FORSOK.map((f) => <option key={f.id} value={f.id}>{f.namn}</option>)}
+                                        </select>
+                                    </React.Fragment>
+                                )}
+                                <div className="st-title mt">Reglage</div>
+                                <div className="st-sliders">
+                                    {forsok === 'egen' && !gissaLage && massReglage}
+                                    {fartReglage}
+                                </div>
+                                <div className="st-actions">{styrknappar}</div>
+                                <div className="st-panels">{paneler}</div>
+                            </React.Fragment>
+                        )}
+                    </div>
+                );
+            };
+
+            return (
+                <div className="min-h-screen px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html?id=fy1">Fysik nivå 1</a> / Trekropparsproblemet
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Trekropparsproblemet</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 840 }}>
+                            Två stjärnor som drar i varandra går att räkna ut med papper och penna. Med tre stjärnor går det inte längre:
+                            varje stjärna dras av de två andra med Newtons gravitationslag, och krafterna ändras hela tiden när avstånden
+                            ändras. Här räknar datorn fram förloppet i hundratusentals små steg. Släpp stjärnorna och se hur nära
+                            passager slungar dem runt, tills en av dem ofta kastas ut ur systemet för gott.
+                        </p>
+
+                        <FormulaCard snap={snap} valtPar={valtPar} setValtPar={setValtPar} massor={massor} />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            <div className="lg:w-2/3 order-1">
+                                <div className={'scene-wrap' + (isFullscreen ? ' is-fs' : '')} ref={sceneWrapRef}>
+                                    <canvas ref={canvasRef} onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}
+                                            aria-label="Tre stjärnor som påverkar varandra med gravitation" />
+                                    {sceneToggles()}
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                    <div className="fs-quick">
+                                        <button className="fq-play" onClick={primar} disabled={gissaLage && gis.fas !== 'kor' && gis.fas !== 'klar'} aria-label={running ? 'Pausa' : 'Släpp stjärnorna'}>
+                                            {running
+                                                ? <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1" /><rect x="14" y="5" width="4" height="14" rx="1" /></svg>
+                                                : <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15L19.5 12z" /></svg>}
+                                        </button>
+                                        <div className="fq-rows">
+                                            <div className="fq-row">
+                                                <span className="fq-lbl">Tidsförlopp</span>
+                                                <input type="range" min="0" max="100" value={fartTillReg(fart)} onChange={(e) => setFart(regTillFart(+e.target.value))} aria-label="Tidsförlopp" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {!isFullscreen && <div className="mt-3">{styrknappar}</div>}
+                                <p className="anm mt-2">
+                                    {gissaLage
+                                        ? 'Klicka på den stjärna du tror kastas ut. Stjärnorna släpps från vila.'
+                                        : 'Innan stjärnorna släpps kan du dra dem dit du vill. Trådarna mellan stjärnorna lyser starkare ju större gravitationskraften i paret är.'}
+                                </p>
+                                <div className="hidden lg:flex flex-col gap-3 mt-3">{paneler}</div>
+                            </div>
+
+                            <div className="lg:w-1/3 order-2 flex flex-col gap-3">
+                                <div className="glass-card rounded-xl p-3">
+                                    <div className="flbl mb-2">Läge</div>
+                                    <div className="seg" style={{ gridTemplateColumns: '1fr 1fr' }}>
+                                        <button className={!gissaLage ? 'active' : ''} onClick={() => valjLage('fri')}>Utforska</button>
+                                        <button className={gissaLage ? 'active' : ''} onClick={() => valjLage('gissa')}>Vem kastas ut?</button>
+                                    </div>
+                                    {!gissaLage ? (
+                                        <React.Fragment>
+                                            <div className="flbl mt-3 mb-2">Färdiga försök</div>
+                                            <div className="forsok">
+                                                {FORSOK.map((f) => (
+                                                    <button key={f.id} className={forsok === f.id ? 'active' : ''} onClick={() => valjForsok(f.id)}>{f.namn}</button>
+                                                ))}
+                                            </div>
+                                            {forsokObj && <p className="anm mt-2">{forsokObj.text}</p>}
+                                        </React.Fragment>
+                                    ) : (
+                                        <p className="anm mt-2">
+                                            Tre stjärnor med slumpade massor ställs upp på slumpade platser. Gissa vilken som kastas ut innan
+                                            de släpps. Ingen formel kan ge svaret, men det finns ett mönster att upptäcka.
+                                        </p>
+                                    )}
+                                </div>
+
+                                {forsok === 'egen' && !gissaLage && (
+                                    <div className="glass-card rounded-xl p-3">
+                                        <div className="flbl mb-2">Massorna</div>
+                                        {massReglage}
+                                    </div>
+                                )}
+
+                                <div className="glass-card rounded-xl p-3">
+                                    {fartReglage}
+                                    <p className="anm mt-2">Stjärnorna rör sig med några km/s, så det tar tusentals år för dem att flytta sig några hundra AU.</p>
+                                </div>
+
+                                <div className="lg:hidden flex flex-col gap-3">{paneler}</div>
+                            </div>
+                        </main>
+
+                        <details className="glass-card rounded-xl p-4 mt-6">
+                            <summary className="accordion-head">
+                                <span>Så hänger det ihop</span>
+                                <span aria-hidden="true">+</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2" style={{ color: 'var(--lab-ink-soft)', fontSize: 14.5, lineHeight: 1.55, paddingLeft: 18, listStyle: 'disc' }}>
+                                <li>Varje par av stjärnor drar i varandra med Newtons gravitationslag, <em>F</em><sub>G</sub> = <em>G</em> · <em>m</em>₁ · <em>m</em>₂ / <em>r</em><sup>2</sup>. Med tre stjärnor finns tre par, och varje stjärna påverkas av två krafter samtidigt.</li>
+                                <li>Krafterna i ett par är lika stora och motriktade, enligt Newtons tredje lag. Slå på kraftpilarna: pilen på den ena stjärnan är lika lång som pilen på den andra. Samma kraft ger ändå den lätta stjärnan störst acceleration, eftersom <em>a</em> = <em>F</em> / <em>m</em>.</li>
+                                <li>Eftersom avståndet är kvadrerat växer kraften mycket snabbt när två stjärnor kommer nära varandra. Vid en nära passage blir kraften tusentals gånger större än vanligt under en kort stund, och stjärnorna slungas iväg. En rymdsond utnyttjar samma sak när den tar fart förbi en planet.</li>
+                                <li>För två stjärnor finns en formel som ger banan för all framtid: en ellips. För tre stjärnor finns ingen sådan formel. Förloppet måste räknas fram steg för steg, och just därför kallas det trekropparsproblemet.</li>
+                                <li>Rörelsen är kaotisk. Slå på kopian, där en stjärna är flyttad 0,01 AU (1,5 miljoner km, mindre än fyra gånger avståndet till månen) av flera hundra AU. Först följs kopian och originalet åt, sedan går de skilda vägar, och i det pythagoreiska försöket är det en annan stjärna som kastas ut.</li>
+                                <li>När en stjärna kastas ut tar den med sig rörelseenergi, och de två som blir kvar kommer närmare varandra och bildar en tät dubbelstjärna. Ett AU (astronomisk enhet) är avståndet mellan jorden och solen, ungefär 150 miljoner km, och en solmassa är 1,99 · 10<sup>30</sup> kg.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+    <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

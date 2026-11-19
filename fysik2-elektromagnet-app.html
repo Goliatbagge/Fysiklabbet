@@ -758,6 +758,8 @@
                     ctx.beginPath();
                     ctx.moveTo(4.5 * s, 0); ctx.lineTo(-3.5 * s, -3.6 * s); ctx.lineTo(-1.6 * s, 0); ctx.lineTo(-3.5 * s, 3.6 * s);
                     ctx.closePath(); ctx.fill();
+                    // tunn mörkblå kant så att pilen syns mot kopparn och den röda sladden
+                    ctx.strokeStyle = '#0b2a5c'; ctx.lineWidth = 1.1 / s; ctx.lineJoin = 'round'; ctx.stroke();
                     ctx.restore();
                 };
                 const bez = (P0, P1, P2, P3, N) => {
@@ -779,13 +781,12 @@
                     ctx.stroke();
                 };
                 // pilar längs en polylinje, förskjutna med fasen
-                const flowAlong = (pts, phase, dir, s) => {
+                const flowAlong = (pts, phase, dir, s, gap = 30) => {
                     const seg = []; let tot = 0;
                     for (let i = 1; i < pts.length; i++) {
                         const l = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]);
                         seg.push(l); tot += l;
                     }
-                    const gap = 30;
                     let o = ((phase * dir) % gap + gap) % gap;
                     for (let d = o + 8; d < tot - 8; d += gap) {
                         let acc = 0, i = 0;
@@ -940,7 +941,7 @@
                         if (flowOn) {
                             const dir = Bdir > 0 ? 1 : -1;     // ner i bilden när fältet pekar åt höger
                             const step = Ns > 12 ? 2 : 1;
-                            for (let i = 0; i < Ns; i += step) flowAlong(T.list[i].fram, st.phase * 0.6, dir, 0.85);
+                            for (let i = 0; i < Ns; i += step) flowAlong(T.list[i].fram, st.phase * 0.6, dir, 1.55, 40);
                         }
                     } else {
                         // genomskärning: ledarnas tvärsnitt längs norra och södra kanten
@@ -1354,8 +1355,8 @@
                         [Ld.L, Ld.R].forEach((P) => { ctx.beginPath(); ctx.moveTo(P.x, P.y); ctx.lineTo(P.x, P.y - 5); ctx.stroke(); });
                         if (flowOn) {
                             // konventionell strömriktning: ut ur pluspolen, in i minuspolen
-                            flowAlong(wRed, st.phase, 1, 1);
-                            flowAlong(wBlack, st.phase, -1, 1);
+                            flowAlong(wRed, st.phase, 1, 1.9, 46);
+                            flowAlong(wBlack, st.phase, -1, 1.9, 46);
                         }
                     } else {
                         if (showField && p.show.linjer) drawLines(alpha, lw, Bdir);

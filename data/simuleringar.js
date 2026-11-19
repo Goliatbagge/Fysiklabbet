@@ -114,6 +114,8 @@ window.SIM_NAMES = {
       kw: ['rörelse','cirkulär','cirkelbana','tomtebloss','gnistor','skruvdragare','tangent','tangentiellt','tröghet','tröghetslagen','newtons första lag','centripetalkraft','varvtal','mekanik'] },
     { name: 'Tvättsvamp i centrifug', href: 'fysik2-tomtebloss-app.html?sim=centrifug', desc: 'En blöt tvättsvamp i en roterande centrifugkorg sedd rakt uppifrån — vattendropparna lämnar banan tangentiellt enligt Newtons första lag.',
       kw: ['rörelse','cirkulär','cirkelbana','centrifug','tvättsvamp','vattendroppar','tangent','tangentiellt','tröghet','tröghetslagen','newtons första lag','centripetalkraft','varvtal','mekanik'] },
+    { name: 'Doserad kurva', href: 'fysik2-doserad-kurva-app.html', desc: 'En bil kör genom en kurva där vägbanan lutar in mot centrum. Se tyngdkraften, normalkraften och friktionen i 3D och i ett tvärsnitt, hitta farten där ingen friktion behövs och se bilen glida utåt eller inåt när greppet inte räcker.',
+      kw: ['rörelse','krafter','cirkulär','cirkelbana','doserad kurva','dosering','doseringsvinkel','lutande kurva','bankad kurva','centripetalkraft','normalkraft','friktion','friktionstal','friktionsfri fart','högsta fart','lägsta fart','racerbana','velodrom','bil','kurva','sladd','grepp','is','mekanik'] },
   ],
   'fysik2-kraftmoment-app.html': [
     { name: 'Gungbrädan — momentjämvikt', desc: 'Placera vikter på en gungbräda, dra i dem och se när kraftmomentet moturs balanserar kraftmomentet medurs (M = F · l).',

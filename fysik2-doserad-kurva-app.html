@@ -1,0 +1,1925 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <script src="i18n.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doserad kurva — Fysiklabbet</title>
+    <meta name="description" content="En bil kör genom en doserad kurva, där vägbanan lutar in mot kurvans centrum. Ändra fart, doseringsvinkel, radie och underlag och se tyngdkraften, normalkraften och friktionskraften i 3D och i ett tvärsnitt. Hitta farten där ingen friktion behövs, och se bilen glida utåt eller inåt när greppet inte räcker.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik2-doserad-kurva-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Doserad kurva — Fysik nivå 2">
+    <meta property="og:description" content="En bil kör genom en doserad kurva, där vägbanan lutar in mot kurvans centrum. Ändra fart, doseringsvinkel, radie och underlag och se tyngdkraften, normalkraften och friktionskraften i 3D och i ett tvärsnitt. Hitta farten där ingen friktion behövs, och se bilen glida utåt eller inåt när greppet inte räcker.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik2-doserad-kurva-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Doserad kurva — Fysik nivå 2">
+    <meta name="twitter:description" content="En bil kör genom en doserad kurva, där vägbanan lutar in mot kurvans centrum. Ändra fart, doseringsvinkel, radie och underlag och se tyngdkraften, normalkraften och friktionskraften i 3D och i ett tvärsnitt. Hitta farten där ingen friktion behövs, och se bilen glida utåt eller inåt när greppet inte räcker.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 20px; }
+        .fcap { font-size: 12.5px; color: var(--lab-ink-muted, #5a6170); margin-bottom: 6px; }
+
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            height: 580px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            -webkit-user-select: none;
+            background: linear-gradient(180deg, #f7f2e8 0%, #ece3d2 100%);
+            touch-action: none;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        .bana-mount { position: absolute; inset: 0; }
+        .bana-mount > canvas { display: block; width: 100%; height: 100%; outline: none; }
+        @media (max-width: 600px) {
+            body.lab-sim .scene-wrap:not(:fullscreen) .bana-mount { position: relative; inset: auto; height: 440px; }
+            body.lab-sim .scene-wrap:is(:fullscreen, :-webkit-full-screen) .bana-mount {
+                position: sticky; inset: auto; top: 0; z-index: 2;
+                flex: 0 0 auto; width: 100%; height: 56vh;
+            }
+        }
+        .scene-wrap.grab { cursor: grab; }
+        .scene-wrap.dragging { cursor: grabbing; }
+
+        .scene-hint {
+            position: absolute; bottom: 10px; left: 12px; z-index: 5;
+            font-size: 12px; color: #e9edf3;
+            background: rgba(15,22,32,0.80); padding: 4px 11px; border-radius: 7px;
+            pointer-events: none; font-weight: 500; max-width: calc(100% - 24px);
+        }
+        .scene-info {
+            position: absolute; top: 66px; left: 14px; z-index: 5;
+            background: rgba(246,242,234,0.94);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 9px; padding: 6px 11px; font-size: 13px; color: var(--lab-ink);
+            pointer-events: none; box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 300px;
+        }
+        .scene-info .si-status { font-weight: 700; }
+        .scene-info .si-rad { font-size: 12px; color: var(--lab-ink-soft); margin-top: 1px; }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 236px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-actions { display: flex; flex-direction: column; gap: 7px; margin-top: 9px; }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 12px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease; font-size: 14px;
+        }
+        .btn-toggle:hover:not(.active) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .seg { display: grid; gap: 1px; border-radius: 9px; overflow: hidden;
+               border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+               background: var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .seg button { background: var(--lab-bg, #f3eee4); border: 0; padding: 7px 4px; font-size: 12.5px;
+                      font-weight: 600; color: var(--lab-ink); cursor: pointer; line-height: 1.15; }
+        .seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+        .seg button small { display: block; font-weight: 500; font-size: 11px; opacity: 0.75; }
+
+        .rd-row { display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
+                  padding: 4px 0; border-bottom: 1px dashed rgba(15,22,32,0.14); font-size: 14px; }
+        .rd-row:last-child { border-bottom: 0; }
+        .rd-row .rv { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 14px; white-space: nowrap; }
+        .mono { font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+
+        .grepp-bar { position: relative; height: 12px; border-radius: 6px; background: rgba(15,22,32,0.08);
+                     border: 1px solid rgba(15,22,32,0.2); overflow: hidden; }
+        .grepp-bar > div { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 6px; transition: width 0.12s linear; }
+
+        .karta svg { touch-action: none; }
+        .legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12.5px; color: var(--lab-ink-soft); margin-top: 6px; }
+        .legend span { display: inline-flex; align-items: center; gap: 6px; }
+        .legend i { display: inline-block; width: 20px; height: 0; border-top-width: 2.5px; border-top-style: solid; }
+        .legend b { display: inline-block; width: 14px; height: 12px; border-radius: 3px; border: 1px solid rgba(15,22,32,0.25); }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+        .forkl p { margin-top: 0.6rem; }
+        .forkl ol, .forkl ul { margin-top: 0.5rem; padding-left: 1.3rem; }
+        .forkl ol { list-style: decimal; }
+        .forkl ul { list-style: disc; }
+        .forkl li { margin-top: 0.35rem; }
+        .forkl .katex-display { margin: 0.6rem 0; overflow-x: auto; overflow-y: hidden; padding-bottom: 4px; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2b">Nivå 2b</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3b">Nivå 1b</a>
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useMemo } = React;
+
+        /* =====================================================================
+           Doserad kurva.
+           En bil kör med konstant fart v runt en cirkulär kurva med radien r.
+           Vägbanan lutar vinkeln α in mot kurvans centrum (doseringen).
+           Tre krafter verkar på bilen: tyngdkraften F_G, normalkraften F_N
+           (vinkelrätt mot vägbanan) och friktionskraften F_f (längs vägbanan).
+           Deras resultant är centripetalkraften F_C = m · v² / r, vågrät och
+           riktad in mot centrum.
+
+           Med u = riktningen uppför vägbanan (utåt och uppåt) ger Newtons
+           andra lag, vågrätt och lodrätt:
+               F_N · sin α − F_f · cos α = m · v² / r
+               F_N · cos α + F_f · sin α = m · g
+           där F_f räknas positiv uppför vägbanan. Lösningen är
+               F_N = m · (g · cos α + a · sin α)
+               F_f = m · (g · sin α − a · cos α),   a = v² / r.
+           F_f = 0 när tan α = v² / (r · g): den friktionsfria farten.
+           Greppet räcker så länge |F_f| ≤ μ · F_N. Annars glider bilen längs
+           vägbanan (utåt eller inåt) med glidfriktionen μ · F_N, och banans
+           radie ändras medan den glider.
+
+           Normalkraften och friktionen angriper där hjulen möter vägen. Bilen
+           ska inte rotera, så kontaktkraften (F_N + F_f) måste gå genom
+           tyngdpunkten: angreppspunkten flyttas mot ytterhjulen när friktionen
+           pekar inåt (lastöverföring), och mot innerhjulen när den pekar utåt.
+
+           Enheter i scenen: 1 enhet = 1 m.
+           ===================================================================== */
+
+        const G = 9.82;            // tyngdfaktor (N/kg)
+        const MASSA = 1200;        // bilens massa (kg)
+        const BREDD = 12;          // vägbanans bredd längs lutningen (m)
+        const SPAR = 0.78;         // halva spårvidden (m)
+        const H_TP = 0.55;         // tyngdpunktens höjd över vägbanan (m)
+        const D_MAX = BREDD / 2 - 1.2;   // hur långt bilen kan glida från körfältets mitt
+        const V_MAX = 40, R_MIN = 20, R_MAX = 150, A_MAX = 45;
+        const K3 = 2.3 / (MASSA * G);    // pilskala i 3D: m per N (F_G blir 2,3 m)
+        const K2 = 100 / (MASSA * G);     // pilskala i tvärsnittet: px per N
+
+        const UNDERLAG = [
+            { id: 'torr', namn: 'Torr asfalt', mu: 0.80 },
+            { id: 'vat',  namn: 'Våt asfalt',  mu: 0.50 },
+            { id: 'sno',  namn: 'Snö',         mu: 0.25 },
+            { id: 'is',   namn: 'Is',          mu: 0.10 },
+        ];
+        const underlagFor = (mu) => mu >= 0.65 ? 'torr' : mu >= 0.38 ? 'vat' : mu >= 0.17 ? 'sno' : 'is';
+
+        const COL = {
+            ink:   '#0f1620',
+            fart:  '#2563c9',  // hastighet v (som i Cirkulär rörelse)
+            fc:    '#b8860b',  // centripetalkraften F_C (streckad)
+            frik:  '#e0701a',  // friktionskraft F_f
+            tyngd: '#c8324a',  // tyngdkraft F_G
+            norm:  '#0d9488',  // normalkraft F_N
+            vmax:  '#9b2c2c',
+            vmin:  '#1f4fa3',
+            hall:  '#3f7d3a',
+            bil:   '#5d6875',   // bilen i tvärsnittet (grafit, som i 3D)
+            bil3d: '#4a5563',   // bilen i 3D (grafit, så att kraftpilarna syns mot den)
+            rand:  '#1f2f4a',
+        };
+
+        const rad = (d) => d * Math.PI / 180;
+        const fmt = (num, decimals = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(decimals);
+            if (parseFloat(s) === 0) return '0';
+            const [i, f] = s.replace('-', '').split('.');
+            const ig = i.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+            return (num < 0 ? '−' : '') + (f !== undefined ? ig + ',' + f : ig);
+        };
+
+        // ── Fysiken ──
+        function krafter(v, alfaGrad, r) {
+            const a = rad(alfaGrad), acc = v * v / r;
+            const N = MASSA * (G * Math.cos(a) + acc * Math.sin(a));
+            const f = MASSA * (G * Math.sin(a) - acc * Math.cos(a));   // + uppför vägbanan
+            return { acc, N, f };
+        }
+        function granser(alfaGrad, r, mu) {
+            const a = rad(alfaGrad), s = Math.sin(a), c = Math.cos(a);
+            const v0 = Math.sqrt(r * G * Math.tan(a));
+            const den = c - mu * s;
+            const vmax = den <= 1e-9 ? Infinity : Math.sqrt(r * G * (s + mu * c) / den);
+            const num = s - mu * c;
+            const vmin = num <= 0 ? 0 : Math.sqrt(r * G * num / (c + mu * s));
+            return { v0, vmin, vmax };
+        }
+        // Var kontaktkraften angriper, räknat längs vägbanan från bilens mitt (+ utåt)
+        const angreppsPunkt = (N, f) => Math.max(-SPAR, Math.min(SPAR, -H_TP * f / Math.max(N, 1)));
+
+        // Delat läge mellan React och scenen (scenen byggs bara en gång)
+        const SIM = {
+            p: { v: 20, alfa: 15, r: 60, mu: 0.8, running: true, slow: false,
+                 show: { krafter: true, fc: true, fart: true, radie: true } },
+            ut: { d: 0, w: 0, glider: false, kant: 0, av: 0, N: 0, f: 0, acc: 0, rc: 60 },
+            cb: {},
+            vy: null,
+            reset: null,
+        };
+
+        // ─────────────────────────────────────────────────────────────────
+        // Grafikhjälp
+        // ─────────────────────────────────────────────────────────────────
+        const Y_AXEL = new THREE.Vector3(0, 1, 0);
+        const linjar = (hex) => new THREE.Color(hex).convertSRGBToLinear();
+        const markMat = (hex, glod = 0.5) => new THREE.MeshStandardMaterial({
+            color: linjar(hex), emissive: linjar(hex).multiplyScalar(glod),
+            roughness: 0.55, metalness: 0, toneMapped: false, depthTest: false, transparent: true });
+
+        const textSprite = (parts) => {
+            const c = document.createElement('canvas');
+            const ctx = c.getContext('2d');
+            const FS = 64, PAD = 12;
+            const fontFor = (p) => `${p.italic ? 'italic ' : ''}${p.weight || 600} ${p.small ? FS * 0.72 : FS}px Poppins, sans-serif`;
+            const rita = () => {
+                let w = 0;
+                parts.forEach((p) => { ctx.font = fontFor(p); w += ctx.measureText(p.t).width; });
+                c.width = Math.max(2, Math.ceil(w) + PAD * 2);
+                c.height = FS + PAD * 2 + 12;
+                let x = PAD;
+                parts.forEach((p) => {
+                    ctx.font = fontFor(p);
+                    ctx.textBaseline = 'middle';
+                    ctx.fillStyle = p.color;
+                    const dy = p.sub ? FS * 0.26 : 0;
+                    ctx.fillText(p.t, x, c.height / 2 + dy - 2);
+                    x += ctx.measureText(p.t).width;
+                });
+            };
+            rita();
+            const tex = new THREE.CanvasTexture(c);
+            tex.minFilter = THREE.LinearFilter;
+            tex.encoding = THREE.sRGBEncoding;
+            const spr = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false, toneMapped: false }));
+            spr.renderOrder = 30;
+            spr.userData.aspect = c.width / c.height;
+            // rita om när Poppins har laddats (annars blir det reservtypsnittet)
+            if (document.fonts) Promise.all([document.fonts.load('600 64px Poppins'), document.fonts.load('italic 600 64px Poppins')]).then(() => {
+                rita(); tex.dispose(); spr.userData.aspect = c.width / c.height;
+                const ny = new THREE.CanvasTexture(c); ny.minFilter = THREE.LinearFilter; ny.encoding = THREE.sRGBEncoding;
+                spr.material.map = ny; spr.material.needsUpdate = true;
+            });
+            return spr;
+        };
+        const kraftEtikett = (sym, sub, color) => textSprite([{ t: sym, italic: true, color }, { t: sub, color, small: true, sub: true }]);
+
+        // Pil med skaft (cylinder, rak ände) och spets; skaftet slutar vid spetsens bas.
+        function pil(color, r = 0.06) {
+            const g = new THREE.Group();
+            const mat = markMat(color);
+            const skaft = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 1, 14), mat);
+            const spets = new THREE.Mesh(new THREE.ConeGeometry(1, 1, 18), mat);
+            skaft.renderOrder = 25; spets.renderOrder = 25;
+            g.add(skaft, spets);
+            g.userData = { skaft, spets, r };
+            return g;
+        }
+        function stallPil(g, from, vec) {
+            const len = vec.length();
+            if (len < 0.05) { g.visible = false; return; }
+            g.visible = true;
+            const r = g.userData.r;
+            const head = Math.min(r * 5.5, len * 0.6);
+            const shaft = len - head;
+            g.position.copy(from);
+            g.quaternion.setFromUnitVectors(Y_AXEL, vec.clone().normalize());
+            const { skaft, spets } = g.userData;
+            skaft.scale.set(r, Math.max(shaft, 1e-4), r);
+            skaft.position.set(0, shaft / 2, 0);
+            spets.scale.set(r * 2.4, head, r * 2.4);
+            spets.position.set(0, shaft + head / 2, 0);
+        }
+        // Streckad pil: skaftet byggs av korta bitar
+        function streckPil(color, r = 0.06, antal = 40) {
+            const g = new THREE.Group();
+            const mat = markMat(color);
+            const bitar = [];
+            const geo = new THREE.CylinderGeometry(1, 1, 1, 10);
+            for (let i = 0; i < antal; i++) { const m = new THREE.Mesh(geo, mat); m.renderOrder = 25; g.add(m); bitar.push(m); }
+            const spets = new THREE.Mesh(new THREE.ConeGeometry(1, 1, 18), mat);
+            spets.renderOrder = 25; g.add(spets);
+            g.userData = { bitar, spets, r };
+            return g;
+        }
+        function stallStreckPil(g, from, vec, utanSpets = false) {
+            const len = vec.length();
+            if (len < 0.05) { g.visible = false; return; }
+            g.visible = true;
+            const { bitar, spets, r } = g.userData;
+            const head = utanSpets ? 0 : Math.min(r * 5.5, len * 0.6);
+            const shaft = len - head;
+            const STRECK = Math.max(0.22, Math.min(0.9, len / 36)), LUCKA = STRECK * 0.7;
+            g.position.copy(from);
+            g.quaternion.setFromUnitVectors(Y_AXEL, vec.clone().normalize());
+            let s = 0;
+            bitar.forEach((m) => {
+                if (s >= shaft) { m.visible = false; return; }
+                const l = Math.min(STRECK, shaft - s);
+                m.visible = true;
+                m.scale.set(r, l, r);
+                m.position.set(0, s + l / 2, 0);
+                s += STRECK + LUCKA;
+            });
+            spets.visible = !utanSpets;
+            spets.scale.set(r * 2.4, Math.max(head, 1e-4), r * 2.4);
+            spets.position.set(0, shaft + head / 2, 0);
+        }
+
+        function canvasTex(w, h, rita) {
+            const c = document.createElement('canvas');
+            c.width = w; c.height = h;
+            rita(c.getContext('2d'), w, h);
+            const t = new THREE.CanvasTexture(c);
+            t.encoding = THREE.sRGBEncoding;
+            t.anisotropy = 8;
+            t.wrapS = t.wrapT = THREE.RepeatWrapping;
+            return t;
+        }
+        function slump(seed) { let s = seed; return () => { s = (s * 16807) % 2147483647; return s / 2147483647; }; }
+
+        // Rutat papper som mark: en ruta = 5 m, en tjockare linje var 50:e meter
+        function papperTextur() {
+            return canvasTex(512, 512, (ctx, w, h) => {
+                ctx.fillStyle = '#efe7d6'; ctx.fillRect(0, 0, w, h);
+                ctx.strokeStyle = 'rgba(70,110,170,0.24)'; ctx.lineWidth = 1.6;
+                for (let i = 1; i < 10; i++) {
+                    const p = i * w / 10;
+                    ctx.beginPath(); ctx.moveTo(p, 0); ctx.lineTo(p, h); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(0, p); ctx.lineTo(w, p); ctx.stroke();
+                }
+                ctx.strokeStyle = 'rgba(70,110,170,0.4)'; ctx.lineWidth = 4;
+                ctx.strokeRect(0, 0, w, h);
+            });
+        }
+        // Asfalt i fyra varianter. u (x) längs banan, v (y) tvärs över den.
+        function asfaltTextur(typ) {
+            return canvasTex(512, 512, (ctx, w, h) => {
+                const rnd = slump(typ === 'torr' ? 11 : typ === 'vat' ? 23 : typ === 'sno' ? 37 : 53);
+                const bas = { torr: '#55585e', vat: '#34373d', sno: '#5a5d63', is: '#8fa6b4' }[typ];
+                ctx.fillStyle = bas; ctx.fillRect(0, 0, w, h);
+                // korn
+                for (let i = 0; i < 9000; i++) {
+                    const l = rnd() < 0.5 ? 255 : 0;
+                    ctx.fillStyle = `rgba(${l},${l},${l},${0.03 + rnd() * 0.07})`;
+                    ctx.fillRect(rnd() * w, rnd() * h, 1 + rnd() * 2, 1 + rnd() * 2);
+                }
+                // däckspår i körfältet
+                ctx.fillStyle = typ === 'sno' ? 'rgba(40,42,46,0.55)' : 'rgba(20,20,22,0.10)';
+                [0.43, 0.57].forEach(v => ctx.fillRect(0, v * h - 10, w, 20));
+                if (typ === 'vat') {
+                    for (let i = 0; i < 26; i++) {
+                        const x = rnd() * w, y = rnd() * h;
+                        const g = ctx.createRadialGradient(x, y, 2, x, y, 30 + rnd() * 50);
+                        g.addColorStop(0, 'rgba(190,205,225,0.20)'); g.addColorStop(1, 'rgba(190,205,225,0)');
+                        ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+                    }
+                }
+                if (typ === 'sno') {
+                    for (let i = 0; i < 1600; i++) {
+                        const v = rnd();
+                        const iSpar = Math.abs(v - 0.43) < 0.03 || Math.abs(v - 0.57) < 0.03;
+                        if (iSpar && rnd() < 0.85) continue;
+                        ctx.fillStyle = `rgba(250,250,252,${0.35 + rnd() * 0.5})`;
+                        ctx.beginPath(); ctx.arc(rnd() * w, v * h, 2 + rnd() * 9, 0, Math.PI * 2); ctx.fill();
+                    }
+                }
+                if (typ === 'is') {
+                    ctx.strokeStyle = 'rgba(240,248,255,0.45)';
+                    for (let i = 0; i < 70; i++) {
+                        ctx.lineWidth = 0.6 + rnd() * 1.4;
+                        let x = rnd() * w, y = rnd() * h;
+                        ctx.beginPath(); ctx.moveTo(x, y);
+                        for (let k = 0; k < 4; k++) { x += (rnd() - 0.5) * 60; y += (rnd() - 0.5) * 60; ctx.lineTo(x, y); }
+                        ctx.stroke();
+                    }
+                }
+                // vita kantlinjer
+                ctx.fillStyle = typ === 'sno' ? 'rgba(245,245,245,0.6)' : '#ece8de';
+                ctx.fillRect(0, h * 0.035, w, 9);
+                ctx.fillRect(0, h * 0.965 - 9, w, 9);
+            });
+        }
+        function kantstenTextur() {
+            return canvasTex(256, 64, (ctx, w, h) => {
+                for (let i = 0; i < 4; i++) {
+                    ctx.fillStyle = i % 2 ? '#f1ece2' : '#b8322c';
+                    ctx.fillRect(i * w / 4, 0, w / 4, h);
+                }
+                ctx.fillStyle = 'rgba(0,0,0,0.12)'; ctx.fillRect(0, h - 6, w, 6);
+            });
+        }
+        function barriarTextur() {
+            return canvasTex(512, 128, (ctx, w, h) => {
+                ctx.fillStyle = '#e4ded2'; ctx.fillRect(0, 0, w, h);
+                ctx.fillStyle = '#1f2f4a'; ctx.fillRect(0, h * 0.5, w, h * 0.16);
+                ctx.fillStyle = 'rgba(0,0,0,0.25)';
+                ctx.fillRect(0, 0, 3, h);
+                const rnd = slump(5);
+                for (let i = 0; i < 900; i++) { ctx.fillStyle = `rgba(0,0,0,${rnd() * 0.05})`; ctx.fillRect(rnd() * w, rnd() * h, 2, 2); }
+            });
+        }
+        function nummerTextur() {
+            return canvasTex(256, 256, (ctx, w, h) => {
+                ctx.clearRect(0, 0, w, h);
+                ctx.fillStyle = '#f4efe5';
+                ctx.beginPath(); ctx.arc(w / 2, h / 2, w * 0.45, 0, Math.PI * 2); ctx.fill();
+                ctx.lineWidth = 10; ctx.strokeStyle = COL.rand; ctx.stroke();
+                ctx.fillStyle = COL.rand; ctx.font = '700 150px Poppins, sans-serif';
+                ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+                ctx.fillText('2', w / 2, h / 2 + 8);
+            });
+        }
+        function omgivning(renderer) {
+            const tex = canvasTex(1024, 512, (ctx, w, h) => {
+                const g = ctx.createLinearGradient(0, 0, 0, h);
+                g.addColorStop(0, '#fbf8f2'); g.addColorStop(0.48, '#efe7d8'); g.addColorStop(0.52, '#8d8a84'); g.addColorStop(1, '#4a4844');
+                ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+                ctx.fillStyle = 'rgba(255,255,255,0.95)';
+                ctx.fillRect(w * 0.1, h * 0.1, w * 0.18, h * 0.18);
+                ctx.fillRect(w * 0.62, h * 0.07, w * 0.2, h * 0.12);
+            });
+            tex.mapping = THREE.EquirectangularReflectionMapping;
+            const pm = new THREE.PMREMGenerator(renderer);
+            const env = pm.fromEquirectangular(tex).texture;
+            pm.dispose();
+            return env;
+        }
+
+        // En ring som sveps runt y-axeln ur en profil [[R, y, v], …]
+        function ringRemsa(profil, segs, uPer) {
+            const np = profil.length, pos = [], uv = [], idx = [];
+            const Rm = profil.reduce((s, p) => s + p[0], 0) / np;
+            for (let i = 0; i <= segs; i++) {
+                const th = i / segs * Math.PI * 2, c = Math.cos(th), s = Math.sin(th);
+                profil.forEach(([R, y, v]) => { pos.push(R * c, y, -R * s); uv.push(th * Rm / uPer, v); });
+            }
+            for (let i = 0; i < segs; i++) for (let j = 0; j < np - 1; j++) {
+                const a = i * np + j, b = a + np;
+                idx.push(a, a + 1, b, b, a + 1, b + 1);
+            }
+            const g = new THREE.BufferGeometry();
+            g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+            g.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
+            g.setIndex(idx);
+            g.computeVertexNormals();
+            return g;
+        }
+
+        // ─────────────────────────────────────────────────────────────────
+        // Bilen (lokalt: x framåt, y uppåt längs vägbanans normal, z åt höger)
+        // ─────────────────────────────────────────────────────────────────
+        function byggBil(env) {
+            const bil = new THREE.Group();
+            const lack = new THREE.MeshStandardMaterial({ color: linjar(COL.bil3d), roughness: 0.32, metalness: 0.55, envMap: env, envMapIntensity: 0.9 });
+            const rand = new THREE.MeshStandardMaterial({ color: linjar('#efe6d2'), roughness: 0.4, metalness: 0.1, envMap: env });
+            const glas = new THREE.MeshStandardMaterial({ color: 0x18212c, roughness: 0.08, metalness: 0.3, envMap: env, envMapIntensity: 1.4 });
+            const svart = new THREE.MeshStandardMaterial({ color: 0x15171b, roughness: 0.8 });
+
+            // kaross (sidoprofil, extruderad i bredd)
+            const sk = new THREE.Shape();
+            sk.moveTo(-2.18, 0.30);
+            // hjulhus: bågar över hjulen, så att hjulen syns från sidan
+            sk.lineTo(-1.36 - 0.44, 0.30);
+            sk.absarc(-1.36, 0.34, 0.44, Math.PI, 0, true);
+            sk.lineTo(1.38 - 0.44, 0.30);
+            sk.absarc(1.38, 0.34, 0.44, Math.PI, 0, true);
+            sk.lineTo(2.08, 0.30);
+            sk.quadraticCurveTo(2.26, 0.32, 2.24, 0.52);
+            sk.quadraticCurveTo(2.22, 0.74, 2.0, 0.80);
+            sk.lineTo(1.05, 0.93);
+            sk.lineTo(-1.62, 0.96);
+            sk.quadraticCurveTo(-2.16, 0.95, -2.22, 0.80);
+            sk.quadraticCurveTo(-2.27, 0.45, -2.18, 0.30);
+            const kGeo = new THREE.ExtrudeGeometry(sk, { depth: 1.66, bevelEnabled: true, bevelThickness: 0.07, bevelSize: 0.06, bevelSegments: 4, curveSegments: 10 });
+            kGeo.translate(0, 0, -0.83);
+            const kaross = new THREE.Mesh(kGeo, lack);
+            bil.add(kaross);
+
+            // kupé i glas
+            const ku = new THREE.Shape();
+            ku.moveTo(-1.6, 0.94);
+            ku.lineTo(1.02, 0.94);
+            ku.quadraticCurveTo(0.6, 1.25, 0.32, 1.36);
+            ku.lineTo(-0.92, 1.38);
+            ku.quadraticCurveTo(-1.3, 1.25, -1.6, 0.94);
+            const kuGeo = new THREE.ExtrudeGeometry(ku, { depth: 1.42, bevelEnabled: true, bevelThickness: 0.03, bevelSize: 0.03, bevelSegments: 2, curveSegments: 10 });
+            kuGeo.translate(0, 0, -0.71);
+            bil.add(new THREE.Mesh(kuGeo, glas));
+            // tak, stolpar och racerränder
+            const tak = new THREE.Mesh(new THREE.BoxGeometry(1.22, 0.05, 1.42), lack);
+            tak.position.set(-0.3, 1.405, 0); bil.add(tak);
+            const bStolpe = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.42, 1.5), lack);
+            bStolpe.position.set(-0.32, 1.15, 0); bil.add(bStolpe);
+            [-0.16, 0.16].forEach(z => {
+                const rTak = new THREE.Mesh(new THREE.BoxGeometry(1.24, 0.055, 0.16), rand);
+                rTak.position.set(-0.3, 1.41, z); bil.add(rTak);
+                const rHuv = new THREE.Mesh(new THREE.BoxGeometry(1.0, 0.03, 0.16), rand);
+                rHuv.position.set(1.52, 0.88, z); rHuv.rotation.z = -0.13; bil.add(rHuv);
+                const rBak = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.03, 0.16), rand);
+                rBak.position.set(-1.9, 0.99, z); bil.add(rBak);
+            });
+            // startnummer på dörrarna
+            const nr = new THREE.MeshBasicMaterial({ map: nummerTextur(), transparent: true, toneMapped: false });
+            [1, -1].forEach(sida => {
+                const p = new THREE.Mesh(new THREE.PlaneGeometry(0.62, 0.62), nr);
+                p.position.set(0.1, 0.62, sida * 0.915);
+                if (sida < 0) p.rotation.y = Math.PI;
+                bil.add(p);
+            });
+            // stötfångare, lampor
+            const sf = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.16, 1.72), svart);
+            sf.position.set(2.24, 0.36, 0); bil.add(sf);
+            const sb = sf.clone(); sb.position.x = -2.25; bil.add(sb);
+            const ljusF = new THREE.MeshStandardMaterial({ color: 0xfff6dc, emissive: 0xfff1c8, emissiveIntensity: 0.9 });
+            const ljusB = new THREE.MeshStandardMaterial({ color: 0xb3121f, emissive: 0x9c0f1a, emissiveIntensity: 0.8 });
+            [0.58, -0.58].forEach(z => {
+                const f = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.12, 0.34), ljusF);
+                f.position.set(2.2, 0.62, z); f.rotation.z = -0.3; bil.add(f);
+                const b = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.12, 0.38), ljusB);
+                b.position.set(-2.27, 0.74, z); bil.add(b);
+            });
+            const grill = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.1, 0.62), svart);
+            grill.position.set(2.24, 0.55, 0); bil.add(grill);
+
+            // hjul
+            const hjul = [];
+            const dack = new THREE.MeshStandardMaterial({ color: 0x1b1c1f, roughness: 0.9 });
+            const falg = new THREE.MeshStandardMaterial({ color: 0xd9dadc, roughness: 0.2, metalness: 1, envMap: env });
+            const dGeo = new THREE.CylinderGeometry(0.34, 0.34, 0.25, 30); dGeo.rotateX(Math.PI / 2);
+            const fGeo = new THREE.CylinderGeometry(0.21, 0.21, 0.26, 24); fGeo.rotateX(Math.PI / 2);
+            [[1.38, 1], [1.38, -1], [-1.36, 1], [-1.36, -1]].forEach(([x, sida]) => {
+                const hg = new THREE.Group();
+                hg.add(new THREE.Mesh(dGeo, dack));
+                hg.add(new THREE.Mesh(fGeo, falg));
+                for (let k = 0; k < 5; k++) {
+                    const ek = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.36, 0.04), svart);
+                    ek.rotation.z = k * Math.PI * 2 / 5;
+                    ek.position.z = sida * 0.135;
+                    hg.add(ek);
+                }
+                hg.position.set(x, 0.34, sida * SPAR);
+                bil.add(hg); hjul.push(hg);
+            });
+            // mjuk skugga under bilen
+            const skugga = new THREE.Mesh(new THREE.PlaneGeometry(4.8, 2.2),
+                new THREE.MeshBasicMaterial({ map: canvasTex(128, 64, (ctx, w, h) => {
+                    const g = ctx.createRadialGradient(w / 2, h / 2, 4, w / 2, h / 2, w / 2);
+                    g.addColorStop(0, 'rgba(0,0,0,0.5)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+                    ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+                }), transparent: true, depthWrite: false }));
+            skugga.rotation.x = -Math.PI / 2; skugga.position.y = 0.02;
+            bil.add(skugga);
+            bil.traverse(m => { if (m.isMesh && m !== skugga) { m.castShadow = true; } });
+            return { bil, hjul };
+        }
+
+        const VYER = {
+            folj:     { theta: 0.5, phi: 0.98, radius: 12 },
+            bakifran: { theta: 0.0,  phi: 1.45, radius: 10 },
+            hela:     { theta: 0.55, phi: 0.82, radius: null },
+        };
+
+        // ─────────────────────────────────────────────────────────────────
+        // 3D-scenen
+        // ─────────────────────────────────────────────────────────────────
+        function BanaScene({ wrapRef }) {
+            const mountRef = useRef(null);
+            useEffect(() => {
+                const wrap = wrapRef.current;
+                const el = mountRef.current;
+                const W = () => el.clientWidth, H = () => el.clientHeight;
+
+                const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                renderer.setSize(W(), H());
+                renderer.setClearColor(0x000000, 0);
+                renderer.outputEncoding = THREE.sRGBEncoding;
+                renderer.toneMapping = THREE.ACESFilmicToneMapping;
+                renderer.toneMappingExposure = 1.05;
+                renderer.shadowMap.enabled = true;
+                renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+                el.appendChild(renderer.domElement);
+
+                const scene = new THREE.Scene();
+                const env = omgivning(renderer);
+                scene.environment = env;
+                scene.fog = new THREE.Fog(linjar('#ece3d2'), 220, 1100);
+                const camera = new THREE.PerspectiveCamera(40, W() / H(), 0.1, 4000);
+
+                // ── Ljus ──
+                scene.add(new THREE.HemisphereLight(0xfffaf0, 0x8a7a62, 0.6));
+                const sol = new THREE.DirectionalLight(0xffffff, 1.2);
+                sol.castShadow = true;
+                sol.shadow.mapSize.set(2048, 2048);
+                Object.assign(sol.shadow.camera, { left: -9, right: 9, top: 9, bottom: -9, near: 1, far: 60 });
+                sol.shadow.bias = -0.0005;
+                scene.add(sol, sol.target);
+                const fyll = new THREE.DirectionalLight(0xdfe8ff, 0.35);
+                fyll.position.set(-80, 60, -40);
+                scene.add(fyll);
+
+                // ── Marken: rutat papper ──
+                const papper = papperTextur();
+                papper.repeat.set(48, 48);
+                const mark = new THREE.Mesh(new THREE.PlaneGeometry(2400, 2400),
+                    new THREE.MeshStandardMaterial({ map: papper, roughness: 0.95, metalness: 0 }));
+                mark.rotation.x = -Math.PI / 2;
+                mark.receiveShadow = true;
+                scene.add(mark);
+
+                // ── Banan (byggs om när r eller α ändras) ──
+                const asfalt = { torr: asfaltTextur('torr'), vat: asfaltTextur('vat'), sno: asfaltTextur('sno'), is: asfaltTextur('is') };
+                const asfaltMat = new THREE.MeshStandardMaterial({ map: asfalt.torr, roughness: 0.85, metalness: 0, side: THREE.DoubleSide,
+                    envMapIntensity: 0.5, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 });
+                const kantMat = new THREE.MeshStandardMaterial({ map: kantstenTextur(), roughness: 0.7, side: THREE.DoubleSide });
+                const barMat = new THREE.MeshStandardMaterial({ map: barriarTextur(), roughness: 0.75, side: THREE.DoubleSide });
+                const banaG = new THREE.Group(); scene.add(banaG);
+                let byggdR = -1, byggdA = -1, byggdU = '';
+                function byggBana(r, alfa) {
+                    banaG.children.slice().forEach(m => { m.geometry.dispose(); banaG.remove(m); });
+                    const a = rad(alfa), ca = Math.cos(a), sa = Math.sin(a);
+                    const Rin = r - BREDD / 2 * ca, Rout = r + BREDD / 2 * ca, Hout = BREDD * sa;
+                    const segs = Math.max(240, Math.round(r * 4));
+                    const yta = new THREE.Mesh(ringRemsa([[Rin, 0.03, 0], [Rout, Hout + 0.03, 1]], segs, 8), asfaltMat);
+                    yta.receiveShadow = true;
+                    const kant = new THREE.Mesh(ringRemsa([[Rin - 1.3, 0.035, 0], [Rin, 0.04, 1]], segs, 2), kantMat);
+                    kant.receiveShadow = true;
+                    const bar = new THREE.Mesh(ringRemsa([[Rout, Hout + 0.03, 0.02], [Rout, Hout + 0.95, 0.98], [Rout + 0.4, Hout + 0.95, 0.98], [Rout + 0.4, 0, 0.02]], segs, 4), barMat);
+                    bar.castShadow = true; bar.receiveShadow = true;
+                    banaG.add(yta, kant, bar);
+                    byggdR = r; byggdA = alfa;
+                    skidN = 0; skidMesh.count = 0;
+                }
+
+                // ── Kurvans centrum och radien ──
+                const centrumG = new THREE.Group(); scene.add(centrumG);
+                const stolpMat = new THREE.MeshStandardMaterial({ color: 0x1f2530, roughness: 0.5 });
+                const stolpe = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.24, 5, 16), stolpMat);
+                stolpe.position.y = 2.5; stolpe.castShadow = true;
+                const knopp = new THREE.Mesh(new THREE.SphereGeometry(0.42, 20, 14), new THREE.MeshStandardMaterial({ color: 0x1f2530, roughness: 0.4 }));
+                knopp.position.y = 5.2;
+                centrumG.add(stolpe, knopp);
+                const centrumLapp = textSprite([{ t: 'kurvans centrum', color: COL.ink, weight: 600, small: true }]);
+                centrumLapp.position.set(0, 6.6, 0);
+                scene.add(centrumLapp);
+                const radieLinje = streckPil(COL.ink, 0.18, 130);
+                scene.add(radieLinje);
+                let radieLapp = null, radieText = '';
+
+                // ── Bilen ──
+                const { bil, hjul } = byggBil(env);
+                scene.add(bil);
+
+                // ── Bromsspår (när bilen glider) ──
+                const SKID_MAX = 900;
+                const skidGeo = new THREE.PlaneGeometry(1.0, 0.2); skidGeo.rotateX(-Math.PI / 2);
+                const skidMesh = new THREE.InstancedMesh(skidGeo, new THREE.MeshBasicMaterial({ color: 0x111111, transparent: true, opacity: 0.22,
+                    depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 }), SKID_MAX);
+                skidMesh.count = 0; skidMesh.renderOrder = 3;
+                scene.add(skidMesh);
+                let skidN = 0, skidT = 0;
+                const tmpM = new THREE.Matrix4(), ett = new THREE.Vector3(1, 1, 1);
+
+                // ── Krafter och hastighet ──
+                const pFG = pil(COL.tyngd), pFN = pil(COL.norm), pFf = pil(COL.frik), pFC = streckPil(COL.fc), pV = pil(COL.fart);
+                scene.add(pFG, pFN, pFf, pFC, pV);
+                const tpPrick = new THREE.Mesh(new THREE.SphereGeometry(0.1, 16, 12), markMat(COL.tyngd, 0.4));
+                tpPrick.renderOrder = 26; scene.add(tpPrick);
+                const lFG = kraftEtikett('F', 'G', COL.tyngd), lFN = kraftEtikett('F', 'N', COL.norm),
+                      lFf = kraftEtikett('F', 'f', COL.frik), lFC = kraftEtikett('F', 'C', COL.fc),
+                      lV = textSprite([{ t: 'v', italic: true, color: COL.fart }]);
+                const lappar = [lFG, lFN, lFf, lFC, lV, centrumLapp];
+                scene.add(lFG, lFN, lFf, lFC, lV);
+
+                // ── Kamera ──
+                const cam = { theta: VYER.folj.theta, phi: VYER.folj.phi, radius: VYER.folj.radius, target: new THREE.Vector3() };
+                let vy = 'folj', camMal = null, overgang = 0;
+                const hela = () => ({ theta: VYER.hela.theta, phi: VYER.hela.phi, radius: SIM.p.r * 2.3 + 28 });
+                SIM.vy = (n) => {
+                    vy = n;
+                    const m = n === 'hela' ? hela() : VYER[n];
+                    camMal = { ...m };
+                    overgang = 1;
+                };
+
+                // ── Pekare: dra för att vrida, hjul/nyp för att zooma ──
+                const pekare = new Map();
+                let drag = null, nyp = null;
+                const rMin = () => vy === 'hela' ? 30 : 5, rMax = () => vy === 'hela' ? 700 : 80;
+                const onDown = (e) => {
+                    if (e.target !== renderer.domElement) return;
+                    pekare.set(e.pointerId, { x: e.clientX, y: e.clientY });
+                    renderer.domElement.setPointerCapture(e.pointerId);
+                    if (pekare.size === 1) drag = { x: e.clientX, y: e.clientY };
+                    if (pekare.size === 2) {
+                        const [a, b] = [...pekare.values()];
+                        nyp = { d: Math.hypot(a.x - b.x, a.y - b.y), r: cam.radius };
+                        drag = null;
+                    }
+                    camMal = null;
+                };
+                const onMove = (e) => {
+                    if (pekare.has(e.pointerId)) pekare.set(e.pointerId, { x: e.clientX, y: e.clientY });
+                    if (nyp && pekare.size === 2) {
+                        const [a, b] = [...pekare.values()];
+                        const d = Math.hypot(a.x - b.x, a.y - b.y);
+                        cam.radius = Math.max(rMin(), Math.min(rMax(), nyp.r * nyp.d / Math.max(d, 1)));
+                        return;
+                    }
+                    if (drag) {
+                        const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+                        drag.x = e.clientX; drag.y = e.clientY;
+                        cam.theta -= dx * 0.008;
+                        cam.phi = Math.max(0.08, Math.min(1.53, cam.phi - dy * 0.006));
+                        wrap.classList.add('dragging');
+                    }
+                };
+                const onUp = (e) => {
+                    pekare.delete(e.pointerId);
+                    if (pekare.size < 2) nyp = null;
+                    if (pekare.size === 0) drag = null;
+                    wrap.classList.remove('dragging');
+                };
+                const onWheel = (e) => {
+                    e.preventDefault();
+                    camMal = null;
+                    cam.radius = Math.max(rMin(), Math.min(rMax(), cam.radius * Math.exp(e.deltaY * 0.0012)));
+                };
+                el.addEventListener('pointerdown', onDown);
+                window.addEventListener('pointermove', onMove);
+                window.addEventListener('pointerup', onUp);
+                window.addEventListener('pointercancel', onUp);
+                el.addEventListener('wheel', onWheel, { passive: false });
+                wrap.classList.add('grab');
+
+                const ro = new ResizeObserver(() => {
+                    renderer.setSize(W(), H());
+                    camera.aspect = W() / H();
+                    camera.fov = camera.aspect < 0.9 ? 50 : 40;
+                    camera.updateProjectionMatrix();
+                });
+                ro.observe(el);
+
+                let synlig = true;
+                const io = new IntersectionObserver((en) => { synlig = en[0].isIntersecting; }, { threshold: 0.01 });
+                io.observe(wrap);
+
+                // ── Tillstånd ──
+                let phi = 0;            // bilens vinkel runt kurvan
+                let d = 0, w = 0;       // läge och fart längs vägbanan, utåt positivt
+                let glider = false, kant = 0, av = 0, nyckel = '';
+                let hjulVinkel = 0;
+                SIM.reset = () => { d = 0; w = 0; glider = false; kant = 0; av = 0; SIM.ut.av = 0; };
+
+                // återanvända vektorer
+                const inat = new THREE.Vector3(), fram = new THREE.Vector3(), upp = new THREE.Vector3(),
+                      sida = new THREE.Vector3(), uppfor = new THREE.Vector3(), pos = new THREE.Vector3(),
+                      tp = new THREE.Vector3(), P = new THREE.Vector3(), basis = new THREE.Matrix4(), tmp = new THREE.Vector3();
+
+                // fysiksteg
+                const steg = (dt) => {
+                    const p = SIM.p;
+                    const a = rad(p.alfa), ca = Math.cos(a), sa = Math.sin(a);
+                    const rc = p.r + d * ca;
+                    const acc = p.v * p.v / rc;
+                    const N = MASSA * (G * ca + acc * sa);
+                    const fBehov = MASSA * (G * sa - acc * ca);
+                    const fMax = p.mu * N;
+                    let f;
+                    if (!glider) {
+                        if (Math.abs(fBehov) > fMax * 1.0001 + 1e-6) {
+                            glider = true;
+                            w = fBehov < 0 ? 1e-4 : -1e-4;     // börjar glida dit friktionen inte räcker
+                        }
+                    }
+                    if (glider) {
+                        f = -Math.sign(w) * fMax;
+                        const wNy = w + (f / MASSA - G * sa + acc * ca) * dt;
+                        if (Math.sign(wNy) !== Math.sign(w) && Math.abs(fBehov) <= fMax) { glider = false; w = 0; f = fBehov; }
+                        else w = wNy;
+                    } else {
+                        f = fBehov; w = 0;
+                        // föraren styr tillbaka mot körfältets mitt när greppet räcker
+                        if (Math.abs(d) > 0.005) d -= Math.sign(d) * Math.min(Math.abs(d), 1.4 * dt);
+                    }
+                    d += w * dt;
+                    kant = 0;
+                    if (d > D_MAX) { d = D_MAX; if (w > 0) w = 0; kant = 1; }
+                    if (d < -D_MAX) { d = -D_MAX; if (w < 0) w = 0; kant = -1; }
+                    if (glider && kant !== 0) {
+                        // Bilen har glidit ända ut till kanten av vägbanan och hade
+                        // fortsatt om kanten inte fanns. Den stannar där, så att scenen
+                        // aldrig visar ett läge där en kraft från barriären saknas.
+                        av = kant;
+                        f = -kant * fMax;
+                    }
+                    phi += p.v / rc * dt;
+                    hjulVinkel -= p.v / 0.34 * dt;
+                    Object.assign(SIM.ut, { d, w, glider, kant, av, N, f, acc, rc, fBehov });
+                    return { rc, sa, ca };
+                };
+
+                let tLast = performance.now(), raf = 0;
+                const tick = () => {
+                    raf = requestAnimationFrame(tick);
+                    const now = performance.now();
+                    const dtv = Math.min(0.05, (now - tLast) / 1000);
+                    tLast = now;
+                    if (!synlig) return;
+                    const p = SIM.p;
+                    const typ = underlagFor(p.mu);
+                    if (typ !== byggdU) {
+                        asfaltMat.map = asfalt[typ];
+                        asfaltMat.roughness = { torr: 0.85, vat: 0.22, sno: 0.95, is: 0.12 }[typ];
+                        asfaltMat.metalness = typ === 'is' ? 0.15 : 0;
+                        asfaltMat.envMapIntensity = typ === 'vat' || typ === 'is' ? 1.2 : 0.5;
+                        asfaltMat.needsUpdate = true;
+                        byggdU = typ;
+                    }
+                    if (p.r !== byggdR || p.alfa !== byggdA) byggBana(p.r, p.alfa);
+
+                    const dt = dtv * (p.slow ? 0.2 : 1);
+                    // ändras något reglage efter att bilen glidit av, börjar den om i körfältet
+                    const nyNyckel = [p.v, p.alfa, p.r, p.mu].join('|');
+                    if (nyNyckel !== nyckel) { if (av) SIM.reset(); nyckel = nyNyckel; }
+                    let geo = null;
+                    if (av) {
+                        const a = rad(p.alfa);
+                        geo = { rc: p.r + d * Math.cos(a), sa: Math.sin(a), ca: Math.cos(a) };
+                    } else if (p.running) {
+                        const n = Math.max(1, Math.ceil(dt / 0.004));
+                        for (let i = 0; i < n; i++) geo = steg(dt / n);
+                    } else geo = steg(0);
+                    const { rc, sa, ca } = geo;
+
+                    // bilens läge och orientering
+                    inat.set(-Math.cos(phi), 0, Math.sin(phi));
+                    fram.set(-Math.sin(phi), 0, -Math.cos(phi));
+                    upp.set(0, ca, 0).addScaledVector(inat, sa);
+                    sida.crossVectors(fram, upp);
+                    uppfor.copy(inat).multiplyScalar(-ca).setY(sa);
+                    pos.set(rc * Math.cos(phi), (BREDD / 2 + d) * sa + 0.035, -rc * Math.sin(phi));
+                    basis.makeBasis(fram, upp, sida);
+                    bil.quaternion.setFromRotationMatrix(basis);
+                    bil.position.copy(pos);
+                    hjul.forEach(h => { h.rotation.z = hjulVinkel; });
+                    tp.copy(pos).addScaledVector(upp, H_TP);
+
+                    // bromsspår
+                    if (p.running && !av && glider && Math.abs(w) > 0.05) {
+                        skidT += dt;
+                        if (skidT > 0.02) {
+                            skidT = 0;
+                            [[-1.36, SPAR], [-1.36, -SPAR]].forEach(([x, z]) => {
+                                tmp.copy(pos).addScaledVector(fram, x).addScaledVector(sida, z).addScaledVector(upp, 0.015);
+                                tmpM.compose(tmp, bil.quaternion, ett);
+                                skidMesh.setMatrixAt(skidN % SKID_MAX, tmpM);
+                                skidN++;
+                            });
+                            skidMesh.count = Math.min(skidN, SKID_MAX);
+                            skidMesh.instanceMatrix.needsUpdate = true;
+                        }
+                    }
+
+                    // krafter (skalenliga, fast skala)
+                    const ut = SIM.ut, sh = p.show;
+                    const Pe = angreppsPunkt(ut.N, ut.f);
+                    P.copy(pos).addScaledVector(uppfor, Pe);
+                    const vFG = new THREE.Vector3(0, -MASSA * G * K3, 0);
+                    const vFN = upp.clone().multiplyScalar(ut.N * K3);
+                    const vFf = uppfor.clone().multiplyScalar(ut.f * K3);
+                    const vFC = new THREE.Vector3().add(vFG).add(vFN).add(vFf);
+                    const kap = (v) => { if (v.length() > 7) v.setLength(7); return v; };
+                    stallPil(pFG, tp, vFG);
+                    stallPil(pFN, P, kap(vFN));
+                    stallPil(pFf, P, kap(vFf));
+                    stallStreckPil(pFC, tp, kap(vFC));
+                    tmp.copy(pos).addScaledVector(upp, 0.62).addScaledVector(fram, 2.32);
+                    stallPil(pV, tmp, fram.clone().multiplyScalar(p.v * 0.1));
+                    pFG.visible = sh.krafter; pFN.visible = sh.krafter && ut.N > 1; tpPrick.visible = sh.krafter;
+                    tpPrick.position.copy(tp);
+                    pFf.visible = sh.krafter && Math.abs(ut.f) * K3 > 0.06;
+                    pFC.visible = sh.fc && vFC.length() > 0.06;
+                    pV.visible = sh.fart && p.v > 0.2;
+                    const tipp = (lapp, from, vec, extra = 0.42) => {
+                        const n = vec.clone().normalize();
+                        lapp.position.copy(from).add(vec).addScaledVector(n, extra);
+                    };
+                    tipp(lFG, tp, vFG); tipp(lFN, P, vFN); tipp(lFf, P, vFf, 0.45); tipp(lFC, tp, vFC, 0.5);
+                    tipp(lV, tmp, fram.clone().multiplyScalar(p.v * 0.1), 0.35);
+                    lFG.visible = pFG.visible; lFN.visible = pFN.visible; lFf.visible = pFf.visible;
+                    lFC.visible = pFC.visible; lV.visible = pV.visible;
+
+                    // radien: vågrätt från centrumaxeln till bilens mitt, i höjd med
+                    // vägbanan under bilen (så att den inte ligger på centripetalkraften)
+                    const radieStart = new THREE.Vector3(0, tp.y, 0);
+                    const radieSlut = tp.clone();
+                    stallStreckPil(radieLinje, radieStart, radieSlut.clone().sub(radieStart), true);
+                    const oversikt = cam.radius > 32;
+                    radieLinje.visible = sh.radie && oversikt;
+                    const rText = 'r = ' + fmt(rc, 0) + ' m';
+                    if (rText !== radieText) {
+                        if (radieLapp) { scene.remove(radieLapp); radieLapp.material.map.dispose(); radieLapp.material.dispose(); }
+                        radieLapp = textSprite([{ t: 'r', italic: true, color: COL.ink }, { t: rText.slice(1), color: COL.ink }]);
+                        scene.add(radieLapp);
+                        radieText = rText;
+                    }
+                    radieLapp.position.copy(radieStart).lerp(radieSlut, 0.5).add(new THREE.Vector3(0, 1.2, 0));
+                    radieLapp.visible = sh.radie && oversikt;
+                    centrumLapp.visible = oversikt;
+                    // etiketten vid centrum på andra sidan om radielinjen
+                    centrumLapp.position.set(-tp.x * 0.1, 3.2, -tp.z * 0.1);
+
+                    // kamera
+                    const mal = vy === 'hela' ? new THREE.Vector3(0, 0, 0) : tp.clone();
+                    if (camMal) {
+                        const k = Math.min(1, dtv * 3.2);
+                        cam.theta += (camMal.theta - cam.theta) * k;
+                        cam.phi += (camMal.phi - cam.phi) * k;
+                        cam.radius += (camMal.radius - cam.radius) * k;
+                        if (Math.abs(camMal.phi - cam.phi) < 1e-3 && Math.abs(camMal.theta - cam.theta) < 1e-3 && Math.abs(camMal.radius - cam.radius) < 0.05) camMal = null;
+                    }
+                    if (overgang > 0) {
+                        overgang = Math.max(0, overgang - dtv * 1.4);
+                        cam.target.lerp(mal, Math.min(1, dtv * 5));
+                        if (overgang === 0) cam.target.copy(mal);
+                    } else cam.target.copy(mal);
+                    const az = (vy === 'hela' ? 0 : phi) + cam.theta;
+                    camera.position.set(
+                        cam.target.x + cam.radius * Math.sin(cam.phi) * Math.sin(az),
+                        cam.target.y + cam.radius * Math.cos(cam.phi),
+                        cam.target.z + cam.radius * Math.sin(cam.phi) * Math.cos(az));
+                    if (camera.position.y < 0.6) camera.position.y = 0.6;
+                    camera.lookAt(cam.target);
+
+                    // skuggan följer bilen
+                    sol.position.copy(pos).add(new THREE.Vector3(14, 26, 10));
+                    sol.target.position.copy(pos);
+
+                    // etiketterna behåller sin storlek på skärmen
+                    const lappH = camera.fov > 45 ? 0.046 : 0.04;
+                    [...lappar, radieLapp].forEach(s => {
+                        const h = lappH * camera.position.distanceTo(s.position);
+                        s.scale.set(h * s.userData.aspect, h, 1);
+                    });
+                    const nara = cam.radius < 45;
+                    [lFG, lFN, lFf, lFC, lV].forEach(s => { if (!nara) s.visible = false; });
+
+                    renderer.render(scene, camera);
+                };
+                tick();
+
+                return () => {
+                    cancelAnimationFrame(raf);
+                    ro.disconnect(); io.disconnect();
+                    el.removeEventListener('pointerdown', onDown);
+                    window.removeEventListener('pointermove', onMove);
+                    window.removeEventListener('pointerup', onUp);
+                    window.removeEventListener('pointercancel', onUp);
+                    el.removeEventListener('wheel', onWheel);
+                    renderer.dispose();
+                    if (renderer.domElement.parentNode) renderer.domElement.parentNode.removeChild(renderer.domElement);
+                };
+            }, []);
+            return <div ref={mountRef} className="bana-mount" />;
+        }
+
+        // ─────────────────────────────────────────────────────────────────
+        // SVG-hjälp
+        // ─────────────────────────────────────────────────────────────────
+        // Pil som EN polygon (skaft + spets), skaftet slutar vid spetsens bas
+        function pilPunkter(x1, y1, x2, y2, bredd = 3.6, spets = 13) {
+            const L = Math.hypot(x2 - x1, y2 - y1);
+            if (L < 1) return null;
+            const ux = (x2 - x1) / L, uy = (y2 - y1) / L, nx = -uy, ny = ux;
+            const h = Math.min(spets, L * 0.6), hb = bredd / 2, hs = 6.5;
+            const bx = x2 - ux * h, by = y2 - uy * h;
+            const P = [[x1 + nx * hb, y1 + ny * hb], [bx + nx * hb, by + ny * hb], [bx + nx * hs, by + ny * hs], [x2, y2],
+                       [bx - nx * hs, by - ny * hs], [bx - nx * hb, by - ny * hb], [x1 - nx * hb, y1 - ny * hb]];
+            return P.map(p => p.map(v => v.toFixed(1)).join(',')).join(' ');
+        }
+        const Pil = ({ x1, y1, x2, y2, color, streckad, tunn }) => {
+            const L = Math.hypot(x2 - x1, y2 - y1);
+            if (L < 2) return null;
+            if (!streckad) return <polygon points={pilPunkter(x1, y1, x2, y2, tunn ? 2.2 : 3.6, tunn ? 10 : 13)} fill={color} />;
+            const ux = (x2 - x1) / L, uy = (y2 - y1) / L, h = Math.min(tunn ? 10 : 13, L * 0.6);
+            const bx = x2 - ux * h, by = y2 - uy * h;
+            return (
+                <g>
+                    <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={tunn ? 2 : 3.4}
+                          strokeDasharray={tunn ? '4 3' : '7 4'} strokeLinecap="butt" />
+                    <polygon points={pilPunkter(bx - ux * 0.5, by - uy * 0.5, x2, y2, 0.1, h)} fill={color} />
+                </g>
+            );
+        };
+        const KraftNamn = ({ x, y, sub, color, anchor = 'middle' }) => (
+            <text x={x} y={y} textAnchor={anchor} fill={color} fontSize="17" fontWeight="600"
+                  fontFamily="Poppins, sans-serif">
+                <tspan fontStyle="italic">F</tspan><tspan fontSize="12" dy="5">{sub}</tspan>
+            </text>
+        );
+
+        // ─────────────────────────────────────────────────────────────────
+        // Tvärsnittet, sett bakifrån: vägbanan, bilen och krafterna
+        // ─────────────────────────────────────────────────────────────────
+        function useSmal() {
+            const [smal, setSmal] = useState(() => window.innerWidth < 600);
+            useEffect(() => {
+                const h = () => setSmal(window.innerWidth < 600);
+                window.addEventListener('resize', h);
+                return () => window.removeEventListener('resize', h);
+            }, []);
+            return smal;
+        }
+        const VB_W = 540, VB_H = 340;
+        const C0 = { x: 280, y: 196 };      // kontaktpunktens mitt
+        const PX = 58;                       // px per meter i bilritningen
+
+        function BilBakifran() {
+            // lokalt: origo i vägbanan mitt under bilen, y negativt uppåt
+            const m = (v) => v * PX;
+            return (
+                <g>
+                    {/* däck */}
+                    {[-1, 1].map(s => (
+                        <rect key={s} x={s * m(SPAR) - 8} y={-m(0.68)} width="16" height={m(0.68)} rx="5" fill="#1b1c1f" />
+                    ))}
+                    {/* kaross */}
+                    <path d={`M ${-m(0.9)} ${-m(0.3)} L ${m(0.9)} ${-m(0.3)} Q ${m(0.95)} ${-m(0.3)} ${m(0.95)} ${-m(0.4)}
+                              L ${m(0.93)} ${-m(0.86)} Q ${m(0.92)} ${-m(0.96)} ${m(0.78)} ${-m(0.97)}
+                              L ${m(0.66)} ${-m(0.98)} L ${m(0.52)} ${-m(1.36)} Q ${m(0.48)} ${-m(1.42)} ${m(0.4)} ${-m(1.42)}
+                              L ${-m(0.4)} ${-m(1.42)} Q ${-m(0.48)} ${-m(1.42)} ${-m(0.52)} ${-m(1.36)} L ${-m(0.66)} ${-m(0.98)}
+                              L ${-m(0.78)} ${-m(0.97)} Q ${-m(0.92)} ${-m(0.96)} ${-m(0.93)} ${-m(0.86)}
+                              L ${-m(0.95)} ${-m(0.4)} Q ${-m(0.95)} ${-m(0.3)} ${-m(0.9)} ${-m(0.3)} Z`}
+                          fill={COL.bil} stroke="#2a3340" strokeWidth="1.4" strokeLinejoin="round" />
+                    {/* bakruta */}
+                    <path d={`M ${-m(0.56)} ${-m(1.02)} L ${m(0.56)} ${-m(1.02)} L ${m(0.45)} ${-m(1.33)} L ${-m(0.45)} ${-m(1.33)} Z`}
+                          fill="#1c242e" />
+                    {/* racerränder */}
+                    <rect x={-m(0.17)} y={-m(1.42)} width={m(0.1)} height={m(0.4)} fill="#efe6d2" />
+                    <rect x={m(0.07)} y={-m(1.42)} width={m(0.1)} height={m(0.4)} fill="#efe6d2" />
+                    <rect x={-m(0.17)} y={-m(0.97)} width={m(0.1)} height={m(0.18)} fill="#efe6d2" />
+                    <rect x={m(0.07)} y={-m(0.97)} width={m(0.1)} height={m(0.18)} fill="#efe6d2" />
+                    {/* baklampor, skylt, stötfångare */}
+                    {[-1, 1].map(s => (
+                        <rect key={s} x={s > 0 ? m(0.6) : -m(0.86)} y={-m(0.8)} width={m(0.26)} height={m(0.12)} rx="2" fill="#b3121f" />
+                    ))}
+                    <rect x={-m(0.26)} y={-m(0.64)} width={m(0.52)} height={m(0.14)} rx="1.5" fill="#f4efe5" stroke="#2a3340" strokeWidth="0.8" />
+                    <rect x={-m(0.92)} y={-m(0.44)} width={m(1.84)} height={m(0.12)} rx="3" fill="#2a2d33" />
+                </g>
+            );
+        }
+
+        function Tvarsnitt({ alfa, N, f, acc, kompos, visaFC, glider }) {
+            const smal = useSmal();
+            // På en smal skärm visas ett tätare utsnitt kring bilen, så att
+            // etiketterna blir lika stora som brödtexten.
+            const VX = smal ? 112 : 0, VW = smal ? 340 : VB_W;
+            const a = rad(alfa), ca = Math.cos(a), sa = Math.sin(a);
+            // riktningar i SVG (y nedåt): uppför vägbanan = utåt (höger) och uppåt
+            const u = { x: ca, y: -sa };          // längs vägbanan, uppåt
+            const n = { x: -sa, y: -ca };         // normalen, snett in mot centrum
+            const HALV = smal ? 150 : 205;
+            const L = { x: C0.x - u.x * HALV, y: C0.y - u.y * HALV };
+            const R = { x: C0.x + u.x * HALV, y: C0.y + u.y * HALV };
+            const Pe = angreppsPunkt(N, f) * PX;
+            const P = { x: C0.x + u.x * Pe, y: C0.y + u.y * Pe };
+            const TP = { x: C0.x + n.x * H_TP * PX, y: C0.y + n.y * H_TP * PX };
+            const kap = (v) => { const l = Math.hypot(v.x, v.y); return l > 175 ? { x: v.x * 175 / l, y: v.y * 175 / l } : v; };
+            const vG = { x: 0, y: MASSA * G * K2 };
+            const vN = kap({ x: n.x * N * K2, y: n.y * N * K2 });
+            const vF = kap({ x: u.x * f * K2, y: u.y * f * K2 });
+            const sum = { x: n.x * N * K2 + u.x * f * K2, y: n.y * N * K2 + u.y * f * K2 + vG.y };
+            const vC = kap(sum);
+
+            // Etiketten läggs bortom pilspetsen och flyttas ut ur bilen om den hamnar där
+            const iBil = (pt) => {
+                const dx = pt.x - C0.x, dy = pt.y - C0.y;
+                const lx = dx * u.x + dy * u.y;          // längs vägbanan
+                const ly = -(dx * n.x + dy * n.y);       // − ut från vägbanan (lokalt y)
+                return Math.abs(lx) < 64 && ly < 12 && ly > -90;
+            };
+            const etikett = (from, vec, extra = 16) => {
+                const l = Math.hypot(vec.x, vec.y) || 1;
+                const dx = vec.x / l, dy = vec.y / l;
+                let s = extra;
+                let pt = { x: from.x + vec.x + dx * s, y: from.y + vec.y + dy * s };
+                for (let i = 0; i < 20 && iBil(pt); i++) { s += 8; pt = { x: from.x + vec.x + dx * s, y: from.y + vec.y + dy * s }; }
+                const anchor = dx > 0.35 ? 'start' : dx < -0.35 ? 'end' : 'middle';
+                return { x: pt.x, y: pt.y + (dy > 0.35 ? 10 : dy < -0.35 ? 0 : 6), anchor };
+            };
+            const eG = etikett(TP, vG), eN = etikett(P, vN), eC = etikett(TP, vC, 14);
+            // friktionens etikett ovanför vägbanan, vid pilspetsen (inte på vägen)
+            const fs = Math.sign(f) || 1;
+            let eF = { x: P.x + vF.x + u.x * fs * 6 + n.x * 20, y: P.y + vF.y + u.y * fs * 6 + n.y * 20 };
+            // hamnar etiketten på bilen flyttas den längs vägbanan, i pilens riktning, tills den är fri
+            for (let i = 0; i < 30 && iBil(eF); i++) eF = { x: eF.x + u.x * fs * 8, y: eF.y + u.y * fs * 8 };
+            eF = { x: eF.x, y: eF.y + 6, anchor: fs > 0 ? 'start' : 'end' };
+
+            // vinkelbågen vid vägbanans nedre ände
+            const bR = 64;
+            const bage = alfa >= 2
+                ? `M ${L.x + bR} ${L.y} A ${bR} ${bR} 0 0 0 ${L.x + bR * ca} ${L.y - bR * sa}` : null;
+            const am = a / 2;
+            const alfaLapp = alfa >= 14
+                ? { x: L.x + (bR + 14) * Math.cos(am), y: L.y - (bR + 14) * Math.sin(am) + 6 }
+                : { x: L.x + bR + 20, y: L.y + 18 };
+
+            const markPunkter = `${VX},${L.y} ${L.x},${L.y} ${R.x},${R.y} ${VX + VW},${R.y} ${VX + VW},${VB_H} ${VX},${VB_H}`;
+            const vagband = `${L.x},${L.y} ${R.x},${R.y} ${R.x + n.x * -13},${R.y + n.y * -13} ${L.x + n.x * -13},${L.y + n.y * -13}`;
+            const visaF = Math.abs(f) * K2 > 2;
+
+            return (
+                <svg viewBox={`${VX} 0 ${VW} ${VB_H}`} width="100%" style={{ display: 'block', maxWidth: 640, margin: '0 auto' }}
+                     role="img" aria-label="Tvärsnitt av vägbanan med bilen sedd bakifrån och krafterna på bilen">
+                    <polygon points={markPunkter} fill="#e8dcc2" />
+                    <polyline points={`${VX},${L.y} ${L.x},${L.y} ${R.x},${R.y} ${VX + VW},${R.y}`} fill="none" stroke="#2a2f38" strokeWidth="1.6" />
+                    <polygon points={vagband} fill="#4c4f55" />
+                    <line x1={L.x} y1={L.y} x2={R.x} y2={R.y} stroke="#1f2328" strokeWidth="2" />
+                    {/* vågrät referens och vinkeln */}
+                    <line x1={L.x} y1={L.y} x2={L.x + 130} y2={L.y} stroke={COL.ink} strokeWidth="1.3" strokeDasharray="5 4" opacity="0.7" />
+                    {bage && <path d={bage} fill="none" stroke={COL.ink} strokeWidth="1.5" />}
+                    {alfa >= 2 && (
+                        <text x={alfaLapp.x} y={alfaLapp.y} textAnchor="middle" fontSize="16" fontStyle="italic"
+                              fontFamily="Poppins, sans-serif" fill={COL.ink}>α</text>
+                    )}
+                    {/* riktningen mot centrum */}
+                    <g opacity="0.85">
+                        <polygon points={pilPunkter(VX + 96, 30, VX + 14, 30, 2, 10)} fill="#5a6170" />
+                        <text x={VX + 104} y="35" fontSize={smal ? 15 : 13} fill="#5a6170" fontFamily="DM Sans, sans-serif">mot kurvans centrum</text>
+                    </g>
+
+                    <g transform={`translate(${C0.x} ${C0.y}) rotate(${-alfa})`} opacity={glider ? 0.92 : 1}>
+                        <BilBakifran />
+                    </g>
+
+                    {/* komposanter */}
+                    {kompos && (
+                        <g>
+                            <Pil x1={P.x} y1={P.y} x2={P.x + n.x * N * K2} y2={P.y} color={COL.norm} streckad tunn />
+                            <Pil x1={P.x} y1={P.y} x2={P.x} y2={P.y + n.y * N * K2} color={COL.norm} streckad tunn />
+                            {visaF && <Pil x1={P.x} y1={P.y} x2={P.x + u.x * f * K2} y2={P.y} color={COL.frik} streckad tunn />}
+                            {visaF && <Pil x1={P.x} y1={P.y} x2={P.x} y2={P.y + u.y * f * K2} color={COL.frik} streckad tunn />}
+                        </g>
+                    )}
+
+                    {/* krafterna */}
+                    <Pil x1={TP.x} y1={TP.y} x2={TP.x + vG.x} y2={TP.y + vG.y} color={COL.tyngd} />
+                    <Pil x1={P.x} y1={P.y} x2={P.x + vN.x} y2={P.y + vN.y} color={COL.norm} />
+                    {visaF && <Pil x1={P.x} y1={P.y} x2={P.x + vF.x} y2={P.y + vF.y} color={COL.frik} />}
+                    {visaFC && <Pil x1={TP.x} y1={TP.y} x2={TP.x + vC.x} y2={TP.y + vC.y} color={COL.fc} streckad />}
+                    <circle cx={TP.x} cy={TP.y} r="3.2" fill={COL.tyngd} />
+
+                    <KraftNamn {...eG} sub="G" color={COL.tyngd} />
+                    <KraftNamn {...eN} sub="N" color={COL.norm} />
+                    {visaF && <KraftNamn {...eF} sub="f" color={COL.frik} />}
+                    {visaFC && Math.hypot(vC.x, vC.y) > 16 && <KraftNamn {...eC} sub="C" color={COL.fc} />}
+                </svg>
+            );
+        }
+
+        // ─────────────────────────────────────────────────────────────────
+        // Fartkartan: vilka kombinationer av α och v håller bilen kvar?
+        // ─────────────────────────────────────────────────────────────────
+        const KW = 540, KH = 320, KL = 56, KR = 22, KT = 18, KB = 46;
+        const kx = (al) => KL + al / A_MAX * (KW - KL - KR);
+        const ky = (v) => KH - KB - v / V_MAX * (KH - KT - KB);
+        const kyKlipp = (v) => ky(Math.min(V_MAX, v));
+
+        function Fartkarta({ alfa, v, r, mu, onSatt }) {
+            const smal = useSmal();
+            const fs = smal ? 1.55 : 1;          // större text på smal skärm
+            const svgRef = useRef(null);
+            const drar = useRef(false);
+            const kurvor = useMemo(() => {
+                const pts = [];
+                for (let al = 0; al <= A_MAX + 1e-9; al += 0.25) pts.push({ al, ...granser(al, r, mu) });
+                const lin = (key, max = V_MAX) => {
+                    const segs = []; let cur = [];
+                    pts.forEach(q => {
+                        const val = q[key];
+                        if (isFinite(val) && val <= max && (key !== 'vmin' || val > 0)) cur.push(`${kx(q.al).toFixed(1)},${ky(val).toFixed(1)}`);
+                        else if (cur.length) { segs.push(cur.join(' ')); cur = []; }
+                    });
+                    if (cur.length) segs.push(cur.join(' '));
+                    return segs;
+                };
+                const upp = pts.map(q => `${kx(q.al).toFixed(1)},${kyKlipp(isFinite(q.vmax) ? q.vmax : V_MAX).toFixed(1)}`);
+                const ned = pts.map(q => `${kx(q.al).toFixed(1)},${kyKlipp(q.vmin).toFixed(1)}`);
+                const hall = [...upp, ...ned.slice().reverse()].join(' ');
+                const ut = [`${kx(0)},${ky(V_MAX)}`, ...upp, `${kx(A_MAX)},${ky(V_MAX)}`].join(' ');
+                const in_ = [`${kx(0)},${ky(0)}`, ...ned, `${kx(A_MAX)},${ky(0)}`].join(' ');
+                return { hall, ut, in_, vmax: lin('vmax'), vmin: lin('vmin').filter(s => s.split(' ').length > 1), v0: lin('v0') };
+            }, [r, mu]);
+            const fran = (e) => {
+                const svg = svgRef.current;
+                const pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY;
+                const q = pt.matrixTransform(svg.getScreenCTM().inverse());
+                const al = Math.round(Math.max(0, Math.min(A_MAX, (q.x - KL) / (KW - KL - KR) * A_MAX)));
+                const vv = Math.round(2 * Math.max(0, Math.min(V_MAX, (KH - KB - q.y) / (KH - KT - KB) * V_MAX))) / 2;
+                onSatt(al, vv);
+            };
+            const ned = (e) => { drar.current = true; e.currentTarget.setPointerCapture(e.pointerId); fran(e); };
+            const flytt = (e) => { if (drar.current) fran(e); };
+            const upp = () => { drar.current = false; };
+            const g = granser(alfa, r, mu);
+            const haller = v <= g.vmax + 1e-9 && v >= g.vmin - 1e-9;
+            const tickA = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45];
+            const tickV = [0, 5, 10, 15, 20, 25, 30, 35, 40];
+            return (
+                <svg ref={svgRef} viewBox={`0 0 ${KW} ${KH}`} width="100%" style={{ display: 'block', cursor: 'crosshair' }}
+                     onPointerDown={ned} onPointerMove={flytt} onPointerUp={upp} onPointerCancel={upp}
+                     role="img" aria-label="Fartkarta: doseringsvinkel mot fart, med området där greppet räcker">
+                    <rect x={kx(0)} y={ky(V_MAX)} width={kx(A_MAX) - kx(0)} height={ky(0) - ky(V_MAX)} fill="#f6f1e7" />
+                    <polygon points={kurvor.ut} fill="rgba(155,44,44,0.10)" />
+                    <polygon points={kurvor.in_} fill="rgba(31,79,163,0.11)" />
+                    <polygon points={kurvor.hall} fill="rgba(63,125,58,0.17)" />
+                    {/* rutnät */}
+                    {tickA.map(t => <line key={'a' + t} x1={kx(t)} y1={ky(0)} x2={kx(t)} y2={ky(V_MAX)} stroke="rgba(70,110,170,0.16)" />)}
+                    {tickV.map(t => <line key={'v' + t} x1={kx(0)} y1={ky(t)} x2={kx(A_MAX)} y2={ky(t)} stroke="rgba(70,110,170,0.16)" />)}
+                    {/* kurvor */}
+                    {kurvor.vmax.map((s, i) => <polyline key={'x' + i} points={s} fill="none" stroke={COL.vmax} strokeWidth="2.6" />)}
+                    {kurvor.vmin.map((s, i) => <polyline key={'n' + i} points={s} fill="none" stroke={COL.vmin} strokeWidth="2.6" />)}
+                    {kurvor.v0.map((s, i) => <polyline key={'o' + i} points={s} fill="none" stroke={COL.ink} strokeWidth="2" strokeDasharray="7 5" />)}
+                    {/* axlar: pil bara åt det positiva hållet */}
+                    <line x1={kx(0)} y1={ky(0)} x2={kx(A_MAX) + 10} y2={ky(0)} stroke={COL.ink} strokeWidth="1.5" />
+                    <polygon points={`${kx(A_MAX) + 16},${ky(0)} ${kx(A_MAX) + 6},${ky(0) - 4.5} ${kx(A_MAX) + 6},${ky(0) + 4.5}`} fill={COL.ink} />
+                    <line x1={kx(0)} y1={ky(0)} x2={kx(0)} y2={ky(V_MAX) - 6} stroke={COL.ink} strokeWidth="1.5" />
+                    <polygon points={`${kx(0)},${ky(V_MAX) - 13} ${kx(0) - 4.5},${ky(V_MAX) - 3} ${kx(0) + 4.5},${ky(V_MAX) - 3}`} fill={COL.ink} />
+                    {tickA.filter(t => !smal || t % 10 === 0).map(t => <text key={'ta' + t} x={kx(t)} y={ky(0) + 12 + 5 * fs} textAnchor="middle" fontSize={12.5 * fs} fill="#3a4150" fontFamily="DM Sans, sans-serif">{t}</text>)}
+                    {tickV.filter(t => t > 0 && (!smal || t % 10 === 0)).map(t => <text key={'tv' + t} x={kx(0) - 7} y={ky(t) + 4.5 * fs} textAnchor="end" fontSize={12.5 * fs} fill="#3a4150" fontFamily="DM Sans, sans-serif">{t}</text>)}
+                    <text x={kx(0) - 7} y={ky(0) + 4.5 * fs} textAnchor="end" fontSize={12.5 * fs} fill="#3a4150" fontFamily="DM Sans, sans-serif">0</text>
+                    <text x={kx(A_MAX)} y={KH - 4} textAnchor="end" fontSize={14 * fs} fill={COL.ink} fontFamily="DM Sans, sans-serif">
+                        doseringsvinkel <tspan fontStyle="italic">α</tspan> (°)
+                    </text>
+                    <text x={kx(0) + 12} y={ky(V_MAX) - 2} textAnchor="start" fontSize={14 * fs} fill={COL.ink} fontFamily="DM Sans, sans-serif">
+                        fart <tspan fontStyle="italic">v</tspan> (m/s)
+                    </text>
+                    {/* bilens läge */}
+                    <line x1={kx(alfa)} y1={ky(0)} x2={kx(alfa)} y2={ky(v)} stroke={COL.ink} strokeWidth="1" strokeDasharray="3 3" opacity="0.55" />
+                    <line x1={kx(0)} y1={ky(v)} x2={kx(alfa)} y2={ky(v)} stroke={COL.ink} strokeWidth="1" strokeDasharray="3 3" opacity="0.55" />
+                    <circle cx={kx(alfa)} cy={ky(v)} r="9.5" fill={haller ? COL.hall : COL.vmax} opacity="0.25" />
+                    <circle cx={kx(alfa)} cy={ky(v)} r="6" fill={COL.ink} />
+                </svg>
+            );
+        }
+
+        // ─────────────────────────────────────────────────────────────────
+        // Formelkort och KaTeX
+        // ─────────────────────────────────────────────────────────────────
+        const Vbl = ({ lbl, children, color }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{lbl}</span>
+                <span className="fnum" style={color ? { color } : undefined}>{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{lbl}</span>
+            </div>
+        );
+        const Op = ({ children }) => <span className="fnum" style={{ padding: '0 2px' }}>{children}</span>;
+        const Brak = ({ topp, nam, tLbl, nLbl }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl brak-etikett">{tLbl}</span>
+                <span className="fnum" style={{ padding: '0 3px 3px' }}>{topp}</span>
+                <span className="fnum" style={{ padding: '3px 3px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{nam}</span>
+                <span className="flbl brak-etikett">{nLbl}</span>
+            </div>
+        );
+        const FormulaCard = () => (
+            <div className="glass-card rounded-xl p-4 mb-6" style={{ color: 'var(--lab-ink)' }}>
+                <div className="flex flex-wrap items-start gap-x-10 gap-y-5">
+                    <div>
+                        <div className="fcap">Resultanten krökar banan</div>
+                        <div className="flex items-center gap-x-2">
+                            <Vbl lbl="Centripetalkraft" color={COL.fc}><em>F</em><sub>C</sub></Vbl>
+                            <Op>=</Op>
+                            <Brak topp={<span><em>m</em> · <em>v</em><sup>2</sup></span>} nam={<em>r</em>} tLbl={<span>Massa · fart<sup>2</sup></span>} nLbl="Radie" />
+                        </div>
+                    </div>
+                    <div>
+                        <div className="fcap">Greppet räcker så länge</div>
+                        <div className="flex items-center gap-x-2">
+                            <Vbl lbl="Friktionskraft" color={COL.frik}><em>F</em><sub>f</sub></Vbl>
+                            <Op>≤</Op>
+                            <Vbl lbl="Friktionstal"><em>μ</em></Vbl>
+                            <Op>·</Op>
+                            <Vbl lbl="Normalkraft" color={COL.norm}><em>F</em><sub>N</sub></Vbl>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="fcap">Ingen friktion behövs när</div>
+                        <div className="flex items-center gap-x-2">
+                            <Vbl lbl="Doseringsvinkel">tan <em>α</em></Vbl>
+                            <Op>=</Op>
+                            <Brak topp={<span><em>v</em><sup>2</sup></span>} nam={<span><em>r</em> · <em>g</em></span>} tLbl={<span>Fart<sup>2</sup></span>} nLbl={<span>Radie · tyngdfaktor</span>} />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
+        const Tex = ({ t, d }) => {
+            const ref = useRef(null);
+            useEffect(() => {
+                let stopp = false;
+                const rita = () => {
+                    if (stopp || !ref.current) return;
+                    if (window.katex) katex.render(t, ref.current, { displayMode: !!d, throwOnError: false });
+                    else setTimeout(rita, 120);
+                };
+                rita();
+                return () => { stopp = true; };
+            }, [t, d]);
+            return d ? <div ref={ref} /> : <span ref={ref} />;
+        };
+
+        const StSlider = ({ label, value, min, max, step, onChange, valueText }) => (
+            <div className="st-slider">
+                <div className="st-slider-top">
+                    <span dangerouslySetInnerHTML={{ __html: label }} />
+                    <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 600, fontSize: 13 }}>{valueText}</span>
+                </div>
+                <span className="sl-wrap">
+                    <input type="range" min={min} max={max} step={step} value={value}
+                           onChange={(e) => onChange(parseFloat(e.target.value))} />
+                </span>
+            </div>
+        );
+        const Reglage = ({ label, value, min, max, step, onChange, text, aria }) => (
+            <div className="mb-2">
+                <div className="mb-1 flex justify-between items-baseline">
+                    <span className="text-sm" style={{ color: 'var(--lab-ink)' }} dangerouslySetInnerHTML={{ __html: label }} />
+                    <span className="mono text-sm">{text}</span>
+                </div>
+                <input type="range" className="w-full cursor-pointer" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} aria-label={aria} />
+            </div>
+        );
+
+        // ─────────────────────────────────────────────────────────────────
+        // Appen
+        // ─────────────────────────────────────────────────────────────────
+        const START = { v: 20, alfa: 15, r: 60, mu: 0.8 };
+
+        const App = () => {
+            const [v, setV] = useState(START.v);
+            const [alfa, setAlfa] = useState(START.alfa);
+            const [r, setR] = useState(START.r);
+            const [mu, setMu] = useState(START.mu);
+            const [running, setRunning] = useState(true);
+            const [slow, setSlow] = useState(false);
+            const [show, setShow] = useState({ ...SIM.p.show });
+            const [kompos, setKompos] = useState(false);
+            const [vy, setVy] = useState('folj');
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [togglesOpen, setTogglesOpen] = useState(true);
+            const [ut, setUt] = useState({ ...SIM.ut });
+            const sceneWrapRef = useRef(null);
+
+            useEffect(() => {
+                Object.assign(SIM.p, { v, alfa, r, mu, running, slow, show: { ...show } });
+            }, [v, alfa, r, mu, running, slow, show]);
+            useEffect(() => {
+                const id = setInterval(() => setUt({ ...SIM.ut }), 90);
+                return () => clearInterval(id);
+            }, []);
+            useEffect(() => {
+                const h = () => setIsFullscreen(!!(document.fullscreenElement || document.webkitFullscreenElement));
+                document.addEventListener('fullscreenchange', h);
+                document.addEventListener('webkitfullscreenchange', h);
+                return () => { document.removeEventListener('fullscreenchange', h); document.removeEventListener('webkitfullscreenchange', h); };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (document.fullscreenElement || document.webkitFullscreenElement) {
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                } else {
+                    (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+                }
+            };
+            const tShow = (k) => setShow(s => ({ ...s, [k]: !s[k] }));
+            const valjVy = (n) => { setVy(n); if (SIM.vy) SIM.vy(n); };
+            const borjaOm = () => {
+                setV(START.v); setAlfa(START.alfa); setR(START.r); setMu(START.mu);
+                setRunning(true); setSlow(false); if (SIM.reset) SIM.reset(); valjVy('folj');
+            };
+
+            const g = granser(alfa, r, mu);
+            const friktionsfri = () => setV(Math.round(Math.min(V_MAX, g.v0) * 10) / 10);
+            const typ = underlagFor(mu);
+
+            // grepp och status
+            const behov = Math.abs(ut.fBehov != null ? ut.fBehov : 0);
+            const fMax = mu * ut.N;
+            const andel = fMax > 1 ? behov / fMax : (behov > 1 ? Infinity : 0);
+            const status = ut.av === 1 ? 'Bilen gled ut till ytterkanten'
+                : ut.av === -1 ? 'Bilen gled ned till innerkanten'
+                : ut.glider ? (ut.w > 0 ? 'Bilen glider utåt' : 'Bilen glider inåt')
+                : 'Greppet räcker';
+            const statusFarg = ut.glider ? COL.vmax : COL.hall;
+            const friktRiktning = Math.abs(ut.f) < 30 ? 'ingen friktion behövs'
+                : ut.f > 0 ? 'uppför vägbanan, utåt' : 'nedför vägbanan, inåt';
+            const kN = (x) => fmt(Math.abs(x) / 1000, 1) + ' kN';
+
+            const reglageFS = (
+                <React.Fragment>
+                    <StSlider label="Fart (<em>v</em>)" value={v} min={0} max={V_MAX} step={0.5} onChange={setV} valueText={`${fmt(v, 1)} m/s`} />
+                    <StSlider label="Doseringsvinkel (<em>α</em>)" value={alfa} min={0} max={A_MAX} step={1} onChange={setAlfa} valueText={`${fmt(alfa, 0)}°`} />
+                    <StSlider label="Radie (<em>r</em>)" value={r} min={R_MIN} max={R_MAX} step={5} onChange={setR} valueText={`${fmt(r, 0)} m`} />
+                    <StSlider label="Friktionstal (<em>μ</em>)" value={mu} min={0} max={1} step={0.05} onChange={setMu} valueText={fmt(mu, 2)} />
+                </React.Fragment>
+            );
+
+            const sceneToggles = () => {
+                if (!togglesOpen) return (
+                    <button className="st-show-btn" onClick={() => setTogglesOpen(true)}
+                            aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <line x1="4" y1="8" x2="20" y2="8" />
+                            <circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                            <line x1="4" y1="16" x2="20" y2="16" />
+                            <circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                        </svg>
+                    </button>
+                );
+                return (
+                    <div className="scene-toggles">
+                        <button className="st-hide" onClick={() => setTogglesOpen(false)}
+                                aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
+                                <path d="M6 6l12 12M18 6L6 18" />
+                            </svg>
+                        </button>
+                        <div className="st-title">Visa</div>
+                        <label><input type="checkbox" checked={show.krafter} onChange={() => tShow('krafter')} />
+                            <span className="st-swatch" style={{ background: `linear-gradient(90deg, ${COL.tyngd} 33%, ${COL.norm} 33% 66%, ${COL.frik} 66%)` }}></span>
+                            <span>Krafterna på bilen</span></label>
+                        <label><input type="checkbox" checked={show.fc} onChange={() => tShow('fc')} />
+                            <span className="st-swatch" style={{ background: `repeating-linear-gradient(90deg, ${COL.fc} 0 4px, transparent 4px 6px)` }}></span>
+                            <span>Centripetalkraften <em>F</em><sub>C</sub></span></label>
+                        <label><input type="checkbox" checked={show.fart} onChange={() => tShow('fart')} />
+                            <span className="st-swatch" style={{ background: COL.fart }}></span><span>Hastigheten <em>v</em></span></label>
+                        <label><input type="checkbox" checked={show.radie} onChange={() => tShow('radie')} />
+                            <span className="st-swatch" style={{ background: `repeating-linear-gradient(90deg, ${COL.ink} 0 4px, transparent 4px 6px)` }}></span>
+                            <span>Radien <em>r</em></span></label>
+                        <div className="st-title mt">Scen</div>
+                        <label><input type="checkbox" checked={slow} onChange={() => setSlow(s => !s)} /><span>Ultrarapid</span></label>
+                        {isFullscreen && (
+                            <React.Fragment>
+                                <div className="st-title mt">Reglage</div>
+                                <div className="st-sliders">{reglageFS}</div>
+                                <div className="st-actions">
+                                    <button className="btn-toggle" onClick={() => setRunning(x => !x)}>{running ? 'Pausa' : 'Fortsätt'}</button>
+                                    <button className="btn-toggle" onClick={friktionsfri}>Kör i friktionsfri fart</button>
+                                </div>
+                            </React.Fragment>
+                        )}
+                    </div>
+                );
+            };
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Doserad kurva
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Doserad kurva</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 860 }}>
+                            En bil som kör runt en kurva behöver en kraft in mot kurvans centrum. På en plan väg måste
+                            friktionen mellan däcken och vägen ge hela den kraften. I en doserad kurva lutar vägbanan in
+                            mot centrum, och då hjälper normalkraften till. Ändra farten, lutningen, radien och underlaget,
+                            och se när friktionen pekar nedför vägbanan, när den pekar uppför och när den inte behövs alls.
+                            Räcker inte greppet glider bilen utåt eller inåt.
+                        </p>
+
+                        <FormulaCard />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            <div className="lg:w-2/3 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    <BanaScene wrapRef={sceneWrapRef} />
+                                    <div className="scene-info" style={ut.av ? { pointerEvents: 'auto' } : undefined}>
+                                        <div className="si-status" style={{ color: statusFarg }}>{status}</div>
+                                        {ut.av !== 0 && (
+                                            <div className="si-rad" style={{ marginTop: 3 }}>
+                                                {ut.av === 1 ? 'Farten är för hög för greppet. ' : 'Farten är för låg för greppet. '}
+                                                Ändra något reglage, eller
+                                                <button className="btn-toggle" style={{ display: 'block', marginTop: 6, padding: '4px 10px', fontSize: 13 }}
+                                                        onClick={() => SIM.reset && SIM.reset()}>Försök igen</button>
+                                            </div>
+                                        )}
+                                        <div className="si-rad">
+                                            {fmt(v, 1)} m/s = {fmt(v * 3.6, 0)} km/h
+                                            {!ut.glider && !ut.av && fMax > 1 && <span><br />friktionen är {fmt(Math.min(andel, 9.99) * 100, 0)}&nbsp;% av största möjliga</span>}
+                                        </div>
+                                    </div>
+                                    <div className="scene-hint">Dra för att vrida kameran, scrolla för att zooma.</div>
+                                    {sceneToggles()}
+                                    <div className="fs-quick">
+                                        <button className="fq-play" onClick={() => setRunning(x => !x)}
+                                                aria-label={running ? 'Paus' : 'Start'} title={running ? 'Paus' : 'Start'}>
+                                            {running ? (
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                                    <rect x="6" y="5" width="4" height="14" rx="1" />
+                                                    <rect x="14" y="5" width="4" height="14" rx="1" />
+                                                </svg>
+                                            ) : (
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                                    <path d="M8 5.5v13l11-6.5z" />
+                                                </svg>
+                                            )}
+                                        </button>
+                                        <div className="fq-rows">
+                                            <div className="fq-row">
+                                                <span className="fq-lbl">Fart</span>
+                                                <input type="range" min={0} max={V_MAX} step={0.5} value={v}
+                                                       onChange={e => setV(parseFloat(e.target.value))} aria-label="Fart" />
+                                            </div>
+                                            <div className="fq-row">
+                                                <span className="fq-lbl">Vinkel</span>
+                                                <input type="range" min={0} max={A_MAX} step={1} value={alfa}
+                                                       onChange={e => setAlfa(parseFloat(e.target.value))} aria-label="Doseringsvinkel" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div className="lg:w-1/3 order-2">
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Reglage</div>
+                                    <Reglage label="Fart <em>v</em>" value={v} min={0} max={V_MAX} step={0.5} onChange={setV}
+                                             text={`${fmt(v, 1)} m/s (${fmt(v * 3.6, 0)} km/h)`} aria="Fart" />
+                                    <Reglage label="Doseringsvinkel <em>α</em>" value={alfa} min={0} max={A_MAX} step={1} onChange={setAlfa}
+                                             text={`${fmt(alfa, 0)}°`} aria="Doseringsvinkel" />
+                                    <Reglage label="Radie <em>r</em>" value={r} min={R_MIN} max={R_MAX} step={5} onChange={setR}
+                                             text={`${fmt(r, 0)} m`} aria="Radie" />
+                                    <div className="text-sm mt-2 mb-1" style={{ color: 'var(--lab-ink)' }}>Underlag</div>
+                                    <div className="seg" style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
+                                        {UNDERLAG.map(u => (
+                                            <button key={u.id} className={typ === u.id ? 'active' : ''} onClick={() => setMu(u.mu)}>
+                                                {u.namn}<small><em>μ</em> = {fmt(u.mu, 2)}</small>
+                                            </button>
+                                        ))}
+                                    </div>
+                                    <div className="mt-2">
+                                        <Reglage label="Friktionstal <em>μ</em>" value={mu} min={0} max={1} step={0.05} onChange={setMu}
+                                                 text={fmt(mu, 2)} aria="Friktionstal" />
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-2 mt-2">
+                                        <button className="btn-toggle" onClick={() => setRunning(x => !x)}>{running ? 'Pausa' : 'Fortsätt'}</button>
+                                        <button className="btn-toggle" onClick={borjaOm}>Börja om</button>
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Vy</div>
+                                    <div className="seg" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
+                                        <button className={vy === 'folj' ? 'active' : ''} onClick={() => valjVy('folj')}>Följ bilen</button>
+                                        <button className={vy === 'bakifran' ? 'active' : ''} onClick={() => valjVy('bakifran')}>Bakifrån</button>
+                                        <button className={vy === 'hela' ? 'active' : ''} onClick={() => valjVy('hela')}>Hela banan</button>
+                                    </div>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Farterna för den här kurvan</div>
+                                    <div className="rd-row"><span>Lägsta fart</span>
+                                        <span className="rv" style={{ color: COL.vmin }}>{g.vmin > 0 ? `${fmt(g.vmin, 1)} m/s` : 'bilen kan stå still'}</span></div>
+                                    <div className="rd-row"><span>Friktionsfri fart</span>
+                                        <span className="rv">{alfa > 0 ? `${fmt(g.v0, 1)} m/s` : 'finns inte'}</span></div>
+                                    <div className="rd-row"><span>Högsta fart</span>
+                                        <span className="rv" style={{ color: COL.vmax }}>{isFinite(g.vmax) ? `${fmt(g.vmax, 1)} m/s` : 'ingen gräns'}</span></div>
+                                    <button className="btn-toggle w-full mt-3" onClick={friktionsfri} disabled={alfa === 0}
+                                            style={alfa === 0 ? { opacity: 0.5, cursor: 'default' } : undefined}>
+                                        Kör i friktionsfri fart
+                                    </button>
+                                </div>
+                            </div>
+                        </main>
+
+                        <div className="mt-6 grid lg:grid-cols-2 gap-5">
+                            <div className="glass-card rounded-xl p-4">
+                                <div className="flex items-baseline justify-between flex-wrap gap-2">
+                                    <div className="flbl">Tvärsnitt, sett bakifrån</div>
+                                    <label className="text-sm flex items-center gap-2 cursor-pointer" style={{ color: 'var(--lab-ink)' }}>
+                                        <input type="checkbox" checked={kompos} onChange={() => setKompos(k => !k)} style={{ accentColor: 'var(--lab-accent)' }} />
+                                        Visa komposanterna
+                                    </label>
+                                </div>
+                                <Tvarsnitt alfa={alfa} N={ut.N} f={ut.f} acc={ut.acc} kompos={kompos} visaFC={show.fc} glider={ut.glider} />
+                                <div className="grid sm:grid-cols-2 gap-x-5 mt-2">
+                                    <div className="rd-row"><span>Tyngdkraft <em>F</em><sub>G</sub></span><span className="rv" style={{ color: COL.tyngd }}>{kN(MASSA * G)}</span></div>
+                                    <div className="rd-row"><span>Normalkraft <em>F</em><sub>N</sub></span><span className="rv" style={{ color: COL.norm }}>{kN(ut.N)}</span></div>
+                                    <div className="rd-row"><span>Friktionskraft <em>F</em><sub>f</sub></span><span className="rv" style={{ color: COL.frik }}>{kN(ut.f)}</span></div>
+                                    <div className="rd-row"><span>Centripetalkraft <em>F</em><sub>C</sub></span><span className="rv" style={{ color: COL.fc }}>{kN(MASSA * ut.acc)}</span></div>
+                                </div>
+                                <div className="text-sm mt-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Friktionen: <strong style={{ color: 'var(--lab-ink)' }}>{friktRiktning}</strong>
+                                </div>
+                                <div className="mt-3">
+                                    <div className="flex justify-between text-sm mb-1" style={{ color: 'var(--lab-ink-soft)' }}>
+                                        <span>Friktion som behövs, jämfört med största möjliga <em>μ</em> · <em>F</em><sub>N</sub></span>
+                                        <span className="mono" style={{ color: andel > 1 ? COL.vmax : 'var(--lab-ink)', whiteSpace: 'nowrap', marginLeft: 8 }}>
+                                            {isFinite(andel) ? `${fmt(andel * 100, 0)} %` : 'mer än max'}
+                                        </span>
+                                    </div>
+                                    <div className="grepp-bar">
+                                        <div style={{ width: `${Math.min(100, (isFinite(andel) ? andel : 2) * 100)}%`, background: andel > 1 ? COL.vmax : COL.hall }} />
+                                    </div>
+                                </div>
+                                <p className="text-xs mt-3" style={{ color: 'var(--lab-ink-muted)' }}>
+                                    Bilens massa är 1&nbsp;200&nbsp;kg och <em>g</em> = 9,82&nbsp;N/kg. Kraftpilarna är skalenliga
+                                    med samma skala hela tiden. Normalkraften och friktionen angriper där hjulen möter vägen,
+                                    och tyngdkraften i tyngdpunkten. Centripetalkraften är streckad: den är summan av de andra
+                                    krafterna, ingen egen kraft.
+                                </p>
+                            </div>
+
+                            <div className="glass-card rounded-xl p-4 karta">
+                                <div className="flbl mb-1">Fartkartan: dra punkten</div>
+                                <p className="text-sm mb-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Varje punkt är en kombination av doseringsvinkel och fart, för radien {fmt(r, 0)}&nbsp;m och
+                                    friktionstalet {fmt(mu, 2)}. Dra punkten för att ändra båda på en gång.
+                                </p>
+                                <Fartkarta alfa={alfa} v={v} r={r} mu={mu} onSatt={(al, vv) => { setAlfa(al); setV(vv); }} />
+                                <div className="legend">
+                                    <span><b style={{ background: 'rgba(63,125,58,0.30)' }}></b>Greppet räcker</span>
+                                    <span><b style={{ background: 'rgba(155,44,44,0.18)' }}></b>Bilen glider utåt</span>
+                                    <span><b style={{ background: 'rgba(31,79,163,0.20)' }}></b>Bilen glider inåt</span>
+                                    <span><i style={{ borderTopColor: COL.vmax }}></i>Högsta fart</span>
+                                    <span><i style={{ borderTopColor: COL.ink, borderTopStyle: 'dashed' }}></i>Friktionsfri fart</span>
+                                    <span><i style={{ borderTopColor: COL.vmin }}></i>Lägsta fart</span>
+                                </div>
+                                <p className="text-sm mt-4" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Vid doseringsvinkeln <strong style={{ color: 'var(--lab-ink)' }}>{fmt(alfa, 0)}°</strong> klarar bilen{' '}
+                                    {g.vmin > 0
+                                        ? <span>farter mellan <span className="mono">{fmt(g.vmin, 1)}</span> och </span>
+                                        : <span>alla farter från stillastående upp till </span>}
+                                    {isFinite(g.vmax)
+                                        ? <span><span className="mono">{fmt(g.vmax, 1)}&nbsp;m/s</span>.</span>
+                                        : <span>hur höga farter som helst, i alla fall i teorin.</span>}{' '}
+                                    {alfa > 0
+                                        ? <span>Friktionen behövs inte alls bara vid en enda fart, <span className="mono">{fmt(g.v0, 1)}&nbsp;m/s</span>. Ju lägre friktionstal, desto smalare blir det gröna bandet runt den farten.</span>
+                                        : <span>På en plan väg finns ingen friktionsfri fart: utan friktion går det inte att svänga alls.</span>}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="mt-8 grid md:grid-cols-2 gap-5 forkl" style={{ color: 'var(--lab-ink-soft)' }}>
+                            <details className="glass-card rounded-xl p-4" open>
+                                <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>Vilka krafter verkar på bilen?<span>+</span></summary>
+                                <ol>
+                                    <li><strong>Tyngdkraften <em>F</em><sub>G</sub></strong> pekar rakt nedåt och angriper i
+                                        tyngdpunkten.</li>
+                                    <li><strong>Normalkraften <em>F</em><sub>N</sub></strong> är vinkelrät mot vägbanan. När vägen
+                                        lutar in mot centrum lutar normalkraften också inåt, och dess vågräta komposant pekar mot
+                                        kurvans centrum.</li>
+                                    <li><strong>Friktionskraften <em>F</em><sub>f</sub></strong> verkar längs vägbanan, mellan
+                                        däcken och vägen. Den kan peka nedför vägbanan (inåt) eller uppför (utåt), beroende på
+                                        farten.</li>
+                                    <li><strong>Resultanten är centripetalkraften <em>F</em><sub>C</sub></strong>. Cirkelbanan
+                                        ligger i ett vågrätt plan, så resultanten är vågrät och pekar in mot centrum, inte längs
+                                        vägbanan. Slå på komposanterna i tvärsnittet: de lodräta delarna tar ut varandra, och de
+                                        vågräta blir tillsammans <Tex t={String.raw`F_C = \dfrac{m \cdot v^2}{r}`} />.</li>
+                                </ol>
+                            </details>
+
+                            <details className="glass-card rounded-xl p-4" open>
+                                <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>Farten där ingen friktion behövs<span>+</span></summary>
+                                <p>Utan friktion verkar bara tyngdkraften och normalkraften. Normalkraftens lodräta komposant
+                                    bär bilens tyngd, och den vågräta ska vara hela centripetalkraften:</p>
+                                <Tex d t={String.raw`F_N \cdot \sin\alpha = \frac{m \cdot v^2}{r} \qquad F_N \cdot \cos\alpha = m \cdot g`} />
+                                <p>Dividera den första ekvationen med den andra. Då försvinner både <em>F</em><sub>N</sub> och
+                                    massan:</p>
+                                <Tex d t={String.raw`\tan\alpha = \frac{v^2}{r \cdot g} \quad\Longleftrightarrow\quad v_0 = \sqrt{r \cdot g \cdot \tan\alpha}`} />
+                                <p>Med <Tex t={String.raw`r = 60\ \mathrm{m}`} /> och <Tex t={String.raw`\alpha = 15^\circ`} /> blir
+                                    farten ungefär 13&nbsp;m/s, alltså 45&nbsp;km/h. Kör bilen i den farten pekar friktionen
+                                    ingenstans, och bilen klarar kurvan även på blankis. Den friktionsfria farten beror inte på
+                                    bilens massa: en lastbil och en cykel får samma fart.</p>
+                            </details>
+
+                            <details className="glass-card rounded-xl p-4">
+                                <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>Högsta och lägsta fart<span>+</span></summary>
+                                <p><strong>Snabbare än den friktionsfria farten</strong> räcker normalkraften inte till, och
+                                    friktionen måste peka nedför vägbanan, inåt. Vid gränsen är
+                                    <Tex t={String.raw`\ F_f = \mu \cdot F_N`} />, och kraftekvationerna vågrätt och lodrätt blir</p>
+                                <Tex d t={String.raw`F_N \cdot \sin\alpha + \mu \cdot F_N \cdot \cos\alpha = \frac{m \cdot v^2}{r} \qquad F_N \cdot \cos\alpha - \mu \cdot F_N \cdot \sin\alpha = m \cdot g`} />
+                                <p>Division ger den högsta farten:</p>
+                                <Tex d t={String.raw`v_\text{max} = \sqrt{\frac{r \cdot g \cdot (\sin\alpha + \mu \cdot \cos\alpha)}{\cos\alpha - \mu \cdot \sin\alpha}}`} />
+                                <p><strong>Långsammare än den friktionsfria farten</strong> skulle bilen glida nedför, och
+                                    friktionen pekar uppför vägbanan. Samma räkning med ombytta tecken ger</p>
+                                <Tex d t={String.raw`v_\text{min} = \sqrt{\frac{r \cdot g \cdot (\sin\alpha - \mu \cdot \cos\alpha)}{\cos\alpha + \mu \cdot \sin\alpha}}`} />
+                                <p>Är <Tex t={String.raw`\tan\alpha \leq \mu`} /> blir täljaren noll eller negativ, och då kan
+                                    bilen stå still i kurvan utan att glida. På en plan väg, <Tex t={String.raw`\alpha = 0`} />,
+                                    ger formeln <Tex t={String.raw`v_\text{max} = \sqrt{\mu \cdot r \cdot g}`} />: där är
+                                    friktionen ensam om att hålla bilen kvar.</p>
+                            </details>
+
+                            <details className="glass-card rounded-xl p-4">
+                                <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>Pröva själv i simuleringen<span>+</span></summary>
+                                <ul>
+                                    <li><strong>Öka farten sakta</strong> och titta på friktionspilen i tvärsnittet. Den krymper,
+                                        försvinner vid den friktionsfria farten och växer sedan åt andra hållet.</li>
+                                    <li><strong>Välj is</strong> och tryck på Kör i friktionsfri fart. Bilen klarar kurvan, men
+                                        ändra farten lite åt något håll så glider den. På fartkartan har det gröna bandet krympt
+                                        till nästan en linje.</li>
+                                    <li><strong>Gör kurvan plan</strong> (<em>α</em> = 0°). Nu finns ingen friktionsfri fart, och
+                                        all kraft in mot centrum måste komma från friktionen.</li>
+                                    <li><strong>Brant kurva och halt underlag:</strong> sänk farten mot noll. Bilen glider ned mot
+                                        innerkanten, precis som en låda på ett lutande plan.</li>
+                                    <li><strong>Ändra radien</strong> och se det gröna bandet på fartkartan flytta sig. En större
+                                        radie tillåter högre fart.</li>
+                                    <li><strong>Titta bakifrån</strong> när bilen tar i hårt. Angreppspunkten för normalkraften
+                                        flyttar sig mot ytterhjulen: de bär mer av bilen än innerhjulen.</li>
+                                </ul>
+                            </details>
+
+                            <details className="glass-card rounded-xl p-4">
+                                <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>Vanliga missförstånd<span>+</span></summary>
+                                <ul>
+                                    <li><strong>”Centrifugalkraften slungar ut bilen.”</strong> Det finns ingen kraft som drar
+                                        bilen utåt. Bilen vill fortsätta rakt fram enligt Newtons första lag, och glider utåt
+                                        när krafterna inåt inte räcker för att kröka banan.</li>
+                                    <li><strong>”Friktionen pekar alltid in mot centrum.”</strong> Bara när bilen kör fortare än
+                                        den friktionsfria farten. Kör den långsammare pekar friktionen uppför vägbanan, utåt.</li>
+                                    <li><strong>”Resultanten pekar längs vägbanan.”</strong> Nej, bilen rör sig i ett vågrätt
+                                        plan, så resultanten är vågrät och pekar mot kurvans centrum.</li>
+                                    <li><strong>”Normalkraften är lika stor som tyngdkraften.”</strong> Bara på ett plant
+                                        underlag utan acceleration i höjdled. I en doserad kurva är normalkraften större än
+                                        tyngdkraften, eftersom den både bär bilen och hjälper till att kröka banan.</li>
+                                    <li><strong>”En tung bil klarar kurvan bättre.”</strong> Massan finns på båda sidor i
+                                        ekvationerna och tar ut sig själv. Högsta och lägsta fart beror bara på <em>r</em>,
+                                        <em> α</em>, <em>μ</em> och <em>g</em>.</li>
+                                </ul>
+                            </details>
+
+                            <details className="glass-card rounded-xl p-4">
+                                <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>Doserade kurvor i verkligheten<span>+</span></summary>
+                                <p>Motorvägarnas av- och påfarter doseras ofta några grader, så att de går att köra även när
+                                    vägen är hal. Cykelbanor i velodromer lutar upp till drygt 40°, och ovalbanor för
+                                    racerbilar har doseringar på 20 till 30°. Även järnvägens kurvor doseras: ytterrälen
+                                    ligger högre än innerrälen, så att tåget lutar in mot kurvan och passagerarna inte
+                                    pressas ut mot sidan.</p>
+                                <p>Ett flygplan som svänger gör samma sak i luften. Det lutar vingarna, och lyftkraften får
+                                    då en vågrät komposant som krökar banan, precis som normalkraften i den doserade kurvan.</p>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+    <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

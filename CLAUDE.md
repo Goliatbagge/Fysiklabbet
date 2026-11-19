@@ -1895,6 +1895,11 @@ simulering, på startsidan och i ett nyhetsbrev (påpekat 2026-08-29).
 - **Hittar du ett fel av en typ som kan återkomma: lägg till en regel** i
   `REGLER` i `verify-sprak.js`. Det är så listan är tänkt att växa, och
   enda sättet att inte göra om samma miss.
+- **Enklare språk (klarspråk):** ber användaren om en text "med enklare
+  språk" följer du råden i `.claude/klarsprak.md` (Isofs klarspråkshjälp,
+  sammanfattad 2026-11-19). Ber användaren om **lättläst** text gäller
+  `.claude/lattlast.md` (MTM:s råd), som går längre. Projektets egna
+  typografiregler går före i båda.
 - **Äldre text saneras inte retroaktivt** utan att användaren ber om det.
   Därför kör en full svepning bara de blockerande reglerna: sajten har en
   arvsskuld på ~850 förkortningar som inte ska blockera någon commit.

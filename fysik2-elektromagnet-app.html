@@ -864,37 +864,83 @@
                         ctx.fillStyle = g; rr(E.outL, c.y - cr, E.outR - E.outL, cr * 2, 3); ctx.fill();
                         ctx.strokeStyle = '#353a41'; ctx.lineWidth = 1; ctx.stroke();
                     }
+                    drawBackTurns(p, E);
                     // spolstommen (genomskinlig plast), så att fältet syns inuti
                     const g = ctx.createLinearGradient(0, c.y - ap, 0, c.y + ap);
                     g.addColorStop(0, 'rgba(206,214,222,0.55)'); g.addColorStop(0.45, 'rgba(244,247,250,0.42)');
                     g.addColorStop(1, 'rgba(180,190,200,0.55)');
                     ctx.fillStyle = g; ctx.fillRect(c.x - L / 2, c.y - ap, L, ap * 2);
                 };
-                const drawStrips = (p, E, Bdir, flowOn) => {
+                // Lindningen: varje varv är en rund koppartråd som går runt röret.
+                // Sett ovanifrån följer tråden y = −a · cos θ medan den flyttar sig
+                // ett halvt varvavstånd i sidled, så framsidans halvvarv blir en
+                // mjuk båge (brant mitt på röret, flackare mot kanterna). Baksidans
+                // halvvarv skymtar genom det genomskinliga röret och binder ihop
+                // varven till en sammanhängande skruvlinje.
+                const turns = (p, E) => {
                     const c = st.coil, L = st.Lp, ap = st.ap;
-                    const Ns = Math.min(25, Math.max(4, Math.round(p.n / 40)));
+                    const Ns = Math.min(18, Math.max(4, Math.round(p.n / 50)));
                     const x0 = c.x - L / 2 + E.fw, span = L - 2 * E.fw;
                     const sp = span / Ns;
-                    const tk = Math.min(10, Math.max(2.6, sp * 0.7));
-                    const sl = p.wind * Math.max(sp * 0.9, 6);
-                    if (!p.show.snitt) {
-                        const g = ctx.createLinearGradient(0, c.y - ap, 0, c.y + ap);
-                        g.addColorStop(0, '#6e3712'); g.addColorStop(0.3, '#cf8a4f'); g.addColorStop(0.5, '#f1b781');
-                        g.addColorStop(0.72, '#c47a3f'); g.addColorStop(1, '#5e2f10');
-                        ctx.strokeStyle = g; ctx.lineWidth = tk; ctx.lineCap = 'butt';
-                        for (let i = 0; i < Ns; i++) {
-                            const xm = x0 + (i + 0.5) * sp;
-                            ctx.beginPath(); ctx.moveTo(xm - sl / 2, c.y - ap); ctx.lineTo(xm + sl / 2, c.y + ap); ctx.stroke();
+                    const tk = Math.min(11, Math.max(3, sp * 0.6));
+                    const pitch = p.wind * sp;                 // ett varv framåt längs axeln
+                    const half = (xs, fram) => {
+                        const pts = [];
+                        for (let j = 0; j <= 24; j++) {
+                            const t = j / 24, th = Math.PI * t + (fram ? 0 : Math.PI);
+                            pts.push([xs + pitch * 0.5 * t, c.y - ap * Math.cos(th) * 0.985]);
                         }
+                        return pts;
+                    };
+                    const list = [];
+                    for (let i = 0; i < Ns; i++) {
+                        // varvets början på ovansidans norra kant
+                        const xs = x0 + (i + 0.5) * sp - pitch * 0.25;
+                        list.push({ fram: half(xs, true), bak: half(xs + pitch * 0.5, false) });
+                    }
+                    return { Ns, sp, tk, list };
+                };
+                const wirePts = (pts) => {
+                    ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]);
+                    for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+                };
+                const drawBackTurns = (p, E) => {
+                    if (p.show.snitt) return;
+                    const T = turns(p, E), c = st.coil, L = st.Lp;
+                    ctx.save();
+                    ctx.beginPath(); ctx.rect(c.x - L / 2 + E.fw, c.y - st.ap, L - 2 * E.fw, st.ap * 2); ctx.clip();
+                    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+                    ctx.strokeStyle = 'rgba(110,55,18,0.55)'; ctx.lineWidth = T.tk * 0.8;
+                    T.list.forEach((tn) => { wirePts(tn.bak); ctx.stroke(); });
+                    ctx.restore();
+                };
+                const drawStrips = (p, E, Bdir, flowOn) => {
+                    const c = st.coil, L = st.Lp, ap = st.ap;
+                    const T = turns(p, E);
+                    const { Ns, sp } = T;
+                    const x0 = c.x - L / 2 + E.fw;
+                    if (!p.show.snitt) {
+                        // koppar: mörk mot rörets kanter, ljus på toppen (rundat rör)
+                        const g = ctx.createLinearGradient(0, c.y - ap, 0, c.y + ap);
+                        g.addColorStop(0, '#7a3d14'); g.addColorStop(0.28, '#c98146'); g.addColorStop(0.5, '#eaa86b');
+                        g.addColorStop(0.72, '#c07337'); g.addColorStop(1, '#6a3410');
+                        ctx.save();
+                        ctx.beginPath(); ctx.rect(x0 - T.tk, c.y - ap - 1, L - 2 * E.fw + 2 * T.tk, ap * 2 + 2); ctx.clip();
+                        ctx.lineCap = 'butt'; ctx.lineJoin = 'round';
+                        T.list.forEach((tn) => {
+                            wirePts(tn.fram); ctx.strokeStyle = '#3f1c06'; ctx.lineWidth = T.tk + 2; ctx.stroke();
+                            wirePts(tn.fram); ctx.strokeStyle = g; ctx.lineWidth = T.tk; ctx.stroke();
+                            // glansstrimma längs tråden, så att den ser rund ut
+                            ctx.save(); ctx.translate(-T.tk * 0.2, 0);
+                            wirePts(tn.fram); ctx.strokeStyle = 'rgba(255,228,196,0.7)'; ctx.lineWidth = Math.max(1, T.tk * 0.22); ctx.stroke();
+                            ctx.restore();
+                        });
+                        ctx.restore();
                         // strömmen över spolens ovansida
                         if (flowOn) {
                             const dir = Bdir > 0 ? 1 : -1;     // ner i bilden när fältet pekar åt höger
-                            const step = Ns > 14 ? 2 : 1;
-                            for (let i = 0; i < Ns; i += step) {
-                                const xm = x0 + (i + 0.5) * sp;
-                                const pts = [[xm - sl / 2, c.y - ap], [xm + sl / 2, c.y + ap]];
-                                flowAlong(pts, st.phase * 0.6, dir, 0.85);
-                            }
+                            const step = Ns > 12 ? 2 : 1;
+                            for (let i = 0; i < Ns; i += step) flowAlong(T.list[i].fram, st.phase * 0.6, dir, 0.85);
                         }
                     } else {
                         // genomskärning: ledarnas tvärsnitt längs norra och södra kanten

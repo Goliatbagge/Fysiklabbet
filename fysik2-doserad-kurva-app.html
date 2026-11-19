@@ -393,66 +393,75 @@
         };
         const kraftEtikett = (sym, sub, color) => textSprite([{ t: sym, italic: true, color }, { t: sub, color, small: true, sub: true }]);
 
-        // Pil med skaft (cylinder, rak ände) och spets; skaftet slutar vid spetsens bas.
-        function pil(color, r = 0.06) {
-            const g = new THREE.Group();
-            const mat = markMat(color);
-            const skaft = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 1, 14), mat);
-            const spets = new THREE.Mesh(new THREE.ConeGeometry(1, 1, 18), mat);
-            skaft.renderOrder = 25; spets.renderOrder = 25;
-            g.add(skaft, spets);
-            g.userData = { skaft, spets, r };
-            return g;
+        // Platta pilar, ritade som på papper: en polygon i det plan som innehåller
+        // pilen och vetter mot kameran. Bredden anges i skärmpixlar, så att
+        // pilarna ser likadana ut på alla avstånd, precis som i tvärsnittet.
+        // Skaftet slutar vid spetsens bas. Hörnen räknas om varje bildruta i
+        // ritaPilar(), efter kamerans läge.
+        const PILAR = [];
+        function nyPil(color, px, streckad) {
+            const maxKvad = streckad ? 400 : 1;
+            const geo = new THREE.BufferGeometry();
+            geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array((maxKvad * 6 + 3) * 3), 3));
+            const mat = new THREE.MeshBasicMaterial({ color: linjar(color), side: THREE.DoubleSide,
+                depthTest: false, depthWrite: false, transparent: true, toneMapped: false });
+            const m = new THREE.Mesh(geo, mat);
+            m.frustumCulled = false;
+            m.renderOrder = 25;
+            m.userData = { px, streckad, utanSpets: false, from: new THREE.Vector3(), vec: new THREE.Vector3() };
+            PILAR.push(m);
+            return m;
         }
-        function stallPil(g, from, vec) {
-            const len = vec.length();
-            if (len < 0.05) { g.visible = false; return; }
+        const pil = (color, px = 4) => nyPil(color, px, false);
+        const streckPil = (color, px = 3.4) => nyPil(color, px, true);
+        function stallPil(g, from, vec, utanSpets = false) {
+            if (vec.length() < 0.05) { g.visible = false; return; }
             g.visible = true;
-            const r = g.userData.r;
-            const head = Math.min(r * 5.5, len * 0.6);
-            const shaft = len - head;
-            g.position.copy(from);
-            g.quaternion.setFromUnitVectors(Y_AXEL, vec.clone().normalize());
-            const { skaft, spets } = g.userData;
-            skaft.scale.set(r, Math.max(shaft, 1e-4), r);
-            skaft.position.set(0, shaft / 2, 0);
-            spets.scale.set(r * 2.4, head, r * 2.4);
-            spets.position.set(0, shaft + head / 2, 0);
+            g.userData.from.copy(from);
+            g.userData.vec.copy(vec);
+            g.userData.utanSpets = utanSpets;
         }
-        // Streckad pil: skaftet byggs av korta bitar
-        function streckPil(color, r = 0.06, antal = 40) {
-            const g = new THREE.Group();
-            const mat = markMat(color);
-            const bitar = [];
-            const geo = new THREE.CylinderGeometry(1, 1, 1, 10);
-            for (let i = 0; i < antal; i++) { const m = new THREE.Mesh(geo, mat); m.renderOrder = 25; g.add(m); bitar.push(m); }
-            const spets = new THREE.Mesh(new THREE.ConeGeometry(1, 1, 18), mat);
-            spets.renderOrder = 25; g.add(spets);
-            g.userData = { bitar, spets, r };
-            return g;
-        }
-        function stallStreckPil(g, from, vec, utanSpets = false) {
-            const len = vec.length();
-            if (len < 0.05) { g.visible = false; return; }
-            g.visible = true;
-            const { bitar, spets, r } = g.userData;
-            const head = utanSpets ? 0 : Math.min(r * 5.5, len * 0.6);
-            const shaft = len - head;
-            const STRECK = Math.max(0.22, Math.min(0.9, len / 36)), LUCKA = STRECK * 0.7;
-            g.position.copy(from);
-            g.quaternion.setFromUnitVectors(Y_AXEL, vec.clone().normalize());
-            let s = 0;
-            bitar.forEach((m) => {
-                if (s >= shaft) { m.visible = false; return; }
-                const l = Math.min(STRECK, shaft - s);
-                m.visible = true;
-                m.scale.set(r, l, r);
-                m.position.set(0, s + l / 2, 0);
-                s += STRECK + LUCKA;
+        const stallStreckPil = stallPil;
+        const _A = new THREE.Vector3(), _B = new THREE.Vector3(), _d = new THREE.Vector3(),
+              _s = new THREE.Vector3(), _k = new THREE.Vector3(), _m = new THREE.Vector3();
+        function ritaPilar(camera, hojdPx) {
+            const tanH = Math.tan(rad(camera.fov / 2));
+            PILAR.forEach((m) => {
+                if (!m.visible) return;
+                const { from, vec, px, streckad, utanSpets } = m.userData;
+                const len = vec.length();
+                _d.copy(vec).divideScalar(len);
+                _m.copy(from).addScaledVector(vec, 0.5);
+                const perPx = 2 * camera.position.distanceTo(_m) * tanH / hojdPx;   // meter per skärmpixel
+                _k.subVectors(camera.position, _m);
+                _s.crossVectors(_d, _k);
+                if (_s.lengthSq() < 1e-12) _s.set(1, 0, 0);
+                _s.normalize();
+                const hb = px / 2 * perPx;
+                const spets = utanSpets ? 0 : Math.min(14 * perPx, len * 0.6);
+                const sb = 6.5 * perPx;
+                const skaft = len - spets;
+                const pos = m.geometry.attributes.position.array;
+                let i = 0;
+                const punkt = (P, sid) => { pos[i++] = P.x + _s.x * sid; pos[i++] = P.y + _s.y * sid; pos[i++] = P.z + _s.z * sid; };
+                const kvad = (s0, s1) => {
+                    _A.copy(from).addScaledVector(_d, s0);
+                    _B.copy(from).addScaledVector(_d, s1);
+                    punkt(_A, -hb); punkt(_A, hb); punkt(_B, hb);
+                    punkt(_A, -hb); punkt(_B, hb); punkt(_B, -hb);
+                };
+                if (streckad) {
+                    const STRECK = 9 * perPx, LUCKA = 6 * perPx;
+                    for (let t = 0; t < skaft && i <= pos.length - 27; t += STRECK + LUCKA) kvad(t, Math.min(t + STRECK, skaft));
+                } else kvad(0, skaft);
+                if (!utanSpets) {
+                    _A.copy(from).addScaledVector(_d, skaft);
+                    _B.copy(from).add(vec);
+                    punkt(_A, -sb); punkt(_B, 0); punkt(_A, sb);
+                }
+                m.geometry.setDrawRange(0, i / 3);
+                m.geometry.attributes.position.needsUpdate = true;
             });
-            spets.visible = !utanSpets;
-            spets.scale.set(r * 2.4, Math.max(head, 1e-4), r * 2.4);
-            spets.position.set(0, shaft + head / 2, 0);
         }
 
         function canvasTex(w, h, rita) {
@@ -792,7 +801,7 @@
                 const centrumLapp = textSprite([{ t: 'kurvans centrum', color: COL.ink, weight: 600, small: true }]);
                 centrumLapp.position.set(0, 6.6, 0);
                 scene.add(centrumLapp);
-                const radieLinje = streckPil(COL.ink, 0.18, 130);
+                const radieLinje = streckPil(COL.ink, 2.4);
                 scene.add(radieLinje);
                 let radieLapp = null, radieText = '';
 
@@ -1095,6 +1104,11 @@
                     const nara = cam.radius < 45;
                     [lFG, lFN, lFf, lFC, lV].forEach(s => { if (!nara) s.visible = false; });
 
+                    if (tpPrick.visible) {
+                        const perPx = 2 * camera.position.distanceTo(tp) * Math.tan(rad(camera.fov / 2)) / H();
+                        tpPrick.scale.setScalar(4.2 * perPx / 0.1);
+                    }
+                    ritaPilar(camera, H());
                     renderer.render(scene, camera);
                 };
                 tick();

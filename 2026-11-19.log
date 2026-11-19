@@ -1,0 +1,45 @@
+03:15:07  [idag] === Nyhetsjobb: start (2026-11-19) ===
+03:15:09  [idag] Dagens nyhet finns (förberedd i går).
+03:15:09  [idag] Startar Claude Code (headless, modell opus, nyckel)...
+03:20:02  [imorgon] === Nyhetsjobb: start (2026-11-19) ===
+03:20:02  [imorgon] En körning pågår redan (lås 5 min gammalt). Avslutar.
+03:26:57  [idag] Morgondagens nyhet är skriven, godkänd av utgivaren och committad på grenen `nyhetsjobb` (3344257c). Jag har inte pushat och inte skickat något mejl.
+03:26:57  [idag] 
+03:26:57  [idag] **Artikeln:** "Värmebrus bär meddelanden utan att någon radiosignal sänds ut" (`2026-11-20-bruset-som-bar-ett-meddelande`, kategori Elektromagnetism, datum 2026-11-20).
+03:26:57  [idag] - Den bygger på en studie från Stanford University i PNAS 123(43), publicerad 20 oktober 2026: Ecola, Zhang, Kahn och Kapetanovic. Sändaren skickar ingen radiosignal utan växlar bara mellan att antennen är öppen och kortsluten. Mottagarens förstärkare skickar ut kallt brus (55 K) som studsar tillbaka från antennen och förstärker eller försvagar förstärkarens eget brus. Det räckte till 1 kbit/s på 50 cm.
+03:26:57  [idag] - Nyheten kom från Physics World, 18 november. pnas.org spärrade nedladdning, så jag läste hela studien med metoddel i författarnas eget manus på arXiv (2611.02562).
+03:26:57  [idag] - Området krockar inte med gårdagens artikel (strömningslära). Nyheten finns inte sedan tidigare i loggen. Teasern om KM3NeT rördes inte, eftersom den inte får publiceras förrän efter brevet 22 november.
+03:26:57  [idag] 
+03:26:57  [idag] **Granskning:** Utgivaren gav först RÄTTA FÖRST.
+03:26:57  [idag] - Den relativa skillnaden i bruseffekt var angiven en faktor 2 fel.
+03:26:57  [idag] - En lärarlänk hade fel avsnittsnamn.
+03:26:57  [idag] 
+03:26:57  [idag] Efter rättningarna gav efterkontrollen en sista omformulering av meningen om 0,76 dB. Jag införde den ordagrant, och utgivaren angav att ingen ny granskning behövdes när den var gjord. Utslaget GODKÄND är loggat i `granskningar.md`.
+03:26:57  [idag] 
+03:26:57  [idag] **Bilder:** Ingen AI-bild.
+03:26:57  [idag] - Huvudbilden är en ekofri mikrovågskammare vid UNSW Canberra, foto Kurt Barnett (CC BY-SA 3.0). Bildtexten säger att kammaren inte ingår i studien.
+03:26:57  [idag] - I brödtexten ligger NASA:s foto av hornantennen i Holmdel (allmän egendom).
+03:26:57  [idag] 
+03:26:57  [idag] **Övrigt:**
+03:26:57  [idag] - Tre nya ord i ordlistan: brustemperatur, ekofri kammare och felrättande kod.
+03:26:57  [idag] - Två nya uppslag i `ko.md`.
+03:26:57  [idag] - `build-nyheter-og.js` är körd, och verifierarna för ordlistan, navigeringen och sitemapen gick igenom. Förhandsvisningen renderades rätt i en skärmdump: inga KaTeX-fel, och ordlisteorden är länkade.
+03:26:57  [idag] 
+03:26:57  [idag] **Lämnat utanför committen:**
+03:26:57  [idag] - Byggskriptet ändrade radsluten i hundratals delningssidor i `katalog/dela/` och `nyheter/dela/`. Där finns ingen ändring i innehållet.
+03:26:57  [idag] - `i18n/gemensamt.js` och `i18n/manifest.js` (manifestet skrevs om av byggskriptet).
+03:26:57  [idag] - Mappen `.claude/nyheter/logg/`, som var ospårad redan när jag började.
+03:26:57  [idag] 
+03:26:57  [idag] `verify-sprak.js` hittar tre fel om "gånger mindre" i äldre artiklar, inte i den nya. Dem har jag inte rört.
+03:26:58  [idag] Claude avslutade med kod 0
+03:26:58  [idag] error: cannot pull with rebase: You have unstaged changes.
+03:26:58  [idag] error: Please commit or stash them.
+03:27:03  [idag] Pushat till main.
+03:27:03  [idag] Artikel 2026-11-20 pushad: 2026-11-20-bruset-som-bar-ett-meddelande
+03:28:33  [idag] https://fysiklabbet.se/nyheter.html?forhand=2026-11-20-bruset-som-bar-ett-meddelande
+03:28:33  [idag] Mejlet byggt av mallen (C:\claude\Fysiklabbet-nyhetsjobb\.claude\nyheter\logg\mejl-2026-11-20).
+03:28:33  [idag] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+03:29:23  [idag] Mejlet är skickat till [ägaren] med utgivarsammanfattningen ifylld: kontrastmåttet ΔP som var fel med en faktor 2, en felaktig lärarlänk, samt omformuleringen av meningen om det 0,76 dB svagare signal–brusförhållandet.
+03:29:24  [idag] Claude avslutade med kod 0
+03:29:24  [idag] Mejlet till ägaren är skickat.
+03:29:24  [idag] === Nyhetsjobb: slut ===

@@ -1835,9 +1835,10 @@ triangelindelning, hörnen lagda runt en punkt) slås på separat. Strukturen
 beskrivs i filhuvudet. Teoriavsnittet `ma2c-4.2` länkar hit.
 
 - **⛔ Verktyget nämns aldrig på Facebook, Instagram eller i nyhetsbrevet**
-  (uttryckligt beslut 2026-11-20), och det ska inte in i `UPDATES` på
-  startsidan. Regeln står i `fb-lansering.md`, `ig-lansering.md` och
-  `nyhetsbrev.md`.
+  (uttryckligt beslut 2026-11-20) och syns inte alls på startsidan: inte i
+  `UPDATES`, inte i menyn och inte i sidfotens lista i `index.html`, fast
+  den finns i Resurser-menyn på övriga sidor. Regeln står i
+  `fb-lansering.md`, `ig-lansering.md` och `nyhetsbrev.md`.
 - Öka `?v=` på skriptet när det ändras. FAQ:n i JSON-LD ska vara ordagrant
   samma som de synliga frågorna.
 

@@ -31,6 +31,8 @@ const ROOT = path.join(__dirname, '..');
 // Whitelist: { fil: [understrängar som får förekomma på matchande rader] }
 // Varje post är manuellt granskad mot scenens faktiska bakgrund.
 const WHITELIST = {
+    // Statusikoner: vit bock eller vit markering i en mörkgrön, brun eller grå cirkel.
+    'geobrade.html': ['<svg class="i-info"', '<svg class="i-ok"', '<svg class="i-varn"'],
     // Fartstrimmor mot mörk väg/rymd och glasreflektion på bilrutan —
     // sitter på mörka ytor, inte på ljust papper.
     'fysik1-newtons-forsta-app.html': [

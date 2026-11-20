@@ -89,7 +89,9 @@
   --line: rgba(15, 22, 32, 0.10);
   --line2: rgba(15, 22, 32, 0.20);
   --accent: #c8324a;
-  --shadow: 0 1px 2px rgba(15, 22, 32, 0.05), 0 12px 32px -18px rgba(15, 22, 32, 0.28);
+  --green: #2f8a4e;
+  --amber: #b0651a;
+  --shadow: 0 1px 2px rgba(15, 22, 32, 0.05), 0 14px 36px -20px rgba(15, 22, 32, 0.32);
   --sans: "DM Sans", system-ui, -apple-system, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
   --serif: "Instrument Serif", Georgia, serif;
@@ -110,60 +112,164 @@ button, input { font-family: inherit; font-size: inherit; color: inherit; }
 .lab-nav-dd-trigger.aktiv { border-bottom-color: var(--lab-accent); }
 [hidden] { display: none !important; }
 
-.top { padding: 14px 22px 12px; max-width: 1280px; margin: 0 auto; }
-.top h1 { font-family: var(--serif); font-weight: 400; font-size: 34px; line-height: 1; margin: 0; letter-spacing: -.01em; }
+/* ---------- Sidhuvud ---------- */
+.top { display: flex; align-items: flex-end; gap: 24px; padding: 18px 22px 14px; max-width: 1320px; margin: 0 auto; }
+.top-text { flex: 1; min-width: 0; }
+.kicker { font: 600 11px var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--accent); margin: 0 0 6px; }
+.top h1 { font-family: var(--serif); font-weight: 400; font-size: 42px; line-height: 1; margin: 0; letter-spacing: -.01em; }
 .top h1 em { color: var(--accent); }
-.top p { margin: 6px 0 0; color: var(--soft); font-size: 14px; max-width: 760px; }
+.top p.ingress { margin: 8px 0 0; color: var(--soft); font-size: 15px; line-height: 1.5; max-width: 720px; }
+.fragan { flex: none; max-width: 330px; padding: 12px 16px; border-radius: 14px; background: var(--panel); border: 1px solid var(--line); box-shadow: var(--shadow); font-size: 14px; line-height: 1.45; color: var(--soft); }
+.fragan b { display: block; font-family: var(--serif); font-weight: 400; font-size: 21px; line-height: 1.15; color: var(--ink); margin-top: 2px; }
 
-.app { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 16px; padding: 0 22px 28px; max-width: 1280px; margin: 0 auto; align-items: start; }
-.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); }
-.brada-wrap { padding: 12px; }
-#bradan { display: block; width: 100%; height: auto; max-height: max(360px, calc(100vh - 205px)); aspect-ratio: 1; margin: 0 auto; touch-action: none; user-select: none; -webkit-user-select: none; }
+/* ---------- Arbetsytan ---------- */
+.app { display: grid; grid-template-columns: minmax(0, 1fr) 372px; gap: 18px; padding: 0 22px 32px; max-width: 1320px; margin: 0 auto; align-items: start; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); }
+.brada-wrap { padding: 14px; position: sticky; top: 12px; }
+#bradan { display: block; width: 100%; height: auto; max-height: max(360px, calc(100vh - 190px)); aspect-ratio: 1; margin: 0 auto; touch-action: none; user-select: none; -webkit-user-select: none; outline: none; }
+#bradan:focus-visible { outline: 2px solid rgba(28, 61, 107, .4); outline-offset: 4px; border-radius: 20px; }
+#bradan text { pointer-events: none; }
 #bradan .horn-grepp { cursor: grab; }
 #bradan .gs-kropp { cursor: move; }
-#bradan .gs-vrid { cursor: grab; }
+#bradan .gs-vrid circle { cursor: grab; transition: fill .15s; }
+#bradan .gs-vrid:hover circle { fill: #eef5fb; }
 #bradan.drar, #bradan.drar * { cursor: grabbing !important; }
-#bradan .gs-tal { font: 600 13px var(--sans); fill: #16314f; pointer-events: none; }
-#bradan .gs-tal2 { font: 500 10px var(--sans); fill: #3d6488; pointer-events: none; }
-#bradan .hornnamn { font: 600 21px var(--sans); fill: #1f2530; pointer-events: none; }
-#bradan .vinkeltal { font: 700 17px var(--sans); pointer-events: none; }
-.hornnamn.liten { font: 600 15px var(--sans); }
+#bradan .gs-yttre text { font: 600 13px var(--sans); fill: #14304e; transition: fill .2s, opacity .2s; }
+#bradan .gs-inre text { font: 500 10px var(--sans); fill: #3d6488; transition: fill .2s, opacity .2s; }
+#bradan .gradskiva.las-yttre .gs-yttre text { fill: #c22d44; font-weight: 700; }
+#bradan .gradskiva.las-yttre .gs-inre text { opacity: .35; }
+#bradan .gradskiva.las-inre .gs-inre text { fill: #c22d44; font-weight: 700; font-size: 11px; }
+#bradan .gradskiva.las-inre .gs-yttre text { opacity: .35; }
+#bradan .hornnamn { font: 700 22px var(--sans); }
+#bradan .vinkeltal { font: 700 18px var(--sans); }
+#bradan .rivnamn { font: 700 15px var(--sans); fill: #1f2530; }
+#bradan .riv-etikett { font: 600 15px var(--sans); fill: #fff; }
+#bradan .triangel-tal { font: 700 17px var(--sans); fill: #1f2530; }
+#bradan .puls { transform-box: fill-box; transform-origin: center; animation: puls 1.5s ease-out infinite; }
+@keyframes puls { 0% { transform: scale(.75); opacity: 1; } 100% { transform: scale(2); opacity: 0; } }
+#bradan .tona { animation: tona .5s ease-out both; }
+@keyframes tona { from { opacity: 0; } to { opacity: 1; } }
+#bradan .triangel.ny, #bradan .triangel-tal.ny { animation: tona .6s ease-out both; }
+#bradan .diagonal.ny { stroke-dasharray: 9 7; animation: tona .5s ease-out both; }
 
-aside.panel { padding: 16px 16px 18px; display: flex; flex-direction: column; gap: 18px; }
-.sek h2 { font: 600 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
-.seg { display: flex; background: var(--bg); border-radius: 10px; padding: 3px; gap: 2px; }
-.seg button { flex: 1; border: 0; background: none; padding: 7px 8px; border-radius: 8px; font: 600 14px var(--sans); color: var(--soft); cursor: pointer; }
+.statusrad { display: flex; gap: 10px; align-items: flex-start; margin: 12px 4px 2px; padding: 10px 13px; border-radius: 12px; background: #f4f0e7; font-size: 14px; line-height: 1.45; color: var(--soft); min-height: 44px; }
+.statusrad svg { flex: none; margin-top: 1px; }
+.statusrad .i-ok, .statusrad .i-varn { display: none; }
+.statusrad.ok { background: rgba(47, 138, 78, .09); color: #1f5a33; }
+.statusrad.ok .i-info { display: none; } .statusrad.ok .i-ok { display: block; }
+.statusrad.varn { background: rgba(176, 101, 26, .11); color: #6e3d0c; }
+.statusrad.varn .i-info { display: none; } .statusrad.varn .i-varn { display: block; }
+
+/* ---------- Sidopanelen ---------- */
+aside.sida { padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+.figurval { padding: 4px 4px 2px; }
+.figur-huvud { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+.etikett { font: 600 10.5px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+#figurnamn { font-family: var(--serif); font-size: 22px; line-height: 1; }
+.seg { display: flex; background: #f1ece2; border-radius: 11px; padding: 3px; gap: 2px; }
+.seg button { flex: 1; border: 0; background: none; padding: 7px 4px; border-radius: 9px; font: 600 13.5px var(--sans); color: var(--soft); cursor: pointer; transition: background .15s, color .15s; }
+.seg button:hover { color: var(--ink); }
 .seg button[aria-pressed="true"] { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgba(15, 22, 32, .16); }
-.rad { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 8px; }
-.knapp { border: 1px solid var(--line2); background: var(--panel); border-radius: 10px; padding: 7px 12px; font: 500 13.5px var(--sans); cursor: pointer; }
+.figurval .rad { display: flex; gap: 8px; margin-top: 8px; }
+.varning { margin-top: 8px; padding: 9px 11px; border-radius: 10px; background: rgba(200, 50, 74, .09); color: #8a1f31; font-size: 13.5px; line-height: 1.45; }
+
+.knapp { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--line2); background: var(--panel); border-radius: 11px; padding: 8px 13px; font: 600 13.5px var(--sans); cursor: pointer; transition: border-color .15s, background .15s, transform .1s; }
 .knapp:hover { border-color: var(--ink); }
-.knapp.primar { background: var(--ink); color: #fff; border-color: var(--ink); }
+.knapp:active { transform: scale(.97); }
+.knapp.primar { background: var(--ink); color: #fff; border-color: var(--ink); box-shadow: 0 8px 18px -12px rgba(15, 22, 32, .8); }
 .knapp.primar:hover { background: #22324a; }
-.chip { min-width: 34px; border: 1px solid var(--line2); background: var(--panel); border-radius: 9px; padding: 6px 9px; font: 600 13.5px var(--sans); cursor: pointer; }
-.chip:hover { border-color: var(--ink); }
-.liten-text { font-size: 12.5px; color: var(--muted); }
-.kryss { display: flex; gap: 9px; align-items: center; font-size: 14px; padding: 4px 0; cursor: pointer; }
-.kryss input { width: 16px; height: 16px; accent-color: var(--ink); margin: 0; }
+.knapprad { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
 
-table.prot { width: 100%; border-collapse: collapse; font-size: 14px; }
-table.prot th, table.prot td { padding: 5px 4px; text-align: left; border-bottom: 1px solid var(--line); }
-table.prot thead th { font: 600 10.5px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+/* Stegkorten */
+ol.steg { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.kort { border: 1px solid var(--line); border-radius: 15px; background: #fff; transition: box-shadow .2s, border-color .2s; }
+.kort.oppen { border-color: rgba(15, 22, 32, .22); box-shadow: 0 10px 26px -18px rgba(15, 22, 32, .45); }
+.kort-huvud { width: 100%; display: flex; align-items: center; gap: 11px; padding: 11px 12px; border: 0; background: none; cursor: pointer; text-align: left; border-radius: 15px; }
+.kort-huvud .nr { width: 28px; height: 28px; flex: none; border-radius: 50%; display: grid; place-items: center; font: 700 13px var(--sans); background: #efe9dd; color: var(--soft); transition: background .2s, color .2s; }
+.kort.oppen .nr { background: var(--ink); color: #fff; }
+.kort.klar .nr { background: var(--green); color: #fff; }
+.kort.klar .nr span { display: none; }
+.kort:not(.klar) .nr svg { display: none; }
+.kort-huvud .kt { flex: 1; display: flex; flex-direction: column; }
+.kort-huvud .kt b { font-size: 15px; }
+.kort-huvud .kt small { font-size: 12.5px; color: var(--muted); }
+.kort.last .kort-huvud { opacity: .55; }
+.kort-huvud .pil { color: var(--muted); transition: transform .2s; }
+.kort.oppen .kort-huvud .pil { transform: rotate(180deg); }
+.kort-kropp { display: none; padding: 0 14px 14px 51px; }
+.kort.oppen .kort-kropp { display: block; animation: in .25s ease-out; }
+@keyframes in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+.instr { margin: 0 0 10px; font-size: 14px; line-height: 1.5; color: var(--soft); }
+.fraga { margin: 14px 0 8px; font-size: 14.5px; font-weight: 600; line-height: 1.4; }
+
+table.prot { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 12px; }
+table.prot th, table.prot td { padding: 5px 3px; text-align: left; border-bottom: 1px solid var(--line); }
+table.prot thead th { font: 600 10px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 table.prot tbody th { font-weight: 500; white-space: nowrap; }
-.prick { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 7px; vertical-align: 1px; }
+table.prot td.ikon { width: 24px; }
+table.prot td.ikon svg { display: block; animation: in .2s ease-out; }
+.prick { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; vertical-align: 0; }
 .matt { display: inline-flex; align-items: center; gap: 3px; }
-.matt input { width: 68px; padding: 5px 7px; border: 1px solid var(--line2); border-radius: 8px; background: #fff; text-align: right; font-variant-numeric: tabular-nums; }
-.matt input:focus { outline: 2px solid rgba(28, 61, 107, .35); border-color: #1c3d6b; }
-.facit-cell { font-weight: 600; font-variant-numeric: tabular-nums; }
-.summarad { display: flex; justify-content: space-between; align-items: baseline; margin-top: 10px; font-size: 14.5px; }
-.summarad b { font-size: 20px; font-variant-numeric: tabular-nums; }
-.facitsumma { margin-top: 6px; padding: 8px 10px; background: rgba(63, 122, 52, .09); border-radius: 9px; font-size: 14px; color: #2c5a24; }
-.varning { padding: 9px 11px; border-radius: 10px; background: rgba(200, 50, 74, .09); color: #8a1f31; font-size: 13.5px; line-height: 1.45; }
-.uppdrag { margin: 0; padding-left: 20px; font-size: 13.5px; line-height: 1.5; color: var(--soft); }
-.uppdrag li { margin-bottom: 4px; }
-.info { font-size: 13.5px; color: var(--soft); line-height: 1.45; margin: 6px 0 0; }
-#hornRuta { text-align: center; }
-#hornSvg { width: 190px; height: 190px; display: block; margin: 4px auto 0; }
+.matt input { width: 66px; padding: 6px 8px; border: 1px solid var(--line2); border-radius: 9px; background: #fff; text-align: right; font: 600 15px var(--sans); font-variant-numeric: tabular-nums; transition: border-color .15s, background .15s; }
+.matt input:focus { outline: 3px solid rgba(28, 61, 107, .18); border-color: #1c3d6b; }
+.matt input.st-ok { border-color: var(--green); background: rgba(47, 138, 78, .07); }
+.matt input.st-skala, .matt input.st-utsida, .matt input.st-fel { border-color: var(--amber); background: rgba(176, 101, 26, .07); }
+.facit-cell { font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
+.respons { display: flex; gap: 9px; align-items: flex-start; margin-top: 10px; padding: 9px 11px; border-radius: 11px; font-size: 13.5px; line-height: 1.45; animation: in .2s ease-out; }
+.respons svg { flex: none; margin-top: 1px; }
+.respons.ok { background: rgba(47, 138, 78, .09); color: #1f5a33; }
+.respons.hint { background: rgba(176, 101, 26, .10); color: #6e3d0c; }
+.summarad { display: flex; justify-content: space-between; align-items: baseline; margin-top: 12px; font-size: 14px; color: var(--soft); }
+.summarad b { font-size: 21px; color: var(--ink); font-variant-numeric: tabular-nums; }
 
+.uttryck { padding: 12px 14px; border-radius: 12px; background: #f6f2ea; font-size: 17px; font-weight: 600; line-height: 1.6; font-variant-numeric: tabular-nums; }
+.uttryck b { font-size: 21px; }
+.val { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+.valknapp { border: 1px solid var(--line2); background: #fff; border-radius: 11px; padding: 10px 9px; font: 500 13.5px var(--sans); cursor: pointer; text-align: left; line-height: 1.3; transition: border-color .15s, background .15s; }
+.valknapp:hover { border-color: var(--ink); background: #faf7f1; }
+.logg { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+.loggrad { display: flex; align-items: center; gap: 10px; padding: 6px 10px 6px 6px; border-radius: 11px; background: #f6f2ea; font-size: 14px; }
+.loggrad span { flex: 1; color: var(--soft); }
+.loggrad b { font-size: 16px; font-variant-numeric: tabular-nums; }
+svg.mini { width: 38px; height: 38px; flex: none; background: #ecdcb9; border-radius: 8px; }
+.slutsats { margin-top: 12px; padding: 12px 14px; border-radius: 12px; background: rgba(47, 138, 78, .08); border: 1px solid rgba(47, 138, 78, .18); font-size: 14px; line-height: 1.5; color: #1f3d28; }
+.slutsats p { margin: 0 0 6px; }
+.slutsats p:last-child { margin: 0; }
+.slutsats .liten { font-size: 13px; color: #3c5a44; }
+
+.experiment { display: flex; flex-direction: column; gap: 8px; }
+.exp { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid var(--line2); border-radius: 13px; background: #fff; cursor: pointer; text-align: left; transition: border-color .15s, background .15s, box-shadow .15s; }
+.exp:hover { border-color: var(--ink); }
+.exp span { display: flex; flex-direction: column; }
+.exp b { font-size: 14.5px; }
+.exp small { font-size: 12.5px; color: var(--muted); }
+.exp.aktiv { border-color: var(--ink); background: #f8f5ef; box-shadow: inset 0 0 0 1px var(--ink); }
+.forklaring { margin-top: 10px; padding: 11px 13px; border-radius: 12px; background: #f6f2ea; font-size: 14px; line-height: 1.5; color: var(--soft); animation: in .25s ease-out; }
+.forklaring b { color: var(--ink); }
+
+table.monster { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 14px; text-align: center; }
+table.monster th { font: 600 9.5px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 6px 2px; border-bottom: 1px solid var(--line2); }
+table.monster td { padding: 7px 2px; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+table.monster tr.nu td { background: #f6f2ea; font-weight: 600; }
+.tomt { color: #b5ad9e; }
+.formelruta { margin-top: 12px; padding: 14px; border-radius: 13px; background: var(--ink); color: #fff; text-align: center; animation: in .3s ease-out; }
+.formelruta span { display: block; font-size: 12.5px; opacity: .75; }
+.formelruta b { display: block; font-family: var(--serif); font-weight: 400; font-size: 34px; margin: 4px 0; }
+.formelruta small { display: block; font-size: 12.5px; opacity: .8; line-height: 1.45; }
+
+details.hjalp { border: 1px solid var(--line); border-radius: 15px; background: #fff; }
+details.hjalp summary { list-style: none; cursor: pointer; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; font-weight: 600; font-size: 14px; }
+details.hjalp summary::-webkit-details-marker { display: none; }
+details.hjalp summary svg { color: var(--muted); transition: transform .2s; }
+details.hjalp[open] summary svg { transform: rotate(180deg); }
+.hjalp-kropp { padding: 0 14px 14px; display: flex; flex-direction: column; gap: 4px; }
+.kryss { display: flex; gap: 10px; align-items: center; font-size: 14px; padding: 5px 0; cursor: pointer; }
+.kryss input { width: 17px; height: 17px; accent-color: var(--ink); margin: 0; flex: none; }
+.kryss small { display: block; font-size: 12px; color: var(--muted); }
+.hjalp-kropp .rad { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 4px 0 6px; }
+.liten-text { font-size: 12.5px; color: var(--muted); margin-right: 2px; }
+
+/* ---------- Text under verktyget ---------- */
 .seo { border-top: 1px solid var(--line2); background: var(--panel); }
 .seo-inner { max-width: 860px; margin: 0 auto; padding: 56px 24px 72px; color: var(--soft); font-size: 16.5px; line-height: 1.7; }
 .seo h2 { font-family: var(--serif); font-weight: 400; font-size: 32px; line-height: 1.15; color: var(--ink); margin: 52px 0 14px; letter-spacing: -.01em; }
@@ -181,17 +287,27 @@ table.prot tbody th { font-weight: 500; white-space: nowrap; }
 .sidfot a { color: inherit; text-decoration: none; margin: 0 8px; }
 .sidfot a:hover { color: var(--ink); }
 
-@media (max-width: 900px) {
+@media (max-width: 980px) {
   .app { grid-template-columns: 1fr; }
-  #bradan { max-height: none; }
+  .brada-wrap { position: static; }
+  #bradan { max-height: none; max-width: 640px; }
+  .fragan { display: none; }
 }
 @media (max-width: 600px) {
-  .top { padding: 12px 16px 10px; }
-  .top h1 { font-size: 28px; }
-  .app { padding: 0 10px 22px; gap: 12px; }
-  .brada-wrap { padding: 6px; }
+  .top { padding: 14px 16px 12px; }
+  .top h1 { font-size: 32px; }
+  .top p.ingress { font-size: 14px; }
+  .app { padding: 0 10px 24px; gap: 12px; }
+  .brada-wrap { padding: 6px; border-radius: 14px; }
+  .statusrad { margin: 8px 2px 2px; font-size: 13.5px; }
+  aside.sida { padding: 10px; }
+  .kort-kropp { padding: 0 12px 14px 12px; }
+  .val { grid-template-columns: 1fr; }
   .seo-inner { padding: 40px 16px 56px; }
   .seo h2 { font-size: 27px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #bradan .puls { animation: none; }
 }
 </style>
 </head>
@@ -299,72 +415,103 @@ table.prot tbody th { font-weight: 500; white-space: nowrap; }
 </div>
 <section id="verktyget" aria-label="Geobräda med gradskiva">
 <header class="top">
-  <h1>Geo<em>bräda</em></h1>
-  <p>Dra i hörnen för att spänna gummibandet. Flytta gradskivan till ett hörn, vrid den med det runda handtaget och mät vinkeln. Skriv in det du mäter i protokollet.</p>
+  <div class="top-text">
+    <p class="kicker">Undersök själv</p>
+    <h1>Geo<em>bräda</em> med gradskiva</h1>
+    <p class="ingress">Spänn gummibandet till en figur, mät vinklarna med gradskivan och ta reda på vad de blir tillsammans. Följ stegen, ett i taget.</p>
+  </div>
+  <div class="fragan">Frågan<b id="fragan">Vad blir vinklarna i en fyrhörning tillsammans?</b></div>
 </header>
 <main class="app">
   <div class="panel brada-wrap">
-    <svg id="bradan" viewBox="0 0 640 640" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, system-ui, sans-serif" role="img" aria-label="Geobräda med ett gummiband som bildar en månghörning, och en gradskiva."></svg>
+    <svg id="bradan" viewBox="0 0 640 640" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, system-ui, sans-serif" tabindex="0" role="img" aria-label="Geobräda med ett gummiband som bildar en månghörning, och en gradskiva. Piltangenterna vrider gradskivan."></svg>
+    <div class="statusrad" id="status" role="status" aria-live="polite">
+      <svg class="i-info" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#3f4a5c"/><path d="M12 11v6" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="7.4" r="1.4" fill="#fff"/></svg>
+      <svg class="i-ok" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#2f8a4e"/><path d="m7.5 12.5 3 3 6-6.5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg class="i-varn" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#b0651a"/><path d="M12 7v6.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="17" r="1.4" fill="#fff"/></svg>
+      <span id="statusText"></span>
+    </div>
   </div>
-  <aside class="panel" aria-label="Inställningar och mätprotokoll">
-    <div class="sek">
-      <h2>Figur: <span id="figurnamn">fyrhörning</span></h2>
+
+  <aside class="panel sida" aria-label="Undersökningen steg för steg">
+    <div class="figurval">
+      <div class="figur-huvud"><span class="etikett">Figur</span><span id="figurnamn">fyrhörning</span></div>
       <div class="seg" role="group" aria-label="Antal hörn">
-        <button type="button" data-n="3">3 hörn</button>
-        <button type="button" data-n="4">4 hörn</button>
-        <button type="button" data-n="5">5 hörn</button>
-        <button type="button" data-n="6">6 hörn</button>
+        <button type="button" data-action="n" data-n="3">3 hörn</button>
+        <button type="button" data-action="n" data-n="4">4 hörn</button>
+        <button type="button" data-action="n" data-n="5">5 hörn</button>
+        <button type="button" data-action="n" data-n="6">6 hörn</button>
       </div>
-      <div class="rad"><button type="button" class="knapp" id="nyFigur">Ny figur</button></div>
-      <div class="varning" id="varning" hidden style="margin-top:10px">Gummibandet korsar sig självt. Flytta ett hörn så att figuren blir en riktig månghörning igen.</div>
+      <div class="rad"><button type="button" class="knapp" data-action="ny-figur">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 4v5h-5"/></svg>
+        Ny figur</button></div>
+      <div class="varning" id="varning" hidden>Gummibandet korsar sig självt. Flytta ett hörn så att figuren blir en riktig månghörning igen.</div>
     </div>
 
-    <div class="sek">
-      <h2>Gradskiva</h2>
-      <label class="kryss"><input type="checkbox" id="visaGs" checked> Visa gradskivan</label>
-      <div class="rad">
-        <span class="liten-text">Vrid</span>
-        <button type="button" class="knapp" id="vridV" aria-label="Vrid gradskivan en grad moturs">−1°</button>
-        <button type="button" class="knapp" id="vridH" aria-label="Vrid gradskivan en grad medurs">+1°</button>
-        <button type="button" class="knapp" id="lagUndan">Lägg undan</button>
+    <ol class="steg">
+      <li class="kort" data-steg="1" id="kort1">
+        <button type="button" class="kort-huvud" data-action="oppna" data-s="1" aria-controls="s1">
+          <span class="nr"><span>1</span><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="kt"><b>Mät vinklarna</b><small>med gradskivan</small></span>
+          <svg class="pil" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="kort-kropp" id="s1">
+          <p class="instr" id="s1text"></p>
+          <button type="button" class="knapp" id="visaHur" data-action="visa-hur">Visa hur man mäter</button>
+          <table class="prot">
+            <thead><tr><th scope="col">Hörn</th><th scope="col">Uppmätt</th><th scope="col"><span class="sr-only"></span></th><th scope="col" id="facitKol" hidden>Facit</th></tr></thead>
+            <tbody id="protokoll"></tbody>
+          </table>
+          <div class="respons" id="respons" hidden></div>
+          <div class="summarad"><span>Summa hittills</span><b id="summa">–</b></div>
+          <div class="knapprad"><button type="button" class="knapp primar" id="summeraBtn" data-action="summera" hidden>Lägg ihop vinklarna</button></div>
+        </div>
+      </li>
+      <li class="kort" data-steg="2" id="kort2">
+        <button type="button" class="kort-huvud" data-action="oppna" data-s="2" aria-controls="s2">
+          <span class="nr"><span>2</span><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="kt"><b>Lägg ihop och jämför</b><small>blir summan alltid densamma?</small></span>
+          <svg class="pil" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="kort-kropp" id="s2"></div>
+      </li>
+      <li class="kort" data-steg="3" id="kort3">
+        <button type="button" class="kort-huvud" data-action="oppna" data-s="3" aria-controls="s3">
+          <span class="nr"><span>3</span><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="kt"><b>Varför?</b><small>riv av hörnen, dela i trianglar</small></span>
+          <svg class="pil" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="kort-kropp" id="s3"></div>
+      </li>
+      <li class="kort" data-steg="4" id="kort4">
+        <button type="button" class="kort-huvud" data-action="oppna" data-s="4" aria-controls="s4">
+          <span class="nr"><span>4</span><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="kt"><b>Fler hörn</b><small>hitta mönstret</small></span>
+          <svg class="pil" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="kort-kropp" id="s4"></div>
+      </li>
+    </ol>
+
+    <details class="hjalp">
+      <summary>Gradskiva och facit<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="hjalp-kropp">
+        <label class="kryss"><input type="checkbox" id="visaGs" checked><span>Visa gradskivan</span></label>
+        <div class="rad">
+          <span class="liten-text">Vrid</span>
+          <button type="button" class="knapp" id="vridV" aria-label="Vrid gradskivan en grad moturs">−1°</button>
+          <button type="button" class="knapp" id="vridH" aria-label="Vrid gradskivan en grad medurs">+1°</button>
+          <button type="button" class="knapp" id="lagUndan">Lägg undan</button>
+        </div>
+        <label class="kryss"><input type="checkbox" id="lashjalp" checked><span>Läshjälp<small>förlänger sidorna och visar vilken skala du ska läsa</small></span></label>
+        <label class="kryss"><input type="checkbox" id="visaBagar"><span>Vinkelbågar</span></label>
+        <label class="kryss"><input type="checkbox" id="visaFacit"><span>Vinklarnas storlek<small>facit, på brädan och i protokollet</small></span></label>
+        <div class="rad">
+          <button type="button" class="knapp" id="rensa">Töm protokollet</button>
+          <button type="button" class="knapp" id="borjaOm">Börja om</button>
+        </div>
       </div>
-      <div class="rad"><span class="liten-text">Lägg an mot hörn</span><span id="hornknappar" class="rad" style="margin-top:0"></span></div>
-    </div>
-
-    <div class="sek">
-      <h2>Mätprotokoll</h2>
-      <table class="prot">
-        <thead><tr><th scope="col">Hörn</th><th scope="col">Uppmätt</th><th scope="col" id="facitKol" hidden>Facit</th></tr></thead>
-        <tbody id="protokoll"></tbody>
-      </table>
-      <div class="summarad"><span>Summa av dina mätningar</span><b id="summa">–</b></div>
-      <p class="liten-text" id="summaInfo" style="margin:2px 0 0"></p>
-      <div class="facitsumma" id="facitSumma" hidden>Vinkelsumman är exakt <b id="facitSummaVarde">360°</b></div>
-      <div class="rad"><button type="button" class="knapp" id="rensa">Töm protokollet</button></div>
-    </div>
-
-    <div class="sek">
-      <h2>Visa</h2>
-      <label class="kryss"><input type="checkbox" id="visaBagar"> Vinkelbågar</label>
-      <label class="kryss"><input type="checkbox" id="visaFacit"> Vinklarnas storlek (facit)</label>
-      <label class="kryss"><input type="checkbox" id="visaTrianglar"> Dela in i trianglar</label>
-      <p class="info" id="triangelInfo" hidden></p>
-      <label class="kryss"><input type="checkbox" id="visaHorn"> Lägg hörnen intill varandra</label>
-      <div id="hornRuta" hidden>
-        <svg id="hornSvg" viewBox="-80 -80 160 160" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, system-ui, sans-serif" role="img" aria-label="Figurens vinklar utklippta och lagda intill varandra runt en punkt."></svg>
-        <p class="info" id="hornText"></p>
-      </div>
-    </div>
-
-    <div class="sek">
-      <h2>Undersök</h2>
-      <ol class="uppdrag">
-        <li>Mät alla vinklar i fyrhörningen och skriv in dem.</li>
-        <li>Lägg ihop vinklarna. Vad blir summan?</li>
-        <li>Gör en ny fyrhörning, gärna en som buktar inåt, och mät igen. Vad märker du?</li>
-        <li>Pröva med tre, fem och sex hörn. Kan du hitta ett mönster?</li>
-      </ol>
-    </div>
+    </details>
   </aside>
 </main>
 </section>
@@ -375,10 +522,10 @@ table.prot tbody th { font-weight: 500; white-space: nowrap; }
     <p class="seo-lede">En geobräda är en bräda med spikar i ett rutnät, där man spänner ett gummiband till en figur. Här finns den digitalt, tillsammans med en gradskiva som eleverna själva lägger an och läser av. Med den kan klassen undersöka vinkelsumman i trianglar, fyrhörningar och andra månghörningar och upptäcka sambandet själva.</p>
     <h2>Så använder du geobrädan</h2>
     <ol class="seo-steps">
-      <li><b>Spänn gummibandet.</b> Välj antal hörn och dra hörnen mellan spikarna, eller tryck på Ny figur.</li>
-      <li><b>Lägg an gradskivan.</b> Dra den så att den röda ringen mitt på nollinjen hamnar i ett hörn. Den fastnar när den är nära. Vrid den med det runda handtaget tills nollinjen ligger längs ena sidan; den lägger sig rätt när den är nära. Knapparna Lägg an mot hörn gör samma sak med ett klick.</li>
-      <li><b>Läs av och skriv in.</b> Läs av vinkeln på skalan och skriv in den i mätprotokollet. Summan räknas ut medan du skriver.</li>
-      <li><b>Kontrollera mot facit.</b> Slå på vinklarnas storlek, dela in figuren i trianglar eller lägg hörnen intill varandra runt en punkt för att se varför summan blir som den blir.</li>
+      <li><b>Mät vinklarna.</b> Dra gradskivan så att den röda ringen mitt på nollinjen hamnar i hörnet som blinkar, och vrid den med det runda handtaget tills nollinjen ligger längs en sida. Den fastnar när den kommer nära. Läshjälpen förlänger sidorna och visar vilken skala som ska läsas. Varje värde du skriver in får respons, och vanliga misstag som fel skala känns igen.</li>
+      <li><b>Lägg ihop och jämför.</b> Gissa om summan blir densamma i en annan figur, mät en till och jämför summorna.</li>
+      <li><b>Se varför.</b> Riv av hörnen och lägg dem runt en punkt, eller dela figuren i trianglar med diagonaler. Båda visar varför summan blir som den blir.</li>
+      <li><b>Pröva fler hörn.</b> Mät trianglar, femhörningar och sexhörningar, fyll tabellen och hitta mönstret.</li>
     </ol>
     <h2>Vinkelsumman i en månghörning</h2>
     <p>Vinkelsumman i en triangel är 180°. En fyrhörning kan alltid delas i två trianglar med en diagonal, och därför är vinkelsumman i en fyrhörning 2 · 180° = 360°. En femhörning delas i tre trianglar och har vinkelsumman 540°. Läs mer i genomgången <a href="katalog.html?id=ma2c-4.2">Vinklar i trianglar och månghörningar</a>.</p>
@@ -392,7 +539,7 @@ table.prot tbody th { font-weight: 500; white-space: nowrap; }
 </article>
 <footer class="sidfot"><a href="index.html">Fysiklabbet</a>·<a href="om.html">Om</a>·<a href="kontakt.html">Kontakt</a></footer>
 <!-- Öka versionsnumret när skriptet ändras (GitHub Pages cachar i tio minuter). -->
-<script src="geobrade.js?v=202611201200"></script>
+<script src="geobrade.js?v=202611201600"></script>
 <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>

@@ -96,7 +96,7 @@
       kw: ['slumpa grupper', 'slumpa', 'grupper', 'gruppindelning', 'gruppgenerator', 'dela in i grupper',
            'grupparbete', 'klasslista', 'klassrum', 'slumpgenerator', 'lottning', 'par', 'parindelning',
            'storskärm', 'slumpify', 'verktyg', 'lärare'] },
-    { title: 'Geobräda med gradskiva', href: 'geobrade.html',
+    { title: 'Geobräda', href: 'geobrade.html',
       description: 'Spänn ett gummiband till en månghörning, mät vinklarna med en gradskiva och undersök vinkelsumman.',
       kw: ['geobräda', 'geobräde', 'geobrade', 'spikbräda', 'gradskiva', 'mäta vinklar', 'vinkel', 'vinklar',
            'vinkelsumma', 'vinkelsumman', 'fyrhörning', 'triangel', 'femhörning', 'månghörning', 'polygon',

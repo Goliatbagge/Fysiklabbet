@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="index, follow">
-<title>Geobräda med gradskiva: undersök vinkelsumman — Fysiklabbet</title>
+<title>Geobräda: undersök vinkelsumman — Fysiklabbet</title>
 <meta name="description" content="En digital geobräda med gradskiva. Spänn gummibandet till en triangel, fyrhörning eller femhörning, mät vinklarna själv med gradskivan och upptäck vinkelsumman. Gratis och utan inloggning.">
 <link rel="canonical" href="https://fysiklabbet.se/geobrade.html">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -12,12 +12,12 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Fysiklabbet">
 <meta property="og:locale" content="sv_SE">
-<meta property="og:title" content="Geobräda med gradskiva: undersök vinkelsumman">
+<meta property="og:title" content="Geobräda: undersök vinkelsumman">
 <meta property="og:description" content="En digital geobräda med gradskiva. Spänn gummibandet till en triangel, fyrhörning eller femhörning, mät vinklarna själv med gradskivan och upptäck vinkelsumman. Gratis och utan inloggning.">
 <meta property="og:url" content="https://fysiklabbet.se/geobrade.html">
 <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Geobräda med gradskiva: undersök vinkelsumman">
+<meta name="twitter:title" content="Geobräda: undersök vinkelsumman">
 <meta name="twitter:description" content="En digital geobräda med gradskiva. Spänn gummibandet till en triangel, fyrhörning eller femhörning, mät vinklarna själv med gradskivan och upptäck vinkelsumman. Gratis och utan inloggning.">
 <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
 <script type="application/ld+json">
@@ -26,7 +26,7 @@
  "@graph": [
   {
    "@type": "WebApplication",
-   "name": "Geobräda med gradskiva",
+   "name": "Geobräda",
    "alternateName": ["Digital geobräda", "Geobräde", "Spikbräda med gradskiva"],
    "url": "https://fysiklabbet.se/geobrade.html",
    "description": "En digital geobräda med gradskiva. Spänn gummibandet till en triangel, fyrhörning eller femhörning, mät vinklarna själv med gradskivan och upptäck vinkelsumman. Gratis och utan inloggning.",
@@ -49,7 +49,7 @@
    "@type": "BreadcrumbList",
    "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Start", "item": "https://fysiklabbet.se/" },
-    { "@type": "ListItem", "position": 2, "name": "Geobräda med gradskiva", "item": "https://fysiklabbet.se/geobrade.html" }
+    { "@type": "ListItem", "position": 2, "name": "Geobräda", "item": "https://fysiklabbet.se/geobrade.html" }
    ]
   },
   {
@@ -159,6 +159,35 @@ button, input { font-family: inherit; font-size: inherit; color: inherit; }
 .statusrad.ok .i-info { display: none; } .statusrad.ok .i-ok { display: block; }
 .statusrad.varn { background: rgba(176, 101, 26, .11); color: #6e3d0c; }
 .statusrad.varn .i-info { display: none; } .statusrad.varn .i-varn { display: block; }
+
+
+/* ---------- Verktygen och fullskärmsknappen på brädan ---------- */
+.brada-wrap { position: sticky; }
+.gb-fs, .vk-visa { position: absolute; top: 14px; z-index: 6; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line2); background: #fff; color: var(--ink); display: grid; place-items: center; cursor: pointer; box-shadow: 0 2px 8px -3px rgba(15, 22, 32, .35); transition: border-color .15s, transform .1s; padding: 0; }
+.gb-fs { left: 14px; }
+.vk-visa { right: 14px; }
+.gb-fs:hover, .vk-visa:hover { border-color: var(--ink); }
+.gb-fs:active, .vk-visa:active { transform: scale(.95); }
+.gb-fs .fs-ut { display: none; }
+.app.fs .gb-fs .fs-in { display: none; }
+.app.fs .gb-fs .fs-ut { display: block; }
+.verktyg { position: absolute; top: 14px; right: 14px; z-index: 5; width: 212px; padding: 10px 12px 10px; border-radius: 14px; background: rgba(255, 253, 249, .94); border: 1px solid var(--line2); box-shadow: 0 12px 28px -14px rgba(15, 22, 32, .45); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.vk-huvud { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+.vk-dolj { width: 26px; height: 26px; border: 0; border-radius: 50%; background: none; color: var(--muted); display: grid; place-items: center; cursor: pointer; padding: 0; }
+.vk-dolj:hover { background: #efe9dd; color: var(--ink); }
+.vk-kryss { display: flex; gap: 9px; align-items: center; font-size: 14px; font-weight: 500; padding: 5px 0; cursor: pointer; }
+.vk-kryss input { width: 17px; height: 17px; accent-color: var(--ink); margin: 0; flex: none; }
+.vk-rad { display: flex; gap: 5px; margin: 2px 0 6px 26px; }
+.vk-knapp { border: 1px solid var(--line2); background: #fff; border-radius: 9px; padding: 5px 8px; font: 600 12.5px var(--sans); cursor: pointer; white-space: nowrap; }
+.vk-knapp:hover { border-color: var(--ink); }
+.knapprad.slut { margin: 0; padding: 0 4px; }
+.knapprad.slut .knapp { font-weight: 500; font-size: 13px; padding: 7px 11px; color: var(--soft); }
+
+/* ---------- Fullskärm ---------- */
+.app.fs { max-width: none; width: 100vw; height: 100vh; margin: 0; padding: 14px; gap: 14px; background: var(--bg); align-items: stretch; overflow: hidden; }
+.app.fs .brada-wrap { position: relative; top: 0; display: flex; flex-direction: column; justify-content: center; min-height: 0; }
+.app.fs #bradan { flex: 1 1 auto; min-height: 0; max-height: calc(100vh - 128px); }
+.app.fs aside.sida { max-height: calc(100vh - 28px); overflow-y: auto; }
 
 /* ---------- Sidopanelen ---------- */
 aside.sida { padding: 14px; display: flex; flex-direction: column; gap: 12px; }
@@ -289,7 +318,7 @@ details.hjalp[open] summary svg { transform: rotate(180deg); }
 
 @media (max-width: 980px) {
   .app { grid-template-columns: 1fr; }
-  .brada-wrap { position: static; }
+  .brada-wrap { position: relative; top: 0; }
   #bradan { max-height: none; max-width: 640px; }
   .fragan { display: none; }
 }
@@ -299,6 +328,19 @@ details.hjalp[open] summary svg { transform: rotate(180deg); }
   .top p.ingress { font-size: 14px; }
   .app { padding: 0 10px 24px; gap: 12px; }
   .brada-wrap { padding: 6px; border-radius: 14px; }
+  .brada-wrap { display: flex; flex-direction: column; }
+  #bradan { order: 1; }
+  .verktyg { order: 2; }
+  .statusrad { order: 3; }
+  .verktyg { position: static; width: auto; margin: 8px 2px 0; display: flex; flex-wrap: wrap; align-items: center; gap: 2px 14px; backdrop-filter: none; box-shadow: none; background: #f6f2ea; border-color: var(--line); }
+  .vk-huvud { width: 100%; margin: 0; }
+  .vk-dolj, .vk-visa { display: none !important; }
+  .verktyg[hidden] { display: flex !important; }
+  .vk-rad { margin: 0; }
+  .gb-fs { top: 10px; left: 10px; width: 34px; height: 34px; }
+  .app.fs { grid-template-columns: 1fr; overflow-y: auto; padding: 8px; }
+  .app.fs #bradan { max-height: 70vh; }
+  .app.fs aside.sida { max-height: none; overflow: visible; }
   .statusrad { margin: 8px 2px 2px; font-size: 13.5px; }
   aside.sida { padding: 10px; }
   .kort-kropp { padding: 0 12px 14px 12px; }
@@ -382,7 +424,7 @@ details.hjalp[open] summary svg { transform: rotate(180deg); }
               <a href="sannolikhetskalkylator.html">Sannolikhetskalkylator</a>
               <a href="sannolikhetshornan.html">Sannolikhetshörnan</a>
               <a href="slumpa-grupper.html">Slumpa grupper</a>
-              <a href="geobrade.html" aria-current="page">Geobräda med gradskiva</a>
+              <a href="geobrade.html" aria-current="page">Geobräda</a>
                           </div>
           </div>
           <div class="lab-nav-dd-grupp">
@@ -413,17 +455,39 @@ details.hjalp[open] summary svg { transform: rotate(180deg); }
     </nav>
   </div>
 </div>
-<section id="verktyget" aria-label="Geobräda med gradskiva">
+<section id="verktyget" aria-label="Geobräda">
 <header class="top">
   <div class="top-text">
     <p class="kicker">Undersök själv</p>
-    <h1>Geo<em>bräda</em> med gradskiva</h1>
+    <h1>Geo<em>bräda</em></h1>
     <p class="ingress">Spänn gummibandet till en figur, mät vinklarna med gradskivan och ta reda på vad de blir tillsammans. Följ stegen, ett i taget.</p>
   </div>
   <div class="fragan">Frågan<b id="fragan">Vad blir vinklarna i en fyrhörning tillsammans?</b></div>
 </header>
 <main class="app">
   <div class="panel brada-wrap">
+    <button type="button" class="gb-fs" id="fsBtn" aria-label="Fullskärm" title="Fullskärm" hidden>
+      <svg class="fs-in" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/></svg>
+      <svg class="fs-ut" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/></svg>
+    </button>
+    <div class="verktyg" id="verktyg" aria-label="Gradskiva och facit">
+      <div class="vk-huvud">
+        <span class="etikett">Verktyg</span>
+        <button type="button" class="vk-dolj" id="verktygDolj" aria-label="Dölj verktygen" title="Dölj verktygen"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </div>
+      <label class="vk-kryss"><input type="checkbox" id="visaGs" checked><span>Gradskiva</span></label>
+      <div class="vk-rad">
+        <button type="button" class="vk-knapp" id="vridV" aria-label="Vrid gradskivan en grad moturs" title="Vrid en grad moturs">−1°</button>
+        <button type="button" class="vk-knapp" id="vridH" aria-label="Vrid gradskivan en grad medurs" title="Vrid en grad medurs">+1°</button>
+        <button type="button" class="vk-knapp" id="lagUndan" title="Lägg gradskivan längst ned på brädan">Lägg undan</button>
+      </div>
+      <label class="vk-kryss"><input type="checkbox" id="lashjalp" checked><span>Läshjälp</span></label>
+      <label class="vk-kryss"><input type="checkbox" id="visaBagar"><span>Vinkelbågar</span></label>
+      <label class="vk-kryss"><input type="checkbox" id="visaFacit"><span>Facit</span></label>
+    </div>
+    <button type="button" class="vk-visa" id="verktygVisa" aria-label="Visa verktygen" title="Visa verktygen" hidden>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2.2"/><circle cx="10" cy="17" r="2.2"/></svg>
+    </button>
     <svg id="bradan" viewBox="0 0 640 640" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, system-ui, sans-serif" tabindex="0" role="img" aria-label="Geobräda med ett gummiband som bildar en månghörning, och en gradskiva. Piltangenterna vrider gradskivan."></svg>
     <div class="statusrad" id="status" role="status" aria-live="polite">
       <svg class="i-info" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#3f4a5c"/><path d="M12 11v6" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="7.4" r="1.4" fill="#fff"/></svg>
@@ -493,25 +557,10 @@ details.hjalp[open] summary svg { transform: rotate(180deg); }
       </li>
     </ol>
 
-    <details class="hjalp">
-      <summary>Gradskiva och facit<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-      <div class="hjalp-kropp">
-        <label class="kryss"><input type="checkbox" id="visaGs" checked><span>Visa gradskivan</span></label>
-        <div class="rad">
-          <span class="liten-text">Vrid</span>
-          <button type="button" class="knapp" id="vridV" aria-label="Vrid gradskivan en grad moturs">−1°</button>
-          <button type="button" class="knapp" id="vridH" aria-label="Vrid gradskivan en grad medurs">+1°</button>
-          <button type="button" class="knapp" id="lagUndan">Lägg undan</button>
-        </div>
-        <label class="kryss"><input type="checkbox" id="lashjalp" checked><span>Läshjälp<small>förlänger sidorna och visar vilken skala du ska läsa</small></span></label>
-        <label class="kryss"><input type="checkbox" id="visaBagar"><span>Vinkelbågar</span></label>
-        <label class="kryss"><input type="checkbox" id="visaFacit"><span>Vinklarnas storlek<small>facit, på brädan och i protokollet</small></span></label>
-        <div class="rad">
-          <button type="button" class="knapp" id="rensa">Töm protokollet</button>
-          <button type="button" class="knapp" id="borjaOm">Börja om</button>
-        </div>
-      </div>
-    </details>
+    <div class="knapprad slut">
+      <button type="button" class="knapp" id="rensa">Töm protokollet</button>
+      <button type="button" class="knapp" id="borjaOm">Börja om</button>
+    </div>
   </aside>
 </main>
 </section>
@@ -539,7 +588,7 @@ details.hjalp[open] summary svg { transform: rotate(180deg); }
 </article>
 <footer class="sidfot"><a href="index.html">Fysiklabbet</a>·<a href="om.html">Om</a>·<a href="kontakt.html">Kontakt</a></footer>
 <!-- Öka versionsnumret när skriptet ändras (GitHub Pages cachar i tio minuter). -->
-<script src="geobrade.js?v=202611201600"></script>
+<script src="geobrade.js?v=202611201800"></script>
 <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>

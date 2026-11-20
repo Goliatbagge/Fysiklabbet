@@ -13,7 +13,7 @@ Nyhetsjobbet (`ig-daglig.md`) ligger sedan 2026-09-05 på lunchen
 lanseringskollen in i nyhetsjobbet — ett jobb per slot (uttryckligt
 önskemål 2026-08-18).
 
-**⛔ Geobrädan (`geobrade.html`, verktyget Geobräda med gradskiva) postas ALDRIG** (uttryckligt beslut 2026-11-20), inte ens om Facebook-jobbet skulle ha tagit med den.
+**⛔ Geobrädan (`geobrade.html`, verktyget Geobräda) postas ALDRIG** (uttryckligt beslut 2026-11-20), inte ens om Facebook-jobbet skulle ha tagit med den.
 
 ## 0. Läs loggen först
 

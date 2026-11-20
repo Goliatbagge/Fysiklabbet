@@ -1825,7 +1825,7 @@ förhandsvisningens adress. Filhuvudet beskriver stationerna.
 - FAQ:n i JSON-LD ska vara ordagrant samma som de synliga frågorna. Öka
   `?v=` på skriptet när det ändras.
 
-### Geobräda med gradskiva (geobrade.html)
+### Geobräda (geobrade.html)
 
 Fjärde verktyget (2026-11-20, efter en lärares önskemål i en Facebookgrupp):
 `geobrade.html` + `geobrade.js`. Ett gummiband med 3–6 hörn på en spikbräda

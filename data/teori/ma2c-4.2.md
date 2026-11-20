@@ -36,7 +36,7 @@ Vinkelsumman i en
 - fyrhörning är 360°
 :::
 
-Undersök vinkelsumman själv i den digitala <a class="artikel-lank" href="geobrade.html?n=4">geobrädan med gradskiva</a>: spänn upp en fyrhörning, mät vinklarna med gradskivan och lägg ihop dem. Pröva sedan med fler hörn.
+Undersök vinkelsumman själv i den digitala <a class="artikel-lank" href="geobrade.html?n=4">geobrädan</a>: spänn upp en fyrhörning, mät vinklarna med gradskivan och lägg ihop dem. Pröva sedan med fler hörn.
 
 ::: exempel "Exempel 1 — Vinkelsumman i en femhörning (Grund)"
 **Vad är vinkelsumman i en femhörning?**

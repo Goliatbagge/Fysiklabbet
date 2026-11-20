@@ -1,4 +1,4 @@
-/* Geobräda med gradskiva — Fysiklabbet
+/* Geobräda — Fysiklabbet
  *
  * En digital geobräda: ett gummiband spänns mellan spikar i ett rutnät och
  * bildar en månghörning med 3–6 hörn. En gradskiva av genomskinlig plast
@@ -264,8 +264,10 @@
     el('circle', { cx: 0, cy: 0, r: 4, fill: 'none', stroke: '#c8324a', 'stroke-width': 1.8, 'pointer-events': 'none' }, G);
     var H = el('g', { transform: 'translate(' + (R + 38) + ' 9)', class: 'gs-vrid' }, G);
     el('circle', { r: 19, fill: '#fffdf9', stroke: '#2f5f8a', 'stroke-width': 1.5, 'data-prot': 'vrid' }, H);
-    el('path', { d: 'M -7.5 -3.5 A 8.5 8.5 0 1 1 -4.5 6.5', fill: 'none', stroke: '#14304e', 'stroke-width': 2.1, 'stroke-linecap': 'round', 'pointer-events': 'none' }, H);
-    el('path', { d: 'M -11.2 -5.4 L -7.1 -3.6 L -5 -7.7', fill: 'none', stroke: '#14304e', 'stroke-width': 2.1, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'pointer-events': 'none' }, H);
+    // Ikon: en krökt pil medurs (samma form som ikonen rotate-cw i Lucide).
+    var Ik = el('g', { transform: 'translate(-10.8 -10.8) scale(0.9)', fill: 'none', stroke: '#14304e', 'stroke-width': 2.4, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'pointer-events': 'none' }, H);
+    el('path', { d: 'M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8' }, Ik);
+    el('path', { d: 'M21 3v5h-5' }, Ik);
     return G;
   }
 
@@ -385,7 +387,7 @@
     var ikon = 'info', t;
     var namn = mal >= 0 ? NAMN[mal] : null;
     if (!g.enkel) { t = 'Gummibandet korsar sig självt. Flytta ett hörn så att figuren blir hel igen.'; ikon = 'varn'; }
-    else if (lage.typ === 'dold') t = st.visa.riv ? 'Hörnen är avrivna och samlade runt en punkt.' : 'Gradskivan är undanlagd. Slå på den under Gradskiva och facit.';
+    else if (lage.typ === 'dold') t = st.visa.riv ? 'Hörnen är avrivna och samlade runt en punkt.' : 'Gradskivan är undanlagd. Slå på den under Verktyg uppe till höger på brädan.';
     else if (lage.typ === 'fri') t = namn ? 'Dra gradskivan så att den röda ringen mitt på nollinjen hamnar i hörn ' + namn + '.' : 'Dra gradskivan så att den röda ringen hamnar i ett hörn. Den fastnar när den kommer nära.';
     else if (lage.typ === 'horn') t = 'Bra, ringen sitter i hörn ' + NAMN[lage.k] + '. Vrid gradskivan med det runda handtaget tills nollinjen ligger längs en av sidorna.';
     else if (lage.typ === 'fel-sida') { t = 'Bågen ligger på fel sida om nollinjen. Vrid gradskivan ett halvt varv, så att bågen täcker vinkeln.'; ikon = 'varn'; }
@@ -697,6 +699,28 @@
     st.prot.x = UNDAN.x; st.prot.y = UNDAN.y; st.prot.rot = 0; st.prot.syns = true; $('visaGs').checked = true;
     sattFigur(STARTFIGUR[4].map(function (p) { return p.slice(); }));
   });
+
+  /* ---------- Verktygsrutan och fullskärm ---------- */
+  $('verktygDolj').addEventListener('click', function () { $('verktyg').hidden = true; $('verktygVisa').hidden = false; $('verktygVisa').focus(); });
+  $('verktygVisa').addEventListener('click', function () { $('verktyg').hidden = false; $('verktygVisa').hidden = true; });
+
+  // Hela arbetsytan (brädan och stegen) går i fullskärm, så att allt går att nå där.
+  var app = document.querySelector('.app');
+  var kanFs = !!(document.fullscreenEnabled || document.webkitFullscreenEnabled);
+  function iFs() { return (document.fullscreenElement || document.webkitFullscreenElement) === app; }
+  $('fsBtn').hidden = !kanFs;
+  $('fsBtn').addEventListener('click', function () {
+    if (iFs()) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+    else (app.requestFullscreen || app.webkitRequestFullscreen).call(app);
+  });
+  function fsAndrad() {
+    var pa = iFs();
+    app.classList.toggle('fs', pa);
+    $('fsBtn').setAttribute('aria-label', pa ? 'Lämna fullskärm' : 'Fullskärm');
+    $('fsBtn').title = pa ? 'Lämna fullskärm' : 'Fullskärm';
+  }
+  document.addEventListener('fullscreenchange', fsAndrad);
+  document.addEventListener('webkitfullscreenchange', fsAndrad);
 
   /* ---------- Dra och vrid på brädan ---------- */
   var drag = null;

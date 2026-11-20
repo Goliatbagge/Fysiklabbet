@@ -34,7 +34,7 @@ simuleringarna finns på norska (`?lang=nb`, commit 8e8482cc "Norska
 språkversioner, jordgloben/språkvalet och ändringar i `i18n/`, är INGEN
 lansering. Hoppa över sådana commits och flytta pekaren förbi dem.
 
-**⛔ Geobrädan (`geobrade.html`, verktyget Geobräda) postas ALDRIG** (uttryckligt beslut 2026-11-20). Den är ingen lansering att lyfta: hoppa över commits som rör den och flytta pekaren förbi dem.
+**⛔ Geobrädan (`geobrada.html`, verktyget Geobräda) postas ALDRIG** (uttryckligt beslut 2026-11-20). Den är ingen lansering att lyfta: hoppa över commits som rör den och flytta pekaren förbi dem.
 
 Finns ingen sådan lansering: logga `lansering: ingen ny lansering`,
 flytta fram `senaste lanseringskoll:`-pekaren till det du granskat och

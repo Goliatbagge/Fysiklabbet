@@ -758,8 +758,8 @@ body.lab-sim.bg-gray-950 .lab-nav > a.active { background: #e9edf3; color: var(-
     .lab-nav-dd-grupp:hover > .lab-nav-dd-undermeny,
     .lab-nav-dd-grupp:focus-within > .lab-nav-dd-undermeny { display: block; }
     .lab-nav-dd-grupp-caret { transition: transform 0.15s ease; }
-    .lab-nav-dd-grupp:hover .lab-nav-dd-grupp-caret,
-    .lab-nav-dd-grupp:focus-within .lab-nav-dd-grupp-caret { transform: rotate(90deg); }
+    .lab-nav-dd-grupp:hover > .lab-nav-dd-grupp-trigger .lab-nav-dd-grupp-caret,
+    .lab-nav-dd-grupp:focus-within > .lab-nav-dd-grupp-trigger .lab-nav-dd-grupp-caret { transform: rotate(90deg); }
 }
 
 /* =========================================================
@@ -4841,4 +4841,17 @@ body.lab-pres-active #fb-feedback-widget { display: none; }
     font-size: 11px;
     letter-spacing: 0.06em;
     color: var(--lab-ink-muted);
+}
+
+/* Resurser > Verktyg > Matematik … är menyns tredje nivå. På mellanbreda
+   skärmar fälls den ut åt VÄNSTER, ovanpå första nivån: åt höger hamnade
+   den utanför skärmkanten (820 px). Under 600 px är alla nivåer dragspel. */
+@media (min-width: 601px) and (max-width: 1000px) {
+    .lab-nav-dd-undermeny .lab-nav-dd-undermeny { left: auto; right: 100%; transform: translateX(4px); }
+    .lab-nav-dd-undermeny .lab-nav-dd-undermeny::before { left: auto; right: -9px; }
+    /* Den utfällda gruppen läggs överst, annars målas första nivåns senare
+       rader (Övningsblad, Sammanfattningar) ovanpå den tredje nivån. */
+    .lab-nav-dd-grupp:hover, .lab-nav-dd-grupp:focus-within { z-index: 3; }
+    .lab-nav-dd-undermeny .lab-nav-dd-grupp:hover > .lab-nav-dd-undermeny,
+    .lab-nav-dd-undermeny .lab-nav-dd-grupp:focus-within > .lab-nav-dd-undermeny { transform: translateX(0); }
 }

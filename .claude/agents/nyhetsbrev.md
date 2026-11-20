@@ -417,7 +417,7 @@ räkna med att en körning tar upp till en timme.)
 
 ## Får ALDRIG
 
-- Nämna geobrädan (`geobrade.html`, verktyget Geobräda) i brevet,
+- Nämna geobrädan (`geobrada.html`, verktyget Geobräda) i brevet,
   varken som nyhet, i Läs även eller i förbigående (uttryckligt beslut 2026-11-20).
 - Skicka, schemalägga eller på annat sätt distribuera brevet själv — du
   producerar utkast, människan skickar.

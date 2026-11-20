@@ -1702,7 +1702,12 @@ i `kopplingsschema.js`; läs dem innan du ändrar något.
 - **Menyvalet Resurser** (infört 2026-09-30, hette tidigare Verktyg) ligger
   efter Nationella prov i huvudmenyn. Det är en rullgardin med tre grupper,
   byggda som Ämne-menyns grupper (`.lab-nav-dd-grupp`): **Verktyg**
-  (Rita kopplingsschema, Sannolikhetskalkylator, Sannolikhetshörnan, Slumpa grupper),
+  (sedan 2026-11-20 i tre undermenyer, en tredje menynivå: **Matematik** med
+  Sannolikhetskalkylator, Sannolikhetshörnan och Geobräda, **Fysik** med Rita
+  kopplingsschema och **Lärarverktyg** med Slumpa grupper; ett nytt verktyg
+  läggs i rätt undermeny på alla sidor; på startsidan saknas Geobräda; den
+  tredje nivån fälls ut åt vänster mellan 601 och 1000 px, se slutet av
+  `styles-laborans.css`),
   **Övningsblad** (Fysik, Matematik, som går till
   `ovningsblad.html#fysik`/`#matematik`) och **Sammanfattningar** (Fysik,
   Matematik, som går till `sammanfattningar.html?amne=fysik`/`?amne=matematik`;
@@ -1825,10 +1830,10 @@ förhandsvisningens adress. Filhuvudet beskriver stationerna.
 - FAQ:n i JSON-LD ska vara ordagrant samma som de synliga frågorna. Öka
   `?v=` på skriptet när det ändras.
 
-### Geobräda (geobrade.html)
+### Geobräda (geobrada.html)
 
 Fjärde verktyget (2026-11-20, efter en lärares önskemål i en Facebookgrupp):
-`geobrade.html` + `geobrade.js`. Ett gummiband med 3–6 hörn på en spikbräda
+`geobrada.html` + `geobrada.js`. Ett gummiband med 3–6 hörn på en spikbräda
 (11 × 11) och en gradskiva som eleven själv flyttar och vrider, så att
 vinklarna mäts och skrivs in i ett mätprotokoll. Facit (bågar, gradtal,
 triangelindelning, hörnen lagda runt en punkt) slås på separat. Strukturen

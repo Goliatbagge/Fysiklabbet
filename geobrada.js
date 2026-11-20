@@ -25,7 +25,7 @@
  * bågen åt −y. Den yttre skalan visar t vid den matematiska vinkeln t från
  * +x, den inre 180 − t.
  *
- * Adressen geobrade.html?n=3 … ?n=6 väljer antalet hörn vid start.
+ * Adressen geobrada.html?n=3 … ?n=6 väljer antalet hörn vid start.
  */
 (function () {
   'use strict';

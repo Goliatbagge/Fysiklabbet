@@ -277,6 +277,7 @@ const SITEMAP_EXCLUDE = new Set([
   'nivakriterier-reviderad.html', // olänkad lokal arbetsfil (ej i repot)
   'fysik2-rorelse-wrapper.html', // olänkad wrapper
   'fysik1-enhetskollen.html',    // redirect-stub → fysik-enhetskoll.html
+  'geobrade.html',               // redirect-stub → geobrada.html
   'fysik2-dubbelspalt-3d-app.html', // redirect-stub → fysik2-dubbelspalt.html (3D och 2D sammanslagna)
   'fysik2-dubbelspalt-2d-app.html', // redirect-stub → fysik2-dubbelspalt.html?vy=2d
   // Omdirigeringssidor hör inte hemma i en sitemap — Google rapporterar dem

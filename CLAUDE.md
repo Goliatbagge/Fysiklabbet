@@ -2982,12 +2982,13 @@ det — men skriv inga egna `align-items: center`-regler på
   `.st-actions`. Rutan visas i både normalt läge och fullskärm — men i
   normalläget UTAN glidare och styrknappar (de bor då i sidopanelen,
   aldrig dubblerade).
-- **Rutan ska vara HOPFÄLLBAR**: ett kryss (`.st-hide`) i rutans övre hörn
+- **Rutan ska vara HOPFÄLLBAR**: ett minimeringsstreck (`.st-hide`, ett
+  vågrätt streck, aldrig ett kryss, se regeln nedan) i rutans övre hörn
   fäller ihop den, och en rund knapp (`.st-show-btn`, samma stil som
   `.fs-btn` men uppe till höger) tar tillbaka den. I fullskärm får rutan
   `max-width: 280px`, `max-height: calc(100vh - 28px)` och
   `overflow-y: auto`, så att den skrollar i stället för att växa ur
-  skärmen. På mobilen göms krysset — dockens eget "Dölj verktyg"-handtag
+  skärmen. På mobilen göms strecket — dockens eget "Dölj verktyg"-handtag
   sköter hopfällningen där, och det ska bara finnas EN fäll-knapp.
 - Fullskärmsknappen (`.fs-btn`) sitter uppe till vänster.
 - ⛔ **Bottenpanelen (`.fs-controls` + `.fs-toggle-handle`) används INTE i
@@ -3055,9 +3056,9 @@ Krav på mönstret:
 3. Inställningsrutan (`.scene-toggles`) uppe till höger, som i fullskärm
    även rymmer glidarna (`.st-sliders`) och styrknapparna (`.st-actions`)
    — se placeringsregeln ovan.
-4. Hopfällbarhet: krysset `.st-hide` i rutans hörn fäller ihop den, runda
+4. Hopfällbarhet: minimeringsstrecket `.st-hide` i rutans hörn fäller ihop den, runda
    `.st-show-btn` tar tillbaka den (göms båda aldrig samtidigt; på mobil
-   göms krysset och dockens handtag tar över).
+   göms strecket och dockens handtag tar över).
 5. Tunga/sällan använda kontroller stannar i sidopanelen utanför scenen.
 6. `user-select: none` på scen-wrappern (förhindrar att etiketter markeras
    blått när användaren drar i scenen).
@@ -3089,6 +3090,22 @@ i sekunden).
 - `node .claude/verify-glidare-remount.js` hittar båda mönstren. Kör den
   före commit när du skrivit eller ändrat reglage i en simulering, och dra
   i varje glidare i fullskärm innan simuleringen räknas som klar.
+
+### ⛔ Kryss stänger, streck fäller ihop
+
+**En knapp som fäller ihop eller minimerar en ruta (verktygsrutan i en
+simulering, `.st-hide`, `.vk-dolj` i geobrädan) visar ett vågrätt
+minimeringsstreck, aldrig ett kryss** (användarkrav 2026-11-20). Ett kryss
+betyder att rutan stängs och försvinner, och den som ser det tror inte att
+rutan går att få tillbaka. Rutan kommer ju tillbaka med den runda knappen.
+
+- Ikonen är ett enda streck: `<path d="M6 12h12"/>` i en 24-ruta, i
+  `currentColor` med rundade ändar. Etiketten säger vad som händer:
+  `aria-label="Fäll ihop verktygen"`, inte "Stäng".
+- **Kryss används bara när något verkligen stängs eller tas bort**: en
+  dialog som stängs, en notis som avfärdas, en rad som raderas.
+- Äldre simuleringar har kryss på `.st-hide`. Byt till strecket när du
+  ändå arbetar i en sådan sida.
 
 ### Mobil (≤600px): scenen överst, verktygen UNDER — aldrig ovanpå
 

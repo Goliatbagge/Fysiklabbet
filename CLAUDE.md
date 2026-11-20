@@ -1730,6 +1730,10 @@ i `kopplingsschema.js`; läs dem innan du ändrar något.
   registreras där syns alltså både på avsnittets kort och på översikten,
   utan att sidan behöver ändras.
 - **Sökrutan** hittar verktygen via listan `VERKTYG` överst i `data/sok.js`.
+- **Glödlampan (`feedback.js`) ska finnas på varje verktygssida**, precis
+  som på simuleringarna, så att besökaren kan lämna synpunkter på sidan
+  (användarkrav 2026-11-20). Lägg `<script src="feedback.js" defer></script>`
+  före `</body>` i ett nytt verktyg.
 - **Öka versionsnumret** i `<script src="kopplingsschema.js?v=…">` när
   skriptet ändras. GitHub Pages låter webbläsaren spara filerna i tio
   minuter, och en ny HTML-fil med ett gammalt skript ger konstiga blandfel.

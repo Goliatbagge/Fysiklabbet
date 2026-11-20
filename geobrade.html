@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow">
+<title>Geobräda med gradskiva: undersök vinkelsumman — Fysiklabbet</title>
+<meta name="description" content="En digital geobräda med gradskiva. Spänn gummibandet till en triangel, fyrhörning eller femhörning, mät vinklarna själv med gradskivan och upptäck vinkelsumman. Gratis och utan inloggning.">
+<link rel="canonical" href="https://fysiklabbet.se/geobrade.html">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fysiklabbet">
+<meta property="og:locale" content="sv_SE">
+<meta property="og:title" content="Geobräda med gradskiva: undersök vinkelsumman">
+<meta property="og:description" content="En digital geobräda med gradskiva. Spänn gummibandet till en triangel, fyrhörning eller femhörning, mät vinklarna själv med gradskivan och upptäck vinkelsumman. Gratis och utan inloggning.">
+<meta property="og:url" content="https://fysiklabbet.se/geobrade.html">
+<meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Geobräda med gradskiva: undersök vinkelsumman">
+<meta name="twitter:description" content="En digital geobräda med gradskiva. Spänn gummibandet till en triangel, fyrhörning eller femhörning, mät vinklarna själv med gradskivan och upptäck vinkelsumman. Gratis och utan inloggning.">
+<meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebApplication",
+   "name": "Geobräda med gradskiva",
+   "alternateName": ["Digital geobräda", "Geobräde", "Spikbräda med gradskiva"],
+   "url": "https://fysiklabbet.se/geobrade.html",
+   "description": "En digital geobräda med gradskiva. Spänn gummibandet till en triangel, fyrhörning eller femhörning, mät vinklarna själv med gradskivan och upptäck vinkelsumman. Gratis och utan inloggning.",
+   "applicationCategory": "EducationalApplication",
+   "operatingSystem": "Webbläsare",
+   "inLanguage": "sv",
+   "isAccessibleForFree": true,
+   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "SEK" },
+   "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
+   "featureList": [
+    "Geobräda med 11 × 11 spikar och ett gummiband med 3–6 hörn",
+    "Gradskiva som flyttas och vrids fritt och lägger sig mot ett hörn",
+    "Mätprotokoll där eleven skriver in sina uppmätta vinklar",
+    "Facit med vinkelbågar och vinklarnas storlek",
+    "Indelning i trianglar och hörnen lagda intill varandra"
+   ],
+   "publisher": { "@type": "Organization", "name": "Fysiklabbet", "url": "https://fysiklabbet.se/" }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Start", "item": "https://fysiklabbet.se/" },
+    { "@type": "ListItem", "position": 2, "name": "Geobräda med gradskiva", "item": "https://fysiklabbet.se/geobrade.html" }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Hur mäter man en vinkel med gradskivan?",
+     "acceptedAnswer": { "@type": "Answer", "text": "Dra gradskivan så att den lilla röda ringen mitt på nollinjen hamnar i vinkelns hörn. Vrid den med det runda handtaget tills nollinjen ligger längs den ena sidan. Läs sedan av där den andra sidan korsar skalan. Börja räkna från den nolla som ligger på sidan du lagt an mot." }
+    },
+    {
+     "@type": "Question",
+     "name": "Varför blir min summa inte exakt 360 grader?",
+     "acceptedAnswer": { "@type": "Answer", "text": "En mätning med gradskiva är aldrig helt exakt, och varje vinkel kan bli en grad fel åt något håll. Då kan summan av fyra vinklar hamna några grader från 360°. Jämför dina värden mot facit och pröva att mäta den vinkel som skiljer mest en gång till." }
+    },
+    {
+     "@type": "Question",
+     "name": "Kostar verktyget något?",
+     "acceptedAnswer": { "@type": "Answer", "text": "Nej. Verktyget är gratis, kräver inget konto och fungerar på dator, surfplatta och mobil." }
+    }
+   ]
+  }
+ ]
+}
+</script>
+<link rel="stylesheet" href="styles-laborans.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f3eee4;
+  --panel: #fffdf9;
+  --ink: #0f1620;
+  --soft: #3f4a5c;
+  --muted: #69655c;
+  --line: rgba(15, 22, 32, 0.10);
+  --line2: rgba(15, 22, 32, 0.20);
+  --accent: #c8324a;
+  --shadow: 0 1px 2px rgba(15, 22, 32, 0.05), 0 12px 32px -18px rgba(15, 22, 32, 0.28);
+  --sans: "DM Sans", system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  --serif: "Instrument Serif", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background:
+    radial-gradient(900px 500px at 12% -10%, rgba(200, 50, 74, 0.06), transparent 60%),
+    radial-gradient(900px 600px at 100% 0%, rgba(28, 61, 107, 0.06), transparent 60%),
+    var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+button, input { font-family: inherit; font-size: inherit; color: inherit; }
+.lab-header { background: var(--bg); }
+.lab-nav-dd-trigger.aktiv { border-bottom-color: var(--lab-accent); }
+[hidden] { display: none !important; }
+
+.top { padding: 14px 22px 12px; max-width: 1280px; margin: 0 auto; }
+.top h1 { font-family: var(--serif); font-weight: 400; font-size: 34px; line-height: 1; margin: 0; letter-spacing: -.01em; }
+.top h1 em { color: var(--accent); }
+.top p { margin: 6px 0 0; color: var(--soft); font-size: 14px; max-width: 760px; }
+
+.app { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 16px; padding: 0 22px 28px; max-width: 1280px; margin: 0 auto; align-items: start; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); }
+.brada-wrap { padding: 12px; }
+#bradan { display: block; width: 100%; height: auto; max-height: max(360px, calc(100vh - 205px)); aspect-ratio: 1; margin: 0 auto; touch-action: none; user-select: none; -webkit-user-select: none; }
+#bradan .horn-grepp { cursor: grab; }
+#bradan .gs-kropp { cursor: move; }
+#bradan .gs-vrid { cursor: grab; }
+#bradan.drar, #bradan.drar * { cursor: grabbing !important; }
+#bradan .gs-tal { font: 600 13px var(--sans); fill: #16314f; pointer-events: none; }
+#bradan .gs-tal2 { font: 500 10px var(--sans); fill: #3d6488; pointer-events: none; }
+#bradan .hornnamn { font: 600 21px var(--sans); fill: #1f2530; pointer-events: none; }
+#bradan .vinkeltal { font: 700 17px var(--sans); pointer-events: none; }
+.hornnamn.liten { font: 600 15px var(--sans); }
+
+aside.panel { padding: 16px 16px 18px; display: flex; flex-direction: column; gap: 18px; }
+.sek h2 { font: 600 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+.seg { display: flex; background: var(--bg); border-radius: 10px; padding: 3px; gap: 2px; }
+.seg button { flex: 1; border: 0; background: none; padding: 7px 8px; border-radius: 8px; font: 600 14px var(--sans); color: var(--soft); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgba(15, 22, 32, .16); }
+.rad { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 8px; }
+.knapp { border: 1px solid var(--line2); background: var(--panel); border-radius: 10px; padding: 7px 12px; font: 500 13.5px var(--sans); cursor: pointer; }
+.knapp:hover { border-color: var(--ink); }
+.knapp.primar { background: var(--ink); color: #fff; border-color: var(--ink); }
+.knapp.primar:hover { background: #22324a; }
+.chip { min-width: 34px; border: 1px solid var(--line2); background: var(--panel); border-radius: 9px; padding: 6px 9px; font: 600 13.5px var(--sans); cursor: pointer; }
+.chip:hover { border-color: var(--ink); }
+.liten-text { font-size: 12.5px; color: var(--muted); }
+.kryss { display: flex; gap: 9px; align-items: center; font-size: 14px; padding: 4px 0; cursor: pointer; }
+.kryss input { width: 16px; height: 16px; accent-color: var(--ink); margin: 0; }
+
+table.prot { width: 100%; border-collapse: collapse; font-size: 14px; }
+table.prot th, table.prot td { padding: 5px 4px; text-align: left; border-bottom: 1px solid var(--line); }
+table.prot thead th { font: 600 10.5px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+table.prot tbody th { font-weight: 500; white-space: nowrap; }
+.prick { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 7px; vertical-align: 1px; }
+.matt { display: inline-flex; align-items: center; gap: 3px; }
+.matt input { width: 68px; padding: 5px 7px; border: 1px solid var(--line2); border-radius: 8px; background: #fff; text-align: right; font-variant-numeric: tabular-nums; }
+.matt input:focus { outline: 2px solid rgba(28, 61, 107, .35); border-color: #1c3d6b; }
+.facit-cell { font-weight: 600; font-variant-numeric: tabular-nums; }
+.summarad { display: flex; justify-content: space-between; align-items: baseline; margin-top: 10px; font-size: 14.5px; }
+.summarad b { font-size: 20px; font-variant-numeric: tabular-nums; }
+.facitsumma { margin-top: 6px; padding: 8px 10px; background: rgba(63, 122, 52, .09); border-radius: 9px; font-size: 14px; color: #2c5a24; }
+.varning { padding: 9px 11px; border-radius: 10px; background: rgba(200, 50, 74, .09); color: #8a1f31; font-size: 13.5px; line-height: 1.45; }
+.uppdrag { margin: 0; padding-left: 20px; font-size: 13.5px; line-height: 1.5; color: var(--soft); }
+.uppdrag li { margin-bottom: 4px; }
+.info { font-size: 13.5px; color: var(--soft); line-height: 1.45; margin: 6px 0 0; }
+#hornRuta { text-align: center; }
+#hornSvg { width: 190px; height: 190px; display: block; margin: 4px auto 0; }
+
+.seo { border-top: 1px solid var(--line2); background: var(--panel); }
+.seo-inner { max-width: 860px; margin: 0 auto; padding: 56px 24px 72px; color: var(--soft); font-size: 16.5px; line-height: 1.7; }
+.seo h2 { font-family: var(--serif); font-weight: 400; font-size: 32px; line-height: 1.15; color: var(--ink); margin: 52px 0 14px; letter-spacing: -.01em; }
+.seo h2:first-of-type { margin-top: 10px; }
+.seo p { margin: 0 0 14px; }
+.seo b { color: var(--ink); font-weight: 600; }
+.seo a { color: var(--ink); }
+.seo-lede { font-size: 18px; color: var(--ink); }
+.seo-steps { margin: 0; padding-left: 22px; }
+.seo-steps li { margin-bottom: 10px; padding-left: 4px; }
+.faq details { border-bottom: 1px solid var(--line); padding: 12px 0; }
+.faq summary { cursor: pointer; color: var(--ink); font-weight: 600; }
+.faq details p { margin: 8px 0 0; }
+.sidfot { text-align: center; padding: 26px 16px 40px; font: 500 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.sidfot a { color: inherit; text-decoration: none; margin: 0 8px; }
+.sidfot a:hover { color: var(--ink); }
+
+@media (max-width: 900px) {
+  .app { grid-template-columns: 1fr; }
+  #bradan { max-height: none; }
+}
+@media (max-width: 600px) {
+  .top { padding: 12px 16px 10px; }
+  .top h1 { font-size: 28px; }
+  .app { padding: 0 10px 22px; gap: 12px; }
+  .brada-wrap { padding: 6px; }
+  .seo-inner { padding: 40px 16px 56px; }
+  .seo h2 { font-size: 27px; }
+}
+</style>
+</head>
+<body>
+<div class="lab-header">
+  <div class="lab-header-inner">
+    <a class="lab-logo" href="index.html">
+      <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+        <g transform="rotate(-24 18 18)">
+          <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+          <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+        </g>
+        <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+      </svg>
+      <span class="lab-logo-text">Fysiklabbet</span>
+    </a>
+    <nav class="lab-nav" aria-label="Huvudnavigation">
+      <a href="index.html">Start</a>
+      <div class="lab-nav-dd">
+        <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">Ämne <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></button>
+        <div class="lab-nav-dd-menu">
+          <div class="lab-nav-dd-grupp">
+            <button type="button" class="lab-nav-dd-grupp-trigger">Fysik <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button>
+            <div class="lab-nav-dd-undermeny">
+              <a href="katalog.html#fy1">Nivå 1</a>
+              <a href="katalog.html#fy2">Nivå 2</a>
+            </div>
+          </div>
+          <div class="lab-nav-dd-grupp">
+            <button type="button" class="lab-nav-dd-grupp-trigger">Matematik <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button>
+            <div class="lab-nav-dd-undermeny">
+              <a href="katalog.html#ma1b">Nivå 1b</a>
+              <a href="katalog.html#ma1c">Nivå 1c</a>
+              <a href="katalog.html#ma2b">Nivå 2b</a>
+              <a href="katalog.html#ma2c">Nivå 2c</a>
+            </div>
+          </div>
+          <div class="lab-nav-dd-grupp">
+            <button type="button" class="lab-nav-dd-grupp-trigger">Matematik – fortsättning <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button>
+            <div class="lab-nav-dd-undermeny">
+              <a href="katalog.html#ma3b">Nivå 1b</a>
+              <a href="katalog.html#ma3c">Nivå 1c</a>
+              <a href="katalog.html#ma4">Nivå 2</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="simuleringar.html">Simuleringar</a>
+      <div class="lab-nav-dd">
+          <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+              Nationella prov
+              <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+          </button>
+          <div class="lab-nav-dd-menu lab-nav-dd-menu--kort">
+              <a href="np.html?amne=fysik">Fysik</a>
+              <a href="np.html?amne=matematik">Matematik</a>
+          </div>
+      </div>
+      <div class="lab-nav-dd">
+        <button type="button" class="lab-nav-dd-trigger aktiv" aria-haspopup="true">
+          Resurser
+          <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+        </button>
+        <div class="lab-nav-dd-menu">
+          <div class="lab-nav-dd-grupp">
+            <button type="button" class="lab-nav-dd-grupp-trigger">
+              Verktyg
+              <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+            </button>
+            <div class="lab-nav-dd-undermeny">
+              <a href="kopplingsschema.html">Rita kopplingsschema</a>
+              <a href="sannolikhetskalkylator.html">Sannolikhetskalkylator</a>
+              <a href="sannolikhetshornan.html">Sannolikhetshörnan</a>
+              <a href="slumpa-grupper.html">Slumpa grupper</a>
+              <a href="geobrade.html" aria-current="page">Geobräda med gradskiva</a>
+                          </div>
+          </div>
+          <div class="lab-nav-dd-grupp">
+            <button type="button" class="lab-nav-dd-grupp-trigger">
+              Övningsblad
+              <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+            </button>
+            <div class="lab-nav-dd-undermeny">
+              <a href="ovningsblad.html#fysik">Fysik</a>
+              <a href="ovningsblad.html#matematik">Matematik</a>
+            </div>
+          </div>
+          <div class="lab-nav-dd-grupp">
+            <button type="button" class="lab-nav-dd-grupp-trigger">
+              Sammanfattningar
+              <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+            </button>
+            <div class="lab-nav-dd-undermeny">
+              <a href="sammanfattningar.html?amne=fysik">Fysik</a>
+              <a href="sammanfattningar.html?amne=matematik">Matematik</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="nyheter.html">Fysiknyheter</a>
+      <a href="om.html">Om</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
+  </div>
+</div>
+<section id="verktyget" aria-label="Geobräda med gradskiva">
+<header class="top">
+  <h1>Geo<em>bräda</em></h1>
+  <p>Dra i hörnen för att spänna gummibandet. Flytta gradskivan till ett hörn, vrid den med det runda handtaget och mät vinkeln. Skriv in det du mäter i protokollet.</p>
+</header>
+<main class="app">
+  <div class="panel brada-wrap">
+    <svg id="bradan" viewBox="0 0 640 640" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, system-ui, sans-serif" role="img" aria-label="Geobräda med ett gummiband som bildar en månghörning, och en gradskiva."></svg>
+  </div>
+  <aside class="panel" aria-label="Inställningar och mätprotokoll">
+    <div class="sek">
+      <h2>Figur: <span id="figurnamn">fyrhörning</span></h2>
+      <div class="seg" role="group" aria-label="Antal hörn">
+        <button type="button" data-n="3">3 hörn</button>
+        <button type="button" data-n="4">4 hörn</button>
+        <button type="button" data-n="5">5 hörn</button>
+        <button type="button" data-n="6">6 hörn</button>
+      </div>
+      <div class="rad"><button type="button" class="knapp" id="nyFigur">Ny figur</button></div>
+      <div class="varning" id="varning" hidden style="margin-top:10px">Gummibandet korsar sig självt. Flytta ett hörn så att figuren blir en riktig månghörning igen.</div>
+    </div>
+
+    <div class="sek">
+      <h2>Gradskiva</h2>
+      <label class="kryss"><input type="checkbox" id="visaGs" checked> Visa gradskivan</label>
+      <div class="rad">
+        <span class="liten-text">Vrid</span>
+        <button type="button" class="knapp" id="vridV" aria-label="Vrid gradskivan en grad moturs">−1°</button>
+        <button type="button" class="knapp" id="vridH" aria-label="Vrid gradskivan en grad medurs">+1°</button>
+        <button type="button" class="knapp" id="lagUndan">Lägg undan</button>
+      </div>
+      <div class="rad"><span class="liten-text">Lägg an mot hörn</span><span id="hornknappar" class="rad" style="margin-top:0"></span></div>
+    </div>
+
+    <div class="sek">
+      <h2>Mätprotokoll</h2>
+      <table class="prot">
+        <thead><tr><th scope="col">Hörn</th><th scope="col">Uppmätt</th><th scope="col" id="facitKol" hidden>Facit</th></tr></thead>
+        <tbody id="protokoll"></tbody>
+      </table>
+      <div class="summarad"><span>Summa av dina mätningar</span><b id="summa">–</b></div>
+      <p class="liten-text" id="summaInfo" style="margin:2px 0 0"></p>
+      <div class="facitsumma" id="facitSumma" hidden>Vinkelsumman är exakt <b id="facitSummaVarde">360°</b></div>
+      <div class="rad"><button type="button" class="knapp" id="rensa">Töm protokollet</button></div>
+    </div>
+
+    <div class="sek">
+      <h2>Visa</h2>
+      <label class="kryss"><input type="checkbox" id="visaBagar"> Vinkelbågar</label>
+      <label class="kryss"><input type="checkbox" id="visaFacit"> Vinklarnas storlek (facit)</label>
+      <label class="kryss"><input type="checkbox" id="visaTrianglar"> Dela in i trianglar</label>
+      <p class="info" id="triangelInfo" hidden></p>
+      <label class="kryss"><input type="checkbox" id="visaHorn"> Lägg hörnen intill varandra</label>
+      <div id="hornRuta" hidden>
+        <svg id="hornSvg" viewBox="-80 -80 160 160" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, system-ui, sans-serif" role="img" aria-label="Figurens vinklar utklippta och lagda intill varandra runt en punkt."></svg>
+        <p class="info" id="hornText"></p>
+      </div>
+    </div>
+
+    <div class="sek">
+      <h2>Undersök</h2>
+      <ol class="uppdrag">
+        <li>Mät alla vinklar i fyrhörningen och skriv in dem.</li>
+        <li>Lägg ihop vinklarna. Vad blir summan?</li>
+        <li>Gör en ny fyrhörning, gärna en som buktar inåt, och mät igen. Vad märker du?</li>
+        <li>Pröva med tre, fem och sex hörn. Kan du hitta ett mönster?</li>
+      </ol>
+    </div>
+  </aside>
+</main>
+</section>
+
+<article class="seo" id="om-verktyget">
+  <div class="seo-inner">
+    <h2>En geobräda med gradskiva</h2>
+    <p class="seo-lede">En geobräda är en bräda med spikar i ett rutnät, där man spänner ett gummiband till en figur. Här finns den digitalt, tillsammans med en gradskiva som eleverna själva lägger an och läser av. Med den kan klassen undersöka vinkelsumman i trianglar, fyrhörningar och andra månghörningar och upptäcka sambandet själva.</p>
+    <h2>Så använder du geobrädan</h2>
+    <ol class="seo-steps">
+      <li><b>Spänn gummibandet.</b> Välj antal hörn och dra hörnen mellan spikarna, eller tryck på Ny figur.</li>
+      <li><b>Lägg an gradskivan.</b> Dra den så att den röda ringen mitt på nollinjen hamnar i ett hörn. Den fastnar när den är nära. Vrid den med det runda handtaget tills nollinjen ligger längs ena sidan; den lägger sig rätt när den är nära. Knapparna Lägg an mot hörn gör samma sak med ett klick.</li>
+      <li><b>Läs av och skriv in.</b> Läs av vinkeln på skalan och skriv in den i mätprotokollet. Summan räknas ut medan du skriver.</li>
+      <li><b>Kontrollera mot facit.</b> Slå på vinklarnas storlek, dela in figuren i trianglar eller lägg hörnen intill varandra runt en punkt för att se varför summan blir som den blir.</li>
+    </ol>
+    <h2>Vinkelsumman i en månghörning</h2>
+    <p>Vinkelsumman i en triangel är 180°. En fyrhörning kan alltid delas i två trianglar med en diagonal, och därför är vinkelsumman i en fyrhörning 2 · 180° = 360°. En femhörning delas i tre trianglar och har vinkelsumman 540°. Läs mer i genomgången <a href="katalog.html?id=ma2c-4.2">Vinklar i trianglar och månghörningar</a>.</p>
+    <h2>Vanliga frågor</h2>
+    <div class="faq">
+      <details><summary>Hur mäter man en vinkel med gradskivan?</summary><p>Dra gradskivan så att den lilla röda ringen mitt på nollinjen hamnar i vinkelns hörn. Vrid den med det runda handtaget tills nollinjen ligger längs den ena sidan. Läs sedan av där den andra sidan korsar skalan. Börja räkna från den nolla som ligger på sidan du lagt an mot.</p></details>
+      <details><summary>Varför blir min summa inte exakt 360 grader?</summary><p>En mätning med gradskiva är aldrig helt exakt, och varje vinkel kan bli en grad fel åt något håll. Då kan summan av fyra vinklar hamna några grader från 360°. Jämför dina värden mot facit och pröva att mäta den vinkel som skiljer mest en gång till.</p></details>
+      <details><summary>Kostar verktyget något?</summary><p>Nej. Verktyget är gratis, kräver inget konto och fungerar på dator, surfplatta och mobil.</p></details>
+    </div>
+  </div>
+</article>
+<footer class="sidfot"><a href="index.html">Fysiklabbet</a>·<a href="om.html">Om</a>·<a href="kontakt.html">Kontakt</a></footer>
+<!-- Öka versionsnumret när skriptet ändras (GitHub Pages cachar i tio minuter). -->
+<script src="geobrade.js?v=202611201200"></script>
+<!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

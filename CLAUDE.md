@@ -1707,7 +1707,7 @@ i `kopplingsschema.js`; läs dem innan du ändrar något.
   kopplingsschema och **Lärarverktyg** med Slumpa grupper; ett nytt verktyg
   läggs i rätt undermeny på alla sidor, och verktygen står i bokstavsordning
   i varje undermeny (Geobräda före Sannolikhetshörnan och
-  Sannolikhetskalkylator); på startsidan saknas Geobräda; den
+  Sannolikhetskalkylator), på startsidan också; den
   tredje nivån fälls ut åt vänster mellan 601 och 1000 px, se slutet av
   `styles-laborans.css`),
   **Övningsblad** (Fysik, Matematik, som går till
@@ -1846,9 +1846,11 @@ triangelindelning, hörnen lagda runt en punkt) slås på separat. Strukturen
 beskrivs i filhuvudet. Teoriavsnittet `ma2c-4.2` länkar hit.
 
 - **⛔ Verktyget nämns aldrig på Facebook, Instagram eller i nyhetsbrevet**
-  (uttryckligt beslut 2026-11-20) och syns inte alls på startsidan: inte i
-  `UPDATES`, inte i menyn och inte i sidfotens lista i `index.html`, fast
-  den finns i Resurser-menyn på övriga sidor. Regeln står i
+  (uttryckligt beslut 2026-11-20) och marknadsförs inte på startsidan:
+  inte i `UPDATES`, inte i verktygslistan och inte i sidfotens lista i
+  `index.html`. Däremot ska den finnas i Resurser-menyn på ALLA sidor,
+  också startsidan (förtydligat samma dag: "Menyn ska den finnas och synas
+  i. Bara att den inte ska marknadsföras tydligt någonstans"). Regeln står i
   `fb-lansering.md`, `ig-lansering.md` och `nyhetsbrev.md`.
 - Öka `?v=` på skriptet när det ändras. FAQ:n i JSON-LD ska vara ordagrant
   samma som de synliga frågorna.

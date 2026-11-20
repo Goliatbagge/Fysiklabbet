@@ -1,0 +1,34 @@
+03:15:02  [idag] === Nyhetsjobb: start (2026-11-20) ===
+03:15:04  [idag] Dagens nyhet finns (förberedd i går).
+03:15:04  [idag] Startar Claude Code (headless, modell opus, nyckel)...
+03:20:02  [imorgon] === Nyhetsjobb: start (2026-11-20) ===
+03:20:02  [imorgon] En körning pågår redan (lås 5 min gammalt). Avslutar.
+03:27:53  [idag] Morgondagens nyhet är skriven, granskad och committad på grenen `nyhetsjobb` (commit `654b9fcc`). Jag har inte pushat och inte mejlat.
+03:27:53  [idag] 
+03:27:53  [idag] **Artikeln:** ”Skakade stålkulor minns hur de svalnade” (`2026-11-21-kulorna-som-minns`, kategori Termodynamik, datum 2026-11-21). Den handlar om Kovacs minneseffekt i ett skakat lager av 4 711 stålkulor, publicerad i *Physical Review Letters* 137, 208201 den 10 november. Jag hittade den via Physics Magazine och läste hela studien i arXiv-versionen. Gårdagens artikel var elektromagnetism, så området skiljer sig från grannen.
+03:27:53  [idag] 
+03:27:53  [idag] **Granskning:** Utgivaren gav först RÄTTA FÖRST. Ingressen påstod mer än studien, och lärarfråga 1 hade inget entydigt svar. Jag rättade båda och tog med tre rekommendationer, och efterkontrollen blev GODKÄND. Utslagen står i `granskningar.md`.
+03:27:53  [idag] 
+03:27:53  [idag] **Bild:** Huvudbilden är en AI-illustration från Gemini, märkt som sådan. Jag hittade ingen fri riktig bild: studiens foto får inte användas, eftersom arXiv-licensen inte medger det och PRL-artikeln inte är öppen.
+03:27:53  [idag] 
+03:27:53  [idag] **Ordlistan:** Tre nya begrepp: granulärt material, Kovacseffekten och Mpembaeffekten.
+03:27:53  [idag] 
+03:27:53  [idag] **Övrigt i committen:** delningssida, `feed.xml`, `sitemap.xml`, `publicerat.md` och `ko.md`. `verify-navigation`, `verify-begrepp` och `verify-sitemap` är gröna. `verify-nbsp-enhet` är inte helt grön, men de fyra fel som återstår fanns i äldre poster och rör inte den nya artikeln.
+03:27:53  [idag] 
+03:27:53  [idag] **Valt bort i dag:** Den starkaste kandidaten var University of Queenslands meddelande som skickades genom gravitationen med en hiss. Jag sköt upp den eftersom gårdagens artikel också handlade om att skicka meddelanden på ett ovanligt sätt. Den ligger nu i kön direkt under brevteasern, som jag inte rörde (KM3NeT ligger kvar som teaser), med noteringen att den kan tas tidigast 2026-11-22. Två andra uppslag lades också i kön: turbulenskapslarna och de urtida svarta hålen.
+03:27:53  [idag] 
+03:27:53  [idag] **Ej committat:** Byggskriptet skrev om radsluten i en mängd delningssidor och i `i18n/gemensamt.js` och `i18n/manifest.js`. Det ändrar inget innehåll, så jag lät dem ligga utanför committen, liksom mappen `.claude/nyheter/logg/`.
+03:27:54  [idag] Claude avslutade med kod 0
+03:27:54  [idag] error: cannot pull with rebase: You have unstaged changes.
+03:27:54  [idag] error: Please commit or stash them.
+03:27:58  [idag] Pushat till main.
+03:27:58  [idag] Artikel 2026-11-21 pushad: 2026-11-21-kulorna-som-minns
+03:29:29  [idag] https://fysiklabbet.se/nyheter.html?forhand=2026-11-21-kulorna-som-minns
+03:29:29  [idag] Mejlet byggt av mallen (C:\claude\Fysiklabbet-nyhetsjobb\.claude\nyheter\logg\mejl-2026-11-21).
+03:29:29  [idag] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+03:30:25  [idag] Sent. The email with subject "[Nyhet 2026-11-21] Att granska: Skakade stålkulor minns hur de svalnade" went to [ägaren], with the `[[UTGIVARE]]` placeholder replaced by a summary noting the utgivare's two requested fixes — sharpening the intro's "first time" claim to specifically temperature in granular material (not granular materials generally, since memory effects in granular compaction were known since 2000), and clarifying an ambiguous teacher question about reference frames — both now applied.
+03:30:26  [idag] Claude avslutade med kod 0
+03:30:26  [idag] FEL: Granskningsmejlet misslyckades (Claude-sessionen gav inget kvitto på att mejlet skickades.) Larmar via GitHub.
+03:30:28  [idag] https://github.com/Goliatbagge/Fysiklabbet/actions/runs/44661285790
+03:30:29  [idag] Larmet skickat till GitHub (Nyhetsjobb-larm).
+03:30:29  [idag] === Nyhetsjobb: slut ===

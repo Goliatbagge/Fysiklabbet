@@ -1705,7 +1705,9 @@ i `kopplingsschema.js`; läs dem innan du ändrar något.
   (sedan 2026-11-20 i tre undermenyer, en tredje menynivå: **Matematik** med
   Sannolikhetskalkylator, Sannolikhetshörnan och Geobräda, **Fysik** med Rita
   kopplingsschema och **Lärarverktyg** med Slumpa grupper; ett nytt verktyg
-  läggs i rätt undermeny på alla sidor; på startsidan saknas Geobräda; den
+  läggs i rätt undermeny på alla sidor, och verktygen står i bokstavsordning
+  i varje undermeny (Geobräda före Sannolikhetshörnan och
+  Sannolikhetskalkylator); på startsidan saknas Geobräda; den
   tredje nivån fälls ut åt vänster mellan 601 och 1000 px, se slutet av
   `styles-laborans.css`),
   **Övningsblad** (Fysik, Matematik, som går till

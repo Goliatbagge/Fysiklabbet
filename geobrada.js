@@ -677,12 +677,18 @@
     else if (a === 'gissa') { st.gissning = b.dataset.g; ritaKort(); }
     else if (a === 'till-steg') gaTill(+b.dataset.s);
     else if (a === 'riv') {
+      // Riv av hörnen och Dela i trianglar visas en i taget: båda på brädan
+      // samtidigt blir bara grötigt. Att välja den ena släcker den andra.
       st.visa.riv = !st.visa.riv;
-      if (st.visa.riv) { st.prot.syns = false; $('visaGs').checked = false; rita(); startRiv(); }
+      if (st.visa.riv) { st.visa.trianglar = false; st.delaNy = false; st.prot.syns = false; $('visaGs').checked = false; rita(); startRiv(); }
       else { stopRiv(); rita(); }
       ritaKort();
     }
-    else if (a === 'dela') { st.visa.trianglar = !st.visa.trianglar; st.delaNy = st.visa.trianglar; rita(); ritaKort(); }
+    else if (a === 'dela') {
+      st.visa.trianglar = !st.visa.trianglar; st.delaNy = st.visa.trianglar;
+      if (st.visa.trianglar && st.visa.riv) { st.visa.riv = false; stopRiv(); }
+      rita(); ritaKort();
+    }
     else if (a === 'monster') { st.monster = true; ritaKort(); }
   });
 

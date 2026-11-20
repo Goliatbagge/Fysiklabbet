@@ -71,3 +71,11 @@
 19:15:28  [svar] Claude avslutade med kod 0
 19:15:28  [svar] VARNING: svarskontrollen gav inget SVAR-besked. Försöker igen vid nästa körning.
 19:15:28  [svar] === Nyhetsjobb: slut ===
+22:15:03  [svar] === Nyhetsjobb: start (2026-11-20) ===
+22:15:05  [svar] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+22:15:25  [svar] There's exactly one thread with a subject starting with `[Nyhet` from the last 4 days: the review email for tomorrow's article (2026-11-21, "Skakade stålkulor minns hur de svalnade"), sent 2026-11-20. It has only 1 message — the original review request itself, no reply from the owner yet.
+22:15:25  [svar] 
+22:15:25  [svar] **Status: no reply yet.** The owner hasn't responded (with OK, changes, or "stoppa") to this review email, so under the standing rule the article will publish automatically at midnight without a response.
+22:15:26  [svar] Claude avslutade med kod 0
+22:15:26  [svar] VARNING: svarskontrollen gav inget SVAR-besked. Försöker igen vid nästa körning.
+22:15:26  [svar] === Nyhetsjobb: slut ===

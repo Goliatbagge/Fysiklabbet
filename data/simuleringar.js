@@ -49,7 +49,7 @@ window.SIM_NAMES = {
   'fysik1-newtons-gravitationslag.html': [
     { name: 'Newtons gravitationslag', desc: 'Kraften mellan två massor, F = G · m₁ · m₂ / r².',
       kw: ['krafter','mekanik','newton','gravitation','gravitationslag','gravitationskraft','tyngdkraft','planet','invers kvadratlag','massa','avstånd','rymd','astronomi'] },
-    { name: 'Trekropparsproblemet', href: 'fysik1-trekropparsproblemet-app.html', desc: 'Tre stjärnor drar i varandra med gravitationslagen. Släpp dem från vila och se vem som slungas ut, följ krafterna mellan paren och se fjärilseffekten.',
+    { name: 'Trekropparsproblemet', href: 'fysik1-trekropparsproblemet-app.html', desc: 'Tre stjärnor drar i varandra med gravitationslagen. Släpp dem från vila och se vilken av dem som slungas ut, följ krafterna mellan paren och se fjärilseffekten.',
       kw: ['krafter','mekanik','gravitation','gravitationslag','gravitationskraft','trekropparsproblemet','tre kroppar','tre stjärnor','stjärna','stjärnor','dubbelstjärna','trippelstjärna','kaos','kaotisk','fjärilseffekten','pythagoreiska problemet','utkastning','slangbella','omloppsbana','astronomi','rymd'] },
   ],
   'fysik1-hiss-app.html': 'Krafter i hissen',

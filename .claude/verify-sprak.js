@@ -57,6 +57,14 @@ const REGLER = [
                   'eller låt simuleringen/eleven vara den som mäter (påpekat 2026-10-16).',
     },
     {
+        namn: 'vem-om-föremål',
+        niva: 'fel',
+        monster: /\bvem\b(?=(?:\s+som)?(?:\s+av)?\s+(?:stjärn|planet|månar|kropp|kul(?:a|an|or)|boll|vagn|kloss|lådor|bil(?:en|ar)|partikl|elektron|proton|atom|molekyl|komet|asteroid|magnet|pendl|föremål|slungas|kastas))/gi,
+        rattelse: '"Vem" används bara om människor (och djur man ser som personer). ' +
+                  'Om stjärnor, kroppar, kulor och andra föremål heter det vilken/vilket/vilka: ' +
+                  '"Vilken kastas ut?", "se vilken stjärna som slungas ut" (påpekat 2026-11-20).',
+    },
+    {
         namn: 'rymdtid',
         niva: 'fel',
         monster: /\brymdtid(en|ens|er)?\b/gi,

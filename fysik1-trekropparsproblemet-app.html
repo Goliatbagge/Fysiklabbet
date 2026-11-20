@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trekropparsproblemet — Fysiklabbet</title>
-    <meta name="description" content="Tre stjärnor drar i varandra med Newtons gravitationslag. Släpp dem från vila och se vem som slungas ut, följ krafterna mellan paren när avståndet krymper, se fjärilseffekten när en stjärna flyttas 0,01 AU och gissa själv vilken stjärna som kastas ut.">
+    <meta name="description" content="Tre stjärnor drar i varandra med Newtons gravitationslag. Släpp dem från vila och se vilken av dem som slungas ut, följ krafterna mellan paren när avståndet krymper, se fjärilseffekten när en stjärna flyttas 0,01 AU och gissa själv vilken stjärna som kastas ut.">
     <link rel="canonical" href="https://fysiklabbet.se/fysik1-trekropparsproblemet-app.html">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Fysiklabbet">
     <meta property="og:title" content="Trekropparsproblemet — Fysik nivå 1">
-    <meta property="og:description" content="Tre stjärnor drar i varandra med Newtons gravitationslag. Släpp dem från vila och se vem som slungas ut, och gissa själv vilken stjärna som kastas ut.">
+    <meta property="og:description" content="Tre stjärnor drar i varandra med Newtons gravitationslag. Släpp dem från vila och se vilken av dem som slungas ut, och gissa själv vilken stjärna som kastas ut.">
     <meta property="og:url" content="https://fysiklabbet.se/fysik1-trekropparsproblemet-app.html">
     <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Trekropparsproblemet — Fysik nivå 1">
-    <meta name="twitter:description" content="Tre stjärnor drar i varandra med Newtons gravitationslag. Släpp dem från vila och se vem som slungas ut, och gissa själv vilken stjärna som kastas ut.">
+    <meta name="twitter:description" content="Tre stjärnor drar i varandra med Newtons gravitationslag. Släpp dem från vila och se vilken av dem som slungas ut, och gissa själv vilken stjärna som kastas ut.">
     <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -1502,7 +1502,7 @@
                             <React.Fragment>
                                 <div className="st-title mt">Läge</div>
                                 <label><input type="radio" name="lage-fs" checked={!gissaLage} onChange={() => valjLage('fri')} /><span>Utforska</span></label>
-                                <label><input type="radio" name="lage-fs" checked={gissaLage} onChange={() => valjLage('gissa')} /><span>Vem kastas ut?</span></label>
+                                <label><input type="radio" name="lage-fs" checked={gissaLage} onChange={() => valjLage('gissa')} /><span>Vilken kastas ut?</span></label>
                                 {!gissaLage && (
                                     <React.Fragment>
                                         <div className="st-title mt">Färdigt försök</div>
@@ -1588,7 +1588,7 @@
                                     <div className="flbl mb-2">Läge</div>
                                     <div className="seg" style={{ gridTemplateColumns: '1fr 1fr' }}>
                                         <button className={!gissaLage ? 'active' : ''} onClick={() => valjLage('fri')}>Utforska</button>
-                                        <button className={gissaLage ? 'active' : ''} onClick={() => valjLage('gissa')}>Vem kastas ut?</button>
+                                        <button className={gissaLage ? 'active' : ''} onClick={() => valjLage('gissa')}>Vilken kastas ut?</button>
                                     </div>
                                     {!gissaLage ? (
                                         <React.Fragment>

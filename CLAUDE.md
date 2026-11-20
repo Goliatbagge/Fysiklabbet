@@ -4382,6 +4382,17 @@ kräver det här ett uppsåt? Då ska verbet bytas.
 Substantivet **förråd** (bränsleförråd, ordförråd, värmeförråd) berörs
 förstås inte — regeln gäller verbet.
 
+## "Vem" bara om människor, "vilken" om föremål
+
+**Frågeordet *vem* används på svenska bara om människor** (och djur man
+ser som personer). Om stjärnor, planeter, kulor, vagnar och andra föremål
+heter det *vilken*, *vilket* eller *vilka* (påpekat 2026-11-20: gissa-läget
+i Trekropparsproblemet hette "Vem kastas ut?" och meta-texten sa "se vem som
+slungas ut"). Skriv "Vilken kastas ut?", "se vilken av stjärnorna som
+slungas ut", "vilket av klotet och cylindern kommer först". Felet ligger
+nära i tävlings- och gissa-lägen, där föremålen tävlar mot varandra som
+personer. `verify-sprak.js` har regeln `vem-om-föremål`.
+
 ## Begreppsordlista
 
 Nyhetsartiklarna innehåller ofta facktermer som ligger över gymnasienivå

@@ -817,7 +817,7 @@ body.lab-sim .fs-toggle-handle svg { transition: transform 0.3s ease; }
    Nya simuleringar samlar ALLT i .scene-toggles uppe till höger:
    kryssrutor/radioknappar som förr, och i fullskärm även glidarna
    (.st-sliders med kompakta .st-slider-rader) och styrknapparna
-   (.st-actions). Rutan fälls ihop med krysset .st-hide och tas tillbaka
+   (.st-actions). Rutan fälls ihop med minimeringsstrecket .st-hide och tas tillbaka
    med runda .st-show-btn (samma stil som .fs-btn men uppe till höger).
    Bottenpanelen .fs-controls/.fs-toggle-handle ovan finns bara kvar för
    äldre, ännu inte migrerade simuleringar — den låg ovanpå scenen och

@@ -693,3 +693,13 @@ Källa: Physics World 2026-11-18 (Isabelle Dumé); original G. Ecola, J. Zhang, 
 > Bilder: huvudbild ekofri mikrovågskammare vid UNSW Canberra, foto Kurt Barnett (CC BY-SA 3.0, Wikimedia Commons), beskuren 16:9, märkt som inte ingående i studien; Holmdel-hornantennen 1962, NASA (allmän egendom) i brödtexten. Studiens figurer användes inte (CC BY-NC-ND), inte heller Stanfords pressbilder (licens ej angiven). Ingen AI-bild.
 > Nya begrepp: brustemperatur, ekofri kammare, felrättande kod (med polära koder).
 > Ingen simuleringsruta; Reflexion, transmission och superposition, Intensitet och ljudnivå, Elektromagnetiska vågor och ljus samt kelvinskalan i larare.moment.
+
+## 2026-11-21 — 2026-11-21-kulorna-som-minns
+**Skakade stålkulor minns hur de svalnade** (Termodynamik)
+Källa: Physics Magazine (APS) 2026-11-10 (Ryan Wilkinson, synopsis ”Granular Matter Carries Hidden Memory”); original F. Vega Reyes, Á. Rodríguez-Rivas, P. Maynar och M. I. García de Soria, ”Kovacs Memory Effect in a Thin Granular Layer: Experimental Evidence and Its Physical Origin”, Phys. Rev. Lett. 137, 208201 (10 november 2026), DOI 10.1103/791d-2tx9, läst i fulltext via arXiv 2602.20716v2.
+> Skriven 2026-11-20 av nattjobbet, ett dygn i förväg. Kom inte ur kön utan ur dagens svepning på Physics Magazine. Grannar: 2026-11-20 elektromagnetism (bruset som bär meddelanden), 2026-11-19 strömningslära; ingen termodynamik på länge.
+> Hissnyheten från University of Queensland (meddelande genom gravitationen) valdes bort i dag eftersom gårdagens artikel också handlade om att skicka meddelanden på ett ovanligt sätt; lagd överst i kön.
+> Utgivaren: RÄTTA FÖRST (ingressens ”första gången i ett granulärt material” gick längre än studien, lärarfråga 1 saknade entydigt svar), båda punkterna och tre rekommendationer införda.
+> Bild: AI-illustration (Gemini), ingen fri bild fanns; arXiv-licensen är bara nonexclusive-distrib och PRL är inte öppen, så studiens foto (figur A1) användes inte. Bildtexten säger att bilden inte visar forskarnas uppställning.
+> Nya begrepp: granulärt material (med granulär gas/temperatur), Kovacseffekten, Mpembaeffekten.
+> Ingen simuleringsruta (Elastisk och oelastisk stöt tangerar bara ämnet); Rörelseenergi, Rörelsemängdens bevarande och Värme och temperatur i larare.moment.

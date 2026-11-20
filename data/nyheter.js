@@ -103,6 +103,57 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-21-kulorna-som-minns",
+    date: "2026-11-21",
+    title: "Skakade stålkulor minns hur de svalnade",
+    deck: "Fysiker i Spanien har skakat 4 711 små stålkulor mellan två plattor och sänkt skakningen. När den sedan höjdes en aning igen, så att kulorna borde ha stannat på den fart de hade, fortsatte de att sakta in en stund, som om de mindes att de var på väg nedåt. Det är första gången den här minneseffekten har setts i temperaturen hos ett skakat granulärt material.",
+    category: "Termodynamik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-11-21-kulorna-som-minns.jpg",
+    imageAlt: "Illustration av en rund, genomskinlig behållare på en skakapparat i ett laboratorium. I behållaren ligger tusentals små blanka stålkulor i ett enda lager, och i bakgrunden står en kamera på ett stativ.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad). Bilden visar inte forskarnas uppställning.",
+    tags: ["termodynamik", "granulärt material", "granulär temperatur", "kovacseffekten", "minneseffekt", "jämvikt", "oelastisk stöt", "rörelseenergi", "kinetisk gasteori", "mpembaeffekten", "universidad de extremadura", "universidad de sevilla"],
+    sources: [
+      { name: "Physics Magazine (APS): Granular Matter Carries Hidden Memory (10 november 2026)", url: "https://physics.aps.org/articles/v19/s141" },
+      { name: "arXiv: F. Vega Reyes med flera, författarnas manuskript till PRL-artikeln (öppet tillgängligt)", url: "https://arxiv.org/abs/2602.20716" }
+    ],
+    research: {
+      citation: "F. Vega Reyes, Á. Rodríguez-Rivas, P. Maynar och M. I. García de Soria, ”Kovacs Memory Effect in a Thin Granular Layer: Experimental Evidence and Its Physical Origin”, Physical Review Letters 137, 208201, publicerad 10 november 2026. Kollegialt granskad.",
+      url: "https://doi.org/10.1103/791d-2tx9"
+    },
+    larare: {
+      moment: [
+        { label: "Rörelseenergi", href: "katalog.html?id=fy1-4.3" },
+        { label: "Rörelsemängdens bevarande", href: "katalog.html?id=fy1-4.8" },
+        { label: "Värme och temperatur", href: "katalog.html?id=fy1-6.1" }
+      ],
+      fragor: [
+        "Två lika tunga kulor rör sig lika snabbt rakt mot varandra, krockar och studsar isär med 95 procent av den fart de närmade sig varandra med. Hur stor del av rörelseenergin i kollisionen försvinner? Vart tar den vägen?",
+        "Plattan skakas med frekvensen 180 Hz och den största accelerationen 7,0 · g. Använd sambandet Γ = A · ω² / g och räkna ut skakningens amplitud A. Jämför med kulornas diameter, 2,38 mm.",
+        "Kulornas temperatur i studien är medelvärdet av deras rörelseenergi i sidled, och skakningen ger dem energi bara i höjdled. Förklara med egna ord varför den vågräta rörelsen fortsätter att sakta in en stund efter att skakningen har höjts."
+      ]
+    },
+    body: [
+      { type: "p", html: "Ställ en kopp varmt te på bordet, så svalnar det tills det har rummets temperatur. Hur det kommer dit spelar ingen roll: när teet väl har en viss temperatur fortsätter det att svalna på samma sätt, vad det än var med om innan. Så fungerar de flesta system nära jämvikt. Temperaturen säger allt som behövs." },
+      { type: "p", html: "Men det finns system som minns. Den mest kända sådana minneseffekten kallas Kovacseffekten, efter polymerforskaren A. J. Kovacs, som såg den i glasartade plaster. Nu har Francisco Vega Reyes vid Universidad de Extremadura och Álvaro Rodríguez-Rivas, Pablo Maynar och María Isabel García de Soria vid Universidad de Sevilla för första gången sett en sådan effekt i rörelsen hos ett skakat granulärt material, ett lager av stålkulor. Studien publicerades i <em>Physical Review Letters</em> den 10 november." },
+      { type: "h2", text: "Kulor i stället för molekyler" },
+      { type: "p", html: "Forskarna lade 4&nbsp;711 kulor av rostfritt stål, var och en 2,38&nbsp;millimeter i diameter, mellan en bottenplatta av aluminium och ett genomskinligt lock. Glappet mellan plattorna var 1,75 gånger kulornas diameter, så kulorna kunde inte hamna ovanpå varandra men hade lite utrymme i höjdled. Hela behållaren skakades upp och ner 180 gånger i sekunden, och en kamera filmade kulorna ovanifrån med 1&nbsp;000 bilder i sekunden, så att varje kulas fart i sidled gick att räkna ut." },
+      { type: "p", html: "Kulorna for omkring och krockade som molekylerna i en gas. Därför går det att tala om lagrets temperatur, fast den inte mäts med en termometer: den granulära temperaturen är medelvärdet av kulornas rörelseenergi i sidled, $E_\\mathrm{k} = \\dfrac{m \\cdot v^{2}}{2}$. Det finns en viktig skillnad mot en vanlig gas. Varje krock mellan två kulor är oelastisk, och en del av rörelseenergin blir värme i stålet. Utan skakning stannar kulorna efter en kort stund. Lagret håller en jämn temperatur bara så länge plattan hela tiden tillför energi." },
+      { type: "h2", text: "Ett försök i tre steg" },
+      { type: "p", html: "Skakningens styrka mäts med talet $\\Gamma = \\dfrac{A \\cdot \\omega^{2}}{g}$, där $A$ är plattans amplitud, $\\omega$ vinkelfrekvensen och $g$ tyngdaccelerationen. Talet säger hur många gånger större plattans största acceleration är än $g$. Först skakade forskarna lagret med $\\Gamma = 7{,}0$ tills temperaturen var stabil. Sedan sänkte de skakningen till $\\Gamma = 3{,}15$, och kulorna började sakta in mot en lägre temperatur." },
+      { type: "p", html: "Innan de hunnit dit höjde forskarna skakningen igen, precis så mycket att den nya jämviktstemperaturen var lika med den temperatur kulorna hade just då. Lagret borde alltså ha stannat där det var. I stället fortsatte temperaturen att sjunka en stund, nådde ett minimum och steg sedan tillbaka till jämvikt. Det gick likadant varje gång, oavsett när skakningen höjdes. Ju senare den höjdes, desto mindre blev dippen i regel." },
+      { type: "p", html: "Hos glasartade plaster går minneseffekten oftast åt andra hållet: systemet vänder och rör sig en bit tillbaka mot där det började. Kulorna gjorde i stället som om de mindes att de var på väg nedåt, en variant som kallas den anomala Kovacseffekten. Någon dipp åt andra hållet såg forskarna aldrig." },
+      { type: "h2", text: "En dold temperatur i höjdled" },
+      { type: "p", html: "Förklaringen är att lagret har två temperaturer. Plattan ger kulorna fart uppåt och nedåt, och först när kulorna krockar på sned förs en del av den farten över till rörelsen i sidled. Rörelsen i höjdled ändras snabbt när skakningen ändras, medan rörelsen i sidled följer efter långsammare. Vid omslaget hade farten i höjdled redan sjunkit för mycket för att hålla uppe rörelsen i sidled, och temperaturen i sidled fortsatte därför nedåt tills krockarna hunnit föra över mer energi. Med en teori för hur kulornas hastigheter fördelar sig, och med datorsimuleringar av kulorna, visade forskarna att det bara är den anomala varianten som kan uppstå i ett sådant lager, eftersom energin alltid kommer in i höjdled." },
+      { type: "p", html: "Minnet varade bara en kort stund. Forskarna följde också formen på fördelningen av kulornas hastigheter, inte bara medelvärdet. Dippen var över innan formen hade stabiliserat sig, och efter det betedde sig lagret som teet på bordet: kurvorna från olika försök lade sig på varandra när de sköts i sidled i tiden, och temperaturen räckte för att beskriva allt. Enligt forskarna kan samma kännetecken, att fördelningens form slutar ändras, användas för att se när minnet är borta också i andra system som hålls i rörelse utifrån." },
+      { type: "fact", title: "Visste du?", items: [
+        "Med $\\Gamma = 7{,}0$ och frekvensen 180&nbsp;Hz blir plattans amplitud $A = \\dfrac{\\Gamma \\cdot g}{\\omega^{2}} \\approx 0{,}054\\ \\mathrm{mm}$, alltså mindre än en fyrtiondel av en kulas diameter. Ändå blir plattans största acceleration sju gånger större än tyngdaccelerationen.",
+        "Vid en rak krock studsar kulorna isär med 95&nbsp;procent av den fart de krockar med. Mellan två lika tunga kulor försvinner då knappt en tiondel av rörelseenergin i deras rörelse i förhållande till varandra.",
+        "Kovacseffekten är släkt med Mpembaeffekten, att ett varmare system under vissa förhållanden kan nå jämvikt snabbare än ett kallare. Båda visar att temperaturen ensam inte alltid räcker för att förutsäga hur ett system kommer att ändra sig."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-20-bruset-som-bar-ett-meddelande",
     date: "2026-11-20",
     title: "Värmebrus bär meddelanden utan att någon radiosignal sänds ut",

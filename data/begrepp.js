@@ -63,6 +63,42 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'granulart-material',
+    term: 'Granulärt material',
+    former: ['granulärt material', 'granulära material', 'granulära materialet', 'granulära materialen', 'granulär gas', 'granulära gasen', 'granulär temperatur', 'granulära temperaturen'],
+    kort: 'Ett material som består av många små, fasta korn, till exempel sand, socker, grus eller stålkulor. Kornen är så stora att värmerörelsen inte rubbar dem, men tillsammans kan de bete sig som en vätska, en gas eller ett fast ämne.',
+    relaterade: ['kinetisk-gasteori', 'kovacseffekten', 'termisk-jamvikt'],
+    body: [
+      { type: 'p', html: 'Häll socker ur en påse, så rinner det nästan som en vätska. Stampa på en hög med sand, så bär den dig som ett fast golv. Skaka en burk med kulor kraftigt, så far kulorna omkring och krockar som molekylerna i en gas. Sand, socker, kaffebönor, grus och små stålkulor kallas med ett gemensamt namn granulära material: material som är byggda av många fasta korn som bara påverkar varandra när de nuddar.' },
+      { type: 'p', html: 'Det som skiljer kornen från molekyler är att de är för stora för att värmerörelsen ska flytta dem. Ett sandkorn på ett bord ligger still, hur varmt rummet än är. Dessutom är krockarna mellan kornen oelastiska: vid varje krock blir en del av rörelseenergin värme och ljud. En skakad burk med kulor slutar därför röra sig så snart skakningen upphör. Ska kornen fortsätta röra sig som en gas måste energi tillföras hela tiden, och då talar fysiker om en granulär gas.' },
+      { type: 'p', html: 'I en granulär gas går det att definiera en sorts temperatur, den granulära temperaturen. Den är medelvärdet av kornens rörelseenergi, precis som temperaturen i en vanlig gas hänger ihop med molekylernas medelrörelseenergi. Den mäts inte med en termometer utan genom att filma kornen och räkna ut deras fart. Granulära material är viktiga i industrin, där sand, säd och pulver ska transporteras och blandas, och i naturen, där de styr allt från laviner till hur sanddyner vandrar.' }
+    ]
+  },
+  {
+    id: 'kovacseffekten',
+    term: 'Kovacseffekten',
+    former: ['kovacseffekten', 'kovacseffekt', 'kovacseffekter', 'anomala kovacseffekten'],
+    kort: 'En minneseffekt: ett system som stoppas mitt på vägen mot jämvikt, på ett värde som borde vara slutläget, rör sig ändå bort en stund innan det kommer tillbaka. Systemet minns hur det kom dit.',
+    relaterade: ['mpembaeffekten', 'granulart-material', 'hysteres', 'glasovergang'],
+    body: [
+      { type: 'p', html: 'Tänk dig att du ställer ned termostaten i ett rum, och när rummet har svalnat halvvägs ställer du upp den igen till exakt den temperatur rummet har just då. Rummet borde stanna där. För vanliga föremål gör det också det. Men vissa system gör inte så: de rör sig först bort från det nya slutläget, når en topp eller en dal, och kommer sedan tillbaka. De beter sig som om de minns vad som hände innan.' },
+      { type: 'p', html: 'Effekten har fått sitt namn efter polymerforskaren A. J. Kovacs, som undersökte glasartade plaster. Där kan volymen ändras på det här sättet efter att temperaturen har ändrats i två steg. Förklaringen är att temperaturen inte säger allt om materialet. Det finns fler egenskaper som ändras långsammare, till exempel hur molekylerna ligger packade, och de har ännu inte hunnit ställa in sig när temperaturen nått rätt värde. När de fortsätter att ändra sig drar de temperaturen eller volymen med sig en stund.' },
+      { type: 'p', html: 'Effekten har sedan setts i många andra system, till exempel i svävande nanopartiklar och i skakade lager av stålkulor. I det vanliga fallet vänder systemet och rör sig en bit tillbaka mot där det började. I den anomala Kovacseffekten fortsätter det i stället åt samma håll som förut, som om det minns vart det var på väg. Gemensamt för alla varianter är att minnet försvinner när de dolda egenskaperna har hunnit ställa in sig.' }
+    ]
+  },
+  {
+    id: 'mpembaeffekten',
+    term: 'Mpembaeffekten',
+    former: ['mpembaeffekten', 'mpembaeffekt', 'mpembaeffekter'],
+    kort: 'Att ett varmare system under vissa förhållanden kan nå jämvikt, till exempel frysa eller svalna till omgivningens temperatur, snabbare än ett som från början är kallare.',
+    relaterade: ['kovacseffekten', 'termisk-jamvikt'],
+    body: [
+      { type: 'p', html: 'Effekten har fått sitt namn efter Erasto Mpemba, en skolelev i Tanzania som på 1960-talet märkte att hans varma glassblandning frös fortare än kompisarnas kalla. Han publicerade sina iakttagelser tillsammans med fysikern Denis Osborne år 1969. Påståendet låter omöjligt: det varma vattnet måste ju först svalna till den temperatur som det kalla har från början, och sedan ha samma väg kvar.' },
+      { type: 'p', html: 'Det resonemanget förutsätter att temperaturen säger allt om vattnet. Gör den inte det, kan det varma provet ha andra egenskaper som hjälper det på vägen, till exempel att mer vatten har dunstat bort, att det innehåller mindre löst gas eller att det strömmar annorlunda i glaset. Om varmt vatten verkligen fryser fortare än kallt är fortfarande omstritt, eftersom resultaten beror mycket på hur försöket görs.' },
+      { type: 'p', html: 'Däremot har fysiker visat att fenomenet finns i andra system, där det går att räkna noggrant på det: i beräkningar på skakade granulära material, i försök med kolloider och i kvantsystem. Där kan ett tillstånd som börjar längre från jämvikt ta en genväg och komma fram först. Mpembaeffekten är släkt med Kovacseffekten, och båda visar att ett system kan bära med sig minnen av sin historia som temperaturen ensam inte avslöjar.' }
+    ]
+  },
+  {
     id: 'brustemperatur',
     term: 'Brustemperatur',
     former: ['brustemperatur', 'brustemperaturen', 'brustemperaturer', 'brustemperaturerna'],

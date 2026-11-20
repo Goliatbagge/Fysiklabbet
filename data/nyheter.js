@@ -103,6 +103,67 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-22-voyager-ett-ljusdygn-bort",
+    date: "2026-11-22",
+    title: "Voyager 1 är nu ett helt ljusdygn från jorden",
+    deck: "Den 18 november 2026 blev rymdsonden Voyager 1 det första föremål som människor har skickat ett helt ljusdygn bort, nästan 26 miljarder kilometer. En radiosignal behöver nu ett dygn för att nå sonden och ett dygn till för att svaret ska komma tillbaka.",
+    category: "Astronomi",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-11-22-voyager-ett-ljusdygn-bort.jpg",
+    imageAlt: "Konstnärlig bild av rymden. Från vänster löper en lång, glödande orangeröd ljusstråle in mot rymdsonden Voyager 1 till höger, en liten farkost med en stor parabolantenn och en lång, tunn bom, mot en svart himmel med svaga stjärnor.",
+    imageCredit: "Illustration: NASA/JPL-Caltech (public domain).",
+    tags: ["astronomi", "voyager 1", "voyager 2", "ljusdygn", "ljusår", "ljusets hastighet", "rymdsond", "heliosfären", "interstellära rymden", "radiosignal", "deep space network", "radioisotopgenerator", "pale blue dot", "guldskivan", "nasa", "jpl"],
+    sources: [
+      { name: "NASA: NASA’s Voyager 1 Makes History Reaching One Light-Day From Earth (pressmeddelande 18 november 2026)", url: "https://www.nasa.gov/news-release/nasas-voyager-1-makes-history-reaching-one-light-day-from-earth/" },
+      { name: "NASA Science: Voyager 1: What Is a Light-Day", url: "https://science.nasa.gov/mission/voyager/voyager-1/voyager-1-what-is-a-light-day/" },
+      { name: "NASA Science: November’s Night Sky Notes: Light-Day Away", url: "https://science.nasa.gov/solar-system/skywatching/night-sky-network/novembers-night-sky-notes-light-day-away/" },
+      { name: "Space.com: Voyager 1 team, unbowed by communications glitch, celebrates epic 1-light-day distance milestone (19 november 2026)", url: "https://www.space.com/space-exploration/voyager/voyager-1-team-unbowed-by-communications-glitch-celebrates-epic-1-light-day-distance-milestone" }
+    ],
+    research: null,
+    larare: {
+      moment: [
+        { label: "Universums struktur", href: "katalog.html?id=fy2-5.1" },
+        { label: "Elektromagnetiska vågor och ljus", href: "katalog.html?id=fy2-4.1" },
+        { label: "Aktivitet och halveringstid", href: "katalog.html?id=fy1-9.4" }
+      ],
+      fragor: [
+        "Voyager 1 rör sig i dag med ungefär 17\u00a0km/s. Hur lång tid hade det tagit att komma ett ljusdygn bort om sonden hela tiden hållit den farten? Jämför med de drygt 49 år det verkligen tog. Vad kan skillnaden bero på?",
+        "Jorden går runt solen medan Voyager 1 är på väg bort från solsystemet. Hur mycket kan avståndet mellan jorden och sonden ändras under ett år bara på grund av jordens rörelse, och vad betyder det för frågan om exakt när sonden passerar ett ljusdygn?",
+        "Ett kommando till Voyager 1 behöver nu ett dygn för att komma fram, och svaret ett dygn till. Hur påverkar det sättet att felsöka sonden, jämfört med att felsöka en satellit i bana runt jorden?"
+      ]
+    },
+    simulering: {
+      href: "ljusresan.html",
+      name: "Ljusresan",
+      text: "Följ en ljusstråle från solens yta förbi planeterna och Pluto ända ut till Voyager 1, och se på ljusklockan hur lång tid varje del av resan tar i verkligheten."
+    },
+    body: [
+      { type: "p", html: "Onsdagen den 18 november 2026 klockan 11.16 svensk tid passerade NASA:s rymdsond Voyager 1 en gräns som inget annat föremål byggt av människor har nått. Sonden är nu ett ljusdygn från jorden, alltså så långt bort som ljuset hinner på 24&nbsp;timmar. Det är ungefär 25,9 miljarder kilometer. Teamet vid NASA:s Jet Propulsion Laboratory (JPL) i Kalifornien fick sondens signal först ett dygn senare, tidigt på torsdagen. Så lång tid behövde radiosignalen för att nå hem." },
+      { type: "h2", text: "Ett avstånd, inte en tid" },
+      { type: "p", html: "Ljusdygnet är, precis som ljusåret, ett längdmått. Ljuset färdas knappt 300&nbsp;000&nbsp;km i sekunden i vakuum, och ett dygn har 86&nbsp;400 sekunder. Sträckan blir då $s = c \\cdot t \\approx 3{,}0 \\cdot 10^{8}\\ \\mathrm{m/s} \\cdot 86\\,400\\ \\mathrm{s} \\approx 2{,}6 \\cdot 10^{13}\\ \\mathrm{m}$. Det är drygt 170 gånger avståndet mellan jorden och solen." },
+      { type: "p", html: "Solljuset behöver drygt åtta minuter för att nå jorden. En ljusstråle som passerar jorden behöver sedan ungefär fyra timmar för att nå Neptunus, solsystemets yttersta planet, och därifrån ungefär 20&nbsp;timmar till för att komma ifatt Voyager 1. Till den närmaste stjärnan efter solen, Proxima Centauri, är det drygt fyra ljusår, alltså mer än 1&nbsp;500 ljusdygn." },
+      { type: "h2", text: "Ett halvt sekel på väg" },
+      { type: "p", html: "Voyager 1 sköts upp den 5 september 1977, drygt två veckor efter tvillingen Voyager 2. Jupiter, Saturnus, Uranus och Neptunus stod då i ett läge som bara återkommer ungefär vart 175:e år. Sonderna kunde därför använda planeternas gravitation för att slungas vidare från den ena planeten till nästa. Tekniken kallas gravitationsslunga. Voyager 1 flög förbi Jupiter 1979 och Saturnus 1980 och styrdes sedan bort från planeterna, ut mot rymden mellan stjärnorna." },
+      { type: "p", html: "Den 14 februari 1990, ungefär sex miljarder kilometer hemifrån, vände Voyager 1 kamerorna bakåt och fotograferade jorden. Bilden kallas <em>Pale Blue Dot</em>, den blekblå pricken. Strax därefter stängdes kamerorna av för att spara energi." },
+      { type: "image", src: "nyheter/bilder/2026-11-22-voyager-ett-ljusdygn-bort-2.jpg", alt: "En nästan enfärgad, blågrå bild med en svagt ljusare, lodrät strimma. Mitt i strimman syns en enda liten ljus prick.", caption: "Jorden som en liten prick i en stråle av spritt solljus, fotograferad av Voyager 1 den 14 februari 1990 från ungefär sex miljarder kilometers avstånd. Utsnitt ur den nybearbetade versionen från 2020.", credit: "Foto: NASA/JPL-Caltech (public domain)" },
+      { type: "p", html: "I augusti 2012 lämnade Voyager 1 heliosfären, den bubbla av laddade partiklar och magnetfält som solvinden blåser upp kring solsystemet. Den blev då den första rymdsonden i den interstellära rymden. Voyager 2 gjorde samma sak 2018, och i dag är de två sonderna de enda som människor har där ute." },
+      { type: "h2", text: "17 kilometer i sekunden är långsamt mot ljuset" },
+      { type: "p", html: "Voyager 1 färdas i dag med ungefär 61&nbsp;000&nbsp;km/h, eller 17&nbsp;km i sekunden. Det är snabbt med jordiska mått, men ljuset är nästan 18&nbsp;000 gånger snabbare. Varje år kommer sonden drygt 500 miljoner kilometer längre bort, och radiosignalens restid växer med ungefär en halvtimme. Ljuset klarar på ett dygn den resa som har tagit Voyager 1 drygt 49&nbsp;år." },
+      { type: "p", html: "Sonden är på väg i riktning mot stjärnan Gliese 445, som ligger drygt 17&nbsp;ljusår från jorden. Om ungefär 40&nbsp;000 år passerar den stjärnan på omkring 1,7&nbsp;ljusårs avstånd. Tvillingen Voyager 2 tog en annan väg genom solsystemet och beräknas vara ett ljusdygn från jorden i november 2035." },
+      { type: "h2", text: "Två dygn för varje fråga" },
+      { type: "p", html: "Avståndet märks varje gång teamet behöver något från sonden. NASA lyssnar efter Voyager 1 varje dag med de stora antennerna i Deep Space Network, som står på tre platser runt jorden, och skickar kommandon ungefär en gång i veckan. ”Även med ljusets hastighet behöver signalerna nu 24&nbsp;timmar för att nå rymdsonden och 24&nbsp;timmar för att nå oss”, säger projektledaren Suzanne Dodd vid JPL i NASA:s pressmeddelande." },
+      { type: "p", html: "Just nu blir det extra tydligt. När NASA höll pressträff den 19 november hade Voyager 1 sedan den 14 november inte skickat några vetenskapliga eller tekniska data, bara en radiosignal utan innehåll. Det var den signalen, tillsammans med beräkningar av sondens bana, som ingenjörerna använde för att bekräfta att sonden passerat ett ljusdygn. ”Det tar två dygn att undersöka vad som helst på rymdsonden”, sa Dodd till Space.com. Teamet har varit med om liknande fel förut och räknar med att få tillbaka data." },
+      { type: "p", html: "Energin sinar också. Sonden drivs av en radioisotopgenerator, som gör om värme från sönderfallande plutonium till elektricitet. Eftersom allt mindre plutonium finns kvar tappar båda sonderna ungefär 4&nbsp;watt i effekt per år. Genom att i år stänga av tre apparater på Voyager 1 och använda tre snålare i stället hoppas teamet kunna hålla de nuvarande instrumenten igång åtminstone till 50-årsdagarna av uppskjutningarna, i augusti och september 2027." },
+      { type: "p", html: "Även när den sista signalen har tystnat fortsätter Voyager 1 utåt. Ombord finns en förgylld kopparskiva, guldskivan, med hälsningar på 55 språk, musik och bilder från jorden, tänkt för den som en dag kanske hittar sonden." },
+      { type: "fact", title: "Visste du?", items: [
+        "Ljusets fart i vakuum är exakt 299&nbsp;792&nbsp;458&nbsp;m/s. Ett ljusdygn blir därför 25&nbsp;902&nbsp;068&nbsp;371&nbsp;km, avrundat till hela kilometer.",
+        "Voyager 1 behövde 49&nbsp;år och drygt två månader för att komma ett ljusdygn bort.",
+        "Guldskivans omslag har en beläggning av uran-238, som har halveringstiden 4,5 miljarder år.",
+        "Voyager-uppdraget var från början planerat att pågå i ungefär fem år."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-21-kulorna-som-minns",
     date: "2026-11-21",
     title: "Skakade stålkulor minns hur de svalnade",

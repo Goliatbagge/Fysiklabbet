@@ -5088,6 +5088,54 @@ window.BEGREPP = [
       { type: 'p', html: 'Astronomer gör samma sak, fast ögonen är jorden på två sidor om solen. På ett halvår flyttar sig jorden omkring 300 miljoner kilometer, och en närbelägen stjärna tycks då ha flyttat sig en aning mot de mycket avlägsnare stjärnorna och galaxerna bakom. Vinkeln är minimal: även för de närmaste stjärnorna är den mindre än en bågsekund, en 3&nbsp;600-del av en grad. Eftersom jordbanans storlek är känd ger vinkeln ändå avståndet med ren geometri, utan några antaganden om hur stjärnan fungerar.' },
       { type: 'p', html: 'Därför är parallaxen grunden för alla avståndsmätningar i rymden. Avståndsenheten parsec är definierad efter den: en stjärna med parallaxen en bågsekund ligger en parsec bort. Rymdteleskopet Gaia har mätt parallaxer för mer än en miljard stjärnor. För föremål som ligger mycket långt bort blir vinkeln till slut för liten att mäta, och då får astronomerna i stället uppskatta avståndet på andra sätt, till exempel genom att jämföra hur ljusstarkt föremålet ser ut med hur ljusstarka liknande föremål är.' }
     ]
+  },
+  {
+    id: 'ljusdygn',
+    term: 'Ljusdygn',
+    former: ['ljusdygn', 'ljusdygnet', 'ljusdygnen'],
+    kort: 'Den sträcka ljuset hinner på ett dygn: nästan 26 miljarder kilometer. Precis som ljusåret är det ett längdmått, inte ett tidsmått.',
+    relaterade: ['ljusar', 'astronomisk-enhet', 'heliosfar'],
+    body: [
+      { type: 'p', html: 'Ljuset är det snabbaste som finns. I vakuum färdas det 299&nbsp;792&nbsp;458 meter varje sekund, så långt att det på en sekund skulle hinna drygt sju varv runt jorden. Får ljuset färdas ett helt dygn, 86&nbsp;400 sekunder, blir sträckan ungefär 25,9 miljarder kilometer. Den sträckan kallas ett ljusdygn.' },
+      { type: 'p', html: 'På samma sätt finns ljussekunder, ljusminuter och ljustimmar. Månen ligger drygt en ljussekund bort, solen ungefär åtta ljusminuter bort och Neptunus omkring fyra ljustimmar bort. Måtten är praktiska eftersom de samtidigt säger hur länge man får vänta på en radiosignal. Radiovågor är, precis som ljus, elektromagnetisk strålning och går lika fort som ljuset.' },
+      { type: 'p', html: 'Ett ljusdygn är ändå litet i rymdens skala. Den närmaste stjärnan efter solen ligger mer än 1&nbsp;500 ljusdygn bort. Ingen rymdsond har kommit längre än Voyager 1, som passerade ett ljusdygn från jorden den 18 november 2026, mer än 49 år efter uppskjutningen.' }
+    ]
+  },
+  {
+    id: 'heliosfar',
+    term: 'Heliosfär',
+    former: ['heliosfär', 'heliosfären', 'heliosfärer'],
+    kort: 'Den jättelika bubbla som solvinden blåser upp kring solsystemet. Utanför den börjar den interstellära rymden, rymden mellan stjärnorna.',
+    relaterade: ['ljusdygn'],
+    body: [
+      { type: 'p', html: 'Solen kastar hela tiden ut laddade partiklar, mest protoner och elektroner, åt alla håll. Strömmen kallas solvinden och har med sig solens magnetfält. Den rusar ut i rymden med flera hundra kilometer i sekunden och fyller ett enormt område kring solen. Det området kallas heliosfären, efter grekiskans <em>helios</em>, sol.' },
+      { type: 'p', html: 'Rymden mellan stjärnorna är inte helt tom. Där finns en tunn gas och ett svagt magnetfält som hör till Vintergatan. Långt bortom Neptunus och Pluto bromsas solvinden först tvärt, ungefär som när vattnet från en kran sprider sig i en diskho: strålen är snabb nära kranen, men en bit ut saktar den plötsligt in i en tydlig ring. Ännu längre ut, där solvindens tryck och gasens tryck tar ut varandra, går heliosfärens gräns, som kallas heliopausen.' },
+      { type: 'p', html: 'Heliosfären skyddar solsystemet mot en del av den kosmiska strålningen, laddade partiklar med mycket hög energi som kommer från resten av galaxen. Rymdsonderna Voyager 1 och Voyager 2 passerade heliopausen 2012 respektive 2018 och är de enda farkoster som har mätt hur gränsen ser ut på plats.' }
+    ]
+  },
+  {
+    id: 'radioisotopgenerator',
+    term: 'Radioisotopgenerator',
+    former: ['radioisotopgenerator', 'radioisotopgeneratorn', 'radioisotopgeneratorer', 'radioisotopgeneratorerna'],
+    kort: 'En strömkälla som gör om värmen från ett radioaktivt ämne till elektricitet. Den används i rymdsonder som är för långt från solen för att solpaneler ska räcka.',
+    relaterade: ['radioaktivt-sonderfall', 'halveringstid'],
+    body: [
+      { type: 'p', html: 'Långt ute i solsystemet är solljuset för svagt för solpaneler. Rymdsonder som ska dit tar därför med sig sin egen värmekälla: en klump av ett radioaktivt ämne, oftast plutonium-238. När atomkärnorna sönderfaller sänder de ut strålning som bromsas i materialet och värmer upp det. Klumpen håller sig varm år efter år, utan att något behöver tändas eller fyllas på.' },
+      { type: 'p', html: 'Värmen görs om till elektricitet utan några rörliga delar. Mellan den varma plutoniumklumpen och den kalla rymden sitter termoelement, par av olika metaller eller halvledare som ger en elektrisk spänning när den ena änden är varmare än den andra. Det är samma princip som i vissa termometrar, fast i stor skala.' },
+      { type: 'p', html: 'Effekten minskar långsamt. Plutonium-238 har en halveringstid på knappt 88 år, så det finns hela tiden mindre kvar av ämnet, och termoelementen slits också. Rymdsonderna Voyager 1 och Voyager 2 har haft sina generatorer igång sedan 1977 och tappar i dag ungefär 4&nbsp;watt effekt per år, vilket tvingar teamet att stänga av instrument efter hand.' }
+    ]
+  },
+  {
+    id: 'gravitationsslunga',
+    term: 'Gravitationsslunga',
+    former: ['gravitationsslunga', 'gravitationsslungan', 'gravitationsslungor', 'gravitationsslungorna'],
+    kort: 'Ett sätt att få en rymdsond att byta fart och riktning genom att låta den passera nära en planet. Planetens gravitation böjer banan, och sonden får med sig en del av planetens fart.',
+    relaterade: ['heliosfar'],
+    body: [
+      { type: 'p', html: 'En rymdsond har bara med sig lite bränsle. För att ändå komma långt kan den låna fart av planeterna. Sonden styrs så att den passerar nära en planet, och planetens gravitation drar i den och böjer av banan. Sett från planeten lämnar sonden planeten med samma fart som den kom med, bara i en annan riktning.' },
+      { type: 'p', html: 'Men planeten rör sig själv runt solen. Sett från solen kan sonden därför komma ut ur passagen betydligt snabbare än den kom in, om den passerar bakom planeten i dess färdriktning. Det liknar en tennisboll som studsar mot en racket som slås framåt: bollen får med sig en del av racketens fart. Planeten bromsas samtidigt en aning, men den är så tung att ändringen inte går att märka.' },
+      { type: 'p', html: 'Tekniken gjorde Voyager-sonderna möjliga. I slutet av 1970-talet stod Jupiter, Saturnus, Uranus och Neptunus så att en sond kunde slungas från den ena planeten till nästa. Ett sådant läge återkommer bara ungefär vart 175:e år. I dag används gravitationsslungor på nästan alla resor till de yttre planeterna, och även för att bromsa sonder på väg in mot solen.' }
+    ]
   }
 ];
 

@@ -321,6 +321,22 @@ details.hjalp[open] summary svg { transform: rotate(180deg); }
   .brada-wrap { position: relative; top: 0; }
   #bradan { max-height: none; max-width: 640px; }
   .fragan { display: none; }
+  .app.fs { display: block; height: 100vh; height: 100dvh; overflow-y: auto; padding: 8px; }
+  .app.fs .brada-wrap { display: flex; flex-direction: column; justify-content: flex-start; }
+  .app.fs #bradan { flex: none; width: 100%; max-width: none; max-height: calc(100dvh - 110px); }
+  .app.fs aside.sida { max-height: none; overflow: visible; margin-top: 10px; }
+}
+/* Fullskärm på en låg skärm (mobil på tvären): brädan till vänster i full
+   höjd, stegen till höger i en egen skrollande kolumn. */
+@media (max-height: 560px) and (min-width: 601px) {
+  .app.fs { display: grid; grid-template-columns: auto minmax(0, 1fr); overflow: hidden; padding: 6px; gap: 8px; align-items: start; }
+  .app.fs .brada-wrap { padding: 6px; max-height: calc(100dvh - 12px); }
+  .app.fs #bradan { width: auto; height: calc(100dvh - 92px); max-height: none; }
+  .app.fs .statusrad { margin-top: 6px; font-size: 13px; min-height: 0; padding: 7px 10px; max-width: calc(100dvh - 92px); }
+  .app.fs aside.sida { margin-top: 0; max-height: calc(100dvh - 12px); overflow-y: auto; }
+  .app.fs .gb-fs, .app.fs .vk-visa { top: 10px; width: 34px; height: 34px; }
+  .app.fs .gb-fs { left: 10px; } .app.fs .vk-visa { right: 10px; }
+  .app.fs .verktyg { top: 10px; right: 10px; }
 }
 @media (max-width: 600px) {
   .top { padding: 14px 16px 12px; }
@@ -334,13 +350,17 @@ details.hjalp[open] summary svg { transform: rotate(180deg); }
   .statusrad { order: 3; }
   .verktyg { position: static; width: auto; margin: 8px 2px 0; display: flex; flex-wrap: wrap; align-items: center; gap: 2px 14px; backdrop-filter: none; box-shadow: none; background: #f6f2ea; border-color: var(--line); }
   .vk-huvud { width: 100%; margin: 0; }
-  .vk-dolj, .vk-visa { display: none !important; }
-  .verktyg[hidden] { display: flex !important; }
+  .app:not(.fs) .vk-dolj, .app:not(.fs) .vk-visa { display: none !important; }
+  .app:not(.fs) .verktyg[hidden] { display: flex !important; }
   .vk-rad { margin: 0; }
   .gb-fs { top: 10px; left: 10px; width: 34px; height: 34px; }
-  .app.fs { grid-template-columns: 1fr; overflow-y: auto; padding: 8px; }
-  .app.fs #bradan { max-height: 70vh; }
-  .app.fs aside.sida { max-height: none; overflow: visible; }
+  /* Fullskärm på mobil: brädan fyller hela bredden överst. Verktygen är
+     hopfällda bakom den runda knappen uppe till höger på brädan och fälls
+     ut under den; stegen följer längre ned, och hela ytan skrollar. */
+  .app.fs { padding: 6px; }
+  .app.fs .brada-wrap { padding: 4px; }
+  .app.fs #bradan { max-height: none; }
+  .app.fs .vk-visa { top: 10px; right: 10px; width: 34px; height: 34px; }
   .statusrad { margin: 8px 2px 2px; font-size: 13.5px; }
   aside.sida { padding: 10px; }
   .kort-kropp { padding: 0 12px 14px 12px; }
@@ -603,7 +623,7 @@ details.hjalp[open] summary svg { transform: rotate(180deg); }
 </article>
 <footer class="sidfot"><a href="index.html">Fysiklabbet</a>·<a href="om.html">Om</a>·<a href="kontakt.html">Kontakt</a></footer>
 <!-- Öka versionsnumret när skriptet ändras (GitHub Pages cachar i tio minuter). -->
-<script src="geobrada.js?v=202611201800"></script>
+<script src="geobrada.js?v=202611201900"></script>
 <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
         data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>

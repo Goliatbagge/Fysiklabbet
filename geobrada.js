@@ -718,6 +718,11 @@
     app.classList.toggle('fs', pa);
     $('fsBtn').setAttribute('aria-label', pa ? 'Lämna fullskärm' : 'Fullskärm');
     $('fsBtn').title = pa ? 'Lämna fullskärm' : 'Fullskärm';
+    // På mobil tar verktygen annars halva skärmen: i fullskärm börjar de
+    // hopfällda, så att brädan får ytan, och fälls ut med knappen på brädan.
+    if (window.matchMedia('(max-width: 600px), (max-height: 560px)').matches) {
+      $('verktyg').hidden = pa; $('verktygVisa').hidden = !pa;
+    }
   }
   document.addEventListener('fullscreenchange', fsAndrad);
   document.addEventListener('webkitfullscreenchange', fsAndrad);

@@ -1,0 +1,122 @@
+<!--
+  ÄMNESRAD:  Tre stjärnor som slänger ut en, och en grön stjärna
+  PREHEADER: Plus genomgångar på film, en elektromagnet på bänken och en bil i en lutande kurva.
+  Utskick:   söndag 2026-11-22 kl 06.00 svensk tid (EmailOctopus)
+  Brevperiod: 2026-11-15 till 2026-11-21 (sju artiklar, alla länkade). Söndagens artikel (11-22, Voyager 1) hör till nästa brev.
+  Nytt på sajten: genomgångsfilmerna i Fysik nivå 2 kapitel 1 (planerat.md), trekropparsproblemet, elektromagneten,
+  doserad kurva (alla tre med skärmdump), kort rad om de nya övningarna i Fysik nivå 1. Geobrädan nämns inte (beslut 2026-11-20).
+  Skärmdumparna tagna i Chromium med React/Babel/three/Tailwind hämtade från npm (CDN spärrade). Filmbilden är ett
+  eget kort i sajtens stil, eftersom YouTube-miniatyrerna inte gick att hämta i molnet.
+  Veckans tips utelämnat (brevet redan långt). tips.md orörd.
+  Teaser: KM3NeT/ORCA och Lorentzinvariansen ([BREVTEASER] i ko.md), kontrollerat mot data/nyheter.js och publicerat.md, ej publicerat.
+-->
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fysiklabbets nyhetsbrev, vecka 47</title>
+</head>
+<body style="margin:0; padding:0; background-color:#f7f2e8;">
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f7f2e8;">
+<tr><td align="center" style="padding:28px 12px 40px;">
+
+  <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:100%;">
+
+    <tr><td align="center" style="padding:8px 8px 26px;">
+      <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; padding-bottom:10px;">Nyhetsbrev nr 15 &middot; vecka 47 &middot; 2026</div>
+      <div style="font-family:Georgia,'Times New Roman',serif; font-size:34px; font-weight:bold; color:#0f1620;">Fysiklabbet</div>
+    </td></tr>
+
+    <tr><td style="background-color:#fdfaf3; border-radius:10px; padding:30px 34px 8px;">
+
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 14px;">Nästa söndag är det första advent, och snart står det ljusstakar i fönstren igen. Fram till dess hinner ni med en hel del fysik. Den här veckan har Fysik nivå&nbsp;2 fått sina första genomgångar på film, och tre nya simuleringar har kommit till.</p>
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:28px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:18px;">Nytt på Fysiklabbet</div>
+      </div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 14px;"><strong>Genomgångar på film.</strong> Fem avsnitt i kapitel&nbsp;1 i Fysik nivå&nbsp;2 har fått en film överst i genomgången. Begreppen och formlerna förklaras steg för steg med animerade figurer och berättarröst, medan räkneexemplen finns kvar i genomgången och pennlösningarna. Filmerna går att se i egen takt, inför provet eller efter en missad lektion, och de passar fint för omvänt klassrum. Välj avsnitt: <a href="https://fysiklabbet.se/katalog.html?id=fy2-1.1&amp;block=genomgang-film" style="color:#2563a8; text-decoration:underline;">kraftmoment</a>, <a href="https://fysiklabbet.se/katalog.html?id=fy2-1.2&amp;block=genomgang-film" style="color:#2563a8; text-decoration:underline;">mer kraftmoment</a>, <a href="https://fysiklabbet.se/katalog.html?id=fy2-1.3&amp;block=genomgang-film" style="color:#2563a8; text-decoration:underline;">stabilitet</a>, <a href="https://fysiklabbet.se/katalog.html?id=fy2-1.4&amp;block=genomgang-film" style="color:#2563a8; text-decoration:underline;">periodtid, frekvens och vinkelhastighet</a> och <a href="https://fysiklabbet.se/katalog.html?id=fy2-1.5&amp;block=genomgang-film" style="color:#2563a8; text-decoration:underline;">cirkulär rörelse</a>. Samma filmer ligger också i spellistan Fysik nivå&nbsp;2 på Fysiklabbets YouTube-kanal.</p>
+      <a href="https://fysiklabbet.se/katalog.html?id=fy2-1.1&amp;block=genomgang-film" style="text-decoration:none;">
+        <img src="https://fysiklabbet.se/nyheter/brev/2026-11-22-genomgangsfilmer.jpg" width="532" alt="Rutat papper med rubriken Genomgångar på film och en lista över fem avsnitt i Fysik nivå 2, kapitel 1, bredvid en stor spelknapp" style="display:block; width:100%; max-width:532px; height:auto; border-radius:8px; border:0;">
+      </a>
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:8px 0 16px;">Fem genomgångar på film i kapitel 1, Fysik nivå 2.</div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 14px;"><strong>Trekropparsproblemet.</strong> Två stjärnor som drar i varandra går att räkna ut med papper och penna. Med tre går det inte längre. Släpp tre stjärnor från vila och se dem slunga runt varandra vid nära passager, tills en av dem ofta kastas ut för gott. Flytta en stjärna en hundradels AU och se ett helt annat slut, och gissa sedan själv vilken stjärna som åker ut. <a href="https://fysiklabbet.se/fysik1-trekropparsproblemet-app.html" style="color:#2563a8; text-decoration:underline;">Släpp stjärnorna</a>.</p>
+      <a href="https://fysiklabbet.se/fysik1-trekropparsproblemet-app.html" style="text-decoration:none;">
+        <img src="https://fysiklabbet.se/nyheter/brev/2026-11-22-trekropparsproblemet.jpg" width="532" alt="Tre stjärnor med 3, 4 och 5 solmassor mot en mörk stjärnhimmel. Deras banor har ritats som trassliga slingor i orange, turkos och lila, och en orange bana sticker iväg uppåt" style="display:block; width:100%; max-width:532px; height:auto; border-radius:8px; border:0;">
+      </a>
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:8px 0 16px;">Banorna efter drygt 4&nbsp;000 år. Den orange stjärnan har redan varit en bra bit ute.</div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 14px;"><strong>Elektromagneten på labbänken.</strong> En spole och ett nätaggregat ligger på bänken. Slå på strömmen och se kompassnålarna runt spolen svänga in sig i ett fält som ser ut precis som en stavmagnets. Mät flödestätheten med provkompassen, stoppa in en järnkärna så att gemen dras till, och avgör i läget Var är nordändan? själv vilken ände som blir nordända. <a href="https://fysiklabbet.se/fysik2-elektromagnet-app.html" style="color:#2563a8; text-decoration:underline;">Till elektromagneten</a>.</p>
+      <a href="https://fysiklabbet.se/fysik2-elektromagnet-app.html" style="text-decoration:none;">
+        <img src="https://fysiklabbet.se/nyheter/brev/2026-11-22-elektromagneten.jpg" width="532" alt="En kopparspole med järnkärna på rutat papper, omgiven av röda fältlinjer och ett rutnät av små kompassnålar. Ett nätaggregat visar 1,50 A, och två gem har fastnat vid spolens ena ände" style="display:block; width:100%; max-width:532px; height:auto; border-radius:8px; border:0;">
+      </a>
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:8px 0 16px;">Med järnkärnan i spolen har två gem dragits till nordändan.</div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 14px;"><strong>Doserad kurva.</strong> Kör en bil genom en kurva där vägbanan lutar in mot centrum, i 3D eller i ett tvärsnitt bakifrån. Se friktionen krympa, försvinna vid den friktionsfria farten och sedan växa åt andra hållet. Byt till is och se bilen glida när greppet inte räcker. Simuleringen hör till samma avsnitt som filmen om cirkulär rörelse. <a href="https://fysiklabbet.se/fysik2-doserad-kurva-app.html" style="color:#2563a8; text-decoration:underline;">Ut på banan</a>.</p>
+      <a href="https://fysiklabbet.se/fysik2-doserad-kurva-app.html" style="text-decoration:none;">
+        <img src="https://fysiklabbet.se/nyheter/brev/2026-11-22-doserad-kurva.jpg" width="532" alt="En grå bil kör genom en lutande kurva med röd och vit kantsten. Pilar visar normalkraften, tyngdkraften, friktionen och den streckade centripetalkraften med sina värden i kilonewton" style="display:block; width:100%; max-width:532px; height:auto; border-radius:8px; border:0;">
+      </a>
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:8px 0 16px;">Torr asfalt i 72&nbsp;km/h: friktionen är 43&nbsp;% av den största möjliga.</div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 4px;"><strong>Kort och gott.</strong> Övningarna i Fysik nivå&nbsp;1 har fått 240 nya uppgifter i veckan, från <a href="https://fysiklabbet.se/katalog.html?id=fy1-4.4:ovningar" style="color:#2563a8; text-decoration:underline;">avsnitt 4.4</a> till 6.2, så att varje avsnitt där har minst sju uppgifter på varje nivå: Grund, Mellan och Avancerad.</p>
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:28px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:18px;">Veckans fysik</div>
+      </div>
+      <a href="https://fysiklabbet.se/nyheter.html?id=2026-11-15-den-forsta-grona-stjarnan" style="text-decoration:none;">
+        <img src="https://fysiklabbet.se/nyheter/brev/2026-11-22-grona-stjarnan-hero.jpg" width="532" alt="Fem runda stjärnskivor på rad mot svart bakgrund: en blekblå, en rosa, en större blekt gulgrön i mitten, en gul och en klarblå" style="display:block; width:100%; max-width:532px; height:auto; border-radius:8px; border:0;">
+      </a>
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:8px 0 18px;">Bilder ur studien: M. A. Hollands med flera, RAS Techniques and Instruments (2026) (CC&nbsp;BY&nbsp;4.0). Beräknade färgtrogna bilder, inte fotografier.</div>
+      <h2 style="font-family:Georgia,'Times New Roman',serif; font-size:22px; line-height:1.35; color:#0f1620; margin:0 0 10px;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-11-15-den-forsta-grona-stjarnan" style="color:#0f1620; text-decoration:none;">Den första gröna stjärnan</a></h2>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 14px;">Stjärnor glöder som ett järnstycke i en smedja: först rött, sedan orange och vitt när de blir varmare. Grönt finns inte med på den skalan, eftersom en stjärna som strålar mest i det gröna strålar nästan lika mycket i alla andra färger och därför ser vit ut. Astronomer vid University of Warwick har nu räknat ut vilken färg vita dvärgar skulle ha på nära håll. De flesta är vita, men några är rosa, gula eller turkosa, och en av dem lyser blekt grön. Natrium i stjärnans täta atmosfär sväljer en stor del av det gula, orange och röda ljuset, och kvar blir grönt.</p>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:15px; margin:0 0 26px;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-11-15-den-forsta-grona-stjarnan" style="color:#2563a8; text-decoration:underline;">Läs artikeln &rarr;</a></p>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td width="48%" valign="top" style="padding-right:10px;">
+            <a href="https://fysiklabbet.se/nyheter.html?id=2026-11-17-galaxen-som-var-en-brun-dvarg" style="text-decoration:none;">
+              <img src="https://fysiklabbet.se/nyheter/brev/2026-11-22-brun-dvarg-thumb.jpg" width="250" alt="Illustration av en randig röd och orange brun dvärg framför Vintergatans stjärnband" style="display:block; width:100%; height:auto; border-radius:8px; border:0;">
+            </a>
+            <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:7px 0 0;">Illustration: NASA, ESA och J. Olmsted (STScI) (CC&nbsp;BY&nbsp;4.0), beskuren.</div>
+            <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:14px; line-height:1.55; color:#0f1620; margin:10px 0 4px;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-11-17-galaxen-som-var-en-brun-dvarg" style="color:#0f1620; text-decoration:none;"><strong>Galaxen som var en brun dvärg.</strong></a> En röd prick i Webbteleskopets bilder såg ut att vara en galax från knappt 100&nbsp;miljoner år efter big bang. Tre och ett halvt år senare hade pricken flyttat sig. Det är en kall brun dvärg omkring 2&nbsp;400&nbsp;ljusår bort.</p>
+            <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:13px; margin:0;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-11-17-galaxen-som-var-en-brun-dvarg" style="color:#2563a8; text-decoration:underline;">Läs mer &rarr;</a></p>
+          </td>
+          <td width="48%" valign="top" style="padding-left:10px;">
+            <a href="https://fysiklabbet.se/nyheter.html?id=2026-11-20-bruset-som-bar-ett-meddelande" style="text-decoration:none;">
+              <img src="https://fysiklabbet.se/nyheter/brev/2026-11-22-varmebrus-thumb.jpg" width="250" alt="En person håller upp en antenn i ett rum där väggar, golv och tak är täckta av blå skumpyramider" style="display:block; width:100%; height:auto; border-radius:8px; border:0;">
+            </a>
+            <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); margin:7px 0 0;">Foto: Kurt Barnett, UNSW Canberra, via Wikimedia Commons (CC&nbsp;BY-SA&nbsp;3.0), beskuren. Kammaren ingår inte i studien.</div>
+            <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:14px; line-height:1.55; color:#0f1620; margin:10px 0 4px;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-11-20-bruset-som-bar-ett-meddelande" style="color:#0f1620; text-decoration:none;"><strong>Ett meddelande utan radiosignal.</strong></a> Varje varm ledare susar av termiskt brus. Ingenjörer vid Stanford har byggt en sändare som inte sänder ut något alls, bara växlar sin antenn mellan öppen och kortsluten. Mottagaren läser meddelandet ur sitt eget brus.</p>
+            <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:13px; margin:0;"><a href="https://fysiklabbet.se/nyheter.html?id=2026-11-20-bruset-som-bar-ett-meddelande" style="color:#2563a8; text-decoration:underline;">Läs mer &rarr;</a></p>
+          </td>
+        </tr>
+      </table>
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:28px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:18px;">Läs även</div>
+      </div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:15px; line-height:1.9; color:#0f1620; margin:0;">
+        <a href="https://fysiklabbet.se/nyheter.html?id=2026-11-21-kulorna-som-minns" style="color:#2563a8; text-decoration:underline;">Skakade stålkulor minns hur de svalnade</a><br>
+        <a href="https://fysiklabbet.se/nyheter.html?id=2026-11-16-randerna-som-ser-i-3d" style="color:#2563a8; text-decoration:underline;">Film i 3D med 150&nbsp;000 bilder i sekunden</a><br>
+        <a href="https://fysiklabbet.se/nyheter.html?id=2026-11-19-gummibladen-som-viker-undan" style="color:#2563a8; text-decoration:underline;">Turbinblad av gummi viker undan för tidvattnet</a><br>
+        <a href="https://fysiklabbet.se/nyheter.html?id=2026-11-18-karnan-som-sander-ut-tva-partiklar-pa-en-gang" style="color:#2563a8; text-decoration:underline;">Alfa- och betastrålning i ett enda sönderfall?</a>
+      </p>
+      <div style="border-top:1px solid rgba(15,22,32,0.18); margin-top:28px; padding-top:22px;">
+        <div style="font-family:'Courier New',Courier,monospace; font-size:11px; letter-spacing:2px; color:rgba(15,22,32,0.62); text-transform:uppercase; margin-bottom:18px;">Nästa vecka</div>
+      </div>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:0 0 16px;">Fler genomgångar på film är på väg. Och ur nyhetskön väntar relativitetsteorin på havsbotten. På Medelhavets botten fångar ljussensorer neutriner som har passerat genom hela jorden, och forskarna har använt dem för att pröva om naturlagarna är desamma åt alla håll och i alla hastigheter, precis som Einstein sa. Vi läser på.</p>
+      <p style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.65; color:#0f1620; margin:26px 0 4px;">Ha en fin vecka!</p>
+      <p style="font-family:Georgia,'Times New Roman',serif; font-size:17px; color:#0f1620; margin:0 0 30px;">/ Fysiklabbet</p>
+    </td></tr>
+
+    <!-- ── Sidfot ───────────────────────────────────────────── -->
+    <!-- {{UnsubscribeURL}}, {{SenderInfo}} och {{RewardsURL}} krävs av
+         EmailOctopus i egen HTML. Ta inte bort dem. -->
+    <tr><td align="center" style="padding:20px 8px 0;">
+      <div style="font-family:'Courier New',Courier,monospace; font-size:10px; letter-spacing:1px; color:rgba(15,22,32,0.5); padding-bottom:12px;"><a href="https://fysiklabbet.se" style="color:rgba(15,22,32,0.5);">fysiklabbet.se</a> &middot; Interaktiva simuleringar, teori och övningar i fysik och matematik</div>
+      <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:12px; line-height:1.6; color:rgba(15,22,32,0.5); padding-bottom:6px;">Du får det här brevet för att du prenumererar på Fysiklabbets nyhetsbrev. <a href="{{UnsubscribeURL}}" style="color:rgba(15,22,32,0.5); text-decoration:underline;">Avsluta prenumerationen</a>.</div>
+      <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:12px; line-height:1.6; color:rgba(15,22,32,0.45); padding-bottom:6px;">{{SenderInfo}}</div>
+      <div style="font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; font-size:11px; color:rgba(15,22,32,0.4);"><a href="{{RewardsURL}}" style="color:rgba(15,22,32,0.4); text-decoration:underline;">Powered by EmailOctopus</a></div>
+    </td></tr>
+
+  </table>
+
+</td></tr>
+</table>
+
+</body>
+</html>

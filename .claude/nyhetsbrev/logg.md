@@ -11,6 +11,31 @@ Format:
 - Teaser: <vad som utlovades inför nästa vecka>
 ```
 
+## 2026-11-22 — "Tre stjärnor som slänger ut en, och en grön stjärna"
+- Status: UTKAST skrivet lördag 2026-11-21 (molnsession, klart cirka 05.20 svensk tid, före 08.00). Tänkt utskick
+  söndag 2026-11-22 kl 06.00 svensk tid. **Kampanjen är INTE upplagd i EmailOctopus** (molnet saknar Chrome): kör
+  `/brev-till-octopus` lokalt, testskicka och schemalägg (tidszonen default:ar till London). Bilderna i nyheter/brev/
+  pushades till main. Förhandsvisningen (JPEG) skickades till användaren.
+- Preheader: "Plus genomgångar på film, en elektromagnet på bänken och en bil i en lutande kurva."
+- Brevperiod 2026-11-15 till 2026-11-21: sju artiklar, alla länkade. Söndagens artikel (11-22, Voyager 1) sparas till
+  nästa brev. `verify-nyhetsbrev.js`, `verify-sprak.js` och `verify-nbsp-enhet.js` utan fel (längdvarning ~778 ord).
+- Nyheter: 2026-11-15-den-forsta-grona-stjarnan (hjälte), 2026-11-17-galaxen-som-var-en-brun-dvarg (förra brevets
+  teaser, infriad) och 2026-11-20-bruset-som-bar-ett-meddelande (miniatyrer). Läs även: stålkulorna (11-21), randigt
+  ljus i 3D (11-16), gummibladen (11-19), alfa och beta i ett sönderfall (11-18).
+- Nytt på sajten: genomgångarna på film i fy2-1.1–1.5 (planerat.md, länk till varje avsnitts &block=genomgang-film),
+  trekropparsproblemet, elektromagneten och doserad kurva (alla med skärmdump), kort rad om 240 nya övningar i
+  fy1-4.4–6.2. Utelämnat: geobrädan (får aldrig nämnas), Ljusresans Fortsätt resan, ma4-3.x-exemplen, Slumpa grupper-
+  dragningen, presentationslägets punktlistor, interna ändringar.
+- Bilder: nyheter/brev/2026-11-22-{genomgangsfilmer,trekropparsproblemet,elektromagneten,doserad-kurva,
+  grona-stjarnan-hero,brun-dvarg-thumb,varmebrus-thumb}.jpg. Skärmdumparna tagna i Chromium med React/Babel/three/
+  Tailwind från npm (CDN spärrade). Filmbilden är ett eget kort i sajtens stil (rutat papper, lista över avsnitten,
+  spelknapp), eftersom YouTube-miniatyrerna var spärrade i molnet; byt gärna mot en riktig bild ur filmen.
+- Veckans tips: utelämnat (brevet redan långt). tips.md orörd.
+- Teaser: fler genomgångar på film (öppet, planerat.md) + KM3NeT/ORCA och Lorentzinvariansen ([BREVTEASER] i ko.md),
+  kontrollerat mot data/nyheter.js och publicerat.md, ej publicerat. Teasat 2026-11-22. OBS: bockningen av
+  genomgångsfilmerna i planerat.md och teaserdatumet i ko.md gjordes inte (uppdraget tillät bara utkast, logg och
+  bilder i commit).
+
 ## 2026-11-15 — "En motor av batteri och tråd, och 2,3 miljoner varv"
 - Status: UTKAST skrivet lördag 2026-11-14 (molnsession, klart cirka 05.40 svensk tid, före 08.00). Tänkt utskick
   söndag 2026-11-15 kl 06.00 svensk tid. **Kampanjen är INTE upplagd i EmailOctopus** (molnet saknar Chrome): kör

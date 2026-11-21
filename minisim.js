@@ -44,6 +44,7 @@
  *           tongenerator (fy2-2.11: tonen på 440 Hz blir starkare och amplituden större när
  *                      ljudintensiteten ökas; frekvensen ändras inte)
  *   titel:  liten rubrik ovanför scenen (valfritt).
+ *           universumsskala (fy1-1.1: zooma från plancklängden till hela universum, motorn i universums-skala.js)
  *
  * Widgeten är ren vanilla-JS (ingen React) och har egen intern CSS.
  *
@@ -18150,6 +18151,29 @@
         rita();
     }
 
+    /* typ: universumsskala — universums skala från plancklängden till hela det
+     * observerbara universum (fy1-1.1). Motorn ligger i universums-skala.js
+     * och laddas först när blocket finns på sidan, precis som kalkylbladet. */
+    var universumLaddning = null;
+    function buildUniversumsskala(node, cfg) {
+        node.classList.add('lab-minisim-universum');
+        function montera() {
+            if (!window.FYSIKUNIVERSUMSSKALA) { node.textContent = 'Kunde inte ladda simuleringen.'; return; }
+            window.FYSIKUNIVERSUMSSKALA.mount(node, cfg);
+        }
+        if (window.FYSIKUNIVERSUMSSKALA) { montera(); return; }
+        if (!universumLaddning) {
+            universumLaddning = new Promise(function (resolve) {
+                var s = document.createElement('script');
+                s.src = 'universums-skala.js?v=' + (window.__CB || '');
+                s.onload = resolve;
+                s.onerror = resolve;
+                document.head.appendChild(s);
+            });
+        }
+        universumLaddning.then(montera);
+    }
+
     var TYPES = { tomtebloss: buildTomtebloss,
                   vagbotten: buildVagbotten, udde: buildUdde,
                   reflexion: buildReflexion, centrifug: buildCentrifug,
@@ -18183,7 +18207,8 @@
                   varmekansla: buildVarmekansla, smaltrace: buildSmaltrace,
                   blixtljud: buildBlixtljud, tongenerator: buildTongenerator, simsida: buildSimsida,
                   vagtank: buildVagtank,
-                  hogtalarpar: buildHogtalarpar, vagskillnad: buildVagskillnad };
+                  hogtalarpar: buildHogtalarpar, vagskillnad: buildVagskillnad,
+                  universumsskala: buildUniversumsskala };
 
     function decodeSrc(b64) {
         try { return decodeURIComponent(escape(atob(b64))); }

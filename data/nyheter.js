@@ -105,7 +105,7 @@ const NYHETER_ALL = [
   {
     id: "2026-11-22-voyager-ett-ljusdygn-bort",
     date: "2026-11-22",
-    title: "Voyager 1 är nu ett helt ljusdygn från jorden",
+    title: "SPECIAL: Voyager 1 är nu ett helt ljusdygn från jorden",
     deck: "Den 18 november 2026 blev rymdsonden Voyager 1 det första föremål som människor har skickat ett helt ljusdygn bort, nästan 26 miljarder kilometer. En radiosignal behöver nu ett dygn för att nå sonden och ett dygn till för att svaret ska komma tillbaka.",
     category: "Astronomi",
     readingTime: "5 min",
@@ -9157,7 +9157,7 @@ const NYHETER_ALL = [
   {
     id: "2026-07-02-cern-specialartikel",
     date: "2026-07-02",
-    title: "Inne i CERN: sju decennier av partiklar, Nobelpris och en och annan mård",
+    title: "SPECIAL: Inne i CERN, sju decennier av partiklar, Nobelpris och en och annan mård",
     deck: "Från ett fredsprojekt i krigets skugga till Higgspartikeln och World Wide Web — och en och annan baguette, mård och rädsla för svarta hål på vägen. Följ med på en resa genom sjuttio år vid världens största fysiklaboratorium.",
     category: "Fördjupning",
     readingTime: "13 min",

@@ -240,6 +240,12 @@ blir artikeln. Krav: håll dig till trovärdiga källor, dubbelkolla fakta, och 
 
 - **Språk: svenska.** Kommatecken som decimalavskiljare (5,0 inte 5.0).
   Ingen title case — bara första ordet i rubrik/mening versalt.
+- **Specialartiklar får "SPECIAL: " först i rubriken** (användarbeslut
+  2026-11-21). Det gäller fördjupande, extra långa artiklar som inte bygger
+  på en enskild ny studie: CERN-reportaget, Nobelpriset, Voyager 1 ett
+  ljusdygn bort. Ordet står i `title` (alltså även i RSS och
+  delningssidorna) och följs av vanlig rubrik med stor bokstav. Undvik ett
+  andra kolon i samma rubrik.
 - **Ton: professionell men populärvetenskaplig.** Förklara facktermer i klartext.
   Korta stycken. Konkreta jämförelser ("stor som ett tolvvåningshus").
 - **Använd de vedertagna svenska facktermerna — inte en ordboksöversättning av

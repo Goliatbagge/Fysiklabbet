@@ -1720,7 +1720,7 @@ window.BEGREPP = [
   {
     id: 'neutrino',
     term: 'Neutrino',
-    former: ['neutrino', 'neutrinon', 'neutriner', 'neutrinerna', 'antineutrino', 'antineutrinon', 'antineutriner', 'antineutrinerna', 'reaktorantineutrin', 'reaktorantineutriner', 'solneutrin', 'solneutriner', 'elektronneutrino', 'myonneutrino', 'tauneutrino', 'tauneutrinon'],
+    former: ['neutrino', 'neutrinon', 'neutriner', 'neutrinerna', 'antineutrino', 'antineutrinon', 'antineutriner', 'antineutrinerna', 'reaktorantineutrin', 'reaktorantineutriner', 'solneutrin', 'solneutriner', 'elektronneutrino', 'myonneutrino', 'tauneutrino', 'tauneutrinon', 'myonneutriner', 'myonneutrinerna', 'tauneutriner', 'tauneutrinerna'],
     kort: 'Universums skyggaste partikel: elektriskt neutral, nästan masslös och passerar rakt genom hela jordklotet utan att märka det. Varje sekund far tiotals miljarder neutriner genom din tumnagel.',
     relaterade: ['lepton', 'betasonderfall', 'svag-vaxelverkan', 'standardmodellen'],
     body: [
@@ -5135,6 +5135,42 @@ window.BEGREPP = [
       { type: 'p', html: 'En rymdsond har bara med sig lite bränsle. För att ändå komma långt kan den låna fart av planeterna. Sonden styrs så att den passerar nära en planet, och planetens gravitation drar i den och böjer av banan. Sett från planeten lämnar sonden planeten med samma fart som den kom med, bara i en annan riktning.' },
       { type: 'p', html: 'Men planeten rör sig själv runt solen. Sett från solen kan sonden därför komma ut ur passagen betydligt snabbare än den kom in, om den passerar bakom planeten i dess färdriktning. Det liknar en tennisboll som studsar mot en racket som slås framåt: bollen får med sig en del av racketens fart. Planeten bromsas samtidigt en aning, men den är så tung att ändringen inte går att märka.' },
       { type: 'p', html: 'Tekniken gjorde Voyager-sonderna möjliga. I slutet av 1970-talet stod Jupiter, Saturnus, Uranus och Neptunus så att en sond kunde slungas från den ena planeten till nästa. Ett sådant läge återkommer bara ungefär vart 175:e år. I dag används gravitationsslungor på nästan alla resor till de yttre planeterna, och även för att bromsa sonder på väg in mot solen.' }
+    ]
+  },
+  {
+    id: 'kvantgravitation',
+    term: 'Kvantgravitation',
+    former: ['kvantgravitation', 'kvantgravitationen', 'kvantgravitationsteori', 'kvantgravitationsteorin', 'kvantgravitationsteorier'],
+    kort: 'En teori som ännu inte finns men som många fysiker letar efter: en beskrivning av gravitationen som följer kvantfysikens regler. Den behövs för att förstå vad som händer i svarta hål och i universums allra första ögonblick.',
+    relaterade: ['rumtid', 'lorentzinvarians', 'planckskalan'],
+    body: [
+      { type: 'p', html: 'Fysiken vilar i dag på två stora teorier. Kvantfysiken beskriver atomer, ljus och elementarpartiklar, och den har klarat varje prov den utsatts för. Den allmänna relativitetsteorin beskriver gravitationen som en krökning av rum och tid, och den förutsäger allt från planeternas banor till gravitationsvågor. Problemet är att de två teorierna talar olika språk. I kvantfysiken kommer energin i bestämda portioner och mycket är osäkert, medan relativitetsteorin behandlar rum och tid som en jämn, sammanhängande yta.' },
+      { type: 'p', html: 'I vardagen gör det ingenting, eftersom gravitationen mellan enskilda partiklar är alldeles för svag för att märkas. Men i mitten av ett svart hål, eller i universums första bråkdel av en sekund, är både massorna och avstånden sådana att båda teorierna behövs på en gång. Där ger relativitetsteorin orimliga svar, som oändligt stora tätheter, och den går inte att foga ihop med kvantfysiken. En teori för kvantgravitation ska lösa det.' },
+      { type: 'p', html: 'Det finns flera förslag, bland annat strängteorin och slingkvantgravitationen, men inget av dem har kunnat prövas direkt. Effekterna väntas bli tydliga först vid ofantligt höga energier. Därför letar forskare efter små spår som skulle kunna synas redan nu, till exempel att ljus eller neutriner beter sig en aning annorlunda efter en mycket lång färd. Hittills har inga sådana spår hittats.' }
+    ]
+  },
+  {
+    id: 'planckskalan',
+    term: 'Planckskalan',
+    former: ['planckskalan', 'planckskala', 'planckenergin', 'planckenergi', 'plancklängden', 'plancklängd'],
+    kort: 'De extrema energier och små avstånd där gravitationen tros bli lika viktig som kvantfysiken. Energin är så hög att ingen partikelaccelerator kommer i närheten, och längden är mycket mindre än en atomkärna.',
+    relaterade: ['kvantgravitation', 'rumtid'],
+    body: [
+      { type: 'p', html: 'Max Planck lade märke till att tre naturkonstanter, ljusets hastighet <em>c</em>, gravitationskonstanten <em>G</em> och Plancks konstant <em>h</em>, kan kombineras så att de ger en längd, en tid och en energi. Längden är omkring 1,6&nbsp;·&nbsp;10<sup>−35</sup>&nbsp;meter. En proton är ungefär hundra miljarder miljarder gånger större. Energin är omkring 10<sup>19</sup>&nbsp;GeV. De här värdena kallas tillsammans planckskalan.' },
+      { type: 'p', html: 'Planckskalan är den skala där fysikerna tror att gravitationen inte längre går att beskriva utan kvantfysik. Vid så små avstånd kan rummet självt tänkas vara kornigt, ungefär som en bild som ser jämn ut på avstånd men består av pixlar när man går nära.' },
+      { type: 'p', html: 'Energin vid planckskalan är omkring tio miljarder miljarder gånger en protons viloenergi, och nästan en biljard gånger mer än i kollisionerna i partikelacceleratorn LHC. Därför prövas idéerna indirekt, med mätningar som är så noggranna att även en mycket liten effekt skulle synas.' }
+    ]
+  },
+  {
+    id: 'fotomultiplikatorror',
+    term: 'Fotomultiplikatorrör',
+    former: ['fotomultiplikatorrör', 'fotomultiplikatorröret', 'fotomultiplikatorrören', 'fotomultiplikator', 'fotomultiplikatorn', 'fotomultiplikatorer'],
+    kort: 'En ljusdetektor som är så känslig att den kan registrera en enda foton. Ljuset slår loss en elektron, och elektronen förstärks sedan i flera steg till en mätbar strömpuls.',
+    relaterade: ['foton', 'tjerenkovstralning', 'neutrino'],
+    body: [
+      { type: 'p', html: 'Ett fotomultiplikatorrör är ett lufttomt glasrör. Längst fram sitter en tunn, ljuskänslig beläggning. När en foton träffar beläggningen kan fotonen slå loss en elektron, precis som i den fotoelektriska effekten. En enda elektron är för lite för att mäta, så röret förstärker den.' },
+      { type: 'p', html: 'Inne i röret sitter en rad metallplattor med allt högre spänning. Elektronen accelereras mot den första plattan och slår loss några nya elektroner där. De accelereras mot nästa platta och slår loss ännu fler. Efter tio till tolv steg har en enda elektron blivit miljontals, och de ger en kort strömpuls som går att mäta.' },
+      { type: 'p', html: 'Därför används fotomultiplikatorrör där ljuset är extremt svagt: i neutrinoteleskop som fångar det blå tjerenkovljuset i vatten eller is, i medicinska kameror och i mätningar av radioaktivitet. Nackdelen är att rören är känsliga för magnetfält och inte tål starkt ljus medan spänningen är på.' }
     ]
   }
 ];

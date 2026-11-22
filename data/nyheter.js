@@ -103,6 +103,63 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-23-neutrinerna-som-provar-einstein",
+    date: "2026-11-23",
+    title: "Neutriner som rest genom jorden prövar relativitetsteorin på Medelhavets botten",
+    deck: "Ett neutrinoteleskop 2 450 meter under Medelhavets yta har registrerat 5 828 neutrinohändelser, nästan alla efter en färd genom jorden. Forskarna letade efter tecken på att Einsteins princip om att naturlagarna är desamma för alla observatörer som rör sig med konstant hastighet inte håller exakt. De hittade inga, men kunde sätta nya gränser för hur stort ett sådant brott kan vara.",
+    category: "Partikelfysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-11-23-neutrinerna-som-provar-einstein.jpg",
+    imageAlt: "Datorritad bild av ett neutrinoteleskop på havsbotten. Långa, tunna linor står lodrätt från botten upp mot ytan, och längs dem sitter små klot på jämna avstånd. Mitt i bilden hänger en gul boj, och till höger syns ett av kloten på nära håll, fullt av runda ljussensorer. På sandbotten står gula förankringar i rader.",
+    imageCredit: "Illustration: Edward Berbee/Nikhef, KM3NeT (CC BY-NC 4.0). Konstnärlig bild. På 2 450 meters djup är det helt mörkt.",
+    tags: ["partikelfysik", "neutriner", "neutrinooscillation", "lorentzinvarians", "relativitetsteori", "kvantgravitation", "rumtid", "km3net", "orca", "tjerenkovljus", "myonneutrino", "tauneutrino", "medelhavet", "neutrinoteleskop"],
+    sources: [
+      { name: "EurekAlert! (SISSA Medialab): Testing Einstein’s laws from the bottom of the Mediterranean Sea (4 november 2026)", url: "https://www.eurekalert.org/news-releases/1149873" },
+      { name: "Phys.org: Testing Einstein’s laws from the bottom of the Mediterranean Sea (4 november 2026)", url: "https://phys.org/news/2026-11-einstein-laws-bottom-mediterranean-sea.html" },
+      { name: "arXiv: KM3NeT-samarbetet, förtrycket av studien (öppet tillgängligt)", url: "https://arxiv.org/abs/2603.04264" }
+    ],
+    research: {
+      citation: "KM3NeT-samarbetet (O. Adriani med flera), ”Atmospheric neutrino constraints on Lorentz invariance violation with the first six detection units of KM3NeT/ORCA”, Journal of Cosmology and Astroparticle Physics 11 (2026) 012, publicerad 4 november 2026. Kollegialt granskad, öppet tillgänglig (CC BY 4.0).",
+      url: "https://doi.org/10.1088/1475-7516/2026/11/012"
+    },
+    larare: {
+      moment: [
+        { label: "Relativitetsteori", href: "katalog.html?id=fy1-8.1" },
+        { label: "Radioaktivt sönderfall", href: "katalog.html?id=fy1-9.3" }
+      ],
+      fragor: [
+        "Brytningsindex för havsvatten är ungefär 1,34. Hur fort går ljus i vattnet? En myon med farten 0,99 · c sänder ut tjerenkovljus, men en myon med farten 0,70 · c gör det inte. Förklara varför.",
+        "Teleskopet räknar bara partiklar som kommer underifrån, fast neutrinerna kommer från alla håll. Varför är det ett smart val? Vad säger det om hur ofta en neutrino krockar med något?",
+        "Studien hittade inget brott mot relativitetsteorin. Varför är det ändå värt att publicera? Kan ett försök någonsin bevisa att en princip håller exakt?"
+      ]
+    },
+    body: [
+      { type: "p", html: "Är naturlagarna desamma för alla, hur fort man än rör sig? Enligt Einsteins relativitetsteori är de det. Lagarna har samma form för varje observatör som rör sig med konstant hastighet, och resultatet av ett försök beror varken på hur apparaten är vriden eller hur fort den färdas. Principen kallas lorentzinvarians och bär upp både relativitetsteorin och standardmodellen för partiklarna. Men några av de teorier som försöker förena gravitationen med kvantfysiken tillåter att principen bryts, om än bara en aning." },
+      { type: "p", html: "Nu har forskare i det internationella KM3NeT-samarbetet prövat principen med neutriner som fångats 2&nbsp;450&nbsp;meter under Medelhavets yta, omkring 40&nbsp;kilometer från Toulon i södra Frankrike. De fann inga tecken på något brott, men kunde räkna ut hur stort ett brott högst kan vara. Studien publicerades i <em>Journal of Cosmology and Astroparticle Physics</em> den 4 november." },
+      { type: "h2", text: "Kan rumtiden vara kornig?" },
+      { type: "p", html: "Vi brukar tänka på rumtiden som sammanhängande, som en slät yta. Flera försök att bygga en teori för kvantgravitation antyder i stället att den på den allra minsta skalan består av små, odelbara bitar. Ett sådant kornigt rum är svårt att förena med en princip som säger att allt ser likadant ut oavsett hur fort man rör sig." },
+      { type: "quote", html: "Vi vet fortfarande inte om vår rumtid är sammanhängande eller om den kanske är diskret. Att leta efter brott mot lorentzinvariansen är ett sätt att undersöka den möjligheten.", cite: "Alba Domi, forskare vid Erlangen Centre for Astroparticle Physics, Friedrich-Alexander-Universität Erlangen-Nürnberg" },
+      { type: "p", html: "Om principen bryts väntas det märkas tydligast vid den så kallade planckskalan, kring 10<sup>19</sup>&nbsp;GeV. Det är omkring tio miljarder miljarder gånger en protons viloenergi, och nästan en biljard gånger mer än i kollisionerna i världens största partikelaccelerator, LHC vid CERN. Så höga energier går inte att skapa. Men ett litet brott skulle kunna lämna spår också vid lägre energier, om man mäter tillräckligt noga och över tillräckligt långa sträckor." },
+      { type: "h2", text: "Neutriner som byter skepnad" },
+      { type: "p", html: "Det är där neutrinerna kommer in. Neutriner är elementarpartiklar med nästan ingen massa och ingen laddning, och de växelverkar så sällan med annan materia att de flesta far rakt igenom hela jordklotet. De finns i tre sorter: elektronneutrino, myonneutrino och tauneutrino. Under färden kan en neutrino byta sort, så att en neutrino som bildades som en myonneutrino upptäcks som en tauneutrino. Fenomenet kallas neutrinooscillation, och hur sannolikt bytet är beror på neutrinons energi och på hur långt den har färdats. Det går att räkna ut mycket noga." },
+      { type: "p", html: "De neutriner forskarna använde bildas när den kosmiska strålningen krockar med atomkärnor högt upp i atmosfären, över hela jorden. En myonneutrino som kommer rakt underifrån har färdats genom hela jordklotet, drygt 12&nbsp;700&nbsp;km. Med en energi kring 25&nbsp;GeV har den då störst chans att ha bytt sort. Ett brott mot lorentzinvariansen skulle fungera som ett litet extra bidrag till neutrinons energi som inte kommer från dess massa. Bytet mellan sorterna skulle då få en annan takt vid olika energier och sträckor, och mönstret i mätningarna skulle få en annan form än teorin förutsäger." },
+      { type: "h2", text: "Jorden som sköld" },
+      { type: "p", html: "Teleskopet heter KM3NeT/ORCA och är fortfarande under uppbyggnad. Det består av lodräta linor som är förankrade i havsbotten och hålls upprätta av flytkraften. Varje lina bär 18 glasklot, och varje klot rymmer 31 ljuskänsliga fotomultiplikatorrör. När en neutrino krockar med en atomkärna i vattnet bildas laddade partiklar som rör sig fortare än ljuset gör i vatten. Då sänds svagt blått tjerenkovljus ut, ungefär som överljudsknallen från ett flygplan som flyger fortare än ljudet. En myonneutrino ger en myon som drar ett ljusspår tiotals till hundratals meter genom vattnet, medan de andra sorterna ger korta ljusblixtar." },
+      { type: "p", html: "Svårigheten är att havet lyser av annat också. Radioaktivt kalium i havssaltet och självlysande mikroorganismer ger ett ständigt flimmer. Värre är myonerna från atmosfären, som når ner till detektorn ovanifrån. Efter de första sållningarna var de fortfarande omkring tio miljoner gånger fler än neutrinohändelserna. Forskarna räknade därför bara partiklar som kom underifrån. Myonerna stoppas av jordklotet, men neutrinerna går rakt igenom. Med maskininlärning rensades sedan de sista felklassade myonerna bort, tills de var färre än två procent av händelserna." },
+      { type: "p", html: "Mätningarna gjordes från januari 2020 till november 2021, när bara sex linor av de planerade drygt hundra var på plats. Efter sorteringen återstod 5&nbsp;828 neutrinohändelser. Forskarna sorterade dem efter energi och efter vilken riktning de kom från. Riktningen avslöjar sträckan genom jorden: från några hundra kilometer för de neutriner som kommer nästan vågrätt till hela jordens diameter för dem som kommer rakt underifrån." },
+      { type: "h2", text: "Inga avvikelser, men snävare gränser" },
+      { type: "p", html: "Mönstret stämde med vanlig neutrinooscillation. Forskarna sökte efter den enklaste sortens brott, ett som är lika stort i alla riktningar, och prövade en effekt i taget. Ingen av dem behövdes för att förklara mätningarna. I stället kunde forskarna ange hur stora effekterna högst kan vara utan att stå i strid med mätningarna. Trots den lilla detektorn och den korta mättiden är gränserna jämförbara med dem från japanska Super-Kamiokande, som samlat data i tolv år, och IceCube vid sydpolen." },
+      { type: "p", html: "Den skarpaste gränsen gäller en effekt som skulle blanda myonneutriner och tauneutriner direkt. Energibidraget från den effekten får vara högst i storleksordningen 10<sup>−24</sup>&nbsp;GeV, alltså några miljondels miljarddels elektronvolt. Forskarna satte också de första direkta gränserna för om ett brott påverkar myonneutriner och tauneutriner olika mycket, för sex olika sorters effekter, från en som är lika stor vid alla energier till sådana som växer allt snabbare med energin." },
+      { type: "quote", html: "De här resultaten visar att KM3NeT/ORCA kan pröva fysikens grundprinciper, även med en förhållandevis liten detektor. Med mer data och en detektor som växer kommer vi att kunna leta efter ännu mindre effekter.", cite: "Lukas Hennig, doktorand vid Erlangen Centre for Astroparticle Physics" },
+      { type: "p", html: "Nästa steg kan bli systerteleskopet ARCA, 3&nbsp;500&nbsp;meter under ytan utanför Sicilien, som fångar neutriner med mycket högre energi från avlägsna källor ute i rymden. Där borde ett brott synas tydligare, eftersom flera av effekterna växer med energin och med sträckan. ”Än så länge har vi inte tillräckligt många neutriner från rymden för att göra en sådan analys”, säger Alba Domi." },
+      { type: "fact", title: "Visste du?", items: [
+        "Ljuset går ungefär en fjärdedel långsammare i vatten än i vakuum, omkring 225&nbsp;000&nbsp;km/s. En partikel kan därför vara snabbare än ljuset i vattnet utan att bryta mot relativitetsteorin, eftersom ingenting kan gå fortare än ljusets fart i vakuum, $c \\approx 3{,}00 \\cdot 10^{8}\\ \\mathrm{m/s}$.",
+        "Planckskalan, 10<sup>19</sup>&nbsp;GeV, motsvarar omkring 2&nbsp;miljarder joule. Det är ungefär lika mycket energi som i en full tank bensin, men samlad i en enda partikel.",
+        "De neutriner som når detektorn nästan rakt underifrån har färdats genom jordens järnkärna. Vid de energier som mättes är hela jordklotet nästan genomskinligt för dem."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-22-voyager-ett-ljusdygn-bort",
     date: "2026-11-22",
     title: "SPECIAL: Voyager 1 är nu ett helt ljusdygn från jorden",

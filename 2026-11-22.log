@@ -1,0 +1,40 @@
+03:15:02  [idag] === Nyhetsjobb: start (2026-11-22) ===
+03:15:06  [idag] Dagens nyhet finns (förberedd i går).
+03:15:07  [idag] Startar Claude Code (headless, modell opus, nyckel)...
+03:20:02  [imorgon] === Nyhetsjobb: start (2026-11-22) ===
+03:20:02  [imorgon] En körning pågår redan (lås 5 min gammalt). Avslutar.
+03:26:17  [idag] Nyheten för 2026-11-23 är skriven, granskad och committad som `85efbcc6` på grenen `nyhetsjobb`. Jag har inte pushat och inte mejlat; det sköter skriptet.
+03:26:17  [idag] 
+03:26:17  [idag] **Artikeln:** ”Neutriner som rest genom jorden prövar relativitetsteorin på Medelhavets botten” (`2026-11-23-neutrinerna-som-provar-einstein`, kategori Partikelfysik).
+03:26:17  [idag] - Teleskopet KM3NeT/ORCA har registrerat 5 828 neutrinohändelser, 2 450 m under Medelhavets yta, med bara sex linor på plats. Forskarna letade efter brott mot lorentzinvariansen, alltså Einsteins princip att naturlagarna är desamma för alla som rör sig med konstant hastighet. De hittade inga, men satte nya gränser för hur stort ett sådant brott kan vara.
+03:26:18  [idag] - Den löser in teasern ur nyhetsbrevet 2026-11-22. Måndag är första tillåtna dagen.
+03:26:18  [idag] - Grannen 2026-11-22 handlar om astronomi, så samma område hamnar inte två dagar i rad. Senaste partikel- och kärnfysik var 2026-11-18.
+03:26:18  [idag] 
+03:26:18  [idag] **Källan:** Studien är publicerad i JCAP 11 (2026) 012 och är kollegialt granskad. Jag läste hela förtrycket på arXiv. Den publicerade versionen reviderades i juni och gick inte att läsa i sin helhet, bara abstractet. Därför står den skarpaste gränsen bara som storleksordning, 10⁻²⁴ GeV.
+03:26:18  [idag] 
+03:26:18  [idag] **Bilden:** KM3NeT:s egen illustration av teleskopet (Edward Berbee/Nikhef). Licensen är CC BY-NC 4.0, alltså ingen kommersiell användning. Det är en konstnärlig bild, och bildtexten säger att det är helt mörkt på det djupet.
+03:26:18  [idag] 
+03:26:18  [idag] **Granskning:**
+03:26:18  [idag] - Utgivaren gav först RÄTTA FÖRST med fyra punkter: jordens diameter, ingressens ordval, en formulering om effekternas energiberoende och en mening i begreppet kvantgravitation. Allt är rättat och artikeln GODKÄND efter omgranskning.
+03:26:18  [idag] - Korrekturläsarens språkbyten är införda.
+03:26:18  [idag] - Vid skärmdumpen upptäckte jag att citaten inte visades, eftersom jag använt fel fältnamn i citatblocken. Det är rättat och kontrollerat i ny skärmdump.
+03:26:18  [idag] 
+03:26:18  [idag] **Ordlistan:** Tre nya begrepp: kvantgravitation, planckskalan och fotomultiplikatorrör. Böjningsformerna myonneutriner och tauneutriner är tillagda i neutrino.
+03:26:18  [idag] 
+03:26:18  [idag] **Kön:** KM3NeT-posten är borttagen. Brevteaser-märkningen är flyttad till uppslaget om meddelandet som skickades genom en tegelvägg med gravitationen (University of Queensland).
+03:26:18  [idag] 
+03:26:18  [idag] **Kontroller:** Byggskriptet är kört. Kontrollerna av ordlistan, navigationen, sitemapen och språket är gröna för den nya texten. Språkgranskaren hittar tre fel, men de ligger i äldre artiklar och inte i den här.
+03:26:18  [idag] 
+03:26:18  [idag] Byggskriptet skrev också om filerna i `katalog/dela/`, men bara radsluten ändrades. De ligger utanför committen.
+03:26:19  [idag] Claude avslutade med kod 0
+03:26:19  [idag] error: cannot pull with rebase: You have unstaged changes.
+03:26:19  [idag] error: Please commit or stash them.
+03:26:24  [idag] Pushat till main.
+03:26:24  [idag] Artikel 2026-11-23 pushad: 2026-11-23-neutrinerna-som-provar-einstein
+03:27:55  [idag] https://fysiklabbet.se/nyheter.html?forhand=2026-11-23-neutrinerna-som-provar-einstein
+03:27:55  [idag] Mejlet byggt av mallen (C:\claude\Fysiklabbet-nyhetsjobb\.claude\nyheter\logg\mejl-2026-11-23).
+03:27:55  [idag] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+03:28:58  [idag] E-postmejlet skickat. Jag fyllde i [[UTGIVARE]] med: utgivaren bad om fyra rättningar (jordens diameter till 12 742 km, att effekten inte växer med energin, "neutrinohändelser" i stället för "neutriner" i ingressen, samt två formuleringar i begreppet kvantgravitation) — alla införda, artikeln godkänd.
+03:28:59  [idag] Claude avslutade med kod 0
+03:28:59  [idag] Mejlet till ägaren är skickat.
+03:28:59  [idag] === Nyhetsjobb: slut ===

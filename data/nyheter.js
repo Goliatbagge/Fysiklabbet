@@ -103,6 +103,63 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-24-turbulensen-som-tammer-sig-sjalv",
+    date: "2026-11-24",
+    title: "Turbulensen tämjer sig själv när ett fusionsplasma plötsligt håller värmen bättre",
+    deck: "När ett fusionsplasma värms tillräckligt mycket stillnar virvlarna i dess ytterkant plötsligt, och plasmat håller värmen ungefär dubbelt så länge. Fenomenet upptäcktes 1982, men ingen har kunnat förklara varför det kräver olika mycket effekt vid olika förhållanden. Nu har forskare i Lausanne tagit fram en teori som ger svaret, och den förutsäger hur mycket uppvärmning framtidens stora fusionsanläggningar behöver.",
+    category: "Plasmafysik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-11-24-turbulensen-som-tammer-sig-sjalv.jpg",
+    imageAlt: "Vidvinkelbild från insidan av en tokamak. En tjock, lodrät pelare klädd med grå plattor står mitt i en ringformad kammare. Väggarna runt omkring är också täckta av plattor och har runda öppningar för mätinstrument.",
+    imageCredit: "Foto: EPFL (CC&nbsp;BY-SA&nbsp;4.0). Insidan av tokamaken TCV vid Swiss Plasma Center i Lausanne.",
+    tags: ["plasmafysik", "fusion", "tokamak", "h-läge", "turbulens", "energiinneslutning", "iter", "sparc", "tcv", "epfl", "simulering", "magnetfält"],
+    sources: [
+      { name: "EPFL: Solving a 40-year puzzle in fusion energy (Nik Papageorgiou, 20 november 2026)", url: "https://actu.epfl.ch/news/solving-a-40-year-puzzle-in-fusion-energy/" },
+      { name: "Phys.org: Theory explains how fusion plasmas enter a state of improved energy confinement, solving a 40-year puzzle (20 november 2026)", url: "https://phys.org/news/2026-11-theory-fusion-plasmas-state-energy.html" },
+      { name: "arXiv: författarnas version av studien (öppet tillgänglig, CC BY 4.0)", url: "https://arxiv.org/abs/2605.00624" }
+    ],
+    research: {
+      citation: "B. De Lucca, P. Ricci, B. Labit, D. Mancini, L. N. Stenger och Z. Tecchiolli, ”Theory for the power threshold of the L–H transition in tokamaks”, Physical Review Letters 137, 205101, publicerad 13 november 2026. Kollegialt granskad.",
+      url: "https://doi.org/10.1103/rw25-wy15"
+    },
+    larare: {
+      moment: [
+        { label: "Effekt", href: "katalog.html?id=fy1-4.5" },
+        { label: "Massdefekt och bindningsenergi", href: "katalog.html?id=fy1-9.2" },
+        { label: "Laddade partiklar i magnetfält", href: "katalog.html?id=fy2-3.4" }
+      ],
+      fragor: [
+        "Plasmat i en tokamak består av laddade partiklar. Varför kan ett magnetfält hålla dem borta från väggen? Vad händer med en elektron som rör sig vinkelrätt mot ett magnetfält?",
+        "ITER beräknas behöva minst 43 MW uppvärmning för att nå H-läget. Hur mycket energi tillförs plasmat under en puls på 400 sekunder med den effekten?",
+        "Teorin förutsäger 26 ± 7 MW för SPARC, som planeras få 25 MW uppvärmning. Betyder det att SPARC inte kommer att nå H-läget? Resonera kring vad osäkerheten säger."
+      ]
+    },
+    body: [
+      { type: "p", html: "I en fusionsreaktor ska atomkärnor av väte slås samman och frigöra energi, på samma sätt som i solen. För att det ska hända måste vätet hettas upp till över hundra miljoner grader. Då har elektronerna slitits loss från kärnorna, och gasen har blivit ett plasma. Inget material tål den temperaturen, så i en tokamak hålls plasmat svävande i en ringformad kammare av starka magnetfält. Svårigheten är att hålla kvar värmen. Plasmat är turbulent, och virvlarna i det för hela tiden värme ut mot kanten." },
+      { type: "p", html: "Nu har forskare vid Swiss Plasma Center på EPFL i Lausanne tagit fram en teori för ett fenomen som fusionsforskarna har kunnat använda i över fyrtio år utan att förstå: att plasmat plötsligt börjar hålla värmen mycket bättre när det värms tillräckligt. Studien publicerades i <em>Physical Review Letters</em> den 13 november." },
+      { type: "h2", text: "Ett språng som upptäcktes 1982" },
+      { type: "p", html: "År 1982 upptäckte forskare vid tokamaken ASDEX i Tyskland att plasmat bytte beteende när uppvärmningen ökades över en viss gräns. Plasmat höll plötsligt energin ungefär dubbelt så länge som förut. Senare mätningar visade att turbulensen i ytterkanten dämpas nästan på en gång och att trycket nära kanten stiger brant. Det nya tillståndet kallas H-läge, efter engelskans <em>high confinement</em>, god inneslutning. Det vanliga tillståndet kallas L-läge." },
+      { type: "p", html: "H-läget anses nödvändigt för att framtidens reaktorer ska ge mer energi än de förbrukar. Men det har varit svårt att säga hur mycket uppvärmning som krävs för att nå dit. Gränsen beror nämligen på flera saker på ett sätt som ingen teori har kunnat förklara samtidigt. Om tätheten i plasmat ökas sjunker först den effekt som krävs, men över en viss täthet stiger den igen. Gränsen beror också på åt vilket håll magnetfältet går runt ringen: åt ena hållet räcker ungefär halva effekten jämfört med åt det andra. Däremot spelar det ingen roll åt vilket håll den elektriska strömmen i plasmat går. Hittills har forskarna fått nöja sig med formler som anpassats till mätningar från många tokamaker." },
+      { type: "h2", text: "Virvlarna skapar sina egna strömmar" },
+      { type: "p", html: "Forskarna använde datorprogrammet GBS, som räknar ut hur plasmat i en tokamaks ytterkant rör sig i tre dimensioner, och körde det på superdatorer i Schweiz och Bulgarien. Simuleringen började i L-läge, med virvlar som förde ut värme mot kanten. Sedan ökades uppvärmningen plötsligt med ungefär 40&nbsp;procent." },
+      { type: "image", src: "nyheter/bilder/2026-11-24-turbulensen-som-tammer-sig-sjalv-2.jpg", alt: "Datorbild av en tokamak som skurits upp så att man ser två tvärsnitt av plasmat. I tvärsnitten syns röda och blå virvelmönster runt en droppformad kontur, och mönstren är tätast i plasmats ytterkant och nertill där konturen korsar sig själv. Mellan tvärsnitten syns plasmats yta randig i rött och blått.", caption: "Turbulensen i ytterkanten av ett tokamakplasma i en av forskarnas simuleringar. Virvlarna för värme och partiklar från det heta inre ut mot kanten.", credit: "Bild: EPFL/Brenno De Lucca (CC&nbsp;BY-SA&nbsp;4.0)" },
+      { type: "p", html: "Med magnetfältet åt det gynnsamma hållet hände samma sak som i de riktiga försöken. Efter en kort stund dämpades turbulensen i kanten, och tiden som plasmat höll kvar energin fördubblades. Den sjönk sedan något och stannade på ungefär en och en halv gång det ursprungliga värdet. Med magnetfältet åt andra hållet och samma effekt hände ingenting. Först när forskarna körde om simuleringen med ungefär dubbelt så stor uppvärmning som i L-läget gick också det plasmat över i H-läge." },
+      { type: "p", html: "Simuleringarna visade vad som händer. Det är turbulensen själv som sätter igång ett flöde i plasmats ytterkant, där skikt som ligger bredvid varandra rör sig olika fort. Skillnaden i fart mellan skikten drar isär virvlarna innan de hinner bli stora och föra ut värme. När turbulensen dämpas blir det varmare i kanten, och då växer flödet ännu mer. Övergången förstärker alltså sig själv. När forskarna tog bort flödet ur simuleringen kom turbulensen tillbaka direkt." },
+      { type: "p", html: "Det visade sig också att de små störningar i magnetfältet som plasmat självt orsakar måste vara med i räkningen. När forskarna räknade utan dem uteblev övergången helt." },
+      { type: "h2", text: "Därför spelar riktningen roll" },
+      { type: "p", html: "Med en förenklad modell kunde forskarna också förklara varför magnetfältets riktning har betydelse. Om man vänder både fältet och strömmen och sedan spelar upp förloppet baklänges i tiden, borde plasmat bete sig likadant. Men partiklarna i plasmat krockar med varandra, och krockarna ger elektriskt motstånd som gör förloppet oåterkalleligt, ungefär som friktion. Tillsammans med flödet, att magnetfältslinjernas vridning ändras från skikt till skikt och att ringens tvärsnitt inte ser likadant ut uppåt och nedåt gör det att flödet kommer igång lättare med fältet åt ena hållet. Strömmens riktning påverkar däremot inte resultatet, precis som i försöken." },
+      { type: "p", html: "Ur teorin härledde forskarna formler för hur mycket effekt som krävs, både vid hög och låg täthet, och för den täthet där det krävs minst effekt. Exponenterna i formlerna, alltså hur starkt effekten beror på magnetfältets styrka, tätheten och reaktorns storlek, räknades fram ur teorin. Det enda som anpassades till mätningarna var konstanterna framför uttrycken. Ändå stämde formeln för hög täthet något bättre med en stor internationell databas med mätningar från många tokamaker än den formel som anpassats direkt till samma data." },
+      { type: "h2", text: "Liten marginal för den kompakta reaktorn" },
+      { type: "p", html: "Forskarna använde sedan formlerna för att räkna ut hur mycket uppvärmning två av de största projekten behöver. ITER, den internationella fusionsanläggningen som byggs i södra Frankrike, behöver enligt teorin minst 43&nbsp;megawatt, med en osäkerhet på 11&nbsp;megawatt, för att nå H-läget med fullt magnetfält. ITER planeras för 73&nbsp;megawatt, så marginalen är god. För SPARC, en kompakt tokamak med mycket starkt magnetfält som det amerikanska företaget Commonwealth Fusion Systems bygger, blir svaret 26&nbsp;megawatt, med en osäkerhet på 7&nbsp;megawatt. Den planeras få en uppvärmning på 25&nbsp;megawatt. Andra forskare har redan varnat för detta utifrån de äldre formlerna, och nu får varningen stöd av en teori." },
+      { type: "p", html: "Modellen är förenklad. Den beskriver plasmat som två vätskor, en av elektroner och en av joner, och i simuleringen var jonerna bara 800 gånger tyngre än elektronerna, mot drygt 3&nbsp;600 gånger för deuterium i verkligheten. Det gjordes för att beräkningarna skulle gå att genomföra, och enligt forskarna påverkar det inte resultatet. Teorin fångar inte heller fullt ut hur gränsen beror på vilken väteisotop som används, och i tokamaken TCV i Lausanne var den lägsta effekt som krävdes högre än teorin förutsäger. Forskarna tror att det beror på att en del av effekten där strålar bort utan att nå plasmats kant." },
+      { type: "fact", title: "Visste du?", items: [
+        "Den effekt som teorin räknar med är den som passerar ut genom plasmats kant. En del av den tillförda energin kan stråla bort innan den kommer så långt.",
+        "Tokamaken TCV i Lausanne, som syns i bilden överst, kan forma plasmats tvärsnitt på många olika sätt. Namnet är en fransk förkortning av <em>Tokamak à configuration variable</em>, tokamak med varierbar form.",
+        "SPARC har ett magnetfält på 12,2&nbsp;tesla, ungefär 250&nbsp;000 gånger starkare än jordens magnetfält vid Sveriges breddgrader."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-23-neutrinerna-som-provar-einstein",
     date: "2026-11-23",
     title: "Neutriner som rest genom jorden prövar relativitetsteorin på Medelhavets botten",

@@ -291,6 +291,18 @@ window.BEGREPP = [
     ]
   },
   {
+    id: 'h-lage',
+    term: 'H-läge',
+    former: ['h-läge', 'h-läget'],
+    kort: 'Ett tillstånd i ett fusionsplasma där virvlarna i ytterkanten plötsligt dämpas, så att plasmat håller kvar värmen ungefär dubbelt så länge som i det vanliga L-läget.',
+    relaterade: ['tokamak', 'plasma', 'turbulens', 'karnfusion'],
+    body: [
+      { type: 'p', html: 'Tänk dig en kastrull med varmt vatten där du hela tiden rör om. Omrörningen för snabbt värme ut mot kastrullens kanter, och vattnet svalnar fortare än om det stod stilla. Ett fusionsplasma i en tokamak har samma problem: det är fullt av virvlar, och virvlarna för värme från det heta inre ut mot kanten. Det vanliga tillståndet kallas <em>L-läge</em>, efter engelskans <em>low confinement</em>, dålig inneslutning.' },
+      { type: 'p', html: 'År 1982 upptäckte forskare vid tokamaken ASDEX i Tyskland att något hände när de värmde plasmat tillräckligt mycket. Plasmat höll plötsligt energin ungefär dubbelt så länge. Senare mätningar visade att virvlarna i ytterkanten dämpas nästan på en gång och att trycket nära kanten stiger brant. Det nya tillståndet fick namnet <em>H-läge</em>, efter <em>high confinement</em>, god inneslutning. Förklaringen är att det uppstår ett flöde i kanten där skikt som ligger bredvid varandra rör sig olika fort. Skillnaden i fart drar isär virvlarna innan de hinner bli stora, ungefär som när en vindby river sönder en rökring.' },
+      { type: 'p', html: 'H-läget anses nödvändigt för att en fusionsreaktor ska kunna ge mer energi än den förbrukar, och de stora anläggningar som byggs i dag är konstruerade för att köras i det. Den effekt som krävs för att nå dit beror bland annat på plasmats täthet, magnetfältets styrka och reaktorns storlek, och även på åt vilket håll magnetfältet går runt ringen. Att förutsäga den gränsen har länge varit ett av fusionsforskningens svåra problem.' }
+    ]
+  },
+  {
     id: 'landaudampning',
     term: 'Landaudämpning',
     former: ['landaudämpning', 'landaudämpningen'],

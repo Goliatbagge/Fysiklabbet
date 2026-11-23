@@ -705,3 +705,12 @@ Källa: Physics Magazine (APS) 2026-11-10 (Ryan Wilkinson, synopsis ”Granular 
 > Bild: AI-illustration (Gemini), ingen fri bild fanns; arXiv-licensen är bara nonexclusive-distrib och PRL är inte öppen, så studiens foto (figur A1) användes inte. Bildtexten säger att bilden inte visar forskarnas uppställning.
 > Nya begrepp: granulärt material (med granulär gas/temperatur), Kovacseffekten, Mpembaeffekten.
 > Ingen simuleringsruta (Elastisk och oelastisk stöt tangerar bara ämnet); Rörelseenergi, Rörelsemängdens bevarande och Värme och temperatur i larare.moment.
+
+## 2026-11-24 — 2026-11-24-turbulensen-som-tammer-sig-sjalv
+**Turbulensen tämjer sig själv när ett fusionsplasma plötsligt håller värmen bättre** (Plasmafysik)
+Källa: EPFL 2026-11-20 (Nik Papageorgiou, CC BY-SA 4.0) och Phys.org 2026-11-20; original B. De Lucca, P. Ricci, B. Labit, D. Mancini, L. N. Stenger och Z. Tecchiolli (EPFL, Swiss Plasma Center), ”Theory for the power threshold of the L–H transition in tokamaks”, Phys. Rev. Lett. 137, 205101 (13 november 2026), DOI 10.1103/rw25-wy15, läst i fulltext i författarnas accepterade version arXiv 2605.00624v3 (CC BY 4.0; v1 hade 44 och 27 MW, v3 och PRL 43 och 26 MW).
+> Skriven 2026-11-23 av nattjobbet, ett dygn i förväg. Kom inte ur kön utan ur dagens svepning på Phys.org. Grannar: 2026-11-23 partikelfysik (neutriner/lorentzinvarians), 2026-11-22 astronomi; senaste plasmafysik/fusion 2026-10-30. Solseglet vid 75 % av ljusfarten (ScienceDaily, arXiv 2606.04052, ej granskat) valdes bort eftersom relativitet låg för nära gårdagens lorentzinvarians; lagt i kön. Gravitationsteasern (hissen i Queensland) är fryst till efter brevet 2026-11-29 och rördes inte.
+> Utgivaren: RÄTTA FÖRST (1982-stycket tillskrev ASDEX senare fynd, massförhållandet 800 framställt som begränsning trots att studien säger att det inte påverkar, TCV-avvikelsen gäller bara lägsta effekten, SPARC:s 25 MW är planerad, ”vridning” fel för magnetisk shear, β = 0-formuleringen, bildtext utan stöd, NBSP i lärarfrågor, L-läge i h-lage-uppslaget), allt infört ordagrant; efterkontroll GODKÄND.
+> Bilder: huvudbild insidan av TCV, EPFL (CC BY-SA 4.0); simuleringsbild EPFL/Brenno De Lucca (CC BY-SA 4.0) i brödtexten. Ingen AI-bild.
+> Nya begrepp: H-läge.
+> Ingen simuleringsruta; Effekt, Massdefekt och bindningsenergi samt Laddade partiklar i magnetfält i larare.moment.

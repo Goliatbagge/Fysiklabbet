@@ -72,6 +72,14 @@ const REGLER = [
                   '(Publicerade artikel-id:n rättas dock aldrig.)',
     },
     {
+        namn: 'reflexion',
+        niva: 'fel',
+        monster: /(?<!['"])\b(?:[Tt]otalreflektion\w*|[Rr]eflektionslag\w*|[Rr]eflektionsvink\w*|partiell reflektion)\b/g,
+        rattelse: 'Fysikens term skrivs med x: reflexion, totalreflexion, reflexionslagen, ' +
+                  'reflexionsvinkel (påpekat av en besökare 2026-11-23). Reflektion med kt ' +
+                  'betyder eftertanke. Ordlistans id totalreflektion behålls för länkarnas skull.',
+    },
+    {
         namn: 'över-ända',
         niva: 'fel',
         monster: /\böver ända\b/gi,

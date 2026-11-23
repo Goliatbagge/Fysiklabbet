@@ -545,13 +545,13 @@
                     };
                 }
 
-                // Reflekterad stråle vid övre gränsytan (partiell reflektion, tillbaka in i medium 1)
+                // Reflekterad stråle vid övre gränsytan (partiell reflexion, tillbaka in i medium 1)
                 const pR = {
                     x: ENTRY_X - RAY_LENGTH * Math.sin(theta1Rad),
                     y: BLOCK_Y - RAY_LENGTH * Math.cos(theta1Rad)
                 };
 
-                // Reflekterad stråle vid undre gränsytan (partiell reflektion, tillbaka in i medium 2)
+                // Reflekterad stråle vid undre gränsytan (partiell reflexion, tillbaka in i medium 2)
                 let pR2 = null;
                 if (!isTIR && !isTwoLayer) {
                     pR2 = {
@@ -1002,10 +1002,10 @@
                             </g>
                         )}
 
-                        {/* Reflektionsvinklar - visas när reflekterade strålar och vinklar båda är på */}
+                        {/* Reflexionsvinklar - visas när reflekterade strålar och vinklar båda är på */}
                         {showAngles && showReflected && !isTIR && (
                             <g>
-                                {/* Reflektion vid övre gränsytan (spegelvänd kring normalen från i₁) */}
+                                {/* Reflexion vid övre gränsytan (spegelvänd kring normalen från i₁) */}
                                 <path d={getArcPath(p2.x, p2.y, 60, 0, -theta1Rad)} stroke="#1c3d6b" strokeWidth="2" fill="none" strokeDasharray="4,3" opacity="0.7"/>
                                 <text x={p2.x + 75 * Math.sin(-theta1Rad/2)} y={p2.y - 75 * Math.cos(-theta1Rad/2)} fill="#1c3d6b" fontSize="16" fontStyle="italic" textAnchor="middle" fontFamily="Poppins, sans-serif" opacity="0.85">
                                     {showAngleValues
@@ -1014,7 +1014,7 @@
                                     }
                                 </text>
 
-                                {/* Reflektion vid undre gränsytan (endast tre-skiktsläge) */}
+                                {/* Reflexion vid undre gränsytan (endast tre-skiktsläge) */}
                                 {!isTwoLayer && pR2 && (
                                     <g>
                                         <path d={getArcPath(p3.x, p3.y, 60, 0, theta2Rad)} stroke="#6d28d9" strokeWidth="2" fill="none" strokeDasharray="4,3" opacity="0.7"/>

@@ -3396,7 +3396,7 @@ window.EXITTICKETS = {
       'Svetten har ungefär samma temperatur som huden när den utsöndras — det är inte en temperaturskillnad som kyler, utan själva avdunstningsprocessen.',
       'Svettning är kroppens sätt att göra sig av med överskottsvärme, men den påverkar inte ämnesomsättningen i sig.',
       'Avdunstning är en process som kräver energi. Den energin tas från huden, som därmed kyls ner.',
-      'Reflektion av solstrålning har inget med svettens kylande effekt att göra — det är avdunstningen som är avgörande.',
+      'Reflexion av solstrålning har inget med svettens kylande effekt att göra — det är avdunstningen som är avgörande.',
     ],
   },
   {
@@ -3422,7 +3422,7 @@ window.EXITTICKETS = {
     why: [
       'Kläder isolerar och håller kvar värmen som kroppen strålar ut, istället för att låta den försvinna till den kallare omgivande luften.',
       'Vanliga kläder producerar ingen egen värme genom kemiska reaktioner — de fungerar istället som isolering.',
-      'Det är inte reflektion av luft som är mekanismen, utan att värmen som redan finns nära kroppen hålls kvar.',
+      'Det är inte reflexion av luft som är mekanismen, utan att värmen som redan finns nära kroppen hålls kvar.',
       'Kläder påverkar inte kroppens egen värmeproduktion, bara hur snabbt den värmen läcker ut till omgivningen.',
     ],
   },
@@ -8489,7 +8489,7 @@ window.EXITTICKETS = {
       'Det är tvärtom när ljuset går till ett tätare medium — det bryts mot normalen, inte från den.',
       'En ljusstråle som går från ett optiskt tunnare till ett optiskt tätare medium bryts mot normalen, till exempel från luft till glas.',
       'Ljuset fortsätter rakt igenom bara om infallsvinkeln är $0^\\circ$.',
-      'Ljuset både bryts och reflekteras delvis vid gränsytan — det försvinner inte helt in i reflektionen.',
+      'Ljuset både bryts och reflekteras delvis vid gränsytan — det försvinner inte helt in i reflexionen.',
     ],
   },
   {

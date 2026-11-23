@@ -71,7 +71,7 @@ export const ControlsView: React.FC<ControlsViewProps> = ({ n1, setN1, n2, setN2
         <div className="flex justify-between items-center bg-sky-100/70 p-3 rounded-lg">
           <span className="text-slate-700">Brytningsvinkel (<i>b</i>):</span>
           {isTIR ? (
-            <span className="font-bold text-lg text-red-500">Total intern reflektion</span>
+            <span className="font-bold text-lg text-red-500">Totalreflexion</span>
           ) : (
             <span className="font-mono text-lg text-slate-900">{theta2.toFixed(1).replace('.', ',')}°</span>
           )}

@@ -440,7 +440,7 @@
                              style={{ background: 'var(--lab-bg-panel, #ffffff)', border: '1px solid var(--lab-line, rgba(15,22,32,0.12))' }}>
                             <span className="text-slate-300">Brytningsvinkel (<i>b</i><sub>1</sub>):</span>
                             {isTIR ? (
-                                <span className="font-semibold text-sm text-right" style={{ color: 'var(--lab-accent, #c8324a)' }}>Total intern reflektion</span>
+                                <span className="font-semibold text-sm text-right" style={{ color: 'var(--lab-accent, #c8324a)' }}>Totalreflexion</span>
                             ) : (
                                 <span className="font-mono text-lg text-cyan-300">{theta2.toFixed(1).replace('.', ',')}°</span>
                             )}
@@ -946,7 +946,7 @@
                         })()}
 
                         {/* TIR-etikett */}
-                        {isTIR && <text x={p2.x + 15} y={p2.y - 40} fill="#c8324a" fontSize="18" fontWeight="bold" fontFamily="Poppins, sans-serif">Total intern reflektion</text>}
+                        {isTIR && <text x={p2.x + 15} y={p2.y - 40} fill="#c8324a" fontSize="18" fontWeight="bold" fontFamily="Poppins, sans-serif">Totalreflexion</text>}
 
                         {/* Vinkelbågar - övre gränsyta */}
                         {showAngles && <g>

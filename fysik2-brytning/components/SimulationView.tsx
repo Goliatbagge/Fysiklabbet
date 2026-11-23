@@ -199,7 +199,7 @@ export const SimulationView: React.FC<SimulationViewProps> = ({ n1, n2, incident
         </g>
 
         {/* TIR Label */}
-        {isTIR && <text x={p2.x + 15} y={p2.y - 40} fill="#ef4444" fontSize="18" fontWeight="bold">Total intern reflektion</text>}
+        {isTIR && <text x={p2.x + 15} y={p2.y - 40} fill="#ef4444" fontSize="18" fontWeight="bold">Totalreflexion</text>}
 
         {/* Angle Arcs and Labels */}
         <g>

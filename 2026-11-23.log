@@ -1,0 +1,34 @@
+03:15:02  [idag] === Nyhetsjobb: start (2026-11-23) ===
+03:15:04  [idag] Dagens nyhet finns (förberedd i går).
+03:15:04  [idag] Startar Claude Code (headless, modell opus, nyckel)...
+03:20:02  [imorgon] === Nyhetsjobb: start (2026-11-23) ===
+03:20:02  [imorgon] Dagens och morgondagens nyhet finns redan. Inget att göra.
+03:20:02  [imorgon] === Nyhetsjobb: slut ===
+03:24:22  [idag] Artikeln för 2026-11-24 är klar och committad på grenen `nyhetsjobb` (c65d4dfa). Jag har inte pushat och inte skickat något mejl.
+03:24:22  [idag] 
+03:24:22  [idag] **Artikeln:** "Turbulensen tämjer sig själv när ett fusionsplasma plötsligt håller värmen bättre" (Plasmafysik).
+03:24:22  [idag] - **Studien:** De Lucca, Ricci med flera vid EPFL:s Swiss Plasma Center, *Physical Review Letters* 137, 205101 (13 november 2026). Jag läste hela den accepterade versionen, arXiv 2605.00624v3 (CC BY 4.0). Där står samma tal som i pressmeddelandet, ITER 43 ± 11 MW och SPARC 26 ± 7 MW. Den första versionen på arXiv hade 44 och 27 MW.
+03:24:22  [idag] - **Innehåll:** forskarna förklarar varför plasmat i en fusionsreaktor plötsligt håller kvar värmen bättre när det värms tillräckligt. Fenomenet upptäcktes 1982. Teorin förklarar också varför det krävs olika mycket effekt beroende på plasmats täthet och åt vilket håll magnetfältet går. ITER har god marginal till den effekt som krävs, medan SPARC har nästan ingen.
+03:24:22  [idag] - **Bilder:** båda kommer från EPFL med licensen CC BY-SA 4.0: ett foto inifrån tokamaken TCV som huvudbild och en bild ur forskarnas simulering i brödtexten. Ingen AI-bild.
+03:24:22  [idag] - **Ordlistan:** ett nytt uppslag, H-läge.
+03:24:22  [idag] - **Grannar:** artikeln 2026-11-23 handlar om partikelfysik och relativitetsteori. Senaste plasmafysik var 2026-10-30.
+03:24:22  [idag] 
+03:24:22  [idag] **Granskning:** utgivaren svarade först RÄTTA FÖRST med nio punkter. Bland annat tillskrev texten upptäckten 1982 sådant som mättes först senare, och SPARC:s uppvärmning på 25 MW är bara planerad. Jag förde in alla nio ordagrant, och efterkontrollen blev GODKÄND.
+03:24:22  [idag] 
+03:24:22  [idag] **Kontroller:** `verify-begrepp` och `verify-navigation` är gröna, och `build-nyheter-og` är körd. `verify-sprak` visar fortfarande 3 fel, men de ligger i en äldre artikel (rad 1358–1372 i `data/nyheter.js`), inte i den nya. Jag tog ingen skärmdump av sidan, så renderingen är inte kontrollerad i webbläsaren.
+03:24:22  [idag] 
+03:24:22  [idag] **Commiten** innehåller bara nyhetsfilerna: `data/nyheter.js`, `data/begrepp.js`, `data/begrepp-sok.js`, `feed.xml`, `sitemap.xml`, de två bilderna, delningssidan samt `publicerat.md`, `ko.md` och `granskningar.md`. Bygget ändrade radsluten i hundratals andra filer (katalog/dela, nyheter/dela och i18n), men det är bara radslut och de ligger kvar ocommittade.
+03:24:22  [idag] 
+03:24:22  [idag] **Kön:** gravitationsuppslaget (meddelandet genom en tegelvägg) står märkt som teaser för brevet 2026-11-29 och kan inte publiceras förrän brevet gått ut, så jag rörde det inte. Jag lade till två nya uppslag: ljussegel nära ljusfarten (valt bort eftersom gårdagens artikel också handlade om relativitet) och European XFEL:s röntgenrekord.
+03:24:22  [idag] Claude avslutade med kod 0
+03:24:23  [idag] error: cannot pull with rebase: You have unstaged changes.
+03:24:23  [idag] error: Please commit or stash them.
+03:24:28  [idag] Pushat till main.
+03:24:28  [idag] Artikel 2026-11-24 pushad: 2026-11-24-turbulensen-som-tammer-sig-sjalv
+03:25:58  [idag] https://fysiklabbet.se/nyheter.html?forhand=2026-11-24-turbulensen-som-tammer-sig-sjalv
+03:25:58  [idag] Mejlet byggt av mallen (C:\claude\Fysiklabbet-nyhetsjobb\.claude\nyheter\logg\mejl-2026-11-24).
+03:25:58  [idag] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+03:26:58  [idag] Mejlet är skickat till [ägaren] med ämnet "[Nyhet 2026-11-24] Att granska: Turbulensen tämjer sig själv när ett fusionsplasma plötsligt håller värmen bättre". Platshållaren [[UTGIVARE]] ersattes i båda texterna med en sammanfattning av utgivarens nio rättningar (1982/ASDEX-historiken, jon-/elektronmassans inverkan, TCV-avvikelsen, SPARC:s planerade 25 MW, "magnetfältets vridning" → magnetisk shear med mera), som alla infördes och ledde till godkännande vid omgranskningen.
+03:26:58  [idag] Claude avslutade med kod 0
+03:26:59  [idag] Mejlet till ägaren är skickat.
+03:26:59  [idag] === Nyhetsjobb: slut ===

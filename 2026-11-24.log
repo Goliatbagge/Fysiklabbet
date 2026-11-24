@@ -1,0 +1,83 @@
+03:15:02  [idag] === Nyhetsjobb: start (2026-11-24) ===
+03:15:06  [idag] Dagens nyhet finns (förberedd i går).
+03:15:06  [idag] Startar Claude Code (headless, modell opus, nyckel)...
+03:20:02  [imorgon] === Nyhetsjobb: start (2026-11-24) ===
+03:20:02  [imorgon] En körning pågår redan (lås 5 min gammalt). Avslutar.
+03:28:40  [idag] Morgondagens nyhet är skriven, godkänd av utgivaren och committad på grenen `nyhetsjobb` (dea25b68). Jag har varken pushat eller skickat mejl, eftersom det sköts av skriptet.
+03:28:40  [idag] 
+03:28:40  [idag] **Artikeln:** ”Vattenmolekylen slits isär innan elektronerna hunnit fylla hålet” (Atomfysik, id `2026-11-25-vattnet-som-slits-isar`, datum 2026-11-25).
+03:28:40  [idag] - **Innehåll:** när en vattenmolekyl träffas av röntgenljus på cirka 550 eV kan båda väteatomerna flyga iväg på några femtosekunder. Det hinner hända innan hålet i syrets innersta elektronskal fylls, så det fylls i en ensam syreatom.
+03:28:40  [idag] - **Källa:** studien kommer från Fritz-Haber-Institut i Berlin, Uppsala universitet, MAX IV i Lund, DESY och Kyoto. Den publicerades i *Physical Review Letters* den 5 november 2026. Jag har läst den i sin helhet, och den är öppen under CC BY 4.0.
+03:28:40  [idag] - **Grannar:** artikeln 2026-11-24 är plasmafysik och 2026-11-23 partikelfysik, så det blir inget upprepat område.
+03:28:40  [idag] 
+03:28:40  [idag] **Utgivarens granskning:** första utslaget blev RÄTTA FÖRST. Det fanns ett sakfel: 1,68 eV är avståndet mellan nivåer i syrejonen som blir kvar, inte i syreatomen. Jag förde in rättelsen ordagrant, liksom fem rekommendationer. Efterkontrollen gav GODKÄND, och båda utslagen är loggade i `granskningar.md`.
+03:28:40  [idag] 
+03:28:40  [idag] **Bilder:** båda är fria foton från Wikimedia Commons, och ingen AI-bild behövdes.
+03:28:40  [idag] - Huvudbilden visar strållinjen NanoMAX vid MAX IV (CC BY 2.0). Bildtexten säger att själva mätningarna gjordes vid andra strållinjer.
+03:28:40  [idag] - I brödtexten finns ett flygfoto av MAX IV från 2014 (CC0).
+03:28:40  [idag] 
+03:28:40  [idag] **Ordlistan:** ett nytt uppslag, Augereffekten. Synkrotronljus fanns redan under Partikelaccelerator, så där lade jag inget nytt uppslag.
+03:28:40  [idag] 
+03:28:40  [idag] **Kontroller:** `verify-begrepp.js` och `verify-navigation.js` ger inga fel, och skärmdumpen av förhandsvisningen ser rätt ut. `verify-sprak.js` och `verify-nbsp-enhet.js` ger fortfarande fel, men på äldre text som inte rördes. Det gäller fältet readingTime, som alla artiklar skriver ”5 min”, och tre jämförelser av typen ”gånger lättare” i äldre artiklar.
+03:28:40  [idag] 
+03:28:40  [idag] **Commit:** innehåller bara nyhetsfilerna: artikeln, ordlistan, RSS, sitemap, delningssidan, bilderna samt `publicerat.md`, `ko.md` och `granskningar.md`. Bygget skrev också om delningssidor under `katalog/dela/` och filer i `i18n/`. De ändringarna ligger kvar ocommittade i worktreen.
+03:28:40  [idag] 
+03:28:40  [idag] **Kön:** tre nyheter som jag valde bort ligger nu i `ko.md`:
+03:28:40  [idag] - Hall-effekt utan magnetfält (Rice): ren teori, svår att göra konkret.
+03:28:40  [idag] - Trippelbindningen i CBi⁻ (Science): ligger bakom betalvägg.
+03:28:40  [idag] - Masslösa excitoner i bornitrid (Nature Physics): publicerad i mars och bakom betalvägg, och förtrycket anger en annan hastighet än pressmeddelandet.
+03:28:40  [idag] 
+03:28:40  [idag] Brevteasern om hissen i Queensland rördes inte.
+03:28:41  [idag] Claude avslutade med kod 0
+03:28:41  [idag] error: cannot pull with rebase: You have unstaged changes.
+03:28:41  [idag] error: Please commit or stash them.
+03:28:43  [idag] To https://github.com/Goliatbagge/Fysiklabbet.git
+03:28:43  [idag]  ! [rejected]          HEAD -> main (non-fast-forward)
+03:28:43  [idag] error: failed to push some refs to 'https://github.com/Goliatbagge/Fysiklabbet.git'
+03:28:43  [idag] hint: Updates were rejected because a pushed branch tip is behind its remote
+03:28:43  [idag] hint: counterpart. If you want to integrate the remote changes, use 'git pull'
+03:28:43  [idag] hint: before pushing again.
+03:28:43  [idag] hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+03:28:43  [idag] Push misslyckades - försöker igen.
+03:28:45  [idag] error: cannot pull with rebase: You have unstaged changes.
+03:28:45  [idag] error: Please commit or stash them.
+03:28:47  [idag] To https://github.com/Goliatbagge/Fysiklabbet.git
+03:28:47  [idag]  ! [rejected]          HEAD -> main (non-fast-forward)
+03:28:47  [idag] error: failed to push some refs to 'https://github.com/Goliatbagge/Fysiklabbet.git'
+03:28:47  [idag] hint: Updates were rejected because a pushed branch tip is behind its remote
+03:28:47  [idag] hint: counterpart. If you want to integrate the remote changes, use 'git pull'
+03:28:47  [idag] hint: before pushing again.
+03:28:47  [idag] hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+03:28:47  [idag] Push misslyckades - försöker igen.
+03:28:52  [idag] error: cannot pull with rebase: You have unstaged changes.
+03:28:52  [idag] error: Please commit or stash them.
+03:28:54  [idag] To https://github.com/Goliatbagge/Fysiklabbet.git
+03:28:54  [idag]  ! [rejected]          HEAD -> main (non-fast-forward)
+03:28:54  [idag] error: failed to push some refs to 'https://github.com/Goliatbagge/Fysiklabbet.git'
+03:28:54  [idag] hint: Updates were rejected because a pushed branch tip is behind its remote
+03:28:54  [idag] hint: counterpart. If you want to integrate the remote changes, use 'git pull'
+03:28:54  [idag] hint: before pushing again.
+03:28:54  [idag] hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+03:28:54  [idag] Push misslyckades - försöker igen.
+03:29:02  [idag] error: cannot pull with rebase: You have unstaged changes.
+03:29:02  [idag] error: Please commit or stash them.
+03:29:04  [idag] To https://github.com/Goliatbagge/Fysiklabbet.git
+03:29:04  [idag]  ! [rejected]          HEAD -> main (non-fast-forward)
+03:29:04  [idag] error: failed to push some refs to 'https://github.com/Goliatbagge/Fysiklabbet.git'
+03:29:04  [idag] hint: Updates were rejected because a pushed branch tip is behind its remote
+03:29:04  [idag] hint: counterpart. If you want to integrate the remote changes, use 'git pull'
+03:29:04  [idag] hint: before pushing again.
+03:29:04  [idag] hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+03:29:04  [idag] Push misslyckades - försöker igen.
+03:29:20  [idag] error: cannot pull with rebase: You have unstaged changes.
+03:29:20  [idag] error: Please commit or stash them.
+03:29:22  [idag] To https://github.com/Goliatbagge/Fysiklabbet.git
+03:29:22  [idag]  ! [rejected]          HEAD -> main (non-fast-forward)
+03:29:22  [idag] error: failed to push some refs to 'https://github.com/Goliatbagge/Fysiklabbet.git'
+03:29:22  [idag] hint: Updates were rejected because a pushed branch tip is behind its remote
+03:29:22  [idag] hint: counterpart. If you want to integrate the remote changes, use 'git pull'
+03:29:22  [idag] hint: before pushing again.
+03:29:22  [idag] hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+03:29:22  [idag] Push misslyckades - försöker igen.
+03:29:22  [idag] FEL: artikeln skrevs men kunde inte pushas.
+03:29:22  [idag] === Nyhetsjobb: slut ===

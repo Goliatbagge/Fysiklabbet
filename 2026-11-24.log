@@ -153,3 +153,35 @@
 11:45:38  [svar] Claude avslutade med kod 0
 11:45:38  [svar] VARNING: svarskontrollen gav inget SVAR-besked. Försöker igen vid nästa körning.
 11:45:38  [svar] === Nyhetsjobb: slut ===
+13:15:02  [imorgon] === Nyhetsjobb: start (2026-11-24) ===
+13:15:05  [imorgon] Dagens nyhet finns (förberedd i går).
+13:15:05  [imorgon] Startar Claude Code (headless, modell opus, nyckel)...
+13:28:37  [imorgon] Artikeln för 2026-11-25 är skriven, godkänd av utgivaren och committad på grenen `nyhetsjobb` (cc699786). Jag har inte pushat och inte skickat något mejl.
+13:28:37  [imorgon] 
+13:28:37  [imorgon] **Efter åtta år i rymden har BepiColombo fångats av Merkurius** (kategori Mekanik, id `2026-11-25-bepicolombo-fangas-av-merkurius`)
+13:28:37  [imorgon] - **Nyheten:** Rymdsonden BepiColombo bromsade in i omloppsbana runt Merkurius den 21 november. Ett programfel avbröt bromsningen när ungefär 77 % av den planerade fartändringen var gjord, men sonden kom ändå in i en stabil bana. Banan tar 75 timmar per varv i stället för de planerade 58.
+13:28:37  [imorgon] - **Det här är ingen studie utan en händelse.** Därför står `research: null`, och originalkällan är ESA:s egen rapport från operationsteamet, som jag läste i sin helhet tillsammans med faktabladet och fyra andra ESA-sidor.
+13:28:37  [imorgon] - **Fysiken i texten:** varför det är så svårt att bromsa in vid Merkurius (energiprincipen och gravitationsslungor), svag infångning, varför man bromsar där farten är som störst, och Keplers tredje lag. Med den lagen räknar artikeln ut att den större banan är knappt 19 % större än tänkt.
+13:28:37  [imorgon] - **Grannarnas ämnen:** 2026-11-24 var plasmafysik och 2026-11-23 partikelfysik, så det blir inte samma område två dagar i rad. Jag valde mekanik framför ännu en astronominyhet, eftersom astronomi redan kommit 15, 17 och 22 november.
+13:28:37  [imorgon] - **Bilder:** två riktiga foton från sondens egna övervakningskameror (ESA/BepiColombo/MTM, CC BY-SA 3.0 IGO). Jag beskar dem så att de inbrända logotyperna och textraden försvann. Ingen AI-bild behövdes.
+13:28:37  [imorgon] - **Övrigt i artikeln:** en ruta som leder vidare till simuleringen "Satellit i omloppsbana", en lärarruta med tre frågor och tre nya ord i ordlistan (svag infångning, gravitationsförlust, säkert läge).
+13:28:37  [imorgon] - **Granskningen:** Utgivaren svarade först RÄTTA FÖRST. Det viktigaste felet satt i ingressen, som påstod att Merkurius gravitation ensam höll kvar sonden fast bromsningen avbrutits. Enligt ESA håller den svaga infångningen bara kvar sonden en tid, och det var bromsningen som gav den stabila banan. Utgivaren hittade också fel titel på ESA:s projektforskare Geraint Jones, två påståenden utan källa och några saknade hårda mellanslag. Jag införde alla sju rättelserna, och vid efterkontrollen blev svaret GODKÄND.
+13:28:37  [imorgon] - **Verifierarna:** `verify-navigation`, `verify-begrepp` och `verify-sitemap` gick igenom. Språk- och mellanslagskontrollerna hittade inga fel i den nya texten.
+13:28:37  [imorgon] - **Loggarna:** `publicerat.md` och `granskningar.md` är uppdaterade. I `ko.md` har jag lagt till två nya uppslag: en ny sorts Hall-effekt utan magnetfält (Rice University) och ett fraktonförsök med ultrakalla atomer.
+13:28:37  [imorgon] - **Brevteasern** om meddelandet genom gravitationen (hissen i Queensland) rörde jag inte, eftersom den är fryst till efter brevet 2026-11-29.
+13:28:37  [imorgon] 
+13:28:37  [imorgon] Byggskriptet skrev om hundratals delningssidor, men bara radsluten ändrades, inte innehållet. De sidorna ligger utanför committen, som bara innehåller de elva nyhetsfilerna.
+13:28:38  [imorgon] Claude avslutade med kod 0
+13:28:38  [imorgon] error: cannot pull with rebase: You have unstaged changes.
+13:28:38  [imorgon] error: Please commit or stash them.
+13:28:43  [imorgon] Pushat till main.
+13:28:43  [imorgon] Artikel 2026-11-25 pushad: 2026-11-25-bepicolombo-fangas-av-merkurius
+13:30:13  [imorgon] https://fysiklabbet.se/nyheter.html?forhand=2026-11-25-bepicolombo-fangas-av-merkurius
+13:30:14  [imorgon] Mejlet byggt av mallen (C:\claude\Fysiklabbet-nyhetsjobb\.claude\nyheter\logg\mejl-2026-11-25).
+13:30:14  [imorgon] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+13:31:15  [imorgon] Sent. The email was delivered to [ägaren] with the `[[UTGIVARE]]` placeholder replaced in both bodies by: "Ingressen påstod felaktigt att planetens gravitation ensam höll kvar sonden trots den avbrutna bromsningen, men enligt ESA var infångningen bara tillfällig och det var själva bromsningen som gav sonden den stabila banan. Dessutom rättades Jones titel, en källhänvisning som saknades för förseningen och kamerornas syfte, en obelagd uppgift i en alt-text, en för bestämt skriven tidsangivelse för april 2024 samt hårda mellanslag och ett radioval i säkert-läge."
+13:31:16  [imorgon] Claude avslutade med kod 0
+13:31:16  [imorgon] FEL: Granskningsmejlet misslyckades (Claude-sessionen gav inget kvitto på att mejlet skickades.) Larmar via GitHub.
+13:31:18  [imorgon] https://github.com/Goliatbagge/Fysiklabbet/actions/runs/45394304912
+13:31:19  [imorgon] Larmet skickat till GitHub (Nyhetsjobb-larm).
+13:31:19  [imorgon] === Nyhetsjobb: slut ===

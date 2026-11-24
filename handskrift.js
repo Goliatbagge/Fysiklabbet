@@ -33450,17 +33450,17 @@
     T.fracH('2·6,67·10^−^1^1·1,99·10^3^0', '(3,00·10^8)^2',
             T.str('r_s=', padL, y), y);
     y += 3.0 * F;
-    T.str('≈2,9·10^3 m', padL, y);
+    T.str('≈2,95·10^3 m=2,95 km', padL, y);
     T.stepEnd();
 
     y += adv + 2.0 * F;
     T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
-      [['Tre kilometer! Hela solen —']],
-      [['1,99·10^3^0 kg — skulle rymmas']],
+      [['Knappt tre kilometer!']],
+      [['Hela solen skulle rymmas']],
       [['innanför en händelsehorisont']],
       [['stor som en småstad.']]
     ]));
-    T.underline(T.str('Svar: Cirka 3,0 km', padL, y), y);
+    T.underline(T.str('Svar: Cirka 2,95 km', padL, y), y);
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };

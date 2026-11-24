@@ -66,6 +66,8 @@ $DataJs    = Join-Path $Repo 'data\nyheter.js'
 $Today     = Get-Date -Format 'yyyy-MM-dd'
 $Tomorrow  = (Get-Date).AddDays(1).ToString('yyyy-MM-dd')
 $LogFile   = Join-Path $LogDir "$Today.log"
+$KvittoFil = Join-Path $LogDir 'mejl-kvitto.txt'
+$BeskedFil = Join-Path $LogDir 'svar-besked.txt'
 # Namnet som installera-task.ps1 registrerar för skyddsnätet (-Lage idag).
 $HuvudTask = 'Fysiklabbet daglig nyhet'
 
@@ -153,7 +155,12 @@ function Invoke-Claude([string]$Prompt, [string]$Modell, [switch]$Gmail) {
     if ($Gmail) { $inlogg = 'vanlig inloggning, Gmail' } else { $inlogg = 'nyckel' }
     Log ("Startar Claude Code (headless, modell {0}, {1})..." -f $Modell, $inlogg)
     $ut = New-Object System.Collections.Generic.List[string]
-    & $script:Claude @('-p', $Prompt, '--model', $Modell, '--dangerously-skip-permissions') 2>&1 |
+    # Prompten går via stdin. Som argument klipps den: Windows PowerShell 5.1
+    # skyddar inte citattecken inuti ett argument, så allt efter prompternas
+    # "..." föll bort och sessionen såg aldrig de sista instruktionerna
+    # (upptäckt 2026-11-24: kvittot och SVAR-beskedet uteblev).
+    $OutputEncoding = New-Object Text.UTF8Encoding $false
+    $Prompt | & $script:Claude @('-p', '--model', $Modell, '--dangerously-skip-permissions') 2>&1 |
         ForEach-Object { $ut.Add([string]$_); Log $_ }
     Log ("Claude avslutade med kod {0}" -f $LASTEXITCODE)
     $script:ClaudeText = ($ut -join "`n")
@@ -224,7 +231,8 @@ function Larma-Mejl([string]$Vad, [string]$Extra) {
     switch ($script:MejlFel) {
         'inloggning' { $orsak = "Claude Code kom inte in med den vanliga inloggningen (~\.claude\.credentials.json), som mejlstegen behöver för Gmail-kopplingen." }
         'koppling'   { $orsak = "Claude-sessionen hade ingen Gmail-koppling." }
-        default      { $orsak = "Claude-sessionen gav inget kvitto på att mejlet skickades." }
+        'besked'     { $orsak = "Claude-sessionen lämnade inget besked tre körningar i rad." }
+        default      { $orsak = "Mejlsessionen lämnade inget kvitto, och mejlet hittades inte heller i Gmail." }
     }
     # Användningsgränsen är inget att laga på datorn (2026-11-08 skickade
     # larmet ägaren att felsöka Gmail, fast kopplingen fungerade).
@@ -238,6 +246,8 @@ function Larma-Mejl([string]$Vad, [string]$Extra) {
         $laga = @"
 Det finns inget att laga: Gmail och inloggningen fungerar, det var bara Claudes användningsgräns som tog slut. Nästa natt går som vanligt. Se gärna efter i claude.ai under Settings, Usage om något annat jobb drar mycket.
 "@
+    } elseif ($script:MejlFel -eq 'besked') {
+        $laga = 'Inloggningen och Gmail fungerar troligen. Be Claude läsa loggen och titta på Prompt-LasSvar i .claude/nyheter/daglig-nyhet.ps1.'
     } else {
         $laga = @"
 Laga så här, på Windows-datorn:
@@ -264,15 +274,67 @@ Artiklarna skrivs och publiceras som vanligt även när mejlen inte går ut. Log
     else { Log 'FEL: gh saknas, inget GitHub-larm.' }
 }
 
-function Mejl-Skickat {
-    # Kvitto från mejlsessionen. Sessionen skriver inte alltid den överenskomna
-    # raden ordagrant ("Mejlet är skickat …", "Skickat."), så godta det, men
-    # aldrig när den samtidigt säger att den inte kunde skicka.
+function Kvitto-Krav {
+    # Sist i varje mejlprompt. Kvittot lämnas i en fil: sessionens avslutande
+    # text är fri prosa (2026-11-24 "Sent. The email was delivered to ...",
+    # vilket inte kändes igen och gav ett falskt larm).
+    return @"
+
+
+RECEIPT, mandatory last step: when send_message has succeeded, write the file $KvittoFil (UTF-8) with exactly one line: SKICKAT followed by a space and the message id that send_message returned. This is the only file you may write. Never write it if the email was not sent. The calling script reads that file, not your answer.
+"@
+}
+
+function Skicka-Mejl([string]$Prompt) {
+    Remove-Item -Force $KvittoFil -ErrorAction SilentlyContinue
+    Invoke-Claude ($Prompt + (Kvitto-Krav)) 'sonnet' -Gmail
+}
+
+function Kvitto-Finns {
+    if (-not (Test-Path $KvittoFil)) { return $false }
+    return [bool]([IO.File]::ReadAllText($KvittoFil) -match '(?m)^\s*SKICKAT\s+\S+')
+}
+
+function Mejl-Skickat([string]$Datum, [string]$Tradid) {
+    # Kvittofilen avgör. Saknas den letar en ny session upp mejlet i Gmail
+    # innan det räknas som misslyckat, så att ett skickat mejl aldrig larmas.
     if ($script:MejlFel) { return $false }
-    $t = $script:ClaudeText
-    if ($t -match 'MEJL SKICKAT') { return $true }
-    if ($t -match "(?i)inte (har )?skicka|kan inte skicka|can.?t send|cannot send|not (been )?sent|unable to send") { return $false }
-    return [bool]($t -match '(?i)skickat|email (has been |was )?sent')
+    if (Kvitto-Finns) { return $true }
+    if ($script:GransNadd) { return $false }
+    Log 'Inget kvitto från mejlsessionen. Letar efter mejlet i Gmail.'
+    if ($Tradid) { $var = "Call get_thread for the thread id $Tradid and look at its LAST message. The email counts as found only if that last message contains the line FL-JOBB FL-NYHET:$Datum." }
+    else { $var = "Call search_threads with the query: subject:`"[Nyhet $Datum]`" newer_than:1d. Set includeTrash to true. Call get_thread for the hits. The email counts as found only if a message with a subject starting with [Nyhet $Datum] contains the line FL-JOBB FL-NYHET:$Datum." }
+    Invoke-Claude @"
+$GmailKoll
+
+Check whether an email was sent. Do not send, reply to or change anything in Gmail. $var
+
+If it was found, write the file $KvittoFil (UTF-8) with exactly one line: SKICKAT followed by a space and the message id. If it was not found, write exactly: SAKNAS. Write no other file.
+"@ 'sonnet' -Gmail
+    if ($script:MejlFel) { return $false }
+    return (Kvitto-Finns)
+}
+
+function Los-GenereradeKonflikter([string]$RebaseDir) {
+    # feed.xml, sitemap.xml och begrepp-sok.js byggs ur data/nyheter.js och
+    # data/begrepp.js, och main bygger om dem varje timme. Konflikter i bara
+    # dem löses genom att filerna byggs på nytt; allt annat lämnas.
+    $genererade = @('feed.xml', 'sitemap.xml', 'data/begrepp-sok.js')
+    for ($varv = 0; $varv -lt 10 -and (Test-Path $RebaseDir); $varv++) {
+        $konflikt = @(& git diff --name-only --diff-filter=U 2>$null)
+        foreach ($f in $konflikt) {
+            if (($genererade -notcontains $f) -and ($f -notlike 'nyheter/dela/*')) { Log "Konflikt i $f."; return $false }
+        }
+        if ($konflikt.Count -eq 0) { return $false }
+        foreach ($f in $konflikt) { & git checkout -q --theirs -- $f 2>$null }
+        Invoke-Native 'node' @('data/build-nyheter-og.js')
+        if ($LASTEXITCODE -ne 0) { return $false }
+        foreach ($f in $konflikt) { Invoke-Native 'git' @('add', '--', $f) }
+        # Byggskriptets övriga radslutsändringar får inte stoppa rebasen.
+        Invoke-Native 'git' @('checkout', '-q', '--', '.')
+        Invoke-Native 'git' @('-c', 'core.editor=true', 'rebase', '--continue')
+    }
+    return (-not (Test-Path $RebaseDir))
 }
 
 function Push-Main {
@@ -280,14 +342,27 @@ function Push-Main {
     # GitHub Actions) rebaseas vi ovanpå och försöker igen.
     $ahead = (& git rev-list --count 'origin/main..HEAD' 2>$null)
     if (-not $ahead -or ([int]$ahead -eq 0)) { Log 'Inget att pusha.'; return $true }
+    # Allt som ska ut är committat här. Byggskriptet lämnar hundratals filer med
+    # ändrade radslut, och git vägrar då rebasa ("You have unstaged changes"):
+    # 2026-11-24 blev en färdig artikel liggande. Katalogen är jobbets egen, så
+    # resterna sparas som patch i loggmappen och kastas.
+    $rester = @(& git status --porcelain --untracked-files=no 2>$null).Count
+    if ($rester -gt 0) {
+        Log "Kastar $rester ocommittade filändringar före rebasen (kopia i logg\ocommittat.patch)."
+        & git diff HEAD --binary "--output=$(Join-Path $LogDir 'ocommittat.patch')" 2>$null
+        Invoke-Native 'git' @('reset', '-q', '--hard', 'HEAD')
+    }
     foreach ($vanta in @(0, 2, 4, 8, 16)) {
         if ($vanta) { Start-Sleep -Seconds $vanta }
         Invoke-Native 'git' @('pull', '-q', '--rebase', 'origin', 'main')
         $rebaseDir = (& git rev-parse --git-path rebase-merge 2>$null)
         if ($rebaseDir -and (Test-Path $rebaseDir)) {
-            Log 'FEL: rebase-konflikt - avbryter rebasen.'
-            Invoke-Native 'git' @('rebase', '--abort')
-            return $false
+            if (-not (Los-GenereradeKonflikter $rebaseDir)) {
+                Log 'FEL: rebase-konflikt - avbryter rebasen.'
+                Invoke-Native 'git' @('rebase', '--abort')
+                return $false
+            }
+            Log 'Rebase-konflikt i genererade filer löst genom ombyggnad.'
         }
         & git push -q origin 'HEAD:main' 2>&1 | ForEach-Object { Log $_ }
         if ($LASTEXITCODE -eq 0) { Log 'Pushat till main.'; return $true }
@@ -482,7 +557,7 @@ Send ONE email with the Gmail tool send_message to $Agare (and nobody else). The
 
 Both bodies contain the placeholder [[UTGIVARE]]. Replace it (in both bodies, with the same text) by ONE or TWO short Swedish sentences that summarise what the utgivare agent asked to be corrected for the article with id "$Id", read from .claude/nyheter/granskningar.md (if nothing had to be corrected, write "Inga rättelser behövdes."). Plain, friendly Swedish; no emojis; no dashes used as pause markers; no formulas in dollar notation; in htmlBody escape & < > as HTML entities.
 
-Apart from that replacement, send the bodies EXACTLY as they are in the files: do not reword, shorten, reorder or restyle anything, and above all keep the link $maste in both bodies, character for character. Before sending, check that both bodies contain $maste, that neither contains [[UTGIVARE]], and that both end with the line FL-JOBB FL-NYHET:$Datum. Do not change any files and do not commit anything. When the email is sent, print the line MEJL SKICKAT.
+Apart from that replacement, send the bodies EXACTLY as they are in the files: do not reword, shorten, reorder or restyle anything, and above all keep the link $maste in both bodies, character for character. Before sending, check that both bodies contain $maste, that neither contains [[UTGIVARE]], and that both end with the line FL-JOBB FL-NYHET:$Datum. Do not change any other files and do not commit anything.
 "@
     }
     Log 'VARNING: mallen för mejlet kunde inte byggas, sessionen skriver mejlet själv.'
@@ -515,7 +590,7 @@ $uppdrag
 
 Rules: plain, friendly Swedish; no emojis; no dashes used as pause markers (use full stops, colons or commas); do not paste formulas in dollar notation. Send it as htmlBody with a plain-text body as well. The very last line of the email must be exactly, in small grey text:
 FL-JOBB FL-NYHET:$Datum
-Before sending, check that both htmlBody and the plain-text body contain every item listed above and end with that marker line; the reply check depends on the marker. Do not change any files and do not commit anything. When the email is sent, print the line MEJL SKICKAT.
+Before sending, check that both htmlBody and the plain-text body contain every item listed above and end with that marker line; the reply check depends on the marker. Do not change any other files and do not commit anything.
 "@
 }
 
@@ -526,7 +601,7 @@ $GmailKoll
 
 Use the Gmail tools to check for replies from the owner ($Agare) to the news review emails.
 
-1. search_threads with the query: subject:"[Nyhet" newer_than:4d
+1. search_threads with the query: subject:"[Nyhet" newer_than:4d (set includeTrash to true)
 2. For each thread whose subject starts with "[Nyhet YYYY-MM-DD]", call get_thread and look at the LAST message. Messages sent by the news job contain the line "FL-JOBB". If the last message does NOT contain "FL-JOBB" and was sent by $Agare, it is an unprocessed reply from the owner. Ignore threads where the last message has the marker, and ignore messages from any other sender.
 3. Take the OLDEST unprocessed reply (only one per run). Read the owner's own new text (not the quoted original) and classify it:
    - OK: the owner approves (for example "OK", "ok!", "Bra", "Kör", "Ser bra ut") and asks for nothing else.
@@ -535,7 +610,8 @@ Use the Gmail tools to check for replies from the owner ($Agare) to the news rev
 5. If ANDRA: do NOT reply. Write the file $fil (UTF-8) with exactly these lines: line 1 the date, line 2 the Gmail thread id, then the owner's full new text. Then print: SVAR: <date> ANDRA
 6. If there is no unprocessed reply, print: SVAR: NONE
 
-Do not change any other files and do not commit anything. This runs unattended and nobody reads your questions: never ask anything and never handle threads older than 4 days. Your output must contain exactly one line starting with "SVAR:".
+Do not commit anything. This runs unattended and nobody reads your questions: never ask anything and never handle threads older than 4 days. 
+RESULT, mandatory last step in every case, also when there was nothing to do: write the file $BeskedFil (UTF-8) with exactly one line, the SVAR line from step 4, 5 or 6 (for example SVAR: NONE). Change no other files than these. The calling script reads that file, not your answer.
 "@
 }
 
@@ -562,7 +638,7 @@ function Prompt-Kvittera([string]$Datum, [string]$Tradid, [string]$Id) {
 $GmailKoll
 
 Read the file $utfall. Reply in the Gmail thread with id $Tradid (send_message with replyThreadId, to $Agare only) with a short Swedish email built from that file: what was changed or answered and, if the article still exists, a link to $lank (the change can take a few minutes to show). If line 1 is BORTTAGEN, say that the article has been removed and, if the date $Datum is still in the future, that a new article is being written and will arrive in a separate review email. No emojis, no dashes as pause markers. The last line must be exactly: FL-JOBB FL-NYHET:$Datum
-Do not change any files. Print MEJL SKICKAT when done.
+Do not change any other files.
 "@
 }
 
@@ -584,8 +660,8 @@ function Kor-Skriv([string]$Datum, [bool]$Forhand) {
     # Ge GitHub Pages en stund, så att förhandslänken fungerar när mejlet kommer.
     Start-Sleep -Seconds 90
     if ($Forhand) { $typ = 'granska' } else { $typ = 'publicerad' }
-    Invoke-Claude (Prompt-Mejl $Datum $id $typ) 'sonnet' -Gmail
-    if (Mejl-Skickat) { Log 'Mejlet till ägaren är skickat.'; return }
+    Skicka-Mejl (Prompt-Mejl $Datum $id $typ)
+    if (Mejl-Skickat $Datum '') { Log 'Mejlet till ägaren är skickat.'; return }
     # Claude-gränsen slog i mellan artikeln och mejlet (2026-11-08: artikeln
     # pushades 03:29, mejlet dog 03:30 på "session limit"). Ett vanligt
     # gränsomförsök gjorde då ingenting, eftersom båda artiklarna redan fanns
@@ -638,8 +714,8 @@ function Kor-VantandeMejl {
             Remove-Item -Force $f.FullName; continue
         }
         Log "Skickar det väntande mejlet om $Datum ($id)."
-        Invoke-Claude (Prompt-Mejl $Datum $id $typ) 'sonnet' -Gmail
-        if (Mejl-Skickat) {
+        Skicka-Mejl (Prompt-Mejl $Datum $id $typ)
+        if (Mejl-Skickat $Datum '') {
             Log 'Det väntande mejlet till ägaren är skickat.'
             Remove-Item -Force $f.FullName; continue
         }
@@ -657,14 +733,35 @@ function Kor-VantandeMejl {
 }
 
 function Kor-Svar {
-    Invoke-Claude (Prompt-LasSvar) 'sonnet' -Gmail
-    if ($script:MejlFel) { Larma-Mejl 'Kontrollen av dina svar på granskningsmejlen' ''; return }
-    $m = [regex]::Match($script:ClaudeText, 'SVAR:\s*(\d{4}-\d{2}-\d{2})\s+(OK|ANDRA)')
+    # Beskedet lämnas i en fil; uteblir det görs ett nytt försök direkt (ett
+    # obehandlat ändringssvar ligger kvar i Gmail, så det är riskfritt), och
+    # efter tre körningar i rad utan besked larmas ägaren.
+    $missFil = Join-Path $LogDir '.svar-missar'
+    $besked = ''
+    foreach ($forsok in 1, 2) {
+        Remove-Item -Force $BeskedFil, (Join-Path $LogDir 'svar-uppdrag.txt') -ErrorAction SilentlyContinue
+        Invoke-Claude (Prompt-LasSvar) 'sonnet' -Gmail
+        if ($script:MejlFel) { Larma-Mejl 'Kontrollen av dina svar på granskningsmejlen' ''; return }
+        if (Test-Path $BeskedFil) { $besked = [IO.File]::ReadAllText($BeskedFil) } else { $besked = $script:ClaudeText }
+        $m = [regex]::Match($besked, 'SVAR:\s*(?:(\d{4}-\d{2}-\d{2})\s+(OK|ANDRA)|NONE)')
+        if ($m.Success -or $script:GransNadd) { break }
+        Log 'VARNING: svarskontrollen gav inget SVAR-besked.'
+    }
     if (-not $m.Success) {
-        if ($script:ClaudeText -match 'SVAR:\s*NONE') { Log 'Inga obehandlade svar.' }
-        else { Log 'VARNING: svarskontrollen gav inget SVAR-besked. Försöker igen vid nästa körning.' }
+        if ($script:GransNadd) { return }
+        $missar = 0
+        if (Test-Path $missFil) { [void][int]::TryParse((Get-Content $missFil -TotalCount 1), [ref]$missar) }
+        $missar++
+        Set-Content -Path $missFil -Value $missar -Encoding ascii
+        Log "Svarskontrollen utan besked $missar körning(ar) i rad."
+        if ($missar -ge 3) {
+            $script:MejlFel = 'besked'
+            Larma-Mejl 'Kontrollen av dina svar på granskningsmejlen' 'Har du svarat på ett granskningsmejl och vill ändra något är svaret kanske inte behandlat.'
+        }
         return
     }
+    Remove-Item -Force $missFil -ErrorAction SilentlyContinue
+    if (-not $m.Groups[2].Success) { Log 'Inga obehandlade svar.'; return }
     $datum = $m.Groups[1].Value
     if ($m.Groups[2].Value -eq 'OK') { Log "Ägaren godkände artikeln för $datum."; return }
 
@@ -685,8 +782,8 @@ function Kor-Svar {
     }
     if (-not (Push-Main)) { Log 'FEL: ändringen kunde inte pushas. Svaret behandlas vid nästa körning.'; return }
     Start-Sleep -Seconds 60
-    Invoke-Claude (Prompt-Kvittera $datum $tradid $id) 'sonnet' -Gmail
-    if (-not (Mejl-Skickat)) {
+    Skicka-Mejl (Prompt-Kvittera $datum $tradid $id)
+    if (-not (Mejl-Skickat $datum $tradid)) {
         Larma-Mejl 'Kvittot på din ändringsbegäran' "Ändringen av artikeln $datum ($id) är ändå gjord och pushad."
     }
     Remove-Item -Force $fil -ErrorAction SilentlyContinue
@@ -727,7 +824,9 @@ Log "=== Nyhetsjobb: start ($Today) ==="
 # Snabb utgång utan lås och utan git: nattjobbet behöver inte göra något när
 # både dagens och morgondagens artikel redan ligger i arbetskatalogen.
 $VantandeMejl = @(Get-ChildItem -Path $LogDir -Filter '.mejl-vantar-*' -Force -ErrorAction SilentlyContinue).Count
-if ($Lage -ne 'svar' -and $VantandeMejl -eq 0 -and (HasArticle $Today) -and (HasArticle $Tomorrow)) {
+# En opushad artikel räknas inte: då ska Sync-Main få försöka pusha den.
+$Opushat = "$(& git rev-list --count 'origin/main..HEAD' 2>$null)".Trim()
+if ($Lage -ne 'svar' -and $VantandeMejl -eq 0 -and $Opushat -eq '0' -and (HasArticle $Today) -and (HasArticle $Tomorrow)) {
     Log 'Dagens och morgondagens nyhet finns redan. Inget att göra.'
     Log '=== Nyhetsjobb: slut ==='
     return

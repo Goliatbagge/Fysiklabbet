@@ -27145,16 +27145,94 @@
     T.stepEnd();
     K.sist(y, 1.3);
 
-    y += adv + 2.4 * F;
-    K.tk([
-      [['Jag dividerar (2) med (1). Då']],
-      [['tar både 2π och ', 0], ['k', 1], [' ut sig.', 0]]
+    /* KVOTEN I FEM LED (användarkrav 2026-11-24: "visas i flera steg så
+     * att eleverna hänger med"). Uttrycken byggs av små delar med mått
+     * (bredd, höjd över och djup under baslinjen), så att staplade bråk
+     * med rötter i täljare och nämnare kan ritas och raderna läggas utan
+     * att krocka:
+     *   T₂/T₁ = 2π√((m+Δm)/k) / 2π√(m/k)     (2) delat med (1)
+     *         = √((m+Δm)/k) / √(m/k)           2π tar ut sig
+     *         = √( ((m+Δm)/k) / (m/k) )        rot delat med rot
+     *         = √( (m+Δm)/k · k/m )            dela med bråk = gånga
+     *         = √((m+Δm)/m)                    k tar ut sig
+     * Varje rad skrivs som HELA ekvationen (REGEL 3c). */
+    function dS(s) {
+      return { w: T.adv(s), up: 0.82 * F, dn: 0.10 * F,
+               draw: function (x, yb) { T.str(s, x, yb); } };
+    }
+    function dFr(n, d) {
+      var w = Math.max(n.w, d.w) + 0.3 * F;
+      /* höga delar (rötter, inre bråk) får extra luft mot strecket */
+      var gn = 0.04 * F + (n.dn > 0.2 * F ? 0.22 * F : 0);
+      var gd = 0.22 * F + (d.up > 1.0 * F ? 0.18 * F : 0);
+      return { w: w, up: 0.34 * F + gn + n.dn + n.up,
+               dn: -0.34 * F + gd + d.up + d.dn,
+        draw: function (x, yb) {
+          var ybar = yb - 0.34 * F;
+          n.draw(x + (w - n.w) / 2, ybar - gn - n.dn);
+          T.pause(130);
+          acts.push({ kind: 'stroke',
+                      pts: humanize([[x, ybar], [x + w, ybar]]) });
+          T.pause(130);
+          d.draw(x + (w - d.w) / 2, ybar + gd + d.up);
+        } };
+    }
+    function dRt(inn) {
+      return { w: 0.46 * F + inn.w + 0.36 * F, up: inn.up + 0.22 * F,
+               dn: inn.dn + 0.06 * F,
+        draw: function (x, yb) {
+          var xs = rootSign(acts, x, yb, inn.w, F,
+                            { yTop: yb - inn.up - 0.15 * F, yBot: yb + inn.dn });
+          inn.draw(xs, yb);
+        } };
+    }
+    function dRad() {
+      var delar = [].slice.call(arguments), w = 0, up = 0, dn = 0;
+      delar.forEach(function (p) {
+        w += p.w + 0.08 * F; up = Math.max(up, p.up); dn = Math.max(dn, p.dn);
+      });
+      return { w: w, up: up, dn: dn, draw: function (x, yb) {
+        delar.forEach(function (p) { p.draw(x, yb); x += p.w + 0.08 * F; });
+      } };
+    }
+    var vl = dRad(dFr(dS('T_2'), dS('T_1')), dS('='));
+    var forraDn = 1.3;                       /* (2)-raden, i F */
+    function kvotRad(hl, bubbla, dynBubbla) {
+      var rad = dRad(vl, hl);
+      y += (forraDn + 0.95) * F + rad.up;
+      K.tk(bubbla);
+      rad.draw(padL, y);
+      T.stepEnd();
+      forraDn = rad.dn / F;
+      K.sist(y, forraDn + 0.1);
+    }
+    var mk = function () { return dFr(dS('m+Δm'), dS('k')); };
+    var bk = function () { return dFr(dS('m'), dS('k')); };
+    y += 0.4 * F;
+    kvotRad(dFr(dRad(dS('2π'), dRt(mk())), dRad(dS('2π'), dRt(bk()))), [
+      [['Jag dividerar (2) med (1):']],
+      [['vänsterled med vänsterled och']],
+      [['högerled med högerled.']]
     ]);
-    xx = T.fracH('T_2', 'T_1', padL, y);
-    xx = T.str('=', xx + 0.10 * F, y);
-    K.rotFrac('m+Δm', 'm', xx, y);
-    T.stepEnd();
-    K.sist(y, 1.3);
+    kvotRad(dFr(dRt(mk()), dRt(bk())), [
+      [['2π finns både i täljaren och i']],
+      [['nämnaren och tar ut sig.']]
+    ]);
+    kvotRad(dRt(dFr(mk(), bk())), [
+      [['En rot delat med en rot är roten']],
+      [['ur kvoten. Jag samlar allt under']],
+      [['ett rottecken.']]
+    ]);
+    kvotRad(dRt(dRad(mk(), dS('·'), dFr(dS('k'), dS('m')))), [
+      [['Att dividera med ett bråk är att']],
+      [['multiplicera med det inverterade']],
+      [['bråket. ', 0], ['m', 1], ['/', 0], ['k', 1], [' blir · ', 0], ['k', 1], ['/', 0], ['m', 1]]
+    ]);
+    kvotRad(dRt(dFr(dS('m+Δm'), dS('m'))), [
+      [['k', 1], [' finns både i täljaren och i', 0]],
+      [['nämnaren och tar ut sig.']]
+    ]);
+    y += (forraDn - 1.3) * F;
 
     y += adv + 2.3 * F;
     K.tk([

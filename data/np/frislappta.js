@@ -23,7 +23,7 @@
 //
 // Fält per prov: t = termin ('vt22', 'ht16'), delar = { B, C, D } (pdf per
 // delprov), fil = full adress till en enda pdf (annars
-// byggs den ur kursens filmall), losning = prov-id i data/np/index.js.
+// byggs den ur kursens filmall), bedomning = adress (sätts sist i filen), losning = prov-id i data/np/index.js.
 // Ordning: nyast först. Bara proven från våren 2022 följer aktuell ämnesplan.
 
 (function () {
@@ -294,4 +294,12 @@
             prov: [{ t: 'vt16', losning: 'fy2-vt2016' }],
         },
     ];
+
+    // Bedömningsanvisningen till varje matteprov: <kurs>-<termin>-bedomning.pdf
+    // i samma mapp (önskemål 2026-11-24). Ma 1 våren 2017 har två häften hos
+    // PRIM, hopslagna till en fil. Umeås är resten av provets pdf.
+    window.NP_FRISLAPPTA.forEach(function (k) {
+        if (k.kursprov) return;
+        k.prov.forEach(function (p) { p.bedomning = EGEN + k.kod + '-' + p.t + '-bedomning.pdf'; });
+    });
 })();

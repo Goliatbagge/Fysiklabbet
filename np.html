@@ -158,7 +158,7 @@
            uppgift har text-, penn- och videolösning). */
         .np-provgrid {
             list-style: none; margin: 0; padding: 0;
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(204px, 1fr));
             gap: 14px 12px;
         }
         .np-provcell { display: flex; flex-direction: column; gap: 7px; }
@@ -180,7 +180,18 @@
             color: var(--lab-ink) !important; text-decoration: none;
             transition: transform .08s ease, box-shadow .08s ease, border-color .12s ease;
         }
-        a.np-provknapp:hover {
+        /* Rutan rymmer två pdf-länkar. Länken Provet täcker hela rutan (::after),
+           så att ett klick var som helst öppnar provet; Bedömningsanvisning
+           ligger ovanpå och går att klicka för sig. */
+        .np-provknapp.har-fil { position: relative; }
+        .np-pdflank {
+            position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 5px;
+            padding: 2px 0; color: var(--lab-ink-soft) !important; text-decoration: none; white-space: nowrap;
+        }
+        .np-pdflank:hover { color: var(--lab-accent) !important; text-decoration: underline; text-underline-offset: 3px; }
+        .np-pdflank-prov { position: static; }
+        .np-pdflank-prov::after { content: ''; position: absolute; inset: 0; border-radius: 10px; }
+        .np-provknapp.har-fil:hover {
             transform: translateY(-1px); border-color: var(--lab-ink-soft);
             box-shadow: 0 3px 10px rgba(15, 22, 32, 0.10);
         }
@@ -302,6 +313,9 @@
             .np-provgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 10px; }
             .np-provknapp { padding: 10px 11px; }
             .np-provknapp-namn { font-size: 17px; }
+            .np-pdflank { font-size: 11.5px; gap: 4px; padding: 5px 0; }
+            .np-pdflank svg { display: none; }
+            .np-provknapp-under small { font-size: 9.5px; letter-spacing: 0; }
             .np-provknapp .np-delar-etikett { display: none; }
             .np-provknapp-delar { flex-wrap: nowrap; gap: 4px; }
             .np-provknapp .np-delknapp { min-width: 26px; padding: 0 6px; }
@@ -1791,8 +1805,17 @@
                             </span>
                         ) : (
                             <span className="np-provknapp-under">
-                                {fil ? <React.Fragment>Provet <small>pdf</small> {IKON_UT}</React.Fragment>
+                                {fil ? <a className="np-pdflank np-pdflank-prov" href={fil} target="_blank" rel="noopener"
+                                          title="Öppna provet (pdf)">Provet <small>pdf</small> {IKON_UT}</a>
                                      : 'Provet finns hos Skolverket'}
+                            </span>
+                        )}
+                        {p.bedomning && (
+                            <span className="np-provknapp-under">
+                                <a className="np-pdflank" href={p.bedomning} target="_blank" rel="noopener"
+                                   title={'Öppna bedömningsanvisningen, ' + provNamn(p).toLowerCase() + ' (pdf)'}>
+                                    Bedömningsanvisning <small>pdf</small> {IKON_UT}
+                                </a>
                             </span>
                         )}
                         {p.t === 'vt22' && <span className="np-tagg">Aktuell ämnesplan</span>}
@@ -1800,13 +1823,7 @@
                 );
                 return (
                     <li key={p.t} className={'np-provcell' + (los ? ' har-losning' : '')}>
-                        {fil ? (
-                            <a className="np-provknapp" href={fil} target="_blank" rel="noopener" title="Öppna provet (pdf)">
-                                {innehall}
-                            </a>
-                        ) : (
-                            <span className={'np-provknapp' + (p.delar ? ' har-delar' : ' is-utan-fil')}>{innehall}</span>
-                        )}
+                        <div className={'np-provknapp' + (fil ? ' har-fil' : p.delar ? ' har-delar' : ' is-utan-fil')}>{innehall}</div>
                         {losningsrad && (
                             <div className="np-losningsslot">
                                 {los && (

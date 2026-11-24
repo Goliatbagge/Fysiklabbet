@@ -324,7 +324,7 @@
                 ? 'Här är det svart. Följer man strålen bakåt hamnar den i hålet, och därifrån kan inget ljus komma.'
                 : s.slut === 'skiva'
                     ? 'Ljuset kommer från skivans ' + (s.skiva.ovan ? 'ovansida' : 'undersida') + ', ' + (s.skiva.bortre ? 'bortom hålet' : 'på din sida av hålet') + '. Det har ' + bojt
-                    : 'Ljuset kommer från stjärnhimlen. Det har ' + bojt;
+                    : 'Ljuset kommer från stjärnorna långt bort. Det har ' + bojt;
             return (
                 <div className="stral-kort">
                     <h4>Ljusstrålen från sidan</h4>
@@ -458,7 +458,7 @@
                         <main className="flex flex-col lg:flex-row gap-6">
                             <div className="lg:w-3/4 order-1 min-w-0">
                                 <div className={'scene-wrap' + (isFullscreen ? ' is-fs' : '')} ref={wrapRef}>
-                                    <div className="tre-mount"><canvas ref={cRef} aria-label="Ett svart hål med en ackretionsskiva framför en stjärnhimmel" />
+                                    <div className="tre-mount"><canvas ref={cRef} aria-label="Ett svart hål med en ackretionsskiva framför avlägsna stjärnor" />
                                         {stral && <div className="matpunkt" style={{ left: punkt.x * 100 + '%', top: punkt.y * 100 + '%' }} title="Dra ringen"
                                             onPointerDown={e => e.currentTarget.setPointerCapture(e.pointerId)} onPointerMove={flyttaPunkt}></div>}
                                     </div>
@@ -489,7 +489,7 @@
                                             <div className="st-title">Visa</div>
                                             <label><input type="checkbox" checked={show.skiva} onChange={() => t('skiva')} /><span>Ackretionsskivan</span></label>
                                             <label><input type="checkbox" checked={show.dopp} onChange={() => t('dopp')} /><span>Doppler och rödförskjutning</span></label>
-                                            <label><input type="checkbox" checked={show.rut} onChange={() => t('rut')} /><span>Himlens förvrängning</span></label>
+                                            <label><input type="checkbox" checked={show.rut} onChange={() => t('rut')} /><span>Bakgrundens förvrängning</span></label>
                                             {isFullscreen && (
                                                 <React.Fragment>
                                                     <div className="st-title st-group">Reglage</div>
@@ -576,7 +576,7 @@
                                 Ljusets banor, skuggans storlek, stjärnornas förvrängning och rödförskjutningen räknas ut för ett
                                 svart hål som inte roterar. Gasens temperatur, färg och mönster är valda för att bilden ska gå
                                 att se: en verklig skiva nära ett svart hål lyser till stor del i ultraviolett ljus och
-                                röntgenstrålning, och skillnaderna i ljusstyrka är mycket större. Stjärnhimlen och galaxen är påhittade. Strålen som du följer räknas som stoppad av skivan inom 9,5 Schwarzschildradier. Längre ut är gasen nästan genomskinlig.
+                                röntgenstrålning, och skillnaderna i ljusstyrka är mycket större. Stjärnorna och galaxen i bakgrunden är påhittade. Strålen som du följer räknas som stoppad av skivan inom 9,5 Schwarzschildradier. Längre ut är gasen nästan genomskinlig.
                             </p>
                         </details>
                     </div>

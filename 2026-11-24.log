@@ -199,3 +199,9 @@
 18:21:08  [svar] Claude avslutade med kod 0
 18:21:08  [svar] VARNING: svarskontrollen gav inget SVAR-besked. Försöker igen vid nästa körning.
 18:21:08  [svar] === Nyhetsjobb: slut ===
+18:21:57  [svar] === Nyhetsjobb: start (2026-11-24) ===
+18:22:00  [svar] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+18:22:19  [svar] Klart. Ingen "[Nyhet ...]"-tråd hittades bland de senaste 4 dagarna, så inget svar att behandla. Resultatfilen är skriven med `SVAR: NONE`.
+18:22:20  [svar] Claude avslutade med kod 0
+18:22:20  [svar] Inga obehandlade svar.
+18:22:20  [svar] === Nyhetsjobb: slut ===

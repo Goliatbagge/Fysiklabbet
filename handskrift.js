@@ -26391,18 +26391,36 @@
       }
       return y;
     }
-    return { sist: sist, tk: tk, fjader: fjader, rotFrac: rotFrac, svar: svar };
+    /* DIVISION I BÅDA LED: täljaren i bläck, streck och nämnare med
+     * blåpennan (physTools.fracH har ingen egen färg för nämnaren, så
+     * mkEkvOp:s divisionsrad blev svart i fysikscenerna). */
+    function fracBla(numS, denS, x0, yb) {
+      var ybar = yb - 0.34 * F;
+      var nw = T.adv(numS), dw = T.adv(denS);
+      var w = Math.max(nw, dw) + 0.3 * F;
+      T.str(numS, x0 + (w - nw) / 2, ybar - 0.14 * F);
+      T.pause(130);
+      acts.push({ kind: 'stroke', pts: humanize([[x0, ybar], [x0 + w, ybar]]),
+                  color: BLUE });
+      T.pause(130);
+      T.str(denS, x0 + (w - dw) / 2, ybar + 1.04 * F, BLUE);
+      return x0 + w + 1.5;
+    }
+    return { sist: sist, tk: tk, fjader: fjader, rotFrac: rotFrac, svar: svar,
+             fracBla: fracBla };
   }
 
   /* ---------------- scen: amplitud och periodtid ur största fart och
    * största acceleration (fy2-2.A Ex 1, Avancerad) ----------------------
    * Två ekvationer med två obekanta: v_max = ω·A och a_max = ω²·A.
-   * Kvoten a_max / v_max = ω = 3,6 / 0,48 = 7,5 rad/s, sedan
+   * Substitutionsmetoden: A = v_max/ω ur (1) insatt i (2) ger
+   * a_max = ω·v_max, så ω = a_max / v_max = 3,6 / 0,48 = 7,5 rad/s, sedan
    * A = 0,48 / 7,5 = 0,064 m = 6,4 cm och T = 2π / 7,5 = 0,837… ≈ 0,84 s.
    * Siffrorna är identiska med textlösningen i fy2-2.A.md. */
   function layoutAmplitudurfart(cfg, F) {
     var T = physTools(F), acts = T.acts, padL = T.padL;
     var K = mkKap2Avancerad(T, F);
+    var ekvOp = mkEkvOp(T, false);
     var adv = 1.7 * F, xx, y;
     var fx = 220, takY = 56, eqY = 190, wc = eqY + 14, AP = 50;
 
@@ -26460,15 +26478,42 @@
     T.stepEnd();
     K.sist(y);
 
+    /* SUBSTITUTIONSMETODEN (användarkrav 2026-11-24): A löses ut ur (1)
+     * och sätts in i (2), sedan löses ω ut i båda led. */
     y += adv + 2.0 * F;
     K.tk([
-      [['Jag dividerar (2) med (1). Då']],
-      [['tar ', 0], ['A', 1], [' ut sig, och ett ', 0], ['ω', 1], [' blir kvar.', 0]]
+      [['Två ekvationer, två obekanta. Jag']],
+      [['använder substitutionsmetoden och']],
+      [['löser först ut ', 0], ['A', 1], [' ur (1).', 0]]
     ]);
-    xx = T.fracH('a_m_a_x', 'v_m_a_x', padL, y);
-    xx = T.str('=', xx + 0.10 * F, y);
-    xx = T.fracH('ω^2·A', 'ω·A', xx, y);
-    T.str('=ω', xx + 0.10 * F, y);
+    xx = T.str('v_m_a_x=ω·A⟺A=', padL, y);
+    xx = T.fracH('v_m_a_x', 'ω', xx, y);
+    T.str('(3)', Math.max(330, xx + 0.9 * F), y);
+    T.stepEnd();
+    K.sist(y, 1.1);
+
+    y += adv + 2.0 * F;
+    K.tk([
+      [['Jag sätter in (3) i (2). ', 0], ['ω', 1], ['2', 0], [' delat', 0]],
+      [['med ', 0], ['ω', 1], [' blir ', 0], ['ω', 1], ['.', 0]]
+    ]);
+    xx = T.str('a_m_a_x=ω^2·', padL, y);
+    xx = T.fracH('v_m_a_x', 'ω', xx, y);
+    T.str('⟺a_m_a_x=ω·v_m_a_x', xx + 0.12 * F, y);
+    T.stepEnd();
+    K.sist(y, 1.1);
+
+    K.tk([
+      [['Jag dividerar båda led med ', 0], ['v', 1], ['max', 0]],
+      [['så att ', 0], ['ω', 1], [' står ensam.', 0]]
+    ]);
+    y = ekvOp(y, '/v_m_a_x', null, function (yb) {
+      var x = K.fracBla('a_m_a_x', 'v_m_a_x', padL, yb);
+      x = T.str('=', x + 0.10 * F, yb);
+      K.fracBla('ω·v_m_a_x', 'v_m_a_x', x, yb);
+    }, { dy: 3.2, dyRes: 2.9 });
+    xx = T.str('ω=', padL, y);
+    T.fracH('a_m_a_x', 'v_m_a_x', xx, y);
     T.stepEnd();
     K.sist(y, 1.1);
 
@@ -26495,8 +26540,8 @@
 
     y += adv + 1.9 * F;
     K.tk([
-      [['Amplituden löser jag ut ur']],
-      [['ekvation (1).']]
+      [['Nu när ', 0], ['ω', 1], [' är känd beräknar jag', 0]],
+      [['amplituden ur ekvation (1).']]
     ]);
     xx = T.str('v_m_a_x=ω·A⟺A=', padL, y);
     T.fracH('v_m_a_x', 'ω', xx, y);
@@ -27180,7 +27225,11 @@
       [['Jag dividerar båda led med']],
       [['0,5625.']]
     ]);
-    y = ekvOp(y, '/0,5625', null, '0,5625·m=0,200');
+    y = ekvOp(y, '/0,5625', null, function (yb) {
+      var x = K.fracBla('0,5625·m', '0,5625', padL, yb);
+      x = T.str('=', x + 0.10 * F, yb);
+      K.fracBla('0,200', '0,5625', x, yb);
+    }, { dy: 3.0, dyRes: 2.9 });
     xx = T.fracH('0,200', '0,5625', T.str('m=', padL, y), y);
     var xIns = T.str('=0,355... kg', xx + 0.15 * F, y);
     T.stepEnd();

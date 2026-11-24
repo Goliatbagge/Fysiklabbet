@@ -714,3 +714,12 @@ Källa: EPFL 2026-11-20 (Nik Papageorgiou, CC BY-SA 4.0) och Phys.org 2026-11-20
 > Bilder: huvudbild insidan av TCV, EPFL (CC BY-SA 4.0); simuleringsbild EPFL/Brenno De Lucca (CC BY-SA 4.0) i brödtexten. Ingen AI-bild.
 > Nya begrepp: H-läge.
 > Ingen simuleringsruta; Effekt, Massdefekt och bindningsenergi samt Laddade partiklar i magnetfält i larare.moment.
+
+## 2026-11-25 — 2026-11-25-bepicolombo-fangas-av-merkurius
+**Efter åtta år i rymden har BepiColombo fångats av Merkurius** (Mekanik)
+Källa: ESA 2026-11-23 (operationsteamets rapport ”BepiColombo safely in Mercury orbit despite unexpected challenge” och sidan ”Latest updates: BepiColombo's arrival at Mercury”), ESA:s faktablad, ”Why does it take so long to get to Mercury?”, ”Fourth Mercury flyby begins BepiColombo's new trajectory” (2024), ”BepiColombo monitoring cameras”, samt Physics World 2026-11-23. Ingen studie: händelsenyhet, research: null; originalkällan är ESA:s egen rapport, läst i sin helhet.
+> Skriven 2026-11-24 av nattjobbet, ett dygn i förväg. Kom inte ur kön utan ur dagens svepning på Physics World. Grannar: 2026-11-24 plasmafysik, 2026-11-23 partikelfysik; senaste mekanik 2026-11-10. Artikeln om rymdfart/banmekanik valdes framför ännu en astronominyhet (astronomi 2026-11-15, 11-17, 11-22). Gravitationsteasern (hissen i Queensland) är fryst till efter brevet 2026-11-29 och rördes inte.
+> Utgivaren: RÄTTA FÖRST (ingressen sade att gravitationen höll kvar sonden trots avbruten bromsning, Geraint Jones titel, två påståenden utan källa, NBSP, alt-texter, april 2024-felet, relaterade i sakert-lage), allt infört ordagrant; efterkontroll se granskningar.md.
+> Bilder: två foton från BepiColombos övervakningskameror, ESA/BepiColombo/MTM (CC BY-SA 3.0 IGO), beskurna så att inbrända logotyper och textrad försvunnit: tredje förbiflygningen 19 juni 2023 (huvudbild) och sjätte förbiflygningen 8 januari 2025 (i brödtexten). Ingen AI-bild.
+> Nya begrepp: svag infångning, gravitationsförlust, säkert läge.
+> Simuleringsruta: Satellit i omloppsbana. Energiprincipen, Gravitationslagen och Energi och gravitation i cirkelbanor i larare.moment.

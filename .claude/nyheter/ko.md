@@ -15,6 +15,12 @@ Format per post:
 - **Ett meddelande genom gravitationen: en hiss och en gravimeter skickade ordet ”Gravity” genom en tegelvägg (University of Queensland)** **[BREVTEASER]** (nominerad 2026-11-22 när KM3NeT-teasern löstes in: ett ord skickat genom en tegelvägg med en hiss som motvikt och en gravimeter som mottagare, lätt att sammanfatta; läs förtrycket arXiv 2511.16710 i fulltext före publicering) — gravitation/mekanik, perfekt gymnasiekoppling (Newtons gravitationslag, motvikten 1,8 ton som växlar mellan två våningar = 0 och 1). Valdes bort 2026-11-21 enbart för att 2026-11-20 också handlade om att skicka meddelanden (värmebrus); ta tidigast 2026-11-22. Woffinden med flera, Science Advances 2026, DOI 10.1126/sciadv.aee0802 (science.org ger 403 för curl); ÖPPET förtryck arXiv 2511.16710 (”Unblockable Communication With Gravity”). Källa (Phys.org 2026-11-18): https://phys.org/news/2026-11-physicists-unblockable-message-gravity.html
   (tillagd 2026-11-20)
 
+- **Hall-effekt utan magnetfält: extrem spänning ger en tvärström i ett starkt korrelerad topologisk halvmetall (Rice University, Qimiao Si, med TU Wien)** — ellära/kondenserad materia; teoretisk studie i Physical Review Letters 2026, DOI 10.1103/cj8b-4sp4, ÖPPET förtryck arXiv 2411.16675 (ej läst ännu). Bra koppling till Hall-effekten. Källa (Phys.org 2026-11-24): https://phys.org/news/2026-11-magnets-extreme-voltage-kind-hall.html
+  (tillagd 2026-11-24)
+
+- **Ultrakalla atomer visar för första gången hur bundna par rör sig i ett fraktonsystem** — kvantfysik/kondenserad materia, svår men ny; originalet ej kontrollerat. Källa (Phys.org 2026-11-24): https://phys.org/news/2026-11-ultracold-atoms-reveal-view-bound.html
+  (tillagd 2026-11-24)
+
 - **Ljussegel vid 75 % av ljusfarten bromsas av sitt eget spridda ljus (Harbin Institute of Technology, Chao Shen och Jiaze Li)** — relativistisk mekanik, strålningstryck, aberration och rödförskjutning; bra gymnasiekoppling. OBS: bara förtryck, arXiv 2606.04052 (”Relativistic Lightsail Propulsion Dynamics”, juni 2026), ej granskat; valdes bort 2026-11-23 eftersom 2026-11-23 handlade om lorentzinvarians. Källa (ScienceDaily 2026-11-22): https://www.sciencedaily.com/releases/2026/11/261120071305.htm
   (tillagd 2026-11-23)
 

@@ -5184,6 +5184,42 @@ window.BEGREPP = [
       { type: 'p', html: 'Inne i röret sitter en rad metallplattor med allt högre spänning. Elektronen accelereras mot den första plattan och slår loss några nya elektroner där. De accelereras mot nästa platta och slår loss ännu fler. Efter tio till tolv steg har en enda elektron blivit miljontals, och de ger en kort strömpuls som går att mäta.' },
       { type: 'p', html: 'Därför används fotomultiplikatorrör där ljuset är extremt svagt: i neutrinoteleskop som fångar det blå tjerenkovljuset i vatten eller is, i medicinska kameror och i mätningar av radioaktivitet. Nackdelen är att rören är känsliga för magnetfält och inte tål starkt ljus medan spänningen är på.' }
     ]
+  },
+  {
+    id: 'svag-infangning',
+    term: 'Svag infångning',
+    former: ['svag infångning', 'svaga infångningen', 'svag stabilitetsinfångning', 'weak stability capture'],
+    kort: 'Ett sätt för en rymdsond att fångas av en himlakropp utan stor inbromsning. Sonden kommer fram så långsamt att himlakroppens och solens gravitation tillsammans håller kvar den en tid.',
+    relaterade: ['gravitationsslunga', 'gravitationsforlust'],
+    body: [
+      { type: 'p', html: 'Den vanliga vägen in i en omloppsbana är att komma fram i hög fart och sedan bromsa hårt med raketmotorer. Utan inbromsning far sonden förbi, eftersom den har för mycket rörelseenergi för att planetens gravitation ska kunna hålla kvar den. Inbromsningen kräver mycket bränsle, och bränsle är tungt att skjuta upp.' },
+      { type: 'p', html: 'Vid svag infångning planeras resan i stället så att sonden kommer fram nästan i samma fart och riktning som planeten själv. Då rör den sig långsamt i förhållande till planeten, och i området där planetens och solens gravitation är ungefär lika starka kan sonden hänga kvar och gå några oregelbundna varv runt planeten. Det liknar en kula som rullat upp på kanten av en grop och stannar där en stund i stället för att rulla förbi.' },
+      { type: 'p', html: 'Infångningen är bara tillfällig. Efter några varv drar solen loss sonden igen, om den inte bromsas med motorerna medan den fortfarande är kvar. Den bromsningen kräver ändå mycket mindre bränsle än vanligt. Metoden har använts av rymdsonder på väg till månen, och 2026 fångades den europeisk-japanska sonden BepiColombo på det sättet av Merkurius, första gången vid en annan planet.' }
+    ]
+  },
+  {
+    id: 'gravitationsforlust',
+    term: 'Gravitationsförlust',
+    former: ['gravitationsförlust', 'gravitationsförlusten', 'gravitationsförluster', 'gravitationsförlusterna'],
+    kort: 'Det bränsle en raket eller rymdsond slösar bort när motorerna arbetar på ett ställe i banan där de gör mindre nytta, ofta för att gravitationen samtidigt drar i farkosten.',
+    relaterade: ['svag-infangning', 'gravitationsslunga'],
+    body: [
+      { type: 'p', html: 'En raket som lyfter från jorden måste först bära sin egen tyngd. Så länge den stiger långsamt går en stor del av motorernas kraft bara åt till att hålla emot tyngdkraften, i stället för att öka farten. Det bränslet är förlorat för själva resan, och därför försöker raketer komma upp i fart så snabbt de kan.' },
+      { type: 'p', html: 'För en rymdsond som ska bromsa in i en bana runt en planet finns en liknande förlust. Rörelseenergin är <em>m</em>&nbsp;·&nbsp;<em>v</em><sup>2</sup>/2, och en liten fartändring ändrar den ungefär med <em>m</em>&nbsp;·&nbsp;<em>v</em>&nbsp;·&nbsp;Δ<em>v</em>. Samma mängd bränsle tar alltså bort mest energi där farten är störst, och det är när sonden är som närmast planeten. Bromsar sonden länge hinner den glida bort från den punkten, och bromsningen gör mindre nytta.' },
+      { type: 'p', html: 'Därför delar man ofta upp en stor bromsning i flera kortare, som var och en görs när sonden passerar närmast planeten. Det tar längre tid, men sparar bränsle. Det ger också möjlighet att mäta banan efter varje bromsning och justera nästa.' }
+    ]
+  },
+  {
+    id: 'sakert-lage',
+    term: 'Säkert läge',
+    former: ['säkert läge', 'säkra läget'],
+    kort: 'Ett skyddsläge som en rymdsond går in i av sig själv när något oväntat händer. Den stänger av allt som inte är nödvändigt, vänder sig så att den får ström och väntar på besked från jorden.',
+    relaterade: [],
+    body: [
+      { type: 'p', html: 'En rymdsond långt ute i solsystemet kan inte styras i realtid. Radiosignalerna tar flera minuter, ibland timmar, att nå fram, och ibland är kontakten bruten för att sonden vänt sig bort från jorden. Sonden måste därför själv kunna känna igen när något går fel och skydda sig.' },
+      { type: 'p', html: 'När datorn ombord upptäcker något oväntat, till exempel en motor som inte beter sig som den ska eller ett värde som ligger utanför det tillåtna, avbryter den det pågående arbetet. Instrument som inte behövs stängs av, solpanelerna riktas mot solen så att batterierna laddas, och antennen riktas så att sonden kan höras från jorden. Det påminner om när en dator startar i felsäkert läge.' },
+      { type: 'p', html: 'Sedan får teknikerna på jorden ta reda på vad som hände och skicka nya kommandon. Säkert läge är alltså inget haveri, utan ett tecken på att sonden skyddat sig som den är byggd för. De flesta rymdsonder hamnar där några gånger under sin livstid.' }
+    ]
   }
 ];
 

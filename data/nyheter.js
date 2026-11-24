@@ -103,6 +103,70 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-25-bepicolombo-fangas-av-merkurius",
+    date: "2026-11-25",
+    title: "Efter åtta år i rymden har BepiColombo fångats av Merkurius",
+    deck: "Den europeisk-japanska rymdsonden BepiColombo har gått in i omloppsbana runt Merkurius. Bromsningen avbröts i förtid av ett programfel, men den hann ändå ge sonden en stabil bana. Sonden kom så långsamt fram att planetens gravitation kunde hålla kvar den en tid även utan motorer, och det är första gången en rymdsond fångats på det sättet av en annan planet.",
+    category: "Mekanik",
+    readingTime: "6 min",
+    image: "nyheter/bilder/2026-11-25-bepicolombo-fangas-av-merkurius.jpg",
+    imageAlt: "Svartvitt foto av Merkurius som ett till större delen upplyst, kraterfyllt klot mot svart rymd. Till vänster syns en glänsande, skrynklig yta av rymdsondens isolering, och uppe till höger en bit av sondens antenn.",
+    imageCredit: "Bild: ESA/BepiColombo/MTM (CC BY-SA 3.0 IGO), beskuren. Merkurius fotograferad av en av BepiColombos övervakningskameror under den tredje förbiflygningen, 19 juni 2023.",
+    tags: ["bepicolombo", "merkurius", "rymdfart", "omloppsbana", "gravitation", "energiprincipen", "keplers lagar", "gravitationsslunga", "esa", "jaxa", "mekanik"],
+    sources: [
+      { name: "ESA: BepiColombo safely in Mercury orbit despite unexpected challenge (23 november 2026)", url: "https://www.esa.int/articles/about-us/directorates/operations/bepicolombo-safely-in-mercury-orbit-despite-unexpected-challenge" },
+      { name: "ESA: Latest updates: BepiColombo's arrival at Mercury (uppdaterad 23 november 2026)", url: "https://www.esa.int/Science_Exploration/Space_Science/BepiColombo/Latest_updates_BepiColombo_s_arrival_at_Mercury" },
+      { name: "ESA: BepiColombo factsheet", url: "https://www.esa.int/Science_Exploration/Space_Science/BepiColombo/BepiColombo_factsheet" },
+      { name: "ESA: Why does it take so long to get to Mercury?", url: "https://www.esa.int/Science_Exploration/Space_Science/BepiColombo/Why_does_it_take_so_long_to_get_to_Mercury" },
+      { name: "ESA: Fourth Mercury flyby begins BepiColombo's new trajectory (2024)", url: "https://www.esa.int/Science_Exploration/Space_Science/BepiColombo/Fourth_Mercury_flyby_begins_BepiColombo_s_new_trajectory" },
+      { name: "ESA: BepiColombo monitoring cameras", url: "https://www.esa.int/ESA_Multimedia/Images/2018/10/BepiColombo_monitoring_cameras" },
+      { name: "Physics World: ESA's BepiColombo mission reaches Mercury despite software glitch (23 november 2026)", url: "https://physicsworld.com/a/esas-bepicolombo-mission-reaches-mercury-despite-software-glitch/" }
+    ],
+    research: null,
+    simulering: {
+      href: "fysik2-satellitbana-app.html",
+      name: "Satellit i omloppsbana",
+      text: "Skjut upp en satellit runt jorden med olika fart och se när banan blir en cirkel, en ellips eller en flykt. Är farten för stor flyr den i väg och kommer aldrig tillbaka."
+    },
+    larare: {
+      moment: [
+        { label: "Energiprincipen", href: "katalog.html?id=fy1-4.4" },
+        { label: "Gravitationslagen", href: "katalog.html?id=fy1-3.5" },
+        { label: "Energi och gravitation i cirkelbanor", href: "katalog.html?id=fy2-1.6" }
+      ],
+      fragor: [
+        "En rymdsond på väg från jorden in mot solen blir snabbare och snabbare utan att motorerna är igång. Förklara varför med energiprincipen. Varför är det ett problem för den som vill hamna i omloppsbana runt Merkurius?",
+        "BepiColombo hamnade i en bana med periodtiden 75 timmar i stället för 58. Använd Keplers tredje lag för att avgöra om banan blev större eller mindre, och ungefär hur mycket.",
+        "Rörelseenergin ändras mer av en viss fartändring när farten redan är stor. Varför vill man då bromsa när sonden är som närmast planeten och inte när den är som längst bort?"
+      ]
+    },
+    body: [
+      { type: "p", html: "Klockan 19.24 svensk tid den 21 november tände rymdsonden BepiColombo sina fyra motorer. Den passerade då bara 635&nbsp;km över Merkurius yta, och motorerna skulle bromsa sonden i 37&nbsp;minuter så att planetens gravitation kunde hålla kvar den. Ingen på jorden kunde följa bromsningen. Sonden hade vänt sig så att kontakten var bruten, och alla kommandon var skickade i förväg." },
+      { type: "p", html: "När signalen kom tillbaka via ESA:s antenn i New Norcia i Australien syntes att något gått fel. Bromsningen hade avbrutits automatiskt, och sonden hade gått in i säkert läge: den hade stängt av allt som inte var nödvändigt och väntade på besked från jorden. Analysen visade att motorerna hade hunnit ge ungefär 77&nbsp;procent av den fartändring som var planerad. Frågan var om det räckte. Vid ettiden på natten, lokal tid i Darmstadt där ESA:s kontrollcentral ligger, kom svaret från gruppen som räknar ut sondens bana: ”Vi bekräftar infångning i bana runt Merkurius!”, sade Frank Budnik som leder den gruppen." },
+      { type: "p", html: "BepiColombo är ett samarbete mellan den europeiska rymdorganisationen ESA och den japanska JAXA, och det är Europas första resa till Merkurius. Felet har spårats till programvaran som styr sondens orientering och motorer, och enligt ESA är sonden säker och i en stabil bana." },
+      { type: "h2", text: "Svårare att nå Merkurius än Pluto" },
+      { type: "p", html: "Jupiter ligger i genomsnitt tio gånger längre bort från jorden än Merkurius. Ändå tar det ungefär lika lång tid att hamna i bana runt Merkurius, och enligt ESA krävs det mer energi än att skicka en sond till Pluto. Förklaringen är energiprincipen. En sond som rör sig in mot solen förlorar lägesenergi, och den energin blir rörelseenergi. Sonden blir alltså snabbare hela vägen in, ungefär som en bil som rullar nedför en backe. Kommer den fram till Merkurius med för stor fart drar planetens gravitation inte tillräckligt i den, och sonden far förbi." },
+      { type: "p", html: "Att bromsa bort all den farten med raketmotorer skulle kräva så mycket bränsle att sonden inte gick att skjuta upp. BepiColombo, som lyftte med en Ariane 5-raket från Kourou i Franska Guyana den 20 oktober 2018, har i stället lämnat ifrån sig energi till planeterna. Med nio gravitationsslungor, en förbi jorden, två förbi Venus och sex förbi Merkurius, har banan bromsats och böjts. Däremellan har elektriska motorer, som får sin ström från stora solpaneler, gett små och långvariga knuffar." },
+      { type: "image", src: "nyheter/bilder/2026-11-25-bepicolombo-fangas-av-merkurius-2.jpg", alt: "Svartvitt foto av en del av Merkurius mot svart rymd, med många kratrar. En lång, smal bom från rymdsonden sticker in i bilden uppifrån höger, och dess spets ser ut att nudda planetens kant.", caption: "Merkurius vid den sjätte och sista förbiflygningen den 8 januari 2025. Den smala bommen i förgrunden är en del av rymdsonden.", credit: "Bild: ESA/BepiColombo/MTM (CC BY-SA 3.0 IGO), beskuren" },
+      { type: "p", html: "I april 2024 började de elektriska motorerna ge mindre kraft än de skulle. Teknikerna hittade oväntade elektriska strömmar mellan solpanelerna och den enhet som fördelar strömmen i sonden, och det tycks ha gett motorerna mindre effekt. Banan fick ritas om, och vid den fjärde förbiflygningen i september 2024 gick sonden bara 165&nbsp;km över Merkurius yta för att få extra hjälp av planetens gravitation." },
+      { type: "h2", text: "Fångad, men bara tillfälligt" },
+      { type: "p", html: "Alla omvägar gjorde att BepiColombo kom fram ovanligt långsamt. Det gjorde det möjligt att använda en metod som kallas svag infångning (på engelska <em>weak stability capture</em>). När farten i förhållande till planeten är tillräckligt liten kan planetens gravitation, i samspel med solens, hålla kvar sonden några varv utan att någon motor tänds. Metoden har tidigare bara använts av några rymdsonder på väg till månen. BepiColombo är den första som fångats på det sättet av en annan planet." },
+      { type: "p", html: "Den svaga infångningen räcker dock inte i längden. ”Med den här svaga infångningen skulle BepiColombo hållas kvar några varv, men bara tillfälligt”, förklarar Frank Budnik. ”Därför är inbromsningen i omloppsbana nödvändig.” Det var den bromsningen som avbröts. De 77&nbsp;procenten räckte ändå för att sonden skulle stanna i bana, men banan blev större än planerat." },
+      { type: "h2", text: "Bromsa där farten är som störst" },
+      { type: "p", html: "Bromsningen den 21 november var bara den första av många. Fram till mars 2027 ska motorerna tändas gång på gång, och varje gång sker det när sonden är som närmast Merkurius. Där är farten störst, och då ger en viss fartändring störst ändring av rörelseenergin. Rörelseenergin är $E_\\mathrm{k} = \\dfrac{m \\cdot v^2}{2}$, och en liten fartändring $\\Delta v$ ändrar den med ungefär $\\Delta E_\\mathrm{k} \\approx m \\cdot v \\cdot \\Delta v$. Samma mängd bränsle tar alltså bort mer energi när $v$ är stor. En enda bromsning som pågick i flera timmar skulle föra sonden långt bort från den bästa punkten, och bränsle skulle gå till spillo. ESA kallar förlusten gravitationsförlust." },
+      { type: "p", html: "Att bromsningarna är många har också en annan fördel. Efter varje bromsning mäts den bana sonden faktiskt hamnat i, och nästa bromsning planeras utifrån den. Det kom väl till pass nu. I stället för en bana där ett varv tar 58&nbsp;timmar hamnade BepiColombo i en bana där ett varv tar 75&nbsp;timmar. Enligt Keplers tredje lag är $\\dfrac{T^2}{a^3}$ lika stort för alla banor runt samma himlakropp, där $T$ är periodtiden och $a$ är halva banans längsta diameter. Den längre periodtiden betyder alltså att banans halva längsta diameter blev knappt 19&nbsp;procent större än tänkt. Resten av bromsningarna har redan räknats om för den nya banan, och inga extra bromsningar behövs." },
+      { type: "h2", text: "Två sonder i en" },
+      { type: "p", html: "BepiColombo är egentligen två sonder som rest staplade på varandra. Den 9 december ska ESA:s MPO (Mercury Planetary Orbiter) och JAXA:s Mio (Mercury Magnetospheric Orbiter) skiljas åt. MPO ska gå i en låg bana nära ytan och kartlägga hur planeten ser ut och vad den består av, bland annat genom att se in i de kratrar vid polerna där det aldrig blir solljus och där det kan finnas is. Mio ska gå i en större, avlång bana och studera Merkurius magnetfält och hur det påverkas av solvinden. Mätningarna ska börja i april 2027 och pågå i minst ett år." },
+      { type: "p", html: "BepiColombo är bara den tredje rymdsonden som besöker Merkurius och den andra som går i bana runt den. Mariner 10 flög förbi tre gånger 1974 och 1975, och Nasas Messenger gick i bana runt planeten 2011–2015. ”Vår vetenskapliga grupp på nästan 600 personer kommer att bli glad att se BepiColombo klara det här viktiga steget och börja avslöja mer om Merkurius, från dess inre och yta till rymden runt omkring den”, säger Geraint Jones, ESA:s ledande projektforskare för BepiColombo." },
+      { type: "fact", title: "Visste du?", items: [
+        "Sonden är uppkallad efter den italienske matematikern och ingenjören Giuseppe ”Bepi” Colombo (1920–1984).",
+        "Vid uppskjutningen vägde BepiColombo 4&nbsp;100&nbsp;kg, varav 1&nbsp;400&nbsp;kg var bränsle.",
+        "Merkurius snurrar tre varv runt sin axel på samma tid som den går två varv runt solen. Ett år där är 88&nbsp;jorddygn, men från en middag till nästa går det 176&nbsp;jorddygn.",
+        "Bilderna av Merkurius under resan togs med enkla övervakningskameror, som egentligen skulle visa att sondens antenner och bommar fällts ut som de skulle."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-24-turbulensen-som-tammer-sig-sjalv",
     date: "2026-11-24",
     title: "Turbulensen tämjer sig själv när ett fusionsplasma plötsligt håller värmen bättre",

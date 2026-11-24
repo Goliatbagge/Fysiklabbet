@@ -27042,9 +27042,11 @@
    * Avancerad) ----------------------------------------------------------
    * T₁ = 0,60 s med massan m, T₂ = 0,75 s med m + 200 g. Kvoten T₂/T₁ gör
    * att 2π och k tar ut sig: (T₂/T₁)² = (m + Δm)/m, (0,75/0,60)² = 1,5625,
-   * 0,5625·m = 0,200, m = 0,355… ≈ 0,36 kg. Sedan k = 4π²·m/T₁² =
-   * 38,99… ≈ 39 N/m. Ekvationsoperationerna skrivs i båda led med
-   * blåpennan (mkEkvOp). Siffrorna är identiska med textlösningen. */
+   * 0,5625·m = 0,200, m = 0,355… ≈ 0,36 kg. Ekvationsoperationerna
+   * följer elevens redovisningsval (mkEkvOp). Systemet skrivs med
+   * klammer, och inga ekvationsnummer behövs eftersom inget hänvisar
+   * till dem (b), fjäderkonstanten, ströks 2026-11-24). Siffrorna är
+   * identiska med textlösningen. */
   function layoutTvaperiodtider(cfg, F) {
     var T = physTools(F), acts = T.acts, padL = T.padL;
     var K = mkKap2Avancerad(T, F);
@@ -27098,14 +27100,15 @@
       [['i båda fallen. Den tillagda']],
       [['massan kallar jag Δ', 0], ['m', 1]]
     ], 120);
-    T.str('a) Samma fjäder: periodtiden i båda fallen', padL, y, null, 0.62);
+    T.str('Samma fjäder: periodtiden i båda fallen', padL, y, null, 0.62);
     T.pause(300);
     y += 2.4 * F;
-    K.rotFrac('m', 'k', T.str('T_1=2π', padL, y), y);
-    T.str('(1)', 330, y);
+    /* ekvationssystem med klammer, som i matematiken */
+    xx = systemKlammer(T, F, padL, y - 1.5 * F, y + 4.0 * F);
+    K.rotFrac('m', 'k', T.str('T_1=2π', xx, y), y);
+    T.pause(240);
     y += 2.7 * F;
-    K.rotFrac('m+Δm', 'k', T.str('T_2=2π', padL, y), y);
-    T.str('(2)', 330, y);
+    K.rotFrac('m+Δm', 'k', T.str('T_2=2π', xx, y), y);
     T.stepEnd();
     K.sist(y, 1.3);
 
@@ -27174,9 +27177,9 @@
     var bk = function () { return dFr(dS('m'), dS('k')); };
     y += 0.4 * F;
     kvotRad(dFr(dRad(dS('2π'), dRt(mk())), dRad(dS('2π'), dRt(bk()))), [
-      [['Jag dividerar (2) med (1):']],
-      [['vänsterled med vänsterled och']],
-      [['högerled med högerled.']]
+      [['Jag dividerar den nedre ekvationen']],
+      [['med den övre: vänsterled med']],
+      [['vänsterled, högerled med högerled.']]
     ]);
     kvotRad(dFr(dRt(mk()), dRt(bk())), [
       [['2π finns både i täljaren och i']],
@@ -27206,7 +27209,6 @@
     xx = T.parenFrac('T_2', 'T_1', '2', padL, y);
     xx = T.str('=', xx + 0.06 * F, y);
     T.fracH('m+Δm', 'm', xx, y);
-    T.str('(3)', 330, y);
     T.stepEnd();
     K.sist(y, 1.1);
 
@@ -27223,7 +27225,7 @@
 
     y += adv + 2.2 * F;
     K.tk([
-      [['Jag sätter in värdena i (3).']],
+      [['Jag sätter in värdena.']],
       [['Kvoten 0,75/0,60 är exakt 1,25.']]
     ]);
     xx = T.parenFrac('0,75', '0,60', '2', padL, y);
@@ -27294,69 +27296,6 @@
       [['är 1,25. Stämmer!']]
     ], 120);
     y = K.svar('Svar: 0,36 kg', y);
-    T.stepEnd();
-    K.sist(y, 0.4);
-
-    /* ---- b) ---- */
-    y += adv + 1.4 * F;
-    K.tk([
-      [['Nu är massan känd. Jag löser ut']],
-      [['fjäderkonstanten ur (1).']]
-    ], 120);
-    T.str('b) Fjäderkonstanten ur ekvation (1)', padL, y, null, 0.62);
-    T.pause(300);
-    y += 2.4 * F;
-    K.rotFrac('m', 'k', T.str('T_1=2π', padL, y), y);
-    T.stepEnd();
-    K.sist(y, 1.3);
-
-    y += adv + 2.0 * F;
-    K.tk([
-      [['Jag kvadrerar båda led och']],
-      [['löser ut ', 0], ['k', 1]]
-    ]);
-    xx = T.str('T_1^2=4π^2·', padL, y);
-    xx = T.fracH('m', 'k', xx, y);
-    xx = T.str('⟺k=', xx + 0.12 * F, y);
-    T.fracH('4π^2·m', 'T_1^2', xx, y);
-    T.stepEnd();
-    K.sist(y, 1.3);
-
-    y += adv + 1.7 * F;
-    K.tk([
-      [['Massan tar jag oavrundad från a).']]
-    ]);
-    klam = valueBracket(acts, ['m=0,355... kg', 'T_1=0,60 s'],
-                        padL, y, T.s, F);
-    T.stepEnd();
-    y = klam.yEnd;
-    K.sist(y);
-
-    y += adv + 2.0 * F;
-    K.tk([
-      [['Nu sätter jag in värdena.']]
-    ]);
-    xx = T.fracH('4π^2·0,355...', '0,60^2', T.str('k=', padL, y), y);
-    xIns = T.str('=38,99... N/m', xx + 0.15 * F, y);
-    T.stepEnd();
-    K.sist(y, 1.3);
-
-    K.tk([
-      [['Först nu avrundar jag till två']],
-      [['värdesiffror.']]
-    ]);
-    if (xIns + T.adv('≈39 N/m') < PAPER_W - 34) T.str('≈39 N/m', xIns, y);
-    else { y += adv + 1.2 * F; T.str('≈39 N/m', padL, y); }
-    T.stepEnd();
-    K.sist(y, 1.3);
-
-    y += adv + 1.2 * F;
-    K.tk([
-      [['En vanlig fjäder i skolans labb']],
-      [['har några tiotal newton per']],
-      [['meter. Rimligt!']]
-    ], 120);
-    y = K.svar('Svar: 39 N/m', y);
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL,

@@ -237,6 +237,11 @@ window.SIM_NAMES = {
       kw: ['astronomi','solförmörkelse','förmörkelse','måne','sol','korona','totalitet','kromosfär','protuberans','bailys pärlor','diamantring','umbra','kärnskugga','skugga','ringformig','partiell','vinkeldiameter','centrallinje'] },
   ],
   'fysik2-solens-farg.html': 'Solens färg',
-  'fysik2-neutronstjarna.html': 'Neutronstjärnan i skala',
+  'fysik2-svart-hal-app.html': [
+    { name: 'Svart hål i 3D', desc: 'Vrid runt ett svart hål och följ ljusets väg förbi hålet, från skivan och från stjärnorna bakom.',
+      kw: ['astronomi','svart hål','svarta hål','händelsehorisont','schwarzschild','schwarzschildradie','ackretionsskiva','fotonring','gravitationslins','einsteinring','ljusböjning','relativitet','allmän relativitetsteori','skugga','m87','sagittarius a','event horizon telescope','dopplereffekt','rödförskjutning','interstellar','3d'] },
+    { name: 'Neutronstjärnan i skala', href: 'fysik2-neutronstjarna.html', desc: 'En neutronstjärna bredvid jorden i exakt samma skala.',
+      kw: ['astronomi','neutronstjärna','neutronstjärnor','supernova','densitet','skala','jorden','pulsar','3d'] },
+  ],
   'ljusresan.html': 'Ljusresan',
 };

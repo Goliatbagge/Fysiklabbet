@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <script src="i18n.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Svart hål i 3D — Fysiklabbet</title>
+    <meta name="description" content="Vrid runt ett svart hål i 3D och se hur gravitationen böjer ljuset: skivan av glödande gas reser sig som en båge över hålet, och stjärnorna bakom dras ut till bågar. Varje ljusstråle räknas fram.">
+    <link rel="canonical" href="https://fysiklabbet.se/fysik2-svart-hal-app.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Svart hål i 3D — Fysik nivå 2">
+    <meta property="og:description" content="Vrid runt ett svart hål i 3D och se hur gravitationen böjer ljuset: skivan av glödande gas reser sig som en båge över hålet, och stjärnorna bakom dras ut till bågar. Varje ljusstråle räknas fram.">
+    <meta property="og:url" content="https://fysiklabbet.se/fysik2-svart-hal-app.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Svart hål i 3D — Fysik nivå 2">
+    <meta name="twitter:description" content="Vrid runt ett svart hål i 3D och se hur gravitationen böjer ljuset: skivan av glödande gas reser sig som en båge över hålet, och stjärnorna bakom dras ut till bågar. Varje ljusstråle räknas fram.">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script src="svart-hal.js?v=6"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 20px; }
+
+        .scene-info {
+            position: absolute; bottom: 12px; right: 14px; z-index: 5;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 7px 12px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            display: flex; flex-direction: column; gap: 1px; pointer-events: none;
+            min-width: 150px;
+        }
+        .scene-info .si-lbl { font-size: 10px; letter-spacing: 0.05em;
+            text-transform: uppercase; color: var(--lab-ink-muted, #5a6170); font-weight: 600; }
+        .scene-info .si-val { font-size: 15px; font-weight: 700;
+            color: var(--lab-ink, #0f1620); font-family: 'JetBrains Mono', monospace; }
+
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            height: 580px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            -webkit-user-select: none;
+            background: #05070c;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+        .tre-mount { position: absolute; inset: 0; touch-action: none; }
+        .tre-mount > canvas { display: block; width: 100%; height: 100%; outline: none; }
+        .tre-mount.grab { cursor: grab; }
+        .tre-mount.dragging { cursor: grabbing; }
+        .tre-mount > canvas { cursor: grab; }
+        .tre-mount > canvas:active { cursor: grabbing; }
+        @media (max-width: 600px) {
+            body.lab-sim .scene-wrap:not(:fullscreen) .tre-mount { position: relative; inset: auto; height: 440px; }
+            /* Mobil fullskärm: scenen måste ligga I FLÖDET med egen höjd, annars
+               hittar sim-dock.js ingen scen och avläsning, ledtext och handtag
+               centreras mitt över bilden (påpekat 2026-11-07). */
+            body.lab-sim .scene-wrap:is(:fullscreen, :-webkit-full-screen) .tre-mount {
+                position: sticky; inset: auto; top: 0; z-index: 2;
+                flex: 0 0 auto; width: 100%; height: 52vh;
+            }
+        }
+
+        .scene-hint {
+            position: absolute; bottom: 10px; left: 12px; z-index: 5;
+            font-size: 12px; color: #e9edf3;
+            background: rgba(15,22,32,0.80); padding: 4px 11px; border-radius: 7px;
+            pointer-events: none; font-weight: 500; max-width: calc(100% - 210px);
+        }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 240px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-group { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin: 0 3px; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .seg { display: grid; gap: 1px; border-radius: 9px; overflow: hidden;
+               border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+               background: var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .seg button { background: var(--lab-bg, #f3eee4); border: 0; padding: 8px 4px; font-size: 13.5px;
+                      font-weight: 600; color: var(--lab-ink); cursor: pointer; line-height: 1.2; }
+        .seg button .sub { display: block; font-size: 11px; font-weight: 500; color: var(--lab-ink-muted); }
+        .seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+        .seg button.active .sub { color: rgba(243,238,228,0.75); }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+    
+        .matpunkt { position: absolute; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%;
+            border: 2.5px solid #5fd3e6; box-shadow: 0 0 0 1px rgba(5,7,12,0.7), inset 0 0 0 1px rgba(5,7,12,0.7);
+            cursor: move; touch-action: none; z-index: 4; }
+        .matpunkt::after { content: ''; position: absolute; left: 50%; top: 50%; width: 4px; height: 4px; margin: -2px; border-radius: 50%; background: #5fd3e6; }
+        .stral-kort { position: absolute; left: 14px; top: 66px; width: 286px; z-index: 5; background: rgba(246,242,234,0.96);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); border-radius: 10px; padding: 9px 12px 10px;
+            color: var(--lab-ink, #0f1620); font-size: 13px; line-height: 1.35; }
+        .stral-kort h4 { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 600; color: var(--lab-ink-muted, #5a6170); margin: 0 0 6px; }
+        .stral-kort > svg { display: block; width: 100%; height: auto; background: #fbf8f1; border-radius: 6px; margin-bottom: 6px; }
+        .stral-kort .forkl { display: flex; gap: 12px; flex-wrap: wrap; font-size: 11.5px; color: var(--lab-ink-soft); margin-bottom: 5px; }
+        .stral-kort .forkl i { display: inline-block; width: 18px; border-top: 2.5px solid; vertical-align: middle; margin-right: 5px; }
+        .stral-kort .stang { position: absolute; top: 4px; right: 5px; width: 26px; height: 26px; display: grid; place-items: center; border: 0; background: none; cursor: pointer; color: inherit; }
+        @media (min-width: 601px) { .scene-wrap.is-fs .scene-info { right: auto; left: 14px; bottom: 50px; } }
+        @media (max-width: 600px) {
+            body.lab-sim .scene-wrap .stral-kort { position: relative; left: auto; top: auto; width: auto; margin: 10px 8px 0; order: 1; }
+        }
+        .vyer { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+        .vyer .btn-toggle { padding: 8px 8px; font-size: 13.5px; }
+        .vyer .bred { grid-column: 1 / -1; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Fysik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#fy1">Nivå 1</a>
+                                <a href="katalog.html#fy2">Nivå 2</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma1b">Nivå 1b</a>
+                                <a href="katalog.html#ma1c">Nivå 1c</a>
+                                <a href="katalog.html#ma2b">Nivå 2b</a>
+                                <a href="katalog.html#ma2c">Nivå 2c</a>
+                            </div>
+                        </div>
+                        <div class="lab-nav-dd-grupp">
+                            <button type="button" class="lab-nav-dd-grupp-trigger">
+                                Matematik – fortsättning
+                                <svg class="lab-nav-dd-grupp-caret" width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg>
+                            </button>
+                            <div class="lab-nav-dd-undermeny">
+                                <a href="katalog.html#ma3b">Nivå 1b</a>
+                                <a href="katalog.html#ma3c">Nivå 1c</a>
+                                <a href="katalog.html#ma4">Nivå 2</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        /* Svart hål i 3D. Strålföljningen och dess fysik står i svart-hal.js.
+           Avståndet mäts i Schwarzschildradier, samma r_s som i fy2-5.5. */
+        const fmt = (n, d) => { const s = n.toFixed(d); return parseFloat(s) === 0 ? '0' : s.replace('.', ',').replace('-', '−'); };
+        const VYER = [
+            { namn: 'Snett från sidan', el: 0.19, r: 27, az: 0.6 },
+            { namn: 'I skivans plan', el: 0.025, r: 27, az: 0.6 },
+            { namn: 'Rakt uppifrån', el: 1.45, r: 32, az: 0.6 },
+            { namn: 'Nära hålet', el: 0.32, r: 9.5, az: 0.6 },
+        ];
+
+        // Samma konstanter som i teorins exempel (fy2-5.5).
+        const G = 6.67e-11, C = 3.00e8, MSOL = 1.99e30;
+        const MASSOR = [
+            { kort: 'Solen', sub: '1 solmassa', m: 1, jmf: 'Hålet är knappt 6 km tvärs över, som en mindre stad.' },
+            { kort: 'Stjärna', sub: '10 solmassor', m: 10, jmf: 'Hålet är 59 km tvärs över, nästan som avståndet mellan Stockholm och Uppsala.' },
+            { kort: 'Sgr A*', sub: '4 miljoner solmassor', m: 4e6, jmf: 'Hålet i Vintergatans mitt, Sagittarius A*, är lika brett som 17 solar i rad.' },
+            { kort: 'M87*', sub: '6,5 miljarder solmassor', m: 6.5e9, jmf: 'Hålet i galaxen M87 har en radie som är drygt fyra gånger avståndet mellan solen och Neptunus.' },
+        ];
+        const gr = s => s.replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
+        const tre = x => { const p = Number(x.toPrecision(3)); const d = Math.max(0, 2 - Math.floor(Math.log10(p) + 1e-9)); const [h, b] = p.toFixed(d).split('.'); return gr(h) + (b ? ',' + b : ''); };
+        const langd = m => m < 1e9 ? tre(m / 1e3) + '\u00a0km' : m < 1e12 ? tre(m / 1e9) + '\u00a0miljoner\u00a0km' : tre(m / 1e12) + '\u00a0miljarder\u00a0km';
+        const tidText = s => s < 1 ? tre(s * 1e3) + '\u00a0ms' : s < 100 ? tre(s) + '\u00a0s' : s < 7200 ? tre(s / 60) + '\u00a0minuter' : tre(s / 86400) + '\u00a0dygn';
+        const Pot = ({ x, enhet }) => { const e = Math.floor(Math.log10(x)); return <span style={{ whiteSpace: 'nowrap' }}>{fmt(x / Math.pow(10, e), 2)}&nbsp;·&nbsp;10<sup>{e}</sup>&nbsp;{enhet}</span>; };
+
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span><span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+        const Frac = ({ top, bottom, over, under, size = 20 }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.15, fontSize: size }}>
+                {over && <span className="flbl brak-etikett">{over}</span>}
+                <span style={{ padding: '0 3px 3px' }}>{top}</span>
+                <span style={{ padding: '3px 3px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bottom}</span>
+                {under && <span className="flbl brak-etikett">{under}</span>}
+            </div>
+        );
+        const FormulaCard = ({ M, rs, jmf }) => (
+            <div className="glass-card rounded-xl p-4 mb-6" style={{ color: 'var(--lab-ink)' }}>
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-3">
+                    <Vbl label="Schwarzschildradie"><em>r</em><sub>s</sub></Vbl>
+                    <span className="fnum">=</span>
+                    <Frac over="Massa" under="Ljushastighet" top={<span>2&nbsp;·&nbsp;<em>G</em>&nbsp;·&nbsp;<em>M</em></span>} bottom={<span><em>c</em><sup>2</sup></span>} />
+                    <span className="fnum">=</span>
+                    <Frac size={15} top={<span>2&nbsp;·&nbsp;6,67&nbsp;·&nbsp;10<sup>−11</sup>&nbsp;N&nbsp;·&nbsp;m²/kg²&nbsp;· <Pot x={M} enhet="kg" /></span>}
+                          bottom={<span>(<Pot x={C} enhet="m/s" />)<sup>2</sup></span>} />
+                    <span className="fnum">≈</span>
+                    <span className="fnum"><Pot x={rs} enhet="m" /> = <span style={{ whiteSpace: 'nowrap' }}>{langd(rs)}</span></span>
+                </div>
+                <p className="text-sm mt-2" style={{ color: 'var(--lab-ink-soft)' }}><em>G</em> är gravitationskonstanten. {jmf}</p>
+            </div>
+        );
+
+        // Strålen sedd från sidan, i det plan som den rör sig i. Kameran till vänster.
+        const p_ok = p => -p[0] > -16 && -p[0] < 13 && Math.abs(p[1]) < 9;
+        const StralKort = ({ s, onClose }) => {
+            const P = p => (-p[0]).toFixed(2) + ',' + (-p[1]).toFixed(2);
+            const pts = s.punkter;
+            // Pilspetsen mitt på den synliga delen, riktad mot kameran (så går ljuset).
+            const syns = pts.map((p, i) => i).filter(i => i > 0 && p_ok(pts[i]));
+            const mi = syns.length ? syns[Math.floor(syns.length * 0.4)] : pts.length - 1;
+            const p1 = pts[mi], p0 = pts[mi - 1], an = Math.atan2(p1[1] - p0[1], p1[0] - p0[0]) * 180 / Math.PI;
+            const grad = fmt(s.vinkel, 0) + '°', bojt = s.vinkel < 0.5 ? 'gått rakt fram.' : 'böjts ' + grad + ' på vägen.';
+            const text = s.slut === 'hal'
+                ? 'Här är det svart. Följer man strålen bakåt hamnar den i hålet, och därifrån kan inget ljus komma.'
+                : s.slut === 'skiva'
+                    ? 'Ljuset kommer från skivans ' + (s.skiva.ovan ? 'ovansida' : 'undersida') + ', ' + (s.skiva.bortre ? 'bortom hålet' : 'på din sida av hålet') + '. Det har ' + bojt
+                    : 'Ljuset kommer från stjärnhimlen. Det har ' + bojt;
+            return (
+                <div className="stral-kort">
+                    <h4>Ljusstrålen från sidan</h4>
+                    <button className="stang" onClick={onClose} aria-label="Stäng" title="Stäng"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg></button>
+                    <svg viewBox="-17 -10 31 20" role="img" aria-label="Ljusstrålens bana kring hålet">
+                        {s.linje && [1, -1].map(t => <line key={t} x1={-s.linje[0] * 3 * t} y1={-s.linje[1] * 3 * t} x2={-s.linje[0] * 9.5 * t} y2={-s.linje[1] * 9.5 * t} stroke="#b9822f" strokeWidth="0.5" />)}
+                        <line x1={-s.rc} y1="0" x2={-s.rc - s.sikt[0] * 120} y2={-s.sikt[1] * 120} stroke="#5a6170" strokeWidth="0.16" strokeDasharray="0.6 0.45" />
+                        <circle r="1" fill="#0a0c10" />
+                        <polyline points={pts.map(P).join(' ')} fill="none" stroke="#c8324a" strokeWidth="0.28" strokeLinejoin="round" />
+                        <polygon points="0.75,0 -0.55,0.55 -0.55,-0.55" fill="#c8324a" transform={'translate(' + P(p1) + ') rotate(' + an + ')'} />
+                        {s.rc < 16.5 && <circle cx={-s.rc} cy="0" r="0.45" fill="#0f1620" />}
+                    </svg>
+                    <div className="forkl">
+                        <span><i style={{ borderColor: '#c8324a' }}></i>ljusets väg</span>
+                        <span><i style={{ borderColor: '#5a6170', borderTopStyle: 'dashed', borderTopWidth: 2 }}></i>så ser det ut</span>
+                        {s.linje && <span><i style={{ borderColor: '#b9822f' }}></i>skivan</span>}
+                    </div>
+                    <div>{text}</div>
+                </div>
+            );
+        };
+
+        const Slider = ({ label, value, min, max, step, onChange, valueText, sub }) => (
+            <div className="mb-4">
+                <div className="flex justify-between items-center mb-1">
+                    <label className="text-sm font-bold" style={{ color: 'var(--lab-ink)' }}>{label}</label>
+                    <div className="font-mono font-semibold text-sm" style={{ color: 'var(--lab-accent)' }}>{valueText}</div>
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value} aria-label={label}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} className="w-full cursor-pointer" />
+                {sub && <div className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}>{sub}</div>}
+            </div>
+        );
+        const StSlider = ({ label, value, min, max, step, onChange, valueText }) => (
+            <div className="st-slider">
+                <div className="st-slider-top">
+                    <span>{label}</span>
+                    <span style={{ whiteSpace: 'nowrap', fontWeight: 600, color: 'var(--lab-ink, #0f1620)' }}>{valueText}</span>
+                </div>
+                <span className="sl-wrap">
+                    <input type="range" min={min} max={max} step={step} value={value} aria-label={label}
+                           onChange={(e) => onChange(parseFloat(e.target.value))} />
+                </span>
+            </div>
+        );
+
+        const App = () => {
+            const cRef = useRef(null), wrapRef = useRef(null), api = useRef(null);
+            const [fel, setFel] = useState(false);
+            const [k, setK] = useState(1);
+            const [show, setShow] = useState({ skiva: true, dopp: true, rut: false });
+            const [spelar, setSpelar] = useState(true);
+            const [kam, setKam] = useState({ r: 27, el: 0.19 });
+            const [mi, setMi] = useState(2);
+            const [tele, setTele] = useState(false);
+            const [punkt, setPunkt] = useState(null);
+            const [isFullscreen, setFs] = useState(false);
+            const [open, setOpen] = useState(true);
+
+            useEffect(() => {
+                let a = null;
+                try { a = window.SVARTHAL.skapa(cRef.current); } catch (e) { console.error(e); }
+                if (!a) { setFel(true); return; }
+                api.current = a; window.__svarthal = a;
+                a.vidAndring(s => setKam({ r: s.r, el: s.el }));
+                a.vidTryck((x, y) => setPunkt({ x, y }));
+                const fs = () => setFs(!!(document.fullscreenElement || document.webkitFullscreenElement));
+                document.addEventListener('fullscreenchange', fs);
+                document.addEventListener('webkitfullscreenchange', fs);
+                return () => { document.removeEventListener('fullscreenchange', fs); document.removeEventListener('webkitfullscreenchange', fs); a.sluta(); };
+            }, []);
+            useEffect(() => { if (api.current) api.current.satt({ k, skiva: show.skiva, dopp: show.dopp, rut: show.rut, spelar, tele }); }, [k, show, spelar, tele]);
+
+            const massa = MASSOR[mi], M = massa.m * MSOL, rs = 2 * G * M / (C * C);
+            const varv = 2 * Math.PI * Math.sqrt(54) * rs / C;      // innersta stabila banan, r = 3 r_s
+            if (api.current) api.current.satt({ k, skiva: show.skiva });
+            const stral = punkt && !tele && api.current ? api.current.stral(punkt.x, punkt.y) : null;
+            const flyttaPunkt = e => {
+                if (!e.currentTarget.hasPointerCapture(e.pointerId)) return;
+                const b = cRef.current.getBoundingClientRect(), c = v => Math.max(0.01, Math.min(0.99, v));
+                setPunkt({ x: c((e.clientX - b.left) / b.width), y: c((e.clientY - b.top) / b.height) });
+            };
+
+            const toggleFullscreen = () => {
+                const el = wrapRef.current;
+                if (document.fullscreenElement || document.webkitFullscreenElement) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+            const t = n => setShow(s => ({ ...s, [n]: !s[n] }));
+            const flyg = v => api.current && api.current.flyg(v);
+            const vy = v => { setTele(false); setShow(s => ({ ...s, skiva: true })); flyg(v); };
+            const ring = () => { setTele(false); setK(1); setShow(s => ({ ...s, skiva: false })); flyg({ az: window.SVARTHAL.MITT_EMOT_GALAXEN.az + 0.02, el: window.SVARTHAL.MITT_EMOT_GALAXEN.el + 0.012, r: 40 }); };
+            const teleskop = () => { setK(1); setMi(3); setShow({ skiva: true, dopp: true, rut: false }); setTele(true); flyg({ el: 1.27, r: 24 }); };
+            const setR = r => { api.current.satt({ r }); setKam(s => ({ ...s, r })); };
+
+            const reglage = (C) => (
+                <React.Fragment>
+                    <C label="Ljusböjning" value={k} min={0} max={1} step={0.01} onChange={setK} valueText={fmt(k * 100, 0) + '\u00a0%'}
+                       sub={C === Slider ? 'Vid 0 % går ljuset rakt fram. Dra långsamt uppåt och se bågen växa fram.' : undefined} />
+                    <C label="Avstånd" value={kam.r} min={6} max={60} step={0.5} onChange={setR} valueText={fmt(kam.r, 1) + ' Schwarzschildradier'} />
+                </React.Fragment>
+            );
+            const vyKnappar = (
+                <div className="vyer">
+                    {VYER.map(v => <button key={v.namn} className="btn-toggle" onClick={() => vy(v)}>{v.namn}</button>)}
+                    <button className="btn-toggle bred" onClick={ring}>Einsteinring av en galax</button>
+                    <button className={'btn-toggle bred' + (tele ? ' active' : '')} onClick={() => tele ? setTele(false) : teleskop()}>Som teleskopet såg det</button>
+                </div>
+            );
+            const massVal = (
+                <div className="vyer">{MASSOR.map((m, i) => <button key={m.kort} className={'btn-toggle' + (i === mi ? ' active' : '')} onClick={() => setMi(i)} style={{ lineHeight: 1.2 }}>{m.kort}<span style={{ display: 'block', fontSize: 11, fontWeight: 500, opacity: 0.8 }}>{m.sub}</span></button>)}</div>
+            );
+            const playKnapp = <button className={'btn-toggle w-full ' + (spelar ? 'active' : '')} onClick={() => setSpelar(s => !s)}>{spelar ? 'Pausa skivan' : 'Starta skivan'}</button>;
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-7xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Svart hål i 3D
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Svart hål i 3D</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 840 }}>
+                            Vrid runt ett svart hål och en <strong>ackretionsskiva</strong> av glödande gas. Skivan är platt,
+                            men gravitationen böjer ljuset så kraftigt att du ser dess bortre del <strong>både över och under
+                            hålet</strong>. Stjärnorna bakom dras ut till bågar. Varje ljusstråle räknas fram med den allmänna
+                            relativitetsteorin medan du tittar. Klicka var som helst i bilden och se vilken väg ljuset tog.
+                        </p>
+
+                        <FormulaCard M={M} rs={rs} jmf={massa.jmf} />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            <div className="lg:w-3/4 order-1 min-w-0">
+                                <div className={'scene-wrap' + (isFullscreen ? ' is-fs' : '')} ref={wrapRef}>
+                                    <div className="tre-mount"><canvas ref={cRef} aria-label="Ett svart hål med en ackretionsskiva framför en stjärnhimmel" />
+                                        {stral && <div className="matpunkt" style={{ left: punkt.x * 100 + '%', top: punkt.y * 100 + '%' }} title="Dra ringen"
+                                            onPointerDown={e => e.currentTarget.setPointerCapture(e.pointerId)} onPointerMove={flyttaPunkt}></div>}
+                                    </div>
+                                    {stral && <StralKort s={stral} onClose={() => setPunkt(null)} />}
+                                    {fel && <div className="absolute inset-x-0 top-1/2 text-center px-6" style={{ color: '#f3eee4' }}>Simuleringen kräver WebGL 2, som inte är tillgängligt i den här webbläsaren.</div>}
+                                    <div className="scene-info">
+                                        <span className="si-lbl">Avstånd till hålets mitt</span>
+                                        <span className="si-val">{fmt(kam.r, 1)} <em>r</em><sub>s</sub></span>
+                                        <span className="si-val" style={{ fontSize: 12.5 }}>{langd(kam.r * rs)}</span>
+                                        <span className="si-lbl" style={{ marginTop: 4 }}>Innersta gasens varv</span>
+                                        <span className="si-val" style={{ fontSize: 13 }}>{tidText(varv)}</span>
+                                        <span className="si-lbl" style={{ marginTop: 4 }}>Vinkel mot skivans plan</span>
+                                        <span className="si-val">{fmt(kam.el * 180 / Math.PI, 0)}°</span>
+                                    </div>
+                                    <div className="scene-hint">{stral ? 'Dra ringen till en annan plats i bilden.' : 'Dra för att vrida, rulla eller nyp för att zooma. Klicka i bilden för att följa en ljusstråle.'}</div>
+                                    {!open ? (
+                                        <button className="st-show-btn" onClick={() => setOpen(true)} aria-label="Visa inställningar" title="Visa inställningar" aria-expanded="false">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                                                <line x1="4" y1="8" x2="20" y2="8" /><circle cx="14.5" cy="8" r="2.7" fill="currentColor" stroke="none" />
+                                                <line x1="4" y1="16" x2="20" y2="16" /><circle cx="9.5" cy="16" r="2.7" fill="currentColor" stroke="none" />
+                                            </svg>
+                                        </button>
+                                    ) : (
+                                        <div className="scene-toggles">
+                                            <button className="st-hide" onClick={() => setOpen(false)} aria-label="Dölj inställningar" title="Dölj inställningar" aria-expanded="true">
+                                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" aria-hidden="true"><path d="M5 12h14" /></svg>
+                                            </button>
+                                            <div className="st-title">Visa</div>
+                                            <label><input type="checkbox" checked={show.skiva} onChange={() => t('skiva')} /><span>Ackretionsskivan</span></label>
+                                            <label><input type="checkbox" checked={show.dopp} onChange={() => t('dopp')} /><span>Doppler och rödförskjutning</span></label>
+                                            <label><input type="checkbox" checked={show.rut} onChange={() => t('rut')} /><span>Himlens förvrängning</span></label>
+                                            {isFullscreen && (
+                                                <React.Fragment>
+                                                    <div className="st-title st-group">Reglage</div>
+                                                    <div className="st-sliders">{reglage(StSlider)}</div>
+                                                    <div className="st-title st-group">Hålets massa</div>{massVal}
+                                                    <div className="st-actions">{vyKnappar}{playKnapp}</div>
+                                                </React.Fragment>
+                                            )}
+                                        </div>
+                                    )}
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm" title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                            {isFullscreen
+                                                ? <React.Fragment><path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" /></React.Fragment>
+                                                : <React.Fragment><path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" /></React.Fragment>}
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="lg:w-1/4 order-2 flex-shrink-0">
+                                {!isFullscreen && (
+                                    <div className="glass-card rounded-xl p-4">
+                                        {reglage(Slider)}
+                                        <div className="text-sm font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Hålets massa</div>
+                                        <div className="mb-4">{massVal}</div>
+                                        <div className="text-sm font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Vyer</div>
+                                        {vyKnappar}
+                                        <div className="mt-3">{playKnapp}</div>
+                                    </div>
+                                )}
+                            </div>
+                        </main>
+
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Bågen över hålet</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Ljus från skivans bortre del sänds ut åt alla håll. En del av det som går snett uppåt böjs
+                                    av över hålet och når dig. Därför ser skivans baksida ut att resa sig. Ljus som
+                                    böjs under hålet ger den smala bågen på undersidan.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Skuggan är större än hålet</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Det svarta området är inte själva händelsehorisonten. Även ljus som passerar utanför
+                                    horisonten kan fångas in. Sedd på långt håll är skuggans radie ungefär 2,6 gånger
+                                    Schwarzschildradien. Längs dess kant ligger den tunna <strong>fotonringen</strong>, ljus
+                                    som gått minst ett halvt varv runt hålet.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Den ena sidan lyser starkare</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Gasen längst in rör sig med halva ljusets fart. Sidan som kommer mot dig blir
+                                    ljusare och blåare, och sidan som rör sig bort blir mörkare och rödare. Stäng av effekten i rutan och
+                                    jämför.
+                                </p>
+                            </div>
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-4 mt-4">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Samma bild, helt olika storlek</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Byt massa och titta på bilden: den ändras inte. På samma antal Schwarzschildradiers avstånd
+                                    ser alla hål som inte roterar likadana ut. Det som ändras är skalan, och därmed tiden. Gasen
+                                    längst in behöver <strong>{tidText(varv)}</strong> för ett varv, sett långt ifrån. I
+                                    simuleringen visas rörelsen alltid lika fort.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Så såg teleskopet M87*</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    År 2019 visade Event Horizon Telescope den första bilden av ett svart håls skugga. Vi ser M87*
+                                    nästan uppifrån, och teleskopet kan inte skilja på detaljer mindre än ungefär halva ringens diameter.
+                                    Vyn <strong>Som teleskopet såg det</strong> gör vår bild lika suddig. Jämför med{' '}
+                                    <a href="https://www.eso.org/public/images/eso1907a/" target="_blank" rel="noopener" style={{ color: 'var(--lab-accent)', textDecoration: 'underline' }}>originalbilden hos ESO</a>.
+                                </p>
+                            </div>
+                        </div>
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}><span>Vad är uträknat och vad är förenklat?</span><span style={{ color: 'var(--lab-ink-muted)' }}>+</span></summary>
+                            <p className="mt-3 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                Ljusets banor, skuggans storlek, stjärnornas förvrängning och rödförskjutningen räknas ut för ett
+                                svart hål som inte roterar. Gasens temperatur, färg och mönster är valda för att bilden ska gå
+                                att se: en verklig skiva nära ett svart hål lyser till stor del i ultraviolett ljus och
+                                röntgenstrålning, och skillnaderna i ljusstyrka är mycket större. Stjärnhimlen och galaxen är påhittade. Strålen som du följer räknas som stoppad av skivan inom 9,5 Schwarzschildradier. Längre ut är gasen nästan genomskinlig.
+                            </p>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="sim-dock.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+    <!-- Cloudflare Web Analytics: cookiefri besöksmätning, se CLAUDE.md. -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon='{"token": "366677ecfe014a76b73f5bc78a489e0e"}'></script>
+</body>
+</html>

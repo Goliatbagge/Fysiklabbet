@@ -26503,9 +26503,9 @@
     T.str('Ur (1) fås', padL, y, null, 0.62);
     T.pause(300);
     y += 2.1 * F;
-    /* NUMRERA BARA DET SOM HÄNVISAS TILL (användarkrav 2026-11-24):
-     * raden får inget (3), den nämns aldrig med nummer. */
-    T.fracH('v_m_a_x', 'ω', T.str('A=', padL, y), y);
+    /* (3) behövs: ω sätts in här på slutet ("Detta i (3) ger"). */
+    xx = T.fracH('v_m_a_x', 'ω', T.str('A=', padL, y), y);
+    T.str('(3)', Math.max(330, xx + 0.9 * F), y);
     T.stepEnd();
     K.sist(y, 1.1);
 
@@ -26558,11 +26558,16 @@
     T.stepEnd();
     K.sist(y, 1.1);
 
-    y += adv + 1.9 * F;
+    /* EKVATIONSSYSTEM: varje insättning får en egen rad som säger var
+     * värdet sätts in ("Detta i (3) ger"), användarkrav 2026-11-24. */
+    y += adv + 1.0 * F;
     K.tk([
       [['Nu när ', 0], ['ω', 1], [' är känd sätter jag in', 0]],
-      [['värdena i ', 0], ['A', 1], [' = ', 0], ['v', 1], ['max', 0], [' / ', 0], ['ω', 1]]
+      [['den i (3), där ', 0], ['A', 1], [' står ensam.', 0]]
     ]);
+    T.str('Detta i (3) ger', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
     xx = T.fracH('0,48', '7,5', T.str('A=', padL, y), y);
     T.str('=0,064 m=6,4 cm', xx + 0.15 * F, y);
     T.stepEnd();

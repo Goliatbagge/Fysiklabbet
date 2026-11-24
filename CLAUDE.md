@@ -1459,6 +1459,24 @@ användaren påpekat (2026-08-25).
    "insättning i (3)", "ur (1)" eller liknande, och ta bort ett nummer
    som blivit oanvänt när en lösning skrivs om. Gäller teori, exempel,
    textlösningar, pennlösningar och övningarnas lösningar.
+   Omvänt: ska ett värde senare sättas in i en rad, ska raden ha ett
+   nummer, så att det går att säga var det sätts in.
+
+10. **Ekvationssystem redovisas med klammer och med ord vid varje
+    insättning** (användarkrav 2026-11-24, referens: `fy2-2.A`
+    exempel 1). Det är så eleverna är vana vid från matematiken, och
+    utan orden blir det svårt att följa vart ett värde tar vägen:
+    - Systemet skrivs med klammer (`\begin{cases}` i text,
+      `systemKlammer` i pennan), med nummer på de ekvationer som
+      hänvisas till: (1), (2).
+    - Den utlösta storheten skrivs efter en egen rad, **"Ur (1) fås"**,
+      och får ett eget nummer om den används igen: $A = \dfrac{v_{\max}}{\omega}$ (3).
+    - Varje insättning inleds med en egen rad som säger var den görs:
+      **"Detta i ekvation (2) ger"**, och när den första obekanta är
+      beräknad **"Detta i (3) ger"**. Raden står ensam, och uttrycket
+      kommer på nästa rad.
+    - I textlösningen skrivs formeln ut efter numret (punkt 8):
+      "Detta i (3), $A = \dfrac{v_{\max}}{\omega}$, ger".
 
 9. **Håll inne med posterna när klassen kan resonera fram dem.** En tabell
    eller lista där varje post bygger på den förra (kapitalet år för år, en

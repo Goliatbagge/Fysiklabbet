@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Mon, 23 Nov 2026 02:23:23 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 24 Nov 2026 02:22:14 GMT</lastBuildDate>
+    <item>
+      <title>Turbulensen tämjer sig själv när ett fusionsplasma plötsligt håller värmen bättre</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-11-24-turbulensen-som-tammer-sig-sjalv</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-11-24-turbulensen-som-tammer-sig-sjalv</guid>
+      <pubDate>Tue, 24 Nov 2026 04:00:00 GMT</pubDate>
+      <category>Plasmafysik</category>
+      <description>När ett fusionsplasma värms tillräckligt mycket stillnar virvlarna i dess ytterkant plötsligt, och plasmat håller värmen ungefär dubbelt så länge. Fenomenet upptäcktes 1982, men ingen har kunnat förklara varför det kräver olika mycket effekt vid olika förhållanden. Nu har forskare i Lausanne tagit fram en teori som ger svaret, och den förutsäger hur mycket uppvärmning framtidens stora fusionsanläggningar behöver.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-11-24-turbulensen-som-tammer-sig-sjalv.jpg" length="133199" type="image/jpeg"/>
+    </item>
     <item>
       <title>Neutriner som rest genom jorden prövar relativitetsteorin på Medelhavets botten</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-11-23-neutrinerna-som-provar-einstein</link>
@@ -177,15 +186,6 @@
       <category>Partikelfysik</category>
       <description>Experimentet LHCb vid CERN har för första gången på egen hand hittat belägg för att B-mesonen, en partikel som innehåller en bottenkvark eller dess antikvark, kan sönderfalla till en myon och en antimyon. Det ska hända ungefär en gång på tio miljarder, och fysiker har letat efter sönderfallet sedan 1984.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-11-05-ett-sonderfall-pa-tio-miljarder.jpg" length="295237" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>En svävande glaskula känner stöten från enskilda atomer</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-11-04-kulan-som-kanner-varje-atom</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-11-04-kulan-som-kanner-varje-atom</guid>
-      <pubDate>Wed, 04 Nov 2026 04:00:00 GMT</pubDate>
-      <category>Mekanik</category>
-      <description>Forskare vid Yale har fångat en glaskula, 100 nanometer i diameter, med en laser i vakuum och mätt den lilla knuff kulan får när en enda gaspartikel krockar med den. Antalet knuffar visar hur högt trycket i gasen är.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-11-04-kulan-som-kanner-varje-atom.jpg" length="552050" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

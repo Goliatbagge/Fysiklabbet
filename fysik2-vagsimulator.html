@@ -295,12 +295,27 @@ function huygensKallor(mode, b, d) {
     for (const c of mitter) for (let j = 0; j < n; j++) xs.push(c - b / 2 + b * (j + 0.5) / n);
     return xs;
 }
+// Vågen kommer alltid in uppifrån. p.uppat = true: grunt vatten överst, så
+// att vågen går från grunt till djupt vatten och bryts från normalen. Är
+// infallsvinkeln då större än gränsvinkeln blir det totalreflexion (tot):
+// en reflekterad våg med r = i och bara en snabbt avtagande rörelse (kappa)
+// i det djupa vattnet. Fasskiftet 2δ gör att höjd och flöde passar ihop
+// längs gränsen (långa vågor på grunt vatten, där flödet är h · dz/dy).
 function brytGeometri(p) {
     const i = p.vinkel * Math.PI / 180;
-    const v1 = V, v2 = Math.sqrt(G * p.h2 / 1000) * 1000;
-    const b = Math.asin(Math.min(1, v2 / v1 * Math.sin(i)));
-    return { i, b, v1, v2 };
+    const vG = Math.sqrt(G * p.h2 / 1000) * 1000;
+    const v1 = p.uppat ? vG : V, v2 = p.uppat ? V : vG;
+    const q = v2 / v1 * Math.sin(i), tot = q > 1 + 1e-9;
+    const b = Math.asin(Math.min(1, q));
+    let kappa = 0, delta = 0;
+    if (tot) {
+        const k1 = 2 * Math.PI * p.f / v1, k2 = 2 * Math.PI * p.f / v2;
+        kappa = k2 * Math.sqrt(q * q - 1);
+        delta = Math.atan(v2 * v2 * kappa / (v1 * v1 * k1 * Math.cos(i)));
+    }
+    return { i, b, v1, v2, tot, kappa, delta };
 }
+const gransVinkel = (p) => Math.asin(Math.min(1, Math.sqrt(G * p.h2 / 1000) * 1000 / V)) * 180 / Math.PI;
 // Fasen θ och amplituden A i punkten (x, y); utslaget är A · sin(θ − φ).
 function byggFalt(p, nx, ny, steg) {
     const S = new Float32Array(nx * ny), C = new Float32Array(nx * ny);
@@ -328,6 +343,14 @@ function byggFalt(p, nx, ny, steg) {
         const fas0 = (k1 * Math.cos(g.i) - k2 * Math.cos(g.b)) * YB_BRYT;
         for (let j = 0; j < ny; j++) for (let i = 0; i < nx; i++) {
             const x = (i + 0.5) * steg, y = (j + 0.5) * steg;
+            if (g.tot) {
+                const A = 0.6, kx = k1 * Math.sin(g.i) * x, dy = y - YB_BRYT, fasB = k1 * Math.cos(g.i) * YB_BRYT;
+                if (dy < 0) {
+                    sett(j * nx + i, A, kx + fasB + k1 * Math.cos(g.i) * dy);
+                    sett(j * nx + i, A, kx + fasB - k1 * Math.cos(g.i) * dy - 2 * g.delta);
+                } else sett(j * nx + i, 2 * A * Math.cos(g.delta) * Math.exp(-g.kappa * dy), kx + fasB - g.delta);
+                continue;
+            }
             const th = y < YB_BRYT ? k1 * (x * Math.sin(g.i) + y * Math.cos(g.i))
                                    : k2 * (x * Math.sin(g.b) + y * Math.cos(g.b)) + fas0;
             sett(j * nx + i, 1, th);
@@ -472,7 +495,8 @@ const WaveSimulator = () => {
     const [ultra, setUltra] = useState(false);
     const [vy, setVy] = useState('2D');
     const [f, setF] = useState(lage === 'interferens' ? 3 : 2);
-    const [vinkel, setVinkel] = useState(35);
+    const [vinkel, setVinkel] = useState(() => new URLSearchParams(location.search).get('riktning') === 'grunt-djupt' ? 25 : 35);
+    const [uppat, setUppat] = useState(() => new URLSearchParams(location.search).get('riktning') === 'grunt-djupt');
     const [h2, setH2] = useState(1.5);          // djup i det grunda området (mm)
     const [d, setD] = useState(lage === 'interferens' ? 200 : 160);            // avstånd mellan källorna/öppningarna (mm)
     const [b, setB] = useState(50);             // öppningens bredd (mm)
@@ -500,7 +524,7 @@ const WaveSimulator = () => {
         doppler.current = { x: 90, fronter: [], nastaFas: fas.current };
     }, [mode]);
 
-    P.current = { mode, spelar, ultra, vy, f, vinkel, h2, d, b, u, visa, k1: kallor.k1, k2: kallor.k2 };
+    P.current = { mode, spelar, ultra, vy, f, vinkel, uppat, h2, d, b, u, visa, k1: kallor.k1, k2: kallor.k2 };
 
     // Fullskärm
     useEffect(() => {
@@ -541,7 +565,7 @@ const WaveSimulator = () => {
             tid.current += dt;
             if (p.mode === 'doppler') stegDoppler(p, dt);
             else {
-                const key = [p.mode, p.f, p.vinkel, p.h2, p.d, p.b, p.k1.x, p.k1.y, p.k2.x, p.k2.y].join('|');
+                const key = [p.mode, p.f, p.vinkel, p.uppat, p.h2, p.d, p.b, p.k1.x, p.k1.y, p.k2.x, p.k2.y].join('|');
                 if (key !== nyckel.current) {
                     nyckel.current = key;
                     falt.current = byggFalt(p, FW, FH, FS);
@@ -574,7 +598,7 @@ const WaveSimulator = () => {
             const data = img.data;
             const grundGrans = p.mode === 'refraction' ? YB_BRYT / FS : 1e9;
             for (let j = 0; j < FH; j++) {
-                const pal = j >= grundGrans ? PAL_GRUNT : PAL_DJUP;
+                const pal = p.mode === 'refraction' && (j >= grundGrans) !== p.uppat ? PAL_GRUNT : PAL_DJUP;
                 for (let i = 0; i < FW; i++) {
                     const idx = j * FW + i;
                     const zx = z[idx + (i < FW - 1 ? 1 : 0)] - z[idx - (i > 0 ? 1 : 0)];
@@ -705,21 +729,22 @@ const WaveSimulator = () => {
             const lam1 = g.v1 / p.f, lam2 = g.v2 / p.f;
             const fas0 = (k1 * Math.cos(g.i) - k2 * Math.cos(g.b)) * YB_BRYT;
             const a1 = [Math.sin(g.i), Math.cos(g.i)], a2 = [Math.sin(g.b), Math.cos(g.b)];
-            info.current = { f: p.f, lam: lam1, v: g.v1, lam2, v2: g.v2, i: g.i, b: g.b };
+            info.current = { f: p.f, lam: lam1, v: g.v1, lam2, v2: g.v2, i: g.i, b: g.b, tot: g.tot };
             // gränsen: kanten på den glasskiva som gör vattnet grunt
             ctx.save();
-            ctx.fillStyle = 'rgba(255,255,255,0.10)'; ctx.fillRect(RAM, YB_BRYT, W - 2 * RAM, H - YB_BRYT - RAM);
+            ctx.fillStyle = 'rgba(255,255,255,0.10)'; ctx.fillRect(RAM, p.uppat ? RAM : YB_BRYT, W - 2 * RAM, H - YB_BRYT - RAM);
             ctx.strokeStyle = 'rgba(15,22,32,0.75)'; ctx.lineWidth = 2.5;
             ctx.beginPath(); ctx.moveTo(0, YB_BRYT); ctx.lineTo(W, YB_BRYT); ctx.stroke();
             ctx.restore();
 
             if (p.visa.toppar) {
                 ctx.save(); ctx.strokeStyle = BLAECK; ctx.lineWidth = 3;
-                for (const [a, kk, f0, y0, y1] of [[a1, k1, 0, 0, YB_BRYT], [a2, k2, fas0, YB_BRYT, H]]) {
-                    ctx.save(); ctx.beginPath(); ctx.rect(0, y0, W, y1 - y0); ctx.clip();
+                const a3 = [a1[0], -a1[1]], fas3 = 2 * k1 * a1[1] * YB_BRYT - 2 * g.delta;
+                for (const [a, kk, f0, y0, y1] of [[a1, k1, 0, 0, YB_BRYT], g.tot ? [a3, k1, fas3, 0, YB_BRYT] : [a2, k2, fas0, YB_BRYT, H]]) {
+                    ctx.save(); if (a === a3) ctx.setLineDash([12, 8]); ctx.beginPath(); ctx.rect(0, y0, W, y1 - y0); ctx.clip();
                     const lam = 2 * Math.PI / kk;
                     let c0 = (phi + Math.PI / 2 - f0) / kk; c0 -= lam * Math.floor(c0 / lam);   // fasen växer hela tiden: håll c0 inom ett varv
-                    for (let n = -1, nMax = Math.ceil((W + H) / lam) + 1; n <= nMax; n++) {   // x · a täcker 0 … W + H
+                    for (let n = a === a3 ? -Math.ceil(H / lam) - 1 : -1, nMax = Math.ceil((W + H) / lam) + 1; n <= nMax; n++) {   // x · a täcker 0 … W + H
                         const c = c0 + n * lam;                  // x · ax + y · ay = c
                         const px = c * a[0], py = c * a[1];
                         ctx.beginPath(); ctx.moveTo(px - 2000 * a[1], py + 2000 * a[0]); ctx.lineTo(px + 2000 * a[1], py - 2000 * a[0]); ctx.stroke();
@@ -729,35 +754,43 @@ const WaveSimulator = () => {
                 ctx.restore();
             }
             // orden efter fronterna, så att ingen front ritas över brickorna
-            etikett(ctx, 'djupt vatten', W - RAM - 14, YB_BRYT - 12, '#f3eee4', 21, 'right');
-            etikett(ctx, 'grunt vatten', W - RAM - 14, YB_BRYT + 30, '#f3eee4', 21, 'right');
+            etikett(ctx, p.uppat ? 'grunt vatten' : 'djupt vatten', W - RAM - 14, YB_BRYT - 12, '#f3eee4', 21, 'right');
+            etikett(ctx, p.uppat ? 'djupt vatten' : 'grunt vatten', W - RAM - 14, YB_BRYT + 30, '#f3eee4', 21, 'right');
+            if (g.tot) etikett(ctx, 'totalreflexion: ingen bruten våg', 300, YB_BRYT + 110, '#f3eee4', 23, 'center');
             if (p.visa.lambda) {
                 // dubbelpilar som åker med fronterna, till höger om strålen
-                const A1 = [450 - lam1 * a1[0], YB_BRYT - 20 - 2 * lam1 * a1[1]];
+                const A1 = [(g.tot ? 500 : 450) - lam1 * a1[0], YB_BRYT - 20 - 2 * lam1 * a1[1]];
                 const t1 = toppSpar(A1[0] * a1[0] + A1[1] * a1[1], k1, 0, phi);
                 const P1 = [A1[0] + t1.s * a1[0], A1[1] + t1.s * a1[1]];
                 dubbelpil(ctx, P1[0], P1[1], P1[0] + lam1 * a1[0], P1[1] + lam1 * a1[1], '#f6f2ea', tona(t1.u));
                 ctx.save(); ctx.globalAlpha = tona(t1.u);
-                beteckning(ctx, 'λ', '1', P1[0] + lam1 * a1[0] / 2 + 14 * a1[1], P1[1] + lam1 * a1[1] / 2 - 14 * a1[0] + 6, LAMBDA_FARG, 25, 'start');
+                if (g.tot) beteckning(ctx, 'λ', '1', P1[0] + lam1 * a1[0] / 2 - 14 * a1[1], P1[1] + lam1 * a1[1] / 2 + 14 * a1[0] + 12, LAMBDA_FARG, 25, 'end');
+                else beteckning(ctx, 'λ', '1', P1[0] + lam1 * a1[0] / 2 + 14 * a1[1], P1[1] + lam1 * a1[1] / 2 - 14 * a1[0] + 6, LAMBDA_FARG, 25, 'start');
                 ctx.restore();
-                const A2 = [600 - lam2 * a2[0], YB_BRYT + 20];
+                if (!g.tot) {
+                const A2 = [600 - lam2 * a2[0], YB_BRYT + (p.uppat ? 60 : 20)];
                 const t2 = toppSpar(A2[0] * a2[0] + A2[1] * a2[1], k2, fas0, phi);
                 const P2 = [A2[0] + t2.s * a2[0], A2[1] + t2.s * a2[1]];
                 dubbelpil(ctx, P2[0], P2[1], P2[0] + lam2 * a2[0], P2[1] + lam2 * a2[1], '#f6f2ea', tona(t2.u));
                 ctx.save(); ctx.globalAlpha = tona(t2.u);
                 beteckning(ctx, 'λ', '2', P2[0] + lam2 * a2[0] / 2 + 14 * a2[1], P2[1] + lam2 * a2[1] / 2 - 14 * a2[0] + 6, LAMBDA_FARG, 25, 'start');
                 ctx.restore();
+                }
             }
             if (p.visa.stralen) {
                 const cx = 300, L = 190;
                 ctx.save(); ctx.strokeStyle = p.visa.toppar ? 'rgba(15,22,32,0.7)' : 'rgba(243,238,228,0.9)'; ctx.lineWidth = 2; ctx.setLineDash([8, 6]);
                 ctx.beginPath(); ctx.moveTo(cx, YB_BRYT - 200); ctx.lineTo(cx, YB_BRYT + 200); ctx.stroke(); ctx.restore();
                 pil(ctx, cx - L * a1[0], YB_BRYT - L * a1[1], cx, YB_BRYT, BLAECK, 4);
-                pil(ctx, cx, YB_BRYT, cx + L * a2[0], YB_BRYT + L * a2[1], BLAECK, 4);
+                if (g.tot) pil(ctx, cx, YB_BRYT, cx + L * a1[0], YB_BRYT - L * a1[1], BLAECK, 4);
+                else pil(ctx, cx, YB_BRYT, cx + L * a2[0], YB_BRYT + L * a2[1], BLAECK, 4);
                 ctx.save(); ctx.strokeStyle = p.visa.toppar ? '#c4860a' : '#ffe9a8'; ctx.lineWidth = p.visa.toppar ? 3 : 2.5;
                 if (g.i > 0.01) {
                     ctx.beginPath(); ctx.arc(cx, YB_BRYT, 52, -Math.PI / 2 - g.i, -Math.PI / 2); ctx.stroke();
-                    ctx.beginPath(); ctx.arc(cx, YB_BRYT, 66, Math.PI / 2 - g.b, Math.PI / 2); ctx.stroke();
+                    ctx.beginPath();
+                    if (g.tot) ctx.arc(cx, YB_BRYT, 66, -Math.PI / 2, -Math.PI / 2 + g.i);
+                    else ctx.arc(cx, YB_BRYT, 66, Math.PI / 2 - g.b, Math.PI / 2);
+                    ctx.stroke();
                 }
                 ctx.restore();
                 if (g.i > 0.01) {
@@ -767,7 +800,8 @@ const WaveSimulator = () => {
                     const plats = (v, r0) => v > 0.3 ? [v / 2, Math.min(175, Math.max(r0, 27 / Math.sin(v / 2)))] : [v + 0.2, r0];
                     const [ai, ri] = plats(g.i, 80), [ab, rb] = plats(g.b, 96);
                     beteckning(ctx, 'i', '', cx - ri * Math.sin(ai), YB_BRYT - ri * Math.cos(ai) + 7, '#ffe9a8', 26, 'middle');
-                    beteckning(ctx, 'b', '', cx + rb * Math.sin(ab), YB_BRYT + rb * Math.cos(ab) + 7, '#ffe9a8', 26, 'middle');
+                    if (g.tot) beteckning(ctx, 'r', '', cx + ri * Math.sin(ai), YB_BRYT - ri * Math.cos(ai) + 7, '#ffe9a8', 26, 'middle');
+                    else beteckning(ctx, 'b', '', cx + rb * Math.sin(ab), YB_BRYT + rb * Math.cos(ab) + 7, '#ffe9a8', 26, 'middle');
                 }
             }
         }
@@ -980,7 +1014,7 @@ const WaveSimulator = () => {
                 const F = falt3.current, cw = Math.cos(phi), sw = Math.sin(phi), inv = 1 / F.norm;
                 const grund = p.mode === 'refraction' ? YB_BRYT : 1e9;
                 for (let j = 0; j <= GY3; j++) {
-                    const pal = j * G3 >= grund ? PAL_GRUNT : PAL_DJUP;
+                    const pal = p.mode === 'refraction' && (j * G3 >= grund) !== p.uppat ? PAL_GRUNT : PAL_DJUP;
                     for (let i = 0; i <= GX3; i++) {
                         const idx = j * nx + i;
                         let zz = (F.S[idx] * cw - F.C[idx] * sw) * inv;
@@ -989,7 +1023,7 @@ const WaveSimulator = () => {
                 }
                 if (p.mode === 'refraction') {
                     const g = brytGeometri(p);
-                    info.current = { f: p.f, lam, v: g.v1, lam2: g.v2 / p.f, v2: g.v2, i: g.i, b: g.b };
+                    info.current = { f: p.f, lam: g.v1 / p.f, v: g.v1, lam2: g.v2 / p.f, v2: g.v2, i: g.i, b: g.b, tot: g.tot };
                 }
                 const ks = p.mode === 'single' ? [p.k1] : p.mode === 'double' ? [p.k1, p.k2] : [];
                 ks.forEach((s, i) => { const k = tre.extra.getObjectByName('kalla' + i); if (k) k.position.set(s.x - W / 2, 8 + 3 * Math.sin(phi), s.y - H / 2); });
@@ -1057,6 +1091,14 @@ const WaveSimulator = () => {
     };
     const tVisa = (n) => setVisa((s) => ({ ...s, [n]: !s[n] }));
     const byt = (m) => setMode(m);
+    // Byter vågen håll blir den gamla brytningsvinkeln ny infallsvinkel, så
+    // att strålen går samma väg tillbaka.
+    const bytRiktning = (ny) => {
+        if (ny === uppat) return;
+        const g = brytGeometri(P.current);
+        if (!g.tot) setVinkel(Math.min(70, Math.round(g.b * 180 / Math.PI)));
+        setUppat(ny);
+    };
 
     // ── Avläsning ───────────────────────────────────────────────────────
     const I = info.current;
@@ -1065,9 +1107,10 @@ const WaveSimulator = () => {
         const cm = (px) => fmt(px / 10, 1) + ' cm';
         const ms = (pxs) => fmt(pxs / 1000, 2) + ' m/s';
         if (mode === 'refraction' && I.v2) {
-            rader.push(['<em>f</em>', fmt(f, 1) + ' Hz'], ['<em>v</em><sub>1</sub>', ms(I.v)], ['<em>λ</em><sub>1</sub>', cm(I.lam)],
-                       ['<em>v</em><sub>2</sub>', ms(I.v2)], ['<em>λ</em><sub>2</sub>', cm(I.lam2)],
-                       ['<em>i</em>', fmt(I.i * 180 / Math.PI, 0) + '°'], ['<em>b</em>', fmt(I.b * 180 / Math.PI, 0) + '°']);
+            rader.push(['<em>f</em>', fmt(f, 1) + ' Hz'], ['<em>v</em><sub>1</sub>', ms(I.v)], ['<em>λ</em><sub>1</sub>', cm(I.lam)]);
+            if (!I.tot) rader.push(['<em>v</em><sub>2</sub>', ms(I.v2)], ['<em>λ</em><sub>2</sub>', cm(I.lam2)]);
+            rader.push(['<em>i</em>', fmt(I.i * 180 / Math.PI, 0) + '°'],
+                       I.tot ? ['<em>r</em>', fmt(I.i * 180 / Math.PI, 0) + '°'] : ['<em>b</em>', fmt(I.b * 180 / Math.PI, 0) + '°']);
         } else if (mode === 'doppler') {
             rader.push(['<em>f</em> hos källan', fmt(f, 1) + ' Hz'], ['<em>v</em>', ms(V)], ['källans fart', ms(u * V)],
                        ['<em>f</em> framför', u < 1 ? fmt(f / (1 - u), 1) + ' Hz' : 'ingen våg'], ['<em>f</em> bakom', fmt(f / (1 + u), 1) + ' Hz']);
@@ -1102,8 +1145,17 @@ const WaveSimulator = () => {
         const ut = [rad('f', 'Frekvens <em>f</em>', f, 1.5, 5, 0.1, setF, fmt(f, 1) + ' Hz',
             mode === 'doppler' ? 'Frekvensen som källan svänger med.' : 'Våglängden blir <em>λ</em> = <em>v</em> / <em>f</em>.')];
         if (mode === 'refraction') {
-            ut.push(rad('i', 'Infallsvinkel <em>i</em>', vinkel, 0, 70, 1, setVinkel, fmt(vinkel, 0) + '°'));
-            ut.push(rad('h', 'Djup i det grunda området <em>h</em><sub>2</sub>', h2, 0.5, 4, 0.1, setH2, fmt(h2, 1) + ' mm',
+            ut.unshift(
+                <div key="riktning" className={kompakt ? 'st-slider' : 'sl-row'}>
+                    <div className={kompakt ? 'st-slider-top' : 'sl-top'}><span>Vågen går från</span></div>
+                    <div className="flex gap-2 mt-1">
+                        <button className={'btn-toggle flex-1' + (uppat ? '' : ' active')} aria-pressed={!uppat} onClick={() => bytRiktning(false)}>djupt till grunt</button>
+                        <button className={'btn-toggle flex-1' + (uppat ? ' active' : '')} aria-pressed={uppat} onClick={() => bytRiktning(true)}>grunt till djupt</button>
+                    </div>
+                </div>);
+            ut.push(rad('i', 'Infallsvinkel <em>i</em>', vinkel, 0, 70, 1, setVinkel, fmt(vinkel, 0) + '°',
+                uppat && gransVinkel(P.current) < 70 ? 'Är <em>i</em> större än cirka ' + fmt(gransVinkel(P.current), 0) + '° reflekteras hela vågen (totalreflexion).' : null));
+            ut.push(rad('h', 'Djup i det grunda området <em>h</em>', h2, 0.5, 4, 0.1, setH2, fmt(h2, 1) + ' mm',
                 'Djupt vatten är ' + fmt(H_DJUP * 1000, 1) + '&nbsp;mm. Ju grundare, desto långsammare går vågen.'));
         }
         if (mode === 'double' || mode === 'diffraction-double')
@@ -1226,8 +1278,8 @@ const WaveSimulator = () => {
         vatten: {
             titel: 'Vågtanken: vattenvågor och brytning',
             krumelur: ['Hem', 'Fysik nivå 2', 'Vattenvågor och brytningslagen'],
-            ingress: <React.Fragment>En vågtank sedd uppifrån. En <strong>punktformig vågkälla</strong> ger cirkulära vågor, och en rak <strong>vågalstrare</strong> ger plana vågor med raka vågfronter. Där en glasskiva gör vattnet <strong>grundare</strong> går vågorna långsammare. Frekvensen är densamma, så våglängden blir kortare, och en våg som kommer snett in <strong>bryts mot normalen</strong>.</React.Fragment>,
-            prova: ['Dra i punktkällan och se att vågfronterna alltid är cirklar runt den.', 'Öka frekvensen. Vad händer med våglängden när farten är densamma?', 'Brytning: gör det grunda området grundare. Hur ändras <em>λ</em><sub>2</sub> och brytningsvinkeln <em>b</em>?', 'Sätt infallsvinkeln till 0°. Ändrar vågen riktning nu?'],
+            ingress: <React.Fragment>En vågtank sedd uppifrån. En <strong>punktformig vågkälla</strong> ger cirkulära vågor, och en rak <strong>vågalstrare</strong> ger plana vågor med raka vågfronter. Där en glasskiva gör vattnet <strong>grundare</strong> går vågorna långsammare. Frekvensen är densamma, så våglängden blir kortare, och en våg som kommer snett in <strong>bryts mot normalen</strong>. Går vågen åt andra hållet, från grunt till djupt vatten, ökar farten och vågen <strong>bryts från normalen</strong>.</React.Fragment>,
+            prova: ['Dra i punktkällan och se att vågfronterna alltid är cirklar runt den.', 'Öka frekvensen. Vad händer med våglängden när farten är densamma?', 'Brytning: gör det grunda området grundare. Hur ändras <em>λ</em><sub>2</sub> och brytningsvinkeln <em>b</em>?', 'Låt vågen gå från grunt till djupt vatten. Åt vilket håll bryts den då, och vad händer med våglängden?', 'Sätt infallsvinkeln till 0°. Ändrar vågen riktning nu?'],
         },
         interferens: {
             titel: 'Vågtanken: interferens och diffraktion',

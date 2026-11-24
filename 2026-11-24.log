@@ -145,3 +145,11 @@
 07:46:06  [svar] Claude avslutade med kod 0
 07:46:06  [svar] VARNING: svarskontrollen gav inget SVAR-besked. Försöker igen vid nästa körning.
 07:46:06  [svar] === Nyhetsjobb: slut ===
+11:45:02  [svar] === Nyhetsjobb: start (2026-11-24) ===
+11:45:05  [svar] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+11:45:37  [svar] Only one thread actually starts with "[Nyhet": **[Nyhet 2026-11-21] Att granska: Skakade stålkulor minns hur de svalnade**.
+11:45:37  [svar] 
+11:45:37  [svar] I checked it — the thread has only the single outgoing review email from the job (sent 2026-11-20), with no reply from the owner. So there are currently no owner replies to news review emails waiting to be processed.
+11:45:38  [svar] Claude avslutade med kod 0
+11:45:38  [svar] VARNING: svarskontrollen gav inget SVAR-besked. Försöker igen vid nästa körning.
+11:45:38  [svar] === Nyhetsjobb: slut ===

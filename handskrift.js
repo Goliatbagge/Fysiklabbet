@@ -26491,7 +26491,7 @@
     K.sist(y, 0.7);
 
     /* SUBSTITUTIONSMETODEN (användarkrav 2026-11-24): A löses ut ur (1)
-     * och sätts in i (2), sedan löses ω ut i båda led. "Ur (1) fås"
+     * och sätts in i (2), sedan löses ω ut i båda led. "Ur ekvation (1) fås"
      * på egen rad och A = v_max/ω under, så att (1) inte skrivs två
      * gånger. */
     y += adv + 0.9 * F;
@@ -26500,7 +26500,7 @@
       [['använder substitutionsmetoden och']],
       [['löser först ut ', 0], ['A', 1], [' ur (1).', 0]]
     ]);
-    T.str('Ur (1) fås', padL, y, null, 0.62);
+    T.str('Ur ekvation (1) fås', padL, y, null, 0.62);
     T.pause(300);
     y += 2.1 * F;
     /* (3) behövs: ω sätts in här på slutet ("Detta i ekvation (3) ger"). */

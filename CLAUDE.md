@@ -1469,7 +1469,7 @@ användaren påpekat (2026-08-25).
     - Systemet skrivs med klammer (`\begin{cases}` i text,
       `systemKlammer` i pennan), med nummer på de ekvationer som
       hänvisas till: (1), (2).
-    - Den utlösta storheten skrivs efter en egen rad, **"Ur (1) fås"**,
+    - Den utlösta storheten skrivs efter en egen rad, **"Ur ekvation (1) fås"**,
       och får ett eget nummer om den används igen: $A = \dfrac{v_{\max}}{\omega}$ (3).
     - Varje insättning inleds med en egen rad som säger var den görs:
       **"Detta i ekvation (2) ger"**, och när den första obekanta är

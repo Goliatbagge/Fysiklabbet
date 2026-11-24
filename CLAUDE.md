@@ -1473,10 +1473,10 @@ användaren påpekat (2026-08-25).
       och får ett eget nummer om den används igen: $A = \dfrac{v_{\max}}{\omega}$ (3).
     - Varje insättning inleds med en egen rad som säger var den görs:
       **"Detta i ekvation (2) ger"**, och när den första obekanta är
-      beräknad **"Detta i (3) ger"**. Raden står ensam, och uttrycket
+      beräknad **"Detta i ekvation (3) ger"**. Raden står ensam, och uttrycket
       kommer på nästa rad.
     - I textlösningen skrivs formeln ut efter numret (punkt 8):
-      "Detta i (3), $A = \dfrac{v_{\max}}{\omega}$, ger".
+      "Detta i ekvation (3), $A = \dfrac{v_{\max}}{\omega}$, ger".
 
 9. **Håll inne med posterna när klassen kan resonera fram dem.** En tabell
    eller lista där varje post bygger på den förra (kapitalet år för år, en

@@ -41,7 +41,7 @@ for (const subj of Object.values(WK.KATALOG)) {
             // för exit tickets — kräv ingen täckning för dem.
             for (const s of ch.sections || []) {
                 const n = String(s.num);
-                if (!n.endsWith('.S') && !n.endsWith('.E')) sections.push(code + '-' + s.num);
+                if (!n.endsWith('.S') && !n.endsWith('.E') && !n.endsWith('.A')) sections.push(code + '-' + s.num);
             }
         }
     }

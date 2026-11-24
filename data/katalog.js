@@ -224,6 +224,7 @@ window.KATALOG = {
               { num: '2.14', title: 'Diffraktion och interferens', description: 'Två vågkällor i fas och en plan våg genom en eller två öppningar i en vågtank. Slå på nodlinjerna och maximilinjerna, dra isär källorna och se hur vågen böjs av vid en smal öppning.', href: 'fysik2-vagsimulator.html?lage=interferens', icon: '〰️', keywords: ['vågor','diffraktion','interferens','dubbelspalt','huygens','nodlinjer'] },
               { num: '2.E', title: 'Enhetskoll', description: 'Quiz på kapitlets storheter, enheter och beteckningar — fjäderkonstant, våglängd, intensitet och ljudnivå.', href: 'fysik-enhetskoll.html#fy2-2', icon: '✓', keywords: ['enhetskoll','enheter','storheter','beteckningar','si-enheter','vågor','svängning','ljud','quiz'] },
               { num: '2.S', title: 'Sammanfattning', description: 'Svängningar, vågor, ljud och resonans — komprimerat inför provet, med repetitionsspel.', href: 'fysik-repetition.html#fy2-2', icon: '∑', keywords: ['sammanfattning','repetition','prov','provkoll','formler','vågor','svängning','ljud','resonans'] },
+              { num: '2.A', title: 'Avancerade exempel', description: 'Fem lösta exempel på nivån Avancerad inför provet: fjäder, pendel, stående våg i en sträng och ljudnivå, med pennlösningar.', href: null, icon: null, keywords: ['avancerad','avancerade exempel','exempel','prov','provkoll','repetition','svängning','fjäder','pendel','periodtid','stående våg','ljudnivå','intensitet','a-nivå'] },
             ],
           },
           'Elektromagnetism': {

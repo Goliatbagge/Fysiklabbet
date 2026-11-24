@@ -3813,6 +3813,10 @@
             // Enhetskollavsnitt (num 'K.E'): quiz på kapitlets storheter och
             // enheter (fysik-enhetskoll.html) — ingen teori, inga övningar.
             const isEnhetskoll = activeSection && String(activeSection.num).endsWith('.E');
+            // Avsnitt med avancerade exempel (num 'K.A', infört 2026-11-24
+            // för fy2-2.A): bara teori, inga "Kommer snart"-kort för
+            // simulering, snabbkoll och övningar.
+            const isAvancerad = activeSection && String(activeSection.num).endsWith('.A');
             const hasTeori = tid && TEORI[tid];
             const hasOvningar = tid && OVNINGAR[tid] && OVNINGAR[tid].length > 0;
             const hasExit = tid && EXITTICKETS[tid] && EXITTICKETS[tid].length > 0;
@@ -4171,7 +4175,7 @@
                                                         <div className="lab-card-tag">Läsning</div>
                                                         <div className="lab-card-title">Teori</div>
                                                         <div className="lab-card-meta">
-                                                            {hasTeori ? 'Genomgång' : 'Kommer snart'}
+                                                            {hasTeori ? (isAvancerad ? 'Lösta exempel' : 'Genomgång') : 'Kommer snart'}
                                                         </div>
                                                     </button>}
                                                     {harSammanfattning && (
@@ -4198,7 +4202,7 @@
                                                             <div className="lab-card-title">Snabbkoll</div>
                                                             <div className="lab-card-meta">{EXITTICKETS[tid].length} frågor</div>
                                                         </button>
-                                                    ) : (isSummary || isEnhetskoll) ? null : (
+                                                    ) : (isSummary || isEnhetskoll || isAvancerad) ? null : (
                                                         <div className="lab-card lab-card-disabled">
                                                             <div className="lab-card-tag">Testa</div>
                                                             <div className="lab-card-title">Snabbkoll</div>
@@ -4249,7 +4253,7 @@
                                                             <div className="lab-card-title">{isSummary ? 'Repetitionsspel' : isEnhetskoll ? 'Enhetskoll' : 'Simulering'}</div>
                                                             <div className="lab-card-meta">{isSummary ? 'Interaktivt' : isEnhetskoll ? 'Quiz' : 'Interaktiv'}</div>
                                                         </a>
-                                                    ) : (
+                                                    ) : isAvancerad ? null : (
                                                         <div className="lab-card lab-card-disabled">
                                                             <div className="lab-card-tag">Experiment</div>
                                                             <div className="lab-card-title">Simulering</div>
@@ -4264,7 +4268,7 @@
                                                             <div className="lab-card-title">Övningar</div>
                                                             <div className="lab-card-meta">{I18N.t('{n} st', { n: OVNINGAR[tid].length })}</div>
                                                         </button>
-                                                    ) : (isSummary || isEnhetskoll) ? null : (
+                                                    ) : (isSummary || isEnhetskoll || isAvancerad) ? null : (
                                                         <div className="lab-card lab-card-disabled">
                                                             <div className="lab-card-tag">Räkna</div>
                                                             <div className="lab-card-title">Övningar</div>
@@ -4502,7 +4506,7 @@
             // befintliga länkar ändrar beteende.
             const hash = (window.location.hash || '').replace(/^#/, '')
                 || (params.get('id') || '');
-            const m = hash.match(/^(fy1|fy2|ma1b|ma1c|ma2b|ma2c|ma3b|ma3c|ma4|maspec)(?:-(\d+)(?:\.(\d+|S|E))?)?(?::(teori|ovningar|exitticket|visualisering|fordjupning|ovningsblad|sammanfattning))?$/);
+            const m = hash.match(/^(fy1|fy2|ma1b|ma1c|ma2b|ma2c|ma3b|ma3c|ma4|maspec)(?:-(\d+)(?:\.(\d+|S|E|A))?)?(?::(teori|ovningar|exitticket|visualisering|fordjupning|ovningsblad|sammanfattning))?$/);
             if (m && HASH_COURSES[m[1]] && K[HASH_COURSES[m[1]][0]]) {
                 out.subject = HASH_COURSES[m[1]][0];
             }

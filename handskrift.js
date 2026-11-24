@@ -26340,6 +26340,242 @@
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
   }
 
+  /* ---------------- verktyg för de avancerade exemplen i Fysik 2 kap 2
+   * (avsnittet fy2-2.A Avancerade exempel, inlagt 2026-11-24 inför
+   * provrepetitionen). Bygger på physTools().
+   *   sist(y, d)   — registrera senast skrivna radens baslinje och hur
+   *                  långt ned dess bläck når (i F), så att nästa tanke-
+   *                  bubbla läggs under den (se REGEL om bubblorna).
+   *   tk(rader)    — tankebubbla under senast skrivna rad.
+   *   fjader(x, y0, y1) — skruvfjäder i EN penndragning, som i
+   *                  layoutPeriodfjader.
+   *   rotFrac(t, n, x, y) — rottecken över ett bråk.
+   *   svar(text, y) — svarsrad; ryms den inte bryts den vid ord, och varje
+   *                  fortsättningsrad börjar vid padL (REGEL 3s). */
+  function mkKap2Avancerad(T, F) {
+    var acts = T.acts, padL = T.padL;
+    var pb = 300, pd = 0.28;
+    function sist(y, d) { pb = y; pd = d == null ? 0.28 : d; }
+    function tk(rader, x) {
+      T.tanke(T.bubble(x == null ? 140 : x, T.bubbleTop(pb, pd), 292, rader));
+    }
+    function fjader(x, y0, y1) {
+      var n = 7, yTop = y0 + 6, yBot = y1 - 6;
+      var step = (yBot - yTop) / (2 * n);
+      var pts = [[x, y0], [x, yTop]];
+      for (var k = 1; k <= 2 * n - 1; k++) {
+        pts.push([x + (k % 2 ? 13 : -13), yTop + k * step]);
+      }
+      pts.push([x, yBot]);
+      pts.push([x, y1]);
+      acts.push({ kind: 'stroke', pts: pts });
+    }
+    function rotFrac(num, den, x, y) {
+      var fw = T.fracW(num, den);
+      var xs = rootSign(acts, x, y, fw, F,
+                        { yTop: y - 1.55 * F, yBot: y + 1.3 * F });
+      return T.fracH(num, den, xs, y);
+    }
+    function svar(text, y) {
+      var max = PAPER_W - 34 - 10, ord = text.split(' '), rad = '';
+      var rader = [];
+      for (var i = 0; i < ord.length; i++) {
+        var prov = rad ? rad + ' ' + ord[i] : ord[i];
+        if (rad && padL + T.adv(prov) > max) { rader.push(rad); rad = ord[i]; }
+        else rad = prov;
+      }
+      rader.push(rad);
+      for (var j = 0; j < rader.length; j++) {
+        if (j) y += 1.75 * F;
+        T.underline(T.str(rader[j], padL, y), y);
+      }
+      return y;
+    }
+    return { sist: sist, tk: tk, fjader: fjader, rotFrac: rotFrac, svar: svar };
+  }
+
+  /* ---------------- scen: amplitud och periodtid ur största fart och
+   * största acceleration (fy2-2.A Ex 1, Avancerad) ----------------------
+   * Två ekvationer med två obekanta: v_max = ω·A och a_max = ω²·A.
+   * Kvoten a_max / v_max = ω = 3,6 / 0,48 = 7,5 rad/s, sedan
+   * A = 0,48 / 7,5 = 0,064 m = 6,4 cm och T = 2π / 7,5 = 0,837… ≈ 0,84 s.
+   * Siffrorna är identiska med textlösningen i fy2-2.A.md. */
+  function layoutAmplitudurfart(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var K = mkKap2Avancerad(T, F);
+    var adv = 1.7 * F, xx, y;
+    var fx = 220, takY = 56, eqY = 190, wc = eqY + 14, AP = 50;
+
+    /* ---- steg 1: fjädern, vikten och lägena (grafit) ---- */
+    T.tanke(T.figurBubble(280, [
+      [['Ritar fjädern med vikten. De']],
+      [['streckade linjerna visar jämvikts-']],
+      [['läget och de två vändlägena.']]
+    ]));
+    T.line([130, takY], [310, takY]);
+    T.hatch([138, takY], [310, takY], 11);
+    T.pause(140);
+    K.fjader(fx, takY, eqY);
+    T.pause(140);
+    T.rect(fx - 14, eqY, fx + 14, eqY + 28);
+    T.pause(140);
+    T.dash([fx + 20, wc - AP], [360, wc - AP]);
+    T.dash([fx + 20, wc], [360, wc]);
+    T.dash([fx + 20, wc + AP], [360, wc + AP]);
+    T.pause(120);
+    T.lbl('vändläge', 368, wc - AP + 5, null, 0.5);
+    T.lbl('jämviktsläge', 368, wc + 5, null, 0.5);
+    T.lbl('vändläge', 368, wc + AP + 5, null, 0.5);
+    T.stepEnd();
+
+    /* ---- steg 2: det givna (blått) ---- */
+    T.tanke(T.figurBubble(286, [
+      [['Farten är störst i jämviktsläget']],
+      [['och accelerationen störst i vänd-']],
+      [['lägena. Amplituden ', 0], ['A', 1], [' söker jag.', 0]]
+    ]));
+    T.lbl('v_m_a_x=0,48 m/s', 40, wc + 5, BLUE);
+    T.pause(150);
+    T.lbl('a_m_a_x=3,6 m/s^2', 40, wc - AP + 5, BLUE);
+    T.pause(150);
+    T.dblArrow([300, wc - AP + 3], [300, wc - 3], BLUE);
+    T.lbl('A', 308, wc - AP / 2 + 6, BLUE);
+    T.stepEnd();
+
+    /* ---- a) ---- */
+    y = 396;
+    K.tk([
+      [['Både ', 0], ['ω', 1], [' och ', 0], ['A', 1], [' är okända. Men', 0]],
+      [['båda finns i formlerna för']],
+      [['största fart och acceleration.']]
+    ], 120);
+    T.str('a) Två ekvationer med två obekanta', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.0 * F;
+    T.str('v_m_a_x=ω·A', padL, y);
+    T.str('(1)', 330, y);
+    y += 1.75 * F;
+    T.str('a_m_a_x=ω^2·A', padL, y);
+    T.str('(2)', 330, y);
+    T.stepEnd();
+    K.sist(y);
+
+    y += adv + 2.0 * F;
+    K.tk([
+      [['Jag dividerar (2) med (1). Då']],
+      [['tar ', 0], ['A', 1], [' ut sig, och ett ', 0], ['ω', 1], [' blir kvar.', 0]]
+    ]);
+    xx = T.fracH('a_m_a_x', 'v_m_a_x', padL, y);
+    xx = T.str('=', xx + 0.10 * F, y);
+    xx = T.fracH('ω^2·A', 'ω·A', xx, y);
+    T.str('=ω', xx + 0.10 * F, y);
+    T.stepEnd();
+    K.sist(y, 1.1);
+
+    y += adv + 1.6 * F;
+    K.tk([
+      [['Största acceleration och']],
+      [['största fart ur uppgiften.']]
+    ]);
+    var klam = valueBracket(acts, ['a_m_a_x=3,6 m/s^2', 'v_m_a_x=0,48 m/s'],
+                            padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+    K.sist(y);
+
+    y += adv + 1.7 * F;
+    K.tk([
+      [['Nu sätter jag in värdena ur']],
+      [['klammern.']]
+    ]);
+    xx = T.fracH('3,6', '0,48', T.str('ω=', padL, y), y);
+    T.str('=7,5 rad/s', xx + 0.15 * F, y);
+    T.stepEnd();
+    K.sist(y, 1.1);
+
+    y += adv + 1.9 * F;
+    K.tk([
+      [['Amplituden löser jag ut ur']],
+      [['ekvation (1).']]
+    ]);
+    xx = T.str('v_m_a_x=ω·A⟺A=', padL, y);
+    T.fracH('v_m_a_x', 'ω', xx, y);
+    T.stepEnd();
+    K.sist(y, 1.1);
+
+    y += adv + 1.9 * F;
+    K.tk([
+      [['Nu sätter jag in värdena.']]
+    ]);
+    xx = T.fracH('0,48', '7,5', T.str('A=', padL, y), y);
+    T.str('=0,064 m=6,4 cm', xx + 0.15 * F, y);
+    T.stepEnd();
+    K.sist(y, 1.1);
+
+    y += adv + 1.2 * F;
+    K.tk([
+      [['Några centimeter upp och ned är']],
+      [['en vanlig svängning för en vikt']],
+      [['i en fjäder. Rimligt!']]
+    ], 120);
+    y = K.svar('Svar: 6,4 cm', y);
+    T.stepEnd();
+    K.sist(y, 0.4);
+
+    /* ---- b) ---- */
+    y += adv + 1.4 * F;
+    K.tk([
+      [['Periodtiden får jag ur vinkel-']],
+      [['hastigheten, som jag nyss fick']],
+      [['fram.']]
+    ], 120);
+    T.str('b) Periodtiden ur vinkelhastigheten', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.3 * F;
+    xx = T.fracH('2π', 'T', T.str('ω=', padL, y), y);
+    xx = T.str('⟺T=', xx + 0.10 * F, y);
+    T.fracH('2π', 'ω', xx, y);
+    T.stepEnd();
+    K.sist(y, 1.1);
+
+    y += adv + 1.5 * F;
+    K.tk([
+      [['Vinkelhastigheten från a).']]
+    ]);
+    klam = valueBracket(acts, ['ω=7,5 rad/s'], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+    K.sist(y);
+
+    y += adv + 1.7 * F;
+    K.tk([
+      [['Nu sätter jag in värdet.']]
+    ]);
+    xx = T.fracH('2π', '7,5', T.str('T=', padL, y), y);
+    var xIns = T.str('=0,837... s', xx + 0.15 * F, y);
+    T.stepEnd();
+    K.sist(y, 1.1);
+
+    K.tk([
+      [['Först nu avrundar jag. Värdena']],
+      [['i uppgiften har två värdesiffror,']],
+      [['så svaret får två.']]
+    ]);
+    T.str('≈0,84 s', xIns, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    K.tk([
+      [['Drygt en svängning per sekund,']],
+      [['som för en vikt i en vanlig']],
+      [['fjäder. Rimligt!']]
+    ], 120);
+    y = K.svar('Svar: 0,84 s', y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
   /* ---------------- scen: periodtid i fjäder (fy2-2.4 Ex 1) -----------
    * En 100-gramsvikt förlänger fjädern 9,0 cm; den dras ned ytterligare
    * 5,0 cm och släpps. Periodtiden söks. Figuren är samma fjäderfigur som
@@ -26793,6 +27029,242 @@
     var xeS = placeString('Svar: 0,14 kg (140 g)', padL, y, s, F, acts);
     underline(xeS, y);
     stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: okänd massa ur två periodtider (fy2-2.A Ex 2,
+   * Avancerad) ----------------------------------------------------------
+   * T₁ = 0,60 s med massan m, T₂ = 0,75 s med m + 200 g. Kvoten T₂/T₁ gör
+   * att 2π och k tar ut sig: (T₂/T₁)² = (m + Δm)/m, (0,75/0,60)² = 1,5625,
+   * 0,5625·m = 0,200, m = 0,355… ≈ 0,36 kg. Sedan k = 4π²·m/T₁² =
+   * 38,99… ≈ 39 N/m. Ekvationsoperationerna skrivs i båda led med
+   * blåpennan (mkEkvOp). Siffrorna är identiska med textlösningen. */
+  function layoutTvaperiodtider(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var K = mkKap2Avancerad(T, F);
+    var ekvOp = mkEkvOp(T, false);
+    var adv = 1.7 * F, xx, y, klam;
+    var x1 = 170, x2 = 330, takY = 56;
+
+    /* ---- steg 1: två likadana fjädrar (grafit) ---- */
+    T.tanke(T.figurBubble(286, [
+      [['Ritar samma fjäder två gånger:']],
+      [['först med vikten, sedan med']],
+      [['200 g extra hängt under den.']]
+    ], 310));
+    T.line([110, takY], [230, takY]);
+    T.hatch([118, takY], [230, takY], 8);
+    T.line([270, takY], [390, takY]);
+    T.hatch([278, takY], [390, takY], 8);
+    T.pause(140);
+    K.fjader(x1, takY, 160);
+    T.rect(x1 - 14, 160, x1 + 14, 188);
+    T.pause(140);
+    K.fjader(x2, takY, 190);
+    T.rect(x2 - 14, 190, x2 + 14, 218);
+    T.line([x2, 218], [x2, 224]);
+    T.rect(x2 - 10, 224, x2 + 10, 240);
+    T.stepEnd();
+
+    /* ---- steg 2: det givna (blått) ---- */
+    T.tanke(T.figurBubble(286, [
+      [['Skriver in periodtiderna. Massan']],
+      [['m', 1], [' och fjäderkonstanten ', 0], ['k', 1], [' är', 0]],
+      [['okända, och ', 0], ['k', 1], [' är lika i båda.', 0]]
+    ], 310));
+    T.lbl('m', x1 - 34, 180, BLUE);
+    T.lbl('T_1=0,60 s', 116, 230, BLUE);
+    T.pause(150);
+    T.lbl('m', x2 - 34, 210, BLUE);
+    T.lbl('200 g', x2 + 18, 238, BLUE);
+    T.lbl('T_2=0,75 s', 286, 272, BLUE);
+    T.stepEnd();
+
+    /* ---- a) ---- */
+    y = 406;
+    K.sist(310);
+    K.tk([
+      [['Formeln för periodtiden gäller']],
+      [['i båda fallen. Den tillagda']],
+      [['massan kallar jag Δ', 0], ['m', 1]]
+    ], 120);
+    T.str('a) Samma fjäder: periodtiden i båda fallen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.4 * F;
+    K.rotFrac('m', 'k', T.str('T_1=2π', padL, y), y);
+    T.str('(1)', 330, y);
+    y += 2.7 * F;
+    K.rotFrac('m+Δm', 'k', T.str('T_2=2π', padL, y), y);
+    T.str('(2)', 330, y);
+    T.stepEnd();
+    K.sist(y, 1.3);
+
+    y += adv + 2.4 * F;
+    K.tk([
+      [['Jag dividerar (2) med (1). Då']],
+      [['tar både 2π och ', 0], ['k', 1], [' ut sig.', 0]]
+    ]);
+    xx = T.fracH('T_2', 'T_1', padL, y);
+    xx = T.str('=', xx + 0.10 * F, y);
+    K.rotFrac('m+Δm', 'm', xx, y);
+    T.stepEnd();
+    K.sist(y, 1.3);
+
+    y += adv + 2.3 * F;
+    K.tk([
+      [['Jag kvadrerar båda led för att']],
+      [['få bort rottecknet.']]
+    ]);
+    xx = T.parenFrac('T_2', 'T_1', '2', padL, y);
+    xx = T.str('=', xx + 0.06 * F, y);
+    T.fracH('m+Δm', 'm', xx, y);
+    T.str('(3)', 330, y);
+    T.stepEnd();
+    K.sist(y, 1.1);
+
+    y += adv + 1.7 * F;
+    K.tk([
+      [['Periodtiderna och den tillagda']],
+      [['massan ur uppgiften.']]
+    ]);
+    klam = valueBracket(acts, ['T_1=0,60 s', 'T_2=0,75 s',
+                               'Δm=200 g=0,200 kg'], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+    K.sist(y);
+
+    y += adv + 2.2 * F;
+    K.tk([
+      [['Jag sätter in värdena i (3).']],
+      [['Kvoten 0,75/0,60 är exakt 1,25.']]
+    ]);
+    xx = T.parenFrac('0,75', '0,60', '2', padL, y);
+    xx = T.str('=', xx + 0.06 * F, y);
+    T.fracH('m+0,200', 'm', xx, y);
+    T.stepEnd();
+    K.sist(y, 1.1);
+
+    y += adv + 2.0 * F;
+    K.tk([
+      [['Kvadraten av 1,25 är 1,5625.']]
+    ]);
+    T.fracH('m+0,200', 'm', T.str('1,5625=', padL, y), y);
+    T.stepEnd();
+    K.sist(y, 1.1);
+
+    K.tk([
+      [['Jag multiplicerar båda led med ', 0], ['m', 1]]
+    ]);
+    y = ekvOp(y, '·m', null, function (yb) {
+      var x = T.str('1,5625', padL, yb);
+      x = T.str('·m', x, yb, BLUE);
+      x = T.str('=', x, yb);
+      x = T.fracH('m+0,200', 'm', x, yb);
+      T.str('·m', x, yb, BLUE);
+    }, { dy: 3.0 });
+    T.str('1,5625·m=m+0,200', padL, y);
+    T.stepEnd();
+    K.sist(y);
+
+    K.tk([
+      [['Jag samlar ', 0], ['m', 1], [' i vänstra ledet', 0]],
+      [['och subtraherar ', 0], ['m', 1], [' från båda led.', 0]]
+    ]);
+    y = ekvOp(y, '−m', null, '1,5625·m=m+0,200');
+    T.str('0,5625·m=0,200', padL, y);
+    T.stepEnd();
+    K.sist(y);
+
+    K.tk([
+      [['Jag dividerar båda led med']],
+      [['0,5625.']]
+    ]);
+    y = ekvOp(y, '/0,5625', null, '0,5625·m=0,200');
+    xx = T.fracH('0,200', '0,5625', T.str('m=', padL, y), y);
+    var xIns = T.str('=0,355... kg', xx + 0.15 * F, y);
+    T.stepEnd();
+    K.sist(y, 1.1);
+
+    K.tk([
+      [['Först nu avrundar jag. Periodtid-']],
+      [['erna har två värdesiffror, så']],
+      [['svaret får två.']]
+    ]);
+    T.str('≈0,36 kg', xIns, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    K.tk([
+      [['Kontroll: (0,36 + 0,20)/0,36 är']],
+      [['ungefär 1,56, och roten ur det']],
+      [['är 1,25. Stämmer!']]
+    ], 120);
+    y = K.svar('Svar: 0,36 kg', y);
+    T.stepEnd();
+    K.sist(y, 0.4);
+
+    /* ---- b) ---- */
+    y += adv + 1.4 * F;
+    K.tk([
+      [['Nu är massan känd. Jag löser ut']],
+      [['fjäderkonstanten ur (1).']]
+    ], 120);
+    T.str('b) Fjäderkonstanten ur ekvation (1)', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.4 * F;
+    K.rotFrac('m', 'k', T.str('T_1=2π', padL, y), y);
+    T.stepEnd();
+    K.sist(y, 1.3);
+
+    y += adv + 2.0 * F;
+    K.tk([
+      [['Jag kvadrerar båda led och']],
+      [['löser ut ', 0], ['k', 1]]
+    ]);
+    xx = T.str('T_1^2=4π^2·', padL, y);
+    xx = T.fracH('m', 'k', xx, y);
+    xx = T.str('⟺k=', xx + 0.12 * F, y);
+    T.fracH('4π^2·m', 'T_1^2', xx, y);
+    T.stepEnd();
+    K.sist(y, 1.3);
+
+    y += adv + 1.7 * F;
+    K.tk([
+      [['Massan tar jag oavrundad från a).']]
+    ]);
+    klam = valueBracket(acts, ['m=0,355... kg', 'T_1=0,60 s'],
+                        padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+    K.sist(y);
+
+    y += adv + 2.0 * F;
+    K.tk([
+      [['Nu sätter jag in värdena.']]
+    ]);
+    xx = T.fracH('4π^2·0,355...', '0,60^2', T.str('k=', padL, y), y);
+    xIns = T.str('=38,99... N/m', xx + 0.15 * F, y);
+    T.stepEnd();
+    K.sist(y, 1.3);
+
+    K.tk([
+      [['Först nu avrundar jag till två']],
+      [['värdesiffror.']]
+    ]);
+    if (xIns + T.adv('≈39 N/m') < PAPER_W - 34) T.str('≈39 N/m', xIns, y);
+    else { y += adv + 1.2 * F; T.str('≈39 N/m', padL, y); }
+    T.stepEnd();
+    K.sist(y, 1.3);
+
+    y += adv + 1.2 * F;
+    K.tk([
+      [['En vanlig fjäder i skolans labb']],
+      [['har några tiotal newton per']],
+      [['meter. Rimligt!']]
+    ], 120);
+    y = K.svar('Svar: 39 N/m', y);
+    T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
   }
@@ -27388,6 +27860,222 @@
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
   }
 
+  /* ---------------- scen: pendel och fjäder i takt (fy2-2.A Ex 3,
+   * Avancerad) ----------------------------------------------------------
+   * a) Kraftjämvikten k·Δl = m·g ger m/k = Δl/g, så vikten i fjädern har
+   *    T = 2π√(Δl/g). Samma periodtid som pendeln kräver l = Δl = 18 cm:
+   *    massan och fjäderkonstanten behövs inte.
+   * b) Fjäderns periodtid innehåller inte g och är densamma på månen,
+   *    medan pendelns blir √(9,82/1,62) = 2,462… ≈ 2,5 gånger så lång.
+   * Siffrorna är identiska med textlösningen i fy2-2.A.md. */
+  function layoutPendelfjadertakt(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var K = mkKap2Avancerad(T, F);
+    var adv = 1.7 * F, xx, y, klam;
+    var fx = 170, takY = 56, endU = 96, endL = 168;
+    var px = 320, PL = 150, vin = 16 * Math.PI / 180;
+    var bob = [px, takY + PL];
+    function bagPts(R, a0, a1, n) {
+      var pts = [];
+      for (var i = 0; i <= n; i++) {
+        var a = a0 + (i / n) * (a1 - a0);
+        pts.push([px + Math.sin(a) * R, takY + Math.cos(a) * R]);
+      }
+      return pts;
+    }
+
+    /* ---- steg 1: fjädern och pendeln (grafit) ---- */
+    T.tanke(T.figurBubble(286, [
+      [['Ritar vikten i fjädern och en']],
+      [['pendel bredvid. Den streckade']],
+      [['linjen visar var fjädern slutar']],
+      [['utan vikt.']]
+    ], 300));
+    T.line([96, takY], [400, takY]);
+    T.hatch([104, takY], [400, takY], 18);
+    T.pause(140);
+    K.fjader(fx, takY, endL);
+    T.rect(fx - 14, endL, fx + 14, endL + 28);
+    T.pause(140);
+    T.dash([134, endU], [fx - 18, endU]);
+    T.dash([134, endL], [fx - 18, endL]);
+    T.pause(140);
+    T.line([px, takY], bob);
+    T.dot(px, takY);
+    T.circle(bob[0], bob[1], 10);
+    T.dot(bob[0], bob[1]);
+    T.pause(140);
+    T.dashPts(bagPts(PL, -vin, vin, 20));
+    T.stepEnd();
+
+    /* ---- steg 2: det givna (blått) ---- */
+    T.tanke(T.figurBubble(286, [
+      [['Skriver in förlängningen. Pendel-']],
+      [['längden ', 0], ['l', 1], [' är det jag söker.', 0]]
+    ], 300));
+    T.dblArrow([144, endU + 2], [144, endL - 2], BLUE);
+    T.lbl('Δl=18 cm', 24, (endU + endL) / 2 + 6, BLUE);
+    T.pause(150);
+    T.dblArrow([364, takY + 2], [364, bob[1] - 2], BLUE);
+    T.lbl('l', 374, takY + PL / 2 + 6, BLUE);
+    T.stepEnd();
+
+    /* ---- a) ---- */
+    y = 396;
+    K.tk([
+      [['I takt betyder samma periodtid.']],
+      [['Jag ställer upp periodtiden för']],
+      [['båda.']]
+    ], 120);
+    T.str('a) Samma periodtid för vikten och pendeln', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.4 * F;
+    K.rotFrac('m', 'k', T.str('T_f_j_ä_d_e_r=2π', padL, y), y);
+    T.str('(1)', 400, y);
+    y += 2.7 * F;
+    K.rotFrac('l', 'g', T.str('T_p_e_n_d_e_l=2π', padL, y), y);
+    T.str('(2)', 400, y);
+    T.stepEnd();
+    K.sist(y, 1.3);
+
+    y += adv + 1.4 * F;
+    K.tk([
+      [['m', 1], [' och ', 0], ['k', 1], [' är inte givna. När vikten', 0]],
+      [['hänger still är fjäderkraften lika']],
+      [['stor som tyngdkraften.']]
+    ]);
+    T.str('Vikten hänger still: kraftjämvikt', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.2 * F;
+    xx = T.str('k·Δl=m·g⟺', padL, y);
+    xx = T.fracH('m', 'k', xx, y);
+    xx = T.str('=', xx + 0.10 * F, y);
+    T.fracH('Δl', 'g', xx, y);
+    T.str('(3)', 400, y);
+    T.stepEnd();
+    K.sist(y, 1.1);
+
+    y += adv + 2.2 * F;
+    K.tk([
+      [['Jag sätter in (3) i (1).']]
+    ]);
+    K.rotFrac('Δl', 'g', T.str('T_f_j_ä_d_e_r=2π', padL, y), y);
+    T.stepEnd();
+    K.sist(y, 1.3);
+
+    y += adv + 2.3 * F;
+    K.tk([
+      [['Periodtiderna ska vara lika']],
+      [['stora. 2π och ', 0], ['g', 1], [' finns i båda', 0]],
+      [['leden och tar ut sig.']]
+    ]);
+    xx = K.rotFrac('l', 'g', T.str('2π', padL, y), y);
+    xx = K.rotFrac('Δl', 'g', T.str('=2π', xx + 0.10 * F, y), y);
+    T.str('⟺l=Δl', xx + 0.12 * F, y);
+    T.stepEnd();
+    K.sist(y, 1.3);
+
+    y += adv + 1.7 * F;
+    K.tk([
+      [['Förlängningen ur uppgiften.']]
+    ]);
+    klam = valueBracket(acts, ['Δl=18 cm'], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+    K.sist(y);
+
+    y += adv + 1.5 * F;
+    K.tk([
+      [['Nu sätter jag in värdet.']]
+    ]);
+    T.str('l=Δl=18 cm', padL, y);
+    T.stepEnd();
+    K.sist(y);
+
+    y += adv + 1.0 * F;
+    K.tk([
+      [['Massan och fjäderkonstanten']],
+      [['behövdes inte alls. Båda svänger']],
+      [['knappt 1,2 gånger per sekund.']],
+      [['Rimligt!']]
+    ], 120);
+    y = K.svar('Svar: 18 cm', y);
+    T.stepEnd();
+    K.sist(y, 0.4);
+
+    /* ---- b) ---- */
+    y += adv + 1.4 * F;
+    K.tk([
+      [['Fjäderns periodtid innehåller']],
+      [['inte ', 0], ['g', 1], ['. Massan och ', 0], ['k', 1], [' är desamma', 0]],
+      [['på månen.']]
+    ], 120);
+    T.str('b) Vikten i fjädern på månen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.4 * F;
+    xx = K.rotFrac('m', 'k', T.str('T_f_j_ä_d_e_r=2π', padL, y), y);
+    T.str('ingen g: samma periodtid', xx + 0.5 * F, y, null, 0.62);
+    T.stepEnd();
+    K.sist(y, 1.3);
+
+    y += adv + 1.4 * F;
+    K.tk([
+      [['Pendelns periodtid beror av ', 0], ['g', 1], ['.', 0]],
+      [['Jag jämför månen (M) med jorden']],
+      [['(J). 2π och ', 0], ['l', 1], [' tar ut sig.', 0]]
+    ]);
+    T.str('Pendeln: jämför månen med jorden', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.4 * F;
+    xx = T.fracH('T_M', 'T_J', padL, y);
+    xx = T.str('=', xx + 0.10 * F, y);
+    K.rotFrac('g_J', 'g_M', xx, y);
+    T.stepEnd();
+    K.sist(y, 1.3);
+
+    y += adv + 1.7 * F;
+    K.tk([
+      [['Tyngdaccelerationen på jorden']],
+      [['och på månen.']]
+    ]);
+    klam = valueBracket(acts, ['g_J=9,82 m/s^2', 'g_M=1,62 m/s^2'],
+                        padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+    K.sist(y);
+
+    y += adv + 2.0 * F;
+    K.tk([
+      [['Nu sätter jag in värdena.']]
+    ]);
+    xx = T.fracH('T_M', 'T_J', padL, y);
+    xx = T.str('=', xx + 0.10 * F, y);
+    xx = K.rotFrac('9,82', '1,62', xx, y);
+    var xIns = T.str('=2,462...', xx + 0.12 * F, y);
+    T.stepEnd();
+    K.sist(y, 1.3);
+
+    K.tk([
+      [['Först nu avrundar jag till två']],
+      [['värdesiffror.']]
+    ]);
+    T.str('≈2,5', xIns, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    K.tk([
+      [['Svagare tyngdkraft drar kulan']],
+      [['långsammare tillbaka, så pendeln']],
+      [['ska svänga långsammare på']],
+      [['månen. Stämmer!']]
+    ], 120);
+    y = K.svar('Svar: Nej. Vikten svänger lika fort som på jorden, ' +
+               'men pendelns periodtid blir 2,5 gånger så lång.', y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
   /* ---------------- scen: gitarrsträngens egenfrekvens (fy2-2.6 Ex 1) ---
    * 100 svängningar på 1,22 s ger periodtiden. Periodtiden är INTE given
    * — den räknas därför ut som en DELUTRÄKNING på sin rad inne i
@@ -27817,6 +28505,201 @@
       [['Rimligt!']]
     ]));
     T.underline(T.str('Svar: 84 Hz', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: två intilliggande frekvenser i en gitarr-
+   * sträng (fy2-2.A Ex 4, Avancerad) -----------------------------------
+   * Med n bukar ryms n halva våglängder: λ = 2l/n, och f = v/λ ger
+   * f_n = n·v/(2l) = n·f₁. Skillnaden mellan två intilliggande frekvenser
+   * är grundtonen: f₁ = 440 − 330 = 110 Hz, och n = 440/110 = 4.
+   * b) v = 2l·f₁ = 2·0,65·110 = 143 ≈ 140 m/s. Strängen ritas rak:
+   * antalet bukar är det som söks och får inte avslöjas i figuren.
+   * Siffrorna är identiska med textlösningen i fy2-2.A.md. */
+  function layoutTvafrekvenser(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var K = mkKap2Avancerad(T, F);
+    var adv = 1.7 * F, xx, y, klam;
+    var xa = 110, xb = 390, sy = 170;
+
+    /* ---- steg 1: strängen mellan fästpunkterna (grafit) ---- */
+    T.tanke(T.figurBubble(286, [
+      [['Ritar strängen mellan de två']],
+      [['fästpunkterna. Där är det alltid']],
+      [['noder.']]
+    ], 300));
+    T.line([xa, sy - 40], [xa, sy + 40]);
+    T.hatch([xa, sy + 40], [xa, sy - 40], 6);
+    T.line([xb, sy - 40], [xb, sy + 40]);
+    T.hatch([xb, sy - 40], [xb, sy + 40], 6);
+    T.pause(140);
+    T.line([xa, sy], [xb, sy]);
+    T.dot(xa, sy);
+    T.dot(xb, sy);
+    T.stepEnd();
+
+    /* ---- steg 2: det givna (blått) ---- */
+    T.tanke(T.figurBubble(286, [
+      [['Skriver in längden och de två']],
+      [['frekvenserna som ger stående']],
+      [['vågor, direkt efter varandra.']]
+    ], 300));
+    T.dblArrow([xa + 3, sy + 60], [xb - 3, sy + 60], BLUE);
+    T.lbl('l=0,65 m', 206, sy + 86, BLUE);
+    T.pause(150);
+    T.lbl('f=330 Hz och 440 Hz', 160, sy - 56, BLUE);
+    T.stepEnd();
+
+    /* ---- a) ---- */
+    y = 396;
+    K.tk([
+      [['Jag vet inte hur många bukar']],
+      [['vågen har. Med ', 0], ['n', 1], [' bukar ryms ', 0], ['n', 1]],
+      [['halva våglängder på strängen.']]
+    ], 120);
+    T.str('a) Frekvensen när strängen har n bukar', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.3 * F;
+    xx = T.fracH('λ', '2', T.str('l=n·', padL, y), y);
+    xx = T.str('⟺λ=', xx + 0.12 * F, y);
+    T.fracH('2l', 'n', xx, y);
+    T.str('(1)', 400, y);
+    T.stepEnd();
+    K.sist(y, 1.1);
+
+    y += adv + 2.0 * F;
+    K.tk([
+      [['Frekvensen får jag ur utbred-']],
+      [['ningshastigheten.']]
+    ]);
+    xx = T.str('v=f·λ⟺f=', padL, y);
+    T.fracH('v', 'λ', xx, y);
+    T.str('(2)', 400, y);
+    T.stepEnd();
+    K.sist(y, 1.1);
+
+    y += adv + 2.9 * F;
+    K.tk([
+      [['Jag sätter in (1) i (2). Att dela']],
+      [['med ett bråk är att multiplicera']],
+      [['med det inverterade bråket.']]
+    ]);
+    xx = T.bigFrac('v', ['2l', 'n'], T.str('f_n=', padL, y), y);
+    xx = T.str('=n·', xx + 0.10 * F, y);
+    T.fracH('v', '2l', xx, y);
+    T.str('(3)', 400, y);
+    T.stepEnd();
+    K.sist(y, 2.4);
+
+    y += adv + 2.4 * F;
+    K.tk([
+      [['Med en buk, ', 0], ['n', 1], [' = 1, får jag grund-', 0]],
+      [['tonen. Varje ny buk lägger alltså']],
+      [['till grundtonens frekvens.']]
+    ]);
+    xx = T.fracH('v', '2l', T.str('f_1=', padL, y), y);
+    T.str('⟹f_n=n·f_1', xx + 0.12 * F, y);
+    T.stepEnd();
+    K.sist(y, 1.1);
+
+    y += adv + 1.5 * F;
+    K.tk([
+      [['Skillnaden mellan två intill-']],
+      [['liggande frekvenser är därför']],
+      [['grundtonens frekvens.']]
+    ]);
+    T.str('f_1=440 Hz−330 Hz=110 Hz', padL, y);
+    T.stepEnd();
+    K.sist(y);
+
+    y += adv + 1.6 * F;
+    K.tk([
+      [['Antalet bukar löser jag ut ur']],
+      [['sambandet jag nyss fick fram.']]
+    ]);
+    xx = T.str('f_n=n·f_1⟺n=', padL, y);
+    T.fracH('f_n', 'f_1', xx, y);
+    T.stepEnd();
+    K.sist(y, 1.1);
+
+    y += adv + 1.6 * F;
+    K.tk([
+      [['Frekvensen vid den sökta vågen']],
+      [['och grundtonen.']]
+    ]);
+    klam = valueBracket(acts, ['f_n=440 Hz', 'f_1=110 Hz'], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+    K.sist(y);
+
+    y += adv + 1.7 * F;
+    K.tk([
+      [['Nu sätter jag in värdena.']]
+    ]);
+    xx = T.fracH('440', '110', T.str('n=', padL, y), y);
+    T.str('=4', xx + 0.12 * F, y);
+    T.stepEnd();
+    K.sist(y, 1.1);
+
+    y += adv + 1.2 * F;
+    K.tk([
+      [['Då är 330 Hz = 3 · 110 Hz, alltså']],
+      [['tre bukar, och nästa frekvens ger']],
+      [['fyra. Stämmer!']]
+    ], 120);
+    y = K.svar('Svar: 4 bukar', y);
+    T.stepEnd();
+    K.sist(y, 0.4);
+
+    /* ---- b) ---- */
+    y += adv + 1.4 * F;
+    K.tk([
+      [['Utbredningshastigheten finns i']],
+      [['uttrycket för grundtonen.']]
+    ], 120);
+    T.str('b) Utbredningshastigheten ur grundtonen', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.3 * F;
+    xx = T.fracH('v', '2l', T.str('f_1=', padL, y), y);
+    T.str('⟺v=2l·f_1', xx + 0.12 * F, y);
+    T.stepEnd();
+    K.sist(y, 1.1);
+
+    y += adv + 1.6 * F;
+    K.tk([
+      [['Strängens längd och grund-']],
+      [['tonen från a).']]
+    ]);
+    klam = valueBracket(acts, ['l=0,65 m', 'f_1=110 Hz'], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+    K.sist(y);
+
+    y += adv + 1.5 * F;
+    K.tk([
+      [['Nu sätter jag in värdena.']]
+    ]);
+    var xIns = T.str('v=2·0,65·110=143 m/s', padL, y);
+    T.stepEnd();
+    K.sist(y);
+
+    K.tk([
+      [['Först nu avrundar jag. 0,65 m']],
+      [['har två värdesiffror, så svaret']],
+      [['får två.']]
+    ]);
+    T.str('≈140 m/s', xIns, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    K.tk([
+      [['Drygt hundra meter per sekund']],
+      [['för en våg på en hårt spänd']],
+      [['sträng. Rimligt!']]
+    ], 120);
+    y = K.svar('Svar: 140 m/s', y);
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
@@ -28334,6 +29217,237 @@
       [['algebraiska lösningen.']]
     ]));
     T.underline(T.str('Svar: 2,0 mW/m^2', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: hur många högtalare behövs? (fy2-2.A Ex 5,
+   * Avancerad) ----------------------------------------------------------
+   * Ljudnivåer går inte att lägga ihop, men intensiteter gör det.
+   * 1) I₁ = 10⁻¹²·10^8,2 = 1,584…·10⁻⁴ W/m² (en högtalare på 5,0 m),
+   * 2) samma effekt: I₂ = I₁·r₁²/r₂² = 6,190…·10⁻⁵ W/m² på 8,0 m,
+   * 3) I_krav = 10⁻¹²·10⁹ = 1,0·10⁻³ W/m² för 90 dB,
+   * 4) n = I_krav/I₂ = 16,15… → avrundas UPPÅT till 17.
+   * Siffrorna är identiska med textlösningen i fy2-2.A.md. */
+  function layoutAntalhogtalare(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var K = mkKap2Avancerad(T, F);
+    var adv = 1.7 * F, xx, y, klam;
+    var hx = 104, hy = 186, k = 34;            /* 34 px per meter */
+    var x5 = hx + 5.0 * k + 14, x8 = hx + 8.0 * k + 14;
+    function bage(r) {
+      var pts = [];
+      for (var i = 0; i <= 10; i++) {
+        var a = -0.55 + 1.1 * i / 10;
+        pts.push([hx + 30 + r * Math.cos(a), hy + r * Math.sin(a)]);
+      }
+      acts.push({ kind: 'stroke', pts: pts });
+    }
+
+    /* ---- steg 1: högtalarna och mätpunkterna (grafit) ---- */
+    T.tanke(T.figurBubble(286, [
+      [['Ritar högtalarna samlade på ett']],
+      [['ställe och de två avstånden där']],
+      [['ljudnivån mäts.']]
+    ], 300));
+    T.rect(hx - 14, hy - 22, hx + 6, hy + 22);
+    T.line([hx + 6, hy - 10], [hx + 24, hy - 24]);
+    T.line([hx + 24, hy - 24], [hx + 24, hy + 24]);
+    T.line([hx + 24, hy + 24], [hx + 6, hy + 10]);
+    T.pause(140);
+    bage(14);
+    bage(28);
+    T.pause(140);
+    T.dash([hx + 24, hy], [x8 + 30, hy]);
+    T.dot(x5, hy);
+    T.dot(x8, hy);
+    T.stepEnd();
+
+    /* ---- steg 2: det givna (blått) ---- */
+    T.tanke(T.figurBubble(286, [
+      [['Skriver in avstånden och ljud-']],
+      [['nivåerna. Antalet högtalare ', 0], ['n', 1]],
+      [['är det jag söker.', 0]]
+    ], 300));
+    T.lbl('n st', hx - 22, hy + 48, BLUE);
+    T.pause(150);
+    T.lbl('82 dB', x5 - 50, hy - 18, BLUE);
+    T.lbl('minst 90 dB', x8 - 30, hy - 18, BLUE);
+    T.pause(150);
+    T.dblArrow([hx + 26, hy + 34], [x5 - 2, hy + 34], BLUE);
+    T.lbl('r_1=5,0 m', hx + 70, hy + 58, BLUE);
+    T.dblArrow([hx + 26, hy + 78], [x8 - 2, hy + 78], BLUE);
+    T.lbl('r_2=8,0 m', hx + 130, hy + 102, BLUE);
+    T.stepEnd();
+
+    /* ---- 1. intensiteten från en högtalare på 5,0 m ---- */
+    y = 396;
+    K.tk([
+      [['Ljudnivåer går inte att lägga']],
+      [['ihop, men intensiteter gör det.']],
+      [['Jag räknar om allt till intensitet.']]
+    ], 120);
+    T.str('1. Intensiteten från en högtalare på 5,0 m', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.6 * F;
+    T.parenFrac('I', 'I_0', null, T.str('L=10·lg', padL, y), y);
+    T.stepEnd();
+    K.sist(y, 1.1);
+
+    y += adv + 2.2 * F;
+    K.tk([
+      [['Jag dividerar båda led med 10']],
+      [['så att logaritmen står ensam.']]
+    ]);
+    T.parenFrac('I', 'I_0', null,
+                T.str('=lg', T.fracH('L', '10', padL, y), y) + 0.02 * F, y);
+    T.stepEnd();
+    K.sist(y, 1.1);
+
+    y += adv + 2.2 * F;
+    K.tk([
+      [['Jag skriver om på potensform och']],
+      [['löser ut ', 0], ['I', 1]]
+    ]);
+    xx = T.str('10^L^/^1^0=', padL, y);
+    xx = T.fracH('I', 'I_0', xx, y);
+    xx = T.str('⟺I=I_0·10^L^/^1^0', xx + 0.12 * F, y);
+    T.str('(1)', Math.max(xx + 0.8 * F, 430), y);
+    T.stepEnd();
+    K.sist(y, 1.1);
+
+    y += adv + 2.0 * F;
+    K.tk([
+      [['Hörtröskeln är en konstant, och']],
+      [['ljudnivån på 5,0 m är given.']]
+    ]);
+    klam = valueBracket(acts, ['I_0=10^−^1^2 W/m^2 (hörtröskeln)',
+                               'L=82 dB'], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+    K.sist(y);
+
+    y += adv + 1.7 * F;
+    K.tk([
+      [['Nu sätter jag in värdena. 82']],
+      [['delat med 10 är 8,2.']]
+    ]);
+    T.str('I_1=10^−^1^2·10^8^,^2=1,584...·10^−^4 W/m^2', padL, y);
+    T.stepEnd();
+    K.sist(y);
+
+    /* ---- 2. samma effekt på 8,0 m ---- */
+    y += adv + 1.6 * F;
+    K.tk([
+      [['Högtalarens effekt ', 0], ['P', 1], [' är densamma', 0]],
+      [['på båda avstånden. För en punkt-']],
+      [['formig källa är ', 0], ['P', 1], [' = ', 0], ['I', 1], [' · 4π · ', 0],
+       ['r', 1], ['2', 0]]
+    ], 120);
+    T.str('2. Samma effekt: intensiteten på 8,0 m', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.2 * F;
+    T.str('I_1·4π·r_1^2=I_2·4π·r_2^2', padL, y);
+    T.stepEnd();
+    K.sist(y);
+
+    y += adv + 2.0 * F;
+    K.tk([
+      [['Jag löser ut ', 0], ['I', 1], ['2', 0], ['. 4π finns i båda', 0]],
+      [['leden och tar ut sig.']]
+    ]);
+    xx = T.str('I_2=I_1·', padL, y);
+    xx = T.fracH('r_1^2', 'r_2^2', xx, y);
+    T.str('(2)', Math.max(xx + 0.8 * F, 430), y);
+    T.stepEnd();
+    K.sist(y, 1.3);
+
+    y += adv + 2.0 * F;
+    K.tk([
+      [['Intensiteten från 1. och de två']],
+      [['avstånden.']]
+    ]);
+    klam = valueBracket(acts, ['I_1=1,584...·10^−^4 W/m^2', 'r_1=5,0 m',
+                               'r_2=8,0 m'], padL, y, T.s, F);
+    T.stepEnd();
+    y = klam.yEnd;
+    K.sist(y);
+
+    y += adv + 2.0 * F;
+    K.tk([
+      [['Nu sätter jag in värdena.']]
+    ]);
+    xx = T.str('I_2=1,584...·10^−^4·', padL, y);
+    xx = T.fracH('5,0^2', '8,0^2', xx, y);
+    T.stepEnd();
+    y += adv + 1.0 * F;
+    T.str('=6,190...·10^−^5 W/m^2', padL, y);
+    T.stepEnd();
+    K.sist(y);
+
+    /* ---- 3. intensiteten som krävs ---- */
+    y += adv + 1.6 * F;
+    K.tk([
+      [['Samma formel (1) igen, nu med']],
+      [['ljudnivån 90 dB.']]
+    ], 120);
+    T.str('3. Intensiteten som krävs för 90 dB', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.2 * F;
+    T.str('I=I_0·10^L^/^1^0', padL, y);
+    T.stepEnd();
+    K.sist(y);
+
+    y += adv + 1.4 * F;
+    K.tk([
+      [['90 delat med 10 är 9.']]
+    ]);
+    T.str('I_k_r_a_v=10^−^1^2·10^9=1,0·10^−^3 W/m^2', padL, y);
+    T.stepEnd();
+    K.sist(y);
+
+    /* ---- 4. antalet högtalare ---- */
+    y += adv + 1.6 * F;
+    K.tk([
+      [['n', 1], [' högtalare ger ', 0], ['n', 1], [' gånger så stor', 0]],
+      [['intensitet som en.']]
+    ], 120);
+    T.str('4. Antalet högtalare', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.3 * F;
+    xx = T.str('n·I_2=I_k_r_a_v⟺n=', padL, y);
+    T.fracH('I_k_r_a_v', 'I_2', xx, y);
+    T.stepEnd();
+    K.sist(y, 1.1);
+
+    y += adv + 2.0 * F;
+    K.tk([
+      [['Nu sätter jag in intensiteterna']],
+      [['från 2. och 3.']]
+    ]);
+    xx = T.fracH('1,0·10^−^3', '6,190...·10^−^5', T.str('n=', padL, y), y);
+    T.str('=16,15...', xx + 0.12 * F, y);
+    T.stepEnd();
+    K.sist(y, 1.3);
+
+    y += adv + 1.4 * F;
+    K.tk([
+      [['16 högtalare ger en aning under']],
+      [['90 dB. Jag måste avrunda uppåt.']]
+    ]);
+    T.str('n=17', padL, y);
+    T.stepEnd();
+    K.sist(y);
+
+    y += adv + 1.2 * F;
+    K.tk([
+      [['En högtalare ger knappt 78 dB på']],
+      [['8,0 m. Fyra fördubblingar ger']],
+      [['4 · 3 dB = 12 dB mer, och då']],
+      [['behövs runt 16. Rimligt!']]
+    ], 120);
+    y = K.svar('Svar: 17 högtalare', y);
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
@@ -65754,17 +66868,22 @@
                    dampning: layoutDampning,
                    'kopplade-fjadrar': layoutKoppladeFjadrar, harmonisk: layoutHarmonisk,
                    periodfjader: layoutPeriodfjader,
+                   amplitudurfart: layoutAmplitudurfart,
                    massafjader: layoutMassafjader,
+                   tvaperiodtider: layoutTvaperiodtider,
                    sekundpendel: layoutSekundpendel,
                    pendelG: layoutPendelG,
+                   pendelfjadertakt: layoutPendelfjadertakt,
                    /* Fysik 2 kapitel 2 — Mekaniska vågor (2.6 och framåt) */
                    egenfrekvens: layoutEgenfrekvens,
                    superposition: layoutSuperposition,
                    staendevag: layoutStaendevag,
+                   tvafrekvenser: layoutTvafrekvenser,
                    halvoppenpipa: layoutHalvoppenpipa,
                    oppenpipa: layoutOppenpipa,
                    ljudintensitet: layoutLjudintensitet,
                    ljudniva: layoutLjudniva,
+                   antalhogtalare: layoutAntalhogtalare,
                    vattenbrytning: layoutVattenbrytning,
                    'vattenbrytning-grunt-djupt': layoutVattenbrytningGruntDjupt,
                    hogtalare: layoutHogtalare,

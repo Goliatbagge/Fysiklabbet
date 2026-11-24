@@ -103,6 +103,62 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-26-vattnet-som-slits-isar",
+    date: "2026-11-26",
+    title: "Vattenmolekylen slits isär innan elektronerna hunnit fylla hålet",
+    deck: "När en vattenmolekyl träffas av röntgenljus med rätt energi kan båda väteatomerna flyga iväg på några femtosekunder, innan elektronerna hunnit fylla det hål som ljuset gjort. Kvar blir en ensam syreatom. Det har forskare från Berlin, Uppsala, Lund, Hamburg och Kyoto visat genom att mäta energin hos de elektroner som syreatomen sänder ut.",
+    category: "Atomfysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-11-26-vattnet-som-slits-isar.jpg",
+    imageAlt: "En stor hall med en orangemålad, rumsstor stålkur täckt av rör, kablar och kabelstegar. Till vänster står vita och svarta elektronikskåp, framför kuren en vagn med en dataskärm och en blank ståltank. På kuren sitter en skylt med texten NanoMAX.",
+    imageCredit: "Foto: Johan Wessman/News Øresund (CC BY 2.0), via Wikimedia Commons. Strållinjen NanoMAX vid MAX IV i Lund. Mätningarna i studien gjordes vid en annan strållinje på samma anläggning, FlexPES, och vid PETRA III i Hamburg.",
+    tags: ["atomfysik", "röntgenstrålning", "vatten", "augereffekten", "exciterat tillstånd", "energinivåer", "fotoelektrisk effekt", "elektronvolt", "femtosekund", "synkrotronljus", "ozon", "max iv", "petra iii", "desy", "uppsala universitet", "fritz-haber-institut"],
+    sources: [
+      { name: "Fritz-Haber-Institut der Max-Planck-Gesellschaft via idw: Röntgenstrahlen zerreißen Wasser, bevor sich seine Elektronen entspannen können (Jelena Tomovic, 18 november 2026)", url: "https://idw-online.de/en/news881079" },
+      { name: "Phys.org: X-rays tear water apart before its electrons can relax (19 november 2026)", url: "https://phys.org/news/2026-11-rays-electrons.html" }
+    ],
+    research: {
+      citation: "F. Trinter, S. Thürmer, Q. Zhou, U. Hergenhahn, B. Winter, O. Björneholm, M. Tchaplyguine, L. Inhester och G. Öhrwall, ”Ultrafast Dissociation of Water Producing Atomic Oxygen following Excitation above the O 1s Threshold”, Physical Review Letters 137, 193002, publicerad 5 november 2026. Kollegialt granskad och öppet tillgänglig (CC BY 4.0).",
+      url: "https://doi.org/10.1103/c1hm-82p2"
+    },
+    larare: {
+      moment: [
+        { label: "Fotoelektrisk effekt", href: "katalog.html?id=fy2-4.5" },
+        { label: "Spektrallinjer", href: "katalog.html?id=fy2-4.7" },
+        { label: "Bohrs atommodell och energinivåer", href: "katalog.html?id=fy2-4.8" }
+      ],
+      fragor: [
+        "Fotonerna i försöket hade energin 550 eV. Beräkna våglängden och jämför med synligt ljus. Varför kan inte en foton av synligt ljus slå loss en av syrets innersta elektroner?",
+        "Elektroner som slås loss av en foton får mer rörelseenergi ju större fotonens energi är. Varför ändrades inte energin hos elektronerna i de två topparna när forskarna ökade fotonernas energi?",
+        "Anta att en väteatom lämnar molekylen med rörelseenergin 5 eV. Hur långt hinner den på 4 femtosekunder? Jämför med avståndet mellan syreatomen och en väteatom i vattenmolekylen, ungefär 0,1 nm."
+      ]
+    },
+    body: [
+      { type: "p", html: "En vattenmolekyl består av en syreatom och två väteatomer. Träffas den av röntgenljus kan en foton ge sin energi till en av syrets två innersta elektroner, de som sitter närmast atomkärnan. Elektronen lämnar då sin plats, och kvar blir ett hål i det innersta skalet. Ett sådant hål finns bara kvar några femtosekunder, alltså några miljondelar av en miljarddels sekund. Sedan faller en elektron från ett yttre skal ner och fyller det." },
+      { type: "p", html: "En forskargrupp från Tyskland, Sverige och Japan har nu visat att vattenmolekylen ibland hinner gå sönder helt innan hålet har fyllts. Båda väteatomerna lossnar, och när hålet till slut fylls sker det i en ensam syreatom. Förstaförfattare är Florian Trinter vid Fritz-Haber-Institut i Berlin, och bland medförfattarna finns forskare från Uppsala universitet och synkrotronljuskällan MAX&nbsp;IV i Lund. Studien publicerades i <em>Physical Review Letters</em> den 5 november." },
+      { type: "h2", text: "Två elektroner i ett läge som driver isär atomerna" },
+      { type: "p", html: "Forskarna lyste med röntgenljus på vattenånga, alltså på enstaka vattenmolekyler i gasform. Fotonerna hade en energi på omkring 550&nbsp;elektronvolt, en bit över de knappt 540&nbsp;elektronvolt som krävs för att slå loss en av syrets innersta elektroner. Med sambandet $E = h \\cdot f$ motsvarar det en våglängd på ungefär 2,3&nbsp;nanometer, så kallad mjuk röntgenstrålning." },
+      { type: "p", html: "Vid just den energin händer ibland något ovanligt. Fotonen lyfter den innersta elektronen till en högre nivå i molekylen, och samtidigt får en av de yttre elektronerna också en knuff upp till samma nivå. Den nivån motverkar bindningen mellan syret och vätet, och med två elektroner där stöter atomerna bort varandra i stället för att hålla ihop. Molekylen är fortfarande elektriskt neutral, men båda väteatomerna slungas iväg nästan genast." },
+      { type: "p", html: "Det blir en kapplöpning. Normalt fylls hålet i syrets innersta skal inom några femtosekunder, och samtidigt skjuts en annan elektron ut ur molekylen. Det kallas augereffekten. Den här gången hinner väteatomerna lämna molekylen först, och när hålet fylls sker det i en fri syreatom." },
+      { type: "quote", html: "Det som gör resultatet särskilt spännande är att vi ser molekylen gå sönder redan innan elektronerna har ordnat om sig färdigt. Båda O–H-bindningarna går av medan hålet i syrets innersta skal fortfarande finns kvar, så atomkärnornas rörelse vinner i stort sett kapplöpningen mot elektronerna.", cite: "Florian Trinter, Fritz-Haber-Institut, Berlin (i pressmeddelandet, översatt från tyska)" },
+      { type: "h2", text: "Elektronerna som avslöjar vad som fanns kvar" },
+      { type: "p", html: "Atomerna går inte att se direkt. Det forskarna mäter är rörelseenergin hos de elektroner som kommer ut ur gasen, medan röntgenljusets energi ändras i små steg. Elektroner som slås loss direkt av en foton får mer rörelseenergi ju mer energi fotonen har, precis som vid den fotoelektriska effekten. Men forskarna såg också två smala toppar som låg stilla, på 511,4 och 513,1&nbsp;elektronvolt, hur fotonernas energi än ändrades. Sådana elektroner kommer inte direkt från fotonen. De skjuts ut när ett hål fylls, och deras energi bestäms av energinivåerna i den atom eller molekyl som de kommer ifrån." },
+      { type: "p", html: "Liknande toppar har setts förut, och då tolkades de som signaler från OH, alltså en vattenmolekyl som bara blivit av med en av sina väteatomer. Men en OH-molekyl vibrerar, och vibrationerna borde ha delat upp varje topp i flera mindre toppar med ungefär 0,4&nbsp;elektronvolts mellanrum. Mätinstrumenten var skarpa nog att se en sådan uppdelning, men topparna var enkla och smala. Avståndet mellan dem, 1,68&nbsp;elektronvolt, stämmer dessutom exakt med avståndet mellan två energinivåer i den syrejon som blir kvar när syreatomen har skjutit ut sin elektron, något som andra forskare har mätt tidigare. Beräkningar av hur en ensam syreatom i just det här exciterade tillståndet gör sig av med sin energi gav samma bild, och forskarna hittade två toppar till, vid omkring 477 och 490&nbsp;elektronvolt, som passar med samma förklaring." },
+      { type: "p", html: "Mätningarna gjordes vid två anläggningar: PETRA&nbsp;III vid forskningscentret DESY i Hamburg och strållinjen FlexPES vid MAX&nbsp;IV i Lund. Signalen syntes på båda ställena." },
+      { type: "quote", html: "Att se den karakteristiska signalen även vid MAX&nbsp;IV var en viktig del i att slå fast att det här verkligen är ett sätt för molekylen att gå sönder. Mätningarna vid de två anläggningarna ger en mycket samstämmig bild av vad som händer med vattenmolekylen efter röntgenexcitationen.", cite: "Gunnar Öhrwall, MAX IV, Lund (i pressmeddelandet, översatt från tyska)" },
+      { type: "image", src: "nyheter/bilder/2026-11-26-vattnet-som-slits-isar-2.jpg", alt: "Flygfoto över ett ringformat byggnadskomplex mitt bland åkrar, med en motorväg strax intill. Ringen har ett platt, rödbrunt tak och en blank, böjd yttervägg, och vid sidan står ett större rektangulärt hus. Runt byggnaden syns grushögar och arbetsmaskiner.", caption: "MAX&nbsp;IV i Lund fotograferad från luften i september 2014, under byggtiden. I den stora ringen kretsar elektroner som sänder ut röntgenljus till många av strållinjerna.", credit: "Foto: David Castor (allmän egendom, CC0), via Wikimedia Commons" },
+      { type: "h2", text: "En syreatom som gärna reagerar" },
+      { type: "p", html: "En fri syreatom är mycket reaktiv. Den kan slå sig ihop med en syremolekyl och bilda ozon, O + O<sub>2</sub> → O<sub>3</sub>, eller reagera med en vattenmolekyl och bilda väteperoxid eller två hydroxylradikaler, OH. Alla tre är själva starkt reaktiva och kan sätta igång nya kemiska reaktioner." },
+      { type: "p", html: "I levande vävnad brukar fritt syre inte anses spela någon stor roll för strålskadorna, skriver forskarna, eftersom en syreatom där genast reagerar med vattnet runt omkring. I tunnare och mer strålningsutsatta miljöer, som mesosfären och den nedre termosfären högt upp i jordens atmosfär, är fritt syre däremot viktigt för kemin och energibalansen. Studien gäller enstaka molekyler i gasform, men forskarna skriver att liknande snabba förlopp skulle kunna ske i små klumpar av vattenmolekyler eller i den övre atmosfären." },
+      { type: "p", html: "Hittills går förloppet bara att avläsa indirekt, ur elektronernas energi. För att följa det medan det pågår behövs röntgenpulser som är kortare än en femtosekund, alltså attosekundpulser, och sådana försök börjar först nu bli möjliga." },
+      { type: "fact", title: "Visste du?", items: [
+        "Augereffekten är uppkallad efter fransmannen Pierre Auger, som upptäckte den 1923. Lise Meitner hade beskrivit samma effekt redan året innan.",
+        "På 4&nbsp;femtosekunder, ungefär den tidsskala som forskarna anger för den ensamma syreatomens korta tillvaro, hinner ljuset bara drygt en mikrometer. Det är omkring en femtiondel av ett hårstrås tjocklek.",
+        "MAX&nbsp;IV i Lund invigdes 2016. Den största lagringsringen, där elektronerna kretsar och sänder ut röntgenljuset, är 528&nbsp;meter i omkrets."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-25-bepicolombo-fangas-av-merkurius",
     date: "2026-11-25",
     title: "Efter åtta år i rymden har BepiColombo fångats av Merkurius",

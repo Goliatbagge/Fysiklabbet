@@ -571,7 +571,7 @@ The article is scheduled and will be published automatically at 00.00 on $Datum.
 - the line "Läs artikeln i förhandsvisning:" followed on the next line by a plain link whose visible text AND href are both EXACTLY $lank, copied character for character (never the plain ?id= address: the article is still hidden by the date gate and that address only shows the news list). No button: no colours, background, padding or other inline style on the link, so that it is readable in every mail client. Add that it can take a few minutes after this email before the link works;
 - the utgivare's verdict for this article and, briefly, what had to be corrected (from .claude/nyheter/granskningar.md);
 - the sources (name and link for the news source and the original research);
-- this instruction, word for word: "Svara på det här mejlet med OK, eller skriv vad som ska ändras. Ändringar som kommer in före klockan 22.15 hinner göras före publiceringen. Vill du inte att artikeln publiceras, skriv stoppa. Svarar du inte publiceras den ändå."
+- this instruction, word for word: "Svara på det här mejlet med OK, eller skriv vad som ska ändras. Ändringar som kommer in före klockan 22.15 hinner göras före publiceringen. Vill du inte att artikeln publiceras, skriv stoppa. Svarar du inte, eller raderar mejlet, räknas det som godkänt och artikeln publiceras som den är."
 "@
     } else {
         $amne = "[Nyhet $Datum] Publicerad utan förhandsgranskning: <title>"
@@ -608,7 +608,7 @@ Use the Gmail tools to check for replies from the owner ($Agare) to the news rev
    - ANDRA: the owner asks for any change or correction, asks a question that needs an answer, or wants the article stopped or withdrawn.
 4. If OK: reply in the same thread (send_message with replyThreadId, to $Agare only) with a one-line Swedish confirmation: "Tack! Artikeln publiceras som den är." if its date is in the future, otherwise "Tack! Artikeln ligger kvar som den är." End that reply with the line FL-JOBB FL-NYHET:<date>. Then print: SVAR: <date> OK
 5. If ANDRA: do NOT reply. Write the file $fil (UTF-8) with exactly these lines: line 1 the date, line 2 the Gmail thread id, then the owner's full new text. Then print: SVAR: <date> ANDRA
-6. If there is no unprocessed reply, print: SVAR: NONE
+6. If there is no unprocessed reply, print: SVAR: NONE (A review email that the owner has deleted or trashed without replying counts as approved. It needs no confirmation and is never an error.)
 
 Do not commit anything. This runs unattended and nobody reads your questions: never ask anything and never handle threads older than 4 days. 
 RESULT, mandatory last step in every case, also when there was nothing to do: write the file $BeskedFil (UTF-8) with exactly one line, the SVAR line from step 4, 5 or 6 (for example SVAR: NONE). Change no other files than these. The calling script reads that file, not your answer.

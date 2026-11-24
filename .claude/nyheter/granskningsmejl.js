@@ -81,7 +81,7 @@ const lankNot = granska
   : '';
 
 const instruktion = granska
-  ? 'Svara på det här mejlet med OK, eller skriv vad som ska ändras. Ändringar som kommer in före klockan 22.15 hinner göras före publiceringen. Vill du inte att artikeln publiceras, skriv stoppa. Svarar du inte publiceras den ändå.'
+  ? 'Svara på det här mejlet med OK, eller skriv vad som ska ändras. Ändringar som kommer in före klockan 22.15 hinner göras före publiceringen. Vill du inte att artikeln publiceras, skriv stoppa. Svarar du inte, eller raderar mejlet, räknas det som godkänt och artikeln publiceras som den är.'
   : 'Svara på det här mejlet om något ska rättas, så ändras artikeln på sajten.';
 
 const kallor = [];

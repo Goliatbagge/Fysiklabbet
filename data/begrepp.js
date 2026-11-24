@@ -872,6 +872,18 @@ window.BEGREPP = [
     ]
   },
   {
+    id: 'augereffekten',
+    term: 'Augereffekten',
+    former: ['augereffekten', 'augereffekt', 'augerelektron', 'augerelektronen', 'augerelektroner', 'augerelektronerna', 'augersönderfall', 'augersönderfallet'],
+    kort: 'Ett sätt för en atom att göra sig av med överskottsenergi när ett hål i ett inre elektronskal fylls: i stället för att sända ut en röntgenfoton skjuter atomen ut en av sina egna elektroner.',
+    relaterade: ['exciterat-tillstand', 'foton', 'elektronvolt', 'partikelaccelerator'],
+    body: [
+      { type: 'p', html: 'Elektronerna i en atom sitter i skal, och de innersta är hårdast bundna. Slår röntgenstrålning eller en snabb partikel loss en elektron ur ett inre skal blir det ett tomt hål där. Ett sådant läge är mycket instabilt. Inom några femtosekunder, alltså några miljondelar av en miljarddels sekund, faller en elektron från ett yttre skal ner och fyller hålet. Den elektronen hamnar då på en lägre energinivå, och skillnaden i energi måste ta vägen någonstans.' },
+      { type: 'p', html: 'Ett sätt är att atomen sänder ut en röntgenfoton med en energi som är typisk för grundämnet. Sådan strålning finns bland annat i ljuset från ett röntgenrör. Det andra sättet är augereffekten: energin går i stället till en annan elektron i atomen, som skjuts ut. Det liknar en stege där någon hoppar ner ett par pinnbredder och samtidigt knuffar ut en granne ur stegen. Den utskjutna elektronen kallas en augerelektron. För lätta grundämnen som kol, kväve och syre är augereffekten det vanligaste sättet att fylla ett hål i det innersta skalet.' },
+      { type: 'p', html: 'Augerelektronens rörelseenergi bestäms av energinivåerna i atomen som den kommer från, inte av strålningen som skapade hålet. Det gör den till ett fingeravtryck. Genom att mäta elektronernas energi kan forskare avgöra vilka grundämnen som finns i ytan på ett material, och i vilket tillstånd atomerna var när hålet fylldes. Effekten är uppkallad efter fransmannen Pierre Auger, som upptäckte den 1923, men Lise Meitner hade beskrivit den redan året innan.' }
+    ]
+  },
+  {
     id: 'attosekund',
     term: 'Attosekund',
     former: ['attosekund', 'attosekunden', 'attosekunder', 'attosekunderna', 'attosekundpuls', 'attosekundpulsen', 'attosekundpulser', 'attosekundpulserna', 'attosekundfysik', 'attosekundfysiken'],

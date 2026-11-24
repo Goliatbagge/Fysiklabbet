@@ -26412,12 +26412,13 @@
              fracBla: fracBla };
   }
 
-  /* ---------------- scen: amplitud och periodtid ur största fart och
-   * största acceleration (fy2-2.A Ex 1, Avancerad) ----------------------
+  /* ---------------- scen: amplitud ur största fart och största
+   * acceleration (fy2-2.A Ex 1, Avancerad) ------------------------------
    * Två ekvationer med två obekanta: v_max = ω·A och a_max = ω²·A.
    * Substitutionsmetoden: A = v_max/ω ur (1) insatt i (2) ger
    * a_max = ω·v_max, så ω = a_max / v_max = 3,6 / 0,48 = 7,5 rad/s, sedan
-   * A = 0,48 / 7,5 = 0,064 m = 6,4 cm och T = 2π / 7,5 = 0,837… ≈ 0,84 s.
+   * A = 0,48 / 7,5 = 0,064 m = 6,4 cm. (Periodtiden, b), ströks
+   * 2026-11-24: den tillförde inget på avancerad nivå.)
    * Siffrorna är identiska med textlösningen i fy2-2.A.md. */
   function layoutAmplitudurfart(cfg, F) {
     var T = physTools(F), acts = T.acts, padL = T.padL;
@@ -26474,7 +26475,7 @@
       [['båda finns i formlerna för']],
       [['största fart och acceleration.']]
     ], 120);
-    T.str('a) Två ekvationer med två obekanta', padL, y, null, 0.62);
+    T.str('Två ekvationer med två obekanta', padL, y, null, 0.62);
     T.pause(300);
     /* EKVATIONSSYSTEM MED KLAMMER (användarkrav 2026-11-24): skrivs som
      * eleverna är vana vid från matematiken, med systemKlammer. */
@@ -26502,16 +26503,20 @@
     T.str('Ur (1) fås', padL, y, null, 0.62);
     T.pause(300);
     y += 2.1 * F;
-    xx = T.fracH('v_m_a_x', 'ω', T.str('A=', padL, y), y);
-    T.str('(3)', Math.max(330, xx + 0.9 * F), y);
+    /* NUMRERA BARA DET SOM HÄNVISAS TILL (användarkrav 2026-11-24):
+     * raden får inget (3), den nämns aldrig med nummer. */
+    T.fracH('v_m_a_x', 'ω', T.str('A=', padL, y), y);
     T.stepEnd();
     K.sist(y, 1.1);
 
-    y += adv + 2.0 * F;
+    y += adv + 1.0 * F;
     K.tk([
-      [['Jag sätter in (3) i (2). ', 0], ['ω', 1], ['2', 0], [' delat', 0]],
-      [['med ', 0], ['ω', 1], [' blir ', 0], ['ω', 1], ['.', 0]]
+      [['Jag sätter in ', 0], ['A', 1], [' i ekvation (2).', 0]],
+      [['ω', 1], ['2', 0], [' delat med ', 0], ['ω', 1], [' blir ', 0], ['ω', 1], ['.', 0]]
     ]);
+    T.str('Detta i ekvation (2) ger', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
     xx = T.str('a_m_a_x=ω^2·', padL, y);
     xx = T.fracH('v_m_a_x', 'ω', xx, y);
     var xRad = T.str('⟺a_m_a_x=ω·v_m_a_x', xx + 0.12 * F, y);
@@ -26556,7 +26561,7 @@
     y += adv + 1.9 * F;
     K.tk([
       [['Nu när ', 0], ['ω', 1], [' är känd sätter jag in', 0]],
-      [['värdena i (3), ', 0], ['A', 1], [' = ', 0], ['v', 1], ['max', 0], [' / ', 0], ['ω', 1]]
+      [['värdena i ', 0], ['A', 1], [' = ', 0], ['v', 1], ['max', 0], [' / ', 0], ['ω', 1]]
     ]);
     xx = T.fracH('0,48', '7,5', T.str('A=', padL, y), y);
     T.str('=0,064 m=6,4 cm', xx + 0.15 * F, y);
@@ -26570,58 +26575,6 @@
       [['i en fjäder. Rimligt!']]
     ], 120);
     y = K.svar('Svar: 6,4 cm', y);
-    T.stepEnd();
-    K.sist(y, 0.4);
-
-    /* ---- b) ---- */
-    y += adv + 1.4 * F;
-    K.tk([
-      [['Periodtiden får jag ur vinkel-']],
-      [['hastigheten, som jag nyss fick']],
-      [['fram.']]
-    ], 120);
-    T.str('b) Periodtiden ur vinkelhastigheten', padL, y, null, 0.62);
-    T.pause(300);
-    y += 2.3 * F;
-    xx = T.fracH('2π', 'T', T.str('ω=', padL, y), y);
-    xx = T.str('⟺T=', xx + 0.10 * F, y);
-    T.fracH('2π', 'ω', xx, y);
-    T.stepEnd();
-    K.sist(y, 1.1);
-
-    y += adv + 1.5 * F;
-    K.tk([
-      [['Vinkelhastigheten från a).']]
-    ]);
-    klam = valueBracket(acts, ['ω=7,5 rad/s'], padL, y, T.s, F);
-    T.stepEnd();
-    y = klam.yEnd;
-    K.sist(y);
-
-    y += adv + 1.7 * F;
-    K.tk([
-      [['Nu sätter jag in värdet.']]
-    ]);
-    xx = T.fracH('2π', '7,5', T.str('T=', padL, y), y);
-    var xIns = T.str('=0,837... s', xx + 0.15 * F, y);
-    T.stepEnd();
-    K.sist(y, 1.1);
-
-    K.tk([
-      [['Först nu avrundar jag. Värdena']],
-      [['i uppgiften har två värdesiffror,']],
-      [['så svaret får två.']]
-    ]);
-    T.str('≈0,84 s', xIns, y);
-    T.stepEnd();
-
-    y += adv + 1.2 * F;
-    K.tk([
-      [['Drygt en svängning per sekund,']],
-      [['som för en vikt i en vanlig']],
-      [['fjäder. Rimligt!']]
-    ], 120);
-    y = K.svar('Svar: 0,84 s', y);
     T.stepEnd();
 
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL,
@@ -28075,7 +28028,6 @@
     T.str('(1)', 400, y);
     y += 2.7 * F;
     K.rotFrac('l', 'g', T.str('T_p_e_n_d_e_l=2π', padL, y), y);
-    T.str('(2)', 400, y);
     T.stepEnd();
     K.sist(y, 1.3);
 
@@ -29500,7 +29452,6 @@
     ]);
     xx = T.str('I_2=I_1·', padL, y);
     xx = T.fracH('r_1^2', 'r_2^2', xx, y);
-    T.str('(2)', Math.max(xx + 0.8 * F, 430), y);
     T.stepEnd();
     K.sist(y, 1.3);
 

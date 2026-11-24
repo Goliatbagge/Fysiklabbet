@@ -1452,6 +1452,14 @@ användaren påpekat (2026-08-25).
    Ledordet är pedagogiskt: eleven ska hela tiden kunna följa med utan
    att leta.
 
+9. **Numrera bara en ekvation som hänvisas till med sitt nummer.**
+   Ett (3) efter en rad som aldrig nämns som "(3)" är brus: eleven
+   letar efter hänvisningen och hittar ingen (användarkrav 2026-11-24,
+   `fy2-2.A` exempel 1). Sätt numret först när texten faktiskt skriver
+   "insättning i (3)", "ur (1)" eller liknande, och ta bort ett nummer
+   som blivit oanvänt när en lösning skrivs om. Gäller teori, exempel,
+   textlösningar, pennlösningar och övningarnas lösningar.
+
 9. **Håll inne med posterna när klassen kan resonera fram dem.** En tabell
    eller lista där varje post bygger på den förra (kapitalet år för år, en
    värdetabell, stegen i en metod) ska inte "slängas upp" i ett klick:

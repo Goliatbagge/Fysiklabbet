@@ -479,6 +479,9 @@
             vidAndring: function (f) { lyssnare = f; },
             vidTryck: function (f) { tryck = f; },
             stral: function (px, py) { return scen ? foljStrale(st, kamera(), tangenter(), px * 2 - 1, 1 - py * 2) : null; },
+            // Händelsehorisontens diameter, som andel av bildens höjd, utan ljusböjning:
+            // en kula med radien 1 på avståndet r. Sammanfaller med kulan vid k = 0.
+            horisont: function () { return scen ? Math.tan(Math.asin(1 / st.r)) / tangenter()[1] : 0; },
             lage: function () { return st; },
             matt: function () { return { kval: kval, snitt: snitt, w: scen && scen.w, h: scen && scen.h }; },
             lasKvalitet: function (q) { kval = KMAX = KMIN = q; smutsig = true; },

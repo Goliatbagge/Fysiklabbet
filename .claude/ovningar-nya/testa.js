@@ -59,6 +59,12 @@ const L0 = levelCount(before), L1 = levelCount(after);
 console.log(`${id}: före ${L0.join('/')}, efter ${L1.join('/')} (Grund/Mellan/Avancerad), ${nya.length} nya`);
 L1.forEach((n, i) => { if (n < 7) fel.push(`nivå ${i + 1} har bara ${n} uppgifter (minst 7)`); });
 if (after.length - nya.length !== before.length) fel.push('antalet befintliga uppgifter har ändrats');
+// Nivåflyttar av befintliga uppgifter (rättelsefilen får ändra level:) skrivs
+// ut så att granskningen syns i loggen.
+const NIV = ['', 'Grund', 'Mellan', 'Avancerad'];
+after.slice(0, before.length).forEach((u, k) => {
+    if (u.level !== before[k].level) console.log(`nivåflytt: befintlig uppgift ${k + 1} ${NIV[before[k].level]} -> ${NIV[u.level]}`);
+});
 after.slice(0, before.length).forEach((u, k) => {
     const t = [u.question, u.solution, ...(u.choices || [])].join('\n').replace(/<svg[\s\S]*?<\/svg>/g, '');
     if (/—/.test(t)) fel.push(`befintlig uppgift ${k + 1}: tankstreck (—) kvar, rätta i ${id}.rattelser.json`);

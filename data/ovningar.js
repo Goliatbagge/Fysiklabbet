@@ -27829,7 +27829,7 @@ $$
 v_p = -\\frac{0{,}015 \\cdot 600}{50} = -\\frac{9{,}0}{50} = -0{,}18\\ \\mathrm{m/s}
 $$
 
-Minustecknet betyder att skytten rör sig åt vänster, motsatt kulan. Skytten är drygt 3 000 gånger tyngre än kulan och får därför en fart som är drygt 3 000 gånger lägre, vilket är rimligt.
+Minustecknet betyder att skytten rör sig åt vänster, motsatt kulan. Skytten är drygt 3 000 gånger tyngre än kulan, och kulans fart är därför drygt 3 000 gånger så stor som skyttens. Det är rimligt.
 
 **Svar:** Skytten glider bakåt med farten 0,18 m/s.`,
         },
@@ -36902,7 +36902,7 @@ $$ E = 2\\,260 \\cdot 0{,}20 = 452\\ \\mathrm{kJ} $$
 
 **Svar:** 452 kJ.
 
-**Generell slutsats:** Att förånga vatten kräver mycket mer energi än att smälta is av samma massa (jämför med 167 kJ för 0,50 kg is). Det är därför det tar lång tid att koka bort vatten ur en kastrull — och varför vattenånga i hud-kontakt orsakar mycket allvarligare brännskador än kokande vatten.`,
+**Generell slutsats:** Att förånga vatten kräver mycket mer energi än att smälta is av samma massa (jämför med 167 kJ för 0,50 kg is). Det är därför det tar lång tid att koka bort vatten ur en kastrull och varför vattenånga i hud-kontakt orsakar mycket allvarligare brännskador än kokande vatten.`,
         },
         {
             level: 1,
@@ -36923,9 +36923,9 @@ $$ E = 2\\,260 \\cdot 0{,}20 = 452\\ \\mathrm{kJ} $$
 - **Sublimering** (fast → gas)
 - **Deposition** (gas → fast)
 
-**Svar:** Alternativ B — deposition.
+**Svar:** Alternativ B, deposition.
 
-**Generell slutsats:** Frost på fönsterrutor en kall morgon bildas genom deposition — vattenånga i luften går direkt till is utan att först bli vatten. Det omvända (sublimering) ser man när torris (fast CO₂) övergår direkt till gas vid rumstemperatur.`,
+**Generell slutsats:** Frost på fönsterrutor en kall morgon bildas genom deposition: vattenånga i luften går direkt till is utan att först bli vatten. Det omvända (sublimering) ser man när torris (fast CO₂) övergår direkt till gas vid rumstemperatur.`,
         },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
@@ -36935,11 +36935,11 @@ $$ E = 2\\,260 \\cdot 0{,}20 = 452\\ \\mathrm{kJ} $$
             answer: { value: 356, unit: 'kJ', tol: 0.02 },
             solution: `Processen sker i två steg: uppvärmning av isen från −10 °C till 0 °C, och därefter smältning vid 0 °C.
 
-**Steg 1 — uppvärmning:**
+**Steg 1, uppvärmning:**
 
 $$ E_1 = c_\\mathrm{is} \\cdot m \\cdot \\Delta T = 2{,}2 \\cdot 1{,}0 \\cdot 10 = 22\\ \\mathrm{kJ} $$
 
-**Steg 2 — smältning:**
+**Steg 2, smältning:**
 
 $$ E_2 = l_s \\cdot m = 334 \\cdot 1{,}0 = 334\\ \\mathrm{kJ} $$
 
@@ -36949,7 +36949,7 @@ $$ E = E_1 + E_2 = 22 + 334 = 356\\ \\mathrm{kJ} $$
 
 **Svar:** 356 kJ.
 
-**Generell slutsats:** Lägg märke till att smältningen kräver ca 15 gånger mer energi än uppvärmningen från −10 °C till 0 °C. Det är typiskt — fasövergångar kräver i allmänhet mycket mer energi än uppvärmning eller avsvalning över samma temperaturintervall. Det är därför is i en drink kyler så effektivt: smältningen suger åt sig stora mängder energi från drycken.`,
+**Generell slutsats:** Lägg märke till att smältningen kräver ca 15 gånger mer energi än uppvärmningen från −10 °C till 0 °C. Det är typiskt: fasövergångar kräver i allmänhet mycket mer energi än uppvärmning eller avsvalning över samma temperaturintervall. Det är därför is i en drink kyler så effektivt: smältningen suger åt sig stora mängder energi från drycken.`,
         },
         {
             level: 2,
@@ -36957,7 +36957,7 @@ $$ E = E_1 + E_2 = 22 + 334 = 356\\ \\mathrm{kJ} $$
             answer: { value: 519, unit: 'kJ', tol: 0.02 },
             solution: `Processen sker i två steg: först uppvärmning till kokpunkten 100 °C, sedan förångning vid 100 °C.
 
-**Steg 1 — uppvärmning:**
+**Steg 1, uppvärmning:**
 
 $$ E_1 = c \\cdot m \\cdot \\Delta T $$
 
@@ -36971,7 +36971,7 @@ $$
 
 $$ E_1 = 4{,}18 \\cdot 0{,}200 \\cdot 80 = 66{,}88\\ \\mathrm{kJ} $$
 
-**Steg 2 — förångning:**
+**Steg 2, förångning:**
 
 $$ E_2 = l_å \\cdot m = 2\\,260 \\cdot 0{,}200 = 452\\ \\mathrm{kJ} $$
 
@@ -36981,12 +36981,12 @@ $$ E = E_1 + E_2 = 66{,}88 + 452 \\approx 519\\ \\mathrm{kJ} $$
 
 **Svar:** Ca 519 kJ.
 
-**Generell slutsats:** Förångningen står för 87 % av den totala energin. Det är därför det går mycket fortare att värma en kastrull med vatten från 20 °C till 100 °C än att sedan koka bort vattnet — fasövergången slukar mycket mer energi än temperaturändringen.`,
+**Generell slutsats:** Förångningen står för 87 % av den totala energin. Det är därför det går mycket fortare att värma en kastrull med vatten från 20 °C till 100 °C än att sedan koka bort vattnet: fasövergången slukar mycket mer energi än temperaturändringen.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
-            level: 3,
+            level: 2,
             question: `Du häller 0,80 kg vatten med temperaturen 70 °C i en isolerad termos. Du tillsätter sedan en mängd isbitar (0 °C) tills sluttemperaturen, när all is smält, blir 25 °C. Hur många gram is behövde du? Räkna med $c_\\mathrm{vatten} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$ och $l_s = 334\\ \\mathrm{kJ/kg}$. Bortse från energiförluster till omgivningen. Ange svaret i gram.`,
             answer: { value: 343, unit: 'g', tol: 0.04 },
             solution: `Varmvattnet avger energi när det avsvalnar från 70 °C till 25 °C. Den energin upptas av isen genom **två** processer: (1) smältning av isen vid 0 °C och (2) uppvärmning av smältvattnet från 0 °C till 25 °C.
@@ -37017,7 +37017,661 @@ $$ m_\\mathrm{is} = \\frac{4{,}18 \\cdot 0{,}80 \\cdot 45}{334 + 4{,}18 \\cdot 2
 
 **Svar:** Ca 343 g.
 
-**Generell slutsats:** Den klassiska fällan här är att glömma att smältvattnet i sin tur måste värmas upp från 0 °C till sluttemperaturen 25 °C. Om man bara räknar med smältenergin får man $m_\\mathrm{is} = 150{,}48/334 \\approx 0{,}450$ kg — alltså ca 30 % för mycket is. Smältvattnets uppvärmning bidrar ca 104,5 kJ/kg, vilket inte alls är försumbart jämfört med smältentalpin 334 kJ/kg.`,
+**Generell slutsats:** Den klassiska fällan här är att glömma att smältvattnet i sin tur måste värmas upp från 0 °C till sluttemperaturen 25 °C. Om man bara räknar med smältenergin får man $m_\\mathrm{is} = 150{,}48/334 \\approx 0{,}450$ kg, alltså ca 30 % för mycket is. Smältvattnets uppvärmning bidrar ca 104,5 kJ/kg, vilket inte alls är försumbart jämfört med smältentalpin 334 kJ/kg.`,
+        },
+        {
+            level: 1,
+            question: `På ett gjuteri ska en okänd metall bestämmas. En bit med massan 0,250 kg har värmts precis till sin smältpunkt. Det krävs ytterligare 28,0 kJ för att smälta hela biten. Tabellen visar specifik smältentalpi för fyra metaller.
+
+| Metall | $l_s$ (kJ/kg) |
+|---|---|
+| Bly | 23 |
+| Tenn | 59 |
+| Zink | 112 |
+| Aluminium | 397 |
+
+Beräkna metallens specifika smältentalpi och avgör vilken av metallerna det är. Ange smältentalpin i kJ/kg.`,
+            answer: { value: 112, unit: 'kJ/kg', tol: 0.02 },
+            solution: `Metallen har redan smältpunktens temperatur, så all energi går till smältningen. Vi löser ut den specifika smältentalpin ur formeln för smältenergi.
+
+$$ E = l_s \\cdot m \\quad\\Leftrightarrow\\quad l_s = \\frac{E}{m} $$
+
+$$
+\\left[ \\begin{array}{l}
+E = 28{,}0\\ \\mathrm{kJ} \\\\
+m = 0{,}250\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$ l_s = \\frac{28{,}0}{0{,}250} = 112\\ \\mathrm{kJ/kg} $$
+
+Värdet stämmer med zink i tabellen.
+
+**Svar:** 112 kJ/kg, metallen är zink`,
+        },
+        {
+            level: 1,
+            question: `De heta stenarna i ett bastuaggregat avger 0,90 MJ till vatten som redan har temperaturen 100 °C. Hur stor massa vatten kan förångas? Räkna med $l_å = 2{,}26\\ \\mathrm{MJ/kg}$. Ange svaret i kg.`,
+            answer: { value: 0.40, unit: 'kg', tol: 0.02 },
+            solution: `Vattnet har redan kokpunktens temperatur, så all energi går till förångningen. Vi löser ut massan.
+
+$$ E = l_å \\cdot m \\quad\\Leftrightarrow\\quad m = \\frac{E}{l_å} $$
+
+$$
+\\left[ \\begin{array}{l}
+E = 0{,}90\\ \\mathrm{MJ} \\\\
+l_å = 2{,}26\\ \\mathrm{MJ/kg}
+\\end{array} \\right]
+$$
+
+$$ m = \\frac{0{,}90}{2{,}26} = 0{,}398\\ldots\\ \\mathrm{kg} \\approx 0{,}40\\ \\mathrm{kg} $$
+
+Energin och ångbildningsentalpin har samma prefix, så MJ behöver inte göras om till J.
+
+**Svar:** 0,40 kg`,
+        },
+        {
+            level: 1,
+            question: `Ett fast ämne värms tills allt har blivit gas. Diagrammet visar ämnets temperatur *T* som funktion av tiden *t*.
+
+${makeDiagram({ xMin: 0, xMax: 20, yMin: 0, yMax: 200, xTicks: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20], yTicks: [0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200], xLabel: '<tspan font-style="italic">t</tspan> (min)', yLabel: '<tspan font-style="italic">T</tspan> (°C)', paths: [{ points: [[0, 20], [2, 60], [5, 60], [10, 140], [18, 140], [19.5, 180]] }] })}
+
+Bestäm ämnets<br>a) smältpunkt&emsp;&emsp;b) kokpunkt.<br>c) I vilken fas är ämnet efter 8 minuter?`,
+            delsvar: [
+                { del: 'a', value: 60, unit: '°C', etikett: 'smältpunkt' },
+                { del: 'b', value: 140, unit: '°C', etikett: 'kokpunkt' },
+                { del: 'c' },
+            ],
+            solution: `Under en fasövergång ändras inte temperaturen. Fasövergångarna syns därför som vågräta platåer i diagrammet.
+
+**a)** Ämnet är fast från början. Den första platån hör till smältningen, och den ligger vid 60 °C.
+
+**Svar:** 60 °C
+
+**b)** Den andra platån hör till förångningen, och den ligger vid 140 °C.
+
+**Svar:** 140 °C
+
+**c)** Efter 8 minuter är smältningen avslutad, men förångningen har inte börjat.
+
+**Svar:** Flytande fas`,
+        },
+        {
+            level: 1,
+            question: `När ett ljus stöps doppas veken i smält stearin. När veken lyfts upp sätter sig ett skikt fast stearin runt den. Vilken fasövergång sker när skiktet bildas, och vad händer med energin?`,
+            choices: [
+                `Smältning, stearinet upptar energi`,
+                `Stelning, stearinet upptar energi`,
+                `Kondensation, stearinet avger energi`,
+                `Stelning, stearinet avger energi`,
+            ],
+            correct: 3,
+            solution: `Stearinet går från flytande till fast form. Den fasövergången heter **stelning**.
+
+Vid smältning tas energi upp för att bryta bindningar. Vid stelning bildas bindningarna igen, och då avges lika mycket energi till omgivningen.
+
+**Svar:** Alternativ D`,
+        },
+        {
+            level: 1,
+            question: `Tabellen visar smältpunkt och kokpunkt för fyra ämnen vid normalt lufttryck.
+
+| Ämne | Smältpunkt (°C) | Kokpunkt (°C) |
+|---|---|---|
+| Ammoniak | −78 | −33 |
+| Etanol | −114 | 78 |
+| Kvicksilver | −39 | 357 |
+| Vatten | 0 | 100 |
+
+En termometer ska innehålla en vätska och fungera från −60 °C till 60 °C. Vilket av ämnena kan användas?`,
+            choices: [
+                `Ammoniak`,
+                `Etanol`,
+                `Kvicksilver`,
+                `Vatten`,
+            ],
+            correct: 1,
+            solution: `Ämnet måste vara flytande i hela intervallet. Smältpunkten ska alltså ligga under −60 °C och kokpunkten över 60 °C.
+
+- Ammoniak blir gas redan vid −33 °C.
+- Kvicksilver är fast vid −60 °C, eftersom smältpunkten är −39 °C.
+- Vatten är fast under 0 °C.
+- Etanol är flytande från −114 °C till 78 °C, och det täcker hela intervallet.
+
+**Svar:** Alternativ B`,
+        },
+        {
+            level: 2,
+            question: `Någon glömmer en kastrull på spisen. I kastrullen finns 0,60 kg vatten som precis har börjat koka. Plattan har effekten 1,2 kW, och 75 % av energin från plattan når vattnet. Hur lång tid tar det innan kastrullen har kokat torr? Räkna med $l_å = 2{,}26\\ \\mathrm{MJ/kg}$. Ange svaret i minuter.`,
+            answer: { value: 25, unit: 'min', tol: 0.03 },
+            solution: `Vattnet har temperaturen 100 °C. Den energi som når vattnet går därför enbart till förångningen.
+
+$$ E = l_å \\cdot m $$
+
+$$ E = 2{,}26 \\cdot 10^{6} \\cdot 0{,}60 = 1\\,356\\,000\\ \\mathrm{J} $$
+
+Den effekt som når vattnet, den nyttiga effekten, är 75 % av plattans effekt.
+
+$$ P_n = 0{,}75 \\cdot 1\\,200 = 900\\ \\mathrm{W} $$
+
+Effekt är energi genom tid, och ur det sambandet löser vi ut tiden.
+
+$$ P_n = \\frac{E}{t} \\quad\\Leftrightarrow\\quad t = \\frac{E}{P_n} $$
+
+$$ t = \\frac{1\\,356\\,000}{900} = 1\\,506{,}6\\ldots\\ \\mathrm{s} $$
+
+Omräknat till minuter blir det
+
+$$ t = \\frac{1\\,356\\,000}{900 \\cdot 60} = 25{,}1\\ldots\\ \\mathrm{min} \\approx 25\\ \\mathrm{min} $$
+
+Kastrullen kokar alltså torr på knappt en halvtimme, vilket är rimligt för drygt en halv liter vatten.
+
+**Svar:** Cirka 25 minuter`,
+        },
+        {
+            level: 2,
+            question: `Ett fast ämne med massan 0,20 kg värms i en väl isolerad behållare med effekten 100 W. Diagrammet visar ämnets temperatur *T* som funktion av tiden *t*.
+
+${makeDiagram({ xMin: 0, xMax: 11, yMin: 0, yMax: 100, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], yTicks: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100], xLabel: '<tspan font-style="italic">t</tspan> (min)', yLabel: '<tspan font-style="italic">T</tspan> (°C)', paths: [{ points: [[0, 20], [2, 60], [8, 60], [10, 90]] }] })}
+
+a) Bestäm ämnets specifika smältentalpi. Ange svaret i kJ/kg.<br>b) Är ämnets specifika värmekapacitet störst i fast eller i flytande fas? Motivera ditt svar.`,
+            answer: { value: 180, unit: 'kJ/kg', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 180, unit: 'kJ/kg', tol: 0.03, etikett: '$l_s =$' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Ämnet smälter medan temperaturen är konstant, 60 °C. I diagrammet ser vi att smältningen pågår från 2 minuter till 8 minuter, alltså i 6 minuter.
+
+$$ P = \\frac{E}{t} \\quad\\Leftrightarrow\\quad E = P \\cdot t $$
+
+$$ E = 100 \\cdot 6 \\cdot 60 = 36\\,000\\ \\mathrm{J} = 36\\ \\mathrm{kJ} $$
+
+Vi löser ut smältentalpin ur formeln för smältenergi.
+
+$$ E = l_s \\cdot m \\quad\\Leftrightarrow\\quad l_s = \\frac{E}{m} $$
+
+$$ l_s = \\frac{36}{0{,}20} = 180\\ \\mathrm{kJ/kg} $$
+
+**Svar:** 180 kJ/kg
+
+**b)** Vi jämför två lika långa tider, 2 minuter. Ämnet får då lika mycket energi, $E = 100 \\cdot 2 \\cdot 60 = 12\\,000\\ \\mathrm{J}$, i båda faserna.
+
+- I fast fas stiger temperaturen från 20 °C till 60 °C, alltså 40 grader.
+- I flytande fas stiger temperaturen från 60 °C till 90 °C, alltså 30 grader.
+
+Massan är densamma. Enligt $E = c \\cdot m \\cdot \\Delta T$ hör den mindre temperaturändringen ihop med den större värmekapaciteten. Räkningen bekräftar det:
+
+$$ c_\\mathrm{fast} = \\frac{12}{0{,}20 \\cdot 40} = 1{,}5\\ \\mathrm{kJ/(kg \\cdot K)} $$
+
+$$ c_\\mathrm{flytande} = \\frac{12}{0{,}20 \\cdot 30} = 2{,}0\\ \\mathrm{kJ/(kg \\cdot K)} $$
+
+**Svar:** I flytande fas`,
+        },
+        {
+            level: 2,
+            question: `I ett storkök värms 1,5 kg soppa genom att vattenånga med temperaturen 100 °C leds ned i grytan. Ångan kondenserar i soppan. Soppan har från början temperaturen 20 °C, och temperaturen ska bli 75 °C. Hur stor massa ånga behövs? Räkna med $c_\\mathrm{soppa} = 3{,}9\\ \\mathrm{kJ/(kg \\cdot K)}$, $c_\\mathrm{vatten} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$ och $l_å = 2{,}26\\ \\mathrm{MJ/kg}$. Bortse från energiförluster. Ange svaret i kg.`,
+            answer: { value: 0.14, unit: 'kg', tol: 0.04 },
+            solution: `Ångan avger energi i två steg: först när den kondenserar vid 100 °C, sedan när det bildade vattnet svalnar till 75 °C. Soppan upptar lika mycket energi.
+
+$$ E_\\mathrm{avg} = E_\\mathrm{upp} $$
+
+$$ l_å \\cdot m_å + c_v \\cdot m_å \\cdot \\Delta T_v = c_s \\cdot m_s \\cdot \\Delta T_s $$
+
+Ångans massa söks. Den finns i båda termerna i vänsterledet, så vi bryter ut den.
+
+$$ m_å \\cdot (l_å + c_v \\cdot \\Delta T_v) = c_s \\cdot m_s \\cdot \\Delta T_s $$
+
+$$ m_å = \\frac{c_s \\cdot m_s \\cdot \\Delta T_s}{l_å + c_v \\cdot \\Delta T_v} $$
+
+$$
+\\left[ \\begin{array}{l}
+c_s = 3{,}9\\ \\mathrm{kJ/(kg \\cdot K)} \\\\
+m_s = 1{,}5\\ \\mathrm{kg} \\\\
+\\Delta T_s = 75 - 20 = 55\\ \\mathrm{K} \\\\
+l_å = 2{,}26\\ \\mathrm{MJ/kg} = 2\\,260\\ \\mathrm{kJ/kg} \\\\
+c_v = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)} \\\\
+\\Delta T_v = 100 - 75 = 25\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+$$ m_å = \\frac{3{,}9 \\cdot 1{,}5 \\cdot 55}{2\\,260 + 4{,}18 \\cdot 25} = \\frac{321{,}75}{2\\,364{,}5} = 0{,}136\\ldots\\ \\mathrm{kg} \\approx 0{,}14\\ \\mathrm{kg} $$
+
+Soppans massa ökar alltså med mindre än en tiondel. Det är rimligt, eftersom kondensationen avger mycket energi per kilogram.
+
+**Svar:** Cirka 0,14 kg`,
+        },
+        {
+            level: 2,
+            question: `En ismaskin tar bort energi från vatten med effekten 150 W. Den fylls med 1,5 kg vatten som har temperaturen 18 °C. Hur lång tid tar det innan allt har blivit is med temperaturen −6 °C? Räkna med $c_\\mathrm{vatten} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$, $c_\\mathrm{is} = 2{,}2\\ \\mathrm{kJ/(kg \\cdot K)}$ och $l_s = 334\\ \\mathrm{kJ/kg}$. Ange svaret i minuter.`,
+            answer: { value: 70, unit: 'min', tol: 0.02 },
+            solution: `Vattnet avger energi i tre steg.
+
+Vattnet svalnar från 18 °C till 0 °C:
+
+$$ E_1 = c_\\mathrm{vatten} \\cdot m \\cdot \\Delta T_1 = 4{,}18 \\cdot 1{,}5 \\cdot 18 = 112{,}86\\ \\mathrm{kJ} $$
+
+Vattnet stelnar vid 0 °C. Vid stelning avges lika mycket energi som tas upp vid smältning:
+
+$$ E_2 = l_s \\cdot m = 334 \\cdot 1{,}5 = 501\\ \\mathrm{kJ} $$
+
+Isen svalnar från 0 °C till −6 °C:
+
+$$ E_3 = c_\\mathrm{is} \\cdot m \\cdot \\Delta T_3 = 2{,}2 \\cdot 1{,}5 \\cdot 6 = 19{,}8\\ \\mathrm{kJ} $$
+
+Den energi som maskinen ska ta bort är summan av de tre energierna.
+
+$$ E = 112{,}86 + 501 + 19{,}8 = 633{,}66\\ \\mathrm{kJ} = 633\\,660\\ \\mathrm{J} $$
+
+Tiden får vi ur effekten.
+
+$$ P = \\frac{E}{t} \\quad\\Leftrightarrow\\quad t = \\frac{E}{P} $$
+
+$$ t = \\frac{633\\,660}{150} = 4\\,224{,}4\\ \\mathrm{s} $$
+
+$$ t = \\frac{4\\,224{,}4}{60} = 70{,}4\\ldots\\ \\mathrm{min} \\approx 70\\ \\mathrm{min} $$
+
+Stelningen tar den största delen av tiden, ungefär 56 minuter.
+
+**Svar:** Cirka 70 minuter`,
+        },
+        {
+            level: 2,
+            question: `En vårnatt väntas frost i en äppelodling. Odlaren sprejar då vatten över de blommande träden. Vattnet fryser till is på blommorna, och så länge odlaren fortsätter att spreja skadas blommorna mindre än om de hade varit torra.<br>a) Förklara med hjälp av fasövergången varför metoden fungerar.<br>b) Hur mycket energi avges när 3,0 kg vatten med temperaturen 5,0 °C kyls och blir is med temperaturen 0 °C? Räkna med $c_\\mathrm{vatten} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$ och $l_s = 334\\ \\mathrm{kJ/kg}$. Ange svaret i MJ.`,
+            answer: { value: 1.1, unit: 'MJ', tol: 0.04 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 1.1, unit: 'MJ', tol: 0.04, etikett: 'avgiven energi' },
+            ],
+            solution: `**a)** När vatten stelnar avger det energi, lika mycket som isen skulle ta upp om den smälte. En del av energin går till blommorna och ersätter den energi som de avger till den kalla natten.
+
+Temperaturen ändras inte under fasövergången. Så länge det finns vatten kvar som håller på att frysa ligger temperaturen vid blomman nära 0 °C, även om luften är kallare. Odlaren måste därför hela tiden fylla på med nytt vatten. När allt har frusit kan isen kylas under 0 °C, och då blir blomman också kallare.
+
+**Svar:** När vattnet stelnar avges energi vid konstant temperatur, vilket håller blomman kring 0 °C
+
+**b)** Energin avges i två steg, först när vattnet svalnar till 0 °C och sedan när det stelnar.
+
+$$ E = c \\cdot m \\cdot \\Delta T + l_s \\cdot m $$
+
+$$
+\\left[ \\begin{array}{l}
+c = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)} \\\\
+m = 3{,}0\\ \\mathrm{kg} \\\\
+\\Delta T = 5{,}0 - 0 = 5{,}0\\ \\mathrm{K} \\\\
+l_s = 334\\ \\mathrm{kJ/kg}
+\\end{array} \\right]
+$$
+
+$$ E = 4{,}18 \\cdot 3{,}0 \\cdot 5{,}0 + 334 \\cdot 3{,}0 = 62{,}7 + 1\\,002 = 1\\,064{,}7\\ \\mathrm{kJ} \\approx 1{,}1\\ \\mathrm{MJ} $$
+
+Nästan all energi kommer från stelningen, inte från att vattnet svalnar.
+
+**Svar:** Cirka 1,1 MJ`,
+        },
+        {
+            level: 2,
+            question: `Diagrammet visar hur temperaturen *T* ändras när ett fast ämne värms med en viss effekt. Försöket görs sedan om med dubbelt så stor massa av samma ämne, med samma starttemperatur och samma effekt.
+
+${makeDiagram({ xMin: 0, xMax: 10, yMin: 0, yMax: 60, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], yTicks: [0, 10, 20, 30, 40, 50, 60], xLabel: '<tspan font-style="italic">t</tspan> (min)', yLabel: '<tspan font-style="italic">T</tspan> (°C)', paths: [{ points: [[0, 10], [2, 30], [6, 30], [8.5, 50]] }] })}
+
+Vid vilken temperatur ligger den vågräta delen i det nya försöket, och hur länge varar den?`,
+            choices: [
+                `30 °C, i 8 minuter`,
+                `60 °C, i 4 minuter`,
+                `30 °C, i 4 minuter`,
+                `60 °C, i 8 minuter`,
+            ],
+            correct: 0,
+            solution: `Den vågräta delen visar smältningen. Smältpunkten är en egenskap hos ämnet och beror inte på massan, så temperaturen är fortfarande 30 °C.
+
+I det första försöket varar smältningen från 2 minuter till 6 minuter, alltså i 4 minuter. Smältenergin är $E = l_s \\cdot m$, och med dubbelt så stor massa blir den dubbelt så stor. Effekten är densamma, och enligt $t = \\dfrac{E}{P}$ blir då även tiden dubbelt så lång:
+
+$$ 2 \\cdot 4 = 8\\ \\mathrm{min} $$
+
+**Svar:** Alternativ A`,
+        },
+        {
+            level: 3,
+            question: `På en polarstation vill en forskare göra blötsnö. I en isolerad låda ligger 2,0 kg snö (is) med temperaturen −30 °C. Forskaren häller på 0,30 kg vatten med temperaturen 10 °C och väntar tills temperaturen är densamma överallt i lådan. Bestäm sluttemperaturen, och avgör om det finns något flytande vatten kvar. Räkna med $c_\\mathrm{vatten} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$, $c_\\mathrm{is} = 2{,}2\\ \\mathrm{kJ/(kg \\cdot K)}$ och $l_s = 334\\ \\mathrm{kJ/kg}$. Ange sluttemperaturen i °C.`,
+            answer: { value: -3.8, unit: '°C', tol: 0.03 },
+            solution: `Vi vet inte på förhand om snön smälter, om vattnet fryser eller om det blir en blandning vid 0 °C. Därför börjar vi med att jämföra energierna om allt får temperaturen 0 °C.
+
+Energi som snön tar upp när den värms till 0 °C:
+
+$$ E_\\mathrm{snö} = c_\\mathrm{is} \\cdot m_\\mathrm{is} \\cdot \\Delta T_\\mathrm{is} = 2{,}2 \\cdot 2{,}0 \\cdot 30 = 132\\ \\mathrm{kJ} $$
+
+Energi som vattnet avger när det svalnar till 0 °C:
+
+$$ E_1 = c_\\mathrm{vatten} \\cdot m_v \\cdot \\Delta T_v = 4{,}18 \\cdot 0{,}30 \\cdot 10 = 12{,}54\\ \\mathrm{kJ} $$
+
+Energi som vattnet avger om allt stelnar:
+
+$$ E_2 = l_s \\cdot m_v = 334 \\cdot 0{,}30 = 100{,}2\\ \\mathrm{kJ} $$
+
+Vattnet avger sammanlagt
+
+$$ E_1 + E_2 = 12{,}54 + 100{,}2 = 112{,}74\\ \\mathrm{kJ} $$
+
+när det svalnar och fryser helt. Det är mindre än de 132 kJ som krävs för att värma snön till 0 °C. Allt vatten fryser alltså, och sluttemperaturen *T* är lägre än 0 °C.
+
+Snön värms från −30 °C till *T*. Vattnet svalnar till 0 °C, stelnar och svalnar sedan som is från 0 °C till *T*. Avgiven energi är lika med upptagen energi.
+
+$$ E_\\mathrm{avg} = E_\\mathrm{upp} $$
+
+$$ E_1 + E_2 + c_\\mathrm{is} \\cdot m_v \\cdot (0 - T) = c_\\mathrm{is} \\cdot m_\\mathrm{is} \\cdot (T - (-30)) $$
+
+$$ 112{,}74 + 2{,}2 \\cdot 0{,}30 \\cdot (0 - T) = 2{,}2 \\cdot 2{,}0 \\cdot (T - (-30)) $$
+
+$$ 112{,}74 - 0{,}66T = 4{,}4T + 132 $$
+
+Vi adderar $0{,}66T$ och subtraherar 132 i båda led.
+
+$$ 112{,}74 - 132 = 4{,}4T + 0{,}66T $$
+
+$$ -19{,}26 = 5{,}06T $$
+
+$$ T = \\frac{-19{,}26}{5{,}06} = -3{,}80\\ldots\\ ^\\circ\\mathrm{C} \\approx -3{,}8\\ ^\\circ\\mathrm{C} $$
+
+Temperaturen ligger mellan −30 °C och 0 °C, som den ska när allt har blivit is. Forskaren får alltså ingen blötsnö.
+
+**Svar:** Sluttemperaturen är −3,8 °C, och det finns inget flytande vatten kvar`,
+        },
+        {
+            level: 3,
+            question: `En elevgrupp bestämmer vattnets ångbildningsentalpi. Vatten får koka i en bägare som står på en våg, och vattnet värms med en doppvärmare. Gruppen mäter hur mycket massan minskar under 10 minuters kokning vid två olika effekter. Under tiden förlorar bägaren energi till omgivningen med en okänd effekt, $P_f$.
+
+| Doppvärmarens effekt | Massminskning på 10 minuter |
+|---|---|
+| 500 W | 117 g |
+| 300 W | 64 g |
+
+a) Varför är det rimligt att anta att $P_f$ är lika stor i båda försöken?<br>b) Bestäm ett värde på $l_å$ som inte påverkas av förlusterna. Ange svaret i MJ/kg.<br>c) Bestäm $P_f$. Ange svaret i watt.`,
+            answer: { value: 2.3, unit: 'MJ/kg', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 2.3, unit: 'MJ/kg', tol: 0.03, etikett: '$l_å =$' },
+                { del: 'c', value: 58, unit: 'W', tol: 0.05, etikett: '$P_f =$' },
+            ],
+            solution: `**a)** Förlusterna beror på temperaturskillnaden mellan bägaren och omgivningen. Vattnet kokar i båda försöken, så temperaturen är 100 °C oavsett effekten. Rummet och bägaren är också desamma.
+
+**Svar:** Temperaturen är 100 °C i båda försöken, så temperaturskillnaden mot omgivningen är densamma
+
+**b)** Den energi som doppvärmaren ger under tiden *t* går dels till förångningen, dels till omgivningen. För de två försöken gäller
+
+$$ \\begin{cases} P_1 \\cdot t = l_å \\cdot m_1 + P_f \\cdot t & (1) \\\\ P_2 \\cdot t = l_å \\cdot m_2 + P_f \\cdot t & (2) \\end{cases} $$
+
+Vi subtraherar ekvation (2) från ekvation (1). Då försvinner den okända förlusten $P_f \\cdot t$.
+
+$$ P_1 \\cdot t - P_2 \\cdot t = l_å \\cdot m_1 - l_å \\cdot m_2 $$
+
+$$ (P_1 - P_2) \\cdot t = l_å \\cdot (m_1 - m_2) $$
+
+$$ l_å = \\frac{(P_1 - P_2) \\cdot t}{m_1 - m_2} $$
+
+$$
+\\left[ \\begin{array}{l}
+P_1 - P_2 = 500 - 300 = 200\\ \\mathrm{W} \\\\
+t = 10 \\cdot 60 = 600\\ \\mathrm{s} \\\\
+m_1 - m_2 = 0{,}117 - 0{,}064 = 0{,}053\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$ l_å = \\frac{200 \\cdot 600}{0{,}053} = 2{,}264\\ldots \\cdot 10^{6}\\ \\mathrm{J/kg} \\approx 2{,}3\\ \\mathrm{MJ/kg} $$
+
+Det stämmer bra med tabellvärdet 2,26 MJ/kg. Hade gruppen bara använt det första försöket och glömt förlusterna hade värdet blivit för stort, ungefär 2,56 MJ/kg.
+
+**Svar:** 2,3 MJ/kg
+
+**c)** Vi löser ut $P_f$ ur ekvation (1), $P_1 \\cdot t = l_å \\cdot m_1 + P_f \\cdot t$.
+
+$$ P_f = P_1 - \\frac{l_å \\cdot m_1}{t} $$
+
+Det oavrundade värdet på ångbildningsentalpin, $l_å = \\dfrac{200 \\cdot 600}{0{,}053}$, sätts in. Tiden 600 s förkortas då bort.
+
+$$ P_f = 500 - \\frac{200 \\cdot 0{,}117}{0{,}053} = 500 - 441{,}5\\ldots = 58{,}4\\ldots\\ \\mathrm{W} \\approx 58\\ \\mathrm{W} $$
+
+Det är rimligt att ungefär en tiondel av 500 W går förlorad från en oisolerad bägare.
+
+**Svar:** Cirka 58 W`,
+        },
+        {
+            level: 3,
+            question: `En kälke med en åkare startar från vila överst i en backe. Backen kan betraktas som friktionsfri. Nedanför backen fortsätter kälken ut på en vågrät isbana som har temperaturen 0 °C. Där bromsas den av friktionen tills den står stilla. Anta att all energi som friktionen omvandlar går till att smälta is.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 205" width="664" height="296" style="max-width:100%;height:auto;display:block;margin:16px auto;font-family:Poppins,sans-serif"><path d="M14 50 L70 50 C140 50 165 150 255 150 L255 196 L14 196 Z" fill="#e6eef4"/><rect x="255" y="150" width="191" height="46" fill="#cfe0ec"/><path d="M14 50 L70 50 C140 50 165 150 255 150" fill="none" stroke="#0f1620" stroke-width="2"/><line x1="255" y1="150" x2="446" y2="150" stroke="#2a5a78" stroke-width="2.4"/><line x1="76" y1="50" x2="322" y2="50" stroke="#8a8579" stroke-width="1.2" stroke-dasharray="5 4"/><line x1="312" y1="59" x2="312" y2="140" stroke="#0f1620" stroke-width="1.5"/><polygon points="307.5,60 312,51 316.5,60" fill="#0f1620"/><polygon points="307.5,139 312,148 316.5,139" fill="#0f1620"/><text x="322" y="105" font-size="15" font-style="italic" fill="#0f1620">h</text><text x="30" y="180" font-size="12.5" fill="#0f1620">Friktionsfri backe</text><text x="350" y="178" text-anchor="middle" font-size="12.5" fill="#0f1620">Isbana</text><g><path d="M22 48.4 L60 48.4 Q69 48.4 68.5 40" fill="none" stroke="#0f1620" stroke-width="2" stroke-linecap="round"/><line x1="29" y1="48" x2="29" y2="40" stroke="#0f1620" stroke-width="2"/><line x1="54" y1="48" x2="54" y2="40" stroke="#0f1620" stroke-width="2"/><rect x="21" y="36" width="43" height="4.4" rx="1.6" fill="#b07a45" stroke="#0f1620" stroke-width="1"/><path d="M30 36 C27 28 28 20 32 15 C36 12 42 14 43 19 L43 27 L54 26 C57 26 58 28 59 30 L65 33 L64 36 Z" fill="#2a5a78" stroke="#0f1620" stroke-width="1" stroke-linejoin="round"/><path d="M36 19 L51 26" stroke="#1d4259" stroke-width="4" stroke-linecap="round"/><circle cx="52.6" cy="26.6" r="2.4" fill="#c8324a" stroke="#0f1620" stroke-width="0.7"/><circle cx="38" cy="8.8" r="5.6" fill="#e0b48c" stroke="#0f1620" stroke-width="1"/><path d="M32.2 8.4 A6 6 0 0 1 43.8 7.4 L32.2 8.4 Z" fill="#c8324a" stroke="#0f1620" stroke-width="0.9"/></g></svg>
+
+Två elever diskuterar hur mycket is som smälter.
+
+- Alma: ”Om isen görs skrovligare blir friktionen större, och då smälter mer is.”
+- Bilal: ”Om både den sammanlagda massan och backens höjd blir dubbelt så stora smälter fyra gånger så mycket is.”
+
+a) Vem har rätt? Motivera med ett generellt samband för massan is som smälter.<br>b) Beräkna massan is som smälter om kälkens och åkarens sammanlagda massa är 95 kg och backens höjd är $h = 18\\ \\mathrm{m}$. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ och $l_s = 334\\ \\mathrm{kJ/kg}$. Ange svaret i gram, och avgör om det verkliga värdet bör vara större eller mindre.`,
+            answer: { value: 50, unit: 'g', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 50, unit: 'g', tol: 0.03, etikett: 'smält is' },
+            ],
+            solution: `**a)** Vi kallar kälkens och åkarens sammanlagda massa *m*, backens höjd *h* och massan is som smälter $m_\\mathrm{is}$. Överst i backen har kälken och åkaren lägesenergin $E_p = m \\cdot g \\cdot h$ och ingen rörelseenergi. Backen är friktionsfri, så all lägesenergi har omvandlats till rörelseenergi nedanför backen. På isbanan uträttar friktionskraften ett arbete som tar bort hela rörelseenergin. Den omvandlade energin är alltså
+
+$$ E = m \\cdot g \\cdot h $$
+
+Isen har redan temperaturen 0 °C. Ingen energi behövs för uppvärmning, utan allt går till smältningen.
+
+$$ E = l_s \\cdot m_\\mathrm{is} $$
+
+Vi sätter de två uttrycken för energin lika med varandra och dividerar båda led med $l_s$.
+
+$$ l_s \\cdot m_\\mathrm{is} = m \\cdot g \\cdot h $$
+
+$$ m_\\mathrm{is} = \\frac{m \\cdot g \\cdot h}{l_s} $$
+
+Varken friktionskraften eller bromssträckan finns med i sambandet. Med större friktionskraft blir bromssträckan kortare, men arbetet (kraft gånger sträcka) är oförändrat, eftersom samma rörelseenergi ska bort. Alma har fel.
+
+Med massan $2m$ och höjden $2h$ blir massan smält is
+
+$$ \\frac{2m \\cdot g \\cdot 2h}{l_s} = 4 \\cdot \\frac{m \\cdot g \\cdot h}{l_s} = 4 \\cdot m_\\mathrm{is} $$
+
+**Svar:** Bilal har rätt, eftersom $m_\\mathrm{is} = \\dfrac{m \\cdot g \\cdot h}{l_s}$
+
+**b)** Vi använder sambandet från a), $m_\\mathrm{is} = \\dfrac{m \\cdot g \\cdot h}{l_s}$.
+
+$$
+\\left[ \\begin{array}{l}
+m = 95\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+h = 18\\ \\mathrm{m} \\\\
+l_s = 334\\ \\mathrm{kJ/kg} = 334\\,000\\ \\mathrm{J/kg}
+\\end{array} \\right]
+$$
+
+$$ m_\\mathrm{is} = \\frac{95 \\cdot 9{,}82 \\cdot 18}{334\\,000} = 0{,}0502\\ldots\\ \\mathrm{kg} \\approx 50\\ \\mathrm{g} $$
+
+I verkligheten tar även medarna upp en del av energin, och luftmotståndet omvandlar en del av energin redan på vägen. Då återstår mindre energi till smältningen. Värdet 50 g är alltså en övre gräns.
+
+**Svar:** Cirka 50 g, och det verkliga värdet bör vara mindre`,
+        },
+        {
+            level: 3,
+            question: `I en isolerad behållare finns en blandning av vatten och is med temperaturen 0 °C. Blandningen värms med en konstant effekt och rörs om hela tiden. Diagrammet visar temperaturen *T* som funktion av tiden *t*. Varken effekten eller blandningens massa är känd.
+
+${makeDiagram({ xMin: 0, xMax: 14, yMin: 0, yMax: 50, xTicks: [0, 2, 4, 6, 8, 10, 12, 14], yTicks: [0, 10, 20, 30, 40, 50], xLabel: '<tspan font-style="italic">t</tspan> (min)', yLabel: '<tspan font-style="italic">T</tspan> (°C)', paths: [{ points: [[0, 0], [6, 0], [14, 40]], width: 3 }] })}
+
+Hur stor andel av blandningens massa var is från början? Räkna med $c_\\mathrm{vatten} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$ och $l_s = 334\\ \\mathrm{kJ/kg}$. Ange svaret i procent.`,
+            answer: { value: 38, unit: '%', tol: 0.03 },
+            solution: `Vi kallar den okända effekten *P*, blandningens hela massa *m* och isens massa $m_\\mathrm{is}$.
+
+**Smältningen.** Temperaturen är 0 °C under de första 6 minuterna, alltså under tiden $t_1 = 6\\ \\mathrm{min}$. All energi går då till att smälta isen.
+
+$$ P \\cdot t_1 = l_s \\cdot m_\\mathrm{is} \\qquad (1) $$
+
+**Uppvärmningen.** Därefter är allt flytande. Hela massan *m*, inte bara den smälta isen, värms från 0 °C till 40 °C under tiden $t_2 = 14 - 6 = 8\\ \\mathrm{min}$.
+
+$$ P \\cdot t_2 = c \\cdot m \\cdot \\Delta T \\qquad (2) $$
+
+Vi dividerar ekvation (1) med ekvation (2). Då förkortas den okända effekten bort.
+
+$$ \\frac{t_1}{t_2} = \\frac{l_s \\cdot m_\\mathrm{is}}{c \\cdot m \\cdot \\Delta T} $$
+
+Den sökta andelen är $\\dfrac{m_\\mathrm{is}}{m}$, som vi löser ut.
+
+$$ \\frac{m_\\mathrm{is}}{m} = \\frac{c \\cdot \\Delta T \\cdot t_1}{l_s \\cdot t_2} $$
+
+Båda tiderna har samma enhet, så kvoten mellan dem kan räknas i minuter.
+
+$$ \\frac{m_\\mathrm{is}}{m} = \\frac{4{,}18 \\cdot 40 \\cdot 6}{334 \\cdot 8} = 0{,}375\\ldots \\approx 0{,}38 $$
+
+Andelen ligger mellan 0 och 1, vilket den måste göra.
+
+**Svar:** Cirka 38 %`,
+        },
+        {
+            level: 3,
+            question: `Vatten med temperaturen *T* (i °C) blandas i en isolerad behållare med lika stor massa is. Isen har temperaturen 0 °C. Beteckna vattnets specifika värmekapacitet med *c* och isens specifika smältentalpi med $l_s$.<br>a) Visa att all is smälter bara om $T \\geq \\dfrac{l_s}{c}$, och beräkna den gränsen. Räkna med $c = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$ och $l_s = 334\\ \\mathrm{kJ/kg}$. Ange svaret i °C.<br>b) Härled ett uttryck för blandningens sluttemperatur när all is smälter.<br>c) Vilken blir sluttemperaturen om vattnets temperatur är 30 °C? Motivera ditt svar.`,
+            answer: { value: 79.9, unit: '°C', tol: 0.01 },
+            delsvar: [
+                { del: 'a', value: 79.9, unit: '°C', tol: 0.01, etikett: 'gränsen för $T$' },
+                { del: 'b' },
+                { del: 'c', value: 0, unit: '°C', etikett: 'sluttemperatur' },
+            ],
+            solution: `Vi kallar vattnets massa *m*. Isen har samma massa, *m*.
+
+**a)** Så länge det finns is kvar är blandningens temperatur 0 °C. Den största energi som vattnet kan avge medan isen smälter är därför
+
+$$ E_\\mathrm{avg} = c \\cdot m \\cdot (T - 0) = c \\cdot m \\cdot T $$
+
+För att smälta all is krävs energin
+
+$$ E_\\mathrm{upp} = l_s \\cdot m $$
+
+All is smälter om den avgivna energin räcker, alltså om
+
+$$ c \\cdot m \\cdot T \\geq l_s \\cdot m $$
+
+Både *c* och *m* är positiva, så vi kan dividera båda led med $c \\cdot m$.
+
+$$ T \\geq \\frac{l_s}{c} $$
+
+Det skulle visas. Gränsen beror alltså inte på hur stora massorna är, bara på att de är lika.
+
+$$ \\frac{l_s}{c} = \\frac{334}{4{,}18} = 79{,}90\\ldots\\ ^\\circ\\mathrm{C} \\approx 79{,}9\\ ^\\circ\\mathrm{C} $$
+
+**Svar:** 79,9 °C
+
+**b)** Kalla sluttemperaturen $T_s$. Vattnet svalnar från *T* till $T_s$. Isen smälter, och sedan värms smältvattnet från 0 °C till $T_s$.
+
+$$ E_\\mathrm{avg} = E_\\mathrm{upp} $$
+
+$$ c \\cdot m \\cdot (T - T_s) = l_s \\cdot m + c \\cdot m \\cdot T_s $$
+
+Vi dividerar båda led med *m* och multiplicerar in *c* i parentesen.
+
+$$ c \\cdot T - c \\cdot T_s = l_s + c \\cdot T_s $$
+
+Vi adderar $c \\cdot T_s$ och subtraherar $l_s$ i båda led.
+
+$$ c \\cdot T - l_s = 2 \\cdot c \\cdot T_s $$
+
+$$ T_s = \\frac{c \\cdot T - l_s}{2 \\cdot c} $$
+
+Vid gränsen $T = \\dfrac{l_s}{c}$ blir täljaren 0, och uttrycket ger $T_s = 0\\ ^\\circ\\mathrm{C}$. Det stämmer med att den sista isen då precis har smält.
+
+**Svar:** $T_s = \\dfrac{c \\cdot T - l_s}{2 \\cdot c}$
+
+**c)** Temperaturen 30 °C är lägre än gränsen 79,9 °C i a). All is kan alltså inte smälta. Uttrycket i b) gäller inte, eftersom det förutsätter att all is smälter. Det skulle dessutom ge en negativ temperatur, vilket är omöjligt när ingen av delarna är kallare än 0 °C från början.
+
+Vattnet svalnar till 0 °C och en del av isen smälter. Sedan är både vattnet och den is som är kvar 0 °C.
+
+**Svar:** 0 °C`,
+        },
+        {
+            level: 3,
+            question: `En bägare med vatten som har temperaturen 0 °C ställs under en glasklocka. En vakuumpump suger bort luften och den vattenånga som bildas. En del av vattnet förångas då mycket snabbt, trots att inget värmer det, och resten av vattnet fryser till is med temperaturen 0 °C. Till slut finns inget flytande vatten kvar. Bortse från energiutbyte med bägaren och rummet. Vid 0 °C är $l_å = 2{,}50\\ \\mathrm{MJ/kg}$ och $l_s = 334\\ \\mathrm{kJ/kg}$.<br>a) Hur stor andel av vattnets massa blir is? Ange svaret i procent.<br>b) Blir andelen is större eller mindre om vattnet har temperaturen 20 °C från början? Motivera ditt svar utan att räkna.`,
+            answer: { value: 88.2, unit: '%', tol: 0.01 },
+            delsvar: [
+                { del: 'a', value: 88.2, unit: '%', tol: 0.01, etikett: 'andel is' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Förångningen kräver energi, men ingen energi tillförs utifrån. Energin måste tas från det vatten som är kvar. Det vattnet har redan temperaturen 0 °C och avger energin genom att stelna.
+
+Vi kallar vattnets hela massa *m* och massan is som bildas $m_\\mathrm{is}$. Allt som inte fryser har förångats, så ångans massa är $m - m_\\mathrm{is}$.
+
+Energin som avges vid stelningen är lika med energin som upptas vid förångningen.
+
+$$ E_\\mathrm{avg} = E_\\mathrm{upp} $$
+
+$$ l_s \\cdot m_\\mathrm{is} = l_å \\cdot (m - m_\\mathrm{is}) $$
+
+Vi multiplicerar in $l_å$ i parentesen och adderar sedan $l_å \\cdot m_\\mathrm{is}$ i båda led.
+
+$$ l_s \\cdot m_\\mathrm{is} = l_å \\cdot m - l_å \\cdot m_\\mathrm{is} $$
+
+$$ l_s \\cdot m_\\mathrm{is} + l_å \\cdot m_\\mathrm{is} = l_å \\cdot m $$
+
+$$ m_\\mathrm{is} \\cdot (l_s + l_å) = l_å \\cdot m $$
+
+Vi dividerar båda led med *m* och med $l_s + l_å$.
+
+$$ \\frac{m_\\mathrm{is}}{m} = \\frac{l_å}{l_s + l_å} $$
+
+Massan finns inte med i högerledet, så andelen är densamma hur mycket vatten som än finns i bägaren.
+
+$$ \\frac{m_\\mathrm{is}}{m} = \\frac{2{,}50}{0{,}334 + 2{,}50} = \\frac{2{,}50}{2{,}834} = 0{,}8821\\ldots \\approx 0{,}882 $$
+
+Det är rimligt att det mesta blir is. Att förånga ett kilogram kräver mer än sju gånger så mycket energi som stelningen av ett kilogram avger, så det räcker att en liten del förångas.
+
+**Svar:** Cirka 88,2 %
+
+**b)** Om vattnet har temperaturen 20 °C måste det först kylas till 0 °C. Den energi som vattnet avger när det svalnar tas också upp genom förångning. Alltså förångas en del av vattnet redan innan temperaturen är 0 °C. Av det vatten som då är kvar fryser samma andel som i a). Sammanlagt blir andelen is mindre.
+
+**Svar:** Mindre`,
+        },
+        {
+            level: 3,
+            question: `En kopparcylinder med höjden 4,0 cm värms till 95 °C och ställs på ett stort isblock med temperaturen 0 °C. Cylindern smälter isen under sig och sjunker rakt ned i blocket. Hålet blir precis lika brett som cylindern. Anta att smältvattnet hela tiden har temperaturen 0 °C. Figuren visar cylindern när den just har ställts på isen.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="14 10 374 200" width="560" height="299" style="max-width:100%;height:auto;display:block;margin:16px auto;font-family:Poppins,sans-serif"><defs><linearGradient id="fy163cu" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#8f4a24"/><stop offset="0.3" stop-color="#d98d5c"/><stop offset="0.65" stop-color="#b96a3a"/><stop offset="1" stop-color="#7c3d1c"/></linearGradient><linearGradient id="fy163is" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#d9ebf5"/><stop offset="1" stop-color="#bcd8e8"/></linearGradient></defs><rect x="30" y="102" width="316" height="100" fill="url(#fy163is)" stroke="#4f7f9c" stroke-width="1.5"/><path d="M30 102 L62 72 L378 72 L346 102 Z" fill="#eaf4fa" stroke="#4f7f9c" stroke-width="1.5" stroke-linejoin="round"/><path d="M346 102 L378 72 L378 172 L346 202 Z" fill="#a5c8dc" stroke="#4f7f9c" stroke-width="1.5" stroke-linejoin="round"/><path d="M150 28 L150 86 A40 7 0 0 0 230 86 L230 28 Z" fill="url(#fy163cu)" stroke="#5a2c14" stroke-width="1.2"/><ellipse cx="190" cy="28" rx="40" ry="7" fill="#e3a577" stroke="#5a2c14" stroke-width="1.2"/><line x1="234" y1="28" x2="266" y2="28" stroke="#6b665c" stroke-width="1" stroke-dasharray="4 3"/><line x1="234" y1="86" x2="266" y2="86" stroke="#6b665c" stroke-width="1" stroke-dasharray="4 3"/><line x1="258" y1="37" x2="258" y2="77" stroke="#0f1620" stroke-width="1.4"/><polygon points="254,37 258,29 262,37" fill="#0f1620"/><polygon points="254,77 258,85 262,77" fill="#0f1620"/><text x="268" y="60" font-size="13" fill="#0f1620">4,0 cm</text><text x="140" y="52" text-anchor="end" font-size="13" fill="#0f1620">Koppar, 95 °C</text><text x="188" y="158" text-anchor="middle" font-size="13" fill="#0f1620">Is, 0 °C</text></svg>
+
+Undersök om cylindern sjunker så djupt att hela cylindern kommer under isens överyta, och diskutera om det också gäller i verkligheten. Räkna med densiteterna $8{,}96 \\cdot 10^{3}\\ \\mathrm{kg/m^3}$ för koppar och $0{,}917 \\cdot 10^{3}\\ \\mathrm{kg/m^3}$ för is, $c_\\mathrm{koppar} = 0{,}39\\ \\mathrm{kJ/(kg \\cdot K)}$ och $l_s = 334\\ \\mathrm{kJ/kg}$. Ange hålets djup enligt modellen i cm.`,
+            answer: { value: 4.3, unit: 'cm', tol: 0.03 },
+            solution: `Cylinderns bredd är inte given. Vi kallar därför cylinderns bottenarea *A*, dess höjd *h* och hålets djup *d*. Hålet är lika brett som cylindern, så volymen smält is är $A \\cdot d$.
+
+Massorna skrivs som densitet gånger volym.
+
+$$ m_\\mathrm{koppar} = \\rho_\\mathrm{koppar} \\cdot A \\cdot h \\qquad (1) $$
+
+$$ m_\\mathrm{is} = \\rho_\\mathrm{is} \\cdot A \\cdot d \\qquad (2) $$
+
+Cylindern svalnar till isens temperatur, 0 °C. Isen har redan temperaturen 0 °C, så den energi som cylindern avger går enligt modellen enbart till smältningen.
+
+$$ E_\\mathrm{upp} = E_\\mathrm{avg} $$
+
+$$ l_s \\cdot m_\\mathrm{is} = c_\\mathrm{koppar} \\cdot m_\\mathrm{koppar} \\cdot \\Delta T $$
+
+Vi sätter in massorna från (1), $m_\\mathrm{koppar} = \\rho_\\mathrm{koppar} \\cdot A \\cdot h$, och (2), $m_\\mathrm{is} = \\rho_\\mathrm{is} \\cdot A \\cdot d$.
+
+$$ l_s \\cdot \\rho_\\mathrm{is} \\cdot A \\cdot d = c_\\mathrm{koppar} \\cdot \\rho_\\mathrm{koppar} \\cdot A \\cdot h \\cdot \\Delta T $$
+
+Arean *A* är en faktor i båda led och förkortas bort. Djupet beror alltså inte på hur bred cylindern är. Sedan dividerar vi båda led med $l_s \\cdot \\rho_\\mathrm{is}$.
+
+$$ d = \\frac{c_\\mathrm{koppar} \\cdot \\rho_\\mathrm{koppar} \\cdot h \\cdot \\Delta T}{l_s \\cdot \\rho_\\mathrm{is}} $$
+
+$$
+\\left[ \\begin{array}{l}
+c_\\mathrm{koppar} = 0{,}39\\ \\mathrm{kJ/(kg \\cdot K)} \\\\
+\\rho_\\mathrm{koppar} = 8{,}96 \\cdot 10^{3}\\ \\mathrm{kg/m^3} \\\\
+h = 4{,}0\\ \\mathrm{cm} = 0{,}040\\ \\mathrm{m} \\\\
+\\Delta T = 95 - 0 = 95\\ \\mathrm{K} \\\\
+l_s = 334\\ \\mathrm{kJ/kg} \\\\
+\\rho_\\mathrm{is} = 0{,}917 \\cdot 10^{3}\\ \\mathrm{kg/m^3}
+\\end{array} \\right]
+$$
+
+$$ d = \\frac{0{,}39 \\cdot 8{,}96 \\cdot 10^{3} \\cdot 0{,}040 \\cdot 95}{334 \\cdot 0{,}917 \\cdot 10^{3}} = 0{,}0433\\ldots\\ \\mathrm{m} \\approx 4{,}3\\ \\mathrm{cm} $$
+
+Enligt modellen är hålet djupare än cylinderns höjd, 4,0 cm, så cylinderns ovansida hamnar cirka 3 mm under isens överyta.
+
+I verkligheten avger cylindern en del av energin till luften, värmer en del av smältvattnet över 0 °C och smälter lite is vid sidorna. Då återstår mindre energi till att smälta isen rakt under. Värdet 4,3 cm är alltså en övre gräns. Det räcker att en tiondel av energin går förlorad på de sätten för att hålet ska bli grundare än 4,0 cm.
+
+**Svar:** Enligt modellen blir hålet 4,3 cm djupt, så hela cylindern kommer under isens överyta. I verkligheten blir hålet grundare, och då sticker cylindern troligen upp`,
         },
     ],
 
@@ -37038,7 +37692,7 @@ $$ m_\\mathrm{is} = \\frac{4{,}18 \\cdot 0{,}80 \\cdot 45}{334 + 4{,}18 \\cdot 2
                 `Svetten reflekterar solens infraröda strålning och hindrar uppvärmning.`,
             ],
             correct: 1,
-            solution: `Avdunstning är en fasövergång från vätska till gas och kräver energi (förångningsentalpin). Den energin tas från det den fuktar — alltså huden. Resultatet är att hudens temperatur sjunker.
+            solution: `Avdunstning är en fasövergång från vätska till gas och kräver energi (förångningsentalpin). Den energin tas från det den fuktar, alltså huden. Resultatet är att hudens temperatur sjunker.
 
 **Svar:** Alternativ B.
 
@@ -37046,7 +37700,7 @@ $$ m_\\mathrm{is} = \\frac{4{,}18 \\cdot 0{,}80 \\cdot 45}{334 + 4{,}18 \\cdot 2
         },
         {
             level: 1,
-            question: `En människokropp i vila avger värme till omgivningen med ungefär samma effekt som ett litet element — vilken effekt rör det sig om?`,
+            question: `En människokropp i vila avger värme till omgivningen med ungefär samma effekt som ett litet element. Vilken effekt rör det sig om?`,
             choices: [
                 `Ca 10 W.`,
                 `Ca 100 W.`,
@@ -37056,9 +37710,9 @@ $$ m_\\mathrm{is} = \\frac{4{,}18 \\cdot 0{,}80 \\cdot 45}{334 + 4{,}18 \\cdot 2
             correct: 1,
             solution: `En människokropp i vila avger ca **100 W** värme genom strålning, konvektion och avdunstning från hud och luftvägar.
 
-**Svar:** Alternativ B — ca 100 W.
+**Svar:** Alternativ B, ca 100 W.
 
-**Generell slutsats:** Det är därför ett klassrum med 30 elever blir varmt även utan att elementen är på — 30 personer ger en sammanlagd uppvärmningseffekt på ca 3 000 W, motsvarande tre starka element. Många moderna passivhus utnyttjar detta för att minska behovet av aktiv uppvärmning.`,
+**Generell slutsats:** Det är därför ett klassrum med 30 elever blir varmt även utan att elementen är på: 30 personer ger en sammanlagd uppvärmningseffekt på ca 3 000 W, motsvarande tre starka element. Många moderna passivhus utnyttjar detta för att minska behovet av aktiv uppvärmning.`,
         },
         {
             level: 1,
@@ -37081,7 +37735,7 @@ $$ E = 100 \\cdot 28\\,800 = 2\\,880\\,000\\ \\mathrm{J} = 2{,}88\\ \\mathrm{MJ}
 
 **Svar:** 2,88 MJ.
 
-**Generell slutsats:** Det motsvarar ungefär energin i 125 g choklad (cirka 2,3 MJ per 100 g) eller sju bananer. Det är därför vi behöver äta — kroppen måste ständigt fylla på energi för att kompensera för värmeavgivningen.`,
+**Generell slutsats:** Det motsvarar ungefär energin i 125 g choklad (cirka 2,3 MJ per 100 g) eller sju bananer. Det är därför vi behöver äta: kroppen måste ständigt fylla på energi för att kompensera för värmeavgivningen.`,
         },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
@@ -37091,15 +37745,15 @@ $$ E = 100 \\cdot 28\\,800 = 2\\,880\\,000\\ \\mathrm{J} = 2{,}88\\ \\mathrm{MJ}
             choices: [
                 `Vid hög lufttemperatur slutar svett att avdunsta, vilket gör att kylningen försvinner.`,
                 `Bastuluft är torrare och leder värme bättre än vanlig luft.`,
-                `Hög temperatur stänger av nervändarna som annars skulle uppfatta värme — så endast tryckkänslan kvarstår.`,
+                `Hög temperatur stänger av nervändarna som annars skulle uppfatta värme, så endast tryckkänslan kvarstår.`,
                 `Den varma luften river bort den 33-gradiga luften nära huden och ersätter den med 80-gradig luft, så värme strömmar **till** huden istället för från den.`,
             ],
             correct: 3,
-            solution: `Värme flödar alltid från varmt till kallt. När du blåser hårt på armen ute (med 20 °C luft) river du bort den varma luften nära huden och ersätter den med kall — då flödar värme **från** armen, och du upplever det som kallt. I bastun gör du tvärtom: du river bort den 33-gradiga luften nära huden och ersätter den med 80-gradig — då flödar värme **till** armen och du upplever det som varmt.
+            solution: `Värme flödar alltid från varmt till kallt. När du blåser hårt på armen ute (med 20 °C luft) river du bort den varma luften nära huden och ersätter den med kall. Då flödar värme **från** armen, och du upplever det som kallt. I bastun gör du tvärtom: du river bort den 33-gradiga luften nära huden och ersätter den med 80-gradig. Då flödar värme **till** armen och du upplever det som varmt.
 
 **Svar:** Alternativ D.
 
-**Generell slutsats:** Det är inte luftrörelsen i sig som avgör om man känner varmt eller kallt — det är **temperaturskillnaden** mellan din hud och den nya luften. Samma fenomen förklarar varför fläktar inte hjälper i extrem hetta (och ibland gör det värre om luften är varmare än huden).`,
+**Generell slutsats:** Det är inte luftrörelsen i sig som avgör om man känner varmt eller kallt. Det är **temperaturskillnaden** mellan din hud och den nya luften. Samma fenomen förklarar varför fläktar inte hjälper i extrem hetta (och ibland gör det värre om luften är varmare än huden).`,
         },
         {
             level: 2,
@@ -37126,7 +37780,577 @@ $$ m = \\frac{8{,}64}{2{,}26} \\approx 3{,}82\\ \\mathrm{kg} $$
 
 **Svar:** Ca 3,8 kg vatten.
 
-**Generell slutsats:** I verkligheten svettar man inte så mycket vid normal aktivitet (ca 0,5–1 kg per dygn) — det mesta av värmen avges genom **strålning** och **konvektion** till omgivande luft. Men vid extrem hetta eller hård fysisk ansträngning, när omgivningen är varmare än huden, blir svettning den enda effektiva avkylningsmekanismen — och då kan svettmängden närma sig flera kg per dag.`,
+**Generell slutsats:** I verkligheten svettar man inte så mycket vid normal aktivitet (ca 0,5–1 kg per dygn). Det mesta av värmen avges genom **strålning** och **konvektion** till omgivande luft. Men vid extrem hetta eller hård fysisk ansträngning, när omgivningen är varmare än huden, blir svettning den enda effektiva avkylningsmekanismen, och då kan svettmängden närma sig flera kg per dag.`,
+        },
+        {
+            level: 1,
+            question: `På en vinterutflykt säger Elin att hennes tjocka ylletröja "ger ifrån sig värme". Vilken är den bästa beskrivningen av vad tröjan egentligen gör?`,
+            choices: [
+                `Den håller kvar värmen från kroppen genom att isolera.`,
+                `Den drar till sig värme från den kalla luften.`,
+                `Den omvandlar kylan utifrån till värme.`,
+                `Den höjer den effekt som kroppen avger till luften.`,
+            ],
+            correct: 0,
+            solution: `Tröjan har ingen egen energikälla. Energin kommer från kroppen, och tröjan bromsar bara energins väg ut till den kalla luften. Ull håller mycket luft stilla mellan fibrerna, och stillastående luft leder värme dåligt.
+
+De andra alternativen kan inte stämma. Värme strömmar av sig själv bara från varmt till kallt, så tröjan kan inte hämta värme ur kall luft, och "kyla" är ingen energi som kan omvandlas. Om kroppen avgav större effekt till luften skulle Elin frysa mer.
+
+**Svar:** Alternativ A.`,
+        },
+        {
+            level: 1,
+            question: `Under ett träningspass avdunstar $0{,}25\\ \\mathrm{kg}$ svett från huden. Hur mycket energi går åt till avdunstningen? Vid hudens temperatur är vattnets specifika ångbildningsentalpi $l_å = 2{,}4\\ \\mathrm{MJ/kg}$. Ange svaret i MJ.`,
+            answer: { value: 0.60, unit: 'MJ', tol: 0.02 },
+            solution: `Energin som behövs för att vatten ska övergå till gas är
+
+$$ E = l_å \\cdot m $$
+
+$$
+\\left[ \\begin{array}{l}
+l_å = 2{,}4\\ \\mathrm{MJ/kg} \\\\
+m = 0{,}25\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$ E = 2{,}4 \\cdot 0{,}25 = 0{,}60\\ \\mathrm{MJ} $$
+
+Energin tas från huden, som därför kyls ner.
+
+**Svar:** 0,60 MJ`,
+        },
+        {
+            level: 1,
+            question: `Efter en skidtur dricker Sara $0{,}50\\ \\mathrm{kg}$ vatten med temperaturen $7{,}0\\ ^\\circ\\mathrm{C}$. Vattnet värms i kroppen till $37\\ ^\\circ\\mathrm{C}$. Hur mycket energi tar vattnet från kroppen? Vattnets specifika värmekapacitet är $4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$. Ange svaret i kJ.`,
+            answer: { value: 63, unit: 'kJ', tol: 0.02 },
+            solution: `Vattnet behåller sin fas men blir varmare:
+
+$$ E = c \\cdot m \\cdot \\Delta T $$
+
+$$
+\\left[ \\begin{array}{l}
+c = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)} \\\\
+m = 0{,}50\\ \\mathrm{kg} \\\\
+\\Delta T = 37 - 7{,}0 = 30\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+$$ E = 4{,}18 \\cdot 0{,}50 \\cdot 30 = 62{,}7\\ \\mathrm{kJ} \\approx 63\\ \\mathrm{kJ} $$
+
+**Svar:** 63 kJ`,
+        },
+        {
+            level: 1,
+            question: `Vid ett försök mäts hudens temperatur på en person som kliver upp ur ett bad vid tiden 0 och inte torkar sig. Diagrammet visar resultatet.
+
+${makeDiagram({ xMax: 12, yMin: 24, yMax: 36, xTicks: [0, 2, 4, 6, 8, 10, 12], yTicks: [24, 26, 28, 30, 32, 34, 36], xLabel: '<tspan font-style="italic">t</tspan> (min)', yLabel: '<tspan font-style="italic">T</tspan> (°C)', paths: [{ points: Array.from({ length: 121 }, (_, i) => { const t = i / 10; return [t, t <= 4 ? 30 + 4 * Math.cos(Math.PI * t / 4) : 29 - 3 * Math.cos(Math.PI * (t - 4) / 8)]; }) }] })}
+
+a) Hur många grader sjunker hudens temperatur som mest?<br>b) Förklara med en mening varför temperaturen sjunker.`,
+            answer: { value: 8, unit: '°C', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 8, unit: '°C', tol: 0.03 },
+                { del: 'b' },
+            ],
+            solution: `**a)** Vid start är temperaturen $34\\ ^\\circ\\mathrm{C}$. Som lägst, efter 4 minuter, är den $26\\ ^\\circ\\mathrm{C}$.
+
+$$ \\Delta T = 34 - 26 = 8\\ ^\\circ\\mathrm{C} $$
+
+**Svar:** 8 °C
+
+**b)** När vattnet på huden avdunstar krävs energi, och den energin tas från huden.
+
+När det mesta av vattnet har avdunstat upphör kylningen, och huden värms upp igen av blodet. Därför stiger kurvan efter 4 minuter.
+
+**Svar:** Vattnet på huden avdunstar, och energin till avdunstningen tas från huden.`,
+        },
+        {
+            level: 2,
+            question: `En roddare utför arbete med effekten $150\\ \\mathrm{W}$ på åran. Kroppens verkningsgrad är $25\\ \\%$, så resten av den kemiska energi som omsätts blir värme. Hur många kilogram svett måste avdunsta under $30\\ \\mathrm{min}$ för att föra bort all denna värme? Vid hudens temperatur är $l_å = 2{,}4\\ \\mathrm{MJ/kg}$. Ange svaret i kg.`,
+            answer: { value: 0.34, unit: 'kg', tol: 0.02 },
+            solution: `Verkningsgraden ger den totala effekt som kroppen omsätter:
+
+$$ \\eta = \\dfrac{P_\\text{nyttig}}{P_\\text{total}} \\quad\\Leftrightarrow\\quad P_\\text{total} = \\dfrac{P_\\text{nyttig}}{\\eta} $$
+
+$$ P_\\text{total} = \\dfrac{150}{0{,}25} = 600\\ \\mathrm{W} $$
+
+Den del som inte blir arbete på åran blir värme:
+
+$$ P_\\text{värme} = 600 - 150 = 450\\ \\mathrm{W} $$
+
+Under 30 minuter blir energin
+
+$$ E = P_\\text{värme} \\cdot t = 450 \\cdot 30 \\cdot 60 = 810\\,000\\ \\mathrm{J} $$
+
+All denna energi ska gå åt till att förånga svett:
+
+$$ E = l_å \\cdot m \\quad\\Leftrightarrow\\quad m = \\dfrac{E}{l_å} $$
+
+$$ m = \\dfrac{810\\,000}{2{,}4 \\cdot 10^6} = 0{,}3375\\ \\mathrm{kg} \\approx 0{,}34\\ \\mathrm{kg} $$
+
+Det motsvarar drygt tre deciliter svett, vilket är rimligt vid hård träning.
+
+**Svar:** 0,34 kg`,
+        },
+        {
+            level: 2,
+            question: `Åtta vilande personer blir sittande i en stillastående linbanekabin. Kabinen rymmer $12\\ \\mathrm{m^3}$ luft med densiteten $1{,}3\\ \\mathrm{kg/m^3}$ och den specifika värmekapaciteten $1{,}0\\ \\mathrm{kJ/(kg \\cdot K)}$. Lufttemperaturen är $-8{,}0\\ ^\\circ\\mathrm{C}$ när kabinen stannar.
+
+a) Hur lång tid skulle det ta innan luften blivit $15\\ ^\\circ\\mathrm{C}$ om all värme från personerna stannade i luften? Ange svaret i minuter.<br>b) Förklara varför tiden i verkligheten blir en annan, och åt vilket håll.`,
+            answer: { value: 7.5, unit: 'min', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 7.5, unit: 'min', tol: 0.02 },
+                { del: 'b' },
+            ],
+            solution: `**a)** En person i vila avger ungefär 100 W, så åtta personer avger
+
+$$ P = 8 \\cdot 100 = 800\\ \\mathrm{W} $$
+
+Luftens massa fås ur densiteten:
+
+$$ m = \\rho \\cdot V = 1{,}3 \\cdot 12 = 15{,}6\\ \\mathrm{kg} $$
+
+Energin som krävs för uppvärmningen är
+
+$$ E = c \\cdot m \\cdot \\Delta T $$
+
+$$
+\\left[ \\begin{array}{l}
+c = 1{,}0 \\cdot 10^3\\ \\mathrm{J/(kg \\cdot K)} \\\\
+m = 15{,}6\\ \\mathrm{kg} \\\\
+\\Delta T = 15 - (-8{,}0) = 23\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+$$ E = 1{,}0 \\cdot 10^3 \\cdot 15{,}6 \\cdot 23 = 358\\,800\\ \\mathrm{J} $$
+
+Effekten är energi per tid, så
+
+$$ t = \\dfrac{E}{P} = \\dfrac{358\\,800}{800} = 448{,}5\\ \\mathrm{s} $$
+
+$$ t = \\dfrac{448{,}5}{60} = 7{,}475\\ \\mathrm{min} \\approx 7{,}5\\ \\mathrm{min} $$
+
+**Svar:** 7,5 min
+
+**b)** I verkligheten värms även väggar, fönster och säten, och energi strömmar ut genom väggarna till den kalla luften utanför. Bara en del av de 800 W stannar i luften, så uppvärmningen tar längre tid. Det är till och med möjligt att luften aldrig når 15 °C.
+
+**Svar:** Tiden blir längre, eftersom energi också går till väggar och säten och ut ur kabinen.`,
+        },
+        {
+            level: 2,
+            question: `En löpare tar en kall och blåsig dag på sig en tunn vindjacka. Tyget är så tunt att det knappt isolerar alls, men löparen fryser ändå mycket mindre. Vilken förklaring är bäst?`,
+            choices: [
+                `Jackan gör att huden avger en större effekt.`,
+                `Jackan får svetten att avdunsta snabbare.`,
+                `Jackan hindrar vinden från att föra bort den varma luften vid huden.`,
+                `Jackan sänker temperaturskillnaden mellan luften ute och marken.`,
+            ],
+            correct: 2,
+            solution: `Närmast huden finns ett tunt luftskikt som kroppen har värmt. I vind blåser det bort och ersätts hela tiden av kall luft. Då blir temperaturskillnaden mellan huden och luften intill stor, och värmen strömmar snabbt från huden.
+
+Vindjackan släpper inte igenom vinden. Det varma luftskiktet blir kvar, och det är den stillastående luften som isolerar, inte tyget i sig.
+
+En större avgiven effekt eller en snabbare avdunstning hade gjort att löparen frös mer. Temperaturen ute påverkas inte av jackan.
+
+**Svar:** Alternativ C.`,
+        },
+        {
+            level: 2,
+            question: `Två likadana flaskor fylls med $0{,}50\\ \\mathrm{kg}$ vatten med temperaturen $37\\ ^\\circ\\mathrm{C}$ och ställs framför en fläkt. Flaska 1 har en torr strumpa utanpå och flaska 2 en våt. Diagrammet visar vattnets temperatur (heldragen kurva: flaska 1, streckad kurva: flaska 2).
+
+${makeDiagram({ xMax: 14, yMin: 21, yMax: 39, xTicks: [0, 2, 4, 6, 8, 10, 12, 14], yTicks: [21, 23, 25, 27, 29, 31, 33, 35, 37, 39], xLabel: '<tspan font-style="italic">t</tspan> (min)', yLabel: '<tspan font-style="italic">T</tspan> (°C)', paths: [{ points: Array.from({ length: 141 }, (_, i) => [i / 10, 22 + 15 * Math.pow(11 / 15, i / 100)]) }, { points: Array.from({ length: 141 }, (_, i) => [i / 10, 17 + 20 * Math.pow(0.5, i / 100)]), color: '#2563eb', dash: '7 5' }] })}
+
+Uppskatta hur många gram vatten som har avdunstat från den våta strumpan under de första $10\\ \\mathrm{min}$. Räkna med att skillnaden i avgiven energi mellan flaskorna helt beror på avdunstningen. För vatten är $c = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$ och vid den här temperaturen är $l_å = 2{,}4\\ \\mathrm{MJ/kg}$. Ange svaret i gram.`,
+            answer: { value: 5.2, unit: 'g', tol: 0.08 },
+            solution: `Efter 10 minuter är temperaturen enligt diagrammet $33\\ ^\\circ\\mathrm{C}$ i flaska 1 och $27\\ ^\\circ\\mathrm{C}$ i flaska 2. Vattnet i flaska 2 har alltså kylts
+
+$$ \\Delta T = 33 - 27 = 6\\ \\mathrm{K} $$
+
+mer än vattnet i flaska 1. Den extra energi som flaska 2 har avgett är
+
+$$ E = c \\cdot m \\cdot \\Delta T $$
+
+$$ E = 4{,}18 \\cdot 10^3 \\cdot 0{,}50 \\cdot 6 = 12\\,540\\ \\mathrm{J} $$
+
+Den energin har använts till att förånga vatten ur strumpan:
+
+$$ m_\\text{avdunstat} = \\dfrac{E}{l_å} = \\dfrac{12\\,540}{2{,}4 \\cdot 10^6} = 5{,}225 \\cdot 10^{-3}\\ \\mathrm{kg} \\approx 5{,}2\\ \\mathrm{g} $$
+
+Att några få gram räcker till en så tydlig kylning visar hur mycket energi avdunstningen kräver. Det är därför svettning är så effektivt.
+
+**Svar:** 5,2 g`,
+        },
+        {
+            level: 2,
+            question: `En person med massan $70\\ \\mathrm{kg}$ har ramlat i kallt vatten och förlorar energi till omgivningen med effekten $280\\ \\mathrm{W}$. Kroppen omsätter $100\\ \\mathrm{W}$ som i vila, och genom att huttra tillförs ytterligare $120\\ \\mathrm{W}$ värme. Kroppens specifika värmekapacitet är i medeltal $3{,}5\\ \\mathrm{kJ/(kg \\cdot K)}$.
+
+a) Hur många grader sjunker kroppens medeltemperatur på $1{,}0\\ \\mathrm{h}$?<br>b) Hur många grader hade den sjunkit på samma tid om personen inte huttrat?`,
+            answer: { value: 0.88, unit: '°C', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 0.88, unit: '°C', tol: 0.02 },
+                { del: 'b', value: 2.6, unit: '°C', tol: 0.02 },
+            ],
+            solution: `Det är skillnaden mellan avgiven och tillförd effekt som kyler kroppen. Energin tas ur kroppen, så $E = P \\cdot t$ ska vara lika med $E = c \\cdot m \\cdot \\Delta T$:
+
+$$ c \\cdot m \\cdot \\Delta T = P \\cdot t \\quad\\Leftrightarrow\\quad \\Delta T = \\dfrac{P \\cdot t}{c \\cdot m} $$
+
+**a)** Den effekt som saknas är
+
+$$ P = 280 - 100 - 120 = 60\\ \\mathrm{W} $$
+
+$$
+\\left[ \\begin{array}{l}
+P = 60\\ \\mathrm{W} \\\\
+t = 1{,}0\\ \\mathrm{h} = 3\\,600\\ \\mathrm{s} \\\\
+c = 3{,}5 \\cdot 10^3\\ \\mathrm{J/(kg \\cdot K)} \\\\
+m = 70\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$ \\Delta T = \\dfrac{60 \\cdot 3\\,600}{3{,}5 \\cdot 10^3 \\cdot 70} = \\dfrac{216\\,000}{245\\,000} \\approx 0{,}88\\ ^\\circ\\mathrm{C} $$
+
+**Svar:** 0,88 °C
+
+**b)** Utan huttrandet saknas
+
+$$ P = 280 - 100 = 180\\ \\mathrm{W} $$
+
+$$ \\Delta T = \\dfrac{180 \\cdot 3\\,600}{3{,}5 \\cdot 10^3 \\cdot 70} = \\dfrac{648\\,000}{245\\,000} \\approx 2{,}6\\ ^\\circ\\mathrm{C} $$
+
+Tre gånger så stor effekt saknas, och därför sjunker temperaturen tre gånger så mycket.
+
+**Svar:** 2,6 °C`,
+        },
+        {
+            level: 3,
+            question: `En vuxen och ett barn har likformiga kroppar: alla längder hos den vuxna är i samma proportion till motsvarande längder hos barnet. I figuren är kropparna förenklade till cylindrar. Båda har samma hudtemperatur och vistas i samma kalla luft, så att de avger lika stor effekt per kvadratmeter hud.
+
+<svg xmlns="http://www.w3.org/2000/svg" width="495" height="330" viewBox="0 0 330 220" style="max-width:100%;height:auto;display:block;margin:16px auto;font-family:Poppins,sans-serif"><defs><linearGradient id="kv64g" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#e9b98f"/><stop offset="0.35" stop-color="#f6d9bd"/><stop offset="1" stop-color="#cf9468"/></linearGradient></defs><line x1="14" y1="208" x2="316" y2="208" stroke="#8a8579" stroke-width="1.5"/><path d="M90 30 V199 A30 9 0 0 0 150 199 V30" fill="url(#kv64g)" stroke="#0f1620" stroke-width="1.6"/><ellipse cx="120" cy="30" rx="30" ry="9" fill="#f6dfc8" stroke="#0f1620" stroke-width="1.6"/><path d="M200 89 V202 A20 6 0 0 0 240 202 V89" fill="url(#kv64g)" stroke="#0f1620" stroke-width="1.6"/><ellipse cx="220" cy="89" rx="20" ry="6" fill="#f6dfc8" stroke="#0f1620" stroke-width="1.6"/><g stroke="#8a8579" stroke-width="1" stroke-dasharray="4 3"><line x1="66" y1="30" x2="87" y2="30"/><line x1="66" y1="199" x2="87" y2="199"/><line x1="243" y1="89" x2="264" y2="89"/><line x1="243" y1="202" x2="264" y2="202"/></g><g stroke="#0e7490" stroke-width="1.5"><line x1="72" y1="38" x2="72" y2="191"/><line x1="258" y1="97" x2="258" y2="194"/></g><g fill="#0e7490"><path d="M72 30l-4 9h8z"/><path d="M72 199l-4 -9h8z"/><path d="M258 89l-4 9h8z"/><path d="M258 202l-4 -9h8z"/></g><g font-size="12" fill="#0e7490"><text x="64" y="119" text-anchor="end">1,80 m</text><text x="266" y="150">1,20 m</text></g><g font-size="12" fill="#0f1620" text-anchor="middle"><text x="120" y="15">Vuxen</text><text x="220" y="76">Barn</text></g></svg>
+
+Om kropparna inte producerade någon egen värme skulle den vuxnas temperatur i början sjunka med $0{,}40\\ ^\\circ\\mathrm{C}$ per timme. Hur många grader per timme skulle barnets temperatur sjunka? Förklara också varför små barn lättare blir nedkylda än vuxna.`,
+            answer: { value: 0.60, unit: '°C per timme', tol: 0.02 },
+            solution: `Varken massa, area eller effekt är kända, så vi arbetar generellt och jämför de två kropparna.
+
+Låt $q$ vara avgiven effekt per kvadratmeter hud, $A$ hudens area, $V$ kroppens volym och $\\rho$ dess densitet. Under tiden $t$ avges energin
+
+$$ E = q \\cdot A \\cdot t $$
+
+Samma energi tas ur kroppen, vars massa är $m = \\rho \\cdot V$:
+
+$$ E = c \\cdot \\rho \\cdot V \\cdot \\Delta T $$
+
+Uttrycken är lika, vilket ger temperaturändringen per tid:
+
+$$ \\dfrac{\\Delta T}{t} = \\dfrac{q}{c \\cdot \\rho} \\cdot \\dfrac{A}{V} $$
+
+Faktorn $\\dfrac{q}{c \\cdot \\rho}$ är lika för båda. Det är alltså bara kvoten $\\dfrac{A}{V}$ som skiljer.
+
+Längdskalan från barn till vuxen är
+
+$$ k = \\dfrac{1{,}80}{1{,}20} = 1{,}5 $$
+
+I likformiga kroppar växer areor med $k^2$ och volymer med $k^3$. Med indexen v för vuxen och b för barn gäller
+
+$$ \\dfrac{A_\\mathrm{v}}{V_\\mathrm{v}} = \\dfrac{k^2 \\cdot A_\\mathrm{b}}{k^3 \\cdot V_\\mathrm{b}} = \\dfrac{1}{k} \\cdot \\dfrac{A_\\mathrm{b}}{V_\\mathrm{b}} $$
+
+Barnets kvot, och därmed barnets temperatursänkning per timme, är $k = 1{,}5$ gånger den vuxnas:
+
+$$ 1{,}5 \\cdot 0{,}40 = 0{,}60\\ ^\\circ\\mathrm{C}\\text{ per timme} $$
+
+Ett litet barn har alltså stor hudarea i förhållande till sin massa. Arean avgör hur snabbt energi försvinner, och massan hur mycket energi som finns att ta av. Därför behöver barnet omsätta mer energi per kilogram, eller ha bättre isolering, för att hålla samma temperatur.
+
+**Svar:** 0,60 °C per timme. Små barn har större hudarea per kilogram kroppsmassa och kyls därför snabbare.`,
+        },
+        {
+            level: 3,
+            question: `Under ett långlopp håller en löpare sin kroppstemperatur konstant och förlorar genom svettning $2{,}0\\ \\%$ av sin kroppsmassa. Hur många grader hade kroppens temperatur stigit om samma energi i stället hade stannat i kroppen? Diskutera sedan två brister i modellen och hur de påverkar ditt svar. Kroppens specifika värmekapacitet är i medeltal $3{,}5\\ \\mathrm{kJ/(kg \\cdot K)}$ och vid hudens temperatur är $l_å = 2{,}4\\ \\mathrm{MJ/kg}$. Ange temperaturökningen i °C.`,
+            answer: { value: 14, unit: '°C', tol: 0.03 },
+            solution: `Löparens massa är inte given. Kalla den $m$. Svettens massa är då $0{,}020 \\cdot m$.
+
+Vi antar att all svett avdunstar. Energin som förs bort är
+
+$$ E = l_å \\cdot 0{,}020 \\cdot m $$
+
+Om energin hade stannat i kroppen hade den höjt temperaturen:
+
+$$ E = c \\cdot m \\cdot \\Delta T $$
+
+Energierna är lika:
+
+$$ c \\cdot m \\cdot \\Delta T = l_å \\cdot 0{,}020 \\cdot m $$
+
+Massan $m$ finns i båda leden och förkortas bort:
+
+$$ \\Delta T = \\dfrac{0{,}020 \\cdot l_å}{c} $$
+
+$$ \\Delta T = \\dfrac{0{,}020 \\cdot 2{,}4 \\cdot 10^6}{3{,}5 \\cdot 10^3} \\approx 13{,}7\\ ^\\circ\\mathrm{C} \\approx 14\\ ^\\circ\\mathrm{C} $$
+
+En kroppstemperatur på över $50\\ ^\\circ\\mathrm{C}$ är förstås omöjlig att överleva. Löparen hade tvingats stanna långt tidigare, så resultatet visar hur nödvändig svettningen är.
+
+**Brister i modellen**
+
+- En del av svetten droppar av eller sugs upp av kläderna i stället för att avdunsta från huden. Den svetten för inte bort någon ångbildningsenergi från huden, så den verkliga energin är mindre och vårt värde är för stort.
+- Utan svettning hade huden blivit varmare. Då hade kroppen avgett större effekt genom strålning och till luften, så all energi hade inte stannat kvar. Även det gör vårt värde för stort.
+
+Båda bristerna verkar åt samma håll, så 14 °C är en övre gräns.
+
+**Svar:** 14 °C, vilket är en övre gräns eftersom en del av svetten inte avdunstar och en varmare kropp avger mer värme.`,
+        },
+        {
+            level: 3,
+            question: `För att testa skyddskläder används en docka fylld med $60\\ \\mathrm{kg}$ vatten. Dockan, som ännu inte har några kläder på sig, sänks ned i en stor bassäng med vatten som håller $4\\ ^\\circ\\mathrm{C}$. Diagrammet visar hur dockans temperatur ändras.
+
+${makeDiagram({ xMax: 3, yMin: 0, yMax: 40, xTicks: [0, 0.5, 1, 1.5, 2, 2.5, 3], yTicks: [0, 5, 10, 15, 20, 25, 30, 35, 40], xLabel: '<tspan font-style="italic">t</tspan> (h)', yLabel: '<tspan font-style="italic">T</tspan> (°C)', paths: [{ points: Array.from({ length: 121 }, (_, i) => [i / 40, 4 + 33 * Math.exp(-0.5 * i / 40)]) }] })}
+
+Dockan är lika stor som en människa. Uppskatta med hjälp av diagrammet hur varmt badvattnet måste vara för att en person i vila utan våtdräkt, med hudtemperaturen $33\\ ^\\circ\\mathrm{C}$, ska kunna ligga still länge utan att behöva huttra. Redovisa vilken modell du använder och visa att den stämmer med diagrammet. För vatten är $c = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$. Ange svaret i °C.`,
+            answer: { value: 30, unit: '°C', tol: 0.03 },
+            solution: `Personen i vila omsätter ungefär 100 W. Utan att huttra får personen alltså inte avge mer än 100 W till vattnet. Vi måste därför veta hur den avgivna effekten beror på temperaturskillnaden, och det kan vi ta reda på med dockan.
+
+**Dockans effekt.** Kurvans lutning visar hur snabbt temperaturen sjunker, och därmed vilken effekt dockan avger just då. Vi ritar tangenten vid $t = 1{,}0\\ \\mathrm{h}$, där $T = 24\\ ^\\circ\\mathrm{C}$:
+
+${makeDiagram({ xMax: 3, yMin: 0, yMax: 40, xTicks: [0, 0.5, 1, 1.5, 2, 2.5, 3], yTicks: [0, 5, 10, 15, 20, 25, 30, 35, 40], xLabel: '<tspan font-style="italic">t</tspan> (h)', yLabel: '<tspan font-style="italic">T</tspan> (°C)', paths: [{ points: Array.from({ length: 121 }, (_, i) => [i / 40, 4 + 33 * Math.exp(-0.5 * i / 40)]) }, { points: [[0, 34], [3, 4]], color: '#2563eb', width: 2 }] })}
+
+Tangenten går genom punkterna $(0;\\ 34)$ och $(3{,}0;\\ 4)$. Temperaturen sjunker alltså med
+
+$$ \\dfrac{\\Delta T}{\\Delta t} = \\dfrac{34 - 4}{3{,}0} = 10\\ ^\\circ\\mathrm{C}\\text{ per timme} $$
+
+På en timme ($3\\,600\\ \\mathrm{s}$) skulle dockan i den takten avge energin $E = c \\cdot m \\cdot \\Delta T$, och effekten är energi per tid:
+
+$$ P = \\dfrac{c \\cdot m \\cdot \\Delta T}{\\Delta t} $$
+
+$$ P = \\dfrac{4{,}18 \\cdot 10^3 \\cdot 60 \\cdot 10}{3\\,600} \\approx 697\\ \\mathrm{W} $$
+
+Dockan är då $24 - 4 = 20\\ ^\\circ\\mathrm{C}$ varmare än vattnet.
+
+**Modellen.** Kurvan är brantast i början och planar ut när dockan närmar sig vattnets temperatur. En rimlig modell är att den avgivna effekten är proportionell mot temperaturskillnaden mellan dockan och vattnet. Då ska även lutningen vara det.
+
+Vid $t = 1{,}0\\ \\mathrm{h}$ är skillnaden 20 grader och temperaturen sjunker med 10 grader per timme, alltså hälften så mycket. I början är skillnaden $37 - 4 = 33$ grader, och där sjunker temperaturen enligt diagrammet med 16 till 17 grader per timme, också ungefär hälften. Modellen stämmer.
+
+**Personen.** Kalla den största tillåtna temperaturskillnaden $x$. Personen är lika stor som dockan, så proportionaliteten ger
+
+$$ \\dfrac{x}{20} = \\dfrac{100}{697} $$
+
+$$ x = 20 \\cdot \\dfrac{100}{697} \\approx 2{,}87\\ ^\\circ\\mathrm{C} $$
+
+Vattnet får vara högst så mycket kallare än huden:
+
+$$ 33 - 2{,}87 = 30{,}13\\ ^\\circ\\mathrm{C} \\approx 30\\ ^\\circ\\mathrm{C} $$
+
+Det är rimligt. I en vanlig bassäng på $26\\ ^\\circ\\mathrm{C}$ fryser man om man ligger still, men inte om man simmar. Kroppen kan dessutom minska blodflödet till huden, så att hudens temperatur och därmed energiförlusten sjunker. Det verkliga gränsvärdet kan därför vara något lägre.
+
+**Svar:** Cirka 30 °C`,
+        },
+        {
+            level: 3,
+            question: `I en enkel modell är den effekt som naken hud avger till luften proportionell mot skillnaden mellan hudens temperatur, $33\\ ^\\circ\\mathrm{C}$, och luftens temperatur. En viss vind gör proportionalitetskonstanten $2{,}5$ gånger så stor som i stillastående luft.
+
+a) Luften är $17\\ ^\\circ\\mathrm{C}$ och det blåser. Vilken temperatur har stillastående luft som kyler huden lika snabbt? Ange svaret i °C.<br>b) För vilka lufttemperaturer gör vinden, enligt modellen, att luften känns varmare än den är? Motivera generellt.<br>c) I verkligheten kan vind svalka även när luften är något varmare än huden. Vad är det modellen inte tar hänsyn till?`,
+            answer: { value: -7, unit: '°C', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: -7, unit: '°C', tol: 0.03 },
+                { del: 'b' },
+                { del: 'c' },
+            ],
+            solution: `Kalla konstanten i stillastående luft $k$, luftens temperatur $T$ och temperaturen i den stillastående luft som ger samma effekt $T_0$.
+
+I vind är den avgivna effekten
+
+$$ P = 2{,}5 \\cdot k \\cdot (33 - T) $$
+
+och i stillastående luft med temperaturen $T_0$
+
+$$ P = k \\cdot (33 - T_0) $$
+
+Effekterna ska vara lika. Konstanten $k$ är okänd men förkortas bort:
+
+$$ k \\cdot (33 - T_0) = 2{,}5 \\cdot k \\cdot (33 - T) $$
+
+$$ 33 - T_0 = 2{,}5 \\cdot (33 - T) $$
+
+$$ T_0 = 33 - 2{,}5 \\cdot (33 - T) $$
+
+**a)** Med $T = 17\\ ^\\circ\\mathrm{C}$ insatt i uttrycket fås
+
+$$ T_0 = 33 - 2{,}5 \\cdot (33 - 17) = 33 - 40 = -7\\ ^\\circ\\mathrm{C} $$
+
+**Svar:** −7 °C
+
+**b)** Luften känns varmare än den är om $T_0 > T$. Vi sätter in uttrycket för $T_0$:
+
+$$ 33 - 2{,}5 \\cdot (33 - T) > T $$
+
+Subtrahera $T$ från båda leden och samla de båda parenteserna:
+
+$$ (33 - T) - 2{,}5 \\cdot (33 - T) > 0 $$
+
+$$ -1{,}5 \\cdot (33 - T) > 0 $$
+
+Division med det negativa talet $-1{,}5$ vänder olikhetstecknet:
+
+$$ 33 - T < 0 $$
+
+$$ T > 33 $$
+
+Vinden byter hela tiden ut luften närmast huden. Är luften kallare än huden ökar energin som lämnar huden, och är den varmare ökar energin som tillförs. Faktorn 2,5 spelar ingen roll: gränsen är hudens temperatur så länge faktorn är större än 1. Det förklarar varför det bränner när man blåser på huden i en bastu.
+
+**Svar:** För lufttemperaturer över 33 °C
+
+**c)** Modellen tar bara hänsyn till energin som utbyts på grund av temperaturskillnaden. Huden är dessutom oftast fuktig av svett. Vinden för bort den fuktiga luften närmast huden, så att svetten avdunstar snabbare, och energin till avdunstningen tas från huden. Är luften bara lite varmare än huden kan den kylningen vara större än uppvärmningen från luften.
+
+**Svar:** Att svetten avdunstar snabbare när det blåser`,
+        },
+        {
+            level: 3,
+            question: `En person i vila omsätter $100\\ \\mathrm{W}$ och sitter i luft som är varmare än huden, som är $33\\ ^\\circ\\mathrm{C}$. Luften tillför då huden effekten $P = k \\cdot (T - 33)$, där $T$ är luftens temperatur i °C. Tabellen visar $k$ och hur mycket svett som högst kan avdunsta, med och utan en fläkt.
+
+| | $k$ (W/°C) | Svett som avdunstar (kg/h) |
+|---|---|---|
+| Utan fläkt | 20 | 0,30 |
+| Med fläkt | 50 | 0,90 |
+
+a) Bestäm den högsta lufttemperatur som personen klarar utan att kroppen blir varmare, utan fläkt och med fläkt.<br>b) Någon påstår: "En fläkt svalkar alltid, eftersom svetten avdunstar snabbare." Utred med hjälp av modellen om påståendet stämmer.
+
+Vid hudens temperatur är $l_å = 2{,}4\\ \\mathrm{MJ/kg}$.`,
+            answer: { value: 38, unit: '°C', tol: 0.01 },
+            delsvar: [
+                { del: 'a', value: 38, unit: '°C', tol: 0.01, etikett: 'utan fläkt' },
+                { del: 'a', value: 43, unit: '°C', tol: 0.01, etikett: 'med fläkt' },
+                { del: 'b' },
+            ],
+            solution: `Först räknas avdunstningen om till kylande effekt. På en timme avdunstar massan $m$, och effekten är energi per tid:
+
+$$ P_\\text{svett} = \\dfrac{l_å \\cdot m}{t} $$
+
+$$ P_\\text{utan} = \\dfrac{2{,}4 \\cdot 10^6 \\cdot 0{,}30}{3\\,600} = 200\\ \\mathrm{W} $$
+
+$$ P_\\text{med} = \\dfrac{2{,}4 \\cdot 10^6 \\cdot 0{,}90}{3\\,600} = 600\\ \\mathrm{W} $$
+
+**a)** Vid den högsta temperaturen är tillförd effekt (kroppens egen och luftens) lika stor som den kylande effekten.
+
+Utan fläkt:
+
+$$ 100 + 20 \\cdot (T - 33) = 200 $$
+
+$$ 20 \\cdot (T - 33) = 100 $$
+
+$$ T - 33 = 5 $$
+
+$$ T = 38\\ ^\\circ\\mathrm{C} $$
+
+Med fläkt:
+
+$$ 100 + 50 \\cdot (T - 33) = 600 $$
+
+$$ 50 \\cdot (T - 33) = 500 $$
+
+$$ T - 33 = 10 $$
+
+$$ T = 43\\ ^\\circ\\mathrm{C} $$
+
+**Svar:** 38 °C utan fläkt och 43 °C med fläkt
+
+**b)** Fläkten har två motsatta verkningar. Avdunstningen kyler $600 - 200 = 400\\ \\mathrm{W}$ mer, oavsett lufttemperatur. Samtidigt tillför luften mer värme, och den ökningen växer med temperaturen:
+
+$$ 50 \\cdot (T - 33) - 20 \\cdot (T - 33) = 30 \\cdot (T - 33) $$
+
+Fläkten svalkar så länge den extra uppvärmningen är mindre än den extra kylningen:
+
+$$ 30 \\cdot (T - 33) < 400 $$
+
+$$ T - 33 < \\dfrac{400}{30} $$
+
+$$ T < 33 + \\dfrac{400}{30} \\approx 46\\ ^\\circ\\mathrm{C} $$
+
+Över cirka $46\\ ^\\circ\\mathrm{C}$ gör fläkten alltså att kroppen värms snabbare. Påståendet glömmer att den bortblåsta luften ersätts med luft som är varmare än huden. Vid temperaturer mellan 43 °C och 46 °C hjälper fläkten, men inte tillräckligt: kroppen blir ändå varmare, bara långsammare. Dessutom förutsätter modellen att personen kan svettas 0,90 kg varje timme och dricker lika mycket. Den som är uttorkad får en lägre gräns.
+
+**Svar:** Påståendet stämmer inte. Enligt modellen svalkar fläkten bara upp till cirka 46 °C, och över den temperaturen gör den att kroppen värms snabbare.`,
+        },
+        {
+            level: 3,
+            question: `Två vilande personer övernattar i en snögrotta när det är $-12\\ ^\\circ\\mathrm{C}$ ute. Efter en stund har luften i grottan den konstanta temperaturen $-4{,}0\\ ^\\circ\\mathrm{C}$. Då kommer tre vilande personer till, och alla fem stannar i $8{,}0\\ \\mathrm{h}$. Den effekt som strömmar ut genom snöväggarna är proportionell mot temperaturskillnaden mellan luften inne och luften ute.
+
+En av personerna räknar proportionellt: "Nu blir temperaturskillnaden två och en halv gånger så stor, alltså blir det $+8\\ ^\\circ\\mathrm{C}$ här inne." Utred vad som händer i stället, och uppskatta hur många kilogram snö som smälter under de åtta timmarna. Isens specifika smältentalpi är $334\\ \\mathrm{kJ/kg}$. Ange svaret i kg.`,
+            answer: { value: 17, unit: 'kg', tol: 0.04 },
+            solution: `En person i vila avger ungefär 100 W.
+
+**Grottans egenskaper.** När temperaturen är konstant strömmar lika stor effekt ut genom väggarna som personerna avger. Med två personer är
+
+$$ P = 2 \\cdot 100 = 200\\ \\mathrm{W} $$
+
+och temperaturskillnaden är
+
+$$ -4{,}0 - (-12) = 8{,}0\\ ^\\circ\\mathrm{C} $$
+
+Effekten per grads skillnad är alltså
+
+$$ \\dfrac{200}{8{,}0} = 25\\ \\mathrm{W/^\\circ C} $$
+
+**Fem personer.** De avger $5 \\cdot 100 = 500\\ \\mathrm{W}$. Proportionaliteten skulle ge skillnaden $\\dfrac{500}{25} = 20\\ ^\\circ\\mathrm{C}$, alltså $-12 + 20 = 8\\ ^\\circ\\mathrm{C}$ inne. Men väggarna är av snö, och snö kan inte bli varmare än $0\\ ^\\circ\\mathrm{C}$. När väggarnas insida når $0\\ ^\\circ\\mathrm{C}$ börjar den smälta, och den energi som tillförs därefter används till fasövergången i stället för till att höja temperaturen. Modellen gäller alltså bara upp till $0\\ ^\\circ\\mathrm{C}$.
+
+**Insidan vid 0 °C.** Nu är skillnaden mot luften ute $0 - (-12) = 12\\ ^\\circ\\mathrm{C}$, och genom väggarna strömmar
+
+$$ 25 \\cdot 12 = 300\\ \\mathrm{W} $$
+
+Resten av effekten smälter snö:
+
+$$ 500 - 300 = 200\\ \\mathrm{W} $$
+
+Under $8{,}0\\ \\mathrm{h}$ blir energin
+
+$$ E = P \\cdot t = 200 \\cdot 8{,}0 \\cdot 3\\,600 = 5\\,760\\,000\\ \\mathrm{J} $$
+
+Med $E = l_s \\cdot m$ blir den smälta massan
+
+$$ m = \\dfrac{E}{l_s} = \\dfrac{5\\,760\\,000}{334 \\cdot 10^3} \\approx 17{,}2\\ \\mathrm{kg} \\approx 17\\ \\mathrm{kg} $$
+
+**Rimlighet.** 17 kg vatten motsvarar knappt två fulla hinkar, fördelat över alla väggar under en hel natt. Värdet är en uppskattning: det tar en stund innan väggarna når $0\\ ^\\circ\\mathrm{C}$, och luften närmast personerna kan vara några grader varmare än väggarna.
+
+**Svar:** Luften stannar nära 0 °C eftersom väggarna börjar smälta, och ungefär 17 kg snö smälter.`,
+        },
+        {
+            level: 3,
+            question: `Under ett cykellopp måste en cyklist bli av med en viss energi per timme utöver den som lämnar kroppen på andra sätt. Cyklisten dricker hela tiden lika stor massa vatten som den svett som avdunstar. I ett tält vid banan hävdar en försäljare: "Dricker du vatten som är $4\\ ^\\circ\\mathrm{C}$ i stället för $37\\ ^\\circ\\mathrm{C}$ behöver du bara svettas hälften så mycket."
+
+Stämmer påståendet? Bestäm generellt med hur många procent svettmängden minskar. Vid hudens temperatur är $l_å = 2{,}4\\ \\mathrm{MJ/kg}$, och för vatten är $c = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$. Ange minskningen i procent.`,
+            answer: { value: 5.4, unit: '%', tol: 0.03 },
+            solution: `Kalla energin som cyklisten måste bli av med per timme $E$. Den är okänd.
+
+Vatten som är $37\\ ^\\circ\\mathrm{C}$ har redan kroppens temperatur och tar inte upp någon energi när man dricker det. All energi måste då föras bort genom avdunstning av massan $m_1$:
+
+$$ E = l_å \\cdot m_1 \\tag{1} $$
+
+Kallt vatten kyler på två sätt. Först värms det från $4\\ ^\\circ\\mathrm{C}$ till $37\\ ^\\circ\\mathrm{C}$ inne i kroppen. Dessutom avdunstar lika stor massa, $m_2$, från huden:
+
+$$ E = c \\cdot m_2 \\cdot \\Delta T + l_å \\cdot m_2 $$
+
+Bryt ut $m_2$:
+
+$$ E = m_2 \\cdot (c \\cdot \\Delta T + l_å) \\tag{2} $$
+
+Energin $E$ är densamma i båda fallen, så högerleden i (1), $E = l_å \\cdot m_1$, och (2), $E = m_2 \\cdot (c \\cdot \\Delta T + l_å)$, är lika:
+
+$$ m_2 \\cdot (c \\cdot \\Delta T + l_å) = l_å \\cdot m_1 $$
+
+$$ \\dfrac{m_2}{m_1} = \\dfrac{l_å}{l_å + c \\cdot \\Delta T} $$
+
+Den okända energin är borta. Nu sätts värdena in:
+
+$$
+\\left[ \\begin{array}{l}
+l_å = 2{,}4 \\cdot 10^6\\ \\mathrm{J/kg} \\\\
+c = 4{,}18 \\cdot 10^3\\ \\mathrm{J/(kg \\cdot K)} \\\\
+\\Delta T = 37 - 4 = 33\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+$$ \\dfrac{m_2}{m_1} = \\dfrac{2{,}4 \\cdot 10^6}{2{,}4 \\cdot 10^6 + 4{,}18 \\cdot 10^3 \\cdot 33} \\approx 0{,}9456 $$
+
+Svettmängden minskar alltså med
+
+$$ 1 - 0{,}9456 = 0{,}0544 \\approx 5{,}4\\ \\% $$
+
+Resultatet är rimligt. Att värma ett kilogram vatten 33 grader kräver bara en liten del av den energi som går åt till att förånga det. Ett kilogram svett som avdunstar kyler mycket mer än ett kilogram kallt vatten som man dricker.
+
+**Svar:** Påståendet stämmer inte. Svettmängden minskar med bara 5,4 %.`,
         },
     ],
 
@@ -37148,9 +38372,9 @@ $$ m = \\frac{8{,}64}{2{,}26} \\approx 3{,}82\\ \\mathrm{kg} $$
             correct: 1,
             solution: `**Första huvudsatsen** är energiprincipen: energi kan varken skapas eller förstöras, bara omvandlas mellan olika energiformer (rörelseenergi, lägesenergi, värme, kemisk energi och så vidare).
 
-**Svar:** Alternativ B — första huvudsatsen.
+**Svar:** Alternativ B, första huvudsatsen.
 
-**Generell slutsats:** Första huvudsatsen är fundamentet för all energiräkning i fysiken. Den utesluter "evighetsmaskiner av första slaget" — maskiner som skulle skapa energi från ingenting.`,
+**Generell slutsats:** Första huvudsatsen är fundamentet för all energiräkning i fysiken. Den utesluter "evighetsmaskiner av första slaget", alltså maskiner som skulle skapa energi från ingenting.`,
         },
         {
             level: 1,
@@ -37162,45 +38386,45 @@ $$ m = \\frac{8{,}64}{2{,}26} \\approx 3{,}82\\ \\mathrm{kg} $$
                 `Tredje huvudsatsen.`,
             ],
             correct: 2,
-            solution: `**Andra huvudsatsen** säger att värme alltid flödar från varmt till kallt — aldrig spontant åt andra hållet. För att flytta värme från kallt till varmt (som i ett kylskåp eller en värmepump) krävs **arbete** från en yttre energikälla.
+            solution: `**Andra huvudsatsen** säger att värme alltid flödar från varmt till kallt, aldrig spontant åt andra hållet. För att flytta värme från kallt till varmt (som i ett kylskåp eller en värmepump) krävs **arbete** från en yttre energikälla.
 
-**Svar:** Alternativ C — andra huvudsatsen.
+**Svar:** Alternativ C, andra huvudsatsen.
 
-**Generell slutsats:** Detta är vad som gör att tiden känns ha en riktning i termodynamiska processer — vi ser aldrig en söndertrasad kopp "lägga ihop sig själv", och kall mjölk värms inte spontant upp i kylen. Andra huvudsatsen är intimt kopplad till begreppet **entropi** (oordning), som ni stöter på i Fysik nivå 2.`,
+**Generell slutsats:** Detta är vad som gör att tiden känns ha en riktning i termodynamiska processer: vi ser aldrig en söndertrasad kopp "lägga ihop sig själv", och kall mjölk värms inte spontant upp i kylen. Andra huvudsatsen är intimt kopplad till begreppet **entropi** (oordning), som ni stöter på i Fysik nivå 2.`,
         },
         {
             level: 1,
             question: `Vid vilken temperatur upphör enligt **tredje huvudsatsen** alla processer i ett system?`,
             choices: [
-                `Vid −100 °C — där alla vanliga gaser kondenserar.`,
-                `Vid 0 °C — vattnets fryspunkt.`,
-                `Vid 0 K — den absoluta nollpunkten.`,
+                `Vid −100 °C, där alla vanliga gaser kondenserar.`,
+                `Vid 0 °C, vattnets fryspunkt.`,
+                `Vid 0 K, den absoluta nollpunkten.`,
                 `Vid kosmiska bakgrundsstrålningens temperatur (2,7 K).`,
             ],
             correct: 2,
             solution: `**Tredje huvudsatsen** säger att alla processer upphör vid **absoluta nollpunkten** (0 K = −273,15 °C). Där har atomerna teoretiskt sett ingen rörelse alls. I praktiken kan man komma godtyckligt nära 0 K, men aldrig riktigt nå dit.
 
-**Svar:** Alternativ C — vid 0 K.
+**Svar:** Alternativ C, vid 0 K.
 
-**Generell slutsats:** I moderna laboratorier har man nått temperaturer på under en miljarddels kelvin (10⁻⁹ K) — kallare än något annat någonstans i det observerbara universum. Det är en konsekvens av tredje huvudsatsen att 0 K inte kan nås i ett ändligt antal steg, men man kan komma så nära man vill.`,
+**Generell slutsats:** I moderna laboratorier har man nått temperaturer på under en miljarddels kelvin (10⁻⁹ K), kallare än något annat någonstans i det observerbara universum. Det är en konsekvens av tredje huvudsatsen att 0 K inte kan nås i ett ändligt antal steg, men man kan komma så nära man vill.`,
         },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
-            level: 2,
+            level: 1,
             question: `Du tar ut en kall läskburk (4 °C) ur kylen och ställer den på köksbordet, där rumsluften är 22 °C. Efter ett tag har läskburken samma temperatur som rummet. Vilken huvudsats beskriver mest direkt denna utjämning?`,
             choices: [
-                `Nollte huvudsatsen — två system i kontakt utbyter energi tills de når jämvikt (samma temperatur).`,
-                `Första huvudsatsen — energin från rummet blir lika stor som energin i läskburken.`,
-                `Andra huvudsatsen — värme flödar från kallt till varmt.`,
-                `Tredje huvudsatsen — utjämningen är bara möjlig om båda systemen ligger ovanför 0 K.`,
+                `Nollte huvudsatsen: två system i kontakt utbyter energi tills de når jämvikt (samma temperatur).`,
+                `Första huvudsatsen: energin från rummet blir lika stor som energin i läskburken.`,
+                `Andra huvudsatsen: värme flödar från kallt till varmt.`,
+                `Tredje huvudsatsen: utjämningen är bara möjlig om båda systemen ligger ovanför 0 K.`,
             ],
             correct: 0,
-            solution: `**Nollte huvudsatsen** säger att två system i kontakt utbyter energi tills de når **termisk jämvikt** — det vill säga samma temperatur. Det är vad som händer med läskburken: värme flödar från den varmare rumsluften till den kallare burken tills temperaturerna är lika.
+            solution: `**Nollte huvudsatsen** säger att två system i kontakt utbyter energi tills de når **termisk jämvikt**, det vill säga samma temperatur. Det är vad som händer med läskburken: värme flödar från den varmare rumsluften till den kallare burken tills temperaturerna är lika.
 
-**Svar:** Alternativ A — nollte huvudsatsen.
+**Svar:** Alternativ A, nollte huvudsatsen.
 
-**Generell slutsats:** Andra huvudsatsen är också relevant (den bestämmer **riktningen** på värmeflödet — från varmt till kallt), men det är nollte huvudsatsen som specifikt säger att utjämningen alltid sker fullt ut. Det är på grund av nollte huvudsatsen som termometrar fungerar: termometern och föremålet utbyter energi tills de har samma temperatur, och termometern visar då föremålets temperatur.`,
+**Generell slutsats:** Andra huvudsatsen är också relevant (den bestämmer **riktningen** på värmeflödet, från varmt till kallt), men det är nollte huvudsatsen som specifikt säger att utjämningen alltid sker fullt ut. Det är på grund av nollte huvudsatsen som termometrar fungerar: termometern och föremålet utbyter energi tills de har samma temperatur, och termometern visar då föremålets temperatur.`,
         },
         {
             level: 2,
@@ -37212,11 +38436,827 @@ $$ m = \\frac{8{,}64}{2{,}26} \\approx 3{,}82\\ \\mathrm{kg} $$
                 `Tredje huvudsatsen.`,
             ],
             correct: 2,
-            solution: `Värme flödar av sig själv bara från varmt till kallt — aldrig tvärtom. Att överföra värme från en kallare till en varmare plats kräver alltid att man tillför arbete (till exempel el till en kompressor i en värmepump). Det är **andra huvudsatsen** som gör en sådan här "passiv värmepump utan kraftkälla" omöjlig.
+            solution: `Värme flödar av sig själv bara från varmt till kallt, aldrig tvärtom. Att överföra värme från en kallare till en varmare plats kräver alltid att man tillför arbete (till exempel el till en kompressor i en värmepump). Det är **andra huvudsatsen** som gör en sådan här "passiv värmepump utan kraftkälla" omöjlig.
 
-**Svar:** Alternativ C — andra huvudsatsen.
+**Svar:** Alternativ C, andra huvudsatsen.
 
-**Generell slutsats:** Riktiga värmepumpar och kylskåp bryter inte mot andra huvudsatsen — de förbrukar elektrisk energi för att "tvinga" värme att gå från kallt till varmt. En vanlig värmepump kan dock leverera 3–4 gånger så mycket värmeenergi till rummet som den drar el från väggen — eftersom resten kommer från uteluften. Det är fortfarande inte gratis, men det är effektivt.`,
+**Generell slutsats:** Riktiga värmepumpar och kylskåp bryter inte mot andra huvudsatsen, eftersom de förbrukar elektrisk energi för att "tvinga" värme att gå från kallt till varmt. En vanlig värmepump kan dock leverera 3–4 gånger så mycket värmeenergi till rummet som den drar el från väggen, eftersom resten kommer från uteluften. Det är fortfarande inte gratis, men det är effektivt.`,
+        },
+        {
+            level: 1,
+            question: `En pannlampa drar 4,0 J elektrisk energi från batteriet varje sekund. Av den energin blir 1,4 J ljus och resten värme. Hur mycket värme avger lampan till omgivningen under 1,0 minut? Ange svaret i joule.`,
+            answer: { value: 160, unit: 'J', tol: 0.04 },
+            solution: `Enligt **första huvudsatsen** kan energi inte förstöras, bara omvandlas. Den elektriska energin måste därför vara lika stor som ljuset och värmen tillsammans.
+
+Värmen varje sekund blir
+
+$$
+4{,}0 - 1{,}4 = 2{,}6\\ \\mathrm{J}
+$$
+
+En minut är 60 sekunder, så värmen under en minut blir
+
+$$
+2{,}6 \\cdot 60 = 156\\ \\mathrm{J} \\approx 160\\ \\mathrm{J}
+$$
+
+**Svar:** 160 J`,
+        },
+        {
+            level: 1,
+            question: `Två metallblock, A och B, läggs mot varandra i en låda med så bra isolering att ingen energi lämnar lådan. Diagrammet visar hur blockens temperatur *T* ändras med tiden *t*.
+
+${makeDiagram({
+    xMax: 30, yMax: 90,
+    xTicks: [0, 5, 10, 15, 20, 25, 30], yTicks: [0, 10, 20, 30, 40, 50, 60, 70, 80],
+    xLabel: '<tspan font-style="italic">t</tspan> (min)',
+    yLabel: '<tspan font-style="italic">T</tspan> (°C)',
+    paths: [
+        { points: Array.from({ length: 121 }, (_, i) => [i / 4, 50 + 20 * Math.exp(-i / 16)]) },
+        { points: Array.from({ length: 121 }, (_, i) => [i / 4, 50 - 40 * Math.exp(-i / 16)]), color: '#1d6fa5' },
+    ],
+}).replace('</svg>', '<text x="124" y="112" font-size="16" font-weight="600" fill="#c8324a">A</text><text x="124" y="206" font-size="16" font-weight="600" fill="#1d6fa5">B</text></svg>')}
+
+a) Vid vilken temperatur är blocken i jämvikt? Svara i °C.<br>b) Åt vilket håll har värme flödat, och vilken huvudsats bestämmer riktningen?`,
+            answer: { value: 50, unit: '°C', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 50, unit: '°C', tol: 0.03 },
+                { del: 'b' },
+            ],
+            solution: `**a)** Enligt **nollte huvudsatsen** utbyter blocken energi tills de är i jämvikt, alltså tills de har samma temperatur. Kurvorna närmar sig varandra och sammanfaller vid 50 °C. Därefter ändras ingen av temperaturerna.
+
+**Svar:** 50 °C
+
+**b)** Block A är varmast från början och svalnar. Block B är kallast och värms upp. Värme har alltså flödat från A till B, från varmt till kallt. Det är **andra huvudsatsen** som bestämmer riktningen.
+
+**Svar:** Från A till B, enligt andra huvudsatsen`,
+        },
+        {
+            level: 1,
+            question: `Fyra stenar ligger i var sitt kylrum. Tabellen visar deras temperatur.
+
+| Sten | Temperatur |
+| --- | --- |
+| A | 250 K |
+| B | −10 °C |
+| C | 5 °C |
+| D | 270 K |
+
+Två av stenarna läggs mot varandra. I vilket fall flödar värme från den första stenen till den andra?`,
+            choices: [
+                `Från A till B`,
+                `Från B till D`,
+                `Från D till C`,
+                `Från C till D`,
+            ],
+            correct: 3,
+            solution: `Enligt **andra huvudsatsen** flödar värme av sig själv bara från varmt till kallt. Temperaturerna måste därför jämföras i samma skala. Vi använder $T_K = T_C + 273$ för B och C.
+
+$$
+T_\\mathrm{B} = -10 + 273 = 263\\ \\mathrm{K}
+$$
+
+$$
+T_\\mathrm{C} = 5 + 273 = 278\\ \\mathrm{K}
+$$
+
+Från varmast till kallast är ordningen C (278 K), D (270 K), B (263 K), A (250 K). Den första stenen är varmare än den andra bara när värmen flödar från C till D.
+
+**Svar:** Alternativ D`,
+        },
+        {
+            level: 1,
+            question: `Ett kylskåp tar upp 240 J värme från maten och luften inne i skåpet medan kompressorn drar 80 J elektrisk energi. Hur mycket värme avger gallret på kylskåpets baksida till köket under samma tid? Räkna med att kylskåpets egen energi inte ändras. Ange svaret i joule.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 236" width="540" height="319" style="max-width:100%;height:auto;display:block;margin:16px auto;font-family:Poppins,sans-serif"><line x1="20" y1="222" x2="380" y2="222" stroke="#0f1620" stroke-width="2"/><rect x="70" y="24" width="146" height="192" rx="8" fill="#e6e9ec" stroke="#0f1620" stroke-width="2"/><rect x="84" y="36" width="120" height="128" rx="4" fill="#d5e8f2" stroke="#0f1620" stroke-width="1.4"/><line x1="78" y1="25" x2="78" y2="215" stroke="#0f1620" stroke-width="1.4"/><rect x="64" y="88" width="5" height="44" rx="2.5" fill="#8a8579" stroke="#0f1620" stroke-width="1"/><line x1="84" y1="76" x2="204" y2="76" stroke="#6f8ea0" stroke-width="2"/><line x1="84" y1="122" x2="204" y2="122" stroke="#6f8ea0" stroke-width="2"/><path d="M 94 75 V 54 L 99 47 H 109 L 114 54 V 75 Z" fill="#f7f2e8" stroke="#0f1620" stroke-width="1.2"/><path d="M 94 54 H 114" stroke="#0f1620" stroke-width="1"/><rect x="94" y="60" width="20" height="8" fill="#1d6fa5"/><path d="M 92 121 L 92 109 L 126 101 L 126 121 Z" fill="#e8b93e" stroke="#0f1620" stroke-width="1.2"/><circle cx="106" cy="114" r="2.6" fill="#c99423"/><circle cx="117" cy="111" r="2" fill="#c99423"/><circle cx="102" cy="141" r="6" fill="#c8324a" stroke="#0f1620" stroke-width="1"/><circle cx="116" cy="140" r="6.5" fill="#6b8e3d" stroke="#0f1620" stroke-width="1"/><path d="M 92 144 H 128 Q 126 163 110 163 Q 94 163 92 144 Z" fill="#b5651d" stroke="#0f1620" stroke-width="1.2"/><rect x="78" y="216" width="14" height="6" fill="#0f1620"/><rect x="194" y="216" width="14" height="6" fill="#0f1620"/><path d="M 166 214 V 190 Q 166 178 185 178 Q 204 178 204 190 V 214 Z" fill="#8a8579" stroke="#0f1620" stroke-width="1.6"/><path d="M 204 190 H 236 V 176" fill="none" stroke="#0f1620" stroke-width="3"/><path d="M 236 48 q 14 8 0 16 q -14 8 0 16 q 14 8 0 16 q -14 8 0 16 q 14 8 0 16 q -14 8 0 16 q 14 8 0 16 q -14 8 0 16" fill="none" stroke="#0f1620" stroke-width="3"/><path d="M 236 48 V 42 H 216" fill="none" stroke="#0f1620" stroke-width="3"/><text x="123" y="200" text-anchor="middle" font-size="13" font-weight="500" fill="#0f1620">kompressor</text><line x1="138" y1="99" x2="214" y2="99" stroke="#1d6fa5" stroke-width="4.5"/><polygon points="214,106 226,99 214,92" fill="#1d6fa5"/><text x="168" y="92" text-anchor="middle" font-size="14" font-weight="600" fill="#1d6fa5">240 J</text><line x1="296" y1="206" x2="218" y2="206" stroke="#b5651d" stroke-width="4.5"/><polygon points="218,199 206,206 218,213" fill="#b5651d"/><text x="304" y="211" text-anchor="start" font-size="14" font-weight="600" fill="#b5651d">80 J</text><line x1="252" y1="112" x2="310" y2="112" stroke="#c8324a" stroke-width="4.5"/><polygon points="310,119 322,112 310,105" fill="#c8324a"/><text x="330" y="117" text-anchor="start" font-size="14" font-weight="600" fill="#c8324a">värme</text><text x="252" y="52" text-anchor="start" font-size="13" font-weight="500" fill="#0f1620">galler</text></svg>`,
+            answer: { value: 320, unit: 'J', tol: 0.02 },
+            solution: `Enligt **första huvudsatsen** kan energi varken skapas eller förstöras. All energi som kommer in i kylskåpets maskineri måste därför lämna det igen:
+
+$$
+E_\\text{ut} = E_\\text{in}
+$$
+
+In kommer värmen från skåpets insida och den elektriska energin.
+
+$$
+E_\\text{ut} = 240 + 80 = 320\\ \\mathrm{J}
+$$
+
+Värmen flyttas från det kalla skåpet till det varmare köket. Det strider inte mot andra huvudsatsen, eftersom det inte sker av sig självt: kompressorn tillför energi.
+
+**Svar:** 320 J`,
+        },
+        {
+            level: 2,
+            question: `En het sommardag ställer Elin upp dörren till kylskåpet för att svalka köket. Köket är mycket väl isolerat och innehåller 50 kg luft. Kylskåpets kompressor drar hela tiden 150 W elektrisk effekt. Räkna med $c_\\mathrm{luft} = 1{,}0\\ \\mathrm{kJ/(kg \\cdot K)}$ och bortse från att väggar, möbler och mat tar upp värme.<br>a) Förklara varför köket inte blir svalare.<br>b) Hur många grader ändras luftens temperatur på 20 minuter?`,
+            answer: { value: 3.6, unit: '°C', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 3.6, unit: '°C', tol: 0.03 },
+            ],
+            solution: `**a)** Kylskåpet tar värme från luften framför den öppna dörren, men lämnar tillbaka samma värme till luften vid gallret på baksidan. Inget av detta lämnar köket. Dessutom tillförs elektrisk energi till kompressorn, och enligt **första huvudsatsen** försvinner inte den energin, utan den omvandlas till värme i köket. Kökets energi ökar alltså.
+
+**Svar:** Värmen flyttas bara inom köket, och den elektriska energin blir också värme där, så köket blir varmare
+
+**b)** Den enda energi som kommer in i köket är den elektriska. Den tas upp av luften:
+
+$$
+E_\\text{avg} = E_\\text{upp}
+$$
+
+$E_\\text{avg} = P \\cdot t$ och $E_\\text{upp} = c \\cdot m \\cdot \\Delta T$ ger
+
+$$
+P \\cdot t = c \\cdot m \\cdot \\Delta T
+$$
+
+$$
+\\Delta T = \\frac{P \\cdot t}{c \\cdot m}
+$$
+
+$$
+\\left[ \\begin{array}{l}
+P = 150\\ \\mathrm{W} \\\\
+t = 20 \\cdot 60 = 1\\,200\\ \\mathrm{s} \\\\
+c = 1\\,000\\ \\mathrm{J/(kg \\cdot K)} \\\\
+m = 50\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$
+\\Delta T = \\frac{150 \\cdot 1\\,200}{1\\,000 \\cdot 50} = 3{,}6\\ \\mathrm{K}
+$$
+
+I ett verkligt kök tar även väggar och möbler upp värme, så temperaturen stiger mindre.
+
+**Svar:** Temperaturen stiger med 3,6 °C`,
+        },
+        {
+            level: 2,
+            question: `Fyra metallklossar, A, B, C och D, läggs mot varandra två och två, och man undersöker om värme flödar mellan dem. Klossarna är så stora att deras temperatur knappt ändras under försöken. Tabellen visar resultatet.
+
+| Klossar i kontakt | Värmeflöde |
+| --- | --- |
+| A och B | inget |
+| A och C | från C till A |
+| B och D | från B till D |
+
+Vilken rangordning av temperaturerna stämmer?`,
+            choices: [
+                `$T_\\mathrm{D} > T_\\mathrm{A} = T_\\mathrm{B} > T_\\mathrm{C}$`,
+                `$T_\\mathrm{C} > T_\\mathrm{A} = T_\\mathrm{B} > T_\\mathrm{D}$`,
+                `$T_\\mathrm{A} = T_\\mathrm{B} > T_\\mathrm{C} > T_\\mathrm{D}$`,
+                `$T_\\mathrm{C} = T_\\mathrm{D} > T_\\mathrm{A} = T_\\mathrm{B}$`,
+            ],
+            correct: 1,
+            solution: `**A och B:** Inget värmeflöde betyder att klossarna redan är i jämvikt. Enligt **nollte huvudsatsen** har de samma temperatur, $T_\\mathrm{A} = T_\\mathrm{B}$.
+
+**A och C:** Värme flödar från varmt till kallt enligt **andra huvudsatsen**. Flödet går från C till A, så $T_\\mathrm{C} > T_\\mathrm{A}$.
+
+**B och D:** Flödet går från B till D, så $T_\\mathrm{B} > T_\\mathrm{D}$.
+
+Eftersom A och B har samma temperatur kan de tre resultaten sättas ihop:
+
+$$
+T_\\mathrm{C} > T_\\mathrm{A} = T_\\mathrm{B} > T_\\mathrm{D}
+$$
+
+Vi vet därmed också att värme skulle flöda från C till D, trots att de aldrig har haft kontakt.
+
+**Svar:** Alternativ B`,
+        },
+        {
+            level: 2,
+            question: `En villa hålls vid 21 °C en vinterdag. Värme läcker då ut ur huset med effekten 4,8 kW. Huset värms av en värmepump som drar 1,5 kW elektrisk effekt och tar resten av energin från den kalla uteluften.<br>a) Med vilken effekt tar värmepumpen energi från uteluften? Svara i kW.<br>b) Hur många kilowattimmar elektrisk energi sparar man på ett dygn jämfört med att värma huset med elelement?<br>c) Värmepumpen flyttar värme från kallt till varmt. Varför strider det inte mot andra huvudsatsen?`,
+            answer: { value: 3.3, unit: 'kW', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 3.3, unit: 'kW', tol: 0.02 },
+                { del: 'b', value: 79, unit: 'kWh', tol: 0.02 },
+                { del: 'c' },
+            ],
+            solution: `**a)** Temperaturen i huset är konstant. Enligt **första huvudsatsen** måste då lika mycket energi tillföras som det läcker ut varje sekund, alltså 4,8 kW. Av detta kommer 1,5 kW från elnätet och resten från uteluften.
+
+$$
+P_\\text{ute} = 4{,}8 - 1{,}5 = 3{,}3\\ \\mathrm{kW}
+$$
+
+**Svar:** 3,3 kW
+
+**b)** Elelement omvandlar elektrisk energi till värme och skulle därför dra 4,8 kW. Besparingen är skillnaden mellan 4,8 kW och 1,5 kW, alltså 3,3 kW. Energi är effekt gånger tid:
+
+$$
+E = P \\cdot t = 3{,}3 \\cdot 24 = 79{,}2\\ \\mathrm{kWh} \\approx 79\\ \\mathrm{kWh}
+$$
+
+**Svar:** 79 kWh
+
+**c)** Andra huvudsatsen säger att värme aldrig flödar från kallt till varmt **av sig själv**. I värmepumpen sker det bara för att elektrisk energi tillförs hela tiden. Slår man av strömmen slutar pumpen, och värmen läcker ut från det varma huset till den kalla luften.
+
+**Svar:** Värmen flödar inte av sig själv, utan pumpen tillförs elektrisk energi`,
+        },
+        {
+            level: 2,
+            question: `En handboll med massan 0,45 kg släpps från vila och studsar mot golvet. Diagrammet visar bollens höjd *h* över golvet som funktion av tiden *t*. Bortse från luftmotståndet.
+
+${makeDiagram({
+    xMax: 2.6, yMax: 2,
+    xTicks: [0, 0.5, 1, 1.5, 2, 2.5], yTicks: [0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8],
+    yLabel: '<tspan font-style="italic">h</tspan> (m)',
+    paths: [{ points: [[1.8, 0, 0, 0.60548], [1.2, 1.09985, 0.60548, 1.59422], [0.8, 1.99788, 1.59422, 2.40154]]
+        .flatMap(([topp, tm, t0, t1]) => Array.from({ length: 41 }, (_, i) => {
+            const t = t0 + (t1 - t0) * i / 40;
+            return [t, Math.max(0, topp - 4.91 * (t - tm) ** 2)];
+        })) }],
+})}
+
+a) Hur mycket mekanisk energi har bollen förlorat från det att den släpps tills den når sin högsta punkt efter den andra studsen? Svara i joule.<br>b) Vilken av de båda studsarna ger störst förlust av mekanisk energi?<br>c) Till sist ligger bollen stilla. En elev säger: "Då har bollens energi tagit slut." Rätta påståendet med hjälp av första huvudsatsen.`,
+            answer: { value: 4.4, unit: 'J', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 4.4, unit: 'J', tol: 0.03 },
+                { del: 'b' },
+                { del: 'c' },
+            ],
+            solution: `**a)** I sina högsta punkter är bollen stilla, så där är all mekanisk energi lägesenergi. Förlusten är skillnaden i lägesenergi:
+
+$$
+\\Delta E = m \\cdot g \\cdot h_0 - m \\cdot g \\cdot h_2 = m \\cdot g \\cdot (h_0 - h_2)
+$$
+
+$$
+\\left[ \\begin{array}{l}
+m = 0{,}45\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+h_0 = 1{,}8\\ \\mathrm{m}\\ (\\text{avläst}) \\\\
+h_2 = 0{,}80\\ \\mathrm{m}\\ (\\text{avläst})
+\\end{array} \\right]
+$$
+
+$$
+\\Delta E = 0{,}45 \\cdot 9{,}82 \\cdot (1{,}8 - 0{,}80) = 4{,}419\\ \\mathrm{J} \\approx 4{,}4\\ \\mathrm{J}
+$$
+
+**Svar:** 4,4 J
+
+**b)** Förlusten är proportionell mot hur mycket högsta höjden minskar. Efter första studsen når bollen 1,2 m och efter andra studsen 0,80 m. Vid den första studsen minskar höjden med
+
+$$
+1{,}8 - 1{,}2 = 0{,}6\\ \\mathrm{m}
+$$
+
+och vid den andra med
+
+$$
+1{,}2 - 0{,}80 = 0{,}4\\ \\mathrm{m}
+$$
+
+Höjden minskar mest vid den första studsen.
+
+**Svar:** Den första studsen
+
+**c)** Energi kan inte förstöras, bara omvandlas. Vid varje studs omvandlas en del av den mekaniska energin, så att atomerna i bollen och golvet rör sig snabbare och temperaturen stiger lite. En liten del blir också ljud, som till slut värmer luften och väggarna. När bollen ligger stilla finns all energi kvar, men som inre energi i boll, golv och omgivning.
+
+**Svar:** Energin har inte tagit slut, utan har omvandlats till inre energi i bollen och omgivningen`,
+        },
+        {
+            level: 2,
+            question: `I ett laboratorium kyls en bit metall i steg. Varje steg halverar metallens temperatur i kelvin. Från början är temperaturen 27 °C.<br>a) Hur många steg behövs för att temperaturen ska bli lägre än 1,0 K?<br>b) En student säger: "Med några steg till är vi nere på absoluta nollpunkten." Stämmer det? Motivera.<br>c) Studenten fortsätter: "Vid absoluta nollpunkten kunde metallen ändå användas för att värma något annat, bara lite." Bemöt påståendet.`,
+            answer: { value: 9, unit: 'steg', tol: 0.001 },
+            delsvar: [
+                { del: 'a', value: 9, unit: 'steg', tol: 0.001 },
+                { del: 'b' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Starttemperaturen i kelvin är
+
+$$
+T_K = T_C + 273 = 27 + 273 = 300\\ \\mathrm{K}
+$$
+
+Efter *n* steg är temperaturen $300 \\cdot 0{,}5^n$ kelvin. Vi prövar:
+
+$$
+300 \\cdot 0{,}5^8 \\approx 1{,}17\\ \\mathrm{K}
+$$
+
+$$
+300 \\cdot 0{,}5^9 \\approx 0{,}586\\ \\mathrm{K}
+$$
+
+Åtta steg räcker inte, men nio steg gör det.
+
+**Svar:** 9 steg
+
+**b)** Hälften av ett positivt tal är alltid ett positivt tal. Hur många steg man än gör är temperaturen därför större än 0 K. Metallen kommer allt närmare absoluta nollpunkten, men når den aldrig.
+
+**Svar:** Nej, temperaturen blir aldrig exakt 0 K
+
+**c)** Enligt **tredje huvudsatsen** upphör alla processer vid absoluta nollpunkten. Atomerna har då ingen rörelseenergi kvar att lämna ifrån sig. Dessutom är absoluta nollpunkten den lägsta möjliga temperaturen, så allt annat är varmare. Enligt **andra huvudsatsen** flödar värme från varmt till kallt, alltså till metallen och inte från den.
+
+**Svar:** Påståendet är fel, eftersom det inte finns någon rörelseenergi att avge och inget som är kallare än metallen`,
+        },
+        {
+            level: 2,
+            question: `En kylsten är en liten stenkub som kyls i frysen och sedan läggs i ett glas, så att drycken svalnar utan att spädas ut. Fyra kylstenar med massan 25 g var tas ur en frys med temperaturen −18 °C och läggs i 0,20 kg saft med temperaturen 22 °C. Räkna med $c_\\mathrm{sten} = 0{,}98\\ \\mathrm{kJ/(kg \\cdot K)}$ och $c_\\mathrm{saft} = 4{,}2\\ \\mathrm{kJ/(kg \\cdot K)}$, och bortse från energiutbyte med glaset och luften.<br>a) En kompis säger: "Stenarna lämnar över sin kyla till saften." Rätta påståendet med hjälp av en av huvudsatserna.<br>b) Vilken temperatur har saften när den och stenarna är i jämvikt? Svara i °C.`,
+            answer: { value: 18, unit: '°C', tol: 0.02 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 18, unit: '°C', tol: 0.02 },
+            ],
+            solution: `**a)** Kyla är inget som flödar. Enligt **andra huvudsatsen** flödar värme från varmt till kallt, alltså från saften till stenarna. Saften svalnar för att den avger energi, och stenarna värms upp för att de tar emot den.
+
+**Svar:** Stenarna avger ingen kyla, utan värme flödar från den varmare saften till de kallare stenarna
+
+**b)** Enligt **nollte huvudsatsen** har saften och stenarna samma temperatur *T* i jämvikt. Enligt **första huvudsatsen** är den energi som saften avger lika stor som den energi som stenarna tar upp:
+
+$$
+E_\\text{avg} = E_\\text{upp}
+$$
+
+Vi använder $E = c \\cdot m \\cdot \\Delta T$. Saften svalnar från 22 °C till *T* och stenarna värms från −18 °C till *T*:
+
+$$
+c_\\mathrm{saft} \\cdot m_\\mathrm{saft} \\cdot (22 - T) = c_\\mathrm{sten} \\cdot m_\\mathrm{sten} \\cdot (T - (-18))
+$$
+
+$$
+\\left[ \\begin{array}{l}
+c_\\mathrm{saft} = 4\\,200\\ \\mathrm{J/(kg \\cdot K)} \\\\
+m_\\mathrm{saft} = 0{,}20\\ \\mathrm{kg} \\\\
+c_\\mathrm{sten} = 980\\ \\mathrm{J/(kg \\cdot K)} \\\\
+m_\\mathrm{sten} = 4 \\cdot 0{,}025 = 0{,}10\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$
+4\\,200 \\cdot 0{,}20 \\cdot (22 - T) = 980 \\cdot 0{,}10 \\cdot (T + 18)
+$$
+
+$$
+840 \\cdot (22 - T) = 98 \\cdot (T + 18)
+$$
+
+$$
+18\\,480 - 840 \\cdot T = 98 \\cdot T + 1\\,764
+$$
+
+Vi adderar $840 \\cdot T$ till båda led och subtraherar sedan $1\\,764$ från båda led:
+
+$$
+16\\,716 = 938 \\cdot T
+$$
+
+$$
+T = \\frac{16\\,716}{938} \\approx 17{,}82\\ ^\\circ\\mathrm{C} \\approx 18\\ ^\\circ\\mathrm{C}
+$$
+
+Rimlighet: saften har både större massa och större specifik värmekapacitet, så jämviktstemperaturen ska ligga mycket närmare 22 °C än −18 °C.
+
+**Svar:** 18 °C`,
+        },
+        {
+            level: 3,
+            question: `En firma säljer en "evighetslampa". Ett svänghjul driver en generator. Generatorn driver en lampa och dessutom en motor, som ska hålla svänghjulet i gång. Ingen energi tillförs utifrån.
+
+Två försök görs, och i båda har svänghjulet energin 1,2 kJ från början. När lampan är påslagen halveras svänghjulets energi på 8,0 minuter. När lampan är urkopplad tar halveringen 24 minuter. I vart och ett av försöken försvinner samma andel av energin varje sekund. När svänghjulet har en viss energi är alla andra förluster än lampans lika stora i de båda försöken.<br>a) Firman påstår att lampan skulle lysa för evigt om man bara fick bort alla andra förluster. Bemöt påståendet.<br>b) Hur mycket energi får lampan sammanlagt i det första försöket, om den får lysa tills svänghjulets energi är förbrukad? Svara i kJ.`,
+            answer: { value: 0.80, unit: 'kJ', tol: 0.02 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 0.80, unit: 'kJ', tol: 0.02 },
+            ],
+            solution: `**a)** Betrakta svänghjul, generator och motor tillsammans. Energin som motorn ger tillbaka till svänghjulet har generatorn tidigare tagit därifrån, så den tillför inget nytt.
+
+Lampan avger ljus och värme, och den energin lämnar anläggningen. Enligt **första huvudsatsen** kan energi inte skapas, så den måste tas från svänghjulet. Även helt utan andra förluster minskar därför svänghjulets energi så länge lampan lyser, och lampan kan sammanlagt aldrig avge mer än de 1,2 kJ som fanns från början.
+
+**Svar:** Påståendet är fel, eftersom lampan hela tiden tar energi som inte ersätts
+
+**b)** Energin minskar med samma andel varje sekund, så minskningen är exponentiell. Halveringstiderna är $8{,}0\\ \\mathrm{min} = 480\\ \\mathrm{s}$ och $24\\ \\mathrm{min} = 1\\,440\\ \\mathrm{s}$. Av svänghjulets energi återstår efter en sekund andelen
+
+$$
+0{,}5^{1/480} \\approx 0{,}998557 \\quad \\text{(med lampa)}
+$$
+
+$$
+0{,}5^{1/1440} \\approx 0{,}999519 \\quad \\text{(utan lampa)}
+$$
+
+Andelen som försvinner på en sekund är alltså
+
+$$
+1 - 0{,}998557 = 0{,}001443 \\quad \\text{(med lampa)}
+$$
+
+$$
+1 - 0{,}999519 = 0{,}000481 \\quad \\text{(utan lampa)}
+$$
+
+Utan lampa är det bara de andra förlusterna som tar energi. De är lika stora i båda försöken när svänghjulet har samma energi. Skillnaden mellan andelarna är därför den andel som lampan tar varje sekund:
+
+$$
+0{,}001443 - 0{,}000481 = 0{,}000962
+$$
+
+Lampans del av hela minskningen under sekunden är
+
+$$
+\\frac{0{,}000962}{0{,}001443} \\approx 0{,}667 \\approx \\frac{2}{3}
+$$
+
+Andelarna är desamma varje sekund, så lampan får två tredjedelar av minskningen hela tiden, oavsett hur mycket energi som är kvar. När hela svänghjulets energi är förbrukad har lampan därför fått
+
+$$
+E = \\frac{2}{3} \\cdot 1{,}2 = 0{,}80\\ \\mathrm{kJ}
+$$
+
+Enligt **första huvudsatsen** finns resten, 0,40 kJ, också kvar någonstans. Den har blivit inre energi i lager, ledningar och luft.
+
+Rimlighet: med lampan på minskar energin tre gånger så snabbt som utan. En tredjedel av minskningen beror då på de andra förlusterna och två tredjedelar på lampan.
+
+**Svar:** 0,80 kJ`,
+        },
+        {
+            level: 3,
+            question: `Två block av samma material ligger mot varandra i en låda. Ingen energi lämnar lådan. Block 2 har dubbelt så stor massa som block 1. Från början har block 1 temperaturen 80 °C och block 2 temperaturen 20 °C. I diagrammet motsvarar varje punkt ett tänkt läge, där $T_1$ och $T_2$ är blockens temperaturer. Starten är den ofyllda ringen.
+
+${makeDiagram({
+    xMax: 110, yMax: 70,
+    xTicks: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100], yTicks: [0, 10, 20, 30, 40, 50, 60],
+    xLabel: '<tspan font-style="italic">T</tspan><tspan dy="3" font-size="10">1</tspan><tspan dy="-3"> (°C)</tspan>',
+    yLabel: '<tspan font-style="italic">T</tspan><tspan dy="3" font-size="10">2</tspan><tspan dy="-3"> (°C)</tspan>',
+}).replace('</svg>', '<circle cx="350.9" cy="215.7" r="5.5" fill="#fff" stroke="#c8324a" stroke-width="2.2"/><circle cx="278.2" cy="178.6" r="5.5" fill="#c8324a" stroke="#c8324a" stroke-width="2.2"/><text x="288.2" y="169.6" text-anchor="start" font-size="16" font-weight="600" fill="#0f1620">P</text><circle cx="205.5" cy="141.4" r="5.5" fill="#c8324a" stroke="#c8324a" stroke-width="2.2"/><text x="215.5" y="132.4" text-anchor="start" font-size="16" font-weight="600" fill="#0f1620">Q</text><circle cx="241.8" cy="104.3" r="5.5" fill="#c8324a" stroke="#c8324a" stroke-width="2.2"/><text x="251.8" y="95.3" text-anchor="start" font-size="16" font-weight="600" fill="#0f1620">R</text><circle cx="423.6" cy="252.9" r="5.5" fill="#c8324a" stroke="#c8324a" stroke-width="2.2"/><text x="433.6" y="243.9" text-anchor="start" font-size="16" font-weight="600" fill="#0f1620">S</text><circle cx="132.7" cy="104.3" r="5.5" fill="#c8324a" stroke="#c8324a" stroke-width="2.2"/><text x="142.7" y="95.3" text-anchor="start" font-size="16" font-weight="600" fill="#0f1620">U</text></svg>')}
+
+Utred vilka av lägena P, Q, R, S och U som blocken kan komma till av sig själva. Ange för varje läge som är omöjligt vilken huvudsats som hindrar det, och bestäm i vilket läge blocken hamnar till slut.`,
+            solution: `**Första huvudsatsen: vilka lägen bevarar energin?** Den energi som block 1 avger är lika stor som den energi som block 2 tar upp. Med massan *m* för block 1 och $2 \\cdot m$ för block 2 ger $E = c \\cdot m \\cdot \\Delta T$
+
+$$
+c \\cdot m \\cdot (80 - T_1) = c \\cdot 2 \\cdot m \\cdot (T_2 - 20)
+$$
+
+Båda led divideras med $c \\cdot m$, så varken massan eller materialet spelar någon roll:
+
+$$
+80 - T_1 = 2 \\cdot T_2 - 40
+$$
+
+$$
+T_1 + 2 \\cdot T_2 = 120 \\qquad (1)
+$$
+
+Första huvudsatsen tillåter alltså bara lägen som uppfyller (1), en rät linje genom startpunkten. Vi prövar $T_1 + 2 \\cdot T_2$ i varje läge:
+
+| Läge | $T_1$ (°C) | $T_2$ (°C) | $T_1 + 2 \\cdot T_2$ |
+| --- | --- | --- | --- |
+| P | 60 | 30 | 120 |
+| Q | 40 | 40 | 120 |
+| R | 50 | 50 | 150 |
+| S | 100 | 10 | 120 |
+| U | 20 | 50 | 120 |
+
+I R har blocken tillsammans mer energi än från början. Att 50 °C ligger mitt emellan 80 °C och 20 °C lockar, men medelvärdet gäller bara om massorna är lika.
+
+**Nollte huvudsatsen: var slutar det?** Blocken utbyter energi tills de är i jämvikt, $T_1 = T_2$. Insättning av $T_2 = T_1$ i (1), $T_1 + 2 \\cdot T_2 = 120$, ger
+
+$$
+3 \\cdot T_1 = 120
+$$
+
+$$
+T_1 = \\frac{120}{3} = 40\\ ^\\circ\\mathrm{C}
+$$
+
+Det är läge Q.
+
+**Andra huvudsatsen: åt vilket håll rör sig läget längs linjen?** Så länge $T_1 > T_2$ flödar värme från block 1 till block 2. Då minskar $T_1$ och $T_2$ ökar, från starten via P till Q.
+
+- I **S** är block 1 varmare och block 2 kallare än från början. Värme har då flödat från det kalla blocket till det varma.
+- För att nå **U** måste blocken först passera Q, där de har samma temperatur. Därefter måste värme flöda från block 1, som då blir allt kallare, till det varmare block 2.
+
+Båda är omöjliga av sig själva enligt andra huvudsatsen, trots att energin bevaras.
+
+${makeDiagram({
+    xMax: 110, yMax: 70,
+    xTicks: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100], yTicks: [0, 10, 20, 30, 40, 50, 60],
+    xLabel: '<tspan font-style="italic">T</tspan><tspan dy="3" font-size="10">1</tspan><tspan dy="-3"> (°C)</tspan>',
+    yLabel: '<tspan font-style="italic">T</tspan><tspan dy="3" font-size="10">2</tspan><tspan dy="-3"> (°C)</tspan>',
+    paths: [
+        { points: [[0, 60], [104, 8]], color: '#8a8579', width: 1.8, dash: '6 5' },
+        { points: [[80, 20], [40, 40]], color: '#1d6fa5', width: 4 },
+    ],
+}).replace('</svg>', '<polygon points="234.7,156.4 250.8,155.6 243.5,169.9" fill="#1d6fa5"/><circle cx="350.9" cy="215.7" r="5.5" fill="#fff" stroke="#c8324a" stroke-width="2.2"/><circle cx="278.2" cy="178.6" r="5.5" fill="#c8324a" stroke="#c8324a" stroke-width="2.2"/><text x="288.2" y="169.6" text-anchor="start" font-size="16" font-weight="600" fill="#0f1620">P</text><circle cx="205.5" cy="141.4" r="5.5" fill="#c8324a" stroke="#c8324a" stroke-width="2.2"/><text x="215.5" y="132.4" text-anchor="start" font-size="16" font-weight="600" fill="#0f1620">Q</text><circle cx="241.8" cy="104.3" r="5.5" fill="#c8324a" stroke="#c8324a" stroke-width="2.2"/><text x="251.8" y="95.3" text-anchor="start" font-size="16" font-weight="600" fill="#0f1620">R</text><circle cx="423.6" cy="252.9" r="5.5" fill="#c8324a" stroke="#c8324a" stroke-width="2.2"/><text x="433.6" y="243.9" text-anchor="start" font-size="16" font-weight="600" fill="#0f1620">S</text><circle cx="132.7" cy="104.3" r="5.5" fill="#c8324a" stroke="#c8324a" stroke-width="2.2"/><text x="142.7" y="95.3" text-anchor="start" font-size="16" font-weight="600" fill="#0f1620">U</text></svg>')}
+
+Den streckade linjen visar lägena som bevarar energin, och den blå sträckan visar hur läget ändras från starten till Q.
+
+**Svar:** P och Q är möjliga, och blocken hamnar till slut i Q (40 °C). R hindras av första huvudsatsen, S och U av andra huvudsatsen`,
+        },
+        {
+            level: 3,
+            question: `En värmepump ger *f* gånger så mycket värme till ett varmt rum som den tar emot som arbete. Pumpen hämtar resten av värmen från kall uteluft. En uppfinnare vill driva pumpen med en värmemotor. Motorn tar värmen *Q* från det varma rummet, omvandlar andelen *η* av den till arbetet *W* och lämnar resten som värme till uteluften. Allt arbete går till pumpen, och ingen annan energi tillförs.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 286" width="594" height="386" style="max-width:100%;height:auto;display:block;margin:16px auto;font-family:Poppins,sans-serif"><rect x="20" y="10" width="400" height="44" rx="6" fill="#f4d9cf" stroke="#0f1620" stroke-width="1.8"/><text x="220" y="37" text-anchor="middle" font-size="15" font-weight="600" fill="#0f1620">varmt rum</text><rect x="20" y="232" width="400" height="44" rx="6" fill="#d5e8f2" stroke="#0f1620" stroke-width="1.8"/><text x="220" y="259" text-anchor="middle" font-size="15" font-weight="600" fill="#0f1620">kall uteluft</text><line x1="110" y1="54" x2="110" y2="100" stroke="#c8324a" stroke-width="5"/><polygon points="103,100 110,112 117,100" fill="#c8324a"/><text x="122" y="88" text-anchor="start" font-size="16" font-weight="600" fill="#c8324a"><tspan font-style="italic">Q</tspan></text><line x1="110" y1="172" x2="110" y2="220" stroke="#c8324a" stroke-width="5"/><polygon points="103,220 110,232 117,220" fill="#c8324a"/><line x1="330" y1="112" x2="330" y2="66" stroke="#c8324a" stroke-width="5"/><polygon points="337,66 330,54 323,66" fill="#c8324a"/><line x1="330" y1="232" x2="330" y2="184" stroke="#c8324a" stroke-width="5"/><polygon points="337,184 330,172 323,184" fill="#c8324a"/><circle cx="110" cy="142" r="30" fill="#efe6d4" stroke="#0f1620" stroke-width="2"/><text x="110" y="147" text-anchor="middle" font-size="14" font-weight="500" fill="#0f1620">motor</text><circle cx="330" cy="142" r="30" fill="#efe6d4" stroke="#0f1620" stroke-width="2"/><text x="330" y="147" text-anchor="middle" font-size="14" font-weight="500" fill="#0f1620">pump</text><line x1="140" y1="142" x2="288" y2="142" stroke="#b5651d" stroke-width="5"/><polygon points="288,149 300,142 288,135" fill="#b5651d"/><text x="220" y="132" text-anchor="middle" font-size="16" font-weight="600" fill="#b5651d"><tspan font-style="italic">W</tspan></text></svg>
+
+Vilket villkor på *η* och *f* ger andra huvudsatsen? Redovisa ditt resonemang fullständigt, och använd villkoret för att bestämma den högsta verkningsgrad som motorn kan ha om värmepumpen har $f = 4{,}0$. Ange verkningsgraden i procent.`,
+            answer: { value: 25, unit: '%', tol: 0.02 },
+            solution: `**Energin i varje del.** Enligt **första huvudsatsen** är den energi som går in i en maskin lika stor som den som går ut.
+
+Motorn tar emot *Q* från rummet och ger arbetet
+
+$$
+W = \\eta \\cdot Q \\qquad (1)
+$$
+
+Resten, $Q - W$, blir värme till uteluften.
+
+Pumpen tar emot *W* och ger värmen $f \\cdot W$ till rummet. Skillnaden, $f \\cdot W - W$, måste den hämta från uteluften.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 286" width="594" height="386" style="max-width:100%;height:auto;display:block;margin:16px auto;font-family:Poppins,sans-serif"><rect x="20" y="10" width="400" height="44" rx="6" fill="#f4d9cf" stroke="#0f1620" stroke-width="1.8"/><text x="220" y="37" text-anchor="middle" font-size="15" font-weight="600" fill="#0f1620">varmt rum</text><rect x="20" y="232" width="400" height="44" rx="6" fill="#d5e8f2" stroke="#0f1620" stroke-width="1.8"/><text x="220" y="259" text-anchor="middle" font-size="15" font-weight="600" fill="#0f1620">kall uteluft</text><line x1="110" y1="54" x2="110" y2="100" stroke="#c8324a" stroke-width="5"/><polygon points="103,100 110,112 117,100" fill="#c8324a"/><text x="122" y="88" text-anchor="start" font-size="16" font-weight="600" fill="#c8324a"><tspan font-style="italic">Q</tspan></text><line x1="110" y1="172" x2="110" y2="220" stroke="#c8324a" stroke-width="5"/><polygon points="103,220 110,232 117,220" fill="#c8324a"/><text x="122" y="206" text-anchor="start" font-size="16" font-weight="600" fill="#c8324a"><tspan font-style="italic">Q</tspan> − <tspan font-style="italic">W</tspan></text><line x1="330" y1="112" x2="330" y2="66" stroke="#c8324a" stroke-width="5"/><polygon points="337,66 330,54 323,66" fill="#c8324a"/><text x="342" y="88" text-anchor="start" font-size="16" font-weight="600" fill="#c8324a"><tspan font-style="italic">f</tspan> · <tspan font-style="italic">W</tspan></text><line x1="330" y1="232" x2="330" y2="184" stroke="#c8324a" stroke-width="5"/><polygon points="337,184 330,172 323,184" fill="#c8324a"/><text x="318" y="206" text-anchor="end" font-size="16" font-weight="600" fill="#c8324a"><tspan font-style="italic">f</tspan> · <tspan font-style="italic">W</tspan> − <tspan font-style="italic">W</tspan></text><circle cx="110" cy="142" r="30" fill="#efe6d4" stroke="#0f1620" stroke-width="2"/><text x="110" y="147" text-anchor="middle" font-size="14" font-weight="500" fill="#0f1620">motor</text><circle cx="330" cy="142" r="30" fill="#efe6d4" stroke="#0f1620" stroke-width="2"/><text x="330" y="147" text-anchor="middle" font-size="14" font-weight="500" fill="#0f1620">pump</text><line x1="140" y1="142" x2="288" y2="142" stroke="#b5651d" stroke-width="5"/><polygon points="288,149 300,142 288,135" fill="#b5651d"/><text x="220" y="132" text-anchor="middle" font-size="16" font-weight="600" fill="#b5651d"><tspan font-style="italic">W</tspan></text></svg>
+
+**Vad får rummet totalt?** Rummet får $f \\cdot W$ från pumpen och lämnar *Q* till motorn. Nettovärmen till rummet är
+
+$$
+Q_\\text{rum} = f \\cdot W - Q
+$$
+
+Insättning av (1), $W = \\eta \\cdot Q$, ger
+
+$$
+Q_\\text{rum} = f \\cdot \\eta \\cdot Q - Q = (\\eta \\cdot f - 1) \\cdot Q \\qquad (2)
+$$
+
+**Vad lämnar uteluften totalt?** Pumpen hämtar $f \\cdot W - W$ och motorn lämnar tillbaka $Q - W$:
+
+$$
+Q_\\text{ute} = (f \\cdot W - W) - (Q - W) = f \\cdot W - Q
+$$
+
+Det är lika mycket som rummet får, precis som första huvudsatsen kräver.
+
+**Andra huvudsatsen.** De två maskinerna tillsammans får ingen energi utifrån. Är $\\eta \\cdot f > 1$ visar (2), $Q_\\text{rum} = (\\eta \\cdot f - 1) \\cdot Q$, att $Q_\\text{rum} > 0$. Då flyttas värme från den kalla uteluften till det varma rummet av sig själv, vilket andra huvudsatsen förbjuder. Alltså måste
+
+$$
+\\eta \\cdot f \\leq 1 \\quad \\Leftrightarrow \\quad \\eta \\leq \\frac{1}{f}
+$$
+
+Med $f = 4{,}0$ blir den högsta verkningsgraden
+
+$$
+\\eta = \\frac{1}{4{,}0} = 0{,}25 = 25\\ \\%
+$$
+
+**Rimlighet:** Ju bättre en värmepump kan vara mellan två temperaturer, desto sämre måste motorn vara mellan samma temperaturer. Som bäst går värmen bara runt utan att rummet blir varmare.
+
+**Svar:** $\\eta \\cdot f \\leq 1$, och motorns verkningsgrad är högst 25 %`,
+        },
+        {
+            level: 3,
+            question: `För att flytta värmen *Q* från ett kallt utrymme med temperaturen $T_k$ till en varmare omgivning med temperaturen $T_v$ måste man tillföra energin *W*. Man kan visa att *W* aldrig kan bli mindre än
+
+$$
+W_\\text{min} = Q \\cdot \\frac{T_v - T_k}{T_k}
+$$
+
+där temperaturerna anges i kelvin.<br>a) Ett kylskåp håller 4 °C i ett kök med temperaturen 22 °C. Hur mycket energi måste minst tillföras för att flytta 100 J värme ut ur skåpet? Svara i joule.<br>b) Visa att $W_\\text{min}$ mer än fördubblas när den kalla temperaturen $T_k$ halveras, om *Q* och $T_v$ är oförändrade.<br>c) Vad säger sambandet om möjligheten att nå absoluta nollpunkten?<br>d) Förklara hur sambandet stämmer med andra huvudsatsen.`,
+            answer: { value: 6.5, unit: 'J', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 6.5, unit: 'J', tol: 0.02 },
+                { del: 'b' },
+                { del: 'c' },
+                { del: 'd' },
+            ],
+            solution: `**a)** Temperaturerna skrivs om till kelvin.
+
+$$
+\\left[ \\begin{array}{l}
+Q = 100\\ \\mathrm{J} \\\\
+T_k = 4 + 273 = 277\\ \\mathrm{K} \\\\
+T_v = 22 + 273 = 295\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+$$
+W_\\text{min} = 100 \\cdot \\frac{295 - 277}{277} \\approx 6{,}498\\ \\mathrm{J} \\approx 6{,}5\\ \\mathrm{J}
+$$
+
+Det är mycket mindre än 100 J. Det är rimligt, eftersom energin bara behövs för att flytta värmen, och temperaturskillnaden är liten. Ett verkligt kylskåp kräver betydligt mer.
+
+**Svar:** 6,5 J
+
+**b)** Kalla den minsta energin $W_1$ vid temperaturen $T_k$ och $W_2$ vid den halverade temperaturen $\\dfrac{T_k}{2}$. Då är
+
+$$
+W_1 = Q \\cdot \\frac{T_v - T_k}{T_k}
+$$
+
+$$
+W_2 = Q \\cdot \\frac{T_v - \\dfrac{T_k}{2}}{\\dfrac{T_k}{2}}
+$$
+
+Bråket i $W_2$ förlängs med 2:
+
+$$
+W_2 = Q \\cdot \\frac{2 \\cdot T_v - T_k}{T_k}
+$$
+
+Kvoten mellan energierna blir, när *Q* och $T_k$ förkortas bort,
+
+$$
+\\frac{W_2}{W_1} = \\frac{2 \\cdot T_v - T_k}{T_v - T_k}
+$$
+
+Täljaren skrivs om så att nämnaren syns i den, $2 \\cdot T_v - T_k = 2 \\cdot (T_v - T_k) + T_k$:
+
+$$
+\\frac{W_2}{W_1} = \\frac{2 \\cdot (T_v - T_k) + T_k}{T_v - T_k} = 2 + \\frac{T_k}{T_v - T_k}
+$$
+
+Omgivningen är varmare än det kalla utrymmet, så $T_v - T_k > 0$. Dessutom är $T_k > 0$ i kelvin. Den sista termen är därför positiv, och kvoten är större än 2.
+
+**Svar:** Kvoten är $2 + \\dfrac{T_k}{T_v - T_k}$, som alltid är större än 2
+
+**c)** När $T_k$ närmar sig 0 K närmar sig täljaren $T_v - T_k$ värdet $T_v$, medan nämnaren $T_k$ närmar sig 0. Kvoten växer då över alla gränser. Ju närmare 0 K man kommer, desto mer energi krävs för att ta bort ytterligare en viss mängd värme. Absoluta nollpunkten framstår därför som en gräns som går att närma sig men inte att passera. Det stämmer med **tredje huvudsatsen**, där absoluta nollpunkten är den temperatur där alla processer upphör.
+
+**Svar:** Energin per joule bortförd värme växer obegränsat när temperaturen närmar sig absoluta nollpunkten, så det blir allt svårare att komma närmare
+
+**d)** Så länge $T_v > T_k$ är $W_\\text{min} > 0$. Värme kan alltså bara flyttas från kallt till varmt om energi tillförs, aldrig av sig själv. I gränsfallet $T_v = T_k$ blir $W_\\text{min} = 0$. Då finns ingen temperaturskillnad att övervinna.
+
+**Svar:** När omgivningen är varmare krävs alltid tillförd energi, så värmen flyttas aldrig av sig själv från kallt till varmt`,
+        },
+        {
+            level: 3,
+            question: `När en termometer sätts ned i en liten mängd vätska ändrar termometern själv vätskans temperatur. Alva undersöker hur mycket. Termometern visar 20,0 °C när den ligger i rummet.
+
+Först sätter hon ned den i 40,0 g vatten med den kända temperaturen 60,0 °C. När temperaturen har slutat ändras visar termometern 56,0 °C. Sedan får termometern åter rummets temperatur, och hon sätter ned den i 10,0 g varmt vatten från ett försök. Nu stannar den på 41,0 °C.
+
+Vilken temperatur hade det varma vattnet innan termometern sattes ned? Bortse från energiutbyte med omgivningen. Ange svaret i °C.`,
+            answer: { value: 50.3, unit: '°C', tol: 0.005 },
+            solution: `Enligt **nollte huvudsatsen** visar termometern den gemensamma temperaturen när den är i jämvikt med vattnet. Det är alltså inte vattnets ursprungliga temperatur som avläses. Enligt **första huvudsatsen** är den energi som vattnet avger lika stor som den energi som termometern tar upp.
+
+**Beteckningar.** Termometerns massa och material är okända. Låt $K$ vara produkten av dess specifika värmekapacitet och massa, så att termometern tar upp energin $K \\cdot \\Delta T$. Vattnets specifika värmekapacitet kallas *c*.
+
+**Första försöket** används för att undersöka termometern. Vattnet svalnar från 60,0 °C till 56,0 °C och termometern värms från 20,0 °C till 56,0 °C. Vi räknar massan i gram i båda försöken, eftersom enheten sedan förkortas bort.
+
+$$
+K \\cdot (56{,}0 - 20{,}0) = c \\cdot 40{,}0 \\cdot (60{,}0 - 56{,}0)
+$$
+
+$$
+K \\cdot 36{,}0 = c \\cdot 160
+$$
+
+$$
+K = \\frac{160}{36{,}0} \\cdot c = \\frac{40}{9} \\cdot c \\qquad (1)
+$$
+
+Termometern tar alltså upp lika mycket energi som ungefär 4,4 g vatten.
+
+**Andra försöket.** Låt *T* vara den sökta temperaturen.
+
+$$
+c \\cdot 10{,}0 \\cdot (T - 41{,}0) = K \\cdot (41{,}0 - 20{,}0)
+$$
+
+Insättning av (1), $K = \\dfrac{40}{9} \\cdot c$, ger
+
+$$
+c \\cdot 10{,}0 \\cdot (T - 41{,}0) = \\frac{40}{9} \\cdot c \\cdot 21{,}0
+$$
+
+Båda led divideras med $c \\cdot 10{,}0$, så vattnets specifika värmekapacitet behöver inte vara känd:
+
+$$
+T - 41{,}0 = \\frac{40 \\cdot 21{,}0}{9 \\cdot 10{,}0}
+$$
+
+$$
+T = 41{,}0 + \\frac{840}{90} \\approx 50{,}33\\ ^\\circ\\mathrm{C} \\approx 50{,}3\\ ^\\circ\\mathrm{C}
+$$
+
+**Rimlighet:** Termometern var kallare än vattnet och kylde det, så den verkliga temperaturen ska vara högre än den avlästa. Med bara 10 g vatten blir felet stort, drygt 9 grader.
+
+**Svar:** 50,3 °C`,
+        },
+        {
+            level: 3,
+            question: `En sten ligger stilla på marken. Tänk dig att stenen plötsligt blir 0,10 °C kallare och att hela den avgivna energin får stenen att hoppa rakt upp. Stenens specifika värmekapacitet är $c = 0{,}80\\ \\mathrm{kJ/(kg \\cdot K)}$.<br>a) Hur högt skulle stenen hoppa? Svara i meter.<br>b) Ett sådant hopp har aldrig observerats, trots att det omvända händer varje gång en sten faller till marken. Ge en fullständig fysikalisk förklaring till skillnaden. Använd huvudsatserna och beskriv vad som händer med atomernas rörelse.`,
+            answer: { value: 8.1, unit: 'm', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 8.1, unit: 'm', tol: 0.03 },
+                { del: 'b' },
+            ],
+            solution: `**a)** Massan är inte given, så vi räknar generellt. Enligt **första huvudsatsen** är den energi som stenen avger när den svalnar lika stor som lägesenergin i högsta punkten:
+
+$$
+c \\cdot m \\cdot \\Delta T = m \\cdot g \\cdot h
+$$
+
+Båda led divideras med $m \\cdot g$:
+
+$$
+h = \\frac{c \\cdot \\Delta T}{g}
+$$
+
+Höjden beror inte på stenens massa.
+
+$$
+\\left[ \\begin{array}{l}
+c = 800\\ \\mathrm{J/(kg \\cdot K)} \\\\
+\\Delta T = 0{,}10\\ \\mathrm{K} \\\\
+g = 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$
+h = \\frac{800 \\cdot 0{,}10}{9{,}82} \\approx 8{,}147\\ \\mathrm{m} \\approx 8{,}1\\ \\mathrm{m}
+$$
+
+Energin räcker alltså till ett högt hopp, fast temperaturen bara sjunker en tiondels grad.
+
+**Svar:** 8,1 m
+
+**b)** **Första huvudsatsen** tillåter båda förloppen. Energin är lika stor före och efter, vare sig lägesenergi blir inre energi eller tvärtom. Den kan alltså inte förklara skillnaden.
+
+När stenen **faller** har alla dess atomer en gemensam rörelse nedåt. Vid nedslaget bromsas stenen, och den gemensamma rörelsen omvandlas till oordnad rörelse hos atomerna i sten och mark. De vibrerar snabbare åt alla möjliga håll, och temperaturen stiger lite. Det finns oerhört många sätt att fördela energin på så många atomer, så detta sker av sig självt.
+
+För att stenen ska **hoppa** måste det omvända ske. Atomerna, som vibrerar slumpmässigt åt olika håll, måste samtidigt och av en slump få en gemensam rörelse uppåt. Antalet atomer är så enormt att detta i praktiken aldrig inträffar.
+
+Det är **andra huvudsatsen** som ger förloppen en riktning. Värme flödar av sig själv från varmt till kallt men aldrig tillbaka, och på samma sätt sprids energi av sig själv ut på atomernas oordnade rörelse men samlas inte av sig själv till en ordnad rörelse. En sten som är lika varm som marken är dessutom redan i jämvikt med den enligt **nollte huvudsatsen**. Den blir inte av sig själv kallare än sin omgivning.
+
+**Svar:** Första huvudsatsen tillåter hoppet, men enligt andra huvudsatsen blir atomernas oordnade rörelse inte av sig själv en ordnad rörelse uppåt`,
+        },
+        {
+            level: 3,
+            question: `I en stuga ligger en ouppvärmd farstu mellan stugrummet och utsidan. Stugrummet hålls hela tiden vid 22 °C. En dag när utetemperaturen är −8 °C har farstun länge haft temperaturen 10 °C.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 244" width="638" height="354" style="max-width:100%;height:auto;display:block;margin:16px auto;font-family:Poppins,sans-serif"><rect x="0" y="212" width="440" height="30" fill="#e3ddd0"/><line x1="0" y1="212" x2="440" y2="212" stroke="#0f1620" stroke-width="2"/><path d="M 66 90 V 34 H 88 V 90 Z" fill="#a07060" stroke="#0f1620" stroke-width="1.6" stroke-linejoin="round"/><path d="M 24 96 L 163 22 L 302 96 Z" fill="#8a4b3a" stroke="#0f1620" stroke-width="2" stroke-linejoin="round"/><rect x="50" y="102" width="228" height="104" fill="#fbf1de"/><path d="M 288 104 L 376 120 V 206 H 288 Z" fill="#eef0e6"/><rect x="40" y="96" width="10" height="116" fill="#b98b5a" stroke="#0f1620" stroke-width="1.5"/><rect x="278" y="96" width="10" height="116" fill="#b98b5a" stroke="#0f1620" stroke-width="1.5"/><rect x="40" y="206" width="346" height="6" fill="#b98b5a" stroke="#0f1620" stroke-width="1.5"/><rect x="40" y="94" width="248" height="8" fill="#b98b5a" stroke="#0f1620" stroke-width="1.5"/><rect x="376" y="118" width="10" height="94" fill="#b98b5a" stroke="#0f1620" stroke-width="1.5"/><path d="M 288 100 L 398 118 L 398 126 L 288 108 Z" fill="#8a4b3a" stroke="#0f1620" stroke-width="1.6" stroke-linejoin="round"/><rect x="72" y="102" width="9" height="54" fill="#3c4148"/><rect x="58" y="154" width="37" height="46" rx="3" fill="#3c4148" stroke="#0f1620" stroke-width="1.5"/><rect x="64" y="166" width="25" height="22" rx="2" fill="#f2b04a"/><path d="M 76.5 187 C 66 184 69 177 73 174 C 74 178 76 176 76 168 C 84 174 88 182 76.5 187 Z" fill="#c8324a"/><path d="M 63 200 v 6 M 90 200 v 6" stroke="#0f1620" stroke-width="3"/><rect x="172" y="174" width="72" height="5" rx="1" fill="#8a5a2c" stroke="#0f1620" stroke-width="1"/><path d="M 180 179 V 206 M 236 179 V 206" stroke="#8a5a2c" stroke-width="5" fill="none"/><path d="M 200 162 h 15 l -2 12 h -11 z M 215 164 q 7 1 4 6 q -2 2 -5 1" fill="#f7f2e8" stroke="#0f1620" stroke-width="1.3"/><path d="M 346 139 h 18 M 355 139 v 6" stroke="#0f1620" stroke-width="2" fill="none"/><path d="M 355 144 L 347 147 L 341 174 L 346 175 L 349 163 L 349 188 H 361 L 361 163 L 364 175 L 369 174 L 363 147 Z" fill="#1d6fa5" stroke="#0f1620" stroke-width="1.3" stroke-linejoin="round"/><text x="180" y="128" text-anchor="middle" font-size="14" font-weight="600" fill="#0f1620">stugrum</text><text x="180" y="149" text-anchor="middle" font-size="15" font-weight="600" fill="#c8324a">22 °C</text><text x="314" y="152" text-anchor="middle" font-size="13" font-weight="600" fill="#0f1620">farstu</text><text x="314" y="171" text-anchor="middle" font-size="14" font-weight="600" fill="#c8324a">10 °C</text><text x="412" y="160" text-anchor="middle" font-size="13" font-weight="600" fill="#0f1620">ute</text><text x="412" y="180" text-anchor="middle" font-size="14" font-weight="600" fill="#1d6fa5">−8 °C</text></svg>
+
+Värmen som varje sekund flödar genom en vägg är proportionell mot temperaturskillnaden mellan väggens båda sidor. Värme flödar till farstun bara från stugrummet och lämnar den bara till utsidan.<br>a) Vilken temperatur får farstun om det under lång tid är −23 °C ute? Svara i °C.<br>b) Med hur många procent ökar värmeflödet från stugrummet till farstun?<br>c) Farstuns temperatur är konstant i båda fallen. Är farstun då i jämvikt med sin omgivning i den mening som nollte huvudsatsen avser? Utred, och beskriv vad som händer om värmen i stugan stängs av.`,
+            answer: { value: 4, unit: '°C', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 4, unit: '°C', tol: 0.03 },
+                { del: 'b', value: 50, unit: '%', tol: 0.03 },
+                { del: 'c' },
+            ],
+            solution: `**a)** Farstuns temperatur är konstant, så dess energi ändras inte. Enligt **första huvudsatsen** måste då lika mycket värme komma in från stugrummet som det går ut genom ytterväggen varje sekund.
+
+Låt innerväggens proportionalitetskonstant vara $k_1$ och ytterväggens $k_2$, och farstuns temperatur *T*. Enligt **andra huvudsatsen** flödar värmen från stugrummet till farstun och vidare ut.
+
+$$
+k_1 \\cdot (T_\\text{rum} - T) = k_2 \\cdot (T - T_\\text{ute}) \\qquad (1)
+$$
+
+Den första dagen är temperaturerna 22 °C, 10 °C och −8 °C:
+
+$$
+k_1 \\cdot (22 - 10) = k_2 \\cdot (10 - (-8))
+$$
+
+$$
+k_1 \\cdot 12 = k_2 \\cdot 18
+$$
+
+$$
+k_1 = 1{,}5 \\cdot k_2 \\qquad (2)
+$$
+
+Det räcker att känna förhållandet mellan konstanterna. Den kalla dagen ger (1), $k_1 \\cdot (T_\\text{rum} - T) = k_2 \\cdot (T - T_\\text{ute})$, tillsammans med (2), $k_1 = 1{,}5 \\cdot k_2$,
+
+$$
+1{,}5 \\cdot k_2 \\cdot (22 - T) = k_2 \\cdot (T - (-23))
+$$
+
+Båda led divideras med $k_2$:
+
+$$
+1{,}5 \\cdot (22 - T) = T + 23
+$$
+
+$$
+33 - 1{,}5 \\cdot T = T + 23
+$$
+
+$$
+10 = 2{,}5 \\cdot T
+$$
+
+$$
+T = \\frac{10}{2{,}5} = 4\\ ^\\circ\\mathrm{C}
+$$
+
+Rimlighet: utetemperaturen sjunker 15 grader, men farstun bara 6 grader, eftersom den också påverkas av det varma stugrummet.
+
+**Svar:** 4 °C
+
+**b)** Värmeflödet från stugrummet är proportionellt mot temperaturskillnaden över innerväggen. Konstanten $k_1$ förkortas bort i kvoten mellan flödet den kalla dagen och flödet den första dagen:
+
+$$
+\\frac{k_1 \\cdot (22 - 4)}{k_1 \\cdot (22 - 10)} = \\frac{18}{12} = 1{,}5
+$$
+
+**Svar:** Värmeflödet ökar med 50 %
+
+**c)** Enligt **nollte huvudsatsen** är två system i kontakt i jämvikt när de har samma temperatur, och då flödar ingen värme mellan dem. Farstun är kallare än stugrummet och varmare än luften ute, och värme flödar hela tiden genom den. Den är alltså inte i jämvikt. Temperaturen är konstant bara för att flödet in är lika stort som flödet ut, och det förutsätter att stugrummet hela tiden tillförs energi.
+
+Stängs värmen av får stugrummet ingen ny energi. Värme fortsätter att flöda från varmt till kallt, så stugrummet svalnar, flödet till farstun minskar och även farstun svalnar. Det pågår tills stugrum, farstu och uteluft har samma temperatur. Först då är de i jämvikt.
+
+**Svar:** Nej, farstun är inte i jämvikt. Utan uppvärmning svalnar både stugrum och farstu tills de har samma temperatur som uteluften`,
         },
     ],
 
@@ -37241,11 +39281,11 @@ ${makeCircuit({
                 `Kortslutning.`,
             ],
             correct: 0,
-            solution: `Alla tre lampor sitter på rad i samma ledning — det finns bara **en väg** för strömmen att gå. Det är definitionen av en **seriekoppling**.
+            solution: `Alla tre lampor sitter på rad i samma ledning. Det finns bara **en väg** för strömmen att gå. Det är definitionen av en **seriekoppling**.
 
-**Svar:** Alternativ A — seriekoppling.
+**Svar:** Alternativ A, seriekoppling.
 
-**Generell slutsats:** Skulle någon av de tre lamporna gå sönder bryts hela kretsen och alla tre lampor slocknar. Det är en av seriekopplingens viktiga egenskaper — och en av anledningarna till att gamla julgransljus var så frustrerande: en trasig lampa släckte hela slingan.`,
+**Generell slutsats:** Skulle någon av de tre lamporna gå sönder bryts hela kretsen och alla tre lampor slocknar. Det är en av seriekopplingens viktiga egenskaper, och en av anledningarna till att gamla julgransljus var så frustrerande: en trasig lampa släckte hela slingan.`,
         },
         {
             level: 1,
@@ -37264,7 +39304,7 @@ ${makeCircuit({
                 `Det spelar ingen roll var i kretsen den sitter.`,
             ],
             correct: 0,
-            solution: `En amperemeter mäter strömmen som går **genom** sig själv. För att mäta strömmen genom lampan måste exakt den strömmen passera även amperemetern — alltså ska den kopplas **i serie** med lampan:
+            solution: `En amperemeter mäter strömmen som går **genom** sig själv. För att mäta strömmen genom lampan måste exakt den strömmen passera även amperemetern. Alltså ska den kopplas **i serie** med lampan:
 
 ${makeCircuit({
     source: { label: 'U' },
@@ -37276,7 +39316,7 @@ ${makeCircuit({
 
 För att amperemetern inte ska påverka strömmen i kretsen ska den ha **låg resistans**.
 
-**Svar:** Alternativ A — i serie med lampan.
+**Svar:** Alternativ A, i serie med lampan.
 
 **Generell slutsats:** Voltmeter och amperemeter är spegelvända: amperemetern kopplas i serie och ska ha låg resistans, voltmetern parallellt och ska ha hög resistans. Båda mätarna är konstruerade för att störa kretsen så lite som möjligt.`,
         },
@@ -37319,7 +39359,7 @@ $$ U_3 = 9{,}0 - 2{,}5 - 3{,}0 = 3{,}5\\ \\mathrm{V} $$
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
-            level: 2,
+            level: 1,
             question: `I kretsen nedan delar strömmen från batteriet upp sig i två parallella grenar med resistorerna $R_1$ och $R_2$. Strömmen genom $R_1$ är $I_1 = 0{,}40\\ \\mathrm{A}$ och strömmen genom $R_2$ är $I_2 = 0{,}30\\ \\mathrm{A}$. Hur stor är strömmen $I_3$ genom $R_3$?
 
 ${makeCircuit({
@@ -37353,10 +39393,10 @@ $$ I_3 = 0{,}40 + 0{,}30 = 0{,}70\\ \\mathrm{A} $$
 
 **Svar:** $I_3 = 0{,}70\\ \\mathrm{A}$.
 
-**Generell slutsats:** Eftersom $R_3$ sitter i serie med hela parallellsektionen passerar **all** ström från batteriet genom $R_3$. Det är samma ström som batteriet levererar — Kirchhoffs första lag är bara ett sätt att uttrycka att laddning inte kan försvinna eller skapas i en förgrening.`,
+**Generell slutsats:** Eftersom $R_3$ sitter i serie med hela parallellsektionen passerar **all** ström från batteriet genom $R_3$. Det är samma ström som batteriet levererar. Kirchhoffs första lag är bara ett sätt att uttrycka att laddning inte kan försvinna eller skapas i en förgrening.`,
         },
         {
-            level: 2,
+            level: 1,
             question: `I kretsen nedan är tre lampor parallellkopplade till ett batteri. Vad händer med lampa 1 och lampa 2 om lampa 3 går sönder?
 
 ${makeCircuit({
@@ -37376,16 +39416,16 @@ ${makeCircuit({
             correct: 3,
             solution: `Varje gren i en parallellkoppling är **direkt ansluten** mellan batteriets poler. Spänningen över varje lampa är därför densamma som batterispänningen *U*, oavsett vad som händer i de andra grenarna.
 
-När lampa 3 går sönder bryts enbart den grenens ledning. Lampornas 1 och 2 spänning och resistans är oförändrade, så enligt Ohms lag är även strömmen genom dem oförändrad — de **lyser exakt som förut**.
+När lampa 3 går sönder bryts enbart den grenens ledning. Lampornas 1 och 2 spänning och resistans är oförändrade, så enligt Ohms lag är även strömmen genom dem oförändrad. De **lyser exakt som förut**.
 
-**Svar:** Alternativ D — de lyser oförändrat.
+**Svar:** Alternativ D, de lyser oförändrat.
 
-**Generell slutsats:** Detta är den fundamentala skillnaden mot seriekoppling, där en trasig lampa släcker hela kretsen. Eluttagen i ett hem är parallellkopplade just därför — om en lampa går sönder ska inte hela rummets belysning slockna. Den totala strömmen från batteriet minskar dock, eftersom en gren har försvunnit.`,
+**Generell slutsats:** Detta är den fundamentala skillnaden mot seriekoppling, där en trasig lampa släcker hela kretsen. Eluttagen i ett hem är parallellkopplade just därför: om en lampa går sönder ska inte hela rummets belysning slockna. Den totala strömmen från batteriet minskar dock, eftersom en gren har försvunnit.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
-            level: 3,
+            level: 2,
             question: `Fyra likadana lampor är kopplade enligt schemat: lampa 1 sitter ensam i den övre grenen, lamporna 2, 3 och 4 sitter i serie i den undre grenen. Båda grenarna är direkt kopplade mellan batteriets poler.
 
 ${makeCircuit({
@@ -37401,7 +39441,7 @@ ${makeCircuit({
 **b)** Vilken eller vilka lampor lyser svagast?
 
 **c)** Lampa 3 går sönder. Vad händer med lampa 1?`,
-            solution: `**a)** Lamporna är likadana — varje lampa har samma resistans *R*. Eftersom båda grenarna är parallella ligger samma spänning *U* över dem.
+            solution: `**a)** Lamporna är likadana: varje lampa har samma resistans *R*. Eftersom båda grenarna är parallella ligger samma spänning *U* över dem.
 
 Övre grenen har bara lampa 1: total resistans *R*, ström $I_1 = U/R$.
 
@@ -37411,15 +39451,823 @@ Lampa 1 får alltså tre gånger så stark ström som lamporna 2, 3 och 4. Efter
 
 **Svar a):** Lampa 1.
 
-**b)** Lamporna 2, 3 och 4 sitter i samma gren och har samma ström — de lyser lika starkt. Den strömmen är en tredjedel av lampa 1:s ström, så de lyser **svagast tillsammans**.
+**b)** Lamporna 2, 3 och 4 sitter i samma gren och har samma ström. De lyser lika starkt. Den strömmen är en tredjedel av lampa 1:s ström, så de lyser **svagast tillsammans**.
 
 **Svar b):** Lamporna 2, 3 och 4 (alla lika svagt).
 
-**c)** När lampa 3 går sönder bryts hela den undre grenen — ingen ström kan längre gå genom lamporna 2, 3 och 4. Den övre grenen påverkas inte: lampa 1 sitter fortfarande direkt mellan batteriets poler och får samma spänning som tidigare. Strömmen genom lampa 1 är därför oförändrad, och **lampa 1 lyser exakt som förut**.
+**c)** När lampa 3 går sönder bryts hela den undre grenen. Ingen ström kan längre gå genom lamporna 2, 3 och 4. Den övre grenen påverkas inte: lampa 1 sitter fortfarande direkt mellan batteriets poler och får samma spänning som tidigare. Strömmen genom lampa 1 är därför oförändrad, och **lampa 1 lyser exakt som förut**.
 
 **Svar c):** Lampa 1 lyser oförändrat.
 
-**Generell slutsats:** Parallella grenar är oberoende av varandra — det som händer i en gren påverkar inte spänningen över de andra. Om en gren bryts försvinner bara den grenens bidrag till totalströmmen, men de övriga grenarna fortsätter som om inget hänt. Det är därför parallellkoppling är så vanlig i elnät: man vill inte att en trasig komponent ska påverka resten.`,
+**Generell slutsats:** Parallella grenar är oberoende av varandra: det som händer i en gren påverkar inte spänningen över de andra. Om en gren bryts försvinner bara den grenens bidrag till totalströmmen, men de övriga grenarna fortsätter som om inget hänt. Det är därför parallellkoppling är så vanlig i elnät: man vill inte att en trasig komponent ska påverka resten.`,
+        },
+        {
+            level: 1,
+            question: `En cykelverkstad har tre lampor parallellkopplade till ett batteri. Strömmen ut från batteriet är $I = 0{,}85\\ \\mathrm{A}$. Genom lampa 1 går strömmen $I_1 = 0{,}35\\ \\mathrm{A}$ och genom lampa 2 går strömmen $I_2 = 0{,}20\\ \\mathrm{A}$. Hur stor är strömmen $I_3$ genom lampa 3? Ange svaret i A.
+
+${makeCircuit({
+    source: { label: 'U' },
+    components: [{ type: 'parallel', branches: [
+        [{ type: 'bulb', label: 'L_1' }],
+        [{ type: 'bulb', label: 'L_2' }],
+        [{ type: 'bulb', label: 'L_3' }],
+    ] }],
+})}`,
+            answer: { value: 0.30, unit: 'A' },
+            solution: `I en parallellkoppling delar strömmen från batteriet upp sig i grenarna. Summan av delströmmarna är lika med den totala strömmen:
+
+$$ I = I_1 + I_2 + I_3 $$
+
+Vi löser ut $I_3$:
+
+$$ I_3 = I - I_1 - I_2 $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+I = 0{,}85\\ \\mathrm{A} \\\\
+I_1 = 0{,}35\\ \\mathrm{A} \\\\
+I_2 = 0{,}20\\ \\mathrm{A}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ I_3 = 0{,}85 - 0{,}35 - 0{,}20 = 0{,}30\\ \\mathrm{A} $$
+
+**Svar:** Strömmen genom lampa 3 är $0{,}30\\ \\mathrm{A}$.`,
+        },
+        {
+            level: 1,
+            question: `I schemat är de två mätinstrumenten ritade som cirklar märkta 1 och 2. Det ena är en amperemeter och det andra en voltmeter, och båda är rätt inkopplade. Vilket påstående är sant?
+
+${makeCircuit({
+    source: { label: 'U' },
+    components: [
+        { type: 'ammeter' },
+        { type: 'parallel', branches: [
+            [{ type: 'bulb', label: 'L_1' }],
+            [{ type: 'voltmeter' }],
+        ] },
+    ],
+}).replace('>A<', '>1<').replace('>V<', '>2<')}`,
+            choices: [
+                `1 är en amperemeter och ska ha hög resistans.`,
+                `2 är en amperemeter och ska ha låg resistans.`,
+                `1 är en voltmeter och ska ha hög resistans.`,
+                `2 är en voltmeter och ska ha hög resistans.`,
+            ],
+            correct: 3,
+            solution: `Instrument 1 sitter **i serie** med lampan, så all ström till lampan passerar instrumentet. Det är en **amperemeter**. Den ska ha låg resistans, så att den inte påverkar strömmen.
+
+Instrument 2 sitter **parallellt** med lampan och mäter alltså spänningen över den. Det är en **voltmeter**. Den ska ha hög resistans, så att nästan ingen ström tar vägen genom instrumentet.
+
+**Svar:** 2 är en voltmeter och ska ha hög resistans.`,
+        },
+        {
+            level: 1,
+            question: `En ljusslinga består av tio likadana lampor som är seriekopplade till spänningen $230\\ \\mathrm{V}$. Strömmen genom den första lampan är $0{,}13\\ \\mathrm{A}$.<br>a) Hur stor är spänningen över en av lamporna? Ange svaret i V.<br>b) Hur stor är strömmen genom den sista lampan i slingan? Ange svaret i A.`,
+            answer: { value: 23, unit: 'V' },
+            delsvar: [
+                { del: 'a', value: 23, unit: 'V' },
+                { del: 'b', value: 0.13, unit: 'A' },
+            ],
+            solution: `**a)** I en seriekoppling är summan av delspänningarna lika med den totala spänningen. Lamporna är likadana, så spänningen fördelas lika på alla tio. Kalla spänningen över en lampa för $U_1$:
+
+$$ U = 10 \\cdot U_1 \\quad\\Leftrightarrow\\quad U_1 = \\frac{U}{10} $$
+
+Insättning:
+
+$$ U_1 = \\frac{230}{10} = 23\\ \\mathrm{V} $$
+
+**Svar:** Spänningen över varje lampa är $23\\ \\mathrm{V}$.
+
+**b)** I en seriekoppling kan strömmen bara gå en väg. Den är därför lika stor genom alla lampor, även den sista. Ström förbrukas inte på vägen.
+
+**Svar:** Strömmen är $0{,}13\\ \\mathrm{A}$.`,
+        },
+        {
+            level: 1,
+            question: `Två resistorer, $R_1 = 20\\ \\mathrm{\\Omega}$ och $R_2 = 30\\ \\mathrm{\\Omega}$, är parallellkopplade till ett batteri med spänningen $12\\ \\mathrm{V}$.
+
+${makeCircuit({
+    source: { label: 'U', value: '12 V' },
+    components: [{ type: 'parallel', branches: [
+        [{ type: 'resistor', label: 'R_1', value: '20 Ω' }],
+        [{ type: 'resistor', label: 'R_2', value: '30 Ω' }],
+    ] }],
+})}
+
+a) Hur stor är strömmen genom $R_1$? Ange svaret i A.<br>b) Hur stor är strömmen ut från batteriet? Ange svaret i A.`,
+            answer: { value: 1.0, unit: 'A' },
+            delsvar: [
+                { del: 'a', value: 0.60, unit: 'A' },
+                { del: 'b', value: 1.0, unit: 'A' },
+            ],
+            solution: `**a)** Båda resistorerna är kopplade direkt till batteriet, så spänningen över var och en är $12\\ \\mathrm{V}$. Ohms lag ger strömmen genom $R_1$:
+
+$$ U = R_1 \\cdot I_1 \\quad\\Leftrightarrow\\quad I_1 = \\frac{U}{R_1} $$
+
+$$ I_1 = \\frac{12}{20} = 0{,}60\\ \\mathrm{A} $$
+
+**Svar:** Strömmen genom $R_1$ är $0{,}60\\ \\mathrm{A}$.
+
+**b)** På samma sätt fås strömmen genom $R_2$:
+
+$$ I_2 = \\frac{U}{R_2} = \\frac{12}{30} = 0{,}40\\ \\mathrm{A} $$
+
+Strömmen ut från batteriet är summan av delströmmarna:
+
+$$ I = I_1 + I_2 $$
+
+$$ I = 0{,}60 + 0{,}40 = 1{,}0\\ \\mathrm{A} $$
+
+**Svar:** Strömmen ut från batteriet är $1{,}0\\ \\mathrm{A}$.`,
+        },
+        {
+            level: 2,
+            question: `Tre likadana lampor och en strömbrytare S är kopplade till ett batteri enligt schemat. Strömbrytaren är öppen från början. Vad händer med lampa 1 och lampa 2 när strömbrytaren sluts?
+
+${makeCircuit({
+    source: { label: 'U' },
+    components: [
+        { type: 'bulb', label: 'L_1' },
+        { type: 'parallel', branches: [
+            [{ type: 'bulb', label: 'L_2' }],
+            [{ type: 'switch', label: 'S', open: true }, { type: 'bulb', label: 'L_3' }],
+        ] },
+    ],
+})}`,
+            choices: [
+                `Båda lyser oförändrat.`,
+                `Lampa 1 lyser svagare och lampa 2 oförändrat.`,
+                `Lampa 1 lyser starkare och lampa 2 svagare.`,
+                `Båda lyser svagare.`,
+            ],
+            correct: 2,
+            solution: `När strömbrytaren sluts får strömmen två vägar att välja mellan efter lampa 1. Hela kretsens resistans minskar då, och strömmen ut från batteriet ökar. All den strömmen går genom lampa 1, som därför lyser **starkare**.
+
+När strömmen genom lampa 1 ökar blir också spänningen $U_1$ över den större (Ohms lag). För lampa 2 gäller
+
+$$ U = U_1 + U_2 \\quad\\Leftrightarrow\\quad U_2 = U - U_1 $$
+
+Batteriets spänning *U* är oförändrad, så när $U_1$ ökar måste $U_2$ minska. Med lägre spänning blir strömmen genom lampa 2 svagare, och den lyser **svagare**.
+
+Lampa 2 sitter alltså inte direkt mellan batteriets poler. Därför gäller inte regeln om att de övriga lamporna i en parallellkoppling lyser oförändrat.
+
+**Svar:** Lampa 1 lyser starkare och lampa 2 svagare.`,
+        },
+        {
+            level: 2,
+            question: `I kretsen visar voltmetern, som är kopplad parallellt med $R_2$ och $R_3$, spänningen $3{,}6\\ \\mathrm{V}$. Bestäm resistansen $R_3$. Ange svaret i Ω.
+
+${makeCircuit({
+    width: 400,
+    source: { label: 'U', value: '9,0 V' },
+    components: [
+        { type: 'resistor', label: 'R_1', value: '20 Ω' },
+        { type: 'parallel', branches: [
+            [{ type: 'resistor', label: 'R_2', value: '30 Ω' }],
+            [{ type: 'resistor', label: 'R_3' }],
+            [{ type: 'voltmeter' }],
+        ] },
+    ],
+})}`,
+            answer: { value: 24, unit: 'Ω' },
+            solution: `Vi följer strömmen genom kretsen: först genom $R_1$, sedan genom de parallella grenarna. Voltmetern har så hög resistans att strömmen genom den kan försummas.
+
+**Strömmen ut från batteriet.** $R_1$ sitter i serie med parallelldelen. Kalla spänningen över parallelldelen för $U_2$. Delspänningarna ger tillsammans batteriets spänning:
+
+$$ U = U_1 + U_2 \\quad\\Leftrightarrow\\quad U_1 = U - U_2 $$
+
+$$ U_1 = 9{,}0 - 3{,}6 = 5{,}4\\ \\mathrm{V} $$
+
+All ström går genom $R_1$. Ohms lag ger
+
+$$ I = \\frac{U_1}{R_1} = \\frac{5{,}4}{20} = 0{,}27\\ \\mathrm{A} $$
+
+**Strömmarna i grenarna.** Över både $R_2$ och $R_3$ ligger $3{,}6\\ \\mathrm{V}$. Strömmen genom $R_2$ är
+
+$$ I_2 = \\frac{U_2}{R_2} = \\frac{3{,}6}{30} = 0{,}12\\ \\mathrm{A} $$
+
+Delströmmarna ger tillsammans den totala strömmen:
+
+$$ I = I_2 + I_3 \\quad\\Leftrightarrow\\quad I_3 = I - I_2 $$
+
+$$ I_3 = 0{,}27 - 0{,}12 = 0{,}15\\ \\mathrm{A} $$
+
+**Resistansen.** Ohms lag för $R_3$ ger
+
+$$ R_3 = \\frac{U_2}{I_3} = \\frac{3{,}6}{0{,}15} = 24\\ \\mathrm{\\Omega} $$
+
+**Rimlighet:** Strömmen genom $R_3$ är lite större än genom $R_2$ vid samma spänning, så $R_3$ ska vara lite mindre än $30\\ \\mathrm{\\Omega}$.
+
+**Svar:** $R_3 = 24\\ \\mathrm{\\Omega}$.`,
+        },
+        {
+            level: 2,
+            question: `En elev har kopplat samma två glödlampor till samma batteri på två olika sätt. Den ena gången är de seriekopplade och den andra gången parallellkopplade. Tabellen visar spänningen över och strömmen genom varje lampa.
+
+| Koppling | $U_1$ (V) | $I_1$ (A) | $U_2$ (V) | $I_2$ (A) |
+| --- | --- | --- | --- | --- |
+| X | 2,6 | 0,19 | 3,4 | 0,19 |
+| Y | 6,0 | 0,30 | 6,0 | 0,24 |
+
+a) Vilken koppling är seriekopplingen? Motivera.<br>b) Hur stor ström levererar batteriet i koppling Y? Ange svaret i A.<br>c) Hur många gånger så stor är resistansen hos lampa 1 i koppling Y som i koppling X?<br>d) Förklara varför resistansen inte är densamma.`,
+            answer: { value: 0.54, unit: 'A' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 0.54, unit: 'A' },
+                { del: 'c', value: 1.5, unit: 'gånger', tol: 0.04 },
+                { del: 'd' },
+            ],
+            solution: `**a)** I koppling X är strömmen lika stor genom båda lamporna medan spänningarna är olika. Det stämmer med en seriekoppling, där strömmen bara har en väg. Delspänningarna ger tillsammans
+
+$$ U = U_1 + U_2 = 2{,}6 + 3{,}4 = 6{,}0\\ \\mathrm{V} $$
+
+I koppling Y är spänningen $6{,}0\\ \\mathrm{V}$ över båda lamporna, som i en parallellkoppling till ett batteri på $6{,}0\\ \\mathrm{V}$. Mätningarna stämmer alltså med att batteriet är detsamma.
+
+**Svar:** Koppling X
+
+**b)** I parallellkopplingen adderas delströmmarna:
+
+$$ I = I_1 + I_2 = 0{,}30 + 0{,}24 = 0{,}54\\ \\mathrm{A} $$
+
+**Svar:** Batteriet levererar $0{,}54\\ \\mathrm{A}$.
+
+**c)** Ohms lag ger resistansen hos lampa 1 i de två kopplingarna:
+
+$$ R_\\mathrm{X} = \\frac{2{,}6}{0{,}19} = 13{,}68\\ldots\\ \\mathrm{\\Omega} $$
+
+$$ R_\\mathrm{Y} = \\frac{6{,}0}{0{,}30} = 20\\ \\mathrm{\\Omega} $$
+
+Förhållandet mellan dem är
+
+$$ \\frac{R_\\mathrm{Y}}{R_\\mathrm{X}} = \\frac{20 \\cdot 0{,}19}{2{,}6} = 1{,}461\\ldots \\approx 1{,}5 $$
+
+**Svar:** Resistansen är cirka $1{,}5$ gånger så stor i koppling Y.
+
+**d)** I koppling Y är både spänningen över och strömmen genom lampan större, så glödtråden blir varmare. Vid högre temperatur rör sig atomerna i glödtråden mer, och då ökar resistansen.
+
+**Svar:** Glödtråden är varmare i koppling Y, och därför är resistansen större.`,
+        },
+        {
+            level: 2,
+            question: `En lampa är märkt $3{,}8\\ \\mathrm{V}$; $0{,}30\\ \\mathrm{A}$. Det betyder att strömmen är $0{,}30\\ \\mathrm{A}$ när spänningen över lampan är $3{,}8\\ \\mathrm{V}$, och då lyser den normalt. Lampan ska drivas av ett batteri på $9{,}0\\ \\mathrm{V}$.<br>a) Vilken resistans ska en resistor ha för att lampan ska lysa normalt när resistorn seriekopplas med lampan? Ange svaret i Ω.<br>b) Två sådana lampor parallellkopplas med varandra, och parallellkopplingen seriekopplas med en enda resistor till samma batteri. Vilken resistans ska den resistorn ha för att båda lamporna ska lysa normalt? Ange svaret i Ω.`,
+            answer: { value: 17, unit: 'Ω', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 17, unit: 'Ω', tol: 0.03 },
+                { del: 'b', value: 8.7, unit: 'Ω', tol: 0.02 },
+            ],
+            solution: `**a)** Lampan och resistorn är seriekopplade. Spänningen över resistorn, $U_\\mathrm{R}$, är det som blir kvar av batteriets spänning när lampan har fått $U_\\mathrm{L} = 3{,}8\\ \\mathrm{V}$:
+
+$$ U = U_\\mathrm{L} + U_\\mathrm{R} \\quad\\Leftrightarrow\\quad U_\\mathrm{R} = U - U_\\mathrm{L} $$
+
+$$ U_\\mathrm{R} = 9{,}0 - 3{,}8 = 5{,}2\\ \\mathrm{V} $$
+
+Strömmen genom resistorn är densamma som genom lampan, $0{,}30\\ \\mathrm{A}$. Ohms lag ger
+
+$$ R = \\frac{U_\\mathrm{R}}{I} = \\frac{5{,}2}{0{,}30} = 17{,}33\\ldots \\approx 17\\ \\mathrm{\\Omega} $$
+
+**Svar:** Resistansen ska vara cirka $17\\ \\mathrm{\\Omega}$.
+
+**b)** Vi ritar kretsen.
+
+${makeCircuit({
+    source: { label: 'U', value: '9,0 V' },
+    components: [
+        { type: 'resistor', label: 'R' },
+        { type: 'parallel', branches: [
+            [{ type: 'bulb', label: 'L_1' }],
+            [{ type: 'bulb', label: 'L_2' }],
+        ] },
+    ],
+})}
+
+Över båda lamporna ska spänningen vara $3{,}8\\ \\mathrm{V}$, så spänningen över resistorn är fortfarande $5{,}2\\ \\mathrm{V}$. Men nu går strömmen till båda lamporna genom resistorn:
+
+$$ I = I_1 + I_2 = 0{,}30 + 0{,}30 = 0{,}60\\ \\mathrm{A} $$
+
+Ohms lag ger
+
+$$ R = \\frac{U_\\mathrm{R}}{I} = \\frac{5{,}2}{0{,}60} = 8{,}666\\ldots \\approx 8{,}7\\ \\mathrm{\\Omega} $$
+
+**Rimlighet:** Dubbelt så stor ström vid samma spänning kräver hälften så stor resistans.
+
+**Svar:** Resistansen ska vara cirka $8{,}7\\ \\mathrm{\\Omega}$.`,
+        },
+        {
+            level: 2,
+            question: `I ett tält hänger två lampor som är parallellkopplade till ett batteri. Strömmen genom lampa 1 är $0{,}25\\ \\mathrm{A}$ och strömmen genom lampa 2 är $0{,}15\\ \\mathrm{A}$. Det fulladdade batteriet kan leverera laddningen $2{,}4\\ \\mathrm{Ah}$. Spänningen är konstant tills batteriet är urladdat.<br>a) Hur länge kan båda lamporna lysa? Ange svaret i timmar.<br>b) Batteriet laddas upp igen. Båda lamporna får lysa i $2{,}0$ timmar, sedan skruvas lampa 1 ur. Hur länge till kan lampa 2 lysa? Ange svaret i timmar.`,
+            answer: { value: 11, unit: 'h', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 6.0, unit: 'h' },
+                { del: 'b', value: 11, unit: 'h', tol: 0.04 },
+            ],
+            solution: `**a)** Lamporna är parallellkopplade, så batteriet levererar summan av delströmmarna:
+
+$$ I = I_1 + I_2 = 0{,}25 + 0{,}15 = 0{,}40\\ \\mathrm{A} $$
+
+Ström är laddning per tid:
+
+$$ I = \\frac{Q}{t} \\quad\\Leftrightarrow\\quad t = \\frac{Q}{I} $$
+
+Insättning med laddningen i Ah ger tiden i timmar:
+
+$$ t = \\frac{2{,}4}{0{,}40} = 6{,}0\\ \\mathrm{h} $$
+
+**Svar:** Lamporna kan lysa i $6{,}0\\ \\mathrm{h}$.
+
+**b)** Under de första $2{,}0$ timmarna levererar batteriet laddningen
+
+$$ Q_1 = I \\cdot t_1 = 0{,}40 \\cdot 2{,}0 = 0{,}80\\ \\mathrm{Ah} $$
+
+Kvar i batteriet finns
+
+$$ Q_2 = 2{,}4 - 0{,}80 = 1{,}6\\ \\mathrm{Ah} $$
+
+När lampa 1 skruvas ur ändras inte spänningen över lampa 2, eftersom den fortfarande sitter direkt till batteriet. Strömmen genom lampa 2 är därför fortfarande $0{,}15\\ \\mathrm{A}$, och det är nu den enda strömmen från batteriet:
+
+$$ t_2 = \\frac{Q_2}{I_2} = \\frac{1{,}6}{0{,}15} = 10{,}66\\ldots \\approx 11\\ \\mathrm{h} $$
+
+**Rimlighet:** Strömmen är mindre än hälften så stor som förut. Den laddning som är kvar räcker därför mer än dubbelt så länge som de $4{,}0$ timmar som båda lamporna hade kunnat lysa till.
+
+**Svar:** Lampa 2 kan lysa i cirka $11\\ \\mathrm{h}$ till.`,
+        },
+        {
+            level: 2,
+            question: `Tre seriekopplade lampor har plötsligt slocknat. Alla sladdar och anslutningar är hela. En voltmeter kopplas in över en lampa i taget och visar $0\\ \\mathrm{V}$ över lampa 1, $12\\ \\mathrm{V}$ över lampa 2 och $0\\ \\mathrm{V}$ över lampa 3. Vilken slutsats kan man dra?
+
+${makeCircuit({
+    source: { label: 'U', value: '12 V' },
+    components: [
+        { type: 'bulb', label: 'L_1' },
+        { type: 'bulb', label: 'L_2' },
+        { type: 'bulb', label: 'L_3' },
+    ],
+})}`,
+            choices: [
+                `Lampa 1 och lampa 3 är trasiga, lampa 2 är hel.`,
+                `Lampa 2 är trasig, lampa 1 och lampa 3 är hela.`,
+                `Batteriet är urladdat, men alla lampor är hela.`,
+                `Alla tre lamporna är trasiga.`,
+            ],
+            correct: 1,
+            solution: `Lamporna är seriekopplade, så det räcker att en glödtråd har gått av för att strömmen i hela kretsen ska bli noll. En hel lampa har fortfarande en viss resistans. Enligt Ohms lag är spänningen över lampa 1, om den är hel,
+
+$$ U_1 = R_1 \\cdot I = R_1 \\cdot 0 = 0\\ \\mathrm{V} $$
+
+En hel lampa i en bruten krets har alltså spänningen noll. Detsamma gäller lampa 3. För hela seriekopplingen gäller
+
+$$ U = U_1 + U_2 + U_3 \\quad\\Leftrightarrow\\quad U_2 = U - U_1 - U_3 $$
+
+$$ U_2 = 12 - 0 - 0 = 12\\ \\mathrm{V} $$
+
+Hela batteriets spänning ligger därför över avbrottet. Det är alltså lampa 2 som är trasig.
+
+Voltmetern kan visa $12\\ \\mathrm{V}$ över lampa 2 bara om dess två sladdar har förbindelse med var sin pol på batteriet. Den förbindelsen går genom lampa 1 på ena sidan och genom lampa 3 på den andra. Båda måste därför vara hela, och batteriet kan inte vara urladdat.
+
+**Svar:** Lampa 2 är trasig, lampa 1 och lampa 3 är hela.`,
+        },
+        {
+            level: 3,
+            question: `Diagrammet visar hur strömmen *I* beror på spänningen *U* för en glödlampa (röd kurva, L) och en resistor (blå linje, *R*).
+
+${makeDiagram({
+    xMax: 10, yMax: 0.5,
+    xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], yTicks: [0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5],
+    xLabel: '<tspan font-style="italic">U</tspan> (V)',
+    yLabel: '<tspan font-style="italic">I</tspan> (A)',
+    paths: [
+        { points: Array.from({ length: 101 }, (_, k) => [k * k / 1000, 0.15 * Math.sqrt(k * k / 1000)]) },
+        { points: [[0, 0], [10, 0.5]], color: '#1c3d6b' },
+    ],
+}).replace('</svg>', '<text x="467" y="56" font-size="15" fill="#c8324a">L</text><text x="467" y="33" font-size="15" font-style="italic" fill="#1c3d6b">R</text></svg>')}
+
+Lampan och resistorn seriekopplas.<br>a) Hur stor blir strömmen om de ansluts till ett batteri på $10\\ \\mathrm{V}$? Ange svaret i A.<br>b) Vilken spänning ska batteriet ha för att spänningen över lampan ska bli lika stor som spänningen över resistorn? Ange svaret i V.`,
+            answer: { value: 18, unit: 'V', tol: 0.06 },
+            delsvar: [
+                { del: 'a', value: 0.30, unit: 'A', tol: 0.04 },
+                { del: 'b', value: 18, unit: 'V', tol: 0.06 },
+            ],
+            solution: `I seriekopplingen gäller två villkor samtidigt: strömmen är lika stor genom lampan och resistorn, och delspänningarna ger tillsammans batteriets spänning,
+
+$$ U = U_\\mathrm{L} + U_\\mathrm{R} $$
+
+Lampans graf är inte en rät linje, så lampan har ingen konstant resistans. Vi kan därför inte räkna med ett enda värde på lampans resistans, utan måste använda grafen.
+
+**a)** Samma ström betyder samma höjd i diagrammet. För en viss ström läser vi av $U_\\mathrm{L}$ på den röda kurvan och $U_\\mathrm{R}$ på den blå linjen, och adderar dem. Summan ska bli $10\\ \\mathrm{V}$.
+
+| $I$ (A) | $U_\\mathrm{L}$ (V) | $U_\\mathrm{R}$ (V) | $U_\\mathrm{L} + U_\\mathrm{R}$ (V) |
+| --- | --- | --- | --- |
+| 0,15 | 1,0 | 3,0 | 4,0 |
+| 0,20 | 1,8 | 4,0 | 5,8 |
+| 0,30 | 4,0 | 6,0 | 10,0 |
+| 0,40 | 7,1 | 8,0 | 15,1 |
+
+Båda spänningarna växer när strömmen ökar. Summan är därför $10\\ \\mathrm{V}$ för exakt en ström, $0{,}30\\ \\mathrm{A}$.
+
+**Svar:** Strömmen blir $0{,}30\\ \\mathrm{A}$.
+
+**b)** Nu ska både strömmen och spänningen vara lika för lampan och resistorn. Samma ström och samma spänning betyder samma punkt i diagrammet, alltså den punkt där graferna skär varandra. Skärningspunkten avläses till $U = 9{,}0\\ \\mathrm{V}$ och $I = 0{,}45\\ \\mathrm{A}$ (i origo går det ingen ström alls). Batteriets spänning är då
+
+$$ U = U_\\mathrm{L} + U_\\mathrm{R} = 9{,}0 + 9{,}0 = 18\\ \\mathrm{V} $$
+
+**Rimlighet:** Vid $10\\ \\mathrm{V}$ har lampan den mindre delen av spänningen. När strömmen ökar blir lampan varmare och får större resistans, så dess andel av spänningen växer. Det stämmer att andelarna blir lika stora först vid en högre batterispänning.
+
+**Svar:** Batteriet ska ha spänningen $18\\ \\mathrm{V}$.`,
+        },
+        {
+            level: 3,
+            question: `Ida ska mäta spänningen över en lampa och strömmen genom den, men råkar låta amperemetern och voltmetern byta plats. Batteriets spänning är $4{,}5\\ \\mathrm{V}$. Voltmeterns resistans är mycket större än lampans, och amperemeterns resistans är mycket mindre än lampans.
+
+${makeCircuit({
+    source: { label: 'U', value: '4,5 V' },
+    components: [
+        { type: 'voltmeter' },
+        { type: 'parallel', branches: [
+            [{ type: 'bulb', label: 'L' }],
+            [{ type: 'ammeter' }],
+        ] },
+    ],
+})}
+
+a) Ungefär vad visar voltmetern? Ange svaret i V och motivera.<br>b) Lyser lampan? Vad visar amperemetern? Motivera båda svaren.<br>c) Ida upptäcker bara att voltmetern sitter fel. Hon ersätter den med en ledning, men låter amperemetern sitta kvar. Förklara varför den kopplingen är farlig för amperemetern, fast den förra inte var det.`,
+            answer: { value: 4.5, unit: 'V' },
+            delsvar: [
+                { del: 'a', value: 4.5, unit: 'V' },
+                { del: 'b' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Voltmetern sitter i serie med parallellkopplingen av lampan och amperemetern. Samma ström *I* går genom voltmetern och genom hela parallellkopplingen. Delspänningarna ger tillsammans batteriets spänning:
+
+$$ U = U_\\mathrm{V} + U_\\mathrm{P} $$
+
+där $U_\\mathrm{V}$ är spänningen över voltmetern och $U_\\mathrm{P}$ är spänningen över parallellkopplingen. Amperemetern ger strömmen en lätt väg, så parallellkopplingen har mycket liten resistans. Voltmetern har mycket stor resistans. Enligt Ohms lag, $U = R \\cdot I$, får den större resistansen den större delen av spänningen när strömmen är densamma. Alltså är $U_\\mathrm{P} \\approx 0$ och
+
+$$ U_\\mathrm{V} \\approx U = 4{,}5\\ \\mathrm{V} $$
+
+**Svar:** Voltmetern visar ungefär $4{,}5\\ \\mathrm{V}$.
+
+**b)** All ström från batteriet måste passera voltmetern. Om dess resistans kallas $R_\\mathrm{V}$ är strömmen
+
+$$ I \\approx \\frac{U}{R_\\mathrm{V}} $$
+
+Eftersom $R_\\mathrm{V}$ är mycket stor är strömmen nästan noll. Den lilla ström som går delar dessutom upp sig mellan lampan och amperemetern. De har samma spänning, så nästan hela strömmen tar vägen genom amperemetern, som har mycket mindre resistans än lampan. Lampan lyser därför inte, och amperemetern visar denna mycket lilla ström, alltså nästan noll.
+
+**Svar:** Lampan lyser inte, och amperemetern visar nästan $0\\ \\mathrm{A}$.
+
+**c)** När voltmetern ersätts med en ledning är amperemetern kopplad direkt mellan batteriets poler. Över dess lilla resistans $R_\\mathrm{A}$ ligger nu hela spänningen *U*, och strömmen genom den är
+
+$$ I_\\mathrm{A} = \\frac{U}{R_\\mathrm{A}} $$
+
+Eftersom $R_\\mathrm{A}$ är mycket liten blir strömmen mycket stor. Batteriet kortsluts genom amperemetern, som kan bli överhettad och gå sönder. I den första kopplingen begränsade voltmeterns stora resistans strömmen, så där kunde den aldrig bli stor.
+
+**Svar:** Amperemetern ligger direkt mellan batteriets poler och får en mycket stor ström. I den första kopplingen hindrade voltmetern det.`,
+        },
+        {
+            level: 3,
+            question: `I en låda sitter tre resistorer, $R_1$, $R_2$ och $R_3$, kopplade enligt figuren. Lådan går inte att öppna, och bara anslutningarna A, B och C är åtkomliga utifrån. Ett batteri på $12\\ \\mathrm{V}$ ansluts till två anslutningar i taget, medan den tredje lämnas fri. Tabellen visar strömmen från batteriet.
+
+${sceneWrap(340, 236, '<rect x="52" y="30" width="236" height="154" rx="8" fill="none" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="6 5"/><g stroke="#0f1620" stroke-width="1.8" fill="none"><path d="M30 84H91M131 84H209M249 84H310M170 84V114M170 154V206"/><rect x="91" y="76" width="40" height="16"/><rect x="209" y="76" width="40" height="16"/><rect x="162" y="114" width="16" height="40"/></g><circle cx="170" cy="84" r="3" fill="#0f1620"/><g fill="#fff" stroke="#0f1620" stroke-width="1.8"><circle cx="26" cy="84" r="4"/><circle cx="314" cy="84" r="4"/><circle cx="170" cy="210" r="4"/></g><g font-size="16" fill="#0f1620" text-anchor="middle"><text x="26" y="70">A</text><text x="314" y="70">B</text><text x="188" y="216">C</text><text x="111" y="64">' + sceneVar('R_1') + '</text><text x="229" y="64">' + sceneVar('R_2') + '</text><text x="200" y="140">' + sceneVar('R_3') + '</text></g>')}
+
+| Batteriet mellan | Ström (A) |
+| --- | --- |
+| A och B | 0,30 |
+| B och C | 0,24 |
+| A och C | 0,40 |
+
+a) Bestäm resistanserna $R_1$, $R_2$ och $R_3$. Ange svaren i Ω.<br>b) A och B förbinds med en ledning och ansluts till batteriets pluspol, och C ansluts till minuspolen. Hur stor ström levererar batteriet? Ange svaret i A.`,
+            answer: { value: 0.44, unit: 'A', tol: 0.02 },
+            delsvar: [
+                { del: 'a', values: [10, 30, 20], unit: 'Ω', etikett: 'resistanserna' },
+                { del: 'b', value: 0.44, unit: 'A', tol: 0.02 },
+            ],
+            solution: `**a)** När batteriet sitter mellan A och B kan ingen ström gå genom $R_3$, eftersom C är fri. Då är $R_1$ och $R_2$ seriekopplade. Samma ström *I* går genom båda, och delspänningarna ger tillsammans batteriets spänning:
+
+$$ U = R_1 \\cdot I + R_2 \\cdot I = (R_1 + R_2) \\cdot I $$
+
+$$ R_1 + R_2 = \\frac{U}{I} $$
+
+På samma sätt är $R_2$ och $R_3$ seriekopplade i den andra mätningen, och $R_1$ och $R_3$ i den tredje. Med resistanserna i ohm ger det ekvationssystemet
+
+$$ \\begin{cases} R_1 + R_2 = \\dfrac{12}{0{,}30} = 40 & (1) \\\\[8pt] R_2 + R_3 = \\dfrac{12}{0{,}24} = 50 & (2) \\\\[8pt] R_1 + R_3 = \\dfrac{12}{0{,}40} = 30 & (3) \\end{cases} $$
+
+Vi adderar vänsterleden för sig och högerleden för sig. Varje resistans förekommer två gånger:
+
+$$ 2 \\cdot (R_1 + R_2 + R_3) = 120 $$
+
+Vi dividerar båda leden med 2:
+
+$$ R_1 + R_2 + R_3 = 60 $$
+
+Ekvation (1), $R_1 + R_2 = 40$, ger
+
+$$ R_3 = 60 - 40 = 20 $$
+
+Ekvation (2), $R_2 + R_3 = 50$, ger
+
+$$ R_1 = 60 - 50 = 10 $$
+
+Ekvation (3), $R_1 + R_3 = 30$, ger
+
+$$ R_2 = 60 - 30 = 30 $$
+
+**Svar:** $R_1 = 10\\ \\mathrm{\\Omega}$, $R_2 = 30\\ \\mathrm{\\Omega}$ och $R_3 = 20\\ \\mathrm{\\Omega}$.
+
+**b)** Nu är $R_1$ och $R_2$ parallellkopplade, eftersom båda sitter mellan pluspolen och mittpunkten i lådan. All ström fortsätter sedan genom $R_3$.
+
+${makeCircuit({
+    width: 400,
+    source: { label: 'U', value: '12 V' },
+    components: [
+        { type: 'parallel', branches: [
+            [{ type: 'resistor', label: 'R_1', value: '10 Ω' }],
+            [{ type: 'resistor', label: 'R_2', value: '30 Ω' }],
+        ] },
+        { type: 'resistor', label: 'R_3', value: '20 Ω' },
+    ],
+})}
+
+Spänningen är lika stor över $R_1$ och $R_2$:
+
+$$ 10 \\cdot I_1 = 30 \\cdot I_2 $$
+
+Vi dividerar båda leden med 10:
+
+$$ I_1 = 3 \\cdot I_2 \\qquad (4) $$
+
+Strömmen från batteriet är summan av delströmmarna. Insättning av (4), $I_1 = 3 \\cdot I_2$, ger
+
+$$ I = I_1 + I_2 = 3 \\cdot I_2 + I_2 = 4 \\cdot I_2 $$
+
+Delspänningarna över parallellkopplingen och $R_3$ ger tillsammans batteriets spänning:
+
+$$ 12 = 30 \\cdot I_2 + 20 \\cdot I $$
+
+Insättning av $I = 4 \\cdot I_2$ ger
+
+$$ 12 = 30 \\cdot I_2 + 20 \\cdot 4 \\cdot I_2 $$
+
+$$ 12 = 110 \\cdot I_2 $$
+
+Vi dividerar båda leden med 110:
+
+$$ I_2 = \\frac{12}{110} $$
+
+Strömmen från batteriet är
+
+$$ I = 4 \\cdot I_2 = 4 \\cdot \\frac{12}{110} = 0{,}436\\ldots \\approx 0{,}44\\ \\mathrm{A} $$
+
+**Rimlighet:** Med bara A och C anslutna är strömmen $0{,}40\\ \\mathrm{A}$. När B också ansluts får strömmen en väg till, så den ska bli större.
+
+**Svar:** Batteriet levererar cirka $0{,}44\\ \\mathrm{A}$.`,
+        },
+        {
+            level: 3,
+            question: `En ljusslinga har 35 likadana lampor i serie. Varje lampa är byggd så att den blir en hel ledning, utan resistans, när glödtråden går av. Resten av slingan lyser då vidare. Tillverkaren skriver att en lampa tål högst $10\\ \\%$ högre spänning än den har när alla lampor är hela.<br>a) Hur många lampor får högst gå sönder innan gränsen överskrids?<br>b) Förklara varför lamporna går sönder allt snabbare om de trasiga inte byts ut.`,
+            answer: { value: 3, unit: 'st' },
+            delsvar: [
+                { del: 'a', value: 3, unit: 'st' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Kalla spänningen från eluttaget för *U*. I en seriekoppling är summan av delspänningarna lika med *U*, och lamporna är likadana. När alla 35 är hela är spänningen över varje lampa
+
+$$ U_1 = \\frac{U}{35} \\qquad (1) $$
+
+När *k* lampor har gått sönder är de bara ledningar utan resistans, och enligt Ohms lag är spänningen över dem noll. Hela spänningen *U* fördelas då på de $35 - k$ lampor som är kvar:
+
+$$ U_2 = \\frac{U}{35 - k} \\qquad (2) $$
+
+Spänningen får vara högst $1{,}10$ gånger så stor som från början:
+
+$$ U_2 \\leq 1{,}10 \\cdot U_1 $$
+
+Insättning av (1), $U_1 = \\dfrac{U}{35}$, och (2), $U_2 = \\dfrac{U}{35 - k}$, ger
+
+$$ \\frac{U}{35 - k} \\leq \\frac{1{,}10 \\cdot U}{35} $$
+
+Vi dividerar båda leden med *U*, som alltså inte behöver vara känd:
+
+$$ \\frac{1}{35 - k} \\leq \\frac{1{,}10}{35} $$
+
+Båda nämnarna är positiva. Vi multiplicerar båda leden med 35 och med $35 - k$:
+
+$$ 35 \\leq 1{,}10 \\cdot (35 - k) $$
+
+Vi dividerar båda leden med $1{,}10$:
+
+$$ 31{,}8\\ldots \\leq 35 - k $$
+
+Vi adderar *k* till båda leden och subtraherar sedan $31{,}8\\ldots$ från båda leden:
+
+$$ k \\leq 3{,}18\\ldots $$
+
+Antalet lampor är ett heltal, så *k* är högst 3.
+
+**Kontroll:** Med $k = 3$ är spänningen $\\dfrac{35}{32} \\approx 1{,}09$ gånger den ursprungliga, och med $k = 4$ är den $\\dfrac{35}{31} \\approx 1{,}13$ gånger den ursprungliga.
+
+**Svar:** Högst 3 lampor får gå sönder.
+
+**b)** För varje lampa som går sönder delar färre lampor på samma spänning. Spänningen över var och en av de hela lamporna ökar, och därmed också strömmen genom dem. Glödtrådarna blir varmare och går lättare av. Nästa lampa som går sönder höjer spänningen ännu mer, så förloppet förstärker sig självt.
+
+Dessutom blir varje ny höjning större än den förra: från 35 till 34 lampor ökar spänningen med faktorn $\\dfrac{35}{34}$, men från 5 till 4 lampor med faktorn $\\dfrac{5}{4}$.
+
+**Svar:** Varje trasig lampa ger högre spänning och större ström för de lampor som är kvar, så att de blir varmare och går sönder fortare.`,
+        },
+        {
+            level: 3,
+            question: `Två likadana resistorer med resistansen *R* är seriekopplade till ett batteri med spänningen $12\\ \\mathrm{V}$. En elev vill kontrollera att spänningen över en av resistorerna är $6{,}0\\ \\mathrm{V}$, men en enkel voltmeter visar $5{,}0\\ \\mathrm{V}$. Batteriets spänning är fortfarande $12\\ \\mathrm{V}$, och voltmetern visar rätt värde på spänningen över den resistor den sitter på.
+
+${makeCircuit({
+    source: { label: 'U', value: '12 V' },
+    components: [
+        { type: 'resistor', label: 'R' },
+        { type: 'parallel', branches: [
+            [{ type: 'resistor', label: 'R' }],
+            [{ type: 'voltmeter' }],
+        ] },
+    ],
+})}
+
+a) Hur många gånger så stor som *R* är voltmeterns resistans?<br>b) Förklara varför spänningen blir lägre än $6{,}0\\ \\mathrm{V}$ när voltmetern kopplas in.`,
+            answer: { value: 2.5, unit: 'gånger' },
+            delsvar: [
+                { del: 'a', value: 2.5, unit: 'gånger' },
+                { del: 'b' },
+            ],
+            solution: `Om voltmetern inte påverkade kretsen skulle de likadana resistorerna dela lika på spänningen, $6{,}0\\ \\mathrm{V}$ var. Att den visar $5{,}0\\ \\mathrm{V}$ betyder att en del av strömmen går genom voltmetern. Kalla voltmeterns resistans för $R_\\mathrm{V}$.
+
+**a)** Den vänstra resistorn sitter i serie med parallelldelen. Spänningen över den är
+
+$$ U_1 = U - U_2 = 12 - 5{,}0 = 7{,}0\\ \\mathrm{V} $$
+
+Hela strömmen från batteriet går genom den vänstra resistorn. Ohms lag ger
+
+$$ I = \\frac{7{,}0}{R} \\qquad (1) $$
+
+Den högra resistorn har spänningen $5{,}0\\ \\mathrm{V}$. Strömmen genom den är
+
+$$ I_\\mathrm{R} = \\frac{5{,}0}{R} \\qquad (2) $$
+
+Strömmen *I* delar upp sig mellan den högra resistorn och voltmetern:
+
+$$ I = I_\\mathrm{R} + I_\\mathrm{V} \\quad\\Leftrightarrow\\quad I_\\mathrm{V} = I - I_\\mathrm{R} $$
+
+Insättning av (1), $I = \\dfrac{7{,}0}{R}$, och (2), $I_\\mathrm{R} = \\dfrac{5{,}0}{R}$, ger strömmen genom voltmetern:
+
+$$ I_\\mathrm{V} = \\frac{7{,}0}{R} - \\frac{5{,}0}{R} = \\frac{2{,}0}{R} $$
+
+Spänningen över voltmetern är också $5{,}0\\ \\mathrm{V}$. Ohms lag ger
+
+$$ R_\\mathrm{V} = \\frac{U_2}{I_\\mathrm{V}} = \\frac{5{,}0}{\\frac{2{,}0}{R}} = \\frac{5{,}0 \\cdot R}{2{,}0} = 2{,}5 \\cdot R $$
+
+**Svar:** Voltmeterns resistans är $2{,}5$ gånger så stor som *R*.
+
+**b)** Voltmetern ger strömmen en extra väg förbi den högra resistorn. Kretsens resistans minskar, och strömmen genom den vänstra resistorn ökar. Då ökar också spänningen över den vänstra resistorn, från $6{,}0\\ \\mathrm{V}$ till $7{,}0\\ \\mathrm{V}$. Eftersom delspänningarna tillsammans är $12\\ \\mathrm{V}$ blir det mindre kvar till den högra.
+
+Voltmetern mäter alltså rätt, men den ändrar kretsen. Vore $R_\\mathrm{V}$ mycket större än *R* skulle $I_\\mathrm{V}$ bli försumbar, och voltmetern skulle visa nästan $6{,}0\\ \\mathrm{V}$. Därför ska en voltmeter ha hög resistans jämfört med det den mäter på.
+
+**Svar:** En del av strömmen går genom voltmetern, så strömmen genom den vänstra resistorn ökar. Den får en större del av spänningen, och det blir mindre kvar till den högra.`,
+        },
+        {
+            level: 3,
+            question: `Du har ett batteri på $12\\ \\mathrm{V}$ och två lampor. Lampa 1 är märkt $6{,}0\\ \\mathrm{V}$; $0{,}50\\ \\mathrm{A}$ och lampa 2 är märkt $6{,}0\\ \\mathrm{V}$; $0{,}20\\ \\mathrm{A}$. En lampa lyser normalt när spänning och ström har de märkta värdena. En kamrat föreslår att lamporna seriekopplas, eftersom $6{,}0 + 6{,}0 = 12$.<br>a) Förklara vad som är fel med förslaget och motivera vilken av lamporna som riskerar att gå sönder.<br>b) Du får använda en enda resistor. Beskriv hur den ska kopplas in för att båda lamporna, som fortfarande är seriekopplade, ska lysa normalt, och bestäm dess resistans. Ange svaret i Ω.`,
+            answer: { value: 20, unit: 'Ω' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 20, unit: 'Ω' },
+            ],
+            solution: `**a)** I en seriekoppling är strömmen lika stor genom båda lamporna. Men för att lysa normalt behöver de olika ström, $0{,}50\\ \\mathrm{A}$ respektive $0{,}20\\ \\mathrm{A}$. Båda kan alltså inte lysa normalt, trots att spänningarna ser ut att gå ihop.
+
+När lamporna lyser normalt är deras resistanser
+
+$$ R_1 = \\frac{6{,}0}{0{,}50} = 12\\ \\mathrm{\\Omega} $$
+
+$$ R_2 = \\frac{6{,}0}{0{,}20} = 30\\ \\mathrm{\\Omega} $$
+
+Med samma ström genom båda får lampa 2, som har störst resistans, den större delen av spänningen. Lampa 2 får alltså mer än $6{,}0\\ \\mathrm{V}$ och lampa 1 mindre. Lampa 2 riskerar att gå sönder. Resistanserna ändras visserligen med temperaturen, men lampa 2 blir varmare och lampa 1 svalare än normalt, och det gör skillnaden mellan resistanserna ännu större.
+
+**Svar:** Strömmen blir lika stor genom båda lamporna, men de behöver olika ström. Lampa 2 får för hög spänning och riskerar att gå sönder.
+
+**b)** Låt båda lamporna lysa normalt och se vad som saknas. Spänningarna stämmer redan: $6{,}0\\ \\mathrm{V}$ över varje lampa ger $12\\ \\mathrm{V}$ tillsammans. Resistorn får därför inte sitta i serie med lamporna, för då skulle den ta en del av spänningen.
+
+Genom lampa 1 ska strömmen vara $0{,}50\\ \\mathrm{A}$, men bara $0{,}20\\ \\mathrm{A}$ får gå genom lampa 2. Resten av strömmen måste ha en annan väg, förbi lampa 2. Resistorn kopplas alltså **parallellt med lampa 2**.
+
+${makeCircuit({
+    source: { label: 'U', value: '12 V' },
+    components: [
+        { type: 'bulb', label: 'L_1' },
+        { type: 'parallel', branches: [
+            [{ type: 'bulb', label: 'L_2' }],
+            [{ type: 'resistor', label: 'R' }],
+        ] },
+    ],
+})}
+
+Strömmen genom resistorn är
+
+$$ I_\\mathrm{R} = I_1 - I_2 = 0{,}50 - 0{,}20 = 0{,}30\\ \\mathrm{A} $$
+
+Resistorn är parallellkopplad med lampa 2, så spänningen över den är också $6{,}0\\ \\mathrm{V}$. Ohms lag ger
+
+$$ R = \\frac{U_2}{I_\\mathrm{R}} = \\frac{6{,}0}{0{,}30} = 20\\ \\mathrm{\\Omega} $$
+
+**Kontroll:** Placeras resistorn över lampa 1 i stället blir strömmen genom lampa 1 mindre än strömmen genom lampa 2, vilket är tvärtemot vad som behövs. Kopplas den över båda lamporna ändrar den ingenting, eftersom spänningen där redan är $12\\ \\mathrm{V}$.
+
+**Svar:** Resistorn ska kopplas parallellt med lampa 2 och ha resistansen $20\\ \\mathrm{\\Omega}$.`,
+        },
+        {
+            level: 3,
+            question: `Tre likadana resistorer ska kopplas till ett batteri, så att det går ström genom alla tre. När alla tre är parallellkopplade räcker batteriet i $12$ timmar. Batteriet kan leverera en bestämd laddning, och spänningen är konstant tills batteriet är urladdat.
+
+Utred vilka andra kopplingar som är möjliga och hur länge batteriet räcker med var och en av dem. Ange tiderna i timmar.`,
+            answer: { value: 108, unit: 'h' },
+            delsvar: [
+                { values: [24, 54, 108], unit: 'h', etikett: 'övriga tider' },
+            ],
+            solution: `Kalla resistansen för *R*, batteriets spänning för *U* och inför beteckningen $I_0 = \\dfrac{U}{R}$, alltså strömmen genom en resistor som sitter ensam direkt till batteriet. Varken *R* eller *U* behöver vara kända.
+
+**Vilka kopplingar finns?** Två av resistorerna är antingen seriekopplade eller parallellkopplade, och den tredje läggs till antingen i serie med dem eller parallellt med dem. Det ger
+
+- alla tre i serie (fall 1)
+- två i serie, parallellt med den tredje (fall 2)
+- två parallellt, i serie med den tredje (fall 3)
+- alla tre parallellt (den givna kopplingen).
+
+**Den givna kopplingen.** Varje resistor har spänningen *U* och strömmen $I_0$. Batteriet levererar $3 \\cdot I_0$.
+
+**Fall 1: alla i serie.** Spänningen delas lika, så varje resistor får $\\dfrac{U}{3}$.
+
+${makeCircuit({
+    source: { label: 'U' },
+    components: [{ type: 'resistor', label: 'R' }, { type: 'resistor', label: 'R' }, { type: 'resistor', label: 'R' }],
+})}
+
+Strömmen från batteriet blir
+
+$$ I = \\frac{\\frac{U}{3}}{R} = \\frac{U}{3R} = \\frac{I_0}{3} $$
+
+**Fall 2: två i serie, parallellt med den tredje.**
+
+${makeCircuit({
+    source: { label: 'U' },
+    components: [{ type: 'parallel', branches: [
+        [{ type: 'resistor', label: 'R' }],
+        [{ type: 'resistor', label: 'R' }, { type: 'resistor', label: 'R' }],
+    ] }],
+})}
+
+Den ensamma resistorn har spänningen *U* och strömmen $I_0$. I den andra grenen får varje resistor halva spänningen, så strömmen där är $\\dfrac{I_0}{2}$. Batteriet levererar
+
+$$ I = I_0 + \\frac{I_0}{2} = \\frac{3 \\cdot I_0}{2} $$
+
+**Fall 3: två parallellt, i serie med den tredje.**
+
+${makeCircuit({
+    source: { label: 'U' },
+    components: [
+        { type: 'resistor', label: 'R' },
+        { type: 'parallel', branches: [
+            [{ type: 'resistor', label: 'R' }],
+            [{ type: 'resistor', label: 'R' }],
+        ] },
+    ],
+})}
+
+De två grenarna är likadana och får lika stor ström, *i*. Genom den ensamma resistorn går då $2i$. Delspänningarna ger tillsammans *U*:
+
+$$ U = R \\cdot 2i + R \\cdot i = 3 \\cdot R \\cdot i $$
+
+Vi dividerar båda leden med $3R$:
+
+$$ i = \\frac{U}{3R} = \\frac{I_0}{3} $$
+
+Batteriet levererar
+
+$$ I = 2i = \\frac{2 \\cdot I_0}{3} $$
+
+**Tiderna.** Batteriet levererar samma laddning i alla kopplingar, $Q = I \\cdot t$. Med tiden i timmar ger den givna kopplingen
+
+$$ Q = 3 \\cdot I_0 \\cdot 12 = 36 \\cdot I_0 $$
+
+För de övriga fås tiden i timmar ur $t = \\dfrac{Q}{I}$, där $I_0$ förkortas bort.
+
+Fall 1:
+
+$$ t_1 = \\frac{36 \\cdot I_0}{\\frac{I_0}{3}} = 36 \\cdot 3 = 108 $$
+
+Fall 2:
+
+$$ t_2 = \\frac{36 \\cdot I_0}{\\frac{3 \\cdot I_0}{2}} = \\frac{36 \\cdot 2}{3} = 24 $$
+
+Fall 3:
+
+$$ t_3 = \\frac{36 \\cdot I_0}{\\frac{2 \\cdot I_0}{3}} = \\frac{36 \\cdot 3}{2} = 54 $$
+
+**Rimlighet:** Ju fler vägar strömmen har, desto större blir den och desto kortare tid räcker batteriet. Parallellkopplingen ska därför ha kortast tid och seriekopplingen längst.
+
+**Svar:** Med alla i serie räcker batteriet i $108\\ \\mathrm{h}$, med två parallellt i serie med den tredje i $54\\ \\mathrm{h}$ och med två i serie parallellt med den tredje i $24\\ \\mathrm{h}$.`,
         },
     ],
 
@@ -37437,9 +40285,9 @@ Lampa 1 får alltså tre gånger så stark ström som lamporna 2, 3 och 4. Efter
             correct: 0,
             solution: `Stavarna har **olika** tecken på sin laddning (en negativ, en positiv). Olika laddningar drar mot varandra med en attraherande kraft.
 
-**Svar:** Alternativ A — de attraherar varandra.
+**Svar:** Alternativ A, de attraherar varandra.
 
-**Generell slutsats:** Lika laddning repellerar, olika laddning attraherar. Det är samma regel som för magneter (lika poler stöts ifrån) — men här handlar det om elektrisk laddning, inte magnetism.`,
+**Generell slutsats:** Lika laddning repellerar, olika laddning attraherar. Det är samma regel som för magneter (lika poler stöts ifrån), men här handlar det om elektrisk laddning, inte magnetism.`,
         },
         {
             level: 1,
@@ -37451,11 +40299,11 @@ Lampa 1 får alltså tre gånger så stark ström som lamporna 2, 3 och 4. Efter
                 `En halvledare leder alltid ström bättre än en metall.`,
             ],
             correct: 0,
-            solution: `I en **ledare** (till exempel metall) finns ledningselektroner som rör sig lätt genom materialet — därför leder ledare ström bra. I en **isolator** (glas, plast, trä) är elektronerna hårt bundna och rör sig inte lätt.
+            solution: `I en **ledare** (till exempel metall) finns ledningselektroner som rör sig lätt genom materialet. Därför leder ledare ström bra. I en **isolator** (glas, plast, trä) är elektronerna hårt bundna och rör sig inte lätt.
 
 **Svar:** Alternativ A.
 
-**Generell slutsats:** En **halvledare** (kisel, selen) är ett mellanting — isolator vid låg temperatur, ledare vid hög. Den leder alltså *inte* alltid bättre än en metall.`,
+**Generell slutsats:** En **halvledare** (kisel, selen) är ett mellanting: isolator vid låg temperatur, ledare vid hög. Den leder alltså *inte* alltid bättre än en metall.`,
         },
         {
             level: 1,
@@ -37482,7 +40330,7 @@ $$ n = \\frac{4{,}0 \\cdot 10^{-9}}{1{,}602 \\cdot 10^{-19}} = 2{,}50 \\cdot 10^
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
-            level: 2,
+            level: 1,
             question: `Två lika stora metallkulor har laddningarna $Q_1 = +6{,}0\\ \\mathrm{nC}$ och $Q_2 = -2{,}0\\ \\mathrm{nC}$. Kulorna får vidröra varandra och skiljs sedan åt. Hur stor laddning har varje kula efteråt?`,
             answer: { value: 2.0, unit: 'nC' },
             solution: `När två **lika stora** ledande kulor vidrör varandra fördelar sig den sammanlagda laddningen jämnt mellan dem. Varje kula får då medelvärdet av de ursprungliga laddningarna:
@@ -37503,10 +40351,10 @@ $$ Q = \\frac{+6{,}0 + (-2{,}0)}{2} = \\frac{+4{,}0}{2} = +2{,}0\\ \\mathrm{nC} 
 
 **Svar:** Varje kula har laddningen $+2{,}0\\ \\mathrm{nC}$ efteråt.
 
-**Generell slutsats:** Den totala laddningen bevaras ($+4{,}0\\ \\mathrm{nC}$ före och efter) — laddning kan inte skapas eller förstöras, bara omfördelas. Jämn fördelning gäller bara när kulorna är lika stora.`,
+**Generell slutsats:** Den totala laddningen bevaras ($+4{,}0\\ \\mathrm{nC}$ före och efter). Laddning kan inte skapas eller förstöras, bara omfördelas. Jämn fördelning gäller bara när kulorna är lika stora.`,
         },
         {
-            level: 2,
+            level: 1,
             question: `En ballong gnuggas mot håret och får då ett överskott på $3{,}0 \\cdot 10^{10}$ elektroner. Hur stor laddning får ballongen? Svara i nC. Elementarladdningen är $q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$.`,
             answer: { value: -4.8, unit: 'nC', ignoreSign: true },
             solution: `Laddningen *Q* är antalet överskottselektroner *n* multiplicerat med elektronens laddning $q_e$:
@@ -37554,12 +40402,12 @@ $$ n = \\frac{\\Delta Q}{q_e} = \\frac{4{,}0 \\cdot 10^{-9}}{1{,}602 \\cdot 10^{
 
 **Svar:** Cirka $2{,}5 \\cdot 10^{10}$ elektroner flyttade från kula 2 till kula 1.
 
-**Generell slutsats:** Det är *elektroner* som rör sig, aldrig protoner. En kula blir mindre positiv genom att ta emot elektroner, inte genom att "skicka iväg" positiv laddning. Att räkna ut den flyttade laddningen $\\Delta Q$ — inte sluttillståndet — är nyckeln.`,
+**Generell slutsats:** Det är *elektroner* som rör sig, aldrig protoner. En kula blir mindre positiv genom att ta emot elektroner, inte genom att "skicka iväg" positiv laddning. Att räkna ut den flyttade laddningen $\\Delta Q$, inte sluttillståndet, är nyckeln.`,
         },
         {
             level: 3,
-            question: `Två små kulor med laddningarna $Q_1$ och $Q_2$ hänger på avståndet $10\\ \\mathrm{cm}$ från varandra och **attraherar** varandra med kraften $14{,}4\\ \\mathrm{\\mu N}$. Kulorna får sedan vidröra varandra och placeras åter på $10\\ \\mathrm{cm}$ avstånd — nu **repellerar** de varandra med kraften $8{,}1\\ \\mathrm{\\mu N}$. Bestäm de ursprungliga laddningarna $Q_1$ och $Q_2$. ($k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2}$)`,
-            solution: `Detta går inte att lösa med ren insättning — vi måste ställa upp två samband och lösa ett ekvationssystem.
+            question: `Två små kulor med laddningarna $Q_1$ och $Q_2$ hänger på avståndet $10\\ \\mathrm{cm}$ från varandra och **attraherar** varandra med kraften $14{,}4\\ \\mathrm{\\mu N}$. Kulorna får sedan vidröra varandra och placeras åter på $10\\ \\mathrm{cm}$ avstånd. Nu **repellerar** de varandra med kraften $8{,}1\\ \\mathrm{\\mu N}$. Bestäm de ursprungliga laddningarna $Q_1$ och $Q_2$. ($k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2}$)`,
+            solution: `Detta går inte att lösa med ren insättning. Vi måste ställa upp två samband och lösa ett ekvationssystem.
 
 **Efter beröringen** delar de två lika stora kulorna laddningen jämnt, så var och en får $\\dfrac{Q_1 + Q_2}{2}$. Att de nu repellerar med $8{,}1\\ \\mathrm{\\mu N}$ ger via Coulombs lag
 
@@ -37582,6 +40430,500 @@ vilket ger $x = 8$ eller $x = -2$.
 **Svar:** Laddningarna var $+8{,}0\\ \\mathrm{nC}$ och $-2{,}0\\ \\mathrm{nC}$.
 
 **Generell slutsats:** Det avgörande är att läsa av *tecknet* ur kraftriktningen (attraktion → produkt negativ, repulsion → produkt positiv) och att inse att beröringen ger medelladdningen. Då blir summa och produkt kända, och laddningarna är rötterna till $x^2 - (\\text{summa})x + (\\text{produkt}) = 0$.`,
+        },
+        // ── Påfyllning: Grund ────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En magnesiumjon har 12 protoner, 12 neutroner och 10 elektroner. Hur stor laddning har jonen? Elementarladdningen är $1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$. Svara i C.`,
+            answer: { value: 3.204e-19, unit: 'C' },
+            solution: `Protonerna har laddningen $+1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$ var, elektronerna $-1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$ var och neutronerna $0\\ \\mathrm{C}$. Det är alltså bara skillnaden mellan antalet protoner och antalet elektroner som avgör jonens laddning.
+
+Jonen har $12 - 10 = 2$ protoner fler än elektroner, det vill säga ett underskott på två elektroner. Laddningen blir därför positiv:
+
+$$ Q = 2 \\cdot 1{,}602 \\cdot 10^{-19} = 3{,}204 \\cdot 10^{-19}\\ \\mathrm{C} $$
+
+**Svar:** $+3{,}204 \\cdot 10^{-19}\\ \\mathrm{C}$`,
+        },
+        {
+            level: 1,
+            question: `Tre små metallkulor A, B och C är alla elektriskt laddade. Kula A är positivt laddad. Kulorna hängs upp två och två i tunna trådar, och figuren visar vad som händer. Vilka laddningar har kulorna B och C?
+
+<svg viewBox="12 14 376 156" width="478" height="198" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kulorna A och B hänger så att de skiljs åt, kulorna B och C så att de dras mot varandra" style="display:block;margin:12px auto;max-width:100%;height:auto"><defs><radialGradient id="f71g2" cx="0.36" cy="0.32" r="0.8"><stop offset="0" stop-color="#e9ebee"/><stop offset="0.6" stop-color="#b4bac3"/><stop offset="1" stop-color="#858d99"/></radialGradient><linearGradient id="f71g2s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e4e7eb"/><stop offset="0.5" stop-color="#bcc2ca"/><stop offset="1" stop-color="#8d95a1"/></linearGradient></defs><rect x="20" y="20" width="360" height="9" rx="2" fill="#c9a878" stroke="#7a5c34" stroke-width="1.3"/><line x1="92" y1="29" x2="58" y2="122" stroke="#0f1620" stroke-width="1.4" stroke-linecap="round"/><circle cx="58" cy="122" r="16" fill="url(#f71g2)" stroke="#0f1620" stroke-width="1.4"/><text x="58" y="158" font-size="15" text-anchor="middle" fill="#0f1620">A</text><line x1="116" y1="29" x2="150" y2="122" stroke="#0f1620" stroke-width="1.4" stroke-linecap="round"/><circle cx="150" cy="122" r="16" fill="url(#f71g2)" stroke="#0f1620" stroke-width="1.4"/><text x="150" y="158" font-size="15" text-anchor="middle" fill="#0f1620">B</text><line x1="52" y1="122" x2="64" y2="122" stroke="#c0392b" stroke-width="2.6" stroke-linecap="round"/><line x1="58" y1="116" x2="58" y2="128" stroke="#c0392b" stroke-width="2.6" stroke-linecap="round"/><line x1="260" y1="29" x2="279" y2="122" stroke="#0f1620" stroke-width="1.4" stroke-linecap="round"/><circle cx="279" cy="122" r="16" fill="url(#f71g2)" stroke="#0f1620" stroke-width="1.4"/><text x="279" y="158" font-size="15" text-anchor="middle" fill="#0f1620">B</text><line x1="340" y1="29" x2="321" y2="122" stroke="#0f1620" stroke-width="1.4" stroke-linecap="round"/><circle cx="321" cy="122" r="16" fill="url(#f71g2)" stroke="#0f1620" stroke-width="1.4"/><text x="321" y="158" font-size="15" text-anchor="middle" fill="#0f1620">C</text></svg>`,
+            choices: [
+                `B är positiv och C är positiv.`,
+                `B är negativ och C är positiv.`,
+                `B är positiv och C är negativ.`,
+                `B är negativ och C är negativ.`,
+            ],
+            correct: 2,
+            solution: `**A och B** stöts bort från varandra. Två laddade föremål som repellerar varandra har **lika** laddning. Eftersom A är positiv är också B positiv.
+
+**B och C** dras mot varandra. Två laddade föremål som attraherar varandra har **olika** laddning. Eftersom B är positiv är C negativ.
+
+**Svar:** Alternativ C. B är positiv och C är negativ.
+
+**Generell slutsats:** Uppgiften säger att alla tre kulorna är laddade. Utan den upplysningen hade C också kunnat vara neutral, eftersom ett laddat föremål drar till sig neutrala föremål genom influens.`,
+        },
+        {
+            level: 1,
+            question: `En positivt laddad stav hålls nära den vänstra änden av en neutral metallstång som står på en fot av plast. Staven och stången vidrör inte varandra. Vad händer i metallstången?
+
+<svg viewBox="12 18 340 118" width="442" height="153" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="En positivt laddad stav till vänster om en neutral metallstång på en plastfot" style="display:block;margin:12px auto;max-width:100%;height:auto"><defs><radialGradient id="f71g4" cx="0.36" cy="0.32" r="0.8"><stop offset="0" stop-color="#e9ebee"/><stop offset="0.6" stop-color="#b4bac3"/><stop offset="1" stop-color="#858d99"/></radialGradient><linearGradient id="f71g4s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e4e7eb"/><stop offset="0.5" stop-color="#bcc2ca"/><stop offset="1" stop-color="#8d95a1"/></linearGradient></defs><rect x="20" y="50" width="110" height="22" rx="11" fill="#f0dfa0" stroke="#a08a35" stroke-width="1.4"/><line x1="33.5" y1="61" x2="42.5" y2="61" stroke="#c0392b" stroke-width="2" stroke-linecap="round"/><line x1="38" y1="56.5" x2="38" y2="65.5" stroke="#c0392b" stroke-width="2" stroke-linecap="round"/><line x1="57.5" y1="61" x2="66.5" y2="61" stroke="#c0392b" stroke-width="2" stroke-linecap="round"/><line x1="62" y1="56.5" x2="62" y2="65.5" stroke="#c0392b" stroke-width="2" stroke-linecap="round"/><line x1="81.5" y1="61" x2="90.5" y2="61" stroke="#c0392b" stroke-width="2" stroke-linecap="round"/><line x1="86" y1="56.5" x2="86" y2="65.5" stroke="#c0392b" stroke-width="2" stroke-linecap="round"/><line x1="105.5" y1="61" x2="114.5" y2="61" stroke="#c0392b" stroke-width="2" stroke-linecap="round"/><line x1="110" y1="56.5" x2="110" y2="65.5" stroke="#c0392b" stroke-width="2" stroke-linecap="round"/><rect x="246" y="74" width="8" height="48" fill="#efe6c8" stroke="#8d7a3f" stroke-width="1.3"/><rect x="228" y="122" width="44" height="9" rx="3" fill="#efe6c8" stroke="#8d7a3f" stroke-width="1.3"/><rect x="158" y="48" width="184" height="26" rx="13" fill="url(#f71g4s)" stroke="#0f1620" stroke-width="1.4"/><text x="75" y="94" font-size="14" text-anchor="middle" fill="#0f1620">Laddad stav</text><text x="250" y="36" font-size="14" text-anchor="middle" fill="#0f1620">Neutral metallstång</text><text x="264" y="108" font-size="14" text-anchor="start" fill="#0f1620">Plastfot</text></svg>`,
+            choices: [
+                `Protoner flyttas till höger, så att den högra änden blir positiv.`,
+                `Elektroner flyttas till höger, så att den högra änden blir negativ.`,
+                `Ingenting, eftersom en neutral stång inte påverkas av laddningar.`,
+                `Elektroner flyttas till vänster, så att den vänstra änden blir negativ.`,
+            ],
+            correct: 3,
+            solution: `Metall är en ledare. Elektronerna rör sig lätt, medan protonerna sitter fast. De negativa elektronerna attraheras av den positiva staven och samlas i den vänstra änden, som får ett överskott av elektroner och blir negativ. Den högra änden får ett lika stort underskott och blir positiv.
+
+Stången är fortfarande neutral som helhet. Laddningarna har bara omfördelats, och det kallas **influens**.
+
+**Svar:** Alternativ D.
+
+**Generell slutsats:** Den ände som är närmast får alltid motsatt laddning mot den laddade staven. Därför dras en neutral ledare mot staven, oavsett om staven är positiv eller negativ.`,
+        },
+
+        // ── Påfyllning: Mellan ───────────────────────────────────────────
+        {
+            level: 2,
+            question: `En aluminiumkula innehåller $6{,}0 \\cdot 10^{23}$ atomer. Varje neutral aluminiumatom har 13 elektroner. Kulan laddas så att den får laddningen $+40\\ \\mathrm{nC}$. En elektron av hur många har lämnat kulan? Elementarladdningen är $q_\\mathrm{e} = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$.`,
+            answer: { value: 3.1e13, unit: 'st', tol: 0.03 },
+            solution: `Vi bestämmer först hur många elektroner den neutrala kulan innehåller och sedan hur många som har försvunnit.
+
+**Elektroner i den neutrala kulan:**
+
+$$ N = 6{,}0 \\cdot 10^{23} \\cdot 13 = 7{,}8 \\cdot 10^{24}\\ \\text{st} $$
+
+**Elektroner som har lämnat kulan:** Kulan är positiv, alltså har den ett underskott av elektroner.
+
+$$ n = \\frac{Q}{q_\\mathrm{e}} $$
+
+$$
+\\left[ \\begin{array}{l}
+Q = 40\\ \\mathrm{nC} = 40 \\cdot 10^{-9}\\ \\mathrm{C} \\\\
+q_\\mathrm{e} = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}
+\\end{array} \\right]
+$$
+
+$$ n = \\frac{40 \\cdot 10^{-9}}{1{,}602 \\cdot 10^{-19}} = 2{,}4968\\ldots \\cdot 10^{11}\\ \\text{st} $$
+
+**Jämförelse:** Antalet elektroner från början per elektron som lämnat kulan är
+
+$$ \\frac{N}{n} = \\frac{7{,}8 \\cdot 10^{24}}{2{,}4968\\ldots \\cdot 10^{11}} \\approx 3{,}1 \\cdot 10^{13} $$
+
+**Rimlighet:** En elektron av 31 biljoner är en försvinnande liten andel. Det stämmer med att kulan varken ser annorlunda ut eller väger märkbart mindre när den är laddad.
+
+**Svar:** Ungefär en elektron av $3{,}1 \\cdot 10^{13}$ har lämnat kulan.`,
+        },
+        {
+            level: 2,
+            question: `Tre lika stora metallkulor A, B och C sitter på var sitt isolerande skaft. Från början är laddningarna $Q_\\mathrm{A} = +12{,}0\\ \\mathrm{nC}$, $Q_\\mathrm{B} = 0$ och $Q_\\mathrm{C} = -2{,}0\\ \\mathrm{nC}$. Först får A vidröra B, sedan får B vidröra C och till sist får C vidröra A. Kulorna skiljs åt efter varje kontakt. Vilken laddning har varje kula till slut?`,
+            delsvar: [
+                { del: 'a', value: 4.0, unit: 'nC', etikett: '$Q_\\mathrm{A} =$' },
+                { del: 'a', value: 2.0, unit: 'nC', etikett: '$Q_\\mathrm{B} =$' },
+                { del: 'a', value: 4.0, unit: 'nC', etikett: '$Q_\\mathrm{C} =$' },
+            ],
+            solution: `Kulorna är lika stora och ledande. Vid varje kontakt delar de två kulorna därför sin sammanlagda laddning lika, så att båda får medelvärdet $Q = \\dfrac{Q_1 + Q_2}{2}$. Den tredje kulan påverkas inte.
+
+**Kontakt 1, A och B:** Båda får
+
+$$ Q = \\frac{12{,}0 + 0}{2} = 6{,}0\\ \\mathrm{nC} $$
+
+**Kontakt 2, B och C:** B har nu $+6{,}0\\ \\mathrm{nC}$ och C har $-2{,}0\\ \\mathrm{nC}$. Båda får
+
+$$ Q = \\frac{6{,}0 + (-2{,}0)}{2} = \\frac{4{,}0}{2} = 2{,}0\\ \\mathrm{nC} $$
+
+**Kontakt 3, C och A:** C har nu $+2{,}0\\ \\mathrm{nC}$ och A har fortfarande $+6{,}0\\ \\mathrm{nC}$. Båda får
+
+$$ Q = \\frac{2{,}0 + 6{,}0}{2} = \\frac{8{,}0}{2} = 4{,}0\\ \\mathrm{nC} $$
+
+| | A (nC) | B (nC) | C (nC) | Summa (nC) |
+| --- | --- | --- | --- | --- |
+| Från början | +12,0 | 0 | −2,0 | +10,0 |
+| Efter kontakt 1 | +6,0 | +6,0 | −2,0 | +10,0 |
+| Efter kontakt 2 | +6,0 | +2,0 | +2,0 | +10,0 |
+| Efter kontakt 3 | +4,0 | +2,0 | +4,0 | +10,0 |
+
+**Rimlighet:** Summan är $+10{,}0\\ \\mathrm{nC}$ hela tiden, precis som lagen om laddningens bevarande kräver.
+
+**Svar:** $Q_\\mathrm{A} = +4{,}0\\ \\mathrm{nC}$, $Q_\\mathrm{B} = +2{,}0\\ \\mathrm{nC}$ och $Q_\\mathrm{C} = +4{,}0\\ \\mathrm{nC}$`,
+        },
+        {
+            level: 2,
+            question: `En neutral metallkula står på en fot av plast. Figuren visar vad en elev gör i fyra steg. I steg 1 förs en negativt laddad stav nära kulan. I steg 2 förbinds kulan med marken genom en metalltråd, i steg 3 tas tråden bort och i steg 4 tas staven bort.<br>a) Vilken laddning har kulan efter steg 4? Förklara varför.<br>b) Vad blir resultatet om eleven byter ordning och tar bort staven före tråden? Förklara varför.
+
+<svg viewBox="6 2 438 324" width="569" height="421" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fyra steg: negativ stav nära en metallkula, kulan förbinds med marken, tråden tas bort, staven tas bort" style="display:block;margin:12px auto;max-width:100%;height:auto"><defs><radialGradient id="f71m3" cx="0.36" cy="0.32" r="0.8"><stop offset="0" stop-color="#e9ebee"/><stop offset="0.6" stop-color="#b4bac3"/><stop offset="1" stop-color="#858d99"/></radialGradient><linearGradient id="f71m3s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e4e7eb"/><stop offset="0.5" stop-color="#bcc2ca"/><stop offset="1" stop-color="#8d95a1"/></linearGradient></defs><rect x="126" y="82" width="8" height="55" fill="#efe6c8" stroke="#8d7a3f" stroke-width="1.3"/><rect x="108" y="137" width="44" height="9" rx="3" fill="#efe6c8" stroke="#8d7a3f" stroke-width="1.3"/><circle cx="130" cy="62" r="23" fill="url(#f71m3)" stroke="#0f1620" stroke-width="1.4"/><rect x="16" y="52" width="78" height="20" rx="10" fill="#f0dfa0" stroke="#a08a35" stroke-width="1.4"/><line x1="28.5" y1="62" x2="37.5" y2="62" stroke="#2563c9" stroke-width="2" stroke-linecap="round"/><line x1="50.5" y1="62" x2="59.5" y2="62" stroke="#2563c9" stroke-width="2" stroke-linecap="round"/><line x1="72.5" y1="62" x2="81.5" y2="62" stroke="#2563c9" stroke-width="2" stroke-linecap="round"/><text x="16" y="20" font-size="14" text-anchor="start" fill="#0f1620"><tspan font-weight="600">1.</tspan> Staven förs nära</text><path d="M372 62 H412 V137" fill="none" stroke="#a5552a" stroke-width="2"/><line x1="400" y1="137" x2="424" y2="137" stroke="#0f1620" stroke-width="2" stroke-linecap="round"/><line x1="404" y1="142" x2="420" y2="142" stroke="#0f1620" stroke-width="2" stroke-linecap="round"/><line x1="408" y1="147" x2="416" y2="147" stroke="#0f1620" stroke-width="2" stroke-linecap="round"/><rect x="346" y="82" width="8" height="55" fill="#efe6c8" stroke="#8d7a3f" stroke-width="1.3"/><rect x="328" y="137" width="44" height="9" rx="3" fill="#efe6c8" stroke="#8d7a3f" stroke-width="1.3"/><circle cx="350" cy="62" r="23" fill="url(#f71m3)" stroke="#0f1620" stroke-width="1.4"/><rect x="236" y="52" width="78" height="20" rx="10" fill="#f0dfa0" stroke="#a08a35" stroke-width="1.4"/><line x1="248.5" y1="62" x2="257.5" y2="62" stroke="#2563c9" stroke-width="2" stroke-linecap="round"/><line x1="270.5" y1="62" x2="279.5" y2="62" stroke="#2563c9" stroke-width="2" stroke-linecap="round"/><line x1="292.5" y1="62" x2="301.5" y2="62" stroke="#2563c9" stroke-width="2" stroke-linecap="round"/><text x="236" y="20" font-size="14" text-anchor="start" fill="#0f1620"><tspan font-weight="600">2.</tspan> Tråden ansluts</text><rect x="126" y="254" width="8" height="55" fill="#efe6c8" stroke="#8d7a3f" stroke-width="1.3"/><rect x="108" y="309" width="44" height="9" rx="3" fill="#efe6c8" stroke="#8d7a3f" stroke-width="1.3"/><circle cx="130" cy="234" r="23" fill="url(#f71m3)" stroke="#0f1620" stroke-width="1.4"/><rect x="16" y="224" width="78" height="20" rx="10" fill="#f0dfa0" stroke="#a08a35" stroke-width="1.4"/><line x1="28.5" y1="234" x2="37.5" y2="234" stroke="#2563c9" stroke-width="2" stroke-linecap="round"/><line x1="50.5" y1="234" x2="59.5" y2="234" stroke="#2563c9" stroke-width="2" stroke-linecap="round"/><line x1="72.5" y1="234" x2="81.5" y2="234" stroke="#2563c9" stroke-width="2" stroke-linecap="round"/><text x="16" y="192" font-size="14" text-anchor="start" fill="#0f1620"><tspan font-weight="600">3.</tspan> Tråden tas bort</text><rect x="346" y="254" width="8" height="55" fill="#efe6c8" stroke="#8d7a3f" stroke-width="1.3"/><rect x="328" y="309" width="44" height="9" rx="3" fill="#efe6c8" stroke="#8d7a3f" stroke-width="1.3"/><circle cx="350" cy="234" r="23" fill="url(#f71m3)" stroke="#0f1620" stroke-width="1.4"/><text x="236" y="192" font-size="14" text-anchor="start" fill="#0f1620"><tspan font-weight="600">4.</tspan> Staven tas bort</text><line x1="220" y1="8" x2="220" y2="322" stroke="#b9ad97" stroke-width="1" stroke-linecap="round" stroke-dasharray="4 5"/><line x1="10" y1="160" x2="440" y2="160" stroke="#b9ad97" stroke-width="1" stroke-linecap="round" stroke-dasharray="4 5"/></svg>`,
+            solution: `**a)** Vi följer elektronerna steg för steg.
+
+1. Den negativa staven repellerar elektronerna i kulan. Kulan är en ledare, så elektroner samlas på den sida som är längst bort från staven. Kulan är fortfarande neutral som helhet (influens).
+2. När tråden ansluts kan elektronerna komma ännu längre bort från staven. De repelleras genom tråden ned i marken. Kulan får då ett underskott av elektroner.
+3. När tråden tas bort finns det ingen väg tillbaka. Foten är av plast, som är en isolator, så underskottet blir kvar.
+4. När staven tas bort fördelar sig den kvarvarande laddningen jämnt över kulan.
+
+Ett underskott av elektroner ger en positiv laddning, alltså motsatt tecken mot staven.
+
+**Svar:** Kulan är positivt laddad, eftersom elektroner har lämnat den genom tråden.
+
+**b)** Så länge tråden sitter kvar är vägen mellan kulan och marken öppen. Tas staven bort finns ingenting som repellerar elektronerna. Underskottet i kulan drar i stället tillbaka elektroner från marken genom tråden, tills kulan är neutral. När tråden därefter tas bort finns ingen laddning kvar att stänga inne.
+
+**Svar:** Kulan blir neutral, eftersom elektronerna hinner återvända genom tråden.
+
+**Generell slutsats:** En ledare kan laddas utan att vidröra det laddade föremålet. Den får då alltid motsatt tecken, medan en ledare som laddas genom kontakt får samma tecken.`,
+        },
+        {
+            level: 2,
+            question: `I en bandgenerator för ett rörligt band bort elektroner från en metallkula. Diagrammet visar hur kulans laddning *Q* ändras efter starten. Bandet går med samma fart hela tiden. Elementarladdningen är $q_\\mathrm{e} = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$.<br>a) Hur många elektroner lämnar kulan per sekund under de första 8,0 sekunderna?<br>b) Efter 8,0 s läcker laddning genom luften. Hur många elektroner per sekund får kulan då från luften?
+
+${makeDiagram({
+    xMin: 0, xMax: 14, yMin: 0, yMax: 200,
+    xTicks: [0, 2, 4, 6, 8, 10, 12, 14],
+    yTicks: [0, 40, 80, 120, 160, 200],
+    xLabel: '<tspan font-style="italic">t</tspan> (s)',
+    yLabel: '<tspan font-style="italic">Q</tspan> (nC)',
+    paths: [{ points: [[0, 0], [8, 160], [13, 160]] }],
+})}`,
+            delsvar: [
+                { del: 'a', value: 1.2e11, unit: 'st/s', tol: 0.05 },
+                { del: 'b', value: 1.2e11, unit: 'st/s', tol: 0.05 },
+            ],
+            solution: `**a)** Ur diagrammet läser vi av att laddningen växer rätlinjigt från $0$ till $160\\ \\mathrm{nC}$ på $8{,}0\\ \\mathrm{s}$. Laddningen ökar alltså lika mycket varje sekund:
+
+$$ \\frac{\\Delta Q}{\\Delta t} = \\frac{160}{8{,}0} = 20\\ \\mathrm{nC/s} $$
+
+Varje sekund ökar laddningen med $20\\ \\mathrm{nC} = 20 \\cdot 10^{-9}\\ \\mathrm{C}$. Varje elektron som lämnar kulan ökar laddningen med en elementarladdning. Antalet elektroner per sekund är därför
+
+$$ n = \\frac{\\Delta Q}{q_\\mathrm{e}} = \\frac{20 \\cdot 10^{-9}}{1{,}602 \\cdot 10^{-19}} = 1{,}248\\ldots \\cdot 10^{11} \\approx 1{,}2 \\cdot 10^{11}\\ \\text{st} $$
+
+**Svar:** $1{,}2 \\cdot 10^{11}$ elektroner per sekund
+
+**b)** Efter $8{,}0\\ \\mathrm{s}$ är laddningen konstant, $160\\ \\mathrm{nC}$. Bandet går med samma fart och fortsätter att föra bort lika många elektroner som förut. För att laddningen ändå ska vara oförändrad måste lika många elektroner komma till kulan från luften varje sekund.
+
+**Svar:** $1{,}2 \\cdot 10^{11}$ elektroner per sekund
+
+**Rimlighet:** Att kurvan planar ut betyder alltså inte att bandet har slutat föra bort elektroner, utan att lika många kommer som går.`,
+        },
+
+        {
+            level: 2,
+            question: `En plexiglasstav har laddningen $-0{,}50\\ \\mathrm{nC}$ och en sidenduk har laddningen $+0{,}20\\ \\mathrm{nC}$. Staven gnuggas med duken. Då flyttas $5{,}0 \\cdot 10^{9}$ elektroner från staven till duken. Elementarladdningen är $q_\\mathrm{e} = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$.<br>a) Bestäm stavens laddning efter gnuggningen. Svara i nC.<br>b) Bestäm dukens laddning efter gnuggningen. Svara i nC.<br>c) Attraherar eller repellerar staven och duken varandra efteråt? Motivera.`,
+            delsvar: [
+                { del: 'a', value: 0.30, unit: 'nC', tol: 0.02 },
+                { del: 'b', value: -0.60, unit: 'nC', tol: 0.02 },
+                { del: 'c' },
+            ],
+            solution: `**a)** Vi bestämmer först storleken av den laddning som flyttas. Den är antalet elektroner gånger elementarladdningen:
+
+$$ \\Delta Q = n \\cdot q_\\mathrm{e} $$
+
+$$
+\\left[ \\begin{array}{l}
+n = 5{,}0 \\cdot 10^{9}\\ \\text{st} \\\\
+q_\\mathrm{e} = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}
+\\end{array} \\right]
+$$
+
+$$ \\Delta Q = 5{,}0 \\cdot 10^{9} \\cdot 1{,}602 \\cdot 10^{-19} = 8{,}01 \\cdot 10^{-10}\\ \\mathrm{C} = 0{,}801\\ \\mathrm{nC} $$
+
+Staven förlorar elektroner, alltså negativ laddning. Dess laddning ökar därför med $0{,}801\\ \\mathrm{nC}$:
+
+$$ Q_\\mathrm{stav} = -0{,}50 + 0{,}801 = 0{,}301\\ \\mathrm{nC} \\approx 0{,}30\\ \\mathrm{nC} $$
+
+**Svar:** $+0{,}30\\ \\mathrm{nC}$
+
+**b)** Duken tar emot elektronerna. Dess laddning minskar därför lika mycket:
+
+$$ Q_\\mathrm{duk} = 0{,}20 - 0{,}801 = -0{,}601\\ \\mathrm{nC} \\approx -0{,}60\\ \\mathrm{nC} $$
+
+**Rimlighet:** Den totala laddningen var $-0{,}50 + 0{,}20 = -0{,}30\\ \\mathrm{nC}$ före gnuggningen och är $0{,}301 + (-0{,}601) = -0{,}30\\ \\mathrm{nC}$ efteråt. Den är bevarad, precis som den ska vara.
+
+**Svar:** $-0{,}60\\ \\mathrm{nC}$
+
+**c)** Staven är positiv och duken är negativ. Olika laddningar attraherar varandra.
+
+**Svar:** De attraherar varandra, eftersom laddningarna har olika tecken.`,
+        },
+        {
+            level: 2,
+            question: `En liten droppe saltlösning svävar i luften. Den innehåller natriumjoner, $\\mathrm{Na^+}$, kalciumjoner, $\\mathrm{Ca^{2+}}$, och kloridjoner, $\\mathrm{Cl^-}$. Antalet natriumjoner är $4{,}0 \\cdot 10^{11}$ och antalet kloridjoner är $6{,}2 \\cdot 10^{11}$. Droppens totala laddning är $+16\\ \\mathrm{nC}$. Hur många kalciumjoner finns i droppen? Elementarladdningen är $q_\\mathrm{e} = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$.`,
+            answer: { value: 1.6e11, unit: 'st', tol: 0.03 },
+            solution: `En natriumjon har en positiv elementarladdning, en kalciumjon har två positiva och en kloridjon har en negativ. Droppens laddning bestäms av hur många positiva elementarladdningar som blir över när de negativa har räknats bort.
+
+**Överskottet av positiva elementarladdningar:**
+
+$$ n = \\frac{Q}{q_\\mathrm{e}} $$
+
+$$
+\\left[ \\begin{array}{l}
+Q = 16\\ \\mathrm{nC} = 16 \\cdot 10^{-9}\\ \\mathrm{C} \\\\
+q_\\mathrm{e} = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}
+\\end{array} \\right]
+$$
+
+$$ n = \\frac{16 \\cdot 10^{-9}}{1{,}602 \\cdot 10^{-19}} = 9{,}9875\\ldots \\cdot 10^{10}\\ \\text{st} $$
+
+**Antalet kalciumjoner:** Låt *x* vara antalet kalciumjoner. De bidrar med $2x$ positiva elementarladdningar. Summan av alla elementarladdningar med tecken ska vara lika med överskottet:
+
+$$ 4{,}0 \\cdot 10^{11} + 2x - 6{,}2 \\cdot 10^{11} = 9{,}9875\\ldots \\cdot 10^{10} $$
+
+Vi räknar ihop talen i vänsterledet:
+
+$$ 2x - 2{,}2 \\cdot 10^{11} = 9{,}9875\\ldots \\cdot 10^{10} $$
+
+Vi adderar $2{,}2 \\cdot 10^{11}$ till båda leden:
+
+$$ 2x = 3{,}19875\\ldots \\cdot 10^{11} $$
+
+Vi dividerar båda leden med 2:
+
+$$ x = 1{,}599\\ldots \\cdot 10^{11} \\approx 1{,}6 \\cdot 10^{11} $$
+
+**Rimlighet:** De positiva jonerna bidrar med $4{,}0 \\cdot 10^{11} + 2 \\cdot 1{,}6 \\cdot 10^{11} = 7{,}2 \\cdot 10^{11}$ elementarladdningar. Det är $1{,}0 \\cdot 10^{11}$ fler än de negativa, vilket motsvarar ungefär $16\\ \\mathrm{nC}$.
+
+**Svar:** $1{,}6 \\cdot 10^{11}$ kalciumjoner`,
+        },
+
+        // ── Påfyllning: Avancerad ────────────────────────────────────────
+        {
+            level: 3,
+            question: `En metallkula har laddningen *Q*. Det finns också *n* neutrala metallkulor av exakt samma storlek. Varje kula sitter på ett isolerande skaft. Ella lägger alla $n + 1$ kulor i en ring, där varje kula vidrör sina två grannar, och tar sedan ut den första kulan. Omar låter i stället den första kulan vidröra de neutrala kulorna en i taget, varje kula en gång.<br>a) Bestäm i båda fallen ett uttryck för den laddning som den första kulan har kvar.<br>b) Visa att Omars metod alltid lämnar kvar mindre laddning än Ellas när $n \\geq 2$.`,
+            solution: `**a)** **Ellas metod.** Alla kulor i ringen är lika stora och ligger på samma sätt i förhållande till de andra. Ingen kula skiljer sig alltså från någon annan, och därför måste alla få lika mycket laddning. Den totala laddningen är bevarad och lika med *Q*. Den delas lika mellan $n + 1$ kulor:
+
+$$ Q_\\mathrm{E} = \\frac{Q}{n+1} $$
+
+**Omars metod.** Vid varje kontakt möter den första kulan en ny, neutral kula. De två är lika stora och får var sin hälft. Om den första kulan har laddningen *q* före en kontakt har den alltså efteråt
+
+$$ \\frac{q + 0}{2} = \\frac{q}{2} $$
+
+Laddningen halveras vid varje kontakt. Efter *n* kontakter har den halverats *n* gånger:
+
+$$ Q_\\mathrm{O} = \\frac{Q}{2^n} $$
+
+**Svar:** Ellas metod lämnar kvar $\\dfrac{Q}{n+1}$ och Omars metod $\\dfrac{Q}{2^n}$.
+
+**b)** Båda uttrycken har samma täljare. Omars laddning är mindre om hans nämnare är större, det vill säga om $2^n > n + 1$ när $n \\geq 2$.
+
+För $n = 2$ stämmer det, eftersom $2^2 = 4$ och $2 + 1 = 3$.
+
+Vi undersöker nu vad som händer när *n* ökar med 1:
+
+- Ellas nämnare $n + 1$ ökar med 1.
+- Omars nämnare fördubblas från $2^n$ till $2^{n+1} = 2^n + 2^n$. Den ökar alltså med $2^n$, och det är minst 4 när $n \\geq 2$.
+
+Omars nämnare är större redan vid $n = 2$ och ökar sedan mer än Ellas för varje ny kula. Den förblir därför större för alla $n \\geq 2$, och då är
+
+$$ \\frac{Q}{2^n} < \\frac{Q}{n+1} $$
+
+vilket skulle visas.
+
+**Rimlighet:** För $n = 1$ är metoderna identiska och båda uttrycken ger $\\dfrac{Q}{2}$. Skillnaden beror på att en ny neutral kula tar hälften av det som finns kvar, medan kulorna i ringen också måste dela med varandra.`,
+        },
+        {
+            level: 3,
+            question: `Fem små metallkulor A, B, C, D och E hänger i isolerande trådar. En del av dem är laddade och andra är neutrala. Kula A är positivt laddad. Två kulor i taget förs mot varandra utan att de vidrör varandra. Kulorna är mycket små jämfört med avstånden mellan dem. Tabellen visar resultaten.
+
+| Par | Resultat |
+| --- | --- |
+| A och B | repellerar |
+| A och C | attraherar |
+| B och D | attraherar |
+| C och D | attraherar |
+| D och E | ingen kraft |
+
+a) Bestäm laddningen (positiv, negativ eller neutral) hos var och en av kulorna B, C, D och E. Motivera varje steg.<br>b) Anta att försöket med D och E aldrig hade gjorts. Vilka möjligheter finns det då för kulorna C och D? Motivera.`,
+            solution: `Vi behöver tre regler:
+
+- **Repulsion** uppstår bara mellan två föremål som är laddade med samma tecken. Ett neutralt föremål repelleras aldrig.
+- **Attraktion** uppstår antingen mellan olika laddningar eller mellan ett laddat och ett neutralt föremål, eftersom influens drar det neutrala föremålet mot det laddade. Attraktion bevisar alltså bara att minst ett av föremålen är laddat och att de inte har samma tecken.
+- **Ingen kraft** betyder att båda är neutrala. Om minst ett av dem vore laddat skulle de attrahera eller repellera varandra.
+
+**a)** **D och E:** Ingen kraft verkar, så både D och E är neutrala.
+
+**A och B:** De repellerar varandra, så B är laddad med samma tecken som A. Kula B är positiv.
+
+**C och D:** De attraherar varandra och D är neutral. Då måste C vara laddad, eftersom två neutrala kulor inte påverkar varandra.
+
+**A och C:** De attraherar varandra. Båda är laddade och kan inte ha samma tecken, för då hade de repellerat. Kula C är därför negativ.
+
+**Kontroll:** B (positiv) och D (neutral) attraherar varandra genom influens, vilket stämmer med tabellen.
+
+**Svar:** B är positiv, C är negativ, D är neutral och E är neutral.
+
+**b)** Utan försöket med D och E vet vi fortfarande att B är positiv.
+
+**A och C** attraherar, och A är positiv. C är alltså negativ eller neutral.
+
+**B och D** attraherar, och B är positiv. D är alltså negativ eller neutral.
+
+Det ger fyra kombinationer, som vi prövar mot att **C och D** attraherar varandra:
+
+| C | D | Väntat resultat | Möjligt? |
+| --- | --- | --- | --- |
+| negativ | negativ | repellerar | nej |
+| negativ | neutral | attraherar | ja |
+| neutral | negativ | attraherar | ja |
+| neutral | neutral | ingen kraft | nej |
+
+**Svar:** Precis en av kulorna C och D är negativ och den andra är neutral. Det går inte att avgöra vilken som är vilken.
+
+**Generell slutsats:** Bara repulsion bevisar att ett föremål är laddat. Attraktion räcker inte, eftersom neutrala föremål också attraheras.`,
+        },
+        {
+            level: 3,
+            question: `En metallkula A laddas av en generator till $+60\\ \\mathrm{nC}$. Den får sedan vidröra en mindre, neutral metallkula B och tas bort. Kula B har då laddningen $+12\\ \\mathrm{nC}$. Därefter laddas A på nytt till $+60\\ \\mathrm{nC}$ och får vidröra B igen, och så fortsätter man många gånger. Vid varje kontakt fördelar sig den sammanlagda laddningen mellan kulorna i samma förhållande. Vilket är det minsta värde som laddningen hos B aldrig kan överskrida? Svara i nC.`,
+            answer: { value: 15, unit: 'nC', tol: 0.01 },
+            solution: `**Förhållandet mellan laddningarna.** Den totala laddningen är bevarad. Efter den första kontakten har A kvar
+
+$$ 60 - 12 = 48\\ \\mathrm{nC} $$
+
+Förhållandet mellan laddningarna är därför
+
+$$ \\frac{Q_\\mathrm{B}}{Q_\\mathrm{A}} = \\frac{12}{48} = 0{,}25 $$
+
+Efter varje kontakt har B alltså en fjärdedel av den laddning som A har, oavsett hur stor den sammanlagda laddningen är.
+
+**När slutar B att ta emot laddning?** Så länge B har mindre än en fjärdedel av laddningen hos A flyttas laddning till B. När B redan före kontakten har precis en fjärdedel av laddningen hos A är fördelningen redan den rätta, och då flyttas ingen laddning. Före varje kontakt har A laddningen $60\\ \\mathrm{nC}$. Gränsvärdet är därför
+
+$$ Q_{\\mathrm{B},\\max} = 0{,}25 \\cdot 60 = 15\\ \\mathrm{nC} $$
+
+**Kontroll genom att räkna kontakt för kontakt.** Vid den andra kontakten är den sammanlagda laddningen $60 + 12 = 72\\ \\mathrm{nC}$. B får andelen $\\dfrac{12}{60} = 0{,}20$ av den:
+
+$$ 0{,}20 \\cdot 72 = 14{,}4\\ \\mathrm{nC} $$
+
+Vid den tredje kontakten får B
+
+$$ 0{,}20 \\cdot (60 + 14{,}4) = 14{,}88\\ \\mathrm{nC} $$
+
+Laddningen växer allt långsammare och närmar sig $15\\ \\mathrm{nC}$ utan att nå dit. Det stämmer med resonemanget.
+
+**Svar:** Laddningen hos B kan aldrig överskrida $15\\ \\mathrm{nC}$.
+
+**Generell slutsats:** Om A laddas till *Q* och B får laddningen *q* vid första kontakten blir gränsvärdet $Q_{\\mathrm{B},\\max} = \\dfrac{q}{Q - q} \\cdot Q$.`,
+        },
+        {
+            level: 3,
+            question: `En liten kula med den negativa laddningen $-Q$ befinner sig på avståndet *d* från en neutral metallstav med längden *L*. Anta att influensen ger laddningen $+q$ i stavens närmaste ände och $-q$ i dess bortre ände, se figuren. Den elektriska kraften mellan två punktladdningar $Q_1$ och $Q_2$ på avståndet *r* är $F = k \\cdot \\dfrac{|Q_1| \\cdot |Q_2|}{r^2}$, där *k* är en konstant.<br>a) Ta fram ett uttryck för den resulterande kraften på staven och visa att staven alltid attraheras, oavsett värdena på *d* och *L*.<br>b) Bestäm kvoten $\\dfrac{L}{d}$ då repulsionskraften är en fjärdedel av attraktionskraften.<br>c) Vad händer med den resulterande kraften när *L* är mycket liten jämfört med *d*? Förklara med hjälp av uttrycket.
+
+<svg viewBox="24 12 354 116" width="421" height="138" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="En negativ kula på avståndet d från en neutral metallstav med längden L, laddningen plus q i den närmaste änden och minus q i den bortre" style="display:block;margin:12px auto;max-width:100%;height:auto"><defs><radialGradient id="f71a4" cx="0.36" cy="0.32" r="0.8"><stop offset="0" stop-color="#e9ebee"/><stop offset="0.6" stop-color="#b4bac3"/><stop offset="1" stop-color="#858d99"/></radialGradient><linearGradient id="f71a4s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e4e7eb"/><stop offset="0.5" stop-color="#bcc2ca"/><stop offset="1" stop-color="#8d95a1"/></linearGradient></defs><circle cx="50" cy="60" r="15" fill="url(#f71a4)" stroke="#0f1620" stroke-width="1.4"/><line x1="44" y1="60" x2="56" y2="60" stroke="#2563c9" stroke-width="2.6" stroke-linecap="round"/><rect x="172" y="48" width="196" height="24" rx="3" fill="url(#f71a4s)" stroke="#0f1620" stroke-width="1.4"/><line x1="179" y1="60" x2="189" y2="60" stroke="#c0392b" stroke-width="2.4" stroke-linecap="round"/><line x1="184" y1="55" x2="184" y2="65" stroke="#c0392b" stroke-width="2.4" stroke-linecap="round"/><line x1="351" y1="60" x2="361" y2="60" stroke="#2563c9" stroke-width="2.4" stroke-linecap="round"/><text x="50" y="34" font-size="16" text-anchor="middle" fill="#0f1620">−<tspan font-style="italic">Q</tspan></text><text x="184" y="34" font-size="16" text-anchor="middle" fill="#0f1620">+<tspan font-style="italic">q</tspan></text><text x="356" y="34" font-size="16" text-anchor="middle" fill="#0f1620">−<tspan font-style="italic">q</tspan></text><line x1="50" y1="79" x2="50" y2="122" stroke="#6b6557" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="4 4"/><line x1="172" y1="76" x2="172" y2="122" stroke="#6b6557" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="4 4"/><line x1="368" y1="76" x2="368" y2="122" stroke="#6b6557" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="4 4"/><line x1="59" y1="114" x2="163" y2="114" stroke="#0e7c86" stroke-width="1.8" stroke-linecap="round"/><polygon points="51,114 60,109.5 60,118.5" fill="#0e7c86"/><polygon points="171,114 162,109.5 162,118.5" fill="#0e7c86"/><line x1="181" y1="114" x2="359" y2="114" stroke="#0e7c86" stroke-width="1.8" stroke-linecap="round"/><polygon points="173,114 182,109.5 182,118.5" fill="#0e7c86"/><polygon points="367,114 358,109.5 358,118.5" fill="#0e7c86"/><text x="111" y="106" font-size="16" text-anchor="middle" fill="#0f1620"><tspan font-style="italic">d</tspan></text><text x="270" y="106" font-size="16" text-anchor="middle" fill="#0f1620"><tspan font-style="italic">L</tspan></text></svg>`,
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 1, unit: '', etikett: '$\\dfrac{L}{d} =$', tol: 0.01 },
+                { del: 'c' },
+            ],
+            solution: `**a)** Kulan och stavens närmaste ände har olika tecken och attraherar varandra. Avståndet mellan dem är *d*:
+
+$$ F_{\\mathrm{attr}} = k \\cdot \\frac{Q \\cdot q}{d^2} $$
+
+Kulan och stavens bortre ände har båda negativ laddning och repellerar varandra. Avståndet mellan dem är $d + L$:
+
+$$ F_{\\mathrm{rep}} = k \\cdot \\frac{Q \\cdot q}{(d + L)^2} $$
+
+Krafterna på staven är motriktade. Den resulterande kraften, med riktningen mot kulan som positiv, är
+
+$$ F_\\mathrm{R} = F_{\\mathrm{attr}} - F_{\\mathrm{rep}} = k \\cdot Q \\cdot q \\cdot \\left( \\frac{1}{d^2} - \\frac{1}{(d+L)^2} \\right) $$
+
+Eftersom $L > 0$ är $d + L > d$. Då är $(d+L)^2 > d^2$, och det större talet i nämnaren ger det mindre bråket:
+
+$$ \\frac{1}{(d+L)^2} < \\frac{1}{d^2} $$
+
+Parentesen är alltså positiv för alla värden på *d* och *L*. Då är $F_\\mathrm{R} > 0$, och staven attraheras alltid, vilket skulle visas.
+
+**Svar:** $F_\\mathrm{R} = k \\cdot Q \\cdot q \\cdot \\left( \\dfrac{1}{d^2} - \\dfrac{1}{(d+L)^2} \\right)$, som alltid är positiv (attraktion).
+
+**b)** Vi bildar kvoten mellan krafterna. Faktorerna *k*, *Q* och *q* är desamma och förkortas bort:
+
+$$ \\frac{F_{\\mathrm{rep}}}{F_{\\mathrm{attr}}} = \\frac{d^2}{(d + L)^2} = \\left( \\frac{d}{d+L} \\right)^2 $$
+
+Kvoten ska vara $\\dfrac{1}{4}$:
+
+$$ \\left( \\frac{d}{d+L} \\right)^2 = \\frac{1}{4} $$
+
+Både *d* och $d + L$ är positiva, så vi behöver bara den positiva roten:
+
+$$ \\frac{d}{d+L} = \\frac{1}{2} $$
+
+Vi multiplicerar båda leden med $2(d + L)$:
+
+$$ 2d = d + L $$
+
+Vi subtraherar *d* från båda leden:
+
+$$ d = L $$
+
+Staven ska alltså vara lika lång som avståndet till kulan.
+
+**Svar:** $\\dfrac{L}{d} = 1$
+
+**c)** När *L* är mycket liten jämfört med *d* är $d + L \\approx d$. De två bråken i parentesen är då nästan lika stora, och deras skillnad är nästan noll. Den bortre änden är nästan lika nära kulan som den närmaste, så repulsionen tar nästan helt ut attraktionen.
+
+**Svar:** Den resulterande kraften går mot noll.
+
+**Rimlighet:** Resultatet förklarar varför en laddad stav måste hållas nära små, neutrala föremål för att de ska dras till den. Modellen är förenklad. I verkligheten sitter laddningarna inte som två punkter i stavens ändar, och *q* minskar när avståndet ökar.`,
+        },
+        {
+            level: 3,
+            question: `I ett datorspel finns en påhittad värld där laddning, precis som i vår värld, bara förekommer som hela antal av en minsta laddning. Den minsta laddningen är dock en annan än vår elementarladdning. En spelare mäter laddningen hos fem oljedroppar och får följande värden.
+
+| Droppe | 1 | 2 | 3 | 4 | 5 |
+| --- | --- | --- | --- | --- | --- |
+| Laddning ($10^{-19}\\ \\mathrm{C}$) | 8,1 | 13,5 | 18,9 | 29,7 | 35,1 |
+
+Spelaren hävdar: ”Skillnaden mellan två droppar är alltid $5{,}4 \\cdot 10^{-19}\\ \\mathrm{C}$ eller en multipel av det, så den minsta laddningen är $5{,}4 \\cdot 10^{-19}\\ \\mathrm{C}$.”<br>a) Visa att spelaren har fel och bestäm det största värde som den minsta laddningen kan ha. Svara i C.<br>b) Kan spelaren vara säker på att den minsta laddningen har just det värdet? Motivera.`,
+            delsvar: [
+                { del: 'a', value: 2.7e-19, unit: 'C', tol: 0.01 },
+                { del: 'b' },
+            ],
+            solution: `**a)** Om den minsta laddningen är *e* måste varje droppe ha laddningen $n \\cdot e$, där *n* är ett heltal. Vi prövar spelarens värde på droppe 1:
+
+$$ \\frac{8{,}1 \\cdot 10^{-19}}{5{,}4 \\cdot 10^{-19}} = 1{,}5 $$
+
+Kvoten är inget heltal, så $5{,}4 \\cdot 10^{-19}\\ \\mathrm{C}$ kan inte vara den minsta laddningen. Spelaren har bara kontrollerat skillnaderna, inte laddningarna själva.
+
+Skillnaden mellan två droppar måste ändå vara ett helt antal minsta laddningar. Den minsta laddningen är därför $5{,}4 \\cdot 10^{-19}\\ \\mathrm{C}$ delat med något heltal. Efter $5{,}4$ är halva värdet det näst största som är möjligt:
+
+$$ e = \\frac{5{,}4 \\cdot 10^{-19}}{2} = 2{,}7 \\cdot 10^{-19}\\ \\mathrm{C} $$
+
+Vi prövar det värdet på alla fem dropparna:
+
+| Droppe | 1 | 2 | 3 | 4 | 5 |
+| --- | --- | --- | --- | --- | --- |
+| Laddning ($10^{-19}\\ \\mathrm{C}$) | 8,1 | 13,5 | 18,9 | 29,7 | 35,1 |
+| Laddning delad med $2{,}7 \\cdot 10^{-19}\\ \\mathrm{C}$ | 3 | 5 | 7 | 11 | 13 |
+
+Alla kvoter är heltal. Eftersom $5{,}4 \\cdot 10^{-19}\\ \\mathrm{C}$ är uteslutet finns inget större värde som passar.
+
+**Svar:** $2{,}7 \\cdot 10^{-19}\\ \\mathrm{C}$
+
+**b)** Om alla laddningar är heltalsmultiplar av $2{,}7 \\cdot 10^{-19}\\ \\mathrm{C}$ är de också heltalsmultiplar av till exempel hälften, $1{,}35 \\cdot 10^{-19}\\ \\mathrm{C}$. Då skulle dropparna ha 6, 10, 14, 22 och 26 minsta laddningar. Mätningarna utesluter inte det.
+
+Det är däremot ett märkligt sammanträffande om alla fem dropparna råkar ha ett jämnt antal. Ju fler droppar som mäts utan att någon laddning mellan multiplerna av $2{,}7 \\cdot 10^{-19}\\ \\mathrm{C}$ dyker upp, desto säkrare blir slutsatsen. Helt säker kan den aldrig bli, medan en enda avvikande droppe räcker för att förkasta den.
+
+**Svar:** Nej, den minsta laddningen kan vara $2{,}7 \\cdot 10^{-19}\\ \\mathrm{C}$ delat med ett heltal. Fler mätningar gör värdet mer troligt men aldrig helt säkert.`,
+        },
+        {
+            level: 3,
+            question: `Ett elektroskop består av en metallplatta överst, en metallstång och två lätta metallblad som hänger längst ned. Plattan, stången och bladen sitter ihop och är isolerade från omgivningen. Ett elektroskop laddas **positivt**, och bladen spärrar ut (bild 1). En laddad stav förs sedan sakta ned mot plattan utan att vidröra den. När staven är på ett visst avstånd hänger bladen rakt ned (bild 2). När staven kommer ännu närmare spärrar bladen ut igen (bild 3). Vilken laddning har staven? Förklara alla tre bilderna, och avgör om elektroskopets totala laddning har ändrats.
+
+<svg viewBox="14 8 432 304" width="549" height="386" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tre bilder av ett elektroskop: utspärrade blad utan stav, hängande blad med staven en bit bort, utspärrade blad med staven nära" style="display:block;margin:12px auto;max-width:100%;height:auto"><defs><radialGradient id="f71a6" cx="0.36" cy="0.32" r="0.8"><stop offset="0" stop-color="#e9ebee"/><stop offset="0.6" stop-color="#b4bac3"/><stop offset="1" stop-color="#858d99"/></radialGradient><linearGradient id="f71a6s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e4e7eb"/><stop offset="0.5" stop-color="#bcc2ca"/><stop offset="1" stop-color="#8d95a1"/></linearGradient></defs><circle cx="80" cy="202" r="58" fill="#fbf8ef" stroke="#0f1620" stroke-width="2"/><path d="M56 255 L46 280 H114 L104 255 Z" fill="#9aa1ab" stroke="#0f1620" stroke-width="1.4"/><circle cx="80" cy="202" r="58" fill="#fbf8ef" stroke="#0f1620" stroke-width="2"/><rect x="70" y="132" width="20" height="24" rx="3" fill="#efe6c8" stroke="#8d7a3f" stroke-width="1.3"/><rect x="77.5" y="99" width="5" height="83" fill="#8d95a1" stroke="#0f1620" stroke-width="0.9"/><rect x="46" y="92" width="68" height="8" rx="4" fill="url(#f71a6s)" stroke="#0f1620" stroke-width="1.4"/><line x1="78.8" y1="182" x2="50.2" y2="227.8" stroke="#b8860b" stroke-width="3" stroke-linecap="round"/><line x1="81.2" y1="182" x2="109.8" y2="227.8" stroke="#b8860b" stroke-width="3" stroke-linecap="round"/><text x="80" y="304" font-size="15" text-anchor="middle" fill="#0f1620">Bild 1</text><g><rect x="184" y="36" width="92" height="18" rx="9" fill="#f0dfa0" stroke="#a08a35" stroke-width="1.4"/></g><circle cx="230" cy="202" r="58" fill="#fbf8ef" stroke="#0f1620" stroke-width="2"/><path d="M206 255 L196 280 H264 L254 255 Z" fill="#9aa1ab" stroke="#0f1620" stroke-width="1.4"/><circle cx="230" cy="202" r="58" fill="#fbf8ef" stroke="#0f1620" stroke-width="2"/><rect x="220" y="132" width="20" height="24" rx="3" fill="#efe6c8" stroke="#8d7a3f" stroke-width="1.3"/><rect x="227.5" y="99" width="5" height="83" fill="#8d95a1" stroke="#0f1620" stroke-width="0.9"/><rect x="196" y="92" width="68" height="8" rx="4" fill="url(#f71a6s)" stroke="#0f1620" stroke-width="1.4"/><line x1="228" y1="182" x2="228.0" y2="236.0" stroke="#b8860b" stroke-width="3" stroke-linecap="round"/><line x1="232" y1="182" x2="232.0" y2="236.0" stroke="#b8860b" stroke-width="3" stroke-linecap="round"/><text x="230" y="304" font-size="15" text-anchor="middle" fill="#0f1620">Bild 2</text><g><rect x="334" y="66" width="92" height="18" rx="9" fill="#f0dfa0" stroke="#a08a35" stroke-width="1.4"/></g><circle cx="380" cy="202" r="58" fill="#fbf8ef" stroke="#0f1620" stroke-width="2"/><path d="M356 255 L346 280 H414 L404 255 Z" fill="#9aa1ab" stroke="#0f1620" stroke-width="1.4"/><circle cx="380" cy="202" r="58" fill="#fbf8ef" stroke="#0f1620" stroke-width="2"/><rect x="370" y="132" width="20" height="24" rx="3" fill="#efe6c8" stroke="#8d7a3f" stroke-width="1.3"/><rect x="377.5" y="99" width="5" height="83" fill="#8d95a1" stroke="#0f1620" stroke-width="0.9"/><rect x="346" y="92" width="68" height="8" rx="4" fill="url(#f71a6s)" stroke="#0f1620" stroke-width="1.4"/><line x1="378.8" y1="182" x2="356.8" y2="231.3" stroke="#b8860b" stroke-width="3" stroke-linecap="round"/><line x1="381.2" y1="182" x2="403.2" y2="231.3" stroke="#b8860b" stroke-width="3" stroke-linecap="round"/><text x="380" y="304" font-size="15" text-anchor="middle" fill="#0f1620">Bild 3</text><text x="230" y="26" font-size="14" text-anchor="middle" fill="#0f1620">Stav</text><text x="380" y="56" font-size="14" text-anchor="middle" fill="#0f1620">Stav</text><text x="80" y="82" font-size="14" text-anchor="middle" fill="#0f1620">Platta</text></svg>`,
+            solution: `**Bild 1.** Elektroskopet har ett underskott av elektroner. Plattan, stången och bladen hänger ihop och är ledare, så laddningen fördelar sig över dem alla. Båda bladen är positiva. Lika laddningar repellerar varandra, och därför spärrar bladen ut.
+
+**Stavens laddning.** När staven närmar sig minskar bladens laddning. Vi prövar de två möjligheterna.
+
+- *Om staven vore positiv* skulle den attrahera elektroner från bladen upp till plattan. Bladen skulle då få ett ännu större underskott, bli mer positiva och spärra ut mer. Det stämmer inte med bild 2.
+- *Om staven är negativ* repellerar den elektroner från plattan ned till bladen. Bladens underskott av elektroner minskar, och bladen faller ihop. Det stämmer med bild 2.
+
+Staven är alltså negativ.
+
+**Bild 2.** Precis så många elektroner har trängts ned att de fyller bladens underskott. Bladen är neutrala och påverkar inte varandra med någon elektrisk kraft. Plattan har i stället ett större underskott än förut.
+
+**Bild 3.** Staven är närmare och repellerar elektronerna starkare. Ännu fler elektroner trängs ned i bladen, som nu får ett **överskott**. Båda bladen är negativa, repellerar varandra och spärrar ut igen.
+
+**Den totala laddningen.** Staven har inte vidrört plattan, och elektroskopet är isolerat. Inga elektroner har alltså kommit till eller lämnat elektroskopet, de har bara flyttats inuti det. Enligt konserveringslagen är den totala laddningen densamma i alla tre bilderna. Tas staven bort fördelar sig elektronerna som från början, och bladen spärrar ut som i bild 1.
+
+**Svar:** Staven är negativt laddad. Bladen är positiva i bild 1, neutrala i bild 2 och negativa i bild 3. Elektroskopets totala laddning är oförändrad.
+
+**Generell slutsats:** Utslaget visar bara att bladen har samma tecken, inte vilket. Därför går det inte att se på bilderna 1 och 3 att bladen har bytt laddning. Det är ordningen i förloppet som avslöjar det.`,
         },
     ],
 
@@ -37611,7 +40953,7 @@ $$ F = 8{,}99 \\cdot 10^9 \\cdot \\frac{8{,}0 \\cdot 10^{-9} \\cdot 5{,}0 \\cdot
 
 **Svar:** Kraften är ungefär $9{,}0\\ \\mathrm{\\mu N}$.
 
-**Generell slutsats:** Glöm inte att omvandla nC till C ($10^{-9}$) och cm till m innan insättning — en av de vanligaste felkällorna i Coulomb-uppgifter är enheter som inte omvandlats.`,
+**Generell slutsats:** Glöm inte att omvandla nC till C ($10^{-9}$) och cm till m innan insättning. En av de vanligaste felkällorna i Coulomb-uppgifter är enheter som inte omvandlats.`,
         },
         {
             level: 1,
@@ -37649,11 +40991,11 @@ $$ r = \\sqrt{\\frac{8{,}99 \\cdot 10^9 \\cdot 2{,}0 \\cdot 10^{-9} \\cdot 5{,}0
                 `Kraften är lika stor på båda laddningarna, men riktad åt motsatt håll.`,
             ],
             correct: 3,
-            solution: `Enligt **Newtons tredje lag** är kraften som $Q_1$ utövar på $Q_2$ exakt lika stor som kraften $Q_2$ utövar på $Q_1$ — fast åt motsatt håll. Det spelar ingen roll att den ena laddningen är större.
+            solution: `Enligt **Newtons tredje lag** är kraften som $Q_1$ utövar på $Q_2$ exakt lika stor som kraften $Q_2$ utövar på $Q_1$, fast åt motsatt håll. Det spelar ingen roll att den ena laddningen är större.
 
 Det syns också direkt i Coulombs lag: i uttrycket $F = k \\cdot Q_1 \\cdot Q_2 / r^2$ ingår *båda* laddningarna i samma produkt, så det blir ett och samma kraftvärde för paret.
 
-**Svar:** Alternativ D — lika stor kraft på båda, motsatt riktad.
+**Svar:** Alternativ D, lika stor kraft på båda, motsatt riktad.
 
 **Generell slutsats:** Samma princip som i gravitationen: jorden drar i dig med samma kraft som du drar i jorden, trots den enorma masskillnaden. En större laddning ger inte en större kraft på "den andra parten".`,
         },
@@ -37709,7 +41051,7 @@ $$ a = \\frac{F}{m} = \\frac{4{,}32 \\cdot 10^{-3}}{0{,}50 \\cdot 10^{-3}} = 8{,
             level: 2,
             question: `Tre laddningar sitter på en rät linje. I mitten sitter $Q_2 = +4{,}0\\ \\mathrm{nC}$. På avståndet $2{,}0\\ \\mathrm{cm}$ till vänster om den sitter $Q_1 = +6{,}0\\ \\mathrm{nC}$, och på avståndet $3{,}0\\ \\mathrm{cm}$ till höger sitter $Q_3 = -5{,}0\\ \\mathrm{nC}$. Bestäm storleken på den resulterande elektriska kraften på mittladdningen $Q_2$.`,
             answer: { value: 740, unit: 'μN' },
-            solution: `Mittladdningen $Q_2$ påverkas av två krafter — en från varje grannladdning. Vi bestämmer storlek och riktning för var och en.
+            solution: `Mittladdningen $Q_2$ påverkas av två krafter, en från varje grannladdning. Vi bestämmer storlek och riktning för var och en.
 
 **Kraften från $Q_1$ (till vänster):** $Q_1$ och $Q_2$ är båda positiva → de repellerar. $Q_2$ knuffas alltså **åt höger**, bort från $Q_1$.
 
@@ -37725,13 +41067,13 @@ $$ F = F_1 + F_3 = 5{,}39 \\cdot 10^{-4} + 2{,}00 \\cdot 10^{-4} = 7{,}39 \\cdot
 
 **Svar:** Den resulterande kraften är ungefär $740\\ \\mathrm{\\mu N}$ (eller $0{,}74\\ \\mathrm{mN}$), riktad åt höger.
 
-**Generell slutsats:** I superpositionsuppgifter måste man först avgöra varje krafts *riktning* med tecken-regeln (lika repellerar, olika attraherar) och sedan addera. Här pekade båda åt samma håll och adderades. Hade de pekat åt motsatt håll skulle man istället subtraherat — och den största kraften bestämt nettoriktningen.`,
+**Generell slutsats:** I superpositionsuppgifter måste man först avgöra varje krafts *riktning* med tecken-regeln (lika repellerar, olika attraherar) och sedan addera. Här pekade båda åt samma håll och adderades. Hade de pekat åt motsatt håll skulle man istället subtraherat, och den största kraften bestämt nettoriktningen.`,
         },
         {
             level: 3,
             question: `På en rät linje sitter laddningen $Q_1 = +4{,}0\\ \\mathrm{nC}$ i origo och laddningen $Q_2 = +9{,}0\\ \\mathrm{nC}$ på avståndet $50\\ \\mathrm{cm}$ till höger. Var på linjen mellan laddningarna ska en tredje laddning placeras för att den **inte ska påverkas av någon resulterande elektrisk kraft**? Ange avståndet från $Q_1$.`,
             answer: { value: 20, unit: 'cm' },
-            solution: `Den tredje laddningen *q* påverkas av en kraft från var och en av de andra. Nettokraften är noll där de två krafterna är **lika stora och motriktade**. Eftersom $Q_1$ och $Q_2$ båda är positiva pekar deras krafter på *q* åt motsatt håll någonstans *mellan* dem — där finns nollpunkten.
+            solution: `Den tredje laddningen *q* påverkas av en kraft från var och en av de andra. Nettokraften är noll där de två krafterna är **lika stora och motriktade**. Eftersom $Q_1$ och $Q_2$ båda är positiva pekar deras krafter på *q* åt motsatt håll någonstans *mellan* dem. Där finns nollpunkten.
 
 Kalla avståndet från $Q_1$ till punkten *x*. Avståndet till $Q_2$ är då $(d - x)$ där $d = 50\\ \\mathrm{cm}$. Kraftjämvikt med Coulombs lag (*q* och *k* finns i båda led och stryks):
 
@@ -37745,7 +41087,481 @@ $$ d - x = 1{,}5x \\quad\\Rightarrow\\quad d = 2{,}5x \\quad\\Rightarrow\\quad x
 
 **Svar:** $20\\ \\mathrm{cm}$ från den mindre laddningen ($Q_1$).
 
-**Generell slutsats:** Nollpunkten ligger *närmare den mindre laddningen* — dess svagare fält behöver kortare avstånd för att hinna ikapp den starkares. Insikten är att sätta krafterna lika och dra roten ur; laddningen *q* och konstanten *k* stryks och spelar ingen roll.`,
+**Generell slutsats:** Nollpunkten ligger *närmare den mindre laddningen*. Dess svagare fält behöver kortare avstånd för att hinna ikapp den starkares. Insikten är att sätta krafterna lika och dra roten ur; laddningen *q* och konstanten *k* stryks och spelar ingen roll.`,
+        },
+        // ── Påfyllning: Grund ─────────────────────────────────────────────
+        {
+            level: 1,
+            question: `I en heliumkärna är avståndet mellan de båda protonernas mittpunkter ungefär $1{,}8 \\cdot 10^{-15}\\ \\mathrm{m}$. Hur stor är den elektriska kraften mellan protonerna? Varje proton har laddningen $1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$. Svara i newton.`,
+            answer: { value: 71, unit: 'N' },
+            solution: `Vi använder Coulombs lag. De båda laddningarna är lika stora.
+
+$$ F = k \\cdot \\frac{Q_1 \\cdot Q_2}{r^2} $$
+
+$$
+\\left[ \\begin{array}{l}
+Q_1 = Q_2 = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C} \\\\
+r = 1{,}8 \\cdot 10^{-15}\\ \\mathrm{m} \\\\
+k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2}
+\\end{array} \\right]
+$$
+
+$$ F = 8{,}99 \\cdot 10^9 \\cdot \\frac{1{,}602 \\cdot 10^{-19} \\cdot 1{,}602 \\cdot 10^{-19}}{(1{,}8 \\cdot 10^{-15})^2} = 71{,}20\\ldots\\ \\mathrm{N} \\approx 71\\ \\mathrm{N} $$
+
+**Svar:** $71\\ \\mathrm{N}$
+
+**Generell slutsats:** Avståndet är så litet att kraften blir enorm för partiklar med så liten massa. Att kärnan ändå håller ihop beror på en annan, ännu starkare kraft mellan kärnpartiklarna: den starka kärnkraften.`,
+        },
+        {
+            level: 1,
+            question: `En liten kula har laddningen $60\\ \\mathrm{nC}$. En annan laddad kula, $12\\ \\mathrm{cm}$ bort, påverkas av den med den elektriska kraften $2{,}4\\ \\mathrm{mN}$. Bestäm beloppet av den andra kulans laddning. Svara i nC.`,
+            answer: { value: 64, unit: 'nC' },
+            solution: `Vi löser ut den sökta laddningen ur Coulombs lag.
+
+$$ F = k \\cdot \\frac{Q_1 \\cdot Q_2}{r^2} \\quad\\Leftrightarrow\\quad Q_2 = \\frac{F \\cdot r^2}{k \\cdot Q_1} $$
+
+$$
+\\left[ \\begin{array}{l}
+F = 2{,}4\\ \\mathrm{mN} = 2{,}4 \\cdot 10^{-3}\\ \\mathrm{N} \\\\
+r = 12\\ \\mathrm{cm} = 0{,}12\\ \\mathrm{m} \\\\
+Q_1 = 60\\ \\mathrm{nC} = 60 \\cdot 10^{-9}\\ \\mathrm{C} \\\\
+k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2}
+\\end{array} \\right]
+$$
+
+$$ Q_2 = \\frac{2{,}4 \\cdot 10^{-3} \\cdot 0{,}12^2}{8{,}99 \\cdot 10^9 \\cdot 60 \\cdot 10^{-9}} = 6{,}407\\ldots \\cdot 10^{-8}\\ \\mathrm{C} \\approx 64\\ \\mathrm{nC} $$
+
+**Svar:** $64\\ \\mathrm{nC}$
+
+Det går inte att veta tecknet på laddningen, eftersom uppgiften inte säger om kulorna attraherar eller repellerar varandra.`,
+        },
+        {
+            level: 1,
+            question: `En kula med laddningen $-Q$ och en kula med laddningen $+3Q$ placeras nära varandra. Vilken bild visar de elektriska krafterna på kulorna på rätt sätt? En längre pil betyder en större kraft.
+
+<svg viewBox="24 6 590 218" width="649" height="240" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fyra bilder av två laddade kulor med kraftpilar i olika riktningar och längder" style="display:block;margin:14px auto;max-width:100%;height:auto"><circle cx="98" cy="50" r="13" fill="#c3d9ee" stroke="#235a94" stroke-width="1.6"/><circle cx="238" cy="50" r="13" fill="#f0c2c0" stroke="#a62b3d" stroke-width="1.6"/><line x1="98" y1="50" x2="113" y2="50" stroke="#0f1620" stroke-width="3"/><polygon points="124,50 113,55.2 113,44.8" fill="#0f1620"/><line x1="238" y1="50" x2="171" y2="50" stroke="#0f1620" stroke-width="3"/><polygon points="160,50 171,44.8 171,55.2" fill="#0f1620"/><text x="98" y="28" text-anchor="middle" font-size="14" fill="#0f1620">−<tspan font-style="italic">Q</tspan></text><text x="238" y="28" text-anchor="middle" font-size="14" fill="#0f1620">+3<tspan font-style="italic">Q</tspan></text><text x="168" y="92" text-anchor="middle" font-size="14" fill="#5a5449">Bild 1</text><circle cx="376" cy="50" r="13" fill="#c3d9ee" stroke="#235a94" stroke-width="1.6"/><circle cx="516" cy="50" r="13" fill="#f0c2c0" stroke="#a62b3d" stroke-width="1.6"/><line x1="376" y1="50" x2="417" y2="50" stroke="#0f1620" stroke-width="3"/><polygon points="428,50 417,55.2 417,44.8" fill="#0f1620"/><line x1="516" y1="50" x2="475" y2="50" stroke="#0f1620" stroke-width="3"/><polygon points="464,50 475,44.8 475,55.2" fill="#0f1620"/><text x="376" y="28" text-anchor="middle" font-size="14" fill="#0f1620">−<tspan font-style="italic">Q</tspan></text><text x="516" y="28" text-anchor="middle" font-size="14" fill="#0f1620">+3<tspan font-style="italic">Q</tspan></text><text x="446" y="92" text-anchor="middle" font-size="14" fill="#5a5449">Bild 2</text><circle cx="98" cy="164" r="13" fill="#c3d9ee" stroke="#235a94" stroke-width="1.6"/><circle cx="238" cy="164" r="13" fill="#f0c2c0" stroke="#a62b3d" stroke-width="1.6"/><line x1="98" y1="164" x2="57" y2="164" stroke="#0f1620" stroke-width="3"/><polygon points="46,164 57,158.8 57,169.2" fill="#0f1620"/><line x1="238" y1="164" x2="279" y2="164" stroke="#0f1620" stroke-width="3"/><polygon points="290,164 279,169.2 279,158.8" fill="#0f1620"/><text x="98" y="142" text-anchor="middle" font-size="14" fill="#0f1620">−<tspan font-style="italic">Q</tspan></text><text x="238" y="142" text-anchor="middle" font-size="14" fill="#0f1620">+3<tspan font-style="italic">Q</tspan></text><text x="168" y="206" text-anchor="middle" font-size="14" fill="#5a5449">Bild 3</text><circle cx="376" cy="164" r="13" fill="#c3d9ee" stroke="#235a94" stroke-width="1.6"/><circle cx="516" cy="164" r="13" fill="#f0c2c0" stroke="#a62b3d" stroke-width="1.6"/><line x1="376" y1="164" x2="361" y2="164" stroke="#0f1620" stroke-width="3"/><polygon points="350,164 361,158.8 361,169.2" fill="#0f1620"/><line x1="516" y1="164" x2="583" y2="164" stroke="#0f1620" stroke-width="3"/><polygon points="594,164 583,169.2 583,158.8" fill="#0f1620"/><text x="376" y="142" text-anchor="middle" font-size="14" fill="#0f1620">−<tspan font-style="italic">Q</tspan></text><text x="516" y="142" text-anchor="middle" font-size="14" fill="#0f1620">+3<tspan font-style="italic">Q</tspan></text><text x="446" y="206" text-anchor="middle" font-size="14" fill="#5a5449">Bild 4</text><line x1="303" y1="14" x2="303" y2="220" stroke="#cfc6b2" stroke-width="1"/><line x1="26" y1="112" x2="612" y2="112" stroke="#cfc6b2" stroke-width="1"/></svg>`,
+            choices: [`Bild 1`, `Bild 2`, `Bild 3`, `Bild 4`],
+            correct: 1,
+            solution: `**Riktningen:** Laddningarna har olika tecken, så kulorna attraherar varandra. Kraften på den vänstra kulan pekar alltså åt höger och kraften på den högra kulan åt vänster. Det stämmer bara i bild 1 och bild 2.
+
+**Storleken:** Enligt Newtons tredje lag är krafterna på de båda kulorna lika stora, även om den ena laddningen är tre gånger så stor. Pilarna ska därför vara lika långa. Det stämmer i bild 2 men inte i bild 1.
+
+**Svar:** Bild 2`,
+        },
+        {
+            level: 1,
+            question: `Två laddade kulor repellerar varandra med kraften $36\\ \\mathrm{\\mu N}$ när avståndet mellan dem är $5{,}0\\ \\mathrm{cm}$. Kulornas laddningar ändras inte. Hur stor blir kraften, i $\\mathrm{\\mu N}$, om avståndet ökas till<br>a) $10\\ \\mathrm{cm}$&emsp;&emsp;b) $15\\ \\mathrm{cm}$`,
+            answer: { value: 9.0, unit: 'μN' },
+            delsvar: [
+                { del: 'a', value: 9.0, unit: 'μN' },
+                { del: 'b', value: 4.0, unit: 'μN' },
+            ],
+            solution: `I Coulombs lag står avståndet i kvadrat i nämnaren. Blir avståndet $n$ gånger så stort, blir kraften därför $\\dfrac{1}{n^2}$ av vad den var.
+
+**a)** Avståndet har blivit $\\dfrac{10}{5{,}0} = 2$ gånger så stort. Kraften blir då $\\dfrac{1}{2^2} = \\dfrac{1}{4}$ av den ursprungliga.
+
+$$ F = \\frac{36\\ \\mathrm{\\mu N}}{4} = 9{,}0\\ \\mathrm{\\mu N} $$
+
+**Svar:** $9{,}0\\ \\mathrm{\\mu N}$
+
+**b)** Avståndet har blivit $\\dfrac{15}{5{,}0} = 3$ gånger så stort. Kraften blir då $\\dfrac{1}{3^2} = \\dfrac{1}{9}$ av den ursprungliga.
+
+$$ F = \\frac{36\\ \\mathrm{\\mu N}}{9} = 4{,}0\\ \\mathrm{\\mu N} $$
+
+**Svar:** $4{,}0\\ \\mathrm{\\mu N}$`,
+        },
+
+        // ── Påfyllning: Mellan ────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Två små kulor har lika stora laddningar. Man mäter den elektriska kraften $F$ mellan kulorna vid olika avstånd $r$ och ritar kraften som funktion av $\\dfrac{1}{r^2}$. Resultatet visas i diagrammet. Bestäm beloppet av laddningen hos var och en av kulorna. Svara i nC.
+
+${makeDiagram({ xMax: 560, yMax: 8, xTicks: [100, 200, 300, 400, 500], yTicks: [1, 2, 3, 4, 5, 6, 7, 8], xLabel: '1/<tspan font-style="italic">r</tspan>² (m⁻²)', yLabel: '<tspan font-style="italic">F</tspan> (mN)', paths: [{ points: [[0, 0], [500, 7.5]] }] })}`,
+            answer: { value: 41, unit: 'nC', tol: 0.03 },
+            solution: `Kalla laddningen hos varje kula $Q$. Coulombs lag ger
+
+$$ F = k \\cdot \\frac{Q \\cdot Q}{r^2} = k \\cdot Q^2 \\cdot \\frac{1}{r^2} $$
+
+Kraften är alltså proportionell mot $\\dfrac{1}{r^2}$, och linjens lutning är $k \\cdot Q^2$. Vi läser av punkten $(400\\ \\mathrm{m^{-2}};\\ 6{,}0\\ \\mathrm{mN})$, som ligger i ett hörn i rutnätet. Linjen går genom origo, så lutningen är
+
+$$ k \\cdot Q^2 = \\frac{6{,}0 \\cdot 10^{-3}}{400} = 1{,}5 \\cdot 10^{-5}\\ \\mathrm{N \\cdot m^2} $$
+
+Vi löser ut laddningen.
+
+$$ Q = \\sqrt{\\frac{1{,}5 \\cdot 10^{-5}}{k}} = \\sqrt{\\frac{1{,}5 \\cdot 10^{-5}}{8{,}99 \\cdot 10^9}} = 4{,}084\\ldots \\cdot 10^{-8}\\ \\mathrm{C} \\approx 41\\ \\mathrm{nC} $$
+
+**Svar:** $41\\ \\mathrm{nC}$
+
+**Generell slutsats:** En graf av $F$ mot $r$ är krökt och svår att räkna på. Med $\\dfrac{1}{r^2}$ på den vågräta axeln blir grafen en rät linje, och lutningen går att tolka.`,
+        },
+        {
+            level: 2,
+            question: `En kula med massan $2{,}0\\ \\mathrm{g}$ och laddningen $+50\\ \\mathrm{nC}$ hänger i en lätt, isolerande tråd. Rakt under den sitter en annan laddad kula fast på en isolerande stång. Avståndet mellan kulornas mittpunkter är $4{,}0\\ \\mathrm{cm}$.<br>a) Hur stor är kraften från tråden på den övre kulan när den undre kulans laddning är $-80\\ \\mathrm{nC}$? Svara i mN.<br>b) Den undre kulan får i stället laddningen $+80\\ \\mathrm{nC}$. Kan den övre kulan då hänga kvar stilla på samma plats? Motivera.
+
+<svg viewBox="46 16 222 250" width="278" height="313" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="En positiv kula hänger i en tråd rakt ovanför en laddad kula på en isolerande stång, avståndet mellan mittpunkterna är 4,0 cm" style="display:block;margin:14px auto;max-width:100%;height:auto"><line x1="120" y1="30" x2="200" y2="30" stroke="#0f1620" stroke-width="2.4"/><line x1="126" y1="30" x2="133" y2="22" stroke="#6b665c" stroke-width="1.1"/><line x1="137" y1="30" x2="144" y2="22" stroke="#6b665c" stroke-width="1.1"/><line x1="148" y1="30" x2="155" y2="22" stroke="#6b665c" stroke-width="1.1"/><line x1="159" y1="30" x2="166" y2="22" stroke="#6b665c" stroke-width="1.1"/><line x1="170" y1="30" x2="177" y2="22" stroke="#6b665c" stroke-width="1.1"/><line x1="181" y1="30" x2="188" y2="22" stroke="#6b665c" stroke-width="1.1"/><line x1="192" y1="30" x2="199" y2="22" stroke="#6b665c" stroke-width="1.1"/><line x1="160" y1="30" x2="160" y2="97" stroke="#4b463c" stroke-width="1.6"/><rect x="156.5" y="206" width="7" height="44" fill="#d9cfb8" stroke="#6b5f45" stroke-width="1.2"/><rect x="128" y="250" width="64" height="9" rx="2" fill="#b8ab8d" stroke="#6b5f45" stroke-width="1.2"/><line x1="105" y1="259.6" x2="215" y2="259.6" stroke="#0f1620" stroke-width="1.6"/><circle cx="160" cy="110" r="13" fill="#f0c2c0" stroke="#a62b3d" stroke-width="1.6"/><line x1="154.5" y1="110" x2="165.5" y2="110" stroke="#8c1f30" stroke-width="2"/><line x1="160" y1="104.5" x2="160" y2="115.5" stroke="#8c1f30" stroke-width="2"/><circle cx="160" cy="194" r="13" fill="#dedad0" stroke="#5a5449" stroke-width="1.6"/><line x1="176" y1="110" x2="212" y2="110" stroke="#8a8579" stroke-width="1.1" stroke-dasharray="4 3"/><line x1="176" y1="194" x2="212" y2="194" stroke="#8a8579" stroke-width="1.1" stroke-dasharray="4 3"/><line x1="206" y1="118" x2="206" y2="186" stroke="#0f1620" stroke-width="1.2"/><polygon points="206,110 202.6,118 209.4,118" fill="#0f1620"/><polygon points="206,194 202.6,186 209.4,186" fill="#0f1620"/><text x="214" y="157" text-anchor="start" font-size="14" fill="#0f1620">4,0 cm</text><text x="140" y="115" text-anchor="end" font-size="14" fill="#0f1620">+50 nC</text><text x="140" y="199" text-anchor="end" font-size="14" fill="#0f1620">laddad kula</text><text x="170" y="72" text-anchor="start" font-size="13" fill="#5a5449">tråd</text></svg>`,
+            answer: { value: 42, unit: 'mN' },
+            delsvar: [
+                { del: 'a', value: 42, unit: 'mN', etikett: '$F_\\mathrm{S} =$' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Tre krafter verkar på den övre kulan: tyngdkraften $F_\\mathrm{G}$ nedåt, spännkraften $F_\\mathrm{S}$ från tråden uppåt och den elektriska kraften $F$. Laddningarna har olika tecken, så den undre kulan attraherar den övre. Kraften $F$ är riktad nedåt.
+
+<svg viewBox="50 14 120 216" width="138" height="248" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Spännkraften uppåt är lika lång som tyngdkraften och den elektriska kraften tillsammans" style="display:block;margin:14px auto;max-width:100%;height:auto"><circle cx="110" cy="150" r="15" fill="#f0c2c0" stroke="#a62b3d" stroke-width="1.6"/><line x1="110" y1="150" x2="110" y2="34.7" stroke="#2563a8" stroke-width="3"/><polygon points="110,23.7 115.2,34.7 104.8,34.7" fill="#2563a8"/><line x1="104.6" y1="150" x2="104.6" y2="197.9" stroke="#0f1620" stroke-width="3"/><polygon points="104.6,208.9 99.4,197.9 109.8,197.9" fill="#0f1620"/><line x1="115.4" y1="150" x2="115.4" y2="206.4" stroke="#c8324a" stroke-width="3"/><polygon points="115.4,217.4 110.2,206.4 120.6,206.4" fill="#c8324a"/><circle cx="110" cy="150" r="2.8" fill="#0f1620"/><text x="122" y="37.7" text-anchor="start" font-size="16" fill="#2563a8"><tspan font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="0.72em">S</tspan></text><text x="94" y="208.9" text-anchor="end" font-size="16" fill="#0f1620"><tspan font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="0.72em">G</tspan></text><text x="127" y="219.4" text-anchor="start" font-size="16" fill="#c8324a"><tspan font-style="italic">F</tspan></text></svg>
+
+Vi beräknar de två krafter som är riktade nedåt.
+
+$$ F_\\mathrm{G} = m \\cdot g = 2{,}0 \\cdot 10^{-3} \\cdot 9{,}82 = 0{,}01964\\ \\mathrm{N} $$
+
+$$ F = k \\cdot \\frac{Q_1 \\cdot Q_2}{r^2} = 8{,}99 \\cdot 10^9 \\cdot \\frac{50 \\cdot 10^{-9} \\cdot 80 \\cdot 10^{-9}}{0{,}040^2} = 0{,}022475\\ \\mathrm{N} $$
+
+Kulan är i vila. Kraften uppåt är då lika stor som krafterna nedåt tillsammans.
+
+$$ F_\\mathrm{S} = F_\\mathrm{G} + F = 0{,}01964 + 0{,}022475 = 0{,}042115\\ \\mathrm{N} \\approx 42\\ \\mathrm{mN} $$
+
+**Svar:** $42\\ \\mathrm{mN}$
+
+**b)** Laddningarnas belopp och avståndet är desamma, så den elektriska kraften är fortfarande $0{,}022475\\ \\mathrm{N}$. Men nu har laddningarna samma tecken, så den är riktad uppåt. Den är större än tyngdkraften, som är $0{,}01964\\ \\mathrm{N}$.
+
+En tråd kan bara dra, aldrig trycka. Den kan alltså inte ge den kraft nedåt som behövs för jämvikt. Tråden slaknar och kulan accelererar uppåt.
+
+**Svar:** Nej, den elektriska kraften uppåt är större än tyngdkraften, så tråden slaknar och kulan lyfter.`,
+        },
+        {
+            level: 2,
+            question: `Två likadana små metallkulor har laddningarna $+8{,}0\\ \\mathrm{nC}$ och $-2{,}0\\ \\mathrm{nC}$. Kraften mellan dem är $F$. Kulorna får nudda varandra och sätts sedan tillbaka på samma avstånd som förut. Vilket alternativ beskriver den nya kraften?`,
+            choices: [
+                `Attraherande, $\\dfrac{9}{16}F$`,
+                `Repellerande, $F$`,
+                `Attraherande, $\\dfrac{25}{16}F$`,
+                `Repellerande, $\\dfrac{9}{16}F$`,
+            ],
+            correct: 3,
+            solution: `När kulorna nuddar varandra fördelas den sammanlagda laddningen. Kulorna är likadana, så de får hälften var.
+
+$$ Q = \\frac{8{,}0 + (-2{,}0)}{2} = 3{,}0\\ \\mathrm{nC} $$
+
+Båda kulorna är nu positiva. De **repellerar** därför varandra.
+
+Avståndet är detsamma, så kraften är proportionell mot produkten av laddningarnas belopp. Förut var produkten $8{,}0 \\cdot 2{,}0 = 16$ och nu är den $3{,}0 \\cdot 3{,}0 = 9{,}0$. Den nya kraften är därför
+
+$$ \\frac{9}{16} \\cdot F $$
+
+**Svar:** Repellerande, $\\dfrac{9}{16}F$`,
+        },
+        {
+            level: 2,
+            question: `Tre små laddade kulor sitter fast så som figuren visar. Hur stor är den resulterande elektriska kraften på kulan i det räta hörnet? Svara i mN.
+
+<svg viewBox="-2 40 346 206" width="450" height="268" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tre laddade kulor i en rätvinklig triangel, plus 5,0 nC i det räta hörnet, plus 8,0 nC 3,0 cm ovanför och minus 12 nC 4,0 cm till höger" style="display:block;margin:14px auto;max-width:100%;height:auto"><line x1="110" y1="60" x2="110" y2="180" stroke="#a79f8e" stroke-width="1.2" stroke-dasharray="5 4"/><line x1="110" y1="180" x2="270" y2="180" stroke="#a79f8e" stroke-width="1.2" stroke-dasharray="5 4"/><path d="M110 158 H132 V180" fill="none" stroke="#6b665c" stroke-width="1.2"/><circle cx="110" cy="60" r="13" fill="#f0c2c0" stroke="#a62b3d" stroke-width="1.6"/><line x1="104.5" y1="60" x2="115.5" y2="60" stroke="#8c1f30" stroke-width="2"/><line x1="110" y1="54.5" x2="110" y2="65.5" stroke="#8c1f30" stroke-width="2"/><circle cx="110" cy="180" r="13" fill="#f0c2c0" stroke="#a62b3d" stroke-width="1.6"/><line x1="104.5" y1="180" x2="115.5" y2="180" stroke="#8c1f30" stroke-width="2"/><line x1="110" y1="174.5" x2="110" y2="185.5" stroke="#8c1f30" stroke-width="2"/><circle cx="270" cy="180" r="13" fill="#c3d9ee" stroke="#235a94" stroke-width="1.6"/><line x1="264.5" y1="180" x2="275.5" y2="180" stroke="#1c4a7d" stroke-width="2"/><text x="130" y="65" text-anchor="start" font-size="14" fill="#0f1620">+8,0 nC</text><text x="288" y="185" text-anchor="start" font-size="14" fill="#0f1620">−12 nC</text><text x="140" y="154" text-anchor="start" font-size="14" fill="#0f1620">+5,0 nC</text><line x1="94" y1="60" x2="56" y2="60" stroke="#8a8579" stroke-width="1.1" stroke-dasharray="4 3"/><line x1="94" y1="180" x2="56" y2="180" stroke="#8a8579" stroke-width="1.1" stroke-dasharray="4 3"/><line x1="62" y1="68" x2="62" y2="172" stroke="#0f1620" stroke-width="1.2"/><polygon points="62,60 58.6,68 65.4,68" fill="#0f1620"/><polygon points="62,180 58.6,172 65.4,172" fill="#0f1620"/><text x="54" y="125" text-anchor="end" font-size="14" fill="#0f1620">3,0 cm</text><line x1="110" y1="196" x2="110" y2="224" stroke="#8a8579" stroke-width="1.1" stroke-dasharray="4 3"/><line x1="270" y1="196" x2="270" y2="224" stroke="#8a8579" stroke-width="1.1" stroke-dasharray="4 3"/><line x1="118" y1="218" x2="262" y2="218" stroke="#0f1620" stroke-width="1.2"/><polygon points="110,218 118,221.4 118,214.6" fill="#0f1620"/><polygon points="270,218 262,221.4 262,214.6" fill="#0f1620"/><text x="190" y="238" text-anchor="middle" font-size="14" fill="#0f1620">4,0 cm</text></svg>`,
+            answer: { value: 0.52, unit: 'mN' },
+            solution: `Kulan i hörnet påverkas av en kraft från vardera av de andra kulorna.
+
+- Den övre kulan har samma tecken och repellerar kulan i hörnet. Kraften $F_1$ är riktad **nedåt**.
+- Den högra kulan har motsatt tecken och attraherar kulan i hörnet. Kraften $F_2$ är riktad **åt höger**.
+
+<svg viewBox="28 28 190 170" width="218" height="195" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kraften F1 nedåt, kraften F2 åt höger och den streckade resultanten snett nedåt åt höger" style="display:block;margin:14px auto;max-width:100%;height:auto"><line x1="181.3" y1="50" x2="181.3" y2="181.9" stroke="#8a8579" stroke-width="1.2" stroke-dasharray="4 3"/><line x1="70" y1="181.9" x2="181.3" y2="181.9" stroke="#8a8579" stroke-width="1.2" stroke-dasharray="4 3"/><circle cx="70" cy="50" r="14" fill="#f0c2c0" stroke="#a62b3d" stroke-width="1.6"/><line x1="70" y1="50" x2="70" y2="170.9" stroke="#c8324a" stroke-width="3"/><polygon points="70,181.9 64.8,170.9 75.2,170.9" fill="#c8324a"/><line x1="70" y1="50" x2="170.3" y2="50" stroke="#c8324a" stroke-width="3"/><polygon points="181.3,50 170.3,55.2 170.3,44.8" fill="#c8324a"/><line x1="70" y1="50" x2="174.2" y2="173.4" stroke="#c8324a" stroke-width="3" stroke-dasharray="6 4"/><polygon points="181.3,181.9 170.2,176.8 178.1,170.1" fill="#c8324a"/><text x="60" y="183.9" text-anchor="end" font-size="16" fill="#c8324a"><tspan font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="0.72em">1</tspan></text><text x="190.3" y="55" text-anchor="start" font-size="16" fill="#c8324a"><tspan font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="0.72em">2</tspan></text><text x="190.3" y="189.9" text-anchor="start" font-size="16" fill="#c8324a"><tspan font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="0.72em">R</tspan></text></svg>
+
+Coulombs lag ger
+
+$$ F_1 = 8{,}99 \\cdot 10^9 \\cdot \\frac{5{,}0 \\cdot 10^{-9} \\cdot 8{,}0 \\cdot 10^{-9}}{0{,}030^2} = 3{,}9955\\ldots \\cdot 10^{-4}\\ \\mathrm{N} $$
+
+$$ F_2 = 8{,}99 \\cdot 10^9 \\cdot \\frac{5{,}0 \\cdot 10^{-9} \\cdot 12 \\cdot 10^{-9}}{0{,}040^2} = 3{,}37125 \\cdot 10^{-4}\\ \\mathrm{N} $$
+
+Krafterna är vinkelräta mot varandra. Den resulterande kraften är diagonalen i rektangeln, och Pythagoras sats ger
+
+$$ F_\\mathrm{R} = \\sqrt{F_1^2 + F_2^2} = \\sqrt{(3{,}9955\\ldots \\cdot 10^{-4})^2 + (3{,}37125 \\cdot 10^{-4})^2} $$
+
+$$ F_\\mathrm{R} = 5{,}2277\\ldots \\cdot 10^{-4}\\ \\mathrm{N} \\approx 0{,}52\\ \\mathrm{mN} $$
+
+**Rimlighet:** Resultanten ska vara större än den största av krafterna ($0{,}40\\ \\mathrm{mN}$) men mindre än deras summa ($0{,}74\\ \\mathrm{mN}$). Det stämmer.
+
+**Svar:** $0{,}52\\ \\mathrm{mN}$`,
+        },
+
+        // ── Påfyllning: Avancerad ─────────────────────────────────────────
+        {
+            level: 3,
+            question: `Två små kulor, båda med massan $1{,}2\\ \\mathrm{g}$, hänger i var sin lätt, isolerande tråd från samma punkt. Trådarna är $50\\ \\mathrm{cm}$ långa. Den ena kulan har laddningen $Q$ och den andra laddningen $4Q$, där $Q$ är positiv. När kulorna är i vila är vinkeln mellan trådarna $20^\\circ$. Bestäm de båda laddningarna. Svara i nC.
+
+<svg viewBox="66 18 208 274" width="250" height="329" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Två kulor med laddningarna Q och 4Q hänger i 50 cm långa trådar från samma punkt, vinkeln mellan trådarna är 20 grader" style="display:block;margin:14px auto;max-width:100%;height:auto"><line x1="120" y1="34" x2="220" y2="34" stroke="#0f1620" stroke-width="2.4"/><line x1="126" y1="34" x2="133" y2="26" stroke="#6b665c" stroke-width="1.1"/><line x1="137" y1="34" x2="144" y2="26" stroke="#6b665c" stroke-width="1.1"/><line x1="148" y1="34" x2="155" y2="26" stroke="#6b665c" stroke-width="1.1"/><line x1="159" y1="34" x2="166" y2="26" stroke="#6b665c" stroke-width="1.1"/><line x1="170" y1="34" x2="177" y2="26" stroke="#6b665c" stroke-width="1.1"/><line x1="181" y1="34" x2="188" y2="26" stroke="#6b665c" stroke-width="1.1"/><line x1="192" y1="34" x2="199" y2="26" stroke="#6b665c" stroke-width="1.1"/><line x1="203" y1="34" x2="210" y2="26" stroke="#6b665c" stroke-width="1.1"/><line x1="214" y1="34" x2="221" y2="26" stroke="#6b665c" stroke-width="1.1"/><line x1="170" y1="34" x2="128.3" y2="270.4" stroke="#4b463c" stroke-width="1.5"/><line x1="170" y1="34" x2="211.7" y2="270.4" stroke="#4b463c" stroke-width="1.5"/><path d="M 184.6 116.7 A 84 84 0 0 1 155.4 116.7" fill="none" stroke="#6b665c" stroke-width="1.3"/><text x="170" y="146" text-anchor="middle" font-size="13" fill="#0f1620">20°</text><circle cx="128.3" cy="270.4" r="13" fill="#f0c2c0" stroke="#a62b3d" stroke-width="1.6"/><line x1="122.9" y1="270.4" x2="133.8" y2="270.4" stroke="#8c1f30" stroke-width="2"/><line x1="128.3" y1="264.9" x2="128.3" y2="275.8" stroke="#8c1f30" stroke-width="2"/><circle cx="211.7" cy="270.4" r="13" fill="#f0c2c0" stroke="#a62b3d" stroke-width="1.6"/><line x1="206.2" y1="270.4" x2="217.1" y2="270.4" stroke="#8c1f30" stroke-width="2"/><line x1="211.7" y1="264.9" x2="211.7" y2="275.8" stroke="#8c1f30" stroke-width="2"/><text x="108.3" y="275.4" text-anchor="end" font-size="15" fill="#0f1620"><tspan font-style="italic">Q</tspan></text><text x="231.7" y="275.4" text-anchor="start" font-size="15" fill="#0f1620">4<tspan font-style="italic">Q</tspan></text><text x="135.2" y="156.2" text-anchor="end" font-size="14" fill="#0f1620">50 cm</text><text x="204.8" y="156.2" text-anchor="start" font-size="14" fill="#0f1620">50 cm</text></svg>`,
+            answer: { value: 42, unit: 'nC' },
+            delsvar: [
+                { value: 42, unit: 'nC', etikett: '$Q =$', tol: 0.03 },
+                { value: 170, unit: 'nC', etikett: '$4Q =$', tol: 0.03 },
+            ],
+            solution: `**Vinklarna.** Enligt Newtons tredje lag är den elektriska kraften $F$ lika stor på båda kulorna, trots att laddningarna är olika. Kulorna har dessutom lika stora massor. Kraftsituationen på den ena kulan är därför en spegelbild av den på den andra, och trådarna bildar samma vinkel $\\alpha$ med lodlinjen.
+
+$$ \\alpha = \\frac{20^\\circ}{2} = 10^\\circ $$
+
+**Krafterna på den högra kulan.** Tyngdkraften $F_\\mathrm{G}$ är riktad nedåt, spännkraften $F_\\mathrm{S}$ längs tråden och den elektriska kraften $F$ vågrätt utåt.
+
+<svg viewBox="50 38 130 422" width="130" height="422" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Krafterna på den högra kulan: spännkraften snett uppåt åt vänster, tyngdkraften nedåt och den elektriska kraften åt höger" style="display:block;margin:14px auto;max-width:100%;height:auto"><line x1="120" y1="250" x2="120" y2="42" stroke="#8a8579" stroke-width="1.2" stroke-dasharray="5 4"/><path d="M 120 140 A 110 110 0 0 0 100.9 141.7" fill="none" stroke="#6b665c" stroke-width="1.3"/><text x="107.7" y="126" text-anchor="middle" font-size="14" fill="#0f1620"><tspan font-style="italic">α</tspan></text><circle cx="120" cy="250" r="9" fill="#f0c2c0" stroke="#a62b3d" stroke-width="1.6"/><line x1="120" y1="250" x2="86.6" y2="60.8" stroke="#2563a8" stroke-width="3"/><polygon points="84.7,50 91.8,59.9 81.5,61.7" fill="#2563a8"/><line x1="120" y1="250" x2="120" y2="439" stroke="#0f1620" stroke-width="3"/><polygon points="120,450 114.8,439 125.2,439" fill="#0f1620"/><line x1="120" y1="250" x2="144.3" y2="250" stroke="#c8324a" stroke-width="3"/><polygon points="155.3,250 144.3,255.2 144.3,244.8" fill="#c8324a"/><circle cx="120" cy="250" r="2.8" fill="#0f1620"/><text x="75.7" y="60" text-anchor="end" font-size="16" fill="#2563a8"><tspan font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="0.72em">S</tspan></text><text x="132" y="450" text-anchor="start" font-size="16" fill="#0f1620"><tspan font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="0.72em">G</tspan></text><text x="162.3" y="255" text-anchor="start" font-size="16" fill="#c8324a"><tspan font-style="italic">F</tspan></text></svg>
+
+Kulan är i vila. Spännkraftens lodräta komposant är då lika stor som $F_\\mathrm{G}$ och dess vågräta komposant lika stor som $F$.
+
+$$ F_\\mathrm{S} \\cdot \\cos\\alpha = m \\cdot g \\qquad (1) $$
+
+$$ F_\\mathrm{S} \\cdot \\sin\\alpha = F \\qquad (2) $$
+
+Vi dividerar leden i (2) med leden i (1). Då förkortas $F_\\mathrm{S}$ bort.
+
+$$ \\frac{\\sin\\alpha}{\\cos\\alpha} = \\frac{F}{m \\cdot g} $$
+
+Vänsterledet är $\\tan\\alpha$. Vi multiplicerar båda led med $m \\cdot g$.
+
+$$ F = m \\cdot g \\cdot \\tan\\alpha \\qquad (3) $$
+
+**Avståndet.** Varje kula är förskjuten sträckan $L \\cdot \\sin\\alpha$ från lodlinjen, där $L$ är trådens längd. Avståndet mellan kulorna är därför
+
+$$ r = 2L \\cdot \\sin\\alpha \\qquad (4) $$
+
+**Laddningen.** Coulombs lag med laddningarna $Q$ och $4Q$ ger
+
+$$ F = k \\cdot \\frac{Q \\cdot 4Q}{r^2} = \\frac{4k \\cdot Q^2}{r^2} \\quad\\Leftrightarrow\\quad Q = \\frac{r}{2} \\cdot \\sqrt{\\frac{F}{k}} $$
+
+Insättning av (4), $r = 2L \\cdot \\sin\\alpha$, och (3), $F = m \\cdot g \\cdot \\tan\\alpha$, ger
+
+$$ Q = L \\cdot \\sin\\alpha \\cdot \\sqrt{\\frac{m \\cdot g \\cdot \\tan\\alpha}{k}} $$
+
+$$
+\\left[ \\begin{array}{l}
+L = 50\\ \\mathrm{cm} = 0{,}50\\ \\mathrm{m} \\\\
+\\alpha = 10^\\circ \\\\
+m = 1{,}2\\ \\mathrm{g} = 1{,}2 \\cdot 10^{-3}\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2}
+\\end{array} \\right]
+$$
+
+$$ Q = 0{,}50 \\cdot \\sin 10^\\circ \\cdot \\sqrt{\\frac{1{,}2 \\cdot 10^{-3} \\cdot 9{,}82 \\cdot \\tan 10^\\circ}{8{,}99 \\cdot 10^9}} $$
+
+$$ Q = 4{,}174\\ldots \\cdot 10^{-8}\\ \\mathrm{C} \\approx 42\\ \\mathrm{nC} $$
+
+Den andra laddningen är
+
+$$ 4Q = 4 \\cdot 4{,}174\\ldots \\cdot 10^{-8}\\ \\mathrm{C} = 1{,}669\\ldots \\cdot 10^{-7}\\ \\mathrm{C} \\approx 170\\ \\mathrm{nC} $$
+
+**Rimlighet:** Laddningar på några tiotal till några hundra nC är vanliga när små föremål laddas genom gnidning.
+
+**Svar:** $Q \\approx 42\\ \\mathrm{nC}$ och $4Q \\approx 170\\ \\mathrm{nC}$`,
+        },
+        {
+            level: 3,
+            question: `Två små kulor sitter fast på avståndet $24\\ \\mathrm{cm}$ från varandra. Den ena har laddningen $+25q$ och den andra $-9q$, där $q$ är positiv. En tredje laddad kula ska placeras någonstans på den räta linjen genom kulorna så att den resulterande elektriska kraften på den blir noll. Utred var på linjen detta är möjligt. Ange avståndet i cm från kulan med laddningen $-9q$.
+
+<svg viewBox="16 14 458 106" width="595" height="138" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="En kula med laddningen plus 25q och 24 cm till höger om den en kula med laddningen minus 9q på en rät linje" style="display:block;margin:14px auto;max-width:100%;height:auto"><line x1="20" y1="56" x2="470" y2="56" stroke="#a79f8e" stroke-width="1.3" stroke-dasharray="6 4"/><circle cx="130" cy="56" r="13" fill="#f0c2c0" stroke="#a62b3d" stroke-width="1.6"/><line x1="124.5" y1="56" x2="135.5" y2="56" stroke="#8c1f30" stroke-width="2"/><line x1="130" y1="50.5" x2="130" y2="61.5" stroke="#8c1f30" stroke-width="2"/><circle cx="300" cy="56" r="13" fill="#c3d9ee" stroke="#235a94" stroke-width="1.6"/><line x1="294.5" y1="56" x2="305.5" y2="56" stroke="#1c4a7d" stroke-width="2"/><text x="130" y="32" text-anchor="middle" font-size="15" fill="#0f1620">+25<tspan font-style="italic">q</tspan></text><text x="300" y="32" text-anchor="middle" font-size="15" fill="#0f1620">−9<tspan font-style="italic">q</tspan></text><line x1="130" y1="72" x2="130" y2="96" stroke="#8a8579" stroke-width="1.1" stroke-dasharray="4 3"/><line x1="300" y1="72" x2="300" y2="96" stroke="#8a8579" stroke-width="1.1" stroke-dasharray="4 3"/><line x1="138" y1="90" x2="292" y2="90" stroke="#0f1620" stroke-width="1.2"/><polygon points="130,90 138,93.4 138,86.6" fill="#0f1620"/><polygon points="300,90 292,93.4 292,86.6" fill="#0f1620"/><text x="215" y="111" text-anchor="middle" font-size="14" fill="#0f1620">24 cm</text></svg>`,
+            answer: { value: 36, unit: 'cm' },
+            solution: `Vi antar att den tredje laddningen $Q$ är positiv. (Är den negativ byter båda krafterna riktning, så platsen där de tar ut varandra är densamma.) Kulan med laddningen $+25q$ repellerar den och kulan med laddningen $-9q$ attraherar den. Vi undersöker linjens tre delar.
+
+| Läge | Kraft från $+25q$ | Kraft från $-9q$ |
+|---|---|---|
+| till vänster om $+25q$ | åt vänster | åt höger |
+| mellan kulorna | åt höger | åt höger |
+| till höger om $-9q$ | åt höger | åt vänster |
+
+**Mellan kulorna** pekar båda krafterna åt samma håll. De kan aldrig ta ut varandra.
+
+**Till vänster om $+25q$** är krafterna motriktade, men där är den tredje kulan närmast den laddning som har störst belopp. Kraften från $+25q$ är då störst, både för att laddningens belopp är större och för att avståndet är mindre. Krafterna kan aldrig bli lika stora.
+
+**Till höger om $-9q$** är krafterna också motriktade, och här är den tredje kulan närmast den laddning som har minst belopp. Det kortare avståndet kan uppväga den mindre laddningen.
+
+Kalla avståndet till $-9q$ för $x$ och avståndet mellan de fasta kulorna för $d$. Avståndet till $+25q$ är då $d + x$. Krafterna ska vara lika stora.
+
+$$ k \\cdot \\frac{25q \\cdot Q}{(d + x)^2} = k \\cdot \\frac{9q \\cdot Q}{x^2} $$
+
+Vi dividerar båda led med $k \\cdot q \\cdot Q$.
+
+$$ \\frac{25}{(d + x)^2} = \\frac{9}{x^2} $$
+
+Alla längder är positiva, så vi kan dra den positiva roten ur båda led.
+
+$$ \\frac{5}{d + x} = \\frac{3}{x} $$
+
+Vi multiplicerar båda led med $x \\cdot (d + x)$ och löser ut $x$.
+
+$$ 5x = 3(d + x) $$
+
+$$ 5x = 3d + 3x $$
+
+$$ 2x = 3d $$
+
+$$ x = 1{,}5d = 1{,}5 \\cdot 24\\ \\mathrm{cm} = 36\\ \\mathrm{cm} $$
+
+**Rimlighet:** Avståndet till $+25q$ är $24 + 36 = 60\\ \\mathrm{cm}$. Kvoten mellan avstånden är $\\dfrac{60}{36} = \\dfrac{5}{3}$, och $\\left(\\frac{5}{3}\\right)^2 = \\dfrac{25}{9}$ är precis kvoten mellan laddningarnas belopp.
+
+**Svar:** Endast i en punkt, $36\\ \\mathrm{cm}$ från $-9q$ på den sida som vetter bort från $+25q$`,
+        },
+        {
+            level: 3,
+            question: `Två små kulor med laddningarna $+q$ och $+9q$ hålls fast på avståndet $d$ från varandra på ett friktionsfritt, isolerande bord. En tredje kula placeras på linjen mellan dem. När alla tre kulorna sedan släpps samtidigt ligger samtliga kvar i vila. Bestäm den tredje kulans läge och laddning, uttryckta i $d$ och $q$. Ange läget som avståndet från kulan med laddningen $+q$.`,
+            answer: { value: 0.25, unit: 'd' },
+            delsvar: [
+                { value: 0.25, unit: '· d', etikett: 'Avstånd från $+q$' },
+                { value: -0.5625, unit: '· q', etikett: 'Laddning med tecken' },
+            ],
+            solution: `Alla tre kulorna ska vara i jämvikt. Vi ställer upp ett villkor för den tredje kulan och ett för kulan med laddningen $+q$.
+
+**Tecknet.** Kulorna $+q$ och $+9q$ repellerar varandra. För att de ska ligga kvar måste den tredje kulan attrahera båda. Dess laddning är därför negativ. Vi kallar laddningens belopp $Q$.
+
+**Den tredje kulan.** Den attraheras av båda kulorna, åt var sitt håll. Kalla avståndet till $+q$ för $x$. Avståndet till $+9q$ är då $d - x$. Krafterna ska vara lika stora.
+
+$$ k \\cdot \\frac{q \\cdot Q}{x^2} = k \\cdot \\frac{9q \\cdot Q}{(d - x)^2} $$
+
+Vi dividerar båda led med $k \\cdot q \\cdot Q$. Beloppet $Q$ påverkar alltså inte läget.
+
+$$ \\frac{1}{x^2} = \\frac{9}{(d - x)^2} $$
+
+Både $x$ och $d - x$ är positiva, så vi drar den positiva roten ur båda led.
+
+$$ \\frac{1}{x} = \\frac{3}{d - x} $$
+
+Vi multiplicerar båda led med $x \\cdot (d - x)$ och löser ut $x$.
+
+$$ d - x = 3x $$
+
+$$ d = 4x $$
+
+$$ x = \\frac{d}{4} $$
+
+**Kulan med laddningen $+q$.** Den repelleras av $+9q$ på avståndet $d$ och attraheras av den tredje kulan på avståndet $\\dfrac{d}{4}$. Krafterna är motriktade och ska vara lika stora.
+
+$$ k \\cdot \\frac{q \\cdot Q}{\\left(\\frac{d}{4}\\right)^2} = k \\cdot \\frac{q \\cdot 9q}{d^2} $$
+
+$$ k \\cdot \\frac{16 \\cdot q \\cdot Q}{d^2} = k \\cdot \\frac{9q^2}{d^2} $$
+
+Vi multiplicerar båda led med $d^2$ och dividerar båda led med $k \\cdot q$.
+
+$$ 16Q = 9q $$
+
+$$ Q = \\frac{9}{16}q = 0{,}5625q $$
+
+**Kulan med laddningen $+9q$.** Krafterna mellan de tre kulorna tar ut varandra parvis enligt Newtons tredje lag, så summan av alla krafter på de tre kulorna är noll. Eftersom den resulterande kraften är noll på två av dem måste den vara noll även på den tredje. Också den här kulan är alltså i jämvikt.
+
+**Svar:** Den tredje kulan ska ha laddningen $-\\dfrac{9}{16}q$ (alltså $-0{,}5625q$) och ligga på avståndet $\\dfrac{d}{4}$ (alltså $0{,}25d$) från $+q$.`,
+        },
+        {
+            level: 3,
+            question: `Två likadana små metallkulor har laddningar med olika tecken och attraherar varandra. Kulorna får nudda varandra och sätts sedan tillbaka på samma avstånd. Nu repellerar de varandra, men kraften är bara en tredjedel så stor som förut. Hur många gånger så stort var beloppet av den ena laddningen som beloppet av den andra från början?`,
+            answer: { value: 3, unit: 'gånger' },
+            solution: `Vi vet varken laddningarna eller avståndet, så vi löser uppgiften generellt. Kalla laddningarna från början $+a$ och $-b$, där $a$ och $b$ är positiva, och avståndet $r$.
+
+**Före.** Kraften är
+
+$$ F_1 = k \\cdot \\frac{a \\cdot b}{r^2} $$
+
+**Efter.** Den sammanlagda laddningen är $a - b$. Kulorna är likadana, så de får $\\dfrac{a - b}{2}$ var. Kraften är då
+
+$$ F_2 = k \\cdot \\frac{\\left(\\frac{a - b}{2}\\right)^2}{r^2} = k \\cdot \\frac{(a - b)^2}{4r^2} $$
+
+**Villkoret.** Kraften efteråt är en tredjedel av kraften före, alltså $F_1 = 3F_2$.
+
+$$ k \\cdot \\frac{a \\cdot b}{r^2} = 3k \\cdot \\frac{(a - b)^2}{4r^2} $$
+
+Vi multiplicerar båda led med $4r^2$ och dividerar båda led med $k$. Då försvinner både $k$ och avståndet.
+
+$$ 4ab = 3(a - b)^2 $$
+
+$$ 4ab = 3a^2 - 6ab + 3b^2 $$
+
+$$ 3a^2 - 10ab + 3b^2 = 0 $$
+
+Vi söker kvoten mellan laddningarnas belopp. Vi dividerar därför båda led med $3b^2$ och sätter $x = \\dfrac{a}{b}$.
+
+$$ x^2 - \\frac{10}{3}x + 1 = 0 $$
+
+$$ x = \\frac{5}{3} \\pm \\sqrt{\\left(\\frac{5}{3}\\right)^2 - 1} = \\frac{5}{3} \\pm \\sqrt{\\frac{16}{9}} = \\frac{5}{3} \\pm \\frac{4}{3} $$
+
+$$ x_1 = 3 \\qquad x_2 = \\frac{1}{3} $$
+
+De båda lösningarna beskriver samma sak: antingen är det den positiva eller den negativa laddningen som är störst, men beloppet av den ena är tre gånger så stort som beloppet av den andra.
+
+**Kontroll:** Laddningarna $+3b$ och $-b$ ger produkten $3b^2$ före. Efteråt har båda kulorna laddningen $b$, och produkten är $b^2$, en tredjedel så stor.
+
+**Svar:** Tre (3) gånger så stort`,
+        },
+        {
+            level: 3,
+            question: `En laddad metallkula står på en isolerande fot på en våg. Vågen visar då $12{,}00\\ \\mathrm{g}$. En likadan kula med samma laddning förs sedan ned rakt ovanför, på en isolerande stång som hålls fast i ett stativ. Kulornas diameter är $1{,}6\\ \\mathrm{cm}$, och $r$ är avståndet mellan deras mittpunkter. Resultatet visas i tabellen.
+
+| $r$ (cm) | 2,0 | 4,0 | 6,0 | 8,0 | 10,0 |
+|---|---|---|---|---|---|
+| Vågen visar (g) | 14,12 | 12,68 | 12,31 | 12,18 | 12,11 |
+
+Utred i vilken mån mätvärdena följer Coulombs lag, ge en fysikalisk förklaring till eventuella avvikelser och bestäm beloppet av kulornas laddning så noggrant som mätningen tillåter. Ange det i nC.
+
+<svg viewBox="34 22 362 294" width="453" height="368" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="En laddad kula på en isolerande fot på en våg, rakt ovanför sitter en likadan kula på en isolerande stång i ett stativ, avståndet mellan mittpunkterna är r" style="display:block;margin:14px auto;max-width:100%;height:auto"><rect x="40" y="300" width="350" height="10" fill="#d8c7a3" stroke="#6b5f45" stroke-width="1.2"/><path d="M118 300 L124 262 H246 L252 300 Z" fill="#e6e8ea" stroke="#0f1620" stroke-width="1.5" stroke-linejoin="round"/><rect x="152" y="271" width="66" height="22" rx="3" fill="#dfe9d6" stroke="#4b5a45" stroke-width="1.1"/><text x="185" y="287" text-anchor="middle" font-size="13" fill="#0f1620">… g</text><rect x="176" y="254" width="18" height="8" fill="#b9bec4" stroke="#0f1620" stroke-width="1.2"/><rect x="112" y="248" width="146" height="7" rx="3" fill="#c9cdd2" stroke="#0f1620" stroke-width="1.4"/><rect x="166" y="241" width="38" height="7" rx="2" fill="#d9cfb8" stroke="#6b5f45" stroke-width="1.1"/><rect x="181.5" y="203" width="7" height="38" fill="#d9cfb8" stroke="#6b5f45" stroke-width="1.1"/><rect x="288" y="290" width="72" height="10" rx="2" fill="#6d7278" stroke="#0f1620" stroke-width="1.2"/><rect x="320" y="30" width="8" height="260" fill="#9aa1a8" stroke="#0f1620" stroke-width="1.2"/><rect x="178" y="51" width="134" height="6" fill="#9aa1a8" stroke="#0f1620" stroke-width="1.1"/><rect x="311" y="45" width="26" height="18" rx="3" fill="#565b61" stroke="#0f1620" stroke-width="1.1"/><rect x="176" y="46" width="18" height="16" rx="3" fill="#565b61" stroke="#0f1620" stroke-width="1.1"/><rect x="181.5" y="62" width="7" height="38" fill="#d9cfb8" stroke="#6b5f45" stroke-width="1.1"/><circle cx="185" cy="114" r="15" fill="#dedad0" stroke="#5a5449" stroke-width="1.6"/><circle cx="185" cy="190" r="15" fill="#dedad0" stroke="#5a5449" stroke-width="1.6"/><line x1="204" y1="114" x2="244" y2="114" stroke="#8a8579" stroke-width="1.1" stroke-dasharray="4 3"/><line x1="204" y1="190" x2="244" y2="190" stroke="#8a8579" stroke-width="1.1" stroke-dasharray="4 3"/><line x1="237" y1="122" x2="237" y2="182" stroke="#0f1620" stroke-width="1.2"/><polygon points="237,114 233.6,122 240.4,122" fill="#0f1620"/><polygon points="237,190 233.6,182 240.4,182" fill="#0f1620"/><text x="246" y="157" text-anchor="start" font-size="16" fill="#0f1620"><tspan font-style="italic">r</tspan></text><text x="168" y="84" text-anchor="end" font-size="13" fill="#5a5449">isolerande stång</text><text x="168" y="228" text-anchor="end" font-size="13" fill="#5a5449">isolerande fot</text><text x="108" y="285" text-anchor="end" font-size="13" fill="#5a5449">våg</text><text x="338" y="168" text-anchor="start" font-size="13" fill="#5a5449">stativ</text></svg>`,
+            answer: { value: 35, unit: 'nC', tol: 0.03 },
+            solution: `**Från vågen till kraften.** Den övre kulan repellerar den undre med kraften $F$ nedåt. Den undre kulan är i vila, så normalkraften från vågen ökar lika mycket. Visar vågen $\\Delta m$ mer än $12{,}00\\ \\mathrm{g}$ är därför
+
+$$ F = \\Delta m \\cdot g $$
+
+**Prövning av Coulombs lag.** Med lika stora laddningar $Q$ gäller
+
+$$ F = k \\cdot \\frac{Q^2}{r^2} \\quad\\Leftrightarrow\\quad F \\cdot r^2 = k \\cdot Q^2 $$
+
+Följer mätvärdena Coulombs lag ska alltså produkten $F \\cdot r^2$ vara densamma för alla avstånd. För $r = 4{,}0\\ \\mathrm{cm}$ är $\\Delta m = 12{,}68 - 12{,}00 = 0{,}68\\ \\mathrm{g}$, vilket ger
+
+$$ F = 0{,}68 \\cdot 10^{-3} \\cdot 9{,}82 = 6{,}6776 \\cdot 10^{-3}\\ \\mathrm{N} $$
+
+$$ F \\cdot r^2 = 6{,}6776 \\cdot 10^{-3} \\cdot 0{,}040^2 = 1{,}068416 \\cdot 10^{-5}\\ \\mathrm{N \\cdot m^2} $$
+
+På samma sätt får vi de övriga värdena.
+
+| $r$ (cm) | $\\Delta m$ (g) | $F$ (mN) | $F \\cdot r^2$ ($10^{-5}\\ \\mathrm{N \\cdot m^2}$) |
+|---|---|---|---|
+| 2,0 | 2,12 | 20,818 | 0,833 |
+| 4,0 | 0,68 | 6,678 | 1,068 |
+| 6,0 | 0,31 | 3,044 | 1,096 |
+| 8,0 | 0,18 | 1,768 | 1,131 |
+| 10,0 | 0,11 | 1,080 | 1,080 |
+
+**Tolkning.** När $r$ är minst $4{,}0\\ \\mathrm{cm}$ är produkten nästan konstant. De små skillnaderna beror framför allt på vågens upplösning: vid $10{,}0\\ \\mathrm{cm}$ motsvarar vågens minsta steg, $0{,}01\\ \\mathrm{g}$, nästan en tiondel av hela ökningen. Där följer värdena Coulombs lag.
+
+Vid $r = 2{,}0\\ \\mathrm{cm}$ är produkten drygt 20 % för liten. Det är mycket mer än upplösningen kan förklara, eftersom $\\Delta m$ där är störst. Coulombs lag i den här formen gäller **punktladdningar**. När mittpunkterna är $2{,}0\\ \\mathrm{cm}$ från varandra är det bara $2{,}0 - 1{,}6 = 0{,}4\\ \\mathrm{cm}$ mellan kulornas ytor, och de kan inte ses som punkter. Laddningarna på kulorna repellerar varandra, så laddningen förskjuts mot de sidor som är vända bort från den andra kulan. Laddningarna är då längre från varandra än mittpunkterna, och kraften blir mindre än vad Coulombs lag ger med avståndet $r$.
+
+**Laddningen.** Mätvärdet vid $2{,}0\\ \\mathrm{cm}$ ska inte räknas med. Medelvärdet av de fyra övriga produkterna är
+
+$$ k \\cdot Q^2 = \\frac{1{,}068 + 1{,}096 + 1{,}131 + 1{,}080}{4} \\cdot 10^{-5} = 1{,}09375 \\cdot 10^{-5}\\ \\mathrm{N \\cdot m^2} $$
+
+$$ Q = \\sqrt{\\frac{1{,}09375 \\cdot 10^{-5}}{8{,}99 \\cdot 10^9}} = 3{,}488\\ldots \\cdot 10^{-8}\\ \\mathrm{C} \\approx 35\\ \\mathrm{nC} $$
+
+**Svar:** Värdena följer Coulombs lag från $4{,}0\\ \\mathrm{cm}$ och uppåt. Vid $2{,}0\\ \\mathrm{cm}$ är kraften för liten, eftersom laddningen förskjuts på kulorna så att de inte kan ses som punktladdningar. Laddningens belopp är $35\\ \\mathrm{nC}$.`,
+        },
+        {
+            level: 3,
+            question: `Två likadana små metallkulor svävar fritt i rymden, långt från alla andra föremål. Var och en ges samma överskott av elektroner. Hur många överskottselektroner per kilogram metall ska kulorna ha för att de varken ska närma sig eller avlägsna sig från varandra när de släpps från vila, och spelar det någon roll på vilket avstånd de släpps? Newtons gravitationslag är $F = G \\cdot \\dfrac{m_1 \\cdot m_2}{d^2}$ med $G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{N \\cdot m^2 / kg^2}$. Ange antalet i miljoner elektroner per kilogram.`,
+            answer: { value: 538, unit: 'miljoner per kg' },
+            solution: `Kulorna attraherar varandra med gravitationskraften och repellerar varandra med den elektriska kraften. De ligger kvar i vila om krafterna är lika stora.
+
+Varken massan, laddningen eller avståndet är givet, så vi räknar generellt. Kalla varje kulas massa $m$, antalet överskottselektroner på varje kula $N$, elementarladdningen $q_\\mathrm{e}$ och avståndet mellan kulorna $r$. Beloppet av varje kulas laddning är då $N \\cdot q_\\mathrm{e}$. Krafterna är lika stora när
+
+$$ k \\cdot \\frac{(N \\cdot q_\\mathrm{e})^2}{r^2} = G \\cdot \\frac{m^2}{r^2} $$
+
+Vi multiplicerar båda led med $r^2$. Avståndet försvinner, eftersom båda krafterna avtar på samma sätt med avståndet.
+
+$$ k \\cdot (N \\cdot q_\\mathrm{e})^2 = G \\cdot m^2 $$
+
+Alla storheter är positiva, så vi drar den positiva roten ur båda led.
+
+$$ \\sqrt{k} \\cdot N \\cdot q_\\mathrm{e} = \\sqrt{G} \\cdot m $$
+
+Vi dividerar båda led med $m \\cdot \\sqrt{k} \\cdot q_\\mathrm{e}$ och får det sökta antalet elektroner per kilogram.
+
+$$ \\frac{N}{m} = \\frac{1}{q_\\mathrm{e}} \\cdot \\sqrt{\\frac{G}{k}} $$
+
+$$
+\\left[ \\begin{array}{l}
+q_\\mathrm{e} = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C} \\\\
+G = 6{,}67 \\cdot 10^{-11}\\ \\mathrm{N \\cdot m^2 / kg^2} \\\\
+k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2}
+\\end{array} \\right]
+$$
+
+$$ \\frac{N}{m} = \\frac{1}{1{,}602 \\cdot 10^{-19}} \\cdot \\sqrt{\\frac{6{,}67 \\cdot 10^{-11}}{8{,}99 \\cdot 10^9}} = 5{,}376\\ldots \\cdot 10^8\\ \\mathrm{kg^{-1}} \\approx 538 \\cdot 10^6\\ \\mathrm{kg^{-1}} $$
+
+**Rimlighet:** Ett kilogram metall innehåller mer än $10^{26}$ elektroner. Det räcker alltså med ett ofattbart litet överskott, eftersom den elektriska kraften är så mycket starkare än gravitationskraften.
+
+**Svar:** 538 miljoner elektroner per kilogram. Avståndet spelar ingen roll.`,
         },
     ],
 
@@ -37829,12 +41645,12 @@ $$ I_2 = 0{,}90 - 0{,}55 = 0{,}35\\ \\mathrm{A} $$
 
 **Svar:** Strömmen genom den högra grenen är $I_2 = 0{,}35\\ \\mathrm{A}$.
 
-**Generell slutsats:** Strömmen kan aldrig "försvinna" eller "fastna" i en förgrening — allt som går in måste komma ut. Grenströmmarna adderas till huvudströmmen.`,
+**Generell slutsats:** Strömmen kan aldrig "försvinna" eller "fastna" i en förgrening: allt som går in måste komma ut. Grenströmmarna adderas till huvudströmmen.`,
         },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
-            level: 2,
+            level: 1,
             question: `Ett uppladdningsbart batteri är märkt $2{,}0\\ \\mathrm{Ah}$ (amperetimmar). Det driver en lampa som drar strömmen $0{,}25\\ \\mathrm{A}$. Hur länge räcker batteriet innan det är urladdat? Svara i timmar.`,
             answer: { value: 8.0, unit: 'h' },
             solution: `Märkningen $2{,}0\\ \\mathrm{Ah}$ betyder att batteriet kan leverera laddningen $Q = 2{,}0\\ \\mathrm{Ah}$. Vi löser ut tiden *t* ur strömformeln:
@@ -37854,10 +41670,10 @@ $$ t = \\frac{2{,}0}{0{,}25} = 8{,}0\\ \\mathrm{h} $$
 
 **Svar:** Batteriet räcker i $8{,}0$ timmar.
 
-**Generell slutsats:** Enheten amperetimme är skräddarsydd för just den här beräkningen — ett batteri på "X Ah" levererar strömmen 1 A i X timmar, eller 0,5 A i 2X timmar, osv. Man behöver inte omvandla till coulomb om både laddning (Ah) och ström (A) hålls i samma "system".`,
+**Generell slutsats:** Enheten amperetimme är skräddarsydd för just den här beräkningen. Ett batteri på "X Ah" levererar strömmen 1 A i X timmar, eller 0,5 A i 2X timmar, osv. Man behöver inte omvandla till coulomb om både laddning (Ah) och ström (A) hålls i samma "system".`,
         },
         {
-            level: 2,
+            level: 1,
             question: `Genom en ledare går strömmen $0{,}50\\ \\mathrm{A}$. Hur många elektroner passerar ett tvärsnitt i ledaren under $1{,}0\\ \\mathrm{s}$? Elementarladdningen är $q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$.`,
             answer: { value: 3.1e18, unit: 'st' },
             solution: `Vi beräknar först laddningen *Q* som passerar under sekunden:
@@ -37879,7 +41695,7 @@ $$ n = \\frac{0{,}50}{1{,}602 \\cdot 10^{-19}} = 3{,}12 \\cdot 10^{18}\\ \\text{
 
 **Svar:** Ungefär $3{,}1 \\cdot 10^{18}$ elektroner.
 
-**Generell slutsats:** Även en ganska blygsam ström motsvarar ett enormt antal elektroner per sekund — laddningen hos en enda elektron är extremt liten.`,
+**Generell slutsats:** Även en ganska blygsam ström motsvarar ett enormt antal elektroner per sekund. Laddningen hos en enda elektron är extremt liten.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
@@ -37887,15 +41703,15 @@ $$ n = \\frac{0{,}50}{1{,}602 \\cdot 10^{-19}} = 3{,}12 \\cdot 10^{18}\\ \\text{
             level: 2,
             question: `Ett uppladdningsbart batteri är märkt $2{,}4\\ \\mathrm{Ah}$. Det laddas ur helt på exakt ett dygn med konstant ström. Hur många elektroner passerar i genomsnitt genom kretsen varje sekund? ($1\\ \\mathrm{Ah} = 3\\,600\\ \\mathrm{C}$, $q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$)`,
             answer: { value: 6.2e17, unit: 'st' },
-            solution: `**Steg 1 — total laddning i coulomb.** Märkningen $2{,}4\\ \\mathrm{Ah}$ omvandlas till coulomb:
+            solution: `**Steg 1: total laddning i coulomb.** Märkningen $2{,}4\\ \\mathrm{Ah}$ omvandlas till coulomb:
 
 $$ Q = 2{,}4\\ \\mathrm{Ah} = 2{,}4 \\cdot 3\\,600\\ \\mathrm{C} = 8\\,640\\ \\mathrm{C} $$
 
-**Steg 2 — strömmen.** Urladdningen sker under ett dygn, $t = 24 \\cdot 3\\,600\\ \\mathrm{s} = 86\\,400\\ \\mathrm{s}$. Strömmen blir
+**Steg 2: strömmen.** Urladdningen sker under ett dygn, $t = 24 \\cdot 3\\,600\\ \\mathrm{s} = 86\\,400\\ \\mathrm{s}$. Strömmen blir
 
 $$ I = \\frac{Q}{t} = \\frac{8\\,640}{86\\,400} = 0{,}10\\ \\mathrm{A} $$
 
-**Steg 3 — elektroner per sekund.** Under en sekund passerar laddningen $Q_1 = I \\cdot t_1 = 0{,}10 \\cdot 1{,}0 = 0{,}10\\ \\mathrm{C}$. Antalet elektroner är
+**Steg 3: elektroner per sekund.** Under en sekund passerar laddningen $Q_1 = I \\cdot t_1 = 0{,}10 \\cdot 1{,}0 = 0{,}10\\ \\mathrm{C}$. Antalet elektroner är
 
 $$ n = \\frac{Q_1}{q_e} = \\frac{0{,}10}{1{,}602 \\cdot 10^{-19}} = 6{,}24 \\cdot 10^{17}\\ \\text{st} \\approx 6{,}2 \\cdot 10^{17}\\ \\text{st} $$
 
@@ -37904,7 +41720,7 @@ $$ n = \\frac{Q_1}{q_e} = \\frac{0{,}10}{1{,}602 \\cdot 10^{-19}} = 6{,}24 \\cdo
 **Generell slutsats:** Uppgiften kopplar ihop tre samband: enhetsomvandlingen $\\mathrm{Ah} \\to \\mathrm{C}$, strömdefinitionen $I = Q/t$ och elektronräkningen $n = Q/q_e$. Den vanligaste fällan är att blanda ihop *total* laddning (hela urladdningen) med laddningen *per sekund*.`,
         },
         {
-            level: 3,
+            level: 2,
             question: `Diagrammet visar strömmen genom en ledare som funktion av tiden. Bestäm den totala laddning som passerat ett tvärsnitt under de första 10 sekunderna, och hur många elektroner det motsvarar. ($q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$)
 
 ${makeDiagram({
@@ -37915,7 +41731,7 @@ ${makeDiagram({
     paths: [{ points: [[0, 0], [4, 2], [10, 2]] }],
 })}`,
             answer: { value: 1.0e20, unit: 'st' },
-            solution: `Strömmen är *inte* konstant, så vi kan inte använda $Q = I \\cdot t$ med ett enda strömvärde. Eftersom $I = \\dfrac{Q}{t}$ motsvarar laddningen **arean under** *I-t*-grafen — precis som sträckan är arean under en *v-t*-graf.
+            solution: `Strömmen är *inte* konstant, så vi kan inte använda $Q = I \\cdot t$ med ett enda strömvärde. Eftersom $I = \\dfrac{Q}{t}$ motsvarar laddningen **arean under** *I-t*-grafen, precis som sträckan är arean under en *v-t*-graf.
 
 ${makeDiagram({
     xMax: 10, yMax: 2.5,
@@ -37946,7 +41762,605 @@ $$ n = \\frac{Q}{q_e} = \\frac{16}{1{,}602 \\cdot 10^{-19}} = 9{,}99 \\cdot 10^{
 
 **Svar:** Laddningen är $16\\ \\mathrm{C}$, vilket motsvarar ungefär $1{,}0 \\cdot 10^{20}$ elektroner.
 
-**Generell slutsats:** Fällan är att gripa efter $Q = I \\cdot t$ — men med vilket *I*? När strömmen varierar är laddningen arean under grafen. Samma princip som att sträcka = area under *v-t*-graf och $\\Delta v$ = area under *a-t*-graf.`,
+**Generell slutsats:** Fällan är att gripa efter $Q = I \\cdot t$, men med vilket *I*? När strömmen varierar är laddningen arean under grafen. Samma princip som att sträcka = area under *v-t*-graf och $\\Delta v$ = area under *a-t*-graf.`,
+        },
+        {
+            level: 1,
+            question: `En metalltråd kopplas mellan polerna på ett batteri. Vilket påstående är riktigt?`,
+            choices: [
+                'Elektronerna rör sig från pluspolen till minuspolen, och strömmens riktning är densamma.',
+                'Elektronerna rör sig från pluspolen till minuspolen, och strömmens riktning är den motsatta.',
+                'Elektronerna rör sig från minuspolen till pluspolen, och strömmens riktning är den motsatta.',
+                'Elektronerna rör sig från minuspolen till pluspolen, och strömmens riktning är densamma.',
+            ],
+            correct: 2,
+            solution: `Elektronerna är negativt laddade. De repelleras av minuspolen och attraheras av pluspolen, så i tråden rör de sig **från minuspolen till pluspolen**.
+
+Strömmens riktning är definierad i det elektriska fältets riktning, från pluspolen till minuspolen. Den är alltså motsatt elektronernas rörelseriktning.
+
+**Svar:** Elektronerna rör sig från minuspolen till pluspolen, och strömmens riktning är den motsatta.`,
+        },
+        {
+            level: 1,
+            question: `En hjärtstartare skickar laddningen $0{,}18\\ \\mathrm{C}$ genom en patients bröstkorg på $6{,}0\\ \\mathrm{ms}$. Hur stor är medelströmmen? Svara i ampere.`,
+            answer: { value: 30, unit: 'A' },
+            solution: `Medelströmmen är laddningen som passerar dividerad med tiden:
+
+$$ I = \\frac{Q}{t} $$
+
+$$
+\\left[ \\begin{array}{l}
+Q = 0{,}18\\ \\mathrm{C} \\\\
+t = 6{,}0\\ \\mathrm{ms} = 6{,}0 \\cdot 10^{-3}\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ I = \\frac{0{,}18}{6{,}0 \\cdot 10^{-3}} = 30\\ \\mathrm{A} $$
+
+Strömmen är stor, men den pågår bara några tusendels sekunder.
+
+**Svar:** Medelströmmen är $30\\ \\mathrm{A}$.`,
+        },
+        {
+            level: 1,
+            question: `Ett batteri till en hörapparat är märkt $675\\ \\mathrm{mAh}$. Hur stor laddning motsvarar det? Svara i coulomb.`,
+            answer: { value: 2430, unit: 'C' },
+            solution: `En amperetimme är den laddning som passerar när strömmen är $1\\ \\mathrm{A}$ under en timme, det vill säga under $3\\,600\\ \\mathrm{s}$:
+
+$$ 1\\ \\mathrm{Ah} = 3\\,600\\ \\mathrm{C} $$
+
+Vi skriver först om laddningen till amperetimmar:
+
+$$ Q = 675\\ \\mathrm{mAh} = 0{,}675\\ \\mathrm{Ah} $$
+
+$$ Q = 0{,}675 \\cdot 3\\,600 = 2\\,430\\ \\mathrm{C} $$
+
+**Svar:** Laddningen är $2\\,430\\ \\mathrm{C}$.`,
+        },
+        {
+            level: 1,
+            question: `Fem ledare möts i en knutpunkt. Pilarna visar strömmarnas riktningar. Bestäm strömmen $I_5$. Svara i ampere.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 344" style="max-width:520px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="135.0" y1="166.0" x2="260.0" y2="166.0" stroke="#0f1620" stroke-width="2.2"/><polygon points="202.5,166.0 187.5,172.5 187.5,159.5" fill="#c8324a"/><line x1="221.4" y1="47.1" x2="260.0" y2="166.0" stroke="#0f1620" stroke-width="2.2"/><polygon points="242.2,111.3 231.4,99.1 243.8,95.0" fill="#c8324a"/><line x1="260.0" y1="166.0" x2="361.1" y2="92.5" stroke="#0f1620" stroke-width="2.2"/><polygon points="318.7,123.4 310.3,137.5 302.7,126.9" fill="#c8324a"/><line x1="260.0" y1="166.0" x2="361.1" y2="239.5" stroke="#0f1620" stroke-width="2.2"/><polygon points="318.7,208.6 302.7,205.1 310.3,194.5" fill="#c8324a"/><line x1="260.0" y1="166.0" x2="221.4" y2="284.9" stroke="#0f1620" stroke-width="2.2"/><polygon points="237.6,235.0 236.0,218.7 248.4,222.7" fill="#c8324a"/><circle cx="260.0" cy="166.0" r="4.5" fill="#0f1620"/><text x="127.0" y="172.0" font-size="17" fill="#0f1620" text-anchor="end"><tspan font-style="italic">I</tspan><tspan font-size="12" dy="4">1</tspan><tspan dy="-4"> = 1,20 A</tspan></text><text x="221.4" y="37.1" font-size="17" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">I</tspan><tspan font-size="12" dy="4">2</tspan><tspan dy="-4"> = 0,45 A</tspan></text><text x="369.1" y="96.5" font-size="17" fill="#0f1620" text-anchor="start"><tspan font-style="italic">I</tspan><tspan font-size="12" dy="4">3</tspan><tspan dy="-4"> = 0,80 A</tspan></text><text x="369.1" y="247.5" font-size="17" fill="#0f1620" text-anchor="start"><tspan font-style="italic">I</tspan><tspan font-size="12" dy="4">4</tspan><tspan dy="-4"> = 0,35 A</tspan></text><text x="221.4" y="308.9" font-size="17" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">I</tspan><tspan font-size="12" dy="4">5</tspan></text></svg>`,
+            answer: { value: 0.50, unit: 'A' },
+            solution: `Enligt **Kirchhoffs första lag** är summan av strömmarna in i punkten lika med summan av strömmarna ut från punkten. Pilarna visar att $I_1$ och $I_2$ går in, medan $I_3$, $I_4$ och $I_5$ går ut:
+
+$$ I_1 + I_2 = I_3 + I_4 + I_5 $$
+
+Vi löser ut $I_5$:
+
+$$ I_5 = I_1 + I_2 - I_3 - I_4 $$
+
+$$
+\\left[ \\begin{array}{l}
+I_1 = 1{,}20\\ \\mathrm{A} \\\\
+I_2 = 0{,}45\\ \\mathrm{A} \\\\
+I_3 = 0{,}80\\ \\mathrm{A} \\\\
+I_4 = 0{,}35\\ \\mathrm{A}
+\\end{array} \\right]
+$$
+
+$$ I_5 = 1{,}20 + 0{,}45 - 0{,}80 - 0{,}35 = 0{,}50\\ \\mathrm{A} $$
+
+**Svar:** $I_5 = 0{,}50\\ \\mathrm{A}$`,
+        },
+        {
+            level: 2,
+            question: `Figuren visar en del av en krets med knutpunkterna A, B och C. Strömmen $I_{\\mathrm{A}}$ går in i A, $I_{\\mathrm{B}}$ och $I_{\\mathrm{C}}$ går ut från B och C. I ledaren mellan A och B går strömmen från A till B. Bestäm<br>a) strömmen $I_{\\mathrm{AC}}$ mellan A och C<br>b) strömmen $I_{\\mathrm{BC}}$ mellan B och C, och dess riktning<br>c) strömmen $I_{\\mathrm{C}}$. Svara i ampere.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 300" style="max-width:540px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="40.0" y1="150.0" x2="170.0" y2="150.0" stroke="#0f1620" stroke-width="2.2"/><polygon points="112.5,150.0 97.5,156.5 97.5,143.5" fill="#c8324a"/><line x1="170.0" y1="150.0" x2="380.0" y2="62.0" stroke="#0f1620" stroke-width="2.2"/><polygon points="281.9,103.1 270.6,114.9 265.6,102.9" fill="#c8324a"/><line x1="170.0" y1="150.0" x2="380.0" y2="238.0" stroke="#0f1620" stroke-width="2.2"/><line x1="380.0" y1="62.0" x2="380.0" y2="238.0" stroke="#0f1620" stroke-width="2.2"/><line x1="380.0" y1="62.0" x2="500.0" y2="62.0" stroke="#0f1620" stroke-width="2.2"/><polygon points="447.5,62.0 432.5,68.5 432.5,55.5" fill="#c8324a"/><line x1="380.0" y1="238.0" x2="500.0" y2="238.0" stroke="#0f1620" stroke-width="2.2"/><polygon points="447.5,238.0 432.5,244.5 432.5,231.5" fill="#c8324a"/><circle cx="170.0" cy="150.0" r="4.5" fill="#0f1620"/><circle cx="380.0" cy="62.0" r="4.5" fill="#0f1620"/><circle cx="380.0" cy="238.0" r="4.5" fill="#0f1620"/><text x="168.0" y="136.0" font-size="17" fill="#0f1620" text-anchor="end">A</text><text x="380.0" y="46.0" font-size="17" fill="#0f1620" text-anchor="middle">B</text><text x="380.0" y="264.0" font-size="17" fill="#0f1620" text-anchor="middle">C</text><text x="105.0" y="180.0" font-size="17" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">I</tspan><tspan font-size="12" dy="4">A</tspan><tspan dy="-4"> = 0,90 A</tspan></text><text x="262.0" y="90.0" font-size="17" fill="#0f1620" text-anchor="end"><tspan font-style="italic">I</tspan><tspan font-size="12" dy="4">AB</tspan><tspan dy="-4"> = 0,35 A</tspan></text><text x="262.0" y="222.0" font-size="17" fill="#0f1620" text-anchor="end"><tspan font-style="italic">I</tspan><tspan font-size="12" dy="4">AC</tspan></text><text x="394.0" y="155.0" font-size="17" fill="#0f1620" text-anchor="start"><tspan font-style="italic">I</tspan><tspan font-size="12" dy="4">BC</tspan></text><text x="455.0" y="44.0" font-size="17" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">I</tspan><tspan font-size="12" dy="4">B</tspan><tspan dy="-4"> = 0,50 A</tspan></text><text x="455.0" y="270.0" font-size="17" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">I</tspan><tspan font-size="12" dy="4">C</tspan></text></svg>`,
+            answer: { value: 0.55, unit: 'A' },
+            delsvar: [
+                { del: 'a', value: 0.55, unit: 'A' },
+                { del: 'b', value: 0.15, unit: 'A', etikett: 'storlek' },
+                { del: 'c', value: 0.40, unit: 'A' },
+            ],
+            solution: `Vi använder Kirchhoffs första lag i en knutpunkt i taget.
+
+**a)** I punkten A går strömmen $I_{\\mathrm{A}}$ in. Den delar sig i $I_{\\mathrm{AB}}$ och $I_{\\mathrm{AC}}$:
+
+$$ I_{\\mathrm{A}} = I_{\\mathrm{AB}} + I_{\\mathrm{AC}} \\quad\\Leftrightarrow\\quad I_{\\mathrm{AC}} = I_{\\mathrm{A}} - I_{\\mathrm{AB}} $$
+
+$$ I_{\\mathrm{AC}} = 0{,}90 - 0{,}35 = 0{,}55\\ \\mathrm{A} $$
+
+**Svar:** $I_{\\mathrm{AC}} = 0{,}55\\ \\mathrm{A}$
+
+**b)** Till B kommer $0{,}35\\ \\mathrm{A}$ från A, men $0{,}50\\ \\mathrm{A}$ går ut åt höger. Det som fattas måste komma in genom ledaren från C. Strömmen går alltså från C till B:
+
+$$ I_{\\mathrm{AB}} + I_{\\mathrm{BC}} = I_{\\mathrm{B}} \\quad\\Leftrightarrow\\quad I_{\\mathrm{BC}} = I_{\\mathrm{B}} - I_{\\mathrm{AB}} $$
+
+$$ I_{\\mathrm{BC}} = 0{,}50 - 0{,}35 = 0{,}15\\ \\mathrm{A} $$
+
+**Svar:** $I_{\\mathrm{BC}} = 0{,}15\\ \\mathrm{A}$, riktad från C till B.
+
+**c)** Till C kommer $I_{\\mathrm{AC}}$ in, medan $I_{\\mathrm{BC}}$ och $I_{\\mathrm{C}}$ går ut:
+
+$$ I_{\\mathrm{AC}} = I_{\\mathrm{BC}} + I_{\\mathrm{C}} \\quad\\Leftrightarrow\\quad I_{\\mathrm{C}} = I_{\\mathrm{AC}} - I_{\\mathrm{BC}} $$
+
+$$ I_{\\mathrm{C}} = 0{,}55 - 0{,}15 = 0{,}40\\ \\mathrm{A} $$
+
+Kontroll: strömmarna ut från hela nätet är $0{,}50 + 0{,}40 = 0{,}90\\ \\mathrm{A}$, lika mycket som $I_{\\mathrm{A}}$ in.
+
+**Svar:** $I_{\\mathrm{C}} = 0{,}40\\ \\mathrm{A}$`,
+        },
+        {
+            level: 2,
+            question: `Ett batteri till en elcykel är laddat till $20\\ \\%$ när laddaren kopplas in. Diagrammet visar laddströmmen. När strömmen har sjunkit till noll är batteriet fulladdat.
+
+${makeDiagram({
+    xMax: 4.5, yMax: 5,
+    xTicks: [0, 1, 2, 3, 4], yTicks: [0, 1, 2, 3, 4],
+    xLabel: '<tspan font-style="italic">t</tspan> (h)',
+    yLabel: '<tspan font-style="italic">I</tspan> (A)',
+    paths: [{ points: [[0, 4], [2, 4], [4, 0]] }],
+})}
+
+a) Hur stor laddning tar batteriet emot? Svara i coulomb.<br>b) Hur stor laddning rymmer batteriet när det är fulladdat? Svara i Ah.`,
+            answer: { value: 43000, unit: 'C' },
+            delsvar: [
+                { del: 'a', value: 43000, unit: 'C' },
+                { del: 'b', value: 15, unit: 'Ah' },
+            ],
+            solution: `**a)** Eftersom $Q = I \\cdot t$ motsvarar laddningen arean mellan grafen och tidsaxeln, även när strömmen ändras. Med strömmen i ampere och tiden i timmar får arean enheten Ah.
+
+${makeDiagram({
+    xMax: 4.5, yMax: 5,
+    xTicks: [0, 1, 2, 3, 4], yTicks: [0, 1, 2, 3, 4],
+    xLabel: '<tspan font-style="italic">t</tspan> (h)',
+    yLabel: '<tspan font-style="italic">I</tspan> (A)',
+    paths: [{ points: [[0, 4], [2, 4], [4, 0]] }],
+    fills: [
+        { points: [[0, 0], [0, 4], [2, 4], [2, 0]] },
+        { points: [[2, 0], [2, 4], [4, 0]], color: 'rgba(28,61,107,0.16)' },
+    ],
+})}
+
+Arean består av en rektangel (de två första timmarna) och en triangel (de två sista):
+
+$$ Q = 4{,}0 \\cdot 2{,}0 + \\frac{4{,}0 \\cdot 2{,}0}{2} = 8{,}0 + 4{,}0 = 12\\ \\mathrm{Ah} $$
+
+$$ Q = 12 \\cdot 3\\,600 = 43\\,200\\ \\mathrm{C} \\approx 43\\,000\\ \\mathrm{C} $$
+
+**Svar:** Batteriet tar emot laddningen $43\\,000\\ \\mathrm{C}$.
+
+**b)** Batteriet laddas från $20\\ \\%$ till $100\\ \\%$. De $12\\ \\mathrm{Ah}$ som tillförs är alltså $80\\ \\%$ av den laddning $Q_\\mathrm{full}$ som batteriet rymmer:
+
+$$ 0{,}80 \\cdot Q_\\mathrm{full} = 12 $$
+
+$$ Q_\\mathrm{full} = \\frac{12}{0{,}80} = 15\\ \\mathrm{Ah} $$
+
+Svaret är rimligt, för det är lite mer än de $12\\ \\mathrm{Ah}$ som tillfördes.
+
+**Svar:** Batteriet rymmer $15\\ \\mathrm{Ah}$.`,
+        },
+        {
+            level: 2,
+            question: `En aktivitetsklocka har ett batteri på $420\\ \\mathrm{mAh}$. Tabellen visar hur klockan används under ett genomsnittligt dygn.
+
+| Läge | Ström (mA) | Tid per dygn (h) |
+| --- | --- | --- |
+| Vila | 1,5 | 22,0 |
+| Skärmen tänd | 40 | 1,5 |
+| Satellitnavigering | 90 | 0,50 |
+
+a) Hur många dygn räcker ett fulladdat batteri?<br>b) Ägaren påstår att batteriet skulle räcka mer än dubbelt så länge om satellitnavigeringen aldrig användes, och klockan i stället var i vila den tiden. Undersök påståendet.`,
+            answer: { value: 3.0, unit: 'dygn', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 3.0, unit: 'dygn', tol: 0.04 },
+                { del: 'b' },
+            ],
+            solution: `**a)** Vi räknar ut hur stor laddning klockan använder per dygn i varje läge, med $Q = I \\cdot t$. Med strömmen i mA och tiden i h får vi laddningen i mAh.
+
+$$ Q_\\mathrm{vila} = 1{,}5 \\cdot 22{,}0 = 33\\ \\mathrm{mAh} $$
+
+$$ Q_\\mathrm{skärm} = 40 \\cdot 1{,}5 = 60\\ \\mathrm{mAh} $$
+
+$$ Q_\\mathrm{nav} = 90 \\cdot 0{,}50 = 45\\ \\mathrm{mAh} $$
+
+Sammanlagd laddning per dygn:
+
+$$ Q = 33 + 60 + 45 = 138\\ \\mathrm{mAh} $$
+
+Antalet dygn är batteriets laddning dividerad med laddningen per dygn:
+
+$$ \\frac{420}{138} = 3{,}04\\ldots \\approx 3{,}0 $$
+
+**Svar:** Batteriet räcker i $3{,}0$ dygn.
+
+**b)** Utan satellitnavigering är klockan i vila $22{,}5\\ \\mathrm{h}$ per dygn. Laddningen per dygn blir då
+
+$$ Q = 1{,}5 \\cdot 22{,}5 + 60 = 93{,}75\\ \\mathrm{mAh} $$
+
+$$ \\frac{420}{93{,}75} = 4{,}48 \\approx 4{,}5 $$
+
+Batteriet räcker i ungefär $4{,}5$ dygn. För att räcka i minst dubbelt så lång tid skulle klockan få använda högst hälften av $138\\ \\mathrm{mAh}$, det vill säga $69\\ \\mathrm{mAh}$ per dygn. Skärmen och vilan använder tillsammans mer än så.
+
+**Svar:** Påståendet är falskt. Batteriet räcker ungefär en och en halv gång så länge.`,
+        },
+        {
+            level: 2,
+            question: `Från en strömbrytare till en taklampa är ledningen $2{,}7\\ \\mathrm{m}$ lång. När lampan lyser med likström är elektronernas drifthastighet i ledningen $0{,}10\\ \\mathrm{mm/s}$.<br>a) Hur lång tid tar det för en elektron vid strömbrytaren att nå lampan? Svara i timmar.<br>b) Förklara varför lampan ändå tänds nästan genast när man trycker på strömbrytaren.`,
+            answer: { value: 7.5, unit: 'h' },
+            delsvar: [
+                { del: 'a', value: 7.5, unit: 'h' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Tiden är sträckan dividerad med hastigheten:
+
+$$ t = \\frac{s}{v} $$
+
+$$
+\\left[ \\begin{array}{l}
+s = 2{,}7\\ \\mathrm{m} \\\\
+v = 0{,}10\\ \\mathrm{mm/s} = 1{,}0 \\cdot 10^{-4}\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$ t = \\frac{2{,}7}{1{,}0 \\cdot 10^{-4}} = 27\\,000\\ \\mathrm{s} = \\frac{27\\,000}{3\\,600}\\ \\mathrm{h} = 7{,}5\\ \\mathrm{h} $$
+
+**Svar:** Det tar $7{,}5\\ \\mathrm{h}$.
+
+**b)** Ledningen och lampans glödtråd är redan fulla av rörliga elektroner, även när strömbrytaren är öppen. När den sluts breder det elektriska fältet ut sig genom kretsen med en hastighet som är nästan lika stor som ljusets. Fältet sätter fart på alla elektroner nästan samtidigt, också dem som redan finns i glödtråden.
+
+**Svar:** Lampan väntar inte på elektronerna vid strömbrytaren. Det elektriska fältet når lampan nästan genast och sätter fart på de elektroner som redan finns där.`,
+        },
+        {
+            level: 2,
+            question: `I vilket av fallen passerar störst laddning?`,
+            choices: [
+                'Strömmen $5{,}0\\ \\mathrm{A}$ går i $2{,}0\\ \\mathrm{min}$.',
+                'Strömmen $0{,}20\\ \\mathrm{A}$ går i $1{,}0\\ \\mathrm{h}$.',
+                'Ett batteri på $180\\ \\mathrm{mAh}$ laddas ur helt.',
+                '$3{,}6 \\cdot 10^{21}$ elektroner passerar.',
+            ],
+            correct: 1,
+            solution: `Vi skriver alla laddningar i coulomb. Där strömmen är given används $Q = I \\cdot t$ med tiden i sekunder.
+
+$$ 5{,}0 \\cdot 2{,}0 \\cdot 60 = 600\\ \\mathrm{C} $$
+
+$$ 0{,}20 \\cdot 3\\,600 = 720\\ \\mathrm{C} $$
+
+Batteriet rymmer $180\\ \\mathrm{mAh} = 0{,}180\\ \\mathrm{Ah}$, och $1\\ \\mathrm{Ah} = 3\\,600\\ \\mathrm{C}$:
+
+$$ 0{,}180 \\cdot 3\\,600 = 648\\ \\mathrm{C} $$
+
+Varje elektron har laddningens belopp $q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$:
+
+$$ 3{,}6 \\cdot 10^{21} \\cdot 1{,}602 \\cdot 10^{-19} \\approx 577\\ \\mathrm{C} $$
+
+**Svar:** Strömmen $0{,}20\\ \\mathrm{A}$ går i $1{,}0\\ \\mathrm{h}$ ger störst laddning, $720\\ \\mathrm{C}$.`,
+        },
+        {
+            level: 3,
+            question: `En koppartråd med tvärsnittsarean $1{,}0\\ \\mathrm{mm^2}$ leder strömmen $1{,}5\\ \\mathrm{A}$. Koppar har densiteten $8\\,960\\ \\mathrm{kg/m^3}$, en kopparatom har massan $1{,}055 \\cdot 10^{-25}\\ \\mathrm{kg}$ och varje atom bidrar med en rörlig elektron. Ställ upp ett generellt uttryck för elektronernas drifthastighet och beräkna den. Svara i mm/s.`,
+            answer: { value: 0.11, unit: 'mm/s', tol: 0.03 },
+            solution: `Vi betraktar de elektroner som passerar ett tvärsnitt under tiden *t*. Inför beteckningarna
+
+- *A* = trådens tvärsnittsarea (m²)
+- *v* = elektronernas drifthastighet (m/s)
+- *ρ* = kopparns densitet (kg/m³)
+- $m_{\\mathrm{a}}$ = en kopparatoms massa (kg)
+
+Under tiden *t* hinner elektronerna sträckan $v \\cdot t$. Alla rörliga elektroner som från början finns i en trådbit med den längden hinner alltså passera tvärsnittet. Trådbitens volym är
+
+$$ V = A \\cdot v \\cdot t $$
+
+Kopparns massa i trådbiten är $m = \\rho \\cdot V$. Antalet atomer är massan dividerad med massan av en atom. Eftersom varje atom bidrar med en rörlig elektron är antalet elektroner lika stort:
+
+$$ n = \\frac{\\rho \\cdot V}{m_{\\mathrm{a}}} = \\frac{\\rho \\cdot A \\cdot v \\cdot t}{m_{\\mathrm{a}}} $$
+
+Laddningen som passerar är $Q = n \\cdot q_e$. Strömmen blir
+
+$$ I = \\frac{Q}{t} = \\frac{n \\cdot q_e}{t} = \\frac{\\rho \\cdot A \\cdot v \\cdot t \\cdot q_e}{m_{\\mathrm{a}} \\cdot t} = \\frac{\\rho \\cdot A \\cdot v \\cdot q_e}{m_{\\mathrm{a}}} $$
+
+Tiden förkortas bort, så den behöver inte vara känd. Vi löser ut drifthastigheten:
+
+$$ v = \\frac{I \\cdot m_{\\mathrm{a}}}{\\rho \\cdot A \\cdot q_e} $$
+
+$$
+\\left[ \\begin{array}{l}
+I = 1{,}5\\ \\mathrm{A} \\\\
+m_{\\mathrm{a}} = 1{,}055 \\cdot 10^{-25}\\ \\mathrm{kg} \\\\
+\\rho = 8\\,960\\ \\mathrm{kg/m^3} \\\\
+A = 1{,}0\\ \\mathrm{mm^2} = 1{,}0 \\cdot 10^{-6}\\ \\mathrm{m^2} \\\\
+q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}
+\\end{array} \\right]
+$$
+
+$$ v = \\frac{1{,}5 \\cdot 1{,}055 \\cdot 10^{-25}}{8\\,960 \\cdot 1{,}0 \\cdot 10^{-6} \\cdot 1{,}602 \\cdot 10^{-19}} \\approx 1{,}1 \\cdot 10^{-4}\\ \\mathrm{m/s} = 0{,}11\\ \\mathrm{mm/s} $$
+
+**Rimlighet:** Drifthastigheter i vanliga ledningar brukar vara omkring $0{,}1\\ \\mathrm{mm/s}$. Hastigheten kan vara så låg för att antalet rörliga elektroner i tråden är enormt.
+
+**Svar:** $v = \\dfrac{I \\cdot m_{\\mathrm{a}}}{\\rho \\cdot A \\cdot q_e}$, vilket ger $0{,}11\\ \\mathrm{mm/s}$.`,
+        },
+        {
+            level: 3,
+            question: `En metalltråd består av två lika långa delar av samma metall. Den tjocka delen har dubbelt så stor diameter som den smala. En konstant ström *I* går genom tråden.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 268" style="max-width:520px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><path d="M 70 78 H 260 V 99 H 450 V 141 H 260 V 162 H 70 Z" fill="#e7c9a6" stroke="#0f1620" stroke-width="2"/><line x1="205.0" y1="44.0" x2="302.0" y2="44.0" stroke="#c8324a" stroke-width="2.6"/><polygon points="315.0,44.0 302.0,50.0 302.0,38.0" fill="#c8324a"/><text x="260.0" y="32.0" font-size="17" fill="#c8324a" text-anchor="middle"><tspan font-style="italic">I</tspan></text><line x1="66.0" y1="78.0" x2="36.0" y2="78.0" stroke="#6b6558" stroke-width="1.2" stroke-dasharray="4 4"/><line x1="66.0" y1="162.0" x2="36.0" y2="162.0" stroke="#6b6558" stroke-width="1.2" stroke-dasharray="4 4"/><line x1="46.0" y1="78.0" x2="46.0" y2="162.0" stroke="#6b6558" stroke-width="1.4"/><polygon points="46.0,162.0 42.5,154.0 49.5,154.0" fill="#6b6558"/><polygon points="46.0,78.0 49.5,86.0 42.5,86.0" fill="#6b6558"/><text x="34.0" y="126.0" font-size="17" fill="#0f1620" text-anchor="end">2<tspan font-style="italic">d</tspan></text><line x1="454.0" y1="99.0" x2="486.0" y2="99.0" stroke="#6b6558" stroke-width="1.2" stroke-dasharray="4 4"/><line x1="454.0" y1="141.0" x2="486.0" y2="141.0" stroke="#6b6558" stroke-width="1.2" stroke-dasharray="4 4"/><line x1="476.0" y1="99.0" x2="476.0" y2="141.0" stroke="#6b6558" stroke-width="1.4"/><polygon points="476.0,141.0 472.5,133.0 479.5,133.0" fill="#6b6558"/><polygon points="476.0,99.0 479.5,107.0 472.5,107.0" fill="#6b6558"/><text x="488.0" y="126.0" font-size="17" fill="#0f1620" text-anchor="start"><tspan font-style="italic">d</tspan></text><line x1="70.0" y1="166.0" x2="70.0" y2="214.0" stroke="#6b6558" stroke-width="1.2" stroke-dasharray="4 4"/><line x1="260.0" y1="166.0" x2="260.0" y2="214.0" stroke="#6b6558" stroke-width="1.2" stroke-dasharray="4 4"/><line x1="450.0" y1="145.0" x2="450.0" y2="214.0" stroke="#6b6558" stroke-width="1.2" stroke-dasharray="4 4"/><line x1="70.0" y1="205.0" x2="260.0" y2="205.0" stroke="#6b6558" stroke-width="1.4"/><polygon points="260.0,205.0 252.0,208.5 252.0,201.5" fill="#6b6558"/><polygon points="70.0,205.0 78.0,201.5 78.0,208.5" fill="#6b6558"/><line x1="260.0" y1="205.0" x2="450.0" y2="205.0" stroke="#6b6558" stroke-width="1.4"/><polygon points="450.0,205.0 442.0,208.5 442.0,201.5" fill="#6b6558"/><polygon points="260.0,205.0 268.0,201.5 268.0,208.5" fill="#6b6558"/><text x="165.0" y="232.0" font-size="17" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">L</tspan></text><text x="355.0" y="232.0" font-size="17" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">L</tspan></text></svg>
+
+Hur stor del av den tid det tar för en elektron att driva genom hela tråden tillbringar den i den tjocka delen? Svara i procent.`,
+            answer: { value: 80, unit: '%' },
+            solution: `**Strömmen är lika stor i båda delarna.** Laddning kan inte samlas i övergången, så enligt Kirchhoffs första lag är strömmen ut ur den tjocka delen lika stor som strömmen in i den smala.
+
+**Tiden genom en del.** Låt $Q$ vara den sammanlagda laddningen hos alla rörliga elektroner som finns i en trådbit. En elektron som just kommer in har hunnit igenom när alla elektroner som låg före den har lämnat trådbiten, alltså när laddningen $Q$ har passerat ut. Tiden fås ur $I = \\dfrac{Q}{t}$:
+
+$$ t = \\frac{Q}{I} $$
+
+Eftersom *I* är densamma i båda delarna är tiden proportionell mot hur mycket rörlig laddning delen rymmer.
+
+**Laddningen i delarna.** Metallen är densamma, så antalet rörliga elektroner per volymenhet är lika i delarna. Laddningen är därför proportionell mot volymen. Med längden *L* och diametern *d* i den smala delen är volymerna
+
+$$ V_\\mathrm{smal} = \\pi \\cdot \\left(\\frac{d}{2}\\right)^2 \\cdot L = \\frac{\\pi \\cdot d^2 \\cdot L}{4} $$
+
+$$ V_\\mathrm{tjock} = \\pi \\cdot \\left(\\frac{2d}{2}\\right)^2 \\cdot L = \\pi \\cdot d^2 \\cdot L $$
+
+Den tjocka delen har alltså fyra gånger så stor volym. Den rymmer fyra gånger så mycket rörlig laddning, och det tar fyra gånger så lång tid att driva genom den:
+
+$$ t_\\mathrm{tjock} = 4 \\cdot t_\\mathrm{smal} $$
+
+**Andelen av tiden** blir
+
+$$ \\frac{t_\\mathrm{tjock}}{t_\\mathrm{tjock} + t_\\mathrm{smal}} = \\frac{4 \\cdot t_\\mathrm{smal}}{4 \\cdot t_\\mathrm{smal} + t_\\mathrm{smal}} = \\frac{4}{5} = 0{,}80 $$
+
+Varken strömmen, längden, diametern eller metallen behöver vara kända, för de förkortas bort.
+
+**Rimlighet:** Elektronerna ska driva långsammare där det är gott om plats, precis som vatten rinner långsammare där en å är bred.
+
+**Svar:** Elektronen tillbringar $80\\ \\%$ av tiden i den tjocka delen.`,
+        },
+        {
+            level: 3,
+            question: `En uppladdad komponent laddas ur genom en lampa. Diagrammet visar strömmen under de första $40\\ \\mathrm{s}$. Strömmen fortsätter att minska enligt samma mönster därefter.
+
+${makeDiagram({
+    xMax: 40, yMax: 90,
+    xTicks: [0, 5, 10, 15, 20, 25, 30, 35, 40], yTicks: [0, 10, 20, 30, 40, 50, 60, 70, 80],
+    xLabel: '<tspan font-style="italic">t</tspan> (s)',
+    yLabel: '<tspan font-style="italic">I</tspan> (mA)',
+    paths: [{ points: Array.from({ length: 81 }, (_, i) => [i / 2, 80 * Math.pow(0.5, i / 20)]) }],
+})}
+
+Uppskatta hur stor laddning som sammanlagt passerar genom lampan, från $t = 0$ tills strömmen i praktiken har upphört. Svara i coulomb.`,
+            answer: { value: 1.2, unit: 'C', tol: 0.08 },
+            solution: `Laddningen motsvarar arean under *I*-*t*-grafen, men grafen når aldrig riktigt fram till tidsaxeln. Vi behöver därför hitta ett mönster som också beskriver det som inte syns.
+
+**Mönstret.** Vi läser av strömmen var tionde sekund:
+
+| Tid (s) | 0 | 10 | 20 | 30 | 40 |
+| --- | --- | --- | --- | --- | --- |
+| Ström (mA) | 80 | 40 | 20 | 10 | 5 |
+
+Strömmen halveras på varje tiosekundersperiod, oavsett var man börjar. Vid varje tidpunkt är strömmen alltså hälften av vad den var tio sekunder tidigare.
+
+**Vad mönstret säger om laddningen.** Kalla hela laddningen $Q$ och laddningen under de första tio sekunderna $Q_1$. Hela kurvan från $t = 10\\ \\mathrm{s}$ och framåt har exakt samma form som hela kurvan från $t = 0$, men är hälften så hög överallt. Arean under den delen är därför hälften av hela arean, $\\dfrac{Q}{2}$. Då gäller
+
+$$ Q = Q_1 + \\frac{Q}{2} $$
+
+$$ \\frac{Q}{2} = Q_1 $$
+
+$$ Q = 2 \\cdot Q_1 $$
+
+Det räcker alltså att bestämma arean under de första tio sekunderna.
+
+**Arean under de första tio sekunderna.** Vi läser av $80\\ \\mathrm{mA}$ vid $0\\ \\mathrm{s}$, cirka $57\\ \\mathrm{mA}$ vid $5\\ \\mathrm{s}$ och $40\\ \\mathrm{mA}$ vid $10\\ \\mathrm{s}$. Kurvan är nästan rak mellan punkterna, så vi räknar med två parallelltrapetser:
+
+$$ Q_1 = \\frac{0{,}080 + 0{,}057}{2} \\cdot 5{,}0 + \\frac{0{,}057 + 0{,}040}{2} \\cdot 5{,}0 = 0{,}3425 + 0{,}2425 = 0{,}585\\ \\mathrm{C} $$
+
+Hela laddningen är
+
+$$ Q = 2 \\cdot 0{,}585 = 1{,}17\\ \\mathrm{C} \\approx 1{,}2\\ \\mathrm{C} $$
+
+**Rimlighet:** Kurvan ligger lite under trapetsernas sneda sidor. Värdet är därför en aning för stort. Vid $80\\ \\mathrm{mA}$ hela tiden skulle $1{,}2\\ \\mathrm{C}$ passera på $15\\ \\mathrm{s}$, vilket är rimligt jämfört med grafen.
+
+**Svar:** Laddningen är ungefär $1{,}2\\ \\mathrm{C}$.`,
+        },
+        {
+            level: 3,
+            question: `En sluten låda innehåller ett okänt nät av ledare och komponenter som möts i ett stort antal knutpunkter. Tre ledningar är anslutna till lådan. Strömmen $I_1$ går in, medan $I_2$ och $I_3$ går ut.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 250" style="max-width:520px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="50.0" y1="125.0" x2="160.0" y2="125.0" stroke="#0f1620" stroke-width="2.2"/><polygon points="112.5,125.0 97.5,131.5 97.5,118.5" fill="#c8324a"/><line x1="360.0" y1="80.0" x2="470.0" y2="80.0" stroke="#0f1620" stroke-width="2.2"/><polygon points="422.5,80.0 407.5,86.5 407.5,73.5" fill="#c8324a"/><line x1="360.0" y1="170.0" x2="470.0" y2="170.0" stroke="#0f1620" stroke-width="2.2"/><polygon points="422.5,170.0 407.5,176.5 407.5,163.5" fill="#c8324a"/><rect x="160" y="35" width="200" height="180" rx="10" fill="#e9e2d3" stroke="#0f1620" stroke-width="2.2"/><text x="260.0" y="131.0" font-size="17" fill="#0f1620" text-anchor="middle">Okänt nät</text><text x="105.0" y="106.0" font-size="17" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">I</tspan><tspan font-size="12" dy="4">1</tspan></text><text x="415.0" y="61.0" font-size="17" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">I</tspan><tspan font-size="12" dy="4">2</tspan></text><text x="415.0" y="151.0" font-size="17" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">I</tspan><tspan font-size="12" dy="4">3</tspan></text></svg>
+
+a) Bevisa att $I_1 = I_2 + I_3$ med hjälp av Kirchhoffs första lag, oavsett hur nätet ser ut.<br>b) En elev säger: ”Då kan strömmen inte vara större än $I_1$ i någon ledare inuti lådan.” Utred om slutsatsen följer ur Kirchhoffs första lag.`,
+            solution: `**a)** Kirchhoffs första lag gäller i en enda punkt. Vi använder den i varje knutpunkt inuti lådan och adderar sedan alla likheter.
+
+För varje knutpunkt gäller
+
+$$ \\sum I_\\mathrm{in} = \\sum I_\\mathrm{ut} $$
+
+När vi adderar vänsterleden för sig och högerleden för sig gäller likheten fortfarande:
+
+$$ \\text{summan av alla } I_\\mathrm{in} = \\text{summan av alla } I_\\mathrm{ut} $$
+
+Nu undersöker vi vilka strömmar som finns med i summorna.
+
+- **En ledare, med eller utan komponenter, mellan två knutpunkter i lådan.** Dess ström går ut från den ena knutpunkten och in i den andra. Den finns därför med exakt en gång i vänsterledet och exakt en gång i högerledet. Den kan subtraheras från båda led och försvinner, oavsett hur stor den är.
+- **En ledning som går ut ur lådan.** Den har bara sin ena ände i en knutpunkt i lådan. $I_1$ går in i en sådan punkt och finns bara i vänsterledet. $I_2$ och $I_3$ går ut från knutpunkter och finns bara i högerledet.
+
+När alla inre strömmar har försvunnit återstår
+
+$$ I_1 = I_2 + I_3 $$
+
+Beviset använder inte hur många knutpunkter det finns eller hur de är förbundna, så det gäller för varje nät.
+
+**Svar:** Varje inre ström finns en gång i vardera ledet och försvinner. Kvar blir $I_1 = I_2 + I_3$, vilket skulle bevisas.
+
+**b)** Vi söker ett motexempel. Anta att en ström $I_0$ dessutom går runt i en sluten slinga inuti lådan. I varje knutpunkt på slingan går $I_0$ in genom en ledare och ut genom nästa. Den ökar summan in och summan ut lika mycket, så Kirchhoffs första lag är uppfylld vilket värde $I_0$ än har. Sambandet $I_1 = I_2 + I_3$ påverkas inte heller.
+
+En sådan ström kan drivas av ett batteri inuti lådan. Då kan strömmen i en ledare i slingan vara mycket större än $I_1$. Lådan kan till och med ha $I_1 = I_2 = I_3 = 0$ samtidigt som det går en ström i den.
+
+Vet man däremot att lådan bara innehåller ledare och resistorer, men ingen spänningskälla, är elevens slutsats rimlig, men det beror på att inget driver en ström runt i en slinga. Det följer inte ur Kirchhoffs första lag.
+
+**Svar:** Nej, slutsatsen följer inte. Finns ett batteri i lådan kan en ström av godtycklig storlek gå runt i en slinga där inne, utan att den märks i de tre ledningarna.`,
+        },
+        {
+            level: 3,
+            question: `En robotgräsklippare drar en konstant ström när den klipper och en annan, mindre ström när den vilar. Batteriets storlek är inte känd, men klipparen visar hur stor del av batteriets laddning som har använts. Två mätningar gav följande resultat.
+
+| Mätning | Klippning (h) | Vila (h) | Använd del av laddningen (%) |
+| --- | --- | --- | --- |
+| 1 | 1,5 | 5,0 | 65 |
+| 2 | 1,0 | 20 | 60 |
+
+a) Hur många gånger så stor är strömmen vid klippning som strömmen i vila?<br>b) Hur länge kan klipparen klippa utan uppehåll på ett fulladdat batteri? Svara i timmar.`,
+            answer: { value: 40, unit: 'gånger' },
+            delsvar: [
+                { del: 'a', value: 40, unit: 'gånger' },
+                { del: 'b', value: 2.5, unit: 'h' },
+            ],
+            solution: `**a)** Låt $Q$ vara laddningen i ett fulladdat batteri, $I_{\\mathrm{k}}$ strömmen vid klippning och $I_{\\mathrm{v}}$ strömmen i vila. Laddningen som används är $I \\cdot t$ i varje läge. De två mätningarna ger
+
+$$
+\\begin{cases}
+1{,}5 \\cdot I_{\\mathrm{k}} + 5{,}0 \\cdot I_{\\mathrm{v}} = 0{,}65 \\cdot Q & (1) \\\\
+1{,}0 \\cdot I_{\\mathrm{k}} + 20 \\cdot I_{\\mathrm{v}} = 0{,}60 \\cdot Q & (2)
+\\end{cases}
+$$
+
+Det är två ekvationer men tre okända storheter. Vi kan ändå uttrycka båda strömmarna i $Q$.
+
+Ekvation (1) multiplicerad med 4 ger lika många $I_{\\mathrm{v}}$ som i ekvation (2):
+
+$$ 6{,}0 \\cdot I_{\\mathrm{k}} + 20 \\cdot I_{\\mathrm{v}} = 2{,}60 \\cdot Q $$
+
+Vi subtraherar ekvation (2) från den raden:
+
+$$ 5{,}0 \\cdot I_{\\mathrm{k}} = 2{,}00 \\cdot Q $$
+
+$$ I_{\\mathrm{k}} = 0{,}40 \\cdot Q \\qquad (3) $$
+
+Här är strömmen i ampere om $Q$ är i Ah. Detta i ekvation (2), $1{,}0 \\cdot I_{\\mathrm{k}} + 20 \\cdot I_{\\mathrm{v}} = 0{,}60 \\cdot Q$, ger
+
+$$ 0{,}40 \\cdot Q + 20 \\cdot I_{\\mathrm{v}} = 0{,}60 \\cdot Q $$
+
+$$ 20 \\cdot I_{\\mathrm{v}} = 0{,}20 \\cdot Q $$
+
+$$ I_{\\mathrm{v}} = 0{,}010 \\cdot Q $$
+
+Nu bildar vi kvoten mellan strömmarna, och den okända laddningen förkortas bort:
+
+$$ \\frac{I_{\\mathrm{k}}}{I_{\\mathrm{v}}} = \\frac{0{,}40 \\cdot Q}{0{,}010 \\cdot Q} = 40 $$
+
+**Svar:** Strömmen vid klippning är $40$ gånger så stor.
+
+**b)** Tiden fås ur $I = \\dfrac{Q}{t}$, där $I_{\\mathrm{k}} = 0{,}40 \\cdot Q$ från (3):
+
+$$ t = \\frac{Q}{I_{\\mathrm{k}}} = \\frac{Q}{0{,}40 \\cdot Q} = \\frac{1}{0{,}40} = 2{,}5\\ \\mathrm{h} $$
+
+**Rimlighet:** I mätning 1 använder klippningen $0{,}40 \\cdot 1{,}5 = 0{,}60$ och vilan $0{,}010 \\cdot 5{,}0 = 0{,}05$ av laddningen, sammanlagt $65\\ \\%$. Det stämmer med tabellen.
+
+**Svar:** Klipparen kan klippa i $2{,}5\\ \\mathrm{h}$.`,
+        },
+        {
+            level: 3,
+            question: `Ett rör är fyllt med en lösning av kalciumklorid. I lösningen finns det två kloridjoner ($\\mathrm{Cl^-}$) för varje kalciumjon ($\\mathrm{Ca^{2+}}$), och jonerna är jämnt fördelade. Ett elektriskt fält driver kalciumjonerna åt höger och kloridjonerna åt vänster. Kloridjonernas drifthastighet är $1{,}3$ gånger så stor som kalciumjonernas.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 262" style="max-width:540px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="40" y="56" width="460" height="172" rx="14" fill="#eef4f6" stroke="#0f1620" stroke-width="2.2"/><line x1="270" y1="48" x2="270" y2="236" stroke="#6b6558" stroke-width="1.6" stroke-dasharray="6 5"/><text x="270" y="38" font-size="16" fill="#0f1620" text-anchor="middle">Tvärsnitt</text><circle cx="110" cy="90" r="20" fill="#f6d9d6" stroke="#c8324a" stroke-width="1.8"/><text x="110" y="95" font-size="14" fill="#0f1620" text-anchor="middle">Ca<tspan font-size="10" dy="-5">2+</tspan></text><line x1="134" y1="90" x2="173" y2="90" stroke="#c8324a" stroke-width="2.4"/><polygon points="184,90 173,85 173,95" fill="#c8324a"/><circle cx="350" cy="90" r="20" fill="#f6d9d6" stroke="#c8324a" stroke-width="1.8"/><text x="350" y="95" font-size="14" fill="#0f1620" text-anchor="middle">Ca<tspan font-size="10" dy="-5">2+</tspan></text><line x1="374" y1="90" x2="413" y2="90" stroke="#c8324a" stroke-width="2.4"/><polygon points="424,90 413,85 413,95" fill="#c8324a"/><circle cx="225" cy="142" r="20" fill="#d8e4f3" stroke="#1c3d6b" stroke-width="1.8"/><text x="225" y="147" font-size="14" fill="#0f1620" text-anchor="middle">Cl<tspan font-size="10" dy="-5">−</tspan></text><line x1="201" y1="142" x2="147" y2="142" stroke="#1c3d6b" stroke-width="2.4"/><polygon points="136,142 147,137 147,147" fill="#1c3d6b"/><circle cx="465" cy="142" r="20" fill="#d8e4f3" stroke="#1c3d6b" stroke-width="1.8"/><text x="465" y="147" font-size="14" fill="#0f1620" text-anchor="middle">Cl<tspan font-size="10" dy="-5">−</tspan></text><line x1="441" y1="142" x2="387" y2="142" stroke="#1c3d6b" stroke-width="2.4"/><polygon points="376,142 387,137 387,147" fill="#1c3d6b"/><circle cx="175" cy="196" r="20" fill="#d8e4f3" stroke="#1c3d6b" stroke-width="1.8"/><text x="175" y="201" font-size="14" fill="#0f1620" text-anchor="middle">Cl<tspan font-size="10" dy="-5">−</tspan></text><line x1="151" y1="196" x2="97" y2="196" stroke="#1c3d6b" stroke-width="2.4"/><polygon points="86,196 97,191 97,201" fill="#1c3d6b"/><circle cx="415" cy="196" r="20" fill="#d8e4f3" stroke="#1c3d6b" stroke-width="1.8"/><text x="415" y="201" font-size="14" fill="#0f1620" text-anchor="middle">Cl<tspan font-size="10" dy="-5">−</tspan></text><line x1="391" y1="196" x2="337" y2="196" stroke="#1c3d6b" stroke-width="2.4"/><polygon points="326,196 337,191 337,201" fill="#1c3d6b"/></svg>
+
+a) En elev säger: ”Positiva och negativa laddningar går åt var sitt håll, så strömmarna tar ut varandra.” Utred påståendet.<br>b) Hur stor del av strömmen bärs av kloridjonerna? Svara i procent.<br>c) Strömmen i röret är $0{,}23\\ \\mathrm{A}$. Hur många kalciumjoner passerar tvärsnittet varje sekund? Svara i st.`,
+            answer: { value: 57, unit: '%' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 57, unit: '%' },
+                { del: 'c', value: 3.1e17, unit: 'st' },
+            ],
+            solution: `**a)** Vi undersöker hur laddningen till höger om tvärsnittet ändras.
+
+- **Positiva joner åt höger** tillför positiv laddning till högra sidan. Det är en ström åt höger.
+- **Negativa joner åt vänster** tar bort negativ laddning från högra sidan, som då också blir mer positiv. Även det är en ström åt höger, precis som elektroner i en metalltråd ger en ström i motsatt riktning mot sin egen rörelse.
+
+**Svar:** Påståendet är fel. Båda jonslagen ger en ström åt höger, så bidragen ska adderas.
+
+**b)** Antalet joner per volymenhet är inte känt. Vi inför därför beteckningarna
+
+- *N* = antal kalciumjoner per volymenhet (1/m³)
+- *A* = tvärsnittsarea hos röret (m²)
+- *v* = drifthastighet hos kalciumjonerna (m/s)
+
+Under tiden *t* rör sig kalciumjonerna sträckan $v \\cdot t$. De som finns i en bit av röret med den längden, alltså i volymen $A \\cdot v \\cdot t$, hinner passera tvärsnittet. Antalet är $N \\cdot A \\cdot v \\cdot t$, och varje kalciumjon har laddningen $2 \\cdot q_e$. Strömmen $I_{\\mathrm{Ca}}$ från kalciumjonerna är
+
+$$ I_{\\mathrm{Ca}} = \\frac{Q}{t} = \\frac{N \\cdot A \\cdot v \\cdot t \\cdot 2 \\cdot q_e}{t} = 2 \\cdot N \\cdot A \\cdot v \\cdot q_e $$
+
+Kloridjonerna är dubbelt så många per volymenhet, $2 \\cdot N$, och har drifthastigheten $1{,}3 \\cdot v$. Varje kloridjon har en laddning med beloppet $q_e$. Strömmen $I_{\\mathrm{Cl}}$ från kloridjonerna är
+
+$$ I_{\\mathrm{Cl}} = \\frac{2 \\cdot N \\cdot A \\cdot 1{,}3 \\cdot v \\cdot t \\cdot q_e}{t} = 2{,}6 \\cdot N \\cdot A \\cdot v \\cdot q_e $$
+
+Bidragen adderas enligt a). Hela strömmen är
+
+$$ I_{\\mathrm{Ca}} + I_{\\mathrm{Cl}} = 4{,}6 \\cdot N \\cdot A \\cdot v \\cdot q_e $$
+
+Kloridjonernas andel av strömmen är
+
+$$ \\frac{2{,}6 \\cdot N \\cdot A \\cdot v \\cdot q_e}{4{,}6 \\cdot N \\cdot A \\cdot v \\cdot q_e} = \\frac{2{,}6}{4{,}6} = 0{,}565\\ldots \\approx 0{,}57 $$
+
+De okända storheterna förkortas bort.
+
+**Rimlighet:** Kloridjonerna är dubbelt så många, men har hälften så stor laddning. De två sakerna tar ut varandra, så det är den högre hastigheten som ger dem lite mer än halva strömmen.
+
+**Svar:** Kloridjonerna bär $57\\ \\%$ av strömmen.
+
+**c)** Kalciumjonerna bär resten av strömmen. Deras andel är $\\dfrac{2}{4{,}6}$ enligt uttrycken i b):
+
+$$ I_{\\mathrm{Ca}} = \\frac{2}{4{,}6} \\cdot 0{,}23 = 0{,}10\\ \\mathrm{A} $$
+
+Under $1{,}0\\ \\mathrm{s}$ passerar alltså laddningen
+
+$$ Q = I_{\\mathrm{Ca}} \\cdot t = 0{,}10 \\cdot 1{,}0 = 0{,}10\\ \\mathrm{C} $$
+
+Varje kalciumjon har laddningen $2 \\cdot q_e$, där $q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$. Antalet är laddningen dividerad med laddningen hos en jon:
+
+$$ n = \\frac{Q}{2 \\cdot q_e} = \\frac{0{,}10}{2 \\cdot 1{,}602 \\cdot 10^{-19}} \\approx 3{,}1 \\cdot 10^{17} $$
+
+**Svar:** Det passerar $3{,}1 \\cdot 10^{17}$ kalciumjoner varje sekund.`,
+        },
+        {
+            level: 3,
+            question: `I en forskningsanläggning cirkulerar elektroner i en ringformad bana med omkretsen $528\\ \\mathrm{m}$. Elektronernas fart är nästan lika stor som ljusets, $3{,}00 \\cdot 10^8\\ \\mathrm{m/s}$. Ett instrument på ett ställe i banan visar att medelströmmen är $0{,}50\\ \\mathrm{A}$.<br>a) Hur många elektroner finns det i ringen? Svara i st.<br>b) I en annan ring cirkulerar lika många elektroner med samma fart, men medelströmmen är tre gånger så stor. Vad kan man säga om den ringens omkrets? Motivera generellt.`,
+            answer: { value: 5.5e12, unit: 'st' },
+            delsvar: [
+                { del: 'a', value: 5.5e12, unit: 'st' },
+                { del: 'b' },
+            ],
+            solution: `**a)** En elektron passerar instrumentet en gång per varv. Det avgörande är att samma elektroner räknas om och om igen. Under tiden för ett varv passerar därför varje elektron i ringen instrumentet exakt en gång, och då har laddningen hos **alla** elektroner i ringen passerat.
+
+Låt *N* vara antalet elektroner, *O* omkretsen och *v* farten. Tiden för ett varv är
+
+$$ t = \\frac{O}{v} \\qquad (1) $$
+
+Laddningen som passerar under ett varv är
+
+$$ Q = N \\cdot q_e \\qquad (2) $$
+
+Insättning av (1), $t = \\dfrac{O}{v}$, och (2), $Q = N \\cdot q_e$, i $I = \\dfrac{Q}{t}$ ger
+
+$$ I = \\frac{N \\cdot q_e}{\\dfrac{O}{v}} = \\frac{N \\cdot q_e \\cdot v}{O} \\qquad (3) $$
+
+Vi löser ut antalet elektroner:
+
+$$ N = \\frac{I \\cdot O}{q_e \\cdot v} $$
+
+$$
+\\left[ \\begin{array}{l}
+I = 0{,}50\\ \\mathrm{A} \\\\
+O = 528\\ \\mathrm{m} \\\\
+q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C} \\\\
+v = 3{,}00 \\cdot 10^8\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$ N = \\frac{0{,}50 \\cdot 528}{1{,}602 \\cdot 10^{-19} \\cdot 3{,}00 \\cdot 10^8} \\approx 5{,}5 \\cdot 10^{12} $$
+
+**Rimlighet:** Vid $0{,}50\\ \\mathrm{A}$ passerar cirka $3 \\cdot 10^{18}$ elektroner per sekund i en vanlig ledning. Antalet i ringen är mycket mindre, vilket är rimligt eftersom varje elektron hinner passera instrumentet flera hundra tusen gånger per sekund.
+
+**Svar:** Det finns $5{,}5 \\cdot 10^{12}$ elektroner i ringen.
+
+**b)** Enligt (3), $I = \\dfrac{N \\cdot q_e \\cdot v}{O}$, är strömmen omvänt proportionell mot omkretsen när antalet elektroner och farten är oförändrade. Vi skriver produkten som
+
+$$ I \\cdot O = N \\cdot q_e \\cdot v $$
+
+Högerledet är detsamma för båda ringarna, så produkten $I \\cdot O$ är också densamma. Är strömmen tre gånger så stor måste omkretsen vara en tredjedel. Det stämmer med att elektronerna då hinner tre gånger så många varv på samma tid.
+
+**Svar:** Omkretsen är en tredjedel så stor, det vill säga $176\\ \\mathrm{m}$.`,
         },
     ],
 
@@ -37996,7 +42410,7 @@ $$ U = \\frac{6{,}0}{0{,}50} = 12\\ \\mathrm{V} $$
 
 **Svar:** Spänningen är $12\\ \\mathrm{V}$.
 
-**Generell slutsats:** Spänning kan tolkas som "energi per coulomb". $1\\ \\mathrm{V} = 1\\ \\mathrm{J/C}$ — en volt betyder att varje coulomb laddning bär med sig en joule energi.`,
+**Generell slutsats:** Spänning kan tolkas som "energi per coulomb". $1\\ \\mathrm{V} = 1\\ \\mathrm{J/C}$. En volt betyder att varje coulomb laddning bär med sig en joule energi.`,
         },
         {
             level: 1,
@@ -38049,7 +42463,7 @@ $$ v = \\sqrt{\\frac{2 \\cdot 1{,}602 \\cdot 10^{-19} \\cdot 200}{9{,}11 \\cdot 
 
 **Svar:** Elektronen får hastigheten ungefär $8{,}4 \\cdot 10^6\\ \\mathrm{m/s}$.
 
-**Generell slutsats:** Bakom uppgiften ligger energiomvandling: elektrisk energi $\\to$ rörelseenergi. Eftersom hastigheten finns i kvadrat måste man dra roten ur till sist. Notera hur snabbt elektronen blir — flera miljoner meter per sekund redan vid blygsamma 200 V.`,
+**Generell slutsats:** Bakom uppgiften ligger energiomvandling: elektrisk energi $\\to$ rörelseenergi. Eftersom hastigheten finns i kvadrat måste man dra roten ur till sist. Notera hur snabbt elektronen blir: flera miljoner meter per sekund redan vid blygsamma 200 V.`,
         },
         {
             level: 2,
@@ -38086,7 +42500,7 @@ $$ U = \\frac{9{,}11 \\cdot 10^{-31} \\cdot (3{,}0 \\cdot 10^6)^2}{2 \\cdot 1{,}
 
 $$ Q \\cdot U = \\frac{m \\cdot v^2}{2} \\quad\\Leftrightarrow\\quad v = \\sqrt{\\frac{2 \\cdot Q \\cdot U}{m}} $$
 
-Eftersom $Q$ och $U$ är desamma för båda, beror hastigheten bara på massan: $v \\propto \\dfrac{1}{\\sqrt{m}}$. Vi bildar kvoten mellan elektronens och protonens hastighet — då försvinner det gemensamma $2QU$:
+Eftersom $Q$ och $U$ är desamma för båda, beror hastigheten bara på massan: $v \\propto \\dfrac{1}{\\sqrt{m}}$. Vi bildar kvoten mellan elektronens och protonens hastighet. Då försvinner det gemensamma $2QU$:
 
 $$ \\frac{v_e}{v_p} = \\frac{\\sqrt{2QU / m_e}}{\\sqrt{2QU / m_p}} = \\sqrt{\\frac{m_p}{m_e}} $$
 
@@ -38096,7 +42510,529 @@ $$ \\frac{v_e}{v_p} = \\sqrt{\\frac{1{,}673 \\cdot 10^{-27}}{9{,}11 \\cdot 10^{-
 
 **Svar:** Elektronen blir ungefär $43$ gånger så snabb som protonen.
 
-**Generell slutsats:** Samma energi ger inte samma hastighet — den lätta partikeln blir mycket snabbare. Tricket är att bilda kvoten *innan* man sätter in värden, så att den okända spänningen och laddningen stryks bort. Då behövs inget värde på *U* alls.`,
+**Generell slutsats:** Samma energi ger inte samma hastighet. Den lätta partikeln blir mycket snabbare. Tricket är att bilda kvoten *innan* man sätter in värden, så att den okända spänningen och laddningen stryks bort. Då behövs inget värde på *U* alls.`,
+        },
+        {
+            level: 1,
+            question: `I ett svenskt eluttag är spänningen $230\\ \\mathrm{V}$. Vilken beskrivning talar om vad det betyder?`,
+            choices: [
+                'Laddningen $230\\ \\mathrm{C}$ passerar uttaget varje sekund.',
+                'Varje elektron överför energin $230\\ \\mathrm{J}$.',
+                'Varje coulomb som förs mellan uttagets poler överför energin $230\\ \\mathrm{J}$.',
+                'Energin $230\\ \\mathrm{J}$ överförs varje sekund.',
+            ],
+            correct: 2,
+            solution: `Spänning är energi per laddning:
+
+$$ U = \\frac{E}{Q} $$
+
+Enheten volt är alltså detsamma som joule per coulomb:
+
+$$ 230\\ \\mathrm{V} = 230\\ \\mathrm{J/C} $$
+
+Det betyder att $1\\ \\mathrm{C}$ överför $230\\ \\mathrm{J}$. Laddning per sekund är strömstyrka och energi per sekund är effekt, så de beskrivningarna handlar om andra storheter. En enda elektron har en mycket mindre laddning än $1\\ \\mathrm{C}$ och överför därför mycket mindre energi.
+
+**Svar:** Varje coulomb som förs mellan uttagets poler överför energin $230\\ \\mathrm{J}$.`,
+        },
+        {
+            level: 1,
+            question: `I en blixt förs laddningen $15\\ \\mathrm{C}$ från ett moln till marken. Spänningen mellan molnet och marken är $80\\ \\mathrm{MV}$. Hur stor energi omsätts? Ange svaret i GJ.`,
+            answer: { value: 1.2, unit: 'GJ' },
+            solution: `Energin fås ur sambandet mellan spänning, energi och laddning:
+
+$$ U = \\frac{E}{Q} \\quad\\Leftrightarrow\\quad E = Q \\cdot U $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+Q = 15\\ \\mathrm{C} \\\\
+U = 80\\ \\mathrm{MV} = 80 \\cdot 10^{6}\\ \\mathrm{V}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ E = 15 \\cdot 80 \\cdot 10^{6} = 1{,}2 \\cdot 10^{9}\\ \\mathrm{J} = 1{,}2\\ \\mathrm{GJ} $$
+
+**Svar:** Energin är $1{,}2\\ \\mathrm{GJ}$.`,
+        },
+        {
+            level: 1,
+            question: `Diagrammet visar hur mycket energi *E* som ett batteri har levererat till en ficklampa när laddningen *Q* har passerat lampan. Hur stor är batteriets spänning? Ange svaret i V.
+
+${makeDiagram({
+    xMax: 11, yMax: 50,
+    xTicks: [0, 2, 4, 6, 8, 10], yTicks: [0, 10, 20, 30, 40, 50],
+    xLabel: '<tspan font-style="italic">Q</tspan> (C)',
+    yLabel: '<tspan font-style="italic">E</tspan> (J)',
+    paths: [{ points: [[0, 0], [10, 45]] }]
+})}`,
+            answer: { value: 4.5, unit: 'V', tol: 0.04 },
+            solution: `Spänningen är energi per laddning:
+
+$$ U = \\frac{E}{Q} $$
+
+Vi väljer en punkt långt ut på linjen, så att avläsningen blir noggrann. Vid laddningen $10\\ \\mathrm{C}$ är energin $45\\ \\mathrm{J}$.
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+E = 45\\ \\mathrm{J} \\\\
+Q = 10\\ \\mathrm{C}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ U = \\frac{45}{10} = 4{,}5\\ \\mathrm{V} $$
+
+**Svar:** Spänningen är $4{,}5\\ \\mathrm{V}$.
+
+Spänningen är alltså lutningen på linjen i ett diagram där energin ritas mot laddningen.`,
+        },
+        {
+            level: 1,
+            question: `I ett elektronmikroskop accelereras elektroner från vila genom spänningen $2{,}5\\ \\mathrm{kV}$. Elektronens laddning har storleken $1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$. Hur stor rörelseenergi får varje elektron? Ange svaret i aJ ($1\\ \\mathrm{aJ} = 10^{-18}\\ \\mathrm{J}$).`,
+            answer: { value: 400, unit: 'aJ' },
+            solution: `Den elektriska energin omvandlas till rörelseenergi:
+
+$$ E_k = Q \\cdot U $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+Q = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C} \\\\
+U = 2{,}5\\ \\mathrm{kV} = 2\\,500\\ \\mathrm{V}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ E_k = 1{,}602 \\cdot 10^{-19} \\cdot 2\\,500 = 4{,}005 \\cdot 10^{-16}\\ \\mathrm{J} $$
+
+Omvandling till attojoule:
+
+$$ E_k = 400{,}5 \\cdot 10^{-18}\\ \\mathrm{J} \\approx 4{,}0 \\cdot 10^{2}\\ \\mathrm{aJ} $$
+
+**Svar:** Rörelseenergin är cirka $400\\ \\mathrm{aJ}$, det vill säga $4{,}0 \\cdot 10^{-16}\\ \\mathrm{J}$.`,
+        },
+        {
+            level: 1,
+            question: `En elektron förs genom en ledning från batteriets minuspol till dess pluspol. Var har elektronen störst elektrisk potentiell energi?`,
+            choices: [
+                'Vid pluspolen',
+                'Vid minuspolen',
+                'Mitt emellan polerna',
+                'Den är lika stor överallt',
+            ],
+            correct: 1,
+            solution: `Elektronen har negativ laddning. Den stöts bort av minuspolen och dras mot pluspolen. När den rör sig dit den dras minskar dess potentiella energi, precis som för ett föremål som faller mot marken.
+
+Den potentiella energin är alltså störst där elektronen startar, vid minuspolen. På vägen omvandlas den till exempelvis värme i ledningen och i en lampa.
+
+**Svar:** Vid minuspolen`,
+        },
+        {
+            level: 2,
+            question: `En cykellampa drivs av ett batteri med spänningen $3{,}0\\ \\mathrm{V}$. Strömmen genom lampan är $0{,}25\\ \\mathrm{A}$. Hur stor elektrisk energi omsätts i lampan under en cykeltur på $40\\ \\mathrm{min}$? Ange svaret i kJ.`,
+            answer: { value: 1.8, unit: 'kJ' },
+            solution: `Energin är $E = Q \\cdot U$, så vi behöver först laddningen. Strömstyrkan är laddning per tid:
+
+$$ I = \\frac{Q}{t} \\quad\\Leftrightarrow\\quad Q = I \\cdot t $$
+
+Insatt i uttrycket för energin ger detta
+
+$$ E = Q \\cdot U = I \\cdot t \\cdot U $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+I = 0{,}25\\ \\mathrm{A} \\\\
+t = 40\\ \\mathrm{min} = 2\\,400\\ \\mathrm{s} \\\\
+U = 3{,}0\\ \\mathrm{V}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ E = 0{,}25 \\cdot 2\\,400 \\cdot 3{,}0 = 1\\,800\\ \\mathrm{J} = 1{,}8\\ \\mathrm{kJ} $$
+
+**Svar:** Energin är $1{,}8\\ \\mathrm{kJ}$.`,
+        },
+        {
+            level: 2,
+            question: `En elektron som accelereras från vila genom spänningen $U$ får farten $v$. Genom vilken spänning ska den accelereras från vila för att få farten $3v$?`,
+            choices: ['$\\sqrt{3} \\cdot U$', '$3U$', '$6U$', '$9U$'],
+            correct: 3,
+            solution: `Den elektriska energin blir rörelseenergi:
+
+$$ Q \\cdot U = \\frac{m \\cdot v^2}{2} \\quad\\Leftrightarrow\\quad U = \\frac{m \\cdot v^2}{2 \\cdot Q} $$
+
+Massan och laddningen är desamma i båda fallen. Den nya spänningen $U_2$ fås när $v$ byts mot $3v$:
+
+$$ U_2 = \\frac{m \\cdot (3v)^2}{2 \\cdot Q} = 9 \\cdot \\frac{m \\cdot v^2}{2 \\cdot Q} = 9U $$
+
+Tre gånger så stor fart kräver alltså nio gånger så stor spänning, eftersom rörelseenergin beror på farten i kvadrat.
+
+**Svar:** $9U$`,
+        },
+        {
+            level: 2,
+            question: `Tabellen visar hur stor laddning tre fulladdade batterier kan leverera, och hur stor energi de då avger. Laddningen anges i amperetimmar: $1\\ \\mathrm{Ah}$ är den laddning som passerar när strömmen är $1\\ \\mathrm{A}$ under en timme.
+
+| Batteri | Laddning (Ah) | Energi (kJ) |
+|---|---|---|
+| A | 2,6 | 35 |
+| B | 1,2 | 39 |
+| C | 45 | 1 940 |
+
+Rangordna batterierna efter spänning, från lägst till högst. Ange den högsta spänningen i V.`,
+            answer: { value: 12, unit: 'V' },
+            solution: `Spänningen är $U = \\dfrac{E}{Q}$, där laddningen ska vara i coulomb. Strömmen $1\\ \\mathrm{A}$ under en timme ger laddningen
+
+$$ Q = I \\cdot t = 1 \\cdot 3\\,600 = 3\\,600\\ \\mathrm{C} $$
+
+Alltså är $1\\ \\mathrm{Ah} = 3\\,600\\ \\mathrm{C}$. För de tre batterierna får vi
+
+$$ U_A = \\frac{35 \\cdot 10^{3}}{2{,}6 \\cdot 3\\,600} = 3{,}739\\ldots\\ \\mathrm{V} \\approx 3{,}7\\ \\mathrm{V} $$
+
+$$ U_B = \\frac{39 \\cdot 10^{3}}{1{,}2 \\cdot 3\\,600} = 9{,}027\\ldots\\ \\mathrm{V} \\approx 9{,}0\\ \\mathrm{V} $$
+
+$$ U_C = \\frac{1\\,940 \\cdot 10^{3}}{45 \\cdot 3\\,600} = 11{,}975\\ldots\\ \\mathrm{V} \\approx 12\\ \\mathrm{V} $$
+
+Batteri A kan leverera mer laddning än batteri B men har ändå lägre spänning. Spänningen säger hur mycket energi varje coulomb överför, inte hur mycket energi batteriet rymmer.
+
+**Svar:** A, B, C från lägst till högst, där den högsta spänningen är $12\\ \\mathrm{V}$.`,
+        },
+        {
+            level: 2,
+            question: `En eldriven vinsch får sin energi från ett batteri med spänningen $24\\ \\mathrm{V}$. Vinschen lyfter en last med massan $60\\ \\mathrm{kg}$ sträckan $4{,}0\\ \\mathrm{m}$ rakt upp, och dess verkningsgrad är $75\\ \\%$. Hur stor laddning passerar genom vinschens motor under lyftet? Ange svaret i C. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            answer: { value: 130, unit: 'C' },
+            solution: `Den nyttiga energin är lastens ökning i lägesenergi, $m \\cdot g \\cdot h$. Verkningsgraden $\\eta$ är kvoten mellan den nyttiga energin och den tillförda elektriska energin $Q \\cdot U$:
+
+$$ \\eta = \\frac{m \\cdot g \\cdot h}{Q \\cdot U} \\quad\\Leftrightarrow\\quad Q = \\frac{m \\cdot g \\cdot h}{\\eta \\cdot U} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+m = 60\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+h = 4{,}0\\ \\mathrm{m} \\\\
+\\eta = 0{,}75 \\\\
+U = 24\\ \\mathrm{V}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ Q = \\frac{60 \\cdot 9{,}82 \\cdot 4{,}0}{0{,}75 \\cdot 24} = 130{,}93\\ldots\\ \\mathrm{C} \\approx 130\\ \\mathrm{C} $$
+
+Om lyftet tar $10\\ \\mathrm{s}$ blir strömmen ungefär $13\\ \\mathrm{A}$, vilket är rimligt för en batteridriven vinsch.
+
+**Svar:** Laddningen är cirka $130\\ \\mathrm{C}$.`,
+        },
+        {
+            level: 2,
+            question: `En proton med hastigheten $v = 2{,}0 \\cdot 10^{5}\\ \\mathrm{m/s}$ kommer in genom ett hål i en negativ platta och rör sig rakt mot en positiv platta. Vilken är den minsta spänning *U* mellan plattorna som gör att protonen vänder innan den når den positiva plattan? Protonens massa är $1{,}673 \\cdot 10^{-27}\\ \\mathrm{kg}$ och dess laddning $1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$. Ange svaret i V.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 205" style="max-width:459px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="112" y="32" width="6" height="40" rx="1" fill="#2563eb"/><rect x="112" y="92" width="6" height="40" rx="1" fill="#2563eb"/><rect x="282" y="32" width="6" height="100" rx="1" fill="#c8324a"/><text x="115" y="24" font-size="17" text-anchor="middle" fill="#2563eb">−</text><text x="285" y="24" font-size="17" text-anchor="middle" fill="#c8324a">+</text><path d="M115 132V160H196M204 160H285V132" fill="none" stroke="#0f1620" stroke-width="1.6"/><line x1="196" y1="153" x2="196" y2="167" stroke="#0f1620" stroke-width="2.6"/><line x1="204" y1="147" x2="204" y2="173" stroke="#0f1620" stroke-width="1.6"/><text x="200" y="192" font-size="14" text-anchor="middle" fill="#0f1620"><tspan font-style="italic">U</tspan></text><circle cx="45" cy="82" r="9" fill="#c8324a"/><line x1="40.5" y1="82" x2="49.5" y2="82" stroke="#fff" stroke-width="1.8"/><line x1="45" y1="77.5" x2="45" y2="86.5" stroke="#fff" stroke-width="1.8"/><line x1="54" y1="82" x2="88" y2="82" stroke="#15803d" stroke-width="2.4"/><polygon points="96,82 87,77.5 87,86.5" fill="#15803d"/><text x="74" y="70" font-size="14" text-anchor="middle" fill="#15803d"><tspan font-style="italic">v</tspan></text></svg>`,
+            answer: { value: 210, unit: 'V' },
+            solution: `Protonen är positiv och stöts bort av den positiva plattan. När den rör sig dit omvandlas rörelseenergi till elektrisk potentiell energi.
+
+I gränsfallet stannar protonen precis vid den positiva plattan. Då har hela rörelseenergin omvandlats:
+
+$$ Q \\cdot U = \\frac{m \\cdot v^2}{2} \\quad\\Leftrightarrow\\quad U = \\frac{m \\cdot v^2}{2 \\cdot Q} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+m = 1{,}673 \\cdot 10^{-27}\\ \\mathrm{kg} \\\\
+v = 2{,}0 \\cdot 10^{5}\\ \\mathrm{m/s} \\\\
+Q = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ U = \\frac{1{,}673 \\cdot 10^{-27} \\cdot (2{,}0 \\cdot 10^{5})^2}{2 \\cdot 1{,}602 \\cdot 10^{-19}} = 208{,}8\\ldots\\ \\mathrm{V} \\approx 210\\ \\mathrm{V} $$
+
+Är spänningen högre än så tar rörelseenergin slut tidigare, och protonen vänder mellan plattorna.
+
+**Svar:** Spänningen måste vara minst cirka $210\\ \\mathrm{V}$.`,
+        },
+        {
+            level: 3,
+            question: `En elektron med farten $v$ passerar ett antal likadana par av plattor efter varandra. Spänningen är lika stor mellan plattorna i varje par, och mellan paren ändras inte elektronens fart. Efter det första paret är farten $2v$.
+
+Hur många par måste elektronen passera sammanlagt för att få farten $5v$?
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 205" style="max-width:580px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="92" y="32" width="6" height="40" rx="1" fill="#2563eb"/><rect x="92" y="92" width="6" height="40" rx="1" fill="#2563eb"/><rect x="162" y="32" width="6" height="40" rx="1" fill="#c8324a"/><rect x="162" y="92" width="6" height="40" rx="1" fill="#c8324a"/><text x="95" y="24" font-size="17" text-anchor="middle" fill="#2563eb">−</text><text x="165" y="24" font-size="17" text-anchor="middle" fill="#c8324a">+</text><path d="M95 132V160H126M134 160H165V132" fill="none" stroke="#0f1620" stroke-width="1.6"/><line x1="126" y1="153" x2="126" y2="167" stroke="#0f1620" stroke-width="2.6"/><line x1="134" y1="147" x2="134" y2="173" stroke="#0f1620" stroke-width="1.6"/><text x="130" y="192" font-size="14" text-anchor="middle" fill="#0f1620"><tspan font-style="italic">U</tspan></text><rect x="267" y="32" width="6" height="40" rx="1" fill="#2563eb"/><rect x="267" y="92" width="6" height="40" rx="1" fill="#2563eb"/><rect x="337" y="32" width="6" height="40" rx="1" fill="#c8324a"/><rect x="337" y="92" width="6" height="40" rx="1" fill="#c8324a"/><text x="270" y="24" font-size="17" text-anchor="middle" fill="#2563eb">−</text><text x="340" y="24" font-size="17" text-anchor="middle" fill="#c8324a">+</text><path d="M270 132V160H301M309 160H340V132" fill="none" stroke="#0f1620" stroke-width="1.6"/><line x1="301" y1="153" x2="301" y2="167" stroke="#0f1620" stroke-width="2.6"/><line x1="309" y1="147" x2="309" y2="173" stroke="#0f1620" stroke-width="1.6"/><text x="305" y="192" font-size="14" text-anchor="middle" fill="#0f1620"><tspan font-style="italic">U</tspan></text><circle cx="38" cy="82" r="9" fill="#2563eb"/><line x1="33.5" y1="82" x2="42.5" y2="82" stroke="#fff" stroke-width="1.8"/><line x1="47" y1="82" x2="57" y2="82" stroke="#15803d" stroke-width="2.4"/><polygon points="65,82 56,77.5 56,86.5" fill="#15803d"/><text x="56" y="70" font-size="14" text-anchor="middle" fill="#15803d"><tspan font-style="italic">v</tspan></text><circle cx="198" cy="82" r="9" fill="#2563eb"/><line x1="193.5" y1="82" x2="202.5" y2="82" stroke="#fff" stroke-width="1.8"/><line x1="207" y1="82" x2="235" y2="82" stroke="#15803d" stroke-width="2.4"/><polygon points="243,82 234,77.5 234,86.5" fill="#15803d"/><text x="225" y="70" font-size="14" text-anchor="middle" fill="#15803d">2<tspan font-style="italic">v</tspan></text><path d="M165 160H270" fill="none" stroke="#0f1620" stroke-width="1.6"/><path d="M340 160H372" fill="none" stroke="#0f1620" stroke-width="1.6"/><circle cx="386" cy="160" r="1.8" fill="#0f1620"/><circle cx="396" cy="160" r="1.8" fill="#0f1620"/><circle cx="406" cy="160" r="1.8" fill="#0f1620"/><circle cx="386" cy="82" r="1.8" fill="#0f1620"/><circle cx="396" cy="82" r="1.8" fill="#0f1620"/><circle cx="406" cy="82" r="1.8" fill="#0f1620"/></svg>`,
+            answer: { value: 8, unit: 'par' },
+            solution: `Elektronen är inte i vila när den når det första paret. Den elektriska energin $Q \\cdot U$ är därför lika med **ökningen** av rörelseenergi, inte med hela rörelseenergin efteråt.
+
+**Ett par:** I det första paret ökar farten från $v$ till $2v$. Energin som elektronen får är
+
+$$ Q \\cdot U = \\frac{m \\cdot (2v)^2}{2} - \\frac{m \\cdot v^2}{2} = \\frac{4 m v^2}{2} - \\frac{m v^2}{2} = \\frac{3 m v^2}{2} \\qquad (1) $$
+
+Laddningen och spänningen är desamma i alla par. Varje par ger alltså elektronen lika mycket energi, men inte lika stor ökning av farten.
+
+**Hela färden:** Efter $n$ par har farten ökat från $v$ till $5v$. Elektronen har då fått energin $n \\cdot Q \\cdot U$:
+
+$$ n \\cdot Q \\cdot U = \\frac{m \\cdot (5v)^2}{2} - \\frac{m \\cdot v^2}{2} = \\frac{25 m v^2}{2} - \\frac{m v^2}{2} = \\frac{24 m v^2}{2} \\qquad (2) $$
+
+Vi dividerar (2), $n \\cdot Q \\cdot U = \\dfrac{24 m v^2}{2}$, med (1), $Q \\cdot U = \\dfrac{3 m v^2}{2}$. Laddningen, spänningen, massan och farten förkortas bort:
+
+$$ \\frac{n \\cdot Q \\cdot U}{Q \\cdot U} = \\frac{24 m v^2}{3 m v^2} $$
+
+$$ n = 8 $$
+
+**Rimlighet:** Om varje par hade ökat farten med $v$ skulle det ha räckt med fyra par. Rörelseenergin beror på farten i kvadrat, så farten ökar allt mindre för varje par. Därför behövs fler än fyra.
+
+**Svar:** Elektronen måste passera $8$ par.`,
+        },
+        {
+            level: 3,
+            question: `I en flygtidsmätare accelereras joner från vila genom en spänning *U*. Därefter flyger de med konstant fart sträckan *s* genom ett tomt rör till en detektor. Varken *U* eller *s* är känd.
+
+En natriumjon med massan $23{,}0\\ \\mathrm{u}$ behöver tiden $8{,}00\\ \\text{µs}$ för att flyga genom röret. En okänd jon med samma laddning behöver tiden $10{,}4\\ \\text{µs}$. Vilken massa har den okända jonen? Ange svaret i u.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 470 205" style="max-width:611px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="47" y="32" width="6" height="100" rx="1" fill="#c8324a"/><rect x="117" y="32" width="6" height="40" rx="1" fill="#2563eb"/><rect x="117" y="92" width="6" height="40" rx="1" fill="#2563eb"/><text x="50" y="24" font-size="17" text-anchor="middle" fill="#c8324a">+</text><text x="120" y="24" font-size="17" text-anchor="middle" fill="#2563eb">−</text><path d="M50 132V160H81M89 160H120V132" fill="none" stroke="#0f1620" stroke-width="1.6"/><line x1="89" y1="153" x2="89" y2="167" stroke="#0f1620" stroke-width="2.6"/><line x1="81" y1="147" x2="81" y2="173" stroke="#0f1620" stroke-width="1.6"/><text x="85" y="192" font-size="14" text-anchor="middle" fill="#0f1620"><tspan font-style="italic">U</tspan></text><circle cx="64" cy="82" r="9" fill="#c8324a"/><line x1="59.5" y1="82" x2="68.5" y2="82" stroke="#fff" stroke-width="1.8"/><line x1="64" y1="77.5" x2="64" y2="86.5" stroke="#fff" stroke-width="1.8"/><rect x="123" y="56" width="284" height="52" fill="rgba(15,22,32,0.05)"/><line x1="123" y1="56" x2="407" y2="56" stroke="#0f1620" stroke-width="1.6"/><line x1="123" y1="108" x2="407" y2="108" stroke="#0f1620" stroke-width="1.6"/><text x="265" y="44" font-size="14" text-anchor="middle" fill="#0f1620">tomt rör</text><circle cx="225" cy="82" r="9" fill="#c8324a"/><line x1="220.5" y1="82" x2="229.5" y2="82" stroke="#fff" stroke-width="1.8"/><line x1="225" y1="77.5" x2="225" y2="86.5" stroke="#fff" stroke-width="1.8"/><line x1="234" y1="82" x2="266" y2="82" stroke="#15803d" stroke-width="2.4"/><polygon points="274,82 265,77.5 265,86.5" fill="#15803d"/><text x="254" y="72" font-size="14" text-anchor="middle" fill="#15803d"><tspan font-style="italic">v</tspan></text><rect x="407" y="46" width="14" height="72" rx="2" fill="#475569"/><text x="414" y="36" font-size="14" text-anchor="middle" fill="#0f1620">detektor</text><path d="M407 122V148" stroke="#0f1620" stroke-width="1" stroke-dasharray="3 3"/><line x1="130" y1="142" x2="400" y2="142" stroke="#0f1620" stroke-width="1.2"/><polygon points="123,142 132,138 132,146" fill="#0f1620"/><polygon points="407,142 398,138 398,146" fill="#0f1620"/><path d="M123 134V148" stroke="#0f1620" stroke-width="1" stroke-dasharray="3 3"/><text x="265" y="160" font-size="14" text-anchor="middle" fill="#0f1620"><tspan font-style="italic">s</tspan></text></svg>`,
+            answer: { value: 38.9, unit: 'u', tol: 0.015 },
+            solution: `Vi söker ett samband mellan jonens massa och dess flygtid. Den elektriska energin blir rörelseenergi:
+
+$$ Q \\cdot U = \\frac{m \\cdot v^2}{2} \\qquad (1) $$
+
+I röret är farten konstant:
+
+$$ v = \\frac{s}{t} \\qquad (2) $$
+
+Farten från (2), $v = \\dfrac{s}{t}$, insatt i (1), $Q \\cdot U = \\dfrac{m \\cdot v^2}{2}$, ger
+
+$$ Q \\cdot U = \\frac{m \\cdot s^2}{2 \\cdot t^2} $$
+
+Vi löser ut massan:
+
+$$ m = \\frac{2 \\cdot Q \\cdot U}{s^2} \\cdot t^2 $$
+
+Laddningen *Q*, spänningen *U* och sträckan *s* är desamma för båda jonerna. Massan är alltså proportionell mot flygtiden i kvadrat. Vi bildar kvoten mellan den okända jonens massa $m_2$ och natriumjonens massa $m_1$, så att det okända förkortas bort:
+
+$$ \\frac{m_2}{m_1} = \\frac{t_2^{\\,2}}{t_1^{\\,2}} = \\left( \\frac{t_2}{t_1} \\right)^2 \\quad\\Leftrightarrow\\quad m_2 = m_1 \\cdot \\left( \\frac{t_2}{t_1} \\right)^2 $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+m_1 = 23{,}0\\ \\mathrm{u} \\\\
+t_1 = 8{,}00\\ \\text{µs} \\\\
+t_2 = 10{,}4\\ \\text{µs}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ m_2 = 23{,}0 \\cdot \\left( \\frac{10{,}4}{8{,}00} \\right)^2 = 38{,}87\\ \\mathrm{u} \\approx 38{,}9\\ \\mathrm{u} $$
+
+**Rimlighet:** Den okända jonen är långsammare och ska därför vara tyngre än natriumjonen. Värdet ligger nära massan hos en kaliumjon, $39\\ \\mathrm{u}$.
+
+**Svar:** Massan är cirka $38{,}9\\ \\mathrm{u}$.`,
+        },
+        {
+            level: 3,
+            question: `Joner av ett och samma slag skjuts in med farten $v_0$ mellan två plattor, där de accelereras genom spänningen *U*. Diagrammet visar hur kvadraten på jonernas sluthastighet, $v^2$, beror på spänningen.
+
+${makeDiagram({
+    xMax: 550, yMax: 4,
+    xTicks: [0, 100, 200, 300, 400, 500], yTicks: [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4],
+    xLabel: '<tspan font-style="italic">U</tspan> (V)',
+    yLabel: '<tspan font-style="italic">v</tspan><tspan dy="-5" font-size="10">2</tspan><tspan dy="5"> (10</tspan><tspan dy="-5" font-size="10">10</tspan><tspan dy="5"> m</tspan><tspan dy="-5" font-size="10">2</tspan><tspan dy="5">/s</tspan><tspan dy="-5" font-size="10">2</tspan><tspan dy="5">)</tspan>',
+    paths: [{ points: [[0, 1], [500, 3.4]] }]
+})}
+
+| Jon | Massa ($10^{-27}$ kg) | Laddning ($10^{-19}$ C) |
+|---|---|---|
+| Vätejon | 1,67 | 1,60 |
+| Heliumjon, en elektron saknas | 6,64 | 1,60 |
+| Heliumjon, två elektroner saknas | 6,64 | 3,20 |
+| Litiumjon | 11,7 | 1,60 |
+
+a) Vilken av jonerna i tabellen är det? Motivera med en beräkning.<br>b) Bestäm farten $v_0$. Ange svaret i km/s.`,
+            answer: { value: 100, unit: 'km/s', tol: 0.04 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 100, unit: 'km/s', tol: 0.04, etikett: '$v_0 =$' },
+            ],
+            solution: `Jonerna har redan farten $v_0$ när de accelereras. Den elektriska energin är lika med ökningen av rörelseenergi:
+
+$$ Q \\cdot U = \\frac{m \\cdot v^2}{2} - \\frac{m \\cdot v_0^{\\,2}}{2} $$
+
+Vi löser ut $v^2$, som är det som står på den lodräta axeln. Multiplikation med $\\dfrac{2}{m}$ i båda led ger
+
+$$ \\frac{2Q}{m} \\cdot U = v^2 - v_0^{\\,2} $$
+
+$$ v^2 = \\frac{2Q}{m} \\cdot U + v_0^{\\,2} $$
+
+Detta är en rät linje med lutningen $\\dfrac{2Q}{m}$, som skär den lodräta axeln i $v_0^{\\,2}$.
+
+**a)** Linjen går genom punkterna $(0;\\ 1{,}0 \\cdot 10^{10})$ och $(500;\\ 3{,}4 \\cdot 10^{10})$. Lutningen är
+
+$$ \\frac{2Q}{m} = \\frac{3{,}4 \\cdot 10^{10} - 1{,}0 \\cdot 10^{10}}{500 - 0} = 4{,}8 \\cdot 10^{7}\\ \\mathrm{C/kg} $$
+
+Kvoten mellan laddning och massa är hälften av lutningen:
+
+$$ \\frac{Q}{m} = \\frac{4{,}8 \\cdot 10^{7}}{2} = 2{,}4 \\cdot 10^{7}\\ \\mathrm{C/kg} $$
+
+Vi jämför med jonerna i tabellen:
+
+- Vätejon: $\\dfrac{1{,}60 \\cdot 10^{-19}}{1{,}67 \\cdot 10^{-27}} \\approx 9{,}6 \\cdot 10^{7}\\ \\mathrm{C/kg}$
+- Heliumjon, en elektron saknas: $\\dfrac{1{,}60 \\cdot 10^{-19}}{6{,}64 \\cdot 10^{-27}} \\approx 2{,}4 \\cdot 10^{7}\\ \\mathrm{C/kg}$
+- Heliumjon, två elektroner saknas: $\\dfrac{3{,}20 \\cdot 10^{-19}}{6{,}64 \\cdot 10^{-27}} \\approx 4{,}8 \\cdot 10^{7}\\ \\mathrm{C/kg}$
+- Litiumjon: $\\dfrac{1{,}60 \\cdot 10^{-19}}{11{,}7 \\cdot 10^{-27}} \\approx 1{,}4 \\cdot 10^{7}\\ \\mathrm{C/kg}$
+
+Bara den andra jonen stämmer. Den som glömmer tvåan i lutningen väljer i stället den tredje.
+
+**Svar:** Heliumjonen där en elektron saknas
+
+**b)** När spänningen är noll ändras inte farten, så linjens skärning med den lodräta axeln är $v_0^{\\,2}$:
+
+$$ v_0^{\\,2} = 1{,}0 \\cdot 10^{10}\\ \\mathrm{m^2/s^2} $$
+
+$$ v_0 = \\sqrt{1{,}0 \\cdot 10^{10}} = 1{,}0 \\cdot 10^{5}\\ \\mathrm{m/s} = 100\\ \\mathrm{km/s} $$
+
+**Svar:** Farten är cirka $100\\ \\mathrm{km/s}$.`,
+        },
+        {
+            level: 3,
+            question: `Ett batteri med spänningen $9{,}0\\ \\mathrm{V}$ består av sex likadana små celler i serie. Varje cell har spänningen $1{,}5\\ \\mathrm{V}$. Ett stort batteri med spänningen $1{,}5\\ \\mathrm{V}$ är gjort av samma material och lagrar lika mycket energi per kilogram. Det stora batteriet har tre gånger så stor massa som $9$-voltsbatteriet.<br>a) Hur många gånger så stor laddning kan det stora batteriet leverera som $9$-voltsbatteriet?<br>b) De sex små cellerna plockas ut och parallellkopplas, så att spänningen blir $1{,}5\\ \\mathrm{V}$. Hur många gånger så stor laddning kan de då leverera, jämfört med när de sitter i serie? Motivera med ett energiresonemang.`,
+            answer: { value: 18, unit: 'gånger' },
+            delsvar: [
+                { del: 'a', value: 18, unit: 'gånger' },
+                { del: 'b', value: 6, unit: 'gånger' },
+            ],
+            solution: `Varken energin eller massan är känd, men det räcker att jämföra batterierna. Laddningen ett batteri kan leverera fås ur
+
+$$ U = \\frac{E}{Q} \\quad\\Leftrightarrow\\quad Q = \\frac{E}{U} $$
+
+**a)** Låt $E$ vara energin i $9$-voltsbatteriet. Det stora batteriet har tre gånger så stor massa och lika mycket energi per kilogram, så dess energi är $3E$. Laddningarna är
+
+$$ Q_\\text{stort} = \\frac{3E}{1{,}5} \\qquad\\text{och}\\qquad Q_\\text{9V} = \\frac{E}{9{,}0} $$
+
+Vi bildar kvoten. Energin $E$ förkortas bort:
+
+$$ \\frac{Q_\\text{stort}}{Q_\\text{9V}} = \\frac{3E}{1{,}5} \\cdot \\frac{9{,}0}{E} = \\frac{3 \\cdot 9{,}0}{1{,}5} = 18 $$
+
+Tre gånger så mycket energi ger en faktor $3$. Varje coulomb överför dessutom bara en sjättedel så mycket energi, vilket ger en faktor $6$.
+
+**Svar:** $18$ gånger så stor laddning
+
+**b)** Energin som är lagrad i de sex cellerna påverkas inte av hur de kopplas. Den är $E$ i båda fallen. Spänningen är däremot $9{,}0\\ \\mathrm{V}$ i serie och $1{,}5\\ \\mathrm{V}$ vid parallellkoppling:
+
+$$ \\frac{Q_\\text{parallell}}{Q_\\text{serie}} = \\frac{E}{1{,}5} \\cdot \\frac{9{,}0}{E} = \\frac{9{,}0}{1{,}5} = 6 $$
+
+**Rimlighet:** I seriekopplingen passerar samma laddning genom alla sex cellerna och får ett energitillskott i varje cell. I parallellkopplingen levererar varje cell sin egen laddning, så de sex cellernas laddningar läggs ihop.
+
+**Svar:** $6$ gånger så stor laddning`,
+        },
+        {
+            level: 3,
+            question: `En elektron startar från vila vid den negativa av två plattor och accelereras rakt mot den positiva. Accelerationen är konstant. Spänningen mellan plattorna är *U* och färden tar tiden *T*.<br>a) Hur stor andel av spänningen *U* har elektronen passerat när halva tiden har gått? Ange svaret i procent.<br>b) Hur stor andel av tiden *T* har gått när elektronen har passerat halva spänningen? Ange svaret i procent.`,
+            answer: { value: 25, unit: '%' },
+            delsvar: [
+                { del: 'a', value: 25, unit: '%' },
+                { del: 'b', value: 71, unit: '%' },
+            ],
+            solution: `Vi söker ett samband mellan den tid *t* som har gått och den spänning *u* som elektronen har passerat hittills. Accelerationen *a* är konstant och elektronen startar från vila, så farten är
+
+$$ v = a \\cdot t \\qquad (1) $$
+
+Den elektriska energin har blivit rörelseenergi:
+
+$$ Q \\cdot u = \\frac{m \\cdot v^2}{2} \\qquad (2) $$
+
+Farten från (1), $v = a \\cdot t$, insatt i (2), $Q \\cdot u = \\dfrac{m \\cdot v^2}{2}$, ger
+
+$$ Q \\cdot u = \\frac{m \\cdot (a \\cdot t)^2}{2} $$
+
+$$ u = \\frac{m \\cdot a^2}{2 \\cdot Q} \\cdot t^2 $$
+
+Massan, accelerationen och laddningen är konstanta. Den passerade spänningen är alltså proportionell mot tiden i kvadrat. Hela spänningen *U* passeras på tiden *T*, och kvoten blir
+
+$$ \\frac{u}{U} = \\left( \\frac{t}{T} \\right)^2 \\qquad (3) $$
+
+**a)** När halva tiden har gått är $\\dfrac{t}{T} = 0{,}5$. Insättning i (3), $\\dfrac{u}{U} = \\left( \\dfrac{t}{T} \\right)^2$, ger
+
+$$ \\frac{u}{U} = 0{,}5^2 = 0{,}25 = 25\\ \\% $$
+
+**Svar:** $25\\ \\%$ av spänningen
+
+**b)** När halva spänningen har passerats är $\\dfrac{u}{U} = 0{,}5$. Insättning i (3), $\\dfrac{u}{U} = \\left( \\dfrac{t}{T} \\right)^2$, ger
+
+$$ 0{,}5 = \\left( \\frac{t}{T} \\right)^2 $$
+
+Tiden är positiv, så bara den positiva roten gäller:
+
+$$ \\frac{t}{T} = \\sqrt{0{,}5} = 0{,}7071\\ldots \\approx 71\\ \\% $$
+
+**Rimlighet:** Elektronen rör sig långsamt i början och snabbt i slutet. Det är därför rimligt att mindre än halva spänningen har passerats efter halva tiden, och att mer än halva tiden har gått när halva spänningen är passerad.
+
+**Svar:** Cirka $71\\ \\%$ av tiden`,
+        },
+        {
+            level: 3,
+            question: `Ett batteris spänning sjunker när det laddas ur. Diagrammet visar en förenklad bild av hur spänningen *U* hos ett mobilbatteri beror på den laddning *Q* som batteriet har levererat. Efter $10\\ \\mathrm{kC}$ är batteriet urladdat.
+
+${makeDiagram({
+    xMax: 12, yMax: 4.5,
+    xTicks: [0, 2, 4, 6, 8, 10], yTicks: [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5],
+    xLabel: '<tspan font-style="italic">Q</tspan> (kC)',
+    yLabel: '<tspan font-style="italic">U</tspan> (V)',
+    paths: [{ points: [[0, 4], [2, 3.5], [8, 3.5], [10, 2.5]] }]
+})}
+
+En elev räknar ut batteriets energi med $E = Q \\cdot U$ och använder spänningen hos det fulladdade batteriet.<br>a) Bestäm hur stor energi batteriet levererar under hela urladdningen. Ange svaret i kJ.<br>b) Med hur många procent överskattar eleven energin?`,
+            answer: { value: 34.5, unit: 'kJ', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 34.5, unit: 'kJ', tol: 0.03 },
+                { del: 'b', value: 16, unit: '%', tol: 0.08 },
+            ],
+            solution: `Sambandet $E = Q \\cdot U$ gäller för en bestämd spänning. Här ändras spänningen, så vi delar upp urladdningen i små delar. För en liten laddning $\\Delta Q$ är spänningen nästan konstant, och energin är
+
+$$ \\Delta E = U \\cdot \\Delta Q $$
+
+Det är arean av en smal stapel under grafen. När alla staplar läggs ihop blir den totala energin lika med **hela arean under grafen**.
+
+${makeDiagram({
+    xMax: 12, yMax: 4.5,
+    xTicks: [0, 2, 4, 6, 8, 10], yTicks: [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5],
+    xLabel: '<tspan font-style="italic">Q</tspan> (kC)',
+    yLabel: '<tspan font-style="italic">U</tspan> (V)',
+    fills: [{ points: [[0, 0], [0, 4], [2, 3.5], [2, 0]], color: 'rgba(200,50,74,0.20)' }, { points: [[2, 0], [2, 3.5], [8, 3.5], [8, 0]], color: 'rgba(37,99,235,0.14)' }, { points: [[8, 0], [8, 3.5], [10, 2.5], [10, 0]], color: 'rgba(200,50,74,0.20)' }],
+    paths: [{ points: [[0, 4], [2, 3.5], [8, 3.5], [10, 2.5]] }]
+})}
+
+**a)** Arean består av en parallelltrapets, en rektangel och ännu en parallelltrapets. Produkten av kC och V ger kJ.
+
+$$ E_1 = \\frac{4{,}0 + 3{,}5}{2} \\cdot 2{,}0 = 7{,}5\\ \\mathrm{kJ} $$
+
+$$ E_2 = 3{,}5 \\cdot 6{,}0 = 21\\ \\mathrm{kJ} $$
+
+$$ E_3 = \\frac{3{,}5 + 2{,}5}{2} \\cdot 2{,}0 = 6{,}0\\ \\mathrm{kJ} $$
+
+Den totala energin är
+
+$$ E = 7{,}5 + 21 + 6{,}0 = 34{,}5\\ \\mathrm{kJ} $$
+
+**Svar:** Energin är cirka $34{,}5\\ \\mathrm{kJ}$.
+
+**b)** Eleven använder spänningen $4{,}0\\ \\mathrm{V}$ för hela laddningen:
+
+$$ E_\\text{elev} = 10 \\cdot 4{,}0 = 40\\ \\mathrm{kJ} $$
+
+Jämfört med den verkliga energin är det
+
+$$ \\frac{40}{34{,}5} = 1{,}159\\ldots \\approx 1{,}16 $$
+
+**Rimlighet:** Spänningen är lägre än $4{,}0\\ \\mathrm{V}$ under nästan hela urladdningen, så elevens värde är en övre gräns. Den verkliga energin motsvarar en medelspänning på $3{,}45\\ \\mathrm{V}$, vilket stämmer med grafen.
+
+**Svar:** Eleven överskattar energin med cirka $16\\ \\%$.`,
         },
     ],
 
@@ -38168,12 +43104,12 @@ $$ I = \\frac{12}{50} = 0{,}24\\ \\mathrm{A} $$
 
 **Svar:** Strömmen är $0{,}24\\ \\mathrm{A}$.
 
-**Generell slutsats:** Ohms lag kan lösas ut åt tre håll — $U = R \\cdot I$, $R = U/I$ och $I = U/R$. Vilken form du behöver beror på vad som efterfrågas.`,
+**Generell slutsats:** Ohms lag kan lösas ut åt tre håll: $U = R \\cdot I$, $R = U/I$ och $I = U/R$. Vilken form du behöver beror på vad som efterfrågas.`,
         },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
-            level: 2,
+            level: 1,
             question: `En kopparledare är $25\\ \\mathrm{m}$ lång och har tvärsnittsarean $1{,}5\\ \\mathrm{mm^2}$. Kopparens resistivitet är $\\rho = 1{,}7 \\cdot 10^{-8}\\ \\mathrm{\\Omega \\cdot m}$. Bestäm ledarens resistans.`,
             answer: { value: 0.28, unit: 'Ω' },
             solution: `Resistansen i en ledare beror på resistivitet, längd och tvärsnittsarea:
@@ -38221,7 +43157,7 @@ $$ I = \\frac{U}{R} = \\frac{1{,}5}{55} = 0{,}0273\\ \\mathrm{A} \\approx 27\\ \
 
 **Svar:** Strömmen är ungefär $27\\ \\mathrm{mA}$ (eller $0{,}027\\ \\mathrm{A}$).
 
-**Generell slutsats:** Uppgiften kräver två formler i följd: först $R = \\rho l / A$ för att hitta trådens resistans, sedan Ohms lag för strömmen. Nikrom har hög resistivitet — därför används det just i värmetrådar.`,
+**Generell slutsats:** Uppgiften kräver två formler i följd: först $R = \\rho l / A$ för att hitta trådens resistans, sedan Ohms lag för strömmen. Nikrom har hög resistivitet. Därför används det just i värmetrådar.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
@@ -38229,11 +43165,11 @@ $$ I = \\frac{U}{R} = \\frac{1{,}5}{55} = 0{,}0273\\ \\mathrm{A} \\approx 27\\ \
             level: 2,
             question: `En värmetråd av nikrom ska ha resistansen $R = 24\\ \\mathrm{\\Omega}$. Tråden har en cirkulär tvärsnittsyta med diametern $d = 0{,}40\\ \\mathrm{mm}$, och nikromens resistivitet är $\\rho = 1{,}1 \\cdot 10^{-6}\\ \\mathrm{\\Omega \\cdot m}$. Hur lång måste tråden vara?`,
             answer: { value: 2.7, unit: 'm' },
-            solution: `**Steg 1 — tvärsnittsarean.** Tråden är cirkulär, så arean fås ur diametern via radien $r = d/2$:
+            solution: `**Steg 1: tvärsnittsarean.** Tråden är cirkulär, så arean fås ur diametern via radien $r = d/2$:
 
 $$ A = \\pi \\cdot r^2 = \\pi \\cdot \\left(\\frac{d}{2}\\right)^2 = \\pi \\cdot (0{,}20 \\cdot 10^{-3})^2 = 1{,}26 \\cdot 10^{-7}\\ \\mathrm{m^2} $$
 
-**Steg 2 — lös ut längden.** Vi utgår från formeln för resistans i ledare och löser ut *l*:
+**Steg 2: lös ut längden.** Vi utgår från formeln för resistans i ledare och löser ut *l*:
 
 $$ R = \\rho \\cdot \\frac{l}{A} \\quad\\Leftrightarrow\\quad l = \\frac{R \\cdot A}{\\rho} $$
 
@@ -38255,7 +43191,7 @@ $$ l = \\frac{24 \\cdot 1{,}26 \\cdot 10^{-7}}{1{,}1 \\cdot 10^{-6}} = 2{,}74\\ 
             level: 3,
             question: `En metalltråd har resistansen $R_0 = 5{,}0\\ \\mathrm{\\Omega}$. Tråden dras ut (sträcks) till **tre gånger** sin ursprungliga längd. Materialets volym är oförändrad. Hur stor blir trådens nya resistans?`,
             answer: { value: 45, unit: 'Ω' },
-            solution: `Den naiva gissningen "tre gånger längre → tre gånger så stor resistans" är **fel** — den missar att tvärsnittsarean ändras när tråden sträcks.
+            solution: `Den naiva gissningen "tre gånger längre → tre gånger så stor resistans" är **fel**. Den missar att tvärsnittsarean ändras när tråden sträcks.
 
 Volymen $V = A \\cdot l$ är konstant. När längden tredubblas ($l \\to 3l$) måste arean krympa till en tredjedel ($A \\to A/3$) för att produkten $A \\cdot l$ ska vara oförändrad.
 
@@ -38267,7 +43203,625 @@ $$ R_\\text{ny} = 9 \\cdot 5{,}0 = 45\\ \\mathrm{\\Omega} $$
 
 **Svar:** Den nya resistansen är $45\\ \\mathrm{\\Omega}$.
 
-**Generell slutsats:** När en tråd sträcks med konstant volym ändras resistansen med **kvadraten** på längdfaktorn: $n$ gånger längre ger $n^2$ gånger så stor resistans. Längdökningen och areaminskningen samverkar — båda höjer resistansen.`,
+**Generell slutsats:** När en tråd sträcks med konstant volym ändras resistansen med **kvadraten** på längdfaktorn: $n$ gånger längre ger $n^2$ gånger så stor resistans. Längdökningen och areaminskningen samverkar: båda höjer resistansen.`,
+        },
+        // ── Grund (påfyllning) ──
+        {
+            level: 1,
+            question: `En lång koppartråd är ansluten till ett batteri som ger konstant spänning. Vilken av åtgärderna gör strömmen genom tråden större?`,
+            choices: ['Tråden värms upp.', 'Tråden byts mot en längre koppartråd som är lika tjock.', 'Tråden kyls ned.', 'Tråden byts mot en smalare koppartråd som är lika lång.'],
+            correct: 2,
+            solution: `Vi löser ut strömmen ur Ohms lag:
+
+$$ U = R \\cdot I \\quad\\Leftrightarrow\\quad I = \\frac{U}{R} $$
+
+Spänningen är konstant, så strömmen blir större bara om trådens resistans blir mindre.
+
+- När tråden värms upp rör sig atomerna mer och hindrar elektronerna i större utsträckning. Resistansen ökar.
+- En längre tråd har större resistans, eftersom fler atomer hindrar elektronerna.
+- När tråden kyls ned rör sig atomerna mindre. Resistansen minskar.
+- En smalare tråd har mindre tvärsnittsarea och därför större resistans.
+
+**Svar:** Strömmen blir större när tråden kyls ned.`,
+        },
+        {
+            level: 1,
+            question: `Grafen visar hur spänningen över en resistor med konstant resistans beror av strömmen genom den.
+
+${makeDiagram({
+    xMax: 250, yMax: 8,
+    xTicks: [0, 50, 100, 150, 200, 250], yTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+    xLabel: '<tspan font-style="italic">I</tspan> (mA)',
+    yLabel: '<tspan font-style="italic">U</tspan> (V)',
+    paths: [{ points: [[0, 0], [250, 7.5]] }],
+})}
+
+a) Bestäm resistorns resistans.<br>b) Hur stor ström går genom resistorn när spänningen är $9{,}0\\ \\mathrm{V}$? Svara i A.`,
+            answer: { value: 30, unit: 'Ω' },
+            delsvar: [
+                { del: 'a', value: 30, unit: 'Ω', etikett: '$R =$' },
+                { del: 'b', value: 0.3, unit: 'A', etikett: '$I =$' },
+            ],
+            solution: `**a)** Vi väljer en punkt på grafen som är lätt att läsa av. När strömmen är $200\\ \\mathrm{mA}$ är spänningen $6{,}0\\ \\mathrm{V}$. Ohms lag ger
+
+$$ U = R \\cdot I \\quad\\Leftrightarrow\\quad R = \\frac{U}{I} $$
+
+$$
+\\left[ \\begin{array}{l}
+U = 6{,}0\\ \\mathrm{V} \\\\
+I = 200\\ \\mathrm{mA} = 0{,}200\\ \\mathrm{A}
+\\end{array} \\right]
+$$
+
+$$ R = \\frac{6{,}0}{0{,}200} = 30\\ \\mathrm{\\Omega} $$
+
+**Svar:** Resistansen är $30\\ \\mathrm{\\Omega}$.
+
+**b)** Resistansen är konstant, så den är $30\\ \\mathrm{\\Omega}$ även när spänningen är $9{,}0\\ \\mathrm{V}$.
+
+$$ I = \\frac{U}{R} = \\frac{9{,}0}{30} = 0{,}30\\ \\mathrm{A} $$
+
+**Svar:** Strömmen är $0{,}30\\ \\mathrm{A}$.`,
+        },
+        {
+            level: 1,
+            question: `Tabellen visar fyra koppartrådar med samma temperatur. Vilken tråd har störst resistans?
+
+| Tråd | Längd (m) | Tvärsnittsarea (mm²) |
+|---|---|---|
+| 1 | 4,0 | 2,0 |
+| 2 | 6,0 | 4,0 |
+| 3 | 8,0 | 5,0 |
+| 4 | 3,0 | 1,0 |`,
+            choices: ['Tråd 1', 'Tråd 2', 'Tråd 3', 'Tråd 4'],
+            correct: 3,
+            solution: `Resistansen i en ledare är
+
+$$ R = \\rho \\cdot \\frac{l}{A} $$
+
+Alla trådar är av koppar och har samma temperatur, så resistiviteten *ρ* är densamma. Den tråd som har störst kvot $\\dfrac{l}{A}$ har därför störst resistans.
+
+| Tråd | Kvoten *l*/*A* (m/mm²) |
+|---|---|
+| 1 | $\\dfrac{4{,}0}{2{,}0} = 2{,}0$ |
+| 2 | $\\dfrac{6{,}0}{4{,}0} = 1{,}5$ |
+| 3 | $\\dfrac{8{,}0}{5{,}0} = 1{,}6$ |
+| 4 | $\\dfrac{3{,}0}{1{,}0} = 3{,}0$ |
+
+Tråd 4 är visserligen kortast, men den är också så smal att resistansen ändå blir störst.
+
+**Svar:** Tråd 4`,
+        },
+        {
+            level: 1,
+            question: `Ett mikrochip är förbundet med ett av sina ben genom en $2{,}0\\ \\mathrm{mm}$ lång guldtråd, se figuren. Trådens tvärsnittsarea är $4{,}9 \\cdot 10^{-10}\\ \\mathrm{m^2}$ och guldets resistivitet är $2{,}2 \\cdot 10^{-8}\\ \\mathrm{\\Omega \\cdot m}$. Bestäm trådens resistans. Svara i mΩ.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 205" role="img" aria-label="Guldtråd i en båge från ett chip till ett metallben" style="max-width:506px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><rect x="24" y="150" width="392" height="22" fill="#7d9a86" stroke="#0f1620" stroke-width="1.4"/><rect x="66" y="112" width="160" height="38" fill="#4a4f58" stroke="#0f1620" stroke-width="1.4"/><rect x="190" y="106" width="22" height="6" fill="#c9971c" stroke="#0f1620" stroke-width="1"/><rect x="325" y="138" width="75" height="12" fill="#c4c7ca" stroke="#0f1620" stroke-width="1.4"/><path d="M 201 106 C 208 36 310 36 348 138" fill="none" stroke="#c9971c" stroke-width="4"/><text x="266" y="44" font-size="15" fill="#0f1620" text-anchor="middle">guldtråd</text><text x="118" y="102" font-size="15" fill="#0f1620" text-anchor="middle">chip</text><text x="384" y="128" font-size="15" fill="#0f1620" text-anchor="middle">ben</text><text x="220" y="192" font-size="15" fill="#0f1620" text-anchor="middle">kretskort</text></svg>`,
+            answer: { value: 90, unit: 'mΩ' },
+            solution: `Vi använder formeln för resistans i ledare:
+
+$$ R = \\rho \\cdot \\frac{l}{A} $$
+
+$$
+\\left[ \\begin{array}{l}
+\\rho = 2{,}2 \\cdot 10^{-8}\\ \\mathrm{\\Omega \\cdot m} \\\\
+l = 2{,}0\\ \\mathrm{mm} = 2{,}0 \\cdot 10^{-3}\\ \\mathrm{m} \\\\
+A = 4{,}9 \\cdot 10^{-10}\\ \\mathrm{m^2}
+\\end{array} \\right]
+$$
+
+$$ R = 2{,}2 \\cdot 10^{-8} \\cdot \\frac{2{,}0 \\cdot 10^{-3}}{4{,}9 \\cdot 10^{-10}} = 0{,}0897\\ldots\\ \\mathrm{\\Omega} \\approx 0{,}090\\ \\mathrm{\\Omega} = 90\\ \\mathrm{m\\Omega} $$
+
+**Svar:** Trådens resistans är $90\\ \\mathrm{m\\Omega}$.`,
+        },
+        // ── Mellan (påfyllning) ──
+        {
+            level: 2,
+            question: `I en kabel ligger två kopparledare bredvid varandra. Någonstans har isoleringen skadats så att ledarna har fått kontakt. För att hitta skadan kopplas ett batteri till kabelns ena ände, se figuren. Amperemetern visar $2{,}4\\ \\mathrm{A}$. Varje ledare har tvärsnittsarean $0{,}75\\ \\mathrm{mm^2}$ och kopparens resistivitet är $1{,}7 \\cdot 10^{-8}\\ \\mathrm{\\Omega \\cdot m}$. Hur långt *x* in i kabeln finns skadan? Bortse från all annan resistans än kabelns. Svara i meter.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 218" role="img" aria-label="Batteri och amperemeter kopplade till två parallella ledare som har kontakt på avståndet x" style="max-width:598px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><path d="M 180 50 L 100 50 L 100 90" fill="none" stroke="#0f1620" stroke-width="1.8"/><path d="M 180 140 L 100 140 L 100 100" fill="none" stroke="#0f1620" stroke-width="1.8"/><line x1="84" y1="90" x2="116" y2="90" stroke="#0f1620" stroke-width="2"/><line x1="92" y1="100" x2="108" y2="100" stroke="#0f1620" stroke-width="4"/><text x="74" y="100" font-size="15" fill="#0f1620" text-anchor="end">1,5 V</text><circle cx="140" cy="50" r="15" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><text x="140" y="55.5" font-size="15" fill="#0f1620" text-anchor="middle">A</text><line x1="180" y1="50" x2="490" y2="50" stroke="#b5651d" stroke-width="4"/><line x1="180" y1="140" x2="490" y2="140" stroke="#b5651d" stroke-width="4"/><line x1="350" y1="50" x2="350" y2="140" stroke="#c8324a" stroke-width="2.4"/><circle cx="350" cy="50" r="5" fill="#c8324a"/><circle cx="350" cy="140" r="5" fill="#c8324a"/><circle cx="180" cy="50" r="4" fill="#0f1620"/><circle cx="180" cy="140" r="4" fill="#0f1620"/><text x="362" y="100" font-size="15" fill="#0f1620">kontakt</text><text x="335" y="30" font-size="15" fill="#0f1620" text-anchor="middle">kabelns två ledare</text><line x1="180" y1="148" x2="180" y2="192" stroke="#8a8579" stroke-width="1.1" stroke-dasharray="3 3"/><line x1="350" y1="149" x2="350" y2="192" stroke="#8a8579" stroke-width="1.1" stroke-dasharray="3 3"/><line x1="188" y1="186" x2="342" y2="186" stroke="#0f1620" stroke-width="1.4"/><polygon points="180,186 189,182 189,190" fill="#0f1620"/><polygon points="350,186 341,190 341,182" fill="#0f1620"/><text x="265" y="206" font-size="16" fill="#0f1620" text-anchor="middle" font-style="italic">x</text></svg>`,
+            answer: { value: 14, unit: 'm', tol: 0.03 },
+            solution: `Strömmen går fram i den ena ledaren till kontaktstället och tillbaka i den andra. Den passerar alltså kopparledare med den sammanlagda längden $l = 2x$.
+
+Ohms lag ger resistansen i den ledaren:
+
+$$ U = R \\cdot I \\quad\\Leftrightarrow\\quad R = \\frac{U}{I} $$
+
+$$ R = \\frac{1{,}5}{2{,}4} = 0{,}625\\ \\mathrm{\\Omega} $$
+
+Vi löser ut längden ur formeln för resistans i ledare:
+
+$$ R = \\rho \\cdot \\frac{l}{A} \\quad\\Leftrightarrow\\quad l = \\frac{R \\cdot A}{\\rho} $$
+
+$$
+\\left[ \\begin{array}{l}
+R = 0{,}625\\ \\mathrm{\\Omega} \\\\
+A = 0{,}75\\ \\mathrm{mm^2} = 0{,}75 \\cdot 10^{-6}\\ \\mathrm{m^2} \\\\
+\\rho = 1{,}7 \\cdot 10^{-8}\\ \\mathrm{\\Omega \\cdot m}
+\\end{array} \\right]
+$$
+
+$$ l = \\frac{0{,}625 \\cdot 0{,}75 \\cdot 10^{-6}}{1{,}7 \\cdot 10^{-8}} = 27{,}57\\ldots\\ \\mathrm{m} $$
+
+Längden räknas både fram och tillbaka. Avståndet till skadan är hälften:
+
+$$ x = \\frac{l}{2} = \\frac{27{,}57\\ldots}{2} = 13{,}78\\ldots\\ \\mathrm{m} \\approx 14\\ \\mathrm{m} $$
+
+**Svar:** Skadan finns $14\\ \\mathrm{m}$ in i kabeln.`,
+        },
+        {
+            level: 2,
+            question: `Grafen visar hur strömmen beror av spänningen för två komponenter, K och M. Den ena är en resistor med konstant resistans och den andra är en liten glödlampa.
+
+${makeDiagram({
+    xMax: 5, yMax: 300,
+    xTicks: [0, 1, 2, 3, 4, 5], yTicks: [0, 50, 100, 150, 200, 250, 300],
+    xLabel: '<tspan font-style="italic">U</tspan> (V)',
+    yLabel: '<tspan font-style="italic">I</tspan> (mA)',
+    paths: [
+        { points: [[0, 0], [5, 250]], color: '#1f5f8b' },
+        { points: Array.from({ length: 82 }, (_, j) => { const i = 0.27 * j / 81; return [5 * i + 50 * i * i, 1000 * i]; }) },
+    ],
+}).replace('</svg>', '<text x="280" y="106" font-size="16" fill="#c8324a" text-anchor="middle">K</text><text x="354" y="172" font-size="16" fill="#1f5f8b" text-anchor="middle">M</text></svg>')}
+
+a) Vilken av komponenterna är glödlampan?<br>b) Bestäm glödlampans resistans vid spänningen $1{,}0\\ \\mathrm{V}$ och vid spänningen $3{,}0\\ \\mathrm{V}$.<br>c) Förklara varför glödlampans resistans ändras på det här sättet.`,
+            answer: { value: 10, unit: 'Ω', tol: 0.05 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 10, unit: 'Ω', etikett: 'vid 1,0 V', tol: 0.05 },
+                { del: 'b', value: 15, unit: 'Ω', etikett: 'vid 3,0 V', tol: 0.05 },
+                { del: 'c' },
+            ],
+            solution: `**a)** En komponent med konstant resistans ger en rät linje genom origo, eftersom $I = \\dfrac{U}{R}$ då är proportionell mot *U*. Grafen för K är krökt, så K har inte konstant resistans.
+
+**Svar:** K är glödlampan.
+
+**b)** Vi läser av strömmen i grafen för K och använder $R = \\dfrac{U}{I}$.
+
+Vid $1{,}0\\ \\mathrm{V}$ är strömmen $100\\ \\mathrm{mA} = 0{,}100\\ \\mathrm{A}$:
+
+$$ R = \\frac{1{,}0}{0{,}100} = 10\\ \\mathrm{\\Omega} $$
+
+Vid $3{,}0\\ \\mathrm{V}$ är strömmen $200\\ \\mathrm{mA} = 0{,}200\\ \\mathrm{A}$:
+
+$$ R = \\frac{3{,}0}{0{,}200} = 15\\ \\mathrm{\\Omega} $$
+
+**Svar:** $10\\ \\mathrm{\\Omega}$ vid $1{,}0\\ \\mathrm{V}$ och $15\\ \\mathrm{\\Omega}$ vid $3{,}0\\ \\mathrm{V}$
+
+**c)** Större spänning ger större ström, och då blir glödtråden varmare. Vid högre temperatur rör sig atomerna i tråden mer och hindrar ledningselektronerna i större utsträckning. Resistiviteten ökar, och därmed ökar även resistansen.
+
+**Svar:** Glödtråden blir varmare när strömmen ökar, och högre temperatur ger större resistans.`,
+        },
+        {
+            level: 2,
+            question: `En rak metalltråd har resistansen $40\\ \\mathrm{\\Omega}$. Tråden kapas i *n* lika långa bitar, som sedan läggs bredvid varandra och löds ihop till en enda kort och tjock ledare. Den nya ledaren har resistansen $2{,}5\\ \\mathrm{\\Omega}$. Bestäm *n*.`,
+            answer: { value: 4, unit: 'bitar' },
+            solution: `Kalla den ursprungliga trådens längd *l* och tvärsnittsarea *A*. Då är
+
+$$ R = \\rho \\cdot \\frac{l}{A} $$
+
+Varje bit har längden $\\dfrac{l}{n}$. När *n* bitar ligger bredvid varandra blir den sammanlagda tvärsnittsarean $n \\cdot A$. Den nya ledaren har därför resistansen
+
+$$ R_\\text{ny} = \\rho \\cdot \\frac{\\frac{l}{n}}{n \\cdot A} = \\frac{1}{n^2} \\cdot \\rho \\cdot \\frac{l}{A} = \\frac{R}{n^2} $$
+
+Vi löser ut $n^2$:
+
+$$ n^2 = \\frac{R}{R_\\text{ny}} $$
+
+$$ n^2 = \\frac{40}{2{,}5} = 16 $$
+
+$$ n = \\sqrt{16} = 4 $$
+
+(Den negativa roten saknar betydelse, eftersom *n* är ett antal.)
+
+**Svar:** $n = 4$`,
+        },
+        {
+            level: 2,
+            question: `Två runda trådar, P och Q, är gjorda av samma metall och har samma temperatur. Tråd Q är dubbelt så lång som tråd P och har dubbelt så stor diameter. Trådarna ansluts en i taget till samma spänning. Strömmen genom tråd P är *I*. Hur stor är strömmen genom tråd Q?`,
+            choices: ['$I$', '$2I$', '$4I$', '$8I$'],
+            correct: 1,
+            solution: `Vi jämför trådarnas resistanser. Dubbelt så stor diameter betyder dubbelt så stor radie, och arean är $A = \\pi \\cdot r^2$. Tråd Q har därför arean
+
+$$ A_\\mathrm{Q} = \\pi \\cdot (2r)^2 = 4 \\cdot \\pi \\cdot r^2 = 4A $$
+
+Längden är $2l$, så
+
+$$ R_\\mathrm{Q} = \\rho \\cdot \\frac{2l}{4A} = \\frac{1}{2} \\cdot \\rho \\cdot \\frac{l}{A} = \\frac{R_\\mathrm{P}}{2} $$
+
+Spänningen *U* är densamma. Ohms lag ger
+
+$$ I_\\mathrm{Q} = \\frac{U}{R_\\mathrm{Q}} = \\frac{U}{\\frac{R_\\mathrm{P}}{2}} = 2 \\cdot \\frac{U}{R_\\mathrm{P}} = 2I $$
+
+Den som svarar $I$ har glömt att arean beror på diametern i kvadrat.
+
+**Svar:** Strömmen genom tråd Q är $2I$.`,
+        },
+        {
+            level: 2,
+            question: `På ett kretskort består ledarna av platta kopparspår med konstant tjocklek *t*. Figuren visar en kvadratisk bit med sidan *a*, där strömmen går in längs hela den ena kanten och ut längs hela den motstående. Kopparens resistivitet är $1{,}7 \\cdot 10^{-8}\\ \\mathrm{\\Omega \\cdot m}$ och tjockleken är $t = 35\\ \\mathrm{\\mu m}$.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 172" role="img" aria-label="Tunn kvadratisk kopparskiva med sidan a och tjockleken t, genomfluten av strömmen I" style="max-width:460px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><polygon points="100,114 240,114 300,44 160,44" fill="#dba679" stroke="#0f1620" stroke-width="1.6" stroke-linejoin="round"/><polygon points="240,114 300,44 300,56 240,126" fill="#a86a38" stroke="#0f1620" stroke-width="1.6" stroke-linejoin="round"/><rect x="100" y="114" width="140" height="12" fill="#c48348" stroke="#0f1620" stroke-width="1.6"/><g stroke="#1f5f8b" stroke-width="3" stroke-linecap="butt"><line x1="56" y1="79" x2="112" y2="79"/><line x1="286" y1="79" x2="346" y2="79"/></g><polygon points="124,79 111,73 111,85" fill="#1f5f8b"/><polygon points="358,79 345,73 345,85" fill="#1f5f8b"/><text x="42" y="85" font-size="17" fill="#1f5f8b" text-anchor="middle" font-style="italic">I</text><text x="374" y="85" font-size="17" fill="#1f5f8b" text-anchor="middle" font-style="italic">I</text><text x="170" y="149" font-size="17" fill="#0f1620" text-anchor="middle" font-style="italic">a</text><text x="282" y="117" font-size="17" fill="#0f1620" text-anchor="middle" font-style="italic">a</text><text x="90" y="126" font-size="17" fill="#0f1620" text-anchor="end" font-style="italic">t</text></svg>
+
+a) Visa att bitens resistans är lika stor för alla kvadrater, oavsett hur stor sidan *a* är.<br>b) Ett rakt kopparspår är $60\\ \\mathrm{mm}$ långt. När strömmen i spåret är $0{,}50\\ \\mathrm{A}$ får spänningen mellan spårets ändar vara högst $30\\ \\mathrm{mV}$. Hur brett måste spåret minst vara? Svara i mm.<br>c) Ett företag vill halvera alla mått på spåret: längden, bredden och tjockleken. Hur påverkas spårets resistans? Ge en förklaring som gäller för alla raka spår.`,
+            answer: { value: 0.49, unit: 'mm', tol: 0.02 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 0.49, unit: 'mm', etikett: 'minsta bredden', tol: 0.02 },
+                { del: 'c' },
+            ],
+            solution: `**a)** Strömmen går sträckan $l = a$. Tvärsnittet som strömmen passerar är en rektangel med sidorna *a* och *t*, så $A = a \\cdot t$. Formeln för resistans i ledare ger
+
+$$ R = \\rho \\cdot \\frac{l}{A} = \\rho \\cdot \\frac{a}{a \\cdot t} = \\frac{\\rho}{t} $$
+
+Sidan *a* förkortas bort. Resistansen beror bara på materialet och tjockleken, vilket skulle visas. (En större kvadrat är längre, men i samma mån bredare.)
+
+**b)** Ohms lag ger den största tillåtna resistansen:
+
+$$ R = \\frac{U}{I} = \\frac{0{,}030}{0{,}50} = 0{,}060\\ \\mathrm{\\Omega} $$
+
+Kalla spårets bredd *b*. Tvärsnittsarean är då $A = b \\cdot t$, och bredden kan lösas ut:
+
+$$ R = \\rho \\cdot \\frac{l}{b \\cdot t} \\quad\\Leftrightarrow\\quad b = \\frac{\\rho \\cdot l}{R \\cdot t} $$
+
+$$
+\\left[ \\begin{array}{l}
+\\rho = 1{,}7 \\cdot 10^{-8}\\ \\mathrm{\\Omega \\cdot m} \\\\
+l = 60\\ \\mathrm{mm} = 0{,}060\\ \\mathrm{m} \\\\
+R = 0{,}060\\ \\mathrm{\\Omega} \\\\
+t = 35\\ \\mathrm{\\mu m} = 35 \\cdot 10^{-6}\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ b = \\frac{1{,}7 \\cdot 10^{-8} \\cdot 0{,}060}{0{,}060 \\cdot 35 \\cdot 10^{-6}} = 4{,}857\\ldots \\cdot 10^{-4}\\ \\mathrm{m} \\approx 0{,}49\\ \\mathrm{mm} $$
+
+Ett bredare spår har mindre resistans, så detta är den minsta bredden. Avrundningen sker uppåt, så kravet är uppfyllt.
+
+**Svar:** Spåret måste vara minst $0{,}49\\ \\mathrm{mm}$ brett.
+
+**c)** Ett spår med längden *l* och bredden *b* har resistansen
+
+$$ R = \\rho \\cdot \\frac{l}{b \\cdot t} $$
+
+När alla mått halveras blir den nya resistansen
+
+$$ R_\\text{ny} = \\rho \\cdot \\frac{\\frac{l}{2}}{\\frac{b}{2} \\cdot \\frac{t}{2}} = \\rho \\cdot \\frac{\\frac{l}{2}}{\\frac{b \\cdot t}{4}} = 2 \\cdot \\rho \\cdot \\frac{l}{b \\cdot t} = 2R $$
+
+Längden halveras, vilket halverar resistansen. Tvärsnittsarean blir dock en fjärdedel så stor, vilket fyrdubblar resistansen. Sammantaget fördubblas den.
+
+**Svar:** Resistansen blir dubbelt så stor.`,
+        },
+        // ── Avancerad (påfyllning) ──
+        {
+            level: 3,
+            question: `Ett rätblock av ett ledande material har kanterna *a*, *b* och *c*, där *a* är kortast och *c* längst. Figuren är inte skalenlig. Blockets resistans kan mätas mellan två motstående sidoytor på tre olika sätt. Vid varje mätning täcks hela de två sidoytorna av metallplattor, så att strömmen går rakt genom blocket.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 204" role="img" aria-label="Rätblock med höjden a, djupet b och längden c" style="max-width:494px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><polygon points="70,80 310,80 366,36 126,36" fill="#e3e0d8" stroke="#0f1620" stroke-width="1.7" stroke-linejoin="round"/><polygon points="310,80 366,36 366,120 310,164" fill="#a9a69d" stroke="#0f1620" stroke-width="1.7" stroke-linejoin="round"/><rect x="70" y="80" width="240" height="84" fill="#c9c6bd" stroke="#0f1620" stroke-width="1.7"/><text x="190" y="187" font-size="17" fill="#0f1620" text-anchor="middle" font-style="italic">c</text><text x="56" y="127" font-size="17" fill="#0f1620" text-anchor="end" font-style="italic">a</text><text x="350" y="162" font-size="17" fill="#0f1620" font-style="italic">b</text></svg>
+
+De tre resistanserna är $1{,}5\\ \\mathrm{\\Omega}$, $6{,}0\\ \\mathrm{\\Omega}$ och $24\\ \\mathrm{\\Omega}$. Den längsta kanten är $c = 8{,}0\\ \\mathrm{cm}$, men de andra två kanterna är inte uppmätta.<br>a) Bestäm materialets resistivitet. Svara i Ω·m.<br>b) En elev påstår att det hade räckt att känna till två av resistanserna, bara det är rätt två, tillsammans med kanten *c*. Avgör om påståendet stämmer.`,
+            answer: { value: 0.24, unit: 'Ω·m' },
+            delsvar: [
+                { del: 'a', value: 0.24, unit: 'Ω·m', etikett: '$\\rho =$' },
+                { del: 'b' },
+            ],
+            solution: `**a)** I formeln $R = \\rho \\cdot \\dfrac{l}{A}$ är *l* den kant som strömmen går längs, och *A* är arean av den yta som de två andra kanterna bildar. De tre resistanserna är alltså
+
+$$ R_a = \\rho \\cdot \\frac{a}{b \\cdot c} \\qquad R_b = \\rho \\cdot \\frac{b}{a \\cdot c} \\qquad R_c = \\rho \\cdot \\frac{c}{a \\cdot b} $$
+
+När strömmen går längs *c* är sträckan längst och arean minst, så $R_c$ är störst. Av motsvarande skäl är $R_a$ minst. Alltså är $R_a = 1{,}5\\ \\mathrm{\\Omega}$, $R_b = 6{,}0\\ \\mathrm{\\Omega}$ och $R_c = 24\\ \\mathrm{\\Omega}$.
+
+Kanterna *a* och *b* är okända. I en kvot mellan två av resistanserna förkortas både *ρ* och en av kanterna bort:
+
+$$ \\frac{R_c}{R_a} = \\frac{\\rho \\cdot \\frac{c}{a \\cdot b}}{\\rho \\cdot \\frac{a}{b \\cdot c}} = \\frac{c}{a \\cdot b} \\cdot \\frac{b \\cdot c}{a} = \\frac{c^2}{a^2} = \\left(\\frac{c}{a}\\right)^2 $$
+
+$$ \\left(\\frac{c}{a}\\right)^2 = \\frac{24}{1{,}5} = 16 $$
+
+$$ \\frac{c}{a} = \\sqrt{16} = 4 $$
+
+$$ a = \\frac{c}{4} = \\frac{8{,}0\\ \\mathrm{cm}}{4} = 2{,}0\\ \\mathrm{cm} $$
+
+På samma sätt fås
+
+$$ \\frac{R_c}{R_b} = \\frac{c}{a \\cdot b} \\cdot \\frac{a \\cdot c}{b} = \\left(\\frac{c}{b}\\right)^2 $$
+
+$$ \\left(\\frac{c}{b}\\right)^2 = \\frac{24}{6{,}0} = 4 $$
+
+$$ \\frac{c}{b} = \\sqrt{4} = 2 $$
+
+$$ b = \\frac{c}{2} = \\frac{8{,}0\\ \\mathrm{cm}}{2} = 4{,}0\\ \\mathrm{cm} $$
+
+Nu är alla kanter kända och resistiviteten kan lösas ut ur uttrycket för $R_c$:
+
+$$ R_c = \\rho \\cdot \\frac{c}{a \\cdot b} \\quad\\Leftrightarrow\\quad \\rho = \\frac{R_c \\cdot a \\cdot b}{c} $$
+
+$$
+\\left[ \\begin{array}{l}
+R_c = 24\\ \\mathrm{\\Omega} \\\\
+a = 2{,}0\\ \\mathrm{cm} = 0{,}020\\ \\mathrm{m} \\\\
+b = 4{,}0\\ \\mathrm{cm} = 0{,}040\\ \\mathrm{m} \\\\
+c = 8{,}0\\ \\mathrm{cm} = 0{,}080\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ \\rho = \\frac{24 \\cdot 0{,}020 \\cdot 0{,}040}{0{,}080} = 0{,}24\\ \\mathrm{\\Omega \\cdot m} $$
+
+**Svar:** Resistiviteten är $0{,}24\\ \\mathrm{\\Omega \\cdot m}$.
+
+**b)** Vi söker två resistanser som tillsammans ger *ρ* utan att *a* och *b* behövs. I $R_a$ står *a* i täljaren och *b* i nämnaren, och i $R_b$ är det tvärtom. I produkten av dem förkortas därför både *a* och *b* bort:
+
+$$ R_a \\cdot R_b = \\rho \\cdot \\frac{a}{b \\cdot c} \\cdot \\rho \\cdot \\frac{b}{a \\cdot c} = \\frac{\\rho^2}{c^2} $$
+
+$$ \\rho^2 = c^2 \\cdot R_a \\cdot R_b $$
+
+$$ \\rho = c \\cdot \\sqrt{R_a \\cdot R_b} $$
+
+Den negativa roten saknar betydelse, eftersom resistiviteten är positiv. Med värdena insatta blir
+
+$$ \\rho = 0{,}080 \\cdot \\sqrt{1{,}5 \\cdot 6{,}0} = 0{,}24\\ \\mathrm{\\Omega \\cdot m} $$
+
+Det är samma värde som i a), fast $R_c$ inte har använts. Med $R_c$ och bara en av de andra två får man däremot bara reda på en av kanterna *a* och *b*, och då kan *ρ* inte bestämmas.
+
+**Svar:** Påståendet stämmer. Det räcker med de två minsta resistanserna, eftersom $\\rho = c \\cdot \\sqrt{R_a \\cdot R_b}$.`,
+        },
+        {
+            level: 3,
+            question: `På en rulle finns ett okänt antal meter rund koppartråd. Tråden har massan $0{,}45\\ \\mathrm{kg}$, och resistansen mellan trådens båda ändar är $2{,}5\\ \\mathrm{\\Omega}$. Kopparens resistivitet är $1{,}7 \\cdot 10^{-8}\\ \\mathrm{\\Omega \\cdot m}$ och dess densitet är $8{,}96 \\cdot 10^3\\ \\mathrm{kg/m^3}$. Bestäm, utan att rulla ut tråden,<br>a) trådens längd i meter&emsp;&emsp;b) trådens diameter i millimeter.`,
+            answer: { value: 86, unit: 'm', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 86, unit: 'm', etikett: 'längden' },
+                { del: 'b', value: 0.86, unit: 'mm', etikett: 'diametern' },
+            ],
+            solution: `**a)** Både längden *l* och tvärsnittsarean *A* är okända, så vi behöver två samband. Massan ger produkten av *l* och *A*, och resistansen ger kvoten av dem.
+
+Trådens volym är $V = A \\cdot l$. Vi betecknar densiteten *D* för att skilja den från resistiviteten *ρ*. Massan ger då volymen:
+
+$$ D = \\frac{m}{V} \\quad\\Leftrightarrow\\quad V = \\frac{m}{D} $$
+
+Ur $V = A \\cdot l$ fås $A = \\dfrac{V}{l}$. Detta insatt i formeln för resistans i ledare, $R = \\rho \\cdot \\dfrac{l}{A}$, ger
+
+$$ R = \\rho \\cdot \\frac{l}{\\frac{V}{l}} = \\rho \\cdot \\frac{l^2}{V} $$
+
+Nu kan längden lösas ut:
+
+$$ l^2 = \\frac{R \\cdot V}{\\rho} $$
+
+$$ l = \\sqrt{\\frac{R \\cdot V}{\\rho}} = \\sqrt{\\frac{R \\cdot m}{\\rho \\cdot D}} $$
+
+$$
+\\left[ \\begin{array}{l}
+R = 2{,}5\\ \\mathrm{\\Omega} \\\\
+m = 0{,}45\\ \\mathrm{kg} \\\\
+\\rho = 1{,}7 \\cdot 10^{-8}\\ \\mathrm{\\Omega \\cdot m} \\\\
+D = 8{,}96 \\cdot 10^3\\ \\mathrm{kg/m^3}
+\\end{array} \\right]
+$$
+
+$$ l = \\sqrt{\\frac{2{,}5 \\cdot 0{,}45}{1{,}7 \\cdot 10^{-8} \\cdot 8{,}96 \\cdot 10^3}} = 85{,}94\\ldots\\ \\mathrm{m} \\approx 86\\ \\mathrm{m} $$
+
+**Svar:** Tråden är $86\\ \\mathrm{m}$ lång.
+
+**b)** Tvärsnittsarean fås ur resistansen, med den oavrundade längden:
+
+$$ A = \\frac{\\rho \\cdot l}{R} = \\frac{1{,}7 \\cdot 10^{-8} \\cdot 85{,}94\\ldots}{2{,}5} = 5{,}844\\ldots \\cdot 10^{-7}\\ \\mathrm{m^2} $$
+
+Arean av en cirkel är $A = \\pi \\cdot r^2$, så
+
+$$ r = \\sqrt{\\frac{A}{\\pi}} = \\sqrt{\\frac{5{,}844\\ldots \\cdot 10^{-7}}{\\pi}} = 4{,}313\\ldots \\cdot 10^{-4}\\ \\mathrm{m} $$
+
+$$ d = 2r = 2 \\cdot 4{,}313\\ldots \\cdot 10^{-4} = 8{,}62\\ldots \\cdot 10^{-4}\\ \\mathrm{m} \\approx 0{,}86\\ \\mathrm{mm} $$
+
+En knapp millimeter är en rimlig tjocklek för en koppartråd på rulle.
+
+**Svar:** Diametern är $0{,}86\\ \\mathrm{mm}$.`,
+        },
+        {
+            level: 3,
+            question: `En elektriker vill veta hur varm en spole av koppartråd blir inuti en apparat, där en termometer inte får plats. Spolen ansluts till en konstant spänning. Precis i början har spolen rumstemperaturen $20\\ \\mathrm{°C}$. När spolen efter en stund har blivit varm har strömmen minskat med $20\\ \\%$. För varje grad som temperaturen stiger ökar kopparens resistivitet med $0{,}39\\ \\%$ av sitt värde vid $20\\ \\mathrm{°C}$.<br>a) Hur varm är spolen?<br>b) Tråden utvidgas också när den värms: alla dess mått blir *k* gånger så stora, där *k* är lite större än 1. Avgör om spolens verkliga temperatur är lite högre eller lite lägre än svaret i a).`,
+            answer: { value: 84, unit: '°C' },
+            delsvar: [
+                { del: 'a', value: 84, unit: '°C', etikett: 'temperaturen' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Varken spänningen, strömmen eller resistansen är given, så vi räknar med beteckningar. Kalla strömmen från början $I_0$ och resistansen från början $R_0$. Genom den varma spolen går strömmen $0{,}80 \\cdot I_0$. Spänningen *U* är densamma, så
+
+$$ R_0 = \\frac{U}{I_0} $$
+
+$$ R = \\frac{U}{0{,}80 \\cdot I_0} = \\frac{1}{0{,}80} \\cdot \\frac{U}{I_0} = 1{,}25 \\cdot R_0 $$
+
+Resistansen har alltså ökat med $25\\ \\%$, inte med $20\\ \\%$.
+
+Enligt $R = \\rho \\cdot \\dfrac{l}{A}$ är resistansen proportionell mot resistiviteten när trådens mått är oförändrade. Resistiviteten har då också ökat med $25\\ \\%$. Varje grad ger $0{,}39\\ \\%$, så temperaturökningen är
+
+$$ \\Delta T = \\frac{25}{0{,}39} = 64{,}1\\ldots\\ \\mathrm{°C} $$
+
+Spolens temperatur är
+
+$$ T = 20 + 64{,}1\\ldots = 84{,}1\\ldots\\ \\mathrm{°C} \\approx 84\\ \\mathrm{°C} $$
+
+**Svar:** Spolen är $84\\ \\mathrm{°C}$ varm.
+
+**b)** När tråden utvidgas blir längden $k \\cdot l$. Trådens radie blir $k \\cdot r$, så arean blir $\\pi \\cdot (k \\cdot r)^2 = k^2 \\cdot A$. Kalla resistiviteten $\\rho_0$ från början och $\\rho_\\text{varm}$ i den varma spolen. Resistansen blir då
+
+$$ R = \\rho_\\text{varm} \\cdot \\frac{k \\cdot l}{k^2 \\cdot A} = \\frac{1}{k} \\cdot \\rho_\\text{varm} \\cdot \\frac{l}{A} $$
+
+Utvidgningen minskar alltså resistansen lite. Att resistansen ändå är 1,25 gånger så stor som från början betyder att
+
+$$ \\frac{1}{k} \\cdot \\rho_\\text{varm} \\cdot \\frac{l}{A} = 1{,}25 \\cdot \\rho_0 \\cdot \\frac{l}{A} \\quad\\Leftrightarrow\\quad \\rho_\\text{varm} = 1{,}25 \\cdot k \\cdot \\rho_0 $$
+
+Eftersom $k > 1$ har resistiviteten ökat med mer än $25\\ \\%$, och då har temperaturen stigit mer än vi räknade med i a).
+
+**Svar:** Den verkliga temperaturen är lite högre än $84\\ \\mathrm{°C}$.`,
+        },
+        {
+            level: 3,
+            question: `Några elever undersöker en metalltråd med diametern $0{,}30\\ \\mathrm{mm}$. De mäter resistansen *R* för olika långa bitar av tråden. Tråden är ansluten med sladdar och klämmor, som sitter på samma sätt vid alla mätningar.
+
+| *l* (m) | 0,20 | 0,40 | 0,60 | 0,80 | 1,00 |
+|---|---|---|---|---|---|
+| *R* (Ω) | 1,9 | 3,1 | 4,6 | 6,1 | 7,4 |
+
+a) Bestäm med hjälp av alla mätvärden trådens resistivitet. Svara i μΩ·m.<br>b) Vad är en rimlig förklaring till att mätvärdena inte ligger på en linje genom origo?<br>c) En av eleverna räknar i stället ut resistiviteten ur enbart den sista mätningen. Blir värdet för stort eller för litet? Avgör också om värdet hade hamnat närmare eller längre ifrån det rätta med enbart den första mätningen.`,
+            answer: { value: 0.49, unit: 'μΩ·m', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 0.49, unit: 'μΩ·m', etikett: '$\\rho =$', tol: 0.04 },
+                { del: 'b' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Enligt $R = \\rho \\cdot \\dfrac{l}{A}$ ska trådens resistans vara proportionell mot *l*, med proportionalitetskonstanten $\\dfrac{\\rho}{A}$. Vi prickar in mätvärdena och anpassar en rät linje.
+
+${makeDiagram({
+    xMax: 1.2, yMax: 9,
+    xTicks: [0, 0.2, 0.4, 0.6, 0.8, 1, 1.2], yTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    xLabel: '<tspan font-style="italic">l</tspan> (m)',
+    yLabel: '<tspan font-style="italic">R</tspan> (Ω)',
+    paths: [{ points: [[0, 0.42], [1.1, 8.12]], width: 2 }].concat(
+        [[0.2, 1.9], [0.4, 3.1], [0.6, 4.6], [0.8, 6.1], [1, 7.4]].map(p => ({ points: [p, p], color: '#0f1620', width: 8 }))),
+})}
+
+Linjär anpassning ger
+
+$$ R = 7{,}0 \\cdot l + 0{,}42 $$
+
+Punkterna ligger nära linjen, men linjen går inte genom origo. Den del av resistansen som beror på trådens längd ges av lutningen:
+
+$$ \\frac{\\rho}{A} = 7{,}0\\ \\mathrm{\\Omega/m} \\quad\\Leftrightarrow\\quad \\rho = 7{,}0 \\cdot A $$
+
+Tvärsnittsarean är en cirkelyta med radien $r = 0{,}15\\ \\mathrm{mm} = 0{,}15 \\cdot 10^{-3}\\ \\mathrm{m}$:
+
+$$ A = \\pi \\cdot r^2 = \\pi \\cdot (0{,}15 \\cdot 10^{-3})^2 = 7{,}068\\ldots \\cdot 10^{-8}\\ \\mathrm{m^2} $$
+
+$$ \\rho = 7{,}0 \\cdot 7{,}068\\ldots \\cdot 10^{-8} = 4{,}94\\ldots \\cdot 10^{-7}\\ \\mathrm{\\Omega \\cdot m} \\approx 0{,}49\\ \\mathrm{\\mu\\Omega \\cdot m} $$
+
+**Svar:** Resistiviteten är $0{,}49\\ \\mathrm{\\mu\\Omega \\cdot m}$.
+
+**b)** Linjen skär *R*-axeln vid $0{,}42\\ \\mathrm{\\Omega}$. Så stor resistans skulle mätas även om trådens längd var noll. Den kommer alltså inte från tråden utan från något som är lika vid alla mätningar.
+
+**Svar:** Sladdarna och kontakten i klämmorna har tillsammans resistansen $0{,}42\\ \\mathrm{\\Omega}$, som läggs till trådens resistans vid varje mätning.
+
+**c)** Den som använder en enda mätning räknar med $\\rho = \\dfrac{R}{l} \\cdot A$, och då ingår sladdarnas resistans i *R*. Enligt linjen är
+
+$$ \\frac{R}{l} = \\frac{7{,}0 \\cdot l + 0{,}42}{l} = 7{,}0 + \\frac{0{,}42}{l} $$
+
+Uttrycket är alltid större än 7,0, så värdet på resistiviteten blir för stort. Felet $\\dfrac{0{,}42}{l}$ är större ju kortare tråden är. Mätvärdena visar samma sak. Den sista mätningen ger
+
+$$ \\frac{R}{l} = \\frac{7{,}4}{1{,}00} = 7{,}4\\ \\mathrm{\\Omega/m} $$
+
+och den första ger
+
+$$ \\frac{R}{l} = \\frac{1{,}9}{0{,}20} = 9{,}5\\ \\mathrm{\\Omega/m} $$
+
+**Svar:** Värdet blir för stort, och med enbart den första mätningen hade det hamnat ännu längre ifrån det rätta.`,
+        },
+        {
+            level: 3,
+            question: `En massiv aluminiumstav ska ersättas av ett kopparrör med samma längd, samma ytterdiameter *d* och samma resistans. Figuren visar tvärsnitten. Den är inte skalenlig.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 470 228" role="img" aria-label="Tvärsnitt av en massiv aluminiumstav med diametern d och ett kopparrör med ytterdiametern d och innerdiametern d i" style="max-width:540px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><circle cx="130" cy="107" r="66" fill="#c9ced2" stroke="#0f1620" stroke-width="1.7"/><circle cx="340" cy="107" r="66" fill="#d49a6a" stroke="#0f1620" stroke-width="1.7"/><circle cx="340" cy="107" r="48" fill="#fafaf5" stroke="#0f1620" stroke-width="1.7"/><text x="130" y="28" font-size="15" fill="#0f1620" text-anchor="middle">aluminium</text><text x="340" y="28" font-size="15" fill="#0f1620" text-anchor="middle">koppar</text><g stroke="#8a8579" stroke-width="1.1" stroke-dasharray="3 3"><line x1="64" y1="111" x2="64" y2="200"/><line x1="196" y1="111" x2="196" y2="200"/><line x1="274" y1="111" x2="274" y2="200"/><line x1="406" y1="111" x2="406" y2="200"/></g><g stroke="#0f1620" stroke-width="1.4"><line x1="72" y1="194" x2="188" y2="194"/><line x1="282" y1="194" x2="398" y2="194"/><line x1="300" y1="107" x2="380" y2="107"/></g><g fill="#0f1620"><polygon points="64,194 73,190 73,198"/><polygon points="196,194 187,190 187,198"/><polygon points="274,194 283,190 283,198"/><polygon points="406,194 397,190 397,198"/><polygon points="292,107 301,103 301,111"/><polygon points="388,107 379,103 379,111"/></g><text x="130" y="215" font-size="16" fill="#0f1620" text-anchor="middle" font-style="italic">d</text><text x="340" y="215" font-size="16" fill="#0f1620" text-anchor="middle" font-style="italic">d</text><text x="340" y="95" font-size="16" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">d</tspan><tspan font-size="11" dy="4">i</tspan></text></svg>
+
+| Ämne | Resistivitet (Ω·m) | Densitet (kg/m³) |
+|---|---|---|
+| Aluminium | $2{,}7 \\cdot 10^{-8}$ | $2{,}70 \\cdot 10^3$ |
+| Koppar | $1{,}7 \\cdot 10^{-8}$ | $8{,}96 \\cdot 10^3$ |
+
+a) Hur många procent av ytterdiametern ska rörets innerdiameter $d_\\mathrm{i}$ vara?<br>b) Hur många gånger så stor massa har kopparröret som aluminiumstaven?`,
+            answer: { value: 61, unit: '%' },
+            delsvar: [
+                { del: 'a', value: 61, unit: '%', etikett: 'innerdiametern' },
+                { del: 'b', value: 2.1, unit: 'gånger', etikett: 'massan', tol: 0.03 },
+            ],
+            solution: `Varken längden eller ytterdiametern är given, så vi räknar med beteckningar och ser vad som förkortas bort.
+
+**a)** Aluminiumstavens tvärsnittsarea är en hel cirkel, och kopparrörets är en cirkelring:
+
+$$ A_\\text{Al} = \\pi \\cdot \\left(\\frac{d}{2}\\right)^2 = \\frac{\\pi \\cdot d^2}{4} $$
+
+$$ A_\\text{Cu} = \\frac{\\pi \\cdot d^2}{4} - \\frac{\\pi \\cdot d_\\mathrm{i}^2}{4} = \\frac{\\pi \\cdot (d^2 - d_\\mathrm{i}^2)}{4} $$
+
+Resistanserna är lika, och längden *l* är densamma:
+
+$$ \\rho_\\text{Cu} \\cdot \\frac{l}{A_\\text{Cu}} = \\rho_\\text{Al} \\cdot \\frac{l}{A_\\text{Al}} \\quad\\Leftrightarrow\\quad \\frac{A_\\text{Cu}}{A_\\text{Al}} = \\frac{\\rho_\\text{Cu}}{\\rho_\\text{Al}} $$
+
+Med uttrycken för areorna blir kvoten i vänstra ledet
+
+$$ \\frac{A_\\text{Cu}}{A_\\text{Al}} = \\frac{d^2 - d_\\mathrm{i}^2}{d^2} = 1 - \\left(\\frac{d_\\mathrm{i}}{d}\\right)^2 $$
+
+Alltså är
+
+$$ 1 - \\left(\\frac{d_\\mathrm{i}}{d}\\right)^2 = \\frac{\\rho_\\text{Cu}}{\\rho_\\text{Al}} $$
+
+$$ \\frac{d_\\mathrm{i}}{d} = \\sqrt{1 - \\frac{\\rho_\\text{Cu}}{\\rho_\\text{Al}}} $$
+
+$$ \\frac{d_\\mathrm{i}}{d} = \\sqrt{1 - \\frac{1{,}7 \\cdot 10^{-8}}{2{,}7 \\cdot 10^{-8}}} = 0{,}608\\ldots \\approx 0{,}61 = 61\\ \\% $$
+
+**Svar:** Innerdiametern ska vara $61\\ \\%$ av ytterdiametern.
+
+**b)** Massan är densiteten gånger volymen, och volymen är $V = A \\cdot l$. Vi betecknar densiteten *D* för att skilja den från resistiviteten *ρ*. Längden förkortas bort:
+
+$$ \\frac{m_\\text{Cu}}{m_\\text{Al}} = \\frac{D_\\text{Cu} \\cdot A_\\text{Cu} \\cdot l}{D_\\text{Al} \\cdot A_\\text{Al} \\cdot l} = \\frac{D_\\text{Cu}}{D_\\text{Al}} \\cdot \\frac{A_\\text{Cu}}{A_\\text{Al}} $$
+
+Från a) vet vi att $\\dfrac{A_\\text{Cu}}{A_\\text{Al}} = \\dfrac{\\rho_\\text{Cu}}{\\rho_\\text{Al}}$, vilket ger
+
+$$ \\frac{m_\\text{Cu}}{m_\\text{Al}} = \\frac{D_\\text{Cu}}{D_\\text{Al}} \\cdot \\frac{\\rho_\\text{Cu}}{\\rho_\\text{Al}} $$
+
+$$ \\frac{m_\\text{Cu}}{m_\\text{Al}} = \\frac{8{,}96 \\cdot 10^3}{2{,}70 \\cdot 10^3} \\cdot \\frac{1{,}7 \\cdot 10^{-8}}{2{,}7 \\cdot 10^{-8}} = 2{,}08\\ldots \\approx 2{,}1 $$
+
+Kopparröret är alltså tyngre trots att det är ihåligt. Koppar leder bättre, men densiteten är mer än tre gånger så stor. Det är en förklaring till att långa kraftledningar görs av aluminium.
+
+**Svar:** Kopparröret har 2,1 gånger så stor massa.`,
+        },
+        {
+            level: 3,
+            question: `En kabel består av en kärna av stål och ett hölje av aluminium, som har kontakt med varandra längs hela kabeln. Kärnans diameter är en tredjedel av hela kabelns diameter. Figuren visar kabelns tvärsnitt.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 220" role="img" aria-label="Tvärsnitt av en kabel med en kärna av stål och ett hölje av aluminium" style="max-width:414px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><circle cx="130" cy="110" r="84" fill="#d3d8db" stroke="#0f1620" stroke-width="1.7"/><circle cx="130" cy="110" r="28" fill="#7c858d" stroke="#0f1620" stroke-width="1.7"/><g stroke="#0f1620" stroke-width="1.2"><line x1="130" y1="110" x2="246" y2="148"/><line x1="172" y1="60" x2="246" y2="60"/></g><g fill="#0f1620"><circle cx="130" cy="110" r="3"/><circle cx="172" cy="60" r="3"/></g><text x="254" y="65" font-size="15" fill="#0f1620">aluminium</text><text x="254" y="153" font-size="15" fill="#0f1620">stål</text></svg>
+
+Resistiviteten är $1{,}8 \\cdot 10^{-7}\\ \\mathrm{\\Omega \\cdot m}$ för stålet och $2{,}7 \\cdot 10^{-8}\\ \\mathrm{\\Omega \\cdot m}$ för aluminiet.<br>a) Hur många procent av strömmen i kabeln går genom stålkärnan?<br>b) Kabeln byts mot en massiv aluminiumkabel med samma längd och samma ytterdiameter. Hur många procent mindre är dess resistans?`,
+            answer: { value: 1.8, unit: '%', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 1.8, unit: '%', etikett: 'andelen', tol: 0.03 },
+                { del: 'b', value: 9.4, unit: '%', etikett: 'minskningen', tol: 0.03 },
+            ],
+            solution: `Varken spänningen, längden eller diametern är given, så vi räknar med beteckningar och ser vad som förkortas bort.
+
+**a)** Stålet och aluminiet har kontakt hela vägen. Mellan kabelns ändar ligger därför samma spänning *U* över båda delarna, och de är lika långa. Den totala strömmen är summan av strömmen genom stålet och strömmen genom aluminiet. Ohms lag och formeln för resistans i ledare ger strömmen genom en del:
+
+$$ I = \\frac{U}{R} = \\frac{U}{\\rho \\cdot \\frac{l}{A}} = \\frac{U}{l} \\cdot \\frac{A}{\\rho} $$
+
+Eftersom *U* och *l* är desamma blir kvoten mellan strömmarna
+
+$$ \\frac{I_\\text{Al}}{I_\\text{stål}} = \\frac{\\frac{A_\\text{Al}}{\\rho_\\text{Al}}}{\\frac{A_\\text{stål}}{\\rho_\\text{stål}}} = \\frac{A_\\text{Al}}{A_\\text{stål}} \\cdot \\frac{\\rho_\\text{stål}}{\\rho_\\text{Al}} $$
+
+Kalla kärnans area *A*. Hela kabelns diameter är tre gånger så stor som kärnans, så hela tvärsnittets area är $3^2 \\cdot A = 9A$. Aluminiet har den area som blir över:
+
+$$ A_\\text{Al} = 9A - A = 8A $$
+
+$$ \\frac{I_\\text{Al}}{I_\\text{stål}} = \\frac{8A}{A} \\cdot \\frac{1{,}8 \\cdot 10^{-7}}{2{,}7 \\cdot 10^{-8}} = 53{,}33\\ldots $$
+
+Strömmen genom aluminiet är alltså $53{,}33\\ldots \\cdot I_\\text{stål}$. Stålets andel av hela strömmen blir
+
+$$ \\frac{I_\\text{stål}}{I_\\text{stål} + I_\\text{Al}} = \\frac{1}{1 + 53{,}33\\ldots} = 0{,}0184\\ldots \\approx 1{,}8\\ \\% $$
+
+Kärnan upptar en niondel (11 %) av arean. Andelen av strömmen är mycket mindre, eftersom stålet har större resistivitet.
+
+**Svar:** $1{,}8\\ \\%$ av strömmen går genom stålkärnan.
+
+**b)** Vi jämför strömmen i de två kablarna vid samma spänning. I den massiva kabeln är aluminiets area $9A$ i stället för $8A$. Enligt uttrycket i a), $I = \\dfrac{U}{l} \\cdot \\dfrac{A}{\\rho}$, är strömmen proportionell mot arean, så
+
+$$ I_\\text{massiv} = \\frac{9}{8} \\cdot I_\\text{Al} $$
+
+I den ursprungliga kabeln är den totala strömmen
+
+$$ I_\\text{tot} = I_\\text{Al} + I_\\text{stål} = I_\\text{Al} + \\frac{I_\\text{Al}}{53{,}33\\ldots} = 1{,}01875 \\cdot I_\\text{Al} $$
+
+Eftersom $R = \\dfrac{U}{I}$ och spänningen är densamma, är kvoten mellan resistanserna den omvända kvoten mellan strömmarna:
+
+$$ \\frac{R_\\text{massiv}}{R} = \\frac{I_\\text{tot}}{I_\\text{massiv}} = \\frac{1{,}01875 \\cdot I_\\text{Al}}{\\frac{9}{8} \\cdot I_\\text{Al}} = 0{,}9055\\ldots $$
+
+Minskningen är
+
+$$ 1 - 0{,}9055\\ldots = 0{,}0944\\ldots \\approx 9{,}4\\ \\% $$
+
+**Svar:** Resistansen är $9{,}4\\ \\%$ mindre.`,
         },
     ],
 
@@ -38305,7 +43859,7 @@ $$ R_\\mathrm{tot} = 10 + 15 + 25 = 50\\ \\mathrm{\\Omega} $$
 
 **Svar:** Ersättningsresistansen är $50\\ \\mathrm{\\Omega}$.
 
-**Generell slutsats:** I en seriekoppling blir totalresistansen alltid *större* än den största enskilda resistorn — strömmen tvingas igenom alla i tur och ordning.`,
+**Generell slutsats:** I en seriekoppling blir totalresistansen alltid *större* än den största enskilda resistorn. Strömmen tvingas igenom alla i tur och ordning.`,
         },
         {
             level: 1,
@@ -38327,7 +43881,7 @@ $$ R_\\mathrm{tot} = 6{,}0\\ \\mathrm{\\Omega} $$
 
 **Svar:** Ersättningsresistansen är $6{,}0\\ \\mathrm{\\Omega}$.
 
-**Generell slutsats:** Två *lika* stora resistorer i parallellkoppling ger alltid halva resistansen. I parallellkoppling blir totalresistansen alltid *mindre* än den minsta grenen — strömmen får fler vägar att välja på.`,
+**Generell slutsats:** Två *lika* stora resistorer i parallellkoppling ger alltid halva resistansen. I parallellkoppling blir totalresistansen alltid *mindre* än den minsta grenen. Strömmen får fler vägar att välja på.`,
         },
         {
             level: 1,
@@ -38353,7 +43907,7 @@ $$ R_\\mathrm{tot} = 15\\ \\mathrm{\\Omega} $$
 
 **Svar:** Ersättningsresistansen är $15\\ \\mathrm{\\Omega}$.
 
-**Generell slutsats:** Glöm inte sista steget — formeln ger $1/R_\\mathrm{tot}$, så du måste invertera till slut för att få $R_\\mathrm{tot}$. En vanlig miss är att svara $1/15\\ \\mathrm{\\Omega}$.`,
+**Generell slutsats:** Glöm inte sista steget. Formeln ger $1/R_\\mathrm{tot}$, så du måste invertera till slut för att få $R_\\mathrm{tot}$. En vanlig miss är att svara $1/15\\ \\mathrm{\\Omega}$.`,
         },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
@@ -38389,10 +43943,10 @@ $$ R_2 = 20\\ \\mathrm{\\Omega} $$
 
 **Svar:** Den okända resistorn är $20\\ \\mathrm{\\Omega}$.
 
-**Generell slutsats:** Eftersom totalresistansen ($12\\ \\mathrm{\\Omega}$) måste vara mindre än varje enskild gren, kan vi direkt sluta oss till att den okända resistorn är större än $12\\ \\mathrm{\\Omega}$ — en bra rimlighetskontroll.`,
+**Generell slutsats:** Eftersom totalresistansen ($12\\ \\mathrm{\\Omega}$) måste vara mindre än varje enskild gren, kan vi direkt sluta oss till att den okända resistorn är större än $12\\ \\mathrm{\\Omega}$, en bra rimlighetskontroll.`,
         },
         {
-            level: 2,
+            level: 1,
             question: `Två resistorer $R_1 = 15\\ \\mathrm{\\Omega}$ och $R_2 = 45\\ \\mathrm{\\Omega}$ seriekopplas till ett batteri med spänningen $U = 12\\ \\mathrm{V}$. Hur stor ström går ut från batteriet?
 
 ${makeCircuit({
@@ -38445,6 +43999,722 @@ vilket ger $x = 30$ eller $x = 10$.
 
 **Generell slutsats:** När man känner *summan* och *produkten* av två tal är de alltid rötterna till $x^2 - (\\text{summa})x + (\\text{produkt}) = 0$. Kontroll: $10 + 30 = 40$ ✓ och $\\dfrac{10 \\cdot 30}{40} = \\dfrac{300}{40} = 7{,}5$ ✓.`,
         },
+        // ── Påfyllning: Grund ────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En ljusslinga till ett fönster består av 20 likadana glödlampor som är seriekopplade. Varje lampa har resistansen $42\\ \\mathrm{\\Omega}$ när den lyser. Bestäm slingans ersättningsresistans. Ange svaret i Ω.`,
+            answer: { value: 840, unit: 'Ω' },
+            solution: `Vid seriekoppling adderas resistanserna:
+
+$$ R_\\mathrm{tot} = R_1 + R_2 + \\ldots $$
+
+Alla 20 lampor har samma resistans *R*. Summan består därför av 20 lika stora termer:
+
+$$ R_\\mathrm{tot} = 20 \\cdot R $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+R = 42\\ \\mathrm{\\Omega}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ R_\\mathrm{tot} = 20 \\cdot 42 = 840\\ \\mathrm{\\Omega} $$
+
+**Svar:** Ersättningsresistansen är $840\\ \\mathrm{\\Omega}$.`,
+        },
+        {
+            level: 1,
+            question: `Tre resistorer är kopplade till ett batteri enligt schemat. Bestäm ersättningsresistansen. Ange svaret i Ω.
+
+${makeCircuit({
+    source: { label: 'U' },
+    components: [{ type: 'parallel', branches: [
+        [{ type: 'resistor', label: 'R_1', value: '10 Ω' }],
+        [{ type: 'resistor', label: 'R_2', value: '15 Ω' }],
+        [{ type: 'resistor', label: 'R_3', value: '30 Ω' }],
+    ] }],
+    width: 230,
+})}`,
+            answer: { value: 5.0, unit: 'Ω' },
+            solution: `De tre resistorerna sitter i var sin gren, alltså är de parallellkopplade:
+
+$$ \\frac{1}{R_\\mathrm{tot}} = \\frac{1}{R_1} + \\frac{1}{R_2} + \\frac{1}{R_3} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+R_1 = 10\\ \\mathrm{\\Omega} \\\\
+R_2 = 15\\ \\mathrm{\\Omega} \\\\
+R_3 = 30\\ \\mathrm{\\Omega}
+\\end{array} \\right]
+$$
+
+Insättning, med den gemensamma nämnaren 30:
+
+$$ \\frac{1}{R_\\mathrm{tot}} = \\frac{1}{10} + \\frac{1}{15} + \\frac{1}{30} = \\frac{3}{30} + \\frac{2}{30} + \\frac{1}{30} = \\frac{6}{30} = \\frac{1}{5} $$
+
+Vi inverterar båda leden:
+
+$$ R_\\mathrm{tot} = 5{,}0\\ \\mathrm{\\Omega} $$
+
+Värdet är mindre än den minsta resistansen, $10\\ \\mathrm{\\Omega}$, som det ska vara vid parallellkoppling.
+
+**Svar:** Ersättningsresistansen är $5{,}0\\ \\mathrm{\\Omega}$.`,
+        },
+        {
+            level: 1,
+            question: `En resistor på $47\\ \\mathrm{\\Omega}$ och en resistor på $82\\ \\mathrm{\\Omega}$ parallellkopplas. Vad kan du säga om ersättningsresistansen utan att räkna ut den?`,
+            choices: [
+                'Den är $129\\ \\mathrm{\\Omega}$.',
+                'Den är mindre än $47\\ \\mathrm{\\Omega}$.',
+                'Den ligger mellan $47\\ \\mathrm{\\Omega}$ och $82\\ \\mathrm{\\Omega}$.',
+                'Den är större än $82\\ \\mathrm{\\Omega}$.',
+            ],
+            correct: 1,
+            solution: `I en parallellkoppling får strömmen ytterligare en väg att gå. Vid samma spänning blir strömmen från batteriet därför större än om bara den minsta resistorn hade varit inkopplad. En större ström vid samma spänning betyder att resistansen är mindre.
+
+Ersättningsresistansen vid parallellkoppling är alltså alltid mindre än den minsta enskilda resistansen, här $47\\ \\mathrm{\\Omega}$. Värdet $129\\ \\mathrm{\\Omega}$ hade man fått om resistorerna i stället varit seriekopplade.
+
+**Svar:** Den är mindre än $47\\ \\mathrm{\\Omega}$.`,
+        },
+        {
+            level: 1,
+            question: `Två resistorer är kopplade till ett batteri enligt schemat.<br>a) Bestäm ersättningsresistansen. Ange svaret i Ω.<br>b) Hur stor ström går ut från batteriet? Ange svaret i A.
+
+${makeCircuit({
+    source: { label: 'U', value: '6,0 V' },
+    components: [{ type: 'parallel', branches: [
+        [{ type: 'resistor', label: 'R_1', value: '28 Ω' }],
+        [{ type: 'resistor', label: 'R_2', value: '21 Ω' }],
+    ] }],
+    width: 230,
+})}`,
+            answer: { value: 0.50, unit: 'A' },
+            delsvar: [
+                { del: 'a', value: 12, unit: 'Ω' },
+                { del: 'b', value: 0.50, unit: 'A' },
+            ],
+            solution: `**a)** Resistorerna är parallellkopplade:
+
+$$ \\frac{1}{R_\\mathrm{tot}} = \\frac{1}{R_1} + \\frac{1}{R_2} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+R_1 = 28\\ \\mathrm{\\Omega} \\\\
+R_2 = 21\\ \\mathrm{\\Omega}
+\\end{array} \\right]
+$$
+
+Insättning, med den gemensamma nämnaren 84:
+
+$$ \\frac{1}{R_\\mathrm{tot}} = \\frac{1}{28} + \\frac{1}{21} = \\frac{3}{84} + \\frac{4}{84} = \\frac{7}{84} = \\frac{1}{12} $$
+
+$$ R_\\mathrm{tot} = 12\\ \\mathrm{\\Omega} $$
+
+**Svar:** Ersättningsresistansen är $12\\ \\mathrm{\\Omega}$.
+
+**b)** Vi löser ut strömmen ur Ohms lag för hela kretsen:
+
+$$ U = R_\\mathrm{tot} \\cdot I \\quad\\Leftrightarrow\\quad I = \\frac{U}{R_\\mathrm{tot}} $$
+
+Insättning av $U = 6{,}0\\ \\mathrm{V}$ och $R_\\mathrm{tot} = 12\\ \\mathrm{\\Omega}$ ger
+
+$$ I = \\frac{6{,}0}{12} = 0{,}50\\ \\mathrm{A} $$
+
+**Svar:** Strömmen ut från batteriet är $0{,}50\\ \\mathrm{A}$.`,
+        },
+        // ── Påfyllning: Mellan ───────────────────────────────────────────
+        {
+            level: 2,
+            question: `Tre likadana resistorer seriekopplas till ett batteri med spänningen $18\\ \\mathrm{V}$. Då går strömmen $0{,}20\\ \\mathrm{A}$ ut från batteriet. Hur stor blir strömmen från batteriet om resistorerna i stället parallellkopplas till samma batteri? Ange svaret i A.`,
+            answer: { value: 1.8, unit: 'A' },
+            solution: `Vi kallar varje resistors resistans för *R*.
+
+**Seriekopplingen.** Ohms lag ger ersättningsresistansen:
+
+$$ R_\\mathrm{tot} = \\frac{U}{I} = \\frac{18}{0{,}20} = 90\\ \\mathrm{\\Omega} $$
+
+Ersättningsresistansen är summan av tre lika stora resistanser, $R_\\mathrm{tot} = 3 \\cdot R$, vilket ger
+
+$$ R = \\frac{90}{3} = 30\\ \\mathrm{\\Omega} $$
+
+**Parallellkopplingen.**
+
+$$ \\frac{1}{R_\\mathrm{tot}} = \\frac{1}{30} + \\frac{1}{30} + \\frac{1}{30} = \\frac{3}{30} = \\frac{1}{10} $$
+
+$$ R_\\mathrm{tot} = 10\\ \\mathrm{\\Omega} $$
+
+Ohms lag ger strömmen:
+
+$$ I = \\frac{U}{R_\\mathrm{tot}} = \\frac{18}{10} = 1{,}8\\ \\mathrm{A} $$
+
+Det är rimligt att strömmen blir mycket större: ersättningsresistansen har minskat från $90\\ \\mathrm{\\Omega}$ till $10\\ \\mathrm{\\Omega}$.
+
+**Svar:** Strömmen blir $1{,}8\\ \\mathrm{A}$.`,
+        },
+        {
+            level: 2,
+            question: `Diagrammet visar strömmen *I* genom två resistorer, A och B, när spänningen *U* över dem varieras.<br>a) Bestäm ersättningsresistansen när A och B seriekopplas. Ange svaret i Ω.<br>b) Bestäm ersättningsresistansen när A och B parallellkopplas. Ange svaret i Ω.
+
+${makeDiagram({
+    xMax: 7, yMax: 0.7,
+    xTicks: [0, 1, 2, 3, 4, 5, 6], yTicks: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6],
+    xLabel: '<tspan font-style="italic">U</tspan> (V)',
+    yLabel: '<tspan font-style="italic">I</tspan> (A)',
+    paths: [
+        { points: [[0, 0], [6, 0.6]] },
+        { points: [[0, 0], [6, 0.15]], color: '#1f6fb2' },
+    ],
+}).replace('</svg>', '<text x="412" y="70" font-size="17" font-weight="600" fill="#c8324a">A</text><text x="412" y="240" font-size="17" font-weight="600" fill="#1f6fb2">B</text></svg>')}`,
+            answer: { value: 8.0, unit: 'Ω' },
+            delsvar: [
+                { del: 'a', value: 50, unit: 'Ω', tol: 0.04 },
+                { del: 'b', value: 8.0, unit: 'Ω', tol: 0.04 },
+            ],
+            solution: `**a)** Vi bestämmer först resistanserna ur punkter på linjerna med $R = \\dfrac{U}{I}$.
+
+Linje A går genom punkten där $U = 6{,}0\\ \\mathrm{V}$ och $I = 0{,}60\\ \\mathrm{A}$:
+
+$$ R_\\mathrm{A} = \\frac{6{,}0}{0{,}60} = 10\\ \\mathrm{\\Omega} $$
+
+Linje B går genom punkten där $U = 4{,}0\\ \\mathrm{V}$ och $I = 0{,}10\\ \\mathrm{A}$:
+
+$$ R_\\mathrm{B} = \\frac{4{,}0}{0{,}10} = 40\\ \\mathrm{\\Omega} $$
+
+Vid seriekoppling adderas resistanserna:
+
+$$ R_\\mathrm{tot} = R_\\mathrm{A} + R_\\mathrm{B} = 10 + 40 = 50\\ \\mathrm{\\Omega} $$
+
+**Svar:** Ersättningsresistansen är $50\\ \\mathrm{\\Omega}$.
+
+**b)** Vid parallellkoppling gäller
+
+$$ \\frac{1}{R_\\mathrm{tot}} = \\frac{1}{R_\\mathrm{A}} + \\frac{1}{R_\\mathrm{B}} = \\frac{1}{10} + \\frac{1}{40} = \\frac{4}{40} + \\frac{1}{40} = \\frac{5}{40} = \\frac{1}{8} $$
+
+$$ R_\\mathrm{tot} = 8{,}0\\ \\mathrm{\\Omega} $$
+
+Rimlighet: i en parallellkoppling adderas strömmarna. Vid $6{,}0\\ \\mathrm{V}$ blir den sammanlagda strömmen $0{,}60 + 0{,}15 = 0{,}75\\ \\mathrm{A}$, och $\\dfrac{6{,}0}{0{,}75} = 8{,}0\\ \\mathrm{\\Omega}$. Det stämmer.
+
+**Svar:** Ersättningsresistansen är $8{,}0\\ \\mathrm{\\Omega}$.`,
+        },
+        {
+            level: 2,
+            question: `En elektrisk golvvärmematta har resistansen $75\\ \\mathrm{\\Omega}$. Flera likadana mattor ska parallellkopplas till spänningen $230\\ \\mathrm{V}$ på en och samma säkring. Säkringen bryter strömmen om den blir större än $10\\ \\mathrm{A}$. Hur många mattor kan som mest kopplas in? Ange antalet mattor.`,
+            answer: { value: 3, unit: 'mattor', tol: 0.001 },
+            solution: `Vi kallar antalet mattor *n* och varje mattas resistans *R*. Mattorna är parallellkopplade:
+
+$$ \\frac{1}{R_\\mathrm{tot}} = \\frac{1}{R} + \\frac{1}{R} + \\ldots = \\frac{n}{R} \\quad\\Leftrightarrow\\quad R_\\mathrm{tot} = \\frac{R}{n} $$
+
+Den minsta ersättningsresistans som säkringen klarar fås ur Ohms lag med $I = 10\\ \\mathrm{A}$:
+
+$$ R_\\mathrm{tot} = \\frac{U}{I} = \\frac{230}{10} = 23\\ \\mathrm{\\Omega} $$
+
+Antalet mattor som motsvarar denna resistans är
+
+$$ n = \\frac{R}{R_\\mathrm{tot}} = \\frac{75}{23} \\approx 3{,}26 $$
+
+Fler mattor ger mindre resistans och därmed större ström. Antalet måste därför avrundas nedåt, till 3.
+
+Kontroll: tre mattor har ersättningsresistansen $\\dfrac{75}{3} = 25\\ \\mathrm{\\Omega}$ och strömmen blir $\\dfrac{230}{25} = 9{,}2\\ \\mathrm{A}$. Med fyra mattor blir strömmen drygt $12\\ \\mathrm{A}$, och säkringen bryter.
+
+**Svar:** Som mest 3 mattor kan kopplas in.`,
+        },
+        {
+            level: 2,
+            question: `I kretsen nedan är strömbrytaren öppen från början. Vad händer med ersättningsresistansen $R_\\mathrm{tot}$ och med strömmen *I* ut från batteriet när strömbrytaren sluts? Spänningen från batteriet ändras inte.
+
+${makeCircuit({
+    source: { label: 'U' },
+    components: [{ type: 'parallel', branches: [
+        [{ type: 'resistor', label: 'R_1' }],
+        [{ type: 'switch', open: true }, { type: 'resistor', label: 'R_2' }],
+    ] }],
+})}`,
+            choices: [
+                'Både $R_\\mathrm{tot}$ och *I* ökar.',
+                '$R_\\mathrm{tot}$ ökar och *I* minskar.',
+                'Båda är oförändrade.',
+                '$R_\\mathrm{tot}$ minskar och *I* ökar.',
+            ],
+            correct: 3,
+            solution: `Med öppen strömbrytare går ingen ström genom $R_2$. Då är kretsens resistans
+
+$$ R_\\mathrm{tot} = R_1 $$
+
+När strömbrytaren sluts blir $R_1$ och $R_2$ parallellkopplade:
+
+$$ \\frac{1}{R_\\mathrm{tot}} = \\frac{1}{R_1} + \\frac{1}{R_2} $$
+
+Högerledet har fått en positiv term till. Då är $\\dfrac{1}{R_\\mathrm{tot}}$ större än $\\dfrac{1}{R_1}$, och därför är $R_\\mathrm{tot}$ mindre än $R_1$.
+
+Strömmen är $I = \\dfrac{U}{R_\\mathrm{tot}}$. Spänningen är densamma och resistansen mindre, alltså ökar strömmen. Strömmen genom $R_1$ är oförändrad, men nu tillkommer strömmen genom $R_2$.
+
+**Svar:** Ersättningsresistansen minskar och strömmen från batteriet ökar.`,
+        },
+        {
+            level: 2,
+            question: `En termistor är en resistor vars resistans beror på temperaturen. Termistorn $R_2$ är seriekopplad med en resistor enligt schemat och sitter i en vattentank. Tabellen visar termistorns resistans vid några temperaturer.
+
+| Temperatur (°C) | 25 | 35 | 45 | 55 | 65 |
+|---|---|---|---|---|---|
+| Resistans (Ω) | 1 500 | 1 020 | 700 | 490 | 350 |
+
+En amperemeter visar att strömmen i kretsen är $10\\ \\mathrm{mA}$. Vilken temperatur har vattnet? Ange svaret i °C.
+
+${makeCircuit({
+    source: { label: 'U', value: '9,0 V' },
+    components: [
+        { type: 'resistor', label: 'R_1', value: '200 Ω' },
+        { type: 'resistor', label: 'R_2' },
+    ],
+    width: 320,
+})}`,
+            answer: { value: 45, unit: '°C' },
+            solution: `Ohms lag för hela kretsen ger ersättningsresistansen:
+
+$$ U = R_\\mathrm{tot} \\cdot I \\quad\\Leftrightarrow\\quad R_\\mathrm{tot} = \\frac{U}{I} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+U = 9{,}0\\ \\mathrm{V} \\\\
+I = 10\\ \\mathrm{mA} = 0{,}010\\ \\mathrm{A} \\\\
+R_1 = 200\\ \\mathrm{\\Omega}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ R_\\mathrm{tot} = \\frac{9{,}0}{0{,}010} = 900\\ \\mathrm{\\Omega} $$
+
+Resistorerna är seriekopplade, alltså är $R_\\mathrm{tot} = R_1 + R_2$. Vi löser ut termistorns resistans:
+
+$$ R_2 = R_\\mathrm{tot} - R_1 = 900 - 200 = 700\\ \\mathrm{\\Omega} $$
+
+Enligt tabellen har termistorn resistansen $700\\ \\mathrm{\\Omega}$ vid temperaturen $45\\ ^{\\circ}\\mathrm{C}$.
+
+**Svar:** Vattnets temperatur är $45\\ ^{\\circ}\\mathrm{C}$.`,
+        },
+        {
+            level: 2,
+            question: `En värmeväst drivs av ett batteri med spänningen $12\\ \\mathrm{V}$ och innehåller två värmetrådar, A och B. I läget Mellan är bara tråd A inkopplad, och strömmen från batteriet är $0{,}30\\ \\mathrm{A}$. I läget Hög är A och B parallellkopplade, och strömmen från batteriet är $0{,}50\\ \\mathrm{A}$. I läget Låg är A och B seriekopplade. Hur stor är strömmen från batteriet i läget Låg? Anta att trådarnas resistans är konstant. Ange svaret i A.`,
+            answer: { value: 0.12, unit: 'A' },
+            solution: `I varje läge ger Ohms lag den inkopplade resistansen:
+
+$$ U = R \\cdot I \\quad\\Leftrightarrow\\quad R = \\frac{U}{I} $$
+
+**Läget Mellan.** Bara tråd A är inkopplad:
+
+$$ R_\\mathrm{A} = \\frac{12}{0{,}30} = 40\\ \\mathrm{\\Omega} $$
+
+**Läget Hög.** Ersättningsresistansen för de parallellkopplade trådarna är
+
+$$ R_\\mathrm{tot} = \\frac{12}{0{,}50} = 24\\ \\mathrm{\\Omega} $$
+
+Vi löser ut den okända termen ur formeln för parallellkoppling:
+
+$$ \\frac{1}{R_\\mathrm{tot}} = \\frac{1}{R_\\mathrm{A}} + \\frac{1}{R_\\mathrm{B}} \\quad\\Leftrightarrow\\quad \\frac{1}{R_\\mathrm{B}} = \\frac{1}{R_\\mathrm{tot}} - \\frac{1}{R_\\mathrm{A}} $$
+
+Insättning, med den gemensamma nämnaren 120:
+
+$$ \\frac{1}{R_\\mathrm{B}} = \\frac{1}{24} - \\frac{1}{40} = \\frac{5}{120} - \\frac{3}{120} = \\frac{2}{120} = \\frac{1}{60} $$
+
+$$ R_\\mathrm{B} = 60\\ \\mathrm{\\Omega} $$
+
+**Läget Låg.** Vid seriekoppling adderas resistanserna:
+
+$$ R_\\mathrm{tot} = R_\\mathrm{A} + R_\\mathrm{B} = 40 + 60 = 100\\ \\mathrm{\\Omega} $$
+
+Ohms lag ger strömmen:
+
+$$ I = \\frac{U}{R_\\mathrm{tot}} = \\frac{12}{100} = 0{,}12\\ \\mathrm{A} $$
+
+Strömmen är mindre än i läget Mellan, vilket är rimligt eftersom resistansen är större.
+
+**Svar:** Strömmen är $0{,}12\\ \\mathrm{A}$ i läget Låg.`,
+        },
+        // ── Påfyllning: Avancerad ────────────────────────────────────────
+        {
+            level: 3,
+            question: `Två resistorer är parallellkopplade. Den ena har resistansen $R_1$ och den andra har resistansen $R_2$, där $R_2 \\geq R_1$.<br>a) Visa att ersättningsresistansen alltid är mindre än $R_1$.<br>b) Visa att ersättningsresistansen aldrig är mindre än $\\dfrac{R_1}{2}$.<br>c) Vid beräkningar förenklar man ibland genom att räkna som om bara $R_1$ var inkopplad. Hur många gånger så stor som $R_1$ måste $R_2$ minst vara för att felet i ersättningsresistansen ska bli högst $2{,}0\\ \\%$?`,
+            answer: { value: 50, unit: 'gånger' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+                { del: 'c', value: 50, unit: 'gånger' },
+            ],
+            solution: `Vi skriver först om formeln för parallellkoppling:
+
+$$ \\frac{1}{R_\\mathrm{tot}} = \\frac{1}{R_1} + \\frac{1}{R_2} = \\frac{R_2}{R_1 \\cdot R_2} + \\frac{R_1}{R_1 \\cdot R_2} = \\frac{R_1 + R_2}{R_1 \\cdot R_2} $$
+
+$$ R_\\mathrm{tot} = \\frac{R_1 \\cdot R_2}{R_1 + R_2} = R_1 \\cdot \\frac{R_2}{R_1 + R_2} \\qquad (1) $$
+
+**a)** Resistansen $R_1$ är positiv. Nämnaren $R_1 + R_2$ är därför större än täljaren $R_2$, och kvoten $\\dfrac{R_2}{R_1 + R_2}$ är mindre än 1. Enligt (1), $R_\\mathrm{tot} = R_1 \\cdot \\dfrac{R_2}{R_1 + R_2}$, är ersättningsresistansen alltså $R_1$ multiplicerat med ett tal som är mindre än 1:
+
+$$ R_\\mathrm{tot} < R_1 $$
+
+**Svar:** Kvoten i (1) är alltid mindre än 1, vilket skulle visas.
+
+**b)** Vi utgår från att $R_1 \\leq R_2$. Då är $\\dfrac{1}{R_2} \\leq \\dfrac{1}{R_1}$, och därmed
+
+$$ \\frac{1}{R_\\mathrm{tot}} = \\frac{1}{R_1} + \\frac{1}{R_2} \\leq \\frac{1}{R_1} + \\frac{1}{R_1} = \\frac{2}{R_1} $$
+
+Båda leden är positiva. När vi inverterar dem vänds därför olikheten:
+
+$$ R_\\mathrm{tot} \\geq \\frac{R_1}{2} $$
+
+Likhet gäller när $R_2 = R_1$.
+
+**Svar:** Ersättningsresistansen är minst hälften av $R_1$, vilket skulle visas.
+
+**c)** Vi bildar kvoten mellan det förenklade värdet $R_1$ och det rätta värdet i (1), $R_\\mathrm{tot} = R_1 \\cdot \\dfrac{R_2}{R_1 + R_2}$:
+
+$$ \\frac{R_1}{R_\\mathrm{tot}} = \\frac{R_1 + R_2}{R_2} = \\frac{R_1}{R_2} + 1 $$
+
+Det förenklade värdet är alltid för stort. Felet är högst $2{,}0\\ \\%$ när kvoten är högst $1{,}020$:
+
+$$ \\frac{R_1}{R_2} + 1 \\leq 1{,}020 $$
+
+$$ \\frac{R_1}{R_2} \\leq 0{,}020 $$
+
+Båda leden är positiva. När vi inverterar dem vänds olikheten:
+
+$$ \\frac{R_2}{R_1} \\geq \\frac{1}{0{,}020} = 50 $$
+
+**Svar:** $R_2$ måste vara minst 50 gånger så stor som $R_1$.`,
+        },
+        {
+            level: 3,
+            question: `En böjlig kabel består av många tunna, likadana metalltrådar. Trådarna är isolerade från varandra men hoplödda i kabelns båda ändar.<br>a) I en sådan kabel har tre trådar gått av. Kabelns resistans har då ökat med $12{,}5\\ \\%$. Hur många trådar har kabeln sammanlagt? Ange antalet trådar.<br>b) En annan kabel av samma slag har 24 trådar. Någon mäter resistansen före och efter en skada och påstår att den har ökat med $30\\ \\%$, med ett mätfel på högst en procentenhet. Kan påståendet stämma? Styrk svaret med beräkningar.`,
+            answer: { value: 27, unit: 'trådar', tol: 0.001 },
+            delsvar: [
+                { del: 'a', value: 27, unit: 'trådar', tol: 0.001 },
+                { del: 'b' },
+            ],
+            solution: `**a)** Trådarna har kontakt med varandra bara i ändarna. De är därför parallellkopplade, och en tråd som har gått av leder ingen ström.
+
+Vi kallar antalet trådar *n* och varje tråds resistans *R*. Summan för den hela kabeln består av *n* lika stora termer:
+
+$$ \\frac{1}{R_\\mathrm{hel}} = \\frac{1}{R} + \\frac{1}{R} + \\ldots = \\frac{n}{R} $$
+
+$$ R_\\mathrm{hel} = \\frac{R}{n} $$
+
+När *k* trådar har gått av återstår $n - k$ trådar. På samma sätt blir
+
+$$ R_\\mathrm{skadad} = \\frac{R}{n - k} $$
+
+Vi bildar kvoten mellan resistanserna. Då försvinner den okända resistansen *R*:
+
+$$ \\frac{R_\\mathrm{skadad}}{R_\\mathrm{hel}} = \\frac{R}{n - k} \\cdot \\frac{n}{R} = \\frac{n}{n - k} \\qquad (1) $$
+
+En ökning med $12{,}5\\ \\%$ betyder att kvoten är $1{,}125$. Insättning av $k = 3$ i (1), $\\dfrac{R_\\mathrm{skadad}}{R_\\mathrm{hel}} = \\dfrac{n}{n - k}$, ger
+
+$$ \\frac{n}{n - 3} = 1{,}125 $$
+
+Vi multiplicerar båda led med $n - 3$:
+
+$$ n = 1{,}125 \\cdot (n - 3) $$
+
+$$ n = 1{,}125n - 3{,}375 $$
+
+$$ 0{,}125n = 3{,}375 $$
+
+$$ n = \\frac{3{,}375}{0{,}125} = 27 $$
+
+Kontroll: $\\dfrac{27}{24} = 1{,}125$. Det stämmer.
+
+**Svar:** Kabeln har 27 trådar.
+
+**b)** Med mätfelet ska kvoten ligga mellan $1{,}29$ och $1{,}31$. Vi sätter in $n = 24$ i (1), $\\dfrac{R_\\mathrm{skadad}}{R_\\mathrm{hel}} = \\dfrac{n}{n - k}$, och prövar vilka kvoter som är möjliga. Antalet avbrutna trådar *k* måste vara ett heltal.
+
+Fem avbrutna trådar ger
+
+$$ \\frac{24}{24 - 5} = \\frac{24}{19} \\approx 1{,}26 $$
+
+Sex avbrutna trådar ger
+
+$$ \\frac{24}{24 - 6} = \\frac{24}{18} \\approx 1{,}33 $$
+
+Kvoten ökar när fler trådar går av. Med färre än fem trådar är den alltså mindre än $1{,}27$, och med fler än sex är den större än $1{,}33$. Inget heltal *k* ger en kvot mellan $1{,}29$ och $1{,}31$.
+
+**Svar:** Nej, påståendet kan inte stämma. Fem avbrutna trådar ger ökningen $26\\ \\%$ och sex ger $33\\ \\%$.`,
+        },
+        {
+            level: 3,
+            question: `En jämntjock metalltråd med resistansen *R* har böjts till en ring, och ändarna har lötts ihop. En ohmmeter ansluts till ringen i punkterna A och B. Vinkeln mellan punkterna, sedd från ringens medelpunkt, är *α*, där $0^\\circ < \\alpha \\leq 180^\\circ$.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="60 40 250 180" width="350" height="252" role="img" aria-label="En trådring med två anslutningspunkter A och B som bildar medelpunktsvinkeln alfa" style="max-width:350px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif">
+<circle cx="150" cy="130" r="80" fill="none" stroke="#b45f06" stroke-width="4"/>
+<line x1="150" y1="130" x2="215.53" y2="84.11" stroke="#0f1620" stroke-width="1.2" stroke-dasharray="4 4"/>
+<line x1="150" y1="130" x2="215.53" y2="175.89" stroke="#0f1620" stroke-width="1.2" stroke-dasharray="4 4"/>
+<path d="M 171.30 115.09 A 26 26 0 0 1 171.30 144.91" fill="none" stroke="#0f1620" stroke-width="1.4"/>
+<text x="183" y="135" font-size="14" fill="#0f1620" font-style="italic">α</text>
+<circle cx="150" cy="130" r="2.4" fill="#0f1620"/>
+<line x1="215.53" y1="84.11" x2="284" y2="84.11" stroke="#0f1620" stroke-width="1.8"/>
+<line x1="215.53" y1="175.89" x2="284" y2="175.89" stroke="#0f1620" stroke-width="1.8"/>
+<circle cx="215.53" cy="84.11" r="3.6" fill="#0f1620"/>
+<circle cx="215.53" cy="175.89" r="3.6" fill="#0f1620"/>
+<circle cx="287.5" cy="84.11" r="3.5" fill="#fff" stroke="#0f1620" stroke-width="1.6"/>
+<circle cx="287.5" cy="175.89" r="3.5" fill="#fff" stroke="#0f1620" stroke-width="1.6"/>
+<text x="224" y="76" font-size="14" fill="#0f1620">A</text>
+<text x="224" y="195" font-size="14" fill="#0f1620">B</text>
+</svg>
+
+a) Ta fram ett uttryck för ersättningsresistansen mellan A och B i *R* och *α*.<br>b) För vilken vinkel är ersättningsresistansen $\\dfrac{3R}{16}$? Ange svaret i grader.<br>c) Hur stor kan ersättningsresistansen som mest bli, och för vilken vinkel? Motivera.`,
+            answer: { value: 90, unit: '°' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 90, unit: '°' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Strömmen kan gå två vägar från A till B: genom den korta bågen eller genom den långa. De två bågarna är alltså parallellkopplade.
+
+Tråden är jämntjock, så resistansen är proportionell mot bågens längd. Den korta bågen utgör andelen $\\dfrac{\\alpha}{360^\\circ}$ av hela ringen. För att få korta uttryck kallar vi andelen *x*:
+
+$$ x = \\frac{\\alpha}{360^\\circ} \\qquad (1) $$
+
+Den korta bågen har resistansen $R_1 = x \\cdot R$, och den långa har resten, $R_2 = (1 - x) \\cdot R$. Parallellkoppling ger
+
+$$ \\frac{1}{R_\\mathrm{tot}} = \\frac{1}{x \\cdot R} + \\frac{1}{(1 - x) \\cdot R} = \\frac{(1 - x) + x}{x \\cdot (1 - x) \\cdot R} = \\frac{1}{x \\cdot (1 - x) \\cdot R} $$
+
+$$ R_\\mathrm{tot} = x \\cdot (1 - x) \\cdot R \\qquad (2) $$
+
+Insättning av (1), $x = \\dfrac{\\alpha}{360^\\circ}$, ger
+
+$$ R_\\mathrm{tot} = \\frac{\\alpha}{360^\\circ} \\cdot \\left(1 - \\frac{\\alpha}{360^\\circ}\\right) \\cdot R $$
+
+**Svar:** $R_\\mathrm{tot} = \\dfrac{\\alpha}{360^\\circ} \\cdot \\left(1 - \\dfrac{\\alpha}{360^\\circ}\\right) \\cdot R$
+
+**b)** Vi sätter uttrycket i (2), $R_\\mathrm{tot} = x \\cdot (1 - x) \\cdot R$, lika med $\\dfrac{3R}{16}$:
+
+$$ x \\cdot (1 - x) \\cdot R = \\frac{3R}{16} $$
+
+Vi dividerar båda led med *R*, som alltså inte behöver vara känd:
+
+$$ x \\cdot (1 - x) = \\frac{3}{16} $$
+
+$$ x^2 - x + \\frac{3}{16} = 0 $$
+
+$$ x = \\frac{1}{2} \\pm \\sqrt{\\frac{1}{4} - \\frac{3}{16}} $$
+
+$$ x = \\frac{1}{2} \\pm \\frac{1}{4} $$
+
+Den korta bågen är högst halva ringen. Därför är $x = \\dfrac{1}{4}$ den lösning vi söker (den andra, $x = \\dfrac{3}{4}$, beskriver den långa bågen). Ur (1), $x = \\dfrac{\\alpha}{360^\\circ}$, fås
+
+$$ \\alpha = \\frac{1}{4} \\cdot 360^\\circ = 90^\\circ $$
+
+**Svar:** Vinkeln är $90^\\circ$.
+
+**c)** Uttrycket $x \\cdot (1 - x)$ är en andragradsfunktion med nollställena $x = 0$ och $x = 1$. Grafen är en parabel med en maximipunkt, och den ligger mitt emellan nollställena, alltså vid $x = \\dfrac{1}{2}$. Insättning i (2), $R_\\mathrm{tot} = x \\cdot (1 - x) \\cdot R$, ger
+
+$$ R_\\mathrm{tot} = \\frac{1}{2} \\cdot \\frac{1}{2} \\cdot R = \\frac{R}{4} $$
+
+Vinkeln är då $\\alpha = \\dfrac{1}{2} \\cdot 360^\\circ = 180^\\circ$. Punkterna ligger mitt emot varandra, och ringen är två lika halvor, vardera med resistansen $\\dfrac{R}{2}$, som är parallellkopplade.
+
+**Svar:** Ersättningsresistansen blir som mest $\\dfrac{R}{4}$, när vinkeln är $180^\\circ$.`,
+        },
+        {
+            level: 3,
+            question: `Två resistorer med resistanserna $R_1$ och $R_2$ kopplas till ett batteri, först i serie och sedan parallellt. Strömmen ut från batteriet är $4{,}5$ gånger så stor vid parallellkopplingen som vid seriekopplingen. Spänningen från batteriet är densamma i båda fallen.<br>a) Hur många gånger så stor är den större resistansen som den mindre?<br>b) Visa att strömmen vid parallellkopplingen alltid är minst fyra gånger så stor som vid seriekopplingen, oavsett vilka två resistorer man väljer.`,
+            answer: { value: 2.0, unit: 'gånger' },
+            delsvar: [
+                { del: 'a', value: 2.0, unit: 'gånger' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Vi kallar batteriets spänning *U*. Vid seriekoppling är $R_\\mathrm{tot} = R_1 + R_2$, och Ohms lag ger strömmen
+
+$$ I_\\mathrm{s} = \\frac{U}{R_1 + R_2} \\qquad (1) $$
+
+Vid parallellkoppling adderas strömmarna genom resistorerna, och båda har spänningen *U*:
+
+$$ I_\\mathrm{p} = \\frac{U}{R_1} + \\frac{U}{R_2} = \\frac{U \\cdot (R_1 + R_2)}{R_1 \\cdot R_2} \\qquad (2) $$
+
+Vi dividerar (2), $I_\\mathrm{p} = \\dfrac{U \\cdot (R_1 + R_2)}{R_1 \\cdot R_2}$, med (1), $I_\\mathrm{s} = \\dfrac{U}{R_1 + R_2}$. Då försvinner spänningen:
+
+$$ \\frac{I_\\mathrm{p}}{I_\\mathrm{s}} = \\frac{U \\cdot (R_1 + R_2)}{R_1 \\cdot R_2} \\cdot \\frac{R_1 + R_2}{U} = \\frac{(R_1 + R_2)^2}{R_1 \\cdot R_2} \\qquad (3) $$
+
+Vi låter $R_2$ vara den större resistansen och skriver $R_2 = k \\cdot R_1$, där *k* är det vi söker. Insättning i (3) ger
+
+$$ \\frac{I_\\mathrm{p}}{I_\\mathrm{s}} = \\frac{(R_1 + k \\cdot R_1)^2}{R_1 \\cdot k \\cdot R_1} = \\frac{R_1^2 \\cdot (1 + k)^2}{k \\cdot R_1^2} = \\frac{(1 + k)^2}{k} \\qquad (4) $$
+
+Strömkvoten är $4{,}5$:
+
+$$ \\frac{(1 + k)^2}{k} = 4{,}5 $$
+
+$$ 1 + 2k + k^2 = 4{,}5k $$
+
+$$ k^2 - 2{,}5k + 1 = 0 $$
+
+$$ k = 1{,}25 \\pm \\sqrt{1{,}25^2 - 1} $$
+
+$$ k = 1{,}25 \\pm 0{,}75 $$
+
+Lösningarna är $k = 2{,}0$ och $k = 0{,}50$. De beskriver samma par av resistorer, och eftersom $R_2$ är den större gäller $k = 2{,}0$.
+
+Kontroll: $\\dfrac{(1 + 2)^2}{2} = \\dfrac{9}{2} = 4{,}5$. Det stämmer.
+
+**Svar:** Den större resistansen är $2{,}0$ gånger så stor som den mindre.
+
+**b)** Vi ska visa att kvoten i (3), $\\dfrac{(R_1 + R_2)^2}{R_1 \\cdot R_2}$, alltid är minst 4. Vi bildar skillnaden mellan kvoten och 4:
+
+$$ \\frac{(R_1 + R_2)^2}{R_1 \\cdot R_2} - 4 = \\frac{R_1^2 + 2 R_1 R_2 + R_2^2 - 4 R_1 R_2}{R_1 \\cdot R_2} = \\frac{R_1^2 - 2 R_1 R_2 + R_2^2}{R_1 \\cdot R_2} $$
+
+Täljaren är kvadraten på en skillnad:
+
+$$ \\frac{(R_1 + R_2)^2}{R_1 \\cdot R_2} - 4 = \\frac{(R_1 - R_2)^2}{R_1 \\cdot R_2} $$
+
+En kvadrat är aldrig negativ, och produkten $R_1 \\cdot R_2$ är positiv. Skillnaden är alltså aldrig negativ, och därför är
+
+$$ \\frac{I_\\mathrm{p}}{I_\\mathrm{s}} \\geq 4 $$
+
+Likhet gäller bara när resistanserna är lika stora.
+
+**Svar:** Skillnaden mellan kvoten och 4 är aldrig negativ, vilket skulle visas.`,
+        },
+        {
+            level: 3,
+            question: `En resistor med okänd resistans $R_0$ är inbyggd i en plastlåda med två uttag. Till uttagen parallellkopplas i tur och ordning fem resistorer med kända resistanser $R_x$, och varje gång mäts ersättningsresistansen $R_\\mathrm{tot}$.
+
+| $R_x$ (Ω) | 20,0 | 40,0 | 60,0 | 80,0 | 120 |
+|---|---|---|---|---|---|
+| $R_\\mathrm{tot}$ (Ω) | 15,8 | 26,1 | 33,3 | 38,7 | 46,2 |
+
+a) Vilka storheter ska avsättas på axlarna för att mätpunkterna ska hamna längs en rät linje? Motivera, och ange vilken lutning linjen bör ha.<br>b) Bestäm $R_0$ med hjälp av linjen. Ange svaret i Ω.<br>c) Någon föreslår att man i stället bara parallellkopplar en resistor på $2{,}0\\ \\mathrm{\\Omega}$ och räknar ut $R_0$ ur den mätningen. Varför ger det ett osäkert värde på $R_0$?`,
+            answer: { value: 75, unit: 'Ω', tol: 0.05 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 75, unit: 'Ω', tol: 0.05 },
+                { del: 'c' },
+            ],
+            solution: `**a)** Resistorerna är parallellkopplade:
+
+$$ \\frac{1}{R_\\mathrm{tot}} = \\frac{1}{R_x} + \\frac{1}{R_0} $$
+
+Vi jämför med räta linjens ekvation, $y = k \\cdot x + m$. Om $\\dfrac{1}{R_\\mathrm{tot}}$ avsätts på den lodräta axeln och $\\dfrac{1}{R_x}$ på den vågräta blir sambandet en rät linje. Faktorn framför $\\dfrac{1}{R_x}$ är 1, så lutningen bör vara 1. Skärningen med den lodräta axeln är $m = \\dfrac{1}{R_0}$.
+
+**Svar:** Avsätt $\\dfrac{1}{R_\\mathrm{tot}}$ mot $\\dfrac{1}{R_x}$. Linjen bör ha lutningen 1.
+
+**b)** Vi beräknar inverserna:
+
+| $\\dfrac{1}{R_x}$ (1/Ω) | 0,0500 | 0,0250 | 0,0167 | 0,0125 | 0,00833 |
+|---|---|---|---|---|---|
+| $\\dfrac{1}{R_\\mathrm{tot}}$ (1/Ω) | 0,0633 | 0,0383 | 0,0300 | 0,0258 | 0,0216 |
+
+${makeDiagram({
+    xMax: 0.06, yMax: 0.08,
+    xTicks: [0, 0.01, 0.02, 0.03, 0.04, 0.05], yTicks: [0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07],
+    xLabel: '1/<tspan font-style="italic">R</tspan><tspan font-size="0.72em" dy="2" font-style="italic">x</tspan><tspan dy="-2"> (1/Ω)</tspan>',
+    yLabel: '1/<tspan font-style="italic">R</tspan><tspan font-size="0.72em" dy="4">tot</tspan><tspan dy="-4"> (1/Ω)</tspan>',
+    paths: [{ points: [[0, 0.0133], [0.055, 0.0683]] }],
+}).replace('</svg>', [[0.05, 0.0633], [0.025, 0.0383], [0.0167, 0.03], [0.0125, 0.0258], [0.00833, 0.0216]].map(p => '<circle cx="' + (60 + p[0] / 0.06 * 400).toFixed(1) + '" cy="' + (290 - p[1] / 0.08 * 260).toFixed(1) + '" r="4" fill="#0f1620"/>').join('') + '</svg>')}
+
+Punkterna ligger längs en rät linje. Lutningen mellan den första och den sista punkten är
+
+$$ k = \\frac{0{,}0633 - 0{,}0216}{0{,}0500 - 0{,}00833} \\approx 1{,}0 $$
+
+vilket stämmer med a). Linjen skär den lodräta axeln där
+
+$$ m = 0{,}0633 - 1 \\cdot 0{,}0500 = 0{,}0133 $$
+
+Skärningen är $\\dfrac{1}{R_0}$, alltså
+
+$$ R_0 = \\frac{1}{0{,}0133} \\approx 75\\ \\mathrm{\\Omega} $$
+
+Rimlighet: $R_0$ måste vara större än alla uppmätta värden på $R_\\mathrm{tot}$. Det största är $46{,}2\\ \\mathrm{\\Omega}$, så det stämmer.
+
+**Svar:** $R_0$ är cirka $75\\ \\mathrm{\\Omega}$.
+
+**c)** Med $R_x = 2{,}0\\ \\mathrm{\\Omega}$ skulle ersättningsresistansen bli
+
+$$ R_\\mathrm{tot} = \\frac{1}{\\frac{1}{2{,}0} + \\frac{1}{75}} \\approx 1{,}95\\ \\mathrm{\\Omega} $$
+
+Nästan all ström går genom den lilla resistorn, och därför är $R_\\mathrm{tot}$ nästan lika med $R_x$. Om $R_0$ i stället vore oändligt stor skulle värdet bli $2{,}0\\ \\mathrm{\\Omega}$, alltså bara $0{,}05\\ \\mathrm{\\Omega}$ mer. Ett mätfel på några hundradels ohm ger därför ett mycket stort fel i $R_0$.
+
+**Svar:** Ersättningsresistansen beror då nästan inte alls på $R_0$, och därför ger ett litet mätfel ett stort fel i $R_0$.`,
+        },
+        {
+            level: 3,
+            question: `En kabel mellan två byggnader är $400\\ \\mathrm{m}$ lång och innehåller två likadana ledare. Varje ledare har resistansen $0{,}025\\ \\mathrm{\\Omega}$ per meter. På ett okänt avstånd *x* från ände A har isoleringen skadats, så att ledarna har fått kontakt med varandra. Kontakten kan beskrivas som en resistor med den okända resistansen $R_\\mathrm{f}$ mellan ledarna. Figuren är inte skalenlig.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="10 24 480 196" width="624" height="255" role="img" aria-label="Två parallella ledare mellan ände A och ände B med en felresistor mellan sig på avståndet x från A" style="max-width:624px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif">
+<line x1="50" y1="64" x2="450" y2="64" stroke="#0f1620" stroke-width="2"/>
+<line x1="50" y1="138" x2="450" y2="138" stroke="#0f1620" stroke-width="2"/>
+<line x1="225" y1="64" x2="225" y2="138" stroke="#c8324a" stroke-width="2"/>
+<rect x="217" y="81" width="16" height="40" fill="#fff" stroke="#c8324a" stroke-width="2"/>
+<circle cx="225" cy="64" r="3" fill="#0f1620"/><circle cx="225" cy="138" r="3" fill="#0f1620"/>
+<circle cx="46.5" cy="64" r="3.5" fill="#fff" stroke="#0f1620" stroke-width="1.6"/><circle cx="46.5" cy="138" r="3.5" fill="#fff" stroke="#0f1620" stroke-width="1.6"/>
+<circle cx="453.5" cy="64" r="3.5" fill="#fff" stroke="#0f1620" stroke-width="1.6"/><circle cx="453.5" cy="138" r="3.5" fill="#fff" stroke="#0f1620" stroke-width="1.6"/>
+<text x="50" y="48" font-size="14" fill="#0f1620" text-anchor="middle">Ände A</text>
+<text x="450" y="48" font-size="14" fill="#0f1620" text-anchor="middle">Ände B</text>
+<text x="241" y="106" font-size="14" fill="#c8324a"><tspan font-style="italic">R</tspan><tspan dy="4" font-size="10">f</tspan></text>
+<g stroke="#0f1620" stroke-width="1" stroke-dasharray="3 4" opacity="0.6"><line x1="46.5" y1="145" x2="46.5" y2="206"/><line x1="225" y1="143" x2="225" y2="176"/><line x1="453.5" y1="145" x2="453.5" y2="206"/></g>
+<g stroke="#0e7c86" stroke-width="1.6"><line x1="54" y1="170" x2="217" y2="170"/><line x1="54" y1="200" x2="446" y2="200"/></g>
+<g fill="#0e7c86"><polygon points="46.5,170 55,166 55,174"/><polygon points="225,170 216.5,166 216.5,174"/><polygon points="46.5,200 55,196 55,204"/><polygon points="453.5,200 445,196 445,204"/></g>
+<text x="135.75" y="163" font-size="14" fill="#0e7c86" text-anchor="middle" font-style="italic">x</text>
+<text x="250" y="193" font-size="14" fill="#0e7c86" text-anchor="middle">400 m</text>
+</svg>
+
+En ohmmeter som kopplas mellan ledarna i ände A visar $14{,}0\\ \\mathrm{\\Omega}$ när ledarna är öppna i ände B. När ohmmetern i stället kopplas mellan ledarna i ände B, med öppna ledare i ände A, visar den $22{,}0\\ \\mathrm{\\Omega}$.<br>a) Var ska man gräva? Bestäm avståndet *x*. Ange svaret i m.<br>b) Bestäm felets resistans $R_\\mathrm{f}$. Ange svaret i Ω.<br>c) Ohmmetern sitter kvar i ände A, och ledarna kopplas ihop i ände B med en kort ledning utan resistans. Vilket värde visar ohmmetern? Ange svaret i Ω.`,
+            answer: { value: 120, unit: 'm' },
+            delsvar: [
+                { del: 'a', value: 120, unit: 'm' },
+                { del: 'b', value: 8.0, unit: 'Ω' },
+                { del: 'c', value: 11, unit: 'Ω', tol: 0.02 },
+            ],
+            solution: `**a)** Vid mätningen i ände A går strömmen ut längs den ena ledaren till felet, genom $R_\\mathrm{f}$ och tillbaka längs den andra ledaren. Ledarna bortom felet är öppna, så där går ingen ström. De tre delarna är seriekopplade.
+
+Varje ledarbit av längden *x* har resistansen $0{,}025 \\cdot x$. Det är två sådana bitar:
+
+$$ 2 \\cdot 0{,}025 \\cdot x + R_\\mathrm{f} = 14{,}0 $$
+
+$$ 0{,}050x + R_\\mathrm{f} = 14{,}0 \\qquad (1) $$
+
+Vid mätningen i ände B är varje ledarbit $400 - x$ meter lång:
+
+$$ 2 \\cdot 0{,}025 \\cdot (400 - x) + R_\\mathrm{f} = 22{,}0 $$
+
+$$ 20 - 0{,}050x + R_\\mathrm{f} = 22{,}0 \\qquad (2) $$
+
+Vi subtraherar (1), $0{,}050x + R_\\mathrm{f} = 14{,}0$, från (2), $20 - 0{,}050x + R_\\mathrm{f} = 22{,}0$, led för led. Då försvinner $R_\\mathrm{f}$:
+
+$$ 20 - 0{,}10x = 8{,}0 $$
+
+$$ 0{,}10x = 12 $$
+
+$$ x = \\frac{12}{0{,}10} = 120\\ \\mathrm{m} $$
+
+Rimlighet: resistansen är mindre vid mätningen från A, så felet ska ligga närmare A än B. Det stämmer.
+
+**Svar:** Felet ligger $120\\ \\mathrm{m}$ från ände A.
+
+**b)** Insättning av $x = 120\\ \\mathrm{m}$ i (1), $0{,}050x + R_\\mathrm{f} = 14{,}0$, ger
+
+$$ R_\\mathrm{f} = 14{,}0 - 0{,}050 \\cdot 120 = 8{,}0\\ \\mathrm{\\Omega} $$
+
+**Svar:** Felets resistans är $8{,}0\\ \\mathrm{\\Omega}$.
+
+**c)** Nu kan strömmen från felstället också gå vidare till ände B och tillbaka. Den vägen är $2 \\cdot (400 - 120) = 560\\ \\mathrm{m}$ lång och har resistansen
+
+$$ R_\\mathrm{B} = 0{,}025 \\cdot 560 = 14\\ \\mathrm{\\Omega} $$
+
+Den är parallellkopplad med $R_\\mathrm{f}$. Parallelldelens ersättningsresistans $R_\\mathrm{p}$ fås ur
+
+$$ \\frac{1}{R_\\mathrm{p}} = \\frac{1}{8{,}0} + \\frac{1}{14} = \\frac{7}{56} + \\frac{4}{56} = \\frac{11}{56} $$
+
+$$ R_\\mathrm{p} = \\frac{56}{11}\\ \\mathrm{\\Omega} $$
+
+Parallelldelen är seriekopplad med de två ledarbitarna mellan A och felet:
+
+$$ R_\\mathrm{tot} = 0{,}050 \\cdot 120 + \\frac{56}{11} = 6{,}0 + \\frac{56}{11} \\approx 11\\ \\mathrm{\\Omega} $$
+
+Värdet är mindre än $14{,}0\\ \\mathrm{\\Omega}$, vilket är rimligt eftersom strömmen har fått en väg till.
+
+**Svar:** Ohmmetern visar $11\\ \\mathrm{\\Omega}$.`,
+        },
     ],
 
     'fy1-7.8': [
@@ -38466,15 +44736,15 @@ ${makeCircuit({
             choices: [
                 `$R_1$ och $R_2$.`,
                 `$R_2$ och $R_3$.`,
-                `$R_1$, $R_2$ och $R_3$ — alla tre.`,
+                `$R_1$, $R_2$ och $R_3$, alla tre.`,
                 `Inga är parallella, alla sitter i serie.`,
             ],
             correct: 1,
-            solution: `$R_2$ och $R_3$ sitter i två separata grenar mellan samma två förgreningspunkter — strömmen kan välja väg genom den ena *eller* den andra. Det är definitionen av en **parallellkoppling**.
+            solution: `$R_2$ och $R_3$ sitter i två separata grenar mellan samma två förgreningspunkter. Strömmen kan välja väg genom den ena *eller* den andra. Det är definitionen av en **parallellkoppling**.
 
 $R_1$ sitter däremot ensam på huvudledningen *före* förgreningen, alltså i **serie** med hela parallelldelen.
 
-**Svar:** Alternativ B — $R_2$ och $R_3$.
+**Svar:** Alternativ B, $R_2$ och $R_3$.
 
 **Generell slutsats:** Knepet är att hitta förgreningspunkterna (noderna). Komponenter mellan *samma* par av noder är parallella; komponenter som strömmen måste passera i tur och ordning är i serie.`,
         },
@@ -38532,21 +44802,21 @@ ${makeCircuit({
     ],
 })}`,
             answer: { value: 3.0, unit: 'A' },
-            solution: `**Steg 1 — parallelldelen.** Klumpa ihop $R_2$ och $R_3$:
+            solution: `**Steg 1: parallelldelen.** Klumpa ihop $R_2$ och $R_3$:
 
 $$ \\frac{1}{R_{2,3}} = \\frac{1}{12} + \\frac{1}{6{,}0} = \\frac{3}{12} \\quad\\Rightarrow\\quad R_{2,3} = 4{,}0\\ \\mathrm{\\Omega} $$
 
-**Steg 2 — totala resistansen.** Den sitter i serie med $R_1$:
+**Steg 2: totala resistansen.** Den sitter i serie med $R_1$:
 
 $$ R_\\mathrm{tot} = R_1 + R_{2,3} = 4{,}0 + 4{,}0 = 8{,}0\\ \\mathrm{\\Omega} $$
 
-**Steg 3 — Ohms lag på hela kretsen.**
+**Steg 3: Ohms lag på hela kretsen.**
 
 $$ I = \\frac{U}{R_\\mathrm{tot}} = \\frac{24}{8{,}0} = 3{,}0\\ \\mathrm{A} $$
 
 **Svar:** Huvudströmmen är $3{,}0\\ \\mathrm{A}$.
 
-**Generell slutsats:** Huvudströmmen är hela strömmen som går genom $R_1$ — den delar sedan upp sig mellan $R_2$ och $R_3$ i förgreningen.`,
+**Generell slutsats:** Huvudströmmen är hela strömmen som går genom $R_1$. Den delar sedan upp sig mellan $R_2$ och $R_3$ i förgreningen.`,
         },
         {
             level: 2,
@@ -38594,25 +44864,25 @@ ${makeCircuit({
             answer: { value: 2.0, unit: 'A' },
             solution: `Vi måste arbeta oss fram till spänningen över $R_3$ innan vi kan få dess ström.
 
-**Steg 1 — totala resistansen.** Parallelldelen: $\\dfrac{1}{R_{2,3}} = \\dfrac{1}{12} + \\dfrac{1}{6{,}0} = \\dfrac{3}{12}$, så $R_{2,3} = 4{,}0\\ \\mathrm{\\Omega}$. I serie med $R_1$:
+**Steg 1: totala resistansen.** Parallelldelen: $\\dfrac{1}{R_{2,3}} = \\dfrac{1}{12} + \\dfrac{1}{6{,}0} = \\dfrac{3}{12}$, så $R_{2,3} = 4{,}0\\ \\mathrm{\\Omega}$. I serie med $R_1$:
 
 $$ R_\\mathrm{tot} = 4{,}0 + 4{,}0 = 8{,}0\\ \\mathrm{\\Omega} $$
 
-**Steg 2 — huvudströmmen.**
+**Steg 2: huvudströmmen.**
 
 $$ I = \\frac{U}{R_\\mathrm{tot}} = \\frac{24}{8{,}0} = 3{,}0\\ \\mathrm{A} $$
 
-**Steg 3 — spänningen över parallelldelen.**
+**Steg 3: spänningen över parallelldelen.**
 
 $$ U_{2,3} = U - R_1 \\cdot I = 24 - 4{,}0 \\cdot 3{,}0 = 12\\ \\mathrm{V} $$
 
-**Steg 4 — strömmen genom $R_3$.** Denna spänning ligger över $R_3$, så Ohms lag ger
+**Steg 4: strömmen genom $R_3$.** Denna spänning ligger över $R_3$, så Ohms lag ger
 
 $$ I_3 = \\frac{U_{2,3}}{R_3} = \\frac{12}{6{,}0} = 2{,}0\\ \\mathrm{A} $$
 
 **Svar:** Strömmen genom $R_3$ är $2{,}0\\ \\mathrm{A}$.
 
-**Generell slutsats:** Kontroll med Kirchhoffs första lag: $I_2 = U_{2,3}/R_2 = 12/12 = 1{,}0\\ \\mathrm{A}$, och $I_2 + I_3 = 1{,}0 + 2{,}0 = 3{,}0\\ \\mathrm{A} = I$ ✓. Den mindre resistorn ($R_3$) drar den större strömmen — strömmen tar helst den "lättaste" vägen.`,
+**Generell slutsats:** Kontroll med Kirchhoffs första lag: $I_2 = U_{2,3}/R_2 = 12/12 = 1{,}0\\ \\mathrm{A}$, och $I_2 + I_3 = 1{,}0 + 2{,}0 = 3{,}0\\ \\mathrm{A} = I$ ✓. Den mindre resistorn ($R_3$) drar den större strömmen. Strömmen tar helst den "lättaste" vägen.`,
         },
         {
             level: 3,
@@ -38625,7 +44895,7 @@ ${makeBridge({
     bridge: { type: 'voltmeter', label: 'V' },
 })}`,
             answer: { value: 5.1, unit: 'V' },
-            solution: `En ideal voltmeter släpper inte igenom någon ström, så de två grenarna fungerar som *oberoende spänningsdelare*. Kretsen kan **inte** förenklas med vanlig serie/parallell — vi måste bestämma potentialen i P och Q var för sig.
+            solution: `En ideal voltmeter släpper inte igenom någon ström, så de två grenarna fungerar som *oberoende spänningsdelare*. Kretsen kan **inte** förenklas med vanlig serie/parallell. Vi måste bestämma potentialen i P och Q var för sig.
 
 **Övre grenen** ($R_1$ och $R_2$ i serie):
 $$ I_\\text{övre} = \\frac{U}{R_1 + R_2} = \\frac{12}{50 + 30} = 0{,}15\\ \\mathrm{A} $$
@@ -38641,7 +44911,626 @@ $$ U_{PQ} = |4{,}5 - 9{,}6| = 5{,}1\\ \\mathrm{V} $$
 
 **Svar:** Voltmetern visar $5{,}1\\ \\mathrm{V}$.
 
-**Generell slutsats:** Det här är en **bryggkoppling**. Fällan är att försöka klumpa ihop motstånden i serie/parallell — det går inte, eftersom P och Q inte är samma punkt. Behandla i stället grenarna som två separata spänningsdelare och jämför mittpunkternas potential.`,
+**Generell slutsats:** Det här är en **bryggkoppling**. Fällan är att försöka klumpa ihop motstånden i serie/parallell. Det går inte, eftersom P och Q inte är samma punkt. Behandla i stället grenarna som två separata spänningsdelare och jämför mittpunkternas potential.`,
+        },
+        {
+            level: 1,
+            question: `Bestäm kretsens totala resistans $R_\\mathrm{tot}$. Ange svaret i ohm.
+
+${makeCircuit({
+    width: 440,
+    source: { label: 'U' },
+    components: [
+        { type: 'resistor', label: 'R_1', value: '10 Ω' },
+        { type: 'parallel', branches: [
+            [{ type: 'resistor', label: 'R_2', value: '40 Ω' }],
+            [{ type: 'resistor', label: 'R_3', value: '60 Ω' }],
+        ] },
+        { type: 'resistor', label: 'R_4', value: '16 Ω' },
+    ],
+})}`,
+            answer: { value: 50, unit: 'Ω' },
+            solution: `Vi börjar med de parallellkopplade resistorerna $R_2$ och $R_3$:
+
+$$ \\frac{1}{R_{2,3}} = \\frac{1}{R_2} + \\frac{1}{R_3} = \\frac{1}{40} + \\frac{1}{60} = \\frac{3}{120} + \\frac{2}{120} = \\frac{5}{120} = \\frac{1}{24} $$
+
+$$ R_{2,3} = 24\\ \\mathrm{\\Omega} $$
+
+Parallelldelen sitter i serie med $R_1$ och $R_4$, så resistanserna adderas:
+
+$$ R_\\mathrm{tot} = R_1 + R_{2,3} + R_4 = 10 + 24 + 16 = 50\\ \\mathrm{\\Omega} $$
+
+**Svar:** Den totala resistansen är $50\\ \\mathrm{\\Omega}$.`,
+        },
+        {
+            level: 1,
+            question: `I kretsen nedan sitter två resistorer i den övre grenen och en resistor i den undre. Bestäm kretsens totala resistans. Ange svaret i ohm.
+
+${makeCircuit({
+    source: { label: 'U' },
+    components: [
+        { type: 'parallel', branches: [
+            [{ type: 'resistor', value: '14 Ω' }, { type: 'resistor', value: '10 Ω' }],
+            [{ type: 'resistor', value: '8,0 Ω' }],
+        ] },
+    ],
+})}`,
+            answer: { value: 6.0, unit: 'Ω' },
+            solution: `I den övre grenen sitter två resistorer i serie. Grenens resistans är
+
+$$ R_\\text{övre} = 14 + 10 = 24\\ \\mathrm{\\Omega} $$
+
+Den övre grenen är parallellkopplad med resistorn på $8{,}0\\ \\mathrm{\\Omega}$:
+
+$$ \\frac{1}{R_\\mathrm{tot}} = \\frac{1}{24} + \\frac{1}{8{,}0} = \\frac{1}{24} + \\frac{3}{24} = \\frac{4}{24} = \\frac{1}{6{,}0} $$
+
+$$ R_\\mathrm{tot} = 6{,}0\\ \\mathrm{\\Omega} $$
+
+**Svar:** Den totala resistansen är $6{,}0\\ \\mathrm{\\Omega}$.`,
+        },
+        {
+            level: 1,
+            question: `I kretsen nedan är strömmen genom $R_1$ lika med $0{,}90\\ \\mathrm{A}$ och strömmen genom $R_2$ lika med $0{,}35\\ \\mathrm{A}$. Bestäm, i ampere, strömmen genom<br>a)&nbsp;$R_3$&emsp;&emsp;b)&nbsp;$R_4$
+
+${makeCircuit({
+    source: { label: 'U' },
+    components: [
+        { type: 'resistor', label: 'R_1' },
+        { type: 'parallel', branches: [
+            [{ type: 'resistor', label: 'R_2' }],
+            [{ type: 'resistor', label: 'R_3' }],
+        ] },
+        { type: 'resistor', label: 'R_4' },
+    ],
+})}`,
+            answer: { value: 0.55, unit: 'A' },
+            delsvar: [
+                { del: 'a', value: 0.55, unit: 'A' },
+                { del: 'b', value: 0.90, unit: 'A' },
+            ],
+            solution: `**a)** Strömmen genom $R_1$ delar upp sig i förgreningen. Enligt Kirchhoffs första lag är strömmen in i förgreningspunkten lika stor som den totala strömmen ut från den:
+
+$$ I_1 = I_2 + I_3 \\quad\\Leftrightarrow\\quad I_3 = I_1 - I_2 $$
+
+$$ I_3 = 0{,}90 - 0{,}35 = 0{,}55\\ \\mathrm{A} $$
+
+**Svar:** $0{,}55\\ \\mathrm{A}$
+
+**b)** I den andra förgreningspunkten går strömmarna genom $R_2$ och $R_3$ ihop igen och fortsätter genom $R_4$:
+
+$$ I_4 = I_2 + I_3 = 0{,}35 + 0{,}55 = 0{,}90\\ \\mathrm{A} $$
+
+Strömmen genom $R_4$ är alltså lika stor som strömmen genom $R_1$.
+
+**Svar:** $0{,}90\\ \\mathrm{A}$`,
+        },
+        {
+            level: 1,
+            question: `Tre likadana lampor är kopplade till ett batteri enligt schemat. Vilket påstående är sant?
+
+${makeCircuit({
+    source: { label: 'U' },
+    components: [
+        { type: 'parallel', branches: [
+            [{ type: 'bulb', label: 'L_1' }, { type: 'bulb', label: 'L_2' }],
+            [{ type: 'bulb', label: 'L_3' }],
+        ] },
+    ],
+})}`,
+            choices: [
+                `Spänningen över L₁ är lika stor som spänningen över L₃.`,
+                `Strömmen genom L₁ är lika stor som strömmen genom L₃.`,
+                `Strömmen från batteriet är lika stor som strömmen genom L₃.`,
+                `Strömmen genom L₁ är lika stor som strömmen genom L₂.`,
+            ],
+            correct: 3,
+            solution: `L₁ och L₂ sitter efter varandra i samma gren, alltså i **serie**. Strömmen genom seriekopplade komponenter är lika stor, så det är lika stor ström genom L₁ som genom L₂.
+
+De andra påståendena är falska:
+
+- Över L₃ ligger hela batteriets spänning. I den övre grenen delas samma spänning mellan L₁ och L₂, så L₁ får bara hälften.
+- Eftersom L₁ har lägre spänning än L₃ och lamporna är likadana är strömmen genom L₁ mindre än strömmen genom L₃.
+- Strömmen från batteriet är summan av strömmarna i de båda grenarna, alltså större än strömmen genom L₃.
+
+**Svar:** Alternativ D. Strömmen genom L₁ är lika stor som strömmen genom L₂.`,
+        },
+        {
+            level: 2,
+            question: `I kretsen nedan är $U = 12\\ \\mathrm{V}$, $R_1 = 30\\ \\mathrm{\\Omega}$, $R_2 = 60\\ \\mathrm{\\Omega}$ och $R_3 = 30\\ \\mathrm{\\Omega}$.<br>a) Bestäm strömmen från batteriet när strömbrytaren är öppen.<br>b) Bestäm strömmen från batteriet när strömbrytaren är sluten.<br>c) Hur många volt minskar spänningen över $R_2$ när strömbrytaren sluts?
+
+${makeCircuit({
+    width: 400,
+    source: { label: 'U' },
+    components: [
+        { type: 'resistor', label: 'R_1' },
+        { type: 'parallel', branches: [
+            [{ type: 'resistor', label: 'R_2' }],
+            [{ type: 'switch', open: true }, { type: 'resistor', label: 'R_3' }],
+        ] },
+    ],
+})}`,
+            answer: { value: 0.24, unit: 'A' },
+            delsvar: [
+                { del: 'a', value: 0.13, unit: 'A', tol: 0.04 },
+                { del: 'b', value: 0.24, unit: 'A' },
+                { del: 'c', value: 3.2, unit: 'V' },
+            ],
+            solution: `**a)** När strömbrytaren är öppen går ingen ström genom $R_3$. Kvar finns $R_1$ och $R_2$ i serie:
+
+$$ R_\\mathrm{tot} = R_1 + R_2 = 30 + 60 = 90\\ \\mathrm{\\Omega} $$
+
+$$ I = \\frac{U}{R_\\mathrm{tot}} = \\frac{12}{90} = 0{,}1333\\ldots\\ \\mathrm{A} \\approx 0{,}13\\ \\mathrm{A} $$
+
+**Svar:** $0{,}13\\ \\mathrm{A}$
+
+**b)** När strömbrytaren är sluten är $R_2$ och $R_3$ parallellkopplade:
+
+$$ \\frac{1}{R_{2,3}} = \\frac{1}{60} + \\frac{1}{30} = \\frac{3}{60} = \\frac{1}{20} \\quad\\Rightarrow\\quad R_{2,3} = 20\\ \\mathrm{\\Omega} $$
+
+Parallelldelen sitter i serie med $R_1$:
+
+$$ R_\\mathrm{tot} = R_1 + R_{2,3} = 30 + 20 = 50\\ \\mathrm{\\Omega} $$
+
+$$ I = \\frac{U}{R_\\mathrm{tot}} = \\frac{12}{50} = 0{,}24\\ \\mathrm{A} $$
+
+**Svar:** $0{,}24\\ \\mathrm{A}$
+
+**c)** Med öppen strömbrytare går hela strömmen genom $R_2$. Ohms lag ger
+
+$$ U_2 = R_2 \\cdot I = 60 \\cdot \\frac{12}{90} = 8{,}0\\ \\mathrm{V} $$
+
+Med sluten strömbrytare ligger samma spänning över hela parallelldelen:
+
+$$ U_2 = R_{2,3} \\cdot I = 20 \\cdot 0{,}24 = 4{,}8\\ \\mathrm{V} $$
+
+Minskningen är
+
+$$ 8{,}0 - 4{,}8 = 3{,}2\\ \\mathrm{V} $$
+
+Det är rimligt att spänningen minskar: strömmen genom $R_1$ ökar, så en större del av batteriets spänning ligger över $R_1$.
+
+**Svar:** Spänningen minskar med $3{,}2\\ \\mathrm{V}$.`,
+        },
+        {
+            level: 2,
+            question: `I kretsen nedan är $R_1 = 22\\ \\mathrm{\\Omega}$, $R_2 = 38\\ \\mathrm{\\Omega}$ och $R_3 = 36\\ \\mathrm{\\Omega}$. Batteriets spänning är okänd. Amperemetern visar $0{,}30\\ \\mathrm{A}$. Hur stor är strömmen från batteriet? Ange svaret i ampere.
+
+${makeCircuit({
+    source: { label: 'U' },
+    components: [
+        { type: 'parallel', branches: [
+            [{ type: 'ammeter' }, { type: 'resistor', label: 'R_1' }, { type: 'resistor', label: 'R_2' }],
+            [{ type: 'resistor', label: 'R_3' }],
+        ] },
+    ],
+})}`,
+            answer: { value: 0.80, unit: 'A' },
+            solution: `Amperemetern sitter i serie med $R_1$ och $R_2$, så strömmen i den övre grenen är $0{,}30\\ \\mathrm{A}$. Grenens resistans är
+
+$$ R_{1,2} = R_1 + R_2 = 22 + 38 = 60\\ \\mathrm{\\Omega} $$
+
+Spänningen över den övre grenen fås med Ohms lag:
+
+$$ U = R_{1,2} \\cdot I_1 = 60 \\cdot 0{,}30 = 18\\ \\mathrm{V} $$
+
+Den undre grenen är parallellkopplad med den övre, så spänningen över $R_3$ är lika stor:
+
+$$ I_3 = \\frac{U}{R_3} = \\frac{18}{36} = 0{,}50\\ \\mathrm{A} $$
+
+Kirchhoffs första lag ger strömmen från batteriet:
+
+$$ I = I_1 + I_3 = 0{,}30 + 0{,}50 = 0{,}80\\ \\mathrm{A} $$
+
+Den större strömmen går genom grenen med lägst resistans, vilket är rimligt.
+
+**Svar:** Strömmen från batteriet är $0{,}80\\ \\mathrm{A}$.`,
+        },
+        {
+            level: 2,
+            question: `En grupp elever har byggt kretsen i schemat med batterispänningen $U = 9{,}0\\ \\mathrm{V}$. De har börjat fylla i en tabell över sina mätningar.
+
+${makeCircuit({
+    source: { label: 'U', value: '9,0 V' },
+    components: [
+        { type: 'resistor', label: 'R_1' },
+        { type: 'parallel', branches: [
+            [{ type: 'resistor', label: 'R_2' }],
+            [{ type: 'resistor', label: 'R_3' }],
+        ] },
+    ],
+})}
+
+| Resistor | Spänning (V) | Ström (A) | Resistans (Ω) |
+|---|---|---|---|
+| $R_1$ | | 0,15 | |
+| $R_2$ | 3,0 | | 60 |
+| $R_3$ | | | |
+
+Använd tabellen och bestäm resistansen<br>a)&nbsp;$R_1$&emsp;&emsp;b)&nbsp;$R_3$`,
+            answer: { value: 30, unit: 'Ω' },
+            delsvar: [
+                { del: 'a', value: 40, unit: 'Ω' },
+                { del: 'b', value: 30, unit: 'Ω' },
+            ],
+            solution: `**a)** Batteriets spänning delas mellan $R_1$ och parallelldelen. Över parallelldelen ligger $3{,}0\\ \\mathrm{V}$, eftersom det är spänningen över $R_2$. Alltså är
+
+$$ U_1 = U - U_2 = 9{,}0 - 3{,}0 = 6{,}0\\ \\mathrm{V} $$
+
+Ohms lag ger
+
+$$ R_1 = \\frac{U_1}{I_1} = \\frac{6{,}0}{0{,}15} = 40\\ \\mathrm{\\Omega} $$
+
+**Svar:** $R_1 = 40\\ \\mathrm{\\Omega}$
+
+**b)** Strömmen genom $R_2$ är
+
+$$ I_2 = \\frac{U_2}{R_2} = \\frac{3{,}0}{60} = 0{,}050\\ \\mathrm{A} $$
+
+Strömmen genom $R_1$ delar upp sig på $R_2$ och $R_3$. Kirchhoffs första lag ger
+
+$$ I_3 = I_1 - I_2 = 0{,}15 - 0{,}050 = 0{,}10\\ \\mathrm{A} $$
+
+$R_3$ är parallellkopplad med $R_2$ och har därför samma spänning, $3{,}0\\ \\mathrm{V}$:
+
+$$ R_3 = \\frac{U_3}{I_3} = \\frac{3{,}0}{0{,}10} = 30\\ \\mathrm{\\Omega} $$
+
+**Svar:** $R_3 = 30\\ \\mathrm{\\Omega}$`,
+        },
+        {
+            level: 2,
+            question: `Tre likadana lampor är kopplade enligt schemat och alla lyser. Plötsligt går glödtråden i L₃ av. Vad händer med de andra två lamporna? Anta att varje lampas resistans är konstant.
+
+${makeCircuit({
+    source: { label: 'U' },
+    components: [
+        { type: 'bulb', label: 'L_1' },
+        { type: 'parallel', branches: [
+            [{ type: 'bulb', label: 'L_2' }],
+            [{ type: 'bulb', label: 'L_3' }],
+        ] },
+    ],
+})}`,
+            choices: [
+                `L₁ lyser svagare och L₂ lyser starkare.`,
+                `Både L₁ och L₂ lyser starkare.`,
+                `L₁ lyser lika starkt och L₂ lyser starkare.`,
+                `Både L₁ och L₂ lyser svagare.`,
+            ],
+            correct: 0,
+            solution: `Kalla resistansen i varje lampa *R* och jämför spänningarna före och efter.
+
+**Före:** L₂ och L₃ är parallellkopplade och har tillsammans resistansen $\\dfrac{R}{2}$. Den totala resistansen är
+
+$$ R_\\mathrm{tot} = R + \\frac{R}{2} = \\frac{3R}{2} $$
+
+Strömmen genom L₁ är då
+
+$$ I = \\frac{U}{R_\\mathrm{tot}} = \\frac{2U}{3R} $$
+
+Spänningen över L₁ är $\\dfrac{2U}{3}$, och spänningen över L₂ är det som återstår, $\\dfrac{U}{3}$.
+
+**Efter:** Ingen ström går genom L₃. Kvar finns L₁ och L₂ i serie. Lamporna är likadana, så de får halva batterispänningen var, $\\dfrac{U}{2}$.
+
+Spänningen över L₁ minskar från $\\dfrac{2U}{3}$ till $\\dfrac{U}{2}$, så strömmen genom L₁ minskar. Spänningen över L₂ ökar från $\\dfrac{U}{3}$ till $\\dfrac{U}{2}$, så strömmen genom L₂ ökar.
+
+**Svar:** Alternativ A. L₁ lyser svagare och L₂ lyser starkare.`,
+        },
+        {
+            level: 3,
+            question: `I kretsen nedan är batteriets spänning $15\\ \\mathrm{V}$ och $R_3 = 15\\ \\mathrm{\\Omega}$. Resistanserna $R_1$ och $R_2$ är okända. Strömmen från batteriet är $0{,}30\\ \\mathrm{A}$ när strömbrytaren är öppen och $0{,}50\\ \\mathrm{A}$ när den är sluten. Bestäm, i ohm,<br>a)&nbsp;$R_1$&emsp;&emsp;b)&nbsp;$R_2$
+
+${makeCircuit({
+    width: 400,
+    source: { label: 'U' },
+    components: [
+        { type: 'resistor', label: 'R_1' },
+        { type: 'parallel', branches: [
+            [{ type: 'resistor', label: 'R_2' }],
+            [{ type: 'switch', open: true }, { type: 'resistor', label: 'R_3' }],
+        ] },
+    ],
+})}`,
+            answer: { value: 30, unit: 'Ω' },
+            delsvar: [
+                { del: 'a', value: 20, unit: 'Ω' },
+                { del: 'b', value: 30, unit: 'Ω' },
+            ],
+            solution: `Två mätningar ger två ekvationer för de två okända resistanserna.
+
+**Öppen strömbrytare.** Ingen ström går genom $R_3$, så $R_1$ och $R_2$ sitter i serie. Ohms lag för hela kretsen ger
+
+$$ R_1 + R_2 = \\frac{15}{0{,}30} = 50 \\tag{1} $$
+
+**Sluten strömbrytare.** $R_2$ och $R_3$ är parallellkopplade. Ersättningsresistansen är
+
+$$ \\frac{1}{R_{2,3}} = \\frac{1}{R_2} + \\frac{1}{15} = \\frac{15 + R_2}{15R_2} \\quad\\Rightarrow\\quad R_{2,3} = \\frac{15R_2}{15 + R_2} $$
+
+Ohms lag för hela kretsen ger
+
+$$ R_1 + \\frac{15R_2}{15 + R_2} = \\frac{15}{0{,}50} = 30 \\tag{2} $$
+
+Ur (1) fås $R_1 = 50 - R_2$. Detta i (2), $R_1 + \\dfrac{15R_2}{15 + R_2} = 30$, ger
+
+$$ 50 - R_2 + \\frac{15R_2}{15 + R_2} = 30 $$
+
+Subtrahera 50 från båda led:
+
+$$ -R_2 + \\frac{15R_2}{15 + R_2} = -20 $$
+
+Multiplicera båda led med $15 + R_2$:
+
+$$ -R_2 \\cdot (15 + R_2) + 15R_2 = -20 \\cdot (15 + R_2) $$
+
+$$ -15R_2 - R_2^2 + 15R_2 = -300 - 20R_2 $$
+
+$$ -R_2^2 = -300 - 20R_2 $$
+
+Addera $300 + 20R_2$ till båda led och multiplicera sedan med $-1$:
+
+$$ R_2^2 - 20R_2 - 300 = 0 $$
+
+$$ R_2 = 10 \\pm \\sqrt{10^2 + 300} = 10 \\pm \\sqrt{400} = 10 \\pm 20 $$
+
+En resistans är positiv, så $R_2 = 10 + 20 = 30\\ \\mathrm{\\Omega}$. Insättning i $R_1 = 50 - R_2$ ger
+
+$$ R_1 = 50 - 30 = 20\\ \\mathrm{\\Omega} $$
+
+**Kontroll:** Med sluten strömbrytare är parallelldelens resistans $\\dfrac{15 \\cdot 30}{15 + 30} = 10\\ \\mathrm{\\Omega}$, och den totala resistansen $20 + 10 = 30\\ \\mathrm{\\Omega}$, som den ska vara.
+
+**Svar:** a) $R_1 = 20\\ \\mathrm{\\Omega}$&emsp;&emsp;b) $R_2 = 30\\ \\mathrm{\\Omega}$`,
+        },
+        {
+            level: 3,
+            question: `En kedja byggs av likadana led. Varje led består av en resistor $R_1 = 8{,}0\\ \\mathrm{\\Omega}$ och en resistor $R_2 = 48\\ \\mathrm{\\Omega}$. Kedjan avslutas med en resistor *X*. Figuren visar en kedja med två led. Bestäm *X* så att resistansen mellan A och B blir lika stor oavsett hur många led kedjan har. Ange svaret i ohm.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 208" style="max-width:490px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><g stroke="#0f1620" stroke-width="1.8" stroke-linecap="square" fill="#fff"><line x1="44" y1="50" x2="440" y2="50"/><line x1="44" y1="140" x2="440" y2="140"/><line x1="170" y1="50" x2="170" y2="140"/><line x1="320" y1="50" x2="320" y2="140"/><line x1="440" y1="50" x2="440" y2="140"/><rect x="85" y="42" width="40" height="16"/><rect x="225" y="42" width="40" height="16"/><rect x="162" y="75" width="16" height="40"/><rect x="312" y="75" width="16" height="40"/><rect x="432" y="75" width="16" height="40"/><circle cx="40" cy="50" r="4"/><circle cx="40" cy="140" r="4"/></g><g fill="#0f1620"><circle cx="170" cy="50" r="2.6"/><circle cx="320" cy="50" r="2.6"/><circle cx="170" cy="140" r="2.6"/><circle cx="320" cy="140" r="2.6"/></g><g fill="#0f1620" font-size="16"><text x="27" y="56" text-anchor="end">A</text><text x="27" y="146" text-anchor="end">B</text><text x="105" y="34" text-anchor="middle"><tspan font-style="italic">R</tspan>₁</text><text x="245" y="34" text-anchor="middle"><tspan font-style="italic">R</tspan>₁</text><text x="186" y="101"><tspan font-style="italic">R</tspan>₂</text><text x="336" y="101"><tspan font-style="italic">R</tspan>₂</text><text x="456" y="101" font-style="italic">X</text></g><g fill="none" stroke="#8a8579" stroke-width="1.5"><path d="M 62 156 V 164 H 206 V 156"/><path d="M 218 156 V 164 H 358 V 156"/></g><g fill="#5f5a50" font-size="15" text-anchor="middle"><text x="134" y="185">led 1</text><text x="288" y="185">led 2</text></g></svg>`,
+            answer: { value: 24, unit: 'Ω' },
+            solution: `Det sista ledet är anslutet till *X*. Om det sista ledet tillsammans med *X* har resistansen *X*, kan ledet och *X* bytas ut mot en enda resistor *X* utan att något ändras. Då kan vi plocka bort ett led i taget från högerkanten, och resistansen mellan A och B är hela tiden *X*. Det är precis det villkor vi söker: en kedja med ett led ska ha samma resistans som en kedja utan led.
+
+I ett led är $R_2$ parallellkopplad med *X*, och parallelldelen sitter i serie med $R_1$. Parallelldelens resistans är
+
+$$ \\frac{1}{R_\\mathrm{p}} = \\frac{1}{R_2} + \\frac{1}{X} = \\frac{X + R_2}{R_2 \\cdot X} \\quad\\Rightarrow\\quad R_\\mathrm{p} = \\frac{R_2 \\cdot X}{R_2 + X} $$
+
+Villkoret blir
+
+$$ R_1 + \\frac{R_2 \\cdot X}{R_2 + X} = X $$
+
+Multiplicera båda led med $R_2 + X$:
+
+$$ R_1 \\cdot (R_2 + X) + R_2 \\cdot X = X \\cdot (R_2 + X) $$
+
+$$ R_1 \\cdot R_2 + R_1 \\cdot X + R_2 \\cdot X = R_2 \\cdot X + X^2 $$
+
+Subtrahera $R_2 \\cdot X$ från båda led och samla alla termer på ena sidan:
+
+$$ X^2 - R_1 \\cdot X - R_1 \\cdot R_2 = 0 $$
+
+Insättning av $R_1 = 8{,}0\\ \\mathrm{\\Omega}$ och $R_2 = 48\\ \\mathrm{\\Omega}$ ger
+
+$$ X^2 - 8X - 384 = 0 $$
+
+$$ X = 4 \\pm \\sqrt{4^2 + 384} = 4 \\pm \\sqrt{400} = 4 \\pm 20 $$
+
+Resistansen är positiv, så $X = 4 + 20 = 24\\ \\mathrm{\\Omega}$.
+
+**Kontroll:** Parallelldelen är $\\dfrac{48 \\cdot 24}{48 + 24} = 16\\ \\mathrm{\\Omega}$. I serie med $R_1$ blir det $8{,}0 + 16 = 24\\ \\mathrm{\\Omega}$, alltså *X* igen.
+
+**Svar:** $X = 24\\ \\mathrm{\\Omega}$`,
+        },
+        {
+            level: 3,
+            question: `Två likadana resistorer, vardera med resistansen *R*, är seriekopplade till ett batteri. Spänningen över den ena ska mätas med en voltmeter. En verklig voltmeter släpper igenom lite ström och fungerar i kretsen som en resistor med resistansen $R_\\mathrm{V}$. Därför visar den ett för litet värde. Hur många gånger så stor som *R* måste $R_\\mathrm{V}$ minst vara för att det visade värdet ska vara högst 5,0&nbsp;% mindre än spänningen utan voltmeter?
+
+${makeCircuit({
+    source: { label: 'U' },
+    components: [
+        { type: 'resistor', label: 'R' },
+        { type: 'parallel', branches: [
+            [{ type: 'resistor', label: 'R' }],
+            [{ type: 'voltmeter' }],
+        ] },
+    ],
+})}`,
+            answer: { value: 9.5, unit: 'gånger' },
+            solution: `Varken *U* eller *R* är känd, så vi räknar med dem som symboler. Låt $R_\\mathrm{V} = k \\cdot R$, där *k* är det sökta talet.
+
+**Utan voltmeter:** Två lika stora resistorer i serie delar spänningen lika. Spänningen över var och en är $\\dfrac{U}{2}$.
+
+**Med voltmeter:** Voltmetern är parallellkopplad med den ena resistorn. Parallelldelens resistans $R_\\mathrm{p}$ fås av
+
+$$ \\frac{1}{R_\\mathrm{p}} = \\frac{1}{R} + \\frac{1}{k \\cdot R} = \\frac{k + 1}{k \\cdot R} \\quad\\Rightarrow\\quad R_\\mathrm{p} = \\frac{k \\cdot R}{k + 1} $$
+
+Den totala resistansen är
+
+$$ R_\\mathrm{tot} = R + \\frac{k \\cdot R}{k + 1} = \\frac{(k + 1) \\cdot R + k \\cdot R}{k + 1} = \\frac{(2k + 1) \\cdot R}{k + 1} $$
+
+Strömmen från batteriet är $I = \\dfrac{U}{R_\\mathrm{tot}}$, och voltmetern visar spänningen över parallelldelen:
+
+$$ U_\\mathrm{V} = R_\\mathrm{p} \\cdot I = \\frac{R_\\mathrm{p}}{R_\\mathrm{tot}} \\cdot U $$
+
+Faktorn *R* och nämnaren $k + 1$ finns i både $R_\\mathrm{p}$ och $R_\\mathrm{tot}$ och förkortas bort:
+
+$$ U_\\mathrm{V} = \\frac{k}{2k + 1} \\cdot U $$
+
+Det visade värdet ska vara minst 95&nbsp;% av $\\dfrac{U}{2}$:
+
+$$ \\frac{k}{2k + 1} \\cdot U \\geq 0{,}95 \\cdot \\frac{U}{2} $$
+
+Dividera båda led med *U* och multiplicera med $2 \\cdot (2k + 1)$, som är positivt:
+
+$$ 2k \\geq 0{,}95 \\cdot (2k + 1) $$
+
+$$ 2k \\geq 1{,}9k + 0{,}95 $$
+
+$$ 0{,}1k \\geq 0{,}95 $$
+
+$$ k \\geq 9{,}5 $$
+
+Resultatet beror varken på *U* eller på *R*. Det är rimligt att $R_\\mathrm{V}$ ska vara mycket större än *R*: ju större $R_\\mathrm{V}$ är, desto mindre ström går genom voltmetern och desto mindre påverkas kretsen.
+
+**Svar:** $R_\\mathrm{V}$ måste vara minst $9{,}5$ gånger så stor som *R*.`,
+        },
+        {
+            level: 3,
+            question: `Du har en låda full med resistorer på $60\\ \\mathrm{\\Omega}$ och vill koppla ihop några av dem så att den totala resistansen blir exakt $100\\ \\mathrm{\\Omega}$. Vilket är det minsta antalet resistorer som behövs? Visa hur de ska kopplas och motivera att det inte går med färre.`,
+            answer: { value: 4, unit: 'resistorer', tol: 0 },
+            solution: `Vi undersöker alla resistanser som går att få med en, två och tre resistorer.
+
+**En resistor** ger $60\\ \\mathrm{\\Omega}$.
+
+**Två resistorer** kan bara kopplas på två sätt:
+
+- i serie: $60 + 60 = 120\\ \\mathrm{\\Omega}$
+- parallellt: $\\dfrac{1}{R_\\mathrm{tot}} = \\dfrac{1}{60} + \\dfrac{1}{60} = \\dfrac{1}{30}$, vilket ger $30\\ \\mathrm{\\Omega}$
+
+**Tre resistorer.** Varje sådan koppling består av ett par ($120\\ \\mathrm{\\Omega}$ eller $30\\ \\mathrm{\\Omega}$) som kopplas ihop med den tredje resistorn, antingen i serie eller parallellt. Det ger fyra möjligheter:
+
+| Paret | Den tredje i serie | Den tredje parallellt |
+|---|---|---|
+| 120 Ω | 180 Ω | 40 Ω |
+| 30 Ω | 90 Ω | 20 Ω |
+
+Värdena i den högra kolumnen fås av
+
+$$ \\frac{1}{120} + \\frac{1}{60} = \\frac{3}{120} = \\frac{1}{40} $$
+
+$$ \\frac{1}{30} + \\frac{1}{60} = \\frac{3}{60} = \\frac{1}{20} $$
+
+Ingen av kopplingarna har resistansen $100\\ \\mathrm{\\Omega}$. Tre resistorer räcker alltså inte.
+
+**Fyra resistorer.** Bland kopplingarna med tre resistorer finns $40\\ \\mathrm{\\Omega}$. Lägger vi till den fjärde resistorn i serie blir den totala resistansen
+
+$$ R_\\mathrm{tot} = 60 + 40 = 100\\ \\mathrm{\\Omega} $$
+
+${makeCircuit({
+    source: { label: 'U' },
+    components: [
+        { type: 'resistor', value: '60 Ω' },
+        { type: 'parallel', branches: [
+            [{ type: 'resistor', value: '60 Ω' }, { type: 'resistor', value: '60 Ω' }],
+            [{ type: 'resistor', value: '60 Ω' }],
+        ] },
+    ],
+})}
+
+**Svar:** Minst 4 resistorer behövs, kopplade enligt figuren.`,
+        },
+        {
+            level: 3,
+            question: `I kretsen nedan är en amperemeter inkopplad mellan punkterna P och Q. Amperemeterns resistans är försumbar.<br>a) Vilken ström visar amperemetern?<br>b) Åt vilket håll går strömmen genom amperemetern? Batteriets pluspol är ansluten till kretsens vänstra sida.
+
+${makeBridge({
+    width: 420,
+    source: { label: 'U', value: '18 V' },
+    upper: [ { type: 'resistor', label: 'R_1', value: '20 Ω' }, { type: 'resistor', label: 'R_2', value: '60 Ω' } ],
+    lower: [ { type: 'resistor', label: 'R_3', value: '30 Ω' }, { type: 'resistor', label: 'R_4', value: '40 Ω' } ],
+    bridge: { type: 'ammeter' },
+})}`,
+            answer: { value: 0.10, unit: 'A' },
+            delsvar: [
+                { del: 'a', value: 0.10, unit: 'A' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Amperemetern har ingen resistans, så det är ingen spänning mellan P och Q. De två punkterna fungerar därför som en och samma punkt. Då blir strukturen enklare än den ser ut:
+
+- $R_1$ och $R_3$ sitter båda mellan vänstra sidan och punkten PQ, alltså parallellt.
+- $R_2$ och $R_4$ sitter båda mellan PQ och högra sidan, alltså parallellt.
+- De två parallelldelarna sitter i serie.
+
+Parallelldelarnas resistanser:
+
+$$ \\frac{1}{R_{1,3}} = \\frac{1}{20} + \\frac{1}{30} = \\frac{5}{60} = \\frac{1}{12} \\quad\\Rightarrow\\quad R_{1,3} = 12\\ \\mathrm{\\Omega} $$
+
+$$ \\frac{1}{R_{2,4}} = \\frac{1}{60} + \\frac{1}{40} = \\frac{5}{120} = \\frac{1}{24} \\quad\\Rightarrow\\quad R_{2,4} = 24\\ \\mathrm{\\Omega} $$
+
+Strömmen från batteriet är
+
+$$ I = \\frac{U}{R_{1,3} + R_{2,4}} = \\frac{18}{12 + 24} = 0{,}50\\ \\mathrm{A} $$
+
+Spänningen över de två parallelldelarna:
+
+$$ U_{1,3} = R_{1,3} \\cdot I = 12 \\cdot 0{,}50 = 6{,}0\\ \\mathrm{V} $$
+
+$$ U_{2,4} = R_{2,4} \\cdot I = 24 \\cdot 0{,}50 = 12\\ \\mathrm{V} $$
+
+Strömmarna i den övre grenen är
+
+$$ I_1 = \\frac{U_{1,3}}{R_1} = \\frac{6{,}0}{20} = 0{,}30\\ \\mathrm{A} $$
+
+$$ I_2 = \\frac{U_{2,4}}{R_2} = \\frac{12}{60} = 0{,}20\\ \\mathrm{A} $$
+
+Till P kommer $0{,}30\\ \\mathrm{A}$ genom $R_1$, men bara $0{,}20\\ \\mathrm{A}$ fortsätter genom $R_2$. Enligt Kirchhoffs första lag måste resten gå genom amperemetern:
+
+$$ I_\\mathrm{A} = I_1 - I_2 = 0{,}30 - 0{,}20 = 0{,}10\\ \\mathrm{A} $$
+
+**Svar:** Amperemetern visar $0{,}10\\ \\mathrm{A}$.
+
+**b)** Strömmen går från batteriets pluspol, alltså från vänster till höger genom resistorerna. Strömmen in i P från vänster är större än strömmen ut ur P åt höger. Överskottet lämnar P genom amperemetern och går ned till Q.
+
+Kontroll i Q: Genom $R_3$ kommer $I_3 = \\dfrac{6{,}0}{30} = 0{,}20\\ \\mathrm{A}$ och genom amperemetern $0{,}10\\ \\mathrm{A}$, sammanlagt $0{,}30\\ \\mathrm{A}$. Genom $R_4$ går $I_4 = \\dfrac{12}{40} = 0{,}30\\ \\mathrm{A}$, så det stämmer.
+
+**Svar:** Från P till Q`,
+        },
+        {
+            level: 3,
+            question: `I kretsen nedan är batteriets spänning $12\\ \\mathrm{V}$, och *X* är en resistor vars resistans kan ändras från $0$ och uppåt. Diagrammet visar hur strömmen *I* från batteriet beror på *X*.<br>a) Bestäm $R_1$ och $R_2$ med hjälp av diagrammet.<br>b) Vilket värde närmar sig strömmen när *X* blir mycket stor?
+
+${makeCircuit({
+    source: { label: 'U', value: '12 V' },
+    components: [
+        { type: 'resistor', label: 'R_1' },
+        { type: 'parallel', branches: [
+            [{ type: 'resistor', label: 'R_2' }],
+            [{ type: 'resistor', label: 'X' }],
+        ] },
+    ],
+})}
+
+${makeDiagram({
+    xMax: 150, yMax: 0.7,
+    xTicks: [0, 30, 60, 90, 120, 150],
+    yTicks: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7],
+    xLabel: '<tspan font-style="italic">X</tspan> (Ω)',
+    yLabel: '<tspan font-style="italic">I</tspan> (A)',
+    paths: [{ points: Array.from({ length: 151 }, (_, x) => [x, 12 / (20 + 60 * x / (60 + x))]) }],
+})}`,
+            answer: { value: 60, unit: 'Ω' },
+            delsvar: [
+                { del: 'a', value: 20, unit: 'Ω', tol: 0.05, etikett: '$R_1 =$' },
+                { del: 'a', value: 60, unit: 'Ω', tol: 0.1, etikett: '$R_2 =$' },
+                { del: 'b', value: 0.15, unit: 'A', tol: 0.05 },
+            ],
+            solution: `**a)** Vi söker två punkter på kurvan som ger var sitt samband.
+
+**Punkten där $X = 0$.** En resistor utan resistans fungerar som en vanlig ledare. Då är spänningen över parallelldelen noll, och ingen ström går genom $R_2$. Hela batterispänningen ligger över $R_1$. Diagrammet ger $I = 0{,}60\\ \\mathrm{A}$:
+
+$$ R_1 = \\frac{U}{I} = \\frac{12}{0{,}60} = 20\\ \\mathrm{\\Omega} $$
+
+**En punkt till.** Vi väljer en punkt som är lätt att läsa av: när $X = 30\\ \\mathrm{\\Omega}$ är $I = 0{,}30\\ \\mathrm{A}$. Den totala resistansen är då
+
+$$ R_\\mathrm{tot} = \\frac{U}{I} = \\frac{12}{0{,}30} = 40\\ \\mathrm{\\Omega} $$
+
+$R_1$ sitter i serie med parallelldelen, som alltså har resistansen
+
+$$ R_\\mathrm{p} = R_\\mathrm{tot} - R_1 = 40 - 20 = 20\\ \\mathrm{\\Omega} $$
+
+Parallelldelen består av $R_2$ och $X = 30\\ \\mathrm{\\Omega}$:
+
+$$ \\frac{1}{20} = \\frac{1}{R_2} + \\frac{1}{30} $$
+
+$$ \\frac{1}{R_2} = \\frac{1}{20} - \\frac{1}{30} = \\frac{3}{60} - \\frac{2}{60} = \\frac{1}{60} $$
+
+$$ R_2 = 60\\ \\mathrm{\\Omega} $$
+
+**Svar:** $R_1 = 20\\ \\mathrm{\\Omega}$ och $R_2 = 60\\ \\mathrm{\\Omega}$
+
+**b)** När *X* är mycket stor går nästan ingen ström genom *X*. Kretsen fungerar då som om bara $R_1$ och $R_2$ fanns, i serie:
+
+$$ I = \\frac{U}{R_1 + R_2} = \\frac{12}{20 + 60} = 0{,}15\\ \\mathrm{A} $$
+
+Det stämmer med diagrammet, där kurvan planar ut och ligger något över $0{,}15\\ \\mathrm{A}$ längst till höger.
+
+**Svar:** Strömmen närmar sig $0{,}15\\ \\mathrm{A}$.`,
         },
     ],
 
@@ -38889,12 +45778,12 @@ $$ \\mathbb{E} = 8{,}99 \\cdot 10^9 \\cdot \\frac{15 \\cdot 10^{-9}}{0{,}10^2} =
 
 **Svar:** Fältstyrkan är ungefär $1{,}3 \\cdot 10^4\\ \\mathrm{N/C}$.
 
-**Generell slutsats:** Notera likheten med Coulombs lag — men här ingår bara *en* laddning, eftersom fältstyrkan beskriver fältet i punkten innan någon andra laddning placerats där.`,
+**Generell slutsats:** Notera likheten med Coulombs lag. Här ingår dock bara *en* laddning, eftersom fältstyrkan beskriver fältet i punkten innan någon andra laddning placerats där.`,
         },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
-            level: 2,
+            level: 1,
             question: `Fältstyrkan $5{,}0\\ \\mathrm{cm}$ från medelpunkten på en laddad kula är $1{,}8 \\cdot 10^5\\ \\mathrm{N/C}$. Hur stor är kulans laddning?`,
             answer: { value: 50, unit: 'nC' },
             solution: `Vi utgår från fältstyrkan från ett klot och löser ut laddningen *Q*:
@@ -38916,23 +45805,23 @@ $$ Q = \\frac{1{,}8 \\cdot 10^5 \\cdot 0{,}050^2}{8{,}99 \\cdot 10^9} = 5{,}0 \\
 
 **Svar:** Kulans laddning är ungefär $50\\ \\mathrm{nC}$.
 
-**Generell slutsats:** Här måste man lösa ut *Q* ur formeln och komma ihåg att avståndet står i kvadrat — det är $r^2 = 0{,}050^2 = 0{,}0025$ som ska in, inte $0{,}050$.`,
+**Generell slutsats:** Här måste man lösa ut *Q* ur formeln och komma ihåg att avståndet står i kvadrat. Det är $r^2 = 0{,}050^2 = 0{,}0025$ som ska in, inte $0{,}050$.`,
         },
         {
             level: 2,
             question: `En liten kula har laddningen $Q = 20\\ \\mathrm{nC}$. I en punkt $8{,}0\\ \\mathrm{cm}$ från kulan placeras en testladdning $q = 3{,}0\\ \\mathrm{nC}$. Hur stor elektrisk kraft verkar på testladdningen?`,
             answer: { value: 84, unit: 'μN' },
-            solution: `**Steg 1 — fältstyrkan i punkten** (från kulans laddning *Q*):
+            solution: `**Steg 1: fältstyrkan i punkten** (från kulans laddning *Q*):
 
 $$ \\mathbb{E} = k \\cdot \\frac{Q}{r^2} = 8{,}99 \\cdot 10^9 \\cdot \\frac{20 \\cdot 10^{-9}}{0{,}080^2} = 2{,}81 \\cdot 10^4\\ \\mathrm{N/C} $$
 
-**Steg 2 — kraften på testladdningen** (fältstyrka gånger testladdning):
+**Steg 2: kraften på testladdningen** (fältstyrka gånger testladdning):
 
 $$ F = \\mathbb{E} \\cdot q = 2{,}81 \\cdot 10^4 \\cdot 3{,}0 \\cdot 10^{-9} = 8{,}4 \\cdot 10^{-5}\\ \\mathrm{N} = 84\\ \\mathrm{\\mu N} $$
 
 **Svar:** Kraften på testladdningen är ungefär $84\\ \\mathrm{\\mu N}$.
 
-**Generell slutsats:** Att räkna fältstyrka först och sedan kraft ger samma svar som Coulombs lag direkt ($F = k Q q / r^2$) — men "fält-tänket" är kraftfullt när flera laddningar bidrar, eftersom man då adderar fält i stället för att para ihop alla laddningar.`,
+**Generell slutsats:** Att räkna fältstyrka först och sedan kraft ger samma svar som Coulombs lag direkt ($F = k Q q / r^2$), men "fält-tänket" är kraftfullt när flera laddningar bidrar, eftersom man då adderar fält i stället för att para ihop alla laddningar.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
@@ -38956,23 +45845,607 @@ $$ \\mathbb{E} = \\mathbb{E}_1 + \\mathbb{E}_2 = 8{,}99 \\cdot 10^4 + 8{,}99 \\c
 
 **Svar:** Den resulterande fältstyrkan i P är ungefär $1{,}8 \\cdot 10^5\\ \\mathrm{N/C}$, riktad åt höger (mot den negativa laddningen).
 
-**Generell slutsats:** Mellan en positiv och en negativ laddning pekar *båda* fälten åt samma håll (från plus mot minus) — därför adderas de. Att avgöra riktningen med regeln "ut från plus, in i minus" är hela poängen med superposition.`,
+**Generell slutsats:** Mellan en positiv och en negativ laddning pekar *båda* fälten åt samma håll (från plus mot minus). Därför adderas de. Att avgöra riktningen med regeln "ut från plus, in i minus" är hela poängen med superposition.`,
         },
         {
-            level: 3,
+            level: 2,
             question: `Två lika stora laddningar $Q = 5{,}0\\ \\mathrm{nC}$ placeras i två hörn (A och C) av en kvadrat med sidan $4{,}0\\ \\mathrm{cm}$. Bestäm den elektriska fältstyrkans **storlek** i hörnet B, som ligger intill båda de laddade hörnen. ($k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2}$)`,
             answer: { value: 4.0e4, unit: 'N/C' },
             solution: `Varje laddning ger ett fält i B. Eftersom A och C är *grannhörn* till B ligger båda på avståndet $4{,}0\\ \\mathrm{cm}$ (kvadratens sida) från B, och de två fälten blir lika stora:
 
 $$ \\mathbb{E}_1 = \\mathbb{E}_2 = k \\cdot \\frac{Q}{a^2} = 8{,}99 \\cdot 10^9 \\cdot \\frac{5{,}0 \\cdot 10^{-9}}{0{,}040^2} = 2{,}81 \\cdot 10^4\\ \\mathrm{N/C} $$
 
-**Riktningarna är vinkelräta mot varandra:** fältet från A pekar längs sidan A→B, fältet från C längs sidan C→B, och dessa två sidor möts i rät vinkel i hörnet B. Den resulterande fältstyrkan fås därför med Pythagoras sats — inte genom enkel addition:
+**Riktningarna är vinkelräta mot varandra:** fältet från A pekar längs sidan A→B, fältet från C längs sidan C→B, och dessa två sidor möts i rät vinkel i hörnet B. Den resulterande fältstyrkan fås därför med Pythagoras sats, inte genom enkel addition:
 
 $$ \\mathbb{E} = \\sqrt{\\mathbb{E}_1^2 + \\mathbb{E}_2^2} = \\mathbb{E}_1 \\cdot \\sqrt{2} = 2{,}81 \\cdot 10^4 \\cdot \\sqrt{2} = 4{,}0 \\cdot 10^4\\ \\mathrm{N/C} $$
 
 **Svar:** Fältstyrkan i hörnet B är ungefär $4{,}0 \\cdot 10^4\\ \\mathrm{N/C}$.
 
-**Generell slutsats:** Fält (och krafter) är **vektorer** — ligger de inte längs samma linje måste de adderas geometriskt. Står de vinkelrätt blir det Pythagoras; i andra fall delar man upp i $x$- och $y$-komposanter var för sig.`,
+**Generell slutsats:** Fält (och krafter) är **vektorer**. Ligger de inte längs samma linje måste de adderas geometriskt. Står de vinkelrätt blir det Pythagoras; i andra fall delar man upp i $x$- och $y$-komposanter var för sig.`,
+        },
+        // ── Grund (påfyllning) ──
+        {
+            level: 1,
+            question: `Figuren visar fältlinjerna i ett elektriskt fält. I fältet finns tre små partiklar: A är positivt laddad, B är negativt laddad och C är oladdad. Partiklarna släpps samtidigt från vila. Vad händer? Bortse från tyngdkraften och från krafterna mellan partiklarna.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 246" role="img" aria-label="Parallella fältlinjer åt höger med tre partiklar: A positiv, B negativ och C oladdad" style="max-width:506px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><line x1="30" y1="45" x2="410" y2="45" stroke="#5f5a50" stroke-width="1.7"/><polygon points="262,45 250,50.5 250,39.5" fill="#5f5a50"/><line x1="30" y1="97" x2="410" y2="97" stroke="#5f5a50" stroke-width="1.7"/><polygon points="262,97 250,102.5 250,91.5" fill="#5f5a50"/><line x1="30" y1="149" x2="410" y2="149" stroke="#5f5a50" stroke-width="1.7"/><polygon points="262,149 250,154.5 250,143.5" fill="#5f5a50"/><line x1="30" y1="201" x2="410" y2="201" stroke="#5f5a50" stroke-width="1.7"/><polygon points="262,201 250,206.5 250,195.5" fill="#5f5a50"/><circle cx="140" cy="71" r="14" fill="#c0392b"/><line x1="134" y1="71" x2="146" y2="71" stroke="#fff" stroke-width="2.4"/><line x1="140" y1="65" x2="140" y2="77" stroke="#fff" stroke-width="2.4"/><text x="112" y="76" font-size="15" fill="#0f1620" text-anchor="middle">A</text><circle cx="140" cy="123" r="14" fill="#2563c9"/><line x1="134" y1="123" x2="146" y2="123" stroke="#fff" stroke-width="2.4"/><text x="112" y="128" font-size="15" fill="#0f1620" text-anchor="middle">B</text><circle cx="140" cy="175" r="14" fill="#8a8579"/><text x="112" y="180" font-size="15" fill="#0f1620" text-anchor="middle">C</text><text x="345" y="77" font-size="15" fill="#0f1620" text-anchor="middle"><tspan font-size="20">𝔼</tspan></text></svg>`,
+            choices: [
+                'A och B rör sig åt höger, C står stilla.',
+                'Alla tre rör sig åt höger.',
+                'A rör sig åt höger, B åt vänster, C står stilla.',
+                'A rör sig åt vänster, B åt höger, C står stilla.',
+            ],
+            correct: 2,
+            solution: `Fältlinjerna pekar åt höger, så fältet är riktat åt höger. Fältets riktning är per definition riktningen på kraften på en **positiv** laddning.
+
+- A är positiv och får en kraft **med** fältet, alltså åt höger.
+- B är negativ och får en kraft **mot** fältet, alltså åt vänster.
+- C är oladdad. Med $Q = 0$ blir kraften $F = \\mathbb{E} \\cdot Q = 0$, så C står stilla.
+
+**Svar:** A rör sig åt höger, B åt vänster och C står stilla.`,
+        },
+        {
+            level: 1,
+            question: `Under ett åskmoln är fältstyrkan $2{,}5 \\cdot 10^4\\ \\mathrm{N/C}$ och fältet är riktat rakt uppåt. Ett dammkorn i luften har laddningen $-6{,}0\\ \\mathrm{pC}$, där $1\\ \\mathrm{pC} = 10^{-12}\\ \\mathrm{C}$.<br>a) Hur stor är den elektriska kraften på dammkornet? Svara i μN.<br>b) Åt vilket håll är kraften riktad?`,
+            answer: { value: 0.15, unit: 'μN' },
+            delsvar: [
+                { del: 'a', value: 0.15, unit: 'μN', etikett: '$F =$' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Vi löser ut kraften ur definitionen av fältstyrka:
+
+$$ \\mathbb{E} = \\frac{F}{Q} \\quad\\Leftrightarrow\\quad F = \\mathbb{E} \\cdot Q $$
+
+Laddningens storlek sätts in utan tecken:
+
+$$
+\\left[ \\begin{array}{l}
+\\mathbb{E} = 2{,}5 \\cdot 10^4\\ \\mathrm{N/C} \\\\
+Q = 6{,}0\\ \\mathrm{pC} = 6{,}0 \\cdot 10^{-12}\\ \\mathrm{C}
+\\end{array} \\right]
+$$
+
+$$ F = 2{,}5 \\cdot 10^4 \\cdot 6{,}0 \\cdot 10^{-12} = 1{,}5 \\cdot 10^{-7}\\ \\mathrm{N} = 0{,}15\\ \\mathrm{\\mu N} $$
+
+**Svar:** Kraften är $0{,}15\\ \\mathrm{\\mu N}$.
+
+**b)** Dammkornet är negativt laddat, så kraften är riktad **mot** fältet. Fältet pekar uppåt.
+
+**Svar:** Kraften är riktad rakt nedåt.`,
+        },
+        {
+            level: 1,
+            question: `Ett flygande bi blir elektriskt laddat av friktionen mot luften. I ett fält med fältstyrkan $120\\ \\mathrm{N/C}$ verkar den elektriska kraften $3{,}6 \\cdot 10^{-9}\\ \\mathrm{N}$ på biet. Hur stor är biets laddning? Svara i pC, där $1\\ \\mathrm{pC} = 10^{-12}\\ \\mathrm{C}$.`,
+            answer: { value: 30, unit: 'pC' },
+            solution: `Vi löser ut laddningen ur definitionen av fältstyrka:
+
+$$ \\mathbb{E} = \\frac{F}{Q} \\quad\\Leftrightarrow\\quad Q = \\frac{F}{\\mathbb{E}} $$
+
+$$
+\\left[ \\begin{array}{l}
+F = 3{,}6 \\cdot 10^{-9}\\ \\mathrm{N} \\\\
+\\mathbb{E} = 120\\ \\mathrm{N/C}
+\\end{array} \\right]
+$$
+
+$$ Q = \\frac{3{,}6 \\cdot 10^{-9}}{120} = 3{,}0 \\cdot 10^{-11}\\ \\mathrm{C} = 30 \\cdot 10^{-12}\\ \\mathrm{C} = 30\\ \\mathrm{pC} $$
+
+**Svar:** Biets laddning är $30\\ \\mathrm{pC}$.`,
+        },
+        {
+            level: 1,
+            question: `Ett metallklot med radien $12\\ \\mathrm{cm}$ har laddningen $0{,}40\\ \\mathrm{\\mu C}$. Punkten P ligger $18\\ \\mathrm{cm}$ från klotets **yta**, se figuren. Hur stor är den elektriska fältstyrkan i P? Svara i kN/C. ($k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2}$)
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 369 258" role="img" aria-label="Ett laddat klot med radien 12 cm och en punkt P 18 cm från klotets yta" style="max-width:424px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><circle cx="109" cy="106" r="84" fill="#ece3d2" stroke="#0f1620" stroke-width="1.8"/><circle cx="109" cy="106" r="3.4" fill="#0f1620"/><line x1="109" y1="106" x2="109" y2="22" stroke="#0f1620" stroke-width="1.4"/><text x="118" y="69" font-size="15" fill="#0f1620" text-anchor="start">12 cm</text><text x="109" y="148" font-size="15" fill="#0f1620" text-anchor="middle">+0,40 μC</text><circle cx="319" cy="106" r="3.4" fill="#0f1620"/><text x="319" y="94" font-size="15" fill="#0f1620" text-anchor="middle">P</text><line x1="193" y1="112" x2="193" y2="226" stroke="rgba(15,22,32,0.4)" stroke-width="1.1" stroke-dasharray="3 3"/><line x1="319" y1="114" x2="319" y2="226" stroke="rgba(15,22,32,0.4)" stroke-width="1.1" stroke-dasharray="3 3"/><line x1="201" y1="220" x2="311" y2="220" stroke="#0f1620" stroke-width="1.4"/><polygon points="193,220 202,216 202,224" fill="#0f1620"/><polygon points="319,220 310,224 310,216" fill="#0f1620"/><text x="256" y="239" font-size="15" fill="#0f1620" text-anchor="middle">18 cm</text></svg>`,
+            answer: { value: 40, unit: 'kN/C' },
+            solution: `Fältstyrkan från ett laddat klot är
+
+$$ \\mathbb{E} = k \\cdot \\frac{Q}{r^2} $$
+
+där *r* är avståndet till klotets **medelpunkt**. Klotets radie ska därför läggas till avståndet från ytan.
+
+$$
+\\left[ \\begin{array}{l}
+k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2} \\\\
+Q = 0{,}40\\ \\mathrm{\\mu C} = 0{,}40 \\cdot 10^{-6}\\ \\mathrm{C} \\\\
+r = 12\\ \\mathrm{cm} + 18\\ \\mathrm{cm} = 30\\ \\mathrm{cm} = 0{,}30\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ \\mathbb{E} = 8{,}99 \\cdot 10^9 \\cdot \\frac{0{,}40 \\cdot 10^{-6}}{0{,}30^2} = 39\\,955{,}5\\ldots\\ \\mathrm{N/C} \\approx 40\\ \\mathrm{kN/C} $$
+
+**Svar:** Fältstyrkan är $40\\ \\mathrm{kN/C}$.`,
+        },
+        // ── Mellan (påfyllning) ──
+        {
+            level: 2,
+            question: `Figuren visar fältlinjerna kring två små laddade kulor. Vilket påstående stämmer?
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 330" role="img" aria-label="Fältlinjer kring två laddade kulor, kula 1 och kula 2" style="max-width:572px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><polyline points="196.7,168.3 200.6,169 204.5,169.7 208.5,170.4 212.4,171 216.4,171.6 220.4,172.2 224.3,172.7 228.3,173.2 232.3,173.7 236.2,174.1 240.2,174.5 244.2,174.8 248.2,175.1 252.2,175.4 256.2,175.6 260.2,175.7 264.2,175.8 268.2,175.8 272.2,175.8 276.2,175.7 280.2,175.5 284.2,175.3 288.2,175 292.1,174.6 296.1,174.1 300.1,173.5 304,172.8 307.9,172 311.8,171.1 314.7,170.4" fill="none" stroke="#5f5a50" stroke-width="1.5"/><polygon points="261.2,175.8 251,179.9 251.4,170.7" fill="#5f5a50"/><polyline points="194.1,174.4 197.6,176.5 201,178.5 204.5,180.5 208.1,182.3 211.6,184.1 215.2,185.8 218.9,187.5 222.6,189 226.3,190.5 230.1,191.9 233.9,193.1 237.7,194.3 241.5,195.4 245.4,196.3 249.3,197.1 253.3,197.9 257.2,198.4 261.2,198.9 265.2,199.2 269.2,199.3 273.2,199.3 277.2,199.1 281.2,198.7 285.1,198.2 289.1,197.4 292.9,196.5 296.8,195.3 300.5,193.9 304.2,192.3 307.7,190.5 311.2,188.4 314.4,186.1 317.5,183.6 320.4,180.8 321.7,179.3" fill="none" stroke="#5f5a50" stroke-width="1.5"/><polygon points="263.2,199.2 252.6,202.4 253.9,193.3" fill="#5f5a50"/><polyline points="189.4,179.1 191.9,182.3 194.4,185.4 197,188.5 199.7,191.4 202.4,194.4 205.2,197.2 208.1,199.9 211.1,202.6 214.2,205.1 217.4,207.6 220.6,210 223.9,212.2 227.2,214.4 230.7,216.4 234.2,218.4 237.8,220.2 241.4,221.8 245.1,223.4 248.8,224.7 252.7,226 256.5,227 260.4,228 264.3,228.7 268.3,229.3 272.3,229.6 276.3,229.8 280.3,229.8 284.3,229.6 288.2,229.2 292.2,228.5 296.1,227.6 299.9,226.5 303.7,225.2 307.4,223.6 310.9,221.7 314.3,219.6 317.6,217.3 320.6,214.7 323.4,211.9 326,208.8 328.3,205.6 330.3,202.1 332,198.5 333.3,194.7 334.2,190.8 334.7,186.8 334.8,182.8 334.7,180.8" fill="none" stroke="#5f5a50" stroke-width="1.5"/><polygon points="272.2,229.9 261.7,232.9 263.1,223.8" fill="#5f5a50"/><polyline points="183.3,181.7 184.4,185.5 185.5,189.4 186.8,193.2 188.2,196.9 189.6,200.6 191.2,204.3 192.9,207.9 194.7,211.5 196.5,215.1 198.5,218.5 200.6,222 202.8,225.3 205,228.6 207.4,231.8 209.9,235 212.4,238.1 215.1,241.1 217.8,244 220.6,246.8 223.5,249.6 226.5,252.2 229.6,254.8 232.7,257.3 235.9,259.6 239.2,261.9 242.6,264.1 246,266.1 249.5,268 253.1,269.9 256.7,271.6 260.4,273.2 264.1,274.6 267.9,276 271.7,277.2 275.6,278.2 279.4,279.2 283.4,279.9 287.3,280.6 291.3,281.1 295.3,281.5 299.3,281.7 303.3,281.7 307.3,281.7 311.3,281.4 315.2,281 319.2,280.4 323.1,279.7 327,278.8 330.9,277.8 334.7,276.5 338.4,275.1 342.1,273.6 345.7,271.8 349.2,269.9 352.7,267.9 356,265.6 359.2,263.2 362.2,260.6 365.1,257.9 367.8,254.9 370.4,251.9 372.8,248.6 374.9,245.3 376.8,241.8 378.5,238.1 379.9,234.4 381,230.5 381.7,226.6 382.2,222.6 382.3,218.6 382.1,214.6 381.5,210.7 380.6,206.8 379.4,203 377.8,199.3 375.9,195.8 373.7,192.5 371.3,189.3 368.6,186.3 365.7,183.5 362.7,180.9 359.5,178.5 356.2,176.3 352.7,174.2 349.2,172.4 345.6,170.6" fill="none" stroke="#5f5a50" stroke-width="1.5"/><polygon points="239.1,262 228.4,259.7 233.9,252.4" fill="#5f5a50"/><polyline points="176.7,181.7 176.2,185.6 175.7,189.6 175.4,193.6 175.2,197.6 175,201.6 175,205.6 175.1,209.6 175.2,213.6 175.4,217.6 175.8,221.6 176.2,225.5 176.7,229.5 177.3,233.5 177.9,237.4 178.7,241.3 179.6,245.3 180.5,249.1 181.5,253 182.6,256.9 183.7,260.7 185,264.5 186.3,268.3 187.7,272 189.2,275.7 190.7,279.4 192.3,283.1 194,286.7 195.7,290.3 197.6,293.9 199.4,297.4 201.4,300.9 203.4,304.4 205.4,307.8 207.5,311.2 209.7,314.6 210.3,315.4" fill="none" stroke="#5f5a50" stroke-width="1.5"/><polygon points="182.5,256.9 175.5,248.3 184.5,246.1" fill="#5f5a50"/><polyline points="170.6,179.1 168.5,182.6 166.5,186 164.6,189.6 162.8,193.1 161,196.7 159.3,200.3 157.6,203.9 156,207.6 154.4,211.3 153,215 151.5,218.7 150.2,222.5 148.9,226.3 147.6,230.1 146.4,233.9 145.2,237.7 144.2,241.6 143.1,245.4 142.1,249.3 141.2,253.2 140.3,257.1 139.4,261 138.6,264.9 137.9,268.8 137.1,272.8 136.5,276.7 135.8,280.7 135.3,284.6 134.7,288.6 134.2,292.6 133.8,296.5 133.3,300.5 133,304.5 132.6,308.5 132.3,312.5 132.1,315.5" fill="none" stroke="#5f5a50" stroke-width="1.5"/><polygon points="141.8,250.3 140,239.4 148.9,241.8" fill="#5f5a50"/><polyline points="165.9,174.4 162.6,176.8 159.4,179.1 156.2,181.6 153,184 149.9,186.5 146.8,189 143.7,191.5 140.6,194.1 137.6,196.7 134.6,199.3 131.6,202 128.6,204.7 125.7,207.4 122.8,210.1 119.9,212.9 117,215.7 114.1,218.5 111.3,221.3 108.5,224.1 105.7,227 102.9,229.9 100.1,232.8 97.4,235.7 94.7,238.6 92,241.6 89.3,244.5 86.6,247.5 84,250.5 81.4,253.5 78.7,256.5 76.1,259.6 73.5,262.6 71,265.7 68.4,268.8 65.9,271.9 63.3,275 60.8,278.1 58.3,281.2 55.8,284.3 53.4,287.5 50.9,290.6 48.5,293.8 46,296.9 43.6,300.1 41.2,303.3 38.8,306.5 36.4,309.7 34,312.9 32.2,315.4" fill="none" stroke="#5f5a50" stroke-width="1.5"/><polygon points="92,241.5 95.4,231.1 102.1,237.3" fill="#5f5a50"/><polyline points="163.3,168.3 159.4,169.1 155.5,170 151.6,170.8 147.7,171.7 143.8,172.6 139.9,173.5 136,174.4 132.1,175.3 128.2,176.3 124.3,177.2 120.4,178.2 116.6,179.2 112.7,180.1 108.8,181.1 104.9,182.1 101.1,183.1 97.2,184.2 93.3,185.2 89.5,186.2 85.6,187.3 81.8,188.3 77.9,189.4 74.1,190.5 70.2,191.6 66.4,192.6 62.5,193.7 58.7,194.8 54.8,196 51,197.1 47.1,198.2 43.3,199.3 39.5,200.5 35.6,201.6 31.8,202.7 28,203.9 24.1,205 20.3,206.2 16.5,207.4 14.6,208" fill="none" stroke="#5f5a50" stroke-width="1.5"/><polygon points="83.7,187.8 92.1,180.8 94.5,189.6" fill="#5f5a50"/><polyline points="163.3,161.7 159.4,160.9 155.5,160 151.6,159.2 147.7,158.3 143.8,157.4 139.9,156.5 136,155.6 132.1,154.7 128.2,153.7 124.3,152.8 120.4,151.8 116.6,150.8 112.7,149.9 108.8,148.9 104.9,147.9 101.1,146.9 97.2,145.8 93.3,144.8 89.5,143.8 85.6,142.7 81.8,141.7 77.9,140.6 74.1,139.5 70.2,138.4 66.4,137.4 62.5,136.3 58.7,135.2 54.8,134 51,132.9 47.1,131.8 43.3,130.7 39.5,129.5 35.6,128.4 31.8,127.3 28,126.1 24.1,125 20.3,123.8 16.5,122.6 14.6,122" fill="none" stroke="#5f5a50" stroke-width="1.5"/><polygon points="83.7,142.2 94.5,140.4 92.1,149.2" fill="#5f5a50"/><polyline points="165.9,155.6 162.6,153.2 159.4,150.9 156.2,148.4 153,146 149.9,143.5 146.8,141 143.7,138.5 140.6,135.9 137.6,133.3 134.6,130.7 131.6,128 128.6,125.3 125.7,122.6 122.8,119.9 119.9,117.1 117,114.3 114.1,111.5 111.3,108.7 108.5,105.9 105.7,103 102.9,100.1 100.1,97.2 97.4,94.3 94.7,91.4 92,88.4 89.3,85.5 86.6,82.5 84,79.5 81.4,76.5 78.7,73.5 76.1,70.4 73.5,67.4 71,64.3 68.4,61.2 65.9,58.1 63.3,55 60.8,51.9 58.3,48.8 55.8,45.7 53.4,42.5 50.9,39.4 48.5,36.2 46,33.1 43.6,29.9 41.2,26.7 38.8,23.5 36.4,20.3 34,17.1 32.2,14.6" fill="none" stroke="#5f5a50" stroke-width="1.5"/><polygon points="92,88.5 102.1,92.7 95.4,98.9" fill="#5f5a50"/><polyline points="170.6,150.9 168.5,147.4 166.5,144 164.6,140.4 162.8,136.9 161,133.3 159.3,129.7 157.6,126.1 156,122.4 154.4,118.7 153,115 151.5,111.3 150.2,107.5 148.9,103.7 147.6,99.9 146.4,96.1 145.2,92.3 144.2,88.4 143.1,84.6 142.1,80.7 141.2,76.8 140.3,72.9 139.4,69 138.6,65.1 137.9,61.2 137.1,57.2 136.5,53.3 135.8,49.3 135.3,45.4 134.7,41.4 134.2,37.4 133.8,33.5 133.3,29.5 133,25.5 132.6,21.5 132.3,17.5 132.1,14.5" fill="none" stroke="#5f5a50" stroke-width="1.5"/><polygon points="141.8,79.7 148.9,88.2 140,90.6" fill="#5f5a50"/><polyline points="176.7,148.3 176.2,144.4 175.7,140.4 175.4,136.4 175.2,132.4 175,128.4 175,124.4 175.1,120.4 175.2,116.4 175.4,112.4 175.8,108.4 176.2,104.5 176.7,100.5 177.3,96.5 177.9,92.6 178.7,88.7 179.6,84.7 180.5,80.9 181.5,77 182.6,73.1 183.7,69.3 185,65.5 186.3,61.7 187.7,58 189.2,54.3 190.7,50.6 192.3,46.9 194,43.3 195.7,39.7 197.6,36.1 199.4,32.6 201.4,29.1 203.4,25.6 205.4,22.2 207.5,18.8 209.7,15.4 210.3,14.6" fill="none" stroke="#5f5a50" stroke-width="1.5"/><polygon points="182.5,73.1 184.5,83.9 175.5,81.7" fill="#5f5a50"/><polyline points="183.3,148.3 184.4,144.5 185.5,140.6 186.8,136.8 188.2,133.1 189.6,129.4 191.2,125.7 192.9,122.1 194.7,118.5 196.5,114.9 198.5,111.5 200.6,108 202.8,104.7 205,101.4 207.4,98.2 209.9,95 212.4,91.9 215.1,88.9 217.8,86 220.6,83.2 223.5,80.4 226.5,77.8 229.6,75.2 232.7,72.7 235.9,70.4 239.2,68.1 242.6,65.9 246,63.9 249.5,62 253.1,60.1 256.7,58.4 260.4,56.8 264.1,55.4 267.9,54 271.7,52.8 275.6,51.8 279.4,50.8 283.4,50.1 287.3,49.4 291.3,48.9 295.3,48.5 299.3,48.3 303.3,48.3 307.3,48.3 311.3,48.6 315.2,49 319.2,49.6 323.1,50.3 327,51.2 330.9,52.2 334.7,53.5 338.4,54.9 342.1,56.4 345.7,58.2 349.2,60.1 352.7,62.1 356,64.4 359.2,66.8 362.2,69.4 365.1,72.1 367.8,75.1 370.4,78.1 372.8,81.4 374.9,84.7 376.8,88.2 378.5,91.9 379.9,95.6 381,99.5 381.7,103.4 382.2,107.4 382.3,111.4 382.1,115.4 381.5,119.3 380.6,123.2 379.4,127 377.8,130.7 375.9,134.2 373.7,137.5 371.3,140.7 368.6,143.7 365.7,146.5 362.7,149.1 359.5,151.5 356.2,153.7 352.7,155.8 349.2,157.6 345.6,159.4" fill="none" stroke="#5f5a50" stroke-width="1.5"/><polygon points="239.1,68 233.9,77.6 228.4,70.3" fill="#5f5a50"/><polyline points="189.4,150.9 191.9,147.7 194.4,144.6 197,141.5 199.7,138.6 202.4,135.6 205.2,132.8 208.1,130.1 211.1,127.4 214.2,124.9 217.4,122.4 220.6,120 223.9,117.8 227.2,115.6 230.7,113.6 234.2,111.6 237.8,109.8 241.4,108.2 245.1,106.6 248.8,105.3 252.7,104 256.5,103 260.4,102 264.3,101.3 268.3,100.7 272.3,100.4 276.3,100.2 280.3,100.2 284.3,100.4 288.2,100.8 292.2,101.5 296.1,102.4 299.9,103.5 303.7,104.8 307.4,106.4 310.9,108.3 314.3,110.4 317.6,112.7 320.6,115.3 323.4,118.1 326,121.2 328.3,124.4 330.3,127.9 332,131.5 333.3,135.3 334.2,139.2 334.7,143.2 334.8,147.2 334.7,149.2" fill="none" stroke="#5f5a50" stroke-width="1.5"/><polygon points="272.2,100.1 263.1,106.2 261.7,97.1" fill="#5f5a50"/><polyline points="194.1,155.6 197.6,153.5 201,151.5 204.5,149.5 208.1,147.7 211.6,145.9 215.2,144.2 218.9,142.5 222.6,141 226.3,139.5 230.1,138.1 233.9,136.9 237.7,135.7 241.5,134.6 245.4,133.7 249.3,132.9 253.3,132.1 257.2,131.6 261.2,131.1 265.2,130.8 269.2,130.7 273.2,130.7 277.2,130.9 281.2,131.3 285.1,131.8 289.1,132.6 292.9,133.5 296.8,134.7 300.5,136.1 304.2,137.7 307.7,139.5 311.2,141.6 314.4,143.9 317.5,146.4 320.4,149.2 321.7,150.7" fill="none" stroke="#5f5a50" stroke-width="1.5"/><polygon points="263.2,130.8 253.9,136.7 252.6,127.6" fill="#5f5a50"/><polyline points="196.7,161.7 200.6,161 204.5,160.3 208.5,159.6 212.4,159 216.4,158.4 220.4,157.8 224.3,157.3 228.3,156.8 232.3,156.3 236.2,155.9 240.2,155.5 244.2,155.2 248.2,154.9 252.2,154.6 256.2,154.4 260.2,154.3 264.2,154.2 268.2,154.2 272.2,154.2 276.2,154.3 280.2,154.5 284.2,154.7 288.2,155 292.1,155.4 296.1,155.9 300.1,156.5 304,157.2 307.9,158 311.8,158.9 314.7,159.6" fill="none" stroke="#5f5a50" stroke-width="1.5"/><polygon points="261.2,154.2 251.4,159.3 251,150.1" fill="#5f5a50"/><circle cx="180" cy="165" r="17" fill="#ece3d2" stroke="#0f1620" stroke-width="1.8"/><text x="180" y="170.5" font-size="16" fill="#0f1620" text-anchor="middle">1</text><circle cx="330" cy="165" r="17" fill="#ece3d2" stroke="#0f1620" stroke-width="1.8"/><text x="330" y="170.5" font-size="16" fill="#0f1620" text-anchor="middle">2</text></svg>`,
+            choices: [
+                'Kula 1 är positiv och kulornas laddningar är lika stora.',
+                'Kula 1 är positiv och har den största laddningen.',
+                'Kula 1 är negativ och har den största laddningen.',
+                'Kula 2 är positiv och har den största laddningen.',
+            ],
+            correct: 1,
+            solution: `**Tecknen:** Fältlinjer går ut från plus och in i minus. Alla pilar pekar bort från kula 1, så den är positiv. Alla linjer vid kula 2 går in i den, så den är negativ.
+
+**Storleken:** Tätare fältlinjer betyder starkare fält. Alldeles intill kulorna, på samma avstånd från medelpunkten, är det kulans egen laddning som dominerar. Från kula 1 utgår 16 linjer men bara hälften så många går in i kula 2. Linjerna är alltså tätare kring kula 1, och fältet där är starkare. Av $\\mathbb{E} = k \\cdot \\dfrac{Q}{r^2}$ följer då att kula 1 har störst laddning.
+
+Man ser det också på att linjerna till vänster om kula 1 aldrig når kula 2: den negativa laddningen räcker inte för att ta emot alla linjer.
+
+**Svar:** Kula 1 är positiv och har den största laddningen.`,
+        },
+        {
+            level: 2,
+            question: `På månens solbelysta sida slår solljuset ut elektroner ur markytan. Ytan blir då laddad, och små dammkorn kan sväva ovanför den. Ett dammkorn med massan $4{,}0 \\cdot 10^{-15}\\ \\mathrm{kg}$ svävar stilla i ett fält som är riktat rakt uppåt och har fältstyrkan $5{,}0\\ \\mathrm{N/C}$. Tyngdfaktorn på månen är $1{,}62\\ \\mathrm{N/kg}$ och elementarladdningen är $1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$.<br>a) Är dammkornet positivt eller negativt laddat?<br>b) Hur många elektroner har dammkornet i underskott eller överskott?`,
+            answer: { value: 8100, unit: 'elektroner' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 8100, unit: 'elektroner' },
+            ],
+            solution: `**a)** Dammkornet svävar stilla, så den elektriska kraften måste vara riktad uppåt och vara lika stor som tyngdkraften. Fältet är också riktat uppåt. Kraften är alltså riktad **med** fältet, och då är laddningen positiv.
+
+**Svar:** Positivt laddat.
+
+**b)** Kraftjämvikt ger att den elektriska kraften är lika stor som tyngdkraften:
+
+$$ F = F_\\mathrm{G} $$
+
+Med $F = \\mathbb{E} \\cdot Q$ och $F_\\mathrm{G} = m \\cdot g$ fås
+
+$$ \\mathbb{E} \\cdot Q = m \\cdot g \\quad\\Leftrightarrow\\quad Q = \\frac{m \\cdot g}{\\mathbb{E}} $$
+
+$$
+\\left[ \\begin{array}{l}
+m = 4{,}0 \\cdot 10^{-15}\\ \\mathrm{kg} \\\\
+g = 1{,}62\\ \\mathrm{N/kg} \\\\
+\\mathbb{E} = 5{,}0\\ \\mathrm{N/C}
+\\end{array} \\right]
+$$
+
+$$ Q = \\frac{4{,}0 \\cdot 10^{-15} \\cdot 1{,}62}{5{,}0} = 1{,}296 \\cdot 10^{-15}\\ \\mathrm{C} $$
+
+Antalet elektroner *N* är laddningen delad med elementarladdningen:
+
+$$ N = \\frac{1{,}296 \\cdot 10^{-15}}{1{,}602 \\cdot 10^{-19}} = 8\\,089{,}8\\ldots \\approx 8\\,100 $$
+
+Eftersom dammkornet är positivt saknas elektronerna.
+
+**Svar:** Cirka $8\\,100$ elektroner i underskott.`,
+        },
+        {
+            level: 2,
+            question: `Två laddningar och punkten P ligger på en rät linje, se figuren. ($k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2}$)<br>a) Bestäm den resulterande fältstyrkans storlek och riktning i P. Ange storleken i kN/C.<br>b) En liten laddning på $-3{,}0\\ \\mathrm{nC}$ placeras i P. Bestäm storlek och riktning på den elektriska kraften på den. Ange storleken i μN.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 145" role="img" aria-label="En positiv laddning, en negativ laddning och punkten P på samma räta linje" style="max-width:529px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><circle cx="60" cy="70" r="14" fill="#c0392b"/><line x1="54" y1="70" x2="66" y2="70" stroke="#fff" stroke-width="2.4"/><line x1="60" y1="64" x2="60" y2="76" stroke="#fff" stroke-width="2.4"/><circle cx="264" cy="70" r="14" fill="#2563c9"/><line x1="258" y1="70" x2="270" y2="70" stroke="#fff" stroke-width="2.4"/><circle cx="400" cy="70" r="3.4" fill="#0f1620"/><text x="400" y="54" font-size="15" fill="#0f1620" text-anchor="middle">P</text><text x="70" y="42" font-size="15" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">Q</tspan>₁ = +12 nC</text><text x="264" y="42" font-size="15" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">Q</tspan>₂ = −5,0 nC</text><line x1="60" y1="88" x2="60" y2="116" stroke="rgba(15,22,32,0.4)" stroke-width="1.1" stroke-dasharray="3 3"/><line x1="264" y1="88" x2="264" y2="116" stroke="rgba(15,22,32,0.4)" stroke-width="1.1" stroke-dasharray="3 3"/><line x1="400" y1="78" x2="400" y2="116" stroke="rgba(15,22,32,0.4)" stroke-width="1.1" stroke-dasharray="3 3"/><line x1="68" y1="110" x2="256" y2="110" stroke="#0f1620" stroke-width="1.4"/><polygon points="60,110 69,106 69,114" fill="#0f1620"/><polygon points="264,110 255,114 255,106" fill="#0f1620"/><text x="162" y="129" font-size="15" fill="#0f1620" text-anchor="middle">6,0 cm</text><line x1="272" y1="110" x2="392" y2="110" stroke="#0f1620" stroke-width="1.4"/><polygon points="264,110 273,106 273,114" fill="#0f1620"/><polygon points="400,110 391,114 391,106" fill="#0f1620"/><text x="332" y="129" font-size="15" fill="#0f1620" text-anchor="middle">4,0 cm</text></svg>`,
+            answer: { value: 17, unit: 'kN/C', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 17, unit: 'kN/C', tol: 0.03, etikett: '$\\mathbb{E} =$' },
+                { del: 'b', value: 52, unit: 'μN', tol: 0.03, etikett: '$F =$' },
+            ],
+            solution: `**a)** Vi räknar ut de båda laddningarnas fält i P var för sig och bestämmer riktningen genom att resonera.
+
+Från $Q_1$ är avståndet till P $r_1 = 6{,}0\\ \\mathrm{cm} + 4{,}0\\ \\mathrm{cm} = 10{,}0\\ \\mathrm{cm} = 0{,}100\\ \\mathrm{m}$:
+
+$$ \\mathbb{E}_1 = k \\cdot \\frac{Q_1}{r_1^2} = 8{,}99 \\cdot 10^9 \\cdot \\frac{12 \\cdot 10^{-9}}{0{,}100^2} = 10\\,788\\ \\mathrm{N/C} $$
+
+Fältet går **ut från plus**, alltså åt höger i P.
+
+Från $Q_2$ är avståndet $r_2 = 4{,}0\\ \\mathrm{cm} = 0{,}040\\ \\mathrm{m}$:
+
+$$ \\mathbb{E}_2 = k \\cdot \\frac{Q_2}{r_2^2} = 8{,}99 \\cdot 10^9 \\cdot \\frac{5{,}0 \\cdot 10^{-9}}{0{,}040^2} = 28\\,093{,}75\\ \\mathrm{N/C} $$
+
+Fältet går **in i minus**, alltså åt vänster i P.
+
+Fälten är motriktade och $\\mathbb{E}_2$ är störst. Resultanten är därför riktad åt vänster:
+
+$$ \\mathbb{E} = \\mathbb{E}_2 - \\mathbb{E}_1 = 28\\,093{,}75 - 10\\,788 = 17\\,305{,}75\\ \\mathrm{N/C} \\approx 17\\ \\mathrm{kN/C} $$
+
+**Svar:** $17\\ \\mathrm{kN/C}$ åt vänster.
+
+**b)** Kraften på den lilla laddningen är
+
+$$ F = \\mathbb{E} \\cdot q = 17\\,305{,}75 \\cdot 3{,}0 \\cdot 10^{-9} = 5{,}191\\ldots \\cdot 10^{-5}\\ \\mathrm{N} \\approx 52\\ \\mathrm{\\mu N} $$
+
+Laddningen är negativ, så kraften är riktad mot fältet, alltså åt höger.
+
+**Svar:** $52\\ \\mathrm{\\mu N}$ åt höger.`,
+        },
+        {
+            level: 2,
+            question: `Luft blir ledande och en gnista slår när fältstyrkan når ungefär $3{,}0 \\cdot 10^6\\ \\mathrm{N/C}$. Klotet på en bandgenerator har radien $11\\ \\mathrm{cm}$. Coulombs konstant är $k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2}$.<br>a) Hur stor laddning kan klotet högst ha innan gnistor slår från dess yta? Svara i μC.<br>b) Hur stor är då fältstyrkan $88\\ \\mathrm{cm}$ från klotets yta? Svara i kN/C.`,
+            answer: { value: 4.0, unit: 'μC' },
+            delsvar: [
+                { del: 'a', value: 4.0, unit: 'μC', etikett: '$Q =$' },
+                { del: 'b', value: 37, unit: 'kN/C', etikett: '$\\mathbb{E} =$' },
+            ],
+            solution: `**a)** Fältet utanför klotet är starkast vid ytan, där avståndet till medelpunkten är lika med radien. Vi löser ut laddningen:
+
+$$ \\mathbb{E} = k \\cdot \\frac{Q}{r^2} \\quad\\Leftrightarrow\\quad Q = \\frac{\\mathbb{E} \\cdot r^2}{k} $$
+
+$$
+\\left[ \\begin{array}{l}
+\\mathbb{E} = 3{,}0 \\cdot 10^6\\ \\mathrm{N/C} \\\\
+r = 11\\ \\mathrm{cm} = 0{,}11\\ \\mathrm{m} \\\\
+k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2}
+\\end{array} \\right]
+$$
+
+$$ Q = \\frac{3{,}0 \\cdot 10^6 \\cdot 0{,}11^2}{8{,}99 \\cdot 10^9} = 4{,}037\\ldots \\cdot 10^{-6}\\ \\mathrm{C} \\approx 4{,}0\\ \\mathrm{\\mu C} $$
+
+**Svar:** Högst $4{,}0\\ \\mathrm{\\mu C}$.
+
+**b)** Avståndet till medelpunkten är $11\\ \\mathrm{cm} + 88\\ \\mathrm{cm} = 99\\ \\mathrm{cm}$, alltså $\\dfrac{99}{11} = 9$ gånger så stort som vid ytan. Fältstyrkan avtar med kvadraten på avståndet och divideras därför med $9^2 = 81$:
+
+$$ \\mathbb{E} = \\frac{3{,}0 \\cdot 10^6}{81} = 37\\,037\\ldots\\ \\mathrm{N/C} \\approx 37\\ \\mathrm{kN/C} $$
+
+Det är rimligt: fältet är långt under gränsen för gnistor, så urladdningen sker bara nära klotet.
+
+**Svar:** $37\\ \\mathrm{kN/C}$.`,
+        },
+        {
+            level: 2,
+            question: `Diagrammet visar hur fältstyrkan beror på avståndet *r* till medelpunkten för två små laddade kulor, A och B. Varje kula har undersökts för sig. ($k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2}$)<br>a) Bestäm laddningen hos kula A. Svara i nC.<br>b) Hur många gånger så stor laddning som B har A?<br>c) Ett litet laddat korn påverkas av en viss elektrisk kraft på avståndet $10\\ \\mathrm{cm}$ från B. På vilket avstånd från A blir kraften på kornet lika stor? Svara i cm.
+
+${makeDiagram({
+    xMin: 0, xMax: 30, yMin: 0, yMax: 50,
+    xTicks: [0, 5, 10, 15, 20, 25, 30],
+    yTicks: [0, 10, 20, 30, 40, 50],
+    xLabel: '<tspan font-style="italic">r</tspan> (cm)',
+    yLabel: '𝔼 (kN/C)',
+    paths: [
+        { points: Array.from({ length: 160 }, (_, i) => Math.sqrt(80) + (28 - Math.sqrt(80)) * i / 159).map(r => [r, 4000 / (r * r)]) },
+        { points: Array.from({ length: 200 }, (_, i) => Math.sqrt(20) + (28 - Math.sqrt(20)) * i / 199).map(r => [r, 1000 / (r * r)]), color: '#1c3d6b' },
+    ],
+}).replace('</svg>', '<text x="247" y="166" font-size="16" fill="#c8324a">A</text><text x="160" y="166" font-size="16" fill="#1c3d6b">B</text></svg>')}`,
+            answer: { value: 44, unit: 'nC', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 44, unit: 'nC', tol: 0.04, etikett: '$Q_\\mathrm{A} =$' },
+                { del: 'b', value: 4, unit: 'gånger', tol: 0.04 },
+                { del: 'c', value: 20, unit: 'cm', tol: 0.04 },
+            ],
+            solution: `**a)** Vi läser av en punkt som ligger på rutnätet: på avståndet $10\\ \\mathrm{cm}$ är fältstyrkan från A lika med $40\\ \\mathrm{kN/C}$. Laddningen löses ut:
+
+$$ \\mathbb{E} = k \\cdot \\frac{Q}{r^2} \\quad\\Leftrightarrow\\quad Q = \\frac{\\mathbb{E} \\cdot r^2}{k} $$
+
+$$
+\\left[ \\begin{array}{l}
+\\mathbb{E} = 40\\ \\mathrm{kN/C} = 40 \\cdot 10^3\\ \\mathrm{N/C} \\\\
+r = 10\\ \\mathrm{cm} = 0{,}10\\ \\mathrm{m} \\\\
+k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2}
+\\end{array} \\right]
+$$
+
+$$ Q_\\mathrm{A} = \\frac{40 \\cdot 10^3 \\cdot 0{,}10^2}{8{,}99 \\cdot 10^9} = 4{,}449\\ldots \\cdot 10^{-8}\\ \\mathrm{C} \\approx 44\\ \\mathrm{nC} $$
+
+**Svar:** $44\\ \\mathrm{nC}$.
+
+**b)** På samma avstånd är fältstyrkan proportionell mot laddningen. På avståndet $10\\ \\mathrm{cm}$ är fältstyrkan $40\\ \\mathrm{kN/C}$ från A och $10\\ \\mathrm{kN/C}$ från B:
+
+$$ \\frac{Q_\\mathrm{A}}{Q_\\mathrm{B}} = \\frac{40}{10} = 4 $$
+
+**Svar:** 4 gånger så stor laddning.
+
+**c)** Kraften är $F = \\mathbb{E} \\cdot Q$. Samma korn får lika stor kraft där fältstyrkan är lika stor, det vill säga $10\\ \\mathrm{kN/C}$. Kurvan för A har det värdet vid $20\\ \\mathrm{cm}$.
+
+Det är rimligt: dubbla avståndet gör att fältstyrkan divideras med $2^2 = 4$, vilket uppväger den fyra gånger större laddningen.
+
+**Svar:** $20\\ \\mathrm{cm}$.`,
+        },
+        // ── Avancerad (påfyllning) ──
+        {
+            level: 3,
+            question: `Två små kulor med laddningarna $+9Q$ och $-4Q$ sitter fast på avståndet *d* från varandra, se figuren. Utred om det finns någon punkt på den räta linjen genom kulorna (den streckade linjen, som fortsätter åt båda hållen) där den resulterande elektriska fältstyrkan är noll. Var ligger den i så fall? Ange punktens avstånd till den negativa laddningen uttryckt i *d*.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 145" role="img" aria-label="Två laddningar på avståndet d från varandra" style="max-width:506px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><line x1="20" y1="65" x2="420" y2="65" stroke="rgba(15,22,32,0.45)" stroke-width="1.2" stroke-dasharray="5 4"/><circle cx="140" cy="65" r="14" fill="#c0392b"/><line x1="134" y1="65" x2="146" y2="65" stroke="#fff" stroke-width="2.4"/><line x1="140" y1="59" x2="140" y2="71" stroke="#fff" stroke-width="2.4"/><circle cx="300" cy="65" r="14" fill="#2563c9"/><line x1="294" y1="65" x2="306" y2="65" stroke="#fff" stroke-width="2.4"/><text x="140" y="38" font-size="15" fill="#0f1620" text-anchor="middle">+9<tspan font-style="italic">Q</tspan></text><text x="300" y="38" font-size="15" fill="#0f1620" text-anchor="middle">−4<tspan font-style="italic">Q</tspan></text><line x1="140" y1="82" x2="140" y2="112" stroke="rgba(15,22,32,0.4)" stroke-width="1.1" stroke-dasharray="3 3"/><line x1="300" y1="82" x2="300" y2="112" stroke="rgba(15,22,32,0.4)" stroke-width="1.1" stroke-dasharray="3 3"/><line x1="148" y1="105" x2="292" y2="105" stroke="#0f1620" stroke-width="1.4"/><polygon points="140,105 149,101 149,109" fill="#0f1620"/><polygon points="300,105 291,109 291,101" fill="#0f1620"/><text x="220" y="124" font-size="15" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">d</tspan></text></svg>`,
+            answer: { value: 2, unit: '· d' },
+            solution: `I en punkt där resultanten är noll måste de två fälten vara **motriktade** och **lika stora**. Vi undersöker de tre delarna av linjen.
+
+**Mellan laddningarna:** Fältet från $+9Q$ går åt höger (ut från plus) och fältet från $-4Q$ går också åt höger (in i minus). Fälten samverkar och kan inte ta ut varandra.
+
+**Till vänster om $+9Q$:** Fälten är motriktade, men varje punkt ligger närmare den större laddningen. Då har $+9Q$ både större laddning och mindre avstånd, så dess fält är alltid starkast. Ingen punkt duger.
+
+**Till höger om $-4Q$:** Fälten är motriktade, och den mindre laddningen ligger närmast. Här kan fälten bli lika stora.
+
+Låt *x* vara avståndet från $-4Q$ till punkten. Avståndet till $+9Q$ är då $d + x$. Lika stora fält ger
+
+$$ k \\cdot \\frac{9Q}{(d + x)^2} = k \\cdot \\frac{4Q}{x^2} $$
+
+Vi dividerar båda led med $k \\cdot Q$:
+
+$$ \\frac{9}{(d + x)^2} = \\frac{4}{x^2} $$
+
+Vi multiplicerar båda led med $x^2$ och $(d + x)^2$:
+
+$$ 9x^2 = 4(d + x)^2 $$
+
+Båda $x$ och $d + x$ är positiva avstånd, så roten ur båda led ger
+
+$$ 3x = 2(d + x) $$
+
+$$ 3x = 2d + 2x $$
+
+$$ x = 2d $$
+
+**Kontroll:** Avståndet till $+9Q$ är $3d$. Fälten är $k \\cdot \\dfrac{9Q}{9d^2} = k \\cdot \\dfrac{Q}{d^2}$ och $k \\cdot \\dfrac{4Q}{4d^2} = k \\cdot \\dfrac{Q}{d^2}$, alltså lika stora. Den större laddningen ligger längre bort, vilket är rimligt.
+
+**Svar:** Det finns exakt en sådan punkt. Den ligger på avståndet $2d$ till höger om den negativa laddningen.`,
+        },
+        {
+            level: 3,
+            question: `Ett laddat metallklot är inbyggt så att det inte går att mäta dess radie *R*. Klotets yta går däremot att nå, och en fältmätare placeras i punkter P på olika avstånd *s* från ytan, se figuren. Resultatet visas i tabellen.
+
+| Avstånd från ytan, *s* (cm) | Fältstyrka, $\\mathbb{E}$ (kN/C) |
+| --- | --- |
+| 5,0 | 799 |
+| 15,0 | 288 |
+| 35,0 | 88,8 |
+| 55,0 | 42,6 |
+
+Bestäm klotets radie *R* (i cm) och laddning *Q* (i μC), och undersök om alla mätvärden stämmer med din modell. ($k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2}$)
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 365 230" role="img" aria-label="Ett laddat klot med radien R och en mätpunkt P på avståndet s från klotets yta" style="max-width:420px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><circle cx="95" cy="92" r="70" fill="#ece3d2" stroke="#0f1620" stroke-width="1.8"/><circle cx="95" cy="92" r="3.4" fill="#0f1620"/><line x1="95" y1="92" x2="95" y2="22" stroke="#0f1620" stroke-width="1.4"/><text x="104" y="62" font-size="15" fill="#0f1620" text-anchor="start"><tspan font-style="italic">R</tspan></text><text x="95" y="127" font-size="15" fill="#0f1620" text-anchor="middle"></text><circle cx="315" cy="92" r="3.4" fill="#0f1620"/><text x="315" y="80" font-size="15" fill="#0f1620" text-anchor="middle">P</text><line x1="165" y1="98" x2="165" y2="198" stroke="rgba(15,22,32,0.4)" stroke-width="1.1" stroke-dasharray="3 3"/><line x1="315" y1="100" x2="315" y2="198" stroke="rgba(15,22,32,0.4)" stroke-width="1.1" stroke-dasharray="3 3"/><line x1="173" y1="192" x2="307" y2="192" stroke="#0f1620" stroke-width="1.4"/><polygon points="165,192 174,188 174,196" fill="#0f1620"/><polygon points="315,192 306,196 306,188" fill="#0f1620"/><text x="240" y="211" font-size="15" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">s</tspan></text></svg>`,
+            answer: { value: 10, unit: 'cm', tol: 0.04 },
+            delsvar: [
+                { value: 10, unit: 'cm', tol: 0.04, etikett: '$R =$' },
+                { value: 2.0, unit: 'μC', tol: 0.04, etikett: '$Q =$' },
+            ],
+            solution: `Fältstyrkan beror på avståndet till klotets **medelpunkt**, som är $r = R + s$. Modellen är alltså
+
+$$ \\mathbb{E} = k \\cdot \\frac{Q}{(R + s)^2} $$
+
+med två obekanta, *R* och *Q*. Två mätningar räcker för att bestämma dem. Vi dividerar den första mätningen med den tredje, så att *k* och *Q* försvinner:
+
+$$ \\frac{\\mathbb{E}_1}{\\mathbb{E}_3} = \\frac{(R + s_3)^2}{(R + s_1)^2} $$
+
+Alla avstånd är positiva, så roten ur båda led ger
+
+$$ \\frac{R + s_3}{R + s_1} = \\sqrt{\\frac{\\mathbb{E}_1}{\\mathbb{E}_3}} = \\sqrt{\\frac{799}{88{,}8}} = 2{,}9996\\ldots $$
+
+Kvoten är 3 så noga som mätvärdena medger. Med avstånden i centimeter blir ekvationen
+
+$$ \\frac{R + 35{,}0}{R + 5{,}0} = 3 $$
+
+$$ R + 35{,}0 = 3R + 15{,}0 $$
+
+$$ 20{,}0 = 2R $$
+
+$$ R = 10{,}0\\ \\mathrm{cm} $$
+
+Laddningen löses ut ur modellen med den första mätningen, där $r = 10{,}0\\ \\mathrm{cm} + 5{,}0\\ \\mathrm{cm} = 0{,}150\\ \\mathrm{m}$:
+
+$$ Q = \\frac{\\mathbb{E}_1 \\cdot r^2}{k} = \\frac{799 \\cdot 10^3 \\cdot 0{,}150^2}{8{,}99 \\cdot 10^9} = 1{,}9997\\ldots \\cdot 10^{-6}\\ \\mathrm{C} \\approx 2{,}0\\ \\mathrm{\\mu C} $$
+
+**Undersökning av modellen:** Produkten $\\mathbb{E} \\cdot r^2 = k \\cdot Q$ ska vara konstant om modellen gäller.
+
+| *s* (cm) | *r* (m) | $\\mathbb{E}$ (N/C) | $\\mathbb{E} \\cdot r^2$ (N·m²/C) |
+| --- | --- | --- | --- |
+| 5,0 | 0,150 | $799 \\cdot 10^3$ | $1{,}80 \\cdot 10^4$ |
+| 15,0 | 0,250 | $288 \\cdot 10^3$ | $1{,}80 \\cdot 10^4$ |
+| 35,0 | 0,450 | $88{,}8 \\cdot 10^3$ | $1{,}80 \\cdot 10^4$ |
+| 55,0 | 0,650 | $42{,}6 \\cdot 10^3$ | $1{,}80 \\cdot 10^4$ |
+
+Produkten är densamma i alla fyra mätningarna, även i de två som inte användes för att bestämma radien. Modellen stämmer.
+
+**Svar:** Radien är $R = 10\\ \\mathrm{cm}$ och laddningen är $Q = 2{,}0\\ \\mathrm{\\mu C}$. Alla mätvärden stämmer med modellen.`,
+        },
+        {
+            level: 3,
+            question: `Två små kulor med samma positiva laddning *Q* sitter på avståndet $2a$ från varandra. Punkten P ligger på avståndet *y* rakt ovanför mittpunkten mellan kulorna, se figuren.<br>a) Ta fram ett uttryck för den resulterande fältstyrkan i P, uttryckt i *k*, *Q*, *a* och *y*.<br>b) Undersök vad uttrycket ger när $y = 0$ och när *y* är mycket större än *a*. Förklara båda resultaten med fysikaliska resonemang.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 275" role="img" aria-label="Två lika laddningar på avståndet 2a och en punkt P rakt ovanför mittpunkten" style="max-width:484px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><g transform="translate(0 -60)"><line x1="110" y1="260" x2="330" y2="260" stroke="rgba(15,22,32,0.45)" stroke-width="1.3"/><line x1="220" y1="260" x2="220" y2="120" stroke="rgba(15,22,32,0.45)" stroke-width="1.3" stroke-dasharray="5 4"/><circle cx="110" cy="260" r="14" fill="#c0392b"/><line x1="104" y1="260" x2="116" y2="260" stroke="#fff" stroke-width="2.4"/><line x1="110" y1="254" x2="110" y2="266" stroke="#fff" stroke-width="2.4"/><circle cx="330" cy="260" r="14" fill="#c0392b"/><line x1="324" y1="260" x2="336" y2="260" stroke="#fff" stroke-width="2.4"/><line x1="330" y1="254" x2="330" y2="266" stroke="#fff" stroke-width="2.4"/><text x="88" y="265" font-size="15" fill="#0f1620" text-anchor="end">+<tspan font-style="italic">Q</tspan></text><text x="352" y="265" font-size="15" fill="#0f1620" text-anchor="start">+<tspan font-style="italic">Q</tspan></text><circle cx="220" cy="120" r="3.4" fill="#0f1620"/><text x="220" y="108" font-size="15" fill="#0f1620" text-anchor="middle">P</text><text x="232" y="195" font-size="15" fill="#0f1620" text-anchor="start"><tspan font-style="italic">y</tspan></text><line x1="110" y1="278" x2="110" y2="306" stroke="rgba(15,22,32,0.4)" stroke-width="1.1" stroke-dasharray="3 3"/><line x1="220" y1="264" x2="220" y2="306" stroke="rgba(15,22,32,0.4)" stroke-width="1.1" stroke-dasharray="3 3"/><line x1="330" y1="278" x2="330" y2="306" stroke="rgba(15,22,32,0.4)" stroke-width="1.1" stroke-dasharray="3 3"/><line x1="118" y1="300" x2="212" y2="300" stroke="#0f1620" stroke-width="1.4"/><polygon points="110,300 119,296 119,304" fill="#0f1620"/><polygon points="220,300 211,304 211,296" fill="#0f1620"/><text x="165" y="319" font-size="15" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">a</tspan></text><line x1="228" y1="300" x2="322" y2="300" stroke="#0f1620" stroke-width="1.4"/><polygon points="220,300 229,296 229,304" fill="#0f1620"/><polygon points="330,300 321,304 321,296" fill="#0f1620"/><text x="275" y="319" font-size="15" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">a</tspan></text></g></svg>`,
+            solution: `**a)** Laddningarna är lika stora och ligger lika långt från P, så de ger lika stora fält. Fälten pekar ut från kulorna. Av symmetriskäl är de vågräta komposanterna lika stora och motriktade, så de tar ut varandra. Kvar blir de lodräta komposanterna, som båda pekar uppåt.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 395" role="img" aria-label="De två fälten i P och deras resultant rakt uppåt" style="max-width:462px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><g transform="translate(0 95)"><line x1="110" y1="260" x2="220" y2="120" stroke="rgba(15,22,32,0.45)" stroke-width="1.2"/><line x1="330" y1="260" x2="220" y2="120" stroke="rgba(15,22,32,0.45)" stroke-width="1.2"/><line x1="110" y1="260" x2="330" y2="260" stroke="rgba(15,22,32,0.45)" stroke-width="1.3"/><line x1="220" y1="260" x2="220" y2="120" stroke="rgba(15,22,32,0.45)" stroke-width="1.3" stroke-dasharray="5 4"/><circle cx="110" cy="260" r="14" fill="#c0392b"/><line x1="104" y1="260" x2="116" y2="260" stroke="#fff" stroke-width="2.4"/><line x1="110" y1="254" x2="110" y2="266" stroke="#fff" stroke-width="2.4"/><circle cx="330" cy="260" r="14" fill="#c0392b"/><line x1="324" y1="260" x2="336" y2="260" stroke="#fff" stroke-width="2.4"/><line x1="330" y1="254" x2="330" y2="266" stroke="#fff" stroke-width="2.4"/><text x="88" y="265" font-size="15" fill="#0f1620" text-anchor="end">+<tspan font-style="italic">Q</tspan></text><text x="352" y="265" font-size="15" fill="#0f1620" text-anchor="start">+<tspan font-style="italic">Q</tspan></text><line x1="220" y1="120" x2="271.3" y2="54.7" stroke="#2563c9" stroke-width="2.8"/><polygon points="276.8,47.7 274.1,59.5 266,53.1" fill="#2563c9"/><line x1="220" y1="120" x2="168.7" y2="54.7" stroke="#2563c9" stroke-width="2.8"/><polygon points="163.2,47.7 174,53.1 165.9,59.5" fill="#2563c9"/><line x1="276.8" y1="47.7" x2="220" y2="-24.7" stroke="#2563c9" stroke-width="1.2" stroke-dasharray="3 3"/><line x1="163.2" y1="47.7" x2="220" y2="-24.7" stroke="#2563c9" stroke-width="1.2" stroke-dasharray="3 3"/><line x1="220" y1="120" x2="220" y2="-15.7" stroke="#1f7a5c" stroke-width="2.8" stroke-dasharray="6 4"/><polygon points="220,-24.7 225.2,-13.7 214.8,-13.7" fill="#1f7a5c"/><circle cx="220" cy="120" r="3.4" fill="#0f1620"/><text x="236" y="129" font-size="15" fill="#0f1620" text-anchor="start">P</text><text x="285.8" y="52.7" font-size="15" fill="#2563c9" text-anchor="start"><tspan font-size="20">𝔼</tspan><tspan baseline-shift="sub" font-size="0.72em">1</tspan></text><text x="154.2" y="52.7" font-size="15" fill="#2563c9" text-anchor="end"><tspan font-size="20">𝔼</tspan><tspan baseline-shift="sub" font-size="0.72em">2</tspan></text><text x="234" y="-24.7" font-size="15" fill="#1f7a5c" text-anchor="start"><tspan font-size="20">𝔼</tspan></text><text x="149" y="188" font-size="15" fill="#0f1620" text-anchor="end"><tspan font-style="italic">r</tspan></text><text x="208" y="210" font-size="15" fill="#0f1620" text-anchor="end"><tspan font-style="italic">y</tspan></text><text x="179" y="280" font-size="15" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">a</tspan></text><text x="261" y="280" font-size="15" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">a</tspan></text><path d="M 152 260 A 42 42 0 0 0 135.9 227" fill="none" stroke="#0f1620" stroke-width="1.3"/><text x="160.4" y="240.5" font-size="15" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">α</tspan></text></g></svg>
+
+Avståndet från en kula till P är *r*. Pythagoras sats ger
+
+$$ r^2 = a^2 + y^2 \\qquad (1) $$
+
+Varje kula ger fältstyrkan
+
+$$ \\mathbb{E}_1 = \\mathbb{E}_2 = k \\cdot \\frac{Q}{r^2} $$
+
+I den rätvinkliga triangeln är *y* motstående katet till *α* och *r* är hypotenusan:
+
+$$ \\sin \\alpha = \\frac{y}{r} $$
+
+Den lodräta komposanten av varje fält är $\\mathbb{E}_1 \\cdot \\sin \\alpha$. Resultanten blir
+
+$$ \\mathbb{E} = 2 \\cdot \\mathbb{E}_1 \\cdot \\sin \\alpha = 2 \\cdot k \\cdot \\frac{Q}{r^2} \\cdot \\frac{y}{r} = \\frac{2kQy}{r^3} $$
+
+Ur (1), $r^2 = a^2 + y^2$, fås $r = \\sqrt{a^2 + y^2}$. Insättning av detta ger
+
+$$ \\mathbb{E} = \\frac{2kQy}{\\left(\\sqrt{a^2 + y^2}\\right)^3} $$
+
+**Svar:** $\\mathbb{E} = \\dfrac{2kQy}{\\left(\\sqrt{a^2 + y^2}\\right)^3}$, riktad rakt bort från mittpunkten.
+
+**b)** När $y = 0$ blir täljaren noll, så $\\mathbb{E} = 0$. Punkten ligger då mitt emellan kulorna, där de två fälten är lika stora och helt motriktade. De tar ut varandra.
+
+När *y* är mycket större än *a* kan $a^2$ försummas jämfört med $y^2$, så $\\sqrt{a^2 + y^2} \\approx y$:
+
+$$ \\mathbb{E} \\approx \\frac{2kQy}{y^3} = k \\cdot \\frac{2Q}{y^2} $$
+
+Det är fältet från en enda laddning $2Q$. På stort avstånd ligger kulorna så nära varandra, sett från P, att de verkar som en enda kula med den sammanlagda laddningen, och båda fälten pekar nästan rakt uppåt.
+
+**Svar:** När $y = 0$ är fältstyrkan noll, och när *y* är mycket större än *a* är den ungefär $k \\cdot \\dfrac{2Q}{y^2}$.`,
+        },
+        {
+            level: 3,
+            question: `En liten laddad kula hänger i en tunn tråd i ett vågrätt elektriskt fält, se figuren. Kulan hänger stilla och vinkeln *α* mellan tråden och lodlinjen är $30^\\circ$. Därefter ökas fältstyrkan till tre gånger sitt ursprungliga värde, och kulan ställer in sig i ett nytt jämviktsläge.<br>a) Bestäm den nya vinkeln. Svara i grader.<br>b) Hur många gånger så stor blir spännkraften i tråden?
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 305" role="img" aria-label="En positivt laddad kula i en tråd hänger snett i ett vågrätt fält åt höger" style="max-width:484px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><line x1="30" y1="79" x2="410" y2="79" stroke="#b5ad9c" stroke-width="1.5"/><polygon points="372,79 360,84.5 360,73.5" fill="#8a8579"/><line x1="30" y1="129" x2="410" y2="129" stroke="#b5ad9c" stroke-width="1.5"/><polygon points="372,129 360,134.5 360,123.5" fill="#8a8579"/><line x1="30" y1="179" x2="410" y2="179" stroke="#b5ad9c" stroke-width="1.5"/><polygon points="372,179 360,184.5 360,173.5" fill="#8a8579"/><line x1="30" y1="229" x2="410" y2="229" stroke="#b5ad9c" stroke-width="1.5"/><polygon points="372,229 360,234.5 360,223.5" fill="#8a8579"/><line x1="30" y1="279" x2="410" y2="279" stroke="#b5ad9c" stroke-width="1.5"/><polygon points="372,279 360,284.5 360,273.5" fill="#8a8579"/><text x="340" y="109" font-size="15" fill="#0f1620" text-anchor="middle"><tspan font-size="20">𝔼</tspan></text><rect x="110" y="26" width="140" height="16" fill="#d8cbb0" stroke="#0f1620" stroke-width="1.4"/><line x1="180" y1="42" x2="180" y2="231.5" stroke="#0f1620" stroke-width="1.2" stroke-dasharray="5 4"/><line x1="180" y1="42" x2="275" y2="206.5" stroke="#0f1620" stroke-width="1.8"/><circle cx="275" cy="206.5" r="15" fill="#c0392b"/><line x1="269" y1="206.5" x2="281" y2="206.5" stroke="#fff" stroke-width="2.4"/><line x1="275" y1="200.5" x2="275" y2="212.5" stroke="#fff" stroke-width="2.4"/><path d="M 180 104 A 62 62 0 0 0 211 95.7" fill="none" stroke="#0f1620" stroke-width="1.4"/><text x="199.7" y="119.4" font-size="15" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">α</tspan></text></svg>`,
+            answer: { value: 60, unit: '°' },
+            delsvar: [
+                { del: 'a', value: 60, unit: '°' },
+                { del: 'b', value: 1.7, unit: 'gånger', tol: 0.03 },
+            ],
+            solution: `**a)** På kulan verkar tyngdkraften $F_\\mathrm{G}$ nedåt, den elektriska kraften *F* åt höger och spännkraften $F_\\mathrm{S}$ längs tråden. Varken massan eller laddningen är känd, så vi räknar generellt.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 280" role="img" aria-label="Kulans krafter: spännkraft längs tråden, tyngdkraft nedåt och elektrisk kraft åt höger" style="max-width:396px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><line x1="180" y1="150" x2="180" y2="20" stroke="rgba(15,22,32,0.45)" stroke-width="1.2" stroke-dasharray="5 4"/><circle cx="180" cy="150" r="15" fill="#ece3d2" stroke="#0f1620" stroke-width="1.6"/><line x1="180" y1="150" x2="123.9" y2="52.8" stroke="#1f7a5c" stroke-width="2.8"/><polygon points="119.4,45 129.4,51.9 120.4,57.1" fill="#1f7a5c"/><line x1="180" y1="150" x2="180" y2="246" stroke="#c0392b" stroke-width="2.8"/><polygon points="180,255 174.8,244 185.2,244" fill="#c0392b"/><line x1="180" y1="150" x2="231.6" y2="150" stroke="#2563c9" stroke-width="2.8"/><polygon points="240.6,150 229.6,155.2 229.6,144.8" fill="#2563c9"/><circle cx="180" cy="150" r="3.4" fill="#0f1620"/><text x="111.4" y="47" font-size="15" fill="#1f7a5c" text-anchor="end"><tspan font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="0.72em">S</tspan></text><text x="194" y="257" font-size="15" fill="#c0392b" text-anchor="start"><tspan font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="0.72em">G</tspan></text><text x="249.6" y="155" font-size="15" fill="#2563c9" text-anchor="start"><tspan font-style="italic">F</tspan></text><path d="M 180 90 A 60 60 0 0 0 150 98" fill="none" stroke="#0f1620" stroke-width="1.3"/><text x="160.1" y="80.6" font-size="15" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">α</tspan></text></svg>
+
+Spännkraften delas upp. Den lodräta komposanten är närliggande katet till *α* och den vågräta är motstående katet. Jämvikt i båda leden ger
+
+$$ F_\\mathrm{S} \\cdot \\cos \\alpha = F_\\mathrm{G} \\qquad (1) $$
+
+$$ F_\\mathrm{S} \\cdot \\sin \\alpha = F = \\mathbb{E} \\cdot Q \\qquad (2) $$
+
+Vi dividerar ekvation (2) med ekvation (1), så att spännkraften försvinner:
+
+$$ \\frac{\\sin \\alpha}{\\cos \\alpha} = \\tan \\alpha = \\frac{\\mathbb{E} \\cdot Q}{F_\\mathrm{G}} \\qquad (3) $$
+
+Laddningen och tyngdkraften ändras inte. Då är det $\\tan \\alpha$ som är proportionell mot fältstyrkan, inte vinkeln själv. Kalla den nya vinkeln *β*. Tre gånger så stor fältstyrka i (3), $\\tan \\alpha = \\dfrac{\\mathbb{E} \\cdot Q}{F_\\mathrm{G}}$, ger
+
+$$ \\tan \\beta = \\frac{3 \\cdot \\mathbb{E} \\cdot Q}{F_\\mathrm{G}} = 3 \\cdot \\tan \\alpha = 3 \\cdot \\tan 30^\\circ = 1{,}7320\\ldots $$
+
+$$ \\beta = 60^\\circ $$
+
+Det är rimligt: vinkeln ökar, men den kan aldrig nå $90^\\circ$, eftersom tråden måste dra uppåt för att bära upp tyngdkraften. En direkt proportionalitet skulle ge det orimliga värdet $3 \\cdot 30^\\circ = 90^\\circ$.
+
+**Svar:** Den nya vinkeln är $60^\\circ$.
+
+**b)** Ur ekvation (1), $F_\\mathrm{S} \\cdot \\cos \\alpha = F_\\mathrm{G}$, fås
+
+$$ F_\\mathrm{S} = \\frac{F_\\mathrm{G}}{\\cos \\alpha} $$
+
+Tyngdkraften är densamma i båda lägena och förkortas bort i kvoten mellan den nya och den ursprungliga spännkraften:
+
+$$ \\frac{F_\\mathrm{S,ny}}{F_\\mathrm{S}} = \\frac{\\cos 30^\\circ}{\\cos 60^\\circ} = 1{,}7320\\ldots \\approx 1{,}7 $$
+
+**Svar:** Spännkraften blir $1{,}7$ gånger så stor.`,
+        },
+        {
+            level: 3,
+            question: `I tre av hörnen i rektangeln ABCD sitter små laddade kulor, se figuren. Kulan i D har laddningen $-12{,}5\\ \\mathrm{nC}$. Kulorna i A och C är positivt laddade, men deras laddningar är okända. I hörnet B är den resulterande elektriska fältstyrkan noll. Bestäm laddningarna i A och C. Svara i nC.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 470 310" role="img" aria-label="Rektangeln ABCD med laddningar i hörnen A, C och D" style="max-width:517px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><rect x="110" y="70" width="240" height="180" fill="none" stroke="rgba(15,22,32,0.45)" stroke-width="1.4"/><circle cx="110" cy="70" r="14" fill="#c0392b"/><line x1="104" y1="70" x2="116" y2="70" stroke="#fff" stroke-width="2.4"/><line x1="110" y1="64" x2="110" y2="76" stroke="#fff" stroke-width="2.4"/><circle cx="350" cy="250" r="14" fill="#c0392b"/><line x1="344" y1="250" x2="356" y2="250" stroke="#fff" stroke-width="2.4"/><line x1="350" y1="244" x2="350" y2="256" stroke="#fff" stroke-width="2.4"/><circle cx="110" cy="250" r="14" fill="#2563c9"/><line x1="104" y1="250" x2="116" y2="250" stroke="#fff" stroke-width="2.4"/><circle cx="350" cy="70" r="3.4" fill="#0f1620"/><text x="88" y="64" font-size="15" fill="#0f1620" text-anchor="end">A</text><text x="364" y="62" font-size="15" fill="#0f1620" text-anchor="start">B</text><text x="372" y="268" font-size="15" fill="#0f1620" text-anchor="start">C</text><text x="88" y="268" font-size="15" fill="#0f1620" text-anchor="end">D</text><text x="230" y="58" font-size="15" fill="#0f1620" text-anchor="middle">4,00 cm</text><text x="362" y="165" font-size="15" fill="#0f1620" text-anchor="start">3,00 cm</text></svg>`,
+            answer: { value: 6.40, unit: 'nC' },
+            delsvar: [
+                { value: 6.40, unit: 'nC', etikett: '$Q_\\mathrm{A} =$' },
+                { value: 2.70, unit: 'nC', etikett: '$Q_\\mathrm{C} =$' },
+            ],
+            solution: `Fältet i B är summan av tre fält. Fälten från A och C pekar ut från de positiva laddningarna, alltså åt höger respektive uppåt. Fältet från D pekar in mot den negativa laddningen, snett ned åt vänster längs diagonalen.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 370" role="img" aria-label="De tre fälten i hörnet B" style="max-width:525px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><g transform="translate(0 50)"><line x1="110" y1="250" x2="350" y2="70" stroke="rgba(15,22,32,0.45)" stroke-width="1.2" stroke-dasharray="5 4"/><rect x="110" y="70" width="240" height="180" fill="none" stroke="rgba(15,22,32,0.45)" stroke-width="1.4"/><circle cx="110" cy="70" r="14" fill="#c0392b"/><line x1="104" y1="70" x2="116" y2="70" stroke="#fff" stroke-width="2.4"/><line x1="110" y1="64" x2="110" y2="76" stroke="#fff" stroke-width="2.4"/><circle cx="350" cy="250" r="14" fill="#c0392b"/><line x1="344" y1="250" x2="356" y2="250" stroke="#fff" stroke-width="2.4"/><line x1="350" y1="244" x2="350" y2="256" stroke="#fff" stroke-width="2.4"/><circle cx="110" cy="250" r="14" fill="#2563c9"/><line x1="104" y1="250" x2="116" y2="250" stroke="#fff" stroke-width="2.4"/><line x1="350" y1="70" x2="429" y2="70" stroke="#c0392b" stroke-width="2.8"/><polygon points="438,70 427,75.2 427,64.8" fill="#c0392b"/><line x1="350" y1="70" x2="350" y2="13" stroke="#c0392b" stroke-width="2.8"/><polygon points="350,4 355.2,15 344.8,15" fill="#c0392b"/><line x1="350" y1="70" x2="269.2" y2="130.6" stroke="#2563c9" stroke-width="2.8"/><polygon points="262,136 267.7,125.2 273.9,133.6" fill="#2563c9"/><circle cx="350" cy="70" r="3.4" fill="#0f1620"/><path d="M 290 70 A 60 60 0 0 0 302 106" fill="none" stroke="#0f1620" stroke-width="1.3"/><text x="276" y="98.7" font-size="15" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">α</tspan></text><text x="446" y="75" font-size="15" fill="#c0392b" text-anchor="start"><tspan font-size="20">𝔼</tspan><tspan baseline-shift="sub" font-size="0.72em">A</tspan></text><text x="350" y="-5" font-size="15" fill="#c0392b" text-anchor="middle"><tspan font-size="20">𝔼</tspan><tspan baseline-shift="sub" font-size="0.72em">C</tspan></text><text x="278" y="152" font-size="15" fill="#2563c9" text-anchor="start"><tspan font-size="20">𝔼</tspan><tspan baseline-shift="sub" font-size="0.72em">D</tspan></text><text x="88" y="64" font-size="15" fill="#0f1620" text-anchor="end">A</text><text x="364" y="94" font-size="15" fill="#0f1620" text-anchor="start">B</text><text x="372" y="268" font-size="15" fill="#0f1620" text-anchor="start">C</text><text x="88" y="268" font-size="15" fill="#0f1620" text-anchor="end">D</text><text x="205" y="200" font-size="15" fill="#0f1620" text-anchor="start">5,00 cm</text><text x="230" y="274" font-size="15" fill="#0f1620" text-anchor="middle">4,00 cm</text><text x="362" y="180" font-size="15" fill="#0f1620" text-anchor="start">3,00 cm</text></g></svg>
+
+Figuren visar att fältet från D kan delas upp i en vågrät komposant som ska ta ut $\\mathbb{E}_\\mathrm{A}$ och en lodrät komposant som ska ta ut $\\mathbb{E}_\\mathrm{C}$.
+
+Diagonalen fås med Pythagoras sats:
+
+$$ \\sqrt{4{,}00^2 + 3{,}00^2} = 5{,}00\\ \\mathrm{cm} $$
+
+Vinkeln *α* mellan sidan AB och diagonalen har närliggande katet $4{,}00\\ \\mathrm{cm}$, motstående katet $3{,}00\\ \\mathrm{cm}$ och hypotenusa $5{,}00\\ \\mathrm{cm}$:
+
+$$ \\cos \\alpha = \\frac{4{,}00}{5{,}00} = 0{,}800 $$
+
+$$ \\sin \\alpha = \\frac{3{,}00}{5{,}00} = 0{,}600 $$
+
+**Vågrätt** ska $\\mathbb{E}_\\mathrm{A}$ vara lika stor som den vågräta komposanten av $\\mathbb{E}_\\mathrm{D}$:
+
+$$ k \\cdot \\frac{Q_\\mathrm{A}}{4{,}00^2} = k \\cdot \\frac{Q_\\mathrm{D}}{5{,}00^2} \\cdot \\cos \\alpha $$
+
+Coulombs konstant förkortas bort. Alla avstånd står i centimeter, och eftersom enheten är densamma i båda led påverkar det inte resultatet. Vi multiplicerar båda led med $4{,}00^2$:
+
+$$ Q_\\mathrm{A} = Q_\\mathrm{D} \\cdot \\frac{4{,}00^2}{5{,}00^2} \\cdot \\cos \\alpha $$
+
+$$ Q_\\mathrm{A} = 12{,}5 \\cdot \\frac{4{,}00^2}{5{,}00^2} \\cdot 0{,}800 = 6{,}40\\ \\mathrm{nC} $$
+
+**Lodrätt** ska $\\mathbb{E}_\\mathrm{C}$ vara lika stor som den lodräta komposanten av $\\mathbb{E}_\\mathrm{D}$:
+
+$$ k \\cdot \\frac{Q_\\mathrm{C}}{3{,}00^2} = k \\cdot \\frac{Q_\\mathrm{D}}{5{,}00^2} \\cdot \\sin \\alpha $$
+
+$$ Q_\\mathrm{C} = Q_\\mathrm{D} \\cdot \\frac{3{,}00^2}{5{,}00^2} \\cdot \\sin \\alpha $$
+
+$$ Q_\\mathrm{C} = 12{,}5 \\cdot \\frac{3{,}00^2}{5{,}00^2} \\cdot 0{,}600 = 2{,}70\\ \\mathrm{nC} $$
+
+Det är rimligt att båda laddningarna är mindre än den i D, eftersom D ligger längst från B. Kulan i C ligger närmast och behöver därför minst laddning.
+
+**Svar:** $Q_\\mathrm{A} = 6{,}40\\ \\mathrm{nC}$ och $Q_\\mathrm{C} = 2{,}70\\ \\mathrm{nC}$.`,
+        },
+        {
+            level: 3,
+            question: `En proton släpps från vila på avståndet $5{,}00\\ \\mathrm{cm}$ från medelpunkten av en liten fast kula med laddningen $+5{,}00\\ \\mathrm{nC}$. Försöket görs i vakuum. För att bestämma protonens fart på avståndet $10{,}0\\ \\mathrm{cm}$ beräknar en elev accelerationen i startögonblicket och använder sedan sambandet $v = \\sqrt{2as}$.<br>a) Blir elevens värde för stort, för litet eller rätt? Motivera.<br>b) Bestäm, med stöd av samma samband, ett intervall som den verkliga farten säkert ligger i. Ange gränserna i km/s med tre värdesiffror.
+
+Coulombs konstant är $k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2}$, protonens laddning är $1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$ och protonens massa är $1{,}673 \\cdot 10^{-27}\\ \\mathrm{kg}$.`,
+            answer: { value: 415, unit: 'km/s', tol: 0.02 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 207, unit: 'km/s', tol: 0.02, etikett: 'undre gräns' },
+                { del: 'b', value: 415, unit: 'km/s', tol: 0.02, etikett: 'övre gräns' },
+            ],
+            solution: `**a)** Sambandet $v = \\sqrt{2as}$ gäller bara när accelerationen är konstant. Newtons andra lag och definitionen av fältstyrka ger protonens acceleration:
+
+$$ a = \\frac{F}{m} = \\frac{\\mathbb{E} \\cdot Q_\\mathrm{p}}{m} $$
+
+Protonen stöts bort från kulan, så avståndet *r* växer. Fältstyrkan $\\mathbb{E} = k \\cdot \\dfrac{Q}{r^2}$ avtar då, och accelerationen avtar på samma sätt. Elevens acceleration är alltså den **största** under hela rörelsen. Räknar man som om den gällde hela vägen blir farten för stor.
+
+**Svar:** Elevens värde blir för stort, eftersom accelerationen minskar när protonen rör sig bort från kulan.
+
+**b)** Under hela sträckan ligger accelerationen mellan sitt värde vid $10{,}0\\ \\mathrm{cm}$ (minst) och sitt värde vid $5{,}00\\ \\mathrm{cm}$ (störst). Med den största accelerationen fås en övre gräns för farten och med den minsta en undre gräns.
+
+Fältstyrkan i startpunkten är
+
+$$ \\mathbb{E}_1 = k \\cdot \\frac{Q}{r_1^2} = 8{,}99 \\cdot 10^9 \\cdot \\frac{5{,}00 \\cdot 10^{-9}}{0{,}0500^2} = 17\\,980\\ \\mathrm{N/C} $$
+
+Den största accelerationen är
+
+$$ a_1 = \\frac{17\\,980 \\cdot 1{,}602 \\cdot 10^{-19}}{1{,}673 \\cdot 10^{-27}} = 1{,}7216\\ldots \\cdot 10^{12}\\ \\mathrm{m/s^2} $$
+
+Sträckan är $s = 10{,}0\\ \\mathrm{cm} - 5{,}00\\ \\mathrm{cm} = 5{,}0\\ \\mathrm{cm} = 0{,}050\\ \\mathrm{m}$. Den övre gränsen blir
+
+$$ v_1 = \\sqrt{2 a_1 s} = \\sqrt{2 \\cdot 1{,}7216\\ldots \\cdot 10^{12} \\cdot 0{,}050} = 4{,}149\\ldots \\cdot 10^5\\ \\mathrm{m/s} \\approx 415\\ \\mathrm{km/s} $$
+
+Vid $10{,}0\\ \\mathrm{cm}$ är avståndet dubbelt så stort. Fältstyrkan, och därmed accelerationen, är då en fjärdedel av den första. Farten är proportionell mot roten ur accelerationen, så den undre gränsen är hälften av den övre:
+
+$$ v_2 = \\sqrt{\\frac{1}{4}} \\cdot v_1 = \\frac{1}{2} \\cdot 4{,}149\\ldots \\cdot 10^5 = 2{,}074\\ldots \\cdot 10^5\\ \\mathrm{m/s} \\approx 207\\ \\mathrm{km/s} $$
+
+Båda gränserna är små jämfört med ljusets fart, $3{,}0 \\cdot 10^5\\ \\mathrm{km/s}$, så det är rimligt att räkna klassiskt.
+
+**Svar:** Farten ligger mellan $207\\ \\mathrm{km/s}$ och $415\\ \\mathrm{km/s}$.`,
+        },
+        {
+            level: 3,
+            question: `En liten positivt laddad kula A släpps från vila i ett vågrätt elektriskt fält som är lika starkt överallt. Den landar på golvet $12\\ \\mathrm{cm}$ från punkten rakt under utgångsläget, se figuren. Därefter släpps en kula B från samma ställe. Den är gjord av samma material men har dubbelt så stor diameter och fyra gånger så stor laddning. Luftmotståndet kan försummas. Svaren ska motiveras.<br>a) Hur långt från punkten rakt under utgångsläget landar B? Svara i cm.<br>b) Vilken av kulorna når golvet på kortast tid?
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="En positivt laddad kula ovanför ett golv i ett vågrätt fält åt höger, med landningspunkten 12 cm åt sidan" style="max-width:440px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><line x1="30" y1="62" x2="370" y2="62" stroke="#b5ad9c" stroke-width="1.5"/><polygon points="332,62 320,67.5 320,56.5" fill="#8a8579"/><line x1="30" y1="112" x2="370" y2="112" stroke="#b5ad9c" stroke-width="1.5"/><polygon points="332,112 320,117.5 320,106.5" fill="#8a8579"/><line x1="30" y1="162" x2="370" y2="162" stroke="#b5ad9c" stroke-width="1.5"/><polygon points="332,162 320,167.5 320,156.5" fill="#8a8579"/><line x1="30" y1="212" x2="370" y2="212" stroke="#b5ad9c" stroke-width="1.5"/><polygon points="332,212 320,217.5 320,206.5" fill="#8a8579"/><text x="345" y="94" font-size="20" fill="#0f1620" text-anchor="middle">𝔼</text><rect x="30" y="236" width="340" height="10" fill="#d8cbb0"/><line x1="30" y1="236" x2="370" y2="236" stroke="#0f1620" stroke-width="1.6"/><line x1="130" y1="36" x2="130" y2="236" stroke="#0f1620" stroke-width="1.2" stroke-dasharray="5 4"/><circle cx="130" cy="36" r="10" fill="#c0392b"/><line x1="125" y1="36" x2="135" y2="36" stroke="#fff" stroke-width="2"/><line x1="130" y1="31" x2="130" y2="41" stroke="#fff" stroke-width="2"/><text x="110" y="41" font-size="15" fill="#0f1620" text-anchor="end">A</text><circle cx="210" cy="236" r="4" fill="#c0392b"/><text x="222" y="230" font-size="14" fill="#0f1620">A landar här</text><line x1="130" y1="250" x2="130" y2="274" stroke="rgba(15,22,32,0.45)" stroke-width="1.2" stroke-dasharray="4 3"/><line x1="210" y1="250" x2="210" y2="274" stroke="rgba(15,22,32,0.45)" stroke-width="1.2" stroke-dasharray="4 3"/><line x1="138" y1="268" x2="202" y2="268" stroke="#0f1620" stroke-width="1.4"/><polygon points="131,268 141,264 141,272" fill="#0f1620"/><polygon points="209,268 199,264 199,272" fill="#0f1620"/><text x="170" y="290" font-size="15" fill="#0f1620" text-anchor="middle">12 cm</text></svg>`,
+            answer: { value: 6.0, unit: 'cm' },
+            delsvar: [
+                { del: 'a', value: 6.0, unit: 'cm' },
+                { del: 'b' },
+            ],
+            solution: `**a)** På en kula verkar tyngdkraften $F_\\mathrm{G} = m \\cdot g$ nedåt och den elektriska kraften $F = \\mathbb{E} \\cdot Q$ åt höger. Båda är konstanta under hela rörelsen, så resultanten $F_\\mathrm{R}$ har hela tiden samma riktning. Eftersom kulan släpps från vila rör den sig längs en **rät linje** i resultantens riktning.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Kulans krafter, resultanten och den raka banan ned till golvet" style="max-width:440px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><rect x="30" y="236" width="340" height="10" fill="#d8cbb0"/><line x1="30" y1="236" x2="370" y2="236" stroke="#0f1620" stroke-width="1.6"/><line x1="130" y1="36" x2="210" y2="236" stroke="rgba(15,22,32,0.45)" stroke-width="1.2" stroke-dasharray="2 4"/><line x1="130" y1="136" x2="130" y2="236" stroke="rgba(15,22,32,0.45)" stroke-width="1.2" stroke-dasharray="5 4"/><line x1="130" y1="136" x2="170" y2="136" stroke="#2563c9" stroke-width="1.2" stroke-dasharray="4 3"/><line x1="78" y1="36" x2="118" y2="36" stroke="rgba(15,22,32,0.45)" stroke-width="1.2" stroke-dasharray="4 3"/><circle cx="130" cy="36" r="10" fill="#ece3d2" stroke="#0f1620" stroke-width="1.4"/><line x1="130" y1="36" x2="130" y2="125" stroke="#c0392b" stroke-width="2.8"/><polygon points="130,136 124.8,125 135.2,125" fill="#c0392b"/><line x1="130" y1="36" x2="159" y2="36" stroke="#2563c9" stroke-width="2.8"/><polygon points="170,36 159,41.2 159,30.8" fill="#2563c9"/><line x1="130" y1="36" x2="165.9" y2="125.8" stroke="#1f7a5c" stroke-width="2.8" stroke-dasharray="6 4"/><polygon points="170,136 161.1,127.7 170.7,123.9" fill="#1f7a5c"/><circle cx="130" cy="36" r="2.6" fill="#0f1620"/><text x="120" y="112" font-size="15" fill="#c0392b" text-anchor="end"><tspan font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="0.72em">G</tspan></text><text x="178" y="41" font-size="15" fill="#2563c9" text-anchor="start"><tspan font-style="italic">F</tspan></text><text x="181" y="130" font-size="15" fill="#1f7a5c" text-anchor="start"><tspan font-style="italic">F</tspan><tspan baseline-shift="sub" font-size="0.72em">R</tspan></text><line x1="84" y1="44" x2="84" y2="228" stroke="#0f1620" stroke-width="1.4"/><polygon points="84,37 80,47 88,47" fill="#0f1620"/><polygon points="84,235 80,225 88,225" fill="#0f1620"/><text x="74" y="141" font-size="15" fill="#0f1620" text-anchor="end"><tspan font-style="italic">h</tspan></text><line x1="130" y1="250" x2="130" y2="274" stroke="rgba(15,22,32,0.45)" stroke-width="1.2" stroke-dasharray="4 3"/><line x1="210" y1="250" x2="210" y2="274" stroke="rgba(15,22,32,0.45)" stroke-width="1.2" stroke-dasharray="4 3"/><line x1="138" y1="268" x2="202" y2="268" stroke="#0f1620" stroke-width="1.4"/><polygon points="131,268 141,264 141,272" fill="#0f1620"/><polygon points="209,268 199,264 199,272" fill="#0f1620"/><text x="170" y="290" font-size="15" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">x</tspan></text></svg>
+
+Kalla fallhöjden *h* och avståndet åt sidan *x*. Resultanten ligger längs banan, så krafterna och sträckorna bildar två likformiga trianglar:
+
+$$ \\frac{x}{h} = \\frac{F}{F_\\mathrm{G}} = \\frac{\\mathbb{E} \\cdot Q}{m \\cdot g} $$
+
+Vi multiplicerar båda led med *h*:
+
+$$ x = \\frac{\\mathbb{E} \\cdot Q \\cdot h}{m \\cdot g} $$
+
+Storheterna $\\mathbb{E}$, *h* och *g* är lika för båda kulorna. Avståndet *x* är därför proportionellt mot kvoten $\\dfrac{Q}{m}$.
+
+Dubbelt så stor diameter ger $2^3 = 8$ gånger så stor volym. Materialet, och därmed densiteten, är detsamma, så B har 8 gånger så stor massa som A. Låt A ha laddningen *Q* och massan *m*. Då är
+
+$$ \\frac{x_\\mathrm{B}}{x_\\mathrm{A}} = \\frac{\\frac{4Q}{8m}}{\\frac{Q}{m}} = \\frac{4}{8} = \\frac{1}{2} $$
+
+$$ x_\\mathrm{B} = \\frac{1}{2} \\cdot 12 = 6{,}0\\ \\mathrm{cm} $$
+
+Det är rimligt att B landar närmare. Den elektriska kraften har blivit 4 gånger så stor men tyngdkraften 8 gånger så stor, så banan blir brantare.
+
+**Svar:** B landar $6{,}0\\ \\mathrm{cm}$ från punkten.
+
+**b)** I lodrät led verkar bara tyngdkraften, eftersom den elektriska kraften är vågrät. Newtons andra lag ger accelerationen nedåt:
+
+$$ a = \\frac{F_\\mathrm{G}}{m} = \\frac{m \\cdot g}{m} = g $$
+
+Accelerationen nedåt beror varken på massan eller på laddningen. Kulorna släpps från vila på samma höjd, så de rör sig likadant i lodrät led.
+
+**Svar:** Ingen av dem. De når golvet på lika lång tid.`,
         },
     ],
 
@@ -39000,7 +46473,7 @@ $$ \\mathbb{E} = \\frac{100}{0{,}020} = 5{,}0 \\cdot 10^3\\ \\mathrm{V/m} $$
 
 **Svar:** Fältstyrkan är $5{,}0 \\cdot 10^3\\ \\mathrm{V/m}$.
 
-**Generell slutsats:** Mellan plattor är fältet *homogent* — lika starkt överallt. Enheten V/m är likvärdig med N/C.`,
+**Generell slutsats:** Mellan plattor är fältet *homogent*, det vill säga lika starkt överallt. Enheten V/m är likvärdig med N/C.`,
         },
         {
             level: 1,
@@ -39052,27 +46525,27 @@ $$ d = \\frac{600}{2{,}0 \\cdot 10^4} = 0{,}030\\ \\mathrm{m} = 3{,}0\\ \\mathrm
             level: 2,
             question: `Mellan två plattor på avståndet $4{,}0\\ \\mathrm{cm}$ ligger spänningen $200\\ \\mathrm{V}$. En liten laddning $Q = 5{,}0\\ \\mathrm{nC}$ placeras i fältet mellan plattorna. Hur stor elektrisk kraft verkar på laddningen?`,
             answer: { value: 25, unit: 'μN' },
-            solution: `**Steg 1 — fältstyrkan mellan plattorna:**
+            solution: `**Steg 1: fältstyrkan mellan plattorna**
 
 $$ \\mathbb{E} = \\frac{U}{d} = \\frac{200}{0{,}040} = 5{,}0 \\cdot 10^3\\ \\mathrm{V/m} $$
 
-**Steg 2 — kraften på laddningen** (fältstyrka gånger laddning):
+**Steg 2: kraften på laddningen** (fältstyrka gånger laddning):
 
 $$ F = \\mathbb{E} \\cdot Q = 5{,}0 \\cdot 10^3 \\cdot 5{,}0 \\cdot 10^{-9} = 2{,}5 \\cdot 10^{-5}\\ \\mathrm{N} = 25\\ \\mathrm{\\mu N} $$
 
 **Svar:** Kraften på laddningen är $25\\ \\mathrm{\\mu N}$.
 
-**Generell slutsats:** I ett homogent fält är kraften lika stor *överallt* mellan plattorna — den beror inte på var laddningen befinner sig, bara på fältstyrkan och laddningen.`,
+**Generell slutsats:** I ett homogent fält är kraften lika stor *överallt* mellan plattorna. Den beror inte på var laddningen befinner sig, bara på fältstyrkan och laddningen.`,
         },
         {
             level: 2,
             question: `En laddning $Q = 8{,}0\\ \\mathrm{nC}$ mellan två plattor som sitter $5{,}0\\ \\mathrm{cm}$ från varandra påverkas av den elektriska kraften $F = 1{,}2 \\cdot 10^{-4}\\ \\mathrm{N}$. Hur stor är spänningen mellan plattorna?`,
             answer: { value: 750, unit: 'V' },
-            solution: `**Steg 1 — fältstyrkan** ur kraft och laddning:
+            solution: `**Steg 1: fältstyrkan** ur kraft och laddning:
 
 $$ \\mathbb{E} = \\frac{F}{Q} = \\frac{1{,}2 \\cdot 10^{-4}}{8{,}0 \\cdot 10^{-9}} = 1{,}5 \\cdot 10^4\\ \\mathrm{V/m} $$
 
-**Steg 2 — spänningen** ur fältstyrka och plattavstånd:
+**Steg 2: spänningen** ur fältstyrka och plattavstånd:
 
 $$ U = \\mathbb{E} \\cdot d = 1{,}5 \\cdot 10^4 \\cdot 0{,}050 = 750\\ \\mathrm{V} $$
 
@@ -39088,16 +46561,16 @@ $$ U = \\mathbb{E} \\cdot d = 1{,}5 \\cdot 10^4 \\cdot 0{,}050 = 750\\ \\mathrm{
             answer: { value: 1.3e7, unit: 'm/s', tol: 0.05 },
             solution: `Vi följer kedjan fält $\\to$ kraft $\\to$ acceleration $\\to$ hastighet.
 
-**Steg 1 — fältstyrkan:**
+**Steg 1: fältstyrkan**
 $$ \\mathbb{E} = \\frac{U}{d} = \\frac{500}{0{,}020} = 2{,}5 \\cdot 10^4\\ \\mathrm{V/m} $$
 
-**Steg 2 — kraften på elektronen:**
+**Steg 2: kraften på elektronen**
 $$ F = \\mathbb{E} \\cdot q_e = 2{,}5 \\cdot 10^4 \\cdot 1{,}602 \\cdot 10^{-19} = 4{,}0 \\cdot 10^{-15}\\ \\mathrm{N} $$
 
-**Steg 3 — accelerationen** (Newtons andra lag):
+**Steg 3: accelerationen** (Newtons andra lag):
 $$ a = \\frac{F}{m_e} = \\frac{4{,}0 \\cdot 10^{-15}}{9{,}11 \\cdot 10^{-31}} = 4{,}4 \\cdot 10^{15}\\ \\mathrm{m/s^2} $$
 
-**Steg 4 — sluthastigheten.** Elektronen accelererar likformigt sträckan $d = 0{,}020\\ \\mathrm{m}$ från vila. Med $v^2 = 2 a d$:
+**Steg 4: sluthastigheten.** Elektronen accelererar likformigt sträckan $d = 0{,}020\\ \\mathrm{m}$ från vila. Med $v^2 = 2 a d$:
 
 $$ v = \\sqrt{2 a d} = \\sqrt{2 \\cdot 4{,}4 \\cdot 10^{15} \\cdot 0{,}020} = 1{,}3 \\cdot 10^7\\ \\mathrm{m/s} $$
 
@@ -39109,13 +46582,13 @@ $$ v = \\sqrt{2 a d} = \\sqrt{2 \\cdot 4{,}4 \\cdot 10^{15} \\cdot 0{,}020} = 1{
             level: 3,
             question: `En elektron skjuts in horisontellt med hastigheten $v_0 = 2{,}0 \\cdot 10^7\\ \\mathrm{m/s}$ mitt emellan två vågräta plattor. Plattorna är $L = 6{,}0\\ \\mathrm{cm}$ långa och sitter $d = 2{,}0\\ \\mathrm{cm}$ från varandra med spänningen $U = 80\\ \\mathrm{V}$ över sig. Hur stor blir elektronens vertikala avböjning när den lämnar plattorna? ($q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$, $m_e = 9{,}11 \\cdot 10^{-31}\\ \\mathrm{kg}$)`,
             answer: { value: 3.2, unit: 'mm' },
-            solution: `Det här är en **projektilrörelse**: vågrätt en konstant hastighet, lodrätt en accelererad rörelse driven av den elektriska kraften — precis som ett vågrätt kast i ett gravitationsfält. De två rörelserna behandlas var för sig.
+            solution: `Det här är en **projektilrörelse**: vågrätt en konstant hastighet, lodrätt en accelererad rörelse driven av den elektriska kraften, precis som ett vågrätt kast i ett gravitationsfält. De två rörelserna behandlas var för sig.
 
-**Lodrätt — accelerationen.** Fältet mellan plattorna och kraften på elektronen:
+**Lodrätt: accelerationen.** Fältet mellan plattorna och kraften på elektronen:
 $$ \\mathbb{E} = \\frac{U}{d} = \\frac{80}{0{,}020} = 4\\,000\\ \\mathrm{V/m} $$
 $$ a = \\frac{F}{m_e} = \\frac{\\mathbb{E} \\cdot q_e}{m_e} = \\frac{4\\,000 \\cdot 1{,}602 \\cdot 10^{-19}}{9{,}11 \\cdot 10^{-31}} = 7{,}03 \\cdot 10^{14}\\ \\mathrm{m/s^2} $$
 
-**Vågrätt — tiden mellan plattorna** (konstant hastighet $v_0$):
+**Vågrätt: tiden mellan plattorna** (konstant hastighet $v_0$):
 $$ t = \\frac{L}{v_0} = \\frac{0{,}060}{2{,}0 \\cdot 10^7} = 3{,}0 \\cdot 10^{-9}\\ \\mathrm{s} $$
 
 **Lodrät avböjning** under denna tid (start från vila i lodled, $y = \\dfrac{1}{2} a t^2$):
@@ -39125,6 +46598,551 @@ $$ y = \\frac{1}{2} a t^2 = \\frac{1}{2} \\cdot 7{,}03 \\cdot 10^{14} \\cdot (3{
 
 **Generell slutsats:** Eftersom $3{,}2\\ \\mathrm{mm} < d/2 = 10\\ \\mathrm{mm}$ hinner elektronen ut utan att träffa en platta. Nyckeln är att se rörelsen som ett kast: vågrätt och lodrätt är *oberoende*, och tiden i fältet bestäms av den vågräta rörelsen. Samma princip styr bildröret i gamla TV-apparater och bläckstråleskrivare.`,
         },
+        {
+            level: 1,
+            question: `Två parallella plattor är laddade så att den vänstra är negativ och den högra positiv. Punkterna A, B och C ligger mellan plattorna, se figuren.
+
+<svg viewBox="28 10 344 170" width="430" height="213" style="display:block;margin:16px auto;max-width:100%;height:auto" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg"><rect x="50" y="16" width="10" height="158" rx="2" fill="#c4c9cf" stroke="#8a9099" stroke-width="1.2"/><line x1="33" y1="29.2" x2="43" y2="29.2" stroke="#2563a8" stroke-width="2"/><line x1="33" y1="55.5" x2="43" y2="55.5" stroke="#2563a8" stroke-width="2"/><line x1="33" y1="81.8" x2="43" y2="81.8" stroke="#2563a8" stroke-width="2"/><line x1="33" y1="108.2" x2="43" y2="108.2" stroke="#2563a8" stroke-width="2"/><line x1="33" y1="134.5" x2="43" y2="134.5" stroke="#2563a8" stroke-width="2"/><line x1="33" y1="160.8" x2="43" y2="160.8" stroke="#2563a8" stroke-width="2"/><rect x="340" y="16" width="10" height="158" rx="2" fill="#c4c9cf" stroke="#8a9099" stroke-width="1.2"/><line x1="357" y1="29.2" x2="367" y2="29.2" stroke="#c0392b" stroke-width="2"/><line x1="362" y1="24.2" x2="362" y2="34.2" stroke="#c0392b" stroke-width="2"/><line x1="357" y1="55.5" x2="367" y2="55.5" stroke="#c0392b" stroke-width="2"/><line x1="362" y1="50.5" x2="362" y2="60.5" stroke="#c0392b" stroke-width="2"/><line x1="357" y1="81.8" x2="367" y2="81.8" stroke="#c0392b" stroke-width="2"/><line x1="362" y1="76.8" x2="362" y2="86.8" stroke="#c0392b" stroke-width="2"/><line x1="357" y1="108.2" x2="367" y2="108.2" stroke="#c0392b" stroke-width="2"/><line x1="362" y1="103.2" x2="362" y2="113.2" stroke="#c0392b" stroke-width="2"/><line x1="357" y1="134.5" x2="367" y2="134.5" stroke="#c0392b" stroke-width="2"/><line x1="362" y1="129.5" x2="362" y2="139.5" stroke="#c0392b" stroke-width="2"/><line x1="357" y1="160.8" x2="367" y2="160.8" stroke="#c0392b" stroke-width="2"/><line x1="362" y1="155.8" x2="362" y2="165.8" stroke="#c0392b" stroke-width="2"/><circle cx="90" cy="60" r="4" fill="#0f1620"/><text x="90" y="49" text-anchor="middle" font-size="15" fill="#0f1620">A</text><circle cx="200" cy="120" r="4" fill="#0f1620"/><text x="200" y="109" text-anchor="middle" font-size="15" fill="#0f1620">B</text><circle cx="310" cy="60" r="4" fill="#0f1620"/><text x="310" y="49" text-anchor="middle" font-size="15" fill="#0f1620">C</text></svg>
+
+Vilket påstående om det elektriska fältet i de tre punkterna är korrekt?`,
+            choices: [
+                'Fältet är starkast i A och riktat åt höger i alla tre punkterna.',
+                'Fältet är starkast i C och riktat åt vänster i alla tre punkterna.',
+                'Fältet är lika starkt i A, B och C och riktat åt vänster.',
+                'Fältet är lika starkt i A, B och C och riktat åt höger.',
+            ],
+            correct: 2,
+            solution: `Mellan två parallella plattor är fältet **homogent**, det vill säga lika starkt överallt. Avståndet från en punkt till plattorna spelar alltså ingen roll, så fältstyrkan är lika stor i A, B och C.
+
+Fältet är riktat från den positiva plattan till den negativa. Den positiva plattan är den högra, så fältet är riktat åt vänster.
+
+**Svar:** Fältet är lika starkt i A, B och C och riktat åt vänster.`,
+        },
+        {
+            level: 1,
+            question: `Väggen i en nervcell består av ett tunt membran som är $8{,}0\\ \\mathrm{nm}$ tjockt. Mellan membranets insida och utsida är spänningen $72\\ \\mathrm{mV}$. Membranets två sidor kan ses som två laddade plattor. Hur stor är den elektriska fältstyrkan i membranet? Svara i MV/m.`,
+            answer: { value: 9.0, unit: 'MV/m' },
+            solution: `Vi använder formeln för fältstyrkan mellan två plattor:
+
+$$ \\mathbb{E} = \\frac{U}{d} $$
+
+$$
+\\left[ \\begin{array}{l}
+U = 72\\ \\mathrm{mV} = 72 \\cdot 10^{-3}\\ \\mathrm{V} \\\\
+d = 8{,}0\\ \\mathrm{nm} = 8{,}0 \\cdot 10^{-9}\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ \\mathbb{E} = \\frac{72 \\cdot 10^{-3}}{8{,}0 \\cdot 10^{-9}} = 9{,}0 \\cdot 10^6\\ \\mathrm{V/m} = 9{,}0\\ \\mathrm{MV/m} $$
+
+Spänningen är mycket liten, men eftersom membranet är så tunt blir fältstyrkan ändå mycket stor.
+
+**Svar:** $9{,}0\\ \\mathrm{MV/m}$`,
+        },
+        {
+            level: 1,
+            question: `Vilken av enheterna är **inte** en enhet för elektrisk fältstyrka?`,
+            choices: [
+                '$\\mathrm{V \\cdot m}$',
+                '$\\mathrm{V/m}$',
+                '$\\mathrm{N/C}$',
+                '$\\mathrm{J/(C \\cdot m)}$',
+            ],
+            correct: 0,
+            solution: `Vi jämför enheterna med formlerna för fältstyrka.
+
+- $\\mathbb{E} = \\dfrac{U}{d}$ ger enheten $\\mathrm{V/m}$.
+- $\\mathbb{E} = \\dfrac{F}{Q}$ ger enheten $\\mathrm{N/C}$.
+- Eftersom $1\\ \\mathrm{V} = 1\\ \\mathrm{J/C}$ är $1\\ \\mathrm{V/m} = 1\\ \\mathrm{J/(C \\cdot m)}$.
+
+Alla tre är alltså enheter för samma storhet. I $\\mathrm{V \\cdot m}$ är spänningen multiplicerad med en längd i stället för dividerad med den, och det är en annan storhet.
+
+**Svar:** $\\mathrm{V \\cdot m}$`,
+        },
+        {
+            level: 1,
+            question: `I en gaständare bildas en gnista mellan två små parallella metallytor när fältstyrkan i luften mellan dem når $3{,}0 \\cdot 10^6\\ \\mathrm{V/m}$.<br>a) Hur stor spänning krävs för en gnista om ytorna sitter $0{,}80\\ \\mathrm{mm}$ från varandra? Svara i kV.<br>b) Tändaren kan ge som mest $4{,}5\\ \\mathrm{kV}$. Vilket är det största avståndet mellan ytorna som fortfarande ger en gnista? Svara i mm.`,
+            answer: { value: 2.4, unit: 'kV' },
+            delsvar: [
+                { del: 'a', value: 2.4, unit: 'kV' },
+                { del: 'b', value: 1.5, unit: 'mm' },
+            ],
+            solution: `**a)** Vi löser ut spänningen ur formeln för fältstyrkan mellan plattor:
+
+$$ \\mathbb{E} = \\frac{U}{d} \\quad\\Leftrightarrow\\quad U = \\mathbb{E} \\cdot d $$
+
+$$
+\\left[ \\begin{array}{l}
+\\mathbb{E} = 3{,}0 \\cdot 10^6\\ \\mathrm{V/m} \\\\
+d = 0{,}80\\ \\mathrm{mm} = 0{,}80 \\cdot 10^{-3}\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ U = 3{,}0 \\cdot 10^6 \\cdot 0{,}80 \\cdot 10^{-3} = 2\\,400\\ \\mathrm{V} = 2{,}4\\ \\mathrm{kV} $$
+
+**Svar:** $2{,}4\\ \\mathrm{kV}$
+
+**b)** Vi löser ut avståndet:
+
+$$ \\mathbb{E} = \\frac{U}{d} \\quad\\Leftrightarrow\\quad d = \\frac{U}{\\mathbb{E}} $$
+
+$$
+\\left[ \\begin{array}{l}
+U = 4{,}5\\ \\mathrm{kV} = 4\\,500\\ \\mathrm{V} \\\\
+\\mathbb{E} = 3{,}0 \\cdot 10^6\\ \\mathrm{V/m}
+\\end{array} \\right]
+$$
+
+$$ d = \\frac{4\\,500}{3{,}0 \\cdot 10^6} = 1{,}5 \\cdot 10^{-3}\\ \\mathrm{m} = 1{,}5\\ \\mathrm{mm} $$
+
+**Svar:** $1{,}5\\ \\mathrm{mm}$`,
+        },
+        {
+            level: 2,
+            question: `Diagrammet visar hur fältstyrkan beror av spänningen för två olika par av plattor, A (röd linje) och B (blå linje).
+
+${makeDiagram({
+    xMin: 0, xMax: 450, yMin: 0, yMax: 6.5,
+    xTicks: [0, 50, 100, 150, 200, 250, 300, 350, 400], yTicks: [0, 1, 2, 3, 4, 5, 6],
+    xLabel: '<tspan font-style="italic">U</tspan> (V)',
+    yLabel: '<tspan font-family="KaTeX_AMS, serif">𝔼</tspan> (kV/m)',
+    paths: [
+        { points: [[0, 0], [240, 6]], color: '#c8324a' },
+        { points: [[0, 0], [450, 4.5]], color: '#2563a8' },
+    ],
+})}
+
+a) Bestäm plattavståndet för A. Svara i cm.<br>b) En liten laddning mellan plattorna i A påverkas av en viss kraft när spänningen är $120\\ \\mathrm{V}$. Vilken spänning ska plattorna i B ha för att samma laddning ska påverkas av en lika stor kraft där? Svara i V.`,
+            answer: { value: 4.0, unit: 'cm' },
+            delsvar: [
+                { del: 'a', value: 4.0, unit: 'cm' },
+                { del: 'b', value: 300, unit: 'V' },
+            ],
+            solution: `**a)** Vi väljer en punkt som är lätt att läsa av. Den röda linjen går genom punkten där $U = 200\\ \\mathrm{V}$ och $\\mathbb{E} = 5{,}0\\ \\mathrm{kV/m}$. Vi löser ut plattavståndet:
+
+$$ \\mathbb{E} = \\frac{U}{d} \\quad\\Leftrightarrow\\quad d = \\frac{U}{\\mathbb{E}} $$
+
+$$
+\\left[ \\begin{array}{l}
+U = 200\\ \\mathrm{V} \\\\
+\\mathbb{E} = 5{,}0\\ \\mathrm{kV/m} = 5\\,000\\ \\mathrm{V/m}
+\\end{array} \\right]
+$$
+
+$$ d = \\frac{200}{5\\,000} = 0{,}040\\ \\mathrm{m} = 4{,}0\\ \\mathrm{cm} $$
+
+**Svar:** $4{,}0\\ \\mathrm{cm}$
+
+**b)** Kraften på laddningen är $F = \\mathbb{E} \\cdot Q$. Samma laddning påverkas av lika stor kraft precis när fältstyrkan är densamma.
+
+Fältstyrkan i A vid $120\\ \\mathrm{V}$ beräknas med $d = 0{,}040\\ \\mathrm{m}$ från a):
+
+$$ \\mathbb{E} = \\frac{U}{d} = \\frac{120}{0{,}040} = 3\\,000\\ \\mathrm{V/m} = 3{,}0\\ \\mathrm{kV/m} $$
+
+I diagrammet har den blå linjen värdet $3{,}0\\ \\mathrm{kV/m}$ vid $U = 300\\ \\mathrm{V}$.
+
+**Svar:** $300\\ \\mathrm{V}$`,
+        },
+        {
+            level: 2,
+            question: `En oljedroppe med massan $3{,}2 \\cdot 10^{-15}\\ \\mathrm{kg}$ svävar stilla mellan två vågräta plattor. Spänningen mellan plattorna är $196\\ \\mathrm{V}$ och avståndet framgår av figuren. Har droppen ett överskott eller ett underskott av elektroner, och hur många är det? Ange antalet som ditt numeriska svar. ($q_\\mathrm{e} = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$)
+
+<svg viewBox="44 16 342 172" width="428" height="215" style="display:block;margin:16px auto;max-width:100%;height:auto" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg"><rect x="50" y="40" width="240" height="10" rx="2" fill="#c4c9cf" stroke="#8a9099" stroke-width="1.2"/><rect x="50" y="150" width="240" height="10" rx="2" fill="#c4c9cf" stroke="#8a9099" stroke-width="1.2"/><line x1="60" y1="27" x2="70" y2="27" stroke="#c0392b" stroke-width="2"/><line x1="65" y1="22" x2="65" y2="32" stroke="#c0392b" stroke-width="2"/><line x1="60" y1="175" x2="70" y2="175" stroke="#2563a8" stroke-width="2"/><line x1="90" y1="27" x2="100" y2="27" stroke="#c0392b" stroke-width="2"/><line x1="95" y1="22" x2="95" y2="32" stroke="#c0392b" stroke-width="2"/><line x1="90" y1="175" x2="100" y2="175" stroke="#2563a8" stroke-width="2"/><line x1="120" y1="27" x2="130" y2="27" stroke="#c0392b" stroke-width="2"/><line x1="125" y1="22" x2="125" y2="32" stroke="#c0392b" stroke-width="2"/><line x1="120" y1="175" x2="130" y2="175" stroke="#2563a8" stroke-width="2"/><line x1="150" y1="27" x2="160" y2="27" stroke="#c0392b" stroke-width="2"/><line x1="155" y1="22" x2="155" y2="32" stroke="#c0392b" stroke-width="2"/><line x1="150" y1="175" x2="160" y2="175" stroke="#2563a8" stroke-width="2"/><line x1="180" y1="27" x2="190" y2="27" stroke="#c0392b" stroke-width="2"/><line x1="185" y1="22" x2="185" y2="32" stroke="#c0392b" stroke-width="2"/><line x1="180" y1="175" x2="190" y2="175" stroke="#2563a8" stroke-width="2"/><line x1="210" y1="27" x2="220" y2="27" stroke="#c0392b" stroke-width="2"/><line x1="215" y1="22" x2="215" y2="32" stroke="#c0392b" stroke-width="2"/><line x1="210" y1="175" x2="220" y2="175" stroke="#2563a8" stroke-width="2"/><line x1="240" y1="27" x2="250" y2="27" stroke="#c0392b" stroke-width="2"/><line x1="245" y1="22" x2="245" y2="32" stroke="#c0392b" stroke-width="2"/><line x1="240" y1="175" x2="250" y2="175" stroke="#2563a8" stroke-width="2"/><line x1="270" y1="27" x2="280" y2="27" stroke="#c0392b" stroke-width="2"/><line x1="275" y1="22" x2="275" y2="32" stroke="#c0392b" stroke-width="2"/><line x1="270" y1="175" x2="280" y2="175" stroke="#2563a8" stroke-width="2"/><circle cx="170" cy="100" r="8" fill="#d9a441" stroke="#7a5618" stroke-width="1.4"/><ellipse cx="167.5" cy="96.5" rx="2.4" ry="1.6" fill="#f3dca6"/><line x1="294" y1="50" x2="324" y2="50" stroke="#0f1620" stroke-width="1" stroke-dasharray="4 4"/><line x1="294" y1="150" x2="324" y2="150" stroke="#0f1620" stroke-width="1" stroke-dasharray="4 4"/><line x1="314" y1="100" x2="314" y2="58" stroke="#0f1620" stroke-width="1.4" stroke-linecap="butt"/><polygon points="314.0,50.0 318.4,58.0 309.6,58.0" fill="#0f1620"/><line x1="314" y1="100" x2="314" y2="142" stroke="#0f1620" stroke-width="1.4" stroke-linecap="butt"/><polygon points="314.0,150.0 309.6,142.0 318.4,142.0" fill="#0f1620"/><text x="324" y="105" text-anchor="start" font-size="15" fill="#0f1620">6,0 mm</text></svg>`,
+            answer: { value: 6, unit: 'elektroner', tol: 0.01 },
+            solution: `Droppen är i vila, så den elektriska kraften är lika stor som tyngdkraften men riktad uppåt.
+
+**Tecknet på laddningen.** Fältet är riktat nedåt, från den positiva plattan till den negativa. Kraften på droppen är riktad uppåt, alltså mot fältets riktning. Då är droppens laddning negativ, och den har ett överskott av elektroner.
+
+**Laddningens storlek.** Den elektriska kraften är $F_\\mathrm{e} = \\mathbb{E} \\cdot Q$, där $\\mathbb{E} = \\dfrac{U}{d}$. Kraftjämvikten ger
+
+$$ F_\\mathrm{e} = F_\\mathrm{G} $$
+
+$$ \\frac{U}{d} \\cdot Q = m \\cdot g $$
+
+$$ Q = \\frac{m \\cdot g \\cdot d}{U} $$
+
+$$
+\\left[ \\begin{array}{l}
+m = 3{,}2 \\cdot 10^{-15}\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+d = 6{,}0\\ \\mathrm{mm} = 0{,}0060\\ \\mathrm{m} \\\\
+U = 196\\ \\mathrm{V}
+\\end{array} \\right]
+$$
+
+$$ Q = \\frac{3{,}2 \\cdot 10^{-15} \\cdot 9{,}82 \\cdot 0{,}0060}{196} = 9{,}619\\ldots \\cdot 10^{-19}\\ \\mathrm{C} $$
+
+**Antalet elektroner.** Antalet är laddningen dividerad med en elektrons laddning:
+
+$$ n = \\frac{Q}{q_\\mathrm{e}} = \\frac{9{,}619\\ldots \\cdot 10^{-19}}{1{,}602 \\cdot 10^{-19}} \\approx 6{,}0 $$
+
+Antalet är mycket nära ett heltal, vilket är rimligt eftersom laddningen måste vara ett helt antal elektronladdningar.
+
+**Svar:** Droppen har ett överskott på 6 elektroner.`,
+        },
+        {
+            level: 2,
+            question: `Mellan två plattor är spänningen $400\\ \\mathrm{V}$ och avståndet $8{,}0\\ \\mathrm{cm}$. En positiv laddning på $6{,}0\\ \\mathrm{nC}$ flyttas långsamt från P till R och sedan vidare till S, se figuren. Hur stort arbete måste uträttas på laddningen för hela förflyttningen? Svara i μJ.
+
+<svg viewBox="28 14 384 284" width="480" height="355" style="display:block;margin:16px auto;max-width:100%;height:auto" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg"><rect x="50" y="20" width="10" height="240" rx="2" fill="#c4c9cf" stroke="#8a9099" stroke-width="1.2"/><line x1="33" y1="40" x2="43" y2="40" stroke="#c0392b" stroke-width="2"/><line x1="38" y1="35" x2="38" y2="45" stroke="#c0392b" stroke-width="2"/><line x1="33" y1="80" x2="43" y2="80" stroke="#c0392b" stroke-width="2"/><line x1="38" y1="75" x2="38" y2="85" stroke="#c0392b" stroke-width="2"/><line x1="33" y1="120" x2="43" y2="120" stroke="#c0392b" stroke-width="2"/><line x1="38" y1="115" x2="38" y2="125" stroke="#c0392b" stroke-width="2"/><line x1="33" y1="160" x2="43" y2="160" stroke="#c0392b" stroke-width="2"/><line x1="38" y1="155" x2="38" y2="165" stroke="#c0392b" stroke-width="2"/><line x1="33" y1="200" x2="43" y2="200" stroke="#c0392b" stroke-width="2"/><line x1="38" y1="195" x2="38" y2="205" stroke="#c0392b" stroke-width="2"/><line x1="33" y1="240" x2="43" y2="240" stroke="#c0392b" stroke-width="2"/><line x1="38" y1="235" x2="38" y2="245" stroke="#c0392b" stroke-width="2"/><rect x="380" y="20" width="10" height="240" rx="2" fill="#c4c9cf" stroke="#8a9099" stroke-width="1.2"/><line x1="397" y1="40" x2="407" y2="40" stroke="#2563a8" stroke-width="2"/><line x1="397" y1="80" x2="407" y2="80" stroke="#2563a8" stroke-width="2"/><line x1="397" y1="120" x2="407" y2="120" stroke="#2563a8" stroke-width="2"/><line x1="397" y1="160" x2="407" y2="160" stroke="#2563a8" stroke-width="2"/><line x1="397" y1="200" x2="407" y2="200" stroke="#2563a8" stroke-width="2"/><line x1="397" y1="240" x2="407" y2="240" stroke="#2563a8" stroke-width="2"/><line x1="60" y1="40" x2="380" y2="40" stroke="#8a9099" stroke-width="1.5"/><polygon points="280,40 269,35 269,45" fill="#8a9099"/><line x1="60" y1="90" x2="380" y2="90" stroke="#8a9099" stroke-width="1.5"/><polygon points="280,90 269,85 269,95" fill="#8a9099"/><line x1="60" y1="140" x2="380" y2="140" stroke="#8a9099" stroke-width="1.5"/><polygon points="280,140 269,135 269,145" fill="#8a9099"/><line x1="60" y1="190" x2="380" y2="190" stroke="#8a9099" stroke-width="1.5"/><polygon points="280,190 269,185 269,195" fill="#8a9099"/><line x1="60" y1="240" x2="380" y2="240" stroke="#8a9099" stroke-width="1.5"/><polygon points="280,240 269,235 269,245" fill="#8a9099"/><line x1="300" y1="215" x2="195" y2="215" stroke="#0f1620" stroke-width="2.2" stroke-linecap="butt"/><polygon points="186.0,215.0 195.0,210.1 195.0,219.9" fill="#0f1620"/><line x1="180" y1="209" x2="180" y2="70" stroke="#0f1620" stroke-width="2.2" stroke-linecap="butt"/><polygon points="180.0,61.0 184.9,70.0 175.1,70.0" fill="#0f1620"/><circle cx="300" cy="215" r="4" fill="#0f1620"/><circle cx="180" cy="215" r="4" fill="#0f1620"/><circle cx="180" cy="55" r="4" fill="#0f1620"/><text x="309" y="221" text-anchor="start" font-size="15" fill="#0f1620">P</text><text x="171" y="221" text-anchor="end" font-size="15" fill="#0f1620">R</text><text x="171" y="64" text-anchor="end" font-size="15" fill="#0f1620">S</text><text x="240" y="209" text-anchor="middle" font-size="15" fill="#0f1620">3,0 cm</text><text x="189" y="120" text-anchor="start" font-size="15" fill="#0f1620">4,0 cm</text><line x1="60" y1="262" x2="60" y2="294" stroke="#0f1620" stroke-width="1" stroke-dasharray="4 4"/><line x1="380" y1="262" x2="380" y2="294" stroke="#0f1620" stroke-width="1" stroke-dasharray="4 4"/><line x1="220" y1="286" x2="68" y2="286" stroke="#0f1620" stroke-width="1.4" stroke-linecap="butt"/><polygon points="60.0,286.0 68.0,281.6 68.0,290.4" fill="#0f1620"/><line x1="220" y1="286" x2="372" y2="286" stroke="#0f1620" stroke-width="1.4" stroke-linecap="butt"/><polygon points="380.0,286.0 372.0,290.4 372.0,281.6" fill="#0f1620"/><text x="220" y="280" text-anchor="middle" font-size="15" fill="#0f1620">8,0 cm</text></svg>`,
+            answer: { value: 0.90, unit: 'μJ' },
+            solution: `Vi delar upp förflyttningen i två delar.
+
+**Från R till S** sker förflyttningen vinkelrätt mot fältet. Den elektriska kraften är riktad längs fältet, så den är vinkelrät mot förflyttningen. Då uträttas inget arbete på den sträckan.
+
+**Från P till R** flyttas laddningen mot fältets riktning. Då krävs en kraft lika stor som den elektriska kraften, och arbetet är
+
+$$ W = F \\cdot s $$
+
+Den elektriska kraften är $F = \\mathbb{E} \\cdot Q$, och fältstyrkan mellan plattorna är $\\mathbb{E} = \\dfrac{U}{d}$. Insättning i $W = F \\cdot s$ ger
+
+$$ W = \\mathbb{E} \\cdot Q \\cdot s = \\frac{U}{d} \\cdot Q \\cdot s $$
+
+$$
+\\left[ \\begin{array}{l}
+U = 400\\ \\mathrm{V} \\\\
+d = 8{,}0\\ \\mathrm{cm} = 0{,}080\\ \\mathrm{m} \\\\
+Q = 6{,}0\\ \\mathrm{nC} = 6{,}0 \\cdot 10^{-9}\\ \\mathrm{C} \\\\
+s = 3{,}0\\ \\mathrm{cm} = 0{,}030\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ W = \\frac{400}{0{,}080} \\cdot 6{,}0 \\cdot 10^{-9} \\cdot 0{,}030 = 9{,}0 \\cdot 10^{-7}\\ \\mathrm{J} = 0{,}90\\ \\mathrm{\\mu J} $$
+
+**Rimlighetsbedömning:** Att flytta laddningen hela vägen mellan plattorna kräver $Q \\cdot U = 2{,}4\\ \\mathrm{\\mu J}$. Sträckan längs fältet är ungefär en tredjedel av plattavståndet, så svaret är rimligt.
+
+**Svar:** $0{,}90\\ \\mathrm{\\mu J}$`,
+        },
+        {
+            level: 2,
+            question: `En laddad partikel mellan två plattor påverkas av en elektrisk kraft. Plattorna är hela tiden kopplade till samma spänningskälla. Avståndet mellan plattorna fördubblas, och partikeln byts mot en annan vars laddning är tre gånger så stor. Hur många gånger så stor blir kraften?`,
+            choices: [
+                '$\\dfrac{2}{3}$',
+                '$6$',
+                '$3$',
+                '$\\dfrac{3}{2}$',
+            ],
+            correct: 3,
+            solution: `Kraften på en laddning är $F = \\mathbb{E} \\cdot Q$, och mellan plattor är $\\mathbb{E} = \\dfrac{U}{d}$. Insättning ger
+
+$$ F = \\frac{U}{d} \\cdot Q $$
+
+Spänningen *U* är oförändrad eftersom plattorna är kopplade till samma spänningskälla. Avståndet blir $2d$ och laddningen $3Q$:
+
+$$ F_{\\text{ny}} = \\frac{U}{2d} \\cdot 3Q = \\frac{3}{2} \\cdot \\frac{U}{d} \\cdot Q = \\frac{3}{2} \\cdot F $$
+
+Det dubbla avståndet halverar fältstyrkan, och den tredubbla laddningen tredubblar kraften.
+
+**Svar:** Kraften blir $\\dfrac{3}{2}$ gånger så stor.`,
+        },
+        {
+            level: 3,
+            question: `I en återvinningsanläggning sorteras plast med ett elektriskt fält. Kornen gnids först mot varandra så att de blir laddade. Sedan släpps de ett i taget från vila mitt emellan överkanterna på två lodräta plattor, se figuren. Spänningen mellan plattorna är $60\\ \\mathrm{kV}$. Bortse från luftmotståndet.
+
+<svg viewBox="40 8 250 360" width="299" height="430" style="display:block;margin:16px auto;max-width:100%;height:auto" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg"><rect x="70" y="62" width="10" height="264" rx="2" fill="#c4c9cf" stroke="#8a9099" stroke-width="1.2"/><rect x="168" y="62" width="10" height="264" rx="2" fill="#c4c9cf" stroke="#8a9099" stroke-width="1.2"/><line x1="53" y1="81" x2="63" y2="81" stroke="#c0392b" stroke-width="2"/><line x1="58" y1="76" x2="58" y2="86" stroke="#c0392b" stroke-width="2"/><line x1="185" y1="81" x2="195" y2="81" stroke="#2563a8" stroke-width="2"/><line x1="53" y1="118.7" x2="63" y2="118.7" stroke="#c0392b" stroke-width="2"/><line x1="58" y1="113.7" x2="58" y2="123.7" stroke="#c0392b" stroke-width="2"/><line x1="185" y1="118.7" x2="195" y2="118.7" stroke="#2563a8" stroke-width="2"/><line x1="53" y1="156.3" x2="63" y2="156.3" stroke="#c0392b" stroke-width="2"/><line x1="58" y1="151.3" x2="58" y2="161.3" stroke="#c0392b" stroke-width="2"/><line x1="185" y1="156.3" x2="195" y2="156.3" stroke="#2563a8" stroke-width="2"/><line x1="53" y1="194" x2="63" y2="194" stroke="#c0392b" stroke-width="2"/><line x1="58" y1="189" x2="58" y2="199" stroke="#c0392b" stroke-width="2"/><line x1="185" y1="194" x2="195" y2="194" stroke="#2563a8" stroke-width="2"/><line x1="53" y1="231.7" x2="63" y2="231.7" stroke="#c0392b" stroke-width="2"/><line x1="58" y1="226.7" x2="58" y2="236.7" stroke="#c0392b" stroke-width="2"/><line x1="185" y1="231.7" x2="195" y2="231.7" stroke="#2563a8" stroke-width="2"/><line x1="53" y1="269.3" x2="63" y2="269.3" stroke="#c0392b" stroke-width="2"/><line x1="58" y1="264.3" x2="58" y2="274.3" stroke="#c0392b" stroke-width="2"/><line x1="185" y1="269.3" x2="195" y2="269.3" stroke="#2563a8" stroke-width="2"/><line x1="53" y1="307" x2="63" y2="307" stroke="#c0392b" stroke-width="2"/><line x1="58" y1="302" x2="58" y2="312" stroke="#c0392b" stroke-width="2"/><line x1="185" y1="307" x2="195" y2="307" stroke="#2563a8" stroke-width="2"/><path d="M96,14 L152,14 L130,42 L130,52 L118,52 L118,42 Z" fill="#e9e2d3" stroke="#0f1620" stroke-width="1.5" stroke-linejoin="round"/><circle cx="110" cy="20" r="3.4" fill="#d9a441"/><circle cx="120" cy="20" r="3.4" fill="#5d8a6a"/><circle cx="130" cy="20" r="3.4" fill="#d9a441"/><circle cx="140" cy="20" r="3.4" fill="#5d8a6a"/><circle cx="115" cy="28" r="3.4" fill="#5d8a6a"/><circle cx="125" cy="28" r="3.4" fill="#d9a441"/><circle cx="134" cy="28" r="3.4" fill="#5d8a6a"/><circle cx="121" cy="36" r="3.4" fill="#d9a441"/><circle cx="128" cy="36" r="3.4" fill="#5d8a6a"/><circle cx="124" cy="62" r="4" fill="#d9a441" stroke="#0f1620" stroke-width="1"/><line x1="124" y1="72" x2="124" y2="326" stroke="#0f1620" stroke-width="1" stroke-dasharray="4 4"/><line x1="80" y1="329" x2="80" y2="362" stroke="#0f1620" stroke-width="1" stroke-dasharray="4 4"/><line x1="168" y1="329" x2="168" y2="362" stroke="#0f1620" stroke-width="1" stroke-dasharray="4 4"/><line x1="88" y1="354" x2="160" y2="354" stroke="#0f1620" stroke-width="1.4" stroke-linecap="butt"/><polygon points="80,354 88,349.6 88,358.4" fill="#0f1620"/><polygon points="168,354 160,349.6 160,358.4" fill="#0f1620"/><text x="124" y="347" text-anchor="middle" font-size="15" fill="#0f1620">0,40 m</text><line x1="201" y1="62" x2="232" y2="62" stroke="#0f1620" stroke-width="1" stroke-dasharray="4 4"/><line x1="201" y1="326" x2="232" y2="326" stroke="#0f1620" stroke-width="1" stroke-dasharray="4 4"/><line x1="224" y1="70" x2="224" y2="318" stroke="#0f1620" stroke-width="1.4" stroke-linecap="butt"/><polygon points="224,62 219.6,70 228.4,70" fill="#0f1620"/><polygon points="224,326 219.6,318 228.4,318" fill="#0f1620"/><text x="234" y="199" font-size="15" fill="#0f1620">1,2 m</text></svg>
+
+a) Ett positivt laddat korn når den högra plattan precis vid dess nederkant. Bestäm kornets laddning per massa, $\\dfrac{Q}{m}$. Svara i μC/kg.<br>b) Ett korn av en annan plast är negativt laddat. Laddningen är hälften så stor som hos kornet i a), men massan är tre gånger så stor. Hur stort är avståndet i sidled mellan de två kornens banor vid plattornas nederkant? Svara i cm.`,
+            answer: { value: 11, unit: 'μC/kg', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 11, unit: 'μC/kg', tol: 0.03 },
+                { del: 'b', value: 23, unit: 'cm', tol: 0.03 },
+            ],
+            solution: `På kornet verkar två krafter: tyngdkraften nedåt och den elektriska kraften vågrätt, eftersom fältet är vinkelrätt mot plattorna. Båda krafterna är konstanta. Rörelsen lodrätt och rörelsen i sidled är därför två likformigt accelererade rörelser från vila, och de pågår lika lång tid *t*.
+
+**a)** Låt plattornas höjd vara *h* och avståndet mellan dem *d*.
+
+**Lodrätt** faller kornet fritt med accelerationen *g*:
+
+$$ h = \\frac{g \\cdot t^2}{2} \\qquad (1) $$
+
+**I sidled** ger den elektriska kraften $F = \\mathbb{E} \\cdot Q = \\dfrac{U}{d} \\cdot Q$ och Newtons andra lag accelerationen
+
+$$ a = \\frac{F}{m} = \\frac{U \\cdot Q}{d \\cdot m} \\qquad (2) $$
+
+Kornet startar mitt emellan plattorna och hinner sträckan $\\dfrac{d}{2}$ i sidled på tiden *t*:
+
+$$ \\frac{d}{2} = \\frac{a \\cdot t^2}{2} \\qquad (3) $$
+
+Vi dividerar (3) med (1). Då förkortas den okända tiden bort:
+
+$$ \\frac{\\dfrac{d}{2}}{h} = \\frac{\\dfrac{a \\cdot t^2}{2}}{\\dfrac{g \\cdot t^2}{2}} $$
+
+$$ \\frac{d}{2 \\cdot h} = \\frac{a}{g} $$
+
+Insättning av (2), $a = \\dfrac{U \\cdot Q}{d \\cdot m}$, ger
+
+$$ \\frac{d}{2 \\cdot h} = \\frac{U \\cdot Q}{d \\cdot m \\cdot g} $$
+
+Vi löser ut laddningen per massa:
+
+$$ \\frac{Q}{m} = \\frac{d^2 \\cdot g}{2 \\cdot h \\cdot U} $$
+
+$$
+\\left[ \\begin{array}{l}
+d = 0{,}40\\ \\mathrm{m} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+h = 1{,}2\\ \\mathrm{m} \\\\
+U = 60\\ \\mathrm{kV} = 60 \\cdot 10^3\\ \\mathrm{V}
+\\end{array} \\right]
+$$
+
+$$ \\frac{Q}{m} = \\frac{0{,}40^2 \\cdot 9{,}82}{2 \\cdot 1{,}2 \\cdot 60 \\cdot 10^3} \\approx 1{,}1 \\cdot 10^{-5}\\ \\mathrm{C/kg} = 11\\ \\mathrm{\\mu C/kg} $$
+
+**Svar:** $11\\ \\mathrm{\\mu C/kg}$
+
+**b)** Fallhöjden är densamma, så enligt (1), $h = \\dfrac{g \\cdot t^2}{2}$, är falltiden lika lång för båda kornen. Massan påverkar inte fallet.
+
+Sträckan i sidled är $s = \\dfrac{a \\cdot t^2}{2}$. Med samma tid är den proportionell mot accelerationen $a = \\dfrac{U \\cdot Q}{d \\cdot m}$, och därmed mot laddningen per massa. För det andra kornet är den
+
+$$ \\frac{\\dfrac{Q}{2}}{3 \\cdot m} = \\frac{1}{6} \\cdot \\frac{Q}{m} $$
+
+Sträckan i sidled blir alltså en sjättedel av det första kornets sträcka, som är $\\dfrac{d}{2} = 20\\ \\mathrm{cm}$. Det negativa kornet dras åt motsatt håll, mot den positiva plattan. Avståndet mellan banorna är därför summan av sträckorna:
+
+$$ 20 + \\frac{20}{6} \\approx 23\\ \\mathrm{cm} $$
+
+**Rimlighetsbedömning:** Det andra kornet hamnar bara några centimeter från mitten och når ingen platta. Avståndet ska därför vara lite större än $20\\ \\mathrm{cm}$, vilket stämmer.
+
+**Svar:** $23\\ \\mathrm{cm}$`,
+        },
+        {
+            level: 3,
+            question: `En liten laddad kula hänger i en isolerande tråd mellan två lodräta plattor. När spänningen mellan plattorna har ett visst värde hänger kulan i vila med tråden i vinkeln $\\alpha = 15^\\circ$ mot lodlinjen, se figuren. Spänningen höjs sedan till tre gånger så stort värde. Kulan har samma laddning och når inte fram till någon platta. Vilken vinkel bildar tråden med lodlinjen när kulan åter är i vila? Svara i grader.
+
+<svg viewBox="28 10 296 246" width="370" height="308" style="display:block;margin:16px auto;max-width:100%;height:auto" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg"><rect x="50" y="14" width="10" height="236" rx="2" fill="#c4c9cf" stroke="#8a9099" stroke-width="1.2"/><line x1="33" y1="33.7" x2="43" y2="33.7" stroke="#c0392b" stroke-width="2"/><line x1="38" y1="28.7" x2="38" y2="38.7" stroke="#c0392b" stroke-width="2"/><line x1="33" y1="73" x2="43" y2="73" stroke="#c0392b" stroke-width="2"/><line x1="38" y1="68" x2="38" y2="78" stroke="#c0392b" stroke-width="2"/><line x1="33" y1="112.3" x2="43" y2="112.3" stroke="#c0392b" stroke-width="2"/><line x1="38" y1="107.3" x2="38" y2="117.3" stroke="#c0392b" stroke-width="2"/><line x1="33" y1="151.7" x2="43" y2="151.7" stroke="#c0392b" stroke-width="2"/><line x1="38" y1="146.7" x2="38" y2="156.7" stroke="#c0392b" stroke-width="2"/><line x1="33" y1="191" x2="43" y2="191" stroke="#c0392b" stroke-width="2"/><line x1="38" y1="186" x2="38" y2="196" stroke="#c0392b" stroke-width="2"/><line x1="33" y1="230.3" x2="43" y2="230.3" stroke="#c0392b" stroke-width="2"/><line x1="38" y1="225.3" x2="38" y2="235.3" stroke="#c0392b" stroke-width="2"/><rect x="290" y="14" width="10" height="236" rx="2" fill="#c4c9cf" stroke="#8a9099" stroke-width="1.2"/><line x1="307" y1="33.7" x2="317" y2="33.7" stroke="#2563a8" stroke-width="2"/><line x1="307" y1="73" x2="317" y2="73" stroke="#2563a8" stroke-width="2"/><line x1="307" y1="112.3" x2="317" y2="112.3" stroke="#2563a8" stroke-width="2"/><line x1="307" y1="151.7" x2="317" y2="151.7" stroke="#2563a8" stroke-width="2"/><line x1="307" y1="191" x2="317" y2="191" stroke="#2563a8" stroke-width="2"/><line x1="307" y1="230.3" x2="317" y2="230.3" stroke="#2563a8" stroke-width="2"/><line x1="140" y1="34" x2="200" y2="34" stroke="#0f1620" stroke-width="2.4"/><line x1="144" y1="34" x2="151" y2="25" stroke="#0f1620" stroke-width="1.2"/><line x1="154" y1="34" x2="161" y2="25" stroke="#0f1620" stroke-width="1.2"/><line x1="164" y1="34" x2="171" y2="25" stroke="#0f1620" stroke-width="1.2"/><line x1="174" y1="34" x2="181" y2="25" stroke="#0f1620" stroke-width="1.2"/><line x1="184" y1="34" x2="191" y2="25" stroke="#0f1620" stroke-width="1.2"/><line x1="194" y1="34" x2="201" y2="25" stroke="#0f1620" stroke-width="1.2"/><line x1="170" y1="34" x2="170" y2="229" stroke="#0f1620" stroke-width="1.2" stroke-dasharray="4 4"/><line x1="170" y1="34" x2="211.4" y2="188.5" stroke="#0f1620" stroke-width="1.8"/><path d="M 170 104 A 70 70 0 0 0 188.12 101.61" fill="none" stroke="#0f1620" stroke-width="1.5"/><text x="182.5" y="133.2" text-anchor="middle" font-size="15" fill="#0f1620"><tspan font-style="italic">α</tspan></text><circle cx="214.0" cy="198.2" r="10" fill="#d9dde2" stroke="#0f1620" stroke-width="1.5"/></svg>`,
+            answer: { value: 39, unit: '°', tol: 0.02 },
+            solution: `Varken massa, laddning, spänning eller plattavstånd är givna, så vi ställer upp sambandet generellt. Låt den nya vinkeln vara *β*.
+
+På kulan verkar tre krafter: tyngdkraften $F_\\mathrm{G}$ nedåt, den elektriska kraften $F_\\mathrm{e}$ vågrätt (fältet är vinkelrätt mot plattorna) och spännkraften $F_\\mathrm{S}$ längs tråden.
+
+<svg viewBox="84 20 136 250" width="170" height="313" style="display:block;margin:16px auto;max-width:100%;height:auto" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg"><line x1="150" y1="150" x2="150" y2="26" stroke="#0f1620" stroke-width="1.2" stroke-dasharray="4 4"/><circle cx="150" cy="150" r="10" fill="#d9dde2" stroke="#0f1620" stroke-width="1.5"/><line x1="150" y1="150" x2="123.1" y2="49.7" stroke="#2d7d46" stroke-width="3" stroke-linecap="butt"/><polygon points="120.5,40.0 128.4,48.2 117.8,51.1" fill="#2d7d46"/><line x1="150" y1="150" x2="169.5" y2="150" stroke="#c0392b" stroke-width="3" stroke-linecap="butt"/><polygon points="179.5,150.0 169.5,155.5 169.5,144.5" fill="#c0392b"/><line x1="150" y1="150" x2="150" y2="250" stroke="#2563a8" stroke-width="3" stroke-linecap="butt"/><polygon points="150.0,260.0 144.5,250.0 155.5,250.0" fill="#2563a8"/><circle cx="150" cy="150" r="2.6" fill="#0f1620"/><path d="M 150 92 A 58 58 0 0 0 134.99 93.98" fill="none" stroke="#0f1620" stroke-width="1.4"/><text x="139.8" y="76.7" text-anchor="middle" font-size="15" fill="#0f1620"><tspan font-style="italic">α</tspan></text><text x="112.5" y="42.0" text-anchor="end" font-size="15" fill="#0f1620"><tspan font-style="italic">F</tspan><tspan dy="4" font-size="11">S</tspan></text><text x="186.4744111674235" y="155" text-anchor="start" font-size="15" fill="#0f1620"><tspan font-style="italic">F</tspan><tspan dy="4" font-size="11">e</tspan></text><text x="159" y="260" text-anchor="start" font-size="15" fill="#0f1620"><tspan font-style="italic">F</tspan><tspan dy="4" font-size="11">G</tspan></text></svg>
+
+**Kraftjämvikt.** Kulan är i vila, så krafterna tar ut varandra i varje led.
+
+Lodrätt: $F_\\mathrm{S} \\cdot \\cos \\alpha = F_\\mathrm{G} \\qquad (1)$
+
+Vågrätt: $F_\\mathrm{S} \\cdot \\sin \\alpha = F_\\mathrm{e} \\qquad (2)$
+
+Vi dividerar (2) med (1). Då förkortas $F_\\mathrm{S}$ bort:
+
+$$ \\frac{F_\\mathrm{S} \\cdot \\sin \\alpha}{F_\\mathrm{S} \\cdot \\cos \\alpha} = \\frac{F_\\mathrm{e}}{F_\\mathrm{G}} $$
+
+$$ \\tan \\alpha = \\frac{F_\\mathrm{e}}{F_\\mathrm{G}} $$
+
+**Den elektriska kraften.** Mellan plattorna gäller $F_\\mathrm{e} = \\mathbb{E} \\cdot Q = \\dfrac{U}{d} \\cdot Q$, och $F_\\mathrm{G} = m \\cdot g$. Insättning ger
+
+$$ \\tan \\alpha = \\frac{U \\cdot Q}{d \\cdot m \\cdot g} $$
+
+Allt utom *U* är oförändrat när spänningen höjs. Det betyder att **tangens för vinkeln**, och inte vinkeln själv, är proportionell mot spänningen. Tre gånger så stor spänning ger alltså
+
+$$ \\tan \\beta = 3 \\cdot \\tan \\alpha $$
+
+$$ \\tan \\beta = 3 \\cdot \\tan 15^\\circ $$
+
+$$ \\beta = \\tan^{-1}(3 \\cdot \\tan 15^\\circ) \\approx 39^\\circ $$
+
+**Rimlighetsbedömning:** Vinkeln blir mindre än $3 \\cdot 15^\\circ = 45^\\circ$. Det är rimligt, eftersom tråden aldrig kan bli helt vågrät hur stor spänningen än är.
+
+**Svar:** $39^\\circ$`,
+        },
+        {
+            level: 3,
+            question: `En mycket liten laddad oljedroppe faller i luften mellan två vågräta plattor. När plattorna är oladdade faller droppen med konstant hastighet. När spänningen mellan plattorna är $480\\ \\mathrm{V}$ stiger samma droppe i stället med konstant hastighet, och farten är då en tredjedel av farten vid fallet. För så små droppar är luftmotståndet proportionellt mot farten. Vilken spänning behövs för att droppen ska sväva stilla? Svara i V.`,
+            answer: { value: 360, unit: 'V' },
+            solution: `Massan, laddningen och plattavståndet är okända. Vi betecknar dem *m*, *Q* och *d* och ställer upp kraftjämvikten i varje situation. Låt fallfarten vara *v* och skriv luftmotståndet som $F_{\\text{luft}} = k \\cdot v$, där *k* är en konstant. Vid konstant hastighet är den resulterande kraften noll.
+
+**Fall utan spänning.** Luftmotståndet är riktat uppåt, mot rörelsen:
+
+$$ k \\cdot v = m \\cdot g \\qquad (1) $$
+
+**Stigning vid $480\\ \\mathrm{V}$.** Nu rör sig droppen uppåt, så luftmotståndet är riktat nedåt, åt samma håll som tyngdkraften. Den elektriska kraften $F_\\mathrm{e} = \\mathbb{E} \\cdot Q = \\dfrac{U_1}{d} \\cdot Q$ är riktad uppåt. Farten är $\\dfrac{v}{3}$, så jämvikten ger
+
+$$ \\frac{U_1 \\cdot Q}{d} = m \\cdot g + k \\cdot \\frac{v}{3} $$
+
+Insättning av (1), $k \\cdot v = m \\cdot g$, ger
+
+$$ \\frac{U_1 \\cdot Q}{d} = m \\cdot g + \\frac{m \\cdot g}{3} = \\frac{4}{3} \\cdot m \\cdot g \\qquad (2) $$
+
+**Svävande droppe.** Droppen är stilla, så det finns inget luftmotstånd. Låt spänningen vara $U_2$:
+
+$$ \\frac{U_2 \\cdot Q}{d} = m \\cdot g \\qquad (3) $$
+
+Vi dividerar (3) med (2). Då förkortas *Q*, *d*, *m* och *g* bort:
+
+$$ \\frac{U_2}{U_1} = \\frac{m \\cdot g}{\\dfrac{4}{3} \\cdot m \\cdot g} = \\frac{3}{4} $$
+
+$$ U_2 = \\frac{3}{4} \\cdot U_1 = \\frac{3}{4} \\cdot 480 = 360\\ \\mathrm{V} $$
+
+**Rimlighetsbedömning:** Svaret ska vara mindre än $480\\ \\mathrm{V}$, eftersom droppen stiger vid den spänningen. Det stämmer.
+
+**Svar:** $360\\ \\mathrm{V}$`,
+        },
+        {
+            level: 3,
+            question: `Positiva joner med laddningen $1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$ släpps från vila vid den positiva av två parallella plattor i vakuum. Jonerna har alla samma massa. Farten mäts när de når fram till den negativa plattan. Mätningen görs för olika spänningar:
+
+| *U* (V) | *v* ($10^4\\ \\mathrm{m/s}$) |
+|:---:|:---:|
+| 50 | 2,05 |
+| 100 | 2,88 |
+| 150 | 3,56 |
+| 200 | 4,09 |
+| 250 | 4,59 |
+
+Jonerna är antingen litium (massa $1{,}15 \\cdot 10^{-26}\\ \\mathrm{kg}$), natrium (massa $3{,}82 \\cdot 10^{-26}\\ \\mathrm{kg}$) eller kalium (massa $6{,}49 \\cdot 10^{-26}\\ \\mathrm{kg}$). Avgör vilket ämne det är genom att använda **alla** mätvärden, och utred om man måste känna till plattavståndet. Ange jonens massa enligt mätningen, i kg, som ditt numeriska svar.`,
+            answer: { value: 3.8e-26, unit: 'kg', tol: 0.03 },
+            solution: `**Teoretiskt samband.** Låt plattavståndet vara *d*. Kraften på en jon är $F = \\mathbb{E} \\cdot Q = \\dfrac{U}{d} \\cdot Q$, och den verkar hela sträckan *d*. Arbetet som fältet uträttar blir
+
+$$ W = F \\cdot d = \\frac{U}{d} \\cdot Q \\cdot d = U \\cdot Q $$
+
+Plattavståndet förkortas bort. Ett större avstånd ger en svagare kraft men en lika många gånger längre sträcka. Plattavståndet behöver alltså inte vara känt.
+
+Jonen startar från vila, så hela arbetet blir rörelseenergi:
+
+$$ \\frac{m \\cdot v^2}{2} = U \\cdot Q $$
+
+$$ v^2 = \\frac{2 \\cdot Q}{m} \\cdot U \\qquad (1) $$
+
+Enligt (1) är $v^2$ proportionell mot *U*, med proportionalitetskonstanten $\\dfrac{2 \\cdot Q}{m}$. Ett diagram med $v^2$ mot *U* ska alltså ge en rät linje genom origo, och i dess lutning finns massan.
+
+**Bearbetning av mätvärdena.** Vi kvadrerar farterna:
+
+| *U* (V) | $v^2$ ($10^8\\ \\mathrm{m^2/s^2}$) |
+|:---:|:---:|
+| 50 | 4,20 |
+| 100 | 8,29 |
+| 150 | 12,7 |
+| 200 | 16,7 |
+| 250 | 21,1 |
+
+${makeDiagram({
+    xMin: 0, xMax: 275, yMin: 0, yMax: 25,
+    xTicks: [0, 50, 100, 150, 200, 250], yTicks: [0, 5, 10, 15, 20],
+    xLabel: '<tspan font-style="italic">U</tspan> (V)',
+    yLabel: '<tspan font-style="italic">v</tspan>² (10<tspan dy="-5" font-size="10">8</tspan><tspan dy="5"> m²/s²)</tspan>',
+    paths: [
+        { points: [[0, 0], [270, 22.68]], color: '#2563a8', width: 2 },
+        ...[[50, 4.2025], [100, 8.2944], [150, 12.6736], [200, 16.7281], [250, 21.0681]].flatMap(([x, y]) => [
+            { points: [[x - 3, y - 0.36], [x + 3, y + 0.36]], color: '#c8324a', width: 2.4 },
+            { points: [[x - 3, y + 0.36], [x + 3, y - 0.36]], color: '#c8324a', width: 2.4 },
+        ]),
+    ],
+})}
+
+Punkterna ligger mycket nära en rät linje genom origo, så modellen stämmer. Linjen går genom punkten där $U = 250\\ \\mathrm{V}$ och $v^2 = 21{,}0 \\cdot 10^8\\ \\mathrm{m^2/s^2}$. Lutningen blir
+
+$$ k = \\frac{21{,}0 \\cdot 10^8}{250} = 8{,}4 \\cdot 10^6\\ \\mathrm{m^2/(s^2 \\cdot V)} $$
+
+**Massan.** Enligt (1), $v^2 = \\dfrac{2 \\cdot Q}{m} \\cdot U$, är $k = \\dfrac{2 \\cdot Q}{m}$. Vi löser ut massan:
+
+$$ m = \\frac{2 \\cdot Q}{k} = \\frac{2 \\cdot 1{,}602 \\cdot 10^{-19}}{8{,}4 \\cdot 10^6} \\approx 3{,}8 \\cdot 10^{-26}\\ \\mathrm{kg} $$
+
+Värdet stämmer med natrium ($3{,}82 \\cdot 10^{-26}\\ \\mathrm{kg}$) och ligger långt från de två andra ämnena.
+
+**Svar:** Jonens massa är $3{,}8 \\cdot 10^{-26}\\ \\mathrm{kg}$, så ämnet är natrium. Plattavståndet behöver inte vara känt.`,
+        },
+        {
+            level: 3,
+            question: `En elektron skjuts in i ett homogent fält genom ett litet hål i den positiva plattan, rakt mot den negativa plattan. Den vänder när den har kommit $\\dfrac{2}{5}$ av plattavståndet och lämnar sedan fältet genom hålet igen. Bortse från tyngdkraften.<br>a) Hur många gånger så stor fart behöver elektronen minst ha för att nå fram till den negativa plattan, om inget annat ändras? Svara med tre värdesiffror.<br>b) Elektronen skjuts in med den ursprungliga farten, men plattorna har flyttats isär till dubbla avståndet med oförändrad spänning. Utred hur stor andel av plattavståndet den nu når, och hur många gånger så lång tid den är i fältet. Ange tidsfaktorn som ditt numeriska svar.`,
+            answer: { value: 1.58, unit: 'gånger' },
+            delsvar: [
+                { del: 'a', value: 1.58, unit: 'gånger' },
+                { del: 'b', value: 2, unit: 'gånger', etikett: 'tidsfaktor' },
+            ],
+            solution: `Inga värden är givna, så vi räknar generellt. Låt spänningen vara *U*, plattavståndet *d*, elektronens fart i hålet *v* och sträckan till vändpunkten *s*.
+
+Fältet är riktat från den positiva plattan till den negativa. Elektronen är negativ, så kraften på den är riktad tillbaka mot hålet och bromsar den. Kraften är konstant:
+
+$$ F = \\mathbb{E} \\cdot q_\\mathrm{e} = \\frac{U \\cdot q_\\mathrm{e}}{d} $$
+
+I vändpunkten är farten noll. All rörelseenergi har då gått åt till arbete mot den elektriska kraften:
+
+$$ \\frac{m_\\mathrm{e} \\cdot v^2}{2} = F \\cdot s = \\frac{U \\cdot q_\\mathrm{e}}{d} \\cdot s $$
+
+Vi löser ut andelen $\\dfrac{s}{d}$:
+
+$$ \\frac{s}{d} = \\frac{m_\\mathrm{e} \\cdot v^2}{2 \\cdot U \\cdot q_\\mathrm{e}} \\qquad (1) $$
+
+**a)** När *U* är oförändrad är andelen enligt (1), $\\dfrac{s}{d} = \\dfrac{m_\\mathrm{e} \\cdot v^2}{2 \\cdot U \\cdot q_\\mathrm{e}}$, proportionell mot $v^2$. Andelen ska öka från $\\dfrac{2}{5}$ till minst 1. Om farten då är $x \\cdot v$ gäller
+
+$$ x^2 \\cdot \\frac{2}{5} = 1 $$
+
+$$ x^2 = \\frac{5}{2} $$
+
+$$ x = \\sqrt{\\frac{5}{2}} \\approx 1{,}58 $$
+
+Eftersom rörelseenergin beror på kvadraten på farten behöver farten inte bli $\\dfrac{5}{2}$ gånger så stor, trots att sträckan blir det.
+
+**Svar:** Minst 1,58 gånger så stor fart
+
+**b)** I uttrycket (1), $\\dfrac{s}{d} = \\dfrac{m_\\mathrm{e} \\cdot v^2}{2 \\cdot U \\cdot q_\\mathrm{e}}$, finns inget plattavstånd i högerledet. Farten och spänningen är oförändrade, så andelen är fortfarande $\\dfrac{2}{5}$. Elektronen når alltså dubbelt så långt räknat i meter.
+
+Accelerationens storlek fås med Newtons andra lag:
+
+$$ a = \\frac{F}{m_\\mathrm{e}} = \\frac{U \\cdot q_\\mathrm{e}}{d \\cdot m_\\mathrm{e}} $$
+
+Dubbelt så stort *d* halverar accelerationen. Tiden till vändpunkten är den tid det tar för farten att minska från *v* till noll:
+
+$$ t = \\frac{v}{a} $$
+
+Farten *v* är oförändrad och *a* halveras, så *t* fördubblas. Återvägen har samma acceleration och samma sträcka och tar därför lika lång tid som framvägen. Hela tiden i fältet fördubblas.
+
+**Svar:** Elektronen når fortfarande $\\dfrac{2}{5}$ av plattavståndet, och tiden i fältet blir 2 gånger så lång.`,
+        },
+        {
+            level: 3,
+            question: `En liten boll med ledande yta och massan $0{,}15\\ \\mathrm{g}$ hänger i en flera meter lång isolerande tråd mellan två lodräta plattor, se figuren. Spänningen mellan plattorna är $5{,}0\\ \\mathrm{kV}$. Varje gång bollen träffar en platta stannar den, får laddningen $3{,}0\\ \\mathrm{nC}$ med samma tecken som plattan och drivs sedan över till den andra plattan. Tråden är så lång att den knappt påverkar rörelsen i sidled, och bollens storlek kan försummas.<br>a) Bestäm den genomsnittliga strömmen mellan plattorna. Svara i nA.<br>b) Laddningen som bollen får är proportionell mot spänningen. Hur många gånger så stor blir strömmen om spänningen fördubblas?
+
+<svg viewBox="28 10 296 248" width="370" height="310" style="display:block;margin:16px auto;max-width:100%;height:auto" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg"><rect x="50" y="40" width="10" height="180" rx="2" fill="#c4c9cf" stroke="#8a9099" stroke-width="1.2"/><line x1="33" y1="55" x2="43" y2="55" stroke="#c0392b" stroke-width="2"/><line x1="38" y1="50" x2="38" y2="60" stroke="#c0392b" stroke-width="2"/><line x1="33" y1="85" x2="43" y2="85" stroke="#c0392b" stroke-width="2"/><line x1="38" y1="80" x2="38" y2="90" stroke="#c0392b" stroke-width="2"/><line x1="33" y1="115" x2="43" y2="115" stroke="#c0392b" stroke-width="2"/><line x1="38" y1="110" x2="38" y2="120" stroke="#c0392b" stroke-width="2"/><line x1="33" y1="145" x2="43" y2="145" stroke="#c0392b" stroke-width="2"/><line x1="38" y1="140" x2="38" y2="150" stroke="#c0392b" stroke-width="2"/><line x1="33" y1="175" x2="43" y2="175" stroke="#c0392b" stroke-width="2"/><line x1="38" y1="170" x2="38" y2="180" stroke="#c0392b" stroke-width="2"/><line x1="33" y1="205" x2="43" y2="205" stroke="#c0392b" stroke-width="2"/><line x1="38" y1="200" x2="38" y2="210" stroke="#c0392b" stroke-width="2"/><rect x="290" y="40" width="10" height="180" rx="2" fill="#c4c9cf" stroke="#8a9099" stroke-width="1.2"/><line x1="307" y1="55" x2="317" y2="55" stroke="#2563a8" stroke-width="2"/><line x1="307" y1="85" x2="317" y2="85" stroke="#2563a8" stroke-width="2"/><line x1="307" y1="115" x2="317" y2="115" stroke="#2563a8" stroke-width="2"/><line x1="307" y1="145" x2="317" y2="145" stroke="#2563a8" stroke-width="2"/><line x1="307" y1="175" x2="317" y2="175" stroke="#2563a8" stroke-width="2"/><line x1="307" y1="205" x2="317" y2="205" stroke="#2563a8" stroke-width="2"/><line x1="175" y1="14" x2="175" y2="34" stroke="#0f1620" stroke-width="1.6" stroke-dasharray="3 3"/><line x1="175" y1="34" x2="175" y2="121" stroke="#0f1620" stroke-width="1.6"/><circle cx="175" cy="130" r="9" fill="#d9dde2" stroke="#0f1620" stroke-width="1.5"/><ellipse cx="172" cy="126.5" rx="2.6" ry="1.8" fill="#f6f7f8"/><line x1="60" y1="222" x2="60" y2="254" stroke="#0f1620" stroke-width="1" stroke-dasharray="4 4"/><line x1="290" y1="222" x2="290" y2="254" stroke="#0f1620" stroke-width="1" stroke-dasharray="4 4"/><line x1="175" y1="246" x2="68" y2="246" stroke="#0f1620" stroke-width="1.4" stroke-linecap="butt"/><polygon points="60.0,246.0 68.0,241.6 68.0,250.4" fill="#0f1620"/><line x1="175" y1="246" x2="282" y2="246" stroke="#0f1620" stroke-width="1.4" stroke-linecap="butt"/><polygon points="290.0,246.0 282.0,250.4 282.0,241.6" fill="#0f1620"/><text x="175" y="240" text-anchor="middle" font-size="15" fill="#0f1620">6,0 cm</text></svg>`,
+            answer: { value: 11, unit: 'nA', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 11, unit: 'nA', tol: 0.03 },
+                { del: 'b', value: 4, unit: 'gånger' },
+            ],
+            solution: `Strömmen är laddningen som transporteras per tid, $I = \\dfrac{Q}{t}$. Vid varje färd för bollen laddningen *Q* från den ena plattan till den andra. På tillbakavägen är laddningen negativ och går åt motsatt håll, vilket är en ström åt samma håll som förut. Strömmen blir därför *Q* dividerad med tiden *t* för **en** färd, och det gäller åt båda hållen.
+
+**a)** Vi bestämmer först ett uttryck för tiden. I det homogena fältet är kraften på bollen konstant:
+
+$$ F = \\mathbb{E} \\cdot Q = \\frac{U \\cdot Q}{d} $$
+
+Newtons andra lag ger en konstant acceleration:
+
+$$ a = \\frac{F}{m} = \\frac{U \\cdot Q}{d \\cdot m} \\qquad (1) $$
+
+Bollen startar från vila och rör sig sträckan *d*, så $d = \\dfrac{a \\cdot t^2}{2}$. Vi löser ut tiden:
+
+$$ t = \\sqrt{\\frac{2 \\cdot d}{a}} $$
+
+Insättning av (1), $a = \\dfrac{U \\cdot Q}{d \\cdot m}$, ger
+
+$$ t = \\sqrt{\\frac{2 \\cdot d^2 \\cdot m}{U \\cdot Q}} = d \\cdot \\sqrt{\\frac{2 \\cdot m}{U \\cdot Q}} \\qquad (2) $$
+
+Insättning av (2) i $I = \\dfrac{Q}{t}$ ger
+
+$$ I = \\frac{Q}{d} \\cdot \\sqrt{\\frac{U \\cdot Q}{2 \\cdot m}} \\qquad (3) $$
+
+$$
+\\left[ \\begin{array}{l}
+Q = 3{,}0\\ \\mathrm{nC} = 3{,}0 \\cdot 10^{-9}\\ \\mathrm{C} \\\\
+d = 6{,}0\\ \\mathrm{cm} = 0{,}060\\ \\mathrm{m} \\\\
+U = 5{,}0\\ \\mathrm{kV} = 5\\,000\\ \\mathrm{V} \\\\
+m = 0{,}15\\ \\mathrm{g} = 1{,}5 \\cdot 10^{-4}\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$ I = \\frac{3{,}0 \\cdot 10^{-9}}{0{,}060} \\cdot \\sqrt{\\frac{5\\,000 \\cdot 3{,}0 \\cdot 10^{-9}}{2 \\cdot 1{,}5 \\cdot 10^{-4}}} \\approx 1{,}1 \\cdot 10^{-8}\\ \\mathrm{A} = 11\\ \\mathrm{nA} $$
+
+**Rimlighetsbedömning:** Tiden för en färd blir ungefär $0{,}3\\ \\mathrm{s}$, och på den tiden transporteras $3\\ \\mathrm{nC}$. Det är ungefär $10\\ \\mathrm{nC}$ per sekund, vilket stämmer med svaret.
+
+**Svar:** $11\\ \\mathrm{nA}$
+
+**b)** När spänningen fördubblas blir den $2U$ och laddningen blir $2Q$. Insättning i (3), $I = \\dfrac{Q}{d} \\cdot \\sqrt{\\dfrac{U \\cdot Q}{2 \\cdot m}}$, ger
+
+$$ I_{\\text{ny}} = \\frac{2Q}{d} \\cdot \\sqrt{\\frac{2U \\cdot 2Q}{2 \\cdot m}} = 2 \\cdot \\frac{Q}{d} \\cdot \\sqrt{4} \\cdot \\sqrt{\\frac{U \\cdot Q}{2 \\cdot m}} = 4 \\cdot I $$
+
+Varje färd för dubbelt så mycket laddning, och färderna går dubbelt så fort.
+
+**Svar:** Strömmen blir 4 gånger så stor.`,
+        },
     ],
 
     'fy1-7.12': [
@@ -39133,7 +47151,7 @@ $$ y = \\frac{1}{2} a t^2 = \\frac{1}{2} \\cdot 7{,}03 \\cdot 10^{14} \\cdot (3{
             level: 1,
             question: `I en krets är potentialen i punkt A $V_A = +12\\ \\mathrm{V}$ och i punkt B $V_B = -4{,}0\\ \\mathrm{V}$. Hur stor är spänningen mellan punkterna A och B?`,
             answer: { value: 16, unit: 'V' },
-            solution: `Spänning är skillnaden i potential mellan två punkter, och kan aldrig vara negativ — därför absolutbeloppet:
+            solution: `Spänning är skillnaden i potential mellan två punkter, och kan aldrig vara negativ. Därför används absolutbeloppet:
 
 $$ U = |V_A - V_B| $$
 
@@ -39151,7 +47169,7 @@ $$ U = |+12 - (-4{,}0)| = |16| = 16\\ \\mathrm{V} $$
 
 **Svar:** Spänningen mellan A och B är $16\\ \\mathrm{V}$.
 
-**Generell slutsats:** Var noga med dubbla tecknet: $12 - (-4{,}0) = 12 + 4{,}0 = 16$. Spänning är *skillnaden* i potential — två punkter kan ha helt olika potential men ändå ha en blygsam spänning emellan sig om de ligger nära varandra på "potentialskalan".`,
+**Generell slutsats:** Var noga med dubbla tecknet: $12 - (-4{,}0) = 12 + 4{,}0 = 16$. Spänning är *skillnaden* i potential. Två punkter kan ha helt olika potential men ändå ha en blygsam spänning emellan sig om de ligger nära varandra på "potentialskalan".`,
         },
         {
             level: 1,
@@ -39163,7 +47181,7 @@ $$ U = |+12 - (-4{,}0)| = |16| = 16\\ \\mathrm{V} $$
                 `Elektrisk potential och spänning är exakt samma storhet.`,
             ],
             correct: 0,
-            solution: `Strömmen går från **högre** till **lägre** potential — precis som vatten rinner från högre till lägre höjd. Potentialen är som en "elektrisk höjd".
+            solution: `Strömmen går från **högre** till **lägre** potential, precis som vatten rinner från högre till lägre höjd. Potentialen är som en "elektrisk höjd".
 
 Övriga alternativ är fel: en jordad punkt har potentialen **0 V** (inte 230 V), och potential har tecken (positiv/negativ/noll) medan spänning är den icke-negativa *skillnaden* mellan två potentialer.
 
@@ -39181,12 +47199,12 @@ $$ V_+ = 0 + U = 0 + 9{,}0 = +9{,}0\\ \\mathrm{V} $$
 
 **Svar:** Pluspolen har potentialen $+9{,}0\\ \\mathrm{V}$.
 
-**Generell slutsats:** Att gå från minus till plus *inuti* batteriet höjer potentialen — det är batteriet som "pumpar upp" laddningarna till högre elektrisk potential.`,
+**Generell slutsats:** Att gå från minus till plus *inuti* batteriet höjer potentialen. Det är batteriet som "pumpar upp" laddningarna till högre elektrisk potential.`,
         },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
-            level: 2,
+            level: 1,
             question: `I en krets är punkt B jordad, så att $V_B = 0$. Punkt A ligger på andra sidan av en $3{,}0\\ \\mathrm{\\Omega}$-resistor som genomflyts av strömmen $4{,}0\\ \\mathrm{A}$. När man potentialvandrar från B till A går man **mot** strömmens riktning. Bestäm potentialen $V_A$.`,
             answer: { value: 12, unit: 'V' },
             solution: `Vi startar i den jordade punkten B ($V_B = 0$) och går till A. Att gå genom en resistor **mot** strömmen *ökar* potentialen med resistorns spänning $R \\cdot I$ (Ohms lag):
@@ -39250,10 +47268,10 @@ $$ U = |V_A - V_C| = |+10 - (-20)| = |30| = 30\\ \\mathrm{V} $$
 
 **Svar:** Spänningen mellan A och C är $30\\ \\mathrm{V}$.
 
-**Generell slutsats:** Trots att ingen *enskild* komponent har $30\\ \\mathrm{V}$ över sig, är spänningen mellan A och C ändå $30\\ \\mathrm{V}$ — de ligger på var sin sida om jordningen, en på $+10\\ \\mathrm{V}$ och en på $-20\\ \\mathrm{V}$. Det är skillnaden i potential som räknas, inte värdet hos någon enskild komponent.`,
+**Generell slutsats:** Trots att ingen *enskild* komponent har $30\\ \\mathrm{V}$ över sig, är spänningen mellan A och C ändå $30\\ \\mathrm{V}$: de ligger på var sin sida om jordningen, en på $+10\\ \\mathrm{V}$ och en på $-20\\ \\mathrm{V}$. Det är skillnaden i potential som räknas, inte värdet hos någon enskild komponent.`,
         },
         {
-            level: 3,
+            level: 2,
             question: `I kretsen nedan är den högra noden jordad ($0\\ \\mathrm{V}$). Bestäm spänningen mellan punkterna P och Q. Tips: bestäm först potentialen i P respektive Q genom att potentialvandra från jordningen.
 
 ${makeBridge({
@@ -39280,7 +47298,627 @@ $$ U_{PQ} = |V_P - V_Q| = |16 - 8{,}0| = 8{,}0\\ \\mathrm{V} $$
 
 **Svar:** Spänningen mellan P och Q är $8{,}0\\ \\mathrm{V}$ (P ligger på högre potential än Q).
 
-**Generell slutsats:** I en bryggkoppling har P och Q olika potential trots att grenarna ligger över *samma* spänning — det är skillnaden i hur spänningen *delas* i de två grenarna som ger spänningen mellan mittpunkterna. Potentialvandring från jordningen håller reda på tecknen.`,
+**Generell slutsats:** I en bryggkoppling har P och Q olika potential trots att grenarna ligger över *samma* spänning. Det är skillnaden i hur spänningen *delas* i de två grenarna som ger spänningen mellan mittpunkterna. Potentialvandring från jordningen håller reda på tecknen.`,
+        },
+        {
+            level: 1,
+            question: `En lampa är kopplad till ett batteri med spänningen $4{,}5\\ \\mathrm{V}$. Punkten P är jordad, se figuren. Vilken potential har punkten Q?
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 225" style="max-width:300px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="50" y1="50" x2="250" y2="50" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="250" y1="50" x2="250" y2="160" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="250" y1="160" x2="50" y2="160" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="50" y1="160" x2="50" y2="50" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><circle cx="150" cy="50" r="12" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><line x1="141.5" y1="41.5" x2="158.5" y2="58.5" stroke="#0f1620" stroke-width="1.8"/><line x1="141.5" y1="58.5" x2="158.5" y2="41.5" stroke="#0f1620" stroke-width="1.8"/><rect x="145" y="156" width="10" height="8" fill="#fff"/><line x1="145" y1="146" x2="145" y2="174" stroke="#0f1620" stroke-width="1.8"/><line x1="155" y1="152" x2="155" y2="168" stroke="#0f1620" stroke-width="3.4"/><text x="150" y="202" font-size="16" text-anchor="middle" fill="#0f1620">4,5 V</text><circle cx="100" cy="160" r="3" fill="#0f1620"/><text x="100" y="146" font-size="16" text-anchor="middle" fill="#0f1620">P</text><circle cx="200" cy="160" r="3" fill="#0f1620"/><text x="200" y="146" font-size="16" text-anchor="middle" fill="#0f1620">Q</text><line x1="100" y1="160" x2="100" y2="176" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="87" y1="176" x2="113" y2="176" stroke="#0f1620" stroke-width="1.8"/><line x1="91.5" y1="181" x2="108.5" y2="181" stroke="#0f1620" stroke-width="1.8"/><line x1="96" y1="186" x2="104" y2="186" stroke="#0f1620" stroke-width="1.8"/></svg>
+
+Ange svaret i volt med rätt tecken.`,
+            answer: { value: -4.5, unit: 'V' },
+            solution: `I batterisymbolen är det långa strecket pluspolen. Den jordade punkten P ligger alltså vid pluspolen och Q vid minuspolen.
+
+Vi startar i P, där potentialen är 0, och går genom batteriet **från pluspol till minuspol**. Då minskar potentialen med batteriets spänning:
+
+$$ V_\\mathrm{Q} = 0 - U = 0 - 4{,}5 = -4{,}5\\ \\mathrm{V} $$
+
+**Svar:** $V_\\mathrm{Q} = -4{,}5\\ \\mathrm{V}$`,
+        },
+        {
+            level: 1,
+            question: `Figuren visar en del av en krets. Punkten A är jordad, och strömmen $0{,}30\\ \\mathrm{A}$ går från A mot C.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 120" style="max-width:420px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="30" y1="60" x2="390" y2="60" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><rect x="100" y="52" width="40" height="16" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><rect x="280" y="52" width="40" height="16" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><text x="120" y="36" font-size="16" text-anchor="middle" fill="#0f1620">20 Ω</text><text x="300" y="36" font-size="16" text-anchor="middle" fill="#0f1620">50 Ω</text><circle cx="30" cy="60" r="3" fill="#0f1620"/><text x="30" y="42" font-size="16" text-anchor="middle" fill="#0f1620">A</text><circle cx="210" cy="60" r="3" fill="#0f1620"/><text x="210" y="42" font-size="16" text-anchor="middle" fill="#0f1620">B</text><circle cx="390" cy="60" r="3" fill="#0f1620"/><text x="390" y="42" font-size="16" text-anchor="middle" fill="#0f1620">C</text><line x1="30" y1="60" x2="30" y2="76" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="17" y1="76" x2="43" y2="76" stroke="#0f1620" stroke-width="1.8"/><line x1="21.5" y1="81" x2="38.5" y2="81" stroke="#0f1620" stroke-width="1.8"/><line x1="26" y1="86" x2="34" y2="86" stroke="#0f1620" stroke-width="1.8"/><polygon points="258,60 247,55 247,65" fill="#c8324a"/><text x="252" y="90" font-size="16" text-anchor="middle" fill="#c8324a"><tspan font-style="italic">I</tspan> = 0,30 A</text></svg>
+
+Bestäm potentialen i<br>a)&nbsp;punkten B&emsp;&emsp;b)&nbsp;punkten C.`,
+            answer: { value: -21, unit: 'V' },
+            delsvar: [
+                { del: 'a', value: -6.0, unit: 'V', etikett: '$V_\\mathrm{B} =$' },
+                { del: 'b', value: -21, unit: 'V', etikett: '$V_\\mathrm{C} =$' },
+            ],
+            solution: `**a)** Vi startar i den jordade punkten A, där potentialen är 0, och går **med** strömmen genom resistorn på $20\\ \\mathrm{\\Omega}$. Då minskar potentialen med $R \\cdot I$:
+
+$$ V_\\mathrm{B} = 0 - 20 \\cdot 0{,}30 = -6{,}0\\ \\mathrm{V} $$
+
+**Svar:** $V_\\mathrm{B} = -6{,}0\\ \\mathrm{V}$
+
+**b)** Vi fortsätter från B, fortfarande med strömmen, genom resistorn på $50\\ \\mathrm{\\Omega}$:
+
+$$ V_\\mathrm{C} = -6{,}0 - 50 \\cdot 0{,}30 = -6{,}0 - 15 = -21\\ \\mathrm{V} $$
+
+Strömmen går från högre till lägre potential, så det är rimligt att $V_\\mathrm{C}$ är lägre än $V_\\mathrm{B}$.
+
+**Svar:** $V_\\mathrm{C} = -21\\ \\mathrm{V}$`,
+        },
+        {
+            level: 1,
+            question: `I en förstärkare har punkten P potentialen $-9{,}0\\ \\mathrm{V}$ och punkten Q potentialen $-3{,}0\\ \\mathrm{V}$. En resistor kopplas mellan P och Q. Antag att potentialerna inte ändras. Vilket påstående är korrekt?`,
+            choices: [
+                'Spänningen är 12 V och strömmen går från P till Q.',
+                'Spänningen är 6,0 V och strömmen går från P till Q.',
+                'Spänningen är 12 V och strömmen går från Q till P.',
+                'Spänningen är 6,0 V och strömmen går från Q till P.',
+            ],
+            correct: 3,
+            solution: `Spänningen är beloppet av skillnaden i potential:
+
+$$ U = |V_\\mathrm{P} - V_\\mathrm{Q}| = |-9{,}0 - (-3{,}0)| = |-6{,}0| = 6{,}0\\ \\mathrm{V} $$
+
+Strömmen går från högre till lägre potential. Eftersom $-3{,}0 > -9{,}0$ har Q högst potential, och strömmen går från Q till P.
+
+**Svar:** Spänningen är 6,0 V och strömmen går från Q till P.`,
+        },
+        {
+            level: 1,
+            question: `Tre lampor är seriekopplade till ett batteri med spänningen $9{,}0\\ \\mathrm{V}$. Spänningen över $\\mathrm{L_1}$ är $2{,}6\\ \\mathrm{V}$ och spänningen över $\\mathrm{L_2}$ är $3{,}7\\ \\mathrm{V}$.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 210" style="max-width:360px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="40" y1="50" x2="320" y2="50" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="320" y1="50" x2="320" y2="150" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="320" y1="150" x2="40" y2="150" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="40" y1="150" x2="40" y2="50" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><circle cx="104" cy="50" r="12" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><line x1="95.5" y1="41.5" x2="112.5" y2="58.5" stroke="#0f1620" stroke-width="1.8"/><line x1="95.5" y1="58.5" x2="112.5" y2="41.5" stroke="#0f1620" stroke-width="1.8"/><text x="104" y="28" font-size="16" text-anchor="middle" fill="#0f1620">L₁</text><circle cx="180" cy="50" r="12" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><line x1="171.5" y1="41.5" x2="188.5" y2="58.5" stroke="#0f1620" stroke-width="1.8"/><line x1="171.5" y1="58.5" x2="188.5" y2="41.5" stroke="#0f1620" stroke-width="1.8"/><text x="180" y="28" font-size="16" text-anchor="middle" fill="#0f1620">L₂</text><circle cx="256" cy="50" r="12" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><line x1="247.5" y1="41.5" x2="264.5" y2="58.5" stroke="#0f1620" stroke-width="1.8"/><line x1="247.5" y1="58.5" x2="264.5" y2="41.5" stroke="#0f1620" stroke-width="1.8"/><text x="256" y="28" font-size="16" text-anchor="middle" fill="#0f1620">L₃</text><rect x="175" y="146" width="10" height="8" fill="#fff"/><line x1="175" y1="136" x2="175" y2="164" stroke="#0f1620" stroke-width="1.8"/><line x1="185" y1="142" x2="185" y2="158" stroke="#0f1620" stroke-width="3.4"/><text x="180" y="190" font-size="16" text-anchor="middle" fill="#0f1620">9,0 V</text></svg>
+
+Använd Kirchhoffs andra lag för att bestämma spänningen över $\\mathrm{L_3}$.`,
+            answer: { value: 2.7, unit: 'V' },
+            solution: `Vi kallar den sökta spänningen $U_3$. Enligt Kirchhoffs andra lag är summan av alla potentialändringar ett helt varv i kretsen noll:
+
+$$ \\sum \\Delta V = 0 $$
+
+Vi går i strömmens riktning. Genom batteriet ökar potentialen, och genom varje lampa minskar den:
+
+$$ 9{,}0 - 2{,}6 - 3{,}7 - U_3 = 0 $$
+
+$$ 2{,}7 - U_3 = 0 \\quad\\Leftrightarrow\\quad U_3 = 2{,}7\\ \\mathrm{V} $$
+
+**Svar:** $2{,}7\\ \\mathrm{V}$`,
+        },
+        {
+            level: 2,
+            question: `Punkterna A, B, C och D ligger i den ordningen i en sluten krets. Mellan A och B sitter ett batteri, mellan B och C en resistor, mellan C och D ytterligare ett batteri och mellan D och A en resistor. Diagrammet visar potentialen när man vandrar ett varv i strömmens riktning. Strömmen är $0{,}25\\ \\mathrm{A}$.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 285" style="max-width:540px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="60" y1="258" x2="500" y2="258" stroke="rgba(15,22,32,0.15)" stroke-width="1"/><text x="52" y="263" font-size="14" text-anchor="end" fill="#0f1620">−6</text><line x1="60" y1="232" x2="500" y2="232" stroke="rgba(15,22,32,0.15)" stroke-width="1"/><text x="52" y="237" font-size="14" text-anchor="end" fill="#0f1620">−4</text><line x1="60" y1="206" x2="500" y2="206" stroke="rgba(15,22,32,0.15)" stroke-width="1"/><text x="52" y="211" font-size="14" text-anchor="end" fill="#0f1620">−2</text><line x1="60" y1="180" x2="500" y2="180" stroke="rgba(15,22,32,0.15)" stroke-width="1"/><text x="52" y="185" font-size="14" text-anchor="end" fill="#0f1620">0</text><line x1="60" y1="154" x2="500" y2="154" stroke="rgba(15,22,32,0.15)" stroke-width="1"/><text x="52" y="159" font-size="14" text-anchor="end" fill="#0f1620">2</text><line x1="60" y1="128" x2="500" y2="128" stroke="rgba(15,22,32,0.15)" stroke-width="1"/><text x="52" y="133" font-size="14" text-anchor="end" fill="#0f1620">4</text><line x1="60" y1="102" x2="500" y2="102" stroke="rgba(15,22,32,0.15)" stroke-width="1"/><text x="52" y="107" font-size="14" text-anchor="end" fill="#0f1620">6</text><line x1="60" y1="76" x2="500" y2="76" stroke="rgba(15,22,32,0.15)" stroke-width="1"/><text x="52" y="81" font-size="14" text-anchor="end" fill="#0f1620">8</text><line x1="60" y1="50" x2="500" y2="50" stroke="rgba(15,22,32,0.15)" stroke-width="1"/><text x="52" y="55" font-size="14" text-anchor="end" fill="#0f1620">10</text><line x1="60" y1="258" x2="60" y2="36" stroke="#0f1620" stroke-width="2"/><polygon points="55.5,36 60,26 64.5,36" fill="#0f1620"/><line x1="60" y1="180" x2="512" y2="180" stroke="#0f1620" stroke-width="1.8"/><polygon points="512,175.5 522,180 512,184.5" fill="#0f1620"/><text x="72" y="34" font-size="16" text-anchor="start" fill="#0f1620"><tspan font-style="italic">V</tspan> (V)</text><polyline points="60,232 100,232 125,76 185,76 245,154 305,154 320,180 380,180 440,232 500,232" fill="none" stroke="#c8324a" stroke-width="2.6"/><circle cx="80" cy="232" r="3.5" fill="#c8324a"/><text x="80" y="223" font-size="16" text-anchor="middle" fill="#0f1620">A</text><circle cx="155" cy="76" r="3.5" fill="#c8324a"/><text x="155" y="67" font-size="16" text-anchor="middle" fill="#0f1620">B</text><circle cx="275" cy="154" r="3.5" fill="#c8324a"/><text x="275" y="145" font-size="16" text-anchor="middle" fill="#0f1620">C</text><circle cx="350" cy="180" r="3.5" fill="#c8324a"/><text x="350" y="171" font-size="16" text-anchor="middle" fill="#0f1620">D</text><circle cx="480" cy="232" r="3.5" fill="#c8324a"/><text x="480" y="223" font-size="16" text-anchor="middle" fill="#0f1620">A</text><text x="532" y="171" font-size="14" text-anchor="end" fill="#0f1620">läge</text></svg>
+
+a) Bestäm resistansen hos resistorn mellan B och C.<br>b) Bestäm resistansen hos resistorn mellan D och A.<br>c) Hjälper batteriet mellan C och D till att driva strömmen, eller motverkar det strömmen? Motivera och ange batteriets spänning.<br>d) Vilken av punkterna kan vara jordad?`,
+            answer: { value: 24, unit: 'Ω' },
+            delsvar: [
+                { del: 'a', value: 24, unit: 'Ω', etikett: '$R_\\mathrm{BC} =$' },
+                { del: 'b', value: 16, unit: 'Ω', etikett: '$R_\\mathrm{DA} =$' },
+                { del: 'c', value: 2, unit: 'V', etikett: 'batteriets spänning' },
+                { del: 'd' },
+            ],
+            solution: `Ur diagrammet avläser vi $V_\\mathrm{A} = -4\\ \\mathrm{V}$, $V_\\mathrm{B} = 8\\ \\mathrm{V}$, $V_\\mathrm{C} = 2\\ \\mathrm{V}$ och $V_\\mathrm{D} = 0$.
+
+**a)** Spänningen över resistorn är
+
+$$ U = |V_\\mathrm{B} - V_\\mathrm{C}| = |8 - 2| = 6\\ \\mathrm{V} $$
+
+Ohms lag ger
+
+$$ R = \\frac{U}{I} = \\frac{6}{0{,}25} = 24\\ \\mathrm{\\Omega} $$
+
+**Svar:** $24\\ \\mathrm{\\Omega}$
+
+**b)** På samma sätt får vi
+
+$$ U = |V_\\mathrm{D} - V_\\mathrm{A}| = |0 - (-4)| = 4\\ \\mathrm{V} $$
+
+$$ R = \\frac{U}{I} = \\frac{4}{0{,}25} = 16\\ \\mathrm{\\Omega} $$
+
+**Svar:** $16\\ \\mathrm{\\Omega}$
+
+**c)** När vi går med strömmen från C till D minskar potentialen från $2\\ \\mathrm{V}$ till $0$. Vi går alltså genom batteriet från pluspol till minuspol. Ett batteri som driver strömmen ska i stället höja potentialen i strömmens riktning, som batteriet mellan A och B gör. Batteriet mellan C och D motverkar därför strömmen. Spänningen är $|2 - 0| = 2\\ \\mathrm{V}$.
+
+**Svar:** Batteriet motverkar strömmen och har spänningen $2\\ \\mathrm{V}$.
+
+**d)** En jordad punkt har potentialen 0. Av de fyra punkterna är det bara D som har den potentialen.
+
+**Svar:** Punkten D.`,
+        },
+        {
+            level: 2,
+            question: `Tre resistorer är seriekopplade till ett batteri. Punkten B är jordad.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 230" style="max-width:420px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="30" y1="60" x2="390" y2="60" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="390" y1="60" x2="390" y2="170" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="390" y1="170" x2="30" y2="170" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="30" y1="170" x2="30" y2="60" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><rect x="70" y="52" width="40" height="16" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><text x="90" y="36" font-size="16" text-anchor="middle" fill="#0f1620">10 Ω</text><rect x="190" y="52" width="40" height="16" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><text x="210" y="36" font-size="16" text-anchor="middle" fill="#0f1620">20 Ω</text><rect x="310" y="52" width="40" height="16" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><text x="330" y="36" font-size="16" text-anchor="middle" fill="#0f1620">30 Ω</text><circle cx="30" cy="60" r="3" fill="#0f1620"/><text x="30" y="42" font-size="16" text-anchor="middle" fill="#0f1620">A</text><circle cx="150" cy="60" r="3" fill="#0f1620"/><text x="150" y="42" font-size="16" text-anchor="middle" fill="#0f1620">B</text><circle cx="270" cy="60" r="3" fill="#0f1620"/><text x="270" y="42" font-size="16" text-anchor="middle" fill="#0f1620">C</text><circle cx="390" cy="60" r="3" fill="#0f1620"/><text x="390" y="42" font-size="16" text-anchor="middle" fill="#0f1620">D</text><rect x="205" y="166" width="10" height="8" fill="#fff"/><line x1="205" y1="156" x2="205" y2="184" stroke="#0f1620" stroke-width="1.8"/><line x1="215" y1="162" x2="215" y2="178" stroke="#0f1620" stroke-width="3.4"/><text x="210" y="210" font-size="16" text-anchor="middle" fill="#0f1620">18 V</text><line x1="150" y1="60" x2="150" y2="76" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="137" y1="76" x2="163" y2="76" stroke="#0f1620" stroke-width="1.8"/><line x1="141.5" y1="81" x2="158.5" y2="81" stroke="#0f1620" stroke-width="1.8"/><line x1="146" y1="86" x2="154" y2="86" stroke="#0f1620" stroke-width="1.8"/></svg>
+
+a) Bestäm potentialen i punkterna A och D.<br>b) Jordningen flyttas från B till D. Bestäm de nya potentialerna i A och B.<br>c) Ändras spänningen mellan B och C när jordningen flyttas? Motivera.`,
+            answer: { value: -15, unit: 'V' },
+            delsvar: [
+                { del: 'a', value: 3.0, unit: 'V', etikett: '$V_\\mathrm{A} =$' },
+                { del: 'a', value: -15, unit: 'V', etikett: '$V_\\mathrm{D} =$' },
+                { del: 'b', value: 18, unit: 'V', etikett: '$V_\\mathrm{A} =$' },
+                { del: 'b', value: 15, unit: 'V', etikett: '$V_\\mathrm{B} =$' },
+                { del: 'c' },
+            ],
+            solution: `Jordningen i en enda punkt ändrar inte strömmen, eftersom ingen sluten krets går genom marken. Strömmen är
+
+$$ I = \\frac{U}{R_\\mathrm{tot}} = \\frac{18}{10 + 20 + 30} = \\frac{18}{60} = 0{,}30\\ \\mathrm{A} $$
+
+Batteriets pluspol är till vänster, så strömmen går från A mot D genom resistorerna.
+
+**a)** Från B till A går vi **mot** strömmen genom resistorn på $10\\ \\mathrm{\\Omega}$:
+
+$$ V_\\mathrm{A} = 0 + 10 \\cdot 0{,}30 = +3{,}0\\ \\mathrm{V} $$
+
+Från B till D går vi **med** strömmen genom resistorerna på $20\\ \\mathrm{\\Omega}$ och $30\\ \\mathrm{\\Omega}$:
+
+$$ V_\\mathrm{D} = 0 - 20 \\cdot 0{,}30 - 30 \\cdot 0{,}30 = -6{,}0 - 9{,}0 = -15\\ \\mathrm{V} $$
+
+Kontroll: $|V_\\mathrm{A} - V_\\mathrm{D}| = |3{,}0 - (-15)| = 18\\ \\mathrm{V}$, vilket är batteriets spänning.
+
+**Svar:** $V_\\mathrm{A} = +3{,}0\\ \\mathrm{V}$ och $V_\\mathrm{D} = -15\\ \\mathrm{V}$
+
+**b)** Nu är $V_\\mathrm{D} = 0$. Från D går vi mot strömmen:
+
+$$ V_\\mathrm{B} = 0 + 30 \\cdot 0{,}30 + 20 \\cdot 0{,}30 = 9{,}0 + 6{,}0 = +15\\ \\mathrm{V} $$
+
+$$ V_\\mathrm{A} = 15 + 10 \\cdot 0{,}30 = 15 + 3{,}0 = +18\\ \\mathrm{V} $$
+
+**Svar:** $V_\\mathrm{A} = +18\\ \\mathrm{V}$ och $V_\\mathrm{B} = +15\\ \\mathrm{V}$
+
+**c)** Alla potentialer ökar lika mycket, $15\\ \\mathrm{V}$, när nollnivån flyttas. Skillnaden mellan två potentialer påverkas därför inte. Spänningen mellan B och C är $20 \\cdot 0{,}30 = 6{,}0\\ \\mathrm{V}$ i båda fallen.
+
+**Svar:** Nej, spänningen är $6{,}0\\ \\mathrm{V}$ i båda fallen. Jordningen bestämmer bara nollnivån.`,
+        },
+        {
+            level: 2,
+            question: `En batteriladdare med spänningen $14{,}5\\ \\mathrm{V}$ laddar ett batteri med spänningen $12{,}1\\ \\mathrm{V}$. Pluspolerna är förbundna med varandra, och det är minuspolerna också. Varje kabel har resistansen $0{,}10\\ \\mathrm{\\Omega}$. En extra resistor med resistansen *R* begränsar strömmen, som ska vara $4{,}0\\ \\mathrm{A}$.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 260" style="max-width:380px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="60" y1="60" x2="320" y2="60" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="320" y1="60" x2="320" y2="190" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="320" y1="190" x2="60" y2="190" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="60" y1="190" x2="60" y2="60" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><rect x="56" y="120" width="8" height="10" fill="#fff"/><line x1="46" y1="120" x2="74" y2="120" stroke="#0f1620" stroke-width="1.8"/><line x1="52" y1="130" x2="68" y2="130" stroke="#0f1620" stroke-width="3.4"/><text x="84" y="131" font-size="16" text-anchor="start" fill="#0f1620">14,5 V</text><rect x="316" y="120" width="8" height="10" fill="#fff"/><line x1="306" y1="120" x2="334" y2="120" stroke="#0f1620" stroke-width="1.8"/><line x1="312" y1="130" x2="328" y2="130" stroke="#0f1620" stroke-width="3.4"/><text x="296" y="131" font-size="16" text-anchor="end" fill="#0f1620">12,1 V</text><rect x="120" y="52" width="40" height="16" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><rect x="220" y="52" width="40" height="16" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><text x="140" y="36" font-size="16" text-anchor="middle" fill="#0f1620">0,10 Ω</text><text x="240" y="36" font-size="16" text-anchor="middle" fill="#0f1620"><tspan font-style="italic">R</tspan></text><rect x="170" y="182" width="40" height="16" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><text x="190" y="228" font-size="16" text-anchor="middle" fill="#0f1620">0,10 Ω</text><polygon points="196,60 185,55 185,65" fill="#c8324a"/><text x="190" y="90" font-size="16" text-anchor="middle" fill="#c8324a"><tspan font-style="italic">I</tspan> = 4,0 A</text></svg>
+
+Bestäm *R* med hjälp av Kirchhoffs andra lag.`,
+            answer: { value: 0.40, unit: 'Ω' },
+            solution: `Vi går ett varv i strömmens riktning med start i laddarens minuspol (nere till vänster). Laddaren passeras från minuspol till pluspol, så potentialen ökar. Batteriet passeras från pluspol till minuspol, så potentialen minskar. Genom resistorerna går vi med strömmen, så potentialen minskar. Kirchhoffs andra lag ger
+
+$$ 14{,}5 - 0{,}10 \\cdot I - R \\cdot I - 12{,}1 - 0{,}10 \\cdot I = 0 $$
+
+Insättning av $I = 4{,}0\\ \\mathrm{A}$ ger
+
+$$ 14{,}5 - 0{,}40 - 4{,}0 \\cdot R - 12{,}1 - 0{,}40 = 0 $$
+
+$$ 1{,}6 - 4{,}0 \\cdot R = 0 $$
+
+$$ R = \\frac{1{,}6}{4{,}0} = 0{,}40\\ \\mathrm{\\Omega} $$
+
+Rimlighetsbedömning: den spänning som driver strömmen är bara $14{,}5 - 12{,}1 = 2{,}4\\ \\mathrm{V}$, och den totala resistansen blir $0{,}60\\ \\mathrm{\\Omega}$. Det ger $\\dfrac{2{,}4}{0{,}60} = 4{,}0\\ \\mathrm{A}$, som det ska.
+
+**Svar:** $R = 0{,}40\\ \\mathrm{\\Omega}$`,
+        },
+        {
+            level: 2,
+            question: `I kretsen nedan är både punkten B och punkten C jordade.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 230" style="max-width:420px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="30" y1="60" x2="390" y2="60" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="390" y1="60" x2="390" y2="170" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="390" y1="170" x2="30" y2="170" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="30" y1="170" x2="30" y2="60" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><rect x="70" y="52" width="40" height="16" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><text x="90" y="36" font-size="16" text-anchor="middle" fill="#0f1620">14 Ω</text><rect x="190" y="52" width="40" height="16" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><text x="210" y="36" font-size="16" text-anchor="middle" fill="#0f1620">40 Ω</text><rect x="310" y="52" width="40" height="16" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><text x="330" y="36" font-size="16" text-anchor="middle" fill="#0f1620">26 Ω</text><circle cx="30" cy="60" r="3" fill="#0f1620"/><text x="30" y="42" font-size="16" text-anchor="middle" fill="#0f1620">A</text><circle cx="150" cy="60" r="3" fill="#0f1620"/><text x="150" y="42" font-size="16" text-anchor="middle" fill="#0f1620">B</text><circle cx="270" cy="60" r="3" fill="#0f1620"/><text x="270" y="42" font-size="16" text-anchor="middle" fill="#0f1620">C</text><circle cx="390" cy="60" r="3" fill="#0f1620"/><text x="390" y="42" font-size="16" text-anchor="middle" fill="#0f1620">D</text><rect x="205" y="166" width="10" height="8" fill="#fff"/><line x1="205" y1="156" x2="205" y2="184" stroke="#0f1620" stroke-width="1.8"/><line x1="215" y1="162" x2="215" y2="178" stroke="#0f1620" stroke-width="3.4"/><text x="210" y="210" font-size="16" text-anchor="middle" fill="#0f1620">20 V</text><line x1="150" y1="60" x2="150" y2="76" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="137" y1="76" x2="163" y2="76" stroke="#0f1620" stroke-width="1.8"/><line x1="141.5" y1="81" x2="158.5" y2="81" stroke="#0f1620" stroke-width="1.8"/><line x1="146" y1="86" x2="154" y2="86" stroke="#0f1620" stroke-width="1.8"/><line x1="270" y1="60" x2="270" y2="76" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="257" y1="76" x2="283" y2="76" stroke="#0f1620" stroke-width="1.8"/><line x1="261.5" y1="81" x2="278.5" y2="81" stroke="#0f1620" stroke-width="1.8"/><line x1="266" y1="86" x2="274" y2="86" stroke="#0f1620" stroke-width="1.8"/></svg>
+
+a) Hur stor är strömmen genom resistorn på $40\\ \\mathrm{\\Omega}$? Motivera.<br>b) Bestäm potentialen i punkterna A och D.`,
+            answer: { value: 7.0, unit: 'V' },
+            delsvar: [
+                { del: 'a', value: 0, unit: 'A', etikett: '$I =$' },
+                { del: 'b', value: 7.0, unit: 'V', etikett: '$V_\\mathrm{A} =$' },
+                { del: 'b', value: -13, unit: 'V', etikett: '$V_\\mathrm{D} =$' },
+            ],
+            solution: `**a)** Båda punkterna är jordade, så $V_\\mathrm{B} = V_\\mathrm{C} = 0$. Spänningen över resistorn är därför
+
+$$ U = |V_\\mathrm{B} - V_\\mathrm{C}| = |0 - 0| = 0 $$
+
+Enligt Ohms lag är strömmen genom den då noll. Två jordningar motsvarar att en ledare kopplas mellan punkterna, och all ström går den vägen.
+
+**Svar:** Strömmen är 0.
+
+**b)** Strömmen går genom resistorerna på $14\\ \\mathrm{\\Omega}$ och $26\\ \\mathrm{\\Omega}$, som nu är seriekopplade via jordningarna:
+
+$$ I = \\frac{20}{14 + 26} = \\frac{20}{40} = 0{,}50\\ \\mathrm{A} $$
+
+Batteriets pluspol är till vänster, så strömmen går från A till B och från C till D. Från B till A går vi **mot** strömmen:
+
+$$ V_\\mathrm{A} = 0 + 14 \\cdot 0{,}50 = +7{,}0\\ \\mathrm{V} $$
+
+Från C till D går vi **med** strömmen:
+
+$$ V_\\mathrm{D} = 0 - 26 \\cdot 0{,}50 = -13\\ \\mathrm{V} $$
+
+Kontroll: $|V_\\mathrm{A} - V_\\mathrm{D}| = |7{,}0 - (-13)| = 20\\ \\mathrm{V}$, vilket är batteriets spänning.
+
+**Svar:** $V_\\mathrm{A} = +7{,}0\\ \\mathrm{V}$ och $V_\\mathrm{D} = -13\\ \\mathrm{V}$`,
+        },
+        {
+            level: 3,
+            question: `Två batterier och tre resistorer är kopplade enligt figuren.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 270" style="max-width:400px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="80" y1="50" x2="320" y2="50" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="320" y1="50" x2="320" y2="200" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="320" y1="200" x2="80" y2="200" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="80" y1="200" x2="80" y2="50" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="200" y1="50" x2="200" y2="200" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><rect x="72" y="83.3" width="16" height="40" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><rect x="76" y="156.7" width="8" height="10" fill="#fff"/><line x1="66" y1="156.7" x2="94" y2="156.7" stroke="#0f1620" stroke-width="1.8"/><line x1="72" y1="166.7" x2="88" y2="166.7" stroke="#0f1620" stroke-width="3.4"/><rect x="192" y="105" width="16" height="40" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><rect x="312" y="83.3" width="16" height="40" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><rect x="316" y="156.7" width="8" height="10" fill="#fff"/><line x1="306" y1="156.7" x2="334" y2="156.7" stroke="#0f1620" stroke-width="1.8"/><line x1="312" y1="166.7" x2="328" y2="166.7" stroke="#0f1620" stroke-width="3.4"/><text x="60" y="109" font-size="16" text-anchor="end" fill="#0f1620">2,0 Ω</text><text x="60" y="167" font-size="16" text-anchor="end" fill="#0f1620">14 V</text><text x="218" y="131" font-size="16" text-anchor="start" fill="#0f1620">6,0 Ω</text><text x="340" y="109" font-size="16" text-anchor="start" fill="#0f1620">3,0 Ω</text><text x="340" y="167" font-size="16" text-anchor="start" fill="#0f1620">9,0 V</text><circle cx="200" cy="50" r="3" fill="#0f1620"/><text x="200" y="36" font-size="16" text-anchor="middle" fill="#0f1620">P</text><circle cx="200" cy="200" r="3" fill="#0f1620"/><line x1="200" y1="200" x2="200" y2="216" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="187" y1="216" x2="213" y2="216" stroke="#0f1620" stroke-width="1.8"/><line x1="191.5" y1="221" x2="208.5" y2="221" stroke="#0f1620" stroke-width="1.8"/><line x1="196" y1="226" x2="204" y2="226" stroke="#0f1620" stroke-width="1.8"/></svg>
+
+a) Bestäm potentialen i punkten P.<br>b) Bestäm strömmen genom batteriet på $9{,}0\\ \\mathrm{V}$ och avgör om batteriet laddas eller laddas ur.`,
+            answer: { value: 10, unit: 'V' },
+            delsvar: [
+                { del: 'a', value: 10, unit: 'V', etikett: '$V_\\mathrm{P} =$' },
+                { del: 'b', value: 0.33, unit: 'A', tol: 0.03, etikett: 'strömmen' },
+            ],
+            solution: `Vi vet inte åt vilket håll strömmarna går och kan inte förenkla kretsen till serie- och parallellkopplingar. Däremot kan vi uttrycka varje ström i den okända potentialen $V_\\mathrm{P}$.
+
+**a)** Den nedre ledaren är jordad, så båda batteriernas minuspoler har potentialen 0. Pluspolerna har då potentialerna $14\\ \\mathrm{V}$ och $9{,}0\\ \\mathrm{V}$.
+
+Antag att strömmen $I_1$ går från batteriet på $14\\ \\mathrm{V}$ till P och att strömmen $I_2$ går från batteriet på $9{,}0\\ \\mathrm{V}$ till P. Strömmen $I_3$ går från P ned genom resistorn på $6{,}0\\ \\mathrm{\\Omega}$. Ohms lag med potentialskillnaden över varje resistor ger
+
+$$ I_1 = \\frac{14 - V_\\mathrm{P}}{2{,}0} \\qquad I_2 = \\frac{9{,}0 - V_\\mathrm{P}}{3{,}0} \\qquad I_3 = \\frac{V_\\mathrm{P}}{6{,}0} $$
+
+Det går lika mycket ström in till P som ut från P, alltså $I_1 + I_2 = I_3$:
+
+$$ \\frac{14 - V_\\mathrm{P}}{2{,}0} + \\frac{9{,}0 - V_\\mathrm{P}}{3{,}0} = \\frac{V_\\mathrm{P}}{6{,}0} $$
+
+Multiplicera båda led med 6,0:
+
+$$ 3 \\cdot (14 - V_\\mathrm{P}) + 2 \\cdot (9{,}0 - V_\\mathrm{P}) = V_\\mathrm{P} $$
+
+$$ 42 - 3 V_\\mathrm{P} + 18 - 2 V_\\mathrm{P} = V_\\mathrm{P} $$
+
+$$ 60 = 6 V_\\mathrm{P} $$
+
+$$ V_\\mathrm{P} = \\frac{60}{6} = 10\\ \\mathrm{V} $$
+
+**Svar:** $V_\\mathrm{P} = +10\\ \\mathrm{V}$
+
+**b)** Insättning av $V_\\mathrm{P} = 10\\ \\mathrm{V}$ ger
+
+$$ I_2 = \\frac{9{,}0 - 10}{3{,}0} = \\frac{-1{,}0}{3{,}0} \\approx -0{,}33\\ \\mathrm{A} $$
+
+Minustecknet betyder att strömmen går åt motsatt håll mot vad vi antog: från P, där potentialen är högre, in i batteriets pluspol. Batteriet laddas.
+
+Kontroll: $I_1 = \\dfrac{14 - 10}{2{,}0} = 2{,}0\\ \\mathrm{A}$ och $I_3 = \\dfrac{10}{6{,}0} \\approx 1{,}67\\ \\mathrm{A}$. Skillnaden, $0{,}33\\ \\mathrm{A}$, går till batteriet på $9{,}0\\ \\mathrm{V}$.
+
+**Svar:** Strömmen är $0{,}33\\ \\mathrm{A}$, och batteriet laddas.`,
+        },
+        {
+            level: 3,
+            question: `En okänd resistans $R_\\mathrm{s}$ kan mätas med kopplingen i figuren. Den bruna linjen är en jämntjock resistanstråd med längden *L*. Kontakten Q går att flytta längs tråden. Avståndet från trådens vänstra ände till Q är *x*. Kontakten flyttas tills voltmetern visar 0.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -35 430 345" style="max-width:430px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="40" y1="15" x2="380" y2="15" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="380" y1="15" x2="380" y2="215" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="40" y1="15" x2="40" y2="215" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="40" y1="115" x2="380" y2="115" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><rect x="205" y="11" width="10" height="8" fill="#fff"/><line x1="205" y1="1" x2="205" y2="29" stroke="#0f1620" stroke-width="1.8"/><line x1="215" y1="7" x2="215" y2="23" stroke="#0f1620" stroke-width="3.4"/><text x="210" y="-8" font-size="16" text-anchor="middle" fill="#0f1620"><tspan font-style="italic">U</tspan></text><rect x="105" y="107" width="40" height="16" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><rect x="275" y="107" width="40" height="16" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><text x="125" y="148" font-size="16" text-anchor="middle" fill="#0f1620"><tspan font-style="italic">R</tspan><tspan dy="4" font-size="12">s</tspan></text><text x="295" y="148" font-size="16" text-anchor="middle" fill="#0f1620"><tspan font-style="italic">R</tspan></text><circle cx="40" cy="115" r="3" fill="#0f1620"/><circle cx="380" cy="115" r="3" fill="#0f1620"/><circle cx="210" cy="115" r="3" fill="#0f1620"/><text x="210" y="103" font-size="16" text-anchor="middle" fill="#0f1620">P</text><line x1="40" y1="215" x2="380" y2="215" stroke="#9a5b2c" stroke-width="5"/><line x1="210" y1="115" x2="210" y2="182" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="210" y1="182" x2="252" y2="182" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="252" y1="182" x2="252" y2="200" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><circle cx="210" cy="150" r="14" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><text x="210" y="155.5" font-size="15" text-anchor="middle" fill="#0f1620">V</text><polygon points="252,212 246,200 258,200" fill="#0f1620"/><text x="270" y="204" font-size="16" text-anchor="start" fill="#0f1620">Q</text><circle cx="40" cy="215" r="3" fill="#0f1620"/><circle cx="380" cy="215" r="3" fill="#0f1620"/><line x1="380" y1="215" x2="380" y2="231" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="367" y1="231" x2="393" y2="231" stroke="#0f1620" stroke-width="1.8"/><line x1="371.5" y1="236" x2="388.5" y2="236" stroke="#0f1620" stroke-width="1.8"/><line x1="376" y1="241" x2="384" y2="241" stroke="#0f1620" stroke-width="1.8"/><line x1="40" y1="221" x2="40" y2="296" stroke="#5b6472" stroke-width="1.1" stroke-dasharray="4 4"/><line x1="252" y1="219" x2="252" y2="258" stroke="#5b6472" stroke-width="1.1" stroke-dasharray="4 4"/><line x1="380" y1="245" x2="380" y2="296" stroke="#5b6472" stroke-width="1.1" stroke-dasharray="4 4"/><line x1="47" y1="252" x2="245" y2="252" stroke="#5b6472" stroke-width="1.3"/><polygon points="40,252 48,248 48,256" fill="#5b6472"/><polygon points="252,252 244,248 244,256" fill="#5b6472"/><text x="146" y="244" font-size="15" text-anchor="middle" fill="#0f1620"><tspan font-style="italic">x</tspan></text><line x1="47" y1="290" x2="373" y2="290" stroke="#5b6472" stroke-width="1.3"/><polygon points="40,290 48,286 48,294" fill="#5b6472"/><polygon points="380,290 372,286 372,294" fill="#5b6472"/><text x="210" y="282" font-size="15" text-anchor="middle" fill="#0f1620"><tspan font-style="italic">L</tspan></text></svg>
+
+a) Visa att $R_\\mathrm{s} = \\dfrac{R \\cdot x}{L - x}$ när voltmetern visar 0.<br>b) I en mätning är $R = 150\\ \\mathrm{\\Omega}$, $L = 1{,}000\\ \\mathrm{m}$ och $x = 0{,}625\\ \\mathrm{m}$. Bestäm $R_\\mathrm{s}$.<br>c) Batteriet är gammalt, så spänningen *U* sjunker långsamt under mätningen. Påverkar det resultatet? Motivera.`,
+            answer: { value: 250, unit: 'Ω' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 250, unit: 'Ω', etikett: '$R_\\mathrm{s} =$' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Voltmetern visar spänningen mellan P och Q, alltså $|V_\\mathrm{P} - V_\\mathrm{Q}|$. När den visar 0 är $V_\\mathrm{P} = V_\\mathrm{Q}$.
+
+Den högra änden är jordad. Genom resistorerna går strömmen
+
+$$ I_1 = \\frac{U}{R_\\mathrm{s} + R} $$
+
+Från jordningen till P går vi mot strömmen genom *R*:
+
+$$ V_\\mathrm{P} = 0 + R \\cdot I_1 = \\frac{U \\cdot R}{R_\\mathrm{s} + R} $$
+
+Tråden är jämntjock, så resistansen är proportionell mot längden. Vi kallar resistansen per meter *r*. Strömmen genom tråden är då
+
+$$ I_2 = \\frac{U}{r \\cdot L} $$
+
+Sträckan från jordningen till Q är $L - x$. Resistansen där är $r \\cdot (L - x)$, och vi går mot strömmen:
+
+$$ V_\\mathrm{Q} = 0 + r \\cdot (L - x) \\cdot I_2 = r \\cdot (L - x) \\cdot \\frac{U}{r \\cdot L} = \\frac{U \\cdot (L - x)}{L} $$
+
+Villkoret $V_\\mathrm{P} = V_\\mathrm{Q}$ ger
+
+$$ \\frac{U \\cdot R}{R_\\mathrm{s} + R} = \\frac{U \\cdot (L - x)}{L} $$
+
+Dividera båda led med *U*:
+
+$$ \\frac{R}{R_\\mathrm{s} + R} = \\frac{L - x}{L} $$
+
+Multiplicera båda led med $L \\cdot (R_\\mathrm{s} + R)$:
+
+$$ R \\cdot L = (L - x) \\cdot (R_\\mathrm{s} + R) $$
+
+$$ R \\cdot L = (L - x) \\cdot R_\\mathrm{s} + R \\cdot L - R \\cdot x $$
+
+Subtrahera $R \\cdot L$ från båda led och addera $R \\cdot x$ till båda led:
+
+$$ R \\cdot x = (L - x) \\cdot R_\\mathrm{s} $$
+
+Dividera båda led med $L - x$:
+
+$$ R_\\mathrm{s} = \\frac{R \\cdot x}{L - x} $$
+
+vilket skulle visas.
+
+**b)** Insättning i sambandet från a), $R_\\mathrm{s} = \\dfrac{R \\cdot x}{L - x}$, ger
+
+$$ R_\\mathrm{s} = \\frac{150 \\cdot 0{,}625}{1{,}000 - 0{,}625} = \\frac{93{,}75}{0{,}375} = 250\\ \\mathrm{\\Omega} $$
+
+Det är rimligt att $R_\\mathrm{s}$ är större än *R*, eftersom den vänstra delen av tråden är längre än den högra.
+
+**Svar:** $R_\\mathrm{s} = 250\\ \\mathrm{\\Omega}$
+
+**c)** Både $V_\\mathrm{P}$ och $V_\\mathrm{Q}$ är proportionella mot *U*. Sjunker *U* så sjunker de båda potentialerna med samma faktor, och de är fortfarande lika. I härledningen stryks *U*, och $R_\\mathrm{s}$ beror därför inte på batteriets spänning.
+
+**Svar:** Nej, spänningen *U* finns inte med i uttrycket för $R_\\mathrm{s}$.`,
+        },
+        {
+            level: 3,
+            question: `En sluten låda innehåller ett batteri med okänd spänning *U* och en resistor med okänd resistans $R_1$. En elev ansluter en känd resistor $R_2$ utanför lådan och mäter potentialen i punkten P, se figuren.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 250" style="max-width:340px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="70" y1="55" x2="270" y2="55" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="270" y1="55" x2="270" y2="185" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="270" y1="185" x2="70" y2="185" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="70" y1="185" x2="70" y2="55" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><rect x="66" y="115" width="8" height="10" fill="#fff"/><line x1="56" y1="115" x2="84" y2="115" stroke="#0f1620" stroke-width="1.8"/><line x1="62" y1="125" x2="78" y2="125" stroke="#0f1620" stroke-width="3.4"/><text x="48" y="126" font-size="16" text-anchor="end" fill="#0f1620"><tspan font-style="italic">U</tspan></text><rect x="150" y="47" width="40" height="16" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><text x="170" y="31" font-size="16" text-anchor="middle" fill="#0f1620"><tspan font-style="italic">R</tspan>₁</text><rect x="262" y="100" width="16" height="40" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><text x="290" y="126" font-size="16" text-anchor="start" fill="#0f1620"><tspan font-style="italic">R</tspan>₂</text><circle cx="270" cy="55" r="3" fill="#0f1620"/><text x="270" y="39" font-size="16" text-anchor="middle" fill="#0f1620">P</text><circle cx="170" cy="185" r="3" fill="#0f1620"/><line x1="170" y1="185" x2="170" y2="201" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="157" y1="201" x2="183" y2="201" stroke="#0f1620" stroke-width="1.8"/><line x1="161.5" y1="206" x2="178.5" y2="206" stroke="#0f1620" stroke-width="1.8"/><line x1="166" y1="211" x2="174" y2="211" stroke="#0f1620" stroke-width="1.8"/><rect x="20" y="12" width="195" height="150" rx="8" fill="none" stroke="#5b6472" stroke-width="1.3" stroke-dasharray="5 4"/><text x="125" y="146" font-size="15" text-anchor="middle" fill="#5b6472">låda</text></svg>
+
+Eleven använder först $R_2 = R$ och byter sedan till $R_2 = 4R$. Potentialen i P blir då dubbelt så hög.
+
+a) Bestäm kvoten $\\dfrac{R_1}{R}$.<br>b) Eleven påstår: ”Om jag byter till $R_2 = 16R$ blir potentialen i P dubbelt så hög en gång till.” Avgör om påståendet stämmer, och bestäm hur många procent av *U* potentialen i P blir.`,
+            answer: { value: 2, unit: '' },
+            delsvar: [
+                { del: 'a', value: 2, unit: '', etikett: '$\\dfrac{R_1}{R} =$' },
+                { del: 'b', value: 89, unit: '%', etikett: 'andelen av *U*' },
+            ],
+            solution: `Varken *U* eller *R* är kända, så vi ställer först upp ett samband för potentialen i P. Kretsen är en seriekoppling av $R_1$ och $R_2$. Kirchhoffs andra lag för ett varv i strömmens riktning ger
+
+$$ U - R_1 \\cdot I - R_2 \\cdot I = 0 \\quad\\Leftrightarrow\\quad I = \\frac{U}{R_1 + R_2} $$
+
+Från jordningen till P går vi mot strömmen genom $R_2$:
+
+$$ V_\\mathrm{P} = 0 + R_2 \\cdot I = \\frac{U \\cdot R_2}{R_1 + R_2} $$
+
+**a)** Potentialen med $R_2 = 4R$ är dubbelt så hög som med $R_2 = R$:
+
+$$ \\frac{U \\cdot 4R}{R_1 + 4R} = 2 \\cdot \\frac{U \\cdot R}{R_1 + R} $$
+
+Dividera båda led med $2 \\cdot U \\cdot R$. Då försvinner *U*:
+
+$$ \\frac{2}{R_1 + 4R} = \\frac{1}{R_1 + R} $$
+
+Multiplicera båda led med $(R_1 + 4R) \\cdot (R_1 + R)$:
+
+$$ 2 \\cdot (R_1 + R) = R_1 + 4R $$
+
+$$ 2R_1 + 2R = R_1 + 4R $$
+
+Subtrahera $R_1$ och $2R$ från båda led:
+
+$$ R_1 = 2R $$
+
+**Svar:** $\\dfrac{R_1}{R} = 2$
+
+**b)** Insättning av $R_1 = 2R$ och $R_2 = 16R$ i $V_\\mathrm{P} = \\dfrac{U \\cdot R_2}{R_1 + R_2}$ ger
+
+$$ V_\\mathrm{P} = \\frac{U \\cdot 16R}{2R + 16R} = \\frac{16}{18} \\cdot U \\approx 0{,}89 \\cdot U $$
+
+Med $R_2 = 4R$ är potentialen
+
+$$ V_\\mathrm{P} = \\frac{U \\cdot 4R}{2R + 4R} = \\frac{2}{3} \\cdot U $$
+
+En fördubbling skulle ge $\\dfrac{4}{3} \\cdot U$, som är större än *U*. Det är omöjligt, eftersom potentialen i P är batteriets spänning minskad med $R_1 \\cdot I$. Hur stor $R_2$ än är blir $V_\\mathrm{P}$ därför alltid mindre än *U*.
+
+**Svar:** Påståendet stämmer inte. Potentialen i P blir $89\\ \\%$ av *U*.`,
+        },
+        {
+            level: 3,
+            question: `En sluten ring består av *n* likadana batterier med spänningen *U* och *n* likadana resistorer med resistansen *R*, växelvis efter varandra. Alla batterier driver strömmen åt samma håll. Figuren visar fallet $n = 4$. Mellan två punkter som är märkta med bokstäver sitter alltid ett batteri och en resistor.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 310" style="max-width:330px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="65" y1="55" x2="265" y2="55" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="265" y1="55" x2="265" y2="255" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="265" y1="255" x2="65" y2="255" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="65" y1="255" x2="65" y2="55" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><rect x="115" y="51" width="10" height="8" fill="#fff"/><line x1="125" y1="41" x2="125" y2="69" stroke="#0f1620" stroke-width="1.8"/><line x1="115" y1="47" x2="115" y2="63" stroke="#0f1620" stroke-width="3.4"/><rect x="175" y="47" width="40" height="16" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><rect x="261" y="105" width="8" height="10" fill="#fff"/><line x1="251" y1="115" x2="279" y2="115" stroke="#0f1620" stroke-width="1.8"/><line x1="257" y1="105" x2="273" y2="105" stroke="#0f1620" stroke-width="3.4"/><rect x="257" y="165" width="16" height="40" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><rect x="205" y="251" width="10" height="8" fill="#fff"/><line x1="205" y1="241" x2="205" y2="269" stroke="#0f1620" stroke-width="1.8"/><line x1="215" y1="247" x2="215" y2="263" stroke="#0f1620" stroke-width="3.4"/><rect x="115" y="247" width="40" height="16" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><rect x="61" y="195" width="8" height="10" fill="#fff"/><line x1="51" y1="195" x2="79" y2="195" stroke="#0f1620" stroke-width="1.8"/><line x1="57" y1="205" x2="73" y2="205" stroke="#0f1620" stroke-width="3.4"/><rect x="57" y="105" width="16" height="40" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><text x="120" y="33" font-size="16" text-anchor="middle" fill="#0f1620"><tspan font-style="italic">U</tspan></text><text x="195" y="33" font-size="16" text-anchor="middle" fill="#0f1620"><tspan font-style="italic">R</tspan></text><text x="289" y="116" font-size="16" text-anchor="start" fill="#0f1620"><tspan font-style="italic">U</tspan></text><text x="289" y="191" font-size="16" text-anchor="start" fill="#0f1620"><tspan font-style="italic">R</tspan></text><text x="210" y="289" font-size="16" text-anchor="middle" fill="#0f1620"><tspan font-style="italic">U</tspan></text><text x="135" y="289" font-size="16" text-anchor="middle" fill="#0f1620"><tspan font-style="italic">R</tspan></text><text x="41" y="206" font-size="16" text-anchor="end" fill="#0f1620"><tspan font-style="italic">U</tspan></text><text x="41" y="131" font-size="16" text-anchor="end" fill="#0f1620"><tspan font-style="italic">R</tspan></text><circle cx="65" cy="55" r="3" fill="#0f1620"/><text x="48" y="46" font-size="16" text-anchor="middle" fill="#0f1620">A</text><circle cx="265" cy="55" r="3" fill="#0f1620"/><text x="282" y="46" font-size="16" text-anchor="middle" fill="#0f1620">B</text><circle cx="265" cy="255" r="3" fill="#0f1620"/><text x="282" y="274" font-size="16" text-anchor="middle" fill="#0f1620">C</text><circle cx="65" cy="255" r="3" fill="#0f1620"/><text x="48" y="274" font-size="16" text-anchor="middle" fill="#0f1620">D</text></svg>
+
+a) Visa att spänningen mellan A och B är noll för alla *n*, trots att det går ström i ringen.<br>b) Batteriet mellan A och B vänds, så att det motverkar de andra. Visa att spänningen mellan A och B då blir $\\dfrac{2U(n - 1)}{n}$ när $n > 2$.<br>c) Hur många batterier har ringen om spänningen mellan A och B i b) är 80 % större än spänningen hos ett batteri?`,
+            answer: { value: 10, unit: 'st' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+                { del: 'c', value: 10, unit: 'st', etikett: '$n =$' },
+            ],
+            solution: `**a)** Vi går ett varv i strömmens riktning. Kirchhoffs andra lag ger
+
+$$ n \\cdot U - n \\cdot R \\cdot I = 0 $$
+
+$$ I = \\frac{n \\cdot U}{n \\cdot R} = \\frac{U}{R} $$
+
+Nu vandrar vi från A till B. Potentialen ökar med *U* genom batteriet och minskar med $R \\cdot I$ genom resistorn:
+
+$$ V_\\mathrm{B} - V_\\mathrm{A} = U - R \\cdot I = U - R \\cdot \\frac{U}{R} = U - U = 0 $$
+
+Potentialen är alltså densamma i A och B, och spänningen är noll. Resultatet innehåller inte *n* och gäller därför för alla *n*. Varje resistor sänker potentialen lika mycket som batteriet före den höjer den. Det är vad som skulle visas.
+
+**b)** Nu höjer $n - 1$ batterier potentialen i strömmens riktning, och ett batteri sänker den. Eftersom $n > 2$ är de som driver strömmen i majoritet, så strömmen går åt samma håll som förut. Kirchhoffs andra lag ger
+
+$$ (n - 1) \\cdot U - U - n \\cdot R \\cdot I = 0 $$
+
+$$ n \\cdot R \\cdot I = (n - 2) \\cdot U $$
+
+$$ R \\cdot I = \\frac{(n - 2) \\cdot U}{n} $$
+
+Från A till B minskar potentialen både genom det vända batteriet och genom resistorn:
+
+$$ V_\\mathrm{B} - V_\\mathrm{A} = -U - R \\cdot I = -U - \\frac{(n - 2) \\cdot U}{n} $$
+
+$$ V_\\mathrm{B} - V_\\mathrm{A} = -\\frac{n \\cdot U + (n - 2) \\cdot U}{n} = -\\frac{(2n - 2) \\cdot U}{n} $$
+
+Spänningen är beloppet av skillnaden:
+
+$$ |V_\\mathrm{A} - V_\\mathrm{B}| = \\frac{(2n - 2) \\cdot U}{n} = \\frac{2U(n - 1)}{n} $$
+
+vilket skulle visas.
+
+**c)** Spänningen ska vara $1{,}80 \\cdot U$:
+
+$$ \\frac{2U(n - 1)}{n} = 1{,}80 \\cdot U $$
+
+Dividera båda led med *U* och multiplicera med *n*:
+
+$$ 2n - 2 = 1{,}80 \\cdot n $$
+
+$$ 0{,}20 \\cdot n = 2 $$
+
+$$ n = \\frac{2}{0{,}20} = 10 $$
+
+Rimlighetsbedömning: med många batterier är strömmen nästan lika stor som i a), och både batteriet och resistorn sänker potentialen med ungefär *U*. Spänningen ska då vara lite mindre än $2U$.
+
+**Svar:** Ringen har 10 batterier.`,
+        },
+        {
+            level: 3,
+            question: `I en brödrost lossnar en ledning och kommer i kontakt med metallhöljet. Figuren är en förenklad modell av kretsen. $R_\\mathrm{F}$ är resistansen i ledningen fram till höljet H och $R_\\mathrm{J}$ är resistansen i jordledaren. Båda är mindre än $1{,}0\\ \\mathrm{\\Omega}$. $R_\\mathrm{P} = 2{,}0\\ \\mathrm{k\\Omega}$ är resistansen hos en person som rör vid höljet och står på marken. Räkna som om spänningen $230\\ \\mathrm{V}$ vore konstant.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 270" style="max-width:420px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="80" y1="60" x2="330" y2="60" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="330" y1="60" x2="330" y2="200" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="330" y1="200" x2="80" y2="200" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="80" y1="200" x2="80" y2="60" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="230" y1="60" x2="230" y2="200" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><circle cx="80" cy="130" r="16" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><path d="M70,130 C73,120 77,120 80,130 S87,140 90,130" fill="none" stroke="#0f1620" stroke-width="1.8"/><text x="56" y="136" font-size="16" text-anchor="end" fill="#0f1620">230 V</text><rect x="135" y="52" width="40" height="16" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><text x="155" y="36" font-size="16" text-anchor="middle" fill="#0f1620"><tspan font-style="italic">R</tspan><tspan dy="4" font-size="12">F</tspan></text><rect x="222" y="110" width="16" height="40" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><text x="248" y="136" font-size="16" text-anchor="start" fill="#0f1620"><tspan font-style="italic">R</tspan><tspan dy="4" font-size="12">J</tspan></text><rect x="322" y="110" width="16" height="40" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><text x="348" y="136" font-size="16" text-anchor="start" fill="#0f1620"><tspan font-style="italic">R</tspan><tspan dy="4" font-size="12">P</tspan></text><circle cx="230" cy="60" r="3" fill="#0f1620"/><text x="230" y="44" font-size="16" text-anchor="middle" fill="#0f1620">H</text><circle cx="230" cy="200" r="3" fill="#0f1620"/><line x1="230" y1="200" x2="230" y2="216" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="217" y1="216" x2="243" y2="216" stroke="#0f1620" stroke-width="1.8"/><line x1="221.5" y1="221" x2="238.5" y2="221" stroke="#0f1620" stroke-width="1.8"/><line x1="226" y1="226" x2="234" y2="226" stroke="#0f1620" stroke-width="1.8"/></svg>
+
+a) Jordledaren är av, så att grenen med $R_\\mathrm{J}$ saknas. Bestäm strömmen genom personen, och avgör om en säkring på $10\\ \\mathrm{A}$ skyddar personen.<br>b) När jordledaren är hel blir potentialen i H $92\\ \\mathrm{V}$ innan säkringen har brutit strömmen. Bestäm kvoten $\\dfrac{R_\\mathrm{J}}{R_\\mathrm{F}}$.<br>c) En elektriker föreslår att både ledningen och jordledaren byts mot grövre, så att $R_\\mathrm{F}$ och $R_\\mathrm{J}$ halveras. Utred hur bytet påverkar potentialen i H och hur det påverkar säkringen.`,
+            answer: { value: 0.67, unit: '' },
+            delsvar: [
+                { del: 'a', value: 0.12, unit: 'A', tol: 0.05, etikett: 'strömmen' },
+                { del: 'b', value: 0.67, unit: '', tol: 0.02, etikett: '$\\dfrac{R_\\mathrm{J}}{R_\\mathrm{F}} =$' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Utan jordledare är $R_\\mathrm{F}$ och $R_\\mathrm{P}$ seriekopplade. $R_\\mathrm{F}$ är mindre än $1{,}0\\ \\mathrm{\\Omega}$, alltså mindre än en tusendel av $R_\\mathrm{P}$, så vi kan bortse från den:
+
+$$ I = \\frac{U}{R_\\mathrm{F} + R_\\mathrm{P}} \\approx \\frac{U}{R_\\mathrm{P}} $$
+
+$$ I \\approx \\frac{230}{2\\,000} = 0{,}115 \\approx 0{,}12\\ \\mathrm{A} $$
+
+Säkringen bryter först när strömmen är större än $10\\ \\mathrm{A}$. Strömmen genom personen är ungefär en hundradel av det, så säkringen bryter inte.
+
+**Svar:** Strömmen är $0{,}12\\ \\mathrm{A}$. Säkringen skyddar inte personen.
+
+**b)** När jordledaren är hel är $R_\\mathrm{J}$ och $R_\\mathrm{P}$ parallellkopplade. Spänningen över dem är lika stor, och $R_\\mathrm{P}$ är mer än 2 000 gånger så stor som $R_\\mathrm{J}$. Nästan all ström går därför genom jordledaren, och vi kan bortse från personen. Då går samma ström *I* genom $R_\\mathrm{F}$ och $R_\\mathrm{J}$.
+
+Från marken, där potentialen är 0, går vi mot strömmen genom jordledaren upp till H:
+
+$$ V_\\mathrm{H} = 0 + R_\\mathrm{J} \\cdot I = 92\\ \\mathrm{V} $$
+
+Spänningen över $R_\\mathrm{F}$ är skillnaden i potential mellan spänningskällan och H:
+
+$$ R_\\mathrm{F} \\cdot I = 230 - 92 = 138\\ \\mathrm{V} $$
+
+Strömmen är densamma, så kvoten mellan spänningarna är kvoten mellan resistanserna:
+
+$$ \\frac{R_\\mathrm{J}}{R_\\mathrm{F}} = \\frac{R_\\mathrm{J} \\cdot I}{R_\\mathrm{F} \\cdot I} = \\frac{92}{138} \\approx 0{,}67 $$
+
+**Svar:** $\\dfrac{R_\\mathrm{J}}{R_\\mathrm{F}} \\approx 0{,}67$
+
+**c)** Strömmen genom ledningen är $I = \\dfrac{U}{R_\\mathrm{F} + R_\\mathrm{J}}$. Insättning i $V_\\mathrm{H} = R_\\mathrm{J} \\cdot I$ ger
+
+$$ V_\\mathrm{H} = \\frac{U \\cdot R_\\mathrm{J}}{R_\\mathrm{F} + R_\\mathrm{J}} $$
+
+Halveras båda resistanserna halveras både täljaren och nämnaren. Potentialen blir alltså oförändrad, $92\\ \\mathrm{V}$. Den bestäms bara av kvoten mellan resistanserna.
+
+I uttrycket för strömmen halveras bara nämnaren, så strömmen fördubblas. Redan före bytet är den större än $\\dfrac{230}{1{,}0 + 1{,}0} = 115\\ \\mathrm{A}$, eftersom båda resistanserna är mindre än $1{,}0\\ \\mathrm{\\Omega}$. Säkringen bryter alltså i båda fallen, men snabbare efter bytet, och då får höljet potentialen 0 tidigare.
+
+**Svar:** Potentialen i H ändras inte, men strömmen blir dubbelt så stor, så säkringen bryter snabbare.`,
+        },
+        {
+            level: 3,
+            question: `Tre metallplattor står parallellt i vakuum, se figuren. Platta 1 är jordad, platta 2 har potentialen $+600\\ \\mathrm{V}$ och platta 3 har potentialen $-300\\ \\mathrm{V}$. Mellan plattorna är fälten homogena, så potentialen ändras lika mycket för varje centimeter. I platta 2 finns ett litet hål. En elektron släpps från vila vid platta 1 och passerar genom hålet.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 285" style="max-width:460px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="66" y="55" width="8" height="150" fill="#5b6472"/><rect x="146" y="55" width="8" height="62" fill="#d9534f"/><rect x="146" y="143" width="8" height="62" fill="#d9534f"/><rect x="386" y="55" width="8" height="150" fill="#4a78c0"/><text x="70" y="40" font-size="16" text-anchor="middle" fill="#0f1620">0</text><text x="150" y="40" font-size="16" text-anchor="middle" fill="#0f1620">+600 V</text><text x="390" y="40" font-size="16" text-anchor="middle" fill="#0f1620">−300 V</text><circle cx="84" cy="130" r="8" fill="#2f5fa8"/><line x1="80" y1="130" x2="88" y2="130" stroke="#fff" stroke-width="1.8"/><text x="84" y="114" font-size="16" text-anchor="start" fill="#0f1620">e<tspan dy="-5" font-size="12">−</tspan></text><line x1="70" y1="209" x2="70" y2="252" stroke="#5b6472" stroke-width="1.1" stroke-dasharray="4 4"/><line x1="150" y1="209" x2="150" y2="252" stroke="#5b6472" stroke-width="1.1" stroke-dasharray="4 4"/><line x1="390" y1="209" x2="390" y2="252" stroke="#5b6472" stroke-width="1.1" stroke-dasharray="4 4"/><line x1="77" y1="247" x2="143" y2="247" stroke="#5b6472" stroke-width="1.3"/><polygon points="70,247 78,243 78,251" fill="#5b6472"/><polygon points="150,247 142,243 142,251" fill="#5b6472"/><text x="110" y="239" font-size="15" text-anchor="middle" fill="#0f1620">2,0 cm</text><line x1="157" y1="247" x2="383" y2="247" stroke="#5b6472" stroke-width="1.3"/><polygon points="150,247 158,243 158,251" fill="#5b6472"/><polygon points="390,247 382,243 382,251" fill="#5b6472"/><text x="270" y="239" font-size="15" text-anchor="middle" fill="#0f1620">6,0 cm</text><text x="70" y="274" font-size="16" text-anchor="middle" fill="#0f1620">1</text><text x="150" y="274" font-size="16" text-anchor="middle" fill="#0f1620">2</text><text x="390" y="274" font-size="16" text-anchor="middle" fill="#0f1620">3</text></svg>
+
+a) Hur långt från platta 2 vänder elektronen?<br>b) Vilken potential ska platta 3 ha för att elektronen ska vända $1{,}5\\ \\mathrm{cm}$ från platta 3? Platta 1 och platta 2 har samma potentialer som förut.<br>c) Platta 3 får en godtycklig potential $V_3$. Visa att elektronen når platta 3 bara om $V_3 \\geq 0$, oavsett vilken positiv potential platta 2 har och hur stora avstånden är.`,
+            answer: { value: 4.0, unit: 'cm' },
+            delsvar: [
+                { del: 'a', value: 4.0, unit: 'cm', etikett: 'avståndet' },
+                { del: 'b', value: -200, unit: 'V', etikett: '$V_3 =$' },
+                { del: 'c' },
+            ],
+            solution: `Nyckeln är energin. Elektronens rörelseenergi är noll både i starten och i vändpunkten. Den elektriska lägesenergin måste då vara lika stor på båda ställena. Samma laddning med samma elektriska lägesenergi betyder samma potential. Elektronen vänder alltså där **potentialen är densamma som vid starten, alltså 0**. Varken massan, laddningen eller hastigheten behövs.
+
+**a)** Från platta 2 till platta 3 minskar potentialen från $+600\\ \\mathrm{V}$ till $-300\\ \\mathrm{V}$, alltså med $900\\ \\mathrm{V}$ på $6{,}0\\ \\mathrm{cm}$. Varje centimeter minskar den med
+
+$$ \\frac{900}{6{,}0} = 150\\ \\mathrm{V/cm} $$
+
+Potentialen är 0 när den har minskat med $600\\ \\mathrm{V}$:
+
+$$ s = \\frac{600}{150} = 4{,}0\\ \\mathrm{cm} $$
+
+Rimlighetsbedömning: vändpunkten ligger mellan plattorna och närmare platta 3, vars potential ligger närmast 0.
+
+**Svar:** Elektronen vänder $4{,}0\\ \\mathrm{cm}$ från platta 2.
+
+**b)** Vändpunkten, där potentialen är 0, ska ligga $6{,}0 - 1{,}5 = 4{,}5\\ \\mathrm{cm}$ från platta 2. Potentialen minskar då varje centimeter med
+
+$$ \\frac{600}{4{,}5} \\approx 133{,}3\\ \\mathrm{V/cm} $$
+
+På hela avståndet $6{,}0\\ \\mathrm{cm}$ minskar den med
+
+$$ \\frac{600}{4{,}5} \\cdot 6{,}0 = 800\\ \\mathrm{V} $$
+
+Platta 3 ska därför ha potentialen
+
+$$ V_3 = 600 - 800 = -200\\ \\mathrm{V} $$
+
+**Svar:** $V_3 = -200\\ \\mathrm{V}$
+
+**c)** Elektronen har negativ laddning, så dess elektriska lägesenergi är störst där potentialen är lägst. Med laddningen $-e$ är lägesenergin i en punkt med potentialen *V* lika med $-e \\cdot V$. Vid starten är både lägesenergin och rörelseenergin 0. Energin bevaras, så i varje punkt på vägen gäller
+
+$$ E_\\mathrm{k} + (-e \\cdot V) = 0 \\quad\\Leftrightarrow\\quad E_\\mathrm{k} = e \\cdot V $$
+
+Rörelseenergin kan inte vara negativ, så elektronen kan bara befinna sig där $V \\geq 0$. Är $V_3 < 0$ passerar potentialen 0 någonstans före platta 3, och där vänder elektronen. Är $V_3 \\geq 0$ är potentialen positiv hela vägen fram till platta 3. Elektronen har då rörelseenergi kvar tills den når plattan. I gränsfallet $V_3 = 0$ stannar den precis vid plattan.
+
+Varken platta 2:s potential eller avstånden ingår i villkoret. De avgör bara hur fort elektronen rör sig på vägen. Det är vad som skulle visas.`,
+        },
+        {
+            level: 3,
+            question: `En apparat behöver en positiv och en negativ potential. Den får dem från ett enda batteri med två resistorer, se figuren. Resistanserna är okända, men potentialen i A är $+6{,}0\\ \\mathrm{V}$.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" style="max-width:400px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="50" y1="60" x2="350" y2="60" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="350" y1="60" x2="350" y2="170" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="350" y1="170" x2="50" y2="170" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="50" y1="170" x2="50" y2="60" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><rect x="105" y="52" width="40" height="16" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><text x="125" y="38" font-size="16" text-anchor="middle" fill="#0f1620"><tspan font-style="italic">R</tspan><tspan dy="4" font-size="12">1</tspan></text><rect x="255" y="52" width="40" height="16" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><text x="275" y="38" font-size="16" text-anchor="middle" fill="#0f1620"><tspan font-style="italic">R</tspan><tspan dy="4" font-size="12">2</tspan></text><circle cx="50" cy="60" r="3" fill="#0f1620"/><text x="50" y="42" font-size="16" text-anchor="middle" fill="#0f1620">A</text><circle cx="200" cy="60" r="3" fill="#0f1620"/><text x="200" y="42" font-size="16" text-anchor="middle" fill="#0f1620">O</text><circle cx="350" cy="60" r="3" fill="#0f1620"/><text x="350" y="42" font-size="16" text-anchor="middle" fill="#0f1620">B</text><line x1="200" y1="60" x2="200" y2="76" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="187" y1="76" x2="213" y2="76" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="191.5" y1="81" x2="208.5" y2="81" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><line x1="196" y1="86" x2="204" y2="86" stroke="#0f1620" stroke-width="1.8" stroke-linecap="square"/><rect x="195" y="166" width="10" height="8" fill="#fff"/><line x1="195" y1="156" x2="195" y2="184" stroke="#0f1620" stroke-width="1.8"/><line x1="205" y1="162" x2="205" y2="178" stroke="#0f1620" stroke-width="3.4"/><text x="200" y="212" font-size="16" text-anchor="middle" fill="#0f1620">9,0 V</text></svg>
+
+En tredje resistor med resistansen $R_3$ kopplas in mellan A och den jordade punkten O. Då sjunker potentialen i A till $+5{,}0\\ \\mathrm{V}$.
+
+a) Bestäm kvoten $\\dfrac{R_3}{R_1}$.<br>b) Potentialen i A ska höjas till $+6{,}0\\ \\mathrm{V}$ igen genom att en fjärde resistor med resistansen $R_4$ kopplas in. $R_3$ sitter kvar. Mellan vilka av punkterna A, O och B ska den kopplas, och hur stor ska $R_4$ vara i förhållande till $R_3$?`,
+            answer: { value: 0.5, unit: '' },
+            delsvar: [
+                { del: 'a', value: 1.7, unit: '', tol: 0.03, etikett: '$\\dfrac{R_3}{R_1} =$' },
+                { del: 'b', value: 0.5, unit: '', etikett: '$\\dfrac{R_4}{R_3} =$' },
+            ],
+            solution: `Kretsen är jordad i en enda punkt, så ingen ström går genom marken. Strömmen från A till O är därför lika stor som strömmen från O till B. Enligt Ohms lag är då kvoten mellan spänningarna på de två sidorna om O lika med kvoten mellan resistanserna där.
+
+**a)** Spänningen mellan A och B är hela tiden batteriets spänning, $9{,}0\\ \\mathrm{V}$. Före ändringen är därför
+
+$$ V_\\mathrm{B} = 6{,}0 - 9{,}0 = -3{,}0\\ \\mathrm{V} $$
+
+Spänningen är alltså $6{,}0\\ \\mathrm{V}$ över $R_1$ och $3{,}0\\ \\mathrm{V}$ över $R_2$, med samma ström:
+
+$$ \\frac{R_1}{R_2} = \\frac{6{,}0}{3{,}0} = 2 \\quad\\Leftrightarrow\\quad R_1 = 2 \\cdot R_2 $$
+
+När $R_3$ har kopplats in är potentialen i B
+
+$$ V_\\mathrm{B} = 5{,}0 - 9{,}0 = -4{,}0\\ \\mathrm{V} $$
+
+Låt $R_\\mathrm{E}$ vara ersättningsresistansen för $R_1$ och $R_3$, som är parallellkopplade. På samma sätt som ovan är
+
+$$ \\frac{R_\\mathrm{E}}{R_2} = \\frac{5{,}0}{4{,}0} = 1{,}25 \\quad\\Leftrightarrow\\quad R_\\mathrm{E} = 1{,}25 \\cdot R_2 $$
+
+Vi använder sambandet för parallellkoppling, $\\dfrac{1}{R_\\mathrm{E}} = \\dfrac{1}{R_1} + \\dfrac{1}{R_3}$. Insättning av $R_\\mathrm{E} = 1{,}25 \\cdot R_2$ och $R_1 = 2 \\cdot R_2$ ger
+
+$$ \\frac{1}{R_3} = \\frac{1}{R_\\mathrm{E}} - \\frac{1}{R_1} = \\frac{1}{1{,}25 \\cdot R_2} - \\frac{1}{2 \\cdot R_2} $$
+
+$$ \\frac{1}{R_3} = \\frac{0{,}80}{R_2} - \\frac{0{,}50}{R_2} = \\frac{0{,}30}{R_2} $$
+
+$$ R_3 = \\frac{R_2}{0{,}30} $$
+
+Kvoten blir
+
+$$ \\frac{R_3}{R_1} = \\frac{R_2}{0{,}30 \\cdot 2 \\cdot R_2} = \\frac{1}{0{,}60} \\approx 1{,}7 $$
+
+**Svar:** $\\dfrac{R_3}{R_1} \\approx 1{,}7$
+
+**b)** Resistansen mellan A och O har minskat, och därför är spänningen där för liten. En resistor mellan A och O skulle minska resistansen ännu mer. En resistor mellan A och B är parallell med batteriet och ändrar inte spänningen mellan A och B, så potentialen i A påverkas inte. $R_4$ ska i stället kopplas mellan O och B, så att resistansen minskar även där.
+
+Potentialen i A är $+6{,}0\\ \\mathrm{V}$ när resistansen mellan A och O är dubbelt så stor som resistansen mellan O och B, precis som från början. Resistansen mellan A och O är $1{,}25 \\cdot R_2$. Ersättningsresistansen för $R_2$ och $R_4$ ska alltså vara
+
+$$ \\frac{1{,}25 \\cdot R_2}{2} = 0{,}625 \\cdot R_2 $$
+
+Sambandet för parallellkoppling ger
+
+$$ \\frac{1}{R_4} = \\frac{1}{0{,}625 \\cdot R_2} - \\frac{1}{R_2} = \\frac{1{,}60}{R_2} - \\frac{1}{R_2} = \\frac{0{,}60}{R_2} $$
+
+$$ R_4 = \\frac{R_2}{0{,}60} $$
+
+Jämförelse med $R_3 = \\dfrac{R_2}{0{,}30}$ ger
+
+$$ \\frac{R_4}{R_3} = \\frac{0{,}30}{0{,}60} = 0{,}50 $$
+
+Resultatet är rimligt: $R_2$ är hälften av $R_1$, så den parallella resistorn ska också vara hälften så stor för att båda resistanserna ska minska med samma faktor.
+
+**Svar:** $R_4$ ska kopplas mellan O och B, och $R_4 = 0{,}50 \\cdot R_3$.`,
         },
     ],
 
@@ -39293,12 +47931,12 @@ $$ U_{PQ} = |V_P - V_Q| = |16 - 8{,}0| = 8{,}0\\ \\mathrm{V} $$
                 `Fältet inuti blir starkare än det yttre fältet.`,
                 `Fältet inuti är lika starkt som det yttre och kvarstår.`,
                 `Fältet inuti är ungefär hälften av det yttre fältet.`,
-                `Fältet inuti är noll — det resulterande fältet släcks ut.`,
+                `Fältet inuti är noll: det resulterande fältet släcks ut.`,
             ],
             correct: 3,
             solution: `Inuti en Faradays bur är det resulterande elektriska fältet **noll**. Ledningselektronerna i metallen omfördelas och skapar ett eget fält som exakt tar ut det yttre fältet inne i buren.
 
-**Svar:** Alternativ D — fältet inuti är noll.
+**Svar:** Alternativ D. Fältet inuti är noll.
 
 **Generell slutsats:** Det är därför känslig elektronik kan skärmas av med ett metallhölje, och varför du inte får mobiltäckning i en hiss eller ett tjockt metallrum.`,
         },
@@ -39316,7 +47954,7 @@ $$ U_{PQ} = |V_P - V_Q| = |16 - 8{,}0| = 8{,}0\\ \\mathrm{V} $$
 
 **Svar:** Alternativ B.
 
-**Generell slutsats:** Att det skulle bero på gummidäcken är en **vanlig missuppfattning**. Däcken är på tok för tunna för att isolera mot en blixt som redan färdats kilometer genom luft — det är karossen, inte däcken, som skyddar.`,
+**Generell slutsats:** Att det skulle bero på gummidäcken är en **vanlig missuppfattning**. Däcken är på tok för tunna för att isolera mot en blixt som redan färdats kilometer genom luft. Det är karossen, inte däcken, som skyddar.`,
         },
         {
             level: 1,
@@ -39330,14 +47968,14 @@ $$ U_{PQ} = |V_P - V_Q| = |16 - 8{,}0| = 8{,}0\\ \\mathrm{V} $$
             correct: 2,
             solution: `Lika laddningar repellerar varandra och strävar därför så långt ifrån varandra som möjligt. På en ledare innebär det att överskottsladdningarna hamnar på **utsidan**.
 
-**Svar:** Alternativ C — på utsidan.
+**Svar:** Alternativ C, på utsidan.
 
 **Generell slutsats:** Det är just därför inget fält uppstår inuti buren: laddningen sitter ytterst, och dess bidrag inuti tar ut varandra. Hänger man föremål på burens insida påverkas de inte, medan föremål på utsidan stöts ut av fältet.`,
         },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
-            level: 2,
+            level: 1,
             question: `Vad menas med **spetsurladdning**?`,
             choices: [
                 `Att laddningar koncentreras i en spetsig del av en ledare så att den lokala fältstyrkan blir så hög att luften runt spetsen laddas och en urladdning sker.`,
@@ -39353,7 +47991,7 @@ $$ U_{PQ} = |V_P - V_Q| = |16 - 8{,}0| = 8{,}0\\ \\mathrm{V} $$
 **Generell slutsats:** Samma fenomen kallas också **Sankt Elmseld** och kan ses som ett svagt blått sken kring masttoppar och åskledarspetsar vid åskväder. Det är en koronaurladdning, där luften kring spetsen joniseras och sänder ut ljus. Det är inte samma sak som en åskblixt.`,
         },
         {
-            level: 2,
+            level: 1,
             question: `En mobiltelefon läggs i en helt sluten metalllåda och tappar då all mottagning. Vilken förklaring stämmer bäst?`,
             choices: [
                 `Metallen drar till sig radiovågornas energi och laddar telefonens batteri.`,
@@ -39366,12 +48004,12 @@ $$ U_{PQ} = |V_P - V_Q| = |16 - 8{,}0| = 8{,}0\\ \\mathrm{V} $$
 
 **Svar:** Alternativ B.
 
-**Generell slutsats:** Samma princip används medvetet i avskärmade rum för känsliga mätningar och i skyddspåsar för kontaktlösa bankkort. Det är fälten utifrån som stängs ute — inte något som händer *med* själva telefonen.`,
+**Generell slutsats:** Samma princip används medvetet i avskärmade rum för känsliga mätningar och i skyddspåsar för kontaktlösa bankkort. Det är fälten utifrån som stängs ute, inte något som händer *med* själva telefonen.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
-            level: 3,
+            level: 2,
             question: `Hur kommer det sig, rent fysikaliskt, att det resulterande elektriska fältet inuti en Faradays bur blir noll?`,
             choices: [
                 `Metallen absorberar det yttre fältet och omvandlar det till värme.`,
@@ -39380,11 +48018,777 @@ $$ U_{PQ} = |V_P - V_Q| = |16 - 8{,}0| = 8{,}0\\ \\mathrm{V} $$
                 `Ledningselektronerna omfördelas så att burens ena sida blir negativ och den andra positiv, vilket skapar ett lika stort men motriktat fält inuti som tar ut det yttre fältet.`,
             ],
             correct: 3,
-            solution: `När det yttre fältet läggs på rör sig de fria ledningselektronerna **mot** fältet. Den ena sidan av buren får då ett elektronöverskott (blir negativ) och den andra ett underskott (blir positiv). Dessa omfördelade laddningar bygger upp ett **eget, motriktat fält** inuti buren. Omfördelningen fortsätter tills det inre fältet är *exakt lika stort* som det yttre — då tar de ut varandra och det resulterande fältet blir noll.
+            solution: `När det yttre fältet läggs på rör sig de fria ledningselektronerna **mot** fältet. Den ena sidan av buren får då ett elektronöverskott (blir negativ) och den andra ett underskott (blir positiv). Dessa omfördelade laddningar bygger upp ett **eget, motriktat fält** inuti buren. Omfördelningen fortsätter tills det inre fältet är *exakt lika stort* som det yttre. Då tar de ut varandra och det resulterande fältet blir noll.
 
 **Svar:** Alternativ D.
 
-**Generell slutsats:** Detta sker nästan ögonblickligen (med ljusets hastighet) och kallas **influens**. Poängen är att utsläckningen inte är passiv "absorption" utan ett aktivt, självreglerande svar: ju starkare yttre fält, desto mer omfördelas laddningarna — alltid precis lagom för att nolla fältet inuti.`,
+**Generell slutsats:** Detta sker nästan ögonblickligen (med ljusets hastighet) och kallas **influens**. Poängen är att utsläckningen inte är passiv "absorption" utan ett aktivt, självreglerande svar: ju starkare yttre fält, desto mer omfördelas laddningarna, alltid precis lagom för att nolla fältet inuti.`,
+        },
+        // ── Grund (påfyllning) ──
+        {
+            level: 1,
+            question: `En sluten låda av tunn mässingsplåt står mellan två laddade plattor. Figuren visar ett tvärsnitt. Punkterna A och C ligger utanför lådan, B och D ligger i luften inuti den. I vilka av punkterna är det resulterande elektriska fältet noll?
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 250" role="img" aria-label="Tvärsnitt av en metallåda mellan en positiv och en negativ platta med punkterna A, B, C och D" style="max-width:550px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><rect x="35" y="25" width="10" height="200" fill="#c0392b"/><rect x="395" y="25" width="10" height="200" fill="#2563c9"/><line x1="19" y1="45" x2="29" y2="45" stroke="#c0392b" stroke-width="2"/><line x1="24" y1="40" x2="24" y2="50" stroke="#c0392b" stroke-width="2"/><line x1="411" y1="45" x2="421" y2="45" stroke="#2563c9" stroke-width="2"/><line x1="19" y1="85" x2="29" y2="85" stroke="#c0392b" stroke-width="2"/><line x1="24" y1="80" x2="24" y2="90" stroke="#c0392b" stroke-width="2"/><line x1="411" y1="85" x2="421" y2="85" stroke="#2563c9" stroke-width="2"/><line x1="19" y1="125" x2="29" y2="125" stroke="#c0392b" stroke-width="2"/><line x1="24" y1="120" x2="24" y2="130" stroke="#c0392b" stroke-width="2"/><line x1="411" y1="125" x2="421" y2="125" stroke="#2563c9" stroke-width="2"/><line x1="19" y1="165" x2="29" y2="165" stroke="#c0392b" stroke-width="2"/><line x1="24" y1="160" x2="24" y2="170" stroke="#c0392b" stroke-width="2"/><line x1="411" y1="165" x2="421" y2="165" stroke="#2563c9" stroke-width="2"/><line x1="19" y1="205" x2="29" y2="205" stroke="#c0392b" stroke-width="2"/><line x1="24" y1="200" x2="24" y2="210" stroke="#c0392b" stroke-width="2"/><line x1="411" y1="205" x2="421" y2="205" stroke="#2563c9" stroke-width="2"/><rect x="150" y="75" width="150" height="100" fill="#fafaf5" stroke="#9aa0a8" stroke-width="7"/><circle cx="88" cy="125" r="4" fill="#0f1620"/><text x="102" y="130" font-size="16" fill="#0f1620" text-anchor="middle">A</text><circle cx="220" cy="125" r="4" fill="#0f1620"/><text x="234" y="130" font-size="16" fill="#0f1620" text-anchor="middle">B</text><circle cx="218" cy="46" r="4" fill="#0f1620"/><text x="232" y="51" font-size="16" fill="#0f1620" text-anchor="middle">C</text><circle cx="168" cy="155" r="4" fill="#0f1620"/><text x="182" y="160" font-size="16" fill="#0f1620" text-anchor="middle">D</text></svg>`,
+            choices: [
+                'I B och D',
+                'Bara i B',
+                'I A och C',
+                'I alla fyra punkterna',
+            ],
+            correct: 0,
+            solution: `Mässing är en metall, och den slutna lådan fungerar som en Faradays bur. Ledningselektronerna i plåten flyttar sig tills deras fält tar ut det yttre fältet **överallt** inuti lådan. Det gäller både i mitten (B) och nära en av väggarna (D).
+
+Punkterna A och C ligger utanför lådan. Där finns plattornas fält kvar, även om det har ändrats något av lådans laddningar.
+
+**Svar:** I B och D.`,
+        },
+        {
+            level: 1,
+            question: `Ett homogent elektriskt fält har styrkan $4{,}2 \\cdot 10^4\\ \\mathrm{N/C}$ och är riktat åt höger. En liten kula med laddningen $+3{,}0\\ \\mathrm{nC}$ hänger i en isolerande tråd i fältet. Därefter sätts en sluten metallbur runt kulan, utan att röra den. Kulans egen inverkan på buren kan försummas.<br>a) Hur stor är den elektriska kraften på kulan innan buren finns på plats? Svara i mN.<br>b) Hur starkt är det fält som burens omfördelade laddningar ger där kulan hänger, och åt vilket håll är det riktat?<br>c) Hur stor är den elektriska kraften på kulan när buren är på plats?`,
+            answer: { value: 0.13, unit: 'mN' },
+            delsvar: [
+                { del: 'a', value: 0.13, unit: 'mN', tol: 0.04 },
+                { del: 'b', value: 42000, unit: 'N/C' },
+                { del: 'c', value: 0, unit: 'N' },
+            ],
+            solution: `**a)** Vi löser ut kraften ur definitionen av elektrisk fältstyrka:
+
+$$ \\mathbb{E} = \\frac{F}{Q} \\quad\\Leftrightarrow\\quad F = \\mathbb{E} \\cdot Q $$
+
+$$
+\\left[ \\begin{array}{l}
+\\mathbb{E} = 4{,}2 \\cdot 10^4\\ \\mathrm{N/C} \\\\
+Q = 3{,}0\\ \\mathrm{nC} = 3{,}0 \\cdot 10^{-9}\\ \\mathrm{C}
+\\end{array} \\right]
+$$
+
+$$ F = 4{,}2 \\cdot 10^4 \\cdot 3{,}0 \\cdot 10^{-9} = 1{,}26 \\cdot 10^{-4}\\ \\mathrm{N} \\approx 0{,}13\\ \\mathrm{mN} $$
+
+**Svar:** 0,13 mN
+
+**b)** Det resulterande fältet inuti buren är noll. De omfördelade laddningarna måste därför ge ett fält som är lika starkt som det yttre fältet men motriktat.
+
+**Svar:** $4{,}2 \\cdot 10^4\\ \\mathrm{N/C}$, riktat åt vänster.
+
+**c)** Det resulterande fältet där kulan hänger är noll, och då är $F = \\mathbb{E} \\cdot Q = 0$. Kulan är fortfarande laddad, men det finns inget fält som påverkar den.
+
+**Svar:** Kraften är noll.`,
+        },
+        {
+            level: 1,
+            question: `Under ett åskmoln är det elektriska fältet riktat rakt uppåt. En oladdad, sluten container av stål står på isolerande klossar i fältet, se figuren. Hur fördelar sig laddningarna på containern?
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 232" role="img" aria-label="En container av stål på två isolerande klossar i ett uppåtriktat elektriskt fält" style="max-width:550px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><line x1="45" y1="20" x2="45" y2="212" stroke="#5f5a50" stroke-width="1.7"/><polygon points="45,104 39.5,117 50.5,117" fill="#5f5a50"/><line x1="95" y1="20" x2="95" y2="212" stroke="#5f5a50" stroke-width="1.7"/><polygon points="95,104 89.5,117 100.5,117" fill="#5f5a50"/><line x1="345" y1="20" x2="345" y2="212" stroke="#5f5a50" stroke-width="1.7"/><polygon points="345,104 339.5,117 350.5,117" fill="#5f5a50"/><line x1="395" y1="20" x2="395" y2="212" stroke="#5f5a50" stroke-width="1.7"/><polygon points="395,104 389.5,117 400.5,117" fill="#5f5a50"/><text x="70" y="121" font-size="20" fill="#0f1620" text-anchor="middle">𝔼</text><text x="370" y="121" font-size="20" fill="#0f1620" text-anchor="middle">𝔼</text><rect x="140" y="85" width="160" height="90" fill="#c9ced6" stroke="#0f1620" stroke-width="2"/><line x1="152" y1="91" x2="152" y2="169" stroke="#8d949e" stroke-width="1.4"/><line x1="164" y1="91" x2="164" y2="169" stroke="#8d949e" stroke-width="1.4"/><line x1="176" y1="91" x2="176" y2="169" stroke="#8d949e" stroke-width="1.4"/><line x1="188" y1="91" x2="188" y2="169" stroke="#8d949e" stroke-width="1.4"/><line x1="200" y1="91" x2="200" y2="169" stroke="#8d949e" stroke-width="1.4"/><line x1="212" y1="91" x2="212" y2="169" stroke="#8d949e" stroke-width="1.4"/><line x1="224" y1="91" x2="224" y2="169" stroke="#8d949e" stroke-width="1.4"/><line x1="236" y1="91" x2="236" y2="169" stroke="#8d949e" stroke-width="1.4"/><line x1="248" y1="91" x2="248" y2="169" stroke="#8d949e" stroke-width="1.4"/><line x1="260" y1="91" x2="260" y2="169" stroke="#8d949e" stroke-width="1.4"/><line x1="272" y1="91" x2="272" y2="169" stroke="#8d949e" stroke-width="1.4"/><line x1="284" y1="91" x2="284" y2="169" stroke="#8d949e" stroke-width="1.4"/><rect x="152" y="176" width="22" height="36" fill="#d9b98a" stroke="#0f1620" stroke-width="1.4"/><rect x="266" y="176" width="22" height="36" fill="#d9b98a" stroke="#0f1620" stroke-width="1.4"/><line x1="15" y1="213" x2="425" y2="213" stroke="#0f1620" stroke-width="2"/><line x1="24" y1="213" x2="16" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="38" y1="213" x2="30" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="52" y1="213" x2="44" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="66" y1="213" x2="58" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="80" y1="213" x2="72" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="94" y1="213" x2="86" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="108" y1="213" x2="100" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="122" y1="213" x2="114" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="136" y1="213" x2="128" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="150" y1="213" x2="142" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="164" y1="213" x2="156" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="178" y1="213" x2="170" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="192" y1="213" x2="184" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="206" y1="213" x2="198" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="220" y1="213" x2="212" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="234" y1="213" x2="226" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="248" y1="213" x2="240" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="262" y1="213" x2="254" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="276" y1="213" x2="268" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="290" y1="213" x2="282" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="304" y1="213" x2="296" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="318" y1="213" x2="310" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="332" y1="213" x2="324" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="346" y1="213" x2="338" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="360" y1="213" x2="352" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="374" y1="213" x2="366" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="388" y1="213" x2="380" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="402" y1="213" x2="394" y2="222" stroke="#0f1620" stroke-width="1"/><line x1="416" y1="213" x2="408" y2="222" stroke="#0f1620" stroke-width="1"/></svg>`,
+            choices: [
+                'Ovansidan blir negativ och undersidan positiv.',
+                'Hela containern blir negativt laddad.',
+                'Ovansidan blir positiv och undersidan negativ.',
+                'Laddningarna flyttar sig inte, eftersom containern är oladdad.',
+            ],
+            correct: 2,
+            solution: `Ett elektriskt fält ger en kraft på negativa laddningar **mot** fältets riktning. Fältet är riktat uppåt, så ledningselektronerna i stålet rör sig nedåt.
+
+Undersidan får då ett överskott av elektroner och blir negativ. Ovansidan får ett underskott av elektroner och blir positiv. Containern som helhet är fortfarande oladdad, eftersom inga laddningar har tillförts eller lämnat den.
+
+**Svar:** Ovansidan blir positiv och undersidan negativ.`,
+        },
+        {
+            level: 1,
+            question: `Spetsen på en nål kan ses som ett litet klot med radien $1{,}0\\ \\mathrm{mm}$. Spetsen har laddningen $1{,}5\\ \\mathrm{nC}$. En slät metallkula med radien $5{,}0\\ \\mathrm{cm}$ har lika stor laddning. Luft blir ledande när fältstyrkan når ungefär $3{,}0 \\cdot 10^6\\ \\mathrm{N/C}$.<br>a) Hur stor är fältstyrkan vid spetsens yta, enligt formeln för ett laddat klot?<br>b) Hur stor är fältstyrkan vid den stora kulans yta?<br>c) Var sker en urladdning till luften, och vad kallas en sådan urladdning?`,
+            answer: { value: 13000000, unit: 'N/C', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 13000000, unit: 'N/C', tol: 0.04 },
+                { del: 'b', value: 5400, unit: 'N/C' },
+                { del: 'c' },
+            ],
+            solution: `Fältstyrkan på avståndet *r* från mitten av ett laddat klot är
+
+$$ \\mathbb{E} = k \\cdot \\frac{Q}{r^2} $$
+
+$$
+\\left[ \\begin{array}{l}
+k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2} \\\\
+Q = 1{,}5\\ \\mathrm{nC} = 1{,}5 \\cdot 10^{-9}\\ \\mathrm{C} \\\\
+r_1 = 1{,}0\\ \\mathrm{mm} = 1{,}0 \\cdot 10^{-3}\\ \\mathrm{m} \\\\
+r_2 = 5{,}0\\ \\mathrm{cm} = 0{,}050\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+**a)** Vid spetsen:
+
+$$ \\mathbb{E}_1 = 8{,}99 \\cdot 10^9 \\cdot \\frac{1{,}5 \\cdot 10^{-9}}{(1{,}0 \\cdot 10^{-3})^2} = 1{,}3485 \\cdot 10^7\\ \\mathrm{N/C} \\approx 1{,}3 \\cdot 10^7\\ \\mathrm{N/C} $$
+
+**Svar:** $1{,}3 \\cdot 10^7\\ \\mathrm{N/C}$
+
+**b)** Vid den stora kulan:
+
+$$ \\mathbb{E}_2 = 8{,}99 \\cdot 10^9 \\cdot \\frac{1{,}5 \\cdot 10^{-9}}{0{,}050^2} = 5\\,394\\ \\mathrm{N/C} \\approx 5{,}4 \\cdot 10^3\\ \\mathrm{N/C} $$
+
+**Svar:** $5{,}4 \\cdot 10^3\\ \\mathrm{N/C}$
+
+**c)** Vid spetsen är fältstyrkan större än $3{,}0 \\cdot 10^6\\ \\mathrm{N/C}$, men vid den stora kulan är den långt under gränsen.
+
+**Svar:** Urladdningen sker vid nålens spets och kallas spetsurladdning.`,
+        },
+
+        // ── Mellan (påfyllning) ──
+        {
+            level: 2,
+            question: `Ett oladdat elektroskop står på ett bord. Över elektroskopet sätts en korg av metallnät, utan att nätet rör elektroskopet. En negativt laddad ballong hålls nära korgen, se figuren.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 290" role="img" aria-label="Ett elektroskop under en korg av metallnät med en negativt laddad ballong ovanför korgen" style="max-width:550px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><line x1="15" y1="272" x2="425" y2="272" stroke="#0f1620" stroke-width="2"/><line x1="24" y1="272" x2="16" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="38" y1="272" x2="30" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="52" y1="272" x2="44" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="66" y1="272" x2="58" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="80" y1="272" x2="72" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="94" y1="272" x2="86" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="108" y1="272" x2="100" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="122" y1="272" x2="114" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="136" y1="272" x2="128" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="150" y1="272" x2="142" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="164" y1="272" x2="156" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="178" y1="272" x2="170" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="192" y1="272" x2="184" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="206" y1="272" x2="198" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="220" y1="272" x2="212" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="234" y1="272" x2="226" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="248" y1="272" x2="240" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="262" y1="272" x2="254" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="276" y1="272" x2="268" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="290" y1="272" x2="282" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="304" y1="272" x2="296" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="318" y1="272" x2="310" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="332" y1="272" x2="324" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="346" y1="272" x2="338" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="360" y1="272" x2="352" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="374" y1="272" x2="366" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="388" y1="272" x2="380" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="402" y1="272" x2="394" y2="281" stroke="#0f1620" stroke-width="1"/><line x1="416" y1="272" x2="408" y2="281" stroke="#0f1620" stroke-width="1"/><rect x="151" y="261" width="68" height="10" rx="2" fill="#6b6256"/><circle cx="185" cy="217" r="45" fill="#ffffff" stroke="#0f1620" stroke-width="2"/><rect x="177" y="162" width="16" height="14" fill="#6b6256"/><line x1="185" y1="146" x2="185" y2="248" stroke="#0f1620" stroke-width="4"/><rect x="161" y="140" width="48" height="6" rx="2" fill="#0f1620"/><line x1="188.4" y1="204" x2="188.4" y2="244" stroke="#c07a1e" stroke-width="2.8"/><circle cx="185" cy="204" r="3.2" fill="#c07a1e"/><line x1="117" y1="112" x2="117" y2="272" stroke="#8d949e" stroke-width="1.1" stroke-opacity="0.55"/><line x1="134" y1="112" x2="134" y2="272" stroke="#8d949e" stroke-width="1.1" stroke-opacity="0.55"/><line x1="151" y1="112" x2="151" y2="272" stroke="#8d949e" stroke-width="1.1" stroke-opacity="0.55"/><line x1="168" y1="112" x2="168" y2="272" stroke="#8d949e" stroke-width="1.1" stroke-opacity="0.55"/><line x1="185" y1="112" x2="185" y2="272" stroke="#8d949e" stroke-width="1.1" stroke-opacity="0.55"/><line x1="202" y1="112" x2="202" y2="272" stroke="#8d949e" stroke-width="1.1" stroke-opacity="0.55"/><line x1="219" y1="112" x2="219" y2="272" stroke="#8d949e" stroke-width="1.1" stroke-opacity="0.55"/><line x1="236" y1="112" x2="236" y2="272" stroke="#8d949e" stroke-width="1.1" stroke-opacity="0.55"/><line x1="253" y1="112" x2="253" y2="272" stroke="#8d949e" stroke-width="1.1" stroke-opacity="0.55"/><line x1="100" y1="128" x2="270" y2="128" stroke="#8d949e" stroke-width="1.1" stroke-opacity="0.55"/><line x1="100" y1="144" x2="270" y2="144" stroke="#8d949e" stroke-width="1.1" stroke-opacity="0.55"/><line x1="100" y1="160" x2="270" y2="160" stroke="#8d949e" stroke-width="1.1" stroke-opacity="0.55"/><line x1="100" y1="176" x2="270" y2="176" stroke="#8d949e" stroke-width="1.1" stroke-opacity="0.55"/><line x1="100" y1="192" x2="270" y2="192" stroke="#8d949e" stroke-width="1.1" stroke-opacity="0.55"/><line x1="100" y1="208" x2="270" y2="208" stroke="#8d949e" stroke-width="1.1" stroke-opacity="0.55"/><line x1="100" y1="224" x2="270" y2="224" stroke="#8d949e" stroke-width="1.1" stroke-opacity="0.55"/><line x1="100" y1="240" x2="270" y2="240" stroke="#8d949e" stroke-width="1.1" stroke-opacity="0.55"/><line x1="100" y1="256" x2="270" y2="256" stroke="#8d949e" stroke-width="1.1" stroke-opacity="0.55"/><rect x="100" y="112" width="170" height="159" fill="none" stroke="#6d747e" stroke-width="3"/><path d="M 185 94 C 140 70 146 12 185 12 C 224 12 230 70 185 94 Z" fill="#e8c46a" stroke="#9a7416" stroke-width="1.6"/><polygon points="185,92 180,101 190,101" fill="#9a7416"/><line x1="164" y1="42" x2="174" y2="42" stroke="#0f1620" stroke-width="2"/><line x1="196" y1="42" x2="206" y2="42" stroke="#0f1620" stroke-width="2"/><line x1="180" y1="62" x2="190" y2="62" stroke="#0f1620" stroke-width="2"/><line x1="180" y1="28" x2="190" y2="28" stroke="#0f1620" stroke-width="2"/><text x="290" y="55" font-size="16" fill="#0f1620" text-anchor="start">laddad ballong</text><line x1="219" y1="50" x2="284" y2="50" stroke="#5f5a50" stroke-width="1.2"/><text x="300" y="150" font-size="16" fill="#0f1620" text-anchor="start">metallnät</text><line x1="273" y1="145" x2="294" y2="145" stroke="#5f5a50" stroke-width="1.2"/><text x="300" y="222" font-size="16" fill="#0f1620" text-anchor="start">elektroskop</text><line x1="231" y1="217" x2="294" y2="217" stroke="#5f5a50" stroke-width="1.2"/></svg>
+
+a) Visar elektroskopet något utslag? Förklara.<br>b) Ballongen hålls kvar på samma plats medan korgen lyfts bort. Vad händer med elektroskopet? Förklara med hjälp av hur elektronerna rör sig.`,
+            solution: `**a)** Ballongens fält påverkar ledningselektronerna i nätet. De stöts bort från ballongen, så den del av korgen som är närmast ballongen blir positiv. De omfördelade laddningarna ger ett fält inuti korgen som är lika starkt som ballongens fält men motriktat. Det resulterande fältet vid elektroskopet är därför noll, och elektronerna i elektroskopet påverkas inte.
+
+**Svar:** Nej, elektroskopet visar inget utslag, eftersom korgen fungerar som en Faradays bur.
+
+**b)** När korgen är borta når ballongens fält elektroskopet. Ledningselektronerna i elektroskopet stöts bort från ballongen, från plattan högst upp ned till staven och visaren. Plattan blir positiv, medan staven och visaren blir negativa. Lika laddningar repellerar varandra, så visaren drivs ut från staven.
+
+Elektroskopet är fortfarande oladdat som helhet. Det är bara laddningarnas fördelning som har ändrats (influens).
+
+**Svar:** Elektroskopet ger utslag, eftersom elektroner trycks ned till staven och visaren, som då repellerar varandra.`,
+        },
+        {
+            level: 2,
+            question: `En elektrisk fältmätare placeras i ett fält med styrkan $500\\ \\mathrm{V/m}$. Den ställs sedan i tur och ordning inuti fem slutna höljen med tunna väggar. Tabellen visar mätarens värden.
+
+| Hölje | Fältstyrka inuti (V/m) |
+|---|---|
+| Aluminiumplåt | 0 |
+| Cellplast | 496 |
+| Kopparfolie | 240 |
+| Finmaskigt stålnät | 2 |
+| Papper | 490 |
+
+a) Förklara varför cellplasten och papperet nästan inte påverkar fältet.<br>b) Ett av mätvärdena är orimligt om höljet verkligen var slutet. Vilket? Ge en möjlig förklaring till värdet.<br>c) Det yttre fältet görs tre gånger så starkt. Hur starkt blir fältet inuti höljet av aluminiumplåt? Motivera.`,
+            answer: { value: 0, unit: 'V/m' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+                { del: 'c', value: 0, unit: 'V/m' },
+            ],
+            solution: `**a)** Cellplast och torrt papper är isolatorer. De har inga ledningselektroner som kan flytta sig genom materialet, så det byggs inte upp något motriktat fält som är starkt nog.
+
+**Svar:** Isolatorer saknar fria elektroner, så det yttre fältet släcks inte ut.
+
+**b)** Koppar är en metall med många ledningselektroner. Ett slutet hölje av kopparfolie ska därför ge ett fält som är noll, precis som aluminiumplåten. Värdet 240 V/m visar att en del av fältet nådde mätaren.
+
+Stålnätets värde 2 V/m är däremot rimligt. Nätet har små hål, så fältet släcks ut nästan helt men inte fullständigt.
+
+**Svar:** Värdet för kopparfolien. En möjlig förklaring är att folien inte var sluten, till exempel för att den hade en stor glipa.
+
+**c)** Ett starkare yttre fält flyttar fler ledningselektroner. De fortsätter att flytta sig tills deras motriktade fält är lika starkt som det nya yttre fältet, alltså tre gånger så starkt som förut. Det resulterande fältet blir åter noll.
+
+**Svar:** Fältet blir 0 V/m även då.`,
+        },
+        {
+            level: 2,
+            question: `Ett yttre elektriskt fält med styrkan $8{,}0 \\cdot 10^4\\ \\mathrm{N/C}$ läggs på över en metallbur. Fältet är riktat åt höger. En mycket kort stund senare har de omfördelade laddningarna hunnit bygga upp ett motriktat fält som är 60 % av det yttre.<br>a) Hur starkt är det resulterande fältet inuti buren i det ögonblicket, och åt vilket håll är det riktat?<br>b) Hur stor är den elektriska kraften på en ledningselektron i det resulterande fältet, och åt vilket håll är den riktad?<br>c) Förklara varför elektronerna slutar att omfördela sig när det motriktade fältet har nått 100 %, varken tidigare eller senare.`,
+            answer: { value: 32000, unit: 'N/C' },
+            delsvar: [
+                { del: 'a', value: 32000, unit: 'N/C' },
+                { del: 'b', value: 5.1e-15, unit: 'N' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Vi räknar fält åt höger som positiva. Det motriktade fältet är 60 % av det yttre:
+
+$$ 0{,}60 \\cdot 8{,}0 \\cdot 10^4 = 4{,}8 \\cdot 10^4\\ \\mathrm{N/C} $$
+
+Det resulterande fältet blir
+
+$$ \\mathbb{E} = 8{,}0 \\cdot 10^4 - 4{,}8 \\cdot 10^4 = 3{,}2 \\cdot 10^4\\ \\mathrm{N/C} $$
+
+Värdet är positivt, så det resulterande fältet är riktat åt höger.
+
+**Svar:** $3{,}2 \\cdot 10^4\\ \\mathrm{N/C}$ åt höger.
+
+**b)** Kraftens storlek fås ur definitionen av fältstyrka:
+
+$$ F = \\mathbb{E} \\cdot q_e $$
+
+$$
+\\left[ \\begin{array}{l}
+\\mathbb{E} = 3{,}2 \\cdot 10^4\\ \\mathrm{N/C} \\\\
+q_e \\approx 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}
+\\end{array} \\right]
+$$
+
+$$ F = 3{,}2 \\cdot 10^4 \\cdot 1{,}602 \\cdot 10^{-19} = 5{,}1264 \\cdot 10^{-15}\\ \\mathrm{N} \\approx 5{,}1 \\cdot 10^{-15}\\ \\mathrm{N} $$
+
+Elektronen är negativ, så kraften är riktad mot fältet.
+
+**Svar:** $5{,}1 \\cdot 10^{-15}\\ \\mathrm{N}$ åt vänster.
+
+**c)** Så länge det motriktade fältet är svagare än det yttre finns ett resulterande fält åt höger. Då verkar en kraft åt vänster på ledningselektronerna, och fler elektroner samlas på burens vänstra sida. Det gör det motriktade fältet ännu starkare.
+
+Om det motriktade fältet skulle bli starkare än det yttre, skulle det resulterande fältet i stället vara riktat åt vänster. Elektronerna skulle då drivas tillbaka åt höger. Bara när fälten är lika starka är kraften på elektronerna noll.
+
+**Svar:** Först vid 100 % är det resulterande fältet noll, och då verkar ingen elektrisk kraft som kan flytta fler elektroner.`,
+        },
+        {
+            level: 2,
+            question: `En blixt slår ned i taket på en bil och strömmen $30\\ \\mathrm{kA}$ går genom karossen ned mot marken. Karossens resistans mellan taket och golvet är $1{,}0\\ \\mathrm{m\\Omega}$. En passagerare rör samtidigt vid karossens tak och golv. Passagerarens kropp har resistansen $2{,}0\\ \\mathrm{k\\Omega}$. Använd en förenklad modell där karossen och passageraren är två parallellkopplade resistorer, och där nästan hela strömmen antas gå genom karossen.<br>a) Hur stor blir spänningen mellan taket och golvet?<br>b) Hur stor ström går genom passageraren? Svara i mA.<br>c) En annan bil har kaross av glasfiber, som är en isolator. Förklara varför den ger ett sämre skydd, trots att däcken är likadana.`,
+            answer: { value: 30, unit: 'V' },
+            delsvar: [
+                { del: 'a', value: 30, unit: 'V' },
+                { del: 'b', value: 15, unit: 'mA' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Spänningen över karossen ges av Ohms lag:
+
+$$ U = R \\cdot I $$
+
+$$
+\\left[ \\begin{array}{l}
+R = 1{,}0\\ \\mathrm{m\\Omega} = 1{,}0 \\cdot 10^{-3}\\ \\Omega \\\\
+I = 30\\ \\mathrm{kA} = 30 \\cdot 10^3\\ \\mathrm{A}
+\\end{array} \\right]
+$$
+
+$$ U = 1{,}0 \\cdot 10^{-3} \\cdot 30 \\cdot 10^3 = 30\\ \\mathrm{V} $$
+
+**Svar:** 30 V
+
+**b)** Vid parallellkoppling är spänningen lika stor över båda grenarna, så spänningen över passageraren är också 30 V. Vi kallar passagerarens resistans för $R_\\mathrm{p}$ och strömmen genom passageraren för $I_\\mathrm{p}$.
+
+$$ U = R_\\mathrm{p} \\cdot I_\\mathrm{p} \\quad\\Leftrightarrow\\quad I_\\mathrm{p} = \\frac{U}{R_\\mathrm{p}} $$
+
+$$ I_\\mathrm{p} = \\frac{30}{2{,}0 \\cdot 10^3} = 0{,}015\\ \\mathrm{A} = 15\\ \\mathrm{mA} $$
+
+Strömmen genom karossen är två miljoner gånger så stor. Det var alltså rimligt att anta att nästan hela strömmen går genom karossen.
+
+**Svar:** 15 mA
+
+**c)** Glasfiber har inga fria elektroner. En sådan kaross kan varken släcka ut det elektriska fältet i kupén eller leda strömmen runt passagerarna. Blixtens ström kan då i stället gå genom kupén. Däcken spelar ingen roll i någon av bilarna, eftersom en blixt som har gått genom kilometervis med luft lätt tar sig förbi dem.
+
+**Svar:** Glasfiberkarossen är en isolator och fungerar inte som en Faradays bur, medan en metallkaross släcker ut fältet i kupén och leder strömmen runt den.`,
+        },
+        {
+            level: 2,
+            question: `Ett ihåligt metallklot med radien *R* har en positiv överskottsladdning. Vilken av graferna visar hur fältstyrkan $\\mathbb{E}$ beror på avståndet *r* från klotets medelpunkt?
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 470 390" role="img" aria-label="Fyra grafer över fältstyrkan som funktion av avståndet r från klotets medelpunkt" style="max-width:564px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><line x1="95" y1="165" x2="95" y2="85" stroke="#5f5a50" stroke-width="1.3" stroke-dasharray="5 4"/><line x1="50" y1="165" x2="222" y2="165" stroke="#0f1620" stroke-width="2"/><polygon points="232,165 221,160.5 221,169.5" fill="#0f1620"/><line x1="50" y1="165" x2="50" y2="37" stroke="#0f1620" stroke-width="2"/><polygon points="50,27 45.5,38 54.5,38" fill="#0f1620"/><path d="M 86.9 46 L 87.8 51.6 L 88.7 56.8 L 89.6 61.7 L 90.5 66.2 L 91.4 70.5 L 92.3 74.5 L 93.2 78.2 L 94.1 81.7 L 95 85 L 95.9 88.1 L 96.8 91 L 97.7 93.8 L 98.6 96.4 L 99.5 98.9 L 100.4 101.2 L 101.3 103.4 L 102.2 105.5 L 103.1 107.5 L 104 109.4 L 104.9 111.3 L 105.8 113 L 106.7 114.6 L 107.6 116.2 L 108.5 117.7 L 109.4 119.1 L 110.3 120.4 L 111.2 121.7 L 112.1 123 L 113 124.2 L 113.9 125.3 L 114.8 126.4 L 115.7 127.5 L 116.6 128.5 L 117.5 129.4 L 118.4 130.4 L 119.3 131.3 L 120.2 132.1 L 121.1 133 L 122 133.8 L 122.9 134.5 L 123.8 135.3 L 124.7 136 L 125.6 136.7 L 126.5 137.3 L 127.4 138 L 128.3 138.6 L 129.2 139.2 L 130.1 139.8 L 131 140.3 L 131.9 140.8 L 132.8 141.4 L 133.7 141.9 L 134.6 142.4 L 135.5 142.8 L 136.4 143.3 L 137.3 143.7 L 138.2 144.2 L 139.1 144.6 L 140 145 L 140.9 145.4 L 141.8 145.8 L 142.7 146.1 L 143.6 146.5 L 144.5 146.9 L 145.4 147.2 L 146.3 147.5 L 147.2 147.9 L 148.1 148.2 L 149 148.5 L 149.9 148.8 L 150.8 149.1 L 151.7 149.3 L 152.6 149.6 L 153.5 149.9 L 154.4 150.1 L 155.3 150.4 L 156.2 150.6 L 157.1 150.9 L 158 151.1 L 158.9 151.3 L 159.8 151.6 L 160.7 151.8 L 161.6 152 L 162.5 152.2 L 163.4 152.4 L 164.3 152.6 L 165.2 152.8 L 166.1 153 L 167 153.2 L 167.9 153.3 L 168.8 153.5 L 169.7 153.7 L 170.6 153.9 L 171.5 154 L 172.4 154.2 L 173.3 154.3 L 174.2 154.5 L 175.1 154.6 L 176 154.8 L 176.9 154.9 L 177.8 155.1 L 178.7 155.2 L 179.6 155.4 L 180.5 155.5 L 181.4 155.6 L 182.3 155.7 L 183.2 155.9 L 184.1 156 L 185 156.1 L 185.9 156.2 L 186.8 156.3 L 187.7 156.5 L 188.6 156.6 L 189.5 156.7 L 190.4 156.8 L 191.3 156.9 L 192.2 157 L 193.1 157.1 L 194 157.2 L 194.9 157.3 L 195.8 157.4 L 196.7 157.5 L 197.6 157.6 L 198.5 157.7 L 199.4 157.7 L 200.3 157.8 L 201.2 157.9 L 202.1 158" fill="none" stroke="#c0392b" stroke-width="3" stroke-linejoin="round"/><text x="33" y="41" font-size="18" fill="#0f1620" text-anchor="middle">𝔼</text><text x="228" y="185" font-size="16" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">r</tspan></text><text x="95" y="185" font-size="16" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">R</tspan></text><text x="160" y="53" font-size="16" fill="#0f1620" text-anchor="middle">Graf 1</text><line x1="320" y1="165" x2="320" y2="85" stroke="#5f5a50" stroke-width="1.3" stroke-dasharray="5 4"/><line x1="275" y1="165" x2="447" y2="165" stroke="#0f1620" stroke-width="2"/><polygon points="457,165 446,160.5 446,169.5" fill="#0f1620"/><line x1="275" y1="165" x2="275" y2="37" stroke="#0f1620" stroke-width="2"/><polygon points="275,27 270.5,38 279.5,38" fill="#0f1620"/><path d="M 275 165 L 320 85 L 320.9 88.1 L 321.8 91 L 322.7 93.8 L 323.6 96.4 L 324.5 98.9 L 325.4 101.2 L 326.3 103.4 L 327.2 105.5 L 328.1 107.5 L 329 109.4 L 329.9 111.3 L 330.8 113 L 331.7 114.6 L 332.6 116.2 L 333.5 117.7 L 334.4 119.1 L 335.3 120.4 L 336.2 121.7 L 337.1 123 L 338 124.2 L 338.9 125.3 L 339.8 126.4 L 340.7 127.5 L 341.6 128.5 L 342.5 129.4 L 343.4 130.4 L 344.3 131.3 L 345.2 132.1 L 346.1 133 L 347 133.8 L 347.9 134.5 L 348.8 135.3 L 349.7 136 L 350.6 136.7 L 351.5 137.3 L 352.4 138 L 353.3 138.6 L 354.2 139.2 L 355.1 139.8 L 356 140.3 L 356.9 140.8 L 357.8 141.4 L 358.7 141.9 L 359.6 142.4 L 360.5 142.8 L 361.4 143.3 L 362.3 143.7 L 363.2 144.2 L 364.1 144.6 L 365 145 L 365.9 145.4 L 366.8 145.8 L 367.7 146.1 L 368.6 146.5 L 369.5 146.9 L 370.4 147.2 L 371.3 147.5 L 372.2 147.9 L 373.1 148.2 L 374 148.5 L 374.9 148.8 L 375.8 149.1 L 376.7 149.3 L 377.6 149.6 L 378.5 149.9 L 379.4 150.1 L 380.3 150.4 L 381.2 150.6 L 382.1 150.9 L 383 151.1 L 383.9 151.3 L 384.8 151.6 L 385.7 151.8 L 386.6 152 L 387.5 152.2 L 388.4 152.4 L 389.3 152.6 L 390.2 152.8 L 391.1 153 L 392 153.2 L 392.9 153.3 L 393.8 153.5 L 394.7 153.7 L 395.6 153.9 L 396.5 154 L 397.4 154.2 L 398.3 154.3 L 399.2 154.5 L 400.1 154.6 L 401 154.8 L 401.9 154.9 L 402.8 155.1 L 403.7 155.2 L 404.6 155.4 L 405.5 155.5 L 406.4 155.6 L 407.3 155.7 L 408.2 155.9 L 409.1 156 L 410 156.1 L 410.9 156.2 L 411.8 156.3 L 412.7 156.5 L 413.6 156.6 L 414.5 156.7 L 415.4 156.8 L 416.3 156.9 L 417.2 157 L 418.1 157.1 L 419 157.2 L 419.9 157.3 L 420.8 157.4 L 421.7 157.5 L 422.6 157.6 L 423.5 157.7 L 424.4 157.7 L 425.3 157.8 L 426.2 157.9 L 427.1 158" fill="none" stroke="#c0392b" stroke-width="3" stroke-linejoin="round"/><text x="258" y="41" font-size="18" fill="#0f1620" text-anchor="middle">𝔼</text><text x="453" y="185" font-size="16" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">r</tspan></text><text x="320" y="185" font-size="16" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">R</tspan></text><text x="385" y="53" font-size="16" fill="#0f1620" text-anchor="middle">Graf 2</text><line x1="95" y1="355" x2="95" y2="275" stroke="#5f5a50" stroke-width="1.3" stroke-dasharray="5 4"/><line x1="50" y1="355" x2="222" y2="355" stroke="#0f1620" stroke-width="2"/><polygon points="232,355 221,350.5 221,359.5" fill="#0f1620"/><line x1="50" y1="355" x2="50" y2="227" stroke="#0f1620" stroke-width="2"/><polygon points="50,217 45.5,228 54.5,228" fill="#0f1620"/><path d="M 50 355 L 95 355 M 95 275 L 95.9 278.1 L 96.8 281 L 97.7 283.8 L 98.6 286.4 L 99.5 288.9 L 100.4 291.2 L 101.3 293.4 L 102.2 295.5 L 103.1 297.5 L 104 299.4 L 104.9 301.3 L 105.8 303 L 106.7 304.6 L 107.6 306.2 L 108.5 307.7 L 109.4 309.1 L 110.3 310.4 L 111.2 311.7 L 112.1 313 L 113 314.2 L 113.9 315.3 L 114.8 316.4 L 115.7 317.5 L 116.6 318.5 L 117.5 319.4 L 118.4 320.4 L 119.3 321.3 L 120.2 322.1 L 121.1 323 L 122 323.8 L 122.9 324.5 L 123.8 325.3 L 124.7 326 L 125.6 326.7 L 126.5 327.3 L 127.4 328 L 128.3 328.6 L 129.2 329.2 L 130.1 329.8 L 131 330.3 L 131.9 330.8 L 132.8 331.4 L 133.7 331.9 L 134.6 332.4 L 135.5 332.8 L 136.4 333.3 L 137.3 333.7 L 138.2 334.2 L 139.1 334.6 L 140 335 L 140.9 335.4 L 141.8 335.8 L 142.7 336.1 L 143.6 336.5 L 144.5 336.9 L 145.4 337.2 L 146.3 337.5 L 147.2 337.9 L 148.1 338.2 L 149 338.5 L 149.9 338.8 L 150.8 339.1 L 151.7 339.3 L 152.6 339.6 L 153.5 339.9 L 154.4 340.1 L 155.3 340.4 L 156.2 340.6 L 157.1 340.9 L 158 341.1 L 158.9 341.3 L 159.8 341.6 L 160.7 341.8 L 161.6 342 L 162.5 342.2 L 163.4 342.4 L 164.3 342.6 L 165.2 342.8 L 166.1 343 L 167 343.2 L 167.9 343.3 L 168.8 343.5 L 169.7 343.7 L 170.6 343.9 L 171.5 344 L 172.4 344.2 L 173.3 344.3 L 174.2 344.5 L 175.1 344.6 L 176 344.8 L 176.9 344.9 L 177.8 345.1 L 178.7 345.2 L 179.6 345.4 L 180.5 345.5 L 181.4 345.6 L 182.3 345.7 L 183.2 345.9 L 184.1 346 L 185 346.1 L 185.9 346.2 L 186.8 346.3 L 187.7 346.5 L 188.6 346.6 L 189.5 346.7 L 190.4 346.8 L 191.3 346.9 L 192.2 347 L 193.1 347.1 L 194 347.2 L 194.9 347.3 L 195.8 347.4 L 196.7 347.5 L 197.6 347.6 L 198.5 347.7 L 199.4 347.7 L 200.3 347.8 L 201.2 347.9 L 202.1 348" fill="none" stroke="#c0392b" stroke-width="3" stroke-linejoin="round"/><text x="33" y="231" font-size="18" fill="#0f1620" text-anchor="middle">𝔼</text><text x="228" y="375" font-size="16" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">r</tspan></text><text x="95" y="375" font-size="16" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">R</tspan></text><text x="160" y="243" font-size="16" fill="#0f1620" text-anchor="middle">Graf 3</text><line x1="320" y1="355" x2="320" y2="275" stroke="#5f5a50" stroke-width="1.3" stroke-dasharray="5 4"/><line x1="275" y1="355" x2="447" y2="355" stroke="#0f1620" stroke-width="2"/><polygon points="457,355 446,350.5 446,359.5" fill="#0f1620"/><line x1="275" y1="355" x2="275" y2="227" stroke="#0f1620" stroke-width="2"/><polygon points="275,217 270.5,228 279.5,228" fill="#0f1620"/><path d="M 275 275 L 320 275 L 320.9 278.1 L 321.8 281 L 322.7 283.8 L 323.6 286.4 L 324.5 288.9 L 325.4 291.2 L 326.3 293.4 L 327.2 295.5 L 328.1 297.5 L 329 299.4 L 329.9 301.3 L 330.8 303 L 331.7 304.6 L 332.6 306.2 L 333.5 307.7 L 334.4 309.1 L 335.3 310.4 L 336.2 311.7 L 337.1 313 L 338 314.2 L 338.9 315.3 L 339.8 316.4 L 340.7 317.5 L 341.6 318.5 L 342.5 319.4 L 343.4 320.4 L 344.3 321.3 L 345.2 322.1 L 346.1 323 L 347 323.8 L 347.9 324.5 L 348.8 325.3 L 349.7 326 L 350.6 326.7 L 351.5 327.3 L 352.4 328 L 353.3 328.6 L 354.2 329.2 L 355.1 329.8 L 356 330.3 L 356.9 330.8 L 357.8 331.4 L 358.7 331.9 L 359.6 332.4 L 360.5 332.8 L 361.4 333.3 L 362.3 333.7 L 363.2 334.2 L 364.1 334.6 L 365 335 L 365.9 335.4 L 366.8 335.8 L 367.7 336.1 L 368.6 336.5 L 369.5 336.9 L 370.4 337.2 L 371.3 337.5 L 372.2 337.9 L 373.1 338.2 L 374 338.5 L 374.9 338.8 L 375.8 339.1 L 376.7 339.3 L 377.6 339.6 L 378.5 339.9 L 379.4 340.1 L 380.3 340.4 L 381.2 340.6 L 382.1 340.9 L 383 341.1 L 383.9 341.3 L 384.8 341.6 L 385.7 341.8 L 386.6 342 L 387.5 342.2 L 388.4 342.4 L 389.3 342.6 L 390.2 342.8 L 391.1 343 L 392 343.2 L 392.9 343.3 L 393.8 343.5 L 394.7 343.7 L 395.6 343.9 L 396.5 344 L 397.4 344.2 L 398.3 344.3 L 399.2 344.5 L 400.1 344.6 L 401 344.8 L 401.9 344.9 L 402.8 345.1 L 403.7 345.2 L 404.6 345.4 L 405.5 345.5 L 406.4 345.6 L 407.3 345.7 L 408.2 345.9 L 409.1 346 L 410 346.1 L 410.9 346.2 L 411.8 346.3 L 412.7 346.5 L 413.6 346.6 L 414.5 346.7 L 415.4 346.8 L 416.3 346.9 L 417.2 347 L 418.1 347.1 L 419 347.2 L 419.9 347.3 L 420.8 347.4 L 421.7 347.5 L 422.6 347.6 L 423.5 347.7 L 424.4 347.7 L 425.3 347.8 L 426.2 347.9 L 427.1 348" fill="none" stroke="#c0392b" stroke-width="3" stroke-linejoin="round"/><text x="258" y="231" font-size="18" fill="#0f1620" text-anchor="middle">𝔼</text><text x="453" y="375" font-size="16" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">r</tspan></text><text x="320" y="375" font-size="16" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">R</tspan></text><text x="385" y="243" font-size="16" fill="#0f1620" text-anchor="middle">Graf 4</text></svg>`,
+            choices: ['Graf 1', 'Graf 2', 'Graf 3', 'Graf 4'],
+            correct: 2,
+            solution: `Vi delar upp grafen i två delar.
+
+**Inuti klotet** ($r < R$): Överskottsladdningarna repellerar varandra och samlas på klotets utsida. Metallklotet fungerar som en Faradays bur, så fältstyrkan är noll ända ut till ytan. Det utesluter graf 1, graf 2 och graf 4, som alla har ett fält inuti klotet.
+
+**Utanför klotet** ($r > R$): Där gäller formeln för ett laddat klot,
+
+$$ \\mathbb{E} = k \\cdot \\frac{Q}{r^2} $$
+
+Fältstyrkan är alltså störst precis utanför ytan och avtar sedan med kvadraten på avståndet. Vid $r = 2R$ är den en fjärdedel av värdet vid ytan, vilket stämmer med graf 3.
+
+**Svar:** Graf 3.`,
+        },
+        {
+            level: 2,
+            question: `En elektron startar från vila vid en negativt laddad platta i vakuum. Mellan plattorna står en metallåda med två små hål, se figuren. Fältet är homogent med styrkan $2{,}0 \\cdot 10^3\\ \\mathrm{N/C}$ i båda mellanrummen utanför lådan. Elektronen rör sig rakt genom hålen. Bortse från hålens och elektronens inverkan på fältet.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 456 266" role="img" aria-label="En elektron vid en negativ platta, en metallåda med två hål och en positiv platta" style="max-width:570px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><rect x="50" y="24" width="10" height="180" fill="#2563c9"/><rect x="396" y="24" width="10" height="180" fill="#c0392b"/><line x1="34" y1="40" x2="44" y2="40" stroke="#2563c9" stroke-width="2" /><line x1="412" y1="40" x2="422" y2="40" stroke="#c0392b" stroke-width="2" /><line x1="417" y1="35" x2="417" y2="45" stroke="#c0392b" stroke-width="2" /><line x1="34" y1="75" x2="44" y2="75" stroke="#2563c9" stroke-width="2" /><line x1="412" y1="75" x2="422" y2="75" stroke="#c0392b" stroke-width="2" /><line x1="417" y1="70" x2="417" y2="80" stroke="#c0392b" stroke-width="2" /><line x1="34" y1="114" x2="44" y2="114" stroke="#2563c9" stroke-width="2" /><line x1="412" y1="114" x2="422" y2="114" stroke="#c0392b" stroke-width="2" /><line x1="417" y1="109" x2="417" y2="119" stroke="#c0392b" stroke-width="2" /><line x1="34" y1="153" x2="44" y2="153" stroke="#2563c9" stroke-width="2" /><line x1="412" y1="153" x2="422" y2="153" stroke="#c0392b" stroke-width="2" /><line x1="417" y1="148" x2="417" y2="158" stroke="#c0392b" stroke-width="2" /><line x1="34" y1="188" x2="44" y2="188" stroke="#2563c9" stroke-width="2" /><line x1="412" y1="188" x2="422" y2="188" stroke="#c0392b" stroke-width="2" /><line x1="417" y1="183" x2="417" y2="193" stroke="#c0392b" stroke-width="2" /><path d="M 159 104 L 159 47 L 297 47 L 297 104 M 159 124 L 159 181 L 297 181 L 297 124" fill="none" stroke="#9aa0a8" stroke-width="6"/><line x1="80" y1="114" x2="396" y2="114" stroke="#5f5a50" stroke-width="1.3" stroke-dasharray="5 4"/><circle cx="69" cy="114" r="9" fill="#2563c9"/><line x1="64.5" y1="114" x2="73.5" y2="114" stroke="#fff" stroke-width="2" /><text x="228" y="82" font-size="16" fill="#0f1620" text-anchor="middle">metallåda</text><line x1="60" y1="206" x2="60" y2="236" stroke="#5f5a50" stroke-width="1.2" stroke-dasharray="3 3"/><line x1="156" y1="186" x2="156" y2="236" stroke="#5f5a50" stroke-width="1.2" stroke-dasharray="3 3"/><line x1="300" y1="186" x2="300" y2="236" stroke="#5f5a50" stroke-width="1.2" stroke-dasharray="3 3"/><line x1="396" y1="206" x2="396" y2="236" stroke="#5f5a50" stroke-width="1.2" stroke-dasharray="3 3"/><line x1="68" y1="230" x2="148" y2="230" stroke="#5f5a50" stroke-width="1.4" /><polygon points="60,230 69,226 69,234" fill="#5f5a50"/><polygon points="156,230 147,226 147,234" fill="#5f5a50"/><text x="108" y="252" font-size="16" fill="#0f1620" text-anchor="middle">4,0 cm</text><line x1="164" y1="230" x2="292" y2="230" stroke="#5f5a50" stroke-width="1.4" /><polygon points="156,230 165,226 165,234" fill="#5f5a50"/><polygon points="300,230 291,226 291,234" fill="#5f5a50"/><text x="228" y="252" font-size="16" fill="#0f1620" text-anchor="middle">6,0 cm</text><line x1="308" y1="230" x2="388" y2="230" stroke="#5f5a50" stroke-width="1.4" /><polygon points="300,230 309,226 309,234" fill="#5f5a50"/><polygon points="396,230 387,226 387,234" fill="#5f5a50"/><text x="348" y="252" font-size="16" fill="#0f1620" text-anchor="middle">4,0 cm</text></svg>
+
+a) Med vilken fart kommer elektronen in i lådan?<br>b) Hur lång tid tar färden genom lådan? Svara i ns.<br>c) Med vilken fart träffar elektronen den positiva plattan?`,
+            answer: { value: 5300000, unit: 'm/s', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 5300000, unit: 'm/s', tol: 0.03 },
+                { del: 'b', value: 11, unit: 'ns', tol: 0.04 },
+                { del: 'c', value: 7500000, unit: 'm/s', tol: 0.03 },
+            ],
+            solution: `**a)** I det första mellanrummet verkar den konstanta elektriska kraften $F = \\mathbb{E} \\cdot q_e$ i rörelsens riktning. Kraftens arbete blir rörelseenergi:
+
+$$ \\mathbb{E} \\cdot q_e \\cdot s = \\frac{m \\cdot v^2}{2} $$
+
+Vi multiplicerar båda led med 2:
+
+$$ 2 \\cdot \\mathbb{E} \\cdot q_e \\cdot s = m \\cdot v^2 $$
+
+Vi dividerar båda led med *m*:
+
+$$ \\frac{2 \\cdot \\mathbb{E} \\cdot q_e \\cdot s}{m} = v^2 $$
+
+Farten är positiv, så
+
+$$ v = \\sqrt{\\frac{2 \\cdot \\mathbb{E} \\cdot q_e \\cdot s}{m}} $$
+
+$$
+\\left[ \\begin{array}{l}
+\\mathbb{E} = 2{,}0 \\cdot 10^3\\ \\mathrm{N/C} \\\\
+q_e \\approx 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C} \\\\
+s = 4{,}0\\ \\mathrm{cm} = 0{,}040\\ \\mathrm{m} \\\\
+m \\approx 9{,}109 \\cdot 10^{-31}\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$ v = \\sqrt{\\frac{2 \\cdot 2{,}0 \\cdot 10^3 \\cdot 1{,}602 \\cdot 10^{-19} \\cdot 0{,}040}{9{,}109 \\cdot 10^{-31}}} = 5{,}304\\ldots \\cdot 10^6\\ \\mathrm{m/s} $$
+
+$$ v \\approx 5{,}3 \\cdot 10^6\\ \\mathrm{m/s} $$
+
+**Svar:** $5{,}3 \\cdot 10^6\\ \\mathrm{m/s}$
+
+**b)** Lådan fungerar som en Faradays bur, så fältet inuti är noll. Då verkar ingen elektrisk kraft på elektronen, och den rör sig med konstant fart.
+
+$$ v = \\frac{s}{t} \\quad\\Leftrightarrow\\quad t = \\frac{s}{v} $$
+
+$$
+\\left[ \\begin{array}{l}
+s = 6{,}0\\ \\mathrm{cm} = 0{,}060\\ \\mathrm{m} \\\\
+v = 5{,}304\\ldots \\cdot 10^6\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$ t = \\frac{0{,}060}{5{,}304 \\cdot 10^6} = 1{,}13\\ldots \\cdot 10^{-8}\\ \\mathrm{s} \\approx 11\\ \\mathrm{ns} $$
+
+**Svar:** 11 ns
+
+**c)** I det andra mellanrummet är kraften och sträckan lika stora som i det första. Fältet uträttar alltså lika stort arbete där. Den sammanlagda sträckan där fältet uträttar arbete är $s = 2 \\cdot 4{,}0\\ \\mathrm{cm} = 0{,}080\\ \\mathrm{m}$. Formeln i a), $v = \\sqrt{\\frac{2 \\cdot \\mathbb{E} \\cdot q_e \\cdot s}{m}}$, ger
+
+$$ v = \\sqrt{\\frac{2 \\cdot 2{,}0 \\cdot 10^3 \\cdot 1{,}602 \\cdot 10^{-19} \\cdot 0{,}080}{9{,}109 \\cdot 10^{-31}}} = 7{,}501\\ldots \\cdot 10^6\\ \\mathrm{m/s} $$
+
+$$ v \\approx 7{,}5 \\cdot 10^6\\ \\mathrm{m/s} $$
+
+**Svar:** $7{,}5 \\cdot 10^6\\ \\mathrm{m/s}$`,
+        },
+
+        // ── Avancerad (påfyllning) ──
+        {
+            level: 3,
+            question: `Två parallella plattor på avståndet *d* från varandra är hela tiden anslutna till en spänningskälla med spänningen *U*. En oladdad, sluten metallåda med bredden *b* skjuts in mellan plattorna utan att röra dem, se figuren. Lådan är nästan lika hög som plattorna. Fältet är homogent och lika starkt i båda luftspalterna.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 288" role="img" aria-label="En metallåda med bredden b mellan två laddade plattor på avståndet d från varandra" style="max-width:550px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><rect x="45" y="25" width="10" height="180" fill="#c0392b"/><rect x="385" y="25" width="10" height="180" fill="#2563c9"/><line x1="29" y1="43" x2="39" y2="43" stroke="#c0392b" stroke-width="2"/><line x1="34" y1="38" x2="34" y2="48" stroke="#c0392b" stroke-width="2"/><line x1="401" y1="43" x2="411" y2="43" stroke="#2563c9" stroke-width="2"/><line x1="29" y1="79" x2="39" y2="79" stroke="#c0392b" stroke-width="2"/><line x1="34" y1="74" x2="34" y2="84" stroke="#c0392b" stroke-width="2"/><line x1="401" y1="79" x2="411" y2="79" stroke="#2563c9" stroke-width="2"/><line x1="29" y1="115" x2="39" y2="115" stroke="#c0392b" stroke-width="2"/><line x1="34" y1="110" x2="34" y2="120" stroke="#c0392b" stroke-width="2"/><line x1="401" y1="115" x2="411" y2="115" stroke="#2563c9" stroke-width="2"/><line x1="29" y1="151" x2="39" y2="151" stroke="#c0392b" stroke-width="2"/><line x1="34" y1="146" x2="34" y2="156" stroke="#c0392b" stroke-width="2"/><line x1="401" y1="151" x2="411" y2="151" stroke="#2563c9" stroke-width="2"/><line x1="29" y1="187" x2="39" y2="187" stroke="#c0392b" stroke-width="2"/><line x1="34" y1="182" x2="34" y2="192" stroke="#c0392b" stroke-width="2"/><line x1="401" y1="187" x2="411" y2="187" stroke="#2563c9" stroke-width="2"/><rect x="152" y="33" width="85" height="164" fill="#fafaf5" stroke="#9aa0a8" stroke-width="6"/><line x1="149" y1="201" x2="149" y2="232" stroke="#5f5a50" stroke-width="1" stroke-dasharray="3 3"/><line x1="240" y1="201" x2="240" y2="232" stroke="#5f5a50" stroke-width="1" stroke-dasharray="3 3"/><line x1="55" y1="207" x2="55" y2="262" stroke="#5f5a50" stroke-width="1" stroke-dasharray="3 3"/><line x1="385" y1="207" x2="385" y2="262" stroke="#5f5a50" stroke-width="1" stroke-dasharray="3 3"/><line x1="157" y1="228" x2="232" y2="228" stroke="#5f5a50" stroke-width="1.4"/><polygon points="149,228 158,224 158,232" fill="#5f5a50"/><polygon points="240,228 231,224 231,232" fill="#5f5a50"/><text x="194.5" y="220" font-size="16" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">b</tspan></text><line x1="63" y1="257" x2="377" y2="257" stroke="#5f5a50" stroke-width="1.4"/><polygon points="55,257 64,253 64,261" fill="#5f5a50"/><polygon points="385,257 376,253 376,261" fill="#5f5a50"/><text x="220" y="278" font-size="16" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">d</tspan></text></svg>
+
+a) Visa att fältstyrkan i luftspalterna är $\\mathbb{E} = \\dfrac{U}{d - b}$, oavsett var mellan plattorna lådan står.<br>b) Skissa potentialen som funktion av avståndet från den positiva plattan när den negativa plattan är jordad.<br>c) Utan lådan är fältstyrkan $2{,}4 \\cdot 10^6\\ \\mathrm{V/m}$. Luften blir ledande vid $3{,}0 \\cdot 10^6\\ \\mathrm{V/m}$. Hur stor andel av plattavståndet får lådan högst ta upp om det inte ska slå gnistor? Svara i procent.`,
+            answer: { value: 20, unit: '%' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+                { del: 'c', value: 20, unit: '%' },
+            ],
+            solution: `**a)** Kalla avståndet från den positiva plattan till lådan för *x*. Den andra luftspalten har då bredden $d - b - x$. Vi följer en rak linje från den positiva plattan till den negativa och ser hur mycket potentialen sjunker på vägen:
+
+- I den första spalten är fältet homogent, så potentialen sjunker med $\\mathbb{E} \\cdot x$.
+- Inuti lådan är fältet noll (Faradays bur), så där ändras potentialen inte alls.
+- I den andra spalten sjunker potentialen med $\\mathbb{E} \\cdot (d - b - x)$.
+
+Summan av ändringarna är spänningen mellan plattorna:
+
+$$
+\\begin{aligned}
+U &= \\mathbb{E} \\cdot x + 0 + \\mathbb{E} \\cdot (d - b - x) \\\\
+&= \\mathbb{E} \\cdot (x + d - b - x) \\\\
+&= \\mathbb{E} \\cdot (d - b)
+\\end{aligned}
+$$
+
+Vi dividerar båda led med $d - b$ och får
+
+$$ \\mathbb{E} = \\frac{U}{d - b} $$
+
+Avståndet *x* försvann ur uttrycket. Fältstyrkan beror alltså inte på var lådan står, vilket skulle visas.
+
+**Svar:** $\\mathbb{E} = \\dfrac{U}{d - b}$ för alla lägen hos lådan.
+
+**b)** Potentialen är *U* vid den positiva plattan och noll vid den negativa. Den sjunker linjärt i spalterna, med samma lutning eftersom fältet är lika starkt, och är konstant genom lådan.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 250" role="img" aria-label="Potentialen sjunker linjärt i båda luftspalterna och är konstant genom lådan" style="max-width:575px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><line x1="151.2" y1="215" x2="151.2" y2="114.9" stroke="#5f5a50" stroke-width="1.2" stroke-dasharray="5 4"/><line x1="239.4" y1="215" x2="239.4" y2="114.9" stroke="#5f5a50" stroke-width="1.2" stroke-dasharray="5 4"/><line x1="60" y1="215" x2="402" y2="215" stroke="#0f1620" stroke-width="2"/><polygon points="413,215 401,210 401,220" fill="#0f1620"/><line x1="60" y1="215" x2="60" y2="28" stroke="#0f1620" stroke-width="2"/><polygon points="60,16 55,29 65,29" fill="#0f1620"/><path d="M 60 50 L 151.2 114.9 L 239.4 114.9 L 380 215" fill="none" stroke="#c0392b" stroke-width="3"/><text x="74" y="30" font-size="14" fill="#0f1620" text-anchor="start">potential</text><text x="50" y="56" font-size="16" fill="#0f1620" text-anchor="end"><tspan font-style="italic">U</tspan></text><text x="50" y="220" font-size="16" fill="#0f1620" text-anchor="end">0</text><text x="147.2" y="236" font-size="16" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">x</tspan></text><text x="243.4" y="236" font-size="16" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">x</tspan> + <tspan font-style="italic">b</tspan></text><text x="380" y="236" font-size="16" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">d</tspan></text><text x="195.3" y="185" font-size="14" fill="#0f1620" text-anchor="middle">lådan</text><text x="424" y="203" font-size="14" fill="#0f1620" text-anchor="middle">avstånd</text></svg>
+
+**c)** Utan lådan är fältstyrkan $\\mathbb{E}_0 = \\dfrac{U}{d}$, så $U = \\mathbb{E}_0 \\cdot d$. Detta insatt i $\\mathbb{E} = \\dfrac{U}{d - b}$ ger
+
+$$ \\mathbb{E} = \\frac{\\mathbb{E}_0 \\cdot d}{d - b} $$
+
+Vi multiplicerar båda led med $d - b$ och dividerar sedan med $\\mathbb{E}$:
+
+$$ d - b = \\frac{\\mathbb{E}_0}{\\mathbb{E}} \\cdot d $$
+
+Med den största tillåtna fältstyrkan $\\mathbb{E} = 3{,}0 \\cdot 10^6\\ \\mathrm{V/m}$ får vi
+
+$$ \\frac{\\mathbb{E}_0}{\\mathbb{E}} = \\frac{2{,}4 \\cdot 10^6}{3{,}0 \\cdot 10^6} = 0{,}80 $$
+
+Luftspalterna måste alltså tillsammans ta upp minst 80 % av plattavståndet, och då återstår högst 20 % till lådan. Varken *U* eller *d* behövde vara kända.
+
+Rimlighet: ju bredare lådan är, desto kortare sträcka har potentialen att sjunka på, och desto starkare blir fältet i spalterna.
+
+**Svar:** Högst 20 % av plattavståndet.`,
+        },
+        {
+            level: 3,
+            question: `Två metallklot med radierna *R* och *r* är förbundna med en lång, tunn ledare, se figuren. Kloten laddas och får då samma potential. Det lilla klotet kan ses som en modell av spetsen på en ledare. Potentialen på ytan av ett klot med laddningen *Q* och radien *r* är $V = k \\cdot \\dfrac{Q}{r}$ när kloten är långt från varandra.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 220" role="img" aria-label="Ett stort klot med radien R och ett litet klot med radien r förbundna med en tunn ledare" style="max-width:550px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><line x1="194" y1="110" x2="358" y2="110" stroke="#b06a2c" stroke-width="2.5"/><circle cx="115" cy="110" r="80" fill="#c9ced6" stroke="#0f1620" stroke-width="2"/><circle cx="375" cy="110" r="18" fill="#c9ced6" stroke="#0f1620" stroke-width="2"/><circle cx="115" cy="110" r="2.6" fill="#0f1620"/><line x1="115" y1="110" x2="171.6" y2="53.4" stroke="#0f1620" stroke-width="1.4"/><text x="131" y="76" font-size="16" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">R</tspan></text><circle cx="375" cy="110" r="2.4" fill="#0f1620"/><line x1="375" y1="110" x2="387.7" y2="97.3" stroke="#0f1620" stroke-width="1.4"/><line x1="383" y1="102" x2="398" y2="88" stroke="#5f5a50" stroke-width="1"/><text x="402" y="90" font-size="16" fill="#0f1620" text-anchor="start"><tspan font-style="italic">r</tspan></text></svg>
+
+a) Visa att kvoten mellan fältstyrkan vid det lilla klotets yta och fältstyrkan vid det stora klotets yta är $\\dfrac{R}{r}$.<br>b) Det stora klotet har radien $15\\ \\mathrm{cm}$ och fältstyrkan vid dess yta är $1{,}2 \\cdot 10^5\\ \\mathrm{N/C}$. Hur stor radie får det lilla klotet högst ha för att det ska ske en urladdning där? Luft blir ledande vid ungefär $3{,}0 \\cdot 10^6\\ \\mathrm{N/C}$. Svara i mm.<br>c) En elev säger: "Det sker en urladdning vid spetsen för att det mesta av laddningen hamnar där." Granska påståendet med hjälp av modellen.`,
+            answer: { value: 6.0, unit: 'mm' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 6.0, unit: 'mm' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Kalla det stora klotets laddning för $Q_1$ och det lilla klotets för $Q_2$. Kloten har samma potential:
+
+$$ k \\cdot \\frac{Q_1}{R} = k \\cdot \\frac{Q_2}{r} \\quad\\Leftrightarrow\\quad \\frac{Q_2}{Q_1} = \\frac{r}{R} \\qquad (1) $$
+
+Fältstyrkorna vid ytorna är
+
+$$ \\mathbb{E}_1 = k \\cdot \\frac{Q_1}{R^2} \\qquad\\qquad \\mathbb{E}_2 = k \\cdot \\frac{Q_2}{r^2} $$
+
+Vi bildar kvoten. Konstanten *k* förkortas bort:
+
+$$ \\frac{\\mathbb{E}_2}{\\mathbb{E}_1} = \\frac{Q_2}{r^2} \\cdot \\frac{R^2}{Q_1} = \\frac{Q_2}{Q_1} \\cdot \\frac{R^2}{r^2} $$
+
+Insättning av (1), $\\dfrac{Q_2}{Q_1} = \\dfrac{r}{R}$, ger
+
+$$ \\frac{\\mathbb{E}_2}{\\mathbb{E}_1} = \\frac{r}{R} \\cdot \\frac{R^2}{r^2} = \\frac{R}{r} $$
+
+**Svar:** $\\dfrac{\\mathbb{E}_2}{\\mathbb{E}_1} = \\dfrac{R}{r}$, vilket skulle visas.
+
+**b)** Vi löser ut *r* ur sambandet i a):
+
+$$ \\frac{\\mathbb{E}_2}{\\mathbb{E}_1} = \\frac{R}{r} \\quad\\Leftrightarrow\\quad r = R \\cdot \\frac{\\mathbb{E}_1}{\\mathbb{E}_2} $$
+
+$$
+\\left[ \\begin{array}{l}
+R = 15\\ \\mathrm{cm} = 0{,}15\\ \\mathrm{m} \\\\
+\\mathbb{E}_1 = 1{,}2 \\cdot 10^5\\ \\mathrm{N/C} \\\\
+\\mathbb{E}_2 = 3{,}0 \\cdot 10^6\\ \\mathrm{N/C}
+\\end{array} \\right]
+$$
+
+$$ r = 0{,}15 \\cdot \\frac{1{,}2 \\cdot 10^5}{3{,}0 \\cdot 10^6} = 0{,}0060\\ \\mathrm{m} = 6{,}0\\ \\mathrm{mm} $$
+
+Ett mindre klot ger ett ännu starkare fält, så detta är den största radien som ger en urladdning.
+
+**Svar:** Högst 6,0 mm.
+
+**c)** Enligt (1), $\\dfrac{Q_2}{Q_1} = \\dfrac{r}{R}$, har det lilla klotet en mindre laddning än det stora. Med värdena i b) är kvoten
+
+$$ \\frac{Q_2}{Q_1} = \\frac{0{,}0060}{0{,}15} = 0{,}040 $$
+
+Spetsen har alltså bara 4,0 % så stor laddning som det stora klotet. Men spetsens yta är mycket mindre. Arean är proportionell mot radien i kvadrat, så laddningen sitter mycket tätare där. Därför blir fältstyrkan 25 gånger så stor.
+
+**Svar:** Påståendet är fel. Spetsen har minst laddning, men laddningen sitter tätast där, och det är den höga lokala fältstyrkan som ger urladdningen.`,
+        },
+        {
+            level: 3,
+            question: `En liten kula med laddningen $Q = +6{,}0\\ \\mathrm{nC}$ hänger i en isolerande tråd mitt i ett oladdat, ihåligt metallklot med tjocka väggar. Figuren visar ett tvärsnitt. Kulan rör inte klotet.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 370 260" role="img" aria-label="Tvärsnitt av ett ihåligt metallklot med tjocka väggar och en positivt laddad kula i mitten" style="max-width:518px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><circle cx="150" cy="140" r="105" fill="#c9ced6" stroke="#0f1620" stroke-width="2"/><circle cx="150" cy="140" r="72" fill="#fafaf5" stroke="#0f1620" stroke-width="2"/><rect x="147" y="33" width="6" height="37" fill="#fafaf5"/><line x1="147" y1="34.5" x2="147" y2="68.5" stroke="#0f1620" stroke-width="1.6"/><line x1="153" y1="34.5" x2="153" y2="68.5" stroke="#0f1620" stroke-width="1.6"/><line x1="150" y1="14" x2="150" y2="130" stroke="#6b6256" stroke-width="1.6"/><circle cx="150" cy="140" r="11" fill="#c0392b"/><line x1="144.5" y1="140" x2="155.5" y2="140" stroke="#fff" stroke-width="2"/><line x1="150" y1="134.5" x2="150" y2="145.5" stroke="#fff" stroke-width="2"/><text x="176" y="146" font-size="16" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">Q</tspan></text><text x="285" y="60" font-size="16" fill="#0f1620" text-anchor="start">utsida</text><line x1="241" y1="87" x2="280" y2="58" stroke="#5f5a50" stroke-width="1.2"/><text x="285" y="130" font-size="16" fill="#0f1620" text-anchor="start">metall</text><line x1="240" y1="125" x2="280" y2="125" stroke="#5f5a50" stroke-width="1.2"/><text x="285" y="205" font-size="16" fill="#0f1620" text-anchor="start">insida</text><line x1="212" y1="176" x2="280" y2="200" stroke="#5f5a50" stroke-width="1.2"/></svg>
+
+En jämnt fördelad laddning på ett klots yta ger inget fält innanför ytan. Utanför ytan ger den samma fält som om hela laddningen satt i klotets medelpunkt.
+
+a) Visa att klotets insida får laddningen $-Q$ och att dess utsida får laddningen $+Q$. Utnyttja att fältet inne i själva metallen är noll.<br>b) Beräkna fältstyrkan utanför klotet, $30\\ \\mathrm{cm}$ från medelpunkten.<br>c) Klotet jordas. Hur många elektroner rör sig då mellan klotet och marken, och åt vilket håll? Hur stor blir fältstyrkan i punkten i b)?<br>d) "En Faradays bur stänger alltid inne fältet från laddningar som finns inuti den." Ta ställning till påståendet.`,
+            answer: { value: 600, unit: 'N/C' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 600, unit: 'N/C' },
+                { del: 'c', value: 3.7e10, unit: 'st', etikett: 'antal elektroner', tol: 0.03 },
+                { del: 'c', value: 0, unit: 'N/C', etikett: 'fältstyrkan' },
+                { del: 'd' },
+            ],
+            solution: `**a)** Kalla insidans laddning för $Q_\\mathrm{in}$ och utsidans för $Q_\\mathrm{ut}$. Välj en punkt inne i metallen, på avståndet *r* från medelpunkten. Tre laddningar kan ge ett fält där:
+
+- Kulan ger fältet av laddningen *Q* i medelpunkten.
+- Insidan ligger innanför punkten och ger samma fält som om $Q_\\mathrm{in}$ satt i medelpunkten.
+- Utsidan ligger utanför punkten och ger inget fält där.
+
+Det resulterande fältet i metallen är noll, annars skulle ledningselektronerna fortsätta att röra sig:
+
+$$ k \\cdot \\frac{Q + Q_\\mathrm{in}}{r^2} = 0 $$
+
+Det gäller bara om täljaren är noll, alltså om $Q_\\mathrm{in} = -Q$. Klotet är oladdat som helhet, så $Q_\\mathrm{in} + Q_\\mathrm{ut} = 0$ och därmed är $Q_\\mathrm{ut} = +Q$.
+
+**Svar:** Insidan får laddningen $-Q$ och utsidan $+Q$, vilket skulle visas.
+
+**b)** Utanför klotet ger alla tre laddningarna samma fält som om de satt i medelpunkten. Den sammanlagda laddningen är
+
+$$ Q + (-Q) + Q = Q $$
+
+Fältet är alltså detsamma som om metallklotet inte fanns.
+
+$$ \\mathbb{E} = k \\cdot \\frac{Q}{r^2} $$
+
+$$
+\\left[ \\begin{array}{l}
+k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2} \\\\
+Q = 6{,}0\\ \\mathrm{nC} = 6{,}0 \\cdot 10^{-9}\\ \\mathrm{C} \\\\
+r = 30\\ \\mathrm{cm} = 0{,}30\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ \\mathbb{E} = 8{,}99 \\cdot 10^9 \\cdot \\frac{6{,}0 \\cdot 10^{-9}}{0{,}30^2} = 599{,}3\\ldots\\ \\mathrm{N/C} \\approx 6{,}0 \\cdot 10^2\\ \\mathrm{N/C} $$
+
+**Svar:** $6{,}0 \\cdot 10^2\\ \\mathrm{N/C}$
+
+**c)** Utsidans positiva laddning drar till sig elektroner från marken tills utsidan är oladdad. Insidans laddning $-Q$ hålls kvar av kulan. Elektronerna som kommer från marken har tillsammans laddningen $-Q$, så antalet är
+
+$$ n = \\frac{Q}{q_e} = \\frac{6{,}0 \\cdot 10^{-9}}{1{,}602 \\cdot 10^{-19}} = 3{,}745\\ldots \\cdot 10^{10} \\approx 3{,}7 \\cdot 10^{10} $$
+
+Den sammanlagda laddningen är nu $Q + (-Q) + 0 = 0$, så fältet utanför klotet är noll.
+
+**Svar:** Det rör sig $3{,}7 \\cdot 10^{10}$ elektroner från marken till klotet, och fältstyrkan blir noll.
+
+**d)** I b) fanns fältet kvar utanför klotet trots att kulan satt inuti en sluten metallbur. Först när buren jordades försvann det yttre fältet.
+
+**Svar:** Påståendet är fel. Buren stänger alltid ute yttre fält, men den stänger bara inne fältet från laddningar inuti om den är jordad.`,
+        },
+        {
+            level: 3,
+            question: `En liten positivt laddad kula hänger i en isolerande tråd med längden $l = 0{,}80\\ \\mathrm{m}$ i ett homogent, vågrätt elektriskt fält. Kulan hänger stilla och tråden bildar då vinkeln $\\alpha = 20^\\circ$ med lodlinjen, se figuren. Kulans egen inverkan på omgivningen, trådens massa och luftmotståndet försummas.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 290" role="img" aria-label="En positivt laddad kula i en tråd mellan två lodräta plattor, med vinkeln α mot lodlinjen" style="max-width:550px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><rect x="35" y="25" width="10" height="240" fill="#c0392b"/><rect x="395" y="25" width="10" height="240" fill="#2563c9"/><line x1="19" y1="49" x2="29" y2="49" stroke="#c0392b" stroke-width="2"/><line x1="24" y1="44" x2="24" y2="54" stroke="#c0392b" stroke-width="2"/><line x1="411" y1="49" x2="421" y2="49" stroke="#2563c9" stroke-width="2"/><line x1="19" y1="97" x2="29" y2="97" stroke="#c0392b" stroke-width="2"/><line x1="24" y1="92" x2="24" y2="102" stroke="#c0392b" stroke-width="2"/><line x1="411" y1="97" x2="421" y2="97" stroke="#2563c9" stroke-width="2"/><line x1="19" y1="145" x2="29" y2="145" stroke="#c0392b" stroke-width="2"/><line x1="24" y1="140" x2="24" y2="150" stroke="#c0392b" stroke-width="2"/><line x1="411" y1="145" x2="421" y2="145" stroke="#2563c9" stroke-width="2"/><line x1="19" y1="193" x2="29" y2="193" stroke="#c0392b" stroke-width="2"/><line x1="24" y1="188" x2="24" y2="198" stroke="#c0392b" stroke-width="2"/><line x1="411" y1="193" x2="421" y2="193" stroke="#2563c9" stroke-width="2"/><line x1="19" y1="241" x2="29" y2="241" stroke="#c0392b" stroke-width="2"/><line x1="24" y1="236" x2="24" y2="246" stroke="#c0392b" stroke-width="2"/><line x1="411" y1="241" x2="421" y2="241" stroke="#2563c9" stroke-width="2"/><line x1="150" y1="40" x2="240" y2="40" stroke="#0f1620" stroke-width="3"/><line x1="156" y1="40" x2="163" y2="32" stroke="#0f1620" stroke-width="1"/><line x1="168" y1="40" x2="175" y2="32" stroke="#0f1620" stroke-width="1"/><line x1="180" y1="40" x2="187" y2="32" stroke="#0f1620" stroke-width="1"/><line x1="192" y1="40" x2="199" y2="32" stroke="#0f1620" stroke-width="1"/><line x1="204" y1="40" x2="211" y2="32" stroke="#0f1620" stroke-width="1"/><line x1="216" y1="40" x2="223" y2="32" stroke="#0f1620" stroke-width="1"/><line x1="228" y1="40" x2="235" y2="32" stroke="#0f1620" stroke-width="1"/><line x1="195" y1="40" x2="195" y2="238" stroke="#5f5a50" stroke-width="1.3" stroke-dasharray="5 4"/><line x1="195" y1="40" x2="260" y2="218.5" stroke="#0f1620" stroke-width="1.8"/><path d="M 195 102 A 62 62 0 0 0 216.2 98.3" fill="none" stroke="#0f1620" stroke-width="1.5"/><text x="209.7" y="120.8" font-size="16" fill="#0f1620" text-anchor="middle"><tspan font-style="italic">α</tspan></text><circle cx="260" cy="218.5" r="11" fill="#c0392b"/><line x1="254.5" y1="218.5" x2="265.5" y2="218.5" stroke="#fff" stroke-width="2"/><line x1="260" y1="213" x2="260" y2="224" stroke="#fff" stroke-width="2"/><text x="244.7" y="138.2" font-size="17" fill="#0f1620" text-anchor="start"><tspan font-style="italic">l</tspan></text><line x1="46" y1="254" x2="394" y2="254" stroke="#5f5a50" stroke-width="1.6"/><polygon points="232,254 219,248.5 219,259.5" fill="#5f5a50"/><text x="330" y="243" font-size="20" fill="#0f1620" text-anchor="middle">𝔼</text></svg>
+
+a) En sluten metallbur sätts mycket snabbt runt hela pendeln, så snabbt att kulan inte hinner röra sig. Vilken fart får kulan i sitt lägsta läge?<br>b) När kulan till slut hänger stilla rakt ned lyfts buren bort lika snabbt. Visa att kulan då svänger ut till vinkeln $2\\alpha$ innan den vänder. Du får använda att $\\dfrac{1 - \\cos \\beta}{\\sin \\beta} = \\tan \\dfrac{\\beta}{2}$.`,
+            answer: { value: 0.97, unit: 'm/s' },
+            delsvar: [
+                { del: 'a', value: 0.97, unit: 'm/s' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Inuti buren är det resulterande elektriska fältet noll. Då påverkas kulan bara av tyngdkraften och spännkraften i tråden. Spännkraften är hela tiden vinkelrät mot rörelsen och uträttar inget arbete, så den mekaniska energin bevaras.
+
+Kulan startar högre upp än sitt lägsta läge. Höjdskillnaden är trådens längd minus trådens lodräta del:
+
+$$ h = l - l \\cdot \\cos \\alpha = l \\cdot (1 - \\cos \\alpha) $$
+
+Lägesenergin omvandlas till rörelseenergi:
+
+$$ m \\cdot g \\cdot h = \\frac{m \\cdot v^2}{2} $$
+
+Vi dividerar båda led med *m* och multiplicerar dem med 2. Massan tar ut sig:
+
+$$ 2 \\cdot g \\cdot h = v^2 \\quad\\Rightarrow\\quad v = \\sqrt{2 \\cdot g \\cdot h} $$
+
+Insättning av $h = l \\cdot (1 - \\cos \\alpha)$ ger
+
+$$ v = \\sqrt{2 \\cdot g \\cdot l \\cdot (1 - \\cos \\alpha)} $$
+
+$$
+\\left[ \\begin{array}{l}
+g \\approx 9{,}82\\ \\mathrm{m/s^2} \\\\
+l = 0{,}80\\ \\mathrm{m} \\\\
+\\alpha = 20^\\circ
+\\end{array} \\right]
+$$
+
+$$ v = \\sqrt{2 \\cdot 9{,}82 \\cdot 0{,}80 \\cdot (1 - \\cos 20^\\circ)} = 0{,}973\\ldots\\ \\mathrm{m/s} \\approx 0{,}97\\ \\mathrm{m/s} $$
+
+Rimlighet: höjdskillnaden är knappt 5 cm, och ett fritt fall på 5 cm ger en fart på ungefär $1\\ \\mathrm{m/s}$.
+
+**Svar:** 0,97 m/s
+
+**b)** Först behöver vi ett samband mellan den elektriska kraften $F = Q \\cdot \\mathbb{E}$ och vinkeln $\\alpha$. I det ursprungliga jämviktsläget verkar tyngdkraften lodrätt, den elektriska kraften vågrätt och spännkraften $F_\\mathrm{S}$ längs tråden. Spännkraftens komposanter balanserar de båda andra krafterna:
+
+$$ F_\\mathrm{S} \\cdot \\sin \\alpha = Q \\cdot \\mathbb{E} \\qquad\\qquad F_\\mathrm{S} \\cdot \\cos \\alpha = m \\cdot g $$
+
+Vi dividerar den första ekvationen med den andra:
+
+$$ \\tan \\alpha = \\frac{Q \\cdot \\mathbb{E}}{m \\cdot g} \\qquad (1) $$
+
+När buren lyfts bort finns fältet åter. Kulan startar från vila i sitt lägsta läge och vänder vid vinkeln $\\beta$, där farten åter är noll. Då har kulan flyttats sträckan $l \\cdot \\sin \\beta$ i den elektriska kraftens riktning och höjts $l \\cdot (1 - \\cos \\beta)$. Den elektriska kraftens arbete har helt omvandlats till lägesenergi:
+
+$$ Q \\cdot \\mathbb{E} \\cdot l \\cdot \\sin \\beta = m \\cdot g \\cdot l \\cdot (1 - \\cos \\beta) $$
+
+Vi dividerar båda led med $m \\cdot g \\cdot l \\cdot \\sin \\beta$:
+
+$$ \\frac{Q \\cdot \\mathbb{E}}{m \\cdot g} = \\frac{1 - \\cos \\beta}{\\sin \\beta} $$
+
+Insättning av (1), $\\tan \\alpha = \\dfrac{Q \\cdot \\mathbb{E}}{m \\cdot g}$, i vänster led och av det givna sambandet i höger led ger
+
+$$ \\tan \\alpha = \\tan \\frac{\\beta}{2} $$
+
+Vinklarna $\\alpha$ och $\\dfrac{\\beta}{2}$ är båda mellan $0^\\circ$ och $90^\\circ$, så $\\alpha = \\dfrac{\\beta}{2}$ och därmed $\\beta = 2\\alpha$. Det är rimligt, eftersom kulan svänger lika långt på båda sidor om sitt jämviktsläge vid vinkeln $\\alpha$.
+
+**Svar:** Kulan vänder vid $\\beta = 2\\alpha$, vilket skulle visas.`,
+        },
+        {
+            level: 3,
+            question: `En stor metallbur står på isolerande ben. Buren laddas tills dess potential är $+45\\ \\mathrm{kV}$ i förhållande till marken. Inuti buren, i kontakt med den, står en person. Några elever diskuterar situationen:
+
+- Elev 1: "Fältet inuti buren är noll, så potentialen där måste också vara noll."
+- Elev 2: "Personen kan röra vid vilken del av burens insida som helst utan att få en stöt."
+- Elev 3: "Personen är skyddad av buren, så det är ofarligt att sträcka ut handen mot en jordad vägg."
+
+a) Ta ställning till vart och ett av påståendena. Motivera med sambandet mellan spänning, fältstyrka och avstånd.<br>b) Personen sticker ut en hand genom en öppning och närmar sig den jordade väggen. Uppskatta på vilket avstånd det slår en gnista. Anta att fältet mellan handen och väggen är homogent och att luften blir ledande vid $3{,}0 \\cdot 10^6\\ \\mathrm{V/m}$. Svara i cm.<br>c) Diskutera om det verkliga avståndet blir större eller mindre när personen pekar mot väggen med ett spetsigt metallföremål.`,
+            answer: { value: 1.5, unit: 'cm' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 1.5, unit: 'cm' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Spänningen mellan två punkter på avståndet *d* från varandra i ett homogent fält är $U = \\mathbb{E} \\cdot d$, och spänningen är skillnaden i potential mellan punkterna.
+
+*Elev 1:* Med $\\mathbb{E} = 0$ blir $U = 0 \\cdot d = 0$ mellan alla par av punkter inuti buren. Alla punkter har alltså **samma** potential, men den behöver inte vara noll. Burens vägg har potentialen +45 kV, så potentialen är +45 kV överallt inuti. Påståendet är fel.
+
+*Elev 2:* Alla delar av buren och personen har samma potential. Spänningen mellan handen och burens insida är noll, och då drivs ingen ström genom kroppen. Påståendet är rätt.
+
+*Elev 3:* Den jordade väggen har potentialen noll. Spänningen mellan handen och väggen är $U = 45 - 0 = 45\\ \\mathrm{kV}$. Utanför buren finns det dessutom ett elektriskt fält. Påståendet är fel.
+
+**Svar:** Bara elev 2 har rätt.
+
+**b)** Vi löser ut avståndet ur formeln för ett homogent fält:
+
+$$ \\mathbb{E} = \\frac{U}{d} \\quad\\Leftrightarrow\\quad d = \\frac{U}{\\mathbb{E}} $$
+
+$$
+\\left[ \\begin{array}{l}
+U = 45\\ \\mathrm{kV} = 45 \\cdot 10^3\\ \\mathrm{V} \\\\
+\\mathbb{E} = 3{,}0 \\cdot 10^6\\ \\mathrm{V/m}
+\\end{array} \\right]
+$$
+
+$$ d = \\frac{45 \\cdot 10^3}{3{,}0 \\cdot 10^6} = 0{,}015\\ \\mathrm{m} = 1{,}5\\ \\mathrm{cm} $$
+
+På större avstånd är fältet svagare än gränsvärdet, så gnistan kan inte komma tidigare enligt modellen.
+
+**Svar:** 1,5 cm
+
+**c)** Vid en spets koncentreras laddningarna, så fältet är inte homogent. Nära spetsen är fältstyrkan mycket större än $\\dfrac{U}{d}$. Luften vid spetsen når därför gränsvärdet redan när avståndet är större än 1,5 cm, och de laddade luftmolekylerna underlättar sedan en urladdning mot väggen.
+
+**Svar:** Det verkliga avståndet blir större än 1,5 cm, eftersom den lokala fältstyrkan vid spetsen är större än i modellen med ett homogent fält.`,
+        },
+        {
+            level: 3,
+            question: `En bur av metallnät släcker inte ut fältet fullständigt alldeles intill nätet, eftersom det finns hål. I en datorsimulering bestäms fältstyrkan inuti två burar som står i samma yttre fält. Den ena buren har ett nät med maskvidden (hålens bredd) $a = 4{,}0\\ \\mathrm{cm}$ och den andra $a = 2{,}0\\ \\mathrm{cm}$. Avståndet från nätet är *x*.
+
+| *x* (cm) | Fältstyrka, *a* = 4,0 cm (V/m) | Fältstyrka, *a* = 2,0 cm (V/m) |
+|---|---|---|
+| 0 | 800 | 800 |
+| 0,50 | 365 | 166 |
+| 1,0 | 166 | 35 |
+| 1,5 | 76 | 7,2 |
+| 2,0 | 35 | 1,5 |
+
+a) Visa att fältstyrkan avtar exponentiellt med avståndet i båda burarna.<br>b) Tabellen tyder på att fältstyrkan bara beror på kvoten $\\dfrac{x}{a}$. Motivera detta och ställ upp en modell på formen $\\mathbb{E} = 800 \\cdot b^{x/a}$, där *b* är en konstant.<br>c) En känslig mätare tål högst 1,0 % av fältstyrkan 800 V/m. Hur långt från nätet måste den minst stå i en bur med maskvidden 10 cm? Svara i cm.<br>d) Vad säger modellen om en bur av hel plåt?`,
+            answer: { value: 7.4, unit: 'cm', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 0.0019, unit: '', etikett: '$b =$', tol: 0.06 },
+                { del: 'c', value: 7.4, unit: 'cm', tol: 0.03 },
+                { del: 'd' },
+            ],
+            solution: `**a)** Fältstyrkan avtar exponentiellt om den minskar med samma faktor varje gång avståndet ökar lika mycket. Vi bildar kvoterna mellan värden som följer på varandra, där *x* ökar med 0,50 cm varje gång.
+
+Maskvidden 4,0 cm:
+
+$$ \\frac{365}{800} \\approx 0{,}46 \\qquad \\frac{166}{365} \\approx 0{,}45 $$
+
+$$ \\frac{76}{166} \\approx 0{,}46 \\qquad \\frac{35}{76} \\approx 0{,}46 $$
+
+Maskvidden 2,0 cm:
+
+$$ \\frac{166}{800} \\approx 0{,}21 \\qquad \\frac{35}{166} \\approx 0{,}21 $$
+
+$$ \\frac{7{,}2}{35} \\approx 0{,}21 \\qquad \\frac{1{,}5}{7{,}2} \\approx 0{,}21 $$
+
+**Svar:** Kvoterna är konstanta inom avrundningsfelen, så fältstyrkan avtar exponentiellt i båda burarna.
+
+**b)** Vi jämför rader där kvoten $\\dfrac{x}{a}$ är densamma. I buren med $a = 4{,}0\\ \\mathrm{cm}$ är fältstyrkan 166 V/m när $x = 1{,}0\\ \\mathrm{cm}$. I buren med $a = 2{,}0\\ \\mathrm{cm}$ är den lika stor när $x = 0{,}50\\ \\mathrm{cm}$. I båda fallen är $\\dfrac{x}{a} = 0{,}25$. På samma sätt är fältstyrkan 35 V/m i båda burarna när $\\dfrac{x}{a} = 0{,}50$.
+
+Vi bestämmer *b* ur värdet 35 V/m, där $\\dfrac{x}{a} = 0{,}50$:
+
+$$ 35 = 800 \\cdot b^{0{,}50} $$
+
+Vi dividerar båda led med 800:
+
+$$ \\frac{35}{800} = b^{0{,}50} $$
+
+Sedan kvadrerar vi båda led:
+
+$$ b = \\left( \\frac{35}{800} \\right)^2 = 0{,}001914\\ldots \\approx 0{,}0019 $$
+
+Kontroll med $\\dfrac{x}{a} = 0{,}25$: modellen ger $800 \\cdot 0{,}001914^{0{,}25} \\approx 167$, alltså 167 V/m, vilket stämmer väl med tabellens 166 V/m.
+
+**Svar:** $\\mathbb{E} = 800 \\cdot 0{,}0019^{x/a}$
+
+**c)** Fältstyrkan ska vara 1,0 % av 800 V/m. Det ger
+
+$$ 0{,}010 \\cdot 800 = 800 \\cdot b^{x/a} $$
+
+Vi dividerar båda led med 800:
+
+$$ 0{,}010 = b^{x/a} $$
+
+Sedan logaritmerar vi båda led:
+
+$$ \\lg 0{,}010 = \\lg b^{x/a} $$
+
+Exponenten flyttas ned framför logaritmen:
+
+$$ \\lg 0{,}010 = \\frac{x}{a} \\cdot \\lg b $$
+
+Vi dividerar båda led med $\\lg b$ och multiplicerar dem med *a*:
+
+$$ x = a \\cdot \\frac{\\lg 0{,}010}{\\lg b} $$
+
+$$
+\\left[ \\begin{array}{l}
+a = 10\\ \\mathrm{cm} \\\\
+b = 0{,}001914\\ldots
+\\end{array} \\right]
+$$
+
+$$ x = 10 \\cdot \\frac{\\lg 0{,}010}{\\lg 0{,}001914} = 7{,}35\\ldots\\ \\mathrm{cm} \\approx 7{,}4\\ \\mathrm{cm} $$
+
+Rimlighet: avståndet är något mindre än maskvidden. Även i tabellen har fältstyrkan sjunkit till några få procent på halva maskviddens avstånd.
+
+**Svar:** Minst 7,4 cm.
+
+**d)** Hel plåt motsvarar att maskvidden *a* går mot noll. För varje avstånd *x* större än noll blir då kvoten $\\dfrac{x}{a}$ hur stor som helst. Eftersom *b* är mellan 0 och 1 går $b^{x/a}$ mot noll.
+
+**Svar:** I en bur av hel plåt är fältstyrkan noll överallt inuti, precis som för en ideal Faradays bur.`,
+        },
+        {
+            level: 3,
+            question: `Ett oladdat, ihåligt metallklot med en liten öppning står på en isolator. En metallkula med en fjärdedel så stor radie laddas med positiv laddning till gränsen för vad luften tål, alltså så mycket att ytterligare laddning skulle ge en urladdning från kulans yta. Kulan sänks ned genom öppningen och får röra vid klotets insida, se figuren. Sedan tas den upp, laddas till samma gräns och sänks ned igen, om och om igen. Öppningens inverkan försummas, och luften tål lika stor fältstyrka överallt.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 318" role="img" aria-label="Tvärsnitt av ett ihåligt metallklot med en öppning upptill och en laddad metallkula som rör vid insidan" style="max-width:563px;width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><line x1="40" y1="296" x2="400" y2="296" stroke="#0f1620" stroke-width="2" /><line x1="52" y1="296" x2="44" y2="305" stroke="#0f1620" stroke-width="1" /><line x1="68" y1="296" x2="60" y2="305" stroke="#0f1620" stroke-width="1" /><line x1="84" y1="296" x2="76" y2="305" stroke="#0f1620" stroke-width="1" /><line x1="100" y1="296" x2="92" y2="305" stroke="#0f1620" stroke-width="1" /><line x1="116" y1="296" x2="108" y2="305" stroke="#0f1620" stroke-width="1" /><line x1="132" y1="296" x2="124" y2="305" stroke="#0f1620" stroke-width="1" /><line x1="148" y1="296" x2="140" y2="305" stroke="#0f1620" stroke-width="1" /><line x1="164" y1="296" x2="156" y2="305" stroke="#0f1620" stroke-width="1" /><line x1="180" y1="296" x2="172" y2="305" stroke="#0f1620" stroke-width="1" /><line x1="196" y1="296" x2="188" y2="305" stroke="#0f1620" stroke-width="1" /><line x1="212" y1="296" x2="204" y2="305" stroke="#0f1620" stroke-width="1" /><line x1="228" y1="296" x2="220" y2="305" stroke="#0f1620" stroke-width="1" /><line x1="244" y1="296" x2="236" y2="305" stroke="#0f1620" stroke-width="1" /><line x1="260" y1="296" x2="252" y2="305" stroke="#0f1620" stroke-width="1" /><line x1="276" y1="296" x2="268" y2="305" stroke="#0f1620" stroke-width="1" /><line x1="292" y1="296" x2="284" y2="305" stroke="#0f1620" stroke-width="1" /><line x1="308" y1="296" x2="300" y2="305" stroke="#0f1620" stroke-width="1" /><line x1="324" y1="296" x2="316" y2="305" stroke="#0f1620" stroke-width="1" /><line x1="340" y1="296" x2="332" y2="305" stroke="#0f1620" stroke-width="1" /><line x1="356" y1="296" x2="348" y2="305" stroke="#0f1620" stroke-width="1" /><line x1="372" y1="296" x2="364" y2="305" stroke="#0f1620" stroke-width="1" /><line x1="388" y1="296" x2="380" y2="305" stroke="#0f1620" stroke-width="1" /><rect x="182" y="236" width="16" height="52" fill="#d9b77e" stroke="#0f1620" stroke-width="1.5"/><rect x="152" y="287" width="76" height="9" fill="#6b6256"/><path d="M 217 66.24 A 88 88 0 1 1 163 66.24 L 163 73.63 A 81 81 0 1 0 217 73.63 Z" fill="#c9ced6" stroke="#0f1620" stroke-width="1.6"/><line x1="190" y1="16" x2="190" y2="188" stroke="#6b6256" stroke-width="1.6" /><circle cx="190" cy="208.5" r="22" fill="#c0392b" stroke="#0f1620" stroke-width="1.6"/><line x1="184" y1="208.5" x2="196" y2="208.5" stroke="#fff" stroke-width="2" /><line x1="190" y1="202.5" x2="190" y2="214.5" stroke="#fff" stroke-width="2" /><line x1="193" y1="35" x2="312" y2="35" stroke="#5f5a50" stroke-width="1.2" /><text x="318" y="40" font-size="16" fill="#0f1620" text-anchor="start">isolerande tråd</text><line x1="275" y1="130" x2="312" y2="130" stroke="#5f5a50" stroke-width="1.2" /><text x="318" y="135" font-size="16" fill="#0f1620" text-anchor="start">metallklot</text><line x1="213" y1="206" x2="312" y2="204" stroke="#5f5a50" stroke-width="1.2" /><text x="318" y="209" font-size="16" fill="#0f1620" text-anchor="start">metallkula</text><line x1="200" y1="262" x2="312" y2="260" stroke="#5f5a50" stroke-width="1.2" /><text x="318" y="265" font-size="16" fill="#0f1620" text-anchor="start">isolator</text></svg>
+
+a) Hur många gånger har kulan rört vid insidan när även klotet når gränsen för urladdning?<br>b) I ett annat försök hålls kulan långt från det oladdade klotet. Varje gång den har laddats till gränsen förbinds den en kort stund med klotets utsida genom en lång, tunn ledare. Hur stor andel av den största fältstyrka som luften tål kan klotets yta då högst få? Svara i procent. Potentialen på ytan av ett klot med laddningen *Q* och radien *r* är $V = k \\cdot \\dfrac{Q}{r}$.<br>c) Förklara varför metoden i a) kan ge klotet större laddning än metoden i b).`,
+            answer: { value: 16, unit: 'gånger' },
+            delsvar: [
+                { del: 'a', value: 16, unit: 'gånger' },
+                { del: 'b', value: 25, unit: '%' },
+                { del: 'c' },
+            ],
+            solution: `Kalla kulans radie för *r*. Klotets radie är då $R = 4r$. Den största fältstyrka som luften tål kallar vi $\\mathbb{E}_\\mathrm{max}$.
+
+**a)** När kulan rör vid insidan blir den en del av klotets innervägg. Överskottsladdningarna repellerar varandra och samlas på en ledares utsida, så kulan lämnar hela sin laddning varje gång. Det gäller även när klotet redan är laddat.
+
+Formeln för fältstyrkan vid ytan av ett laddat klot ger den största laddningen på kulan, $Q_1$, och den största laddningen på klotet, $Q_2$:
+
+$$ \\mathbb{E}_\\mathrm{max} = k \\cdot \\frac{Q_1}{r^2} \\quad\\Leftrightarrow\\quad Q_1 = \\frac{\\mathbb{E}_\\mathrm{max} \\cdot r^2}{k} $$
+
+$$ \\mathbb{E}_\\mathrm{max} = k \\cdot \\frac{Q_2}{R^2} \\quad\\Leftrightarrow\\quad Q_2 = \\frac{\\mathbb{E}_\\mathrm{max} \\cdot R^2}{k} $$
+
+Antalet gånger *n* är kvoten mellan laddningarna. Både $\\mathbb{E}_\\mathrm{max}$ och *k* förkortas bort:
+
+$$ n = \\frac{Q_2}{Q_1} = \\frac{R^2}{r^2} = \\left( \\frac{4r}{r} \\right)^2 = 4^2 = 16 $$
+
+**Svar:** 16 gånger
+
+**b)** Laddning flyttas genom ledaren bara så länge kulan och klotet har olika potential. Vi skriver först om potentialen med hjälp av fältstyrkan vid ytan, $\\mathbb{E} = k \\cdot \\dfrac{Q}{r^2}$:
+
+$$ V = k \\cdot \\frac{Q}{r} = k \\cdot \\frac{Q}{r^2} \\cdot r = \\mathbb{E} \\cdot r $$
+
+En kula som är laddad till gränsen har alltså potentialen $\\mathbb{E}_\\mathrm{max} \\cdot r$. När klotets yta har fältstyrkan $\\mathbb{E}$ har klotet potentialen $\\mathbb{E} \\cdot R$. Klotet slutar att ta emot laddning när dess potential har blivit lika stor som den nyladdade kulans:
+
+$$ \\mathbb{E} \\cdot R = \\mathbb{E}_\\mathrm{max} \\cdot r $$
+
+Vi dividerar båda led med *R*:
+
+$$ \\mathbb{E} = \\mathbb{E}_\\mathrm{max} \\cdot \\frac{r}{R} $$
+
+Insättning av $R = 4r$ ger
+
+$$ \\mathbb{E} = \\mathbb{E}_\\mathrm{max} \\cdot \\frac{r}{4r} = \\frac{\\mathbb{E}_\\mathrm{max}}{4} = 0{,}25 \\cdot \\mathbb{E}_\\mathrm{max} $$
+
+**Svar:** Högst 25 % av den största fältstyrka som luften tål.
+
+**c)** I b) får klotet laddning bara när den nyladdade kulan har högre potential än klotet. När potentialerna är lika drivs ingen laddning genom ledaren.
+
+I a) är kulan innesluten i klotet. Laddningen på klotets utsida ger inget fält där inne, så den höjer potentialen lika mycket hos kulan och hos innerväggen. Kulans egen positiva laddning ger därför alltid kulan en högre potential än väggen, hur mycket laddning klotet än har. Den som sänker ned kulan uträttar ett arbete mot klotets fält utanför öppningen. Det är så kulan får den högre potentialen.
+
+**Svar:** Klotets laddning ger inget fält inuti klotet och kan därför inte hindra kulan från att lämna all sin laddning där. Utifrån upphör överföringen när potentialerna är lika.`,
         },
     ],
 
@@ -39453,7 +48857,7 @@ $$ n = \\frac{Q}{q_e} = \\frac{4{,}8 \\cdot 10^{-19}}{1{,}602 \\cdot 10^{-19}} =
 
 **Svar:** Droppen har $3$ överskottselektroner.
 
-**Generell slutsats:** Svaret blir (nästan) ett heltal — det var precis det Millikan upptäckte. Laddningen är alltid en hel multipel av elementarladdningen $1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$, aldrig något "mitt emellan".`,
+**Generell slutsats:** Svaret blir (nästan) ett heltal. Det var precis det Millikan upptäckte. Laddningen är alltid en hel multipel av elementarladdningen $1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$, aldrig något "mitt emellan".`,
         },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
@@ -39485,23 +48889,23 @@ $$ Q = \\frac{1{,}8 \\cdot 10^{-14} \\cdot 9{,}82 \\cdot 4{,}0 \\cdot 10^{-3}}{1
 
 **Svar:** Droppens laddning är ungefär $4{,}7 \\cdot 10^{-19}\\ \\mathrm{C}$.
 
-**Generell slutsats:** Formeln $Q = m g d / U$ är bara kraftbalansen $Q \\mathbb{E} = mg$ med $\\mathbb{E}$ utbytt mot $U/d$. Man behöver alltså inte räkna ut fältstyrkan separat — men det går lika bra att göra det i två steg.`,
+**Generell slutsats:** Formeln $Q = m g d / U$ är bara kraftbalansen $Q \\mathbb{E} = mg$ med $\\mathbb{E}$ utbytt mot $U/d$. Man behöver alltså inte räkna ut fältstyrkan separat, men det går lika bra att göra det i två steg.`,
         },
         {
             level: 2,
             question: `Mellan två horisontella plattor $5{,}0\\ \\mathrm{mm}$ från varandra läggs spänningen $2{,}0\\ \\mathrm{kV}$. En oljedroppe med massan $m = 1{,}3 \\cdot 10^{-14}\\ \\mathrm{kg}$ svävar i jämvikt. Hur många överskottselektroner har droppen? ($g = 9{,}82\\ \\mathrm{N/kg}$, $q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$)`,
             answer: { value: 2, unit: 'st' },
-            solution: `**Steg 1 — droppens laddning** ur kraftbalansen $Q \\cdot U/d = m g$:
+            solution: `**Steg 1: droppens laddning** ur kraftbalansen $Q \\cdot U/d = m g$:
 
 $$ Q = \\frac{m \\cdot g \\cdot d}{U} = \\frac{1{,}3 \\cdot 10^{-14} \\cdot 9{,}82 \\cdot 5{,}0 \\cdot 10^{-3}}{2\\,000} = 3{,}2 \\cdot 10^{-19}\\ \\mathrm{C} $$
 
-**Steg 2 — antalet elektroner:**
+**Steg 2: antalet elektroner:**
 
 $$ n = \\frac{Q}{q_e} = \\frac{3{,}2 \\cdot 10^{-19}}{1{,}602 \\cdot 10^{-19}} = 1{,}99\\ldots \\approx 2\\ \\text{st} $$
 
 **Svar:** Droppen har $2$ överskottselektroner.
 
-**Generell slutsats:** Att svaret hamnar så nära ett heltal är inget sammanträffande — det är hela poängen med försöket. Droppens laddning *måste* vara ett helt antal elementarladdningar.`,
+**Generell slutsats:** Att svaret hamnar så nära ett heltal är inget sammanträffande. Det är hela poängen med försöket. Droppens laddning *måste* vara ett helt antal elementarladdningar.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
@@ -39509,11 +48913,11 @@ $$ n = \\frac{Q}{q_e} = \\frac{3{,}2 \\cdot 10^{-19}}{1{,}602 \\cdot 10^{-19}} =
             level: 2,
             question: `Mellan två horisontella plattor $6{,}0\\ \\mathrm{mm}$ från varandra svävar en oljedroppe med massan $m = 3{,}3 \\cdot 10^{-15}\\ \\mathrm{kg}$ i jämvikt. Droppen har 2 överskottselektroner. Vilken spänning ligger över plattorna? ($g = 9{,}82\\ \\mathrm{N/kg}$, $q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$)`,
             answer: { value: 610, unit: 'V' },
-            solution: `**Steg 1 — droppens laddning.** Med 2 överskottselektroner är
+            solution: `**Steg 1: droppens laddning.** Med 2 överskottselektroner är
 
 $$ Q = n \\cdot q_e = 2 \\cdot 1{,}602 \\cdot 10^{-19} = 3{,}204 \\cdot 10^{-19}\\ \\mathrm{C} $$
 
-**Steg 2 — kraftbalansen, löst för spänningen.** Vid jämvikt gäller $F_\\mathrm{e} = F_\\mathrm{G}$, dvs. $Q \\cdot \\dfrac{U}{d} = m \\cdot g$. Vi löser ut *U*:
+**Steg 2: kraftbalansen, löst för spänningen.** Vid jämvikt gäller $F_\\mathrm{e} = F_\\mathrm{G}$, dvs. $Q \\cdot \\dfrac{U}{d} = m \\cdot g$. Vi löser ut *U*:
 
 $$ U = \\frac{m \\cdot g \\cdot d}{Q} $$
 
@@ -39536,22 +48940,591 @@ $$ U = \\frac{3{,}3 \\cdot 10^{-15} \\cdot 9{,}82 \\cdot 6{,}0 \\cdot 10^{-3}}{3
 **Generell slutsats:** Detta är försöket "baklänges": i stället för att mäta upp spänningen och räkna ut laddningen, utgår vi från en känd laddning (2 elektroner) och frågar vilken spänning som krävs för jämvikt. Nyckeln är att först omvandla antalet elektroner till en laddning med $Q = n \\cdot q_e$.`,
         },
         {
-            level: 3,
+            level: 2,
             question: `En oljedroppe svävar i jämvikt mellan två vågräta plattor som sitter $8{,}0\\ \\mathrm{mm}$ från varandra med spänningen $5{,}0\\ \\mathrm{kV}$. Droppen har 4 överskottselektroner. Oljans densitet är $\\rho = 900\\ \\mathrm{kg/m^3}$. Bestäm oljedroppens radie. Anta att droppen är klotformad ($V = \\dfrac{4}{3}\\pi r^3$). ($q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$, $g = 9{,}82\\ \\mathrm{N/kg}$)`,
             answer: { value: 2.2, unit: 'μm' },
-            solution: `**Steg 1 — droppens laddning** (4 elementarladdningar):
+            solution: `**Steg 1: droppens laddning** (4 elementarladdningar):
 $$ Q = 4 \\cdot q_e = 4 \\cdot 1{,}602 \\cdot 10^{-19} = 6{,}41 \\cdot 10^{-19}\\ \\mathrm{C} $$
 
-**Steg 2 — droppens massa ur jämvikten.** Vid svävning balanserar elektrisk kraft tyngdkraften, och $\\mathbb{E} = U/d$:
+**Steg 2: droppens massa ur jämvikten.** Vid svävning balanserar elektrisk kraft tyngdkraften, och $\\mathbb{E} = U/d$:
 $$ Q \\cdot \\frac{U}{d} = m \\cdot g \\quad\\Rightarrow\\quad m = \\frac{Q \\cdot U}{d \\cdot g} = \\frac{6{,}41 \\cdot 10^{-19} \\cdot 5\\,000}{0{,}0080 \\cdot 9{,}82} = 4{,}08 \\cdot 10^{-14}\\ \\mathrm{kg} $$
 
-**Steg 3 — radien ur massa och densitet.** Massan är densitet gånger klotvolym:
+**Steg 3: radien ur massa och densitet.** Massan är densitet gånger klotvolym:
 $$ m = \\rho \\cdot \\frac{4}{3}\\pi r^3 \\quad\\Rightarrow\\quad r = \\sqrt[3]{\\frac{3m}{4\\pi\\rho}} $$
 $$ r = \\sqrt[3]{\\frac{3 \\cdot 4{,}08 \\cdot 10^{-14}}{4\\pi \\cdot 900}} = \\sqrt[3]{1{,}08 \\cdot 10^{-17}} = 2{,}2 \\cdot 10^{-6}\\ \\mathrm{m} = 2{,}2\\ \\mathrm{\\mu m} $$
 
 **Svar:** Oljedroppens radie är ungefär $2{,}2\\ \\mathrm{\\mu m}$.
 
-**Generell slutsats:** Uppgiften kombinerar Millikans jämvikt, fältet mellan plattor *och* sambandet mellan massa, densitet och klotvolym — och kräver till sist en kubikrot. Det var just genom att bestämma droppens storlek (via dess falltid) som Millikan kunde få fram massan och därmed elementarladdningen.`,
+**Generell slutsats:** Uppgiften kombinerar Millikans jämvikt, fältet mellan plattor *och* sambandet mellan massa, densitet och klotvolym, och kräver till sist en kubikrot. Det var just genom att bestämma droppens storlek (via dess falltid) som Millikan kunde få fram massan och därmed elementarladdningen.`,
+        },
+        // ── Påfyllning: Grund ─────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En negativt laddad oljedroppe svävar stilla mellan två vågräta plattor, se figuren. Vilket påstående stämmer?
+
+<svg viewBox="10 14 240 146" width="300" height="183" style="display:block;margin:16px auto;max-width:100%;height:auto" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Negativt laddad oljedroppe mellan två vågräta plattor"><rect x="20" y="30" width="220" height="8" rx="2" fill="#c4c9cf" stroke="#8a9099" stroke-width="1.2"/><rect x="20" y="134" width="220" height="8" rx="2" fill="#c4c9cf" stroke="#8a9099" stroke-width="1.2"/><circle cx="130" cy="86" r="14" fill="#eadfb4" stroke="#0f1620" stroke-width="1.4"/><ellipse cx="124.7" cy="79.7" rx="3.4" ry="2.1" fill="#f7f0d4"/><line x1="126" y1="86" x2="134" y2="86" stroke="#2563a8" stroke-width="1.8" /></svg>`,
+            choices: [
+                `Övre plattan är negativ och fältet är riktat uppåt.`,
+                `Övre plattan är negativ och fältet är riktat nedåt.`,
+                `Övre plattan är positiv och fältet är riktat nedåt.`,
+                `Övre plattan är positiv och fältet är riktat uppåt.`,
+            ],
+            correct: 2,
+            solution: `Tyngdkraften på droppen är riktad nedåt. När droppen svävar måste den elektriska kraften därför vara riktad uppåt.
+
+Droppen är negativ och dras mot den positiva plattan. Den övre plattan är alltså positiv, och den undre är negativ.
+
+Det elektriska fältet är riktat från den positiva plattan till den negativa, alltså nedåt. Kraften på en negativ laddning är motsatt riktad fältet, vilket stämmer med att den är riktad uppåt.
+
+**Svar:** Alternativ C. Övre plattan är positiv och fältet är riktat nedåt.`,
+        },
+        {
+            level: 1,
+            question: `En oljedroppe med 5 överskottselektroner befinner sig i ett elektriskt fält med fältstyrkan $1{,}8 \\cdot 10^5\\ \\mathrm{V/m}$. Elementarladdningen är $q_\mathrm{e} = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$.<br>a) Hur stor är droppens laddning? Svara i C.<br>b) Hur stor är den elektriska kraften på droppen? Svara i N.`,
+            answer: { value: 8.01e-19, unit: 'C' },
+            delsvar: [
+                { del: 'a', value: 8.01e-19, unit: 'C', ignoreSign: true },
+                { del: 'b', value: 1.4e-13, unit: 'N', tol: 0.04 },
+            ],
+            solution: `**a)** Droppens laddning är antalet överskottselektroner multiplicerat med elementarladdningen. Vi anger laddningens storlek. Tecknet är negativt, eftersom elektroner är negativa.
+
+$$ Q = n \\cdot q_\mathrm{e} = 5 \\cdot 1{,}602 \\cdot 10^{-19} = 8{,}01 \\cdot 10^{-19}\\ \\mathrm{C} $$
+
+**Svar:** $8{,}01 \\cdot 10^{-19}\\ \\mathrm{C}$ (negativ)
+
+**b)** Den elektriska kraften är
+
+$$ F_\\mathrm{e} = Q \\cdot \\mathbb{E} $$
+
+$$
+\\left[ \\begin{array}{l}
+Q = 8{,}01 \\cdot 10^{-19}\\ \\mathrm{C} \\\\
+\\mathbb{E} = 1{,}8 \\cdot 10^5\\ \\mathrm{V/m}
+\\end{array} \\right]
+$$
+
+$$ F_\\mathrm{e} = 8{,}01 \\cdot 10^{-19} \\cdot 1{,}8 \\cdot 10^5 = 1{,}4418 \\cdot 10^{-13}\\ \\mathrm{N} \\approx 1{,}4 \\cdot 10^{-13}\\ \\mathrm{N} $$
+
+**Svar:** $1{,}4 \\cdot 10^{-13}\\ \\mathrm{N}$`,
+        },
+        {
+            level: 1,
+            question: `En elev har mätt laddningen på fyra oljedroppar. En av mätningarna måste vara felaktig. Vilken?`,
+            choices: [
+                `$6{,}4 \\cdot 10^{-19}\\ \\mathrm{C}$`,
+                `$5{,}6 \\cdot 10^{-19}\\ \\mathrm{C}$`,
+                `$8{,}0 \\cdot 10^{-19}\\ \\mathrm{C}$`,
+                `$11{,}2 \\cdot 10^{-19}\\ \\mathrm{C}$`,
+            ],
+            correct: 1,
+            solution: `En droppes laddning är alltid ett helt antal elementarladdningar. Vi dividerar varje laddning med $1{,}6 \\cdot 10^{-19}\\ \\mathrm{C}$ och ser om vi får ett heltal:
+
+$$ \\frac{6{,}4 \\cdot 10^{-19}}{1{,}6 \\cdot 10^{-19}} = 4 $$
+
+$$ \\frac{5{,}6 \\cdot 10^{-19}}{1{,}6 \\cdot 10^{-19}} = 3{,}5 $$
+
+$$ \\frac{8{,}0 \\cdot 10^{-19}}{1{,}6 \\cdot 10^{-19}} = 5 $$
+
+$$ \\frac{11{,}2 \\cdot 10^{-19}}{1{,}6 \\cdot 10^{-19}} = 7 $$
+
+En droppe kan inte ha tre och en halv överskottselektroner.
+
+**Svar:** Alternativ B, $5{,}6 \\cdot 10^{-19}\\ \\mathrm{C}$`,
+        },
+        {
+            level: 1,
+            question: `En oljedroppe har massan $5{,}2 \\cdot 10^{-15}\\ \\mathrm{kg}$ och laddningen $9{,}6 \\cdot 10^{-19}\\ \\mathrm{C}$. Hur stor elektrisk fältstyrka krävs för att droppen ska sväva? ($g = 9{,}82\\ \\mathrm{N/kg}$) Svara i kV/m.`,
+            answer: { value: 53, unit: 'kV/m' },
+            solution: `När droppen svävar är den elektriska kraften lika stor som tyngdkraften:
+
+$$ Q \\cdot \\mathbb{E} = m \\cdot g $$
+
+Vi löser ut fältstyrkan genom att dividera båda led med *Q*:
+
+$$ \\mathbb{E} = \\frac{m \\cdot g}{Q} $$
+
+$$
+\\left[ \\begin{array}{l}
+m = 5{,}2 \\cdot 10^{-15}\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+Q = 9{,}6 \\cdot 10^{-19}\\ \\mathrm{C}
+\\end{array} \\right]
+$$
+
+$$ \\mathbb{E} = \\frac{5{,}2 \\cdot 10^{-15} \\cdot 9{,}82}{9{,}6 \\cdot 10^{-19}} = 53\\,191{,}6\\ldots\\ \\mathrm{V/m} \\approx 53\\ \\mathrm{kV/m} $$
+
+**Svar:** $53\\ \\mathrm{kV/m}$`,
+        },
+
+        // ── Påfyllning: Mellan ────────────────────────────────────────────
+        {
+            level: 2,
+            question: `I en repris av Millikans försök är avståndet mellan plattorna $6{,}00\\ \\mathrm{mm}$. För tre droppar har man bestämt massan och den spänning som får droppen att sväva:
+
+| Droppe | Massa ($10^{-15}$ kg) | Spänning (V) |
+|---|---|---|
+| A | 4,20 | 772 |
+| B | 7,30 | 537 |
+| C | 2,90 | 356 |
+
+Hur många överskottselektroner har var och en av dropparna? ($g = 9{,}82\\ \\mathrm{N/kg}$, $q_\mathrm{e} = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$)`,
+            answer: { value: 5, unit: 'st' },
+            delsvar: [
+                { value: 2, unit: 'st', etikett: 'droppe A' },
+                { value: 5, unit: 'st', etikett: 'droppe B' },
+                { value: 3, unit: 'st', etikett: 'droppe C' },
+            ],
+            solution: `När en droppe svävar är den elektriska kraften lika stor som tyngdkraften, $Q \\cdot \\mathbb{E} = m \\cdot g$. Fältstyrkan är $\\mathbb{E} = \\dfrac{U}{d}$, så
+
+$$ Q \\cdot \\frac{U}{d} = m \\cdot g $$
+
+Vi multiplicerar båda led med *d* och dividerar med *U*:
+
+$$ Q = \\frac{m \\cdot g \\cdot d}{U} $$
+
+Antalet överskottselektroner är $n = \\dfrac{Q}{q_\mathrm{e}}$.
+
+Avståndet är $d = 6{,}00\\ \\mathrm{mm} = 6{,}00 \\cdot 10^{-3}\\ \\mathrm{m}$.
+
+**Droppe A:**
+
+$$ Q = \\frac{4{,}20 \\cdot 10^{-15} \\cdot 9{,}82 \\cdot 6{,}00 \\cdot 10^{-3}}{772} = 3{,}205\\ldots \\cdot 10^{-19}\\ \\mathrm{C} $$
+
+$$ n = \\frac{3{,}205\\ldots \\cdot 10^{-19}}{1{,}602 \\cdot 10^{-19}} = 2{,}00\\ldots \\approx 2 $$
+
+**Droppe B:**
+
+$$ Q = \\frac{7{,}30 \\cdot 10^{-15} \\cdot 9{,}82 \\cdot 6{,}00 \\cdot 10^{-3}}{537} = 8{,}009\\ldots \\cdot 10^{-19}\\ \\mathrm{C} $$
+
+$$ n = \\frac{8{,}009\\ldots \\cdot 10^{-19}}{1{,}602 \\cdot 10^{-19}} = 4{,}99\\ldots \\approx 5 $$
+
+**Droppe C:**
+
+$$ Q = \\frac{2{,}90 \\cdot 10^{-15} \\cdot 9{,}82 \\cdot 6{,}00 \\cdot 10^{-3}}{356} = 4{,}799\\ldots \\cdot 10^{-19}\\ \\mathrm{C} $$
+
+$$ n = \\frac{4{,}799\\ldots \\cdot 10^{-19}}{1{,}602 \\cdot 10^{-19}} = 2{,}99\\ldots \\approx 3 $$
+
+Alla tre kvoterna ligger mycket nära heltal, precis som de ska göra när laddningen består av ett helt antal elektroner.
+
+**Svar:** Droppe A har 2, droppe B har 5 och droppe C har 3 överskottselektroner.`,
+        },
+        {
+            level: 2,
+            question: `En oljedroppe svävar mellan två plattor som är anslutna till en spänningskub. Plattorna flyttas isär så att avståndet mellan dem fördubblas, medan spänningen hålls oförändrad. Vad händer med droppen, och hur ska spänningen ändras för att den åter ska kunna sväva?`,
+            choices: [
+                `Den börjar stiga, och spänningen ska halveras.`,
+                `Den fortsätter sväva, och spänningen ska inte ändras.`,
+                `Den börjar sjunka, och spänningen ska göras fyra gånger så stor.`,
+                `Den börjar sjunka, och spänningen ska fördubblas.`,
+            ],
+            correct: 3,
+            solution: `Fältstyrkan mellan plattorna är $\\mathbb{E} = \\dfrac{U}{d}$. När *d* fördubblas och *U* är oförändrad halveras fältstyrkan.
+
+Den elektriska kraften $F_\\mathrm{e} = Q \\cdot \\mathbb{E}$ halveras då också, medan tyngdkraften är oförändrad. Den resulterande kraften blir riktad nedåt och droppen börjar sjunka.
+
+För att droppen åter ska kunna sväva måste fältstyrkan ha sitt gamla värde. När nämnaren *d* är dubbelt så stor måste täljaren *U* också vara dubbelt så stor:
+
+$$ \\mathbb{E} = \\frac{2U}{2d} = \\frac{U}{d} $$
+
+**Svar:** Alternativ D. Droppen börjar sjunka, och spänningen ska fördubblas.`,
+        },
+        {
+            level: 2,
+            question: `En klotformad oljedroppe har diametern $1{,}8\\ \\mathrm{\\mu m}$ och 3 överskottselektroner. Oljans densitet är $880\\ \\mathrm{kg/m^3}$. Vilken spänning krävs för att droppen ska sväva mellan två vågräta plattor på avståndet $7{,}0\\ \\mathrm{mm}$ från varandra? Klotets volym är $V = \\dfrac{4 \\cdot \\pi \\cdot r^3}{3}$. ($g = 9{,}82\\ \\mathrm{N/kg}$, $q_\mathrm{e} = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$) Svara i V.`,
+            answer: { value: 380, unit: 'V', tol: 0.025 },
+            solution: `Droppens massa är densiteten multiplicerad med volymen:
+
+$$ m = \\rho \\cdot V = \\rho \\cdot \\frac{4 \\cdot \\pi \\cdot r^3}{3} $$
+
+$$
+\\left[ \\begin{array}{l}
+\\rho = 880\\ \\mathrm{kg/m^3} \\\\
+r = \\dfrac{1{,}8\\ \\mathrm{\\mu m}}{2} = 0{,}90 \\cdot 10^{-6}\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ m = 880 \\cdot \\frac{4 \\cdot \\pi \\cdot (0{,}90 \\cdot 10^{-6})^3}{3} = 2{,}687\\ldots \\cdot 10^{-15}\\ \\mathrm{kg} $$
+
+När droppen svävar är den elektriska kraften lika stor som tyngdkraften. Med $\\mathbb{E} = \\dfrac{U}{d}$ och $Q = n \\cdot q_\mathrm{e}$ får vi
+
+$$ n \\cdot q_\mathrm{e} \\cdot \\frac{U}{d} = m \\cdot g $$
+
+Vi multiplicerar båda led med *d* och dividerar med $n \\cdot q_\mathrm{e}$:
+
+$$ U = \\frac{m \\cdot g \\cdot d}{n \\cdot q_\mathrm{e}} $$
+
+$$ U = \\frac{2{,}687\\ldots \\cdot 10^{-15} \\cdot 9{,}82 \\cdot 7{,}0 \\cdot 10^{-3}}{3 \\cdot 1{,}602 \\cdot 10^{-19}} = 384{,}3\\ldots\\ \\mathrm{V} \\approx 380\\ \\mathrm{V} $$
+
+**Svar:** $380\\ \\mathrm{V}$`,
+        },
+        {
+            level: 2,
+            question: `Figuren visar krafterna på en oljedroppe i det ögonblick då fältet mellan plattorna slås på och droppen är i vila. Pilarna är skalenliga, och en ruta motsvarar $1{,}0 \\cdot 10^{-14}\\ \\mathrm{N}$. Fältstyrkan är $1{,}25 \\cdot 10^5\\ \\mathrm{V/m}$. ($g = 9{,}82\\ \\mathrm{N/kg}$, $q_\mathrm{e} = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$)<br>a) Hur många överskottselektroner har droppen?<br>b) Hur stor är droppens acceleration i detta ögonblick? Svara i m/s².
+
+<svg viewBox="16 16 208 288" width="250" height="346" style="display:block;margin:16px auto;max-width:100%;height:auto" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Oljedroppe på rutat papper med kraften F-e uppåt, 6 rutor, och F-G nedåt, 4 rutor"><line x1="20" y1="20" x2="20" y2="300" stroke="rgba(15,22,32,0.15)" stroke-width="1" /><line x1="40" y1="20" x2="40" y2="300" stroke="rgba(15,22,32,0.15)" stroke-width="1" /><line x1="60" y1="20" x2="60" y2="300" stroke="rgba(15,22,32,0.15)" stroke-width="1" /><line x1="80" y1="20" x2="80" y2="300" stroke="rgba(15,22,32,0.15)" stroke-width="1" /><line x1="100" y1="20" x2="100" y2="300" stroke="rgba(15,22,32,0.15)" stroke-width="1" /><line x1="120" y1="20" x2="120" y2="300" stroke="rgba(15,22,32,0.15)" stroke-width="1" /><line x1="140" y1="20" x2="140" y2="300" stroke="rgba(15,22,32,0.15)" stroke-width="1" /><line x1="160" y1="20" x2="160" y2="300" stroke="rgba(15,22,32,0.15)" stroke-width="1" /><line x1="180" y1="20" x2="180" y2="300" stroke="rgba(15,22,32,0.15)" stroke-width="1" /><line x1="200" y1="20" x2="200" y2="300" stroke="rgba(15,22,32,0.15)" stroke-width="1" /><line x1="220" y1="20" x2="220" y2="300" stroke="rgba(15,22,32,0.15)" stroke-width="1" /><line x1="20" y1="20" x2="220" y2="20" stroke="rgba(15,22,32,0.15)" stroke-width="1" /><line x1="20" y1="40" x2="220" y2="40" stroke="rgba(15,22,32,0.15)" stroke-width="1" /><line x1="20" y1="60" x2="220" y2="60" stroke="rgba(15,22,32,0.15)" stroke-width="1" /><line x1="20" y1="80" x2="220" y2="80" stroke="rgba(15,22,32,0.15)" stroke-width="1" /><line x1="20" y1="100" x2="220" y2="100" stroke="rgba(15,22,32,0.15)" stroke-width="1" /><line x1="20" y1="120" x2="220" y2="120" stroke="rgba(15,22,32,0.15)" stroke-width="1" /><line x1="20" y1="140" x2="220" y2="140" stroke="rgba(15,22,32,0.15)" stroke-width="1" /><line x1="20" y1="160" x2="220" y2="160" stroke="rgba(15,22,32,0.15)" stroke-width="1" /><line x1="20" y1="180" x2="220" y2="180" stroke="rgba(15,22,32,0.15)" stroke-width="1" /><line x1="20" y1="200" x2="220" y2="200" stroke="rgba(15,22,32,0.15)" stroke-width="1" /><line x1="20" y1="220" x2="220" y2="220" stroke="rgba(15,22,32,0.15)" stroke-width="1" /><line x1="20" y1="240" x2="220" y2="240" stroke="rgba(15,22,32,0.15)" stroke-width="1" /><line x1="20" y1="260" x2="220" y2="260" stroke="rgba(15,22,32,0.15)" stroke-width="1" /><line x1="20" y1="280" x2="220" y2="280" stroke="rgba(15,22,32,0.15)" stroke-width="1" /><line x1="20" y1="300" x2="220" y2="300" stroke="rgba(15,22,32,0.15)" stroke-width="1" /><circle cx="120" cy="180" r="14" fill="#eadfb4" stroke="#0f1620" stroke-width="1.4"/><ellipse cx="114.7" cy="173.7" rx="3.4" ry="2.1" fill="#f7f0d4"/><line x1="120" y1="180" x2="120" y2="70" stroke="#2563a8" stroke-width="2.6" stroke-linecap="butt"/><polygon points="120,60 114.5,70 125.5,70" fill="#2563a8"/><line x1="120" y1="180" x2="120" y2="250" stroke="#0f1620" stroke-width="2.6" stroke-linecap="butt"/><polygon points="120,260 114.5,250 125.5,250" fill="#0f1620"/><circle cx="120" cy="180" r="2.6" fill="#0f1620"/><text x="120" y="49" font-size="15" text-anchor="middle" fill="#2563a8"><tspan font-style="italic">F</tspan><tspan dy="4" font-size="11">e</tspan></text><text x="120" y="280" font-size="15" text-anchor="middle" fill="#0f1620"><tspan font-style="italic">F</tspan><tspan dy="4" font-size="11">G</tspan></text></svg>`,
+            answer: { value: 4.9, unit: 'm/s²', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 3, unit: 'st' },
+                { del: 'b', value: 4.9, unit: 'm/s²', tol: 0.03 },
+            ],
+            solution: `**a)** Pilen för den elektriska kraften är 6 rutor lång, så $F_\\mathrm{e} = 6{,}0 \\cdot 10^{-14}\\ \\mathrm{N}$. Ur $F_\\mathrm{e} = Q \\cdot \\mathbb{E}$ får vi
+
+$$ Q = \\frac{F_\\mathrm{e}}{\\mathbb{E}} = \\frac{6{,}0 \\cdot 10^{-14}}{1{,}25 \\cdot 10^5} = 4{,}8 \\cdot 10^{-19}\\ \\mathrm{C} $$
+
+$$ n = \\frac{Q}{q_\mathrm{e}} = \\frac{4{,}8 \\cdot 10^{-19}}{1{,}602 \\cdot 10^{-19}} = 2{,}99\\ldots \\approx 3 $$
+
+**Svar:** 3 st
+
+**b)** Pilen för tyngdkraften är 4 rutor lång, så $F_\\mathrm{G} = 4{,}0 \\cdot 10^{-14}\\ \\mathrm{N}$. Ur $F_\\mathrm{G} = m \\cdot g$ får vi massan:
+
+$$ m = \\frac{F_\\mathrm{G}}{g} = \\frac{4{,}0 \\cdot 10^{-14}}{9{,}82} = 4{,}073\\ldots \\cdot 10^{-15}\\ \\mathrm{kg} $$
+
+Den resulterande kraften är riktad uppåt:
+
+$$ F_\\mathrm{R} = F_\\mathrm{e} - F_\\mathrm{G} = 6{,}0 \\cdot 10^{-14} - 4{,}0 \\cdot 10^{-14} = 2{,}0 \\cdot 10^{-14}\\ \\mathrm{N} $$
+
+Newtons andra lag ger accelerationen:
+
+$$ a = \\frac{F_\\mathrm{R}}{m} = \\frac{2{,}0 \\cdot 10^{-14}}{4{,}073\\ldots \\cdot 10^{-15}} = 4{,}91\\ldots\\ \\mathrm{m/s^2} \\approx 4{,}9\\ \\mathrm{m/s^2} $$
+
+**Rimlighetsbedömning:** Den resulterande kraften är hälften så stor som tyngdkraften, så accelerationen ska vara hälften av $9{,}82\\ \\mathrm{m/s^2}$. Det stämmer.
+
+**Svar:** $4{,}9\\ \\mathrm{m/s^2}$ uppåt`,
+        },
+
+        // ── Påfyllning: Avancerad ─────────────────────────────────────────
+        {
+            level: 3,
+            question: `En oljedroppe svävar mellan två plattor när spänningen är $960\\ \\mathrm{V}$. Plötsligt fångar droppen upp en elektron från luften. Spänningen måste då sänkas till $800\\ \\mathrm{V}$ för att droppen åter ska sväva. Elektronernas massa kan försummas.<br>a) Hur många överskottselektroner hade droppen från början?<br>b) Senare under försöket ändras droppens laddning igen, och nu krävs $1\\,200\\ \\mathrm{V}$ för att den ska sväva. Hur många överskottselektroner har den då?`,
+            answer: { value: 5, unit: 'st' },
+            delsvar: [
+                { del: 'a', value: 5, unit: 'st' },
+                { del: 'b', value: 4, unit: 'st' },
+            ],
+            solution: `Varken droppens massa eller plattornas avstånd är känt, men de är desamma under hela försöket.
+
+**a)** När droppen svävar är den elektriska kraften lika stor som tyngdkraften. Med *n* överskottselektroner är $Q = n \\cdot q_\mathrm{e}$, så
+
+$$ n \\cdot q_\mathrm{e} \\cdot \\frac{U}{d} = m \\cdot g $$
+
+Vi multiplicerar båda led med *d* och dividerar med $q_\mathrm{e}$:
+
+$$ n \\cdot U = \\frac{m \\cdot g \\cdot d}{q_\mathrm{e}} \\qquad (1) $$
+
+Högerledet är konstant. Produkten av antalet överskottselektroner och spänningen är alltså densamma varje gång droppen svävar.
+
+Före händelsen är antalet *n* och spänningen $960\\ \\mathrm{V}$. Efteråt är antalet $n + 1$ och spänningen $800\\ \\mathrm{V}$. Eftersom produkten är densamma gäller
+
+$$ n \\cdot 960 = (n + 1) \\cdot 800 $$
+
+$$ 960n = 800n + 800 $$
+
+$$ 960n - 800n = 800 $$
+
+$$ 160n = 800 $$
+
+$$ n = \\frac{800}{160} = 5 $$
+
+**Svar:** 5 st
+
+**b)** Produkten i (1), $n \\cdot U = \\dfrac{m \\cdot g \\cdot d}{q_\mathrm{e}}$, kan vi nu räkna ut med värdena från början:
+
+$$ n \\cdot U = 5 \\cdot 960 = 4\\,800\\ \\mathrm{V} $$
+
+När spänningen är $1\\,200\\ \\mathrm{V}$ är antalet
+
+$$ n = \\frac{4\\,800}{1\\,200} = 4 $$
+
+Droppen hade 6 överskottselektroner efter den första händelsen, så den har förlorat två.
+
+**Rimlighetsbedömning:** En högre spänning krävs när laddningen är mindre, vilket stämmer. Båda svaren blir dessutom heltal, som de måste.
+
+**Svar:** 4 st`,
+        },
+        {
+            level: 3,
+            question: `I en science fiction-roman gör forskare i ett annat universum Millikans försök. De vet inte hur stor elementarladdningen är där. Fyra droppar får laddningarna i tabellen, och mätosäkerheten kan försummas.
+
+| Droppe | Laddning ($10^{-19}$ C) |
+|---|---|
+| 1 | 9,1 |
+| 2 | 5,2 |
+| 3 | 13,0 |
+| 4 | 7,8 |
+
+a) Vilket är det största värde som elementarladdningen kan ha i detta universum? Motivera. Svara i C.<br>b) Kan forskarna vara säkra på att elementarladdningen har just detta värde? Motivera, och beskriv ett mätresultat som skulle visa att den är mindre.`,
+            answer: { value: 1.3e-19, unit: 'C' },
+            delsvar: [
+                { del: 'a', value: 1.3e-19, unit: 'C' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Kalla elementarladdningen *q*. Varje droppes laddning är ett helt antal *q*. Då måste också *skillnaden* mellan två droppars laddningar vara ett helt antal *q*, eftersom skillnaden mellan två heltal är ett heltal.
+
+Den minsta skillnaden finns mellan droppe 1 och droppe 4. Räknat i $10^{-19}\\ \\mathrm{C}$ är den
+
+$$ 9{,}1 - 7{,}8 = 1{,}3 $$
+
+Skillnaden är inte noll och är minst en elementarladdning. Alltså kan *q* inte vara större än $1{,}3 \\cdot 10^{-19}\\ \\mathrm{C}$.
+
+Vi prövar om värdet $1{,}3 \\cdot 10^{-19}\\ \\mathrm{C}$ stämmer med alla fyra dropparna:
+
+$$ \\frac{9{,}1}{1{,}3} = 7 $$
+
+$$ \\frac{5{,}2}{1{,}3} = 4 $$
+
+$$ \\frac{13{,}0}{1{,}3} = 10 $$
+
+$$ \\frac{7{,}8}{1{,}3} = 6 $$
+
+Alla kvoter är heltal, så värdet är möjligt, och inget större värde är det.
+
+**Svar:** $1{,}3 \\cdot 10^{-19}\\ \\mathrm{C}$
+
+**b)** Nej. Om elementarladdningen till exempel är hälften så stor, $0{,}65 \\cdot 10^{-19}\\ \\mathrm{C}$, är alla fyra laddningarna fortfarande hela multiplar. Antalen blir då 14, 8, 20 och 12. På samma sätt fungerar en tredjedel, en fjärdedel och så vidare av $1{,}3 \\cdot 10^{-19}\\ \\mathrm{C}$.
+
+Ett mätresultat som inte är en hel multipel av $1{,}3 \\cdot 10^{-19}\\ \\mathrm{C}$ skulle visa att elementarladdningen är mindre. Ett exempel är $5{,}85 \\cdot 10^{-19}\\ \\mathrm{C}$:
+
+$$ \\frac{5{,}85}{1{,}3} = 4{,}5 $$
+
+Ju fler droppar som ger hela multiplar, desto säkrare blir slutsatsen. Därför behövde försöket upprepas många gånger.
+
+**Svar:** Nej, varje värde som är $1{,}3 \\cdot 10^{-19}\\ \\mathrm{C}$ dividerat med ett positivt heltal stämmer också. En laddning på till exempel $5{,}85 \\cdot 10^{-19}\\ \\mathrm{C}$ skulle visa att elementarladdningen är mindre.`,
+        },
+        {
+            level: 3,
+            question: `Diagrammet visar höjden *y* över den undre plattan för en oljedroppe. I början är spänningen mellan plattorna noll och droppen faller med konstant fart. Efter en stund slås spänningen $1\\,200\\ \\mathrm{V}$ på, och droppen stiger nästan genast med konstant fart. Luftmotståndet är proportionellt mot droppens fart. Vid vilken spänning skulle droppen sväva? Svara i V.
+
+${makeDiagram({ xMax: 22, yMax: 3.4, xTicks: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20], yTicks: [0, 0.4, 0.8, 1.2, 1.6, 2.0, 2.4, 2.8, 3.2], yLabel: '<tspan font-style="italic">y</tspan> (mm)', paths: [{ points: [[0, 2.8], [8, 1.6], [20, 2.8]] }] })}`,
+            answer: { value: 720, unit: 'V', tol: 0.03 },
+            solution: `Vi känner varken droppens massa, dess laddning eller plattornas avstånd. Vi ställer därför upp kraftjämvikten i de två fallen och ser vad som kan förkortas bort. Farten är konstant i båda fallen, så den resulterande kraften är noll.
+
+<svg viewBox="26 14 312 230" width="390" height="288" style="display:block;margin:16px auto;max-width:100%;height:auto" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Krafterna på droppen i de två fallen. Utan spänning balanserar luftmotståndet tyngdkraften. Med spänning balanserar den elektriska kraften tyngdkraften och luftmotståndet tillsammans."><circle cx="90" cy="120" r="13" fill="#eadfb4" stroke="#0f1620" stroke-width="1.4"/><ellipse cx="85.1" cy="114.2" rx="3.1" ry="1.9" fill="#f7f0d4"/><line x1="90" y1="120" x2="90" y2="158" stroke="#0f1620" stroke-width="2.6" stroke-linecap="butt"/><polygon points="90,168 84.5,158 95.5,158" fill="#0f1620"/><line x1="90" y1="107" x2="90" y2="69" stroke="#8a5a12" stroke-width="2.6" stroke-linecap="butt"/><polygon points="90,59 84.5,69 95.5,69" fill="#8a5a12"/><circle cx="90" cy="120" r="2.6" fill="#0f1620"/><text x="90" y="189" font-size="15" text-anchor="middle" fill="#0f1620"><tspan font-style="italic">F</tspan><tspan dy="4" font-size="11">G</tspan></text><text x="90" y="50" font-size="15" text-anchor="middle" fill="#8a5a12"><tspan font-style="italic">F</tspan><tspan dy="4" font-size="11">luft</tspan></text><text x="90" y="234" font-size="15" text-anchor="middle" fill="#0f1620">Utan spänning</text><circle cx="270" cy="120" r="13" fill="#eadfb4" stroke="#0f1620" stroke-width="1.4"/><ellipse cx="265.1" cy="114.2" rx="3.1" ry="1.9" fill="#f7f0d4"/><line x1="270" y1="120" x2="270" y2="158" stroke="#0f1620" stroke-width="2.6" stroke-linecap="butt"/><polygon points="270,168 264.5,158 275.5,158" fill="#0f1620"/><line x1="282" y1="125" x2="282" y2="147" stroke="#8a5a12" stroke-width="2.6" stroke-linecap="butt"/><polygon points="282,157 276.5,147 287.5,147" fill="#8a5a12"/><line x1="270" y1="120" x2="270" y2="50" stroke="#2563a8" stroke-width="2.6" stroke-linecap="butt"/><polygon points="270,40 264.5,50 275.5,50" fill="#2563a8"/><circle cx="270" cy="120" r="2.6" fill="#0f1620"/><text x="268" y="189" font-size="15" text-anchor="middle" fill="#0f1620"><tspan font-style="italic">F</tspan><tspan dy="4" font-size="11">G</tspan></text><text x="292" y="163" font-size="15" text-anchor="start" fill="#8a5a12"><tspan font-style="italic">F</tspan><tspan dy="4" font-size="11">luft</tspan></text><text x="270" y="32" font-size="15" text-anchor="middle" fill="#2563a8"><tspan font-style="italic">F</tspan><tspan dy="4" font-size="11">e</tspan></text><text x="270" y="234" font-size="15" text-anchor="middle" fill="#0f1620">Med spänning</text></svg>
+
+**Utan spänning:** Droppen faller, så luftmotståndet är riktat uppåt. Skriv luftmotståndet som $k \\cdot v$. Med farten $v_1$ gäller
+
+$$ m \\cdot g = k \\cdot v_1 \\qquad (1) $$
+
+**Med spänningen *U*:** Droppen stiger, så luftmotståndet är riktat nedåt. Den elektriska kraften ska balansera både tyngdkraften och luftmotståndet. Med farten $v_2$ gäller
+
+$$ \\frac{Q \\cdot U}{d} = m \\cdot g + k \\cdot v_2 \\qquad (2) $$
+
+**När droppen svävar** är luftmotståndet noll. Kalla den spänningen $U_0$:
+
+$$ \\frac{Q \\cdot U_0}{d} = m \\cdot g \\qquad (3) $$
+
+Vi dividerar ekvation (2) med ekvation (3), led för led. Då förkortas *Q* och *d* bort i vänsterledet:
+
+$$ \\frac{U}{U_0} = \\frac{m \\cdot g + k \\cdot v_2}{m \\cdot g} $$
+
+Insättning av (1), $m \\cdot g = k \\cdot v_1$, ger
+
+$$ \\frac{U}{U_0} = \\frac{k \\cdot v_1 + k \\cdot v_2}{k \\cdot v_1} = \\frac{v_1 + v_2}{v_1} $$
+
+Vi löser ut $U_0$:
+
+$$ U_0 = \\frac{U \\cdot v_1}{v_1 + v_2} $$
+
+Farterna fås ur linjernas lutning i diagrammet. Droppen faller från $2{,}8\\ \\mathrm{mm}$ till $1{,}6\\ \\mathrm{mm}$ på $8\\ \\mathrm{s}$ och stiger sedan lika långt på $12\\ \\mathrm{s}$:
+
+$$ v_1 = \\frac{2{,}8 - 1{,}6}{8} = 0{,}15\\ \\mathrm{mm/s} $$
+
+$$ v_2 = \\frac{2{,}8 - 1{,}6}{20 - 8} = 0{,}10\\ \\mathrm{mm/s} $$
+
+Båda farterna är i mm/s, så enheten förkortas bort:
+
+$$ U_0 = \\frac{1\\,200 \\cdot 0{,}15}{0{,}15 + 0{,}10} = 720\\ \\mathrm{V} $$
+
+**Rimlighetsbedömning:** Vid $1\\,200\\ \\mathrm{V}$ stiger droppen, så spänningen för jämvikt ska vara lägre. Det stämmer.
+
+**Svar:** $720\\ \\mathrm{V}$`,
+        },
+        {
+            level: 3,
+            question: `En negativt laddad oljedroppe svävar mitt emellan två vågräta plattor på avståndet $6{,}0\\ \\mathrm{mm}$ från varandra, se figuren. Spänningens poler byts plötsligt, så att den övre plattan blir negativ och den undre positiv, medan spänningens storlek är oförändrad. Droppens storlek kan försummas. ($g = 9{,}82\\ \\mathrm{N/kg}$)<br>a) Vilken platta når droppen, och hur lång tid tar det om luftmotståndet försummas? Svara i ms.<br>b) Diskutera hur svaret i a) förhåller sig till den verkliga tiden.
+
+<svg viewBox="0 8 300 182" width="375" height="228" style="display:block;margin:16px auto;max-width:100%;height:auto" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Negativ oljedroppe mitt emellan en övre positiv och en undre negativ platta, avståndet 6,0 mm"><rect x="90" y="30" width="200" height="8" rx="2" fill="#c4c9cf" stroke="#8a9099" stroke-width="1.2"/><rect x="90" y="158" width="200" height="8" rx="2" fill="#c4c9cf" stroke="#8a9099" stroke-width="1.2"/><line x1="111" y1="19" x2="119" y2="19" stroke="#c0392b" stroke-width="1.8" /><line x1="115" y1="15" x2="115" y2="23" stroke="#c0392b" stroke-width="1.8" /><line x1="111" y1="178" x2="119" y2="178" stroke="#2563a8" stroke-width="1.8" /><line x1="161" y1="19" x2="169" y2="19" stroke="#c0392b" stroke-width="1.8" /><line x1="165" y1="15" x2="165" y2="23" stroke="#c0392b" stroke-width="1.8" /><line x1="161" y1="178" x2="169" y2="178" stroke="#2563a8" stroke-width="1.8" /><line x1="211" y1="19" x2="219" y2="19" stroke="#c0392b" stroke-width="1.8" /><line x1="215" y1="15" x2="215" y2="23" stroke="#c0392b" stroke-width="1.8" /><line x1="211" y1="178" x2="219" y2="178" stroke="#2563a8" stroke-width="1.8" /><line x1="261" y1="19" x2="269" y2="19" stroke="#c0392b" stroke-width="1.8" /><line x1="265" y1="15" x2="265" y2="23" stroke="#c0392b" stroke-width="1.8" /><line x1="261" y1="178" x2="269" y2="178" stroke="#2563a8" stroke-width="1.8" /><circle cx="190" cy="98" r="13" fill="#eadfb4" stroke="#0f1620" stroke-width="1.4"/><ellipse cx="185.1" cy="92.2" rx="3.1" ry="1.9" fill="#f7f0d4"/><line x1="186" y1="98" x2="194" y2="98" stroke="#2563a8" stroke-width="1.8" /><line x1="64" y1="38" x2="88" y2="38" stroke="#0f1620" stroke-width="1" stroke-dasharray="4 4"/><line x1="64" y1="158" x2="88" y2="158" stroke="#0f1620" stroke-width="1" stroke-dasharray="4 4"/><line x1="72" y1="45" x2="72" y2="151" stroke="#0f1620" stroke-width="1.4" /><polygon points="72,38 68,46 76,46" fill="#0f1620"/><polygon points="72,158 68,150 76,150" fill="#0f1620"/><text x="60" y="103" font-size="15" text-anchor="end" fill="#0f1620">6,0 mm</text></svg>`,
+            answer: { value: 17, unit: 'ms', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 17, unit: 'ms', tol: 0.04 },
+                { del: 'b' },
+            ],
+            solution: `**a)** När droppen svävar är den elektriska kraften riktad uppåt och lika stor som tyngdkraften:
+
+$$ F_\\mathrm{e} = m \\cdot g $$
+
+När polerna byts ändrar fältet riktning men inte storlek. Den elektriska kraften blir därför riktad nedåt, men har samma storlek $m \\cdot g$ som förut. Nu är alltså **båda** krafterna riktade nedåt:
+
+<svg viewBox="50 8 200 232" width="240" height="278" style="display:block;margin:16px auto;max-width:100%;height:auto" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Efter polbytet är både den elektriska kraften och tyngdkraften riktade nedåt och lika stora"><rect x="60" y="30" width="180" height="8" rx="2" fill="#c4c9cf" stroke="#8a9099" stroke-width="1.2"/><rect x="60" y="208" width="180" height="8" rx="2" fill="#c4c9cf" stroke="#8a9099" stroke-width="1.2"/><line x1="86" y1="19" x2="94" y2="19" stroke="#2563a8" stroke-width="1.8" /><line x1="86" y1="229" x2="94" y2="229" stroke="#c0392b" stroke-width="1.8" /><line x1="90" y1="225" x2="90" y2="233" stroke="#c0392b" stroke-width="1.8" /><line x1="126" y1="19" x2="134" y2="19" stroke="#2563a8" stroke-width="1.8" /><line x1="126" y1="229" x2="134" y2="229" stroke="#c0392b" stroke-width="1.8" /><line x1="130" y1="225" x2="130" y2="233" stroke="#c0392b" stroke-width="1.8" /><line x1="166" y1="19" x2="174" y2="19" stroke="#2563a8" stroke-width="1.8" /><line x1="166" y1="229" x2="174" y2="229" stroke="#c0392b" stroke-width="1.8" /><line x1="170" y1="225" x2="170" y2="233" stroke="#c0392b" stroke-width="1.8" /><line x1="206" y1="19" x2="214" y2="19" stroke="#2563a8" stroke-width="1.8" /><line x1="206" y1="229" x2="214" y2="229" stroke="#c0392b" stroke-width="1.8" /><line x1="210" y1="225" x2="210" y2="233" stroke="#c0392b" stroke-width="1.8" /><circle cx="150" cy="80" r="13" fill="#eadfb4" stroke="#0f1620" stroke-width="1.4"/><ellipse cx="145.1" cy="74.2" rx="3.1" ry="1.9" fill="#f7f0d4"/><line x1="143.5" y1="80" x2="143.5" y2="134" stroke="#2563a8" stroke-width="2.6" stroke-linecap="butt"/><polygon points="143.5,144 138,134 149,134" fill="#2563a8"/><line x1="156.5" y1="80" x2="156.5" y2="134" stroke="#0f1620" stroke-width="2.6" stroke-linecap="butt"/><polygon points="156.5,144 151,134 162,134" fill="#0f1620"/><text x="138" y="163" font-size="15" text-anchor="end" fill="#2563a8"><tspan font-style="italic">F</tspan><tspan dy="4" font-size="11">e</tspan></text><text x="162" y="163" font-size="15" text-anchor="start" fill="#0f1620"><tspan font-style="italic">F</tspan><tspan dy="4" font-size="11">G</tspan></text></svg>
+
+$$ F_\\mathrm{R} = F_\\mathrm{e} + F_\\mathrm{G} = m \\cdot g + m \\cdot g = 2 \\cdot m \\cdot g $$
+
+Newtons andra lag ger accelerationen. Massan förkortas bort:
+
+$$ a = \\frac{F_\\mathrm{R}}{m} = \\frac{2 \\cdot m \\cdot g}{m} = 2 \\cdot g $$
+
+Fältet är homogent, så kraften är konstant och accelerationen är densamma hela vägen. Droppen startar från vila och rör sig sträckan $s = \\dfrac{d}{2}$ till den undre plattan:
+
+$$ s = \\frac{a \\cdot t^2}{2} $$
+
+Insättning av $s = \\dfrac{d}{2}$ och $a = 2 \\cdot g$ ger
+
+$$ \\frac{d}{2} = \\frac{2 \\cdot g \\cdot t^2}{2} $$
+
+$$ \\frac{d}{2} = g \\cdot t^2 $$
+
+Vi dividerar båda led med *g*:
+
+$$ t^2 = \\frac{d}{2 \\cdot g} $$
+
+Vi drar roten ur båda led. Tiden är positiv:
+
+$$ t = \\sqrt{\\frac{d}{2 \\cdot g}} $$
+
+$$ t = \\sqrt{\\frac{6{,}0 \\cdot 10^{-3}}{2 \\cdot 9{,}82}} = 0{,}01747\\ldots\\ \\mathrm{s} \\approx 17\\ \\mathrm{ms} $$
+
+Varken massan, laddningen eller spänningen behövs.
+
+**Svar:** Droppen når den undre plattan efter $17\\ \\mathrm{ms}$.
+
+**b)** Luftmotståndet är riktat uppåt när droppen rör sig nedåt. Det minskar den resulterande kraften och därmed accelerationen, så den verkliga tiden är längre än $17\\ \\mathrm{ms}$. Beräkningen ger en undre gräns.
+
+För en så liten droppe är skillnaden stor. Utan luftmotstånd skulle droppen nå farten
+
+$$ v = a \\cdot t = 2 \\cdot 9{,}82 \\cdot 0{,}01747\\ldots = 0{,}343\\ldots\\ \\mathrm{m/s} $$
+
+Verkliga oljedroppar i försöket rör sig oftast med bråkdelar av en millimeter per sekund, eftersom luftmotståndet mycket snabbt blir lika stort som de andra krafterna tillsammans. Den verkliga tiden blir därför många sekunder.
+
+**Svar:** Den verkliga tiden är mycket längre. Värdet i a) är en undre gräns.`,
+        },
+        {
+            level: 3,
+            question: `När laddningen på en svävande oljedroppe beräknas med $Q = \\dfrac{m \\cdot g \\cdot d}{U}$ bortser man från luftens lyftkraft på droppen. Utred hur många procent för stor eller för liten den beräknade laddningen blir när oljans densitet är $870\\ \\mathrm{kg/m^3}$ och luftens densitet är $1{,}2\\ \\mathrm{kg/m^3}$. Diskutera också om felet kan göra att man räknar fel på antalet överskottselektroner. Svara i procent.`,
+            answer: { value: 0.14, unit: '%', tol: 0.04, ignoreSign: true },
+            solution: `Droppens volym är okänd. Vi kallar den *V* och räknar generellt. Oljans densitet kallar vi $\\rho_\\mathrm{o}$ och luftens $\\rho_\\mathrm{l}$.
+
+**Utan lyftkraften** är den beräknade laddningen, med $m = \\rho_\\mathrm{o} \\cdot V$,
+
+$$ Q = \\frac{\\rho_\\mathrm{o} \\cdot V \\cdot g \\cdot d}{U} \\qquad (1) $$
+
+**Med lyftkraften** verkar två krafter uppåt: den elektriska kraften och luftens lyftkraft. Enligt Arkimedes princip är lyftkraften lika stor som tyngdkraften på den undanträngda luften, $F_\\mathrm{L} = \\rho_\\mathrm{l} \\cdot V \\cdot g$. Jämvikten blir, med den sanna laddningen $Q_0$,
+
+$$ \\frac{Q_0 \\cdot U}{d} + \\rho_\\mathrm{l} \\cdot V \\cdot g = \\rho_\\mathrm{o} \\cdot V \\cdot g $$
+
+Vi subtraherar lyftkraften från båda led:
+
+$$ \\frac{Q_0 \\cdot U}{d} = \\rho_\\mathrm{o} \\cdot V \\cdot g - \\rho_\\mathrm{l} \\cdot V \\cdot g $$
+
+Vi bryter ut $V \\cdot g$, multiplicerar båda led med *d* och dividerar med *U*:
+
+$$ Q_0 = \\frac{(\\rho_\\mathrm{o} - \\rho_\\mathrm{l}) \\cdot V \\cdot g \\cdot d}{U} \\qquad (2) $$
+
+Vi dividerar (1), $Q = \\dfrac{\\rho_\\mathrm{o} \\cdot V \\cdot g \\cdot d}{U}$, med (2). Då förkortas *V*, *g*, *d* och *U* bort:
+
+$$ \\frac{Q}{Q_0} = \\frac{\\rho_\\mathrm{o}}{\\rho_\\mathrm{o} - \\rho_\\mathrm{l}} $$
+
+$$ \\frac{Q}{Q_0} = \\frac{870}{870 - 1{,}2} = 1{,}00138\\ldots $$
+
+Den beräknade laddningen är alltså ungefär $0{,}14\\ \\%$ för stor, och felet är detsamma för alla droppar av denna olja.
+
+**Antalet elektroner:** Ett fel på $0{,}14\\ \\%$ ger fel heltal först när felet i *n* är större än en halv elektron:
+
+$$ 0{,}00138\\ldots \\cdot n > 0{,}5 $$
+
+Gränsen går vid
+
+$$ n = \\frac{0{,}5}{0{,}00138\\ldots} \\approx 360 $$
+
+Dropparna i försöket har bara några få överskottselektroner, så antalet påverkas inte. Däremot blir själva värdet på elementarladdningen $0{,}14\\ \\%$ för stort om lyftkraften försummas.
+
+**Svar:** Den beräknade laddningen blir $0{,}14\\ \\%$ för stor. Det är för lite för att ge fel antal överskottselektroner.`,
+        },
+        {
+            level: 3,
+            question: `Två oljedroppar, A och B, av samma olja svävar samtidigt mellan samma två plattor, se figuren. Diametern hos droppe B är 1,5 gånger så stor som diametern hos droppe A. Hur många överskottselektroner måste droppe A minst ha?
+
+<svg viewBox="10 8 300 176" width="375" height="220" style="display:block;margin:16px auto;max-width:100%;height:auto" font-family="Poppins, system-ui, sans-serif" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Två oljedroppar, A och B, svävar mellan samma två plattor. B är 1,5 gånger så bred som A."><rect x="20" y="30" width="280" height="8" rx="2" fill="#c4c9cf" stroke="#8a9099" stroke-width="1.2"/><rect x="20" y="152" width="280" height="8" rx="2" fill="#c4c9cf" stroke="#8a9099" stroke-width="1.2"/><line x1="46" y1="19" x2="54" y2="19" stroke="#c0392b" stroke-width="1.8" /><line x1="50" y1="15" x2="50" y2="23" stroke="#c0392b" stroke-width="1.8" /><line x1="46" y1="173" x2="54" y2="173" stroke="#2563a8" stroke-width="1.8" /><line x1="101" y1="19" x2="109" y2="19" stroke="#c0392b" stroke-width="1.8" /><line x1="105" y1="15" x2="105" y2="23" stroke="#c0392b" stroke-width="1.8" /><line x1="101" y1="173" x2="109" y2="173" stroke="#2563a8" stroke-width="1.8" /><line x1="156" y1="19" x2="164" y2="19" stroke="#c0392b" stroke-width="1.8" /><line x1="160" y1="15" x2="160" y2="23" stroke="#c0392b" stroke-width="1.8" /><line x1="156" y1="173" x2="164" y2="173" stroke="#2563a8" stroke-width="1.8" /><line x1="211" y1="19" x2="219" y2="19" stroke="#c0392b" stroke-width="1.8" /><line x1="215" y1="15" x2="215" y2="23" stroke="#c0392b" stroke-width="1.8" /><line x1="211" y1="173" x2="219" y2="173" stroke="#2563a8" stroke-width="1.8" /><line x1="266" y1="19" x2="274" y2="19" stroke="#c0392b" stroke-width="1.8" /><line x1="270" y1="15" x2="270" y2="23" stroke="#c0392b" stroke-width="1.8" /><line x1="266" y1="173" x2="274" y2="173" stroke="#2563a8" stroke-width="1.8" /><circle cx="105" cy="95" r="14" fill="#eadfb4" stroke="#0f1620" stroke-width="1.4"/><ellipse cx="99.7" cy="88.7" rx="3.4" ry="2.1" fill="#f7f0d4"/><line x1="101" y1="95" x2="109" y2="95" stroke="#2563a8" stroke-width="1.8" /><circle cx="205" cy="95" r="21" fill="#eadfb4" stroke="#0f1620" stroke-width="1.4"/><ellipse cx="197.0" cy="85.5" rx="5.0" ry="3.1" fill="#f7f0d4"/><line x1="201" y1="95" x2="209" y2="95" stroke="#2563a8" stroke-width="1.8" /><text x="83" y="100" font-size="15" text-anchor="end" fill="#0f1620">A</text><text x="234" y="100" font-size="15" text-anchor="start" fill="#0f1620">B</text></svg>`,
+            answer: { value: 8, unit: 'st' },
+            solution: `Båda dropparna är i jämvikt i samma fält. För var och en gäller $Q \\cdot \\mathbb{E} = m \\cdot g$, det vill säga
+
+$$ Q = \\frac{m \\cdot g}{\\mathbb{E}} $$
+
+Vi bildar kvoten mellan dropparnas laddningar. Då förkortas *g* och $\\mathbb{E}$ bort:
+
+$$ \\frac{Q_\\mathrm{B}}{Q_\\mathrm{A}} = \\frac{m_\\mathrm{B}}{m_\\mathrm{A}} \\qquad (1) $$
+
+Dropparna har samma densitet, så massan är proportionell mot volymen. Volymen hos ett klot är i sin tur proportionell mot diametern upphöjd till 3. När diametern är 1,5 gånger så stor är massan därför $1{,}5^3$ gånger så stor:
+
+$$ \\frac{m_\\mathrm{B}}{m_\\mathrm{A}} = 1{,}5^3 = \\left(\\frac{3}{2}\\right)^3 = \\frac{27}{8} \\qquad (2) $$
+
+Laddningarna är $Q_\\mathrm{A} = n_\\mathrm{A} \\cdot q_\mathrm{e}$ och $Q_\\mathrm{B} = n_\\mathrm{B} \\cdot q_\mathrm{e}$. Insättning av dem och (2), $\\dfrac{m_\\mathrm{B}}{m_\\mathrm{A}} = \\dfrac{27}{8}$, i (1) ger, sedan $q_\mathrm{e}$ förkortats bort,
+
+$$ \\frac{n_\\mathrm{B}}{n_\\mathrm{A}} = \\frac{27}{8} $$
+
+Vi multiplicerar båda led med $n_\\mathrm{A}$:
+
+$$ n_\\mathrm{B} = \\frac{27 \\cdot n_\\mathrm{A}}{8} $$
+
+Laddningen är kvantiserad, så både $n_\\mathrm{A}$ och $n_\\mathrm{B}$ måste vara heltal. Talen 27 och 8 har ingen gemensam faktor större än 1. Därför blir $n_\\mathrm{B}$ ett heltal bara om $n_\\mathrm{A}$ är delbart med 8. Det minsta möjliga antalet är $n_\\mathrm{A} = 8$, och då är
+
+$$ n_\\mathrm{B} = \\frac{27 \\cdot 8}{8} = 27 $$
+
+**Svar:** 8 st`,
+        },
+        {
+            level: 3,
+            question: `Mellan två vågräta plattor kan man reglera spänningen. En liten oljedroppe A svävar när spänningen är $400\ \mathrm{V}$, medan en större droppe B av samma olja svävar när spänningen är $720\ \mathrm{V}$. Båda dropparna är negativt laddade. De stöter ihop och smälter samman till en enda droppe, som svävar när spänningen är $600\ \mathrm{V}$. Hur många procent av den nya droppens volym kommer från droppe A?`,
+            answer: { value: 25, unit: '%', tol: 0.03 },
+            solution: `Varken massorna, laddningarna eller plattornas avstånd är kända. Vi ställer därför upp jämvikten för varje droppe och ser vad som kan förkortas bort. Laddningarna räknas som positiva storheter nedan, eftersom det bara är deras storlek som behövs.
+
+En svävande droppe har $Q \cdot \dfrac{U}{d} = m \cdot g$. Vi multiplicerar båda led med *d* och dividerar med *g*:
+
+$$ m = \frac{Q \cdot U}{g \cdot d} $$
+
+Faktorn $\dfrac{1}{g \cdot d}$ är densamma i alla tre fallen. Vi kallar den *k*. För dropparna gäller då
+
+$$ m_\mathrm{A} = k \cdot Q_\mathrm{A} \cdot 400 \qquad (1) $$
+
+$$ m_\mathrm{B} = k \cdot Q_\mathrm{B} \cdot 720 \qquad (2) $$
+
+När dropparna smälter samman bevaras både massan och laddningen. Den nya droppen har alltså massan $m_\mathrm{A} + m_\mathrm{B}$ och laddningen $Q_\mathrm{A} + Q_\mathrm{B}$, så
+
+$$ m_\mathrm{A} + m_\mathrm{B} = k \cdot (Q_\mathrm{A} + Q_\mathrm{B}) \cdot 600 \qquad (3) $$
+
+Insättning av (1), $m_\mathrm{A} = k \cdot Q_\mathrm{A} \cdot 400$, och (2), $m_\mathrm{B} = k \cdot Q_\mathrm{B} \cdot 720$, i (3) ger
+
+$$ k \cdot Q_\mathrm{A} \cdot 400 + k \cdot Q_\mathrm{B} \cdot 720 = k \cdot (Q_\mathrm{A} + Q_\mathrm{B}) \cdot 600 $$
+
+Vi dividerar båda led med *k* och multiplicerar in 600 i parentesen:
+
+$$ 400 \cdot Q_\mathrm{A} + 720 \cdot Q_\mathrm{B} = 600 \cdot Q_\mathrm{A} + 600 \cdot Q_\mathrm{B} $$
+
+Vi subtraherar $600 \cdot Q_\mathrm{B}$ från båda led:
+
+$$ 400 \cdot Q_\mathrm{A} + 120 \cdot Q_\mathrm{B} = 600 \cdot Q_\mathrm{A} $$
+
+Vi subtraherar $400 \cdot Q_\mathrm{A}$ från båda led:
+
+$$ 120 \cdot Q_\mathrm{B} = 200 \cdot Q_\mathrm{A} $$
+
+Vi dividerar båda led med 120:
+
+$$ Q_\mathrm{B} = \frac{200}{120} \cdot Q_\mathrm{A} = \frac{5}{3} \cdot Q_\mathrm{A} \qquad (4) $$
+
+Insättning av (4), $Q_\mathrm{B} = \dfrac{5}{3} \cdot Q_\mathrm{A}$, i (2) ger
+
+$$ m_\mathrm{B} = k \cdot \frac{5}{3} \cdot Q_\mathrm{A} \cdot 720 = k \cdot Q_\mathrm{A} \cdot 1\,200 $$
+
+Enligt (1) är $m_\mathrm{A} = k \cdot Q_\mathrm{A} \cdot 400$. Kvoten mellan massorna är därför
+
+$$ \frac{m_\mathrm{B}}{m_\mathrm{A}} = \frac{1\,200}{400} = 3 $$
+
+Droppe B har alltså tre gånger så stor massa som droppe A. Oljan är densamma, så volymerna förhåller sig som massorna. Den nya droppen består av 1 del från A och 3 delar från B:
+
+$$ \frac{1}{1 + 3} = \frac{1}{4} = 0{,}25 $$
+
+**Rimlighetsbedömning:** Droppe B skulle vara den större, vilket stämmer. Spänningen $600\ \mathrm{V}$ ligger mellan $400\ \mathrm{V}$ och $720\ \mathrm{V}$, som den måste.
+
+**Svar:** $25\ \%$`,
         },
     ],
 

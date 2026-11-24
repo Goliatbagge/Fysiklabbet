@@ -50,14 +50,14 @@ const num = v => (v === undefined ? undefined : parseFloat(v));
 const isWhite = c => /^(#fff(fff)?|white)$/i.test((c || '').trim());
 
 function parseSvg(svg) {
-    const H = [], V = [], comps = [], dots = [];
+    const H = [], V = [], comps = [], dots = [], masks = [];
     const add = (x1, y1, x2, y2, w) => {
         if (Math.abs(y1 - y2) < 0.6) H.push({ y: (y1 + y2) / 2, a: Math.min(x1, x2), b: Math.max(x1, x2), w });
         else if (Math.abs(x1 - x2) < 0.6) V.push({ x: (x1 + x2) / 2, a: Math.min(y1, y2), b: Math.max(y1, y2), w });
     };
     for (const m of svg.matchAll(/<line\b([^>]*)>/g)) {
         const a = attrs(m[1]);
-        if (isWhite(a.stroke)) continue;
+        if (isWhite(a.stroke) || a.stroke === '#15803d') continue;   // grön = hastighetspil, ingen ledare
         add(num(a.x1), num(a.y1), num(a.x2), num(a.y2), num(a['stroke-width']) || 1);
     }
     for (const m of svg.matchAll(/<polyline\b([^>]*)>/g)) {
@@ -77,7 +77,17 @@ function parseSvg(svg) {
         const x = num(a.x), y = num(a.y), w = num(a.width), h = num(a.height);
         if (!(w >= 10 && h >= 8)) continue;
         if (isWhite(a.stroke) && isWhite(a.fill)) continue;
+        // Vit ruta utan kant är en mask (gapet i ett batteri eller under en
+        // öppen strömbrytare). Bara strömbrytaren, som har sina två
+        // kontaktpunkter i masken, är en egen komponent.
+        if (isWhite(a.fill) && (!a.stroke || a.stroke === 'none')) { masks.push({ x, y, w, h }); continue; }
         comps.push({ kind: 'symbol', cx: x + w / 2, cy: y + h / 2, w, h });
+    }
+    for (const k of masks) {
+        const inne = dots.filter(d => d.cx > k.x && d.cx < k.x + k.w && d.cy > k.y && d.cy < k.y + k.h);
+        if (inne.length !== 2) continue;
+        comps.push({ kind: 'symbol', cx: k.x + k.w / 2, cy: inne[0].cy, w: k.w, h: k.h });
+        inne.forEach(d => dots.splice(dots.indexOf(d), 1));
     }
     // Batteri: två korta parallella streck, ett tjockt, förskjutna 6–16 px.
     // Plattorna är INTE ledare — plocka bort dem ur H/V.

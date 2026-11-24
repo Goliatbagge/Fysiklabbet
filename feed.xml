@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Tue, 24 Nov 2026 19:21:22 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 24 Nov 2026 23:07:04 GMT</lastBuildDate>
+    <item>
+      <title>Efter åtta år i rymden har BepiColombo fångats av Merkurius</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-11-25-bepicolombo-fangas-av-merkurius</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-11-25-bepicolombo-fangas-av-merkurius</guid>
+      <pubDate>Wed, 25 Nov 2026 04:00:00 GMT</pubDate>
+      <category>Mekanik</category>
+      <description>Den europeisk-japanska rymdsonden BepiColombo har gått in i omloppsbana runt Merkurius. Bromsningen avbröts i förtid av ett programfel, men den hann ändå ge sonden en stabil bana. Sonden kom så långsamt fram att planetens gravitation kunde hålla kvar den en tid även utan motorer, och det är första gången en rymdsond fångats på det sättet av en annan planet.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-11-25-bepicolombo-fangas-av-merkurius.jpg" length="152509" type="image/jpeg"/>
+    </item>
     <item>
       <title>Turbulensen tämjer sig själv när ett fusionsplasma plötsligt håller värmen bättre</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-11-24-turbulensen-som-tammer-sig-sjalv</link>
@@ -177,15 +186,6 @@
       <category>Materialfysik</category>
       <description>En kraftig laserpuls kan få atomlagren i kristallen volframditellurid att glida fram och tillbaka mot varandra, men över en viss styrka blir rörelsen mindre i stället för större. Nu visar forskare i Schweiz, Tyskland och Frankrike att samma ljusenergi, delad på två pulser med exakt rätt mellanrum, ger upp till 50 procent större svängningar. Det är samma knep som när man knuffar någon på en gunga.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-11-06-tva-knuffar-i-takt.jpg" length="171023" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>LHCb hittar belägg för ett sönderfall som sker en gång på tio miljarder</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-11-05-ett-sonderfall-pa-tio-miljarder</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-11-05-ett-sonderfall-pa-tio-miljarder</guid>
-      <pubDate>Thu, 05 Nov 2026 04:00:00 GMT</pubDate>
-      <category>Partikelfysik</category>
-      <description>Experimentet LHCb vid CERN har för första gången på egen hand hittat belägg för att B-mesonen, en partikel som innehåller en bottenkvark eller dess antikvark, kan sönderfalla till en myon och en antimyon. Det ska hända ungefär en gång på tio miljarder, och fysiker har letat efter sönderfallet sedan 1984.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-11-05-ett-sonderfall-pa-tio-miljarder.jpg" length="295237" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

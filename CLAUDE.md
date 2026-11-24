@@ -848,8 +848,17 @@ Så här bygger du scenen:
    lägena (positionen bevaras via stegindex vid växling). Väggen gäller
    term-/faktoroperationer (+, −, ·, /) — rotdragningar och
    upphöjningar skrivs likadant i båda lägena, och ryms inte väggen på
-   raden (pilzonen!) får det steget behålla ledformen. Gäller ENDAST
-   matematik — fysikscener redovisar alltid med båda led.
+   raden (pilzonen!) får det steget behålla ledformen. **Gäller även
+   fysiken** (användarkrav 2026-11-24): en fysikscen som löser en
+   ekvation med en operation i båda led (multiplicera, subtrahera,
+   dividera) ska ha samma val, med `cfg.vagg`, `mkEkvOp(T, vagg)` och
+   `ekvval: 1`. Referens: `layoutTvaperiodtider` och
+   `layoutAmplitudurfart` (fy2-2.A). Äldre fysikscener som bara har
+   båda led byggs om när de ändå skrivs om. Omskrivningar med ⟺
+   (lös ut en storhet ur en formel) är inga ekvationsoperationer och
+   skrivs som förut. I fysikscener ritar `physTools.fracH` hela bråket
+   i en färg, så divisionsraden i båda led skrivs med en egen hjälpare
+   (`fracBla` i `mkKap2Avancerad`) som ger streck och nämnare i blått.
    `verify-handskrift.js` granskar båda lägena automatiskt, och
    ekvval-scener har en HÖGRE inställningsruta: inget bläck med x > 420
    får ligga ovanför y = 210 (i stället för 150).

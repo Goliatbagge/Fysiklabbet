@@ -54,8 +54,10 @@
  *   två redovisningssätt: "Båda led" (standard — operationen skrivs med
  *   blåpennan i båda led på en egen rad) och "Väggen" (ett lodrätt blått
  *   streck till höger om ekvationsraden med operationen efter, t.ex.
- *   "4x+7=35 | −7"; nästa rad är direkt resultatet). Gäller ENDAST
- *   matematik — fysikscener redovisar alltid med båda led. En scen som
+ *   "4x+7=35 | −7"; nästa rad är direkt resultatet). Gäller matematik
+ *   OCH fysik (användarkrav 2026-11-24: fysikscener som löser ekvationer
+ *   ska också ha valet; äldre fysikscener med bara båda led rättas när
+ *   de ändå skrivs om). En scen som
  *   stödjer båda lägena läser cfg.vagg i sin layoutfunktion, använder
  *   T.vaggOp() för väggstegen och sätter ekvval: 1 i sitt returobjekt —
  *   då får inställningsrutan en radiogrupp "Ekvationer". Valet sparas
@@ -26420,16 +26422,20 @@
   function layoutAmplitudurfart(cfg, F) {
     var T = physTools(F), acts = T.acts, padL = T.padL;
     var K = mkKap2Avancerad(T, F);
-    var ekvOp = mkEkvOp(T, false);
+    /* EKVATIONSREDOVISNING (användarkrav 2026-11-24): fysikscener som
+     * löser ekvationer stödjer båda lägena precis som matten, Båda led
+     * och Väggen, efter elevens val i inställningsrutan (cfg.vagg). */
+    var vagg = !!cfg.vagg;
+    var ekvOp = mkEkvOp(T, vagg);
     var adv = 1.7 * F, xx, y;
-    var fx = 220, takY = 56, eqY = 190, wc = eqY + 14, AP = 50;
+    var fx = 220, takY = 56, eqY = 250, wc = eqY + 14, AP = 50;  /* vändläget under y = 210 (ekvval-zonen) */
 
     /* ---- steg 1: fjädern, vikten och lägena (grafit) ---- */
     T.tanke(T.figurBubble(280, [
       [['Ritar fjädern med vikten. De']],
       [['streckade linjerna visar jämvikts-']],
       [['läget och de två vändlägena.']]
-    ]));
+    ], 350));
     T.line([130, takY], [310, takY]);
     T.hatch([138, takY], [310, takY], 11);
     T.pause(140);
@@ -26451,7 +26457,7 @@
       [['Farten är störst i jämviktsläget']],
       [['och accelerationen störst i vänd-']],
       [['lägena. Amplituden ', 0], ['A', 1], [' söker jag.', 0]]
-    ]));
+    ], 350));
     T.lbl('v_m_a_x=0,48 m/s', 40, wc + 5, BLUE);
     T.pause(150);
     T.lbl('a_m_a_x=3,6 m/s^2', 40, wc - AP + 5, BLUE);
@@ -26461,7 +26467,8 @@
     T.stepEnd();
 
     /* ---- a) ---- */
-    y = 396;
+    y = 446;
+    K.sist(350);
     K.tk([
       [['Både ', 0], ['ω', 1], [' och ', 0], ['A', 1], [' är okända. Men', 0]],
       [['båda finns i formlerna för']],
@@ -26507,7 +26514,7 @@
     ]);
     xx = T.str('a_m_a_x=ω^2·', padL, y);
     xx = T.fracH('v_m_a_x', 'ω', xx, y);
-    T.str('⟺a_m_a_x=ω·v_m_a_x', xx + 0.12 * F, y);
+    var xRad = T.str('⟺a_m_a_x=ω·v_m_a_x', xx + 0.12 * F, y);
     T.stepEnd();
     K.sist(y, 1.1);
 
@@ -26515,11 +26522,11 @@
       [['Jag dividerar båda led med ', 0], ['v', 1], ['max', 0]],
       [['så att ', 0], ['ω', 1], [' står ensam.', 0]]
     ]);
-    y = ekvOp(y, '/v_m_a_x', null, function (yb) {
+    y = ekvOp(y, '/v_m_a_x', xRad + 0.5 * F, function (yb) {
       var x = K.fracBla('a_m_a_x', 'v_m_a_x', padL, yb);
       x = T.str('=', x + 0.10 * F, yb);
       K.fracBla('ω·v_m_a_x', 'v_m_a_x', x, yb);
-    }, { dy: 3.2, dyRes: 2.9 });
+    }, { dy: 3.2, dyRes: 2.9, dyVagg: 2.6, vopt: { h0: 1.25, h1: 1.15 } });
     xx = T.str('ω=', padL, y);
     T.fracH('a_m_a_x', 'v_m_a_x', xx, y);
     T.stepEnd();
@@ -26617,7 +26624,8 @@
     y = K.svar('Svar: 0,84 s', y);
     T.stepEnd();
 
-    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL,
+             ekvval: 1 };
   }
 
   /* ---------------- scen: periodtid i fjäder (fy2-2.4 Ex 1) -----------
@@ -27087,7 +27095,11 @@
   function layoutTvaperiodtider(cfg, F) {
     var T = physTools(F), acts = T.acts, padL = T.padL;
     var K = mkKap2Avancerad(T, F);
-    var ekvOp = mkEkvOp(T, false);
+    /* EKVATIONSREDOVISNING (användarkrav 2026-11-24): fysikscener som
+     * löser ekvationer stödjer båda lägena precis som matten, Båda led
+     * och Väggen, efter elevens val i inställningsrutan (cfg.vagg). */
+    var vagg = !!cfg.vagg;
+    var ekvOp = mkEkvOp(T, vagg);
     var adv = 1.7 * F, xx, y, klam;
     var x1 = 170, x2 = 330, takY = 56;
 
@@ -27271,21 +27283,23 @@
     K.tk([
       [['Kvadraten av 1,25 är 1,5625.']]
     ]);
-    T.fracH('m+0,200', 'm', T.str('1,5625=', padL, y), y);
+    var xRad2 = T.fracH('m+0,200', 'm', T.str('1,5625=', padL, y), y);
     T.stepEnd();
     K.sist(y, 1.1);
+    /* en gemensam vägg för de tre stegen, efter den bredaste raden */
+    var xVagg = Math.max(xRad2, padL + T.adv('1,5625·m=m+0,200')) + 0.5 * F;
 
     K.tk([
       [['Jag multiplicerar båda led med ', 0], ['m', 1]]
     ]);
-    y = ekvOp(y, '·m', null, function (yb) {
+    y = ekvOp(y, '·m', xVagg, function (yb) {
       var x = T.str('1,5625', padL, yb);
       x = T.str('·m', x, yb, BLUE);
       x = T.str('=', x, yb);
       x = T.fracH('m+0,200', 'm', x, yb);
       T.str('·m', x, yb, BLUE);
-    }, { dy: 3.0 });
-    T.str('1,5625·m=m+0,200', padL, y);
+    }, { dy: 3.0, dyVagg: 2.6, vopt: { h0: 1.25, h1: 1.15 } });
+    xRad2 = T.str('1,5625·m=m+0,200', padL, y);
     T.stepEnd();
     K.sist(y);
 
@@ -27293,8 +27307,8 @@
       [['Jag samlar ', 0], ['m', 1], [' i vänstra ledet', 0]],
       [['och subtraherar ', 0], ['m', 1], [' från båda led.', 0]]
     ]);
-    y = ekvOp(y, '−m', null, '1,5625·m=m+0,200');
-    T.str('0,5625·m=0,200', padL, y);
+    y = ekvOp(y, '−m', xVagg, '1,5625·m=m+0,200');
+    xRad2 = T.str('0,5625·m=0,200', padL, y);
     T.stepEnd();
     K.sist(y);
 
@@ -27302,11 +27316,11 @@
       [['Jag dividerar båda led med']],
       [['0,5625.']]
     ]);
-    y = ekvOp(y, '/0,5625', null, function (yb) {
+    y = ekvOp(y, '/0,5625', xVagg, function (yb) {
       var x = K.fracBla('0,5625·m', '0,5625', padL, yb);
       x = T.str('=', x + 0.10 * F, yb);
       K.fracBla('0,200', '0,5625', x, yb);
-    }, { dy: 3.0, dyRes: 2.9 });
+    }, { dy: 3.0, dyRes: 2.9, dyVagg: 2.4 });
     xx = T.fracH('0,200', '0,5625', T.str('m=', padL, y), y);
     var xIns = T.str('=0,355... kg', xx + 0.15 * F, y);
     T.stepEnd();
@@ -27392,7 +27406,8 @@
     y = K.svar('Svar: 39 N/m', y);
     T.stepEnd();
 
-    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL,
+             ekvval: 1 };
   }
 
   /* ---------------- scen: sekundpendeln (fy2-2.5 Ex 1) ----------------

@@ -26469,25 +26469,33 @@
     ], 120);
     T.str('a) Två ekvationer med två obekanta', padL, y, null, 0.62);
     T.pause(300);
-    y += 2.0 * F;
-    T.str('v_m_a_x=ω·A', padL, y);
+    /* EKVATIONSSYSTEM MED KLAMMER (användarkrav 2026-11-24): skrivs som
+     * eleverna är vana vid från matematiken, med systemKlammer. */
+    y += 2.3 * F;
+    xx = systemKlammer(T, F, padL, y - 1.0 * F, y + 2.9 * F);
+    T.str('v_m_a_x=ω·A', xx, y);
     T.str('(1)', 330, y);
-    y += 1.75 * F;
-    T.str('a_m_a_x=ω^2·A', padL, y);
-    T.str('(2)', 330, y);
+    T.pause(240);
+    T.str('a_m_a_x=ω^2·A', xx, y + 2.2 * F);
+    T.str('(2)', 330, y + 2.2 * F);
     T.stepEnd();
-    K.sist(y);
+    y += 2.2 * F;
+    K.sist(y, 0.7);
 
     /* SUBSTITUTIONSMETODEN (användarkrav 2026-11-24): A löses ut ur (1)
-     * och sätts in i (2), sedan löses ω ut i båda led. */
-    y += adv + 2.0 * F;
+     * och sätts in i (2), sedan löses ω ut i båda led. "Ur (1) fås"
+     * på egen rad och A = v_max/ω under, så att (1) inte skrivs två
+     * gånger. */
+    y += adv + 0.9 * F;
     K.tk([
       [['Två ekvationer, två obekanta. Jag']],
       [['använder substitutionsmetoden och']],
       [['löser först ut ', 0], ['A', 1], [' ur (1).', 0]]
     ]);
-    xx = T.str('v_m_a_x=ω·A⟺A=', padL, y);
-    xx = T.fracH('v_m_a_x', 'ω', xx, y);
+    T.str('Ur (1) fås', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    xx = T.fracH('v_m_a_x', 'ω', T.str('A=', padL, y), y);
     T.str('(3)', Math.max(330, xx + 0.9 * F), y);
     T.stepEnd();
     K.sist(y, 1.1);
@@ -26540,17 +26548,8 @@
 
     y += adv + 1.9 * F;
     K.tk([
-      [['Nu när ', 0], ['ω', 1], [' är känd beräknar jag', 0]],
-      [['amplituden ur ekvation (1).']]
-    ]);
-    xx = T.str('v_m_a_x=ω·A⟺A=', padL, y);
-    T.fracH('v_m_a_x', 'ω', xx, y);
-    T.stepEnd();
-    K.sist(y, 1.1);
-
-    y += adv + 1.9 * F;
-    K.tk([
-      [['Nu sätter jag in värdena.']]
+      [['Nu när ', 0], ['ω', 1], [' är känd sätter jag in', 0]],
+      [['värdena i (3), ', 0], ['A', 1], [' = ', 0], ['v', 1], ['max', 0], [' / ', 0], ['ω', 1]]
     ]);
     xx = T.fracH('0,48', '7,5', T.str('A=', padL, y), y);
     T.str('=0,064 m=6,4 cm', xx + 0.15 * F, y);

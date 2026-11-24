@@ -438,19 +438,6 @@
             letter-spacing: -0.01em; margin: 8px 0 0; }
         .ns-nyhet-liten:hover h4 { color: var(--lab-accent); }
 
-        .ns-brev { padding-top: 72px; }
-        .ns-brev > .lab-section { padding: 0; max-width: none; }
-        .ns-brev .nb-box {
-            margin: 0; border: 1px solid var(--lab-line); border-radius: var(--ns-r-lg);
-            padding: 48px 56px 40px; position: relative; overflow: hidden;
-            background:
-                radial-gradient(520px 320px at 100% 0%, rgba(200, 50, 74, 0.12), transparent 70%),
-                radial-gradient(620px 260px at 75% 110%, rgba(28, 61, 107, 0.09), transparent 70%),
-                #fff;
-        }
-        .ns-brev .nb-box .nb-title { font-size: clamp(32px, 3.6vw, 46px); }
-        @media (max-width: 720px) { .ns-brev .nb-box { padding: 30px 22px 24px; } }
-
         /* ── Senaste uppdateringar ──────────────────────────────────── */
         .ns-uppd-nav { display: flex; gap: 8px; }
         .ns-uppd-nav button {
@@ -558,10 +545,6 @@
     <script>document.write('<scr' + 'ipt src="data/sok.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/nyheter.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/np/index.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
-    <!-- Anmälningsrutan för nyhetsbrevet. Laddas UTAN defer, före React:
-         komponenten nedan monterar widgeten i sin useEffect och behöver
-         window.FYSIKNYHETSBREV redan då. -->
-    <script>document.write('<scr' + 'ipt src="nyhetsbrev.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -1034,6 +1017,10 @@
                                         <span className="ring"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.5v9l7.5-4.5z" fill="currentColor"/></svg></span>
                                         Fysiklabbet på en minut
                                     </a>
+                                    <a className="ns-filmlank" href="nyhetsbrev.html">
+                                        <span className="ring"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></span>
+                                        Veckans nyhetsbrev
+                                    </a>
                                 </div>
                                 <div className="ns-stats">
                                     {FAKTA.map(f => (
@@ -1468,19 +1455,6 @@
             );
         }
 
-        function NyhetsbrevRuta() {
-            const holder = useRef(null);
-            useEffect(() => {
-                if (!window.FYSIKNYHETSBREV) return;
-                return window.FYSIKNYHETSBREV.mount(holder.current);
-            }, []);
-            return (
-                <div className="ns-wrap ns-brev ns-in">
-                    <section className="lab-section" ref={holder} />
-                </div>
-            );
-        }
-
         function Uppdateringar() {
             const spar = useRef(null);
             const [start, setStart] = useState(true);
@@ -1594,7 +1568,6 @@
                     <Bento />
                     <Film />
                     <Nyheter />
-                    <NyhetsbrevRuta />
                     <Uppdateringar />
                     <Fot />
                 </div>

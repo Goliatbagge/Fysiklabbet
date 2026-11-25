@@ -14,130 +14,19 @@ De här exemplen är på nivån **Avancerad**. Det som gör en uppgift avancerad
 kan börja räkna måste du se hur uppgiften hänger ihop. Ofta är det något av
 det här:
 
-- **En storhet som inte behövs**, som antalet elever eller varans pris, och
-  som försvinner när man ställer upp en ekvation.
-- **Ett helt som ändras**, så att två procentsatser inte är andelar av
-  samma sak.
+- **En storhet som inte behövs**, som varans pris.
 - **En okänd förändringsfaktor** som används flera gånger och därför ger en
   potensekvation.
 - **En lång summa** som går att räkna ut på ett smart sätt.
 
-Läs uppgiften och försök först själv. Fundera på vad som är okänt, vad som
-är det hela och vad som inte ändras. Titta sedan på lösningen.
-
-## Andelar
-
-*Bygger på avsnitt 3.1 Procent, promille och ppm.*
-
-::: exempel "Exempel 1: Torkad svamp (Avancerad)"
-**Färsk svamp innehåller 92 % vatten. När svampen har torkats innehåller den bara 20 % vatten. Hur mycket väger 3,0 kg färsk svamp efter torkningen?**
-
-::: handskrift
-typ: torkadsvamp
-:::
-
-::: textlosning
-När svampen torkas avdunstar vatten. Det hela ändras alltså, och därför
-går det inte att räkna med skillnaden 92 % − 20 %. Det som **inte** ändras
-är det torra i svampen, så vi räknar på det.
-
-Andelen torrt i den färska svampen är
-
-$$
-100\ \% - 92\ \% = 8\ \%
-$$
-
-Det torra väger
-
-$$
-0{,}08 \cdot 3{,}0\ \mathrm{kg} = 0{,}24\ \mathrm{kg}
-$$
-
-Efter torkningen är andelen torrt
-
-$$
-100\ \% - 20\ \% = 80\ \%
-$$
-
-De 0,24 kg torrt är alltså 80 % av den torkade svampen. Vi söker det hela.
-
-$$
-\text{det hela} = \frac{\text{delen}}{\text{andelen}} = \frac{0{,}24\ \mathrm{kg}}{0{,}80} = 0{,}30\ \mathrm{kg}
-$$
-
-**Svar:** 0,30 kg
-:::
-:::
-
-::: exempel "Exempel 2: Hur stor andel går i årskurs 1? (Avancerad)"
-**På en gymnasieskola cyklar 45 % av eleverna i årskurs 1 till skolan. Bland eleverna i årskurs 2 och 3 är det 20 % som cyklar. På hela skolan cyklar 30 % av eleverna. Hur stor andel av skolans elever går i årskurs 1?**
-
-::: handskrift
-typ: andelarskurs
-:::
-
-::: textlosning
-Vi vet inte hur många elever skolan har. Vi kallar antalet *N* och låter
-*x* vara andelen som går i årskurs 1. Då är andelen i årskurs 2 och 3
-det som är kvar, $1 - x$.
-
-Antalet cyklister i årskurs 1 är 45 % av $x \cdot N$, och antalet i årskurs
-2 och 3 är 20 % av $(1 - x) \cdot N$. Tillsammans är de 30 % av *N*.
-
-$$
-0{,}45 \cdot x \cdot N + 0{,}20 \cdot (1 - x) \cdot N = 0{,}30 \cdot N
-$$
-
-*N* är en faktor i varje term. Vi dividerar båda led med *N*.
-
-$$
-\frac{0{,}45 \cdot x \cdot N + 0{,}20 \cdot (1 - x) \cdot N}{\boldsymbol{N}} = \frac{0{,}30 \cdot N}{\boldsymbol{N}}
-$$
-
-$$
-0{,}45x + 0{,}20(1 - x) = 0{,}30
-$$
-
-Antalet elever behövs alltså inte. Vi multiplicerar in 0,20 i parentesen
-och samlar *x*-termerna.
-
-$$
-0{,}45x + 0{,}20 - 0{,}20x = 0{,}30
-$$
-
-$$
-0{,}25x + 0{,}20 = 0{,}30
-$$
-
-Vi subtraherar 0,20 från båda led.
-
-$$
-0{,}25x + 0{,}20 \mathbin{\boldsymbol{-}} \boldsymbol{0{,}20} = 0{,}30 \mathbin{\boldsymbol{-}} \boldsymbol{0{,}20}
-$$
-
-$$
-0{,}25x = 0{,}10
-$$
-
-Vi dividerar båda led med 0,25.
-
-$$
-\frac{0{,}25x}{\boldsymbol{0{,}25}} = \frac{0{,}10}{\boldsymbol{0{,}25}}
-$$
-
-$$
-x = 0{,}40 = 40\ \%
-$$
-
-**Svar:** 40 %
-:::
-:::
+Läs uppgiften och försök först själv. Fundera på vad som är okänt och
+vilka förändringsfaktorer som ska multipliceras. Titta sedan på lösningen.
 
 ## Upprepade förändringar
 
 *Bygger på avsnitt 3.3 Upprepade procentuella förändringar och avsnitt 2.9 Enkla andra- och tredjegradsekvationer.*
 
-::: exempel "Exempel 3: Två lika stora sänkningar (Avancerad)"
+::: exempel "Exempel 1: Två lika stora sänkningar (Avancerad)"
 **Priset på en vara höjs med 60 %. Därefter sänks priset två gånger, med lika många procent varje gång. Efter den andra sänkningen är priset detsamma som från början. Med hur många procent sänktes priset varje gång?**
 
 ::: handskrift
@@ -192,7 +81,7 @@ $$
 
 *Bygger på avsnitt 3.3 Upprepade procentuella förändringar och avsnitt 2.3 Multiplicera med parenteser.*
 
-::: exempel "Exempel 4: Upp och ned med lika många procent (Avancerad)"
+::: exempel "Exempel 2: Upp och ned med lika många procent (Avancerad)"
 **Ett pris höjs med ett visst antal procent och sänks sedan med lika många procent.<br>a) Visa att priset alltid blir lägre än det var från början.<br>b) Efter de två ändringarna är priset 9 % lägre än från början. Hur många procent höjdes priset med?**
 
 ::: handskrift
@@ -240,17 +129,20 @@ $$
 x^2 = 0{,}09
 $$
 
-Vi drar roten ur båda led.
+Vi drar roten ur båda led. Minustecknet står i parentes, eftersom den
+negativa lösningen finns men inte är möjlig här: $x > 0$.
 
 $$
-x = \pm\sqrt{0{,}09}
+x = \genfrac{}{}{0pt}{0}{+}{(-)}\sqrt{0{,}09}
 $$
 
 $$
-x = \pm 0{,}3
+x = \genfrac{}{}{0pt}{0}{+}{(-)}\,0{,}3
 $$
 
-Eftersom $x > 0$ är $x = 0{,}3 = 30\ \%$.
+$$
+x = 0{,}3 = 30\ \%
+$$
 
 **Svar:** 30 %
 :::
@@ -260,7 +152,7 @@ Eftersom $x > 0$ är $x = 0{,}3 = 30\ \%$.
 
 *Bygger på avsnittet Lån och ränteberäkningar.*
 
-::: exempel "Exempel 5: Räntesatsen ur den totala räntan (Avancerad)"
+::: exempel "Exempel 3: Räntesatsen ur den totala räntan (Avancerad)"
 **Nora lånar 240 000 kr. Lånet betalas av med rak amortering under 8 år, med en inbetalning i slutet av varje år. Räntesatsen är densamma hela tiden. Sammanlagt betalar Nora 43 200 kr i ränta. Bestäm räntesatsen.**
 
 ::: handskrift
@@ -321,14 +213,14 @@ $$
 ::: sammanfattning "Sammanfattning"
 
 ::: sampunkt "Hitta vägen först"
-- Vad är det hela, och ändras det?
-- Räkna på det som inte ändras, till exempel det torra i svampen.
 - Kalla det okända för en bokstav och ställ upp en ekvation.
+- Räkna med bokstäver när något ska visas för alla procentsatser.
+- Pröva om lösningen är möjlig i verkligheten.
 :::
 
-::: sampunkt "Okänt antal eller pris"
-- Kalla antalet $N$. Det försvinner om det är en faktor i varje term.
-- Två grupper: andelarna $x$ och $1 - x$ är tillsammans 1.
+::: sampunkt "Okänt pris"
+- Priset behövs inte. Räkna med den totala förändringsfaktorn.
+- 9 % lägre än från början: total förändringsfaktor 0,91.
 - Samma värde som från början: total förändringsfaktor 1.
 :::
 

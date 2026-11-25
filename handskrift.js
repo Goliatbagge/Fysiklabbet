@@ -17012,116 +17012,7 @@
    * inlagda 2026-11-25). Siffrorna är identiska med textlösningarna.
    * ================================================================== */
 
-  /* ---------------- scen: torkad svamp (ma1c-3.A ex 1) ------------- */
-  function layoutTorkadsvamp(cfg, F) {
-    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
-    var tanke = mkTanke(T);
-    tanke(20, [
-      [['Vattnet avdunstar, men det']],
-      [['torra i svampen finns kvar.']],
-      [['Jag räknar på det torra.']]
-    ], 0);
-    y = 235;
-    T.str('Andelen torrt i den färska svampen', padL, y - 1.6 * F, null, 0.62);
-    T.str('100 %-92 %=8 %', padL, y);
-    T.stepEnd();
-    y += 3.6 * F;
-    T.str('Det torra väger', padL, y - 1.6 * F, null, 0.62);
-    T.str('0,08·3,0 kg=0,24 kg', padL, y);
-    T.stepEnd();
-    y += 3.6 * F;
-    T.str('Andelen torrt efter torkningen', padL, y - 1.6 * F, null, 0.62);
-    T.str('100 %-20 %=80 %', padL, y);
-    T.stepEnd();
-    tanke(y, [
-      [['0,24 kg torrt är 80 % av den']],
-      [['torkade svampen. Jag söker']],
-      [['det hela.']]
-    ]);
-    y += 4.4 * F;
-    T.str('Den torkade svampen väger', padL, y - 2.1 * F, null, 0.62);
-    xx = T.str('det hela=', padL, y);
-    xx = T.fracH('delen', 'andelen', xx, y);
-    T.stepEnd();
-    y += 3.2 * F;
-    xx = T.str('=', padL, y);
-    xx = T.fracH('0,24 kg', '0,80', xx, y);
-    T.stepEnd();
-    T.str('=0,30 kg', xx, y);
-    T.stepEnd();
-    y += 3.4 * F;
-    xe = T.str('Svar: 0,30 kg', padL, y);
-    T.underline(xe, y);
-    T.stepEnd();
-    return { acts: acts, contentW: 640, lastBase: y + 1.7 * F, padL: padL };
-  }
-
-  /* ---------------- scen: andelen i årskurs 1 (ma1c-3.A ex 2) ------- */
-  function layoutAndelarskurs(cfg, F) {
-    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
-    var tanke = mkTanke(T), vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
-    function xw(rad) { return padL + T.adv(rad) + 0.6 * F; }
-    y = 90;
-    T.str('Skolan har N elever', padL, y, null, 0.62);
-    y += 1.2 * F;
-    T.str('Andelen i årskurs 1 är x', padL, y, null, 0.62);
-    y += 1.2 * F;
-    T.str('Andelen i årskurs 2 och 3 är 1-x', padL, y, null, 0.62);
-    T.stepEnd();
-    tanke(y, [
-      [['Cyklisterna i årskurs 1 och']],
-      [['i årskurs 2 och 3 är']],
-      [['tillsammans 30 % av N.']]
-    ]);
-    y = Math.max(y + 3.8 * F, 270);
-    T.str('Antalet som cyklar', padL, y - 1.6 * F, null, 0.62);
-    var rad = '0,45x·N+0,20(1-x)·N=0,30·N';
-    T.str(rad, padL, y);
-    T.stepEnd();
-    tanke(y, [
-      [['N är en faktor i varje term.']],
-      [['Jag dividerar båda led med N.']]
-    ]);
-    y = ekvOp(y, '/N', xw(rad), rad, { dyVagg: 2.6 });
-    xx = T.str('0,45x+', padL, y);
-    var f0 = xx; xx = T.str('0,20', xx, y); var f1 = xx;
-    xx = T.str('(', xx, y);
-    var t0 = xx; xx = T.str('1', xx, y); var t1 = xx;
-    var u0 = xx; xx = T.str('-x', xx, y); var u1 = xx;
-    T.str(')=0,30', xx, y);
-    T.stepEnd();
-    var yk = y;
-    y += 2.3 * F;
-    var a0 = padL; xx = T.str('0,45x', padL, y); var a1 = xx;
-    var delar = [
-      { fran: [f0, f1], till: [t0, t1], skriv: '+0,20', hojd: 22 },
-      { fran: [f0, f1], till: [u0, u1], skriv: '-0,20x', hojd: 36, dx: 4 }
-    ];
-    xx = mkMultIn(T)(xx, y, yk - 0.95 * F, delar);
-    T.str('=0,30', xx, y);
-    T.stepEnd();
-    yk = y;
-    y += 2.4 * F;
-    xx = mkSamla(T)(padL, y, [
-      { ringar: [[a0, a1, yk], [delar[1].x0, delar[1].x1, yk]], skriv: '0,25x' },
-      { skriv: '+0,20=0,30' }]);
-    T.stepEnd();
-    y = ekvOp(y, '-0,20', xw('0,25x+0,20=0,30'), '0,25x+0,20=0,30');
-    T.str('0,25x=0,10', padL, y);
-    T.stepEnd();
-    y = ekvOp(y, '/0,25', xw('0,25x=0,10'), '0,25x=0,10');
-    xx = T.str('x=0,40', padL, y);
-    T.stepEnd();
-    T.str('=40 %', xx, y);
-    T.stepEnd();
-    y += 2.8 * F;
-    xe = T.str('Svar: 40 %', padL, y);
-    T.underline(xe, y);
-    T.stepEnd();
-    return { acts: acts, contentW: 640, lastBase: y + 1.7 * F, padL: padL, ekvval: 1 };
-  }
-
-  /* ---------------- scen: två lika sänkningar (ma1c-3.A ex 3) ------- */
+  /* ---------------- scen: två lika sänkningar (ma1c-3.A ex 1) ------- */
   function layoutTvasankningar(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T), vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
@@ -17170,7 +17061,7 @@
     return { acts: acts, contentW: 640, lastBase: y + 1.7 * F, padL: padL, ekvval: 1 };
   }
 
-  /* ---------------- scen: upp och ned (ma1c-3.A ex 4) --------------- */
+  /* ---------------- scen: upp och ned (ma1c-3.A ex 2) --------------- */
   function layoutUppochned(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T), vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
@@ -17233,14 +17124,22 @@
     T.str('x^2=0,09', padL, y);
     T.stepEnd();
     y += 2.5 * F;
-    xx = T.str('x=±', padL, y);
-    T.rot('0,09', xx + 2, y);
+    /* plus med minustecknet i parentes under: den negativa lösningen
+     * finns, men vi bortser från den (användarkrav 2026-11-25) */
+    function plusMinusParentes(x) {
+      var w = T.adv('(-)', 0.78);
+      T.str('+', x + (w - T.adv('+', 0.78)) / 2, y - 0.52 * F, null, 0.78);
+      return T.str('(-)', x, y + 0.26 * F, null, 0.78);
+    }
+    xx = plusMinusParentes(T.str('x=', padL, y) + 3);
+    T.rot('0,09', xx + 4, y);
     T.stepEnd();
     y += 2.4 * F;
-    T.str('x=±0,3', padL, y);
+    xx = plusMinusParentes(T.str('x=', padL, y) + 3);
+    T.str('0,3', xx + 2, y);
     T.stepEnd();
     y += 2.1 * F;
-    T.str('x>0 ger x=0,3=30 %', padL, y);
+    T.str('x=0,3=30 %', padL, y);
     T.stepEnd();
     y += 2.8 * F;
     xe = T.str('Svar: 30 %', padL, y);
@@ -17249,7 +17148,7 @@
     return { acts: acts, contentW: 640, lastBase: y + 1.7 * F, padL: padL, ekvval: 1 };
   }
 
-  /* ---------------- scen: räntesats ur total ränta (ma1c-3.A ex 5) -- */
+  /* ---------------- scen: räntesats ur total ränta (ma1c-3.A ex 3) -- */
   function layoutRaklanranta(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T), vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
@@ -67529,8 +67428,6 @@
                    potensekvuddajamn: layoutPotensekvuddajamn,
                    potensbestamc: layoutPotensbestamc,
                    potensljus: layoutPotensljus,
-                   torkadsvamp: layoutTorkadsvamp,
-                   andelarskurs: layoutAndelarskurs,
                    tvasankningar: layoutTvasankningar,
                    uppochned: layoutUppochned,
                    raklanranta: layoutRaklanranta,

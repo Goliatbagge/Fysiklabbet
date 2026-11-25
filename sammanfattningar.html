@@ -402,7 +402,17 @@ body.laborans { overflow: hidden; }
     function preprocessBlocks(md) {
         const out = [];
         const stack = [];
-        for (const line of md.split('\n')) {
+        const rader = md.split('\n');
+        for (let i = 0; i < rader.length; i++) {
+            const line = rader[i];
+            // ::: minisim (animering i sammanfattningen), som i katalog.html.
+            if (/^:::\s*minisim\s*$/i.test(line)) {
+                const cfg = [];
+                for (i++; i < rader.length && !/^:::\s*$/.test(rader[i]); i++) cfg.push(rader[i]);
+                out.push('', '<div class="lab-minisim" data-minisim-src="' +
+                    btoa(unescape(encodeURIComponent(cfg.join('\n')))) + '"></div>', '');
+                continue;
+            }
             const open = line.match(/^:::\s*([a-zåäö]+)(?:\s+"([^"]*)")?\s*$/i);
             if (open) {
                 const ty = open[1].toLowerCase();
@@ -477,6 +487,18 @@ body.laborans { overflow: hidden; }
         return;
     }
 
+    // Animeringarna (minisim.js) är en stor fil och behövs bara i enstaka
+    // sammanfattningar: den hämtas först när en sådan bild byggs.
+    let minisimLadd = null;
+    function laddaMinisim() {
+        return minisimLadd || (minisimLadd = new Promise((ok, fel) => {
+            const s = document.createElement('script');
+            s.src = 'minisim.js?v=' + window.__CB;
+            s.onload = ok; s.onerror = fel;
+            document.head.appendChild(s);
+        }));
+    }
+
     // Bilden byggs första gången avsnittet visas i ett valt kapitel.
     function bygg(a) {
         if (a.el) return;
@@ -501,6 +523,12 @@ body.laborans { overflow: hidden; }
         scen.appendChild(el);
         a.el = el;
         a.ruta = el.querySelector('.lab-block-sammanfattning');
+        if (el.querySelector('.lab-minisim')) {
+            laddaMinisim().then(() => {
+                window.FYSIKMINISIM.mountAll(el);
+                anpassa(a);
+            }).catch(() => {});
+        }
     }
 
     // ---------- Storleksanpassning (som fitSammanfattning i katalogen) ----------

@@ -31,6 +31,7 @@
  *           smaltrace (fy1-6.1: isbitar på aluminium och plast, vilken smälter först?),
  *           pulsvag (fy2-2.7, visa: puls | vag: rep från en person till ett träd),
  *           vagtyp (fy2-2.7, visa: transversell | longitudinell),
+ *           vagjamforelse (fy2-2.7 och fy2-2.S, sammanfattningen: transversell och longitudinell våg sida vid sida),
  *           ytvag (fy2-2.7, visa: vatten | rayleigh: partiklarnas banor i en ytvåg),
  *           fasvag (fy2-2.7: stående våg med partiklar i fas och i motfas),
  *           vagstallning (fy2-2.7: en puls vandrar nedåt i en hängande vågställning),
@@ -13085,6 +13086,116 @@
     }
 
     // ══════════════════════════════════════════════════════════════════════
+    //  typ: vagjamforelse
+    // ══════════════════════════════════════════════════════════════════════
+    // Sammanfattningarna (fy2-2.7 och fy2-2.S): en transversell och en
+    // longitudinell våg bredvid varandra, eller rakt ovanför varandra när
+    // ytan är smal. Båda går åt höger i samma takt, och partiklarna har samma
+    // amplitud, våglängd och periodtid: det enda som skiljer är åt vilket
+    // håll den orange partikeln rör sig. Inga reglage, bara paus. Texten är
+    // em-baserad så att sammanfattningsbilden kan storleksanpassas
+    // (fitSammanfattning i katalog.html).
+    function buildVagjamforelse(node) {
+        var ROD = '#c0392b', SIGNAL = '#e8590c', PART = '#5b7ea6', GREY = '#8a919b';
+        var W = 460, H = 88, YC = 40, LAMBDA = 180, T = 2.6, AMP = 22, XR = 230;
+        var K = 2 * Math.PI / LAMBDA, OM = 2 * Math.PI / T, tid = 0;
+        var id = 'ms-vj-rutnat-' + (++vtRaknare);
+
+        var card = document.createElement('div');
+        card.className = 'ms-vj';
+        function panel(longi, namn, text, alt) {
+            var bas = vgRutnat(id + (longi ? 'l' : 't'), 0, 0, W, H);
+            if (longi) {
+                bas += '<line x1="' + XR + '" y1="2" x2="' + XR + '" y2="74" stroke="' + GREY + '" stroke-width="1" stroke-dasharray="3 4"/>' +
+                    vgDubbelpil(XR - AMP, 82, XR + AMP, 82, SIGNAL);
+            } else {
+                bas += '<line x1="0" y1="' + YC + '" x2="460" y2="' + YC + '" stroke="' + GREY + '" stroke-width="1" stroke-dasharray="5 4"/>' +
+                    vgDubbelpil(XR, YC - AMP - 14, XR, YC + AMP + 14, SIGNAL);
+            }
+            var d = document.createElement('div');
+            d.className = 'ms-vj-panel';
+            d.innerHTML = '<div class="ms-vj-rubrik">' + namn + '</div>' +
+                '<div class="ms-vj-rikt">vågens riktning <svg viewBox="0 0 56 12" width="56" height="12" aria-hidden="true">' +
+                vgPilX(0, 56, 6, ROD, 2.6) + '</svg></div>' +
+                '<svg class="ms-vj-scen" preserveAspectRatio="xMidYMid slice" viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg" ' +
+                'font-family="Poppins, system-ui, sans-serif" role="img" aria-label="' + alt + '">' + bas + '<g></g></svg>' +
+                '<div class="ms-vj-text">' + text + '</div>';
+            card.appendChild(d);
+            return d.querySelector('.ms-vj-scen > g');
+        }
+        var gT = panel(false, 'Transversell våg',
+            'Den orange partikeln rör sig <b>vinkelrätt</b> mot vågens riktning.',
+            'Transversell våg: vågen går åt höger medan partiklarna svänger upp och ned.');
+        var gL = panel(true, 'Longitudinell våg',
+            'Den orange partikeln rör sig <b>längs med</b> vågens riktning.',
+            'Longitudinell våg: vågen går åt höger medan partiklarna svänger åt höger och vänster.');
+
+        // Partiklarna skapas en gång och flyttas sedan med attribut.
+        var NS = 'http://www.w3.org/2000/svg', tp = [], lp = [];
+        function prick(g, r, fill, stroke) {
+            var c = document.createElementNS(NS, 'circle');
+            c.setAttribute('r', r);
+            c.setAttribute('fill', fill);
+            if (stroke) c.setAttribute('stroke', stroke);
+            g.appendChild(c);
+            return c;
+        }
+        var trad = document.createElementNS(NS, 'polyline');
+        trad.setAttribute('fill', 'none');
+        trad.setAttribute('stroke', '#b9c4d2');
+        trad.setAttribute('stroke-width', '1.6');
+        gT.appendChild(trad);
+        var x, rad;
+        for (x = XR - 221; x <= XR + 221; x += 13) {
+            if (x !== XR) tp.push([x, prick(gT, 4.4, PART, '#3f6189')]);
+        }
+        for (rad = 0; rad < 5; rad++) {
+            for (x = XR - 253; x <= XR + 253; x += 11) {
+                if (x !== XR || rad !== 2) lp.push([x, 12 + rad * 14, prick(gL, 3, PART)]);
+            }
+        }
+        var rT = prick(gT, 7, SIGNAL, '#9c3a06'), rL = prick(gL, 7, SIGNAL, '#9c3a06');
+        rT.setAttribute('cx', XR);
+        rL.setAttribute('cy', YC);
+
+        function u(x0) { return AMP * Math.sin(OM * tid - K * x0); }
+        function rita() {
+            var pts = [];
+            for (var q = 0; q <= 460; q += 4) pts.push(q + ',' + vgR1(YC - u(q)));
+            trad.setAttribute('points', pts.join(' '));
+            tp.forEach(function (p) {
+                p[1].setAttribute('cx', p[0]);
+                p[1].setAttribute('cy', (YC - u(p[0])).toFixed(2));
+            });
+            lp.forEach(function (p) {
+                p[2].setAttribute('cx', (p[0] + u(p[0])).toFixed(2));
+                p[2].setAttribute('cy', p[1]);
+            });
+            rT.setAttribute('cy', (YC - u(XR)).toFixed(2));
+            rL.setAttribute('cx', (XR + u(XR)).toFixed(2));
+        }
+
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'ms-vj-paus';
+        card.appendChild(btn);
+        node.appendChild(card);
+        var loop = vgLoop(card, function (dt) { tid += dt; rita(); });
+        function spela(v) {
+            loop.satt(v);
+            btn.setAttribute('aria-label', v ? 'Pausa' : 'Spela');
+            btn.title = v ? 'Pausa' : 'Spela';
+            btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">' +
+                (v ? '<rect x="5" y="4" width="5" height="16" rx="1"/><rect x="14" y="4" width="5" height="16" rx="1"/>'
+                   : '<path d="M7 4 L20 12 L7 20 Z"/>') + '</svg>';
+        }
+        btn.addEventListener('click', function (e) { e.stopPropagation(); spela(!loop.igang()); });
+        card._set = function (t) { tid = t; rita(); };
+        rita();
+        spela(!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches));
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
     //  typ: ytvag  (visa: vatten | rayleigh)
     // ══════════════════════════════════════════════════════════════════════
     // fy2-2.7, rutan "Fler typer av vågor": en ytvåg går åt höger genom ett
@@ -18251,7 +18362,7 @@
                   lodlinje: buildLodlinje,
                   vinkelrata: buildVinkelrata, pennprovet: buildPennprovet,
                   vagstallning: buildVagstallning, pulsvag: buildPulsvag, vagtyp: buildVagtyp,
-                  ytvag: buildYtvag, fasvag: buildFasvag,
+                  ytvag: buildYtvag, vagjamforelse: buildVagjamforelse, fasvag: buildFasvag,
                   staendevag: buildStaendevag, gitarrton: buildGitarrton,
                   snurrslang: buildSnurrslang, pipton: buildPipton, provror: buildProvror,
                   varmekansla: buildVarmekansla, smaltrace: buildSmaltrace,

@@ -1700,7 +1700,9 @@
                 // därför: texten före simuleringen är ett steg, och
                 // simuleringen tänds tillsammans med stycket direkt före den
                 // ("I simuleringen nedan …") som ett eget steg.
+                // (Sammanfattningen är alltid EN slide, även med animering i.)
                 if (el.classList.contains('lab-block') &&
+                    !el.classList.contains('lab-block-sammanfattning') &&
                     Array.from(el.children).some(c => c.classList.contains('lab-minisim'))) {
                     const subs = Array.from(el.children)
                         .filter(c => !c.classList.contains('lab-block-title'));

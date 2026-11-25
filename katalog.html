@@ -1093,6 +1093,9 @@
                 if (li.tagName !== 'LI') continue;
                 if (li.querySelector('.vardef-sym')) continue;            // redan gjort
                 if (li.textContent.indexOf('=') < 0) continue;           // ingen variabeldef
+                // Ligger "=" bara inuti matten ($I_0 = 10^{-12}$) finns inget att
+                // dela vid: lämna raden orörd, annars försvinner den helt.
+                if (!Array.from(li.childNodes).some(n => n.nodeType === 3 && n.nodeValue.indexOf('=') >= 0)) continue;
                 const sym = document.createElement('span');
                 sym.className = 'vardef-sym';
                 for (const node of Array.from(li.childNodes)) {

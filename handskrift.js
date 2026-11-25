@@ -17007,6 +17007,685 @@
              ekvval: 1 };
   }
 
+  /* ==================================================================
+   * AVANCERADE EXEMPEL i Matematik nivå 1c (ma1c-3.A och ma1c-4.A,
+   * inlagda 2026-11-25). Siffrorna är identiska med textlösningarna.
+   * ================================================================== */
+
+  /* ---------------- scen: torkad svamp (ma1c-3.A ex 1) ------------- */
+  function layoutTorkadsvamp(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    tanke(20, [
+      [['Vattnet avdunstar, men det']],
+      [['torra i svampen finns kvar.']],
+      [['Jag räknar på det torra.']]
+    ], 0);
+    y = 235;
+    T.str('Andelen torrt i den färska svampen', padL, y - 1.6 * F, null, 0.62);
+    T.str('100 %-92 %=8 %', padL, y);
+    T.stepEnd();
+    y += 3.6 * F;
+    T.str('Det torra väger', padL, y - 1.6 * F, null, 0.62);
+    T.str('0,08·3,0 kg=0,24 kg', padL, y);
+    T.stepEnd();
+    y += 3.6 * F;
+    T.str('Andelen torrt efter torkningen', padL, y - 1.6 * F, null, 0.62);
+    T.str('100 %-20 %=80 %', padL, y);
+    T.stepEnd();
+    tanke(y, [
+      [['0,24 kg torrt är 80 % av den']],
+      [['torkade svampen. Jag söker']],
+      [['det hela.']]
+    ]);
+    y += 4.4 * F;
+    T.str('Den torkade svampen väger', padL, y - 2.1 * F, null, 0.62);
+    xx = T.str('det hela=', padL, y);
+    xx = T.fracH('delen', 'andelen', xx, y);
+    T.stepEnd();
+    y += 3.2 * F;
+    xx = T.str('=', padL, y);
+    xx = T.fracH('0,24 kg', '0,80', xx, y);
+    T.stepEnd();
+    T.str('=0,30 kg', xx, y);
+    T.stepEnd();
+    y += 3.4 * F;
+    xe = T.str('Svar: 0,30 kg', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+    return { acts: acts, contentW: 640, lastBase: y + 1.7 * F, padL: padL };
+  }
+
+  /* ---------------- scen: andelen i årskurs 1 (ma1c-3.A ex 2) ------- */
+  function layoutAndelarskurs(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    function xw(rad) { return padL + T.adv(rad) + 0.6 * F; }
+    y = 90;
+    T.str('Skolan har N elever', padL, y, null, 0.62);
+    y += 1.2 * F;
+    T.str('Andelen i årskurs 1 är x', padL, y, null, 0.62);
+    y += 1.2 * F;
+    T.str('Andelen i årskurs 2 och 3 är 1-x', padL, y, null, 0.62);
+    T.stepEnd();
+    tanke(y, [
+      [['Cyklisterna i årskurs 1 och']],
+      [['i årskurs 2 och 3 är']],
+      [['tillsammans 30 % av N.']]
+    ]);
+    y = Math.max(y + 3.8 * F, 270);
+    T.str('Antalet som cyklar', padL, y - 1.6 * F, null, 0.62);
+    var rad = '0,45x·N+0,20(1-x)·N=0,30·N';
+    T.str(rad, padL, y);
+    T.stepEnd();
+    tanke(y, [
+      [['N är en faktor i varje term.']],
+      [['Jag dividerar båda led med N.']]
+    ]);
+    y = ekvOp(y, '/N', xw(rad), rad, { dyVagg: 2.6 });
+    xx = T.str('0,45x+', padL, y);
+    var f0 = xx; xx = T.str('0,20', xx, y); var f1 = xx;
+    xx = T.str('(', xx, y);
+    var t0 = xx; xx = T.str('1', xx, y); var t1 = xx;
+    var u0 = xx; xx = T.str('-x', xx, y); var u1 = xx;
+    T.str(')=0,30', xx, y);
+    T.stepEnd();
+    var yk = y;
+    y += 2.3 * F;
+    var a0 = padL; xx = T.str('0,45x', padL, y); var a1 = xx;
+    var delar = [
+      { fran: [f0, f1], till: [t0, t1], skriv: '+0,20', hojd: 22 },
+      { fran: [f0, f1], till: [u0, u1], skriv: '-0,20x', hojd: 36, dx: 4 }
+    ];
+    xx = mkMultIn(T)(xx, y, yk - 0.95 * F, delar);
+    T.str('=0,30', xx, y);
+    T.stepEnd();
+    yk = y;
+    y += 2.4 * F;
+    xx = mkSamla(T)(padL, y, [
+      { ringar: [[a0, a1, yk], [delar[1].x0, delar[1].x1, yk]], skriv: '0,25x' },
+      { skriv: '+0,20=0,30' }]);
+    T.stepEnd();
+    y = ekvOp(y, '-0,20', xw('0,25x+0,20=0,30'), '0,25x+0,20=0,30');
+    T.str('0,25x=0,10', padL, y);
+    T.stepEnd();
+    y = ekvOp(y, '/0,25', xw('0,25x=0,10'), '0,25x=0,10');
+    xx = T.str('x=0,40', padL, y);
+    T.stepEnd();
+    T.str('=40 %', xx, y);
+    T.stepEnd();
+    y += 2.8 * F;
+    xe = T.str('Svar: 40 %', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+    return { acts: acts, contentW: 640, lastBase: y + 1.7 * F, padL: padL, ekvval: 1 };
+  }
+
+  /* ---------------- scen: två lika sänkningar (ma1c-3.A ex 3) ------- */
+  function layoutTvasankningar(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    y = 90;
+    T.str('Höjningens faktor: 1,60', padL, y, null, 0.62);
+    T.stepEnd();
+    y += 1.2 * F;
+    T.str('Sänkningens faktor: x', padL, y, null, 0.62);
+    T.stepEnd();
+    tanke(y, [
+      [['Priset är till slut detsamma']],
+      [['som från början. Då är den']],
+      [['totala faktorn 1.']]
+    ]);
+    y += 3.6 * F;
+    T.str('Total förändringsfaktor', padL, y - 1.6 * F, null, 0.62);
+    T.str('1,60·x·x=1', padL, y);
+    T.stepEnd();
+    y += 2.3 * F;
+    T.str('1,60x^2=1', padL, y);
+    T.stepEnd();
+    y = ekvOp(y, '/1,60', padL + T.adv('1,60x^2=1') + 0.9 * F, '1,60x^2=1', { dyVagg: 2.4 });
+    T.str('x^2=0,625', padL, y);
+    T.stepEnd();
+    y += 2.5 * F;
+    xx = T.str('x=±', padL, y);
+    T.rot('0,625', xx + 2, y);
+    T.stepEnd();
+    y += 2.4 * F;
+    T.str('x=±0,790...', padL, y);
+    T.stepEnd();
+    tanke(y, [
+      [['En förändringsfaktor kan']],
+      [['inte vara negativ.']]
+    ]);
+    y += 3.8 * F;
+    T.str('Bara den positiva är möjlig. Sänkningen är', padL, y - 1.6 * F, null, 0.62);
+    xx = T.str('1-0,790...=0,209...', padL, y);
+    T.stepEnd();
+    T.str('≈21 %', xx, y);
+    T.stepEnd();
+    y += 2.8 * F;
+    xe = T.str('Svar: 21 %', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+    return { acts: acts, contentW: 640, lastBase: y + 1.7 * F, padL: padL, ekvval: 1 };
+  }
+
+  /* ---------------- scen: upp och ned (ma1c-3.A ex 4) --------------- */
+  function layoutUppochned(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    tanke(20, [
+      [['Det ska gälla alla procent-']],
+      [['satser. Då räknar jag med']],
+      [['en bokstav.']]
+    ], 0);
+    y = 130;
+    T.str('a) Procentsatsen är x, x>0', padL, y, null, 0.62);
+    T.stepEnd();
+    y += 3.9 * F;
+    T.str('Total förändringsfaktor', padL, y - 2.3 * F, null, 0.62);
+    xx = T.str('(', padL, y);
+    var a0 = xx; xx = T.str('1', xx, y); var a1 = xx;
+    var b0 = xx; xx = T.str('+x', xx, y); var b1 = xx;
+    xx = T.str(')(', xx, y);
+    var c0 = xx; xx = T.str('1', xx, y); var c1 = xx;
+    var d0 = xx; xx = T.str('-x', xx, y); var d1 = xx;
+    T.str(')', xx, y);
+    T.stepEnd();
+    var yk = y;
+    y += 3.1 * F;
+    xx = T.str('=', padL, y);
+    var delar = [
+      { fran: [a0, a1], till: [c0, c1], skriv: '1', hojd: 14 },
+      { fran: [a0, a1], till: [d0, d1], skriv: '-x', hojd: 22, dx: 3 },
+      { fran: [b0, b1], till: [c0, c1], skriv: '+x', hojd: 20, under: true },
+      { fran: [b0, b1], till: [d0, d1], skriv: '-x^2', hojd: 36, dx: 3, under: true }];
+    mkMultIn(T)(xx, y, yk - 0.95 * F, delar);
+    T.stepEnd();
+    tanke(y, [[['-x och +x tar ut varandra.']]]);
+    yk = y;
+    y += 2.4 * F;
+    xx = T.str('=', padL, y);
+    mkSamla(T)(xx, y, [
+      { skriv: '1' },
+      { ringar: [[delar[1].x0, delar[1].x1, yk], [delar[2].x0, delar[2].x1, yk]], skriv: '-x^2' }]);
+    T.stepEnd();
+    y += 2.0 * F;
+    T.str('x>0 ger att x^2>0', padL, y, null, 0.62);
+    T.stepEnd();
+    y += 1.4 * F;
+    T.str('Då är 1-x^2<1, alltså blir priset lägre', padL, y, null, 0.62);
+    T.stepEnd();
+    /* b) */
+    tanke(y, [
+      [['9 % lägre ger faktorn 0,91.']],
+      [['Den är också 1-x^2.']]
+    ]);
+    y += 4.0 * F;
+    T.str('b) Priset är 9 % lägre: faktorn är 0,91', padL, y - 1.6 * F, null, 0.62);
+    T.str('1-x^2=0,91', padL, y);
+    T.stepEnd();
+    y = ekvOp(y, '-1', padL + T.adv('1-x^2=0,91') + 0.9 * F, '1-x^2=0,91', { dyVagg: 2.4, dyRes: 2.4 });
+    T.str('-x^2=-0,09', padL, y);
+    T.stepEnd();
+    y = ekvOp(y, '/(-1)', padL + T.adv('-x^2=-0,09') + 0.9 * F, '-x^2=-0,09', { dyVagg: 2.4 });
+    T.str('x^2=0,09', padL, y);
+    T.stepEnd();
+    y += 2.5 * F;
+    xx = T.str('x=±', padL, y);
+    T.rot('0,09', xx + 2, y);
+    T.stepEnd();
+    y += 2.4 * F;
+    T.str('x=±0,3', padL, y);
+    T.stepEnd();
+    y += 2.1 * F;
+    T.str('x>0 ger x=0,3=30 %', padL, y);
+    T.stepEnd();
+    y += 2.8 * F;
+    xe = T.str('Svar: 30 %', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+    return { acts: acts, contentW: 640, lastBase: y + 1.7 * F, padL: padL, ekvval: 1 };
+  }
+
+  /* ---------------- scen: räntesats ur total ränta (ma1c-3.A ex 5) -- */
+  function layoutRaklanranta(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    y = 150;
+    T.str('Amortering per år', padL, y - 2.1 * F, null, 0.62);
+    xx = T.fracH('240 000', '8', padL, y);
+    T.str('=30 000', xx, y);
+    T.stepEnd();
+    tanke(y, [
+      [['Räntan är r gånger skulden.']],
+      [['Skulden minskar med 30 000 kr']],
+      [['varje år, från 240 000 kr till']],
+      [['30 000 kr det sista året.']]
+    ], 1.05);
+    y += 4.6 * F;
+    T.str('Total ränta när räntesatsen är r', padL, y - 1.6 * F, null, 0.62);
+    T.str('r·240 000+r·210 000+...+r·30 000', padL, y, null, 0.86);
+    T.stepEnd();
+    tanke(y, [[['r finns i varje term. Jag']], [['bryter ut r.']]]);
+    y += 2.4 * F;
+    xx = T.str('=r·(', padL, y, null, 0.86);
+    T.stepEnd();
+    xx = T.str('240 000', xx, y, null, 0.86);
+    xx = T.str('+210 000', xx, y, null, 0.86);
+    xx = T.str('+...', xx, y, null, 0.86);
+    T.str('+30 000)', xx, y, null, 0.86);
+    T.stepEnd();
+    tanke(y, [
+      [['Första och sista termen är']],
+      [['tillsammans 270 000. Andra och']],
+      [['näst sista också. Åtta termer']],
+      [['blir fyra par.']]
+    ]);
+    y += 4.0 * F;
+    T.str('Summan i parentesen: 4 par', padL, y - 1.6 * F, null, 0.62);
+    T.str('4·270 000=1 080 000', padL, y);
+    T.stepEnd();
+    y += 4.0 * F;
+    T.str('Den totala räntan är 43 200 kr', padL, y - 1.6 * F, null, 0.62);
+    T.str('r·1 080 000=43 200', padL, y);
+    T.stepEnd();
+    y = ekvOp(y, '/1 080 000', padL + T.adv('r·1 080 000=43 200') + 0.6 * F,
+              'r·1 080 000=43 200', { dyVagg: 2.4 });
+    xx = T.str('r=0,04', padL, y);
+    T.stepEnd();
+    T.str('=4 %', xx, y);
+    T.stepEnd();
+    y += 2.8 * F;
+    xe = T.str('Svar: 4 %', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+    return { acts: acts, contentW: 640, lastBase: y + 1.7 * F, padL: padL, ekvval: 1 };
+  }
+
+  /* ---------------- scen: triangel med given area (ma1c-4.A ex 1) --- */
+  function layoutTriangellinje(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    tanke(20, [
+      [['m=6, så linjen skär y-axeln']],
+      [['i 6. Triangeln har rät vinkel']],
+      [['i origo och höjden 6.']]
+    ], 0);
+    y = 170;
+    T.str('Höjden är 6, basen är b', padL, y - 2.1 * F, null, 0.62);
+    xx = T.fracH('b·6', '2', padL, y);
+    xx = T.str('=12', xx, y);
+    T.stepEnd();
+    y += 3.0 * F;
+    T.str('3b=12', padL, y);
+    T.stepEnd();
+    y = ekvOp(y, '/3', padL + T.adv('3b=12') + 0.9 * F, '3b=12');
+    T.str('b=4', padL, y);
+    T.stepEnd();
+    tanke(y, [
+      [['Basen kan gå 4 steg åt höger,']],
+      [['men också 4 steg åt vänster.']]
+    ]);
+    var ox = 13 * RUTA, oy = Math.round((y + 10.2 * F) / RUTA) * RUTA;
+    var A = mkAxes(T, F, { ox: ox, oy: oy, u: RUTA, xmin: -6, xmax: 6,
+                           ymin: -1, ymax: 7 });
+    A.axes();
+    A.ticks([-4, 4], [6], [], []);
+    A.tag(0, 6, '6', 18, 5);
+    T.stepEnd();
+    A.linjalKM(-1.5, 6, null, -0.6, 4.7);
+    A.tag(4, 0, '(4, 0)', 12, -14);
+    T.stepEnd();
+    A.linjalKM(1.5, 6, null, -4.7, 0.6);
+    A.tag(-4, 0, '(−4, 0)', -12 - T.adv('(−4, 0)', 0.5), -14);
+    T.stepEnd();
+    y = oy + 5.6 * F;
+    T.str('Linjen genom (0, 6) och (4, 0)', padL, y - 2.1 * F, null, 0.62);
+    xx = T.str('k=', padL, y);
+    xx = T.fracH('0-6', '4-0', xx, y);
+    T.stepEnd();
+    xx = T.str('=-', xx, y);
+    xx = T.fracH('6', '4', xx, y);
+    T.stepEnd();
+    T.str('=-1,5', xx, y);
+    T.stepEnd();
+    y += 4.6 * F;
+    T.str('Linjen genom (0, 6) och (−4, 0)', padL, y - 2.1 * F, null, 0.62);
+    xx = T.str('k=', padL, y);
+    xx = T.fracH('0-6', '-4-0', xx, y);
+    T.stepEnd();
+    xx = T.str('=', xx, y);
+    xx = T.fracH('6', '4', xx, y);
+    T.stepEnd();
+    T.str('=1,5', xx, y);
+    T.stepEnd();
+    y += 3.4 * F;
+    xe = T.str('Svar: k=-1,5 och k=1,5', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+    return { acts: acts, contentW: 640, lastBase: y + 1.7 * F, padL: padL, ekvval: 1 };
+  }
+
+  /* ---------------- scen: f(x+2)-f(x)=6 (ma1c-4.A ex 2) ------------- */
+  function layoutSkillnadfunktion(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    y = 130;
+    T.str('Funktionen är linjär', padL, y - 1.6 * F, null, 0.62);
+    T.str('f(x)=kx+m', padL, y);
+    T.stepEnd();
+    tanke(y, [[['Jag ersätter x med x+2.']]]);
+    y = Math.max(y + 3.0 * F, 240);
+    xx = T.str('f(x+2)=', padL, y);
+    var f0 = xx; xx = T.str('k', xx, y); var f1 = xx;
+    xx = T.str('(', xx, y);
+    var t0 = xx; xx = T.str('x', xx, y); var t1 = xx;
+    var u0 = xx; xx = T.str('+2', xx, y); var u1 = xx;
+    T.str(')+m', xx, y);
+    T.stepEnd();
+    var yk = y;
+    y += 2.3 * F;
+    xx = T.str('f(x+2)=', padL, y);
+    xx = mkMultIn(T)(xx, y, yk - 0.95 * F, [
+      { fran: [f0, f1], till: [t0, t1], skriv: 'kx', hojd: 20 },
+      { fran: [f0, f1], till: [u0, u1], skriv: '+2k', hojd: 34, dx: 3 }]);
+    T.str('+m', xx, y);
+    T.stepEnd();
+    y += 4.0 * F;
+    T.str('Skillnaden mellan funktionsvärdena', padL, y - 1.6 * F, null, 0.62);
+    T.str('f(x+2)-f(x)', padL, y);
+    T.stepEnd();
+    y += 2.2 * F;
+    T.str('=kx+2k+m-(kx+m)', padL, y);
+    T.stepEnd();
+    tanke(y, [[['Minus framför parentesen']], [['byter tecken på båda termerna.']]]);
+    y += 2.4 * F;
+    xx = T.str('=', padL, y);
+    var a0 = xx; xx = T.str('kx', xx, y); var a1 = xx;
+    xx = T.str('+', xx, y);
+    xx = T.str('2k', xx, y);
+    xx = T.str('+', xx, y);
+    var b0 = xx; xx = T.str('m', xx, y); var b1 = xx;
+    var c0 = xx; xx = T.str('-', xx, y, BLUE) - 0.2 * F; xx = T.str('kx', xx, y); var c1 = xx;
+    var d0 = xx; xx = T.str('-', xx, y, BLUE) - 0.2 * F; xx = T.str('m', xx, y); var d1 = xx;
+    T.stepEnd();
+    tanke(y, [[['kx och m tar ut varandra.']]]);
+    yk = y;
+    y += 2.4 * F;
+    var r1 = T.ring(a0, a1, yk); T.pause(250);
+    var r2 = T.ring(c0, c1, yk); T.pause(400); T.fade(r1); T.fade(r2);
+    r1 = T.ring(b0, b1, yk); T.pause(250);
+    r2 = T.ring(d0, d1, yk); T.pause(400); T.fade(r1); T.fade(r2);
+    T.str('=2k', padL, y);
+    T.stepEnd();
+    y += 3.8 * F;
+    T.str('Skillnaden ska vara 6', padL, y - 1.6 * F, null, 0.62);
+    T.str('2k=6', padL, y);
+    T.stepEnd();
+    y = ekvOp(y, '/2', padL + T.adv('2k=6') + 0.9 * F, '2k=6');
+    T.str('k=3', padL, y);
+    T.stepEnd();
+    tanke(y, [[['Då är f(x)=3x+m. Nu använder']], [['jag att f(3)=4.']]]);
+    y += 3.8 * F;
+    T.str('f(x)=3x+m och f(3)=4 ger', padL, y - 1.6 * F, null, 0.62);
+    T.str('3·3+m=4', padL, y);
+    T.stepEnd();
+    y += 2.2 * F;
+    T.str('9+m=4', padL, y);
+    T.stepEnd();
+    y = ekvOp(y, '-9', padL + T.adv('9+m=4') + 0.9 * F, '9+m=4');
+    T.str('m=-5', padL, y);
+    T.stepEnd();
+    y += 2.8 * F;
+    xe = T.str('Svar: f(x)=3x-5', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+    return { acts: acts, contentW: 640, lastBase: y + 1.7 * F, padL: padL, ekvval: 1 };
+  }
+
+  /* ---------------- scen: f(f(x))=9x+8 (ma1c-4.A ex 3) -------------- */
+  function layoutFunktionavsigsjalv(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T), vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
+    y = 130;
+    T.str('Funktionen är linjär', padL, y - 1.6 * F, null, 0.62);
+    T.str('f(x)=kx+m', padL, y);
+    T.stepEnd();
+    tanke(y, [[['I f(f(x)) står f(x) på']], [['platsen för x.']]]);
+    y = Math.max(y + 3.0 * F, 240);
+    T.str('f(f(x))=k·f(x)+m', padL, y);
+    T.stepEnd();
+    y += 2.4 * F;
+    xx = T.str('f(f(x))=', padL, y);
+    var f0 = xx; xx = T.str('k', xx, y); var f1 = xx;
+    xx = T.str('(', xx, y);
+    var t0 = xx; xx = T.str('kx', xx, y); var t1 = xx;
+    var u0 = xx; xx = T.str('+m', xx, y); var u1 = xx;
+    T.str(')+m', xx, y);
+    T.stepEnd();
+    var yk = y;
+    y += 2.4 * F;
+    xx = T.str('f(f(x))=', padL, y);
+    xx = mkMultIn(T)(xx, y, yk - 0.95 * F, [
+      { fran: [f0, f1], till: [t0, t1], skriv: 'k^2x', hojd: 20 },
+      { fran: [f0, f1], till: [u0, u1], skriv: '+km', hojd: 34, dx: 3 }]);
+    T.str('+m', xx, y);
+    T.stepEnd();
+    tanke(y, [
+      [['Det ska vara lika med 9x+8']],
+      [['för alla x. Då är talen']],
+      [['framför x lika, och resten']],
+      [['är också lika.']]
+    ]);
+    y += 4.0 * F;
+    T.str('Lika för alla x', padL, y - 1.6 * F, null, 0.62);
+    var p0 = padL; xx = T.str('k^2', padL, y); var p1 = xx;
+    xx = T.str('x+', xx, y);
+    var q0 = xx; xx = T.str('km+m', xx, y); var q1 = xx;
+    xx = T.str('=', xx, y);
+    var v0 = xx; xx = T.str('9', xx, y); var v1 = xx;
+    xx = T.str('x+', xx, y);
+    var w0 = xx; xx = T.str('8', xx, y); var w1 = xx;
+    T.stepEnd();
+    yk = y;
+    y += 2.6 * F;
+    var yTop = y;
+    var r1 = T.ring(p0, p1, yk); T.pause(250); var r2 = T.ring(v0, v1, yk);
+    T.pause(350);
+    T.str('k^2=9', padL + 24, y);
+    T.str('(1)', padL + 24 + T.adv('km+m=8') + 0.9 * F, y, null, 0.7);
+    T.fade(r1); T.fade(r2);
+    T.stepEnd();
+    y += 1.9 * F;
+    r1 = T.ring(q0, q1, yk); T.pause(250); r2 = T.ring(w0, w1, yk);
+    T.pause(350);
+    T.str('km+m=8', padL + 24, y);
+    T.str('(2)', padL + 24 + T.adv('km+m=8') + 0.9 * F, y, null, 0.7);
+    T.fade(r1); T.fade(r2);
+    /* klammern */
+    var ya = yTop - 0.95 * F, yb = y + 0.3 * F, ym = (ya + yb) / 2, xk = padL + 4;
+    acts.push({ kind: 'stroke', pts: [[xk + 10, ya], [xk + 3, ya + 8], [xk + 3, ym - 10],
+      [xk - 4, ym], [xk + 3, ym + 10], [xk + 3, yb - 8], [xk + 10, yb]] });
+    T.stepEnd();
+    y += 3.8 * F;
+    T.str('Ur ekvation (1) fås', padL, y - 1.6 * F, null, 0.62);
+    xx = T.str('k=±', padL, y);
+    T.rot('9', xx + 2, y);
+    T.stepEnd();
+    y += 2.4 * F;
+    T.str('k=±3', padL, y);
+    T.stepEnd();
+    y += 3.8 * F;
+    T.str('Fall 1: k=3 i ekvation (2) ger', padL, y - 1.6 * F, null, 0.62);
+    T.str('3m+m=8', padL, y);
+    T.stepEnd();
+    function samla(sum, n1) {
+      var yr = y, e1 = padL + T.adv(n1), m0 = e1 + T.adv('+');
+      y += 2.4 * F;
+      mkSamla(T)(padL, y, [
+        { ringar: [[padL, e1, yr], [m0, m0 + T.adv('m'), yr]], skriv: sum },
+        { skriv: '=8' }]);
+      T.stepEnd();
+    }
+    samla('4m', '3m');
+    y = ekvOp(y, '/4', padL + T.adv('4m=8') + 0.9 * F, '4m=8');
+    T.str('m=2', padL, y);
+    T.stepEnd();
+    tanke(y, [[['Glöm inte det andra fallet.']]]);
+    y += 3.8 * F;
+    T.str('Fall 2: k=-3 i ekvation (2) ger', padL, y - 1.6 * F, null, 0.62);
+    T.str('-3m+m=8', padL, y);
+    T.stepEnd();
+    samla('-2m', '-3m');
+    y = ekvOp(y, '/(-2)', padL + T.adv('-2m=8') + 0.9 * F, '-2m=8');
+    T.str('m=-4', padL, y);
+    T.stepEnd();
+    y += 2.8 * F;
+    T.str('Svar: f(x)=3x+2 och', padL, y);
+    y += 1.9 * F;
+    xe = T.str('f(x)=-3x-4', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+    return { acts: acts, contentW: 640, lastBase: y + 1.7 * F, padL: padL, ekvval: 1 };
+  }
+
+  /* ---------------- scen: läkemedel i kroppen (ma1c-4.A ex 4) ------- */
+  function layoutLakemedel(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
+    var tanke = mkTanke(T);
+    tanke(20, [
+      [['Halva tiden ger inte halva']],
+      [['minskningen. Jag räknar med']],
+      [['förändringsfaktorer.']]
+    ], 0);
+    y = 130;
+    T.str('a) Faktorn för 1 timme är a', padL, y, null, 0.62);
+    y += 1.2 * F;
+    T.str('10 timmar: faktorn är 1-0,75=0,25', padL, y, null, 0.62);
+    y += 1.8 * F;
+    T.str('a^1^0=0,25', padL, y);
+    T.stepEnd();
+    tanke(y, [
+      [['På 5 timmar är faktorn a^5.']],
+      [['Den används två gånger']],
+      [['på 10 timmar.']]
+    ]);
+    y += 2.6 * F;
+    T.str('(a^5)^2=0,25', padL, y);
+    T.stepEnd();
+    y += 2.6 * F;
+    xx = T.str('a^5=±', padL, y);
+    T.rot('0,25', xx + 2, y);
+    T.stepEnd();
+    y += 2.4 * F;
+    T.str('a^5=±0,5', padL, y);
+    T.stepEnd();
+    tanke(y, [[['En förändringsfaktor kan']], [['inte vara negativ.']]]);
+    y += 3.8 * F;
+    T.str('Bara 0,5 är möjlig. Minskningen är', padL, y - 1.6 * F, null, 0.62);
+    T.str('1-0,5=0,5=50 %', padL, y);
+    T.stepEnd();
+    y += 2.6 * F;
+    xe = T.str('Svar: 50 %', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+    y += 4.4 * F;
+    T.str('b) Faktorn för 1 timme söks', padL, y - 1.6 * F, null, 0.62);
+    T.str('a^1^0=0,25', padL, y);
+    T.stepEnd();
+    tanke(y, [[['Jag drar tionderoten ur båda']], [['led: upphöjt till en tiondel.']]]);
+    y += 3.2 * F;
+    xx = T.str('a=0,25', padL, y);
+    xx = T.fracSup('1', '10', xx + 2, y);
+    T.stepEnd();
+    T.str('=0,870...', xx + 4, y);
+    T.stepEnd();
+    y += 3.8 * F;
+    T.str('Minskningen är', padL, y - 1.6 * F, null, 0.62);
+    xx = T.str('1-0,870...=0,129...', padL, y);
+    T.stepEnd();
+    T.str('≈13 %', xx, y);
+    T.stepEnd();
+    y += 2.8 * F;
+    xe = T.str('Svar: 13 %', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+    return { acts: acts, contentW: 640, lastBase: y + 1.7 * F, padL: padL };
+  }
+
+  /* ---------------- scen: jämföra stora potenser (ma1c-4.A ex 5) ---- */
+  function layoutStorapotenser(cfg, F) {
+    var T = mathTools(F), acts = T.acts, padL = T.padL, y, xe, r;
+    var tanke = mkTanke(T);
+    function kedja(led) {
+      var x = padL;
+      led.forEach(function (t) { x = T.str(t, x, y); T.stepEnd(); });
+    }
+    /* ring kring en exponent */
+    function expRing(x0, x1) { return [x0, x1, y, F, { cy: y - 0.92 * F, ry: 0.46 * F }]; }
+    tanke(20, [
+      [['Talen är för stora att räkna']],
+      [['ut. Får de samma exponent kan']],
+      [['jag jämföra baserna.']]
+    ], 0);
+    y = 245;
+    T.str('a) 100, 75 och 50 är delbara med 25', padL, y - 1.7 * F, null, 0.62);
+    kedja(['2^1^0^0', '=2^4^·^2^5', '=(2^4)^2^5', '=16^2^5']);
+    y += 2.6 * F;
+    kedja(['3^7^5', '=3^3^·^2^5', '=(3^3)^2^5', '=27^2^5']);
+    y += 2.6 * F;
+    kedja(['5^5^0', '=5^2^·^2^5', '=(5^2)^2^5', '=25^2^5']);
+    tanke(y, [
+      [['Samma exponent. Då är']],
+      [['potensen störst där basen']],
+      [['är störst.']]
+    ]);
+    y += 4.0 * F;
+    T.str('Samma exponent: jämför baserna, 16<25<27', padL, y - 1.7 * F, null, 0.62);
+    T.str('16^2^5<25^2^5<27^2^5', padL, y);
+    T.stepEnd();
+    y += 2.8 * F;
+    xe = T.str('Svar: 2^1^0^0<5^5^0<3^7^5', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+    tanke(y, [
+      [['Samma idé. 200 och 300 är']],
+      [['båda delbara med 100.']]
+    ], 0.5);
+    y += 4.4 * F;
+    T.str('b) 200 och 300 är delbara med 100', padL, y - 1.7 * F, null, 0.62);
+    kedja(['n^2^0^0', '=n^2^·^1^0^0', '=(n^2)^1^0^0']);
+    y += 2.6 * F;
+    kedja(['5^3^0^0', '=5^3^·^1^0^0', '=(5^3)^1^0^0', '=125^1^0^0']);
+    y += 4.0 * F;
+    T.str('Olikheten blir', padL, y - 1.7 * F, null, 0.62);
+    T.str('(n^2)^1^0^0<125^1^0^0', padL, y);
+    T.stepEnd();
+    tanke(y, [[['Samma exponent. Det räcker']], [['att jämföra baserna.']]]);
+    var h = '(n^2)^1^0^0<125';
+    r = substRings(acts, [expRing(padL + T.adv('(n^2)'), padL + T.adv('(n^2)^1^0^0')),
+                          expRing(padL + T.adv(h), padL + T.adv(h + '^1^0^0'))]);
+    y += 2.6 * F;
+    T.str('n^2<125', padL, y);
+    fadeRings(acts, r);
+    T.stepEnd();
+    y += 4.0 * F;
+    T.str('Prövar heltal', padL, y - 1.7 * F, null, 0.62);
+    T.str('11^2=121<125', padL, y);
+    T.stepEnd();
+    y += 2.4 * F;
+    T.str('12^2=144>125', padL, y);
+    T.stepEnd();
+    y += 2.8 * F;
+    xe = T.str('Svar: n=11', padL, y);
+    T.underline(xe, y);
+    T.stepEnd();
+    return { acts: acts, contentW: 640, lastBase: y + 1.7 * F, padL: padL };
+  }
+
+  /* SLUT-MA1C-AVANCERAD */
+
   /* ---------------- scen: belysningen från en lampa (ma1c-4.12 ex 4) ---
    * Avancerad tillämpning: E(x) = C·x^a, E(1) = 180 lux och E(3) = 20 lux.
    * a) 1^a = 1 ger C = 180 direkt. 180·3^a = 20 ger 3^a = 1/9 = 1/3² =
@@ -66849,6 +67528,16 @@
                    potensekvuddajamn: layoutPotensekvuddajamn,
                    potensbestamc: layoutPotensbestamc,
                    potensljus: layoutPotensljus,
+                   torkadsvamp: layoutTorkadsvamp,
+                   andelarskurs: layoutAndelarskurs,
+                   tvasankningar: layoutTvasankningar,
+                   uppochned: layoutUppochned,
+                   raklanranta: layoutRaklanranta,
+                   triangellinje: layoutTriangellinje,
+                   skillnadfunktion: layoutSkillnadfunktion,
+                   funktionavsigsjalv: layoutFunktionavsigsjalv,
+                   lakemedel: layoutLakemedel,
+                   storapotenser: layoutStorapotenser,
                    funktionifunktion: layoutFunktionifunktion,
                    /* ma1c kapitel 5 — Statistik och sannolikhetslära */
                    enkatfraga: layoutEnkatfraga,

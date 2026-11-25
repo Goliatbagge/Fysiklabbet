@@ -355,6 +355,7 @@ window.KATALOG = {
               { num: '3.4', title: 'Sparande och ränteberäkningar', description: 'Ränta, behållning och kalkylblad — låsta cellreferenser och årligt sparande.', href: null, icon: null, keywords: ['procent','ränta','årsränta','sparande','sparkonto','behållning','kalkylblad','kalkylark','excel','cell','fyllnadshandtag'] },
               { num: '3.5', title: 'Lån och ränteberäkningar', description: 'Amortering, ränta och total lånekostnad — rak amortering månad för månad i kalkylblad.', href: null, icon: null, keywords: ['procent','lån','ränta','räntesats','amortera','amortering','rak amortering','skuld','inbetalning','lånekostnad','privatekonomi'] },
               { num: '3.S', title: 'Sammanfattning', description: 'Procent, förändringsfaktor och ränteberäkningar — kapitlets begrepp, formler och metoder komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','procent','förändringsfaktor','ränta','lån','sparande'] },
+              { num: '3.A', title: 'Avancerade exempel', description: 'Fem lösta exempel på nivån Avancerad inför provet: andelar, upprepade förändringar och lån, med pennlösningar.', href: null, icon: null, keywords: ['avancerad','avancerade exempel','exempel','prov','provkoll','repetition','procent','andel','förändringsfaktor','upprepade förändringar','ränta','lån','amortering','a-nivå'] },
             ],
           },
           'Räta linjer och funktioner': {
@@ -374,6 +375,7 @@ window.KATALOG = {
               { num: '4.11', title: 'Exponentialfunktioner', description: 'y = C·aˣ — variabeln i exponenten, med tillväxt när a > 1 och avtagande när a < 1.', href: null, icon: null, keywords: ['funktioner','exponentialfunktion','exponentialfunktioner','exponentiell','tillväxt','avtagande','förändringsfaktor','ränta på ränta','sönderfall'] },
               { num: '4.12', title: 'Potensfunktioner', description: 'f(x) = C·xᵃ — variabeln i basen, från parabler och hyperblar till rotkurvor.', href: null, icon: null, keywords: ['funktioner','potensfunktion','potensfunktioner','parabel','hyperbel','rotfunktion','funktion i funktion','sammansatt funktion'] },
               { num: '4.S', title: 'Sammanfattning', description: 'Räta linjens ekvation, funktionsbegreppet och exponentialfunktioner — kapitlets begrepp, formler och metoder komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','räta linjer','funktioner','k-värde','m-värde','exponentialfunktion','potensfunktion'] },
+              { num: '4.A', title: 'Avancerade exempel', description: 'Fem lösta exempel på nivån Avancerad inför provet: räta linjer, funktioner, exponentiell minskning och jämförelse av stora potenser, med pennlösningar.', href: null, icon: null, keywords: ['avancerad','avancerade exempel','exempel','prov','provkoll','repetition','räta linjer','funktion','exponentialfunktion','potenser','jämföra potenser','a-nivå'] },
             ],
           },
           'Statistik och sannolikhetslära': {
@@ -831,10 +833,10 @@ window.MA1B_ALIAS = {};
     { kapitel: 'Procentuella förändringar',
       intro: 'Procent i praktiken — från promille och ppm till förändringsfaktorer som gör upprepade höjningar och sänkningar till en enda multiplikation. Med indextal jämför vi priser och löner över tid, och kapitlet avslutas med privatekonomi: sparande, lån och ränta.',
       sektioner: ['3.1', '3.2', '3.3', NYA.kpi, '3.4', '3.5',
-                  { fran: '3.S', egenTeori: true }] },
+                  { fran: '3.S', egenTeori: true }, '3.A'] },
     { kapitel: 'Räta linjer och funktioner',
       sektioner: ['4.1', '4.2', '4.3', '4.4', '4.5', '4.8', '4.9', '4.10',
-                  '4.11', '4.12', { fran: '4.S', egenTeori: true }] },
+                  '4.11', '4.12', { fran: '4.S', egenTeori: true }, '4.A'] },
     { kapitel: 'Statistik och sannolikhetslära',
       intro: 'Att dra slutsatser av data — vi börjar med att tolka och granska tabeller och diagram, och går vidare till undersökningar, urval och felkällor, felmarginaler och skillnaden mellan korrelation och kausalitet. Sedan sannolikhetslärans grunder: den klassiska definitionen, experiment, produktregeln, träddiagram och komplementhändelser.',
       sektioner: [NYA.tolkaDiagram, '5.1', '5.2', '5.3', '5.4', '5.5',
@@ -860,9 +862,9 @@ window.MA1B_ALIAS = {};
       } else {
         sec = kopia(spec);
       }
-      // Specialavsnitt (K.S sammanfattning, K.E enhetskoll) behåller sin
+      // Specialavsnitt (K.S, K.E, K.A avancerade exempel) behåller sin
       // bokstav; övriga numreras löpande efter positionen i listan.
-      const suffix = spec.fran && /\.(S|E)$/.test(spec.fran)
+      const suffix = spec.fran && /\.(S|E|A)$/.test(spec.fran)
         ? spec.fran.split('.')[1] : null;
       sec.num = suffix ? nr + '.' + suffix : nr + '.' + (++lopnr);
       if (spec.fran && !spec.egenTeori) {
@@ -954,9 +956,9 @@ window.MA2B_ALIAS = {};
       } else {
         sec = kopia(spec);
       }
-      // Specialavsnitt (K.S sammanfattning, K.E enhetskoll) behåller sin
+      // Specialavsnitt (K.S, K.E, K.A avancerade exempel) behåller sin
       // bokstav; övriga numreras löpande efter positionen i listan.
-      const suffix = spec.fran && /\.(S|E)$/.test(spec.fran)
+      const suffix = spec.fran && /\.(S|E|A)$/.test(spec.fran)
         ? spec.fran.split('.')[1] : null;
       sec.num = suffix ? nr + '.' + suffix : nr + '.' + (++lopnr);
       if (spec.fran && !spec.egenTeori) {
@@ -1112,10 +1114,10 @@ window.MA3B_ALIAS = {};
       } else {
         sec = kopia(spec);
       }
-      // Specialavsnitt (K.S sammanfattning, K.E enhetskoll) behåller sin
+      // Specialavsnitt (K.S, K.E, K.A avancerade exempel) behåller sin
       // bokstav; övriga numreras löpande efter positionen i listan.
       const kalla = spec.fran || spec.num;
-      const suffix = kalla && /\.(S|E)$/.test(kalla) ? kalla.split('.')[1] : null;
+      const suffix = kalla && /\.(S|E|A)$/.test(kalla) ? kalla.split('.')[1] : null;
       sec.num = suffix ? nr + '.' + suffix : nr + '.' + (++lopnr);
       if (spec.fran && !spec.egenTeori) {
         window.MA3B_ALIAS['ma3b-' + sec.num] = 'ma3c-' + spec.fran;

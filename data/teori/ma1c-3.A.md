@@ -211,7 +211,7 @@ $$
 $$
 
 Eftersom $x > 0$ är $x^2 > 0$. Då är förändringsfaktorn
-$1 - x^2 < 1 ;Rightarrow$ priset blir lägre, vilket skulle visas.
+$1 - x^2 < 1 \Rightarrow$ priset blir lägre, vilket skulle visas.
 
 **b)** Priset är 9 % lägre, så den totala förändringsfaktorn är
 $1 - 0{,}09 = 0{,}91$. I a-uppgiften fick vi att den också är $1 - x^2$.

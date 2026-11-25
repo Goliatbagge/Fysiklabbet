@@ -19,6 +19,10 @@ $skript = Join-Path $PSScriptRoot 'ig-daglig.ps1'
 $action = New-ScheduledTaskAction -Execute 'powershell.exe' `
     -Argument "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$skript`""
 $trigger = New-ScheduledTaskTrigger -Daily -At 13:18
+# Lokal tid UTAN tidszon i StartBoundary: New-ScheduledTaskTrigger skriver annars
+# in aktuell UTC-forskjutning, och korningen hamnar en timme fel nar klockan
+# stalls om (felet marktes 2026-11-25, efter vintertiden 25 oktober).
+$trigger.StartBoundary = ([datetime]$trigger.StartBoundary).ToString('yyyy-MM-ddTHH:mm:ss')
 $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable `
     -ExecutionTimeLimit (New-TimeSpan -Minutes 30)
 $principal = New-ScheduledTaskPrincipal -UserId $env:USERNAME -LogonType Interactive

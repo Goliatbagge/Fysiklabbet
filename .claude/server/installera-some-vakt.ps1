@@ -26,6 +26,10 @@ $triggers = @(
     (New-ScheduledTaskTrigger -Daily -At 14:00),
     (New-ScheduledTaskTrigger -Daily -At 21:00)
 )
+# Lokal tid UTAN tidszon i StartBoundary: New-ScheduledTaskTrigger skriver annars
+# in aktuell UTC-forskjutning, och korningen hamnar en timme fel nar klockan
+# stalls om (felet marktes 2026-11-25, efter vintertiden 25 oktober).
+foreach ($t in $triggers) { $t.StartBoundary = ([datetime]$t.StartBoundary).ToString('yyyy-MM-ddTHH:mm:ss') }
 # 75 min: vakten kan behöva köra om båda jobben (30 min-gräns vardera).
 $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable `
     -ExecutionTimeLimit (New-TimeSpan -Minutes 75)

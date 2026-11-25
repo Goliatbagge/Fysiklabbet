@@ -20,6 +20,8 @@ $dolt = Join-Path $PSScriptRoot 'kor-dolt.vbs'
 $action = New-ScheduledTaskAction -Execute 'wscript.exe' `
     -Argument "//B //Nologo `"$dolt`" powershell.exe -NoProfile -ExecutionPolicy Bypass -File `"$skript`""
 $trigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Saturday -At 08:15
+# Lokal tid utan tidszon, annars en timme fel efter sommar-/vintertid (2026-11-25).
+$trigger.StartBoundary = ([datetime]$trigger.StartBoundary).ToString('yyyy-MM-ddTHH:mm:ss')
 $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable `
     -ExecutionTimeLimit (New-TimeSpan -Minutes 90)
 $principal = New-ScheduledTaskPrincipal -UserId $env:USERNAME -LogonType Interactive

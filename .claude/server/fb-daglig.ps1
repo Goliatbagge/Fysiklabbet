@@ -27,10 +27,13 @@ Logga '--- fb-daglig startar ---'
 
 # Chrome måste vara igång för att Claude-in-Chrome-utökningen ska svara.
 if (-not (Get-Process chrome -ErrorAction SilentlyContinue)) {
-    Logga 'Chrome kör inte - startar (minimerat).'
-    Start-Process 'chrome.exe' -WindowStyle Minimized
+    Logga 'Chrome kör inte - startar.'
+    Start-Process 'chrome.exe'
     Start-Sleep -Seconds 20
 }
+. (Join-Path $PSScriptRoot 'chrome-synligt.ps1')   # minimerat fonster ger inga skarmdumpar, se filen
+$antalFonster = AterstallChromeFonster
+if ($antalFonster -gt 0) { Logga "Aterstallde $antalFonster minimerade Chrome-fonster." }
 
 $claude = 'C:\Users\sam_s\AppData\Local\Microsoft\WinGet\Packages\Anthropic.ClaudeCode_Microsoft.Winget.Source_8wekyb3d8bbwe\claude.exe'
 if (-not (Test-Path $claude)) {

@@ -19,6 +19,8 @@ $dolt = Join-Path $PSScriptRoot 'kor-dolt.vbs'
 $action = New-ScheduledTaskAction -Execute 'wscript.exe' `
     -Argument "//B //Nologo `"$dolt`" powershell.exe -NoProfile -ExecutionPolicy Bypass -File `"$skript`""
 $triggers = @('07:30', '11:30', '17:45', '23:00') | ForEach-Object { New-ScheduledTaskTrigger -Daily -At $_ }
+# Lokal tid utan tidszon, annars en timme fel efter sommar-/vintertid (2026-11-25).
+foreach ($t in $triggers) { $t.StartBoundary = ([datetime]$t.StartBoundary).ToString('yyyy-MM-ddTHH:mm:ss') }
 $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable -ExecutionTimeLimit (New-TimeSpan -Minutes 10)
 $principal = New-ScheduledTaskPrincipal -UserId $env:USERNAME -LogonType Interactive
 

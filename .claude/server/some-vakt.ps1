@@ -115,15 +115,18 @@ function JobbStatus {
     $ig  = $false
     $fbL = $false
     $igL = $false
+    # Prefixet får följas av en parentes om en körning (omkörning, ny körning, sen körning), "nyhet (omkörning): postad".
+    # Utan den larmade vakten falskt 2026-11-25 (issue #27). Bara ASCII i mönstret.
+    $omk = '(?:\s*\([^)]*rning[^)]*\))?'
     foreach ($rad in (DagensSektion)) {
         $r = $rad.Trim()
-        if ($r -match '(?i)^ig-lansering\s*:\s*(.*)$') {
+        if ($r -match ('(?i)^ig-lansering' + $omk + '\s*:\s*(.*)$')) {
             if (StatusKlar $Matches[1] @('postad', 'ingen')) { $igL = $true }
-        } elseif ($r -match '(?i)^lansering\s*:\s*(.*)$') {
+        } elseif ($r -match ('(?i)^lansering' + $omk + '\s*:\s*(.*)$')) {
             if (StatusKlar $Matches[1] @('postad', 'ingen')) { $fbL = $true }
-        } elseif ($r -match '(?i)^ig-?nyhet\s*:\s*(.*)$') {
+        } elseif ($r -match ('(?i)^ig-?nyhet' + $omk + '\s*:\s*(.*)$')) {
             if (StatusKlar $Matches[1] @('postad', 'ingen artikel')) { $ig = $true }
-        } elseif ($r -match '(?i)^nyhet\s*:\s*(.*)$') {
+        } elseif ($r -match ('(?i)^nyhet' + $omk + '\s*:\s*(.*)$')) {
             if (StatusKlar $Matches[1] @('postad', 'ingen artikel')) { $fb = $true }
         }
     }

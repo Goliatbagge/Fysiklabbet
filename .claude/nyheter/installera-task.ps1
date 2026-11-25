@@ -100,6 +100,10 @@ $Settings = New-ScheduledTaskSettingsSet `
     -DontStopOnIdleEnd
 
 function Registrera([string]$TaskNamn, [string]$Lage, $Triggers, [string]$Beskrivning) {
+    # Lokal tid utan tidszon, annars en timme fel efter sommar-/vintertid (2026-11-25).
+    foreach ($t in @($Triggers)) {
+        if ($t.StartBoundary) { $t.StartBoundary = ([datetime]$t.StartBoundary).ToString('yyyy-MM-ddTHH:mm:ss') }
+    }
     Register-ScheduledTask -TaskName $TaskNamn -Action (Ny-Atgard $Lage) -Trigger $Triggers `
         -Principal $Principal -Settings $Settings -Description $Beskrivning -Force | Out-Null
     Write-Output "OK  $TaskNamn"

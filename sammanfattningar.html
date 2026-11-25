@@ -451,6 +451,8 @@ body.laborans { overflow: hidden; }
     for (const s of KF) {
         const kod = KURSKOD[s.course];
         if (!kod) continue;
+        // Avancerade exempel (K.A) hör inte till kapitlets sammanfattning.
+        if (String(s.num).endsWith('.A')) continue;
         const id = kod + '-' + s.num;
         const md = TEORI[id] !== undefined ? TEORI[id] : TEORI[ALIAS[id]];
         const sam = md ? hamtaSammanfattning(md) : null;

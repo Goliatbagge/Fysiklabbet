@@ -3803,6 +3803,8 @@
             // läggas till. Kortet visas bara om kapitlet har sådana rutor.
             const antalAvsnittsSam = isSummary
                 ? sections.filter(s => {
+                    // Avancerade exempel (K.A) ingår inte i bildspelet.
+                    if (String(s.num).endsWith('.A')) return false;
                     const md = TEORI[teoriId(course, s.num)];
                     return md && /^:::\s*sammanfattning\b/m.test(md);
                 }).length

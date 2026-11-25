@@ -1760,6 +1760,14 @@ i `kopplingsschema.js`; läs dem innan du ändrar något.
   kapitelsammanfattning (K.S) i `katalog.html`, som öppnar valrutan med
   kapitlet förkryssat (`?kurs=…&kap=…&val=1`). Kurser och kapitel läses ur
   katalogen, så sidan behöver inte ändras när avsnitt läggs till.
+  **⛔ Avancerade exempel (avsnitt K.A, till exempel `fy2-2.A`) hör ALDRIG
+  till kapitlets sammanfattning** (användarkrav 2026-11-25): de visas inte
+  i bildspelet och nämns inte i kapitelsammanfattningen (K.S),
+  repetitionspaketet eller enhetskollen. `sammanfattningar.html` hoppar
+  över alla avsnitt vars nummer slutar på `.A`, och `katalog.html` räknar
+  inte med dem; ta inte bort de villkoren. Samlas lösta exempel i ett
+  eget avsnitt ska det därför numreras K.A. Avsnittets egen
+  `::: sammanfattning` visas bara i avsnittet självt.
 - **`ovningsblad.html`** listar alla övningsblad ämne för ämne och kurs för
   kurs, direkt ur `data/ovningsblad.js` + `data/katalog.js`. Ett blad som
   registreras där syns alltså både på avsnittets kort och på översikten,

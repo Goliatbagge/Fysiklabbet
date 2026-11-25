@@ -17180,7 +17180,8 @@
       [['en bokstav.']]
     ], 0);
     y = 130;
-    T.str('a) Procentsatsen är x, x>0', padL, y, null, 0.62);
+    T.str('a) Andelen i decimalform', padL, y - 1.2 * F, null, 0.62);
+    T.str('är x, och x>0', padL, y, null, 0.62);
     T.stepEnd();
     y += 3.9 * F;
     T.str('Total förändringsfaktor', padL, y - 2.3 * F, null, 0.62);
@@ -17264,7 +17265,7 @@
       [['30 000 kr det sista året.']]
     ], 1.05);
     y += 4.6 * F;
-    T.str('Total ränta när räntesatsen är r', padL, y - 1.6 * F, null, 0.62);
+    T.str('Räntesatsen i decimalform är r. Total ränta:', padL, y - 1.6 * F, null, 0.62);
     T.str('r·240 000+r·210 000+...+r·30 000', padL, y, null, 0.86);
     T.stepEnd();
     tanke(y, [[['r finns i varje term. Jag']], [['bryter ut r.']]]);

@@ -201,7 +201,7 @@ typ: uppochned
 
 ::: textlosning
 **a)** Vi räknar med bokstäver, så att resultatet gäller alla procentsatser.
-Låt *x* vara procentsatsen i decimalform. Då är $x > 0$.
+Låt *x* vara andelen i decimalform som priset höjs och sänks med. Då är $x > 0$.
 
 Höjningen har förändringsfaktorn $1 + x$ och sänkningen $1 - x$. Den totala
 förändringsfaktorn är
@@ -336,7 +336,7 @@ $$
 ::: sampunkt "Okänd förändringsfaktor"
 - Samma förändring två gånger ger $x^2$.
 - En förändringsfaktor kan inte vara negativ.
-- Upp och ned med lika många procent: $(1 + x)(1 - x) = 1 - x^2$, alltid mindre än 1.
+- Upp och ned med andelen $x$ i decimalform: $(1 + x)(1 - x) = 1 - x^2$, alltid mindre än 1.
 :::
 
 ::: sampunkt "Ränta vid rak amortering"

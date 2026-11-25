@@ -210,9 +210,8 @@ $$
 (1 + x)(1 - x) = 1 - x + x - x^2 = 1 - x^2
 $$
 
-Eftersom $x > 0$ är $x^2 > 0$. Då är $1 - x^2 < 1$. En total
-förändringsfaktor som är mindre än 1 betyder att priset har blivit lägre,
-vilket skulle visas.
+Eftersom $x > 0$ är $x^2 > 0$. Då är förändringsfaktorn
+$1 - x^2 < 1 ;Rightarrow$ priset blir lägre, vilket skulle visas.
 
 **b)** Priset är 9 % lägre, så den totala förändringsfaktorn är
 $1 - 0{,}09 = 0{,}91$. I a-uppgiften fick vi att den också är $1 - x^2$.

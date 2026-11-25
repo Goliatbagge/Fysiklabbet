@@ -17215,7 +17215,7 @@
     T.str('x>0 ger att x^2>0', padL, y, null, 0.62);
     T.stepEnd();
     y += 1.4 * F;
-    T.str('Då är 1-x^2<1, alltså blir priset lägre', padL, y, null, 0.62);
+    T.str('Då är förändringsfaktorn 1-x^2<1 ⇒ priset blir lägre', padL, y, null, 0.62);
     T.stepEnd();
     /* b) */
     tanke(y, [

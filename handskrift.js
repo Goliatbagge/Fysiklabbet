@@ -17223,7 +17223,7 @@
       [['Den är också 1-x^2.']]
     ]);
     y += 4.0 * F;
-    T.str('b) Priset är 9 % lägre: faktorn är 0,91', padL, y - 1.6 * F, null, 0.62);
+    T.str('b) Priset är 9 % lägre: totala förändringsfaktorn är 0,91', padL, y - 1.6 * F, null, 0.62);
     T.str('1-x^2=0,91', padL, y);
     T.stepEnd();
     y = ekvOp(y, '-1', padL + T.adv('1-x^2=0,91') + 0.9 * F, '1-x^2=0,91', { dyVagg: 2.4, dyRes: 2.4 });

@@ -103,6 +103,69 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-27-kratern-efter-dart",
+    date: "2026-11-27",
+    title: "Smällen från DART lämnade en krater lika bred som hela asteroiden",
+    deck: "För fyra år sedan körde NASA:s rymdsond DART med flit in i den lilla asteroiden Dimorphos och knuffade den till en ny bana. Nu har den europeiska rymdsonden Hera kommit fram och tagit de första närbilderna av följderna: en tillplattad sida, en asteroid som tumlar och hundratals stenblock som kretsar runt asteroidparet.",
+    category: "Mekanik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-11-27-kratern-efter-dart.jpg",
+    imageAlt: "Två grå asteroider mot svart rymd. Uppe till vänster en liten, oval och knölig kropp, Dimorphos. Nere till höger en mycket större kropp, Didymos, täckt av grus och stenblock och med en skarp ås tvärs över ytan.",
+    imageCredit: "Foto: ESA/Hera Asteroid Framing Camera (©ESA, används enligt ESA:s villkor för utbildning och information), beskuren. Dimorphos uppe till vänster, Didymos nere till höger.",
+    tags: ["mekanik", "rörelsemängd", "rörelsemängdens bevarande", "impuls", "stöt", "asteroid", "dimorphos", "didymos", "dart", "hera", "esa", "nasa", "planetförsvar", "dubbelasteroid", "krater", "gravitation", "omloppstid", "keplers lagar", "lockne"],
+    sources: [
+      { name: "ESA: Hera reveals stadium-sized asteroid crater from spacecraft impact (25 november 2026)", url: "https://www.esa.int/articles/about-us/directorates/operations/space-safety/hera/hera-reveals-stadium-sized-asteroid-crater-left-after-spacecraft-impact" },
+      { name: "ESA: Hera Media Kit (uppdaterad november 2026, pdf)", url: "https://media.esa.int/global/public/common/misc/2026/11/hera-media-kit-november-2026-updated-1795619216.pdf" },
+      { name: "Physics World: Close-up images reveal giant DART impact crater on asteroid Dimorphos (25 november 2026)", url: "https://physicsworld.com/a/close-up-images-reveal-giant-dart-impact-crater-on-asteroid-dimorphos/" },
+      { name: "Ormö m.fl., ”First known Terrestrial Impact of a Binary Asteroid from a Main Belt Breakup Event”, Scientific Reports 4, 6724 (2014)", url: "https://doi.org/10.1038/srep06724" }
+    ],
+    research: {
+      citation: "A. F. Cheng, H. F. Agrusa, B. W. Barbee m.fl., ”Momentum transfer from the DART mission kinetic impact on asteroid Dimorphos”, Nature 616, 457–460 (2023). Kollegialt granskad och öppet tillgänglig (CC BY 4.0). Bilderna från Hera är ännu inte publicerade i någon granskad studie; uppgifterna om dem kommer från ESA.",
+      url: "https://doi.org/10.1038/s41586-023-05878-z"
+    },
+    simulering: {
+      href: "fysik1-stotar-app.html",
+      name: "Elastisk och oelastisk stöt",
+      text: "Låt två kroppar krocka, elastiskt eller så att de fastnar i varandra, och se hur rörelsemängden fördelas mellan dem medan summan hela tiden är densamma."
+    },
+    larare: {
+      moment: [
+        { label: "Rörelsemängd och impuls", href: "katalog.html?id=fy1-4.7" },
+        { label: "Rörelsemängdens bevarande", href: "katalog.html?id=fy1-4.8" },
+        { label: "Gravitationslagen", href: "katalog.html?id=fy1-3.5" }
+      ],
+      fragor: [
+        "DART hade massan 579,4 kg och farten 6,1 km/s när den träffade. Beräkna sondens rörelsemängd. Hur kan Dimorphos ha fått ungefär 3,6 gånger så stor rörelsemängd som sonden hade, utan att rörelsemängden i systemet ökade?",
+        "DART bromsade Dimorphos i dess bana runt Didymos. Förklara varför omloppstiden då blev kortare och inte längre.",
+        "Faktorn β går inte att bestämma utan att man känner till Dimorphos massa. Hur kan man mäta massan hos en himlakropp genom att studera hur något annat rör sig i dess närhet?"
+      ]
+    },
+    body: [
+      { type: "p", html: "Den 26 september 2022 körde NASA:s rymdsond DART med flit in i den lilla asteroiden Dimorphos, i drygt sex kilometer per sekund. Det var första gången människan försökt flytta en himlakropp, och det lyckades över förväntan: Dimorphos varv runt den större asteroiden Didymos blev 33&nbsp;minuter kortare. Teleskop på jorden kunde mäta den nya banan, men hur asteroiden själv klarat smällen har ingen kunnat se." },
+      { type: "p", html: "Nu har den europeiska rymdsonden Hera kommit fram. Den 25 november visade den europeiska rymdorganisationen ESA de första närbilderna av Dimorphos, och de bjöd på flera överraskningar. Sidan som DART träffade har plattats till av en krater stor som en idrottsarena, som sträcker sig över hela asteroidens bredd. Resten av ytan ser ut som på DART:s bilder från 2022, täckt av stenblock. Men Dimorphos tumlar nu oregelbundet i sin bana, och runt asteroidparet kretsar hundratals stenblock, bara några meter stora, som ingen kände till. Resultaten är ännu inte publicerade i någon granskad vetenskaplig studie." },
+      { type: "quote", html: "Forskarna diskuterade om Dimorphos hade fått en nedslagskrater, ändrat form eller förblivit som förut. Till vår stora förvåning visar det sig att svaret är alla tre på en gång!", cite: "Patrick Michel, CNRS och Observatoire de la Côte d’Azur, huvudforskare för Hera (i ESA:s pressmeddelande, översatt från engelska)" },
+      { type: "h2", text: "En asteroid som aldrig var ett hot" },
+      { type: "p", html: "Dimorphos är 151&nbsp;meter i diameter och kretsar runt Didymos, som är ungefär fem gånger så bred. Paret ligger i dag drygt 190&nbsp;miljoner kilometer från jorden och har aldrig varit på väg mot oss. Det valdes för att det är en dubbelasteroid: Dimorphos går ett varv runt Didymos på knappt tolv timmar, och en ändring av den omloppstiden går att mäta från jorden. Försöket skulle visa om man kan knuffa undan en farlig asteroid genom att helt enkelt köra in i den, något som kallas planetförsvar." },
+      { type: "h2", text: "Knuffen som blev större än stöten" },
+      { type: "p", html: "DART vägde 579,4&nbsp;kg när den träffade och hade farten 6,1&nbsp;km/s i förhållande till Dimorphos. Sondens rörelsemängd var alltså $p = m \\cdot v \\approx 579{,}4\\ \\mathrm{kg} \\cdot 6\\,145\\ \\mathrm{m/s} \\approx 3{,}6 \\cdot 10^{6}\\ \\mathrm{kg \\cdot m/s}$. Hade sonden bara fastnat i asteroiden, som en lerklump som fastnar på en vägg, hade det varit hela knuffen. Men smällen kastade ut stora mängder sten och stoft. Molnet av utkastat material sträckte sig mer än 10&nbsp;000&nbsp;kilometer ut i rymden och syntes i flera månader." },
+      { type: "p", html: "Materialet kastades ut bakåt, ungefär åt det håll som DART kom ifrån. Eftersom rörelsemängden i systemet bevaras fick asteroiden då en extra knuff i motsatt riktning, på samma sätt som ett gevär får en rekyl när kulan skjuts ut. Hur stor knuffen blev beskrivs med faktorn $\\beta$ (beta): hur många gånger större rörelsemängd asteroiden fick än sonden hade. Om $\\beta = 1$ hade allt kommit från sonden." },
+      { type: "p", html: "Ur den ändrade omloppstiden räknade forskare kring Andrew Cheng vid Johns Hopkins University i Maryland 2023 ut att Dimorphos fart i banans riktning minskade med 2,70&nbsp;millimeter per sekund, knappt tio meter i timmen. Om Dimorphos har samma densitet som Didymos, omkring 2&nbsp;400&nbsp;kg/m³, ger det $\\beta \\approx 3{,}6$. Asteroiden fick alltså ungefär 3,6 gånger så stor rörelsemängd som sonden hade, och nästan tre fjärdedelar av knuffen kom från det utkastade materialet." },
+      { type: "p", html: "Att omloppstiden blev kortare kan låta bakvänt, eftersom DART bromsade asteroiden. Men med lägre fart är Didymos dragningskraft större än vad som behövs för att hålla Dimorphos kvar i den gamla banan, så Dimorphos faller en aning inåt, till en mindre bana. En mindre bana har kortare omloppstid, så varvet minskade från 11&nbsp;timmar och 55&nbsp;minuter till ungefär 11&nbsp;timmar och 22&nbsp;minuter." },
+      { type: "h2", text: "Massan är den saknade pusselbiten" },
+      { type: "p", html: "Faktorn $\\beta$ är ändå osäker, eftersom ingen vet hur mycket Dimorphos väger. Med en densitet mellan 1&nbsp;500 och 3&nbsp;300&nbsp;kg/m³ hamnar $\\beta$ någonstans mellan 2,2 och 4,9. Att mäta massan är därför ett av Heras viktigaste uppdrag. Det ska göras på två sätt. Dels följer man stenblock på Didymos yta för att se hur den större asteroiden vickar fram och tillbaka när den och Dimorphos kretsar kring sin gemensamma tyngdpunkt. Dels mäter man små dopplerförskjutningar i Heras radiosignal, som visar hur mycket asteroiderna drar i rymdsonden." },
+      { type: "p", html: "Dragningen är mycket svag. Gravitationen på Didymos är omkring en fyrtiotusendel av den på jorden och på Dimorphos bara omkring en tvåhundratusendel. Hera går därför inte i en vanlig omloppsbana runt asteroiderna. I stället flyger sonden i rektangulära banor 25 till 30&nbsp;kilometer bort, med en medelfart på bara 12&nbsp;centimeter per sekund, och håller sig i dem med hjälp av sina små raketmotorer." },
+      { type: "image", src: "nyheter/bilder/2026-11-27-kratern-efter-dart-2.jpg", alt: "En svart bild full av små vita prickar som bildar korta, prickade spår i olika riktningar. Mitt i bilden finns några mörka, utslätade fält utan prickar.", caption: "En långexponerad bild från Heras kamera Hyperscout&nbsp;H. De prickade spåren är några av de hundratals stenblock, bara några meter stora, som kretsar runt asteroidparet.", credit: "Bild: ESA/Hera Hyperscout H (©ESA, används enligt ESA:s villkor för utbildning och information)" },
+      { type: "h2", text: "Närmare i december" },
+      { type: "p", html: "Bilderna är början på undersökningen, inte slutet. I december ska Hera gå in till omkring 13&nbsp;kilometer från asteroiderna, och i januari 2027 släpper sonden två små satelliter, så kallade cubesats, stora som skokartonger. Den ena, Juventas, ska med radar se in i en asteroid för första gången och till sist försöka landa. Den andra, Milani, ska undersöka asteroidernas material och stoftet runt dem. De nyupptäckta stenblocken måste teamet ta hänsyn till när sonderna flyttar närmare." },
+      { type: "quote", html: "För sextiosex miljoner år sedan ändrade ett asteroidnedslag livets utveckling på jorden. I dag prövar mänskligheten för första gången i historien hur man kan förhindra att en sådan händelse inträffar igen.", cite: "Ian Carnelli, ESA, ansvarig för Hera-uppdraget, när bilderna visades i dinosauriesalen på Museum für Naturkunde i Berlin (översatt från engelska)" },
+      { type: "fact", title: "Visste du?", items: [
+        "Hera sköts upp den 7 oktober 2024. Sonden är ungefär lika stor som en småbil och vägde omkring 1&nbsp;081&nbsp;kg med full tank.",
+        "Gravitationen på Dimorphos är bara omkring en tvåhundratusendel av den på jorden, ungefär 5&nbsp;·&nbsp;10<sup>−5</sup>&nbsp;m/s². En sten som släpps från en meters höjd skulle behöva drygt tre minuter för att nå marken, om man bortser från att asteroiden roterar.",
+        "Även Sverige har spår av en dubbelasteroid. Lockne- och Målingenkratrarna i Jämtland bildades samtidigt för omkring 458&nbsp;miljoner år sedan, när en asteroid och dess följeslagare slog ner i ett hav som var omkring 500&nbsp;meter djupt. Forskarna bakom upptäckten kallar det det första kända nedslaget av en dubbelasteroid på jorden."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-26-vattnet-som-slits-isar",
     date: "2026-11-26",
     title: "Vattenmolekylen slits isär innan elektronerna hunnit fylla hålet",

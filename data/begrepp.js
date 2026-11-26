@@ -63,6 +63,42 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'planetforsvar',
+    term: 'Planetförsvar',
+    former: ['planetförsvar', 'planetförsvaret', 'planetförsvarsuppdrag', 'planetförsvarsuppdraget'],
+    kort: 'Arbetet med att hitta asteroider och kometer som kan träffa jorden och att utveckla sätt att få dem att missa.',
+    relaterade: ['asteroid', 'dubbelasteroid', 'rorelsemangd'],
+    body: [
+      { type: 'p', html: 'Jorden träffas hela tiden av sten från rymden. Det mesta är små korn som brinner upp som stjärnfall, men ibland kommer något större. För 66&nbsp;miljoner år sedan slog en omkring tio kilometer stor kropp ner i nuvarande Mexiko och bidrog till att dinosaurierna dog ut. Planetförsvar handlar om att se nästa stora sten i god tid och om att ha en plan för vad man gör då.' },
+      { type: 'p', html: 'Första steget är att leta. Teleskop fotograferar himlen natt efter natt, och ett föremål som flyttar sig mellan bilderna mot stjärnorna i bakgrunden kan vara en asteroid. Ur flera mätningar av positionen räknar man ut banan och kan sedan räkna framåt i tiden: kommer den nära jorden, och hur nära? Ju tidigare en farlig asteroid upptäcks, desto mindre knuff behövs för att få den att missa, eftersom en liten ändring av farten hinner växa till ett stort avstånd under många varv runt solen.' },
+      { type: 'p', html: 'Det enklaste sättet att ge knuffen är att köra in i asteroiden med en tung rymdsond i hög fart. Rörelsemängden förs över vid smällen, och utkastat material ger asteroiden en extra skjuts åt samma håll. Metoden prövades för första gången 2022, när NASA:s sond DART körde in i den lilla asteroiden Dimorphos och ändrade dess bana. Andra idéer är att låta en tung rymdsond dra asteroiden åt sidan med sin gravitation eller att värma upp ytan så att material kokar bort. Inget av dem har prövats på riktigt.' }
+    ]
+  },
+  {
+    id: 'dubbelasteroid',
+    term: 'Dubbelasteroid',
+    former: ['dubbelasteroid', 'dubbelasteroiden', 'dubbelasteroider', 'dubbelasteroiderna', 'binär asteroid', 'binära asteroiden', 'binära asteroider', 'asteroidpar', 'asteroidparet', 'asteroidparen'],
+    kort: 'Två asteroider som kretsar runt varandra, ofta en stor och en mindre följeslagare, en asteroidmåne.',
+    relaterade: ['asteroid', 'planetforsvar'],
+    body: [
+      { type: 'p', html: 'Länge trodde man att asteroider var ensamma stenar. Men 1993 flög rymdsonden Galileo förbi asteroiden Ida på väg till Jupiter och fick syn på en liten måne som kretsade runt den. I dag tror man att omkring var sjätte eller sjunde asteroid har minst en följeslagare. Paret hålls ihop av sin gemensamma gravitation, precis som jorden och månen, fast krafterna är mycket svagare.' },
+      { type: 'p', html: 'Hur sådana par bildas är inte helt klarlagt. En förklaring är att solljuset får en asteroid att snurra allt fortare under miljontals år. Ytan värms av solen och strålar ut värmen igen, och eftersom asteroiden har en oregelbunden form strålar den ut lite mer åt ena hållet än åt det andra. Det ger ett litet vridande moment, som efter hand får den att snurra fortare. Snurrar den till slut tillräckligt fort kan grus och sten slungas ut från ekvatorn och samlas till en egen liten måne. Många större asteroider i par har därför formen av en snurra, med en ås runt midjan.' },
+      { type: 'p', html: 'För forskare är dubbelasteroider praktiska. Ur hur snabbt den lilla asteroiden går runt den stora och hur långt ifrån den befinner sig kan man räkna ut massan, på samma sätt som man bestämmer solens massa ur jordens bana. En ändring av banan går också att mäta från jorden, eftersom den lilla asteroiden regelbundet skymmer den stora eller hamnar i dess skugga. Därför valdes dubbelasteroiden Didymos och Dimorphos när NASA 2022 för första gången försökte knuffa en asteroid ur sin bana.' }
+    ]
+  },
+  {
+    id: 'dopplerforskjutning',
+    term: 'Dopplerförskjutning',
+    former: ['dopplerförskjutning', 'dopplerförskjutningen', 'dopplerförskjutningar', 'dopplerförskjutningarna', 'dopplereffekt', 'dopplereffekten', 'dopplerskift', 'dopplerskiftet'],
+    kort: 'Att frekvensen hos en våg ändras när källan och mottagaren rör sig mot eller från varandra. Ändringen avslöjar farten.',
+    relaterade: ['asteroid'],
+    body: [
+      { type: 'p', html: 'Alla har hört det: en ambulans som kör förbi låter ljusare när den kommer mot dig och mörkare när den åker bort. Sirenen ändras inte, men när ambulansen närmar sig hinner den köra en bit mellan varje våg den skickar ut. Vågorna packas tätare, fler hinner fram varje sekund, och frekvensen blir högre. När den åker bort dras vågorna ut, och frekvensen blir lägre. Fenomenet beskrevs av österrikaren Christian Doppler 1842.' },
+      { type: 'p', html: 'Samma sak händer med ljus och radiovågor. Rör sig en stjärna bort från oss förskjuts dess ljus mot längre våglängder, mot det röda, och rör den sig mot oss förskjuts det mot det blå. Ju större farten är, desto större blir förskjutningen. Det gör att man kan mäta hur fort något rör sig längs synlinjen utan att se det röra sig alls, bara genom att mäta frekvensen noga.' },
+      { type: 'p', html: 'Metoden används överallt: i polisens fartmätare, i väderradar som ser hur regnet blåser, i ultraljud som mäter blodets flöde och i astronomi, där den avslöjade att universum expanderar. Rymdsonder mäts på samma sätt. Ändras frekvensen i radiosignalen från en sond en aning har dess fart ändrats, till exempel för att en planet eller en asteroid drar i den med sin gravitation, och ur dragningen kan man räkna ut himlakroppens massa.' }
+    ]
+  },
+  {
     id: 'granulart-material',
     term: 'Granulärt material',
     former: ['granulärt material', 'granulära material', 'granulära materialet', 'granulära materialen', 'granulär gas', 'granulära gasen', 'granulär temperatur', 'granulära temperaturen'],

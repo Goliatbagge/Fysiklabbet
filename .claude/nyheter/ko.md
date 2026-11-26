@@ -15,6 +15,12 @@ Format per post:
 - **Ett meddelande genom gravitationen: en hiss och en gravimeter skickade ordet ”Gravity” genom en tegelvägg (University of Queensland)** **[BREVTEASER]** (nominerad 2026-11-22 när KM3NeT-teasern löstes in: ett ord skickat genom en tegelvägg med en hiss som motvikt och en gravimeter som mottagare, lätt att sammanfatta; läs förtrycket arXiv 2511.16710 i fulltext före publicering) — gravitation/mekanik, perfekt gymnasiekoppling (Newtons gravitationslag, motvikten 1,8 ton som växlar mellan två våningar = 0 och 1). Valdes bort 2026-11-21 enbart för att 2026-11-20 också handlade om att skicka meddelanden (värmebrus); ta tidigast 2026-11-22. Woffinden med flera, Science Advances 2026, DOI 10.1126/sciadv.aee0802 (science.org ger 403 för curl); ÖPPET förtryck arXiv 2511.16710 (”Unblockable Communication With Gravity”). Källa (Phys.org 2026-11-18): https://phys.org/news/2026-11-physicists-unblockable-message-gravity.html
   (tillagd 2026-11-20)
 
+- **Koherent elastisk neutrino–kärnspridning mätt med rekordprecision, skärper gränserna för nya krafter** — partikelfysik/neutriner; OBS neutriner 2026-11-23, vänta minst en vecka. Originalet ej kontrollerat. Källa (Phys.org 2026-11-26): https://phys.org/news/2026-11-precise-coherent-elastic-neutrinonucleus-date.html
+  (tillagd 2026-11-26)
+
+- **Magnetisk rekonnektion återskapad i labbet (Physics Magazine, Physics 19, 158)** — plasmafysik, kopplar till solutbrott och norrsken; OBS plasmafysik 2026-11-24, vänta några dagar. Originalet ej kontrollerat. Källa: https://link.aps.org/doi/10.1103/Physics.19.158
+  (tillagd 2026-11-26)
+
 - **Hall-effekt utan magnetfält: stark elektrisk spänning ger en tvärström i en topologisk halvmetall (Rice University och TU Wien, Qimiao Si)** — ellära/kvantmaterial, kopplar till Halleffekten och laddningar i magnetfält. Sur, Chen, Wang, Setty, Paschen och Si, ”Fully Nonequilibrium Hall Response from Berry Curvature”, PRL 2026, DOI 10.1103/cj8b-4sp4; ÖPPET förtryck arXiv 2411.16675 (läst 2026-11-24: ren teori om Berrykrökning, abstrakt för gymnasiet; behöver en konkret ingång). Källa (Phys.org 2026-11-24): https://phys.org/news/2026-11-magnets-extreme-voltage-kind-hall.html
   (tillagd 2026-11-24)
 

@@ -64111,7 +64111,7 @@ $$ E = \\frac{120 \\cdot 0{,}15^2}{2} = \\frac{120 \\cdot 0{,}0225}{2} = 1{,}35\
 
 **Svar:** Energin är $1{,}35\\ \\mathrm{J}$.
 
-**Generell slutsats:** Lagrad energi växer med *kvadraten* på utslaget — dubbel utdragning ger fyra gånger så mycket energi.`,
+**Generell slutsats:** Lagrad energi växer med *kvadraten* på utslaget: dubbel utdragning ger fyra gånger så mycket energi.`,
         },
         {
             level: 1,
@@ -64260,7 +64260,7 @@ $$ E_\\text{värme} = 0{,}14175 - 0{,}04375 = 0{,}098\\ \\mathrm{J} $$
 
 **Svar:** Ungefär $0{,}098\\ \\mathrm{J}$ har omvandlats till värme.
 
-**Generell slutsats:** I en dämpad svängning minskar amplituden över tid, och energiförlusten är inte linjär i amplituden — eftersom *E* ∝ *A*² är förlusten kvadratiskt fördelad.`,
+**Generell slutsats:** I en dämpad svängning minskar amplituden över tid, och energiförlusten är inte linjär i amplituden, eftersom *E* ∝ *A*² är förlusten kvadratiskt fördelad.`,
         },
         {
             level: 2,
@@ -64302,7 +64302,7 @@ ${makeProjectile({ kind: 'horizontal', hLabel: 'h = 1,6 m', xLabel: 'x = 24 m'
             answer: { value: 0.033, unit: 'kg' },
             solution: `Uppgiften kombinerar **fjäderenergi**, **energiomvandling** och **horisontellt kast**.
 
-**Steg 1 — pilens utgångsfart ur kasträkning.** Fallhöjden ger falltiden via $h = \\dfrac{1}{2}gt^2$:
+**Steg 1: pilens utgångsfart ur kasträkning.** Fallhöjden ger falltiden via $h = \\dfrac{1}{2}gt^2$:
 
 $$ t = \\sqrt{\\frac{2h}{g}} = \\sqrt{\\frac{2 \\cdot 1{,}6}{9{,}82}} = 0{,}5712\\ \\mathrm{s} $$
 
@@ -64310,13 +64310,13 @@ Under den tiden går pilen sträckan *x* horisontellt med konstant fart $v_0$:
 
 $$ v_0 = \\frac{x}{t} = \\frac{24}{0{,}5712} = 42{,}02\\ \\mathrm{m/s} $$
 
-**Steg 2 — spännenergin i pilbågen.** Med Hookes lag är fjäderkonstanten $k = F/A = 180/0{,}32 = 562{,}5\\ \\mathrm{N/m}$. Spännenergin är
+**Steg 2: spännenergin i pilbågen.** Med Hookes lag är fjäderkonstanten $k = F/A = 180/0{,}32 = 562{,}5\\ \\mathrm{N/m}$. Spännenergin är
 
 $$ E = \\frac{k \\cdot A^2}{2} = \\frac{562{,}5 \\cdot 0{,}32^2}{2} = 28{,}8\\ \\mathrm{J} $$
 
 (Alternativ: triangelarean $E = \\dfrac{1}{2}FA = \\dfrac{1}{2}\\cdot 180\\cdot 0{,}32 = 28{,}8\\ \\mathrm{J}$.)
 
-**Steg 3 — energiprincipen.** All spännenergi omvandlas till pilens rörelseenergi:
+**Steg 3: energiprincipen.** All spännenergi omvandlas till pilens rörelseenergi:
 
 $$ E = \\frac{m \\cdot v_0^2}{2} \\quad\\Leftrightarrow\\quad m = \\frac{2E}{v_0^2} $$
 
@@ -64334,6 +64334,622 @@ $$ m = \\frac{2 \\cdot 28{,}8}{42{,}02^2} = \\frac{57{,}6}{1766} \\approx 0{,}03
 
 **Generell slutsats:** Tre olika delar måste falla på plats: (1) kasträkning ger pilens utgångsfart, (2) Hookes lag (eller triangelarean) ger spännenergin, (3) energiprincipen kopplar ihop dem. Att se *vilka tre principer* som hör till samma uppgift är hela nivåhöjningen.`,
         },
+        {
+            level: 1,
+            question: `En vikt svänger upp och ned i en fjäder med amplituden $A$. Vikten sätts sedan i svängning i samma fjäder med amplituden $3A$. Hur många gånger större blir svängningsenergin?`,
+            choices: [
+                '3 gånger större',
+                '6 gånger större',
+                '9 gånger större',
+                '27 gånger större',
+            ],
+            correct: 2,
+            solution: `Svängningsenergin beror på amplituden enligt
+
+$$ E = \\frac{k \\cdot A^2}{2} $$
+
+Fjädern är densamma, så $k$ ändras inte. Med amplituden $3A$ blir energin
+
+$$ E_\\mathrm{ny} = \\frac{k \\cdot (3A)^2}{2} = \\frac{k \\cdot 9A^2}{2} = 9 \\cdot \\frac{k \\cdot A^2}{2} = 9 \\cdot E $$
+
+Energin växer med kvadraten på amplituden, så tre gånger så stor amplitud ger $3^2 = 9$ gånger så stor energi.
+
+**Svar:** Alternativ C, 9 gånger större.`,
+        },
+        {
+            level: 1,
+            question: `Fyra likadana fjädrar, var och en med fjäderkonstanten $360\\ \\mathrm{N/m}$, seriekopplas så att de sitter efter varandra. Bestäm den resulterande fjäderkonstanten. Svara i N/m.`,
+            answer: { value: 90, unit: 'N/m' },
+            solution: `Fjädrarna sitter efter varandra, så samma kraft verkar på var och en av dem. För $n$ likadana seriekopplade fjädrar gäller
+
+$$ k_\\mathrm{R} = \\frac{k}{n} $$
+
+$$
+\\left[ \\begin{array}{l}
+k = 360\\ \\mathrm{N/m} \\\\
+n = 4
+\\end{array} \\right]
+$$
+
+$$ k_\\mathrm{R} = \\frac{360}{4} = 90\\ \\mathrm{N/m} $$
+
+**Rimlighet:** Seriekopplingen är mjukare än en ensam fjäder, och $90\\ \\mathrm{N/m}$ är mindre än $360\\ \\mathrm{N/m}$.
+
+**Svar:** $90\\ \\mathrm{N/m}$`,
+        },
+        {
+            level: 1,
+            question: `En vikt svänger upp och ned i en fjäder med fjäderkonstanten $64\\ \\mathrm{N/m}$. Diagrammet visar viktens elongation $y$ som funktion av tiden $t$. Bestäm svängningsenergin. Svara i J.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 320" width="600" height="384" role="img" aria-label="Elongationen y i cm som funktion av tiden t i s for en vikt som svanger i en fjader" style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="58" y1="34" x2="58" y2="290" stroke="#d5d2cb" stroke-width="1"/><line x1="98.2" y1="34" x2="98.2" y2="290" stroke="#d5d2cb" stroke-width="1"/><line x1="138.4" y1="34" x2="138.4" y2="290" stroke="#d5d2cb" stroke-width="1"/><line x1="178.6" y1="34" x2="178.6" y2="290" stroke="#d5d2cb" stroke-width="1"/><line x1="218.8" y1="34" x2="218.8" y2="290" stroke="#d5d2cb" stroke-width="1"/><line x1="259" y1="34" x2="259" y2="290" stroke="#d5d2cb" stroke-width="1"/><line x1="299.2" y1="34" x2="299.2" y2="290" stroke="#d5d2cb" stroke-width="1"/><line x1="339.4" y1="34" x2="339.4" y2="290" stroke="#d5d2cb" stroke-width="1"/><line x1="379.6" y1="34" x2="379.6" y2="290" stroke="#d5d2cb" stroke-width="1"/><line x1="419.8" y1="34" x2="419.8" y2="290" stroke="#d5d2cb" stroke-width="1"/><line x1="460" y1="34" x2="460" y2="290" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="290" x2="460" y2="290" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="268.7" x2="460" y2="268.7" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="247.3" x2="460" y2="247.3" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="226" x2="460" y2="226" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="204.7" x2="460" y2="204.7" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="183.3" x2="460" y2="183.3" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="162" x2="460" y2="162" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="140.7" x2="460" y2="140.7" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="119.3" x2="460" y2="119.3" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="98" x2="460" y2="98" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="76.7" x2="460" y2="76.7" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="55.3" x2="460" y2="55.3" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="34" x2="460" y2="34" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="162" x2="467" y2="162" stroke="#0f1620" stroke-width="1.8"/><polygon points="467,166.3 476,162 467,157.7" fill="#0f1620"/><line x1="58" y1="290" x2="58" y2="27" stroke="#0f1620" stroke-width="1.8"/><polygon points="62.3,27 58,18 53.7,27" fill="#0f1620"/><text x="138.4" y="180" font-size="13" fill="#0f1620" text-anchor="middle">0,4</text><text x="218.8" y="180" font-size="13" fill="#0f1620" text-anchor="middle">0,8</text><text x="299.2" y="180" font-size="13" fill="#0f1620" text-anchor="middle">1,2</text><text x="379.6" y="180" font-size="13" fill="#0f1620" text-anchor="middle">1,6</text><text x="460" y="180" font-size="13" fill="#0f1620" text-anchor="middle">2</text><text x="51" y="295" font-size="13" fill="#0f1620" text-anchor="end">−6</text><text x="51" y="252.3" font-size="13" fill="#0f1620" text-anchor="end">−4</text><text x="51" y="209.7" font-size="13" fill="#0f1620" text-anchor="end">−2</text><text x="51" y="167" font-size="13" fill="#0f1620" text-anchor="end">0</text><text x="51" y="124.3" font-size="13" fill="#0f1620" text-anchor="end">2</text><text x="51" y="81.7" font-size="13" fill="#0f1620" text-anchor="end">4</text><text x="51" y="39" font-size="13" fill="#0f1620" text-anchor="end">6</text><text x="494" y="153" font-size="14" fill="#0f1620" text-anchor="end"><tspan font-style="italic">t</tspan> (s)</text><text x="68" y="24" font-size="14" fill="#0f1620" text-anchor="start"><tspan font-style="italic">y</tspan> (cm)</text><path d="M 58 55.3 L 59 55.4 L 60 55.7 L 61 56.1 L 62 56.6 L 63 57.4 L 64 58.3 L 65 59.3 L 66 60.6 L 67 61.9 L 68 63.5 L 69.1 65.1 L 70.1 67 L 71.1 68.9 L 72.1 71.1 L 73.1 73.3 L 74.1 75.7 L 75.1 78.2 L 76.1 80.9 L 77.1 83.7 L 78.1 86.6 L 79.1 89.6 L 80.1 92.7 L 81.1 96 L 82.1 99.3 L 83.1 102.7 L 84.1 106.3 L 85.1 109.9 L 86.1 113.6 L 87.1 117.3 L 88.2 121.2 L 89.2 125.1 L 90.2 129 L 91.2 133 L 92.2 137.1 L 93.2 141.2 L 94.2 145.3 L 95.2 149.5 L 96.2 153.6 L 97.2 157.8 L 98.2 162 L 99.2 166.2 L 100.2 170.4 L 101.2 174.5 L 102.2 178.7 L 103.2 182.8 L 104.2 186.9 L 105.2 191 L 106.2 195 L 107.2 198.9 L 108.3 202.8 L 109.3 206.7 L 110.3 210.4 L 111.3 214.1 L 112.3 217.7 L 113.3 221.3 L 114.3 224.7 L 115.3 228 L 116.3 231.3 L 117.3 234.4 L 118.3 237.4 L 119.3 240.3 L 120.3 243.1 L 121.3 245.8 L 122.3 248.3 L 123.3 250.7 L 124.3 252.9 L 125.3 255.1 L 126.3 257 L 127.3 258.9 L 128.3 260.5 L 129.4 262.1 L 130.4 263.4 L 131.4 264.7 L 132.4 265.7 L 133.4 266.6 L 134.4 267.4 L 135.4 267.9 L 136.4 268.3 L 137.4 268.6 L 138.4 268.7 L 139.4 268.6 L 140.4 268.3 L 141.4 267.9 L 142.4 267.4 L 143.4 266.6 L 144.4 265.7 L 145.4 264.7 L 146.4 263.4 L 147.4 262.1 L 148.4 260.5 L 149.5 258.9 L 150.5 257 L 151.5 255.1 L 152.5 252.9 L 153.5 250.7 L 154.5 248.3 L 155.5 245.8 L 156.5 243.1 L 157.5 240.3 L 158.5 237.4 L 159.5 234.4 L 160.5 231.3 L 161.5 228 L 162.5 224.7 L 163.5 221.3 L 164.5 217.7 L 165.5 214.1 L 166.5 210.4 L 167.5 206.7 L 168.6 202.8 L 169.6 198.9 L 170.6 195 L 171.6 191 L 172.6 186.9 L 173.6 182.8 L 174.6 178.7 L 175.6 174.5 L 176.6 170.4 L 177.6 166.2 L 178.6 162 L 179.6 157.8 L 180.6 153.6 L 181.6 149.5 L 182.6 145.3 L 183.6 141.2 L 184.6 137.1 L 185.6 133 L 186.6 129 L 187.6 125.1 L 188.7 121.2 L 189.7 117.3 L 190.7 113.6 L 191.7 109.9 L 192.7 106.3 L 193.7 102.7 L 194.7 99.3 L 195.7 96 L 196.7 92.7 L 197.7 89.6 L 198.7 86.6 L 199.7 83.7 L 200.7 80.9 L 201.7 78.2 L 202.7 75.7 L 203.7 73.3 L 204.7 71.1 L 205.7 68.9 L 206.7 67 L 207.7 65.1 L 208.8 63.5 L 209.8 61.9 L 210.8 60.6 L 211.8 59.3 L 212.8 58.3 L 213.8 57.4 L 214.8 56.6 L 215.8 56.1 L 216.8 55.7 L 217.8 55.4 L 218.8 55.3 L 219.8 55.4 L 220.8 55.7 L 221.8 56.1 L 222.8 56.6 L 223.8 57.4 L 224.8 58.3 L 225.8 59.3 L 226.8 60.6 L 227.8 61.9 L 228.8 63.5 L 229.9 65.1 L 230.9 67 L 231.9 68.9 L 232.9 71.1 L 233.9 73.3 L 234.9 75.7 L 235.9 78.2 L 236.9 80.9 L 237.9 83.7 L 238.9 86.6 L 239.9 89.6 L 240.9 92.7 L 241.9 96 L 242.9 99.3 L 243.9 102.7 L 244.9 106.3 L 245.9 109.9 L 246.9 113.6 L 247.9 117.3 L 248.9 121.2 L 250 125.1 L 251 129 L 252 133 L 253 137.1 L 254 141.2 L 255 145.3 L 256 149.5 L 257 153.6 L 258 157.8 L 259 162 L 260 166.2 L 261 170.4 L 262 174.5 L 263 178.7 L 264 182.8 L 265 186.9 L 266 191 L 267 195 L 268 198.9 L 269.1 202.8 L 270.1 206.7 L 271.1 210.4 L 272.1 214.1 L 273.1 217.7 L 274.1 221.3 L 275.1 224.7 L 276.1 228 L 277.1 231.3 L 278.1 234.4 L 279.1 237.4 L 280.1 240.3 L 281.1 243.1 L 282.1 245.8 L 283.1 248.3 L 284.1 250.7 L 285.1 252.9 L 286.1 255.1 L 287.1 257 L 288.1 258.9 L 289.1 260.5 L 290.2 262.1 L 291.2 263.4 L 292.2 264.7 L 293.2 265.7 L 294.2 266.6 L 295.2 267.4 L 296.2 267.9 L 297.2 268.3 L 298.2 268.6 L 299.2 268.7 L 300.2 268.6 L 301.2 268.3 L 302.2 267.9 L 303.2 267.4 L 304.2 266.6 L 305.2 265.7 L 306.2 264.7 L 307.2 263.4 L 308.2 262.1 L 309.3 260.5 L 310.3 258.9 L 311.3 257 L 312.3 255.1 L 313.3 252.9 L 314.3 250.7 L 315.3 248.3 L 316.3 245.8 L 317.3 243.1 L 318.3 240.3 L 319.3 237.4 L 320.3 234.4 L 321.3 231.3 L 322.3 228 L 323.3 224.7 L 324.3 221.3 L 325.3 217.7 L 326.3 214.1 L 327.3 210.4 L 328.3 206.7 L 329.4 202.8 L 330.4 198.9 L 331.4 195 L 332.4 191 L 333.4 186.9 L 334.4 182.8 L 335.4 178.7 L 336.4 174.5 L 337.4 170.4 L 338.4 166.2 L 339.4 162 L 340.4 157.8 L 341.4 153.6 L 342.4 149.5 L 343.4 145.3 L 344.4 141.2 L 345.4 137.1 L 346.4 133 L 347.4 129 L 348.4 125.1 L 349.4 121.2 L 350.5 117.3 L 351.5 113.6 L 352.5 109.9 L 353.5 106.3 L 354.5 102.7 L 355.5 99.3 L 356.5 96 L 357.5 92.7 L 358.5 89.6 L 359.5 86.6 L 360.5 83.7 L 361.5 80.9 L 362.5 78.2 L 363.5 75.7 L 364.5 73.3 L 365.5 71.1 L 366.5 68.9 L 367.5 67 L 368.5 65.1 L 369.6 63.5 L 370.6 61.9 L 371.6 60.6 L 372.6 59.3 L 373.6 58.3 L 374.6 57.4 L 375.6 56.6 L 376.6 56.1 L 377.6 55.7 L 378.6 55.4 L 379.6 55.3 L 380.6 55.4 L 381.6 55.7 L 382.6 56.1 L 383.6 56.6 L 384.6 57.4 L 385.6 58.3 L 386.6 59.3 L 387.6 60.6 L 388.6 61.9 L 389.6 63.5 L 390.7 65.1 L 391.7 67 L 392.7 68.9 L 393.7 71.1 L 394.7 73.3 L 395.7 75.7 L 396.7 78.2 L 397.7 80.9 L 398.7 83.7 L 399.7 86.6 L 400.7 89.6 L 401.7 92.7 L 402.7 96 L 403.7 99.3 L 404.7 102.7 L 405.7 106.3 L 406.7 109.9 L 407.7 113.6 L 408.7 117.3 L 409.8 121.2 L 410.8 125.1 L 411.8 129 L 412.8 133 L 413.8 137.1 L 414.8 141.2 L 415.8 145.3 L 416.8 149.5 L 417.8 153.6 L 418.8 157.8 L 419.8 162 L 420.8 166.2 L 421.8 170.4 L 422.8 174.5 L 423.8 178.7 L 424.8 182.8 L 425.8 186.9 L 426.8 191 L 427.8 195 L 428.8 198.9 L 429.9 202.8 L 430.9 206.7 L 431.9 210.4 L 432.9 214.1 L 433.9 217.7 L 434.9 221.3 L 435.9 224.7 L 436.9 228 L 437.9 231.3 L 438.9 234.4 L 439.9 237.4 L 440.9 240.3 L 441.9 243.1 L 442.9 245.8 L 443.9 248.3 L 444.9 250.7 L 445.9 252.9 L 446.9 255.1 L 447.9 257 L 448.9 258.9 L 449.9 260.5 L 451 262.1 L 452 263.4 L 453 264.7 L 454 265.7 L 455 266.6 L 456 267.4 L 457 267.9 L 458 268.3 L 459 268.6 L 460 268.7" fill="none" stroke="#c8324a" stroke-width="2.6" stroke-linejoin="round"/></svg>`,
+            answer: { value: 0.080, unit: 'J', tol: 0.05 },
+            solution: `Amplituden är det största utslaget från jämviktsläget. I diagrammet når kurvan $5\\ \\mathrm{cm}$ ovanför och $5\\ \\mathrm{cm}$ nedanför jämviktsläget, så amplituden är $5{,}0\\ \\mathrm{cm}$.
+
+Svängningsenergin är
+
+$$ E = \\frac{k \\cdot A^2}{2} $$
+
+$$
+\\left[ \\begin{array}{l}
+k = 64\\ \\mathrm{N/m} \\\\
+A = 5{,}0\\ \\mathrm{cm} = 0{,}050\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ E = \\frac{64 \\cdot 0{,}050^2}{2} = \\frac{64 \\cdot 0{,}0025}{2} = 0{,}080\\ \\mathrm{J} $$
+
+**Svar:** $0{,}080\\ \\mathrm{J}$`,
+        },
+        {
+            level: 2,
+            question: `En vikt med massan $0{,}50\\ \\mathrm{kg}$ svänger upp och ned i en fjäder med fjäderkonstanten $200\\ \\mathrm{N/m}$. Amplituden är $8{,}0\\ \\mathrm{cm}$. Hur stor fart har vikten när den befinner sig $4{,}0\\ \\mathrm{cm}$ från jämviktsläget? Bortse från energiförluster. Svara i m/s.`,
+            answer: { value: 1.4, unit: 'm/s', tol: 0.03 },
+            solution: `Svängningsenergin är konstant. I varje läge är den summan av den potentiella energin, räknad från jämviktsläget, och rörelseenergin. Vi beräknar först hela svängningsenergin.
+
+$$ E = \\frac{k \\cdot A^2}{2} $$
+
+$$
+\\left[ \\begin{array}{l}
+k = 200\\ \\mathrm{N/m} \\\\
+A = 8{,}0\\ \\mathrm{cm} = 0{,}080\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ E = \\frac{200 \\cdot 0{,}080^2}{2} = 0{,}64\\ \\mathrm{J} $$
+
+På avståndet $y$ från jämviktsläget är den potentiella energin $\\dfrac{k \\cdot y^2}{2}$, med $y = 0{,}040\\ \\mathrm{m}$:
+
+$$ E_p = \\frac{200 \\cdot 0{,}040^2}{2} = 0{,}16\\ \\mathrm{J} $$
+
+Resten av svängningsenergin är rörelseenergi:
+
+$$ E_k = E - E_p = 0{,}64 - 0{,}16 = 0{,}48\\ \\mathrm{J} $$
+
+Farten löses ut ur rörelseenergin:
+
+$$ E_k = \\frac{m \\cdot v^2}{2} \\quad\\Leftrightarrow\\quad v = \\sqrt{\\frac{2 \\cdot E_k}{m}} $$
+
+$$
+\\left[ \\begin{array}{l}
+E_k = 0{,}48\\ \\mathrm{J} \\\\
+m = 0{,}50\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$ v = \\sqrt{\\frac{2 \\cdot 0{,}48}{0{,}50}} = \\sqrt{1{,}92} = 1{,}3856\\ \\mathrm{m/s} \\approx 1{,}4\\ \\mathrm{m/s} $$
+
+**Rimlighet:** Halva amplituden ger bara en fjärdedel av den potentiella energin, så tre fjärdedelar av energin är rörelseenergi. Farten är därför nära den största farten.
+
+**Svar:** $1{,}4\\ \\mathrm{m/s}$`,
+        },
+        {
+            level: 2,
+            question: `En vikt med massan $0{,}60\\ \\mathrm{kg}$ hängs i en fjäder. När vikten hänger stilla är fjädern förlängd $7{,}5\\ \\mathrm{cm}$. Vikten dras sedan ned ytterligare $4{,}0\\ \\mathrm{cm}$ och släpps. Bortse från energiförluster.<br>a) Bestäm fjäderkonstanten.<br>b) Bestäm svängningsenergin.<br>c) Hur stor är viktens största fart?`,
+            answer: { value: 0.46, unit: 'm/s' },
+            delsvar: [
+                { del: 'a', value: 79, unit: 'N/m', tol: 0.02 },
+                { del: 'b', value: 0.063, unit: 'J', tol: 0.03 },
+                { del: 'c', value: 0.46, unit: 'm/s', tol: 0.03 },
+            ],
+            solution: `**a)** När vikten hänger stilla är fjäderkraften lika stor som tyngdkraften. Hookes lag ger fjäderkonstanten:
+
+$$ k \\cdot \\Delta l = m \\cdot g \\quad\\Leftrightarrow\\quad k = \\frac{m \\cdot g}{\\Delta l} $$
+
+$$
+\\left[ \\begin{array}{l}
+m = 0{,}60\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+\\Delta l = 7{,}5\\ \\mathrm{cm} = 0{,}075\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ k = \\frac{0{,}60 \\cdot 9{,}82}{0{,}075} = \\frac{5{,}892}{0{,}075} = 78{,}56\\ \\mathrm{N/m} \\approx 79\\ \\mathrm{N/m} $$
+
+**Svar:** Ungefär $79\\ \\mathrm{N/m}$
+
+**b)** Amplituden räknas från jämviktsläget, inte från fjäderns ospända längd. Vikten släpps $4{,}0\\ \\mathrm{cm}$ under jämviktsläget, så amplituden är $4{,}0\\ \\mathrm{cm}$ och inte $7{,}5 + 4{,}0 = 11{,}5\\ \\mathrm{cm}$.
+
+$$ E = \\frac{k \\cdot A^2}{2} $$
+
+$$
+\\left[ \\begin{array}{l}
+k = 78{,}56\\ \\mathrm{N/m} \\\\
+A = 4{,}0\\ \\mathrm{cm} = 0{,}040\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ E = \\frac{78{,}56 \\cdot 0{,}040^2}{2} = 0{,}062848\\ \\mathrm{J} \\approx 0{,}063\\ \\mathrm{J} $$
+
+**Svar:** Ungefär $0{,}063\\ \\mathrm{J}$
+
+**c)** Farten är störst i jämviktsläget. Där är den potentiella energin 0, så hela svängningsenergin är rörelseenergi:
+
+$$ \\frac{m \\cdot v^2}{2} = E \\quad\\Leftrightarrow\\quad v = \\sqrt{\\frac{2 \\cdot E}{m}} $$
+
+$$
+\\left[ \\begin{array}{l}
+E = 0{,}062848\\ \\mathrm{J} \\\\
+m = 0{,}60\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$ v = \\sqrt{\\frac{2 \\cdot 0{,}062848}{0{,}60}} = \\sqrt{0{,}20949} = 0{,}45770\\ \\mathrm{m/s} \\approx 0{,}46\\ \\mathrm{m/s} $$
+
+**Rimlighet:** Vikten rör sig fram och tillbaka några centimeter på en bråkdel av en sekund, så en fart på knappt en halv meter per sekund är rimlig.
+
+**Svar:** Ungefär $0{,}46\\ \\mathrm{m/s}$`,
+        },
+        {
+            level: 2,
+            question: `Två likadana fjädrar har fjäderkonstanten $60\\ \\mathrm{N/m}$ var. Samma vikt hängs först i fjädrarna parallellkopplade och sedan i fjädrarna seriekopplade, se figuren. I båda fallen dras vikten $6{,}0\\ \\mathrm{cm}$ ned från jämviktsläget och släpps.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="20 16 320 240" width="406" height="305" role="img" aria-label="Till vanster tva fjadrar bredvid varandra som bar en stang med en vikt, till hoger tva fjadrar efter varandra med samma vikt. Alla fjadrar har fjaderkonstanten k." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="50" y1="30" x2="150" y2="30" stroke="#0f1620" stroke-width="1.8"/><line x1="54" y1="30" x2="47" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="62" y1="30" x2="55" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="70" y1="30" x2="63" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="78" y1="30" x2="71" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="86" y1="30" x2="79" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="94" y1="30" x2="87" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="102" y1="30" x2="95" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="110" y1="30" x2="103" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="118" y1="30" x2="111" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="126" y1="30" x2="119" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="134" y1="30" x2="127" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="142" y1="30" x2="135" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="150" y1="30" x2="143" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><polyline points="75,30 75,35 83,38.8 67,46.3 83,53.8 67,61.3 83,68.8 67,76.3 83,83.8 67,91.3 83,98.8 67,106.3 83,113.8 67,121.3 75,125 75,130" fill="none" stroke="#5f6670" stroke-width="1.7" stroke-linejoin="round"/><polyline points="125,30 125,35 133,38.8 117,46.3 133,53.8 117,61.3 133,68.8 117,76.3 133,83.8 117,91.3 133,98.8 117,106.3 133,113.8 117,121.3 125,125 125,130" fill="none" stroke="#5f6670" stroke-width="1.7" stroke-linejoin="round"/><rect x="62" y="130" width="76" height="5" fill="#8a7a62" stroke="#0f1620" stroke-width="1"/><line x1="100" y1="135" x2="100" y2="141" stroke="#5f6670" stroke-width="1.7"/><rect x="85" y="141" width="30" height="26" rx="2" fill="#6ba3d6" stroke="#2f6db0" stroke-width="1.5"/><text x="100" y="159" font-size="15" fill="#0f1620" text-anchor="middle" font-style="italic">m</text><text x="61" y="84" font-size="15" fill="#0f1620" text-anchor="end" font-style="italic">k</text><text x="139" y="84" font-size="15" fill="#0f1620" text-anchor="start" font-style="italic">k</text><line x1="222" y1="30" x2="298" y2="30" stroke="#0f1620" stroke-width="1.8"/><line x1="226" y1="30" x2="219" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="234" y1="30" x2="227" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="242" y1="30" x2="235" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="250" y1="30" x2="243" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="258" y1="30" x2="251" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="266" y1="30" x2="259" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="274" y1="30" x2="267" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="282" y1="30" x2="275" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="290" y1="30" x2="283" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="298" y1="30" x2="291" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><polyline points="260,30 260,35 268,38 252,44 268,50 252,56 268,62 252,68 268,74 252,80 268,86 252,92 268,98 252,104 260,107 260,112" fill="none" stroke="#5f6670" stroke-width="1.7" stroke-linejoin="round"/><circle cx="260" cy="112" r="2.4" fill="#5f6670"/><polyline points="260,112 260,117 268,120 252,126 268,132 252,138 268,144 252,150 268,156 252,162 268,168 252,174 268,180 252,186 260,189 260,194" fill="none" stroke="#5f6670" stroke-width="1.7" stroke-linejoin="round"/><rect x="245" y="194" width="30" height="26" rx="2" fill="#6ba3d6" stroke="#2f6db0" stroke-width="1.5"/><text x="260" y="212" font-size="15" fill="#0f1620" text-anchor="middle" font-style="italic">m</text><text x="246" y="75" font-size="15" fill="#0f1620" text-anchor="end" font-style="italic">k</text><text x="246" y="157" font-size="15" fill="#0f1620" text-anchor="end" font-style="italic">k</text><text x="100" y="246" font-size="14" fill="#0f1620" text-anchor="middle">Parallellkoppling</text><text x="260" y="246" font-size="14" fill="#0f1620" text-anchor="middle">Seriekoppling</text></svg>
+
+Bestäm svängningsenergin när fjädrarna är<br>a) parallellkopplade&emsp;&emsp;b) seriekopplade.`,
+            answer: { value: 0.054, unit: 'J' },
+            delsvar: [
+                { del: 'a', value: 0.22, unit: 'J', tol: 0.03 },
+                { del: 'b', value: 0.054, unit: 'J', tol: 0.03 },
+            ],
+            solution: `I båda fallen beter sig fjäderparet som en enda fjäder med den resulterande fjäderkonstanten $k_\\mathrm{R}$, och svängningsenergin är
+
+$$ E = \\frac{k_\\mathrm{R} \\cdot A^2}{2} $$
+
+**a)** Parallellt multipliceras fjäderkonstanten med antalet fjädrar:
+
+$$ k_\\mathrm{R} = n \\cdot k = 2 \\cdot 60 = 120\\ \\mathrm{N/m} $$
+
+$$
+\\left[ \\begin{array}{l}
+k_\\mathrm{R} = 120\\ \\mathrm{N/m} \\\\
+A = 6{,}0\\ \\mathrm{cm} = 0{,}060\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ E = \\frac{120 \\cdot 0{,}060^2}{2} = 0{,}216\\ \\mathrm{J} \\approx 0{,}22\\ \\mathrm{J} $$
+
+**Svar:** $0{,}22\\ \\mathrm{J}$
+
+**b)** I serie delas fjäderkonstanten med antalet fjädrar:
+
+$$ k_\\mathrm{R} = \\frac{k}{n} = \\frac{60}{2} = 30\\ \\mathrm{N/m} $$
+
+$$
+\\left[ \\begin{array}{l}
+k_\\mathrm{R} = 30\\ \\mathrm{N/m} \\\\
+A = 0{,}060\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ E = \\frac{30 \\cdot 0{,}060^2}{2} = 0{,}054\\ \\mathrm{J} $$
+
+**Rimlighet:** Parallellkopplingen är fyra gånger så styv som seriekopplingen, och vid samma amplitud blir energin därför fyra gånger så stor: $4 \\cdot 0{,}054 = 0{,}216$.
+
+**Svar:** $0{,}054\\ \\mathrm{J}$`,
+        },
+        {
+            level: 2,
+            question: `En expander är ett träningsredskap där man drar isär två handtag som hålls ihop av en fjäder. Diagrammet visar hur kraften $F$ beror på fjäderns förlängning $\\Delta l$.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 320" width="600" height="384" role="img" aria-label="Kraften F i N som funktion av forlangningen i cm for fjadern i en expander, en rat linje genom origo" style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="58" y1="34" x2="58" y2="290" stroke="#d5d2cb" stroke-width="1"/><line x1="91.5" y1="34" x2="91.5" y2="290" stroke="#d5d2cb" stroke-width="1"/><line x1="125" y1="34" x2="125" y2="290" stroke="#d5d2cb" stroke-width="1"/><line x1="158.5" y1="34" x2="158.5" y2="290" stroke="#d5d2cb" stroke-width="1"/><line x1="192" y1="34" x2="192" y2="290" stroke="#d5d2cb" stroke-width="1"/><line x1="225.5" y1="34" x2="225.5" y2="290" stroke="#d5d2cb" stroke-width="1"/><line x1="259" y1="34" x2="259" y2="290" stroke="#d5d2cb" stroke-width="1"/><line x1="292.5" y1="34" x2="292.5" y2="290" stroke="#d5d2cb" stroke-width="1"/><line x1="326" y1="34" x2="326" y2="290" stroke="#d5d2cb" stroke-width="1"/><line x1="359.5" y1="34" x2="359.5" y2="290" stroke="#d5d2cb" stroke-width="1"/><line x1="393" y1="34" x2="393" y2="290" stroke="#d5d2cb" stroke-width="1"/><line x1="426.5" y1="34" x2="426.5" y2="290" stroke="#d5d2cb" stroke-width="1"/><line x1="460" y1="34" x2="460" y2="290" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="290" x2="460" y2="290" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="268.7" x2="460" y2="268.7" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="247.3" x2="460" y2="247.3" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="226" x2="460" y2="226" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="204.7" x2="460" y2="204.7" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="183.3" x2="460" y2="183.3" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="162" x2="460" y2="162" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="140.7" x2="460" y2="140.7" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="119.3" x2="460" y2="119.3" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="98" x2="460" y2="98" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="76.7" x2="460" y2="76.7" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="55.3" x2="460" y2="55.3" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="34" x2="460" y2="34" stroke="#d5d2cb" stroke-width="1"/><line x1="58" y1="290" x2="467" y2="290" stroke="#0f1620" stroke-width="1.8"/><polygon points="467,294.3 476,290 467,285.7" fill="#0f1620"/><line x1="58" y1="290" x2="58" y2="27" stroke="#0f1620" stroke-width="1.8"/><polygon points="62.3,27 58,18 53.7,27" fill="#0f1620"/><text x="58" y="308" font-size="13" fill="#0f1620" text-anchor="middle">0</text><text x="125" y="308" font-size="13" fill="#0f1620" text-anchor="middle">2</text><text x="192" y="308" font-size="13" fill="#0f1620" text-anchor="middle">4</text><text x="259" y="308" font-size="13" fill="#0f1620" text-anchor="middle">6</text><text x="326" y="308" font-size="13" fill="#0f1620" text-anchor="middle">8</text><text x="393" y="308" font-size="13" fill="#0f1620" text-anchor="middle">10</text><text x="460" y="308" font-size="13" fill="#0f1620" text-anchor="middle">12</text><text x="51" y="295" font-size="13" fill="#0f1620" text-anchor="end">0</text><text x="51" y="252.3" font-size="13" fill="#0f1620" text-anchor="end">8</text><text x="51" y="209.7" font-size="13" fill="#0f1620" text-anchor="end">16</text><text x="51" y="167" font-size="13" fill="#0f1620" text-anchor="end">24</text><text x="51" y="124.3" font-size="13" fill="#0f1620" text-anchor="end">32</text><text x="51" y="81.7" font-size="13" fill="#0f1620" text-anchor="end">40</text><text x="51" y="39" font-size="13" fill="#0f1620" text-anchor="end">48</text><text x="494" y="281" font-size="14" fill="#0f1620" text-anchor="end">Δ<tspan font-style="italic">l</tspan> (cm)</text><text x="68" y="24" font-size="14" fill="#0f1620" text-anchor="start"><tspan font-style="italic">F</tspan> (N)</text><path d="M 58 290 L 460 34" fill="none" stroke="#c8324a" stroke-width="2.6" stroke-linejoin="round"/></svg>
+
+a) Bestäm fjäderkonstanten.<br>b) Hur stort arbete krävs för att dra ut fjädern från förlängningen $4{,}0\\ \\mathrm{cm}$ till förlängningen $10\\ \\mathrm{cm}$?`,
+            answer: { value: 1.7, unit: 'J' },
+            delsvar: [
+                { del: 'a', value: 400, unit: 'N/m', tol: 0.04 },
+                { del: 'b', value: 1.7, unit: 'J', tol: 0.04 },
+            ],
+            solution: `**a)** Grafen är en rät linje genom origo, så Hookes lag gäller och fjäderkonstanten är linjens lutning. Vi läser av en punkt långt ut på linjen, eftersom avläsningen då blir noggrannare.
+
+$$ F = k \\cdot \\Delta l \\quad\\Leftrightarrow\\quad k = \\frac{F}{\\Delta l} $$
+
+$$
+\\left[ \\begin{array}{l}
+F = 40\\ \\mathrm{N} \\\\
+\\Delta l = 10\\ \\mathrm{cm} = 0{,}10\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ k = \\frac{40}{0{,}10} = 400\\ \\mathrm{N/m} $$
+
+**Svar:** $400\\ \\mathrm{N/m}$
+
+**b)** Kraften är inte konstant, så arbetet är arean under grafen mellan $\\Delta l = 0{,}040\\ \\mathrm{m}$ och $\\Delta l = 0{,}10\\ \\mathrm{m}$. Arean är en parallelltrapets med de parallella sidorna $F_1 = 16\\ \\mathrm{N}$ och $F_2 = 40\\ \\mathrm{N}$ (avlästa i grafen) och höjden $0{,}10 - 0{,}040 = 0{,}060\\ \\mathrm{m}$.
+
+$$ W = \\frac{(F_1 + F_2) \\cdot \\text{höjden}}{2} = \\frac{(16 + 40) \\cdot 0{,}060}{2} = 1{,}68\\ \\mathrm{J} \\approx 1{,}7\\ \\mathrm{J} $$
+
+Samma resultat fås som skillnaden mellan två triangelareor, alltså den lagrade energin vid de två förlängningarna:
+
+$$ W = \\frac{400 \\cdot 0{,}10^2}{2} - \\frac{400 \\cdot 0{,}040^2}{2} = 2{,}0 - 0{,}32 = 1{,}68\\ \\mathrm{J} $$
+
+**Svar:** Ungefär $1{,}7\\ \\mathrm{J}$`,
+        },
+        {
+            level: 3,
+            question: `Två fjädrar hänger bredvid varandra i taket och bär en lätt stång. Från stångens mitt hänger en tredje fjäder, och i den hänger en vikt med massan $m$, se figuren. Alla tre fjädrarna har fjäderkonstanten $k$.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="50 16 160 230" width="203" height="292" role="img" aria-label="Tva fjadrar bredvid varandra bar en latt stang. Fran stangens mitt hanger en tredje fjader med en vikt. Alla tre fjadrarna har fjaderkonstanten k." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="78" y1="30" x2="182" y2="30" stroke="#0f1620" stroke-width="1.8"/><line x1="82" y1="30" x2="75" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="90" y1="30" x2="83" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="98" y1="30" x2="91" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="106" y1="30" x2="99" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="114" y1="30" x2="107" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="122" y1="30" x2="115" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="130" y1="30" x2="123" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="138" y1="30" x2="131" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="146" y1="30" x2="139" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="154" y1="30" x2="147" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="162" y1="30" x2="155" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="170" y1="30" x2="163" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="178" y1="30" x2="171" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><polyline points="100,30 100,35 108,37.8 92,43.5 108,49.2 92,54.8 108,60.5 92,66.2 108,71.8 92,77.5 108,83.2 92,88.8 108,94.5 92,100.2 100,103 100,108" fill="none" stroke="#5f6670" stroke-width="1.7" stroke-linejoin="round"/><polyline points="160,30 160,35 168,37.8 152,43.5 168,49.2 152,54.8 168,60.5 152,66.2 168,71.8 152,77.5 168,83.2 152,88.8 168,94.5 152,100.2 160,103 160,108" fill="none" stroke="#5f6670" stroke-width="1.7" stroke-linejoin="round"/><rect x="88" y="108" width="84" height="5" fill="#8a7a62" stroke="#0f1620" stroke-width="1"/><polyline points="130,113 130,118 138,121 122,127.1 138,133.2 122,139.3 138,145.4 122,151.5 138,157.5 122,163.6 138,169.7 122,175.8 138,181.9 122,188 130,191 130,196" fill="none" stroke="#5f6670" stroke-width="1.7" stroke-linejoin="round"/><rect x="115" y="196" width="30" height="26" rx="2" fill="#6ba3d6" stroke="#2f6db0" stroke-width="1.5"/><text x="130" y="214" font-size="15" fill="#0f1620" text-anchor="middle" font-style="italic">m</text><text x="86" y="74" font-size="15" fill="#0f1620" text-anchor="end" font-style="italic">k</text><text x="174" y="74" font-size="15" fill="#0f1620" text-anchor="start" font-style="italic">k</text><text x="116" y="160" font-size="15" fill="#0f1620" text-anchor="end" font-style="italic">k</text></svg>
+
+a) Visa att hela kopplingen beter sig som en fjäder med den resulterande fjäderkonstanten $k_\\mathrm{R} = \\dfrac{2 \\cdot k}{3}$.<br>b) Hur mycket sänks vikten när den hängs i kopplingen, om $k = 90\\ \\mathrm{N/m}$ och $m = 0{,}40\\ \\mathrm{kg}$? Svara i m.<br>c) Vikten dras ytterligare $3{,}0\\ \\mathrm{cm}$ ned och släpps. Hur stor är svängningsenergin?`,
+            answer: { value: 0.027, unit: 'J' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 0.065, unit: 'm', tol: 0.03 },
+                { del: 'c', value: 0.027, unit: 'J', tol: 0.03 },
+            ],
+            solution: `**a)** Kopplingen består av två delar efter varandra: det parallellkopplade paret överst och den ensamma fjädern under. Vi låter vikten hänga stilla, så att kraften i kopplingen är $F = m \\cdot g$, och följer kraften genom de två delarna.
+
+*Den nedre fjädern* bär hela vikten. Hookes lag ger dess förlängning:
+
+$$ \\Delta l_\\mathrm{ned} = \\frac{F}{k} $$
+
+*Det övre paret* bär också hela vikten, via stången. Två likadana parallellkopplade fjädrar har fjäderkonstanten $2 \\cdot k$, så paret förlängs
+
+$$ \\Delta l_\\mathrm{upp} = \\frac{F}{2 \\cdot k} $$
+
+Vikten sänks med båda förlängningarna tillsammans:
+
+$$ \\Delta l = \\Delta l_\\mathrm{upp} + \\Delta l_\\mathrm{ned} = \\frac{F}{2 \\cdot k} + \\frac{F}{k} = \\frac{F}{2 \\cdot k} + \\frac{2 \\cdot F}{2 \\cdot k} = \\frac{3 \\cdot F}{2 \\cdot k} $$
+
+För hela kopplingen gäller Hookes lag $F = k_\\mathrm{R} \\cdot \\Delta l$, alltså
+
+$$ k_\\mathrm{R} = \\frac{F}{\\Delta l} = \\frac{F}{\\dfrac{3 \\cdot F}{2 \\cdot k}} = \\frac{2 \\cdot k}{3} $$
+
+**Svar:** $k_\\mathrm{R} = \\dfrac{2 \\cdot k}{3}$, vilket skulle visas.
+
+**b)** Med $k = 90\\ \\mathrm{N/m}$ blir den resulterande fjäderkonstanten
+
+$$ k_\\mathrm{R} = \\frac{2 \\cdot 90}{3} = 60\\ \\mathrm{N/m} $$
+
+Vikten hänger stilla, så fjäderkraften är lika stor som tyngdkraften:
+
+$$ k_\\mathrm{R} \\cdot \\Delta l = m \\cdot g \\quad\\Leftrightarrow\\quad \\Delta l = \\frac{m \\cdot g}{k_\\mathrm{R}} $$
+
+$$
+\\left[ \\begin{array}{l}
+m = 0{,}40\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+k_\\mathrm{R} = 60\\ \\mathrm{N/m}
+\\end{array} \\right]
+$$
+
+$$ \\Delta l = \\frac{0{,}40 \\cdot 9{,}82}{60} = \\frac{3{,}928}{60} = 0{,}065467\\ \\mathrm{m} \\approx 0{,}065\\ \\mathrm{m} $$
+
+**Rimlighet:** En ensam fjäder hade gett $\\dfrac{3{,}928}{90} = 0{,}0436\\ \\mathrm{m}$. Kopplingen är mjukare än en ensam fjäder, så förlängningen ska vara större.
+
+**Svar:** Vikten sänks ungefär $0{,}065\\ \\mathrm{m}$.
+
+**c)** Vikten släpps $3{,}0\\ \\mathrm{cm}$ från jämviktsläget, så amplituden är $A = 0{,}030\\ \\mathrm{m}$. Kopplingen svänger som en fjäder med fjäderkonstanten $k_\\mathrm{R}$:
+
+$$ E = \\frac{k_\\mathrm{R} \\cdot A^2}{2} $$
+
+$$
+\\left[ \\begin{array}{l}
+k_\\mathrm{R} = 60\\ \\mathrm{N/m} \\\\
+A = 0{,}030\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ E = \\frac{60 \\cdot 0{,}030^2}{2} = 0{,}027\\ \\mathrm{J} $$
+
+**Svar:** $0{,}027\\ \\mathrm{J}$`,
+        },
+        {
+            level: 3,
+            question: `En fjäder med fjäderkonstanten $k$ hänger lodrätt och är ospänd. En vikt med massan $m$ fästs i fjäderns nedre ände och släpps utan fart. Bortse från energiförluster.<br>a) Visa att vikten svänger med amplituden $A = \\dfrac{m \\cdot g}{k}$.<br>b) Bestäm viktens största fart om $m = 0{,}25\\ \\mathrm{kg}$ och $k = 40\\ \\mathrm{N/m}$. Svara i m/s.<br>c) Hur långt under startläget kommer vikten som längst? Svara i m.`,
+            answer: { value: 0.78, unit: 'm/s' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 0.78, unit: 'm/s', tol: 0.03 },
+                { del: 'c', value: 0.12, unit: 'm', tol: 0.04 },
+            ],
+            solution: `**a)** I jämviktsläget tar fjäderkraften och tyngdkraften ut varandra. Där är fjädern förlängd sträckan $d$, där
+
+$$ k \\cdot d = m \\cdot g \\quad\\Leftrightarrow\\quad d = \\frac{m \\cdot g}{k} $$
+
+Vikten släpps där fjädern är ospänd, alltså sträckan $d$ ovanför jämviktsläget. Den har ingen fart när den släpps, så startläget är ett vändläge. Amplituden är avståndet mellan ett vändläge och jämviktsläget:
+
+$$ A = d = \\frac{m \\cdot g}{k} $$
+
+**Svar:** $A = \\dfrac{m \\cdot g}{k}$, vilket skulle visas.
+
+**b)** Amplituden blir
+
+$$
+\\left[ \\begin{array}{l}
+m = 0{,}25\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+k = 40\\ \\mathrm{N/m}
+\\end{array} \\right]
+$$
+
+$$ A = \\frac{0{,}25 \\cdot 9{,}82}{40} = \\frac{2{,}455}{40} = 0{,}061375\\ \\mathrm{m} $$
+
+Farten är störst i jämviktsläget. Där är hela svängningsenergin rörelseenergi, medan den i vändläget är potentiell energi:
+
+$$ \\frac{m \\cdot v^2}{2} = \\frac{k \\cdot A^2}{2} \\quad\\Leftrightarrow\\quad v = A \\cdot \\sqrt{\\frac{k}{m}} $$
+
+$$ v = 0{,}061375 \\cdot \\sqrt{\\frac{40}{0{,}25}} = 0{,}061375 \\cdot \\sqrt{160} = 0{,}77634\\ \\mathrm{m/s} \\approx 0{,}78\\ \\mathrm{m/s} $$
+
+**Svar:** $0{,}78\\ \\mathrm{m/s}$
+
+**c)** Det nedre vändläget ligger amplituden $A$ under jämviktsläget, och jämviktsläget ligger $A$ under startläget. Det lägsta läget ligger alltså
+
+$$ 2 \\cdot A = 2 \\cdot 0{,}061375 = 0{,}12275\\ \\mathrm{m} \\approx 0{,}12\\ \\mathrm{m} $$
+
+under startläget.
+
+**Rimlighet:** Vi kan kontrollera med energin räknad från startläget. När vikten har sjunkit sträckan $s = 2 \\cdot A$ och står still har den förlorat lägesenergin $m \\cdot g \\cdot s$, och fjädern har fått den elastiska energin $\\dfrac{k \\cdot s^2}{2}$:
+
+$$ m \\cdot g \\cdot s = 2{,}455 \\cdot 0{,}12275 = 0{,}30135\\ \\mathrm{J} $$
+
+$$ \\frac{k \\cdot s^2}{2} = \\frac{40 \\cdot 0{,}12275^2}{2} = 0{,}30135\\ \\mathrm{J} $$
+
+De är lika stora, så det nedre läget stämmer.
+
+**Svar:** Ungefär $0{,}12\\ \\mathrm{m}$ under startläget.`,
+        },
+        {
+            level: 3,
+            question: `En vikt hänger i en fjäder med fjäderkonstanten $50\\ \\mathrm{N/m}$ och svänger dämpat med periodtiden $0{,}80\\ \\mathrm{s}$. Tabellen visar amplituden $A$ efter $n$ hela svängningar.
+
+| $n$ | 0 | 1 | 2 | 3 | 4 |
+|---|---|---|---|---|---|
+| $A$ (cm) | 10,0 | 8,0 | 6,4 | 5,1 | 4,1 |
+
+a) Visa med mätvärdena att svängningen förlorar ungefär samma andel av sin energi under varje hel svängning, och bestäm andelen.<br>b) Hur stor är medeleffekten som omvandlas till värme under den första svängningen?<br>c) Anta att mönstret fortsätter. Efter hur många hela svängningar har svängningsenergin för första gången sjunkit under $1\\ \\%$ av startvärdet?`,
+            answer: { value: 0.11, unit: 'W' },
+            delsvar: [
+                { del: 'a', value: 36, unit: '%', tol: 0.06, etikett: 'förlorad andel' },
+                { del: 'b', value: 0.11, unit: 'W', tol: 0.04 },
+                { del: 'c', value: 11, unit: 'svängningar', tol: 0.001 },
+            ],
+            solution: `**a)** Svängningsenergin är $E = \\dfrac{k \\cdot A^2}{2}$. Förhållandet mellan energin efter och före en svängning är därför
+
+$$ \\frac{E_{n+1}}{E_n} = \\frac{\\dfrac{k \\cdot A_{n+1}^2}{2}}{\\dfrac{k \\cdot A_n^2}{2}} = \\left( \\frac{A_{n+1}}{A_n} \\right)^2 $$
+
+Det räcker alltså att undersöka kvoten mellan två amplituder som följer på varandra:
+
+| Svängning | Kvot $\\dfrac{A_{n+1}}{A_n}$ | Energikvot |
+|---|---|---|
+| 1 | $\\dfrac{8{,}0}{10{,}0} = 0{,}800$ | 0,640 |
+| 2 | $\\dfrac{6{,}4}{8{,}0} = 0{,}800$ | 0,640 |
+| 3 | $\\dfrac{5{,}1}{6{,}4} = 0{,}797$ | 0,635 |
+| 4 | $\\dfrac{4{,}1}{5{,}1} = 0{,}804$ | 0,646 |
+
+Energikvoten är nästan densamma, ungefär $0{,}64$, under varje svängning. Andelen som går förlorad är
+
+$$ 1 - 0{,}64 = 0{,}36 $$
+
+**Svar:** Varje hel svängning behåller ungefär $64\\ \\%$ av energin och förlorar ungefär $36\\ \\%$.
+
+**b)** Vi beräknar energin före och efter den första svängningen.
+
+$$
+\\left[ \\begin{array}{l}
+k = 50\\ \\mathrm{N/m} \\\\
+A_0 = 10{,}0\\ \\mathrm{cm} = 0{,}100\\ \\mathrm{m} \\\\
+A_1 = 8{,}0\\ \\mathrm{cm} = 0{,}080\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ E_0 = \\frac{50 \\cdot 0{,}100^2}{2} = 0{,}25\\ \\mathrm{J} \\qquad E_1 = \\frac{50 \\cdot 0{,}080^2}{2} = 0{,}16\\ \\mathrm{J} $$
+
+Energiförlusten sker under en periodtid, $t = 0{,}80\\ \\mathrm{s}$. Medeleffekten är energin per tid:
+
+$$ P = \\frac{E_0 - E_1}{t} = \\frac{0{,}25 - 0{,}16}{0{,}80} = \\frac{0{,}09}{0{,}80} = 0{,}1125\\ \\mathrm{W} \\approx 0{,}11\\ \\mathrm{W} $$
+
+**Svar:** Ungefär $0{,}11\\ \\mathrm{W}$
+
+**c)** Med modellen från a) är energin efter $n$ svängningar $E_n = 0{,}64^n \\cdot E_0$. Vi söker det minsta heltalet $n$ som ger
+
+$$ 0{,}64^n < 0{,}01 $$
+
+Vi logaritmerar båda led:
+
+$$ \\lg 0{,}64^n < \\lg 0{,}01 $$
+
+Logaritmlagen flyttar ned exponenten:
+
+$$ n \\cdot \\lg 0{,}64 < \\lg 0{,}01 $$
+
+Logaritmen av $0{,}64$ är negativ, så olikhetstecknet vänds när vi dividerar båda led med den:
+
+$$ n > \\frac{\\lg 0{,}01}{\\lg 0{,}64} = \\frac{-2}{-0{,}19382} = 10{,}32 $$
+
+Det minsta heltalet som är större än $10{,}32$ är $11$. Kontroll: $0{,}64^{10} = 0{,}0115$ är fortfarande över $1\\ \\%$, medan $0{,}64^{11} = 0{,}0074$ är under.
+
+**Svar:** Efter 11 hela svängningar, alltså efter ungefär $11 \\cdot 0{,}80 = 8{,}8\\ \\mathrm{s}$.`,
+        },
+        {
+            level: 3,
+            question: `En godsvagn med massan $12\\ \\mathrm{ton}$ rullar med farten $1{,}5\\ \\mathrm{m/s}$ in mot en stoppbock vid ett spårslut. Stoppbocken har två buffertar bredvid varandra, och vagnen trycker ihop båda lika mycket. Varje buffert fungerar som en fjäder med fjäderkonstanten $4{,}0 \\cdot 10^{5}\\ \\mathrm{N/m}$. Bortse från friktion och andra energiförluster.<br>a) Hur långt trycks buffertarna ihop som mest?<br>b) Hur stor är den största kraften från stoppbocken på vagnen?<br>c) Den största kraften får inte överstiga $1{,}0 \\cdot 10^{5}\\ \\mathrm{N}$. Hur stor får den resulterande fjäderkonstanten högst vara? Räcker det att ta bort den ena bufferten?`,
+            answer: { value: 3.7e5, unit: 'N/m' },
+            delsvar: [
+                { del: 'a', value: 0.18, unit: 'm', tol: 0.04 },
+                { del: 'b', value: 1.5e5, unit: 'N', tol: 0.04 },
+                { del: 'c', value: 3.7e5, unit: 'N/m', tol: 0.03, etikett: 'största fjäderkonstant' },
+            ],
+            solution: `Buffertarna sitter bredvid varandra och trycks ihop lika mycket, så de är parallellkopplade:
+
+$$ k_\\mathrm{R} = n \\cdot k = 2 \\cdot 4{,}0 \\cdot 10^{5} = 8{,}0 \\cdot 10^{5}\\ \\mathrm{N/m} $$
+
+När buffertarna är ihoptryckta som mest står vagnen still ett ögonblick. Då har all rörelseenergi blivit energi i fjädrarna, precis som i ett vändläge:
+
+$$ \\frac{m \\cdot v^2}{2} = \\frac{k_\\mathrm{R} \\cdot x^2}{2} \\qquad (1) $$
+
+där $x$ är den största ihoptryckningen.
+
+**a)** Ur (1) löser vi ut $x$:
+
+$$ x = v \\cdot \\sqrt{\\frac{m}{k_\\mathrm{R}}} $$
+
+$$
+\\left[ \\begin{array}{l}
+m = 12\\ \\mathrm{ton} = 12\\,000\\ \\mathrm{kg} \\\\
+v = 1{,}5\\ \\mathrm{m/s} \\\\
+k_\\mathrm{R} = 8{,}0 \\cdot 10^{5}\\ \\mathrm{N/m}
+\\end{array} \\right]
+$$
+
+$$ x = 1{,}5 \\cdot \\sqrt{\\frac{12\\,000}{8{,}0 \\cdot 10^{5}}} = 1{,}5 \\cdot \\sqrt{0{,}015} = 0{,}18371\\ \\mathrm{m} \\approx 0{,}18\\ \\mathrm{m} $$
+
+**Svar:** Ungefär $0{,}18\\ \\mathrm{m}$
+
+**b)** Kraften från buffertarna växer med ihoptryckningen enligt Hookes lag, så den är störst när $x$ är störst:
+
+$$ F_\\mathrm{max} = k_\\mathrm{R} \\cdot x = 8{,}0 \\cdot 10^{5} \\cdot 0{,}18371 = 1{,}4697 \\cdot 10^{5}\\ \\mathrm{N} \\approx 1{,}5 \\cdot 10^{5}\\ \\mathrm{N} $$
+
+**Svar:** Ungefär $1{,}5 \\cdot 10^{5}\\ \\mathrm{N}$
+
+**c)** Vi tar fram ett generellt uttryck för den största kraften genom att sätta in $x$ från a) i Hookes lag:
+
+$$ F_\\mathrm{max} = k_\\mathrm{R} \\cdot v \\cdot \\sqrt{\\frac{m}{k_\\mathrm{R}}} = v \\cdot \\sqrt{m \\cdot k_\\mathrm{R}} $$
+
+En mjukare stoppbock ger alltså en mindre största kraft, men en längre bromssträcka. Kravet $F_\\mathrm{max} \\leq 1{,}0 \\cdot 10^{5}\\ \\mathrm{N}$ ger
+
+$$ v \\cdot \\sqrt{m \\cdot k_\\mathrm{R}} \\leq F_\\mathrm{max} \\quad\\Leftrightarrow\\quad k_\\mathrm{R} \\leq \\frac{F_\\mathrm{max}^2}{m \\cdot v^2} $$
+
+$$ k_\\mathrm{R} \\leq \\frac{(1{,}0 \\cdot 10^{5})^2}{12\\,000 \\cdot 1{,}5^2} = \\frac{1{,}0 \\cdot 10^{10}}{27\\,000} = 3{,}7037 \\cdot 10^{5}\\ \\mathrm{N/m} \\approx 3{,}7 \\cdot 10^{5}\\ \\mathrm{N/m} $$
+
+Med bara en buffert blir $k_\\mathrm{R} = 4{,}0 \\cdot 10^{5}\\ \\mathrm{N/m}$, vilket är större än det tillåtna värdet. Den största kraften blir då
+
+$$ F_\\mathrm{max} = 1{,}5 \\cdot \\sqrt{12\\,000 \\cdot 4{,}0 \\cdot 10^{5}} = 1{,}0392 \\cdot 10^{5}\\ \\mathrm{N} $$
+
+vilket är något över gränsen.
+
+**Svar:** Den resulterande fjäderkonstanten får högst vara ungefär $3{,}7 \\cdot 10^{5}\\ \\mathrm{N/m}$. Det räcker inte att ta bort den ena bufferten, eftersom kraften då blir ungefär $1{,}04 \\cdot 10^{5}\\ \\mathrm{N}$.`,
+        },
+        {
+            level: 3,
+            question: `En elev vill bestämma fjäderkonstanten för en fjäder utan att hänga vikter i den. Hon fäster en vagn med massan $0{,}200\\ \\mathrm{kg}$ i fjädern på ett vågrätt bord med försumbar friktion, drar ut vagnen olika långt och släpper den. En rörelsesensor mäter vagnens största fart $v$ för varje amplitud $A$.
+
+| $A$ (cm) | 2,0 | 4,0 | 6,0 | 8,0 |
+|---|---|---|---|---|
+| $v$ (m/s) | 0,19 | 0,38 | 0,56 | 0,76 |
+
+a) Visa att den största farten ska vara proportionell mot amplituden.<br>b) Bestäm fjäderkonstanten ur mätvärdena.<br>c) Hur mycket skulle fjädern förlängas om eleven i stället hängde vagnen lodrätt i den?`,
+            answer: { value: 18, unit: 'N/m' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 18, unit: 'N/m', tol: 0.06 },
+                { del: 'c', value: 0.11, unit: 'm', tol: 0.06 },
+            ],
+            solution: `**a)** I vändläget står vagnen still, och hela svängningsenergin är potentiell energi $\\dfrac{k \\cdot A^2}{2}$. I jämviktsläget är farten störst och hela svängningsenergin rörelseenergi $\\dfrac{m \\cdot v^2}{2}$. Utan energiförluster är svängningsenergin konstant:
+
+$$ \\frac{m \\cdot v^2}{2} = \\frac{k \\cdot A^2}{2} \\quad\\Leftrightarrow\\quad v^2 = \\frac{k}{m} \\cdot A^2 \\quad\\Leftrightarrow\\quad v = \\sqrt{\\frac{k}{m}} \\cdot A $$
+
+Faktorn $\\sqrt{\\dfrac{k}{m}}$ är densamma i alla försök, eftersom samma fjäder och samma vagn används.
+
+**Svar:** $v = \\sqrt{\\dfrac{k}{m}} \\cdot A$, alltså är $v$ proportionell mot $A$, vilket skulle visas.
+
+**b)** Proportionalitetskonstanten är $\\dfrac{v}{A}$. Vi beräknar den för varje mätning, med amplituden i meter:
+
+| $A$ (m) | 0,020 | 0,040 | 0,060 | 0,080 |
+|---|---|---|---|---|
+| $\\dfrac{v}{A}$ (1/s) | 9,50 | 9,50 | 9,33 | 9,50 |
+
+Medelvärdet är
+
+$$ \\frac{9{,}50 + 9{,}50 + 9{,}3333 + 9{,}50}{4} = 9{,}4583\\ \\mathrm{s^{-1}} $$
+
+Enligt a) är $\\dfrac{v}{A} = \\sqrt{\\dfrac{k}{m}}$. Vi kvadrerar och löser ut $k$:
+
+$$ \\left( \\frac{v}{A} \\right)^2 = \\frac{k}{m} \\quad\\Leftrightarrow\\quad k = m \\cdot \\left( \\frac{v}{A} \\right)^2 $$
+
+$$ k = 0{,}200 \\cdot 9{,}4583^2 = 0{,}200 \\cdot 89{,}460 = 17{,}892\\ \\mathrm{N/m} \\approx 18\\ \\mathrm{N/m} $$
+
+Farterna är givna med två värdesiffror, så svaret ges med två.
+
+**Svar:** Ungefär $18\\ \\mathrm{N/m}$
+
+**c)** När vagnen hänger stilla är fjäderkraften lika stor som tyngdkraften:
+
+$$ k \\cdot \\Delta l = m \\cdot g \\quad\\Leftrightarrow\\quad \\Delta l = \\frac{m \\cdot g}{k} $$
+
+$$
+\\left[ \\begin{array}{l}
+m = 0{,}200\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+k = 17{,}892\\ \\mathrm{N/m}
+\\end{array} \\right]
+$$
+
+$$ \\Delta l = \\frac{0{,}200 \\cdot 9{,}82}{17{,}892} = \\frac{1{,}964}{17{,}892} = 0{,}10977\\ \\mathrm{m} \\approx 0{,}11\\ \\mathrm{m} $$
+
+**Svar:** Ungefär $0{,}11\\ \\mathrm{m}$`,
+        },
+        {
+            level: 3,
+            question: `En vikt hänger i en fjäder med fjäderkonstanten $k$. Fjädern klipps sedan mitt itu, och de två halvorna parallellkopplas och bär samma vikt.<br>a) Visa att varje halva har fjäderkonstanten $2 \\cdot k$.<br>b) Hur många gånger så stor blir förlängningen i jämviktsläget, jämfört med när vikten hängde i den hela fjädern?<br>c) Vikten sätts i svängning i de två halvorna med lika stor svängningsenergi som den hade i den hela fjädern. Hur många gånger så stor blir amplituden, jämfört med i den hela fjädern?`,
+            answer: { value: 0.5, unit: '' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 0.25, unit: '', etikett: 'gånger så stor' },
+                { del: 'c', value: 0.5, unit: '', etikett: 'gånger så stor' },
+            ],
+            solution: `**a)** Den hela fjädern kan ses som de två halvorna seriekopplade, efter varandra. Kalla varje halvas fjäderkonstant $k_\\mathrm{h}$. Två likadana fjädrar i serie har den resulterande fjäderkonstanten
+
+$$ k_\\mathrm{R} = \\frac{k_\\mathrm{h}}{2} $$
+
+och den ska vara lika med den hela fjäderns fjäderkonstant $k$:
+
+$$ \\frac{k_\\mathrm{h}}{2} = k \\quad\\Leftrightarrow\\quad k_\\mathrm{h} = 2 \\cdot k $$
+
+Det stämmer också med vad som händer i fjädern: varje halva bär hela kraften men har bara hälften så många varv, så den förlängs bara hälften så mycket som den hela fjädern.
+
+**Svar:** Varje halva har fjäderkonstanten $2 \\cdot k$, vilket skulle visas.
+
+**b)** De två halvorna parallellkopplade har den resulterande fjäderkonstanten
+
+$$ k_\\mathrm{R} = n \\cdot k_\\mathrm{h} = 2 \\cdot 2 \\cdot k = 4 \\cdot k $$
+
+Vikten hänger stilla, så fjäderkraften är lika stor som tyngdkraften $m \\cdot g$ i båda fallen. Förlängningarna blir
+
+$$ \\Delta l_\\mathrm{hel} = \\frac{m \\cdot g}{k} \\qquad \\Delta l_\\mathrm{par} = \\frac{m \\cdot g}{4 \\cdot k} $$
+
+och förhållandet är
+
+$$ \\frac{\\Delta l_\\mathrm{par}}{\\Delta l_\\mathrm{hel}} = \\frac{\\dfrac{m \\cdot g}{4 \\cdot k}}{\\dfrac{m \\cdot g}{k}} = \\frac{1}{4} $$
+
+**Svar:** Förlängningen blir $0{,}25$ gånger så stor, alltså en fjärdedel.
+
+**c)** Svängningsenergin är lika stor i båda fallen:
+
+$$ \\frac{k \\cdot A_\\mathrm{hel}^2}{2} = \\frac{4 \\cdot k \\cdot A_\\mathrm{par}^2}{2} $$
+
+Vi multiplicerar båda led med $2$ och dividerar med $k$:
+
+$$ A_\\mathrm{hel}^2 = 4 \\cdot A_\\mathrm{par}^2 \\quad\\Leftrightarrow\\quad A_\\mathrm{par}^2 = \\frac{A_\\mathrm{hel}^2}{4} $$
+
+Amplituderna är positiva, så vi drar roten ur båda led:
+
+$$ A_\\mathrm{par} = \\frac{A_\\mathrm{hel}}{2} $$
+
+**Rimlighet:** En fyra gånger så styv fjäder lagrar fyra gånger så mycket energi vid samma amplitud. För samma energi räcker därför halva amplituden, eftersom energin växer med kvadraten på amplituden.
+
+**Svar:** Amplituden blir $0{,}5$ gånger så stor, alltså hälften så stor.`,
+        },
     ],
 
     'fy2-2.3': [
@@ -64350,7 +64966,7 @@ $$ A = 0{,}080\\ \\mathrm{m} = 8{,}0\\ \\mathrm{cm} $$
 
 **Svar:** Amplituden är $0{,}080\\ \\mathrm{m}$ (= $8{,}0\\ \\mathrm{cm}$).
 
-**Generell slutsats:** Amplituden är *halva* skillnaden mellan toppen och bottnen — alltid mätt från jämviktsläget, aldrig som hela utslaget topp till botten.`,
+**Generell slutsats:** Amplituden är *halva* skillnaden mellan toppen och bottnen. Den mäts alltid från jämviktsläget, aldrig som hela utslaget topp till botten.`,
         },
         {
             level: 1,
@@ -64426,7 +65042,7 @@ $$ T = \\frac{2\\pi}{16} = 0{,}3927\\ldots\\ \\mathrm{s} \\approx 0{,}39\\ \\mat
 
 **Svar:** Periodtiden är ungefär $0{,}39\\ \\mathrm{s}$.
 
-**Generell slutsats:** Periodtiden för en fjäderpendel beror bara på fjäderkonstanten och massan — inte på amplituden. En stor amplitud ger inte längre periodtid.`,
+**Generell slutsats:** Periodtiden för en fjäderpendel beror bara på fjäderkonstanten och massan, inte på amplituden. En stor amplitud ger inte längre periodtid.`,
         },
         {
             level: 2,
@@ -64461,7 +65077,7 @@ $$ v \\approx 0{,}96 \\cdot 0{,}6967 \\approx 0{,}67\\ \\mathrm{m/s} $$
 
 **Svar:** Farten är ungefär $0{,}67\\ \\mathrm{m/s}$.
 
-**Generell slutsats:** Glöm inte att räknaren ska stå i radianmod när argumentet är $\\omega t$. Maxfarten är $v_{\\max} = \\omega A = 0{,}96\\ \\mathrm{m/s}$ — vår fart $0{,}67\\ \\mathrm{m/s}$ ligger rimligt en bit under det.`,
+**Generell slutsats:** Glöm inte att räknaren ska stå i radianmod när argumentet är $\\omega t$. Maxfarten är $v_{\\max} = \\omega A = 0{,}96\\ \\mathrm{m/s}$, och vår fart $0{,}67\\ \\mathrm{m/s}$ ligger rimligt en bit under det.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
@@ -64495,15 +65111,15 @@ ${(() => {
             answer: { value: 0.240, unit: 'kg' },
             solution: `**Insikten är att vi kan eliminera den okända fjäderkonstanten genom att bilda kvoten av de två fallens vinkelhastigheter.**
 
-**Steg 1 — vinkelhastigheterna.** Periodtiderna är $T_1 = 30/24 = 1{,}25\\ \\mathrm{s}$ respektive $T_2 = 30/16 = 1{,}875\\ \\mathrm{s}$. Vinkelhastigheterna blir
+**Steg 1: vinkelhastigheterna.** Periodtiderna är $T_1 = 30/24 = 1{,}25\\ \\mathrm{s}$ respektive $T_2 = 30/16 = 1{,}875\\ \\mathrm{s}$. Vinkelhastigheterna blir
 
 $$ \\omega_1 = \\frac{2\\pi}{T_1}, \\qquad \\omega_2 = \\frac{2\\pi}{T_2} $$
 
-**Steg 2 — ekvationssystem.** Med formeln $\\omega = \\sqrt{k/m}$ får vi två ekvationer med två obekanta (*k* och *m*):
+**Steg 2: ekvationssystem.** Med formeln $\\omega = \\sqrt{k/m}$ får vi två ekvationer med två obekanta (*k* och *m*):
 
 $$ \\omega_1^2 = \\frac{k}{m}, \\qquad \\omega_2^2 = \\frac{k}{m + \\Delta m} $$
 
-**Steg 3 — eliminera *k*.** Dividera ekvationerna:
+**Steg 3: eliminera *k*.** Dividera ekvationerna:
 
 $$ \\frac{\\omega_1^2}{\\omega_2^2} = \\frac{m + \\Delta m}{m} = 1 + \\frac{\\Delta m}{m} $$
 
@@ -64524,7 +65140,677 @@ $$ m = \\frac{0{,}30}{2{,}25 - 1} = \\frac{0{,}30}{1{,}25} = 0{,}24\\ \\mathrm{k
 
 **Svar:** Den ursprungliga massan är $0{,}24\\ \\mathrm{kg}$ (= $240\\ \\mathrm{g}$).
 
-**Generell slutsats:** Den centrala insikten är att kvoten $T_2/T_1$ eliminerar fjäderkonstanten — vi behöver aldrig veta *k* för att lösa massan. Sådana **kvotresonemang** är typiska för avancerad nivå: bilda förhållandet innan insättning så att de obekanta stryks.`,
+**Generell slutsats:** Den centrala insikten är att kvoten $T_2/T_1$ eliminerar fjäderkonstanten, och vi behöver aldrig veta *k* för att lösa massan. Sådana **kvotresonemang** är typiska för avancerad nivå: bilda förhållandet innan insättning så att de obekanta stryks.`,
+        },
+        {
+            level: 1,
+            question: `En vikt svänger harmoniskt upp och ned i en fjäder. I vilket läge befinner sig vikten när farten är som störst?`,
+            choices: [
+                'I det övre vändläget',
+                'I jämviktsläget',
+                'I det nedre vändläget',
+                'Mitt emellan jämviktsläget och ett vändläge',
+            ],
+            correct: 1,
+            solution: `Hastigheten i en harmonisk svängning är
+
+$$ v = \\omega \\cdot A \\cdot \\cos(\\omega \\cdot t) $$
+
+och läget är
+
+$$ y = A \\cdot \\sin(\\omega \\cdot t) $$
+
+Farten är störst när $\\cos(\\omega \\cdot t) = \\pm 1$. Då är $\\sin(\\omega \\cdot t) = 0$, alltså $y = 0$: vikten passerar jämviktsläget.
+
+I vändlägena vänder vikten, och där är farten 0. På väg från vändläget mot jämviktsläget ökar farten hela tiden, eftersom den resulterande kraften pekar mot jämviktsläget.
+
+**Svar:** Alternativ B, i jämviktsläget.`,
+        },
+        {
+            level: 1,
+            question: `En vikt med massan $0{,}80\\ \\mathrm{kg}$ hänger i en fjäder med fjäderkonstanten $50\\ \\mathrm{N/m}$ och svänger harmoniskt. Beräkna svängningens vinkelhastighet. Svara i rad/s.`,
+            answer: { value: 7.9, unit: 'rad/s' },
+            solution: `Vinkelhastigheten för en fjäderpendel är
+
+$$ \\omega = \\sqrt{\\frac{k}{m}} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+k = 50\\ \\mathrm{N/m} \\\\
+m = 0{,}80\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$ \\omega = \\sqrt{\\frac{50}{0{,}80}} = \\sqrt{62{,}5} = 7{,}905\\ldots\\ \\mathrm{rad/s} \\approx 7{,}9\\ \\mathrm{rad/s} $$
+
+**Svar:** $7{,}9\\ \\mathrm{rad/s}$`,
+        },
+        {
+            level: 1,
+            question: `En vikt svänger harmoniskt med amplituden $3{,}0\\ \\mathrm{cm}$. Dess största fart är $0{,}45\\ \\mathrm{m/s}$. Bestäm svängningens vinkelhastighet. Svara i rad/s.`,
+            answer: { value: 15, unit: 'rad/s' },
+            solution: `Den största farten i en harmonisk svängning är
+
+$$ v_{\\max} = \\omega \\cdot A $$
+
+Vi dividerar båda led med *A*:
+
+$$ \\omega = \\frac{v_{\\max}}{A} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+v_{\\max} = 0{,}45\\ \\mathrm{m/s} \\\\
+A = 3{,}0\\ \\mathrm{cm} = 0{,}030\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ \\omega = \\frac{0{,}45}{0{,}030} = 15\\ \\mathrm{rad/s} $$
+
+**Svar:** $15\\ \\mathrm{rad/s}$`,
+        },
+        {
+            level: 1,
+            question: `Elongationen *y* (i meter) hos en harmonisk svängning beror av tiden *t* (i sekunder) enligt
+
+$$ y = 0{,}20\\sin(5{,}0\\,t) $$
+
+Beräkna elongationen vid tidpunkten $t = 0{,}50\\ \\mathrm{s}$. Svara i meter.
+
+${makeOscillation({ A: 0.20, omega: 5.0, tMax: 2.5, xTicks: [0, 0.5, 1.0, 1.5, 2.0, 2.5], markT: 0.50, markTLabel: '<tspan font-style="italic">t</tspan> = 0,50 s' })}`,
+            answer: { value: 0.12, unit: 'm' },
+            solution: `Elongationen ges direkt av uttrycket:
+
+$$ y = 0{,}20\\sin(5{,}0\\,t) $$
+
+Mätvärde:
+$$
+\\left[ \\begin{array}{l}
+t = 0{,}50\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+Insättning ger
+
+$$ y = 0{,}20\\sin(5{,}0 \\cdot 0{,}50) = 0{,}20\\sin(2{,}5) $$
+
+Argumentet $2{,}5$ är i radianer, så räknaren ska stå i radianmod: $\\sin(2{,}5) = 0{,}5984\\ldots$
+
+$$ y = 0{,}20 \\cdot 0{,}5984\\ldots = 0{,}1196\\ldots\\ \\mathrm{m} \\approx 0{,}12\\ \\mathrm{m} $$
+
+I diagrammet ligger den markerade punkten ovanför jämviktsläget men under toppen, vilket stämmer med $0{,}12\\ \\mathrm{m}$.
+
+**Svar:** $0{,}12\\ \\mathrm{m}$`,
+        },
+        {
+            level: 2,
+            question: `Diagrammet visar elongationen *y* för en harmonisk svängning som funktion av tiden *t*.<br>a) Avläs amplituden och periodtiden.<br>b) Bestäm den största farten.<br>c) Bestäm den största accelerationen.
+
+${makeOscillation({ A: 3.0, omega: 2 * Math.PI / 0.40, tMax: 1.2, xTicks: [0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2], yTicks: [-3, -2, -1, 0, 1, 2, 3], yLabel: '<tspan font-style="italic">y</tspan> (cm)' })}`,
+            answer: { value: 7.4, unit: 'm/s²' },
+            delsvar: [
+                { del: 'a', value: 3.0, unit: 'cm', etikett: 'amplitud' },
+                { del: 'a', value: 0.40, unit: 's', etikett: 'periodtid' },
+                { del: 'b', value: 0.47, unit: 'm/s' },
+                { del: 'c', value: 7.4, unit: 'm/s²' },
+            ],
+            solution: `**a)** Amplituden är kurvans största utslag från jämviktsläget $y = 0$. Toppen ligger vid $3\\ \\mathrm{cm}$.
+
+Periodtiden är tiden för en hel svängning. Kurvan går uppåt genom $y = 0$ vid $t = 0$ och nästa gång vid $t = 0{,}40\\ \\mathrm{s}$.
+
+**Svar:** Amplituden är $3{,}0\\ \\mathrm{cm}$ och periodtiden $0{,}40\\ \\mathrm{s}$.
+
+**b)** Vinkelhastigheten fås ur periodtiden:
+
+$$ \\omega = \\frac{2\\pi}{T} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+A = 3{,}0\\ \\mathrm{cm} = 0{,}030\\ \\mathrm{m} \\\\
+T = 0{,}40\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ \\omega = \\frac{2\\pi}{0{,}40} = 15{,}70\\ldots\\ \\mathrm{rad/s} $$
+
+Den största farten är
+
+$$ v_{\\max} = \\omega \\cdot A = 15{,}70\\ldots \\cdot 0{,}030 = 0{,}4712\\ldots\\ \\mathrm{m/s} \\approx 0{,}47\\ \\mathrm{m/s} $$
+
+**Svar:** $0{,}47\\ \\mathrm{m/s}$
+
+**c)** Den största accelerationen är
+
+$$ a_{\\max} = \\omega^{2} \\cdot A = 15{,}70\\ldots^{2} \\cdot 0{,}030 = 7{,}402\\ldots\\ \\mathrm{m/s^2} \\approx 7{,}4\\ \\mathrm{m/s^2} $$
+
+**Svar:** $7{,}4\\ \\mathrm{m/s^2}$`,
+        },
+        {
+            level: 2,
+            question: `En vikt med massan $0{,}25\\ \\mathrm{kg}$ svänger harmoniskt i en fjäder med fjäderkonstanten $40\\ \\mathrm{N/m}$. Vid ett visst ögonblick befinner sig vikten $2{,}0\\ \\mathrm{cm}$ ovanför jämviktsläget. Bestäm viktens acceleration i det ögonblicket. Positiv riktning är uppåt, så ange accelerationen med tecken. Svara i m/s².`,
+            answer: { value: -3.2, unit: 'm/s²' },
+            solution: `Läget och accelerationen i en harmonisk svängning är
+
+$$ y = A \\cdot \\sin(\\omega \\cdot t), \\qquad a = -\\omega^{2} \\cdot A \\cdot \\sin(\\omega \\cdot t) $$
+
+Uttrycket $A \\cdot \\sin(\\omega \\cdot t)$ i accelerationen är just läget *y*, så
+
+$$ a = -\\omega^{2} \\cdot y $$
+
+Accelerationen beror alltså bara på var vikten är, inte på åt vilket håll den rör sig. Vinkelhastigheten för fjäderpendeln är
+
+$$ \\omega = \\sqrt{\\frac{k}{m}} \\quad\\Leftrightarrow\\quad \\omega^{2} = \\frac{k}{m} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+k = 40\\ \\mathrm{N/m} \\\\
+m = 0{,}25\\ \\mathrm{kg} \\\\
+y = 2{,}0\\ \\mathrm{cm} = 0{,}020\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ \\omega^{2} = \\frac{40}{0{,}25} = 160\\ \\mathrm{s^{-2}} $$
+
+$$ a = -160 \\cdot 0{,}020 = -3{,}2\\ \\mathrm{m/s^2} $$
+
+**Rimlighet:** Vikten är ovanför jämviktsläget, så den resulterande kraften och därmed accelerationen ska peka nedåt, mot jämviktsläget. Minustecknet stämmer.
+
+**Svar:** $-3{,}2\\ \\mathrm{m/s^2}$, alltså $3{,}2\\ \\mathrm{m/s^2}$ riktad nedåt.`,
+        },
+        {
+            level: 2,
+            question: `Elongationen *y* (i meter) hos en vikt som svänger harmoniskt beror av tiden *t* (i sekunder) enligt
+
+$$ y = 0{,}080\\sin(6{,}0\\,t) $$
+
+a) Vid vilken tidpunkt efter $t = 0$ är vikten för första gången $4{,}0\\ \\mathrm{cm}$ ovanför jämviktsläget? Svara i sekunder.<br>b) Hur stor är farten i det ögonblicket? Svara i m/s.`,
+            answer: { value: 0.42, unit: 'm/s' },
+            delsvar: [
+                { del: 'a', value: 0.087, unit: 's' },
+                { del: 'b', value: 0.42, unit: 'm/s' },
+            ],
+            solution: `**a)** Vi sätter $y = 0{,}040\\ \\mathrm{m}$ i uttrycket:
+
+$$ 0{,}040 = 0{,}080\\sin(6{,}0\\,t) $$
+
+Vi dividerar båda led med $0{,}080$:
+
+$$ \\sin(6{,}0\\,t) = 0{,}50 $$
+
+Den minsta positiva vinkeln (i radianer) med sinusvärdet $0{,}50$ är $\\dfrac{\\pi}{6}$, så första gången gäller
+
+$$ 6{,}0\\,t = \\frac{\\pi}{6} $$
+
+Vi dividerar båda led med $6{,}0$:
+
+$$ t = \\frac{\\pi}{36} = 0{,}08726\\ldots\\ \\mathrm{s} \\approx 0{,}087\\ \\mathrm{s} $$
+
+**Rimlighet:** Periodtiden är $T = \\dfrac{2\\pi}{6{,}0} \\approx 1{,}05\\ \\mathrm{s}$, och vikten når toppen efter en fjärdedels period, cirka $0{,}26\\ \\mathrm{s}$. Halva amplituden nås alltså tidigare, och $0{,}087\\ \\mathrm{s}$ är rimligt.
+
+**Svar:** $0{,}087\\ \\mathrm{s}$
+
+**b)** Hastigheten är derivatan av läget:
+
+$$ v = y' = 6{,}0 \\cdot 0{,}080\\cos(6{,}0\\,t) = 0{,}48\\cos(6{,}0\\,t) $$
+
+I ögonblicket då $6{,}0\\,t = \\dfrac{\\pi}{6}$ är $\\cos\\left(\\dfrac{\\pi}{6}\\right) = 0{,}8660\\ldots$, så
+
+$$ v = 0{,}48 \\cdot 0{,}8660\\ldots = 0{,}4156\\ldots\\ \\mathrm{m/s} \\approx 0{,}42\\ \\mathrm{m/s} $$
+
+Farten är mindre än maxfarten $0{,}48\\ \\mathrm{m/s}$, eftersom vikten inte är i jämviktsläget.
+
+**Svar:** $0{,}42\\ \\mathrm{m/s}$`,
+        },
+        {
+            level: 2,
+            question: `Två fjäderpendlar har vikter med samma massa. Fjädern i pendel 1 har fjäderkonstanten *k*, och vikten svänger med amplituden $4{,}0\\ \\mathrm{cm}$. Fjädern i pendel 2 har fjäderkonstanten $4k$, och vikten svänger med amplituden $2{,}0\\ \\mathrm{cm}$. Vilket påstående stämmer?`,
+            choices: [
+                'Pendel 1 har både störst maxfart och störst maxacceleration',
+                'Pendel 2 har störst maxfart, men pendel 1 har störst maxacceleration',
+                'Pendlarna har samma maxfart, men pendel 2 har dubbelt så stor maxacceleration',
+                'Pendlarna har samma maxfart och samma maxacceleration',
+            ],
+            correct: 2,
+            solution: `Vinkelhastigheten för en fjäderpendel är
+
+$$ \\omega = \\sqrt{\\frac{k}{m}} $$
+
+Massan är densamma, så för pendel 2 blir
+
+$$ \\omega_2 = \\sqrt{\\frac{4k}{m}} = 2 \\cdot \\sqrt{\\frac{k}{m}} = 2\\omega_1 $$
+
+**Maxfarten**, $v_{\\max} = \\omega \\cdot A$:
+
+$$ v_{1,\\max} = \\omega_1 \\cdot 4{,}0\\ \\mathrm{cm}, \\qquad v_{2,\\max} = 2\\omega_1 \\cdot 2{,}0\\ \\mathrm{cm} = \\omega_1 \\cdot 4{,}0\\ \\mathrm{cm} $$
+
+Maxfarterna är lika.
+
+**Maxaccelerationen**, $a_{\\max} = \\omega^{2} \\cdot A$:
+
+$$ a_{1,\\max} = \\omega_1^{2} \\cdot 4{,}0\\ \\mathrm{cm}, \\qquad a_{2,\\max} = (2\\omega_1)^{2} \\cdot 2{,}0\\ \\mathrm{cm} = \\omega_1^{2} \\cdot 8{,}0\\ \\mathrm{cm} $$
+
+Pendel 2 har dubbelt så stor maxacceleration. Halverad amplitud halverar både maxfart och maxacceleration, men den dubbla vinkelhastigheten fördubblar maxfarten och fyrdubblar maxaccelerationen.
+
+**Svar:** Alternativ C, samma maxfart men dubbelt så stor maxacceleration för pendel 2.`,
+        },
+        {
+            level: 2,
+            question: `En mobiltelefon är fastsatt på en vikt som svänger harmoniskt i en fjäder. Telefonens sensorer visar att den största farten är $0{,}60\\ \\mathrm{m/s}$ och att den största accelerationen är $4{,}8\\ \\mathrm{m/s^2}$.<br>a) Bestäm svängningens vinkelhastighet. Svara i rad/s.<br>b) Bestäm amplituden. Svara i cm.<br>c) Bestäm periodtiden. Svara i sekunder.`,
+            answer: { value: 0.79, unit: 's' },
+            delsvar: [
+                { del: 'a', value: 8.0, unit: 'rad/s' },
+                { del: 'b', value: 7.5, unit: 'cm' },
+                { del: 'c', value: 0.79, unit: 's' },
+            ],
+            solution: `De två maxvärdena är
+
+$$ v_{\\max} = \\omega \\cdot A \\qquad (1) $$
+
+$$ a_{\\max} = \\omega^{2} \\cdot A \\qquad (2) $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+v_{\\max} = 0{,}60\\ \\mathrm{m/s} \\\\
+a_{\\max} = 4{,}8\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+**a)** Vi dividerar (2), $a_{\\max} = \\omega^{2} \\cdot A$, med (1), $v_{\\max} = \\omega \\cdot A$. Amplituden förkortas bort:
+
+$$ \\frac{a_{\\max}}{v_{\\max}} = \\frac{\\omega^{2} \\cdot A}{\\omega \\cdot A} = \\omega $$
+
+$$ \\omega = \\frac{4{,}8}{0{,}60} = 8{,}0\\ \\mathrm{rad/s} $$
+
+**Svar:** $8{,}0\\ \\mathrm{rad/s}$
+
+**b)** Ur (1), $v_{\\max} = \\omega \\cdot A$, fås genom division av båda led med *ω*:
+
+$$ A = \\frac{v_{\\max}}{\\omega} = \\frac{0{,}60}{8{,}0} = 0{,}075\\ \\mathrm{m} = 7{,}5\\ \\mathrm{cm} $$
+
+**Svar:** $7{,}5\\ \\mathrm{cm}$
+
+**c)** Periodtiden fås ur $\\omega = \\dfrac{2\\pi}{T}$, som ger $T = \\dfrac{2\\pi}{\\omega}$:
+
+$$ T = \\frac{2\\pi}{8{,}0} = 0{,}7853\\ldots\\ \\mathrm{s} \\approx 0{,}79\\ \\mathrm{s} $$
+
+**Svar:** $0{,}79\\ \\mathrm{s}$`,
+        },
+        {
+            level: 3,
+            question: `a) Visa att farten *v* och läget *y* i en harmonisk svängning hänger ihop enligt
+
+$$ v^{2} = \\omega^{2} \\cdot (A^{2} - y^{2}) $$
+
+b) En vikt som svänger harmoniskt har farten $0{,}40\\ \\mathrm{m/s}$ när den är $3{,}0\\ \\mathrm{cm}$ från jämviktsläget och farten $0{,}30\\ \\mathrm{m/s}$ när den är $4{,}0\\ \\mathrm{cm}$ från jämviktsläget. Bestäm svängningens amplitud och vinkelhastighet.`,
+            answer: { value: 10, unit: 'rad/s' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 5.0, unit: 'cm', etikett: 'amplitud' },
+                { del: 'b', value: 10, unit: 'rad/s', etikett: 'vinkelhastighet' },
+            ],
+            solution: `**a)** Läget och hastigheten är
+
+$$ y = A \\cdot \\sin(\\omega \\cdot t), \\qquad v = \\omega \\cdot A \\cdot \\cos(\\omega \\cdot t) $$
+
+Vi dividerar hastigheten med *ω* och kvadrerar båda uttrycken:
+
+$$ y^{2} = A^{2} \\cdot \\sin^{2}(\\omega \\cdot t), \\qquad \\frac{v^{2}}{\\omega^{2}} = A^{2} \\cdot \\cos^{2}(\\omega \\cdot t) $$
+
+Vi adderar dem och använder trigonometriska ettan, $\\sin^{2} x + \\cos^{2} x = 1$:
+
+$$ y^{2} + \\frac{v^{2}}{\\omega^{2}} = A^{2} \\cdot \\left(\\sin^{2}(\\omega \\cdot t) + \\cos^{2}(\\omega \\cdot t)\\right) = A^{2} $$
+
+Vi subtraherar $y^{2}$ från båda led:
+
+$$ \\frac{v^{2}}{\\omega^{2}} = A^{2} - y^{2} $$
+
+Vi multiplicerar båda led med $\\omega^{2}$:
+
+$$ v^{2} = \\omega^{2} \\cdot (A^{2} - y^{2}) $$
+
+vilket skulle visas. Tiden har försvunnit, så sambandet gäller i varje ögonblick.
+
+**b)** Sambandet från a) ger en ekvation för varje mätning, med de två obekanta *A* och *ω*:
+
+$$
+\\begin{cases}
+0{,}40^{2} = \\omega^{2} \\cdot (A^{2} - 0{,}030^{2}) & (1) \\\\
+0{,}30^{2} = \\omega^{2} \\cdot (A^{2} - 0{,}040^{2}) & (2)
+\\end{cases}
+$$
+
+Räknat ut blir det
+
+$$
+\\begin{cases}
+0{,}16 = \\omega^{2} \\cdot A^{2} - 0{,}0009 \\cdot \\omega^{2} & (1) \\\\
+0{,}09 = \\omega^{2} \\cdot A^{2} - 0{,}0016 \\cdot \\omega^{2} & (2)
+\\end{cases}
+$$
+
+Vi subtraherar (2) från (1). Termen $\\omega^{2} \\cdot A^{2}$ försvinner:
+
+$$ 0{,}16 - 0{,}09 = (0{,}0016 - 0{,}0009) \\cdot \\omega^{2} $$
+
+$$ 0{,}07 = 0{,}0007 \\cdot \\omega^{2} $$
+
+Vi dividerar båda led med $0{,}0007$:
+
+$$ \\omega^{2} = 100 $$
+
+Vinkelhastigheten är positiv, så
+
+$$ \\omega = \\sqrt{100} = 10\\ \\mathrm{rad/s} $$
+
+Detta i ekvation (1), $0{,}16 = \\omega^{2} \\cdot (A^{2} - 0{,}030^{2})$, ger
+
+$$ 0{,}16 = 100 \\cdot (A^{2} - 0{,}0009) $$
+
+Vi dividerar båda led med 100:
+
+$$ 0{,}0016 = A^{2} - 0{,}0009 $$
+
+Vi adderar $0{,}0009$ till båda led:
+
+$$ A^{2} = 0{,}0025 $$
+
+$$ A = \\sqrt{0{,}0025} = 0{,}050\\ \\mathrm{m} = 5{,}0\\ \\mathrm{cm} $$
+
+**Rimlighet:** Amplituden är större än båda lägena, $3{,}0\\ \\mathrm{cm}$ och $4{,}0\\ \\mathrm{cm}$, och farten är lägre i läget längre ut, som den ska. Maxfarten blir $\\omega \\cdot A = 10 \\cdot 0{,}050 = 0{,}50\\ \\mathrm{m/s}$, större än båda de uppmätta farterna.
+
+**Svar:** Amplituden är $5{,}0\\ \\mathrm{cm}$ och vinkelhastigheten $10\\ \\mathrm{rad/s}$.`,
+        },
+        {
+            level: 3,
+            question: `Ett mynt ligger löst på en vågrät platta. Plattan sitter på en vibrationsgenerator som får den att svänga harmoniskt upp och ned med frekvensen $4{,}0\\ \\mathrm{Hz}$. När amplituden ökas lättar myntet till slut från plattan.
+
+Var i svängningen lättar myntet först? Bestäm den största amplitud plattan kan ha utan att myntet lättar. Motivera ditt svar med en kraftanalys. Svara i cm.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 215" width="474" height="340" role="img" aria-label="Ett mynt ligger pa en vagrat platta som sitter pa en vibrationsgenerator. Plattan svanger upp och ned." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="20" y1="200" x2="280" y2="200" stroke="#0f1620" stroke-width="2"/><line x1="26" y1="200" x2="18" y2="208" stroke="#8a8478" stroke-width="1"/><line x1="38" y1="200" x2="30" y2="208" stroke="#8a8478" stroke-width="1"/><line x1="50" y1="200" x2="42" y2="208" stroke="#8a8478" stroke-width="1"/><line x1="62" y1="200" x2="54" y2="208" stroke="#8a8478" stroke-width="1"/><line x1="74" y1="200" x2="66" y2="208" stroke="#8a8478" stroke-width="1"/><line x1="86" y1="200" x2="78" y2="208" stroke="#8a8478" stroke-width="1"/><line x1="98" y1="200" x2="90" y2="208" stroke="#8a8478" stroke-width="1"/><line x1="110" y1="200" x2="102" y2="208" stroke="#8a8478" stroke-width="1"/><line x1="122" y1="200" x2="114" y2="208" stroke="#8a8478" stroke-width="1"/><line x1="134" y1="200" x2="126" y2="208" stroke="#8a8478" stroke-width="1"/><line x1="146" y1="200" x2="138" y2="208" stroke="#8a8478" stroke-width="1"/><line x1="158" y1="200" x2="150" y2="208" stroke="#8a8478" stroke-width="1"/><line x1="170" y1="200" x2="162" y2="208" stroke="#8a8478" stroke-width="1"/><line x1="182" y1="200" x2="174" y2="208" stroke="#8a8478" stroke-width="1"/><line x1="194" y1="200" x2="186" y2="208" stroke="#8a8478" stroke-width="1"/><line x1="206" y1="200" x2="198" y2="208" stroke="#8a8478" stroke-width="1"/><line x1="218" y1="200" x2="210" y2="208" stroke="#8a8478" stroke-width="1"/><line x1="230" y1="200" x2="222" y2="208" stroke="#8a8478" stroke-width="1"/><line x1="242" y1="200" x2="234" y2="208" stroke="#8a8478" stroke-width="1"/><line x1="254" y1="200" x2="246" y2="208" stroke="#8a8478" stroke-width="1"/><line x1="266" y1="200" x2="258" y2="208" stroke="#8a8478" stroke-width="1"/><line x1="278" y1="200" x2="270" y2="208" stroke="#8a8478" stroke-width="1"/><rect x="80" y="140" width="140" height="60" rx="6" fill="#d9d4c7" stroke="#0f1620" stroke-width="1.6"/><circle cx="104" cy="160" r="4" fill="#5a6172"/><circle cx="118" cy="160" r="4" fill="#9aa0a6"/><text x="150" y="186" text-anchor="middle" font-size="12" fill="#0f1620">vibrationsgenerator</text><rect x="146" y="88" width="8" height="52" fill="#9aa0a6" stroke="#5a6172" stroke-width="1"/><rect x="70" y="80" width="160" height="8" rx="1.5" fill="#6ba3d6" stroke="#2f6db0" stroke-width="1.4"/><rect x="139" y="73" width="22" height="7" rx="2" fill="#d4a93c" stroke="#8a6d1f" stroke-width="1.2"/><text x="168" y="68" text-anchor="start" font-size="12" fill="#0f1620">mynt</text><text x="76" y="104" text-anchor="start" font-size="12" fill="#0f1620">platta</text><line x1="256" y1="58" x2="256" y2="110" stroke="#2563a8" stroke-width="1.8" stroke-linecap="butt"/><polygon points="252,58 256,50 260,58" fill="#2563a8"/><polygon points="252,110 256,118 260,110" fill="#2563a8"/></svg>`,
+            answer: { value: 1.6, unit: 'cm' },
+            solution: `**Kraftanalys.** På myntet verkar tyngdkraften $F_\\mathrm{G} = m \\cdot g$ nedåt och normalkraften $F_\\mathrm{N}$ från plattan uppåt. Så länge myntet ligger kvar har det samma acceleration *a* som plattan. Med positiv riktning uppåt ger Newtons andra lag
+
+$$ F_\\mathrm{N} - m \\cdot g = m \\cdot a $$
+
+Vi adderar $m \\cdot g$ till båda led:
+
+$$ F_\\mathrm{N} = m \\cdot (g + a) $$
+
+Plattan kan bara trycka på myntet, inte dra i det, så $F_\\mathrm{N} \\geq 0$. Myntet lättar alltså om plattans acceleration någon gång blir mer negativ än $-g$, det vill säga om den är riktad nedåt och större än *g*.
+
+**Var lättar det?** Plattans acceleration är $a = -\\omega^{2} \\cdot y$. Den är riktad nedåt när plattan är ovanför jämviktsläget och störst i det övre vändläget, där $y = A$ och $a = -\\omega^{2} \\cdot A$. Där är normalkraften minst, så det är där myntet lättar först.
+
+**Gränsamplituden.** Myntet ligger precis kvar när normalkraften blir noll i det övre vändläget, alltså när
+
+$$ \\omega^{2} \\cdot A = g $$
+
+Vi dividerar båda led med $\\omega^{2}$:
+
+$$ A = \\frac{g}{\\omega^{2}} $$
+
+Vinkelhastigheten fås ur frekvensen, $\\omega = 2\\pi \\cdot f$.
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+f = 4{,}0\\ \\mathrm{Hz} \\\\
+g = 9{,}82\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$ \\omega = 2\\pi \\cdot 4{,}0 = 25{,}13\\ldots\\ \\mathrm{rad/s} $$
+
+$$ A = \\frac{9{,}82}{25{,}13\\ldots^{2}} = 0{,}01554\\ldots\\ \\mathrm{m} \\approx 1{,}6\\ \\mathrm{cm} $$
+
+Myntets massa förkortas bort, så gränsen är densamma för alla föremål som ligger löst på plattan.
+
+**Rimlighet:** Kontroll: $\\omega^{2} \\cdot A = 25{,}13\\ldots^{2} \\cdot 0{,}01554\\ldots = 9{,}82\\ \\mathrm{m/s^2}$, alltså precis *g*. Med en mindre amplitud blir plattans acceleration nedåt mindre än *g*, och myntet ligger kvar.
+
+**Svar:** Myntet lättar först i det övre vändläget. Amplituden får högst vara $1{,}6\\ \\mathrm{cm}$.`,
+        },
+        {
+            level: 3,
+            question: `En vagn med massan $0{,}40\\ \\mathrm{kg}$ står på en vågrät luftkuddebana, där friktionen är försumbar. Vagnen är fäst i en fjäder med fjäderkonstanten $16\\ \\mathrm{N/m}$ och svänger fram och tillbaka med amplituden $10\\ \\mathrm{cm}$. En lerklump med massan $0{,}20\\ \\mathrm{kg}$ släpps rakt ned på vagnen och fastnar.<br>a) Bestäm den nya amplituden om lerklumpen landar när vagnen passerar jämviktsläget. Svara i cm.<br>b) Bestäm den nya amplituden om lerklumpen i stället landar när vagnen är i ett vändläge. Svara i cm.<br>c) Förklara med hjälp av energi varför amplituden minskar i det ena fallet men inte i det andra.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 200" width="616" height="280" role="img" aria-label="En vagn pa en luftkuddebana ar fast i en fjader och passerar jamviktslaget at hoger. En lerklump faller rakt ned mot vagnen." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="18" y="64" width="12" height="98" fill="#d9d4c7" stroke="#0f1620" stroke-width="1.4"/><line x1="18" y1="78" x2="10" y2="70" stroke="#8a8478" stroke-width="1"/><line x1="18" y1="90" x2="10" y2="82" stroke="#8a8478" stroke-width="1"/><line x1="18" y1="102" x2="10" y2="94" stroke="#8a8478" stroke-width="1"/><line x1="18" y1="114" x2="10" y2="106" stroke="#8a8478" stroke-width="1"/><line x1="18" y1="126" x2="10" y2="118" stroke="#8a8478" stroke-width="1"/><line x1="18" y1="138" x2="10" y2="130" stroke="#8a8478" stroke-width="1"/><line x1="18" y1="150" x2="10" y2="142" stroke="#8a8478" stroke-width="1"/><line x1="18" y1="162" x2="10" y2="154" stroke="#8a8478" stroke-width="1"/><rect x="30" y="150" width="392" height="12" rx="2" fill="#d9d4c7" stroke="#0f1620" stroke-width="1.4"/><circle cx="50" cy="156" r="1.4" fill="#8a8478"/><circle cx="68" cy="156" r="1.4" fill="#8a8478"/><circle cx="86" cy="156" r="1.4" fill="#8a8478"/><circle cx="104" cy="156" r="1.4" fill="#8a8478"/><circle cx="122" cy="156" r="1.4" fill="#8a8478"/><circle cx="140" cy="156" r="1.4" fill="#8a8478"/><circle cx="158" cy="156" r="1.4" fill="#8a8478"/><circle cx="176" cy="156" r="1.4" fill="#8a8478"/><circle cx="194" cy="156" r="1.4" fill="#8a8478"/><circle cx="212" cy="156" r="1.4" fill="#8a8478"/><circle cx="230" cy="156" r="1.4" fill="#8a8478"/><circle cx="248" cy="156" r="1.4" fill="#8a8478"/><circle cx="266" cy="156" r="1.4" fill="#8a8478"/><circle cx="284" cy="156" r="1.4" fill="#8a8478"/><circle cx="302" cy="156" r="1.4" fill="#8a8478"/><circle cx="320" cy="156" r="1.4" fill="#8a8478"/><circle cx="338" cy="156" r="1.4" fill="#8a8478"/><circle cx="356" cy="156" r="1.4" fill="#8a8478"/><circle cx="374" cy="156" r="1.4" fill="#8a8478"/><circle cx="392" cy="156" r="1.4" fill="#8a8478"/><circle cx="410" cy="156" r="1.4" fill="#8a8478"/><text x="226" y="182" text-anchor="middle" font-size="12" fill="#0f1620">luftkuddebana</text><path d="M 200 150 L 210 120 L 270 120 L 280 150 Z" fill="#6ba3d6" stroke="#2f6db0" stroke-width="1.5"/><rect x="222" y="112" width="36" height="8" rx="1.5" fill="#9aa0a6" stroke="#5a6172" stroke-width="1"/><polyline points="30,136 40,136 46.5,128 59.4,144 72.3,128 85.2,144 98.1,128 111,144 124,128 136.9,144 149.8,128 162.7,144 175.6,128 188.5,144 195,136 205,136" fill="none" stroke="#7c828c" stroke-width="1.8"/><text x="116" y="118" text-anchor="middle" font-size="12" fill="#0f1620">fjäder</text><text x="194" y="108" text-anchor="end" font-size="12" fill="#0f1620">vagn</text><line x1="276" y1="134" x2="326" y2="134" stroke="#2563a8" stroke-width="2.4" stroke-linecap="butt"/><polygon points="326,129 336,134 326,139" fill="#2563a8"/><text x="342" y="139" text-anchor="start" font-size="14" fill="#2563a8"><tspan font-style="italic">v</tspan></text><circle cx="240" cy="42" r="10" fill="#a0673a" stroke="#5e3a1f" stroke-width="1.2"/><line x1="240" y1="58" x2="240" y2="92" stroke="#5a6172" stroke-width="1.6" stroke-dasharray="5 4" stroke-linecap="butt"/><polygon points="236,92 240,100 244,92" fill="#5a6172"/><text x="256" y="46" text-anchor="start" font-size="12" fill="#0f1620">lerklump</text></svg>`,
+            answer: { value: 8.2, unit: 'cm' },
+            delsvar: [
+                { del: 'a', value: 8.2, unit: 'cm' },
+                { del: 'b', value: 10, unit: 'cm' },
+                { del: 'c' },
+            ],
+            solution: `Banan är vågrät, så jämviktsläget är där fjädern är ospänd, och tyngdkraften påverkar inte svängningen. Vinkelhastigheten för en fjäderpendel är
+
+$$ \\omega = \\sqrt{\\frac{k}{m}} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+m = 0{,}40\\ \\mathrm{kg} \\\\
+\\Delta m = 0{,}20\\ \\mathrm{kg} \\\\
+k = 16\\ \\mathrm{N/m} \\\\
+A_1 = 10\\ \\mathrm{cm} = 0{,}10\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+Före och efter att lerklumpen fastnat är vinkelhastigheten
+
+$$ \\omega_1 = \\sqrt{\\frac{16}{0{,}40}} = 6{,}324\\ldots\\ \\mathrm{rad/s}, \\qquad \\omega_2 = \\sqrt{\\frac{16}{0{,}60}} = 5{,}163\\ldots\\ \\mathrm{rad/s} $$
+
+**a)** I jämviktsläget har vagnen sin största fart:
+
+$$ v_1 = \\omega_1 \\cdot A_1 = 6{,}324\\ldots \\cdot 0{,}10 = 0{,}6324\\ldots\\ \\mathrm{m/s} $$
+
+Lerklumpen faller lodrätt och har ingen vågrät fart. Stöten är kort, och i jämviktsläget är fjäderkraften noll, så ingen vågrät yttre kraft verkar under stöten. Rörelsemängden i vågrät led bevaras:
+
+$$ m \\cdot v_1 = (m + \\Delta m) \\cdot v_2 $$
+
+Vi dividerar båda led med $m + \\Delta m$:
+
+$$ v_2 = \\frac{m \\cdot v_1}{m + \\Delta m} = \\frac{0{,}40 \\cdot 0{,}6324\\ldots}{0{,}60} = 0{,}4216\\ldots\\ \\mathrm{m/s} $$
+
+Vagnen med lerklumpen är fortfarande i jämviktsläget, så $v_2$ är den nya svängningens största fart. Ur $v_{\\max} = \\omega \\cdot A$ fås genom division av båda led med *ω*:
+
+$$ A_2 = \\frac{v_2}{\\omega_2} = \\frac{0{,}4216\\ldots}{5{,}163\\ldots} = 0{,}08164\\ldots\\ \\mathrm{m} \\approx 8{,}2\\ \\mathrm{cm} $$
+
+**Rimlighet:** Löst med bokstäver blir $A_2 = A_1 \\cdot \\sqrt{\\dfrac{m}{m + \\Delta m}}$, och $10\\ \\mathrm{cm} \\cdot \\sqrt{\\dfrac{2}{3}}$ ger samma $8{,}2\\ \\mathrm{cm}$. Amplituden blir mindre men inte mycket mindre, eftersom lerklumpen är lättare än vagnen.
+
+**Svar:** $8{,}2\\ \\mathrm{cm}$
+
+**b)** I vändläget står vagnen stilla ett ögonblick, och lerklumpen har ingen vågrät fart. Efter stöten har vagnen med lerklumpen därför fortfarande farten noll, och den är kvar $10\\ \\mathrm{cm}$ från jämviktsläget. Jämviktsläget flyttas inte, eftersom fjädern är vågrät. Ett läge där farten är noll är ett vändläge, så den nya svängningen har samma amplitud. Det som ändras är vinkelhastigheten, från $\\omega_1$ till $\\omega_2$, så svängningen blir långsammare.
+
+**Svar:** $10\\ \\mathrm{cm}$
+
+**c)** Svängningsenergin är lika med fjäderns energi i vändläget, $\\dfrac{k \\cdot A^{2}}{2}$, och i jämviktsläget är den lika med rörelseenergin.
+
+I a) är all energi rörelseenergi när lerklumpen landar:
+
+$$ E_1 = \\frac{m \\cdot v_1^{2}}{2} = \\frac{0{,}40 \\cdot 0{,}6324\\ldots^{2}}{2} = 0{,}080\\ \\mathrm{J} $$
+
+$$ E_2 = \\frac{(m + \\Delta m) \\cdot v_2^{2}}{2} = \\frac{0{,}60 \\cdot 0{,}4216\\ldots^{2}}{2} = 0{,}05333\\ldots\\ \\mathrm{J} $$
+
+En tredjedel av energin blir värme och deformation när leran fastnar (stöten är fullständigt oelastisk). Mindre energi ger mindre amplitud: $\\dfrac{k \\cdot A_2^{2}}{2} = E_2$ ger samma $8{,}2\\ \\mathrm{cm}$ som i a).
+
+I b) är rörelseenergin noll när lerklumpen landar. Ingen energi kan gå förlorad i stöten, och fjäderns energi är oförändrad. Då är också amplituden oförändrad.
+
+**Svar:** I jämviktsläget är all energi rörelseenergi, och en del av den blir värme när lerklumpen fastnar, så amplituden minskar. I vändläget är rörelseenergin noll, så ingen energi går förlorad och amplituden är densamma.`,
+        },
+        {
+            level: 3,
+            question: `I en hamn varierar vattenståndet med tidvattnet. Vid högvatten är vattendjupet vid kajen $6{,}6\\ \\mathrm{m}$ och vid lågvatten $1{,}8\\ \\mathrm{m}$, och det går $12{,}4\\ \\mathrm{h}$ mellan två högvatten. Vattenytans rörelse upp och ned kan beskrivas som en harmonisk svängning. Ett fartyg behöver minst $5{,}5\\ \\mathrm{m}$ vattendjup för att kunna ligga vid kajen.<br>a) Hur lång tid under varje tidvattenperiod kan fartyget ligga vid kajen? Svara i timmar.<br>b) Hur snabbt sjunker vattenytan i det ögonblick då fartyget senast måste lämna kajen? Svara i cm/min.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 470 240" width="635" height="324" role="img" aria-label="Ett fartyg ligger vid en kaj. Vattendjupet vid kajen ar 6,6 m vid hogvatten och 1,8 m vid lagvatten." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="16" y="22" width="54" height="193" fill="#d9d4c7" stroke="#0f1620" stroke-width="1.4"/><line x1="16" y1="36" x2="70" y2="36" stroke="#a9a293" stroke-width="0.8"/><line x1="16" y1="50" x2="70" y2="50" stroke="#a9a293" stroke-width="0.8"/><line x1="16" y1="64" x2="70" y2="64" stroke="#a9a293" stroke-width="0.8"/><line x1="16" y1="78" x2="70" y2="78" stroke="#a9a293" stroke-width="0.8"/><line x1="16" y1="92" x2="70" y2="92" stroke="#a9a293" stroke-width="0.8"/><line x1="16" y1="106" x2="70" y2="106" stroke="#a9a293" stroke-width="0.8"/><line x1="16" y1="120" x2="70" y2="120" stroke="#a9a293" stroke-width="0.8"/><line x1="16" y1="134" x2="70" y2="134" stroke="#a9a293" stroke-width="0.8"/><line x1="16" y1="148" x2="70" y2="148" stroke="#a9a293" stroke-width="0.8"/><line x1="16" y1="162" x2="70" y2="162" stroke="#a9a293" stroke-width="0.8"/><line x1="16" y1="176" x2="70" y2="176" stroke="#a9a293" stroke-width="0.8"/><line x1="16" y1="190" x2="70" y2="190" stroke="#a9a293" stroke-width="0.8"/><line x1="16" y1="204" x2="70" y2="204" stroke="#a9a293" stroke-width="0.8"/><line x1="52" y1="22" x2="52" y2="36" stroke="#a9a293" stroke-width="0.8"/><line x1="34" y1="36" x2="34" y2="50" stroke="#a9a293" stroke-width="0.8"/><line x1="52" y1="50" x2="52" y2="64" stroke="#a9a293" stroke-width="0.8"/><line x1="34" y1="64" x2="34" y2="78" stroke="#a9a293" stroke-width="0.8"/><line x1="52" y1="78" x2="52" y2="92" stroke="#a9a293" stroke-width="0.8"/><line x1="34" y1="92" x2="34" y2="106" stroke="#a9a293" stroke-width="0.8"/><line x1="52" y1="106" x2="52" y2="120" stroke="#a9a293" stroke-width="0.8"/><line x1="34" y1="120" x2="34" y2="134" stroke="#a9a293" stroke-width="0.8"/><line x1="52" y1="134" x2="52" y2="148" stroke="#a9a293" stroke-width="0.8"/><line x1="34" y1="148" x2="34" y2="162" stroke="#a9a293" stroke-width="0.8"/><line x1="52" y1="162" x2="52" y2="176" stroke="#a9a293" stroke-width="0.8"/><line x1="34" y1="176" x2="34" y2="190" stroke="#a9a293" stroke-width="0.8"/><line x1="52" y1="190" x2="52" y2="204" stroke="#a9a293" stroke-width="0.8"/><line x1="34" y1="204" x2="34" y2="215" stroke="#a9a293" stroke-width="0.8"/><text x="43" y="16" text-anchor="middle" font-size="12" fill="#0f1620">kaj</text><line x1="70" y1="215" x2="392" y2="215" stroke="#0f1620" stroke-width="2"/><line x1="78" y1="215" x2="70" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="90" y1="215" x2="82" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="102" y1="215" x2="94" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="114" y1="215" x2="106" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="126" y1="215" x2="118" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="138" y1="215" x2="130" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="150" y1="215" x2="142" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="162" y1="215" x2="154" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="174" y1="215" x2="166" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="186" y1="215" x2="178" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="198" y1="215" x2="190" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="210" y1="215" x2="202" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="222" y1="215" x2="214" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="234" y1="215" x2="226" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="246" y1="215" x2="238" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="258" y1="215" x2="250" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="270" y1="215" x2="262" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="282" y1="215" x2="274" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="294" y1="215" x2="286" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="306" y1="215" x2="298" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="318" y1="215" x2="310" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="330" y1="215" x2="322" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="342" y1="215" x2="334" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="354" y1="215" x2="346" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="366" y1="215" x2="358" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="378" y1="215" x2="370" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="390" y1="215" x2="382" y2="223" stroke="#8a8478" stroke-width="1"/><line x1="70" y1="50" x2="392" y2="50" stroke="#2563a8" stroke-width="1.8"/><line x1="70" y1="170" x2="392" y2="170" stroke="#2563a8" stroke-width="1.6" stroke-dasharray="7 5"/><text x="398" y="54" text-anchor="start" font-size="12" fill="#0f1620">högvatten</text><text x="398" y="174" text-anchor="start" font-size="12" fill="#0f1620">lågvatten</text><path d="M 74 34 L 196 34 L 214 30 Q 204 72 186 80 L 84 80 Q 74 74 74 34 Z" fill="#5a6172" stroke="#0f1620" stroke-width="1.4"/><line x1="76" y1="39" x2="204" y2="39" stroke="#c8324a" stroke-width="2"/><rect x="90" y="12" width="40" height="22" fill="#ece6d8" stroke="#0f1620" stroke-width="1.2"/><rect x="96" y="18" width="7" height="6" fill="#5a6172"/><rect x="108" y="18" width="7" height="6" fill="#5a6172"/><rect x="120" y="18" width="6" height="6" fill="#5a6172"/><rect x="104" y="0" width="9" height="12" fill="#c8324a" stroke="#0f1620" stroke-width="1"/><line x1="262" y1="57" x2="262" y2="208" stroke="#0f1620" stroke-width="1.6" stroke-linecap="butt"/><polygon points="258,57 262,50 266,57" fill="#0f1620"/><polygon points="258,208 262,215 266,208" fill="#0f1620"/><text x="270" y="136.5" text-anchor="start" font-size="13" fill="#0f1620">6,6 m</text><line x1="338" y1="177" x2="338" y2="208" stroke="#0f1620" stroke-width="1.6" stroke-linecap="butt"/><polygon points="334,177 338,170 342,177" fill="#0f1620"/><polygon points="334,208 338,215 342,208" fill="#0f1620"/><text x="346" y="196.5" text-anchor="start" font-size="13" fill="#0f1620">1,8 m</text></svg>`,
+            answer: { value: 1.7, unit: 'cm/min' },
+            delsvar: [
+                { del: 'a', value: 3.9, unit: 'h' },
+                { del: 'b', value: 1.7, unit: 'cm/min' },
+            ],
+            solution: `**Modell.** Vi mäter vattenytans läge *y* från medelvattenståndet, med positiv riktning uppåt. Medelvattenståndet ligger mitt emellan högvatten och lågvatten, så djupet där är medelvärdet av de två djupen:
+
+$$ d_0 = \\frac{6{,}6 + 1{,}8}{2} = 4{,}2\\ \\mathrm{m} $$
+
+Amplituden är avståndet från medelvattenståndet upp till högvattnet:
+
+$$ A = 6{,}6 - 4{,}2 = 2{,}4\\ \\mathrm{m} $$
+
+Periodtiden är tiden mellan två högvatten. Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+A = 2{,}4\\ \\mathrm{m} \\\\
+T = 12{,}4\\ \\mathrm{h}
+\\end{array} \\right]
+$$
+
+Med *t* räknat från en passage av medelvattenståndet på väg uppåt är
+
+$$ y = A \\cdot \\sin(\\omega \\cdot t), \\qquad \\omega = \\frac{2\\pi}{T} $$
+
+**a)** Fartyget kan ligga vid kajen så länge djupet är minst $5{,}5\\ \\mathrm{m}$, alltså så länge vattenytan ligger minst $5{,}5 - 4{,}2 = 1{,}3\\ \\mathrm{m}$ över medelvattenståndet:
+
+$$ A \\cdot \\sin(\\omega \\cdot t) \\geq 1{,}3 $$
+
+Vi dividerar båda led med $A = 2{,}4$:
+
+$$ \\sin(\\omega \\cdot t) \\geq \\frac{1{,}3}{2{,}4} = 0{,}5416\\ldots $$
+
+Vi kallar vinkeln $\\alpha = \\omega \\cdot t$. Under en period, $0 \\leq \\alpha < 2\\pi$, har sinus värdet $0{,}5416\\ldots$ för två vinklar:
+
+$$ \\alpha_1 = \\sin^{-1}(0{,}5416\\ldots) = 0{,}5725\\ldots\\ \\mathrm{rad}, \\qquad \\alpha_2 = \\pi - \\alpha_1 = 2{,}569\\ldots\\ \\mathrm{rad} $$
+
+Mellan dem är sinusvärdet större, så vattnet är tillräckligt djupt när vinkeln ligger mellan $\\alpha_1$ och $\\alpha_2$, kring högvattnet vid $\\alpha = \\dfrac{\\pi}{2}$. Vinkelintervallet är
+
+$$ \\Delta \\alpha = \\pi - 2 \\cdot 0{,}5725\\ldots = 1{,}996\\ldots\\ \\mathrm{rad} $$
+
+En hel period svarar mot vinkeln $2\\pi$, så tiden är samma andel av periodtiden:
+
+$$ \\Delta t = \\frac{\\Delta \\alpha}{2\\pi} \\cdot T = \\frac{1{,}996\\ldots}{2\\pi} \\cdot 12{,}4 = 3{,}940\\ldots\\ \\mathrm{h} \\approx 3{,}9\\ \\mathrm{h} $$
+
+**Rimlighet:** Vattenytan ligger över halva amplituden under en tredjedel av perioden, cirka $4{,}1\\ \\mathrm{h}$. Gränsen $1{,}3\\ \\mathrm{m}$ ligger en bit över halva amplituden, $1{,}2\\ \\mathrm{m}$, så något kortare tid är rimligt.
+
+**Svar:** Cirka $3{,}9\\ \\mathrm{h}$
+
+**b)** Fartyget måste lämna kajen när vattenytan sjunker förbi gränsen, vid vinkeln $\\alpha_2$. Hastigheten är derivatan av läget:
+
+$$ v = \\omega \\cdot A \\cdot \\cos(\\omega \\cdot t) $$
+
+Vinkelhastigheten är
+
+$$ \\omega = \\frac{2\\pi}{12{,}4} = 0{,}5067\\ldots\\ \\mathrm{rad/h} $$
+
+och vid $\\alpha_2$ är $\\cos \\alpha_2 = \\cos(2{,}569\\ldots) = -0{,}8406\\ldots$, så
+
+$$ v = 0{,}5067\\ldots \\cdot 2{,}4 \\cdot (-0{,}8406\\ldots) = -1{,}022\\ldots\\ \\mathrm{m/h} $$
+
+Minustecknet visar att ytan sjunker. I centimeter per minut blir farten
+
+$$ 1{,}022\\ldots\\ \\mathrm{m/h} = \\frac{102{,}2\\ldots\\ \\mathrm{cm}}{60\\ \\mathrm{min}} = 1{,}703\\ldots\\ \\mathrm{cm/min} \\approx 1{,}7\\ \\mathrm{cm/min} $$
+
+**Rimlighet:** Vattenytan rör sig snabbast vid medelvattenståndet, med $\\omega \\cdot A = 1{,}2\\ \\mathrm{m/h}$, ungefär $2\\ \\mathrm{cm/min}$. Vid gränsen ligger ytan en bit ovanför medelvattenståndet, så farten är något lägre.
+
+**Svar:** Cirka $1{,}7\\ \\mathrm{cm/min}$`,
+        },
+        {
+            level: 3,
+            question: `En vikt svänger harmoniskt med periodtiden $1{,}5\\ \\mathrm{s}$.<br>a) Visa att den andel av varje period då farten är större än halva maxfarten inte beror på amplituden eller periodtiden.<br>b) Hur lång tid under varje period är farten större än halva maxfarten? Svara i sekunder.`,
+            answer: { value: 1.0, unit: 's' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 1.0, unit: 's' },
+            ],
+            solution: `**a)** Hastigheten är
+
+$$ v = \\omega \\cdot A \\cdot \\cos(\\omega \\cdot t) $$
+
+och maxfarten är $v_{\\max} = \\omega \\cdot A$. Farten är större än halva maxfarten när
+
+$$ |\\omega \\cdot A \\cdot \\cos(\\omega \\cdot t)| > \\frac{\\omega \\cdot A}{2} $$
+
+Vi dividerar båda led med $\\omega \\cdot A$, som är positivt:
+
+$$ |\\cos(\\omega \\cdot t)| > \\frac{1}{2} $$
+
+Amplituden har försvunnit. Under en period går vinkeln $\\alpha = \\omega \\cdot t$ från 0 till $2\\pi$, oavsett hur lång periodtiden är. Andelen av perioden är därför andelen av vinklarna $0 \\leq \\alpha < 2\\pi$ där $|\\cos \\alpha| > \\dfrac{1}{2}$, och den beror varken på *A* eller på *T*.
+
+Vi bestämmer andelen. $\\cos \\alpha = \\dfrac{1}{2}$ för $\\alpha = \\dfrac{\\pi}{3}$ och $\\alpha = \\dfrac{5\\pi}{3}$, och $\\cos \\alpha = -\\dfrac{1}{2}$ för $\\alpha = \\dfrac{2\\pi}{3}$ och $\\alpha = \\dfrac{4\\pi}{3}$. Villkoret gäller i tre intervall:
+
+- $0 \\leq \\alpha < \\dfrac{\\pi}{3}$, längden $\\dfrac{\\pi}{3}$
+- $\\dfrac{2\\pi}{3} < \\alpha < \\dfrac{4\\pi}{3}$, längden $\\dfrac{2\\pi}{3}$
+- $\\dfrac{5\\pi}{3} < \\alpha < 2\\pi$, längden $\\dfrac{\\pi}{3}$
+
+Sammanlagt är det $\\dfrac{4\\pi}{3}$ av $2\\pi$, alltså andelen
+
+$$ \\frac{4\\pi}{3} \\cdot \\frac{1}{2\\pi} = \\frac{2}{3} $$
+
+**Svar:** Villkoret blir $|\\cos(\\omega \\cdot t)| > \\dfrac{1}{2}$, där varken *A* eller *T* ingår. Farten är större än halva maxfarten under $\\dfrac{2}{3}$ av varje period.
+
+**b)** Andelen gånger periodtiden:
+
+$$ t = \\frac{2}{3} \\cdot 1{,}5 = 1{,}0\\ \\mathrm{s} $$
+
+**Rimlighet:** Vikten rör sig snabbt kring jämviktsläget och bromsar in bara nära vändlägena. Att farten är stor under mer än halva tiden stämmer med det.
+
+**Svar:** $1{,}0\\ \\mathrm{s}$`,
+        },
+        {
+            level: 3,
+            question: `En elev fäster en mobiltelefon med massan $0{,}20\\ \\mathrm{kg}$ i en fjäder och låter den svänga lodrätt. Telefonens accelerometer och en avståndsmätare ger accelerationen *a* vid några lägen *y* (räknat från jämviktsläget, positiv riktning uppåt):
+
+| $y$ (cm) | $-4{,}0$ | $-2{,}0$ | $0$ | $2{,}0$ | $4{,}0$ |
+|---|---|---|---|---|---|
+| $a$ (m/s²) | $3{,}9$ | $2{,}1$ | $0$ | $-1{,}9$ | $-4{,}0$ |
+
+a) Förklara med teorin för harmonisk svängning varför mätpunkterna bör ligga på en rät linje genom origo med negativ lutning, om *a* ritas mot *y*.<br>b) Bestäm vinkelhastigheten ur mätdata. Svara i rad/s.<br>c) Bestäm fjäderkonstanten. Svara i N/m.`,
+            answer: { value: 20, unit: 'N/m', tol: 0.05 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 9.9, unit: 'rad/s', tol: 0.05 },
+                { del: 'c', value: 20, unit: 'N/m', tol: 0.05 },
+            ],
+            solution: `**a)** Läget och accelerationen är
+
+$$ y = A \\cdot \\sin(\\omega \\cdot t), \\qquad a = -\\omega^{2} \\cdot A \\cdot \\sin(\\omega \\cdot t) $$
+
+Faktorn $A \\cdot \\sin(\\omega \\cdot t)$ i accelerationen är läget *y*, så
+
+$$ a = -\\omega^{2} \\cdot y $$
+
+Det är en proportionalitet: ritas *a* mot *y* blir grafen en rät linje genom origo med lutningen $-\\omega^{2}$. Lutningen är negativ eftersom accelerationen alltid pekar mot jämviktsläget, nedåt när telefonen är ovanför och uppåt när den är nedanför.
+
+**Svar:** Teorin ger $a = -\\omega^{2} \\cdot y$, en rät linje genom origo med den negativa lutningen $-\\omega^{2}$.
+
+**b)** Vi ritar *a* mot *y* (med *y* i meter) och drar en rät linje genom punkterna. Punkterna ligger nära en linje genom origo. Lutningen kan bestämmas med de två punkterna längst ut, eftersom ett litet avläsningsfel betyder minst när punkterna ligger långt från varandra:
+
+$$ \\text{lutning} = \\frac{\\Delta a}{\\Delta y} = \\frac{-4{,}0 - 3{,}9}{0{,}040 - (-0{,}040)} = \\frac{-7{,}9}{0{,}080} = -98{,}75\\ \\mathrm{s^{-2}} $$
+
+(Räknarens linjära regression ger nästan samma värde, $-99\\ \\mathrm{s^{-2}}$.) Lutningen är $-\\omega^{2}$, så
+
+$$ \\omega^{2} = 98{,}75\\ \\mathrm{s^{-2}} $$
+
+$$ \\omega = \\sqrt{98{,}75} = 9{,}937\\ldots\\ \\mathrm{rad/s} \\approx 9{,}9\\ \\mathrm{rad/s} $$
+
+**Svar:** Cirka $9{,}9\\ \\mathrm{rad/s}$
+
+**c)** Vinkelhastigheten för en fjäderpendel är $\\omega = \\sqrt{\\dfrac{k}{m}}$. Vi kvadrerar båda led och multiplicerar med *m*:
+
+$$ k = m \\cdot \\omega^{2} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+m = 0{,}20\\ \\mathrm{kg} \\\\
+\\omega^{2} = 98{,}75\\ \\mathrm{s^{-2}}
+\\end{array} \\right]
+$$
+
+$$ k = 0{,}20 \\cdot 98{,}75 = 19{,}75\\ \\mathrm{N/m} \\approx 20\\ \\mathrm{N/m} $$
+
+**Rimlighet:** Mätvärdena är givna med två värdesiffror och ligger inte exakt på linjen, så svaret anges med två värdesiffror. Periodtiden blir $T = \\dfrac{2\\pi}{\\omega} \\approx 0{,}63\\ \\mathrm{s}$, en rimlig svängning för en labbfjäder med en telefon i.
+
+**Svar:** Cirka $20\\ \\mathrm{N/m}$`,
         },
     ],
 
@@ -64552,7 +65838,7 @@ $$ T = 2\\pi\\sqrt{\\frac{0{,}50}{80}} = 2\\pi\\sqrt{0{,}00625} = 2\\pi\\cdot 0{
 
 **Svar:** Periodtiden är ungefär $0{,}50\\ \\mathrm{s}$.
 
-**Generell slutsats:** Notera att amplituden inte ingår i formeln — periodtiden beror bara på fjäderkonstanten och massan.`,
+**Generell slutsats:** Notera att amplituden inte ingår i formeln: periodtiden beror bara på fjäderkonstanten och massan.`,
         },
         {
             level: 1,
@@ -64608,7 +65894,7 @@ ${makeOscillation({ A: 0.04, omega: Math.sqrt(39.28/0.50), tMax: 1.6, showPeriod
             answer: { value: 0.709, unit: 's' },
             solution: `Vi behöver först fjäderkonstanten *k* via Hookes lag, och sedan periodtiden med den nya massan.
 
-**Steg 1 — fjäderkonstanten.** Tyngdkraften från den första vikten ger förlängningen $\\Delta l$:
+**Steg 1: fjäderkonstanten.** Tyngdkraften från den första vikten ger förlängningen $\\Delta l$:
 
 $$ k = \\frac{m_1 \\cdot g}{\\Delta l} $$
 
@@ -64622,23 +65908,23 @@ $$
 
 $$ k = \\frac{0{,}200 \\cdot 9{,}82}{0{,}050} = 39{,}28\\ \\mathrm{N/m} $$
 
-**Steg 2 — periodtiden med den nya massan.**
+**Steg 2: periodtiden med den nya massan.**
 
 $$ T = 2\\pi\\sqrt{\\frac{m_2}{k}} = 2\\pi\\sqrt{\\frac{0{,}500}{39{,}28}} = 2\\pi\\cdot 0{,}1129 \\approx 0{,}71\\ \\mathrm{s} $$
 
 **Svar:** Periodtiden är ungefär $0{,}71\\ \\mathrm{s}$.
 
-**Generell slutsats:** Två formler i kedja — Hookes lag ger *k* ur den första viktens utdragning, sedan ger periodformeln *T* ur den nya massan. Notera att amplituden inte spelar någon roll.`,
+**Generell slutsats:** Två formler i kedja: Hookes lag ger *k* ur den första viktens utdragning, sedan ger periodformeln *T* ur den nya massan. Notera att amplituden inte spelar någon roll.`,
         },
         {
-            level: 2,
+            level: 1,
             question: `Diagrammet visar elongationen för en vikt med massan $0{,}45\\ \\mathrm{kg}$ som svänger i en fjäder. Avläs periodtiden ur diagrammet och bestäm fjäderkonstanten.
 
 ${makeOscillation({ A: 0.06, omega: 2*Math.PI/0.80, tMax: 1.6, xTicks: [0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6], yTicks: [-0.08, -0.04, 0, 0.04, 0.08] })}`,
             answer: { value: 27.76, unit: 'N/m' },
-            solution: `**Steg 1 — avläs periodtiden från grafen.** En hel svängning tar tiden från en topp till nästa, eller från en stigande nollgenomgång till nästa. Från diagrammet syns $T = 0{,}80\\ \\mathrm{s}$.
+            solution: `**Steg 1: avläs periodtiden från grafen.** En hel svängning tar tiden från en topp till nästa, eller från en stigande nollgenomgång till nästa. Från diagrammet syns $T = 0{,}80\\ \\mathrm{s}$.
 
-**Steg 2 — beräkna fjäderkonstanten.**
+**Steg 2: beräkna fjäderkonstanten.**
 
 $$ T = 2\\pi\\sqrt{\\frac{m}{k}} \\quad\\Leftrightarrow\\quad k = \\frac{4\\pi^2 \\cdot m}{T^2} $$
 
@@ -64654,12 +65940,12 @@ $$ k = \\frac{4\\pi^2 \\cdot 0{,}45}{0{,}80^2} = \\frac{17{,}77}{0{,}64} \\appro
 
 **Svar:** Fjäderkonstanten är ungefär $28\\ \\mathrm{N/m}$.
 
-**Generell slutsats:** Att läsa av en periodtid från en sinuskurva är en grundfärdighet. Räkna från en topp till nästa (eller från en nollgenomgång i samma riktning till nästa) — inte från en topp till nästa botten, vilket bara är en halv periodtid.`,
+**Generell slutsats:** Att läsa av en periodtid från en sinuskurva är en grundfärdighet. Räkna från en topp till nästa (eller från en nollgenomgång i samma riktning till nästa), inte från en topp till nästa botten, vilket bara är en halv periodtid.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
-            level: 3,
+            level: 2,
             question: `Två likadana fjädrar, var och en med fjäderkonstanten $k = 96\\ \\mathrm{N/m}$, kopplas i **serie**: den ena hänger från taket och den andra i den, och slutligen en vikt på $0{,}50\\ \\mathrm{kg}$ längst ner. Bestäm periodtiden om vikten sätts i svängning.
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 236" width="280" height="236" style="display:block;margin:14px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:4px">
@@ -64675,17 +65961,643 @@ $$ k = \\frac{4\\pi^2 \\cdot 0{,}45}{0{,}80^2} = \\frac{17{,}77}{0{,}64} \\appro
             answer: { value: 0.641, unit: 's' },
             solution: `**Insikten är att två fjädrar i serie känner samma *kraft*** (viktens tyngd), men deras *förlängningar* adderas. Paret blir därför mjukare än en ensam fjäder.
 
-**Steg 1 — resulterande fjäderkonstant.** Båda fjädrarna känner samma kraft *F* och har samma fjäderkonstant, så de förlängs lika mycket. Paret förlängs dubbelt så mycket som en ensam fjäder. För $n$ likadana fjädrar i serie gäller $k_\\mathrm{R} = \\dfrac{k}{n}$, här med $n = 2$:
+**Steg 1: resulterande fjäderkonstant.** Båda fjädrarna känner samma kraft *F* och har samma fjäderkonstant, så de förlängs lika mycket. Paret förlängs dubbelt så mycket som en ensam fjäder. För $n$ likadana fjädrar i serie gäller $k_\\mathrm{R} = \\dfrac{k}{n}$, här med $n = 2$:
 
 $$ k_\\mathrm{R} = \\frac{k}{n} = \\frac{96}{2} = 48\\ \\mathrm{N/m} $$
 
-**Steg 2 — periodtiden.**
+**Steg 2: periodtiden.**
 
 $$ T = 2\\pi\\sqrt{\\frac{m}{k_\\mathrm{R}}} = 2\\pi\\sqrt{\\frac{0{,}50}{48}} = 2\\pi\\cdot 0{,}1021 \\approx 0{,}64\\ \\mathrm{s} $$
 
 **Svar:** Periodtiden är ungefär $0{,}64\\ \\mathrm{s}$.
 
 **Generell slutsats:** Likadana fjädrar i serie är mjukare än en ensam fjäder, $k_\\mathrm{R} = \\dfrac{k}{n}$. Parallellt blir de styvare, $k_\\mathrm{R} = n \\cdot k$. Att se vilken storhet (kraft eller förlängning) som är gemensam för fjädrarna är hela insikten.`,
+        },
+        {
+            level: 1,
+            question: `En vikt svänger upp och ned i en fjäder med periodtiden $T$. Vikten byts mot en vikt med fyra gånger så stor massa, som får svänga i samma fjäder. Vilken periodtid får den nya svängningen?`,
+            choices: [
+                '$\\dfrac{T}{2}$',
+                '$2T$',
+                '$4T$',
+                '$T$',
+            ],
+            correct: 1,
+            solution: `Periodtiden för en vikt i fjäder är
+
+$$ T = 2\\pi\\sqrt{\\frac{m}{k}} $$
+
+Fjädern är densamma, så $k$ ändras inte. Med massan $4m$ blir periodtiden
+
+$$ T_\\mathrm{ny} = 2\\pi\\sqrt{\\frac{4m}{k}} = \\sqrt{4} \\cdot 2\\pi\\sqrt{\\frac{m}{k}} = 2 \\cdot T $$
+
+Periodtiden växer med roten ur massan, så fyra gånger så stor massa ger $\\sqrt{4} = 2$ gånger så lång periodtid.
+
+**Svar:** Alternativ B, $2T$.`,
+        },
+        {
+            level: 1,
+            question: `En liten figur med ett fjädrande huvud står på en hylla. Huvudet har massan $45\\ \\mathrm{g}$ och sitter på en fjäder med fjäderkonstanten $6{,}0\\ \\mathrm{N/m}$. När man knackar på huvudet svänger det upp och ned. Bestäm svängningens frekvens. Svara i Hz.`,
+            answer: { value: 1.8, unit: 'Hz', tol: 0.03 },
+            solution: `Vi beräknar först periodtiden och sedan frekvensen, som är antalet svängningar per sekund.
+
+$$ T = 2\\pi\\sqrt{\\frac{m}{k}} \\qquad f = \\frac{1}{T} $$
+
+$$
+\\left[ \\begin{array}{l}
+m = 45\\ \\mathrm{g} = 0{,}045\\ \\mathrm{kg} \\\\
+k = 6{,}0\\ \\mathrm{N/m}
+\\end{array} \\right]
+$$
+
+$$ T = 2\\pi\\sqrt{\\frac{0{,}045}{6{,}0}} = 2\\pi \\cdot 0{,}08660\\ldots = 0{,}54413\\ldots\\ \\mathrm{s} $$
+
+$$ f = \\frac{1}{0{,}54413\\ldots} = 1{,}8377\\ldots\\ \\mathrm{Hz} \\approx 1{,}8\\ \\mathrm{Hz} $$
+
+**Svar:** Ungefär $1{,}8\\ \\mathrm{Hz}$`,
+        },
+        {
+            level: 1,
+            question: `En elev hänger en vikt med massan $0{,}250\\ \\mathrm{kg}$ i en fjäder och sätter den i svängning. Med ett tidtagarur mäter hon att vikten gör $20$ hela svängningar på $13{,}0\\ \\mathrm{s}$. Bestäm fjäderns fjäderkonstant. Svara i N/m.`,
+            answer: { value: 23.4, unit: 'N/m', tol: 0.02 },
+            solution: `En hel svängning tar periodtiden $T$, så 20 svängningar tar tiden $20 \\cdot T$.
+
+$$ T = \\frac{13{,}0\\ \\mathrm{s}}{20} = 0{,}650\\ \\mathrm{s} $$
+
+Vi löser ut fjäderkonstanten ur formeln för periodtiden genom att kvadrera båda led.
+
+$$ T = 2\\pi\\sqrt{\\frac{m}{k}} \\quad\\Leftrightarrow\\quad T^{2} = 4\\pi^{2} \\cdot \\frac{m}{k} \\quad\\Leftrightarrow\\quad k = \\frac{4\\pi^{2} \\cdot m}{T^{2}} $$
+
+$$
+\\left[ \\begin{array}{l}
+m = 0{,}250\\ \\mathrm{kg} \\\\
+T = 0{,}650\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ k = \\frac{4\\pi^{2} \\cdot 0{,}250}{0{,}650^{2}} = \\frac{9{,}8696\\ldots}{0{,}4225} = 23{,}360\\ldots\\ \\mathrm{N/m} \\approx 23{,}4\\ \\mathrm{N/m} $$
+
+Att eleven tar tiden för 20 svängningar i stället för en gör mätningen noggrannare: felet när klockan startas och stoppas fördelas på 20 periodtider.
+
+**Svar:** Ungefär $23{,}4\\ \\mathrm{N/m}$`,
+        },
+        {
+            level: 1,
+            question: `En vikt svänger upp och ned i en fjäder. Vilken av ändringarna gör periodtiden kortare?`,
+            choices: [
+                'Vikten byts mot en tyngre vikt.',
+                'Vikten dras ner längre innan den släpps.',
+                'Fjädern byts mot en mjukare fjäder.',
+                'Fjädern byts mot en styvare fjäder.',
+            ],
+            correct: 3,
+            solution: `Periodtiden är
+
+$$ T = 2\\pi\\sqrt{\\frac{m}{k}} $$
+
+Vi går igenom alternativen.
+
+- **En tyngre vikt** ger större $m$ och därmed längre periodtid.
+- **Att dra ner vikten längre** ger större amplitud, men amplituden finns inte med i formeln. Periodtiden ändras inte.
+- **En mjukare fjäder** har mindre fjäderkonstant $k$. Då blir kvoten $\\dfrac{m}{k}$ större och periodtiden längre.
+- **En styvare fjäder** har större $k$. Kvoten $\\dfrac{m}{k}$ blir mindre och periodtiden kortare.
+
+**Svar:** Alternativ D, fjädern byts mot en styvare fjäder.`,
+        },
+        {
+            level: 2,
+            question: `a) Visa att periodtiden för en vikt som svänger i en fjäder kan skrivas $T = 2\\pi\\sqrt{\\frac{\\Delta l}{g}}$, där $\\Delta l$ är hur mycket fjädern förlängs när vikten hänger stilla i den.<br>b) En vikt hängs i en fjäder, som då förlängs $6{,}5\\ \\mathrm{cm}$. Bestäm periodtiden när vikten sätts i svängning. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.`,
+            answer: { value: 0.51, unit: 's' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 0.51, unit: 's' },
+            ],
+            solution: `**a)** Periodtiden för en vikt i fjäder är
+
+$$ T = 2\\pi\\sqrt{\\frac{m}{k}} \\qquad (1) $$
+
+När vikten hänger stilla är fjäderkraften lika stor som tyngdkraften. Med Hookes lag ger det
+
+$$ k \\cdot \\Delta l = m \\cdot g \\quad\\Leftrightarrow\\quad k = \\frac{m \\cdot g}{\\Delta l} $$
+
+Detta i ekvation (1), $T = 2\\pi\\sqrt{\\dfrac{m}{k}}$, ger
+
+$$ T = 2\\pi\\sqrt{\\frac{m}{\\;\\dfrac{m \\cdot g}{\\Delta l}\\;}} = 2\\pi\\sqrt{\\frac{m \\cdot \\Delta l}{m \\cdot g}} = 2\\pi\\sqrt{\\frac{\\Delta l}{g}} $$
+
+Massan förkortas bort. Det räcker alltså att veta hur mycket vikten drar ut fjädern för att kunna förutsäga periodtiden.
+
+**Svar:** $T = 2\\pi\\sqrt{\\frac{\\Delta l}{g}}$, vilket skulle visas.
+
+**b)**
+
+$$
+\\left[ \\begin{array}{l}
+\\Delta l = 6{,}5\\ \\mathrm{cm} = 0{,}065\\ \\mathrm{m} \\\\
+g = 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$ T = 2\\pi\\sqrt{\\frac{0{,}065}{9{,}82}} = 2\\pi \\cdot 0{,}08135\\ldots = 0{,}5111\\ldots\\ \\mathrm{s} \\approx 0{,}51\\ \\mathrm{s} $$
+
+**Svar:** Ungefär $0{,}51\\ \\mathrm{s}$`,
+        },
+        {
+            level: 2,
+            question: `En vikt med massan $0{,}30\\ \\mathrm{kg}$ svänger i en fjäder med periodtiden $0{,}60\\ \\mathrm{s}$. Hur stor massa måste läggas till vikten för att periodtiden i samma fjäder ska bli $0{,}90\\ \\mathrm{s}$? Svara i kg.`,
+            answer: { value: 0.38, unit: 'kg', tol: 0.02 },
+            solution: `Fjäderkonstanten är densamma i båda fallen. Vi skriver periodtiden för båda massorna.
+
+$$ T_1 = 2\\pi\\sqrt{\\frac{m_1}{k}} \\qquad T_2 = 2\\pi\\sqrt{\\frac{m_2}{k}} $$
+
+Vi dividerar den andra med den första. Då försvinner både $2\\pi$ och $k$.
+
+$$ \\frac{T_2}{T_1} = \\sqrt{\\frac{m_2}{m_1}} $$
+
+Vi kvadrerar båda led och löser ut $m_2$.
+
+$$ \\left(\\frac{T_2}{T_1}\\right)^{2} = \\frac{m_2}{m_1} \\quad\\Leftrightarrow\\quad m_2 = m_1 \\cdot \\left(\\frac{T_2}{T_1}\\right)^{2} $$
+
+$$
+\\left[ \\begin{array}{l}
+m_1 = 0{,}30\\ \\mathrm{kg} \\\\
+T_1 = 0{,}60\\ \\mathrm{s} \\\\
+T_2 = 0{,}90\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ m_2 = 0{,}30 \\cdot \\left(\\frac{0{,}90}{0{,}60}\\right)^{2} = 0{,}30 \\cdot 2{,}25 = 0{,}675\\ \\mathrm{kg} $$
+
+Den massa som ska läggas till är skillnaden.
+
+$$ \\Delta m = m_2 - m_1 = 0{,}675 - 0{,}30 = 0{,}375\\ \\mathrm{kg} \\approx 0{,}38\\ \\mathrm{kg} $$
+
+**Rimlighet:** Periodtiden ska bli $1{,}5$ gånger så lång, och då måste massan bli $1{,}5^{2} = 2{,}25$ gånger så stor, alltså mer än dubbelt så stor.
+
+**Svar:** Ungefär $0{,}38\\ \\mathrm{kg}$ måste läggas till.`,
+        },
+        {
+            level: 2,
+            question: `Diagrammet visar elongationen $y$ för en vikt med massan $0{,}80\\ \\mathrm{kg}$ som svänger i en fjäder.<br>a) Bestäm fjäderkonstanten.<br>b) Bestäm viktens största fart.
+
+${makeOscillation({ A: 4.0, omega: 2*Math.PI/0.6, tMax: 1.8, xTicks: [0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8], yTicks: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5], yLabel: '<tspan font-style="italic">y</tspan> (cm)' })}`,
+            answer: { value: 0.42, unit: 'm/s' },
+            delsvar: [
+                { del: 'a', value: 88, unit: 'N/m' },
+                { del: 'b', value: 0.42, unit: 'm/s' },
+            ],
+            solution: `Vi läser av två värden i diagrammet. En hel svängning, till exempel från toppen vid $t = 0{,}15\\ \\mathrm{s}$ till nästa topp vid $t = 0{,}75\\ \\mathrm{s}$, tar $0{,}60\\ \\mathrm{s}$. Kurvan går upp till $4{,}0\\ \\mathrm{cm}$ på var sida om jämviktsläget.
+
+$$
+\\left[ \\begin{array}{l}
+m = 0{,}80\\ \\mathrm{kg} \\\\
+T = 0{,}60\\ \\mathrm{s} \\\\
+A = 4{,}0\\ \\mathrm{cm} = 0{,}040\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+**a)** Vi löser ut fjäderkonstanten ur formeln för periodtiden.
+
+$$ T = 2\\pi\\sqrt{\\frac{m}{k}} \\quad\\Leftrightarrow\\quad k = \\frac{4\\pi^{2} \\cdot m}{T^{2}} $$
+
+$$ k = \\frac{4\\pi^{2} \\cdot 0{,}80}{0{,}60^{2}} = \\frac{31{,}582\\ldots}{0{,}36} = 87{,}729\\ldots\\ \\mathrm{N/m} \\approx 88\\ \\mathrm{N/m} $$
+
+**Svar:** Ungefär $88\\ \\mathrm{N/m}$
+
+**b)** Den största farten har vikten när den passerar jämviktsläget, och den är
+
+$$ v_{\\max} = \\omega \\cdot A \\qquad \\text{där} \\qquad \\omega = \\frac{2\\pi}{T} $$
+
+$$ \\omega = \\frac{2\\pi}{0{,}60} = 10{,}471\\ldots\\ \\mathrm{rad/s} $$
+
+$$ v_{\\max} = 10{,}471\\ldots \\cdot 0{,}040 = 0{,}4188\\ldots\\ \\mathrm{m/s} \\approx 0{,}42\\ \\mathrm{m/s} $$
+
+**Svar:** Ungefär $0{,}42\\ \\mathrm{m/s}$`,
+        },
+        {
+            level: 2,
+            question: `En bil med massan $1\\,200\\ \\mathrm{kg}$ står parkerad. Fyra personer med den sammanlagda massan $320\\ \\mathrm{kg}$ stiger in, och bilens kaross sjunker då $3{,}0\\ \\mathrm{cm}$. Bilen gungar sedan upp och ned när den kör över ett gupp. Bestäm periodtiden för gungningen med personerna i bilen. Betrakta bilens fjädrar som en enda fjäder och bortse från stötdämparna. Svara i s.`,
+            answer: { value: 0.76, unit: 's' },
+            solution: `Vi behöver fjäderkonstanten för bilens fjädrar. Den får vi ur nedsjunkningen: personernas tyngd trycker ihop fjädrarna $3{,}0\\ \\mathrm{cm}$.
+
+$$
+\\left[ \\begin{array}{l}
+m_\\mathrm{p} = 320\\ \\mathrm{kg} \\\\
+\\Delta l = 3{,}0\\ \\mathrm{cm} = 0{,}030\\ \\mathrm{m} \\\\
+F = k \\cdot \\Delta l \\quad\\Leftrightarrow\\quad m_\\mathrm{p} \\cdot g = k \\cdot \\Delta l \\quad\\Leftrightarrow\\quad k = \\dfrac{m_\\mathrm{p} \\cdot g}{\\Delta l} \\\\[6pt]
+k = \\dfrac{320 \\cdot 9{,}82}{0{,}030} = 104\\,746{,}6\\ldots\\ \\mathrm{N/m}
+\\end{array} \\right]
+$$
+
+Det som svänger är hela bilen med personerna, så massan i formeln för periodtiden är den totala massan.
+
+$$ m = 1\\,200\\ \\mathrm{kg} + 320\\ \\mathrm{kg} = 1\\,520\\ \\mathrm{kg} $$
+
+$$ T = 2\\pi\\sqrt{\\frac{m}{k}} = 2\\pi\\sqrt{\\frac{1\\,520}{104\\,746{,}6\\ldots}} = 2\\pi \\cdot 0{,}12046\\ldots = 0{,}7568\\ldots\\ \\mathrm{s} \\approx 0{,}76\\ \\mathrm{s} $$
+
+**Rimlighet:** En bil som gungar efter ett gupp gör ungefär en svängning i sekunden, så en periodtid på knappt en sekund är rimlig. I verkligheten dämpar stötdämparna svängningen så att den nästan försvinner efter en svängning.
+
+**Svar:** Ungefär $0{,}76\\ \\mathrm{s}$`,
+        },
+        {
+            level: 2,
+            question: `Linnea och Hugo låter en vikt svänga i en fjäder. Först drar de ner vikten $2\\ \\mathrm{cm}$ och släpper den, sedan drar de ner den $6\\ \\mathrm{cm}$.<br>Linnea säger: "Med den större amplituden har vikten en längre väg att gå, så periodtiden blir längre."<br>Hugo säger: "Med den större amplituden får vikten större fart, så periodtiden blir kortare."<br>Vem har rätt? Motivera ditt svar med hjälp av formlerna för harmonisk svängning.`,
+            solution: `Ingen av dem har helt rätt, men båda har sett något som stämmer.
+
+**Linnea har rätt i att vägen blir längre.** Under en hel svängning går vikten från jämviktsläget ner till det nedre vändläget, upp till det övre och tillbaka. Vägen är $4A$, så med tre gånger så stor amplitud blir vägen tre gånger så lång.
+
+**Hugo har rätt i att farten blir större.** Den största farten är
+
+$$ v_{\\max} = \\omega \\cdot A \\qquad \\text{där} \\qquad \\omega = \\sqrt{\\frac{k}{m}} $$
+
+Vinkelhastigheten $\\omega$ beror bara på fjädern och vikten. Med tre gånger så stor amplitud blir farten därför tre gånger så stor i varje motsvarande läge.
+
+**De två effekterna tar ut varandra.** Tre gånger så lång väg med tre gånger så stor fart tar lika lång tid. Det syns också i formeln för periodtiden, där amplituden inte finns med:
+
+$$ T = 2\\pi\\sqrt{\\frac{m}{k}} $$
+
+**Svar:** Ingen av dem har rätt. Vägen blir längre och farten större i samma förhållande, så periodtiden är densamma i båda försöken.`,
+        },
+        {
+            level: 3,
+            question: `På en rymdstation är allt tyngdlöst, så en vanlig våg visar noll. För att mäta astronauternas massa används i stället en stol som sitter fast i en fjäder och svänger fram och tillbaka. Både stolens massa och fjäderkonstanten är okända. Den tomma stolen svänger med periodtiden $0{,}90\\ \\mathrm{s}$. Med en kalibreringsvikt på $20{,}0\\ \\mathrm{kg}$ fastspänd i stolen blir periodtiden $1{,}30\\ \\mathrm{s}$, och med en astronaut fastspänd blir den $2{,}10\\ \\mathrm{s}$.<br>a) Förklara varför en svängande fjäder kan användas som våg i tyngdlöshet, fast en badrumsvåg inte kan det.<br>b) Bestäm astronautens massa.`,
+            answer: { value: 82, unit: 'kg' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 82, unit: 'kg' },
+            ],
+            solution: `**a)** En badrumsvåg mäter hur hårt man trycker mot den, alltså normalkraften. Den beror på tyngdkraften, och i en rymdstation som faller fritt runt jorden trycker astronauten inte alls mot vågen. Periodtiden för en fjädersvängning beror däremot på massan i sig, alltså på hur trögt föremålet är att sätta i rörelse:
+
+$$ T = 2\\pi\\sqrt{\\frac{m}{k}} $$
+
+Tyngdkraften finns inte med i formeln, så svängningen fungerar likadant i tyngdlöshet.
+
+**Svar:** Periodtiden beror på massan och fjäderkonstanten men inte på tyngdkraften, medan en badrumsvåg mäter en kraft som beror på tyngdkraften.
+
+**b)** Det som svänger är stolen plus det som är fastspänt i den. Med stolens massa $m_\\mathrm{s}$ ger formeln för periodtiden, i kvadrerad form, tre ekvationer:
+
+$$
+\\begin{array}{ll}
+T_0^{2} = \\dfrac{4\\pi^{2} \\cdot m_\\mathrm{s}}{k} & (1) \\\\[10pt]
+T_1^{2} = \\dfrac{4\\pi^{2} \\cdot (m_\\mathrm{s} + m_\\mathrm{k})}{k} & (2) \\\\[10pt]
+T_2^{2} = \\dfrac{4\\pi^{2} \\cdot (m_\\mathrm{s} + m_\\mathrm{a})}{k} & (3)
+\\end{array}
+$$
+
+där $m_\\mathrm{k}$ är kalibreringsviktens massa och $m_\\mathrm{a}$ astronautens. De okända storheterna är $m_\\mathrm{s}$, $k$ och $m_\\mathrm{a}$.
+
+Ekvation (1), $T_0^{2} = \\dfrac{4\\pi^{2} \\cdot m_\\mathrm{s}}{k}$, subtraherad från (2) och från (3) ger
+
+$$ T_1^{2} - T_0^{2} = \\frac{4\\pi^{2} \\cdot m_\\mathrm{k}}{k} \\qquad (4) $$
+
+$$ T_2^{2} - T_0^{2} = \\frac{4\\pi^{2} \\cdot m_\\mathrm{a}}{k} \\qquad (5) $$
+
+Stolens massa har försvunnit. Vi dividerar (5) med (4), så försvinner även $4\\pi^{2}$ och $k$:
+
+$$ \\frac{T_2^{2} - T_0^{2}}{T_1^{2} - T_0^{2}} = \\frac{m_\\mathrm{a}}{m_\\mathrm{k}} \\quad\\Leftrightarrow\\quad m_\\mathrm{a} = m_\\mathrm{k} \\cdot \\frac{T_2^{2} - T_0^{2}}{T_1^{2} - T_0^{2}} $$
+
+$$
+\\left[ \\begin{array}{l}
+m_\\mathrm{k} = 20{,}0\\ \\mathrm{kg} \\\\
+T_0 = 0{,}90\\ \\mathrm{s} \\\\
+T_1 = 1{,}30\\ \\mathrm{s} \\\\
+T_2 = 2{,}10\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ m_\\mathrm{a} = 20{,}0 \\cdot \\frac{2{,}10^{2} - 0{,}90^{2}}{1{,}30^{2} - 0{,}90^{2}} = 20{,}0 \\cdot \\frac{4{,}41 - 0{,}81}{1{,}69 - 0{,}81} = 20{,}0 \\cdot \\frac{3{,}60}{0{,}88} = 81{,}81\\ldots\\ \\mathrm{kg} \\approx 82\\ \\mathrm{kg} $$
+
+**Rimlighet:** En vuxen människa väger ofta mellan 50 och 100 kg, så 82 kg är rimligt. Kalibreringsvikten behövs just för att stolens massa och fjäderkonstanten är okända: utan den skulle vi ha tre obekanta men bara två mätningar.
+
+**Svar:** Ungefär $82\\ \\mathrm{kg}$`,
+        },
+        {
+            level: 3,
+            question: `En grupp elever undersöker hur periodtiden för en fjädersvängning beror på massan. De hänger olika vikter i samma fjäder och mäter periodtiden. Resultatet står i tabellen.
+
+| $m$ (kg) | 0,050 | 0,100 | 0,150 | 0,200 | 0,250 |
+|---|---|---|---|---|---|
+| $T$ (s) | 0,480 | 0,628 | 0,748 | 0,851 | 0,942 |
+
+a) Rita ett diagram med $T^{2}$ som funktion av $m$ och anpassa en rät linje till punkterna.<br>b) Bestäm fjäderkonstanten med hjälp av linjen.<br>c) Enligt formeln $T = 2\\pi\\sqrt{\\frac{m}{k}}$ borde linjen gå genom origo, men det gör den inte. Ge en fysikalisk förklaring och bestäm hur stor extra massa skärningen med $T^{2}$-axeln motsvarar. Svara i gram.`,
+            answer: { value: 12.0, unit: 'N/m', tol: 0.04 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 12.0, unit: 'N/m', tol: 0.04 },
+                { del: 'c', value: 20, unit: 'g', tol: 0.3 },
+            ],
+            solution: `**a)** Vi kvadrerar periodtiderna.
+
+| $m$ (kg) | 0,050 | 0,100 | 0,150 | 0,200 | 0,250 |
+|---|---|---|---|---|---|
+| $T^{2}$ ($\\mathrm{s^2}$) | 0,230 | 0,394 | 0,560 | 0,724 | 0,887 |
+
+Punkterna ligger på en rät linje, men den skär $T^{2}$-axeln en bit ovanför origo.
+
+${makeDiagram({ xMin: 0, xMax: 0.30, yMin: 0, yMax: 1.2, xTicks: [0, 0.05, 0.10, 0.15, 0.20, 0.25, 0.30], yTicks: [0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2], xLabel: '<tspan font-style="italic">m</tspan> (kg)', yLabel: '<tspan font-style="italic">T</tspan><tspan baseline-shift="super" font-size="10">2</tspan> (s<tspan baseline-shift="super" font-size="10">2</tspan>)', paths: [{ points: [[0, 0.0662], [0.30, 1.0516]], width: 2.2 }] }).replace('</svg>', '<circle cx="126.7" cy="240.1" r="4.5" fill="#2563a8" stroke="#0f1620" stroke-width="1"/><circle cx="193.3" cy="204.6" r="4.5" fill="#2563a8" stroke="#0f1620" stroke-width="1"/><circle cx="260" cy="168.8" r="4.5" fill="#2563a8" stroke="#0f1620" stroke-width="1"/><circle cx="326.7" cy="133.1" r="4.5" fill="#2563a8" stroke="#0f1620" stroke-width="1"/><circle cx="393.3" cy="97.7" r="4.5" fill="#2563a8" stroke="#0f1620" stroke-width="1"/></svg>')}
+
+**b)** Formeln för periodtiden i kvadrerad form är
+
+$$ T^{2} = \\frac{4\\pi^{2}}{k} \\cdot m $$
+
+$T^{2}$ är alltså proportionellt mot $m$, och linjens lutning är $\\dfrac{4\\pi^{2}}{k}$. Vi bestämmer lutningen ur två punkter på linjen, $(0{,}050\\ \\mathrm{kg};\\ 0{,}2304\\ \\mathrm{s^2})$ och $(0{,}250\\ \\mathrm{kg};\\ 0{,}8874\\ \\mathrm{s^2})$:
+
+$$ \\text{lutning} = \\frac{\\Delta (T^{2})}{\\Delta m} = \\frac{0{,}8874 - 0{,}2304}{0{,}250 - 0{,}050} = \\frac{0{,}6570}{0{,}200} = 3{,}285\\ \\mathrm{s^2/kg} $$
+
+Lutningen är $\\dfrac{4\\pi^{2}}{k}$, så
+
+$$ \\frac{4\\pi^{2}}{k} = 3{,}285 \\quad\\Leftrightarrow\\quad k = \\frac{4\\pi^{2}}{3{,}285} = 12{,}018\\ldots\\ \\mathrm{N/m} \\approx 12{,}0\\ \\mathrm{N/m} $$
+
+**Svar:** Ungefär $12{,}0\\ \\mathrm{N/m}$
+
+**c)** Formeln förutsätter att bara vikten svänger. I verkligheten svänger också fjädern själv och kroken som vikten hänger i. De bidrar med en extra massa $m_\\mathrm{e}$, så att
+
+$$ T^{2} = \\frac{4\\pi^{2}}{k} \\cdot (m + m_\\mathrm{e}) = 3{,}285 \\cdot m + 3{,}285 \\cdot m_\\mathrm{e} $$
+
+Skärningen med $T^{2}$-axeln är $3{,}285 \\cdot m_\\mathrm{e}$. Vi får den ur punkten $(0{,}050;\\ 0{,}2304)$:
+
+$$ 3{,}285 \\cdot m_\\mathrm{e} = 0{,}2304 - 3{,}285 \\cdot 0{,}050 = 0{,}2304 - 0{,}16425 = 0{,}06615\\ \\mathrm{s^2} $$
+
+$$ m_\\mathrm{e} = \\frac{0{,}06615}{3{,}285} = 0{,}02013\\ldots\\ \\mathrm{kg} \\approx 20\\ \\mathrm{g} $$
+
+Skärningen är svår att läsa av noggrant, så svaret har bara två värdesiffror.
+
+**Rimlighet:** Fjäderns undre del rör sig nästan lika mycket som vikten och den övre nästan inte alls, så bara en del av fjäderns massa räknas med. Några tiotal gram är rimligt för en vanlig laborationsfjäder med krok.
+
+**Svar:** Fjädern och kroken svänger med och bidrar med ungefär $20\\ \\mathrm{g}$ extra massa.`,
+        },
+        {
+            level: 3,
+            question: `En vikt hänger i en lång fjäder och svänger med periodtiden $1{,}20\\ \\mathrm{s}$. Fjädern klipps sedan mitt itu så att den blir två likadana halvor.<br>a) Vikten hängs i den ena halvan. Bestäm den nya periodtiden.<br>b) Vikten hängs i båda halvorna bredvid varandra, som i figuren. Bestäm periodtiden.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 14 360 222" width="456" height="281" role="img" aria-label="Tre upphangningar: en vikt i hela fjadern, en vikt i en halv fjader och en vikt i tva halva fjadrar bredvid varandra" style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="36" y1="30" x2="84" y2="30" stroke="#0f1620" stroke-width="1.8"/><line x1="40" y1="30" x2="33" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="48" y1="30" x2="41" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="56" y1="30" x2="49" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="64" y1="30" x2="57" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="72" y1="30" x2="65" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="80" y1="30" x2="73" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><polyline points="60,30 60,35 68,37 52,41.1 68,45.2 52,49.2 68,53.3 52,57.3 68,61.4 52,65.5 68,69.5 52,73.6 68,77.7 52,81.7 68,85.8 52,89.8 68,93.9 52,98 68,102 52,106.1 68,110.2 52,114.2 68,118.3 52,122.3 68,126.4 52,130.5 68,134.5 52,138.6 68,142.7 52,146.7 68,150.8 52,154.8 68,158.9 52,163 60,165 60,170" fill="none" stroke="#5f6670" stroke-width="1.7" stroke-linejoin="round"/><rect x="45" y="170" width="30" height="26" rx="2" fill="#6ba3d6" stroke="#2f6db0" stroke-width="1.5"/><text x="60" y="188" font-size="15" fill="#0f1620" text-anchor="middle" font-style="italic">m</text><line x1="156" y1="30" x2="204" y2="30" stroke="#0f1620" stroke-width="1.8"/><line x1="160" y1="30" x2="153" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="168" y1="30" x2="161" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="176" y1="30" x2="169" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="184" y1="30" x2="177" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="192" y1="30" x2="185" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="200" y1="30" x2="193" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><polyline points="180,30 180,35 188,36.9 172,40.6 188,44.4 172,48.1 188,51.9 172,55.6 188,59.4 172,63.1 188,66.9 172,70.6 188,74.4 172,78.1 188,81.9 172,85.6 188,89.4 172,93.1 180,95 180,100" fill="none" stroke="#5f6670" stroke-width="1.7" stroke-linejoin="round"/><rect x="165" y="100" width="30" height="26" rx="2" fill="#6ba3d6" stroke="#2f6db0" stroke-width="1.5"/><text x="180" y="118" font-size="15" fill="#0f1620" text-anchor="middle" font-style="italic">m</text><line x1="268" y1="30" x2="332" y2="30" stroke="#0f1620" stroke-width="1.8"/><line x1="272" y1="30" x2="265" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="280" y1="30" x2="273" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="288" y1="30" x2="281" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="296" y1="30" x2="289" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="304" y1="30" x2="297" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="312" y1="30" x2="305" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="320" y1="30" x2="313" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="328" y1="30" x2="321" y2="23" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><polyline points="285,30 285,35 293,36.9 277,40.6 293,44.4 277,48.1 293,51.9 277,55.6 293,59.4 277,63.1 293,66.9 277,70.6 293,74.4 277,78.1 293,81.9 277,85.6 293,89.4 277,93.1 285,95 285,100" fill="none" stroke="#5f6670" stroke-width="1.7" stroke-linejoin="round"/><polyline points="315,30 315,35 323,36.9 307,40.6 323,44.4 307,48.1 323,51.9 307,55.6 323,59.4 307,63.1 323,66.9 307,70.6 323,74.4 307,78.1 323,81.9 307,85.6 323,89.4 307,93.1 315,95 315,100" fill="none" stroke="#5f6670" stroke-width="1.7" stroke-linejoin="round"/><rect x="274" y="100" width="52" height="5" fill="#8a7a62" stroke="#0f1620" stroke-width="1"/><line x1="300" y1="105" x2="300" y2="111" stroke="#5f6670" stroke-width="1.7"/><rect x="285" y="111" width="30" height="26" rx="2" fill="#6ba3d6" stroke="#2f6db0" stroke-width="1.5"/><text x="300" y="129" font-size="15" fill="#0f1620" text-anchor="middle" font-style="italic">m</text><text x="60" y="226" font-size="14" fill="#0f1620" text-anchor="middle">Hela fjädern</text><text x="180" y="226" font-size="14" fill="#0f1620" text-anchor="middle">a) En halva</text><text x="300" y="226" font-size="14" fill="#0f1620" text-anchor="middle">b) Två halvor</text></svg>`,
+            answer: { value: 0.60, unit: 's' },
+            delsvar: [
+                { del: 'a', value: 0.85, unit: 's' },
+                { del: 'b', value: 0.60, unit: 's' },
+            ],
+            solution: `Vi kallar den hela fjäderns fjäderkonstant $k$ och en halvas fjäderkonstant $k_\\mathrm{h}$. Det första steget är att se hur de hänger ihop.
+
+**Den hela fjädern är två halvor i serie.** När vikten hänger i den hela fjädern verkar samma kraft $F$ genom båda halvorna, och var halva förlängs lika mycket. Den totala förlängningen är summan:
+
+$$ \\Delta l_\\mathrm{hel} = 2 \\cdot \\Delta l_\\mathrm{h} \\quad\\Leftrightarrow\\quad \\frac{F}{k} = 2 \\cdot \\frac{F}{k_\\mathrm{h}} \\quad\\Leftrightarrow\\quad k_\\mathrm{h} = 2k $$
+
+En halv fjäder är alltså dubbelt så styv som den hela.
+
+**a)** Periodtiden med den hela fjädern och med en halva är
+
+$$ T = 2\\pi\\sqrt{\\frac{m}{k}} \\qquad T_\\mathrm{a} = 2\\pi\\sqrt{\\frac{m}{k_\\mathrm{h}}} = 2\\pi\\sqrt{\\frac{m}{2k}} = \\frac{1}{\\sqrt{2}} \\cdot 2\\pi\\sqrt{\\frac{m}{k}} = \\frac{T}{\\sqrt{2}} $$
+
+$$ T_\\mathrm{a} = \\frac{1{,}20}{\\sqrt{2}} = 0{,}8485\\ldots\\ \\mathrm{s} \\approx 0{,}85\\ \\mathrm{s} $$
+
+**Svar:** Ungefär $0{,}85\\ \\mathrm{s}$
+
+**b)** När vikten hänger i båda halvorna bredvid varandra förlängs de lika mycket, och var och en bär halva tyngden. För att få samma förlängning som en halva krävs dubbelt så stor kraft, så paret har fjäderkonstanten
+
+$$ k_\\mathrm{b} = 2 \\cdot k_\\mathrm{h} = 2 \\cdot 2k = 4k $$
+
+$$ T_\\mathrm{b} = 2\\pi\\sqrt{\\frac{m}{4k}} = \\frac{1}{2} \\cdot 2\\pi\\sqrt{\\frac{m}{k}} = \\frac{T}{2} = \\frac{1{,}20}{2} = 0{,}60\\ \\mathrm{s} $$
+
+**Rimlighet:** Ju kortare och fler fjädrar som delar på vikten, desto styvare blir upphängningen och desto kortare periodtid. Ordningen $1{,}20\\ \\mathrm{s} > 0{,}85\\ \\mathrm{s} > 0{,}60\\ \\mathrm{s}$ stämmer med det. Vi behövde varken massan eller fjäderkonstanten, bara hur fjäderkonstanten ändras.
+
+**Svar:** $0{,}60\\ \\mathrm{s}$`,
+        },
+        {
+            level: 3,
+            question: `En marslandare har med sig en vikt som hänger i en fjäder. På jorden förlängs fjädern $4{,}0\\ \\mathrm{cm}$ när vikten hänger stilla i den. En ingenjör föreslår att instrumentet ska användas för att bestämma tyngdfaktorn på Mars: vikten sätts i svängning och periodtiden mäts.<br>a) Visa att förslaget inte fungerar.<br>b) På Mars hänger vikten stilla och fjädern är förlängd $1{,}52\\ \\mathrm{cm}$. Bestäm tyngdfaktorn på Mars. Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$ på jorden.<br>c) Periodtiden kan också skrivas $T = 2\\pi\\sqrt{\\frac{\\Delta l}{g}}$, där tyngdfaktorn ingår. Förklara hur det går ihop med svaret i a).`,
+            answer: { value: 3.7, unit: 'N/kg' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 3.7, unit: 'N/kg' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Periodtiden är
+
+$$ T = 2\\pi\\sqrt{\\frac{m}{k}} $$
+
+Viktens massa är densamma på Mars som på jorden, eftersom massan är en egenskap hos vikten. Fjäderkonstanten är en egenskap hos fjädern och ändras inte heller. Tyngdfaktorn finns inte med i formeln, så periodtiden blir exakt densamma på Mars som på jorden. Mätningen säger därför ingenting om tyngdfaktorn.
+
+**Svar:** Periodtiden beror bara på $m$ och $k$, som är desamma på båda planeterna, så den blir likadan på Mars och kan inte avslöja tyngdfaktorn.
+
+**b)** Däremot beror förlängningen när vikten hänger stilla på tyngdfaktorn. Fjäderkraften är då lika stor som tyngdkraften:
+
+$$ k \\cdot \\Delta l = m \\cdot g $$
+
+Vi skriver villkoret på båda planeterna:
+
+$$ k \\cdot \\Delta l_\\mathrm{J} = m \\cdot g_\\mathrm{J} \\qquad (1) $$
+
+$$ k \\cdot \\Delta l_\\mathrm{M} = m \\cdot g_\\mathrm{M} \\qquad (2) $$
+
+Ekvation (2), $k \\cdot \\Delta l_\\mathrm{M} = m \\cdot g_\\mathrm{M}$, dividerad med ekvation (1), $k \\cdot \\Delta l_\\mathrm{J} = m \\cdot g_\\mathrm{J}$, ger, eftersom $k$ och $m$ är samma,
+
+$$ \\frac{\\Delta l_\\mathrm{M}}{\\Delta l_\\mathrm{J}} = \\frac{g_\\mathrm{M}}{g_\\mathrm{J}} \\quad\\Leftrightarrow\\quad g_\\mathrm{M} = g_\\mathrm{J} \\cdot \\frac{\\Delta l_\\mathrm{M}}{\\Delta l_\\mathrm{J}} $$
+
+$$
+\\left[ \\begin{array}{l}
+g_\\mathrm{J} = 9{,}82\\ \\mathrm{N/kg} \\\\
+\\Delta l_\\mathrm{J} = 4{,}0\\ \\mathrm{cm} \\\\
+\\Delta l_\\mathrm{M} = 1{,}52\\ \\mathrm{cm}
+\\end{array} \\right]
+$$
+
+$$ g_\\mathrm{M} = 9{,}82 \\cdot \\frac{1{,}52}{4{,}0} = 3{,}7316\\ \\mathrm{N/kg} \\approx 3{,}7\\ \\mathrm{N/kg} $$
+
+Förlängningarna kan sättas in i centimeter, eftersom enheten förkortas bort i kvoten.
+
+**Svar:** Ungefär $3{,}7\\ \\mathrm{N/kg}$
+
+**c)** I formeln $T = 2\\pi\\sqrt{\\frac{\\Delta l}{g}}$ är $\\Delta l$ inte en fast storhet. Förlängningen är $\\Delta l = \\dfrac{m \\cdot g}{k}$ och blir mindre när tyngdfaktorn blir mindre, i samma förhållande. Kvoten är därför alltid densamma:
+
+$$ \\frac{\\Delta l}{g} = \\frac{m \\cdot g}{k \\cdot g} = \\frac{m}{k} $$
+
+På jorden blir kvoten $\\dfrac{0{,}040}{9{,}82}$ och på Mars $\\dfrac{0{,}0152}{3{,}73}$, och båda är ungefär $0{,}0041\\ \\mathrm{s^2}$. Formlerna säger alltså samma sak: tyngdfaktorn påverkar var jämviktsläget hamnar, men inte hur snabbt vikten svänger kring det.
+
+**Svar:** Förlängningen $\\Delta l$ är proportionell mot $g$, så kvoten $\\dfrac{\\Delta l}{g}$ och därmed periodtiden ändras inte när tyngdfaktorn ändras.`,
+        },
+        {
+            level: 3,
+            question: `I en grönsaksdisk hänger en korg i en fjädervåg. En kund lägger potatis i korgen, och korgen sjunker då $2{,}5\\ \\mathrm{cm}$ innan den hänger stilla. Överst på potatisen ligger en lös vitlök. Kunden råkar stöta till korgen, som börjar svänga upp och ned. Korgens massa kan försummas, och luftmotståndet också.<br>a) Var i svängningen riskerar vitlöken först att lyfta från potatisen? Motivera ditt svar.<br>b) Bestäm den största amplitud korgen kan svänga med utan att vitlöken lyfter.<br>c) Kunden lägger i mer potatis, så att den totala massan i korgen blir dubbelt så stor. Bestäm den nya största amplituden.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="40 6 300 222" width="407" height="301" role="img" aria-label="En korg med potatis hanger i en fjader fran taket. Overst pa potatisen ligger en vitlok. En mattlinje visar att fjaderns nedre ande sjunker 2,5 cm nar lasten laggs i." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="104" y1="20" x2="196" y2="20" stroke="#0f1620" stroke-width="1.8"/><line x1="108" y1="20" x2="101" y2="13" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="116" y1="20" x2="109" y2="13" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="124" y1="20" x2="117" y2="13" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="132" y1="20" x2="125" y2="13" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="140" y1="20" x2="133" y2="13" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="148" y1="20" x2="141" y2="13" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="156" y1="20" x2="149" y2="13" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="164" y1="20" x2="157" y2="13" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="172" y1="20" x2="165" y2="13" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="180" y1="20" x2="173" y2="13" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="188" y1="20" x2="181" y2="13" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><line x1="196" y1="20" x2="189" y2="13" stroke="#0f1620" stroke-width="1" stroke-linecap="round"/><polyline points="150,20 150,26 150,28 158,32.4 142,36.9 158,41.3 142,45.7 158,50.1 142,54.6 158,59 142,63.4 158,67.9 142,72.3 158,76.7 142,81.1 158,85.6 150,90 150,92 150,96" fill="none" stroke="#5f6670" stroke-width="1.7" stroke-linejoin="round"/><circle cx="150" cy="99" r="3" fill="none" stroke="#5f6670" stroke-width="1.6"/><ellipse cx="108" cy="153" rx="15" ry="10" fill="#c49a5a" stroke="#7a5a2e" stroke-width="1.2"/><circle cx="102.75" cy="150.5" r="1.1" fill="#7a5a2e"/><circle cx="112.5" cy="154" r="1.1" fill="#7a5a2e"/><ellipse cx="136" cy="149" rx="16" ry="11" fill="#c49a5a" stroke="#7a5a2e" stroke-width="1.2"/><circle cx="130.4" cy="146.25" r="1.1" fill="#7a5a2e"/><circle cx="140.8" cy="150.1" r="1.1" fill="#7a5a2e"/><ellipse cx="166" cy="152" rx="15" ry="10" fill="#c49a5a" stroke="#7a5a2e" stroke-width="1.2"/><circle cx="160.75" cy="149.5" r="1.1" fill="#7a5a2e"/><circle cx="170.5" cy="153" r="1.1" fill="#7a5a2e"/><ellipse cx="192" cy="153" rx="14" ry="9" fill="#c49a5a" stroke="#7a5a2e" stroke-width="1.2"/><circle cx="187.1" cy="150.75" r="1.1" fill="#7a5a2e"/><circle cx="196.2" cy="153.9" r="1.1" fill="#7a5a2e"/><path d="M160 127 C157 132 151 135 151 141 C151 147 155 150 160 150 C165 150 169 147 169 141 C169 135 163 132 160 127 Z" fill="#f1e8d4" stroke="#6b5d45" stroke-width="1.2"/><path d="M160 131 C157 136 156 142 158 149 M160 131 C163 136 164 142 162 149" fill="none" stroke="#a8977a" stroke-width="0.9"/><line x1="160" y1="127" x2="161" y2="122" stroke="#6b5d45" stroke-width="1.4" stroke-linecap="round"/><path d="M84 160 L216 160 L200 216 L100 216 Z" fill="#c99a5b" stroke="#0f1620" stroke-width="1.5" stroke-linejoin="round"/><line x1="88.4" y1="172" x2="211.6" y2="172" stroke="#8a6332" stroke-width="1"/><line x1="91.9" y1="184" x2="208.1" y2="184" stroke="#8a6332" stroke-width="1"/><line x1="95.3" y1="196" x2="204.7" y2="196" stroke="#8a6332" stroke-width="1"/><line x1="98.7" y1="208" x2="201.3" y2="208" stroke="#8a6332" stroke-width="1"/><line x1="100" y1="161" x2="112.1" y2="215" stroke="#8a6332" stroke-width="0.8"/><line x1="112" y1="161" x2="121.2" y2="215" stroke="#8a6332" stroke-width="0.8"/><line x1="124" y1="161" x2="130.3" y2="215" stroke="#8a6332" stroke-width="0.8"/><line x1="136" y1="161" x2="139.4" y2="215" stroke="#8a6332" stroke-width="0.8"/><line x1="148" y1="161" x2="148.5" y2="215" stroke="#8a6332" stroke-width="0.8"/><line x1="160" y1="161" x2="157.6" y2="215" stroke="#8a6332" stroke-width="0.8"/><line x1="172" y1="161" x2="166.7" y2="215" stroke="#8a6332" stroke-width="0.8"/><line x1="184" y1="161" x2="175.8" y2="215" stroke="#8a6332" stroke-width="0.8"/><line x1="196" y1="161" x2="184.8" y2="215" stroke="#8a6332" stroke-width="0.8"/><rect x="80" y="155" width="140" height="7" rx="2" fill="#a97a3d" stroke="#0f1620" stroke-width="1.3"/><line x1="150" y1="102" x2="86" y2="156" stroke="#5f6670" stroke-width="1.5"/><line x1="150" y1="102" x2="214" y2="156" stroke="#5f6670" stroke-width="1.5"/><line x1="158" y1="78" x2="258" y2="78" stroke="#9aa0a6" stroke-width="1" stroke-dasharray="4 3"/><line x1="156" y1="99" x2="258" y2="99" stroke="#9aa0a6" stroke-width="1" stroke-dasharray="4 3"/><line x1="250" y1="85" x2="250" y2="92" stroke="#0f1620" stroke-width="1.4" stroke-linecap="butt"/><polygon points="246.8,85 250,78 253.2,85" fill="#0f1620"/><polygon points="246.8,92 250,99 253.2,92" fill="#0f1620"/><text x="262" y="74" font-size="13" fill="#0f1620">utan last</text><text x="258" y="94" font-size="14" fill="#0f1620">Δ<tspan font-style="italic">l</tspan> = 2,5 cm</text></svg>`,
+            answer: { value: 2.5, unit: 'cm' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 2.5, unit: 'cm' },
+                { del: 'c', value: 5.0, unit: 'cm' },
+            ],
+            solution: `**a)** På vitlöken verkar två krafter: tyngdkraften $F_\\mathrm{G} = m_\\mathrm{v} \\cdot g$ nedåt och normalkraften $F_\\mathrm{N}$ från potatisen uppåt. Normalkraften kan bara trycka, aldrig dra, så $F_\\mathrm{N} \\geq 0$. Med nedåt som positiv riktning ger Newtons andra lag
+
+$$ m_\\mathrm{v} \\cdot g - F_\\mathrm{N} = m_\\mathrm{v} \\cdot a \\quad\\Leftrightarrow\\quad a = g - \\frac{F_\\mathrm{N}}{m_\\mathrm{v}} $$
+
+Eftersom $F_\\mathrm{N} \\geq 0$ kan vitlöken som mest få accelerationen $g$ nedåt. Ligger den kvar har den samma acceleration som korgen, och i en harmonisk svängning är accelerationen $a = -\\omega^{2} \\cdot y$. Den är riktad nedåt när korgen är ovanför jämviktsläget och är störst i det övre vändläget, där $y = A$. Kräver korgen där en acceleration nedåt som är större än $g$, hinner vitlöken inte med och lyfter.
+
+**Svar:** I det övre vändläget, där korgens acceleration nedåt är som störst.
+
+**b)** Vitlöken ligger kvar så länge korgens största acceleration inte är större än $g$:
+
+$$ \\omega^{2} \\cdot A \\leq g \\qquad (1) $$
+
+Vinkelhastigheten för en vikt i fjäder är $\\omega = \\sqrt{\\dfrac{k}{m}}$, där $m$ är potatisens och vitlökens sammanlagda massa. Fjäderkonstanten känner vi inte, men när korgen hänger stilla är fjäderkraften lika stor som tyngdkraften:
+
+$$ k \\cdot \\Delta l = m \\cdot g \\quad\\Leftrightarrow\\quad \\frac{k}{m} = \\frac{g}{\\Delta l} $$
+
+Alltså är
+
+$$ \\omega^{2} = \\frac{k}{m} = \\frac{g}{\\Delta l} $$
+
+Detta i olikhet (1), $\\omega^{2} \\cdot A \\leq g$, ger
+
+$$ \\frac{g}{\\Delta l} \\cdot A \\leq g $$
+
+Vi multiplicerar båda led med $\\Delta l$ och dividerar båda led med $g$:
+
+$$ A \\leq \\Delta l $$
+
+Massan och fjäderkonstanten har försvunnit. Den största amplituden är lika stor som nedsjunkningen, $A_{\\max} = \\Delta l = 2{,}5\\ \\mathrm{cm}$.
+
+**Rimlighet:** Med amplituden $\\Delta l$ når korgen i det övre vändläget precis den punkt där fjädern är ospänd. Där drar fjädern inte alls, och korgen faller med accelerationen $g$, precis som vitlöken skulle göra av sig själv. Med större amplitud skulle korgen behöva dras nedåt snabbare än vitlöken kan falla.
+
+**Svar:** $2{,}5\\ \\mathrm{cm}$
+
+**c)** Fjädern är densamma, så fjäderkonstanten är oförändrad. Enligt $k \\cdot \\Delta l = m \\cdot g$ blir nedsjunkningen dubbelt så stor när massan blir dubbelt så stor:
+
+$$ \\Delta l_\\mathrm{ny} = 2 \\cdot 2{,}5\\ \\mathrm{cm} = 5{,}0\\ \\mathrm{cm} $$
+
+Villkoret från b) gäller för vilken last som helst, så den största amplituden blir $A_{\\max} = \\Delta l_\\mathrm{ny} = 5{,}0\\ \\mathrm{cm}$. Den tyngre lasten svänger långsammare, och då blir accelerationen mindre vid samma amplitud.
+
+**Svar:** $5{,}0\\ \\mathrm{cm}$`,
+        },
+        {
+            level: 3,
+            question: `En cylinderformad boj med massan $12\\ \\mathrm{kg}$ och radien $11\\ \\mathrm{cm}$ flyter upprätt i en sjö. En våg trycker ner bojen en bit, och den guppar sedan upp och ned. Bortse från vattnets motstånd och räkna med att sjövattnet har densiteten $1\\,000\\ \\mathrm{kg/m^3}$.<br>a) Visa att bojen utför en harmonisk svängning, och ta fram ett uttryck för den konstant som spelar samma roll som fjäderkonstanten.<br>b) Bestäm periodtiden för bojens guppande.<br>c) Bojen lastas med en mätutrustning på $8{,}0\\ \\mathrm{kg}$. Bestäm den nya periodtiden.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="10 16 320 222" width="434" height="301" role="img" aria-label="En cylinderformad boj med radien 11 cm och massan 12 kg flyter upprätt med nedre delen under vattenytan" style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="130" y="70" width="80" height="130" fill="#e07b39" stroke="#0f1620" stroke-width="1.6"/><rect x="130" y="92" width="80" height="14" fill="#f3eee4" stroke="#0f1620" stroke-width="1"/><ellipse cx="170" cy="70" rx="40" ry="8" fill="#ec9a62" stroke="#0f1620" stroke-width="1.6"/><line x1="170" y1="70" x2="170" y2="26" stroke="#0f1620" stroke-width="2"/><circle cx="170" cy="24" r="4" fill="#c8324a" stroke="#0f1620" stroke-width="1"/><rect x="20" y="140" width="300" height="95" fill="#6ba3d6" fill-opacity="0.45"/><path d="M 20 140 L 20 140 L 25 140.4 L 30 140.8 L 35 141.2 L 40 141.4 L 45 141.6 L 50 141.6 L 55 141.5 L 60 141.3 L 65 141 L 70 140.6 L 75 140.1 L 80 139.7 L 85 139.3 L 90 138.9 L 95 138.6 L 100 138.5 L 105 138.4 L 110 138.5 L 115 138.6 L 120 138.9 L 125 139.3 L 130 139.7 L 135 140.2 L 140 140.6 L 145 141 L 150 141.3 L 155 141.5 L 160 141.6 L 165 141.6 L 170 141.4 L 175 141.2 L 180 140.8 L 185 140.4 L 190 140 L 195 139.5 L 200 139.1 L 205 138.8 L 210 138.6 L 215 138.4 L 220 138.4 L 225 138.5 L 230 138.7 L 235 139.1 L 240 139.5 L 245 139.9 L 250 140.3 L 255 140.8 L 260 141.1 L 265 141.4 L 270 141.6 L 275 141.6 L 280 141.5 L 285 141.3 L 290 141 L 295 140.7 L 300 140.2 L 305 139.8 L 310 139.4 L 315 139 L 320 138.7" fill="none" stroke="#2f6db0" stroke-width="1.6"/><line x1="170" y1="70" x2="210" y2="70" stroke="#0f1620" stroke-width="1" stroke-dasharray="3 3"/><line x1="210" y1="68" x2="210" y2="42" stroke="#0f1620" stroke-width="1" stroke-dasharray="3 3"/><line x1="178" y1="48" x2="202" y2="48" stroke="#0f1620" stroke-width="1.3"/><polygon points="171,48 179,44 179,52" fill="#0f1620"/><polygon points="210,48 202,44 202,52" fill="#0f1620"/><text x="218" y="53" font-size="14" fill="#0f1620"><tspan font-style="italic">r</tspan> = 11 cm</text><text x="120" y="108" font-size="14" fill="#0f1620" text-anchor="end"><tspan font-style="italic">m</tspan> = 12 kg</text></svg>`,
+            answer: { value: 1.1, unit: 's' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 1.1, unit: 's', tol: 0.05 },
+                { del: 'c', value: 1.5, unit: 's', tol: 0.05 },
+            ],
+            solution: `**a)** När bojen flyter stilla är lyftkraften lika stor som tyngdkraften. Det är bojens jämviktsläge. Vi låter $y$ vara hur långt bojen har tryckts ner från jämviktsläget, med nedåt som positiv riktning.
+
+När bojen trycks ner sträckan $y$ hamnar en extra vattenvolym $\\Delta V = \\pi r^{2} \\cdot y$ under ytan. Enligt Arkimedes princip ökar lyftkraften då med tyngden av den undanträngda vattenmängden:
+
+$$ \\Delta F_\\mathrm{lyft} = \\rho \\cdot \\Delta V \\cdot g = \\rho \\cdot g \\cdot \\pi r^{2} \\cdot y $$
+
+Tyngdkraften är oförändrad, så den resulterande kraften på bojen är den extra lyftkraften, riktad uppåt, mot jämviktsläget:
+
+$$ F_\\mathrm{R} = -\\rho \\cdot g \\cdot \\pi r^{2} \\cdot y $$
+
+Samma sak gäller när bojen är ovanför jämviktsläget: då är lyftkraften mindre än tyngdkraften och resultanten är riktad nedåt. Den resulterande kraften är alltså proportionell mot utslaget och riktad mot jämviktsläget, precis som för en vikt i fjäder, $F_\\mathrm{R} = -k \\cdot y$. Bojen utför därför en harmonisk svängning med
+
+$$ k = \\rho \\cdot g \\cdot \\pi r^{2} $$
+
+**Svar:** Resulterande kraften är $F_\\mathrm{R} = -\\rho g \\pi r^{2} \\cdot y$, alltså proportionell mot utslaget och riktad mot jämviktsläget, med $k = \\rho g \\pi r^{2}$.
+
+**b)**
+
+$$
+\\left[ \\begin{array}{l}
+m = 12\\ \\mathrm{kg} \\\\
+r = 11\\ \\mathrm{cm} = 0{,}11\\ \\mathrm{m} \\\\
+\\rho = 1\\,000\\ \\mathrm{kg/m^3} \\\\
+g = 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$ k = 1\\,000 \\cdot 9{,}82 \\cdot \\pi \\cdot 0{,}11^{2} = 373{,}29\\ldots\\ \\mathrm{N/m} $$
+
+$$ T = 2\\pi\\sqrt{\\frac{m}{k}} = 2\\pi\\sqrt{\\frac{12}{373{,}29\\ldots}} = 2\\pi \\cdot 0{,}17929\\ldots = 1{,}1265\\ldots\\ \\mathrm{s} \\approx 1{,}1\\ \\mathrm{s} $$
+
+**Svar:** Ungefär $1{,}1\\ \\mathrm{s}$
+
+**c)** Lasten ändrar inte bojens radie, så $k$ är densamma. Bojen ligger djupare, men det flyttar bara jämviktsläget. Det som ändras är massan:
+
+$$ m = 12\\ \\mathrm{kg} + 8{,}0\\ \\mathrm{kg} = 20\\ \\mathrm{kg} $$
+
+$$ T = 2\\pi\\sqrt{\\frac{20}{373{,}29\\ldots}} = 2\\pi \\cdot 0{,}23146\\ldots = 1{,}4543\\ldots\\ \\mathrm{s} \\approx 1{,}5\\ \\mathrm{s} $$
+
+**Rimlighet:** Massan blir $\\dfrac{20}{12} \\approx 1{,}7$ gånger så stor, så periodtiden ska bli $\\sqrt{1{,}7} \\approx 1{,}3$ gånger så lång, och $1{,}1\\ \\mathrm{s} \\cdot 1{,}3 \\approx 1{,}5\\ \\mathrm{s}$. I verkligheten svänger också en del av vattnet kring bojen med, så den uppmätta periodtiden blir något längre än modellens.
+
+**Svar:** Ungefär $1{,}5\\ \\mathrm{s}$`,
+        },
+        {
+            level: 3,
+            question: `En bungeehoppare med massan $75\\ \\mathrm{kg}$ hoppar från en bro med ett elastiskt rep fäst runt anklarna. När hon till sist hänger stilla är repet förlängt $12\\ \\mathrm{m}$ jämfört med sin ospända längd. Under det första studset är hon som lägst $36\\ \\mathrm{m}$ nedanför den punkt där repet blir sträckt. Behandla repet som en fjäder som följer Hookes lag när det är sträckt, och bortse från luftmotstånd och energiförluster.<br>a) Bestäm periodtiden för små gupp kring jämviktsläget.<br>b) Visa att hopparens rörelse under ett helt studs inte är en harmonisk svängning.<br>c) Bestäm hur lång tid ett helt studs tar, från den lägsta punkten tills hon är tillbaka i den lägsta punkten, och jämför med svaret i a).
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="10 4 310 362" width="357" height="417" role="img" aria-label="En bungeehoppare hanger med huvudet nedat i ett rep fran en bro. Tre streckade nivaer: dar repet blir strackt, jamviktslaget 12 m lagre och lagsta punkten 36 m under den punkt dar repet blir strackt." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="20" y1="12" x2="310" y2="12" stroke="#0f1620" stroke-width="1.6"/><line x1="26" y1="12" x2="26" y2="24" stroke="#0f1620" stroke-width="1.2"/><line x1="46" y1="12" x2="46" y2="24" stroke="#0f1620" stroke-width="1.2"/><line x1="66" y1="12" x2="66" y2="24" stroke="#0f1620" stroke-width="1.2"/><line x1="86" y1="12" x2="86" y2="24" stroke="#0f1620" stroke-width="1.2"/><line x1="106" y1="12" x2="106" y2="24" stroke="#0f1620" stroke-width="1.2"/><line x1="126" y1="12" x2="126" y2="24" stroke="#0f1620" stroke-width="1.2"/><line x1="146" y1="12" x2="146" y2="24" stroke="#0f1620" stroke-width="1.2"/><line x1="166" y1="12" x2="166" y2="24" stroke="#0f1620" stroke-width="1.2"/><line x1="186" y1="12" x2="186" y2="24" stroke="#0f1620" stroke-width="1.2"/><line x1="206" y1="12" x2="206" y2="24" stroke="#0f1620" stroke-width="1.2"/><line x1="226" y1="12" x2="226" y2="24" stroke="#0f1620" stroke-width="1.2"/><line x1="246" y1="12" x2="246" y2="24" stroke="#0f1620" stroke-width="1.2"/><line x1="266" y1="12" x2="266" y2="24" stroke="#0f1620" stroke-width="1.2"/><line x1="286" y1="12" x2="286" y2="24" stroke="#0f1620" stroke-width="1.2"/><line x1="306" y1="12" x2="306" y2="24" stroke="#0f1620" stroke-width="1.2"/><rect x="18" y="24" width="294" height="13" fill="#8a7a62" stroke="#0f1620" stroke-width="1.3"/><line x1="30" y1="37" x2="45" y2="45" stroke="#8a7a62" stroke-width="1.6"/><line x1="45" y1="45" x2="60" y2="37" stroke="#8a7a62" stroke-width="1.6"/><line x1="60" y1="37" x2="75" y2="45" stroke="#8a7a62" stroke-width="1.6"/><line x1="75" y1="45" x2="90" y2="37" stroke="#8a7a62" stroke-width="1.6"/><line x1="90" y1="37" x2="105" y2="45" stroke="#8a7a62" stroke-width="1.6"/><line x1="105" y1="45" x2="120" y2="37" stroke="#8a7a62" stroke-width="1.6"/><line x1="120" y1="37" x2="135" y2="45" stroke="#8a7a62" stroke-width="1.6"/><line x1="135" y1="45" x2="150" y2="37" stroke="#8a7a62" stroke-width="1.6"/><line x1="150" y1="37" x2="165" y2="45" stroke="#8a7a62" stroke-width="1.6"/><line x1="165" y1="45" x2="180" y2="37" stroke="#8a7a62" stroke-width="1.6"/><line x1="180" y1="37" x2="195" y2="45" stroke="#8a7a62" stroke-width="1.6"/><line x1="195" y1="45" x2="210" y2="37" stroke="#8a7a62" stroke-width="1.6"/><line x1="210" y1="37" x2="225" y2="45" stroke="#8a7a62" stroke-width="1.6"/><line x1="225" y1="45" x2="240" y2="37" stroke="#8a7a62" stroke-width="1.6"/><line x1="240" y1="37" x2="255" y2="45" stroke="#8a7a62" stroke-width="1.6"/><line x1="255" y1="45" x2="270" y2="37" stroke="#8a7a62" stroke-width="1.6"/><line x1="270" y1="37" x2="285" y2="45" stroke="#8a7a62" stroke-width="1.6"/><line x1="285" y1="45" x2="300" y2="37" stroke="#8a7a62" stroke-width="1.6"/><line x1="300" y1="37" x2="315" y2="45" stroke="#8a7a62" stroke-width="1.6"/><line x1="315" y1="45" x2="330" y2="37" stroke="#8a7a62" stroke-width="1.6"/><line x1="18" y1="45" x2="312" y2="45" stroke="#8a7a62" stroke-width="1.6"/><line x1="30" y1="106" x2="300" y2="106" stroke="#9aa0a6" stroke-width="1" stroke-dasharray="5 4"/><line x1="30" y1="166" x2="300" y2="166" stroke="#9aa0a6" stroke-width="1" stroke-dasharray="5 4"/><line x1="30" y1="286" x2="300" y2="286" stroke="#9aa0a6" stroke-width="1" stroke-dasharray="5 4"/><text x="138" y="100" font-size="13" fill="#0f1620" text-anchor="end">Repet blir sträckt</text><text x="138" y="160" font-size="13" fill="#0f1620" text-anchor="end">Jämviktsläge</text><text x="138" y="280" font-size="13" fill="#0f1620" text-anchor="end">Lägsta punkt</text><line x1="150" y1="37" x2="150" y2="287" stroke="#c8553d" stroke-width="2.4"/><line x1="212" y1="113" x2="212" y2="159" stroke="#0f1620" stroke-width="1.4" stroke-linecap="butt"/><polygon points="208.8,113 212,106 215.2,113" fill="#0f1620"/><polygon points="208.8,159 212,166 215.2,159" fill="#0f1620"/><text x="219" y="141" font-size="14" fill="#0f1620">12 m</text><line x1="266" y1="113" x2="266" y2="279" stroke="#0f1620" stroke-width="1.4" stroke-linecap="butt"/><polygon points="262.8,113 266,106 269.2,113" fill="#0f1620"/><polygon points="262.8,279 266,286 269.2,279" fill="#0f1620"/><text x="273" y="201" font-size="14" fill="#0f1620">36 m</text><rect x="142" y="285" width="16" height="7" rx="2" fill="#1f2530"/><rect x="142.5" y="291" width="7" height="28" rx="3" fill="#2f5f8f" stroke="#0f1620" stroke-width="0.9"/><rect x="150.5" y="291" width="7" height="28" rx="3" fill="#2f5f8f" stroke="#0f1620" stroke-width="0.9"/><rect x="140" y="316" width="20" height="25" rx="5" fill="#2f8f6a" stroke="#0f1620" stroke-width="0.9"/><path d="M143 337 Q134 344 128 353" fill="none" stroke="#8d5a3b" stroke-width="4.5" stroke-linecap="round"/><path d="M157 337 Q166 344 172 353" fill="none" stroke="#8d5a3b" stroke-width="4.5" stroke-linecap="round"/><rect x="147" y="339" width="6" height="5" fill="#8d5a3b"/><circle cx="150" cy="350" r="8" fill="#8d5a3b" stroke="#0f1620" stroke-width="0.9"/><path d="M142 352 C141 358 143 362 146 363 C148 360 152 360 154 363 C157 362 159 358 158 352 C155 356 145 356 142 352 Z" fill="#2a1a12"/></svg>`,
+            answer: { value: 8.5, unit: 's' },
+            delsvar: [
+                { del: 'a', value: 6.9, unit: 's' },
+                { del: 'b' },
+                { del: 'c', value: 8.5, unit: 's' },
+            ],
+            solution: `Vi kallar repets förlängning i jämviktsläget $\\Delta l = 12\\ \\mathrm{m}$ och mäter utslaget $y$ från jämviktsläget, med uppåt som positiv riktning.
+
+**a)** När hopparen hänger stilla är repets kraft lika stor som tyngdkraften:
+
+$$ k \\cdot \\Delta l = m \\cdot g \\quad\\Leftrightarrow\\quad k = \\frac{m \\cdot g}{\\Delta l} $$
+
+Detta i formeln för periodtiden, $T = 2\\pi\\sqrt{\\dfrac{m}{k}}$, ger
+
+$$ T = 2\\pi\\sqrt{\\frac{m}{\\;\\dfrac{m \\cdot g}{\\Delta l}\\;}} = 2\\pi\\sqrt{\\frac{\\Delta l}{g}} $$
+
+Massan förkortas bort, så hopparens massa behövs inte.
+
+$$
+\\left[ \\begin{array}{l}
+\\Delta l = 12\\ \\mathrm{m} \\\\
+g = 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$ T = 2\\pi\\sqrt{\\frac{12}{9{,}82}} = 6{,}9456\\ldots\\ \\mathrm{s} \\approx 6{,}9\\ \\mathrm{s} $$
+
+**Svar:** Ungefär $6{,}9\\ \\mathrm{s}$
+
+**b)** Den lägsta punkten ligger $36\\ \\mathrm{m} - 12\\ \\mathrm{m} = 24\\ \\mathrm{m}$ under jämviktsläget. Om rörelsen vore harmonisk skulle amplituden vara $24\\ \\mathrm{m}$, och det övre vändläget skulle ligga lika långt ovanför jämviktsläget, alltså
+
+$$ 24\\ \\mathrm{m} - 12\\ \\mathrm{m} = 12\\ \\mathrm{m} $$
+
+ovanför den punkt där repet blir sträckt. Där är repet slakt och drar inte alls. Sambandet $F_\\mathrm{R} = -k \\cdot y$ gäller bara så länge repet är sträckt. Ovanför den punkten verkar bara tyngdkraften, som är konstant och inte proportionell mot utslaget. Hopparen rör sig där som ett föremål i fritt fall.
+
+**Svar:** Repet blir slakt innan det tänkta övre vändläget nås. Där är den resulterande kraften bara tyngdkraften, som inte är proportionell mot utslaget, så rörelsen är inte harmonisk.
+
+**c)** Studset består av två delar: en harmonisk del medan repet är sträckt och ett fritt fall uppåt och tillbaka medan det är slakt.
+
+**Del 1, repet sträckt.** Här är rörelsen harmonisk med amplituden $A = 24\\ \\mathrm{m}$ och periodtiden $T$ från a). Vi beskriver den med $y = A \\cdot \\sin(\\omega \\cdot t)$, med $t = 0$ när hopparen passerar jämviktsläget uppåt. Repet blir slakt vid $y = 12\\ \\mathrm{m}$:
+
+$$ 12 = 24 \\cdot \\sin(\\omega \\cdot t_1) \\quad\\Leftrightarrow\\quad \\sin(\\omega \\cdot t_1) = \\frac{1}{2} \\quad\\Leftrightarrow\\quad \\omega \\cdot t_1 = \\frac{\\pi}{6} $$
+
+Ett helt varv motsvarar $2\\pi$ och tar tiden $T$, så vinkeln $\\dfrac{\\pi}{6}$ tar tiden $t_1 = \\dfrac{T}{12}$. Från den lägsta punkten upp till jämviktsläget går det en kvarts periodtid, $\\dfrac{T}{4}$. Från den lägsta punkten tills repet blir slakt tar det alltså
+
+$$ \\frac{T}{4} + \\frac{T}{12} = \\frac{T}{3} $$
+
+På vägen ned är det lika lång tid från den punkten till den lägsta punkten, så repet är sträckt under tiden
+
+$$ t_\\mathrm{s} = 2 \\cdot \\frac{T}{3} = \\frac{2 \\cdot 6{,}9456\\ldots}{3} = 4{,}6304\\ldots\\ \\mathrm{s} $$
+
+**Del 2, repet slakt.** Vi behöver farten $v$ när repet blir slakt. Energiprincipen mellan den lägsta punkten och den punkten: fjäderenergin i repet, som är sträckt $36\\ \\mathrm{m}$ i den lägsta punkten, blir lägesenergi och rörelseenergi när hopparen har stigit $36\\ \\mathrm{m}$.
+
+$$ \\frac{k \\cdot 36^{2}}{2} = m \\cdot g \\cdot 36 + \\frac{m \\cdot v^{2}}{2} $$
+
+Med $k = \\dfrac{m \\cdot g}{12}$ från a) insatt kan vi dividera båda led med $m$:
+
+$$ \\frac{g \\cdot 36^{2}}{2 \\cdot 12} = g \\cdot 36 + \\frac{v^{2}}{2} \\quad\\Leftrightarrow\\quad 54 \\cdot g = 36 \\cdot g + \\frac{v^{2}}{2} \\quad\\Leftrightarrow\\quad v^{2} = 36 \\cdot g $$
+
+$$ v = \\sqrt{36 \\cdot 9{,}82} = 18{,}802\\ldots\\ \\mathrm{m/s} $$
+
+Utan repet bromsas hon av tyngdkraften med accelerationen $g$. Tiden upp tills farten är noll är $\\dfrac{v}{g}$, och lika lång tid tar det att falla tillbaka. Tiden med slakt rep är
+
+$$ t_\\mathrm{f} = \\frac{2 \\cdot v}{g} = \\frac{2 \\cdot 18{,}802\\ldots}{9{,}82} = 3{,}8293\\ldots\\ \\mathrm{s} $$
+
+**Hela studset:**
+
+$$ t = t_\\mathrm{s} + t_\\mathrm{f} = 4{,}6304\\ldots + 3{,}8293\\ldots = 8{,}4598\\ldots\\ \\mathrm{s} \\approx 8{,}5\\ \\mathrm{s} $$
+
+**Rimlighet:** Under det fria fallet stiger hon $\\dfrac{v^{2}}{2g} = 18\\ \\mathrm{m}$ över den punkt där repet blir sträckt, men i en harmonisk svängning skulle hon bara ha nått $12\\ \\mathrm{m}$. Uppe vid toppen bromsas hon bara av tyngdkraften, inte också av repet, så hon hinner längre och vänder långsammare. Därför tar studset längre tid än periodtiden. Massan $75\\ \\mathrm{kg}$ behövdes aldrig.
+
+**Svar:** Ungefär $8{,}5\\ \\mathrm{s}$, alltså cirka $1{,}5\\ \\mathrm{s}$ längre än periodtiden $6{,}9\\ \\mathrm{s}$ för små gupp.`,
         },
     ],
 
@@ -64788,7 +66700,7 @@ Massan spelar ingen roll eftersom den tyngre kulan visserligen dras tillbaka med
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
-            level: 2,
+            level: 1,
             question: `En matematisk pendel har pendellängden $0{,}80\\ \\mathrm{m}$. Hur lång ska pendeln vara för att periodtiden ska **fördubblas**?
 
 ${makeSwing({ angle: 14, ropeLabel: 'l = 0,80 m', angleLabel: null })}`,
@@ -64900,6 +66812,502 @@ $$ g_\\text{planet} = 9{,}82 \\cdot \\left(\\frac{14{,}75}{24{,}00}\\right)^2 = 
 
 **Generell slutsats:** Insikten är att koppla *klockans avläsning* till *antalet pendelslag*. Pendelklockor mäter inte tid på samma sätt som atomur. Pendellängden *l* stryks ur ekvationen, så vi behöver aldrig veta vilken pendel som används. Detta är ett klassiskt kvotresonemang.`,
         },
+        {
+            level: 1,
+            question: `En kula med massan $0{,}250\\ \\mathrm{kg}$ hänger i ett snöre. Kulan dras ut så att snöret bildar vinkeln $\\alpha = 12^\\circ$ med lodlinjen. Hur stor är den komposant av tyngdkraften som är riktad längs cirkelbågens tangent, mot jämviktsläget? Svara i N.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 267" width="365" height="390" role="img" aria-label="En pendel som dras ut vinkeln alfa fran lodlinjen." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="75" y1="30" x2="185" y2="30" stroke="#0f1620" stroke-width="1.8"/><line x1="81" y1="30" x2="74" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="91" y1="30" x2="84" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="101" y1="30" x2="94" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="111" y1="30" x2="104" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="121" y1="30" x2="114" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="131" y1="30" x2="124" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="141" y1="30" x2="134" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="151" y1="30" x2="144" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="161" y1="30" x2="154" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="171" y1="30" x2="164" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="181" y1="30" x2="174" y2="23" stroke="#0f1620" stroke-width="1"/><polyline points="175.7,245.2 173.5,245.7 171.2,246.1 169.0,246.5 166.7,246.9 164.4,247.3 162.1,247.6 159.9,248.0 157.6,248.3 155.3,248.5 153.0,248.8 150.7,249.0 148.4,249.2 146.1,249.4 143.8,249.6 141.5,249.7 139.2,249.8 136.9,249.9 134.6,250.0 132.3,250.0 130.0,250.0 127.7,250.0 125.4,250.0 123.1,249.9 120.8,249.8 118.5,249.7 116.2,249.6 113.9,249.4 111.6,249.2 109.3,249.0 107.0,248.8 104.7,248.5 102.4,248.3 100.1,248.0 97.9,247.6 95.6,247.3 93.3,246.9 91.0,246.5 88.8,246.1 86.5,245.7 84.3,245.2" fill="none" stroke="#8a8579" stroke-width="1.3" stroke-dasharray="3 3"/><line x1="130" y1="30" x2="86.1" y2="236.4" stroke="#8a8579" stroke-width="1.3" stroke-dasharray="5 4"/><circle cx="84.3" cy="245.2" r="9" fill="#fff" stroke="#0f1620" stroke-width="1.3"/><line x1="130" y1="30" x2="130" y2="241" stroke="#0f1620" stroke-width="1.6"/><circle cx="130" cy="250" r="9" fill="#5a6270" stroke="#2b303a" stroke-width="1.2"/><circle cx="130" cy="30" r="2.6" fill="#0f1620"/><polyline points="130.0,125.0 129.0,125.0 128.0,125.0 127.0,125.0 126.0,124.9 125.0,124.9 124.0,124.8 123.0,124.7 122.1,124.7 121.1,124.6 120.1,124.5 119.1,124.4 118.1,124.3 117.1,124.1 116.1,124.0 115.1,123.8 114.2,123.7 113.2,123.5 112.2,123.3 111.2,123.1 110.2,122.9" fill="none" stroke="#0f1620" stroke-width="1.2"/><text x="104.2" y="127.9" text-anchor="end" font-size="14" fill="#0f1620"><tspan font-style="italic">α</tspan> = 12°</text></svg>`,
+            answer: { value: 0.51, unit: 'N' },
+            solution: `Tyngdkraften delas upp i en komposant längs snöret och en komposant $F_1$ längs tangenten till cirkelbågen. Vinkeln mellan tyngdkraften och snöret är lika stor som utslagsvinkeln $\\alpha$, och $F_1$ står mot den vinkeln i krafttriangeln:
+
+$$ F_1 = mg \\cdot \\sin \\alpha $$
+
+$$
+\\left[ \\begin{array}{l}
+m = 0{,}250\\ \\mathrm{kg} \\\\
+g \\approx 9{,}82\\ \\mathrm{m/s^2} \\\\
+\\alpha = 12^\\circ
+\\end{array} \\right]
+$$
+
+$$ F_1 = 0{,}250 \\cdot 9{,}82 \\cdot \\sin 12^\\circ = 2{,}455 \\cdot 0{,}2079\\ldots = 0{,}5104\\ldots\\ \\mathrm{N} \\approx 0{,}51\\ \\mathrm{N} $$
+
+**Svar:** Komposanten längs tangenten är ungefär $0{,}51\\ \\mathrm{N}$.`,
+        },
+        {
+            level: 1,
+            question: `En matematisk pendel görs nio gånger så lång. Hur ändras pendelns frekvens?`,
+            choices: [
+                'Frekvensen blir nio gånger så hög',
+                'Frekvensen blir en tredjedel så hög',
+                'Frekvensen blir tre gånger så hög',
+                'Frekvensen blir en niondel så hög',
+            ],
+            correct: 1,
+            solution: `Periodtiden är
+
+$$ T = 2\\pi \\sqrt{\\frac{l}{g}} $$
+
+Längden står under rottecknet. Med nio gånger så lång pendel blir periodtiden $\\sqrt{9} = 3$ gånger så lång.
+
+Frekvensen är antalet svängningar per sekund, $f = \\dfrac{1}{T}$. När periodtiden blir tre gånger så lång blir frekvensen en tredjedel så hög.
+
+**Svar:** Frekvensen blir en tredjedel så hög.`,
+        },
+        {
+            level: 2,
+            question: `Ett barn gungar med små utslag. Kedjorna är $2{,}30\\ \\mathrm{m}$ långa från fästpunkten till sitsen, och barnets tyngdpunkt ligger $0{,}25\\ \\mathrm{m}$ ovanför sitsen. Behandla barnet och gungan som en matematisk pendel. Hur lång tid tar det för barnet att gå från det bakre vändläget till gungans lägsta punkt? Svara i s.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 290 256" width="424" height="374" role="img" aria-label="En gunga sedd fran sidan. Kedjan ar 2,30 m fran fastpunkten till sitsen och barnets tyngdpunkt ligger 0,25 m ovanfor sitsen." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="90" y1="34" x2="170" y2="34" stroke="#0f1620" stroke-width="1.8"/><line x1="96" y1="34" x2="89" y2="27" stroke="#0f1620" stroke-width="1"/><line x1="106" y1="34" x2="99" y2="27" stroke="#0f1620" stroke-width="1"/><line x1="116" y1="34" x2="109" y2="27" stroke="#0f1620" stroke-width="1"/><line x1="126" y1="34" x2="119" y2="27" stroke="#0f1620" stroke-width="1"/><line x1="136" y1="34" x2="129" y2="27" stroke="#0f1620" stroke-width="1"/><line x1="146" y1="34" x2="139" y2="27" stroke="#0f1620" stroke-width="1"/><line x1="156" y1="34" x2="149" y2="27" stroke="#0f1620" stroke-width="1"/><line x1="166" y1="34" x2="159" y2="27" stroke="#0f1620" stroke-width="1"/><line x1="130" y1="34" x2="130" y2="241" stroke="#0f1620" stroke-width="1.6"/><rect x="104" y="241" width="52" height="7" rx="1.5" fill="#b9854f" stroke="#0f1620" stroke-width="1.2"/><circle cx="130" cy="34" r="2.6" fill="#0f1620"/><circle cx="130" cy="218.5" r="3.4" fill="#c8324a"/><line x1="133" y1="214.5" x2="148" y2="196.5" stroke="#0f1620" stroke-width="0.9"/><text x="150" y="193.5" text-anchor="start" font-size="13" fill="#0f1620">barnets tyngdpunkt</text><line x1="88" y1="34.0" x2="58" y2="34.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="3 2"/><line x1="102" y1="241.0" x2="58" y2="241.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="3 2"/><line x1="64" y1="40.0" x2="64" y2="235.0" stroke="#0f1620" stroke-width="1.2" stroke-linecap="butt"/><polygon points="60.5,40.0 64,34.0 67.5,40.0" fill="#0f1620"/><polygon points="60.5,235.0 64,241.0 67.5,235.0" fill="#0f1620"/><text x="57" y="142.0" text-anchor="end" font-size="13" fill="#0f1620">2,30 m</text><line x1="134" y1="218.5" x2="190" y2="218.5" stroke="#8a8579" stroke-width="1" stroke-dasharray="3 2"/><line x1="158" y1="241.0" x2="190" y2="241.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="3 2"/><line x1="184" y1="224.5" x2="184" y2="235.0" stroke="#0f1620" stroke-width="1.2" stroke-linecap="butt"/><polygon points="180.5,224.5 184,218.5 187.5,224.5" fill="#0f1620"/><polygon points="180.5,235.0 184,241.0 187.5,235.0" fill="#0f1620"/><text x="191" y="234.3" text-anchor="start" font-size="13" fill="#0f1620">0,25 m</text><text x="176" y="38" text-anchor="start" font-size="13" fill="#0f1620">fästpunkt</text></svg>`,
+            answer: { value: 0.72, unit: 's' },
+            solution: `Pendellängden räknas från fästpunkten till den svängande kroppens **tyngdpunkt**. Tyngdpunkten ligger ovanför sitsen, så
+
+$$ l = 2{,}30\\ \\mathrm{m} - 0{,}25\\ \\mathrm{m} = 2{,}05\\ \\mathrm{m} $$
+
+Periodtiden för en hel svängning, fram och tillbaka:
+
+$$ T = 2\\pi \\sqrt{\\frac{l}{g}} $$
+
+$$
+\\left[ \\begin{array}{l}
+l = 2{,}05\\ \\mathrm{m} \\\\
+g \\approx 9{,}82\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$ T = 2\\pi \\sqrt{\\frac{2{,}05}{9{,}82}} = 2\\pi \\cdot 0{,}4569\\ldots = 2{,}870\\ldots\\ \\mathrm{s} $$
+
+Under en hel svängning går barnet från det bakre vändläget till det främre och tillbaka. Från det bakre vändläget till den lägsta punkten är en fjärdedel av den vägen, och eftersom rörelsen är symmetrisk tar den en fjärdedel av periodtiden:
+
+$$ t = \\frac{T}{4} = \\frac{2{,}870\\ldots\\ \\mathrm{s}}{4} = 0{,}7176\\ldots\\ \\mathrm{s} \\approx 0{,}72\\ \\mathrm{s} $$
+
+**Svar:** Det tar ungefär $0{,}72\\ \\mathrm{s}$.`,
+        },
+        {
+            level: 2,
+            question: `Två pendlar har längderna $0{,}90\\ \\mathrm{m}$ och $0{,}40\\ \\mathrm{m}$. Båda kulorna dras ut åt samma håll och släpps samtidigt. Efter hur lång tid är båda kulorna för första gången tillbaka i sina startlägen samtidigt? Räkna med $g = 9{,}82\\ \\mathrm{m/s^2}$. Svara i s.`,
+            answer: { value: 3.8, unit: 's' },
+            solution: `En kula är tillbaka i sitt startläge efter varje hel periodtid. Vi söker alltså den kortaste tid som är ett helt antal periodtider för **båda** pendlarna.
+
+Kvoten mellan periodtiderna, där $2\\pi$ och $g$ förkortas bort:
+
+$$ \\frac{T_\\mathrm{lång}}{T_\\mathrm{kort}} = \\frac{2\\pi\\sqrt{\\dfrac{0{,}90}{g}}}{2\\pi\\sqrt{\\dfrac{0{,}40}{g}}} = \\sqrt{\\frac{0{,}90}{0{,}40}} = \\sqrt{2{,}25} = 1{,}5 = \\frac{3}{2} $$
+
+Den långa pendelns periodtid är alltså en och en halv gånger den kortas. Under två svängningar med den långa hinner den korta med tre:
+
+$$ 2 \\cdot T_\\mathrm{lång} = 3 \\cdot T_\\mathrm{kort} $$
+
+Periodtiden för den långa pendeln:
+
+$$ T_\\mathrm{lång} = 2\\pi \\sqrt{\\frac{0{,}90}{9{,}82}} = 2\\pi \\cdot 0{,}3027\\ldots = 1{,}902\\ldots\\ \\mathrm{s} $$
+
+$$ t = 2 \\cdot T_\\mathrm{lång} = 2 \\cdot 1{,}902\\ldots = 3{,}804\\ldots\\ \\mathrm{s} \\approx 3{,}8\\ \\mathrm{s} $$
+
+**Rimlighet:** Den korta pendeln har periodtiden $2\\pi \\sqrt{\\dfrac{0{,}40}{9{,}82}} = 1{,}268\\ldots\\ \\mathrm{s}$, och tre sådana är också $3{,}804\\ldots\\ \\mathrm{s}$.
+
+**Svar:** Efter ungefär $3{,}8\\ \\mathrm{s}$.`,
+        },
+        {
+            level: 2,
+            question: `En kula med massan $0{,}40\\ \\mathrm{kg}$ hänger i ett snöre och släpps från vila vid utslagsvinkeln $\\alpha = 15^\\circ$.<br>a) Bestäm kulans acceleration i släppögonblicket.<br>b) Bestäm spännkraften i snöret i släppögonblicket.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 267" width="365" height="390" role="img" aria-label="En pendel som dras ut vinkeln alfa fran lodlinjen." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="75" y1="30" x2="185" y2="30" stroke="#0f1620" stroke-width="1.8"/><line x1="81" y1="30" x2="74" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="91" y1="30" x2="84" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="101" y1="30" x2="94" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="111" y1="30" x2="104" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="121" y1="30" x2="114" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="131" y1="30" x2="124" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="141" y1="30" x2="134" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="151" y1="30" x2="144" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="161" y1="30" x2="154" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="171" y1="30" x2="164" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="181" y1="30" x2="174" y2="23" stroke="#0f1620" stroke-width="1"/><polyline points="186.9,242.5 184.2,243.2 181.4,243.9 178.6,244.6 175.7,245.2 172.9,245.8 170.1,246.3 167.3,246.8 164.4,247.3 161.6,247.7 158.7,248.1 155.9,248.5 153.0,248.8 150.1,249.1 147.3,249.3 144.4,249.5 141.5,249.7 138.6,249.8 135.8,249.9 132.9,250.0 130.0,250.0 127.1,250.0 124.2,249.9 121.4,249.8 118.5,249.7 115.6,249.5 112.7,249.3 109.9,249.1 107.0,248.8 104.1,248.5 101.3,248.1 98.4,247.7 95.6,247.3 92.7,246.8 89.9,246.3 87.1,245.8 84.3,245.2 81.4,244.6 78.6,243.9 75.8,243.2 73.1,242.5" fill="none" stroke="#8a8579" stroke-width="1.3" stroke-dasharray="3 3"/><line x1="130" y1="30" x2="75.4" y2="233.8" stroke="#8a8579" stroke-width="1.3" stroke-dasharray="5 4"/><circle cx="73.1" cy="242.5" r="9" fill="#fff" stroke="#0f1620" stroke-width="1.3"/><line x1="130" y1="30" x2="130" y2="241" stroke="#0f1620" stroke-width="1.6"/><circle cx="130" cy="250" r="9" fill="#5a6270" stroke="#2b303a" stroke-width="1.2"/><circle cx="130" cy="30" r="2.6" fill="#0f1620"/><polyline points="130.0,125.0 128.8,125.0 127.5,125.0 126.3,124.9 125.0,124.9 123.8,124.8 122.5,124.7 121.3,124.6 120.1,124.5 118.8,124.3 117.6,124.2 116.4,124.0 115.1,123.8 113.9,123.6 112.7,123.4 111.5,123.2 110.2,122.9 109.0,122.7 107.8,122.4 106.6,122.1 105.4,121.8" fill="none" stroke="#0f1620" stroke-width="1.2"/><text x="99.4" y="126.8" text-anchor="end" font-size="14" fill="#0f1620"><tspan font-style="italic">α</tspan> = 15°</text></svg>`,
+            answer: { value: 2.5, unit: 'm/s²' },
+            delsvar: [
+                { del: 'a', value: 2.5, unit: 'm/s²', etikett: '$a =$' },
+                { del: 'b', value: 3.8, unit: 'N', etikett: '$F_\\mathrm{S} =$' },
+            ],
+            solution: `**a)** På kulan verkar tyngdkraften $F_\\mathrm{G} = mg$ och spännkraften $F_\\mathrm{S}$ längs snöret. Tyngdkraften delas upp i komposanten $F_2$ längs snöret och komposanten $F_1$ längs tangenten. Vinkeln mellan tyngdkraften och snöret är lika stor som $\\alpha$, och $F_1$ står mot den vinkeln:
+
+$$ F_1 = mg \\cdot \\sin \\alpha $$
+
+I släppögonblicket är farten noll. Kulan behöver då ingen centripetalkraft, så krafterna längs snöret tar ut varandra. Den resulterande kraften är bara $F_1$, och Newtons andra lag ger
+
+$$ F_1 = m \\cdot a \\quad\\Leftrightarrow\\quad a = \\frac{F_1}{m} = \\frac{mg \\cdot \\sin \\alpha}{m} = g \\cdot \\sin \\alpha $$
+
+$$
+\\left[ \\begin{array}{l}
+g \\approx 9{,}82\\ \\mathrm{m/s^2} \\\\
+\\alpha = 15^\\circ
+\\end{array} \\right]
+$$
+
+$$ a = 9{,}82 \\cdot \\sin 15^\\circ = 9{,}82 \\cdot 0{,}2588\\ldots = 2{,}541\\ldots\\ \\mathrm{m/s^2} \\approx 2{,}5\\ \\mathrm{m/s^2} $$
+
+Massan förkortas bort, så accelerationen blir densamma för en tung och en lätt kula. Det är samma skäl som att massan saknas i formeln för periodtiden.
+
+**Svar:** Ungefär $2{,}5\\ \\mathrm{m/s^2}$
+
+**b)** Längs snöret har kulan ingen acceleration i släppögonblicket, eftersom farten är noll och ingen centripetalkraft behövs. Spännkraften är därför lika stor som tyngdkraftens komposant längs snöret, $F_2$. I krafttriangeln ligger $F_2$ intill vinkeln $\\alpha$:
+
+$$ F_\\mathrm{S} = F_2 = mg \\cdot \\cos \\alpha $$
+
+$$
+\\left[ \\begin{array}{l}
+m = 0{,}40\\ \\mathrm{kg} \\\\
+g \\approx 9{,}82\\ \\mathrm{m/s^2} \\\\
+\\alpha = 15^\\circ
+\\end{array} \\right]
+$$
+
+$$ F_\\mathrm{S} = 0{,}40 \\cdot 9{,}82 \\cdot \\cos 15^\\circ = 3{,}928 \\cdot 0{,}9659\\ldots = 3{,}794\\ldots\\ \\mathrm{N} \\approx 3{,}8\\ \\mathrm{N} $$
+
+**Rimlighet:** Spännkraften är lite mindre än tyngdkraften $3{,}9\\ \\mathrm{N}$. När kulan hänger stilla i lägsta punkten bär snöret hela tyngden, men i vändläget bär det bara komposanten längs snöret.
+
+**Svar:** Ungefär $3{,}8\\ \\mathrm{N}$`,
+        },
+        {
+            level: 2,
+            question: `Diagrammet visar hur en pendelkulas läge $y$ längs cirkelbågen, räknat från jämviktsläget, varierar med tiden $t$. Räkna med $g = 9{,}82\\ \\mathrm{m/s^2}$.<br>a) Bestäm pendellängden.<br>b) Bestäm den största utslagsvinkeln.
+
+${makeOscillation({ A: 8, omega: 2 * Math.PI / 1.6, tMax: 3.2, yTicks: [-8, -4, 0, 4, 8], yLabel: '<tspan font-style="italic">y</tspan> (cm)' })}`,
+            answer: { value: 0.64, unit: 'm' },
+            delsvar: [
+                { del: 'a', value: 0.64, unit: 'm', etikett: '$l =$' },
+                { del: 'b', value: 7.2, unit: '°', etikett: '$\\alpha =$' },
+            ],
+            solution: `**a)** Ur diagrammet: kurvan går upp genom noll vid $t = 0$ och nästa gång uppåt genom noll vid $t = 1{,}6\\ \\mathrm{s}$. En hel svängning tar alltså $T = 1{,}6\\ \\mathrm{s}$.
+
+Vi löser ut pendellängden ur formeln för periodtid:
+
+$$ T = 2\\pi \\sqrt{\\frac{l}{g}} \\quad\\Leftrightarrow\\quad T^2 = 4\\pi^2 \\cdot \\frac{l}{g} \\quad\\Leftrightarrow\\quad l = \\frac{T^2 \\cdot g}{4\\pi^2} $$
+
+$$
+\\left[ \\begin{array}{l}
+T = 1{,}6\\ \\mathrm{s} \\\\
+g \\approx 9{,}82\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$ l = \\frac{1{,}6^2 \\cdot 9{,}82}{4\\pi^2} = \\frac{25{,}139\\ldots}{39{,}478\\ldots} = 0{,}6367\\ldots\\ \\mathrm{m} \\approx 0{,}64\\ \\mathrm{m} $$
+
+**Svar:** Ungefär $0{,}64\\ \\mathrm{m}$
+
+**b)** Den största elongationen ur diagrammet är $8{,}0\\ \\mathrm{cm} = 0{,}080\\ \\mathrm{m}$. Det är bågen $y$ från jämviktsläget till vändläget. En båge är lika stor andel av hela cirkelns omkrets som vinkeln är av $360^\\circ$:
+
+$$ y = \\frac{\\alpha}{360^\\circ} \\cdot 2\\pi \\cdot l \\quad\\Leftrightarrow\\quad \\alpha = \\frac{y}{2\\pi \\cdot l} \\cdot 360^\\circ $$
+
+$$ \\alpha = \\frac{0{,}080}{2\\pi \\cdot 0{,}6367\\ldots} \\cdot 360^\\circ = \\frac{0{,}080}{4{,}001\\ldots} \\cdot 360^\\circ = 7{,}198\\ldots^\\circ \\approx 7{,}2^\\circ $$
+
+**Rimlighet:** Vinkeln är liten, så formeln för periodtid gäller, vilket vi förutsatte i a).
+
+**Svar:** Ungefär $7{,}2^\\circ$`,
+        },
+        {
+            level: 3,
+            question: `En kula hänger i ett snöre som är $1{,}20\\ \\mathrm{m}$ långt räknat till kulans tyngdpunkt. Kulan släpps från vila vid utslagsvinkeln $\\alpha = 8{,}0^\\circ$. Räkna med $g = 9{,}82\\ \\mathrm{m/s^2}$.<br>a) Bestäm kulans fart i lägsta punkten med hjälp av energiprincipen.<br>b) Bestäm samma fart genom att behandla rörelsen som en harmonisk svängning, där amplituden är bågen från lägsta punkten till vändläget.<br>c) Jämför svaren. Förklara varför de blir nästan lika, och vilken av metoderna som ger för stort värde när utslaget görs större.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 267" width="365" height="390" role="img" aria-label="En pendel som dras ut vinkeln alfa fran lodlinjen." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="75" y1="30" x2="185" y2="30" stroke="#0f1620" stroke-width="1.8"/><line x1="81" y1="30" x2="74" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="91" y1="30" x2="84" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="101" y1="30" x2="94" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="111" y1="30" x2="104" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="121" y1="30" x2="114" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="131" y1="30" x2="124" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="141" y1="30" x2="134" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="151" y1="30" x2="144" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="161" y1="30" x2="154" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="171" y1="30" x2="164" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="181" y1="30" x2="174" y2="23" stroke="#0f1620" stroke-width="1"/><polyline points="160.6,247.9 159.1,248.1 157.6,248.3 156.0,248.5 154.5,248.6 153.0,248.8 151.5,249.0 149.9,249.1 148.4,249.2 146.9,249.4 145.3,249.5 143.8,249.6 142.3,249.7 140.7,249.7 139.2,249.8 137.7,249.9 136.1,249.9 134.6,250.0 133.1,250.0 131.5,250.0 130.0,250.0 128.5,250.0 126.9,250.0 125.4,250.0 123.9,249.9 122.3,249.9 120.8,249.8 119.3,249.7 117.7,249.7 116.2,249.6 114.7,249.5 113.1,249.4 111.6,249.2 110.1,249.1 108.5,249.0 107.0,248.8 105.5,248.6 104.0,248.5 102.4,248.3 100.9,248.1 99.4,247.9" fill="none" stroke="#8a8579" stroke-width="1.3" stroke-dasharray="3 3"/><line x1="130" y1="30" x2="100.6" y2="238.9" stroke="#8a8579" stroke-width="1.3" stroke-dasharray="5 4"/><circle cx="99.4" cy="247.9" r="9" fill="#fff" stroke="#0f1620" stroke-width="1.3"/><line x1="130" y1="30" x2="130" y2="241" stroke="#0f1620" stroke-width="1.6"/><circle cx="130" cy="250" r="9" fill="#5a6270" stroke="#2b303a" stroke-width="1.2"/><circle cx="130" cy="30" r="2.6" fill="#0f1620"/><polyline points="130.0,125.0 129.3,125.0 128.7,125.0 128.0,125.0 127.3,125.0 126.7,124.9 126.0,124.9 125.4,124.9 124.7,124.9 124.0,124.8 123.4,124.8 122.7,124.7 122.1,124.7 121.4,124.6 120.7,124.5 120.1,124.5 119.4,124.4 118.8,124.3 118.1,124.3 117.4,124.2 116.8,124.1" fill="none" stroke="#0f1620" stroke-width="1.2"/><text x="110.8" y="129.1" text-anchor="end" font-size="14" fill="#0f1620"><tspan font-style="italic">α</tspan></text><text x="138" y="166.4" text-anchor="start" font-size="14" fill="#0f1620"><tspan font-style="italic">l</tspan> = 1,20 m</text></svg>`,
+            answer: { value: 0.479, unit: 'm/s' },
+            delsvar: [
+                { del: 'a', value: 0.479, unit: 'm/s', etikett: 'energiprincipen' },
+                { del: 'b', value: 0.479, unit: 'm/s', etikett: 'harmonisk svängning' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Spännkraften är hela tiden vinkelrät mot rörelsen och uträttar inget arbete, så kulans lägesenergi i vändläget blir rörelseenergi i lägsta punkten. Kulan sjunker höjden $h$, som är skillnaden mellan snörlängden och den lodräta sträckan $l \\cdot \\cos \\alpha$ från fästpunkten ned till kulan i vändläget:
+
+$$ h = l - l \\cdot \\cos \\alpha = l \\cdot (1 - \\cos \\alpha) $$
+
+$$ h = 1{,}20 \\cdot (1 - \\cos 8{,}0^\\circ) = 1{,}20 \\cdot 0{,}009731\\ldots = 0{,}01167\\ldots\\ \\mathrm{m} $$
+
+$$ mgh = \\frac{m v^2}{2} \\quad\\Leftrightarrow\\quad v = \\sqrt{2gh} $$
+
+$$ v = \\sqrt{2 \\cdot 9{,}82 \\cdot 0{,}01167\\ldots} = \\sqrt{0{,}2293\\ldots} = 0{,}4789\\ldots\\ \\mathrm{m/s} \\approx 0{,}479\\ \\mathrm{m/s} $$
+
+**Svar:** Ungefär $0{,}479\\ \\mathrm{m/s}$
+
+**b)** I en harmonisk svängning är den största farten $v_{\\max} = \\omega \\cdot A$, där $\\omega = \\dfrac{2\\pi}{T}$. Med $T = 2\\pi \\sqrt{\\dfrac{l}{g}}$ blir
+
+$$ \\omega = \\frac{2\\pi}{2\\pi \\sqrt{\\dfrac{l}{g}}} = \\sqrt{\\frac{g}{l}} = \\sqrt{\\frac{9{,}82}{1{,}20}} = 2{,}860\\ldots\\ \\mathrm{rad/s} $$
+
+Amplituden är bågen från lägsta punkten till vändläget, som är lika stor andel av cirkelns omkrets som $8{,}0^\\circ$ är av $360^\\circ$:
+
+$$ A = \\frac{8{,}0^\\circ}{360^\\circ} \\cdot 2\\pi \\cdot 1{,}20 = 0{,}1675\\ldots\\ \\mathrm{m} $$
+
+$$ v_{\\max} = \\omega \\cdot A = 2{,}860\\ldots \\cdot 0{,}1675\\ldots = 0{,}4793\\ldots\\ \\mathrm{m/s} \\approx 0{,}479\\ \\mathrm{m/s} $$
+
+**Svar:** Ungefär $0{,}479\\ \\mathrm{m/s}$
+
+**c)** Med fyra värdesiffror skiljer svaren bara $0{,}4793 - 0{,}4789 = 0{,}0004\\ \\mathrm{m/s}$, mindre än en promille. Energiprincipen är exakt, medan den harmoniska modellen bygger på att den återförande kraften är proportionell mot bågen, $F_1 = \\dfrac{mg}{l} \\cdot y$. Den verkliga kraften är $F_1 = mg \\cdot \\sin \\alpha$, och vid små vinklar är sträckan $l \\cdot \\sin \\alpha$ nästan lika lång som bågen $y$. Därför ger modellerna nästan samma svar.
+
+Vid större utslag är $l \\cdot \\sin \\alpha$ tydligt kortare än bågen, så den verkliga återförande kraften är **mindre** än den harmoniska modellen antar. Modellen räknar då med en för stor kraft och ger för stor fart. Vid $40^\\circ$ blir den harmoniska modellens värde ungefär $2\\ \\%$ för stort.
+
+**Svar:** Svaren är nästan lika eftersom den återförande kraften är nästan proportionell mot bågen vid små vinklar. Vid större utslag ger den harmoniska modellen för stort värde.`,
+        },
+        {
+            level: 2,
+            question: `En vikt hänger stilla i en fjäder. Fjädern är då förlängd sträckan $\\Delta l$ jämfört med sin naturliga längd.<br>a) Visa att vikten, om den sätts i svängning upp och ned, får samma periodtid som en matematisk pendel med pendellängden $\\Delta l$.<br>b) En fjäder förlängs $12{,}0\\ \\mathrm{cm}$ när en vikt hängs i den. Bestäm periodtiden när vikten svänger upp och ned. Svara i s.`,
+            answer: { value: 0.695, unit: 's' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 0.695, unit: 's', etikett: '$T =$' },
+            ],
+            solution: `**a)** När vikten hänger stilla är fjäderkraften lika stor som tyngdkraften. Med Hookes lag, $F = k \\cdot \\Delta l$, blir
+
+$$ k \\cdot \\Delta l = mg \\quad\\Leftrightarrow\\quad k = \\frac{mg}{\\Delta l} \\qquad (1) $$
+
+Periodtiden för en vikt som svänger i en fjäder är
+
+$$ T = 2\\pi \\sqrt{\\frac{m}{k}} $$
+
+Insättning av (1), $k = \\dfrac{mg}{\\Delta l}$, ger
+
+$$ T = 2\\pi \\sqrt{\\frac{m}{\\dfrac{mg}{\\Delta l}}} = 2\\pi \\sqrt{\\frac{m \\cdot \\Delta l}{m \\cdot g}} = 2\\pi \\sqrt{\\frac{\\Delta l}{g}} $$
+
+Det är formeln för en matematisk pendel, $T = 2\\pi \\sqrt{\\dfrac{l}{g}}$, med $l = \\Delta l$. Massan förkortas bort, så sambandet gäller för varje vikt och varje fjäder.
+
+**Svar:** Periodtiden blir $T = 2\\pi \\sqrt{\\dfrac{\\Delta l}{g}}$, samma som för en matematisk pendel med längden $\\Delta l$.
+
+**b)**
+
+$$
+\\left[ \\begin{array}{l}
+\\Delta l = 12{,}0\\ \\mathrm{cm} = 0{,}120\\ \\mathrm{m} \\\\
+g \\approx 9{,}82\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$ T = 2\\pi \\sqrt{\\frac{0{,}120}{9{,}82}} = 2\\pi \\cdot 0{,}1105\\ldots = 0{,}6945\\ldots\\ \\mathrm{s} \\approx 0{,}695\\ \\mathrm{s} $$
+
+**Rimlighet:** En pendel som är $12\\ \\mathrm{cm}$ lång svänger fram och tillbaka på knappt en sekund, och en vikt i en mjuk fjäder gungar ungefär lika fort.
+
+**Svar:** Ungefär $0{,}695\\ \\mathrm{s}$`,
+        },
+        {
+            level: 3,
+            question: `Ett pendelur går exakt rätt vid havsytan. Uret flyttas till ett observatorium på $3{,}0\\ \\mathrm{km}$ höjd. Hur många sekunder har uret gått efter när det har gått ett dygn? Räkna med jordens radie $6\\,371\\ \\mathrm{km}$, och anta att tyngdaccelerationen bara beror på avståndet till jordens medelpunkt. Svara i s.`,
+            answer: { value: 41, unit: 's' },
+            solution: `**Hur tyngdaccelerationen beror på avståndet.** Enligt gravitationslagen verkar kraften $F = G \\cdot \\dfrac{m \\cdot M}{r^2}$ på en kropp med massan $m$ på avståndet $r$ från jordens medelpunkt. Den kraften är tyngdkraften $mg$:
+
+$$ mg = G \\cdot \\frac{m \\cdot M}{r^2} \\quad\\Leftrightarrow\\quad g = \\frac{G \\cdot M}{r^2} $$
+
+Här är $G$ gravitationskonstanten och $M$ jordens massa.
+
+**Hur periodtiden beror på avståndet.** Insättning i $T = 2\\pi \\sqrt{\\dfrac{l}{g}}$ ger
+
+$$ T = 2\\pi \\sqrt{\\frac{l \\cdot r^2}{G \\cdot M}} = 2\\pi \\cdot r \\cdot \\sqrt{\\frac{l}{G \\cdot M}} $$
+
+Pendellängden är densamma på båda platserna, så periodtiden är proportionell mot $r$. Med jordradien $R$ och höjden $h$ blir
+
+$$ \\frac{T_h}{T_0} = \\frac{R + h}{R} $$
+
+**Vad uret visar.** Uret räknar svängningar och flyttar visarna en bestämd tid, $T_0$, för varje svängning. Under den verkliga tiden $t$ hinner pendeln $\\dfrac{t}{T_h}$ svängningar, så uret visar
+
+$$ t_\\mathrm{ur} = \\frac{t}{T_h} \\cdot T_0 = t \\cdot \\frac{R}{R + h} $$
+
+Uret går efter med
+
+$$ \\Delta t = t - t_\\mathrm{ur} = t \\cdot \\left(1 - \\frac{R}{R + h}\\right) = t \\cdot \\frac{h}{R + h} $$
+
+$$
+\\left[ \\begin{array}{l}
+t = 24 \\cdot 3\\,600\\ \\mathrm{s} = 86\\,400\\ \\mathrm{s} \\\\
+h = 3{,}0\\ \\mathrm{km} \\\\
+R = 6\\,371\\ \\mathrm{km}
+\\end{array} \\right]
+$$
+
+$$ \\Delta t = 86\\,400 \\cdot \\frac{3{,}0}{6\\,371 + 3{,}0} = 86\\,400 \\cdot \\frac{3{,}0}{6\\,374} = 40{,}66\\ldots\\ \\mathrm{s} \\approx 41\\ \\mathrm{s} $$
+
+**Rimlighet:** Periodtiden blir bara $\\dfrac{3{,}0}{6\\,371} \\approx 0{,}05\\ \\%$ längre, men ett dygn är $86\\,400\\ \\mathrm{s}$, så det blir knappt en minut. Pendelur var tillräckligt noggranna för att sådana skillnader skulle märkas.
+
+**Svar:** Uret går efter ungefär $41\\ \\mathrm{s}$ per dygn.`,
+        },
+        {
+            level: 3,
+            question: `En elev vill bestämma tyngdaccelerationen med en pendel som är $1{,}05\\ \\mathrm{m}$ lång, räknat till kulans tyngdpunkt. Eleven släpper kulan från utslagsvinkeln $40^\\circ$ och tar tid på tio hela svängningar: $21{,}2\\ \\mathrm{s}$.<br>a) Vilket värde på tyngdaccelerationen får eleven om formeln $T = 2\\pi \\sqrt{\\dfrac{l}{g}}$ används som den står?<br>b) Vid $40^\\circ$ är den verkliga periodtiden $3{,}1\\ \\%$ längre än formelns värde. Vilket värde på tyngdaccelerationen ger mätningen när hänsyn tas till det?<br>c) Periodtiden i a) var bara $3{,}1\\ \\%$ för lång. Hur många procent för litet blev värdet på tyngdaccelerationen i a)? Förklara varför felet i tyngdaccelerationen blir ungefär dubbelt så stort som felet i periodtiden.`,
+            answer: { value: 9.80, unit: 'm/s²' },
+            delsvar: [
+                { del: 'a', value: 9.22, unit: 'm/s²', etikett: '$g =$' },
+                { del: 'b', value: 9.80, unit: 'm/s²', etikett: '$g =$' },
+                { del: 'c', value: 5.9, unit: '%', etikett: 'för litet med' },
+            ],
+            solution: `**a)** Periodtiden är tiden för en svängning:
+
+$$ T = \\frac{21{,}2\\ \\mathrm{s}}{10} = 2{,}12\\ \\mathrm{s} $$
+
+Vi löser ut tyngdaccelerationen:
+
+$$ T = 2\\pi \\sqrt{\\frac{l}{g}} \\quad\\Leftrightarrow\\quad T^2 = 4\\pi^2 \\cdot \\frac{l}{g} \\quad\\Leftrightarrow\\quad g = \\frac{4\\pi^2 \\cdot l}{T^2} $$
+
+$$
+\\left[ \\begin{array}{l}
+l = 1{,}05\\ \\mathrm{m} \\\\
+T = 2{,}12\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ g = \\frac{4\\pi^2 \\cdot 1{,}05}{2{,}12^2} = \\frac{41{,}45\\ldots}{4{,}4944} = 9{,}223\\ldots\\ \\mathrm{m/s^2} \\approx 9{,}22\\ \\mathrm{m/s^2} $$
+
+**Svar:** Ungefär $9{,}22\\ \\mathrm{m/s^2}$
+
+**b)** Den uppmätta periodtiden är $3{,}1\\ \\%$ längre än formelns värde $T_\\mathrm{formel}$:
+
+$$ T = 1{,}031 \\cdot T_\\mathrm{formel} \\quad\\Leftrightarrow\\quad T_\\mathrm{formel} = \\frac{T}{1{,}031} = \\frac{2{,}12}{1{,}031} = 2{,}056\\ldots\\ \\mathrm{s} $$
+
+Det är formelns periodtid som ska sättas in i $g = \\dfrac{4\\pi^2 \\cdot l}{T^2}$:
+
+$$ g = \\frac{4\\pi^2 \\cdot 1{,}05}{2{,}056\\ldots^2} = \\frac{41{,}45\\ldots}{4{,}228\\ldots} = 9{,}803\\ldots\\ \\mathrm{m/s^2} \\approx 9{,}80\\ \\mathrm{m/s^2} $$
+
+**Rimlighet:** Värdet ligger nära tabellvärdet $9{,}82\\ \\mathrm{m/s^2}$.
+
+**Svar:** Ungefär $9{,}80\\ \\mathrm{m/s^2}$
+
+**c)** Värdet i a) jämfört med det korrigerade värdet i b):
+
+$$ \\frac{g_\\mathrm{a}}{g_\\mathrm{b}} = \\frac{9{,}223\\ldots}{9{,}803\\ldots} = 0{,}9407\\ldots $$
+
+Värdet i a) är alltså $1 - 0{,}9407\\ldots = 0{,}0592\\ldots \\approx 5{,}9\\ \\%$ för litet.
+
+Det beror på att periodtiden står i kvadrat i nämnaren i $g = \\dfrac{4\\pi^2 \\cdot l}{T^2}$. Med samma $l$ blir kvoten mellan värdena
+
+$$ \\frac{g_\\mathrm{a}}{g_\\mathrm{b}} = \\frac{T_\\mathrm{formel}^2}{T^2} = \\frac{1}{1{,}031^2} = \\frac{1}{1{,}0629\\ldots} $$
+
+En periodtid som är $3{,}1\\ \\%$ för lång ger alltså en kvadrat som är ungefär $6{,}3\\ \\%$ för stor, eftersom felet följer med i båda faktorerna i $T \\cdot T$. Att dividera med en ungefär $6\\ \\%$ för stor nämnare ger ett ungefär $6\\ \\%$ för litet värde. Felet i periodtiden fördubblas.
+
+**Svar:** Värdet i a) är ungefär $5{,}9\\ \\%$ för litet. Felet blir dubbelt så stort eftersom periodtiden står i kvadrat i uttrycket för tyngdaccelerationen.`,
+        },
+        {
+            level: 3,
+            question: `En elev gör en pendel av en oregelbunden sten som knyts fast i ett snöre. Var stenens tyngdpunkt ligger går inte att mäta, så eleven mäter i stället snörets längd $L$ från fästpunkten till knuten. Med $L = 0{,}800\\ \\mathrm{m}$ tar tio hela svängningar $18{,}38\\ \\mathrm{s}$. Eleven kortar snöret till $L = 0{,}500\\ \\mathrm{m}$ och mäter då $14{,}73\\ \\mathrm{s}$ för tio svängningar. Bestäm tyngdaccelerationen och avståndet från knuten ned till stenens tyngdpunkt.`,
+            answer: { value: 9.80, unit: 'm/s²' },
+            delsvar: [
+                { value: 9.80, unit: 'm/s²', etikett: '$g =$' },
+                { value: 3.9, unit: 'cm', etikett: 'avstånd från knuten till tyngdpunkten' },
+            ],
+            solution: `Pendellängden räknas till tyngdpunkten. Kalla avståndet från knuten ned till tyngdpunkten $x$. Då är pendellängden $l = L + x$, och $x$ är detsamma i båda mätningarna. Två mätningar ger två ekvationer med de två obekanta $g$ och $x$.
+
+Periodtiderna:
+
+$$ T_1 = \\frac{18{,}38\\ \\mathrm{s}}{10} = 1{,}838\\ \\mathrm{s} \\qquad T_2 = \\frac{14{,}73\\ \\mathrm{s}}{10} = 1{,}473\\ \\mathrm{s} $$
+
+Formeln för periodtid, kvadrerad, $T^2 = \\dfrac{4\\pi^2}{g} \\cdot l$, ger ekvationssystemet
+
+$$
+\\begin{cases}
+T_1^2 = \\dfrac{4\\pi^2}{g} \\cdot (L_1 + x) & (1) \\\\[6pt]
+T_2^2 = \\dfrac{4\\pi^2}{g} \\cdot (L_2 + x) & (2)
+\\end{cases}
+$$
+
+Ekvation (2) subtraheras från ekvation (1). Då försvinner $x$:
+
+$$ T_1^2 - T_2^2 = \\frac{4\\pi^2}{g} \\cdot (L_1 - L_2) \\quad\\Leftrightarrow\\quad g = \\frac{4\\pi^2 \\cdot (L_1 - L_2)}{T_1^2 - T_2^2} $$
+
+$$
+\\left[ \\begin{array}{l}
+L_1 = 0{,}800\\ \\mathrm{m} \\\\
+L_2 = 0{,}500\\ \\mathrm{m} \\\\
+T_1 = 1{,}838\\ \\mathrm{s} \\\\
+T_2 = 1{,}473\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ g = \\frac{4\\pi^2 \\cdot 0{,}300}{1{,}838^2 - 1{,}473^2} = \\frac{11{,}84\\ldots}{3{,}378\\ldots - 2{,}169\\ldots} = \\frac{11{,}84\\ldots}{1{,}208\\ldots} = 9{,}800\\ldots\\ \\mathrm{m/s^2} \\approx 9{,}80\\ \\mathrm{m/s^2} $$
+
+**Svar:** Tyngdaccelerationen är ungefär $9{,}80\\ \\mathrm{m/s^2}$.
+
+Ekvation (1), $T_1^2 = \\dfrac{4\\pi^2}{g} \\cdot (L_1 + x)$, löst för $x$:
+
+$$ L_1 + x = \\frac{g \\cdot T_1^2}{4\\pi^2} \\quad\\Leftrightarrow\\quad x = \\frac{g \\cdot T_1^2}{4\\pi^2} - L_1 $$
+
+$$ x = \\frac{9{,}800\\ldots \\cdot 1{,}838^2}{4\\pi^2} - 0{,}800 = 0{,}8386\\ldots - 0{,}800 = 0{,}0386\\ldots\\ \\mathrm{m} \\approx 3{,}9\\ \\mathrm{cm} $$
+
+**Rimlighet:** Insättning i ekvation (2) ger samma $x$: $\\dfrac{9{,}800\\ldots \\cdot 1{,}473^2}{4\\pi^2} - 0{,}500 = 0{,}0386\\ldots\\ \\mathrm{m}$. Några centimeter till tyngdpunkten stämmer med en sten av knytnävsstorlek. Värdet på $x$ är känsligt för mätfel, eftersom det fås som en liten skillnad mellan två nästan lika stora tal.
+
+**Svar:** Stenens tyngdpunkt ligger ungefär $3{,}9\\ \\mathrm{cm}$ under knuten.`,
+        },
+        {
+            level: 3,
+            question: `En pendel har snörlängden $1{,}00\\ \\mathrm{m}$, räknat till kulans tyngdpunkt. En spik sitter $0{,}64\\ \\mathrm{m}$ rakt under fästpunkten. När kulan svänger till vänster svänger hela snöret, men när kulan passerar lägsta punkten åt höger fastnar snöret på spiken, så att bara delen under spiken svänger. Kulan släpps från ett litet utslag till vänster. Räkna med $g = 9{,}82\\ \\mathrm{m/s^2}$.<br>a) Bestäm periodtiden för den här rörelsen.<br>b) Når kulan lika högt på höger sida som på vänster sida? Blir utslagsvinkeln på höger sida större eller mindre än på vänster sida? Motivera.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 252" width="468" height="368" role="img" aria-label="En pendel med en spik 0,64 m rakt under fastpunkten. Kulan slapps fran ett litet utslag till vanster." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="100" y1="34" x2="200" y2="34" stroke="#0f1620" stroke-width="1.8"/><line x1="106" y1="34" x2="99" y2="27" stroke="#0f1620" stroke-width="1"/><line x1="116" y1="34" x2="109" y2="27" stroke="#0f1620" stroke-width="1"/><line x1="126" y1="34" x2="119" y2="27" stroke="#0f1620" stroke-width="1"/><line x1="136" y1="34" x2="129" y2="27" stroke="#0f1620" stroke-width="1"/><line x1="146" y1="34" x2="139" y2="27" stroke="#0f1620" stroke-width="1"/><line x1="156" y1="34" x2="149" y2="27" stroke="#0f1620" stroke-width="1"/><line x1="166" y1="34" x2="159" y2="27" stroke="#0f1620" stroke-width="1"/><line x1="176" y1="34" x2="169" y2="27" stroke="#0f1620" stroke-width="1"/><line x1="186" y1="34" x2="179" y2="27" stroke="#0f1620" stroke-width="1"/><line x1="196" y1="34" x2="189" y2="27" stroke="#0f1620" stroke-width="1"/><polyline points="150.0,234.0 148.6,234.0 147.2,234.0 145.8,234.0 144.4,233.9 143.0,233.9 141.6,233.8 140.2,233.8 138.8,233.7 137.4,233.6 136.0,233.5 134.7,233.4 133.3,233.3 131.9,233.2 130.5,233.0 129.1,232.9 127.7,232.8 126.3,232.6 124.9,232.4 123.5,232.2 122.2,232.1 120.8,231.9 119.4,231.6 118.0,231.4 116.6,231.2 115.3,231.0 113.9,230.7 112.5,230.5 111.2,230.2 109.8,229.9 108.4,229.6 107.1,229.3 105.7,229.0 104.3,228.7 103.0,228.4 101.6,228.1 100.3,227.7 98.9,227.4 97.6,227.0 96.2,226.6 94.9,226.3" fill="none" stroke="#8a8579" stroke-width="1.3" stroke-dasharray="3 3"/><line x1="150" y1="34" x2="96.8" y2="219.5" stroke="#8a8579" stroke-width="1.3" stroke-dasharray="5 4"/><circle cx="94.9" cy="226.3" r="7" fill="#fff" stroke="#0f1620" stroke-width="1.3"/><line x1="150" y1="34" x2="150" y2="227" stroke="#0f1620" stroke-width="1.6"/><circle cx="150" cy="234" r="7" fill="#5a6270" stroke="#2b303a" stroke-width="1.2"/><circle cx="150" cy="34" r="2.6" fill="#0f1620"/><circle cx="150" cy="162" r="3.4" fill="#0f1620"/><text x="158" y="154" text-anchor="start" font-size="13" fill="#0f1620">spik</text><line x1="204" y1="34.0" x2="262" y2="34.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="3 2"/><line x1="156" y1="162.0" x2="262" y2="162.0" stroke="#8a8579" stroke-width="1" stroke-dasharray="3 2"/><line x1="256" y1="40.0" x2="256" y2="156.0" stroke="#0f1620" stroke-width="1.2" stroke-linecap="butt"/><polygon points="252.5,40.0 256,34.0 259.5,40.0" fill="#0f1620"/><polygon points="252.5,156.0 256,162.0 259.5,156.0" fill="#0f1620"/><text x="263" y="102.5" text-anchor="start" font-size="13" fill="#0f1620">0,64 m</text><text x="96" y="38" text-anchor="end" font-size="13" fill="#0f1620">fästpunkt</text></svg>`,
+            answer: { value: 1.6, unit: 's' },
+            delsvar: [
+                { del: 'a', value: 1.6, unit: 's', etikett: '$T =$' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Rörelsen består av två halvor. På vänster sida, från lägsta punkten ut till vändläget och tillbaka, svänger en pendel med längden $l_1 = 1{,}00\\ \\mathrm{m}$. Det är en halv svängning för den pendeln. På höger sida svänger en pendel med längden
+
+$$ l_2 = 1{,}00\\ \\mathrm{m} - 0{,}64\\ \\mathrm{m} = 0{,}36\\ \\mathrm{m} $$
+
+också en halv svängning. Utslagen är små, så varje halva tar halva periodtiden för sin pendel:
+
+$$ T = \\frac{1}{2} \\cdot 2\\pi \\sqrt{\\frac{l_1}{g}} + \\frac{1}{2} \\cdot 2\\pi \\sqrt{\\frac{l_2}{g}} = \\pi \\sqrt{\\frac{l_1}{g}} + \\pi \\sqrt{\\frac{l_2}{g}} $$
+
+$$
+\\left[ \\begin{array}{l}
+l_1 = 1{,}00\\ \\mathrm{m} \\\\
+l_2 = 0{,}36\\ \\mathrm{m} \\\\
+g \\approx 9{,}82\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$ T = \\pi \\sqrt{\\frac{1{,}00}{9{,}82}} + \\pi \\sqrt{\\frac{0{,}36}{9{,}82}} = 1{,}002\\ldots + 0{,}6015\\ldots = 1{,}604\\ldots\\ \\mathrm{s} \\approx 1{,}6\\ \\mathrm{s} $$
+
+**Rimlighet:** En pendel med hela längden har periodtiden $2{,}0\\ \\mathrm{s}$ och en med bara delen under spiken $1{,}2\\ \\mathrm{s}$. Rörelsen med spiken ska ligga mellan dem, och $1{,}6\\ \\mathrm{s}$ gör det.
+
+**Svar:** Ungefär $1{,}6\\ \\mathrm{s}$
+
+**b)** Spännkraften är hela tiden vinkelrät mot kulans rörelse, även när snöret går runt spiken, så den uträttar inget arbete. Luftmotståndet försummas, så kulans rörelseenergi i lägsta punkten blir lägesenergi på båda sidor. Kulan når därför samma höjd över lägsta punkten på höger sida som på vänster sida.
+
+Höjden över lägsta punkten är $l \\cdot (1 - \\cos \\alpha)$ för en pendel med längden $l$ och utslagsvinkeln $\\alpha$. På höger sida är pendellängden kortare. För att nå samma höjd med kortare snöre måste $1 - \\cos \\alpha$ vara större, alltså måste vinkeln vara större.
+
+**Svar:** Kulan når lika högt på båda sidor, men utslagsvinkeln blir större på höger sida eftersom den svängande delen av snöret är kortare.`,
+        },
+        {
+            level: 3,
+            question: `En pendelkula svänger med små utslag. Bågen från jämviktsläget till vändläget är $6{,}0\\ \\mathrm{cm}$. En ljusgrind sitter vid banan $3{,}0\\ \\mathrm{cm}$ från jämviktsläget, räknat längs bågen, och registrerar varje gång kulan passerar. Kulan passerar ljusgrinden på väg ut mot vändläget, vänder och passerar ljusgrinden igen $0{,}600\\ \\mathrm{s}$ senare. Räkna med $g = 9{,}82\\ \\mathrm{m/s^2}$.<br>a) Bestäm pendellängden.<br>b) Hur lång tid dröjer det sedan innan kulan passerar ljusgrinden nästa gång?
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 292" width="380" height="426" role="img" aria-label="En pendel i sitt vandlage till vanster. En ljusgrind sitter halvvags mellan jamviktslaget och vandlaget." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="75" y1="30" x2="185" y2="30" stroke="#0f1620" stroke-width="1.8"/><line x1="81" y1="30" x2="74" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="91" y1="30" x2="84" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="101" y1="30" x2="94" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="111" y1="30" x2="104" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="121" y1="30" x2="114" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="131" y1="30" x2="124" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="141" y1="30" x2="134" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="151" y1="30" x2="144" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="161" y1="30" x2="154" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="171" y1="30" x2="164" y2="23" stroke="#0f1620" stroke-width="1"/><line x1="181" y1="30" x2="174" y2="23" stroke="#0f1620" stroke-width="1"/><polyline points="198.0,239.2 196.2,239.8 194.3,240.4 192.5,240.9 190.6,241.5 188.8,242.0 186.9,242.5 185.1,243.0 183.2,243.5 181.4,243.9 179.5,244.4 177.6,244.8 175.7,245.2 173.9,245.6 172.0,246.0 170.1,246.3 168.2,246.7 166.3,247.0 164.4,247.3 162.5,247.6 160.6,247.9 158.7,248.1 156.8,248.4 154.9,248.6 153.0,248.8 151.1,249.0 149.2,249.2 147.3,249.3 145.3,249.5 143.4,249.6 141.5,249.7 139.6,249.8 137.7,249.9 135.8,249.9 133.8,250.0 131.9,250.0 130.0,250.0 128.1,250.0 126.2,250.0 124.2,249.9 122.3,249.9 120.4,249.8 118.5,249.7 116.6,249.6 114.7,249.5 112.7,249.3 110.8,249.2 108.9,249.0 107.0,248.8 105.1,248.6 103.2,248.4 101.3,248.1 99.4,247.9 97.5,247.6 95.6,247.3 93.7,247.0 91.8,246.7 89.9,246.3 88.0,246.0 86.1,245.6 84.3,245.2 82.4,244.8 80.5,244.4 78.6,243.9 76.8,243.5 74.9,243.0 73.1,242.5 71.2,242.0 69.4,241.5 67.5,240.9 65.7,240.4 63.8,239.8 62.0,239.2" fill="none" stroke="#8a8579" stroke-width="1.3" stroke-dasharray="3 3"/><line x1="130" y1="30" x2="130" y2="266" stroke="#8a8579" stroke-width="1.2" stroke-dasharray="5 4"/><line x1="102.2" y1="228.1" x2="96.6" y2="267.7" stroke="#c8324a" stroke-width="1.4" stroke-dasharray="2 2"/><rect x="98.2" y="219.6" width="9" height="9" rx="1.5" fill="#0f1620" transform="rotate(8 102.7 224.1)"/><rect x="91.5" y="267.1" width="9" height="9" rx="1.5" fill="#0f1620" transform="rotate(8 96.0 271.6)"/><line x1="130" y1="30" x2="71.8" y2="232.8" stroke="#0f1620" stroke-width="1.6"/><circle cx="69.4" cy="241.5" r="9" fill="#5a6270" stroke="#2b303a" stroke-width="1.2"/><circle cx="130" cy="30" r="2.6" fill="#0f1620"/><text x="56.4" y="246.5" text-anchor="end" font-size="13" fill="#0f1620">vändläge</text><text x="87.0" y="286.6" text-anchor="end" font-size="13" fill="#0f1620">ljusgrind</text><text x="138" y="280" text-anchor="start" font-size="13" fill="#0f1620">jämviktsläge</text></svg>`,
+            answer: { value: 0.806, unit: 'm' },
+            delsvar: [
+                { del: 'a', value: 0.806, unit: 'm', etikett: '$l =$' },
+                { del: 'b', value: 1.20, unit: 's', etikett: '$t =$' },
+            ],
+            solution: `**a)** Vid små utslag är den återförande kraften proportionell mot bågen *y*, precis som i en fjäder. Kulans rörelse längs bågen är därför en harmonisk svängning med amplituden $A = 6{,}0\\ \\mathrm{cm}$, och ljusgrinden sitter vid $y = 3{,}0\\ \\mathrm{cm} = \\dfrac{A}{2}$.
+
+Kulans fart är inte konstant. Den rör sig fortast genom jämviktsläget och långsamt nära vändläget, så tiden kan inte räknas som en andel av vägen. I stället använder vi läget som funktion av tiden, med $t = 0$ när kulan passerar jämviktsläget på väg mot ljusgrinden:
+
+$$ y = A \\cdot \\sin(\\omega \\cdot t) \\qquad \\omega = \\frac{2\\pi}{T} $$
+
+**När kulan når ljusgrinden.** Där är $y = \\dfrac{A}{2}$:
+
+$$ A \\cdot \\sin(\\omega \\cdot t_1) = \\frac{A}{2} \\quad\\Leftrightarrow\\quad \\sin(\\omega \\cdot t_1) = \\frac{1}{2} \\quad\\Leftrightarrow\\quad \\omega \\cdot t_1 = \\frac{\\pi}{6} $$
+
+$$ t_1 = \\frac{\\pi}{6 \\cdot \\omega} = \\frac{\\pi}{6} \\cdot \\frac{T}{2\\pi} = \\frac{T}{12} $$
+
+**När kulan når vändläget.** Från jämviktsläget till vändläget är en fjärdedels svängning, $t = \\dfrac{T}{4}$. Från ljusgrinden till vändläget tar det alltså
+
+$$ \\frac{T}{4} - \\frac{T}{12} = \\frac{3T}{12} - \\frac{T}{12} = \\frac{T}{6} $$
+
+Rörelsen tillbaka från vändläget är spegelbilden av rörelsen dit, så den tar lika lång tid. Mellan de två passagerna går
+
+$$ \\Delta t = 2 \\cdot \\frac{T}{6} = \\frac{T}{3} \\quad\\Leftrightarrow\\quad T = 3 \\cdot \\Delta t = 3 \\cdot 0{,}600\\ \\mathrm{s} = 1{,}800\\ \\mathrm{s} $$
+
+Pendellängden löses ut ur formeln för periodtid:
+
+$$ T = 2\\pi \\sqrt{\\frac{l}{g}} \\quad\\Leftrightarrow\\quad T^2 = 4\\pi^2 \\cdot \\frac{l}{g} \\quad\\Leftrightarrow\\quad l = \\frac{T^2 \\cdot g}{4\\pi^2} $$
+
+$$
+\\left[ \\begin{array}{l}
+T = 1{,}800\\ \\mathrm{s} \\\\
+g \\approx 9{,}82\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$ l = \\frac{1{,}800^2 \\cdot 9{,}82}{4\\pi^2} = \\frac{31{,}81\\ldots}{39{,}47\\ldots} = 0{,}8059\\ldots\\ \\mathrm{m} \\approx 0{,}806\\ \\mathrm{m} $$
+
+**Rimlighet:** Utslagsvinkeln är $\\dfrac{0{,}060}{0{,}806} = 0{,}074\\ \\mathrm{rad}$, ungefär $4^\\circ$, så utslaget är litet och formeln gäller. Hade farten varit konstant hade sträckan $3{,}0 + 3{,}0 = 6{,}0\\ \\mathrm{cm}$ av en hel svängnings $24\\ \\mathrm{cm}$ tagit en fjärdedel av periodtiden, vilket ger $T = 2{,}4\\ \\mathrm{s}$. Det är för långt, eftersom kulan rör sig långsammast just mellan ljusgrinden och vändläget.
+
+**Svar:** Pendellängden är ungefär $0{,}806\\ \\mathrm{m}$.
+
+**b)** Efter den andra passagen svänger kulan genom jämviktsläget, ut till det andra vändläget och tillbaka, innan den når ljusgrinden igen på väg ut. Det är resten av en hel svängning:
+
+$$ t = T - \\frac{T}{3} = \\frac{2T}{3} = \\frac{2 \\cdot 1{,}800\\ \\mathrm{s}}{3} = 1{,}200\\ \\mathrm{s} \\approx 1{,}20\\ \\mathrm{s} $$
+
+**Svar:** Det dröjer ungefär $1{,}20\\ \\mathrm{s}$.`,
+        },
     ],
 
     'fy2-2.6': [
@@ -64956,7 +67364,7 @@ $$ T = \\frac{1}{440} = 0{,}002273\\ldots\\ \\mathrm{s} \\approx 2{,}3\\ \\mathr
             correct: 3,
             solution: `Resonans uppstår när en yttre periodisk kraft har **samma frekvens** som systemets egenfrekvens. Då tillförs energi i takt med svängningen och amplituden växer för varje cykel.
 
-- Vid *högre* eller *lägre* frekvens hamnar den yttre kraften ibland i otakt och bromsar svängningen lika ofta som den driver den — amplituden växer inte.
+- Vid *högre* eller *lägre* frekvens hamnar den yttre kraften ibland i otakt och bromsar svängningen lika ofta som den driver den. Amplituden växer inte.
 - Utan yttre kraft har vi en *fri* svängning, inte resonans.
 
 **Generell slutsats:** Resonans = matchande frekvens + rätt fas (energi tillförs när systemet är på väg åt rätt håll). Klassiska exempel: gungan som puttas i takt, vinglaset som spricker när tonen träffar rätt frekvens, Tacoma-bron som slets sönder av vinden.`,
@@ -64964,7 +67372,7 @@ $$ T = \\frac{1}{440} = 0{,}002273\\ldots\\ \\mathrm{s} \\approx 2{,}3\\ \\mathr
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
-            level: 2,
+            level: 1,
             question: `En fjäderpendel har fjäderkonstanten $200\\ \\mathrm{N/m}$ och en vikt med massan $0{,}50\\ \\mathrm{kg}$. Bestäm systemets egenfrekvens.
 
 ${makeOscillation({ A: 0.04, omega: Math.sqrt(200/0.50), tMax: 1.0, showPeriod: true })}`,
@@ -64988,7 +67396,7 @@ $$ f = \\frac{1}{2\\pi}\\sqrt{\\frac{200}{0{,}50}} = \\frac{\\sqrt{400}}{2\\pi} 
 **Generell slutsats:** Egenfrekvensen är systemets "naturliga" svängningstakt. Om en yttre kraft driver systemet med just denna frekvens uppstår resonans.`,
         },
         {
-            level: 2,
+            level: 1,
             question: `Varför kan ett vinglas spricka när en sångare håller en hög, ren ton?`,
             choices: [
                 'Ljudets energi värmer glaset så att det smälter och brister.',
@@ -64997,24 +67405,24 @@ $$ f = \\frac{1}{2\\pi}\\sqrt{\\frac{200}{0{,}50}} = \\frac{\\sqrt{400}}{2\\pi} 
                 'Ljudet skapar tryckvågor som direkt slår sönder glaset oavsett frekvens.',
             ],
             correct: 2,
-            solution: `Vinglas har en *egenfrekvens* — den ton man hör när man knackar på dem. Om en yttre periodisk kraft (ljudvågor från en stark röst eller högtalare) träffar glaset med just denna frekvens uppstår **resonans**: ljudet driver glaset i takt med dess naturliga svängning, och amplituden växer för varje cykel. Till slut blir utslagen så stora att glasmaterialet inte håller och spricker.
+            solution: `Vinglas har en *egenfrekvens*: den ton man hör när man knackar på dem. Om en yttre periodisk kraft (ljudvågor från en stark röst eller högtalare) träffar glaset med just denna frekvens uppstår **resonans**: ljudet driver glaset i takt med dess naturliga svängning, och amplituden växer för varje cykel. Till slut blir utslagen så stora att glasmaterialet inte håller och spricker.
 
-- Ljudet värmer inte glaset i någon nämnvärd grad — alternativ A är fel.
-- Trycket från en mänsklig röst är alldeles för svagt för att direkt mosa glaset — alternativ B och D är fel.
+- Ljudet värmer inte glaset i någon nämnvärd grad, så alternativ A är fel.
+- Trycket från en mänsklig röst är alldeles för svagt för att direkt mosa glaset, så alternativ B och D är fel.
 
 **Generell slutsats:** Resonansen är vad som *förstärker* en svag yttre påverkan till en stor effekt. Utan matchning av frekvensen kan man ropa hur högt som helst utan att glaset bryts.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
-            level: 3,
+            level: 2,
             question: `En personbil med massan $1{,}5\\ \\mathrm{ton}$ vilar på en fjädring vars sammanlagda fjäderkonstant är $1{,}0\\cdot 10^5\\ \\mathrm{N/m}$. Bilen kör över en väg där jämna rufflor i asfalten ligger på avståndet $4{,}5\\ \\mathrm{m}$. Vid vilken hastighet uppstår resonans i fjädringen? Ange svaret i km/h.
 
-${makeOscillation({ A: 0.05, omega: Math.sqrt(1e5/1500), tMax: 3.0, showPeriod: true, yLabel: '<tspan font-style="italic">y</tspan> (m) — bilens fjädring' })}`,
+${makeOscillation({ A: 0.05, omega: Math.sqrt(1e5/1500), tMax: 3.0, showPeriod: true, yLabel: '<tspan font-style="italic">y</tspan> (m), bilens fjädring' })}`,
             answer: { value: 21.05, unit: 'km/h' },
             solution: `**Insikten är att kombinera två frekvenser**: bilens egenfrekvens i fjädringen, och frekvensen som rufflorna träffar hjulen med vid en given hastighet. Resonans uppstår när dessa är lika.
 
-**Steg 1 — bilens egenfrekvens.** Bilen + fjädring beter sig som en stor fjäderpendel:
+**Steg 1: bilens egenfrekvens.** Bilen + fjädring beter sig som en stor fjäderpendel:
 
 $$ f_\\text{egen} = \\frac{1}{2\\pi}\\sqrt{\\frac{k}{m}} $$
 
@@ -65028,11 +67436,11 @@ $$
 
 $$ f_\\text{egen} = \\frac{1}{2\\pi}\\sqrt{\\frac{1{,}0\\cdot 10^5}{1\\,500}} = \\frac{\\sqrt{66{,}67}}{2\\pi} = \\frac{8{,}165}{2\\pi} \\approx 1{,}30\\ \\mathrm{Hz} $$
 
-**Steg 2 — rufflornas frekvens vid hastigheten *v*.** Hjulen passerar en rufflor var $d/v$:te sekund, så frekvensen är
+**Steg 2: rufflornas frekvens vid hastigheten *v*.** Hjulen passerar en rufflor var $d/v$:te sekund, så frekvensen är
 
 $$ f_\\text{rufflor} = \\frac{v}{d} $$
 
-**Steg 3 — resonansvillkoret $f_\\text{rufflor} = f_\\text{egen}$.**
+**Steg 3: resonansvillkoret $f_\\text{rufflor} = f_\\text{egen}$.**
 
 $$ \\frac{v}{d} = f_\\text{egen} \\quad\\Leftrightarrow\\quad v = d \\cdot f_\\text{egen} $$
 
@@ -65040,7 +67448,793 @@ $$ v = 4{,}5 \\cdot 1{,}30 = 5{,}85\\ \\mathrm{m/s} = 21\\ \\mathrm{km/h} $$
 
 **Svar:** Resonans uppstår vid ungefär $21\\ \\mathrm{km/h}$.
 
-**Generell slutsats:** Det här fenomenet är välkänt för bilförare — vid en viss "obekväm" fart börjar bilen vagga rytmiskt; vid snabbare hastighet försvinner skakningarna eftersom rufflorna då slår oftare än fjädringens egenfrekvens, och fjädringen hinner inte med. Insikten är att kombinera mekanik (fjäderpendelns *f*) med rumslig periodicitet (vägens *d*/*v*).`,
+**Generell slutsats:** Det här fenomenet är välkänt för bilförare: vid en viss "obekväm" fart börjar bilen vagga rytmiskt; vid snabbare hastighet försvinner skakningarna eftersom rufflorna då slår oftare än fjädringens egenfrekvens, och fjädringen hinner inte med. Insikten är att kombinera mekanik (fjäderpendelns *f*) med rumslig periodicitet (vägens *d*/*v*).`,
+        },
+        {
+            level: 1,
+            question: `En simhoppare lämnar en svikt, och sviktens ände svänger sedan fritt upp och ned. Diagrammet visar sviktändens läge $y$ som funktion av tiden $t$. Bestäm sviktens egenfrekvens. Svara i Hz.
+
+${(() => {
+    const pts = [];
+    for (let i = 0; i <= 400; i++) {
+        const t = i / 400 * 2.0;
+        pts.push([t, 6 * Math.exp(-t / 1.6) * Math.cos(2 * Math.PI * t / 0.4)]);
+    }
+    return makeDiagram({
+        xMin: 0, xMax: 2.0, yMin: -7, yMax: 7,
+        xTicks: [0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0],
+        yTicks: [-6, -4, -2, 0, 2, 4, 6],
+        paths: [{ points: pts, color: '#c8324a', width: 2.5 }],
+        xLabel: '<tspan font-style="italic">t</tspan> (s)',
+        yLabel: '<tspan font-style="italic">y</tspan> (cm)'
+    });
+})()}`,
+            answer: { value: 2.5, unit: 'Hz', tol: 0.03 },
+            solution: `Svikten svänger av sig själv efter hoppet, så svängningen är fri och dess frekvens är egenfrekvensen.
+
+$$ f = \\frac{1}{T} $$
+
+Periodtiden läses av i diagrammet. Kurvan har sina toppar vid $t = 0$, $t = 0{,}4\\ \\mathrm{s}$, $t = 0{,}8\\ \\mathrm{s}$ och så vidare, så under $2{,}0\\ \\mathrm{s}$ hinner svikten med 5 hela svängningar:
+
+$$ T = \\frac{2{,}0\\ \\mathrm{s}}{5} = 0{,}40\\ \\mathrm{s} $$
+
+$$
+\\left[ \\begin{array}{l}
+T = 0{,}40\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ f = \\frac{1}{0{,}40} = 2{,}5\\ \\mathrm{Hz} $$
+
+Amplituden minskar för varje svängning, men periodtiden är densamma hela tiden. Så ser en fri svängning ut när energi går förlorad.
+
+**Svar:** $2{,}5\\ \\mathrm{Hz}$`,
+        },
+        {
+            level: 1,
+            question: `Vilket av exemplen är en **tvungen** svängning?`,
+            choices: [
+                'Ett högtalarmembran som drivs av en växelström i spolen.',
+                'En gitarrsträng som har knäppts och får klinga ut.',
+                'En gunga som har dragits bakåt och släppts.',
+                'En stämgaffel som har slagits an mot en bordskant.',
+            ],
+            correct: 0,
+            solution: `I en tvungen svängning bestäms frekvensen av en yttre periodisk kraft. I en fri svängning har systemet satts i gång och lämnas sedan i fred, och då svänger det med sin egenfrekvens.
+
+- Högtalarmembranet sitter fast i en spole. Strömmen i spolen ändras periodiskt, och den magnetiska kraften på spolen tvingar membranet att svänga i strömmens takt. Det är en tvungen svängning.
+- Gitarrsträngen, gungan och stämgaffeln sätts i gång en gång och får sedan svänga av sig själva. De utför fria svängningar med sina egenfrekvenser.
+
+**Svar:** Alternativ A, högtalarmembranet.`,
+        },
+        {
+            level: 1,
+            question: `En hög flaggstång svajar fritt fram och tillbaka med periodtiden $2{,}5\\ \\mathrm{s}$. Vindbyar som kommer i rätt takt kan få stången att svaja allt kraftigare. Hur många vindbyar per minut skulle ge resonans? Svara i vindbyar per minut.`,
+            answer: { value: 24, unit: 'vindbyar per minut', tol: 0.02 },
+            solution: `Resonans uppstår när vindbyarna kommer med samma frekvens som stångens egenfrekvens. Egenfrekvensen är
+
+$$ f = \\frac{1}{T} $$
+
+$$
+\\left[ \\begin{array}{l}
+T = 2{,}5\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ f = \\frac{1}{2{,}5} = 0{,}40\\ \\mathrm{Hz} $$
+
+Frekvensen $0{,}40\\ \\mathrm{Hz}$ betyder $0{,}40$ svängningar per sekund. På en minut, $60\\ \\mathrm{s}$, blir det
+
+$$ 0{,}40 \\cdot 60 = 24 $$
+
+Vindbyarna ska alltså komma en gång per svängning, var $2{,}5$:e sekund.
+
+**Svar:** $24$ vindbyar per minut`,
+        },
+        {
+            level: 1,
+            question: `Motorn i en gräsklippare går med $3\\,600$ varv per minut. Gräsklipparens handtag har egenfrekvensen $60\\ \\mathrm{Hz}$.<br>a) Beräkna motorns varvfrekvens. Svara i Hz.<br>b) Kommer handtaget att skaka kraftigt? Motivera.`,
+            answer: { value: 60, unit: 'Hz' },
+            delsvar: [
+                { del: 'a', value: 60, unit: 'Hz', etikett: 'varvfrekvens' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Varvfrekvensen är antalet varv per sekund. En minut är $60\\ \\mathrm{s}$, så
+
+$$ f_\\text{motor} = \\frac{3\\,600}{60\\ \\mathrm{s}} = 60\\ \\mathrm{Hz} $$
+
+**Svar:** $60\\ \\mathrm{Hz}$
+
+**b)** Motorn skakar gräsklipparen en gång per varv, alltså med frekvensen $60\\ \\mathrm{Hz}$. Handtaget utsätts därmed för en periodisk kraft med samma frekvens som sin egenfrekvens, $60\\ \\mathrm{Hz}$. Energi tillförs i takt med handtagets egen svängning, och amplituden växer: handtaget hamnar i resonans.
+
+**Svar:** Ja. Motorns frekvens är lika med handtagets egenfrekvens, så handtaget hamnar i resonans och skakar kraftigt.`,
+        },
+        {
+            level: 2,
+            question: `En vikt hängs i en fjäder. När vikten hänger stilla har fjädern förlängts $6{,}2\\ \\mathrm{cm}$. En elev håller fjäderns övre ände i handen och rör handen upp och ned. Med vilken frekvens ska eleven röra handen för att viktens svängning ska bli så stor som möjligt? Svara i Hz.`,
+            answer: { value: 2.0, unit: 'Hz', tol: 0.03 },
+            solution: `Svängningen blir störst vid resonans, alltså när handen rör sig med samma frekvens som fjäderns och viktens egenfrekvens. Egenfrekvensen är
+
+$$ f = \\frac{1}{T} \\qquad \\text{där} \\qquad T = 2\\pi \\sqrt{\\frac{m}{k}} $$
+
+Varken massan $m$ eller fjäderkonstanten $k$ är given. När vikten hänger stilla är fjäderkraften lika stor som tyngdkraften, och Hookes lag ger
+
+$$ k \\cdot \\Delta l = m \\cdot g \\quad\\Leftrightarrow\\quad \\frac{m}{k} = \\frac{\\Delta l}{g} $$
+
+Insättning av $\\dfrac{m}{k} = \\dfrac{\\Delta l}{g}$ i $T = 2\\pi \\sqrt{\\dfrac{m}{k}}$ ger
+
+$$ T = 2\\pi \\sqrt{\\frac{\\Delta l}{g}} $$
+
+$$
+\\left[ \\begin{array}{l}
+\\Delta l = 6{,}2\\ \\mathrm{cm} = 0{,}062\\ \\mathrm{m} \\\\
+g = 9{,}82\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$ T = 2\\pi \\sqrt{\\frac{0{,}062}{9{,}82}} = 0{,}49925\\ldots\\ \\mathrm{s} $$
+
+$$ f = \\frac{1}{0{,}49925\\ldots} = 2{,}0029\\ldots\\ \\mathrm{Hz} \\approx 2{,}0\\ \\mathrm{Hz} $$
+
+**Rimlighet:** Två svängningar per sekund är en takt som går bra att följa med handen. Lägg märke till att massan inte behövs: förlängningen räcker för att bestämma egenfrekvensen.
+
+**Svar:** $2{,}0\\ \\mathrm{Hz}$`,
+        },
+        {
+            level: 2,
+            question: `En lampa hänger i en $1{,}6\\ \\mathrm{m}$ lång kabel från taket i en verkstad. En maskin på golvet får byggnaden att skaka svagt med frekvensen $0{,}40\\ \\mathrm{Hz}$. Behandla lampan som en matematisk pendel.<br>a) Bestäm lampans egenfrekvens. Svara i Hz.<br>b) Finns det risk att lampan börjar svänga kraftigt? Motivera.`,
+            answer: { value: 0.39, unit: 'Hz', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 0.39, unit: 'Hz', tol: 0.03, etikett: 'egenfrekvens' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Lampans periodtid ges av formeln för den matematiska pendeln, och egenfrekvensen är inversen av periodtiden:
+
+$$ T = 2\\pi \\sqrt{\\frac{l}{g}}, \\qquad f = \\frac{1}{T} $$
+
+$$
+\\left[ \\begin{array}{l}
+l = 1{,}6\\ \\mathrm{m} \\\\
+g = 9{,}82\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$ T = 2\\pi \\sqrt{\\frac{1{,}6}{9{,}82}} = 2{,}5361\\ldots\\ \\mathrm{s} $$
+
+$$ f = \\frac{1}{2{,}5361\\ldots} = 0{,}39429\\ldots\\ \\mathrm{Hz} \\approx 0{,}39\\ \\mathrm{Hz} $$
+
+**Svar:** $0{,}39\\ \\mathrm{Hz}$
+
+**b)** Skakningarna verkar på lampan som en yttre periodisk kraft med frekvensen $0{,}40\\ \\mathrm{Hz}$. Den frekvensen ligger mycket nära lampans egenfrekvens, $0{,}39\\ \\mathrm{Hz}$. Kraften kommer då nästan i takt med lampans svängning och tillför energi svängning efter svängning, så amplituden kan växa trots att skakningarna är svaga.
+
+**Svar:** Ja. Skakningarnas frekvens ligger nära lampans egenfrekvens, så lampan kan hamna i resonans och svänga kraftigt.`,
+        },
+        {
+            level: 2,
+            question: `En liten kula hänger i ett snöre. En elev rör snörets övre ände fram och tillbaka med olika frekvenser $f$ och mäter kulans amplitud $A$ när svängningen har stabiliserats. Tabellen visar mätresultaten.
+
+| $f$ (Hz) | 0,50 | 0,60 | 0,65 | 0,70 | 0,75 | 0,80 | 0,90 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| $A$ (cm) | 1,2 | 2,6 | 4,9 | 9,5 | 4,7 | 2,4 | 1,1 |
+
+Bestäm pendelns längd, alltså avståndet från snörets övre ände till kulans tyngdpunkt. Svara i m.`,
+            answer: { value: 0.51, unit: 'm', tol: 0.04 },
+            solution: `Amplituden blir störst vid resonans, när handens frekvens är lika med pendelns egenfrekvens. I tabellen är amplituden störst vid $0{,}70\\ \\mathrm{Hz}$, så egenfrekvensen är $f = 0{,}70\\ \\mathrm{Hz}$.
+
+Periodtiden för den matematiska pendeln är
+
+$$ T = 2\\pi \\sqrt{\\frac{l}{g}} $$
+
+Vi löser ut längden. Kvadrering av båda led ger
+
+$$ T^2 = 4\\pi^2 \\cdot \\frac{l}{g} \\quad\\Leftrightarrow\\quad l = \\frac{g \\cdot T^2}{4\\pi^2} $$
+
+$$
+\\left[ \\begin{array}{l}
+f = 0{,}70\\ \\mathrm{Hz} \\\\
+T = \\dfrac{1}{f} = \\dfrac{1}{0{,}70} = 1{,}4285\\ldots\\ \\mathrm{s} \\\\
+g = 9{,}82\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$ l = \\frac{9{,}82 \\cdot 1{,}4285\\ldots^2}{4\\pi^2} = 0{,}50763\\ldots\\ \\mathrm{m} \\approx 0{,}51\\ \\mathrm{m} $$
+
+**Rimlighet:** En pendel på en halv meter svänger knappt en gång per sekund, vilket stämmer med $0{,}70\\ \\mathrm{Hz}$. Mätningarna visar bara att egenfrekvensen ligger någonstans mellan $0{,}65\\ \\mathrm{Hz}$ och $0{,}75\\ \\mathrm{Hz}$, nära $0{,}70\\ \\mathrm{Hz}$, så längden är bestämd med några centimeters osäkerhet.
+
+**Svar:** $0{,}51\\ \\mathrm{m}$`,
+        },
+        {
+            level: 2,
+            question: `Fem pendlar hänger i ett vågrätt snöre som är spänt mellan två stativ. Pendeln längst till vänster har en tung kula och längden $0{,}80\\ \\mathrm{m}$. De fyra andra pendlarna har lätta kulor och längderna A: $0{,}60\\ \\mathrm{m}$, B: $0{,}80\\ \\mathrm{m}$, C: $1{,}00\\ \\mathrm{m}$ och D: $0{,}40\\ \\mathrm{m}$. Den tunga pendeln sätts i svängning vinkelrätt mot papperet. Den rycker då i snöret i takt med sin egen svängning, och de lätta pendlarna börjar också svänga. Vilken av de lätta pendlarna får störst amplitud?
+
+<svg viewBox="0 18 440 222" width="557" height="281" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fem pendlar hanger i ett vagratt snore mellan tva stativ. Langst till vanster en tung kula, sedan fyra latta kulor A, B, C och D med olika langd." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="6" y="228" width="38" height="8" rx="2" fill="#8a7a64" stroke="#0f1620" stroke-width="1.2"/><rect x="396" y="228" width="38" height="8" rx="2" fill="#8a7a64" stroke="#0f1620" stroke-width="1.2"/><line x1="22" y1="30" x2="22" y2="228" stroke="#5b6370" stroke-width="4" stroke-linecap="butt"/><line x1="418" y1="30" x2="418" y2="228" stroke="#5b6370" stroke-width="4" stroke-linecap="butt"/><line x1="22" y1="40" x2="418" y2="40" stroke="#0f1620" stroke-width="1.6"/><line x1="70" y1="40" x2="70" y2="157" stroke="#0f1620" stroke-width="1.2"/><circle cx="70" cy="40" r="2.2" fill="#0f1620"/><circle cx="70" cy="168" r="11" fill="#4a5361" stroke="#0f1620" stroke-width="1.4"/><line x1="150" y1="40" x2="150" y2="130" stroke="#0f1620" stroke-width="1"/><circle cx="150" cy="40" r="2.2" fill="#0f1620"/><circle cx="150" cy="136" r="6" fill="#e9dcc2" stroke="#0f1620" stroke-width="1.3"/><line x1="230" y1="40" x2="230" y2="162" stroke="#0f1620" stroke-width="1"/><circle cx="230" cy="40" r="2.2" fill="#0f1620"/><circle cx="230" cy="168" r="6" fill="#e9dcc2" stroke="#0f1620" stroke-width="1.3"/><line x1="310" y1="40" x2="310" y2="194" stroke="#0f1620" stroke-width="1"/><circle cx="310" cy="40" r="2.2" fill="#0f1620"/><circle cx="310" cy="200" r="6" fill="#e9dcc2" stroke="#0f1620" stroke-width="1.3"/><line x1="380" y1="40" x2="380" y2="98" stroke="#0f1620" stroke-width="1"/><circle cx="380" cy="40" r="2.2" fill="#0f1620"/><circle cx="380" cy="104" r="6" fill="#e9dcc2" stroke="#0f1620" stroke-width="1.3"/><text x="150" y="160" text-anchor="middle" font-size="15" fill="#0f1620">A</text><text x="230" y="192" text-anchor="middle" font-size="15" fill="#0f1620">B</text><text x="310" y="224" text-anchor="middle" font-size="15" fill="#0f1620">C</text><text x="380" y="128" text-anchor="middle" font-size="15" fill="#0f1620">D</text></svg>`,
+            choices: [
+                'Pendel A',
+                'Pendel B',
+                'Pendel C',
+                'Pendel D',
+            ],
+            correct: 1,
+            solution: `Den tunga pendeln utför en svängning med sin egenfrekvens. Via snöret påverkar den de lätta pendlarna med en periodisk kraft med samma frekvens, så de lätta pendlarna utför tvungna svängningar. Störst amplitud får den pendel som har samma egenfrekvens som den tunga, för den hamnar i resonans.
+
+Egenfrekvensen för en matematisk pendel är
+
+$$ f = \\frac{1}{T} = \\frac{1}{2\\pi \\sqrt{\\dfrac{l}{g}}} $$
+
+Den beror bara på längden $l$, inte på kulans massa. Den tunga pendeln har därför samma egenfrekvens som en lätt pendel med samma längd. Insättning med $g = 9{,}82\\ \\mathrm{m/s^2}$ ger:
+
+- tunga pendeln och B, $l = 0{,}80\\ \\mathrm{m}$: $f \\approx 0{,}56\\ \\mathrm{Hz}$
+- A, $l = 0{,}60\\ \\mathrm{m}$: $f \\approx 0{,}64\\ \\mathrm{Hz}$
+- C, $l = 1{,}00\\ \\mathrm{m}$: $f \\approx 0{,}50\\ \\mathrm{Hz}$
+- D, $l = 0{,}40\\ \\mathrm{m}$: $f \\approx 0{,}79\\ \\mathrm{Hz}$
+
+Bara B har samma egenfrekvens som den tunga pendeln. De andra svänger också lite, men kraften hamnar ibland i otakt med deras svängning och bromsar den.
+
+**Svar:** Alternativ B, pendel B.`,
+        },
+        {
+            level: 2,
+            question: `En vikt med massan $0{,}40\\ \\mathrm{kg}$ hänger i en fjäder. I försök 1 dras vikten nedåt och släpps. I försök 2 sitter fjäderns övre ände i en motor som rör den upp och ned med en bestämd frekvens. Graferna visar viktens läge $y$ som funktion av tiden $t$ i de två försöken, men i okänd ordning.
+
+**Graf 1**
+
+${(() => {
+    const pts = [];
+    for (let i = 0; i <= 500; i++) {
+        const t = i / 500 * 4.0;
+        pts.push([t, 5 * (1 - Math.exp(-t / 1.4)) * Math.sin(2 * Math.PI * t / 0.8)]);
+    }
+    return makeDiagram({
+        xMin: 0, xMax: 4.0, yMin: -6, yMax: 6,
+        xTicks: [0, 0.4, 0.8, 1.2, 1.6, 2.0, 2.4, 2.8, 3.2, 3.6, 4.0],
+        yTicks: [-4, -2, 0, 2, 4],
+        paths: [{ points: pts, color: '#2563a8', width: 2.5 }],
+        xLabel: '<tspan font-style="italic">t</tspan> (s)',
+        yLabel: '<tspan font-style="italic">y</tspan> (cm)'
+    });
+})()}
+
+**Graf 2**
+
+${(() => {
+    const pts = [];
+    for (let i = 0; i <= 500; i++) {
+        const t = i / 500 * 4.0;
+        pts.push([t, -5 * Math.exp(-t / 2.2) * Math.cos(2 * Math.PI * t / 0.8)]);
+    }
+    return makeDiagram({
+        xMin: 0, xMax: 4.0, yMin: -6, yMax: 6,
+        xTicks: [0, 0.4, 0.8, 1.2, 1.6, 2.0, 2.4, 2.8, 3.2, 3.6, 4.0],
+        yTicks: [-4, -2, 0, 2, 4],
+        paths: [{ points: pts, color: '#c8324a', width: 2.5 }],
+        xLabel: '<tspan font-style="italic">t</tspan> (s)',
+        yLabel: '<tspan font-style="italic">y</tspan> (cm)'
+    });
+})()}
+
+a) Vilken graf hör till försök 2? Motivera.<br>b) Bestäm egenfrekvensen. Svara i Hz.<br>c) Bestäm fjäderkonstanten. Svara i N/m.`,
+            answer: { value: 25, unit: 'N/m', tol: 0.04 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 1.3, unit: 'Hz', tol: 0.05, etikett: 'egenfrekvens' },
+                { del: 'c', value: 25, unit: 'N/m', tol: 0.04, etikett: '$k =$' },
+            ],
+            solution: `**a)** I försök 1 lämnas vikten i fred efter att den släppts. Det är en fri svängning, och eftersom energi går förlorad minskar amplituden med tiden. Det visar graf 2. I försök 2 tillför motorn energi hela tiden. Amplituden i graf 1 växer svängning för svängning, och det gör den bara när motorn rör fjädern i takt med viktens egen svängning, alltså vid resonans.
+
+**Svar:** Graf 1, eftersom amplituden där växer med tiden. Motorn tillför energi i takt med svängningen.
+
+**b)** Den fria svängningen i graf 2 svänger med egenfrekvensen. Under $4{,}0\\ \\mathrm{s}$ hinner vikten med 5 hela svängningar, så
+
+$$ T = \\frac{4{,}0\\ \\mathrm{s}}{5} = 0{,}80\\ \\mathrm{s} $$
+
+$$ f = \\frac{1}{T} = \\frac{1}{0{,}80} = 1{,}25\\ \\mathrm{Hz} \\approx 1{,}3\\ \\mathrm{Hz} $$
+
+Graf 1 har samma periodtid, vilket stämmer med att den visar resonans.
+
+**Svar:** $1{,}3\\ \\mathrm{Hz}$
+
+**c)** Periodtiden för en vikt i en fjäder är
+
+$$ T = 2\\pi \\sqrt{\\frac{m}{k}} $$
+
+Kvadrering av båda led ger
+
+$$ T^2 = 4\\pi^2 \\cdot \\frac{m}{k} \\quad\\Leftrightarrow\\quad k = \\frac{4\\pi^2 \\cdot m}{T^2} $$
+
+$$
+\\left[ \\begin{array}{l}
+m = 0{,}40\\ \\mathrm{kg} \\\\
+T = 0{,}80\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ k = \\frac{4\\pi^2 \\cdot 0{,}40}{0{,}80^2} = 24{,}674\\ldots\\ \\mathrm{N/m} \\approx 25\\ \\mathrm{N/m} $$
+
+**Svar:** $25\\ \\mathrm{N/m}$`,
+        },
+        {
+            level: 2,
+            question: `Trumman i en tvättmaskin har tillsammans med den blöta tvätten massan $30\\ \\mathrm{kg}$ och hänger i fjädrar inne i maskinen. Under centrifugeringen ökar trummans varvtal likformigt från noll till $1\\,400$ varv per minut på $35\\ \\mathrm{s}$. Ligger tvätten ojämnt fördelad påverkas trumman av en periodisk kraft med samma frekvens som trummans varvfrekvens. När maskinen startar skakar den som mest $6{,}0\\ \\mathrm{s}$ efter starten.<br>a) Bestäm fjädrarnas sammanlagda fjäderkonstant. Svara i N/m.<br>b) Förklara varför maskinen slutar skaka kraftigt när varvtalet fortsätter att öka.`,
+            answer: { value: 19000, unit: 'N/m', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 19000, unit: 'N/m', tol: 0.04, etikett: '$k =$' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Maskinen skakar som mest vid resonans, när trummans varvfrekvens är lika med egenfrekvensen för trumman i fjädrarna. Vi tar först reda på varvfrekvensen efter $6{,}0\\ \\mathrm{s}$.
+
+Det högsta varvtalet är
+
+$$ f_\\text{max} = \\frac{1\\,400}{60\\ \\mathrm{s}} = 23{,}333\\ldots\\ \\mathrm{Hz} $$
+
+Varvtalet ökar likformigt, så varvfrekvensen ökar lika mycket varje sekund:
+
+$$ \\frac{23{,}333\\ldots\\ \\mathrm{Hz}}{35\\ \\mathrm{s}} = 0{,}6666\\ldots\\ \\mathrm{Hz/s} $$
+
+Efter $6{,}0\\ \\mathrm{s}$ är varvfrekvensen
+
+$$ f = 0{,}6666\\ldots \\cdot 6{,}0 = 4{,}0\\ \\mathrm{Hz} $$
+
+Egenfrekvensen är alltså $4{,}0\\ \\mathrm{Hz}$. För en massa i en fjäder gäller
+
+$$ f = \\frac{1}{T} = \\frac{1}{2\\pi} \\sqrt{\\frac{k}{m}} $$
+
+Kvadrering av båda led ger
+
+$$ f^2 = \\frac{k}{4\\pi^2 \\cdot m} \\quad\\Leftrightarrow\\quad k = 4\\pi^2 \\cdot f^2 \\cdot m $$
+
+$$
+\\left[ \\begin{array}{l}
+f = 4{,}0\\ \\mathrm{Hz} \\\\
+m = 30\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$ k = 4\\pi^2 \\cdot 4{,}0^2 \\cdot 30 = 18\\,949{,}6\\ldots\\ \\mathrm{N/m} \\approx 1{,}9 \\cdot 10^{4}\\ \\mathrm{N/m} $$
+
+**Rimlighet:** Trumman sjunker då $\\dfrac{m \\cdot g}{k} = \\dfrac{30 \\cdot 9{,}82}{18\\,949{,}6\\ldots} \\approx 0{,}016\\ \\mathrm{m}$ i fjädrarna, ett par centimeter, vilket är rimligt för en tvättmaskin.
+
+**Svar:** $1{,}9 \\cdot 10^{4}\\ \\mathrm{N/m}$
+
+**b)** Efter $6{,}0\\ \\mathrm{s}$ fortsätter varvfrekvensen att öka, ända till $23\\ \\mathrm{Hz}$. Den periodiska kraften har då en frekvens som är mycket högre än trummans egenfrekvens, $4{,}0\\ \\mathrm{Hz}$. Kraften växlar riktning flera gånger under varje egen svängning och hamnar lika ofta i otakt som i takt med den. Den tillför därför ingen energi som bygger upp svängningen, och amplituden förblir liten. Den kraftiga skakningen varar bara den korta stund då varvfrekvensen passerar egenfrekvensen.
+
+**Svar:** När varvfrekvensen har passerat egenfrekvensen är trumman inte längre i resonans. Kraften kommer i otakt med trummans svängning och kan inte bygga upp amplituden.`,
+        },
+        {
+            level: 2,
+            question: `Ett barn gungar. Avståndet från gungans upphängning till barnets tyngdpunkt är $2{,}4\\ \\mathrm{m}$. Behandla gungan som en matematisk pendel.<br>a) Bestäm gungans egenfrekvens. Svara i Hz.<br>b) En förälder står bakom gungan och puttar bara varannan gång gungan når det bakre vändläget. Förklara varför gungan ändå kommer i resonans, och bestäm med vilken frekvens föräldern puttar. Svara i Hz.<br>c) Barnet ställer sig upp på gungan, så att tyngdpunkten hamnar $0{,}40\\ \\mathrm{m}$ högre. Bestäm den nya egenfrekvensen. Svara i Hz.`,
+            answer: { value: 0.35, unit: 'Hz', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 0.32, unit: 'Hz', tol: 0.04, etikett: 'egenfrekvens' },
+                { del: 'b', value: 0.16, unit: 'Hz', tol: 0.04, etikett: 'puttfrekvens' },
+                { del: 'c', value: 0.35, unit: 'Hz', tol: 0.04, etikett: 'ny egenfrekvens' },
+            ],
+            solution: `**a)** För en matematisk pendel gäller
+
+$$ T = 2\\pi \\sqrt{\\frac{l}{g}}, \\qquad f = \\frac{1}{T} \\qquad (1) $$
+
+$$
+\\left[ \\begin{array}{l}
+l = 2{,}4\\ \\mathrm{m} \\\\
+g = 9{,}82\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$ T = 2\\pi \\sqrt{\\frac{2{,}4}{9{,}82}} = 3{,}1062\\ldots\\ \\mathrm{s} $$
+
+$$ f = \\frac{1}{3{,}1062\\ldots} = 0{,}32193\\ldots\\ \\mathrm{Hz} \\approx 0{,}32\\ \\mathrm{Hz} $$
+
+**Svar:** $0{,}32\\ \\mathrm{Hz}$
+
+**b)** Resonans kräver att energi tillförs vid rätt tidpunkt. Varje putt kommer när gungan just har vänt i det bakre vändläget och är på väg framåt, så varje putt tillför energi i takt med svängningen. Att det går en hel svängning utan putt däremellan gör ingenting: gungan svänger då fritt och förlorar bara lite energi. Amplituden växer långsammare än om föräldern puttade varje gång, men den växer.
+
+Gungan svänger två gånger för varje putt, så föräldern puttar en gång per två periodtider:
+
+$$ f_\\text{putt} = \\frac{1}{2 \\cdot T} = \\frac{1}{2 \\cdot 3{,}1062\\ldots} = 0{,}16096\\ldots\\ \\mathrm{Hz} \\approx 0{,}16\\ \\mathrm{Hz} $$
+
+**Svar:** Varje putt kommer i rätt ögonblick i svängningen, så energi tillförs i takt med den. Föräldern puttar med frekvensen $0{,}16\\ \\mathrm{Hz}$.
+
+**c)** Pendellängden blir $l = 2{,}4 - 0{,}40 = 2{,}0\\ \\mathrm{m}$. Insättning i (1), $T = 2\\pi \\sqrt{\\dfrac{l}{g}}$ och $f = \\dfrac{1}{T}$, ger
+
+$$ T = 2\\pi \\sqrt{\\frac{2{,}0}{9{,}82}} = 2{,}8355\\ldots\\ \\mathrm{s} $$
+
+$$ f = \\frac{1}{2{,}8355\\ldots} = 0{,}35267\\ldots\\ \\mathrm{Hz} \\approx 0{,}35\\ \\mathrm{Hz} $$
+
+**Rimlighet:** En kortare pendel svänger snabbare, och egenfrekvensen ökade från $0{,}32\\ \\mathrm{Hz}$ till $0{,}35\\ \\mathrm{Hz}$. Puttar föräldern kvar i den gamla takten kommer puttarna så småningom i otakt med gungan.
+
+**Svar:** $0{,}35\\ \\mathrm{Hz}$`,
+        },
+        {
+            level: 3,
+            question: `En lätt gångbro över en kanal kan svänga på två sätt: upp och ned med egenfrekvensen $2{,}4\\ \\mathrm{Hz}$ och i sidled med egenfrekvensen $0{,}95\\ \\mathrm{Hz}$. Varje gång en fot sätts ned trycker den bron lite nedåt och lite åt sidan, åt vänster med vänster fot och åt höger med höger fot. En stor grupp människor går över bron i takt, med $114$ steg per minut.<br>a) Visa med beräkningar vilket av de två sätten att svänga som riskerar att hamna i resonans.<br>b) Vid vilken stegtakt skulle bron i stället hamna i resonans upp och ned? Svara i steg per minut.`,
+            answer: { value: 144, unit: 'steg per minut', tol: 0.02 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 144, unit: 'steg per minut', tol: 0.02, etikett: 'stegtakt' },
+            ],
+            solution: `**a)** Gruppen tar $114$ steg per minut, alltså
+
+$$ f_\\text{steg} = \\frac{114}{60\\ \\mathrm{s}} = 1{,}90\\ \\mathrm{Hz} $$
+
+*Upp och ned:* Varje steg trycker bron nedåt, oavsett vilken fot det är. Kraften nedåt kommer alltså en gång per steg, med frekvensen $1{,}90\\ \\mathrm{Hz}$. Brons egenfrekvens upp och ned är $2{,}4\\ \\mathrm{Hz}$. Frekvenserna skiljer sig med $0{,}5\\ \\mathrm{Hz}$, drygt $20\\ \\%$, så kraften hamnar ofta i otakt med svängningen och amplituden byggs inte upp.
+
+*I sidled:* Vänster fot trycker bron åt vänster och höger fot åt höger. En hel period av sidokraften, vänster och sedan höger, tar därför två steg. Sidokraftens frekvens är hälften av stegfrekvensen:
+
+$$ f_\\text{sida} = \\frac{f_\\text{steg}}{2} = \\frac{1{,}90}{2} = 0{,}95\\ \\mathrm{Hz} $$
+
+Det är exakt brons egenfrekvens i sidled. Sidokraften tillför energi i takt med brons sidosvängning, steg efter steg, och amplituden växer.
+
+**Svar:** Svängningen i sidled. Sidokraften har frekvensen $0{,}95\\ \\mathrm{Hz}$, samma som brons egenfrekvens i sidled, medan kraften nedåt, $1{,}90\\ \\mathrm{Hz}$, inte stämmer med egenfrekvensen $2{,}4\\ \\mathrm{Hz}$.
+
+**b)** Kraften nedåt kommer en gång per steg. Resonans upp och ned kräver därför att stegfrekvensen är $2{,}4\\ \\mathrm{Hz}$, alltså $2{,}4$ steg per sekund:
+
+$$ 2{,}4 \\cdot 60 = 144 $$
+
+**Rimlighet:** $144$ steg per minut är snabbare än vanlig gång, ungefär lugn löpning. En grupp som joggar i takt över bron kan alltså få den att gunga upp och ned.
+
+**Svar:** $144$ steg per minut`,
+        },
+        {
+            level: 3,
+            question: `En tom bil gungar upp och ned i sin fjädring med egenfrekvensen $1{,}5\\ \\mathrm{Hz}$. Fyra personer med den sammanlagda massan $320\\ \\mathrm{kg}$ sätter sig i bilen, och bilen sjunker då $4{,}0\\ \\mathrm{cm}$. Behandla bilen som en vikt i en fjäder.<br>a) Bestäm den tomma bilens massa. Svara i kg.<br>b) Bestäm egenfrekvensen för den lastade bilen. Svara i Hz.`,
+            answer: { value: 1.3, unit: 'Hz', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 880, unit: 'kg', tol: 0.03, etikett: 'bilens massa' },
+                { del: 'b', value: 1.3, unit: 'Hz', tol: 0.04, etikett: 'egenfrekvens' },
+            ],
+            solution: `Beteckna den tomma bilens massa med $M$ och passagerarnas massa med $m$.
+
+**a)** Fjäderkonstanten fås ur hur mycket bilen sjunker. När personerna har satt sig har fjädrarna tryckts ihop $\\Delta l$ ytterligare, och den extra fjäderkraften är lika stor som personernas tyngd. Hookes lag ger
+
+$$ k \\cdot \\Delta l = m \\cdot g \\quad\\Leftrightarrow\\quad k = \\frac{m \\cdot g}{\\Delta l} $$
+
+$$
+\\left[ \\begin{array}{l}
+m = 320\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{m/s^2} \\\\
+\\Delta l = 4{,}0\\ \\mathrm{cm} = 0{,}040\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ k = \\frac{320 \\cdot 9{,}82}{0{,}040} = 78\\,560\\ \\mathrm{N/m} $$
+
+Den tomma bilens egenfrekvens är
+
+$$ f_0 = \\frac{1}{T_0} = \\frac{1}{2\\pi} \\sqrt{\\frac{k}{M}} $$
+
+Vi löser ut $M$. Kvadrering av båda led ger
+
+$$ f_0^2 = \\frac{k}{4\\pi^2 \\cdot M} \\quad\\Leftrightarrow\\quad M = \\frac{k}{4\\pi^2 \\cdot f_0^2} $$
+
+$$ M = \\frac{78\\,560}{4\\pi^2 \\cdot 1{,}5^2} = 884{,}42\\ldots\\ \\mathrm{kg} \\approx 880\\ \\mathrm{kg} $$
+
+**Svar:** $880\\ \\mathrm{kg}$
+
+**b)** Fjädrarna är desamma, men nu svänger både bilen och personerna:
+
+$$ f = \\frac{1}{2\\pi} \\sqrt{\\frac{k}{M + m}} = \\frac{1}{2\\pi} \\sqrt{\\frac{78\\,560}{884{,}42\\ldots + 320}} = 1{,}2853\\ldots\\ \\mathrm{Hz} \\approx 1{,}3\\ \\mathrm{Hz} $$
+
+**Rimlighet:** Större massa i samma fjädrar ger längre periodtid och därmed lägre egenfrekvens, och $1{,}3\\ \\mathrm{Hz}$ är lägre än $1{,}5\\ \\mathrm{Hz}$. Generellt gäller $\\dfrac{f}{f_0} = \\sqrt{\\dfrac{M}{M + m}}$, så frekvensen sjunker mindre än massan ökar.
+
+**Svar:** $1{,}3\\ \\mathrm{Hz}$`,
+        },
+        {
+            level: 3,
+            question: `En helikopter med massan $2\\,400\\ \\mathrm{kg}$ står på marken. Landningsstället fjädrar, och när helikoptern ställdes ned trycktes det ihop $2{,}5\\ \\mathrm{cm}$. Behandla helikoptern som en vikt i en fjäder. När rotorn startar påverkas helikopterkroppen av en periodisk kraft vars frekvens ökar från noll till $5{,}0\\ \\mathrm{Hz}$.<br>a) Visa att helikoptern kan hamna i resonans under uppstarten.<br>b) En kamrat påstår att egenfrekvensen sjunker när rotorn börjar lyfta helikoptern, eftersom landningsstället då är mindre ihoptryckt och $f = \\dfrac{1}{2\\pi} \\sqrt{\\dfrac{g}{\\Delta l}}$. Har kamraten rätt? Motivera.<br>c) Förklara varför risken för resonans försvinner helt när helikoptern har lättat.`,
+            answer: { value: 3.2, unit: 'Hz', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 3.2, unit: 'Hz', tol: 0.04, etikett: 'egenfrekvens' },
+                { del: 'b' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Vi bestämmer först landningsställets fjäderkonstant. När helikoptern står stilla är fjäderkraften lika stor som tyngdkraften:
+
+$$ k \\cdot \\Delta l = m \\cdot g \\quad\\Leftrightarrow\\quad k = \\frac{m \\cdot g}{\\Delta l} \\qquad (1) $$
+
+$$
+\\left[ \\begin{array}{l}
+m = 2\\,400\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{m/s^2} \\\\
+\\Delta l = 2{,}5\\ \\mathrm{cm} = 0{,}025\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ k = \\frac{2\\,400 \\cdot 9{,}82}{0{,}025} = 942\\,720\\ \\mathrm{N/m} $$
+
+Egenfrekvensen är
+
+$$ f = \\frac{1}{T} = \\frac{1}{2\\pi} \\sqrt{\\frac{k}{m}} = \\frac{1}{2\\pi} \\sqrt{\\frac{942\\,720}{2\\,400}} = 3{,}1543\\ldots\\ \\mathrm{Hz} \\approx 3{,}2\\ \\mathrm{Hz} $$
+
+Rotorns kraft ökar i frekvens från noll till $5{,}0\\ \\mathrm{Hz}$ och passerar därför $3{,}2\\ \\mathrm{Hz}$ på vägen. I det ögonblicket har kraften samma frekvens som egenfrekvensen, och helikoptern kan hamna i resonans.
+
+**Svar:** Egenfrekvensen är $3{,}2\\ \\mathrm{Hz}$. Den ligger mellan noll och $5{,}0\\ \\mathrm{Hz}$, så kraftens frekvens passerar egenfrekvensen under uppstarten.
+
+**b)** Egenfrekvensen beror på fjäderkonstanten och massan, $f = \\dfrac{1}{2\\pi} \\sqrt{\\dfrac{k}{m}}$. Ingen av dem ändras när rotorn börjar lyfta: landningsstället är detsamma, och helikoptern väger lika mycket. Egenfrekvensen är alltså fortfarande $3{,}2\\ \\mathrm{Hz}$.
+
+Kamratens formel får man genom att sätta in $\\dfrac{k}{m} = \\dfrac{g}{\\Delta l}$ ur (1), $k \\cdot \\Delta l = m \\cdot g$. Det sambandet gäller bara när fjädrarna bär hela tyngden. När rotorn lyfter med kraften $F_\\text{lyft}$ gäller i stället $k \\cdot \\Delta l = m \\cdot g - F_\\text{lyft}$. Hoptryckningen blir mindre, men $k$ och $m$ är oförändrade, så formeln med $\\Delta l$ kan inte längre användas.
+
+**Svar:** Nej. Egenfrekvensen beror bara på $k$ och $m$, som inte ändras. Formeln med $\\Delta l$ förutsätter att fjädrarna bär hela tyngden, och det gör de inte när rotorn lyfter.
+
+**c)** Det som får helikoptern att svänga upp och ned med en egenfrekvens är landningsställets fjäderkraft, som drar helikoptern tillbaka mot jämviktsläget. I luften rör landningsstället inte marken, och då finns ingen sådan återförande kraft. Helikoptern har alltså ingen egenfrekvens för rörelsen upp och ned, och då finns ingen frekvens som rotorns kraft kan hamna i takt med.
+
+**Svar:** I luften finns ingen fjäderkraft från marken som ger helikoptern en egenfrekvens, så ingen resonans kan uppstå.`,
+        },
+        {
+            level: 3,
+            question: `En vikt hänger i en fjäder vars övre ände rörs upp och ned av en motor med frekvensen $f$. Den blå kurvan visar viktens amplitud $A$ som funktion av $f$. Sedan hängs en extra vikt med massan $0{,}20\\ \\mathrm{kg}$ på, och mätningen görs om. Resultatet visas av den röda kurvan.
+
+${(() => {
+    const k = 87.73, b = 0.5, a0 = 0.5;
+    const kurva = (m) => {
+        const pts = [];
+        for (let i = 0; i <= 400; i++) {
+            const f = i / 400 * 4.0;
+            const w = 2 * Math.PI * f;
+            pts.push([f, k * a0 / Math.sqrt(Math.pow(k - m * w * w, 2) + Math.pow(b * w, 2))]);
+        }
+        return pts;
+    };
+    const svg = makeDiagram({
+        xMin: 0, xMax: 4.5, yMin: 0, yMax: 8,
+        xTicks: [0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0],
+        yTicks: [0, 2, 4, 6, 8],
+        paths: [
+            { points: kurva(0.3556), color: '#2563a8', width: 2.5 },
+            { points: kurva(0.5556), color: '#c8324a', width: 2.5 }
+        ],
+        xLabel: '<tspan font-style="italic">f</tspan> (Hz)',
+        yLabel: '<tspan font-style="italic">A</tspan> (cm)'
+    });
+    const legend = '<line x1="335" y1="52" x2="360" y2="52" stroke="#2563a8" stroke-width="2.5"/><text x="366" y="57" font-size="13" fill="#0f1620">utan extra vikt</text><line x1="335" y1="76" x2="360" y2="76" stroke="#c8324a" stroke-width="2.5"/><text x="366" y="81" font-size="13" fill="#0f1620">med extra vikt</text>';
+    return svg.replace('</svg>', legend + '</svg>');
+})()}
+
+a) Bestäm den första viktens massa. Svara i kg.<br>b) Bestäm fjäderkonstanten. Svara i N/m.`,
+            answer: { value: 88, unit: 'N/m', tol: 0.05 },
+            delsvar: [
+                { del: 'a', value: 0.36, unit: 'kg', tol: 0.05, etikett: 'massa' },
+                { del: 'b', value: 88, unit: 'N/m', tol: 0.05, etikett: '$k =$' },
+            ],
+            solution: `**a)** Amplituden är störst vid resonans, när motorns frekvens är lika med egenfrekvensen. Ur diagrammet läser vi av topparna:
+
+- utan extra vikt: $f_1 = 2{,}5\\ \\mathrm{Hz}$
+- med extra vikt: $f_2 = 2{,}0\\ \\mathrm{Hz}$
+
+Varken massan $m$ eller fjäderkonstanten $k$ är känd, men vi har två egenfrekvenser med samma fjäder. För en vikt i en fjäder gäller
+
+$$ f = \\frac{1}{2\\pi} \\sqrt{\\frac{k}{m}} \\quad\\Leftrightarrow\\quad k = 4\\pi^2 \\cdot f^2 \\cdot m $$
+
+Med $\\Delta m = 0{,}20\\ \\mathrm{kg}$ ger de två mätningarna
+
+$$
+\\begin{cases}
+k = 4\\pi^2 \\cdot f_1^2 \\cdot m & (1) \\\\
+k = 4\\pi^2 \\cdot f_2^2 \\cdot (m + \\Delta m) & (2)
+\\end{cases}
+$$
+
+Fjädern är densamma, så högerleden i (1) och (2) är lika:
+
+$$ 4\\pi^2 \\cdot f_1^2 \\cdot m = 4\\pi^2 \\cdot f_2^2 \\cdot (m + \\Delta m) $$
+
+$$ f_1^2 \\cdot m = f_2^2 \\cdot m + f_2^2 \\cdot \\Delta m $$
+
+$$ f_1^2 \\cdot m - f_2^2 \\cdot m = f_2^2 \\cdot \\Delta m \\quad\\Leftrightarrow\\quad m = \\frac{f_2^2 \\cdot \\Delta m}{f_1^2 - f_2^2} $$
+
+$$
+\\left[ \\begin{array}{l}
+f_1 = 2{,}5\\ \\mathrm{Hz} \\\\
+f_2 = 2{,}0\\ \\mathrm{Hz} \\\\
+\\Delta m = 0{,}20\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$ m = \\frac{2{,}0^2 \\cdot 0{,}20}{2{,}5^2 - 2{,}0^2} = \\frac{0{,}80}{2{,}25} = 0{,}3555\\ldots\\ \\mathrm{kg} \\approx 0{,}36\\ \\mathrm{kg} $$
+
+**Svar:** $0{,}36\\ \\mathrm{kg}$
+
+**b)** Insättning av $m$ i (1), $k = 4\\pi^2 \\cdot f_1^2 \\cdot m$, ger
+
+$$ k = 4\\pi^2 \\cdot 2{,}5^2 \\cdot 0{,}3555\\ldots = 87{,}729\\ldots\\ \\mathrm{N/m} \\approx 88\\ \\mathrm{N/m} $$
+
+**Rimlighet:** Kontroll med (2), $k = 4\\pi^2 \\cdot f_2^2 \\cdot (m + \\Delta m)$: $4\\pi^2 \\cdot 2{,}0^2 \\cdot 0{,}5555\\ldots = 87{,}729\\ldots\\ \\mathrm{N/m}$, samma värde. Den tyngre vikten ger lägre egenfrekvens, precis som diagrammet visar.
+
+**Svar:** $88\\ \\mathrm{N/m}$`,
+        },
+        {
+            level: 3,
+            question: `En elev ska bestämma tyngdaccelerationen $g$ med en pendel. Pendeln är en metallvikt som hänger i ett snöre. Det är svårt att veta var viktens tyngdpunkt ligger, så eleven mäter i stället längden $L$ från snörets fästpunkt till viktens krok. Eleven rör fästpunkten fram och tillbaka med en motor och letar för varje längd upp den frekvens $f$ som ger störst amplitud. Tabellen visar mätresultaten.
+
+<svg viewBox="0 0 250 290" width="318" height="368" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="En vikt hanger i ett snore fran en fastpunkt som rors fram och tillbaka. Langden L ar mattsatt fran fastpunkten till viktens krok." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="70" y="34" width="150" height="8" rx="2" fill="#8a8f98" stroke="#0f1620" stroke-width="1.2"/><rect x="128" y="42" width="24" height="12" rx="2" fill="#5b6370" stroke="#0f1620" stroke-width="1.2"/><line x1="122" y1="18" x2="158" y2="18" stroke="#0f1620" stroke-width="1.8" stroke-linecap="butt"/><polygon points="122,13 112,18 122,23" fill="#0f1620"/><polygon points="158,13 168,18 158,23" fill="#0f1620"/><line x1="140" y1="54" x2="140" y2="196" stroke="#0f1620" stroke-width="1.3"/><path d="M 140 196 C 147 196 147 206 140 206" fill="none" stroke="#0f1620" stroke-width="1.6"/><line x1="140" y1="206" x2="140" y2="212" stroke="#0f1620" stroke-width="1.6"/><rect x="122" y="212" width="36" height="58" rx="3" fill="#a9aeb6" stroke="#0f1620" stroke-width="1.4"/><rect x="127" y="216" width="6" height="50" rx="2" fill="#cfd3d8"/><line x1="110" y1="54" x2="60" y2="54" stroke="#5b6370" stroke-width="1" stroke-dasharray="4 3"/><line x1="134" y1="206" x2="60" y2="206" stroke="#5b6370" stroke-width="1" stroke-dasharray="4 3"/><line x1="68" y1="63" x2="68" y2="197" stroke="#2a9d8f" stroke-width="1.6" stroke-linecap="butt"/><polygon points="63,63 68,54 73,63" fill="#2a9d8f"/><polygon points="63,197 68,206 73,197" fill="#2a9d8f"/><text x="58" y="135" text-anchor="end" font-size="17" fill="#0f1620"><tspan font-style="italic">L</tspan></text></svg>
+
+| $L$ (m) | 0,20 | 0,40 | 0,60 | 0,80 | 1,00 |
+| --- | --- | --- | --- | --- | --- |
+| $f$ (Hz) | 0,979 | 0,733 | 0,614 | 0,537 | 0,484 |
+
+a) Använd alla mätvärden och bestäm ett experimentellt värde på $g$. Svara i m/s².<br>b) Bestäm avståndet från viktens krok till viktens tyngdpunkt. Svara i cm.`,
+            answer: { value: 9.8, unit: 'm/s²', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 9.8, unit: 'm/s²', tol: 0.03, etikett: '$g =$' },
+                { del: 'b', value: 6.0, unit: 'cm', tol: 0.2, etikett: 'avstånd' },
+            ],
+            solution: `**a)** Amplituden blir störst vid resonans, när motorns frekvens är lika med pendelns egenfrekvens. Varje frekvens i tabellen är alltså egenfrekvensen för den längden.
+
+Pendelns längd i formeln för den matematiska pendeln är avståndet från fästpunkten till tyngdpunkten. Beteckna avståndet från kroken till tyngdpunkten med $d$. Pendelns längd är då $L + d$, och
+
+$$ T = 2\\pi \\sqrt{\\frac{L + d}{g}} $$
+
+Vi vill ha ett samband som ger en rät linje. Kvadrering av båda led ger
+
+$$ T^2 = \\frac{4\\pi^2}{g} \\cdot (L + d) = \\frac{4\\pi^2}{g} \\cdot L + \\frac{4\\pi^2}{g} \\cdot d \\qquad (1) $$
+
+Ritas $T^2$ mot $L$ blir grafen alltså en rät linje med lutningen $\\dfrac{4\\pi^2}{g}$ och skärningen $\\dfrac{4\\pi^2}{g} \\cdot d$ med $T^2$-axeln. Varken $g$ eller $d$ behöver vara känd för att rita linjen.
+
+Periodtiden är $T = \\dfrac{1}{f}$, så $T^2 = \\dfrac{1}{f^2}$:
+
+| $L$ (m) | 0,20 | 0,40 | 0,60 | 0,80 | 1,00 |
+| --- | --- | --- | --- | --- | --- |
+| $T^2$ (s²) | 1,04 | 1,86 | 2,65 | 3,47 | 4,27 |
+
+${(() => {
+    const L = [0.20, 0.40, 0.60, 0.80, 1.00], T2 = [1.0434, 1.8612, 2.6525, 3.4678, 4.2688];
+    const svg = makeDiagram({
+        xMin: 0, xMax: 1.1, yMin: 0, yMax: 5,
+        xTicks: [0, 0.2, 0.4, 0.6, 0.8, 1.0],
+        yTicks: [0, 1, 2, 3, 4, 5],
+        paths: [{ points: [[0, 0.2415], [1.1, 0.2415 + 4.0288 * 1.1]], color: '#2563a8', width: 2 }],
+        xLabel: '<tspan font-style="italic">L</tspan> (m)',
+        yLabel: '<tspan font-style="italic">T</tspan><tspan dy="-6" font-size="10">2</tspan><tspan dy="6"> (s</tspan><tspan dy="-6" font-size="10">2</tspan><tspan dy="6">)</tspan>'
+    });
+    const pkt = L.map((l, i) => '<circle cx="' + (60 + l / 1.1 * 400).toFixed(1) + '" cy="' + (290 - T2[i] / 5 * 260).toFixed(1) + '" r="4" fill="#c8324a" stroke="#0f1620" stroke-width="1"/>').join('');
+    return svg.replace('</svg>', pkt + '</svg>');
+})()}
+
+Mätpunkterna ligger väl på en rät linje, vilket visar att modellen stämmer. Linjen som anpassas till punkterna går genom $(0;\\ 0{,}24)$ och $(1{,}00;\\ 4{,}27)$. Lutningen är
+
+$$ \\frac{\\Delta (T^2)}{\\Delta L} = \\frac{4{,}27 - 0{,}24}{1{,}00} = 4{,}03\\ \\mathrm{s^2/m} $$
+
+Enligt (1) är lutningen lika med $\\dfrac{4\\pi^2}{g}$:
+
+$$ \\frac{4\\pi^2}{g} = 4{,}03 \\quad\\Leftrightarrow\\quad g = \\frac{4\\pi^2}{4{,}03} = 9{,}796\\ldots\\ \\mathrm{m/s^2} \\approx 9{,}8\\ \\mathrm{m/s^2} $$
+
+**Rimlighet:** Tabellvärdet är $9{,}82\\ \\mathrm{m/s^2}$, så mätningen stämmer bra. Genom att använda lutningen i stället för en enda mätning jämnas mätfelen ut, och den okända tyngdpunkten påverkar inte resultatet.
+
+**Svar:** $9{,}8\\ \\mathrm{m/s^2}$
+
+**b)** Enligt (1) är skärningen med $T^2$-axeln lika med $\\dfrac{4\\pi^2}{g} \\cdot d$, alltså lutningen gånger $d$:
+
+$$ 4{,}03 \\cdot d = 0{,}24 \\quad\\Leftrightarrow\\quad d = \\frac{0{,}24}{4{,}03} = 0{,}0595\\ldots\\ \\mathrm{m} \\approx 6{,}0\\ \\mathrm{cm} $$
+
+**Rimlighet:** Tyngdpunkten ligger några centimeter under kroken, ungefär mitt i vikten, vilket är rimligt för en vikt som är drygt en decimeter hög. Skärningen är ett litet tal som är svårt att läsa av noga, så $d$ är mer osäkert än $g$.
+
+**Svar:** $6{,}0\\ \\mathrm{cm}$`,
+        },
+        {
+            level: 3,
+            question: `I en buss sitter en vågrät hylla av plåt. Hyllan är fäst i väggen med gummikuddar och kan svänga upp och ned med egenfrekvensen $24\\ \\mathrm{Hz}$. Motorn får karossen att skaka med samma frekvens som motorns varvfrekvens. En mobiltelefon ligger löst på hyllan.<br>a) Vid vilket varvtal hamnar hyllan i resonans? Svara i varv per minut.<br>b) Vid resonans svänger hyllan harmoniskt upp och ned med amplituden $0{,}80\\ \\mathrm{mm}$. Visa att telefonen då inte hela tiden ligger an mot hyllan utan börjar skallra.<br>c) Bestäm den största amplitud hyllan kan svänga med vid $24\\ \\mathrm{Hz}$ utan att telefonen lyfter från hyllan. Svara i mm.`,
+            answer: { value: 0.43, unit: 'mm', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 1440, unit: 'varv per minut', tol: 0.02, etikett: 'varvtal' },
+                { del: 'b' },
+                { del: 'c', value: 0.43, unit: 'mm', tol: 0.04, etikett: 'största amplitud' },
+            ],
+            solution: `**a)** Resonans uppstår när skakningarnas frekvens är lika med hyllans egenfrekvens, alltså när motorn går med $24$ varv per sekund. En minut är $60\\ \\mathrm{s}$:
+
+$$ 24 \\cdot 60 = 1\\,440 $$
+
+**Svar:** $1\\,440$ varv per minut
+
+**b)** Telefonen påverkas av två krafter: tyngdkraften $F_G$ nedåt och normalkraften $F_N$ från hyllan uppåt. Så länge telefonen ligger kvar har den samma acceleration som hyllan.
+
+<svg viewBox="30 40 250 150" width="318" height="191" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kraftfigur for telefonen i hyllans ovre vandlage. Tyngdkraften pekar nedat fran tyngdpunkten, normalkraften uppat fran kontaktytan och ar kortare. Accelerationen pekar nedat." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="40" y="120" width="200" height="10" rx="1.5" fill="#a9aeb6" stroke="#0f1620" stroke-width="1.2"/><rect x="118" y="112" width="64" height="8" rx="2.5" fill="#2b3440" stroke="#0f1620" stroke-width="1.2"/><rect x="123" y="113.5" width="54" height="2.5" rx="1" fill="#5a7fa8"/><line x1="148" y1="120" x2="148" y2="99" stroke="#c8324a" stroke-width="3.4" stroke-linecap="butt"/><polygon points="142,99 148,89 154,99" fill="#c8324a"/><line x1="152" y1="116" x2="152" y2="167" stroke="#c8324a" stroke-width="3.4" stroke-linecap="butt"/><polygon points="146,167 152,177 158,167" fill="#c8324a"/><circle cx="152" cy="116" r="2.6" fill="#0f1620"/><text x="138" y="96" text-anchor="end" font-size="15" fill="#0f1620"><tspan font-style="italic">F</tspan><tspan font-size="11" dy="4">N</tspan></text><text x="162" y="178" text-anchor="start" font-size="15" fill="#0f1620"><tspan font-style="italic">F</tspan><tspan font-size="11" dy="4">G</tspan></text><line x1="225" y1="55" x2="225" y2="94" stroke="#2563a8" stroke-width="2.6" stroke-linecap="butt"/><polygon points="219,94 225,104 231,94" fill="#2563a8"/><text x="235" y="84" text-anchor="start" font-size="15" fill="#0f1620"><tspan font-style="italic">a</tspan></text></svg>
+
+I hyllans övre vändläge är accelerationen riktad nedåt och som störst. Resultanten på telefonen pekar då nedåt, och Newtons andra lag med nedåt som positiv riktning ger
+
+$$ F_G - F_N = m \\cdot a \\quad\\Leftrightarrow\\quad F_N = m \\cdot g - m \\cdot a = m \\cdot (g - a) \\qquad (1) $$
+
+Normalkraften kan aldrig bli negativ, för hyllan kan bara trycka på telefonen, inte dra i den. Enligt (1) gäller därför att telefonen bara kan ligga kvar så länge $a \\leq g$. Är hyllans acceleration nedåt större än $g$ faller telefonen långsammare än hyllan och lyfter från den.
+
+Hyllans största acceleration i den harmoniska svängningen är
+
+$$ a_{\\max} = \\omega^2 \\cdot A, \\qquad \\omega = 2\\pi \\cdot f $$
+
+$$
+\\left[ \\begin{array}{l}
+f = 24\\ \\mathrm{Hz} \\\\
+A = 0{,}80\\ \\mathrm{mm} = 0{,}00080\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ \\omega = 2\\pi \\cdot 24 = 150{,}79\\ldots\\ \\mathrm{rad/s} $$
+
+$$ a_{\\max} = 150{,}79\\ldots^2 \\cdot 0{,}00080 = 18{,}191\\ldots\\ \\mathrm{m/s^2} \\approx 18\\ \\mathrm{m/s^2} $$
+
+**Svar:** Hyllans största acceleration är $18\\ \\mathrm{m/s^2}$, nästan dubbelt så stor som $g = 9{,}82\\ \\mathrm{m/s^2}$. Normalkraften skulle behöva bli negativ i det övre vändläget, så telefonen lyfter från hyllan och skallrar.
+
+**c)** Gränsen går där hyllans största acceleration är lika med $g$, för då blir normalkraften i (1) precis noll i det övre vändläget:
+
+$$ \\omega^2 \\cdot A = g \\quad\\Leftrightarrow\\quad A = \\frac{g}{\\omega^2} $$
+
+$$ A = \\frac{9{,}82}{150{,}79\\ldots^2} = 0{,}00043184\\ldots\\ \\mathrm{m} \\approx 0{,}43\\ \\mathrm{mm} $$
+
+**Rimlighet:** Ett utslag på en halv millimeter syns knappt, men vid så hög frekvens räcker det för att telefonen ska skallra. Eftersom $A = \\dfrac{g}{\\omega^2}$ blir gränsen en fjärdedel så stor om frekvensen fördubblas.
+
+**Svar:** $0{,}43\\ \\mathrm{mm}$`,
+        },
+        {
+            level: 3,
+            question: `En vikt hänger i en fjäder, och fjäderns övre ände sitter i en kraftgivare som mäter fjäderkraften $F$. Vikten dras nedåt och släpps. Grafen visar fjäderkraften som funktion av tiden $t$.
+
+${(() => {
+    const pts = [];
+    for (let i = 0; i <= 400; i++) {
+        const t = i / 400 * 2.0;
+        pts.push([t, 4.0 + 2.0 * Math.cos(2 * Math.PI * t / 0.50)]);
+    }
+    return makeDiagram({
+        xMin: 0, xMax: 2.0, yMin: 0, yMax: 7,
+        xTicks: [0, 0.25, 0.50, 0.75, 1.00, 1.25, 1.50, 1.75, 2.00],
+        yTicks: [0, 1, 2, 3, 4, 5, 6, 7],
+        paths: [{ points: pts, color: '#c8324a', width: 2.5 }],
+        xLabel: '<tspan font-style="italic">t</tspan> (s)',
+        yLabel: '<tspan font-style="italic">F</tspan> (N)'
+    });
+})()}
+
+a) Bestäm viktens massa. Svara i kg.<br>b) Bestäm svängningens amplitud. Svara i cm.<br>c) Kraftgivaren byts mot en motor som rör fjäderns övre ände upp och ned. Motorns frekvens kan ställas in mellan $0{,}50\\ \\mathrm{Hz}$ och $1{,}5\\ \\mathrm{Hz}$. Hur stor massa måste minst läggas till på vikten för att motorn ska kunna få den i resonans? Svara i kg.`,
+            answer: { value: 0.32, unit: 'kg', tol: 0.05 },
+            delsvar: [
+                { del: 'a', value: 0.41, unit: 'kg', tol: 0.04, etikett: 'massa' },
+                { del: 'b', value: 3.1, unit: 'cm', tol: 0.05, etikett: 'amplitud' },
+                { del: 'c', value: 0.32, unit: 'kg', tol: 0.05, etikett: 'extra massa' },
+            ],
+            solution: `**a)** Kraften svänger mellan $2{,}0\\ \\mathrm{N}$ och $6{,}0\\ \\mathrm{N}$. Mitt emellan ligger jämviktsläget. Där är accelerationen noll, så fjäderkraften är lika stor som tyngdkraften. Kraften i jämviktsläget är medelvärdet av den största och den minsta kraften:
+
+$$ F_0 = \\frac{6{,}0 + 2{,}0}{2} = 4{,}0\\ \\mathrm{N} $$
+
+$$ m \\cdot g = F_0 \\quad\\Leftrightarrow\\quad m = \\frac{F_0}{g} = \\frac{4{,}0}{9{,}82} = 0{,}40733\\ldots\\ \\mathrm{kg} \\approx 0{,}41\\ \\mathrm{kg} $$
+
+**Svar:** $0{,}41\\ \\mathrm{kg}$
+
+**b)** I vändlägena är vikten sträckan $A$ från jämviktsläget, och fjäderkraften skiljer sig då från $F_0$ med $k \\cdot A$ enligt Hookes lag. Ur grafen är skillnaden
+
+$$ \\Delta F = 6{,}0 - 4{,}0 = 2{,}0\\ \\mathrm{N} $$
+
+$$ k \\cdot A = \\Delta F \\quad\\Leftrightarrow\\quad A = \\frac{\\Delta F}{k} \\qquad (1) $$
+
+Fjäderkonstanten är inte given, men den fås ur periodtiden. Grafen har sina toppar vid $t = 0$, $0{,}50\\ \\mathrm{s}$, $1{,}00\\ \\mathrm{s}$ och så vidare, så $T = 0{,}50\\ \\mathrm{s}$. Periodtiden för en vikt i en fjäder ger
+
+$$ T = 2\\pi \\sqrt{\\frac{m}{k}} \\quad\\Leftrightarrow\\quad T^2 = 4\\pi^2 \\cdot \\frac{m}{k} \\quad\\Leftrightarrow\\quad k = \\frac{4\\pi^2 \\cdot m}{T^2} \\qquad (2) $$
+
+$$
+\\left[ \\begin{array}{l}
+m = 0{,}40733\\ldots\\ \\mathrm{kg} \\\\
+T = 0{,}50\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ k = \\frac{4\\pi^2 \\cdot 0{,}40733\\ldots}{0{,}50^2} = 64{,}323\\ldots\\ \\mathrm{N/m} $$
+
+Insättning i (1), $A = \\dfrac{\\Delta F}{k}$, ger
+
+$$ A = \\frac{2{,}0}{64{,}323\\ldots} = 0{,}031092\\ldots\\ \\mathrm{m} \\approx 3{,}1\\ \\mathrm{cm} $$
+
+**Svar:** $3{,}1\\ \\mathrm{cm}$
+
+**c)** Viktens egenfrekvens är nu
+
+$$ f = \\frac{1}{T} = \\frac{1}{0{,}50} = 2{,}0\\ \\mathrm{Hz} $$
+
+Det är mer än motorns högsta frekvens, $1{,}5\\ \\mathrm{Hz}$. För att resonans ska kunna uppstå måste egenfrekvensen sänkas till högst $1{,}5\\ \\mathrm{Hz}$, och det görs med större massa i samma fjäder. Den minsta massan $m_\\text{ny}$ ger egenfrekvensen precis $1{,}5\\ \\mathrm{Hz}$. Ur (2) med $T = \\dfrac{1}{f}$:
+
+$$ k = 4\\pi^2 \\cdot f^2 \\cdot m_\\text{ny} \\quad\\Leftrightarrow\\quad m_\\text{ny} = \\frac{k}{4\\pi^2 \\cdot f^2} = \\frac{64{,}323\\ldots}{4\\pi^2 \\cdot 1{,}5^2} = 0{,}72414\\ldots\\ \\mathrm{kg} $$
+
+Den massa som ska läggas till är
+
+$$ m_\\text{ny} - m = 0{,}72414\\ldots - 0{,}40733\\ldots = 0{,}31681\\ldots\\ \\mathrm{kg} \\approx 0{,}32\\ \\mathrm{kg} $$
+
+**Rimlighet:** Egenfrekvensen är omvänt proportionell mot roten ur massan. Ska frekvensen sänkas från $2{,}0\\ \\mathrm{Hz}$ till $1{,}5\\ \\mathrm{Hz}$ måste massan öka med faktorn $\\left(\\dfrac{2{,}0}{1{,}5}\\right)^2 = 1{,}777\\ldots$, och $0{,}40733\\ldots \\cdot 1{,}777\\ldots = 0{,}72414\\ldots\\ \\mathrm{kg}$, samma värde.
+
+**Svar:** $0{,}32\\ \\mathrm{kg}$`,
         },
     ],
 
@@ -65126,7 +68320,7 @@ $$ f = \\frac{2{,}0}{0{,}40} = 5{,}0\\ \\mathrm{Hz} $$
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
-            level: 2,
+            level: 1,
             question: `En vattenvåg har periodtiden $0{,}25\\ \\mathrm{s}$ och våglängden $2{,}0\\ \\mathrm{m}$. Bestäm vågens utbredningshastighet.`,
             answer: { value: 8.0, unit: 'm/s' },
             solution: `Vågens utbredningshastighet är
@@ -65150,7 +68344,7 @@ $$ v = \\frac{2{,}0}{0{,}25} = 8{,}0\\ \\mathrm{m/s} $$
 **Generell slutsats:** Sambandet $v = \\lambda/T$ är ekvivalent med $v = f\\cdot\\lambda$ eftersom $f = 1/T$.`,
         },
         {
-            level: 2,
+            level: 1,
             question: `Diagrammet visar en transversell vågrörelse längs en sträng i ett ögonblick. Vågen rör sig åt höger med hastigheten $6{,}0\\ \\mathrm{m/s}$. Avläs våglängden ur diagrammet och beräkna vågens frekvens.
 
 ${(() => {
@@ -65170,9 +68364,9 @@ ${(() => {
     });
 })()}`,
             answer: { value: 12, unit: 'Hz' },
-            solution: `**Steg 1 — avläs våglängden ur diagrammet.** Våglängden är avståndet mellan två närliggande vågberg (eller två närliggande nollgenomgångar i samma riktning). Från diagrammet syns $\\lambda = 0{,}50\\ \\mathrm{m}$.
+            solution: `**Steg 1: avläs våglängden ur diagrammet.** Våglängden är avståndet mellan två närliggande vågberg (eller två närliggande nollgenomgångar i samma riktning). Från diagrammet syns $\\lambda = 0{,}50\\ \\mathrm{m}$.
 
-**Steg 2 — beräkna frekvensen.**
+**Steg 2: beräkna frekvensen.**
 
 $$ f = \\frac{v}{\\lambda} $$
 
@@ -65194,7 +68388,7 @@ $$ f = \\frac{6{,}0}{0{,}50} = 12\\ \\mathrm{Hz} $$
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `Vid en jordbävning registrerar en seismograf två typer av vågor — P-vågor (longitudinella, $5{,}8\\ \\mathrm{km/s}$) och S-vågor (transversella, $3{,}4\\ \\mathrm{km/s}$) — som båda färdas radiellt från epicentrum. Seismografen upptäcker att S-vågorna anländer $12\\ \\mathrm{s}$ efter P-vågorna. Hur långt bort ligger jordbävningens epicentrum?`,
+            question: `Vid en jordbävning registrerar en seismograf två typer av vågor, P-vågor (longitudinella, $5{,}8\\ \\mathrm{km/s}$) och S-vågor (transversella, $3{,}4\\ \\mathrm{km/s}$), som båda färdas radiellt från epicentrum. Seismografen upptäcker att S-vågorna anländer $12\\ \\mathrm{s}$ efter P-vågorna. Hur långt bort ligger jordbävningens epicentrum?`,
             answer: { value: 99000, unit: 'm' },
             solution: `**Insikten är att avståndet *d* är samma för båda vågtyperna**, men de färdas olika fort, så ankomsttiderna skiljer sig. Skillnaden mellan tiderna ger ekvationen för *d*.
 
@@ -65219,7 +68413,934 @@ $$ d = \\frac{12 \\cdot 3\\,400 \\cdot 5\\,800}{5\\,800 - 3\\,400} = \\frac{2{,}
 
 **Svar:** Epicentrum ligger ungefär $99\\ \\mathrm{km}$ från seismografen.
 
-**Generell slutsats:** Detta är hur seismologer i praktiken lokaliserar jordbävningar — *en* station ger avståndet, *tre* stationer ger den exakta platsen genom triangulering. Insikten är att ankomsttiderna inte ges direkt utan endast deras *skillnad*, vilket ändå räcker eftersom *d* är gemensam för båda.`,
+**Generell slutsats:** Detta är hur seismologer i praktiken lokaliserar jordbävningar: *en* station ger avståndet, *tre* stationer ger den exakta platsen genom triangulering. Insikten är att ankomsttiderna inte ges direkt utan endast deras *skillnad*, vilket ändå räcker eftersom *d* är gemensam för båda.`,
+        },
+        {
+            level: 1,
+            question: `Vilken av vågorna nedan är en **longitudinell** våg?`,
+            choices: [
+                'En våg längs en spänd gitarrsträng',
+                'En ljudvåg som går genom luften',
+                'En våg i ett hopprep som skakas upp och ned',
+                'En puls i en vågställning där stavarna rör sig i sidled',
+            ],
+            correct: 1,
+            solution: `I en **longitudinell** våg rör sig varje del av mediet fram och tillbaka i **samma riktning** som vågen breder ut sig. Vågen går fram som förtätningar och förtunningar.
+
+En ljudvåg i luft är just sådan: luftpartiklarna pendlar fram och tillbaka längs vågens riktning, så att lufttrycket växlar mellan förtätningar och förtunningar.
+
+I gitarrsträngen, hopprepet och vågställningen rör sig delarna i stället **vinkelrätt** mot vågens utbredningsriktning. Det är transversella vågor.
+
+**Svar:** Ljudvågen i luften är longitudinell.`,
+        },
+        {
+            level: 1,
+            question: `En våg går längs ett långt rep. Diagrammet visar hur en punkt på repet rör sig upp och ned när vågen passerar. Avståndet mellan två närliggande vågberg på repet är $1{,}2\\ \\mathrm{m}$.<br>a) Bestäm vågens amplitud.&emsp;&emsp;b) Bestäm periodtiden.<br>c) Beräkna vågens utbredningshastighet.
+
+${(() => {
+    const T = 0.40, A = 4.0, tMax = 1.2;
+    const N = 360, pts = [];
+    for (let i = 0; i <= N; i++) {
+        const t = (i / N) * tMax;
+        pts.push([t, A * Math.sin(2 * Math.PI * t / T)]);
+    }
+    return makeDiagram({
+        xMin: 0, xMax: tMax, yMin: -6, yMax: 6,
+        xTicks: [0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2],
+        yTicks: [-6, -4, -2, 0, 2, 4, 6],
+        paths: [{ points: pts, color: '#c8324a', width: 2.5 }],
+        xLabel: '<tspan font-style="italic">t</tspan> (s)',
+        yLabel: '<tspan font-style="italic">y</tspan> (cm)'
+    });
+})()}`,
+            answer: { value: 3.0, unit: 'm/s' },
+            delsvar: [
+                { del: 'a', value: 4.0, unit: 'cm' },
+                { del: 'b', value: 0.40, unit: 's' },
+                { del: 'c', value: 3.0, unit: 'm/s' },
+            ],
+            solution: `**a)** Amplituden är det största utslaget från jämviktsläget $y = 0$. Kurvan når upp till $4\\ \\mathrm{cm}$ och ned till $-4\\ \\mathrm{cm}$.
+
+**Svar:** Amplituden är $4{,}0\\ \\mathrm{cm}$.
+
+**b)** Periodtiden är tiden för en hel svängning. Punkten går från jämviktsläget, upp till toppen, ned till botten och tillbaka till jämviktsläget på tiden $0$ till $0{,}4\\ \\mathrm{s}$. Kurvan upprepar sig sedan likadant mellan $0{,}4\\ \\mathrm{s}$ och $0{,}8\\ \\mathrm{s}$.
+
+**Svar:** Periodtiden är $0{,}40\\ \\mathrm{s}$.
+
+**c)** Avståndet mellan två vågberg är våglängden, $\\lambda = 1{,}2\\ \\mathrm{m}$. Vågen rör sig en våglängd på en periodtid:
+
+$$ v = \\frac{\\lambda}{T} $$
+
+$$
+\\left[ \\begin{array}{l}
+\\lambda = 1{,}2\\ \\mathrm{m} \\\\
+T = 0{,}40\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ v = \\frac{1{,}2}{0{,}40} = 3{,}0\\ \\mathrm{m/s} $$
+
+**Svar:** Utbredningshastigheten är $3{,}0\\ \\mathrm{m/s}$.`,
+        },
+        {
+            level: 1,
+            question: `Vid en ultraljudsundersökning skickas ljud med frekvensen $3{,}5\\ \\mathrm{MHz}$ in i kroppen. Ljudets utbredningshastighet i mjuk vävnad är $1\\,540\\ \\mathrm{m/s}$. Beräkna ljudets våglängd i vävnaden. Svara i mm.`,
+            answer: { value: 0.44, unit: 'mm' },
+            solution: `Vi löser ut våglängden ur $v = f \\cdot \\lambda$:
+
+$$ v = f \\cdot \\lambda \\quad\\Leftrightarrow\\quad \\lambda = \\frac{v}{f} $$
+
+$$
+\\left[ \\begin{array}{l}
+v = 1\\,540\\ \\mathrm{m/s} \\\\
+f = 3{,}5\\ \\mathrm{MHz} = 3{,}5 \\cdot 10^{6}\\ \\mathrm{Hz}
+\\end{array} \\right]
+$$
+
+$$ \\lambda = \\frac{1\\,540}{3{,}5 \\cdot 10^{6}} = 4{,}4 \\cdot 10^{-4}\\ \\mathrm{m} = 0{,}44\\ \\mathrm{mm} $$
+
+Den korta våglängden är skälet till att man använder så höga frekvenser: med kort våglängd går det att se små detaljer i kroppen.
+
+**Svar:** Våglängden är $0{,}44\\ \\mathrm{mm}$.`,
+        },
+        {
+            level: 1,
+            question: `En badboll ligger på en sjö. Vågor rullar förbi bollen på väg in mot stranden. Hur rör sig bollen?`,
+            choices: [
+                'Bollen följer med vågorna in mot stranden.',
+                'Bollen ligger helt stilla medan vågorna går under den.',
+                'Bollen rör sig bara fram och tillbaka i vågornas riktning.',
+                'Bollen guppar runt kring samma plats men följer inte med vågorna.',
+            ],
+            correct: 3,
+            solution: `En våg för **ingen materia** med sig i utbredningsriktningen. Den transporterar energi, men varje del av vattnet svänger bara kring sitt viloläge.
+
+I en vattenvåg rör sig vattnet vid ytan i en liten cirkelbana: upp och fram när ett vågberg kommer, ned och tillbaka när vågdalen kommer. Bollen följer vattnet vid ytan och guppar därför runt kring samma plats. (Att saker ändå till slut flyter i land beror på vind och strömmar, inte på vågen i sig.)
+
+**Svar:** Bollen guppar runt kring samma plats men följer inte med vågorna.`,
+        },
+        {
+            level: 2,
+            question: `Figuren visar en transversell våg längs ett rep i ett ögonblick. Fem punkter på repet är utmärkta. Avståndet mellan punkterna A och E längs repet är $1{,}8\\ \\mathrm{m}$, och vågens frekvens är $2{,}5\\ \\mathrm{Hz}$.<br>a) Vilken eller vilka punkter svänger i fas med A?<br>b) Vilken eller vilka punkter svänger i motfas med A?<br>c) Bestäm vågens våglängd.&emsp;&emsp;d) Beräkna utbredningshastigheten.
+
+${(() => {
+    const x0 = 40, L = 180, mid = 88, amp = 45;
+    const y = x => mid - amp * Math.sin(2 * Math.PI * (x - x0) / L);
+    let d = '';
+    for (let x = x0; x <= x0 + 2 * L + 0.01; x += 2) d += (x === x0 ? 'M ' : 'L ') + x.toFixed(1) + ' ' + y(x).toFixed(1) + ' ';
+    const pt = (f, namn, dx, dy, anchor) => {
+        const px = x0 + f * L, py = y(px);
+        return '<circle cx="' + px.toFixed(1) + '" cy="' + py.toFixed(1) + '" r="4.2" fill="#0f1620"/>' +
+            '<text x="' + (px + dx).toFixed(1) + '" y="' + (py + dy).toFixed(1) + '" text-anchor="' + anchor + '" font-size="15" fill="#0f1620">' + namn + '</text>';
+    };
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 176" width="598" height="239" role="img" aria-label="En transversell våg längs ett rep med punkterna A till E utmärkta." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif">' +
+        '<line x1="24" y1="' + mid + '" x2="416" y2="' + mid + '" stroke="#9aa0a6" stroke-width="1.2" stroke-dasharray="6 4"/>' +
+        '<path d="' + d.trim() + '" fill="none" stroke="#2563c9" stroke-width="2.6" stroke-linejoin="round"/>' +
+        pt(0.25, 'A', 0, -12, 'middle') + pt(0.75, 'B', 0, 25, 'middle') + pt(1.25, 'C', 0, -12, 'middle') +
+        pt(1.5, 'D', 9, -10, 'start') + pt(1.75, 'E', 0, 25, 'middle') +
+        '</svg>';
+})()}`,
+            answer: { value: 3.0, unit: 'm/s' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+                { del: 'c', value: 1.2, unit: 'm' },
+                { del: 'd', value: 3.0, unit: 'm/s' },
+            ],
+            solution: `Två punkter svänger **i fas** när de i varje ögonblick befinner sig i motsvarande läge, och **i motfas** när de befinner sig i helt motsatt läge.
+
+**a)** A ligger på ett vågberg. Den enda andra punkten på ett vågberg är C. De befinner sig i samma läge och rör sig likadant, eftersom de ligger exakt en våglängd från varandra.
+
+**Svar:** Punkten C svänger i fas med A.
+
+**b)** Helt motsatt läge till ett vågberg är en vågdal. B och E ligger i vågdalar. Punkten D ligger i jämviktsläget och svänger varken i fas eller i motfas med A.
+
+**Svar:** Punkterna B och E svänger i motfas med A.
+
+**c)** Från A (ett vågberg) till C (nästa vågberg) är en våglängd. Från C till E (nästa vågdal) är en halv våglängd till. Avståndet A till E är alltså $1{,}5$ våglängder:
+
+$$ 1{,}5 \\cdot \\lambda = 1{,}8 $$
+
+$$ \\lambda = \\frac{1{,}8}{1{,}5} = 1{,}2\\ \\mathrm{m} $$
+
+**Svar:** Våglängden är $1{,}2\\ \\mathrm{m}$.
+
+**d)**
+$$ v = f \\cdot \\lambda $$
+
+$$
+\\left[ \\begin{array}{l}
+f = 2{,}5\\ \\mathrm{Hz} \\\\
+\\lambda = 1{,}2\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ v = 2{,}5 \\cdot 1{,}2 = 3{,}0\\ \\mathrm{m/s} $$
+
+**Svar:** Utbredningshastigheten är $3{,}0\\ \\mathrm{m/s}$.`,
+        },
+        {
+            level: 2,
+            question: `En lärare skakar ena änden av ett långt spänt rep upp och ned med frekvensen $2{,}0\\ \\mathrm{Hz}$. Våglängden blir då $1{,}6\\ \\mathrm{m}$. Sedan skakar läraren repet med frekvensen $5{,}0\\ \\mathrm{Hz}$, utan att ändra hur hårt repet är spänt.<br>a) Beräkna vågens utbredningshastighet.<br>b) Hur lång blir våglängden vid den högre frekvensen?`,
+            answer: { value: 0.64, unit: 'm' },
+            delsvar: [
+                { del: 'a', value: 3.2, unit: 'm/s' },
+                { del: 'b', value: 0.64, unit: 'm' },
+            ],
+            solution: `**a)**
+$$ v = f \\cdot \\lambda $$
+
+$$
+\\left[ \\begin{array}{l}
+f = 2{,}0\\ \\mathrm{Hz} \\\\
+\\lambda = 1{,}6\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ v = 2{,}0 \\cdot 1{,}6 = 3{,}2\\ \\mathrm{m/s} $$
+
+**Svar:** Utbredningshastigheten är $3{,}2\\ \\mathrm{m/s}$.
+
+**b)** Utbredningshastigheten bestäms av mediet, alltså av repet och hur hårt det är spänt, inte av hur snabbt läraren skakar. Repet är detsamma, så vågen går fortfarande med $v = 3{,}2\\ \\mathrm{m/s}$. Det som ändras är våglängden:
+
+$$ v = f \\cdot \\lambda \\quad\\Leftrightarrow\\quad \\lambda = \\frac{v}{f} $$
+
+$$
+\\left[ \\begin{array}{l}
+v = 3{,}2\\ \\mathrm{m/s} \\\\
+f = 5{,}0\\ \\mathrm{Hz}
+\\end{array} \\right]
+$$
+
+$$ \\lambda = \\frac{3{,}2}{5{,}0} = 0{,}64\\ \\mathrm{m} $$
+
+Rimligt: frekvensen blir $2{,}5$ gånger så hög, och då blir våglängden en $2{,}5$-del av den tidigare, $\\dfrac{1{,}6}{2{,}5} = 0{,}64\\ \\mathrm{m}$.
+
+**Svar:** Våglängden blir $0{,}64\\ \\mathrm{m}$.`,
+        },
+        {
+            level: 2,
+            question: `Diagrammet visar en våg längs en sträng vid två tidpunkter. Den heldragna röda kurvan visar strängen vid $t = 0$ och den streckade blå kurvan visar den $0{,}050\\ \\mathrm{s}$ senare. Vågen går åt höger, och under tiden mellan bilderna har den flyttat sig mindre än en våglängd.<br>a) Bestäm våglängden.&emsp;&emsp;b) Bestäm utbredningshastigheten.<br>c) Beräkna vågens frekvens.
+
+${(() => {
+    const lambda = 1.2, A = 2.0, xMax = 2.4, s = 0.30;
+    const N = 360, p0 = [], p1 = [];
+    for (let i = 0; i <= N; i++) {
+        const x = (i / N) * xMax;
+        p0.push([x, A * Math.sin(2 * Math.PI * x / lambda)]);
+        p1.push([x, A * Math.sin(2 * Math.PI * (x - s) / lambda)]);
+    }
+    return makeDiagram({
+        xMin: 0, xMax: xMax, yMin: -3, yMax: 3,
+        xTicks: [0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4],
+        yTicks: [-3, -2, -1, 0, 1, 2, 3],
+        paths: [
+            { points: p0, color: '#c8324a', width: 2.5 },
+            { points: p1, color: '#2563c9', width: 2.3, dash: '7 5' },
+        ],
+        xLabel: '<tspan font-style="italic">x</tspan> (m)',
+        yLabel: '<tspan font-style="italic">y</tspan> (cm)'
+    });
+})()}`,
+            answer: { value: 5.0, unit: 'Hz' },
+            delsvar: [
+                { del: 'a', value: 1.2, unit: 'm' },
+                { del: 'b', value: 6.0, unit: 'm/s' },
+                { del: 'c', value: 5.0, unit: 'Hz' },
+            ],
+            solution: `**a)** Våglängden är avståndet mellan två närliggande vågberg på samma kurva. Den röda kurvan har vågberg vid $x = 0{,}3\\ \\mathrm{m}$ och $x = 1{,}5\\ \\mathrm{m}$:
+
+$$ \\lambda = 1{,}5 - 0{,}3 = 1{,}2\\ \\mathrm{m} $$
+
+**Svar:** Våglängden är $1{,}2\\ \\mathrm{m}$.
+
+**b)** Vågen går åt höger, så vågberget vid $x = 0{,}3\\ \\mathrm{m}$ i den röda kurvan har flyttat till närmaste vågberg till höger i den blå kurvan, vid $x = 0{,}6\\ \\mathrm{m}$. (Vågberget längre bort, vid $x = 1{,}8\\ \\mathrm{m}$, skulle betyda en förflyttning större än en våglängd.) Vågen har alltså gått sträckan
+
+$$ s = 0{,}6 - 0{,}3 = 0{,}3\\ \\mathrm{m} $$
+
+på tiden $t = 0{,}050\\ \\mathrm{s}$. Vågen rör sig med konstant hastighet:
+
+$$ v = \\frac{s}{t} $$
+
+$$
+\\left[ \\begin{array}{l}
+s = 0{,}30\\ \\mathrm{m} \\\\
+t = 0{,}050\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ v = \\frac{0{,}30}{0{,}050} = 6{,}0\\ \\mathrm{m/s} $$
+
+**Svar:** Utbredningshastigheten är $6{,}0\\ \\mathrm{m/s}$.
+
+**c)**
+$$ v = f \\cdot \\lambda \\quad\\Leftrightarrow\\quad f = \\frac{v}{\\lambda} $$
+
+$$
+\\left[ \\begin{array}{l}
+v = 6{,}0\\ \\mathrm{m/s} \\\\
+\\lambda = 1{,}2\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ f = \\frac{6{,}0}{1{,}2} = 5{,}0\\ \\mathrm{Hz} $$
+
+Kontroll: på $0{,}050\\ \\mathrm{s}$ hinner vågen en fjärdedels periodtid ($T = 0{,}20\\ \\mathrm{s}$), och den har mycket riktigt flyttat sig en fjärdedels våglängd.
+
+**Svar:** Frekvensen är $5{,}0\\ \\mathrm{Hz}$.`,
+        },
+        {
+            level: 2,
+            question: `Ett ekolod på en fiskebåt skickar en kort puls ultraljud rakt ned i vattnet. Ljudet har frekvensen $200\\ \\mathrm{kHz}$ och utbredningshastigheten $1\\,480\\ \\mathrm{m/s}$ i vattnet. Ekot från botten kommer tillbaka efter $0{,}054\\ \\mathrm{s}$.<br>a) Hur djupt är vattnet?<br>b) Beräkna ultraljudets våglängd i vattnet. Svara i mm.`,
+            answer: { value: 7.4, unit: 'mm' },
+            delsvar: [
+                { del: 'a', value: 40, unit: 'm' },
+                { del: 'b', value: 7.4, unit: 'mm' },
+            ],
+            solution: `**a)** Pulsen går ned till botten och sedan upp igen. På tiden $0{,}054\\ \\mathrm{s}$ har ljudet alltså gått sträckan $2d$, där $d$ är djupet. Ljudet rör sig med konstant hastighet:
+
+$$ v = \\frac{s}{t} \\quad\\Leftrightarrow\\quad s = v \\cdot t $$
+
+$$
+\\left[ \\begin{array}{l}
+v = 1\\,480\\ \\mathrm{m/s} \\\\
+t = 0{,}054\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ s = 1\\,480 \\cdot 0{,}054 = 79{,}92\\ \\mathrm{m} $$
+
+$$ d = \\frac{79{,}92}{2} = 39{,}96\\ \\mathrm{m} \\approx 40\\ \\mathrm{m} $$
+
+**Svar:** Vattnet är ungefär $40\\ \\mathrm{m}$ djupt.
+
+**b)**
+$$ v = f \\cdot \\lambda \\quad\\Leftrightarrow\\quad \\lambda = \\frac{v}{f} $$
+
+$$
+\\left[ \\begin{array}{l}
+v = 1\\,480\\ \\mathrm{m/s} \\\\
+f = 200\\ \\mathrm{kHz} = 200\\,000\\ \\mathrm{Hz}
+\\end{array} \\right]
+$$
+
+$$ \\lambda = \\frac{1\\,480}{200\\,000} = 0{,}0074\\ \\mathrm{m} = 7{,}4\\ \\mathrm{mm} $$
+
+**Svar:** Våglängden är $7{,}4\\ \\mathrm{mm}$.`,
+        },
+        {
+            level: 2,
+            question: `En grupp elever skakar en lång spiralfjäder med olika frekvenser och mäter våglängden varje gång. Fjädern är lika hårt spänd under hela försöket.
+
+| Frekvens $f$ (Hz) | 2,0 | 3,0 | 4,0 | 5,0 |
+|---|---|---|---|---|
+| Våglängd $\\lambda$ (m) | 1,50 | 1,00 | 0,76 | 0,60 |
+
+a) Visa att mätningarna stämmer med att vågens utbredningshastighet är densamma vid alla frekvenser, och bestäm den.<br>b) Vilken våglängd kan eleverna vänta sig om de skakar fjädern med frekvensen $6{,}0\\ \\mathrm{Hz}$?`,
+            answer: { value: 0.50, unit: 'm' },
+            delsvar: [
+                { del: 'a', value: 3.0, unit: 'm/s', etikett: 'utbredningshastighet' },
+                { del: 'b', value: 0.50, unit: 'm' },
+            ],
+            solution: `**a)** Vi räknar ut $v = f \\cdot \\lambda$ för varje mätning:
+
+| $f$ (Hz) | $\\lambda$ (m) | $v = f \\cdot \\lambda$ (m/s) |
+|---|---|---|
+| 2,0 | 1,50 | 3,0 |
+| 3,0 | 1,00 | 3,0 |
+| 4,0 | 0,76 | 3,04 |
+| 5,0 | 0,60 | 3,0 |
+
+Alla fyra värden ligger på $3{,}0\\ \\mathrm{m/s}$ inom mätnoggrannheten. När frekvensen ökar blir våglängden kortare i samma proportion, så produkten är densamma. Det stämmer med att utbredningshastigheten bestäms av fjädern, inte av hur snabbt man skakar. Medelvärdet är
+
+$$ v = \\frac{3{,}0 + 3{,}0 + 3{,}04 + 3{,}0}{4} = 3{,}01\\ \\mathrm{m/s} \\approx 3{,}0\\ \\mathrm{m/s} $$
+
+**Svar:** Utbredningshastigheten är densamma, ungefär $3{,}0\\ \\mathrm{m/s}$, vid alla frekvenserna.
+
+**b)** Fjädern är densamma, så $v = 3{,}0\\ \\mathrm{m/s}$ även vid den nya frekvensen:
+
+$$ v = f \\cdot \\lambda \\quad\\Leftrightarrow\\quad \\lambda = \\frac{v}{f} $$
+
+$$
+\\left[ \\begin{array}{l}
+v = 3{,}0\\ \\mathrm{m/s} \\\\
+f = 6{,}0\\ \\mathrm{Hz}
+\\end{array} \\right]
+$$
+
+$$ \\lambda = \\frac{3{,}0}{6{,}0} = 0{,}50\\ \\mathrm{m} $$
+
+Rimligt: tabellen visar att våglängden minskar när frekvensen ökar, och $0{,}50\\ \\mathrm{m}$ är lite kortare än $0{,}60\\ \\mathrm{m}$ vid $5{,}0\\ \\mathrm{Hz}$.
+
+**Svar:** Våglängden blir ungefär $0{,}50\\ \\mathrm{m}$.`,
+        },
+        {
+            level: 2,
+            question: `På en fullsatt arena gör publiken en läktarvåg. Varje person reser sig, sträcker upp armarna och sätter sig igen, och hela rörelsen tar $1{,}5\\ \\mathrm{s}$. Grannen till höger gör samma sak en kort stund senare, och vågen går runt läktaren. Den stolsrad som vågen följer är $540\\ \\mathrm{m}$ lång runt hela arenan, och vågen går ett varv på $45\\ \\mathrm{s}$. Stolarna i raden sitter $0{,}50\\ \\mathrm{m}$ från varandra.<br>a) Är läktarvågen en transversell eller en longitudinell våg? Motivera.<br>b) Beräkna vågens utbredningshastighet.<br>c) Hur många personer i stolsraden är i rörelse samtidigt?<br>d) Publiken startar i stället en ny läktarvåg var $6{,}0$:e sekund. Hur långt är det längs raden mellan två vågor som följer efter varandra?`,
+            answer: { value: 72, unit: 'm' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 12, unit: 'm/s' },
+                { del: 'c', value: 36, unit: 'personer' },
+                { del: 'd', value: 72, unit: 'm' },
+            ],
+            solution: `**a)** Vågen går längs raden, alltså vågrätt runt arenan. Varje person rör sig däremot upp och ned, vinkelrätt mot vågens utbredningsriktning, och följer inte med vågen runt läktaren. En våg där delarna rör sig vinkelrätt mot utbredningsriktningen är transversell.
+
+**Svar:** Läktarvågen är transversell.
+
+**b)** Vågen rör sig med konstant hastighet och går ett varv, $540\\ \\mathrm{m}$, på $45\\ \\mathrm{s}$:
+
+$$ v = \\frac{s}{t} $$
+
+$$
+\\left[ \\begin{array}{l}
+s = 540\\ \\mathrm{m} \\\\
+t = 45\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ v = \\frac{540}{45} = 12\\ \\mathrm{m/s} $$
+
+**Svar:** Utbredningshastigheten är $12\\ \\mathrm{m/s}$.
+
+**c)** En enda läktarvåg är en puls. En person är i rörelse i $1{,}5\\ \\mathrm{s}$, från att hen börjar resa sig tills hen sitter igen. Under den tiden hinner pulsens framkant gå vidare längs raden, och alla som pulsen hunnit nå men som ännu inte satt sig är i rörelse. Pulsens längd längs raden är alltså sträckan vågen går på $1{,}5\\ \\mathrm{s}$:
+
+$$ s = v \\cdot t = 12 \\cdot 1{,}5 = 18\\ \\mathrm{m} $$
+
+Med en stol var $0{,}50\\ \\mathrm{m}$ ryms det
+
+$$ \\frac{18}{0{,}50} = 36 $$
+
+personer på den sträckan.
+
+**Svar:** Ungefär $36$ personer i raden är i rörelse samtidigt.
+
+**d)** Nu skickas pulser iväg med jämna mellanrum, och då bildas en våg med periodtiden $T = 6{,}0\\ \\mathrm{s}$. Avståndet mellan två vågor som följer efter varandra är våglängden, den sträcka vågen hinner på en periodtid:
+
+$$ v = \\frac{\\lambda}{T} \\quad\\Leftrightarrow\\quad \\lambda = v \\cdot T $$
+
+$$
+\\left[ \\begin{array}{l}
+v = 12\\ \\mathrm{m/s} \\\\
+T = 6{,}0\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ \\lambda = 12 \\cdot 6{,}0 = 72\\ \\mathrm{m} $$
+
+Rimligt: runt hela arenan ryms då $\\dfrac{540}{72} = 7{,}5$ vågor samtidigt.
+
+**Svar:** Det är $72\\ \\mathrm{m}$ mellan två vågor som följer efter varandra.`,
+        },
+        {
+            level: 3,
+            question: `En jordbävning under havsbotten startar en tsunami. Ute på öppet hav är djupet $h = 4{,}0\\ \\mathrm{km}$, och tsunamin har periodtiden $12\\ \\mathrm{min}$. Periodtiden bestäms av jordbävningen och är densamma hela vägen in mot land. För vattenvågor med mycket lång våglängd jämfört med djupet gäller modellen
+
+$$ v = \\sqrt{g \\cdot h} $$
+
+där $h$ är vattendjupet och $g = 9{,}82\\ \\mathrm{m/s^2}$.<br>a) Beräkna tsunamins fart på öppet hav. Svara i km/h.<br>b) Kusten ligger $1\\,800\\ \\mathrm{km}$ bort. Hur lång tid tar det innan tsunamin når fram, om den går hela vägen på djupt vatten? Svara i timmar.<br>c) Bestäm våglängden på öppet hav och där djupet är $8{,}0\\ \\mathrm{m}$ nära kusten. Svara i km.<br>d) Ute på havet är tsunamins amplitud $0{,}50\\ \\mathrm{m}$. Energin i en vattenvåg per kvadratmeter vattenyta är proportionell mot amplitudens kvadrat. Anta att vågfronten är lika bred hela vägen och att ingen energi går förlorad. Bestäm amplituden där djupet är $8{,}0\\ \\mathrm{m}$.`,
+            answer: { value: 2.4, unit: 'm' },
+            delsvar: [
+                { del: 'a', value: 710, unit: 'km/h' },
+                { del: 'b', value: 2.5, unit: 'h' },
+                { del: 'c', value: 140, unit: 'km', etikett: 'på öppet hav' },
+                { del: 'c', value: 6.4, unit: 'km', etikett: 'nära kusten' },
+                { del: 'd', value: 2.4, unit: 'm' },
+            ],
+            solution: `**a)**
+$$ v = \\sqrt{g \\cdot h} $$
+
+$$
+\\left[ \\begin{array}{l}
+g = 9{,}82\\ \\mathrm{m/s^2} \\\\
+h = 4{,}0\\ \\mathrm{km} = 4\\,000\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ v = \\sqrt{9{,}82 \\cdot 4\\,000} = 198{,}19\\ldots\\ \\mathrm{m/s} $$
+
+Omvandlat till km/h (multiplicera med $3{,}6$):
+
+$$ v = 198{,}19 \\cdot 3{,}6 = 713{,}5\\ldots\\ \\mathrm{km/h} \\approx 710\\ \\mathrm{km/h} $$
+
+Det är ungefär lika fort som ett flygplan.
+
+**Svar:** Tsunamin går med ungefär $710\\ \\mathrm{km/h}$.
+
+**b)** Vågen rör sig med konstant fart, så
+
+$$ v = \\frac{s}{t} \\quad\\Leftrightarrow\\quad t = \\frac{s}{v} $$
+
+$$
+\\left[ \\begin{array}{l}
+s = 1\\,800\\ \\mathrm{km} \\\\
+v = 713{,}5\\ \\mathrm{km/h}
+\\end{array} \\right]
+$$
+
+$$ t = \\frac{1\\,800}{713{,}5} = 2{,}52\\ldots\\ \\mathrm{h} \\approx 2{,}5\\ \\mathrm{h} $$
+
+**Svar:** Det tar ungefär $2{,}5$ timmar.
+
+**c)** Vågen rör sig en våglängd på en periodtid, så $\\lambda = v \\cdot T$, med $T = 12\\ \\mathrm{min} = 720\\ \\mathrm{s}$.
+
+På öppet hav:
+
+$$ \\lambda = 198{,}19 \\cdot 720 = 142\\,698\\ \\mathrm{m} \\approx 140\\ \\mathrm{km} $$
+
+Nära kusten är farten
+
+$$ v = \\sqrt{9{,}82 \\cdot 8{,}0} = 8{,}863\\ldots\\ \\mathrm{m/s} $$
+
+och våglängden
+
+$$ \\lambda = 8{,}863 \\cdot 720 = 6\\,381\\ \\mathrm{m} \\approx 6{,}4\\ \\mathrm{km} $$
+
+**Svar:** Våglängden är ungefär $140\\ \\mathrm{km}$ på öppet hav och $6{,}4\\ \\mathrm{km}$ nära kusten.
+
+**d)** Under en periodtid passerar precis en våglängd en given punkt, både ute på havet och nära kusten. Ingen energi går förlorad, så den energi som förs in under en periodtid förs vidare under samma tid. Energin i en våglängd, alltså mellan två närliggande vågtoppar, är därför densamma hela vägen.
+
+En våglängd täcker vattenytan $\\lambda \\cdot b$, där $b$ är vågfrontens bredd. Energin per kvadratmeter är proportionell mot $A^2$, så energin i en våglängd är
+
+$$ E = C \\cdot A^2 \\cdot \\lambda \\cdot b $$
+
+där $C$ är en konstant. Både $E$ och $b$ är desamma ute på havet (index 1) och nära kusten (index 2):
+
+$$ C \\cdot A_1^2 \\cdot \\lambda_1 \\cdot b = C \\cdot A_2^2 \\cdot \\lambda_2 \\cdot b \\quad\\Leftrightarrow\\quad A_2 = A_1 \\cdot \\sqrt{\\frac{\\lambda_1}{\\lambda_2}} $$
+
+$$
+\\left[ \\begin{array}{l}
+A_1 = 0{,}50\\ \\mathrm{m} \\\\
+\\lambda_1 = 142\\,698\\ \\mathrm{m} \\\\
+\\lambda_2 = 6\\,381\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ A_2 = 0{,}50 \\cdot \\sqrt{\\frac{142\\,698}{6\\,381}} = 2{,}364\\ldots\\ \\mathrm{m} \\approx 2{,}4\\ \\mathrm{m} $$
+
+Rimligt: våglängden krymper till mindre än en tjugondel, men amplituden växer bara ungefär $4{,}7$ gånger, eftersom energin beror på amplitudens kvadrat. Ändå blir en våg som knappt märks ute på havet nästan fem meter från dal till topp vid kusten. (Allra närmast stranden slutar modellen att gälla, när vågen bryter.)
+
+**Svar:** Amplituden blir ungefär $2{,}4\\ \\mathrm{m}$ nära kusten.`,
+        },
+        {
+            level: 2,
+            question: `En transversell våg med amplituden $A$, våglängden $\\lambda$ och frekvensen $f$ går längs ett rep.<br>a) Visa att kvoten mellan en punkts medelfart under en hel svängning och vågens utbredningshastighet är $\\dfrac{4A}{\\lambda}$.<br>b) Beräkna en punkts medelfart och vågens utbredningshastighet när $A = 2{,}0\\ \\mathrm{cm}$, $\\lambda = 0{,}80\\ \\mathrm{m}$ och $f = 5{,}0\\ \\mathrm{Hz}$.<br>c) En elev säger: "Om jag skakar repet med större utslag går vågen fortare." Bedöm påståendet med hjälp av resultatet i a).`,
+            answer: { value: 4.0, unit: 'm/s' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 0.40, unit: 'm/s', etikett: 'punktens medelfart' },
+                { del: 'b', value: 4.0, unit: 'm/s', etikett: 'utbredningshastigheten' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Under en hel periodtid $T$ går en punkt på repet från jämviktsläget upp till toppen (sträckan $A$), ned till jämviktsläget ($A$), ned till botten ($A$) och tillbaka upp till jämviktsläget ($A$). Punktens väg är alltså $4A$, och dess medelfart är
+
+$$ \\bar{u} = \\frac{4A}{T} = 4A \\cdot f \\qquad (1) $$
+
+Vågen går under samma tid en våglängd:
+
+$$ v = \\frac{\\lambda}{T} = f \\cdot \\lambda \\qquad (2) $$
+
+Kvoten mellan (1), $\\bar{u} = 4A \\cdot f$, och (2), $v = f \\cdot \\lambda$, blir
+
+$$ \\frac{\\bar{u}}{v} = \\frac{4A \\cdot f}{f \\cdot \\lambda} = \\frac{4A}{\\lambda} $$
+
+vilket skulle visas.
+
+**b)**
+$$
+\\left[ \\begin{array}{l}
+A = 2{,}0\\ \\mathrm{cm} = 0{,}020\\ \\mathrm{m} \\\\
+\\lambda = 0{,}80\\ \\mathrm{m} \\\\
+f = 5{,}0\\ \\mathrm{Hz}
+\\end{array} \\right]
+$$
+
+Insättning i (1), $\\bar{u} = 4A \\cdot f$, ger
+
+$$ \\bar{u} = 4 \\cdot 0{,}020 \\cdot 5{,}0 = 0{,}40\\ \\mathrm{m/s} $$
+
+Insättning i (2), $v = f \\cdot \\lambda$, ger
+
+$$ v = 5{,}0 \\cdot 0{,}80 = 4{,}0\\ \\mathrm{m/s} $$
+
+Kontroll med kvoten: $\\dfrac{4A}{\\lambda} = \\dfrac{4 \\cdot 0{,}020}{0{,}80} = 0{,}10$, och $\\dfrac{0{,}40}{4{,}0} = 0{,}10$.
+
+**Svar:** Punkten har medelfarten $0{,}40\\ \\mathrm{m/s}$ och vågen utbredningshastigheten $4{,}0\\ \\mathrm{m/s}$, alltså tio gånger större.
+
+**c)** Resultatet i a) visar att det är **punkternas** fart som beror på amplituden: med större utslag måste varje punkt hinna en längre väg upp och ned på samma tid, så punkterna rör sig fortare. Vågens utbredningshastighet $v = f \\cdot \\lambda$ innehåller däremot inte $A$. Den bestäms av repet, hur tungt det är och hur hårt det är spänt. Eleven blandar ihop hur fort repets delar rör sig upp och ned med hur fort vågformen vandrar längs repet.
+
+**Svar:** Påståendet är fel. Ett större utslag gör att repets punkter rör sig fortare upp och ned, men vågen går lika fort längs repet som förut.`,
+        },
+        {
+            level: 3,
+            question: `En våg går åt höger längs ett långt rep. Punkten P sitter vid $x = 0$ och punkten Q vid $x = 0{,}90\\ \\mathrm{m}$, och avståndet mellan dem är mindre än en våglängd. Diagrammet visar hur de två punkterna rör sig upp och ned. Den heldragna röda kurvan hör till P och den streckade blå till Q.<br>a) Bestäm vågens periodtid.<br>b) Bestäm vågens utbredningshastighet och våglängd.<br>c) Utan upplysningen att avståndet PQ är mindre än en våglängd går utbredningshastigheten inte att bestämma entydigt ur diagrammet. Förklara varför, och ange två andra värden som då vore möjliga.
+
+${(() => {
+    const T = 0.40, A = 2.0, lag = 0.10, tMax = 0.8;
+    const N = 320, p = [], q = [];
+    for (let i = 0; i <= N; i++) {
+        const t = (i / N) * tMax;
+        p.push([t, A * Math.sin(2 * Math.PI * t / T)]);
+        q.push([t, A * Math.sin(2 * Math.PI * (t - lag) / T)]);
+    }
+    return makeDiagram({
+        xMin: 0, xMax: tMax, yMin: -3, yMax: 3,
+        xTicks: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8],
+        yTicks: [-3, -2, -1, 0, 1, 2, 3],
+        paths: [
+            { points: p, color: '#c8324a', width: 2.5 },
+            { points: q, color: '#2563c9', width: 2.3, dash: '7 5' },
+        ],
+        xLabel: '<tspan font-style="italic">t</tspan> (s)',
+        yLabel: '<tspan font-style="italic">y</tspan> (cm)'
+    });
+})()}`,
+            answer: { value: 9.0, unit: 'm/s' },
+            delsvar: [
+                { del: 'a', value: 0.40, unit: 's' },
+                { del: 'b', value: 9.0, unit: 'm/s', etikett: 'utbredningshastighet' },
+                { del: 'b', value: 3.6, unit: 'm', etikett: 'våglängd' },
+                { del: 'c' },
+            ],
+            solution: `**a)** P:s kurva går från jämviktsläget, upp, ned och tillbaka till jämviktsläget mellan $t = 0$ och $t = 0{,}4\\ \\mathrm{s}$.
+
+**Svar:** Periodtiden är $0{,}40\\ \\mathrm{s}$.
+
+**b)** Vågen går åt höger, så den når P först och Q senare. Q gör exakt samma rörelse som P, men förskjuten i tiden. P har sitt första maximum vid $t = 0{,}1\\ \\mathrm{s}$ och Q vid $t = 0{,}2\\ \\mathrm{s}$, så Q ligger $0{,}10\\ \\mathrm{s}$ efter P. (Att Q i stället skulle ligga $0{,}50\\ \\mathrm{s}$ efter, vid nästa maximum, går inte: på en hel periodtid hinner vågen en hel våglängd, och PQ är kortare än så.)
+
+Vågens tillstånd har alltså gått sträckan $0{,}90\\ \\mathrm{m}$ på tiden $0{,}10\\ \\mathrm{s}$:
+
+$$ v = \\frac{s}{t} $$
+
+$$
+\\left[ \\begin{array}{l}
+s = 0{,}90\\ \\mathrm{m} \\\\
+t = 0{,}10\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ v = \\frac{0{,}90}{0{,}10} = 9{,}0\\ \\mathrm{m/s} $$
+
+Våglängden är sträckan vågen går på en periodtid:
+
+$$ v = \\frac{\\lambda}{T} \\quad\\Leftrightarrow\\quad \\lambda = v \\cdot T $$
+
+$$ \\lambda = 9{,}0 \\cdot 0{,}40 = 3{,}6\\ \\mathrm{m} $$
+
+Kontroll: $0{,}90\\ \\mathrm{m}$ är en fjärdedels våglängd, och fördröjningen $0{,}10\\ \\mathrm{s}$ är en fjärdedels periodtid. Det stämmer, och PQ är mycket riktigt kortare än en våglängd.
+
+**Svar:** Utbredningshastigheten är $9{,}0\\ \\mathrm{m/s}$ och våglängden $3{,}6\\ \\mathrm{m}$.
+
+**c)** Punkterna upprepar sin rörelse efter varje periodtid. Diagrammet ser därför precis likadant ut om Q ligger $0{,}10\\ \\mathrm{s}$, $0{,}50\\ \\mathrm{s}$ eller $0{,}90\\ \\mathrm{s}$ efter P. Fördröjningen kan vara
+
+$$ t = 0{,}10 + n \\cdot 0{,}40\\ \\mathrm{s}, \\qquad n = 0, 1, 2, \\ldots $$
+
+Med $n = 1$:
+
+$$ v = \\frac{0{,}90}{0{,}50} = 1{,}8\\ \\mathrm{m/s} $$
+
+Med $n = 2$:
+
+$$ v = \\frac{0{,}90}{0{,}90} = 1{,}0\\ \\mathrm{m/s} $$
+
+I de fallen är våglängden $1{,}8 \\cdot 0{,}40 = 0{,}72\\ \\mathrm{m}$ respektive $1{,}0 \\cdot 0{,}40 = 0{,}40\\ \\mathrm{m}$, alltså kortare än PQ.
+
+**Svar:** Ett diagram över punkternas rörelse visar bara fördröjningen upp till hela periodtider, eftersom rörelsen upprepar sig. Möjliga värden är till exempel $1{,}8\\ \\mathrm{m/s}$ och $1{,}0\\ \\mathrm{m/s}$.`,
+        },
+        {
+            level: 3,
+            question: `Ett tunt rep är knutet till ett tjockt rep, och det tjocka repet sitter fast i en vägg. Båda delarna är $3{,}0\\ \\mathrm{m}$ långa, och hela repet är lika hårt spänt. En vågmaskin får den lösa änden av det tunna repet att svänga, så att en våg går längs hela repet. I det tunna repet är utbredningshastigheten $12\\ \\mathrm{m/s}$ och våglängden $0{,}80\\ \\mathrm{m}$. I det tjocka repet mäter man våglängden $0{,}50\\ \\mathrm{m}$.<br>a) Bestäm utbredningshastigheten i det tjocka repet. Motivera noga varje samband du använder.<br>b) Vågmaskinen stängs av och en enstaka puls skickas i stället in i det tunna repet. Hur lång tid tar det för pulsen att nå väggen?
+
+${(() => {
+    const yR = 64, xa = 30, xk = 220, xw = 410;
+    let puls = '';
+    for (let x = xa; x <= xk + 0.01; x += 2) {
+        const yy = yR - 26 * Math.exp(-Math.pow((x - 105) / 18, 2));
+        puls += (x === xa ? 'M ' : 'L ') + x.toFixed(1) + ' ' + yy.toFixed(1) + ' ';
+    }
+    let hatch = '';
+    for (let y = 20; y <= 100; y += 10) hatch += '<line x1="' + (xw + 12) + '" y1="' + y + '" x2="' + (xw + 22) + '" y2="' + (y - 10) + '" stroke="#6b7178" stroke-width="1"/>';
+    const dim = (x1, x2, yy, txt) =>
+        '<line x1="' + x1 + '" y1="' + (yR + 8) + '" x2="' + x1 + '" y2="' + (yy + 6) + '" stroke="#6b7280" stroke-width="1" stroke-dasharray="3 3"/>' +
+        '<line x1="' + x2 + '" y1="' + (yR + 8) + '" x2="' + x2 + '" y2="' + (yy + 6) + '" stroke="#6b7280" stroke-width="1" stroke-dasharray="3 3"/>' +
+        '<line x1="' + (x1 + 6) + '" y1="' + yy + '" x2="' + (x2 - 6) + '" y2="' + yy + '" stroke="#0f7d86" stroke-width="1.4" stroke-linecap="butt"/>' +
+        '<polygon points="' + x1 + ',' + yy + ' ' + (x1 + 6) + ',' + (yy - 3.2) + ' ' + (x1 + 6) + ',' + (yy + 3.2) + '" fill="#0f7d86"/>' +
+        '<polygon points="' + x2 + ',' + yy + ' ' + (x2 - 6) + ',' + (yy - 3.2) + ' ' + (x2 - 6) + ',' + (yy + 3.2) + '" fill="#0f7d86"/>' +
+        '<text x="' + ((x1 + x2) / 2) + '" y="' + (yy + 18) + '" text-anchor="middle" font-size="13" fill="#0f1620">' + txt + '</text>';
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 128" width="616" height="179" role="img" aria-label="Ett tunt rep knutet till ett tjockt rep som sitter fast i en vägg. Båda delarna är 3,0 meter långa. En puls går i det tunna repet." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif">' +
+        '<rect x="' + xw + '" y="12" width="12" height="90" fill="#d9d2c3" stroke="#0f1620" stroke-width="1.6"/>' + hatch +
+        '<rect x="14" y="' + (yR - 9) + '" width="16" height="18" rx="3" fill="#5b6573" stroke="#0f1620" stroke-width="1.4"/>' +
+        '<path d="' + puls.trim() + '" fill="none" stroke="#a8735a" stroke-width="2" stroke-linejoin="round"/>' +
+        '<line x1="' + xk + '" y1="' + yR + '" x2="' + xw + '" y2="' + yR + '" stroke="#7a4a2e" stroke-width="5" stroke-linecap="butt"/>' +
+        '<circle cx="' + xk + '" cy="' + yR + '" r="5" fill="#7a4a2e" stroke="#0f1620" stroke-width="1.2"/>' +
+        '<text x="170" y="48" text-anchor="middle" font-size="13" fill="#0f1620">tunt rep</text>' +
+        '<text x="315" y="48" text-anchor="middle" font-size="13" fill="#0f1620">tjockt rep</text>' +
+        dim(xa, xk, 92, '3,0 m') + dim(xk, xw, 92, '3,0 m') +
+        '</svg>';
+})()}`,
+            answer: { value: 0.65, unit: 's' },
+            delsvar: [
+                { del: 'a', value: 7.5, unit: 'm/s' },
+                { del: 'b', value: 0.65, unit: 's' },
+            ],
+            solution: `**a)** Utbredningshastigheten bestäms av mediet, så den är olika i de två repen. Frekvensen är däremot densamma i båda. Knuten tillhör båda repen samtidigt: den svänger upp och ned i takt med det tunna repet, och det är knutens svängning som driver vågen i det tjocka repet. Varje gång en svängning kommer fram till knuten skickas en svängning vidare, så lika många svängningar per sekund passerar i båda delarna.
+
+Frekvensen i det tunna repet fås ur $v = f \\cdot \\lambda$:
+
+$$ v_1 = f \\cdot \\lambda_1 \\quad\\Leftrightarrow\\quad f = \\frac{v_1}{\\lambda_1} $$
+
+$$
+\\left[ \\begin{array}{l}
+v_1 = 12\\ \\mathrm{m/s} \\\\
+\\lambda_1 = 0{,}80\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ f = \\frac{12}{0{,}80} = 15\\ \\mathrm{Hz} $$
+
+Med samma frekvens i det tjocka repet blir
+
+$$ v_2 = f \\cdot \\lambda_2 = 15 \\cdot 0{,}50 = 7{,}5\\ \\mathrm{m/s} $$
+
+Rimligt: ett tyngre rep som är lika hårt spänt är trögare att sätta i rörelse, så vågen går långsammare och våglängden blir kortare.
+
+**Svar:** Utbredningshastigheten i det tjocka repet är $7{,}5\\ \\mathrm{m/s}$.
+
+**b)** En puls går med samma utbredningshastighet som vågen i varje rep, eftersom hastigheten bestäms av repet. Pulsen går först $3{,}0\\ \\mathrm{m}$ i det tunna repet och sedan $3{,}0\\ \\mathrm{m}$ i det tjocka, och för varje del gäller $t = \\dfrac{s}{v}$:
+
+$$ t_1 = \\frac{3{,}0}{12} = 0{,}25\\ \\mathrm{s} $$
+
+$$ t_2 = \\frac{3{,}0}{7{,}5} = 0{,}40\\ \\mathrm{s} $$
+
+$$ t = t_1 + t_2 = 0{,}25 + 0{,}40 = 0{,}65\\ \\mathrm{s} $$
+
+**Svar:** Det tar $0{,}65\\ \\mathrm{s}$ för pulsen att nå väggen.`,
+        },
+        {
+            level: 3,
+            question: `Figuren visar en transversell våg längs en sträng i ett ögonblick. Vågen går åt höger. Fyra punkter på strängen är utmärkta.<br>a) Avgör för var och en av punkterna A, B, C och D om den i ögonblicket rör sig uppåt, nedåt eller just står still. Motivera.<br>b) Rangordna punkterna efter hur stor fart de har i ögonblicket, från störst till minst. Motivera.
+
+${(() => {
+    const x0 = 40, L = 280, mid = 84, amp = 45;
+    const y = x => mid - amp * Math.sin(2 * Math.PI * (x - x0) / L);
+    let d = '';
+    for (let x = x0; x <= x0 + 1.25 * L + 0.01; x += 2) d += (x === x0 ? 'M ' : 'L ') + x.toFixed(1) + ' ' + y(x).toFixed(1) + ' ';
+    const pt = (f, namn, dx, dy, anchor) => {
+        const px = x0 + f * L, py = y(px);
+        return '<circle cx="' + px.toFixed(1) + '" cy="' + py.toFixed(1) + '" r="4.2" fill="#0f1620"/>' +
+            '<text x="' + (px + dx).toFixed(1) + '" y="' + (py + dy).toFixed(1) + '" text-anchor="' + anchor + '" font-size="15" fill="#0f1620">' + namn + '</text>';
+    };
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 156" width="598" height="212" role="img" aria-label="En transversell våg längs en sträng som går åt höger, med punkterna A, B, C och D utmärkta." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif">' +
+        '<line x1="24" y1="' + mid + '" x2="416" y2="' + mid + '" stroke="#9aa0a6" stroke-width="1.2" stroke-dasharray="6 4"/>' +
+        '<path d="' + d.trim() + '" fill="none" stroke="#2563c9" stroke-width="2.6" stroke-linejoin="round"/>' +
+        pt(0.1, 'A', -9, -6, 'end') + pt(0.25, 'B', 0, -12, 'middle') + pt(0.5, 'C', 9, -10, 'start') + pt(0.85, 'D', 9, 17, 'start') +
+        '<line x1="360" y1="26" x2="398" y2="26" stroke="#c8324a" stroke-width="2.6" stroke-linecap="butt"/>' +
+        '<polygon points="398,21 408,26 398,31" fill="#c8324a"/>' +
+        '<text x="350" y="31" text-anchor="end" font-size="15" fill="#c8324a"><tspan font-style="italic">v</tspan></text>' +
+        '</svg>';
+})()}`,
+            solution: `**Metod.** Vågformen vandrar åt höger utan att ändra form. Om vi tänker oss vågen ett litet stycke senare har hela kurvan flyttats lite åt höger. Varje punkt på strängen tar då det läge som strängen strax **till vänster** om den hade nyss. Ligger strängen till vänster om punkten lägre, rör sig punkten nedåt, och ligger den högre, rör sig punkten uppåt.
+
+**a)**
+- **A** ligger på väg upp mot vågberget B. Till vänster om A ligger strängen lägre, närmare jämviktsläget. När vågen flyttar sig åt höger kommer den lägre delen fram till A, så A rör sig **nedåt**.
+- **B** ligger i ett vågberg, i sitt högsta läge. Där vänder punkten: den har slutat röra sig uppåt och har ännu inte börjat röra sig nedåt. B **står still** i ögonblicket.
+- **C** ligger i jämviktsläget mellan vågberget B och vågdalen längre till höger. Till vänster om C ligger vågberget, så det som kommer fram till C är högre: C rör sig **uppåt**.
+- **D** ligger mellan vågdalen till vänster och jämviktsläget till höger. Till vänster om D ligger vågdalen, alltså lägre: D rör sig **nedåt**.
+
+**Svar:** A rör sig nedåt, B står still, C rör sig uppåt och D rör sig nedåt.
+
+**b)** Varje punkt på strängen svänger upp och ned kring jämviktsläget som en fjäder. I vändlägena (vågberg och vågdal) är farten noll, och farten är störst när punkten passerar jämviktsläget. Ju närmare jämviktsläget en punkt är, desto större är alltså farten.
+
+Det syns också av metoden ovan: när vågen flyttar sig ett litet stycke ändras en punkts läge mest där strängen lutar brantast, och strängen lutar brantast vid jämviktsläget och flackare ju närmare ett vågberg eller en vågdal punkten ligger.
+
+- **C** ligger i jämviktsläget: störst fart.
+- **A** ligger ovanför jämviktsläget men en bra bit under vågberget. Strängen lutar fortfarande ganska brant där.
+- **D** ligger längre ut från jämviktsläget än A, nära botten av vågdalen. Strängen är nästan vågrät där, så D rör sig långsammare än A.
+- **B** ligger i vågberget och står still.
+
+**Svar:** C har störst fart, sedan A, sedan D, och B har farten noll.`,
+        },
+        {
+            level: 3,
+            question: `En högtalare sänder ut en ton med frekvensen $f$. Två mikrofoner, M₁ och M₂, står på en rak linje från högtalaren med avståndet $d$ mellan sig, enligt figuren. Ljudets utbredningshastighet är $v$.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 132" width="571" height="180" role="img" aria-label="En högtalare till vänster och två mikrofoner M1 och M2 på en rak linje till höger om den, med avståndet d mellan mikrofonerna." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="66" y1="60" x2="380" y2="60" stroke="#9aa0a6" stroke-width="1.1" stroke-dasharray="5 4"/><rect x="20" y="26" width="46" height="68" rx="4" fill="#d9d2c3" stroke="#0f1620" stroke-width="1.8"/><circle cx="43" cy="44" r="7" fill="#5b6573" stroke="#0f1620" stroke-width="1.2"/><circle cx="43" cy="72" r="13" fill="#5b6573" stroke="#0f1620" stroke-width="1.2"/><circle cx="43" cy="72" r="4.5" fill="#2c333d"/><path d="M 80 46 Q 88 60 80 74" fill="none" stroke="#2563c9" stroke-width="1.6"/><path d="M 92 40 Q 103 60 92 80" fill="none" stroke="#2563c9" stroke-width="1.6"/><path d="M 104 34 Q 118 60 104 86" fill="none" stroke="#2563c9" stroke-width="1.6"/><line x1="200" y1="68" x2="200" y2="102" stroke="#0f1620" stroke-width="2"/><line x1="188" y1="102" x2="212" y2="102" stroke="#0f1620" stroke-width="2.2" stroke-linecap="round"/><rect x="193" y="52" width="14" height="18" rx="7" fill="#5b6573" stroke="#0f1620" stroke-width="1.3"/><line x1="340" y1="68" x2="340" y2="102" stroke="#0f1620" stroke-width="2"/><line x1="328" y1="102" x2="352" y2="102" stroke="#0f1620" stroke-width="2.2" stroke-linecap="round"/><rect x="333" y="52" width="14" height="18" rx="7" fill="#5b6573" stroke="#0f1620" stroke-width="1.3"/><text x="200" y="42" text-anchor="middle" font-size="14" fill="#0f1620">M₁</text><text x="340" y="42" text-anchor="middle" font-size="14" fill="#0f1620">M₂</text><line x1="206" y1="118" x2="334" y2="118" stroke="#0f7d86" stroke-width="1.4" stroke-linecap="butt"/><polygon points="200,118 206,114.8 206,121.2" fill="#0f7d86"/><polygon points="340,118 334,114.8 334,121.2" fill="#0f7d86"/><text x="270" y="112" text-anchor="middle" font-size="15" fill="#0f1620"><tspan font-style="italic">d</tspan></text></svg>
+
+a) Visa att mikrofonerna tar emot ljudet i fas när $d$ är ett helt antal våglängder, och i motfas när $d$ är ett helt antal våglängder plus en halv. Skriv villkoren som samband mellan $d$, $v$ och $f$.<br>b) Avståndet är $d = 1{,}00\\ \\mathrm{m}$ och $v = 340\\ \\mathrm{m/s}$. Vid frekvensen $1\\,020\\ \\mathrm{Hz}$ är mikrofonerna i fas. Man höjer sakta frekvensen. Vid vilken frekvens är de i fas nästa gång?<br>c) Vilken är den lägsta frekvens där mikrofonerna tar emot ljudet i motfas?`,
+            answer: { value: 170, unit: 'Hz' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 1360, unit: 'Hz' },
+                { del: 'c', value: 170, unit: 'Hz' },
+            ],
+            solution: `**a)** Ljudvågen når M₂ en stund efter M₁. Under den tiden har vågen gått sträckan $d$, så fördröjningen är
+
+$$ t = \\frac{d}{v} \\qquad (1) $$
+
+M₂ gör alltså samma svängning som M₁ gjorde tiden $t$ tidigare. Svängningen upprepar sig efter varje periodtid $T$. Är fördröjningen ett helt antal periodtider, $t = n \\cdot T$, befinner sig M₂ i varje ögonblick i samma läge som M₁: de svänger **i fas**. Är fördröjningen ett helt antal periodtider plus en halv, är M₂ en halv svängning efter, alltså i helt motsatt läge: **motfas**.
+
+Vågen går en våglängd på en periodtid, $\\lambda = v \\cdot T$. Insättning av $t = n \\cdot T$ i (1), $t = \\dfrac{d}{v}$, ger
+
+$$ d = n \\cdot v \\cdot T = n \\cdot \\lambda $$
+
+och på samma sätt ger $t = \\left(n + \\dfrac{1}{2}\\right) \\cdot T$ villkoret $d = \\left(n + \\dfrac{1}{2}\\right) \\cdot \\lambda$. Med $\\lambda = \\dfrac{v}{f}$ blir villkoren
+
+$$ \\text{i fas:}\\quad d = n \\cdot \\frac{v}{f} \\quad\\Leftrightarrow\\quad f = n \\cdot \\frac{v}{d} \\qquad (2) $$
+
+$$ \\text{motfas:}\\quad d = \\left(n + \\frac{1}{2}\\right) \\cdot \\frac{v}{f} \\quad\\Leftrightarrow\\quad f = \\left(n + \\frac{1}{2}\\right) \\cdot \\frac{v}{d} \\qquad (3) $$
+
+där $n$ är ett heltal.
+
+**Svar:** I fas när $f = n \\cdot \\dfrac{v}{d}$ och i motfas när $f = \\left(n + \\dfrac{1}{2}\\right) \\cdot \\dfrac{v}{d}$, där $n$ är ett heltal.
+
+**b)** Enligt (2), $f = n \\cdot \\dfrac{v}{d}$, är frekvenserna för fas multipler av
+
+$$ \\frac{v}{d} = \\frac{340}{1{,}00} = 340\\ \\mathrm{Hz} $$
+
+Frekvensen $1\\,020\\ \\mathrm{Hz}$ motsvarar
+
+$$ n = \\frac{1\\,020}{340} = 3 $$
+
+alltså tre våglängder mellan mikrofonerna. Nästa frekvens med fas är $n = 4$:
+
+$$ f = 4 \\cdot 340 = 1\\,360\\ \\mathrm{Hz} $$
+
+Mellan dem, vid $n = 3{,}5$, passerar mikrofonerna motfas.
+
+**Svar:** Nästa gång de är i fas är vid frekvensen $1\\,360\\ \\mathrm{Hz}$.
+
+**c)** Enligt (3), $f = \\left(n + \\dfrac{1}{2}\\right) \\cdot \\dfrac{v}{d}$, ger det minsta heltalet $n = 0$ den lägsta frekvensen. Då är avståndet $d$ en halv våglängd:
+
+$$ f = 0{,}5 \\cdot 340 = 170\\ \\mathrm{Hz} $$
+
+Kontroll: vid $170\\ \\mathrm{Hz}$ är våglängden $\\dfrac{340}{170} = 2{,}0\\ \\mathrm{m}$, och $1{,}00\\ \\mathrm{m}$ är mycket riktigt en halv våglängd.
+
+**Svar:** Den lägsta frekvensen med motfas är $170\\ \\mathrm{Hz}$.`,
+        },
+        {
+            level: 3,
+            question: `En tunn sträng går från en vågmaskin, längs ett bord och över ett lätt hjul i bordskanten. I strängens ände hänger en vikt med massan $m$. Vågmaskinen svänger med frekvensen $40\\ \\mathrm{Hz}$ och skickar en våg längs strängen. En bit skumplast före hjulet dämpar vågen, så att den inte studsar tillbaka. Eleverna byter vikt och mäter våglängden varje gång.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 190" width="616" height="254" role="img" aria-label="En vågmaskin på ett bord skickar en våg längs en sträng. Strängen går genom en dämpare av skumplast och över ett hjul i bordskanten, och i änden hänger en vikt med massan m." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif">${(() => {
+    let d = 'M 86 84';
+    for (let x = 88; x <= 336; x += 2) d += ' L ' + x + ' ' + (84 - 7 * Math.sin(2 * Math.PI * (x - 86) / 62)).toFixed(1);
+    return '<rect x="30" y="110" width="352" height="12" fill="#c9a77c" stroke="#0f1620" stroke-width="1.4"/>' +
+        '<rect x="40" y="122" width="10" height="58" fill="#b08d62" stroke="#0f1620" stroke-width="1.2"/>' +
+        '<rect x="356" y="122" width="10" height="58" fill="#b08d62" stroke="#0f1620" stroke-width="1.2"/>' +
+        '<rect x="34" y="72" width="42" height="38" rx="4" fill="#5b6573" stroke="#0f1620" stroke-width="1.5"/>' +
+        '<circle cx="55" cy="91" r="6" fill="#2c333d"/>' +
+        '<rect x="76" y="80" width="10" height="8" fill="#8a929c" stroke="#0f1620" stroke-width="1.1"/>' +
+        '<line x1="336" y1="84" x2="392" y2="84" stroke="#a8735a" stroke-width="2"/>' +
+        '<path d="' + d + '" fill="none" stroke="#a8735a" stroke-width="2" stroke-linejoin="round"/>' +
+        '<rect x="334" y="74" width="20" height="20" rx="3" fill="#f0d98a" stroke="#0f1620" stroke-width="1.2"/>' +
+        '<line x1="382" y1="110" x2="392" y2="96" stroke="#0f1620" stroke-width="2"/>' +
+        '<path d="M 392 84 A 12 12 0 0 1 404 96" fill="none" stroke="#a8735a" stroke-width="2"/>' +
+        '<circle cx="392" cy="96" r="12" fill="none" stroke="#0f1620" stroke-width="1.6"/>' +
+        '<circle cx="392" cy="96" r="2.5" fill="#0f1620"/>' +
+        '<line x1="404" y1="96" x2="404" y2="140" stroke="#a8735a" stroke-width="2"/>' +
+        '<rect x="393" y="140" width="22" height="28" rx="2" fill="#7d8590" stroke="#0f1620" stroke-width="1.4"/>' +
+        '<text x="422" y="159" font-size="14" fill="#0f1620"><tspan font-style="italic">m</tspan></text>' +
+        '<text x="55" y="62" text-anchor="middle" font-size="13" fill="#0f1620">vågmaskin</text>' +
+        '<text x="344" y="66" text-anchor="middle" font-size="13" fill="#0f1620">skumplast</text>';
+})()}</svg>
+
+| Massa $m$ (g) | 100 | 200 | 300 | 400 | 500 |
+|---|---|---|---|---|---|
+| Våglängd $\\lambda$ (m) | 0,55 | 0,79 | 0,95 | 1,11 | 1,24 |
+
+a) En elev menar att våglängden är proportionell mot viktens massa. Visa med mätvärdena att det inte stämmer.<br>b) Utbredningshastigheten i en spänd sträng ges av modellen
+
+$$ v = \\sqrt{\\frac{F_\\mathrm{S}}{\\mu}} $$
+
+där $F_\\mathrm{S}$ är spännkraften i strängen och $\\mu$ är strängens massa per meter. Visa att modellen innebär att $\\lambda^2$ är proportionell mot $m$, och pröva om mätvärdena stämmer med modellen.<br>c) Bestäm ett värde på strängens massa per meter ur mätningarna. Svara i g/m.`,
+            answer: { value: 2.0, unit: 'g/m' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+                { del: 'c', value: 2.0, unit: 'g/m' },
+            ],
+            solution: `**a)** Om $\\lambda$ vore proportionell mot $m$ skulle kvoten $\\dfrac{\\lambda}{m}$ vara densamma i alla mätningar, och dubbla massan skulle ge dubbla våglängden. Kvoterna blir
+
+| $m$ (kg) | $\\lambda$ (m) | $\\dfrac{\\lambda}{m}$ (m/kg) |
+|---|---|---|
+| 0,100 | 0,55 | 5,5 |
+| 0,200 | 0,79 | 4,0 |
+| 0,300 | 0,95 | 3,2 |
+| 0,400 | 1,11 | 2,8 |
+| 0,500 | 1,24 | 2,5 |
+
+Kvoten minskar hela tiden. När massan fördubblas från $100\\ \\mathrm{g}$ till $200\\ \\mathrm{g}$ ökar våglängden bara från $0{,}55\\ \\mathrm{m}$ till $0{,}79\\ \\mathrm{m}$, inte till $1{,}10\\ \\mathrm{m}$.
+
+**Svar:** Kvoten $\\dfrac{\\lambda}{m}$ är inte konstant utan minskar från $5{,}5$ till $2{,}5\\ \\mathrm{m/kg}$, så våglängden är inte proportionell mot massan.
+
+**b)** Vikten hänger still, så krafterna på den tar ut varandra. Hjulet är lätt och antas friktionsfritt, så spännkraften i strängen är lika stor som viktens tyngd:
+
+$$ F_\\mathrm{S} = m \\cdot g \\qquad (1) $$
+
+Vågens utbredningshastighet är också
+
+$$ v = f \\cdot \\lambda \\qquad (2) $$
+
+Utbredningshastigheten i (2), $v = f \\cdot \\lambda$, är samma som i modellen. Med (1), $F_\\mathrm{S} = m \\cdot g$, insatt i modellen ger det
+
+$$ f \\cdot \\lambda = \\sqrt{\\frac{m \\cdot g}{\\mu}} $$
+
+Vi kvadrerar båda led:
+
+$$ f^2 \\cdot \\lambda^2 = \\frac{m \\cdot g}{\\mu} $$
+
+Vi dividerar båda led med $f^2$:
+
+$$ \\lambda^2 = \\frac{g}{\\mu \\cdot f^2} \\cdot m \\qquad (3) $$
+
+Faktorn $\\dfrac{g}{\\mu \\cdot f^2}$ är densamma i alla mätningarna, eftersom samma sträng och samma frekvens används. Enligt modellen är alltså $\\lambda^2$ proportionell mot $m$, och kvoten $\\dfrac{\\lambda^2}{m}$ ska vara konstant. Vi prövar:
+
+| $m$ (kg) | $\\lambda^2$ ($\\mathrm{m^2}$) | $\\dfrac{\\lambda^2}{m}$ ($\\mathrm{m^2/kg}$) |
+|---|---|---|
+| 0,100 | 0,3025 | 3,03 |
+| 0,200 | 0,6241 | 3,12 |
+| 0,300 | 0,9025 | 3,01 |
+| 0,400 | 1,2321 | 3,08 |
+| 0,500 | 1,5376 | 3,08 |
+
+Kvoterna skiljer sig bara med några procent, vilket är rimligt när våglängden bara är mätt med två värdesiffror. I ett diagram ligger punkterna nära en rät linje genom origo:
+
+${(() => {
+    const m = [0.1, 0.2, 0.3, 0.4, 0.5], L = [0.55, 0.79, 0.95, 1.11, 1.24], k = 3.06;
+    const prick = (x, y) => ({ points: [[x, y], [x + 0.0005, y]], color: '#0f1620', width: 8 });
+    return makeDiagram({
+        xMin: 0, xMax: 0.6, yMin: 0, yMax: 2.0,
+        xTicks: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6],
+        yTicks: [0, 0.4, 0.8, 1.2, 1.6, 2.0],
+        paths: [{ points: [[0, 0], [0.6, 0.6 * k]], color: '#2563c9', width: 2 }]
+            .concat(m.map((x, i) => prick(x, L[i] * L[i]))),
+        xLabel: '<tspan font-style="italic">m</tspan> (kg)',
+        yLabel: '<tspan font-style="italic">λ</tspan><tspan baseline-shift="super" font-size="10">2</tspan> (m<tspan baseline-shift="super" font-size="10">2</tspan>)'
+    });
+})()}
+
+**Svar:** Modellen ger $\\lambda^2 = \\dfrac{g}{\\mu \\cdot f^2} \\cdot m$, alltså är $\\lambda^2$ proportionell mot $m$. Mätvärdena stämmer med modellen, eftersom $\\dfrac{\\lambda^2}{m}$ är nästan konstant, cirka $3{,}1\\ \\mathrm{m^2/kg}$.
+
+**c)** Proportionalitetskonstanten i (3) är medelvärdet av kvoterna i tabellen:
+
+$$ \\frac{g}{\\mu \\cdot f^2} = \\frac{3{,}025 + 3{,}1205 + 3{,}0083 + 3{,}0803 + 3{,}0752}{5} = 3{,}0619\\ \\mathrm{m^2/kg} $$
+
+Vi löser ut $\\mu$:
+
+$$ \\frac{g}{\\mu \\cdot f^2} = 3{,}0619 \\quad\\Leftrightarrow\\quad \\mu = \\frac{g}{3{,}0619 \\cdot f^2} $$
+
+$$
+\\left[ \\begin{array}{l}
+g = 9{,}82\\ \\mathrm{m/s^2} \\\\
+f = 40\\ \\mathrm{Hz}
+\\end{array} \\right]
+$$
+
+$$ \\mu = \\frac{9{,}82}{3{,}0619 \\cdot 40^2} = 0{,}0020045\\ \\mathrm{kg/m} \\approx 2{,}0\\ \\mathrm{g/m} $$
+
+Rimligt: en meter av en tunn sträng väger några gram.
+
+**Svar:** Strängens massa per meter är ungefär $2{,}0\\ \\mathrm{g/m}$.`,
         },
     ],
 
@@ -65230,12 +69351,12 @@ $$ d = \\frac{12 \\cdot 3\\,400 \\cdot 5\\,800}{5\\,800 - 3\\,400} = \\frac{2{,}
             question: `Ett vågberg rör sig på ett snöre mot en **fast ände** (snöret är fast fäst i en vägg). Vad händer med vågen när den reflekteras?`,
             choices: [
                 'Ett vågberg studsar tillbaka i samma form, ej omvänt.',
-                'En vågdal studsar tillbaka — vågen vänds upp och ner.',
+                'En vågdal studsar tillbaka, vågen vänds upp och ner.',
                 'Vågen försvinner helt vid väggen.',
                 'Vågen passerar igenom väggen oförändrad.',
             ],
             correct: 1,
-            solution: `Vid reflexion mot en **fast ände** vänds vågen upp och ner — ett vågberg blir en vågdal och vice versa. Detta beror på att den fasta änden inte kan röra sig: när vågberget anländer drar det änden uppåt, men eftersom änden inte kan röra sig måste det uppstå en motverkande kraft som genererar en vågdal som studsar tillbaka.
+            solution: `Vid reflexion mot en **fast ände** vänds vågen upp och ner: ett vågberg blir en vågdal och vice versa. Detta beror på att den fasta änden inte kan röra sig: när vågberget anländer drar det änden uppåt, men eftersom änden inte kan röra sig måste det uppstå en motverkande kraft som genererar en vågdal som studsar tillbaka.
 
 **Generell slutsats:** Fast ände → omvänd reflexion. Lös ände → rättvänd reflexion.`,
         },
@@ -65244,12 +69365,12 @@ $$ d = \\frac{12 \\cdot 3\\,400 \\cdot 5\\,800}{5\\,800 - 3\\,400} = \\frac{2{,}
             question: `Ett vågberg rör sig mot en **lös ände** (snörets ände kan glida fritt). Vad händer med vågen när den reflekteras?`,
             choices: [
                 'Ett vågberg studsar tillbaka i samma form (rättvänt).',
-                'En vågdal studsar tillbaka — vågen vänds upp och ner.',
+                'En vågdal studsar tillbaka, vågen vänds upp och ner.',
                 'Vågen försvinner helt vid den lösa änden.',
                 'Vågen passerar igenom utan att reflekteras.',
             ],
             correct: 0,
-            solution: `Vid reflexion mot en **lös ände** behåller vågen sin form — ett vågberg studsar tillbaka som ett vågberg. Den lösa änden kan följa med vågens rörelse, så det uppstår ingen "motverkande" våg som vänder vågen.
+            solution: `Vid reflexion mot en **lös ände** behåller vågen sin form: ett vågberg studsar tillbaka som ett vågberg. Den lösa änden kan följa med vågens rörelse, så det uppstår ingen "motverkande" våg som vänder vågen.
 
 **Generell slutsats:** Lös ände → rättvänd. Fast ände → omvänd.`,
         },
@@ -65263,30 +69384,30 @@ $$ d = \\frac{12 \\cdot 3\\,400 \\cdot 5\\,800}{5\\,800 - 3\\,400} = \\frac{2{,}
                 'Pulserna multiplicerar varandras höjd där de möts.',
             ],
             correct: 2,
-            solution: `Superpositionsprincipen säger att två pulser som möts inte stör varandra — strängens läge under mötet är *summan* av elongationerna i varje punkt. Efter att pulserna passerat varandra fortsätter de oförändrade i sina ursprungliga riktningar och former.
+            solution: `Superpositionsprincipen säger att två pulser som möts inte stör varandra: strängens läge under mötet är *summan* av elongationerna i varje punkt. Efter att pulserna passerat varandra fortsätter de oförändrade i sina ursprungliga riktningar och former.
 
-**Generell slutsats:** Vid mötet kan pulserna förstärka varandra (om båda är vågberg eller båda vågdalar) eller delvis ta ut varandra (vågberg + vågdal). Det är hela grunden för **interferens** — som vi möter i 2.14.`,
+**Generell slutsats:** Vid mötet kan pulserna förstärka varandra (om båda är vågberg eller båda vågdalar) eller delvis ta ut varandra (vågberg + vågdal). Det är hela grunden för **interferens**, som vi möter i 2.14.`,
         },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
-            level: 2,
+            level: 1,
             question: `Två triangulära pulser möts på en sträng. Båda har formen av en likbent triangel med höjden $5{,}0\\ \\mathrm{cm}$ och samma bredd. Den ena är ett **vågberg**, den andra en **vågdal**. Vad är strängens läge när pulserna **exakt överlappar** varandra?`,
             choices: [
                 'En triangelformad puls som är hälften så hög.',
                 'En vågdal med dubbelt djup ($-10\\ \\mathrm{cm}$).',
                 'Ett vågberg med dubbel höjd ($10\\ \\mathrm{cm}$).',
-                'Helt platt (strängens läge är $0$ överallt) — pulserna tar ut varandra fullständigt.',
+                'Helt platt (strängens läge är $0$ överallt), eftersom pulserna tar ut varandra fullständigt.',
             ],
             correct: 3,
-            solution: `Enligt superpositionsprincipen är strängens läge **summan** av elongationerna i varje punkt. När vågberget ($+5{,}0\\ \\mathrm{cm}$) och vågdalen ($-5{,}0\\ \\mathrm{cm}$) är exakt på samma plats blir summan $0$ — strängen är helt platt i det ögonblicket.
+            solution: `Enligt superpositionsprincipen är strängens läge **summan** av elongationerna i varje punkt. När vågberget ($+5{,}0\\ \\mathrm{cm}$) och vågdalen ($-5{,}0\\ \\mathrm{cm}$) är exakt på samma plats blir summan $0$, och strängen är helt platt i det ögonblicket.
 
-Detta är **destruktiv interferens** i sin renaste form. Efter ögonblicket fortsätter dock båda pulser oförändrade — strängen "kommer ihåg" att det fanns två motverkande pulser.
+Detta är **destruktiv interferens** i sin renaste form. Efter ögonblicket fortsätter dock båda pulser oförändrade. Strängen "kommer ihåg" att det fanns två motverkande pulser.
 
 **Generell slutsats:** Två pulser som helt tar ut varandra ser ut som att de "försvinner" i ett ögonblick, men de finns kvar och dyker upp igen på andra sidan. Pulser passerar **genom** varandra utan att förstöras.`,
         },
         {
-            level: 2,
+            level: 1,
             question: `En vågpuls rör sig från ett **tätt medium** (en tjock fjäder) in i ett **tunnare medium** (en lätt fjäder) som är fastsatta. Vad händer med pulsen vid övergången?`,
             choices: [
                 'Pulsen transmitteras förlängd in i det tunnare mediet, och en rättvänd puls reflekteras tillbaka i det tätare mediet.',
@@ -65300,29 +69421,660 @@ Detta är **destruktiv interferens** i sin renaste form. Efter ögonblicket fort
 - den transmitterade pulsen blir **förlängd** (våglängden ökar i det tunnare mediet)
 - den reflekterade pulsen är **rättvänd** (samma orientering som den infallande)
 
-Det är som om det tunnare mediet beter sig som en "lös ände" från det tätare mediets perspektiv — det erbjuder mindre motstånd.
+Det är som om det tunnare mediet beter sig som en "lös ände" från det tätare mediets perspektiv: det erbjuder mindre motstånd.
 
-**Generell slutsats:** Det motsatta fallet — tunnare till tätare — ger förkortad transmission och **omvänd** reflexion (likt en fast ände). Båda fenomen sker samtidigt; pulsen splittras i en transmitterad och en reflekterad del.`,
+**Generell slutsats:** Det motsatta fallet, tunnare till tätare, ger förkortad transmission och **omvänd** reflexion (likt en fast ände). Båda fenomen sker samtidigt; pulsen splittras i en transmitterad och en reflekterad del.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
-            level: 3,
+            level: 2,
             question: `Två likadana triangulära pulser rör sig mot varandra på ett snöre med farten $2{,}0\\ \\mathrm{m/s}$ vardera. Båda har höjden $8{,}0\\ \\mathrm{cm}$ och en bas på $0{,}40\\ \\mathrm{m}$, men den ena är ett **vågberg** och den andra en **vågdal**. Vid tiden $t = 0$ är pulsernas centrum $1{,}2\\ \\mathrm{m}$ från varandra. Vid vilken tidpunkt är hela snöret **helt platt** (pulserna har tagit ut varandra fullständigt)?`,
             answer: { value: 0.30, unit: 's' },
-            solution: `**Insikten är att snöret är helt platt precis när pulsernas centrum sammanfaller** — då, och endast då, ligger varje punkt i vågberget exakt ovanpå motsvarande punkt i vågdalen, och summan är $0$ överallt.
+            solution: `**Insikten är att snöret är helt platt precis när pulsernas centrum sammanfaller**. Då, och endast då, ligger varje punkt i vågberget exakt ovanpå motsvarande punkt i vågdalen, och summan är $0$ överallt.
 
-**Steg 1 — relativ fart.** Båda pulser rör sig mot varandra med farten $2{,}0\\ \\mathrm{m/s}$. Den **relativa farten** är summan:
+**Steg 1: relativ fart.** Båda pulser rör sig mot varandra med farten $2{,}0\\ \\mathrm{m/s}$. Den **relativa farten** är summan:
 
 $$ v_\\text{rel} = v_1 + v_2 = 2{,}0 + 2{,}0 = 4{,}0\\ \\mathrm{m/s} $$
 
-**Steg 2 — tid för centrum att mötas.** Avståndet mellan centrum är $d = 1{,}2\\ \\mathrm{m}$, och det "konsumeras" med relativa farten:
+**Steg 2: tid för centrum att mötas.** Avståndet mellan centrum är $d = 1{,}2\\ \\mathrm{m}$, och det "konsumeras" med relativa farten:
 
 $$ t = \\frac{d}{v_\\text{rel}} = \\frac{1{,}2}{4{,}0} = 0{,}30\\ \\mathrm{s} $$
 
 **Svar:** Snöret är helt platt vid $t = 0{,}30\\ \\mathrm{s}$.
 
-**Generell slutsats:** Vid det ögonblicket har båda pulser inte försvunnit — de finns "gömda" i strängens hastighetsfördelning (varje punkt rör sig fortfarande). Direkt därefter dyker pulserna upp igen på respektive andra sida och fortsätter oförändrade. Detta är en av de mest överraskande konsekvenserna av superpositionsprincipen — pulserna "går igenom" varandra utan att förstöras, även när snöret är helt platt mitt under mötet.`,
+**Generell slutsats:** Vid det ögonblicket har båda pulser inte försvunnit. De finns "gömda" i strängens hastighetsfördelning (varje punkt rör sig fortfarande). Direkt därefter dyker pulserna upp igen på respektive andra sida och fortsätter oförändrade. Detta är en av de mest överraskande konsekvenserna av superpositionsprincipen: pulserna "går igenom" varandra utan att förstöras, även när snöret är helt platt mitt under mötet.`,
+        },
+        {
+            level: 1,
+            question: `Ett tunt snöre är hopknutet med ett tjockt och tungt rep. En puls skickas längs det tunna snöret mot knuten. Vad händer vid knuten?`,
+            choices: [
+                'Pulsen går över i repet förlängd, och en rättvänd puls studsar tillbaka.',
+                'Hela pulsen studsar tillbaka rättvänd, och ingenting går över i repet.',
+                'Pulsen går över i repet förkortad, och en omvänd puls studsar tillbaka.',
+                'Pulsen går över i repet oförändrad, och ingenting studsar tillbaka.',
+            ],
+            correct: 2,
+            solution: `Pulsen går från ett **tunnare** medium (snöret) till ett **tätare** medium (repet). Vid en sådan övergång sker både transmission och reflexion:
+
+- den transmitterade pulsen blir **förkortad**, eftersom pulsen rör sig långsammare i det tunga repet
+- den reflekterade pulsen blir **omvänd**, ett vågberg kommer tillbaka som en vågdal.
+
+Det tunga repet är svårt att sätta i rörelse, så för snöret beter sig knuten nästan som en fast ände. Därför vänds den reflekterade pulsen.
+
+**Svar:** Pulsen går över i repet förkortad, och en omvänd puls studsar tillbaka.`,
+        },
+        {
+            level: 1,
+            question: `Figuren visar två pulser på ett snöre vid tiden $t = 0$. En ruta motsvarar $1{,}0\\ \\mathrm{cm}$ i båda led. Puls A är ett vågberg och puls B en vågdal, och de rör sig mot varandra med farten $2{,}0\\ \\mathrm{cm/s}$ vardera.<br>a) Hur stor är snörets elongation där pulserna ligger exakt ovanpå varandra?<br>b) Vid vilken tidpunkt ligger pulserna exakt ovanpå varandra?
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 374 186" width="508" height="252" role="img" aria-label="Rutat papper. Puls A är ett rektangulärt vågberg tre rutor högt och två rutor brett som rör sig åt höger. Puls B är en rektangulär vågdal en ruta djup och två rutor bred som rör sig åt vänster." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><g stroke="#cfdceb" stroke-width="1"><line x1="18" y1="16" x2="18" y2="172"/><line x1="44" y1="16" x2="44" y2="172"/><line x1="70" y1="16" x2="70" y2="172"/><line x1="96" y1="16" x2="96" y2="172"/><line x1="122" y1="16" x2="122" y2="172"/><line x1="148" y1="16" x2="148" y2="172"/><line x1="174" y1="16" x2="174" y2="172"/><line x1="200" y1="16" x2="200" y2="172"/><line x1="226" y1="16" x2="226" y2="172"/><line x1="252" y1="16" x2="252" y2="172"/><line x1="278" y1="16" x2="278" y2="172"/><line x1="304" y1="16" x2="304" y2="172"/><line x1="330" y1="16" x2="330" y2="172"/><line x1="356" y1="16" x2="356" y2="172"/><line x1="18" y1="172" x2="356" y2="172"/><line x1="18" y1="146" x2="356" y2="146"/><line x1="18" y1="120" x2="356" y2="120"/><line x1="18" y1="94" x2="356" y2="94"/><line x1="18" y1="68" x2="356" y2="68"/><line x1="18" y1="42" x2="356" y2="42"/><line x1="18" y1="16" x2="356" y2="16"/></g><line x1="18" y1="120" x2="356" y2="120" stroke="#9aa3ad" stroke-width="1" stroke-dasharray="4 4"/><polyline points="18,120 44,120 44,42 96,42 96,120 252,120 252,146 304,146 304,120 356,120" fill="none" stroke="#0f1620" stroke-width="2.4" stroke-linejoin="round"/><line x1="44" y1="26.4" x2="87" y2="26.4" stroke="#2563c9" stroke-width="2.2" stroke-linecap="butt"/><polygon points="87,31.8 96,26.4 87,21" fill="#2563c9"/><text x="70" y="19.4" text-anchor="middle" font-size="14" fill="#2563c9"><tspan font-style="italic">v</tspan></text><line x1="304" y1="101.8" x2="261" y2="101.8" stroke="#2563c9" stroke-width="2.2" stroke-linecap="butt"/><polygon points="261,96.4 252,101.8 261,107.2" fill="#2563c9"/><text x="278" y="94.8" text-anchor="middle" font-size="14" fill="#2563c9"><tspan font-style="italic">v</tspan></text><text x="70" y="86.2" text-anchor="middle" font-size="14" fill="#0f1620">A</text><text x="278" y="164.2" text-anchor="middle" font-size="14" fill="#0f1620">B</text></svg>`,
+            answer: { value: 2.0, unit: 'cm' },
+            delsvar: [
+                { del: 'a', value: 2.0, unit: 'cm' },
+                { del: 'b', value: 2.0, unit: 's' },
+            ],
+            solution: `**a)** Enligt superpositionsprincipen är snörets elongation i varje punkt summan av de två pulsernas elongationer. Vågberget A har elongationen $+3{,}0\\ \\mathrm{cm}$ och vågdalen B har $-1{,}0\\ \\mathrm{cm}$. Pulserna är lika breda, så när de ligger exakt ovanpå varandra gäller i hela överlappet
+
+$$ y = y_A + y_B = 3{,}0 + (-1{,}0) = 2{,}0\\ \\mathrm{cm} $$
+
+**Svar:** Elongationen är $2{,}0\\ \\mathrm{cm}$.
+
+**b)** Pulsernas mittpunkter ligger $8$ rutor isär, alltså $d = 8{,}0\\ \\mathrm{cm}$. Båda pulserna rör sig mot varandra, så avståndet minskar med summan av farterna:
+
+$$ v_\\text{rel} = 2{,}0 + 2{,}0 = 4{,}0\\ \\mathrm{cm/s} $$
+
+$$ t = \\frac{d}{v_\\text{rel}} = \\frac{8{,}0}{4{,}0} = 2{,}0\\ \\mathrm{s} $$
+
+**Svar:** Vid tiden $t = 2{,}0\\ \\mathrm{s}$`,
+        },
+        {
+            level: 1,
+            question: `Ett $6{,}0\\ \\mathrm{m}$ långt rep är fastknutet i en vägg. Du rycker till i repets andra ände så att ett vågberg rör sig mot väggen med farten $4{,}0\\ \\mathrm{m/s}$.<br>a) Hur lång tid dröjer det innan pulsen är tillbaka i din hand?<br>b) Är pulsen som kommer tillbaka ett vågberg eller en vågdal? Motivera.`,
+            answer: { value: 3.0, unit: 's' },
+            delsvar: [
+                { del: 'a', value: 3.0, unit: 's' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Pulsen ska gå fram till väggen och tillbaka igen, alltså sträckan $s = 2 \\cdot 6{,}0 = 12\\ \\mathrm{m}$. Farten är konstant:
+
+$$ v = \\frac{s}{t} \\quad\\Leftrightarrow\\quad t = \\frac{s}{v} $$
+
+$$
+\\left[ \\begin{array}{l}
+s = 12\\ \\mathrm{m} \\\\
+v = 4{,}0\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$ t = \\frac{12}{4{,}0} = 3{,}0\\ \\mathrm{s} $$
+
+**Svar:** Det dröjer $3{,}0\\ \\mathrm{s}$.
+
+**b)** Repet är fastknutet i väggen, så det är en **fast ände**. Vid reflexion mot en fast ände kommer ett vågberg tillbaka som en vågdal.
+
+**Svar:** Pulsen kommer tillbaka som en vågdal, eftersom den reflekteras mot en fast ände.`,
+        },
+        {
+            level: 1,
+            question: `En brusreducerande hörlur har en mikrofon som mäter ljudet utanför. I ett visst ögonblick är lufttrycket vid örat $0{,}20\\ \\mathrm{Pa}$ högre än normalt på grund av bullret. Vilken tryckändring ska hörlurens högtalare ge vid örat i samma ögonblick för att bullret ska tas bort?`,
+            choices: [
+                '$+0{,}20\\ \\mathrm{Pa}$',
+                '$-0{,}20\\ \\mathrm{Pa}$',
+                '$0\\ \\mathrm{Pa}$',
+                '$+0{,}40\\ \\mathrm{Pa}$',
+            ],
+            correct: 1,
+            solution: `Enligt superpositionsprincipen är den sammanlagda tryckändringen vid örat summan av bullrets och högtalarens tryckändringar. För att summan ska bli noll måste högtalaren ge en lika stor tryckändring åt motsatt håll:
+
+$$ \\Delta p_\\text{buller} + \\Delta p_\\text{hörlur} = 0 \\quad\\Leftrightarrow\\quad \\Delta p_\\text{hörlur} = -0{,}20\\ \\mathrm{Pa} $$
+
+Hörluren spelar alltså upp en omvänd kopia av bullret. Med $+0{,}20\\ \\mathrm{Pa}$ skulle bullret i stället bli dubbelt så starkt.
+
+**Svar:** $-0{,}20\\ \\mathrm{Pa}$`,
+        },
+        {
+            level: 2,
+            question: `En lång, tung spiralfjäder är hopkopplad med en lätt spiralfjäder. En puls som är $30\\ \\mathrm{cm}$ bred rör sig i den tunga fjädern med farten $1{,}5\\ \\mathrm{m/s}$ mot kopplingen. I den lätta fjädern är farten $4{,}5\\ \\mathrm{m/s}$.<br>a) Hur bred är den transmitterade pulsen i den lätta fjädern? Svara i cm.<br>b) Beskriv den reflekterade pulsen: hur bred är den, och är den rättvänd eller omvänd?`,
+            answer: { value: 90, unit: 'cm' },
+            delsvar: [
+                { del: 'a', value: 90, unit: 'cm' },
+                { del: 'b', value: 30, unit: 'cm', etikett: 'bredd' },
+            ],
+            solution: `**a)** Det tar en viss tid för hela pulsen att passera kopplingen, och under exakt den tiden skapas den transmitterade pulsen. Tiden är därför densamma på båda sidor om kopplingen, men pulsen rör sig snabbare i den lätta fjädern och hinner bli bredare.
+
+Tiden det tar för pulsen att passera kopplingen:
+
+$$
+\\left[ \\begin{array}{l}
+b_1 = 0{,}30\\ \\mathrm{m} \\\\
+v_1 = 1{,}5\\ \\mathrm{m/s} \\\\
+v_2 = 4{,}5\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$ \\Delta t = \\frac{b_1}{v_1} = \\frac{0{,}30}{1{,}5} = 0{,}20\\ \\mathrm{s} $$
+
+Under denna tid rör sig den transmitterade pulsens front sträckan
+
+$$ b_2 = v_2 \\cdot \\Delta t = 4{,}5 \\cdot 0{,}20 = 0{,}90\\ \\mathrm{m} $$
+
+Pulsen blir alltså tre gånger så bred, lika många gånger som farten ökar. Det stämmer med att en puls från ett tätare till ett tunnare medium transmitteras förlängd.
+
+**Svar:** Den transmitterade pulsen är $90\\ \\mathrm{cm}$ bred.
+
+**b)** Den reflekterade pulsen rör sig tillbaka i den tunga fjädern med samma fart som den infallande, $1{,}5\\ \\mathrm{m/s}$. Den skapas under samma tid $0{,}20\\ \\mathrm{s}$ och blir därför lika bred som den infallande pulsen:
+
+$$ b_\\text{r} = v_1 \\cdot \\Delta t = 1{,}5 \\cdot 0{,}20 = 0{,}30\\ \\mathrm{m} $$
+
+En puls från ett tätare till ett tunnare medium reflekteras rättvänd, eftersom den lätta fjädern beter sig ungefär som en lös ände för den tunga.
+
+**Svar:** Den reflekterade pulsen är $30\\ \\mathrm{cm}$ bred och rättvänd.`,
+        },
+        {
+            level: 2,
+            question: `Figuren visar ett snöre vid tiden $t = 0$. En ruta motsvarar $1{,}0\\ \\mathrm{cm}$ i båda led, och talen under rutnätet anger läget i cm. Puls A rör sig åt höger och puls B åt vänster, båda med farten $1{,}0\\ \\mathrm{cm/s}$. Bestäm snörets elongation i punkten P vid tiden<br>a)&nbsp;$t = 3{,}0\\ \\mathrm{s}$&emsp;&emsp;b)&nbsp;$t = 4{,}0\\ \\mathrm{s}$<br>Svara i cm.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 202" width="543" height="274" role="img" aria-label="Rutat papper med talen 0 till 14 under. Puls A är ett triangulärt vågberg från 0 till 6 med toppen 3 rutor hög vid 3. Puls B är en rektangulär vågdal en ruta djup mellan 9 och 12. Punkten P ligger vid 7." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><g stroke="#cfdceb" stroke-width="1"><line x1="18" y1="16" x2="18" y2="172"/><line x1="44" y1="16" x2="44" y2="172"/><line x1="70" y1="16" x2="70" y2="172"/><line x1="96" y1="16" x2="96" y2="172"/><line x1="122" y1="16" x2="122" y2="172"/><line x1="148" y1="16" x2="148" y2="172"/><line x1="174" y1="16" x2="174" y2="172"/><line x1="200" y1="16" x2="200" y2="172"/><line x1="226" y1="16" x2="226" y2="172"/><line x1="252" y1="16" x2="252" y2="172"/><line x1="278" y1="16" x2="278" y2="172"/><line x1="304" y1="16" x2="304" y2="172"/><line x1="330" y1="16" x2="330" y2="172"/><line x1="356" y1="16" x2="356" y2="172"/><line x1="382" y1="16" x2="382" y2="172"/><line x1="18" y1="172" x2="382" y2="172"/><line x1="18" y1="146" x2="382" y2="146"/><line x1="18" y1="120" x2="382" y2="120"/><line x1="18" y1="94" x2="382" y2="94"/><line x1="18" y1="68" x2="382" y2="68"/><line x1="18" y1="42" x2="382" y2="42"/><line x1="18" y1="16" x2="382" y2="16"/></g><line x1="18" y1="120" x2="382" y2="120" stroke="#9aa3ad" stroke-width="1" stroke-dasharray="4 4"/><text x="18" y="190" text-anchor="middle" font-size="12" fill="#0f1620">0</text><text x="44" y="190" text-anchor="middle" font-size="12" fill="#0f1620">1</text><text x="70" y="190" text-anchor="middle" font-size="12" fill="#0f1620">2</text><text x="96" y="190" text-anchor="middle" font-size="12" fill="#0f1620">3</text><text x="122" y="190" text-anchor="middle" font-size="12" fill="#0f1620">4</text><text x="148" y="190" text-anchor="middle" font-size="12" fill="#0f1620">5</text><text x="174" y="190" text-anchor="middle" font-size="12" fill="#0f1620">6</text><text x="200" y="190" text-anchor="middle" font-size="12" fill="#0f1620">7</text><text x="226" y="190" text-anchor="middle" font-size="12" fill="#0f1620">8</text><text x="252" y="190" text-anchor="middle" font-size="12" fill="#0f1620">9</text><text x="278" y="190" text-anchor="middle" font-size="12" fill="#0f1620">10</text><text x="304" y="190" text-anchor="middle" font-size="12" fill="#0f1620">11</text><text x="330" y="190" text-anchor="middle" font-size="12" fill="#0f1620">12</text><text x="356" y="190" text-anchor="middle" font-size="12" fill="#0f1620">13</text><text x="382" y="190" text-anchor="middle" font-size="12" fill="#0f1620">14</text><line x1="200" y1="16" x2="200" y2="172" stroke="#c8324a" stroke-width="1.2" stroke-dasharray="3 3"/><text x="205" y="30" text-anchor="start" font-size="13" fill="#c8324a">P</text><polyline points="18,120 96,42 174,120 252,120 252,146 330,146 330,120 382,120" fill="none" stroke="#0f1620" stroke-width="2.4" stroke-linejoin="round"/><line x1="127.2" y1="31.6" x2="170.2" y2="31.6" stroke="#2563c9" stroke-width="2.2" stroke-linecap="butt"/><polygon points="170.2,37 179.2,31.6 170.2,26.2" fill="#2563c9"/><text x="153.2" y="24.6" text-anchor="middle" font-size="14" fill="#2563c9"><tspan font-style="italic">v</tspan></text><line x1="345.6" y1="99.2" x2="302.6" y2="99.2" stroke="#2563c9" stroke-width="2.2" stroke-linecap="butt"/><polygon points="302.6,93.8 293.6,99.2 302.6,104.6" fill="#2563c9"/><text x="319.6" y="92.2" text-anchor="middle" font-size="14" fill="#2563c9"><tspan font-style="italic">v</tspan></text><text x="59.6" y="62.8" text-anchor="middle" font-size="14" fill="#0f1620">A</text><text x="291" y="164.2" text-anchor="middle" font-size="14" fill="#0f1620">B</text></svg>`,
+            answer: { value: 2.0, unit: 'cm' },
+            delsvar: [
+                { del: 'a', value: 1.0, unit: 'cm' },
+                { del: 'b', value: 2.0, unit: 'cm' },
+            ],
+            solution: `Vi flyttar varje puls för sig och adderar sedan elongationerna i P (superpositionsprincipen). Punkten P ligger vid läget $7\\ \\mathrm{cm}$. På tiden $t$ flyttar sig varje puls sträckan $s = v \\cdot t$.
+
+Vid $t = 0$ sträcker sig A från $0$ till $6\\ \\mathrm{cm}$ med toppen $3\\ \\mathrm{cm}$ hög vid $3\\ \\mathrm{cm}$. Flankerna sjunker en ruta för varje ruta i sidled. B är en vågdal med djupet $1\\ \\mathrm{cm}$ mellan $9$ och $12\\ \\mathrm{cm}$.
+
+**a)** På $3{,}0\\ \\mathrm{s}$ flyttar sig varje puls $s = 1{,}0 \\cdot 3{,}0 = 3{,}0\\ \\mathrm{cm}$.
+
+- A sträcker sig från $3$ till $9\\ \\mathrm{cm}$ med toppen vid $6\\ \\mathrm{cm}$. P ligger en ruta till höger om toppen, så $y_A = 3 - 1 = 2\\ \\mathrm{cm}$.
+- B ligger mellan $6$ och $9\\ \\mathrm{cm}$, alltså över P: $y_B = -1\\ \\mathrm{cm}$.
+
+$$ y = y_A + y_B = 2 + (-1) = 1{,}0\\ \\mathrm{cm} $$
+
+**Svar:** Elongationen i P är $1{,}0\\ \\mathrm{cm}$.
+
+**b)** På $4{,}0\\ \\mathrm{s}$ flyttar sig varje puls $4{,}0\\ \\mathrm{cm}$.
+
+- A sträcker sig från $4$ till $10\\ \\mathrm{cm}$ med toppen vid $7\\ \\mathrm{cm}$, rakt i P: $y_A = 3\\ \\mathrm{cm}$.
+- B ligger mellan $5$ och $8\\ \\mathrm{cm}$, fortfarande över P: $y_B = -1\\ \\mathrm{cm}$.
+
+$$ y = y_A + y_B = 3 + (-1) = 2{,}0\\ \\mathrm{cm} $$
+
+Toppen på A når P i samma ögonblick som vågdalen ligger där, så P kommer inte upp till $3\\ \\mathrm{cm}$.
+
+**Svar:** Elongationen i P är $2{,}0\\ \\mathrm{cm}$.`,
+        },
+        {
+            level: 2,
+            question: `Ett vågberg rör sig längs ett snöre mot en vägg där snöret sitter fast. Under en kort stund ligger den infallande och den reflekterade pulsen delvis ovanpå varandra nära väggen. Förklara med hjälp av superpositionsprincipen varför snörets punkt precis vid väggen hela tiden har elongationen noll, och vad det säger om den reflekterade pulsens orientering.`,
+            solution: `Snöret sitter fast i väggen, så punkten vid väggen kan aldrig röra sig: dess elongation är noll i varje ögonblick.
+
+Under reflexionen finns två pulser på snöret samtidigt: den infallande och den reflekterade. Enligt superpositionsprincipen är elongationen i varje punkt summan av de båda pulsernas elongationer. Vid väggen gäller alltså i varje ögonblick
+
+$$ y_\\text{infallande} + y_\\text{reflekterad} = 0 \\quad\\Leftrightarrow\\quad y_\\text{reflekterad} = -y_\\text{infallande} $$
+
+När den infallande pulsen lyfter snöret vid väggen uppåt måste den reflekterade pulsen dra lika mycket nedåt. Den reflekterade pulsen har därför samma form men är **omvänd**: ett vågberg kommer tillbaka som en vågdal.
+
+**Svar:** Vid väggen måste summan av de två pulsernas elongationer vara noll i varje ögonblick, eftersom snöret inte kan röra sig där. Den reflekterade pulsen måste därför vara lika stor men omvänd, så ett vågberg reflekteras som en vågdal.`,
+        },
+        {
+            level: 2,
+            question: `Ett tunt snöre är $4{,}5\\ \\mathrm{m}$ långt och hopknutet med ett långt, tjockt rep. En puls skickas från handen. Pulsens fart är $6{,}0\\ \\mathrm{m/s}$ i snöret och $2{,}0\\ \\mathrm{m/s}$ i repet.<br>a) Hur lång tid efter att pulsen skickades kommer den reflekterade pulsen tillbaka till handen?<br>b) Hur långt in i repet har den transmitterade pulsen kommit i det ögonblicket?<br>c) Beskriv den reflekterade och den transmitterade pulsens orientering jämfört med den ursprungliga.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 170" width="664" height="205" role="img" aria-label="En hand skickar en puls längs ett tunt snöre som 4,5 m bort är hopknutet med ett långt tjockt rep." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><path d="M 16 69 q 18 -4 30 2 q 4 3 0 7 q -12 5 -30 2 z" fill="#e8c9a8" stroke="#0f1620" stroke-width="1.4" stroke-linejoin="round"/><path d="M 42 73 q 5 1 4 5" fill="none" stroke="#0f1620" stroke-width="1"/><polyline points="46,78 47,78 48,78 49,78 50,78 51,78 52,78 53,78 54,78 55,78 56,78 57,78 58,78 59,78 60,78 61,78 62,78 63,78 64,78 65,78 66,78 67,78 68,78 69,78 70,78 71,78 72,78 73,78 74,78 75,78 76,78 77,77.9 78,77.6 79,77.2 80,76.6 81,75.8 82,74.9 83,73.9 84,72.7 85,71.5 86,70.3 87,69 88,67.7 89,66.5 90,65.3 91,64.1 92,63.1 93,62.2 94,61.4 95,60.8 96,60.4 97,60.1 98,60 99,60.1 100,60.4 101,60.8 102,61.4 103,62.2 104,63.1 105,64.1 106,65.3 107,66.5 108,67.7 109,69 110,70.3 111,71.5 112,72.7 113,73.9 114,74.9 115,75.8 116,76.6 117,77.2 118,77.6 119,77.9 120,78 121,78 122,78 123,78 124,78 125,78 126,78 127,78 128,78 129,78 130,78 131,78 132,78 133,78 134,78 135,78 136,78 137,78 138,78 139,78 140,78 141,78 142,78 143,78 144,78 145,78 146,78 147,78 148,78 149,78 150,78 151,78 152,78 153,78 154,78 155,78 156,78 157,78 158,78 159,78 160,78 161,78 162,78 163,78 164,78 165,78 166,78 167,78 168,78 169,78 170,78 171,78 172,78 173,78 174,78 175,78 176,78 177,78 178,78 179,78 180,78 181,78 182,78 183,78 184,78 185,78 186,78 187,78 188,78 189,78 190,78 191,78 192,78 193,78 194,78 195,78 196,78 197,78 198,78 199,78 200,78 201,78 202,78 203,78 204,78 205,78 206,78 207,78 208,78 209,78 210,78 211,78 212,78 213,78 214,78 215,78 216,78 217,78 218,78 219,78 220,78 221,78 222,78 223,78 224,78 225,78 226,78 227,78 228,78 229,78 230,78 231,78 232,78 233,78 234,78 235,78 236,78 237,78 238,78 239,78 240,78 241,78 242,78 243,78 244,78 245,78 246,78 247,78 248,78 249,78 250,78 251,78 252,78 253,78 254,78 255,78 256,78 257,78 258,78 259,78 260,78 261,78 262,78 263,78 264,78 265,78 266,78 267,78 268,78 269,78 270,78 271,78 272,78 273,78 274,78 275,78 276,78 277,78 278,78 279,78 280,78 281,78 282,78 283,78 284,78 285,78 286,78 287,78 288,78 289,78 290,78 291,78 292,78 293,78 294,78 295,78 296,78 297,78 298,78 299,78 300,78" fill="none" stroke="#0f1620" stroke-width="1.6" stroke-linejoin="round"/><line x1="300" y1="78" x2="470" y2="78" stroke="#6b4a2b" stroke-width="6" stroke-linecap="butt"/><circle cx="300" cy="78" r="5" fill="#6b4a2b" stroke="#0f1620" stroke-width="1.2"/><line x1="470" y1="78" x2="500" y2="78" stroke="#6b4a2b" stroke-width="6" stroke-dasharray="6 5"/><line x1="82" y1="46" x2="119" y2="46" stroke="#2563c9" stroke-width="2.2" stroke-linecap="butt"/><polygon points="119,51.4 128,46 119,40.6" fill="#2563c9"/><text x="105" y="38" text-anchor="middle" font-size="14" fill="#2563c9"><tspan font-style="italic">v</tspan></text><text x="203" y="64" text-anchor="middle" font-size="13" fill="#0f1620">tunt snöre</text><text x="385" y="64" text-anchor="middle" font-size="13" fill="#0f1620">tjockt rep</text><text x="300" y="100" text-anchor="middle" font-size="13" fill="#0f1620">knut</text><g stroke="#5a616b" stroke-width="0.9" stroke-dasharray="3 3"><line x1="46" y1="90" x2="46" y2="136"/><line x1="300" y1="106" x2="300" y2="136"/></g><line x1="173" y1="130" x2="54" y2="130" stroke="#0f1620" stroke-width="1.3" stroke-linecap="butt"/><polygon points="54,125.2 46,130 54,134.8" fill="#0f1620"/><line x1="173" y1="130" x2="292" y2="130" stroke="#0f1620" stroke-width="1.3" stroke-linecap="butt"/><polygon points="292,134.8 300,130 292,125.2" fill="#0f1620"/><text x="173" y="124" text-anchor="middle" font-size="13" fill="#0f1620">4,5 m</text></svg>`,
+            answer: { value: 1.5, unit: 's' },
+            delsvar: [
+                { del: 'a', value: 1.5, unit: 's' },
+                { del: 'b', value: 1.5, unit: 'm' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Den reflekterade pulsen går hela vägen i snöret: fram till knuten och tillbaka, sträckan $s = 2 \\cdot 4{,}5 = 9{,}0\\ \\mathrm{m}$.
+
+$$
+\\left[ \\begin{array}{l}
+s = 9{,}0\\ \\mathrm{m} \\\\
+v_1 = 6{,}0\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$ t = \\frac{s}{v_1} = \\frac{9{,}0}{6{,}0} = 1{,}5\\ \\mathrm{s} $$
+
+**Svar:** Den reflekterade pulsen är tillbaka efter $1{,}5\\ \\mathrm{s}$.
+
+**b)** Pulsen når knuten efter
+
+$$ t_1 = \\frac{4{,}5}{6{,}0} = 0{,}75\\ \\mathrm{s} $$
+
+Därefter rör sig den transmitterade pulsen i repet under resten av tiden, $1{,}5 - 0{,}75 = 0{,}75\\ \\mathrm{s}$:
+
+$$ s_2 = v_2 \\cdot (t - t_1) = 2{,}0 \\cdot 0{,}75 = 1{,}5\\ \\mathrm{m} $$
+
+**Svar:** Den transmitterade pulsen har kommit $1{,}5\\ \\mathrm{m}$ in i repet.
+
+**c)** Pulsen går från ett tunnare medium (snöret) till ett tätare (repet). Då reflekteras den **omvänd** och transmitteras **förkortad**. Den transmitterade pulsen har samma orientering som den ursprungliga.
+
+**Svar:** Den reflekterade pulsen är omvänd, och den transmitterade pulsen är rättvänd men kortare.`,
+        },
+        {
+            level: 2,
+            question: `Ett vågberg med höjden $4{,}0\\ \\mathrm{cm}$ rör sig längs ett snöre mot en **lös ände**, där snöret sitter i en ring som glider fritt längs en lodrät stång. Hur högt rör sig ringen som mest när pulsen reflekteras?`,
+            choices: [
+                '$0\\ \\mathrm{cm}$',
+                '$2{,}0\\ \\mathrm{cm}$',
+                '$4{,}0\\ \\mathrm{cm}$',
+                '$8{,}0\\ \\mathrm{cm}$',
+            ],
+            correct: 3,
+            solution: `Vid en lös ände reflekteras ett vågberg som ett **vågberg**. Under reflexionen finns både den infallande och den reflekterade pulsen vid änden samtidigt, och enligt superpositionsprincipen är elongationen summan av dem.
+
+I det ögonblick då toppen just når änden lämnar den reflekterade pulsens topp samma punkt, så båda bidrar med sin fulla höjd:
+
+$$ y_\\text{max} = 4{,}0 + 4{,}0 = 8{,}0\\ \\mathrm{cm} $$
+
+En fast ände skulle i stället ge $0\\ \\mathrm{cm}$, eftersom den reflekterade pulsen då är omvänd och tar ut den infallande.
+
+**Svar:** $8{,}0\\ \\mathrm{cm}$`,
+        },
+        {
+            level: 3,
+            question: `En symmetrisk puls (ett vågberg) rör sig längs ett snöre mot en vägg där snöret sitter fast. Pulsens mittpunkt är avståndet $d$ från väggen, och pulsen rör sig med farten $v$. Pulsen är kortare än $d$.<br>a) Visa att snöret i ett visst ögonblick är helt rakt, och bestäm när det inträffar uttryckt i $d$ och $v$.<br>b) Beräkna tidpunkten när $d = 1{,}5\\ \\mathrm{m}$ och $v = 3{,}0\\ \\mathrm{m/s}$.<br>c) Blir snöret helt rakt i något ögonblick om pulsen i stället är osymmetrisk, till exempel brant fram och flack bak? Motivera.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 188" width="559" height="255" role="img" aria-label="En symmetrisk triangulär puls på ett snöre rör sig åt höger mot en vägg där snöret är fastsatt. Avståndet d mäts från pulsens mitt till väggen." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><g stroke="#cfdceb" stroke-width="1"><line x1="18" y1="16" x2="18" y2="172"/><line x1="44" y1="16" x2="44" y2="172"/><line x1="70" y1="16" x2="70" y2="172"/><line x1="96" y1="16" x2="96" y2="172"/><line x1="122" y1="16" x2="122" y2="172"/><line x1="148" y1="16" x2="148" y2="172"/><line x1="174" y1="16" x2="174" y2="172"/><line x1="200" y1="16" x2="200" y2="172"/><line x1="226" y1="16" x2="226" y2="172"/><line x1="252" y1="16" x2="252" y2="172"/><line x1="278" y1="16" x2="278" y2="172"/><line x1="304" y1="16" x2="304" y2="172"/><line x1="330" y1="16" x2="330" y2="172"/><line x1="356" y1="16" x2="356" y2="172"/><line x1="382" y1="16" x2="382" y2="172"/><line x1="18" y1="172" x2="382" y2="172"/><line x1="18" y1="146" x2="382" y2="146"/><line x1="18" y1="120" x2="382" y2="120"/><line x1="18" y1="94" x2="382" y2="94"/><line x1="18" y1="68" x2="382" y2="68"/><line x1="18" y1="42" x2="382" y2="42"/><line x1="18" y1="16" x2="382" y2="16"/></g><line x1="18" y1="94" x2="382" y2="94" stroke="#9aa3ad" stroke-width="1" stroke-dasharray="4 4"/><rect x="382" y="16" width="12" height="156" fill="#e4dfd4"/><g stroke="#5a616b" stroke-width="1"><line x1="384" y1="20" x2="392" y2="28"/><line x1="384" y1="28" x2="392" y2="36"/><line x1="384" y1="36" x2="392" y2="44"/><line x1="384" y1="44" x2="392" y2="52"/><line x1="384" y1="52" x2="392" y2="60"/><line x1="384" y1="60" x2="392" y2="68"/><line x1="384" y1="68" x2="392" y2="76"/><line x1="384" y1="76" x2="392" y2="84"/><line x1="384" y1="84" x2="392" y2="92"/><line x1="384" y1="92" x2="392" y2="100"/><line x1="384" y1="100" x2="392" y2="108"/><line x1="384" y1="108" x2="392" y2="116"/><line x1="384" y1="116" x2="392" y2="124"/><line x1="384" y1="124" x2="392" y2="132"/><line x1="384" y1="132" x2="392" y2="140"/><line x1="384" y1="140" x2="392" y2="148"/><line x1="384" y1="148" x2="392" y2="156"/><line x1="384" y1="156" x2="392" y2="164"/><line x1="384" y1="164" x2="392" y2="172"/></g><line x1="382" y1="16" x2="382" y2="172" stroke="#0f1620" stroke-width="2"/><polyline points="18,94 18.6,94 19.3,94 19.9,94 20.6,94 21.3,94 21.9,94 22.6,94 23.2,94 23.9,94 24.5,94 25.1,94 25.8,94 26.5,94 27.1,94 27.8,94 28.4,94 29,94 29.7,94 30.4,94 31,94 31.6,94 32.3,94 33,94 33.6,94 34.3,94 34.9,94 35.5,94 36.2,94 36.8,94 37.5,94 38.2,94 38.8,94 39.5,94 40.1,94 40.8,94 41.4,94 42,94 42.7,94 43.3,94 44,94 44.6,94 45.3,94 46,94 46.6,94 47.3,94 47.9,94 48.5,94 49.2,94 49.9,94 50.5,94 51.1,94 51.8,94 52.4,94 53.1,94 53.8,94 54.4,94 55.1,94 55.7,94 56.4,94 57,94 57.6,94 58.3,94 58.9,94 59.6,94 60.3,94 60.9,94 61.6,94 62.2,94 62.9,94 63.5,94 64.2,94 64.8,94 65.4,94 66.1,94 66.8,94 67.4,94 68.1,94 68.7,94 69.3,94 70,94 70.7,94 71.3,94 72,94 72.6,94 73.3,94 73.9,94 74.5,94 75.2,94 75.8,94 76.5,94 77.2,94 77.8,94 78.5,94 79.1,94 79.8,94 80.4,94 81,94 81.7,94 82.4,94 83,94 83.6,94 84.3,94 85,94 85.6,94 86.3,94 86.9,94 87.5,94 88.2,94 88.9,94 89.5,94 90.1,94 90.8,94 91.5,94 92.1,94 92.8,94 93.4,94 94,94 94.7,94 95.4,94 96,94 96.6,93.4 97.3,92.7 98,92 98.6,91.4 99.3,90.8 99.9,90.1 100.5,89.5 101.2,88.8 101.9,88.1 102.5,87.5 103.1,86.9 103.8,86.2 104.5,85.5 105.1,84.9 105.8,84.3 106.4,83.6 107,83 107.7,82.3 108.4,81.6 109,81 109.6,80.4 110.3,79.7 111,79 111.6,78.4 112.3,77.8 112.9,77.1 113.5,76.5 114.2,75.8 114.9,75.2 115.5,74.5 116.1,73.8 116.8,73.2 117.5,72.5 118.1,71.9 118.8,71.3 119.4,70.6 120,70 120.7,69.3 121.4,68.7 122,68 122.7,67.3 123.3,66.7 124,66 124.6,65.4 125.3,64.8 125.9,64.1 126.5,63.5 127.2,62.8 127.8,62.2 128.5,61.5 129.2,60.8 129.8,60.2 130.4,59.5 131.1,58.9 131.8,58.3 132.4,57.6 133.1,57 133.7,56.3 134.3,55.7 135,55 135.7,54.3 136.3,53.7 136.9,53 137.6,52.4 138.3,51.8 138.9,51.1 139.6,50.5 140.2,49.8 140.8,49.2 141.5,48.5 142.2,47.8 142.8,47.2 143.4,46.5 144.1,45.9 144.8,45.3 145.4,44.6 146,44 146.7,43.3 147.3,42.7 148,42 148.7,42.7 149.3,43.3 150,44 150.6,44.6 151.3,45.3 151.9,45.9 152.5,46.5 153.2,47.2 153.8,47.8 154.5,48.5 155.2,49.2 155.8,49.8 156.5,50.5 157.1,51.1 157.8,51.8 158.4,52.4 159,53 159.7,53.7 160.3,54.3 161,55 161.7,55.7 162.3,56.3 163,57 163.6,57.6 164.3,58.3 164.9,58.9 165.5,59.5 166.2,60.2 166.8,60.8 167.5,61.5 168.2,62.2 168.8,62.8 169.5,63.5 170.1,64.1 170.8,64.8 171.4,65.4 172,66 172.7,66.7 173.3,67.3 174,68 174.7,68.7 175.3,69.3 176,70 176.6,70.6 177.3,71.3 177.9,71.9 178.5,72.5 179.2,73.2 179.8,73.8 180.5,74.5 181.2,75.2 181.8,75.8 182.5,76.5 183.1,77.1 183.8,77.8 184.4,78.4 185,79 185.7,79.7 186.3,80.3 187,81 187.7,81.7 188.3,82.3 189,83 189.6,83.6 190.3,84.3 190.9,84.9 191.5,85.5 192.2,86.2 192.8,86.8 193.5,87.5 194.2,88.2 194.8,88.8 195.5,89.5 196.1,90.1 196.8,90.8 197.4,91.4 198,92 198.7,92.7 199.3,93.3 200,94 200.7,94 201.3,94 202,94 202.6,94 203.3,94 203.9,94 204.5,94 205.2,94 205.8,94 206.5,94 207.2,94 207.8,94 208.5,94 209.1,94 209.8,94 210.4,94 211,94 211.7,94 212.3,94 213,94 213.7,94 214.3,94 215,94 215.6,94 216.3,94 216.9,94 217.5,94 218.2,94 218.8,94 219.5,94 220.2,94 220.8,94 221.5,94 222.1,94 222.8,94 223.4,94 224,94 224.7,94 225.3,94 226,94 226.7,94 227.3,94 227.9,94 228.6,94 229.3,94 229.9,94 230.6,94 231.2,94 231.8,94 232.5,94 233.2,94 233.8,94 234.4,94 235.1,94 235.8,94 236.4,94 237.1,94 237.7,94 238.3,94 239,94 239.7,94 240.3,94 240.9,94 241.6,94 242.3,94 242.9,94 243.6,94 244.2,94 244.8,94 245.5,94 246.2,94 246.8,94 247.4,94 248.1,94 248.8,94 249.4,94 250.1,94 250.7,94 251.3,94 252,94 252.7,94 253.3,94 253.9,94 254.6,94 255.3,94 255.9,94 256.6,94 257.2,94 257.9,94 258.5,94 259.1,94 259.8,94 260.4,94 261.1,94 261.8,94 262.4,94 263.1,94 263.7,94 264.4,94 265,94 265.6,94 266.3,94 266.9,94 267.6,94 268.3,94 268.9,94 269.6,94 270.2,94 270.9,94 271.5,94 272.1,94 272.8,94 273.4,94 274.1,94 274.8,94 275.4,94 276.1,94 276.7,94 277.3,94 278,94 278.7,94 279.3,94 279.9,94 280.6,94 281.3,94 281.9,94 282.6,94 283.2,94 283.8,94 284.5,94 285.2,94 285.8,94 286.4,94 287.1,94 287.8,94 288.4,94 289.1,94 289.7,94 290.3,94 291,94 291.7,94 292.3,94 292.9,94 293.6,94 294.3,94 294.9,94 295.6,94 296.2,94 296.8,94 297.5,94 298.2,94 298.8,94 299.4,94 300.1,94 300.8,94 301.4,94 302.1,94 302.7,94 303.3,94 304,94 304.7,94 305.3,94 305.9,94 306.6,94 307.3,94 307.9,94 308.6,94 309.2,94 309.8,94 310.5,94 311.2,94 311.8,94 312.4,94 313.1,94 313.8,94 314.4,94 315.1,94 315.7,94 316.3,94 317,94 317.7,94 318.3,94 318.9,94 319.6,94 320.3,94 320.9,94 321.6,94 322.2,94 322.8,94 323.5,94 324.2,94 324.8,94 325.4,94 326.1,94 326.8,94 327.4,94 328.1,94 328.7,94 329.3,94 330,94 330.7,94 331.3,94 331.9,94 332.6,94 333.3,94 333.9,94 334.6,94 335.2,94 335.8,94 336.5,94 337.2,94 337.8,94 338.4,94 339.1,94 339.8,94 340.4,94 341.1,94 341.7,94 342.3,94 343,94 343.7,94 344.3,94 344.9,94 345.6,94 346.3,94 346.9,94 347.6,94 348.2,94 348.8,94 349.5,94 350.2,94 350.8,94 351.4,94 352.1,94 352.8,94 353.4,94 354.1,94 354.7,94 355.3,94 356,94 356.7,94 357.3,94 357.9,94 358.6,94 359.3,94 359.9,94 360.6,94 361.2,94 361.8,94 362.5,94 363.2,94 363.8,94 364.4,94 365.1,94 365.8,94 366.4,94 367.1,94 367.7,94 368.3,94 369,94 369.7,94 370.3,94 370.9,94 371.6,94 372.3,94 372.9,94 373.6,94 374.2,94 374.8,94 375.5,94 376.2,94 376.8,94 377.4,94 378.1,94 378.8,94 379.4,94 380.1,94 380.7,94 381.3,94 382,94" fill="none" stroke="#0f1620" stroke-width="2.4" stroke-linejoin="round"/><line x1="184.4" y1="36.8" x2="227.4" y2="36.8" stroke="#2563c9" stroke-width="2.2" stroke-linecap="butt"/><polygon points="227.4,42.2 236.4,36.8 227.4,31.4" fill="#2563c9"/><text x="210.4" y="29.8" text-anchor="middle" font-size="14" fill="#2563c9"><tspan font-style="italic">v</tspan></text><line x1="265" y1="135.6" x2="156" y2="135.6" stroke="#0f1620" stroke-width="1.3" stroke-linecap="butt"/><polygon points="156,130.8 148,135.6 156,140.4" fill="#0f1620"/><line x1="265" y1="135.6" x2="374" y2="135.6" stroke="#0f1620" stroke-width="1.3" stroke-linecap="butt"/><polygon points="374,140.4 382,135.6 374,130.8" fill="#0f1620"/><text x="265" y="129.6" text-anchor="middle" font-size="13" fill="#0f1620"><tspan font-style="italic">d</tspan></text><line x1="148" y1="98" x2="148" y2="141.6" stroke="#5a616b" stroke-width="0.9" stroke-dasharray="3 3"/></svg>`,
+            answer: { value: 0.50, unit: 's' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 0.50, unit: 's' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Vid väggen måste snörets elongation vara noll hela tiden. Det uppfylls om vi tänker oss att den reflekterade pulsen redan finns på ett osynligt snöre bakom väggen: en **omvänd och spegelvänd** kopia av pulsen, lika långt bakom väggen som den riktiga pulsen är framför, och som rör sig mot väggen med samma fart $v$. I väggen är de två pulsernas elongationer då alltid lika stora men motsatta, så summan blir noll där.
+
+Superpositionsprincipen ger att snörets form framför väggen är summan av den riktiga pulsen och spegelpulsen.
+
+Spegelpulsens mittpunkt är också avståndet $d$ från väggen, och de två mittpunkterna närmar sig väggen med samma fart. De når väggen samtidigt efter tiden
+
+$$ t = \\frac{d}{v} $$
+
+I det ögonblicket ligger båda pulserna med mitten i väggen. Spegelpulsen är den riktiga pulsen spegelvänd i väggen och omvänd. Eftersom pulsen är symmetrisk är spegelbilden lika med pulsen själv, så i varje punkt på ett visst avstånd från väggen är den ena pulsens elongation $+y$ och den andras $-y$. Summan blir noll överallt, och snöret är helt rakt.
+
+**Svar:** Snöret är helt rakt vid tiden $t = \\dfrac{d}{v}$, när pulsens mittpunkt når väggen.
+
+**b)**
+$$
+\\left[ \\begin{array}{l}
+d = 1{,}5\\ \\mathrm{m} \\\\
+v = 3{,}0\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$ t = \\frac{d}{v} = \\frac{1{,}5}{3{,}0} = 0{,}50\\ \\mathrm{s} $$
+
+**Svar:** Snöret är helt rakt vid $t = 0{,}50\\ \\mathrm{s}$.
+
+**c)** Snöret är helt rakt bara om spegelpulsen tar ut den riktiga pulsen i varje punkt framför väggen. Då måste de två pulserna ligga på samma ställe och ha exakt samma form, med motsatt tecken. Men spegelpulsen är spegelvänd. Är den riktiga pulsen brant på sin högra sida (fram, mot väggen) är spegelpulsen brant på sin vänstra sida. När de ligger på samma ställe hamnar den riktiga pulsens branta flank där spegelpulsen har sin flacka flank. Där är elongationerna olika stora, och summan blir inte noll.
+
+**Svar:** Nej. Snöret blir helt rakt bara om pulsen är symmetrisk, eftersom den reflekterade pulsen är spegelvänd och därför bara tar ut den infallande överallt när pulsen ser likadan ut åt båda håll.`,
+        },
+        {
+            level: 3,
+            question: `Figuren visar ett snöre i ett ögonblick då två pulser A och B överlappar. Den heldragna linjen är snörets verkliga form. Den streckade linjen visar var puls A skulle ha legat om B inte funnits. En ruta motsvarar $1{,}0\\ \\mathrm{cm}$ i båda led, och talen under rutnätet anger läget i cm. Puls A rör sig åt höger och puls B åt vänster, båda med farten $1{,}0\\ \\mathrm{cm/s}$.<br>a) Bestäm puls B:s form: är den ett vågberg eller en vågdal, och hur hög och hur bred är den?<br>b) Bestäm snörets största elongation $1{,}0\\ \\mathrm{s}$ senare, och var på snöret den finns.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 158" width="505" height="214" role="img" aria-label="Rutat papper med talen 0 till 12 under. Den heldragna linjen visar snöret i ett ögonblick: noll fram till 2, stiger till 2 rutor vid 4, sjunker till 1 vid 5, hoppar upp till 2 vid 5, sjunker till 1 vid 6, ligger på 1 fram till 8 och är sedan noll. Den streckade blå linjen visar puls A: en triangel från 2 till 6 med toppen 2 rutor vid 4." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><g stroke="#cfdceb" stroke-width="1"><line x1="18" y1="16" x2="18" y2="128"/><line x1="46" y1="16" x2="46" y2="128"/><line x1="74" y1="16" x2="74" y2="128"/><line x1="102" y1="16" x2="102" y2="128"/><line x1="130" y1="16" x2="130" y2="128"/><line x1="158" y1="16" x2="158" y2="128"/><line x1="186" y1="16" x2="186" y2="128"/><line x1="214" y1="16" x2="214" y2="128"/><line x1="242" y1="16" x2="242" y2="128"/><line x1="270" y1="16" x2="270" y2="128"/><line x1="298" y1="16" x2="298" y2="128"/><line x1="326" y1="16" x2="326" y2="128"/><line x1="354" y1="16" x2="354" y2="128"/><line x1="18" y1="128" x2="354" y2="128"/><line x1="18" y1="100" x2="354" y2="100"/><line x1="18" y1="72" x2="354" y2="72"/><line x1="18" y1="44" x2="354" y2="44"/><line x1="18" y1="16" x2="354" y2="16"/></g><line x1="18" y1="100" x2="354" y2="100" stroke="#9aa3ad" stroke-width="1" stroke-dasharray="4 4"/><text x="18" y="146" text-anchor="middle" font-size="12" fill="#0f1620">0</text><text x="46" y="146" text-anchor="middle" font-size="12" fill="#0f1620">1</text><text x="74" y="146" text-anchor="middle" font-size="12" fill="#0f1620">2</text><text x="102" y="146" text-anchor="middle" font-size="12" fill="#0f1620">3</text><text x="130" y="146" text-anchor="middle" font-size="12" fill="#0f1620">4</text><text x="158" y="146" text-anchor="middle" font-size="12" fill="#0f1620">5</text><text x="186" y="146" text-anchor="middle" font-size="12" fill="#0f1620">6</text><text x="214" y="146" text-anchor="middle" font-size="12" fill="#0f1620">7</text><text x="242" y="146" text-anchor="middle" font-size="12" fill="#0f1620">8</text><text x="270" y="146" text-anchor="middle" font-size="12" fill="#0f1620">9</text><text x="298" y="146" text-anchor="middle" font-size="12" fill="#0f1620">10</text><text x="326" y="146" text-anchor="middle" font-size="12" fill="#0f1620">11</text><text x="354" y="146" text-anchor="middle" font-size="12" fill="#0f1620">12</text><polyline points="18,100 74,100 130,44 186,100 354,100" fill="none" stroke="#2563c9" stroke-width="1.8" stroke-linejoin="round" stroke-dasharray="6 4"/><polyline points="18,100 74,100 130,44 158,72 158,44 186,72 242,72 242,100 354,100" fill="none" stroke="#0f1620" stroke-width="2.4" stroke-linejoin="round"/></svg>`,
+            answer: { value: 3.0, unit: 'cm' },
+            delsvar: [
+                { del: 'a', value: 1.0, unit: 'cm', etikett: 'höjd' },
+                { del: 'a', value: 3.0, unit: 'cm', etikett: 'bredd' },
+                { del: 'b', value: 3.0, unit: 'cm', etikett: 'största elongation' },
+                { del: 'b', value: 5.0, unit: 'cm', etikett: 'läge' },
+            ],
+            solution: `**a)** Enligt superpositionsprincipen är snörets elongation summan av pulsernas elongationer, $y = y_A + y_B$. Puls B fås därför genom att i varje punkt dra bort A från snörets form:
+
+$$ y_B = y - y_A $$
+
+Vi läser av i några punkter:
+
+| Läge (cm) | $y$ (cm) | $y_A$ (cm) | $y_B$ (cm) |
+|---|---|---|---|
+| 3 | $1$ | $1$ | $0$ |
+| 4 | $2$ | $2$ | $0$ |
+| 5,5 | $1{,}5$ | $0{,}5$ | $1$ |
+| 6 | $1$ | $0$ | $1$ |
+| 7 | $1$ | $0$ | $1$ |
+| 9 | $0$ | $0$ | $0$ |
+
+Snörets form hoppar upp med en hel ruta vid $5\\ \\mathrm{cm}$ och ned till noll vid $8\\ \\mathrm{cm}$. Mellan $5$ och $8\\ \\mathrm{cm}$ är skillnaden $y - y_A$ hela tiden $+1\\ \\mathrm{cm}$, och utanför är den noll. B är alltså en rektangulär puls.
+
+**Svar:** B är ett rektangulärt vågberg som är $1{,}0\\ \\mathrm{cm}$ högt och $3{,}0\\ \\mathrm{cm}$ brett (från $5$ till $8\\ \\mathrm{cm}$).
+
+**b)** På $1{,}0\\ \\mathrm{s}$ flyttar sig varje puls $1{,}0\\ \\mathrm{cm}$.
+
+- A sträcker sig då från $3$ till $7\\ \\mathrm{cm}$ med toppen $2\\ \\mathrm{cm}$ vid $5\\ \\mathrm{cm}$.
+- B ligger mellan $4$ och $7\\ \\mathrm{cm}$ med höjden $1\\ \\mathrm{cm}$.
+
+Där pulserna överlappar, mellan $4$ och $7\\ \\mathrm{cm}$, lyfter B hela A med $1\\ \\mathrm{cm}$. Det högsta läget fås där A är som högst:
+
+$$ y_\\text{max} = y_A + y_B = 2 + 1 = 3{,}0\\ \\mathrm{cm} $$
+
+Utanför överlappet är snöret högst $1\\ \\mathrm{cm}$ högt, så detta är snörets största elongation.
+
+**Svar:** Den största elongationen är $3{,}0\\ \\mathrm{cm}$, vid läget $5{,}0\\ \\mathrm{cm}$.`,
+        },
+        {
+            level: 3,
+            question: `Två likadana pulser rör sig mot varandra på ett snöre med farten $1{,}5\\ \\mathrm{m/s}$ vardera. Båda är symmetriska triangulära vågberg med höjden $2{,}0\\ \\mathrm{cm}$ och basen $0{,}60\\ \\mathrm{m}$.<br>a) Visa att snöret är rakt (har konstant elongation) mellan de två topparna så länge topparna är närmare varandra än en halv bas, och bestäm denna elongation uttryckt i topparnas avstånd $s$.<br>b) Under hur lång tid är snörets största elongation minst $3{,}0\\ \\mathrm{cm}$?
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 146" width="570" height="198" role="img" aria-label="Två likadana triangulära vågberg, 2,0 cm höga med basen 0,60 m, rör sig mot varandra med samma fart." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><g stroke="#cfdceb" stroke-width="1"><line x1="18" y1="16" x2="18" y2="112"/><line x1="42" y1="16" x2="42" y2="112"/><line x1="66" y1="16" x2="66" y2="112"/><line x1="90" y1="16" x2="90" y2="112"/><line x1="114" y1="16" x2="114" y2="112"/><line x1="138" y1="16" x2="138" y2="112"/><line x1="162" y1="16" x2="162" y2="112"/><line x1="186" y1="16" x2="186" y2="112"/><line x1="210" y1="16" x2="210" y2="112"/><line x1="234" y1="16" x2="234" y2="112"/><line x1="258" y1="16" x2="258" y2="112"/><line x1="282" y1="16" x2="282" y2="112"/><line x1="306" y1="16" x2="306" y2="112"/><line x1="330" y1="16" x2="330" y2="112"/><line x1="354" y1="16" x2="354" y2="112"/><line x1="378" y1="16" x2="378" y2="112"/><line x1="402" y1="16" x2="402" y2="112"/><line x1="18" y1="112" x2="402" y2="112"/><line x1="18" y1="88" x2="402" y2="88"/><line x1="18" y1="64" x2="402" y2="64"/><line x1="18" y1="40" x2="402" y2="40"/><line x1="18" y1="16" x2="402" y2="16"/></g><line x1="18" y1="88" x2="402" y2="88" stroke="#9aa3ad" stroke-width="1" stroke-dasharray="4 4"/><polyline points="18,88 18.6,88 19.2,88 19.8,88 20.4,88 21,88 21.6,88 22.2,88 22.8,88 23.4,88 24,88 24.6,88 25.2,88 25.8,88 26.4,88 27,88 27.6,88 28.2,88 28.8,88 29.4,88 30,88 30.6,88 31.2,88 31.8,88 32.4,88 33,88 33.6,88 34.2,88 34.8,88 35.4,88 36,88 36.6,88 37.2,88 37.8,88 38.4,88 39,88 39.6,88 40.2,88 40.8,88 41.4,88 42,88 42.6,87.6 43.2,87.2 43.8,86.8 44.4,86.4 45,86 45.6,85.6 46.2,85.2 46.8,84.8 47.4,84.4 48,84 48.6,83.6 49.2,83.2 49.8,82.8 50.4,82.4 51,82 51.6,81.6 52.2,81.2 52.8,80.8 53.4,80.4 54,80 54.6,79.6 55.2,79.2 55.8,78.8 56.4,78.4 57,78 57.6,77.6 58.2,77.2 58.8,76.8 59.4,76.4 60,76 60.6,75.6 61.2,75.2 61.8,74.8 62.4,74.4 63,74 63.6,73.6 64.2,73.2 64.8,72.8 65.4,72.4 66,72 66.6,71.6 67.2,71.2 67.8,70.8 68.4,70.4 69,70 69.6,69.6 70.2,69.2 70.8,68.8 71.4,68.4 72,68 72.6,67.6 73.2,67.2 73.8,66.8 74.4,66.4 75,66 75.6,65.6 76.2,65.2 76.8,64.8 77.4,64.4 78,64 78.6,63.6 79.2,63.2 79.8,62.8 80.4,62.4 81,62 81.6,61.6 82.2,61.2 82.8,60.8 83.4,60.4 84,60 84.6,59.6 85.2,59.2 85.8,58.8 86.4,58.4 87,58 87.6,57.6 88.2,57.2 88.8,56.8 89.4,56.4 90,56 90.6,55.6 91.2,55.2 91.8,54.8 92.4,54.4 93,54 93.6,53.6 94.2,53.2 94.8,52.8 95.4,52.4 96,52 96.6,51.6 97.2,51.2 97.8,50.8 98.4,50.4 99,50 99.6,49.6 100.2,49.2 100.8,48.8 101.4,48.4 102,48 102.6,47.6 103.2,47.2 103.8,46.8 104.4,46.4 105,46 105.6,45.6 106.2,45.2 106.8,44.8 107.4,44.4 108,44 108.6,43.6 109.2,43.2 109.8,42.8 110.4,42.4 111,42 111.6,41.6 112.2,41.2 112.8,40.8 113.4,40.4 114,40 114.6,40.4 115.2,40.8 115.8,41.2 116.4,41.6 117,42 117.6,42.4 118.2,42.8 118.8,43.2 119.4,43.6 120,44 120.6,44.4 121.2,44.8 121.8,45.2 122.4,45.6 123,46 123.6,46.4 124.2,46.8 124.8,47.2 125.4,47.6 126,48 126.6,48.4 127.2,48.8 127.8,49.2 128.4,49.6 129,50 129.6,50.4 130.2,50.8 130.8,51.2 131.4,51.6 132,52 132.6,52.4 133.2,52.8 133.8,53.2 134.4,53.6 135,54 135.6,54.4 136.2,54.8 136.8,55.2 137.4,55.6 138,56 138.6,56.4 139.2,56.8 139.8,57.2 140.4,57.6 141,58 141.6,58.4 142.2,58.8 142.8,59.2 143.4,59.6 144,60 144.6,60.4 145.2,60.8 145.8,61.2 146.4,61.6 147,62 147.6,62.4 148.2,62.8 148.8,63.2 149.4,63.6 150,64 150.6,64.4 151.2,64.8 151.8,65.2 152.4,65.6 153,66 153.6,66.4 154.2,66.8 154.8,67.2 155.4,67.6 156,68 156.6,68.4 157.2,68.8 157.8,69.2 158.4,69.6 159,70 159.6,70.4 160.2,70.8 160.8,71.2 161.4,71.6 162,72 162.6,72.4 163.2,72.8 163.8,73.2 164.4,73.6 165,74 165.6,74.4 166.2,74.8 166.8,75.2 167.4,75.6 168,76 168.6,76.4 169.2,76.8 169.8,77.2 170.4,77.6 171,78 171.6,78.4 172.2,78.8 172.8,79.2 173.4,79.6 174,80 174.6,80.4 175.2,80.8 175.8,81.2 176.4,81.6 177,82 177.6,82.4 178.2,82.8 178.8,83.2 179.4,83.6 180,84 180.6,84.4 181.2,84.8 181.8,85.2 182.4,85.6 183,86 183.6,86.4 184.2,86.8 184.8,87.2 185.4,87.6 186,88 186.6,88 187.2,88 187.8,88 188.4,88 189,88 189.6,88 190.2,88 190.8,88 191.4,88 192,88 192.6,88 193.2,88 193.8,88 194.4,88 195,88 195.6,88 196.2,88 196.8,88 197.4,88 198,88 198.6,88 199.2,88 199.8,88 200.4,88 201,88 201.6,88 202.2,88 202.8,88 203.4,88 204,88 204.6,88 205.2,88 205.8,88 206.4,88 207,88 207.6,88 208.2,88 208.8,88 209.4,88 210,88 210.6,88 211.2,88 211.8,88 212.4,88 213,88 213.6,88 214.2,88 214.8,88 215.4,88 216,88 216.6,88 217.2,88 217.8,88 218.4,88 219,88 219.6,88 220.2,88 220.8,88 221.4,88 222,88 222.6,88 223.2,88 223.8,88 224.4,88 225,88 225.6,88 226.2,88 226.8,88 227.4,88 228,88 228.6,88 229.2,88 229.8,88 230.4,88 231,88 231.6,88 232.2,88 232.8,88 233.4,88 234,88 234.6,87.6 235.2,87.2 235.8,86.8 236.4,86.4 237,86 237.6,85.6 238.2,85.2 238.8,84.8 239.4,84.4 240,84 240.6,83.6 241.2,83.2 241.8,82.8 242.4,82.4 243,82 243.6,81.6 244.2,81.2 244.8,80.8 245.4,80.4 246,80 246.6,79.6 247.2,79.2 247.8,78.8 248.4,78.4 249,78 249.6,77.6 250.2,77.2 250.8,76.8 251.4,76.4 252,76 252.6,75.6 253.2,75.2 253.8,74.8 254.4,74.4 255,74 255.6,73.6 256.2,73.2 256.8,72.8 257.4,72.4 258,72 258.6,71.6 259.2,71.2 259.8,70.8 260.4,70.4 261,70 261.6,69.6 262.2,69.2 262.8,68.8 263.4,68.4 264,68 264.6,67.6 265.2,67.2 265.8,66.8 266.4,66.4 267,66 267.6,65.6 268.2,65.2 268.8,64.8 269.4,64.4 270,64 270.6,63.6 271.2,63.2 271.8,62.8 272.4,62.4 273,62 273.6,61.6 274.2,61.2 274.8,60.8 275.4,60.4 276,60 276.6,59.6 277.2,59.2 277.8,58.8 278.4,58.4 279,58 279.6,57.6 280.2,57.2 280.8,56.8 281.4,56.4 282,56 282.6,55.6 283.2,55.2 283.8,54.8 284.4,54.4 285,54 285.6,53.6 286.2,53.2 286.8,52.8 287.4,52.4 288,52 288.6,51.6 289.2,51.2 289.8,50.8 290.4,50.4 291,50 291.6,49.6 292.2,49.2 292.8,48.8 293.4,48.4 294,48 294.6,47.6 295.2,47.2 295.8,46.8 296.4,46.4 297,46 297.6,45.6 298.2,45.2 298.8,44.8 299.4,44.4 300,44 300.6,43.6 301.2,43.2 301.8,42.8 302.4,42.4 303,42 303.6,41.6 304.2,41.2 304.8,40.8 305.4,40.4 306,40 306.6,40.4 307.2,40.8 307.8,41.2 308.4,41.6 309,42 309.6,42.4 310.2,42.8 310.8,43.2 311.4,43.6 312,44 312.6,44.4 313.2,44.8 313.8,45.2 314.4,45.6 315,46 315.6,46.4 316.2,46.8 316.8,47.2 317.4,47.6 318,48 318.6,48.4 319.2,48.8 319.8,49.2 320.4,49.6 321,50 321.6,50.4 322.2,50.8 322.8,51.2 323.4,51.6 324,52 324.6,52.4 325.2,52.8 325.8,53.2 326.4,53.6 327,54 327.6,54.4 328.2,54.8 328.8,55.2 329.4,55.6 330,56 330.6,56.4 331.2,56.8 331.8,57.2 332.4,57.6 333,58 333.6,58.4 334.2,58.8 334.8,59.2 335.4,59.6 336,60 336.6,60.4 337.2,60.8 337.8,61.2 338.4,61.6 339,62 339.6,62.4 340.2,62.8 340.8,63.2 341.4,63.6 342,64 342.6,64.4 343.2,64.8 343.8,65.2 344.4,65.6 345,66 345.6,66.4 346.2,66.8 346.8,67.2 347.4,67.6 348,68 348.6,68.4 349.2,68.8 349.8,69.2 350.4,69.6 351,70 351.6,70.4 352.2,70.8 352.8,71.2 353.4,71.6 354,72 354.6,72.4 355.2,72.8 355.8,73.2 356.4,73.6 357,74 357.6,74.4 358.2,74.8 358.8,75.2 359.4,75.6 360,76 360.6,76.4 361.2,76.8 361.8,77.2 362.4,77.6 363,78 363.6,78.4 364.2,78.8 364.8,79.2 365.4,79.6 366,80 366.6,80.4 367.2,80.8 367.8,81.2 368.4,81.6 369,82 369.6,82.4 370.2,82.8 370.8,83.2 371.4,83.6 372,84 372.6,84.4 373.2,84.8 373.8,85.2 374.4,85.6 375,86 375.6,86.4 376.2,86.8 376.8,87.2 377.4,87.6 378,88 378.6,88 379.2,88 379.8,88 380.4,88 381,88 381.6,88 382.2,88 382.8,88 383.4,88 384,88 384.6,88 385.2,88 385.8,88 386.4,88 387,88 387.6,88 388.2,88 388.8,88 389.4,88 390,88 390.6,88 391.2,88 391.8,88 392.4,88 393,88 393.6,88 394.2,88 394.8,88 395.4,88 396,88 396.6,88 397.2,88 397.8,88 398.4,88 399,88 399.6,88 400.2,88 400.8,88 401.4,88 402,88" fill="none" stroke="#0f1620" stroke-width="2.4" stroke-linejoin="round"/><line x1="128.4" y1="25.6" x2="167.4" y2="25.6" stroke="#2563c9" stroke-width="2.2" stroke-linecap="butt"/><polygon points="167.4,31 176.4,25.6 167.4,20.2" fill="#2563c9"/><text x="152.4" y="18.6" text-anchor="middle" font-size="14" fill="#2563c9"><tspan font-style="italic">v</tspan></text><line x1="291.6" y1="25.6" x2="252.6" y2="25.6" stroke="#2563c9" stroke-width="2.2" stroke-linecap="butt"/><polygon points="252.6,20.2 243.6,25.6 252.6,31" fill="#2563c9"/><text x="267.6" y="18.6" text-anchor="middle" font-size="14" fill="#2563c9"><tspan font-style="italic">v</tspan></text><line x1="114" y1="102.4" x2="50" y2="102.4" stroke="#0f1620" stroke-width="1.3" stroke-linecap="butt"/><polygon points="50,97.6 42,102.4 50,107.2" fill="#0f1620"/><line x1="114" y1="102.4" x2="178" y2="102.4" stroke="#0f1620" stroke-width="1.3" stroke-linecap="butt"/><polygon points="178,107.2 186,102.4 178,97.6" fill="#0f1620"/><text x="114" y="122.4" text-anchor="middle" font-size="13" fill="#0f1620">0,60 m</text><line x1="306" y1="102.4" x2="242" y2="102.4" stroke="#0f1620" stroke-width="1.3" stroke-linecap="butt"/><polygon points="242,97.6 234,102.4 242,107.2" fill="#0f1620"/><line x1="306" y1="102.4" x2="370" y2="102.4" stroke="#0f1620" stroke-width="1.3" stroke-linecap="butt"/><polygon points="370,107.2 378,102.4 370,97.6" fill="#0f1620"/><text x="306" y="122.4" text-anchor="middle" font-size="13" fill="#0f1620">0,60 m</text></svg>`,
+            answer: { value: 0.10, unit: 's' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 0.10, unit: 's' },
+            ],
+            solution: `Kalla pulsernas höjd $h = 2{,}0\\ \\mathrm{cm}$ och halva basen $a = 0{,}30\\ \\mathrm{m}$. Varje flank sjunker från $h$ till $0$ på sträckan $a$, alltså med lutningen $\\dfrac{h}{a}$.
+
+**a)** Lägg en $x$-axel längs snöret och låt topparna ligga vid $x_1$ (puls 1, vänster) och $x_2 = x_1 + s$ (puls 2, höger), där $s \\le a$. En punkt $x$ mellan topparna ligger på puls 1:s högra flank och på puls 2:s vänstra flank:
+
+$$ y_1 = h - \\frac{h}{a}(x - x_1) \\qquad y_2 = h - \\frac{h}{a}(x_2 - x) $$
+
+Superpositionsprincipen ger elongationen
+
+$$ y = y_1 + y_2 = 2h - \\frac{h}{a}(x - x_1 + x_2 - x) = 2h - \\frac{h}{a}(x_2 - x_1) = 2h - \\frac{h \\cdot s}{a} $$
+
+Uttrycket innehåller inte $x$, så elongationen är densamma i alla punkter mellan topparna. Där den ena pulsen sjunker stiger den andra lika mycket. Vid topparna själva är elongationen också $2h - \\dfrac{h \\cdot s}{a}$, och utanför topparna sjunker snöret. Detta är alltså snörets största elongation.
+
+**Svar:** Mellan topparna är elongationen konstant, $y = 2h - \\dfrac{h \\cdot s}{a}$, och det är snörets största elongation.
+
+**b)** Den största elongationen ska vara minst $3{,}0\\ \\mathrm{cm}$:
+
+$$ 2h - \\frac{h \\cdot s}{a} \\ge 3{,}0 $$
+
+$$ 2 \\cdot 2{,}0 - \\frac{2{,}0 \\cdot s}{a} \\ge 3{,}0 $$
+
+$$ 4{,}0 - \\frac{2{,}0 \\cdot s}{a} \\mathbin{\\boldsymbol{+}} \\boldsymbol{\\frac{2{,}0 \\cdot s}{a}} \\ge 3{,}0 \\mathbin{\\boldsymbol{+}} \\boldsymbol{\\frac{2{,}0 \\cdot s}{a}} $$
+
+$$ 4{,}0 \\ge 3{,}0 + \\frac{2{,}0 \\cdot s}{a} $$
+
+$$ 4{,}0 \\mathbin{\\boldsymbol{-}} \\boldsymbol{3{,}0} \\ge 3{,}0 + \\frac{2{,}0 \\cdot s}{a} \\mathbin{\\boldsymbol{-}} \\boldsymbol{3{,}0} $$
+
+$$ 1{,}0 \\ge \\frac{2{,}0 \\cdot s}{a} $$
+
+$$ s \\le \\frac{a}{2} = \\frac{0{,}30}{2} = 0{,}15\\ \\mathrm{m} $$
+
+Topparna kommer alltså inom $0{,}15\\ \\mathrm{m}$ från varandra, möts och går sedan isär till $0{,}15\\ \\mathrm{m}$ igen. Under den tiden ändras avståndet mellan topparna med sammanlagt $0{,}15 + 0{,}15 = 0{,}30\\ \\mathrm{m}$. Topparna rör sig i förhållande till varandra med farten $v_\\text{rel} = 1{,}5 + 1{,}5 = 3{,}0\\ \\mathrm{m/s}$:
+
+$$ \\Delta t = \\frac{0{,}30}{3{,}0} = 0{,}10\\ \\mathrm{s} $$
+
+Rimlighet: hela mötet, från första kontakt tills pulserna skilts åt, tar $\\dfrac{2 \\cdot 0{,}60}{3{,}0} = 0{,}40\\ \\mathrm{s}$. Att snöret bara når över $3{,}0\\ \\mathrm{cm}$ under en fjärdedel av den tiden är rimligt, eftersom elongationen är $4{,}0\\ \\mathrm{cm}$ bara i själva mötesögonblicket.
+
+**Svar:** Under $0{,}10\\ \\mathrm{s}$`,
+        },
+        {
+            level: 3,
+            question: `Ett lätt rep är hopknutet med ett tungt rep, som i sin tur sitter fast i en vägg (se figuren). Du skickar ett kort vågberg, $40\\ \\mathrm{cm}$ brett, från handen. Pulsens fart är $8{,}0\\ \\mathrm{m/s}$ i det lätta repet och $4{,}0\\ \\mathrm{m/s}$ i det tunga. Efter en stund känner du två pulser komma tillbaka till handen.<br>a) Förklara var de två pulserna kommer ifrån, och bestäm vid vilka tidpunkter de når handen.<br>b) Är de vågberg eller vågdalar, och hur breda är de när de når handen?
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 170" width="664" height="209" role="img" aria-label="En hand skickar en puls längs ett lätt rep. Efter 4,0 m är det lätta repet hopknutet med ett tungt rep som är 2,0 m långt och fastsatt i en vägg." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><path d="M 16 69 q 18 -4 30 2 q 4 3 0 7 q -12 5 -30 2 z" fill="#e8c9a8" stroke="#0f1620" stroke-width="1.4" stroke-linejoin="round"/><path d="M 42 73 q 5 1 4 5" fill="none" stroke="#0f1620" stroke-width="1"/><polyline points="46,78 47,78 48,78 49,78 50,78 51,78 52,78 53,78 54,78 55,78 56,78 57,78 58,78 59,78 60,78 61,78 62,78 63,78 64,78 65,78 66,78 67,78 68,78 69,78 70,78 71,78 72,78 73,78 74,78 75,78 76,78 77,77.9 78,77.6 79,77.2 80,76.6 81,75.8 82,74.9 83,73.9 84,72.7 85,71.5 86,70.3 87,69 88,67.7 89,66.5 90,65.3 91,64.1 92,63.1 93,62.2 94,61.4 95,60.8 96,60.4 97,60.1 98,60 99,60.1 100,60.4 101,60.8 102,61.4 103,62.2 104,63.1 105,64.1 106,65.3 107,66.5 108,67.7 109,69 110,70.3 111,71.5 112,72.7 113,73.9 114,74.9 115,75.8 116,76.6 117,77.2 118,77.6 119,77.9 120,78 121,78 122,78 123,78 124,78 125,78 126,78 127,78 128,78 129,78 130,78 131,78 132,78 133,78 134,78 135,78 136,78 137,78 138,78 139,78 140,78 141,78 142,78 143,78 144,78 145,78 146,78 147,78 148,78 149,78 150,78 151,78 152,78 153,78 154,78 155,78 156,78 157,78 158,78 159,78 160,78 161,78 162,78 163,78 164,78 165,78 166,78 167,78 168,78 169,78 170,78 171,78 172,78 173,78 174,78 175,78 176,78 177,78 178,78 179,78 180,78 181,78 182,78 183,78 184,78 185,78 186,78 187,78 188,78 189,78 190,78 191,78 192,78 193,78 194,78 195,78 196,78 197,78 198,78 199,78 200,78 201,78 202,78 203,78 204,78 205,78 206,78 207,78 208,78 209,78 210,78 211,78 212,78 213,78 214,78 215,78 216,78 217,78 218,78 219,78 220,78 221,78 222,78 223,78 224,78 225,78 226,78 227,78 228,78 229,78 230,78 231,78 232,78 233,78 234,78 235,78 236,78 237,78 238,78 239,78 240,78 241,78 242,78 243,78 244,78 245,78 246,78 247,78 248,78 249,78 250,78 251,78 252,78 253,78 254,78 255,78 256,78 257,78 258,78 259,78 260,78 261,78 262,78 263,78 264,78 265,78 266,78 267,78 268,78 269,78 270,78 271,78 272,78 273,78 274,78 275,78 276,78 277,78 278,78 279,78 280,78 281,78 282,78 283,78 284,78 285,78 286,78 287,78 288,78 289,78 290,78 291,78 292,78 293,78 294,78 295,78 296,78 297,78 298,78 299,78 300,78 301,78 302,78 303,78 304,78 305,78 306,78 307,78 308,78 309,78 310,78" fill="none" stroke="#0f1620" stroke-width="1.6" stroke-linejoin="round"/><line x1="310" y1="78" x2="470" y2="78" stroke="#6b4a2b" stroke-width="6" stroke-linecap="butt"/><circle cx="310" cy="78" r="5" fill="#6b4a2b" stroke="#0f1620" stroke-width="1.2"/><rect x="470" y="30" width="14" height="96" fill="#e4dfd4"/><g stroke="#5a616b" stroke-width="1"><line x1="472" y1="34" x2="480" y2="42"/><line x1="472" y1="42" x2="480" y2="50"/><line x1="472" y1="50" x2="480" y2="58"/><line x1="472" y1="58" x2="480" y2="66"/><line x1="472" y1="66" x2="480" y2="74"/><line x1="472" y1="74" x2="480" y2="82"/><line x1="472" y1="82" x2="480" y2="90"/><line x1="472" y1="90" x2="480" y2="98"/><line x1="472" y1="98" x2="480" y2="106"/><line x1="472" y1="106" x2="480" y2="114"/><line x1="472" y1="114" x2="480" y2="122"/></g><line x1="470" y1="30" x2="470" y2="126" stroke="#0f1620" stroke-width="2"/><line x1="82" y1="46" x2="119" y2="46" stroke="#2563c9" stroke-width="2.2" stroke-linecap="butt"/><polygon points="119,51.4 128,46 119,40.6" fill="#2563c9"/><text x="105" y="38" text-anchor="middle" font-size="14" fill="#2563c9"><tspan font-style="italic">v</tspan></text><text x="208" y="64" text-anchor="middle" font-size="13" fill="#0f1620">lätt rep</text><text x="390" y="64" text-anchor="middle" font-size="13" fill="#0f1620">tungt rep</text><text x="310" y="100" text-anchor="middle" font-size="13" fill="#0f1620">knut</text><g stroke="#5a616b" stroke-width="0.9" stroke-dasharray="3 3"><line x1="46" y1="90" x2="46" y2="136"/><line x1="310" y1="106" x2="310" y2="136"/><line x1="470" y1="126" x2="470" y2="136"/></g><line x1="178" y1="130" x2="54" y2="130" stroke="#0f1620" stroke-width="1.3" stroke-linecap="butt"/><polygon points="54,125.2 46,130 54,134.8" fill="#0f1620"/><line x1="178" y1="130" x2="302" y2="130" stroke="#0f1620" stroke-width="1.3" stroke-linecap="butt"/><polygon points="302,134.8 310,130 302,125.2" fill="#0f1620"/><text x="178" y="124" text-anchor="middle" font-size="13" fill="#0f1620">4,0 m</text><line x1="390" y1="130" x2="318" y2="130" stroke="#0f1620" stroke-width="1.3" stroke-linecap="butt"/><polygon points="318,125.2 310,130 318,134.8" fill="#0f1620"/><line x1="390" y1="130" x2="462" y2="130" stroke="#0f1620" stroke-width="1.3" stroke-linecap="butt"/><polygon points="462,134.8 470,130 462,125.2" fill="#0f1620"/><text x="390" y="124" text-anchor="middle" font-size="13" fill="#0f1620">2,0 m</text></svg>`,
+            answer: { value: 2.0, unit: 's' },
+            delsvar: [
+                { del: 'a', value: 1.0, unit: 's', etikett: 'första pulsen' },
+                { del: 'a', value: 2.0, unit: 's', etikett: 'andra pulsen' },
+                { del: 'b', value: 40, unit: 'cm', etikett: 'bredd första' },
+                { del: 'b', value: 40, unit: 'cm', etikett: 'bredd andra' },
+            ],
+            solution: `Vid knuten delas pulsen: en del reflekteras och en del transmitteras. Den transmitterade delen reflekteras sedan mot väggen och kommer tillbaka till knuten, där den åter delas.
+
+$$
+\\left[ \\begin{array}{l}
+L_1 = 4{,}0\\ \\mathrm{m} \\\\
+L_2 = 2{,}0\\ \\mathrm{m} \\\\
+v_1 = 8{,}0\\ \\mathrm{m/s} \\\\
+v_2 = 4{,}0\\ \\mathrm{m/s} \\\\
+b_1 = 0{,}40\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+**a)** *Första pulsen* är den del som reflekteras direkt vid knuten. Den går $L_1$ fram och $L_1$ tillbaka i det lätta repet:
+
+$$ t_\\text{första} = \\frac{2L_1}{v_1} = \\frac{2 \\cdot 4{,}0}{8{,}0} = 1{,}0\\ \\mathrm{s} $$
+
+*Andra pulsen* är den del som transmitteras in i det tunga repet, reflekteras mot väggen, går tillbaka till knuten och transmitteras in i det lätta repet igen. Den går $L_1$ två gånger i det lätta repet och $L_2$ två gånger i det tunga:
+
+$$ t_\\text{andra} = \\frac{2L_1}{v_1} + \\frac{2L_2}{v_2} = \\frac{2 \\cdot 4{,}0}{8{,}0} + \\frac{2 \\cdot 2{,}0}{4{,}0} = 1{,}0 + 1{,}0 = 2{,}0\\ \\mathrm{s} $$
+
+**Svar:** Den första pulsen är reflexen vid knuten och når handen efter $1{,}0\\ \\mathrm{s}$. Den andra pulsen är reflexen mot väggen och når handen efter $2{,}0\\ \\mathrm{s}$.
+
+**b)** *Orientering.* Följ varje puls genom alla övergångar:
+
+- Första pulsen: från lätt till tungt rep (tunnare till tätare) reflekteras pulsen **omvänd**. Den blir en vågdal.
+- Andra pulsen: den transmitteras rättvänd in i det tunga repet, vänds vid den fasta änden till en vågdal och transmitteras sedan från det tunga till det lätta repet. En transmitterad puls behåller sin orientering, så den förblir en vågdal.
+
+*Bredd.* En puls tar lika lång tid att passera en punkt var den än befinner sig, eftersom ingenting ändrar dess varaktighet:
+
+$$ \\Delta t = \\frac{b_1}{v_1} = \\frac{0{,}40}{8{,}0} = 0{,}050\\ \\mathrm{s} $$
+
+Bredden i ett rep är därför $b = v \\cdot \\Delta t$. I det tunga repet är den andra pulsen $b_2 = 4{,}0 \\cdot 0{,}050 = 0{,}20\\ \\mathrm{m}$, men tillbaka i det lätta repet blir den åter $8{,}0 \\cdot 0{,}050 = 0{,}40\\ \\mathrm{m}$. Den första pulsen har hela tiden gått i det lätta repet och är också $0{,}40\\ \\mathrm{m}$.
+
+Båda pulserna är lägre än den ursprungliga, eftersom en del av energin för varje gång går vidare eller studsar åt ett annat håll.
+
+**Svar:** Båda pulserna är vågdalar och $40\\ \\mathrm{cm}$ breda när de når handen.`,
+        },
+        {
+            level: 2,
+            question: `Vid en ultraljudsundersökning skickar givaren korta ljudpulser in i kroppen och registrerar ekon. Under givaren finns först mjukvävnad, sedan ett muskellager och sist ben. Ljudets fart är $1\\,540\\ \\mathrm{m/s}$ i mjukvävnaden och $1\\,580\\ \\mathrm{m/s}$ i muskeln. Två tydliga ekon kommer tillbaka $40\\ \\mathrm{\\mu s}$ och $65\\ \\mathrm{\\mu s}$ efter att pulsen sändes ut.<br>a) Förklara varför det kan komma flera ekon från en och samma puls.<br>b) Hur djupt under givaren ligger gränsen mellan mjukvävnad och muskel? Svara i cm.<br>c) Hur tjockt är muskellagret? Svara i cm.<br>d) Ett enkelt instrument räknar med farten $1\\,540\\ \\mathrm{m/s}$ i all vävnad. Vilken tjocklek visar det för muskellagret? Svara i cm.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 250" width="664" height="361" role="img" aria-label="En ultraljudsgivare ligger mot huden. Under den finns ett lager mjukvävnad där ljudets fart är 1 540 m/s, sedan ett lager muskel med farten 1 580 m/s och sist ben. Ljudpulsen går nedåt och ekon kommer tillbaka från gränsytorna." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="40" y="70" width="380" height="70" fill="#f3d9cc"/><rect x="40" y="140" width="380" height="46" fill="#d98f86"/><rect x="40" y="186" width="380" height="44" fill="#ece6d6"/><line x1="40" y1="70" x2="420" y2="70" stroke="#0f1620" stroke-width="1.4"/><line x1="40" y1="140" x2="420" y2="140" stroke="#0f1620" stroke-width="1.4"/><line x1="40" y1="186" x2="420" y2="186" stroke="#0f1620" stroke-width="1.4"/><rect x="92" y="28" width="56" height="34" rx="5" fill="#d7dde3" stroke="#0f1620" stroke-width="1.6"/><rect x="100" y="62" width="40" height="8" fill="#9aa3ad" stroke="#0f1620" stroke-width="1.2"/><line x1="120" y1="28" x2="120" y2="12" stroke="#0f1620" stroke-width="2"/><text x="160" y="50" text-anchor="start" font-size="13" fill="#0f1620">givare</text><text x="410" y="110" text-anchor="end" font-size="13" fill="#0f1620">mjukvävnad</text><text x="410" y="127" text-anchor="end" font-size="13" fill="#0f1620">1 540 m/s</text><text x="410" y="160" text-anchor="end" font-size="13" fill="#0f1620">muskel</text><text x="410" y="177" text-anchor="end" font-size="13" fill="#0f1620">1 580 m/s</text><text x="410" y="213" text-anchor="end" font-size="13" fill="#0f1620">ben</text><line x1="112" y1="74" x2="112" y2="173" stroke="#2563c9" stroke-width="2" stroke-linecap="butt"/><polygon points="106.6,173 112,182 117.4,173" fill="#2563c9"/><line x1="128" y1="136" x2="128" y2="85" stroke="#c8324a" stroke-width="2" stroke-linecap="butt"/><polygon points="133.4,85 128,76 122.6,85" fill="#c8324a"/><line x1="144" y1="182" x2="144" y2="85" stroke="#c8324a" stroke-width="2" stroke-linecap="butt"/><polygon points="149.4,85 144,76 138.6,85" fill="#c8324a"/><text x="156" y="122" text-anchor="start" font-size="13" fill="#c8324a">ekon</text></svg>`,
+            answer: { value: 2.0, unit: 'cm' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 3.1, unit: 'cm' },
+                { del: 'c', value: 2.0, unit: 'cm' },
+                { del: 'd', value: 1.9, unit: 'cm' },
+            ],
+            solution: `**a)** När ljudpulsen når en gräns mellan två vävnader där ljudets fart är olika sker både **reflexion** och **transmission**. En del av pulsen studsar tillbaka som ett eko, och resten fortsätter in i nästa lager. Där kan den reflekteras igen vid nästa gräns. Varje gränsyta ger alltså ett eget eko.
+
+**Svar:** Vid varje gränsyta reflekteras en del av pulsen medan resten transmitteras vidare, så varje gräns ger ett eget eko.
+
+**b)** Det första ekot kommer från den närmaste gränsen. Pulsen har gått ned till gränsen och tillbaka, sträckan $2d_1$, med farten $v_1$:
+
+$$ 2d_1 = v_1 \\cdot t_1 \\quad\\Leftrightarrow\\quad d_1 = \\frac{v_1 \\cdot t_1}{2} $$
+
+$$
+\\left[ \\begin{array}{l}
+v_1 = 1\\,540\\ \\mathrm{m/s} \\\\
+t_1 = 40\\ \\mathrm{\\mu s} = 40 \\cdot 10^{-6}\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ d_1 = \\frac{1\\,540 \\cdot 40 \\cdot 10^{-6}}{2} = 0{,}0308\\ \\mathrm{m} \\approx 3{,}1\\ \\mathrm{cm} $$
+
+**Svar:** Gränsen ligger cirka $3{,}1\\ \\mathrm{cm}$ under givaren.
+
+**c)** Det andra ekot har gått samma väg genom mjukvävnaden som det första och dessutom genom muskellagret, ned och upp. Skillnaden i tid är alltså den tid det tar att gå genom muskeln två gånger:
+
+$$ \\Delta t = t_2 - t_1 = 65 - 40 = 25\\ \\mathrm{\\mu s} $$
+
+$$ 2d_2 = v_2 \\cdot \\Delta t \\quad\\Leftrightarrow\\quad d_2 = \\frac{v_2 \\cdot \\Delta t}{2} $$
+
+$$ d_2 = \\frac{1\\,580 \\cdot 25 \\cdot 10^{-6}}{2} = 0{,}01975\\ \\mathrm{m} \\approx 2{,}0\\ \\mathrm{cm} $$
+
+**Svar:** Muskellagret är cirka $2{,}0\\ \\mathrm{cm}$ tjockt.
+
+**d)** Med farten $1\\,540\\ \\mathrm{m/s}$ även i muskeln blir den beräknade tjockleken
+
+$$ d_2' = \\frac{1\\,540 \\cdot 25 \\cdot 10^{-6}}{2} = 0{,}01925\\ \\mathrm{m} \\approx 1{,}9\\ \\mathrm{cm} $$
+
+Instrumentet underskattar tjockleken med ungefär $0{,}5\\ \\mathrm{mm}$, eftersom ljudet i verkligheten går lite snabbare i muskeln och därför hinner längre på samma tid. Felet är bara cirka $3\\ \\%$, så antagandet om en gemensam fart är rimligt för de flesta undersökningar.
+
+**Svar:** Instrumentet visar cirka $1{,}9\\ \\mathrm{cm}$.`,
+        },
+        {
+            level: 3,
+            question: `I en brusreducerande hörlur fångar en mikrofon upp bullret, och elektroniken skickar en omvänd kopia till högtalaren. Kopian kommer dock fram till örat med en liten fördröjning $\\Delta t = 0{,}25\\ \\mathrm{ms}$ jämfört med bullret. Betrakta buller som består av en enda ton med periodtiden $T$.<br>a) Visa med superpositionsprincipen att bullret i stället **förstärks** till dubbla amplituden om fördröjningen är en halv periodtid.<br>b) Vid vilken frekvens inträffar det med denna hörlur? Svara i Hz.<br>c) Förklara varför hörluren fungerar bra mot det dova bruset från en flygmotor (cirka $100\\ \\mathrm{Hz}$) men sämre mot ljusa ljud.`,
+            answer: { value: 2000, unit: 'Hz' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 2000, unit: 'Hz' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Bullret vid örat är en harmonisk tryckvariation med amplituden $A$:
+
+$$ p_1(t) = A \\sin\\left(\\frac{2\\pi}{T} t\\right) $$
+
+Hörluren ger en omvänd kopia som är fördröjd tiden $\\Delta t$:
+
+$$ p_2(t) = -A \\sin\\left(\\frac{2\\pi}{T} (t - \\Delta t)\\right) $$
+
+Om $\\Delta t = \\dfrac{T}{2}$ blir vinkeln i kopian $\\dfrac{2\\pi}{T} t - \\pi$. En sinuskurva som förskjuts en halv period byter tecken, $\\sin(\\varphi - \\pi) = -\\sin \\varphi$, så
+
+$$ p_2(t) = -A \\cdot \\left(-\\sin\\left(\\frac{2\\pi}{T} t\\right)\\right) = A \\sin\\left(\\frac{2\\pi}{T} t\\right) = p_1(t) $$
+
+Fördröjningen vänder alltså tillbaka kopian, så att den blir exakt lika med bullret. Superpositionsprincipen ger
+
+$$ p_1 + p_2 = 2A \\sin\\left(\\frac{2\\pi}{T} t\\right) $$
+
+**Svar:** Med fördröjningen en halv periodtid sammanfaller den omvända kopian med bullret, och summan får amplituden $2A$: bullret förstärks i stället för att tas bort.
+
+**b)**
+$$ \\Delta t = \\frac{T}{2} \\quad\\Leftrightarrow\\quad T = 2\\Delta t = 2 \\cdot 0{,}25 \\cdot 10^{-3} = 0{,}50 \\cdot 10^{-3}\\ \\mathrm{s} $$
+
+$$ f = \\frac{1}{T} = \\frac{1}{0{,}50 \\cdot 10^{-3}} = 2\\,000\\ \\mathrm{Hz} $$
+
+**Svar:** Vid frekvensen $2\\,000\\ \\mathrm{Hz}$
+
+**c)** Vid $100\\ \\mathrm{Hz}$ är periodtiden
+
+$$ T = \\frac{1}{100} = 0{,}010\\ \\mathrm{s} = 10\\ \\mathrm{ms} $$
+
+Fördröjningen $0{,}25\\ \\mathrm{ms}$ är då bara en fyrtiondel av periodtiden. Kopian ligger nästan exakt i motfas med bullret, och summan blir nästan noll. Ju högre frekvensen är, desto kortare är periodtiden, och desto större del av en period utgör samma fördröjning. Kopian hamnar då allt mer ur motfas, och vid $2\\,000\\ \\mathrm{Hz}$ förstärker den i stället bullret. Därför tar hörlurar av den här sorten bort lågfrekvent brus bäst, medan ljusa ljud främst dämpas av själva kåporna.
+
+**Svar:** Vid låga frekvenser är fördröjningen liten jämfört med periodtiden, så kopian tar nästan helt ut bullret. Vid höga frekvenser utgör fördröjningen en stor del av periodtiden, och kopian tar inte längre ut bullret.`,
+        },
+        {
+            level: 3,
+            question: `Ett snöre är spänt mellan två väggar som står $4{,}0\\ \\mathrm{m}$ från varandra, och snöret sitter fast i båda. Vid tiden $t = 0$ finns två likadana, korta och symmetriska vågberg på snöret, med mittpunkterna $1{,}0\\ \\mathrm{m}$ och $3{,}0\\ \\mathrm{m}$ från den vänstra väggen (se figuren). Båda rör sig åt höger med farten $2{,}0\\ \\mathrm{m/s}$.<br>a) När och var möts pulserna första gången, och hur ser snöret ut i det ögonblicket?<br>b) Hur många gånger under de första $4{,}0\\ \\mathrm{s}$ är snöret helt rakt? Motivera.<br>c) Vid vilken tidpunkt ser snöret för första gången ut exakt som vid $t = 0$, med vågberg på samma platser och med samma rörelseriktning?
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 166" width="580" height="229" role="img" aria-label="Ett snöre mellan två väggar 4,0 m isär. Två korta symmetriska vågberg har mittpunkterna 1,0 m och 3,0 m från den vänstra väggen och rör sig båda åt höger." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="18" y="22" width="12" height="112" fill="#e4dfd4"/><g stroke="#5a616b" stroke-width="1"><line x1="20" y1="26" x2="28" y2="34"/><line x1="20" y1="34" x2="28" y2="42"/><line x1="20" y1="42" x2="28" y2="50"/><line x1="20" y1="50" x2="28" y2="58"/><line x1="20" y1="58" x2="28" y2="66"/><line x1="20" y1="66" x2="28" y2="74"/><line x1="20" y1="74" x2="28" y2="82"/><line x1="20" y1="82" x2="28" y2="90"/><line x1="20" y1="90" x2="28" y2="98"/><line x1="20" y1="98" x2="28" y2="106"/><line x1="20" y1="106" x2="28" y2="114"/><line x1="20" y1="114" x2="28" y2="122"/><line x1="20" y1="122" x2="28" y2="130"/><line x1="20" y1="130" x2="28" y2="138"/></g><line x1="30" y1="22" x2="30" y2="134" stroke="#0f1620" stroke-width="2"/><rect x="390" y="22" width="12" height="112" fill="#e4dfd4"/><g stroke="#5a616b" stroke-width="1"><line x1="392" y1="26" x2="400" y2="34"/><line x1="392" y1="34" x2="400" y2="42"/><line x1="392" y1="42" x2="400" y2="50"/><line x1="392" y1="50" x2="400" y2="58"/><line x1="392" y1="58" x2="400" y2="66"/><line x1="392" y1="66" x2="400" y2="74"/><line x1="392" y1="74" x2="400" y2="82"/><line x1="392" y1="82" x2="400" y2="90"/><line x1="392" y1="90" x2="400" y2="98"/><line x1="392" y1="98" x2="400" y2="106"/><line x1="392" y1="106" x2="400" y2="114"/><line x1="392" y1="114" x2="400" y2="122"/><line x1="392" y1="122" x2="400" y2="130"/><line x1="392" y1="130" x2="400" y2="138"/></g><line x1="390" y1="22" x2="390" y2="134" stroke="#0f1620" stroke-width="2"/><polyline points="30,78 31.5,78 33,78 34.5,78 36,78 37.5,78 39,78 40.5,78 42,78 43.5,78 45,78 46.5,78 48,78 49.5,78 51,78 52.5,78 54,78 55.5,78 57,78 58.5,78 60,78 61.5,78 63,78 64.5,78 66,78 67.5,78 69,78 70.5,78 72,78 73.5,78 75,78 76.5,78 78,78 79.5,78 81,78 82.5,78 84,78 85.5,78 87,78 88.5,78 90,78 91.5,78 93,78 94.5,78 96,78 97.5,78 99,78 100.5,78 102,78 103.5,75.5 105,73 106.5,70.5 108,68 109.5,65.5 111,63 112.5,60.5 114,58 115.5,55.5 117,53 118.5,50.5 120,48 121.5,50.5 123,53 124.5,55.5 126,58 127.5,60.5 129,63 130.5,65.5 132,68 133.5,70.5 135,73 136.5,75.5 138,78 139.5,78 141,78 142.5,78 144,78 145.5,78 147,78 148.5,78 150,78 151.5,78 153,78 154.5,78 156,78 157.5,78 159,78 160.5,78 162,78 163.5,78 165,78 166.5,78 168,78 169.5,78 171,78 172.5,78 174,78 175.5,78 177,78 178.5,78 180,78 181.5,78 183,78 184.5,78 186,78 187.5,78 189,78 190.5,78 192,78 193.5,78 195,78 196.5,78 198,78 199.5,78 201,78 202.5,78 204,78 205.5,78 207,78 208.5,78 210,78 211.5,78 213,78 214.5,78 216,78 217.5,78 219,78 220.5,78 222,78 223.5,78 225,78 226.5,78 228,78 229.5,78 231,78 232.5,78 234,78 235.5,78 237,78 238.5,78 240,78 241.5,78 243,78 244.5,78 246,78 247.5,78 249,78 250.5,78 252,78 253.5,78 255,78 256.5,78 258,78 259.5,78 261,78 262.5,78 264,78 265.5,78 267,78 268.5,78 270,78 271.5,78 273,78 274.5,78 276,78 277.5,78 279,78 280.5,78 282,78 283.5,75.5 285,73 286.5,70.5 288,68 289.5,65.5 291,63 292.5,60.5 294,58 295.5,55.5 297,53 298.5,50.5 300,48 301.5,50.5 303,53 304.5,55.5 306,58 307.5,60.5 309,63 310.5,65.5 312,68 313.5,70.5 315,73 316.5,75.5 318,78 319.5,78 321,78 322.5,78 324,78 325.5,78 327,78 328.5,78 330,78 331.5,78 333,78 334.5,78 336,78 337.5,78 339,78 340.5,78 342,78 343.5,78 345,78 346.5,78 348,78 349.5,78 351,78 352.5,78 354,78 355.5,78 357,78 358.5,78 360,78 361.5,78 363,78 364.5,78 366,78 367.5,78 369,78 370.5,78 372,78 373.5,78 375,78 376.5,78 378,78 379.5,78 381,78 382.5,78 384,78 385.5,78 387,78 388.5,78 390,78 390,78" fill="none" stroke="#0f1620" stroke-width="2.4" stroke-linejoin="round"/><line x1="98" y1="34" x2="133" y2="34" stroke="#2563c9" stroke-width="2.2" stroke-linecap="butt"/><polygon points="133,39.4 142,34 133,28.6" fill="#2563c9"/><text x="120" y="27" text-anchor="middle" font-size="14" fill="#2563c9"><tspan font-style="italic">v</tspan></text><line x1="278" y1="34" x2="313" y2="34" stroke="#2563c9" stroke-width="2.2" stroke-linecap="butt"/><polygon points="313,39.4 322,34 313,28.6" fill="#2563c9"/><text x="300" y="27" text-anchor="middle" font-size="14" fill="#2563c9"><tspan font-style="italic">v</tspan></text><text x="96" y="66" text-anchor="end" font-size="13" fill="#0f1620">A</text><text x="276" y="66" text-anchor="end" font-size="13" fill="#0f1620">B</text><line x1="120" y1="82" x2="120" y2="109" stroke="#5a616b" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="300" y1="82" x2="300" y2="135" stroke="#5a616b" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="30" y1="134" x2="30" y2="161" stroke="#5a616b" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="390" y1="134" x2="390" y2="161" stroke="#5a616b" stroke-width="0.9" stroke-dasharray="3 3"/><line x1="38" y1="104" x2="112" y2="104" stroke="#0f1620" stroke-width="1.3" stroke-linecap="butt"/><polygon points="38,99.2 30,104 38,108.8" fill="#0f1620"/><polygon points="112,99.2 120,104 112,108.8" fill="#0f1620"/><text x="75" y="99" text-anchor="middle" font-size="13" fill="#0f1620">1,0 m</text><line x1="38" y1="130" x2="292" y2="130" stroke="#0f1620" stroke-width="1.3" stroke-linecap="butt"/><polygon points="38,125.2 30,130 38,134.8" fill="#0f1620"/><polygon points="292,125.2 300,130 292,134.8" fill="#0f1620"/><text x="165" y="125" text-anchor="middle" font-size="13" fill="#0f1620">3,0 m</text><line x1="38" y1="156" x2="382" y2="156" stroke="#0f1620" stroke-width="1.3" stroke-linecap="butt"/><polygon points="38,151.2 30,156 38,160.8" fill="#0f1620"/><polygon points="382,151.2 390,156 382,160.8" fill="#0f1620"/><text x="210" y="151" text-anchor="middle" font-size="13" fill="#0f1620">4,0 m</text></svg>`,
+            answer: { value: 4.0, unit: 's' },
+            delsvar: [
+                { del: 'a', value: 1.0, unit: 's', etikett: 'tid' },
+                { del: 'a', value: 3.0, unit: 'm', etikett: 'avstånd från vänstra väggen' },
+                { del: 'b', value: 2, unit: 'gånger' },
+                { del: 'c', value: 4.0, unit: 's' },
+            ],
+            solution: `Kalla pulsen som börjar vid $1{,}0\\ \\mathrm{m}$ för A och pulsen som börjar vid $3{,}0\\ \\mathrm{m}$ för B. Lägg en $x$-axel längs snöret med origo i den vänstra väggen. Båda väggarna är fasta ändar, så varje gång en puls reflekteras vänds den: ett vågberg kommer tillbaka som en vågdal och tvärtom.
+
+**a)** A och B rör sig åt samma håll med samma fart, så avståndet mellan dem ändras inte förrän någon av dem reflekteras. B når den högra väggen först. Den har sträckan $4{,}0 - 3{,}0 = 1{,}0\\ \\mathrm{m}$ kvar:
+
+$$ t_B = \\frac{1{,}0}{2{,}0} = 0{,}50\\ \\mathrm{s} $$
+
+Där reflekteras B och kommer tillbaka som en **vågdal** på väg åt vänster. Vid tiden $t$ har B gått sträckan $2{,}0 \\cdot t$, varav $1{,}0\\ \\mathrm{m}$ fram till väggen. Mittpunkterna ligger därför vid
+
+$$ x_A = 1{,}0 + 2{,}0t \\qquad x_B = 4{,}0 - (2{,}0t - 1{,}0) = 5{,}0 - 2{,}0t $$
+
+Pulserna möts när mittpunkterna sammanfaller, $x_A = x_B$:
+
+$$ 1{,}0 + 2{,}0t = 5{,}0 - 2{,}0t $$
+
+$$ 1{,}0 + 2{,}0t \\mathbin{\\boldsymbol{+}} \\boldsymbol{2{,}0t} = 5{,}0 - 2{,}0t \\mathbin{\\boldsymbol{+}} \\boldsymbol{2{,}0t} $$
+
+$$ 1{,}0 + 4{,}0t = 5{,}0 $$
+
+$$ 1{,}0 + 4{,}0t \\mathbin{\\boldsymbol{-}} \\boldsymbol{1{,}0} = 5{,}0 \\mathbin{\\boldsymbol{-}} \\boldsymbol{1{,}0} $$
+
+$$ 4{,}0t = 4{,}0 $$
+
+$$ \\frac{4{,}0t}{\\boldsymbol{4{,}0}} = \\frac{4{,}0}{\\boldsymbol{4{,}0}} $$
+
+$$ t = 1{,}0\\ \\mathrm{s} $$
+
+Mötespunkten är $x_A = 1{,}0 + 2{,}0 \\cdot 1{,}0 = 3{,}0\\ \\mathrm{m}$.
+
+I det ögonblicket ligger vågberget A och vågdalen B med mittpunkterna på samma ställe. Pulserna har samma form och är symmetriska, så i varje punkt har den ena elongationen $+y$ och den andra $-y$. Enligt superpositionsprincipen blir summan noll överallt.
+
+**Svar:** Pulserna möts efter $1{,}0\\ \\mathrm{s}$, $3{,}0\\ \\mathrm{m}$ från den vänstra väggen, och då är snöret helt rakt.
+
+**b)** Snöret är helt rakt bara när båda pulserna samtidigt tas ut. Vi går igenom tidsintervallen mellan reflexionerna. A når den högra väggen vid $t = \\dfrac{3{,}0}{2{,}0} = 1{,}5\\ \\mathrm{s}$ och den vänstra vid $t = 1{,}5 + \\dfrac{4{,}0}{2{,}0} = 3{,}5\\ \\mathrm{s}$. B når den högra väggen vid $0{,}50\\ \\mathrm{s}$ och den vänstra vid $t = 0{,}50 + \\dfrac{4{,}0}{2{,}0} = 2{,}5\\ \\mathrm{s}$.
+
+| Tid (s) | A | B | Möts de? |
+|---|---|---|---|
+| $0$ till $0{,}50$ | vågberg, åt höger | vågberg, åt höger | nej, samma riktning |
+| $0{,}50$ till $1{,}5$ | vågberg, åt höger | vågdal, åt vänster | ja, vid $1{,}0\\ \\mathrm{s}$ |
+| $1{,}5$ till $2{,}5$ | vågdal, åt vänster | vågdal, åt vänster | nej, samma riktning |
+| $2{,}5$ till $3{,}5$ | vågdal, åt vänster | vågberg, åt höger | ja |
+| $3{,}5$ till $4{,}0$ | vågberg, åt höger | vågberg, åt höger | nej, samma riktning |
+
+I intervallet $2{,}5$ till $3{,}5\\ \\mathrm{s}$ ligger mittpunkterna vid $x_A = 4{,}0 - 2{,}0(t - 1{,}5) = 7{,}0 - 2{,}0t$ och $x_B = 2{,}0(t - 2{,}5) = 2{,}0t - 5{,}0$. Samma räkning som i a) ger
+
+$$ 7{,}0 - 2{,}0t = 2{,}0t - 5{,}0 \\quad\\Leftrightarrow\\quad 12 = 4{,}0t \\quad\\Leftrightarrow\\quad t = 3{,}0\\ \\mathrm{s} $$
+
+Där möts vågdalen A och vågberget B, och snöret är åter helt rakt. Vid varje möte har den ena pulsen reflekterats en gång mer än den andra, så det är alltid ett vågberg som möter en vågdal.
+
+Däremellan kan snöret inte vara rakt. En puls som har mittpunkten i en vägg tar visserligen ut sig själv just där, men det händer aldrig för båda pulserna samtidigt ($0{,}50$, $1{,}5$, $2{,}5$ och $3{,}5\\ \\mathrm{s}$), och den andra pulsen syns då någon annanstans på snöret.
+
+**Svar:** Snöret är helt rakt $2$ gånger, vid $t = 1{,}0\\ \\mathrm{s}$ och vid $t = 3{,}0\\ \\mathrm{s}$.
+
+**c)** En puls som går fram och tillbaka mellan väggarna är tillbaka på samma plats med samma riktning när den har gått sträckan $2 \\cdot 4{,}0 = 8{,}0\\ \\mathrm{m}$. Den har då reflekterats två gånger, alltså vänts två gånger, och är åter ett vågberg:
+
+$$ T = \\frac{8{,}0}{2{,}0} = 4{,}0\\ \\mathrm{s} $$
+
+Pulserna är likadana, så snöret skulle också se ut som från början om A och B bytt plats. A ligger vid $3{,}0\\ \\mathrm{m}$ på väg åt höger som vågberg först vid $t = 1{,}0\\ \\mathrm{s}$, men då är B en vågdal på väg åt vänster (se a). Något platsbyte inträffar alltså inte tidigare, och tabellen i b) visar att båda pulserna är vågberg på väg åt höger först efter $3{,}5\\ \\mathrm{s}$.
+
+**Svar:** Vid $t = 4{,}0\\ \\mathrm{s}$`,
+        },
+        {
+            level: 3,
+            question: `Ella och Omar står i var sin ände av en lång spiralfjäder som ligger utsträckt på golvet. Ella skickar iväg ett symmetriskt vågberg, och $0{,}40\\ \\mathrm{s}$ senare skickar Omar iväg en vågdal med exakt samma form. På filmen av försöket syns att fjädern i ett ögonblick är helt rak, och det sker i en punkt som ligger $0{,}60\\ \\mathrm{m}$ från fjäderns mitt. Ingen av dem har mätt fjäderns längd.<br>a) Ligger punkten på Ellas eller på Omars sida om mitten? Motivera.<br>b) Visa att pulsernas fart kan bestämmas utan att man känner fjäderns längd, och beräkna farten.<br>c) Punkten kan bara avläsas med noggrannheten $\\pm 0{,}05\\ \\mathrm{m}$ och fördröjningen med $\\pm 0{,}02\\ \\mathrm{s}$. Inom vilket intervall ligger farten?`,
+            answer: { value: 3.0, unit: 'm/s' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 3.0, unit: 'm/s' },
+                { del: 'c', value: 2.6, unit: 'm/s', etikett: 'minsta' },
+                { del: 'c', value: 3.4, unit: 'm/s', etikett: 'största' },
+            ],
+            solution: `Ett vågberg och en vågdal med samma symmetriska form tar ut varandra överallt just när deras mittpunkter sammanfaller (superpositionsprincipen). Punkten där fjädern är helt rak är alltså platsen där pulsernas mittpunkter möts.
+
+**a)** Pulserna rör sig lika fort, men Ellas puls har varit på väg $0{,}40\\ \\mathrm{s}$ längre än Omars när de möts. Den har därför hunnit längre än Omars puls, och mötet sker efter mitten sett från Ella.
+
+**Svar:** Punkten ligger på Omars sida om mitten, eftersom Ellas puls har gått längre tid och därmed längre sträcka.
+
+**b)** Kalla fjäderns okända längd $L$, pulsernas fart $v$ och fördröjningen $\\Delta t$. Lägg en $x$-axel längs fjädern med origo hos Ella, och räkna tiden $t$ från det att Ella skickar sin puls. Mittpunkterna ligger vid
+
+$$ x_E = v \\cdot t \\qquad x_O = L - v(t - \\Delta t) $$
+
+Pulserna möts när $x_E = x_O$:
+
+$$ v t = L - v t + v \\Delta t $$
+
+$$ v t \\mathbin{\\boldsymbol{+}} \\boldsymbol{v t} = L - v t + v \\Delta t \\mathbin{\\boldsymbol{+}} \\boldsymbol{v t} $$
+
+$$ 2 v t = L + v \\Delta t $$
+
+$$ \\frac{2 v t}{\\boldsymbol{2}} = \\frac{L + v \\Delta t}{\\boldsymbol{2}} $$
+
+$$ v t = \\frac{L}{2} + \\frac{v \\Delta t}{2} $$
+
+Vänsterledet $v t$ är mötespunktens läge $x_E$, och $\\dfrac{L}{2}$ är fjäderns mitt. Mötespunktens avstånd från mitten är alltså
+
+$$ s = x_E - \\frac{L}{2} = \\frac{v \\Delta t}{2} \\quad\\Leftrightarrow\\quad v = \\frac{2s}{\\Delta t} $$
+
+Längden $L$ har försvunnit ur uttrycket: farten bestäms bara av avståndet från mitten och fördröjningen.
+
+$$
+\\left[ \\begin{array}{l}
+s = 0{,}60\\ \\mathrm{m} \\\\
+\\Delta t = 0{,}40\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ v = \\frac{2 \\cdot 0{,}60}{0{,}40} = 3{,}0\\ \\mathrm{m/s} $$
+
+**Svar:** Farten är $v = \\dfrac{2s}{\\Delta t}$, som inte innehåller fjäderns längd, och den blir $3{,}0\\ \\mathrm{m/s}$.
+
+**c)** Farten blir minst när $s$ är så litet och $\\Delta t$ så stort som mätosäkerheten tillåter, och störst i det omvända fallet:
+
+$$ v_\\text{min} = \\frac{2 \\cdot 0{,}55}{0{,}42} \\approx 2{,}6\\ \\mathrm{m/s} \\qquad v_\\text{max} = \\frac{2 \\cdot 0{,}65}{0{,}38} \\approx 3{,}4\\ \\mathrm{m/s} $$
+
+Intervallet är brett, ungefär $\\pm 14\\ \\%$. Den största osäkerheten kommer från avläsningen av punkten: $0{,}05$ av $0{,}60\\ \\mathrm{m}$ är drygt $8\\ \\%$, medan $0{,}02$ av $0{,}40\\ \\mathrm{s}$ är $5\\ \\%$. Med en längre fördröjning hamnar mötespunkten längre från mitten, och då väger samma avläsningsfel mindre.
+
+**Svar:** Farten ligger mellan $2{,}6\\ \\mathrm{m/s}$ och $3{,}4\\ \\mathrm{m/s}$.`,
         },
     ],
 
@@ -65349,7 +70101,7 @@ $$ \\lambda = 2 \\cdot 0{,}60 = 1{,}20\\ \\mathrm{m} $$
 
 **Svar:** Våglängden är $1{,}20\\ \\mathrm{m}$.
 
-**Generell slutsats:** En sträng kan bara svänga med våglängder $\\lambda_n = 2l/n$ — det är därför ett strängat instrument bara producerar diskreta toner.`,
+**Generell slutsats:** En sträng kan bara svänga med våglängder $\\lambda_n = 2l/n$. Det är därför ett strängat instrument bara producerar diskreta toner.`,
         },
         {
             level: 1,
@@ -65388,25 +70140,25 @@ $$ f = \\frac{v}{\\lambda} = \\frac{300}{2{,}0} = 150\\ \\mathrm{Hz} $$
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
-            level: 2,
+            level: 1,
             question: `En sträng med längden $0{,}50\\ \\mathrm{m}$ har våghastigheten $160\\ \\mathrm{m/s}$. Beräkna **grundtonens frekvens**.
 
 ${makeStanding({ type: 'string', n: 1, length: 260, lengthLabel: '<tspan font-style="italic">l</tspan> = 0,50 m' })}`,
             answer: { value: 160, unit: 'Hz' },
             solution: `Vi behöver först grundtonens våglängd, sedan dess frekvens.
 
-**Steg 1 — våglängd.** Grundtonen ($n = 1$) ger
+**Steg 1: våglängd.** Grundtonen ($n = 1$) ger
 
 $$ \\lambda = 2l = 2 \\cdot 0{,}50 = 1{,}00\\ \\mathrm{m} $$
 
-**Steg 2 — frekvens.**
+**Steg 2: frekvens.**
 
 $$ f = \\frac{v}{\\lambda} = \\frac{160}{1{,}00} = 160\\ \\mathrm{Hz} $$
 
 **Svar:** Grundtonens frekvens är $160\\ \\mathrm{Hz}$.`,
         },
         {
-            level: 2,
+            level: 1,
             question: `En sträng har grundtonens frekvens $100\\ \\mathrm{Hz}$. Vilka är frekvenserna för **första och andra övertonen**?`,
             answer: { value: 300, unit: 'Hz', label: 'andra övertonens frekvens' },
             solution: `Eftersom våghastigheten *v* i strängen är konstant och $\\lambda_n = 2l/n$, blir frekvensen för $n$:te moden
@@ -65425,23 +70177,23 @@ $$
 
 **Svar:** Första övertonen $200\\ \\mathrm{Hz}$, andra övertonen $300\\ \\mathrm{Hz}$ (ange den andra övertonens frekvens i svarsfältet).
 
-**Generell slutsats:** Den så kallade **övertonsserien** $f_n = n\\cdot f_1$ är grunden för all stränginstrument-musik — det är blandningen av grundtonen och övertonerna som ger varje instrument sin karakteristiska klang.`,
+**Generell slutsats:** Den så kallade **övertonsserien** $f_n = n\\cdot f_1$ är grunden för all stränginstrument-musik. Det är blandningen av grundtonen och övertonerna som ger varje instrument sin karakteristiska klang.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
-            level: 3,
-            question: `En gitarrsträng med längden $0{,}65\\ \\mathrm{m}$ svänger i sin **tredje överton** (fyra bukar) vid frekvensen $660\\ \\mathrm{Hz}$. Gitarristen sätter sedan fingret precis halvvägs upp på strängen — den effektiva längden blir då $0{,}325\\ \\mathrm{m}$ — och spelar **grundtonen** för den förkortade strängen. Vilken frekvens har den nya grundtonen? (Strängens spänning och därmed våghastigheten är oförändrad.)`,
+            level: 2,
+            question: `En gitarrsträng med längden $0{,}65\\ \\mathrm{m}$ svänger i sin **tredje överton** (fyra bukar) vid frekvensen $660\\ \\mathrm{Hz}$. Gitarristen sätter sedan fingret precis halvvägs upp på strängen (den effektiva längden blir då $0{,}325\\ \\mathrm{m}$) och spelar **grundtonen** för den förkortade strängen. Vilken frekvens har den nya grundtonen? (Strängens spänning och därmed våghastigheten är oförändrad.)`,
             answer: { value: 330, unit: 'Hz' },
-            solution: `**Insikten är att våghastigheten *v* i strängen är samma både före och efter** — fingret ändrar bara hur länge svängningen reflekterar mellan vibrationspunkterna, inte spänningen i strängen. Vi använder *v* för att brygga mellan två olika randvillkor.
+            solution: `**Insikten är att våghastigheten *v* i strängen är samma både före och efter**. Fingret ändrar bara hur länge svängningen reflekterar mellan vibrationspunkterna, inte spänningen i strängen. Vi använder *v* för att brygga mellan två olika randvillkor.
 
-**Steg 1 — våghastigheten ur första situationen.** Vid tredje övertonen ($n = 4$, fyra bukar):
+**Steg 1: våghastigheten ur första situationen.** Vid tredje övertonen ($n = 4$, fyra bukar):
 
 $$ \\lambda_1 = \\frac{2l}{n} = \\frac{2 \\cdot 0{,}65}{4} = 0{,}325\\ \\mathrm{m} $$
 
 $$ v = f_1 \\cdot \\lambda_1 = 660 \\cdot 0{,}325 = 214{,}5\\ \\mathrm{m/s} $$
 
-**Steg 2 — grundtonen för den förkortade strängen.** Ny effektiv längd $l' = 0{,}325\\ \\mathrm{m}$, grundton ($n = 1$):
+**Steg 2: grundtonen för den förkortade strängen.** Ny effektiv längd $l' = 0{,}325\\ \\mathrm{m}$, grundton ($n = 1$):
 
 $$ \\lambda_2 = 2l' = 2 \\cdot 0{,}325 = 0{,}65\\ \\mathrm{m} $$
 
@@ -65449,7 +70201,642 @@ $$ f_2 = \\frac{v}{\\lambda_2} = \\frac{214{,}5}{0{,}65} = 330\\ \\mathrm{Hz} $$
 
 **Svar:** Den nya grundtonen är $330\\ \\mathrm{Hz}$.
 
-**Generell slutsats:** En förkortning av strängen till hälften halverar våglängden för grundtonen, och därmed *fördubblar* frekvensen för en given mode — det är en *oktav* upp i musikalisk mening. Att gripa strängen på olika positioner på greppbrädet är hur gitarristen ändrar tonhöjden.`,
+**Generell slutsats:** En förkortning av strängen till hälften halverar våglängden för grundtonen, och därmed *fördubblar* frekvensen för en given mode, alltså en *oktav* upp i musikalisk mening. Att gripa strängen på olika positioner på greppbrädet är hur gitarristen ändrar tonhöjden.`,
+        },
+        {
+            level: 1,
+            question: `En tvättlina med längden $3{,}0\\ \\mathrm{m}$ är spänd mellan två stolpar. När du rycker rytmiskt i linan nära ena stolpen börjar den svänga kraftigt med **en buk** vid frekvensen $2{,}5\\ \\mathrm{Hz}$. Bestäm vågens utbredningshastighet i linan. Svara i m/s.`,
+            answer: { value: 15, unit: 'm/s' },
+            solution: `Linan svänger med en buk, alltså i sin grundton. Avståndet mellan två närliggande noder är en halv våglängd, så linans längd är en halv våglängd:
+
+$$ l = \\frac{\\lambda}{2} \\quad\\Leftrightarrow\\quad \\lambda = 2 \\cdot l $$
+
+$$
+\\left[ \\begin{array}{l}
+f = 2{,}5\\ \\mathrm{Hz} \\\\
+\\lambda = 2 \\cdot 3{,}0\\ \\mathrm{m} = 6{,}0\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+Utbredningshastigheten fås ur
+
+$$ v = f \\cdot \\lambda = 2{,}5 \\cdot 6{,}0 = 15\\ \\mathrm{m/s} $$
+
+**Svar:** $15\\ \\mathrm{m/s}$`,
+        },
+        {
+            level: 1,
+            question: `Figuren visar en stående våg i en sträng med längden $1{,}20\\ \\mathrm{m}$. Strängens båda ändar sitter fast.<br>a) Hur många bukar och hur många noder har den stående vågen? Räkna med noderna vid ändarna.<br>b) Bestäm vågens våglängd. Svara i meter.
+
+${makeStanding({ type: 'string', n: 4, length: 320, lengthLabel: '<tspan font-style="italic">l</tspan> = 1,20 m' })}`,
+            answer: { value: 0.60, unit: 'm' },
+            delsvar: [
+                { del: 'a', value: 4, unit: '', etikett: 'antal bukar' },
+                { del: 'a', value: 5, unit: '', etikett: 'antal noder' },
+                { del: 'b', value: 0.60, unit: 'm' },
+            ],
+            solution: `**a)** Bukarna är punkterna där strängen svänger med störst utslag, mitt emellan noderna. I figuren finns fyra sådana. Noderna är punkterna som står still: en i varje ände och tre mellan bukarna, alltså fem.
+
+**Svar:** 4 bukar och 5 noder
+
+**b)** Avståndet mellan två närliggande noder är en halv våglängd. Med fyra bukar ryms fyra halva våglängder på strängen:
+
+$$ l = 4 \\cdot \\frac{\\lambda}{2} = 2\\lambda \\quad\\Leftrightarrow\\quad \\lambda = \\frac{l}{2} $$
+
+$$ \\lambda = \\frac{1{,}20}{2} = 0{,}60\\ \\mathrm{m} $$
+
+**Svar:** $0{,}60\\ \\mathrm{m}$`,
+        },
+        {
+            level: 1,
+            question: `I ett laborationsförsök svänger en lång spänd metalltråd med en stående våg. Avståndet mellan två närliggande bukar är $0{,}40\\ \\mathrm{m}$, och frekvensen är $250\\ \\mathrm{Hz}$. Bestäm vågens utbredningshastighet i tråden. Svara i m/s.`,
+            answer: { value: 200, unit: 'm/s' },
+            solution: `Avståndet mellan två närliggande bukar är en halv våglängd:
+
+$$ \\frac{\\lambda}{2} = 0{,}40\\ \\mathrm{m} \\quad\\Leftrightarrow\\quad \\lambda = 2 \\cdot 0{,}40 = 0{,}80\\ \\mathrm{m} $$
+
+$$
+\\left[ \\begin{array}{l}
+f = 250\\ \\mathrm{Hz} \\\\
+\\lambda = 0{,}80\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ v = f \\cdot \\lambda = 250 \\cdot 0{,}80 = 200\\ \\mathrm{m/s} $$
+
+**Svar:** $200\\ \\mathrm{m/s}$`,
+        },
+        {
+            level: 1,
+            question: `Vilket påstående om en stående våg i en sträng stämmer?`,
+            choices: [
+                'Bukarna står stilla, och noderna svänger med störst amplitud.',
+                'Energi transporteras hela tiden från ena änden av strängen till den andra.',
+                'Avståndet mellan två närliggande noder är en hel våglängd.',
+                'Noderna står stilla, och energin är koncentrerad till bukarna.',
+            ],
+            correct: 3,
+            solution: `I en stående våg finns punkter som aldrig rör sig, **noderna**, och mitt emellan dem punkter med störst amplitud, **bukarna**. Det första påståendet har alltså bytt plats på orden.
+
+En stående våg transporterar **ingen energi** längs strängen. Energin stannar i bukarna, där strängen svänger. Avståndet mellan två närliggande noder är en **halv** våglängd, $\\dfrac{\\lambda}{2}$, inte en hel.
+
+**Svar:** Noderna står stilla, och energin är koncentrerad till bukarna.`,
+        },
+        {
+            level: 2,
+            question: `I ett laborationsförsök går ett snöre från en vibrator över en trissa till en hängande vikt (se figuren). Den svängande delen av snöret är $1{,}50\\ \\mathrm{m}$ lång. När vibratorns frekvens är $42\\ \\mathrm{Hz}$ svänger snöret med tre bukar.<br>a) Bestäm vågens utbredningshastighet i snöret.<br>b) Vibratorns frekvens kan ställas in mellan $50\\ \\mathrm{Hz}$ och $100\\ \\mathrm{Hz}$. Vid vilka frekvenser i det intervallet svänger snöret kraftigt, och hur många bukar har det då?<br>c) Vid vilka av frekvenserna i b) står snöret stilla mitt emellan vibratorn och trissan? Motivera.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 200" width="664" height="255" style="display:block;margin:14px auto;max-width:100%;height:auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:4px;font-family:Poppins,sans-serif"><rect x="8" y="150" width="448" height="12" fill="#d9c3a0" stroke="#0f1620" stroke-width="1.2"/><path d="M30 153 q 14 4 30 1" stroke="#b89a70" stroke-width="0.8" fill="none"/><path d="M76 153 q 14 4 30 1" stroke="#b89a70" stroke-width="0.8" fill="none"/><path d="M122 153 q 14 4 30 1" stroke="#b89a70" stroke-width="0.8" fill="none"/><path d="M168 153 q 14 4 30 1" stroke="#b89a70" stroke-width="0.8" fill="none"/><path d="M214 153 q 14 4 30 1" stroke="#b89a70" stroke-width="0.8" fill="none"/><path d="M260 153 q 14 4 30 1" stroke="#b89a70" stroke-width="0.8" fill="none"/><path d="M306 153 q 14 4 30 1" stroke="#b89a70" stroke-width="0.8" fill="none"/><path d="M352 153 q 14 4 30 1" stroke="#b89a70" stroke-width="0.8" fill="none"/><path d="M398 153 q 14 4 30 1" stroke="#b89a70" stroke-width="0.8" fill="none"/><path d="M444 153 q 14 4 30 1" stroke="#b89a70" stroke-width="0.8" fill="none"/><rect x="22" y="104" width="46" height="46" rx="3" fill="#e4ddcd" stroke="#0f1620" stroke-width="1.4"/><circle cx="45" cy="127" r="9" fill="#cfc6b2" stroke="#0f1620" stroke-width="1.1"/><rect x="66" y="108" width="11" height="5" fill="#5a6172" stroke="#0f1620" stroke-width="0.8"/><text x="45" y="97" text-anchor="middle" font-size="12" fill="#0f1620">vibrator</text><rect x="438" y="146" width="16" height="20" fill="#8a8f9c" stroke="#0f1620" stroke-width="1"/><line x1="462" y1="118" x2="446" y2="146" stroke="#0f1620" stroke-width="2.4" stroke-linecap="round"/><circle cx="462" cy="118" r="8" fill="#d8d3c8" stroke="#0f1620" stroke-width="1.4"/><circle cx="462" cy="118" r="1.8" fill="#0f1620"/><line x1="470" y1="118" x2="470" y2="168" stroke="#0f1620" stroke-width="1.3"/><rect x="461" y="168" width="18" height="24" rx="2" fill="#6f7685" stroke="#0f1620" stroke-width="1.2"/><text x="484" y="185" text-anchor="start" font-size="12" fill="#0f1620">vikt</text><line x1="77" y1="110" x2="462" y2="110" stroke="#8a8f9c" stroke-width="0.8" stroke-dasharray="3 3"/><path d="M77.0 110.0 L79.4 109.1 L81.8 108.2 L84.2 107.4 L86.6 106.5 L89.0 105.6 L91.4 104.8 L93.8 104.0 L96.3 103.2 L98.7 102.4 L101.1 101.7 L103.5 100.9 L105.9 100.3 L108.3 99.6 L110.7 99.0 L113.1 98.4 L115.5 97.9 L117.9 97.4 L120.3 96.9 L122.7 96.5 L125.1 96.1 L127.5 95.8 L129.9 95.6 L132.3 95.3 L134.8 95.2 L137.2 95.1 L139.6 95.0 L142.0 95.0 L144.4 95.0 L146.8 95.1 L149.2 95.3 L151.6 95.5 L154.0 95.7 L156.4 96.0 L158.8 96.4 L161.2 96.8 L163.6 97.2 L166.0 97.7 L168.4 98.2 L170.8 98.8 L173.3 99.4 L175.7 100.0 L178.1 100.7 L180.5 101.4 L182.9 102.2 L185.3 102.9 L187.7 103.7 L190.1 104.5 L192.5 105.4 L194.9 106.2 L197.3 107.1 L199.7 107.9 L202.1 108.8 L204.5 109.7 L206.9 110.6 L209.3 111.5 L211.8 112.3 L214.2 113.2 L216.6 114.1 L219.0 114.9 L221.4 115.7 L223.8 116.5 L226.2 117.3 L228.6 118.1 L231.0 118.8 L233.4 119.5 L235.8 120.2 L238.2 120.8 L240.6 121.4 L243.0 122.0 L245.4 122.5 L247.8 122.9 L250.3 123.4 L252.7 123.7 L255.1 124.1 L257.5 124.4 L259.9 124.6 L262.3 124.8 L264.7 124.9 L267.1 125.0 L269.5 125.0 L271.9 125.0 L274.3 124.9 L276.7 124.8 L279.1 124.6 L281.5 124.4 L283.9 124.1 L286.3 123.7 L288.8 123.4 L291.2 122.9 L293.6 122.5 L296.0 122.0 L298.4 121.4 L300.8 120.8 L303.2 120.2 L305.6 119.5 L308.0 118.8 L310.4 118.1 L312.8 117.3 L315.2 116.5 L317.6 115.7 L320.0 114.9 L322.4 114.1 L324.8 113.2 L327.3 112.3 L329.7 111.5 L332.1 110.6 L334.5 109.7 L336.9 108.8 L339.3 107.9 L341.7 107.1 L344.1 106.2 L346.5 105.4 L348.9 104.5 L351.3 103.7 L353.7 102.9 L356.1 102.2 L358.5 101.4 L360.9 100.7 L363.3 100.0 L365.8 99.4 L368.2 98.8 L370.6 98.2 L373.0 97.7 L375.4 97.2 L377.8 96.8 L380.2 96.4 L382.6 96.0 L385.0 95.7 L387.4 95.5 L389.8 95.3 L392.2 95.1 L394.6 95.0 L397.0 95.0 L399.4 95.0 L401.8 95.1 L404.3 95.2 L406.7 95.3 L409.1 95.6 L411.5 95.8 L413.9 96.1 L416.3 96.5 L418.7 96.9 L421.1 97.4 L423.5 97.9 L425.9 98.4 L428.3 99.0 L430.7 99.6 L433.1 100.3 L435.5 100.9 L437.9 101.7 L440.3 102.4 L442.8 103.2 L445.2 104.0 L447.6 104.8 L450.0 105.6 L452.4 106.5 L454.8 107.4 L457.2 108.2 L459.6 109.1 L462.0 110.0" stroke="#c8324a" stroke-width="2" fill="none"/><path d="M77.0 110.0 L79.4 110.9 L81.8 111.8 L84.2 112.6 L86.6 113.5 L89.0 114.4 L91.4 115.2 L93.8 116.0 L96.3 116.8 L98.7 117.6 L101.1 118.3 L103.5 119.1 L105.9 119.7 L108.3 120.4 L110.7 121.0 L113.1 121.6 L115.5 122.1 L117.9 122.6 L120.3 123.1 L122.7 123.5 L125.1 123.9 L127.5 124.2 L129.9 124.4 L132.3 124.7 L134.8 124.8 L137.2 124.9 L139.6 125.0 L142.0 125.0 L144.4 125.0 L146.8 124.9 L149.2 124.7 L151.6 124.5 L154.0 124.3 L156.4 124.0 L158.8 123.6 L161.2 123.2 L163.6 122.8 L166.0 122.3 L168.4 121.8 L170.8 121.2 L173.3 120.6 L175.7 120.0 L178.1 119.3 L180.5 118.6 L182.9 117.8 L185.3 117.1 L187.7 116.3 L190.1 115.5 L192.5 114.6 L194.9 113.8 L197.3 112.9 L199.7 112.1 L202.1 111.2 L204.5 110.3 L206.9 109.4 L209.3 108.5 L211.8 107.7 L214.2 106.8 L216.6 105.9 L219.0 105.1 L221.4 104.3 L223.8 103.5 L226.2 102.7 L228.6 101.9 L231.0 101.2 L233.4 100.5 L235.8 99.8 L238.2 99.2 L240.6 98.6 L243.0 98.0 L245.4 97.5 L247.8 97.1 L250.3 96.6 L252.7 96.3 L255.1 95.9 L257.5 95.6 L259.9 95.4 L262.3 95.2 L264.7 95.1 L267.1 95.0 L269.5 95.0 L271.9 95.0 L274.3 95.1 L276.7 95.2 L279.1 95.4 L281.5 95.6 L283.9 95.9 L286.3 96.3 L288.8 96.6 L291.2 97.1 L293.6 97.5 L296.0 98.0 L298.4 98.6 L300.8 99.2 L303.2 99.8 L305.6 100.5 L308.0 101.2 L310.4 101.9 L312.8 102.7 L315.2 103.5 L317.6 104.3 L320.0 105.1 L322.4 105.9 L324.8 106.8 L327.3 107.7 L329.7 108.5 L332.1 109.4 L334.5 110.3 L336.9 111.2 L339.3 112.1 L341.7 112.9 L344.1 113.8 L346.5 114.6 L348.9 115.5 L351.3 116.3 L353.7 117.1 L356.1 117.8 L358.5 118.6 L360.9 119.3 L363.3 120.0 L365.8 120.6 L368.2 121.2 L370.6 121.8 L373.0 122.3 L375.4 122.8 L377.8 123.2 L380.2 123.6 L382.6 124.0 L385.0 124.3 L387.4 124.5 L389.8 124.7 L392.2 124.9 L394.6 125.0 L397.0 125.0 L399.4 125.0 L401.8 124.9 L404.3 124.8 L406.7 124.7 L409.1 124.4 L411.5 124.2 L413.9 123.9 L416.3 123.5 L418.7 123.1 L421.1 122.6 L423.5 122.1 L425.9 121.6 L428.3 121.0 L430.7 120.4 L433.1 119.7 L435.5 119.1 L437.9 118.3 L440.3 117.6 L442.8 116.8 L445.2 116.0 L447.6 115.2 L450.0 114.4 L452.4 113.5 L454.8 112.6 L457.2 111.8 L459.6 110.9 L462.0 110.0" stroke="#c8324a" stroke-width="2" fill="none" opacity="0.55" stroke-dasharray="5 4"/><circle cx="77.0" cy="110" r="3.2" fill="#0f1620"/><circle cx="205.3" cy="110" r="3.2" fill="#0f1620"/><circle cx="333.7" cy="110" r="3.2" fill="#0f1620"/><circle cx="462.0" cy="110" r="3.2" fill="#0f1620"/><line x1="77.0" y1="92" x2="77.0" y2="66" stroke="#5a6172" stroke-width="0.8" stroke-dasharray="3 3"/><line x1="462.0" y1="92" x2="462.0" y2="66" stroke="#5a6172" stroke-width="0.8" stroke-dasharray="3 3"/><line x1="83.0" y1="62" x2="456.0" y2="62" stroke="#5a6172" stroke-width="1.2" stroke-linecap="butt"/><polygon points="77.0,62 84.0,58 84.0,66" fill="#5a6172"/><polygon points="462.0,62 455.0,58 455.0,66" fill="#5a6172"/><text x="269.5" y="56" text-anchor="middle" font-size="13" fill="#0f1620"><tspan font-style="italic">l</tspan> = 1,50 m</text></svg>`,
+            answer: { value: 42, unit: 'm/s' },
+            delsvar: [
+                { del: 'a', value: 42, unit: 'm/s' },
+                { del: 'b', values: [56, 70, 84, 98], unit: 'Hz' },
+                { del: 'c', values: [56, 84], unit: 'Hz' },
+            ],
+            solution: `Snöret är fast vid vibratorn och vid trissan, så där bildas noder. Vikten håller spännkraften konstant, och därför är utbredningshastigheten *v* densamma vid alla frekvenser.
+
+**a)** Med tre bukar ryms tre halva våglängder på snöret:
+
+$$ l = \\frac{3\\lambda}{2} \\quad\\Leftrightarrow\\quad \\lambda = \\frac{2 \\cdot l}{3} = \\frac{2 \\cdot 1{,}50}{3} = 1{,}00\\ \\mathrm{m} $$
+
+$$
+\\left[ \\begin{array}{l}
+f = 42\\ \\mathrm{Hz} \\\\
+\\lambda = 1{,}00\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ v = f \\cdot \\lambda = 42 \\cdot 1{,}00 = 42\\ \\mathrm{m/s} $$
+
+**Svar:** $42\\ \\mathrm{m/s}$
+
+**b)** Med *n* bukar ryms *n* halva våglängder på snöret, $l = n \\cdot \\dfrac{\\lambda}{2}$, alltså $\\lambda = \\dfrac{2 \\cdot l}{n}$. Frekvensen fås ur $v = f \\cdot \\lambda$:
+
+$$ f = \\frac{v}{\\lambda} = n \\cdot \\frac{v}{2 \\cdot l} = n \\cdot \\frac{42}{2 \\cdot 1{,}50} = n \\cdot 14\\ \\mathrm{Hz} $$
+
+Snöret svänger alltså kraftigt vid hela multiplar av $14\\ \\mathrm{Hz}$. Mellan $50\\ \\mathrm{Hz}$ och $100\\ \\mathrm{Hz}$ ligger
+
+$$ 4 \\cdot 14 = 56\\ \\mathrm{Hz} \\qquad 5 \\cdot 14 = 70\\ \\mathrm{Hz} \\qquad 6 \\cdot 14 = 84\\ \\mathrm{Hz} \\qquad 7 \\cdot 14 = 98\\ \\mathrm{Hz} $$
+
+Tre bukar ger $42\\ \\mathrm{Hz}$, som ligger under intervallet, och åtta bukar ger $112\\ \\mathrm{Hz}$, som ligger över.
+
+**Svar:** $56\\ \\mathrm{Hz}$ (4 bukar), $70\\ \\mathrm{Hz}$ (5 bukar), $84\\ \\mathrm{Hz}$ (6 bukar) och $98\\ \\mathrm{Hz}$ (7 bukar)
+
+**c)** Punkten som står stilla är en nod. Med *n* bukar ligger noderna med avståndet $\\dfrac{l}{n}$ från varandra, räknat från vibratorn. Mitt på snöret, på avståndet $\\dfrac{l}{2}$, finns en nod om $\\dfrac{l}{2}$ är ett helt antal nodavstånd, det vill säga om antalet bukar är jämnt. Med ett udda antal bukar ligger i stället en buk mitt på snöret.
+
+**Svar:** Vid $56\\ \\mathrm{Hz}$ och $84\\ \\mathrm{Hz}$, där snöret har ett jämnt antal bukar (4 och 6)`,
+        },
+        {
+            level: 2,
+            question: `En elev spänner ett snöre så att den svängande delen är $2{,}00\\ \\mathrm{m}$ lång. Hon ökar långsamt vibratorns frekvens och antecknar varje frekvens där snöret svänger kraftigt, och hur många bukar snöret då har.
+
+| Antal bukar | Frekvens (Hz) |
+|---|---|
+| 1 | 12,4 |
+| 2 | 24,9 |
+| 3 | 37,1 |
+| 4 | 49,8 |
+
+Använd alla mätvärden och bestäm ett värde på vågens utbredningshastighet i snöret. Svara i m/s.`,
+            answer: { value: 49.7, unit: 'm/s', tol: 0.03 },
+            solution: `Utbredningshastigheten *v* är densamma vid alla frekvenser, eftersom snöret och spännkraften inte ändras. Med *n* bukar är snöret *n* halva våglängder långt, $l = n \\cdot \\dfrac{\\lambda}{2}$, så
+
+$$ f = \\frac{v}{\\lambda} = n \\cdot \\frac{v}{2l} $$
+
+Frekvensen delad med antalet bukar ska alltså vara samma tal, grundtonens frekvens, i alla mätningar:
+
+$$ \\frac{12{,}4}{1} = 12{,}4 \\qquad \\frac{24{,}9}{2} = 12{,}45 \\qquad \\frac{37{,}1}{3} \\approx 12{,}367 \\qquad \\frac{49{,}8}{4} = 12{,}45 $$
+
+Medelvärdet blir
+
+$$ f_1 = \\frac{12{,}4 + 12{,}45 + 12{,}367 + 12{,}45}{4} \\approx 12{,}417\\ \\mathrm{Hz} $$
+
+I grundtonen är snöret en halv våglängd långt, $\\lambda = 2 \\cdot l = 4{,}00\\ \\mathrm{m}$.
+
+$$
+\\left[ \\begin{array}{l}
+f_1 = 12{,}417\\ \\mathrm{Hz} \\\\
+\\lambda = 4{,}00\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ v = f_1 \\cdot \\lambda = 12{,}417 \\cdot 4{,}00 \\approx 49{,}67\\ \\mathrm{m/s} \\approx 49{,}7\\ \\mathrm{m/s} $$
+
+Kvoterna skiljer sig bara i tredje siffran, så mätningarna stämmer väl med modellen att övertonerna är hela multiplar av grundtonen.
+
+**Svar:** Ungefär $49{,}7\\ \\mathrm{m/s}$`,
+        },
+        {
+            level: 2,
+            question: `En gitarrist trycker ned en sträng mot ett band på gitarrens hals, så att den svängande delen av strängen blir kortare. Hur ändras grundtonens våglängd, vågens utbredningshastighet i strängen och grundtonens frekvens?`,
+            choices: [
+                'Våglängden ökar, hastigheten är oförändrad och frekvensen minskar.',
+                'Våglängden minskar, hastigheten är oförändrad och frekvensen ökar.',
+                'Våglängden minskar, hastigheten minskar och frekvensen är oförändrad.',
+                'Våglängden är oförändrad, hastigheten ökar och frekvensen ökar.',
+            ],
+            correct: 1,
+            solution: `**Våglängden:** i grundtonen är den svängande delen en halv våglängd, $l = \\dfrac{\\lambda}{2}$, alltså $\\lambda = 2 \\cdot l$. En kortare svängande del ger en kortare våglängd.
+
+**Hastigheten:** utbredningshastigheten beror på strängens spänning, tvärsnittsarea och densitet. Inget av det ändras när fingret trycker ned strängen, så hastigheten är oförändrad.
+
+**Frekvensen:** ur $v = f \\cdot \\lambda$ följer $f = \\dfrac{v}{\\lambda}$. Med samma *v* och mindre λ blir frekvensen högre, och tonen ljusare.
+
+**Svar:** Våglängden minskar, hastigheten är oförändrad och frekvensen ökar.`,
+        },
+        {
+            level: 2,
+            question: `En metalltråd med längden $1{,}20\\ \\mathrm{m}$ är spänd mellan två fästen. Vågens utbredningshastighet i tråden är $120\\ \\mathrm{m/s}$. Tråden sätts i svängning med frekvensen $150\\ \\mathrm{Hz}$, och en stående våg uppstår.<br>a) Hur många bukar har den stående vågen?<br>b) På vilka avstånd från vänstra fästet finns noderna mellan fästena? Svara i meter.`,
+            answer: { value: 3, unit: '' },
+            delsvar: [
+                { del: 'a', value: 3, unit: '', etikett: 'antal bukar' },
+                { del: 'b', values: [0.40, 0.80], unit: 'm' },
+            ],
+            solution: `**a)** Vi bestämmer först våglängden ur $v = f \\cdot \\lambda$:
+
+$$ \\lambda = \\frac{v}{f} = \\frac{120}{150} = 0{,}80\\ \\mathrm{m} $$
+
+Avståndet mellan två närliggande noder är en halv våglängd, $\\dfrac{\\lambda}{2} = 0{,}40\\ \\mathrm{m}$. Varje buk tar alltså upp $0{,}40\\ \\mathrm{m}$ av tråden, och antalet bukar blir
+
+$$ n = \\frac{l}{\\lambda / 2} = \\frac{1{,}20}{0{,}40} = 3 $$
+
+**Svar:** 3 bukar
+
+**b)** Det finns noder vid båda fästena, och därifrån en nod var $0{,}40\\ \\mathrm{m}$. Mellan fästena ligger noderna alltså på
+
+$$ 0{,}40\\ \\mathrm{m} \\qquad \\text{och} \\qquad 2 \\cdot 0{,}40 = 0{,}80\\ \\mathrm{m} $$
+
+från vänstra fästet. Nästa nod, $3 \\cdot 0{,}40 = 1{,}20\\ \\mathrm{m}$, är det högra fästet.
+
+**Svar:** $0{,}40\\ \\mathrm{m}$ och $0{,}80\\ \\mathrm{m}$ från vänstra fästet`,
+        },
+        {
+            level: 2,
+            question: `Ett snöre med längden $2{,}40\\ \\mathrm{m}$ är fäst i båda ändar, och vågens utbredningshastighet i snöret är $36{,}0\\ \\mathrm{m/s}$. En vibrator får snöret att svänga med frekvensen $20{,}0\\ \\mathrm{Hz}$.<br>a) Visa med beräkning att det inte uppstår någon stående våg på snöret vid denna frekvens.<br>b) Vilken frekvens strax under och vilken strax över $20{,}0\\ \\mathrm{Hz}$ ger en stående våg? Svara i Hz.`,
+            answer: { value: 22.5, unit: 'Hz' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', values: [15, 22.5], unit: 'Hz' },
+            ],
+            solution: `En stående våg uppstår bara när snörets längd är ett helt antal halva våglängder, $l = n \\cdot \\dfrac{\\lambda}{2}$, där *n* är antalet bukar.
+
+**a)** Vid $20{,}0\\ \\mathrm{Hz}$ är våglängden
+
+$$ \\lambda = \\frac{v}{f} = \\frac{36{,}0}{20{,}0} = 1{,}80\\ \\mathrm{m} $$
+
+och en halv våglängd är $0{,}90\\ \\mathrm{m}$. Antalet halva våglängder på snöret blir
+
+$$ \\frac{l}{\\lambda / 2} = \\frac{2{,}40}{0{,}90} \\approx 2{,}67 $$
+
+Det är inget heltal, så vågen kan inte ha noder vid båda fästena.
+
+**Svar:** Snöret rymmer $2{,}67$ halva våglängder, inte ett helt antal, och då uppstår ingen stående våg.
+
+**b)** Med *n* bukar är $\\lambda = \\dfrac{2l}{n}$, och frekvensen blir
+
+$$ f = \\frac{v}{\\lambda} = n \\cdot \\frac{v}{2l} = n \\cdot \\frac{36{,}0}{2 \\cdot 2{,}40} = n \\cdot 7{,}5\\ \\mathrm{Hz} $$
+
+De möjliga frekvenserna är alltså $7{,}5\\ \\mathrm{Hz}$, $15\\ \\mathrm{Hz}$, $22{,}5\\ \\mathrm{Hz}$ och så vidare. Närmast $20{,}0\\ \\mathrm{Hz}$ ligger
+
+$$ n = 2: \\quad f = 2 \\cdot 7{,}5 = 15\\ \\mathrm{Hz} \\qquad\\qquad n = 3: \\quad f = 3 \\cdot 7{,}5 = 22{,}5\\ \\mathrm{Hz} $$
+
+Rimlighet: $20{,}0\\ \\mathrm{Hz}$ gav $2{,}67$ halva våglängder, mellan 2 och 3, och därför ligger frekvensen mellan de två resonanserna.
+
+**Svar:** $15\\ \\mathrm{Hz}$ (två bukar) och $22{,}5\\ \\mathrm{Hz}$ (tre bukar)`,
+        },
+        {
+            level: 2,
+            question: `Den svängande delen av en fiolsträng är $0{,}325\\ \\mathrm{m}$ lång. När strängen stryks med stråken svänger den i sin grundton med frekvensen $440\\ \\mathrm{Hz}$, och tonen hörs genom luften, där ljudets hastighet är $340\\ \\mathrm{m/s}$.<br>a) Bestäm vågens utbredningshastighet i strängen.<br>b) Bestäm ljudvågens våglängd i luften.<br>c) Ljudvågen i luften och vågen i strängen har samma frekvens men olika våglängd. Förklara varför.`,
+            answer: { value: 286, unit: 'm/s' },
+            delsvar: [
+                { del: 'a', value: 286, unit: 'm/s' },
+                { del: 'b', value: 0.77, unit: 'm' },
+                { del: 'c' },
+            ],
+            solution: `**a)** I grundtonen har strängen en buk, och den svängande delen är en halv våglängd lång:
+
+$$ l = \\frac{\\lambda}{2} \\quad\\Leftrightarrow\\quad \\lambda = 2 \\cdot l = 2 \\cdot 0{,}325 = 0{,}650\\ \\mathrm{m} $$
+
+$$
+\\left[ \\begin{array}{l}
+f = 440\\ \\mathrm{Hz} \\\\
+\\lambda = 0{,}650\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ v = f \\cdot \\lambda = 440 \\cdot 0{,}650 = 286\\ \\mathrm{m/s} $$
+
+**Svar:** $286\\ \\mathrm{m/s}$
+
+**b)** Strängen sätter luften i svängning i samma takt som den själv svänger, så ljudvågen har också frekvensen $440\\ \\mathrm{Hz}$. Ur $v = f \\cdot \\lambda$ fås
+
+$$ \\lambda = \\frac{v}{f} = \\frac{340}{440} \\approx 0{,}7727\\ \\mathrm{m} \\approx 0{,}77\\ \\mathrm{m} $$
+
+**Svar:** Ungefär $0{,}77\\ \\mathrm{m}$
+
+**c)** Frekvensen bestäms av vågkällan. Varje gång strängen svänger en gång knuffar den på luften en gång, så luften svänger lika många gånger per sekund som strängen. Utbredningshastigheten bestäms däremot av mediet: i strängen av spänningen, tvärsnittsarean och densiteten, i luften av luftens egenskaper. Eftersom $\\lambda = \\dfrac{v}{f}$ ger samma frekvens med olika hastighet olika våglängd. Ljudet går snabbare i luften än vågen i strängen, så våglängden i luften blir längre.
+
+**Svar:** Frekvensen bestäms av strängen som sätter luften i svängning, medan hastigheten beror på mediet. Med olika hastighet och samma frekvens blir våglängderna olika, $\\lambda = \\dfrac{v}{f}$.`,
+        },
+        {
+            level: 3,
+            question: `I ett ljudlabb undersöks en spänd stålsträng med längden $0{,}850\\ \\mathrm{m}$. En högtalare nära strängen sveper långsamt över frekvenserna, och strängen svänger kraftigt vid $1\\,320\\ \\mathrm{Hz}$ och nästa gång vid $1\\,540\\ \\mathrm{Hz}$. Mellan dessa två frekvenser svänger den inte kraftigt någon gång.<br>a) Bestäm strängens grundton.<br>b) Hur många bukar har strängen vid $1\\,320\\ \\mathrm{Hz}$?<br>c) Bestäm vågens utbredningshastighet i strängen. Svara i m/s.`,
+            answer: { value: 374, unit: 'm/s' },
+            delsvar: [
+                { del: 'a', value: 220, unit: 'Hz' },
+                { del: 'b', value: 6, unit: '', etikett: 'antal bukar' },
+                { del: 'c', value: 374, unit: 'm/s' },
+            ],
+            solution: `Vi vet inte hur många bukar strängen har vid någon av frekvenserna, så vi börjar med att ta fram ett generellt uttryck för de frekvenser där en stående våg kan uppstå.
+
+Med *n* bukar ryms *n* halva våglängder på strängen, och utbredningshastigheten *v* är densamma för alla *n*:
+
+$$ l = n \\cdot \\frac{\\lambda_n}{2} \\quad\\Leftrightarrow\\quad \\lambda_n = \\frac{2l}{n} $$
+
+$$ f_n = \\frac{v}{\\lambda_n} = n \\cdot \\frac{v}{2l} = n \\cdot f_1 $$
+
+Resonansfrekvenserna är alltså $f_1, 2f_1, 3f_1, \\ldots$, med avståndet $f_1$ mellan två som följer på varandra.
+
+**a)** Eftersom det inte finns någon resonans mellan de två frekvenserna motsvarar de *n* och *n* + 1 bukar. Skillnaden mellan dem är grundtonen:
+
+$$ f_1 = f_{n+1} - f_n = 1\\,540 - 1\\,320 = 220\\ \\mathrm{Hz} $$
+
+**Svar:** $220\\ \\mathrm{Hz}$
+
+**b)** Antalet bukar är kvoten mellan frekvensen och grundtonen:
+
+$$ n = \\frac{f_n}{f_1} = \\frac{1\\,320}{220} = 6 $$
+
+Kontroll: $\\dfrac{1\\,540}{220} = 7$, alltså nästa heltal, som det ska vara.
+
+**Svar:** 6 bukar
+
+**c)** I grundtonen är strängen en halv våglängd lång, $\\lambda_1 = 2 \\cdot l$:
+
+$$
+\\left[ \\begin{array}{l}
+f_1 = 220\\ \\mathrm{Hz} \\\\
+\\lambda_1 = 2 \\cdot 0{,}850\\ \\mathrm{m} = 1{,}70\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ v = f_1 \\cdot \\lambda_1 = 220 \\cdot 1{,}70 = 374\\ \\mathrm{m/s} $$
+
+Samma värde fås ur sex bukar: $\\lambda_6 = \\dfrac{2 \\cdot 0{,}850}{6} \\approx 0{,}2833\\ \\mathrm{m}$ och $1\\,320 \\cdot 0{,}2833 \\approx 374\\ \\mathrm{m/s}$. Några hundra meter per sekund är en rimlig utbredningshastighet i en spänd musiksträng.
+
+**Svar:** $374\\ \\mathrm{m/s}$`,
+        },
+        {
+            level: 3,
+            question: `En sitar har, förutom strängarna man spelar på, några resonanssträngar som ingen knäpper på. De börjar svänga av sig själva när en ton på spelsträngen har en frekvens där resonanssträngen kan ha en stående våg. Tänk dig två strängar av samma sort och med samma spänning, så att vågen har samma utbredningshastighet i båda. Sträng A har längden $0{,}90\\ \\mathrm{m}$ och grundtonen $220\\ \\mathrm{Hz}$. Sträng B har längden $0{,}60\\ \\mathrm{m}$.<br>a) Bestäm grundtonen för sträng B.<br>b) Vilken är den lägsta frekvens där båda strängarna kan svänga med en stående våg? Hur många bukar har var och en av strängarna då? Motivera.`,
+            answer: { value: 660, unit: 'Hz' },
+            delsvar: [
+                { del: 'a', value: 330, unit: 'Hz' },
+                { del: 'b', value: 660, unit: 'Hz', etikett: 'lägsta gemensamma frekvens' },
+                { del: 'b', value: 3, unit: '', etikett: 'bukar i sträng A' },
+                { del: 'b', value: 2, unit: '', etikett: 'bukar i sträng B' },
+            ],
+            solution: `**a)** I grundtonen är strängen en halv våglängd lång, $\\lambda = 2 \\cdot l$, och då är
+
+$$ f_1 = \\frac{v}{\\lambda} = \\frac{v}{2l} $$
+
+Utbredningshastigheten *v* är densamma i båda strängarna, så grundtonen är omvänt proportionell mot längden. Kvoten mellan strängarnas grundtoner blir
+
+$$ \\frac{f_B}{f_A} = \\frac{v/(2 l_B)}{v/(2 l_A)} = \\frac{l_A}{l_B} \\quad\\Leftrightarrow\\quad f_B = f_A \\cdot \\frac{l_A}{l_B} $$
+
+$$ f_B = 220 \\cdot \\frac{0{,}90}{0{,}60} = 330\\ \\mathrm{Hz} $$
+
+Rimlighet: den kortare strängen har den högre grundtonen.
+
+**Svar:** $330\\ \\mathrm{Hz}$
+
+**b)** En sträng kan bara ha stående vågor vid hela multiplar av sin grundton, $f = n \\cdot f_1$, där *n* är antalet bukar. De möjliga frekvenserna är
+
+$$ \\text{A:} \\quad 220,\\ 440,\\ 660,\\ 880,\\ \\ldots\\ \\mathrm{Hz} \\qquad\\qquad \\text{B:} \\quad 330,\\ 660,\\ 990,\\ \\ldots\\ \\mathrm{Hz} $$
+
+En gemensam frekvens kräver att
+
+$$ n_A \\cdot 220 = n_B \\cdot 330 \\quad\\Leftrightarrow\\quad 2 n_A = 3 n_B $$
+
+Den minsta lösningen med heltal är $n_A = 3$ och $n_B = 2$, som ger
+
+$$ f = 3 \\cdot 220 = 660\\ \\mathrm{Hz} $$
+
+Kontroll: $2 \\cdot 330 = 660\\ \\mathrm{Hz}$. Våglängden är då densamma i båda strängarna, $\\lambda = \\dfrac{2 \\cdot 0{,}90}{3} = \\dfrac{2 \\cdot 0{,}60}{2} = 0{,}60\\ \\mathrm{m}$, vilket det måste vara eftersom frekvensen och hastigheten är desamma.
+
+**Svar:** $660\\ \\mathrm{Hz}$, med tre bukar i sträng A och två bukar i sträng B`,
+        },
+        {
+            level: 3,
+            question: `Figuren visar en gitarrsträng som svänger mellan sadeln och stallet. Den lösa strängen är $0{,}650\\ \\mathrm{m}$ lång och har grundtonen $110\\ \\mathrm{Hz}$. När gitarristen trycker ned strängen mot ett band svänger bara delen mellan bandet och stallet.<br>a) Visa att den svängande längden $l'$ som ger grundtonen $f'$ är $l' = l \\cdot \\dfrac{f}{f'}$, där *l* och *f* gäller för den lösa strängen.<br>b) På vilket avstånd från sadeln ska strängen tryckas ned för att grundtonen ska bli $165\\ \\mathrm{Hz}$? Svara i meter.<br>c) Ett annat band ger grundtonen $220\\ \\mathrm{Hz}$. Hur långt från bandet i b) ligger det? Jämför med svaret i b) och förklara varför banden ligger allt tätare ju längre upp mot stallet man kommer.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 548 176" width="663" height="213" style="display:block;margin:14px auto;max-width:100%;height:auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:4px;font-family:Poppins,sans-serif"><path d="M330 75 C330 30 400 24 422 44 C436 57 446 57 461 40 C492 14 538 34 538 75 C538 116 492 136 461 110 C446 93 436 93 422 106 C400 126 330 120 330 75 Z" fill="#ecdcb8" stroke="#0f1620" stroke-width="1.4"/><circle cx="392" cy="75" r="17" fill="#7a5a3e" stroke="#0f1620" stroke-width="1.1"/><rect x="60" y="64" width="276" height="22" fill="#c49a6c" stroke="#0f1620" stroke-width="1.2"/><line x1="84.1" y1="65" x2="84.1" y2="85" stroke="#8a8f9c" stroke-width="2"/><line x1="106.9" y1="65" x2="106.9" y2="85" stroke="#8a8f9c" stroke-width="2"/><line x1="128.4" y1="65" x2="128.4" y2="85" stroke="#8a8f9c" stroke-width="2"/><circle cx="117.8" cy="81" r="2.2" fill="#f3eee4"/><line x1="148.7" y1="65" x2="148.7" y2="85" stroke="#8a8f9c" stroke-width="2"/><line x1="167.9" y1="65" x2="167.9" y2="85" stroke="#8a8f9c" stroke-width="2"/><circle cx="158.4" cy="81" r="2.2" fill="#f3eee4"/><line x1="185.9" y1="65" x2="185.9" y2="85" stroke="#8a8f9c" stroke-width="2"/><line x1="203.0" y1="65" x2="203.0" y2="85" stroke="#8a8f9c" stroke-width="2"/><circle cx="194.6" cy="81" r="2.2" fill="#f3eee4"/><line x1="219.1" y1="65" x2="219.1" y2="85" stroke="#8a8f9c" stroke-width="2"/><line x1="234.3" y1="65" x2="234.3" y2="85" stroke="#8a8f9c" stroke-width="2"/><circle cx="226.8" cy="81" r="2.2" fill="#f3eee4"/><line x1="248.7" y1="65" x2="248.7" y2="85" stroke="#8a8f9c" stroke-width="2"/><line x1="262.2" y1="65" x2="262.2" y2="85" stroke="#8a8f9c" stroke-width="2"/><line x1="275.0" y1="65" x2="275.0" y2="85" stroke="#8a8f9c" stroke-width="2"/><line x1="287.1" y1="65" x2="287.1" y2="85" stroke="#8a8f9c" stroke-width="2"/><line x1="298.5" y1="65" x2="298.5" y2="85" stroke="#8a8f9c" stroke-width="2"/><line x1="309.2" y1="65" x2="309.2" y2="85" stroke="#8a8f9c" stroke-width="2"/><rect x="56" y="61" width="6" height="28" fill="#f3eee4" stroke="#0f1620" stroke-width="1"/><rect x="485" y="64" width="11" height="22" rx="1.5" fill="#3b2a1e" stroke="#0f1620" stroke-width="1"/><text x="50" y="79" text-anchor="end" font-size="12" fill="#0f1620">sadel</text><text x="490" y="56" text-anchor="middle" font-size="12" fill="#0f1620">stall</text><line x1="60" y1="75" x2="490" y2="75" stroke="#0f1620" stroke-width="1.6" stroke-linecap="butt"/><line x1="66.0" y1="160" x2="484.0" y2="160" stroke="#5a6172" stroke-width="1.2" stroke-linecap="butt"/><polygon points="60.0,160 67.0,156 67.0,164" fill="#5a6172"/><polygon points="490.0,160 483.0,156 483.0,164" fill="#5a6172"/><text x="275.0" y="154" text-anchor="middle" font-size="13" fill="#0f1620"><tspan font-style="italic">l</tspan> = 0,650 m</text><line x1="60" y1="92" x2="60" y2="164" stroke="#5a6172" stroke-width="0.8" stroke-dasharray="3 3"/><line x1="490" y1="134" x2="490" y2="164" stroke="#5a6172" stroke-width="0.8" stroke-dasharray="3 3"/></svg>`,
+            answer: { value: 0.217, unit: 'm' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 0.217, unit: 'm' },
+                { del: 'c', value: 0.108, unit: 'm' },
+            ],
+            solution: `**a)** I grundtonen är den svängande delen en halv våglängd lång, $\\lambda = 2 \\cdot l$, så
+
+$$ f = \\frac{v}{\\lambda} = \\frac{v}{2l} \\qquad (1) $$
+
+Fingret ändrar inte strängens spänning, tvärsnittsarea eller densitet, och därför är utbredningshastigheten *v* densamma för den lösa och den nedtryckta strängen. Ur (1), $f = \\dfrac{v}{2l}$, fås $v = 2 \\cdot l \\cdot f$ för båda längderna:
+
+$$ 2 \\cdot l \\cdot f = 2 \\cdot l' \\cdot f' $$
+
+$$ \\frac{2 \\cdot l \\cdot f}{\\boldsymbol{2 \\cdot f'}} = \\frac{2 \\cdot l' \\cdot f'}{\\boldsymbol{2 \\cdot f'}} $$
+
+$$ l' = l \\cdot \\frac{f}{f'} $$
+
+Den svängande längden är alltså omvänt proportionell mot grundtonens frekvens.
+
+**b)** Den svängande längden för $165\\ \\mathrm{Hz}$ blir
+
+$$ l' = 0{,}650 \\cdot \\frac{110}{165} \\approx 0{,}4333\\ \\mathrm{m} $$
+
+Den svängande delen går från bandet till stallet, så bandet ligger på avståndet
+
+$$ d = l - l' = 0{,}650 - 0{,}4333 \\approx 0{,}2167\\ \\mathrm{m} \\approx 0{,}217\\ \\mathrm{m} $$
+
+från sadeln. Rimlighet: frekvensen ökar med faktorn $\\dfrac{165}{110} = 1{,}5$, så den svängande delen ska bli $\\dfrac{2}{3}$ av hela strängen, och fingret hamnar en tredjedel av strängen från sadeln.
+
+**Svar:** Ungefär $0{,}217\\ \\mathrm{m}$ från sadeln
+
+**c)** För $220\\ \\mathrm{Hz}$ är den svängande längden
+
+$$ l'' = 0{,}650 \\cdot \\frac{110}{220} = 0{,}325\\ \\mathrm{m} $$
+
+Avståndet mellan de två banden är skillnaden mellan de svängande längderna:
+
+$$ l' - l'' = 0{,}4333 - 0{,}325 \\approx 0{,}1083\\ \\mathrm{m} \\approx 0{,}108\\ \\mathrm{m} $$
+
+Båda stegen höjer frekvensen lika mycket, $55\\ \\mathrm{Hz}$, men det första kräver att fingret flyttas $0{,}217\\ \\mathrm{m}$ och det andra bara $0{,}108\\ \\mathrm{m}$. Det beror på att längden är omvänt proportionell mot frekvensen: $l' = \\dfrac{l \\cdot f}{f'}$. Ju högre frekvensen redan är, desto mindre ändras $\\dfrac{1}{f'}$ när frekvensen ökar ytterligare, och desto mindre bit av strängen behöver tas bort. Därför sitter banden allt tätare ju närmare stallet de ligger.
+
+**Svar:** Ungefär $0{,}108\\ \\mathrm{m}$, hälften så långt som i b), eftersom den svängande längden är omvänt proportionell mot frekvensen`,
+        },
+        {
+            level: 3,
+            question: `En gitarrist rör **lätt** vid den lösa strängen precis ovanför sjunde bandet, en tredjedel av strängens längd från sadeln (se figuren), och knäpper samtidigt på strängen. Fingret trycker inte ned strängen, så strängen svänger fortfarande längs hela sin längd *l*, men den kan inte röra sig just där fingret ligger an. Den lösa strängens grundton är $82\\ \\mathrm{Hz}$.<br>a) Vilken är den lägsta frekvens som strängen kan svänga med när fingret ligger an? Motivera.<br>b) Vilka är de tre närmast högre frekvenserna som strängen kan svänga med? Svara i Hz.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 548 196" width="663" height="237" style="display:block;margin:14px auto;max-width:100%;height:auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:4px;font-family:Poppins,sans-serif"><path d="M330 75 C330 30 400 24 422 44 C436 57 446 57 461 40 C492 14 538 34 538 75 C538 116 492 136 461 110 C446 93 436 93 422 106 C400 126 330 120 330 75 Z" fill="#ecdcb8" stroke="#0f1620" stroke-width="1.4"/><circle cx="392" cy="75" r="17" fill="#7a5a3e" stroke="#0f1620" stroke-width="1.1"/><rect x="60" y="64" width="276" height="22" fill="#c49a6c" stroke="#0f1620" stroke-width="1.2"/><line x1="84.1" y1="65" x2="84.1" y2="85" stroke="#8a8f9c" stroke-width="2"/><line x1="106.9" y1="65" x2="106.9" y2="85" stroke="#8a8f9c" stroke-width="2"/><line x1="128.4" y1="65" x2="128.4" y2="85" stroke="#8a8f9c" stroke-width="2"/><circle cx="117.8" cy="81" r="2.2" fill="#f3eee4"/><line x1="148.7" y1="65" x2="148.7" y2="85" stroke="#8a8f9c" stroke-width="2"/><line x1="167.9" y1="65" x2="167.9" y2="85" stroke="#8a8f9c" stroke-width="2"/><circle cx="158.4" cy="81" r="2.2" fill="#f3eee4"/><line x1="185.9" y1="65" x2="185.9" y2="85" stroke="#8a8f9c" stroke-width="2"/><line x1="203.0" y1="65" x2="203.0" y2="85" stroke="#8a8f9c" stroke-width="2"/><circle cx="194.6" cy="81" r="2.2" fill="#f3eee4"/><line x1="219.1" y1="65" x2="219.1" y2="85" stroke="#8a8f9c" stroke-width="2"/><line x1="234.3" y1="65" x2="234.3" y2="85" stroke="#8a8f9c" stroke-width="2"/><circle cx="226.8" cy="81" r="2.2" fill="#f3eee4"/><line x1="248.7" y1="65" x2="248.7" y2="85" stroke="#8a8f9c" stroke-width="2"/><line x1="262.2" y1="65" x2="262.2" y2="85" stroke="#8a8f9c" stroke-width="2"/><line x1="275.0" y1="65" x2="275.0" y2="85" stroke="#8a8f9c" stroke-width="2"/><line x1="287.1" y1="65" x2="287.1" y2="85" stroke="#8a8f9c" stroke-width="2"/><line x1="298.5" y1="65" x2="298.5" y2="85" stroke="#8a8f9c" stroke-width="2"/><line x1="309.2" y1="65" x2="309.2" y2="85" stroke="#8a8f9c" stroke-width="2"/><rect x="56" y="61" width="6" height="28" fill="#f3eee4" stroke="#0f1620" stroke-width="1"/><rect x="485" y="64" width="11" height="22" rx="1.5" fill="#3b2a1e" stroke="#0f1620" stroke-width="1"/><text x="50" y="79" text-anchor="end" font-size="12" fill="#0f1620">sadel</text><text x="490" y="56" text-anchor="middle" font-size="12" fill="#0f1620">stall</text><line x1="60" y1="75" x2="490" y2="75" stroke="#0f1620" stroke-width="1.6" stroke-linecap="butt"/><path d="M191.3 6 L191.3 62 Q191.3 74 203.3 74 Q215.3 74 215.3 62 L215.3 6" fill="#e9c4a3" stroke="#8a5a3c" stroke-width="1.2"/><path d="M197.3 30 q 6 3 12 0" stroke="#b07f5f" stroke-width="0.9" fill="none"/><text x="221.3" y="26" text-anchor="start" font-size="12" fill="#0f1620">lätt beröring</text><line x1="60.0" y1="90" x2="60.0" y2="154" stroke="#5a6172" stroke-width="0.8" stroke-dasharray="3 3"/><line x1="203.3" y1="90" x2="203.3" y2="154" stroke="#5a6172" stroke-width="0.8" stroke-dasharray="3 3"/><line x1="66.0" y1="150" x2="197.3" y2="150" stroke="#5a6172" stroke-width="1.2" stroke-linecap="butt"/><polygon points="60.0,150 67.0,146 67.0,154" fill="#5a6172"/><polygon points="203.3,150 196.3,146 196.3,154" fill="#5a6172"/><text x="131.7" y="144" text-anchor="middle" font-size="13" fill="#0f1620"><tspan font-style="italic">l</tspan>/3</text><line x1="66.0" y1="180" x2="484.0" y2="180" stroke="#5a6172" stroke-width="1.2" stroke-linecap="butt"/><polygon points="60.0,180 67.0,176 67.0,184" fill="#5a6172"/><polygon points="490.0,180 483.0,176 483.0,184" fill="#5a6172"/><text x="275.0" y="174" text-anchor="middle" font-size="13" fill="#0f1620"><tspan font-style="italic">l</tspan></text><line x1="60" y1="154" x2="60" y2="184" stroke="#5a6172" stroke-width="0.8" stroke-dasharray="3 3"/><line x1="490" y1="134" x2="490" y2="184" stroke="#5a6172" stroke-width="0.8" stroke-dasharray="3 3"/></svg>`,
+            answer: { value: 246, unit: 'Hz' },
+            delsvar: [
+                { del: 'a', value: 246, unit: 'Hz' },
+                { del: 'b', values: [492, 738, 984], unit: 'Hz' },
+            ],
+            solution: `Fingret håller strängen stilla i en punkt, och därför måste den stående vågen ha en **nod** där. Ändarna vid sadeln och stallet är också noder.
+
+**a)** Med *n* bukar är avståndet mellan två närliggande noder $\\dfrac{l}{n}$, och noderna ligger på avstånden
+
+$$ 0,\\ \\frac{l}{n},\\ \\frac{2l}{n},\\ \\ldots,\\ l $$
+
+från sadeln. En nod på avståndet $\\dfrac{l}{3}$ kräver att $\\dfrac{l}{3} = \\dfrac{k \\cdot l}{n}$ för något heltal *k*, det vill säga $n = 3k$. Antalet bukar måste alltså vara en multipel av 3.
+
+Grundtonen ($n = 1$) och första övertonen ($n = 2$) har ingen nod vid $\\dfrac{l}{3}$: grundtonen har sin buk mitt på strängen, och första övertonen har sin enda inre nod mitt på strängen. Fingret dämpar därför bort dem. Den lägsta svängning som överlever har tre bukar.
+
+Strängens frekvenser är hela multiplar av grundtonen, $f_n = n \\cdot f_1$, eftersom utbredningshastigheten är densamma för alla svängningar:
+
+$$ f_3 = 3 \\cdot 82 = 246\\ \\mathrm{Hz} $$
+
+**Svar:** $246\\ \\mathrm{Hz}$, eftersom bara svängningar med en nod vid fingret är möjliga, och den första sådana har tre bukar
+
+**b)** Nästa möjliga antal bukar är 6, 9 och 12:
+
+$$ f_6 = 6 \\cdot 82 = 492\\ \\mathrm{Hz} \\qquad f_9 = 9 \\cdot 82 = 738\\ \\mathrm{Hz} \\qquad f_{12} = 12 \\cdot 82 = 984\\ \\mathrm{Hz} $$
+
+Rimlighet: alla dessa är multiplar av $246\\ \\mathrm{Hz}$, så strängen låter som om den hade grundtonen $246\\ \\mathrm{Hz}$. Gitarrister kallar en sådan ton för en flageolett.
+
+**Svar:** $492\\ \\mathrm{Hz}$, $738\\ \\mathrm{Hz}$ och $984\\ \\mathrm{Hz}$`,
+        },
+        {
+            level: 3,
+            question: `I ett laborationsförsök går ett snöre från en vibrator över en trissa till en hängande vikt. Vibratorns frekvens hålls fast på $60{,}0\\ \\mathrm{Hz}$, och spännkraften är densamma hela tiden. Snörets svängande del ändras genom att en kil flyttas längs snöret. Eleverna mäter längden *l* från kilen till en markering på bänken under trissan, och noterar de längder där snöret svänger kraftigt och hur många bukar *n* det då har.
+
+| Antal bukar $n$ | Längd $l$ (m) |
+|---|---|
+| 1 | 0,35 |
+| 2 | 0,74 |
+| 3 | 1,13 |
+| 4 | 1,55 |
+| 5 | 1,94 |
+
+a) Rita en graf med *l* som funktion av *n*, och använd grafen för att bestämma ett experimentellt värde på vågens utbredningshastighet i snöret. Svara i m/s.<br>b) Grafen går inte genom origo. Förklara vad det beror på, och vad grafens skärning med *l*-axeln betyder.<br>c) En elev använder bara den första mätningen. Vilket värde på utbredningshastigheten får hon, och varför är värdet i a) mer tillförlitligt?`,
+            answer: { value: 47.9, unit: 'm/s', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 47.9, unit: 'm/s', tol: 0.04 },
+                { del: 'b' },
+                { del: 'c', value: 42, unit: 'm/s', tol: 0.03 },
+            ],
+            solution: `**a)** Den svängande delen av snöret går från kilen till den punkt där snöret lämnar trissan, och där finns noderna. Med *n* bukar ryms *n* halva våglängder på den svängande delen. Frekvensen och spännkraften är fasta, så våglängden λ är densamma i alla mätningar.
+
+Den uppmätta längden *l* behöver inte vara exakt lika med den svängande längden. Kallar vi skillnaden *d* (den svängande delen är $l + d$) gäller
+
+$$ l + d = n \\cdot \\frac{\\lambda}{2} \\quad\\Leftrightarrow\\quad l = \\frac{\\lambda}{2} \\cdot n - d $$
+
+Grafen med *l* som funktion av *n* blir alltså en rät linje med lutningen $\\dfrac{\\lambda}{2}$, och skärningen med *l*-axeln är $-d$. Lutningen påverkas inte av *d*.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 252" width="572" height="328" style="display:block;margin:14px auto;max-width:100%;height:auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:4px;font-family:Poppins,sans-serif"><line x1="124" y1="220" x2="124" y2="20" stroke="#e3dccb" stroke-width="1"/><line x1="188" y1="220" x2="188" y2="20" stroke="#e3dccb" stroke-width="1"/><line x1="252" y1="220" x2="252" y2="20" stroke="#e3dccb" stroke-width="1"/><line x1="316" y1="220" x2="316" y2="20" stroke="#e3dccb" stroke-width="1"/><line x1="380" y1="220" x2="380" y2="20" stroke="#e3dccb" stroke-width="1"/><line x1="60" y1="180.0" x2="412" y2="180.0" stroke="#e3dccb" stroke-width="1"/><line x1="60" y1="140.0" x2="412" y2="140.0" stroke="#e3dccb" stroke-width="1"/><line x1="60" y1="100.0" x2="412" y2="100.0" stroke="#e3dccb" stroke-width="1"/><line x1="60" y1="60.0" x2="412" y2="60.0" stroke="#e3dccb" stroke-width="1"/><line x1="60" y1="20.0" x2="412" y2="20.0" stroke="#e3dccb" stroke-width="1"/><line x1="60" y1="220" x2="429.6" y2="220" stroke="#0f1620" stroke-width="1.4"/><polygon points="437.6,220 428.6,215.5 428.6,224.5" fill="#0f1620"/><line x1="60" y1="220" x2="60" y2="18.4" stroke="#0f1620" stroke-width="1.4"/><polygon points="60,10.4 55.5,19.4 64.5,19.4" fill="#0f1620"/><line x1="124" y1="220" x2="124" y2="224" stroke="#0f1620" stroke-width="1"/><text x="124" y="237" text-anchor="middle" font-size="12" fill="#0f1620">1</text><line x1="188" y1="220" x2="188" y2="224" stroke="#0f1620" stroke-width="1"/><text x="188" y="237" text-anchor="middle" font-size="12" fill="#0f1620">2</text><line x1="252" y1="220" x2="252" y2="224" stroke="#0f1620" stroke-width="1"/><text x="252" y="237" text-anchor="middle" font-size="12" fill="#0f1620">3</text><line x1="316" y1="220" x2="316" y2="224" stroke="#0f1620" stroke-width="1"/><text x="316" y="237" text-anchor="middle" font-size="12" fill="#0f1620">4</text><line x1="380" y1="220" x2="380" y2="224" stroke="#0f1620" stroke-width="1"/><text x="380" y="237" text-anchor="middle" font-size="12" fill="#0f1620">5</text><text x="54" y="237" text-anchor="end" font-size="12" fill="#0f1620">0</text><line x1="56" y1="180.0" x2="60" y2="180.0" stroke="#0f1620" stroke-width="1"/><text x="53" y="184.0" text-anchor="end" font-size="12" fill="#0f1620">0,5</text><line x1="56" y1="140.0" x2="60" y2="140.0" stroke="#0f1620" stroke-width="1"/><text x="53" y="144.0" text-anchor="end" font-size="12" fill="#0f1620">1,0</text><line x1="56" y1="100.0" x2="60" y2="100.0" stroke="#0f1620" stroke-width="1"/><text x="53" y="104.0" text-anchor="end" font-size="12" fill="#0f1620">1,5</text><line x1="56" y1="60.0" x2="60" y2="60.0" stroke="#0f1620" stroke-width="1"/><text x="53" y="64.0" text-anchor="end" font-size="12" fill="#0f1620">2,0</text><line x1="56" y1="20.0" x2="60" y2="20.0" stroke="#0f1620" stroke-width="1"/><text x="53" y="24.0" text-anchor="end" font-size="12" fill="#0f1620">2,5</text><text x="437.6" y="211" text-anchor="end" font-size="13" fill="#0f1620"><tspan font-style="italic">n</tspan></text><text x="70" y="16.4" text-anchor="start" font-size="13" fill="#0f1620"><tspan font-style="italic">l</tspan> (m)</text><line x1="68.8" y1="220" x2="418.4" y2="45.6" stroke="#c8324a" stroke-width="1.8"/><circle cx="124" cy="192.0" r="3.6" fill="#2b5d8a"/><circle cx="188" cy="160.8" r="3.6" fill="#2b5d8a"/><circle cx="252" cy="129.6" r="3.6" fill="#2b5d8a"/><circle cx="316" cy="96.0" r="3.6" fill="#2b5d8a"/><circle cx="380" cy="64.8" r="3.6" fill="#2b5d8a"/></svg>
+
+Den anpassade linjen går genom punkterna $(1;\\ 0{,}344)$ och $(5;\\ 1{,}940)$, vilket ger lutningen
+
+$$ k = \\frac{1{,}940 - 0{,}344}{5 - 1} = 0{,}399\\ \\mathrm{m} $$
+
+Lutningen är en halv våglängd:
+
+$$ \\frac{\\lambda}{2} = 0{,}399\\ \\mathrm{m} \\quad\\Leftrightarrow\\quad \\lambda = 2 \\cdot 0{,}399 = 0{,}798\\ \\mathrm{m} $$
+
+$$
+\\left[ \\begin{array}{l}
+f = 60{,}0\\ \\mathrm{Hz} \\\\
+\\lambda = 0{,}798\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ v = f \\cdot \\lambda = 60{,}0 \\cdot 0{,}798 = 47{,}88\\ \\mathrm{m/s} \\approx 47{,}9\\ \\mathrm{m/s} $$
+
+**Svar:** Ungefär $47{,}9\\ \\mathrm{m/s}$
+
+**b)** Skärningen med *l*-axeln fås ur linjens ekvation, $l = k \\cdot n + m$, med punkten $(1;\\ 0{,}344)$:
+
+$$ 0{,}344 = 0{,}399 \\cdot 1 + m \\quad\\Leftrightarrow\\quad m = 0{,}344 - 0{,}399 = -0{,}055\\ \\mathrm{m} $$
+
+Om eleverna hade mätt hela den svängande delen hade noll bukar svarat mot noll längd, och linjen hade gått genom origo. Skärningen $-0{,}055\\ \\mathrm{m}$ visar att den svängande delen är ungefär $5{,}5\\ \\mathrm{cm}$ längre än den uppmätta längden i varje mätning. Snöret lämnar trissan en bit bortom markeringen på bänken, och den sista noden ligger där snöret lämnar trissan, inte vid markeringen.
+
+**Svar:** Den uppmätta längden är kortare än den svängande delen. Skärningen visar att den svängande delen i varje mätning är ungefär $5{,}5\\ \\mathrm{cm}$ längre än *l*, eftersom noden vid trissan ligger en bit bortom markeringen.
+
+**c)** Eleven sätter snörets längd vid en buk till en halv våglängd:
+
+$$ \\lambda = 2 \\cdot 0{,}35 = 0{,}70\\ \\mathrm{m} \\qquad v = f \\cdot \\lambda = 60{,}0 \\cdot 0{,}70 = 42\\ \\mathrm{m/s} $$
+
+Värdet är ungefär $12\\ \\%$ för lågt. Hela felet på $5{,}5\\ \\mathrm{cm}$ hamnar i hennes enda halva våglängd, som bara är $0{,}40\\ \\mathrm{m}$. Lutningen är däremot skillnaden mellan längder, och där tar den konstanta skillnaden *d* ut sig. Lutningen väger dessutom samman alla fem mätningarna, så att slumpmässiga avläsningsfel åt olika håll delvis tar ut varandra.
+
+**Svar:** $42\\ \\mathrm{m/s}$. Värdet i a) är mer tillförlitligt, eftersom lutningen inte påverkas av att längden mäts till fel punkt och väger samman alla mätningar.`,
+        },
+        {
+            level: 3,
+            question: `Ett snöre går från en vibrator över en trissa till en vikt med massan *m* (se figuren). Den svängande delen är $1{,}20\\ \\mathrm{m}$ lång. Eleverna byter vikt och letar för varje vikt upp den frekvens där snöret svänger i sin grundton.
+
+| Massa $m$ (kg) | Grundtonens frekvens (Hz) |
+|---|---|
+| 0,10 | 7,9 |
+| 0,20 | 11,1 |
+| 0,40 | 15,7 |
+| 0,80 | 22,3 |
+
+a) Bestäm vågens utbredningshastighet i snöret för varje vikt.<br>b) En elev påstår att utbredningshastigheten är proportionell mot spännkraften i snöret. Visa att mätningarna motsäger påståendet, och ta fram ett samband mellan utbredningshastigheten och spännkraften som stämmer med mätningarna.<br>c) Vilken massa ska vikten ha för att snöret ska svänga med tre bukar vid frekvensen $30\\ \\mathrm{Hz}$? Svara i kg.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 200" width="664" height="255" style="display:block;margin:14px auto;max-width:100%;height:auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:4px;font-family:Poppins,sans-serif"><rect x="8" y="150" width="448" height="12" fill="#d9c3a0" stroke="#0f1620" stroke-width="1.2"/><path d="M30 153 q 14 4 30 1" stroke="#b89a70" stroke-width="0.8" fill="none"/><path d="M76 153 q 14 4 30 1" stroke="#b89a70" stroke-width="0.8" fill="none"/><path d="M122 153 q 14 4 30 1" stroke="#b89a70" stroke-width="0.8" fill="none"/><path d="M168 153 q 14 4 30 1" stroke="#b89a70" stroke-width="0.8" fill="none"/><path d="M214 153 q 14 4 30 1" stroke="#b89a70" stroke-width="0.8" fill="none"/><path d="M260 153 q 14 4 30 1" stroke="#b89a70" stroke-width="0.8" fill="none"/><path d="M306 153 q 14 4 30 1" stroke="#b89a70" stroke-width="0.8" fill="none"/><path d="M352 153 q 14 4 30 1" stroke="#b89a70" stroke-width="0.8" fill="none"/><path d="M398 153 q 14 4 30 1" stroke="#b89a70" stroke-width="0.8" fill="none"/><path d="M444 153 q 14 4 30 1" stroke="#b89a70" stroke-width="0.8" fill="none"/><rect x="22" y="104" width="46" height="46" rx="3" fill="#e4ddcd" stroke="#0f1620" stroke-width="1.4"/><circle cx="45" cy="127" r="9" fill="#cfc6b2" stroke="#0f1620" stroke-width="1.1"/><rect x="66" y="108" width="11" height="5" fill="#5a6172" stroke="#0f1620" stroke-width="0.8"/><text x="45" y="97" text-anchor="middle" font-size="12" fill="#0f1620">vibrator</text><rect x="438" y="146" width="16" height="20" fill="#8a8f9c" stroke="#0f1620" stroke-width="1"/><line x1="462" y1="118" x2="446" y2="146" stroke="#0f1620" stroke-width="2.4" stroke-linecap="round"/><circle cx="462" cy="118" r="8" fill="#d8d3c8" stroke="#0f1620" stroke-width="1.4"/><circle cx="462" cy="118" r="1.8" fill="#0f1620"/><line x1="470" y1="118" x2="470" y2="168" stroke="#0f1620" stroke-width="1.3"/><rect x="461" y="168" width="18" height="24" rx="2" fill="#6f7685" stroke="#0f1620" stroke-width="1.2"/><text x="484" y="185" text-anchor="start" font-size="12" fill="#0f1620">vikt, <tspan font-style="italic">m</tspan></text><line x1="77" y1="110" x2="462" y2="110" stroke="#8a8f9c" stroke-width="0.8" stroke-dasharray="3 3"/><path d="M77.0 110.0 L79.4 109.7 L81.8 109.4 L84.2 109.1 L86.6 108.8 L89.0 108.5 L91.4 108.2 L93.8 107.9 L96.3 107.7 L98.7 107.4 L101.1 107.1 L103.5 106.8 L105.9 106.5 L108.3 106.2 L110.7 105.9 L113.1 105.6 L115.5 105.4 L117.9 105.1 L120.3 104.8 L122.7 104.5 L125.1 104.3 L127.5 104.0 L129.9 103.7 L132.3 103.5 L134.8 103.2 L137.2 102.9 L139.6 102.7 L142.0 102.4 L144.4 102.2 L146.8 101.9 L149.2 101.7 L151.6 101.4 L154.0 101.2 L156.4 100.9 L158.8 100.7 L161.2 100.5 L163.6 100.3 L166.0 100.0 L168.4 99.8 L170.8 99.6 L173.3 99.4 L175.7 99.2 L178.1 99.0 L180.5 98.8 L182.9 98.6 L185.3 98.4 L187.7 98.2 L190.1 98.0 L192.5 97.9 L194.9 97.7 L197.3 97.5 L199.7 97.4 L202.1 97.2 L204.5 97.1 L206.9 96.9 L209.3 96.8 L211.8 96.6 L214.2 96.5 L216.6 96.4 L219.0 96.3 L221.4 96.1 L223.8 96.0 L226.2 95.9 L228.6 95.8 L231.0 95.7 L233.4 95.6 L235.8 95.6 L238.2 95.5 L240.6 95.4 L243.0 95.3 L245.4 95.3 L247.8 95.2 L250.3 95.2 L252.7 95.1 L255.1 95.1 L257.5 95.1 L259.9 95.0 L262.3 95.0 L264.7 95.0 L267.1 95.0 L269.5 95.0 L271.9 95.0 L274.3 95.0 L276.7 95.0 L279.1 95.0 L281.5 95.1 L283.9 95.1 L286.3 95.1 L288.8 95.2 L291.2 95.2 L293.6 95.3 L296.0 95.3 L298.4 95.4 L300.8 95.5 L303.2 95.6 L305.6 95.6 L308.0 95.7 L310.4 95.8 L312.8 95.9 L315.2 96.0 L317.6 96.1 L320.0 96.3 L322.4 96.4 L324.8 96.5 L327.3 96.6 L329.7 96.8 L332.1 96.9 L334.5 97.1 L336.9 97.2 L339.3 97.4 L341.7 97.5 L344.1 97.7 L346.5 97.9 L348.9 98.0 L351.3 98.2 L353.7 98.4 L356.1 98.6 L358.5 98.8 L360.9 99.0 L363.3 99.2 L365.8 99.4 L368.2 99.6 L370.6 99.8 L373.0 100.0 L375.4 100.3 L377.8 100.5 L380.2 100.7 L382.6 100.9 L385.0 101.2 L387.4 101.4 L389.8 101.7 L392.2 101.9 L394.6 102.2 L397.0 102.4 L399.4 102.7 L401.8 102.9 L404.3 103.2 L406.7 103.5 L409.1 103.7 L411.5 104.0 L413.9 104.3 L416.3 104.5 L418.7 104.8 L421.1 105.1 L423.5 105.4 L425.9 105.6 L428.3 105.9 L430.7 106.2 L433.1 106.5 L435.5 106.8 L437.9 107.1 L440.3 107.4 L442.8 107.7 L445.2 107.9 L447.6 108.2 L450.0 108.5 L452.4 108.8 L454.8 109.1 L457.2 109.4 L459.6 109.7 L462.0 110.0" stroke="#c8324a" stroke-width="2" fill="none"/><path d="M77.0 110.0 L79.4 110.3 L81.8 110.6 L84.2 110.9 L86.6 111.2 L89.0 111.5 L91.4 111.8 L93.8 112.1 L96.3 112.3 L98.7 112.6 L101.1 112.9 L103.5 113.2 L105.9 113.5 L108.3 113.8 L110.7 114.1 L113.1 114.4 L115.5 114.6 L117.9 114.9 L120.3 115.2 L122.7 115.5 L125.1 115.7 L127.5 116.0 L129.9 116.3 L132.3 116.5 L134.8 116.8 L137.2 117.1 L139.6 117.3 L142.0 117.6 L144.4 117.8 L146.8 118.1 L149.2 118.3 L151.6 118.6 L154.0 118.8 L156.4 119.1 L158.8 119.3 L161.2 119.5 L163.6 119.7 L166.0 120.0 L168.4 120.2 L170.8 120.4 L173.3 120.6 L175.7 120.8 L178.1 121.0 L180.5 121.2 L182.9 121.4 L185.3 121.6 L187.7 121.8 L190.1 122.0 L192.5 122.1 L194.9 122.3 L197.3 122.5 L199.7 122.6 L202.1 122.8 L204.5 122.9 L206.9 123.1 L209.3 123.2 L211.8 123.4 L214.2 123.5 L216.6 123.6 L219.0 123.7 L221.4 123.9 L223.8 124.0 L226.2 124.1 L228.6 124.2 L231.0 124.3 L233.4 124.4 L235.8 124.4 L238.2 124.5 L240.6 124.6 L243.0 124.7 L245.4 124.7 L247.8 124.8 L250.3 124.8 L252.7 124.9 L255.1 124.9 L257.5 124.9 L259.9 125.0 L262.3 125.0 L264.7 125.0 L267.1 125.0 L269.5 125.0 L271.9 125.0 L274.3 125.0 L276.7 125.0 L279.1 125.0 L281.5 124.9 L283.9 124.9 L286.3 124.9 L288.8 124.8 L291.2 124.8 L293.6 124.7 L296.0 124.7 L298.4 124.6 L300.8 124.5 L303.2 124.4 L305.6 124.4 L308.0 124.3 L310.4 124.2 L312.8 124.1 L315.2 124.0 L317.6 123.9 L320.0 123.7 L322.4 123.6 L324.8 123.5 L327.3 123.4 L329.7 123.2 L332.1 123.1 L334.5 122.9 L336.9 122.8 L339.3 122.6 L341.7 122.5 L344.1 122.3 L346.5 122.1 L348.9 122.0 L351.3 121.8 L353.7 121.6 L356.1 121.4 L358.5 121.2 L360.9 121.0 L363.3 120.8 L365.8 120.6 L368.2 120.4 L370.6 120.2 L373.0 120.0 L375.4 119.7 L377.8 119.5 L380.2 119.3 L382.6 119.1 L385.0 118.8 L387.4 118.6 L389.8 118.3 L392.2 118.1 L394.6 117.8 L397.0 117.6 L399.4 117.3 L401.8 117.1 L404.3 116.8 L406.7 116.5 L409.1 116.3 L411.5 116.0 L413.9 115.7 L416.3 115.5 L418.7 115.2 L421.1 114.9 L423.5 114.6 L425.9 114.4 L428.3 114.1 L430.7 113.8 L433.1 113.5 L435.5 113.2 L437.9 112.9 L440.3 112.6 L442.8 112.3 L445.2 112.1 L447.6 111.8 L450.0 111.5 L452.4 111.2 L454.8 110.9 L457.2 110.6 L459.6 110.3 L462.0 110.0" stroke="#c8324a" stroke-width="2" fill="none" opacity="0.55" stroke-dasharray="5 4"/><circle cx="77.0" cy="110" r="3.2" fill="#0f1620"/><circle cx="462.0" cy="110" r="3.2" fill="#0f1620"/><line x1="77.0" y1="92" x2="77.0" y2="66" stroke="#5a6172" stroke-width="0.8" stroke-dasharray="3 3"/><line x1="462.0" y1="92" x2="462.0" y2="66" stroke="#5a6172" stroke-width="0.8" stroke-dasharray="3 3"/><line x1="83.0" y1="62" x2="456.0" y2="62" stroke="#5a6172" stroke-width="1.2" stroke-linecap="butt"/><polygon points="77.0,62 84.0,58 84.0,66" fill="#5a6172"/><polygon points="462.0,62 455.0,58 455.0,66" fill="#5a6172"/><text x="269.5" y="56" text-anchor="middle" font-size="13" fill="#0f1620"><tspan font-style="italic">l</tspan> = 1,20 m</text></svg>`,
+            answer: { value: 0.16, unit: 'kg', tol: 0.05 },
+            delsvar: [
+                { del: 'a', values: [19.0, 26.6, 37.7, 53.5], unit: 'm/s' },
+                { del: 'b' },
+                { del: 'c', value: 0.16, unit: 'kg', tol: 0.05 },
+            ],
+            solution: `Snöret är fast vid vibratorn och vid trissan, så där bildas noder. Vikten hänger stilla, så spännkraften $F_\\mathrm{S}$ i snöret är lika stor som viktens tyngd: $F_\\mathrm{S} = m \\cdot g$.
+
+**a)** I grundtonen är den svängande delen en halv våglängd lång, $\\lambda = 2 \\cdot l = 2 \\cdot 1{,}20 = 2{,}40\\ \\mathrm{m}$, för alla vikter. Utbredningshastigheten blir
+
+$$ v = f \\cdot \\lambda = f \\cdot 2{,}40 $$
+
+| $m$ (kg) | $f$ (Hz) | $v$ (m/s) |
+|---|---|---|
+| 0,10 | 7,9 | $7{,}9 \\cdot 2{,}40 = 18{,}96$ |
+| 0,20 | 11,1 | $11{,}1 \\cdot 2{,}40 = 26{,}64$ |
+| 0,40 | 15,7 | $15{,}7 \\cdot 2{,}40 = 37{,}68$ |
+| 0,80 | 22,3 | $22{,}3 \\cdot 2{,}40 = 53{,}52$ |
+
+**Svar:** Ungefär $19{,}0\\ \\mathrm{m/s}$, $26{,}6\\ \\mathrm{m/s}$, $37{,}7\\ \\mathrm{m/s}$ och $53{,}5\\ \\mathrm{m/s}$
+
+**b)** Spännkraften är $F_\\mathrm{S} = m \\cdot g$, så den fördubblas varje gång massan fördubblas. Om *v* vore proportionell mot $F_\\mathrm{S}$ skulle även *v* fördubblas. Men när massan går från $0{,}10\\ \\mathrm{kg}$ till $0{,}20\\ \\mathrm{kg}$ ökar hastigheten bara med faktorn
+
+$$ \\frac{26{,}64}{18{,}96} \\approx 1{,}41 $$
+
+och från $0{,}10\\ \\mathrm{kg}$ till $0{,}40\\ \\mathrm{kg}$, fyra gånger så stor kraft, med faktorn $\\dfrac{37{,}68}{18{,}96} \\approx 1{,}99$. Påståendet stämmer alltså inte.
+
+Fyra gånger så stor kraft ger dubbelt så stor hastighet, och dubbel kraft ger faktorn $1{,}41 \\approx \\sqrt{2}$. Det tyder på att $v^2$ är proportionell mot spännkraften. Vi prövar genom att räkna kvoten $\\dfrac{v^2}{F_\\mathrm{S}}$ med $g = 9{,}82\\ \\mathrm{N/kg}$:
+
+| $F_\\mathrm{S} = m \\cdot g$ (N) | $v^2$ $(\\mathrm{m^2/s^2})$ | $\\dfrac{v^2}{F_\\mathrm{S}}$ (m/kg) |
+|---|---|---|
+| 0,982 | 359,5 | 366 |
+| 1,964 | 709,7 | 361 |
+| 3,928 | 1 419,8 | 361 |
+| 7,856 | 2 864,4 | 365 |
+
+Kvoten är nästan densamma i alla mätningar, med medelvärdet ungefär $363\\ \\mathrm{m/kg}$. Mätningarna stämmer alltså med sambandet
+
+$$ v^2 = C \\cdot F_\\mathrm{S} \\qquad (1) $$
+
+där $C \\approx 363\\ \\mathrm{m/kg}$ är en konstant för det här snöret.
+
+**Svar:** Fördubblad spännkraft ger bara $1{,}4$ gånger så stor hastighet, så *v* är inte proportionell mot $F_\\mathrm{S}$. I stället är $v^2$ proportionell mot spännkraften, $v^2 = C \\cdot F_\\mathrm{S}$ med $C \\approx 363\\ \\mathrm{m/kg}$.
+
+**c)** Med tre bukar ryms tre halva våglängder på snöret:
+
+$$ l = \\frac{3\\lambda}{2} \\quad\\Leftrightarrow\\quad \\lambda = \\frac{2 \\cdot l}{3} = \\frac{2 \\cdot 1{,}20}{3} = 0{,}80\\ \\mathrm{m} $$
+
+$$ v = f \\cdot \\lambda = 30 \\cdot 0{,}80 = 24\\ \\mathrm{m/s} $$
+
+Ur (1), $v^2 = C \\cdot F_\\mathrm{S}$, med $F_\\mathrm{S} = m \\cdot g$:
+
+$$ v^2 = C \\cdot m \\cdot g \\quad\\Leftrightarrow\\quad m = \\frac{v^2}{C \\cdot g} $$
+
+$$
+\\left[ \\begin{array}{l}
+v = 24\\ \\mathrm{m/s} \\\\
+C = 363\\ \\mathrm{m/kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg}
+\\end{array} \\right]
+$$
+
+$$ m = \\frac{24^2}{363 \\cdot 9{,}82} \\approx 0{,}1616\\ \\mathrm{kg} \\approx 0{,}16\\ \\mathrm{kg} $$
+
+Rimlighet: $24\\ \\mathrm{m/s}$ ligger mellan hastigheterna för $0{,}10\\ \\mathrm{kg}$ och $0{,}20\\ \\mathrm{kg}$, och massan hamnar också där.
+
+**Svar:** Ungefär $0{,}16\\ \\mathrm{kg}$`,
+        },
+        {
+            level: 3,
+            question: `En harpbyggare funderar på att bygga en harpa där alla strängar är av samma sort och har samma spänning, så att vågen har samma utbredningshastighet $v = 220\\ \\mathrm{m/s}$ i alla strängar. Strängarna skulle då bara skilja sig i längd. Harpans lägsta ton ska ha frekvensen $32{,}7\\ \\mathrm{Hz}$ och den högsta $3\\,136\\ \\mathrm{Hz}$.<br>a) Hur lång måste den längsta och den kortaste strängen vara? Svara i meter.<br>b) Den längsta strängen på en verklig konsertharpa är omkring $1{,}4\\ \\mathrm{m}$ lång. Vilken utbredningshastighet måste vågen ha i den strängen för att grundtonen ska bli $32{,}7\\ \\mathrm{Hz}$? Svara i m/s.<br>c) Diskutera varför harpbyggarens modell inte fungerar i praktiken, och hur verkliga harpor får låga toner utan orimligt långa strängar.`,
+            answer: { value: 92, unit: 'm/s' },
+            delsvar: [
+                { del: 'a', value: 3.36, unit: 'm', etikett: 'längsta strängen' },
+                { del: 'a', value: 0.0351, unit: 'm', etikett: 'kortaste strängen' },
+                { del: 'b', value: 92, unit: 'm/s' },
+                { del: 'c' },
+            ],
+            solution: `Varje sträng ger sin ton i grundtonen, där strängen är en halv våglängd lång, $\\lambda = 2 \\cdot l$. Ur $v = f \\cdot \\lambda$ fås
+
+$$ v = f \\cdot 2l \\quad\\Leftrightarrow\\quad l = \\frac{v}{2f} $$
+
+**a)** Den längsta strängen ger den lägsta tonen:
+
+$$ l_{\\max} = \\frac{220}{2 \\cdot 32{,}7} \\approx 3{,}364\\ \\mathrm{m} \\approx 3{,}36\\ \\mathrm{m} $$
+
+Den kortaste strängen ger den högsta tonen:
+
+$$ l_{\\min} = \\frac{220}{2 \\cdot 3\\,136} \\approx 0{,}03508\\ \\mathrm{m} \\approx 0{,}0351\\ \\mathrm{m} $$
+
+**Svar:** Den längsta strängen måste vara ungefär $3{,}36\\ \\mathrm{m}$ och den kortaste ungefär $0{,}0351\\ \\mathrm{m}$, alltså omkring $3{,}5\\ \\mathrm{cm}$.
+
+**b)** Nu är längden given och utbredningshastigheten söks:
+
+$$
+\\left[ \\begin{array}{l}
+f = 32{,}7\\ \\mathrm{Hz} \\\\
+l = 1{,}4\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ v = f \\cdot 2l = 32{,}7 \\cdot 2 \\cdot 1{,}4 = 91{,}56\\ \\mathrm{m/s} \\approx 92\\ \\mathrm{m/s} $$
+
+**Svar:** Ungefär $92\\ \\mathrm{m/s}$
+
+**c)** Frekvenserna skiljer sig med en faktor $\\dfrac{3\\,136}{32{,}7} \\approx 96$, och med samma *v* i alla strängar måste längderna skilja sig lika mycket. En sträng på drygt tre meter ryms inte i ett instrument som en människa kan spela på, och en sträng på några centimeter går knappt att knäppa. Modellen ger alltså ett instrument som inte går att bygga.
+
+Längden är inte det enda som avgör grundtonen. Enligt $f = \\dfrac{v}{2l}$ blir tonen också lägre om utbredningshastigheten minskar, och den beror på strängens spänning, tvärsnittsarea och densitet. Bassträngarna på en verklig harpa görs därför tjockare och tyngre, ofta lindade med metalltråd, och har en lägre hastighet, ungefär $92\\ \\mathrm{m/s}$ enligt b) i stället för $220\\ \\mathrm{m/s}$. Diskantsträngarna görs tunnare och spänns hårt, så att de kan vara längre än några centimeter. Strängarna skiljer sig alltså både i längd och i hur snabbt vågen går i dem.
+
+**Svar:** Med samma utbredningshastighet blir strängarna mellan drygt tre meter och några centimeter, vilket inte går att bygga eller spela på. Verkliga harpor ger bassträngarna lägre utbredningshastighet genom att göra dem tjockare och tyngre, och strängarna skiljer sig både i längd och i hastighet.`,
         },
     ],
 
@@ -65485,7 +70872,7 @@ $$ f = \\frac{v}{\\lambda} = \\frac{340}{0{,}80} = 425\\ \\mathrm{Hz} $$
 
 ${makeStanding({ type: 'half', n: 1, length: 280, lengthLabel: '<tspan font-style="italic">l</tspan> = 0,40 m' })}`,
             answer: { value: 212.5, unit: 'Hz' },
-            solution: `I en halvöppen pipa är ena änden öppen (buk) och andra änden sluten (nod). Grundtonen ($n = 1$) motsvarar avståndet från en buk till närliggande nod — en **fjärdedels** våglängd:
+            solution: `I en halvöppen pipa är ena änden öppen (buk) och andra änden sluten (nod). Grundtonen ($n = 1$) motsvarar avståndet från en buk till närliggande nod, alltså en **fjärdedels** våglängd:
 
 $$ l = \\frac{\\lambda}{4} \\quad\\Leftrightarrow\\quad \\lambda = 4l $$
 
@@ -65503,7 +70890,7 @@ $$ f = \\frac{v}{\\lambda} = \\frac{340}{1{,}60} = 212{,}5\\ \\mathrm{Hz} \\appr
 
 **Svar:** Grundtonens frekvens är ungefär $213\\ \\mathrm{Hz}$.
 
-**Generell slutsats:** En halvöppen pipa har grundton med **dubbelt så lång** våglängd som en öppen pipa med samma längd — alltså *halva* frekvensen. Det är därför en klarinett (halvöppen) klingar oktaven lägre än en flöjt (öppen) av samma längd.`,
+**Generell slutsats:** En halvöppen pipa har grundton med **dubbelt så lång** våglängd som en öppen pipa med samma längd, alltså *halva* frekvensen. Det är därför en klarinett (halvöppen) klingar oktaven lägre än en flöjt (öppen) av samma längd.`,
         },
         {
             level: 1,
@@ -65554,7 +70941,7 @@ $$ f = \\frac{v}{\\lambda} = \\frac{340}{0{,}24} = 1\\,417\\ \\mathrm{Hz} \\appr
 
 **Svar:** Första övertonen är ungefär $1{,}4\\ \\mathrm{kHz}$.
 
-**Generell slutsats:** I halvöppna pipor hoppar övertonerna med faktor $3, 5, 7, \\ldots$ (udda multiplar av grundtonen) — inte med $2, 3, 4, \\ldots$ som i öppna eller slutna. Det är därför en klarinett ljuder helt annorlunda än en flöjt även när båda spelar samma grundton.`,
+**Generell slutsats:** I halvöppna pipor hoppar övertonerna med faktor $3, 5, 7, \\ldots$ (udda multiplar av grundtonen), inte med $2, 3, 4, \\ldots$ som i öppna eller slutna. Det är därför en klarinett ljuder helt annorlunda än en flöjt även när båda spelar samma grundton.`,
         },
         {
             level: 2,
@@ -65573,7 +70960,7 @@ $$ f_h = \\frac{425}{2} = 212{,}5\\ \\mathrm{Hz} \\approx 213\\ \\mathrm{Hz} $$
 
 **Svar:** Halvöppna pipans grundton är ungefär $213\\ \\mathrm{Hz}$.
 
-**Generell slutsats:** Det är därför man kan göra en orgelpipa kompaktare genom att stänga ena änden — man får en lägre ton från en kortare pipa. Det kostar dock i ljudkaraktär (bara udda övertoner uppstår).`,
+**Generell slutsats:** Det är därför man kan göra en orgelpipa kompaktare genom att stänga ena änden: man får en lägre ton från en kortare pipa. Det kostar dock i ljudkaraktär (bara udda övertoner uppstår).`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
@@ -65583,11 +70970,11 @@ $$ f_h = \\frac{425}{2} = 212{,}5\\ \\mathrm{Hz} \\approx 213\\ \\mathrm{Hz} $$
             answer: { value: 338.8, unit: 'm/s' },
             solution: `**Insikten är att skillnaden mellan två successiva resonanslängder är exakt en halv våglängd**, oberoende av eventuella "ändkorrektioner" vid öppningen.
 
-**Steg 1 — varför skillnaden är $\\lambda/2$.** Halvöppna pipans resonanser sker vid $l_n = (2n - 1)\\lambda/4$. Två successiva moder skiljer sig med
+**Steg 1: varför skillnaden är $\\lambda/2$.** Halvöppna pipans resonanser sker vid $l_n = (2n - 1)\\lambda/4$. Två successiva moder skiljer sig med
 
 $$ l_{n+1} - l_n = \\frac{(2(n+1) - 1)\\lambda - (2n - 1)\\lambda}{4} = \\frac{2\\lambda}{4} = \\frac{\\lambda}{2} $$
 
-**Steg 2 — beräkna våglängden.**
+**Steg 2: beräkna våglängden.**
 
 Mätvärden:
 $$
@@ -65602,13 +70989,641 @@ $$ \\frac{\\lambda}{2} = l_2 - l_1 = 0{,}570 - 0{,}185 = 0{,}385\\ \\mathrm{m} $
 
 $$ \\lambda = 0{,}770\\ \\mathrm{m} $$
 
-**Steg 3 — beräkna ljudhastigheten.**
+**Steg 3: beräkna ljudhastigheten.**
 
 $$ v = f \\cdot \\lambda = 440 \\cdot 0{,}770 = 338{,}8\\ \\mathrm{m/s} $$
 
 **Svar:** Ljudets hastighet är ungefär $339\\ \\mathrm{m/s}$.
 
 **Generell slutsats:** Insikten är att skillnaden mellan två successiva resonanser eliminerar både okänd ändkorrektion och behovet av att veta vilket *n* varje resonans motsvarar. Detta är en av de exaktaste enkla metoderna att mäta ljudets hastighet.`,
+        },
+        {
+            level: 1,
+            question: `Under ett åskväder ser du en blixt. Det dröjer $4{,}5\\ \\mathrm{s}$ innan du hör mullret. Hur långt bort slog blixten ned? Räkna med ljudets hastighet $v = 340\\ \\mathrm{m/s}$ i luft och försumma tiden det tar för ljuset att nå dig. Svara i km.`,
+            answer: { value: 1.5, unit: 'km' },
+            solution: `Ljuset når dig i stort sett direkt, så fördröjningen är den tid ljudet behöver för att färdas sträckan $s$. Ljudet rör sig med konstant fart:
+
+$$ v = \\frac{s}{t} \\quad\\Leftrightarrow\\quad s = v \\cdot t $$
+
+$$
+\\left[ \\begin{array}{l}
+v = 340\\ \\mathrm{m/s} \\\\
+t = 4{,}5\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ s = 340 \\cdot 4{,}5 = 1\\,530\\ \\mathrm{m} \\approx 1{,}5\\ \\mathrm{km} $$
+
+Tumregeln från genomgången ger samma sak: $4{,}5\\ \\mathrm{s}$ delat med 3 blir $1{,}5\\ \\mathrm{km}$.
+
+**Svar:** Blixten slog ned ungefär $1{,}5\\ \\mathrm{km}$ bort.`,
+        },
+        {
+            level: 1,
+            question: `Ett rum kan ses som en **sluten pipa**: luften mellan två motstående väggar kan inte röra sig in i väggarna. Vilket påstående stämmer om den stående ljudvågens grundton mellan väggarna?`,
+            choices: [
+                'Det är bukar vid båda väggarna och en nod mitt i rummet.',
+                'Det är en nod vid ena väggen och en buk vid den andra.',
+                'Det är noder vid båda väggarna och en buk mitt i rummet.',
+                'Det är bukar vid båda väggarna och ingen nod alls.',
+            ],
+            correct: 2,
+            solution: `Vid en sluten ände kan luften inte svänga, så där bildas alltid en **nod**. Båda väggarna är slutna ändar, alltså är det noder vid båda väggarna.
+
+Mellan två noder måste luften svänga, och i grundtonen ligger det en enda buk mitt emellan dem. Avståndet mellan väggarna är då en halv våglängd, $l = \\dfrac{\\lambda}{2}$, precis som för en öppen pipa men med noder och bukar på omvända platser.
+
+Bukar vid båda ändarna gäller en öppen pipa, och nod vid ena änden och buk vid den andra gäller en halvöppen pipa.
+
+**Svar:** Det är noder vid båda väggarna och en buk mitt i rummet.`,
+        },
+        {
+            level: 1,
+            question: `En korridor är $6{,}8\\ \\mathrm{m}$ lång från den ena ändväggen till den andra. Luften mellan ändväggarna kan ses som en sluten pipa. Beräkna grundtonens frekvens. Räkna med $v = 340\\ \\mathrm{m/s}$.
+
+${makeStanding({ type: 'closed', n: 1, length: 280, lengthLabel: '<tspan font-style="italic">l</tspan> = 6,8 m' })}`,
+            answer: { value: 25, unit: 'Hz' },
+            solution: `En sluten pipa har noder vid båda ändarna (nod till nod), så samma formel gäller som för en öppen pipa:
+
+$$ l = \\frac{n \\cdot \\lambda}{2} \\quad\\Leftrightarrow\\quad \\lambda = \\frac{2l}{n} $$
+
+$$
+\\left[ \\begin{array}{l}
+l = 6{,}8\\ \\mathrm{m} \\\\
+n = 1\\ (\\text{grundtonen})
+\\end{array} \\right]
+$$
+
+$$ \\lambda = \\frac{2 \\cdot 6{,}8}{1} = 13{,}6\\ \\mathrm{m} $$
+
+Frekvensen fås ur $v = f \\cdot \\lambda$:
+
+$$ f = \\frac{v}{\\lambda} = \\frac{340}{13{,}6} = 25\\ \\mathrm{Hz} $$
+
+Det är en mycket låg ton, nära gränsen för vad örat kan uppfatta. Därför kan en korridor eller ett stort rum få ett dovt mullrande ljud.
+
+**Svar:** Grundtonens frekvens är $25\\ \\mathrm{Hz}$.`,
+        },
+        {
+            level: 1,
+            question: `Någon slår med en hammare på en järnvägsräls $1{,}2\\ \\mathrm{km}$ bort. Ljudet når dig både genom rälsen och genom luften. Ljudets hastighet är $5\\,100\\ \\mathrm{m/s}$ i stål och $340\\ \\mathrm{m/s}$ i luft. Hur lång tid tar det för ljudet att nå dig<br>a) genom rälsen&emsp;&emsp;b) genom luften?<br>Svara i sekunder.`,
+            answer: { value: 3.5, unit: 's' },
+            delsvar: [
+                { del: 'a', value: 0.24, unit: 's', tol: 0.03 },
+                { del: 'b', value: 3.5, unit: 's', tol: 0.03 },
+            ],
+            solution: `Ljudet färdas med konstant fart i båda materialen, så tiden är sträckan delad med farten:
+
+$$ v = \\frac{s}{t} \\quad\\Leftrightarrow\\quad t = \\frac{s}{v} $$
+
+Sträckan är $s = 1{,}2\\ \\mathrm{km} = 1\\,200\\ \\mathrm{m}$ i båda fallen.
+
+**a)**
+$$
+\\left[ \\begin{array}{l}
+s = 1\\,200\\ \\mathrm{m} \\\\
+v = 5\\,100\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$ t = \\frac{1\\,200}{5\\,100} = 0{,}235\\ldots\\ \\mathrm{s} \\approx 0{,}24\\ \\mathrm{s} $$
+
+**Svar:** Ungefär $0{,}24\\ \\mathrm{s}$
+
+**b)**
+$$
+\\left[ \\begin{array}{l}
+s = 1\\,200\\ \\mathrm{m} \\\\
+v = 340\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$ t = \\frac{1\\,200}{340} = 3{,}529\\ldots\\ \\mathrm{s} \\approx 3{,}5\\ \\mathrm{s} $$
+
+Ljudet i rälsen kommer alltså fram mer än tre sekunder före ljudet i luften. Fasta ämnen leder ljud mycket snabbare än gaser, eftersom partiklarna är tätare kopplade till varandra.
+
+**Svar:** Ungefär $3{,}5\\ \\mathrm{s}$`,
+        },
+        {
+            level: 2,
+            question: `En mätcylinder är $25\\ \\mathrm{cm}$ hög från botten till kanten. När man blåser över kanten bildas en stående våg i luftpelaren, som kan ses som en halvöppen pipa.<br>a) Beräkna grundtonens frekvens när mätcylindern är tom.<br>b) Man häller i vatten tills grundtonen blir $425\\ \\mathrm{Hz}$. Hur högt står vattnet då? Svara i cm.<br>Räkna med $v = 340\\ \\mathrm{m/s}$. (Figuren är inte skalenlig.)
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 290" width="365" height="424" role="img" aria-label="Mätcylinder med vatten. Total höjd 25 cm från botten till kanten, vattnets höjd h." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="96" y="28" width="58" height="218" fill="#eef4f8"/><rect x="96" y="176" width="58" height="70" fill="#9cc3e6" opacity="0.75"/><path d="M 96 174 Q 125 180 154 174" fill="none" stroke="#2563c9" stroke-width="1.6"/><g stroke="#6b7178" stroke-width="1"><line x1="144" y1="66" x2="154" y2="66"/><line x1="148" y1="86" x2="154" y2="86"/><line x1="144" y1="106" x2="154" y2="106"/><line x1="148" y1="126" x2="154" y2="126"/><line x1="144" y1="146" x2="154" y2="146"/><line x1="148" y1="166" x2="154" y2="166"/><line x1="144" y1="186" x2="154" y2="186"/><line x1="148" y1="206" x2="154" y2="206"/><line x1="144" y1="226" x2="154" y2="226"/></g><path d="M 95 28 L 95 246 Q 95 250 99 250 L 151 250 Q 155 250 155 246 L 155 28" fill="none" stroke="#0f1620" stroke-width="2.2" stroke-linejoin="round"/><path d="M 88 25 Q 92 28 95 28" fill="none" stroke="#0f1620" stroke-width="2.2" stroke-linecap="round"/><line x1="155" y1="28" x2="159" y2="28" stroke="#0f1620" stroke-width="2.2" stroke-linecap="round"/><rect x="72" y="250" width="106" height="11" rx="3" fill="#d9d2c3" stroke="#0f1620" stroke-width="1.8"/><text x="122" y="112" text-anchor="middle" font-size="13" fill="#0f1620">luft</text><text x="122" y="218" text-anchor="middle" font-size="13" fill="#0f1620">vatten</text><g stroke="#5a6172" stroke-width="0.9" stroke-dasharray="3 3"><line x1="86" y1="28" x2="46" y2="28"/><line x1="95" y1="246" x2="46" y2="246"/><line x1="159" y1="176" x2="196" y2="176"/><line x1="155" y1="246" x2="196" y2="246"/></g><line x1="52" y1="36" x2="52" y2="238" stroke="#0f1620" stroke-width="1.3"/><polygon points="52,28 48,37 56,37" fill="#0f1620"/><polygon points="52,246 48,237 56,237" fill="#0f1620"/><text x="44" y="141" text-anchor="end" font-size="13" fill="#0f1620">25 cm</text><line x1="190" y1="184" x2="190" y2="238" stroke="#0f1620" stroke-width="1.3"/><polygon points="190,176 186,185 194,185" fill="#0f1620"/><polygon points="190,246 186,237 194,237" fill="#0f1620"/><text x="199" y="216" text-anchor="start" font-size="14" font-style="italic" fill="#0f1620">h</text></svg>`,
+            answer: { value: 5, unit: 'cm' },
+            delsvar: [
+                { del: 'a', value: 340, unit: 'Hz' },
+                { del: 'b', value: 5, unit: 'cm', tol: 0.05 },
+            ],
+            solution: `Luftpelaren är öppen vid kanten (buk) och sluten vid botten eller vattenytan (nod). För en halvöppen pipa gäller
+
+$$ l = \\frac{(2n - 1) \\cdot \\lambda}{4} $$
+
+och för grundtonen är $n = 1$, alltså $l = \\dfrac{\\lambda}{4}$.
+
+**a)** Hela höjden är luft: $l = 25\\ \\mathrm{cm} = 0{,}25\\ \\mathrm{m}$.
+
+$$ \\lambda = 4l = 4 \\cdot 0{,}25 = 1{,}0\\ \\mathrm{m} $$
+
+$$ f = \\frac{v}{\\lambda} = \\frac{340}{1{,}0} = 340\\ \\mathrm{Hz} $$
+
+**Svar:** Grundtonens frekvens är $340\\ \\mathrm{Hz}$.
+
+**b)** Vi tar först fram våglängden för den nya tonen och sedan hur lång luftpelaren ska vara.
+
+$$
+\\left[ \\begin{array}{l}
+v = 340\\ \\mathrm{m/s} \\\\
+f = 425\\ \\mathrm{Hz}
+\\end{array} \\right]
+$$
+
+$$ \\lambda = \\frac{v}{f} = \\frac{340}{425} = 0{,}80\\ \\mathrm{m} $$
+
+$$ l = \\frac{\\lambda}{4} = \\frac{0{,}80}{4} = 0{,}20\\ \\mathrm{m} = 20\\ \\mathrm{cm} $$
+
+Luftpelaren ska alltså vara $20\\ \\mathrm{cm}$. Resten av mätcylinderns höjd fylls av vatten:
+
+$$ h = 25 - 20 = 5\\ \\mathrm{cm} $$
+
+Rimligt: en kortare luftpelare ger en kortare våglängd och därmed en högre ton, och $425\\ \\mathrm{Hz}$ är högre än $340\\ \\mathrm{Hz}$.
+
+**Svar:** Vattnet står ungefär $5\\ \\mathrm{cm}$ högt.`,
+        },
+        {
+            level: 2,
+            question: `Du står framför en stor, plan bergvägg och klappar i händerna. Du ökar takten tills ekot från varje klapp hörs exakt samtidigt som du gör nästa klapp. Då klappar du $2{,}0$ gånger per sekund. Hur långt från bergväggen står du? Räkna med $v = 340\\ \\mathrm{m/s}$. Svara i meter.`,
+            answer: { value: 85, unit: 'm' },
+            solution: `Med $2{,}0$ klappar per sekund går det tiden
+
+$$ t = \\frac{1}{2{,}0} = 0{,}50\\ \\mathrm{s} $$
+
+mellan två klappar. Under den tiden ska ljudet hinna fram till väggen **och tillbaka**, alltså sträckan $2d$, där $d$ är avståndet till väggen.
+
+$$ v = \\frac{2d}{t} \\quad\\Leftrightarrow\\quad d = \\frac{v \\cdot t}{2} $$
+
+$$
+\\left[ \\begin{array}{l}
+v = 340\\ \\mathrm{m/s} \\\\
+t = 0{,}50\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ d = \\frac{340 \\cdot 0{,}50}{2} = 85\\ \\mathrm{m} $$
+
+Den vanligaste missen är att glömma att ljudet går fram och tillbaka, vilket ger det dubbla avståndet.
+
+**Svar:** Du står ungefär $85\\ \\mathrm{m}$ från bergväggen.`,
+        },
+        {
+            level: 2,
+            question: `En orgelpipa är öppen i båda ändarna och har längden $1{,}20\\ \\mathrm{m}$. Vid $15\\ ^\\circ\\mathrm{C}$ är ljudets hastighet $340\\ \\mathrm{m/s}$, och den ökar med ungefär $0{,}60\\ \\mathrm{m/s}$ för varje grad som temperaturen stiger. Beräkna pipans grundton när luften i kyrkan håller<br>a) $15\\ ^\\circ\\mathrm{C}$&emsp;&emsp;b) $30\\ ^\\circ\\mathrm{C}$<br>Svara i Hz.`,
+            answer: { value: 145, unit: 'Hz' },
+            delsvar: [
+                { del: 'a', value: 142, unit: 'Hz', tol: 0.01 },
+                { del: 'b', value: 145, unit: 'Hz', tol: 0.01 },
+            ],
+            solution: `I en öppen pipa är grundtonen ($n = 1$) en halv våglängd lång, $l = \\dfrac{\\lambda}{2}$, så $\\lambda = 2l$ oberoende av temperaturen:
+
+$$ \\lambda = 2 \\cdot 1{,}20 = 2{,}40\\ \\mathrm{m} $$
+
+Frekvensen fås ur $v = f \\cdot \\lambda \\Leftrightarrow f = \\dfrac{v}{\\lambda}$.
+
+**a)**
+$$
+\\left[ \\begin{array}{l}
+v = 340\\ \\mathrm{m/s} \\\\
+\\lambda = 2{,}40\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ f = \\frac{340}{2{,}40} = 141{,}66\\ldots\\ \\mathrm{Hz} \\approx 142\\ \\mathrm{Hz} $$
+
+**Svar:** Ungefär $142\\ \\mathrm{Hz}$
+
+**b)** Temperaturen är $30 - 15 = 15$ grader högre, så ljudhastigheten är
+
+$$ v = 340 + 15 \\cdot 0{,}60 = 349\\ \\mathrm{m/s} $$
+
+$$ f = \\frac{349}{2{,}40} = 145{,}41\\ldots\\ \\mathrm{Hz} \\approx 145\\ \\mathrm{Hz} $$
+
+Pipans längd och därmed våglängden är densamma, men ljudet går fortare, så tonen blir högre. Därför låter en orgel något falskt om kyrkan är mycket varmare än när den stämdes.
+
+**Svar:** Ungefär $145\\ \\mathrm{Hz}$`,
+        },
+        {
+            level: 2,
+            question: `En pipa är öppen i båda ändarna och har längden $0{,}85\\ \\mathrm{m}$. Den ljuder med frekvensen $1\\,000\\ \\mathrm{Hz}$, som är en av dess övertoner.<br>a) Vilken överton är det?<br>b) Hur många noder finns det i pipan?<br>Räkna med $v = 340\\ \\mathrm{m/s}$.`,
+            answer: { value: 5, unit: 'noder' },
+            delsvar: [
+                { del: 'a', value: 4, unit: '', etikett: 'övertonens nummer' },
+                { del: 'b', value: 5, unit: 'noder' },
+            ],
+            solution: `**a)** Vi tar först fram tonens våglängd:
+
+$$
+\\left[ \\begin{array}{l}
+v = 340\\ \\mathrm{m/s} \\\\
+f = 1\\,000\\ \\mathrm{Hz}
+\\end{array} \\right]
+$$
+
+$$ \\lambda = \\frac{v}{f} = \\frac{340}{1\\,000} = 0{,}34\\ \\mathrm{m} $$
+
+För en öppen pipa gäller
+
+$$ l = \\frac{n \\cdot \\lambda}{2} \\quad\\Leftrightarrow\\quad n = \\frac{2l}{\\lambda} $$
+
+$$ n = \\frac{2 \\cdot 0{,}85}{0{,}34} = 5 $$
+
+Ordningsnumret $n = 5$ betyder den femte tonen: grundtonen är $n = 1$, första övertonen $n = 2$ och så vidare. Tonen med $n = 5$ är alltså den fjärde övertonen.
+
+**Svar:** Det är den fjärde övertonen.
+
+**b)** Pipan har en buk i varje ände, och avståndet mellan två närliggande bukar är en halv våglängd. Pipans längd rymmer $n = 5$ halva våglängder, alltså fem sådana avsnitt från buk till buk. Mitt i varje avsnitt ligger en nod.
+
+**Svar:** Det finns 5 noder i pipan.`,
+        },
+        {
+            level: 2,
+            question: `En öppen pipa och en halvöppen pipa har samma grundton. Den öppna pipan är $68\\ \\mathrm{cm}$ lång.<br>a) Hur lång är den halvöppna pipan? Svara i cm.<br>b) Beräkna frekvensen för första övertonen i var och en av piporna.<br>Räkna med $v = 340\\ \\mathrm{m/s}$.`,
+            answer: { value: 34, unit: 'cm' },
+            delsvar: [
+                { del: 'a', value: 34, unit: 'cm' },
+                { del: 'b', value: 500, unit: 'Hz', etikett: 'öppna pipan' },
+                { del: 'b', value: 750, unit: 'Hz', etikett: 'halvöppna pipan' },
+            ],
+            solution: `Samma grundton betyder samma frekvens och därmed samma våglängd $\\lambda_1$ för grundtonen.
+
+**a)** För den öppna pipans grundton gäller $l_\\text{ö} = \\dfrac{\\lambda_1}{2}$:
+
+$$ \\lambda_1 = 2 \\cdot l_\\text{ö} = 2 \\cdot 0{,}68 = 1{,}36\\ \\mathrm{m} $$
+
+För den halvöppna pipans grundton gäller $l_\\text{h} = \\dfrac{\\lambda_1}{4}$:
+
+$$ l_\\text{h} = \\frac{1{,}36}{4} = 0{,}34\\ \\mathrm{m} = 34\\ \\mathrm{cm} $$
+
+**Svar:** Den halvöppna pipan är $34\\ \\mathrm{cm}$ lång.
+
+**b)** Grundtonens frekvens är densamma för båda:
+
+$$ f_1 = \\frac{v}{\\lambda_1} = \\frac{340}{1{,}36} = 250\\ \\mathrm{Hz} $$
+
+*Öppna pipan:* första övertonen har $n = 2$, och $l = \\dfrac{2\\lambda}{2} = \\lambda$, alltså $\\lambda = 0{,}68\\ \\mathrm{m}$.
+
+$$ f = \\frac{340}{0{,}68} = 500\\ \\mathrm{Hz} $$
+
+*Halvöppna pipan:* första övertonen har $n = 2$, och $l = \\dfrac{(2 \\cdot 2 - 1)\\lambda}{4} = \\dfrac{3\\lambda}{4}$, alltså
+
+$$ \\lambda = \\frac{4 \\cdot 0{,}34}{3} = 0{,}4533\\ldots\\ \\mathrm{m} $$
+
+$$ f = \\frac{340}{0{,}4533\\ldots} = 750\\ \\mathrm{Hz} $$
+
+Den öppna pipans första överton är två gånger grundtonen, medan den halvöppna pipans är tre gånger grundtonen. Pipornas toner låter därför olika, trots att de har samma grundton.
+
+**Svar:** Öppna pipan $500\\ \\mathrm{Hz}$, halvöppna pipan $750\\ \\mathrm{Hz}$`,
+        },
+        {
+            level: 3,
+            question: `Människans öra uppfattar ljud med frekvenser från ungefär $20\\ \\mathrm{Hz}$ till $20\\ \\mathrm{kHz}$. Ett rör är $0{,}50\\ \\mathrm{m}$ långt och kan användas antingen som öppen pipa eller, med ena änden tillsluten, som halvöppen pipa.<br>a) Hur många olika toner (grundtonen och övertonerna) inom hörbarhetsområdet kan röret ge som halvöppen pipa?<br>b) Hur många kan det ge som öppen pipa?<br>c) Den halvöppna pipans grundton är bara hälften av den öppna pipans, men ändå ger den halvöppna pipan bara en ton mer. Förklara varför.<br>Räkna med $v = 340\\ \\mathrm{m/s}$.`,
+            answer: { value: 59, unit: 'toner' },
+            delsvar: [
+                { del: 'a', value: 59, unit: 'toner', tol: 0 },
+                { del: 'b', value: 58, unit: 'toner', tol: 0 },
+                { del: 'c' },
+            ],
+            solution: `Vi tar först fram ett uttryck för frekvensen hos ton nummer $n$ i varje pipa, så att vi kan avgöra vilka toner som ligger under $20\\ \\mathrm{kHz}$.
+
+**a)** Halvöppen pipa: $l = \\dfrac{(2n - 1)\\lambda}{4}$ ger $\\lambda = \\dfrac{4l}{2n - 1}$ och
+
+$$ f_n = \\frac{v}{\\lambda} = (2n - 1) \\cdot \\frac{v}{4l} \\qquad (1) $$
+
+$$
+\\left[ \\begin{array}{l}
+v = 340\\ \\mathrm{m/s} \\\\
+l = 0{,}50\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ \\frac{v}{4l} = \\frac{340}{4 \\cdot 0{,}50} = 170\\ \\mathrm{Hz} $$
+
+Grundtonen $170\\ \\mathrm{Hz}$ ligger över den undre gränsen $20\\ \\mathrm{Hz}$, så alla toner börjar inom området. Den övre gränsen ger, med (1), $f_n = (2n - 1) \\cdot 170$:
+
+$$ (2n - 1) \\cdot 170 \\leq 20\\,000 \\quad\\Leftrightarrow\\quad 2n - 1 \\leq \\frac{20\\,000}{170} = 117{,}6\\ldots $$
+
+Talet $2n - 1$ är alltid udda, och det största udda heltalet som är högst $117{,}6$ är $117$. Det ger $n = 59$, med frekvensen $117 \\cdot 170 = 19\\,890\\ \\mathrm{Hz}$.
+
+**Svar:** 59 toner
+
+**b)** Öppen pipa: $l = \\dfrac{n\\lambda}{2}$ ger
+
+$$ f_n = n \\cdot \\frac{v}{2l} = n \\cdot \\frac{340}{2 \\cdot 0{,}50} = n \\cdot 340\\ \\mathrm{Hz} $$
+
+$$ n \\cdot 340 \\leq 20\\,000 \\quad\\Leftrightarrow\\quad n \\leq \\frac{20\\,000}{340} = 58{,}8\\ldots $$
+
+Det största heltalet är $n = 58$, med frekvensen $58 \\cdot 340 = 19\\,720\\ \\mathrm{Hz}$.
+
+**Svar:** 58 toner
+
+**c)** Den halvöppna pipans grundton är $170\\ \\mathrm{Hz}$, hälften av den öppna pipans $340\\ \\mathrm{Hz}$, men nästa ton ligger $2 \\cdot 170 = 340\\ \\mathrm{Hz}$ högre, eftersom bara udda multiplar av grundtonen förekommer. Båda piporna har alltså toner med mellanrummet $340\\ \\mathrm{Hz}$. Den halvöppna pipans toner är $170, 510, 850, \\ldots$ och den öppna pipans $340, 680, 1\\,020, \\ldots$, så de två serierna är lika täta och bara förskjutna ett halvt steg mot varandra. Den halvöppna serien börjar ett halvt steg lägre och hinner därför få med en ton mer under $20\\ \\mathrm{kHz}$.
+
+**Svar:** Tonerna ligger med samma mellanrum, $340\\ \\mathrm{Hz}$, i båda piporna. Den halvöppna pipans serie börjar ett halvt mellanrum lägre och får därför med en ton till.`,
+        },
+        {
+            level: 3,
+            question: `En pipa av okänd typ och okänd längd ger bland annat två närliggande resonansfrekvenser, $420\\ \\mathrm{Hz}$ och $588\\ \\mathrm{Hz}$. Det finns ingen resonans mellan dem.<br>a) Är pipan öppen eller halvöppen? Motivera med beräkningar.<br>b) Hur lång är pipan? Räkna med $v = 340\\ \\mathrm{m/s}$ och svara i meter.`,
+            answer: { value: 1.0, unit: 'm' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 1.0, unit: 'm', tol: 0.03 },
+            ],
+            solution: `Vi skriver först tonernas frekvenser uttryckta i grundtonens frekvens $f_1$, för de två piptyperna.
+
+*Öppen pipa:* $l = \\dfrac{n\\lambda}{2}$ ger $f_n = n \\cdot \\dfrac{v}{2l} = n \\cdot f_1$. Tonerna är $f_1, 2f_1, 3f_1, \\ldots$, och två närliggande toner skiljer sig med $f_1$.
+
+*Halvöppen pipa:* $l = \\dfrac{(2n - 1)\\lambda}{4}$ ger $f_n = (2n - 1) \\cdot \\dfrac{v}{4l} = (2n - 1) \\cdot f_1$. Tonerna är $f_1, 3f_1, 5f_1, \\ldots$, och två närliggande toner skiljer sig med $2f_1$.
+
+Skillnaden mellan de givna frekvenserna är
+
+$$ \\Delta f = 588 - 420 = 168\\ \\mathrm{Hz} $$
+
+**a)** *Prövar öppen pipa.* Då är $f_1 = \\Delta f = 168\\ \\mathrm{Hz}$, och $420\\ \\mathrm{Hz}$ skulle vara en heltalsmultipel av grundtonen:
+
+$$ \\frac{420}{168} = 2{,}5 $$
+
+Det är inget heltal, så pipan kan inte vara öppen.
+
+*Prövar halvöppen pipa.* Då är $2f_1 = 168\\ \\mathrm{Hz}$, alltså $f_1 = 84\\ \\mathrm{Hz}$, och båda frekvenserna ska vara udda multiplar av $84\\ \\mathrm{Hz}$:
+
+$$ \\frac{420}{84} = 5 \\qquad \\frac{588}{84} = 7 $$
+
+Båda är udda heltal, så tonerna är $5f_1$ och $7f_1$, med $3f_1$ före och $9f_1$ efter. Det stämmer.
+
+**Svar:** Pipan är halvöppen, eftersom frekvenserna är udda multiplar av $84\\ \\mathrm{Hz}$ men inte heltalsmultiplar av $168\\ \\mathrm{Hz}$.
+
+**b)** För den halvöppna pipans grundton gäller $l = \\dfrac{\\lambda_1}{4}$ och $\\lambda_1 = \\dfrac{v}{f_1}$:
+
+$$ l = \\frac{v}{4 f_1} $$
+
+$$
+\\left[ \\begin{array}{l}
+v = 340\\ \\mathrm{m/s} \\\\
+f_1 = 84\\ \\mathrm{Hz}
+\\end{array} \\right]
+$$
+
+$$ l = \\frac{340}{4 \\cdot 84} = 1{,}011\\ldots\\ \\mathrm{m} \\approx 1{,}0\\ \\mathrm{m} $$
+
+Rimligt: en grundton på $84\\ \\mathrm{Hz}$ är en låg ton, och en drygt meterlång pipa är vad man kan förvänta sig för en sådan ton.
+
+**Svar:** Pipan är ungefär $1{,}0\\ \\mathrm{m}$ lång.`,
+        },
+        {
+            level: 3,
+            question: `Ett rör som är öppet i båda ändarna har längden $l$. Man håller för den ena änden så att röret blir en halvöppen pipa med samma längd. Visa att **ingen** av den halvöppna pipans toner kan ha samma frekvens som någon av den öppna pipans toner, oavsett rörets längd.`,
+            solution: `Vi skriver frekvenserna för båda piptyperna med ljudhastigheten $v$ och rörets längd $l$.
+
+*Öppen pipa*, ton nummer $k$ ($k = 1, 2, 3, \\ldots$): $l = \\dfrac{k \\lambda}{2}$ ger $\\lambda = \\dfrac{2l}{k}$ och
+
+$$ f_\\text{ö} = \\frac{v}{\\lambda} = \\frac{k \\cdot v}{2l} \\qquad (1) $$
+
+*Halvöppen pipa*, ton nummer $m$ ($m = 1, 2, 3, \\ldots$): $l = \\dfrac{(2m - 1)\\lambda}{4}$ ger $\\lambda = \\dfrac{4l}{2m - 1}$ och
+
+$$ f_\\text{h} = \\frac{v}{\\lambda} = \\frac{(2m - 1) \\cdot v}{4l} \\qquad (2) $$
+
+Antag att en ton i den halvöppna pipan har samma frekvens som en ton i den öppna pipan. Då är (1) lika med (2):
+
+$$ \\frac{k \\cdot v}{2l} = \\frac{(2m - 1) \\cdot v}{4l} $$
+
+Vi multiplicerar båda leden med $\\dfrac{4l}{v}$, som aldrig är noll:
+
+$$ 2k = 2m - 1 $$
+
+Vänsterledet $2k$ är ett jämnt heltal för varje $k$, och högerledet $2m - 1$ är ett udda heltal för varje $m$. Ett jämnt tal kan aldrig vara lika med ett udda tal, så antagandet leder till en motsägelse. Eftersom både $v$ och $l$ föll bort ur ekvationen gäller slutsatsen för alla rörlängder och alla ljudhastigheter.
+
+**Svar:** Likheten skulle kräva att ett jämnt tal $2k$ var lika med ett udda tal $2m - 1$, vilket är omöjligt. Därför har de två piporna inga gemensamma toner.`,
+        },
+        {
+            level: 3,
+            question: `En tvärflöjt kan ses som en pipa som är öppen i båda ändarna. Inomhus vid $20\\ ^\\circ\\mathrm{C}$ är den stämd så att en viss ton har frekvensen $440\\ \\mathrm{Hz}$. Ljudets hastighet i luft är proportionell mot $\\sqrt{T}$, där $T$ är luftens absoluta temperatur i kelvin. Flöjten tas med ut och spelas i luft som håller $0\\ ^\\circ\\mathrm{C}$. Anta att luften i flöjten håller samma temperatur som omgivningen och att flöjtens längd inte ändras.<br>a) Vilken frekvens får tonen utomhus? Svara i Hz.<br>b) Med hur många procent måste flöjtens verksamma längd ändras för att tonen åter ska bli $440\\ \\mathrm{Hz}$? Ska den bli längre eller kortare?`,
+            answer: { value: 425, unit: 'Hz' },
+            delsvar: [
+                { del: 'a', value: 425, unit: 'Hz', tol: 0.005 },
+                { del: 'b', value: 3.5, unit: '%', tol: 0.05 },
+            ],
+            solution: `Flöjtens längd $l$ är inte given, så vi löser uppgiften generellt och ser om längden faller bort.
+
+För en öppen pipa gäller $l = \\dfrac{n\\lambda}{2}$, så $\\lambda = \\dfrac{2l}{n}$, och med $v = f \\cdot \\lambda$ blir frekvensen
+
+$$ f = \\frac{v}{\\lambda} = \\frac{n \\cdot v}{2l} \\qquad (1) $$
+
+Ljudhastigheten är proportionell mot roten ur den absoluta temperaturen, $v = C \\cdot \\sqrt{T}$, där $C$ är en konstant.
+
+$$
+\\left[ \\begin{array}{l}
+T_\\text{in} = 20 + 273 = 293\\ \\mathrm{K} \\\\
+T_\\text{ut} = 0 + 273 = 273\\ \\mathrm{K} \\\\
+f_\\text{in} = 440\\ \\mathrm{Hz}
+\\end{array} \\right]
+$$
+
+**a)** Samma ton har samma $n$, och längden $l$ är oförändrad. Kvoten mellan frekvenserna ur (1) blir då
+
+$$ \\frac{f_\\text{ut}}{f_\\text{in}} = \\frac{\\dfrac{n \\cdot v_\\text{ut}}{2l}}{\\dfrac{n \\cdot v_\\text{in}}{2l}} = \\frac{v_\\text{ut}}{v_\\text{in}} = \\frac{C\\sqrt{T_\\text{ut}}}{C\\sqrt{T_\\text{in}}} = \\sqrt{\\frac{T_\\text{ut}}{T_\\text{in}}} $$
+
+Både $n$, $l$ och konstanten $C$ faller bort, så vi behöver inte känna flöjtens längd.
+
+$$ f_\\text{ut} = 440 \\cdot \\sqrt{\\frac{273}{293}} = 440 \\cdot 0{,}9652\\ldots = 424{,}7\\ldots\\ \\mathrm{Hz} \\approx 425\\ \\mathrm{Hz} $$
+
+**Svar:** Tonen får frekvensen ungefär $425\\ \\mathrm{Hz}$.
+
+**b)** Nu ska frekvensen vara densamma, $f = 440\\ \\mathrm{Hz}$, och längden får ändras. Vi löser ut längden ur (1):
+
+$$ l = \\frac{n \\cdot v}{2f} $$
+
+Med samma $n$ och samma $f$ är längden proportionell mot ljudhastigheten:
+
+$$ \\frac{l_\\text{ut}}{l_\\text{in}} = \\frac{v_\\text{ut}}{v_\\text{in}} = \\sqrt{\\frac{273}{293}} = 0{,}9652\\ldots $$
+
+Längden ska alltså bli $0{,}9652\\ldots$ gånger den ursprungliga, en minskning med
+
+$$ 1 - 0{,}9652\\ldots = 0{,}0347\\ldots \\approx 3{,}5\\ \\% $$
+
+Rimligt: i kall luft går ljudet långsammare, så våglängden för $440\\ \\mathrm{Hz}$ blir kortare, och då måste även pipan vara kortare. Flöjtister stämmer därför om sina instrument genom att skjuta in huvudstycket när det är kallt.
+
+**Svar:** Den verksamma längden måste göras ungefär $3{,}5\\ \\%$ kortare.`,
+        },
+        {
+            level: 3,
+            question: `För att bestämma ljudets hastighet mäter en grupp grundtonens frekvens $f$ i fyra plaströr av olika längd $l$. Rören är öppna i båda ändarna.
+
+| Längd $l$ (cm) | 30,0 | 45,0 | 60,0 | 90,0 |
+|---|---|---|---|---|
+| Frekvens $f$ (Hz) | 536 | 365 | 277 | 186 |
+
+Gruppen märker att värdet på ljudhastigheten blir olika för varje rör om man räknar med $l = \\dfrac{\\lambda}{2}$. En förklaring är att den stående vågen sticker ut en bit utanför rörets ändar, så att luftpelaren svänger som om röret vore lite längre än det är.<br>a) Använd en lämplig rät linje och bestäm ljudhastigheten ur mätningarna. Svara i m/s.<br>b) Hur mycket längre än röret är den svängande luftpelaren? Svara i cm.`,
+            answer: { value: 342, unit: 'm/s' },
+            delsvar: [
+                { del: 'a', value: 342, unit: 'm/s', tol: 0.02 },
+                { del: 'b', value: 1.9, unit: 'cm', tol: 0.15 },
+            ],
+            solution: `Vi kallar tillägget till rörets längd $\\Delta l$. Den svängande luftpelaren har då längden $l + \\Delta l$, och för grundtonen i en öppen pipa gäller
+
+$$ l + \\Delta l = \\frac{\\lambda}{2} = \\frac{v}{2f} $$
+
+Vi löser ut rörets längd:
+
+$$ l = \\frac{v}{2} \\cdot \\frac{1}{f} - \\Delta l \\qquad (1) $$
+
+Det är en rät linje om vi sätter $l$ på den lodräta axeln och $\\dfrac{1}{f}$ på den vågräta. Lutningen är $\\dfrac{v}{2}$, och linjen skär den lodräta axeln i $-\\Delta l$. Vi räknar ut $\\dfrac{1}{f}$ för varje rör:
+
+| $l$ (m) | 0,300 | 0,450 | 0,600 | 0,900 |
+|---|---|---|---|---|
+| $\\dfrac{1}{f}$ (ms) | 1,866 | 2,740 | 3,610 | 5,376 |
+
+${makeDiagram({ xMin: 0, xMax: 6, yMin: -0.1, yMax: 1.0, xTicks: [0, 1, 2, 3, 4, 5, 6], yTicks: [0, 0.2, 0.4, 0.6, 0.8, 1.0], xLabel: '1/<tspan font-style="italic">f</tspan> (ms)', yLabel: '<tspan font-style="italic">l</tspan> (m)', paths: [ { points: [[0, -0.0189], [6, 1.0065]], color: '#2563c9', width: 2 }, { points: [[1.806, 0.283], [1.926, 0.317]] }, { points: [[1.806, 0.317], [1.926, 0.283]] }, { points: [[2.680, 0.433], [2.800, 0.467]] }, { points: [[2.680, 0.467], [2.800, 0.433]] }, { points: [[3.550, 0.583], [3.670, 0.617]] }, { points: [[3.550, 0.617], [3.670, 0.583]] }, { points: [[5.316, 0.883], [5.436, 0.917]] }, { points: [[5.316, 0.917], [5.436, 0.883]] } ] })}
+
+Punkterna ligger på en rät linje, vilket stöder modellen (1).
+
+**a)** Vi bestämmer lutningen med de två punkter som ligger längst ifrån varandra, eftersom det ger minst inverkan av mätfelen:
+
+$$ k = \\frac{0{,}900 - 0{,}300}{0{,}005376 - 0{,}001866} = \\frac{0{,}600}{0{,}003510} = 170{,}9\\ \\mathrm{m/s} $$
+
+Lutningen är $\\dfrac{v}{2}$ enligt (1), alltså
+
+$$ v = 2 \\cdot 170{,}9 = 341{,}8\\ \\mathrm{m/s} \\approx 342\\ \\mathrm{m/s} $$
+
+Rimligt: det ligger nära det vanliga värdet $340\\ \\mathrm{m/s}$ för luft i rumstemperatur.
+
+**Svar:** Ljudets hastighet är ungefär $342\\ \\mathrm{m/s}$.
+
+**b)** Vi sätter in det kortaste rörets punkt och lutningen i (1), $l = k \\cdot \\dfrac{1}{f} - \\Delta l$, och löser ut tillägget:
+
+$$ \\Delta l = k \\cdot \\frac{1}{f} - l = 170{,}9 \\cdot 0{,}001866 - 0{,}300 = 0{,}3189 - 0{,}300 = 0{,}0189\\ \\mathrm{m} $$
+
+$$ \\Delta l \\approx 0{,}019\\ \\mathrm{m} = 1{,}9\\ \\mathrm{cm} $$
+
+Det är tillägget för båda ändarna tillsammans, knappt en centimeter per ände. Det är rimligt för rör som är några centimeter vida, eftersom luften strax utanför öppningen också svänger med. Med en rät linje i stället för en enda mätning påverkas inte ljudhastigheten av detta tillägg, eftersom det bara flyttar linjen och inte ändrar dess lutning.
+
+**Svar:** Luftpelaren är ungefär $1{,}9\\ \\mathrm{cm}$ längre än röret.`,
+        },
+        {
+            level: 2,
+            question: `En didgeridoo är ett blåsinstrument från Australien: ett ihåligt rör som spelaren blåser i med läpparna tätt mot den ena änden. Ett instrument är $1{,}30\\ \\mathrm{m}$ långt. Grundtonen mäts till ungefär $65\\ \\mathrm{Hz}$, och spelaren kan även få fram en ton på $196\\ \\mathrm{Hz}$.<br>a) Avgör med beräkningar om instrumentet beter sig som en öppen eller en halvöppen pipa, och förklara vad läpparna har för roll.<br>b) Vilken ton är $196\\ \\mathrm{Hz}$?<br>c) Vilken är nästa högre ton spelaren kan få fram? Svara i Hz.<br>Räkna med $v = 340\\ \\mathrm{m/s}$.`,
+            answer: { value: 327, unit: 'Hz' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+                { del: 'c', value: 327, unit: 'Hz', tol: 0.02 },
+            ],
+            solution: `Vi beräknar grundtonen för båda modellerna och jämför med mätningen.
+
+$$
+\\left[ \\begin{array}{l}
+l = 1{,}30\\ \\mathrm{m} \\\\
+v = 340\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+**a)** *Öppen pipa:* grundtonen har $l = \\dfrac{\\lambda}{2}$, alltså $\\lambda = 2l$ och
+
+$$ f_1 = \\frac{v}{2l} = \\frac{340}{2 \\cdot 1{,}30} = 130{,}7\\ldots\\ \\mathrm{Hz} $$
+
+*Halvöppen pipa:* grundtonen har $l = \\dfrac{\\lambda}{4}$, alltså $\\lambda = 4l$ och
+
+$$ f_1 = \\frac{v}{4l} = \\frac{340}{4 \\cdot 1{,}30} = 65{,}38\\ldots\\ \\mathrm{Hz} $$
+
+Den uppmätta grundtonen, ungefär $65\\ \\mathrm{Hz}$, stämmer med den halvöppna modellen men är bara hälften av den öppna modellens värde. Läpparna sluter alltså röret i den ena änden. Där kan luften inte svänga fritt, så det blir en nod vid munstycket och en buk vid den öppna änden.
+
+**Svar:** Instrumentet beter sig som en halvöppen pipa. Läpparna gör den ena änden sluten.
+
+**b)** I en halvöppen pipa gäller $f_n = (2n - 1) \\cdot f_1$. Vi undersöker vilken faktor $196\\ \\mathrm{Hz}$ motsvarar:
+
+$$ \\frac{196}{65{,}38\\ldots} = 2{,}99\\ldots \\approx 3 $$
+
+Faktorn $3 = 2n - 1$ ger $n = 2$, alltså den första övertonen. Med den öppna modellen hade nästa ton efter grundtonen i stället legat på två gånger grundtonen, och tre gånger $65\\ \\mathrm{Hz}$ hade då inte kunnat förekomma. Även detta stöder den halvöppna modellen.
+
+**Svar:** Tonen $196\\ \\mathrm{Hz}$ är den första övertonen.
+
+**c)** Nästa ton är andra övertonen, $n = 3$, med faktorn $2 \\cdot 3 - 1 = 5$:
+
+$$ f_3 = 5 \\cdot \\frac{v}{4l} = \\frac{5 \\cdot 340}{4 \\cdot 1{,}30} = 326{,}9\\ldots\\ \\mathrm{Hz} \\approx 327\\ \\mathrm{Hz} $$
+
+En överton på dubbla grundtonen, cirka $131\\ \\mathrm{Hz}$, kan inte förekomma i en halvöppen pipa, så nästa ton efter $196\\ \\mathrm{Hz}$ ligger först vid fem gånger grundtonen.
+
+**Svar:** Nästa ton är ungefär $327\\ \\mathrm{Hz}$.`,
+        },
+        {
+            level: 3,
+            question: `Ett tomt rum är $5{,}10\\ \\mathrm{m}$ långt, $3{,}40\\ \\mathrm{m}$ brett och $2{,}55\\ \\mathrm{m}$ högt. Luften mellan två motstående ytor (två väggar, eller golv och tak) kan ses som en sluten pipa, så rummet rymmer tre sådana pipor, en i varje riktning.<br>a) Beräkna grundtonen i var och en av de tre riktningarna.<br>b) Bestäm den lägsta frekvens som ger en stående våg i alla tre riktningarna samtidigt.<br>c) Ljudtekniker undviker gärna rum där längden, bredden och höjden står i enkla förhållanden till varandra. Förklara varför med hjälp av resultatet i b).<br>Räkna med $v = 340\\ \\mathrm{m/s}$.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 36 430 240" width="628" height="350" role="img" aria-label="Rum som ett rätblock: längd 5,10 m, bredd 3,40 m och höjd 2,55 m." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><polygon points="70,110 310,110 406,46 166,46" fill="#e9eef3"/><polygon points="310,230 406,166 406,46 310,110" fill="#dde5ec"/><line x1="70" y1="230" x2="166" y2="166" stroke="#8a9099" stroke-width="1.1" stroke-dasharray="4 3"/><line x1="166" y1="166" x2="406" y2="166" stroke="#8a9099" stroke-width="1.1" stroke-dasharray="4 3"/><line x1="166" y1="166" x2="166" y2="46" stroke="#8a9099" stroke-width="1.1" stroke-dasharray="4 3"/><polygon points="70,230 310,230 310,110 70,110" fill="#f2f5f8" fill-opacity="0.55"/><path d="M 70,230 L 310,230 L 310,110 L 70,110 Z M 70,110 L 166,46 L 406,46 L 310,110 M 310,230 L 406,166 L 406,46" fill="none" stroke="#0f1620" stroke-width="2" stroke-linejoin="round"/><g stroke="#5a6172" stroke-width="0.9" stroke-dasharray="3 3"><line x1="70" y1="233" x2="70" y2="250"/><line x1="310" y1="233" x2="310" y2="250"/><line x1="67" y1="230" x2="48" y2="230"/><line x1="67" y1="110" x2="48" y2="110"/></g><line x1="78" y1="246" x2="302" y2="246" stroke="#0f1620" stroke-width="1.3"/><polygon points="70,246 78,250 78,242" fill="#0f1620"/><polygon points="310,246 302,250 302,242" fill="#0f1620"/><text x="190" y="263" text-anchor="middle" font-size="13" fill="#0f1620">5,10 m</text><line x1="54" y1="222" x2="54" y2="118" stroke="#0f1620" stroke-width="1.3"/><polygon points="54,230 58,222 50,222" fill="#0f1620"/><polygon points="54,110 58,118 50,118" fill="#0f1620"/><text x="47" y="175" text-anchor="end" font-size="13" fill="#0f1620">2,55 m</text><g stroke="#5a6172" stroke-width="0.9" stroke-dasharray="3 3"><line x1="311.7" y1="232.5" x2="321.1" y2="246.6"/><line x1="407.7" y1="168.5" x2="417.1" y2="182.6"/></g><line x1="325.5" y1="238.9" x2="408.2" y2="183.8" stroke="#0f1620" stroke-width="1.3"/><polygon points="318.9,243.3 327.8,242.2 323.3,235.5" fill="#0f1620"/><polygon points="414.9,179.3 410.4,187.1 406,180.4" fill="#0f1620"/><text x="372.4" y="224.6" text-anchor="start" font-size="13" fill="#0f1620">3,40 m</text></svg>`,
+            answer: { value: 200, unit: 'Hz' },
+            delsvar: [
+                { del: 'a', value: 33.3, unit: 'Hz', tol: 0.02, etikett: 'längden' },
+                { del: 'a', value: 50, unit: 'Hz', tol: 0.02, etikett: 'bredden' },
+                { del: 'a', value: 66.7, unit: 'Hz', tol: 0.02, etikett: 'höjden' },
+                { del: 'b', value: 200, unit: 'Hz', tol: 0.01 },
+                { del: 'c' },
+            ],
+            solution: `En sluten pipa har noder vid båda ändarna (nod till nod), så för ton nummer $n$ gäller
+
+$$ l = \\frac{n \\cdot \\lambda}{2} \\quad\\Leftrightarrow\\quad \\lambda = \\frac{2l}{n} $$
+
+Med $v = f \\cdot \\lambda$ blir frekvensen
+
+$$ f_n = \\frac{v}{\\lambda} = n \\cdot \\frac{v}{2l} \\qquad (1) $$
+
+**a)** Grundtonen har $n = 1$, alltså $f_1 = \\dfrac{v}{2l}$.
+
+$$
+\\left[ \\begin{array}{l}
+v = 340\\ \\mathrm{m/s} \\\\
+l_\\text{längd} = 5{,}10\\ \\mathrm{m} \\\\
+l_\\text{bredd} = 3{,}40\\ \\mathrm{m} \\\\
+l_\\text{höjd} = 2{,}55\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ f_\\text{längd} = \\frac{340}{2 \\cdot 5{,}10} = 33{,}33\\ldots\\ \\mathrm{Hz} \\approx 33{,}3\\ \\mathrm{Hz} $$
+
+$$ f_\\text{bredd} = \\frac{340}{2 \\cdot 3{,}40} = 50{,}0\\ \\mathrm{Hz} $$
+
+$$ f_\\text{höjd} = \\frac{340}{2 \\cdot 2{,}55} = 66{,}66\\ldots\\ \\mathrm{Hz} \\approx 66{,}7\\ \\mathrm{Hz} $$
+
+**Svar:** Längden ger $33{,}3\\ \\mathrm{Hz}$, bredden $50{,}0\\ \\mathrm{Hz}$ och höjden $66{,}7\\ \\mathrm{Hz}$.
+
+**b)** Enligt (1) är tonerna i varje riktning heltalsmultiplar av riktningens grundton: $f_1, 2f_1, 3f_1, \\ldots$ En frekvens ger alltså en stående våg i alla tre riktningarna om den är en heltalsmultipel av **alla tre** grundtonerna. Vi skriver grundtonerna exakt, som bråk:
+
+$$ f_\\text{längd} = \\frac{340}{10{,}2} = \\frac{100}{3}\\ \\mathrm{Hz} $$
+
+$$ f_\\text{bredd} = 50\\ \\mathrm{Hz} = \\frac{150}{3}\\ \\mathrm{Hz} $$
+
+$$ f_\\text{höjd} = \\frac{340}{5{,}1} = \\frac{200}{3}\\ \\mathrm{Hz} $$
+
+Vi söker den minsta frekvensen $f$ som kan skrivas på alla tre sätten, med heltalen $n$, $m$ och $k$:
+
+$$ f = n \\cdot \\frac{100}{3} = m \\cdot \\frac{150}{3} = k \\cdot \\frac{200}{3} $$
+
+Vi multiplicerar alla led med $\\dfrac{3}{50}$:
+
+$$ 2n = 3m = 4k $$
+
+Talet $2n = 3m = 4k$ ska alltså vara delbart med 2, 3 och 4. Det minsta sådana talet är 12, vilket ger $n = 6$, $m = 4$ och $k = 3$:
+
+$$ f = 6 \\cdot \\frac{100}{3} = 200\\ \\mathrm{Hz} $$
+
+Kontroll: $4 \\cdot 50 = 200$ och $3 \\cdot \\dfrac{200}{3} = 200$. Frekvensen är den sjätte tonen längs rummet, den fjärde tvärs över och den tredje mellan golv och tak.
+
+**Svar:** $200\\ \\mathrm{Hz}$
+
+**c)** Måtten förhåller sig som
+
+$$ 5{,}10 : 3{,}40 : 2{,}55 = 6 : 4 : 3 $$
+
+(alla tre är multiplar av $0{,}85\\ \\mathrm{m}$). Därför står grundtonerna i enkla förhållanden till varandra, och tonerna i alla tre riktningarna sammanfaller redan vid $200\\ \\mathrm{Hz}$ och sedan vid varje multipel av $200\\ \\mathrm{Hz}$. Dessutom är längden dubbelt så stor som höjden, så **varje** ton mellan golv och tak är också en ton längs rummet ($66{,}7 = 2 \\cdot 33{,}3$).
+
+Vid en frekvens där flera riktningar har resonans samtidigt förstärks ljudet i flera riktningar på en gång. Just de tonerna blir då mycket starkare än tonerna emellan, och rummet låter ojämnt: vissa basnoter dånar medan andra knappt hörs. Står måtten i ett ojämnt förhållande hamnar resonanserna i de tre riktningarna på olika frekvenser, de sprids jämnare och ingen ton förstärks särskilt mycket.
+
+**Svar:** I ett rum med enkla förhållanden mellan måtten sammanfaller resonanserna i flera riktningar vid samma frekvenser. Då förstärks några toner kraftigt och ljudet i rummet blir ojämnt.`,
         },
     ],
 
@@ -65677,7 +71692,7 @@ $$ I = 10^{-12} \\cdot 10^{60/10} = 10^{-12} \\cdot 10^{6} = 10^{-6}\\ \\mathrm{
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
-            level: 2,
+            level: 1,
             question: `En högtalare strålar ut effekten $8{,}0\\ \\mathrm{W}$ jämnt i alla riktningar (punktkälla). Beräkna ljudintensiteten på avståndet $5{,}0\\ \\mathrm{m}$ från högtalaren.
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" style="display:block;margin:14px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:4px;font-family:Poppins,sans-serif">
@@ -65715,11 +71730,11 @@ $$ I = \\frac{8{,}0}{314{,}16} \\approx 0{,}0255\\ \\mathrm{W/m^2} \\approx 25\\
             answer: { value: 64, unit: 'dB' },
             solution: `**Insikten är att intensiteten avtar med kvadraten på avståndet** ($I \\propto 1/r^2$). När *r* fördubblas blir intensiteten en fjärdedel.
 
-**Steg 1 — beräkna ändringen i decibel.**
+**Steg 1: beräkna ändringen i decibel.**
 
 $$ \\Delta L = 10\\cdot\\lg\\!\\left(\\frac{I_2}{I_1}\\right) = 10\\cdot\\lg\\!\\left(\\frac{1}{4}\\right) = -10\\cdot\\lg 4 \\approx -6{,}02\\ \\mathrm{dB} $$
 
-**Steg 2 — beräkna nya ljudnivån.**
+**Steg 2: beräkna nya ljudnivån.**
 
 $$ L_2 = L_1 + \\Delta L = 70 - 6{,}02 \\approx 64\\ \\mathrm{dB} $$
 
@@ -65730,30 +71745,607 @@ $$ L_2 = L_1 + \\Delta L = 70 - 6{,}02 \\approx 64\\ \\mathrm{dB} $$
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
-            level: 3,
+            level: 2,
             question: `Två högtalare *A* och *B* står sida vid sida och spelar olika ljud (okorrelerade). Bara *A* är på: ljudnivån mäts till $65\\ \\mathrm{dB}$. Bara *B* är på: $70\\ \\mathrm{dB}$. Vilken ljudnivå mäts när **båda är på samtidigt**?`,
             answer: { value: 71.19, unit: 'dB' },
-            solution: `**KLASSISK FÄLLA:** Decibel adderas INTE direkt — $65 + 70 \\neq 135\\ \\mathrm{dB}$. Eftersom decibelskalan är logaritmisk måste man först konvertera till intensiteter, addera, och konvertera tillbaka.
+            solution: `**KLASSISK FÄLLA:** Decibel adderas INTE direkt: $65 + 70 \\neq 135\\ \\mathrm{dB}$. Eftersom decibelskalan är logaritmisk måste man först konvertera till intensiteter, addera, och konvertera tillbaka.
 
-**Steg 1 — intensiteterna från ljudnivåerna.**
+**Steg 1: intensiteterna från ljudnivåerna.**
 
 $$ I = I_0 \\cdot 10^{L/10} $$
 
 $$ I_A = I_0 \\cdot 10^{6{,}5}, \\qquad I_B = I_0 \\cdot 10^{7{,}0} $$
 
-**Steg 2 — addera intensiteterna.** Eftersom ljuden är okorrelerade adderas energierna (intensiteterna):
+**Steg 2: addera intensiteterna.** Eftersom ljuden är okorrelerade adderas energierna (intensiteterna):
 
 $$ I_\\text{tot} = I_A + I_B = I_0 \\cdot (10^{6{,}5} + 10^{7{,}0}) $$
 
 $$ I_\\text{tot} = I_0 \\cdot (3{,}162\\cdot 10^{6} + 1{,}000\\cdot 10^{7}) = I_0 \\cdot 1{,}316\\cdot 10^{7} $$
 
-**Steg 3 — totala ljudnivån.**
+**Steg 3: totala ljudnivån.**
 
 $$ L_\\text{tot} = 10\\cdot\\lg\\!\\left(\\frac{I_\\text{tot}}{I_0}\\right) = 10\\cdot\\lg(1{,}316\\cdot 10^{7}) = 10\\cdot(7 + 0{,}1192) \\approx 71{,}2\\ \\mathrm{dB} $$
 
 **Svar:** Den totala ljudnivån är ungefär $71\\ \\mathrm{dB}$.
 
-**Generell slutsats:** Två lika starka ljud ($L_A = L_B$) ger en ökning på $10\\cdot\\lg 2 \\approx 3\\ \\mathrm{dB}$ när båda är på. När en källa dominerar med många dB över den andra blir tillskottet försumbart — den starkare källan "döljer" den svagare i logaritmisk mening. Det är därför man i konsertsalar bara behöver fundera över de starkaste källorna för att uppskatta totalnivån.`,
+**Generell slutsats:** Två lika starka ljud ($L_A = L_B$) ger en ökning på $10\\cdot\\lg 2 \\approx 3\\ \\mathrm{dB}$ när båda är på. När en källa dominerar med många dB över den andra blir tillskottet försumbart. Den starkare källan "döljer" den svagare i logaritmisk mening. Det är därför man i konsertsalar bara behöver fundera över de starkaste källorna för att uppskatta totalnivån.`,
+        },
+        // ── Påfyllning: Grund ─────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En väckarklocka står på ett nattduksbord och sänder ut ljud lika i alla riktningar. På avståndet $1{,}5\\ \\mathrm{m}$ från klockan är ljudintensiteten $2{,}0 \\cdot 10^{-5}\\ \\mathrm{W/m^2}$. Hur stor ljudeffekt sänder väckarklockan ut? Svara i milliwatt (mW).`,
+            answer: { value: 0.57, unit: 'mW', tol: 0.02 },
+            solution: `Ljudet sprids lika i alla riktningar, så effekten fördelas över en sfär med radien *r*. Vi löser ut effekten ur formeln för en punktformig källa:
+
+$$ I = \\frac{P}{4\\pi \\cdot r^{2}} \\quad\\Leftrightarrow\\quad P = I \\cdot 4\\pi \\cdot r^{2} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+I = 2{,}0 \\cdot 10^{-5}\\ \\mathrm{W/m^2} \\\\
+r = 1{,}5\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ P = 2{,}0 \\cdot 10^{-5} \\cdot 4\\pi \\cdot 1{,}5^{2} = 2{,}0 \\cdot 10^{-5} \\cdot 28{,}27\\ldots = 5{,}654\\ldots \\cdot 10^{-4}\\ \\mathrm{W} \\approx 0{,}57\\ \\mathrm{mW} $$
+
+**Svar:** $0{,}57\\ \\mathrm{mW}$`,
+        },
+        {
+            level: 1,
+            question: `Ljudnivån i ett klassrum ökar från $50\\ \\mathrm{dB}$ till $70\\ \\mathrm{dB}$. Hur många gånger större blir ljudintensiteten?`,
+            choices: ['1,4 gånger', '20 gånger', '40 gånger', '100 gånger'],
+            correct: 3,
+            solution: `Decibelskalan är logaritmisk: varje ökning med $10\\ \\mathrm{dB}$ betyder tio gånger så stor intensitet. Ur formeln för ljudnivå får vi kvoten mellan intensiteterna:
+
+$$ L_2 - L_1 = 10 \\cdot \\lg\\!\\left(\\frac{I_2}{I_1}\\right) \\quad\\Leftrightarrow\\quad \\frac{I_2}{I_1} = 10^{(L_2 - L_1)/10} $$
+
+$$ \\frac{I_2}{I_1} = 10^{(70 - 50)/10} = 10^{2} = 100 $$
+
+Ökningen är 20 dB, alltså två tiosteg, och intensiteten blir $10 \\cdot 10 = 100$ gånger större.
+
+**Svar:** 100 gånger`,
+        },
+        {
+            level: 1,
+            question: `Ljudet från en trafikerad gata når ett öppet fönster med ljudintensiteten $3{,}2 \\cdot 10^{-5}\\ \\mathrm{W/m^2}$. Fönstret har arean $1{,}5\\ \\mathrm{m^2}$. Hur stor ljudeffekt kommer in genom fönstret? Svara i mikrowatt (µW).`,
+            answer: { value: 48, unit: 'µW', tol: 0.02 },
+            solution: `Ljudintensiteten är effekt per area. Vi löser ut effekten:
+
+$$ I = \\frac{P}{A} \\quad\\Leftrightarrow\\quad P = I \\cdot A $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+I = 3{,}2 \\cdot 10^{-5}\\ \\mathrm{W/m^2} \\\\
+A = 1{,}5\\ \\mathrm{m^2}
+\\end{array} \\right]
+$$
+
+$$ P = 3{,}2 \\cdot 10^{-5} \\cdot 1{,}5 = 4{,}8 \\cdot 10^{-5}\\ \\mathrm{W} = 48\\ \\mathrm{\\mu W} $$
+
+**Svar:** $48\\ \\mathrm{\\mu W}$`,
+        },
+        {
+            level: 1,
+            question: `Där du står när du dammsuger är ljudintensiteten $2{,}5 \\cdot 10^{-5}\\ \\mathrm{W/m^2}$. Vilken ljudnivå motsvarar det? Svara i dB.`,
+            answer: { value: 74, unit: 'dB', tol: 0.01 },
+            solution: `Ljudnivån beräknas med
+
+$$ L = 10 \\cdot \\lg\\!\\left(\\frac{I}{I_0}\\right) $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+I = 2{,}5 \\cdot 10^{-5}\\ \\mathrm{W/m^2} \\\\
+I_0 = 10^{-12}\\ \\mathrm{W/m^2}
+\\end{array} \\right]
+$$
+
+$$ L = 10 \\cdot \\lg\\!\\left(\\frac{2{,}5 \\cdot 10^{-5}}{10^{-12}}\\right) = 10 \\cdot \\lg(2{,}5 \\cdot 10^{7}) = 73{,}979\\ldots\\ \\mathrm{dB} \\approx 74\\ \\mathrm{dB} $$
+
+Det stämmer med tabellen i genomgången: ungefär som ljudet inne i en bil.
+
+**Svar:** $74\\ \\mathrm{dB}$`,
+        },
+        {
+            level: 1,
+            question: `Du står på avståndet *r* från en ljudkälla som sänder ut ljud lika i alla riktningar. Sedan flyttar du dig så att avståndet blir tre gånger så stort. Hur ändras ljudintensiteten?`,
+            choices: ['Den blir en tredjedel så stor.', 'Den blir en niondel så stor.', 'Den minskar med 3 dB.', 'Den ändras inte.'],
+            correct: 1,
+            solution: `För en punktformig källa är
+
+$$ I = \\frac{P}{4\\pi \\cdot r^{2}} $$
+
+Effekten *P* är densamma, men den sprids över en sfär vars area växer med kvadraten på radien. Blir avståndet tre gånger så stort blir arean $3^{2} = 9$ gånger så stor, och intensiteten blir då en niondel.
+
+En minskning med 3 dB motsvarar en halverad intensitet, och det är inte vad som händer här.
+
+**Svar:** Den blir en niondel så stor.`,
+        },
+        // ── Påfyllning: Mellan ────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En gräsklippare ger ljudnivån $88\\ \\mathrm{dB}$ på avståndet $1{,}0\\ \\mathrm{m}$. Betrakta gräsklipparen som en punktkälla som sänder ut ljud lika i alla riktningar. Hur långt bort måste en granne stå för att ljudnivån ska vara högst $70\\ \\mathrm{dB}$? Svara i meter.`,
+            answer: { value: 7.9, unit: 'm', tol: 0.02 },
+            solution: `Ljudnivån ska sjunka med $88 - 70 = 18\\ \\mathrm{dB}$. Vi tar först fram hur mycket intensiteten måste minska. Ur formeln för ljudnivå följer
+
+$$ L_1 - L_2 = 10 \\cdot \\lg\\!\\left(\\frac{I_1}{I_2}\\right) \\quad\\Leftrightarrow\\quad \\frac{I_1}{I_2} = 10^{(L_1 - L_2)/10} $$
+
+$$ \\frac{I_1}{I_2} = 10^{18/10} = 10^{1{,}8} = 63{,}09\\ldots $$
+
+För en punktkälla är $I = \\dfrac{P}{4\\pi \\cdot r^{2}}$, så kvoten mellan intensiteterna är kvoten mellan avståndens kvadrater:
+
+$$ \\frac{I_1}{I_2} = \\frac{r_2^{2}}{r_1^{2}} \\quad\\Leftrightarrow\\quad r_2 = r_1 \\cdot \\sqrt{\\frac{I_1}{I_2}} $$
+
+$$ r_2 = 1{,}0 \\cdot \\sqrt{63{,}09\\ldots} = 7{,}943\\ldots\\ \\mathrm{m} \\approx 7{,}9\\ \\mathrm{m} $$
+
+Rimlighet: varje fördubbling av avståndet ger ungefär 6 dB lägre nivå. Tre fördubblingar (1 m, 2 m, 4 m, 8 m) ger ungefär 18 dB, och det stämmer med knappt 8 m.
+
+**Svar:** Grannen måste stå minst $7{,}9\\ \\mathrm{m}$ bort.`,
+        },
+        {
+            level: 2,
+            question: `På en utomhuskonsert mäts ljudnivån $102\\ \\mathrm{dB}$ på avståndet $25\\ \\mathrm{m}$ från högtalarna. Anta att högtalarna tillsammans fungerar som en punktkälla som sänder ut ljud lika i alla riktningar. Hur stor ljudeffekt sänder högtalarna ut? Svara i watt.`,
+            answer: { value: 120, unit: 'W', tol: 0.05 },
+            solution: `Vi tar först fram intensiteten ur ljudnivån och sedan effekten ur intensiteten.
+
+**Intensiteten.** Ur formeln för ljudnivå löser vi ut *I*:
+
+$$ L = 10 \\cdot \\lg\\!\\left(\\frac{I}{I_0}\\right) \\quad\\Leftrightarrow\\quad I = I_0 \\cdot 10^{L/10} $$
+
+$$ I = 10^{-12} \\cdot 10^{102/10} = 10^{-12} \\cdot 10^{10{,}2} = 0{,}01584\\ldots\\ \\mathrm{W/m^2} $$
+
+**Effekten.** För en punktkälla är $I = \\dfrac{P}{4\\pi \\cdot r^{2}}$, så
+
+$$ P = I \\cdot 4\\pi \\cdot r^{2} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+I = 0{,}01584\\ldots\\ \\mathrm{W/m^2} \\\\
+r = 25\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ P = 0{,}01584\\ldots \\cdot 4\\pi \\cdot 25^{2} = 0{,}01584\\ldots \\cdot 7\\,853{,}98\\ldots = 124{,}47\\ldots\\ \\mathrm{W} \\approx 1{,}2 \\cdot 10^{2}\\ \\mathrm{W} $$
+
+Avståndet har två värdesiffror, så svaret avrundas till två värdesiffror. Rimlighet: konserthögtalare har en elektrisk effekt på flera kilowatt, och bara några procent blir ljud, så drygt hundra watt ljudeffekt är rimligt.
+
+**Svar:** Ungefär $120\\ \\mathrm{W}$`,
+        },
+        {
+            level: 2,
+            question: `En snickare arbetar med en vinkelslip, och vid örat är ljudnivån $104\\ \\mathrm{dB}$.<br>a) Hur stor är ljudintensiteten vid örat? Svara i W/m².<br>b) Snickaren tar på sig hörselskydd som släpper igenom $0{,}40\\ \\%$ av ljudintensiteten. Vilken ljudnivå blir det innanför hörselskydden, och är den lägre än gränsen $85\\ \\mathrm{dB}$ för risk för hörselskada? Svara i dB.`,
+            answer: { value: 0.025, unit: 'W/m²', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 0.025, unit: 'W/m²', tol: 0.03, etikett: '$I =$' },
+                { del: 'b', value: 80, unit: 'dB', tol: 0.01, etikett: '$L =$' },
+            ],
+            solution: `**a)** Vi löser ut intensiteten ur formeln för ljudnivå:
+
+$$ L = 10 \\cdot \\lg\\!\\left(\\frac{I}{I_0}\\right) \\quad\\Leftrightarrow\\quad I = I_0 \\cdot 10^{L/10} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+L = 104\\ \\mathrm{dB} \\\\
+I_0 = 10^{-12}\\ \\mathrm{W/m^2}
+\\end{array} \\right]
+$$
+
+$$ I = 10^{-12} \\cdot 10^{104/10} = 10^{-12} \\cdot 10^{10{,}4} = 0{,}02511\\ldots\\ \\mathrm{W/m^2} \\approx 0{,}025\\ \\mathrm{W/m^2} $$
+
+**Svar:** $0{,}025\\ \\mathrm{W/m^2}$
+
+**b)** Innanför hörselskydden är intensiteten $0{,}40\\ \\%$ av intensiteten utanför:
+
+$$ I_\\text{in} = 0{,}0040 \\cdot 0{,}02511\\ldots = 1{,}0047\\ldots \\cdot 10^{-4}\\ \\mathrm{W/m^2} $$
+
+$$ L_\\text{in} = 10 \\cdot \\lg\\!\\left(\\frac{1{,}0047\\ldots \\cdot 10^{-4}}{10^{-12}}\\right) = 10 \\cdot \\lg(1{,}0047\\ldots \\cdot 10^{8}) = 80{,}02\\ldots\\ \\mathrm{dB} \\approx 80\\ \\mathrm{dB} $$
+
+Det är 5 dB under gränsen $85\\ \\mathrm{dB}$. Rimlighet: hörselskydden dämpar med $104 - 80 = 24\\ \\mathrm{dB}$, och $10 \\cdot \\lg 250 \\approx 24$, eftersom $0{,}40\\ \\%$ är en tvåhundrafemtiondel.
+
+**Svar:** Ljudnivån blir $80\\ \\mathrm{dB}$, alltså lägre än $85\\ \\mathrm{dB}$.`,
+        },
+        {
+            level: 2,
+            question: `En fläkt står ute på en öppen gård och sänder ut ljud lika i alla riktningar. Diagrammet visar ljudnivån *L* som funktion av avståndet *r* från fläkten.
+
+${makeDiagram({
+    xMax: 10, yMin: 60, yMax: 90,
+    xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    yTicks: [60, 62, 64, 66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90],
+    xLabel: '<tspan font-style="italic">r</tspan> (m)',
+    yLabel: '<tspan font-style="italic">L</tspan> (dB)',
+    paths: [{ points: Array.from({ length: 181 }, (_, i) => { const r = 1 + i * 0.05; return [r, 70 - 20 * Math.log10(r / 5)]; }) }]
+})}
+
+a) Läs av ljudnivån på avståndet $5{,}0\\ \\mathrm{m}$ och bestäm fläktens ljudeffekt. Svara i milliwatt (mW).<br>b) På vilket avstånd är ljudnivån $76\\ \\mathrm{dB}$? Bestäm avståndet genom beräkning och kontrollera med diagrammet. Svara i meter.`,
+            answer: { value: 3.1, unit: 'mW', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 3.1, unit: 'mW', tol: 0.03, etikett: '$P =$' },
+                { del: 'b', value: 2.5, unit: 'm', tol: 0.04, etikett: '$r =$' },
+            ],
+            solution: `**a)** Diagrammet ger $L = 70\\ \\mathrm{dB}$ vid $r = 5{,}0\\ \\mathrm{m}$. Intensiteten där är
+
+$$ I = I_0 \\cdot 10^{L/10} = 10^{-12} \\cdot 10^{70/10} = 10^{-12} \\cdot 10^{7} = 10^{-5}\\ \\mathrm{W/m^2} $$
+
+Fläkten är en punktkälla, så $I = \\dfrac{P}{4\\pi \\cdot r^{2}}$ och
+
+$$ P = I \\cdot 4\\pi \\cdot r^{2} = 10^{-5} \\cdot 4\\pi \\cdot 5{,}0^{2} = 3{,}141\\ldots \\cdot 10^{-3}\\ \\mathrm{W} \\approx 3{,}1\\ \\mathrm{mW} $$
+
+**Svar:** $3{,}1\\ \\mathrm{mW}$
+
+**b)** Ljudnivån $76\\ \\mathrm{dB}$ är $6\\ \\mathrm{dB}$ högre än vid $5{,}0\\ \\mathrm{m}$. Intensiteten är då
+
+$$ \\frac{I_2}{I_1} = 10^{(76 - 70)/10} = 10^{0{,}6} = 3{,}981\\ldots $$
+
+gånger så stor. Eftersom $I = \\dfrac{P}{4\\pi \\cdot r^{2}}$ är intensiteten omvänt proportionell mot $r^{2}$:
+
+$$ \\frac{I_2}{I_1} = \\frac{r_1^{2}}{r_2^{2}} \\quad\\Leftrightarrow\\quad r_2 = \\frac{r_1}{\\sqrt{I_2 / I_1}} $$
+
+$$ r_2 = \\frac{5{,}0}{\\sqrt{3{,}981\\ldots}} = \\frac{5{,}0}{1{,}995\\ldots} = 2{,}505\\ldots\\ \\mathrm{m} \\approx 2{,}5\\ \\mathrm{m} $$
+
+I diagrammet korsar kurvan linjen $L = 76\\ \\mathrm{dB}$ mitt emellan 2 m och 3 m, vilket stämmer. Det är också tumregeln: halverat avstånd ger ungefär 6 dB högre nivå.
+
+**Svar:** $2{,}5\\ \\mathrm{m}$`,
+        },
+        {
+            level: 2,
+            question: `På en viss plats i en konsertsal ger en enda fiol ljudnivån $70\\ \\mathrm{dB}$. Hur många fioler som spelar lika starkt behövs för att ljudnivån på samma plats ska bli minst $82\\ \\mathrm{dB}$? Anta att ljudintensiteterna från fiolerna adderas.`,
+            answer: { value: 16, unit: 'st', tol: 0.001 },
+            solution: `Decibel kan inte adderas direkt. Det är intensiteterna som adderas, så *N* lika starka fioler ger intensiteten $N \\cdot I_1$, där $I_1$ är intensiteten från en fiol.
+
+Ljudnivåns ökning är då
+
+$$ L_N - L_1 = 10 \\cdot \\lg\\!\\left(\\frac{N \\cdot I_1}{I_1}\\right) = 10 \\cdot \\lg N $$
+
+Vi löser ut *N*:
+
+$$ 82 - 70 = 10 \\cdot \\lg N \\quad\\Leftrightarrow\\quad \\lg N = 1{,}2 \\quad\\Leftrightarrow\\quad N = 10^{1{,}2} $$
+
+$$ N = 10^{1{,}2} = 15{,}84\\ldots $$
+
+Antalet fioler måste vara ett heltal. Med 15 fioler blir nivån $70 + 10 \\cdot \\lg 15 = 81{,}76\\ldots\\ \\mathrm{dB}$, alltså under $82\\ \\mathrm{dB}$, och med 16 fioler blir den $70 + 10 \\cdot \\lg 16 = 82{,}04\\ldots\\ \\mathrm{dB}$.
+
+Rimlighet: 12 dB är fyra steg på 3 dB, alltså ungefär fyra fördubblingar: $2^{4} = 16$.
+
+**Svar:** 16 fioler`,
+        },
+        // ── Påfyllning: Avancerad ─────────────────────────────────────────
+        {
+            level: 3,
+            question: `Inför en utomhuskonsert mäter en ljudtekniker ljudnivån i två punkter A och B. Punkterna ligger på en rak linje ut från en högtalare som sänder ut ljud lika i alla riktningar, och B ligger $12\\ \\mathrm{m}$ längre bort från högtalaren än A. I A är ljudnivån $78\\ \\mathrm{dB}$ och i B är den $72\\ \\mathrm{dB}$. Teknikern vet varken avståndet till högtalaren eller dess effekt.<br>a) Bestäm avståndet från högtalaren till A. Svara i meter.<br>b) Bestäm högtalarens ljudeffekt. Svara i watt.`,
+            answer: { value: 12, unit: 'm', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 12, unit: 'm', tol: 0.03, etikett: '$r =$' },
+                { del: 'b', value: 0.12, unit: 'W', tol: 0.05, etikett: '$P =$' },
+            ],
+            solution: `**a)** Kalla avståndet från högtalaren till A för *r*. Då är avståndet till B lika med $r + 12$ (i meter). Två obekanta, *r* och *P*, kräver två samband, och skillnaden i ljudnivå ger ett samband där *P* försvinner.
+
+För en punktkälla är $I = \\dfrac{P}{4\\pi \\cdot r^{2}}$. Kvoten mellan intensiteterna i A och B blir
+
+$$ \\frac{I_\\mathrm{A}}{I_\\mathrm{B}} = \\frac{\\dfrac{P}{4\\pi \\cdot r^{2}}}{\\dfrac{P}{4\\pi \\cdot (r + 12)^{2}}} = \\frac{(r + 12)^{2}}{r^{2}} \\tag{1} $$
+
+Skillnaden i ljudnivå ger samma kvot:
+
+$$ L_\\mathrm{A} - L_\\mathrm{B} = 10 \\cdot \\lg\\!\\left(\\frac{I_\\mathrm{A}}{I_\\mathrm{B}}\\right) \\quad\\Leftrightarrow\\quad \\frac{I_\\mathrm{A}}{I_\\mathrm{B}} = 10^{(78 - 72)/10} = 10^{0{,}6} = 3{,}981\\ldots \\tag{2} $$
+
+Sätter vi (1), $\\dfrac{I_\\mathrm{A}}{I_\\mathrm{B}} = \\dfrac{(r + 12)^{2}}{r^{2}}$, lika med (2) och drar roten ur båda led (alla storheter är positiva) får vi
+
+$$ \\frac{r + 12}{r} = \\sqrt{3{,}981\\ldots} = 1{,}995\\ldots $$
+
+$$ r + 12 = 1{,}995\\ldots \\cdot r $$
+
+$$ 12 = 0{,}995\\ldots \\cdot r $$
+
+$$ r = \\frac{12}{0{,}9952\\ldots} = 12{,}057\\ldots\\ \\mathrm{m} \\approx 12\\ \\mathrm{m} $$
+
+Rimlighet: 6 dB lägre nivå betyder ungefär en fjärdedel så stor intensitet och alltså ungefär dubbelt så stort avstånd. Om A ligger 12 m från högtalaren ligger B 24 m bort, dubbelt så långt, och det stämmer.
+
+**Svar:** Ungefär $12\\ \\mathrm{m}$
+
+**b)** Nu när avståndet är känt ger intensiteten i A effekten. Ur ljudnivån i A:
+
+$$ I_\\mathrm{A} = I_0 \\cdot 10^{L_\\mathrm{A}/10} = 10^{-12} \\cdot 10^{7{,}8} = 6{,}309\\ldots \\cdot 10^{-5}\\ \\mathrm{W/m^2} $$
+
+$$ P = I_\\mathrm{A} \\cdot 4\\pi \\cdot r^{2} = 6{,}309\\ldots \\cdot 10^{-5} \\cdot 4\\pi \\cdot 12{,}057\\ldots^{2} = 0{,}1152\\ldots\\ \\mathrm{W} \\approx 0{,}12\\ \\mathrm{W} $$
+
+Kontroll med B: $P = 10^{-12} \\cdot 10^{7{,}2} \\cdot 4\\pi \\cdot 24{,}057\\ldots^{2}$ ger samma effekt, eftersom avståndet valdes just så att båda mätningarna stämmer.
+
+**Svar:** Ungefär $0{,}12\\ \\mathrm{W}$`,
+        },
+        {
+            level: 3,
+            question: `En ljudkälla sänder ut ljud lika i alla riktningar. På avståndet $r_1$ är ljudnivån $L_1$ och på avståndet $r_2$ är den $L_2$.<br>a) Visa att $L_1 - L_2 = 20 \\cdot \\lg\\!\\left(\\dfrac{r_2}{r_1}\\right)$, oberoende av källans effekt.<br>b) Enligt tillverkaren ger en brandvarnare ljudnivån $85\\ \\mathrm{dB}$ på avståndet $3{,}0\\ \\mathrm{m}$. Vilken ljudnivå ger den på avståndet $7{,}5\\ \\mathrm{m}$, om inget ljud reflekteras? Svara i dB.<br>c) Med hur många procent måste avståndet till en ljudkälla öka för att ljudnivån ska sjunka med $1{,}0\\ \\mathrm{dB}$? Svaret ska gälla oavsett källans effekt och avståndet från början.`,
+            answer: { value: 77, unit: 'dB', tol: 0.01 },
+            delsvar: [
+                { del: 'b', value: 77, unit: 'dB', tol: 0.01, etikett: '$L =$' },
+                { del: 'c', value: 12, unit: '%', tol: 0.03, etikett: 'ökning' },
+            ],
+            solution: `**a)** Ljudnivån på de två avstånden är
+
+$$ L_1 = 10 \\cdot \\lg\\!\\left(\\frac{I_1}{I_0}\\right) \\qquad L_2 = 10 \\cdot \\lg\\!\\left(\\frac{I_2}{I_0}\\right) $$
+
+Differensen skrivs om med logaritmlagen $\\lg a - \\lg b = \\lg\\!\\left(\\dfrac{a}{b}\\right)$:
+
+$$ L_1 - L_2 = 10 \\cdot \\left(\\lg\\!\\left(\\frac{I_1}{I_0}\\right) - \\lg\\!\\left(\\frac{I_2}{I_0}\\right)\\right) = 10 \\cdot \\lg\\!\\left(\\frac{I_1}{I_2}\\right) $$
+
+För en punktkälla är $I = \\dfrac{P}{4\\pi \\cdot r^{2}}$. Effekten och $4\\pi$ stryks när kvoten bildas:
+
+$$ \\frac{I_1}{I_2} = \\frac{\\dfrac{P}{4\\pi \\cdot r_1^{2}}}{\\dfrac{P}{4\\pi \\cdot r_2^{2}}} = \\frac{r_2^{2}}{r_1^{2}} = \\left(\\frac{r_2}{r_1}\\right)^{2} $$
+
+Insatt, med logaritmlagen $\\lg a^{2} = 2 \\cdot \\lg a$:
+
+$$ L_1 - L_2 = 10 \\cdot \\lg\\!\\left(\\frac{r_2}{r_1}\\right)^{2} = 20 \\cdot \\lg\\!\\left(\\frac{r_2}{r_1}\\right) $$
+
+Effekten *P* finns inte kvar i uttrycket, vilket skulle visas.
+
+**b)** Sambandet från a), $L_1 - L_2 = 20 \\cdot \\lg\\!\\left(\\dfrac{r_2}{r_1}\\right)$, löst för $L_2$:
+
+$$ L_2 = L_1 - 20 \\cdot \\lg\\!\\left(\\frac{r_2}{r_1}\\right) $$
+
+$$ L_2 = 85 - 20 \\cdot \\lg\\!\\left(\\frac{7{,}5}{3{,}0}\\right) = 85 - 20 \\cdot \\lg 2{,}5 = 85 - 7{,}958\\ldots = 77{,}04\\ldots\\ \\mathrm{dB} \\approx 77\\ \\mathrm{dB} $$
+
+**Svar:** $77\\ \\mathrm{dB}$
+
+**c)** Med $L_1 - L_2 = 1{,}0$ i sambandet från a), $L_1 - L_2 = 20 \\cdot \\lg\\!\\left(\\dfrac{r_2}{r_1}\\right)$:
+
+$$ 1{,}0 = 20 \\cdot \\lg\\!\\left(\\frac{r_2}{r_1}\\right) $$
+
+$$ \\lg\\!\\left(\\frac{r_2}{r_1}\\right) = 0{,}050 \\quad\\Leftrightarrow\\quad \\frac{r_2}{r_1} = 10^{0{,}050} $$
+
+$$ \\frac{r_2}{r_1} = 10^{0{,}050} = 1{,}122\\ldots $$
+
+Avståndet måste alltså bli $1{,}12$ gånger så stort, en ökning med ungefär 12 %. Eftersom bara kvoten $r_2/r_1$ ingår gäller det på alla avstånd och för alla effekter. Rimlighet: 6 dB motsvarar fördubblat avstånd, och $1{,}122^{6} \\approx 2{,}0$.
+
+**Svar:** Med ungefär 12 %`,
+        },
+        {
+            level: 3,
+            question: `En högtalare står direkt på en stor, plan asfaltyta utomhus. Tillverkaren anger att den sänder ut ljudeffekten $2{,}0\\ \\mathrm{W}$. På avståndet $20\\ \\mathrm{m}$ från högtalaren, nära marken, mäts ljudnivån $89\\ \\mathrm{dB}$.<br>a) Vilken ljudnivå ger modellen att högtalaren är en punktkälla som sänder ut ljud lika i alla riktningar? Svara i dB.<br>b) Mätvärdet är högre än modellens. Föreslå en förklaring som har med asfalten att göra, ställ upp en förbättrad modell för intensiteten och visa att den stämmer med mätningen.`,
+            answer: { value: 86, unit: 'dB', tol: 0.01 },
+            delsvar: [
+                { del: 'a', value: 86, unit: 'dB', tol: 0.01, etikett: '$L =$' },
+                { del: 'b', value: 89, unit: 'dB', tol: 0.01, etikett: 'förbättrad modell, $L =$' },
+            ],
+            solution: `**a)** Med punktkällemodellen sprids effekten över en hel sfär:
+
+$$ I = \\frac{P}{4\\pi \\cdot r^{2}} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+P = 2{,}0\\ \\mathrm{W} \\\\
+r = 20\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ I = \\frac{2{,}0}{4\\pi \\cdot 20^{2}} = 3{,}978\\ldots \\cdot 10^{-4}\\ \\mathrm{W/m^2} $$
+
+$$ L = 10 \\cdot \\lg\\!\\left(\\frac{3{,}978\\ldots \\cdot 10^{-4}}{10^{-12}}\\right) = 85{,}99\\ldots\\ \\mathrm{dB} \\approx 86\\ \\mathrm{dB} $$
+
+**Svar:** $86\\ \\mathrm{dB}$
+
+**b)** Asfalt är hård och absorberar nästan inget ljud. Det ljud som högtalaren sänder ned mot marken reflekteras därför upp igen. Ingen energi går ned i marken, så hela effekten sprids i halvrummet ovanför asfalten. Ytan som effekten fördelas över på avståndet *r* är då en halvsfär med arean
+
+$$ A = \\frac{4\\pi \\cdot r^{2}}{2} = 2\\pi \\cdot r^{2} $$
+
+och den förbättrade modellen blir
+
+$$ I = \\frac{P}{2\\pi \\cdot r^{2}} $$
+
+Intensiteten blir dubbelt så stor som i a), och dubbel intensitet betyder $10 \\cdot \\lg 2 \\approx 3\\ \\mathrm{dB}$ högre nivå på alla avstånd. Med siffrorna:
+
+$$ I = \\frac{2{,}0}{2\\pi \\cdot 20^{2}} = 7{,}957\\ldots \\cdot 10^{-4}\\ \\mathrm{W/m^2} $$
+
+$$ L = 10 \\cdot \\lg\\!\\left(\\frac{7{,}957\\ldots \\cdot 10^{-4}}{10^{-12}}\\right) = 89{,}00\\ldots\\ \\mathrm{dB} \\approx 89\\ \\mathrm{dB} $$
+
+Det är precis den uppmätta nivån. Modellen förutsätter att asfalten reflekterar allt ljud och att inget annat (vind, luftens absorption, hinder) påverkar ljudet på vägen.
+
+**Svar:** Asfalten reflekterar ljudet uppåt, så effekten sprids över en halvsfär, $I = \\dfrac{P}{2\\pi \\cdot r^{2}}$. Den modellen ger $89\\ \\mathrm{dB}$, samma som mätningen.`,
+        },
+        {
+            level: 3,
+            question: `Två högtalare A och B står $12\\ \\mathrm{m}$ från varandra på en öppen gräsplan. A ger ljudnivån $90\\ \\mathrm{dB}$ på avståndet $1{,}0\\ \\mathrm{m}$ och B ger $84\\ \\mathrm{dB}$ på avståndet $1{,}0\\ \\mathrm{m}$. Båda sänder ut ljud lika i alla riktningar, och de spelar olika musik så att ljudintensiteterna adderas.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 172" width="626" height="234" style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif" role="img" aria-label="Två högtalare A och B på en gräsplan, 12 meter från varandra."><rect x="0" y="130" width="460" height="10" fill="#cfdcb8"/><line x1="0" y1="130" x2="460" y2="130" stroke="#6b7d4f" stroke-width="1.4"/><g fill="none" stroke="#8a93a3" stroke-width="1.4"><path d="M 96 92 A 26 26 0 0 1 96 120"/><path d="M 106 84 A 38 38 0 0 1 106 128"/><path d="M 364 92 A 26 26 0 0 0 364 120"/><path d="M 354 84 A 38 38 0 0 0 354 128"/></g><rect x="50" y="72" width="36" height="58" rx="3" fill="#2b2f38" stroke="#0f1620" stroke-width="1.2"/><circle cx="68" cy="86" r="5" fill="#6b7383" stroke="#0f1620" stroke-width="1"/><circle cx="68" cy="111" r="12" fill="#4a5161" stroke="#0f1620" stroke-width="1"/><circle cx="68" cy="111" r="4.5" fill="#8a93a3"/><rect x="374" y="80" width="32" height="50" rx="3" fill="#2b2f38" stroke="#0f1620" stroke-width="1.2"/><circle cx="390" cy="92" r="4.5" fill="#6b7383" stroke="#0f1620" stroke-width="1"/><circle cx="390" cy="113" r="10.5" fill="#4a5161" stroke="#0f1620" stroke-width="1"/><circle cx="390" cy="113" r="4" fill="#8a93a3"/><text x="68" y="62" text-anchor="middle" font-size="14" fill="#0f1620">A</text><text x="390" y="70" text-anchor="middle" font-size="14" fill="#0f1620">B</text><g stroke="#0f1620" stroke-width="1" stroke-dasharray="3 3"><line x1="68" y1="142" x2="68" y2="164"/><line x1="390" y1="142" x2="390" y2="164"/></g><line x1="76" y1="158" x2="382" y2="158" stroke="#0f1620" stroke-width="1.4" stroke-linecap="butt"/><polygon points="68,158 77,154 77,162" fill="#0f1620"/><polygon points="390,158 381,154 381,162" fill="#0f1620"/><text x="229" y="152" text-anchor="middle" font-size="14" fill="#0f1620">12 m</text></svg>
+
+a) I vilken punkt på sträckan mellan högtalarna ger de två högtalarna lika hög ljudnivå? Ange avståndet från B. Svara i meter.<br>b) Hur hög är den sammanlagda ljudnivån i den punkten? Svara i dB.`,
+            answer: { value: 4.0, unit: 'm', tol: 0.02 },
+            delsvar: [
+                { del: 'a', value: 4.0, unit: 'm', tol: 0.02, etikett: 'avstånd från B' },
+                { del: 'b', value: 75, unit: 'dB', tol: 0.01, etikett: '$L =$' },
+            ],
+            solution: `**a)** Kalla punktens avstånd till A för $x_\\mathrm{A}$ och till B för $x_\\mathrm{B}$. Punkten ligger på sträckan, så
+
+$$ x_\\mathrm{A} + x_\\mathrm{B} = 12 \\tag{1} $$
+
+Intensiteten på avståndet $1{,}0\\ \\mathrm{m}$ från respektive högtalare är
+
+$$ I_{\\mathrm{A}1} = 10^{-12} \\cdot 10^{90/10} = 10^{-3}\\ \\mathrm{W/m^2} $$
+
+$$ I_{\\mathrm{B}1} = 10^{-12} \\cdot 10^{84/10} = 2{,}511\\ldots \\cdot 10^{-4}\\ \\mathrm{W/m^2} $$
+
+För en punktkälla är $I = \\dfrac{P}{4\\pi \\cdot r^{2}}$, så intensiteten avtar med kvadraten på avståndet: på avståndet *x* meter är intensiteten $\\dfrac{I_1}{x^{2}}$, där $I_1$ är intensiteten på 1,0 m. Lika hög ljudnivå betyder lika stor intensitet:
+
+$$ \\frac{I_{\\mathrm{A}1}}{x_\\mathrm{A}^{2}} = \\frac{I_{\\mathrm{B}1}}{x_\\mathrm{B}^{2}} \\quad\\Leftrightarrow\\quad \\frac{x_\\mathrm{A}}{x_\\mathrm{B}} = \\sqrt{\\frac{I_{\\mathrm{A}1}}{I_{\\mathrm{B}1}}} $$
+
+Kvoten mellan intensiteterna ges direkt av skillnaden i ljudnivå, 6 dB:
+
+$$ \\frac{x_\\mathrm{A}}{x_\\mathrm{B}} = \\sqrt{10^{(90 - 84)/10}} = \\sqrt{10^{0{,}6}} = 1{,}995\\ldots $$
+
+Alltså är $x_\\mathrm{A} = 1{,}995\\ldots \\cdot x_\\mathrm{B}$. Det insatt i (1), $x_\\mathrm{A} + x_\\mathrm{B} = 12$, ger
+
+$$ 1{,}995\\ldots \\cdot x_\\mathrm{B} + x_\\mathrm{B} = 12 $$
+
+$$ 2{,}995\\ldots \\cdot x_\\mathrm{B} = 12 $$
+
+$$ x_\\mathrm{B} = \\frac{12}{2{,}995\\ldots} = 4{,}006\\ldots\\ \\mathrm{m} \\approx 4{,}0\\ \\mathrm{m} $$
+
+Punkten ligger närmare den svagare högtalaren B, vilket är rimligt: A är fyra gånger så stark och måste därför vara ungefär dubbelt så långt bort för att ge samma intensitet.
+
+**Svar:** $4{,}0\\ \\mathrm{m}$ från B
+
+**b)** Intensiteten från B i punkten är
+
+$$ I_\\mathrm{B} = \\frac{I_{\\mathrm{B}1}}{x_\\mathrm{B}^{2}} = \\frac{2{,}511\\ldots \\cdot 10^{-4}}{4{,}006\\ldots^{2}} = 1{,}564\\ldots \\cdot 10^{-5}\\ \\mathrm{W/m^2} $$
+
+och intensiteten från A är lika stor. Intensiteterna adderas:
+
+$$ I_\\text{tot} = 2 \\cdot 1{,}564\\ldots \\cdot 10^{-5} = 3{,}129\\ldots \\cdot 10^{-5}\\ \\mathrm{W/m^2} $$
+
+$$ L_\\text{tot} = 10 \\cdot \\lg\\!\\left(\\frac{3{,}129\\ldots \\cdot 10^{-5}}{10^{-12}}\\right) = 74{,}95\\ldots\\ \\mathrm{dB} \\approx 75\\ \\mathrm{dB} $$
+
+Rimlighet: var och en ger ungefär $72\\ \\mathrm{dB}$, och två lika starka ljud ger 3 dB mer.
+
+**Svar:** $75\\ \\mathrm{dB}$`,
+        },
+        {
+            level: 3,
+            question: `En vanlig gräns på arbetsplatser är att man under en arbetsdag på $8{,}0\\ \\mathrm{h}$ högst får utsättas för ljudnivån $85\\ \\mathrm{dB}$. Anta att risken för hörselskada bestäms av den ljudenergi per kvadratmeter som når örat.<br>a) Hur länge kan man vistas på en konsert där ljudnivån är $100\\ \\mathrm{dB}$ innan örat har tagit emot lika mycket energi per kvadratmeter som under en arbetsdag vid $85\\ \\mathrm{dB}$? Svara i minuter.<br>b) Visa att varje ökning av ljudnivån med $3\\ \\mathrm{dB}$ ungefär halverar den tid man kan vistas i ljudet med samma risk.`,
+            answer: { value: 15, unit: 'min', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 15, unit: 'min', tol: 0.03, etikett: '$t =$' },
+            ],
+            solution: `**a)** Intensiteten är energi per sekund och kvadratmeter. Under tiden *t* tar örat därför emot energin per kvadratmeter
+
+$$ \\frac{E}{A} = I \\cdot t $$
+
+Samma risk betyder samma energi per kvadratmeter:
+
+$$ I_1 \\cdot t_1 = I_2 \\cdot t_2 \\quad\\Leftrightarrow\\quad t_2 = t_1 \\cdot \\frac{I_1}{I_2} \\tag{1} $$
+
+Kvoten mellan intensiteterna ges av skillnaden i ljudnivå:
+
+$$ L_2 - L_1 = 10 \\cdot \\lg\\!\\left(\\frac{I_2}{I_1}\\right) \\quad\\Leftrightarrow\\quad \\frac{I_2}{I_1} = 10^{(L_2 - L_1)/10} $$
+
+$$ \\frac{I_2}{I_1} = 10^{(100 - 85)/10} = 10^{1{,}5} = 31{,}62\\ldots $$
+
+Insatt i (1), $t_2 = t_1 \\cdot \\dfrac{I_1}{I_2}$:
+
+$$ t_2 = \\frac{8{,}0\\ \\mathrm{h}}{31{,}62\\ldots} = 0{,}2529\\ldots\\ \\mathrm{h} = 0{,}2529\\ldots \\cdot 60\\ \\mathrm{min} = 15{,}17\\ldots\\ \\mathrm{min} \\approx 15\\ \\mathrm{min} $$
+
+Rimlighet: 15 dB är fem steg på 3 dB. Varje steg halverar tiden enligt b), och $\\dfrac{8\\ \\mathrm{h}}{2^{5}} = 0{,}25\\ \\mathrm{h} = 15\\ \\mathrm{min}$.
+
+**Svar:** Ungefär $15\\ \\mathrm{min}$
+
+**b)** En ökning med $3\\ \\mathrm{dB}$ ger intensitetskvoten
+
+$$ \\frac{I_2}{I_1} = 10^{3/10} = 10^{0{,}3} = 1{,}995\\ldots \\approx 2 $$
+
+Intensiteten blir alltså ungefär dubbelt så stor. Enligt (1), $t_2 = t_1 \\cdot \\dfrac{I_1}{I_2}$, blir tiden då
+
+$$ t_2 = \\frac{t_1}{1{,}995\\ldots} \\approx \\frac{t_1}{2} $$
+
+Tiden halveras alltså för varje 3 dB, oavsett vilken ljudnivå man börjar på, eftersom bara skillnaden i ljudnivå ingår.`,
+        },
+        {
+            level: 3,
+            question: `I en tom idrottshall mäter en elev ljudnivån på olika avstånd *r* från en liten högtalare som sänder ut ljud lika i alla riktningar. Resultatet står i tabellen.
+
+| Avstånd *r* (m) | Ljudnivå *L* (dB) |
+|---|---|
+| 1,0 | 90,1 |
+| 2,0 | 84,5 |
+| 4,0 | 79,8 |
+| 8,0 | 76,8 |
+
+a) Använd modellen $I = \\dfrac{P}{4\\pi \\cdot r^{2}}$ och mätningen på $1{,}0\\ \\mathrm{m}$. Vilken ljudnivå förutsäger modellen på $8{,}0\\ \\mathrm{m}$? Svara i dB.<br>b) Förklara varför den uppmätta nivån på $8{,}0\\ \\mathrm{m}$ är högre än modellens, och varför skillnaden är störst långt från högtalaren.<br>c) Anta att det uppmätta ljudet består av det direkta ljudet från högtalaren plus ett efterklangsljud som har samma intensitet överallt i hallen. Bestäm efterklangsljudets intensitet. Svara i W/m².`,
+            answer: { value: 72, unit: 'dB', tol: 0.01 },
+            delsvar: [
+                { del: 'a', value: 72, unit: 'dB', tol: 0.01, etikett: '$L =$' },
+                { del: 'c', value: 3.2e-5, unit: 'W/m²', tol: 0.04, etikett: '$I =$' },
+            ],
+            solution: `**a)** Enligt modellen är intensiteten omvänt proportionell mot $r^{2}$. På $8{,}0\\ \\mathrm{m}$ är avståndet 8 gånger så stort som på $1{,}0\\ \\mathrm{m}$, så intensiteten blir en sextiofjärdedel, eftersom $8^{2} = 64$. Det ger sänkningen
+
+$$ \\Delta L = 10 \\cdot \\lg 64 = 18{,}06\\ldots\\ \\mathrm{dB} $$
+
+$$ L_\\text{modell} = 90{,}1 - 18{,}06\\ldots = 72{,}03\\ldots\\ \\mathrm{dB} \\approx 72\\ \\mathrm{dB} $$
+
+**Svar:** $72\\ \\mathrm{dB}$
+
+**b)** Modellen räknar bara med ljud som går direkt från högtalaren till mätaren. I en hall reflekteras ljudet mot golv, väggar och tak, och det reflekterade ljudet studsar fram och tillbaka och fyller hela hallen. Mätaren tar emot både det direkta ljudet och det reflekterade.
+
+Nära högtalaren är det direkta ljudet mycket starkt, och det reflekterade ljudet bidrar då med en liten del. Mellan 1,0 m och 2,0 m sjunker nivån därför med $90{,}1 - 84{,}5 = 5{,}6\\ \\mathrm{dB}$, nära modellens 6,0 dB. Det direkta ljudet avtar med $r^{2}$, men det reflekterade gör det inte, så långt bort står det reflekterade ljudet för en allt större del av det man mäter. Därför ligger mätningarna allt högre över modellen ju längre bort man kommer.
+
+**Svar:** Ljud som reflekteras i hallen läggs till det direkta ljudet. Det direkta ljudet avtar med kvadraten på avståndet men det reflekterade gör det inte, så skillnaden växer med avståndet.
+
+**c)** På $1{,}0\\ \\mathrm{m}$ är det direkta ljudet så starkt att vi kan räkna hela den uppmätta intensiteten där som direkt ljud:
+
+$$ I_{\\text{dir},1} = 10^{-12} \\cdot 10^{90{,}1/10} = 1{,}023\\ldots \\cdot 10^{-3}\\ \\mathrm{W/m^2} $$
+
+Det direkta ljudet på $8{,}0\\ \\mathrm{m}$ är en sextiofjärdedel så starkt:
+
+$$ I_{\\text{dir},8} = \\frac{1{,}023\\ldots \\cdot 10^{-3}}{64} = 1{,}598\\ldots \\cdot 10^{-5}\\ \\mathrm{W/m^2} $$
+
+Den uppmätta intensiteten på $8{,}0\\ \\mathrm{m}$ är
+
+$$ I_{\\text{mätt},8} = 10^{-12} \\cdot 10^{76{,}8/10} = 4{,}786\\ldots \\cdot 10^{-5}\\ \\mathrm{W/m^2} $$
+
+Intensiteterna adderas, så efterklangsljudets intensitet är skillnaden:
+
+$$ I_\\text{efterklang} = 4{,}786\\ldots \\cdot 10^{-5} - 1{,}598\\ldots \\cdot 10^{-5} = 3{,}187\\ldots \\cdot 10^{-5}\\ \\mathrm{W/m^2} \\approx 3{,}2 \\cdot 10^{-5}\\ \\mathrm{W/m^2} $$
+
+Kontroll: på $1{,}0\\ \\mathrm{m}$ är efterklangsljudet bara cirka 3 % av det uppmätta ($\\dfrac{3{,}2 \\cdot 10^{-5}}{1{,}0 \\cdot 10^{-3}} \\approx 0{,}03$), så antagandet att allt ljud där är direkt var rimligt. Efterklangsljudet motsvarar ensamt ungefär $75\\ \\mathrm{dB}$, och därför kan nivån i hallen aldrig sjunka under det, hur långt bort man än går.
+
+**Svar:** $3{,}2 \\cdot 10^{-5}\\ \\mathrm{W/m^2}$`,
+        },
+        {
+            level: 3,
+            question: `Från en lång, rak och tätt trafikerad motorväg kommer ljud lika mycket från varje meter av vägen. Långt från vägens ändar kan vägen därför betraktas som en lång linje som sänder ut ljud, och inte som en punktkälla. Bortse från ljud som reflekteras i marken.<br>a) Vägen sänder ut ljudeffekten *P* från varje vägsträcka med längden *s*. Ställ upp ett uttryck för ljudintensiteten *I* på avståndet *r* från vägen, och visa att ljudnivån då sjunker med ungefär $3\\ \\mathrm{dB}$ när avståndet till vägen fördubblas.<br>b) På avståndet $60\\ \\mathrm{m}$ från vägen är ljudnivån $66\\ \\mathrm{dB}$. En kommun vill bygga bostäder där ljudnivån från vägen är högst $55\\ \\mathrm{dB}$. Hur långt från vägen måste husen ligga enligt modellen i a)? Svara i meter.<br>c) Hur långt bort hade husen behövt ligga om ljudet i stället kom från en punktkälla som också ger $66\\ \\mathrm{dB}$ på avståndet $60\\ \\mathrm{m}$? Svara i meter.`,
+            answer: { value: 760, unit: 'm', tol: 0.02 },
+            delsvar: [
+                { del: 'b', value: 760, unit: 'm', tol: 0.02, etikett: '$r =$' },
+                { del: 'c', value: 210, unit: 'm', tol: 0.02, etikett: '$r =$' },
+            ],
+            solution: `**a)** Ljudet från en vägsträcka med längden *s* sprids ut från vägen åt alla håll vinkelrätt mot den. På avståndet *r* har det spridits ut över mantelytan på en cylinder med radien *r* och längden *s*, med vägen som axel. Cylinderns ändar behöver inte räknas med, eftersom ljudet från grannsträckorna går in genom ändytorna lika mycket som det går ut. Mantelytans area är omkretsen gånger längden:
+
+$$ A = 2\\pi \\cdot r \\cdot s $$
+
+Med $I = \\dfrac{P}{A}$ blir intensiteten
+
+$$ I = \\frac{P}{2\\pi \\cdot r \\cdot s} \\tag{1} $$
+
+Intensiteten är alltså omvänt proportionell mot *r*, inte mot $r^{2}$ som för en punktkälla. Fördubblas avståndet från $r_1$ till $r_2 = 2 \\cdot r_1$ ger (1), $I = \\dfrac{P}{2\\pi \\cdot r \\cdot s}$, kvoten
+
+$$ \\frac{I_1}{I_2} = \\frac{\\dfrac{P}{2\\pi \\cdot r_1 \\cdot s}}{\\dfrac{P}{2\\pi \\cdot r_2 \\cdot s}} = \\frac{r_2}{r_1} = 2 $$
+
+Sänkningen i ljudnivå blir
+
+$$ L_1 - L_2 = 10 \\cdot \\lg\\!\\left(\\frac{I_1}{I_2}\\right) = 10 \\cdot \\lg 2 = 3{,}01\\ldots\\ \\mathrm{dB} \\approx 3\\ \\mathrm{dB} $$
+
+vilket skulle visas. För en punktkälla hade samma fördubbling gett ungefär 6 dB.
+
+**b)** Ur (1) följer på samma sätt för två godtyckliga avstånd att $\\dfrac{I_1}{I_2} = \\dfrac{r_2}{r_1}$, så
+
+$$ L_1 - L_2 = 10 \\cdot \\lg\\!\\left(\\frac{r_2}{r_1}\\right) \\quad\\Leftrightarrow\\quad \\frac{r_2}{r_1} = 10^{(L_1 - L_2)/10} \\quad\\Leftrightarrow\\quad r_2 = r_1 \\cdot 10^{(L_1 - L_2)/10} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+r_1 = 60\\ \\mathrm{m} \\\\
+L_1 = 66\\ \\mathrm{dB} \\\\
+L_2 = 55\\ \\mathrm{dB}
+\\end{array} \\right]
+$$
+
+$$ r_2 = 60 \\cdot 10^{(66 - 55)/10} = 60 \\cdot 10^{1{,}1} = 60 \\cdot 12{,}58\\ldots = 755{,}3\\ldots\\ \\mathrm{m} \\approx 7{,}6 \\cdot 10^{2}\\ \\mathrm{m} $$
+
+Rimlighet: 11 dB är knappt fyra steg på 3 dB, och varje steg fördubblar avståndet: $60 \\cdot 2^{4} = 960\\ \\mathrm{m}$, lite längre än svaret, som det ska vara.
+
+**Svar:** Ungefär $760\\ \\mathrm{m}$ från vägen
+
+**c)** För en punktkälla är $I = \\dfrac{P}{4\\pi \\cdot r^{2}}$, och då är kvoten $\\dfrac{I_1}{I_2} = \\left(\\dfrac{r_2}{r_1}\\right)^{2}$. Det ger
+
+$$ L_1 - L_2 = 10 \\cdot \\lg\\!\\left(\\frac{r_2}{r_1}\\right)^{2} = 20 \\cdot \\lg\\!\\left(\\frac{r_2}{r_1}\\right) \\quad\\Leftrightarrow\\quad r_2 = r_1 \\cdot 10^{(L_1 - L_2)/20} $$
+
+$$ r_2 = 60 \\cdot 10^{(66 - 55)/20} = 60 \\cdot 10^{0{,}55} = 60 \\cdot 3{,}548\\ldots = 212{,}8\\ldots\\ \\mathrm{m} \\approx 2{,}1 \\cdot 10^{2}\\ \\mathrm{m} $$
+
+Ljudet från en lång väg avtar alltså mycket långsammare med avståndet än ljudet från en punktkälla, och bostäderna måste hamna mer än tre gånger så långt bort. Det är ett skäl till att man bygger bullerplank längs vägar i stället för att bara hålla avstånd.
+
+**Svar:** Ungefär $210\\ \\mathrm{m}$ från källan`,
         },
     ],
 
@@ -65791,12 +72383,12 @@ $$ \\lambda = \\frac{340}{25\\,000} = 0{,}0136\\ \\mathrm{m} \\approx 1{,}4\\ \\
                 'En ton med frekvensen $5\\ \\mathrm{Hz}$.',
             ],
             correct: 2,
-            solution: `**Ultraljud** är ljud med frekvenser över det mänskliga hörselområdet — alltså över $20\\ \\mathrm{kHz}$. En ton på $35\\ \\mathrm{kHz}$ är därför ultraljud.
+            solution: `**Ultraljud** är ljud med frekvenser över det mänskliga hörselområdet, alltså över $20\\ \\mathrm{kHz}$. En ton på $35\\ \\mathrm{kHz}$ är därför ultraljud.
 
 - $15\\ \\mathrm{Hz}$ och $5\\ \\mathrm{Hz}$ är **infraljud** (under $20\\ \\mathrm{Hz}$).
 - $440\\ \\mathrm{Hz}$ är inom det normala hörselområdet.
 
-**Generell slutsats:** Hörselområdet $20$–$20\\,000\\ \\mathrm{Hz}$ är en grov approximation av en frisk ungdoms öron — med åldern krymper det övre området ofta till $12$–$15\\ \\mathrm{kHz}$ eller lägre.`,
+**Generell slutsats:** Hörselområdet $20$–$20\\,000\\ \\mathrm{Hz}$ är en grov approximation av en frisk ungdoms öron. Med åldern krymper det övre området ofta till $12$–$15\\ \\mathrm{kHz}$ eller lägre.`,
         },
         {
             level: 1,
@@ -65808,19 +72400,19 @@ $$ \\lambda = \\frac{340}{25\\,000} = 0{,}0136\\ \\mathrm{m} \\approx 1{,}4\\ \\
                 'Tonen försvinner.',
             ],
             correct: 2,
-            solution: `När en ljudkälla rör sig **mot** dig trycks vågfronterna ihop framför källan — våglängden förkortas och därmed ökar frekvensen. Du hör en **högre** ton än den källan sänder ut.
+            solution: `När en ljudkälla rör sig **mot** dig trycks vågfronterna ihop framför källan. Våglängden förkortas och därmed ökar frekvensen. Du hör en **högre** ton än den källan sänder ut.
 
-När ambulansen sedan har passerat och rör sig **från** dig, sker det motsatta — vågfronterna glesnar och frekvensen sjunker. Det är därför man hör sirenens ton "falla" precis när ambulansen passerar.
+När ambulansen sedan har passerat och rör sig **från** dig, sker det motsatta: vågfronterna glesnar och frekvensen sjunker. Det är därför man hör sirenens ton "falla" precis när ambulansen passerar.
 
-**Generell slutsats:** Detta är **dopplereffekten** — en ändring i upplevd frekvens som beror på relativ rörelse mellan källa och mottagare. Den fungerar för ljud, vatten- och ljusvågor (där den används för att mäta hastigheter på avlägsna galaxer — *rödförskjutning*).`,
+**Generell slutsats:** Detta är **dopplereffekten**, en ändring i upplevd frekvens som beror på relativ rörelse mellan källa och mottagare. Den fungerar för ljud, vatten- och ljusvågor (där den används för att mäta hastigheter på avlägsna galaxer, *rödförskjutning*).`,
         },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
-            level: 2,
+            level: 1,
             question: `En fladdermus skickar ut en ultraljudspuls och tar emot ekot från en mal $12\\ \\mathrm{ms}$ senare. Hur långt från fladdermusen är malen? Räkna med ljudets hastighet $v = 340\\ \\mathrm{m/s}$.`,
             answer: { value: 2.04, unit: 'm' },
-            solution: `**Insikten är att ljudet färdas dubbelt så långt som avståndet — fram och tillbaka.**
+            solution: `**Insikten är att ljudet färdas dubbelt så långt som avståndet, fram och tillbaka.**
 
 Låt *d* vara avståndet från fladdermusen till malen. Ljudet rör sig sträckan $2d$ (fram + tillbaka) på den uppmätta tiden:
 
@@ -65841,7 +72433,7 @@ $$ d = \\frac{340 \\cdot 0{,}012}{2} = 2{,}04\\ \\mathrm{m} $$
 **Generell slutsats:** Samma princip används i bilars parkeringssensorer, ekosounder ombord på fiskebåtar och ultraljudsundersökningar i sjukvården. Fladdermöss kan ofta bestämma avstånd med några millimeters noggrannhet.`,
         },
         {
-            level: 2,
+            level: 1,
             question: `Varför är det mänskliga örat som mest känsligt för frekvenser runt $4\\,000\\ \\mathrm{Hz}$?`,
             choices: [
                 'Det är där bas-tonen ligger i västerländsk musik.',
@@ -65850,25 +72442,25 @@ $$ d = \\frac{340 \\cdot 0{,}012}{2} = 2{,}04\\ \\mathrm{m} $$
                 'Alla ljud har störst amplitud just vid $4\\,000\\ \\mathrm{Hz}$.',
             ],
             correct: 1,
-            solution: `Vårt öra är som mest känsligt mellan $2\\,000$ och $4\\,000\\ \\mathrm{Hz}$ eftersom **konsonanter** i mänskligt tal — som *s*, *f*, *t*, *k*, *p* och sch-ljud — ligger där. Konsonanterna bär nästan all *information* i talet; vokalerna ligger lägre (250–1 000 Hz) och bär ljudets styrka. Utan diskanten kan vi inte skilja "saft" från "katt".
+            solution: `Vårt öra är som mest känsligt mellan $2\\,000$ och $4\\,000\\ \\mathrm{Hz}$ eftersom **konsonanter** i mänskligt tal (som *s*, *f*, *t*, *k*, *p* och sch-ljud) ligger där. Konsonanterna bär nästan all *information* i talet; vokalerna ligger lägre (250–1 000 Hz) och bär ljudets styrka. Utan diskanten kan vi inte skilja "saft" från "katt".
 
-Dessutom förstärker **hörselgångens resonans** (ett rör stängt i ena änden) just frekvenserna 2 500–4 000 Hz, så örat fungerar som en passiv förstärkare i exakt det område där talets information sitter. Evolutionärt har det också varit livsavgörande att höra prassel, knak och barngråt — alla med starka komponenter runt $3\\,000\\ \\mathrm{Hz}$.
+Dessutom förstärker **hörselgångens resonans** (ett rör stängt i ena änden) just frekvenserna 2 500–4 000 Hz, så örat fungerar som en passiv förstärkare i exakt det område där talets information sitter. Evolutionärt har det också varit livsavgörande att höra prassel, knak och barngråt, alla med starka komponenter runt $3\\,000\\ \\mathrm{Hz}$.
 
-**Generell slutsats:** Mänsklig hörsel är **inte** linjär — vi uppfattar olika frekvenser olika starkt även när ljudnivån (i dB) är densamma. Det är därför hörlurar och ljudsystem ofta är "EQ-tunade" till att kompensera.`,
+**Generell slutsats:** Mänsklig hörsel är **inte** linjär: vi uppfattar olika frekvenser olika starkt även när ljudnivån (i dB) är densamma. Det är därför hörlurar och ljudsystem ofta är "EQ-tunade" till att kompensera.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
-            level: 3,
+            level: 2,
             question: `En fladdermus jagar genom att skicka ut korta ultraljudspulser $80$ gånger per sekund. Varje puls är $1{,}5\\ \\mathrm{ms}$ lång. För att fladdermusen ska kunna "höra" ekot tydligt måste det komma tillbaka **efter** att den aktuella pulsen avslutats (annars överlagras eko och puls). Vad är det **kortaste avståndet** en fladdermus kan upptäcka? Räkna med $v = 340\\ \\mathrm{m/s}$.`,
             answer: { value: 0.255, unit: 'm' },
-            solution: `**Insikten är att ekot måste anlända *efter* att den utsända pulsen avslutats** — annars hör fladdermusen sin egen utgående puls samtidigt som ekot, och kan inte särskilja dem.
+            solution: `**Insikten är att ekot måste anlända *efter* att den utsända pulsen avslutats**, annars hör fladdermusen sin egen utgående puls samtidigt som ekot, och kan inte särskilja dem.
 
-**Steg 1 — villkor för kortaste avstånd.** Ekot anländer efter tiden $t_\\text{eko} = 2d/v$ (fram + tillbaka). För att ekot ska komma efter pulsens slut krävs
+**Steg 1: villkor för kortaste avstånd.** Ekot anländer efter tiden $t_\\text{eko} = 2d/v$ (fram + tillbaka). För att ekot ska komma efter pulsens slut krävs
 
 $$ \\frac{2d}{v} \\geq t_\\text{puls} \\quad\\Leftrightarrow\\quad d \\geq \\frac{v \\cdot t_\\text{puls}}{2} $$
 
-**Steg 2 — räkna ut det kortaste avståndet.**
+**Steg 2: räkna ut det kortaste avståndet.**
 
 Mätvärden:
 $$
@@ -65884,7 +72476,675 @@ Pulstakten, $80$ pulser per sekund, påverkar inte det kortaste avståndet. Den 
 
 **Svar:** Det kortaste avståndet fladdermusen kan upptäcka är ungefär $26\\ \\mathrm{cm}$.
 
-**Generell slutsats:** Det är därför fladdermöss förkortar sina pulser kraftigt när de närmar sig bytet — sista millisekunderna av jakten skickar de upp till $200$ pulser per sekund med pulslängd ner mot $0{,}3\\ \\mathrm{ms}$ för att kunna lösa upp avstånd ner mot $5\\ \\mathrm{cm}$. Samma princip — pulsbredd sätter ekoavstånds-upplösningen — gäller i radar och ekosounder.`,
+**Generell slutsats:** Det är därför fladdermöss förkortar sina pulser kraftigt när de närmar sig bytet. Under de sista millisekunderna av jakten skickar de upp till $200$ pulser per sekund med pulslängd ner mot $0{,}3\\ \\mathrm{ms}$ för att kunna lösa upp avstånd ner mot $5\\ \\mathrm{cm}$. Samma princip (pulsbredd sätter ekoavstånds-upplösningen) gäller i radar och ekosounder.`,
+        },
+        {
+            level: 1,
+            question: `Tabellen visar frekvensen hos fem ljud. Avgör för varje ljud om det är infraljud, hörbart ljud eller ultraljud för en människa med normal hörsel.
+
+| Ljud | Frekvens |
+|---|---|
+| Blåvalens lockrop | $17\\ \\mathrm{Hz}$ |
+| Pianots lägsta ton | $27{,}5\\ \\mathrm{Hz}$ |
+| En hundvissla | $23\\ \\mathrm{kHz}$ |
+| Mullret från en jordbävning | $5\\ \\mathrm{Hz}$ |
+| En ultraljudsundersökning av ett foster | $3{,}5\\ \\mathrm{MHz}$ |`,
+            solution: `Det mänskliga örat hör ungefär från $20\\ \\mathrm{Hz}$ till $20\\,000\\ \\mathrm{Hz} = 20\\ \\mathrm{kHz}$. Ljud under $20\\ \\mathrm{Hz}$ är infraljud, och ljud över $20\\ \\mathrm{kHz}$ är ultraljud.
+
+| Ljud | Frekvens | Jämförelse | Slag av ljud |
+|---|---|---|---|
+| Blåvalens lockrop | $17\\ \\mathrm{Hz}$ | under $20\\ \\mathrm{Hz}$ | infraljud |
+| Pianots lägsta ton | $27{,}5\\ \\mathrm{Hz}$ | strax över $20\\ \\mathrm{Hz}$ | hörbart |
+| En hundvissla | $23\\ \\mathrm{kHz}$ | över $20\\ \\mathrm{kHz}$ | ultraljud |
+| Mullret från en jordbävning | $5\\ \\mathrm{Hz}$ | under $20\\ \\mathrm{Hz}$ | infraljud |
+| Ultraljudsundersökningen | $3{,}5\\ \\mathrm{MHz} = 3\\,500\\ \\mathrm{kHz}$ | långt över $20\\ \\mathrm{kHz}$ | ultraljud |
+
+Pianots lägsta ton ligger nära den nedre gränsen, så den hörs som en mycket mörk ton. Hundvisslan hörs av hundar men inte av oss.
+
+**Svar:** Blåvalens lockrop och jordbävningens muller är infraljud, pianots lägsta ton är hörbart ljud, och hundvisslan och ultraljudsundersökningen är ultraljud.`,
+        },
+        {
+            level: 1,
+            question: `Ett stridsflygplan flyger vågrätt och i jämn fart, snabbare än ljudet, över ett skogslandskap. Vilket av påståendena om ljudbangen stämmer?`,
+            choices: [
+                'Bangen hörs bara av den som befinner sig under planet just när det passerar ljudvallen.',
+                'Piloten hör bangen tydligast, eftersom hon är närmast planet.',
+                'Personer på marken längs planets väg hör bangen i tur och ordning, när Mach-konen sveper förbi dem.',
+                'Bangen hörs en enda gång, samtidigt på hela marken under planet.',
+            ],
+            correct: 2,
+            solution: `När planet flyger snabbare än ljudet kör det ikapp sina egna ljudvågor. Vågorna förstärker varandra längs en kon, Mach-konen, som har sin spets vid planet och följer med det.
+
+- Bangen uppstår inte bara i ögonblicket då planet passerar ljudvallen. Konen följer med planet så länge det flyger snabbare än ljudet, så bangen hörs långt efter det ögonblicket.
+- Piloten hör ingen bang, eftersom ljudet aldrig hinner ifatt planet.
+- Konen når inte hela marken samtidigt. Den sveper över marken i takt med att planet flyger fram, och var och en hör bangen när konens kant passerar platsen där hon eller han står.
+
+**Svar:** Personer på marken längs planets väg hör bangen i tur och ordning, när Mach-konen sveper förbi dem.`,
+        },
+        {
+            level: 1,
+            question: `En delfin letar föda med ultraljud som har frekvensen $120\\ \\mathrm{kHz}$. Ljudets fart i havsvatten är $1\\,500\\ \\mathrm{m/s}$. Ultraljud studsar bara tydligt mot föremål som är större än ljudets våglängd. Vilket av föremålen kan delfinen upptäcka med sitt ultraljud?`,
+            choices: [
+                'En sill som är $8\\ \\mathrm{cm}$ lång.',
+                'En räka som är $1{,}0\\ \\mathrm{cm}$ lång.',
+                'Ett fiskyngel som är $6\\ \\mathrm{mm}$ långt.',
+                'Ett sandkorn som är $0{,}5\\ \\mathrm{mm}$ stort.',
+            ],
+            correct: 0,
+            solution: `Våglängden fås ur $v = f \\cdot \\lambda$:
+
+$$ \\lambda = \\dfrac{v}{f} $$
+
+$$
+\\left[ \\begin{array}{l}
+v = 1\\,500\\ \\mathrm{m/s} \\\\
+f = 120\\ \\mathrm{kHz} = 120\\,000\\ \\mathrm{Hz}
+\\end{array} \\right]
+$$
+
+$$ \\lambda = \\dfrac{1\\,500}{120\\,000} = 0{,}0125\\ \\mathrm{m} = 12{,}5\\ \\mathrm{mm} $$
+
+Föremålet måste vara större än $12{,}5\\ \\mathrm{mm}$. Sillen, $8\\ \\mathrm{cm} = 80\\ \\mathrm{mm}$, är det. Räkan ($10\\ \\mathrm{mm}$), ynglet ($6\\ \\mathrm{mm}$) och sandkornet ($0{,}5\\ \\mathrm{mm}$) är alla mindre än våglängden och ger inget tydligt eko.
+
+**Svar:** Sillen som är $8\\ \\mathrm{cm}$ lång.`,
+        },
+        {
+            level: 1,
+            question: `Ett brandlarm tjuter med konstant frekvens på en husvägg. Du cyklar i jämn fart rakt bort från huset. Hur uppfattar du larmets ton jämfört med när du står still?`,
+            choices: [
+                'Högre frekvens, alltså ljusare ton.',
+                'Samma frekvens, eftersom larmet står still.',
+                'Först högre och sedan lägre frekvens.',
+                'Lägre frekvens, alltså mörkare ton.',
+            ],
+            correct: 3,
+            solution: `Dopplereffekten uppstår när sändare och mottagare rör sig i förhållande till varandra. Det spelar alltså ingen roll att det är du som rör dig och inte larmet.
+
+Vågtopparna från larmet rör sig utåt med ljudets fart. När du cyklar bort från huset "flyr" du från topparna, så det tar längre tid mellan varje gång en vågtopp når ditt öra. Färre vågtoppar per sekund betyder lägre frekvens.
+
+Tonen är konstant så länge du håller jämn fart: den blir inte först högre och sedan lägre, det händer bara när en ljudkälla passerar förbi dig.
+
+**Svar:** Lägre frekvens, alltså mörkare ton.`,
+        },
+        {
+            level: 2,
+            question: `Hörselgången kan i en förenklad modell ses som ett rör som är öppet i ena änden och slutet av trumhinnan i den andra. En vuxens hörselgång är ungefär $l = 2{,}5\\ \\mathrm{cm}$ lång.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 158" width="597" height="214" role="img" aria-label="Förenklad modell av hörselgången: ett rör med längden l som är öppet mot omgivningen i ena änden och slutet av trumhinnan i den andra." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><path d="M 40,22 L 400,22 L 400,122 L 40,122 L 40,116 Q 60,106 70,100 L 360,100 L 360,44 L 70,44 Q 60,38 40,28 Z" fill="#f2d2bb" stroke="none"/><rect x="70" y="44" width="290" height="56" fill="#eef4fb"/><path d="M 40,28 Q 60,38 70,44 L 360,44" fill="none" stroke="#a8735a" stroke-width="2.2"/><path d="M 40,116 Q 60,106 70,100 L 360,100" fill="none" stroke="#a8735a" stroke-width="2.2"/><path d="M 360,44 Q 367,72 360,100" fill="none" stroke="#7a3f2c" stroke-width="3"/><text x="64" y="15" text-anchor="middle" font-size="13" fill="#0f1620">öppning</text><text x="360" y="15" text-anchor="middle" font-size="13" fill="#0f1620">trumhinnan</text><text x="215" y="77" text-anchor="middle" font-size="13" fill="#4b5563">luft</text><line x1="70" y1="100" x2="70" y2="142" stroke="#6b7280" stroke-width="1" stroke-dasharray="3 3"/><line x1="360" y1="100" x2="360" y2="142" stroke="#6b7280" stroke-width="1" stroke-dasharray="3 3"/><line x1="76" y1="136" x2="354" y2="136" stroke="#0f7d86" stroke-width="1.4" stroke-linecap="butt"/><polygon points="70,136 76,132.8 76,139.2" fill="#0f7d86"/><polygon points="360,136 354,132.8 354,139.2" fill="#0f7d86"/><text x="215" y="153" text-anchor="middle" font-size="14" fill="#0f1620"><tspan font-style="italic">l</tspan></text></svg>
+
+a) Beräkna frekvensen för hörselgångens grundton. Räkna med ljudets fart $v = 340\\ \\mathrm{m/s}$.<br>b) Förklara med hjälp av resultatet varför örat är extra känsligt i intervallet $2\\,000$ till $4\\,000\\ \\mathrm{Hz}$.`,
+            answer: { value: 3400, unit: 'Hz' },
+            delsvar: [
+                { del: 'a', value: 3400, unit: 'Hz', etikett: '$f$' },
+                { del: 'b' },
+            ],
+            solution: `**a)** I ett rör som är slutet i ena änden bildas en nod vid den slutna änden (trumhinnan, där luften inte kan röra sig) och en buk vid den öppna änden. För en stående våg i ett sådant rör gäller
+
+$$ l = \\dfrac{(2n - 1) \\cdot \\lambda}{4} $$
+
+Grundtonen är $n = 1$, så att röret rymmer en fjärdedels våglängd:
+
+$$ l = \\dfrac{\\lambda}{4} \\quad\\Leftrightarrow\\quad \\lambda = 4 \\cdot l $$
+
+$$
+\\left[ \\begin{array}{l}
+l = 2{,}5\\ \\mathrm{cm} = 0{,}025\\ \\mathrm{m} \\\\
+v = 340\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$ \\lambda = 4 \\cdot 0{,}025 = 0{,}10\\ \\mathrm{m} $$
+
+Frekvensen fås ur $v = f \\cdot \\lambda$:
+
+$$ f = \\dfrac{v}{\\lambda} = \\dfrac{340}{0{,}10} = 3\\,400\\ \\mathrm{Hz} $$
+
+**Svar:** Grundtonen har frekvensen ungefär $3{,}4\\ \\mathrm{kHz}$.
+
+**b)** Ljud med frekvenser nära $3{,}4\\ \\mathrm{kHz}$ ger resonans i hörselgången: luften i röret svänger med stor amplitud, och trumhinnan får ett kraftigare tryck än ljudet utanför örat skulle ge. Resonansfrekvensen ligger i den övre delen av intervallet $2\\,000$ till $4\\,000\\ \\mathrm{Hz}$, och resonansen är så bred att frekvenser i hela intervallet förstärks.
+
+**Svar:** Hörselgången har sin resonans vid ungefär $3{,}4\\ \\mathrm{kHz}$, så den förstärker ljud i just det intervallet och örat blir extra känsligt där.`,
+        },
+        {
+            level: 2,
+            question: `En skrämma mot mårdar sitter på en husvägg och sänder ut en ton med frekvensen $f_0 = 21{,}5\\ \\mathrm{kHz}$, som är ultraljud för människor. Räkna med att örat hör frekvenser upp till $20{,}0\\ \\mathrm{kHz}$ och att ljudets fart är $v = 340\\ \\mathrm{m/s}$. För en lyssnare som rör sig med farten $v_\\mathrm{l}$ rakt bort från en stillastående ljudkälla gäller
+
+$$ f = f_0 \\cdot \\dfrac{v - v_\\mathrm{l}}{v} $$
+
+a) En motorcyklist kör rakt bort från huset med farten $72\\ \\mathrm{km/h}$. Kan hon höra tonen? Motivera med en beräkning.<br>b) Hur fort måste en motorcyklist köra rakt bort från huset för att tonen ska bli hörbar? Ange svaret i km/h.`,
+            answer: { value: 85, unit: 'km/h' },
+            delsvar: [
+                { del: 'a', value: 20.2, unit: 'kHz', etikett: 'frekvensen $f$' },
+                { del: 'b', value: 85, unit: 'km/h', etikett: 'farten' },
+            ],
+            solution: `**a)** Farten omvandlas till m/s genom division med $3{,}6$:
+
+$$ v_\\mathrm{l} = \\dfrac{72}{3{,}6} = 20\\ \\mathrm{m/s} $$
+
+$$
+\\left[ \\begin{array}{l}
+f_0 = 21{,}5\\ \\mathrm{kHz} \\\\
+v = 340\\ \\mathrm{m/s} \\\\
+v_\\mathrm{l} = 20\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$ f = 21{,}5 \\cdot \\dfrac{340 - 20}{340} = 21{,}5 \\cdot \\dfrac{320}{340} \\approx 20{,}235\\ \\mathrm{kHz} $$
+
+Frekvensen har sjunkit, men den ligger fortfarande över $20{,}0\\ \\mathrm{kHz}$ och är alltså ultraljud.
+
+**Svar:** Nej, hon uppfattar ungefär $20{,}2\\ \\mathrm{kHz}$, vilket fortfarande är över hörselområdets övre gräns.
+
+**b)** Tonen blir hörbar när den uppfattade frekvensen har sjunkit till $f = 20{,}0\\ \\mathrm{kHz}$. Sambandet löses ut för $v_\\mathrm{l}$:
+
+$$ f = f_0 \\cdot \\dfrac{v - v_\\mathrm{l}}{v} $$
+
+$$ \\dfrac{f}{f_0} = \\dfrac{v - v_\\mathrm{l}}{v} = 1 - \\dfrac{v_\\mathrm{l}}{v} $$
+
+$$ v_\\mathrm{l} = v \\cdot \\left( 1 - \\dfrac{f}{f_0} \\right) $$
+
+$$ v_\\mathrm{l} = 340 \\cdot \\left( 1 - \\dfrac{20{,}0}{21{,}5} \\right) \\approx 23{,}72\\ \\mathrm{m/s} $$
+
+$$ 23{,}72\\ \\mathrm{m/s} = 23{,}72 \\cdot 3{,}6\\ \\mathrm{km/h} \\approx 85{,}4\\ \\mathrm{km/h} $$
+
+Rimlighet: i a) gav $72\\ \\mathrm{km/h}$ en frekvens strax över gränsen, så den fart som krävs ska vara något högre. Det stämmer.
+
+**Svar:** Motorcyklisten måste köra med minst ungefär $85\\ \\mathrm{km/h}$.`,
+        },
+        {
+            level: 2,
+            question: `Figuren visar vågfronterna från en liten ljudkälla som rör sig i jämn fart längs en rak linje. Varje cirkel är en vågtopp, och topparna sändes ut med jämna mellanrum. Måtten visar avståndet mellan de två yttersta vågtopparna på källans högra och vänstra sida. Ljudets fart i luften är $v = 340\\ \\mathrm{m/s}$.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 462" width="563" height="520" role="img" aria-label="Fem vågfronter som cirklar runt en ljudkälla. Cirklarna ligger tätare till höger om källan än till vänster. Avståndet mellan de två yttersta fronterna är 0,30 meter till höger och 0,50 meter till vänster." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><circle cx="250" cy="232" r="220" fill="none" stroke="#2563c9" stroke-width="1.6"/><circle cx="261" cy="232" r="176" fill="none" stroke="#2563c9" stroke-width="1.6"/><circle cx="272" cy="232" r="132" fill="none" stroke="#2563c9" stroke-width="1.6"/><circle cx="283" cy="232" r="88" fill="none" stroke="#2563c9" stroke-width="1.6"/><circle cx="294" cy="232" r="44" fill="none" stroke="#2563c9" stroke-width="1.6"/><circle cx="305" cy="232" r="6" fill="#c0392b" stroke="#0f1620" stroke-width="1.2"/><text x="305" y="218" text-anchor="middle" font-size="12" fill="#0f1620">källa</text><line x1="437" y1="232" x2="437" y2="398.5" stroke="#6b7280" stroke-width="1" stroke-dasharray="3 3"/><line x1="470" y1="232" x2="470" y2="398.5" stroke="#6b7280" stroke-width="1" stroke-dasharray="3 3"/><line x1="443" y1="391.5" x2="464" y2="391.5" stroke="#0f7d86" stroke-width="1.4" stroke-linecap="butt"/><polygon points="437,391.5 443,388.3 443,394.7" fill="#0f7d86"/><polygon points="470,391.5 464,388.3 464,394.7" fill="#0f7d86"/><text x="453.5" y="410.5" text-anchor="middle" font-size="12" fill="#0f1620">0,30 m</text><line x1="30" y1="232" x2="30" y2="398.5" stroke="#6b7280" stroke-width="1" stroke-dasharray="3 3"/><line x1="85" y1="232" x2="85" y2="398.5" stroke="#6b7280" stroke-width="1" stroke-dasharray="3 3"/><line x1="36" y1="391.5" x2="79" y2="391.5" stroke="#0f7d86" stroke-width="1.4" stroke-linecap="butt"/><polygon points="30,391.5 36,388.3 36,394.7" fill="#0f7d86"/><polygon points="85,391.5 79,388.3 79,394.7" fill="#0f7d86"/><text x="57.5" y="410.5" text-anchor="middle" font-size="12" fill="#0f1620">0,50 m</text></svg>
+
+a) Vilken frekvens uppfattar en stillastående lyssnare långt till höger om källan?<br>b) Vilken frekvens uppfattar en stillastående lyssnare långt till vänster om källan?<br>c) Åt vilket håll rör sig källan? Motivera.`,
+            answer: { value: 1.1, unit: 'kHz' },
+            delsvar: [
+                { del: 'a', value: 1.1, unit: 'kHz', etikett: 'till höger' },
+                { del: 'b', value: 680, unit: 'Hz', etikett: 'till vänster' },
+                { del: 'c' },
+            ],
+            solution: `Avståndet mellan två intilliggande vågtoppar är våglängden $\\lambda$. Vågtopparna rör sig genom luften med ljudets fart, så frekvensen som en stillastående lyssnare uppfattar fås ur
+
+$$ v = f \\cdot \\lambda \\quad\\Leftrightarrow\\quad f = \\dfrac{v}{\\lambda} $$
+
+**a)** Till höger är $\\lambda = 0{,}30\\ \\mathrm{m}$:
+
+$$ f = \\dfrac{340}{0{,}30} \\approx 1\\,133\\ \\mathrm{Hz} $$
+
+Måtten är givna med två värdesiffror, så svaret blir $1{,}1\\ \\mathrm{kHz}$.
+
+**Svar:** Lyssnaren till höger uppfattar ungefär $1{,}1\\ \\mathrm{kHz}$.
+
+**b)** Till vänster är $\\lambda = 0{,}50\\ \\mathrm{m}$:
+
+$$ f = \\dfrac{340}{0{,}50} = 680\\ \\mathrm{Hz} $$
+
+**Svar:** Lyssnaren till vänster uppfattar ungefär $680\\ \\mathrm{Hz}$.
+
+**c)** Varje cirkel har sin medelpunkt där källan var när vågtoppen sändes ut. Den största (äldsta) cirkeln har sin medelpunkt längst till vänster och den minsta (nyaste) längst till höger, så källan har flyttat sig åt höger. Det stämmer med att topparna ligger tätare till höger: källan följer efter de toppar den sänder ut åt det hållet, och avståndet mellan dem blir kortare.
+
+**Svar:** Källan rör sig åt höger, eftersom vågtopparna ligger tätare där och cirklarnas medelpunkter har flyttat sig åt höger.`,
+        },
+        {
+            level: 2,
+            question: `En fladdermus jagar med ultraljudspulser där frekvensen i varje puls sjunker från $80\\ \\mathrm{kHz}$ till $40\\ \\mathrm{kHz}$. Ljudets fart i luften är $340\\ \\mathrm{m/s}$, och ultraljud studsar bara tydligt mot föremål som är större än våglängden.<br>a) Mellan vilka våglängder varierar ljudet i en puls?<br>b) En mygga är ungefär $6\\ \\mathrm{mm}$ stor. Vilken är den lägsta frekvensen i pulsen som ger ett tydligt eko från myggan?`,
+            answer: { value: 57, unit: 'kHz' },
+            delsvar: [
+                { del: 'a', value: 4.3, unit: 'mm', etikett: 'kortaste våglängden' },
+                { del: 'a', value: 8.5, unit: 'mm', etikett: 'längsta våglängden' },
+                { del: 'b', value: 57, unit: 'kHz', etikett: 'lägsta frekvensen' },
+            ],
+            solution: `**a)** Våglängden fås ur $v = f \\cdot \\lambda$, alltså $\\lambda = \\dfrac{v}{f}$. Den högsta frekvensen ger den kortaste våglängden:
+
+$$ \\lambda_\\text{min} = \\dfrac{340}{80\\,000} = 0{,}00425\\ \\mathrm{m} \\approx 4{,}3\\ \\mathrm{mm} $$
+
+$$ \\lambda_\\text{max} = \\dfrac{340}{40\\,000} = 0{,}0085\\ \\mathrm{m} = 8{,}5\\ \\mathrm{mm} $$
+
+**Svar:** Våglängden varierar mellan ungefär $4{,}3\\ \\mathrm{mm}$ och $8{,}5\\ \\mathrm{mm}$.
+
+**b)** Ekot är tydligt när våglängden är kortare än myggan, $\\lambda < 6\\ \\mathrm{mm}$. Eftersom $f = \\dfrac{v}{\\lambda}$ motsvarar det en frekvens över
+
+$$ f = \\dfrac{340}{0{,}006} \\approx 56\\,667\\ \\mathrm{Hz} \\approx 57\\ \\mathrm{kHz} $$
+
+Under pulsens första del, från $80\\ \\mathrm{kHz}$ ned till ungefär $57\\ \\mathrm{kHz}$, är våglängden kortare än myggan. Resten av pulsen har för lång våglängd.
+
+**Svar:** Den lägsta frekvensen som ger ett tydligt eko är ungefär $57\\ \\mathrm{kHz}$.`,
+        },
+        {
+            level: 2,
+            question: `Ett vindkraftverk ger ifrån sig infraljud med frekvensen $4{,}0\\ \\mathrm{Hz}$, samtidigt som det hörs ett susande ljud med frekvensen $4\\,000\\ \\mathrm{Hz}$. Mellan vindkraftverket och en stuga står en lada som är $12\\ \\mathrm{m}$ bred. Ljudets fart i luften är $340\\ \\mathrm{m/s}$.<br>a) Beräkna våglängden för de två ljuden.<br>b) Ladan dämpar det susande ljudet tydligt i stugan, men infraljudet når stugan nästan odämpat. Förklara varför med hjälp av resultaten i a).`,
+            answer: { value: 85, unit: 'm' },
+            delsvar: [
+                { del: 'a', value: 85, unit: 'm', etikett: 'infraljudet' },
+                { del: 'a', value: 8.5, unit: 'cm', etikett: 'det susande ljudet' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Våglängden fås ur $v = f \\cdot \\lambda$, alltså $\\lambda = \\dfrac{v}{f}$.
+
+Infraljudet:
+
+$$ \\lambda = \\dfrac{340}{4{,}0} = 85\\ \\mathrm{m} $$
+
+Det susande ljudet:
+
+$$ \\lambda = \\dfrac{340}{4\\,000} = 0{,}085\\ \\mathrm{m} = 8{,}5\\ \\mathrm{cm} $$
+
+**Svar:** Infraljudet har våglängden $85\\ \\mathrm{m}$ och det susande ljudet $8{,}5\\ \\mathrm{cm}$.
+
+**b)** Ett ljud studsar mot ett föremål som är större än ljudets våglängd. Ladan, $12\\ \\mathrm{m}$ bred, är mer än hundra gånger större än det susande ljudets våglängd. Det ljudet studsar därför mot ladan, och bakom den bildas en ljudskugga där stugan ligger.
+
+Infraljudets våglängd, $85\\ \\mathrm{m}$, är ungefär sju gånger så stor som ladan. Ladan är för liten för att infraljudet ska studsa mot den, och vågen går runt ladan nästan som om den inte fanns.
+
+**Svar:** Ladan är mycket större än det susande ljudets våglängd men mycket mindre än infraljudets, så bara det susande ljudet studsar mot ladan och lämnar en ljudskugga vid stugan.`,
+        },
+        {
+            level: 2,
+            question: `Ett tåg kör med farten $v_\\mathrm{k} = 35{,}0\\ \\mathrm{m/s}$ rakt mot en perrong där en resenär står still. Tågets signalhorn har frekvensen $f_0 = 520\\ \\mathrm{Hz}$, och ljudets fart i luften är $v = 340\\ \\mathrm{m/s}$. Det blåser inte.<br>a) Visa att resenären uppfattar frekvensen $f = f_0 \\cdot \\dfrac{v}{v - v_\\mathrm{k}}$ medan tåget närmar sig.<br>b) Beräkna frekvensen som resenären hör medan tåget närmar sig och medan det åker bort från perrongen.<br>c) Hur mycket sjunker tonen när tåget passerar?`,
+            answer: { value: 108, unit: 'Hz' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 580, unit: 'Hz', etikett: 'tåget närmar sig' },
+                { del: 'b', value: 471, unit: 'Hz', etikett: 'tåget åker bort' },
+                { del: 'c', value: 108, unit: 'Hz', etikett: 'sänkningen' },
+            ],
+            solution: `**a)** Hornet sänder ut en vågtopp varje periodtid $T_0 = \\dfrac{1}{f_0}$. När en vågtopp har sänts ut rör den sig framåt genom luften med farten $v$. Under en periodtid hinner den sträckan $v \\cdot T_0$.
+
+Under samma tid kör tåget sträckan $v_\\mathrm{k} \\cdot T_0$ efter vågtoppen innan nästa topp sänds ut. Avståndet mellan topparna framför tåget, alltså våglängden där, blir därför
+
+$$ \\lambda_\\text{fram} = v \\cdot T_0 - v_\\mathrm{k} \\cdot T_0 = \\dfrac{v - v_\\mathrm{k}}{f_0} \\tag{1} $$
+
+Topparna når resenären med ljudets fart $v$, så resenären uppfattar frekvensen
+
+$$ f = \\dfrac{v}{\\lambda_\\text{fram}} $$
+
+Med $\\lambda_\\text{fram}$ från (1), $\\lambda_\\text{fram} = \\dfrac{v - v_\\mathrm{k}}{f_0}$, insatt ger det
+
+$$ f = \\dfrac{v}{\\dfrac{v - v_\\mathrm{k}}{f_0}} = f_0 \\cdot \\dfrac{v}{v - v_\\mathrm{k}} $$
+
+vilket skulle visas.
+
+**b)** När tåget har passerat kör det bort från topparna som går bakåt mot resenären. Då läggs tågets sträcka till i stället för att dras bort: $\\lambda_\\text{bak} = \\dfrac{v + v_\\mathrm{k}}{f_0}$, och
+
+$$ f_\\text{bak} = f_0 \\cdot \\dfrac{v}{v + v_\\mathrm{k}} $$
+
+$$
+\\left[ \\begin{array}{l}
+f_0 = 520\\ \\mathrm{Hz} \\\\
+v = 340\\ \\mathrm{m/s} \\\\
+v_\\mathrm{k} = 35{,}0\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$ f_\\text{fram} = 520 \\cdot \\dfrac{340}{340 - 35{,}0} = 520 \\cdot \\dfrac{340}{305} \\approx 579{,}67\\ \\mathrm{Hz} $$
+
+$$ f_\\text{bak} = 520 \\cdot \\dfrac{340}{340 + 35{,}0} = 520 \\cdot \\dfrac{340}{375} \\approx 471{,}47\\ \\mathrm{Hz} $$
+
+Rimlighet: tåget kör ungefär en tiondel av ljudets fart, och tonen ändras med ungefär en tiondel åt vardera hållet. Det stämmer.
+
+**Svar:** Resenären hör ungefär $580\\ \\mathrm{Hz}$ medan tåget närmar sig och ungefär $471\\ \\mathrm{Hz}$ när det åker bort.
+
+**c)** Med de oavrundade värdena:
+
+$$ \\Delta f = 579{,}67 - 471{,}47 = 108{,}20\\ \\mathrm{Hz} $$
+
+**Svar:** Tonen sjunker med ungefär $108\\ \\mathrm{Hz}$ när tåget passerar.`,
+        },
+        {
+            level: 3,
+            question: `En lärare spelar in ljudet från en motorcykel med en mobiltelefon vid vägkanten. När motorcykeln närmar sig visar en app att motorljudet har frekvensen $1\\,090\\ \\mathrm{Hz}$, och när den har passerat är frekvensen $920\\ \\mathrm{Hz}$. Motorcykeln håller konstant fart, och motorljudet har konstant frekvens. För en ljudkälla som rör sig med farten $v_\\mathrm{k}$ mot respektive från en stillastående lyssnare gäller
+
+$$ f_\\text{mot} = f_0 \\cdot \\dfrac{v}{v - v_\\mathrm{k}} \\qquad \\text{och} \\qquad f_\\text{från} = f_0 \\cdot \\dfrac{v}{v + v_\\mathrm{k}} $$
+
+där $f_0$ är källans frekvens och $v = 340\\ \\mathrm{m/s}$ är ljudets fart.<br>a) Bestäm motorcykelns fart. Ange svaret i km/h.<br>b) Bestäm frekvensen hos motorljudet som föraren själv hör.<br>c) Visa att svaret i b) inte beror på ljudets fart.`,
+            answer: { value: 104, unit: 'km/h' },
+            delsvar: [
+                { del: 'a', value: 104, unit: 'km/h', etikett: 'farten' },
+                { del: 'b', value: 998, unit: 'Hz', etikett: '$f_0$' },
+                { del: 'c' },
+            ],
+            solution: `Ekvationerna innehåller två obekanta, $f_0$ och $v_\\mathrm{k}$, och två mätvärden. De bildar ett ekvationssystem:
+
+$$
+\\begin{cases}
+f_\\text{mot} = f_0 \\cdot \\dfrac{v}{v - v_\\mathrm{k}} & (1) \\\\
+f_\\text{från} = f_0 \\cdot \\dfrac{v}{v + v_\\mathrm{k}} & (2)
+\\end{cases}
+$$
+
+**a)** Division av ekvation (1) med ekvation (2) tar bort både $f_0$ och $v$ i täljarna:
+
+$$ \\dfrac{f_\\text{mot}}{f_\\text{från}} = \\dfrac{v + v_\\mathrm{k}}{v - v_\\mathrm{k}} $$
+
+Multiplikation med $f_\\text{från} \\cdot (v - v_\\mathrm{k})$ i båda led ger
+
+$$ f_\\text{mot} \\cdot (v - v_\\mathrm{k}) = f_\\text{från} \\cdot (v + v_\\mathrm{k}) $$
+
+Termerna med $v_\\mathrm{k}$ samlas på ena sidan:
+
+$$ v_\\mathrm{k} \\cdot (f_\\text{mot} + f_\\text{från}) = v \\cdot (f_\\text{mot} - f_\\text{från}) $$
+
+$$ v_\\mathrm{k} = v \\cdot \\dfrac{f_\\text{mot} - f_\\text{från}}{f_\\text{mot} + f_\\text{från}} \\tag{3} $$
+
+$$
+\\left[ \\begin{array}{l}
+f_\\text{mot} = 1\\,090\\ \\mathrm{Hz} \\\\
+f_\\text{från} = 920\\ \\mathrm{Hz} \\\\
+v = 340\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$ v_\\mathrm{k} = 340 \\cdot \\dfrac{1\\,090 - 920}{1\\,090 + 920} = 340 \\cdot \\dfrac{170}{2\\,010} \\approx 28{,}756\\ \\mathrm{m/s} $$
+
+$$ 28{,}756\\ \\mathrm{m/s} = 28{,}756 \\cdot 3{,}6\\ \\mathrm{km/h} \\approx 103{,}5\\ \\mathrm{km/h} $$
+
+**Svar:** Motorcykeln kör med ungefär $104\\ \\mathrm{km/h}$.
+
+**b)** Föraren rör sig tillsammans med motorn och hör därför källans egen frekvens $f_0$. Ekvation (1) löst för $f_0$:
+
+$$ f_0 = f_\\text{mot} \\cdot \\dfrac{v - v_\\mathrm{k}}{v} = 1\\,090 \\cdot \\dfrac{340 - 28{,}756}{340} \\approx 997{,}8\\ \\mathrm{Hz} $$
+
+Rimlighet: $f_0$ ska ligga mellan de två uppmätta frekvenserna, och det gör den.
+
+**Svar:** Föraren hör ungefär $998\\ \\mathrm{Hz}$.
+
+**c)** Ur (3), $v_\\mathrm{k} = v \\cdot \\dfrac{f_\\text{mot} - f_\\text{från}}{f_\\text{mot} + f_\\text{från}}$, fås
+
+$$ v - v_\\mathrm{k} = v \\cdot \\left( 1 - \\dfrac{f_\\text{mot} - f_\\text{från}}{f_\\text{mot} + f_\\text{från}} \\right) = v \\cdot \\dfrac{2 f_\\text{från}}{f_\\text{mot} + f_\\text{från}} $$
+
+Detta insatt i $f_0 = f_\\text{mot} \\cdot \\dfrac{v - v_\\mathrm{k}}{v}$ ger
+
+$$ f_0 = f_\\text{mot} \\cdot \\dfrac{2 f_\\text{från}}{f_\\text{mot} + f_\\text{från}} = \\dfrac{2 \\cdot f_\\text{mot} \\cdot f_\\text{från}}{f_\\text{mot} + f_\\text{från}} $$
+
+Ljudets fart $v$ har strukits, så $f_0$ beror bara på de två uppmätta frekvenserna. Kontroll: $\\dfrac{2 \\cdot 1\\,090 \\cdot 920}{2\\,010} \\approx 997{,}8\\ \\mathrm{Hz}$, samma som i b).
+
+**Svar:** $f_0 = \\dfrac{2 \\cdot f_\\text{mot} \\cdot f_\\text{från}}{f_\\text{mot} + f_\\text{från}}$, där ljudets fart inte ingår.`,
+        },
+        {
+            level: 3,
+            question: `Ett jetplan flyger vågrätt med farten $u$, som är $1{,}60$ gånger ljudets fart, på höjden $h = 10{,}0\\ \\mathrm{km}$. Räkna med att ljudets fart är $v = 300\\ \\mathrm{m/s}$ på hela vägen ned till marken. Figuren visar läget i det ögonblick då en person i punkten P på marken hör ljudbangen.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 266" width="608" height="337" role="img" aria-label="Ett jetplan flyger vågrätt åt höger på höjden h med farten u. Bakom planet går Mach-konens kanter snett bakåt från nosen, med halva toppvinkeln alfa mot flygbanan. Konens nedre kant når marken i punkten P, där en observatör står." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="0" y="230" width="480" height="12" fill="#e7e1d3"/><line x1="0" y1="230" x2="480" y2="230" stroke="#0f1620" stroke-width="1.6"/><line x1="10" y1="60" x2="328" y2="60" stroke="#6b7280" stroke-width="1" stroke-dasharray="5 4"/><line x1="402" y1="60" x2="334.6" y2="6" stroke="#c0392b" stroke-width="2"/><line x1="402" y1="60" x2="189.7" y2="230" stroke="#c0392b" stroke-width="2"/><text x="326.6" y="20" text-anchor="end" font-size="13" fill="#c0392b">Mach-konen</text><g fill="#5b6573" stroke="#0f1620" stroke-width="1"><path d="M 402,60 L 390,56 L 338,56 L 332,60 L 338,64 L 390,64 Z"/><path d="M 374,61 L 350,75 L 344,75 L 352,61 Z"/><path d="M 344,57 L 332,43 L 328,43 L 334,57 Z"/></g><path d="M 392,57 L 380,57 L 382,54 Z" fill="#bcd4ec" stroke="#0f1620" stroke-width="0.8"/><line x1="410" y1="60" x2="448" y2="60" stroke="#2563c9" stroke-width="2.6" stroke-linecap="butt"/><polygon points="448,55 458,60 448,65" fill="#2563c9"/><text x="462" y="65" font-size="15" fill="#2563c9"><tspan font-style="italic">u</tspan></text><path d="M 310,60 A 92 92 0 0 0 330.2,117.5" fill="none" stroke="#0f1620" stroke-width="1.3"/><text x="303.9" y="99.4" text-anchor="middle" font-size="15" fill="#0f1620"><tspan font-style="italic">α</tspan></text><line x1="402" y1="78" x2="402" y2="230" stroke="#6b7280" stroke-width="1" stroke-dasharray="4 3"/><line x1="424" y1="72" x2="424" y2="224" stroke="#0f7d86" stroke-width="1.4" stroke-linecap="butt"/><polygon points="424,66 420.8,72 427.2,72" fill="#0f7d86"/><polygon points="424,230 420.8,224 427.2,224" fill="#0f7d86"/><line x1="406" y1="60" x2="432" y2="60" stroke="none"/><text x="432" y="150" font-size="15" fill="#0f1620"><tspan font-style="italic">h</tspan></text><circle cx="189.7" cy="230" r="4.5" fill="#0f1620"/><text x="189.7" y="260" text-anchor="middle" font-size="14" fill="#0f1620">P</text></svg>
+
+a) Visa att halva toppvinkeln $\\alpha$ i Mach-konen uppfyller $\\sin \\alpha = \\dfrac{v}{u}$.<br>b) Hur långt har planet hunnit förbi personen, räknat längs marken, när personen hör bangen? Ange svaret i km.<br>c) Hur lång tid efter att planet var rakt ovanför personen hörs bangen?`,
+            answer: { value: 12.5, unit: 'km' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 12.5, unit: 'km', etikett: 'avståndet' },
+                { del: 'c', value: 26.0, unit: 's', etikett: 'tiden' },
+            ],
+            solution: `**a)** Anta att planet befinner sig i punkten A vid tiden $0$ och i punkten B vid tiden $t$. Sträckan mellan punkterna är $AB = u \\cdot t$.
+
+Ljudet som sändes ut i A har under tiden $t$ spridit sig som ett klot med radien $v \\cdot t$. Ljud som sändes ut senare, närmare B, har hunnit kortare och bildar mindre klot. Alla klot tangerar en kon med spetsen i B, och det är där ljudvågorna förstärker varandra: Mach-konen.
+
+Radien från A till punkten där konens kant tangerar klotet är vinkelrät mot kanten. Triangeln mellan A, B och tangeringspunkten är därför rätvinklig, med hypotenusan $AB = u \\cdot t$ och den motstående kateten $v \\cdot t$ till vinkeln $\\alpha$ vid B:
+
+$$ \\sin \\alpha = \\dfrac{v \\cdot t}{u \\cdot t} = \\dfrac{v}{u} $$
+
+vilket skulle visas. Eftersom $u > v$ är kvoten mindre än 1, så konen finns bara vid överljudsfart.
+
+**b)** Bangen når P när konens nedre kant passerar P. I figuren bildar planet, P och punkten rakt under planet en rätvinklig triangel. Vinkeln mellan konens kant och den vågräta flygbanan är $\\alpha$, och vid planet är höjden $h$ motstående katet och avståndet $d$ längs marken närliggande katet:
+
+$$ \\tan \\alpha = \\dfrac{h}{d} \\quad\\Leftrightarrow\\quad d = \\dfrac{h}{\\tan \\alpha} $$
+
+Ur a):
+
+$$ \\sin \\alpha = \\dfrac{v}{u} = \\dfrac{1}{1{,}60} = 0{,}625 \\quad\\Rightarrow\\quad \\alpha \\approx 38{,}68^\\circ $$
+
+$$ d = \\dfrac{10{,}0}{\\tan 38{,}68^\\circ} \\approx \\dfrac{10{,}0}{0{,}8006} \\approx 12{,}49\\ \\mathrm{km} $$
+
+**Svar:** Planet har hunnit ungefär $12{,}5\\ \\mathrm{km}$ förbi personen.
+
+**c)** Planet flyger sträckan $d$ från läget rakt ovanför P till läget i figuren med farten
+
+$$ u = 1{,}60 \\cdot 300 = 480\\ \\mathrm{m/s} $$
+
+$$ t = \\dfrac{d}{u} = \\dfrac{12\\,490}{480} \\approx 26{,}0\\ \\mathrm{s} $$
+
+Rimlighet: bangen hörs alltså först när planet sedan länge har passerat. Det stämmer med erfarenheten att man ser ett överljudsplan innan man hör det.
+
+**Svar:** Bangen hörs ungefär $26{,}0\\ \\mathrm{s}$ efter att planet var rakt ovanför personen.`,
+        },
+        {
+            level: 3,
+            question: `En fladdermus flyger med farten $8{,}0\\ \\mathrm{m/s}$ rakt mot en klippvägg. Den skickar ut en kort ultraljudspuls och hör ekot från väggen $0{,}120\\ \\mathrm{s}$ senare. Ljudets fart i luften är $340\\ \\mathrm{m/s}$.<br>a) Hur långt från väggen var fladdermusen när den skickade ut pulsen?<br>b) Hur långt från väggen är fladdermusen när ekot når den?<br>c) En elev räknar som om fladdermusen hängde still. Hur stort blir felet i elevens svar på a), och blir elevens svar för stort eller för litet?`,
+            answer: { value: 21, unit: 'm' },
+            delsvar: [
+                { del: 'a', value: 21, unit: 'm', etikett: 'avståndet vid pulsen' },
+                { del: 'b', value: 20, unit: 'm', etikett: 'avståndet vid ekot' },
+                { del: 'c', value: 0.5, unit: 'm', etikett: 'felet', tol: 0.1 },
+            ],
+            solution: `Låt $d$ vara avståndet till väggen när pulsen skickas ut, $v = 340\\ \\mathrm{m/s}$ ljudets fart, $v_\\mathrm{f} = 8{,}0\\ \\mathrm{m/s}$ fladdermusens fart och $t = 0{,}120\\ \\mathrm{s}$ tiden till ekot.
+
+**a)** Ljudet går först sträckan $d$ fram till väggen. Under tiden $t$ har fladdermusen flugit sträckan $v_\\mathrm{f} \\cdot t$ mot väggen, så ekot behöver bara gå tillbaka sträckan $d - v_\\mathrm{f} \\cdot t$ för att nå den. Hela sträckan ljudet går på tiden $t$ är
+
+$$ d + (d - v_\\mathrm{f} \\cdot t) = v \\cdot t $$
+
+$$ 2d = v \\cdot t + v_\\mathrm{f} \\cdot t $$
+
+$$ d = \\dfrac{(v + v_\\mathrm{f}) \\cdot t}{2} \\tag{1} $$
+
+$$
+\\left[ \\begin{array}{l}
+v = 340\\ \\mathrm{m/s} \\\\
+v_\\mathrm{f} = 8{,}0\\ \\mathrm{m/s} \\\\
+t = 0{,}120\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ d = \\dfrac{(340 + 8{,}0) \\cdot 0{,}120}{2} = 20{,}88\\ \\mathrm{m} $$
+
+**Svar:** Fladdermusen var ungefär $21\\ \\mathrm{m}$ från väggen.
+
+**b)** Under tiden $t$ har fladdermusen flugit $v_\\mathrm{f} \\cdot t = 8{,}0 \\cdot 0{,}120 = 0{,}96\\ \\mathrm{m}$ närmare:
+
+$$ d - v_\\mathrm{f} \\cdot t = 20{,}88 - 0{,}96 = 19{,}92\\ \\mathrm{m} $$
+
+**Svar:** Fladdermusen är ungefär $20\\ \\mathrm{m}$ från väggen när ekot når den.
+
+**c)** Om fladdermusen hängde still vore $v_\\mathrm{f} = 0$ i (1), $d = \\dfrac{(v + v_\\mathrm{f}) \\cdot t}{2}$:
+
+$$ d_\\text{elev} = \\dfrac{340 \\cdot 0{,}120}{2} = 20{,}4\\ \\mathrm{m} $$
+
+$$ d - d_\\text{elev} = 20{,}88 - 20{,}4 = 0{,}48\\ \\mathrm{m} $$
+
+Eleven missar att fladdermusen flyger mot ekot och att ljudets väg tillbaka därför är kortare. Ekot kommer tidigare än om fladdermusen hängt still, och elevens avstånd blir för litet. Felet är litet, drygt $2\\ \\%$, eftersom fladdermusens fart bara är en liten del av ljudets fart.
+
+**Svar:** Elevens svar blir ungefär $0{,}5\\ \\mathrm{m}$ för litet.`,
+        },
+        {
+            level: 3,
+            question: `En järnvägsövergång har en klocka som ringer med frekvensen $f_0 = 800\\ \\mathrm{Hz}$. Ljudets fart i luften är $v = 340\\ \\mathrm{m/s}$, och det blåser inte.<br>a) En resenär sitter i ett tåg som kör med farten $30{,}0\\ \\mathrm{m/s}$ rakt mot klockan. Vilken frekvens hör resenären?<br>b) Anta i stället att klockan sitter på tåget och närmar sig en stillastående lyssnare med samma fart, $30{,}0\\ \\mathrm{m/s}$. Vilken frekvens hör lyssnaren då?<br>c) Den relativa rörelsen mellan klocka och lyssnare är densamma i a) och b). Förklara varför frekvenserna ändå skiljer sig åt.`,
+            answer: { value: 871, unit: 'Hz' },
+            delsvar: [
+                { del: 'a', value: 871, unit: 'Hz', etikett: 'resenären' },
+                { del: 'b', value: 877, unit: 'Hz', etikett: 'lyssnaren' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Klockan står still i luften, så vågtopparna ligger med den vanliga våglängden
+
+$$ \\lambda_0 = \\dfrac{v}{f_0} = \\dfrac{340}{800} = 0{,}425\\ \\mathrm{m} $$
+
+Topparna rör sig mot resenären med farten $v$, och resenären rör sig mot topparna med farten $v_\\mathrm{l} = 30{,}0\\ \\mathrm{m/s}$. Topparna passerar alltså resenären med farten $v + v_\\mathrm{l}$, och antalet toppar per sekund blir
+
+$$ f = \\dfrac{v + v_\\mathrm{l}}{\\lambda_0} = f_0 \\cdot \\dfrac{v + v_\\mathrm{l}}{v} $$
+
+$$ f = 800 \\cdot \\dfrac{340 + 30{,}0}{340} = 800 \\cdot \\dfrac{370}{340} \\approx 870{,}6\\ \\mathrm{Hz} $$
+
+**Svar:** Resenären hör ungefär $871\\ \\mathrm{Hz}$.
+
+**b)** Nu rör sig källan. Under en periodtid $T_0 = \\dfrac{1}{f_0}$ går en vågtopp sträckan $v \\cdot T_0$ framåt, men klockan följer efter med sträckan $v_\\mathrm{k} \\cdot T_0$ innan nästa topp sänds ut. Våglängden framför tåget blir
+
+$$ \\lambda = \\dfrac{v - v_\\mathrm{k}}{f_0} = \\dfrac{340 - 30{,}0}{800} = 0{,}3875\\ \\mathrm{m} $$
+
+Lyssnaren står still, så topparna passerar med farten $v$:
+
+$$ f = \\dfrac{v}{\\lambda} = \\dfrac{340}{0{,}3875} \\approx 877{,}4\\ \\mathrm{Hz} $$
+
+**Svar:** Lyssnaren hör ungefär $877\\ \\mathrm{Hz}$.
+
+**c)** Ljudet är en våg i luften och rör sig med farten $v$ i förhållande till luften, inte i förhållande till klockan eller lyssnaren. Därför spelar det roll vem av dem som rör sig genom luften.
+
+- När lyssnaren rör sig (a) är våglängden oförändrad, $0{,}425\\ \\mathrm{m}$. Lyssnaren möter bara topparna snabbare, och frekvensen ökar med faktorn $\\dfrac{370}{340} \\approx 1{,}088$.
+- När klockan rör sig (b) trycks vågtopparna ihop till $0{,}3875\\ \\mathrm{m}$, medan de når lyssnaren med den vanliga farten. Frekvensen ökar med faktorn $\\dfrac{340}{310} \\approx 1{,}097$.
+
+De två faktorerna är nästan lika när farten är liten jämfört med ljudets fart, men skillnaden växer när farten närmar sig $v$. I b) går frekvensen mot oändligheten när klockan närmar sig ljudets fart, eftersom topparna då hamnar ovanpå varandra. I a) blir frekvensen bara dubbelt så hög.
+
+**Svar:** Ljudets fart gäller i förhållande till luften. Rör sig lyssnaren är våglängden densamma men topparna möts snabbare, och rör sig källan trycks våglängden ihop, så ändringen blir inte densamma.`,
+        },
+        {
+            level: 3,
+            question: `Hästskonäsor är fladdermöss som hör allra bäst vid en bestämd frekvens, ungefär $83{,}0\\ \\mathrm{kHz}$. När de flyger mot ett hinder ändrar de frekvensen på sitt eget läte så att ekot alltid kommer tillbaka med just den frekvensen. För en källa som rör sig med farten $v_\\mathrm{k}$ mot en stillastående lyssnare, respektive för en lyssnare som rör sig med farten $v_\\mathrm{l}$ mot en stillastående källa, gäller
+
+$$ f = f_0 \\cdot \\dfrac{v}{v - v_\\mathrm{k}} \\qquad \\text{respektive} \\qquad f = f_0 \\cdot \\dfrac{v + v_\\mathrm{l}}{v} $$
+
+där $f_0$ är frekvensen som källan sänder ut och $v = 340\\ \\mathrm{m/s}$ är ljudets fart.<br>a) En hästskonäsa flyger med farten $8{,}0\\ \\mathrm{m/s}$ rakt mot en vägg. Vilken frekvens ska den sända ut för att ekot ska ha frekvensen $83{,}0\\ \\mathrm{kHz}$?<br>b) Fladdermusen saktar in. Ska den då höja eller sänka frekvensen på sitt läte? Motivera.`,
+            answer: { value: 79.2, unit: 'kHz' },
+            delsvar: [
+                { del: 'a', value: 79.2, unit: 'kHz', etikett: 'utsänd frekvens' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Ljudet ändrar frekvens två gånger på vägen, och de två stegen måste behandlas var för sig.
+
+*Steg 1, fladdermusen till väggen.* Väggen står still och tar emot ljud från en källa som rör sig mot den med farten $v_\\mathrm{f} = 8{,}0\\ \\mathrm{m/s}$:
+
+$$ f_\\text{vägg} = f_0 \\cdot \\dfrac{v}{v - v_\\mathrm{f}} \\tag{1} $$
+
+*Steg 2, väggen tillbaka till fladdermusen.* Väggen kastar tillbaka ljudet med frekvensen $f_\\text{vägg}$ och fungerar då som en stillastående källa. Fladdermusen är nu en lyssnare som rör sig mot källan:
+
+$$ f_\\text{eko} = f_\\text{vägg} \\cdot \\dfrac{v + v_\\mathrm{f}}{v} \\tag{2} $$
+
+$f_\\text{vägg}$ från (1), $f_\\text{vägg} = f_0 \\cdot \\dfrac{v}{v - v_\\mathrm{f}}$, insatt i (2) ger
+
+$$ f_\\text{eko} = f_0 \\cdot \\dfrac{v}{v - v_\\mathrm{f}} \\cdot \\dfrac{v + v_\\mathrm{f}}{v} = f_0 \\cdot \\dfrac{v + v_\\mathrm{f}}{v - v_\\mathrm{f}} $$
+
+$$ f_0 = f_\\text{eko} \\cdot \\dfrac{v - v_\\mathrm{f}}{v + v_\\mathrm{f}} $$
+
+$$
+\\left[ \\begin{array}{l}
+f_\\text{eko} = 83{,}0\\ \\mathrm{kHz} \\\\
+v = 340\\ \\mathrm{m/s} \\\\
+v_\\mathrm{f} = 8{,}0\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$ f_0 = 83{,}0 \\cdot \\dfrac{340 - 8{,}0}{340 + 8{,}0} = 83{,}0 \\cdot \\dfrac{332}{348} \\approx 79{,}18\\ \\mathrm{kHz} $$
+
+Rimlighet: ekot ska bli högre än lätet eftersom fladdermusen närmar sig väggen. Ändringen är $83{,}0 - 79{,}18 \\approx 3{,}8\\ \\mathrm{kHz}$, knappt $5\\ \\%$, vilket är ungefär dubbla kvoten $\\dfrac{v_\\mathrm{f}}{v} \\approx 2{,}4\\ \\%$. Det stämmer med att frekvensen ändras två gånger.
+
+**Svar:** Fladdermusen ska sända ut ungefär $79{,}2\\ \\mathrm{kHz}$.
+
+**b)** Kvoten $\\dfrac{v + v_\\mathrm{f}}{v - v_\\mathrm{f}}$ är större än 1 och blir mindre när $v_\\mathrm{f}$ minskar. När fladdermusen saktar in höjs ekot alltså mindre än förut. För att ekot fortfarande ska få frekvensen $83{,}0\\ \\mathrm{kHz}$ måste fladdermusen sända ut en frekvens som ligger närmare $83{,}0\\ \\mathrm{kHz}$. Hänger den helt still sänder den ut just $83{,}0\\ \\mathrm{kHz}$.
+
+**Svar:** Den ska höja frekvensen, eftersom dopplereffekten höjer ekot mindre när farten minskar.`,
+        },
+        {
+            level: 3,
+            question: `En ambulans kör med farten $v_\\mathrm{k} = 25{,}0\\ \\mathrm{m/s}$ längs en rak väg, med sirenen på frekvensen $f_0 = 960\\ \\mathrm{Hz}$. En person står i punkten P på ett fält, $30{,}0\\ \\mathrm{m}$ från vägen. Punkten C är den punkt på vägen som ligger närmast P. Ljudets fart är $v = 340\\ \\mathrm{m/s}$, och det blåser inte. För en ljudkälla som rör sig rakt mot en stillastående lyssnare gäller
+
+$$ f = f_0 \\cdot \\dfrac{v}{v - v_\\mathrm{k}} $$
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="560" height="336" role="img" aria-label="Sett uppifrån: en rak väg med två körfält. En ambulans i punkten A kör åt höger i det nedre körfältet. Punkten C på vägen ligger 40,0 meter längre fram. Punkten P ligger på ett fält 30,0 meter från vägen, rakt nedanför C. En streckad linje går från ambulansen till P." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><rect x="0" y="40" width="400" height="56" fill="#dedbd3"/><line x1="0" y1="40" x2="400" y2="40" stroke="#6b6558" stroke-width="1.6"/><line x1="0" y1="96" x2="400" y2="96" stroke="#6b6558" stroke-width="1.6"/><line x1="0" y1="68" x2="400" y2="68" stroke="#ffffff" stroke-width="2" stroke-dasharray="14 10"/><line x1="122" y1="90" x2="290" y2="216" stroke="#4b5563" stroke-width="1.3" stroke-dasharray="5 4"/><line x1="290" y1="96" x2="290" y2="216" stroke="#9aa0a6" stroke-width="1" stroke-dasharray="4 3"/><path d="M 290,104 L 298,104 L 298,96" fill="none" stroke="#4b5563" stroke-width="1"/><g stroke="#0f1620" stroke-width="1.2"><rect x="87" y="74" width="45" height="16" rx="2.5" fill="#f4f1e8"/><rect x="119" y="75.5" width="6" height="13" rx="1.5" fill="#bcd4ec" stroke-width="0.9"/><path d="M 125,74.5 L 129,74.5 Q 132,75 132,78 L 132,86 Q 132,89 129,89.5 L 125,89.5 Z" fill="#e9e4d6" stroke-width="0.9"/></g><rect x="88" y="80.5" width="30" height="3" fill="#c0392b"/><rect x="107" y="75" width="7" height="14" rx="1.5" fill="#2563c9" stroke="#0f1620" stroke-width="0.8"/><circle cx="110" cy="82" r="2" fill="#0f1620"/><line x1="132" y1="82" x2="165" y2="82" stroke="#c0392b" stroke-width="2.6" stroke-linecap="butt"/><polygon points="165,77 175,82 165,87" fill="#c0392b"/><text x="179" y="87" font-size="14" fill="#c0392b"><tspan font-style="italic">v</tspan><tspan font-size="10" dy="3">k</tspan></text><text x="100" y="114" text-anchor="end" font-size="14" fill="#0f1620">A</text><circle cx="290" cy="82" r="3" fill="#0f1620"/><text x="303" y="87" font-size="14" fill="#0f1620">C</text><line x1="110" y1="72" x2="110" y2="20" stroke="#9aa0a6" stroke-width="1" stroke-dasharray="4 3"/><line x1="290" y1="78" x2="290" y2="20" stroke="#9aa0a6" stroke-width="1" stroke-dasharray="4 3"/><line x1="116" y1="26" x2="284" y2="26" stroke="#0f7d86" stroke-width="1.4" stroke-linecap="butt"/><polygon points="110,26 116,22.8 116,29.2" fill="#0f7d86"/><polygon points="290,26 284,22.8 284,29.2" fill="#0f7d86"/><text x="200" y="18" text-anchor="middle" font-size="13" fill="#0f1620">40,0 m</text><line x1="296" y1="216" x2="340" y2="216" stroke="#9aa0a6" stroke-width="1" stroke-dasharray="4 3"/><line x1="340" y1="102" x2="340" y2="210" stroke="#0f7d86" stroke-width="1.4" stroke-linecap="butt"/><polygon points="340,96 336.8,102 343.2,102" fill="#0f7d86"/><polygon points="340,216 336.8,210 343.2,210" fill="#0f7d86"/><text x="348" y="160" font-size="13" fill="#0f1620">30,0 m</text><circle cx="290" cy="216" r="4.5" fill="#0f1620"/><text x="290" y="235" text-anchor="middle" font-size="14" fill="#0f1620">P</text></svg>
+
+a) Ambulansen befinner sig i punkten A, $40{,}0\\ \\mathrm{m}$ före C, när sirenen sänder ut ett visst ljud. Vilken frekvens har det ljudet när P hör det?<br>b) Vilken frekvens har ljudet som sänds ut när ambulansen passerar C?<br>c) P hör sirenens ton sjunka medan ambulansen passerar. Förklara varför tonen sjunker gradvis och inte i ett enda språng, och hur förloppet ändras om P står närmare vägen.`,
+            answer: { value: 1.02, unit: 'kHz' },
+            delsvar: [
+                { del: 'a', value: 1.02, unit: 'kHz', etikett: 'frekvensen från A' },
+                { del: 'b', value: 960, unit: 'Hz', etikett: 'frekvensen från C' },
+                { del: 'c' },
+            ],
+            solution: `Sambandet i uppgiften gäller när källan rör sig rakt mot lyssnaren. Här rör sig ambulansen snett i förhållande till linjen mot P, och det är bara rörelsen längs den linjen som trycker ihop vågtopparna.
+
+Under en periodtid $T_0 = \\dfrac{1}{f_0} \\approx 1\\ \\mathrm{ms}$ hinner ambulansen bara $v_\\mathrm{k} \\cdot T_0 \\approx 2{,}6\\ \\mathrm{cm}$, så riktningen mot P ändras inte märkbart mellan två vågtoppar. Av förflyttningen längs vägen är det bara delen längs linjen mot P som minskar avståndet till P. Om vinkeln mellan vägen och linjen mot P är $\\alpha$ är farten mot P komposanten
+
+$$ v_\\mathrm{r} = v_\\mathrm{k} \\cdot \\cos \\alpha \\tag{1} $$
+
+Komposanten vinkelrätt mot linjen ändrar inte avståndet och påverkar inte våglängden mot P. Sambandet i uppgiften gäller därför med $v_\\mathrm{r}$ i stället för $v_\\mathrm{k}$:
+
+$$ f = f_0 \\cdot \\dfrac{v}{v - v_\\mathrm{r}} \\tag{2} $$
+
+**a)** A, C och P bildar en rätvinklig triangel med den räta vinkeln vid C. Hypotenusan, avståndet från A till P, fås med Pythagoras sats:
+
+$$ AP = \\sqrt{40{,}0^2 + 30{,}0^2} = \\sqrt{2\\,500} = 50{,}0\\ \\mathrm{m} $$
+
+Vid A är sträckan AC närliggande katet till vinkeln $\\alpha$:
+
+$$ \\cos \\alpha = \\dfrac{AC}{AP} = \\dfrac{40{,}0}{50{,}0} = 0{,}800 $$
+
+Detta i ekvation (1), $v_\\mathrm{r} = v_\\mathrm{k} \\cdot \\cos \\alpha$, ger
+
+$$ v_\\mathrm{r} = 25{,}0 \\cdot 0{,}800 = 20{,}0\\ \\mathrm{m/s} $$
+
+Detta i ekvation (2), $f = f_0 \\cdot \\dfrac{v}{v - v_\\mathrm{r}}$, ger
+
+$$ f = 960 \\cdot \\dfrac{340}{340 - 20{,}0} = 960 \\cdot \\dfrac{340}{320} = 1\\,020\\ \\mathrm{Hz} $$
+
+Rimlighet: frekvensen ska ligga under $960 \\cdot \\dfrac{340}{340 - 25{,}0} \\approx 1\\,036\\ \\mathrm{Hz}$, som P hade hört om ambulansen kört rakt mot P. Det gör den.
+
+**Svar:** P hör ljudet från A med frekvensen ungefär $1{,}02\\ \\mathrm{kHz}$.
+
+**b)** I C går vägen vinkelrätt mot linjen till P, så $\\alpha = 90^\\circ$ och $\\cos \\alpha = 0$. Ekvation (1) ger $v_\\mathrm{r} = 0$, och ekvation (2) ger då $f = f_0$.
+
+**Svar:** Ljudet från C har sirenens egen frekvens, $960\\ \\mathrm{Hz}$.
+
+**c)** Långt före C är linjen mot P nästan parallell med vägen, $\\cos \\alpha \\approx 1$, och P hör nästan $f_0 \\cdot \\dfrac{v}{v - v_\\mathrm{k}}$. När ambulansen närmar sig C växer $\\alpha$, komposanten mot P minskar och frekvensen sjunker. I C är den $f_0$. Efter C rör sig ambulansen bort från P med en komposant som växer, och långt efter C är frekvensen nästan $f_0 \\cdot \\dfrac{v}{v + v_\\mathrm{k}}$. Komposanten ändras gradvis eftersom vinkeln ändras gradvis, och därför sjunker tonen gradvis.
+
+Står P närmare vägen ändras vinkeln $\\alpha$ snabbare kring C: ambulansen behöver då bara köra en kort sträcka för att linjen mot P ska vrida sig från nästan rakt framåt till nästan rakt bakåt. Tonen sjunker då under kortare tid och låter som ett tydligt språng. Längre från vägen blir sänkningen utdragen.
+
+**Svar:** Bara hastighetskomposanten längs linjen mot P ändrar frekvensen, och den ändras gradvis när vinkeln ändras. Ju närmare vägen P står, desto snabbare och tvärare sjunker tonen.`,
+        },
+        {
+            level: 3,
+            question: `En mistlur på en fyr ljuder med frekvensen $f_0 = 180\\ \\mathrm{Hz}$. En båt ligger för ankar $2{,}0\\ \\mathrm{km}$ från fyren, och vinden blåser med farten $w = 15{,}0\\ \\mathrm{m/s}$ rakt från fyren mot båten. Ljudet rör sig med farten $v = 340\\ \\mathrm{m/s}$ i förhållande till luften.<br>a) Hur lång tid tar det för ljudet att nå båten?<br>b) En passagerare påstår att tonen låter högre i medvinden än i stilla luft, eftersom vågtopparna kommer fram snabbare. Utred med beräkningar om det stämmer.<br>c) Båten lättar ankar och kör rakt mot fyren med farten $6{,}0\\ \\mathrm{m/s}$ i förhållande till vattnet, som står still. Vilken frekvens hör passageraren nu?`,
+            answer: { value: 183, unit: 'Hz' },
+            delsvar: [
+                { del: 'a', value: 5.6, unit: 's', etikett: 'tiden' },
+                { del: 'b', value: 180, unit: 'Hz', etikett: 'frekvensen i medvind' },
+                { del: 'c', value: 183, unit: 'Hz', etikett: 'frekvensen' },
+            ],
+            solution: `Allt räknas i förhållande till marken. Luften rör sig mot båten med farten $w$, och ljudet rör sig med farten $v$ i förhållande till luften. I förhållande till marken rör sig vågtopparna mot båten med farten
+
+$$ v + w = 340 + 15{,}0 = 355\\ \\mathrm{m/s} \\tag{1} $$
+
+**a)** Tiden fås ur sträckan och farten (1):
+
+$$ t = \\dfrac{s}{v + w} = \\dfrac{2\\,000}{355} \\approx 5{,}63\\ \\mathrm{s} $$
+
+**Svar:** Ljudet når båten efter ungefär $5{,}6\\ \\mathrm{s}$.
+
+**b)** Fyren står still och sänder ut en vågtopp varje periodtid $T_0 = \\dfrac{1}{f_0}$. Under den tiden flyttar sig en vågtopp sträckan $(v + w) \\cdot T_0$ mot båten innan nästa topp sänds ut. Avståndet mellan topparna, våglängden, är alltså
+
+$$ \\lambda = (v + w) \\cdot T_0 = \\dfrac{v + w}{f_0} \\tag{2} $$
+
+Medvinden gör våglängden längre än i stilla luft. Båten ligger still, så topparna passerar den med farten (1), $v + w$. Antalet toppar per sekund är frekvensen som passageraren hör:
+
+$$ f = \\dfrac{v + w}{\\lambda} $$
+
+Med $\\lambda$ från (2), $\\lambda = \\dfrac{v + w}{f_0}$, insatt ger det
+
+$$ f = \\dfrac{v + w}{\\dfrac{v + w}{f_0}} = f_0 = 180\\ \\mathrm{Hz} $$
+
+Topparna kommer fram snabbare, men de ligger lika mycket glesare. De två effekterna tar ut varandra exakt, och det gäller för varje vindfart.
+
+**Svar:** Nej, passageraren hör samma frekvens, $180\\ \\mathrm{Hz}$, som i stilla luft. Vinden ändrar både vågtopparnas fart och våglängden lika mycket.
+
+**c)** Fyren står fortfarande still, så våglängden är densamma som i (2). Topparna rör sig mot båten med farten $v + w$, och båten rör sig mot topparna med farten $v_\\mathrm{b} = 6{,}0\\ \\mathrm{m/s}$. De möts alltså med farten $v + w + v_\\mathrm{b}$, och
+
+$$ f = \\dfrac{v + w + v_\\mathrm{b}}{\\lambda} = f_0 \\cdot \\dfrac{v + w + v_\\mathrm{b}}{v + w} $$
+
+$$
+\\left[ \\begin{array}{l}
+f_0 = 180\\ \\mathrm{Hz} \\\\
+v + w = 355\\ \\mathrm{m/s} \\\\
+v_\\mathrm{b} = 6{,}0\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$ f = 180 \\cdot \\dfrac{355 + 6{,}0}{355} = 180 \\cdot \\dfrac{361}{355} \\approx 183{,}04\\ \\mathrm{Hz} $$
+
+Rimlighet: i stilla luft hade samma fart gett $180 \\cdot \\dfrac{346}{340} \\approx 183{,}18\\ \\mathrm{Hz}$. Medvinden gör ökningen något mindre, eftersom båtens fart då är en mindre del av vågtopparnas fart. Båda värdena ligger strax över $180\\ \\mathrm{Hz}$, vilket är rimligt när båten kör knappt två procent av ljudets fart.
+
+**Svar:** Passageraren hör ungefär $183\\ \\mathrm{Hz}$.`,
         },
     ],
 
@@ -65998,7 +73258,7 @@ $$ v \\approx \\sqrt{9{,}82 \\cdot 2{,}5} = 4{,}954\\ldots\\ \\mathrm{m/s} \\app
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
-            level: 2,
+            level: 1,
             question: `En vattenvåg går från djupt till grunt vatten. Våglängden i djupt vatten är $8{,}0\\ \\mathrm{m}$. Infallsvinkeln är $60^\\circ$ och brytningsvinkeln är $30^\\circ$. Beräkna våglängden i det grunda vattnet.
 
 ${makeRefraction({ i: 60, b: 30, iLabel: '60°', bLabel: '30°', medium1: 'djupt (<tspan font-style="italic">λ</tspan>₁ = 8,0 m)', medium2: 'grunt (<tspan font-style="italic">λ</tspan>₂)' })}`,
@@ -66094,7 +73354,7 @@ $$ \\frac{\\sin i}{\\sin b} = \\frac{\\lambda_1}{\\lambda_2} = \\frac{12}{18} < 
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
-            level: 3,
+            level: 2,
             question: `Raka havsvågor går över ett område där vattnet är $8{,}0\\ \\mathrm{m}$ djupt och kommer snett in mot en kant där djupet minskar till $2{,}0\\ \\mathrm{m}$. Infallsvinkeln är $40^\\circ$. Beräkna brytningsvinkeln. Anta att $v \\approx \\sqrt{g \\cdot h}$ gäller på båda djupen.
 
 ${makeRefraction({ i: 40, b: 18.7, iLabel: '40°', bLabel: 'b', medium1: 'djupt (<tspan font-style="italic">h</tspan> = 8,0 m)', medium2: 'grunt (<tspan font-style="italic">h</tspan> = 2,0 m)' })}`,
@@ -66131,6 +73391,524 @@ Vågen kommer in på grundare vatten, saktar in och bryts mot normalen, så vink
 
 **Generell slutsats:** Ett fyra gånger så litet djup halverar farten, eftersom farten beror på roten ur djupet.`,
         },
+        {
+            level: 1,
+            question: `Raka vattenvågor går snett in från djupt till grunt vatten. Vilket påstående beskriver vad som händer med vågornas frekvens och våglängd när de passerar gränsen?`,
+            choices: [
+                'Frekvensen ökar och våglängden är oförändrad.',
+                'Frekvensen är oförändrad och våglängden minskar.',
+                'Frekvensen minskar och våglängden är oförändrad.',
+                'Både frekvensen och våglängden minskar.',
+            ],
+            correct: 1,
+            solution: `Frekvensen bestäms av det som skapar vågorna. Lika många vågor per sekund når gränsen som lämnar den, så **frekvensen är oförändrad**.
+
+På grunt vatten går vågen långsammare. Med $v = f \\cdot \\lambda$ och samma frekvens *f* blir då våglängden kortare:
+
+$$ \\lambda = \\frac{v}{f} $$
+
+**Svar:** Frekvensen är oförändrad och våglängden minskar.`,
+        },
+        {
+            level: 1,
+            question: `Vattenvågor med frekvensen $0{,}75\\ \\mathrm{Hz}$ har våglängden $2{,}4\\ \\mathrm{m}$ på djupt vatten. När vågorna kommer in över ett grund blir våglängden $1{,}6\\ \\mathrm{m}$. Beräkna våghastigheten på grundet. Ange svaret i m/s.`,
+            answer: { value: 1.2, unit: 'm/s' },
+            solution: `Frekvensen ändras inte när vågen passerar gränsen, så på grundet är fortfarande $f = 0{,}75\\ \\mathrm{Hz}$. Vågens hastighet är
+
+$$ v = f \\cdot \\lambda $$
+
+$$
+\\left[ \\begin{array}{l}
+f = 0{,}75\\ \\mathrm{Hz} \\\\
+\\lambda_2 = 1{,}6\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ v_2 = 0{,}75 \\cdot 1{,}6 = 1{,}2\\ \\mathrm{m/s} $$
+
+På det djupa vattnet var hastigheten $0{,}75 \\cdot 2{,}4 = 1{,}8\\ \\mathrm{m/s}$, så vågen går långsammare på grundet. Det stämmer med att vågor saktar in på grunt vatten.
+
+**Svar:** $1{,}2\\ \\mathrm{m/s}$`,
+        },
+        {
+            level: 1,
+            question: `En rak vattenvåg träffar en kaj och reflekteras. Vågens rörelseriktning bildar vinkeln $25^\\circ$ med kajkanten, som figuren visar. Hur stor är reflexionsvinkeln?
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 210" width="526" height="307" role="img" aria-label="En vattenvåg träffar en kaj. Vågens rörelseriktning bildar vinkeln 25 grader med kajkanten. Normalen är streckad." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><rect x="0" y="0" width="360" height="150" fill="rgba(135,180,210,0.22)"/><rect x="0" y="150" width="360" height="60" fill="rgba(120,110,95,0.22)"/><line x1="10" y1="210" x2="26" y2="152" stroke="rgba(15,22,32,0.18)" stroke-width="1"/><line x1="28" y1="210" x2="44" y2="152" stroke="rgba(15,22,32,0.18)" stroke-width="1"/><line x1="46" y1="210" x2="62" y2="152" stroke="rgba(15,22,32,0.18)" stroke-width="1"/><line x1="64" y1="210" x2="80" y2="152" stroke="rgba(15,22,32,0.18)" stroke-width="1"/><line x1="82" y1="210" x2="98" y2="152" stroke="rgba(15,22,32,0.18)" stroke-width="1"/><line x1="100" y1="210" x2="116" y2="152" stroke="rgba(15,22,32,0.18)" stroke-width="1"/><line x1="118" y1="210" x2="134" y2="152" stroke="rgba(15,22,32,0.18)" stroke-width="1"/><line x1="136" y1="210" x2="152" y2="152" stroke="rgba(15,22,32,0.18)" stroke-width="1"/><line x1="154" y1="210" x2="170" y2="152" stroke="rgba(15,22,32,0.18)" stroke-width="1"/><line x1="172" y1="210" x2="188" y2="152" stroke="rgba(15,22,32,0.18)" stroke-width="1"/><line x1="190" y1="210" x2="206" y2="152" stroke="rgba(15,22,32,0.18)" stroke-width="1"/><line x1="208" y1="210" x2="224" y2="152" stroke="rgba(15,22,32,0.18)" stroke-width="1"/><line x1="226" y1="210" x2="242" y2="152" stroke="rgba(15,22,32,0.18)" stroke-width="1"/><line x1="244" y1="210" x2="260" y2="152" stroke="rgba(15,22,32,0.18)" stroke-width="1"/><line x1="262" y1="210" x2="278" y2="152" stroke="rgba(15,22,32,0.18)" stroke-width="1"/><line x1="280" y1="210" x2="296" y2="152" stroke="rgba(15,22,32,0.18)" stroke-width="1"/><line x1="298" y1="210" x2="314" y2="152" stroke="rgba(15,22,32,0.18)" stroke-width="1"/><line x1="316" y1="210" x2="332" y2="152" stroke="rgba(15,22,32,0.18)" stroke-width="1"/><line x1="334" y1="210" x2="350" y2="152" stroke="rgba(15,22,32,0.18)" stroke-width="1"/><line x1="352" y1="210" x2="368" y2="152" stroke="rgba(15,22,32,0.18)" stroke-width="1"/><line x1="0" y1="150" x2="360" y2="150" stroke="#0f1620" stroke-width="2.2"/><line x1="180" y1="28" x2="180" y2="200" stroke="#5a6172" stroke-width="1.2" stroke-dasharray="5 4"/><text x="186" y="38" font-size="12" fill="#5a6172">normal</text><line x1="80.5" y1="79.3" x2="61.9" y2="119.2" stroke="#2563c9" stroke-width="2"/><line x1="62.4" y1="70.9" x2="43.8" y2="110.8" stroke="#2563c9" stroke-width="2"/><line x1="44.1" y1="86.6" x2="180" y2="150" stroke="#c8324a" stroke-width="2.2" stroke-linecap="butt"/><polygon points="102.5,113.9 92.3,114.4 96.4,105.7" fill="#c8324a"/><path d="M 132 150 A 48 48 0 0 1 136.5 129.7" stroke="#0f1620" stroke-width="1.3" fill="none"/><text x="109.7" y="138.9" font-size="13" text-anchor="middle" fill="#0f1620">25°</text><text x="14" y="140" font-size="12" fill="#3a4250">vatten</text><text x="14" y="172" font-size="12" fill="#3a4250">kaj</text></svg>`,
+            answer: { value: 65, unit: '°' },
+            solution: `Vinklarna i reflexionslagen mäts mot **normalen**, inte mot ytan. Normalen står vinkelrätt mot kajkanten, så infallsvinkeln är
+
+$$ i = 90^\\circ - 25^\\circ = 65^\\circ $$
+
+Reflexionslagen ger
+
+$$ r = i = 65^\\circ $$
+
+**Svar:** $65^\\circ$`,
+        },
+        {
+            level: 2,
+            question: `I en vågtank alstrar en vågmaskin raka vågor med frekvensen $12\\ \\mathrm{Hz}$. I den djupa delen av tanken mäter en elev avståndet mellan sex intilliggande vågfronter till $9{,}0\\ \\mathrm{cm}$. Vågorna kommer in mot gränsen till en grundare del med infallsvinkeln $50^\\circ$, och brytningsvinkeln mäts till $34^\\circ$. Bestäm våghastigheten<br>a) i den djupa delen&emsp;&emsp;b) i den grunda delen.<br>Ange svaren i m/s.
+
+${makeRefraction({ i: 50, b: 34, iLabel: '50°', bLabel: '34°', medium1: 'djup del', medium2: 'grund del' })}`,
+            answer: { value: 0.16, unit: 'm/s' },
+            delsvar: [
+                { del: 'a', value: 0.22, unit: 'm/s', tol: 0.03 },
+                { del: 'b', value: 0.16, unit: 'm/s', tol: 0.04 },
+            ],
+            solution: `**a)** Mellan sex intilliggande vågfronter finns fem våglängder, eftersom avståndet mellan två fronter är en våglängd.
+
+$$ \\lambda_1 = \\frac{9{,}0}{5} = 1{,}8\\ \\mathrm{cm} = 0{,}018\\ \\mathrm{m} $$
+
+Våghastigheten är
+
+$$ v = f \\cdot \\lambda $$
+
+$$
+\\left[ \\begin{array}{l}
+f = 12\\ \\mathrm{Hz} \\\\
+\\lambda_1 = 0{,}018\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ v_1 = 12 \\cdot 0{,}018 = 0{,}216\\ \\mathrm{m/s} \\approx 0{,}22\\ \\mathrm{m/s} $$
+
+**Svar:** $0{,}22\\ \\mathrm{m/s}$
+
+**b)** Brytningslagen kopplar vinklarna till hastigheterna:
+
+$$ \\frac{\\sin i}{\\sin b} = \\frac{v_1}{v_2} \\quad\\Leftrightarrow\\quad v_2 = \\frac{v_1 \\cdot \\sin b}{\\sin i} $$
+
+$$
+\\left[ \\begin{array}{l}
+v_1 = 0{,}216\\ \\mathrm{m/s} \\\\
+i = 50^\\circ \\\\
+b = 34^\\circ
+\\end{array} \\right]
+$$
+
+$$ v_2 = \\frac{0{,}216 \\cdot \\sin 34^\\circ}{\\sin 50^\\circ} = 0{,}1576\\ldots\\ \\mathrm{m/s} \\approx 0{,}16\\ \\mathrm{m/s} $$
+
+Vågen bryts mot normalen, så den ska gå långsammare i den grunda delen. Det stämmer.
+
+**Svar:** $0{,}16\\ \\mathrm{m/s}$`,
+        },
+        {
+            level: 2,
+            question: `Raka havsvågor går över ett område där vattnet är $3{,}2\\ \\mathrm{m}$ djupt och kommer snett in mot ett grund. Infallsvinkeln är $35^\\circ$ och brytningsvinkeln $22^\\circ$. Hur djupt är vattnet på grundet? Anta att $v \\approx \\sqrt{g \\cdot h}$ gäller på båda djupen. Ange svaret i meter.
+
+${makeRefraction({ i: 35, b: 22, iLabel: '35°', bLabel: '22°', medium1: 'djupt (<tspan font-style="italic">h</tspan>₁ = 3,2 m)', medium2: 'grund (<tspan font-style="italic">h</tspan>₂)' })}`,
+            answer: { value: 1.4, unit: 'm', tol: 0.04 },
+            solution: `Brytningslagen ger kvoten mellan hastigheterna:
+
+$$ \\frac{\\sin i}{\\sin b} = \\frac{v_1}{v_2} $$
+
+Med $v \\approx \\sqrt{g \\cdot h}$ på båda djupen blir
+
+$$ \\frac{v_1}{v_2} = \\frac{\\sqrt{g \\cdot h_1}}{\\sqrt{g \\cdot h_2}} = \\sqrt{\\frac{h_1}{h_2}} $$
+
+Tyngdfaktorn *g* förkortas bort. Sambanden tillsammans ger
+
+$$ \\frac{\\sin i}{\\sin b} = \\sqrt{\\frac{h_1}{h_2}} \\quad\\Leftrightarrow\\quad \\frac{h_2}{h_1} = \\left(\\frac{\\sin b}{\\sin i}\\right)^2 \\quad\\Leftrightarrow\\quad h_2 = h_1 \\cdot \\left(\\frac{\\sin b}{\\sin i}\\right)^2 $$
+
+$$
+\\left[ \\begin{array}{l}
+h_1 = 3{,}2\\ \\mathrm{m} \\\\
+i = 35^\\circ \\\\
+b = 22^\\circ
+\\end{array} \\right]
+$$
+
+$$ h_2 = 3{,}2 \\cdot \\left(\\frac{\\sin 22^\\circ}{\\sin 35^\\circ}\\right)^2 = 1{,}364\\ldots\\ \\mathrm{m} \\approx 1{,}4\\ \\mathrm{m} $$
+
+Vågen bryts mot normalen och saktar alltså in, så grundet ska vara grundare än $3{,}2\\ \\mathrm{m}$. Det stämmer.
+
+**Svar:** Ungefär $1{,}4\\ \\mathrm{m}$`,
+        },
+        {
+            level: 2,
+            question: `Ett jordskalv under havsbotten ger upphov till en tsunami. Mellan skalvet och en kust $1\\ 200\\ \\mathrm{km}$ bort är havet i genomsnitt $3\\ 600\\ \\mathrm{m}$ djupt. Tsunamin har periodtiden $20\\ \\mathrm{min}$.<br>a) Hur lång tid tar det innan tsunamin når kusten? Ange svaret i timmar.<br>b) Hur lång är tsunamins våglängd ute på havet? Ange svaret i km.<br>c) Motivera att sambandet $v \\approx \\sqrt{g \\cdot h}$ får användas för tsunamin.`,
+            answer: { value: 1.8, unit: 'h' },
+            delsvar: [
+                { del: 'a', value: 1.8, unit: 'h', tol: 0.03 },
+                { del: 'b', value: 230, unit: 'km', tol: 0.03 },
+                { del: 'c' },
+            ],
+            solution: `**a)** Vi antar att tsunamin går med farten för grunt vatten (det motiveras i c):
+
+$$ v \\approx \\sqrt{g \\cdot h} $$
+
+$$
+\\left[ \\begin{array}{l}
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+h = 3\\ 600\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ v \\approx \\sqrt{9{,}82 \\cdot 3\\ 600} = 188{,}02\\ldots\\ \\mathrm{m/s} $$
+
+Tiden för sträckan $s = 1\\ 200\\ \\mathrm{km} = 1{,}2 \\cdot 10^{6}\\ \\mathrm{m}$ är
+
+$$ t = \\frac{s}{v} = \\frac{1{,}2 \\cdot 10^{6}}{188{,}02\\ldots} = 6\\ 382{,}2\\ldots\\ \\mathrm{s} $$
+
+$$ t = \\frac{6\\ 382{,}2\\ldots}{3\\ 600}\\ \\mathrm{h} = 1{,}772\\ldots\\ \\mathrm{h} \\approx 1{,}8\\ \\mathrm{h} $$
+
+**Svar:** Ungefär $1{,}8\\ \\mathrm{h}$
+
+**b)** Med $f = \\dfrac{1}{T}$ blir $v = f \\cdot \\lambda = \\dfrac{\\lambda}{T}$, alltså
+
+$$ \\lambda = v \\cdot T $$
+
+$$
+\\left[ \\begin{array}{l}
+v = 188{,}02\\ldots\\ \\mathrm{m/s} \\\\
+T = 20\\ \\mathrm{min} = 1\\ 200\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ \\lambda = 188{,}02\\ldots \\cdot 1\\ 200 = 225\\ 625{,}5\\ldots\\ \\mathrm{m} \\approx 230\\ \\mathrm{km} $$
+
+**Svar:** Ungefär $230\\ \\mathrm{km}$
+
+**c)** Sambandet gäller när djupet är mindre än ungefär en tjugondel av våglängden. En tjugondel av våglängden är
+
+$$ \\frac{225\\ 625{,}5\\ldots}{20} = 11\\ 281{,}2\\ldots\\ \\mathrm{m} \\approx 11\\ \\mathrm{km} $$
+
+Havet är bara $3{,}6\\ \\mathrm{km}$ djupt, alltså mycket mindre än det. För tsunamin är till och med världshavet "grunt vatten".
+
+**Svar:** Djupet $3{,}6\\ \\mathrm{km}$ är mindre än en tjugondel av våglängden, ungefär $11\\ \\mathrm{km}$, så sambandet gäller.`,
+        },
+        {
+            level: 3,
+            question: `Raka vattenvågor går över ett område där vattnet är $6{,}0\\ \\mathrm{m}$ djupt. Vågorna passerar ett långt, rakt grund med parallella kanter. Grundet är $40\\ \\mathrm{m}$ brett och vattnet där är $1{,}5\\ \\mathrm{m}$ djupt. På andra sidan grundet är djupet åter $6{,}0\\ \\mathrm{m}$. Vågorna kommer in mot grundet med infallsvinkeln $50^\\circ$. Anta att $v \\approx \\sqrt{g \\cdot h}$ gäller på båda djupen.<br>a) Visa att vågorna lämnar grundet i samma riktning som de hade innan de kom in på det.<br>b) Vågornas bana efter grundet är parallell med banan de hade haft utan grundet, men förskjuten i sidled. Beräkna det vinkelräta avståndet mellan de två banorna. Ange svaret i meter.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="585" height="365" role="img" aria-label="Ett grund med bredden 40 meter och djupet 1,5 meter ligger mellan två områden med djupet 6,0 meter. En våg kommer in mot grundet med infallsvinkeln 50 grader." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><rect x="0" y="0" width="400" height="90" fill="rgba(135,180,210,0.34)"/><rect x="0" y="90" width="400" height="80" fill="rgba(135,180,210,0.14)"/><rect x="0" y="170" width="400" height="80" fill="rgba(135,180,210,0.34)"/><line x1="0" y1="90" x2="400" y2="90" stroke="#0f1620" stroke-width="1.8"/><line x1="0" y1="170" x2="400" y2="170" stroke="#0f1620" stroke-width="1.8"/><line x1="120" y1="28" x2="120" y2="128" stroke="#5a6172" stroke-width="1.2" stroke-dasharray="5 4"/><line x1="51.1" y1="32.1" x2="120" y2="90" stroke="#c8324a" stroke-width="2.2" stroke-linecap="butt"/><polygon points="89,64 79,61.9 85.2,54.5" fill="#c8324a"/><path d="M 120 56 A 34 34 0 0 0 94 68.1" stroke="#0f1620" stroke-width="1.3" fill="none"/><text x="97.2" y="45.6" font-size="13" text-anchor="middle" fill="#0f1620">50°</text><line x1="366" y1="99" x2="366" y2="161" stroke="#0f1620" stroke-width="1.3"/><polygon points="366,90 370,99 362,99" fill="#0f1620"/><polygon points="366,170 362,161 370,161" fill="#0f1620"/><text x="358" y="148" font-size="13" text-anchor="end" fill="#0f1620"><tspan font-style="italic">d</tspan> = 40 m</text><text x="340" y="78" font-size="12" text-anchor="end" fill="#3a4250">djupt, <tspan font-style="italic">h</tspan>₁ = 6,0 m</text><text x="340" y="114" font-size="12" text-anchor="end" fill="#3a4250">grunt, <tspan font-style="italic">h</tspan>₂ = 1,5 m</text><text x="340" y="194" font-size="12" text-anchor="end" fill="#3a4250">djupt, <tspan font-style="italic">h</tspan>₁ = 6,0 m</text></svg>`,
+            answer: { value: 20, unit: 'm', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 20, unit: 'm', tol: 0.03 },
+            ],
+            solution: `**a)** Låt *b* vara vinkeln mot normalen på grundet och *u* vinkeln mot normalen efter grundet. Vid den första kanten ger brytningslagen
+
+$$ \\frac{\\sin 50^\\circ}{\\sin b} = \\frac{v_1}{v_2} \\tag{1} $$
+
+Kanterna är parallella, så normalerna vid de två kanterna är också parallella. Vågen träffar därför den andra kanten med infallsvinkeln *b*. Där går vågen från grunt till djupt vatten, och brytningslagen ger
+
+$$ \\frac{\\sin b}{\\sin u} = \\frac{v_2}{v_1} \\tag{2} $$
+
+Multiplikation av (1), $\\dfrac{\\sin 50^\\circ}{\\sin b} = \\dfrac{v_1}{v_2}$, med (2), $\\dfrac{\\sin b}{\\sin u} = \\dfrac{v_2}{v_1}$, ger
+
+$$ \\frac{\\sin 50^\\circ}{\\sin b} \\cdot \\frac{\\sin b}{\\sin u} = \\frac{v_1}{v_2} \\cdot \\frac{v_2}{v_1} \\quad\\Leftrightarrow\\quad \\frac{\\sin 50^\\circ}{\\sin u} = 1 \\quad\\Leftrightarrow\\quad \\sin u = \\sin 50^\\circ $$
+
+Båda vinklarna ligger mellan $0^\\circ$ och $90^\\circ$, så $u = 50^\\circ$. Vågen lämnar grundet med samma vinkel mot normalen som den kom in med, och eftersom normalerna är parallella har den samma riktning som förut. Resultatet gäller för alla djup och alla infallsvinklar, eftersom hastigheterna förkortas bort.
+
+**b)** Vi behöver först vinkeln *b* på grundet. Med $v \\approx \\sqrt{g \\cdot h}$ är
+
+$$ \\frac{v_2}{v_1} = \\sqrt{\\frac{h_2}{h_1}} = \\sqrt{\\frac{1{,}5}{6{,}0}} = 0{,}5 $$
+
+och (1), $\\dfrac{\\sin 50^\\circ}{\\sin b} = \\dfrac{v_1}{v_2}$, ger
+
+$$ \\sin b = \\frac{v_2}{v_1} \\cdot \\sin 50^\\circ = 0{,}5 \\cdot \\sin 50^\\circ = 0{,}3830\\ldots \\quad\\Leftrightarrow\\quad b = 22{,}52\\ldots^\\circ $$
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="585" height="365" role="img" aria-label="Vågens bana över grundet från A till B. Den streckade linjen visar banan utan grund. Avståndet s mellan banorna är vinkelrätt mot dem." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><rect x="0" y="0" width="400" height="90" fill="rgba(135,180,210,0.34)"/><rect x="0" y="90" width="400" height="80" fill="rgba(135,180,210,0.14)"/><rect x="0" y="170" width="400" height="80" fill="rgba(135,180,210,0.34)"/><line x1="0" y1="90" x2="400" y2="90" stroke="#0f1620" stroke-width="1.8"/><line x1="0" y1="170" x2="400" y2="170" stroke="#0f1620" stroke-width="1.8"/><line x1="110" y1="30" x2="110" y2="150" stroke="#5a6172" stroke-width="1.2" stroke-dasharray="5 4"/><line x1="41.1" y1="32.1" x2="110" y2="90" stroke="#c8324a" stroke-width="2.2"/><polygon points="79,64 69,61.9 75.2,54.5" fill="#c8324a"/><line x1="110" y1="90" x2="143.2" y2="170" stroke="#c8324a" stroke-width="2.2"/><line x1="143.2" y1="170" x2="196.8" y2="215" stroke="#c8324a" stroke-width="2.2"/><polygon points="173.8,195.7 163.8,193.6 170,186.2" fill="#c8324a"/><line x1="110" y1="90" x2="255.5" y2="212.1" stroke="#5a6172" stroke-width="1.4" stroke-dasharray="6 4"/><line x1="148.3" y1="163.9" x2="163.7" y2="145.5" stroke="#0f8a8a" stroke-width="1.4"/><polygon points="168.9,139.4 166.4,147.8 161,143.3" fill="#0f8a8a"/><polygon points="143.2,170 145.6,161.6 151,166.1" fill="#0f8a8a"/><path d="M 165 144 L 160.4 140.1 L 164.3 135.5" fill="none" stroke="#0f8a8a" stroke-width="1.1"/><text x="168" y="168.1" font-size="13" text-anchor="middle" fill="#0f8a8a"><tspan font-style="italic">s</tspan></text><path d="M 110 56 A 34 34 0 0 0 84 68.1" stroke="#0f1620" stroke-width="1.3" fill="none"/><text x="87.2" y="45.6" font-size="13" text-anchor="middle" fill="#0f1620">50°</text><path d="M 110 120 A 30 30 0 0 0 121.5 117.7" stroke="#0f1620" stroke-width="1.3" fill="none"/><text x="118.4" y="141.6" font-size="13" text-anchor="middle" fill="#0f1620"><tspan font-style="italic">b</tspan></text><text x="116" y="84" font-size="13" fill="#0f1620">A</text><text x="136" y="190" font-size="13" text-anchor="end" fill="#0f1620">B</text><line x1="366" y1="99" x2="366" y2="161" stroke="#0f1620" stroke-width="1.3"/><polygon points="366,90 370,99 362,99" fill="#0f1620"/><polygon points="366,170 362,161 370,161" fill="#0f1620"/><text x="358" y="134" font-size="13" text-anchor="end" fill="#0f1620"><tspan font-style="italic">d</tspan></text></svg>
+
+Låt A vara punkten där vågen kommer in på grundet och B punkten där den lämnar det. Sträckan AB går snett över grundet med vinkeln *b* mot normalen, och grundets bredd *d* är den närliggande kateten:
+
+$$ \\cos b = \\frac{d}{\\mathrm{AB}} \\quad\\Leftrightarrow\\quad \\mathrm{AB} = \\frac{d}{\\cos b} = \\frac{40}{\\cos 22{,}52\\ldots^\\circ} = 43{,}30\\ldots\\ \\mathrm{m} $$
+
+Utan grundet hade vågen fortsatt rakt från A med vinkeln $50^\\circ$ mot normalen. Vinkeln mellan den banan och AB är $50^\\circ - b$. Förskjutningen *s* är det vinkelräta avståndet från B till den gamla banan, alltså den motstående kateten till vinkeln $50^\\circ - b$ i en rätvinklig triangel med hypotenusan AB:
+
+$$ s = \\mathrm{AB} \\cdot \\sin(50^\\circ - b) = 43{,}30\\ldots \\cdot \\sin 27{,}47\\ldots^\\circ $$
+
+$$ s = 19{,}98\\ldots\\ \\mathrm{m} \\approx 20\\ \\mathrm{m} $$
+
+Förskjutningen är halva grundets bredd, vilket är rimligt eftersom vågen vrids kraftigt (från $50^\\circ$ till $23^\\circ$) på grundet.
+
+**Svar:** Ungefär $20\\ \\mathrm{m}$`,
+        },
+        {
+            level: 3,
+            question: `Vågor går på grunt vatten, $0{,}80\\ \\mathrm{m}$ djupt, och kommer snett in mot kanten av en muddrad farled där vattnet är $3{,}2\\ \\mathrm{m}$ djupt. Anta att $v \\approx \\sqrt{g \\cdot h}$ gäller på båda djupen.<br>a) Visa att vågorna inte kan fortsätta in i farleden om infallsvinkeln är större än ett visst gränsvärde, och bestäm gränsvärdet.<br>b) Vad händer med en våg som kommer in mot farleden med infallsvinkeln $40^\\circ$? Motivera ditt svar.`,
+            answer: { value: 30, unit: '°' },
+            delsvar: [
+                { del: 'a', value: 30, unit: '°', tol: 0.02 },
+                { del: 'b' },
+            ],
+            solution: `**a)** Vågen går från grunt till djupt vatten, alltså från långsammare till snabbare. Brytningslagen ger
+
+$$ \\frac{\\sin i}{\\sin b} = \\frac{v_1}{v_2} \\quad\\Leftrightarrow\\quad \\sin b = \\frac{v_2}{v_1} \\cdot \\sin i \\tag{1} $$
+
+Med $v \\approx \\sqrt{g \\cdot h}$ är
+
+$$ \\frac{v_2}{v_1} = \\sqrt{\\frac{h_2}{h_1}} = \\sqrt{\\frac{3{,}2}{0{,}80}} = \\sqrt{4} = 2 $$
+
+Insättning i (1), $\\sin b = \\dfrac{v_2}{v_1} \\cdot \\sin i$, ger
+
+$$ \\sin b = 2 \\cdot \\sin i $$
+
+Sinus för en vinkel kan aldrig vara större än 1. En brytningsvinkel finns därför bara om
+
+$$ 2 \\cdot \\sin i \\leq 1 \\quad\\Leftrightarrow\\quad \\sin i \\leq 0{,}5 \\quad\\Leftrightarrow\\quad i \\leq 30^\\circ $$
+
+Vid $i = 30^\\circ$ blir $\\sin b = 1$, alltså $b = 90^\\circ$: vågen går precis längs kanten. För större infallsvinklar finns ingen brytningsvinkel, och vågen kan inte fortsätta in i farleden.
+
+**Svar:** Gränsvärdet är $30^\\circ$.
+
+**b)** Infallsvinkeln $40^\\circ$ är större än gränsvärdet $30^\\circ$. Brytningslagen skulle kräva $\\sin b = 2 \\cdot \\sin 40^\\circ = 1{,}28\\ldots$, och någon sådan vinkel finns inte. Vågen tar sig därför inte in i farleden utan reflekteras vid kanten. Enligt reflexionslagen blir reflexionsvinkeln lika stor som infallsvinkeln, $r = 40^\\circ$.
+
+**Svar:** Vågen reflekteras vid farledens kant med reflexionsvinkeln $40^\\circ$.`,
+        },
+        {
+            level: 3,
+            question: `En grupp elever undersöker hur vattenvågors hastighet beror på djupet. De fyller en lång vågtank till olika djup *h* och alstrar raka vågor med frekvensen $1{,}0\\ \\mathrm{Hz}$. För varje djup mäter de våglängden *λ*.
+
+| *h* (cm) | 0,50 | 1,0 | 1,5 | 2,0 | 2,5 |
+|---|---|---|---|---|---|
+| *λ* (cm) | 22,0 | 31,8 | 38,0 | 44,8 | 49,2 |
+
+Eleverna vill pröva modellen $v \\approx \\sqrt{g \\cdot h}$.<br>a) Bestäm ett experimentellt värde på tyngdaccelerationen *g* ur mätningarna med hjälp av en lämplig graf. Ange svaret i m/s².<br>b) Sambandet $v \\approx \\sqrt{g \\cdot h}$ gäller när djupet är mindre än ungefär en tjugondel av våglängden. Undersök om villkoret är uppfyllt i elevernas mätningar.`,
+            answer: { value: 9.8, unit: 'm/s²', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 9.8, unit: 'm/s²', tol: 0.04 },
+                { del: 'b' },
+            ],
+            solution: `**a)** Enligt modellen växer *v* med roten ur *h*. En graf med *v* mot *h* blir därför krökt, och ur en krökt graf går det inte att läsa av *g* direkt. Vi kvadrerar båda led i sambandet:
+
+$$ v = \\sqrt{g \\cdot h} \\quad\\Leftrightarrow\\quad v^2 = g \\cdot h $$
+
+$v^2$ är alltså proportionell mot *h*, och proportionalitetskonstanten är tyngdaccelerationen *g*. En graf med $v^2$ på den lodräta axeln och *h* på den vågräta blir en rät linje genom origo med lutningen *g*.
+
+Våghastigheten fås ur $v = f \\cdot \\lambda$. Med $f = 1{,}0\\ \\mathrm{Hz}$ är *v* i meter per sekund lika med *λ* i meter. Vi omvandlar till SI-enheter och kvadrerar:
+
+| *h* (m) | 0,0050 | 0,010 | 0,015 | 0,020 | 0,025 |
+|---|---|---|---|---|---|
+| *v* (m/s) | 0,220 | 0,318 | 0,380 | 0,448 | 0,492 |
+| $v^2$ (m²/s²) | 0,0484 | 0,1011 | 0,1444 | 0,2007 | 0,2421 |
+
+Punkterna ritas i ett diagram, och en rät linje genom origo dras så nära punkterna som möjligt.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 340" width="664" height="452" role="img" aria-label="Mätpunkterna v i kvadrat mot djupet h ligger nära en rät linje genom origo." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><line x1="70" y1="34" x2="70" y2="284" stroke="rgba(15,22,32,0.15)"/><text x="70" y="304" font-size="13" text-anchor="middle" fill="#0f1620">0</text><line x1="135" y1="34" x2="135" y2="284" stroke="rgba(15,22,32,0.15)"/><text x="135" y="304" font-size="13" text-anchor="middle" fill="#0f1620">0,005</text><line x1="200" y1="34" x2="200" y2="284" stroke="rgba(15,22,32,0.15)"/><text x="200" y="304" font-size="13" text-anchor="middle" fill="#0f1620">0,01</text><line x1="265" y1="34" x2="265" y2="284" stroke="rgba(15,22,32,0.15)"/><text x="265" y="304" font-size="13" text-anchor="middle" fill="#0f1620">0,015</text><line x1="330" y1="34" x2="330" y2="284" stroke="rgba(15,22,32,0.15)"/><text x="330" y="304" font-size="13" text-anchor="middle" fill="#0f1620">0,02</text><line x1="395" y1="34" x2="395" y2="284" stroke="rgba(15,22,32,0.15)"/><text x="395" y="304" font-size="13" text-anchor="middle" fill="#0f1620">0,025</text><line x1="460" y1="34" x2="460" y2="284" stroke="rgba(15,22,32,0.15)"/><text x="460" y="304" font-size="13" text-anchor="middle" fill="#0f1620">0,03</text><line x1="70" y1="284" x2="460" y2="284" stroke="rgba(15,22,32,0.15)"/><text x="63" y="289" font-size="13" text-anchor="end" fill="#0f1620">0</text><line x1="70" y1="242.3" x2="460" y2="242.3" stroke="rgba(15,22,32,0.15)"/><text x="63" y="247.3" font-size="13" text-anchor="end" fill="#0f1620">0,05</text><line x1="70" y1="200.7" x2="460" y2="200.7" stroke="rgba(15,22,32,0.15)"/><text x="63" y="205.7" font-size="13" text-anchor="end" fill="#0f1620">0,1</text><line x1="70" y1="159" x2="460" y2="159" stroke="rgba(15,22,32,0.15)"/><text x="63" y="164" font-size="13" text-anchor="end" fill="#0f1620">0,15</text><line x1="70" y1="117.3" x2="460" y2="117.3" stroke="rgba(15,22,32,0.15)"/><text x="63" y="122.3" font-size="13" text-anchor="end" fill="#0f1620">0,2</text><line x1="70" y1="75.7" x2="460" y2="75.7" stroke="rgba(15,22,32,0.15)"/><text x="63" y="80.7" font-size="13" text-anchor="end" fill="#0f1620">0,25</text><line x1="70" y1="34" x2="460" y2="34" stroke="rgba(15,22,32,0.15)"/><text x="63" y="39" font-size="13" text-anchor="end" fill="#0f1620">0,3</text><line x1="70" y1="284" x2="468" y2="284" stroke="#0f1620" stroke-width="2"/><polygon points="477,284 468,288 468,280" fill="#0f1620"/><line x1="70" y1="284" x2="70" y2="26" stroke="#0f1620" stroke-width="2"/><polygon points="70,17 74,26 66,26" fill="#0f1620"/><text x="494" y="276" font-size="14" text-anchor="end" fill="#0f1620"><tspan font-style="italic">h</tspan> (m)</text><text x="78" y="28" font-size="14" fill="#0f1620"><tspan font-style="italic">v</tspan>² (m²/s²)</text><line x1="70" y1="284" x2="460" y2="39" stroke="#2563c9" stroke-width="2"/><line x1="395" y1="79.8" x2="395" y2="284" stroke="#5a6172" stroke-dasharray="4 3" stroke-width="1.2"/><line x1="70" y1="79.8" x2="395" y2="79.8" stroke="#5a6172" stroke-dasharray="4 3" stroke-width="1.2"/><circle cx="135" cy="243.7" r="4" fill="#c8324a"/><circle cx="200" cy="199.8" r="4" fill="#c8324a"/><circle cx="265" cy="163.7" r="4" fill="#c8324a"/><circle cx="330" cy="116.8" r="4" fill="#c8324a"/><circle cx="395" cy="82.3" r="4" fill="#c8324a"/></svg>
+
+På linjen avläses punkten $(0{,}025;\\ 0{,}245)$. Lutningen är
+
+$$ g = \\frac{\\Delta (v^2)}{\\Delta h} = \\frac{0{,}245 - 0}{0{,}025 - 0} = 9{,}8\\ \\mathrm{m/s^2} $$
+
+Punkterna ligger nära linjen, så modellen $v^2 = g \\cdot h$ beskriver mätningarna väl. Värdet ligger nära tabellvärdet $9{,}82\\ \\mathrm{m/s^2}$.
+
+**Svar:** Ungefär $9{,}8\\ \\mathrm{m/s^2}$
+
+**b)** En tjugondel av våglängden jämförs med djupet för varje mätning:
+
+| *h* (cm) | 0,50 | 1,0 | 1,5 | 2,0 | 2,5 |
+|---|---|---|---|---|---|
+| $\\dfrac{\\lambda}{20}$ (cm) | 1,10 | 1,59 | 1,90 | 2,24 | 2,46 |
+
+I de fyra första mätningarna är djupet tydligt mindre än en tjugondel av våglängden. I den sista är djupet $2{,}5\\ \\mathrm{cm}$ ungefär lika stort som $2{,}46\\ \\mathrm{cm}$, så där är villkoret precis på gränsen. Den punkten ligger också något under linjen i grafen, vilket passar med att vågen går lite långsammare än $\\sqrt{g \\cdot h}$ när vattnet inte längre är riktigt grunt.
+
+**Svar:** Villkoret är uppfyllt i de fyra första mätningarna. I den sista mätningen är det precis på gränsen.`,
+        },
+        {
+            level: 3,
+            question: `Figuren visar en rak strand sedd uppifrån. Havsbotten sluttar jämnt, så djupkurvorna är parallella med strandkanten. Ute på $5{,}0\\ \\mathrm{m}$ djup kommer raka vågor in mot stranden, och deras rörelseriktning bildar vinkeln $50^\\circ$ med normalen till djupkurvorna. Vågornas periodtid är $16\\ \\mathrm{s}$. Anta att $v \\approx \\sqrt{g \\cdot h}$ gäller hela vägen in.<br>a) Bestäm vinkeln mellan vågornas rörelseriktning och normalen där vattnet är $1{,}0\\ \\mathrm{m}$ djupt. Ange svaret i grader.<br>b) Hur stor är våglängden där vattnet är $1{,}0\\ \\mathrm{m}$ djupt? Ange svaret i meter.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 270" width="585" height="395" role="img" aria-label="Strand sedd uppifrån med parallella djupkurvor från 5,0 meter ute till 1,0 meter nära land. En våg korsar 5,0-meterskurvan med vinkeln 50 grader mot normalen." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><rect x="0" y="0" width="400" height="232" fill="rgba(135,180,210,0.26)"/><rect x="0" y="232" width="400" height="38" fill="rgba(214,190,140,0.55)"/><line x1="0" y1="232" x2="400" y2="232" stroke="#0f1620" stroke-width="2"/><line x1="0" y1="70" x2="400" y2="70" stroke="#5a6172" stroke-width="1.1" stroke-dasharray="6 4"/><line x1="0" y1="105" x2="400" y2="105" stroke="#5a6172" stroke-width="1.1" stroke-dasharray="6 4"/><line x1="0" y1="140" x2="400" y2="140" stroke="#5a6172" stroke-width="1.1" stroke-dasharray="6 4"/><line x1="0" y1="175" x2="400" y2="175" stroke="#5a6172" stroke-width="1.1" stroke-dasharray="6 4"/><line x1="0" y1="210" x2="400" y2="210" stroke="#5a6172" stroke-width="1.1" stroke-dasharray="6 4"/><text x="392" y="64" font-size="12" text-anchor="end" fill="#3a4250">5,0 m</text><text x="392" y="204" font-size="12" text-anchor="end" fill="#3a4250">1,0 m</text><text x="14" y="254" font-size="12" fill="#3a4250">strand</text><line x1="150" y1="22" x2="150" y2="104" stroke="#5a6172" stroke-width="1.2" stroke-dasharray="3 3"/><text x="156" y="30" font-size="12" fill="#5a6172">normal</text><line x1="102.5" y1="30.1" x2="150" y2="70" stroke="#c8324a" stroke-width="2.2" stroke-linecap="butt"/><polygon points="127.3,51 117.3,48.9 123.5,41.5" fill="#c8324a"/><path d="M 150 40 A 30 30 0 0 0 127 50.7" stroke="#0f1620" stroke-width="1.3" fill="none"/><text x="129.7" y="31" font-size="13" text-anchor="middle" fill="#0f1620">50°</text></svg>`,
+            answer: { value: 20, unit: '°', tol: 0.04 },
+            delsvar: [
+                { del: 'a', value: 20, unit: '°', tol: 0.04 },
+                { del: 'b', value: 50, unit: 'm', tol: 0.03 },
+            ],
+            solution: `**a)** Djupet ändras jämnt, men vi kan tänka oss botten som många tunna band med konstant djup, med en gräns mellan varje band. Alla gränser är parallella, så normalen är densamma överallt, och den brytningsvinkel vågen får vid en gräns är infallsvinkeln vid nästa.
+
+Låt $\\alpha_1, \\alpha_2, \\alpha_3, \\ldots$ vara vinklarna mot normalen i banden och $v_1, v_2, v_3, \\ldots$ hastigheterna där. Brytningslagen vid varje gräns kan skrivas
+
+$$ \\frac{\\sin \\alpha_1}{\\sin \\alpha_2} = \\frac{v_1}{v_2} \\quad\\Leftrightarrow\\quad \\frac{\\sin \\alpha_1}{v_1} = \\frac{\\sin \\alpha_2}{v_2} $$
+
+och likadant $\\dfrac{\\sin \\alpha_2}{v_2} = \\dfrac{\\sin \\alpha_3}{v_3}$ och så vidare. Kvoten $\\dfrac{\\sin \\alpha}{v}$ är alltså densamma i alla band. Vinkeln på ett visst djup beror därför bara på hastigheten där, inte på hur botten ser ut på vägen in. Med $v \\approx \\sqrt{g \\cdot h}$ blir
+
+$$ \\frac{\\sin \\alpha_\\mathrm{ute}}{\\sqrt{g \\cdot h_\\mathrm{ute}}} = \\frac{\\sin \\alpha_\\mathrm{in}}{\\sqrt{g \\cdot h_\\mathrm{in}}} \\quad\\Leftrightarrow\\quad \\sin \\alpha_\\mathrm{in} = \\sin \\alpha_\\mathrm{ute} \\cdot \\sqrt{\\frac{h_\\mathrm{in}}{h_\\mathrm{ute}}} $$
+
+$$
+\\left[ \\begin{array}{l}
+\\alpha_\\mathrm{ute} = 50^\\circ \\\\
+h_\\mathrm{ute} = 5{,}0\\ \\mathrm{m} \\\\
+h_\\mathrm{in} = 1{,}0\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ \\sin \\alpha_\\mathrm{in} = \\sin 50^\\circ \\cdot \\sqrt{\\frac{1{,}0}{5{,}0}} = 0{,}3425\\ldots \\quad\\Leftrightarrow\\quad \\alpha_\\mathrm{in} = 20{,}03\\ldots^\\circ \\approx 20^\\circ $$
+
+Vågen bryts mot normalen hela vägen in, så vinkeln ska vara mindre än $50^\\circ$. Det stämmer, och det förklarar varför vågor kommer in nästan rakt mot stranden.
+
+**Svar:** Ungefär $20^\\circ$
+
+**b)** Periodtiden ändras inte när vågen går in mot land. Med $v = \\dfrac{\\lambda}{T}$ är
+
+$$ \\lambda = v \\cdot T = \\sqrt{g \\cdot h} \\cdot T $$
+
+$$
+\\left[ \\begin{array}{l}
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+h = 1{,}0\\ \\mathrm{m} \\\\
+T = 16\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ \\lambda = \\sqrt{9{,}82 \\cdot 1{,}0} \\cdot 16 = 50{,}13\\ldots\\ \\mathrm{m} \\approx 50\\ \\mathrm{m} $$
+
+Djupet $1{,}0\\ \\mathrm{m}$ är mindre än en tjugondel av $50\\ \\mathrm{m}$, så antagandet håller där. Ute på $5{,}0\\ \\mathrm{m}$ djup är våglängden $\\sqrt{9{,}82 \\cdot 5{,}0} \\cdot 16 = 112{,}1\\ldots\\ \\mathrm{m}$, och en tjugondel av den är ungefär $5{,}6\\ \\mathrm{m}$. Antagandet håller alltså även där.
+
+**Svar:** Ungefär $50\\ \\mathrm{m}$`,
+        },
+        {
+            level: 3,
+            question: `Figuren visar raka vågfronter i en vågtank, sedda uppifrån. Vågorna rör sig från den djupa delen in i den grunda. En elev har inte kunnat mäta några vinklar, men har mätt tre avstånd:
+
+- avståndet mellan två intilliggande fronter i den djupa delen, $2{,}0\\ \\mathrm{cm}$
+- avståndet mellan två intilliggande fronter i den grunda delen, $1{,}4\\ \\mathrm{cm}$
+- avståndet längs gränsen mellan två punkter P och Q där intilliggande fronter når gränsen, $2{,}4\\ \\mathrm{cm}$.
+
+a) Bestäm infallsvinkeln.&emsp;&emsp;b) Bestäm brytningsvinkeln.<br>c) Visa att vinklar som bestäms på det här sättet alltid uppfyller brytningslagen, vilka avstånd som än mäts.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 284" width="585" height="415" role="img" aria-label="Raka vågfronter i en vågtank sedda uppifrån. Fronterna når gränsen i gemensamma punkter, bland annat P och Q. På den grunda sidan står fronterna tätare." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><rect x="20" y="26" width="360" height="116" fill="rgba(135,180,210,0.34)"/><rect x="20" y="142" width="360" height="116" fill="rgba(135,180,210,0.14)"/><line x1="20" y1="85.2" x2="61.5" y2="26" stroke="#2563c9" stroke-width="2"/><line x1="53.5" y1="142" x2="134.7" y2="26" stroke="#2563c9" stroke-width="2"/><line x1="53.5" y1="142" x2="20" y2="165.5" stroke="#2563c9" stroke-width="2"/><line x1="126.8" y1="142" x2="208" y2="26" stroke="#2563c9" stroke-width="2"/><line x1="126.8" y1="142" x2="20" y2="216.7" stroke="#2563c9" stroke-width="2"/><line x1="200" y1="142" x2="281.2" y2="26" stroke="#2563c9" stroke-width="2"/><line x1="200" y1="142" x2="34.3" y2="258" stroke="#2563c9" stroke-width="2"/><line x1="273.2" y1="142" x2="354.5" y2="26" stroke="#2563c9" stroke-width="2"/><line x1="273.2" y1="142" x2="107.6" y2="258" stroke="#2563c9" stroke-width="2"/><line x1="346.5" y1="142" x2="380" y2="94.1" stroke="#2563c9" stroke-width="2"/><line x1="346.5" y1="142" x2="180.8" y2="258" stroke="#2563c9" stroke-width="2"/><line x1="380" y1="169.8" x2="254.1" y2="258" stroke="#2563c9" stroke-width="2"/><line x1="380" y1="221.1" x2="327.3" y2="258" stroke="#2563c9" stroke-width="2"/><line x1="20" y1="142" x2="380" y2="142" stroke="#0f1620" stroke-width="2"/><rect x="20" y="26" width="360" height="232" fill="none" stroke="rgba(15,22,32,0.35)" stroke-width="1"/><circle cx="200" cy="142" r="3.4" fill="#0f1620"/><circle cx="273.2" cy="142" r="3.4" fill="#0f1620"/><text x="207" y="158" font-size="13" fill="#0f1620">P</text><text x="280.2" y="158" font-size="13" fill="#0f1620">Q</text><text x="20" y="18" font-size="12" fill="#3a4250">djup del</text><text x="380" y="276" font-size="12" text-anchor="end" fill="#3a4250">grund del</text></svg>`,
+            answer: { value: 56, unit: '°', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 56, unit: '°', tol: 0.03 },
+                { del: 'b', value: 36, unit: '°', tol: 0.03 },
+                { del: 'c' },
+            ],
+            solution: `**a)** Vinklarna mot normalen kan inte mätas direkt, men de finns i figuren ändå. Vågens rörelseriktning står vinkelrätt mot fronterna, och normalen står vinkelrätt mot gränsen. När båda linjerna vrids $90^\\circ$ ändras inte vinkeln mellan dem, så **vinkeln mellan en front och gränsen är lika stor som vinkeln mellan rörelseriktningen och normalen**. Infallsvinkeln *i* är alltså vinkeln mellan en front och gränsen på den djupa sidan.
+
+Fronten genom Q och fronten genom P ligger på avståndet $\\lambda_1$ från varandra. Dra den vinkelräta sträckan från P till fronten genom Q. Då bildas en rätvinklig triangel där PQ är hypotenusa, sträckan $\\lambda_1$ är en katet och vinkeln vid Q mellan fronten och gränsen är *i*. Kateten $\\lambda_1$ ligger mitt emot vinkeln vid Q, så
+
+$$ \\sin i = \\frac{\\lambda_1}{\\mathrm{PQ}} \\tag{1} $$
+
+$$
+\\left[ \\begin{array}{l}
+\\lambda_1 = 2{,}0\\ \\mathrm{cm} \\\\
+\\mathrm{PQ} = 2{,}4\\ \\mathrm{cm}
+\\end{array} \\right]
+$$
+
+$$ \\sin i = \\frac{2{,}0}{2{,}4} = 0{,}8333\\ldots \\quad\\Leftrightarrow\\quad i = 56{,}44\\ldots^\\circ \\approx 56^\\circ $$
+
+**Svar:** Ungefär $56^\\circ$
+
+**b)** Varje front fortsätter obruten genom gränsen, så fronterna på den grunda sidan utgår från samma punkter P och Q. Samma triangel på den grunda sidan, med kateten $\\lambda_2$ och vinkeln *b* mellan fronten och gränsen, ger
+
+$$ \\sin b = \\frac{\\lambda_2}{\\mathrm{PQ}} \\tag{2} $$
+
+$$
+\\left[ \\begin{array}{l}
+\\lambda_2 = 1{,}4\\ \\mathrm{cm} \\\\
+\\mathrm{PQ} = 2{,}4\\ \\mathrm{cm}
+\\end{array} \\right]
+$$
+
+$$ \\sin b = \\frac{1{,}4}{2{,}4} = 0{,}5833\\ldots \\quad\\Leftrightarrow\\quad b = 35{,}68\\ldots^\\circ \\approx 36^\\circ $$
+
+Vågen får kortare våglängd och går alltså långsammare i den grunda delen, så den ska brytas mot normalen. Brytningsvinkeln är mindre än infallsvinkeln, och det stämmer.
+
+**Svar:** Ungefär $36^\\circ$
+
+**c)** Division av (1), $\\sin i = \\dfrac{\\lambda_1}{\\mathrm{PQ}}$, med (2), $\\sin b = \\dfrac{\\lambda_2}{\\mathrm{PQ}}$, ger
+
+$$ \\frac{\\sin i}{\\sin b} = \\frac{\\lambda_1}{\\mathrm{PQ}} \\cdot \\frac{\\mathrm{PQ}}{\\lambda_2} = \\frac{\\lambda_1}{\\lambda_2} $$
+
+Avståndet PQ förkortas bort, så kvoten mellan sinusvärdena är alltid lika med kvoten mellan våglängderna, vilket är brytningslagen. Det beror på att fronterna hänger ihop vid gränsen: båda sidor delar samma avstånd PQ.`,
+        },
+        {
+            level: 3,
+            question: `Mitt i en sjö ligger ett runt grund där vattnet är betydligt grundare än runt omkring. Djupet är ungefär detsamma över hela grundet. Raka vågor kommer in mot grundet från djupt vatten, som figuren visar.<br>a) Beskriv hur vågornas rörelseriktning ändras när de passerar grundet, och förklara varför. Rita gärna en figur.<br>b) Seglare har märkt att vågorna kan bli ovanligt höga på ett visst ställe bakom grundet. Förklara var det stället ligger och varför vågorna blir högre där.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 250" width="614" height="365" role="img" aria-label="Raka vågfronter på djupt vatten närmar sig ett runt grund i en sjö, sett uppifrån." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><rect x="0" y="0" width="420" height="250" fill="rgba(135,180,210,0.30)"/><circle cx="230" cy="125" r="62" fill="rgba(214,190,140,0.50)" stroke="#0f1620" stroke-width="1.4" stroke-dasharray="5 4"/><text x="230" y="129.5" font-size="13" text-anchor="middle" fill="#3a4250">grund</text><line x1="40" y1="18" x2="40" y2="220" stroke="#2563c9" stroke-width="2"/><line x1="70" y1="18" x2="70" y2="220" stroke="#2563c9" stroke-width="2"/><line x1="100" y1="18" x2="100" y2="220" stroke="#2563c9" stroke-width="2"/><line x1="130" y1="18" x2="130" y2="220" stroke="#2563c9" stroke-width="2"/><line x1="24" y1="236" x2="150" y2="236" stroke="#c8324a" stroke-width="2.2" stroke-linecap="butt"/><polygon points="123,236 114,240.8 114,231.2" fill="#c8324a"/><text x="408" y="30" font-size="12" text-anchor="end" fill="#3a4250">djupt vatten</text></svg>`,
+            solution: `**a)** På grundet går vågorna långsammare än på det djupa vattnet. Vid grundets kant gäller brytningslagen, med normalen vinkelrät mot kanten. För ett runt grund pekar normalen i varje punkt mot grundets mittpunkt.
+
+**När en våg kommer in på grundet** saktar den in och bryts **mot** normalen. En våg som träffar grundets övre halva vrids därför nedåt, mot mittlinjen genom grundet. En våg som träffar den nedre halvan vrids uppåt, också mot mittlinjen.
+
+**När vågen lämnar grundet** blir den snabbare igen och bryts **från** normalen. På grundets bakre sida pekar normalen utåt från mittpunkten, och även den brytningen vrider vågen mot mittlinjen.
+
+En våg som går rakt mot grundets mittpunkt träffar kanten längs normalen och fortsätter rakt fram.
+
+Båda brytningarna vrider alltså vågorna åt samma håll, mot mittlinjen. Grundet fungerar som en samlingslins för vattenvågor.
+
+Samma sak syns i vågfronterna: mitten av en front går längst sträcka över grundet och blir mest försenad. Fronterna bakom grundet blir därför böjda bakåt på mitten, och en sådan front drar ihop sig mot en punkt.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 250" width="614" height="365" role="img" aria-label="Strålgång genom ett runt grund. Strålarna böjs mot mittlinjen både när de kommer in på grundet och när de lämnar det, och möts bakom grundet." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><rect x="0" y="0" width="420" height="250" fill="rgba(135,180,210,0.30)"/><circle cx="230" cy="125" r="62" fill="rgba(214,190,140,0.50)" stroke="#0f1620" stroke-width="1.4" stroke-dasharray="5 4"/><text x="230" y="55" font-size="13" text-anchor="middle" fill="#3a4250">grund</text><line x1="14" y1="81" x2="186.3" y2="81" stroke="#c8324a" stroke-width="2"/><polygon points="80,81 71,85.8 71,76.2" fill="#c8324a"/><line x1="186.3" y1="81" x2="287.9" y2="102.8" stroke="#c8324a" stroke-width="2"/><line x1="287.9" y1="102.8" x2="410" y2="157.8" stroke="#c8324a" stroke-width="2"/><line x1="14" y1="103" x2="172" y2="103" stroke="#c8324a" stroke-width="2"/><polygon points="80,103 71,107.8 71,98.2" fill="#c8324a"/><line x1="172" y1="103" x2="290.9" y2="113.3" stroke="#c8324a" stroke-width="2"/><line x1="290.9" y1="113.3" x2="410" y2="134" stroke="#c8324a" stroke-width="2"/><line x1="14" y1="125" x2="168" y2="125" stroke="#c8324a" stroke-width="2"/><polygon points="80,125 71,129.8 71,120.2" fill="#c8324a"/><line x1="168" y1="125" x2="292" y2="125" stroke="#c8324a" stroke-width="2"/><line x1="292" y1="125" x2="410" y2="125" stroke="#c8324a" stroke-width="2"/><line x1="14" y1="147" x2="172" y2="147" stroke="#c8324a" stroke-width="2"/><polygon points="80,147 71,151.8 71,142.2" fill="#c8324a"/><line x1="172" y1="147" x2="290.9" y2="136.7" stroke="#c8324a" stroke-width="2"/><line x1="290.9" y1="136.7" x2="410" y2="116" stroke="#c8324a" stroke-width="2"/><line x1="14" y1="169" x2="186.3" y2="169" stroke="#c8324a" stroke-width="2"/><polygon points="80,169 71,173.8 71,164.2" fill="#c8324a"/><line x1="186.3" y1="169" x2="287.9" y2="147.2" stroke="#c8324a" stroke-width="2"/><line x1="287.9" y1="147.2" x2="410" y2="92.2" stroke="#c8324a" stroke-width="2"/><text x="347.6" y="215" font-size="12" text-anchor="middle" fill="#0f1620">vågorna högst här</text><line x1="347.6" y1="201" x2="347.6" y2="145" stroke="#0f1620" stroke-width="1.2"/><polygon points="347.6,137 351.6,145 343.6,145" fill="#0f1620"/></svg>
+
+**Svar:** Vågorna vrids mot mittlinjen genom grundet både när de kommer in på det och när de lämnar det, eftersom de bryts mot normalen när de saktar in och från normalen när de blir snabbare igen.
+
+**b)** Vågorna från hela grundets bredd vrids mot mittlinjen och korsar den en bit bakom grundet. Där samlas vågenergi som kom in över en bred front på en mycket smalare yta. Samma energi per sekund fördelad på en mindre bredd ger högre vågor.
+
+**Svar:** Stället ligger på mittlinjen genom grundet, en bit bakom det. Där samlas vågenergin från grundets hela bredd, och vågorna blir därför högre.`,
+        },
+        {
+            level: 3,
+            question: `Utanför en sandstrand sluttar botten jämnt, så att djupet ökar med $2{,}0\\ \\mathrm{cm}$ för varje meter ut från strandkanten. En boj ligger $150\\ \\mathrm{m}$ ut. Vågorna kommer rakt in mot stranden. Anta att $v \\approx \\sqrt{g \\cdot h}$ gäller hela vägen in.<br>a) Visa att en vågtopp rör sig in mot stranden som ett föremål med konstant retardation, och bestäm retardationen.<br>b) Hur lång tid tar det för en vågtopp att gå från bojen till strandkanten enligt modellen? Ange svaret i sekunder.<br>c) Modellen ger en vågtopp som stannar precis vid strandkanten. Förklara varför det inte går till så i verkligheten.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 200" width="614" height="292" role="img" aria-label="Genomskärning av stranden. Botten sluttar jämnt nedåt från strandkanten ut mot en boj 150 meter ut. Djupet är överdrivet i figuren." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fafaf5;border:1px solid #d8d1bd;border-radius:6px;font-family:Poppins,sans-serif"><polygon points="40,70 420,70 420,159.4" fill="rgba(135,180,210,0.34)"/><polygon points="0,70 40,70 420,159.4 420,200 0,200" fill="rgba(214,190,140,0.55)"/><line x1="0" y1="70" x2="40" y2="70" stroke="#0f1620" stroke-width="1.6"/><line x1="40" y1="70" x2="420" y2="70" stroke="#2563c9" stroke-width="1.8"/><line x1="40" y1="70" x2="420" y2="159.4" stroke="#0f1620" stroke-width="1.8"/><line x1="380" y1="56" x2="380" y2="70" stroke="#0f1620" stroke-width="1.6"/><circle cx="380" cy="52" r="6" fill="#c8324a"/><text x="390" y="56" font-size="12" fill="#3a4250">boj</text><text x="8" y="92" font-size="12" fill="#3a4250">strand</text><line x1="49" y1="26" x2="371" y2="26" stroke="#0f1620" stroke-width="1.3"/><polygon points="40,26 49,22 49,30" fill="#0f1620"/><polygon points="380,26 371,30 371,22" fill="#0f1620"/><line x1="40" y1="20" x2="40" y2="66" stroke="#5a6172" stroke-width="1" stroke-dasharray="3 3"/><text x="210" y="19" font-size="13" text-anchor="middle" fill="#0f1620">150 m</text><text x="250" y="140" font-size="12" text-anchor="middle" fill="#3a4250">botten</text><text x="410" y="190" font-size="11" text-anchor="end" fill="#5a6172">djupet överdrivet</text></svg>`,
+            answer: { value: 55, unit: 's', tol: 0.03 },
+            delsvar: [
+                { del: 'a', value: 0.098, unit: 'm/s²', tol: 0.03 },
+                { del: 'b', value: 55, unit: 's', tol: 0.03 },
+                { del: 'c' },
+            ],
+            solution: `**a)** Låt *x* vara avståndet från strandkanten. Djupet ökar med $k = 2{,}0\\ \\mathrm{cm/m} = 0{,}020$ (meter djup per meter ut), så
+
+$$ h = k \\cdot x $$
+
+Med $v \\approx \\sqrt{g \\cdot h}$ blir vågtoppens fart på avståndet *x*
+
+$$ v = \\sqrt{g \\cdot k \\cdot x} \\quad\\Leftrightarrow\\quad v^2 = g \\cdot k \\cdot x \\tag{1} $$
+
+Vågtoppen startar vid bojen, på avståndet *L* från strandkanten, med farten $v_0$. Ur (1) är $v_0^2 = g \\cdot k \\cdot L$. När vågtoppen har gått sträckan *s* in mot land är den på avståndet $x = L - s$, och (1), $v^2 = g \\cdot k \\cdot x$, ger
+
+$$ v^2 = g \\cdot k \\cdot (L - s) = g \\cdot k \\cdot L - g \\cdot k \\cdot s = v_0^2 - g \\cdot k \\cdot s $$
+
+Jämför med sambandet för rörelse med konstant retardation *a*, $v^2 = v_0^2 - 2 \\cdot a \\cdot s$. Uttrycken har samma form, och de stämmer för alla *s* om
+
+$$ 2 \\cdot a = g \\cdot k \\quad\\Leftrightarrow\\quad a = \\frac{g \\cdot k}{2} \\tag{2} $$
+
+Vågtoppen bromsas alltså in som ett föremål med konstant retardation.
+
+$$
+\\left[ \\begin{array}{l}
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+k = 0{,}020
+\\end{array} \\right]
+$$
+
+$$ a = \\frac{9{,}82 \\cdot 0{,}020}{2} = 0{,}0982\\ \\mathrm{m/s^2} \\approx 0{,}098\\ \\mathrm{m/s^2} $$
+
+**Svar:** Retardationen är ungefär $0{,}098\\ \\mathrm{m/s^2}$.
+
+**b)** Farten vid bojen ges av (1), $v^2 = g \\cdot k \\cdot x$, med $x = L$:
+
+$$
+\\left[ \\begin{array}{l}
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+k = 0{,}020 \\\\
+L = 150\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ v_0 = \\sqrt{9{,}82 \\cdot 0{,}020 \\cdot 150} = 5{,}427\\ldots\\ \\mathrm{m/s} $$
+
+Vid strandkanten är djupet noll, och då är farten noll. Vid konstant retardation minskar farten lika mycket varje sekund, $v = v_0 - a \\cdot t$. Farten är noll när
+
+$$ 0 = v_0 - a \\cdot t \\quad\\Leftrightarrow\\quad t = \\frac{v_0}{a} $$
+
+med *a* från (2), $a = \\dfrac{g \\cdot k}{2} = 0{,}0982\\ \\mathrm{m/s^2}$:
+
+$$ t = \\frac{5{,}427\\ldots}{0{,}0982} = 55{,}27\\ldots\\ \\mathrm{s} \\approx 55\\ \\mathrm{s} $$
+
+Medelfarten är då hälften av startfarten, $\\dfrac{150}{55{,}27\\ldots} = 2{,}7\\ \\mathrm{m/s}$, vilket stämmer med konstant retardation från $5{,}4\\ \\mathrm{m/s}$ till noll.
+
+**Svar:** Ungefär $55\\ \\mathrm{s}$
+
+**c)** Modellen bygger på att vågen behåller sin form ända in. Men när vågen saktar in blir våglängden kortare och vågen högre, och nära land går vågtoppen fortare än vattnet framför den. Toppen faller då framåt och vågen bryter, så det finns ingen vågtopp kvar som kan stanna vid strandkanten. Det brutna vattnet rusar i stället upp på stranden. Sambandet $v \\approx \\sqrt{g \\cdot h}$ förutsätter dessutom att vågens höjd är liten jämfört med djupet, och det gäller inte när djupet närmar sig noll.
+
+**Svar:** Nära land blir vågen så hög att den bryter, och då gäller inte modellen längre.`,
+        },
     ],
 
 
@@ -66146,7 +73924,7 @@ Vågen kommer in på grundare vatten, saktar in och bryts mot normalen, så vink
                 '2:a maxlinjen.',
             ],
             correct: 3,
-            solution: `För **konstruktiv interferens** (maxlinjer) gäller $\\Delta s = n\\cdot\\lambda$. Punkten har $\\Delta s = 2\\lambda$, så $n = 2$ — det är **2:a maxlinjen**.
+            solution: `För **konstruktiv interferens** (maxlinjer) gäller $\\Delta s = n\\cdot\\lambda$. Punkten har $\\Delta s = 2\\lambda$, så $n = 2$, och det är **2:a maxlinjen**.
 
 För nodlinjerna (destruktiv interferens) skulle $\\Delta s$ vara ett halvt antal våglängder: $\\lambda/2, 3\\lambda/2, 5\\lambda/2, \\ldots$.
 
@@ -66173,16 +73951,16 @@ $$ \\lambda = 2 \\cdot 0{,}30 = 0{,}60\\ \\mathrm{m} $$
             question: `Vad är skillnaden mellan **diffraktion** och **interferens**?`,
             choices: [
                 'Diffraktion är samma sak som reflexion; interferens samma sak som brytning.',
-                'De är samma fenomen — bara olika ord för det.',
+                'De är samma fenomen, bara olika ord för det.',
                 'Diffraktion sker bara i ljud; interferens bara i ljus.',
                 'Diffraktion är hur vågor böjs av vid kanter eller spalter; interferens är hur vågor förstärker eller släcker ut varandra när de möts.',
             ],
             correct: 3,
-            solution: `**Diffraktion** är vågors avböjning vid kanter eller smala öppningar — fenomenet att en våg "böjs runt hörn" eller sprids ut efter en spalt. **Interferens** är överlagring av vågor: när vågor från olika källor (eller olika delar av samma våg som spridits) möts kan de förstärka varandra (maxlinjer) eller släcka ut varandra (nodlinjer).
+            solution: `**Diffraktion** är vågors avböjning vid kanter eller smala öppningar, alltså fenomenet att en våg "böjs runt hörn" eller sprids ut efter en spalt. **Interferens** är överlagring av vågor: när vågor från olika källor (eller olika delar av samma våg som spridits) möts kan de förstärka varandra (maxlinjer) eller släcka ut varandra (nodlinjer).
 
-I dubbelspaltsförsöket samverkar båda — först diffrakterar vågen genom varje spalt, och sedan interfererar de två diffrakterade vågorna med varandra.
+I dubbelspaltsförsöket samverkar båda: först diffrakterar vågen genom varje spalt, och sedan interfererar de två diffrakterade vågorna med varandra.
 
-**Generell slutsats:** Båda fenomen är karakteristiska för **vågor**. De avslöjar att något är en våg — t.ex. visade dubbelspaltsförsök 1801 att ljus är en vågrörelse, och 1927 att även elektroner är vågor.`,
+**Generell slutsats:** Båda fenomen är karakteristiska för **vågor**. De avslöjar att något är en våg: t.ex. visade dubbelspaltsförsök 1801 att ljus är en vågrörelse, och 1927 att även elektroner är vågor.`,
         },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
@@ -66194,11 +73972,11 @@ ${makeTwoSourceGeo({ dAB: 4.0, dBL: 3.0, dABLabel: 'AB = 4,0 m', dBLLabel: 'BL 
             answer: { value: 2, unit: '(2:a maxlinjen)' },
             solution: `Vi avgör vilken linje genom att räkna vägskillnaden i våglängder.
 
-**Steg 1 — ljudets våglängd.**
+**Steg 1: ljudets våglängd.**
 
 $$ \\lambda = \\frac{v}{f} = \\frac{340}{340} = 1{,}00\\ \\mathrm{m} $$
 
-**Steg 2 — avstånden till källorna.** Lyssnaren *L* står $3{,}0\\ \\mathrm{m}$ rakt fram från *B*:
+**Steg 2: avstånden till källorna.** Lyssnaren *L* står $3{,}0\\ \\mathrm{m}$ rakt fram från *B*:
 
 $$ BL = 3{,}0\\ \\mathrm{m} $$
 
@@ -66206,7 +73984,7 @@ $$ AL = \\sqrt{AB^2 + BL^2} = \\sqrt{4{,}0^2 + 3{,}0^2} = \\sqrt{25} = 5{,}0\\ \
 
 (Pythagoreisk trippel 3-4-5.)
 
-**Steg 3 — vägskillnad.**
+**Steg 3: vägskillnad.**
 
 $$ \\Delta s = AL - BL = 5{,}0 - 3{,}0 = 2{,}0\\ \\mathrm{m} = 2\\lambda $$
 
@@ -66224,17 +74002,17 @@ ${makeTwoSourceGeo({ dAB: 3.0, dBL: 4.0, dABLabel: 'AB = 3,0 m', dBLLabel: 'BL 
             answer: { value: 170, unit: 'Hz' },
             solution: `Vi bestämmer först vägskillnaden ur geometrin, sedan våglängden från interferens-villkoret, och slutligen frekvensen.
 
-**Steg 1 — vägskillnad ur geometrin.**
+**Steg 1: vägskillnad ur geometrin.**
 
 $$ AL = \\sqrt{3{,}0^2 + 4{,}0^2} = \\sqrt{25} = 5{,}0\\ \\mathrm{m} $$
 
 $$ \\Delta s = AL - BL = 5{,}0 - 4{,}0 = 1{,}0\\ \\mathrm{m} $$
 
-**Steg 2 — våglängd ur nodlinjeformeln.** För 0:e nodlinjen ($n = 0$):
+**Steg 2: våglängd ur nodlinjeformeln.** För 0:e nodlinjen ($n = 0$):
 
 $$ \\Delta s = \\frac{\\lambda}{2} \\quad\\Leftrightarrow\\quad \\lambda = 2\\Delta s = 2{,}0\\ \\mathrm{m} $$
 
-**Steg 3 — frekvens.**
+**Steg 3: frekvens.**
 
 $$ f = \\frac{v}{\\lambda} = \\frac{340}{2{,}0} = 170\\ \\mathrm{Hz} $$
 
@@ -66245,14 +74023,14 @@ $$ f = \\frac{v}{\\lambda} = \\frac{340}{2{,}0} = 170\\ \\mathrm{Hz} $$
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
-            level: 3,
+            level: 2,
             question: `Två högtalare *A* och *B* står $5{,}0\\ \\mathrm{m}$ från varandra och spelar samma ton i fas. En lyssnare står $12{,}0\\ \\mathrm{m}$ från *B* på en linje vinkelrätt mot $AB$ (rakt fram från *B*). Lyssnaren upplever att hen står på **1:a nodlinjen**. Bestäm tonens frekvens. Räkna med $v = 340\\ \\mathrm{m/s}$.
 
 ${makeTwoSourceGeo({ dAB: 5.0, dBL: 12.0, dABLabel: 'AB = 5,0 m', dBLLabel: 'BL = 12,0 m', dALLabel: 'AL' })}`,
             answer: { value: 510, unit: 'Hz' },
-            solution: `**Insikten är att 1:a nodlinjen ($n = 1$) motsvarar vägskillnaden $\\dfrac{3\\lambda}{2}$** — inte $\\lambda/2$ som för 0:e nodlinjen. Att räkna fel på nodlinje-ordningen är den vanligaste fällan i interferensuppgifter.
+            solution: `**Insikten är att 1:a nodlinjen ($n = 1$) motsvarar vägskillnaden $\\dfrac{3\\lambda}{2}$**, inte $\\lambda/2$ som för 0:e nodlinjen. Att räkna fel på nodlinje-ordningen är den vanligaste fällan i interferensuppgifter.
 
-**Steg 1 — vägskillnad ur geometrin.** Lyssnaren *L* står $12\\ \\mathrm{m}$ rakt fram från *B*, vinkelrätt mot $AB$:
+**Steg 1: vägskillnad ur geometrin.** Lyssnaren *L* står $12\\ \\mathrm{m}$ rakt fram från *B*, vinkelrätt mot $AB$:
 
 $$ AL = \\sqrt{AB^2 + BL^2} = \\sqrt{5{,}0^2 + 12{,}0^2} = \\sqrt{25 + 144} = \\sqrt{169} = 13{,}0\\ \\mathrm{m} $$
 
@@ -66260,19 +74038,539 @@ $$ AL = \\sqrt{AB^2 + BL^2} = \\sqrt{5{,}0^2 + 12{,}0^2} = \\sqrt{25 + 144} = \\
 
 $$ \\Delta s = AL - BL = 13{,}0 - 12{,}0 = 1{,}0\\ \\mathrm{m} $$
 
-**Steg 2 — våglängd ur nodlinje-villkoret.** För 1:a nodlinjen ($n = 1$):
+**Steg 2: våglängd ur nodlinje-villkoret.** För 1:a nodlinjen ($n = 1$):
 
 $$ \\Delta s = \\left(1 + \\frac{1}{2}\\right)\\lambda = \\frac{3\\lambda}{2} \\quad\\Leftrightarrow\\quad \\lambda = \\frac{2\\Delta s}{3} $$
 
 $$ \\lambda = \\frac{2 \\cdot 1{,}0}{3} = \\frac{2}{3}\\ \\mathrm{m} \\approx 0{,}667\\ \\mathrm{m} $$
 
-**Steg 3 — frekvens.**
+**Steg 3: frekvens.**
 
 $$ f = \\frac{v}{\\lambda} = \\frac{340}{2/3} = 340 \\cdot \\frac{3}{2} = 510\\ \\mathrm{Hz} $$
 
 **Svar:** Tonens frekvens är $510\\ \\mathrm{Hz}$.
 
-**Generell slutsats:** För att lösa interferensuppgifter behöver man (1) en geometrisk del för att hitta $\\Delta s$ (här Pythagoras), (2) rätt villkor för max/nod (heltal $\\lambda$ vs halvtal $\\lambda$), och (3) $v = f\\lambda$ för att binda ihop. Den klassiska fällan är att blanda ihop nodlinje-numreringen — kom ihåg att 0:e nodlinjen har $\\Delta s = \\lambda/2$, 1:a nodlinjen har $3\\lambda/2$, och så vidare.`,
+**Generell slutsats:** För att lösa interferensuppgifter behöver man (1) en geometrisk del för att hitta $\\Delta s$ (här Pythagoras), (2) rätt villkor för max/nod (heltal $\\lambda$ vs halvtal $\\lambda$), och (3) $v = f\\lambda$ för att binda ihop. Den klassiska fällan är att blanda ihop nodlinje-numreringen. Kom ihåg att 0:e nodlinjen har $\\Delta s = \\lambda/2$, 1:a nodlinjen har $3\\lambda/2$, och så vidare.`,
+        },
+        {
+            level: 1,
+            question: `I en vågtank skapar två punktkällor som svänger i fas vattenvågor med våglängden $\\lambda = 2{,}4\\ \\mathrm{cm}$. En punkt *P* på vattenytan ligger $15{,}6\\ \\mathrm{cm}$ från den ena källan och $19{,}2\\ \\mathrm{cm}$ från den andra. Var i interferensmönstret ligger *P*?`,
+            choices: [
+                'På 1:a maximilinjen.',
+                'På 0:e nodlinjen.',
+                'På 1:a nodlinjen.',
+                'Mitt emellan en nodlinje och en maximilinje.',
+            ],
+            correct: 2,
+            solution: `Vi räknar ut vägskillnaden och jämför den med våglängden.
+
+$$ \\Delta s = 19{,}2 - 15{,}6 = 3{,}6\\ \\mathrm{cm} $$
+
+Uttryckt i antal våglängder:
+
+$$ \\frac{\\Delta s}{\\lambda} = \\frac{3{,}6}{2{,}4} = 1{,}5 $$
+
+Vägskillnaden är ett **halvt** antal våglängder, så vågorna möts i motfas och det blir destruktiv interferens. Villkoret för en nodlinje är
+
+$$ \\Delta s = \\left(n + \\frac{1}{2}\\right) \\cdot \\lambda $$
+
+och $1{,}5\\lambda$ ger $n = 1$.
+
+**Svar:** *P* ligger på 1:a nodlinjen.`,
+        },
+        {
+            level: 1,
+            question: `Du står i en korridor bredvid en öppen dörr. Inne i rummet pratar en person som du inte kan se, men du hör rösten tydligt. Vilket fenomen förklarar att ljudet når runt dörrkarmen fram till dig?`,
+            choices: [
+                'Diffraktion: ljudvågorna böjs av vid dörröppningens kanter och sprids ut i korridoren.',
+                'Destruktiv interferens: ljuset släcks ut i korridoren men inte ljudet.',
+                'Konstruktiv interferens: ljudet förstärks när det passerar dörren.',
+                'Brytning: ljudet byter hastighet i dörröppningen.',
+            ],
+            correct: 0,
+            solution: `När en våg passerar en öppning böjs den av vid kanterna och sprider sig ut bakom öppningen, som om öppningen vore en ny vågkälla. Det kallas **diffraktion**. Ljudet från rösten sprids därför ut i korridoren, också åt sidorna där du står.
+
+Avböjningen märks tydligast när öppningen inte är mycket större än våglängden. En röst har våglängder från ungefär en decimeter till ett par meter, ungefär som dörröppningen. Ljusets våglängd är mindre än en tusendels millimeter, så ljuset böjs nästan inte alls vid dörren, och därför ser du inte personen.
+
+Interferens kräver vågor från två källor eller två öppningar som möts, och brytning sker när en våg går in i ett annat material. Ingen av dem förklarar att ljudet når runt hörnet.
+
+**Svar:** Diffraktion.`,
+        },
+        {
+            level: 1,
+            question: `Två högtalare som är kopplade i fas spelar en ton med frekvensen $680\\ \\mathrm{Hz}$. Hur stor är vägskillnaden till högtalarna för en punkt på 2:a maximilinjen? Räkna med $v = 340\\ \\mathrm{m/s}$ och ange svaret i meter.`,
+            answer: { value: 1, unit: 'm' },
+            solution: `Först våglängden ur $v = f \\cdot \\lambda$:
+
+$$ \\lambda = \\frac{v}{f} = \\frac{340}{680} = 0{,}50\\ \\mathrm{m} $$
+
+På en maximilinje är vägskillnaden ett helt antal våglängder:
+
+$$ \\Delta s = n \\cdot \\lambda $$
+
+$$
+\\left[ \\begin{array}{l}
+n = 2\\ (\\text{2:a maximilinjen}) \\\\
+\\lambda = 0{,}50\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ \\Delta s = 2 \\cdot 0{,}50 = 1{,}0\\ \\mathrm{m} $$
+
+**Svar:** $1{,}0\\ \\mathrm{m}$`,
+        },
+        {
+            level: 1,
+            question: `Figuren visar vattenvågor från två punktkällor $S_1$ och $S_2$ som svänger i fas, sedda uppifrån. Heldragna cirklar är vågtoppar och streckade cirklar är vågdalar. I vilken av de markerade punkterna är vattnet hela tiden nästan stilla?
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 290" width="614" height="424" role="img" aria-label="Två punktkällor S1 och S2 med cirkulära vågtoppar och vågdalar. Tre punkter P, Q och R är markerade i mönstret." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><defs><clipPath id="ovn2214klipp"><rect x="14" y="50" width="392" height="232"/></clipPath></defs><g clip-path="url(#ovn2214klipp)"><circle cx="180" cy="50" r="24" fill="none" stroke="#2f6db0" stroke-width="1.3" opacity="0.75"/><circle cx="180" cy="50" r="48" fill="none" stroke="#2f6db0" stroke-width="1.3" opacity="0.75"/><circle cx="180" cy="50" r="72" fill="none" stroke="#2f6db0" stroke-width="1.3" opacity="0.75"/><circle cx="180" cy="50" r="96" fill="none" stroke="#2f6db0" stroke-width="1.3" opacity="0.75"/><circle cx="180" cy="50" r="120" fill="none" stroke="#2f6db0" stroke-width="1.3" opacity="0.75"/><circle cx="180" cy="50" r="144" fill="none" stroke="#2f6db0" stroke-width="1.3" opacity="0.75"/><circle cx="180" cy="50" r="168" fill="none" stroke="#2f6db0" stroke-width="1.3" opacity="0.75"/><circle cx="180" cy="50" r="192" fill="none" stroke="#2f6db0" stroke-width="1.3" opacity="0.75"/><circle cx="180" cy="50" r="216" fill="none" stroke="#2f6db0" stroke-width="1.3" opacity="0.75"/><circle cx="180" cy="50" r="12" fill="none" stroke="#2f6db0" stroke-width="1.1" stroke-dasharray="3 3" opacity="0.75"/><circle cx="180" cy="50" r="36" fill="none" stroke="#2f6db0" stroke-width="1.1" stroke-dasharray="3 3" opacity="0.75"/><circle cx="180" cy="50" r="60" fill="none" stroke="#2f6db0" stroke-width="1.1" stroke-dasharray="3 3" opacity="0.75"/><circle cx="180" cy="50" r="84" fill="none" stroke="#2f6db0" stroke-width="1.1" stroke-dasharray="3 3" opacity="0.75"/><circle cx="180" cy="50" r="108" fill="none" stroke="#2f6db0" stroke-width="1.1" stroke-dasharray="3 3" opacity="0.75"/><circle cx="180" cy="50" r="132" fill="none" stroke="#2f6db0" stroke-width="1.1" stroke-dasharray="3 3" opacity="0.75"/><circle cx="180" cy="50" r="156" fill="none" stroke="#2f6db0" stroke-width="1.1" stroke-dasharray="3 3" opacity="0.75"/><circle cx="180" cy="50" r="180" fill="none" stroke="#2f6db0" stroke-width="1.1" stroke-dasharray="3 3" opacity="0.75"/><circle cx="180" cy="50" r="204" fill="none" stroke="#2f6db0" stroke-width="1.1" stroke-dasharray="3 3" opacity="0.75"/><circle cx="240" cy="50" r="24" fill="none" stroke="#c8324a" stroke-width="1.3" opacity="0.75"/><circle cx="240" cy="50" r="48" fill="none" stroke="#c8324a" stroke-width="1.3" opacity="0.75"/><circle cx="240" cy="50" r="72" fill="none" stroke="#c8324a" stroke-width="1.3" opacity="0.75"/><circle cx="240" cy="50" r="96" fill="none" stroke="#c8324a" stroke-width="1.3" opacity="0.75"/><circle cx="240" cy="50" r="120" fill="none" stroke="#c8324a" stroke-width="1.3" opacity="0.75"/><circle cx="240" cy="50" r="144" fill="none" stroke="#c8324a" stroke-width="1.3" opacity="0.75"/><circle cx="240" cy="50" r="168" fill="none" stroke="#c8324a" stroke-width="1.3" opacity="0.75"/><circle cx="240" cy="50" r="192" fill="none" stroke="#c8324a" stroke-width="1.3" opacity="0.75"/><circle cx="240" cy="50" r="216" fill="none" stroke="#c8324a" stroke-width="1.3" opacity="0.75"/><circle cx="240" cy="50" r="12" fill="none" stroke="#c8324a" stroke-width="1.1" stroke-dasharray="3 3" opacity="0.75"/><circle cx="240" cy="50" r="36" fill="none" stroke="#c8324a" stroke-width="1.1" stroke-dasharray="3 3" opacity="0.75"/><circle cx="240" cy="50" r="60" fill="none" stroke="#c8324a" stroke-width="1.1" stroke-dasharray="3 3" opacity="0.75"/><circle cx="240" cy="50" r="84" fill="none" stroke="#c8324a" stroke-width="1.1" stroke-dasharray="3 3" opacity="0.75"/><circle cx="240" cy="50" r="108" fill="none" stroke="#c8324a" stroke-width="1.1" stroke-dasharray="3 3" opacity="0.75"/><circle cx="240" cy="50" r="132" fill="none" stroke="#c8324a" stroke-width="1.1" stroke-dasharray="3 3" opacity="0.75"/><circle cx="240" cy="50" r="156" fill="none" stroke="#c8324a" stroke-width="1.1" stroke-dasharray="3 3" opacity="0.75"/><circle cx="240" cy="50" r="180" fill="none" stroke="#c8324a" stroke-width="1.1" stroke-dasharray="3 3" opacity="0.75"/><circle cx="240" cy="50" r="204" fill="none" stroke="#c8324a" stroke-width="1.1" stroke-dasharray="3 3" opacity="0.75"/></g><line x1="14" y1="50" x2="406" y2="50" stroke="#7a8088" stroke-width="1"/><circle cx="180" cy="50" r="4" fill="#2f6db0"/><circle cx="240" cy="50" r="4" fill="#c8324a"/><text x="180" y="40" text-anchor="middle" font-size="13" fill="#2f6db0"><tspan font-style="italic">S</tspan><tspan font-size="10" dy="3">1</tspan></text><text x="240" y="40" text-anchor="middle" font-size="13" fill="#c8324a"><tspan font-style="italic">S</tspan><tspan font-size="10" dy="3">2</tspan></text><line x1="18" y1="16" x2="44" y2="16" stroke="#0f1620" stroke-width="1.4"/><text x="50" y="20" font-size="12" fill="#0f1620">vågtopp</text><line x1="292" y1="16" x2="318" y2="16" stroke="#0f1620" stroke-width="1.2" stroke-dasharray="3 3"/><text x="324" y="20" font-size="12" fill="#0f1620">vågdal</text><line x1="272.4" y1="190.3" x2="290.4" y2="176.3" stroke="#0f1620" stroke-width="1"/><rect x="280.4" y="166.3" width="20" height="20" rx="3" fill="#fffdf8" stroke="#0f1620" stroke-width="1"/><text x="290.4" y="180.9" text-anchor="middle" font-size="13" font-weight="600" fill="#0f1620"><tspan font-style="italic">P</tspan></text><circle cx="272.4" cy="190.3" r="3.6" fill="#0f1620"/><line x1="120" y1="167.6" x2="90" y2="151.6" stroke="#0f1620" stroke-width="1"/><rect x="80" y="141.6" width="20" height="20" rx="3" fill="#fffdf8" stroke="#0f1620" stroke-width="1"/><text x="90" y="156.2" text-anchor="middle" font-size="13" font-weight="600" fill="#0f1620"><tspan font-style="italic">Q</tspan></text><circle cx="120" cy="167.6" r="3.6" fill="#0f1620"/><line x1="210" y1="166.2" x2="210" y2="192.2" stroke="#0f1620" stroke-width="1"/><rect x="200" y="182.2" width="20" height="20" rx="3" fill="#fffdf8" stroke="#0f1620" stroke-width="1"/><text x="210" y="196.8" text-anchor="middle" font-size="13" font-weight="600" fill="#0f1620"><tspan font-style="italic">R</tspan></text><circle cx="210" cy="166.2" r="3.6" fill="#0f1620"/></svg>`,
+            choices: [
+                '*P*',
+                '*Q*',
+                '*R*',
+                'I ingen av punkterna.',
+            ],
+            correct: 1,
+            solution: `Vattnet är stilla på en **nodlinje**, där en vågtopp från den ena källan alltid möter en vågdal från den andra (destruktiv interferens).
+
+- I *P* möts en heldragen cirkel från $S_1$ och en heldragen cirkel från $S_2$: topp möter topp. Räknar man cirklarna ligger *P* på den 7:e toppen från $S_1$ och den 6:e från $S_2$, så $\\Delta s = 7\\lambda - 6\\lambda = \\lambda$. Det är en maximilinje.
+- I *Q* möts en streckad cirkel från $S_1$ (en vågdal $5{,}5\\lambda$ från källan) och en heldragen cirkel från $S_2$ ($7\\lambda$ från källan): dal möter topp. Vägskillnaden är $1{,}5\\lambda$, ett halvt antal våglängder.
+- I *R* möts två toppar på samma avstånd, $5\\lambda$, från båda källorna. *R* ligger på centralmax.
+
+**Svar:** *Q*`,
+        },
+        {
+            level: 2,
+            question: `I en vågtank finns två punktkällor som svänger i fas med frekvensen $12\\ \\mathrm{Hz}$. En elev lägger en liten kork på 1:a nodlinjen och mäter avstånden från korken till källorna: $10{,}0\\ \\mathrm{cm}$ och $13{,}0\\ \\mathrm{cm}$.<br>a) Bestäm vågornas våglängd.<br>b) Bestäm vågornas utbredningshastighet i m/s.`,
+            answer: { value: 0.24, unit: 'm/s' },
+            delsvar: [
+                { del: 'a', value: 2, unit: 'cm', etikett: '$\\lambda =$' },
+                { del: 'b', value: 0.24, unit: 'm/s', etikett: '$v =$' },
+            ],
+            solution: `**a)** Vägskillnaden från korken till källorna är
+
+$$ \\Delta s = 13{,}0 - 10{,}0 = 3{,}0\\ \\mathrm{cm} $$
+
+Korken ligger på en nodlinje, så villkoret för destruktiv interferens gäller. Vi löser ut våglängden:
+
+$$ \\Delta s = \\left(n + \\frac{1}{2}\\right) \\cdot \\lambda \\quad\\Leftrightarrow\\quad \\lambda = \\frac{\\Delta s}{n + \\frac{1}{2}} $$
+
+$$
+\\left[ \\begin{array}{l}
+\\Delta s = 3{,}0\\ \\mathrm{cm} \\\\
+n = 1\\ (\\text{1:a nodlinjen})
+\\end{array} \\right]
+$$
+
+$$ \\lambda = \\frac{3{,}0}{1{,}5} = 2{,}0\\ \\mathrm{cm} $$
+
+**Svar:** $2{,}0\\ \\mathrm{cm}$
+
+**b)** Utbredningshastigheten ges av $v = f \\cdot \\lambda$.
+
+$$
+\\left[ \\begin{array}{l}
+f = 12\\ \\mathrm{Hz} \\\\
+\\lambda = 2{,}0\\ \\mathrm{cm} = 0{,}020\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ v = 12 \\cdot 0{,}020 = 0{,}24\\ \\mathrm{m/s} $$
+
+Vattenvågor i en vågtank rör sig några decimeter per sekund, så svaret är rimligt.
+
+**Svar:** $0{,}24\\ \\mathrm{m/s}$`,
+        },
+        {
+            level: 2,
+            question: `Två högtalare som är kopplade i fas spelar samma ton. En mikrofon står $3{,}47\\ \\mathrm{m}$ från den ena högtalaren och $2{,}96\\ \\mathrm{m}$ från den andra. Tonens frekvens höjs långsamt, med början vid $200\\ \\mathrm{Hz}$. Räkna med $v = 340\\ \\mathrm{m/s}$.<br>a) Vid vilken frekvens blir det tyst vid mikrofonen för första gången?<br>b) Vid vilken frekvens är ljudet vid mikrofonen därefter som starkast för första gången?`,
+            answer: { value: 330, unit: 'Hz' },
+            delsvar: [
+                { del: 'a', value: 330, unit: 'Hz', etikett: '$f =$' },
+                { del: 'b', value: 670, unit: 'Hz', etikett: '$f =$' },
+            ],
+            solution: `Mikrofonen står kvar på samma plats, så vägskillnaden är densamma hela tiden:
+
+$$ \\Delta s = 3{,}47 - 2{,}96 = 0{,}51\\ \\mathrm{m} $$
+
+Det som ändras när frekvensen höjs är våglängden, $\\lambda = \\dfrac{v}{f}$.
+
+**a)** Det är tyst när vägskillnaden är ett halvt antal våglängder:
+
+$$ \\Delta s = \\left(n + \\frac{1}{2}\\right) \\cdot \\lambda = \\left(n + \\frac{1}{2}\\right) \\cdot \\frac{v}{f} \\quad\\Leftrightarrow\\quad f = \\left(n + \\frac{1}{2}\\right) \\cdot \\frac{v}{\\Delta s} $$
+
+Den lägsta frekvensen fås med $n = 0$:
+
+$$ f = 0{,}5 \\cdot \\frac{340}{0{,}51} = 333{,}3\\ \\mathrm{Hz} \\approx 330\\ \\mathrm{Hz} $$
+
+Den ligger över startfrekvensen $200\\ \\mathrm{Hz}$, så det är den första tysta frekvensen.
+
+**Svar:** Cirka $330\\ \\mathrm{Hz}$
+
+**b)** Ljudet är starkast när vägskillnaden är ett helt antal våglängder:
+
+$$ \\Delta s = n \\cdot \\frac{v}{f} \\quad\\Leftrightarrow\\quad f = n \\cdot \\frac{v}{\\Delta s} $$
+
+Nästa maximum efter $333\\ \\mathrm{Hz}$ fås med $n = 1$:
+
+$$ f = 1 \\cdot \\frac{340}{0{,}51} = 666{,}7\\ \\mathrm{Hz} \\approx 670\\ \\mathrm{Hz} $$
+
+Det stämmer med att maxima och minima växlar: den tysta frekvensen ligger mitt emellan $0\\ \\mathrm{Hz}$ och den första starka.
+
+**Svar:** Cirka $670\\ \\mathrm{Hz}$`,
+        },
+        {
+            level: 2,
+            question: `Två högtalare som är kopplade i fas spelar samma ton. Elin börjar i en punkt där hon har lika långt till båda högtalarna och går sedan åt sidan längs en rak linje. Ljudet blir omväxlande svagare och starkare. I den **tredje** tysta punkten som hon passerar mäter hon avstånden till högtalarna: $7{,}25\\ \\mathrm{m}$ och $5{,}50\\ \\mathrm{m}$. Bestäm tonens frekvens. Räkna med $v = 340\\ \\mathrm{m/s}$ och ange svaret i Hz.`,
+            answer: { value: 490, unit: 'Hz' },
+            solution: `Elin börjar där vägskillnaden är 0, alltså på centralmax. Den första tysta punkten hon kommer till ligger på 0:e nodlinjen, den andra på 1:a nodlinjen och den tredje på **2:a nodlinjen**. Här är $n = 2$, inte $n = 3$.
+
+Vägskillnaden i den tredje tysta punkten är
+
+$$ \\Delta s = 7{,}25 - 5{,}50 = 1{,}75\\ \\mathrm{m} $$
+
+Villkoret för destruktiv interferens ger våglängden:
+
+$$ \\Delta s = \\left(n + \\frac{1}{2}\\right) \\cdot \\lambda \\quad\\Leftrightarrow\\quad \\lambda = \\frac{\\Delta s}{n + \\frac{1}{2}} $$
+
+$$ \\lambda = \\frac{1{,}75}{2{,}5} = 0{,}70\\ \\mathrm{m} $$
+
+Frekvensen fås ur $v = f \\cdot \\lambda$:
+
+$$ f = \\frac{v}{\\lambda} = \\frac{340}{0{,}70} = 485{,}7\\ \\mathrm{Hz} \\approx 490\\ \\mathrm{Hz} $$
+
+**Svar:** Cirka $490\\ \\mathrm{Hz}$`,
+        },
+        {
+            level: 2,
+            question: `Två högtalare står bredvid varandra och spelar samma ton. Vid ett försök kopplas den ena högtalarens sladdar åt fel håll, så att högtalarna svänger i **motfas**: när den ena sänder ut en förtätning (en vågtopp) sänder den andra samtidigt ut en förtunning (en vågdal).<br>a) Blir ljudet starkt eller svagt på mittlinjen mellan högtalarna? Motivera.<br>b) En punkt låg på 1:a maximilinjen innan sladdarna byttes. Blir ljudet där starkt eller svagt efter bytet? Motivera.`,
+            solution: `**a)** På mittlinjen är avståndet till de två högtalarna lika stort, $\\Delta s = 0$. Vågorna har gått lika långt och kommer därför fram med samma fasskillnad som när de lämnade högtalarna. De lämnade högtalarna i motfas, så de möts i motfas: en vågtopp från den ena möter en vågdal från den andra. Det blir destruktiv interferens.
+
+**Svar:** Svagt. Mittlinjen blir en nodlinje.
+
+**b)** På 1:a maximilinjen är vägskillnaden $\\Delta s = \\lambda$. En hel våglängd längre väg ändrar inte vågens fas, eftersom vågen då har gjort exakt en svängning mer. Vågorna kommer alltså fram med samma fasskillnad som de startade med, motfas, och släcker ut varandra.
+
+**Svar:** Svagt. Punkten ligger nu på en nodlinje.
+
+När källorna svänger i motfas byter maximilinjer och nodlinjer plats: det blir tyst där $\\Delta s = n \\cdot \\lambda$ och starkt där $\\Delta s = \\left(n + \\dfrac{1}{2}\\right) \\cdot \\lambda$.`,
+        },
+        {
+            level: 2,
+            question: `Figuren visar en vågtank sedd uppifrån med ett rutnät i centimeter. Två punktkällor $S_1$ och $S_2$ svänger i fas och skapar vågor med våglängden $\\lambda = 1{,}0\\ \\mathrm{cm}$.<br>a) Bestäm avstånden från punkten *P* till de två källorna.<br>b) Ligger *P* på en nodlinje eller på en maximilinje? Ange också linjens ordningsnummer.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 330" width="611" height="448" role="img" aria-label="Rutnät med koordinatsystem i centimeter. Källorna S1 och S2 ligger på x-axeln i x = −3 och x = 3. Punkten P ligger i (4, 5)." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="40" y1="302" x2="40" y2="30" stroke="#d5d2cb" stroke-width="1"/><line x1="74" y1="302" x2="74" y2="30" stroke="#d5d2cb" stroke-width="1"/><line x1="108" y1="302" x2="108" y2="30" stroke="#d5d2cb" stroke-width="1"/><line x1="142" y1="302" x2="142" y2="30" stroke="#d5d2cb" stroke-width="1"/><line x1="176" y1="302" x2="176" y2="30" stroke="#d5d2cb" stroke-width="1"/><line x1="210" y1="302" x2="210" y2="30" stroke="#d5d2cb" stroke-width="1"/><line x1="244" y1="302" x2="244" y2="30" stroke="#d5d2cb" stroke-width="1"/><line x1="278" y1="302" x2="278" y2="30" stroke="#d5d2cb" stroke-width="1"/><line x1="312" y1="302" x2="312" y2="30" stroke="#d5d2cb" stroke-width="1"/><line x1="346" y1="302" x2="346" y2="30" stroke="#d5d2cb" stroke-width="1"/><line x1="380" y1="302" x2="380" y2="30" stroke="#d5d2cb" stroke-width="1"/><line x1="414" y1="302" x2="414" y2="30" stroke="#d5d2cb" stroke-width="1"/><line x1="40" y1="302" x2="414" y2="302" stroke="#d5d2cb" stroke-width="1"/><line x1="40" y1="268" x2="414" y2="268" stroke="#d5d2cb" stroke-width="1"/><line x1="40" y1="234" x2="414" y2="234" stroke="#d5d2cb" stroke-width="1"/><line x1="40" y1="200" x2="414" y2="200" stroke="#d5d2cb" stroke-width="1"/><line x1="40" y1="166" x2="414" y2="166" stroke="#d5d2cb" stroke-width="1"/><line x1="40" y1="132" x2="414" y2="132" stroke="#d5d2cb" stroke-width="1"/><line x1="40" y1="98" x2="414" y2="98" stroke="#d5d2cb" stroke-width="1"/><line x1="40" y1="64" x2="414" y2="64" stroke="#d5d2cb" stroke-width="1"/><line x1="40" y1="30" x2="414" y2="30" stroke="#d5d2cb" stroke-width="1"/><line x1="40" y1="268" x2="424" y2="268" stroke="#0f1620" stroke-width="1.6"/><polygon points="424,264 433,268 424,272" fill="#0f1620"/><line x1="210" y1="302" x2="210" y2="20" stroke="#0f1620" stroke-width="1.6"/><polygon points="206,20 210,11 214,20" fill="#0f1620"/><text x="74" y="285" text-anchor="middle" font-size="12" fill="#0f1620">−4</text><text x="142" y="285" text-anchor="middle" font-size="12" fill="#0f1620">−2</text><text x="278" y="285" text-anchor="middle" font-size="12" fill="#0f1620">2</text><text x="346" y="285" text-anchor="middle" font-size="12" fill="#0f1620">4</text><text x="414" y="285" text-anchor="middle" font-size="12" fill="#0f1620">6</text><text x="216" y="204" text-anchor="start" font-size="12" fill="#0f1620">2</text><text x="216" y="136" text-anchor="start" font-size="12" fill="#0f1620">4</text><text x="216" y="68" text-anchor="start" font-size="12" fill="#0f1620">6</text><text x="204" y="285" text-anchor="end" font-size="12" fill="#0f1620">0</text><text x="436" y="298" text-anchor="end" font-size="13" fill="#0f1620"><tspan font-style="italic">x</tspan> (cm)</text><text x="220" y="24" text-anchor="start" font-size="13" fill="#0f1620"><tspan font-style="italic">y</tspan> (cm)</text><line x1="108" y1="268" x2="346" y2="98" stroke="#2f6db0" stroke-width="1.4" stroke-dasharray="5 4"/><line x1="312" y1="268" x2="346" y2="98" stroke="#2f6db0" stroke-width="1.4" stroke-dasharray="5 4"/><circle cx="108" cy="268" r="4.5" fill="#c8324a"/><circle cx="312" cy="268" r="4.5" fill="#c8324a"/><circle cx="346" cy="98" r="4" fill="#0f1620"/><text x="91" y="256" text-anchor="middle" font-size="14" fill="#c8324a"><tspan font-style="italic">S</tspan><tspan font-size="10" dy="3">1</tspan></text><text x="329" y="256" text-anchor="middle" font-size="14" fill="#c8324a"><tspan font-style="italic">S</tspan><tspan font-size="10" dy="3">2</tspan></text><text x="363" y="86" text-anchor="middle" font-size="14" fill="#0f1620"><tspan font-style="italic">P</tspan></text></svg>`,
+            answer: { value: 8.6, unit: 'cm' },
+            delsvar: [
+                { del: 'a', value: 8.6, unit: 'cm', etikett: '$S_1P =$' },
+                { del: 'a', value: 5.1, unit: 'cm', etikett: '$S_2P =$' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Ur figuren avläses $S_1$ i $(-3,\\ 0)$, $S_2$ i $(3,\\ 0)$ och *P* i $(4,\\ 5)$. Varje avstånd är hypotenusan i en rätvinklig triangel, så vi använder Pythagoras sats.
+
+Från $S_1$ till *P* är det $4 - (-3) = 7$ cm i sidled och $5$ cm i höjdled:
+
+$$ S_1P = \\sqrt{7^2 + 5^2} = \\sqrt{74} = 8{,}602\\ \\mathrm{cm} \\approx 8{,}6\\ \\mathrm{cm} $$
+
+Från $S_2$ till *P* är det $4 - 3 = 1$ cm i sidled och $5$ cm i höjdled:
+
+$$ S_2P = \\sqrt{1^2 + 5^2} = \\sqrt{26} = 5{,}099\\ \\mathrm{cm} \\approx 5{,}1\\ \\mathrm{cm} $$
+
+**Svar:** $S_1P \\approx 8{,}6\\ \\mathrm{cm}$ och $S_2P \\approx 5{,}1\\ \\mathrm{cm}$
+
+**b)** Vi räknar med de oavrundade avstånden:
+
+$$ \\Delta s = 8{,}602 - 5{,}099 = 3{,}503\\ \\mathrm{cm} \\approx 3{,}5\\ \\mathrm{cm} $$
+
+Med $\\lambda = 1{,}0\\ \\mathrm{cm}$ är det $3{,}5$ våglängder, ett halvt antal. Villkoret för en nodlinje, $\\Delta s = \\left(n + \\dfrac{1}{2}\\right) \\cdot \\lambda$, är uppfyllt med $n = 3$.
+
+**Svar:** *P* ligger på 3:e nodlinjen.`,
+        },
+        {
+            level: 3,
+            question: `Två högtalare *A* och *B* som är kopplade i fas står på avståndet $d$ från varandra. En lyssnare befinner sig på den räta linjen genom båda högtalarna, på andra sidan om *B* (se figuren).<br>a) Visa att vägskillnaden är $d$ var lyssnaren än står på den delen av linjen.<br>b) Ta fram ett allmänt uttryck för de frekvenser $f$ som ger tystnad överallt på den delen av linjen. Uttryck svaret med $d$, ljudets hastighet $v$ och ett heltal $n$.<br>c) Avståndet är $d = 0{,}85\\ \\mathrm{m}$. Bestäm de tre lägsta frekvenserna som ger tystnad där. Räkna med $v = 340\\ \\mathrm{m/s}$.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 130" width="597" height="176" role="img" aria-label="Två högtalare A och B på en rät linje med avståndet d. En lyssnare står på samma linje, bortom B." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="40" y1="60" x2="420" y2="60" stroke="#7a8088" stroke-width="1.2" stroke-dasharray="5 4"/><rect x="65" y="51" width="9" height="18" rx="1.5" fill="#3a3f47"/><polygon points="74,51 82,46 82,74 74,69" fill="#5a616b"/><rect x="165" y="51" width="9" height="18" rx="1.5" fill="#3a3f47"/><polygon points="174,51 182,46 182,74 174,69" fill="#5a616b"/><text x="70" y="38" text-anchor="middle" font-size="14" fill="#0f1620"><tspan font-style="italic">A</tspan></text><text x="170" y="38" text-anchor="middle" font-size="14" fill="#0f1620"><tspan font-style="italic">B</tspan></text><circle cx="330" cy="60" r="4.5" fill="#0f1620"/><text x="330" y="46" text-anchor="middle" font-size="13" fill="#0f1620">lyssnare</text><line x1="70" y1="78" x2="70" y2="104" stroke="#7a8088" stroke-width="1" stroke-dasharray="3 3"/><line x1="170" y1="78" x2="170" y2="104" stroke="#7a8088" stroke-width="1" stroke-dasharray="3 3"/><line x1="77" y1="98" x2="163" y2="98" stroke="#0f1620" stroke-width="1.2" stroke-linecap="butt"/><polygon points="77,94.5 70,98 77,101.5" fill="#0f1620"/><polygon points="163,94.5 170,98 163,101.5" fill="#0f1620"/><text x="120" y="120" text-anchor="middle" font-size="14" fill="#0f1620"><tspan font-style="italic">d</tspan></text></svg>`,
+            answer: { value: 200, unit: 'Hz' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b' },
+                { del: 'c', values: [200, 600, 1000], unit: 'Hz', etikett: '$f =$' },
+            ],
+            solution: `**a)** Kalla lyssnarens avstånd till *B* för $s$. Lyssnaren står på linjen bortom *B*, så ljudet från *A* måste först gå sträckan $d$ fram till *B* och sedan samma sträcka $s$ som ljudet från *B*:
+
+$$ AL = d + s \\qquad BL = s $$
+
+$$ \\Delta s = AL - BL = (d + s) - s = d $$
+
+Vägskillnaden beror inte på $s$, så den är $d$ överallt på den delen av linjen.
+
+**b)** Det är tyst när vägskillnaden är ett halvt antal våglängder. Med $\\Delta s = d$ och $\\lambda = \\dfrac{v}{f}$:
+
+$$ d = \\left(n + \\frac{1}{2}\\right) \\cdot \\frac{v}{f} \\quad\\Leftrightarrow\\quad f = \\left(n + \\frac{1}{2}\\right) \\cdot \\frac{v}{d} = \\frac{(2n + 1) \\cdot v}{2d} $$
+
+där $n = 0,\\ 1,\\ 2,\\ \\ldots$
+
+**Svar:** $f = \\dfrac{(2n + 1) \\cdot v}{2d}$, där $n = 0,\\ 1,\\ 2,\\ \\ldots$
+
+**c)** Först faktorn som är gemensam för alla frekvenser:
+
+$$ \\frac{v}{2d} = \\frac{340}{2 \\cdot 0{,}85} = 200\\ \\mathrm{Hz} $$
+
+De tre lägsta frekvenserna fås med $n = 0$, $1$ och $2$, alltså med $2n + 1 = 1$, $3$ och $5$:
+
+$$ f = 1 \\cdot 200 = 200\\ \\mathrm{Hz} \\qquad f = 3 \\cdot 200 = 600\\ \\mathrm{Hz} \\qquad f = 5 \\cdot 200 = 1\\,000\\ \\mathrm{Hz} $$
+
+Bara udda multipler av $200\\ \\mathrm{Hz}$ ger tystnad. Vid jämna multipler, till exempel $400\\ \\mathrm{Hz}$, är $d$ ett helt antal våglängder och ljudet förstärks i stället. I verkligheten blir det inte helt tyst, eftersom ljudet från *A* har gått längre och är svagare än ljudet från *B* när det når lyssnaren, men ljudet blir mycket svagt.
+
+**Svar:** $200\\ \\mathrm{Hz}$, $600\\ \\mathrm{Hz}$ och $1\\,000\\ \\mathrm{Hz}$`,
+        },
+        {
+            level: 3,
+            question: `Två högtalare som är kopplade i fas står $1{,}9\\ \\mathrm{m}$ från varandra på en stor, öppen gräsyta och spelar en ton med frekvensen $500\\ \\mathrm{Hz}$. Betrakta området framför högtalarna.<br>a) Hur många nodlinjer finns det sammanlagt?<br>b) Hur många maximilinjer finns det sammanlagt?<br>Motivera svaren. Räkna med $v = 340\\ \\mathrm{m/s}$.`,
+            answer: { value: 6, unit: 'st' },
+            delsvar: [
+                { del: 'a', value: 6, unit: 'st', etikett: 'nodlinjer' },
+                { del: 'b', value: 5, unit: 'st', etikett: 'maximilinjer' },
+            ],
+            solution: `Våglängden är
+
+$$ \\lambda = \\frac{v}{f} = \\frac{340}{500} = 0{,}68\\ \\mathrm{m} $$
+
+**Hur stor kan vägskillnaden bli?** För en punkt *P* bildar *P* och de två högtalarna *A* och *B* en triangel. En sida i en triangel är alltid kortare än summan av de två andra, så $AP < AB + BP$, alltså $AP - BP < AB = 1{,}9\\ \\mathrm{m}$. Vägskillnaden kan alltså aldrig bli större än avståndet mellan högtalarna. Den närmar sig $1{,}9\\ \\mathrm{m}$ längst ut åt sidorna, i linje med högtalarna.
+
+En linje finns därför bara om dess vägskillnad är mindre än $1{,}9\\ \\mathrm{m}$. Uttryckt i våglängder:
+
+$$ \\frac{1{,}9}{0{,}68} = 2{,}794 $$
+
+Vägskillnaden kan alltså vara högst ungefär $2{,}8$ våglängder.
+
+**a)** På en nodlinje är $\\Delta s = \\left(n + \\dfrac{1}{2}\\right) \\cdot \\lambda$. Villkoret $n + 0{,}5 < 2{,}794$ uppfylls av $n = 0$, $1$ och $2$ (med vägskillnaderna $0{,}5\\lambda$, $1{,}5\\lambda$ och $2{,}5\\lambda$). Varje nodlinje finns på båda sidor om mittlinjen, närmare *A* på den ena sidan och närmare *B* på den andra, så antalet blir $3 \\cdot 2 = 6$.
+
+**Svar:** 6 nodlinjer
+
+**b)** På en maximilinje är $\\Delta s = n \\cdot \\lambda$. Villkoret $n < 2{,}794$ uppfylls av $n = 0$, $1$ och $2$. Centralmax ($n = 0$) är mittlinjen och finns bara en gång, medan 1:a och 2:a maximilinjen finns på båda sidor. Antalet blir $1 + 2 \\cdot 2 = 5$.
+
+**Svar:** 5 maximilinjer
+
+Det stämmer med att nodlinjer och maximilinjer ligger om vartannat: utifrån och in kommer nod, max, nod, max, nod, centralmax, och sedan samma sak spegelvänt på andra sidan.`,
+        },
+        {
+            level: 3,
+            question: `Två högtalare *A* och *B* som är kopplade i fas står $1{,}2\\ \\mathrm{m}$ från varandra och $15\\ \\mathrm{m}$ från en lång vägg som är parallell med *AB*. De spelar en ton med frekvensen $680\\ \\mathrm{Hz}$. Punkten *C* på väggen ligger mitt emot mittpunkten mellan högtalarna. När man går längs väggen från *C* kommer man till den första tysta punkten *T*. Bestäm avståndet $x$ från *C* till *T*. Räkna med $v = 340\\ \\mathrm{m/s}$ och ange svaret i meter. Figuren är inte skalenlig.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 266" width="570" height="361" role="img" aria-label="Två högtalare A och B, 1,2 m från varandra, står 15 m från en vägg. C ligger på väggen mitt emot högtalarna och T på avståndet x från C." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="360" y1="18" x2="360" y2="236" stroke="#6b7178" stroke-width="5"/><line x1="76" y1="125" x2="360" y2="125" stroke="#7a8088" stroke-width="1.2" stroke-dasharray="5 4"/><line x1="76" y1="105" x2="360" y2="205" stroke="#c8324a" stroke-width="1.3"/><line x1="76" y1="145" x2="360" y2="205" stroke="#c8324a" stroke-width="1.3"/><rect x="59" y="96" width="9" height="18" rx="1.5" fill="#3a3f47"/><polygon points="68,96 76,91 76,119 68,114" fill="#5a616b"/><rect x="59" y="136" width="9" height="18" rx="1.5" fill="#3a3f47"/><polygon points="68,136 76,131 76,159 68,154" fill="#5a616b"/><text x="64" y="85" text-anchor="middle" font-size="14" fill="#0f1620"><tspan font-style="italic">A</tspan></text><text x="64" y="177" text-anchor="middle" font-size="14" fill="#0f1620"><tspan font-style="italic">B</tspan></text><line x1="34" y1="112" x2="34" y2="138" stroke="#0f1620" stroke-width="1.2" stroke-linecap="butt"/><polygon points="30.5,112 34,105 37.5,112" fill="#0f1620"/><polygon points="30.5,138 34,145 37.5,138" fill="#0f1620"/><text x="28" y="129" text-anchor="end" font-size="12" fill="#0f1620">1,2 m</text><circle cx="360" cy="125" r="3.8" fill="#0f1620"/><circle cx="360" cy="205" r="3.8" fill="#0f1620"/><text x="351" y="118" text-anchor="end" font-size="14" fill="#0f1620"><tspan font-style="italic">C</tspan></text><text x="351" y="227" text-anchor="end" font-size="14" fill="#0f1620"><tspan font-style="italic">T</tspan></text><line x1="384" y1="132" x2="384" y2="198" stroke="#0f1620" stroke-width="1.2" stroke-linecap="butt"/><polygon points="380.5,132 384,125 387.5,132" fill="#0f1620"/><polygon points="380.5,198 384,205 387.5,198" fill="#0f1620"/><text x="392" y="170" text-anchor="start" font-size="14" fill="#0f1620"><tspan font-style="italic">x</tspan></text><line x1="64" y1="185" x2="64" y2="258" stroke="#7a8088" stroke-width="1" stroke-dasharray="3 3"/><line x1="71" y1="250" x2="350" y2="250" stroke="#0f1620" stroke-width="1.2" stroke-linecap="butt"/><polygon points="71,246.5 64,250 71,253.5" fill="#0f1620"/><polygon points="350,246.5 357,250 350,253.5" fill="#0f1620"/><text x="212" y="244" text-anchor="middle" font-size="12" fill="#0f1620">15 m</text><text x="252" y="118" text-anchor="middle" font-size="12" fill="#7a8088">mittlinje</text></svg>`,
+            answer: { value: 3.2, unit: 'm', tol: 0.04 },
+            solution: `**Vilket villkor gäller i *T*?** I *C* är vägskillnaden 0 (centralmax). Den första tysta punkten ligger på 0:e nodlinjen, där
+
+$$ \\Delta s = \\frac{\\lambda}{2} $$
+
+$$ \\lambda = \\frac{v}{f} = \\frac{340}{680} = 0{,}50\\ \\mathrm{m} \\qquad \\Delta s = 0{,}25\\ \\mathrm{m} $$
+
+**Avstånden till *T*.** Mittpunkten mellan högtalarna ligger $0{,}6\\ \\mathrm{m}$ från var och en. *T* ligger $x$ från *C*, på samma sida som *B*. Med Pythagoras sats:
+
+$$ AT = \\sqrt{15^2 + (x + 0{,}6)^2} \\qquad BT = \\sqrt{15^2 + (x - 0{,}6)^2} $$
+
+Villkoret är $AT - BT = 0{,}25$. Ekvationen blir enklare med konjugatregeln. Skillnaden mellan kvadraterna är
+
+$$ AT^2 - BT^2 = (x + 0{,}6)^2 - (x - 0{,}6)^2 = 4 \\cdot 0{,}6 \\cdot x = 2{,}4x $$
+
+och samtidigt är $AT^2 - BT^2 = (AT - BT)(AT + BT)$. Alltså gäller
+
+$$ 2{,}4x = 0{,}25 \\cdot (AT + BT) \\quad\\Leftrightarrow\\quad x = \\frac{0{,}25 \\cdot (AT + BT)}{2{,}4} \\qquad (1) $$
+
+**Första uppskattning.** *T* ligger nära *C* jämfört med avståndet $15\\ \\mathrm{m}$, så båda avstånden är nära $15\\ \\mathrm{m}$ och $AT + BT \\approx 30\\ \\mathrm{m}$. Insättning i (1), $x = \\dfrac{0{,}25 \\cdot (AT + BT)}{2{,}4}$, ger
+
+$$ x \\approx \\frac{0{,}25 \\cdot 30}{2{,}4} = 3{,}125\\ \\mathrm{m} $$
+
+**Förbättring.** Med $x = 3{,}125\\ \\mathrm{m}$ blir avstånden
+
+$$ AT = \\sqrt{15^2 + 3{,}725^2} = 15{,}456\\ \\mathrm{m} \\qquad BT = \\sqrt{15^2 + 2{,}525^2} = 15{,}211\\ \\mathrm{m} $$
+
+$$ AT + BT = 15{,}456 + 15{,}211 = 30{,}667\\ \\mathrm{m} $$
+
+Insättning i (1), $x = \\dfrac{0{,}25 \\cdot (AT + BT)}{2{,}4}$, ger
+
+$$ x = \\frac{0{,}25 \\cdot 30{,}667}{2{,}4} = 3{,}194\\ \\mathrm{m} $$
+
+**Kontroll.** Med $x = 3{,}194\\ \\mathrm{m}$ blir $AT = 15{,}472\\ \\mathrm{m}$ och $BT = 15{,}223\\ \\mathrm{m}$, så att vägskillnaden blir $15{,}472 - 15{,}223 = 0{,}249\\ \\mathrm{m}$. Det är $0{,}25\\ \\mathrm{m}$ med god noggrannhet, och en ny förbättring ändrar inte svaret med två värdesiffror.
+
+Den första uppskattningen gav ett något för litet värde, eftersom avstånden till *T* är lite längre än $15\\ \\mathrm{m}$. Att *T* hamnar ett par meter från *C* är rimligt: en våglängd på en halv meter och högtalare drygt en meter isär ger några tysta punkter på en vägg som är 15 meter bort.
+
+**Svar:** Cirka $3{,}2\\ \\mathrm{m}$`,
+        },
+        {
+            level: 3,
+            question: `Två högtalare *A* och *B* som är kopplade i fas spelar en ton med frekvensen $425\\ \\mathrm{Hz}$. Tabellen visar avstånden från fyra punkter till högtalarna.
+
+| Punkt | Avstånd till *A* (m) | Avstånd till *B* (m) |
+|---|---|---|
+| *P* | 5,20 | 4,80 |
+| *Q* | 6,90 | 5,30 |
+| *R* | 4,62 | 4,50 |
+| *S* | 6,14 | 5,10 |
+
+Rangordna punkterna efter hur starkt ljudet är, från starkast till svagast, och motivera rangordningen fullständigt. Anta att ljudet från de två högtalarna har lika stor amplitud i alla punkterna. Räkna med $v = 340\\ \\mathrm{m/s}$.`,
+            solution: `Hur starkt ljudet blir beror på hur vågorna från de två högtalarna möts, alltså på vägskillnaden jämförd med våglängden.
+
+$$ \\lambda = \\frac{v}{f} = \\frac{340}{425} = 0{,}80\\ \\mathrm{m} $$
+
+Vägskillnaden i varje punkt, och samma vägskillnad uttryckt i våglängder:
+
+| Punkt | $\\Delta s$ (m) | $\\Delta s$ i våglängder |
+|---|---|---|
+| *P* | $5{,}20 - 4{,}80 = 0{,}40$ | $0{,}50$ |
+| *Q* | $6{,}90 - 5{,}30 = 1{,}60$ | $2{,}00$ |
+| *R* | $4{,}62 - 4{,}50 = 0{,}12$ | $0{,}15$ |
+| *S* | $6{,}14 - 5{,}10 = 1{,}04$ | $1{,}30$ |
+
+- När vägskillnaden är ett **helt** antal våglängder möts vågorna i fas, och ljudet blir så starkt det kan bli (maximilinje).
+- När den är ett **halvt** antal våglängder möts de i motfas och släcker ut varandra (nodlinje).
+- Däremellan möts vågorna delvis i fas. Ju närmare ett helt antal våglängder vägskillnaden ligger, desto bättre stämmer vågtopparna överens och desto starkare blir ljudet.
+
+Vi jämför därför hur långt varje vägskillnad ligger från närmaste hela antal våglängder:
+
+- *Q*: $2{,}00$ ligger exakt på ett helt tal. Topp möter topp, alltså starkast möjliga ljud (2:a maximilinjen).
+- *R*: $0{,}15$ ligger $0{,}15$ våglängder från $0$. Nästan i fas, starkt ljud.
+- *S*: $1{,}30$ ligger $0{,}30$ våglängder från $1$ (och bara $0{,}20$ från nodlinjen vid $1{,}5$). Svagare än *R*.
+- *P*: $0{,}50$ är ett halvt antal våglängder. Punkten ligger på 0:e nodlinjen och där blir det tyst.
+
+**Svar:** *Q*, *R*, *S*, *P* (från starkast till svagast).`,
+        },
+        {
+            level: 3,
+            question: `För att bestämma ljudets hastighet kopplar en grupp elever två högtalare i fas till samma tongenerator och ställer upp en mikrofon. Mikrofonen står $0{,}65\\ \\mathrm{m}$ längre från den ena högtalaren än från den andra. Eleverna höjer frekvensen långsamt från $100\\ \\mathrm{Hz}$ och noterar varje frekvens där ljudet i mikrofonen är svagast.
+
+| Minimum | Frekvens (Hz) |
+|---|---|
+| 1 | 260 |
+| 2 | 780 |
+| 3 | 1 300 |
+
+a) Bestäm ljudets hastighet ur mätningarna. Ange svaret i m/s.<br>b) Visa att det första minimumet i tabellen svarar mot 0:e nodlinjen, alltså att eleverna inte har missat något minimum mellan $100\\ \\mathrm{Hz}$ och $260\\ \\mathrm{Hz}$.`,
+            answer: { value: 340, unit: 'm/s' },
+            delsvar: [
+                { del: 'a', value: 340, unit: 'm/s', etikett: '$v =$' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Mikrofonen står still, så vägskillnaden $\\Delta s = 0{,}65\\ \\mathrm{m}$ är densamma vid alla frekvenser. Ett minimum uppstår när vägskillnaden är ett halvt antal våglängder. Med $\\lambda = \\dfrac{v}{f}$:
+
+$$ \\Delta s = \\left(n + \\frac{1}{2}\\right) \\cdot \\frac{v}{f} \\quad\\Leftrightarrow\\quad f = \\left(n + \\frac{1}{2}\\right) \\cdot \\frac{v}{\\Delta s} \\qquad (1) $$
+
+Två minima som följer på varandra har $n$-värden som skiljer sig med 1, så skillnaden mellan deras frekvenser är
+
+$$ f_{n+1} - f_n = \\frac{v}{\\Delta s} $$
+
+Ur tabellen:
+
+$$ 780 - 260 = 520\\ \\mathrm{Hz} \\qquad 1\\,300 - 780 = 520\\ \\mathrm{Hz} $$
+
+Skillnaden är densamma, vilket bekräftar modellen. Vi löser ut $v$:
+
+$$ \\frac{v}{\\Delta s} = 520\\ \\mathrm{Hz} \\quad\\Leftrightarrow\\quad v = 520 \\cdot \\Delta s $$
+
+$$ v = 520 \\cdot 0{,}65 = 338\\ \\mathrm{m/s} \\approx 340\\ \\mathrm{m/s} $$
+
+Ljudets hastighet i luft vid rumstemperatur är ungefär $340\\ \\mathrm{m/s}$, så resultatet är rimligt.
+
+**Svar:** Cirka $340\\ \\mathrm{m/s}$
+
+**b)** Enligt (1), $f = \\left(n + \\dfrac{1}{2}\\right) \\cdot \\dfrac{v}{\\Delta s}$, med $\\dfrac{v}{\\Delta s} = 520\\ \\mathrm{Hz}$ ligger minimumen vid
+
+$$ f = (n + 0{,}5) \\cdot 520\\ \\mathrm{Hz} $$
+
+Med $n = 0$ blir det $0{,}5 \\cdot 520 = 260\\ \\mathrm{Hz}$, precis det första värdet i tabellen. Det finns inget mindre $n$, så det finns inget minimum under $260\\ \\mathrm{Hz}$. Det första minimumet hör alltså till 0:e nodlinjen, och de följande ($780\\ \\mathrm{Hz}$ och $1\\,300\\ \\mathrm{Hz}$) till $n = 1$ och $n = 2$.`,
+        },
+        {
+            level: 3,
+            question: `En ljudtekniker testar två högtalare som är kopplade i fas. Hon vill hitta en frekvens mellan $200\\ \\mathrm{Hz}$ och $900\\ \\mathrm{Hz}$ där det är tyst i punkten *P* och samtidigt så starkt som möjligt i punkten *Q*. Punkten *P* ligger $4{,}37\\ \\mathrm{m}$ och $3{,}35\\ \\mathrm{m}$ från högtalarna, och punkten *Q* ligger $3{,}12\\ \\mathrm{m}$ och $2{,}44\\ \\mathrm{m}$ från högtalarna. Bestäm frekvensen. Räkna med $v = 340\\ \\mathrm{m/s}$ och ange svaret i Hz.`,
+            answer: { value: 500, unit: 'Hz' },
+            solution: `Vägskillnaderna i de två punkterna är
+
+$$ \\Delta s_P = 4{,}37 - 3{,}35 = 1{,}02\\ \\mathrm{m} \\qquad \\Delta s_Q = 3{,}12 - 2{,}44 = 0{,}68\\ \\mathrm{m} $$
+
+Vi tar fram vilka frekvenser som uppfyller varje villkor för sig, med $\\lambda = \\dfrac{v}{f}$.
+
+**Tyst i *P*.** Vägskillnaden ska vara ett halvt antal våglängder:
+
+$$ \\Delta s_P = \\left(n + \\frac{1}{2}\\right) \\cdot \\frac{v}{f} \\quad\\Leftrightarrow\\quad f = \\left(n + \\frac{1}{2}\\right) \\cdot \\frac{v}{\\Delta s_P} $$
+
+$$ \\frac{v}{\\Delta s_P} = \\frac{340}{1{,}02} = 333{,}3\\ \\mathrm{Hz} $$
+
+| $n$ | 0 | 1 | 2 | 3 |
+|---|---|---|---|---|
+| $f$ (Hz) | 166,7 | 500 | 833,3 | 1 167 |
+
+Mellan $200\\ \\mathrm{Hz}$ och $900\\ \\mathrm{Hz}$ är det tyst i *P* vid $500\\ \\mathrm{Hz}$ och $833\\ \\mathrm{Hz}$.
+
+**Starkt i *Q*.** Vägskillnaden ska vara ett helt antal våglängder:
+
+$$ \\Delta s_Q = m \\cdot \\frac{v}{f} \\quad\\Leftrightarrow\\quad f = m \\cdot \\frac{v}{\\Delta s_Q} $$
+
+$$ \\frac{v}{\\Delta s_Q} = \\frac{340}{0{,}68} = 500\\ \\mathrm{Hz} $$
+
+Ljudet är som starkast i *Q* vid $500\\ \\mathrm{Hz}$, $1\\,000\\ \\mathrm{Hz}$ och så vidare. Bara $500\\ \\mathrm{Hz}$ ligger i intervallet.
+
+**Båda villkoren.** Den enda frekvensen som finns i båda listorna är $500\\ \\mathrm{Hz}$. Vid $833\\ \\mathrm{Hz}$ är det visserligen tyst i *P*, men där är $\\Delta s_Q = 0{,}68\\ \\mathrm{m}$ ungefär $1{,}67$ våglängder, och då är ljudet i *Q* inte som starkast.
+
+**Kontroll.** Vid $500\\ \\mathrm{Hz}$ är $\\lambda = \\dfrac{340}{500} = 0{,}68\\ \\mathrm{m}$. Då är $\\Delta s_P = 1{,}02\\ \\mathrm{m} = 1{,}5\\lambda$, så *P* ligger på 1:a nodlinjen, och $\\Delta s_Q = 0{,}68\\ \\mathrm{m} = \\lambda$, så *Q* ligger på 1:a maximilinjen.
+
+**Svar:** $500\\ \\mathrm{Hz}$`,
+        },
+        {
+            level: 3,
+            question: `Två högtalare *A* och *B* som är kopplade i fas står $d = 2{,}4\\ \\mathrm{m}$ från varandra och spelar en ton med frekvensen $340\\ \\mathrm{Hz}$. En lyssnare *L* startar vid *B* och går rakt bort från högtalarna längs en linje som är vinkelrät mot *AB* (se figuren). Lyssnarens avstånd till *B* kallas $x$.<br>a) Visa att vägskillnaden $\\Delta s$ och avståndet $x$ hänger ihop enligt $x = \\dfrac{d^2 - \\Delta s^2}{2 \\cdot \\Delta s}$.<br>b) Hur många tysta punkter passerar lyssnaren, och hur långt från *B* ligger de? Räkna med $v = 340\\ \\mathrm{m/s}$.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 232" width="570" height="315" role="img" aria-label="Två högtalare A och B står 2,4 m från varandra, A rakt ovanför B. Från B går en rak linje åt höger, vinkelrät mot AB. Lyssnaren L står på linjen på avståndet x från B." style="max-width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif"><line x1="76" y1="170" x2="392" y2="170" stroke="#7a8088" stroke-width="1.2" stroke-dasharray="5 4"/><polygon points="392,165.5 401,170 392,174.5" fill="#7a8088"/><line x1="76" y1="60" x2="214" y2="170" stroke="#c8324a" stroke-width="1.4"/><line x1="76" y1="170" x2="214" y2="170" stroke="#c8324a" stroke-width="1.4"/><polyline points="88,170 88,158 76,158" fill="none" stroke="#5a6172" stroke-width="1"/><rect x="59" y="51" width="9" height="18" rx="1.5" fill="#3a3f47"/><polygon points="68,51 76,46 76,74 68,69" fill="#5a616b"/><rect x="59" y="161" width="9" height="18" rx="1.5" fill="#3a3f47"/><polygon points="68,161 76,156 76,184 68,179" fill="#5a616b"/><text x="64" y="38" text-anchor="middle" font-size="14" fill="#0f1620"><tspan font-style="italic">A</tspan></text><text x="62" y="202" text-anchor="middle" font-size="14" fill="#0f1620"><tspan font-style="italic">B</tspan></text><line x1="48" y1="67" x2="48" y2="163" stroke="#0f1620" stroke-width="1.2" stroke-linecap="butt"/><polygon points="44.5,67 48,60 51.5,67" fill="#0f1620"/><polygon points="44.5,163 48,170 51.5,163" fill="#0f1620"/><text x="42" y="119" text-anchor="end" font-size="12" fill="#0f1620">2,4 m</text><circle cx="214" cy="170" r="4" fill="#0f1620"/><text x="220" y="162" text-anchor="start" font-size="14" fill="#0f1620"><tspan font-style="italic">L</tspan></text><line x1="76" y1="188" x2="76" y2="222" stroke="#7a8088" stroke-width="1" stroke-dasharray="3 3"/><line x1="214" y1="178" x2="214" y2="222" stroke="#7a8088" stroke-width="1" stroke-dasharray="3 3"/><line x1="83" y1="214" x2="207" y2="214" stroke="#0f1620" stroke-width="1.2" stroke-linecap="butt"/><polygon points="83,210.5 76,214 83,217.5" fill="#0f1620"/><polygon points="207,210.5 214,214 207,217.5" fill="#0f1620"/><text x="145" y="207" text-anchor="middle" font-size="14" fill="#0f1620"><tspan font-style="italic">x</tspan></text></svg>`,
+            answer: { value: 1.2, unit: 'm' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', values: [1.2, 5.5], unit: 'm', etikett: '$x =$' },
+            ],
+            solution: `**a)** Linjen som lyssnaren går längs är vinkelrät mot *AB*, så triangeln *ABL* är rätvinklig vid *B*. Pythagoras sats ger avstånden till högtalarna:
+
+$$ AL = \\sqrt{d^2 + x^2} \\qquad BL = x $$
+
+Vägskillnaden är
+
+$$ \\Delta s = AL - BL = \\sqrt{d^2 + x^2} - x $$
+
+För att lösa ut $x$ lägger vi först till $x$ i båda led, så att rottecknet står ensamt:
+
+$$ \\Delta s + x = \\sqrt{d^2 + x^2} $$
+
+Båda led är positiva, så vi kan kvadrera båda led:
+
+$$ \\Delta s^2 + 2 \\cdot x \\cdot \\Delta s + x^2 = d^2 + x^2 $$
+
+Termen $x^2$ finns i båda led och tar ut varandra. Vi drar sedan bort $\\Delta s^2$ från båda led och dividerar båda led med $2 \\cdot \\Delta s$:
+
+$$ 2 \\cdot x \\cdot \\Delta s = d^2 - \\Delta s^2 \\quad\\Leftrightarrow\\quad x = \\frac{d^2 - \\Delta s^2}{2 \\cdot \\Delta s} \\qquad (1) $$
+
+**b)** Våglängden är
+
+$$ \\lambda = \\frac{v}{f} = \\frac{340}{340} = 1{,}0\\ \\mathrm{m} $$
+
+**Vilka vägskillnader finns längs linjen?** Vid *B* är $x = 0$, och där är vägskillnaden $\\Delta s = AB - 0 = d = 2{,}4\\ \\mathrm{m}$. Ju längre bort lyssnaren kommer, desto mer lika blir *AL* och *BL*, så vägskillnaden minskar mot 0. Det syns också i (1): ett litet $\\Delta s$ ger ett stort $x$. Längs linjen passerar vägskillnaden alltså varje värde mellan 0 och $2{,}4\\ \\mathrm{m}$, och varje värde på exakt ett ställe.
+
+**Vilka nodlinjer korsar lyssnaren?** Det är tyst där vägskillnaden är ett halvt antal våglängder:
+
+$$ \\Delta s = \\left(n + \\frac{1}{2}\\right) \\cdot \\lambda = 0{,}5\\ \\mathrm{m},\\ 1{,}5\\ \\mathrm{m},\\ 2{,}5\\ \\mathrm{m},\\ \\ldots $$
+
+Bara $0{,}5\\ \\mathrm{m}$ och $1{,}5\\ \\mathrm{m}$ är mindre än $2{,}4\\ \\mathrm{m}$, så lyssnaren passerar två tysta punkter: 1:a nodlinjen ($n = 1$) och 0:e nodlinjen ($n = 0$).
+
+**Var ligger de?** Insättning av $d = 2{,}4\\ \\mathrm{m}$ i (1), $x = \\dfrac{d^2 - \\Delta s^2}{2 \\cdot \\Delta s}$, ger med $\\Delta s = 1{,}5\\ \\mathrm{m}$
+
+$$ x = \\frac{2{,}4^2 - 1{,}5^2}{2 \\cdot 1{,}5} = \\frac{5{,}76 - 2{,}25}{3{,}0} = 1{,}17\\ \\mathrm{m} \\approx 1{,}2\\ \\mathrm{m} $$
+
+och med $\\Delta s = 0{,}5\\ \\mathrm{m}$
+
+$$ x = \\frac{2{,}4^2 - 0{,}5^2}{2 \\cdot 0{,}5} = \\frac{5{,}76 - 0{,}25}{1{,}0} = 5{,}51\\ \\mathrm{m} \\approx 5{,}5\\ \\mathrm{m} $$
+
+**Kontroll.** Med $x = 5{,}51\\ \\mathrm{m}$ blir $AL = \\sqrt{2{,}4^2 + 5{,}51^2} = 6{,}01\\ \\mathrm{m}$, och vägskillnaden blir $6{,}01 - 5{,}51 = 0{,}50\\ \\mathrm{m}$, ett halvt antal våglängder som det ska vara.
+
+Den tysta punkten närmast *B* hör alltså till den högre nodlinjen. Bortom $5{,}5\\ \\mathrm{m}$ är vägskillnaden mindre än $\\dfrac{\\lambda}{2}$, och där blir det aldrig mer tyst.
+
+**Svar:** Två tysta punkter, cirka $1{,}2\\ \\mathrm{m}$ och $5{,}5\\ \\mathrm{m}$ från *B*.`,
         },
     ],
 
@@ -66294,7 +74592,7 @@ $$ f = \\frac{v}{\\lambda} = \\frac{340}{2/3} = 340 \\cdot \\frac{3}{2} = 510\\ 
             correct: 1,
             solution: `Permanentmagneter är tillverkade av **ferromagnetiska material** som järn, stål eller nickel och behåller sina magnetiska egenskaper utan att behöva tillförd energi. Exempel: stavmagneter, kylskåpsmagneter.
 
-Magneter som bara fungerar med tillförd ström kallas **elektromagneter** (se 3.3) — fördelen är att man kan styra fältets storlek och riktning genom strömmen.`,
+Magneter som bara fungerar med tillförd ström kallas **elektromagneter** (se 3.3). Fördelen är att man kan styra fältets storlek och riktning genom strömmen.`,
         },
         {
             level: 1,
@@ -66302,30 +74600,30 @@ Magneter som bara fungerar med tillförd ström kallas **elektromagneter** (se 3
             choices: [
                 'Den ena magnetens nordända förvandlas till en sydända.',
                 'De attraherar varandra (dras ihop).',
-                'Inget händer — nordändar påverkar inte varandra.',
+                'Inget händer, nordändar påverkar inte varandra.',
                 'De repellerar varandra (puttas isär).',
             ],
             correct: 3,
             solution: `**Lika poler repellerar varandra** och **olika poler attraherar varandra**. Eftersom båda magneterna har sina nordändar mot varandra, repellerar de.
 
-**Generell slutsats:** Detta är analogt med elektriska laddningar — lika laddningar repellerar, olika attraherar.`,
+**Generell slutsats:** Detta är analogt med elektriska laddningar: lika laddningar repellerar, olika attraherar.`,
         },
         {
             level: 1,
             question: `En stavmagnet **delas på mitten**. Vad händer?`,
             choices: [
-                'Magnetiseringen försvinner helt — båda halvorna blir omagnetiska.',
+                'Magnetiseringen försvinner helt, och båda halvorna blir omagnetiska.',
                 'Den ena delen blir en ensam nordända, den andra en ensam sydända.',
                 'Den ena halvan får dubbel styrka, den andra ingen.',
                 'Båda halvorna blir nya, mindre stavmagneter med varsin nordända och sydända.',
             ],
             correct: 3,
-            solution: `**Magnetpoler uppträder alltid parvis.** När en magnet delas bildas två nya, kortare magneter — vardera med en nordända och en sydända. Man kan **aldrig** skapa en magnet med endast en pol (en så kallad *magnetisk monopol*) — det är en grundläggande egenskap hos magnetism.`,
+            solution: `**Magnetpoler uppträder alltid parvis.** När en magnet delas bildas två nya, kortare magneter, vardera med en nordända och en sydända. Man kan **aldrig** skapa en magnet med endast en pol (en så kallad *magnetisk monopol*). Det är en grundläggande egenskap hos magnetism.`,
         },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
-            level: 2,
+            level: 1,
             question: `Hur ritas magnetiska fältlinjer kring en stavmagnet?`,
             choices: [
                 'Som raka linjer från sydändan till nordändan, utanför magneten.',
@@ -66339,29 +74637,29 @@ Magneter som bara fungerar med tillförd ström kallas **elektromagneter** (se 3
 Att fältlinjerna alltid är slutna kurvor (inte avbrytas vid någon pol) är en konsekvens av att magnetiska monopoler inte existerar.`,
         },
         {
-            level: 2,
+            level: 1,
             question: `Två stavmagneter ritas med likadana fältlinjer kring sig, men i den första är fältlinjerna **tätare** än i den andra. Vad betyder det?`,
             choices: [
                 'Den första magneten har starkare magnetfält där fältlinjerna är tätare.',
-                'Den första magneten har svagare magnetfält — fältlinjerna trängs ihop när fältet är litet.',
+                'Den första magneten har svagare magnetfält, eftersom fältlinjerna trängs ihop när fältet är litet.',
                 'Tätheten av fältlinjer säger ingenting om fältets styrka.',
                 'Den första magneten är mindre i fysisk storlek.',
             ],
             correct: 0,
             solution: `**Tätheten av fältlinjer är ett mått på magnetfältets styrka.** Där fältlinjerna är tätare är fältet starkare; där de är glesare är fältet svagare.
 
-**Generell slutsats:** Det är därför man inte vill korsa fältlinjer i en figur — en överlappning skulle innebära att fältet har två olika riktningar samtidigt vid samma punkt, vilket är fysiskt omöjligt.`,
+**Generell slutsats:** Det är därför man inte vill korsa fältlinjer i en figur: en överlappning skulle innebära att fältet har två olika riktningar samtidigt vid samma punkt, vilket är fysiskt omöjligt.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
-            level: 3,
+            level: 2,
             question: `En kompassnåls nordända pekar mot jordens geografiska nordpol. Vilken sorts **magnetisk** pol har jorden alltså i norr?`,
             choices: [
                 'En nordända, och därför pekar kompassen dit.',
                 'En sydända, eftersom kompassens nordända attraheras av en sydända.',
                 'Båda på en gång: jordens nordpol har båda sorternas poler samtidigt.',
-                'Ingen — jorden har inget magnetfält vid polerna.',
+                'Ingen, jorden har inget magnetfält vid polerna.',
             ],
             correct: 1,
             solution: `**Jordens magnetiska pol i norr är en sydända!** Insikten kommer från regeln att olika poler attraherar:
@@ -66372,6 +74670,327 @@ Att fältlinjerna alltid är slutna kurvor (inte avbrytas vid någon pol) är en
 Namnet nordända betyder "den ända som pekar norrut", inte att ändan själv skulle vara något slags nordpol. Orden nordpol och sydpol sparar vi till jordens geografiska poler.
 
 **Generell slutsats:** Detta är ett klassiskt "fälla"-problem som testar om eleven verkligen förstår polkonventionen och kan tänka kontraintuitivt.`,
+        },
+        {
+            level: 1,
+            question: `Vilket av materialen dras **inte** till en magnet?`,
+            choices: [
+                `Järn`,
+                `Stål`,
+                `Nickel`,
+                `Aluminium`,
+            ],
+            correct: 3,
+            solution: `Järn, stål och nickel är **ferromagnetiska** material. De dras till en magnet, och det är av sådana material som permanentmagneter tillverkas. Aluminium är visserligen en metall, men den är inte ferromagnetisk och dras inte märkbart till en magnet. Att något är en metall räcker alltså inte.
+
+**Svar:** Alternativ D, aluminium.`,
+        },
+        {
+            level: 1,
+            question: `Magnetiska poler och elektriska laddningar påminner om varandra.<br>a) Ge två likheter mellan dem.&emsp;&emsp;b) Ge en viktig skillnad.`,
+            solution: `**a)** Både magnetiska och elektriska krafter verkar **på avstånd**, utan att föremålen behöver röra vid varandra. Dessutom gäller samma regel för hur de påverkar varandra: **lika poler repellerar och olika poler attraherar**, precis som lika laddningar repellerar och olika laddningar attraherar.
+
+**Svar:** Båda verkar på avstånd, och för båda gäller att lika repellerar och olika attraherar.
+
+**b)** En elektrisk laddning kan finnas ensam, till exempel en elektron som är negativt laddad. Magnetiska poler uppträder däremot **alltid parvis**: varje magnet har både en nordända och en sydända, och det går aldrig att få en magnet med bara en pol.
+
+**Svar:** Laddningar kan vara ensamma, men magnetiska poler finns alltid parvis.`,
+        },
+        {
+            level: 1,
+            question: `Var kring en stavmagnet är magnetfältet starkast, och hur syns det i en bild med fältlinjer?`,
+            solution: `Magnetfältet är starkast **vid magnetens ändar**, alltså vid nordändan och sydändan. Där går fältlinjerna ut ur och in i magneten, och därför ligger de tätt. Ju tätare fältlinjerna ligger, desto starkare är fältet. Längre bort från magneten sprider linjerna ut sig och fältet blir svagare.
+
+Det stämmer med vardagen: ett gem fastnar lätt vid ändarna på en stavmagnet men knappt alls mitt på magnetens sida.
+
+**Svar:** Vid ändarna (polerna), där fältlinjerna ligger tätast.`,
+        },
+        {
+            level: 1,
+            question: `En stavmagnet bryts i tre lika långa bitar. Hur många nordändar finns det sammanlagt bland bitarna?`,
+            choices: [
+                `1`,
+                `2`,
+                `3`,
+                `6`,
+            ],
+            correct: 2,
+            solution: `Magnetpoler uppträder alltid parvis. Varje bit blir en ny, kortare magnet med både en nordända och en sydända. Tre bitar ger alltså tre nordändar (och tre sydändar, sex poler sammanlagt).
+
+**Svar:** Alternativ C, 3.`,
+        },
+        {
+            level: 2,
+            question: `Tre stavmagneter X, Y och Z ligger efter varandra på en rad. Bara magnet X är märkt: dess högra ände är en nordända. När magneterna förs mot varandra märks följande:
+
+- X:s högra ände och Y:s vänstra ände repellerar varandra.
+- Y:s högra ände och Z:s vänstra ände attraherar varandra.
+
+a) Vilken sorts ände är Y:s vänstra ände?<br>b) Vilken sorts ände är Z:s högra ände?`,
+            solution: `**a)** Lika poler repellerar varandra. X:s högra ände är en nordända, och den repellerar Y:s vänstra ände. Då måste Y:s vänstra ände också vara en nordända.
+
+**Svar:** En nordända.
+
+**b)** En magnet har alltid en nordända och en sydända. Eftersom Y:s vänstra ände är en nordända är Y:s högra ände en sydända.
+
+Olika poler attraherar varandra. Y:s högra ände (sydända) attraherar Z:s vänstra ände, så Z:s vänstra ände är en nordända. Då är Z:s högra ände en sydända.
+
+**Svar:** En sydända.`,
+        },
+        {
+            level: 2,
+            question: `Figuren visar en stavmagnet och fyra små kompasser A, B, C och D, ritade utan nål.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="40 18 280 178" width="355" height="225" style="display:block;margin:16px auto;max-width:100%;height:auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,system-ui,sans-serif" role="img" aria-label="En stavmagnet med rod nordanda till vanster och gra sydanda till hoger. Fyra kompasser utan nal: A ovanfor magnetens mitt, B till vanster om nordandan, C till hoger om sydandan och D under magnetens mitt."><rect x="120" y="97" width="60" height="26" fill="#c0392b"/><rect x="180" y="97" width="60" height="26" fill="#cfd4da"/><rect x="120" y="97" width="120" height="26" fill="none" stroke="#5d646e" stroke-width="1.3"/><text x="150" y="115.04" text-anchor="middle" font-size="14" font-weight="600" fill="#ffffff">N</text><text x="210" y="115.04" text-anchor="middle" font-size="14" font-weight="600" fill="#3a3f47">S</text><circle cx="180" cy="45" r="14" fill="#fffdf8" stroke="#0f1620" stroke-width="1.4"/><line x1="190.0" y1="45.0" x2="193.0" y2="45.0" stroke="#0f1620" stroke-width="1.1"/><line x1="180.0" y1="55.0" x2="180.0" y2="58.0" stroke="#0f1620" stroke-width="1.1"/><line x1="170.0" y1="45.0" x2="167.0" y2="45.0" stroke="#0f1620" stroke-width="1.1"/><line x1="180.0" y1="35.0" x2="180.0" y2="32.0" stroke="#0f1620" stroke-width="1.1"/><circle cx="180" cy="45" r="1.8" fill="#0f1620"/><text x="199" y="33" font-size="15" font-weight="600" fill="#0f1620">A</text><circle cx="78" cy="110" r="14" fill="#fffdf8" stroke="#0f1620" stroke-width="1.4"/><line x1="88.0" y1="110.0" x2="91.0" y2="110.0" stroke="#0f1620" stroke-width="1.1"/><line x1="78.0" y1="120.0" x2="78.0" y2="123.0" stroke="#0f1620" stroke-width="1.1"/><line x1="68.0" y1="110.0" x2="65.0" y2="110.0" stroke="#0f1620" stroke-width="1.1"/><line x1="78.0" y1="100.0" x2="78.0" y2="97.0" stroke="#0f1620" stroke-width="1.1"/><circle cx="78" cy="110" r="1.8" fill="#0f1620"/><text x="97" y="98" font-size="15" font-weight="600" fill="#0f1620">B</text><circle cx="282" cy="110" r="14" fill="#fffdf8" stroke="#0f1620" stroke-width="1.4"/><line x1="292.0" y1="110.0" x2="295.0" y2="110.0" stroke="#0f1620" stroke-width="1.1"/><line x1="282.0" y1="120.0" x2="282.0" y2="123.0" stroke="#0f1620" stroke-width="1.1"/><line x1="272.0" y1="110.0" x2="269.0" y2="110.0" stroke="#0f1620" stroke-width="1.1"/><line x1="282.0" y1="100.0" x2="282.0" y2="97.0" stroke="#0f1620" stroke-width="1.1"/><circle cx="282" cy="110" r="1.8" fill="#0f1620"/><text x="301" y="98" font-size="15" font-weight="600" fill="#0f1620">C</text><circle cx="180" cy="175" r="14" fill="#fffdf8" stroke="#0f1620" stroke-width="1.4"/><line x1="190.0" y1="175.0" x2="193.0" y2="175.0" stroke="#0f1620" stroke-width="1.1"/><line x1="180.0" y1="185.0" x2="180.0" y2="188.0" stroke="#0f1620" stroke-width="1.1"/><line x1="170.0" y1="175.0" x2="167.0" y2="175.0" stroke="#0f1620" stroke-width="1.1"/><line x1="180.0" y1="165.0" x2="180.0" y2="162.0" stroke="#0f1620" stroke-width="1.1"/><circle cx="180" cy="175" r="1.8" fill="#0f1620"/><text x="199" y="163" font-size="15" font-weight="600" fill="#0f1620">D</text></svg>
+
+Åt vilket håll pekar kompassnålens nordända i var och en av kompasserna? Svara med vänster, höger, uppåt eller nedåt, och motivera.`,
+            solution: `Magnetfältets riktning är den riktning som en kompassnåls nordända pekar åt, och utanför magneten går fältlinjerna **från nordändan till sydändan**.
+
+- **A** (ovanför mitten): fältlinjerna går i en båge från nordändan till vänster, över magneten, till sydändan till höger. Mitt på bågen är de vågräta och pekar åt höger.
+- **B** (till vänster om nordändan): här går fältlinjerna rakt ut ur nordändan, alltså bort från magneten, åt vänster.
+- **C** (till höger om sydändan): här går fältlinjerna rakt in i sydändan, alltså mot magneten, åt vänster.
+- **D** (under mitten): samma båge som vid A, fast under magneten. Den går också från nordändan till sydändan, alltså åt höger.
+
+Man kan kontrollera B och C med regeln om poler. I B repelleras nålens nordända av magnetens nordända och pekar bort från den. I C attraheras nålens nordända av magnetens sydända och pekar mot den.
+
+Lägg märke till att nålarna i B och C pekar åt samma håll, fast de sitter på var sin sida om magneten, och att nålarna ovanför och under magneten pekar motsatt mot dem.
+
+**Svar:** A höger, B vänster, C vänster, D höger.`,
+        },
+        {
+            level: 2,
+            question: `Figuren visar två stavmagneter vars ändar inte är märkta. Ändarna är numrerade 1 till 4, och fältlinjerna runt magneterna är inritade.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 34 420 88" width="570" height="119" style="display:block;margin:16px auto;max-width:100%;height:auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,system-ui,sans-serif" role="img" aria-label="Tva gra stavmagneter med omarkta andar 1 och 2 pa den vanstra och 3 och 4 pa den hogra. Faltlinjer gar over glipan mellan ande 2 och ande 3 med pilar som pekar at vanster. Linjer gar ut at vanster fran ande 1 och in i ande 4 fran hoger."><rect x="40" y="62" width="120" height="26" fill="#ddd6c8" stroke="#5d646e" stroke-width="1.3"/><rect x="260" y="62" width="120" height="26" fill="#ddd6c8" stroke="#5d646e" stroke-width="1.3"/><line x1="260" y1="69" x2="160" y2="69" stroke="#0f1620" stroke-width="1.5" stroke-linecap="butt"/><polygon points="205.5,69.0 214.5,64.8 214.5,73.2" fill="#0f1620"/><line x1="260" y1="81" x2="160" y2="81" stroke="#0f1620" stroke-width="1.5" stroke-linecap="butt"/><polygon points="205.5,81.0 214.5,76.8 214.5,85.2" fill="#0f1620"/><path d="M 260 62 Q 210 18 160 62" fill="none" stroke="#0f1620" stroke-width="1.5"/><polygon points="205.5,40.0 214.5,35.8 214.5,44.2" fill="#0f1620"/><path d="M 260 88 Q 210 132 160 88" fill="none" stroke="#0f1620" stroke-width="1.5"/><polygon points="205.5,110.0 214.5,105.8 214.5,114.2" fill="#0f1620"/><line x1="40" y1="75" x2="4" y2="75" stroke="#0f1620" stroke-width="1.5" stroke-linecap="butt"/><polygon points="17.5,75.0 26.5,70.8 26.5,79.2" fill="#0f1620"/><line x1="40" y1="66" x2="8" y2="48" stroke="#0f1620" stroke-width="1.5" stroke-linecap="butt"/><polygon points="20.1,54.8 30.0,55.5 25.9,62.9" fill="#0f1620"/><line x1="40" y1="84" x2="8" y2="102" stroke="#0f1620" stroke-width="1.5" stroke-linecap="butt"/><polygon points="20.1,95.2 25.9,87.1 30.0,94.5" fill="#0f1620"/><line x1="416" y1="75" x2="380" y2="75" stroke="#0f1620" stroke-width="1.5" stroke-linecap="butt"/><polygon points="393.5,75.0 402.5,70.8 402.5,79.2" fill="#0f1620"/><line x1="412" y1="48" x2="380" y2="66" stroke="#0f1620" stroke-width="1.5" stroke-linecap="butt"/><polygon points="392.1,59.2 397.9,51.1 402.0,58.5" fill="#0f1620"/><line x1="412" y1="102" x2="380" y2="84" stroke="#0f1620" stroke-width="1.5" stroke-linecap="butt"/><polygon points="392.1,90.8 402.0,91.5 397.9,98.9" fill="#0f1620"/><text x="54" y="116" text-anchor="middle" font-size="14" font-weight="600" fill="#0f1620">1</text><text x="146" y="116" text-anchor="middle" font-size="14" font-weight="600" fill="#0f1620">2</text><text x="274" y="116" text-anchor="middle" font-size="14" font-weight="600" fill="#0f1620">3</text><text x="366" y="116" text-anchor="middle" font-size="14" font-weight="600" fill="#0f1620">4</text></svg>
+
+a) Vilka av ändarna 1 till 4 är nordändar?<br>b) Attraherar eller repellerar magneterna varandra? Motivera.`,
+            solution: `**a)** Utanför en magnet går fältlinjerna **ut ur nordändan och in i sydändan**.
+
+- I glipan pekar pilarna åt vänster, från ände 3 mot ände 2. Fältlinjerna går alltså ut ur ände 3 och in i ände 2. Ände 3 är en nordända och ände 2 en sydända.
+- Vid ände 1 pekar pilarna bort från magneten, så linjerna går ut ur den: ände 1 är en nordända. Det stämmer med att den vänstra magneten har sin sydända i ände 2.
+- Vid ände 4 pekar pilarna mot magneten, så linjerna går in i den: ände 4 är en sydända. Det stämmer med att den högra magneten har sin nordända i ände 3.
+
+**Svar:** Ände 1 och ände 3.
+
+**b)** Mot varandra vänder magneterna ände 2 (sydända) och ände 3 (nordända). Olika poler attraherar varandra. Det syns också i fältlinjebilden: linjerna går obrutna över glipan från den ena magneten till den andra, i stället för att böja av åt sidan.
+
+**Svar:** De attraherar varandra, eftersom en sydända och en nordända är vända mot varandra.`,
+        },
+        {
+            level: 2,
+            question: `Två fältlinjer i en bild av ett magnetfält får aldrig korsa varandra. Förklara varför, med hjälp av hur magnetfältets riktning definieras.`,
+            solution: `Magnetfältets riktning i en punkt är den riktning som en liten kompassnåls nordända pekar åt där. En fältlinje visar den riktningen: i varje punkt på linjen pekar fältet längs linjen.
+
+Om två fältlinjer korsade varandra skulle fältet i korsningspunkten ha två olika riktningar på en gång, en längs varje linje. En kompassnål som placeras i punkten kan bara peka åt ett håll. Därför kan fältet bara ha en riktning i varje punkt, och fältlinjerna kan aldrig korsa varandra.
+
+**Svar:** I en korsning skulle fältet ha två riktningar samtidigt, men en kompassnål kan bara peka åt ett håll, så fältet har bara en riktning i varje punkt.`,
+        },
+        {
+            level: 2,
+            question: `Elin har en metallstav som ser ut som en vanlig järnstav. Hon för den mot ändarna på en stavmagnet. Vilken observation visar **säkert** att metallstaven själv är en magnet?`,
+            choices: [
+                `Ena änden på staven repelleras av magnetens nordända.`,
+                `Staven dras mot magnetens nordända.`,
+                `Staven dras mot båda ändarna på magneten.`,
+                `Staven fastnar på magneten och sitter kvar.`,
+            ],
+            correct: 0,
+            solution: `En vanlig järnstav dras till en magnet, och det gäller vilken ände av magneten man än håller den mot. Att staven attraheras, fastnar eller dras mot båda ändarna kan alltså lika gärna bero på att den är av järn.
+
+Repulsion kräver däremot **lika poler**. Om en ände på staven stöts bort från magnetens nordända måste den änden själv vara en nordända. Staven har alltså en egen pol och är en magnet.
+
+**Svar:** Alternativ A, att ena änden på staven repelleras av magnetens nordända.`,
+        },
+        {
+            level: 2,
+            question: `En kompass ligger på ett bord, och utan magneter i närheten pekar nålens nordända mot norr. En stavmagnet läggs sedan öster om kompassen, i öst–västlig riktning, med sydändan närmast kompassen. Figuren visar uppställningen sedd uppifrån.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="10 10 300 110" width="420" height="154" style="display:block;margin:16px auto;max-width:100%;height:auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,system-ui,sans-serif" role="img" aria-label="Sett uppifran: en kompass utan nal och en stavmagnet till hoger om den, med sydandan narmast kompassen och nordandan langst bort. En pil uppe till vanster visar norr."><line x1="36" y1="92" x2="36" y2="52" stroke="#0f1620" stroke-width="1.6" stroke-linecap="butt"/><polygon points="31,52 41,52 36,40" fill="#0f1620"/><text x="36" y="110" text-anchor="middle" font-size="13" fill="#0f1620">Norr</text><circle cx="120" cy="70" r="16" fill="#fffdf8" stroke="#0f1620" stroke-width="1.4"/><line x1="131.5" y1="70" x2="135" y2="70" stroke="#0f1620" stroke-width="1.1"/><line x1="120" y1="81.5" x2="120" y2="85" stroke="#0f1620" stroke-width="1.1"/><line x1="108.5" y1="70" x2="105" y2="70" stroke="#0f1620" stroke-width="1.1"/><line x1="120" y1="58.5" x2="120" y2="55" stroke="#0f1620" stroke-width="1.1"/><circle cx="120" cy="70" r="1.8" fill="#0f1620"/><rect x="180" y="57" width="60" height="26" fill="#cfd4da"/><rect x="240" y="57" width="60" height="26" fill="#c0392b"/><rect x="180" y="57" width="120" height="26" fill="none" stroke="#5d646e" stroke-width="1.3"/><text x="210" y="75.04" text-anchor="middle" font-size="14" font-weight="600" fill="#3a3f47">S</text><text x="270" y="75.04" text-anchor="middle" font-size="14" font-weight="600" fill="#ffffff">N</text><text x="120" y="108" text-anchor="middle" font-size="13" fill="#0f1620">Kompass</text></svg>
+
+a) Åt vilket håll vrids kompassnålens nordända? Motivera.<br>b) Förklara varför nålen inte pekar rakt mot magneten.<br>c) Magneten vänds så att nordändan är närmast kompassen. Åt vilket håll pekar nålen nu?`,
+            solution: `**a)** Utanför en magnet går fältlinjerna in i sydändan. Kompassen ligger på magnetens linje strax väster om sydändan, så magnetens fält pekar där rakt mot sydändan, alltså **åt öster**. Det stämmer med regeln om poler: nålens nordända attraheras av magnetens sydända.
+
+Nålen påverkas nu av två fält på en gång, jordens fält mot norr och magnetens fält mot öster. Den ställer in sig mellan dem.
+
+**Svar:** Nordändan vrids från norr åt öster och pekar ungefär mot nordost.
+
+**b)** Jordens magnetfält finns kvar, även när magneten läggs dit. Det drar fortfarande nålens nordända mot norr, medan magnetens fält drar den mot öster. Nålen pekar rakt mot magneten bara om magnetens fält är mycket starkare än jordens där kompassen ligger. Ju närmare magneten ligger, desto mer domineras fältet av den och desto närmare öster pekar nålen.
+
+**Svar:** Jordens fält drar fortfarande nålen mot norr, så nålen pekar mellan norr och magneten.
+
+**c)** Nu är det magnetens nordända som är närmast kompassen. Fältlinjerna går ut ur nordändan, så magnetens fält pekar vid kompassen bort från magneten, **åt väster**. Nålens nordända repelleras av magnetens nordända. Tillsammans med jordens fält mot norr ställer sig nålen mellan norr och väster.
+
+**Svar:** Nålens nordända pekar ungefär mot nordväst.`,
+        },
+        {
+            level: 3,
+            question: `Tre stavar ser exakt likadana ut och är målade i samma gråa färg. En av dem är en stavmagnet, en är av järn och en är av aluminium. Du har inga andra hjälpmedel än de tre stavarna. Beskriv hur du kan ta reda på vilken stav som är vilken, och motivera varje steg.`,
+            solution: `**Steg 1: hitta aluminiumstaven.** För stavarnas ändar mot varandra parvis. Magneten och järnstaven attraherar varandra. Aluminium är inte ferromagnetiskt och påverkas varken av magneten eller av järnet. Den stav som inte dras till någon av de andra är alltså aluminiumstaven. De två stavar som dras till varandra är magneten och järnstaven.
+
+**Steg 2: skilj magneten från järnstaven.** Repulsion går inte att använda: järn repellerar aldrig en magnet, och man har bara en magnet. I stället utnyttjar man att magnetfältet är starkast vid magnetens ändar, där fältlinjerna ligger tätt, och mycket svagt mitt på magnetens sida, där linjerna går parallellt med magneten och glest.
+
+Kalla de två stavarna P och Q. Håll en ände av P mot **mitten** av Q.
+
+- Om de drar kraftigt i varandra är P magneten. Dess ände är en pol med starkt fält, och den drar till sig järnet i Q:s mitt.
+- Om de knappt drar i varandra är P järnstaven. Q är då magneten, och dess mitt har nästan inget fält att dra järnet med.
+
+Pröva gärna åt andra hållet också (en ände av Q mot mitten av P) som kontroll. Den ena kombinationen ska ge stark attraktion och den andra svag.
+
+**Steg 3 (om man vill veta polerna):** En magnet som får hänga fritt ställer in sig i nordsydlig riktning, men det kräver ett snöre. Med bara stavarna räcker det att veta vilken stav som är magneten.
+
+**Svar:** Den stav som inte dras till någon av de andra är av aluminium. Håll sedan en ände av en av de två återstående mot mitten av den andra: blir attraktionen stark är staven vars ände du håller magneten, blir den svag är det järnstaven.`,
+        },
+        {
+            level: 3,
+            question: `En stavmagnet med nordändan åt vänster sågas av på mitten.<br>a) Använd fältlinjerna inuti magneten för att avgöra vilken sorts pol som bildas vid var och en av de två nya snittytorna.<br>b) Förklara med hjälp av fältlinjerna varför det aldrig går att få en magnet med bara en pol.`,
+            solution: `**a)** Utanför magneten går fältlinjerna från nordändan till sydändan, och inuti magneten fortsätter de från sydändan tillbaka till nordändan. Med nordändan åt vänster går linjerna alltså **åt vänster inuti magneten**, hela vägen genom den.
+
+Sågas magneten av på mitten ligger snittet tvärs över dessa linjer.
+
+- Den vänstra biten: linjerna går *in* i den genom snittytan (de kommer från höger och fortsätter åt vänster mot nordändan). Där fältlinjer går in i en magnet sitter en sydända. Snittytan på den vänstra biten blir alltså en **sydända**.
+- Den högra biten: linjerna kommer inifrån och går *ut* genom snittytan åt vänster. Där fältlinjer går ut ur en magnet sitter en nordända. Snittytan på den högra biten blir alltså en **nordända**.
+
+De två nya ytorna har olika poler, och de attraherar därför varandra om bitarna förs ihop igen, precis som när magneten var hel.
+
+**Svar:** Snittytan på den vänstra biten blir en sydända och snittytan på den högra biten en nordända.
+
+**b)** Varje fältlinje är en sluten kurva utan början och slut. En linje som går ut ur en magnet genom en yta måste därför någonstans gå in i magneten igen. En magnet som bara hade en nordända skulle ha fältlinjer som bara går ut, och som aldrig kommer tillbaka, vilket strider mot att linjerna är slutna. Hur många gånger man än delar magneten passerar samma slutna linjer genom varje bit: de går in i biten på ena sidan och ut på den andra. Varje bit får därför både en sydända och en nordända.
+
+**Svar:** Fältlinjerna är slutna kurvor, så de linjer som går ut ur en bit måste också gå in i den. Varje bit får därför alltid både en nordända och en sydända.`,
+        },
+        {
+            level: 3,
+            question: `Två likadana stavmagneter ligger på en rad med nordändarna vända mot varandra. Punkten M ligger mitt emellan nordändarna.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="10 12 380 54" width="481" height="68" style="display:block;margin:16px auto;max-width:100%;height:auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,system-ui,sans-serif" role="img" aria-label="Tva likadana stavmagneter pa en rad med nordandarna vanda mot varandra. Punkten M ligger mitt emellan nordandarna."><rect x="20" y="30" width="70" height="26" fill="#cfd4da"/><rect x="90" y="30" width="70" height="26" fill="#c0392b"/><rect x="20" y="30" width="140" height="26" fill="none" stroke="#5d646e" stroke-width="1.3"/><text x="55" y="48.04" text-anchor="middle" font-size="14" font-weight="600" fill="#3a3f47">S</text><text x="125" y="48.04" text-anchor="middle" font-size="14" font-weight="600" fill="#ffffff">N</text><rect x="240" y="30" width="70" height="26" fill="#c0392b"/><rect x="310" y="30" width="70" height="26" fill="#cfd4da"/><rect x="240" y="30" width="140" height="26" fill="none" stroke="#5d646e" stroke-width="1.3"/><text x="275" y="48.04" text-anchor="middle" font-size="14" font-weight="600" fill="#ffffff">N</text><text x="345" y="48.04" text-anchor="middle" font-size="14" font-weight="600" fill="#3a3f47">S</text><circle cx="200" cy="43" r="3" fill="#0f1620"/><text x="200" y="30" text-anchor="middle" font-size="15" font-style="normal" font-weight="600" fill="#0f1620">M</text></svg>
+
+a) Vilken riktning har magnetfältet i punkten M? Motivera.<br>b) En liten kompass placeras i M. Hur ställer den in sig?<br>c) Den högra magneten byts mot en starkare magnet. Flyttas den punkt där fältet är noll åt vänster eller åt höger? Motivera.`,
+            solution: `**a)** Fältlinjerna går ut ur en nordända. Från den vänstra magnetens nordända pekar fältet i M därför **åt höger**, bort från den. Från den högra magnetens nordända pekar fältet i M **åt vänster**, bort från den.
+
+Magneterna är likadana och M ligger lika långt från båda nordändarna. De två bidragen är alltså lika starka men motsatt riktade, och de tar ut varandra. Fältet från magneterna är noll i M och har ingen riktning där.
+
+**Svar:** Fältet är noll i M, så det har ingen riktning.
+
+**b)** Magneterna påverkar inte kompassnålen i M, eftersom deras fält tar ut varandra där. Nålen påverkas bara av andra magnetfält, och i ett klassrum är det jordens magnetfält som finns kvar. Nålen ställer därför in sig i nordsydlig riktning, som om magneterna inte fanns. (Utan jordens fält skulle nålen stanna i vilket läge som helst.)
+
+**Svar:** Den ställer inte in sig efter magneterna, utan pekar som en vanlig kompass efter jordens magnetfält.
+
+**c)** Fältet från en magnet blir svagare ju längre bort från magneten man kommer, eftersom fältlinjerna sprider ut sig. Med en starkare högra magnet är dess fält i M större än den vänstra magnetens. Fältet i M pekar då åt vänster, och det tar inte längre ut sig.
+
+För att bidragen ska bli lika stora igen måste man gå närmare den svagare, vänstra magneten och längre bort från den starka högra. Där ökar det vänstra bidraget och det högra minskar, tills de är lika stora.
+
+**Svar:** Åt vänster, närmare den svagare magneten.`,
+        },
+        {
+            level: 3,
+            question: `En flexibel kylskåpsmagnet är en tunn gummiaktig skiva. Den fastnar bra med baksidan mot en kylskåpsdörr av stål. Lägger man två likadana skivor baksida mot baksida och drar den ena långsamt i sidled känns det som om de omväxlande drar ihop sig och stöter ifrån varandra. Skivorna drar ihop sig som mest i lägen som ligger $4\\ \\mathrm{mm}$ från varandra.
+
+a) Föreslå en modell av hur nordändar och sydändar är ordnade på skivans baksida som förklarar observationen.<br>b) Hur bred är varje del i din modell? Svara i millimeter.<br>c) Förklara med modellen och fältlinjerna varför en sådan magnet nästan helt tappar greppet om kylskåpsdörren om man lägger en bit kartong som är några millimeter tjock emellan.`,
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 2, unit: 'mm', etikett: 'bredd på varje rand' },
+                { del: 'c' },
+            ],
+            answer: { value: 2, unit: 'mm', tol: 0.05 },
+            solution: `**a)** Om baksidan bara hade en nordända och en sydända skulle skivorna inte växla mellan att dra ihop sig och att stöta ifrån varandra när den ena flyttas lite. Växlingen tyder på att baksidan består av **smala ränder som omväxlande är nordända och sydända**: N, S, N, S och så vidare.
+
+När ränderna i de två skivorna ligger så att varje N står mot ett S attraherar skivorna varandra (olika poler). Flyttas den ena skivan en randbredd kommer N att stå mot N och S mot S, och skivorna repellerar varandra (lika poler). Flyttas den en randbredd till är man tillbaka i ett läge med attraktion.
+
+**Svar:** Baksidan består av smala parallella ränder som omväxlande är nordända och sydända.
+
+**b)** Från ett läge med största attraktion till nästa flyttas skivan förbi en nordrand och en sydrand, alltså två randbredder:
+
+$$2 \\cdot b = 4\\ \\mathrm{mm}$$
+
+$$b = \\dfrac{4\\ \\mathrm{mm}}{2} = 2\\ \\mathrm{mm}$$
+
+**Svar:** Varje rand är 2 mm bred.
+
+**c)** Fältlinjerna går ut ur varje nordrand och in i grannranden, som är en sydända bara 2 mm bort. Linjerna blir därför korta bågar som håller sig mycket nära skivans yta. Nära ytan ligger de tätt och fältet är starkt, men redan en bit ut har nästan alla linjer vänt tillbaka in i skivan, och fältet är mycket svagt. Bågarna når ungefär en randbredd ut, alltså någon millimeter. En kartong som är några millimeter tjock placerar stålet i dörren utanför bågarna, där fältet nästan har försvunnit, och magneten tappar greppet. (Ett enda tunt papper är däremot bara en tiondels millimeter tjockt, och därför håller magneten ett papper mot dörren.) En stavmagnet med poler långt isär har i stället stora bågar som når långt ut.
+
+**Svar:** Fältlinjerna går i små bågar mellan grannränder och når bara någon millimeter ut, så fältet är mycket svagt redan några millimeter från skivan.`,
+        },
+        {
+            level: 3,
+            question: `Fyra likadana ringmagneter är trädda på en lodrät penna som står i en träkloss. Varje ring är magnetiserad så att den ena plana sidan är en nordända och den andra en sydända. Den understa ringen vilar på klossen, och de andra tre svävar ovanför varandra utan att röra varandra.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="32 98 168 174" width="246" height="254" style="display:block;margin:16px auto;max-width:100%;height:auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,system-ui,sans-serif" role="img" aria-label="Fyra likadana ringmagneter tradda pa en lodrat penna som star i en trakloss. Den understa ringen vilar pa klossen. De andra svavar, och glipan mellan ringarna ar minst langst ned och storst langst upp."><rect x="40" y="250" width="120" height="16" rx="2" fill="#b98b5e" stroke="#5d646e" stroke-width="1.2"/><rect x="95" y="118" width="10" height="132" fill="#e0b04a" stroke="#5d646e" stroke-width="1.1"/><polygon points="95,118 105,118 100,104" fill="#e8cfa0" stroke="#5d646e" stroke-width="1.1"/><polygon points="98.2,109 101.8,109 100,104" fill="#3a3f47"/><rect x="65" y="236" width="70" height="14" rx="2" fill="#4a4f57" stroke="#0f1620" stroke-width="1.1"/><text x="146" y="248" font-size="13" fill="#0f1620">Ring 1</text><rect x="65" y="212" width="70" height="14" rx="2" fill="#4a4f57" stroke="#0f1620" stroke-width="1.1"/><text x="146" y="224" font-size="13" fill="#0f1620">Ring 2</text><rect x="65" y="182" width="70" height="14" rx="2" fill="#4a4f57" stroke="#0f1620" stroke-width="1.1"/><text x="146" y="194" font-size="13" fill="#0f1620">Ring 3</text><rect x="65" y="142" width="70" height="14" rx="2" fill="#4a4f57" stroke="#0f1620" stroke-width="1.1"/><text x="146" y="154" font-size="13" fill="#0f1620">Ring 4</text></svg>
+
+a) Den understa ringen har nordändan uppåt. Ange för var och en av ringarna 2, 3 och 4 vilken sorts pol som vänder uppåt.<br>b) Förklara varför glipan mellan ringarna är minst längst ned.<br>c) Ring 4 lyfts av och vänds upp och ned innan den träs på igen. Vad händer? Motivera.`,
+            solution: `**a)** En ring kan bara sväva om den repelleras av ringen under, alltså om de sidor som vetter mot varandra är **lika poler**.
+
+- Ring 1 har nordändan uppåt. Ring 2 måste då ha nordändan nedåt, och därmed sydändan uppåt.
+- Ring 3 måste vända sydändan nedåt mot ring 2:s sydända, och har då nordändan uppåt.
+- Ring 4 måste vända nordändan nedåt mot ring 3:s nordända, och har då sydändan uppåt.
+
+Ringarna sitter alltså omväxlande vända.
+
+**Svar:** Ring 2 sydända, ring 3 nordända och ring 4 sydända uppåt.
+
+**b)** Varje svävande ring är i jämvikt: den magnetiska kraften uppåt från ringen under är lika stor som tyngdkraften på de ringar som den kraften bär.
+
+- Kraften mellan ring 3 och ring 4 bär bara ring 4.
+- Kraften mellan ring 2 och ring 3 bär ring 3 och ring 4.
+- Kraften mellan ring 1 och ring 2 bär ring 2, 3 och 4, alltså tre ringars tyngd.
+
+Den understa glipan måste därför ge den största repulsionen. Kraften mellan två magneter blir större ju närmare varandra de är, eftersom fältet är starkare närmare polerna. Ringarna längst ned trycks därför ihop tills kraften räcker, och glipan blir minst där.
+
+**Svar:** Den understa glipan bär tyngden av flest ringar, och den större kraft som krävs uppstår bara när ringarna är närmare varandra.
+
+**c)** Vänds ring 4 hamnar dess sydända nedåt. Ring 3 har nordändan uppåt, så nu vetter en sydända mot en nordända. Olika poler attraherar, och ring 4 dras ned och fastnar mot ring 3.
+
+**Svar:** Ring 4 dras ned och fastnar mot ring 3, eftersom olika poler nu vetter mot varandra.`,
+        },
+        {
+            level: 3,
+            question: `Du har en stavmagnet, ett stort papper, en penna och en enda liten kompass. Planera ett experiment där du ritar upp fältlinjerna runt magneten. Beskriv metoden steg för steg, förklara hur du får fram fältlinjernas riktning och hur du kan se var fältet är starkt, och ange minst två saker som kan göra bilden felaktig och hur du minskar dem.`,
+            solution: `**Metod.**
+
+1. Lägg magneten mitt på pappret och rita av dess kontur. Ta bort järnföremål från bordet.
+2. Ställ kompassen alldeles intill magnetens nordända. Sätt en prick vid var och en av nålens två spetsar.
+3. Flytta kompassen så att nålens bakre spets (sydändan) ligger vid den främre pricken, och sätt en ny prick vid nålens nordända.
+4. Upprepa tills linjen når magnetens sydända eller pappersarkets kant.
+5. Dra en mjuk kurva genom prickarna. Det är en fältlinje.
+6. Börja om från flera punkter jämnt fördelade runt nordändan, så att du får många fältlinjer.
+
+**Riktning.** Fältets riktning är den riktning kompassnålens nordända pekar åt. Rita därför en pil på varje linje i den riktning nålens nordända pekade. Pilarna ska då gå ut ur magnetens nordända och in i dess sydända.
+
+**Var fältet är starkt.** Om linjerna startas med lika stora mellanrum runt polen visar deras täthet fältets styrka: tätt mellan linjerna betyder starkt fält. Man kan även se det på kompassen, som snabbt ställer in sig och är svår att vrida ur riktningen där fältet är starkt.
+
+**Felkällor och hur de minskas.**
+
+- **Jordens magnetfält.** Långt från magneten är magnetens fält svagt, och där ställer kompassen in sig efter jordens fält i stället. Linjerna böjer då av mot nordsydlig riktning och når aldrig fram till sydändan. Minska felet genom att hålla mätningarna nära magneten, använda en starkare magnet eller jämföra med kompassens riktning helt utan magnet, så att man vet hur jordens fält ser ut.
+- **Järn i närheten.** Bordsben, skruvar, mobiltelefoner och andra magneter stör fältet. Arbeta på ett bord utan järn och håll andra föremål borta.
+- **Kompassens storlek.** Varje steg blir lika långt som nålen, så en stor kompass ger kantiga linjer och missar hur skarpt linjerna böjer sig nära polerna. Använd en så liten kompass som möjligt och ta små steg.
+- **Friktion i nålen.** En nål som kärvar ställer inte in sig helt. Knacka lätt på kompassen före varje markering.
+
+**Svar:** Följ fältlinjen steg för steg genom att flytta kompassen från pricken vid nålens nordända, rita pilar åt nålens nordända och starta linjerna jämnt fördelade runt polen så att tätheten visar fältstyrkan. Jordens fält och järn i närheten är de viktigaste felkällorna, och de minskas genom att arbeta nära magneten och hålla järn borta.`,
+        },
+        {
+            level: 3,
+            question: `En ring av stål är magnetiserad på ett ovanligt sätt. Fältlinjerna inuti stålet går runt, runt i ringen, moturs i figuren, och ingen fältlinje lämnar stålet.
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="44 14 132 148" width="198" height="222" style="display:block;margin:16px auto;max-width:100%;height:auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,system-ui,sans-serif" role="img" aria-label="En stalring sedd uppifran. En faltlinje gar runt inuti ringen, och pilar pa den visar att den gar moturs. Overst pa ringen ar ett stalle markerat med P och en streckad linje tvars over ringen."><path d="M 54 96 A 56 56 0 1 0 166 96 A 56 56 0 1 0 54 96 Z M 74 96 A 36 36 0 1 1 146 96 A 36 36 0 1 1 74 96 Z" fill="#c4cad1" fill-rule="evenodd" stroke="#5d646e" stroke-width="1.3"/><circle cx="110" cy="96" r="46" fill="none" stroke="#0f1620" stroke-width="1.5"/><polygon points="64,101 59.8,91 68.2,91" fill="#0f1620"/><polygon points="115,142 105,146.2 105,137.8" fill="#0f1620"/><polygon points="156,91 160.2,101 151.8,101" fill="#0f1620"/><line x1="110" y1="34" x2="110" y2="66" stroke="#0f1620" stroke-width="1.4" stroke-dasharray="4 3"/><text x="110" y="29" text-anchor="middle" font-size="15" font-weight="600" fill="#0f1620">P</text></svg>
+
+a) Var på ringen sitter dess nordända och sydända? Motivera.<br>b) Ringen är kraftigt magnetiserad, men ett gem som hålls mot den dras inte till den. Förklara varför.<br>c) Ringen sågas av vid P så att en smal springa bildas. Vilken sorts pol bildas på springans högra och vänstra sida i figuren, och var fastnar ett gem nu lättast? Motivera.`,
+            solution: `**a)** En nordända är det ställe där fältlinjerna går ut ur en magnet, och en sydända det ställe där de går in. I ringen lämnar ingen fältlinje stålet, och ingen kommer in i det utifrån. Det finns alltså inget ställe där linjerna går ut eller in, och därmed ingen pol alls.
+
+Det strider inte mot att poler alltid uppträder parvis. Ringen har inte en ensam pol, den har noll poler.
+
+**Svar:** Ingenstans. Eftersom inga fältlinjer går ut ur eller in i stålet har ringen varken nordända eller sydända.
+
+**b)** Ett gem dras till en magnet av magnetfältet där gemet befinner sig. Alla fältlinjer ligger inuti stålet, så utanför ringen finns inget magnetfält. Gemet ligger utanför stålet och påverkas därför inte, hur starkt ringen än är magnetiserad.
+
+**Svar:** Utanför ringen finns inget magnetfält, eftersom alla fältlinjer stannar inuti stålet. Då finns ingenting som drar i gemet.
+
+**c)** Överst på ringen, vid P, går fältlinjerna moturs, alltså **åt vänster** i figuren. Fältlinjerna är slutna kurvor och kan inte ta slut vid springan, så de måste korsa den: de kommer genom stålet på springans högra sida, går ut genom snittytan, korsar springan och går in i snittytan på vänster sida.
+
+- På springans högra sida går linjerna ut ur stålet. Där bildas en **nordända**.
+- På springans vänstra sida går linjerna in i stålet. Där bildas en **sydända**.
+
+Nu finns det ett magnetfält utanför stålet, men bara vid springan. Alla fältlinjer i ringen tränger sig igenom den smala springan, så de ligger tätt där och fältet är starkt. Ett gem fastnar därför lättast vid springan, och längre bort på ringen dras det fortfarande nästan inte alls.
+
+**Svar:** Springans högra sida blir en nordända och dess vänstra sida en sydända. Gemet fastnar lättast vid springan, där fältlinjerna ligger tätt.`,
         },
     ],
 
@@ -67432,7 +76051,7 @@ $$ U = \\frac{\\hat{u}}{\\sqrt{2}} \\quad\\Leftrightarrow\\quad \\hat{u} = U\\sq
 
 **Svar:** Toppspänningen är ungefär $325\\ \\mathrm{V}$.
 
-**Generell slutsats:** Toppspänningen är ungefär $1{,}41$ gånger effektivvärdet. Det är en av anledningarna till varför man behöver isolering klassad för betydligt högre spänning än "nominella" $230\\ \\mathrm{V}$ — kortvarigt når spänningen $\\pm 325\\ \\mathrm{V}$ flera gånger per sekund.`,
+**Generell slutsats:** Toppspänningen är ungefär $1{,}41$ gånger effektivvärdet. Det är en av anledningarna till varför man behöver isolering klassad för betydligt högre spänning än "nominella" $230\\ \\mathrm{V}$: kortvarigt når spänningen $\\pm 325\\ \\mathrm{V}$ flera gånger per sekund.`,
         },
         {
             level: 1,
@@ -67452,7 +76071,7 @@ $$ u = 325\\sin(100\\pi \\cdot 5{,}0\\cdot 10^{-3}) = 325\\sin(0{,}5\\pi) = 325\
 
 **Svar:** Spänningen är $325\\ \\mathrm{V}$ (= toppspänningen, eftersom $\\sin(\\pi/2) = 1$).
 
-**Generell slutsats:** Vid $t = T/4$ (en kvarts periodtid) når spänningen sitt toppvärde — det är då rotationsslingan i generatorn är optimalt orienterad för maximal flödesändring.`,
+**Generell slutsats:** Vid $t = T/4$ (en kvarts periodtid) når spänningen sitt toppvärde. Det är då rotationsslingan i generatorn är optimalt orienterad för maximal flödesändring.`,
         },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
@@ -67476,17 +76095,17 @@ $$ U = \\frac{\\hat{u}}{\\sqrt{2}} = \\frac{170}{\\sqrt{2}} \\approx 120{,}2\\ \
 
 **Svar:** $u(t) = 170\\sin(120\\pi t)\\ \\mathrm{V}$ med effektivvärdet ungefär $120\\ \\mathrm{V}$.
 
-**Generell slutsats:** Detta är ungefär det amerikanska elnätet (110–120 V effektivt, 60 Hz). Effektivvärdet är det "praktiska" värdet som t.ex. anges på apparater — det är spänningen som *ger samma effekt* som en motsvarande likspänning skulle göra.`,
+**Generell slutsats:** Detta är ungefär det amerikanska elnätet (110–120 V effektivt, 60 Hz). Effektivvärdet är det "praktiska" värdet som t.ex. anges på apparater. Det är spänningen som *ger samma effekt* som en motsvarande likspänning skulle göra.`,
         },
         {
             level: 2,
             question: `En enkel växelströmsgenerator har en kvadratisk slinga med sidan $10\\ \\mathrm{cm}$ som roterar i ett magnetfält $B = 0{,}40\\ \\mathrm{T}$. Slingan roterar med frekvensen $50\\ \\mathrm{Hz}$. Beräkna **toppspänningen** $\\hat{u}$ som induceras.`,
             answer: { value: 1.257, unit: 'V' },
-            solution: `**Steg 1 — vinkelhastighet.**
+            solution: `**Steg 1: vinkelhastighet.**
 
 $$ \\omega = 2\\pi f = 2\\pi \\cdot 50 = 100\\pi\\ \\mathrm{rad/s} $$
 
-**Steg 2 — toppspänning.** För en slinga som roterar i ett magnetfält gäller $\\hat{u} = B\\cdot A\\cdot\\omega$:
+**Steg 2: toppspänning.** För en slinga som roterar i ett magnetfält gäller $\\hat{u} = B\\cdot A\\cdot\\omega$:
 
 $$ \\hat{u} = B\\cdot A\\cdot\\omega = 0{,}40 \\cdot (0{,}10)^2 \\cdot 100\\pi = 0{,}40 \\cdot 0{,}010 \\cdot 314{,}16 \\approx 1{,}26\\ \\mathrm{V} $$
 
@@ -67497,7 +76116,7 @@ $$ \\hat{u} = B\\cdot A\\cdot\\omega = 0{,}40 \\cdot (0{,}10)^2 \\cdot 100\\pi =
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
-            level: 3,
+            level: 2,
             question: `En glödlampa har en resistans på $230\\ \\mathrm{\\Omega}$ och är ansluten till det svenska elnätet ($U = 230\\ \\mathrm{V}$ effektivt, $f = 50\\ \\mathrm{Hz}$). Bestäm (a) toppströmmen $\\hat{\\imath}$ genom lampan, och (b) den **maximala effekten** under en periodtid.`,
             answer: { value: 460, unit: 'W' },
             solution: `**(a) Toppströmmen.** Effektivströmmen är $I = U/R$:
@@ -67512,11 +76131,662 @@ $$ \\hat{\\imath} = I\\sqrt{2} = 1{,}0\\sqrt{2} \\approx 1{,}41\\ \\mathrm{A} $$
 
 $$ P_{\\max} = \\hat{u}\\cdot\\hat{\\imath} = 325 \\cdot 1{,}41 \\approx 460\\ \\mathrm{W} $$
 
-**Insikt:** Detta är **dubbla** medeleffekten. Medeleffekten är $P_\\text{medel} = U\\cdot I = 230\\cdot 1{,}0 = 230\\ \\mathrm{W}$, vilket är hälften av maxeffekten. Det är därför vi använder effektivvärden — då blir formeln $P = UI$ giltig som *medel*effekt.
+**Insikt:** Detta är **dubbla** medeleffekten. Medeleffekten är $P_\\text{medel} = U\\cdot I = 230\\cdot 1{,}0 = 230\\ \\mathrm{W}$, vilket är hälften av maxeffekten. Det är därför vi använder effektivvärden: då blir formeln $P = UI$ giltig som *medel*effekt.
 
 **Svar:** (a) Toppströmmen är ungefär $1{,}4\\ \\mathrm{A}$. (b) Maxeffekten är ungefär $460\\ \\mathrm{W}$ (= $2\\cdot P_\\text{medel}$).
 
 **Generell slutsats:** $P_{\\max} = 2 P_\\text{medel}$ är ett klassiskt fysik 2-resultat som ofta missförstås. Det är därför man måste skilja på *medel*-, *topp*- och *effektiv*-värden i växelströmsanalys.`,
+        },
+        {
+            level: 1,
+            question: `En elev kopplar en liten växelströmsgenerator till ett oscilloskop och läser av toppspänningen $\\hat{u} = 17\\ \\mathrm{V}$. Vilket är spänningens effektivvärde $U$?`,
+            choices: [
+                `$24\\ \\mathrm{V}$`,
+                `$12\\ \\mathrm{V}$`,
+                `$8{,}5\\ \\mathrm{V}$`,
+                `$17\\ \\mathrm{V}$`,
+            ],
+            correct: 1,
+            solution: `Effektivvärdet fås genom att toppvärdet divideras med $\\sqrt{2}$:
+
+$$ U = \\frac{\\hat{u}}{\\sqrt{2}} = \\frac{17}{\\sqrt{2}} = 12{,}02\\ldots\\ \\mathrm{V} \\approx 12\\ \\mathrm{V} $$
+
+Rimlighet: effektivvärdet ska alltid vara mindre än toppvärdet. Alternativet $24\\ \\mathrm{V}$ får man om man multiplicerar med $\\sqrt{2}$ i stället för att dividera, och $8{,}5\\ \\mathrm{V}$ om man tar halva toppvärdet.
+
+**Svar:** $12\\ \\mathrm{V}$`,
+        },
+        {
+            level: 1,
+            question: `Grafen visar hur spänningen $u$ från en växelströmsgenerator varierar med tiden $t$.
+
+${makeDiagram({ xMin: 0, xMax: 11, yMin: -8, yMax: 8, xTicks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], yTicks: [-8, -6, -4, -2, 0, 2, 4, 6, 8], xLabel: '<tspan font-style="italic">t</tspan> (ms)', yLabel: '<tspan font-style="italic">u</tspan> (V)', paths: [{ points: Array.from({ length: 401 }, (_, k) => { const t = k * 0.025; return [t, 6 * Math.sin(2 * Math.PI * t / 4)]; }) }] })}
+
+Bestäm<br>a) toppspänningen $\\hat{u}$&emsp;&emsp;b) periodtiden $T$&emsp;&emsp;c) frekvensen $f$`,
+            answer: { value: 250, unit: 'Hz' },
+            delsvar: [
+                { del: 'a', value: 6.0, unit: 'V', etikett: '$\\hat{u} =$' },
+                { del: 'b', value: 4.0, unit: 'ms', etikett: '$T =$' },
+                { del: 'c', value: 250, unit: 'Hz', etikett: '$f =$' },
+            ],
+            solution: `**a)** Toppspänningen är det största värdet som spänningen når. Kurvan når som högst 3 rutor upp, där varje ruta är $2\\ \\mathrm{V}$.
+
+$$ \\hat{u} = 6{,}0\\ \\mathrm{V} $$
+
+**Svar:** $6{,}0\\ \\mathrm{V}$
+
+**b)** Periodtiden är tiden för en hel svängning, till exempel från en nollgenomgång uppåt till nästa nollgenomgång uppåt. Kurvan går uppåt genom noll vid $t = 0$ och nästa gång vid $t = 4{,}0\\ \\mathrm{ms}$.
+
+$$ T = 4{,}0\\ \\mathrm{ms} $$
+
+**Svar:** $4{,}0\\ \\mathrm{ms}$
+
+**c)** Frekvensen är antalet svängningar per sekund:
+
+$$ f = \\frac{1}{T} = \\frac{1}{4{,}0 \\cdot 10^{-3}} = 250\\ \\mathrm{Hz} $$
+
+**Svar:** $250\\ \\mathrm{Hz}$`,
+        },
+        {
+            level: 1,
+            question: `En växelströmsgenerator ger en ström med toppvärdet $\\hat{\\imath} = 3{,}2\\ \\mathrm{A}$ och frekvensen $f = 25\\ \\mathrm{Hz}$. Vid tiden $t = 0$ är strömmen noll och på väg att öka. Hur stor är momentanströmmen $i$ vid tiden $t = 4{,}0\\ \\mathrm{ms}$? Ange svaret i A.`,
+            answer: { value: 1.9, unit: 'A' },
+            solution: `Momentanströmmen ges av
+
+$$ i = \\hat{\\imath} \\cdot \\sin(\\omega t) $$
+
+Vi börjar med vinkelhastigheten:
+
+$$ \\omega = 2\\pi \\cdot f = 2\\pi \\cdot 25 = 50\\pi\\ \\mathrm{rad/s} $$
+
+$$
+\\left[ \\begin{array}{l}
+\\hat{\\imath} = 3{,}2\\ \\mathrm{A} \\\\
+\\omega = 50\\pi\\ \\mathrm{rad/s} \\\\
+t = 4{,}0 \\cdot 10^{-3}\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+Vinkeln $\\omega t$ är i radianer, så räknaren ska stå i radianläge:
+
+$$ \\omega t = 50\\pi \\cdot 4{,}0 \\cdot 10^{-3} = 0{,}20\\pi\\ \\mathrm{rad} $$
+
+$$ i = 3{,}2 \\cdot \\sin(0{,}20\\pi) = 3{,}2 \\cdot 0{,}5877\\ldots = 1{,}88\\ldots\\ \\mathrm{A} \\approx 1{,}9\\ \\mathrm{A} $$
+
+Rimlighet: periodtiden är $\\dfrac{1}{25}\\ \\mathrm{s} = 40\\ \\mathrm{ms}$, så $4{,}0\\ \\mathrm{ms}$ är mindre än en kvarts periodtid ($10\\ \\mathrm{ms}$). Strömmen har alltså inte hunnit upp till toppvärdet, och $1{,}9\\ \\mathrm{A}$ är mindre än $3{,}2\\ \\mathrm{A}$.
+
+**Svar:** $1{,}9\\ \\mathrm{A}$`,
+        },
+        {
+            level: 1,
+            question: `Figuren visar en slinga i en generator rakt från sidan, i tre olika lägen P, Q och R. Slingan ritas som ett tjockt blått streck och roterar kring axeln i mitten. Magnetfältet $B$ går rakt nedåt från nordändan N till sydändan S.
+
+<svg viewBox="0 0 450 222" width="534" height="263" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Tre lägen av en slinga sedd från sidan mellan en nordända upptill och en sydända nedtill. I läge P står slingan lodrätt, i läge Q lutar den 45 grader och i läge R ligger den vågrätt."><g><rect x="15" y="8" width="120" height="24" fill="#ef4444" stroke="#0f1620" stroke-width="1.4"/><text x="75" y="25.5" text-anchor="middle" font-size="15" font-weight="600" fill="#fff">N</text><rect x="15" y="168" width="120" height="24" fill="#fff" stroke="#0f1620" stroke-width="1.4"/><text x="75" y="185.5" text-anchor="middle" font-size="15" font-weight="600" fill="#fff" stroke="#0f1620" stroke-width="1.4" paint-order="stroke">S</text><line x1="30" y1="34" x2="30" y2="166" stroke="#a855f7" stroke-width="1.5"/><polygon points="25.5,47 30,56 34.5,47" fill="#a855f7"/><line x1="60" y1="34" x2="60" y2="166" stroke="#a855f7" stroke-width="1.5"/><polygon points="55.5,47 60,56 64.5,47" fill="#a855f7"/><line x1="90" y1="34" x2="90" y2="166" stroke="#a855f7" stroke-width="1.5"/><polygon points="85.5,47 90,56 94.5,47" fill="#a855f7"/><line x1="120" y1="34" x2="120" y2="166" stroke="#a855f7" stroke-width="1.5"/><polygon points="115.5,47 120,56 124.5,47" fill="#a855f7"/><line x1="75" y1="64" x2="75" y2="136" stroke="#2563eb" stroke-width="5" stroke-linecap="round"/><circle cx="75" cy="64" r="4.5" fill="#eaf2fb" stroke="#2563eb" stroke-width="1.6"/><circle cx="75" cy="136" r="4.5" fill="#eaf2fb" stroke="#2563eb" stroke-width="1.6"/><circle cx="75" cy="100" r="3" fill="#0f1620"/><text x="75" y="214" text-anchor="middle" font-size="16" font-weight="600" fill="#0f1620">P</text></g><g><rect x="165" y="8" width="120" height="24" fill="#ef4444" stroke="#0f1620" stroke-width="1.4"/><text x="225" y="25.5" text-anchor="middle" font-size="15" font-weight="600" fill="#fff">N</text><rect x="165" y="168" width="120" height="24" fill="#fff" stroke="#0f1620" stroke-width="1.4"/><text x="225" y="185.5" text-anchor="middle" font-size="15" font-weight="600" fill="#fff" stroke="#0f1620" stroke-width="1.4" paint-order="stroke">S</text><line x1="180" y1="34" x2="180" y2="166" stroke="#a855f7" stroke-width="1.5"/><polygon points="175.5,47 180,56 184.5,47" fill="#a855f7"/><line x1="210" y1="34" x2="210" y2="166" stroke="#a855f7" stroke-width="1.5"/><polygon points="205.5,47 210,56 214.5,47" fill="#a855f7"/><line x1="240" y1="34" x2="240" y2="166" stroke="#a855f7" stroke-width="1.5"/><polygon points="235.5,47 240,56 244.5,47" fill="#a855f7"/><line x1="270" y1="34" x2="270" y2="166" stroke="#a855f7" stroke-width="1.5"/><polygon points="265.5,47 270,56 274.5,47" fill="#a855f7"/><line x1="199.5" y1="125.5" x2="250.5" y2="74.5" stroke="#2563eb" stroke-width="5" stroke-linecap="round"/><circle cx="199.5" cy="125.5" r="4.5" fill="#eaf2fb" stroke="#2563eb" stroke-width="1.6"/><circle cx="250.5" cy="74.5" r="4.5" fill="#eaf2fb" stroke="#2563eb" stroke-width="1.6"/><circle cx="225" cy="100" r="3" fill="#0f1620"/><text x="225" y="214" text-anchor="middle" font-size="16" font-weight="600" fill="#0f1620">Q</text></g><g><rect x="315" y="8" width="120" height="24" fill="#ef4444" stroke="#0f1620" stroke-width="1.4"/><text x="375" y="25.5" text-anchor="middle" font-size="15" font-weight="600" fill="#fff">N</text><rect x="315" y="168" width="120" height="24" fill="#fff" stroke="#0f1620" stroke-width="1.4"/><text x="375" y="185.5" text-anchor="middle" font-size="15" font-weight="600" fill="#fff" stroke="#0f1620" stroke-width="1.4" paint-order="stroke">S</text><line x1="330" y1="34" x2="330" y2="166" stroke="#a855f7" stroke-width="1.5"/><polygon points="325.5,47 330,56 334.5,47" fill="#a855f7"/><line x1="360" y1="34" x2="360" y2="166" stroke="#a855f7" stroke-width="1.5"/><polygon points="355.5,47 360,56 364.5,47" fill="#a855f7"/><line x1="390" y1="34" x2="390" y2="166" stroke="#a855f7" stroke-width="1.5"/><polygon points="385.5,47 390,56 394.5,47" fill="#a855f7"/><line x1="420" y1="34" x2="420" y2="166" stroke="#a855f7" stroke-width="1.5"/><polygon points="415.5,47 420,56 424.5,47" fill="#a855f7"/><line x1="339" y1="100" x2="411" y2="100" stroke="#2563eb" stroke-width="5" stroke-linecap="round"/><circle cx="339" cy="100" r="4.5" fill="#eaf2fb" stroke="#2563eb" stroke-width="1.6"/><circle cx="411" cy="100" r="4.5" fill="#eaf2fb" stroke="#2563eb" stroke-width="1.6"/><circle cx="375" cy="100" r="3" fill="#0f1620"/><text x="375" y="214" text-anchor="middle" font-size="16" font-weight="600" fill="#0f1620">R</text></g></svg>
+
+I vilket läge är den inducerade spänningen i slingan noll?`,
+            choices: [
+                `Läge P`,
+                `Läge Q`,
+                `Läge R`,
+                `Spänningen är lika stor i alla tre lägena`,
+            ],
+            correct: 2,
+            solution: `Enligt induktionslagen är den inducerade spänningen $e = -\\dfrac{d\\Phi}{dt}$. Den beror alltså inte på hur stort flödet är, utan på hur snabbt flödet **ändras**.
+
+I läge R ligger slingans yta vinkelrätt mot fältlinjerna. Då är den vinkelräta arean och därmed flödet som störst. Precis i det läget slutar flödet att öka och börjar minska, så flödet ändras inte för stunden, och spänningen är noll. Det stämmer med $e = B \\cdot A \\cdot \\omega \\cdot \\sin(\\omega t)$, som är noll när $\\omega t = 0$, alltså när slingan ligger vågrätt.
+
+I läge P är flödet noll, men där ändras det som snabbast. Där är spänningen som störst. I läge Q ligger spänningen mellan noll och toppvärdet.
+
+**Svar:** Läge R`,
+        },
+        {
+            level: 2,
+            question: `En generator har en rektangulär spole med $250$ varv. Varje varv är $3{,}0\\ \\mathrm{cm}$ gånger $2{,}0\\ \\mathrm{cm}$, och spolen roterar i ett magnetfält med flödestätheten $B = 0{,}12\\ \\mathrm{T}$. Spänningen från alla varv adderas, så toppspänningen blir $\\hat{u} = N \\cdot B \\cdot A \\cdot \\omega$, där $N$ är antalet varv. Med vilken frekvens måste spolen rotera för att toppspänningen ska bli $6{,}0\\ \\mathrm{V}$? Ange svaret i Hz.`,
+            answer: { value: 53, unit: 'Hz' },
+            solution: `Vi löser ut vinkelhastigheten ur sambandet för toppspänningen:
+
+$$ \\hat{u} = N \\cdot B \\cdot A \\cdot \\omega \\quad\\Leftrightarrow\\quad \\omega = \\frac{\\hat{u}}{N \\cdot B \\cdot A} $$
+
+Spolens area är
+
+$$ A = 0{,}030 \\cdot 0{,}020 = 6{,}0 \\cdot 10^{-4}\\ \\mathrm{m^2} $$
+
+$$
+\\left[ \\begin{array}{l}
+\\hat{u} = 6{,}0\\ \\mathrm{V} \\\\
+N = 250 \\\\
+B = 0{,}12\\ \\mathrm{T} \\\\
+A = 6{,}0 \\cdot 10^{-4}\\ \\mathrm{m^2}
+\\end{array} \\right]
+$$
+
+$$ \\omega = \\frac{6{,}0}{250 \\cdot 0{,}12 \\cdot 6{,}0 \\cdot 10^{-4}} = 333{,}33\\ldots\\ \\mathrm{rad/s} $$
+
+Frekvensen fås ur $\\omega = 2\\pi \\cdot f$:
+
+$$ \\omega = 2\\pi \\cdot f \\quad\\Leftrightarrow\\quad f = \\frac{\\omega}{2\\pi} = \\frac{333{,}33\\ldots}{2\\pi} = 53{,}05\\ldots\\ \\mathrm{Hz} \\approx 53\\ \\mathrm{Hz} $$
+
+Frekvensen är lika med antalet varv per sekund, så spolen ska snurra 53 varv per sekund, ungefär $3\\,200$ varv per minut. Det är ett rimligt varvtal för en liten generator.
+
+**Svar:** $53\\ \\mathrm{Hz}$`,
+        },
+        {
+            level: 2,
+            question: `En generator är kopplad till ett motstånd med resistansen $R = 120\\ \\mathrm{\\Omega}$. Strömmen genom motståndet beskrivs av $i = 0{,}85 \\cdot \\sin(314 t)$, där $i$ är i ampere och $t$ i sekunder.<br>a) Beräkna den effektiva strömmen $I$.<br>b) Beräkna den effektiva spänningen $U$ över motståndet.<br>c) Hur lång tid efter $t = 0$ är strömmen för första gången $0{,}50\\ \\mathrm{A}$? Ange svaret i ms.`,
+            answer: { value: 2.0, unit: 'ms' },
+            delsvar: [
+                { del: 'a', value: 0.60, unit: 'A', etikett: '$I =$' },
+                { del: 'b', value: 72, unit: 'V', etikett: '$U =$' },
+                { del: 'c', value: 2.0, unit: 'ms', etikett: '$t =$' },
+            ],
+            solution: `Ur uttrycket läser vi av toppströmmen och vinkelhastigheten genom att jämföra med $i = \\hat{\\imath} \\cdot \\sin(\\omega t)$:
+
+$$
+\\left[ \\begin{array}{l}
+\\hat{\\imath} = 0{,}85\\ \\mathrm{A} \\\\
+\\omega = 314\\ \\mathrm{rad/s} \\\\
+R = 120\\ \\mathrm{\\Omega}
+\\end{array} \\right]
+$$
+
+**a)**
+
+$$ I = \\frac{\\hat{\\imath}}{\\sqrt{2}} = \\frac{0{,}85}{\\sqrt{2}} = 0{,}601\\ldots\\ \\mathrm{A} \\approx 0{,}60\\ \\mathrm{A} $$
+
+**Svar:** $0{,}60\\ \\mathrm{A}$
+
+**b)** Ström och spänning i motståndet följer varandra enligt Ohms lag, så sambandet gäller även för effektivvärdena. Vi använder det oavrundade värdet från a):
+
+$$ U = R \\cdot I = 120 \\cdot 0{,}601\\ldots = 72{,}12\\ldots\\ \\mathrm{V} \\approx 72\\ \\mathrm{V} $$
+
+**Svar:** $72\\ \\mathrm{V}$
+
+**c)** Vi söker den första tiden då $i = 0{,}50\\ \\mathrm{A}$:
+
+$$ 0{,}50 = 0{,}85 \\cdot \\sin(314 t) $$
+
+$$ \\frac{0{,}50}{0{,}85} = \\frac{0{,}85 \\cdot \\sin(314 t)}{0{,}85} $$
+
+$$ \\sin(314 t) = 0{,}5882\\ldots $$
+
+Den första lösningen är den minsta positiva vinkeln, i radianer:
+
+$$ 314 t = \\arcsin(0{,}5882\\ldots) = 0{,}6288\\ldots $$
+
+$$ \\frac{314 t}{314} = \\frac{0{,}6288\\ldots}{314} $$
+
+$$ t = 0{,}002002\\ldots\\ \\mathrm{s} \\approx 2{,}0\\ \\mathrm{ms} $$
+
+Rimlighet: periodtiden är $\\dfrac{2\\pi}{314}\\ \\mathrm{s} \\approx 20\\ \\mathrm{ms}$, och strömmen når toppvärdet efter en kvarts periodtid, $5\\ \\mathrm{ms}$. Värdet $0{,}50\\ \\mathrm{A}$ är lägre än toppvärdet och nås därför tidigare.
+
+**Svar:** $2{,}0\\ \\mathrm{ms}$`,
+        },
+        {
+            level: 2,
+            question: `Slingan i en växelströmsgenerator får rotera dubbelt så fort som tidigare. Magnetfältet och slingan är desamma. Hur ändras toppspänningen $\\hat{u}$ och periodtiden $T$?`,
+            choices: [
+                `$\\hat{u}$ är oförändrad och $T$ halveras`,
+                `$\\hat{u}$ fördubblas och $T$ fördubblas`,
+                `$\\hat{u}$ halveras och $T$ halveras`,
+                `$\\hat{u}$ fördubblas och $T$ halveras`,
+            ],
+            correct: 3,
+            solution: `Toppspänningen är
+
+$$ \\hat{u} = B \\cdot A \\cdot \\omega $$
+
+$B$ och $A$ är oförändrade, så toppspänningen är proportionell mot vinkelhastigheten. Dubbelt så stor vinkelhastighet ger dubbelt så stor toppspänning. Det beror på att flödet ändras dubbelt så snabbt, och enligt induktionslagen ger en snabbare flödesändring en större spänning.
+
+Periodtiden fås ur
+
+$$ \\omega = \\frac{2\\pi}{T} \\quad\\Leftrightarrow\\quad T = \\frac{2\\pi}{\\omega} $$
+
+Dubbelt så stor $\\omega$ ger halva periodtiden: slingan hinner ett varv på halva tiden.
+
+Den som bara tänker på periodtiden tror lätt att spänningen är oförändrad, men båda storheterna ändras.
+
+**Svar:** $\\hat{u}$ fördubblas och $T$ halveras.`,
+        },
+        {
+            level: 2,
+            question: `En elev mäter spänningen från en generator som har frekvensen $50\\ \\mathrm{Hz}$. Vid $t = 0$ är spänningen noll och på väg att öka. Tabellen visar några av mätvärdena.
+
+| $t$ (ms) | 0 | 1,0 | 2,0 | 3,0 |
+|---|---|---|---|---|
+| $u$ (V) | 0 | 9,3 | 17,6 | 24,3 |
+
+a) Använd mätvärdet vid $t = 3{,}0\\ \\mathrm{ms}$ och bestäm toppspänningen $\\hat{u}$.<br>b) Bestäm spänningens effektivvärde $U$.`,
+            answer: { value: 30, unit: 'V' },
+            delsvar: [
+                { del: 'a', value: 30, unit: 'V', etikett: '$\\hat{u} =$' },
+                { del: 'b', value: 21, unit: 'V', etikett: '$U =$' },
+            ],
+            solution: `Momentanspänningen är
+
+$$ u = \\hat{u} \\cdot \\sin(\\omega t) $$
+
+Vinkelhastigheten:
+
+$$ \\omega = 2\\pi \\cdot f = 2\\pi \\cdot 50 = 100\\pi\\ \\mathrm{rad/s} $$
+
+**a)** Vi löser ut toppspänningen:
+
+$$ u = \\hat{u} \\cdot \\sin(\\omega t) \\quad\\Leftrightarrow\\quad \\hat{u} = \\frac{u}{\\sin(\\omega t)} $$
+
+$$
+\\left[ \\begin{array}{l}
+u = 24{,}3\\ \\mathrm{V} \\\\
+\\omega = 100\\pi\\ \\mathrm{rad/s} \\\\
+t = 3{,}0 \\cdot 10^{-3}\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ \\omega t = 100\\pi \\cdot 3{,}0 \\cdot 10^{-3} = 0{,}30\\pi\\ \\mathrm{rad} $$
+
+$$ \\hat{u} = \\frac{24{,}3}{\\sin(0{,}30\\pi)} = \\frac{24{,}3}{0{,}8090\\ldots} = 30{,}03\\ldots\\ \\mathrm{V} \\approx 30\\ \\mathrm{V} $$
+
+Kontroll med ett annat mätvärde: vid $t = 1{,}0\\ \\mathrm{ms}$ ger samma räkning $\\dfrac{9{,}3}{\\sin(0{,}10\\pi)} \\approx 30\\ \\mathrm{V}$. Mätvärdena följer alltså samma sinuskurva.
+
+**Svar:** $30\\ \\mathrm{V}$
+
+**b)** Vi använder det oavrundade värdet från a):
+
+$$ U = \\frac{\\hat{u}}{\\sqrt{2}} = \\frac{30{,}03\\ldots}{\\sqrt{2}} = 21{,}23\\ldots\\ \\mathrm{V} \\approx 21\\ \\mathrm{V} $$
+
+**Svar:** $21\\ \\mathrm{V}$`,
+        },
+        {
+            level: 2,
+            question: `Slingan i en generator roterar med $1\\,500$ varv per minut. Generatorn ger en växelspänning med effektivvärdet $U = 12\\ \\mathrm{V}$, och vid $t = 0$ är spänningen noll och på väg att öka.<br>a) Bestäm frekvensen $f$.<br>b) Bestäm toppspänningen $\\hat{u}$.<br>c) Teckna ett uttryck för hur spänningen $u$ varierar med tiden $t$.`,
+            answer: { value: 17, unit: 'V' },
+            delsvar: [
+                { del: 'a', value: 25, unit: 'Hz', etikett: '$f =$' },
+                { del: 'b', value: 17, unit: 'V', etikett: '$\\hat{u} =$' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Ett varv av slingan ger en hel svängning av spänningen. Frekvensen är därför antalet varv per sekund:
+
+$$ f = \\frac{1\\,500}{60} = 25\\ \\mathrm{Hz} $$
+
+**Svar:** $25\\ \\mathrm{Hz}$
+
+**b)**
+
+$$ U = \\frac{\\hat{u}}{\\sqrt{2}} \\quad\\Leftrightarrow\\quad \\hat{u} = \\sqrt{2} \\cdot U $$
+
+$$ \\hat{u} = \\sqrt{2} \\cdot 12 = 16{,}97\\ldots\\ \\mathrm{V} \\approx 17\\ \\mathrm{V} $$
+
+**Svar:** $17\\ \\mathrm{V}$
+
+**c)** Momentanspänningen skrivs
+
+$$ u = \\hat{u} \\cdot \\sin(\\omega t) \\qquad (1) $$
+
+Vinkelhastigheten:
+
+$$ \\omega = 2\\pi \\cdot f = 2\\pi \\cdot 25 = 50\\pi\\ \\mathrm{rad/s} $$
+
+Insättning av $\\hat{u} = 17\\ \\mathrm{V}$ och $\\omega = 50\\pi\\ \\mathrm{rad/s}$ i (1), $u = \\hat{u} \\cdot \\sin(\\omega t)$, ger
+
+$$ u = 17 \\cdot \\sin(50\\pi \\cdot t) $$
+
+**Svar:** $u = 17 \\cdot \\sin(50\\pi \\cdot t)$, med $u$ i volt och $t$ i sekunder.`,
+        },
+        {
+            level: 3,
+            question: `I genomgången börjar slingan i läget där dess yta är vinkelrät mot fältlinjerna. Anta i stället att klockan startas, $t = 0$, när slingans yta är **parallell** med fältlinjerna. Slingan har arean $A$, roterar med vinkelhastigheten $\\omega$ och fältet har flödestätheten $B$.<br>a) Teckna ett uttryck för flödet $\\Phi(t)$ genom slingan.<br>b) Visa att den inducerade spänningen då blir $e = B \\cdot A \\cdot \\omega \\cdot \\cos(\\omega t)$.<br>c) Har toppspänningen ändrats jämfört med genomgångens generator? Motivera.`,
+            solution: `**a)** Vi mäter vinkeln $\\alpha$ som i genomgången, från läget där ytan är vinkelrät mot fältlinjerna. Då gäller
+
+$$ \\Phi = B \\cdot A \\cdot \\cos\\alpha $$
+
+Vid $t = 0$ är ytan parallell med fältlinjerna, alltså vriden ett kvarts varv, $\\alpha = \\dfrac{\\pi}{2}$. Sedan växer vinkeln med $\\omega t$:
+
+$$ \\alpha = \\omega t + \\frac{\\pi}{2} $$
+
+$$ \\Phi(t) = B \\cdot A \\cdot \\cos\\left(\\omega t + \\frac{\\pi}{2}\\right) $$
+
+Eftersom $\\cos\\left(v + \\dfrac{\\pi}{2}\\right) = -\\sin v$ kan flödet skrivas
+
+$$ \\Phi(t) = -B \\cdot A \\cdot \\sin(\\omega t) $$
+
+Kontroll: vid $t = 0$ blir flödet noll, vilket stämmer eftersom inga fältlinjer går genom en yta som är parallell med fältet.
+
+**Svar:** $\\Phi(t) = -B \\cdot A \\cdot \\sin(\\omega t)$
+
+**b)** Enligt induktionslagen är
+
+$$ e = -\\Phi'(t) $$
+
+Derivatan av $\\sin(\\omega t)$ är $\\omega \\cdot \\cos(\\omega t)$, så
+
+$$ e = -\\bigl(-B \\cdot A \\cdot \\omega \\cdot \\cos(\\omega t)\\bigr) = B \\cdot A \\cdot \\omega \\cdot \\cos(\\omega t) $$
+
+vilket skulle visas.
+
+**Svar:** $e = B \\cdot A \\cdot \\omega \\cdot \\cos(\\omega t)$
+
+**c)** Eftersom $-1 \\le \\cos(\\omega t) \\le 1$ är spänningens största värde
+
+$$ \\hat{e} = B \\cdot A \\cdot \\omega $$
+
+precis som i genomgången. Generatorn är densamma, och bara den tidpunkt då vi startar klockan har flyttats. Kurvan för spänningen är därför samma sinuskurva, förskjuten en kvarts periodtid i tiden. Spänningen är nu som störst vid $t = 0$, eftersom flödet ändras snabbast när det är noll.
+
+**Svar:** Nej, toppspänningen är fortfarande $B \\cdot A \\cdot \\omega$. Bara starttidpunkten har ändrats, så kurvan är förskjuten en kvarts periodtid.`,
+        },
+        {
+            level: 3,
+            question: `Grafen visar hur det magnetiska flödet $\\Phi$ genom en roterande slinga med ett enda varv varierar med tiden $t$.
+
+${makeDiagram({ xMin: 0, xMax: 40, yMin: -5, yMax: 5, xTicks: [0, 5, 10, 15, 20, 25, 30, 35, 40], yTicks: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5], xLabel: '<tspan font-style="italic">t</tspan> (ms)', yLabel: '<tspan font-style="italic">Φ</tspan> (mWb)', paths: [{ points: Array.from({ length: 401 }, (_, k) => { const t = k * 0.1; return [t, 4 * Math.cos(2 * Math.PI * t / 20)]; }), color: '#2563eb' }] })}
+
+a) Bestäm toppvärdet $\\hat{e}$ för den inducerade spänningen.<br>b) Ange de tidpunkter i intervallet $0 \\le t \\le 40\\ \\mathrm{ms}$ då den inducerade spänningen har sitt största belopp. Motivera med hjälp av grafen.`,
+            answer: { value: 1.3, unit: 'V' },
+            delsvar: [
+                { del: 'a', value: 1.3, unit: 'V', etikett: '$\\hat{e} =$' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Flödet följer $\\Phi(t) = B \\cdot A \\cdot \\cos(\\omega t)$, och toppspänningen är $\\hat{e} = B \\cdot A \\cdot \\omega$. Produkten $B \\cdot A$ är flödets största värde, så
+
+$$ \\hat{e} = \\hat{\\Phi} \\cdot \\omega $$
+
+Ur grafen läser vi av flödets största värde och periodtiden. Kurvan når som högst $4{,}0\\ \\mathrm{mWb}$, och den är tillbaka i sitt största värde efter $20\\ \\mathrm{ms}$.
+
+$$
+\\left[ \\begin{array}{l}
+\\hat{\\Phi} = 4{,}0 \\cdot 10^{-3}\\ \\mathrm{Wb} \\\\
+T = 20 \\cdot 10^{-3}\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ \\omega = \\frac{2\\pi}{T} = \\frac{2\\pi}{0{,}020} = 314{,}1\\ldots\\ \\mathrm{rad/s} $$
+
+$$ \\hat{e} = 4{,}0 \\cdot 10^{-3} \\cdot 314{,}1\\ldots = 1{,}256\\ldots\\ \\mathrm{V} \\approx 1{,}3\\ \\mathrm{V} $$
+
+Rimlighet: lutningen hos flödeskurvan där den är brantast ska motsvara spänningen. Från $t = 3{,}5\\ \\mathrm{ms}$ till $t = 6{,}5\\ \\mathrm{ms}$ faller kurvan ungefär $3{,}6\\ \\mathrm{mWb}$, alltså cirka $1{,}2\\ \\mathrm{Wb/s} = 1{,}2\\ \\mathrm{V}$. Det ligger nära det beräknade värdet och lite under, eftersom kurvan är något flackare i intervallets ändar.
+
+**Svar:** $1{,}3\\ \\mathrm{V}$
+
+**b)** Enligt induktionslagen $e = -\\dfrac{d\\Phi}{dt}$ är spänningens belopp lika med flödeskurvans lutning. Lutningen är störst där kurvan är brantast, och det är där den skär tidsaxeln, alltså där flödet är noll. I topparna och dalarna ($t = 0$, $10$, $20$, $30$, $40\\ \\mathrm{ms}$) är kurvan vågrät, och där är spänningen noll.
+
+**Svar:** Vid $t = 5$, $15$, $25$ och $35\\ \\mathrm{ms}$, där flödet är noll och kurvan är som brantast.`,
+        },
+        {
+            level: 3,
+            question: `En cykeldynamo drivs av en liten rulle som ligger an mot däcket. Rullen har radien $r = 1{,}0\\ \\mathrm{cm}$, och dynamons magnet sitter på samma axel som rullen. Ett varv av rullen ger en hel svängning av spänningen. När cykeln har farten $18\\ \\mathrm{km/h}$ ger dynamon en växelspänning med effektivvärdet $6{,}0\\ \\mathrm{V}$.
+
+<svg viewBox="0 0 420 300" width="533" height="381" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Ett cykelhjul som står på marken. Till höger om hjulet ligger en liten rulle an mot däcket, och rullen sitter på en dynamo. Ovanför hjulet visar en pil cykelns fart v åt höger."><rect x="0" y="287" width="420" height="13" fill="#e4d9c4"/><line x1="0" y1="287" x2="420" y2="287" stroke="#0f1620" stroke-width="1.6"/><circle cx="160" cy="160" r="120" fill="none" stroke="#2b2f36" stroke-width="14"/><circle cx="160" cy="160" r="110" fill="none" stroke="#9aa0a6" stroke-width="3"/><g stroke="#9aa0a6" stroke-width="1.2"><line x1="160" y1="52" x2="160" y2="268"/><line x1="52" y1="160" x2="268" y2="160"/><line x1="83.6" y1="83.6" x2="236.4" y2="236.4"/><line x1="236.4" y1="83.6" x2="83.6" y2="236.4"/><line x1="118.7" y1="60.2" x2="201.3" y2="259.8"/><line x1="201.3" y1="60.2" x2="118.7" y2="259.8"/><line x1="60.2" y1="118.7" x2="259.8" y2="201.3"/><line x1="60.2" y1="201.3" x2="259.8" y2="118.7"/></g><circle cx="160" cy="160" r="10" fill="#d9cfb9" stroke="#0f1620" stroke-width="1.5"/><circle cx="160" cy="160" r="3" fill="#0f1620"/><rect x="311" y="140" width="76" height="40" rx="7" fill="#c9ced6" stroke="#0f1620" stroke-width="1.5"/><rect x="387" y="150" width="8" height="20" rx="2" fill="#8a8f99" stroke="#0f1620" stroke-width="1.2"/><line x1="399" y1="160" x2="415" y2="160" stroke="#0f1620" stroke-width="1.4"/><line x1="399" y1="166" x2="415" y2="176" stroke="#0f1620" stroke-width="1.4"/><circle cx="299" cy="160" r="12" fill="#d9cfb9" stroke="#0f1620" stroke-width="1.5"/><circle cx="299" cy="160" r="2.5" fill="#0f1620"/><text x="349" y="128" text-anchor="middle" font-size="15" fill="#0f1620">Dynamo</text><line x1="303" y1="172" x2="309" y2="188" stroke="#0f1620" stroke-width="1"/><text x="304" y="205" text-anchor="start" font-size="15" fill="#0f1620">Rulle</text><text x="40" y="40" text-anchor="middle" font-size="15" fill="#0f1620">Däck</text><line x1="52" y1="46" x2="70" y2="70" stroke="#0f1620" stroke-width="1"/><line x1="200" y1="20" x2="272" y2="20" stroke="#c8324a" stroke-width="3" stroke-linecap="butt"/><polygon points="272,14 284,20 272,26" fill="#c8324a"/><text x="292" y="26" font-size="16" font-style="italic" fill="#c8324a">v</text></svg>
+
+a) Bestäm spänningens frekvens när cykeln har farten $18\\ \\mathrm{km/h}$.<br>b) Lampan lyser bara om dynamons effektiva spänning är minst $4{,}0\\ \\mathrm{V}$. Hur fort måste cykeln minst åka för att lampan ska lysa? Redovisa vilka antaganden du gör. Ange svaret i km/h.`,
+            answer: { value: 12, unit: 'km/h' },
+            delsvar: [
+                { del: 'a', value: 80, unit: 'Hz', etikett: '$f =$' },
+                { del: 'b', value: 12, unit: 'km/h', etikett: '$v =$' },
+            ],
+            solution: `**Antaganden:** Hjulet rullar utan att glida mot marken, och rullen glider inte mot däcket. Då rör sig däckets yta med cykelns fart $v$ relativt hjulets axel, och rullens kant rör sig med samma fart. Dynamons magnetfält och spole är desamma vid alla farter.
+
+**a)** Farten i m/s:
+
+$$ v = \\frac{18}{3{,}6} = 5{,}0\\ \\mathrm{m/s} $$
+
+Rullens kant går sträckan $2\\pi r$ per varv. Antalet varv per sekund, som är lika med frekvensen, blir
+
+$$ f = \\frac{v}{2\\pi r} $$
+
+$$
+\\left[ \\begin{array}{l}
+v = 5{,}0\\ \\mathrm{m/s} \\\\
+r = 0{,}010\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ f = \\frac{5{,}0}{2\\pi \\cdot 0{,}010} = 79{,}57\\ldots\\ \\mathrm{Hz} \\approx 80\\ \\mathrm{Hz} $$
+
+Rimlighet: en liten rulle snurrar mycket fortare än hjulet. Cirka 80 varv per sekund är rimligt för en dynamo.
+
+**Svar:** $80\\ \\mathrm{Hz}$
+
+**b)** Dynamon fungerar som generatorn i genomgången: när magneten roterar ändras flödet genom dynamons spole sinusformat, och toppspänningen blir $\\hat{u} = N \\cdot B \\cdot A \\cdot \\omega$, där $N$ är spolens antal varv. Effektivvärdet är $U = \\dfrac{\\hat{u}}{\\sqrt{2}}$. Eftersom $N$, $B$ och $A$ inte ändras är $U$ proportionell mot $\\omega$. Enligt a) är $\\omega = 2\\pi f = \\dfrac{v}{r}$ proportionell mot cykelns fart. Alltså är
+
+$$ U \\propto v $$
+
+Spänningen ska minska från $6{,}0\\ \\mathrm{V}$ till $4{,}0\\ \\mathrm{V}$, så farten ska minska i samma förhållande:
+
+$$ \\frac{v}{18} = \\frac{4{,}0}{6{,}0} $$
+
+$$ \\frac{v}{18} \\cdot 18 = \\frac{4{,}0}{6{,}0} \\cdot 18 $$
+
+$$ v = 12\\ \\mathrm{km/h} $$
+
+Rimlighet: en lägre fart ger en lägre spänning, och $12\\ \\mathrm{km/h}$ är en vanlig lugn cykelfart. I verkligheten har dynamon också ett inre motstånd, så spänningen vid lampan blir lite lägre än modellen säger.
+
+**Svar:** Minst $12\\ \\mathrm{km/h}$`,
+        },
+        {
+            level: 3,
+            question: `En glimlampa kopplas till det svenska elnätet, som har den effektiva spänningen $230\\ \\mathrm{V}$ och frekvensen $50\\ \\mathrm{Hz}$. Anta att lampan lyser så länge spänningens belopp är minst $150\\ \\mathrm{V}$ och är släckt annars.<br>a) Hur stor andel av tiden lyser lampan? Ange svaret i procent.<br>b) Hur många gånger per sekund tänds lampan?`,
+            answer: { value: 69, unit: '%' },
+            delsvar: [
+                { del: 'a', value: 69, unit: '%', etikett: 'andel' },
+                { del: 'b', value: 100, unit: 'gånger', etikett: 'antal' },
+            ],
+            solution: `Spänningen är $u = \\hat{u} \\cdot \\sin(\\omega t)$. Vi bestämmer först toppspänningen:
+
+$$ \\hat{u} = \\sqrt{2} \\cdot U = \\sqrt{2} \\cdot 230 = 325{,}26\\ldots\\ \\mathrm{V} $$
+
+**a)** Sinuskurvan är symmetrisk, så det räcker att studera den första halva periodtiden, där spänningen är positiv. Där är $u = \\hat{u} \\cdot \\sin(\\omega t)$, och vi kallar vinkeln $v = \\omega t$. Lampan lyser när
+
+$$ \\sin v \\ge \\frac{150}{325{,}26\\ldots} = 0{,}4611\\ldots $$
+
+Den minsta vinkeln där detta gäller är
+
+$$ v_1 = \\arcsin(0{,}4611\\ldots) = 0{,}4792\\ldots\\ \\mathrm{rad} $$
+
+Sinuskurvan är symmetrisk kring sin topp vid $v = \\dfrac{\\pi}{2}$, så lampan släcks igen vid
+
+$$ v_2 = \\pi - v_1 = \\pi - 0{,}4792\\ldots = 2{,}662\\ldots\\ \\mathrm{rad} $$
+
+Under den halva periodtiden, som svarar mot vinkeln $\\pi$, lyser lampan alltså medan vinkeln går från $v_1$ till $v_2$. Eftersom vinkeln växer jämnt med tiden är andelen
+
+$$ \\frac{v_2 - v_1}{\\pi} = \\frac{\\pi - 2 \\cdot 0{,}4792\\ldots}{\\pi} = 0{,}6948\\ldots \\approx 69\\ \\% $$
+
+Den negativa halvperioden ger samma andel, så detta gäller för hela tiden.
+
+Rimlighet: $150\\ \\mathrm{V}$ är knappt hälften av toppspänningen, och sinuskurvan ligger länge nära sin topp. Att lampan lyser mer än halva tiden är därför rimligt.
+
+**Svar:** Cirka $69\\ \\%$ av tiden
+
+**b)** Under varje periodtid tänds lampan två gånger: en gång när spänningen är positiv och en gång när den är negativ, eftersom det är beloppet som räknas. Frekvensen är $50\\ \\mathrm{Hz}$, alltså 50 periodtider per sekund:
+
+$$ 2 \\cdot 50 = 100 $$
+
+Lampan blinkar alltså 100 gånger per sekund, vilket är för snabbt för att ögat ska se det.
+
+**Svar:** $100$ gånger per sekund`,
+        },
+        {
+            level: 3,
+            question: `En grupp elever vill bestämma flödestätheten $B$ mellan polerna på en magnet. De låter en spole med $N = 50$ varv och arean $A = 20\\ \\mathrm{cm^2}$ rotera mellan polerna och mäter toppspänningen $\\hat{u}$ vid olika frekvenser $f$. Spänningen från alla varv adderas, så $\\hat{u} = N \\cdot B \\cdot A \\cdot \\omega$.
+
+| $f$ (Hz) | 5,0 | 10 | 15 | 20 | 25 |
+|---|---|---|---|---|---|
+| $\\hat{u}$ (V) | 0,26 | 0,49 | 0,77 | 0,99 | 1,27 |
+
+a) Rita en lämplig graf och bestäm $B$ med hjälp av grafen.<br>b) Förklara varför grafen ska gå genom origo.`,
+            answer: { value: 0.080, unit: 'T', tol: 0.05 },
+            delsvar: [
+                { del: 'a', value: 0.080, unit: 'T', etikett: '$B =$', tol: 0.05 },
+                { del: 'b' },
+            ],
+            solution: `**a)** Vi skriver om sambandet med frekvensen, $\\omega = 2\\pi \\cdot f$:
+
+$$ \\hat{u} = N \\cdot B \\cdot A \\cdot 2\\pi \\cdot f $$
+
+$N$, $B$ och $A$ är konstanta, så $\\hat{u}$ är proportionell mot $f$. En graf med $f$ på den vågräta axeln och $\\hat{u}$ på den lodräta ska därför bli en rät linje genom origo med lutningen
+
+$$ k = 2\\pi \\cdot N \\cdot B \\cdot A \\qquad (1) $$
+
+Vi prickar in mätpunkterna och drar den räta linje genom origo som passar punkterna bäst.
+
+${makeDiagram({ xMin: 0, xMax: 30, yMin: 0, yMax: 1.5, xTicks: [0, 5, 10, 15, 20, 25, 30], yTicks: [0, 0.3, 0.6, 0.9, 1.2, 1.5], xLabel: '<tspan font-style="italic">f</tspan> (Hz)', yLabel: '<tspan font-style="italic">û</tspan> (V)', paths: [{ points: [[0, 0], [30, 1.512]], color: '#2563eb', width: 2 }].concat(...[[5, 0.26], [10, 0.49], [15, 0.77], [20, 0.99], [25, 1.27]].map(([f, u]) => [{ points: [[f - 0.45, u - 0.035], [f + 0.45, u + 0.035]], color: '#0f1620', width: 2 }, { points: [[f - 0.45, u + 0.035], [f + 0.45, u - 0.035]], color: '#0f1620', width: 2 }])) })}
+
+Punkterna ligger nära linjen, och linjen går till exempel genom punkten $(25\\ \\mathrm{Hz};\\ 1{,}26\\ \\mathrm{V})$. Lutningen blir
+
+$$ k = \\frac{\\Delta \\hat{u}}{\\Delta f} = \\frac{1{,}26 - 0}{25 - 0} = 0{,}0504\\ \\mathrm{V/Hz} $$
+
+Vi löser ut $B$ ur (1), $k = 2\\pi \\cdot N \\cdot B \\cdot A$:
+
+$$ k = 2\\pi \\cdot N \\cdot B \\cdot A \\quad\\Leftrightarrow\\quad B = \\frac{k}{2\\pi \\cdot N \\cdot A} $$
+
+$$
+\\left[ \\begin{array}{l}
+k = 0{,}0504\\ \\mathrm{V/Hz} \\\\
+N = 50 \\\\
+A = 20 \\cdot 10^{-4}\\ \\mathrm{m^2}
+\\end{array} \\right]
+$$
+
+$$ B = \\frac{0{,}0504}{2\\pi \\cdot 50 \\cdot 0{,}0020} = 0{,}0802\\ldots\\ \\mathrm{T} \\approx 0{,}080\\ \\mathrm{T} $$
+
+Att använda en linje anpassad till alla punkter är bättre än att räkna med en enda mätpunkt, eftersom mätfelen i de enskilda punkterna då jämnas ut. Rimlighet: $0{,}08\\ \\mathrm{T}$ är en typisk flödestäthet mellan polerna på en skolmagnet.
+
+**Svar:** $B \\approx 0{,}080\\ \\mathrm{T}$
+
+**b)** Vid frekvensen noll står spolen still. Då ändras inte flödet genom den, och enligt induktionslagen induceras ingen spänning. Punkten $(0;\\ 0)$ hör alltså till mätserien, och sambandet $\\hat{u} = 2\\pi \\cdot N \\cdot B \\cdot A \\cdot f$ saknar en konstant term.
+
+**Svar:** Utan rotation ändras inte flödet, så då induceras ingen spänning. Därför är $\\hat{u} = 0$ när $f = 0$.`,
+        },
+        {
+            level: 3,
+            question: `En liten generator står på kanten av ett bord. På generatorns axel sitter en trumma med radien $r = 1{,}0\\ \\mathrm{cm}$, och runt trumman är ett snöre lindat. I snöret hänger en vikt med massan $m = 0{,}20\\ \\mathrm{kg}$. Generatorns spole har $N = 500$ varv och arean $A = 10\\ \\mathrm{cm^2}$ och roterar i ett magnetfält med flödestätheten $B = 0{,}20\\ \\mathrm{T}$. Spänningen från alla varv adderas, så toppspänningen blir $N$ gånger så stor som för ett enda varv. Generatorn är kopplad till ett motstånd med resistansen $R = 5{,}0\\ \\mathrm{\\Omega}$.
+
+<svg viewBox="0 0 334 236" width="423" height="299" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En generator står på ett bord. Dess axel sticker ut över bordskanten och bär en trumma, och från trumman hänger ett snöre med en vikt som sjunker. Två ledningar går från generatorn till ett motstånd R."><rect x="0" y="110" width="250" height="10" fill="#d9c7a6" stroke="#0f1620" stroke-width="1.4"/><rect x="222" y="120" width="12" height="114" fill="#d9c7a6" stroke="#0f1620" stroke-width="1.4"/><rect x="120" y="60" width="100" height="50" rx="6" fill="#c9ced6" stroke="#0f1620" stroke-width="1.5"/><circle cx="170" cy="85" r="13" fill="none" stroke="#8a8f99" stroke-width="2"/><circle cx="170" cy="85" r="3" fill="#0f1620"/><text x="170" y="50" text-anchor="middle" font-size="15" fill="#0f1620">Generator</text><line x1="220" y1="80" x2="262" y2="80" stroke="#8a8478" stroke-width="4" stroke-linecap="butt"/><circle cx="262" cy="80" r="12" fill="#d9cfb9" stroke="#0f1620" stroke-width="1.5"/><circle cx="262" cy="80" r="2.5" fill="#0f1620"/><line x1="274" y1="80" x2="274" y2="182" stroke="#0f1620" stroke-width="1.4"/><rect x="258" y="182" width="32" height="34" rx="2" fill="#8a8f99" stroke="#0f1620" stroke-width="1.5"/><text x="248" y="204" text-anchor="end" font-size="15" font-style="italic" fill="#0f1620">m</text><line x1="306" y1="184" x2="306" y2="207" stroke="#c8324a" stroke-width="3" stroke-linecap="butt"/><polygon points="300.5,207 306,218 311.5,207" fill="#c8324a"/><text x="315" y="206" font-size="15" font-style="italic" fill="#c8324a">v</text><polyline points="120,72 100,72 100,30 80,30" fill="none" stroke="#0f1620" stroke-width="1.6"/><polyline points="40,30 20,30 20,94 120,94" fill="none" stroke="#0f1620" stroke-width="1.6"/><rect x="40" y="23" width="40" height="14" fill="#f3eee4" stroke="#0f1620" stroke-width="1.6"/><text x="60" y="16" text-anchor="middle" font-size="15" font-style="italic" fill="#0f1620">R</text></svg>
+
+Vikten släpps, och efter en kort stund sjunker den med i stort sett konstant fart.<br>a) Bestäm viktens fart. Ange de antaganden du gör.<br>b) Motståndet byts mot ett med halva resistansen. Hur ändras viktens fart? Motivera.`,
+            answer: { value: 0.20, unit: 'm/s' },
+            delsvar: [
+                { del: 'a', value: 0.20, unit: 'm/s', etikett: '$v =$' },
+                { del: 'b', value: 0.098, unit: 'm/s', etikett: '$v =$' },
+            ],
+            solution: `**Antaganden:** Friktionen i generatorn, luftmotståndet och spolens egen resistans är försumbara, och snöret glider inte på trumman. När farten är konstant ändras inte viktens rörelseenergi. Då blir all lägesenergi som vikten förlorar elektrisk energi som omvandlas till värme i motståndet.
+
+**a)** Vikten sjunker sträckan $v$ på en sekund, så lägesenergin minskar med $m \\cdot g \\cdot v$ per sekund. Det är den effekt som tillförs generatorn. Motståndets medeleffekt är $P = U \\cdot I$, och med Ohms lag, $I = \\dfrac{U}{R}$, blir den $\\dfrac{U^2}{R}$. Energiprincipen ger
+
+$$ m \\cdot g \\cdot v = \\frac{U^2}{R} \\qquad (1) $$
+
+Effektivvärdet är toppspänningen delad med $\\sqrt{2}$, och toppspänningen är $N$ gånger toppspänningen $B \\cdot A \\cdot \\omega$ för ett varv:
+
+$$ U = \\frac{N \\cdot B \\cdot A \\cdot \\omega}{\\sqrt{2}} \\qquad (2) $$
+
+Snöret lindas av från trummans kant, så kanten rör sig med viktens fart $v$. Sambandet mellan fart och vinkelhastighet i en cirkelrörelse ger
+
+$$ v = \\omega \\cdot r \\quad\\Leftrightarrow\\quad \\omega = \\frac{v}{r} \\qquad (3) $$
+
+Detta i ekvation (2), $U = \\dfrac{N \\cdot B \\cdot A \\cdot \\omega}{\\sqrt{2}}$, ger
+
+$$ U = \\frac{N \\cdot B \\cdot A \\cdot v}{\\sqrt{2} \\cdot r} $$
+
+Detta i ekvation (1), $m \\cdot g \\cdot v = \\dfrac{U^2}{R}$, ger
+
+$$ m \\cdot g \\cdot v = \\frac{(N \\cdot B \\cdot A)^2 \\cdot v^2}{2 \\cdot r^2 \\cdot R} $$
+
+Farten är inte noll, så vi kan dividera båda led med $v$:
+
+$$ m \\cdot g = \\frac{(N \\cdot B \\cdot A)^2 \\cdot v}{2 \\cdot r^2 \\cdot R} $$
+
+Vi multiplicerar båda led med $2 \\cdot r^2 \\cdot R$ och dividerar med $(N \\cdot B \\cdot A)^2$:
+
+$$ v = \\frac{2 \\cdot m \\cdot g \\cdot r^2 \\cdot R}{(N \\cdot B \\cdot A)^2} \\qquad (4) $$
+
+$$
+\\left[ \\begin{array}{l}
+m = 0{,}20\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+r = 0{,}010\\ \\mathrm{m} \\\\
+R = 5{,}0\\ \\mathrm{\\Omega} \\\\
+N = 500 \\\\
+B = 0{,}20\\ \\mathrm{T} \\\\
+A = 10 \\cdot 10^{-4}\\ \\mathrm{m^2}
+\\end{array} \\right]
+$$
+
+Produkten i nämnaren är $N \\cdot B \\cdot A = 500 \\cdot 0{,}20 \\cdot 0{,}0010 = 0{,}10\\ \\mathrm{Wb}$. Insättning i (4) ger
+
+$$ v = \\frac{2 \\cdot 0{,}20 \\cdot 9{,}82 \\cdot 0{,}010^2 \\cdot 5{,}0}{0{,}10^2} = 0{,}1964\\ \\mathrm{m/s} \\approx 0{,}20\\ \\mathrm{m/s} $$
+
+Rimlighet: trumman får vinkelhastigheten $\\omega = \\dfrac{0{,}1964}{0{,}010} \\approx 20\\ \\mathrm{rad/s}$, ungefär tre varv per sekund, och motståndet får effekten $m \\cdot g \\cdot v \\approx 0{,}39\\ \\mathrm{W}$. Båda värdena är rimliga för en liten generator.
+
+**Svar:** Cirka $0{,}20\\ \\mathrm{m/s}$
+
+**b)** Enligt (4) är farten proportionell mot resistansen, eftersom $m$, $g$, $r$, $N$, $B$ och $A$ inte ändras. Halva resistansen ger alltså halva farten:
+
+$$ v = \\frac{0{,}1964}{2} = 0{,}0982\\ \\mathrm{m/s} \\approx 0{,}098\\ \\mathrm{m/s} $$
+
+Det kan verka bakvänt att mindre motstånd ger lägre fart. Men vid en given fart är spänningen densamma, och ett mindre motstånd ger då en större ström och en större effekt $\\dfrac{U^2}{R}$. Generatorn tar alltså ut energi snabbare och bromsar vikten hårdare, så jämvikten nås redan vid en lägre fart.
+
+**Svar:** Farten halveras till cirka $0{,}098\\ \\mathrm{m/s}$.`,
+        },
+        {
+            level: 3,
+            question: `En elev vill undersöka jordens magnetfält med en generator. Hon låter en spole med $N = 200$ varv och arean $A = 150\\ \\mathrm{cm^2}$ rotera med $10$ varv per sekund och mäter toppspänningen. Spänningen från alla varv adderas, så toppspänningen blir $N$ gånger så stor som för ett enda varv. Där mätningen görs har jordens magnetfält flödestätheten $B_\\mathrm{j} = 50\\ \\mathrm{\\mu T}$ och inklinationen $i = 70^\\circ$, som figuren visar.
+
+<svg viewBox="0 0 300 166" width="381" height="211" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="En vågrät linje markerar marken och en grön pil pekar åt höger mot norr. Jordens magnetfält Bj pekar snett nedåt mot norr och bildar vinkeln i lika med 70 grader med marken."><rect x="10" y="40" width="280" height="8" fill="#e4d9c4"/><line x1="10" y1="40" x2="290" y2="40" stroke="#1f2530" stroke-width="1.8"/><line x1="200" y1="22" x2="262" y2="22" stroke="#3f8f4a" stroke-width="2.2" stroke-linecap="butt"/><polygon points="262,17.5 271,22 262,26.5" fill="#3f8f4a"/><text x="194" y="27" text-anchor="end" font-size="14" fill="#3f8f4a">norr</text><line x1="60" y1="40" x2="96.6" y2="140.5" stroke="#c0392b" stroke-width="2.4" stroke-linecap="butt"/><polygon points="91.9,142.3 100.4,150.9 101.3,138.8" fill="#c0392b"/><text x="108" y="152" font-size="15" fill="#c0392b"><tspan font-style="italic">B</tspan><tspan font-size="11" dy="3">j</tspan></text><path d="M 94 40 A 34 34 0 0 1 71.6 71.9" fill="none" stroke="#1f2530" stroke-width="1.2"/><text x="100" y="74" font-size="14" fill="#1f2530"><tspan font-style="italic">i</tspan> = 70°</text></svg>
+
+a) Först roterar spolen kring en lodrät axel. Bestäm toppspänningen.<br>b) Sedan roterar spolen kring en vågrät axel som pekar mot norr. Bestäm toppspänningen.<br>c) Kring vilken axel ska spolen rotera för att toppspänningen ska bli så stor som möjligt, och hur stor blir den då? Motivera.`,
+            answer: { value: 9.4, unit: 'mV' },
+            delsvar: [
+                { del: 'a', value: 3.2, unit: 'mV', etikett: '$\\hat{u} =$' },
+                { del: 'b', value: 8.9, unit: 'mV', etikett: '$\\hat{u} =$' },
+                { del: 'c', value: 9.4, unit: 'mV', etikett: '$\\hat{u} =$' },
+            ],
+            solution: `Jordens magnetfält kan delas upp i en horisontalkomposant $B_{\\mathrm{jh}}$, som pekar mot norr längs marken, och en vertikalkomposant $B_{\\mathrm{jv}}$, som pekar rakt nedåt:
+
+$$ B_{\\mathrm{jh}} = B_\\mathrm{j} \\cdot \\cos i \\qquad B_{\\mathrm{jv}} = B_\\mathrm{j} \\cdot \\sin i $$
+
+Spolen ligger hela tiden i ett plan som innehåller rotationsaxeln. En fältkomposant som är **parallell med axeln** går därför alltid längs spolens yta och ger inget flöde genom spolen, hur spolen än står. Bara komposanten **vinkelrät mot axeln** ger ett flöde som ändras under ett varv. För den gäller genomgångens samband, så för $N$ varv blir
+
+$$ \\hat{u} = N \\cdot B_\\perp \\cdot A \\cdot \\omega \\qquad (1) $$
+
+där $B_\\perp$ är fältets komposant vinkelrät mot axeln.
+
+$$
+\\left[ \\begin{array}{l}
+N = 200 \\\\
+A = 150 \\cdot 10^{-4}\\ \\mathrm{m^2} \\\\
+B_\\mathrm{j} = 50 \\cdot 10^{-6}\\ \\mathrm{T} \\\\
+i = 70^\\circ
+\\end{array} \\right]
+$$
+
+Vinkelhastigheten är densamma i alla tre försöken:
+
+$$ \\omega = 2\\pi \\cdot f = 2\\pi \\cdot 10 = 20\\pi\\ \\mathrm{rad/s} $$
+
+**a)** Axeln är lodrät, så vertikalkomposanten $B_{\\mathrm{jv}}$ är parallell med axeln och ger inget flöde. Horisontalkomposanten är vinkelrät mot axeln:
+
+$$ B_{\\mathrm{jh}} = 50 \\cdot 10^{-6} \\cdot \\cos 70^\\circ = 1{,}710\\ldots \\cdot 10^{-5}\\ \\mathrm{T} $$
+
+Insättning i (1), $\\hat{u} = N \\cdot B_\\perp \\cdot A \\cdot \\omega$, ger
+
+$$ \\hat{u} = 200 \\cdot 1{,}710\\ldots \\cdot 10^{-5} \\cdot 0{,}0150 \\cdot 20\\pi = 3{,}22\\ldots \\cdot 10^{-3}\\ \\mathrm{V} \\approx 3{,}2\\ \\mathrm{mV} $$
+
+**Svar:** Cirka $3{,}2\\ \\mathrm{mV}$
+
+**b)** Nu pekar axeln mot norr, alltså längs horisontalkomposanten, som då inte ger något flöde. Vertikalkomposanten är vinkelrät mot axeln:
+
+$$ B_{\\mathrm{jv}} = 50 \\cdot 10^{-6} \\cdot \\sin 70^\\circ = 4{,}698\\ldots \\cdot 10^{-5}\\ \\mathrm{T} $$
+
+Insättning i (1), $\\hat{u} = N \\cdot B_\\perp \\cdot A \\cdot \\omega$, ger
+
+$$ \\hat{u} = 200 \\cdot 4{,}698\\ldots \\cdot 10^{-5} \\cdot 0{,}0150 \\cdot 20\\pi = 8{,}85\\ldots \\cdot 10^{-3}\\ \\mathrm{V} \\approx 8{,}9\\ \\mathrm{mV} $$
+
+**Svar:** Cirka $8{,}9\\ \\mathrm{mV}$
+
+**c)** Toppspänningen blir störst när hela fältet är vinkelrätt mot axeln, så att ingen del av fältet går förlorad. Axeln ska alltså vara vinkelrät mot $B_\\mathrm{j}$. Det gäller till exempel en vågrät axel som pekar i riktningen öster och väster, eftersom den är vinkelrät mot både $B_{\\mathrm{jh}}$ och $B_{\\mathrm{jv}}$. Då är $B_\\perp = B_\\mathrm{j}$, och insättning i (1) ger
+
+$$ \\hat{u} = 200 \\cdot 50 \\cdot 10^{-6} \\cdot 0{,}0150 \\cdot 20\\pi = 9{,}42\\ldots \\cdot 10^{-3}\\ \\mathrm{V} \\approx 9{,}4\\ \\mathrm{mV} $$
+
+Kontroll: komposanterna är vinkelräta mot varandra, så enligt Pythagoras sats ska kvadraterna av svaren i a) och b) tillsammans bli kvadraten av svaret i c). Med de oavrundade värdena blir $3{,}223^2 + 8{,}856^2 \\approx 88{,}8$ och $9{,}425^2 \\approx 88{,}8$, vilket stämmer.
+
+**Svar:** Kring en axel vinkelrät mot jordens magnetfält, till exempel en vågrät axel i riktningen öster och väster. Toppspänningen blir då cirka $9{,}4\\ \\mathrm{mV}$.`,
         },
     ],
 
@@ -67550,12 +76820,12 @@ $$ \\frac{N_1}{N_2} = \\frac{I_2}{I_1} \\quad\\Leftrightarrow\\quad I_2 = I_1\\c
 
 **Svar:** Sekundärströmmen är $50\\ \\mathrm{mA}$.
 
-**Generell slutsats:** När spänningen *upptransformeras* (faktor $10$) blir strömmen samtidigt en tiondel så stor — eftersom effekten $P = UI$ bevaras enligt energiprincipen.`,
+**Generell slutsats:** När spänningen *upptransformeras* (faktor $10$) blir strömmen samtidigt en tiondel så stor, eftersom effekten $P = UI$ bevaras enligt energiprincipen.`,
         },
 
         // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
         {
-            level: 2,
+            level: 1,
             question: `En mobilladdare är en transformator som transformerar $230\\ \\mathrm{V}$ till $5{,}0\\ \\mathrm{V}$. Laddaren levererar strömmen $2{,}0\\ \\mathrm{A}$ vid utgången. Bestäm strömmen genom primärspolen (förutsatt $100\\,\\%$ verkningsgrad).`,
             answer: { value: 0.0435, unit: 'A' },
             solution: `**Insikten är att den effektiva effekten är samma genom båda spolarna** (energi bevaras):
@@ -67564,53 +76834,725 @@ $$ U_1\\cdot I_1 = U_2\\cdot I_2 \\quad\\Leftrightarrow\\quad I_1 = \\frac{U_2\\
 
 **Svar:** Primärströmmen är ungefär $43\\ \\mathrm{mA}$.
 
-**Generell slutsats:** Detta är grunden för att höga spänningar används vid eltransport — en hög spänning ger låg ström, vilket ger små värmeförluster i ledningarna ($P_\\text{förlust} = I^2 R$).`,
+**Generell slutsats:** Detta är grunden för att höga spänningar används vid eltransport: en hög spänning ger låg ström, vilket ger små värmeförluster i ledningarna ($P_\\text{förlust} = I^2 R$).`,
         },
         {
             level: 2,
             question: `En transformator har $N_1 = 800$ varv i primärspolen och $N_2 = 200$ varv i sekundärspolen. Den ansluts till $400\\ \\mathrm{V}$ växelspänning och belastas med ett motstånd $R = 20\\ \\mathrm{\\Omega}$ på sekundärsidan. Bestäm strömmen i primärspolen.`,
             answer: { value: 1.25, unit: 'A' },
-            solution: `**Steg 1 — sekundärspänningen.**
+            solution: `**Steg 1: sekundärspänningen.**
 
 $$ U_2 = U_1\\cdot\\frac{N_2}{N_1} = 400 \\cdot \\frac{200}{800} = 100\\ \\mathrm{V} $$
 
-**Steg 2 — sekundärströmmen (genom motståndet $R$).**
+**Steg 2: sekundärströmmen (genom motståndet $R$).**
 
 $$ I_2 = \\frac{U_2}{R} = \\frac{100}{20} = 5{,}0\\ \\mathrm{A} $$
 
-**Steg 3 — primärströmmen.**
+**Steg 3: primärströmmen.**
 
 $$ I_1 = I_2\\cdot\\frac{N_2}{N_1} = 5{,}0 \\cdot \\frac{200}{800} = 1{,}25\\ \\mathrm{A} $$
 
 **Svar:** Primärströmmen är $1{,}25\\ \\mathrm{A}$.
 
-**Generell slutsats:** Tre principer kombinerade — spänningsförhållande, Ohms lag, strömförhållande. En klassisk uppgift på mellannivå.`,
+**Generell slutsats:** Tre principer kombinerade: spänningsförhållande, Ohms lag, strömförhållande. En klassisk uppgift på mellannivå.`,
         },
 
         // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
         {
-            level: 3,
+            level: 2,
             question: `Elnätet i Sverige transporterar effekt $50\\ \\mathrm{MW}$ till en ort med spänningen $400\\ \\mathrm{kV}$. Ledningarna har den totala resistansen $5{,}0\\ \\mathrm{\\Omega}$. Beräkna **effektförlusten** i ledningarna. Jämför med vad effektförlusten skulle blivit om spänningen istället varit $20\\ \\mathrm{kV}$.`,
             answer: { value: 78.1, unit: 'kW' },
-            solution: `**Insikten är att effektförlusten beror på $I^2 R$**, så vid samma transporterade effekt $P = UI$ leder en hög spänning till en låg ström — och därmed kvadratiskt mindre förluster.
+            solution: `**Insikten är att effektförlusten beror på $I^2 R$**, så vid samma transporterade effekt $P = UI$ leder en hög spänning till en låg ström, och därmed kvadratiskt mindre förluster.
 
-**Steg 1 — strömmen i ledningarna vid $400\\ \\mathrm{kV}$.**
+**Steg 1: strömmen i ledningarna vid $400\\ \\mathrm{kV}$.**
 
 $$ I = \\frac{P}{U} = \\frac{50\\cdot 10^6}{400\\cdot 10^3} = 125\\ \\mathrm{A} $$
 
-**Steg 2 — effektförlust vid $400\\ \\mathrm{kV}$.**
+**Steg 2: effektförlust vid $400\\ \\mathrm{kV}$.**
 
 $$ P_\\text{förlust} = I^2\\cdot R = 125^2 \\cdot 5{,}0 = 78\\,125\\ \\mathrm{W} \\approx 78\\ \\mathrm{kW} $$
 
-**Steg 3 — jämför med $20\\ \\mathrm{kV}$.** Vid $20\\ \\mathrm{kV}$ blir strömmen $I' = 50\\cdot 10^6/20\\cdot 10^3 = 2\\,500\\ \\mathrm{A}$, 20 gånger så stor. Effektförlusten blir:
+**Steg 3: jämför med $20\\ \\mathrm{kV}$.** Vid $20\\ \\mathrm{kV}$ blir strömmen $I' = 50\\cdot 10^6/20\\cdot 10^3 = 2\\,500\\ \\mathrm{A}$, 20 gånger så stor. Effektförlusten blir:
 
 $$ P'_\\text{förlust} = (2\\,500)^2 \\cdot 5{,}0 = 31{,}25\\ \\mathrm{MW} $$
 
 (eller med kvotresonemang: $20^2 = 400$ gånger så stor förlust = $78\\cdot 400 = 31{,}2\\ \\mathrm{MW}$).
 
-**Svar:** Vid $400\\ \\mathrm{kV}$ är förlusten $78\\ \\mathrm{kW}$ (cirka $0{,}16\\,\\%$ av effekten). Vid $20\\ \\mathrm{kV}$ skulle förlusten vara $31\\ \\mathrm{MW}$ — **över $60\\,\\%$ av effekten** skulle försvinna i värme!
+**Svar:** Vid $400\\ \\mathrm{kV}$ är förlusten $78\\ \\mathrm{kW}$ (cirka $0{,}16\\,\\%$ av effekten). Vid $20\\ \\mathrm{kV}$ skulle förlusten vara $31\\ \\mathrm{MW}$, alltså **över $60\\,\\%$ av effekten** skulle försvinna i värme!
 
-**Generell slutsats:** Detta är hela motiveringen för **högspänningsledningar** — utan dem skulle eltransport över långa avstånd vara praktiskt omöjligt. Transformatorerna är därför kritiska för det moderna elsystemet.`,
+**Generell slutsats:** Detta är hela motiveringen för **högspänningsledningar**. Utan dem skulle eltransport över långa avstånd vara praktiskt omöjligt. Transformatorerna är därför kritiska för det moderna elsystemet.`,
+        },
+        {
+            level: 1,
+            question: `En transformator kopplas till ett bilbatteri som ger likspänningen $12\\ \\mathrm{V}$. Ingen spänning går att mäta upp över sekundärspolen. Vad är förklaringen?`,
+            choices: [
+                'Batteriets spänning är för låg för att magnetisera järnkärnan',
+                'Likström ger inget magnetfält i primärspolen',
+                'Flödet genom sekundärspolen ändras inte, så ingen spänning induceras',
+                'Sekundärspolen kan bara leda växelström',
+            ],
+            correct: 2,
+            solution: `En spänning induceras i sekundärspolen bara när det magnetiska flödet genom den **ändras**, eftersom $e = -N \\cdot \\dfrac{d\\Phi}{dt}$.
+
+Likströmmen i primärspolen ger visserligen ett magnetfält i järnkärnan, men fältet är konstant. Då är $\\dfrac{d\\Phi}{dt} = 0$, och ingen spänning induceras i sekundärspolen. (Bara i det ögonblick batteriet kopplas in eller ur ändras flödet, och då syns en kort spänningsstöt.)
+
+De andra alternativen stämmer inte: även en liten ström magnetiserar kärnan, likström ger ett magnetfält, och sekundärspolen är en vanlig ledare som kan leda både lik- och växelström.
+
+**Svar:** Flödet genom sekundärspolen ändras inte, så ingen spänning induceras.`,
+        },
+        {
+            level: 1,
+            question: `Transformatorn till en ringklocka ska ge spänningen $8{,}0\\ \\mathrm{V}$ när den är ansluten till vägguttagets $230\\ \\mathrm{V}$. Sekundärspolen har $60$ varv. Hur många varv ska primärspolen ha?`,
+            answer: { value: 1700, unit: 'varv', tol: 0.03 },
+            solution: `Vi löser ut antalet varv i primärspolen ur sambandet för spänning i en transformator:
+
+$$ \\frac{N_1}{N_2} = \\frac{U_1}{U_2} \\quad\\Leftrightarrow\\quad N_1 = N_2 \\cdot \\frac{U_1}{U_2} $$
+
+$$
+\\left[ \\begin{array}{l}
+N_2 = 60 \\\\
+U_1 = 230\\ \\mathrm{V} \\\\
+U_2 = 8{,}0\\ \\mathrm{V}
+\\end{array} \\right]
+$$
+
+$$ N_1 = 60 \\cdot \\frac{230}{8{,}0} = 1\\,725 $$
+
+Spänningen $8{,}0\\ \\mathrm{V}$ har två värdesiffror, så vi avrundar till två värdesiffror.
+
+**Svar:** Primärspolen ska ha cirka $1\\,700$ varv.`,
+        },
+        {
+            level: 1,
+            question: `En transformator har $200$ varv i primärspolen och $1\\,000$ varv i sekundärspolen. Primärspolen ansluts till växelspänningen $6{,}0\\ \\mathrm{V}$, och en lampa kopplas till sekundärspolen. Vilket påstående stämmer? Anta att transformatorn är ideal.`,
+            choices: [
+                'Lampan får 1,2 V, och strömmen i lampan är större än i primärspolen',
+                'Lampan får 30 V, och strömmen i lampan är lika stor som i primärspolen',
+                'Lampan får 1,2 V, och strömmen i lampan är mindre än i primärspolen',
+                'Lampan får 30 V, och strömmen i lampan är mindre än i primärspolen',
+            ],
+            correct: 3,
+            solution: `Sekundärspolen har fler varv än primärspolen, så spänningen transformeras upp. Ur sambandet för spänning:
+
+$$ \\frac{N_1}{N_2} = \\frac{U_1}{U_2} \\quad\\Leftrightarrow\\quad U_2 = U_1 \\cdot \\frac{N_2}{N_1} = 6{,}0 \\cdot \\frac{1\\,000}{200} = 30\\ \\mathrm{V} $$
+
+Strömkvoten är omvänd mot varvtalskvoten, $\\dfrac{N_1}{N_2} = \\dfrac{I_2}{I_1}$. Med $\\dfrac{N_1}{N_2} = \\dfrac{200}{1\\,000} = 0{,}20$ blir strömmen i lampan en femtedel av strömmen i primärspolen. Det måste vara så, eftersom effekten $P = U \\cdot I$ är lika stor på båda sidor i en ideal transformator: fem gånger så hög spänning kräver en femtedel så stor ström.
+
+**Svar:** Lampan får $30\\ \\mathrm{V}$, och strömmen i lampan är mindre än i primärspolen.`,
+        },
+        {
+            level: 1,
+            question: `I en svetstransformator har primärspolen många varv av tunn tråd och sekundärspolen få varv av grov tråd, se figuren. Strömmen i primärspolen är $3{,}0\\ \\mathrm{A}$, och svetsningen kräver strömmen $69\\ \\mathrm{A}$ i sekundärspolen. Hur många varv ska sekundärspolen ha? Anta att transformatorn är ideal.
+
+<svg viewBox="0 0 470 236" width="638" height="320" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Svetstransformator med primärspole på 460 varv och sekundärspole med okänt antal varv på en gemensam järnkärna."><path d="M 150 30 L 330 30 L 330 180 L 150 180 Z M 176 56 L 304 56 L 304 154 L 176 154 Z" fill-rule="evenodd" fill="#d7dbe0" stroke="#8d939c" stroke-width="1.6"/><ellipse cx="163" cy="66" rx="22" ry="5.5" fill="none" stroke="#c87f3a" stroke-width="2.4"/><ellipse cx="163" cy="76" rx="22" ry="5.5" fill="none" stroke="#c87f3a" stroke-width="2.4"/><ellipse cx="163" cy="86" rx="22" ry="5.5" fill="none" stroke="#c87f3a" stroke-width="2.4"/><ellipse cx="163" cy="96" rx="22" ry="5.5" fill="none" stroke="#c87f3a" stroke-width="2.4"/><ellipse cx="163" cy="106" rx="22" ry="5.5" fill="none" stroke="#c87f3a" stroke-width="2.4"/><ellipse cx="163" cy="116" rx="22" ry="5.5" fill="none" stroke="#c87f3a" stroke-width="2.4"/><ellipse cx="163" cy="126" rx="22" ry="5.5" fill="none" stroke="#c87f3a" stroke-width="2.4"/><ellipse cx="163" cy="136" rx="22" ry="5.5" fill="none" stroke="#c87f3a" stroke-width="2.4"/><ellipse cx="163" cy="146" rx="22" ry="5.5" fill="none" stroke="#c87f3a" stroke-width="2.4"/><ellipse cx="317" cy="86" rx="23" ry="6.5" fill="none" stroke="#c87f3a" stroke-width="4.2"/><ellipse cx="317" cy="106" rx="23" ry="6.5" fill="none" stroke="#c87f3a" stroke-width="4.2"/><ellipse cx="317" cy="126" rx="23" ry="6.5" fill="none" stroke="#c87f3a" stroke-width="4.2"/><line x1="141" y1="66" x2="60" y2="66" stroke="#0f1620" stroke-width="1.8"/><line x1="141" y1="146" x2="60" y2="146" stroke="#0f1620" stroke-width="1.8"/><line x1="60" y1="66" x2="60" y2="91" stroke="#0f1620" stroke-width="1.8"/><line x1="60" y1="121" x2="60" y2="146" stroke="#0f1620" stroke-width="1.8"/><circle cx="60" cy="106" r="15" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><path d="M 52 106 Q 56 99 60 106 Q 64 113 68 106" fill="none" stroke="#0f1620" stroke-width="1.6"/><text x="38" y="111" text-anchor="end" font-size="14" fill="#0f1620">230 V</text><line x1="340" y1="86" x2="410" y2="86" stroke="#0f1620" stroke-width="3.2"/><line x1="340" y1="126" x2="410" y2="126" stroke="#0f1620" stroke-width="3.2"/><circle cx="414" cy="86" r="4" fill="none" stroke="#0f1620" stroke-width="1.8"/><circle cx="414" cy="126" r="4" fill="none" stroke="#0f1620" stroke-width="1.8"/><text x="424" y="103" text-anchor="start" font-size="14" fill="#0f1620"><tspan font-style="italic">I</tspan><tspan font-size="10" dy="3">2</tspan><tspan dy="-3"> =</tspan></text><text x="424" y="122" text-anchor="start" font-size="14" fill="#0f1620">69 A</text><text x="100" y="56" text-anchor="middle" font-size="14" fill="#2563c9"><tspan font-style="italic">I</tspan><tspan font-size="10" dy="3">1</tspan><tspan dy="-3"> = 3,0 A</tspan></text><line x1="86" y1="66" x2="112" y2="66" stroke="#2563c9" stroke-width="2"/><polygon points="111,61.5 120,66 111,70.5" fill="#2563c9"/><text x="163" y="204" text-anchor="middle" font-size="14" fill="#0f1620"><tspan font-style="italic">N</tspan><tspan font-size="10" dy="3">1</tspan><tspan dy="-3"> = 460 varv</tspan></text><text x="317" y="204" text-anchor="middle" font-size="14" fill="#0f1620"><tspan font-style="italic">N</tspan><tspan font-size="10" dy="3">2</tspan><tspan dy="-3"> = ?</tspan></text><text x="163" y="224" text-anchor="middle" font-size="12" fill="#7c828c">primärspole</text><text x="317" y="224" text-anchor="middle" font-size="12" fill="#7c828c">sekundärspole</text><text x="240" y="172" text-anchor="middle" font-size="12" fill="#7c828c">järnkärna</text></svg>`,
+            answer: { value: 20, unit: 'varv' },
+            solution: `Vi använder sambandet för strömmen i en transformator och löser ut $N_2$. Lägg märke till att strömkvoten är omvänd mot varvtalskvoten:
+
+$$ \\frac{N_1}{N_2} = \\frac{I_2}{I_1} \\quad\\Leftrightarrow\\quad N_2 = N_1 \\cdot \\frac{I_1}{I_2} $$
+
+$$
+\\left[ \\begin{array}{l}
+N_1 = 460 \\\\
+I_1 = 3{,}0\\ \\mathrm{A} \\\\
+I_2 = 69\\ \\mathrm{A}
+\\end{array} \\right]
+$$
+
+$$ N_2 = 460 \\cdot \\frac{3{,}0}{69} = 20 $$
+
+Strömmen ska bli $\\dfrac{69}{3{,}0} = 23$ gånger så stor i sekundärspolen, och då ska sekundärspolen ha en tjugotredjedel så många varv. Samtidigt transformeras spänningen ner 23 gånger. Den stora strömmen är just det som behövs för att smälta metallen vid svetsningen, och därför är sekundärspolen lindad av grov tråd.
+
+**Svar:** Sekundärspolen ska ha $20$ varv.`,
+        },
+        {
+            level: 2,
+            question: `I ett laborationsförsök ansluts en primärspole till växelspänningen $12{,}0\\ \\mathrm{V}$. Sekundärspoler med olika antal varv $N_2$ sätts i tur och ordning på samma järnkärna, och spänningen $U_2$ över sekundärspolen mäts. Diagrammet visar mätpunkterna och en anpassad linje.<br>a) Bestäm antalet varv i primärspolen.<br>b) Vilken spänning ger en sekundärspole med $1\\,500$ varv? Svara i V.
+
+${(() => {
+    const pts = [[200, 7.9], [400, 16.1], [600, 23.8], [800, 32.1], [1000, 39.9], [1200, 47.6]];
+    const xs = t => 60 + t / 1200 * 400, ys = v => 290 - v / 50 * 260;
+    const ringar = pts.map(([n, u]) => `<circle cx="${xs(n).toFixed(1)}" cy="${ys(u).toFixed(1)}" r="4.5" fill="#fff" stroke="#0f1620" stroke-width="1.8"/>`).join('');
+    return makeDiagram({
+        xMin: 0, xMax: 1200, yMin: 0, yMax: 50,
+        xTicks: [0, 200, 400, 600, 800, 1000, 1200],
+        yTicks: [0, 10, 20, 30, 40, 50],
+        paths: [{ points: [[0, 0], [1200, 48]], color: '#2563c9', width: 2 }],
+        xLabel: '<tspan font-style="italic">N</tspan><tspan font-size="10" dy="3">2</tspan><tspan dy="-3"> (varv)</tspan>',
+        yLabel: '<tspan font-style="italic">U</tspan><tspan font-size="10" dy="3">2</tspan><tspan dy="-3"> (V)</tspan>'
+    }).replace('</svg>', ringar + '</svg>');
+})()}`,
+            answer: { value: 60, unit: 'V' },
+            delsvar: [
+                { del: 'a', value: 300, unit: 'varv' },
+                { del: 'b', value: 60, unit: 'V' },
+            ],
+            solution: `**a)** Sambandet för spänning i en transformator kan skrivas om så att $U_2$ står ensamt:
+
+$$ \\frac{N_1}{N_2} = \\frac{U_1}{U_2} \\quad\\Leftrightarrow\\quad U_2 = \\frac{U_1}{N_1} \\cdot N_2 $$
+
+Med samma primärspole och samma $U_1$ är $U_2$ alltså proportionell mot $N_2$, och linjens lutning är $\\dfrac{U_1}{N_1}$. Vi läser av en punkt på linjen där den skär rutnätet: $N_2 = 1\\,000$ ger $U_2 = 40\\ \\mathrm{V}$.
+
+$$ \\text{lutning} = \\frac{U_2}{N_2} = \\frac{40}{1\\,000} = 0{,}040\\ \\mathrm{V/varv} $$
+
+Lutningen är $\\dfrac{U_1}{N_1}$, så
+
+$$ \\frac{U_1}{N_1} = 0{,}040 \\quad\\Leftrightarrow\\quad N_1 = \\frac{U_1}{0{,}040} = \\frac{12{,}0}{0{,}040} = 300 $$
+
+**Svar:** Primärspolen har $300$ varv.
+
+**b)** Spänningen per varv är densamma, $0{,}040\\ \\mathrm{V}$, för alla sekundärspolar på kärnan:
+
+$$ U_2 = 0{,}040 \\cdot 1\\,500 = 60\\ \\mathrm{V} $$
+
+Vi kan också räkna med sambandet direkt: $U_2 = U_1 \\cdot \\dfrac{N_2}{N_1} = 12{,}0 \\cdot \\dfrac{1\\,500}{300} = 60\\ \\mathrm{V}$.
+
+**Svar:** Sekundärspolen ger $60\\ \\mathrm{V}$.`,
+        },
+        {
+            level: 2,
+            question: `En transformator är ansluten till $230\\ \\mathrm{V}$ och ger $9{,}0\\ \\mathrm{V}$. Sekundärspolen har $90$ varv.<br>a) Hur många varv har primärspolen?<br>b) Transformatorn ska byggas om så att den ger $6{,}0\\ \\mathrm{V}$ i stället. Hur många varv ska lindas av från sekundärspolen?`,
+            answer: { value: 30, unit: 'varv' },
+            delsvar: [
+                { del: 'a', value: 2300, unit: 'varv' },
+                { del: 'b', value: 30, unit: 'varv' },
+            ],
+            solution: `**a)** Vi löser ut $N_1$ ur sambandet för spänning:
+
+$$ \\frac{N_1}{N_2} = \\frac{U_1}{U_2} \\quad\\Leftrightarrow\\quad N_1 = N_2 \\cdot \\frac{U_1}{U_2} $$
+
+$$
+\\left[ \\begin{array}{l}
+N_2 = 90 \\\\
+U_1 = 230\\ \\mathrm{V} \\\\
+U_2 = 9{,}0\\ \\mathrm{V}
+\\end{array} \\right]
+$$
+
+$$ N_1 = 90 \\cdot \\frac{230}{9{,}0} = 2\\,300 $$
+
+**Svar:** Primärspolen har $2\\,300$ varv.
+
+**b)** Primärspolen och $U_1$ är desamma, så $U_2$ är proportionell mot $N_2$. Den nya sekundärspänningen är $\\dfrac{6{,}0}{9{,}0}$ av den gamla, och då ska sekundärspolen ha $\\dfrac{6{,}0}{9{,}0}$ av de gamla varven:
+
+$$ N_2' = 90 \\cdot \\frac{6{,}0}{9{,}0} = 60 $$
+
+Antalet varv som ska lindas av är
+
+$$ 90 - 60 = 30 $$
+
+Kontroll med primärspolen från a): $U_2 = 230 \\cdot \\dfrac{60}{2\\,300} = 6{,}0\\ \\mathrm{V}$.
+
+**Svar:** $30$ varv ska lindas av.`,
+        },
+        {
+            level: 2,
+            question: `En trädgårdsbelysning drivs av en transformator som ansluts till $230\\ \\mathrm{V}$ och ger $12\\ \\mathrm{V}$. Åtta lampor på vardera $20\\ \\mathrm{W}$ kopplas parallellt till sekundärsidan. På sekundärsidan sitter en säkring som löser ut om strömmen blir större än $10\\ \\mathrm{A}$. Anta att transformatorn är ideal.<br>a) Hur stor blir strömmen på sekundärsidan? Löser säkringen ut?<br>b) Hur stor blir strömmen i primärspolen?<br>c) Hur många lampor kan högst kopplas in utan att säkringen löser ut?`,
+            answer: { value: 0.70, unit: 'A' },
+            delsvar: [
+                { del: 'a', value: 13, unit: 'A' },
+                { del: 'b', value: 0.70, unit: 'A' },
+                { del: 'c', value: 6, unit: 'lampor' },
+            ],
+            solution: `**a)** Lamporna är parallellkopplade, så deras effekter adderas:
+
+$$ P_2 = 8 \\cdot 20 = 160\\ \\mathrm{W} $$
+
+Strömmen på sekundärsidan fås ur $P = U \\cdot I$:
+
+$$ P_2 = U_2 \\cdot I_2 \\quad\\Leftrightarrow\\quad I_2 = \\frac{P_2}{U_2} = \\frac{160}{12} = 13{,}33\\ \\mathrm{A} \\approx 13\\ \\mathrm{A} $$
+
+Strömmen är större än $10\\ \\mathrm{A}$.
+
+**Svar:** Strömmen blir $13\\ \\mathrm{A}$, så säkringen löser ut.
+
+**b)** I en ideal transformator är $P_1 = P_2$:
+
+$$ U_1 \\cdot I_1 = P_2 \\quad\\Leftrightarrow\\quad I_1 = \\frac{P_2}{U_1} = \\frac{160}{230} = 0{,}696\\ \\mathrm{A} \\approx 0{,}70\\ \\mathrm{A} $$
+
+Kontroll med strömsambandet: $\\dfrac{N_1}{N_2} = \\dfrac{U_1}{U_2} = \\dfrac{230}{12} = 19{,}17$ och $I_1 = I_2 \\cdot \\dfrac{N_2}{N_1} = \\dfrac{13{,}33}{19{,}17} = 0{,}696\\ \\mathrm{A}$.
+
+**Svar:** Strömmen i primärspolen blir $0{,}70\\ \\mathrm{A}$.
+
+**c)** Den största effekt sekundärsidan klarar är
+
+$$ P_\\text{max} = U_2 \\cdot I_\\text{max} = 12 \\cdot 10 = 120\\ \\mathrm{W} $$
+
+Det räcker till $\\dfrac{120}{20} = 6$ lampor.
+
+**Svar:** Högst $6$ lampor kan kopplas in.`,
+        },
+        {
+            level: 2,
+            question: `En ideal transformator är ansluten till en växelspänning $U_1$ som hålls konstant. Sekundärspolen är kopplad till en resistor. Antalet varv i sekundärspolen fördubblas, medan primärspolen och resistorn är desamma. Vad händer med strömmen i **primärspolen**?`,
+            choices: [
+                'Den fördubblas',
+                'Den fyrdubblas',
+                'Den halveras',
+                'Den blir oförändrad',
+            ],
+            correct: 1,
+            solution: `Vi följer förändringen steg för steg.
+
+1. Spänningen: $U_2 = U_1 \\cdot \\dfrac{N_2}{N_1}$. När $N_2$ fördubblas, fördubblas $U_2$.
+2. Strömmen i resistorn: $I_2 = \\dfrac{U_2}{R}$. Med samma resistans fördubblas också $I_2$.
+3. Strömmen i primärspolen: $I_1 = I_2 \\cdot \\dfrac{N_2}{N_1}$. Här fördubblas både $I_2$ och kvoten $\\dfrac{N_2}{N_1}$, så $I_1$ blir $2 \\cdot 2 = 4$ gånger så stor.
+
+Samma slutsats fås med effekten: $P_2 = \\dfrac{U_2^2}{R}$ blir $2^2 = 4$ gånger så stor. Eftersom $P_1 = U_1 \\cdot I_1$ och $U_1$ är oförändrad, måste $I_1$ bli 4 gånger så stor.
+
+Det är lätt att tro att strömmen i primärspolen ska minska när spänningen transformeras upp. Men här ändras belastningen: resistorn får en högre spänning och tar då mer effekt, och den effekten måste komma från primärsidan.
+
+**Svar:** Strömmen i primärspolen fyrdubblas.`,
+        },
+        {
+            level: 2,
+            question: `En verklig transformator mäts i ett laboratorium. Primärspolen är ansluten till $230\\ \\mathrm{V}$ och strömmen i den är $0{,}30\\ \\mathrm{A}$. Sekundärsidan ger $24\\ \\mathrm{V}$ och strömmen $2{,}6\\ \\mathrm{A}$ till en apparat.<br>a) Beräkna transformatorns verkningsgrad. Svara i procent.<br>b) Vart tar den energi vägen som inte når apparaten? Ge två förklaringar.`,
+            answer: { value: 90, unit: '%' },
+            delsvar: [
+                { del: 'a', value: 90, unit: '%' },
+                { del: 'b' },
+            ],
+            solution: `**a)** Verkningsgraden är den nyttiga effekten (den som når apparaten) delat med den tillförda effekten:
+
+$$ \\eta = \\frac{P_2}{P_1} = \\frac{U_2 \\cdot I_2}{U_1 \\cdot I_1} $$
+
+$$
+\\left[ \\begin{array}{l}
+U_1 = 230\\ \\mathrm{V} \\\\
+I_1 = 0{,}30\\ \\mathrm{A} \\\\
+U_2 = 24\\ \\mathrm{V} \\\\
+I_2 = 2{,}6\\ \\mathrm{A}
+\\end{array} \\right]
+$$
+
+$$ P_1 = 230 \\cdot 0{,}30 = 69\\ \\mathrm{W} $$
+
+$$ P_2 = 24 \\cdot 2{,}6 = 62{,}4\\ \\mathrm{W} $$
+
+$$ \\eta = \\frac{62{,}4}{69} = 0{,}904 \\approx 0{,}90 = 90\\ \\% $$
+
+Ungefär $69 - 62{,}4 = 6{,}6\\ \\mathrm{W}$ går förlorade. Det är rimligt för en mindre transformator.
+
+**Svar:** Verkningsgraden är $90\\ \\%$.
+
+**b)** Energin som går förlorad blir värme i transformatorn, som därför blir varm när den används. Två orsaker:
+
+- **Spolarnas resistans.** Strömmen genom koppartråden i spolarna värmer tråden.
+- **Virvelströmmar i järnkärnan.** Det varierande magnetfältet inducerar strömmar även i själva järnet, och de värmer kärnan. (Därför byggs kärnan av tunna, isolerade plåtar, som gör virvelströmmarna svagare.)
+
+En del av flödet från primärspolen går dessutom aldrig genom sekundärspolen, och järnet värms också något av att det magnetiseras om i varje period.
+
+**Svar:** Energin blir värme, främst i spolarnas trådar och genom virvelströmmar i järnkärnan.`,
+        },
+        {
+            level: 2,
+            question: `En transformator har okända antal varv i spolarna. Den är ansluten till vägguttagets $230\\ \\mathrm{V}$ och ger $12{,}0\\ \\mathrm{V}$ på sekundärsidan. För att ta reda på varvtalen lindar en elev $20$ varv isolerad tråd runt järnkärnan och kopplar en voltmeter till trådens ändar. Voltmetern visar $4{,}6\\ \\mathrm{V}$.<br>a) Förklara varför spänningen per varv är densamma för alla spolar på kärnan.<br>b) Bestäm antalet varv i primärspolen och i sekundärspolen.<br>c) Voltmeterns avläsning är osäker med $\\pm 0{,}1\\ \\mathrm{V}$. Inom vilket intervall ligger antalet varv i primärspolen?`,
+            answer: { value: 1000, unit: 'varv' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 1000, unit: 'varv', etikett: '$N_1 =$' },
+                { del: 'b', value: 52, unit: 'varv', etikett: '$N_2 =$' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Järnkärnan leder det magnetiska flödet $\\Phi$ genom alla spolar som sitter på den. Flödet och dess förändring $\\dfrac{d\\Phi}{dt}$ är därför desamma i varje varv, oavsett vilken spole varvet tillhör. Den inducerade spänningen i en spole med $N$ varv är
+
+$$ e = -N \\cdot \\frac{d\\Phi}{dt} \\quad\\Leftrightarrow\\quad \\frac{e}{N} = -\\frac{d\\Phi}{dt} $$
+
+Spänningen per varv är alltså $\\dfrac{d\\Phi}{dt}$, lika för alla spolar. Den extra tråden fungerar som en tredje spole och mäter just spänningen per varv. (Det är samma resonemang som ger $\\dfrac{N_1}{N_2} = \\dfrac{U_1}{U_2}$.)
+
+**Svar:** Alla spolar omsluter samma flöde i kärnan, så $\\dfrac{d\\Phi}{dt}$ och därmed spänningen per varv är densamma i alla.
+
+**b)** Spänningen per varv är
+
+$$ \\frac{4{,}6}{20} = 0{,}23\\ \\mathrm{V/varv} $$
+
+Samma spänning per varv gäller för primär- och sekundärspolen:
+
+$$ N_1 = \\frac{U_1}{0{,}23} = \\frac{230}{0{,}23} = 1\\,000 $$
+
+$$ N_2 = \\frac{U_2}{0{,}23} = \\frac{12{,}0}{0{,}23} = 52{,}17 \\approx 52 $$
+
+Kontroll: $\\dfrac{N_1}{N_2} = \\dfrac{1\\,000}{52{,}17} = 19{,}17$ och $\\dfrac{U_1}{U_2} = \\dfrac{230}{12{,}0} = 19{,}17$.
+
+**Svar:** Primärspolen har cirka $1\\,000$ varv och sekundärspolen cirka $52$ varv.
+
+**c)** Antalet varv i primärspolen är $N_1 = \\dfrac{20 \\cdot U_1}{U_\\text{tråd}}$. En högre avläsning ger färre varv:
+
+$$ U_\\text{tråd} = 4{,}7\\ \\mathrm{V}: \\quad N_1 = \\frac{20 \\cdot 230}{4{,}7} = 978{,}7 $$
+
+$$ U_\\text{tråd} = 4{,}5\\ \\mathrm{V}: \\quad N_1 = \\frac{20 \\cdot 230}{4{,}5} = 1\\,022{,}2 $$
+
+En osäkerhet på $0{,}1\\ \\mathrm{V}$ av $4{,}6\\ \\mathrm{V}$ är ungefär $2\\ \\%$, och det ger lika stor relativ osäkerhet i antalet varv. Vill eleven ha ett noggrannare värde kan hon linda fler varv runt kärnan: med $100$ varv blir den uppmätta spänningen fem gånger så stor och den relativa osäkerheten en femtedel så stor.
+
+**Svar:** Primärspolen har mellan cirka $980$ och $1\\,020$ varv.`,
+        },
+        {
+            level: 3,
+            question: `I ett laboratorium finns fyra spolar med $250$, $500$, $800$ och $1\\,200$ varv, som kan träs på samma järnkärna. Spänningskällan ger växelspänningen $12\\ \\mathrm{V}$. En transformator byggs av två av spolarna, en som primärspole och en som sekundärspole.<br>a) Vilka kombinationer ger en sekundärspänning mellan $20\\ \\mathrm{V}$ och $30\\ \\mathrm{V}$? Utred alla möjligheter.<br>b) En lampa märkt $24\\ \\mathrm{V}$, $36\\ \\mathrm{W}$ ska lysa normalt. Vilken kombination ska väljas, och hur stor blir strömmen genom spänningskällan? Anta att transformatorn är ideal.`,
+            answer: { value: 3.0, unit: 'A' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 3.0, unit: 'A' },
+            ],
+            solution: `**a)** Ur sambandet för spänning får vi sekundärspänningen:
+
+$$ \\frac{N_1}{N_2} = \\frac{U_1}{U_2} \\quad\\Leftrightarrow\\quad U_2 = U_1 \\cdot \\frac{N_2}{N_1} $$
+
+Med $U_1 = 12\\ \\mathrm{V}$ ska $20 \\le 12 \\cdot \\dfrac{N_2}{N_1} \\le 30$, alltså
+
+$$ \\frac{20}{12} \\le \\frac{N_2}{N_1} \\le \\frac{30}{12} \\quad\\Leftrightarrow\\quad 1{,}67 \\le \\frac{N_2}{N_1} \\le 2{,}5 $$
+
+Spänningen ska transformeras upp, så sekundärspolen måste ha fler varv än primärspolen. Med fyra spolar finns sex sådana par. Vi prövar alla:
+
+| $N_1$ | $N_2$ | $\\dfrac{N_2}{N_1}$ | $U_2$ (V) |
+|---|---|---|---|
+| $250$ | $500$ | $2{,}0$ | $24$ |
+| $250$ | $800$ | $3{,}2$ | $38{,}4$ |
+| $250$ | $1\\,200$ | $4{,}8$ | $57{,}6$ |
+| $500$ | $800$ | $1{,}6$ | $19{,}2$ |
+| $500$ | $1\\,200$ | $2{,}4$ | $28{,}8$ |
+| $800$ | $1\\,200$ | $1{,}5$ | $18$ |
+
+Bara två kvoter ligger i intervallet $1{,}67$ till $2{,}5$. De övriga sex kombinationerna, där sekundärspolen har färre varv än primärspolen, transformerar ner spänningen under $12\\ \\mathrm{V}$ och faller bort.
+
+**Svar:** Två kombinationer: $250$ varv som primärspole och $500$ som sekundärspole ($24\\ \\mathrm{V}$), samt $500$ varv som primärspole och $1\\,200$ som sekundärspole ($28{,}8\\ \\mathrm{V}$).
+
+**b)** Lampan lyser normalt när spänningen över den är $24\\ \\mathrm{V}$. Med $28{,}8\\ \\mathrm{V}$ skulle den få för hög spänning och kunna gå sönder, så vi väljer $N_1 = 250$ och $N_2 = 500$.
+
+Strömmen genom lampan är
+
+$$ I_2 = \\frac{P}{U_2} = \\frac{36}{24} = 1{,}5\\ \\mathrm{A} $$
+
+Strömmen genom spänningskällan är strömmen i primärspolen:
+
+$$ \\frac{N_1}{N_2} = \\frac{I_2}{I_1} \\quad\\Leftrightarrow\\quad I_1 = I_2 \\cdot \\frac{N_2}{N_1} = 1{,}5 \\cdot \\frac{500}{250} = 3{,}0\\ \\mathrm{A} $$
+
+Kontroll med effekten: $P_1 = U_1 \\cdot I_1 = 12 \\cdot 3{,}0 = 36\\ \\mathrm{W}$, lika mycket som lampan tar. Det stämmer för en ideal transformator.
+
+**Svar:** Primärspole $250$ varv och sekundärspole $500$ varv. Strömmen genom spänningskällan blir $3{,}0\\ \\mathrm{A}$.`,
+        },
+        {
+            level: 3,
+            question: `En rörförstärkare för elgitarr fungerar bäst när den är belastad med resistansen $5\\,000\\ \\Omega$, men en högtalare har bara resistansen $8{,}0\\ \\Omega$. Därför kopplas högtalaren till förstärkaren via en utgångstransformator. Sett från förstärkaren beter sig primärspolen då som en resistor med resistansen $R_1 = \\dfrac{U_1}{I_1}$.<br>a) Visa att $R_1 = \\left(\\dfrac{N_1}{N_2}\\right)^2 \\cdot R$, där $R$ är resistansen som är kopplad till sekundärspolen. Anta att transformatorn är ideal.<br>b) Vilken varvtalskvot $\\dfrac{N_1}{N_2}$ ska transformatorn ha?<br>c) Högtalaren byts mot en med resistansen $4{,}0\\ \\Omega$. Vilken resistans ser förstärkaren då? Svara i Ω.`,
+            answer: { value: 2500, unit: 'Ω' },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 25, unit: '' },
+                { del: 'c', value: 2500, unit: 'Ω' },
+            ],
+            solution: `**a)** Resistorn på sekundärsidan ger enligt Ohms lag
+
+$$ R = \\frac{U_2}{I_2} \\tag{1} $$
+
+Spänningen och strömmen i primärspolen uttrycks i sekundärsidans storheter med transformatorns två samband:
+
+$$ \\frac{N_1}{N_2} = \\frac{U_1}{U_2} \\quad\\Leftrightarrow\\quad U_1 = \\frac{N_1}{N_2} \\cdot U_2 $$
+
+$$ \\frac{N_1}{N_2} = \\frac{I_2}{I_1} \\quad\\Leftrightarrow\\quad I_1 = \\frac{N_2}{N_1} \\cdot I_2 $$
+
+Detta insatt i $R_1 = \\dfrac{U_1}{I_1}$ ger
+
+$$ R_1 = \\frac{\\dfrac{N_1}{N_2} \\cdot U_2}{\\dfrac{N_2}{N_1} \\cdot I_2} = \\frac{N_1}{N_2} \\cdot \\frac{N_1}{N_2} \\cdot \\frac{U_2}{I_2} = \\left(\\frac{N_1}{N_2}\\right)^2 \\cdot \\frac{U_2}{I_2} $$
+
+Detta i ekvation (1), $R = \\dfrac{U_2}{I_2}$, ger
+
+$$ R_1 = \\left(\\frac{N_1}{N_2}\\right)^2 \\cdot R $$
+
+Varvtalskvoten kommer in två gånger: spänningen på primärsidan är $\\dfrac{N_1}{N_2}$ gånger så hög som på sekundärsidan, och strömmen på sekundärsidan är $\\dfrac{N_1}{N_2}$ gånger så stor som på primärsidan.
+
+**b)** Vi löser ut varvtalskvoten:
+
+$$ R_1 = \\left(\\frac{N_1}{N_2}\\right)^2 \\cdot R \\quad\\Leftrightarrow\\quad \\frac{N_1}{N_2} = \\sqrt{\\frac{R_1}{R}} $$
+
+$$
+\\left[ \\begin{array}{l}
+R_1 = 5\\,000\\ \\Omega \\\\
+R = 8{,}0\\ \\Omega
+\\end{array} \\right]
+$$
+
+$$ \\frac{N_1}{N_2} = \\sqrt{\\frac{5\\,000}{8{,}0}} = \\sqrt{625} = 25 $$
+
+Primärspolen ska alltså ha 25 gånger så många varv som sekundärspolen, till exempel $2\\,500$ och $100$ varv.
+
+**Svar:** Varvtalskvoten ska vara $25$.
+
+**c)** Med samma transformator och $R = 4{,}0\\ \\Omega$:
+
+$$ R_1 = 25^2 \\cdot 4{,}0 = 625 \\cdot 4{,}0 = 2\\,500\\ \\Omega $$
+
+Resistansen som förstärkaren ser halveras, lika mycket som högtalarens resistans halveras, eftersom $R_1$ är proportionell mot $R$.
+
+**Svar:** Förstärkaren ser resistansen $2\\,500\\ \\Omega$.`,
+        },
+        {
+            level: 3,
+            question: `En vindkraftpark ger effekten $2{,}0\\ \\mathrm{MW}$ vid spänningen $690\\ \\mathrm{V}$. Effekten ska föras till en transformatorstation på land genom en kabel med den totala resistansen $0{,}80\\ \\Omega$.<br>a) Visa att effekten inte går att föra över genom kabeln vid spänningen $690\\ \\mathrm{V}$.<br>b) Därför transformeras spänningen upp innan kabeln. Effektförlusten i kabeln får vara högst $1{,}0\\ \\%$ av den överförda effekten. Hur stor måste varvtalskvoten $\\dfrac{N_2}{N_1}$ i upptransformatorn minst vara? Anta att transformatorn är ideal.`,
+            answer: { value: 18.3, unit: '', tol: 0.03 },
+            delsvar: [
+                { del: 'a' },
+                { del: 'b', value: 18.3, unit: '', tol: 0.03 },
+            ],
+            solution: `**a)** Strömmen i kabeln fås ur $P = U \\cdot I$:
+
+$$ I = \\frac{P}{U} = \\frac{2{,}0 \\cdot 10^{6}}{690} = 2\\,899\\ \\mathrm{A} $$
+
+Effektförlusten i kabeln är $P_\\text{förlust} = R \\cdot I^2$ (eftersom $P = U \\cdot I$ och spänningsfallet över kabeln är $U = R \\cdot I$):
+
+$$ P_\\text{förlust} = 0{,}80 \\cdot 2\\,899^2 = 6{,}7 \\cdot 10^{6}\\ \\mathrm{W} = 6{,}7\\ \\mathrm{MW} $$
+
+Förlusten skulle bli större än hela effekten $2{,}0\\ \\mathrm{MW}$, vilket är omöjligt. Det syns också på spänningsfallet: för att driva $2\\,899\\ \\mathrm{A}$ genom kabeln krävs spänningen $R \\cdot I = 0{,}80 \\cdot 2\\,899 = 2\\,319\\ \\mathrm{V}$, mer än tre gånger så mycket som de $690\\ \\mathrm{V}$ som finns. Räkningen bygger på att hela strömmen $2\\,899\\ \\mathrm{A}$ går genom kabeln, och den förutsättningen kan inte uppfyllas.
+
+**Svar:** Vid $690\\ \\mathrm{V}$ skulle strömmen bli $2\\,900\\ \\mathrm{A}$ och förlusten $6{,}7\\ \\mathrm{MW}$, mer än hela den producerade effekten. Effekten kan alltså inte föras över vid den spänningen.
+
+**b)** Vi tar fram ett generellt uttryck för förlusten när effekten $P$ förs över vid spänningen $U$. Strömmen är $I = \\dfrac{P}{U}$, så
+
+$$ P_\\text{förlust} = R \\cdot I^2 = R \\cdot \\frac{P^2}{U^2} $$
+
+Förlusten ska vara högst $1{,}0\\ \\%$ av $P$:
+
+$$ R \\cdot \\frac{P^2}{U^2} \\le 0{,}010 \\cdot P $$
+
+$$ R \\cdot \\frac{P^2}{U^2} \\cdot \\boldsymbol{\\frac{U^2}{0{,}010 \\cdot P}} \\le 0{,}010 \\cdot P \\cdot \\boldsymbol{\\frac{U^2}{0{,}010 \\cdot P}} $$
+
+$$ \\frac{R \\cdot P}{0{,}010} \\le U^2 \\quad\\Leftrightarrow\\quad U \\ge \\sqrt{\\frac{R \\cdot P}{0{,}010}} $$
+
+$$
+\\left[ \\begin{array}{l}
+R = 0{,}80\\ \\Omega \\\\
+P = 2{,}0 \\cdot 10^{6}\\ \\mathrm{W}
+\\end{array} \\right]
+$$
+
+$$ U \\ge \\sqrt{\\frac{0{,}80 \\cdot 2{,}0 \\cdot 10^{6}}{0{,}010}} = \\sqrt{1{,}6 \\cdot 10^{8}} = 12\\,649\\ \\mathrm{V} $$
+
+Upptransformatorn ska alltså ge minst $12\\,649\\ \\mathrm{V}$ ur $690\\ \\mathrm{V}$. Ur sambandet för spänning:
+
+$$ \\frac{N_2}{N_1} = \\frac{U_2}{U_1} \\ge \\frac{12\\,649}{690} = 18{,}33 $$
+
+Rimlighet: vid $12{,}6\\ \\mathrm{kV}$ är strömmen $\\dfrac{2{,}0 \\cdot 10^{6}}{12\\,649} = 158\\ \\mathrm{A}$ och förlusten $0{,}80 \\cdot 158^2 = 20\\ \\mathrm{kW}$, just $1{,}0\\ \\%$ av $2{,}0\\ \\mathrm{MW}$. Lägg märke till hur starkt förlusten beror på spänningen: förlusten $6{,}7\\ \\mathrm{MW}$ i a) är $18{,}3^2 \\approx 340$ gånger så stor som förlusten $20\\ \\mathrm{kW}$ vid $12{,}6\\ \\mathrm{kV}$.
+
+**Svar:** Varvtalskvoten $\\dfrac{N_2}{N_1}$ måste vara minst $18$ (mer exakt $18{,}3$).`,
+        },
+        {
+            level: 3,
+            question: `En generator ger spänningen $400\\ \\mathrm{V}$. Transformatorn T1 transformerar upp spänningen till $10\\,000\\ \\mathrm{V}$, och effekten förs genom en kraftledning med den totala resistansen $200\\ \\Omega$ till transformatorn T2 hos en kund. Kunden använder effekten $40\\ \\mathrm{kW}$ vid spänningen $230\\ \\mathrm{V}$. Anta att båda transformatorerna är ideala.
+
+<svg viewBox="0 0 660 178" width="664" height="179" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Generator, upptransformator T1, kraftledning med resistansen 200 ohm, nedtransformator T2 och kunden."><circle cx="48" cy="87" r="22" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><text x="48" y="84" text-anchor="middle" font-size="13" fill="#0f1620">G</text><path d="M 39 95 Q 43.5 89 48 95 Q 52.5 101 57 95" fill="none" stroke="#0f1620" stroke-width="1.4"/><line x1="48" y1="65" x2="48" y2="62" stroke="#0f1620" stroke-width="1.8"/><line x1="48" y1="109" x2="48" y2="112" stroke="#0f1620" stroke-width="1.8"/><line x1="48" y1="62" x2="122" y2="62" stroke="#0f1620" stroke-width="1.8"/><line x1="48" y1="112" x2="122" y2="112" stroke="#0f1620" stroke-width="1.8"/><line x1="122" y1="62" x2="122" y2="112" stroke="#0f1620" stroke-width="1.8"/><line x1="194" y1="62" x2="194" y2="112" stroke="#0f1620" stroke-width="1.8"/><circle cx="147" cy="87" r="20" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><circle cx="169" cy="87" r="20" fill="none" stroke="#0f1620" stroke-width="1.8"/><line x1="122" y1="87" x2="127" y2="87" stroke="#0f1620" stroke-width="1.8"/><line x1="189" y1="87" x2="194" y2="87" stroke="#0f1620" stroke-width="1.8"/><text x="158" y="138" text-anchor="middle" font-size="13" fill="#0f1620">T1</text><line x1="194" y1="62" x2="470" y2="62" stroke="#0f1620" stroke-width="1.8"/><line x1="194" y1="112" x2="470" y2="112" stroke="#0f1620" stroke-width="1.8"/><rect x="305" y="54" width="54" height="16" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><text x="332" y="40" text-anchor="middle" font-size="13" fill="#0f1620"><tspan font-style="italic">R</tspan> = 200 Ω</text><text x="332" y="138" text-anchor="middle" font-size="12" fill="#7c828c">kraftledning</text><line x1="470" y1="62" x2="470" y2="112" stroke="#0f1620" stroke-width="1.8"/><line x1="542" y1="62" x2="542" y2="112" stroke="#0f1620" stroke-width="1.8"/><circle cx="495" cy="87" r="20" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><circle cx="517" cy="87" r="20" fill="none" stroke="#0f1620" stroke-width="1.8"/><line x1="470" y1="87" x2="475" y2="87" stroke="#0f1620" stroke-width="1.8"/><line x1="537" y1="87" x2="542" y2="87" stroke="#0f1620" stroke-width="1.8"/><text x="506" y="138" text-anchor="middle" font-size="13" fill="#0f1620">T2</text><line x1="542" y1="62" x2="590" y2="62" stroke="#0f1620" stroke-width="1.8"/><line x1="542" y1="112" x2="590" y2="112" stroke="#0f1620" stroke-width="1.8"/><path d="M 590 72 L 616 50 L 642 72 L 642 112 L 590 112 Z" fill="#efe6d4" stroke="#0f1620" stroke-width="1.8" stroke-linejoin="round"/><rect x="609" y="90" width="14" height="22" fill="#fff" stroke="#0f1620" stroke-width="1.4"/><text x="616" y="138" text-anchor="middle" font-size="12" fill="#7c828c">kund</text><text x="85" y="40" text-anchor="middle" font-size="13" fill="#0f1620">400 V</text><text x="236" y="40" text-anchor="middle" font-size="13" fill="#0f1620">10 000 V</text><text x="566" y="40" text-anchor="middle" font-size="13" fill="#0f1620">230 V</text><text x="616" y="162" text-anchor="middle" font-size="13" fill="#0f1620">40 kW</text><text x="48" y="138" text-anchor="middle" font-size="12" fill="#7c828c">generator</text></svg>
+
+a) Bestäm strömmen i kraftledningen. Svara i A.<br>b) Bestäm varvtalskvoten $\\dfrac{N_1}{N_2}$ i T2. Svara med två värdesiffror.<br>c) Hur stor är strömmen från generatorn? Svara i A.`,
+            answer: { value: 4.4, unit: 'A' },
+            delsvar: [
+                { del: 'a', value: 4.4, unit: 'A' },
+                { del: 'b', value: 40, unit: '' },
+                { del: 'c', value: 110, unit: 'A' },
+            ],
+            solution: `**a)** Det är frestande att räkna $I = \\dfrac{40\\,000}{10\\,000} = 4{,}0\\ \\mathrm{A}$, men det stämmer inte: i ledningen går också effekt förlorad, så T1 måste leverera mer än $40\\ \\mathrm{kW}$. Strömmen $I$ i ledningen är okänd, och vi ställer upp energiprincipen för ledningen. Effekten som går in i ledningen från T1 är lika med effekten som når kunden plus förlusten i ledningen:
+
+$$ U \\cdot I = P + R \\cdot I^2 $$
+
+$$
+\\left[ \\begin{array}{l}
+U = 10\\,000\\ \\mathrm{V} \\\\
+P = 40\\,000\\ \\mathrm{W} \\\\
+R = 200\\ \\Omega
+\\end{array} \\right]
+$$
+
+$$ 10\\,000 \\cdot I = 40\\,000 + 200 \\cdot I^2 $$
+
+Vi samlar alla termer i ett led och delar med $200$:
+
+$$ 200 \\cdot I^2 - 10\\,000 \\cdot I + 40\\,000 = 0 $$
+
+$$ I^2 - 50 \\cdot I + 200 = 0 $$
+
+$$ I = 25 \\pm \\sqrt{25^2 - 200} = 25 \\pm \\sqrt{425} = 25 \\pm 20{,}616 $$
+
+$$ I = 4{,}384\\ \\mathrm{A} \\quad \\text{eller} \\quad I = 45{,}62\\ \\mathrm{A} $$
+
+Båda lösningarna uppfyller energiprincipen. Med $45{,}6\\ \\mathrm{A}$ skulle förlusten bli $200 \\cdot 45{,}62^2 = 416\\ \\mathrm{kW}$, alltså mer än tio gånger det kunden får. Det är en orimlig drift som ingen konstruerar för (den motsvarar en helt annan T2). Den rimliga lösningen är den lilla strömmen.
+
+Rimlighet: $4{,}4\\ \\mathrm{A}$ ligger nära överslaget $4{,}0\\ \\mathrm{A}$, men något högre, eftersom förlusten också ska täckas.
+
+**Svar:** Strömmen i kraftledningen är $4{,}4\\ \\mathrm{A}$.
+
+**b)** Spänningsfallet över ledningen är $R \\cdot I$, så spänningen över primärspolen i T2 blir
+
+$$ U_1 = 10\\,000 - 200 \\cdot 4{,}384 = 10\\,000 - 876{,}9 = 9\\,123\\ \\mathrm{V} $$
+
+Sekundärspänningen ska vara $U_2 = 230\\ \\mathrm{V}$:
+
+$$ \\frac{N_1}{N_2} = \\frac{U_1}{U_2} = \\frac{9\\,123}{230} = 39{,}67 \\approx 40 $$
+
+**Svar:** Varvtalskvoten i T2 ska vara $40$.
+
+**c)** Strömmen i ledningen är strömmen i sekundärspolen i T1. T1 transformerar upp spänningen från $400\\ \\mathrm{V}$ till $10\\,000\\ \\mathrm{V}$, alltså 25 gånger. Med $\\dfrac{N_1}{N_2} = \\dfrac{U_1}{U_2}$ och $\\dfrac{N_1}{N_2} = \\dfrac{I_2}{I_1}$ blir strömmen på generatorsidan 25 gånger så stor:
+
+$$ \\frac{I_2}{I_1} = \\frac{U_1}{U_2} \\quad\\Leftrightarrow\\quad I_1 = I_2 \\cdot \\frac{U_2}{U_1} = 4{,}384 \\cdot \\frac{10\\,000}{400} = 109{,}6\\ \\mathrm{A} $$
+
+Kontroll med energin: generatorn ger $400 \\cdot 109{,}6 = 43{,}8\\ \\mathrm{kW}$. Kunden får $40\\ \\mathrm{kW}$ och ledningen tar $200 \\cdot 4{,}384^2 = 3{,}8\\ \\mathrm{kW}$, totalt $43{,}8\\ \\mathrm{kW}$.
+
+**Svar:** Strömmen från generatorn är cirka $110\\ \\mathrm{A}$.`,
+        },
+        {
+            level: 3,
+            question: `En signalgenerator driver primärspolen i en transformator så att det magnetiska flödet i järnkärnan varierar som diagrammet visar. Över primärspolen mäts en spänning vars belopp är $96\\ \\mathrm{V}$. Sekundärspolen har $50$ varv.<br>a) Bestäm antalet varv i primärspolen.<br>b) Bestäm beloppet av spänningen över sekundärspolen, och beskriv hur den varierar med tiden. Svara i V.<br>c) Visa att varvtalskvoten och spänningskvoten är lika, trots att flödet inte varierar som en sinuskurva.
+
+${makeDiagram({
+    xMin: 0, xMax: 20, yMin: -0.8, yMax: 0.8,
+    xTicks: [0, 2.5, 5, 7.5, 10, 12.5, 15, 17.5, 20],
+    yTicks: [-0.8, -0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.6, 0.8],
+    paths: [{ points: [[0, -0.6], [5, 0.6], [10, -0.6], [15, 0.6], [20, -0.6]], color: '#2563c9', width: 2.5 }],
+    xLabel: '<tspan font-style="italic">t</tspan> (ms)',
+    yLabel: '<tspan font-style="italic">Φ</tspan> (mWb)'
+})}`,
+            answer: { value: 12, unit: 'V' },
+            delsvar: [
+                { del: 'a', value: 400, unit: 'varv' },
+                { del: 'b', value: 12, unit: 'V' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Den inducerade spänningen i en spole är $e = -N \\cdot \\dfrac{d\\Phi}{dt}$, och flödesändringen per sekund är grafens lutning. Grafen består av raka delar, så lutningen är konstant inom varje del. Från $t = 0$ till $t = 5\\ \\mathrm{ms}$ ökar flödet från $-0{,}6\\ \\mathrm{mWb}$ till $0{,}6\\ \\mathrm{mWb}$:
+
+$$ \\frac{\\Delta\\Phi}{\\Delta t} = \\frac{0{,}6 \\cdot 10^{-3} - (-0{,}6 \\cdot 10^{-3})}{5 \\cdot 10^{-3}} = \\frac{1{,}2 \\cdot 10^{-3}}{5 \\cdot 10^{-3}} = 0{,}24\\ \\mathrm{Wb/s} $$
+
+Mellan $5\\ \\mathrm{ms}$ och $10\\ \\mathrm{ms}$ minskar flödet lika mycket på lika lång tid, så lutningen är $-0{,}24\\ \\mathrm{Wb/s}$. Beloppet är alltså $0{,}24\\ \\mathrm{Wb/s}$ hela tiden.
+
+Transformatorns inre resistans är liten, så spänningen över primärspolen är lika med den inducerade spänningen:
+
+$$ U_1 = N_1 \\cdot \\left|\\frac{\\Delta\\Phi}{\\Delta t}\\right| \\quad\\Leftrightarrow\\quad N_1 = \\frac{U_1}{\\left|\\dfrac{\\Delta\\Phi}{\\Delta t}\\right|} = \\frac{96}{0{,}24} = 400 $$
+
+**Svar:** Primärspolen har $400$ varv.
+
+**b)** Samma flöde går genom sekundärspolen:
+
+$$ U_2 = N_2 \\cdot \\left|\\frac{\\Delta\\Phi}{\\Delta t}\\right| = 50 \\cdot 0{,}24 = 12\\ \\mathrm{V} $$
+
+Spänningen är konstant så länge lutningen är konstant, och byter tecken när lutningen byter tecken. Med $e = -N \\cdot \\dfrac{d\\Phi}{dt}$ är $e_2 = -12\\ \\mathrm{V}$ när flödet ökar ($0$ till $5\\ \\mathrm{ms}$, $10$ till $15\\ \\mathrm{ms}$) och $e_2 = +12\\ \\mathrm{V}$ när det minskar ($5$ till $10\\ \\mathrm{ms}$, $15$ till $20\\ \\mathrm{ms}$). Spänningen hoppar alltså mellan $-12\\ \\mathrm{V}$ och $+12\\ \\mathrm{V}$ var femte millisekund, en fyrkantvåg med periodtiden $10\\ \\mathrm{ms}$.
+
+**Svar:** Spänningen över sekundärspolen har beloppet $12\\ \\mathrm{V}$. Den växlar mellan $-12\\ \\mathrm{V}$ och $+12\\ \\mathrm{V}$ var femte millisekund (fyrkantvåg).
+
+**c)** I varje ögonblick gäller för båda spolarna, med samma flödesändring $\\dfrac{d\\Phi}{dt}$:
+
+$$ \\frac{e_1}{e_2} = \\frac{-N_1 \\cdot \\dfrac{d\\Phi}{dt}}{-N_2 \\cdot \\dfrac{d\\Phi}{dt}} = \\frac{N_1}{N_2} $$
+
+Flödesändringen förkortas bort oavsett hur flödet varierar, så kvoten gäller för en triangelformad flödeskurva lika väl som för en sinuskurva. Det enda som krävs är att flödet ändras ($\\dfrac{d\\Phi}{dt} \\ne 0$). Med talen från a) och b):
+
+$$ \\frac{N_1}{N_2} = \\frac{400}{50} = 8{,}0 \\qquad \\frac{U_1}{U_2} = \\frac{96}{12} = 8{,}0 $$
+
+**Svar:** Kvoterna är lika, $8{,}0$, eftersom flödesändringen är densamma i båda spolarna och förkortas bort ur kvoten.`,
+        },
+        {
+            level: 3,
+            question: `En transformator har en primärspole och två sekundärspolar, A och B, på samma järnkärna, se figuren. Primärspolen är ansluten till $230\\ \\mathrm{V}$. När bara lampan är inkopplad är strömmen i primärspolen $0{,}10\\ \\mathrm{A}$. När även resistorn kopplas in ökar strömmen i primärspolen till $0{,}24\\ \\mathrm{A}$. Anta att transformatorn är ideal.
+
+<svg viewBox="0 0 480 250" width="651" height="339" xmlns="http://www.w3.org/2000/svg" font-family="Poppins, system-ui, sans-serif" role="img" aria-label="Transformator med en primärspole på 1 150 varv ansluten till 230 volt och två sekundärspolar på samma järnkärna. Spole A har 60 varv och är kopplad till en lampa. Spole B har okänt antal varv och är kopplad till en resistor på 18 ohm."><path d="M 150 30 L 340 30 L 340 190 L 150 190 Z M 176 56 L 314 56 L 314 164 L 176 164 Z" fill-rule="evenodd" fill="#d7dbe0" stroke="#8d939c" stroke-width="1.6"/><ellipse cx="163" cy="62" rx="22" ry="5.5" fill="none" stroke="#c87f3a" stroke-width="2.4"/><ellipse cx="163" cy="72.6" rx="22" ry="5.5" fill="none" stroke="#c87f3a" stroke-width="2.4"/><ellipse cx="163" cy="83.2" rx="22" ry="5.5" fill="none" stroke="#c87f3a" stroke-width="2.4"/><ellipse cx="163" cy="93.8" rx="22" ry="5.5" fill="none" stroke="#c87f3a" stroke-width="2.4"/><ellipse cx="163" cy="104.4" rx="22" ry="5.5" fill="none" stroke="#c87f3a" stroke-width="2.4"/><ellipse cx="163" cy="115" rx="22" ry="5.5" fill="none" stroke="#c87f3a" stroke-width="2.4"/><ellipse cx="163" cy="125.6" rx="22" ry="5.5" fill="none" stroke="#c87f3a" stroke-width="2.4"/><ellipse cx="163" cy="136.2" rx="22" ry="5.5" fill="none" stroke="#c87f3a" stroke-width="2.4"/><ellipse cx="163" cy="146.8" rx="22" ry="5.5" fill="none" stroke="#c87f3a" stroke-width="2.4"/><ellipse cx="163" cy="157.39999999999998" rx="22" ry="5.5" fill="none" stroke="#c87f3a" stroke-width="2.4"/><line x1="141" y1="62" x2="60" y2="62" stroke="#0f1620" stroke-width="1.8"/><line x1="141" y1="157.4" x2="60" y2="157.4" stroke="#0f1620" stroke-width="1.8"/><line x1="60" y1="62" x2="60" y2="94.7" stroke="#0f1620" stroke-width="1.8"/><line x1="60" y1="124.7" x2="60" y2="157.4" stroke="#0f1620" stroke-width="1.8"/><circle cx="60" cy="109.7" r="15" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><path d="M 52 109.7 Q 56 102.7 60 109.7 Q 64 116.7 68 109.7" fill="none" stroke="#0f1620" stroke-width="1.6"/><text x="38" y="114.7" text-anchor="end" font-size="14" fill="#0f1620">230 V</text><ellipse cx="327" cy="64" rx="22" ry="5.5" fill="none" stroke="#c87f3a" stroke-width="2.4"/><ellipse cx="327" cy="74" rx="22" ry="5.5" fill="none" stroke="#c87f3a" stroke-width="2.4"/><ellipse cx="327" cy="84" rx="22" ry="5.5" fill="none" stroke="#c87f3a" stroke-width="2.4"/><ellipse cx="327" cy="132" rx="22" ry="5.5" fill="none" stroke="#c87f3a" stroke-width="2.4"/><ellipse cx="327" cy="142" rx="22" ry="5.5" fill="none" stroke="#c87f3a" stroke-width="2.4"/><ellipse cx="327" cy="152" rx="22" ry="5.5" fill="none" stroke="#c87f3a" stroke-width="2.4"/><text x="296" y="79" text-anchor="end" font-size="14" fill="#0f1620">A</text><text x="296" y="147" text-anchor="end" font-size="14" fill="#0f1620">B</text><polyline points="349,64 380,64 380,44 400,44 400,61" fill="none" stroke="#0f1620" stroke-width="1.8"/><polyline points="349,84 380,84 380,104 400,104 400,87" fill="none" stroke="#0f1620" stroke-width="1.8"/><circle cx="400" cy="74" r="13" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><line x1="390.8" y1="64.8" x2="409.2" y2="83.2" stroke="#0f1620" stroke-width="1.6"/><line x1="390.8" y1="83.2" x2="409.2" y2="64.8" stroke="#0f1620" stroke-width="1.6"/><text x="420" y="79" text-anchor="start" font-size="14" fill="#0f1620">lampa</text><polyline points="349,132 380,132 380,116 400,116 400,128" fill="none" stroke="#0f1620" stroke-width="1.8"/><polyline points="349,152 380,152 380,170 400,170 400,158" fill="none" stroke="#0f1620" stroke-width="1.8"/><rect x="393" y="128" width="14" height="30" fill="#fff" stroke="#0f1620" stroke-width="1.8"/><text x="420" y="148" text-anchor="start" font-size="14" fill="#0f1620">18 Ω</text><text x="163" y="214" text-anchor="middle" font-size="14" fill="#0f1620"><tspan font-style="italic">N</tspan><tspan font-size="10" dy="3">1</tspan><tspan dy="-3"> = 1 150 varv</tspan></text><text x="163" y="234" text-anchor="middle" font-size="12" fill="#7c828c">primärspole</text><text x="327" y="214" text-anchor="middle" font-size="14" fill="#0f1620">A: 60 varv</text><text x="327" y="234" text-anchor="middle" font-size="14" fill="#0f1620">B: ? varv</text></svg>
+
+a) Hur stor är strömmen genom lampan? Svara i A.<br>b) Hur många varv har spole B?<br>c) En elev räknar ut strömmen genom lampan med $\\dfrac{N_1}{N_2} = \\dfrac{I_2}{I_1}$ och strömmen $0{,}24\\ \\mathrm{A}$ i primärspolen. Förklara varför eleven får fel svar.`,
+            answer: { value: 120, unit: 'varv' },
+            delsvar: [
+                { del: 'a', value: 1.9, unit: 'A' },
+                { del: 'b', value: 120, unit: 'varv' },
+                { del: 'c' },
+            ],
+            solution: `**a)** Spänningen över lampan fås ur sambandet för spänning, med spole A som sekundärspole:
+
+$$ \\frac{N_1}{N_\\mathrm{A}} = \\frac{U_1}{U_\\mathrm{A}} \\quad\\Leftrightarrow\\quad U_\\mathrm{A} = U_1 \\cdot \\frac{N_\\mathrm{A}}{N_1} = 230 \\cdot \\frac{60}{1\\,150} = 12\\ \\mathrm{V} $$
+
+När bara lampan är inkopplad går all effekt från primärspolen till lampan, eftersom transformatorn är ideal:
+
+$$ P_\\mathrm{A} = U_1 \\cdot I_1 = 230 \\cdot 0{,}10 = 23\\ \\mathrm{W} $$
+
+Strömmen genom lampan fås ur $P = U \\cdot I$:
+
+$$ I_\\mathrm{A} = \\frac{P_\\mathrm{A}}{U_\\mathrm{A}} = \\frac{23}{12} = 1{,}917\\ \\mathrm{A} \\approx 1{,}9\\ \\mathrm{A} $$
+
+**Svar:** Strömmen genom lampan är $1{,}9\\ \\mathrm{A}$.
+
+**b)** Spänningen över lampan bestäms bara av $U_1$ och varvtalskvoten, så den är fortfarande $12\\ \\mathrm{V}$ när resistorn kopplas in, och lampan tar fortfarande $23\\ \\mathrm{W}$. Ökningen av strömmen i primärspolen, $0{,}24 - 0{,}10 = 0{,}14\\ \\mathrm{A}$, står alltså för effekten till resistorn:
+
+$$ P_\\mathrm{B} = U_1 \\cdot \\Delta I_1 = 230 \\cdot 0{,}14 = 32{,}2\\ \\mathrm{W} $$
+
+Effekten i resistorn är $P_\\mathrm{B} = U_\\mathrm{B} \\cdot I_\\mathrm{B}$, och med Ohms lag $I_\\mathrm{B} = \\dfrac{U_\\mathrm{B}}{R}$ blir den $P_\\mathrm{B} = \\dfrac{U_\\mathrm{B}^2}{R}$. Vi löser ut spänningen över spole B:
+
+$$ P_\\mathrm{B} = \\frac{U_\\mathrm{B}^2}{R} \\quad\\Leftrightarrow\\quad U_\\mathrm{B} = \\sqrt{P_\\mathrm{B} \\cdot R} = \\sqrt{32{,}2 \\cdot 18} = 24{,}07\\ \\mathrm{V} $$
+
+Antalet varv i spole B fås ur sambandet för spänning:
+
+$$ \\frac{N_1}{N_\\mathrm{B}} = \\frac{U_1}{U_\\mathrm{B}} \\quad\\Leftrightarrow\\quad N_\\mathrm{B} = N_1 \\cdot \\frac{U_\\mathrm{B}}{U_1} = 1\\,150 \\cdot \\frac{24{,}07}{230} = 120{,}4 $$
+
+Strömmarna har två värdesiffror, så svaret avrundas till två värdesiffror. Rimlighet: spole B har ungefär dubbelt så många varv som spole A och får ungefär dubbelt så hög spänning, $24\\ \\mathrm{V}$ mot $12\\ \\mathrm{V}$.
+
+**Svar:** Spole B har cirka $120$ varv.
+
+**c)** Sambandet $\\dfrac{N_1}{N_2} = \\dfrac{I_2}{I_1}$ bygger på att all effekt i primärspolen går till en enda sekundärspole, $U_1 \\cdot I_1 = U_2 \\cdot I_2$. Här delas effekten mellan två spolar:
+
+$$ U_1 \\cdot I_1 = P_\\mathrm{A} + P_\\mathrm{B} $$
+
+Strömmen $0{,}24\\ \\mathrm{A}$ i primärspolen driver alltså både lampan och resistorn, och bara $0{,}10\\ \\mathrm{A}$ av den hör till lampan. Elevens räkning ger $I_\\mathrm{A} = 0{,}24 \\cdot \\dfrac{1\\,150}{60} = 4{,}6\\ \\mathrm{A}$, och det skulle betyda att lampan tar $12 \\cdot 4{,}6 = 55\\ \\mathrm{W}$, lika mycket som hela effekten $230 \\cdot 0{,}24 = 55\\ \\mathrm{W}$ som primärspolen tar emot. Då skulle ingenting finnas kvar till resistorn.
+
+**Svar:** Strömsambandet gäller bara när all effekt går till en sekundärspole. Här driver strömmen i primärspolen båda spolarna, så bara den del som hör till lampan, $0{,}10\\ \\mathrm{A}$, får användas.`,
+        },
+        {
+            level: 3,
+            question: `En liten transformator är ansluten till $230\\ \\mathrm{V}$. Utan belastning visar en voltmeter $12{,}0\\ \\mathrm{V}$ över sekundärspolen, som har $48$ varv. När en resistor på $4{,}0\\ \\Omega$ kopplas till sekundärspolen sjunker spänningen till $10{,}0\\ \\mathrm{V}$, eftersom sekundärspolens tråd har resistans. Beskriv sekundärspolen som en spänningskälla med den inducerade spänningen $e = 12{,}0\\ \\mathrm{V}$ och en inre resistans $r$. Anta att den inducerade spänningen inte ändras när transformatorn belastas.<br>a) Bestäm den inre resistansen $r$. Svara i Ω.<br>b) En värmeslinga märkt $12\\ \\mathrm{V}$, $18\\ \\mathrm{W}$ kopplas till sekundärspolen. Vilken effekt utvecklas i slingan? Anta att slingans resistans är konstant.<br>c) Sekundärspolen lindas om så att slingan får sin märkspänning $12\\ \\mathrm{V}$. Hur många varv ska läggas till? Anta att de nya varven inte ändrar den inre resistansen märkbart.`,
+            answer: { value: 5, unit: 'varv' },
+            delsvar: [
+                { del: 'a', value: 0.80, unit: 'Ω' },
+                { del: 'b', value: 15, unit: 'W' },
+                { del: 'c', value: 5, unit: 'varv' },
+            ],
+            solution: `**a)** Strömmen genom resistorn fås ur Ohms lag:
+
+$$ I = \\frac{U}{R} = \\frac{10{,}0}{4{,}0} = 2{,}5\\ \\mathrm{A} $$
+
+Samma ström går genom sekundärspolen. Av den inducerade spänningen faller en del, $r \\cdot I$, över spolens egen resistans, och resten ligger över resistorn:
+
+$$ U = e - r \\cdot I \\quad\\Leftrightarrow\\quad r = \\frac{e - U}{I} $$
+
+$$
+\\left[ \\begin{array}{l}
+e = 12{,}0\\ \\mathrm{V} \\\\
+U = 10{,}0\\ \\mathrm{V} \\\\
+I = 2{,}5\\ \\mathrm{A}
+\\end{array} \\right]
+$$
+
+$$ r = \\frac{12{,}0 - 10{,}0}{2{,}5} = \\frac{2{,}0}{2{,}5} = 0{,}80\\ \\Omega $$
+
+**Svar:** Den inre resistansen är $0{,}80\\ \\Omega$.
+
+**b)** Slingans resistans fås ur märkningen. Med $P = U \\cdot I$ och $I = \\dfrac{U}{R}$ är $P = \\dfrac{U^2}{R}$:
+
+$$ R = \\frac{U^2}{P} = \\frac{12^2}{18} = 8{,}0\\ \\Omega $$
+
+Strömmen går genom spolens inre resistans och slingan efter varandra, så den inducerade spänningen driver strömmen genom den sammanlagda resistansen:
+
+$$ I = \\frac{e}{R + r} = \\frac{12{,}0}{8{,}0 + 0{,}80} = 1{,}364\\ \\mathrm{A} $$
+
+Effekten i slingan är
+
+$$ P = R \\cdot I^2 = 8{,}0 \\cdot 1{,}364^2 = 14{,}88\\ \\mathrm{W} \\approx 15\\ \\mathrm{W} $$
+
+Rimlighet: spänningen över slingan blir $8{,}0 \\cdot 1{,}364 = 10{,}9\\ \\mathrm{V}$, lite under märkspänningen, så effekten ska vara lite under $18\\ \\mathrm{W}$.
+
+**Svar:** Effekten i slingan blir $15\\ \\mathrm{W}$.
+
+**c)** Vid märkspänningen $12\\ \\mathrm{V}$ ska strömmen genom slingan vara
+
+$$ I = \\frac{U}{R} = \\frac{12}{8{,}0} = 1{,}5\\ \\mathrm{A} $$
+
+Den inducerade spänningen måste då räcka både till slingan och till spänningsfallet i spolen:
+
+$$ e' = U + r \\cdot I = 12 + 0{,}80 \\cdot 1{,}5 = 13{,}2\\ \\mathrm{V} $$
+
+Alla varv på kärnan omsluter samma flöde, så den inducerade spänningen är proportionell mot antalet varv. Nu ger $48$ varv $12{,}0\\ \\mathrm{V}$, alltså $\\dfrac{12{,}0}{48} = 0{,}25\\ \\mathrm{V}$ per varv:
+
+$$ N_2' = \\frac{e'}{0{,}25} = \\frac{13{,}2}{0{,}25} = 52{,}8 $$
+
+Antalet varv måste vara ett heltal. Med $53$ varv blir $e' = 53 \\cdot 0{,}25 = 13{,}25\\ \\mathrm{V}$ och spänningen över slingan $8{,}0 \\cdot \\dfrac{13{,}25}{8{,}8} = 12{,}05\\ \\mathrm{V}$, med $52$ varv bara $11{,}8\\ \\mathrm{V}$. Vi väljer $53$ varv, alltså $53 - 48 = 5$ varv till.
+
+**Svar:** $5$ varv ska läggas till.`,
         },
     ],
 

@@ -1,0 +1,27 @@
+03:15:04  [idag] === Nyhetsjobb: start (2026-11-26) ===
+03:15:10  [idag] Dagens nyhet finns (förberedd i går).
+03:15:11  [idag] Startar Claude Code (headless, modell opus, nyckel)...
+03:20:02  [imorgon] === Nyhetsjobb: start (2026-11-26) ===
+03:20:03  [imorgon] En körning pågår redan (lås 5 min gammalt). Avslutar.
+03:33:40  [idag] I've written and committed tomorrow's article: **"Smällen från DART lämnade en krater lika bred som hela asteroiden"** ("DART's impact left a crater as wide as the whole asteroid"). The id is `2026-11-27-kratern-efter-dart`, the category is Mekanik, and the date is 2026-11-27, so it stays hidden until midnight. It's in commit `cae5fdd7` on `nyhetsjobb`. Nothing was pushed and no email was sent.
+03:33:41  [idag] 
+03:33:41  [idag] - **Story:** ESA released Hera's first close-up images on 25 November. They show a stadium-sized crater across all of Dimorphos, the asteroid now tumbling irregularly, and hundreds of metre-sized boulders orbiting the pair. The physics section explains momentum and the push factor β, why braking the asteroid made its orbit shorter, and why Hera must measure Dimorphos's mass. The numbers come from Cheng et al., Nature 616 (2023), which I read in full via arXiv. The text says plainly that Hera's results are not yet peer reviewed.
+03:33:41  [idag] - **Neighbour:** the 2026-11-26 article is atomic physics, so there's no clash. This is a space-probe story two days after BepiColombo (2026-11-25), but the angle here is collisions and momentum.
+03:33:41  [idag] - **Review:** the reviewer (utgivare) first returned "fix first" with eight points. The main ones were a wrong explanation of why the orbit got shorter, a word missing from a quote, the weak gravity attributed to the wrong asteroid, and wrong image licences. I applied all eight word for word and the follow-up check came back approved. The verdict is logged in `granskningar.md`.
+03:33:41  [idag] - **Images:** two real ESA images from Hera (the asteroid pair, and a long exposure showing the orbiting boulders), no AI image. They are not Creative Commons. The credit reads ©ESA, used under ESA's terms for education and information, as the reviewer recommended.
+03:33:41  [idag] - **Glossary:** three new entries (planetförsvar, dubbelasteroid, dopplerförskjutning). The "Prova själv" box links the simulation "Elastisk och oelastisk stöt".
+03:33:41  [idag] - **Checks:** the navigation, glossary, sitemap and fraction checks pass. The language checker's remaining errors (and the space-before-unit warnings on `readingTime`) are all in older articles.
+03:33:41  [idag] - **Logs:** `publicerat.md` is updated. I added two leads to `ko.md` (neutrino scattering, and magnetic reconnection in the lab). The gravity teaser (the lift in Queensland) is untouched and still frozen until after the 2026-11-29 newsletter.
+03:33:41  [idag] 
+03:33:41  [idag] The build rewrote hundreds of share pages and two `i18n` files with different line endings only. I didn't commit those, so they still show as modified.
+03:33:41  [idag] Claude avslutade med kod 0
+03:33:41  [idag] Kastar 672 ocommittade filändringar före rebasen (kopia i logg\ocommittat.patch).
+03:33:50  [idag] Pushat till main.
+03:33:50  [idag] Artikel 2026-11-27 pushad: 2026-11-27-kratern-efter-dart
+03:35:21  [idag] https://fysiklabbet.se/nyheter.html?forhand=2026-11-27-kratern-efter-dart
+03:35:21  [idag] Mejlet byggt av mallen (C:\claude\Fysiklabbet-nyhetsjobb\.claude\nyheter\logg\mejl-2026-11-27).
+03:35:21  [idag] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+03:36:21  [idag] Done. Mejlet skickat till [ägaren] (message-id `1a215b5f0cce9c49`), och kvittot skrivet till `mejl-kvitto.txt`.
+03:36:22  [idag] Claude avslutade med kod 0
+03:36:22  [idag] Mejlet till ägaren är skickat.
+03:36:23  [idag] === Nyhetsjobb: slut ===

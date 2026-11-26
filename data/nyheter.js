@@ -668,7 +668,7 @@ const NYHETER_ALL = [
     id: "2026-11-18-karnan-som-sander-ut-tva-partiklar-pa-en-gang",
     date: "2026-11-18",
     title: "Atomkärnor kan sända ut alfa- och betastrålning i ett enda sönderfall, föreslår fysiker",
-    deck: "En instabil atomkärna sönderfaller oftast genom att skjuta ut en alfapartikel, en elektron eller en positron, eller genom att fånga in en av atomens egna elektroner. Två fysiker i Kina och Sverige föreslår nu ett nytt sätt, där en alfapartikel och en positron eller elektron lämnar kärnan i en och samma händelse. Modellen kan förklara formen på de alfatoppar som har uppmätts hos kortlivade kärnor sedan 1970-talet, men den träffar inte toppens läge för alla kärnor, och mätningarna kan ännu inte avgöra vilken förklaring som är rätt.",
+    deck: "En instabil atomkärna sönderfaller oftast genom att skjuta ut en alfapartikel, en elektron eller en positron, eller genom att fånga in en av atomens egna elektroner. Två fysiker i Kina och Sverige föreslår nu ett nytt sätt, där en alfapartikel och en positron eller elektron lämnar kärnan i en och samma händelse. Modellen kan förklara formen på de alfatoppar som har uppmätts hos kortlivade kärnor sedan 1970-talet, men för de flesta av kärnorna hamnar den beräknade toppen på fel ställe, och mätningarna kan ännu inte avgöra vilken förklaring som är rätt.",
     category: "Kärnfysik",
     readingTime: "5 min",
     image: "nyheter/bilder/2026-11-18-karnan-som-sander-ut-tva-partiklar-pa-en-gang.jpg",

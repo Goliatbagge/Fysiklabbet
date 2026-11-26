@@ -25,3 +25,17 @@
 03:36:22  [idag] Claude avslutade med kod 0
 03:36:22  [idag] Mejlet till ägaren är skickat.
 03:36:23  [idag] === Nyhetsjobb: slut ===
+07:15:03  [idag] === Nyhetsjobb: start (2026-11-26) ===
+07:15:03  [idag] Dagens och morgondagens nyhet finns redan. Inget att göra.
+07:15:03  [idag] === Nyhetsjobb: slut ===
+07:20:01  [imorgon] === Nyhetsjobb: start (2026-11-26) ===
+07:20:01  [imorgon] Dagens och morgondagens nyhet finns redan. Inget att göra.
+07:20:01  [imorgon] === Nyhetsjobb: slut ===
+07:45:01  [svar] === Nyhetsjobb: start (2026-11-26) ===
+07:45:05  [svar] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+07:45:30  [svar] SVAR: NONE
+07:45:30  [svar] 
+07:45:30  [svar] No unprocessed owner reply found — only one thread (2026-11-27 DART-nyheten) and its last message is the job's own review email, already marked FL-JOBB.
+07:45:31  [svar] Claude avslutade med kod 0
+07:45:32  [svar] Inga obehandlade svar.
+07:45:32  [svar] === Nyhetsjobb: slut ===

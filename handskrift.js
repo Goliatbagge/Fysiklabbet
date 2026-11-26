@@ -17215,16 +17215,64 @@
   }
 
   /* ---------------- scen: triangel med given area (ma1c-4.A ex 1) --- */
+  /* Ordningen (användarkrav 2026-11-26): först koordinatsystemet och de
+   * två linjerna genom (0, 6), som skär en ograderad x-axel, med den ena
+   * triangeln skuggad, så att eleven ser att höjden är 6 och vilket
+   * område som avses. Sedan räknas basen ut, och först därefter
+   * markeras (−4, 0) och (4, 0) på x-axeln. */
   function layoutTriangellinje(cfg, F) {
     var T = mathTools(F), acts = T.acts, padL = T.padL, y, xx, xe;
     var tanke = mkTanke(T), vagg = !!cfg.vagg, ekvOp = mkEkvOp(T, vagg);
-    tanke(20, [
-      [['m=6, så linjen skär y-axeln']],
-      [['i 6. Triangeln har rät vinkel']],
-      [['i origo och höjden 6.']]
+    var ox = 12 * RUTA, oy = 9 * RUTA;
+    var A = mkAxes(T, F, { ox: ox, oy: oy, u: RUTA, xmin: -6, xmax: 6,
+                           ymin: -1, ymax: 7 });
+    A.axes();
+    A.ticks([], [6], [], [6]);
+    T.stepEnd();
+    /* två linjer genom (0, 6), en åt vardera hållet */
+    A.linjalKM(-1.5, 6, null, -0.25, 4.4);
+    T.pause(200);
+    A.linjalKM(1.5, 6, null, -4.4, 0.25);
+    T.stepEnd();
+    /* skugga triangeln mellan axlarna och den högra linjen: tunna blå
+     * snedstreck, klippta mot triangelns sidor */
+    (function () {
+      var P = [[A.X(0), A.Y(0)], [A.X(4), A.Y(0)], [A.X(0), A.Y(6)]];
+      var c, steg = 9, cMin = Infinity, cMax = -Infinity;
+      P.forEach(function (p) { var v = p[0] - p[1];
+        if (v < cMin) cMin = v; if (v > cMax) cMax = v; });
+      for (c = cMin + steg / 2; c < cMax; c += steg) {
+        var pts = [];
+        for (var i = 0; i < 3; i++) {
+          var a = P[i], b = P[(i + 1) % 3];
+          var fa = a[0] - a[1] - c, fb = b[0] - b[1] - c;
+          if (fa === fb || fa * fb > 0) continue;
+          var t = fa / (fa - fb);
+          pts.push([a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]);
+        }
+        if (pts.length < 2) continue;
+        pts.sort(function (p, q) { return p[0] - q[0]; });
+        var p0 = pts[0], p1 = pts[pts.length - 1];
+        var d = Math.hypot(p1[0] - p0[0], p1[1] - p0[1]);
+        if (d < 3) continue;
+        var k = 1.6 / d;                       /* lite luft mot kanterna */
+        acts.push({ kind: 'stroke', color: 'rgba(43,92,168,0.55)',
+                    pts: [[p0[0] + (p1[0] - p0[0]) * k, p0[1] + (p1[1] - p0[1]) * k],
+                          [p1[0] - (p1[0] - p0[0]) * k, p1[1] - (p1[1] - p0[1]) * k]] });
+      }
+    })();
+    T.stepEnd();
+    /* basen b under triangeln */
+    T.str('b', (A.X(0) + A.X(4)) / 2 - T.adv('b', 0.5) / 2, oy + 0.95 * F, BLUE, 0.5);
+    T.stepEnd();
+    y = oy + 2.4 * F;
+    tanke(y, [
+      [['Triangeln har rät vinkel i origo.']],
+      [['Höjden är 6 och basen kallar']],
+      [['jag b.']]
     ], 0);
-    y = 170;
-    T.str('Höjden är 6, basen är b', padL, y - 2.1 * F, null, 0.62);
+    y = Math.max(y + 2.6 * F, oy + 5.4 * F);
+    T.str('Triangelns area', padL, y - 2.1 * F, null, 0.62);
     xx = T.fracH('b·6', '2', padL, y);
     xx = T.str('=12', xx, y);
     T.stepEnd();
@@ -17238,20 +17286,13 @@
       [['Basen kan gå 4 steg åt höger,']],
       [['men också 4 steg åt vänster.']]
     ]);
-    var ox = 13 * RUTA, oy = Math.round((y + 10.2 * F) / RUTA) * RUTA;
-    var A = mkAxes(T, F, { ox: ox, oy: oy, u: RUTA, xmin: -6, xmax: 6,
-                           ymin: -1, ymax: 7 });
-    A.axes();
-    A.ticks([-4, 4], [6], [], []);
-    A.tag(0, 6, '6', 18, 5);
+    A.dot(4, 0);
+    A.tag(4, 0, '(4, 0)', 10, -9);
+    T.pause(250);
+    A.dot(-4, 0);
+    A.tag(-4, 0, '(−4, 0)', -10 - T.adv('(−4, 0)', 0.5), -9);
     T.stepEnd();
-    A.linjalKM(-1.5, 6, null, -0.6, 4.7);
-    A.tag(4, 0, '(4, 0)', 12, -14);
-    T.stepEnd();
-    A.linjalKM(1.5, 6, null, -4.7, 0.6);
-    A.tag(-4, 0, '(−4, 0)', -12 - T.adv('(−4, 0)', 0.5), -14);
-    T.stepEnd();
-    y = oy + 5.6 * F;
+    y += 4.4 * F;
     T.str('Linjen genom (0, 6) och (4, 0)', padL, y - 2.1 * F, null, 0.62);
     xx = T.str('k=', padL, y);
     xx = T.fracH('0-6', '4-0', xx, y);

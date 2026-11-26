@@ -93,7 +93,7 @@ bort hela raden om även `ig:` redan är postad. Rör aldrig `ig:`-fältet.
 
 ## Faktagranskning före publicering (obligatorisk)
 
-**Ingen text publiceras på Facebook utan att utgivaren har godkänt den**
+**Ingen text publiceras på Facebook utan att utgivaren OCH fysikgranskaren har godkänt den**
 (uttryckligt krav 2026-11-26). Inläggen granskades tidigare inte alls, och
 det märktes: när en artikel kortas ned till fyra meningar försvinner
 förbehållen, en uppräkning blir "bara en handfull sätt" och ett fel i
@@ -102,29 +102,32 @@ utelämnade elektroninfångning och spontan fission, påpekat av en
 fysiklärare i kommentarerna). Texten på Facebook läses av fler än
 artikeln och ska vara lika korrekt.
 
-1. **Skriv färdigt inlägget (steg 2)** och starta sedan agenten **`utgivare`**
-   (verktyget `Agent`, `subagent_type: "utgivare"`) med en prompt som
-   börjar `SoMe-granskning.` och innehåller kanalen (Facebook), artikelns `id` i `data/nyheter.js`
+1. **Skriv färdigt inlägget (steg 2)** och starta sedan BÅDA granskarna parallellt, i samma meddelande:
+   agenterna **`utgivare`** och **`fysikgranskare`** (verktyget `Agent`,
+   `subagent_type` respektive namn). Utgivaren läser texten mot artikeln
+   och källorna, fysikgranskaren prövar att varje fysikaliskt påstående
+   är rätt, oberoende av artikeln (artikeln kan själv vara fel). Båda får
+   en prompt som börjar `SoMe-granskning.` och innehåller kanalen (Facebook), artikelns `id` i `data/nyheter.js`
    och hela texten ordagrant, inklusive hashtags. Utgivaren följer
    avsnittet "Granskning av inlägg i sociala medier" i
-   `.claude/agents/utgivare.md`.
-2. **GODKÄND** → publicera exakt den granskade texten. Ändra inte ett ord
+   `.claude/agents/utgivare.md`, fysikgranskaren `.claude/agents/fysikgranskare.md`.
+2. **GODKÄND av båda** → publicera exakt den granskade texten. Ändra inte ett ord
    efteråt; en ändring kräver en ny granskning.
-3. **RÄTTA FÖRST** → skriv om enligt rättningarna och låt utgivaren
-   granska den nya texten. Högst tre omgångar.
-4. **STOPPAD, eller fortfarande inte godkänd efter tre omgångar** →
+3. **RÄTTA FÖRST från någon av dem** → skriv om enligt rättningarna och
+   låt BÅDA granska den nya texten. Högst tre omgångar.
+4. **STOPPAD från någon av dem, eller fortfarande inte godkänd efter tre omgångar** →
    publicera INGENTING i dag. Skriv i loggen
-   `nyhet: stoppad av utgivaren (<skäl>)` och avsluta. Hellre ett
+   `nyhet: stoppad av granskningen (<granskare>: <skäl>)` och avsluta. Hellre ett
    uteblivet inlägg än ett felaktigt.
-5. **Pekar utgivaren ut ett fel i själva artikeln eller på sajten**: för
+5. **Pekar någon av granskarna ut ett fel i själva artikeln eller på sajten**: för
    inte felet vidare, skriv inlägget så att det är korrekt, och lägg en
    egen rad i loggen, `artikelfel: <id eller fil>: <vad som är fel>`, så
    att användaren kan rätta källan. Rätta aldrig artikeln själv här.
-6. **Saknas verktyget `Agent`** i körningen: gör hela protokollet i
-   utgivarens avsnitt själv, som ett separat och självkritiskt pass efter
+6. **Saknas verktyget `Agent`** i körningen: gör båda protokollen själv
+   (utgivarens avsnitt och `fysikgranskare.md`), som två separata pass efter
    att texten är skriven, och skriv `(utan oberoende agent)` i loggraden.
 7. Skriv utslaget i loggen, till exempel
-   `granskning: GODKÄND av utgivaren (2 omgångar)`.
+   `granskning: GODKÄND av utgivaren och fysikgranskaren (2 omgångar)`.
 
 ## 3. Publicera
 

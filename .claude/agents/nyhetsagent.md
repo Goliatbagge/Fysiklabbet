@@ -139,16 +139,30 @@ lärare. Kvalitet och korrekthet går alltid före tempo.
     (varje träff stäms av mot originalets *billion/trillion* och mot en
     rimlighetsberäkning). Se Skrivregler: svenska facktermer och räkneord.
 
-11. **Utgivargranskning FÖRE publicering (obligatorisk).** Artikeln får inte
-    committas/pushas förrän den oberoende utgivaren har godkänt den:
-    - Körs du i en session som kan starta subagenter: be huvudsessionen köra
-      agenten **`utgivare`** (`.claude/agents/utgivare.md`) på den nya
-      artikeln. Kan du själv inte starta agenter: genomför i stället HELA
+11. **Utgivar- och fysikgranskning FÖRE publicering (obligatorisk).** Artikeln
+    får inte committas/pushas förrän BÅDE den oberoende utgivaren OCH den
+    oberoende fysikgranskaren har godkänt den. Utgivaren granskar texten
+    mot studien (siffror, citat, förbehåll, källor). Fysikgranskaren
+    (`.claude/agents/fysikgranskare.md`) granskar att fysiken är rätt,
+    mening för mening, också det som inte kommer från studien:
+    bakgrundsförklaringar, uppräkningar, definitioner och facktermer.
+    Den uppdelningen finns för att utgivaren ensam släppte igenom en
+    felaktig ingress 2026-11-18 (alfa, beta och gamma som "några få kända
+    sätt" att sönderfalla; elektroninfångning och fission saknades, och
+    gamma ändrar inte kärnan). Felet upptäcktes av en fysiklärare på
+    Facebook. Sajtens trovärdighet hänger på att sådant aldrig händer.
+    - Kör de två agenterna **parallellt**, i samma meddelande: **`utgivare`**
+      och **`fysikgranskare`**, var och en på den nya artikeln. Ändras
+      texten efter granskningen ska BÅDA granska den nya versionen, även
+      om bara den ena hade invändningar; en rättning kan själv vara fel.
+    - Kan du själv inte starta agenter: genomför båda protokollen som två
+      separata, självkritiska pass och logga båda utslagen. För utgivarens
+      del innebär det att du genomför HELA
       granskningsprotokollet i `utgivare.md` (abstract + metoddel i
       originalpublikationen, peer review-status, varje siffra, varje citat)
       som ett separat, självkritiskt pass — och logga utslaget i
       `.claude/nyheter/granskningar.md` som utgivaren skulle gjort.
-    - Utslag **GODKÄND** → gå vidare till steg 12. **RÄTTA FÖRST** → åtgärda
+    - **Båda** utslagen **GODKÄND** → gå vidare till steg 12. **RÄTTA FÖRST** → åtgärda
       varje punkt, kör om berörda verifierare och låt granskningen göras om.
       **STOPPAD** → publicera inte; ta nästa nyhet ur kön eller rapportera
       till användaren.

@@ -45638,22 +45638,24 @@
     /* d) gamma */
     y += adv + 2.2 * F;
     T.tanke(T.bubble(120, T.bubbleTop(y - adv, 0.6), bw, [
-      [['d) Vid γ-sönderfall ändras']],
-      [['ingenting i kärnan — bara']],
-      [['energin. Fotonen tar']],
-      [['mellanskillnaden.']]
+      [['d) Vid γ-sönderfall ändras inte']],
+      [['antalet protoner och neutroner,']],
+      [['bara kärnans energi. Fotonen']],
+      [['tar mellanskillnaden.']]
     ]));
-    T.str('d) γ-sönderfall av Kobolt-60', padL, y, null, 0.62);
+    T.str('d) γ-sönderfall av Nickel-60', padL, y, null, 0.62);
     T.pause(300);
     y += 2.1 * F;
-    T.str('Co (1,33 MeV)→Co (1,17 MeV)+γ (0,16 MeV)', padL, y, null, 0.8);
+    /* Nickel-60:s nivåer 2,506 och 1,333 MeV; fotonen 1,173 MeV (en av
+       kobolt-60-preparatens två gammalinjer). */
+    T.str('Ni (2,506 MeV)→Ni (1,333 MeV)+γ (1,173 MeV)', padL, y, null, 0.68);
     T.stepEnd();
 
     /* e) neutroninfångning */
     y += adv + 2.2 * F;
     T.tanke(T.bubble(120, T.bubbleTop(y - adv, 0.4), bw, [
       [['e) Först fångas en neutron in,']],
-      [['sedan sker ett β-sönderfall. Jag']],
+      [['sedan betasönderfaller Co-60. Jag']],
       [['balanserar masstal och']],
       [['atomnummer som vanligt.']]
     ]));
@@ -45666,7 +45668,8 @@
     x = T.str('→', x + 0.10 * F, y);
     x = nuklid(T, F, 60, 28, 'Ni', x + 0.10 * F, y);
     x = T.str('+', x + 0.06 * F, y);
-    nuklid(T, F, 0, '−1', 'e', x + 0.06 * F, y);
+    x = nuklid(T, F, 0, '−1', 'e', x + 0.06 * F, y);
+    T.str('+ν', x + 0.06 * F, y);
     T.stepEnd();
 
     y += adv + 1.9 * F;

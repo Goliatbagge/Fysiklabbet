@@ -1152,6 +1152,7 @@
                              [58, 52]]] },
     /* upphöjt plus — för β⁺ */
     '⁺': { w: 52, strokes: [[[14, 30], [44, 30]], [[29, 16], [29, 45]]] },
+    '⁻': { w: 52, strokes: [[[14, 30], [44, 30]]] },   /* som ⁺ utan lodstrecket (β⁻) */
     /* rho (densitet): en rund ögla som skrivs i ETT drag nerifrån, med
      * ett SNETT ben som börjar under öglan till vänster. Benet når aldrig
      * upp över öglan, till skillnad från p:s raka stapel som börjar i
@@ -45584,8 +45585,8 @@
     y += adv + 2.0 * F;
     T.tanke(T.bubble(120, T.bubbleTop(y - adv, 0.4), bw, [
       [['a) Vid α-sönderfall sänds en']],
-      [['heliumkärna ut: 4 masstal och']],
-      [['2 atomnummer försvinner.']]
+      [['heliumkärna ut. Masstalet minskar']],
+      [['med 4 och atomnumret med 2.']]
     ]));
     T.str('a) α-sönderfall av Radium-226', padL, y, null, 0.62);
     T.pause(300);
@@ -45605,7 +45606,7 @@
       [['Masstalet står still men']],
       [['atomnumret ÖKAR med 1.']]
     ]));
-    T.str('b) β-sönderfall av Kol-14', padL, y, null, 0.62);
+    T.str('b) β⁻-sönderfall av Kol-14', padL, y, null, 0.62);
     T.pause(300);
     y += 2.1 * F;
     x = nuklid(T, F, 14, 6, 'C', padL, y);
@@ -45620,7 +45621,7 @@
     y += adv + 2.2 * F;
     T.tanke(T.bubble(120, T.bubbleTop(y - adv, 0.6), bw, [
       [['c) Vid β⁺-sönderfall blir en']],
-      [['proton till en neutron —']],
+      [['proton till en neutron, och']],
       [['atomnumret MINSKAR med 1 i']],
       [['stället.']]
     ]));
@@ -45648,14 +45649,17 @@
     y += 2.1 * F;
     /* Nickel-60:s nivåer 2,506 och 1,333 MeV; fotonen 1,173 MeV (en av
        kobolt-60-preparatens två gammalinjer). */
-    T.str('Ni (2,506 MeV)→Ni (1,333 MeV)+γ (1,173 MeV)', padL, y, null, 0.68);
+    x = nuklid(T, F, 60, 28, 'Ni', padL, y);
+    x = T.str(' (2,506 MeV)→', x + 0.04 * F, y, null, 0.56);
+    x = nuklid(T, F, 60, 28, 'Ni', x + 0.04 * F, y);
+    T.str(' (1,333 MeV)+γ (1,173 MeV)', x + 0.04 * F, y, null, 0.56);
     T.stepEnd();
 
     /* e) neutroninfångning */
     y += adv + 2.2 * F;
     T.tanke(T.bubble(120, T.bubbleTop(y - adv, 0.4), bw, [
       [['e) Först fångas en neutron in,']],
-      [['sedan betasönderfaller Co-60. Jag']],
+      [['sedan β⁻-sönderfaller Co-60. Jag']],
       [['balanserar masstal och']],
       [['atomnummer som vanligt.']]
     ]));

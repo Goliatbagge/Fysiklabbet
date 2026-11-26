@@ -84,6 +84,41 @@ därför filmen åt båda kanalerna:
 - Går det inte att få en film som visar förloppet, eller är lanseringen
   ingen simulering: stillbild enligt steg 3, och logga varför.
 
+## Faktagranskning före publicering (obligatorisk)
+
+**Ingen text publiceras på Facebook utan att utgivaren har godkänt den**
+(uttryckligt krav 2026-11-26). Inläggen granskades tidigare inte alls, och
+det märktes: när en artikel kortas ned till fyra meningar försvinner
+förbehållen, en uppräkning blir "bara en handfull sätt" och ett fel i
+ingressen följer med ut (inlägget om alfa-beta-sönderfallet 2026-11-18
+utelämnade elektroninfångning och spontan fission, påpekat av en
+fysiklärare i kommentarerna). Texten på Facebook läses av fler än
+artikeln och ska vara lika korrekt.
+
+1. **Skriv färdigt inlägget (steg 2)** och starta sedan agenten **`utgivare`**
+   (verktyget `Agent`, `subagent_type: "utgivare"`) med en prompt som
+   börjar `SoMe-granskning.` och innehåller kanalen (Facebook), vad som lanserades (sidans filnamn, och avsnittets id om inlägget pekar på en genomgång)
+   och hela texten ordagrant, inklusive hashtags. Utgivaren följer
+   avsnittet "Granskning av inlägg i sociala medier" i
+   `.claude/agents/utgivare.md`.
+2. **GODKÄND** → publicera exakt den granskade texten. Ändra inte ett ord
+   efteråt; en ändring kräver en ny granskning.
+3. **RÄTTA FÖRST** → skriv om enligt rättningarna och låt utgivaren
+   granska den nya texten. Högst tre omgångar.
+4. **STOPPAD, eller fortfarande inte godkänd efter tre omgångar** →
+   publicera INGENTING i dag. Skriv i loggen
+   `lansering: stoppad av utgivaren (<skäl>)` och avsluta. Hellre ett
+   uteblivet inlägg än ett felaktigt.
+5. **Pekar utgivaren ut ett fel i själva artikeln eller på sajten**: för
+   inte felet vidare, skriv inlägget så att det är korrekt, och lägg en
+   egen rad i loggen, `artikelfel: <id eller fil>: <vad som är fel>`, så
+   att användaren kan rätta källan. Rätta aldrig artikeln själv här.
+6. **Saknas verktyget `Agent`** i körningen: gör hela protokollet i
+   utgivarens avsnitt själv, som ett separat och självkritiskt pass efter
+   att texten är skriven, och skriv `(utan oberoende agent)` i loggraden.
+7. Skriv utslaget i loggen, till exempel
+   `granskning: GODKÄND av utgivaren (2 omgångar)`.
+
 ## 3. Publicera
 
 **Reel (filmen från 2b): via Business Suites reel-verktyg.** Sidans

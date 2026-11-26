@@ -41,6 +41,9 @@ $verktyg = @(
     'Read'
     'Grep'
     'Glob'
+    'Agent'                # utgivaren granskar texten fore publicering
+    'WebFetch'             # ... och behover kunna lasa kallorna
+    'WebSearch'
     'Edit(.claude/facebook/logg.md)'
     'Bash(git log:*)'
     # Reels (sedan 2026-09-05): spela in simuleringen, granska en bildruta

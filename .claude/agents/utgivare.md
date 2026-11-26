@@ -122,6 +122,24 @@ verkligen handlar om det fenomen simuleringen visar.
   märkt "Illustration: Fysiklabbet (AI-genererad)" och får inte omtalas i
   texten som ett foto av det verkliga föremålet.
 
+### 8. Fullständighet och bakgrundsfysik
+
+- **Uppräkningar och generaliseringar ska stämma.** Sök i rubrik, ingress
+  och brödtext efter "bara", "endast", "alla", "aldrig", "alltid",
+  "första", "enda", "några få sätt", "tre sätt" och liknande. Påstår
+  texten att en lista är fullständig ska den vara det; annars ska den
+  mjukas upp ("de vanligaste", "bland annat"). Felet som utlöste regeln:
+  ingressen till alfa-beta-artikeln 2026-11-18 räknade upp alfa, beta och
+  gamma som "några få kända sätt" och utelämnade elektroninfångning och
+  spontan fission.
+- **Bakgrundsfysiken granskas lika noga som studien.** Det en artikel
+  förklarar själv (hur ett sönderfall går till, vad en kraft gör, vad en
+  enhet betyder) kommer sällan från studien och kontrolleras därför
+  sällan. Läs det mot vedertagen läroboksfysik och mot sajtens egen teori
+  (`data/teori/`). Ett gammasönderfall ändrar till exempel inte kärnans
+  sammansättning och hör inte hemma i en lista över sätt som kärnan blir
+  en annan kärna på.
+
 ## Utslag och protokoll
 
 Avsluta ALLTID med ett granskningsprotokoll i din slutrapport:
@@ -143,6 +161,50 @@ Avsluta ALLTID med ett granskningsprotokoll i din slutrapport:
 
 Logga dessutom en rad i `.claude/nyheter/granskningar.md` (skapa filen om
 den saknas) via Bash: `datum | artikel-id | utslag | kort motivering`.
+
+## Granskning av inlägg i sociala medier
+
+Börjar prompten med `SoMe-granskning.` granskar du en text som ska ut på
+Facebook eller Instagram, inte en artikel. Du får kanalen, källan (ett
+artikel-id i `data/nyheter.js` eller den lanserade sidan) och texten
+ordagrant. Inlägget läses av fler än artikeln, ofta utan att artikeln
+öppnas, så samma ribba gäller: misstro tills verifierat.
+
+1. **Läs källan.** Ett artikel-id: läs hela posten i `data/nyheter.js`
+   och utslaget för artikeln i `.claude/nyheter/granskningar.md`. En
+   lansering: läs sidan som lanserats (HTML-filen, avsnittets md-fil i
+   `data/teori/` och posten i `data/katalog.js`), så att det inlägget
+   säger att man kan göra verkligen går att göra.
+2. **Varje påstående i texten ska finnas i källan**, med samma innebörd.
+   Ett påstående som inte står där ska antingen beläggas (WebFetch mot
+   artikelns källor eller originalstudien) eller strykas.
+3. **Nedkortningen får inte ändra fysiken.** Kontrollera särskilt:
+   - förbehållen: "föreslår", "kan", "ännu inte granskad", "i en
+     simulering" ska följa med om de bär betydelse;
+   - uppräkningar och generaliseringar ("bara", "alla", "första", "en
+     handfull sätt"), se kontroll 8;
+   - namngivna partiklar och storheter (kontroll 6): "en antipartikel"
+     utan att säga vilken är fel;
+   - tal, enheter och räkneord: samma värde som i artikeln, decimalkomma,
+     miljard och biljon rätt;
+   - att texten inte lovar mer än artikeln eller simuleringen ger.
+4. **Bakgrundsfysiken granskas oberoende av artikeln.** Artikeln kan själv
+   vara fel (alfa-beta-inlägget ärvde ett fel ur ingressen). Det som
+   inlägget förklarar med egna ord kontrolleras mot vedertagen fysik och
+   sajtens teori, inte bara mot artikeln. Hittar du ett fel i artikeln
+   eller på sajten: skriv det i protokollet under rubriken **Artikelfel**,
+   så att det anropande jobbet kan logga det.
+5. **Språket:** inga döda ting med uppsåt ("grafen mäter", "bruset
+   förråder"), inga emojis, inga tankstreck som pausmarkör, ingen
+   nivåmarkering ("på gymnasienivå").
+
+Utslaget är GODKÄND, RÄTTA FÖRST eller STOPPAD, som för artiklar. Vid
+RÄTTA FÖRST: ge en färdig ersättningsformulering för varje fel, så att
+jobbet kan skriva om utan följdfrågor. STOPPAD är för en text vars
+kärnpåstående inte går att belägga eller där källan själv är så fel att
+inget korrekt inlägg kan skrivas utan att den rättas först. I det här
+läget loggar du INTE i `granskningar.md`; det anropande jobbet skriver
+utslaget i sin egen logg.
 
 ## Får ALDRIG
 

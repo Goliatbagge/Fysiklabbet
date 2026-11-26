@@ -44959,6 +44959,377 @@
     return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
   }
 
+  /* ---------------- scen: elementarpartikel eller inte (fy1-9.6 Ex 1) --
+   * En partikel i taget: vad den består av, och om den alltså är en
+   * elementarpartikel. Svaret står i blått till höger på varje rad. */
+  function layoutElementarpartiklar(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292, xs = 470;
+
+    var y = 104;
+    T.tanke(T.bubble(96, 44, bw, [
+      [['En elementarpartikel är inte']],
+      [['uppbyggd av några mindre']],
+      [['delar. Jag prövar en i taget.']]
+    ]));
+    T.str('Elementarpartikel?', padL, y, null, 0.62);
+    T.stepEnd();
+
+    var rader = [
+      ['elektron: en lepton', 'ja', 'Elektronen är en lepton.'],
+      ['neutron: kvarkarna udd', 'nej', 'Neutronen är byggd av tre kvarkar.'],
+      ['myon: en lepton', 'ja', 'Myonen är också en lepton.'],
+      ['proton: kvarkarna uud', 'nej', 'Protonen är byggd av tre kvarkar.'],
+      ['foton: kraftförmedlare', 'ja', 'Fotonen förmedlar den elektro-'],
+      ['nedkvark: en kvark', 'ja', 'Kvarkarna är elementarpartiklar.'],
+      ['heliumkärna: 2 p och 2 n', 'nej', 'Heliumkärnan är byggd av nukleoner.']
+    ];
+    y += 1.1 * F;
+    for (var i = 0; i < rader.length; i++) {
+      y += 1.45 * F;
+      if (i === 4) {
+        T.tanke(T.bubble(120, T.bubbleTop(y - adv, 0.4), bw, [
+          [['Fotonen förmedlar den']],
+          [['elektromagnetiska växelverkan.']],
+          [['Den är en elementarpartikel.']]
+        ]));
+      }
+      T.str(rader[i][0], padL, y, null, 0.7);
+      T.str(rader[i][1], xs, y, BLUE, 0.7);
+      T.stepEnd();
+    }
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Protonen och neutronen är']],
+      [['alltså inte elementarpartiklar,']],
+      [['fast de ofta kallas så i äldre']],
+      [['böcker.']]
+    ]));
+    T.underline(T.str('Svar: Elektronen, myonen, fotonen', padL, y), y);
+    y += 1.6 * F;
+    T.underline(T.str('och nedkvarken', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: protonens och neutronens laddning (fy1-9.6 Ex 2) --
+   * Laddningen är summan av kvarkarnas laddningar. Bråken skrivs med
+   * vågrätt bråkstreck, och e följer med i varje term. */
+  function layoutNukleonladdning(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292, g = 0.12 * F;
+
+    function term(x, y, tal, namn, sista) {
+      x = T.fracH(tal, '3', x, y);
+      return T.str(sista ? '·e=' : namn, x + g, y);
+    }
+
+    var y = 104;
+    T.tanke(T.bubble(96, 44, bw, [
+      [['Laddningen är summan av']],
+      [['kvarkarnas laddningar.']],
+      [['Uppkvarken har +2/3 e och']],
+      [['nedkvarken −1/3 e.']]
+    ]));
+    T.str('Summan av laddningarna', padL, y, null, 0.62);
+    T.stepEnd();
+
+    /* ---- a) protonen ---- */
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv, 0.4), bw, [
+      [['Protonen har två uppkvarkar']],
+      [['och en nedkvark: uud.']]
+    ]));
+    T.str('a) Protonen: uud', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.6 * F;
+    var x = T.str('q=', padL, y);
+    x = term(x, y, '2', '·e+');
+    x = term(x, y, '2', '·e−');
+    x = term(x, y, '1', '', true);
+    x = T.fracH('3', '3', x, y);
+    T.str('·e=e', x + g, y);
+    T.stepEnd();
+
+    y += adv + 1.6 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['e är elementarladdningen.']],
+      [['Protonen har precis en']],
+      [['elementarladdning.']]
+    ]));
+    T.str('q=1,602·10^−^19 C', padL, y);
+    T.stepEnd();
+
+    y += adv + 1.2 * F;
+    T.underline(T.str('Svar: +1,602·10^−^19 C', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) neutronen ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv, 0.4), bw, [
+      [['Neutronen har en uppkvark']],
+      [['och två nedkvarkar: udd.']]
+    ]));
+    T.str('b) Neutronen: udd', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.6 * F;
+    x = T.str('q=', padL, y);
+    x = term(x, y, '2', '·e−');
+    x = term(x, y, '1', '·e−');
+    x = T.fracH('1', '3', x, y);
+    T.str('·e=0', x + g, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Laddningarna tar ut varandra.']],
+      [['Det stämmer med att neutronen']],
+      [['är oladdad.']]
+    ]));
+    T.underline(T.str('Svar: 0, neutronen är oladdad', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: tre kvarkar med laddningen −e (fy1-9.6 Ex 3) --
+   * Alla fyra kombinationer av u och d prövas. Laddningen räknas i
+   * enheten e, så att raderna blir korta. */
+  function layoutTredkvarkar(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292, g = 0.12 * F;
+
+    var y = 104;
+    T.tanke(T.bubble(96, 44, bw, [
+      [['Tre kvarkar som bara är u och']],
+      [['d går att sätta ihop på fyra']],
+      [['sätt. Jag prövar alla fyra.']]
+    ]));
+    T.str('Laddning i enheten e', padL, y, null, 0.62);
+    T.stepEnd();
+
+    var komb = [
+      ['uuu', ['2', '+'], ['2', '+'], ['2', '=2']],
+      ['uud', ['2', '+'], ['2', '−'], ['1', '=1']],
+      ['udd', ['2', '−'], ['1', '−'], ['1', '=0']],
+      ['ddd', ['1', '−'], ['1', '−'], ['1', '=−1']]
+    ];
+    var yDDD = 0, xDDD = 0;
+    y += 0.6 * F;
+    for (var i = 0; i < komb.length; i++) {
+      y += 2.5 * F;
+      if (i === 1) {
+        T.tanke(T.bubble(120, T.bubbleTop(y - adv, 0.4), bw, [
+          [['Varje gång en u byts mot en d']],
+          [['minskar laddningen med 1 e.']]
+        ]));
+      }
+      var xNamn = T.str(komb[i][0], padL, y);
+      var x = T.str(i === 3 ? ': −' : ': ', xNamn, y);
+      for (var j = 1; j <= 3; j++) {
+        x = T.fracH(komb[i][j][0], '3', x, y);
+        x = T.str(komb[i][j][1], x + g, y);
+      }
+      if (i === 3) { yDDD = y; xDDD = xNamn; }
+      T.stepEnd();
+    }
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Bara ddd ger laddningen −e.']],
+      [['Partikeln finns och kallas']],
+      [['delta minus.']]
+    ]));
+    T.ring(padL + 0.15 * F, xDDD + 0.05 * F, yDDD);
+    T.underline(T.str('Svar: Tre nedkvarkar, ddd', padL, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: betasönderfall på kvarknivå (fy1-9.6 Ex 4) --
+   * a) udd blir uud: en d blir u. b) Laddningen före och efter i
+   * d → u + e⁻ + antineutrino. Antineutrinons streck ritas för hand
+   * över ν, eftersom glyfen saknar streck. */
+  function layoutBetakvark(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292, g = 0.12 * F;
+
+    var y = 104;
+    T.tanke(T.bubble(96, 44, bw, [
+      [['Neutronen är udd och']],
+      [['protonen är uud. Jag jämför']],
+      [['kvarkarna.']]
+    ]));
+    T.str('a) Neutron blir proton', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    var x = T.str('udd', padL, y);
+    x = T.str('→', x + 0.10 * F, y);
+    T.str('uud', x + 0.10 * F, y);
+    T.stepEnd();
+
+    y += adv + 1.4 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Ett d har blivit ett u.']]
+    ]));
+    T.underline(T.str('Svar: En nedkvark blir en uppkvark', padL, y), y);
+    T.stepEnd();
+
+    /* ---- b) laddningen ---- */
+    y += adv + 2.0 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv, 0.4), bw, [
+      [['Samtidigt sänds en elektron']],
+      [['och en antineutrino ut.']]
+    ]));
+    T.str('b) Laddningen före och efter', padL, y, null, 0.62);
+    T.pause(300);
+    y += 2.1 * F;
+    x = T.str('d→u+e^−+', padL, y);
+    var xNu = T.str('ν', x, y);
+    T.line([x + 0.06 * F, y - 0.78 * F], [xNu - 0.04 * F, y - 0.78 * F]);
+    T.stepEnd();
+
+    y += adv + 1.6 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Före finns bara nedkvarken.']]
+    ]));
+    x = T.str('Före: q=−', padL, y);
+    x = T.fracH('1', '3', x, y);
+    T.str('·e', x + g, y);
+    T.stepEnd();
+
+    y += adv + 1.9 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Efter: uppkvarken, elektronen']],
+      [['med −e och den oladdade']],
+      [['antineutrinon.']]
+    ]));
+    x = T.str('Efter: q=', padL, y);
+    x = T.fracH('2', '3', x, y);
+    x = T.str('·e−e+0=−', x + g, y);
+    x = T.fracH('1', '3', x, y);
+    T.str('·e', x + g, y);
+    T.stepEnd();
+
+    y += adv + 1.6 * F;
+    T.tanke(T.bubble(120, T.bubbleTop(y - adv), bw, [
+      [['Samma laddning före och efter.']],
+      [['Laddningen bevaras.']]
+    ]));
+    x = T.str('Svar: −', padL, y);
+    x = T.fracH('1', '3', x, y);
+    T.underline(T.str('·e både före och efter', x + g, y), y);
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
+  /* ---------------- scen: planera ett pendelförsök (fy1-1.3 Ex 1) --
+   * Figuren (stativ, snöre, vikt och längden l) ritas först. Sedan skrivs
+   * planeringens delar en i taget, i den ordning checklistan i avsnittet
+   * har dem. Texten är mindre än vanligt eftersom planeringen är löptext. */
+  function layoutPlanerapendel(cfg, F) {
+    var T = physTools(F), acts = T.acts, padL = T.padL;
+    var adv = 1.7 * F, bw = 292, rs = 0.56, rad = 1.25 * F;
+
+    /* ---- figur: stativ med pendel ---- */
+    var bx = 70, by = 300, topY = 70, armX = 250, bobY = 250;
+    T.tanke(T.bubble(370, 180, bw, [
+      [['Ritar försöket: en vikt i ett']],
+      [['snöre som hänger i ett stativ.']]
+    ]));
+    T.line([bx - 30, by], [bx + 70, by]);
+    T.line([bx, by], [bx, topY]);
+    T.line([bx, topY + 10], [armX + 10, topY + 10]);
+    T.pause(150);
+    T.line([armX, topY + 10], [armX, bobY - 13]);
+    T.circle(armX, bobY, 13);
+    T.pause(150);
+    /* utslaget: viktens läge när den dras ut, streckat */
+    var ang = 16 * Math.PI / 180, L = bobY - topY - 10;
+    var ex = armX + Math.sin(ang) * L, ey = topY + 10 + Math.cos(ang) * L;
+    T.dash([armX, topY + 10], [ex - Math.sin(ang) * 13, ey - Math.cos(ang) * 13]);
+    T.circle(ex, ey, 13);
+    T.stepEnd();
+
+    T.tanke(T.bubble(370, 180, bw, [
+      [['Längden l mäts från upp-']],
+      [['hängningen till viktens mitt.']]
+    ]));
+    T.dblArrow([armX - 26, topY + 10], [armX - 26, bobY], BLUE);
+    T.lbl('l', armX - 46, (topY + bobY) / 2 + 8, BLUE);
+    T.stepEnd();
+
+    var y = by + 2.2 * F;
+    function rubrik(txt) {
+      y += 0.6 * F;
+      T.str(txt, padL, y, null, 0.62);
+      y += rad;
+    }
+    function rad1(txt) {
+      T.str(txt, padL + 20, y, null, rs);
+      y += rad;
+    }
+
+    T.tanke(T.bubble(120, y + 0.2 * F, bw, [
+      [['Först frågan, och vad som']],
+      [['ändras, mäts och hålls']],
+      [['konstant.']]
+    ]));
+    rubrik('Frågeställning');
+    rad1('Beror periodtiden T på längden l?');
+    T.stepEnd();
+
+    rubrik('Variabler');
+    rad1('Ändras: längden l (oberoende variabel)');
+    rad1('Mäts: periodtiden T (beroende variabel)');
+    rad1('Konstant: vikten och utslaget');
+    T.stepEnd();
+
+    T.tanke(T.bubble(120, y + 0.2 * F, bw, [
+      [['Numrerade steg, så att en']],
+      [['klasskamrat kan följa dem.']]
+    ]));
+    rubrik('Genomförande');
+    rad1('1. Mät l med måttbandet.');
+    rad1('2. Dra ut vikten 10 cm och släpp den.');
+    rad1('3. Mät tiden t för 10 svängningar.');
+    rad1('4. Upprepa tre gånger, ta medelvärdet.');
+    rad1('5. Gör om för l = 20, 40, 60, 80, 100 cm.');
+    T.stepEnd();
+
+    T.tanke(T.bubble(120, y + 0.2 * F, bw, [
+      [['En svängning är för kort att']],
+      [['mäta noga. Tio svängningar']],
+      [['minskar felet från reaktionen.']]
+    ]));
+    rubrik('Samband');
+    y += 0.6 * F;
+    var x = T.str('T=', padL + 20, y, null, 0.8);
+    T.fracH('t', '10', x, y);
+    y += 1.9 * F;
+    T.stepEnd();
+
+    T.tanke(T.bubble(120, y + 0.2 * F, bw, [
+      [['Hur ser jag svaret? I en graf']],
+      [['med l vågrätt och T lodrätt.']]
+    ]));
+    rubrik('Slutsats');
+    rad1('Rita T mot l. Ökar T när l ökar, beror');
+    rad1('periodtiden på längden. Lika T: inget beroende.');
+    T.stepEnd();
+
+    rubrik('Felkällor');
+    rad1('Reaktionstiden vid tidtagningen. Minskas med');
+    rad1('10 svängningar och upprepade mätningar.');
+    T.stepEnd();
+
+    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+  }
+
   /* ---------------- nuklidbeteckning med FÖRE-index ------------------
    * placeString sätter ^ och _ EFTER bastecknet, men en nuklid skrivs
    * med masstalet och atomnumret FÖRE symbolen. Helpern skriver därför
@@ -67648,7 +68019,7 @@
                    aktivitet: layoutAktivitet,
                    brandvarnare: layoutBrandvarnare,
                    skeppsvrak: layoutSkeppsvrak,
-                   straldos: layoutStraldos,
+                   straldos: layoutStraldos, elementarpartiklar: layoutElementarpartiklar, nukleonladdning: layoutNukleonladdning, tredkvarkar: layoutTredkvarkar, betakvark: layoutBetakvark, planerapendel: layoutPlanerapendel,
                    bindningsenergi: layoutBindningsenergi,
                    sonderfallsformler: layoutSonderfallsformler,
                    betaenergi: layoutBetaenergi,

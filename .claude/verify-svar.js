@@ -11,7 +11,8 @@
  * "Svar:", bara en tabell och en bisats om behållningen efter 8 år.
  *
  * Undantag: deluppgifter som inte har något svar att ge, alltså bevis och
- * ritningar ("Visa att", "Bevisa", "Härled", "Rita", "Konstruera").
+ * ritningar ("Visa att", "Bevisa", "Härled", "Rita", "Konstruera") samt
+ * planeringar av experiment ("Planera"), som slutar med planeringen.
  *
  * UNDANTAG nedan är arvsskulden när verifieraren skrevs. Den ska bara
  * krympa: rättar du ett av exemplen, ta bort det ur listan.
@@ -41,7 +42,7 @@ const UNDANTAG = new Set([
 ]);
 const UNDANTAG_UTAN_NIVA = new Set([...UNDANTAG].map(k => k.replace(/\s*\((Grund|Mellan|Avancerad|E|C|A)\)\s*$/, '')));
 
-const INGET_SVAR = /\b(visa att|bevisa|härled|rita|konstruera)\b/i;
+const INGET_SVAR = /\b(visa att|bevisa|härled|rita|konstruera|planera)\b/i;
 const SVAR = /Svar[^:\n]{0,12}:/g;
 
 const ids = process.argv.slice(2);

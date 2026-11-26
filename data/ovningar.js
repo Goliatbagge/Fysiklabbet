@@ -5017,6 +5017,359 @@ Vatten har densiteten 1 000 kg/m³, alltså 1,00 g/cm³, och kvicksilver har ung
 **Svar:** 13,6 g/cm³`,
         },
     ],
+    'fy1-1.3': [
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad kallas den storhet som du själv ändrar i ett försök?`,
+            choices: [
+                `Beroende variabel.`,
+                `Oberoende variabel.`,
+                `Kontrollerad variabel.`,
+                `Felkälla.`,
+            ],
+            correct: 1,
+            solution: `Den storhet du själv ändrar kallas den **oberoende variabeln**. Den storhet du mäter för att se om den ändras kallas den beroende variabeln.
+
+**Svar:** Alternativ B.
+
+**Generell slutsats:** Den beroende variabeln "beror" (kanske) på den oberoende. Det är just det försöket ska ta reda på.`,
+        },
+        {
+            level: 1,
+            question: `Vad kallas den storhet som du mäter för att se om den ändras?`,
+            choices: [
+                `Kontrollerad variabel.`,
+                `Oberoende variabel.`,
+                `Beroende variabel.`,
+                `Konstant.`,
+            ],
+            correct: 2,
+            solution: `Den storhet som mäts är den **beroende variabeln**. Om den ändras när den oberoende variabeln ändras finns ett beroende.
+
+**Svar:** Alternativ C.
+
+**Generell slutsats:** I en graf brukar den oberoende variabeln stå på den vågräta axeln och den beroende på den lodräta.`,
+        },
+        {
+            level: 1,
+            question: `Varför ska man bara ändra en storhet i taget i ett försök?`,
+            choices: [
+                `Så att man vet vilken ändring som orsakade skillnaden i resultatet.`,
+                `För att försöket ska gå fortare.`,
+                `För att man då behöver färre mätvärden.`,
+                `För att grafen då alltid blir en rät linje.`,
+            ],
+            correct: 0,
+            solution: `Ändras två storheter samtidigt går det inte att avgöra vilken av dem som orsakade skillnaden. Ett försök där bara den oberoende variabeln ändras kallas ett rättvist försök.
+
+**Svar:** Alternativ A.
+
+**Generell slutsats:** Allt annat som kan påverka resultatet ska hållas konstant. De storheterna kallas kontrollerade variabler.`,
+        },
+        {
+            level: 1,
+            question: `En elev vill undersöka om sträckan som en leksaksbil rullar efter en ramp beror på rampens lutning. Vilken är den oberoende variabeln?`,
+            choices: [
+                `Sträckan som bilen rullar.`,
+                `Bilens massa.`,
+                `Underlaget efter rampen.`,
+                `Rampens lutning.`,
+            ],
+            correct: 3,
+            solution: `Eleven ändrar rampens lutning själv. Det är alltså den oberoende variabeln. Sträckan mäts och är den beroende variabeln.
+
+**Svar:** Alternativ D.
+
+**Generell slutsats:** Frågan "beror A på B?" talar om att B är den oberoende variabeln och A den beroende.`,
+        },
+        {
+            level: 1,
+            question: `I försöket med leksaksbilen och rampen, vilken storhet ska hållas konstant?`,
+            choices: [
+                `Rampens lutning.`,
+                `Bilens massa.`,
+                `Sträckan som bilen rullar.`,
+                `Ingen, alla får ändras.`,
+            ],
+            correct: 1,
+            solution: `Lutningen ändras (oberoende variabel) och sträckan mäts (beroende variabel). Bilens massa kan också påverka sträckan och måste därför hållas konstant, så att samma bil används hela tiden.
+
+**Svar:** Alternativ B.
+
+**Generell slutsats:** Fler exempel på kontrollerade variabler i försöket är underlaget efter rampen och var på rampen bilen släpps.`,
+        },
+        {
+            level: 1,
+            question: `Varför mäter man tiden för tio svängningar hos en pendel, i stället för tiden för en svängning?`,
+            choices: [
+                `Pendeln svänger jämnare efter några svängningar.`,
+                `Det krävs för att få ett heltal i svaret.`,
+                `Reaktionstiden blir då en mycket mindre del av den uppmätta tiden.`,
+                `Periodtiden blir då tio gånger så lång.`,
+            ],
+            correct: 2,
+            solution: `Felet från reaktionstiden, när uret startas och stoppas, blir ungefär lika stort oavsett hur lång tid som mäts. Mäts en tio gånger så lång tid blir felet en tio gånger så liten del av mätvärdet. Periodtiden fås sedan genom att tiden delas med tio.
+
+**Svar:** Alternativ C.
+
+**Generell slutsats:** Mät hellre en stor storhet och dela, än att mäta en liten storhet direkt.`,
+        },
+        {
+            level: 1,
+            question: `Hur många olika värden på den oberoende variabeln bör man minst använda för att kunna se ett samband?`,
+            choices: [
+                `Ett.`,
+                `Två.`,
+                `Fem eller fler.`,
+                `Det spelar ingen roll.`,
+            ],
+            correct: 2,
+            solution: `Med ett eller två värden går det inte att se hur sambandet ser ut, till exempel om det är en rät linje eller en kurva. Fem eller fler värden, spridda över ett stort intervall, ger en graf som går att tolka.
+
+**Svar:** Alternativ C.
+
+**Generell slutsats:** Upprepa dessutom varje mätning några gånger och räkna ut medelvärdet.`,
+        },
+
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En elev mäter tiden för tio svängningar hos en pendel tre gånger och får 14,2 s, 14,6 s och 14,4 s. Bestäm pendelns periodtid.`,
+            answer: { value: 1.44, unit: 's' },
+            solution: `Först räknar vi ut medelvärdet av de tre mätningarna.
+
+$$ t = \\frac{14{,}2 + 14{,}6 + 14{,}4}{3} = \\frac{43{,}2}{3} = 14{,}4\\ \\mathrm{s} $$
+
+Periodtiden är tiden för en svängning.
+
+$$ T = \\frac{t}{10} = \\frac{14{,}4}{10} = 1{,}44\\ \\mathrm{s} $$
+
+**Svar:** $1{,}44\\ \\mathrm{s}$
+
+**Generell slutsats:** Medelvärdet minskar betydelsen av slumpmässiga fel, och att mäta tio svängningar minskar betydelsen av reaktionstiden.`,
+        },
+        {
+            level: 2,
+            question: `En elev mäter tiden för 20 svängningar hos en pendel till 31,0 s. Bestäm pendelns periodtid.`,
+            answer: { value: 1.55, unit: 's' },
+            solution: `Periodtiden är tiden för en svängning.
+
+$$ T = \\frac{t}{20} = \\frac{31{,}0}{20} = 1{,}55\\ \\mathrm{s} $$
+
+**Svar:** $1{,}55\\ \\mathrm{s}$
+
+**Generell slutsats:** Ju fler svängningar som mäts, desto mindre betyder reaktionstiden för resultatet.`,
+        },
+        {
+            level: 2,
+            question: `En elev vill undersöka om en studsboll studsar högre när den släpps från en högre höjd. Hon släpper bollen en gång från 1,0 m och en gång från 2,0 m och mäter studshöjden. Vad är den största bristen i försöket?`,
+            choices: [
+                `Bollen borde ha varit tyngre.`,
+                `Hon borde ha mätt tiden i stället för höjden.`,
+                `Hon borde ha släppt bollen på olika underlag.`,
+                `För få släpphöjder och inga upprepade mätningar.`,
+            ],
+            correct: 3,
+            solution: `Med bara två släpphöjder och en mätning per höjd går det inte att se hur sambandet ser ut, och en enda felmätning kan ge fel slutsats. Hon bör använda minst fem höjder och upprepa varje mätning några gånger. Att byta underlag vore däremot fel, eftersom underlaget ska hållas konstant.
+
+**Svar:** Alternativ D.
+
+**Generell slutsats:** Flera värden på den oberoende variabeln och upprepade mätningar är två av de vanligaste bedömningspunkterna i en planering.`,
+        },
+        {
+            level: 2,
+            question: `En elev mäter en pendels periodtid för fyra olika massor och får 1,42 s, 1,44 s, 1,41 s och 1,43 s. Mätosäkerheten är ungefär 0,03 s. Vilken slutsats kan eleven dra?`,
+            choices: [
+                `Periodtiden ökar när massan ökar.`,
+                `Periodtiden minskar när massan ökar.`,
+                `Periodtiden beror inte på massan.`,
+                `Det går inte att dra någon slutsats alls.`,
+            ],
+            correct: 2,
+            solution: `Värdena skiljer sig som mest med $1{,}44 - 1{,}41 = 0{,}03\\ \\mathrm{s}$, vilket är lika mycket som mätosäkerheten. Värdena är alltså lika stora inom mätosäkerheten, och det finns inget tecken på att periodtiden ändras med massan.
+
+**Svar:** Alternativ C.
+
+**Generell slutsats:** En skillnad som inte är större än mätosäkerheten räknas inte som ett beroende.`,
+        },
+        {
+            level: 2,
+            question: `En elev undersöker om en isbit smälter fortare i saltvatten än i sötvatten. Vilken storhet måste hållas konstant för att försöket ska bli rättvist?`,
+            choices: [
+                `Isbitens storlek.`,
+                `Vattnets salthalt.`,
+                `Tiden det tar för isbiten att smälta.`,
+                `Ingen, eftersom eleven bara jämför två fall.`,
+            ],
+            correct: 0,
+            solution: `Salthalten ändras (oberoende variabel) och smälttiden mäts (beroende variabel). Isbitens storlek påverkar också smälttiden och måste därför vara densamma, liksom vattnets volym och temperatur.
+
+**Svar:** Alternativ A.
+
+**Generell slutsats:** Fråga dig: vad mer än den oberoende variabeln kan påverka det jag mäter? Allt sådant ska hållas konstant.`,
+        },
+        {
+            level: 2,
+            question: `Vilket slags fel minskar när en mätning upprepas och medelvärdet räknas ut?`,
+            choices: [
+                `Ett fel som beror på att instrumentet visar fel, till exempel en våg som alltid visar 5 g för mycket.`,
+                `Slumpmässiga fel, till exempel att reaktionstiden blir olika lång varje gång.`,
+                `Ett räknefel i formeln.`,
+                `Inga fel alls, medelvärdet är bara enklare att skriva.`,
+            ],
+            correct: 1,
+            solution: `Slumpmässiga fel gör mätvärdet ibland för stort och ibland för litet. I medelvärdet tar de delvis ut varandra. Ett instrument som visar fel ger samma fel varje gång, och det försvinner inte hur många gånger mätningen än upprepas. Ett sådant fel kallas systematiskt.
+
+**Svar:** Alternativ B.
+
+**Generell slutsats:** Systematiska fel minskas genom att instrumentet kontrolleras eller nollställs, inte genom upprepning.`,
+        },
+        {
+            level: 2,
+            question: `Hur bör en tabell med mätvärden se ut i en planering?`,
+            choices: [
+                `En rad med alla mätvärden efter varandra, skilda med kommatecken.`,
+                `Bara medelvärdena, utan de enskilda mätningarna.`,
+                `En kolumn för varje storhet, med storhetens namn och enhet i rubriken.`,
+                `Mätvärdena utan enheter, eftersom de framgår av texten.`,
+            ],
+            correct: 2,
+            solution: `En tabell med en kolumn per storhet och enheten i rubriken, till exempel "l (m)" och "t (s)", är lätt att fylla i och att läsa. Då behöver enheten inte skrivas efter varje tal.
+
+**Svar:** Alternativ C.
+
+**Generell slutsats:** Ta gärna med en kolumn för varje upprepad mätning och en för medelvärdet.`,
+        },
+
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Planera ett experiment för att undersöka om tiden det tar för en leksaksbil att rulla ned för en ramp beror på bilens massa. Du har tillgång till en ramp, en leksaksbil, vikter som kan fästas på bilen, en våg, ett måttband och ett tidtagarur. Planeringen ska vara så tydlig att en klasskamrat kan genomföra försöket.`,
+            solution: `**Frågeställning:** Beror tiden *t* det tar för bilen att rulla ned för rampen på bilens massa *m*?
+
+**Variabler:** Massan *m* ändras (oberoende variabel). Tiden *t* mäts (beroende variabel). Rampens lutning, sträckan bilen rullar och startpunkten hålls konstanta.
+
+**Genomförande:**
+
+1. Ställ rampen på en fast lutning och markera en startlinje och en mållinje. Mät sträckan mellan dem med måttbandet.
+2. Väg bilen med vågen.
+3. Släpp bilen från startlinjen utan att knuffa den. Mät tiden tills den passerar mållinjen.
+4. Upprepa tre gånger och räkna ut medelvärdet.
+5. Fäst vikter på bilen och gör om steg 2–4, för minst fem olika massor.
+6. Skriv in massor och tider i en tabell.
+
+**Slutsats:** Rita en graf med *m* på den vågräta axeln och *t* på den lodräta. Är tiderna lika stora inom mätosäkerheten beror tiden inte på massan. Ändras tiden tydligt finns ett beroende.
+
+**Felkällor:** Reaktionstiden vid tidtagningen, som minskas med upprepade mätningar. Att bilen kan få en knuff vid starten. Att vikterna kan ändra friktionen i hjulen.`,
+        },
+        {
+            level: 3,
+            question: `En elev har skrivit följande planering för att undersöka om ett kaffefilters falltid beror på hur många filter som staplas i varandra:<br>"Jag släpper ett filter och tre filter och tar tiden. Sedan ser jag vilket som går fortast."<br>Ange tre brister i planeringen och hur var och en kan rättas till.`,
+            solution: `Några brister och hur de rättas till:
+
+1. **Höjden saknas.** Filtren ska släppas från samma, uppmätta höjd varje gång, till exempel 2,0 m, mätt med måttband.
+2. **För få värden.** Med bara två antal går det inte att se ett samband. Använd till exempel 1, 2, 3, 4 och 5 filter.
+3. **Inga upprepningar.** Varje falltid ska mätas flera gånger och medelvärdet räknas ut, eftersom reaktionstiden ger slumpmässiga fel.
+4. **Ingen slutsats beskriven.** Planeringen ska säga hur svaret avgörs, till exempel genom en graf med antalet filter på den vågräta axeln och falltiden på den lodräta.
+5. **Instrumenten nämns inte.** Det ska stå att tiden mäts med tidtagarur och höjden med måttband.
+
+**Svar:** Till exempel saknad höjd, för få värden och inga upprepade mätningar, se ovan.`,
+        },
+        {
+            level: 3,
+            question: `En pendel har periodtiden ungefär 1,6 s. Reaktionstiden när ett tidtagarur startas och stoppas ger ett fel på ungefär 0,20 s per mätning. Hur många svängningar måste man minst mäta för att felet ska bli högst 1 % av den uppmätta tiden?`,
+            answer: { value: 13, unit: 'svängningar' },
+            solution: `Mäts *n* svängningar blir den uppmätta tiden ungefär $n \\cdot 1{,}6\\ \\mathrm{s}$. Felet 0,20 s får vara högst 1 % av den tiden.
+
+$$ 0{,}20 \\leq 0{,}01 \\cdot n \\cdot 1{,}6 $$
+
+$$ 0{,}20 \\leq 0{,}016 \\cdot n $$
+
+$$ n \\geq \\frac{0{,}20}{0{,}016} = 12{,}5 $$
+
+Antalet svängningar måste vara ett heltal, så vi avrundar uppåt.
+
+**Svar:** 13 svängningar
+
+**Generell slutsats:** Med en svängning blir felet $\\dfrac{0{,}20}{1{,}6} \\approx 13\\ \\%$. Att mäta många svängningar är alltså en mycket effektiv förbättring.`,
+        },
+        {
+            level: 3,
+            question: `En elev undersöker om en magnets dragkraft på en spik beror på avståndet. Mellan mätningarna byter hon både avståndet och magnet. Vilken slutsats kan hon dra av resultatet?`,
+            choices: [
+                `Att kraften beror på avståndet, eftersom avståndet ändrades.`,
+                `Att kraften beror på vilken magnet som används.`,
+                `Att kraften inte beror på avståndet.`,
+                `Ingen säker slutsats, eftersom två storheter ändrades samtidigt.`,
+            ],
+            correct: 3,
+            solution: `När både avståndet och magneten byts samtidigt går det inte att avgöra vilken av ändringarna som gav skillnaden i kraft. Försöket är inte rättvist. Hon måste använda samma magnet och bara ändra avståndet.
+
+**Svar:** Alternativ D.
+
+**Generell slutsats:** Ändra bara den oberoende variabeln, och håll allt annat konstant.`,
+        },
+        {
+            level: 3,
+            question: `En elev mätte en pendels periodtid *T* för olika längder *l*:<br>$l$ (m): 0,20, 0,40, 0,60, 0,80, 1,00<br>$T$ (s): 0,90, 1,27, 1,55, 1,79, 2,01<br>Vilken slutsats stämmer?`,
+            choices: [
+                `*T* är proportionell mot *l*.`,
+                `*T* beror inte på *l*.`,
+                `*T* beror på *l*, men är inte proportionell mot *l*.`,
+                `Det går inte att avgöra med så få mätvärden.`,
+            ],
+            correct: 2,
+            solution: `Periodtiden ökar tydligt när längden ökar, mycket mer än någon rimlig mätosäkerhet, så *T* beror på *l*.
+
+Om *T* vore proportionell mot *l* skulle dubbel längd ge dubbel periodtid. Men när *l* fördubblas från 0,20 m till 0,40 m ökar *T* bara från 0,90 s till 1,27 s.
+
+$$ \\frac{1{,}27}{0{,}90} \\approx 1{,}4 $$
+
+*T* ökar alltså långsammare än *l*. En graf med *l* vågrätt och *T* lodrätt blir en kurva, inte en rät linje genom origo.
+
+**Svar:** Alternativ C.
+
+**Generell slutsats:** Ett beroende och en proportionalitet är inte samma sak. Proportionalitet syns som en rät linje genom origo.`,
+        },
+        {
+            level: 3,
+            question: `Planera ett experiment för att undersöka om studshöjden hos en boll beror på bollens temperatur. Du har tillgång till en boll, en frys, en vattenkokare, en skål, en termometer, ett måttband och en mobilkamera. Planeringen ska vara så tydlig att en klasskamrat kan genomföra försöket.`,
+            solution: `**Frågeställning:** Beror bollens studshöjd *h* på bollens temperatur *T*?
+
+**Variabler:** Temperaturen ändras (oberoende variabel). Studshöjden mäts (beroende variabel). Släpphöjden, underlaget och bollen hålls konstanta.
+
+**Genomförande:**
+
+1. Ge bollen olika temperaturer: lägg den i frysen, låt den ligga i rumstemperatur och lägg den i varmt vatten i skålen, gärna i olika varmt vatten så att det blir minst fem temperaturer.
+2. Mät vattnets temperatur med termometern, eller luftens i frysen, och låt bollen ligga där i tio minuter så att den får samma temperatur.
+3. Tejpa upp måttbandet lodrätt mot en vägg.
+4. Släpp bollen från 1,00 m, intill måttbandet, och filma studsen med mobilkameran.
+5. Läs av studshöjden i filmen, bild för bild.
+6. Upprepa tre gånger för varje temperatur och räkna ut medelvärdet. Torka bollen först.
+7. Skriv in temperaturer och studshöjder i en tabell.
+
+**Slutsats:** Rita en graf med temperaturen på den vågräta axeln och studshöjden på den lodräta. Ändras höjden tydligt, mer än mätosäkerheten, beror studshöjden på temperaturen.
+
+**Felkällor:** Bollen hinner ändra temperatur under försöket, så släpp den direkt. Avläsningen av höjden blir säkrare med film än med ögat.`,
+        },
+        {
+            level: 3,
+            question: `En våg visar alltid 5 g för mycket. En elev väger samma föremål tio gånger med vågen och räknar ut medelvärdet. Vilket påstående stämmer?`,
+            choices: [
+                `Medelvärdet blir rätt, eftersom felen tar ut varandra.`,
+                `Medelvärdet blir fortfarande 5 g för stort, eftersom felet är lika stort varje gång.`,
+                `Medelvärdet blir 0,5 g för stort, eftersom felet delas med tio.`,
+                `Medelvärdet blir 50 g för stort, eftersom felet läggs ihop tio gånger.`,
+            ],
+            correct: 1,
+            solution: `Felet är lika stort och åt samma håll vid varje vägning. Summan av tio vägningar blir 50 g för stor, och när den delas med tio blir medelvärdet 5 g för stort. Ett sådant fel kallas systematiskt och försvinner inte med upprepning.
+
+**Svar:** Alternativ B.
+
+**Generell slutsats:** Systematiska fel upptäcks genom att instrumentet kontrolleras mot något känt, till exempel en vikt med känd massa, eller genom att vågen nollställs.`,
+        },
+    ],
 
     // ═══════════════════════════════════════════════════════════════════
     // fy1-5.1  Densitet
@@ -54656,6 +55009,358 @@ $$ H = 1{,}9993\\ldots \\cdot 10^{9} \\cdot 8{,}3304 \\cdot 10^{-14} \\cdot 1 = 
 **Rimlighet:** Dosen är mycket mindre än gränsvärdet $50\\ \\mathrm{mSv}$ per år för huden, vilket stämmer med att alla människor lever med den här strålningen.
 
 **Svar:** Dosen är ungefär $0{,}17\\ \\mathrm{mSv}$ under ett år. Den är lika stor för en vuxen och ett barn, så länge andelen kalium i kroppen är densamma.`,
+        },
+    ],
+    'fy1-9.6': [
+        // ── Nivå 1 (Grund) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vilken av partiklarna nedan är en elementarpartikel?`,
+            choices: [
+                `Protonen.`,
+                `Neutronen.`,
+                `Elektronen.`,
+                `Heliumkärnan.`,
+            ],
+            correct: 2,
+            solution: `En elementarpartikel är inte uppbyggd av några mindre delar. Protonen och neutronen består av tre kvarkar var, och heliumkärnan består av två protoner och två neutroner. Elektronen är en lepton och har inga mindre delar.
+
+**Svar:** Alternativ C, elektronen.
+
+**Generell slutsats:** Protonen och neutronen kallas ibland elementarpartiklar i äldre texter, men enligt standardmodellen är de sammansatta av kvarkar.`,
+        },
+        {
+            level: 1,
+            question: `Vilka kvarkar består protonen av?`,
+            choices: [
+                `udd`,
+                `uud`,
+                `uuu`,
+                `ddd`,
+            ],
+            correct: 1,
+            solution: `Protonen består av två uppkvarkar och en nedkvark, uud. Laddningen blir
+
+$$ q = \\frac{2}{3} \\cdot e + \\frac{2}{3} \\cdot e - \\frac{1}{3} \\cdot e = e $$
+
+**Svar:** Alternativ B, uud.
+
+**Generell slutsats:** Neutronen är udd. En proton och en neutron skiljer sig alltså med en kvark.`,
+        },
+        {
+            level: 1,
+            question: `Uppkvarken har laddningen $+\\dfrac{2}{3} \\cdot e$, där $e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$ är elementarladdningen. Bestäm uppkvarkens laddning i coulomb.`,
+            answer: { value: 1.068e-19, unit: 'C' },
+            solution: `Vi multiplicerar bråket med elementarladdningen.
+
+$$ q_u = \\frac{2}{3} \\cdot e = \\frac{2}{3} \\cdot 1{,}602 \\cdot 10^{-19} = 1{,}068 \\cdot 10^{-19}\\ \\mathrm{C} $$
+
+**Svar:** $1{,}068 \\cdot 10^{-19}\\ \\mathrm{C}$
+
+**Generell slutsats:** Kvarkarnas laddningar är bråkdelar av elementarladdningen, men en partikel som går att observera fritt har alltid en laddning som är ett helt antal elementarladdningar.`,
+        },
+        {
+            level: 1,
+            question: `Vilken partikel förmedlar den elektromagnetiska växelverkan?`,
+            choices: [
+                `Gluonen.`,
+                `W-partikeln.`,
+                `Higgsbosonen.`,
+                `Fotonen.`,
+            ],
+            correct: 3,
+            solution: `Varje växelverkan i standardmodellen har en egen kraftförmedlare. Den elektromagnetiska växelverkan förmedlas av fotonen, den starka av gluonen och den svaga av W- och Z-partiklarna.
+
+**Svar:** Alternativ D, fotonen.
+
+**Generell slutsats:** Ljus består av fotoner, så samma partikel som bär ljuset förmedlar också kraften mellan laddningar.`,
+        },
+        {
+            level: 1,
+            question: `Vad är en neutrino?`,
+            choices: [
+                `En oladdad och nästan masslös lepton.`,
+                `En kvark utan laddning.`,
+                `En partikel som består av tre kvarkar.`,
+                `Den partikel som förmedlar den starka växelverkan.`,
+            ],
+            correct: 0,
+            solution: `Neutrinerna hör till leptonerna. De är oladdade och nästan masslösa och påverkar annan materia mycket svagt, så de passerar rakt igenom jorden.
+
+**Svar:** Alternativ A.
+
+**Generell slutsats:** Det finns tre sorters neutriner: elektronneutrinon, myonneutrinon och tauneutrinon.`,
+        },
+        {
+            level: 1,
+            question: `Vilken laddning har neutronen, som består av kvarkarna udd?`,
+            choices: [
+                `$+e$`,
+                `$-e$`,
+                `$0$`,
+                `$+\\dfrac{2}{3} \\cdot e$`,
+            ],
+            correct: 2,
+            solution: `Laddningen är summan av kvarkarnas laddningar.
+
+$$ q = \\frac{2}{3} \\cdot e - \\frac{1}{3} \\cdot e - \\frac{1}{3} \\cdot e = 0 $$
+
+**Svar:** Alternativ C, neutronen är oladdad.
+
+**Generell slutsats:** Att neutronen är oladdad betyder inte att den saknar laddade delar. Laddningarna hos dess kvarkar tar ut varandra.`,
+        },
+        {
+            level: 1,
+            question: `Vilken av naturens fyra grundläggande krafter ingår **inte** i standardmodellen?`,
+            choices: [
+                `Den starka växelverkan.`,
+                `Den svaga växelverkan.`,
+                `Den elektromagnetiska växelverkan.`,
+                `Gravitationen.`,
+            ],
+            correct: 3,
+            solution: `Standardmodellen beskriver den starka, den svaga och den elektromagnetiska växelverkan. Gravitationen ingår inte. Den är mycket svagare än de andra och spelar ingen roll för enskilda partiklar.
+
+**Svar:** Alternativ D, gravitationen.
+
+**Generell slutsats:** Att förena gravitationen med standardmodellen är ett av fysikens stora olösta problem.`,
+        },
+
+        // ── Nivå 2 (Mellan) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Nedkvarken har laddningen $-\\dfrac{1}{3} \\cdot e$. Bestäm nedkvarkens laddning i coulomb. Elementarladdningen är $e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$.`,
+            answer: { value: -5.340e-20, unit: 'C' },
+            solution: `Vi multiplicerar bråket med elementarladdningen.
+
+$$ q_d = -\\frac{1}{3} \\cdot e = -\\frac{1}{3} \\cdot 1{,}602 \\cdot 10^{-19} = -5{,}340 \\cdot 10^{-20}\\ \\mathrm{C} $$
+
+**Svar:** $-5{,}340 \\cdot 10^{-20}\\ \\mathrm{C}$
+
+**Generell slutsats:** En tredjedel av elementarladdningen är den minsta laddning som finns i standardmodellen.`,
+        },
+        {
+            level: 2,
+            question: `Lambdapartikeln består av kvarkarna uds. Särkvarken s har samma laddning som nedkvarken. Vilken laddning har lambdapartikeln?`,
+            choices: [
+                `$+e$`,
+                `$-e$`,
+                `$+\\dfrac{1}{3} \\cdot e$`,
+                `$0$`,
+            ],
+            correct: 3,
+            solution: `Särkvarken har laddningen $-\\dfrac{1}{3} \\cdot e$, precis som nedkvarken. Laddningen är summan av kvarkarnas laddningar.
+
+$$ q = \\frac{2}{3} \\cdot e - \\frac{1}{3} \\cdot e - \\frac{1}{3} \\cdot e = 0 $$
+
+**Svar:** Alternativ D, lambdapartikeln är oladdad.
+
+**Generell slutsats:** Kvarkarna i generation 2 och 3 har samma laddningar som de i generation 1: c och t som u, s och b som d.`,
+        },
+        {
+            level: 2,
+            question: `Vid β⁺-sönderfall blir en proton i kärnan en neutron. Vilken omvandling sker då på kvarknivå?`,
+            choices: [
+                `$\\mathrm{u} \\rightarrow \\mathrm{d} + \\mathrm{e}^+ + \\nu$`,
+                `$\\mathrm{d} \\rightarrow \\mathrm{u} + \\mathrm{e}^- + \\bar{\\nu}$`,
+                `$\\mathrm{u} \\rightarrow \\mathrm{d} + \\mathrm{e}^- + \\bar{\\nu}$`,
+                `$\\mathrm{d} \\rightarrow \\mathrm{u} + \\mathrm{e}^+ + \\nu$`,
+            ],
+            correct: 0,
+            solution: `Protonen uud blir neutronen udd, så en uppkvark blir en nedkvark. Laddningen ska bevaras: före är den $+\\dfrac{2}{3} \\cdot e$, och efter är den
+
+$$ -\\frac{1}{3} \\cdot e + e + 0 = +\\frac{2}{3} \\cdot e $$
+
+Det stämmer bara om en positron sänds ut, tillsammans med en neutrino.
+
+**Svar:** Alternativ A.
+
+**Generell slutsats:** Vid β⁻ blir en nedkvark en uppkvark och en elektron sänds ut, vid β⁺ är det tvärtom och en positron sänds ut.`,
+        },
+        {
+            level: 2,
+            question: `Vad har en positron och en elektron gemensamt?`,
+            choices: [
+                `Samma laddning.`,
+                `Samma massa.`,
+                `Båda är kvarkar.`,
+                `Båda är kraftförmedlare.`,
+            ],
+            correct: 1,
+            solution: `Positronen är elektronens antipartikel. En antipartikel har samma massa som partikeln men motsatt laddning, så positronen har laddningen $+e$.
+
+**Svar:** Alternativ B, samma massa.
+
+**Generell slutsats:** Möts en partikel och dess antipartikel kan de förintas, och massan omvandlas då till energi i form av fotoner.`,
+        },
+        {
+            level: 2,
+            question: `Partikeln delta plus plus består av tre uppkvarkar, uuu. Bestäm dess laddning i coulomb. Elementarladdningen är $e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$.`,
+            answer: { value: 3.204e-19, unit: 'C' },
+            solution: `Laddningen är summan av kvarkarnas laddningar.
+
+$$ q = \\frac{2}{3} \\cdot e + \\frac{2}{3} \\cdot e + \\frac{2}{3} \\cdot e = 2e $$
+
+$$ q = 2 \\cdot 1{,}602 \\cdot 10^{-19} = 3{,}204 \\cdot 10^{-19}\\ \\mathrm{C} $$
+
+**Svar:** $3{,}204 \\cdot 10^{-19}\\ \\mathrm{C}$
+
+**Generell slutsats:** Tre kvarkar kan ge laddningarna $2e$, $e$, $0$ och $-e$, beroende på hur många av dem som är uppkvarkar.`,
+        },
+        {
+            level: 2,
+            question: `Hur många kvarkar finns det sammanlagt i en kärna av helium-4, $_2^4\\mathrm{He}$?`,
+            choices: [
+                `4`,
+                `6`,
+                `8`,
+                `12`,
+            ],
+            correct: 3,
+            solution: `Masstalet 4 säger att kärnan har fyra nukleoner: två protoner och två neutroner. Varje nukleon består av tre kvarkar.
+
+$$ 4 \\cdot 3 = 12 $$
+
+**Svar:** Alternativ D, 12 kvarkar.
+
+**Generell slutsats:** Masstalet *A* räknar nukleonerna, så en kärna innehåller $3A$ kvarkar.`,
+        },
+        {
+            level: 2,
+            question: `Varför består vanlig materia inte av myoner, fast myonen har samma laddning som elektronen?`,
+            choices: [
+                `Myonen är en kvark och sitter därför inne i protonerna.`,
+                `Myonen är tyngre och instabil, och sönderfaller på en bråkdel av en sekund.`,
+                `Myonen saknar massa och kan inte stanna kvar i en atom.`,
+                `Myonen är en kraftförmedlare och inte en materiepartikel.`,
+            ],
+            correct: 1,
+            solution: `Myonen hör till generation 2 av leptonerna. Den är omkring 200 gånger tyngre än elektronen och sönderfaller efter ungefär två miljondels sekund. Myoner bildas när kosmisk strålning träffar atmosfären.
+
+**Svar:** Alternativ B.
+
+**Generell slutsats:** All stabil vanlig materia byggs av generation 1: uppkvark, nedkvark och elektron.`,
+        },
+
+        // ── Nivå 3 (Avancerad) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Hur många uppkvarkar finns det i en kärna av kol-12, $_6^{12}\\mathrm{C}$?`,
+            answer: { value: 18, unit: '' },
+            solution: `Kärnan har $Z = 6$ protoner och $A - Z = 12 - 6 = 6$ neutroner.
+
+En proton (uud) har två uppkvarkar och en neutron (udd) har en.
+
+$$ 6 \\cdot 2 + 6 \\cdot 1 = 18 $$
+
+Kontroll med laddningen: kärnan har 18 uppkvarkar och $6 + 6 \\cdot 2 = 18$ nedkvarkar.
+
+$$ 18 \\cdot \\frac{2}{3} \\cdot e - 18 \\cdot \\frac{1}{3} \\cdot e = 12e - 6e = 6e $$
+
+Det stämmer med sex protoner.
+
+**Svar:** 18 uppkvarkar
+
+**Generell slutsats:** En kärna med *Z* protoner och *N* neutroner har $2Z + N$ uppkvarkar och $Z + 2N$ nedkvarkar.`,
+        },
+        {
+            level: 3,
+            question: `Hur många nedkvarkar finns det i en kärna av uran-238, $_{92}^{238}\\mathrm{U}$?`,
+            answer: { value: 384, unit: '' },
+            solution: `Kärnan har $Z = 92$ protoner och $A - Z = 238 - 92 = 146$ neutroner.
+
+En proton (uud) har en nedkvark och en neutron (udd) har två.
+
+$$ 92 \\cdot 1 + 146 \\cdot 2 = 92 + 292 = 384 $$
+
+**Svar:** 384 nedkvarkar
+
+**Generell slutsats:** Tunga kärnor har fler neutroner än protoner och därför fler nedkvarkar än uppkvarkar.`,
+        },
+        {
+            level: 3,
+            question: `Partikeln sigma plus har laddningen $+e$ och består av tre kvarkar, varav en är en särkvark med laddningen $-\\dfrac{1}{3} \\cdot e$. De två andra är uppkvarkar eller nedkvarkar. Vilka är de?`,
+            choices: [
+                `Två nedkvarkar.`,
+                `En uppkvark och en nedkvark.`,
+                `Två uppkvarkar.`,
+                `Två särkvarkar.`,
+            ],
+            correct: 2,
+            solution: `De två okända kvarkarna ska tillsammans ha laddningen
+
+$$ e - \\left(-\\frac{1}{3} \\cdot e\\right) = \\frac{4}{3} \\cdot e $$
+
+Bara två uppkvarkar ger det: $\\dfrac{2}{3} \\cdot e + \\dfrac{2}{3} \\cdot e = \\dfrac{4}{3} \\cdot e$. En uppkvark och en nedkvark ger $\\dfrac{1}{3} \\cdot e$, och två nedkvarkar ger $-\\dfrac{2}{3} \\cdot e$.
+
+**Svar:** Alternativ C, sigma plus är uus.
+
+**Generell slutsats:** Ta reda på vilken laddning som saknas och pröva vilka kvarkar som ger just den.`,
+        },
+        {
+            level: 3,
+            question: `Kol-14 sönderfaller med β⁻-strålning till kväve-14: $_6^{14}\\mathrm{C} \\rightarrow {_7^{14}}\\mathrm{N} + {_{-1}^{0}}\\mathrm{e} + \\bar{\\nu}$. Hur många uppkvarkar innehåller kärnan efter sönderfallet?`,
+            answer: { value: 21, unit: '' },
+            solution: `Kvävekärnan har $Z = 7$ protoner och $14 - 7 = 7$ neutroner. En proton har två uppkvarkar och en neutron en.
+
+$$ 7 \\cdot 2 + 7 \\cdot 1 = 21 $$
+
+Kontroll: kolkärnan har 6 protoner och 8 neutroner, alltså $6 \\cdot 2 + 8 \\cdot 1 = 20$ uppkvarkar. Vid β⁻-sönderfallet blir en nedkvark en uppkvark, så antalet ska öka med en.
+
+**Svar:** 21 uppkvarkar
+
+**Generell slutsats:** Vid β⁻-sönderfall ökar antalet uppkvarkar med en och antalet nedkvarkar minskar med en, medan antalet kvarkar är detsamma.`,
+        },
+        {
+            level: 3,
+            question: `En pion består av en kvark och en antikvark. En antikvark har motsatt laddning mot sin kvark. Pionen π⁺ består av en uppkvark och en antinedkvark. Bestäm pionens laddning i coulomb. Elementarladdningen är $e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$.`,
+            answer: { value: 1.602e-19, unit: 'C' },
+            solution: `Nedkvarken har laddningen $-\\dfrac{1}{3} \\cdot e$, så antinedkvarken har $+\\dfrac{1}{3} \\cdot e$.
+
+$$ q = \\frac{2}{3} \\cdot e + \\frac{1}{3} \\cdot e = e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C} $$
+
+**Svar:** $1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$
+
+**Generell slutsats:** Partiklar av kvarkar finns i två slag: tre kvarkar (som protonen) eller en kvark och en antikvark (som pionen). Båda kallas hadroner.`,
+        },
+        {
+            level: 3,
+            question: `En elektron och en positron som ligger stilla förintas, och hela deras massa omvandlas till energi. Bestäm hur stor energi som frigörs. Elektronens massa är $9{,}109 \\cdot 10^{-31}\\ \\mathrm{kg}$ och ljusets hastighet $c = 2{,}998 \\cdot 10^{8}\\ \\mathrm{m/s}$.`,
+            answer: { value: 1.637e-13, unit: 'J' },
+            solution: `Positronen har samma massa som elektronen, så den massa som omvandlas är dubbla elektronmassan. Vi använder $E = m \\cdot c^2$.
+
+$$
+\\left[ \\begin{array}{l}
+m = 2 \\cdot 9{,}109 \\cdot 10^{-31}\\ \\mathrm{kg} \\\\
+c = 2{,}998 \\cdot 10^{8}\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$ E = 2 \\cdot 9{,}109 \\cdot 10^{-31} \\cdot (2{,}998 \\cdot 10^{8})^2 = 1{,}637 \\cdot 10^{-13}\\ \\mathrm{J} $$
+
+**Svar:** $1{,}637 \\cdot 10^{-13}\\ \\mathrm{J}$
+
+**Generell slutsats:** Energin sänds ut som två fotoner med vardera hälften av energin, ungefär $0{,}511\\ \\mathrm{MeV}$. Det används i PET-kameror på sjukhus.`,
+        },
+        {
+            level: 3,
+            question: `Vilken av reaktionerna nedan är **omöjlig**, eftersom laddningen inte bevaras?`,
+            choices: [
+                `$\\mathrm{n} \\rightarrow \\mathrm{p} + \\mathrm{e}^- + \\bar{\\nu}$`,
+                `$\\mathrm{d} \\rightarrow \\mathrm{u} + \\mathrm{e}^+ + \\nu$`,
+                `$\\mathrm{u} \\rightarrow \\mathrm{d} + \\mathrm{e}^+ + \\nu$`,
+                `$\\mathrm{d} \\rightarrow \\mathrm{u} + \\mathrm{e}^- + \\bar{\\nu}$`,
+            ],
+            correct: 1,
+            solution: `Vi räknar laddningen före och efter i alternativ B. Före: $-\\dfrac{1}{3} \\cdot e$. Efter:
+
+$$ \\frac{2}{3} \\cdot e + e + 0 = \\frac{5}{3} \\cdot e $$
+
+Laddningen ändras, så reaktionen är omöjlig. I de andra alternativen stämmer laddningen, till exempel i D: $\\dfrac{2}{3} \\cdot e - e = -\\dfrac{1}{3} \\cdot e$.
+
+**Svar:** Alternativ B.
+
+**Generell slutsats:** Laddningen bevaras i varje reaktion. Det är ett snabbt sätt att avslöja en felaktig reaktionsformel.`,
         },
     ],
 

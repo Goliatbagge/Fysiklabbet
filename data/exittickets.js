@@ -191,6 +191,97 @@ window.EXITTICKETS = {
   },
 ],
 
+'fy1-1.3': [
+  {
+    question: 'En elev undersöker om tiden det tar för en isbit att smälta beror på vattnets temperatur. Vilken är den **beroende** variabeln?',
+    choices: ['Vattnets temperatur', 'Tiden det tar för isbiten att smälta', 'Isbitens storlek', 'Vattnets volym'],
+    correct: 1,
+    why: [
+      'Vattnets temperatur är den storhet eleven ändrar, alltså den oberoende variabeln.',
+      'Smälttiden är det som mäts för att se om den ändras. Den är den beroende variabeln.',
+      'Isbitens storlek ska hållas konstant. Den är en kontrollerad variabel.',
+      'Vattnets volym ska också hållas konstant, så att försöket blir rättvist.',
+    ],
+  },
+  {
+    question: 'Vad menas med ett **rättvist försök**?',
+    choices: ['Att alla i gruppen får mäta lika många gånger', 'Att försöket görs två gånger', 'Att bara den oberoende variabeln ändras och allt annat hålls konstant', 'Att man väljer de mätvärden som ser bäst ut'],
+    correct: 2,
+    why: [
+      'Vem som mäter har inget med begreppet att göra. Det handlar om vilka storheter som ändras.',
+      'Upprepning är bra, men gör inte försöket rättvist om flera storheter ändras samtidigt.',
+      'I ett rättvist försök ändras bara en storhet, så att man vet vad som orsakade skillnaden.',
+      'Att välja bort mätvärden som inte passar är att fuska med resultatet.',
+    ],
+  },
+  {
+    question: 'Varför mäter man tiden för tio svängningar hos en pendel och delar med tio?',
+    choices: ['Reaktionstiden blir en mycket mindre del av den uppmätta tiden', 'Pendeln svänger fortare efter några varv', 'Det ger ett jämnare tal att räkna med', 'Periodtiden ändras annars under försöket'],
+    correct: 0,
+    why: [
+      'Reaktionstidens fel är ungefär lika stort oavsett hur lång tid som mäts, så en lång mätning ger ett relativt sett litet fel.',
+      'Periodtiden är densamma varv efter varv. Det är mätfelet som blir mindre.',
+      'Talet blir inte jämnare. Skälet är att mätfelet blir en mindre del av resultatet.',
+      'Periodtiden är densamma hela tiden. Det är tidtagningen som blir säkrare.',
+    ],
+  },
+  {
+    question: 'Vilket av följande hör **inte** hemma i en planering av ett experiment?',
+    choices: ['Numrerade steg för genomförandet', 'Vilka instrument varje mätning görs med', 'Hur slutsatsen ska dras ur mätvärdena', 'Vilket resultat man hoppas få fram'],
+    correct: 3,
+    why: [
+      'Numrerade steg gör att en klasskamrat kan följa planeringen. De ska finnas med.',
+      'Instrumenten ska anges, annars vet läsaren inte hur mätningen görs.',
+      'Planeringen ska säga hur svaret på frågan avgörs, till exempel med en graf.',
+      'Planeringen ska undersöka frågan förutsättningslöst. Vad man hoppas på påverkar inte hur försöket ska göras.',
+    ],
+  },
+  {
+    question: 'En elev mäter en storhet för fem olika värden på den oberoende variabeln. Värdena skiljer sig som mest 0,02 s, och mätosäkerheten är 0,05 s. Vad är slutsatsen?',
+    choices: ['Den beroende variabeln ökar', 'Det finns inget beroende, värdena är lika inom mätosäkerheten', 'Den beroende variabeln minskar', 'Försöket måste göras om med fler värden'],
+    correct: 1,
+    why: [
+      'En skillnad som är mindre än mätosäkerheten räknas inte som en ökning.',
+      'Skillnaden är mindre än mätosäkerheten, så värdena är lika stora. Något beroende syns inte.',
+      'En skillnad som är mindre än mätosäkerheten räknas inte heller som en minskning.',
+      'Fem värden räcker för att dra en slutsats. Det är mätosäkerheten som avgör.',
+    ],
+  },
+  {
+    question: 'Vilket fel minskar när en mätning upprepas och medelvärdet räknas ut?',
+    choices: ['Ett systematiskt fel, som en våg som alltid visar för mycket', 'Ett räknefel i formeln', 'Ett slumpmässigt fel, som en reaktionstid som varierar', 'Inget fel, medelvärdet är bara ett sätt att sammanfatta'],
+    correct: 2,
+    why: [
+      'Ett systematiskt fel är lika stort varje gång och finns kvar i medelvärdet.',
+      'Ett räknefel rättas genom att räkningen kontrolleras, inte genom fler mätningar.',
+      'Slumpmässiga fel är ibland för stora och ibland för små, och tar delvis ut varandra i medelvärdet.',
+      'Medelvärdet minskar faktiskt betydelsen av slumpmässiga fel.',
+    ],
+  },
+  {
+    question: 'Du ska bestämma en storhet som inte går att mäta direkt, till exempel en verkningsgrad. Vad måste planeringen då innehålla?',
+    choices: ['Bara vilka instrument som används', 'De samband som behövs för att räkna fram storheten ur mätvärdena', 'Ett gissat värde på storheten', 'Ingenting extra, det räcker att mäta'],
+    correct: 1,
+    why: [
+      'Instrumenten behövs, men läsaren måste också veta hur mätvärdena räknas om till det som söks.',
+      'Formlerna, och vad varje beteckning står för, visar hur resultatet räknas fram ur mätvärdena.',
+      'En gissning hör inte hemma i planeringen. Resultatet ska komma ur mätningarna.',
+      'Utan sambanden går det inte att få fram en storhet som inte mäts direkt.',
+    ],
+  },
+  {
+    question: 'Hur många olika värden på den oberoende variabeln bör en undersökning minst ha?',
+    choices: ['Ett', 'Två', 'Det spelar ingen roll', 'Ungefär fem eller fler'],
+    correct: 3,
+    why: [
+      'Med ett värde finns inget att jämföra med.',
+      'Två värden visar inte om sambandet är en rät linje eller en kurva.',
+      'Antalet spelar stor roll: för få värden gör att sambandet inte syns.',
+      'Fem eller fler värden, spridda över ett stort intervall, gör det möjligt att se hur sambandet ser ut.',
+    ],
+  },
+],
+
 'fy1-2.1': [
   {
     question: 'Vilken formel gäller för medelfart?',
@@ -5021,6 +5112,97 @@ window.EXITTICKETS = {
       '$20\\ \\mathrm{mSv}$ skulle stämma om $Q$ vore 10, men betastrålning har kvalitetsfaktor 1, inte 10.',
       '$1{,}0\\ \\mathrm{mSv}$ skulle fås om dosen delades med 2 i stället för att multipliceras med kvalitetsfaktorn 1.',
       '$0{,}50\\ \\mathrm{mSv}$ skulle fås om dosen delades med 4 — det finns ingen sådan division i formeln för ekvivalent dos.',
+    ],
+  },
+],
+
+'fy1-9.6': [
+  {
+    question: 'Vad är en **elementarpartikel**?',
+    choices: ['En partikel som finns i atomkärnan', 'En partikel som inte är uppbyggd av några mindre delar', 'En partikel med laddningen $e$', 'Den lättaste partikeln i en atom'],
+    correct: 1,
+    why: [
+      'Protonen och neutronen finns i kärnan men är inte elementarpartiklar, eftersom de består av kvarkar.',
+      'En elementarpartikel har så långt vi vet inga mindre beståndsdelar, till exempel elektronen och kvarkarna.',
+      'Laddningen avgör inte saken. Neutrinon är oladdad men ändå en elementarpartikel.',
+      'Det handlar inte om massa. Toppkvarken är mycket tung men ändå en elementarpartikel.',
+    ],
+  },
+  {
+    question: 'Vilka tre av partiklarna är elementarpartiklar enligt standardmodellen: elektron, proton, neutron, uppkvark, neutrino?',
+    choices: ['Elektron, proton och neutron', 'Proton, neutron och uppkvark', 'Elektron, uppkvark och neutrino', 'Elektron, proton och neutrino'],
+    correct: 2,
+    why: [
+      'Protonen och neutronen består av tre kvarkar var och är därför inte elementarpartiklar.',
+      'Protonen och neutronen är sammansatta av kvarkar.',
+      'Elektronen och neutrinon är leptoner och uppkvarken är en kvark. Alla tre saknar mindre delar.',
+      'Protonen består av kvarkarna uud och är därför inte en elementarpartikel.',
+    ],
+  },
+  {
+    question: 'Vilken laddning har uppkvarken och nedkvarken?',
+    choices: ['$+\\dfrac{2}{3} \\cdot e$ och $-\\dfrac{1}{3} \\cdot e$', '$+e$ och $-e$', '$+\\dfrac{1}{3} \\cdot e$ och $-\\dfrac{2}{3} \\cdot e$', '$+e$ och $0$'],
+    correct: 0,
+    why: [
+      'Uppkvarken har $+\\dfrac{2}{3} \\cdot e$ och nedkvarken $-\\dfrac{1}{3} \\cdot e$. Då får protonen uud laddningen $+e$ och neutronen udd laddningen 0.',
+      'Det är protonens och elektronens laddningar. Kvarkarna har bråkdelar av $e$.',
+      'Laddningarna är omkastade. Då skulle protonen uud få laddningen 0.',
+      'Det är protonens och neutronens laddningar, inte kvarkarnas.',
+    ],
+  },
+  {
+    question: 'Vilka kvarkar består neutronen av?',
+    choices: ['uud', 'uuu', 'ddd', 'udd'],
+    correct: 3,
+    why: [
+      'uud är protonen, med laddningen $+e$.',
+      'uuu ger laddningen $2e$, inte 0.',
+      'ddd ger laddningen $-e$, inte 0.',
+      'udd ger $\\dfrac{2}{3} \\cdot e - \\dfrac{1}{3} \\cdot e - \\dfrac{1}{3} \\cdot e = 0$, precis som neutronen.',
+    ],
+  },
+  {
+    question: 'Vilken partikel förmedlar den **starka** växelverkan, som håller ihop kvarkarna?',
+    choices: ['Fotonen', 'Gluonen', 'W-partikeln', 'Higgsbosonen'],
+    correct: 1,
+    why: [
+      'Fotonen förmedlar den elektromagnetiska växelverkan.',
+      'Gluonen förmedlar den starka växelverkan och håller ihop kvarkarna, och därmed också atomkärnan.',
+      'W-partikeln förmedlar den svaga växelverkan, som orsakar betasönderfall.',
+      'Higgsbosonen hör ihop med det fält som ger partiklarna massa. Den förmedlar ingen av de tre krafterna.',
+    ],
+  },
+  {
+    question: 'Vad händer på kvarknivå vid β⁻-sönderfall?',
+    choices: ['En uppkvark blir en nedkvark', 'En proton delas i tre kvarkar', 'En nedkvark blir en uppkvark', 'En kvark blir en elektron'],
+    correct: 2,
+    why: [
+      'Det är vad som händer vid β⁺-sönderfall, när en proton blir en neutron.',
+      'Kvarkar förekommer aldrig ensamma, och protonen delas inte.',
+      'Neutronen udd blir protonen uud, så en nedkvark blir en uppkvark. Samtidigt sänds en elektron och en antineutrino ut.',
+      'Kvarken finns kvar som en annan kvark. Elektronen bildas samtidigt, men ersätter inte kvarken.',
+    ],
+  },
+  {
+    question: 'Vad är positronen?',
+    choices: ['Elektronens antipartikel, med samma massa men positiv laddning', 'En positivt laddad kvark', 'En proton utan neutroner', 'En kraftförmedlare för den svaga växelverkan'],
+    correct: 0,
+    why: [
+      'Positronen är elektronens antipartikel: samma massa men motsatt laddning, $+e$.',
+      'Positronen är en lepton, inte en kvark.',
+      'Positronen är en elementarpartikel och har inget med protoner att göra, mer än att laddningen är lika stor.',
+      'Den svaga växelverkan förmedlas av W- och Z-partiklarna, inte av positronen.',
+    ],
+  },
+  {
+    question: 'Vilken kraft ingår **inte** i standardmodellen?',
+    choices: ['Den elektromagnetiska växelverkan', 'Den starka växelverkan', 'Den svaga växelverkan', 'Gravitationen'],
+    correct: 3,
+    why: [
+      'Den elektromagnetiska växelverkan ingår och förmedlas av fotonen.',
+      'Den starka växelverkan ingår och förmedlas av gluonen.',
+      'Den svaga växelverkan ingår och förmedlas av W- och Z-partiklarna.',
+      'Gravitationen ingår inte i standardmodellen. Den är mycket svagare än de andra krafterna.',
     ],
   },
 ],

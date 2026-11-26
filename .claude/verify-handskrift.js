@@ -391,6 +391,60 @@ function granska(HK, typ, cfg) {
     }
   }
 
+  /* UNDERSTRYKNINGEN UNDER BRÅKET (REGEL i handskrift.js, användarkrav
+   * 2026-11-26): inget bläck får korsa svarets understrykning. En
+   * understrykning på baslinjen gick rakt igenom nämnaren i ett bråk
+   * ("3" i −1/3 · e, fy1-9.6 exempel 4b). underlinePts() märker
+   * punkterna med understrykning: true. Ringar får korsa. */
+  {
+    const korsar = (pts, r) => {
+      for (let i = 0; i + 1 < pts.length; i++) {
+        const [x0, y0] = pts[i], [x1, y1] = pts[i + 1];
+        let t0 = 0, t1 = 1;
+        const dx = x1 - x0, dy = y1 - y0;
+        const p = [-dx, dx, -dy, dy];
+        const q = [x0 - r.x0, r.x1 - x0, y0 - r.y0, r.y1 - y0];
+        let ok = true;
+        for (let k = 0; k < 4 && ok; k++) {
+          if (p[k] === 0) { if (q[k] < 0) ok = false; continue; }
+          const t = q[k] / p[k];
+          if (p[k] < 0) { if (t > t1) ok = false; else if (t > t0) t0 = t; }
+          else { if (t < t0) ok = false; else if (t < t1) t1 = t; }
+        }
+        if (ok) return [x0 + dx * t0, y0 + dy * t0];
+      }
+      return null;
+    };
+    const uls = L.acts.filter(a => a.kind === 'stroke' && a.pts &&
+                                   a.pts.understrykning);
+    for (const u of uls) {
+      const r = nyBox(); bboxAvPunkter(u.pts, r);
+      /* bara bläck som når understrykningens mittlinje räknas: en
+       * bokstavsfot på baslinjen kan nudda överkanten med 1 px */
+      r.x0 += 2; r.x1 -= 2;
+      const uTop = r.y0, uBot = r.y1;
+      const ym = (r.y0 + r.y1) / 2; r.y0 = ym - 0.5; r.y1 = ym + 0.5;
+      for (const a of L.acts) {
+        if (a === u || a.kind !== 'stroke' || a.ring || !a.pts ||
+            a.pts.understrykning || a.pts.length < 2) continue;
+        const ab = nyBox(); bboxAvPunkter(a.pts, ab);
+        if (ab.x1 < r.x0 || ab.x0 > r.x1 || ab.y1 < r.y0 || ab.y0 > r.y1) continue;
+        /* strecket ska gå IGENOM understrykningen, inte bara nudda den, och
+         * en systemklammer som spänner över flera rader räknas inte */
+        if (ab.y0 > uTop - 1 || ab.y1 < uBot + 1) continue;
+        if (ab.y1 - ab.y0 > 70) continue;
+        const pt = korsar(a.pts, r);
+        if (pt) {
+          fel.push('bläck korsar svarets understrykning vid x=' +
+                   pt[0].toFixed(0) + ', y=' + pt[1].toFixed(0) +
+                   ' (strecket ' + ab.x0.toFixed(0) + '–' + ab.x1.toFixed(0) + ' × ' + ab.y0.toFixed(0) + '–' + ab.y1.toFixed(0) + ', understrykningen y ' + r.y0.toFixed(0) + '–' + r.y1.toFixed(0) + ')' +
+                   ': lägg understrykningen under bråket (y + 0.95 * F)');
+          break;
+        }
+      }
+    }
+  }
+
   /* INTEGRALGRÄNSERNA BREDVID TECKNET (REGEL i handskrift.js,
    * användarkrav 2026-11-17): inget annat bläck får nudda ∫-tecknet.
    * Gränserna hamnade förut på krokarna ("1" och "4" i ma4-3.2 exempel 1)

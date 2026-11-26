@@ -757,6 +757,15 @@ Så här bygger du scenen:
    tecknets BÖRJAN med samma tal. `verify-handskrift.js` ger fel när
    bläck nuddar integraltecknet. Se REGEL "INTEGRALGRÄNSERNA BREDVID
    TECKNET" i filhuvudet.
+3v. **Understrykningen under svaret går aldrig igenom ett tecken.** Har
+   svarsraden ett bråk, en undre gräns eller något annat som hänger under
+   baslinjen (nämnaren i $-\dfrac{1}{3} \cdot e$, "x→2" under lim) läggs
+   understrykningen under det: `T.underline(xe, y + 0.95 * F)`, och
+   `lastBase` och nästa tankebubbla flyttas ned lika mycket (användarkrav
+   2026-11-26: linjen gick genom trean i `fy1-9.6` exempel 4b, och samma
+   fel fanns i `ma3c-3.5` och `ma3c-1.6`). `underlinePts()` märker
+   understrykningen och `verify-handskrift.js` ger fel när bläck går
+   igenom den. Se REGEL "UNDERSTRYKNINGEN UNDER BRÅKET" i filhuvudet.
 3r. **En ekvation som skrivs om rad för rad börjar på samma x varje rad.**
    `−3 = 2 · 4 + m` och raden under, `−3 = 8 + m`, ska stå rakt under
    varandra. Tidigare stod kedjans första rad på `padL` och resten på

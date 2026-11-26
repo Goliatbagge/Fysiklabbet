@@ -712,6 +712,17 @@
  * ma3b-2.2 och i NP Ma 4.) verify-handskrift.js ger fel på en T.str()
  * på en ny rad efter 'Svar:' som inte skrivs på padL.
  *
+ * ⚠️ REGEL (UNDERSTRYKNINGEN UNDER BRÅKET, användarkrav 2026-11-26):
+ * understrykningen under svaret får ALDRIG gå igenom något tecken. Har
+ * svarsraden ett bråk (fracH, fracOp …) hänger nämnaren ned under
+ * baslinjen, och en understrykning på T.underline(xe, y) går då rakt
+ * igenom nämnaren (trean i −1/3 · e i fy1-9.6 exempel 4b). Lägg den
+ * under nämnaren: T.underline(xe, y + 0.95 * F), som alla andra
+ * svarsrader med bråk, och räkna med den extra höjden i lastBase. Samma
+ * sak med en undre gräns eller ett index som hänger lågt. underlinePts()
+ * märker punkterna (understrykning: true), och verify-handskrift.js ger
+ * fel när något annat bläck än en ring korsar understrykningen.
+ *
  * ⚠️ REGEL (ALLA RADER BÖRJAR VID VÄNSTERKANTEN, användarkrav 2026-10-19):
  * varje rad i en pennlösning börjar vid padL — följdrader också. En
  * "= …"-kedja, en omskrivning under en ekvation, operationsraden i läget
@@ -45221,10 +45232,11 @@
     ]));
     x = T.str('Svar: −', padL, y);
     x = T.fracH('1', '3', x, y);
-    T.underline(T.str('·e både före och efter', x + g, y), y);
+    /* raden har ett bråk: understrykningen läggs under nämnaren */
+    T.underline(T.str('·e både före och efter', x + g, y), y + 0.95 * F);
     T.stepEnd();
 
-    return { acts: acts, contentW: 660, lastBase: y + 40, padL: padL };
+    return { acts: acts, contentW: 660, lastBase: y + 0.95 * F + 40, padL: padL };
   }
 
   /* ---------------- scen: planera ett pendelförsök (fy1-1.3 Ex 1) --
@@ -46367,6 +46379,9 @@
       }
     }
     pts.push([x0 + rnd(-0.4, 0.4), yTop + rnd(-0.4, 0.4)]);
+    /* märkning för verify-handskrift.js: inget bläck får korsa en
+     * understrykning (REGEL "UNDERSTRYKNINGEN UNDER BRÅKET") */
+    pts.understrykning = true;
     return pts;
   }
 
@@ -57075,7 +57090,7 @@
     xx = lim(padL, y, 'x→2');
     xx = T.str('(x+5)=2+5=', xx, y);
     xe = T.str('7', xx, y);
-    T.underline(xe, y);
+    T.underline(xe, y + 0.95 * F);   /* under x→2 */
     T.stepEnd();
 
     tanke(y, [
@@ -57083,10 +57098,10 @@
       [['i samma steg som värdet sätts']],
       [['in. Den hör till gränsvärdet,']],
       [['inte till svaret.']]
-    ], 0.7);
+    ], 1.45);
     T.stepEnd();
 
-    return { acts: acts, contentW: 660, lastBase: y + 5.2 * F, padL: padL };
+    return { acts: acts, contentW: 660, lastBase: y + 5.95 * F, padL: padL };
   }
 
   /* ---------------- scen: förkorta uttrycket (ma3c-1.6 ex 2) ---------
@@ -58491,10 +58506,10 @@
     xx = smallFrac(T, F, 'x', '3', xx, y - 0.52 * F, 0.62);
     xe = T.str('=4e', xx + 0.2 * F, y);
     xe = smallFrac(T, F, 'x', '3', xe, y - 0.52 * F, 0.62);
-    T.underline(xe, y);
+    T.underline(xe, y + 0.95 * F);   /* under nämnaren 3 */
     T.stepEnd();
 
-    return { acts: acts, contentW: 660, lastBase: y + 0.9 * F, padL: padL };
+    return { acts: acts, contentW: 660, lastBase: y + 1.85 * F, padL: padL };
   }
 
   /* ---------------- scen: annan bas än e (ma3c-3.5 ex 2) -------------

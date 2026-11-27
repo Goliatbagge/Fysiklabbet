@@ -3587,8 +3587,12 @@
         }
 
         function AvanceradeOvningar({ course, sections }) {
-            const grupper = samladeAvancerade(course, sections);
+            const alla = samladeAvancerade(course, sections);
+            // Snabbknappar överst: Alla eller ett enskilt avsnitt.
+            const [valt, setValt] = useState(null);
+            const grupper = valt === null ? alla : alla.filter(g => g.num === valt);
             const total = grupper.reduce((n, g) => n + g.upp.length, 0);
+            const totaltAlla = alla.reduce((n, g) => n + g.upp.length, 0);
             if (!total) {
                 return (
                     <div className="lab-block lab-block-bild" style={{ marginTop: 8 }}>
@@ -3603,6 +3607,21 @@
                     <p className="lab-ovningar-ingress">
                         Kapitlets alla uppgifter på nivån Avancerad, samlade från avsnitten.
                     </p>
+                    <div className="lab-ovningar-filter">
+                        <button type="button"
+                            className={'lab-ovningar-filter-btn' + (valt === null ? ' active' : '')}
+                            onClick={() => setValt(null)}>
+                            Alla <span className="lab-ovningar-filter-count">{totaltAlla}</span>
+                        </button>
+                        {alla.map(g => (
+                            <button key={g.num} type="button"
+                                className={'lab-ovningar-filter-btn' + (valt === g.num ? ' active' : '')}
+                                title={plainTitle(g.title)}
+                                onClick={() => setValt(g.num)}>
+                                {g.num} <span className="lab-ovningar-filter-count">{g.upp.length}</span>
+                            </button>
+                        ))}
+                    </div>
                     {grupper.map(g => (
                         <div key={g.num} className="lab-ovningar-grupp">
                             <h4 className="lab-ovningar-grupp-rubrik">
@@ -3610,7 +3629,7 @@
                             </h4>
                             {g.upp.map((u, i) => {
                                 const idx = nr++;
-                                return <Ovning key={g.num + '-' + i} uppgift={u} index={idx} total={total} />;
+                                return <Ovning key={valt + '-' + g.num + '-' + i} uppgift={u} index={idx} total={total} />;
                             })}
                         </div>
                     ))}

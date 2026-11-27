@@ -3566,6 +3566,58 @@
             );
         }
 
+        // ── Övningar i avsnittet Avancerade exempel (K.A) ───────────
+        // K.A-avsnitten har inga egna övningar. Kortet Övningar samlar i
+        // stället kapitlets alla uppgifter på nivån Avancerad (level 3) ur
+        // de vanliga avsnitten, i avsnittsordning och med avsnittets namn
+        // som mellanrubrik (önskemål 2026-11-27). Uppgifterna KOPIERAS inte
+        // i data/ovningar.js: de läses direkt ur avsnitten, så en rättad
+        // uppgift rättas här också. Sammanfattning (K.S), enhetskoll (K.E)
+        // och K.A själv hoppas över.
+        function samladeAvancerade(course, sections) {
+            const grupper = [];
+            for (const s of sections || []) {
+                const num = String(s.num);
+                if (/\.(S|E|A)$/.test(num)) continue;
+                const list = OVNINGAR[teoriId(course, s.num)] || [];
+                const upp = list.filter(u => u.level === 3);
+                if (upp.length) grupper.push({ num: s.num, title: s.title, upp });
+            }
+            return grupper;
+        }
+
+        function AvanceradeOvningar({ course, sections }) {
+            const grupper = samladeAvancerade(course, sections);
+            const total = grupper.reduce((n, g) => n + g.upp.length, 0);
+            if (!total) {
+                return (
+                    <div className="lab-block lab-block-bild" style={{ marginTop: 8 }}>
+                        <em>Övningar kommer snart.</em>
+                    </div>
+                );
+            }
+            let nr = 0;
+            return (
+                <div className="lab-ovningar">
+                    <h3 className="lab-ovningar-heading">Övningar på nivån Avancerad</h3>
+                    <p className="lab-ovningar-ingress">
+                        Kapitlets alla uppgifter på nivån Avancerad, samlade från avsnitten.
+                    </p>
+                    {grupper.map(g => (
+                        <div key={g.num} className="lab-ovningar-grupp">
+                            <h4 className="lab-ovningar-grupp-rubrik">
+                                <span className="lab-ovningar-grupp-num">{g.num}</span> {emTitle(g.title)}
+                            </h4>
+                            {g.upp.map((u, i) => {
+                                const idx = nr++;
+                                return <Ovning key={g.num + '-' + i} uppgift={u} index={idx} total={total} />;
+                            })}
+                        </div>
+                    ))}
+                </div>
+            );
+        }
+
         // ── Exit ticket ─────────────────────────────────────────────
         // Kort förhör på avsnittets viktigaste grunder. En fråga i taget;
         // eleven klickar direkt på det alternativ hen tror är rätt. Vid fel
@@ -3826,6 +3878,10 @@
             const isAvancerad = activeSection && String(activeSection.num).endsWith('.A');
             const hasTeori = tid && TEORI[tid];
             const hasOvningar = tid && OVNINGAR[tid] && OVNINGAR[tid].length > 0;
+            // K.A: kortet Övningar samlar kapitlets uppgifter på nivån Avancerad.
+            const antalAvancerade = isAvancerad
+                ? samladeAvancerade(course, sections).reduce((n, g) => n + g.upp.length, 0)
+                : 0;
             const hasExit = tid && EXITTICKETS[tid] && EXITTICKETS[tid].length > 0;
             // Övningsblad-kortet renderas BARA när avsnittet har minst ett
             // blad i data/ovningsblad.js (inget "Kommer snart").
@@ -4267,7 +4323,15 @@
                                                             <div className="lab-card-meta">Kommer snart</div>
                                                         </div>
                                                     ))}
-                                                    {hasOvningar ? (
+                                                    {(isAvancerad && antalAvancerade > 0) ? (
+                                                        <button type="button"
+                                                            className={'lab-card ' + (view === 'ovningar' ? 'lab-card-active' : 'lab-card-clickable')}
+                                                            onClick={() => setView('ovningar')}>
+                                                            <div className="lab-card-tag">Räkna</div>
+                                                            <div className="lab-card-title">Övningar</div>
+                                                            <div className="lab-card-meta">{I18N.t('{n} st', { n: antalAvancerade })}</div>
+                                                        </button>
+                                                    ) : hasOvningar ? (
                                                         <button type="button"
                                                             className={'lab-card ' + (view === 'ovningar' ? 'lab-card-active' : 'lab-card-clickable')}
                                                             onClick={() => setView('ovningar')}>
@@ -4407,7 +4471,9 @@
                                                     <TeoriBody id={tid} del="sammanfattning"
                                                         bionic={bionic} dyslexia={dyslexia} textScale={textScale} />
                                                 )}
-                                                {view === 'ovningar' && <Ovningar id={tid} />}
+                                                {view === 'ovningar' && (isAvancerad
+                                                    ? <AvanceradeOvningar course={course} sections={sections} />
+                                                    : <Ovningar id={tid} />)}
                                                 {view === 'ovningsblad' && <Ovningsblad id={tid} />}
                                                 {view === 'exitticket' && <ExitTicket id={tid} onStudyAgain={() => setView('teori')} />}
                                                 {view === 'visualisering' && vis && <Visualisering id={tid} />}

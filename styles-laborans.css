@@ -3849,6 +3849,24 @@ body.laborans u .lab-term {
     font-weight: 500;
 }
 
+/* Avancerade exempel (K.A): kapitlets uppgifter på nivån Avancerad,
+   grupperade per avsnitt (AvanceradeOvningar i katalog.html). */
+.lab-ovningar-ingress {
+    margin: -8px 0 22px;
+    color: var(--lab-ink-soft, var(--lab-ink));
+}
+.lab-ovningar-grupp { margin-bottom: 28px; }
+.lab-ovningar-grupp-rubrik {
+    font-family: var(--lab-font-display);
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--lab-ink);
+    margin: 0 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--lab-rule, rgba(15,22,32,0.15));
+}
+.lab-ovningar-grupp-num { opacity: 0.6; margin-right: 4px; }
+
 .lab-ovningar-filter {
     display: flex;
     flex-wrap: wrap;

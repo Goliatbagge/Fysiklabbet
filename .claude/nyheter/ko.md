@@ -15,6 +15,12 @@ Format per post:
 - **Ett meddelande genom gravitationen: en hiss och en gravimeter skickade ordet ”Gravity” genom en tegelvägg (University of Queensland)** **[BREVTEASER]** (nominerad 2026-11-22 när KM3NeT-teasern löstes in: ett ord skickat genom en tegelvägg med en hiss som motvikt och en gravimeter som mottagare, lätt att sammanfatta; läs förtrycket arXiv 2511.16710 i fulltext före publicering) — gravitation/mekanik, perfekt gymnasiekoppling (Newtons gravitationslag, motvikten 1,8 ton som växlar mellan två våningar = 0 och 1). Valdes bort 2026-11-21 enbart för att 2026-11-20 också handlade om att skicka meddelanden (värmebrus); ta tidigast 2026-11-22. Woffinden med flera, Science Advances 2026, DOI 10.1126/sciadv.aee0802 (science.org ger 403 för curl); ÖPPET förtryck arXiv 2511.16710 (”Unblockable Communication With Gravity”). Källa (Phys.org 2026-11-18): https://phys.org/news/2026-11-physicists-unblockable-message-gravity.html
   (tillagd 2026-11-20)
 
+- **p-vågsmagnetism i den enkla metallen europiumsilicid (EuSi, MPI CPfS Dresden, Erjian Cheng)** — magnetism/kvantmaterial; elektroner som rör sig åt motsatta håll har motsatt spinnpolarisation, spiralordning 33–62 K. Cheng m.fl., Nature 2026-11-24, DOI 10.1038/s41586-026-11295-9; betalvägg trolig, leta förtryck. OBS magnetism 2026-11-09. Källa (ScienceDaily 2026-11-24): https://www.sciencedaily.com/releases/2026/11/261123005341.htm
+  (tillagd 2026-11-27)
+
+- **Proteindroppar driver mikropartiklar utan motor (Princeton, Sorkin och Wingreen)** — biofysik/mjuk materia, teori och simuleringar; upp till 0,1 mm/s. Phys. Rev. X 16, 041056 (2026-11-25), DOI 10.1103/PhysRevX.16.041056, öppen (PRX). Källa (Physics Magazine): https://physics.aps.org/articles/v19/s157
+  (tillagd 2026-11-27)
+
 - **Koherent elastisk neutrino–kärnspridning mätt med rekordprecision, skärper gränserna för nya krafter** — partikelfysik/neutriner; OBS neutriner 2026-11-23, vänta minst en vecka. Originalet ej kontrollerat. Källa (Phys.org 2026-11-26): https://phys.org/news/2026-11-precise-coherent-elastic-neutrinonucleus-date.html
   (tillagd 2026-11-26)
 

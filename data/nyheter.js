@@ -103,6 +103,65 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-28-atomen-till-vanster-eller-hoger",
+    date: "2026-11-28",
+    title: "Kvantbitar av atomer som sitter till vänster eller till höger",
+    deck: "Fysiker i Kina har byggt en kvantprocessor där varje qubit är en enda rubidiumatom som sitter i den vänstra eller den högra av två små gropar i ett gitter av laserljus. Med hjälp av tunneleffekten kopplade de ihop 123 sådana atomer i ett sammanflätat rutnät och tog med den här sortens qubitar de första stegen mot en kvantdator som räknar genom att mäta.",
+    category: "Kvantfysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-11-28-atomen-till-vanster-eller-hoger.jpg",
+    imageAlt: "Närbild genom en stor kopparfärgad ring på en avlång glascell i ett laboratorium. Inne i glaset skimrar ett gyllene sken, och till höger syns ett genomskinligt glasprisma i rosa ljus.",
+    imageCredit: "Foto: Tomasz Kawalec (CC BY-SA 4.0), via Wikimedia Commons, beskuren. En glascell med laserkylda rubidiumatomer och magnetspolar i ett annat laboratorium. Bilden visar inte uppställningen i studien.",
+    tags: ["kvantfysik", "kvantdator", "qubit", "sammanflätning", "superposition", "tunneleffekt", "ljusgitter", "klustertillstånd", "kvantgrind", "ultrakalla atomer", "rubidium", "interferens", "kvantgasmikroskop", "jian-wei pan"],
+    sources: [
+      { name: "Physics Magazine (APS): Quantum Computing with Location-Based Bits (Rachel Berkowitz, 24 november 2026)", url: "https://physics.aps.org/articles/v19/163" },
+      { name: "Phys.org: New quantum network entangles 123 qubits that store information in atoms' positions (25 november 2026)", url: "https://phys.org/news/2026-11-quantum-network-entangles-qubits-atoms.html" }
+    ],
+    research: {
+      citation: "M.-G. He, W.-Y. Zhang, Z.-S. Yuan och J.-W. Pan, ”Orbit-Qubit Quantum Processor of Ultracold Atoms”, Physical Review Letters 137, 223402, publicerad 24 november 2026. Kollegialt granskad. Läst i fulltext i förtrycket med samma titel, arXiv:2509.10797v2.",
+      url: "https://doi.org/10.1103/fxpf-vzxx"
+    },
+    larare: {
+      moment: [
+        { label: "Reflexion, transmission och stående vågor", href: "katalog.html?id=fy2-2.8" },
+        { label: "Ljus, diffraktion och interferens", href: "katalog.html?id=fy2-4.2" },
+        { label: "Våg-partikeldualitet och de Broglies hypotes", href: "katalog.html?id=fy2-4.6" }
+      ],
+      fragor: [
+        "Två laserstrålar med våglängden 532 nm som möts rakt mot varandra bildar en stående våg där de ljusa ränderna ligger en halv våglängd från varandra. Beräkna det avståndet. I försöket korsades strålarna i stället under en vinkel, och avståndet blev 630 nm. Förklara med ord varför avståndet blir större när strålarna inte möts rakt mot varandra.",
+        "Beräkna de Broglievåglängden för en rubidiumatom (massan $m = 1{,}44 \\cdot 10^{-25}\\ \\mathrm{kg}$) som rör sig med farten 1 mm/s, och jämför med avståndet 630 nm mellan groparna. Vad säger jämförelsen om varför atomen kan bete sig som en våg i gittret?",
+        "Forskarna läser av resultatet genom att fotografera var varje atom sitter. Varför räcker det inte att mäta atomernas lägen en gång för att visa att de är sammanflätade, och varför måste försöket upprepas många gånger?"
+      ]
+    },
+    body: [
+      { type: "p", html: "En vanlig dator räknar med bitar som är antingen 0 eller 1. En kvantdator räknar med qubitar, som också kan vara i en superposition, en kombination av 0 och 1 som avgörs först när man mäter. Det finns många sätt att bygga en qubit: en elektrisk krets som kyls till nära absoluta nollpunkten, en jon som hålls fast av elektriska fält eller en atom vars elektroner kan vara i två olika tillstånd." },
+      { type: "p", html: "Forskare vid University of Science and Technology of China i Hefei har nu prövat en idé som är nästan löjligt enkel att beskriva. Qubiten är en enda atom som sitter antingen i en liten grop till vänster, och då är den 0, eller i en grop alldeles intill till höger, och då är den 1. Studien, med Ming-Gen He som försteförfattare och Jian-Wei Pan som gruppledare, publicerades i <em>Physical Review Letters</em> den 24 november." },
+      { type: "h2", text: "Ett gitter av laserljus" },
+      { type: "p", html: "Groparna är gjorda av ljus. När två laserstrålar korsar varandra interfererar ljuset och bildar ett regelbundet mönster av ljusa och mörka ränder. Med strålpar i två riktningar blir det ett rutnät av fläckar. Ultrakalla atomer, i det här fallet rubidiumatomer, fastnar i vissa delar av mönstret ungefär som ägg i en äggkartong. Ett sådant mönster av ljus kallas ett ljusgitter." },
+      { type: "p", html: "Forskarna lade två ljusgitter ovanpå varandra: ett av grönt laserljus med våglängden 532&nbsp;nanometer och ett av infrarött ljus med dubbelt så lång våglängd, 1&nbsp;064&nbsp;nanometer. Avståndet mellan groparna blev 630&nbsp;nanometer i det ena gittret och dubbelt så stort i det andra, och tillsammans gör de varannan grop lite djupare än grannarna. Över alltihop lade forskarna dessutom ett magnetfält som blir starkare åt ena hållet, så att golvet lutar en aning. Lutningen tar ut skillnaden i djup mellan två grannar, så att de bildar ett par där atomen kan röra sig fram och tillbaka. Ett sådant par är en qubit. De två groparna ligger 630&nbsp;nanometer från varandra, ungefär en hundradel av ett hårstrås tjocklek." },
+      { type: "p", html: "Mellan de två groparna finns en vägg av ljus. En boll som rullar i en skål kan inte ta sig över en kant som är för hög. En atom kan ändå hamna på andra sidan, genom tunneleffekten: den beter sig som en våg, och en del av vågen läcker igenom väggen. När forskarna gjorde väggen lagom låg pendlade atomerna fram och tillbaka mellan vänster och höger grop, ett helt varv på ungefär 9&nbsp;millisekunder. Stoppar man pendlingen efter ett kvarts varv är atomen i en superposition, lika mycket i båda groparna. Pendlingarna dämpades långsamt, med en avklingningstid på drygt 0,2&nbsp;sekunder, vilket betyder att atomerna behåller sin superposition förhållandevis länge." },
+      { type: "h2", text: "Ett varv runt som vänder tecknet" },
+      { type: "p", html: "En enda qubit räcker inte. För att räkna måste qubitarna påverka varandra, och då behövs sammanflätning: två atomer vars tillstånd hänger ihop så att det ena inte längre går att beskriva utan det andra." },
+      { type: "p", html: "Här använde forskarna ett trick. Varje atom kan vara i ett av två inre tillstånd, och de två tillstånden påverkas olika mycket av magnetfältet. Genom att ställa in gittret rätt kunde forskarna välja att bara atomerna i det ena tillståndet får tunnla, medan de andra sitter fast. De tunnlande atomerna kunde då ta sig in i en grop hos grannqubiten, men bara om den gropen var tom. Satt grannatomen där hade de två atomerna hamnat i samma grop, och eftersom de stöter bort varandra kostar det extra energi. Då stämmer energin inte längre för att tunnla, och atomen blev kvar där den var." },
+      { type: "p", html: "En atom som tunnlar ett helt varv, dit och tillbaka, är efteråt där den började. Men dess kvanttillstånd har bytt tecken. Det syns inte om man bara tittar var atomen sitter, men det avgör hur tillståndet interfererar senare. Eftersom varvet bara blir av när grannens grop är tom, beror tecknet på var grannatomen sitter. Det är en kvantgrind, en grundläggande räkneoperation mellan två qubitar, och när qubitarna är i superposition sammanflätar den dem. Grindens trohet, ett mått på hur nära den kommer den ideala operationen, var omkring 95&nbsp;procent i den del av gittret där den mättes. Operationen som sätter en ensam qubit i superposition nådde en trohet på drygt 99&nbsp;procent." },
+      { type: "h2", text: "123 atomer i ett rutnät" },
+      { type: "p", html: "Med två lager av sådana grindar, först för atomerna i det ena inre tillståndet och sedan för dem i det andra, kopplade forskarna ihop qubitarna i ett rutnät. Ett sådant rutnät av sammanflätade qubitar kallas ett klustertillstånd. För att kontrollera resultatet fotograferade de atomerna i ett kvantgasmikroskop, som visar var varje enskild atom sitter, och upprepade försöket många gånger." },
+      { type: "p", html: "I ett sammanhängande område med 123 qubitar visade mätningarna att grannar var parvis sammanflätade, så att rutnätet inte går att dela upp i två oberoende delar, hur man än delar det. Marginalen är dock knapp, bara en standardavvikelse över gränsen. Ett starkare bevis, att alla qubitarna i en grupp hänger ihop som en enda helhet, gav de för kedjor med upp till sju qubitar." },
+      { type: "image", src: "nyheter/bilder/2026-11-28-atomen-till-vanster-eller-hoger-2.jpg", alt: "En apparat av blank metall på ett svart stativ i en vit museisal: en liggande ståltank med bultade flänsar, ett långt rör som sticker ut åt vänster och ett kors med små runda fönster ovanpå. Under tanken sitter två svarta spolar lindade med koppartråd.", caption: "En apparat för att göra Bose–Einstein-kondensat, byggd vid Max-Planck-institutet för kvantoptik i Garching 1997 och i dag utställd på Deutsches Museum i München. Experiment med ultrakalla atomer bygger på vakuumkammare och magnetspolar som dessa.", credit: "Foto: Tiia Monto (CC BY 4.0), via Wikimedia Commons, beskuren" },
+      { type: "h2", text: "En dator som räknar genom att mäta" },
+      { type: "p", html: "Klustertillståndet är råmaterialet till en ovanlig sorts kvantdator, en som räknar genom att mäta. Först sammanflätas alla qubitar. Sedan mäter man dem en i taget, och genom att välja på vilket sätt varje qubit mäts styr man vilken räkneoperation som utförs. För varje mätning flyttas informationen ett steg vidare längs kedjan av qubitar. Forskarna visade principen med fyra enkla operationer, bland annat en som vrider tillståndet hos en qubit och en som sammanflätar två qubitar." },
+      { type: "p", html: "Idén är ett sätt att komma runt ett av de stora problemen med atomer i ljusgitter. Groparna ligger så tätt att det är svårt att rikta en laserstråle mot en enda atom utan att träffa grannarna. Här styr forskarna i stället alla atomer med samma inre tillstånd på en gång, med magnetfältet och gittret, och kan ändå välja vilka som deltar." },
+      { type: "quote", html: "Ett mycket originellt sätt att koda en qubit i ett gitter.", cite: "Konrad Viebahn, ETH Zürich, som inte deltog i studien (i Physics Magazine, översatt från engelska)" },
+      { type: "p", html: "Precisionen är ännu inte tillräcklig för riktiga beräkningar. De enklaste logiska operationerna gav rätt svar i omkring 77&nbsp;procent av försöken, och forskarna skriver att ojämnheter i gittret och tekniskt brus begränsar resultatet. Immanuel Bloch vid Max-Planck-institutet för kvantoptik, som inte heller deltog i studien, kallar troheten, alltså hur nära rutnätet i labbet kommer det ideala, ”inte bra ännu” men ser arbetet som ett nytt sätt att bygga kvantdatorer." },
+      { type: "quote", html: "De visar stegen. Nu handlar det om att förbättra troheten.", cite: "Immanuel Bloch, Max-Planck-institutet för kvantoptik (i Physics Magazine, översatt från engelska)" },
+      { type: "fact", title: "Visste du?", items: [
+        "Idén om en kvantdator som räknar genom att mäta i ett klustertillstånd lades fram 2001 av Robert Raussendorf och Hans Briegel.",
+        "Rubidium-87 var också den atomsort som det första Bose–Einstein-kondensatet gjordes av, 1995. Eric Cornell och Carl Wieman fick Nobelpriset i fysik för det 2001, tillsammans med Wolfgang Ketterle.",
+        "Groparna i ljusgittret ligger 630&nbsp;nanometer isär, alltså bara lite mer än en våglängd av det gröna laserljuset som bildar dem."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-27-kratern-efter-dart",
     date: "2026-11-27",
     title: "Smällen från DART lämnade en krater lika bred som hela asteroiden",

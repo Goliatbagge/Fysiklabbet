@@ -3730,7 +3730,7 @@ window.BEGREPP = [
     id: 'qubit',
     term: 'Qubit',
     former: ['qubit', 'qubiten', 'qubitar', 'qubitarna', 'kvantbit', 'kvantbiten', 'kvantbitar', 'kvantbitarna', 'logisk qubit', 'logiska qubitar', 'fysisk qubit', 'fysiska qubitar'],
-    kort: 'Kvantdatorns minnescell. Till skillnad från en vanlig bit, som är antingen noll eller ett, kan en qubit befinna sig i en blandning av båda, men bara fram till att den läses av.',
+    kort: 'Kvantdatorns minnescell. Till skillnad från en vanlig bit, som är antingen noll eller ett, kan en qubit befinna sig i en superposition av båda, men bara fram till att den läses av.',
     relaterade: ['kvantdator', 'dekoherens', 'kvantsammanflatning', 'kvantmekanik'],
     body: [
       { type: 'p', html: 'En vanlig dator lagrar allt som bitar, strömbrytare som står i ett av två lägen. En qubit är i stället ett kvantsystem med två tillstånd, och kvantmekaniken tillåter det att befinna sig i en superposition av båda samtidigt. Det betyder inte att qubiten i hemlighet är noll eller ett och att vi bara saknar upplysningen. Blandningen är verklig och går att mäta på indirekta sätt. Men i samma ögonblick som man läser av den faller den ihop till ett vanligt svar, noll eller ett, och blandningen är borta för gott.' },
@@ -5267,6 +5267,42 @@ window.BEGREPP = [
       { type: 'p', html: 'En rymdsond långt ute i solsystemet kan inte styras i realtid. Radiosignalerna tar flera minuter, ibland timmar, att nå fram, och ibland är kontakten bruten för att sonden vänt sig bort från jorden. Sonden måste därför själv kunna känna igen när något går fel och skydda sig.' },
       { type: 'p', html: 'När datorn ombord upptäcker något oväntat, till exempel en motor som inte beter sig som den ska eller ett värde som ligger utanför det tillåtna, avbryter den det pågående arbetet. Instrument som inte behövs stängs av, solpanelerna riktas mot solen så att batterierna laddas, och antennen riktas så att sonden kan höras från jorden. Det påminner om när en dator startar i felsäkert läge.' },
       { type: 'p', html: 'Sedan får teknikerna på jorden ta reda på vad som hände och skicka nya kommandon. Säkert läge är alltså inget haveri, utan ett tecken på att sonden skyddat sig som den är byggd för. De flesta rymdsonder hamnar där några gånger under sin livstid.' }
+    ]
+  },
+  {
+    id: 'ljusgitter',
+    term: 'Ljusgitter',
+    former: ['ljusgitter', 'ljusgittret', 'ljusgittren'],
+    kort: 'Ett regelbundet mönster av ljusa och mörka fläckar som bildas där laserstrålar korsar varandra, och där ultrakalla atomer kan fångas en och en, som ägg i en äggkartong. Kallas också optiskt gitter.',
+    relaterade: ['kvantgasmikroskop', 'laserkylning', 'bose-einstein-kondensat', 'qubit'],
+    body: [
+      { type: 'p', html: 'När två laserstrålar möts lägger sig vågorna ovanpå varandra. På vissa ställen samverkar de och ljuset blir starkt, på andra tar de ut varandra och det blir mörkt. Möts strålarna rakt mot varandra uppstår en stående våg, där de ljusa ränderna ligger en halv våglängd isär. Med flera strålar i olika riktningar blir mönstret ett rutnät i två eller tre dimensioner, med några hundra nanometers mellanrum.' },
+      { type: 'p', html: 'Ljuset påverkar atomerna. Beroende på ljusets våglängd dras de mot de ljusa fläckarna eller trycks bort mot de mörka. Är atomerna tillräckligt kalla, en liten bråkdel av en grad över absoluta nollpunkten, har de för lite rörelseenergi för att ta sig ur sina gropar, och de blir liggande i mönstret som ägg i en äggkartong. Genom att ändra laserljusets styrka kan forskarna göra groparna djupare eller grundare och styra hur lätt atomerna tunnlar mellan dem.' },
+      { type: 'p', html: 'Ljusgitter används för att efterlikna hur elektroner rör sig i ett fast material, i de noggrannaste atomuren och som grund för kvantdatorer där varje atom är en qubit. Ordet gitter används i optiken också om en glasskiva med tätt liggande spår som delar upp ljus i färger. Det är något helt annat, därför kallas fällan för atomer här ljusgitter.' }
+    ]
+  },
+  {
+    id: 'kvantgrind',
+    term: 'Kvantgrind',
+    former: ['kvantgrind', 'kvantgrinden', 'kvantgrindar', 'kvantgrindarna', 'logisk kvantgrind', 'logiska kvantgrindar'],
+    kort: 'En räkneoperation i en kvantdator. Den ändrar tillståndet hos en eller några qubitar på ett bestämt sätt, och kvantdatorns program byggs av många sådana operationer efter varandra.',
+    relaterade: ['qubit', 'kvantdator', 'kvantsammanflatning', 'superposition'],
+    body: [
+      { type: 'p', html: 'I en vanlig dator bearbetas bitarna av logiska grindar, små kretsar som till exempel ger utsignalen 1 bara om båda insignalerna är 1. Alla beräkningar, från en miniräknare till en spelkonsol, byggs av sådana grindar, i en modern processor flera miljarder.' },
+      { type: 'p', html: 'En kvantgrind gör samma sak med qubitar, men den måste respektera kvantfysiken. En grind på en enda qubit kan till exempel vrida den från 0 till en superposition av 0 och 1. En grind på två qubitar kan ändra den ena qubiten beroende på den andras tillstånd, och det är så qubitar blir sammanflätade. Till skillnad från de flesta vanliga grindar kan en kvantgrind alltid köras baklänges, ingen information får gå förlorad på vägen.' },
+      { type: 'p', html: 'Hur bra en kvantdator är beror till stor del på hur ofta grindarna gör rätt. Ett fel på en procent i varje grind låter lite, men efter hundra grindar efter varandra har felen hunnit samlas så mycket att svaret inte går att lita på. Därför jagar forskarna grindar som gör rätt i mer än 99,9&nbsp;procent av fallen, och felrättning som kan laga de fel som ändå blir.' }
+    ]
+  },
+  {
+    id: 'klustertillstand',
+    term: 'Klustertillstånd',
+    former: ['klustertillstånd', 'klustertillståndet', 'klustertillstånden'],
+    kort: 'Ett rutnät eller en kedja av qubitar där varje qubit är sammanflätad med sina grannar. Det kan användas som råmaterial i en kvantdator som räknar genom att mäta.',
+    relaterade: ['qubit', 'kvantsammanflatning', 'kvantgrind', 'kvantdator'],
+    body: [
+      { type: 'p', html: 'Tänk dig ett rutat papper där varje ruta är en qubit, och där varje qubit är sammanflätad med sina närmaste grannar. Det är ett klustertillstånd. Man bygger det genom att först sätta alla qubitar i en superposition av 0 och 1 och sedan låta varje par av grannar gå igenom samma kvantgrind, som kopplar ihop dem.' },
+      { type: 'p', html: 'Det märkliga är vad man sedan kan göra med det. En vanlig kvantdator räknar genom att låta många grindar verka på qubitarna efter varandra. Med ett klustertillstånd gör man allt sammanflätande först, och räknar sedan bara genom att mäta qubitarna en i taget. Valet av hur varje qubit mäts styr vilken beräkning som utförs, och för varje mätning flyttas informationen ett steg vidare genom rutnätet. Idén lades fram 2001 och kallas mätbaserad eller enkelriktad kvantberäkning, eftersom klustret förbrukas medan man räknar.' },
+      { type: 'p', html: 'Fördelen är att den svåra delen, sammanflätningen, kan göras på en gång för alla qubitar, medan resten bara kräver mätningar på en qubit i taget. Klustertillstånd har byggts av ljuspartiklar, joner och atomer, och de används också för att pröva metoder som skyddar beräkningen mot fel.' }
     ]
   }
 ];

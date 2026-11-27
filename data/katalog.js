@@ -325,6 +325,7 @@ window.KATALOG = {
               { num: '1.10', title: 'Prioriteringsregler', description: 'I vilken ordning räkneoperationer utförs — parenteser, potenser, multiplikation och addition.', href: null, icon: null, keywords: ['aritmetik','prioriteringsregler','räkneordning','parenteser','potenser','mattedjävulen','term','summa','differens','faktor','produkt','täljare','nämnare','kvot'] },
               { num: '1.11', title: 'Hur du slår på din räknare', description: 'Testberäkningar för räknaren — rötter, potenser, parenteser i bråk och E-notation.', href: null, icon: null, keywords: ['aritmetik','räknare','miniräknare','grafräknare','e-notation','tiopotens','parenteser','rot','bråk'] },
               { num: '1.S', title: 'Sammanfattning', description: 'Talmängder, bråkräkning, potenslagar och prefix — kapitlets begrepp, formler och metoder komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','aritmetik','bråk','potenser','potenslagarna','prefix','grundpotensform'] },
+              { num: '1.A', title: 'Avancerade exempel', description: 'Fyra lösta exempel på nivån Avancerad inför provet: potenser med olika baser, antalet siffror i ett stort tal och smarta bråkberäkningar, med pennlösningar.', href: null, icon: null, keywords: ['avancerad','avancerade exempel','exempel','prov','provkoll','repetition','potenser','potenslagarna','rationella exponenter','grundpotensform','bråk','jämföra bråk','a-nivå'] },
             ],
           },
           'Algebra och ekvationer': {
@@ -345,6 +346,7 @@ window.KATALOG = {
               { num: '2.12', title: 'Använda formler', description: 'Sätt in värden, lös ut storheter — och håll koll på enheterna.', href: null, icon: null, keywords: ['algebra','formel','formler','storhet','lösa ut','insättning','enheter','hastighet'] },
               { num: '2.13', title: 'Mönster och formler', description: 'Talföljder och slutna formler — hitta mönstret och beräkna element nummer 1 000 direkt.', href: null, icon: null, keywords: ['algebra','talföljd','mönster','element','sluten formel','ordningsnummer','prickmönster'] },
               { num: '2.S', title: 'Sammanfattning', description: 'Uttryck, ekvationslösning, olikheter och formler — kapitlets begrepp och metoder komprimerat inför provet.', href: null, icon: null, keywords: ['sammanfattning','repetition','prov','provkoll','formler','algebra','ekvationer','ekvation','olikheter','faktorisera','balansmetoden'] },
+              { num: '2.A', title: 'Avancerade exempel', description: 'Fyra lösta exempel på nivån Avancerad inför provet: ett algebraiskt bevis, ett uttryck ur ett annat, en konstant i en olikhet och en formel ur ett mönster, med pennlösningar.', href: null, icon: null, keywords: ['avancerad','avancerade exempel','exempel','prov','provkoll','repetition','bevis','jämna tal','delbarhet','olikheter','konstant','mönster','formel','a-nivå'] },
             ],
           },
           'Procentuella förändringar': {

@@ -1,0 +1,45 @@
+03:15:02  [idag] === Nyhetsjobb: start (2026-11-27) ===
+03:15:06  [idag] Dagens nyhet finns (förberedd i går).
+03:15:06  [idag] Startar Claude Code (headless, modell opus, nyckel)...
+03:20:03  [imorgon] === Nyhetsjobb: start (2026-11-27) ===
+03:20:03  [imorgon] En körning pågår redan (lås 5 min gammalt). Avslutar.
+03:29:14  [idag] Artikeln för 2026-11-28 är skriven, granskad och committad som `4df0b2af` på grenen `nyhetsjobb`. Jag har inte pushat och inte skickat något mejl.
+03:29:14  [idag] 
+03:29:14  [idag] **Artikeln:** "Kvantbitar av atomer som sitter till vänster eller till höger" (Kvantfysik). En grupp vid University of Science and Technology of China (Hefei) har byggt en kvantprocessor där varje qubit är en rubidiumatom i den vänstra eller den högra av två små gropar i ett ljusgitter. Atomerna kopplas ihop med tunneleffekten, och forskarna visade sammanflätning mellan grannar i ett rutnät med 123 qubitar. Artikeln säger att marginalen är knapp och att det starkare beviset bara gäller kedjor med upp till sju qubitar.
+03:29:15  [idag] - **Studien:** He, Zhang, Yuan och Pan, Physical Review Letters 137, 223402, publicerad 24 november. Jag läste den i fulltext i förtrycket arXiv:2509.10797v2, inklusive metoddelen.
+03:29:15  [idag] - **Valet:** grannen 2026-11-27 handlar om mekanik, och ingen kvantfysikartikel har publicerats sedan 2026-11-02. Positronfällan från Northwestern valdes bort eftersom den redan publicerades 2026-10-23.
+03:29:15  [idag] - **Brevteasern** om hissen i Queensland ska vänta till efter brevet 2026-11-29, så den lämnades orörd.
+03:29:15  [idag] 
+03:29:15  [idag] **Granskningen:** både utgivaren och fysikgranskaren svarade först "Rätta först". Jag förde in alla deras punkter, bland annat:
+03:29:15  [idag] - hur dubbelbrunnen bildas;
+03:29:15  [idag] - att de två grindlagren gäller atomer i olika inre tillstånd, inte två riktningar;
+03:29:15  [idag] - att resultatet anges som trohet, inte som "rätt i 95 procent av fallen";
+03:29:15  [idag] - att två laserstrålar ger ränder, inte fläckar;
+03:29:15  [idag] - fel titel i källhänvisningen.
+03:29:15  [idag] 
+03:29:15  [idag] Ett undantag: lärarmomentets etikett för fy2-2.8 behölls, eftersom den stämmer med katalogen. Utgivaren drog då tillbaka den punkten. I efterkontrollen godkände båda artikeln.
+03:29:15  [idag] 
+03:29:15  [idag] **Bilderna** är två riktiga foton från Wikimedia Commons, ingen AI-bild:
+03:29:15  [idag] - Huvudbilden är en glascell med laserkylda rubidiumatomer (Tomasz Kawalec, CC BY-SA 4.0).
+03:29:15  [idag] - I brödtexten finns en apparat för Bose–Einstein-kondensat på Deutsches Museum (Tiia Monto, CC BY 4.0).
+03:29:15  [idag] 
+03:29:15  [idag] Båda är beskurna så att en etikett och en museiskylt försvann, och krediterna säger det.
+03:29:15  [idag] 
+03:29:15  [idag] **Ordlistan** har tre nya begrepp: ljusgitter, kvantgrind och klustertillstånd. På fysikgranskarens inrådan ändrade jag också "blandning" till "superposition" i det befintliga uppslaget om qubit.
+03:29:15  [idag] 
+03:29:15  [idag] **Kontroller:** `node data/build-nyheter-og.js` är körd. `verify-begrepp` och `verify-navigation` gav inga fel. `verify-sprak` och `verify-nbsp-enhet` hittade inga fel i den nya artikeln, men `verify-sprak` ger tre fel och `verify-nbsp-enhet` 16 fel i äldre artiklar längre ner i `data/nyheter.js`, som jag inte rörde. Jag har också kontrollerat förhandsvisningen i en skärmdump.
+03:29:15  [idag] 
+03:29:15  [idag] `publicerat.md`, `ko.md` och `granskningar.md` är uppdaterade. Kön har två nya uppslag: magnetism i europiumsilicid och proteindroppar som driver mikropartiklar. Bygget ändrade bara radsluten i `katalog/dela`, `nyheter/dela` och `i18n`, och de filerna committade jag inte.
+03:29:15  [idag] 
+03:29:15  [idag] **Att ta ställning till:** utgivaren upptäckte att fy2-2.8 har två titlar. Katalogen säger "Reflexion, transmission och stående vågor", men genomgången heter "… och superposition" och tar inte upp stående vågor. Någon behöver bestämma vilken titel som gäller.
+03:29:15  [idag] Claude avslutade med kod 0
+03:29:16  [idag] Kastar 675 ocommittade filändringar före rebasen (kopia i logg\ocommittat.patch).
+03:29:25  [idag] Pushat till main.
+03:29:25  [idag] Artikel 2026-11-28 pushad: 2026-11-28-atomen-till-vanster-eller-hoger
+03:30:56  [idag] https://fysiklabbet.se/nyheter.html?forhand=2026-11-28-atomen-till-vanster-eller-hoger
+03:30:57  [idag] Mejlet byggt av mallen (C:\claude\Fysiklabbet-nyhetsjobb\.claude\nyheter\logg\mejl-2026-11-28).
+03:30:57  [idag] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+03:32:07  [idag] Done. The granskningsmejl for the 2026-11-28 article was sent to [ägaren] with the `[[UTGIVARE]]` placeholder replaced by a short summary of the utgivare's correction requests, and the receipt file was written with message id `1a21ad870937c847`.
+03:32:08  [idag] Claude avslutade med kod 0
+03:32:08  [idag] Mejlet till ägaren är skickat.
+03:32:08  [idag] === Nyhetsjobb: slut ===

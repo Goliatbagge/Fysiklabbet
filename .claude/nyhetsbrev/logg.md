@@ -16,7 +16,7 @@ Format:
   söndag 2026-11-29 (första advent) kl 06.00 svensk tid. Bilderna i nyheter/brev/ pushades till main.
   Förhandsvisningen (JPEG) skickades till användaren.
 - EmailOctopus: UPPLAGD 2026-11-28 som kampanjen "Nyhetsbrev nr 16 - 2026-11-29" (alla prenumeranter, 40
-  mottagare), testmejlet skickat samma dag ("Sent!"). INTE schemalagd: schemaläggningen är användarens.
+  mottagare), testmejlet skickat samma dag ("Sent!"). Tre stycken omskrivna efter användarens påpekanden och nytt testmejl skickat. SCHEMALAGD 2026-11-28 på användarens uttryckliga begäran till söndag 2026-11-29 kl. 06.00 (tidszon Europe/Amsterdam, samma som Stockholm).
 - Preheader: "Plus en resa från atomerna till hela universum och avancerade exempel inför provet."
 - Brevperiod 2026-11-22 till 2026-11-28: sju artiklar, alla länkade. Söndagens artikel (11-29, instantoner vid CERN)
   sparas till nästa brev. `verify-nyhetsbrev.js`, `verify-sprak.js` och `verify-nbsp-enhet.js` utan fel

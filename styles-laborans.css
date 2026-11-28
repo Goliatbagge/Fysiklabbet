@@ -4218,6 +4218,11 @@ body.laborans u .lab-term {
 .lab-ovning-feedback.is-correct { color: #4a8757; }
 .lab-ovning-feedback.is-wrong { color: var(--lab-accent); }
 .lab-ovning-feedback.is-varning { color: #9a6410; }
+/* Länken i värdesiffrebeskedet: kantlinje i stället för text-decoration,
+   som body.laborans a:not(…) nollställer. */
+.lab-ovning-feedback-lank { border-bottom: 1px solid currentColor; }
+.lab-ovning-feedback-lank:hover,
+.lab-ovning-feedback-lank:focus-visible { border-bottom-width: 2px; }
 .lab-ovning-feedback.is-ord { color: var(--lab-ink-muted); font-weight: 500; }
 
 /* Ett svarsfält per deluppgift (uppgift.delsvar i data/ovningar.js).

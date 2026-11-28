@@ -2888,7 +2888,19 @@
             const tillatna = svarsradVardesiffror(solution, expected.value, expected.tol);
             return tillatna !== null && p.sig > tillatna;
         }
-        const VARDESIFFROR_TEXT = '✓ Rätt räknat, men kontrollera antalet värdesiffror. Svaret ska inte ha fler värdesiffror än det minst noggranna givna värdet.';
+        // Ordet värdesiffror länkar till rutan om värdesiffror i fy1-1.2, i en
+        // ny flik så att eleven inte tappar sitt svar i övningen.
+        const VARDESIFFROR_LANK = 'katalog.html?id=fy1-1.2&block=obs-2-vardesiffror';
+        function VardesiffrorBesked() {
+            return (
+                <span className="lab-ovning-feedback is-varning">
+                    ✓ Rätt räknat, men kontrollera antalet{' '}
+                    <a href={VARDESIFFROR_LANK} target="_blank" rel="noopener"
+                        className="lab-ovning-feedback-lank">värdesiffror</a>.
+                    {' '}Svaret ska inte ha fler värdesiffror än det minst noggranna givna värdet.
+                </span>
+            );
+        }
 
         // Deluppgift med flera lösningar (values: [8, -2]): eleven skriver EN
         // lösning per fält och lägger själv till fler fält ("Lägg till en
@@ -3367,7 +3379,7 @@
                                                         onClick={() => laggTillFalt(i)}>{d.olikhet ? '+ Lägg till ett villkor' : '+ Lägg till en lösning'}</button>
                                                 )}
                                                 {fb === 'correct' && <span className="lab-ovning-feedback is-correct">✓ Rätt!</span>}
-                                                {fb === 'vardesiffror' && <span className="lab-ovning-feedback is-varning">{VARDESIFFROR_TEXT}</span>}
+                                                {fb === 'vardesiffror' && <VardesiffrorBesked />}
                                                 {fb === 'wrong' && <span className="lab-ovning-feedback is-wrong">✗ Inte riktigt, försök igen</span>}
                                                 {fb === 'ofullstandig' && <span className="lab-ovning-feedback is-wrong">{d.olikhet
                                                     ? 'Det du skrivit stämmer, men lösningen är inte komplett. Finns det fler delar av tallinjen där olikheten gäller?'
@@ -3465,9 +3477,7 @@
                             {feedback === 'correct' && (
                                 <span className="lab-ovning-feedback is-correct">✓ Rätt!</span>
                             )}
-                            {feedback === 'vardesiffror' && (
-                                <span className="lab-ovning-feedback is-varning">{VARDESIFFROR_TEXT}</span>
-                            )}
+                            {feedback === 'vardesiffror' && <VardesiffrorBesked />}
                             {feedback === 'wrong' && (
                                 <span className="lab-ovning-feedback is-wrong">✗ Inte riktigt — försök igen</span>
                             )}

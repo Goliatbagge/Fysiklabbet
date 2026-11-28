@@ -13,9 +13,10 @@ Format:
 
 ## 2026-11-29 — "En krater lika bred som asteroiden, och ett svart hål"
 - Status: UTKAST skrivet lördag 2026-11-28 (molnsession, klart cirka 05.30 svensk tid, före 08.00). Tänkt utskick
-  söndag 2026-11-29 (första advent) kl 06.00 svensk tid. **Kampanjen är INTE upplagd i EmailOctopus** (molnet saknar
-  Chrome): kör `/brev-till-octopus` lokalt, testskicka och schemalägg (tidszonen default:ar till London). Bilderna i
-  nyheter/brev/ pushades till main. Förhandsvisningen (JPEG) skickades till användaren.
+  söndag 2026-11-29 (första advent) kl 06.00 svensk tid. Bilderna i nyheter/brev/ pushades till main.
+  Förhandsvisningen (JPEG) skickades till användaren.
+- EmailOctopus: UPPLAGD 2026-11-28 som kampanjen "Nyhetsbrev nr 16 - 2026-11-29" (alla prenumeranter, 40
+  mottagare), testmejlet skickat samma dag ("Sent!"). INTE schemalagd: schemaläggningen är användarens.
 - Preheader: "Plus en resa från atomerna till hela universum och avancerade exempel inför provet."
 - Brevperiod 2026-11-22 till 2026-11-28: sju artiklar, alla länkade. Söndagens artikel (11-29, instantoner vid CERN)
   sparas till nästa brev. `verify-nyhetsbrev.js`, `verify-sprak.js` och `verify-nbsp-enhet.js` utan fel

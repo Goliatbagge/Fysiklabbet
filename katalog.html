@@ -2847,6 +2847,49 @@
             return 'wrong';
         }
 
+        // ── Värdesiffror i fysikövningarna ──────────────────────────────
+        // Ett svar som är rätt räknat men har fler värdesiffror än lösningens
+        // svarsrad får ett eget besked i stället för bara "Rätt!" (önskemål
+        // 2026-11-28). Facit i data/ovningar.js är ett JS-tal och har tappat
+        // sina nollor (3.0 blir 3), så antalet värdesiffror läses ur
+        // svarsraden: talet där som stämmer med facit. Nollor sist i ett
+        // heltal ("180 km") kan vara värdesiffror, så de räknas med där,
+        // medan elevens heltal räknas utan dem: hellre inget besked än ett
+        // felaktigt. Saknas ett matchande tal i svarsraden görs ingen kontroll.
+        function svarsradVardesiffror(solution, value, tol) {
+            if (!solution || typeof value !== 'number' || !isFinite(value) || value === 0) return null;
+            const block = (solution.match(/\*\*(?:Svar|Answer)[^*\n]*:\*\*[\s\S]*?(?=\n\n|$)/g) || []).join(' ');
+            if (!block) return null;
+            const s = block
+                .replace(/\{,\}/g, ',')
+                .replace(/\\+(?:cdot|times)/g, '·')
+                .replace(/<sup>\s*([^<]*?)\s*<\/sup>/g, '^{$1}')
+                .replace(/\\+[,;: !]|~|&nbsp;|&thinsp;|&#8239;/g, ' ')
+                .replace(/[   ]/g, ' ')
+                .replace(/[−–]/g, '-')
+                .replace(/(\d) (?=\d{3}(?!\d))/g, '$1');
+            const re = /-?\d+(?:[.,]\d+)?(?:\s*[·⋅*×]\s*10\s*(?:\^\s*\{?\s*[-+]?\d+\s*\}?|[⁻⁺⁰¹²³⁴⁵⁶⁷⁸⁹]+))?/g;
+            const marg = Math.abs(value) * Math.max(typeof tol === 'number' ? tol : 0.02, 0.02);
+            let bast = null, m;
+            while ((m = re.exec(s))) {
+                const p = parseAnswerParts(m[0]);
+                if (!p || !p.sig) continue;
+                if (Math.abs(Math.abs(p.value) - Math.abs(value)) > marg) continue;
+                const mant = m[0].match(/\d+(?:[.,]\d+)?/)[0];
+                const sig = /[.,]/.test(mant) ? p.sig : Math.max(mant.replace(/^0+/, '').length, 1);
+                bast = bast === null ? sig : Math.max(bast, sig);
+            }
+            return bast;
+        }
+        // true när ett rätt svar har fler värdesiffror än svarsraden
+        function forMangaVardesiffror(input, expected, solution) {
+            const p = parseAnswerParts(input);
+            if (!p || !p.sig) return false;
+            const tillatna = svarsradVardesiffror(solution, expected.value, expected.tol);
+            return tillatna !== null && p.sig > tillatna;
+        }
+        const VARDESIFFROR_TEXT = '✓ Rätt räknat, men kontrollera antalet värdesiffror. Svaret ska inte ha fler värdesiffror än det minst noggranna givna värdet.';
+
         // Deluppgift med flera lösningar (values: [8, -2]): eleven skriver EN
         // lösning per fält och lägger själv till fler fält ("Lägg till en
         // lösning"). Från början finns bara ett fält, så att antalet fält
@@ -3105,7 +3148,7 @@
             );
         }
 
-        function Ovning({ uppgift, index, total }) {
+        function Ovning({ uppgift, index, total, fysik }) {
             const isMC = Array.isArray(uppgift.choices) && typeof uppgift.correct === 'number';
             const [answer, setAnswer] = useState('');
             const [selected, setSelected] = useState(null); // för flerval: index av valt alternativ
@@ -3148,6 +3191,8 @@
                         const ordDel = typeof d.value !== 'number' && !Array.isArray(d.values);
                         if (!ordDel && !delSvar[i].trim()) return null;   // tomt fält: ingen dom
                         const r = checkDelsvar(delSvar[i], d);
+                        if (r === 'correct' && fysik && typeof d.value === 'number'
+                            && forMangaVardesiffror(delSvar[i], d, uppgift.solution)) return 'vardesiffror';
                         return r === null ? 'ord' : r;
                     }));
                     return;
@@ -3158,7 +3203,9 @@
                     return;
                 }
                 if (!uppgift.answer) return;
-                setFeedback(checkAnswer(answer, uppgift.answer));
+                const r = checkAnswer(answer, uppgift.answer);
+                setFeedback(r === 'correct' && fysik && forMangaVardesiffror(answer, uppgift.answer, uppgift.solution)
+                    ? 'vardesiffror' : r);
             };
             const handleChange = (e) => {
                 setAnswer(e.target.value);
@@ -3222,7 +3269,8 @@
 
             const inputClass = 'lab-ovning-answer-input'
                 + (feedback === 'correct' ? ' is-correct' : '')
-                + (feedback === 'wrong' ? ' is-wrong' : '');
+                + (feedback === 'wrong' ? ' is-wrong' : '')
+                + (feedback === 'vardesiffror' ? ' is-varning' : '');
 
             return (
                 <div className={`lab-ovning lab-ovning-level-${uppgift.level}`}>
@@ -3268,6 +3316,7 @@
                                     const fb = flera ? (delFb[i] && delFb[i].r) : delFb[i];
                                     const klass = (dom) => 'lab-ovning-answer-input'
                                         + (dom === 'correct' ? ' is-correct' : '')
+                                        + (dom === 'vardesiffror' ? ' is-varning' : '')
                                         + (dom === 'wrong' || dom === 'tecken' || dom === 'riktning' || dom === 'unparseable' && flera ? ' is-wrong' : '');
                                     const etikettText = d.etikett ? ', ' + d.etikett.replace(/\$/g, '') : '';
                                     const falt = (j, varde, dom) => (
@@ -3318,6 +3367,7 @@
                                                         onClick={() => laggTillFalt(i)}>{d.olikhet ? '+ Lägg till ett villkor' : '+ Lägg till en lösning'}</button>
                                                 )}
                                                 {fb === 'correct' && <span className="lab-ovning-feedback is-correct">✓ Rätt!</span>}
+                                                {fb === 'vardesiffror' && <span className="lab-ovning-feedback is-varning">{VARDESIFFROR_TEXT}</span>}
                                                 {fb === 'wrong' && <span className="lab-ovning-feedback is-wrong">✗ Inte riktigt, försök igen</span>}
                                                 {fb === 'ofullstandig' && <span className="lab-ovning-feedback is-wrong">{d.olikhet
                                                     ? 'Det du skrivit stämmer, men lösningen är inte komplett. Finns det fler delar av tallinjen där olikheten gäller?'
@@ -3414,6 +3464,9 @@
                             </div>
                             {feedback === 'correct' && (
                                 <span className="lab-ovning-feedback is-correct">✓ Rätt!</span>
+                            )}
+                            {feedback === 'vardesiffror' && (
+                                <span className="lab-ovning-feedback is-varning">{VARDESIFFROR_TEXT}</span>
                             )}
                             {feedback === 'wrong' && (
                                 <span className="lab-ovning-feedback is-wrong">✗ Inte riktigt — försök igen</span>
@@ -3560,7 +3613,7 @@
                         ))}
                     </div>
                     {filtered.map((u, i) => (
-                        <Ovning key={`${selectedLevel}-${i}`} uppgift={u} index={i} total={filtered.length} />
+                        <Ovning key={`${selectedLevel}-${i}`} uppgift={u} index={i} total={filtered.length} fysik={/^fy/.test(id)} />
                     ))}
                 </div>
             );
@@ -3629,7 +3682,7 @@
                             </h4>
                             {g.upp.map((u, i) => {
                                 const idx = nr++;
-                                return <Ovning key={valt + '-' + g.num + '-' + i} uppgift={u} index={idx} total={total} />;
+                                return <Ovning key={valt + '-' + g.num + '-' + i} uppgift={u} index={idx} total={total} fysik={/^fy/.test(teoriId(course, g.num))} />;
                             })}
                         </div>
                     ))}

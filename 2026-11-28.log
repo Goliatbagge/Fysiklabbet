@@ -1,0 +1,38 @@
+03:15:03  [idag] === Nyhetsjobb: start (2026-11-28) ===
+03:15:05  [idag] Dagens nyhet finns (förberedd i går).
+03:15:06  [idag] Startar Claude Code (headless, modell opus, nyckel)...
+03:20:06  [imorgon] === Nyhetsjobb: start (2026-11-28) ===
+03:20:06  [imorgon] En körning pågår redan (lås 5 min gammalt). Avslutar.
+03:30:13  [idag] Artikeln för 2026-11-29 är skriven, godkänd av både utgivaren och fysikgranskaren och committad på grenen `nyhetsjobb` (commit `39dcebe9`). Jag har inte pushat och inte mejlat.
+03:30:13  [idag] 
+03:30:13  [idag] **Artikeln:** ”Partikelkrockar vid CERN kan bära spår av en dold struktur i tomrummet” (Partikelfysik, id `2026-11-29-vakuumets-dolda-backar`).
+03:30:13  [idag] - **Nyheten:** ATLAS första sökning efter QCD-instantoner, alltså tunnling mellan olika tvinnade former av fältet som håller ihop kvarkarna. ATLAS fann ett överskott på 3,5 standardavvikelser.
+03:30:13  [idag] - **Källor:** studien lästes i fulltext (arXiv:2611.22092), plus pressmeddelandet från universitetet i Bonn och ATLAS egen resultatsida.
+03:30:13  [idag] - **Förbehåll:** studien är ett förtryck som inte är granskat av andra forskare ännu och räcker inte för att kallas en upptäckt. Det står i ingressen, i brödtexten och i källhänvisningen.
+03:30:13  [idag] - **Valet av ämne:** grannen 2026-11-28 är kvantfysik, och partikelfysik förekom senast 2026-11-23.
+03:30:13  [idag] - **Granskningen:** båda granskarna sa först RÄTTA FÖRST. De invände bland annat mot en uppgift utan källa, att kontrollintervallen beskrevs som ”mer rörelseenergi” i stället för rörelsemängd vinkelrätt mot strålen, och att isotropin bara gäller sett från händelsens eget tyngdpunktssystem. Alla rättningar är införda, och efterkontrollen gav GODKÄND från båda. Utslagen står i `granskningar.md`.
+03:30:13  [idag] 
+03:30:13  [idag] **Bilder:** båda är riktiga och CC BY 4.0, ingen AI-bild.
+03:30:13  [idag] - Huvudbilden är ett foto av ATLAS under bygget 2005, av Maximilien Brice/CERN.
+03:30:13  [idag] - I brödtexten ligger en händelsebild ur studien, beskuren så att loggan och texten försvann.
+03:30:13  [idag] 
+03:30:13  [idag] **Ordlistan** fick två nya uppslag: *instanton* och *neuralt nätverk*.
+03:30:13  [idag] 
+03:30:13  [idag] **Kontroller:** verify-navigation och verify-begrepp är gröna, liksom språk-, NBSP- och sitemapkontrollerna för den nya artikeln. I en skärmdump renderas artikeln rätt. Artikeln saknas i RSS-flödet och sitemapen tills datumgrinden släpper den vid midnatt, och det är väntat.
+03:30:13  [idag] 
+03:30:13  [idag] **Loggar:** `publicerat.md` och `granskningar.md` är uppdaterade. I `ko.md` lade jag till det svarta hålet Phoebe som ett omstritt uppslag för en senare dag. Gravitationsteasern rörde jag inte, eftersom den inte får publiceras före brevet 2026-11-29.
+03:30:13  [idag] 
+03:30:13  [idag] **Två saker du kan stöta på:**
+03:30:13  [idag] - Bygget skrev om alla delningssidor under `nyheter/dela/` och `katalog/dela/`, men de skiljer sig bara i radslut. Jag committade bara den nya delningssidan. De gamla sidorna under `nyheter/dela/` står därför fortfarande som ändrade i arbetskatalogen, med samma innehåll som tidigare.
+03:30:13  [idag] - Utvecklingsservern på port 8000 visar huvudkatalogen och inte jobbets arbetskatalog. Skärmdumpen tog jag därför med en tillfällig server på port 8765, som är stoppad nu.
+03:30:15  [idag] Claude avslutade med kod 0
+03:30:15  [idag] Kastar 166 ocommittade filändringar före rebasen (kopia i logg\ocommittat.patch).
+03:30:22  [idag] Pushat till main.
+03:30:22  [idag] Artikel 2026-11-29 pushad: 2026-11-29-vakuumets-dolda-backar
+03:31:53  [idag] https://fysiklabbet.se/nyheter.html?forhand=2026-11-29-vakuumets-dolda-backar
+03:31:54  [idag] Mejlet byggt av mallen (C:\claude\Fysiklabbet-nyhetsjobb\.claude\nyheter\logg\mejl-2026-11-29).
+03:31:54  [idag] Startar Claude Code (headless, modell sonnet, vanlig inloggning, Gmail)...
+03:33:00  [idag] Mejlet skickades till [ägaren] (meddelande-id `1a21fff9771d8df1`), och kvittofilen är skriven.
+03:33:01  [idag] Claude avslutade med kod 0
+03:33:01  [idag] Mejlet till ägaren är skickat.
+03:33:01  [idag] === Nyhetsjobb: slut ===

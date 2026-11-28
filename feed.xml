@@ -6,7 +6,16 @@
     <atom:link href="https://fysiklabbet.se/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.</description>
     <language>sv-SE</language>
-    <lastBuildDate>Fri, 27 Nov 2026 13:12:12 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 28 Nov 2026 02:28:26 GMT</lastBuildDate>
+    <item>
+      <title>Kvantbitar av atomer som sitter till vänster eller till höger</title>
+      <link>https://fysiklabbet.se/nyheter.html?id=2026-11-28-atomen-till-vanster-eller-hoger</link>
+      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-11-28-atomen-till-vanster-eller-hoger</guid>
+      <pubDate>Sat, 28 Nov 2026 04:00:00 GMT</pubDate>
+      <category>Kvantfysik</category>
+      <description>Fysiker i Kina har byggt en kvantprocessor där varje qubit är en enda rubidiumatom som sitter i den vänstra eller den högra av två små gropar i ett gitter av laserljus. Med hjälp av tunneleffekten kopplade de ihop 123 sådana atomer i ett sammanflätat rutnät och tog med den här sortens qubitar de första stegen mot en kvantdator som räknar genom att mäta.</description>
+      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-11-28-atomen-till-vanster-eller-hoger.jpg" length="198170" type="image/jpeg"/>
+    </item>
     <item>
       <title>Smällen från DART lämnade en krater lika bred som hela asteroiden</title>
       <link>https://fysiklabbet.se/nyheter.html?id=2026-11-27-kratern-efter-dart</link>
@@ -177,15 +186,6 @@
       <category>Magnetism</category>
       <description>Uranus och Neptunus har solsystemets märkligaste magnetfält, kraftigt lutade och oordnade. Datorsimuleringar tyder på att förklaringen är vattnet djupt inne i planeterna, som leder ström allt bättre ju längre ner man kommer, och att fälten då kan ändras kraftigt på några årtionden.</description>
       <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-11-09-isjattarnas-vingliga-magnetfalt.jpg" length="92099" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Därför spricker sten på längden när den trycks ihop</title>
-      <link>https://fysiklabbet.se/nyheter.html?id=2026-11-08-spricka-pa-langden</link>
-      <guid isPermaLink="true">https://fysiklabbet.se/nyheter.html?id=2026-11-08-spricka-pa-langden</guid>
-      <pubDate>Sun, 08 Nov 2026 04:00:00 GMT</pubDate>
-      <category>Mekanik</category>
-      <description>Trycker man ihop en cylinder av sten eller keramik mellan två plattor spricker den ofta längs tryckriktningen, som om den drogs isär från sidorna. Forskare i USA har räknat fram en förklaring: plattorna hindrar materialet från att bli tjockare, och då uppstår en dragspänning inne i kroppen.</description>
-      <enclosure url="https://fysiklabbet.se/nyheter/bilder/2026-11-08-spricka-pa-langden.jpg" length="399422" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

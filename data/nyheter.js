@@ -103,6 +103,65 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-11-29-vakuumets-dolda-backar",
+    date: "2026-11-29",
+    title: "Partikelkrockar vid CERN kan bära spår av en dold struktur i tomrummet",
+    deck: "Detektorn ATLAS vid CERN har sett fler protonkrockar än väntat där partiklarna, sett från händelsens eget tyngdpunktssystem, sprutar ut nästan lika mycket åt alla håll. Det är det mönster som instantoner, tunnling mellan olika former av fältet som håller ihop kvarkarna, har förutsagts ge. Resultatet är ännu inte granskat av andra forskare och räcker inte för att kallas en upptäckt.",
+    category: "Partikelfysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-11-29-vakuumets-dolda-backar.jpg",
+    imageAlt: "En väldig maskin i en hall, sedd längs dess mittaxel: åtta tjocka rör med orange band strålar ut som ekrar runt en rund, glänsande skiva i mitten. Allt omges av ställningar i aluminium, och nere i mitten står en person i skyddshjälm och ser liten ut.",
+    imageCredit: "Foto: Maximilien Brice, CERN (CC BY 4.0), via Wikimedia Commons, beskuren. Detektorn ATLAS under bygget i november 2005, med de åtta magneterna runt kalorimetern som senare flyttades in i mitten.",
+    tags: ["partikelfysik", "cern", "lhc", "atlas", "instanton", "stark växelverkan", "kvarkar", "gluoner", "tunneleffekt", "vakuum", "standardmodellen", "neuralt nätverk", "statistisk signifikans", "materia och antimateria"],
+    sources: [
+      { name: "Phys.org (pressmeddelande från universitetet i Bonn): ATLAS finds hints of the hidden structure of the vacuum (27 november 2026)", url: "https://phys.org/news/2026-11-atlas-hints-hidden-vacuum.html" },
+      { name: "ATLAS-samarbetet: sammanfattning med alla figurer och händelsebilder (STDM-2021-01)", url: "https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/PAPERS/STDM-2021-01/" }
+    ],
+    research: {
+      citation: "ATLAS-samarbetet, ”Search for the low-mass isotropic signature of QCD instantons in pp collisions at √s = 13 TeV using the ATLAS detector”, förtryck arXiv:2611.22092 (17 november 2026), inskickat till Physical Review Letters. Ännu inte kollegialt granskat.",
+      url: "https://arxiv.org/abs/2611.22092"
+    },
+    larare: {
+      moment: [
+        { label: "Standardmodellen", href: "katalog.html?id=fy1-9.6" },
+        { label: "Laddade partiklar i magnetfält", href: "katalog.html?id=fy2-3.4" },
+        { label: "Standardavvikelse", href: "katalog.html?id=ma2c-6.4" }
+      ],
+      fragor: [
+        "Spåren i ATLAS innersta del böjs av ett magnetfält med flödestätheten 2,0 T. Beräkna krökningsradien för en partikel med laddningen $e$ som rör sig vinkelrätt mot fältet med rörelsemängden $p = 2{,}7 \\cdot 10^{-19}\\ \\mathrm{kg \\cdot m/s}$ (den minsta som togs med i analysen). Hur ändras radien för en partikel med mindre rörelsemängd, och varför gör det att de långsammaste partiklarna är svåra att mäta?",
+        "Överskottet har signifikansen 3,5 standardavvikelser, men fem krävs för att kalla något en upptäckt. Varför är kravet så högt i partikelfysiken, där många forskargrupper letar efter många olika saker i samma mätdata?",
+        "Forskarna upprepade analysen för krockar där spåren tillsammans har mer rörelsemängd vinkelrätt mot strålen. Där bidrar instantonerna enligt teorin mycket lite, och där fanns inget överskott. Varför stärker en sådan kontroll resultatet, och vad kan den ändå inte utesluta?"
+      ]
+    },
+    body: [
+      { type: "p", html: "Tomrummet låter som det enklaste som finns: ingenting alls. Men i partikelfysiken är tomrummet inte tomt. Fälten som förmedlar naturens krafter finns överallt, också där det inte finns några partiklar. Enligt teorin har fältet för den starka växelverkan, kraften som håller ihop kvarkarna inne i protoner och neutroner, en dold struktur även i sitt lägsta energitillstånd." },
+      { type: "p", html: "Nu har ATLAS-samarbetet vid CERN för första gången letat efter spår av den strukturen i protonkrockar vid partikelacceleratorn LHC. Forskare vid universiteten i Bonn, Oxford och Prag hade en ledande roll i analysen. Den lades ut som förtryck den 17&nbsp;november och är inskickad till tidskriften <em>Physical Review Letters</em>, men den har ännu inte granskats av andra forskare. Resultatet är att fler krockar än väntat har just det utseende som teorin förutsäger." },
+      { type: "h2", text: "Ett landskap med många dalar" },
+      { type: "p", html: "Fysiker beskriver gärna ett fälts möjliga tillstånd som ett landskap där höjden är energin. Ett fält i vila ligger i en dal, som en kula i botten av en skål. För den starka växelverkans fält finns det inte en enda dal utan oändligt många, alla lika djupa och åtskilda av berg. Dalarna skiljer sig inte i energi utan i hur fältet är tvinnat, ungefär som ett gummiband som kan vara lindat ett, två eller tre varv runt en stång. Från två varv till tre kommer man inte genom att bara dra och vrida i bandet." },
+      { type: "p", html: "Det som inte går i klassisk fysik kan ändå ske i kvantfysiken. Genom tunneleffekten kan fältet ta sig igenom berget i stället för över det. En sådan övergång kallas en instanton. Teorin för den starka växelverkan kallas kvantkromodynamik, förkortat QCD, och därför talar fysikerna om QCD-instantoner. Idén lades fram i mitten av 1970-talet, och standardmodellen har förutsagt övergångarna i omkring 50&nbsp;år. Ingen har ännu sett en direkt." },
+      { type: "p", html: "Enligt teorin bildas det vid varje sådan övergång ett par av en kvark och en antikvark av varje kvarksort som är lätt nog, i ATLAS simuleringar upp-, ned-, sär- och charmkvarkar, och dessutom ett antal gluoner. Eftersom instantonen inte har någon föredragen riktning bör partiklarna, sett från ett system som följer med händelsen, spruta ut nästan likformigt åt alla håll." },
+      { type: "h2", text: "Att leta bland vanliga krockar" },
+      { type: "p", html: "Svårigheten är att vanliga protonkrockar också kan ge många partiklar med låg energi åt olika håll. En proton består av kvarkar och gluoner, och i en enda krock kan flera av dem stöta ihop samtidigt. Just sådana mjuka krockar är dessutom de som teorin har svårast att räkna på." },
+      { type: "p", html: "ATLAS använde mätdata från 2015, då LHC kördes så att krockarna blev ovanligt glesa: i genomsnitt 0,028 kollisioner varje gång två protonpaket passerade varandra, långt färre än i vanliga körningar. Då kommer nästan varje registrerad händelse från en enda krock, och dess form går att bedöma. Forskarna mätte banorna för de laddade partiklarna, som böjs av ett magnetfält i detektorns innersta del, och tränade ett neuralt nätverk på simulerade krockar för att skilja instantonliknande händelser från vanliga. Nätverket fick fem mått på varje händelse: antalet spår, summan av beloppen av deras rörelsemängd vinkelrätt mot strålen och tre mått på hur spåren fördelar sig i olika riktningar. Hur många vanliga krockar som borde hamna bland de utvalda uppskattades så långt det gick ur mätdata själva, inte bara ur simuleringar." },
+      { type: "image", src: "nyheter/bilder/2026-11-29-vakuumets-dolda-backar-2.jpg", alt: "Datorbild mot svart bakgrund av en genomskuren cylinder i blågrönt och lila, med ett tunt rör längs mitten. Från en punkt på röret sprutar ett tiotal tunna orange linjer ut åt olika håll, en del raka och en del böjda.", caption: "En av de utvalda händelserna, registrerad den 10&nbsp;juni 2015. Tolv laddade partiklar (orange) lämnar kollisionspunkten på strålröret åt olika håll och böjs av magnetfältet. Om just den här händelsen är en instanton eller en vanlig krock går inte att avgöra.", credit: "Bild: ATLAS-samarbetet, CERN (CC BY 4.0), beskuren så att loggan och texten försvann" },
+      { type: "h2", text: "Överskottet är 3,5 standardavvikelser" },
+      { type: "p", html: "Bland de utvalda fanns 32&nbsp;789 händelser. Vanliga krockar förklarar omkring 28&nbsp;800 av dem, och överskottet är omkring 3&nbsp;900. Det är drygt dubbelt så många som den teoretiska förutsägelsen för instantoner, men den förutsägelsen är så osäker att den kan vara fel med flera tiopotenser. Överskottet har en signifikans på 3,5&nbsp;standardavvikelser. Om bara vanliga krockar fanns skulle ett minst lika stort överskott uppstå av en slump ungefär en gång på 4&nbsp;300. Inom partikelfysiken räcker tre standardavvikelser för att tala om belägg, men fem krävs för att tala om en upptäckt." },
+      { type: "p", html: "De extra händelserna är också rundare än de vanliga, precis som instantoner borde vara. Forskarna gjorde också om analysen för krockar där spåren tillsammans har mer rörelsemängd vinkelrätt mot strålen. Där är instantonernas andel enligt teorin högst en trettiondel så stor, och där fanns inget överskott." },
+      { type: "p", html: "Forskarna är ändå försiktiga. De skriver att ingen av modellerna med enbart vanliga krockar kan beskriva mätdata helt, och att tolkningen begränsas av hur väl de vanliga mjuka krockarna är förstådda. För att visa att det verkligen är instantoner behöver de bland annat undersöka vilka kvarksorter händelserna innehåller och hur mycket energi de har. Nästa steg är att leta i andra sorters krockar, till exempel sådana där den ena eller båda protonerna kommer ut hela, och med andra analysmetoder." },
+      { type: "quote", html: "För mig kan det här vara en av de mest spännande upptäckterna som fortfarande väntar på oss vid LHC.", cite: "Ynyr Harris, Humboldtstipendiat i forskargruppen vid universitetet i Bonn (i universitetets pressmeddelande, översatt från engelska)" },
+      { type: "h2", text: "Varför tomrummets form spelar roll" },
+      { type: "p", html: "Bekräftas instantonerna vore det första gången man direkt ser att tomrummets tvinnade struktur får mätbara följder i en partikelkrock. Det vore ett nytt sätt att pröva en förutsägelse som hittills bara prövats indirekt." },
+      { type: "quote", html: "Om vi kunde upptäcka en QCD-instantonprocess, alltså en av de här övergångarna mellan tillstånd, i en partikelkollision skulle vi kunna börja mäta tomrummets topologiska struktur.", cite: "Matthias Schott, professor i experimentell partikelfysik vid universitetet i Bonn (i universitetets pressmeddelande, översatt från engelska)" },
+      { type: "p", html: "Strukturen hänger också ihop med frågan om varför universum består av materia. Om materia och antimateria hade bildats i exakt samma mängd efter big bang skulle de ha förintat varandra. Liknande övergångar i fältet för den svaga växelverkan kan enligt teorin ändra överskottet av materia över antimateria, och sådana processer i det tidiga universum är en av de förklaringar som prövas. Att studera den starka växelverkans variant i laboratoriet vore ett sätt att undersöka samma sorts fysik." },
+      { type: "quote", html: "För att förstå varför det finns materia i universum i dag måste vi förstå hur processer i det tidiga universum kunde förskjuta balansen mellan materia och antimateria.", cite: "Alan Barr, professor i partikelfysik vid University of Oxford (i pressmeddelandet från universitetet i Bonn, översatt från engelska)" },
+      { type: "fact", title: "Visste du?", items: [
+        "Instantonerna i den starka växelverkans teori beskrevs 1975 av de sovjetiska forskarna Aleksandr Belavin, Aleksandr Poljakov, Albert Schwarz och Jurij Tjupkin. Året därpå visade Gerard ’t&nbsp;Hooft vad de betyder för partiklarna.",
+        "Tidigare sökningar gjordes vid acceleratorn HERA i Hamburg, där elektroner krockade med protoner, av experimenten H1 och ZEUS. Inga instantoner hittades där.",
+        "Det tvinnade tomrummet ligger bakom en olöst gåta, det starka CP-problemet. Teorin tillåter en parameter som skulle ge neutronen ett mätbart elektriskt dipolmoment, men mätningarna visar att parametern är mindre än en tiomiljarddel. Varför den är så liten vet ingen."
+      ] }
+    ]
+  },
+  {
     id: "2026-11-28-atomen-till-vanster-eller-hoger",
     date: "2026-11-28",
     title: "Kvantbitar av atomer som sitter till vänster eller till höger",

@@ -63,6 +63,30 @@
 // namnet, och webbläsaren avbryter med "Identifier has already been declared".
 window.BEGREPP = [
   {
+    id: 'instanton',
+    term: 'Instanton',
+    former: ['instanton', 'instantonen', 'instantoner', 'instantonerna', 'qcd-instanton', 'qcd-instantonen', 'qcd-instantoner', 'qcd-instantonerna', 'qcd-instantonprocess', 'instantonprocess', 'instantonprocesser'],
+    kort: 'En kvantfysikalisk övergång där ett kraftfält tunnlar mellan två olika sätt att vara tvinnat på i sitt lägsta energitillstånd. Instantoner förutsägs av standardmodellen men har aldrig observerats direkt.',
+    relaterade: ['stark-vaxelverkan', 'tunneleffekt', 'kvark', 'standardmodellen'],
+    body: [
+      { type: 'p', html: 'Tänk dig ett gummiband runt en stång. Bandet kan ligga ett varv runt stången, eller två, eller tre. Hur du än drar och vrider i det går det inte att ändra antalet varv utan att klippa av bandet. Antalet varv är en egenskap hos hela formen, inte hos någon enskild del av bandet. Matematiker kallar den sortens egenskaper topologiska.' },
+      { type: 'p', html: 'Fältet för den starka växelverkan, kraften som håller ihop kvarkarna i protoner och neutroner, har en liknande egenskap. Även när fältet har så lite energi som möjligt, i det som kallas vakuum, kan det vara tvinnat på olika sätt, ungefär som bandet med olika många varv. De olika sätten har exakt samma energi men är åtskilda av en energibarriär, som dalar åtskilda av berg. I klassisk fysik skulle fältet ligga kvar i sin dal för alltid. Kvantfysikens tunneleffekt gör att det ändå kan ta sig igenom berget till nästa dal. En sådan övergång kallas en instanton. Namnet kommer av engelskans instant, ögonblick, eftersom övergången i räkningarna är samlad kring ett enda ögonblick i tiden.' },
+      { type: 'p', html: 'Teorin säger att varje sådan övergång lämnar spår: par av kvarkar och antikvarkar av flera sorter bildas samtidigt, och partiklarna som sedan bildas sprutar, sett från händelsens eget tyngdpunktssystem, ut nästan lika mycket åt alla håll. Instantonerna beskrevs i mitten av 1970-talet, och fysiker har letat efter dem i partikelkrockar sedan dess, först vid acceleratorn HERA i Hamburg och nu vid LHC vid CERN. Liknande övergångar i den svaga växelverkans fält kan enligt teorin ändra överskottet av materia över antimateria, och därför hör de ihop med frågan om varför universum består av materia och inte lika mycket antimateria.' }
+    ]
+  },
+  {
+    id: 'neuralt-natverk',
+    term: 'Neuralt nätverk',
+    former: ['neuralt nätverk', 'neurala nätverket', 'neurala nätverk', 'neurala nätverken', 'artificiellt neuralt nätverk', 'artificiella neurala nätverk'],
+    kort: 'Ett datorprogram som lär sig känna igen mönster genom att tränas på många exempel, i stället för att följa regler som någon skrivit för hand. Det är tekniken bakom det mesta som i dag kallas AI.',
+    relaterade: ['statistisk-signifikans'],
+    body: [
+      { type: 'p', html: 'Hur skulle du skriva regler för att avgöra om en bild visar en katt? Spetsiga öron, morrhår, päls … och snart märker du att det finns hur många undantag som helst. Ett neuralt nätverk löser problemet på ett annat sätt. I stället för regler får det tusentals bilder där svaret redan är känt, och det justerar sig självt tills det oftast gissar rätt.' },
+      { type: 'p', html: 'Nätverket är byggt av många enkla räknesteg i lager, löst inspirerade av hur nervceller i hjärnan är kopplade. Varje steg tar emot tal, väger ihop dem och skickar ett nytt tal vidare. Vikterna är det nätverket lär sig: efter varje omgång exempel ändras de en aning, så att felen blir mindre nästa gång. Ett nätverk kan ha allt från några tusen till många miljarder sådana vikter.' },
+      { type: 'p', html: 'Inom fysiken används neurala nätverk bland annat för att sortera mätdata. I en partikeldetektor sker miljontals krockar, och nätverket kan tränas på simulerade krockar för att skilja de sällsynta händelser man letar efter från de vanliga. Svagheten är att nätverket bara blir så bra som exemplen det tränats på. Är simuleringarna fel lär sig nätverket fel, och därför kontrolleras resultatet mot riktiga mätdata.' }
+    ]
+  },
+  {
     id: 'planetforsvar',
     term: 'Planetförsvar',
     former: ['planetförsvar', 'planetförsvaret', 'planetförsvarsuppdrag', 'planetförsvarsuppdraget'],

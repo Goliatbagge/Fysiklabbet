@@ -11,6 +11,31 @@ Format:
 - Teaser: <vad som utlovades inför nästa vecka>
 ```
 
+## 2026-11-29 — "En krater lika bred som asteroiden, och ett svart hål"
+- Status: UTKAST skrivet lördag 2026-11-28 (molnsession, klart cirka 05.30 svensk tid, före 08.00). Tänkt utskick
+  söndag 2026-11-29 (första advent) kl 06.00 svensk tid. **Kampanjen är INTE upplagd i EmailOctopus** (molnet saknar
+  Chrome): kör `/brev-till-octopus` lokalt, testskicka och schemalägg (tidszonen default:ar till London). Bilderna i
+  nyheter/brev/ pushades till main. Förhandsvisningen (JPEG) skickades till användaren.
+- Preheader: "Plus en resa från atomerna till hela universum och avancerade exempel inför provet."
+- Brevperiod 2026-11-22 till 2026-11-28: sju artiklar, alla länkade. Söndagens artikel (11-29, instantoner vid CERN)
+  sparas till nästa brev. `verify-nyhetsbrev.js`, `verify-sprak.js` och `verify-nbsp-enhet.js` utan fel
+  (längdvarning ~692 ord).
+- Nyheter: 2026-11-27-kratern-efter-dart (hjälte), 2026-11-25-bepicolombo-fangas-av-merkurius och
+  2026-11-26-vattnet-som-slits-isar (miniatyrer). Läs även: Voyager 1 (11-22, nämndes redan i förra brevets anslag),
+  KM3NeT (11-23, förra brevets teaser, infriad), fusionsplasmat (11-24), kvantbitarna (11-28).
+- Nytt på sajten: svart hål i 3D och universums skala (båda med skärmdump), avancerade exempel (Ma 1c kap 1 till 4,
+  även 1b, och fy2-2.A, med kortet Övningar), kort och gott: fy1-9.6 Standardmodellen, fy1-1.3 Planera en
+  undersökning, nya övningar fy1-6.3 till fy2-3.11, bedömningsanvisningar som pdf i NP. Utelämnat: geobrädan (får
+  aldrig nämnas), vågtankens riktningsval, Magdeburg-molekylerna, rättelser och interna ändringar.
+- Anslag: första advent (adventsljusstakens glödtråd eller lysdiod), leder in i det svarta hålets glödande gasskiva.
+- Bilder: nyheter/brev/2026-11-29-{svart-hal,universums-skala,dart-hero,bepicolombo-thumb,maxiv-thumb}.jpg.
+  Skärmdumparna tagna i Chromium (WebGL via SwiftShader) med React/Babel/Tailwind från npm (CDN spärrade);
+  universums skala monterad i en testsida och inzoomad till atomerna i DNA.
+- Veckans tips: utelämnat (brevet redan långt). tips.md orörd.
+- Teaser: meddelandet genom gravitationen, University of Queensland ([BREVTEASER] i ko.md), kontrollerat mot
+  data/nyheter.js och publicerat.md, ej publicerat. Teasat 2026-11-29. OBS: teaserdatumet i ko.md skrevs inte
+  (uppdraget tillät bara utkast, logg och bilder i commit).
+
 ## 2026-11-22 — "Tre stjärnor som slänger ut en, och en grön stjärna"
 - Status: UTKAST skrivet lördag 2026-11-21 (molnsession, klart cirka 05.20 svensk tid, före 08.00). Tänkt utskick
   söndag 2026-11-22 kl 06.00 svensk tid. **Kampanjen är INTE upplagd i EmailOctopus** (molnet saknar Chrome): kör
